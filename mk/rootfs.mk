@@ -10,7 +10,7 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
-$(eval $(call rootfs_template,ext2-cf,EXT2_CF))
+$(eval $(call rootfs_template,ext2-cf,EXT2_CF,root=/dev/sda2))
 $(eval $(call rootfs_template,ext2-mmc,EXT2_MMC))
 $(eval $(call rootfs_template,ext2,EXT2))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
