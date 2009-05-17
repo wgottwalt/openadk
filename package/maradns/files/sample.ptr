@@ -1,0 +1,11 @@
+# Zone file for 1.168.192.in-addr.arpa local zone
+# see http://www.maradns.org/tutorial/man.csv1.html for more information
+
+# The SOA record must be first, followed by all authoritative NS
+# records for this zone.
+S1.168.192.in-addr.arpa.|86400|sample.|hostmaster@sample.|19771108|7200|3600|604800|1800
+
+# again, the '%' sign used as shortcut for the long domain name
+P1.%|3600|gateway.sample.
+P2.%|3600|myhost.sample.
+

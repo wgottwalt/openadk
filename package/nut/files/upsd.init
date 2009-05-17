@@ -1,0 +1,30 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${upsd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/state/ups ] || mkdir -p /var/state/ups
+	/usr/bin/upsdrvctl start || exit 1
+	/usr/sbin/upsd || exit 2
+	;;
+stop)
+	/usr/sbin/upsd -c stop || killall upsd
+	/usr/bin/upsdrvctl stop
+	;;
+restart)
+	sh $0 stop
+	sleep 1
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

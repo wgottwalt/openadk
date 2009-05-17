@@ -1,0 +1,2 @@
+#/bin/sh
+echo sm3600 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

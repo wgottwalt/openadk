@@ -1,0 +1,9 @@
+plugin rp-pppoe.so
+defaultroute
+usepeerdns
+lcp-echo-interval 10
+lcp-echo-failure 3
+#IDLEOPTIONS#
+user #USERNAME#
+password #PASSWORD#
+#DEVICE#

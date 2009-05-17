@@ -1,0 +1,2 @@
+#/bin/sh
+echo ibm >> $IPKG_INSTROOT/etc/sane.d/dll.conf

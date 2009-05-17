@@ -1,0 +1,26 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		libol
+PKG_VERSION:=		0.3.18
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		cbadf4b7ea276dfa85acc38a1cc5ff17
+MASTER_SITES:=		http://www.balabit.com/downloads/files/libol/0.3/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,LIBOL,libol,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE=	gnu
+BUILD_STYLE=		auto
+INSTALL_STYLE=		confprog auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_LIBOL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libol.so.* ${IDIR_LIBOL}/usr/lib/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

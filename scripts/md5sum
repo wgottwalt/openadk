@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# $Id: md5sum 185 2008-10-28 12:24:05Z wbx $
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+if [ -x /usr/bin/md5sum ];then
+	md5sum "$@"
+else
+	md5 "$@" | sed 's#MD5 (\([^)]*\)) = \(.*\)#\2  \1#'
+fi

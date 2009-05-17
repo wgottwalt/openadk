@@ -1,0 +1,28 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${pptpd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	for m in arc4 sha1 slhc crc-ccitt ppp_generic ppp_async ppp_mppe_mppc; do
+		insmod $m >/dev/null 2>&1
+	done
+	pptpd
+	;;
+stop)
+	killall pptpd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

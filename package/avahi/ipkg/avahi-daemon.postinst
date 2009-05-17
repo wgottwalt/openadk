@@ -1,0 +1,6 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+gid=$(get_next_gid)
+add_group avahi $gid
+add_user avahi $(get_next_uid) $gid /tmp
+add_rcconf avahi avahi NO

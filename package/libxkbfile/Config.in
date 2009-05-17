@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBXKBFILE
+	prompt "libxkbfile.............................. X keyboard library"
+	tristate
+	default n
+	help
+         http://www.x.org

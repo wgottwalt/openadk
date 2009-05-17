@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heyu-2.3.2.orig/tty.c	2008-04-14 00:40:24.000000000 +0200
++++ heyu-2.3.2/tty.c	2008-10-09 14:57:18.000000000 +0200
+@@ -396,7 +396,7 @@ char *make_lock_name ( char *ttydev )
+     char        err_string[200];
+ 
+     /* strip the leading path name */
+-    ptr = rindex(ttydev, '/');
++    ptr = strrchr(ttydev, '/');
+ 
+     devstr = dev_string;
+     

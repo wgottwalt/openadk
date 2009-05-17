@@ -1,0 +1,5 @@
+Package: asterisk-codec-gsm
+Priority: optional
+Section: net
+Description: a GSM Codec Translator for Asterisk
+Depends: asterisk

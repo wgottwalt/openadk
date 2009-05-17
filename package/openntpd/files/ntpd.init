@@ -1,0 +1,27 @@
+#!/bin/sh
+#FWINIT 55
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $ntpd_flags = NO ]] && exit 0
+        exec sh $0 start
+        ;;
+start)
+	mkdir -p /tmp/.ntp
+	/usr/sbin/ntpd $ntpd_flags
+	;;
+stop)
+	kill $(pidof ntpd|cut -d ' ' -f 3)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

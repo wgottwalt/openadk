@@ -1,0 +1,5 @@
+Package: mc
+Priority: optional
+Section: misc
+Depends: glib1, libncurses
+Description: norton commander clone

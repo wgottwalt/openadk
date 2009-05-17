@@ -1,0 +1,72 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/rootfs.mk
+
+PKG_NAME:=		base-files
+PKG_VERSION:=		1.0
+PKG_RELEASE:=		5
+WRKDIST=		${WRKDIR}/base-files
+NO_DISTFILES:=		1
+ifeq ($(CPU_ARCH),x86_64)
+PKG_ID=			x86-64-${FS}
+else
+PKG_ID=			${DEVICE}-${FS}
+endif
+WRKDIR=			${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-${PKG_ID}
+ICONTROL_BASE_FILES=	ipkg/base-files.control
+ICONTROL_ADDON_BASE_FILES=	"Package: base-files-${PKG_ID}"
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+do-install:
+	$(CP) ./files/* $(IDIR_BASE_FILES)
+	$(CP) $(TOPDIR)/target/$(DEVICE)/files/* $(IDIR_BASE_FILES)
+	typeset -i REV; \
+	if fgrep xml .svn/entries >/dev/null 2>&1; then \
+		let REV="$$(sed -n '/revision=/s/^.*"\([0-9]*\)".*$$/\1/p' \
+		    .svn/entries)"; \
+	else \
+		let REV="$$(head -n 4 .svn/entries | tail -1)"; \
+	fi; ${SED} 's,$$R,'$$REV,g $(IDIR_BASE_FILES)/etc/banner
+	$(SED) 's,@TARGET@,$(DEVICE),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
+	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
+ifneq (${ADK_PACKAGE_BASH},)
+	echo /bin/bash >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_MKSH},)
+	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_ZSH},)
+	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
+endif
+	mkdir -p $(IDIR_BASE_FILES)/dev
+	mkdir -p $(IDIR_BASE_FILES)/boot
+	mkdir -p $(IDIR_BASE_FILES)/root
+	mkdir -p $(IDIR_BASE_FILES)/sys
+	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
+	mkdir -p $(IDIR_BASE_FILES)/mnt
+	mkdir -p $(IDIR_BASE_FILES)/proc
+	mkdir -p $(IDIR_BASE_FILES)/tmp
+	mkdir -p $(IDIR_BASE_FILES)/usr/lib
+	mkdir -p $(IDIR_BASE_FILES)/usr/bin
+	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
+	ln -sf ../tmp/resolv.conf $(IDIR_BASE_FILES)/etc/resolv.conf
+	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
+	rm -rf $(IDIR_BASE_FILES)/var
+	ln -sf tmp $(IDIR_BASE_FILES)/var
+	-find $(IDIR_BASE_FILES) -type d -name CVS | xargs rm -rf
+	-find $(IDIR_BASE_FILES) -type d -name .svn | xargs rm -rf
+	-find $(IDIR_BASE_FILES) -name '.#*' | xargs rm -f
+ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
+	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
+endif
+
+include ${TOPDIR}/mk/pkg-bottom.mk

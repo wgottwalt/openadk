@@ -1,0 +1,2 @@
+#/bin/sh
+echo pie >> $IPKG_INSTROOT/etc/sane.d/dll.conf

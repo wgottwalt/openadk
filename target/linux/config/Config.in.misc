@@ -1,0 +1,77 @@
+menu "Miscellaneous devices support"
+
+source target/linux/config/Config.in.leds
+
+config ADK_KERNEL_WATCHDOG
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
+	prompt "kmod-softdog...................... Software watchdog"
+	tristate
+	default n
+	select ADK_KERNEL_WATCHDOG
+	help
+	  A software monitoring watchdog. This will fail to reboot your system
+	  from some situations that the hardware watchdog will recover
+	  from. Equally it's a lot cheaper to install.
+
+config ADK_KPACKAGE_KMOD_WD1100
+	prompt "kmod-wd1100....................... Soekris net4801 watchdog"
+	tristate
+	select ADK_KERNEL_WATCHDOG
+	default n
+	help
+	  Driver for the NatSemi SC1x00 series Watchdog
+	  found on Soekris net4801 boards
+
+config ADK_KPACKAGE_KMOD_PARPORT
+	prompt "kmod-parport...................... generic parallel port support"
+	tristate
+	default n
+	help
+	  Kernel module for generic parallel port support
+
+config ADK_KPACKAGE_KMOD_PLIP
+	prompt "kmod-plip....................... PLIP (internet over parallel port)"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PARPORT
+	help
+	  PLIP: IPv4 over parallel port, using a Turbo Laplink
+	  (crossed null-printer) cable. Drivers exist for DOS
+	  (from Crynwr), Linux 2.x (protocol changed and is no
+	  longer compatible with Linux 1.x), FreeBSD and MirBSD.
+	  This will enlarge your kernel by about 8 KiB.
+
+config ADK_KPACKAGE_KMOD_PRINTER
+	prompt "kmod-lp......................... line printer support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PARPORT
+	help
+	  Kernel module for line printer support
+
+config ADK_KPACKAGE_KMOD_PPDEV
+	prompt "kmod-ppdev...................... userland parallel port driver"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PARPORT
+	help
+	  Kernel module for userland parallel port access
+
+config ADK_KPACKAGE_KMOD_FW_LOADER
+	prompt "kmod-fw-loader.................. userspace firmware loading support"
+	tristate
+	default n
+	help
+	  This may be necessary when using drivers which require
+	  loading of external firmware files.
+
+config ADK_KPACKAGE_KMOD_EEPROM_93CX6
+	prompt "kmod-eeprom-93cx6................ 93cx6 eeprom support"
+	tristate
+	default n
+	help
+
+endmenu

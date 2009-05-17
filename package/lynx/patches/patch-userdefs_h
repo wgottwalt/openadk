@@ -1,0 +1,65 @@
+$Id$
+$MirOS: ports/www/lynx/patches/patch-userdefs_h,v 1.9 2007/08/03 12:14:24 tg Exp $
+--- lynx2-8-7/userdefs.h.orig	Thu Aug  2 23:24:04 2007
++++ lynx2-8-7/userdefs.h	Fri Aug  3 12:01:19 2007
+@@ -461,7 +461,7 @@
+  * Normally we expect you will connect to a remote site, e.g., the Lynx starting
+  * site:
+  */
+-#define STARTFILE "http://lynx.isc.org/"
++/* #define STARTFILE "http://lynx.isc.org/" */
+ /*
+  * As an alternative, you may want to use a local URL.  A good choice for this
+  * is the user's home directory:
+@@ -471,6 +471,7 @@
+  * you can connect to reliably.  Otherwise users will become confused and think
+  * that they cannot run Lynx.
+  */
++#define STARTFILE "file://localhost/~/"
+ 
+ /*****************************
+  * HELPFILE must be defined as a URL and must have a
+@@ -727,7 +728,7 @@
+  * that preference in their RC file.  This may be a comma-separated list
+  * of languages in decreasing preference.
+  */
+-#define PREFERRED_LANGUAGE "en"
++#define PREFERRED_LANGUAGE ""
+ 
+ /*****************************
+  * PREFERRED_CHARSET specifies the character set in MIME notation (e.g.,
+@@ -802,8 +803,8 @@
+  * and use "http://" as the default (e.g., gopher.wfbr.edu or gopher.wfbr.
+  * will be made gopher://gopher.wfbr.edu).
+  */
+-#define URL_DOMAIN_PREFIXES "www."
+-#define URL_DOMAIN_SUFFIXES ".com,.edu,.net,.org"
++#define URL_DOMAIN_PREFIXES ""
++#define URL_DOMAIN_SUFFIXES ""
+ 
+ /********************************
+  * If LIST_NEWS_NUMBERS is set TRUE, Lynx will use an ordered list
+@@ -1371,7 +1372,9 @@
+  * the version definition with the Project Version on checkout.  Just
+  * ignore it. - kw */
+ /* $Format: "#define LYNX_VERSION \"$ProjectVersion$\""$ */
++#ifndef LYNX_VERSION
+ #define LYNX_VERSION "2.8.7dev.7"
++#endif
+ #define LYNX_WWW_HOME "http://lynx.isc.org/"
+ #define LYNX_WWW_DIST "http://lynx.isc.org/current/"
+ /* $Format: "#define LYNX_DATE \"$ProjectDate$\""$ */
+@@ -1559,11 +1562,11 @@
+ 
+ /*****************************
+  * Uncomment the following line to enable the kanji code override routine.
+- * The code can be changed by pressing ^L.  More precisely, this allows
++ * The code can be changed by pressing Shift-J.  More precisely, this allows
+  * the user to override the assumption about the kanji code for the document
+  * which Lynx has made on the basis of a META tag and HTTP response.
+  */
+-/*#define KANJI_CODE_OVERRIDE */
++#define KANJI_CODE_OVERRIDE
+ 
+ 
+ /****************************************************************

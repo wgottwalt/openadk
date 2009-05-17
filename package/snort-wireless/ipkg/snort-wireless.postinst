@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf snort-wireless snort_wireless NO
+add_rcconf snort-wireless snort_wireless_flags "-i eth0.1 -c /etc/snort/snort.conf -D -N -q -s"

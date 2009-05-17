@@ -1,0 +1,4 @@
+Package: ltp
+Priority: optional
+Section: utilities
+Description: the Linux Test Project Suite (full)

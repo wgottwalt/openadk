@@ -1,0 +1,14 @@
+#!/bin/mksh
+(busybox ps ww | grep "[ /]pppd call $1\( .*\)*\$") |&
+found=0
+rv=0
+while read thepid rest; do
+	if ! kill $thepid; then
+		print -u2 "$0: kill $thepid failed"
+		rv=1
+	fi
+	found=1
+done
+[[ $found = 1 ]] && exit $rv
+print -u2 "$0: I could not find a pppd process for provider '$1'."
+exit 1

@@ -1,0 +1,5 @@
+Package: shorewall-shell
+Priority: optional
+Section: net
+Depends: shorewall-common
+Description: shell compiler for shorewall

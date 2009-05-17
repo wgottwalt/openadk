@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/kuser/Makefile.am	2008-07-28 14:04:50.000000000 +0200
++++ heimdal-1.2.1/kuser/Makefile.am	2009-01-02 22:22:25.000000000 +0100
+@@ -48,7 +48,7 @@ $(kdigest_OBJECTS): kdigest-commands.h
+ CLEANFILES = kdigest-commands.h kdigest-commands.c
+ 
+ kdigest-commands.c kdigest-commands.h: kdigest-commands.in
+-	$(SLC) $(srcdir)/kdigest-commands.in
++	slc $(srcdir)/kdigest-commands.in
+ 
+ LDADD = \
+ 	$(top_builddir)/lib/krb5/libkrb5.la \

@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- device-mapper.1.02.28.orig/make.tmpl.in	2008-06-06 22:44:35.000000000 +0200
++++ device-mapper.1.02.28/make.tmpl.in	2009-01-04 14:47:10.000000000 +0100
+@@ -25,10 +25,10 @@ MSGFMT = @MSGFMT@
+ LN_S = @LN_S@
+ LIBS = @LIBS@
+ DEFS += @DEFS@
+-CFLAGS += @CFLAGS@
++CFLAGS ?= @CFLAGS@
+ CLDFLAGS += @CLDFLAGS@
+ LDDEPS += @LDDEPS@
+-LDFLAGS += @LDFLAGS@
++LDFLAGS ?= @LDFLAGS@
+ LIB_SUFFIX = @LIB_SUFFIX@
+ 
+ # Setup directory variables

@@ -1,0 +1,18 @@
+config ADK_PACKAGE_LIBAVAHI
+	prompt   "libavahi.......................... An mDNS/DNS-SD (ZeroConf) implementation (library)"
+	tristate
+	default n
+	select ADK_COMPILE_AVAHI
+	help
+	  Avahi is a system which facilitates service discovery on a local network --
+	  this means that you can plug your laptop or computer into a network and
+	  instantly be able to view other people who you can chat with, find printers
+	  to print to or find files being shared. This kind of technology is already
+	  found in MacOS X (branded 'Rendezvous', 'Bonjour' and sometimes 'ZeroConf')
+	  and is very convenient.
+
+	  http://www.freedesktop.org/Software/Avahi
+
+	  This package contains the mDNS/DNS-SD shared libraries, used by other programs.
+
+

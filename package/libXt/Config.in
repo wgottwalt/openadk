@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBXT
+	prompt "libXt................................... X library"
+	tristate
+	default n
+	help
+         http://www.x.org

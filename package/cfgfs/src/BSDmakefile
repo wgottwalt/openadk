@@ -1,0 +1,32 @@
+# $MirOS: contrib/hosted/fwcf/BSDmakefile,v 1.8 2007/03/13 18:14:30 tg Exp $
+#-
+# This file is part of the FreeWRT project. FreeWRT is copyrighted
+# material, please see the LICENCE file in the top-level directory
+# or at http://www.freewrt.org/licence for details.
+
+  SUBDIR+= lib
+  SUBDIR+= mkfwcf
+  SUBDIR+= unfwcf
+  SUBDIR+= tool
+  SUBDIR+= fwcf.helper
+
+test: _SUBDIRUSE
+
+.include <bsd.own.mk>
+COPTS?=		# for OpenBSD
+.if !${COPTS:M-fhonour-copts} || !${CFLAGS:M-fhonour-copts}
+CFLAGS+=	${COPTS}
+.endif
+
+gmake:
+	-rm -rf gmake_test
+	mkdir -p gmake_test
+	cd gmake_test && lndir -e gmake_test ${.CURDIR}
+	cd gmake_test && CC=${CC:Q} CFLAGS=${CFLAGS:M*:Q} gmake
+
+clean_gmake:
+	-rm -rf gmake_test
+
+.include <bsd.subdir.mk>
+
+clean cleandir: clean_gmake

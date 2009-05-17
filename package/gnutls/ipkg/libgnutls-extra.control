@@ -1,0 +1,5 @@
+Package: libgnutls-extra
+Priority: optional
+Section: libs
+Description: GNU TLS extra library
+Depends: libgnutls, opencdk, liblzo

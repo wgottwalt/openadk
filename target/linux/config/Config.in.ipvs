@@ -1,0 +1,118 @@
+menu "IPVS support"
+
+config ADK_KPACKAGE_KMOD_IP_VS
+	prompt "kmod-ip-vs............................ IPVS support"
+	tristate
+	select ADK_KERNEL_NETFILTER
+	default n
+
+config ADK_KERNEL_IP_VS_DEBUG
+	prompt "enable debugging support"
+	boolean
+	default n
+	depends ADK_KPACKAGE_KMOD_IP_VS
+
+menu "IPVS transport protocol load balancing support"
+	depends ADK_KPACKAGE_KMOD_IP_VS
+
+config ADK_KERNEL_IP_VS_PROTO_TCP
+	prompt "TCP load balancing support"
+	boolean
+	default n
+	help
+	  This option enables support for load balancing TCP transport
+	  protocol. Say Y if unsure.
+
+config ADK_KERNEL_IP_VS_PROTO_UDP
+	prompt "UDP load balancing support"
+	boolean
+	default n
+	help
+	  This option enables support for load balancing UDP transport
+	  protocol. Say Y if unsure.
+
+config ADK_KERNEL_IP_VS_PROTO_ESP
+	prompt "ESP load balancing support"
+	boolean
+	default n
+	help
+	  This option enables support for load balancing ESP (Encapsulation
+	  Security Payload) transport protocol. Say Y if unsure.
+
+config ADK_KERNEL_IP_VS_PROTO_AH
+	prompt "AH load balancing support"
+	boolean
+	default n
+	help
+	  This option enables support for load balancing AH (Authentication
+	  Header) transport protocol. Say Y if unsure.
+
+endmenu
+
+menu "IPVS Scheduler"
+	depends ADK_KPACKAGE_KMOD_IP_VS
+
+config ADK_KPACKAGE_KMOD_IP_VS_RR
+	prompt "kmod-ip-vs-rr......................... round-robin"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_WRR
+	prompt "kmod-ip-vs-wrr........................ weighted round-robin"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_LC
+	prompt "kmod-ip-vs-lc......................... least-connection"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_WLC
+	prompt "kmod-ip-vs-wlc........................ weighted least-connection"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_LBLC
+	prompt "kmod-ip-vs-lblc....................... locality-based least-connection"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_LBLCR
+	prompt "kmod-ip-vs-lblcr...................... locality-based least-connection with replication"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_DH
+	prompt "kmod-ip-vs-dh......................... destination hashing"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_SH
+	prompt "kmod-ip-vs-sh......................... source hashing"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_SED
+	prompt "kmod-ip-vs-sed........................ shortest expected delay"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_IP_VS_NQ
+	prompt "kmod-ip-vs-nq......................... never queue"
+	tristate
+	default n
+
+endmenu
+
+menu "IPVS application helper"
+	depends ADK_KPACKAGE_KMOD_IP_VS
+
+config ADK_KPACKAGE_KMOD_IP_VS_FTP
+	prompt "kmod-ip-vs-ftp........................ FTP protocol"
+	tristate
+	default n
+	select ADK_KERNEL_IP_VS_PROTO_TCP
+
+endmenu
+
+endmenu

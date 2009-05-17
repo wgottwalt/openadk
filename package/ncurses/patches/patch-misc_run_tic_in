@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ncurses-5.7.orig/misc/run_tic.in	2006-10-28 21:43:30.000000000 +0200
++++ ncurses-5.7/misc/run_tic.in	2009-05-07 18:43:38.156250000 +0200
+@@ -61,7 +61,7 @@ test -z "${DESTDIR}" && DESTDIR=
+ # Allow tic to run either from the install-path, or from the build-directory.
+ # Do not do this if we appear to be cross-compiling.  In that case, we rely
+ # on the host's copy of tic to compile the terminfo database.
+-if test "$THAT_CC" = "$THIS_CC" ; then
++if test "$THAT_CC" != "$THIS_CC" ; then
+ case "$PATH" in
+ :*) PATH=../progs:../lib:${DESTDIR}$bindir$PATH ;;
+ *) PATH=../progs:../lib:${DESTDIR}$bindir:$PATH ;;

@@ -1,0 +1,91 @@
+diff -Nur linux-2.6.28.orig/arch/cris/arch-v32/boot/compressed/Makefile linux-2.6.28/arch/cris/arch-v32/boot/compressed/Makefile
+--- linux-2.6.28.orig/arch/cris/arch-v32/boot/compressed/Makefile	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/arch-v32/boot/compressed/Makefile	2009-01-02 16:46:24.000000000 +0100
+@@ -6,7 +6,6 @@
+ ccflags-y += -O2 -I $(srctree)/include/asm/mach/ -I $(srctree)/include/asm/arch
+ ldflags-y += -T $(srctree)/$(src)/decompress.lds
+ OBJECTS = $(obj)/head.o $(obj)/misc.o
+-OBJCOPYFLAGS = -O binary --remove-section=.bss
+ 
+ quiet_cmd_image = BUILD   $@
+ cmd_image = cat $(obj)/decompress.bin $(obj)/piggy.gz > $@
+diff -Nur linux-2.6.28.orig/arch/cris/arch-v32/boot/compressed/misc.c linux-2.6.28/arch/cris/arch-v32/boot/compressed/misc.c
+--- linux-2.6.28.orig/arch/cris/arch-v32/boot/compressed/misc.c	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/arch-v32/boot/compressed/misc.c	2009-01-02 16:47:08.000000000 +0100
+@@ -5,7 +5,7 @@
+  * adapted for Linux.
+  *
+  * malloc by Hannu Savolainen 1993 and Matthias Urlichs 1994
+- * puts by Nick Holloway 1993, better puts by Martin Mares 1995
++ * putstr by Nick Holloway 1993, better putstr by Martin Mares 1995
+  * adaptation for Linux/CRIS Axis Communications AB, 1999
+  *
+  */
+@@ -98,7 +98,7 @@
+ 
+ static void error(char *m);
+ 
+-static void puts(const char *);
++static void putstr(const char *);
+ 
+ /* the "heap" is put directly after the BSS ends, at end */
+ 
+@@ -125,7 +125,7 @@
+ }
+ 
+ static void
+-puts(const char *s)
++putstr(const char *s)
+ {
+ #ifndef CONFIG_ETRAX_DEBUG_PORT_NULL
+ 	while (*s) {
+@@ -197,9 +197,9 @@
+ static void
+ error(char *x)
+ {
+-	puts("\r\n\n");
+-	puts(x);
+-	puts("\r\n\n -- System halted\n");
++	putstr("\r\n\n");
++	putstr(x);
++	putstr("\r\n\n -- System halted\n");
+ 
+ 	while(1);	/* Halt */
+ }
+@@ -308,11 +308,11 @@
+ 	__asm__ volatile ("move $vr,%0" : "=rm" (revision));
+ 	if (revision < 32)
+ 	{
+-		puts("You need an ETRAX FS to run Linux 2.6/crisv32.\r\n");
++		putstr("You need an ETRAX FS to run Linux 2.6/crisv32.\r\n");
+ 		while(1);
+ 	}
+ 
+-	puts("Uncompressing Linux...\r\n");
++	putstr("Uncompressing Linux...\r\n");
+ 	gunzip();
+-	puts("Done. Now booting the kernel.\r\n");
++	putstr("Done. Now booting the kernel.\r\n");
+ }
+diff -Nur linux-2.6.28.orig/arch/cris/arch-v32/boot/Makefile linux-2.6.28/arch/cris/arch-v32/boot/Makefile
+--- linux-2.6.28.orig/arch/cris/arch-v32/boot/Makefile	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/arch-v32/boot/Makefile	2009-01-02 16:46:10.000000000 +0100
+@@ -4,8 +4,8 @@
+ 
+ OBJCOPYFLAGS = -O binary -R .note -R .comment
+ 
+-subdir- := compressed rescue
+-targets := Image
++subdir- := compressed
++targets := Image zImage
+ 
+ $(obj)/Image: vmlinux FORCE
+ 	$(call if_changed,objcopy)
+@@ -13,7 +13,6 @@
+ 
+ $(obj)/compressed/vmlinux: $(obj)/Image FORCE
+ 	$(Q)$(MAKE) $(build)=$(obj)/compressed $@
+-	$(Q)$(MAKE) $(build)=$(obj)/rescue $(obj)/rescue/rescue.bin
+ 
+ $(obj)/zImage:  $(obj)/compressed/vmlinux
+ 	@cp $< $@

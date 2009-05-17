@@ -1,0 +1,12 @@
+$Id$
+--- tor-0.1.1.26.orig/src/common/util.h	2006-09-24 19:47:57.000000000 +0200
++++ tor-0.1.1.26/src/common/util.h	2007-02-17 23:09:46.000000000 +0100
+@@ -36,7 +36,7 @@
+  * And I'm not just saying that because some of our asserts check
+  * security-critical properties.
+  */
+-#error "Sorry; we don't support building with NDEBUG."
++#define tor_assert(expr) ((void)(0))
+ #else
+ #define tor_assert(expr) do {                                           \
+     if (!(expr)) {                                                      \

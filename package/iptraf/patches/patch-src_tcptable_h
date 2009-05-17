@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- iptraf-3.0.0.orig/src/tcptable.h	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.0/src/tcptable.h	2008-10-09 17:34:11.000000000 +0200
+@@ -22,7 +22,6 @@
+ #include <asm/types.h>
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+-#include <linux/if_fddi.h>
+ #include <linux/if_tr.h>
+ #include <net/if.h>
+ #include <netinet/ip.h>

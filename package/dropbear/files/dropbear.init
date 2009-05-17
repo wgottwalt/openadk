@@ -1,0 +1,43 @@
+#!/bin/sh
+#FWINIT 50
+. /etc/rc.conf
+
+bothlog() {
+	echo "$*"
+}
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $dropbear_flags = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	if test ! -f /etc/dropbear/dropbear_rsa_host_key; then
+		mkdir -p /etc/dropbear
+		if test ! -x /usr/bin/dropbearkey; then
+			bothlog dropbear not starting: SSH private key missing
+			exit 0
+		fi
+		bothlog "dropbear: generating SSH private key (RSA)"
+		/usr/bin/dropbearkey -f /etc/dropbear/dropbear_rsa_host_key \
+		    -t rsa; rv=$?
+		bothlog dropbear: key generation exited with code $rv
+		test $rv = 0 || exit 1
+		test -f /etc/dropbear/dropbear_rsa_host_key || exit 1
+	fi
+	/usr/sbin/dropbear $dropbear_flags
+	;;
+stop)
+	killall dropbear
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

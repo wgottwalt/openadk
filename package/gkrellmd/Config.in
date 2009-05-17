@@ -1,0 +1,9 @@
+config ADK_PACKAGE_GKRELLMD
+	prompt "gkrellmd.......................... The GNU Krell Monitors Server"
+	tristate
+	default n
+	select ADK_PACKAGE_GLIB1
+	help
+	  Gkrellmd Listens for connections from gkrellm clients. When a gkrellm
+	  client connects to a gkrellmd server all builtin monitors collect
+	  their data from the server.

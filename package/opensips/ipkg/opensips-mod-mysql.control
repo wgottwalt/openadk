@@ -1,0 +1,5 @@
+Package: opensips-mod-mysql
+Depends: opensips, libmysqlclient
+Section: net
+Priority: optional
+Description: MySQL support for OpenSIPS

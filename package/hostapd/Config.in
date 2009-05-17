@@ -1,0 +1,41 @@
+config ADK_COMPILE_HOSTAPD
+	tristate
+	default n
+	depends ADK_PACKAGE_HOSTAPD || ADK_PACKAGE_HOSTAPD_UTILS
+
+config ADK_PACKAGE_HOSTAPD
+	prompt "hostapd........................... An IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator"
+	tristate
+	default n
+	select ADK_COMPILE_HOSTAPD
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_LIBNL
+	help
+
+	  hostapd is a user space daemon for access point and
+	  authentication servers. It implements IEEE 802.11 access point
+	  management, IEEE 802.1X/WPA/WPA2/EAP Authenticators, RADIUS
+	  client, EAP server, and RADIUS authentication server.
+
+	  http://hostap.epitest.fi/hostapd/
+
+	  Includes:
+	   - hostapd
+
+config ADK_PACKAGE_HOSTAPD_UTILS
+	prompt "hostapd-utils..................... An IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator (CLI utility)"
+	tristate
+	default n
+	select ADK_COMPILE_HOSTAPD
+	depends on ADK_PACKAGE_HOSTAPD
+	help
+
+	  hostapd is a user space daemon for access point and
+	  authentication servers. It implements IEEE 802.11 access point
+	  management, IEEE 802.1X/WPA/WPA2/EAP Authenticators, RADIUS
+	  client, EAP server, and RADIUS authentication server.
+
+	  http://hostap.epitest.fi/hostapd/
+
+	  Includes:
+	   - hostapd_cli

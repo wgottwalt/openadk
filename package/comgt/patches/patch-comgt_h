@@ -1,0 +1,14 @@
+$Id$
+--- comgt.0.32.orig/comgt.h	2006-10-20 16:49:46.000000000 +0200
++++ comgt.0.32/comgt.h	2006-12-06 13:10:54.000000000 +0100
+@@ -470,8 +470,8 @@ char _SETAPN_code[]=
+     if a=0 goto apnerror\n\
+     if a>32 goto apnerror\n\
+   :enterapn\n\
+-    send \"AT+CGDCONT=1,\\\"IP\\\",\\\"\n\
+-    send $c\n\
++    send \"AT+CGDCONT=1,\\\"IP\\\",\\\"\"\n\
++    send $x\n\
+     send \"\\\"^m\"\n\
+     waitfor 20 \"OK\",\"ERR\"\n\
+     if % = -1 goto timeerror\n\

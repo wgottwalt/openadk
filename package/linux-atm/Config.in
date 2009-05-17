@@ -1,0 +1,20 @@
+config ADK_PACKAGE_LINUX_ATM
+	prompt "linux-atm......................... ATM Library/Utilities for Linux"
+	tristate
+	default n
+	help
+	  ATM Library for linux
+	  
+	  http://ftp.debian.org/debian/pool/main/l/linux-atm/
+
+config ADK_PACKAGE_BR2684CTL
+	prompt   "br2684ctl....................... RFC2684 bridging utility"
+	tristate
+	default n
+	depends ADK_PACKAGE_LINUX_ATM
+	help
+	  Utility for setting up ATM RFC2684 bridging mode
+	  Useful for PPPoE
+	  
+	  http://ftp.debian.org/debian/pool/main/l/linux-atm/
+

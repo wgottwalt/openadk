@@ -1,0 +1,113 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		mgetty
+PKG_VERSION:=		1.1.35
+PKG_XVERSION:=		Feb22
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6805f8e31423bb777be80e3a856001cb
+MASTER_SITES:=		ftp://alpha.greenie.net/pub/mgetty/source/1.1/
+DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_XVERSION}.tar.gz
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,MGETTY,mgetty,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+pre-configure:
+	cp ${WRKBUILD}/policy.h-dist ${WRKBUILD}/policy.h
+	echo "#define	AUTO_PPP" >> ${WRKBUILD}/policy.h
+	echo "#undef	FAX_NOTIFY_PROGRAM" >> ${WRKBUILD}/policy.h
+	echo "#define	FAX_NOTIFY_PROGRAM \"/usr/lib/mgetty+sendfax/new_fax\"" >> ${WRKBUILD}/policy.h
+	echo "#undef	DATA_FLOW" >> ${WRKBUILD}/policy.h
+	echo "#define	DATA_FLOW FLOW_HARD" >> ${WRKBUILD}/policy.h
+	echo "#undef	DEVICE_GROUP" >> ${WRKBUILD}/policy.h
+	echo "#undef	DEVICE_OWNER" >> ${WRKBUILD}/policy.h
+	echo "#define	DEVICE_OWNER \"root\"" >> ${WRKBUILD}/policy.h
+	echo "#undef	FAXREC_FLOW" >> ${WRKBUILD}/policy.h
+	echo "#define	FAXREC_FLOW FLOW_SOFT" >> ${WRKBUILD}/policy.h
+	echo "#undef	FAXSEND_FLOW" >> ${WRKBUILD}/policy.h
+	echo "#define	FAXSEND_FLOW FLOW_SOFT" >> ${WRKBUILD}/policy.h
+
+do-build:
+	mkdir -p ${WRKINST}/usr/bin
+	mkdir -p ${WRKINST}/usr/sbin
+	mkdir -p ${WRKINST}/usr/lib/mgetty+sendfax
+	mkdir -p ${WRKINST}/etc/mgetty+sendfax
+	${MAKE} -C ${WRKBUILD} \
+		${TARGET_CONFIGURE_OPTS} \
+		prefix="${WRKINST}/usr" \
+		CONFDIR=/etc/mgetty+sendfax \
+		bin-all
+	${CP} ${WRKBUILD}/mgetty ${WRKINST}/usr/sbin
+	${CP} ${WRKBUILD}/sendfax ${WRKINST}/usr/sbin
+	${CP} ${WRKBUILD}/fax/faxrunqd ${WRKINST}/usr/sbin
+	chmod 755 ${WRKINST}/usr/sbin/*
+	${CP} ${WRKBUILD}/fax/faxq-helper ${WRKINST}/usr/lib/mgetty+sendfax
+	chmod u+s ${WRKINST}/usr/lib/mgetty+sendfax/faxq-helper
+	${CP} ${WRKBUILD}/fax/cour25n.pbm ${WRKINST}/usr/lib/mgetty+sendfax
+	${CP} ${WRKBUILD}/fax/cour25.pbm ${WRKINST}/usr/lib/mgetty+sendfax
+	${CP} ${WRKBUILD}/fax/faxq ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/fax/faxrm ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/fax/faxrunq ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/fax/faxspool ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/g3/g32pbm ${WRKINST}/usr/bin
+	(cd ${WRKINST}/usr/bin;\
+		ln -snf g32pbm g3topbm;\
+	);
+	${CP} ${WRKBUILD}/g3/g3cat ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/g3/pbm2g3 ${WRKINST}/usr/bin
+	${CP} ${WRKBUILD}/g3/sff2g3 ${WRKINST}/usr/bin
+	chmod 755 ${WRKINST}/usr/bin/*
+# Installation into /etc
+	${CP} ${WRKBUILD}/dialin.config ${WRKINST}/etc/mgetty+sendfax
+	${CP} ${WRKBUILD}/fax/faxheader ${WRKINST}/etc/mgetty+sendfax
+	${CP} ${WRKBUILD}/faxrunq.config ${WRKINST}/etc/mgetty+sendfax
+	${CP} ${WRKBUILD}/fax/faxspool.rules ${WRKINST}/etc/mgetty+sendfax/faxspool.rules.sample
+	${WRKBUILD}/sedscript < ${WRKBUILD}/login.cfg.in > ${WRKINST}/etc/mgetty+sendfax/login.config
+	${WRKBUILD}/sedscript < ${WRKBUILD}/mgetty.cfg.in > ${WRKINST}/etc/mgetty+sendfax/mgetty.config
+	${WRKBUILD}/sedscript < ${WRKBUILD}/sendfax.cfg.in > ${WRKINST}/etc/mgetty+sendfax/sendfax.config
+
+ISBIN:=${IDIR_MGETTY}/usr/sbin
+IBIN:=${IDIR_MGETTY}/usr/bin
+ILIB:=${IDIR_MGETTY}/usr/lib/mgetty+sendfax
+IETC:=${IDIR_MGETTY}/etc/mgetty+sendfax
+
+do-install:
+	${INSTALL_DIR} ${ISBIN} ${IBIN} ${ILIB} ${IETC}
+	${INSTALL_BIN} \
+		${WRKINST}/usr/bin/faxq \
+		${WRKINST}/usr/bin/faxrm \
+		${WRKINST}/usr/bin/faxrunq \
+		${WRKINST}/usr/bin/faxspool \
+		${WRKINST}/usr/bin/g32pbm \
+		${WRKINST}/usr/bin/g3cat \
+		${WRKINST}/usr/bin/pbm2g3 \
+		${WRKINST}/usr/bin/sff2g3 \
+		${IBIN}
+	${INSTALL_BIN} \
+		${WRKINST}/usr/sbin/mgetty \
+		${WRKINST}/usr/sbin/sendfax \
+		${WRKINST}/usr/sbin/faxrunqd \
+		${ISBIN}
+	install -m4755 \
+		${WRKINST}/usr/lib/mgetty+sendfax/faxq-helper \
+		${ILIB}
+	${INSTALL_DATA} \
+		${WRKINST}/usr/lib/mgetty+sendfax/cour25n.pbm \
+		${WRKINST}/usr/lib/mgetty+sendfax/cour25.pbm \
+		${ILIB}
+	install -m600 \
+		${WRKINST}/etc/mgetty+sendfax/dialin.config \
+		${WRKINST}/etc/mgetty+sendfax/faxheader \
+		${WRKINST}/etc/mgetty+sendfax/faxrunq.config \
+		${WRKINST}/etc/mgetty+sendfax/faxspool.rules.sample \
+		${WRKINST}/etc/mgetty+sendfax/login.config \
+		${WRKINST}/etc/mgetty+sendfax/mgetty.config \
+		${WRKINST}/etc/mgetty+sendfax/sendfax.config \
+		${IETC}
+
+include ${TOPDIR}/mk/pkg-bottom.mk

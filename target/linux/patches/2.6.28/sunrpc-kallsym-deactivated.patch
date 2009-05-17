@@ -1,0 +1,13 @@
+diff -Nur linux-2.6.28.orig/net/sunrpc/clnt.c linux-2.6.28/net/sunrpc/clnt.c
+--- linux-2.6.28.orig/net/sunrpc/clnt.c	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/net/sunrpc/clnt.c	2009-01-04 16:35:59.000000000 +0100
+@@ -1548,7 +1548,9 @@
+ 
+ 	/* map tk_action pointer to a function name; then trim off
+ 	 * the "+0x0 [sunrpc]" */
++#ifdef CONFIG_KALLSYMS
+ 	sprint_symbol(action, (unsigned long)task->tk_action);
++#endif
+ 	p = strchr(action, '+');
+ 	if (p)
+ 		*p = '\0';

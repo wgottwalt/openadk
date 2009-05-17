@@ -1,0 +1,28 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${cups:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/cache/cups ] || mkdir -p /var/cache/cups
+	[ -d /var/cups ] || mkdir -p /var/cups/tmp
+	[ -d /var/cups/spool/cups/tmp ] || mkdir -p /var/cups/spool/cups/tmp
+	/usr/sbin/cupsd -c /etc/cups/cupsd.conf
+	;;
+stop)
+	killall cupsd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

@@ -1,0 +1,5 @@
+Package: curl
+Priority: optional
+Section: net
+Description: a client-side URL transfer tool
+Depends: libcurl

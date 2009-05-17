@@ -1,0 +1,31 @@
+config ADK_PACKAGE_MKSH
+	prompt "mksh................................. The MirBSD enhanced Korn Shell"
+	tristate
+	default n
+	help
+	  mksh is the MirBSD enhanced version of the Public Domain Korn
+	  shell (pdksh), a bourne-compatible shell which is largely si-
+	  milar to the original AT&T Korn shell.  It includes bug fixes
+	  and feature improvements in order to produce a modern, robust
+	  shell good for interactive and especially script use.  It has
+	  UTF-8 support in the emacs command line editing mode; corres-
+	  ponds to OpenBSD 4.4-beta ksh without GNU bash-like $PS1; the
+	  build environment requirements are autoconfigured; throughout
+	  code simplification/bugfix/enhancement has been done, and the
+	  shell has extended compatibility to other modern shells.
+
+	  This package also installs mksh as /bin/ash and /bin/sh (i.e.
+	  the default Bourne/POSIX shell) and creates a ~/.mkshrc file,
+	  which can be used to further customise the look and feel.
+
+	  http://mirbsd.de/mksh
+
+config ADK_PACKAGE_MKSH_FULL
+	bool "  Include all features"
+	depends ADK_PACKAGE_MKSH
+	default y
+	help
+	  Disable this to remove a few functions from mksh to make it smaller.
+	  Ideal for embedded systems. However, be aware you will lose some
+	  functionality you'd otherwise expect, among these is the vi command
+	  line editing mode.

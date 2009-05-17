@@ -1,0 +1,63 @@
+$Id$
+--- procps-3.2.7.orig/Makefile	Sat Jun 24 09:02:02 2006
++++ procps-3.2.7/Makefile	Tue May 22 14:43:11 2007
+@@ -27,7 +27,7 @@ TARVERSION   := $(VERSION).$(SUBVERSION)
+ ldconfig := ldconfig
+ ln_f     := ln -f
+ ln_sf    := ln -sf
+-install  := install -D --owner 0 --group 0
++install  := install
+ 
+ # Lame x86-64 /lib64 and /usr/lib64 abomination:
+ lib64    := lib$(shell [ -d /lib64 ] && echo 64)
+@@ -82,7 +82,7 @@ CURSES := -lncurses
+ 
+ # Preprocessor flags.
+ PKG_CPPFLAGS := -D_GNU_SOURCE -I proc
+-CPPFLAGS     := -I/usr/include/ncurses
++CPPFLAGS     ?= -I/usr/include/ncurses
+ ALL_CPPFLAGS := $(PKG_CPPFLAGS) $(CPPFLAGS)
+ 
+ # Left out -Wconversion due to noise in glibc headers.
+@@ -102,11 +102,11 @@ PKG_CFLAGS   := -fno-common -ffast-math 
+   -Wstrict-prototypes -Wmissing-prototypes
+ # Note that some stuff below is conditional on CFLAGS containing
+ # an option that starts with "-g". (-g, -g2, -g3, -ggdb, etc.)
+-CFLAGS       := -O2 -s
++CFLAGS       ?= -O2 -s
+ ALL_CFLAGS   := $(PKG_CFLAGS) $(CFLAGS)
+ 
+ PKG_LDFLAGS  := -Wl,-warn-common
+-LDFLAGS      :=
++LDFLAGS      ?=
+ ALL_LDFLAGS  := $(PKG_LDFLAGS) $(LDFLAGS)
+ 
+ ############ Add some extra flags if gcc allows
+@@ -128,7 +128,7 @@ check_gcc = $(shell if $(CC) $(ALL_CPPFL
+ # i386 and x86-64, mips and mips64, sparc and sparc64, and so on.
+ # Failure to do so will cause data corruption.
+ m64 := $(call check_gcc,-m64,$(call check_gcc,-mabi=64,))
+-ALL_CFLAGS += $(m64)
++#ALL_CFLAGS += $(m64)
+ 
+ ALL_CFLAGS += $(call check_gcc,-Wdeclaration-after-statement,)
+ ALL_CFLAGS += $(call check_gcc,-Wpadded,)
+@@ -222,10 +222,16 @@ clean:
+ ###### install
+ 
+ $(BINFILES) : all
+-	$(install) --mode a=rx $(notdir $@) $@
++	mkdir -p $(dir $@)
++	for f in $@; do \
++		install -c -m 555 $$(basename $$f) $$f; \
++	done
+ 
+ $(MANFILES) : all
+-	$(install) --mode a=r $(notdir $@) $@
++	mkdir -p $(dir $@)
++	for f in $@; do \
++		install -c -m 444 $$(basename $$f) $$f; \
++	done
+ 
+ install: $(filter-out $(SKIP) $(addprefix $(DESTDIR),$(SKIP)),$(INSTALL))
+ 	cd $(usr/bin) && $(ln_f) skill snice

@@ -1,0 +1,27 @@
+$Id$
+--- aiccu.orig/unix-console/Makefile	Mon Jan 15 11:04:04 2007
++++ aiccu/unix-console/Makefile	Mon Jun 25 13:19:42 2007
+@@ -10,9 +10,9 @@
+ #  $Date: 2007-01-15 11:04:27 $
+ # **********************************************************/
+ 
+-SRCS	= main.c ../common/tun.c ../common/aiccu.c ../common/hash_md5.c ../common/hash_sha1.c ../common/common.c ../common/heartbeat.c ../common/tic.c ../common/ayiya.c ../common/aiccu_test.c ../common/resolver.c
++SRCS	= main.c ../common/tun.c ../common/aiccu.c ../common/hash_md5.c ../common/hash_sha1.c ../common/common.c ../common/heartbeat.c ../common/tic.c ../common/ayiya.c ../common/aiccu_test.c ../common/resolver.c ../common/dn_skipname.c
+ INCS	= ../common/tun.h ../common/aiccu.h ../common/hash_md5.h ../common/hash_sha1.h ../common/common.h ../common/heartbeat.h ../common/tic.h ../common/ayiya.h ../common/resolver.h
+-OBJS	= main.o ../common/tun.o ../common/aiccu.o ../common/hash_md5.o ../common/hash_sha1.o ../common/common.o ../common/heartbeat.o ../common/tic.o ../common/ayiya.o ../common/aiccu_test.o ../common/resolver.o
++OBJS	= main.o ../common/tun.o ../common/aiccu.o ../common/hash_md5.o ../common/hash_sha1.o ../common/common.o ../common/heartbeat.o ../common/tic.o ../common/ayiya.o ../common/aiccu_test.o ../common/resolver.o ../common/dn_skipname.o
+ 
+ # New features not fully implemented and thus disabled for now
+ #CFLAGS	+= -D NEWSTUFF_TSP -D NEWSTUFF_TEEPEE
+@@ -145,11 +145,6 @@ all: aiccu
+ 
+ aiccu:	$(OBJS) ${SRCS} ${INCS}
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
+-ifeq ($(shell echo $(CFLAGS) | grep -c "DEBUG"),0)
+-ifeq ($(shell echo "$(RPM_OPT_FLAGS)" | wc -c),1)
+-	strip $@
+-endif
+-endif
+ 
+ clean:
+ 	$(RM) -f $(OBJS) aiccu

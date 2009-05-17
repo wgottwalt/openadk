@@ -1,0 +1,24 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/lib/roken/Makefile.in	2008-07-28 14:05:33.000000000 +0200
++++ heimdal-1.2.1/lib/roken/Makefile.in	2009-01-02 22:22:25.000000000 +0100
+@@ -665,9 +665,6 @@ getaddrinfo-test$(EXEEXT): $(getaddrinfo
+ hex-test$(EXEEXT): $(hex_test_OBJECTS) $(hex_test_DEPENDENCIES) 
+ 	@rm -f hex-test$(EXEEXT)
+ 	$(LINK) $(hex_test_OBJECTS) $(hex_test_LDADD) $(LIBS)
+-make-roken$(EXEEXT): $(make_roken_OBJECTS) $(make_roken_DEPENDENCIES) 
+-	@rm -f make-roken$(EXEEXT)
+-	$(LINK) $(make_roken_OBJECTS) $(make_roken_LDADD) $(LIBS)
+ parse_bytes-test$(EXEEXT): $(parse_bytes_test_OBJECTS) $(parse_bytes_test_DEPENDENCIES) 
+ 	@rm -f parse_bytes-test$(EXEEXT)
+ 	$(LINK) $(parse_bytes_test_OBJECTS) $(parse_bytes_test_LDADD) $(LIBS)
+@@ -1818,6 +1815,10 @@ roken.h: make-roken$(EXEEXT)
+ 
+ make-roken.c: roken.h.in roken.awk
+ 	$(AWK) -f $(srcdir)/roken.awk $(srcdir)/roken.h.in > make-roken.c
++
++make-roken: make-roken.c
++	$(HOSTCC) $(HOSTCFLAGS) -I$(top_builddir)/include -DHAVE_CONFIG_H \
++		-o $@ $<
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+ .NOEXPORT:

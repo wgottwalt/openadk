@@ -1,0 +1,10 @@
+config ADK_PACKAGE_FPROBE
+	prompt "fprobe............................ NetFlow probe (libpcap-based)"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBPCAP
+	select ADK_PACKAGE_LIBPTHREAD
+	help
+	  A NetFlow probe using libpcap
+
+	  http://fprobe.sourceforge.net/

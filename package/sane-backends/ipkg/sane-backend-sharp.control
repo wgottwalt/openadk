@@ -1,0 +1,5 @@
+Package: sane-backend-sharp
+Depends: sane-backends, libusb
+Priority: optional
+Section: misc
+Description: Scanner access now easy

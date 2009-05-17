@@ -1,0 +1,5 @@
+Package: libstdcxx
+Priority: optional
+Section: net
+Depends: libgcc
+Description: G++ support library

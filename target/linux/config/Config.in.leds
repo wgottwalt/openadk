@@ -1,0 +1,14 @@
+menu "LEDS driver support"
+
+config ADK_KERNEL_NEW_LEDS
+	bool
+	default n
+	help
+
+config ADK_KPACKAGE_KMOD_LEDS_CLASS
+	prompt "LED Class support"
+	tristate
+	default n
+	help
+
+endmenu

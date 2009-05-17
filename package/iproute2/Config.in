@@ -1,0 +1,18 @@
+config ADK_COMPILE_IPROUTE2
+	tristate
+	default n
+
+config ADK_PACKAGE_IP
+	prompt   "ip................................ iproute2 routing control utility"
+	tristate
+	default n
+	select ADK_COMPILE_IPROUTE2
+
+config ADK_PACKAGE_TC
+	prompt   "tc................................ iproute2 traffic control utility"
+	tristate
+	default n
+	select ADK_COMPILE_IPROUTE2
+	help
+	 Traffic shaping control utility. Please choose the kmod-sched-* modules
+	 you need.

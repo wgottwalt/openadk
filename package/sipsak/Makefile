@@ -1,0 +1,29 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		sipsak
+PKG_VERSION:=		0.9.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c4eb8e282902e75f4f040f09ea9d99d5
+MASTER_SITES:=		http://download.berlios.de/sipsak/ \
+			http://ftp.iptel.org/pub/sipsak/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,SIPSAK,sipsak,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
+CONFIGURE_ARGS+=	--disable-gnutls
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_SIPSAK}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/sipsak ${IDIR_SIPSAK}/usr/bin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

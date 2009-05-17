@@ -1,0 +1,43 @@
+config ADK_PACKAGE_DAVFS2
+	prompt "davfs2............................ WebDAV filesystem"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBICONV
+	select ADK_PACKAGE_NEON
+	help
+	  WebDAV is an extension to HTTP that allows remote collaborative
+	  authoring of Web resources, defined in RFC 2518.
+	  
+	  davfs2 is a Linux file system driver that allows you to mount a
+	  WebDAV server as a local file system, like a disk drive. This
+	  way applications can access resources on a Web server without
+	  knowing anything about HTTP or WebDAV.
+	  
+	  davfs2 runs as a daemon in userspace. It uses the kernel file
+	  system coda or fuse. To connect to the WebDAV
+	  server it makes use of the neon library. Neon supports TLS/SSL
+	  (using OpenSSL or GnuTLS) and access via proxy server.
+	  
+	  davfs2 allows you to e.g.
+	  * use a WebDAV server as workspace for a geographically
+	    distributed work group.
+	  * save documents on a WebDAV server and access and edit them
+	    via internet from wherever you want.
+	  * edit a web site in place, using your preferred development
+	    tools.
+
+choice
+prompt "kernel filesystem interface"
+depends on ADK_PACKAGE_DAVFS2
+
+config ADK_PACKAGE_DAVFS2_FUSE
+	bool "use the FUSE filesystem interface"
+	select ADK_PACKAGE_FUSE_UTILS
+config ADK_PACKAGE_DAVFS2_CODA
+	bool "use the CODA filesystem interface"
+	select ADK_KPACKAGE_KMOD_CODA_FS
+config ADK_PACKAGE_DAVFS2_BOTH
+	bool "use both filesystem interfaces"
+	select ADK_PACKAGE_FUSE_UTILS
+	select ADK_KPACKAGE_KMOD_CODA_FS
+endchoice

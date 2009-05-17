@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+
+* prevent segfault with uClibc
+  http://www.spinics.net/lists/dm-crypt/msg01187.html
+
+--- cryptsetup-1.0.6.orig/lib/utils.c	2007-12-01 17:29:27.000000000 +0100
++++ cryptsetup-1.0.6/lib/utils.c	2008-12-25 14:18:46.523091272 +0100
+@@ -27,6 +27,8 @@ static char *error=NULL;
+ void set_error_va(const char *fmt, va_list va)
+ {
+ 
++	if(!fmt) return;
++
+ 	if(error) {
+ 	    free(error);
+ 	    error=NULL;

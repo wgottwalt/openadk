@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+gid=$(get_next_gid)
+add_group audio $gid

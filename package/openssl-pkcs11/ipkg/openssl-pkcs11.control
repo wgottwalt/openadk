@@ -1,0 +1,4 @@
+Package: openssl-pkcs11
+Priority: optional
+Section: crypto
+Description: pkcs11 engine for openssl

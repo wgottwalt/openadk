@@ -1,0 +1,5 @@
+Package: opensips-mod-avpops
+Depends: opensips
+Section: net
+Priority: optional
+Description: AVPOPS support for OpenSIPS

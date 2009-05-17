@@ -1,0 +1,11 @@
+config ADK_PACKAGE_LYNX
+	prompt "lynx.............................. Standard text browser"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBNCURSES
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_CA_CERTS
+	help
+	  The standard text-based world wide web browser.
+	  
+	  http://lynx.isc.org/current/

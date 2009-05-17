@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- sane-backends-1.0.20.orig/backend/pixma_imageclass.c	2009-03-12 18:36:09.000000000 +0100
++++ sane-backends-1.0.20/backend/pixma_imageclass.c	2009-05-11 00:30:36.000000000 +0200
+@@ -159,8 +159,6 @@ query_status (pixma_t * s)
+   if (error >= 0)
+     {
+       memcpy (mf->current_status, data, 12);
+-      DBG (3, "Current status: paper=%u cal=%u lamp=%u\n",
+-	   data[1], data[8], data[7]);
+       PDBG (pixma_dbg (3, "Current status: paper=%u cal=%u lamp=%u\n",
+ 		       data[1], data[8], data[7]));
+     }

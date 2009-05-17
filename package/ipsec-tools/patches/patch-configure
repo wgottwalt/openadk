@@ -1,0 +1,12 @@
+$Id$
+--- ipsec-tools-0.6.4.orig/configure	2005-12-09 10:03:34.000000000 +0100
++++ ipsec-tools-0.6.4/configure	2007-06-28 16:58:31.000000000 +0200
+@@ -23147,7 +23147,7 @@ echo "${ECHO_T}${crypto_dir-default}" >&
+ 
+ if test "x$crypto_dir" != "x"; then
+ 	LIBS="$LIBS -L${crypto_dir}/lib"
+-	CPPFLAGS="-I${crypto_dir}/include $CPPLAGS"
++	CPPFLAGS="-I${crypto_dir}/include $CPPFLAGS"
+ fi
+ echo "$as_me:$LINENO: checking openssl version" >&5
+ echo $ECHO_N "checking openssl version... $ECHO_C" >&6

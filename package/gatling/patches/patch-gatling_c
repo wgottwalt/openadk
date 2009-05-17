@@ -1,0 +1,73 @@
+$Id$
+--- gatling-0.8.orig/gatling.c	2005-05-20 17:32:27.000000000 +0200
++++ gatling-0.8/gatling.c	2007-07-06 17:55:56.000000000 +0200
+@@ -34,6 +34,7 @@
+ #include <sys/time.h>
+ #include <sys/resource.h>
+ #include <sys/socket.h>
++#include <crypt.h>
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <errno.h>
+@@ -865,24 +866,6 @@ static inline int issafe(unsigned char c
+   return (c!='"' && c!='%' && c>=' ' && c!='+');
+ }
+ 
+-unsigned long fmt_urlencoded(char* dest,const char* src,unsigned long len) {
+-  register const unsigned char* s=(const unsigned char*) src;
+-  unsigned long written=0,i;
+-  for (i=0; i<len; ++i) {
+-    if (!issafe(s[i])) {
+-      if (dest) {
+-	dest[written]='%';
+-	dest[written+1]=fmt_tohex(s[i]>>4);
+-	dest[written+2]=fmt_tohex(s[i]&15);
+-      }
+-      written+=3;
+-    } else {
+-      if (dest) dest[written]=s[i]; ++written;
+-    }
+-  }
+-  return written;
+-}
+-
+ void catencoded(array* a,char* s) {
+   unsigned int len=str_len(s);
+   char* buf=alloca(fmt_urlencoded(0,s,len));
+@@ -1011,7 +994,7 @@ username2:password2
+  * authentication was OK or -1 if authentication is needed (the HTTP
+  * response was then already written to the iob). */
+ int http_dohtaccess(struct http_data* h) {
+-  unsigned long filesize;
++  size_t filesize;
+   char* map;
+   char* s;
+   char* auth;
+@@ -1031,7 +1014,8 @@ int http_dohtaccess(struct http_data* h)
+       char* username,* password;
+       char* decoded;
+       int i;
+-      unsigned long l,dl,ul;
++      unsigned long l,ul;
++      size_t dl;
+       auth+=6;
+       while (*auth==' ' || *auth=='\t') ++auth;
+       i=str_chr(auth,'\n');
+@@ -1103,7 +1087,7 @@ int64 http_openfile(struct http_data* h,
+   char* dir=0;
+   char* s;
+   char* args;
+-  unsigned long i;
++  size_t i;
+   int64 fd;
+   int doesgzip,doesbzip2;
+ 
+@@ -2948,7 +2932,7 @@ void forkslave(int fd,buffer* in) {
+ 		j=str_chr(x,'\n'); if (j && x[j-1]=='\r') { --j; }
+ 		k=str_chr(x,' ');
+ 		if (k<j) {
+-		  unsigned long dl;
++		  size_t dl;
+ 		  remoteuser=alloca(20+k-j);
+ 		  i=fmt_str(remoteuser,"REMOTE_USER=");
+ 		  scan_base64(x+k+1,remoteuser+i,&dl);

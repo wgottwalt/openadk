@@ -1,0 +1,28 @@
+#!/bin/sh
+#FWINIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $slapd = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/slapd
+	;;
+stop)
+	if [ -e /var/run/slapd.pid ]; then
+		kill $(cat /var/run/slapd.pid)
+	fi
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

@@ -1,0 +1,14 @@
+$Id$
+--- opencdk-0.6.4.orig/configure	Mon Jun 11 10:25:19 2007
++++ opencdk-0.6.4/configure	Thu Sep  6 15:42:04 2007
+@@ -20379,8 +20379,8 @@ echo "$as_me: error:
+ 
+ 
+ 
+-LIBOPENCDK_LIBS="-L${libdir} -lopencdk $LIBGCRYPT_LIBS $LIBS"
+-LIBOPENCDK_CFLAGS="$LIBGCRYPT_CFLAGS -I${includedir}"
++LIBOPENCDK_LIBS="$LIBS -lopencdk $LIBGCRYPT_LIBS"
++LIBOPENCDK_CFLAGS="$LIBGCRYPT_CFLAGS"
+ 
+ 
+ 

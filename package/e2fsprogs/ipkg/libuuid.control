@@ -1,0 +1,4 @@
+Package: libuuid
+Priority: optional
+Section: admin
+Description: UUID library

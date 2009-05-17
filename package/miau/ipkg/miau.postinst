@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf miau
+

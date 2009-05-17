@@ -1,0 +1,113 @@
+menu "Multimedia devices support"
+
+config ADK_KERNEL_SND_TIMER
+	boolean
+	default n
+
+config ADK_KERNEL_SND_PCM
+	boolean
+	default n
+
+config ADK_KERNEL_SND_HWDEP
+	boolean
+	default n
+
+config ADK_KERNEL_SND_MIXER_OSS
+	boolean
+	default n
+
+config ADK_KERNEL_SND_PCM_OSS
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_SOUND
+	tristate
+	default n
+	help
+	  Basic support for sound.
+
+config ADK_KPACKAGE_KMOD_SND
+	prompt "kmod-sound-alsa................. ALSA sound support"
+	select ADK_KPACKAGE_KMOD_SOUND
+	select ADK_KERNEL_SND_TIMER
+	select ADK_KERNEL_SND_PCM
+	select ADK_KERNEL_SND_HWDEP
+	tristate
+	default n
+	help
+	 Basic ALSA sound support.
+
+config ADK_KPACKAGE_KMOD_SND_OSSEMUL
+	prompt "kmod-sound-alsa-oss-emul........ ALSA OSS Emulation"
+	depends ADK_KPACKAGE_KMOD_SND
+	select ADK_KERNEL_SND_MIXER_OSS
+	select ADK_KERNEL_SND_PCM_OSS
+	tristate
+	default n
+	help
+	 ALSA OSS Emulation
+
+config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	prompt "kmod-sound-alsa-ac97-codec..... ALSA AC97 codec"
+	depends ADK_KPACKAGE_KMOD_SND
+	tristate
+	default n
+	help
+	 ALSA AC97 driver
+
+config ADK_KPACKAGE_KMOD_SND_VIA82XX
+	prompt "kmod-sound-alsa-via82xx........ ALSA VIA82XX driver"
+	depends ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	tristate
+	default n
+	help
+	 ALSA VIA82XX driver
+
+config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
+	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver (ALIX1C)"
+	depends ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	depends on ADK_LINUX_X86_ALIX1C
+	tristate
+	default n
+	help
+	 ALSA AMD CS5535 driver
+
+config ADK_KPACKAGE_KMOD_VIDEO_DEV
+	prompt "kmod-videodev................... Video (For Linux) kernel support"
+	tristate
+	default n
+	help
+	  Support for audio/video capture and overlay devices and FM radio
+	  cards. The exact capabilities of each device vary.
+
+	  This kernel includes support for the new Video for Linux Two API,
+	  (V4L2) as well as the original system. Drivers and applications
+	  need to be rewritten to use V4L2, but drivers for popular cards
+	  and applications for most video capture functions already exist.
+
+	  Additional info and docs are available on the web at
+	  <http://linuxtv.org>
+
+	  Documentation for V4L2 is also available on the web at
+	  <http://bytesex.org/v4l/>.
+
+config ADK_KPACKAGE_KMOD_VIDEO_V4L1
+	prompt "................................ Enable Video For Linux API 1 (DEPRECATED)"
+	boolean
+	default n
+	depends ADK_KPACKAGE_KMOD_VIDEO_DEV
+	help
+	  Enables a compatibility API used by most V4L2 devices to allow
+	  its usage with legacy applications that supports only V4L1 api.
+
+config ADK_KPACKAGE_KMOD_USB_PWC
+	prompt "kmod-usb-pwc.................... Kernel driver for USB Philips Cameras"
+	tristate
+	depends ADK_KPACKAGE_KMOD_USB
+	default n
+	help
+
+#source package/em28xx/Config.in
+endmenu

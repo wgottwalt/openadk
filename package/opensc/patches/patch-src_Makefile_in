@@ -1,0 +1,14 @@
+$Id$
+--- opensc-0.11.1.orig/src/Makefile.in	2006-05-30 23:06:00.000000000 +0200
++++ opensc-0.11.1/src/Makefile.in	2007-04-08 13:21:01.000000000 +0200
+@@ -208,8 +208,8 @@ MAINTAINERCLEANFILES = Makefile.in
+ EXTRA_DIST = Makefile.mak
+ 
+ # Order IS important
+-SUBDIRS = common include scconf libopensc pkcs15init pkcs11 \
+-	tests tools openssh signer 
++SUBDIRS = common include scconf libopensc pkcs15init pkcs11
++	 
+ 
+ all: all-recursive
+ 

@@ -1,0 +1,5 @@
+Package: gcc
+Priority: optional
+Section: comp
+Depends: libgmp, mpfr
+Description: gnu compiler

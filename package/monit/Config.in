@@ -1,0 +1,17 @@
+config ADK_PACKAGE_MONIT
+	prompt "monit............................. System services monitoring utility"
+	tristate
+	select ADK_PACKAGE_LIBPTHREAD
+	default n
+	help
+	  An utility for monitoring services on a Unix system
+	  http://www.tildeslash.com/monit/
+
+config ADK_COMPILE_MONIT_WITH_SSL
+	prompt "Compile with SSL support"
+	tristate
+	select ADK_PACKAGE_LIBOPENSSL
+	depends on ADK_PACKAGE_MONIT
+	default n
+	help
+	  Enable SSL

@@ -1,0 +1,11 @@
+config ADK_PACKAGE_PPTPD
+	prompt "pptpd............................. PPTP (Point-to-Point Tunneling Protocol) server"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_NET_IPGRE
+	select ADK_PACKAGE_PPP
+	help
+	  A Point-to-Point Tunneling Protocol server
+	  
+	  http://poptop.sourceforge.net/
+

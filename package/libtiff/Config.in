@@ -1,0 +1,8 @@
+config ADK_PACKAGE_LIBTIFF
+	prompt "libtiff........................... TIFF format files handling library"
+	tristate
+	default n
+	help
+	  A library for reading/writing TIFF files
+	  
+	  http://www.libtiff.org/

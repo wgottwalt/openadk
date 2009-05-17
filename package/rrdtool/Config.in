@@ -1,0 +1,66 @@
+config ADK_COMPILE_RRDTOOL
+	bool
+	default n
+
+config ADK_PACKAGE_LIBRRD
+	prompt   "librrd............................ Round Robin Database (RRD) management library (v1.2.x)"
+	tristate
+	default n
+	select ADK_COMPILE_RRDTOOL
+	select ADK_PACKAGE_LIBART
+	select ADK_PACKAGE_LIBFREETYPE
+	select ADK_PACKAGE_LIBPNG
+	select ADK_PACKAGE_LIBXML2
+	select ADK_PACKAGE_ZLIB
+	help
+	  RRD is the Acronym for Round Robin Database. RRD is a system to store and
+	  display time-series data (i.e. network bandwidth, machine-room temperature,
+	  server load average). It stores the data in a very compact way that will
+	  not expand over time, and it presents useful graphs by processing the data
+	  to enforce a certain data density. It can be used either via simple wrapper
+	  scripts (from shell or Perl) or via frontends that poll network devices and
+	  put friendly user interface on it.
+	  
+	  http://people.ee.ethz.ch/~oetiker/webtools/rrdtool/
+	  
+	  This package contains command line tools used to manage RRDs.
+
+config ADK_PACKAGE_RRDCGI
+	prompt   "rrdcgi............................ Round Robin Database (RRD) CGI graphing tool (v1.2.x)"
+	tristate
+	default n
+	select ADK_COMPILE_RRDTOOL
+	select ADK_PACKAGE_LIBRRD
+	select ADK_PACKAGE_CGILIB
+	help
+	  RRD is the Acronym for Round Robin Database. RRD is a system to store and
+	  display time-series data (i.e. network bandwidth, machine-room temperature,
+	  server load average). It stores the data in a very compact way that will
+	  not expand over time, and it presents useful graphs by processing the data
+	  to enforce a certain data density. It can be used either via simple wrapper
+	  scripts (from shell or Perl) or via frontends that poll network devices and
+	  put friendly user interface on it.
+	  
+	  http://people.ee.ethz.ch/~oetiker/webtools/rrdtool/
+	  
+	  This package contains the rrdcgi tool used to create web pages containing
+	  RRD graphs based on templates.
+
+config ADK_PACKAGE_RRDTOOL
+	prompt   "rrdtool........................... Round Robin Database (RRD) management tools (v1.2.x)"
+	tristate
+	default n
+	select ADK_COMPILE_RRDTOOL
+	select ADK_PACKAGE_LIBRRD
+	help
+	  RRD is the Acronym for Round Robin Database. RRD is a system to store and
+	  display time-series data (i.e. network bandwidth, machine-room temperature,
+	  server load average). It stores the data in a very compact way that will
+	  not expand over time, and it presents useful graphs by processing the data
+	  to enforce a certain data density. It can be used either via simple wrapper
+	  scripts (from shell or Perl) or via frontends that poll network devices and
+	  put friendly user interface on it.
+	  
+	  http://people.ee.ethz.ch/~oetiker/webtools/rrdtool/
+	  
+	  This package contains command line tools used to manage RRDs.

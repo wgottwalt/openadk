@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf lighttpd lighttpd NO
+add_rcconf lighttpd_flags lighttpd_flags "-f /etc/lighttpd.conf"

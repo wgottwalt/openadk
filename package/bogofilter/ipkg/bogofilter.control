@@ -1,0 +1,4 @@
+Package: bogofilter
+Priority: optional
+Section: mail
+Description: Mail filter

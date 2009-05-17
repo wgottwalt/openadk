@@ -1,0 +1,555 @@
+menu "Native Language support"
+
+config ADK_KERNEL_NLS_DEFAULT
+	string
+	default "iso8859-1"
+
+config ADK_KPACKAGE_KMOD_NLS
+	prompt "kmod-nls.......................... Base native language support"
+	tristate
+	default n
+	help
+	  The base Native Language Support. A number of filesystems
+	  depend on it (e.g. FAT, JOLIET, NT, BEOS filesystems), as well
+	  as the ability of some filesystems to use native languages
+	  (NCP, SMB).
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_437
+	prompt   "kmod-nls-codepage-437........... Codepage 437 (United States, Canada)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored
+	  in so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage that is used in
+	  the United States and parts of Canada. This is recommended.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_737
+	prompt   "kmod-nls-codepage-737........... Codepage 737 (Greek)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored
+	  in so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage that is used for
+	  Greek. If unsure, say N.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_775
+	prompt   "kmod-nls-codepage-775........... Codepage 775 (Baltic Rim)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored
+	  in so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage that is used
+	  for the Baltic Rim Languages (Latvian and Lithuanian). If unsure,
+	  say N.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
+	prompt   "kmod-nls-codepage-850........... Codepage 850 (Western European Languages)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage that is used for
+	  much of Europe -- United Kingdom, Germany, Spain, Italy, and [add
+	  more countries here]. It has some characters useful to many European
+	  languages that are not part of the US codepage 437.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_852
+        prompt   "kmod-nls-codepage-852........... Codepage 852 (Eastern European Languages)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the Latin 2 codepage used by DOS
+	  for much of Central and Eastern Europe. It has all the required
+	  characters for these languages: Albanian, Croatian, Czech, English,
+	  Finnish, Hungarian, Irish, German, Polish, Romanian, Serbian (Latin
+	  transcription), Slovak, Slovenian, and Sorbian.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_855
+        prompt   "kmod-nls-codepage-855........... Codepage 855 (Cyrillic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Cyrillic.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_857
+        prompt   "kmod-nls-codepage-857........... Codepage 857 (Turkish)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Turkish.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_860
+        prompt   "kmod-nls-codepage-860........... Codepage 860 (Portuguese)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Portuguese.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_861
+        prompt   "kmod-nls-codepage-861........... Codepage 861 (Icelandic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Icelandic.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_862
+        prompt   "kmod-nls-codepage-862........... Codepage 862 (Hebrew)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Hebrew.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_863
+        prompt   "kmod-nls-codepage-863........... Codepage 863 (French Canadian)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Canadian
+	  French.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_864
+        prompt   "kmod-nls-codepage-864........... Codepage 864 (Arabic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Arabic.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_865
+        prompt   "kmod-nls-codepage-865........... Codepage 865 (Norwegian, Danish)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for the Nordic
+	  European countries.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_866
+        prompt   "kmod-nls-codepage-866........... Codepage 866 (Cyrillic/Russian)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for
+	  Cyrillic/Russian.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_869
+        prompt   "kmod-nls-codepage-869........... Codepage 869 (Greek)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Greek.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_874
+        prompt   "kmod-nls-codepage-874........... Codepage 874 (Thai)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Thai.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_932
+        prompt   "kmod-nls-codepage-932........... Codepage 932 (Japanese)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Shift-JIS
+	  or EUC-JP. To use EUC-JP, you can use 'euc-jp' as mount option or
+	  NLS Default value during kernel configuration, instead of 'cp932'.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_936
+        prompt   "kmod-nls-codepage-936........... Codepage 936 (Simplified Chinese)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Simplified
+	  Chinese(GBK).
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_949
+        prompt   "kmod-nls-codepage-949........... Codepage 949 (Korean)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for UHC.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_950
+        prompt   "kmod-nls-codepage-950........... Codepage 950 (Traditional Chinese)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Traditional
+	  Chinese(Big5).
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1250
+        prompt   "kmod-nls-codepage-1250.......... Codepage 1250 (Slavic/Central European)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CDROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Windows CP-1250
+	  character set, which works for most Latin-written Slavic and Central
+	  European languages: Czech, German, Hungarian, Polish, Rumanian, Croatian,
+	  Slovak, Slovene.
+
+config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1251
+        prompt   "kmod-nls-codepage-1251.......... Codepage 1251 (Bulgarian, Belarusian)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  The Microsoft FAT file system family can deal with filenames in
+	  native language character sets. These character sets are stored in
+	  so-called DOS codepages. You need to include the appropriate
+	  codepage if you want to be able to read/write these filenames on
+	  DOS/Windows partitions correctly. This does apply to the filenames
+	  only, not to the file contents. You can include several codepages;
+	  say Y here if you want to include the DOS codepage for Russian and
+	  Bulgarian and Belarusian.
+
+config ADK_KPACKAGE_KMOD_NLS_ASCII
+	prompt   "kmod-nls-ascii.................. ASCII (United States)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  An ASCII NLS module is needed if you want to override the
+	  DEFAULT NLS with this very basic charset and don't want any
+	  non-ASCII characters to be translated.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_1
+	prompt   "kmod-nls-iso8859-1.............. NLS ISO 8859-1 (Latin-1; Western European Languages)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 1 character
+	  set, which covers most West European languages such as Albanian,
+	  Catalan, Danish, Dutch, English, Faeroese, Finnish, French, German,
+	  Galician, Irish, Icelandic, Italian, Norwegian, Portuguese, Spanish,
+	  and Swedish. It is also the default for the US. If unsure, say Y.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_2
+        prompt   "kmod-nls-iso8859-2.............. NLS ISO 8859-2 (Latin-2; Central European Languages)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 2 character
+	  set, which works for most Latin-written Slavic and Central European
+	  languages: Czech, German, Hungarian, Polish, Rumanian, Croatian,
+	  Slovak, Slovene.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_3
+        prompt   "kmod-nls-iso8859-3.............. NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 3 character
+	  set, which is popular with authors of Esperanto, Galician, Maltese,
+	  and Turkish.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_4
+        prompt   "kmod-nls-iso8859-4.............. NLS ISO 8859-4 (Latin-4; old Baltic charset)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 4 character
+	  set which introduces letters for Estonian, Latvian, and
+	  Lithuanian. It is an incomplete predecessor of Latin 7.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_5
+        prompt   "kmod-nls-iso8859-5.............. NLS ISO 8859-5 (Cyrillic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for ISO8859-5, a Cyrillic
+	  character set with which you can type Bulgarian, Belarusian,
+	  Macedonian, Russian, Serbian, and Ukrainian. Note that the charset
+	  KOI8-R is preferred in Russia.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_6
+        prompt   "kmod-nls-iso8859-6.............. NLS ISO 8859-6 (Arabic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for ISO8859-6, the Arabic
+	  character set.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_7
+        prompt   "kmod-nls-iso8859-7.............. NLS ISO 8859-7 (Greek)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for ISO8859-7, the Modern
+	  Greek character set.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_8
+        prompt   "kmod-nls-iso8859-8.............. NLS ISO 8859-8 (Hebrew)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for ISO8859-8, the Hebrew
+	  character set.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_9
+        prompt   "kmod-nls-iso8859-9.............. NLS ISO 8859-9 (Latin-5; Turkish)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 5 character
+	  set, and it replaces the rarely needed Icelandic letters in Latin 1
+	  with the Turkish ones. Useful in Turkey.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_13
+        prompt   "kmod-nls-iso8859-13............. NLS ISO 8859-13 (Latin-7; Baltic Rim)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 7 character
+	  set, which supports modern Baltic languages including Latvian
+	  and Lithuanian.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_14
+        prompt   "kmod-nls-iso8859-14............. NLS ISO 8859-14 (Latin-8; Celtic)"
+        tristate
+        default n
+        depends ADK_KPACKAGE_KMOD_NLS
+        help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 8 character
+	  set, which adds the last accented vowels for Welsh (aka Cymraeg)
+	  (and Manx Gaelic) that were missing in Latin 1.
+	  <http://linux.speech.cymru.org/> has further information.
+
+config ADK_KPACKAGE_KMOD_NLS_ISO8859_15
+	prompt   "kmod-nls-iso8859-15............. NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the Latin 9 character
+	  set, which covers most West European languages such as Albanian,
+	  Catalan, Danish, Dutch, English, Estonian, Faeroese, Finnish,
+	  French, German, Galician, Irish, Icelandic, Italian, Norwegian,
+	  Portuguese, Spanish, and Swedish. Latin 9 is an update to
+	  Latin 1 (ISO 8859-1) that removes a handful of rarely used
+	  characters and instead adds support for Estonian, corrects the
+	  support for French and Finnish, and adds the new Euro character.
+	  If unsure, say Y.
+
+config ADK_KPACKAGE_KMOD_NLS_KOI8_R
+	prompt   "kmod-nls-koi8-r................. NLS KOI8-R (Cryllic for Russian and Bulgarian"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the preferred Russian
+	  character set.
+
+config ADK_KPACKAGE_KMOD_NLS_KOI8_U
+	prompt   "kmod-nls-koi8-u................. NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the preferred Ukrainian
+	  (koi8-u) and Belarusian (koi8-ru) character sets.
+
+config ADK_KPACKAGE_KMOD_NLS_UTF8
+	prompt   "kmod-nls-utf8................... NLS UTF8"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_NLS
+	help
+	  If you want to display filenames with native language characters
+	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
+	  correctly on the screen, you need to include the appropriate
+	  input/output character sets. Say Y here for the UTF-8 encoding of
+	  the Unicode/ISO9646 universal character set.
+
+endmenu
+

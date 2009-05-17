@@ -1,0 +1,20 @@
+$Id$
+--- id3lib-3.8.3.orig/include/id3/id3lib_strings.h	2003-03-02 01:23:00.000000000 +0100
++++ id3lib-3.8.3/include/id3/id3lib_strings.h	2008-12-15 13:15:00.000000000 +0100
+@@ -30,6 +30,7 @@
+ #define _ID3LIB_STRINGS_H_
+ 
+ #include <string>
++#include <cstring>
+ 
+ #if (defined(__GNUC__) && (__GNUC__ >= 3) || (defined(_MSC_VER) && _MSC_VER > 1000))
+ namespace std
+@@ -41,7 +42,7 @@ namespace std
+       // Unsigned as wint_t in unsigned.
+       typedef unsigned long  	int_type;
+       typedef streampos 	pos_type;
+-      typedef streamoff 	off_type;
++      //typedef streamoff 	off_type;
+       typedef mbstate_t 	state_type;
+ 
+       static void

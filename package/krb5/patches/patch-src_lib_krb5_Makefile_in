@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- krb5-1.6.3.orig/src/lib/krb5/Makefile.in	2007-09-18 06:22:24.000000000 +0200
++++ krb5-1.6.3/src/lib/krb5/Makefile.in	2009-01-30 18:41:20.000000000 +0100
+@@ -55,7 +55,7 @@ RELDIR=krb5
+ SHLIB_EXPDEPS = \
+ 	$(TOPLIBD)/libk5crypto$(SHLIBEXT) \
+ 	$(COM_ERR_DEPLIB) $(SUPPORT_DEPLIB)
+-SHLIB_EXPLIBS=-lk5crypto -lcom_err $(SUPPORT_LIB) @GEN_LIB@ $(LIBS)
++SHLIB_EXPLIBS=-pthread -lk5crypto -lcom_err $(SUPPORT_LIB) @GEN_LIB@ $(LIBS)
+ SHLIB_DIRS=-L$(TOPLIBD)
+ SHLIB_RDIRS=$(KRB5_LIBDIR)
+ 

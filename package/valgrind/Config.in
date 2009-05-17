@@ -1,0 +1,6 @@
+config ADK_PACKAGE_VALGRIND
+	prompt "valgrind.......................... a memory error detector and more"
+	tristate
+	default n
+	help
+	  http://valgrind.org/

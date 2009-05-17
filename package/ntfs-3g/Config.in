@@ -1,0 +1,6 @@
+config ADK_PACKAGE_KMOD_FS_NTFS_3G
+	prompt "kmod-fs-ntfs-3g................... Kernel driver for NTFS filesystem (rw)"
+	tristate
+	default n
+	help
+	  http://www.ntfs-3g.org

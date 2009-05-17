@@ -1,0 +1,14 @@
+config ADK_COMPILE_FLAC
+	tristate
+	default n
+	depends ADK_PACKAGE_LIBFLAC
+
+config ADK_PACKAGE_LIBFLAC
+	prompt "libflac........................... Free Lossless Audio Codec library"
+	tristate
+	default n
+	select ADK_COMPILE_FLAC
+	help
+	  Free Lossless Audio Codec library
+
+	  http://flac.sourceforge.net/

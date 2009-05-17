@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- w-dhcp6-1.0-1.orig/server/reply.c	2002-06-28 14:50:04.000000000 +0200
++++ w-dhcp6-1.0-1/server/reply.c	2008-10-20 15:29:52.000000000 +0200
+@@ -147,7 +147,7 @@ struct DHCP_MESSAGE * create_dummy_reply
+     opt_ptr -> u_opt_len.opt_len = opt_src_ptr -> u_opt_len.opt_len;
+     ia_ptr = (struct IA *) malloc (sizeof (struct IA));
+     opt_ptr -> opt_data = ia_ptr;
+-    bzero (ia_ptr, sizeof (struct IA));
++    memset (ia_ptr, 0, sizeof (struct IA));
+     ia_ptr -> u_iaid.iaid = ia_src_ptr -> u_iaid.iaid;
+     
+     // set IAADDR option with values set to null
+@@ -159,7 +159,7 @@ struct DHCP_MESSAGE * create_dummy_reply
+     opt_ptr -> u_opt_len.opt_len = opt_src_ptr -> u_opt_len.opt_len;
+     iaaddr_ptr = (struct IA_ADDRESS *) malloc (sizeof (struct IA_ADDRESS));
+     opt_ptr -> opt_data = iaaddr_ptr;
+-    bzero (iaaddr_ptr, sizeof (struct IA_ADDRESS));
++    memset (iaaddr_ptr, 0, sizeof (struct IA_ADDRESS));
+     
+     return dhcp_message_ptr;
+ }

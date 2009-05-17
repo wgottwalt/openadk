@@ -1,0 +1,14 @@
+config ADK_COMPILE_LIBTOOL
+	tristate
+	depends ADK_PACKAGE_LIBLTDL
+
+config ADK_PACKAGE_LIBLTDL
+	prompt "libltdl........................... A generic dynamic object loading library"
+	tristate
+	default n
+	select ADK_COMPILE_LIBTOOL
+	help
+	  A generic dynamic object loading library.
+	  
+	  http://www.gnu.org/software/libtool/
+

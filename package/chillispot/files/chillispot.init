@@ -1,0 +1,25 @@
+#!/bin/sh
+#FWINIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${chillispot:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	chilli
+	;;
+stop)
+	killall chilli
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+ *)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

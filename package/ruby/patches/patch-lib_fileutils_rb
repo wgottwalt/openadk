@@ -1,0 +1,12 @@
+$Id$
+--- ruby-1.8.6.orig/lib/fileutils.rb	2007-03-04 16:03:11.000000000 +0100
++++ ruby-1.8.6/lib/fileutils.rb	2007-05-21 22:14:04.000000000 +0200
+@@ -1026,7 +1026,7 @@ module FileUtils
+     list.each do |path|
+       created = nocreate
+       begin
+-        File.utime(t, t, path)
++        #File.utime(t, t, path)
+       rescue Errno::ENOENT
+         raise if created
+         File.open(path, 'a') {

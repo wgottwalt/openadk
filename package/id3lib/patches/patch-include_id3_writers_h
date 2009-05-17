@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- id3lib-3.8.3.orig/include/id3/writers.h	2003-03-02 01:23:00.000000000 +0100
++++ id3lib-3.8.3/include/id3/writers.h	2008-12-15 13:15:25.000000000 +0100
+@@ -30,7 +30,7 @@
+ 
+ #include "id3/writer.h"
+ #include "id3/id3lib_streams.h"
+-//#include <string.h>
++#include <cstring>
+ 
+ class ID3_CPP_EXPORT ID3_OStreamWriter : public ID3_Writer
+ {

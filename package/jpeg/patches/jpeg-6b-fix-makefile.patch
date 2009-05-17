@@ -1,0 +1,12 @@
+diff -ruN jpeg-6b-old/makefile.cfg jpeg-6b/makefile.cfg
+--- jpeg-6b-old/makefile.cfg	2006-11-02 12:36:36.000000000 +0100
++++ jpeg-6b/makefile.cfg	2006-11-02 12:37:09.000000000 +0100
+@@ -168,7 +168,7 @@
+ 
+ # with libtool:
+ libjpeg.la: @A2K_DEPS@ $(LIBOBJECTS)
+-	$(LIBTOOL) --mode=link $(CC) -o libjpeg.la $(LIBOBJECTS) \
++	$(LIBTOOL) --mode=link "$(CC)" -o libjpeg.la $(LIBOBJECTS) \
+ 		-rpath $(libdir) -version-info $(JPEG_LIB_VERSION)
+ 
+ # sample programs:

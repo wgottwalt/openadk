@@ -1,0 +1,17 @@
+config ADK_PACKAGE_SNORT_WIRELESS
+	prompt "snort-wireless.................... Ligthweight Wireless Network Intrusion Detection System (NIDS)"
+	tristate
+	select ADK_PACKAGE_LIBNET
+	select ADK_PACKAGE_LIBPCAP
+	select ADK_PACKAGE_LIBPCRE
+	default n
+	help
+	  
+	  A ligthweight Wireless Network Intrusion Detection System (NIDS)
+	  
+	  http://www.snort-wireless.org/
+	  
+	  Depends: 
+	    - libnet
+	    - libpcap
+	    - libpcre

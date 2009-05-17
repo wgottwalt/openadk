@@ -1,0 +1,40 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- bitlbee-1.2.3.orig/configure	2008-09-06 14:33:13.000000000 +0200
++++ bitlbee-1.2.3/configure	2008-10-08 16:07:32.000000000 +0200
+@@ -19,7 +19,6 @@ libevent='/usr/'
+ pidfile='/var/run/bitlbee.pid'
+ ipcsocket='/var/run/bitlbee.sock'
+ pcdir='$prefix/lib/pkgconfig'
+-systemlibdirs="/lib /usr/lib /usr/local/lib"
+ 
+ msn=1
+ jabber=1
+@@ -137,12 +136,8 @@ EOF
+ 
+ 
+ if [ -n "$target" ]; then
+-	PKG_CONFIG_LIBDIR=/usr/$target/lib/pkgconfig
+-	export PKG_CONFIG_LIBDIR
+-	PATH=/usr/$target/bin:$PATH
+-	CC=$target-cc
++	CC=$target-gcc
+ 	LD=$target-ld
+-	systemlibdirs="/usr/$target/lib"
+ fi
+ 
+ 
+@@ -348,14 +343,6 @@ fi;
+ 
+ echo 'SSL_CLIENT=ssl_'$ssl'.o' >> Makefile.settings
+ 
+-for i in $systemlibdirs; do
+-	if [ -f $i/libresolv.a ]; then
+-		echo '#define HAVE_RESOLV_A' >> config.h
+-		echo 'EFLAGS+='$i'/libresolv.a' >> Makefile.settings
+-		break
+-	fi
+-done
+-
+ STORAGES="text xml"
+ 
+ if [ "$ldap" = "auto" ]; then

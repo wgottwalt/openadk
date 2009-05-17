@@ -1,0 +1,7 @@
+config ADK_PACKAGE_TTCP
+	prompt "ttcp.............................. A TCP connection performance tester"
+	tristate
+	default n
+	help
+	  A small utility to test TCP connection performance
+

@@ -1,0 +1,28 @@
+config ADK_PACKAGE_KMOD_MAC80211
+	prompt "kmod-mac80211................... mac80211 softmac (development)"
+	tristate
+	select ADK_MOD_KERNEL_MAC80211
+	depends on !ADK_KPACKAGE_KMOD_MAC80211
+	default n
+	help
+	  http://linuxwireless.org/
+
+config ADK_PACKAGE_KMOD_MAC80211_ATH5K
+	prompt "kmod-mac80211-ath5k............. Atheros 5xxx wireless driver"
+	tristate
+	depends on ADK_PACKAGE_KMOD_MAC80211
+	default n
+	help
+	  http://linuxwireless.org/
+
+config ADK_PACKAGE_KMOD_MAC80211_RT61
+	prompt "kmod-mac80211-rt61.............. Ralink rt2501/rt61 wireless driver"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_CRC_ITU_T
+	select ADK_PACKAGE_WIRELESS_FIRMWARE_RT61
+	depends on ADK_PACKAGE_KMOD_MAC80211
+	help
+	  This adds support for rt2501 wireless chipset family.
+	  Supported chips: RT2561, RT2561S & RT2661.
+

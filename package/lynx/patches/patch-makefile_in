@@ -1,0 +1,22 @@
+$Id$
+$MirOS: ports/www/lynx/patches/patch-makefile_in,v 1.2 2007/05/20 12:06:19 tg Exp $
+--- lynx2-8-7/makefile.in.orig	Thu May 17 22:52:59 2007
++++ lynx2-8-7/makefile.in	Sun May 20 11:17:21 2007
+@@ -161,13 +161,13 @@ SITE_DEFS = # Your defines here
+ # for installation of local execution links, please see the file userdefs.h
+ 
+ WWW_CFLAGS = \
+-	LY_CFLAGS="$(CFLAGS)" \
+-	CPPFLAGS="$(CPPFLAGS)" \
++	LY_CFLAGS='${CFLAGS}' \
++	CPPFLAGS='${CPPFLAGS}' \
+ 	LYFLAGS="$(SITE_LYDEFS)"
+ 
+ SRC_CFLAGS = \
+-	CFLAGS="$(CFLAGS)" \
+-	CPPFLAGS="$(CPPFLAGS)" \
++	CFLAGS='${CFLAGS}' \
++	CPPFLAGS='${CPPFLAGS}' \
+ 	LIBS="$(LIBS) $(RESOLVLIB) $(WAISLIB) $(SITE_LIBS)" \
+ 	SITE_DEFS="$(SITE_DEFS)" \
+ 	WWWINC=$(WWWINC) \

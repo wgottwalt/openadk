@@ -1,0 +1,11 @@
+config ADK_PACKAGE_VIM
+	prompt "vim............................... VI Improved"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBNCURSES
+	help
+	  An improved version of VI.
+	  Note that compiling this on non-Linux may break some things.
+	  The configure script is horrible.
+	  
+	  http://www.vim.org

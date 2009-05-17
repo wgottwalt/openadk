@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ulogd-1.24.orig/mysql/Makefile.in	2005-11-25 20:58:27.000000000 +0100
++++ ulogd-1.24/mysql/Makefile.in	2008-10-16 10:38:34.000000000 +0200
+@@ -14,7 +14,7 @@ all: $(SHARED_LIBS)
+ distrib:
+ 
+ $(SHARED_LIBS): %.so: %_sh.o
+-	$(LD) -shared $(MYSQL_LDFLAGS) -o $@ $< -lc
++	$(LD) -shared -o $@ $< -lc
+ 
+ %_sh.o: %.c
+ 	$(CC) $(MYSQL_CFLAGS) $(SH_CFLAGS) -o $@ -c $<

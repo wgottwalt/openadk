@@ -1,0 +1,5 @@
+Package: sane-backend-u12
+Depends: sane-backends, libusb
+Priority: optional
+Section: misc
+Description: Scanner access now easy

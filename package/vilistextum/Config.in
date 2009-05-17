@@ -1,0 +1,23 @@
+config ADK_PACKAGE_VILISTEXTUM
+	prompt "vilistextum....................... A html to ascii-converter"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBICONV
+	help
+	  This is release 2.6.9 (22 October 2006) of Vilistextum.
+	  Vilistextum is a html to text / ascii converter specifically
+	  programmed to get the best out of incorrect html. It is released 
+	  as free software under the terms of the GNU GPL Version 2.
+	  Some features:
+	    * small and fast
+	    * understands HTML 3.2 upto 4.01 and XHTML 1.0
+	    * creates footnotes for links
+	    * can swallow multiple empty lines
+	    * removes empty ALT attributes
+	    * converts characters and entities between 128 and 159 from 
+	      the windows1252 charset to meaningful strings in ISO-8859-1. 
+	      E.g. 0x93 is converted to ".
+	    * output can be optimized for ebook reading
+	    * GUI-frontend using kaptain
+	    * supports various multibyte encodings (e.g. Unicode, Shift_JIS)
+

@@ -1,0 +1,20 @@
+#!/bin/sh
+#FWINIT 10
+
+case $1 in
+autostop) ;;
+autostart|start)
+	monit $monit_flags
+	;;
+stop)
+	killall monit	
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 (start|stop|restart)"
+	exit 1
+esac
+exit $?

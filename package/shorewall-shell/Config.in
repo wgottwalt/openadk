@@ -1,0 +1,8 @@
+config ADK_PACKAGE_SHOREWALL_SHELL
+	prompt "shorewall-shell................. shorewall shell compiler"
+	tristate
+	depends ADK_PACKAGE_SHOREWALL
+	default y
+	help
+	  http://www.shorewall.net/
+

@@ -1,0 +1,4 @@
+Package: zsh
+Priority: optional
+Section: shells
+Description: zsh shell

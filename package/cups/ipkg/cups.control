@@ -1,0 +1,5 @@
+Package: cups
+Priority: optional
+Section: net
+Depends: zlib, libpthread
+Description: Common Unix Printing System

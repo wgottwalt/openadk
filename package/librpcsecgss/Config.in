@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBRPCSECGSS
+	prompt "librpcsecgss...................... NFSv4 library"
+	tristate
+	default n
+	help
+

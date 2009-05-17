@@ -1,0 +1,10 @@
+config ADK_PACKAGE_WONDERSHAPER
+	prompt "wondershaper...................... The Wonder Shaper"
+	tristate
+	default n
+	select ADK_PACKAGE_TC
+	help
+	  WonderShaper is a tc based traffic shaping tool.
+	  
+	  Depends: tc
+

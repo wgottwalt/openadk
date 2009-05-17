@@ -1,0 +1,11 @@
+config ADK_PACKAGE_DNSMASQ
+	prompt "dnsmasq........................... Lightweight DNS and DHCP server"
+	tristate
+	default n
+	help
+	  A lightweight DNS and DHCP server. It is intended to
+	  provide coupled DNS and DHCP service to a LAN. Dnsmasq
+	  supports static and dynamic DHCP leases and BOOTP/TFTP for
+	  network booting of diskless machines.
+
+	  http://www.thekelleys.org.uk/dnsmasq/

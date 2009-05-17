@@ -1,0 +1,13 @@
+config ADK_PACKAGE_WIFIDOG
+	prompt "wifidog........................... A wireless captive portal solution"
+	tristate
+	default n
+	select ADK_PACKAGE_IPTABLES
+	help
+	  The Wifidog project is a complete and embeddable captive
+	  portal solution for wireless community groups or individuals
+	  who wish to open a free Hotspot while still preventing abuse
+	  of their Internet connection.
+	  
+	  http://www.wifidog.org/
+

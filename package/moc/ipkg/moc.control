@@ -1,0 +1,5 @@
+Package: moc
+Priority: optional
+Section: sound
+Depends: libmad, libvorbis, libcurl, libflac, ffmpeg
+Description: console music player

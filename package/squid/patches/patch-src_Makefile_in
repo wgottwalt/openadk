@@ -1,0 +1,19 @@
+$Id$
+
+	cross-configure kludge
+
+--- squid-2.5.STABLE13.orig/src/Makefile.in	2005-09-28 22:57:21.000000000 +0200
++++ squid-2.5.STABLE13/src/Makefile.in	2006-09-18 19:24:05.000000000 +0200
+@@ -702,7 +702,12 @@ cachemgr$(CGIEXT)$(EXEEXT): $(cachemgr__
+ 	$(LINK) $(cachemgr__CGIEXT__LDFLAGS) $(cachemgr__CGIEXT__OBJECTS) $(cachemgr__CGIEXT__LDADD) $(LIBS)
+ cf_gen$(EXEEXT): $(cf_gen_OBJECTS) $(cf_gen_DEPENDENCIES) 
+ 	@rm -f cf_gen$(EXEEXT)
++ifneq (${HOSTCC},)
++	${HOSTCC} ${INCLUDES} -DNDEBUG -DBUILD_HOST_TOOL -o cf_gen$(EXEEXT) \
++	    $(srcdir)/cf_gen.c $(top_srcdir)/lib/util.c
++else
+ 	$(LINK) $(cf_gen_LDFLAGS) $(cf_gen_OBJECTS) $(cf_gen_LDADD) $(LIBS)
++endif
+ dnsserver$(EXEEXT): $(dnsserver_OBJECTS) $(dnsserver_DEPENDENCIES) 
+ 	@rm -f dnsserver$(EXEEXT)
+ 	$(LINK) $(dnsserver_LDFLAGS) $(dnsserver_OBJECTS) $(dnsserver_LDADD) $(LIBS)

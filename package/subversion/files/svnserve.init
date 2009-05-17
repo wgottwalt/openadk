@@ -1,0 +1,36 @@
+#!/bin/sh
+#FWINIT 80
+. /etc/rc.conf
+
+case $1 in
+(autostop) ;;
+(autostart)
+	[[ $svnserve = YES ]] || exit 0
+	exec sh $0 start
+	;;
+(start)
+	if [[ ! -d $svnserve_path ]]; then
+		echo "The subversion repository ($svnserve_path) does not exist."
+		echo "Create a new repository and/or change the path in /etc/rc.conf"
+		echo
+		echo "Create a new subversion repository with:"
+		echo "        mkdir -p $svnserve_path"
+		echo "        svnadmin create --fs-type fsfs $svnserve_path"
+		echo
+		exit 1
+	fi
+
+	/usr/bin/svnserve -d -r $svnserve_path
+	;;
+(stop)
+	killall svnserve
+	;;
+(restart)
+	sh $0 stop
+	sh $0 start
+	;;
+(*)
+	echo "Usage: $0 {start|stop|restart}"
+	;;
+esac
+exit $?

@@ -1,0 +1,42 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- strace-4.5.18.orig/signal.c	2008-08-20 03:59:40.000000000 +0200
++++ strace-4.5.18/signal.c	2009-01-02 21:24:05.502094888 +0100
+@@ -1485,9 +1485,38 @@ struct tcb *tcp;
+ 	}
+ 	return 0;
+ #else
++#if defined(CRISV10) || defined(CRISV32)
++	struct sigcontext sc;
++	
++	if (entering(tcp)) {
++	   long regs[PT_MAX+1];
++
++	   tcp->u_arg[0] = 0;
++
++	   if (ptrace(PTRACE_GETREGS, tcp->pid, NULL, (long)regs) < 0) {
++			perror("sigreturn: PTRACE_GETREGS");
++			return 0;
++	   }
++	   if (umove(tcp, regs[PT_USP], &sc) < 0)
++			return 0;
++	   tcp->u_arg[0] = 1;
++	   tcp->u_arg[1] = sc.oldmask;
++   } else {
++	   sigset_t sigm;
++
++	   long_to_sigset(tcp->u_arg[1], &sigm);
++	   tcp->u_rval = tcp->u_error = 0;
++	   if (tcp->u_arg[0] == 0)
++			return 0;
++	   tcp->auxstr = sprintsigmask("mask now ", &sigm, 0);
++	   return RVAL_NONE | RVAL_STR;
++   }
++   return 0;
++#else
+ #warning No sys_sigreturn() for this architecture
+ #warning         (no problem, just a reminder :-)
+ 	return 0;
++#endif /* !CRISV10/!CRISV32 */
+ #endif /* MIPS */
+ #endif /* LINUX_MIPSN32 || LINUX_MIPSN64 */
+ #endif /* SPARC || SPARC64 */

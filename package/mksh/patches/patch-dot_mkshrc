@@ -1,0 +1,36 @@
+$Id$
+
+	• OpenADK patches:
+	  – no hostname(1)
+	  – ls has no -o
+	  – yofuh doesn’t like $? in $PS1
+
+--- mksh.orig/dot.mkshrc	Sat May 17 18:27:55 2008
++++ mksh/dot.mkshrc	Mon Jul 21 21:02:05 2008
+@@ -2,13 +2,15 @@
+ #-
+ # ~/.mkshrc: mksh initialisation file for interactive shells
+ 
+-: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
++: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(</proc/sys/kernel/hostname)}
+ [[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
+ : ${HOSTNAME:=nil}; if (( USER_ID )); then PS1='$'; else PS1='#'; fi
+ function precmd {
+ 	typeset -i e=$?
+ 
+-	(( e )) && print -n "$e|"
++# enable this back if you want the errorlevel in your prompt
++# this is default in upstream mksh, disabled locally in fwrt
++#	(( e )) && print -n "$e|"
+ }
+ PS1='$(precmd)${USER:=$(ulimit -c 0;id -un 2>&- || print \?)}@${HOSTNAME%%.*}:$(
+ 	typeset pfx=~ wd=${PWD:-?}
+@@ -30,7 +32,7 @@ unalias ls
+ alias l='ls -F'
+ alias la='l -a'
+ alias ll='l -l'
+-alias lo='l -alo'
++alias lo='l -al'
+ alias which='whence -p'
+ whence -p rot13 >&- || alias rot13='tr \
+     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ \

@@ -1,0 +1,4 @@
+Package: libnl
+Priority: optional
+Section: net
+Description: Tools for setting up WiFi cards via netlink (nl80211)

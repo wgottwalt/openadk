@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/kadmin/Makefile.am	2008-07-28 14:04:51.000000000 +0200
++++ heimdal-1.2.1/kadmin/Makefile.am	2009-01-02 22:22:25.000000000 +0100
+@@ -44,7 +44,7 @@ $(kadmin_OBJECTS): kadmin-commands.h
+ CLEANFILES = kadmin-commands.h kadmin-commands.c
+ 
+ kadmin-commands.c kadmin-commands.h: kadmin-commands.in
+-	$(SLC) $(srcdir)/kadmin-commands.in
++	slc $(srcdir)/kadmin-commands.in
+ 
+ kadmind_SOURCES =				\
+ 	kadmind.c				\

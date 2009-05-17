@@ -1,0 +1,30 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- busybox-1.13.4.orig/include/platform.h	2008-11-09 18:28:17.000000000 +0100
++++ busybox-1.13.4/include/platform.h	2009-05-08 22:48:50.000000000 +0200
+@@ -116,7 +116,7 @@
+ # include <sex.h>
+ # define __BIG_ENDIAN__ (BYTE_ORDER == BIG_ENDIAN)
+ # define __BYTE_ORDER BYTE_ORDER
+-#elif !defined __APPLE__
++#elif !(defined __APPLE__ || defined __FreeBSD__)
+ # include <byteswap.h>
+ # include <endian.h>
+ #endif
+@@ -162,7 +162,7 @@
+ 
+ /* ---- Networking ------------------------------------------ */
+ 
+-#ifndef __APPLE__
++#if !(defined __APPLE__ || defined __FreeBSD__)
+ # include <arpa/inet.h>
+ # ifndef __socklen_t_defined
+ typedef int socklen_t;
+@@ -210,7 +210,7 @@ __extension__ typedef unsigned long long
+ #define HAVE_FEATURES_H
+ #include <stdint.h>
+ #define HAVE_STDINT_H
+-#elif !defined __APPLE__
++#elif !(defined __APPLE__ || defined __FreeBSD__)
+ /* Largest integral types.  */
+ #if __BIG_ENDIAN__
+ typedef long                intmax_t;

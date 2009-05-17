@@ -1,0 +1,35 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		lrzsz
+PKG_VERSION:=		0.12.20
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b5ce6a74abc9b9eb2af94dffdfd372a4
+MASTER_SITES:=		http://www.ohse.de/uwe/releases/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,LRZSZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--without-libiconv-prefix \
+			--without-libintl-prefix
+BUILD_STYLE:=		auto
+#INSTALL_STYLE:=		auto
+
+do-install:
+	${INSTALL_DIR} ${IDIR_LRZSZ}/usr/bin
+	${CP} ${WRKBUILD}/src/lrz ${IDIR_LRZSZ}/usr/bin/
+	${CP} ${WRKBUILD}/src/lsz ${IDIR_LRZSZ}/usr/bin/
+	(cd ${IDIR_LRZSZ}/usr/bin; \
+		ln -fs lrz lrx; \
+		ln -fs lrz lrb; \
+		ln -fs lsz lsx; \
+		ln -fs lsz lsb; \
+	);
+
+include ${TOPDIR}/mk/pkg-bottom.mk

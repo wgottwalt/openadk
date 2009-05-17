@@ -1,0 +1,32 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		gd
+PKG_VERSION:=		2.0.35
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
+MASTER_SITES:=		http://www.libgd.org/releases/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_DIR}/usr/bin/libpng12-config"
+CONFIGURE_ARGS+=	--without-x \
+			--without-freetype \
+			--with-jpeg=${STAGING_DIR}/usr \
+			--with-png=${STAGING_DIR}/usr \
+			--without-xpm 
+BUILD_STYLE=		auto
+INSTALL_STYLE=		auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_LIBGD}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgd.so.* ${IDIR_LIBGD}/usr/lib/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,59 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- mysql-5.0.81.orig/include/my_global.h	2009-04-16 13:48:04.000000000 +0200
++++ mysql-5.0.81/include/my_global.h	2009-05-12 10:59:28.000000000 +0200
+@@ -350,29 +350,32 @@ C_MODE_END
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++
+ #if defined(__cplusplus) && defined(NO_CPLUSPLUS_ALLOCA)
+ #undef HAVE_ALLOCA
+ #undef HAVE_ALLOCA_H
+ #endif
+-#ifdef HAVE_ALLOCA_H
+-#include <alloca.h>
++
++#if defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD__)
++#ifndef BSD
++#define BSD
+ #endif
+-#ifdef HAVE_ATOMIC_ADD
+-#define new my_arg_new
+-#define need_to_restore_new 1
+-C_MODE_START
+-#include <asm/atomic.h>
+-C_MODE_END
+-#ifdef need_to_restore_new /* probably safer than #ifdef new */
+-#undef new
+-#undef need_to_restore_new
+ #endif
++
++#if defined(HAVE_ALLOCA_H) && !defined(BSD)
++#include <alloca.h>
+ #endif
++
+ #include <errno.h>				/* Recommended by debian */
+ /* We need the following to go around a problem with openssl on solaris */
++#ifdef BSD
++#include <pwd.h>
++#include <unistd.h>
++#else
+ #if defined(HAVE_CRYPT_H)
+ #include <crypt.h>
+ #endif
++#endif
+ 
+ /*
+   A lot of our programs uses asserts, so better to always include it
+@@ -826,9 +829,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
+ #define finite(x) (1.0 / fabs(x) > 0.0)
+ #endif
+ 
++/*
+ #ifndef HAVE_ISNAN
+ #define isnan(x) ((x) != (x))
+ #endif
++*/
+ 
+ #ifdef HAVE_ISINF
+ /* isinf() can be used in both C and C++ code */

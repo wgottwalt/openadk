@@ -1,0 +1,12 @@
+config ADK_PACKAGE_APR_UTIL
+	prompt "apr-util.......................... Apache Portable Runtime (utils)"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBEXPAT
+	select ADK_PACKAGE_APR
+	help
+	  Apache Portable Runtime
+
+	  http://apr.apache.org
+
+

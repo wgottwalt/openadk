@@ -1,0 +1,21 @@
+$Id$
+--- nfs-utils-1.1.4.orig/tools/Makefile.in	2008-10-17 16:23:52.000000000 +0200
++++ nfs-utils-1.1.4/tools/Makefile.in	2009-01-03 13:46:50.000000000 +0100
+@@ -59,7 +59,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
+   distclean-recursive maintainer-clean-recursive
+ ETAGS = etags
+ CTAGS = ctags
+-DIST_SUBDIRS = locktest rpcdebug nlmtest rpcgen
++DIST_SUBDIRS = rpcgen
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ ACLOCAL = @ACLOCAL@
+ ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
+@@ -210,7 +210,7 @@ target_alias = @target_alias@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ OPTDIRS = $(am__append_1)
+-SUBDIRS = locktest rpcdebug nlmtest $(OPTDIRS)
++SUBDIRS = $(OPTDIRS)
+ MAINTAINERCLEANFILES = Makefile.in
+ all: all-recursive
+ 

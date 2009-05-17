@@ -1,0 +1,13 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- dovecot-1.1.7.orig/src/plugins/quota/Makefile.in	2008-11-23 23:16:42.000000000 +0100
++++ dovecot-1.1.7/src/plugins/quota/Makefile.in	2008-12-22 14:17:55.000000000 +0100
+@@ -239,9 +239,6 @@ lib10_quota_plugin_la_LDFLAGS = -module 
+ module_LTLIBRARIES = \
+ 	lib10_quota_plugin.la
+ 
+-@HAVE_RQUOTA_TRUE@lib10_quota_plugin_la_LIBADD = \
+-@HAVE_RQUOTA_TRUE@	-lrpcsvc
+-
+ quota_dist_sources = \
+ 	quota.c \
+ 	quota-count.c \

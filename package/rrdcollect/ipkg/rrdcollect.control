@@ -1,0 +1,5 @@
+Package: rrdcollect
+Priority: optional
+Section: admin
+Depends: librrd
+Description: Round-Robin Database (RRD) collecting daemon

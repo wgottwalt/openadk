@@ -1,0 +1,4 @@
+Package: libcom-err
+Priority: optional
+Section: admin
+Description: Common error library

@@ -1,0 +1,246 @@
+menu "Block devices support"
+
+config ADK_KERNEL_MD
+	boolean
+	default n
+
+config ADK_KERNEL_SWAP
+	boolean
+	default n
+
+config ADK_KERNEL_LBD
+	boolean
+	default n
+
+config ADK_KERNEL_BLK_DEV_IO_TRACE
+	boolean
+	default n
+
+config ADK_KERNEL_LSF
+	boolean
+	default n
+
+config ADK_KERNEL_IOSCHED_AS
+	boolean
+	default n
+
+config ADK_KERNEL_IOSCHED_DEADLINE
+	boolean
+	default n
+
+config ADK_KERNEL_IOSCHED_CFQ
+	boolean
+	default n
+
+config ADK_KERNEL_SCSI
+	boolean
+	default n
+
+#config ADK_KERNEL_IDE
+#	boolean
+#	default n
+#
+#config ADK_KPACKAGE_KMOD_BLK_DEV_IDE
+#	prompt "kmod-ide.......................... IDE support"
+#	tristate
+#	select ADK_KERNEL_BLOCK
+#	select ADK_KERNEL_IDE
+#	default n
+#	help
+#	  If you say Y here, you will use the full-featured IDE driver to
+#	  control up to ten ATA/IDE interfaces, each being able to serve a
+#	  "master" and a "slave" device, for a total of up to twenty ATA/IDE
+#	  disk/cdrom/tape/floppy drives.
+#
+#	  Useful information about large (>540 MB) IDE disks, multiple
+#	  interfaces, what to do if ATA/IDE devices are not automatically
+#	  detected, sound card ATA/IDE ports, module support, and other
+#	  topics, is contained in <file:Documentation/ide.txt>. For detailed
+#	  information about hard drives, consult the Disk-HOWTO and the
+#	  Multi-Disk-HOWTO, available from
+#	  <http://www.tldp.org/docs.html#howto>.
+#
+#	  To fine-tune ATA/IDE drive/interface parameters for improved
+#	  performance, look for the hdparm package at
+#	  <ftp://ibiblio.org/pub/Linux/system/hardware/>.
+#
+#	  To compile this driver as a module, choose M here and read
+#	  <file:Documentation/ide.txt>. The module will be called ide-mod.
+#	  Do not compile this driver as a module if your root file system (the
+#	  one containing the directory /) is located on an IDE device.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
+	prompt "kmod-loop......................... Loop mount support"
+	tristate
+	default n
+	help
+	  Saying Y here will allow you to use a regular file as a block
+	  device; you can then create a file system on that block device and
+	  mount it just as you would mount other block devices such as hard
+	  drive partitions, CD-ROM drives or floppy drives. The loop devices
+	  are block special device files with major number 7 and typically
+	  called /dev/loop0, /dev/loop1 etc.
+
+	  This is useful if you want to check an ISO 9660 file system before
+	  burning the CD, or if you want to use floppy images without first
+	  writing them to floppy. Furthermore, some Linux distributions avoid
+	  the need for a dedicated Linux partition by keeping their complete
+	  root file system inside a DOS FAT file using this loop device
+	  driver.
+
+	  To use the loop device, you need the losetup utility, found in the
+	  util-linux package, see
+	  <ftp://ftp.kernel.org/pub/linux/utils/util-linux/>.
+
+	  The loop device driver can also be used to "hide" a file system in
+	  a disk partition, floppy, or regular file, either using encryption
+	  (scrambling the data) or steganography (hiding the data in the low
+	  bits of, say, a sound file). This is also safe if the file resides
+	  on a remote file server.
+
+	  There are several ways of encrypting disks. Some of these require
+	  kernel patches. The vanilla kernel offers the cryptoloop option
+	  and a Device Mapper target (which is superior, as it supports all
+	  file systems). If you want to use the cryptoloop, say Y to both
+	  LOOP and CRYPTOLOOP, and make sure you have a recent (version 2.12
+	  or later) version of util-linux. Additionally, be aware that
+	  the cryptoloop is not safe for storing journaled filesystems.
+
+	  Note that this loop device has nothing to do with the loopback
+	  device used for network connections from the machine to itself.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_NBD
+	prompt "kmod-nbd.......................... Network Block Device"
+	tristate
+	default n
+	help
+	  Saying Y here will allow your computer to be a client for network
+	  block devices, i.e. it will be able to use block devices exported by
+	  servers (mount file systems on them etc.). Communication between
+	  client and server works over TCP/IP networking, but to the client
+	  program this is hidden: it looks like a regular local file access to
+	  a block device special file such as /dev/nd0.
+
+	  Network block devices also allows you to run a block-device in
+	  userland (making server and client physically the same computer,
+	  communicating using the loopback network device).
+
+	  Read <file:Documentation/nbd.txt> for more information, especially
+	  about where to find the server code, which runs in user space and
+	  does not need special kernel support.
+
+	  Note that this has nothing to do with the network file systems NFS
+	  or Coda; you can say N here even if you intend to use NFS or Coda.
+
+config ADK_KPACKAGE_KMOD_SCSI
+	prompt "kmod-scsi......................... SCSI support"
+	select ADK_KERNEL_LBD
+	select ADK_KERNEL_LSF
+	select ADK_KERNEL_IOSCHED_AS
+	depends on !ADK_KERNEL_SCSI
+	tristate
+	help
+	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
+	  any other SCSI device under Linux, say Y and make sure that you know
+	  the name of your SCSI host adapter (the card inside your computer
+	  that "speaks" the SCSI protocol, also called SCSI controller),
+	  because you will be asked for it.
+
+	  You also need to say Y here if you have a device which speaks
+	  the SCSI protocol.  Examples of this include the parallel port
+	  version of the IOMEGA ZIP drive, USB storage devices, Fibre
+	  Channel, FireWire storage and the IDE-SCSI emulation driver.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_SD
+	prompt "kmod-scsi-disk.................... SCSI disk support"
+	depends !ADK_KERNEL_SCSI
+	depends ADK_KPACKAGE_KMOD_SCSI
+	tristate
+	help
+	  If you want to use SCSI hard disks, Fibre Channel disks,
+	  USB storage or the SCSI or parallel port version of
+	  the IOMEGA ZIP drive, say Y and read the SCSI-HOWTO,
+	  the Disk-HOWTO and the Multi-Disk-HOWTO, available from
+	  <http://www.tldp.org/docs.html#howto>. This is NOT for SCSI
+	  CD-ROMs.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_SR
+	prompt "kmod-scsi-cdrom................... SCSI CDROM support"
+	depends !ADK_KERNEL_SCSI
+	depends ADK_KPACKAGE_KMOD_SCSI
+	tristate
+	help
+	  If you want to use a SCSI or FireWire CD-ROM under Linux,
+	  say Y and read the SCSI-HOWTO and the CDROM-HOWTO at
+	  <http://www.tldp.org/docs.html#howto>. Also make sure to say
+	  Y or M to "ISO 9660 CD-ROM file system support" later.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	prompt "kmod-md........................... RAID support"
+	tristate
+	select ADK_KERNEL_MD
+	help
+
+config ADK_KPACKAGE_KMOD_MD_RAID0
+	prompt "kmod-md-raid0..................... RAID0 support"
+	tristate
+	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	help
+
+config ADK_KPACKAGE_KMOD_MD_RAID1
+	prompt "kmod-md-raid1..................... RAID1 support"
+	tristate
+	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	help
+
+config ADK_KPACKAGE_KMOD_MD_RAID456
+	prompt "kmod-md-raid456................... RAID456 support"
+	tristate
+	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	help
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	prompt "kmod-dm........................... Device Mapper support"
+	select ADK_KERNEL_MD
+	tristate
+	help
+	  Device-mapper is a low level volume manager.  It works by allowing
+	  people to specify mappings for ranges of logical sectors.  Various
+	  mapping types are available, in addition people may write their own
+	  modules containing custom mappings if they wish.
+
+	  Higher level volume managers such as LVM2 use this driver.
+
+config ADK_KPACKAGE_KMOD_DM_CRYPT
+	prompt "kmod-dm-crypt................... Crypt target support"
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KERNEL_MD
+	select ADK_KERNEL_CRYPTO
+	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
+	tristate
+	help
+	  This device-mapper target allows you to create a device that
+	  transparently encrypts the data on it. You'll need to activate
+	  the ciphers you're going to use in the cryptoapi configuration.
+
+	  Information on how to use dm-crypt can be found on
+
+	  <http://www.saout.de/misc/dm-crypt/>
+
+config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
+	prompt "kmod-dm-snapshot................ Snapshot target"
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	tristate
+	help
+         Allow volume managers to take writable snapshots of a device.
+
+config ADK_KPACKAGE_KMOD_DM_MIRROR
+	prompt "kmod-dm-mirror.................. Mirror target"
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	tristate
+	help
+         Allow volume managers to mirror logical volumes, also
+         needed for live data migration tools such as 'pvmove'.
+
+endmenu

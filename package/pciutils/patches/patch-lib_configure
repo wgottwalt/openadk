@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- pciutils-3.0.3.orig/lib/configure	2008-11-09 20:50:26.000000000 +0100
++++ pciutils-3.0.3/lib/configure	2009-01-09 19:56:33.000000000 +0100
+@@ -60,7 +60,6 @@ case $sys in
+ 		echo_n " sysfs proc"
+ 		echo >>$c '#define PCI_HAVE_PM_LINUX_SYSFS'
+ 		echo >>$c '#define PCI_HAVE_PM_LINUX_PROC'
+-		echo >>$c '#define PCI_HAVE_LINUX_BYTEORDER_H'
+ 		echo >>$c '#define PCI_PATH_PROC_BUS_PCI "/proc/bus/pci"'
+ 		echo >>$c '#define PCI_PATH_SYS_BUS_PCI "/sys/bus/pci"'
+ 		case $cpu in

@@ -1,0 +1,4 @@
+Package: glibc
+Priority: optional
+Section: libs
+Description: GNU Standard C library 

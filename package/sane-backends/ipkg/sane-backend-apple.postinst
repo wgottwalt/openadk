@@ -1,0 +1,2 @@
+#/bin/sh
+echo apple >> $IPKG_INSTROOT/etc/sane.d/dll.conf

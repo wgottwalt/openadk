@@ -1,0 +1,23 @@
+$Id$
+
+ cast to double, to avoid sinf, patch from Sven Gugges
+
+--- esound-0.2.38.orig/esd.c	2007-05-03 22:28:35.000000000 +0200
++++ esound-0.2.38/esd.c	2007-05-19 17:21:23.000000000 +0200
+@@ -131,14 +131,14 @@ void set_audio_buffer( void *buf, esd_fo
+     {
+     case ESD_BITS8:
+ 	for ( i = 0 ; i < length ; i+=2 ) {
+-	    sample = sin( (float)(i+offset) * kf );
++	    sample = sin( (double)(i+offset) * kf );
+ 	    uc_buf[i] = 127 + magl * sample;
+ 	    uc_buf[i+1] = 127 + magr * sample;
+ 	}
+ 	break;
+     case ESD_BITS16:	/* assume same endianness */
+ 	for ( i = 0 ; i < length ; i+=2 ) {
+-	    sample = sin( (float)(i+offset) * kf );
++	    sample = sin( (double)(i+offset) * kf );
+ 	    ss_buf[i] = magl * sample;
+ 	    ss_buf[i+1] = magr * sample;
+ 	}

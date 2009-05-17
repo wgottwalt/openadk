@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- nfs-utils-1.1.3.orig/utils/mount/error.c	2008-07-27 23:01:45.000000000 +0200
++++ nfs-utils-1.1.3/utils/mount/error.c	2008-10-06 16:58:40.000000000 +0200
+@@ -62,7 +62,7 @@ static int rpc_strerror(int spos)
+ 	char *tmp;
+ 
+ 	if (estr) {
+-		if ((ptr = index(estr, ':')))
++		if ((ptr = strchr(estr, ':')))
+ 			estr = ++ptr;
+ 
+ 		tmp = &errbuf[spos];

@@ -1,0 +1,4 @@
+config ADK_COMPILE_LIBOWFAT
+	prompt "libowfat.......................... fefe's version of libdjb"
+	tristate
+	default n

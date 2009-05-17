@@ -1,0 +1,11 @@
+config ADK_PACKAGE_RTORRENT
+	prompt "rtorrent........................... file transfer utility"
+	tristate
+	depends on ADK_CXX
+	select ADK_PACKAGE_LIBNCURSES
+	select ADK_PACKAGE_LIBTORRENT
+	select ADK_PACKAGE_LIBCURL
+	default n
+	help
+	  http://rsync.samba.org
+

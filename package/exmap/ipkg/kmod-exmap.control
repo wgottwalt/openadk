@@ -1,0 +1,4 @@
+Package: kmod-exmap
+Priority: optional
+Section: utils
+Description: kernel module for a memory analysing tool

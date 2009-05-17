@@ -1,0 +1,5 @@
+Package: opensips-mod-permissions
+Depends: opensips
+Section: net
+Priority: optional
+Description: permissions support for OpenSIPS

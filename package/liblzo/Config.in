@@ -1,0 +1,9 @@
+config ADK_PACKAGE_LIBLZO
+	prompt "liblzo............................ Real-time data compression library"
+	tristate
+	default n
+	help
+	  A real-time data compression library
+	  
+	  http://www.oberhumer.com/opensource/lzo/
+

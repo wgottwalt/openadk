@@ -1,0 +1,32 @@
+menu "PCMCIA/CardBus support"
+
+config ADK_KERNEL_CARDBUS
+	boolean 
+	default n
+
+config ADK_KPACKAGE_KMOD_PCCARD
+	prompt "kmod-pccard....................... PCCARD support"
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_PCMCIA
+	prompt "kmod-pcmcia....................... 16-bit PCMCIA support"
+	tristate
+	depends ADK_KPACKAGE_KMOD_PCCARD
+	select ADK_KERNEL_CRC32
+	default n
+
+config ADK_KPACKAGE_KMOD_YENTA
+	prompt "kmod-cardbus...................... 32-bit CardBus support"
+	tristate
+	depends ADK_KPACKAGE_KMOD_PCCARD
+	select ADK_KERNEL_CARDBUS
+	default n
+
+config ADK_KPACKAGE_KMOD_SERIAL_8250_CS
+	prompt   "kmod-pcmcia-serial................ PCMCIA/CardBus serial device support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PCMCIA || ADK_KPACKAGE_KMOD_CARDBUS
+
+endmenu

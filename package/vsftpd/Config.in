@@ -1,0 +1,9 @@
+config ADK_PACKAGE_VSFTPD
+	prompt "vsftpd............................ Fast and secure FTP server"
+	tristate
+	default n
+	help
+	  A fast and secure FTP server
+	  
+	  http://vsftpd.beasts.org/
+

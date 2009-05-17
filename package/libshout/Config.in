@@ -1,0 +1,16 @@
+config ADK_COMPILE_LIBSHOUT
+	tristate
+	default n
+	depends ADK_PACKAGE_LIBSHOUT
+
+config ADK_PACKAGE_LIBSHOUT
+	prompt "libshout.......................... Streaming library"
+	tristate
+	default n
+	select ADK_COMPILE_LIBSHOUT
+	select ADK_PACKAGE_LIBVORBIS
+	select ADK_PACKAGE_LIBOGG
+	help
+	  Shoutcast streaming library.
+
+	  http://www.icecast.org/

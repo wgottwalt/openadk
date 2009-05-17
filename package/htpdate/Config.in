@@ -1,0 +1,8 @@
+config ADK_PACKAGE_HTPDATE
+	prompt "htpdate........................... HTP (Hypertext Time Protocol) implementation"
+	tristate
+	default n
+	help
+	  An HTP (Hypertext Time Protocol) implementation
+
+	  http://www.clevervest.com/htp/

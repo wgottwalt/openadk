@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libX11-1.1.5.orig/src/util/Makefile.in	2008-09-04 23:48:56.000000000 +0200
++++ libX11-1.1.5/src/util/Makefile.in	2008-12-22 13:39:31.000000000 +0100
+@@ -229,7 +229,7 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ makekeys_CFLAGS = $(X11_CFLAGS)
+ 
+-#override CC = gcc
++override CC = gcc
+ LINK = $(CC) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+ EXTRA_DIST = mkks.sh
+ 

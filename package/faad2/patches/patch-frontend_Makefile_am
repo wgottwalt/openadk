@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- faad2.orig/frontend/Makefile.am	2006-05-07 20:09:00.000000000 +0200
++++ faad2/frontend/Makefile.am	2009-01-11 17:16:19.901544559 +0100
+@@ -4,7 +4,7 @@ INCLUDES = -I$(top_srcdir)/include -I$(t
+    -I$(top_srcdir)/common/mp4ff
+ 
+ faad_LDADD = $(top_builddir)/libfaad/libfaad.la \
+-	$(top_builddir)/common/mp4ff/libmp4ff.la
++	$(top_builddir)/common/mp4ff/libmp4ff.a
+ 
+ faad_SOURCES = main.c \
+ 	audio.c audio.h \

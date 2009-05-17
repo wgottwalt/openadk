@@ -1,0 +1,10 @@
+config ADK_PACKAGE_DBUS
+	prompt "dbus.............................. DBUS library"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBEXPAT
+	help
+	  DBUS library. 
+	  
+	  http://www.freedesktop.org/wiki/Software/dbus
+

@@ -1,0 +1,25 @@
+#menu "atftp............................. TFTP implementation"
+
+config ADK_COMPILE_ATFTP
+	tristate
+	default n
+	depends ADK_PACKAGE_ATFTP || ADK_PACKAGE_ATFTPD
+	select ADK_PACKAGE_LIBREADLINE
+	
+config ADK_PACKAGE_ATFTP
+	prompt "atftp............................. TFTP client"
+	tristate
+	default n
+	select ADK_COMPILE_ATFTP
+	help
+	  TFTP client
+
+config ADK_PACKAGE_ATFTPD
+	prompt "atftpd............................ TFTP server"
+	tristate
+	default n
+	select ADK_COMPILE_ATFTP
+	help
+	  TFTP server 
+
+#endmenu

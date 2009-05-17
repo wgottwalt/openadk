@@ -1,0 +1,4 @@
+Package: fbset
+Priority: optional
+Section: net
+Description: framebuffer utility 

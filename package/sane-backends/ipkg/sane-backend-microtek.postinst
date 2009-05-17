@@ -1,0 +1,2 @@
+#/bin/sh
+echo microtek >> $IPKG_INSTROOT/etc/sane.d/dll.conf

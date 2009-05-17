@@ -1,0 +1,5 @@
+ifeq ($(strip $(ADK_PACKAGE_CONFIG)),y)
+TARGETS+=config
+endif
+
+include ${TOPDIR}/mk/pkg-bottom.mk

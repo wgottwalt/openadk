@@ -1,0 +1,5 @@
+Package: trafshow
+Priority: optional
+Section: net
+Depends: libpcap, libncurses, libpthread
+Description: network traffic monitor

@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- util-linux-2.12r.orig/misc-utils/logger.c	2004-09-06 23:13:49.000000000 +0200
++++ util-linux-2.12r/misc-utils/logger.c	2008-10-16 11:47:36.000000000 +0200
+@@ -198,7 +198,7 @@ main(int argc, char **argv) {
+ 			} else {
+ 				if (p != buf)
+ 					*p++ = ' ';
+-				bcopy(*argv++, p, len);
++				memcpy(p, *argv++, len);
+ 				*(p += len) = '\0';
+ 			}
+ 		}

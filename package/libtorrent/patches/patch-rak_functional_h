@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libtorrent-0.12.2.orig/rak/functional.h	2008-05-07 14:19:14.000000000 +0200
++++ libtorrent-0.12.2/rak/functional.h	2008-12-14 21:36:38.000000000 +0100
+@@ -37,6 +37,7 @@
+ #ifndef RAK_FUNCTIONAL_H
+ #define RAK_FUNCTIONAL_H
+ 
++#include <cstdlib>
+ #include <functional>
+ 
+ namespace rak {

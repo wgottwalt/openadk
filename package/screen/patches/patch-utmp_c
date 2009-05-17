@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/utmp.c	2003-09-08 16:27:17.000000000 +0200
++++ screen-4.0.3/utmp.c	2008-12-08 04:59:38.000000000 +0100
+@@ -422,7 +422,7 @@ struct win *wi;
+   debug2("SetUtmp %d will get slot %d...\n", wi->w_number, (int)slot);
+ 
+   bzero((char *)&u, sizeof(u));
+-  if ((saved_ut = bcmp((char *) &wi->w_savut, (char *)&u, sizeof(u))))
++  if ((saved_ut = memcmp((char *) &wi->w_savut, (char *)&u, sizeof(u))))
+     /* restore original, of which we will adopt all fields but ut_host */
+     bcopy((char *)&wi->w_savut, (char *) &u, sizeof(u));
+ 

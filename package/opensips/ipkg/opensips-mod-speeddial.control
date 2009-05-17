@@ -1,0 +1,5 @@
+Package: opensips-mod-speeddial
+Depends: opensips
+Section: net
+Priority: optional
+Description: Speed-dial support for OpenSIPS

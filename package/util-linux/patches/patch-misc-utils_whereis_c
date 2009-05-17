@@ -1,0 +1,20 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- util-linux-2.12r.orig/misc-utils/whereis.c	2001-03-15 11:09:58.000000000 +0100
++++ util-linux-2.12r/misc-utils/whereis.c	2008-10-16 11:50:03.000000000 +0200
+@@ -323,14 +323,14 @@ findin(char *dir, char *cp) {
+ 	char dirbuf[1024];
+ 	struct stat statbuf;
+ 
+-	dd = index(dir, '*');
++	dd = strchr(dir, '*');
+ 	if (!dd)
+ 		goto noglob;
+ 
+ 	l = strlen(dir);
+ 	if (l < sizeof(dirbuf)) { 	/* refuse excessively long names */
+ 		strcpy (dirbuf, dir);
+-		d = index(dirbuf, '*');
++		d = strchr(dirbuf, '*');
+ 		*d = 0;
+ 		dirp = opendir(dirbuf);
+ 		if (dirp == NULL)

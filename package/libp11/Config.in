@@ -1,0 +1,8 @@
+config ADK_PACKAGE_LIBP11
+	prompt "libp11............................ libp11"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_LIBLTDL
+	help
+	 libp11

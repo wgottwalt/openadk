@@ -1,0 +1,4 @@
+Package: liblame
+Priority: optional
+Section: sound
+Description: LAME MP3 encoding library

@@ -1,0 +1,34 @@
+#!/bin/sh
+#FWINIT 90
+. /etc/rc.conf
+
+LIB_D=/var/lib/rrdcollect
+CGI_S=$LIB_D/rrd.cgi
+RRD_D=$LIB_D/rrd
+RRD_F=$(find $RRD_D -name "*.rrd" 2>/dev/null)
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${rrdcollect:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d $LIB_D/img ] || mkdir -p $LIB_D/img
+	[ -n "$RRD_F" ] || /usr/bin/rrd.sh init
+	[ -x $CGI_S ] || /usr/bin/rrd.sh cgi
+	rrdcollect
+	;;
+stop)
+	killall rrdcollect
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

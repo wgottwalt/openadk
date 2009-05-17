@@ -1,0 +1,10 @@
+config ADK_PACKAGE_BLUEZ
+	prompt "bluez............................. Bluetooth library and tools"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluez libs and apps. 
+	  
+	  http://bluez.org
+

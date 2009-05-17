@@ -1,0 +1,4 @@
+#!/bin/mksh
+. /etc/rc.conf
+[[ $rdate_flags = NO ]] || /usr/ucb/rdate $rdate_flags
+exit 0

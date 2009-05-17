@@ -1,0 +1,4 @@
+Package: ffmpeg
+Priority: optional
+Section: sound
+Description: cross-platform solution to record, convert and stream audio and video

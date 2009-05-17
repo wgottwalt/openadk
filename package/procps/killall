@@ -1,0 +1,25 @@
+#!/bin/ash
+dolist=0
+doquiet=0
+l=1
+x=$#
+signal=
+while [ $x -gt 0 ]; do
+	case $1 in
+	-l)	dolist=1 ;;
+	-q)	doquiet=1 ;;
+	-lq|-ql)
+		dolist=1
+		doquiet=1
+		;;
+	-*)	signal=$1 ;;
+	*)	break ;;
+	esac
+	shift
+	x=$(expr $x - 1)
+done
+[ $dolist = 1 ] && kill -l
+pkill -x $signal "$@"
+rv=$?
+[ $doquiet = 1 ] && exit 0
+exit $rv

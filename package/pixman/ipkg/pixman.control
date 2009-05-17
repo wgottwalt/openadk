@@ -1,0 +1,4 @@
+Package: pixman
+Priority: optional
+Section: x11
+Description: pixman library

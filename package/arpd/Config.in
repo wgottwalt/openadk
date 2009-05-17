@@ -1,0 +1,11 @@
+config ADK_PACKAGE_ARPD
+	prompt "arpd.............................. A daemon to fake ARP replies"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBPCAP
+	select ADK_PACKAGE_LIBDNET
+	select ADK_PACKAGE_LIBEVENT
+	help
+	  Generates ARP responses for (locally unused) IP addresses
+	  
+	  http://www.honeyd.org/tools.php

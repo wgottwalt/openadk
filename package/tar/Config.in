@@ -1,0 +1,8 @@
+config ADK_PACKAGE_TAR
+	prompt "gtar.............................. gnu tar"
+	tristate
+	default n
+	help
+	  The GNU implementation of tar.
+	  
+	  http://www.gnu.org/software/tar/

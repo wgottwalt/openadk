@@ -1,0 +1,5 @@
+Package: rrs
+Priority: optional
+Section: net
+Description: A reverse (connecting) remote shell, with SSL support.
+

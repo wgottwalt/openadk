@@ -1,0 +1,5 @@
+Package: php-mod-gmp
+Priority: optional
+Section: net
+Depends: php, libgmp
+Description: GMP (GNU MP) module for PHP5

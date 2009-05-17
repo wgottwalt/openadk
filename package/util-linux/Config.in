@@ -1,0 +1,38 @@
+config ADK_COMPILE_UTIL_LINUX
+	tristate
+	default n
+	depends ADK_PACKAGE_FDISK || ADK_PACKAGE_SWAP_UTILS
+
+config ADK_PACKAGE_FDISK
+	prompt "fdisk............................. Partition table manipulation utility"
+	tristate
+	default n
+	select ADK_COMPILE_UTIL_LINUX
+	help
+	  A partition table manipulation utility
+	  
+	  http://www.kernel.org/pub/linux/utils/util-linux/
+
+config ADK_PACKAGE_LOSETUP
+	prompt "losetup........................... Loop devices setup and control utility"
+	tristate
+	default n
+	select ADK_COMPILE_UTIL_LINUX
+	select ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
+	help
+	  A loop devices setup and control utility
+	  
+	  http://www.kernel.org/pub/linux/utils/util-linux/
+
+config ADK_PACKAGE_SWAP_UTILS
+	prompt "swap-utils........................ Swap space management utilities"
+	tristate
+	default n
+	select ADK_COMPILE_UTIL_LINUX
+	help
+	  A collection of tools to manage swap space :
+	    * mkswap
+	    * swapon
+	    * swapoff
+	  
+	  http://www.kernel.org/pub/linux/utils/util-linux/

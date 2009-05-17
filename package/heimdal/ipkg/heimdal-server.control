@@ -1,0 +1,4 @@
+Package: heimdal-server
+Priority: optional
+Section: net
+Description: heimdal kerberos server

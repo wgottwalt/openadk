@@ -1,0 +1,5 @@
+Package: opensips-mod-uri
+Depends: opensips
+Section: net
+Priority: optional
+Description: uri support for OpenSIPS

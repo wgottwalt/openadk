@@ -1,0 +1,30 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- nfs-utils-1.1.3.orig/support/nfs/nfs_mntent.c	2008-07-27 23:01:45.000000000 +0200
++++ nfs-utils-1.1.3/support/nfs/nfs_mntent.c	2008-10-06 16:53:17.000000000 +0200
+@@ -9,7 +9,7 @@
+  */
+ 
+ #include <stdio.h>
+-#include <string.h>		/* for index */
++#include <string.h>		/* for strchr */
+ #include <ctype.h>		/* for isdigit */
+ #include <sys/stat.h>		/* for umask */
+ 
+@@ -163,7 +163,7 @@ nfs_getmntent (mntFILE *mfp) {
+ 			return NULL;
+ 
+ 		mfp->mntent_lineno++;
+-		s = index (buf, '\n');
++		s = strchr (buf, '\n');
+ 		if (s == NULL) {
+ 			/* Missing final newline?  Otherwise extremely */
+ 			/* long line - assume file was corrupted */
+@@ -171,7 +171,7 @@ nfs_getmntent (mntFILE *mfp) {
+ 				fprintf(stderr, _("[mntent]: warning: no final "
+ 					"newline at the end of %s\n"),
+ 					mfp->mntent_file);
+-				s = index (buf, 0);
++				s = strchr (buf, 0);
+ 			} else {
+ 				mfp->mntent_errs = 1;
+ 				goto err;

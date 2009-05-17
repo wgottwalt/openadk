@@ -1,0 +1,4 @@
+Package: scsi-spin
+Priority: optional
+Section: extra
+Description: Utility to spin down scsi disks

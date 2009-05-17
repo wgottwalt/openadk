@@ -1,0 +1,5 @@
+Package: opensips-mod-flatstore
+Depends: opensips
+Section: net
+Priority: optional
+Description: flatstore support for OpenSIPS

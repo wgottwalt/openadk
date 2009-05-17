@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- xfsprogs-3.0.0.orig/include/buildmacros	2009-02-04 23:29:25.000000000 +0100
++++ xfsprogs-3.0.0/include/buildmacros	2009-03-27 11:45:29.000000000 +0100
+@@ -48,7 +48,7 @@ LTINSTALL = $(LIBTOOL) --mode=install $(
+ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CCF)
+ 
+ ifeq ($(ENABLE_SHARED),yes)
+-LTLDFLAGS += -rpath $(PKG_LIB_DIR)
++#LTLDFLAGS += -rpath $(PKG_LIB_DIR)
+ LTLDFLAGS += -version-info $(LTVERSION)
+ endif
+ 

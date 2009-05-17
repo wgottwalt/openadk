@@ -1,0 +1,6 @@
+config ADK_PACKAGE_FFMPEG
+	tristate "ffmpeg............................ audio/video multimedia library"
+	default n
+	help
+	  cross-platform solution to record, convert and stream audio and video.
+	  http://www.ffmpeg.org

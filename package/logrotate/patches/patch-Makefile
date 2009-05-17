@@ -1,0 +1,21 @@
+$Id$
+--- logrotate-3.7.1.orig/Makefile	Thu Oct  9 22:05:07 2003
++++ logrotate-3.7.1/Makefile	Sat Jan 20 19:25:23 2007
+@@ -3,7 +3,7 @@ CVSROOT = $(shell cat CVS/Root)
+ CVSTAG = r$(subst .,-,$(VERSION))
+ OS_NAME = $(shell uname -s)
+ LFS = $(shell echo `getconf LFS_CFLAGS 2>/dev/null`)
+-CFLAGS = -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
++CFLAGS ?= -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
+ PROG = logrotate
+ MAN = logrotate.8
+ LOADLIBES = -lpopt
+@@ -69,7 +69,7 @@ SOURCES = $(subst .o,.c,$(OBJS) $(LIBOBJ
+ 
+ ifeq ($(RPM_OPT_FLAGS),)
+ CFLAGS += -g
+-LDFLAGS = -g
++LDFLAGS ?= -g
+ endif
+ 
+ ifeq (.depend,$(wildcard .depend))

@@ -1,0 +1,118 @@
+#!/bin/sh
+#* reason                       -- why this script was called, one of: pre-init connect disconnect
+#* VPNGATEWAY                   -- vpn gateway address (always present)
+#* TUNDEV                       -- tunnel device (always present)
+#* INTERNAL_IP4_ADDRESS         -- address (always present)
+#* INTERNAL_IP4_NETMASK         -- netmask (often unset)
+#* INTERNAL_IP4_DNS             -- list of dns serverss
+#* INTERNAL_IP4_NBNS            -- list of wins servers
+#* CISCO_DEF_DOMAIN             -- default domain name
+#* CISCO_BANNER                 -- banner from server
+#* CISCO_SPLIT_INC              -- number of networks in split-network-list
+#* CISCO_SPLIT_INC_%d_ADDR      -- network address
+#* CISCO_SPLIT_INC_%d_MASK      -- subnet mask (for example: 255.255.255.0)
+#* CISCO_SPLIT_INC_%d_MASKLEN   -- subnet masklen (for example: 24)
+#* CISCO_SPLIT_INC_%d_PROTOCOL  -- protocol (often just 0)
+#* CISCO_SPLIT_INC_%d_SPORT     -- source port (often just 0)
+#* CISCO_SPLIT_INC_%d_DPORT     -- destination port (often just 0)
+
+do_pre_init() {
+	# bevore doing anything, make shure, the tun module is loaded and the
+	# tun device nodes exist.
+	if (exec 6<> /dev/net/tun) > /dev/null 2>&1 ; then
+		:
+	else # can't open /dev/net/tun
+		test -e /proc/sys/kernel/modprobe && `cat /proc/sys/kernel/modprobe` tun 2>/dev/null
+		# fix for broken devfs in kernel 2.6.x
+		if [ "`readlink /dev/net/tun`" = misc/net/tun \
+			-a ! -e /dev/net/misc/net/tun -a -e /dev/misc/net/tun ] ; then
+			ln -sf /dev/misc/net/tun /dev/net/tun
+		fi
+		# make sure tun device exists
+		if [ ! -e /dev/net/tun ]; then
+			mkdir -p /dev/net
+			mknod -m 0640 /dev/net/tun c 10 200
+		fi
+	fi
+	echo "pre-init successful."
+}
+
+do_connect() {
+	# after connection is established, we should update resolv.conf
+	# and the kernel routing table
+
+	# set up the interface
+	ifconfig $TUNDEV $INTERNAL_IP4_ADDRESS pointopoint $INTERNAL_IP4_ADDRESS mtu 1412 up
+
+	# set up the route to the remote side and remove any cached routes
+	ip route add `ip route get "$VPNGATEWAY"`
+	ip route flush cache
+
+	# set up the default routes via vpnc-route
+	echo "starting vpnc-route"
+	/etc/vpnc/vpnc-route start
+
+	if [ "x$INTERNAL_IP4_DNS" != "x" ]; then
+		# set up the dns servers (add to resolv.conf)
+		echo "setting up DNS server"
+		# simply add the given servers to the resolv.conf file
+		echo "" > /var/run/vpnc/resolv.conf
+		for dns in $INTERNAL_IP4_DNS; do
+			echo "nameserver $dns" >> /var/run/vpnc/resolv.conf
+		done;
+		cat /etc/resolv.conf >> /var/run/vpnc/resolv.conf
+		mv /var/run/vpnc/resolv.conf /etc/resolv.conf
+		# keep the DNS server IPs for shutdown
+		echo "$INTERNAL_IP4_DNS" > /var/run/vpnc/dnsserver
+	fi
+
+}
+
+do_disconnect() {
+	# remove the nameserver from resolv.conf
+	# and restore the old routing table
+
+	# remove route to gateway
+	ip route del $VPNGATEWAY
+
+	# remove default routes
+	/etc/vpnc/vpnc-route stop
+
+	# remove the dns servers from resolv.conf
+	if [ -f /var/run/vpnc/dnsserver ]; then
+		re_dns="";
+		for dns in `cat /var/run/vpnc/dnsserver`; do
+			echo "removing DNS server $dns";
+			if [ "x$re_dns" == "x" ]; then
+				re_dns=\($dns\);
+			else
+				re_dns=$re_dns\|\($dns\);
+			fi;
+		done;
+		echo "re_dns=$re_dns"
+		cat /etc/resolv.conf | grep -v -E "($re_dns)|(^\ *$)" > /var/run/vpnc/resolv.conf
+		mv /var/run/vpnc/resolv.conf /etc/resolv.conf
+		rm /var/run/vpnc/dnsserver
+	fi;
+	
+	# deconfigure network interface
+	ifconfig $TUNDEV down
+}
+
+case "$reason" in
+	pre-init)
+		do_pre_init
+		;;
+	connect)
+		do_connect
+		;;
+	disconnect)
+		do_disconnect
+		;;
+	*)
+		echo "unknown reason '$reason'. Maybe vpnc-script is out of date" 1>&2
+		exit 1
+		;;
+esac
+
+exit 0

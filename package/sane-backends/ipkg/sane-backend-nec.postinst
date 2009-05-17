@@ -1,0 +1,2 @@
+#/bin/sh
+echo nec >> $IPKG_INSTROOT/etc/sane.d/dll.conf

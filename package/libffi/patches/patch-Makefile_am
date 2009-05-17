@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libffi-3.0.6.orig/Makefile.am	2008-02-21 14:36:18.000000000 +0100
++++ libffi-3.0.6/Makefile.am	2008-12-08 02:27:27.000000000 +0100
+@@ -68,6 +68,7 @@ AM_MAKEFLAGS = \
+ 	"infodir=$(infodir)" \
+ 	"libdir=$(libdir)" \
+ 	"prefix=$(prefix)" \
++	"includesdir=$(prefix)/include" \
+ 	"AR=$(AR)" \
+ 	"AS=$(AS)" \
+ 	"CC=$(CC)" \

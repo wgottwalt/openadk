@@ -1,0 +1,15 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+
+* disable examples
+
+--- id3lib-3.8.3.orig/Makefile.in	2003-03-02 01:23:00.000000000 +0100
++++ id3lib-3.8.3/Makefile.in	2008-12-15 13:21:08.000000000 +0100
+@@ -132,7 +132,7 @@ EXTRA_DIST = \
+ @ID3_NEEDZLIB_TRUE@zlib_subdir = zlib
+ @ID3_NEEDZLIB_FALSE@zlib_subdir = 
+ 
+-SUBDIRS = . m4 $(zlib_subdir) doc include id3com src examples
++SUBDIRS = . m4 $(zlib_subdir) doc include id3com src
+ DIST_SUBDIRS = . m4 zlib doc include id3com src examples prj libprj
+ 
+ INCLUDES = @ID3LIB_DEBUG_FLAGS@

@@ -1,0 +1,5 @@
+Package: dbus
+Priority: optional
+Section: net
+Description: DBUS library
+Depends: libexpat

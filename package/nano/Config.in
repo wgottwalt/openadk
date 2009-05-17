@@ -1,0 +1,18 @@
+config ADK_PACKAGE_NANO
+	prompt "nano.............................. An enhanced clone of the Pico text editor"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBNCURSES
+	help
+	  GNU nano (Nano's ANOther editor, or Not ANOther editor) is an enhanced clone of the Pico text editor.
+	  
+	  http://www.nano-editor.org/
+
+config ADK_PACKAGE_NANO_TINY
+	prompt "   only compile a minimal nano (using --enable-tiny)"
+	bool
+	default y
+	depends ADK_PACKAGE_NANO
+	help
+	  If not selected, nano will support justify, line wrapping, tab completion and multiple open file buffers.
+

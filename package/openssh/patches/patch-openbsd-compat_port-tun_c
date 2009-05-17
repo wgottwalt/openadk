@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openssh-5.1p1.orig/openbsd-compat/port-tun.c	2008-05-19 07:28:36.000000000 +0200
++++ openssh-5.1p1/openbsd-compat/port-tun.c	2008-10-14 10:20:42.000000000 +0200
+@@ -213,7 +213,7 @@ sys_tun_infilter(struct Channel *c, char
+ 	if (len <= 0 || len > (int)(sizeof(rbuf) - sizeof(*af)))
+ 		return (-1);
+ 	ptr = (char *)&rbuf[0];
+-	bcopy(buf, ptr + sizeof(u_int32_t), len);
++	memcpy(ptr + sizeof(u_int32_t), buf, len);
+ 	len += sizeof(u_int32_t);
+ 	af = (u_int32_t *)ptr;
+ 

@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+
+* do not include tcpd.h, when hosts access disabled
+
+--- portmap_6.0.orig/pmap_check.c	2007-05-11 05:02:10.000000000 +0200
++++ portmap_6.0/pmap_check.c	2009-04-24 12:26:06.041879543 +0200
+@@ -44,7 +44,9 @@
+ #include <netinet/in.h>
+ #include <rpc/rpcent.h>
+ #endif
++#ifdef HOSTS_ACCESS
+ #include <tcpd.h>
++#endif
+ #include <arpa/inet.h>
+ #include <grp.h>
+ 

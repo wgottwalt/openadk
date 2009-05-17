@@ -1,0 +1,5 @@
+Package: xfsprogs
+Priority: optional
+Section: admin
+Depends: libuuid, libpthread
+Description: Utilities to create and check XFS filesystems

@@ -1,0 +1,139 @@
+config ADK_KPACKAGE_KMOD_CIFS
+	prompt "kmod-fs-cifs...................... CIFS support"
+	select ADK_KPACKAGE_KMOD_NLS
+	tristate
+	default n
+	help
+	  This is the client VFS module for the Common Internet File System
+	  (CIFS) protocol which is the successor to the Server Message Block 
+	  (SMB) protocol, the native file sharing mechanism for most early
+	  PC operating systems.  The CIFS protocol is fully supported by 
+	  file servers such as Windows 2000 (including Windows 2003, NT 4  
+	  and Windows XP) as well by Samba (which provides excellent CIFS
+	  server support for Linux and many other operating systems). Limited
+	  support for Windows ME and similar servers is provided as well. 
+	  You must use the smbfs client filesystem to access older SMB servers
+	  such as OS/2 and DOS.
+
+	  The intent of the cifs module is to provide an advanced
+	  network file system client for mounting to CIFS compliant servers, 
+	  including support for dfs (hierarchical name space), secure per-user
+	  session establishment, safe distributed caching (oplock), optional
+	  packet signing, Unicode and other internationalization improvements, 
+	  and optional Winbind (nsswitch) integration. You do not need to enable
+	  cifs if running only a (Samba) server. It is possible to enable both
+	  smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
+	  and Samba 3 servers, and smbfs for accessing old servers). If you need 
+	  to mount to Samba or Windows from this machine, say Y.
+
+config ADK_KPACKAGE_KMOD_CODA_FS
+	prompt "kmod-fs-coda...................... support for coda client"
+	tristate
+	default n
+	help
+	  This is the kernel part of the client for the CODA filesystem.
+
+config ADK_KERNEL_NFS_V4
+	boolean
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
+	default n
+
+config ADK_KERNEL_RPCSEC_GSS_KRB5
+	boolean
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
+	default n
+
+config ADK_KPACKAGE_KMOD_NFS_FS
+	prompt "kmod-fs-nfs....................... NFS client support (includes V3 support)"
+	tristate
+	default n
+	select ADK_KERNEL_NFS_V3
+	select ADK_KPACKAGE_KMOD_SUNRPC
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
+	help
+	  If you are connected to some other (usually local) Unix computer
+	  (using SLIP, PLIP, PPP or Ethernet) and want to mount files residing
+	  on that computer (the NFS server) using the Network File Sharing
+	  protocol, say Y. "Mounting files" means that the client can access
+	  the files with usual UNIX commands as if they were sitting on the
+	  client's hard disk. For this to work, the server must run the
+	  programs nfsd and mountd (but does not need to have NFS file system
+	  support enabled in its kernel). NFS is explained in the Network
+	  Administrator's Guide, available from
+	  <http://www.tldp.org/docs.html#guide>, on its man page: "man
+	  nfs", and in the NFS-HOWTO.
+
+	  A superior but less widely used alternative to NFS is provided by
+	  the Coda file system; see "Coda file system support" below.
+
+	  If you say Y here, you should have said Y to TCP/IP networking also.
+	  This option would enlarge your kernel by about 27 KB.
+
+	  To compile this file system support as a module, choose M here: the
+	  module will be called nfs.
+
+	  If you are configuring a diskless machine which will mount its root
+	  file system over NFS at boot time, say Y here and to "Kernel
+	  level IP autoconfiguration" above and to "Root file system on NFS"
+	  below. You cannot compile this driver as a module in this case.
+	  There are two packages designed for booting diskless machines over
+	  the net: netboot, available from
+	  <http://ftp1.sourceforge.net/netboot/>, and Etherboot,
+	  available from <http://ftp1.sourceforge.net/etherboot/>.
+
+	  If you don't know what all this is about, say N.
+	  Kernel modules for NFS client support
+
+config ADK_KERNEL_NFSD_V3
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_NFSD
+	prompt "kmod-fs-nfsd...................... NFS server support (includes V3 support)"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_EXPORTFS
+	select ADK_KERNEL_NFSD_V3
+	depends ADK_KPACKAGE_KMOD_NFS_FS
+	help
+	  If you want your Linux box to act as an NFS *server*, so that other
+	  computers on your local network which support NFS can access certain
+	  directories on your box transparently, you have two options: you can
+	  use the self-contained user space program nfsd, in which case you
+	  should say N here, or you can say Y and use the kernel based NFS
+	  server. The advantage of the kernel based solution is that it is
+	  faster.
+
+	  In either case, you will need support software; the respective
+	  locations are given in the file <file:Documentation/Changes> in the
+	  NFS section.
+
+	  If you say Y here, you will get support for version 2 of the NFS
+	  protocol (NFSv2). If you also want NFSv3, say Y to the next question
+	  as well.
+
+	  Please read the NFS-HOWTO, available from
+	  <http://www.tldp.org/docs.html#howto>.
+
+config ADK_KERNEL_NFSD_V4
+	prompt "Enable NFSv4 and RPC Kerberos"
+	boolean
+	depends on ADK_KPACKAGE_KMOD_NFSD
+	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
+	select ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
+	select ADK_KERNEL_NFS_V4
+	default n
+	help
+	 NFSv4 with Kerberos authentication.
+
+config ADK_KPACKAGE_KMOD_SUNRPC
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_SUNRPC_GSS
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
+	tristate
+	default n

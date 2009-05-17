@@ -1,0 +1,5 @@
+Package: cbtt-mysql
+Priority: optional
+Section: net
+Depends: zlib, libmysqlclient, uclibc++
+Description: Bittorrent tracker with mysql support

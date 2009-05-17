@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- mutt-1.5.19.orig/Makefile.in	2009-01-05 20:24:13.000000000 +0100
++++ mutt-1.5.19/Makefile.in	2009-05-10 19:02:17.000000000 +0200
+@@ -129,7 +129,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
+   distclean-recursive maintainer-clean-recursive
+ ETAGS = etags
+ CTAGS = ctags
+-DIST_SUBDIRS = m4 po intl doc contrib imap
++DIST_SUBDIRS = m4 po intl contrib imap
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ distdir = $(PACKAGE)-$(VERSION)
+ top_distdir = $(distdir)
+@@ -291,7 +291,7 @@ top_srcdir = @top_srcdir@
+ AUTOMAKE_OPTIONS = 1.6 foreign
+ @BUILD_IMAP_TRUE@IMAP_SUBDIR = imap
+ @BUILD_IMAP_TRUE@IMAP_INCLUDES = -I$(top_srcdir)/imap
+-SUBDIRS = m4 po intl doc contrib $(IMAP_SUBDIR)
++SUBDIRS = m4 po intl contrib $(IMAP_SUBDIR)
+ bin_SCRIPTS = muttbug flea @SMIMEAUX_TARGET@
+ BUILT_SOURCES = keymap_defs.h patchlist.c reldate.h hcversion.h
+ mutt_SOURCES = \

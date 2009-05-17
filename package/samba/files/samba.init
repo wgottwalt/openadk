@@ -1,0 +1,29 @@
+#!/bin/sh
+#FWINIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"$samba" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/run/samba ] || mkdir -p /var/run/samba
+	[ -d /var/log/samba ] || mkdir -p /var/log/samba
+	nmbd -D 
+	smbd -D
+	;;
+stop)
+	killall nmbd
+	killall smbd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

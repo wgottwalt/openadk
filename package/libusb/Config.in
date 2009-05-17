@@ -1,0 +1,9 @@
+config ADK_PACKAGE_LIBUSB
+	prompt "libusb............................ A library for accessing Linux USB devices"
+	tristate
+	default n
+	help
+	  A library for accessing Linux USB devices
+	  
+	  http://libusb.sourceforge.net/
+

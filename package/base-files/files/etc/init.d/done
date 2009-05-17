@@ -1,0 +1,4 @@
+#!/bin/sh
+#FWINIT 98
+[[ $1 = autostart ]] && sysctl -p >&-
+exit 0

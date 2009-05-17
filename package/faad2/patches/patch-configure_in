@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- faad2.orig/configure.in	2006-09-25 21:52:53.000000000 +0200
++++ faad2/configure.in	2009-01-08 16:50:34.056700106 +0100
+@@ -16,6 +16,7 @@ AC_SUBST(LIBTOOL_DEPS)
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
++AC_PROG_CXX
+ AC_PROG_CPP
+ dnl disable for mpeg4ip plugin
+ dnl AC_PROG_CXX

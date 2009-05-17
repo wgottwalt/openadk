@@ -1,0 +1,5 @@
+Package: glib2
+Priority: optional
+Section: libs
+Description: some broken toolkit
+Depends: gettext, libiconv, libpthread

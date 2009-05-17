@@ -1,0 +1,4 @@
+Package: swconfig
+Priority: optional
+Section: base
+Description: switch configuration utility

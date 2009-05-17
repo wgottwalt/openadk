@@ -1,0 +1,6 @@
+config ADK_PACKAGE_DOSFSTOOLS
+	prompt "dosfstools........................ Utilities to create and check MS-DOS FAT filesystems"
+	tristate
+	default n
+	help
+	  Utilities to create and check MS-DOS FAT filesystems.

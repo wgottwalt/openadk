@@ -1,0 +1,16 @@
+config ADK_COMPILE_NCURSES
+	tristate
+	depends ADK_PACKAGE_LIBNCURSES
+
+config ADK_PACKAGE_LIBNCURSES
+	prompt "libncurses........................ Terminal handling library"
+	tristate
+	default n
+	select ADK_COMPILE_NCURSES
+	help
+	  A terminal handling library
+	  
+	  Comes with: libcurses libform libmenu libncurses libpanel
+	  
+	  http://www.gnu.org/software/ncurses/
+

@@ -1,0 +1,44 @@
+config ADK_COMPILE_AVAHI
+	tristate
+	default n
+	depends ADK_PACKAGE_AVAHI_DAEMON || ADK_PACKAGE_AVAHI_DNSCONFD || ADK_PACKAGE_LIBAVAHI
+
+config ADK_PACKAGE_AVAHI_DAEMON
+	prompt   "avahi-daemon...................... An mDNS/DNS-SD (ZeroConf) implementation (daemon)"
+	tristate
+	default n
+	select ADK_COMPILE_AVAHI
+	select ADK_PACKAGE_LIBAVAHI
+	select ADK_PACKAGE_LIBDAEMON
+	help
+	  Avahi is a system which facilitates service discovery on a local network --
+	  this means that you can plug your laptop or computer into a network and
+	  instantly be able to view other people who you can chat with, find printers
+	  to print to or find files being shared. This kind of technology is already
+	  found in MacOS X (branded 'Rendezvous', 'Bonjour' and sometimes 'ZeroConf')
+	  and is very convenient.
+
+	  http://www.freedesktop.org/Software/Avahi
+
+	  This package contains an mDNS/DNS-SD daemon.
+
+config ADK_PACKAGE_AVAHI_DNSCONFD
+	prompt     "avahi-dnsconfd.................. Unicast DNS server from mDNS/DNS-SD config daemon"
+	tristate
+	default n
+	select ADK_COMPILE_AVAHI
+	depends ADK_PACKAGE_AVAHI_DAEMON
+	help
+	  Avahi is a system which facilitates service discovery on a local network --
+	  this means that you can plug your laptop or computer into a network and
+	  instantly be able to view other people who you can chat with, find printers
+	  to print to or find files being shared. This kind of technology is already
+	  found in MacOS X (branded 'Rendezvous', 'Bonjour' and sometimes 'ZeroConf')
+	  and is very convenient.
+
+	  http://www.freedesktop.org/Software/Avahi
+
+	  This package contains an Unicast DNS server from mDNS/DNS-SD configuration
+	  daemon, which may be used to configure conventional DNS servers using mDNS
+	  in a DHCP-like fashion. Especially useful on IPv6.
+

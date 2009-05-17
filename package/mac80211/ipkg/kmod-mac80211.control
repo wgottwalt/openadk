@@ -1,0 +1,4 @@
+Package: kmod-mac80211
+Priority: optional
+Section: net
+Description: Linux wireless framwork

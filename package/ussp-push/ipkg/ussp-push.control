@@ -1,0 +1,5 @@
+Package: ussp-push
+Priority: optional
+Section: bluetooth
+Depends: openobex
+Description: obex push

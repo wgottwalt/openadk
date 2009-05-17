@@ -1,0 +1,45 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openssh-5.2p1.orig/myproposal.h	2009-01-28 06:33:31.000000000 +0100
++++ openssh-5.2p1/myproposal.h	2009-05-01 14:00:47.000000000 +0200
+@@ -42,15 +42,35 @@
+ 
+ #define	KEX_DEFAULT_PK_ALG	"ssh-rsa,ssh-dss"
+ 
++
++#ifndef OPENSSL_NO_AES192
++#define KEX_ENCRYPT_AES192	",aes192-ctr,aes192-cbc"
++#else
++#define KEX_ENCRYPT_AES192
++#endif
++#ifndef OPENSSL_NO_BF
++#define KEX_ENCRYPT_BF		",blowfish-cbc"
++#else
++#define KEX_ENCRYPT_BF
++#endif
++#ifndef OPENSSL_NO_CAST 
++#define KEX_ENCRYPT_CAST	",cast128-cbc"
++#define KEX_MAC_CAST		",hmac-ripemd160,hmac-ripemd160@openssh.com"
++#else
++#define KEX_ENCRYPT_CAST
++#define KEX_MAC_CAST
++#endif
++
+ #define	KEX_DEFAULT_ENCRYPT \
+-	"aes128-ctr,aes192-ctr,aes256-ctr," \
++	"aes128-ctr,aes256-ctr," \
+ 	"arcfour256,arcfour128," \
+-	"aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc," \
+-	"aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se"
++	"aes128-cbc,3des-cbc," \
++	"aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se" \
++	 KEX_ENCRYPT_AES192 KEX_ENCRYPT_BF KEX_ENCRYPT_CAST
+ #define	KEX_DEFAULT_MAC \
+-	"hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160," \
+-	"hmac-ripemd160@openssh.com," \
+-	"hmac-sha1-96,hmac-md5-96"
++	"hmac-md5,hmac-sha1,umac-64@openssh.com," \
++	"hmac-sha1-96,hmac-md5-96" \
++	KEX_MAC_CAST
+ #define	KEX_DEFAULT_COMP	"none,zlib@openssh.com,zlib"
+ #define	KEX_DEFAULT_LANG	""
+ 

@@ -1,0 +1,4 @@
+Package: links
+Priority: optional
+Section: net
+Description: web browser with console graphic support

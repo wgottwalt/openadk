@@ -1,0 +1,5 @@
+Package: opensips-mod-gflags
+Depends: opensips
+Section: net
+Priority: optional
+Description: gflags support for OpenSIPS

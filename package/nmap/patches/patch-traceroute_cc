@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- nmap-4.76.orig/traceroute.cc	2008-09-06 06:12:34.000000000 +0200
++++ nmap-4.76/traceroute.cc	2008-10-29 13:42:16.000000000 +0100
+@@ -850,9 +850,12 @@ Traceroute::outputTarget (Target * t) {
+     tg = TraceGroups[t->v4host ().s_addr];
+ 
+     /* sort into ttl order */
++    /* quick hack 
+     for (it = tg->TraceProbes.begin (); it != tg->TraceProbes.end (); ++it)
+         sortedProbes[it->second->ttl] = it->second;
+     sortedProbes.swap (tg->TraceProbes);
++    */
++    
+ 
+     /* clean up and consolidate traces */
+     tg->consolidateHops ();

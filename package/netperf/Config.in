@@ -1,0 +1,6 @@
+config ADK_PACKAGE_NETPERF
+	prompt "netperf........................... network performance measurement tool"
+	tristate
+	default n
+	help
+	  Program and service to do network performance measurement.

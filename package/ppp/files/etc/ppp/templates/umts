@@ -1,0 +1,11 @@
+defaultroute
+usepeerdns
+lcp-echo-interval 10
+lcp-echo-failure 3
+crtscts
+460800
+connect "NUMBER='*99***1#' /usr/bin/comgt -s /etc/comgt/dial.comgt -d #DEVICE#"
+#IDLEOPTIONS#
+user #USERNAME#
+password #PASSWORD#
+#DEVICE#

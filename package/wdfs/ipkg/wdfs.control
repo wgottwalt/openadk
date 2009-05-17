@@ -1,0 +1,5 @@
+Package: wdfs
+Priority: optional
+Section: net
+Depends: openssl, fuse-utils, kmod-fuse, libfuse, neon, glib2
+Description: WebDAV filesystem

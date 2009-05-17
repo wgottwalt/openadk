@@ -1,0 +1,5 @@
+Package: gpg
+Priority: optional
+Section: text
+Description: Gnu Privacy Guard
+Depends: libreadline

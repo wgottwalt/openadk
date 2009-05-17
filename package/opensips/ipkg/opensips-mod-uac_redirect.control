@@ -1,0 +1,5 @@
+Package: opensips-mod-uac_redirect
+Depends: opensips
+Section: net
+Priority: optional
+Description: uac_redirect support for OpenSIPS

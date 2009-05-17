@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rtorrent-0.8.2.orig/src/command_ui.cc	2008-05-07 14:19:11.000000000 +0200
++++ rtorrent-0.8.2/src/command_ui.cc	2008-12-14 22:56:02.000000000 +0100
+@@ -36,6 +36,8 @@
+ 
+ #include "config.h"
+ 
++#include <ctime>
++
+ #include <rak/functional.h>
+ #include <rak/functional_fun.h>
+ #include <sigc++/adaptors/bind.h>

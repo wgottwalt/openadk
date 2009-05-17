@@ -1,0 +1,68 @@
+diff -Nur linux-2.6.28.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.28/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-2.6.28.orig/arch/cris/include/arch-v10/arch/Kbuild	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/include/arch-v10/arch/Kbuild	2008-12-29 20:49:24.000000000 +0100
+@@ -1,4 +1,9 @@
++header-y += dma.h
++header-y += io_interface_mux.h
+ header-y += user.h
+ header-y += svinto.h
+ header-y += sv_addr_ag.h
+ header-y += sv_addr.agh
++header-y += elf.h
++header-y += page.h
++header-y += ptrace.h
+diff -Nur linux-2.6.28.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.28/arch/cris/include/arch-v32/arch/Kbuild
+--- linux-2.6.28.orig/arch/cris/include/arch-v32/arch/Kbuild	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/include/arch-v32/arch/Kbuild	2008-12-29 20:48:51.000000000 +0100
+@@ -1,2 +1,6 @@
+ header-y += user.h
+ header-y += cryptocop.h
++header-y += elf.h
++header-y += page.h
++header-y += ptrace.h
++
+diff -Nur linux-2.6.28.orig/arch/cris/include/asm/Kbuild linux-2.6.28/arch/cris/include/asm/Kbuild
+--- linux-2.6.28.orig/arch/cris/include/asm/Kbuild	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/cris/include/asm/Kbuild	2008-12-29 20:48:51.000000000 +0100
+@@ -1,11 +1,14 @@
+ include include/asm-generic/Kbuild.asm
+ 
+-header-y += arch-v10/
+-header-y += arch-v32/
++header-y += ../arch-v10/arch/
++header-y += ../arch-v32/arch/
+ 
++header-y += elf.h
+ header-y += ethernet.h
+ header-y += rtc.h
+ header-y += sync_serial.h
++header-y += page.h
++header-y += user.h
+ 
+ unifdef-y += etraxgpio.h
+ unifdef-y += rs485.h
+diff -Nur linux-2.6.28.orig/include/asm-generic/Kbuild linux-2.6.28/include/asm-generic/Kbuild
+--- linux-2.6.28.orig/include/asm-generic/Kbuild	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/include/asm-generic/Kbuild	2008-12-29 20:48:51.000000000 +0100
+@@ -2,8 +2,10 @@
+ header-y += errno.h
+ header-y += fcntl.h
+ header-y += ioctl.h
++header-y += memory_model.h
+ header-y += mman.h
+ header-y += poll.h
++header-y += page.h
+ header-y += signal.h
+ header-y += statfs.h
+ 
+diff -Nur linux-2.6.28.orig/include/linux/Kbuild linux-2.6.28/include/linux/Kbuild
+--- linux-2.6.28.orig/include/linux/Kbuild	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/include/linux/Kbuild	2008-12-29 20:48:51.000000000 +0100
+@@ -158,6 +158,7 @@
+ header-y += udf_fs_i.h
+ header-y += ultrasound.h
+ header-y += un.h
++header-y += user.h
+ header-y += utime.h
+ header-y += veth.h
+ header-y += video_decoder.h

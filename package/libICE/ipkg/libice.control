@@ -1,0 +1,4 @@
+Package: libice
+Priority: optional
+Section: x11
+Description: X.org library

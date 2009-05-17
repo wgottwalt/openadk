@@ -1,0 +1,7 @@
+config ADK_PACKAGE_LIBPTHREAD
+	prompt "libpthread........................ POSIX threads library"
+	tristate
+	default n
+	help
+	  POSIX threads library
+

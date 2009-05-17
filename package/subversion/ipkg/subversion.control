@@ -1,0 +1,4 @@
+Package: subversion
+Priority: optional
+Section: net
+Description: revision control program

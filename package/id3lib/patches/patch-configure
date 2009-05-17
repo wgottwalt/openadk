@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- id3lib-3.8.3.orig/configure	2003-03-02 01:23:00.000000000 +0100
++++ id3lib-3.8.3/configure	2008-12-15 13:14:18.000000000 +0100
+@@ -10296,7 +10296,7 @@ done
+ 
+ for ac_header in \
+   string                        \
+-  iomanip.h                     \
++  iomanip                     \
+ 
+ do
+ as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`

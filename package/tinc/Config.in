@@ -1,0 +1,13 @@
+config ADK_PACKAGE_TINC
+	prompt "tinc.............................. VPN tunneling daemon"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_TUN
+	select ADK_PACKAGE_LIBLZO
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_ZLIB
+	help
+	  A VPN tunneling daemon
+	  
+	  http://www.tinc-vpn.org/
+

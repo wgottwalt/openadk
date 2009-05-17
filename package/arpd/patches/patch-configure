@@ -1,0 +1,28 @@
+$Id$
+--- arpd.orig/configure	2003-02-09 19:31:28.000000000 +0100
++++ arpd/configure	2007-01-21 00:51:54.000000000 +0100
+@@ -2205,12 +2205,12 @@ echo "${ECHO_T}no" >&6
+   *)
+      echo "$as_me:2206: result: $withval" >&5
+ echo "${ECHO_T}$withval" >&6
+-     if test -f $withval/include/event.h -a -f $withval/lib/libevent.a; then
++     if test -f $withval/include/event.h; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+         EVENTINC="-I$withval/include"
+         EVENTLIB="-L$withval/lib -levent"
+-     elif test -f $withval/event.h -a -f $withval/libevent.a; then
++     elif test -f $withval/event.h; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+         EVENTINC="-I$withval"
+@@ -2258,8 +2258,7 @@ echo "${ECHO_T}$withval" >&6
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+         PCAPINC="-I$withval -I$withval/bpf"
+         PCAPLIB="-L$withval -lpcap"
+-     elif test -f $withval/include/pcap.h -a \
+-               -f $withval/include/net/bpf.h; then
++     elif test -f $withval/include/pcap.h; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+         PCAPINC="-I$withval/include"

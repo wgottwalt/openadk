@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- iptraf-3.0.0.orig/src/log.c	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.0/src/log.c	2008-10-09 17:34:11.000000000 +0200
+@@ -491,8 +491,6 @@ void writeethlog(struct ethtabent *list,
+                         ptmp->un.desc.ascaddr);
+             else if (ptmp->un.desc.linktype == LINK_PLIP)
+                 fprintf(fd, "\nPLIP address: %s", ptmp->un.desc.ascaddr);
+-            else if (ptmp->un.desc.linktype == LINK_FDDI)
+-                fprintf(fd, "\nFDDI address: %s", ptmp->un.desc.ascaddr);
+ 
+             if (ptmp->un.desc.withdesc)
+                 fprintf(fd, " (%s)", ptmp->un.desc.desc);

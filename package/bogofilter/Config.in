@@ -1,0 +1,26 @@
+config ADK_PACKAGE_BOGOFILTER
+	prompt "bogofilter........................ Mail (spam) filter utility"
+	tristate
+	default n
+	depends on ADK_CXX
+	select ADK_PACKAGE_LIBDB
+	select ADK_PACKAGE_LIBICONV
+	help
+		Filters mail, must be trained.
+
+		http://bogofilter.sourceforge.net
+
+
+config ADK_PACKAGE_BOGOFILTER_BOGOUTIL
+	prompt "    include bogoutil in firmware image and package file"
+	bool
+	default n
+	depends ADK_PACKAGE_BOGOFILTER
+
+config ADK_PACKAGE_BOGOFILTER_BOGOTUNE
+	prompt "    include bogotune in firmware image and package file"
+	bool
+	default n
+	depends ADK_PACKAGE_BOGOFILTER
+
+

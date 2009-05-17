@@ -1,0 +1,29 @@
+config ADK_PACKAGE_CTORRENT
+	prompt "ctorrent.......................... console-based BitTorrent client"
+	tristate
+	default n
+	depends on ADK_CXX
+	help
+	  CTorrent is a BitTorrent client written in the C programming language, known to
+	  be a very robust and mature programming language, which produces fast and
+	  optimized application.
+
+	  http://www.rahul.net/dholmes/ctorrent/
+
+choice
+prompt "C++ library to use"
+depends on ADK_PACKAGE_CTORRENT
+default ADK_COMPILE_CTORRENT_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_CTORRENT_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+
+config ADK_COMPILE_CTORRENT_WITH_STDCXX
+	bool "Standard C++ library"
+	select ADK_PACKAGE_LIBSTDCXX
+	help
+
+config ADK_COMPILE_CTORRENT_WITH_UCLIBCXX
+	bool "Embedded uClibc++ library"
+	select ADK_PACKAGE_UCLIBCXX
+	help
+
+endchoice

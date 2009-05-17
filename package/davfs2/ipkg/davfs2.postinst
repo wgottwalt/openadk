@@ -1,0 +1,5 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+gid=$(get_next_gid)
+add_group davfs2 $gid
+add_user davfs2 $(get_next_uid) $gid /nonexistent

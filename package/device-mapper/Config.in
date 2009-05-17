@@ -1,0 +1,6 @@
+config ADK_PACKAGE_DEVICE_MAPPER
+	prompt "device-mapper..................... device mapper tool and lib"
+	tristate
+	default n
+	help
+         device mapper tool and libdevice mapper tool and lib

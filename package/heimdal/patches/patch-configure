@@ -1,0 +1,13 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/configure	2008-07-28 14:05:20.000000000 +0200
++++ heimdal-1.2.1/configure	2009-01-04 18:24:14.421500455 +0100
+@@ -47096,9 +47096,6 @@ end
+ EOF
+ if ${COMPILE_ET} conftest_et.et >/dev/null 2>&1; then
+     save_CPPFLAGS="${CPPFLAGS}"
+-  if test -d "/usr/include/et"; then
+-    CPPFLAGS="-I/usr/include/et ${CPPFLAGS}"
+-  fi
+     if test "$cross_compiling" = yes; then
+   krb_cv_compile_et="yes" krb_cv_compile_et_cross=yes
+ else

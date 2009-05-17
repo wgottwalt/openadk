@@ -1,0 +1,4 @@
+Package: kmod-mac80211-ath5k
+Priority: optional
+Section: net
+Description: Linux wireless driver for ath5k

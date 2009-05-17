@@ -1,0 +1,12 @@
+$Id$
+--- ipsec-tools-0.6.4.orig/src/setkey/token.l	2005-06-29 15:01:30.000000000 +0200
++++ ipsec-tools-0.6.4/src/setkey/token.l	2007-06-28 16:58:31.000000000 +0200
+@@ -84,6 +84,8 @@
+ #ifndef SADB_X_EALG_AESCTR
+ #define SADB_X_EALG_AESCTR	(-1)
+ #endif
++
++int yywrap(void) { return 1; }
+ %}
+ 
+ /* common section */

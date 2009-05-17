@@ -1,0 +1,5 @@
+Package: rrs-nossl
+Priority: optional
+Section: net
+Description: A reverse (connecting) remote shell, without SSL support.
+

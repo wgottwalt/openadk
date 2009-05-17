@@ -1,0 +1,62 @@
+config ADK_COMPILE_SAMBA
+	tristate
+	default n
+	depends ADK_PACKAGE_SAMBA || ADK_PACKAGE_SAMBA_CLIENT || ADK_PACKAGE_SMBFS
+
+config ADK_PACKAGE_SAMBA
+	prompt "samba............................. NetBIOS/SMB file and print server"
+	tristate
+	default n
+	select ADK_COMPILE_SAMBA
+	select ADK_PACKAGE_LIBPOPT
+	help
+	 The Samba software suite is a collection of programs that implements the 
+	 SMB protocol for unix systems, allowing you to serve files and printers to 
+	 Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred 
+	 to as the LanManager or Netbios protocol.
+	 
+	 http://www.samba.org/
+	 
+	 This package contains the SMB file and print server daemons.
+
+config ADK_SAMBA_CODEPAGE
+	string "legacy codepage"
+	default "ISO8859-1"
+	depends on ADK_PACKAGE_SAMBA
+	help
+	  which codepage should be added to package
+	  choose one of:
+	  1125 1251 437 737 775 850 852 857 861 866 932 936 949 950
+	  ISO8859-1 ISO8859-13 ISO8859-15 ISO8859-2 ISO8859-5 ISO8859-7
+	  ISO8859-9 KOI8-R KOI8-U
+
+config ADK_PACKAGE_SAMBA_CLIENT
+	prompt "samba-client...................... NetBIOS/SMB simple client"
+	tristate
+	default n
+	select ADK_COMPILE_SAMBA
+	help
+	 The Samba software suite is a collection of programs that implements the 
+	 SMB protocol for unix systems, allowing you to serve files and printers to 
+	 Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred 
+	 to as the LanManager or Netbios protocol.
+	 
+	 http://www.samba.org/
+	 
+	 This package contains a simple command-line SMB client.
+
+config ADK_PACKAGE_SAMBA_PASSWD
+	prompt "samba-passwd...................... samba password utility"
+	tristate
+	default n
+	select ADK_COMPILE_SAMBA
+	help
+	 The Samba software suite is a collection of programs that implements the 
+	 SMB protocol for unix systems, allowing you to serve files and printers to 
+	 Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred 
+	 to as the LanManager or Netbios protocol.
+	 
+	 http://www.samba.org/
+	 
+	 This package contains a the samba password utility.
+

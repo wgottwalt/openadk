@@ -1,0 +1,25 @@
+#!/bin/sh
+#FWINIT 40
+. /etc/rc.conf
+case $1 in
+autostart)
+	test x"${network:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/network/interfaces ] || exit 1
+	ifup -a
+	;;
+autostop|stop)
+	ifdown -a
+	;;
+restart)
+	sh $0 stop
+	exec sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

@@ -1,0 +1,32 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/ansi.c	2003-12-05 14:57:05.000000000 +0100
++++ screen-4.0.3/ansi.c	2008-12-08 04:59:17.000000000 +0100
+@@ -1462,7 +1462,7 @@ StringEnd()
+   switch (curr->w_StringType)
+     {
+     case OSC:	/* special xterm compatibility hack */
+-      if (curr->w_string[0] == ';' || (p = index(curr->w_string, ';')) == 0)
++      if (curr->w_string[0] == ';' || (p = strchr(curr->w_string, ';')) == 0)
+ 	break;
+       typ = atoi(curr->w_string);
+       p++;
+@@ -2803,15 +2803,15 @@ int ys, ye;
+   debug2("MFindUsedLine: %d %d\n", ye, ys);
+   for (y = ye; y >= ys; y--, ml--)
+     {
+-      if (bcmp((char*)ml->image, blank, p->w_width))
++      if (memcmp((char*)ml->image, blank, p->w_width))
+ 	break;
+-      if (ml->attr != null && bcmp((char*)ml->attr, null, p->w_width))
++      if (ml->attr != null && memcmp((char*)ml->attr, null, p->w_width))
+ 	break;
+ #ifdef COLOR
+-      if (ml->color != null && bcmp((char*)ml->color, null, p->w_width))
++      if (ml->color != null && memcmp((char*)ml->color, null, p->w_width))
+ 	break;
+ # ifdef COLORS256
+-      if (ml->colorx != null && bcmp((char*)ml->colorx, null, p->w_width))
++      if (ml->colorx != null && memcmp((char*)ml->colorx, null, p->w_width))
+ 	break;
+ # endif
+ #endif

@@ -1,0 +1,10 @@
+# on embedded devices with MTD you can _only_ export usb disks or sticks
+# for nfsv3
+#/mnt/usb	*(ro,no_root_squash,insecure,no_subtree_check)
+# for nfsv4, do mount --bind /srv/music /nfs4/music and
+# set nfs_server_version 4 in /etc/rc.conf
+#/nfs4		hostname(rw,sync,fsid=0,crossmnt,no_subtree_check)
+#/nfs4/music    hostname(rw,sync,no_subtree_check)
+# with kerberos based authentication, add krb5i for integrity and krb5p for privacy
+#/nfs4/music    gss/krb5(rw,sync,no_subtree_check)
+

@@ -1,0 +1,25 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${mrd6:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/mrd6 -f /etc/mrd6.conf -D
+	;;
+stop)
+	killall mrd6
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

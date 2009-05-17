@@ -1,0 +1,31 @@
+$Id$
+--- davfs2-1.3.3.orig/src/kernel_interface.c	2008-04-05 20:43:04.000000000 +0200
++++ davfs2-1.3.3/src/kernel_interface.c	2008-12-08 00:09:01.000000000 +0100
+@@ -23,7 +23,6 @@
+ 
+ #include "config.h"
+ 
+-#include <argz.h>
+ #include <errno.h>
+ #include <error.h>
+ #include <fcntl.h>
+@@ -173,7 +172,8 @@ static int init_coda(int *dev, dav_run_m
+     }
+ 
+     if (*dev <= 0) {
+-        system("/sbin/modprobe coda &>/dev/null");
++        system("/sbin/insmod coda");
++	sleep(1);
+         minor = 0;
+         while (*dev <= 0 && minor < MAX_CODADEVS) {
+             char *path;
+@@ -240,7 +240,8 @@ static int init_fuse(int *dev, dav_run_m
+ 
+     *dev = open(path, O_RDWR | O_NONBLOCK);
+     if (*dev <= 0) {
+-        system("/sbin/modprobe fuse &>/dev/null");
++        system("/sbin/insmod fuse");
++	sleep(1);
+         *dev = open(path, O_RDWR | O_NONBLOCK);
+     }
+     if (*dev <= 0) {

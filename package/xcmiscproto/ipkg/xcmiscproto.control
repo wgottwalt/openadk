@@ -1,0 +1,4 @@
+Package: xcmiscproto
+Priority: optional
+Section: x11
+Description: Xproto headers

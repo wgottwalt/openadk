@@ -1,0 +1,8 @@
+config ADK_PACKAGE_OBEXFTP
+	prompt "obexftp........................... obexftp applications"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBICONV
+	select ADK_PACKAGE_OPENOBEX
+	help
+	  http://openobex.triq.net/

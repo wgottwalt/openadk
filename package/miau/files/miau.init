@@ -1,0 +1,28 @@
+#!/bin/sh
+#FWINIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${miau:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/run ] || mkdir -p /var/run
+	[ -d /var/log/miau ] || mkdir -p /var/log/miau
+	/usr/bin/miau -f -d /etc/miau > /var/log/miau/miau.log 2> /var/log/miau/error.log &
+	;;
+stop)
+	[ -f /var/run/miau.pid ] && kill $(cat /var/run/miau.pid) >/dev/null 2>&1 && rm /var/run/miau.pid
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

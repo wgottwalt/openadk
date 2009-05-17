@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rtorrent-0.8.2.orig/configure.ac	2008-05-07 14:19:12.000000000 +0200
++++ rtorrent-0.8.2/configure.ac	2008-12-14 22:11:22.000000000 +0100
+@@ -15,7 +15,6 @@ TORRENT_DISABLE_IPV6
+ 
+ AC_SYS_LARGEFILE
+ 
+-TORRENT_CHECK_EXECINFO()
+ TORRENT_OTFD()
+ 
+ TORRENT_ENABLE_ARCH

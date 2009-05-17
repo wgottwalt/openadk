@@ -1,0 +1,212 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+#-
+# Comments:
+# * pre/do/post-foo are always defined here, but empty. This is so
+#   that we can call it (BSD make has .if target(foo) but GNU not)
+#   and it won't error out.
+# * ${_foo_COOKIE} are the actual targets
+# * default is "manual" -> define a do-foo: target in the Makefile
+# * if you have a style -> define a pre-foo: and post-foo: if they
+#   are required, but the do-foo: magic is done here
+# * we want to use styles (configure:gnu, build/install:auto), for
+#   making the Makefiles of the packages more clear
+
+#--- configure
+pre-configure:
+do-configure:
+post-configure:
+${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+	mkdir -p ${WRKBUILD}
+	@${MAKE} pre-configure $(MAKE_TRACE)
+
+ifneq ($(filter autotool,${CONFIGURE_STYLE}),)
+	cd ${WRKBUILD}; \
+	    autoreconf -vif $(MAKE_TRACE)
+endif
+ifneq ($(filter autoconf,${CONFIGURE_STYLE}),)
+	cd ${WRKBUILD}; \
+	    autoconf $(MAKE_TRACE)
+endif
+ifneq ($(filter gnu,${CONFIGURE_STYLE}),)
+	@$(CMD_TRACE) "configuring... "
+	@cd ${WRKBUILD}; \
+	    for i in $$(find . -name config.sub);do \
+		if [ -f $$i ]; then \
+			${CP} $$i $$i.bak; \
+			${CP} ${SCRIPT_DIR}/config.sub $$i; \
+		fi; \
+	    done; \
+	    for i in $$(find . -name config.guess);do \
+		if [ -f $$i ]; then \
+			${CP} $$i $$i.bak; \
+			${CP} ${SCRIPT_DIR}/config.guess $$i; \
+		fi; \
+	    done;
+	cd ${WRKBUILD}; rm -f config.{cache,status}; \
+	    env ${CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/configure \
+	    --build=${GNU_HOST_NAME} \
+	    --host=${GNU_TARGET_NAME} \
+	    --target=${GNU_TARGET_NAME} \
+	    --program-prefix= \
+	    --program-suffix= \
+	    --prefix=/usr \
+	    --datadir=/usr/share \
+	    --mandir=/usr/share/man \
+	    --libexecdir=/usr/sbin \
+	    --localstatedir=/var \
+	    --sysconfdir=/etc \
+	    --disable-nls \
+	    --enable-shared \
+	    --enable-static \
+	    --disable-dependency-tracking \
+	    --disable-libtool-lock \
+	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
+else ifeq ($(filter-out manual,${CONFIGURE_STYLE}),)
+	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
+else
+	@echo "Invalid CONFIGURE_STYLE '${CONFIGURE_STYLE}'" >&2
+	@exit 1
+endif
+	@${MAKE} post-configure $(MAKE_TRACE)
+	touch $@
+
+#--- build
+pre-build:
+do-build:
+post-build:
+${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
+	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
+	@$(CMD_TRACE) "compiling... "
+ifneq ($(filter auto,${BUILD_STYLE}),)
+	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    ${MAKEJOBS} ${MAKE_FLAGS} ${ALL_TARGET} $(MAKE_TRACE)
+else ifneq ($(filter manual,${BUILD_STYLE}),)
+	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
+else ifeq ($(strip ${BUILD_STYLE}),)
+	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
+else
+	@echo "Invalid BUILD_STYLE '${BUILD_STYLE}'" >&2
+	@exit 1
+endif
+	@env ${MAKE_ENV} ${MAKE} post-build $(MAKE_TRACE)
+	touch $@
+
+#--- fake
+pre-install:
+do-install:
+post-install:
+${_FAKE_COOKIE}: ${_BUILD_COOKIE}
+	-rm -f ${_ALL_CONTROLS}
+	@mkdir -p '${STAGING_PARENT}/pkg' ${WRKINST} '${STAGING_DIR}/scripts'
+	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
+	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
+ifneq ($(filter auto,${INSTALL_STYLE}),)
+	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    DESTDIR='${WRKINST}' ${FAKE_FLAGS} ${INSTALL_TARGET} $(MAKE_TRACE)
+else ifneq ($(filter manual,${INSTALL_STYLE}),)
+	env ${MAKE_ENV} ${MAKE} do-install $(MAKE_TRACE)
+else ifeq ($(strip ${INSTALL_STYLE}),)
+	env ${MAKE_ENV} ${MAKE} do-install $(MAKE_TRACE)
+else
+	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
+	@exit 1
+endif
+ifneq ($(filter confprog,${INSTALL_STYLE}),)
+	for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
+		[[ -e $$a ]] || continue; \
+		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
+	done
+endif
+	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
+	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+		cd '${STAGING_DIR}'; \
+		while read fn; do \
+			rm -f "$$fn"; \
+		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+	fi
+	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
+	@cd ${WRKINST}; \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
+	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
+		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
+	    find usr ! -type d 2>/dev/null | \
+	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
+	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
+	    cpio -apdlmu --quiet '${STAGING_DIR}'
+	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
+	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
+		chmod u+w $$fn; \
+		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
+	done; grep 'usr/s*bin/' '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
+	    while read fn; do \
+		b="$$(dd if="$$fn" bs=2 count=1 2>/dev/null)"; \
+		[[ $$b = '#!' ]] || continue; \
+		cp "$$fn" scripts/; \
+		echo "scripts/$$(basename "$$fn")" \
+		    >>'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+	done
+	touch $@
+
+#--- package
+${_IPKGS_COOKIE}:
+	@clean=0; \
+	for f in ${ALL_IPKGS}; do \
+		[[ -e $$f ]] && clean=1; \
+	done; \
+	[[ $$clean = 0 ]] || ${MAKE} clean
+	exec ${MAKE} package
+
+package: ${ALL_IPKGS}
+	@cd ${WRKDIR}/fake-${ARCH} || exit 1; \
+	y=; sp=; for x in ${ALL_IDIRS}; do \
+		y="$$y$$sp$${x#$(WRKDIR)/fake-${ARCH}/}"; \
+		sp=' '; \
+	done; ls=; ln=; x=1; [[ -z $$y ]] || \
+	    md5sum $$(find $$y -type f) | sed -e "s/*//" | \
+	    while read sum name; do \
+		inode=$$(ls -i "$$name"); \
+		echo "$$sum $${inode%% *} $$name"; \
+	    done | sort | while read sum inode name; do \
+		if [[ $$sum = $$ls ]]; then \
+			[[ $$li = $$inode ]] && continue; \
+			case $$x in \
+			1)	echo 'WARNING: duplicate files found in' \
+				    'package "${PKG_NAME}"! Fix them.' >&2; \
+				echo -n "> $$ln "; \
+				;; \
+			2)	echo -n "> $$ln "; \
+				;; \
+			3)	echo -n ' '; \
+				;; \
+			esac; \
+			echo -n "$$name"; \
+			x=3; \
+		else \
+			case $$x in \
+			3)	echo; \
+				x=2; \
+				;; \
+			esac; \
+		fi; \
+		ls=$$sum; \
+		ln=$$name; \
+		li=$$inode; \
+	done
+	touch ${_IPKGS_COOKIE}
+
+#--- clean
+clean-targets: clean-dev-generic
+
+clean-dev-generic:
+	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+		cd '${STAGING_DIR}'; \
+		while read fn; do \
+			rm -f "$$fn"; \
+		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+	fi
+	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'

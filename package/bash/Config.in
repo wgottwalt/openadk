@@ -1,0 +1,8 @@
+config ADK_PACKAGE_BASH
+	prompt "bash.............................. GNU Bourne-Again SHell"
+	tristate
+	default n
+	help
+	  GNU Bourne-Again SHell
+	  
+	  http://www.gnu.org/software/bash/

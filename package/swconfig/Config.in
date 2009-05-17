@@ -1,0 +1,8 @@
+config ADK_PACKAGE_SWCONFIG
+	prompt "swconfig........................... Switch configuration utility"
+	tristate
+	depends on ADK_LINUX_MIPS_RB433
+	select ADK_PACKAGE_LIBNL
+	default y
+	help
+	  Switch configuration utility (Adopted from OpenWrt).

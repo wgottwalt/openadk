@@ -1,0 +1,17 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openssl-0.9.8j.orig/util/shlib_wrap.sh	2007-08-27 10:52:57.000000000 +0200
++++ openssl-0.9.8j/util/shlib_wrap.sh	2009-01-08 14:11:14.967293819 +0100
+@@ -57,11 +57,10 @@ SunOS|IRIX*)
+ 	eval $rld_var=\"${THERE}'${'$rld_var':+:$'$rld_var'}'\"; export $rld_var
+ 	unset rld_var
+ 	;;
+-*)	LD_LIBRARY_PATH="${THERE}:$LD_LIBRARY_PATH"	# Linux, ELF HP-UX
+-	DYLD_LIBRARY_PATH="${THERE}:$DYLD_LIBRARY_PATH"	# MacOS X
++*)	DYLD_LIBRARY_PATH="${THERE}:$DYLD_LIBRARY_PATH"	# MacOS X
+ 	SHLIB_PATH="${THERE}:$SHLIB_PATH"		# legacy HP-UX
+ 	LIBPATH="${THERE}:$LIBPATH"			# AIX, OS/2
+-	export LD_LIBRARY_PATH DYLD_LIBRARY_PATH SHLIB_PATH LIBPATH
++	export DYLD_LIBRARY_PATH SHLIB_PATH LIBPATH
+ 	# Even though $PATH is adjusted [for Windows sake], it doesn't
+ 	# necessarily does the trick. Trouble is that with introduction
+ 	# of SafeDllSearchMode in XP/2003 it's more appropriate to copy

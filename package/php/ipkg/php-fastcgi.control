@@ -1,0 +1,6 @@
+Package: php-fastcgi
+Priority: optional
+Section: net
+Provides: php
+Depends: libopenssl, zlib
+Description: PHP5 compiled for FastCGI (for use with libhttpd-fastcgi)

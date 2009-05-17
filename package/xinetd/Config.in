@@ -1,0 +1,9 @@
+config ADK_PACKAGE_XINETD
+	prompt "xinetd............................ Powerful and secure superserver"
+	tristate
+	default n
+	help
+	  A powerful and secure superserver
+	  
+	  http://www.xinetd.org/
+

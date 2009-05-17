@@ -1,0 +1,15 @@
+config ADK_PACKAGE_BUSYBOX
+	prompt "busybox.............................. The Swiss Army Knife"
+	bool
+	default y
+	help
+	  The Swiss Army Knife of embedded Linux.  It slices, it dices, it
+	  makes Julian Fries.
+	  
+	  http://busybox.net/
+	  
+	  Most people will answer Y.
+
+menu "Busybox Configuration"
+source "package/busybox/config/Config.in"
+endmenu

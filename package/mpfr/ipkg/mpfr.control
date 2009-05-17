@@ -1,0 +1,4 @@
+Package: mpfr
+Priority: optional
+Section: comp
+Description: multiprecision floatingpoint library

@@ -1,0 +1,5 @@
+Package: opensips-mod-xlog
+Depends: opensips
+Section: net
+Priority: optional
+Description: Xlog targets support for OpenSIPS

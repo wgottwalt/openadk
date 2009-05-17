@@ -1,0 +1,24 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- gpsd-2.37.orig/gpsd.h	2008-02-17 18:47:00.000000000 +0100
++++ gpsd-2.37/gpsd.h	2008-10-09 14:08:46.000000000 +0200
+@@ -22,16 +22,16 @@
+ /* #undef DBUS_ENABLE */
+ #define EARTHMATE_ENABLE 1
+ #define EVERMORE_ENABLE 1
+-/* #undef FV18_ENABLE */
++#define FV18_ENABLE 1
+ /* #undef GARMINTXT_ENABLE */
+ #define GARMIN_ENABLE 1
+ #define GPSCLOCK_ENABLE 1
+ #define ITRAX_ENABLE 1
+ #define NAVCOM_ENABLE 1
+ #define NMEA_ENABLE 1
+-/* #undef NTPSHM_ENABLE */
+-/* #undef NTRIP_ENABLE */
+-/* #undef PPS_ENABLE */
++#define NTPSHM_ENABLE 1
++#define NTRIP_ENABLE 1
++#define PPS_ENABLE 1
+ #define RTCM104_ENABLE 1
+ #define SIRF_ENABLE 1
+ /* #undef SQUELCH_ENABLE */

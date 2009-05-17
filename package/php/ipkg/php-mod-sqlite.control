@@ -1,0 +1,5 @@
+Package: php-mod-sqlite
+Priority: optional
+Section: net
+Depends: php, libsqlite
+Description: SQLite module for PHP5

@@ -1,0 +1,14 @@
+$Id$
+--- htpdate-0.9.0.orig/Makefile	Sun Dec 11 22:34:35 2005
++++ htpdate-0.9.0/Makefile	Tue Jan 16 23:47:33 2007
+@@ -2,8 +2,8 @@ prefix = /usr
+ bindir = ${prefix}/bin
+ mandir = ${prefix}/share/man
+ 
+-CC = gcc
+-CFLAGS += -Wall -ansi -Os -DDEBUG
++CC ?= gcc
++CFLAGS ?= -Wall -ansi -Os -DDEBUG
+ 
+ INSTALL = /usr/bin/install -c
+ STRIP = /usr/bin/strip -s

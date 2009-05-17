@@ -1,0 +1,11 @@
+config ADK_PACKAGE_UDEV
+	prompt "udev.............................. Dynamic device management subsystem"
+	tristate
+	default n
+	select ADK_COMPILE_UTIL_LINUX
+	help
+	  udev provides a dynamic device directory containing only the files for 
+	  actually present devices. It creates or removes device node files in 
+	  the /dev directory, or it renames network interfaces.
+	  
+	  http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html

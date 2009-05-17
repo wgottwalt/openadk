@@ -1,0 +1,27 @@
+#!/bin/sh
+#FWINIT 41
+. /etc/rc.conf
+case $1 in
+autostart)
+	test x"$inetd" = x"NO" && exit 0
+	test -e /etc/inetd.conf || exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/inetd
+	;;
+autostop)
+	;;
+stop)
+	killall inetd
+	;;
+restart)
+	sh $0 stop
+	exec sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

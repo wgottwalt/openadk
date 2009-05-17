@@ -1,0 +1,13 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- asterisk-1.4.24.1.orig/menuselect-tree	2009-04-02 19:44:31.000000000 +0200
++++ asterisk-1.4.24.1/menuselect-tree	2009-05-12 16:07:12.000000000 +0200
+@@ -59,9 +59,6 @@
+ <member name="app_flash" displayname="Flash channel application" remove_on_change="apps/app_flash.o apps/app_flash.so">
+ 	<depend>dahdi</depend>
+ </member>
+-<member name="app_followme" displayname="Find-Me/Follow-Me Application" remove_on_change="apps/app_followme.o apps/app_followme.so">
+-        <depend>chan_local</depend>
+-</member>
+ <member name="app_forkcdr" displayname="Fork The CDR into 2 separate entities" remove_on_change="apps/app_forkcdr.o apps/app_forkcdr.so">
+ </member>
+ <member name="app_getcpeid" displayname="Get ADSI CPE ID" remove_on_change="apps/app_getcpeid.o apps/app_getcpeid.so">

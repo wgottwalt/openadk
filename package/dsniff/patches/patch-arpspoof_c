@@ -1,0 +1,12 @@
+$Id$
+--- dsniff-2.4.orig/arpspoof.c	2001-03-15 09:32:58.000000000 +0100
++++ dsniff-2.4/arpspoof.c	2007-01-23 00:20:48.000000000 +0100
+@@ -113,7 +113,7 @@ arp_find(in_addr_t ip, struct ether_addr
+ 	int i = 0;
+ 
+ 	do {
+-		if (arp_cache_lookup(ip, mac) == 0)
++		if (arp_cache_lookup(ip, mac, intf) == 0)
+ 			return (1);
+ #ifdef __linux__
+ 		/* XXX - force the kernel to arp. feh. */

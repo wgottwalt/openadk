@@ -1,0 +1,29 @@
+$Id$
+--- gd-2.0.34.orig/Makefile.in	2007-02-03 02:41:46.000000000 +0100
++++ gd-2.0.34/Makefile.in	2007-02-20 20:56:27.000000000 +0100
+@@ -78,7 +78,7 @@ am_libgd_la_OBJECTS = gd.lo gdfx.lo gd_s
+ 	gd_io.lo gd_io_dp.lo gd_gif_in.lo gd_gif_out.lo gd_io_file.lo \
+ 	gd_io_ss.lo gd_jpeg.lo gd_png.lo gd_ss.lo gd_topal.lo \
+ 	gd_wbmp.lo gdcache.lo gdfontg.lo gdfontl.lo gdfontmb.lo \
+-	gdfonts.lo gdfontt.lo gdft.lo gdhelpers.lo gdkanji.lo \
++	gdfonts.lo gdfontt.lo gdft.lo gdhelpers.lo \
+ 	gdtables.lo gdxpm.lo wbmp.lo
+ libgd_la_OBJECTS = $(am_libgd_la_OBJECTS)
+ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
+@@ -344,7 +344,7 @@ bin_SCRIPTS = bdftogd config/gdlib-confi
+ EXTRA_DIST = README-JPEG.TXT README.TXT configure.pl bdftogd demoin.png err.out index.html install-item makefile.sample readme.jpn entities.html entities.tcl
+ include_HEADERS = gd.h gdfx.h gd_io.h gdcache.h gdfontg.h gdfontl.h gdfontmb.h gdfonts.h gdfontt.h entities.h
+ lib_LTLIBRARIES = libgd.la
+-libgd_la_SOURCES = gd.c gdfx.c gd_security.c gd_gd.c gd_gd2.c gd_io.c gd_io_dp.c gd_gif_in.c gd_gif_out.c gd_io_file.c gd_io_ss.c gd_jpeg.c gd_png.c gd_ss.c gd_topal.c gd_wbmp.c gdcache.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c gdft.c gdhelpers.c gdhelpers.h gdkanji.c gdtables.c gdxpm.c jisx0208.h wbmp.c wbmp.h
++libgd_la_SOURCES = gd.c gdfx.c gd_security.c gd_gd.c gd_gd2.c gd_io.c gd_io_dp.c gd_gif_in.c gd_gif_out.c gd_io_file.c gd_io_ss.c gd_jpeg.c gd_png.c gd_ss.c gd_topal.c gd_wbmp.c gdcache.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c gdft.c gdhelpers.c gdhelpers.h gdtables.c gdxpm.c jisx0208.h wbmp.c wbmp.h
+ libgd_la_LDFLAGS = -version-info 2:0:0 $(XTRA_LDFLAGS)
+ libgd_la_LIBADD = $(LTLIBICONV)
+ LDADD = ./libgd.la $(LIBICONV)
+@@ -594,7 +594,6 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdft.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdfx.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdhelpers.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdkanji.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdparttopng.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdtables.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdtest.Po@am__quote@

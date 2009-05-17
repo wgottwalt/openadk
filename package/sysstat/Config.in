@@ -1,0 +1,11 @@
+config ADK_PACKAGE_SYSSTAT
+	prompt "sysstat........................... System monitoring and performance analysis utilities"
+	tristate
+	default n
+	help
+	  The sysstat package contains utilities to monitor system performance and 
+	  usage activity. Sysstat contains various utilities, common to many commercial 
+	  Unixes, and tools you can schedule via cron to collect and historize 
+	  performance and activity data. 
+
+	  http://perso.wanadoo.fr/sebastien.godard/

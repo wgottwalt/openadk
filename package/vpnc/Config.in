@@ -1,0 +1,9 @@
+config ADK_PACKAGE_VPNC
+	prompt "vpnc.............................. VPN client for Cisco 3000"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_TUN
+	select ADK_PACKAGE_LIBGPG_ERROR
+	select ADK_PACKAGE_LIBGCRYPT
+	help
+		Client for cisco3000 VPN Concentrator.

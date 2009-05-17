@@ -1,0 +1,50 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- iptraf-3.0.0.orig/src/packet.c	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.0/src/packet.c	2008-10-09 17:34:11.000000000 +0200
+@@ -35,7 +35,6 @@ details.
+ #include <sys/ioctl.h>
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+-#include <linux/if_fddi.h>
+ #include <linux/if_tr.h>
+ #include <linux/isdn.h>
+ #include <linux/sockios.h>
+@@ -81,8 +80,6 @@ unsigned short getlinktype(unsigned shor
+             result = LINK_ETHERNET;
+         else if (strncmp(ifname, "plip", 4) == 0)
+             result = LINK_PLIP;
+-        else if (strncmp(ifname, "fddi", 4) == 0)       /* For some Ethernet- */
+-            result = LINK_ETHERNET;     /* emulated FDDI ifaces */
+         else if (strncmp(ifname, "dvb", 3) == 0)
+             result = LINK_ETHERNET;
+         else if (strncmp(ifname, "sbni", 4) == 0)
+@@ -136,9 +133,6 @@ unsigned short getlinktype(unsigned shor
+     case ARPHRD_PPP:
+         result = LINK_PPP;
+         break;
+-    case ARPHRD_FDDI:
+-        result = LINK_FDDI;
+-        break;
+     case ARPHRD_IEEE802:
+     case ARPHRD_IEEE802_TR:
+         result = LINK_TR;
+@@ -194,19 +188,6 @@ void adjustpacket(char *tpacket, unsigne
+         *packet = tpacket + 4;
+         *readlen -= 4;
+         break;
+-    case LINK_FDDI:
+-        *packet = tpacket + sizeof(struct fddihdr);
+-        *readlen -= sizeof(struct fddihdr);
+-
+-        /*
+-         * Move IP data into an aligned buffer.  96 bytes should be sufficient
+-         * for IP and TCP headers with reasonable numbers of options and some
+-         * data.
+-         */
+-
+-        memmove(aligned_buf, *packet, min(SNAPSHOT_LEN, *readlen));
+-        *packet = aligned_buf;
+-        break;
+     case LINK_TR:
+         /*
+          * Token Ring patch supplied by Tomas Dvorak 

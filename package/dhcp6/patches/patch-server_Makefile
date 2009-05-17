@@ -1,0 +1,38 @@
+$Id$
+--- w-dhcp6-1.0-1.orig/server/Makefile	Fri Jun 28 14:49:42 2002
++++ w-dhcp6-1.0-1/server/Makefile	Tue Jul 25 10:37:06 2006
+@@ -1,27 +1,26 @@
+-CC = gcc
+ STD_HEADERS = stdhead.h head.h struct.h options_type.h message_type.h macros.h status_codes.h constants.h
+ OBJECT_FILES = server.o lib.o advertise.o parse.o leases.o reply.o
+ 
+ serv: $(OBJECT_FILES)
+-	$(CC) -g3 $(OBJECT_FILES) -o serv
++	$(CC) $(OBJECT_FILES) -o serv
+ 
+ lib.o: lib.c lib.h $(STD_HEADERS)
+-	$(CC) -g3 -c lib.c -o lib.o
++	$(CC) -c lib.c -o lib.o
+ 
+ parse.o: parse.c parse.h $(STD_HEADERS)
+-	$(CC) -g3 -c parse.c -o parse.o
++	$(CC) -c parse.c -o parse.o
+ 
+ leases.o: leases.c leases.h $(STD_HEADERS)
+-	$(CC) -g3 -c leases.c -o leases.o
++	$(CC) -c leases.c -o leases.o
+ 
+ advertise.o: advertise.c advertise.h $(STD_HEADERS)
+-	$(CC) -g3 -c advertise.c -o advertise.o
++	$(CC) -c advertise.c -o advertise.o
+ 
+ reply.o: reply.c reply.h $(STD_HEADERS)
+-	$(CC) -g3 -c reply.c -o reply.o
++	$(CC) -c reply.c -o reply.o
+ 
+ server.o: server.c lib.h advertise.h reply.h leases.h parse.h $(STD_HEADERS)
+-	$(CC) -g3 -c server.c -o server.o
++	$(CC) -c server.c -o server.o
+ 
+ clean: 
+ 	rm -f *.o serv

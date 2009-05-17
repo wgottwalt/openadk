@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rp-pppoe-3.10.orig/src/configure	2008-06-30 16:00:42.000000000 +0200
++++ rp-pppoe-3.10/src/configure	2008-10-30 13:04:54.000000000 +0100
+@@ -6272,7 +6272,7 @@ esac
+ { echo "$as_me:$LINENO: checking packing order of bit fields" >&5
+ echo $ECHO_N "checking packing order of bit fields... $ECHO_C" >&6; }
+ if test "$cross_compiling" = yes; then
+-  $ECHO "no defaults for cross-compiling"; exit 0
++  $ECHO "no defaults for cross-compiling"
+ else
+   cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */

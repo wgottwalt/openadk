@@ -1,0 +1,7 @@
+config ADK_PACKAGE_WATCHDOG
+	prompt "watchdog.......................... configurable watchdog"
+	tristate
+	default n
+	help
+	  watchdog
+	  

@@ -1,0 +1,29 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		ptunnel
+PKG_VERSION:=		0.61
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b45f73875f2af48f101816672f83a5fe
+MASTER_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,PTUNNEL,ptunnel,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" \
+			ac_cv_linux_vers=2 \
+			td_cv_buggygetaddrinfo="no"
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_PTUNNEL}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ptunnel ${IDIR_PTUNNEL}/usr/sbin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,31 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- exmap-console-0.4.1.orig/kernel/exmap.c	2006-10-24 20:45:11.000000000 +0200
++++ exmap-console-0.4.1/kernel/exmap.c	2008-12-14 13:34:01.000000000 +0100
+@@ -392,7 +392,11 @@ int setup_from_pid(pid_t pid)
+ 	struct task_struct *tsk;
+ 	int errcode = -EINVAL;
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,26)
++	tsk = find_task_by_vpid(pid);
++#else
+ 	tsk = find_task_by_pid(pid);
++#endif
+ 	if (tsk == NULL) {
+ 		printk (KERN_ALERT
+ 			"/proc/%s: can't find task for pid %d\n",
+@@ -507,7 +511,7 @@ int init_module ()
+ 							NULL);
+ 
+ 	if (exmap_proc_file == NULL) {
+-		remove_proc_entry (PROCFS_NAME, &proc_root);
++		remove_proc_entry (PROCFS_NAME, NULL);
+ 		printk (KERN_ALERT "/proc/%s: could not initialize\n",
+ 			PROCFS_NAME);
+ 		return -ENOMEM;
+@@ -532,5 +536,5 @@ int init_module ()
+ void cleanup_module ()
+ {
+ 	printk (KERN_INFO "/proc/%s: remove\n", PROCFS_NAME);
+-	remove_proc_entry (PROCFS_NAME, &proc_root);
++	remove_proc_entry (PROCFS_NAME, NULL);
+ }

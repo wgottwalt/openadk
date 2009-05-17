@@ -1,0 +1,21 @@
+$Id$
+--- axTLS.orig/httpd/main.c	2007-01-31 22:35:53.000000000 +0100
++++ axTLS/httpd/main.c	2007-02-10 12:15:20.000000000 +0100
+@@ -98,11 +98,12 @@ int main(int argc, char *argv[]) 
+     WSADATA wsaData;
+     WSAStartup(wVersionRequested,&wsaData);
+ #else
+-    if (getuid() == 0)  /* change our uid if we are root */
+-    {
+-        setgid(32767);
+-        setuid(32767);
+-    }
++    /* we can't bind to port 80/443 if we are nobody ?! */
++    //if (getuid() == 0)  /* change our uid if we are root */
++    //{
++    //   setgid(32767);
++    //    setuid(32767);
++    //}
+ 
+     signal(SIGQUIT, die);
+     signal(SIGPIPE, SIG_IGN);

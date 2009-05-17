@@ -1,0 +1,32 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		libvorbisidec
+PKG_VERSION:=		1.0.2
+PKG_RELEASE:=		1
+PKG_VARIANT:=		svn15687
+PKG_MD5SUM:=		cd3f62e87e38548c3e1120b1b2d3cac7
+MASTER_SITES:=		http://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec/
+DISTFILES:=		${PKG_NAME}_${PKG_VERSION}+$(PKG_VARIANT).orig.tar.gz
+WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)+$(PKG_VARIANT)
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,LIBVORBISIDEC,libvorbisidec,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE=	gnu
+BUILD_STYLE=		auto
+INSTALL_STYLE=		auto
+
+post-extract:
+	cd ${WRKBUILD}; ./autogen.sh
+
+post-install:
+	${INSTALL_DIR} ${IDIR_LIBVORBISIDEC}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libvorbisidec.so.* ${IDIR_LIBVORBISIDEC}/usr/lib/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,16 @@
+config ADK_PACKAGE_APR
+	prompt "apr............................... Apache Portable Runtime"
+	tristate
+	default n
+	help
+	  Apache Portable Runtime
+
+	  http://apr.apache.org
+
+config ADK_PACKAGE_APR_THREADING
+        prompt "  Enable threading support"
+        bool
+        default n
+        depends ADK_PACKAGE_APR
+        help
+	  Enable threading support in APR.

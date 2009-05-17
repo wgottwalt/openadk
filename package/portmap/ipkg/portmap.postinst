@@ -1,0 +1,5 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf portmap
+add_group portmap 20
+add_user portmap 20 20 /tmp/.portmap

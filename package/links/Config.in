@@ -1,0 +1,10 @@
+config ADK_PACKAGE_LINKS
+	prompt "links............................. web browser for console"
+	tristate
+	select ADK_PACKAGE_LIBJPEG
+	select ADK_PACKAGE_LIBPNG
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_GPM
+	default n
+	help
+	  http://links.twibright.com/

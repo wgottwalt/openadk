@@ -1,0 +1,4 @@
+Package: bridge-utils
+Priority: optional
+Section: net
+Description: Ethernet bridging tools

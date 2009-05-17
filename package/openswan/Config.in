@@ -1,0 +1,10 @@
+config ADK_PACKAGE_OPENSWAN
+	prompt "openswan.......................... VPN solution using IPsec"
+	tristate
+	default n
+	select ADK_PACKAGE_IP
+	select ADK_PACKAGE_LIBGMP
+	help
+	  Openswan is an implementation of IPsec for Linux.
+	  
+	  http://www.openswan.org/

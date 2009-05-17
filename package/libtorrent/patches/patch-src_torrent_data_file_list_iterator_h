@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libtorrent-0.12.2.orig/src/torrent/data/file_list_iterator.h	2008-05-07 14:19:13.000000000 +0200
++++ libtorrent-0.12.2/src/torrent/data/file_list_iterator.h	2008-12-14 21:31:54.000000000 +0100
+@@ -39,6 +39,7 @@
+ 
+ #include <torrent/common.h>
+ #include <torrent/data/file_list.h>
++#include <cstdlib>
+ 
+ namespace torrent {
+ 

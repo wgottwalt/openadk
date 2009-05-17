@@ -1,0 +1,26 @@
+#!/bin/sh
+#FWINIT 50
+. /etc/rc.conf
+
+case $1 in
+(autostop) ;;
+(autostart)
+	[[ $dns_dhcp = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/dnsmasq.conf ] || exit
+	/usr/sbin/dnsmasq
+	;;
+(stop)
+	killall dnsmasq
+	;;
+(restart)
+	sh $0 stop
+	sh $0 start
+	;;
+(*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

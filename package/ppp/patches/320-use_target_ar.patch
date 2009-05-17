@@ -1,0 +1,24 @@
+$Id$
+
+--- ppp-2.4.3/pppd/plugins/radius/Makefile.linux.orig	Sun Jun 18 23:45:43 2006
++++ ppp-2.4.3/pppd/plugins/radius/Makefile.linux	Sun Jun 18 23:46:01 2006
+@@ -55,7 +55,7 @@ radrealms.so: radrealms.o
+ CLIENTOBJS = avpair.o buildreq.o config.o dict.o ip_util.o \
+ 	clientid.o sendserver.o lock.o util.o md5.o
+ libradiusclient.a: $(CLIENTOBJS)
+-	$(AR) rv $@ $?
++	$(TARGET_AR) rcsv $@ $?
+ 
+ clean:
+ 	rm -f *.o *.so *.a
+--- ppp-2.4.3/pppd/plugins/rp-pppoe/Makefile.linux.orig	Sun Jun 18 23:45:44 2006
++++ ppp-2.4.3/pppd/plugins/rp-pppoe/Makefile.linux	Sun Jun 18 23:46:09 2006
+@@ -50,7 +50,7 @@ plugin.o: plugin.c
+ 	$(CC) '-DRP_VERSION="$(VERSION)"' $(CFLAGS) -I../../..  -c -o plugin.o -fPIC plugin.c
+ 
+ libplugin.a: discovery.o if.o common.o debug.o
+-	$(AR) -rc $@ $^
++	$(TARGET_AR) -rcs $@ $^
+ 
+ discovery.o: discovery.c
+ 	$(CC) $(CFLAGS) '-DVERSION="$(VERSION)"' -c -o discovery.o -fPIC discovery.c

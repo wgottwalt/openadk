@@ -1,0 +1,6 @@
+config ADK_PACKAGE_FBSET
+	prompt "fbset............................. framebuffer utility"
+	tristate
+	default n
+	help
+	  http://users.telenet.be/geertu/Linux/fbdev/

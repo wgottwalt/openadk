@@ -1,0 +1,5 @@
+Package: heimdal-client-libs
+Priority: optional
+Section: net
+Depends: libopenssl, libpthread
+Description: heimdal kerberos client tool libraries

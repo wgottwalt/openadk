@@ -1,0 +1,12 @@
+$Id$
+--- httping-1.2.3.orig/io.c	2007-05-01 14:05:43.000000000 +0000
++++ httping-1.2.3/io.c	2007-06-20 14:19:11.000000000 +0000
+@@ -37,7 +37,7 @@ ssize_t myread(int fd, char *whereto, si
+ 		struct timeval to;
+ 		fd_set rfds;
+ 
+-		FD_ZERO(&rfds);
++		//FD_ZERO(&rfds);
+ 		FD_SET(fd, &rfds);
+ 
+ 		to.tv_sec  = timeout / 1000;

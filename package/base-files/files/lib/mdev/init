@@ -1,0 +1,21 @@
+#!/bin/sh
+if [ "$ACTION" == "add" ];then
+        if [ "$DEVPATH" == "/bus/usb" ];then
+                mount -t usbfs usbfs /proc/bus/usb
+        fi
+fi
+if [ "$SUBSYSTEM" == "firmware" ];then
+        logger "Firmware load for $FIRMWARE requested"
+        if [ "$ACTION" == "add" ];then
+                if [ -e "/lib/firmware/$FIRMWARE" ];then
+                        logger "Firmware loading ..."
+                        echo 1 > /sys$DEVPATH/loading
+                        cat "/lib/firmware/$FIRMWARE" > /sys$DEVPATH/data
+                        echo 0 > /sys$DEVPATH/loading
+                        logger "finished."
+                else
+                        logger "Firmware file $FIRMWARE not found"
+                        echo -1 > /sys$DEVPATH/loading
+                fi
+        fi
+fi

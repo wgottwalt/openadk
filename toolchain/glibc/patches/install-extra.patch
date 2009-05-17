@@ -1,0 +1,84 @@
+diff -Nur glibc-2.7.orig/elf/Makefile glibc-2.7/elf/Makefile
+--- glibc-2.7.orig/elf/Makefile	2007-08-16 23:20:11.000000000 +0200
++++ glibc-2.7/elf/Makefile	2008-09-17 08:57:12.000000000 +0200
+@@ -116,7 +116,7 @@
+ ifeq (yes,$(build-shared))
+ extra-objs	= $(all-rtld-routines:%=%.os) soinit.os sofini.os interp.os
+ generated	+= librtld.os dl-allobjs.os ld.so ldd
+-install-others	= $(inst_slibdir)/$(rtld-installed-name)
++install-extra	= $(inst_slibdir)/$(rtld-installed-name)
+ install-bin-script = ldd
+ endif
+ 
+diff -Nur glibc-2.7.orig/iconvdata/Makefile glibc-2.7/iconvdata/Makefile
+--- glibc-2.7.orig/iconvdata/Makefile	2007-09-30 06:00:02.000000000 +0200
++++ glibc-2.7/iconvdata/Makefile	2008-09-17 08:56:57.000000000 +0200
+@@ -211,7 +211,7 @@
+ 
+ 
+ extra-objs	+= $(modules.so)
+-install-others	= $(addprefix $(inst_gconvdir)/, $(modules.so))	\
++install-extra	= $(addprefix $(inst_gconvdir)/, $(modules.so))	\
+ 		  $(inst_gconvdir)/gconv-modules
+ 
+ # We can build the conversion tables for numerous charsets automatically.
+diff -Nur glibc-2.7.orig/intl/Makefile glibc-2.7/intl/Makefile
+--- glibc-2.7.orig/intl/Makefile	2005-05-04 19:53:42.000000000 +0200
++++ glibc-2.7/intl/Makefile	2008-09-17 08:55:58.000000000 +0200
+@@ -45,7 +45,7 @@
+ 
+ before-compile = $(objpfx)msgs.h
+ 
+-install-others = $(inst_msgcatdir)/locale.alias
++install-extra = $(inst_msgcatdir)/locale.alias
+ 
+ generated = msgs.h mtrace-tst-gettext tst-gettext.mtrace
+ generated-dirs := domaindir localedir
+diff -Nur glibc-2.7.orig/localedata/Makefile glibc-2.7/localedata/Makefile
+--- glibc-2.7.orig/localedata/Makefile	2007-10-02 19:19:40.000000000 +0200
++++ glibc-2.7/localedata/Makefile	2008-09-17 08:55:35.000000000 +0200
+@@ -102,7 +102,7 @@
+ endif
+ 
+ # Files to install.
+-install-others := $(addprefix $(inst_i18ndir)/, \
++install-extra := $(addprefix $(inst_i18ndir)/, \
+ 			      $(addsuffix .gz, $(charmaps)) \
+ 			      $(locales))
+ 
+diff -Nur glibc-2.7.orig/po/Makefile glibc-2.7/po/Makefile
+--- glibc-2.7.orig/po/Makefile	2007-05-29 20:08:41.000000000 +0200
++++ glibc-2.7/po/Makefile	2008-09-17 08:55:15.000000000 +0200
+@@ -46,7 +46,7 @@
+ mo-installed = $(inst_msgcatdir)/%/LC_MESSAGES/$(domainname).mo
+ 
+ # Files to install: a $(domainname).mo file for each language.
+-install-others = $(LINGUAS:%=$(mo-installed))
++install-extra = $(LINGUAS:%=$(mo-installed))
+ 
+ # Files to distribute: all the source and compiled binary translation files.
+ distribute = $(ALL_LINGUAS:=.po) $(BROKEN_LINGUAS:=.po) $(ALL_LINGUAS:=.mo) \
+diff -Nur glibc-2.7.orig/sunrpc/Makefile glibc-2.7/sunrpc/Makefile
+--- glibc-2.7.orig/sunrpc/Makefile	2006-10-18 21:25:38.000000000 +0200
++++ glibc-2.7/sunrpc/Makefile	2008-09-17 08:54:26.000000000 +0200
+@@ -52,7 +52,7 @@
+ 			   svc_auth.h types.h xdr.h auth_des.h \
+ 			   des_crypt.h key_prot.h rpc_des.h) \
+ 	  $(rpcsvc:%=rpcsvc/%) rpcsvc/bootparam.h
+-install-others = $(inst_sysconfdir)/rpc
++install-extra = $(inst_sysconfdir)/rpc
+ generated = $(rpcsvc:%.x=rpcsvc/%.h) $(rpcsvc:%.x=x%.c) $(rpcsvc:%.x=x%.stmp) \
+ 	    $(rpcsvc:%.x=rpcsvc/%.stmp) rpcgen
+ generated-dirs := rpcsvc
+diff -Nur glibc-2.7.orig/timezone/Makefile glibc-2.7/timezone/Makefile
+--- glibc-2.7.orig/timezone/Makefile	2007-07-28 22:33:11.000000000 +0200
++++ glibc-2.7/timezone/Makefile	2008-09-17 08:54:43.000000000 +0200
+@@ -71,7 +71,7 @@
+ 
+ ifeq ($(cross-compiling),no)
+ # Don't try to install the zoneinfo files since we can't run zic.
+-install-others = $(addprefix $(inst_zonedir)/,$(zonenames) \
++install-extra = $(addprefix $(inst_zonedir)/,$(zonenames) \
+ 					      $(zonenames:%=posix/%) \
+ 					      $(zonenames:%=right/%)) \
+ 		 $(installed-localtime-file) $(installed-posixrules-file)

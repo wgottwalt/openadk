@@ -1,0 +1,15 @@
+config ADK_COMPILE_TCP_WRAPPERS
+	bool
+	default n
+	depends ADK_PACKAGE_LIBWRAP
+
+config ADK_PACKAGE_LIBWRAP
+	prompt "libwrap........................... Security wrapper library for TCP services"
+	tristate
+	default n
+	select ADK_COMPILE_TCP_WRAPPERS
+	help
+	  Security wrapper library for TCP services.
+	  
+	  ftp://ftp.porcupine.org/pub/security/index.html
+

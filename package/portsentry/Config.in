@@ -1,0 +1,9 @@
+config ADK_PACKAGE_PORTSENTRY
+	prompt "portsentry........................ Portscan protection utility"
+	tristate
+	default n
+	help
+	  Software for protection against port scans
+	  
+	  http://sourceforge.net/projects/sentrytools
+

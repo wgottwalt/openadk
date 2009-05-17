@@ -1,0 +1,7 @@
+config ADK_PACKAGE_GLIB2
+	prompt "glib2............................. some broken toolkit"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBPTHREAD
+	select ADK_PACKAGE_LIBICONV
+	select ADK_PACKAGE_GETTEXT

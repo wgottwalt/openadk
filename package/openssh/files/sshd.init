@@ -1,0 +1,47 @@
+#!/bin/sh
+#FWINIT 50
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $openssh = NO ]] && exit 0
+	grep dropbear_flags /etc/rc.conf >/dev/null 2>&1 || dropbear_flags=NO
+	if [[ $openssh = AUTO && $dropbear_flags != NO ]]; then
+		echo openssh not starting: set to AUTO and dropbear is enabled
+		exit 0
+	fi
+	exec sh $0 start
+	;;
+start)
+	if [[ ! -s /etc/ssh/ssh_host_rsa_key ]]; then
+		mkdir -p /etc/ssh
+		if [[ ! -x /usr/bin/ssh-keygen ]]; then
+			bothlog openssh not starting: SSH private key missing
+			exit 0
+		fi
+		echo "openssh: generating SSH private key (RSA)"
+		/usr/bin/ssh-keygen -N '' -t rsa -f /etc/ssh/ssh_host_rsa_key
+		rv=$?
+		echo openssh: key generation exited with code $rv
+		[[ $rv = 0 && -s /etc/ssh/ssh_host_rsa_key ]] || exit 1
+	fi
+	mkdir -p /var/run/sshd
+	mkdir -p /var/empty
+	/usr/sbin/sshd
+	;;
+stop)
+	if [ -e /var/run/sshd.pid ]; then
+		kill $(cat /var/run/sshd.pid)
+	fi
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

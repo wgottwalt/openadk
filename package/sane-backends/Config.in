@@ -1,0 +1,654 @@
+config ADK_PACKAGE_SANE_BACKENDS
+	prompt "sane-backends..................... Scanner Access Now Easy (backends)"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBPTHREAD
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_NET
+	prompt "sane-backend-net................ network access to SANE servers"
+	tristate
+	default n
+	depends on ADK_PACKAGE_SANE_BACKENDS
+	help
+	  Install this backend to export scanners over the network.
+
+config ADK_PACKAGE_SANE_BACKEND_ABATON
+	prompt "sane-backend-abaton............. Scanner Access Now Easy (ABATON)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_AGFAFOCUS
+	prompt "sane-backend-agfafocus.......... Scanner Access Now Easy (AGFAFOCUS)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_APPLE
+	prompt "sane-backend-apple.............. Scanner Access Now Easy (APPLE)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_ARTEC_EPLUS48U
+	prompt "sane-backend-artec-eplus48u..... Scanner Access Now Easy (ARTEC_EPLUS48U)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_ARTEC
+	prompt "sane-backend-artec.............. Scanner Access Now Easy (ARTEC)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_AS6E
+	prompt "sane-backend-as6e............... Scanner Access Now Easy (AS6E)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_AVISION
+	prompt "sane-backend-avision............ Scanner Access Now Easy (AVISION)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_BH
+	prompt "sane-backend-bh................. Scanner Access Now Easy (BH)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_CANON630U
+	prompt "sane-backend-canon630u.......... Scanner Access Now Easy (CANON630U)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_CANON
+	prompt "sane-backend-canon.............. Scanner Access Now Easy (CANON)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_COOLSCAN2
+	prompt "sane-backend-coolscan2.......... Scanner Access Now Easy (COOLSCAN2)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_COOLSCAN
+	prompt "sane-backend-coolscan........... Scanner Access Now Easy (COOLSCAN)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_DC25
+	prompt "sane-backend-dc25............... Scanner Access Now Easy (DC25)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_DMC
+	prompt "sane-backend-dmc................ Scanner Access Now Easy (DMC)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_EPSON
+	prompt "sane-backend-epson.............. Scanner Access Now Easy (EPSON)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_FUJITSU
+	prompt "sane-backend-fujitsu............ Scanner Access Now Easy (FUJITSU)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_GENESYS
+	prompt "sane-backend-genesys............ Scanner Access Now Easy (GENESYS)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_GT68XX
+	prompt "sane-backend-gt68xx............. Scanner Access Now Easy (GT68XX)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_HP3500
+	prompt "sane-backend-hp3500............. Scanner Access Now Easy (HP3500)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_HP4200
+	prompt "sane-backend-hp4200............. Scanner Access Now Easy (HP4200)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_HP5400
+	prompt "sane-backend-hp5400............. Scanner Access Now Easy (HP5400)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_HP
+	prompt "sane-backend-hp................. Scanner Access Now Easy (HP)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_IBM
+	prompt "sane-backend-ibm................ Scanner Access Now Easy (IBM)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_LEO
+	prompt "sane-backend-leo................ Scanner Access Now Easy (LEO)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_LEXMARK
+	prompt "sane-backend-lexmark............ Scanner Access Now Easy (LEXMARK)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MA1509
+	prompt "sane-backend-ma1509............. Scanner Access Now Easy (MA1509)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MATSUSHITA
+	prompt "sane-backend-matsushita......... Scanner Access Now Easy (MATSUSHITA)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MICROTEK2
+	prompt "sane-backend-microtek2.......... Scanner Access Now Easy (MICROTEK2)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MICROTEK
+	prompt "sane-backend-microtek........... Scanner Access Now Easy (MICROTEK)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MUSTEK
+	prompt "sane-backend-mustek............. Scanner Access Now Easy (MUSTEK)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MUSTEK_USB2
+	prompt "sane-backend-mustek-usb2........ Scanner Access Now Easy (MUSTEK_USB2)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_MUSTEK_USB
+	prompt "sane-backend-mustek-usb......... Scanner Access Now Easy (MUSTEK_USB)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_NEC
+	prompt "sane-backend-nec................ Scanner Access Now Easy (NEC)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_NIASH
+	prompt "sane-backend-niash.............. Scanner Access Now Easy (NIASH)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_PIE
+	prompt "sane-backend-pie................ Scanner Access Now Easy (PIE)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_PIXMA
+	prompt "sane-backend-pixma.............. Scanner Access Now Easy (PIXMA)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_PLUSTEK_PP
+	prompt "sane-backend-plustek-pp......... Scanner Access Now Easy (PLUSTEK_PP)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_PLUSTEK
+	prompt "sane-backend-plustek............ Scanner Access Now Easy (PLUSTEK)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_QCAM
+	prompt "sane-backend-qcam............... Scanner Access Now Easy (QCAM)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_RICOH
+	prompt "sane-backend-ricoh.............. Scanner Access Now Easy (RICOH)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_S9036
+	prompt "sane-backend-s9036.............. Scanner Access Now Easy (S9036)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SCEPTRE
+	prompt "sane-backend-sceptre............ Scanner Access Now Easy (SCEPTRE)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SHARP
+	prompt "sane-backend-sharp.............. Scanner Access Now Easy (SHARP)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SM3600
+	prompt "sane-backend-sm3600............. Scanner Access Now Easy (SM3600)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SM3840
+	prompt "sane-backend-sm3840............. Scanner Access Now Easy (SM3840)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SNAPSCAN
+	prompt "sane-backend-snapscan........... Scanner Access Now Easy (SNAPSCAN)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_SP15C
+	prompt "sane-backend-sp15c.............. Scanner Access Now Easy (SP15C)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_ST400
+	prompt "sane-backend-st400.............. Scanner Access Now Easy (ST400)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_STV680
+	prompt "sane-backend-stv680............. Scanner Access Now Easy (STV680)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_TAMARACK
+	prompt "sane-backend-tamarack........... Scanner Access Now Easy (TAMARACK)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_TECO1
+	prompt "sane-backend-teco1.............. Scanner Access Now Easy (TECO1)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_TECO2
+	prompt "sane-backend-teco2.............. Scanner Access Now Easy (TECO2)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_TECO3
+	prompt "sane-backend-teco3.............. Scanner Access Now Easy (TECO3)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_TEST
+	prompt "sane-backend-test............... Scanner Access Now Easy (TEST)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_U12
+	prompt "sane-backend-u12................ Scanner Access Now Easy (U12)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_UMAX1220U
+	prompt "sane-backend-umax1220u.......... Scanner Access Now Easy (UMAX1220U)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_UMAX_PP
+	prompt "sane-backend-umax-pp............ Scanner Access Now Easy (UMAX_PP)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+
+config ADK_PACKAGE_SANE_BACKEND_UMAX
+	prompt "sane-backend-umax............... Scanner Access Now Easy (UMAX)"
+	tristate
+	default n
+	depends ADK_PACKAGE_SANE_BACKENDS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  SANE (Scanner Access Now Easy) is a universal scanner interface.
+	  
+	  http://www.sane-project.org
+

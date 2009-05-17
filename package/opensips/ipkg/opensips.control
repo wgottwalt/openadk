@@ -1,0 +1,4 @@
+Package: opensips
+Section: net
+Priority: optional
+Description: OpenSIPS is a high-performance, configurable, free SIP server.

@@ -1,0 +1,12 @@
+plugin rp-pppoe.so
+ipcp-accept-remote
+ipcp-accept-local
+usepeerdns
+defaultroute
+lcp-echo-interval 10
+lcp-echo-failure 3
+persist
+maxfail 0
+
+user "user@t-online.de"
+password "secret"

@@ -1,0 +1,5 @@
+Package: syslog-ng
+Priority: optional
+Section: admin
+Depends: libol libwrap
+Description: A powerful syslog daemon

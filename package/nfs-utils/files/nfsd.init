@@ -1,0 +1,48 @@
+#!/bin/sh
+#FWINIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${portmap:-NO}" = x"NO" && exit 0
+	test x"${nfs_server:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/bin/mkdir -p /var/lib/nfs/v4recovery
+	/bin/touch /var/lib/nfs/rmtab
+	/bin/touch /var/lib/nfs/etab
+	/bin/touch /var/lib/nfs/xtab
+	/bin/touch /var/lib/nfs/sm
+	chown nfs:nfs /var/lib/nfs/sm
+	/usr/sbin/exportfs -r
+	/usr/sbin/mountd
+	/usr/sbin/nfsd
+	/usr/sbin/statd
+	if [ ${nfs_server_version} -eq 4 ];then
+		mkdir -p /var/lib/nfs/rpc_pipefs
+		mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs
+		/usr/sbin/idmapd
+		/usr/sbin/svcgssd
+	fi
+	;;
+stop)
+	killall nfsd
+	killall mountd
+	killall statd
+	if [ ${nfs_server_version} -eq 4 ];then
+		killall idmapd
+		killall svcgssd
+	fi
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

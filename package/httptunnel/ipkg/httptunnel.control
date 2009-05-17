@@ -1,0 +1,4 @@
+Package: httptunnel
+Priority: optional
+Section: net
+Description: http tunneling software

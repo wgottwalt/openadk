@@ -1,0 +1,12 @@
+$Id$
+--- privoxy-3.0.12-stable.orig/configure.in	2009-03-21 11:45:06.000000000 +0100
++++ privoxy-3.0.12-stable/configure.in	2009-04-17 17:42:04.722725574 +0200
+@@ -693,7 +693,7 @@ dnl Check for user and group validity
+ dnl =================================================================
+ 
+ 
+-if test "$EMXOS2" = yes; then
++if true test "$EMXOS2" = yes; then
+   echo "Skipping user and group validity stuff.";
+ 
+ else

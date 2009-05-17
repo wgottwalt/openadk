@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/tty.sh	2003-09-08 16:24:25.000000000 +0200
++++ screen-4.0.3/tty.sh	2008-10-08 14:13:39.000000000 +0200
+@@ -659,7 +659,7 @@ char *opt;
+ 
+   while (*opt)
+     {
+-      while (index(sep, *opt)) opt++;
++      while (strchr(sep, *opt)) opt++;
+       if (*opt >= '0' && *opt <= '9')
+         {
+ 	  if (SetBaud(m, atoi(opt), atoi(opt)))
+@@ -745,7 +745,7 @@ char *opt;
+ 	}
+       else
+         return -1;
+-      while (*opt && !index(sep, *opt)) opt++;
++      while (*opt && !strchr(sep, *opt)) opt++;
+     }
+   return 0;
+ }

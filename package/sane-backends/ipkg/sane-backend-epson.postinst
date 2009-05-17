@@ -1,0 +1,2 @@
+#/bin/sh
+echo epson >> $IPKG_INSTROOT/etc/sane.d/dll.conf

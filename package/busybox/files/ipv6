@@ -1,0 +1,71 @@
+#!/bin/sh
+	
+ipv6_up() {
+	env | grep -q IF_IPV6_ || return 0
+
+	# IPV6-FLUSH
+	if [ "$IF_IPV6_FLUSH" == "1" ] || [ "$IF_IPV6_FLUSH" == "yes" ] || [ "$IF_IPV6_FLUSH" == "YES" ]
+	then
+	        ip -6 addr flush $IFACE
+	        logger -t IPv6 "deactivated IPv6 for interface $IFACE"
+	fi
+	# IPV6-AUTOCONF
+	if [ "$IF_IPV6_AUTOCONF" == "1" ] || [ "$IF_IPV6_AUTOCONF" == "yes" ] || [ "$IF_IPV6_AUTOCONF" == "YES" ]
+	then
+	        echo 1 > /proc/sys/net/ipv6/conf/$IFACE/autoconf
+	        logger -t IPv6 "autoconf enabled for $IFACE"
+	fi
+	if [ "$IF_IPV6_AUTOCONF" == "0" ] || [ "$IF_IPV6_AUTOCONF" == "no" ] || [ "$IF_IPV6_AUTOCONF" == "NO" ]
+	then
+	        echo 0 > /proc/sys/net/ipv6/conf/$IFACE/autoconf
+	        logger -t IPv6 "autoconf disabled for $IFACE"
+	fi
+	# IPV6-ACCEPT-RA
+	if [ "$IF_IPV6_ACCEPT_RA" == "1" ] || [ "$IF_IPV6_ACCEPT_RA" == "yes" ] || [ "$IF_IPV6_ACCEPT_RA" == "YES" ]
+	then
+	
+	        echo 1 > /proc/sys/net/ipv6/conf/$IFACE/accept_ra
+	        logger -t IPv6 "accept-ra enabled for $IFACE"
+	fi
+	if [ "$IF_IPV6_ACCEPT_RA" == "0" ] || [ "$IF_IPV6_ACCEPT_RA" == "no" ] || [ "$IF_IPV6_ACCEPT_RA" == "NO" ]
+	then
+	        echo 0 > /proc/sys/net/ipv6/conf/$IFACE/accept_ra
+	        logger -t IPv6 "accept-ra disabled for $IFACE"
+	fi
+	# IPV6-ACCEPT-REDIRECTS
+	if [ "$IF_IPV6_ACCEPT_REDIRECTS" == "1" ] || [ "$IF_IPV6_ACCEPT_REDIRECTS" == "yes" ] || [ "$IF_IPV6_ACCEPT_REDIRECTS" == "YES" ]
+	then
+	
+	        echo 1 > /proc/sys/net/ipv6/conf/$IFACE/accept_redirects
+	        logger -t IPv6 "accept-redirects enabled for $IFACE"
+	fi
+	if [ "$IF_IPV6_ACCEPT_REDIRECTS" == "0" ] || [ "$IF_IPV6_ACCEPT_REDIRECTS" == "no" ] || [ "$IF_IPV6_ACCEPT_REDIRECTS" == "NO" ]
+	then
+	        echo 0 > /proc/sys/net/ipv6/conf/$IFACE/accept_redirects
+	        logger -t IPv6 "accept-redirects disabled for $IFACE"
+	fi
+	# IPV6-FORWARDING
+	if [ "$IF_IPV6_FORWARDING" == "1" ] || [ "$IF_IPV6_FORWARDING" == "yes" ] || [ "$IF_IPV6_FORWARDING" == "YES" ]
+	then
+	
+	        echo 1 > /proc/sys/net/ipv6/conf/$IFACE/forwarding
+	        logger -t IPv6 "forwarding enabled for $IFACE"
+	fi
+	if [ "$IF_IPV6_FORWARDING" == "0" ] || [ "$IF_IPV6_FORWARDING" == "no" ] || [ "$IF_IPV6_FORWARDING" == "NO" ]
+	then
+	        echo 0 > /proc/sys/net/ipv6/conf/$IFACE/forwarding
+	        logger -t IPv6 "forwarding disabled for $IFACE"
+	fi
+	# IPV6-USE-TEMPADDR
+	if [ "$IF_IPV6_USE_TEMPADDR" == "1" ] || [ "$IF_IPV6_USE_TEMPADDR" == "yes" ] || [ "$IF_IPV6_USE_TEMPADDR" == "YES" ]
+	then
+	
+	        echo 1 > /proc/sys/net/ipv6/conf/$IFACE/use_tempaddr
+	        logger -t IPv6 "use_tempaddr enabled for $IFACE"
+	fi
+	if [ "$IF_IPV6_USE_TEMPADDR" == "0" ] || [ "$IF_IPV6_USE_TEMPADDR" == "no" ] || [ "$IF_IPV6_USE_TEMPADDR" == "NO" ]
+	then
+	        echo 0 > /proc/sys/net/ipv6/conf/$IFACE/use_tempaddr
+	        logger -t IPv6 "use_tempaddr disabled for $IFACE"
+	fi
+}

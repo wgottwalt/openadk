@@ -1,0 +1,15 @@
+config ADK_COMPILE_PCRE
+	tristate
+	default n
+	depends ADK_PACKAGE_LIBPCRE
+
+config ADK_PACKAGE_LIBPCRE
+	prompt "libpcre........................... A Perl Compatible Regular Expression library"
+	tristate
+	default n
+	select ADK_COMPILE_PCRE
+	help
+	  A Perl Compatible Regular Expression library
+	  
+	  http://www.pcre.org/
+

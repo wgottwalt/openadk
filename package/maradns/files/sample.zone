@@ -1,0 +1,24 @@
+# Zone file for domain sample
+# see http://www.maradns.org/tutorial/man.csv1.html for more information
+
+# The SOA record must be first, followed by all authoritative NS
+# records for this zone.
+Ssample.|86400|sample.|hostmaster@sample.|19771108|7200|3600|604800|1800
+Nsample.|86400|ns1.sample.
+
+# Some 'IN A' records
+Asample.|86400|192.168.1.1
+Amx.%|86400|192.168.1.1
+Ans1.%|86400|192.168.1.1
+
+# An 'IN MX' record
+@sample.|86400|10|mx.sample.
+
+# An 'IN CNAME' record
+#Cwww.%|86400|sample.
+
+# An 'A' record showing the use of percent as a shortcut for the name
+# of this zone (in this case, 'sample.')
+Agateway.%|3600|192.168.1.1
+Amyhost.%|3600|192.168.1.2
+

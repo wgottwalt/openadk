@@ -1,0 +1,5 @@
+Package: opensips-mod-uri_db
+Depends: opensips
+Section: net
+Priority: optional
+Description: uri_db support for OpenSIPS

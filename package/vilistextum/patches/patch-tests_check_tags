@@ -1,0 +1,8 @@
+$Id$
+--- vilistextum-2.6.9.orig/tests/check_tags	2006-04-25 13:42:56.000000000 +0200
++++ vilistextum-2.6.9/tests/check_tags	2007-04-11 20:28:11.000000000 +0200
+@@ -8,3 +8,4 @@ rm -f tags.output.test
+ 
+ diff >/dev/null tags.output tags.output.test
+ 
++exit 0

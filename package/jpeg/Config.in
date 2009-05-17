@@ -1,0 +1,15 @@
+config ADK_COMPILE_JPEG
+	tristate
+	default n
+	depends ADK_PACKAGE_LIBJPEG
+
+config ADK_PACKAGE_LIBJPEG
+	prompt "libjpeg........................... The Independent JPEG Group's JPEG runtime library"
+	tristate
+	default n
+	select ADK_COMPILE_JPEG
+	help
+	  The Independent JPEG Group's JPEG runtime library.
+	  
+	  http://www.ijg.org/
+

@@ -1,0 +1,10 @@
+config ADK_PACKAGE_RSYNC
+	prompt "rsync............................. file transfer utility"
+	tristate
+	select ADK_PACKAGE_LIBPOPT
+	default n
+	help
+	  An utility that provides fast incremental file transfer
+	  
+	  http://rsync.samba.org
+

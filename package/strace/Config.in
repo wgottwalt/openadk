@@ -1,0 +1,11 @@
+config ADK_PACKAGE_STRACE
+	prompt "strace............................ System call tracer"
+	tristate
+	default n
+	help
+	  A useful diagnostic, instructional, and debugging tool.
+	  Allows you to track what system calls a program makes 
+	  while it is running.
+	  
+	  http://sourceforge.net/projects/strace/
+

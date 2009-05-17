@@ -1,0 +1,5 @@
+Package: axhttpd
+Priority: optional
+Section: net
+Depends: libaxtls
+Description: small embedded webserver

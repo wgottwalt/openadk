@@ -1,0 +1,4 @@
+Package: tar
+Priority: optional
+Section: archival
+Description: GNU tar

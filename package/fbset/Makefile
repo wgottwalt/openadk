@@ -1,0 +1,42 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		fbset
+PKG_VERSION:=		2.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		e547cfcbb8c1a4f2a6b8ba4acb8b7164
+
+MASTER_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,FBSET,fbset,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
+do-build:
+	(cd ${WRKSRC} && bison -d modes.y)
+	(cd ${WRKSRC} && flex modes.l)
+	${TARGET_CC} ${TARGET_CFLAGS} -I${WRKBUILD} -c -o \
+		${WRKBUILD}/modes.tab.o ${WRKSRC}/modes.tab.c
+	${TARGET_CC} ${TARGET_CFLAGS} -I${WRKBUILD} -c -o \
+		${WRKBUILD}/lex.yy.o ${WRKSRC}/lex.yy.c
+	${TARGET_CC} ${TARGET_CFLAGS} -I${WRKBUILD} -c -o \
+		${WRKBUILD}/fbset.o ${WRKSRC}/fbset.c
+	${TARGET_CC} ${TARGET_CFLAGS} -o ${WRKBUILD}/fbset \
+		${WRKBUILD}/fbset.o \
+		${WRKBUILD}/modes.tab.o \
+		${WRKBUILD}/lex.yy.o
+
+do-install:
+	${INSTALL_DIR} ${IDIR_FBSET}/usr/bin
+	${INSTALL_DIR} ${IDIR_FBSET}/etc
+	${CP} ${WRKBUILD}/fbset ${IDIR_FBSET}/usr/bin
+	${CP} ./files/fb.modes ${IDIR_FBSET}/etc
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,19 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- iproute2-2.6.26.orig/Makefile	2008-07-25 22:46:07.000000000 +0200
++++ iproute2-2.6.26/Makefile	2008-10-09 17:08:16.000000000 +0200
+@@ -21,13 +21,13 @@ ADDLIB+=ipx_ntop.o ipx_pton.o
+ 
+ CC = gcc
+ HOSTCC = gcc
+-CCOPTS = -D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall
++CCOPTS = -D_GNU_SOURCE -fwrapv -fno-ident -fwrapv -fno-ident -O2 -pipe -march=i586 -funit-at-a-time -pipe -march=i586 -funit-at-a-time -Wstrict-prototypes -Wall
+ CFLAGS = $(CCOPTS) -I../include $(DEFINES)
+ YACCFLAGS = -d -t -v
+ 
+ LDLIBS += -L../lib -lnetlink -lutil
+ 
+-SUBDIRS=lib ip tc misc netem genl
++SUBDIRS=lib ip tc genl
+ 
+ LIBNETLINK=../lib/libnetlink.a ../lib/libutil.a
+ 

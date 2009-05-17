@@ -1,0 +1,12 @@
+$Id$
+--- ipsec-tools-0.6.4.orig/src/racoon/crypto_openssl.c	2005-07-12 13:50:15.000000000 +0200
++++ ipsec-tools-0.6.4/src/racoon/crypto_openssl.c	2007-06-28 17:04:27.000000000 +0200
+@@ -81,7 +81,7 @@
+ #ifdef HAVE_OPENSSL_SHA2_H
+ #include <openssl/sha2.h>
+ #else
+-#include "crypto/sha2/sha2.h"
++#include "missing/crypto/sha2/sha2.h"
+ #endif
+ #endif
+ 

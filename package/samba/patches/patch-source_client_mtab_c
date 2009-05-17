@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- samba-3.3.3.orig/source/client/mtab.c	2009-04-01 13:48:54.000000000 +0200
++++ samba-3.3.3/source/client/mtab.c	2009-04-18 23:27:50.522604765 +0200
+@@ -32,6 +32,7 @@
+ #include <errno.h>
+ #include <stdio.h>
+ #include <sys/time.h>
++#include <sys/stat.h>
+ #include <time.h>
+ #include <fcntl.h>
+ #include <mntent.h>

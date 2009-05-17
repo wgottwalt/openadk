@@ -1,0 +1,5 @@
+Package: gpsd-clients
+Priority: optional
+Section: net
+Depends: gpsd
+Description: Command-line clients for the GPS daemon.

@@ -1,0 +1,5 @@
+Package: opensips-mod-msilo
+Depends: opensips
+Section: net
+Priority: optional
+Description: msilo support for OpenSIPS

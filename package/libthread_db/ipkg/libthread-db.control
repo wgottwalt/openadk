@@ -1,0 +1,4 @@
+Package: libthread-db
+Priority: optional
+Section: libs
+Description: POSIX threads library for gdb/gdbserver

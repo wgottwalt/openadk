@@ -1,0 +1,21 @@
+#!/bin/sh
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+busybox reboot -d 60 -f &		# just in case…
+{
+	[[ -f /proc/diag/led/power ]] && echo f >/proc/diag/led/power
+	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
+	grep '^#FWINIT ' /etc/init.d/* | \
+	    sort -rnk2 | \
+	    while read line; do
+		shebang=$(sed -n '1s/^#![	 ]*//p' ${line%%:*})
+		case $shebang in
+		*[\	\ ]*) shebang=\'$(echo X"$shebang" | sed \
+		    -e 's/^X//' -e "s/'/'\\\\''/g" \
+		    -e 's/^\([^	 ][^	 ]*\)[	 ]*$/\1/' \
+		    -e 's/^\([^	 ][^	 ]*\)[	 ][	 ]*\(..*\)$/\1 \2/' \
+		    -e 's/^\([^ ][^ ]*\) /\1'\'' '\''/')\' ;;
+		esac
+		${shebang:-/bin/sh} ${line%%:*} autostop 2>&1
+	done
+	[[ -f /proc/diag/led/power ]] && echo 0 >/proc/diag/led/power
+} | logger -s -p 6 -t ''

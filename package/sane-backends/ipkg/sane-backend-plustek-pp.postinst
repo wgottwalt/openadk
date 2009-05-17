@@ -1,0 +1,2 @@
+#/bin/sh
+echo plustek_pp >> $IPKG_INSTROOT/etc/sane.d/dll.conf

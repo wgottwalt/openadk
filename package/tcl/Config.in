@@ -1,0 +1,8 @@
+config ADK_PACKAGE_TCL
+	prompt "tcl............................... TCL"
+	tristate
+	default n
+	help
+	  The TCL scripting language.
+
+	  http://www.tcl.tk/

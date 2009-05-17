@@ -1,0 +1,35 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		hostapd
+PKG_VERSION:=		0.6.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		83630d11fa66ade9091f1b304fccd74c
+MASTER_SITES:=		http://hostap.epitest.fi/releases/
+
+WRKSRC=			${WRKDIST}/${PKG_NAME}
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,HOSTAPD,hostapd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+BUILD_STYLE=		auto
+#MAKE_FLAGS+=		OPTFLAGS="${TARGET_CFLAGS}"
+
+do-configure:
+	${CP} ./files/hostapd.config ${WRKBUILD}/.config
+
+do-install:
+	${INSTALL_DIR} ${IDIR_HOSTAPD_UTILS}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/hostapd_cli ${IDIR_HOSTAPD_UTILS}/usr/sbin/
+	${INSTALL_DIR} ${IDIR_HOSTAPD}/etc
+	${INSTALL_DIR} ${IDIR_HOSTAPD}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/hostapd ${IDIR_HOSTAPD}/usr/sbin/
+	${INSTALL_DATA} ./files/hostapd.conf ${IDIR_HOSTAPD}/etc
+
+include ${TOPDIR}/mk/pkg-bottom.mk

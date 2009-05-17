@@ -1,0 +1,53 @@
+menu "Kernel debugging"
+
+config ADK_KERNEL_DEBUG_KERNEL
+	boolean
+	default n
+
+config ADK_KERNEL_DEBUG_INFO
+	boolean
+	default n
+
+config ADK_KERNEL_KGDB
+	boolean
+	default n
+
+config ADK_KERNEL_KGDB_SERIAL_CONSOLE
+	boolean
+	default n
+
+config ADK_KERNEL_FRAME_POINTER
+	boolean
+	default n
+
+config ADK_KERNEL_MAGIC_SYSRQ
+	prompt "Magic BREAK sequence"
+	bool
+	default y
+	help
+	  Enable this to be able to use the Magic SysRq functions,
+	  probably using a serial console break.
+
+config ADK_KERNEL_DEBUG_FS
+	prompt "Debug Filesystem"
+	bool
+	default n
+	help
+	  debugfs is a virtual file system that kernel developers use to put
+	  debugging files into.  Enable this option to be able to read and
+	  write to these files.
+
+config ADK_KERNEL_DEBUG_WITH_KGDB
+	boolean
+	prompt "Enable remote kernel debugging using KGDB"
+	depends on ADK_TARGET_ROOTFS_NFSROOT || \
+		ADK_TARGET_ROOTFS_EXT2_CF || \
+		ADK_TARGET_ROOTFS_EXT2
+	default n
+	select ADK_KERNEL_DEBUG_KERNEL
+	select ADK_KERNEL_DEBUG_INFO
+	select ADK_KERNEL_KGDB
+	select ADK_KERNEL_KGDB_SERIAL_CONSOLE
+	select ADK_KERNEL_FRAME_POINTER
+
+endmenu

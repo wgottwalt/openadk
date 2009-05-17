@@ -1,0 +1,12 @@
+config ADK_COMPILE_LAME
+	boolean
+	default n
+	help
+
+config ADK_PACKAGE_LAME
+	prompt "lame.............................. MP3 encoder"
+	tristate
+	default n
+	select ADK_COMPILE_LAME
+	help
+	  http://lame.sourceforge.net

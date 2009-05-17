@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- tinc-1.0.9.orig/src/linux/device.c	2006-12-16 17:54:05.000000000 +0100
++++ tinc-1.0.9/src/linux/device.c	2009-05-11 23:55:39.000000000 +0200
+@@ -64,7 +64,7 @@ bool setup_device(void)
+ #ifdef HAVE_LINUX_IF_TUN_H
+ 		iface = netname;
+ #else
+-		iface = rindex(device, '/') ? rindex(device, '/') + 1 : device;
++		iface = strrchr(device, '/') ? strrchr(device, '/') + 1 : device;
+ #endif
+ 	device_fd = open(device, O_RDWR | O_NONBLOCK);
+ 
+@@ -104,7 +104,7 @@ bool setup_device(void)
+ 			overwrite_mac = true;
+ 		device_info = _("Linux ethertap device");
+ 		device_type = DEVICE_TYPE_ETHERTAP;
+-		iface = rindex(device, '/') ? rindex(device, '/') + 1 : device;
++		iface = strrchr(device, '/') ? strrchr(device, '/') + 1 : device;
+ 	}
+ 
+ 	logger(LOG_INFO, _("%s is a %s"), device, device_info);

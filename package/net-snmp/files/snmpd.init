@@ -1,0 +1,27 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $snmpd_flags = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/lib/snmp ] || mkdir -p /var/lib/snmp
+	snmpd $snmpd_flags
+	;;
+stop)
+	killall snmpd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

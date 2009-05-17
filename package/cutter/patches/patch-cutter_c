@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- cutter-1.03.orig/cutter.c	2005-04-30 09:01:03.000000000 +0200
++++ cutter-1.03/cutter.c	2008-10-09 11:32:40.000000000 +0200
+@@ -297,7 +297,7 @@ int send_rst(
+ 	pheader.placeholder=0;
+ 	pheader.protocol=IPPROTO_TCP;
+ 	pheader.tcp_length=htons(TCPHDR);
+-	bcopy((char *)&tpack.tcp,(char *)&pheader.tcp,TCPHDR);
++	memcpy((char *)&pheader.tcp,(char *)&tpack.tcp,TCPHDR);
+ 	tpack.tcp.check=in_cksum((unsigned short *)&pheader,TCPHDR+12);
+ 
+ 	/*
+@@ -419,7 +419,7 @@ int send_rst(
+ 			pheader.placeholder=0;
+ 			pheader.protocol=IPPROTO_TCP;
+ 			pheader.tcp_length=htons(TCPHDR);
+-			bcopy((char *)&tpack.tcp,(char *)&pheader.tcp,TCPHDR);
++			memcpy((char *)&pheader.tcp,(char *)&tpack.tcp,TCPHDR);
+ 			tpack.tcp.check=in_cksum((unsigned short *)&pheader,TCPHDR+12);
+ 
+ 			i_result = sendto(raw_sock,&tpack,PACKETSIZE,0,(void*)&hisaddr,sizeof(hisaddr));

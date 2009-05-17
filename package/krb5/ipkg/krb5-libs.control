@@ -1,0 +1,5 @@
+Package: krb5-libs
+Priority: optional
+Section: net
+Depends: libpthread
+Description: MIT kerberos libraries

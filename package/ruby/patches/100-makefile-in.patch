@@ -1,0 +1,11 @@
+--- ruby-1.8.6.orig/Makefile.in	2007-02-13 00:01:19.000000000 +0100
++++ ruby-1.8.6/Makefile.in	2007-05-21 22:12:54.000000000 +0200
+@@ -131,7 +131,7 @@ fake.rb:	Makefile
+ 		if RUBY_PLATFORM =~ /mswin|bccwin|mingw/; \
+ 		  class File; \
+ 		    remove_const :ALT_SEPARATOR; \
+-		    ALT_SEPARATOR = "\\"; \
++		    ALT_SEPARATOR = "\\\\"; \
+ 		  end; \
+ 		end; \
+ 		' > $@

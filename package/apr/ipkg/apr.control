@@ -1,0 +1,4 @@
+Package: apr
+Priority: optional
+Section: lib
+Description: Apache Portable Runtime

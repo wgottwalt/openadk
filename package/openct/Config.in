@@ -1,0 +1,8 @@
+config ADK_PACKAGE_OPENCT
+	prompt "openct............................ openct"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBLTDL
+	select ADK_PACKAGE_LIBUSB
+	help
+	 openct

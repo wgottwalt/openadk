@@ -1,0 +1,5 @@
+Package: opensips-mod-diversion
+Depends: opensips
+Section: net
+Priority: optional
+Description: diversion support for OpenSIPS

@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openswan-2.6.18.orig/programs/ikeping/ikeping.c	2008-10-06 18:52:49.000000000 +0200
++++ openswan-2.6.18/programs/ikeping/ikeping.c	2008-10-14 13:09:06.000000000 +0200
+@@ -316,7 +316,7 @@ main(int argc, char **argv)
+   natt=0;
+   listen_only=0;
+   noDNS=0;
+-  bzero(&laddr, sizeof(laddr));
++  memset(&laddr, 0, sizeof(laddr));
+ 
+   while((c = getopt_long(argc, argv, "hVnvsp:b:46E:w:", long_opts, 0))!=EOF) {
+       switch (c) {

@@ -1,0 +1,12 @@
+config ADK_PACKAGE_HDPARM
+	prompt "hdparm............................ get/set ATA drive parameters"
+	tristate
+	default n
+	help
+
+	  tune hard disk parameters for high performance
+	  Get/set hard disk parameters for Linux IDE drives.
+	  Primary use is for enabling irq-unmasking and IDE multiplemode.
+
+	  The original website:
+	  http://sourceforge.net/projects/hdparm/

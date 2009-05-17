@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/lib/krb5/Makefile.am	2008-07-28 14:04:45.000000000 +0200
++++ heimdal-1.2.1/lib/krb5/Makefile.am	2009-01-02 22:22:25.000000000 +0100
+@@ -57,6 +57,7 @@ libkrb5_la_LIBADD = \
+ 	$(LIB_com_err) \
+ 	$(LIB_hcrypto) \
+ 	$(top_builddir)/lib/asn1/libasn1.la \
++	$(top_builddir)/lib/wind/libwind.la \
+ 	$(LIBADD_roken) \
+ 	$(LIB_door_create) \
+ 	$(LIB_dlopen)

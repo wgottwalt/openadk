@@ -1,0 +1,4 @@
+Package: libpciaccess
+Priority: optional
+Section: x11
+Description: libpciaccess library

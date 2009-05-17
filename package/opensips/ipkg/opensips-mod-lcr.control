@@ -1,0 +1,5 @@
+Package: opensips-mod-lcr
+Depends: opensips
+Section: net
+Priority: optional
+Description: Least Cost Routing support for OpenSIPS

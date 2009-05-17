@@ -1,0 +1,43 @@
+config ADK_PACKAGE_NFS_UTILS
+	prompt "nfs-utils......................... NFS server utilities"
+	tristate
+	default n
+	select ADK_PACKAGE_PORTMAP
+	select ADK_KPACKAGE_KMOD_NFSD
+	select ADK_KPACKAGE_KMOD_NFS_FS
+	select ADK_PACKAGE_LIBTIRPC if ADK_IPV6
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
+	help
+	  NFS server utilities (namely, exportfs), and an NFS server.
+
+config ADK_COMPILE_NFS_UTILS_WITH_KERBEROS
+	prompt "Enable Kerberos and NFSv4"
+	bool
+	select ADK_PACKAGE_LIBEVENT
+	select ADK_PACKAGE_LIBNFSIDMAP
+	select ADK_PACKAGE_LIBRPCSECGSS
+	select ADK_PACKAGE_LIBCOM_ERR
+	select ADK_KERNEL_NFSD_V4
+	default n
+	depends on ADK_PACKAGE_NFS_UTILS
+
+choice
+prompt "Kerberos implementation"
+depends on ADK_COMPILE_NFS_UTILS_WITH_KERBEROS
+config ADK_COMPILE_NFS_UTILS_WITH_KRB5
+	prompt "MIT"
+	bool
+	select ADK_COMPILE_KRB5
+	select ADK_PACKAGE_KRB5_LIBS
+	select ADK_PACKAGE_LIBGSSGLUE
+	help
+	  use MIT kerberos libraries
+
+config ADK_COMPILE_NFS_UTILS_WITH_HEIMDAL
+	prompt "Heimdal"
+	bool
+	select ADK_PACKAGE_HEIMDAL_LIBS
+	help 
+	  Use heimdal kerberos libraries (experimental)
+
+endchoice

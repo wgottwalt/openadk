@@ -1,0 +1,25 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $mini_httpd_flags = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	mini_httpd $mini_httpd_flags
+	;;
+stop)
+	killall mini_httpd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

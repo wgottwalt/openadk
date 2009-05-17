@@ -1,0 +1,9 @@
+config ADK_PACKAGE_LIBTIRPC
+	prompt "libtirpc.......................... A transport independent RPC library"
+	tristate
+	default n
+	help
+	  A transport independent RPC library
+	  
+	  http://libtirpc.sourceforge.net/
+

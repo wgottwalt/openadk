@@ -1,0 +1,2 @@
+#/bin/sh
+echo ma1509 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

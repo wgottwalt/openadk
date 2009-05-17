@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- busybox-1.13.4.orig/networking/traceroute.c	2008-11-09 18:27:59.000000000 +0100
++++ busybox-1.13.4/networking/traceroute.c	2009-05-12 16:26:08.000000000 +0200
+@@ -273,7 +273,7 @@ typedef struct outdata {
+ 	unsigned char seq;             /* sequence number of this packet */
+ 	unsigned char ttl;             /* ttl packet left with */
+ // UNUSED. Retaining to have the same packet size.
+-	struct timeval tv_UNUSED PACKED; /* time packet left */
++	struct timeval tv_UNUSED; /* time packet left */
+ } outdata_t;
+ 
+ struct IFADDRLIST {

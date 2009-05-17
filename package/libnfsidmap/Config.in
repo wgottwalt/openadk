@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBNFSIDMAP
+	prompt "libnfsidmap....................... NFSv4 library"
+	tristate
+	default n
+	help
+

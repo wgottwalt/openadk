@@ -1,0 +1,52 @@
+
+config ADK_PACKAGE_PPP
+	prompt "ppp............................... PPP (Point-to-Point Protocol) daemon"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_PPP
+
+#config ADK_PACKAGE_PPP_MOD_PPPOA
+#	prompt "ppp-mod-pppoa................... PPPoA (PPP over ATM) plugin"
+#	tristate
+#	default n
+#	select ADK_KPACKAGE_KMOD_PPPOATM
+#	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_PPPOE
+	prompt "ppp-mod-pppoe................... PPPoE (PPP over Ethernet) plugin"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_PPPOE
+	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_RADIUS
+	prompt "ppp-mod-radius.................. RADIUS (Remote Authentication Dial-In User Service) plugin"
+	tristate
+	default n
+	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_CHAT
+	prompt "chat............................ Utility to establish conversation with other PPP servers (via a modem)"
+	tristate
+	default n
+	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_PPPDUMP
+	prompt "pppdump......................... Utility to read PPP record file"
+	tristate
+	default n
+	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_PPPSTATS
+	prompt "pppstats........................ Utility to report PPP statistics"
+	tristate
+	default n
+	depends ADK_PACKAGE_PPP
+
+config ADK_PACKAGE_PPP_MOD_PPPUMTS
+	prompt "GPRS/UMTS support............... Package with scripts and dependencies to run UMTS/GRPS"
+	tristate
+	default n
+	select ADK_PACKAGE_COMGT
+	select ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends ADK_PACKAGE_PPP

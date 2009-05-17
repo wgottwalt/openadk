@@ -1,0 +1,5 @@
+Package: collectd
+Priority: optional
+Section: console
+Description: System statistics collection daemon
+Depends: libpthread

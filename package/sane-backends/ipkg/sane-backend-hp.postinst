@@ -1,0 +1,2 @@
+#/bin/sh
+echo hp >> $IPKG_INSTROOT/etc/sane.d/dll.conf

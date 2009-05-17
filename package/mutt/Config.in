@@ -1,0 +1,11 @@
+config ADK_PACKAGE_MUTT
+	prompt "mutt.............................. console mail client"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBNCURSES
+	select ADK_PACKAGE_LIBOPENSSL
+	help
+	  Mail client for the text console
+	  
+	  http://www.mutt.org
+

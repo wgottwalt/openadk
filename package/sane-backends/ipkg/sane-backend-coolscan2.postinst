@@ -1,0 +1,2 @@
+#/bin/sh
+echo coolscan2 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

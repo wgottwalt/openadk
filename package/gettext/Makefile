@@ -1,0 +1,40 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME=		gettext
+PKG_VERSION=		0.16.1
+PKG_RELEASE=		1
+PKG_MD5SUM=		3d9ad24301c6d6b17ec30704a13fe127
+MASTER_SITES=		${MASTER_SITE_GNU:=gettext/}
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE=	gnu
+CONFIGURE_ARGS+=	--disable-java \
+			--disable-native-java \
+			--disable-csharp \
+			--enable-nls \
+			--disable-libasprintf \
+			--enable-threads=posix \
+			--disable-openmp \
+			--with-libiconv-prefix='${STAGING_DIR}/usr' \
+			--with-included-gettext \
+			--without-emacs
+CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
+			ac_cv_gnu_library_2=no \
+			gt_use_preinstalled_gnugettext=no
+BUILD_STYLE=		auto
+INSTALL_STYLE=		auto confprog
+
+post-install:
+	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/*.so.* ${IDIR_GETTEXT}/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

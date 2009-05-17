@@ -1,0 +1,9 @@
+config ADK_PACKAGE_SCSI_SPIN
+	prompt "scsi-spin......................... Utility to spin down scsi disks"
+	tristate
+	default n
+	help
+	  Utility to spin down scsi disks
+	  
+	  This program is part of debian's scsitools package
+

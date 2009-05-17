@@ -1,0 +1,27 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		frickin
+PKG_VERSION:=		1.3
+PKG_RELEASE:=		9
+PKG_MD5SUM:=		5b2e98da2310c71c703d4617b88a173f
+MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=frickin/}
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,FRICKIN,frickin,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+BUILD_STYLE=		auto
+
+do-install:
+	${INSTALL_DIR} ${IDIR_FRICKIN}/etc/init.d
+	${INSTALL_DIR} ${IDIR_FRICKIN}/usr/sbin
+	${INSTALL_BIN} ./files/frickin.init \
+		${IDIR_FRICKIN}/etc/init.d/frickin
+	${INSTALL_BIN} ${WRKBUILD}/frickin ${IDIR_FRICKIN}/usr/sbin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

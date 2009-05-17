@@ -1,0 +1,9 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf "kernel nfs server" nfs_server NO
+add_rcconf "kernel nfs server version" nfs_server_version 3
+add_service nfs 2049/tdp
+add_service nfs 2049/udp
+gid=$(get_next_gid)
+add_group nfs $gid
+add_user nfs $(get_next_uid) $gid /var/lib/nfs

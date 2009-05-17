@@ -1,0 +1,10 @@
+config ADK_PACKAGE_CUPS
+	prompt "cups.............................. Common UNIX Printing System"
+	tristate
+	select ADK_PACKAGE_ZLIB	
+	select ADK_PACKAGE_LIBPTHREAD
+	default n
+	help
+	  A printer spooling system for devices with USB or LP support
+	  
+	  http://www.cups.org/

@@ -1,0 +1,5 @@
+Package: scanlogd
+Priority: optional
+Section: net
+Description: Port scan logger.
+Depends: libpcap, libnet, libnids

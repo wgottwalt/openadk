@@ -1,0 +1,4 @@
+Package: opensc
+Priority: optional
+Section: crypto
+Description: opensc

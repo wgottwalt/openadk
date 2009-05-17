@@ -1,0 +1,40 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		mt-daapd
+PKG_VERSION:=		0.2.4
+PKG_RELEASE:=		10
+PKG_MD5SUM:=		2e1cdbe6b94ef153e915806f80a28dca
+
+MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,MT_DAAPD,mt-daapd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
+CONFIGURE_ARGS+=	--enable-mdns \
+			--disable-howl \
+			--with-id3tag="${STAGING_DIR}/usr" \
+			--with-gdbm-includes="${STAGING_DIR}/usr/include" \
+			--with-gdbm-libs="${STAGING_DIR}/usr/lib" \
+			--without-static-libs
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc/init.d
+	${INSTALL_DIR} ${IDIR_MT_DAAPD}/usr/{share,sbin}
+	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.conf ${IDIR_MT_DAAPD}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.playlist ${IDIR_MT_DAAPD}/etc/
+	${INSTALL_BIN} ./files/mt-daapd.init \
+		${IDIR_MT_DAAPD}/etc/init.d/mt-daapd
+	${CP} ${WRKINST}/usr/share/mt-daapd ${IDIR_MT_DAAPD}/usr/share/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mt-daapd ${IDIR_MT_DAAPD}/usr/sbin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+#* VPNGATEWAY                   -- vpn gateway address (always present)
+#* TUNDEV                       -- tunnel device (always present)
+#* INTERNAL_IP4_ADDRESS         -- address (always present)
+
+# define which traffic should be routed through the tunnel device
+# any traffic that is not bound to a local interface will be
+# mangled by the "main" routing table, so we add our rules to
+# the main routing table
+
+# the setup for remote traffic and already bound traffic is done by
+# the hotplug scripts.
+
+if [ "x$TUNDEV" == "x" ]; then
+        echo "No TUNDEV given. Script must be called from vpnc-script"
+        exit 1;
+fi
+case "$1" in
+        start)
+                # for each subnet that should be reached from this machine over the vpn tunnel,
+                # add a line like this:
+                # ip route add some.sub.net/msk dev $TUNDEV src $INTERNAL_IP4_ADDRESS
+        ;;
+        stop)
+                # remove the routing entries
+        ;;
+esac;
+exit 0;
+

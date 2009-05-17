@@ -1,0 +1,2 @@
+#/bin/sh
+echo umax1220u >> $IPKG_INSTROOT/etc/sane.d/dll.conf

@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBNL
+	prompt "libnl........................... Tools for manipulating Linux Wireless cards"
+	tristate
+	default n
+	help
+	  Tools for configuring Wireless Adapters.

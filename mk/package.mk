@@ -1,0 +1,212 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+all: build-all-ipkgs
+
+TCFLAGS:=		${TARGET_CFLAGS}
+TCXXFLAGS:=		${TARGET_CFLAGS}
+TCPPFLAGS:=		${TARGET_CPPFLAGS}
+ifneq ($(DEBUG),1)
+TCPPFLAGS+=		-DNDEBUG
+endif
+TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
+			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
+ifeq ($(DEBUG),1)
+CONFIGURE_ARGS+=	--enable-debug
+else
+CONFIGURE_ARGS+=	--disable-debug
+endif
+ifeq ($(ADK_IPV6),y)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
+CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
+			${HOST_CONFIGURE_OPTS} \
+			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
+			CFLAGS='$(strip ${TCFLAGS})' \
+			CXXFLAGS='$(strip ${TCXXFLAGS})' \
+			CPPFLAGS='$(strip ${TCPPFLAGS})' \
+			LDFLAGS='$(strip ${TLDFLAGS})' \
+			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_LIBDIR=/dev/null \
+			CONFIG_SHELL='$(strip ${SHELL})' \
+			ac_cv_func_realloc_0_nonnull=yes \
+			ac_cv_func_malloc_0_nonnull=yes
+MAKE_FILE?=		Makefile
+# this is environment for 'make all' and 'make install'
+MAKE_ENV?=
+# this is arguments for 'make all' and 'make install'
+XAKE_FLAGS?=
+# this is arguments for 'make all' ONLY
+MAKE_FLAGS?=
+# this is arguments for 'make install' ONLY
+FAKE_FLAGS?=
+ALL_TARGET?=		all
+INSTALL_TARGET?=	install
+MAKE_ENV+=		PATH='${TARGET_PATH}' \
+			${HOST_CONFIGURE_OPTS} \
+			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
+			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
+			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_LIBDIR=/dev/null \
+			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
+			AR='${TARGET_CROSS}ar' RANLIB='${TARGET_CROSS}ranlib' \
+			NM='${TARGET_CROSS}nm' \
+			CFLAGS='$(strip ${TCFLAGS})' \
+			CXXFLAGS='$(strip ${TCXXFLAGS})' \
+			CPPFLAGS='$(strip ${TCPPFLAGS})' \
+			LDFLAGS='$(strip ${TLDFLAGS})'
+MAKE_FLAGS+=		${XAKE_FLAGS}
+FAKE_FLAGS+=		${XAKE_FLAGS}
+
+ifeq ($(strip ${WRKDIR_BSD}),)
+WRKDIR_BASE:=		${BUILD_DIR}
+else
+WRKDIR_BASE:=		$(shell pwd)
+endif
+
+_EXTRACT_COOKIE=	${WRKDIST}/.extract_done
+_PATCH_COOKIE=		${WRKDIST}/.prepared
+_CONFIGURE_COOKIE=	${WRKBUILD}/.configure_done
+_BUILD_COOKIE=		${WRKBUILD}/.build_done
+_FAKE_COOKIE=		${WRKINST}/.fake_done
+_IPKGS_COOKIE=		${PACKAGE_DIR}/.stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
+
+_IN_PACKAGE:=		1
+include ${TOPDIR}/mk/buildhlp.mk
+-include info.mk
+
+# defined in buildhlp.mk ('extract' can fail, use 'patch' then)
+extract: ${_EXTRACT_COOKIE}
+patch: ${_PATCH_COOKIE}
+
+# defined below (will be moved to pkg-bottom.mk!)
+configure: ${_CONFIGURE_COOKIE}
+build: ${_BUILD_COOKIE}
+fake: ${_FAKE_COOKIE}
+
+# our recursive build entry point
+build-all-ipkgs: ${_IPKGS_COOKIE}
+
+define PKG_template
+IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_$(4).ipk
+IDIR_$(1)=	$(WRKDIR)/fake-${ARCH}/ipkg-$(2)
+ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
+ALL_IPKGS+=	$$(IPKG_$(1))
+ALL_IDIRS+=	$${IDIR_$(1)}
+endif
+INFO_$(1)=	$(IPKG_STATE_DIR)/info/$(2).list
+
+ifeq ($(ADK_PACKAGE_$(1)),y)
+install-targets: $$(INFO_$(1))
+endif
+
+IDEPEND_$(1):=	$$(strip $(5))
+
+_ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
+ICONTROL_$(1)?=	ipkg/$(2).control
+$$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) $(4)
+	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
+		comma=; \
+		deps=; \
+		last=; \
+		for dep in $$$$adeps; do \
+			if [[ $$$$last = kernel && $$$$dep = \(* ]]; then \
+				deps="$$$$deps $$$$dep"; \
+			else \
+				deps="$$$$deps$$$$comma$$$$dep"; \
+			fi; \
+			comma=", "; \
+			last=$$$$dep; \
+		done; \
+		echo "Depends: $$$$deps" >>$${IDIR_$(1)}/CONTROL/control; \
+	fi
+	for file in conffiles preinst postinst prerm postrm; do \
+		[ ! -f ./ipkg/$(2).$$$$file ] || cp ./ipkg/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
+	done
+ifneq ($(strip $${ICONTROL_ADDON_$(1)}),)
+	echo $${ICONTROL_ADDON_$(1)} >> $${IDIR_$(1)}/CONTROL/control
+endif
+
+$$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
+ifneq ($(DEBUG),1)
+	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+endif
+	cd $${IDIR_$(1)}; for script in etc/init.d/*; do \
+		[[ -e $$$$script ]] || continue; \
+		chmod 0755 "$$$$script"; \
+	done
+	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
+	    '$${STAGING_DIR}/scripts'
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+		cd '$${STAGING_DIR}'; \
+		while read fn; do \
+			rm -f "$$$$fn"; \
+		done <'$${STAGING_PARENT}/pkg/$(1)'; \
+	fi
+	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
+	@cd $${IDIR_$(1)}; \
+	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
+		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
+		    'ramdisk location:' >&2; \
+		echo "$$$$x" | sed 's/^/- /' >&2; \
+	    fi; \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
+	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
+		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
+	    find usr ! -type d 2>/dev/null | \
+	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
+	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
+	    cpio -apdlmu --quiet '$${STAGING_DIR}'
+	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
+		chmod u+w $$$$fn; \
+		printf '%s\nwq\n' '/^libdir='\''*/s##&${STAGING_DIR}#' | \
+		    ed -s $$$$fn; \
+	done; grep 'usr/s*bin/' '$${STAGING_PARENT}/pkg/$(1)' | \
+	    while read fn; do \
+		b="$$$$(dd if="$$$$fn" bs=2 count=1 2>/dev/null)"; \
+		[[ $$$$b = '#!' ]] || continue; \
+		cp "$$$$fn" scripts/; \
+		echo "scripts/$$$$(basename "$$$$fn")" \
+		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
+	done
+	$${IPKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+
+clean-targets: clean-dev-$(1)
+
+clean-dev-$(1):
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+		cd '$${STAGING_DIR}'; \
+		while read fn; do \
+			rm -f "$$$$fn"; \
+		done <'$${STAGING_PARENT}/pkg/$(1)'; \
+	fi
+	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
+
+$$(INFO_$(1)): $$(IPKG_$(1))
+	$(IPKG) install $$(IPKG_$(1))
+endef
+
+install-targets:
+install:
+	@$(CMD_TRACE) "installing... "
+	@$(MAKE) install-targets $(MAKE_TRACE)
+
+clean-targets:
+clean:
+	@$(CMD_TRACE) "cleaning... "
+	@$(MAKE) clean-targets $(MAKE_TRACE)
+	rm -rf ${WRKDIR} ${ALL_IPKGS} ${PACKAGE_DIR}/.stamps/${PKG_NAME}*
+
+distclean: clean
+	rm -f ${FULLDISTFILES}
+
+.PHONY:	all refetch extract patch configure \
+	build fake package install clean build-all-ipkgs

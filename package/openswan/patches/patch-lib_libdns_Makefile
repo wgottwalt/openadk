@@ -1,0 +1,10 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openswan-2.6.18.orig/lib/libdns/Makefile	2008-10-06 18:52:49.000000000 +0200
++++ openswan-2.6.18/lib/libdns/Makefile	2008-10-14 13:08:03.000000000 +0200
+@@ -102,5 +102,5 @@ code.h:	gen
+ # cross-compiled!
+ HOSTCC?=cc
+ gen: gen.c
+-	${HOSTCC} ${HOSTCINCLUDES} ${LDFLAGS} -o $@ ${srcdir}gen.c ${LIBS}
++	${HOSTCC} ${HOSTCINCLUDES} -o $@ ${srcdir}gen.c ${LIBS}
+ 

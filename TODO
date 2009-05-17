@@ -1,0 +1,9 @@
+- eglibc support
+- glibc 2.10 support
+- rescue initramfs image (more archs, generic kernel config )
+  - replace ibm x40
+  - usb boot via stick
+- kernel 2.6.29.3
+- bind isc 9.6.1
+- asterisk 1.6
+- gcc 4.4.0

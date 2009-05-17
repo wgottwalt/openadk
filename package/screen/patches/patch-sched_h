@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/sched.h	2002-01-08 16:42:43.000000000 +0100
++++ screen-4.0.3/sched.h	2008-10-08 13:33:43.000000000 +0200
+@@ -22,6 +22,11 @@
+  * $Id: sched.h,v 1.1.1.1 1993/06/16 23:51:13 jnweiger Exp $ FAU
+  */
+ 
++#ifndef __SCHED_H
++#define __SCHED_H
++
++#include <sys/time.h>
++
+ struct event
+ {
+   struct event *next;
+@@ -41,3 +46,5 @@ struct event
+ #define EV_READ		1
+ #define EV_WRITE	2
+ #define EV_ALWAYS	3
++
++#endif

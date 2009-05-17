@@ -1,0 +1,10 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libtirpc-0.1.9.orig/Makefile.am	2008-07-09 20:13:20.000000000 +0200
++++ libtirpc-0.1.9/Makefile.am	2008-12-10 01:02:50.823745058 +0100
+@@ -46,6 +46,3 @@ nobase_include_HEADERS = tirpc/un-namesp
+ pkgconfigdir=$(libdir)/pkgconfig
+ pkgconfig_DATA = libtirpc.pc
+ 
+-install-exec-local:
+-	cp -p ./doc/etc_netconfig $(DESTDIR)/etc/netconfig
+-	chmod 0644 $(DESTDIR)/etc/netconfig

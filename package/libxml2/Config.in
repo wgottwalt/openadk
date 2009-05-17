@@ -1,0 +1,11 @@
+config ADK_PACKAGE_LIBXML2
+	prompt "libxml2........................... Gnome XML library"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBPTHREAD
+	select ADK_PACKAGE_ZLIB
+	help
+	  A library for manipulating XML and HTML resources.
+	  
+	  http://xmlsoft.org/
+

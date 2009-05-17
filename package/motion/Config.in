@@ -1,0 +1,10 @@
+config ADK_PACKAGE_MOTION
+	prompt "motion............................ webcam motion sensing and logging"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBJPEG
+	select ADK_PACKAGE_LIBPTHREAD
+	help
+	  Motion is a software motion detector
+
+	  http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome

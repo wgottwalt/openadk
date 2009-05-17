@@ -1,0 +1,6 @@
+config ADK_PACKAGE_RENDERPROTO
+	prompt "renderproto............................. X protocol library"
+	tristate
+	default n
+	help
+         http://www.x.org

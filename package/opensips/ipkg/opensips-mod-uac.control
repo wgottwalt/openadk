@@ -1,0 +1,5 @@
+Package: opensips-mod-uac
+Depends: opensips
+Section: net
+Priority: optional
+Description: uac support for OpenSIPS

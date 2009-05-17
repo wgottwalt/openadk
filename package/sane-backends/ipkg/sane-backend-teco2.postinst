@@ -1,0 +1,2 @@
+#/bin/sh
+echo teco2 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

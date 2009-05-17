@@ -1,0 +1,41 @@
+menu "Input devices"
+
+config ADK_KERNEL_INPUT
+	bool
+	default n
+
+config ADK_KERNEL_INPUT_KEYBOARD
+	bool
+	default n
+
+config ADK_KERNEL_HID_SUPPORT
+	bool
+	default n
+
+config ADK_KERNEL_HID
+	tristate
+	select ADK_KERNEL_HID_SUPPORT
+	default n
+
+config ADK_KPACKAGE_KMOD_USB_HID
+	prompt "kmod-usb-hid..................... USB keyboard/mouse support"
+	tristate
+	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_HID
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
+
+config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
+	prompt "kmod-input-keyboard.............. Keyboard support (AT)"
+	tristate
+	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_INPUT_KEYBOARD
+	default n
+
+config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
+	prompt "kmod-input-mouse................. Mouse support (PS/2)"
+	select ADK_KERNEL_INPUT
+	tristate
+	default n
+
+endmenu

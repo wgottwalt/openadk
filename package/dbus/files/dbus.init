@@ -1,0 +1,27 @@
+#!/bin/sh
+#FWINIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${dbus:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	mkdir -p /var/run/dbus
+	dbus-daemon --config-file=/etc/dbus-1/system.conf
+	;;
+stop)
+	killall dbus-daemon
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

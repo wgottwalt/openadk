@@ -1,0 +1,33 @@
+#!/bin/sh
+#FWINIT 75
+. /etc/rc.conf
+
+IPT=/usr/sbin/iptables
+WAN=${reaim_flags}
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${reaim:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+        $IPT -A input_rule -i $WAN -p tcp --dport 1863:1864 -j ACCEPT
+        $IPT -A input_rule -i $WAN -p tcp --dport 4443 -j ACCEPT
+        $IPT -A input_rule -i $WAN -p tcp --dport 5566 -j ACCEPT
+        $IPT -A input_rule -i $WAN -p tcp --dport 40000:40099 -j ACCEPT
+	reaim
+	;;
+stop)
+	killall reaim
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

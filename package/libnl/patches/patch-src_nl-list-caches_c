@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libnl-1.1.orig/src/nl-list-caches.c	2008-01-14 16:48:45.000000000 +0100
++++ libnl-1.1/src/nl-list-caches.c	2009-04-16 20:16:45.349364825 +0200
+@@ -10,6 +10,7 @@
+  */
+ 
+ #include "utils.h"
++#include <netlink-local.h>
+ 
+ static void print_usage(void)
+ {

@@ -1,0 +1,4 @@
+Package: netperf
+Priority: optional
+Section: net
+Description: Program and service to do network performance measurement.

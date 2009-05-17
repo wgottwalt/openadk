@@ -1,0 +1,5 @@
+Package: libp11
+Priority: optional
+Section: crypto
+Description: libp11
+Depends: libopenssl, libltdl

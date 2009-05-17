@@ -1,0 +1,34 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- krb5-1.6.3.orig/src/include/stock/osconf.h	2006-05-26 01:37:33.000000000 +0200
++++ krb5-1.6.3/src/include/stock/osconf.h	2009-02-03 19:13:37.508177540 +0100
+@@ -60,14 +60,14 @@
+ #define	DEFAULT_LNAME_FILENAME	"@PREFIX/lib/krb5.aname"
+ #endif /* _WINDOWS  */
+ 
+-#define DEFAULT_KDB_FILE        "@LOCALSTATEDIR/krb5kdc/principal"
+-#define	DEFAULT_KEYFILE_STUB	"@LOCALSTATEDIR/krb5kdc/.k5."
+-#define KRB5_DEFAULT_ADMIN_ACL	"@LOCALSTATEDIR/krb5kdc/krb5_adm.acl"
++#define DEFAULT_KDB_FILE        "@SYSCONFDIR/krb5kdc/principal"
++#define	DEFAULT_KEYFILE_STUB	"@SYSCONFDIR/krb5kdc/.k5."
++#define KRB5_DEFAULT_ADMIN_ACL	"@SYSCONFDIR/krb5kdc/krb5_adm.acl"
+ /* Used by old admin server */
+-#define	DEFAULT_ADMIN_ACL	"@LOCALSTATEDIR/krb5kdc/kadm_old.acl"
++#define	DEFAULT_ADMIN_ACL	"@SYSCONFDIR/krb5kdc/kadm_old.acl"
+ 
+ /* Location of KDC profile */
+-#define	DEFAULT_KDC_PROFILE	"@LOCALSTATEDIR/krb5kdc/kdc.conf"
++#define	DEFAULT_KDC_PROFILE	"@SYSCONFDIR/krb5kdc/kdc.conf"
+ #define	KDC_PROFILE_ENV		"KRB5_KDC_PROFILE"
+ 
+ #if TARGET_OS_MAC
+@@ -96,8 +96,8 @@
+ /*
+  * Defaults for the KADM5 admin system.
+  */
+-#define DEFAULT_KADM5_KEYTAB	"@LOCALSTATEDIR/krb5kdc/kadm5.keytab"
+-#define DEFAULT_KADM5_ACL_FILE	"@LOCALSTATEDIR/krb5kdc/kadm5.acl"
++#define DEFAULT_KADM5_KEYTAB	"@SYSCONFDIR/krb5kdc/kadm5.keytab"
++#define DEFAULT_KADM5_ACL_FILE	"@SYSCONFDIR/krb5kdc/kadm5.acl"
+ #define DEFAULT_KADM5_PORT	749 /* assigned by IANA */
+ 
+ #define MAX_DGRAM_SIZE	4096

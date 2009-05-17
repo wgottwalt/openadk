@@ -1,0 +1,8 @@
+config ADK_PACKAGE_LIBSIGCXX
+	prompt "libsigc++......................... Callback framework for C++"
+	tristate
+	depends on ADK_CXX
+	select ADK_PACKAGE_LIBSTDCXX
+	default n
+	help
+	  Callback framework for C++

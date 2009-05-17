@@ -1,0 +1,26 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/kdc/process.c	2008-07-28 14:04:51.000000000 +0200
++++ heimdal-1.2.1/kdc/process.c	2009-01-04 19:04:06.899022107 +0100
+@@ -68,7 +68,9 @@ krb5_kdc_process_request(krb5_context co
+     KDC_REQ req;
+     Ticket ticket;
+     DigestREQ digestreq;
++#ifdef PKINIT
+     Kx509Request kx509req;
++#endif
+     krb5_error_code ret;
+     size_t i;
+ 
+@@ -94,10 +96,12 @@ krb5_kdc_process_request(krb5_context co
+ 	ret = _kdc_do_digest(context, config, &digestreq, reply, from, addr);
+ 	free_DigestREQ(&digestreq);
+ 	return ret;
++#ifdef PKINIT
+     } else if (_kdc_try_kx509_request(buf, len, &kx509req, &i) == 0) {
+ 	ret = _kdc_do_kx509(context, config, &kx509req, reply, from, addr);
+ 	free_Kx509Request(&kx509req);
+ 	return ret;
++#endif
+     } else if(_kdc_maybe_version4(buf, len)){
+ 	*prependlength = FALSE; /* elbitapmoc sdrawkcab XXX */
+ 	_kdc_do_version4(context, config, buf, len, reply, from, 

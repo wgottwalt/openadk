@@ -1,0 +1,8 @@
+config ADK_PACKAGE_XORG_SERVER
+	prompt "xorg-server............................... X server"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBXKBFILE
+	select ADK_PACKAGE_LIBX11
+	help
+         http://www.x.org

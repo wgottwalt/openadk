@@ -1,0 +1,4 @@
+Package: exmapd
+Priority: optional
+Section: utils
+Description: memory analysing tool

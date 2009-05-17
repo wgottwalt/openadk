@@ -1,0 +1,10 @@
+config ADK_PACKAGE_CFGFS
+	prompt "cfgfs................................ compressed config filesystem"
+	tristate
+	select BUSYBOX_COMM
+	select BUSYBOX_MD5SUM
+	select BUSYBOX_FEATURE_SORT_BIG
+	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_CRIS_FOXBOARD
+	default y
+	help
+	  Adopted from FreeWRT fwcf

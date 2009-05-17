@@ -1,0 +1,22 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- heimdal-1.2.1.orig/include/Makefile.am	2008-07-28 14:04:49.000000000 +0200
++++ heimdal-1.2.1/include/Makefile.am	2009-01-02 22:22:25.000000000 +0100
+@@ -7,11 +7,17 @@ SUBDIRS = kadm5 hcrypto gssapi
+ noinst_PROGRAMS = bits make_crypto
+ CHECK_LOCAL = no-check-local
+ 
+-AM_CPPFLAGS += -DHOST=\"$(CANONICAL_HOST)\"
++AM_CPPFLAGS += -DHOST=\"$(CANONICAL_HOST)\" -DHAVE_CONFIG_H -I. -I..
+ 
+ nodist_include_HEADERS = krb5-types.h
+ nodist_noinst_HEADERS = crypto-headers.h
+ 
++bits:
++	$(HOSTCC) $(HOSTCFLAGS) $(AM_CPPFLAGS) -o $@ $(bits_SOURCES)
++
++make_crypto:
++	$(HOSTCC) $(HOSTCFLAGS) $(AM_CPPFLAGS) -o $@ $(make_crypto_SOURCES)
++
+ krb5-types.h: bits$(EXEEXT)
+ 	./bits$(EXEEXT) krb5-types.h
+ 

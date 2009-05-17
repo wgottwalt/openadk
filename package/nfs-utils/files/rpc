@@ -1,0 +1,3 @@
+portmapper	100000	portmap sunrpc rpcbind
+nfs		100003	nfsprog
+mountd		100005	mount showmount

@@ -1,0 +1,6 @@
+config ADK_PACKAGE_MPFR
+	prompt "mpfr......................... multiprecision floatingpoint library"
+	tristate
+	default n
+	help
+	  http://www.mpfr.org

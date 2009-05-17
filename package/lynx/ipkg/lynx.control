@@ -1,0 +1,5 @@
+Package: lynx
+Priority: base
+Section: www
+Description: Standard text browser
+Depends: libncurses, libopenssl

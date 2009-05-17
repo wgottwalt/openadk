@@ -1,0 +1,51 @@
+$Id$
+--- vpnc-0.4.0.orig/Makefile	2007-02-19 21:51:12.000000000 +0100
++++ vpnc-0.4.0/Makefile	2007-04-21 18:39:46.000000000 +0200
+@@ -35,12 +35,11 @@ VERSION := $(shell sh mk-version)
+ RELEASE_VERSION := $(shell cat VERSION)
+ 
+ CC=gcc
+-CFLAGS += -W -Wall -O3 -Wmissing-declarations -Wwrite-strings -g
++CFLAGS += -W -Wall -O3 -Wmissing-declarations -Wwrite-strings -g -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/include $(OFLAGS)
+ CPPFLAGS = -DVERSION=\"$(VERSION)\"
+-LDFLAGS = -g $(shell libgcrypt-config --libs)
+-CFLAGS +=  $(shell libgcrypt-config --cflags)
++LDFLAGS = -g -L$(STAGING_DIR)/usr/lib -L$(STAGING_DIR)/lib -lgcrypt -lgpg-error
+ 
+-ifeq ($(shell uname -s), SunOS)
++ifeq ($(OS), SunOS)
+ LDFLAGS += -lnsl -lresolv -lsocket
+ endif
+ 
+@@ -84,21 +83,21 @@ distclean : clean
+ 	-rm -f vpnc-debug.c vpnc-debug.h vpnc.ps .depend
+ 
+ install : all
+-	install -d $(DESTDIR)$(ETCDIR) $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(MANDIR)/man8
+-	install vpnc-script $(DESTDIR)$(ETCDIR)
+-	install -m 600 vpnc.conf $(DESTDIR)$(ETCDIR)/default.conf
++	install -d $(DESTDIR)$(ETCDIR)  $(DESTDIR)$(SBINDIR)
++#	install vpnc-script $(DESTDIR)$(ETCDIR)
++#	install -m 600 vpnc.conf $(DESTDIR)$(ETCDIR)/default.conf
+ 	install vpnc vpnc-disconnect $(DESTDIR)$(SBINDIR)
+-	install pcf2vpnc $(DESTDIR)$(BINDIR)
+-	install vpnc.8 $(DESTDIR)$(MANDIR)/man8
++#	install pcf2vpnc $(DESTDIR)$(BINDIR)
++#	install vpnc.8 $(DESTDIR)$(MANDIR)/man8
+ 
+ install-strip : all
+-	install -d $(DESTDIR)$(ETCDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(MANDIR)/man8
+-	install vpnc-script $(DESTDIR)$(ETCDIR)
+-	install -m 600 vpnc.conf $(DESTDIR)$(ETCDIR)/default.conf
+-	install pcf2vpnc $(DESTDIR)$(BINDIR)
++	install -d $(DESTDIR)$(ETCDIR) $(DESTDIR)$(SBINDIR)
++#	install vpnc-script $(DESTDIR)$(ETCDIR)
++#	install -m 600 vpnc.conf $(DESTDIR)$(ETCDIR)/default.conf
++#	install pcf2vpnc $(DESTDIR)$(BINDIR)
+ 	install -s vpnc $(DESTDIR)$(SBINDIR)
+ 	install vpnc-disconnect $(DESTDIR)$(SBINDIR)
+-	install vpnc.8 $(DESTDIR)$(MANDIR)/man8
++#	install vpnc.8 $(DESTDIR)$(MANDIR)/man8
+ 
+ uninstall :
+ 	rm -f $(DESTDIR)$(SBINDIR)/vpnc \

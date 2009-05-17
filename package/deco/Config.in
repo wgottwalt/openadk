@@ -1,0 +1,10 @@
+config ADK_PACKAGE_DECO
+	prompt "deco.............................. Text-based full featured file manager"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBNCURSES
+	help
+	  A clone of Norton Commander for Unix. Text-based, full featured
+	  file manager.
+
+	  http://deco.sourceforge.net/

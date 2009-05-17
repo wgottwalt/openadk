@@ -1,0 +1,5 @@
+Package: sane-backends
+Priority: optional
+Section: misc
+Depends: libpthread
+Description: Scanner access now easy

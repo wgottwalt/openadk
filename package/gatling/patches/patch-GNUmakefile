@@ -1,0 +1,15 @@
+$Id$
+--- gatling-0.8.orig/GNUmakefile	Thu May 19 05:30:26 2005
++++ gatling-0.8/GNUmakefile	Mon Jul  9 11:52:58 2007
+@@ -96,9 +96,10 @@ libiconv: tryiconv.c
+ dummy.c:
+ 	touch $@
+ 
++RANLIB?=ranlib
+ libsocketkludge.a: libsocket libiconv dummy.o
+ 	ar q $@ dummy.o
+-	-ranlib $@
++	-${RANLIB} $@
+ 
+ LDLIBS+=`cat libsocket libiconv`
+ 

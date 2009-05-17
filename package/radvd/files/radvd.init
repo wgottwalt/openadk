@@ -1,0 +1,29 @@
+#!/bin/sh
+#FWINIT 51
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${radvd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	echo 1 > /proc/sys/net/ipv6/conf/all/forwarding
+	/usr/sbin/radvd
+	;;
+
+stop)
+	killall radvd
+	echo 0 > /proc/sys/net/ipv6/conf/all/forwarding
+	;;
+
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

@@ -1,0 +1,4 @@
+Package: file
+Priority: optional
+Section: net
+Description: a file type guesser

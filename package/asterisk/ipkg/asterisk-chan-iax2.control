@@ -1,0 +1,5 @@
+Package: asterisk-chan-iax2
+Priority: optional
+Section: net
+Description: Asterisk Channel for the Inter Asterisk Protocol
+Depends: asterisk

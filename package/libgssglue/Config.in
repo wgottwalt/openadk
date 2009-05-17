@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBGSSGLUE
+	prompt "libgssglue........................ NFSv4 GSSAPI helper library"
+	tristate
+	default n
+	help
+

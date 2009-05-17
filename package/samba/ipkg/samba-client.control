@@ -1,0 +1,4 @@
+Package: samba-client
+Priority: optional
+Section: net
+Description: NetBIOS/SMB client

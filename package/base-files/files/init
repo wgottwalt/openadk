@@ -1,0 +1,18 @@
+#!/bin/sh
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -nt proc proc /proc
+mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
+mount none /tmp -t tmpfs -o size=2M
+mount none /tmp -t tmpfs -o remount,nosuid,nodev,mode=1777
+mount -o nosuid,size=64k,mode=0755 -t tmpfs mdev /dev
+mkdir /dev/pts /dev/shm
+mount -o nosuid,noexec -t devpts devpts /dev/pts
+exec 0<>/dev/console >&0 2>&0
+echo >/dev/mdev.seq
+echo "/sbin/mdev" >/proc/sys/kernel/hotplug
+mdev -s
+mount -o remount,rw /
+cat /etc/.rnd >/dev/urandom 2>&1
+[ -f /etc/fstab ] && mount -a
+[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
+exec /sbin/init

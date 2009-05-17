@@ -1,0 +1,7 @@
+config ADK_PACKAGE_PIPACS
+	prompt "pipacs............................ UNIX socket accounting/wiewer program"
+	tristate
+	default n
+	help
+	  An UNIX socket accounting/wiewer program.
+	  This is version 2.

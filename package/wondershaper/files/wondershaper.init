@@ -1,0 +1,25 @@
+#!/bin/sh
+#FWINIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${wondershaper:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/wshaper start
+	;;
+stop)
+	/usr/sbin/wshaper stop
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit 0

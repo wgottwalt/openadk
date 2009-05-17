@@ -1,0 +1,42 @@
+menu "Library Routines"
+
+config ADK_KERNEL_CRC32
+	bool
+	default n
+
+config ADK_KPACKAGE_KMOD_CRC_ITU_T
+	prompt "kmod-crc-itu-t...................... CRC ITU-T V.41 functions"
+	tristate
+	default n
+	help
+	  This option is provided for the case where no in-kernel-tree
+	  modules require CRC ITU-T V.41 functions, but a module built outside
+	  the kernel tree does. Such modules that use library CRC ITU-T V.41
+	  functions require M here.
+
+config ADK_KPACKAGE_KMOD_CRC32
+	prompt "kmod-crc32.......................... provide CRC32 library functions"
+	tristate
+        depends ! ADK_KERNEL_CRC32
+	default n
+	help
+
+config ADK_KPACKAGE_KMOD_LIBCRC32C
+	prompt "kmod-libcrc32c...................... CRC32c Cyclic Redundancy-Check"
+	tristate
+	default n
+	help
+	  This option is provided for the case where no in-kernel-tree
+	  modules require CRC32c functions, but a module built outside the
+	  kernel tree does. Such modules that use library CRC32c functions
+	  require M here.  See Castagnoli93.
+
+config ADK_KPACKAGE_KMOD_CRC_CCITT
+	prompt "kmod-crc-ccitt...................... provide CRC-CCITT library functions"
+	tristate
+	default n
+	help
+	  This module provides CRC-CCITT library functions for kernel modules built
+	  outside the kernel.
+
+endmenu

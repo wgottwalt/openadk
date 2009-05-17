@@ -1,0 +1,5 @@
+Package: opensips-mod-group
+Depends: opensips
+Section: net
+Priority: optional
+Description: group support for OpenSIPS

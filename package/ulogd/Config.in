@@ -1,0 +1,48 @@
+#menu "ulogd............................. Netfilter userspace logging daemon"
+
+config ADK_PACKAGE_ULOGD
+	prompt "ulogd............................. Netfilter userspace logging daemon"
+	tristate
+	default n
+	select ADK_PACKAGE_IPTABLES
+	help
+	  The netfilter userspace logging daemon
+	  
+	  http://gnumonks.org/projects/ulogd
+
+config ADK_PACKAGE_ULOGD_MOD_MYSQL
+	prompt   "  ulogd-mod-mysql............... Output plugin for logging into a MySQL database"
+	tristate
+	default n
+	depends on ADK_CXX
+	depends ADK_PACKAGE_ULOGD
+	select ADK_PACKAGE_LIBMYSQLCLIENT
+
+config ADK_PACKAGE_ULOGD_MOD_PCAP
+        prompt  "  ulogd-mod-pcap................. Output plugin for logging into pcap format"
+	tristate
+	default n
+	depends ADK_PACKAGE_ULOGD
+	select ADK_PACKAGE_LIBPCAP
+
+config ADK_PACKAGE_ULOGD_MOD_PGSQL
+	prompt   "  ulogd-mod-pgsql............... Output plugin for logging into a PostgreSQL database"
+	tristate
+	default n
+	depends ADK_PACKAGE_ULOGD
+	select ADK_PACKAGE_LIBPQ
+
+config ADK_PACKAGE_ULOGD_MOD_SQLITE
+	prompt   "  ulogd-mod-sqlite.............. Output plugin for logging into an SQLite database"
+	tristate
+	default n
+	depends ADK_PACKAGE_ULOGD
+	select ADK_PACKAGE_LIBSQLITE
+
+config ADK_PACKAGE_ULOGD_MOD_EXTRA
+	prompt   "  ulogd-mod-extra............... All other plugins"
+	tristate
+	default n
+	depends ADK_PACKAGE_ULOGD
+
+#endmenu

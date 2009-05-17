@@ -1,0 +1,29 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		mini-sendmail
+PKG_VERSION:=		1.3.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		fb1585d2ad81c519a26d83bfd783dee8
+MASTER_SITES:=		http://www.acme.com/software/mini_sendmail/
+DISTFILES:=		mini_sendmail-${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/mini_sendmail-${PKG_VERSION}
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,MINI_SENDMAIL,mini-sendmail,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+BUILD_STYLE:=		auto
+MAKE_FLAGS+=		OFLAGS="${TARGET_CFLAGS}"
+MAKE_FLAGS+=		CC="${TARGET_CC}"
+
+do-install:
+	${INSTALL_DIR} ${IDIR_MINI_SENDMAIL}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/mini_sendmail ${IDIR_MINI_SENDMAIL}/usr/sbin/
+	ln -sf mini_sendmail ${IDIR_MINI_SENDMAIL}/usr/sbin/sendmail
+
+include ${TOPDIR}/mk/pkg-bottom.mk

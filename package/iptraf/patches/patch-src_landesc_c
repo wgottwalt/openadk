@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- iptraf-3.0.0.orig/src/landesc.c	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.0/src/landesc.c	2008-10-09 17:34:11.000000000 +0200
+@@ -83,8 +83,6 @@ void loaddesclist(struct desclist *list,
+ 
+     if (linktype == LINK_ETHERNET)
+         fd = fopen(ETHFILE, "r");
+-    else if (linktype == LINK_FDDI)
+-        fd = fopen(FDDIFILE, "r");
+ 
+     if (fd == NULL) {
+         return;
+@@ -205,8 +203,6 @@ void savedesclist(struct desclist *list,
+ 
+     if (linktype == LINK_ETHERNET)
+         fd = fopen(ETHFILE, "w");
+-    else if (linktype == LINK_FDDI)
+-        fd = fopen(FDDIFILE, "w");
+ 
+     if (fd < 0) {
+         etherr();

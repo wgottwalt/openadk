@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- util-linux-2.12r.orig/mount/mount_by_label.c	2004-12-22 00:15:33.000000000 +0100
++++ util-linux-2.12r/mount/mount_by_label.c	2008-10-16 12:01:50.000000000 +0200
+@@ -213,7 +213,7 @@ uuidcache_init(void) {
+ 	    fseek(procpt, 0, SEEK_SET);
+ 
+ 	    while (fgets(line, sizeof(line), procpt)) {
+-		if (!index(line, '\n'))
++		if (!strchr(line, '\n'))
+ 			break;
+ 
+ 		if (sscanf (line, " %d %d %d %[^\n ]",

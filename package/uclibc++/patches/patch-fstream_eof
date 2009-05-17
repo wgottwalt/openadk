@@ -1,0 +1,15 @@
+$Id$
+ * fix crash on reading from closed fstream
+
+--- uClibc++-0.2.1.orig/include/fstream	2006-09-04 04:28:09.000000000 +0200
++++ uClibc++-0.2.1/include/fstream	2008-12-14 18:20:27.000000000 +0100
+@@ -201,6 +201,9 @@ namespace std{
+ 
+ 			*/
+ 
++			if(fp == 0)
++				return traits::eof();
++
+ 			if(basic_streambuf<charT,traits>::eback() == 0){
+ 				//No buffer, so...
+ 				charT c;

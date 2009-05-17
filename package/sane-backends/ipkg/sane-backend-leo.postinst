@@ -1,0 +1,2 @@
+#/bin/sh
+echo leo >> $IPKG_INSTROOT/etc/sane.d/dll.conf

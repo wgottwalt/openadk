@@ -1,0 +1,28 @@
+# $Id$
+#-
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		ntpclient
+PKG_VERSION:=		2007_365
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		cb98711f11769cdd22fc592844cef414
+MASTER_SITES:=		http://doolittle.icarus.com/ntpclient/
+DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-2007
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+
+BUILD_STYLE:=		auto
+MAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TCFLAGS}'
+ALL_TARGET:=
+
+do-install:
+	${INSTALL_DIR} ${IDIR_NTPCLIENT}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/ntpclient ${IDIR_NTPCLIENT}/usr/sbin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk

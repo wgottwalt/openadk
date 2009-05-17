@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LIBXFONT
+	prompt "libxfont................................ X keyboard library"
+	tristate
+	default n
+	help
+         http://www.x.org

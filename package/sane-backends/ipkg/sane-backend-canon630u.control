@@ -1,0 +1,5 @@
+Package: sane-backend-canon630u
+Depends: sane-backends, libusb
+Priority: optional
+Section: misc
+Description: Scanner access now easy

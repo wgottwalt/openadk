@@ -1,0 +1,5 @@
+Package: sispmctl
+Priority: optional
+Section: misc
+Depends: libusb
+Description: control application for power sockets

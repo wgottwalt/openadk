@@ -1,0 +1,11 @@
+config ADK_PACKAGE_LIBGD
+	prompt "libgd............................. The GD Graphics Library"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBJPEG
+	select ADK_PACKAGE_LIBPNG
+	help
+	  The GD Graphics Library
+	  
+	  http://www.libgd.org/
+

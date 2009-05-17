@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf srelay srelay NO
+add_rcconf srelay_flags srelay_flags "-c /etc/srelay.conf -r -s"

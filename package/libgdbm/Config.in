@@ -1,0 +1,9 @@
+config ADK_PACKAGE_LIBGDBM
+	prompt "libgdbm........................... The GNU database manager"
+	tristate
+	default n
+	help
+	  disk file format database which stores key/data-pairs in single files.  
+	  
+	  http://www.gnu.org
+

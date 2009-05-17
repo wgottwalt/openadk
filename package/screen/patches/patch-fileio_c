@@ -1,0 +1,39 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/fileio.c	2003-09-08 16:25:28.000000000 +0200
++++ screen-4.0.3/fileio.c	2008-10-08 14:07:52.000000000 +0200
+@@ -96,7 +96,7 @@ char *rcfile;
+ 
+   if (rcfile)
+     {
+-      char *rcend = rindex(rc_name, '/');
++      char *rcend = strrchr(rc_name, '/');
+       if (*rcfile != '/' && rcend && (rcend - rc_name) + strlen(rcfile) + 2 < sizeof(buf))
+ 	{
+ 	  strncpy(buf, rc_name, rcend - rc_name + 1);
+@@ -169,7 +169,7 @@ char *rcfilename;
+     }
+   while (fgets(buf, sizeof buf, fp) != NULL)
+     {
+-      if ((p = rindex(buf, '\n')) != NULL)
++      if ((p = strrchr(buf, '\n')) != NULL)
+ 	*p = '\0';
+       if ((argc = Parse(buf, sizeof buf, args, argl)) == 0)
+ 	continue;
+@@ -216,7 +216,7 @@ char *rcfilename;
+ 	    }
+ 	  for (p = args[1]; p && *p; p = cp)
+ 	    {
+-	      if ((cp = index(p, '|')) != 0)
++	      if ((cp = strchr(p, '|')) != 0)
+ 		*cp++ = '\0';
+ 	      len = strlen(p);
+ 	      if (p[len - 1] == '*')
+@@ -501,7 +501,7 @@ int dump;
+ 		}
+ 	      break;
+ 	    case DUMP_TERMCAP:
+-	      if ((p = index(MakeTermcap(fore->w_aflag), '=')) != NULL)
++	      if ((p = strchr(MakeTermcap(fore->w_aflag), '=')) != NULL)
+ 		{
+ 		  fputs(++p, f);
+ 		  putc('\n', f);

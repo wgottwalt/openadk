@@ -1,0 +1,4 @@
+Package: uclibc
+Priority: optional
+Section: net
+Description: Standard C library for embedded Linux systems

@@ -1,0 +1,13 @@
+config ADK_PACKAGE_OWFS
+	prompt "owfs.............................. 1-wire filesystem to map sensors to a directory"
+	tristate
+	default n
+	select ADK_PACKAGE_FUSE_UTILS
+	select ADK_PACKAGE_LIBUSB
+	help
+	  1-Wire technology by Dallas Semiconductors is a simple bus for different kind of devices
+	  like tempereatur, humidity, pressure, voltage, etc.
+	  owfs maps the devices to a dirctory utilizing fuse.
+	  
+	  http://www.owfs.org/
+

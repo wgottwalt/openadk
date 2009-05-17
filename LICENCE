@@ -1,0 +1,38 @@
+$Id$
+
+OpenADK is Copyright © 2008 Waldemar Brodkorb
+All rights reserved.
+
+This licence file covers all of the OpenADK meta distribution
+source code (including Makefiles and documentation).
+
+Binary firmware images are composed of the meta distribution
+OpenADK and downloaded distfiles from third party sources,
+which may be covered by various differing licence terms, but
+since the firmware image only aggregates differently licenced
+packages on the same medium we believe it is redistributable
+as long as the licences of the different packages are honoured.
+
+
+OpenADK itself is developed by Waldemar Brodkorb and covered
+by the GNU General Public License, Version 2 or later, as shown
+in the file COPYING in this directory. Individual files may be
+covered by the LGPL or BSD-style licences instead. OpenADK also
+contains tools that are possibly covered by non-GPL-compatible,
+but OSD/DFSG-compliant, licences. Specifically, some of these
+components may require acknowledgements to be displayed in the
+advertising materials; these are listed here:
+‣ This product includes material provided by Thorsten Glaser.
+
+OpenADK is based upon several other projects which are listed
+below, in no particular order. If you think you should be li-
+sted here but we have forgotten you, please forgive and drop
+us an email.
+
+
+• The FreeWRT Project
+• The OpenWrt Project
+• uClibc Buildroot
+• The MirOS Project and contributors
+
+────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,12 @@
+$Id$
+--- w-dhcp6-1.0-1.orig/client/solicit.c	Sat Jun 28 23:21:17 2025
++++ w-dhcp6-1.0-1/client/solicit.c	Tue Jul 25 10:37:07 2006
+@@ -18,7 +18,7 @@ struct DHCP_MESSAGE * create_solicit_mes
+     dhcp_message_ptr -> opt = add_client_id_option (interface_details);
+     
+     opt_ptr = (struct OPTIONS *) dhcp_message_ptr -> opt;
+-    (struct OPTIONS *) ((struct DUID *) opt_ptr -> opt_data) -> opt = add_ia_option (interface_details);
++    ((struct DUID *) opt_ptr -> opt_data) -> opt = add_ia_option (interface_details);
+     return dhcp_message_ptr;
+ }
+ 

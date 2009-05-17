@@ -1,0 +1,9 @@
+config ADK_PACKAGE_WPUT
+	prompt "wput.............................. A wget-like command-line FTP client"
+	tristate
+	default n
+	help
+	  A wget-like command-line FTP client.
+	  
+	  http://itooktheredpill.dyndns.org/wput/
+

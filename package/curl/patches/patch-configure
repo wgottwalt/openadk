@@ -1,0 +1,24 @@
+$Id$
+
+	Don't do *THAT* for cross-compiling.
+
+--- curl-7.16.3.orig/configure	2007-06-25 11:18:41.000000000 +0200
++++ curl-7.16.3/configure	2007-08-02 17:44:28.000000000 +0200
+@@ -25783,17 +25783,6 @@ fi
+ 
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+   fi
+-
+-  if test "$OPENSSL_ENABLED" = "1"; then
+-    if test -n "$LIB_OPENSSL"; then
+-
+-       LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$LIB_OPENSSL"
+-       export LD_LIBRARY_PATH
+-       { echo "$as_me:$LINENO: Added $LIB_OPENSSL to LD_LIBRARY_PATH" >&5
+-echo "$as_me: Added $LIB_OPENSSL to LD_LIBRARY_PATH" >&6;}
+-    fi
+-  fi
+-
+ fi
+ 
+ 

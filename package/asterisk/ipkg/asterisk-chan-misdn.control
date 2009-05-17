@@ -1,0 +1,5 @@
+Package: asterisk-chan-misdn
+Priority: optional
+Section: net
+Depends: asterisk
+Description: Asterisk Channel for the mISDN ISDN systems

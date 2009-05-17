@@ -1,0 +1,6 @@
+config ADK_PACKAGE_XF86DGAPROTO
+	prompt "xf86dgaproto................................. X protocol library"
+	tristate
+	default n
+	help
+         http://www.x.org

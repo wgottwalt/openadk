@@ -1,0 +1,7 @@
+config ADK_PACKAGE_ARPWATCH
+	prompt "arpwatch.......................... Ethernet station activity monitor"
+	tristate
+	default n
+	help
+	  Ethernet monitor program for keeping track of ethernet/ip address pairings
+

@@ -1,0 +1,120 @@
+menu "Bluetooth"
+
+config ADK_KPACKAGE_KMOD_BT
+	prompt "kmod-bluetooth.................... Bluetooth drivers and network stack"
+	tristate
+	default n
+	help
+	  Bluetooth is low-cost, low-power, short-range wireless technology.
+	  It was designed as a replacement for cables and other short-range
+	  technologies like IrDA.  Bluetooth operates in personal area range
+	  that typically extends up to 10 meters.  More information about
+	  Bluetooth can be found at <http://www.bluetooth.com/>.
+
+	  Linux Bluetooth subsystem consist of several layers:
+	     Bluetooth Core (HCI device and connection manager, scheduler)
+	     HCI Device drivers (Interface to the hardware)
+	     SCO Module (SCO audio links)
+	     L2CAP Module (Logical Link Control and Adaptation Protocol)
+	     RFCOMM Module (RFCOMM Protocol)  
+	     BNEP Module (Bluetooth Network Encapsulation Protocol)
+	     CMTP Module (CAPI Message Transport Protocol)
+	     HIDP Module (Human Interface Device Protocol)
+
+config ADK_KPACKAGE_KMOD_BT_L2CAP
+	prompt "kmod-bluetooth-l2cap.............. L2CAP protocol support"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  L2CAP (Logical Link Control and Adaptation Protocol) provides
+	  connection oriented and connection-less data transport.  L2CAP
+	  support is required for most Bluetooth applications.
+
+
+config ADK_KPACKAGE_KMOD_BT_SCO
+	prompt "kmod-bluetooth-sco................ SCO links support"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  SCO link provides voice transport over Bluetooth.  SCO support is
+	  required for voice applications like Headset and Audio.
+
+config ADK_KPACKAGE_KMOD_BT_RFCOMM
+	prompt "kmod-bluetooth-rfcomm............. RFCOMM protocol support"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	depends ADK_KPACKAGE_KMOD_BT_L2CAP
+	help
+	  RFCOMM provides connection oriented stream transport.  RFCOMM
+	  support is required for Dialup Networking, OBEX and other Bluetooth
+	  applications.
+
+config ADK_KPACKAGE_KMOD_BT_BNEP
+	prompt "kmod-bluetooth-bnep............... BNEP protocol support"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	depends ADK_KPACKAGE_KMOD_BT_L2CAP
+	help
+	  BNEP (Bluetooth Network Encapsulation Protocol) is Ethernet
+	  emulation layer on top of Bluetooth.  BNEP is required for
+	  Bluetooth PAN (Personal Area Network).
+
+config ADK_KPACKAGE_KMOD_BT_HIDP
+	prompt "kmod-bluetooth-hidp............... HIDP protocol support"
+	tristate
+	default n
+	select ADK_KERNEL_HID
+	depends ADK_KPACKAGE_KMOD_BT
+	depends ADK_KPACKAGE_KMOD_BT_L2CAP
+	help
+	  HIDP (Human Interface Device Protocol) is a transport layer
+	  for HID reports.  HIDP is required for the Bluetooth Human
+	  Interface Device Profile.
+
+config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
+	prompt "kmod-bluetooth-hci-usb............ HCI USB driver"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluetooth HCI USB driver.
+	  This driver is required if you want to use Bluetooth devices with
+	  USB interface.
+
+config ADK_KPACKAGE_KMOD_BT_HCIUART
+	prompt "kmod-bluetooth-hci-uart........... HCI UART driver"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluetooth HCI UART driver.
+	  This driver is required if you want to use Bluetooth devices with
+	  serial port interface. You will also need this driver if you have 
+	  UART based Bluetooth PCMCIA and CF devices like Xircom Credit Card 
+	  adapter and BrainBoxes Bluetooth PC Card.
+
+config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
+	prompt "kmod-bluetooth-hci-bcm203x........ HCI BCM203x USB driver"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluetooth HCI BCM203x USB driver.
+	  This driver provides the firmware loading mechanism for the Broadcom
+	  Blutonium based devices.
+
+config ADK_KPACKAGE_KMOD_BT_HCIBPA10X
+	prompt "kmod-bluetooth-hci-bpa10x......... HCI BPA10x USB driver"
+	tristate
+	default n
+	depends ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluetooth HCI BPA10x USB driver.
+	  This driver provides support for the Digianswer BPA 100/105 Bluetooth
+	  sniffer devices.
+
+endmenu

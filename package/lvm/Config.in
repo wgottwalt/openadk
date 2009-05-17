@@ -1,0 +1,6 @@
+config ADK_PACKAGE_LVM
+	prompt "lvm......................... logical volume management"
+	tristate
+	default n
+	help
+	  lvm

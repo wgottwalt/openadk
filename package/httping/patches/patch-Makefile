@@ -1,0 +1,14 @@
+$Id$
+--- httping-1.2.3.orig/Makefile	2007-05-01 14:05:43.000000000 +0000
++++ httping-1.2.3/Makefile	2007-06-20 14:19:59.000000000 +0000
+@@ -15,8 +15,8 @@
+ include version
+ 
+ DEBUG=-g # -D_DEBUG
+-LDFLAGS+=-lssl -lcrypto $(DEBUG)
+-CFLAGS+=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
++LDFLAGS+=-lssl -lcrypto $(DEBUG) -L$(STAGING_DIR)/usr/lib
++CFLAGS+=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG) -I$(STAGING_DIR)/usr/include
+ 
+ OBJS=mem.o http.o io.o str.o error.o utils.o main.o tcp.o mssl.o res.o
+ 

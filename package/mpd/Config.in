@@ -1,0 +1,96 @@
+#menu "mpd............................... Music Player Daemon"
+
+config ADK_PACKAGE_MPD
+	prompt "mpd............................... Music Player Daemon"
+	tristate
+	default n
+	select ADK_PACKAGE_ALSA_LIB
+	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_LIBCURL
+	help
+	  MPD is a music player supporting flac, mp3 and ogg files.
+	  It is typically controlled over a network using one of it's many
+	  clients including mpc(console), gmpc(gnome), phpmp(php) etc.
+
+	  http://www.musicpd.org/
+
+config ADK_COMPILE_MPD_WITH_MP3
+	prompt   "  MP3 support"
+	bool
+	default y
+	depends ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBMAD
+	select ADK_PACKAGE_LIBID3TAG
+	help
+	  Enable mp3 support (libmad).
+
+config ADK_COMPILE_MPD_WITH_MP4
+	prompt   "  MP4/AAC support"
+	bool
+	default y
+	depends ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBFAAD2
+	help
+	  Enable mp4/aac support (libfaad2).
+
+config ADK_COMPILE_MPD_OGG
+	prompt   "  Ogg/Vorbis Support"
+	tristate
+	depends ADK_PACKAGE_MPD
+	select ADK_COMPILE_MPD_WITH_OGG if ADK_COMPILE_MPD_OGG_FLOAT
+	select ADK_COMPILE_MPD_WITH_TREMOR if ADK_COMPILE_MPD_OGG_FIXED
+	default y
+	help
+		Ogg/Vorbis support.
+
+choice
+prompt "Ogg type"
+depends on ADK_COMPILE_MPD_OGG
+config ADK_COMPILE_MPD_OGG_FLOAT
+	bool "Ogg/Vorbis (floating point implementation)"
+config ADK_COMPILE_MPD_OGG_FIXED
+	bool "Ogg/Vorbis (fixed point implementation)"
+endchoice
+
+config ADK_COMPILE_MPD_WITH_OGG
+	bool
+	default n
+	depends ADK_PACKAGE_MPD
+	depends ADK_COMPILE_MPD_OGG_FLOAT
+	select ADK_PACKAGE_LIBOGG
+	select ADK_PACKAGE_LIBVORBIS
+	help
+	  Enable ogg vorbis support.
+
+config ADK_COMPILE_MPD_WITH_TREMOR
+	bool
+	default n
+	depends ADK_PACKAGE_MPD
+	depends ADK_COMPILE_MPD_OGG_FIXED
+	select ADK_PACKAGE_LIBVORBISIDEC
+	help
+	  Enable ogg support (tremor).
+          Can not be used with shout plugin.
+
+config ADK_COMPILE_MPD_WITH_FLAC
+	prompt   "  FLAC Support"
+	bool
+	default y
+	depends ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBFLAC
+	help
+	  Enable flac support (libflac).
+
+config ADK_COMPILE_MPD_WITH_SHOUT
+	prompt   "  Shout Support (Streaming support)"
+	bool
+	default y
+	depends ADK_PACKAGE_MPD
+	depends ADK_COMPILE_MPD_WITH_OGG
+	select ADK_PACKAGE_LIBSHOUT
+	select ADK_PACKAGE_LIBVORBISENC
+	select ADK_PACKAGE_LIBLAME
+	help
+	  Enable shout support (libshout).
+
+#endmenu

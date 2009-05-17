@@ -1,0 +1,5 @@
+Package: libreadline
+Priority: optional
+Section: libs
+Depends: libncurses
+Description: Command lines edition library

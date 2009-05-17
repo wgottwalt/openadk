@@ -1,0 +1,5 @@
+Package: opensips-mod-mediaproxy
+Depends: opensips
+Section: net
+Priority: optional
+Description: mediaproxy support for OpenSIPS

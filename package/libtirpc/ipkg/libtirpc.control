@@ -1,0 +1,4 @@
+Package: libtirpc
+Priority: optional
+Section: libs
+Description: a transport independent RPC library

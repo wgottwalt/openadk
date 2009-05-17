@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- cgilib-0.7.orig/cgi.c	2009-01-11 22:59:16.000000000 +0100
++++ cgilib-0.7/cgi.c	2009-03-31 19:16:46.214155324 +0200
+@@ -327,7 +327,7 @@ s_cgi *cgiReadMultipart (char *boundary)
+ 			file->name = name;
+ 			file->type = type;
+ 			file->tmpfile = tmpfile;
+-			if ((cp = rindex (fname, '/')) == NULL)
++			if ((cp = strrchr (fname, '/')) == NULL)
+ 			    file->filename = fname;
+ 			else {
+ 			    file->filename = strdup (++cp);

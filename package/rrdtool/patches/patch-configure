@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rrdtool-1.2.30.orig/configure	2009-01-19 15:29:29.000000000 +0100
++++ rrdtool-1.2.30/configure	2009-05-09 04:31:25.000000000 +0200
+@@ -26320,7 +26320,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+  ex_check_save_CPPFLAGS=${CPPFLAGS}
+  ex_check_save_LDFLAGS=${LDFLAGS}
+  if test "x/usr/include/libart-2.0" != "x"; then
+-   CPPFLAGS="$CPPFLAGS -I/usr/include/libart-2.0"
++   CPPFLAGS="$CPPFLAGS"
+  fi
+   { echo "$as_me:$LINENO: checking for art_vpath_add_point in -lart_lgpl_2" >&5
+ echo $ECHO_N "checking for art_vpath_add_point in -lart_lgpl_2... $ECHO_C" >&6; }
+@@ -27916,7 +27916,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+  ex_check_save_CPPFLAGS=${CPPFLAGS}
+  ex_check_save_LDFLAGS=${LDFLAGS}
+  if test "x/usr/include/freetype2" != "x"; then
+-   CPPFLAGS="$CPPFLAGS -I/usr/include/freetype2"
++   CPPFLAGS="$CPPFLAGS"
+  fi
+   { echo "$as_me:$LINENO: checking for FT_Init_FreeType in -lfreetype" >&5
+ echo $ECHO_N "checking for FT_Init_FreeType in -lfreetype... $ECHO_C" >&6; }

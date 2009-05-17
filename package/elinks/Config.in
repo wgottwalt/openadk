@@ -1,0 +1,9 @@
+config ADK_PACKAGE_ELINKS
+	prompt "elinks............................ A text based web browser"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBOPENSSL
+	help
+	  An advanced text based web browser
+	  
+	  http://elinks.or.cz/

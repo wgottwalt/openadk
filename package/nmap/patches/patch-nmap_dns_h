@@ -1,0 +1,13 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- nmap-4.76.orig/nmap_dns.h	2008-08-21 11:24:35.000000000 +0200
++++ nmap-4.76/nmap_dns.h	2008-12-14 19:40:58.000000000 +0100
+@@ -95,6 +95,9 @@
+  *                                                                         *
+  ***************************************************************************/
+ 
++#include <list>
++#include <string>
++
+ class Target;
+ 
+ void nmap_mass_rdns(Target ** targets, int num_targets);

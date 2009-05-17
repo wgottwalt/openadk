@@ -1,0 +1,28 @@
+#!/bin/sh
+#FWINIT 80
+. /etc/rc.conf
+
+export PHP_FCGI_CHILDREN=''
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${php:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	php ${php_flags} &
+	;;
+stop)
+	killall php
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

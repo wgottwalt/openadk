@@ -1,0 +1,6 @@
+Package: php-cli
+Priority: optional
+Section: net
+Provides: php
+Depends: libopenssl, zlib
+Description: PHP5 CLI (Command Line Interface)

@@ -1,0 +1,33 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- screen-4.0.3.orig/window.c	2003-12-05 14:45:41.000000000 +0100
++++ screen-4.0.3/window.c	2008-10-08 14:08:40.000000000 +0200
+@@ -643,7 +643,7 @@ struct NewWindow *newwin;
+   if (!nwin.aka)
+     nwin.aka = Filename(nwin.args[0]);
+   strncpy(p->w_akabuf, nwin.aka, sizeof(p->w_akabuf) - 1);
+-  if ((nwin.aka = rindex(p->w_akabuf, '|')) != NULL)
++  if ((nwin.aka = strrchr(p->w_akabuf, '|')) != NULL)
+     {
+       p->w_autoaka = 0;
+       *nwin.aka++ = 0;
+@@ -1356,9 +1356,9 @@ char **args, *ttyn;
+ 	  debug2("Makewindow %d with %s\n", win->w_number, tebuf);
+ 	  tl = strlen(win->w_term);
+ 	  NewEnv[1] = tebuf;
+-	  if ((s1 = index(NewEnv[2], '|')))
++	  if ((s1 = strchr(NewEnv[2], '|')))
+ 	    {
+-	      if ((s2 = index(++s1, '|')))
++	      if ((s2 = strchr(++s1, '|')))
+ 		{
+ 		  if (strlen(NewEnv[2]) - (s2 - s1) + tl < 1024)
+ 		    {
+@@ -1396,7 +1396,7 @@ char *prog, **args, **env;
+   char *shargs[MAXARGS + 1];
+   register int i, eaccess = 0;
+ 
+-  if (rindex(prog, '/'))
++  if (strrchr(prog, '/'))
+     path = "";
+   if (!path && !(path = getenv("PATH")))
+     path = DefaultPath;
