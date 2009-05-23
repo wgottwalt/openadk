@@ -9,7 +9,7 @@ include ${TOPDIR}/mk/package.mk
 
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 
-$(eval $(call PKG_template,GDBSERVER,gdbserver,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GDBSERVER,gdbserver,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

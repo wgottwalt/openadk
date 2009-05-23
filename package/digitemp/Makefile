@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.digitemp.com/software/linux/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 ALL_TARGET=		ds2490
 BUILD_STYLE=		auto

@@ -14,8 +14,8 @@ MASTER_SITES:=		http://matt.ucc.asn.au/dropbear/releases/ \
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-pam \
@@ -42,14 +42,6 @@ do-build:
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} \
 	    PROGRAMS=dropbearconvert
 
-# evaluate startup options according to menuconfig selection
-DROPBEAR-OPTS-y							= -g
-DROPBEAR-OPTS-$(ADK_RUNTIME_SSH_DISABLE_NOTHING)		=
-DROPBEAR-OPTS-$(ADK_RUNTIME_SSH_DISABLE_PASSWORD_FOR_ROOT)	= -g
-DROPBEAR-OPTS-$(ADK_RUNTIME_SSH_DISABLE_PASSWORD)		= -s
-DROPBEAR-OPTS-$(ADK_RUNTIME_SSH_DISABLE_ROOT)			= -w
-DROPBEAR-OPTS-$(ADK_RUNTIME_SSH_DISABLE_ROOT_AND_PASSWORD)	= -w -s
-
 do-install:
 	# main package
 	$(INSTALL_DIR) $(IDIR_DROPBEAR)/etc/init.d
@@ -63,7 +55,6 @@ do-install:
 	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/usr/bin/dropbearkey
 	$(INSTALL_DATA) ./files/dropbear.init \
 		$(IDIR_DROPBEAR)/etc/init.d/dropbear
-	$(SED) "s/@OPTIONS@/$(DROPBEAR-OPTS-y)/g" $(IDIR_DROPBEAR)/CONTROL/postinst
 	# subpackage dropbearconvert
 	$(INSTALL_DIR) $(IDIR_DBCONVERT)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/dropbearconvert \

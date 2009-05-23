@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=reaim/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,REAIM,reaim,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,REAIM,reaim,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

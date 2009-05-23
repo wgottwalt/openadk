@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.snort-wireless.org/files/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SNORT_WIRELESS,snort-wireless,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SNORT_WIRELESS,snort-wireless,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-flexresp \

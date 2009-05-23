@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,COMGT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,COMGT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 ALL_TARGET=		comgt

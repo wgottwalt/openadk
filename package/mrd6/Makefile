@@ -15,7 +15,7 @@ WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

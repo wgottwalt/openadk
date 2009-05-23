@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MTR,mtr,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MTR,mtr,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE+=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_resolv_res_mkquery=yes

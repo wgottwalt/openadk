@@ -14,7 +14,7 @@ MASTER_SITES:=		http://fping.sourceforge.net/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,FPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 

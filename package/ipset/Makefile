@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 XAKE_FLAGS+=		KERNEL_DIR=${LINUX_DIR} PREFIX=/usr LD=$(TARGET_CROSS)ld
 BUILD_STYLE=		auto

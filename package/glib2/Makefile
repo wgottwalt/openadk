@@ -15,7 +15,7 @@ MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.18/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GLIB2,glib2,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GLIB2,glib2,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCPPFLAGS+=		-I'${STAGING_DIR}/usr/include'
 CONFIGURE_STYLE=	gnu

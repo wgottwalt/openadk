@@ -16,8 +16,8 @@ WRKSRC=			${WRKDIST}/src
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,KRB5_LIBS,krb5-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,KRB5_LIBS,krb5-libs,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-krb4 --disable-static --without-tcl

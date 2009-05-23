@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HASERL,haserl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HASERL,haserl,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCFLAGS+=		-DMAX_UPLOAD_KB=8192
 CONFIGURE_STYLE=	gnu

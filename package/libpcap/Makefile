@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.tcpdump.org/release/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=26

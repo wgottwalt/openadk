@@ -17,7 +17,7 @@ WRKDIST=		${WRKDIR}/$(PKG_NAME)
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AICCU,aiccu,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,AICCU,aiccu,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 TCFLAGS+=	-D_REENTRANT -D_GNU_SOURCE -DAICCU_CONSOLE \
 		-D_LINUX -DHAS_IFHEAD -DAICCU_TYPE=\"linux\"

@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VTUN,vtun,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VTUN,vtun,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-ssl-headers=$(STAGING_DIR)/usr/include/openssl \

@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ZSH,zsh,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,ZSH,zsh,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

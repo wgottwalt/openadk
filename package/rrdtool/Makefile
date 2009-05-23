@@ -13,9 +13,9 @@ MASTER_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		rd_cv_ieee_works=yes

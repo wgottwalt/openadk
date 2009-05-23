@@ -13,9 +13,9 @@ MASTER_SITES:=		http://www.h5l.org/dist/src/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,HEIMDAL_LIBS,heimdal-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,HEIMDAL_CLIENT_LIBS,heimdal-client-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,HEIMDAL_LIBS,heimdal-libs,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,HEIMDAL_CLIENT_LIBS,heimdal-client-libs,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 PKG_DEPENDS:=		heimdal-libs, heimdal-client-libs, libncurses, 
 

@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.clevervest.com/htp/archive/c/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTPDATE,htpdate,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HTPDATE,htpdate,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 

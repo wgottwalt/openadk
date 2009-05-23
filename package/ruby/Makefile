@@ -16,7 +16,7 @@ MASTER_SITES:=		http://ftp.ruby-lang.org/pub/ruby/stable/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes

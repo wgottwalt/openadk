@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/engine_pkcs11-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSSL_PKCS11,openssl-pkcs11,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OPENSSL_PKCS11,openssl-pkcs11,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		cross_compiling=yes

@@ -15,8 +15,8 @@ MASTER_SITES:=		http://openvpn.net/release/ \
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,OPENVPN_EASY_RSA,openvpn-easy-rsa,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,OPENVPN_EASY_RSA,openvpn-easy-rsa,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 PKG_DEPEND:="kmod-tun"
 

@@ -18,10 +18,10 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 include ${LINUX_DIR}/.config
 
-$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,IPTABLES_UTILS,iptables-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPTABLES_UTILS,iptables-utils,${PKG_VERSION}-${PKG_RELEASE}))
 ifeq ($(ADK_IPV6),y)
-$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE}))
 endif
 
 CONFIGURE_STYLE:=	gnu

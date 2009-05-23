@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/lynx2-8-7
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 TCPPFLAGS+=		-DLYNX_VERSION=\"${PKG_VERSION}-OpenADK-${PKG_RELEASE}\"

@@ -45,7 +45,7 @@ $(KERNEL_IPKG):
 	rm -rf $(KERNEL_IDIR)
 	@mkdir -p $(KERNEL_IDIR)/etc
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_IDIR} \
-	    ../linux/kernel.control ${DEVICE}-${KERNEL_VERSION} ${ARCH}
+	    ../linux/kernel.control ${DEVICE}-${KERNEL_VERSION} ${CPU_ARCH}
 	$(IPKG_BUILD) $(KERNEL_IDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 
 prepare:

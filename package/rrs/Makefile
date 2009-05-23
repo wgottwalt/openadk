@@ -22,8 +22,8 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPEND}))
-$(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPEND_NOSSL}))
+$(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
+$(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND_NOSSL}))
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
 PKG_CFLAGS=-fno-builtin -fno-rtti -nostdinc++

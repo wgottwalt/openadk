@@ -18,7 +18,7 @@ EXTRA_CFLAGS=		-DNEW_LIBNET_INTERFACE
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RARPD,rarpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RARPD,rarpd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \

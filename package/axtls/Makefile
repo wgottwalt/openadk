@@ -15,8 +15,8 @@ WRKDIST=		${WRKDIR}/axTLS
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,AXHTTPD,axhttpd,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,AXHTTPD,axhttpd,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 BUILD_STYLE=		auto
 XAKE_FLAGS+=		STRIP='' \

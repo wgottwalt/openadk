@@ -15,8 +15,8 @@ WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HOSTAPD,hostapd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HOSTAPD,hostapd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 #MAKE_FLAGS+=		OPTFLAGS="${TARGET_CFLAGS}"

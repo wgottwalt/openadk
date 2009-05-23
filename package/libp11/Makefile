@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.opensc-project.org/files/libp11/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBP11,libp11,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBP11,libp11,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

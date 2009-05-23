@@ -16,10 +16,10 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},${ARCH},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-doc

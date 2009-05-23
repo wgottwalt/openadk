@@ -14,9 +14,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

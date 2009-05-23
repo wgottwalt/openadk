@@ -14,7 +14,7 @@ MASTER_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,XFSPROGS,xfsprogs,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,XFSPROGS,xfsprogs,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	autoconf gnu
 CONFIGURE_ARGS+=	--enable-gettext=no \

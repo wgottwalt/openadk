@@ -13,7 +13,7 @@ MASTER_SITES:=		http://procps.sourceforge.net/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},${ARCH},libncurses))
+$(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},libncurses))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

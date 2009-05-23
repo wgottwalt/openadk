@@ -14,8 +14,8 @@ MASTER_SITES:=		http://download.berlios.de/radiusclient-ng/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADIUSCLIENT_NG,radiusclient-ng,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LIBRADIUSCLIENT_NG,libradiusclient-ng,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RADIUSCLIENT_NG,radiusclient-ng,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBRADIUSCLIENT_NG,libradiusclient-ng,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	ac_cv_func_getdomainname=yes

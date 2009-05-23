@@ -13,8 +13,8 @@ MASTER_SITES:=		ftp://ftp.isc.org/isc/dhcp/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,DHCP_SERVER,dhcp-server,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DHCP_SERVER,dhcp-server,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-configure:
 	(cd ${WRKBUILD} ; \

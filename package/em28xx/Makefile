@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 include ${TOPDIR}/mk/package.mk
 
 
-$(eval $(call PKG_template,KMOD_EM28XX,kmod-em28xx,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},${ARCH},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,KMOD_EM28XX,kmod-em28xx,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
 
 CONFIGURE_STYLE:=	manual
 BUILD_STYLE:=		manual

@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.packetfactory.net/projects/libnids/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \

@@ -15,8 +15,8 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}80-${PKG_VERSION}-src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CBTT,cbtt,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,CBTT_MYSQL,cbtt-mysql,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CBTT,cbtt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CBTT_MYSQL,cbtt-mysql,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 TLDFLAGS+=		-shared -L. -L${STAGING_DIR}/usr/lib/mysql \

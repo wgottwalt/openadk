@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-tools \

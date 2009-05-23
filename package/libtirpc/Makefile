@@ -14,7 +14,7 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	autotool gnu
 ifneq (${ADK_COMPILE_NFS_UTILS_WITH_KERBEROS},y)

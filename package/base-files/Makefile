@@ -22,7 +22,7 @@ ICONTROL_ADDON_BASE_FILES=	"Package: base-files-${PKG_ID}"
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-install:
 	$(CP) ./files/* $(IDIR_BASE_FILES)

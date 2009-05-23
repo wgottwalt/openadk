@@ -14,7 +14,7 @@ MASTER_SITES:=		http://xmlsoft.org/sources/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-c14n \

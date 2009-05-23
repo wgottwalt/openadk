@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://sourceware.org/pub/libffi/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	autotool gnu
 BUILD_STYLE=		auto

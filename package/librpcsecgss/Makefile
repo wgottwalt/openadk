@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/librpcsecgss/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBRPCSECGSS,librpcsecgss,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LIBRPCSECGSS,librpcsecgss,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	autotool gnu
 BUILD_STYLE=		auto

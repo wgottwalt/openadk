@@ -16,7 +16,7 @@ MASTER_SITES:=		http://get.bitlbee.org/src/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BITLBEE,bitlbee,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BITLBEE,bitlbee,${PKG_VERSION}-${PKG_RELEASE}))
 ifeq ($(ADK_IPV6),y)
 IPV6+=	--ipv6=1
 else

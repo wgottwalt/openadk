@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/$(PKG_NAME)-0.11
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,6TUNNEL,6tunnel,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,6TUNNEL,6tunnel,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_path_STRIP=$(STRIP) \

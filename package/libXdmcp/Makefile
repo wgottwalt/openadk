@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXDMCP,libxdmcp,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LIBXDMCP,libxdmcp,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

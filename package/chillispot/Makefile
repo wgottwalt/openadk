@@ -13,7 +13,7 @@ MASTER_SITES=		http://www.chillispot.info/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CHILLISPOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CHILLISPOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

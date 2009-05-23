@@ -13,7 +13,7 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SWCONFIG,swconfig,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SWCONFIG,swconfig,${PKG_VERSION}-${PKG_RELEASE}))
 
 #XAKE_FLAGS:=		LIBS="$(STAGING_DIR)/usr/lib/libnl.a -lm"
 XAKE_FLAGS:=		LIBS="-lnl -lm" CFLAGS="$(TARGET_CFLAGS) -I$(LINUX_DIR)/include"

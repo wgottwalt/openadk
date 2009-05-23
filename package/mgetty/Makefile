@@ -15,7 +15,7 @@ DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_XVERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MGETTY,mgetty,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MGETTY,mgetty,${PKG_VERSION}-${PKG_RELEASE}))
 
 pre-configure:
 	cp ${WRKBUILD}/policy.h-dist ${WRKBUILD}/policy.h

@@ -14,7 +14,7 @@ MASTER_SITES:=		http://www.lowth.com/cutter/software/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CUTTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CUTTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${TARGET_CC} ${WRKBUILD}/cutter.c -o ${WRKBUILD}/cutter

@@ -15,7 +15,7 @@ MASTER_SITES:=		http://www.openwall.com/scanlogd/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SCANLOGD,scanlogd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SCANLOGD,scanlogd,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" LD="${TARGET_CC}" CFLAGS="-c ${TARGET_CFLAGS}" \

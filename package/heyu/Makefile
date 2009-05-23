@@ -14,7 +14,7 @@ MASTER_SITES:=		http://heyu.tanj.com/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HEYU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HEYU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	(cd ${WRKBUILD} && ${BASH} ./Configure);

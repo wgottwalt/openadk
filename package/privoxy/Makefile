@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-stable
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PRIVOXY,privoxy,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PRIVOXY,privoxy,${PKG_VERSION}-${PKG_RELEASE}))
 
 TLDFLAGS+=		-pthread
 CONFIGURE_STYLE:=	gnu

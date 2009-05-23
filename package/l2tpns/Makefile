@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=l2tpns/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,L2TPNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,L2TPNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_FLAGS=		auto
 INSTALL_STYLE=		auto

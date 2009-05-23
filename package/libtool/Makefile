@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_GNU:=libtool/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

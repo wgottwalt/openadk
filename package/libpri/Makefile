@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.asterisk-support.de/mirror/libpri/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPRI,libpri,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBPRI,libpri,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC='${TARGET_CC}'

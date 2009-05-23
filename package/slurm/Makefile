@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.wormulon.net/files/slurm/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SLURM,slurm,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SLURM,slurm,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	LIBS="-lncurses" \

@@ -14,7 +14,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=libcli/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBCLI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBCLI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

@@ -17,7 +17,7 @@ WRKDIST=		${WRKDIR}/wireless_tools.29
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_TOOLS,wireless-tools,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,WIRELESS_TOOLS,wireless-tools,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS} -I."

@@ -70,18 +70,18 @@ endef
 #endef
 
 
-$(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-auth-getpwnam,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_WINBIND,${PKG_NAME}-mod-basic-auth-winbind,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_WINBIND_GROUP,${PKG_NAME}-mod-external-acl-winbind-group,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,${PKG_NAME}-mod-ntlm-auth-smb-auth,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_WINBIND_AUTH,${PKG_NAME}-mod-ntlm-auth-winbind-auth,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-auth-getpwnam,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_WINBIND,${PKG_NAME}-mod-basic-auth-winbind,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_WINBIND_GROUP,${PKG_NAME}-mod-external-acl-winbind-group,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,${PKG_NAME}-mod-ntlm-auth-smb-auth,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_WINBIND_AUTH,${PKG_NAME}-mod-ntlm-auth-winbind-auth,${PKG_VERSION}-${PKG_RELEASE}))
 
 #${eval ${call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,getpwname_auth}}
 #${eval ${call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,ldap}}

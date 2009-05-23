@@ -13,7 +13,7 @@ MASTER_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.0/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \

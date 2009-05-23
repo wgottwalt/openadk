@@ -27,7 +27,7 @@ ifeq ($(ADK_SSP),y)
 	echo 'PROPOLICE_BLOCK_ABRT=y' >> ${WRKBUILD}/.config
 	echo '# PROPOLICE_BLOCK_SEGV is not set' >> ${WRKBUILD}/.config
 endif
-ifeq ($(DEBUG),1)
+ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
 	$(MAKE) -C $(WRKBUILD) \

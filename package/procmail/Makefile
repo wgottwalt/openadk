@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.procmail.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PROCMAIL,procmail,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PROCMAIL,procmail,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src -f ../Makefile.new  \

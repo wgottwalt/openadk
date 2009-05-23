@@ -17,7 +17,7 @@ MASTER_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENNTPD,openntpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OPENNTPD,openntpd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-privsep-user=ntp \

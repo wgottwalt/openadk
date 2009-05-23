@@ -5,9 +5,6 @@
 
 menu "Package selection"
 
-comment "Package categories"
-
-
 menu "Applications"
 
 menu "Basesystem"

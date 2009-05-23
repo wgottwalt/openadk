@@ -17,7 +17,7 @@ MASTER_SITES:=		ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/source/v${PK
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 PKG_CONFIGURE_ARGS:=\

@@ -13,7 +13,7 @@ MASTER_SITES:=		http://weather.ou.edu/~apw/projects/stress/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,STRESS,stress,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,STRESS,stress,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

@@ -17,7 +17,7 @@ WRKSRC=			${WRKDIST}/unix
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \

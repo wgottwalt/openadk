@@ -14,8 +14,8 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-1.0-pl10
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGSM,libgsm,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,GSM_UTILS,gsm-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBGSM,libgsm,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GSM_UTILS,gsm-utils,${PKG_VERSION}-${PKG_RELEASE}))
 
 XAKE_FLAGS+=		COPTS="${TARGET_CFLAGS}" \
 			INSTALL_ROOT="${WRKINST}"

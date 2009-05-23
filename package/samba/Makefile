@@ -15,9 +15,9 @@ WRKSRC=			${WRKDIST}/source
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba

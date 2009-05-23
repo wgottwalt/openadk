@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IGMPPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IGMPPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS}" -C ${WRKBUILD}/src

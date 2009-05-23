@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/faad2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	autotool gnu
 CONFIGURE_ARGS+=	--without-mpeg4ip \

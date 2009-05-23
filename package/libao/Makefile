@@ -13,7 +13,7 @@ MASTER_SITES:=		http://downloads.xiph.org/releases/ao/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBAO,libao,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBAO,libao,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-esd \

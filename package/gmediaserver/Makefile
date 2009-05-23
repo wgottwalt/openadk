@@ -13,7 +13,7 @@ MASTER_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz" \

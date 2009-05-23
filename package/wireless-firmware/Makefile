@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/RT61_Firmware_V1.2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_FIRMWARE_RT61,wireless-firmware-rt61,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,WIRELESS_FIRMWARE_RT61,wireless-firmware-rt61,${PKG_VERSION}-${PKG_RELEASE}))
 
 INSTALL_STYLE=		manual
 

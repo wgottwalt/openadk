@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.tntnet.org/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CXXTOOLS,cxxtools,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CXXTOOLS,cxxtools,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TCXXFLAGS+=		-fno-builtin -nostdinc++ -I${STAGING_DIR}/usr/include/uClibc++

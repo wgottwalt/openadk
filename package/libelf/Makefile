@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.mr511.de/software/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		mr_cv_target_elf=yes \

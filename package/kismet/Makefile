@@ -13,10 +13,10 @@ MASTER_SITES:=		http://www.kismetwireless.net/code/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifeq ($(ADK_COMPILE_KISMET_WITH_UCLIBCXX),y)
 TCFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ -I${STAGING_DIR}/usr/include/uClibc++

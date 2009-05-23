@@ -18,7 +18,7 @@ WRKDIST=		${WRKDIR}/perl-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MICROPERL,microperl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MICROPERL,microperl,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" OPTIMIZE="${TCFLAGS}"

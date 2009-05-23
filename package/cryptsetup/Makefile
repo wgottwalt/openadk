@@ -14,7 +14,7 @@ MASTER_SITES:=		http://cryptsetup.googlecode.com/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CRYPTSETUP,cryptsetup,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CRYPTSETUP,cryptsetup,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-static

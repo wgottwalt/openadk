@@ -13,7 +13,7 @@ MASTER_SITES:=		http://downloads.us.xiph.org/releases/libshout/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSHOUT,libshout,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBSHOUT,libshout,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-speex=no \

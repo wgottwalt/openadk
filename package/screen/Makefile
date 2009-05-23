@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_GNU:=screen/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SCREEN,screen,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SCREEN,screen,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(foreach flag,rename fchmod fchown strerror lstat _exit utimes vsnprintf getcwd setlocale strftime,ac_cv_func_${flag}=yes)

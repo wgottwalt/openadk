@@ -13,8 +13,8 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=lame/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

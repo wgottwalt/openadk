@@ -13,7 +13,7 @@ MASTER_SITES:=		http://verplant.org/collectd/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifneq (${ADK_PACKAGE_COLLECTD_CPU},y)
 DISABLE_CPU:=--disable-cpu

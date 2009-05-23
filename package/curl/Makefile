@@ -19,8 +19,8 @@ MASTER_SITES:=		http://curl.haxx.se/download/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-thread \

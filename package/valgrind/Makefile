@@ -14,7 +14,7 @@ MASTER_SITES:=		http://valgrind.org/downloads/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,VALGRIND,valgrind,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,VALGRIND,valgrind,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-tls

@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/mini_sendmail-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MINI_SENDMAIL,mini-sendmail,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MINI_SENDMAIL,mini-sendmail,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		OFLAGS="${TARGET_CFLAGS}"

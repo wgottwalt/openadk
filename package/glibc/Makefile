@@ -10,7 +10,7 @@ NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 do-extract:
 

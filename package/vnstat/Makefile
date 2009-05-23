@@ -14,7 +14,7 @@ MASTER_SITES:=		http://humdi.net/vnstat/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VNSTAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VNSTAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}

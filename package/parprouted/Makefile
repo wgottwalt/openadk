@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.hazard.maks.net/parprouted/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PARPROUTED,parprouted,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PARPROUTED,parprouted,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

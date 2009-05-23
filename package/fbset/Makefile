@@ -14,7 +14,7 @@ MASTER_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FBSET,fbset,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,FBSET,fbset,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

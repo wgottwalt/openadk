@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.infodrom.org/projects/cgilib/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CGILIB,cgilib,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CGILIB,cgilib,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE=		auto

@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SSMTP,ssmtp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SSMTP,ssmtp,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

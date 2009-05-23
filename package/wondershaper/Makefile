@@ -13,7 +13,7 @@ MASTER_SITES:=		http://lartc.org/wondershaper/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WONDERSHAPER,wondershaper,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,WONDERSHAPER,wondershaper,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_WONDERSHAPER}/usr/sbin/

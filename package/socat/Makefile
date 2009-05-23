@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.dest-unreach.org/socat/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \

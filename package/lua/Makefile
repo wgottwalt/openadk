@@ -16,10 +16,10 @@ MASTER_SITES:=		http://www.lua.org/ftp/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBLUA,liblua,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LUA,lua,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LUAC,luac,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LUA_EXAMPLES,lua-examples,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBLUA,liblua,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LUA,lua,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LUAC,luac,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LUA_EXAMPLES,lua-examples,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD} \

@@ -17,8 +17,8 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RRDCOLLECT,rrdcollect,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,RRDCOLLECT_EXAMPLE,rrdcollect-example,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RRDCOLLECT,rrdcollect,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RRDCOLLECT_EXAMPLE,rrdcollect-example,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		LIBS="${RRDTOOL_LIBS} -lz" ac_cv_func_malloc_0_nonnull=yes

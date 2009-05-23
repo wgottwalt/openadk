@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SETPWC,setpwc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SETPWC,setpwc,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${TARGET_CC} ${TCFLAGS} -DVERSION=\"${PKG_VERSION}\" -o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c

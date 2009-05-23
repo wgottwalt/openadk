@@ -11,7 +11,7 @@ KMOD_BUILD_DIR := $(LINUX_BUILD_DIR)/linux-modules
 MODULES_DIR := $(LINUX_BUILD_DIR)/modules/$(MODULES_SUBDIR)
 TARGET_MODULES_DIR := $(LINUX_TARGET_DIR)/$(MODULES_SUBDIR)
 
-KERNEL_IPKG:=$(PACKAGE_DIR)/kernel_$(DEVICE)-$(KERNEL_VERSION)_$(ARCH).ipk
+KERNEL_IPKG:=$(PACKAGE_DIR)/kernel_$(DEVICE)-$(KERNEL_VERSION)_$(CPU_ARCH).ipk
 INSTALL_TARGETS:= $(KERNEL_IPKG)
 NOINSTALL_TARGETS:=
 TARGETS:=
@@ -34,7 +34,7 @@ define KMOD_template
 
 IDEPENDK_$(1):=kernel ($(DEVICE)-$(KERNEL_VERSION)) $(foreach pkg,$(5),", $(pkg)")
 
-PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(DEVICE)-$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(ARCH).ipk
+PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(DEVICE)-$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(CPU_ARCH).ipk
 I_$(1) := $(KMOD_BUILD_DIR)/ipkg/$(2)
 
 ifeq ($$(ADK_KPACKAGE_KMOD_$(1)),m)
@@ -53,7 +53,7 @@ $$(PKG_$(1)):
 	echo "Description: kernel module $(2)" >> $(LINUX_BUILD_DIR)/kmod-control/kmod-$(2).control
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $$(I_$(1)) \
 	    $(LINUX_BUILD_DIR)/kmod-control/kmod-$(2).control \
-	    $(DEVICE)-$(KERNEL_VERSION)-$(KERNEL_RELEASE) $(ARCH)
+	    $(DEVICE)-$(KERNEL_VERSION)-$(KERNEL_RELEASE) $(CPU_ARCH)
 	echo "Depends: $$(IDEPENDK_$(1))" >> $$(I_$(1))/CONTROL/control
 ifneq ($(strip $(3)),)
 	mkdir -p $$(I_$(1))/lib/modules/$(KERNEL_VERSION)
