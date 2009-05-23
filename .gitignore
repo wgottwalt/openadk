@@ -1,0 +1,10 @@
+prereq.mk
+toolchain_build_*/
+.prereq_done
+.config*
+.cfg/
+cross_*/
+root_*/
+bin_*/
+make.log
+dl/
