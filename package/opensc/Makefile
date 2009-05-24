@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.opensc-project.org/files/opensc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSC,opensc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OPENSC,opensc,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

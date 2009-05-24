@@ -15,7 +15,7 @@ MASTER_SITES:=		http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/cups/${
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \

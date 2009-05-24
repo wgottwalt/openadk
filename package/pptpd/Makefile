@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=poptop/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PPTPD,pptpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PPTPD,pptpd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

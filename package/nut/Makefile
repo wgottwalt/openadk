@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.networkupstools.org/source/2.0/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NUT,nut,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NUT,nut,${PKG_VERSION}-${PKG_RELEASE}))
 
 define DRIVER_template
 

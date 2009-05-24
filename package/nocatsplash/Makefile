@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/NoCatSplash-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NOCATSPLASH,nocatsplash,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NOCATSPLASH,nocatsplash,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-firewall=iptables \

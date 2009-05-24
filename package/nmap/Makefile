@@ -21,7 +21,7 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPEND}))
+$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
 
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)

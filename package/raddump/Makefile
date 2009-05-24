@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	ac_cv_c_bigendian=no \

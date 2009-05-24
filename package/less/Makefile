@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.greenwoodsoftware.com/less/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LESS,less,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LESS,less,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-regex

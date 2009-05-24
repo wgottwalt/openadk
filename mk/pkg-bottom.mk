@@ -162,9 +162,9 @@ ${_IPKGS_COOKIE}:
 	exec ${MAKE} package
 
 package: ${ALL_IPKGS}
-	@cd ${WRKDIR}/fake-${ARCH} || exit 1; \
+	@cd ${WRKDIR}/fake-${CPU_ARCH} || exit 1; \
 	y=; sp=; for x in ${ALL_IDIRS}; do \
-		y="$$y$$sp$${x#$(WRKDIR)/fake-${ARCH}/}"; \
+		y="$$y$$sp$${x#$(WRKDIR)/fake-${CPU_ARCH}/}"; \
 		sp=' '; \
 	done; ls=; ln=; x=1; [[ -z $$y ]] || \
 	    md5sum $$(find $$y -type f) | sed -e "s/*//" | \

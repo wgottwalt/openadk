@@ -14,7 +14,7 @@ MASTER_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PCIUTILS,pciutils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PCIUTILS,pciutils,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

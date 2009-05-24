@@ -14,7 +14,7 @@ MASTER_SITES:=		http://www.joachim-breitner.de/udp-broadcast-relay/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,UDP_BROADCAST_RELAY,udp-broadcast-relay,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,UDP_BROADCAST_RELAY,udp-broadcast-relay,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${TARGET_CC} ${WRKBUILD}/main.c -o ${WRKBUILD}/${PKG_NAME}

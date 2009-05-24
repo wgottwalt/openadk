@@ -13,7 +13,7 @@ MASTER_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-sample \

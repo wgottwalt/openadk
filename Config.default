@@ -38,15 +38,12 @@ ADK_TARGET_ROOTFS_EXT2_CF=y
 # ADK_TARGET_ROOTFS_EXT2 is not set
 # ADK_SSP is not set
 # ADK_CXX is not set
+# ADK_DEBUG is not set
 # ADK_IPV6 is not set
 # ADK_XORG is not set
 
 #
 # Package selection
-#
-
-#
-# Package categories
 #
 
 #
@@ -896,10 +893,7 @@ ADK_PACKAGE_CFGFS=y
 # ADK_COMPILE_KRB5 is not set
 # ADK_PACKAGE_OPENCT is not set
 # ADK_PACKAGE_OPENSC is not set
-ADK_COMPILE_OPENSSL=y
-ADK_PACKAGE_LIBOPENSSL=y
-# ADK_PACKAGE_OPENSSL_UTIL is not set
-# ADK_PACKAGE_CA_CERTS is not set
+# ADK_PACKAGE_LIBOPENSSL is not set
 # ADK_PACKAGE_OPENSSL_PKCS11 is not set
 
 #
@@ -1236,7 +1230,7 @@ ADK_PACKAGE_DROPBEAR=y
 # ADK_PACKAGE_LIBWRAP is not set
 # ADK_PACKAGE_LIBXML2 is not set
 # ADK_PACKAGE_LIBXSLT is not set
-ADK_PACKAGE_ZLIB=y
+# ADK_PACKAGE_ZLIB is not set
 
 #
 # Kernel configuration

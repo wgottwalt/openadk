@@ -7,7 +7,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCPPFLAGS+=		-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib
 TLDFLAGS+=		-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib

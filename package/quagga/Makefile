@@ -15,15 +15,15 @@ MASTER_SITES:=		http://www.quagga.net/download/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE}))
 ifeq ($(ADK_IPV6),y)
-$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE}))
 endif
-$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \

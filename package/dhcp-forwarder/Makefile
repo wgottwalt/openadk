@@ -14,7 +14,7 @@ MASTER_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DHCP_FORWARDER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DHCP_FORWARDER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull="yes"

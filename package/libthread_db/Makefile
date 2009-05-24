@@ -16,7 +16,7 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTHREAD_DB,libthread-db,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBTHREAD_DB,libthread-db,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib

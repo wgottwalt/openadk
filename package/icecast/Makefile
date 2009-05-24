@@ -13,7 +13,7 @@ MASTER_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ICECAST,icecast,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,ICECAST,icecast,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/libxml2
 CONFIGURE_STYLE=	autotool gnu

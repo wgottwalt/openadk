@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://ftp.ee.lbl.gov/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ARPWATCH,arpwatch,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,ARPWATCH,arpwatch,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

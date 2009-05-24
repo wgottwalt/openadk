@@ -13,7 +13,7 @@ MASTER_SITES=		http://webdav.org/neon/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NEON,neon,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NEON,neon,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-ssl=openssl \

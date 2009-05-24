@@ -14,8 +14,8 @@ MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/l/linux-atm/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LINUX_ATM,linux-atm,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LINUX_ATM,linux-atm,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

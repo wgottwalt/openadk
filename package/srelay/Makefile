@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=socks-relay/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SRELAY,srelay,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SRELAY,srelay,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-thread

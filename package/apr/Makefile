@@ -13,7 +13,7 @@ MASTER_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NA
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,APR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,APR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no

@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OBEXFTP,obexftp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OBEXFTP,obexftp,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_DIR}/usr/include" \

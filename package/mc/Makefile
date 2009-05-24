@@ -13,7 +13,7 @@ MASTER_SITES=		http://www.ibiblio.org/pub/Linux/utils/file/managers/mc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-charset \

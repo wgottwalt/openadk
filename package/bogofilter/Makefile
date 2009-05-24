@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BOGOFILTER,bogofilter,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BOGOFILTER,bogofilter,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_c_bigendian=no \

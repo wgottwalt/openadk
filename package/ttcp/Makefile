@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/ttcp
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TTCP,ttcp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,TTCP,ttcp,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${TARGET_CC} ${TCFLAGS} -o ${WRKBUILD}/ttcp ttcp.c

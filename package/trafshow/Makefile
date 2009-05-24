@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/trafshow-5.2.3
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCFLAGS+=		-DHAVE_SOCKADDR_STORAGE -DHAVE_HAS_COLORS -I$(STAGING_DIR)/usr/include
 TLDFLAGS+=		-pthread

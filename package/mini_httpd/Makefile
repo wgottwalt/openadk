@@ -15,9 +15,9 @@ WRKDIST=		${WRKDIR}/mini_httpd-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MINI_HTTPD,mini-httpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,MINI_HTTPD_HTPASSWD,mini-httpd-htpasswd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,MINI_HTTPD_OPENSSL,mini-httpd-openssl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MINI_HTTPD,mini-httpd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MINI_HTTPD_HTPASSWD,mini-httpd-htpasswd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MINI_HTTPD_OPENSSL,mini-httpd-openssl,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	# with OpenSSL

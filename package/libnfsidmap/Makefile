@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBNFSIDMAP,libnfsidmap,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,LIBNFSIDMAP,libnfsidmap,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

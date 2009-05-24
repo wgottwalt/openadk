@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-java \

@@ -13,8 +13,8 @@ MASTER_SITES:=		http://download.berlios.de/gpsd/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GPSD,gpsd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GPSD,gpsd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-x \

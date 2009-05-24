@@ -29,7 +29,7 @@ else
 PKG_DEPEND+=		liblua
 endif
 
-$(eval $(call PKG_template,WEECHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPEND}))
+$(eval $(call PKG_template,WEECHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	${ENABLE_TLS} \

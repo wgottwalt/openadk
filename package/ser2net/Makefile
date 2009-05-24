@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ser2net/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SER2NET,ser2net,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SER2NET,ser2net,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

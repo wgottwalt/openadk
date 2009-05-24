@@ -17,7 +17,7 @@ MASTER_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTASN1,libtasn1,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBTASN1,libtasn1,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

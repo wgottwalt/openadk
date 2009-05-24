@@ -8,13 +8,13 @@ all: build-all-ipkgs
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
-ifneq ($(DEBUG),1)
+ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
 TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
 			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
-ifeq ($(DEBUG),1)
+ifneq ($(ADK_DEBUG),)
 CONFIGURE_ARGS+=	--enable-debug
 else
 CONFIGURE_ARGS+=	--disable-debug
@@ -92,9 +92,17 @@ fake: ${_FAKE_COOKIE}
 # our recursive build entry point
 build-all-ipkgs: ${_IPKGS_COOKIE}
 
+# there are some parameters to the PKG_template function
+# 1.) Config.in identifier ADK_PACKAGE_$(1)
+# 2.) name of the package, for single package mostly $(PKG_NAME)
+# 3.) package version (upstream version) and package revision (adk revision),
+#     always $(PKG_VERSION)-$(PKG_REVISION)
+# 4.) dependencies to other packages, $(PKG_DEPENDS)
+#    
+# should be package format independent and modular in the future
 define PKG_template
-IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_$(4).ipk
-IDIR_$(1)=	$(WRKDIR)/fake-${ARCH}/ipkg-$(2)
+IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.ipk
+IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/ipkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
@@ -105,12 +113,12 @@ ifeq ($(ADK_PACKAGE_$(1)),y)
 install-targets: $$(INFO_$(1))
 endif
 
-IDEPEND_$(1):=	$$(strip $(5))
+IDEPEND_$(1):=	$$(strip $(4))
 
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
 ICONTROL_$(1)?=	ipkg/$(2).control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) $(4)
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
 		deps=; \
@@ -126,18 +134,19 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 		done; \
 		echo "Depends: $$$$deps" >>$${IDIR_$(1)}/CONTROL/control; \
 	fi
-	for file in conffiles preinst postinst prerm postrm; do \
+	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./ipkg/$(2).$$$$file ] || cp ./ipkg/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+# FIXME: special case for device dependent base-files package
 ifneq ($(strip $${ICONTROL_ADDON_$(1)}),)
 	echo $${ICONTROL_ADDON_$(1)} >> $${IDIR_$(1)}/CONTROL/control
 endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
-ifneq ($(DEBUG),1)
+ifeq ($(ADK_DEBUG),)
 	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
-	cd $${IDIR_$(1)}; for script in etc/init.d/*; do \
+	@cd $${IDIR_$(1)}; for script in etc/init.d/*; do \
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \
 	done
@@ -167,8 +176,7 @@ endif
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
-		printf '%s\nwq\n' '/^libdir='\''*/s##&${STAGING_DIR}#' | \
-		    ed -s $$$$fn; \
+		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
 	done; grep 'usr/s*bin/' '$${STAGING_PARENT}/pkg/$(1)' | \
 	    while read fn; do \
 		b="$$$$(dd if="$$$$fn" bs=2 count=1 2>/dev/null)"; \

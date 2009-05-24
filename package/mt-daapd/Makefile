@@ -14,7 +14,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MT_DAAPD,mt-daapd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MT_DAAPD,mt-daapd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes

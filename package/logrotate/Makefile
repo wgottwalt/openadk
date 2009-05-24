@@ -14,7 +14,7 @@ MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/l/logrotate/
 
 include ${TOPDIR}/mk/package.mk
 
-${eval ${call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}}}
+${eval ${call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}}}
 
 TCFLAGS+=		-D_GNU_SOURCE -DLinux -DVERSION=\"$(VERSION)\"
 ALL_TARGET=		logrotate

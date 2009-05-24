@@ -14,8 +14,8 @@ MASTER_SITES:=		http://developer.osdl.org/dev/iproute2/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-configure:
 	${SED} "s:-O2:${TARGET_CFLAGS}:g" ${WRKBUILD}/Makefile

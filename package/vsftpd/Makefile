@@ -14,7 +14,7 @@ MASTER_SITES:=		ftp://vsftpd.beasts.org/users/cevans/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VSFTPD,vsftpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VSFTPD,vsftpd,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}

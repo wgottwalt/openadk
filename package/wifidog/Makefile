@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIFIDOG,wifidog,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,WIFIDOG,wifidog,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \

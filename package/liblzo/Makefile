@@ -14,7 +14,7 @@ MASTER_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-static

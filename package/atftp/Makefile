@@ -13,8 +13,8 @@ MASTER_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ATFTP,atftp,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,ATFTPD,atftpd,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,ATFTP,atftp,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,ATFTPD,atftpd,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 MAKE_FLAGS+=		CFLAGS="${TCFLAGS} -Wall -D_REENTRANT -fno-inline"
 CONFIGURE_STYLE=	gnu

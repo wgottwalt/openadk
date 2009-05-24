@@ -13,7 +13,7 @@ MASTER_SITES:=		http://downloads.us.xiph.org/releases/speex/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-ogg --disable-oggtest --enable-fixed-point

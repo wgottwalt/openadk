@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PPTP,pptp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PPTP,pptp,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

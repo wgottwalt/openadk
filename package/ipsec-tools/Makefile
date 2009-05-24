@@ -14,7 +14,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \

@@ -18,9 +18,9 @@ MASTER_SITES:=		http://www.openssl.org/source/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,CA_CERTS,ca-certificates,${PKG_VERSION}-${CACERT_VER},${ARCH}))
+$(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CA_CERTS,ca-certificates,${PKG_VERSION}-${CACERT_VER}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		auto confprog

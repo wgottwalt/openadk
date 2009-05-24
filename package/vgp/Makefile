@@ -14,7 +14,7 @@ MASTER_SITES:=		http://vgpd.freaknet.org/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VGP,vgp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VGP,vgp,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 INSTALL_STYLE:=		auto

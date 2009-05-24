@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=scdp/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SCDP,scdp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SCDP,scdp,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_path_libnet_config=${STAGING_DIR}/usr/bin

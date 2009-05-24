@@ -14,7 +14,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-piddir=/var \

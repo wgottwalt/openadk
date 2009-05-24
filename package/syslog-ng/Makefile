@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.balabit.com/downloads/files/syslog-ng/sources/1.6/src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-full-dynamic \

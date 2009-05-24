@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://ftp.gnome.org/pub/gnome/sources/esound/0.2/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ESOUND,esound,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,ESOUND,esound,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

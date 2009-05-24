@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DHCP6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DHCP6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} CC="${TARGET_CC}" STAGING_DIR=${STAGING_DIR} -C ${WRKBUILD}/server

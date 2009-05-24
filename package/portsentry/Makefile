@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}_beta
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PORTSENTRY,portsentry,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PORTSENTRY,portsentry,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 ALL_TARGET:=		linux

@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC=${TARGET_CC} \

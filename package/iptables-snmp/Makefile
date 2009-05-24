@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.nobiscuit.com/iptables-snmp/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPTABLES_SNMP,iptables-snmp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IPTABLES_SNMP,iptables-snmp,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

@@ -16,7 +16,7 @@ WRKDIST=${WRKDIR}/gkrellm-${PKG_VERSION}/server
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GKRELLMD,gkrellmd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GKRELLMD,gkrellmd,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=	auto
 MAKE_FLAGS+=	GLIB12_INCLUDE="-I${STAGING_DIR}/usr/include/glib-1.2 -I${STAGING_DIR}/usr/lib/glib/include" \

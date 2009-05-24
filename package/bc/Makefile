@@ -13,8 +13,8 @@ MASTER_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,DC,dc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DC,dc,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

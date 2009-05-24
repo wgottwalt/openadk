@@ -13,7 +13,7 @@ MASTER_SITES:=		http://thekelleys.org.uk/dnsmasq/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DNSMASQ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DNSMASQ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE=		manual

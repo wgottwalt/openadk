@@ -16,7 +16,7 @@ PKG_DEPENDS:=		libgcrypt libgpg-error kmod-tun
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VPNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VPNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 XAKE_FLAGS+=		CC="${TARGET_CC}" \

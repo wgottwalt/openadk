@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/vnc_reflector
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 TCPPFLAGS+=		-I.

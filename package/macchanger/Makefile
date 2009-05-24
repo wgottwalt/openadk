@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_GNU:=macchanger/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 INSTALL_STYLE:=		auto

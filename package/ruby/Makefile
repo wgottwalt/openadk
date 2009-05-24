@@ -13,7 +13,7 @@ MASTER_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/1.9/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE}))
 
 MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags=''

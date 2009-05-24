@@ -18,7 +18,8 @@ noconfig_targets:=	menuconfig \
 			_mconfig \
 			tags
 
-MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC ADK_TARGET_LIB_GLIBC ADK_SSP ADK_IPV6 ADK_CXX
+MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC ADK_TARGET_LIB_GLIBC ADK_SSP ADK_IPV6 ADK_CXX \
+			ADK_DEBUG
 POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
 	if [ -d .cfg ];then \

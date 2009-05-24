@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PORTMAP,portmap,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PORTMAP,portmap,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
 MAKE_FLAGS+=		WRAP_LIB='-L${STAGING_DIR}/usr/lib -lwrap'

@@ -11,7 +11,7 @@ INSTALL_SCRIPT=		install -m0755
 MAKEFLAGS=		$(EXTRA_MAKEFLAGS)
 BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
-ifeq ($(DEBUG),1)
+ifneq ($(ADK_DEBUG),)
 TARGET_DEBUGGING:=	-g -O0 -fno-omit-frame-pointer
 else
 TARGET_DEBUGGING:=	-fomit-frame-pointer

@@ -10,7 +10,6 @@ PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
 MASTER_SITES:=		http://www.openadk.org/distfiles/
-
 WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk
@@ -23,7 +22,7 @@ else
 PKG_DEPENDS:=		libstdcxx
 endif
 
-$(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPENDS}))
+$(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

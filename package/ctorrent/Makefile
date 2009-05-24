@@ -19,7 +19,7 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPEND}))
+$(eval $(call PKG_template,CTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
 
 ifeq ($(ADK_COMPILE_CTORRENT_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++

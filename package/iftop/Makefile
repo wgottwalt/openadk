@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.ex-parrot.com/~pdw/iftop/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IFTOP,iftop,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IFTOP,iftop,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

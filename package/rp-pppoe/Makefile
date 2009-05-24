@@ -13,10 +13,10 @@ MASTER_SITES:=		http://www.roaringpenguin.com/files/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PPPOE_CLIENT,pppoe-client,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,PPPOE_RELAY,pppoe-relay,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,PPPOE_SERVER,pppoe-server,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,PPPOE_SNIFF,pppoe-sniff,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PPPOE_CLIENT,pppoe-client,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PPPOE_RELAY,pppoe-relay,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PPPOE_SERVER,pppoe-server,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PPPOE_SNIFF,pppoe-sniff,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setvbuf_reversed=no \

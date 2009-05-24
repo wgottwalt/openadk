@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

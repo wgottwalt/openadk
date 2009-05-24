@@ -14,7 +14,7 @@ MASTER_SITES:=		ftp://ftp.netperf.org/netperf/archive/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NETPERF,netperf,${PKG_VERSION}${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NETPERF,netperf,${PKG_VERSION}${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		TARGET_NETPERF_HOME="/etc/netperf.conf" \

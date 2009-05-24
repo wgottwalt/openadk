@@ -14,7 +14,7 @@ MASTER_SITES:=		ftp://iptraf.seul.org/pub/iptraf/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPTRAF,iptraf,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,IPTRAF,iptraf,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \

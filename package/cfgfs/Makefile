@@ -13,7 +13,7 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CFGFS,cfgfs,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,CFGFS,cfgfs,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 

@@ -14,7 +14,7 @@ MASTER_SITES:=		http://www.openswan.org/download/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSWAN,openswan,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OPENSWAN,openswan,${PKG_VERSION}-${PKG_RELEASE}))
 
 FLAGS:=			${TCFLAGS} ${TCPPFLAGS} ${TLDFLAGS}
 

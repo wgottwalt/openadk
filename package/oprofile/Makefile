@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 TLDFLAGS+=		-shared
 CONFIGURE_STYLE=	gnu

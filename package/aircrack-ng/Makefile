@@ -13,7 +13,7 @@ MASTER_SITES:=		http://download.aircrack-ng.org/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AIRCRACK_NG,aircrack-ng,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,AIRCRACK_NG,aircrack-ng,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 BUILD_STYLE=	auto
 INSTALL_STYLE=	auto

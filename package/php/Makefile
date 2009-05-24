@@ -13,8 +13,8 @@ MASTER_SITES:=		http://de.php.net/distributions/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE}))
 
 define PKG_mod_template
 
@@ -118,19 +118,19 @@ else
 PKG_CONFIGURE_OPTS+=	--disable-xml
 endif
 
-$(eval $(call PKG_template,PHP_MOD_CURL,php-mod-curl,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_FTP,php-mod-ftp,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_GD,php-mod-gd,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_GMP,php-mod-gmp,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_PCRE,php-mod-pcre,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_SESSION,php-mod-session,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_SQLITE,php-mod-sqlite,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
-$(eval $(call PKG_template,PHP_MOD_XML,php-mod-xml,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,PHP_MOD_CURL,php-mod-curl,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_FTP,php-mod-ftp,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_GD,php-mod-gd,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_GMP,php-mod-gmp,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_PCRE,php-mod-pcre,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_SESSION,php-mod-session,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_SQLITE,php-mod-sqlite,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PHP_MOD_XML,php-mod-xml,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 $(eval $(call PKG_mod_template,PHP_MOD_CURL,curl))
 $(eval $(call PKG_mod_template,PHP_MOD_FTP,ftp))

@@ -13,7 +13,7 @@ MASTER_SITES:=		http://efault.net/npat/hacks/picocom/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PICOCOM,picocom,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PICOCOM,picocom,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 ALL_TARGET:=		picocom

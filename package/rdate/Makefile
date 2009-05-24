@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RDATE,rdate,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RDATE,rdate,${PKG_VERSION}-${PKG_RELEASE}))
 
 MAKE_FILE=		GNUmakefile
 BUILD_STYLE=		auto

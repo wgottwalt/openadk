@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.opensc-project.org/files/openct/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENCT,openct,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,OPENCT,openct,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

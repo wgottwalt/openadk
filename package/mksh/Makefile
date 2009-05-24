@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
 TCPPFLAGS+=		-DMKSH_SMALL=1

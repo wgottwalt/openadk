@@ -16,7 +16,7 @@ MASTER_SITES:=		http://www.tcpdump.org/release/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCPDUMP,tcpdump,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,TCPDUMP,tcpdump,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOSTCC} \

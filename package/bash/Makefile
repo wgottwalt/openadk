@@ -13,7 +13,7 @@ MASTER_SITES:=		http://ftp.gnu.org/gnu/bash/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BASH,bash,$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,BASH,bash,$(PKG_VERSION)-$(PKG_RELEASE)))
 
 XAKE_FLAGS+=		LIBS_FOR_BUILD=''
 CONFIGURE_STYLE=	gnu

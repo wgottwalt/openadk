@@ -14,7 +14,7 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tgz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AUTOSSH,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE),$(ARCH)))
+$(eval $(call PKG_template,AUTOSSH,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE)))
 
 TCFLAGS+=		-Wall -DSSH_PATH=\\\"/usr/bin/ssh\\\"\ \
 			-DVER=\\\"$(PKG_VERSION)\\\"\"

@@ -13,7 +13,7 @@ MASTER_SITES:=		http://perso.orange.fr/sebastien.godard/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SYSSTAT,sysstat,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,SYSSTAT,sysstat,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

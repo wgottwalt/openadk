@@ -68,9 +68,9 @@ SNMP_TRANSPORTS_EXCLUDED=	TCP TCPv6 UDPv6 Unix
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_header_pcap_h=no

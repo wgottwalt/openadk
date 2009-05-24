@@ -14,7 +14,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PALANTIR,palantir,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,PALANTIR,palantir,${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	mkdir -p ${WRKINST}/usr

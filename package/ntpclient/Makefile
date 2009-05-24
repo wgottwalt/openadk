@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-2007
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TCFLAGS}'

@@ -9,6 +9,7 @@ choice
 prompt "PHP Mode"
 default ADK_PACKAGE_PHP_FASTCGI
 depends on ADK_COMPILE_PHP
+
 config ADK_PACKAGE_PHP_FASTCGI
 	prompt "PHP built for FastCGI"
 	bool 

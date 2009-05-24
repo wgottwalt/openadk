@@ -13,7 +13,7 @@ MASTER_SITES:=		http://bluez.sourceforge.net/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ_FIRMWARE,bluez-firmware,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,BLUEZ_FIRMWARE,bluez-firmware,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--libdir=/lib

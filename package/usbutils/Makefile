@@ -14,7 +14,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-usb/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

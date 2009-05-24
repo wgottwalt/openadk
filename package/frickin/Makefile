@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=frickin/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FRICKIN,frickin,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,FRICKIN,frickin,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE=		auto
 

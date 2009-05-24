@@ -15,7 +15,7 @@ MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/e/ez-ipupdate/ \
 
 include ${TOPDIR}/mk/package.mk
 
-${eval ${call PKG_template,EZIPUPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}}}
+${eval ${call PKG_template,EZIPUPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}}}
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

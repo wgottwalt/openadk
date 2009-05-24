@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-db \

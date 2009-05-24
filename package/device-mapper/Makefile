@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE}))
 
 ifeq ($(DEBUG),1)
 CONFIGURE_ARGS+=	--enable-debug

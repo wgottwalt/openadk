@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.nano-editor.org/dist/v2.0/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NANO,nano,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,NANO,nano,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_header_regex_h=no

@@ -13,7 +13,7 @@ MASTER_SITES:=		${MASTER_SITE_GNU:=osip/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOSIP2,libosip2,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBOSIP2,libosip2,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-trace \

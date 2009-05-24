@@ -19,7 +19,7 @@ ifeq (${ARCH},mips)
 ENDIAN:=big
 endif
 
-$(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_libnet_have_pf_packet=yes \

@@ -7,7 +7,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/mpfr/Makefile.inc
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPFR,mpfr,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MPFR,mpfr,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

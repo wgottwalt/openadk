@@ -13,8 +13,8 @@ MASTER_SITES:=		http://www.zeroflux.org/proj/knock/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KNOCK,knock,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,KNOCK,knock,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE}))
 
 TCXXFLAGS+=		${TCPPFLAGS} ${TCFLAGS}
 CONFIGURE_STYLE=	gnu

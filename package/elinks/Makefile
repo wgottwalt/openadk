@@ -13,7 +13,7 @@ MASTER_SITES:=		http://elinks.or.cz/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ELINKS,elinks,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,ELINKS,elinks,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=yes

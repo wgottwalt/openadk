@@ -19,16 +19,16 @@ ${INSTALL_DIR} ${IDIR_${1}}/usr/lib/updatedd
 ${INSTALL_BIN} ${WRKINST}/usr/lib/updatedd/lib${2}.so ${IDIR_${1}}/usr/lib/updatedd/
 endef
 
-$(eval $(call PKG_template,UPDATEDD,updatedd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_CHANGEIP,updatedd-mod-changeip,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_DYNDNS,updatedd-mod-dyndns,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_EURODYNDNS,updatedd-mod-eurodyndns,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_HN,updatedd-mod-hn,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_NOIP,updatedd-mod-noip,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_ODS,updatedd-mod-ods,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_OVH,updatedd-mod-ovh,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_REGFISH,updatedd-mod-regfish,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,UPDATEDD_MOD_TZO,updatedd-mod-tzo,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,UPDATEDD,updatedd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_CHANGEIP,updatedd-mod-changeip,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_DYNDNS,updatedd-mod-dyndns,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_EURODYNDNS,updatedd-mod-eurodyndns,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_HN,updatedd-mod-hn,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_NOIP,updatedd-mod-noip,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_ODS,updatedd-mod-ods,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_OVH,updatedd-mod-ovh,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_REGFISH,updatedd-mod-regfish,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UPDATEDD_MOD_TZO,updatedd-mod-tzo,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

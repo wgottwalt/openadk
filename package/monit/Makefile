@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.tildeslash.com/monit/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MONIT,monit,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MONIT,monit,${PKG_VERSION}-${PKG_RELEASE}))
 
 PKG_DEPENDS:=		libpthread,
 

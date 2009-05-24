@@ -20,7 +20,7 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD} -f ${WRKBUILD}/Makefile${SSL_ENABLE} \

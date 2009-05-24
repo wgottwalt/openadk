@@ -13,7 +13,7 @@ MASTER_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-aligned

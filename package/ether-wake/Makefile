@@ -12,7 +12,7 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ETHER_WAKE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,ETHER_WAKE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
 
 do-build:
 	${TARGET_CC} ${TARGET_CFLAGS} -o ${WRKBUILD}/${PKG_NAME} ${WRKBUILD}/${PKG_NAME}.c

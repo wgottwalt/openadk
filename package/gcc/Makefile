@@ -7,7 +7,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-languages=c \

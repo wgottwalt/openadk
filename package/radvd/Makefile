@@ -16,7 +16,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADVD,radvd,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,RADVD,radvd,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-configfile=/etc/radvd.conf \

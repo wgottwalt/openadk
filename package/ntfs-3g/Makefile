@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/ntfs-3g-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KMOD_FS_NTFS_3G,kmod-fs-ntfs-3g,${KERNEL_VERSION}-${DEVICE}-${PKG_RELEASE},${ARCH},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,KMOD_FS_NTFS_3G,kmod-fs-ntfs-3g,${KERNEL_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
 
 CONFIGURE_ARGS+=	--disable-ldconfig \
 			--disable-library

@@ -15,7 +15,7 @@ WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CPPFLAGS='${TCPPFLAGS}' \

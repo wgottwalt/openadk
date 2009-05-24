@@ -13,7 +13,7 @@ MASTER_SITES:=		http://0pointer.de/lennart/projects/libdaemon/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes

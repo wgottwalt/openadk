@@ -13,7 +13,7 @@ MASTER_SITES:=		https://www.banu.com/pub/tinyproxy/1.6/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

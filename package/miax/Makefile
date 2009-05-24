@@ -15,7 +15,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MIAX,miax,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,MIAX,miax,${PKG_VERSION}-${PKG_RELEASE}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

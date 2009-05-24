@@ -14,7 +14,7 @@ MASTER_SITES:=		http://download.strongswan.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,STRONGSWAN,strongswan,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,STRONGSWAN,strongswan,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

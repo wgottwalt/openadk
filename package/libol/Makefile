@@ -13,7 +13,7 @@ MASTER_SITES:=		http://www.balabit.com/downloads/files/libol/0.3/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOL,libol,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBOL,libol,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto
