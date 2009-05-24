@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- iptraf-3.0.0.orig/src/packet.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/packet.c	2008-10-09 17:34:11.000000000 +0200
++++ iptraf-3.0.0/src/packet.c	2009-05-21 23:03:57.000000000 +0200
 @@ -35,7 +35,6 @@ details.
  #include <sys/ioctl.h>
  #include <linux/if_packet.h>
@@ -48,3 +48,12 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
      case LINK_TR:
          /*
           * Token Ring patch supplied by Tomas Dvorak 
+@@ -337,7 +318,7 @@ int processpacket(char *tpacket, char **
+      * Prepare ISDN reference descriptor and table.
+      */
+ 
+-    bzero(&isdntable, sizeof(struct isdntab));
++    memset(&isdntable, 0, sizeof(struct isdntab));
+     isdn_iface_check(&isdnfd, ifname);
+ 
+     /*

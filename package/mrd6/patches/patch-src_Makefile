@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- mrd6-0.9.6.orig/src/Makefile	2007-06-25 01:58:28.000000000 +0200
-+++ mrd6-0.9.6/src/Makefile	2008-10-21 11:27:38.000000000 +0200
++++ mrd6-0.9.6/src/Makefile	2009-05-22 00:43:30.000000000 +0200
 @@ -26,7 +26,7 @@ ifeq ($(SUPPORT_MODULES),yes)
  	MODULES ?= BGP
  	LDCMD = -rdynamic
@@ -19,7 +19,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  ifeq ($(OPTIMIZE),yes)
  	ifeq ($(SPACE_OPTIMIZE),yes)
-@@ -101,11 +101,8 @@ ifeq ($(OPTIMIZE),yes)
+@@ -101,22 +101,13 @@ ifeq ($(OPTIMIZE),yes)
  		CXXFLAGS += -O3
  	endif
  else
@@ -31,7 +31,18 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	endif
  endif
  
-@@ -151,7 +148,7 @@ $(foreach test,$(TESTS),$(eval $(call un
+ LDFLAGS += -lm
+ 
+-ifeq ($(STATIC_STDCXX),no)
+-	LDFLAGS += -lstdc++
+-else
+-	LDFLAGS += `$(CXX) -print-file-name=libstdc++.a`
+-endif
+-
+ TEST_OBJECTS = $(addprefix $(OBJ_DIR)/,$(TEST_SOURCES:.cpp=.o))
+ MRD_OBJECTS = $(addprefix $(OBJ_DIR)/,$(MRD_SOURCES:.cpp=.o))
+ 
+@@ -151,7 +142,7 @@ $(foreach test,$(TESTS),$(eval $(call un
  
  $(TARGET): $(MRD_OBJECTS)
  	@echo "Linking $(TARGET)"
@@ -40,7 +51,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  install: $(TARGET) $(EXTERNAL_MODULES)
  	install -D $(TARGET) $(DEST_PREFIX)/sbin/$(TARGET)
-@@ -162,12 +159,12 @@ ifneq (,$(EXTERNAL_MODULES))
+@@ -162,12 +153,12 @@ ifneq (,$(EXTERNAL_MODULES))
  endif
  
  $(MRD_VERSION_CPP): $(SOURCES) Makefile Makefile.options
@@ -55,7 +66,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		echo "Generating modules.cpp"; \
  		scripts/generate-modules-cpp.pl $(STATIC_MODULES) > $(MODULES_CPP)
  
-@@ -181,7 +178,7 @@ $(OPTIONS):
+@@ -181,7 +172,7 @@ $(OPTIONS):
  
  $(DEPS_DIR)/%.d: %.cpp $(OPTIONS)
  	@echo "Deps $<"
@@ -64,7 +75,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		$(CXX) -MM -MT $@ -MT $(addprefix $(OBJ_DIR)/,$(<:.cpp=.o)) \
  		       $(CXXFLAGS) $< > $@
  
-@@ -195,7 +192,7 @@ endif
+@@ -195,7 +186,7 @@ endif
  
  $(OBJ_DIR)/%.o: %.cpp $(OPTIONS)
  	@echo "C++ $<"

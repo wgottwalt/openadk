@@ -13,3 +13,21 @@ config ADK_PACKAGE_MRD6
 		and provides MLDv2 (as well as MLDv1), PIM-SM and MBGP support.
 
 		http://artemis.av.it.pt/mrd6/
+
+choice
+prompt "C++ library to use"
+depends on ADK_PACKAGE_MRD6
+default ADK_COMPILE_MRD6_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_MRD6_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+
+config ADK_COMPILE_MRD6_WITH_STDCXX
+	bool "Standard C++ library"
+	select ADK_PACKAGE_LIBSTDCXX
+	help
+
+config ADK_COMPILE_MRD6_WITH_UCLIBCXX
+	bool "Embedded uClibc++ library"
+	select ADK_PACKAGE_UCLIBCXX
+	help
+
+endchoice

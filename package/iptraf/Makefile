@@ -21,7 +21,7 @@ do-build:
 		${TARGET_CONFIGURE_OPTS} \
 		CFLAGS="${TARGET_CFLAGS}" \
 		DEBUG="" \
-		INCLUDEDIR="-I../support -I${STAGING_DIR}/usr/include -I${STAGING_DIR}/include" \
+		INCLUDEDIR="-I../support -I${STAGING_DIR}/usr/include" \
 		LDOPTS="-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib" \
 		PLATFORM="-DPLATFORM=\\\"Linux/${ARCH}\\\"" \
 		TARGET="/usr/bin" \

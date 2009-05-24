@@ -6,9 +6,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.6.2
+PKG_VERSION:=		2.6.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f42e7342cf9c12755577d207fffa9713
+PKG_MD5SUM:=		ca2489e29f9dc313a79b9747bb1090e5
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 MASTER_SITES:=		${MASTER_SITE_GNU:=gnutls/}
 
@@ -18,13 +18,28 @@ $(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${A
 $(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
 $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
-$(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
+$(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${ARCH},${PKG_DEPENDS}))
+
+ifeq (${ADK_COMPILE_GNUTLS_WITH_UCLIBCXX},y)
+TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
+TLDFLAGS+=		-nodefaultlibs -luClibc++
+PKG_DEPENDS:=		uclibc++
+else
+PKG_DEPENDS:=		libstdcxx
+endif
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--without-libz-prefix
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
+
+ifeq (${ADK_COMPILE_GNUTLS_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+post-configure:
+	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
+	    ${WRKBUILD}/libtool
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib

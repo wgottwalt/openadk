@@ -100,12 +100,14 @@ libshout-compile: libvorbis-compile
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
 libfontenc-compile: xproto-compile zlib-compile
+libICE-compile: xtrans-compile
 libSM-compile: libICE-compile
 libXt-compile: libSM-compile
 libXmu-compile: libXt-compile
+libXext-compile: libX11-compile
 libXaw-compile: libXext-compile libXmu-compile libXpm-compile
 libX11-compile: xproto-compile xextproto-compile xtrans-compile libXdmcp-compile \
-	libXau-compile libXaw-compile xcmiscproto-compile bigreqsproto-compile kbproto-compile \
+	libXau-compile xcmiscproto-compile bigreqsproto-compile kbproto-compile \
 	inputproto-compile
 libXfont-compile: freetype-compile fontcacheproto-compile fontsproto-compile libfontenc-compile
 libxml2-compile: zlib-compile
@@ -132,7 +134,7 @@ endif
 mt-daapd-compile: libgdbm-compile libid3tag-compile
 mtr-compile: ncurses-compile
 mutt-compile: ncurses-compile openssl-compile
-mysql-compile: ncurses-compile zlib-compile
+mysql-compile: ncurses-compile zlib-compile readline-compile
 nano-compile: ncurses-compile
 neon-compile: libpthread-compile libxml2-compile openssl-compile zlib-compile
 net-snmp-compile: libelf-compile

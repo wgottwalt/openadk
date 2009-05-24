@@ -104,7 +104,7 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				unzip -d ${WRKDIR} $$file ;; \
+				unzip -qd ${WRKDIR} $$file ;; \
 			*) \
 				echo "Cannot extract '$$file'" >&2; \
 				false ;; \

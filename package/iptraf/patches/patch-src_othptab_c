@@ -1,14 +1,31 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- iptraf-3.0.0.orig/src/othptab.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/othptab.c	2008-10-09 17:34:11.000000000 +0200
-@@ -19,7 +19,6 @@ details.
++++ iptraf-3.0.0/src/othptab.c	2009-05-21 23:02:50.000000000 +0200
+@@ -17,13 +17,12 @@ details.
+ ***/
+ 
  #include <asm/types.h>
++#include "options.h"
++#include "tcptable.h"
  #include <linux/if_ether.h>
  #include <linux/if_tr.h>
 -#include <linux/if_fddi.h>
  #include <winops.h>
  #include "arphdr.h"
- #include "options.h"
+-#include "options.h"
+-#include "tcptable.h"
+ #include "othptab.h"
+ #include "deskman.h"
+ #include "attrs.h"
+@@ -128,7 +127,7 @@ struct othptabent *add_othp_entry(struct
+         *nomem = 1;
+         return NULL;
+     }
+-    bzero(new_entry, sizeof(struct othptabent));
++    memset(new_entry, 0, sizeof(struct othptabent));
+ 
+     new_entry->is_ip = is_ip;
+     new_entry->fragment = fragment;
 @@ -139,11 +138,6 @@ struct othptabent *add_othp_entry(struct
                          new_entry->smacaddr);
              convmacaddr(((struct ethhdr *) packet)->h_dest,

@@ -16,14 +16,15 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${ARCH}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
-			LIBS="-lc -lm -lgcc_s -lpthread"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
-ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
+
+ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
 TLDFLAGS+=		-nodefaultlibs
 CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm -lgcc_s -lpthread"
+else
+CONFIGURE_ENV+=		LIBS="-lc -lm -lgcc_s -lpthread"
 endif
 
 post-install:
