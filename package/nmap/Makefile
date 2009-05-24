@@ -12,16 +12,16 @@ PKG_MD5SUM:=		278dd2e849cc3dbb947df961a1aaffd0
 MASTER_SITES:=		http://download.insecure.org/nmap/dist/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DEPEND:=		libgcc libdnet libpcap libpcre
+PKG_DEPENDS:=		libgcc libdnet libpcap libpcre
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
-PKG_DEPEND+=		uclibc++
+PKG_DEPENDS+=		uclibc++
 else
-PKG_DEPEND+=		libstdcxx
+PKG_DEPENDS+=		libstdcxx
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
+$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
 
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)

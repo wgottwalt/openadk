@@ -599,7 +599,8 @@ source package/busybox/config/networking/Config.in
 source package/busybox/config/printutils/Config.in
 source package/busybox/config/mailutils/Config.in
 source package/busybox/config/procps/Config.in
-source package/busybox/config/runit/Config.in
+# disable, gcc 4.4.0 problems
+#source package/busybox/config/runit/Config.in
 source package/busybox/config/selinux/Config.in
 source package/busybox/config/shell/Config.in
 source package/busybox/config/sysklogd/Config.in
