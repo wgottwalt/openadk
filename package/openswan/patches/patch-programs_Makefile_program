@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- openswan-2.6.21.orig/programs/Makefile.program	2009-03-30 15:11:28.000000000 +0200
++++ openswan-2.6.21/programs/Makefile.program	2009-05-22 01:09:17.000000000 +0200
+@@ -49,9 +49,9 @@ CFLAGS+=-DFINALCONFFILE=\"${FINALCONFFIL
+ CFLAGS+=-DFINALVARDIR=\"${FINALVARDIR}\"
+ 
+ # die if there are any warnings
+-ifndef WERROR
+-WERROR:= -Werror
+-endif
++#ifndef WERROR
++#WERROR:= -Werror
++#endif
+ 
+ CFLAGS+= ${WERROR}
+ 

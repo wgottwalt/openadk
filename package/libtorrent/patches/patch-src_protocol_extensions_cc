@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libtorrent-0.12.2.orig/src/protocol/extensions.cc	2008-05-07 14:19:12.000000000 +0200
++++ libtorrent-0.12.2/src/protocol/extensions.cc	2009-05-21 23:39:00.000000000 +0200
+@@ -36,6 +36,7 @@
+ 
+ #include "config.h"
+ 
++#include <cstdio>
+ #include <limits>
+ #include <sstream>
+ 
