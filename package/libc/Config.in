@@ -1,0 +1,9 @@
+config ADK_PACKAGE_LIBC
+	prompt "libc............................... native C library"
+	tristate
+	default y if ADK_NATIVE
+	default n
+	depends on ADK_NATIVE
+	help
+	  C library.
+

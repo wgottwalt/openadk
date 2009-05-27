@@ -24,6 +24,10 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
+
+ifeq ($(ADK_NATIVE),y)
+			CONFIG_SHELL='$(strip ${SHELL})'
+else
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
@@ -36,6 +40,7 @@ CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
+endif
 MAKE_FILE?=		Makefile
 # this is environment for 'make all' and 'make install'
 MAKE_ENV?=
@@ -47,6 +52,11 @@ MAKE_FLAGS?=
 FAKE_FLAGS?=
 ALL_TARGET?=		all
 INSTALL_TARGET?=	install
+ifeq ($(ADK_NATIVE),y)
+MAKE_ENV+=		\
+			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
+			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
+else
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
@@ -60,6 +70,7 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
+endif
 MAKE_FLAGS+=		${XAKE_FLAGS}
 FAKE_FLAGS+=		${XAKE_FLAGS}
 

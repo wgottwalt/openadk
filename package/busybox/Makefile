@@ -22,18 +22,35 @@ do-configure:
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
 	$(SED) 's@IDIR@${WRKINST}' ${WRKBUILD}/.config
+ifeq ($(ADK_NATIVE),y)
+	yes '' | \
+	$(MAKE) V=1 \
+	    IPKG_ARCH="$(ARCH)" \
+	    ARCH="$(ARCH)" -C $(WRKBUILD) oldconfig
+else
 	yes '' | \
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    EXTRA_CFLAGS="$(TARGET_CFLAGS)" IPKG_ARCH="$(ARCH)" \
 	    ARCH="$(ARCH)" -C $(WRKBUILD) oldconfig
+endif
 
 do-build:
+ifeq ($(ADK_NATIVE),y)
+	$(MAKE) V=1 \
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD)
+else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD)
+endif
 
 do-install: ${TOPDIR}/.config
+ifeq ($(ADK_NATIVE),y)
+	$(MAKE) V=1 \
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) install
+else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) install
+endif
 ifeq ($(DEBUG),1)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox

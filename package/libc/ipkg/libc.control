@@ -1,0 +1,4 @@
+Package: libc
+Priority: optional
+Section: libs
+Description: native standard C library 

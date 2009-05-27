@@ -18,8 +18,8 @@ noconfig_targets:=	menuconfig \
 			_mconfig \
 			tags
 
-MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC ADK_TARGET_LIB_GLIBC ADK_SSP ADK_IPV6 ADK_CXX \
-			ADK_DEBUG
+MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC ADK_TARGET_LIB_GLIBC ADK_SSP \
+			ADK_IPV6 ADK_CXX ADK_DEBUG
 POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
 	if [ -d .cfg ];then \
@@ -57,7 +57,11 @@ all: world
 
 world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
+ifeq ($(ADK_NATIVE),y)
+	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+else
 	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+endif
 
 package_index:
 	-cd ${PACKAGE_DIR} && \

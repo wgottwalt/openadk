@@ -111,6 +111,9 @@ package-$(ADK_PACKAGE_GLIB2) += glib2
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 endif
+ifeq (${ADK_NATIVE},y)
+package-$(ADK_PACKAGE_LIBC) += libc
+endif
 package-$(ADK_PACKAGE_GMEDIASERVER) += gmediaserver
 package-$(ADK_COMPILE_GMP) += gmp
 package-$(ADK_COMPILE_GNUTLS) += gnutls
@@ -360,7 +363,9 @@ package-$(ADK_PACKAGE_TOR) += tor
 package-$(ADK_PACKAGE_TRAFSHOW) += trafshow
 package-$(ADK_PACKAGE_TTCP) += ttcp
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
+ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
+endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 endif
 package-$(ADK_PACKAGE_UDEV) += udev

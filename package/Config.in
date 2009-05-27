@@ -10,9 +10,10 @@ menu "Applications"
 menu "Basesystem"
 source "package/base-files/Config.in"
 source "package/busybox/Config.in"
-source "package/uclibc/Config.in"
 source "package/cfgfs/Config.in"
+source "package/uclibc/Config.in"
 source "package/glibc/Config.in"
+source "package/libc/Config.in"
 endmenu
 
 menu "Bluetooth"
