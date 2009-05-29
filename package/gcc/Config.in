@@ -1,5 +1,5 @@
 config ADK_PACKAGE_GCC
-	prompt "gcc.......................... GNU Compiler Collection"
+	prompt "gcc............................... GNU Compiler Collection"
 	tristate
 	default n
 	select ADK_PACKAGE_LIBGMP

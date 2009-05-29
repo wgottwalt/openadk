@@ -352,7 +352,7 @@ endmenu
 menu "Programming"
 source "package/binutils/Config.in"
 source "package/cxxtools/Config.in"
-#source "package/gcc/Config.in"
+source "package/gcc/Config.in"
 source "package/haserl/Config.in"
 source "package/jamvm/Config.in"
 source "package/lua/Config.in"
