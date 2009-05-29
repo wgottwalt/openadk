@@ -60,7 +60,7 @@ CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS}
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
-XAKE_FLAGS+=		STRIP=""
+XAKE_FLAGS+=		STRIP="" CPPFLAGS="-D_GNU_SOURCE"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENLDAP}/etc/openldap

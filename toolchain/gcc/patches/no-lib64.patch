@@ -1,0 +1,11 @@
+diff -Nur gcc-4.4.0.orig/gcc/config/mips/t-linux64 gcc-4.4.0/gcc/config/mips/t-linux64
+--- gcc-4.4.0.orig/gcc/config/mips/t-linux64	2006-06-06 14:51:24.000000000 +0200
++++ gcc-4.4.0/gcc/config/mips/t-linux64	2009-05-28 18:13:45.000000000 +0200
+@@ -1,6 +1,6 @@
+ MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
+ MULTILIB_DIRNAMES = n32 32 64
+-MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64
++MULTILIB_OSDIRNAMES = ../lib ../lib ../lib
+ 
+ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+ 

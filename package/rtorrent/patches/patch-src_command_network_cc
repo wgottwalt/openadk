@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rtorrent-0.8.2.orig/src/command_network.cc	2008-05-07 14:19:11.000000000 +0200
++++ rtorrent-0.8.2/src/command_network.cc	2009-05-29 01:38:53.000000000 +0200
+@@ -36,6 +36,7 @@
+ 
+ #include "config.h"
+ 
++#include <cstdio>
+ #include <functional>
+ #include <rak/address_info.h>
+ #include <rak/path.h>

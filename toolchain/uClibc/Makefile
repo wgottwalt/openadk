@@ -55,6 +55,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		PREFIX=$(STAGING_DIR) \
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_dev
 	touch $@
 
@@ -63,6 +64,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		PREFIX=$(STAGING_DIR) \
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
 	echo $(PKG_VERSION) >$(STAGING_DIR)/uclibc_version
 	rm -rf $(STAGING_DIR)/lib/libc.so

@@ -4,7 +4,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		glibc
-PKG_VERSION:=		2.7
+PKG_VERSION:=		2.10-current
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0b4bc75fb7413bbd7e43c0a0e7c672b6
-MASTER_SITES:=		${MASTER_SITE_GNU:=glibc/}
+PKG_MD5SUM:=		f1d6d30f762e0be537a1f84d26fa0403
+MASTER_SITES:=		http://www.openadk.org/distfiles
