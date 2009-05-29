@@ -229,8 +229,8 @@ wpa_supplicant-compile: openssl-compile
 endif
 wx200d-compile: postgresql-compile
 xfsprogs-compile: e2fsprogs-compile
-libXxf86dga-compile: xf86dgaproto-compile
-xf86dga-compile: libXxf86dga-compile
+libXxf86dga-compile: xf86dgaproto-compile libXext-compile libXaw-compile
+xf86dga-compile: libXxf86dga-compile 
 xorg-server-compile: libX11-compile randrproto-compile renderproto-compile fixesproto-compile \
 	damageproto-compile scrnsaverproto-compile resourceproto-compile \
 	fontsproto-compile videoproto-compile compositeproto-compile \

@@ -23,8 +23,10 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-__cxa_atexit \
 			--enable-target-optspace \
 			--with-gnu-ld \
+			--without-headers \
 			--disable-libmudflap \
 			--disable-libgomp \
+			--disable-biarch \
 			--disable-multilib \
 			--disable-nls 
 
@@ -36,6 +38,10 @@ endif
 
 ifeq ($(ADK_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
+endif
+
+ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
+GCC_CONFOPTS+=		--with-abi=64
 endif
 
 include ${TOPDIR}/mk/buildhlp.mk
@@ -74,6 +80,7 @@ $(GCC_BUILD_DIR2)/.configured:
 		${GCC_CONFOPTS} \
 		--enable-languages=$(TARGET_LANGUAGES) \
 		--with-sysroot=$(STAGING_DIR) \
+		--with-slibdir=$(STAGING_DIR)/lib \
 		--enable-shared \
 	);
 	touch $@

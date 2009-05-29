@@ -33,6 +33,9 @@ config ADK_zaurus
 config ADK_foxboard
 	tristate
 
+config ADK_lemote
+	tristate
+
 config ADK_ibm_x40
 	tristate
 
@@ -60,6 +63,7 @@ config ADK_DEVICE
 	default "rb433"  if ADK_rb433
 	default "zaurus"  if ADK_arm
 	default "ibm-x40"  if ADK_ibm_x40
+	default "lemote"  if ADK_lemote
 	default "rescue-x86"  if ADK_rescue_x86
 	default "rescue-x86_64"  if ADK_rescue_x86_64
 	default "rescue-mips"  if ADK_rescue_mips
@@ -89,6 +93,12 @@ config ADK_LINUX_CRIS_FOXBOARD
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Foxboard support
+
+config ADK_LINUX_MIPS64_LEMOTE
+	bool "Lemote Subnotebook"
+	select ADK_lemote
+	help
+	  Lemote Subnotebook
 
 config ADK_LINUX_MIPS_RB411
 	bool "Mikrotik Routerboard 411"
@@ -229,7 +239,8 @@ config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	depends on ADK_LINUX_X86_IBM_X40 || ADK_LINUX_X86_QEMU || \
 		ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB411 || \
-		ADK_LINUX_MIPS_RB532 || ADK_LINUX_RESCUE
+		ADK_LINUX_MIPS_RB532 || ADK_LINUX_RESCUE || \
+		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.gnu.org/libc
 endchoice
@@ -242,7 +253,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on ADK_LINUX_X86_IBM_X40 || ADK_LINUX_X86_QEMU || \
 		ADK_LINUX_CRIS_QEMU || ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_RESCUE
+		ADK_LINUX_RESCUE || ADK_LINUX_MIPS64_LEMOTE
 	help
 	  initramfs help...
 
@@ -261,9 +272,12 @@ config ADK_TARGET_ROOTFS_YAFFS
 
 config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
-	depends on ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_MIPS_RB532 || ADK_LINUX_MIPS_RB433 || \
-		ADK_LINUX_MIPS_RB411
+	depends on ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_MIPS_RB433 || \
+		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_NFS_V3
 	select ADK_KERNEL_ROOT_NFS

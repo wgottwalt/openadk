@@ -14,6 +14,10 @@ else
 CONFOPTS+=		--disable-libssp
 endif
 
+ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
+CONFOPTS+=		--enable-64-bit-bfd
+endif
+
 $(WRKBUILD)/.headers: 
 $(WRKBUILD)/.configure_done: 
 	(cd $(WRKBUILD); \
@@ -25,10 +29,11 @@ $(WRKBUILD)/.configure_done:
 		--disable-nls \
 		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 		--with-sysroot=$(STAGING_DIR) \
-		${CONFOPTS} \
+		--disable-multilib \
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-werror \
+		${CONFOPTS} \
 	);
 	touch $@
 

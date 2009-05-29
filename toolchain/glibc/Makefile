@@ -24,14 +24,17 @@ $(WRKBUILD)/.headers_configure:
 		$(WRKBUILD)/configure \
 		--prefix=/usr \
 		--build=$(GNU_HOST_NAME) \
-		--host=$(GNU_HOST_NAME) \
-		--target=$(REAL_GNU_TARGET_NAME) \
+		--host=$(REAL_GNU_TARGET_NAME) \
 		--disable-nls \
 		--without-cvs \
+		--with-__thread \
+		--with-tls \
+		--enable-add-ons \
+		--enable-kernel="2.6.0" \
 		--disable-sanity-checks \
-		${GLIBC_CONFOPTS} \
 		--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
 		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+		${GLIBC_CONFOPTS} \
 	);
 	touch $@
 
@@ -41,8 +44,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		CFLAGS="-DBOOTSTRAP_GCC" install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
-	$(CP) $(GLIBC_BUILD_DIR)/bits/stdio_lim.h \
-		$(TOOLCHAIN_SYSROOT)/usr/include/bits
+	touch $(TOOLCHAIN_SYSROOT)/usr/include/bits/stdio_lim.h
 	touch $@
 
 $(WRKBUILD)/.configure_done: 
@@ -57,9 +59,10 @@ $(WRKBUILD)/.configure_done:
 		LD=${REAL_GNU_TARGET_NAME}-ld \
 		libc_cv_forced_unwind=yes \
 		libc_cv_c_cleanup=yes \
+		libc_cv_gnu99_inline=yes \
 		$(WRKBUILD)/configure \
 		--prefix=/usr \
-		--build=$(GNU_TARGET_NAME) \
+		--build=$(GNU_HOST_NAME) \
 		--host=$(REAL_GNU_TARGET_NAME) \
 		--disable-nls \
 		--without-cvs \
@@ -68,11 +71,12 @@ $(WRKBUILD)/.configure_done:
 		--without-gd \
 		--enable-shared \
 		--enable-stackguard-randomization \
-		--enable-add-ons=nptl --with-__thread \
+		--with-__thread \
 		--with-tls \
-		--enable-tls \
-		${GLIBC_CONFOPTS} \
+		--enable-add-ons \
+		--enable-kernel=2.6.0 \
 		--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+		${GLIBC_CONFOPTS} \
 	);
 	touch $@
 
@@ -88,7 +92,6 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	PATH='${TARGET_PATH}' \
-	#CFLAGS="$(TARGET_CFLAGS_ARCH) $(TARGET_CFLAGS)" \
 	$(MAKE) -C $(GLIBC_BUILD_DIR2) \
 		install_root=$(STAGING_DIR) \
 		install-lib-all install-headers \

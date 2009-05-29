@@ -6,9 +6,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libelf
-PKG_VERSION:=		0.8.9
+PKG_VERSION:=		0.8.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		11904a77b948bcfab671e80100b6098d
+PKG_MD5SUM:=		e931910b6d100f6caa32239849947fbf
 MASTER_SITES:=		http://www.mr511.de/software/
 
 include ${TOPDIR}/mk/package.mk
@@ -17,12 +17,9 @@ $(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		mr_cv_target_elf=yes \
-			libelf_64bit=yes \
-			libelf_cv_struct_elf64_ehdr=yes \
-			libelf_cv_type_elf64_addr=no \
-			libelf_cv_struct_elf64_rel=yes \
 			ac_cv_sizeof_long_long=8
-CONFIGURE_ARGS+=	--enable-elf64=yes
+CONFIGURE_ARGS+=	--enable-elf64=yes \
+			--disable-sanity-checks
 BUILD_STYLE=		auto
 INSTALL_STYLE=		confprog auto
 FAKE_FLAGS+=		instroot="${WRKINST}"

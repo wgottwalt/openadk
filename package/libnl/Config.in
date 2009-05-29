@@ -1,6 +1,6 @@
 config ADK_PACKAGE_LIBNL
-	prompt "libnl........................... Tools for manipulating Linux Wireless cards"
+	prompt "libnl........................... netlink library"
 	tristate
 	default n
 	help
-	  Tools for configuring Wireless Adapters.
+	  Netlink library.

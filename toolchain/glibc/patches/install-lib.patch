@@ -1,7 +1,7 @@
-diff -Nur glibc-2.7.orig/Makerules glibc-2.7/Makerules
---- glibc-2.7.orig/Makerules	2007-08-26 04:18:03.000000000 +0200
-+++ glibc-2.7/Makerules	2008-09-12 11:35:40.000000000 +0200
-@@ -867,6 +867,13 @@
+diff -Nur glibc-2.9.orig/Makerules glibc-2.9/Makerules
+--- glibc-2.9.orig/Makerules	2008-02-07 01:39:18.000000000 +0100
++++ glibc-2.9/Makerules	2009-05-27 00:30:47.000000000 +0200
+@@ -853,6 +853,13 @@
  installed-libcs := $(foreach o,$(filter-out .os,$(object-suffixes-for-libc)),\
  			     $(inst_libdir)/$(patsubst %,$(libtype$o),\
  						     $(libprefix)$(libc-name)))

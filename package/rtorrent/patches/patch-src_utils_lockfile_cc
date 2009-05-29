@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- rtorrent-0.8.2.orig/src/utils/lockfile.cc	2008-05-07 14:19:11.000000000 +0200
++++ rtorrent-0.8.2/src/utils/lockfile.cc	2009-05-29 01:34:05.000000000 +0200
+@@ -39,6 +39,7 @@
+ #include <algorithm>
+ #include <cctype>
+ #include <cerrno>
++#include <cstdio>
+ #include <cstring>
+ #include <sstream>
+ #include <fcntl.h>

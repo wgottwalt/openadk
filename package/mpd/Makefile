@@ -18,7 +18,7 @@ $(eval $(call PKG_template,MPD,mpd,${PKG_VERSION}-${PKG_RELEASE}))
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
-XAKE_FLAGS+=		MPD_CFLAGS=''
+XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 PKG_DEPENDS:=		glib2 alsa-lib libcurl
 
 CONFIGURE_ARGS+=	\
