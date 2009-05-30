@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- libX11-1.1.5.orig/src/util/Makefile.in	2008-09-04 23:48:56.000000000 +0200
-+++ libX11-1.1.5/src/util/Makefile.in	2008-12-22 13:41:42.000000000 +0100
++++ libX11-1.1.5/src/util/Makefile.in	2009-05-30 21:53:42.350425696 +0200
+@@ -52,7 +52,7 @@ makekeys_OBJECTS = makekeys-makekeys.$(O
+ makekeys_LDADD = $(LDADD)
+ makekeys_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(makekeys_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(HOSTLDFLAGS) -o $@
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/src -I$(top_builddir)/include/X11
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
 @@ -82,7 +82,7 @@ BIGFONT_CFLAGS = @BIGFONT_CFLAGS@
  BIGFONT_LIBS = @BIGFONT_LIBS@
  CC = @CC@
@@ -10,9 +19,12 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  CPP = @CPP@
  CPPFLAGS = @CPPFLAGS@
  CXX = @CXX@
-@@ -229,7 +229,7 @@ top_builddir = @top_builddir@
+@@ -227,9 +227,9 @@ sysconfdir = @sysconfdir@
+ target_alias = @target_alias@
+ top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
- makekeys_CFLAGS = $(X11_CFLAGS)
+-makekeys_CFLAGS = $(X11_CFLAGS)
++makekeys_CFLAGS = $(HOSTCFLAGS)
  
 -#override CC = gcc
 +override CC = gcc
