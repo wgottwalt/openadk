@@ -37,6 +37,9 @@ find $TARGETS -type f -a -exec file {} \; | \
 	*ELF*executable*statically\ linked*)
 		echo >&2 "$SELF: *WARNING* '$V' is not dynamically linked!"
 		;;
+	*ELF*relocatable*,\ not\ stripped*)
+		echo >&2 "$SELF: *WARNING* '$V' is a relocatable!"
+		;;
 	esac
 	case $line in
 	*ELF*executable*,\ not\ stripped*)
@@ -48,14 +51,12 @@ find $TARGETS -type f -a -exec file {} \; | \
 		    sed -n -e '/__param_/s/^.*__param_/-K /p' \
 		    -e '/__module_parm_/s/^.*__module_parm_/-K /p'))"
 		S='kernel module' ;;
-	*ELF*relocatable*,\ not\ stripped*)
-		S=relocatable ;;
 	*ELF*shared\ object*,\ not\ stripped*)
 		S='shared object' ;;
 	*)
 		continue ;;
 	esac
 	echo "$SELF: $V:$S"
-	#echo "+ $T $F"
+	echo "-> $T $F"
 	eval "$T $F"
 done

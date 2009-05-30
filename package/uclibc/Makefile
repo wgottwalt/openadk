@@ -28,11 +28,13 @@ endif
 		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_UCLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/; \
 	done
-	# create ld.so link for ldd
+	# create links for ldd / gcc
 ifneq (${CPU_ARCH},x86_64)
 	cd $(IDIR_UCLIBC)/lib && ln -sf ld-uClibc.so.0 ld.so
 else
 	cd $(IDIR_UCLIBC)/lib && ln -sf ld64-uClibc.so.0 ld.so
 endif
+	cd $(IDIR_UCLIBC)/lib && ln -sf libc.so.0 libc.so
+	cd $(IDIR_UCLIBC)/lib && ln -sf libgcc_s.so.1 libgcc_s.so
 
 include ${TOPDIR}/mk/pkg-bottom.mk

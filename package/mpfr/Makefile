@@ -15,5 +15,6 @@ INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPFR}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libmpfr.so.* ${IDIR_MPFR}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

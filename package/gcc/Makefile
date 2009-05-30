@@ -16,6 +16,7 @@ ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
 CONFIGURE_ARGS+=	--with-abi=64
 endif
 CONFIGURE_ARGS+=	--enable-languages=c \
+			--libexecdir=/usr/lib \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
 			--disable-__cxa_atexit \
@@ -32,9 +33,12 @@ INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install-gcc install-target-libgcc
 
 post-install:
-	${INSTALL_DIR} ${IDIR_GCC}/usr/lib
-	${INSTALL_DIR} ${IDIR_GCC}/usr/bin
+	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gcc ${IDIR_GCC}/usr/bin/
-	${INSTALL_BIN} ${WRKINST}/usr/bin/ccp ${IDIR_GCC}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
+	${CP} ${WRKINST}/usr/lib/gcc/* ${IDIR_GCC}/usr/lib/gcc/
+	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_GCC}/usr/lib
+	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/include-fixed
+	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 
 include ${TOPDIR}/mk/pkg-bottom.mk
