@@ -15,6 +15,15 @@ config ADK_qemu_x86
 config ADK_qemu_mips
 	tristate
 
+config ADK_qemu_mipsel
+	tristate
+
+config ADK_qemu_mips64
+	tristate
+
+config ADK_qemu_mips64el
+	tristate
+
 config ADK_qemu_cris
 	tristate
 
@@ -36,9 +45,6 @@ config ADK_foxboard
 config ADK_lemote
 	tristate
 
-config ADK_ibm_x40
-	tristate
-
 config ADK_rescue_x86
 	tristate
 
@@ -56,18 +62,24 @@ config ADK_DEVICE
 	default "alix1c"  if ADK_alix1c
 	default "qemu-x86"  if ADK_qemu_x86
 	default "qemu-mips"  if ADK_qemu_mips
+	default "qemu-mipsel"  if ADK_qemu_mipsel
+	default "qemu-mips64"  if ADK_qemu_mips64
+	default "qemu-mips64el"  if ADK_qemu_mips64el
 	default "qemu-cris"  if ADK_qemu_cris
 	default "foxboard"  if ADK_foxboard
 	default "rb532"  if ADK_rb532
 	default "rb411"  if ADK_rb411
 	default "rb433"  if ADK_rb433
 	default "zaurus"  if ADK_arm
-	default "ibm-x40"  if ADK_ibm_x40
 	default "lemote"  if ADK_lemote
 	default "rescue-x86"  if ADK_rescue_x86
 	default "rescue-x86_64"  if ADK_rescue_x86_64
 	default "rescue-mips"  if ADK_rescue_mips
 	default "rescue-mipsel"  if ADK_rescue_mipsel
+
+config ADK_LINUX_MIPS64
+	bool
+	default n	
 
 menu "Target system"
 
@@ -97,6 +109,7 @@ config ADK_LINUX_CRIS_FOXBOARD
 config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook"
 	select ADK_lemote
+	select ADK_LINUX_MIPS64
 	help
 	  Lemote Subnotebook
 
@@ -133,12 +146,6 @@ config ADK_LINUX_XSCALE_ZAURUS
 	select ADK_DEVICE_NO_FPU
 	help
 	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
-
-config ADK_LINUX_X86_IBM_X40
-	bool "IBM X40 Rescuesystem for encrypted Root/Swap"
-	select ADK_ibm_x40
-	help
-	 IBM X40 Rescuesystem
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
@@ -194,10 +201,30 @@ config ADK_LINUX_X86_QEMU
 	 Qemu support for x86 architecture.
 
 config ADK_LINUX_MIPS_QEMU
-	bool "mips (little endian)"
+	bool "mips (big endian)"
 	select ADK_qemu_mips
 	help
+	 Qemu support for MIPS BE architecture.
+
+config ADK_LINUX_MIPSEL_QEMU
+	bool "mipsel (little endian)"
+	select ADK_qemu_mipsel
+	help
 	 Qemu support for MIPS LE architecture.
+
+config ADK_LINUX_MIPS64_QEMU
+	bool "mips64 (big endian)"
+	select ADK_qemu_mips64
+	select ADK_LINUX_MIPS64
+	help
+	 Qemu support for MIPS64 BE architecture.
+
+config ADK_LINUX_MIPS64EL_QEMU
+	bool "mips64 (little endian)"
+	select ADK_qemu_mips64el
+	select ADK_LINUX_MIPS64
+	help
+	 Qemu support for MIPS64 LE architecture.
 
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
@@ -237,9 +264,15 @@ config ADK_TARGET_LIB_UCLIBC
 
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
-	depends on ADK_LINUX_X86_IBM_X40 || ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB411 || \
-		ADK_LINUX_MIPS_RB532 || ADK_LINUX_RESCUE || \
+	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_MIPS_QEMU || \
+		ADK_LINUX_MIPS64_QEMU || \
+		ADK_LINUX_MIPSEL_QEMU || \
+		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_RESCUE || \
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.gnu.org/libc
@@ -251,11 +284,16 @@ prompt "Target Firmware type"
 
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
-	depends on ADK_LINUX_X86_IBM_X40 || ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_CRIS_QEMU || ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_RESCUE || ADK_LINUX_MIPS64_LEMOTE
+	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_CRIS_QEMU || \
+		ADK_LINUX_MIPS_QEMU || \
+		ADK_LINUX_MIPSEL_QEMU || \
+		ADK_LINUX_MIPS64_QEMU || \
+		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_RESCUE || \
+		ADK_LINUX_MIPS64_LEMOTE
 	help
-	  initramfs help...
+	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "squashfs read-only root filesystem"
@@ -265,8 +303,9 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 
 config ADK_TARGET_ROOTFS_YAFFS
 	bool "YAFFS2 rootfilesystem (NAND)"
-	depends on ADK_LINUX_MIPS_RB532 || ADK_LINUX_MIPS_RB433 \
-		|| ADK_LINUX_MIPS_RB411
+	depends on ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_MIPS_RB433 || \
+		ADK_LINUX_MIPS_RB411
 	help
 	  Root filesystem on NAND.
 
@@ -297,12 +336,11 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 
 config ADK_TARGET_ROOTFS_EXT2
 	bool "read-write filesystem for qemu emulator"
-	depends on ADK_LINUX_X86_QEMU || ADK_LINUX_CRIS_QEMU || ADK_LINUX_MIPS_QEMU \
-		|| ADK_LINUX_XSCALE_ZAURUS
+	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_XSCALE_ZAURUS
 	select ADK_KERNEL_EXT2_FS
 	help
 	  Use this option if you compile for qemu.
-
 endchoice
 
 config ADK_SSP

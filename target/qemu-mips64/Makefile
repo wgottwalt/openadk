@@ -19,12 +19,12 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -n qemu-mips.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -hda qemu-mips.img -append="root=/dev/hda1 init=/init"'
+	@echo 'qemu-system-mips64 -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -hda qemu-mips.img -append="root=/dev/hda1 init=/init"'
 endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "init=/init"'
+	@echo 'qemu-system-mips64 -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "init=/init"'
 endif
