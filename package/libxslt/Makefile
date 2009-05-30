@@ -9,12 +9,16 @@ PKG_NAME:=		libxslt
 PKG_VERSION:=		1.1.24
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e83ec5d27fc4c10c6f612879bea9a153
-MASTER_SITES:=		http://xmlsoft.org/sources/ \
+PKG_DESCR:=		XSLT Library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libxml2
+PKG_URL:=		http://xmlsoft.org/XSLT
+PKG_SITES:=		http://xmlsoft.org/sources/ \
 			ftp://fr.rpmfind.net/pub/libxml/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBXSLT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_DIR}/usr" \

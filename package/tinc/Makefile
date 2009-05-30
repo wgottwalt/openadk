@@ -9,13 +9,17 @@ PKG_NAME:=		tinc
 PKG_VERSION:=		1.0.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f907acebada53512e01235bea6b4cdf1
-MASTER_SITES:=		http://www.tinc-vpn.org/packages/ \
+PKG_DESCR:=		VPN tunnel daemon
+PKG_SECTION:=		net
+PKG_DEPENDS:=		zlib liblzo libopenssl kmod-tun
+PKG_URL:=		http://www.tinc-vpn.org
+PKG_SITES:=		http://www.tinc-vpn.org/packages/ \
 			http://ftp.yi.se/pub/tinc/ \
 			http://www.mirrors.wiretapped.net/security/network-security/tinc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TINC,tinc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TINC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-kernel=${LINUX_DIR} \

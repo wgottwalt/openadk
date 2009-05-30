@@ -9,11 +9,15 @@ PKG_NAME:=		elinks
 PKG_VERSION:=		0.11.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		11547e054d7afb1f5ac9e9f65728cc6a
-MASTER_SITES:=		http://elinks.or.cz/download/
+PKG_DESCR:=		advanced text web browser
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libopenssl
+PKG_URL:=		http://elinks.or.cz
+PKG_SITES:=		http://elinks.or.cz/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ELINKS,elinks,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,ELINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=yes

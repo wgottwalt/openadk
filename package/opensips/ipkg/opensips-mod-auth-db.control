@@ -1,5 +1,0 @@
-Package: opensips-mod-auth-db
-Depends: opensips, libmysqlclient
-Section: net
-Priority: optional
-Description: authentication support against database for OpenSIPS

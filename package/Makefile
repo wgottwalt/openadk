@@ -66,7 +66,7 @@ package-$(ADK_PACKAGE_DECO) += deco
 package-$(ADK_PACKAGE_DEVICE_MAPPER) += device-mapper
 package-$(ADK_COMPILE_DHCP) += dhcp
 package-$(ADK_PACKAGE_DHCP_FORWARDER) += dhcp-forwarder
-package-$(ADK_PACKAGE_DHCP6) += dhcp6
+package-$(ADK_COMPILE_DHCPV6) += dhcpv6
 package-$(ADK_PACKAGE_DIGITEMP) += digitemp
 package-$(ADK_PACKAGE_DNSMASQ) += dnsmasq
 package-$(ADK_PACKAGE_DOSFSTOOLS) += dosfstools
@@ -111,6 +111,9 @@ package-$(ADK_PACKAGE_GLIB2) += glib2
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 endif
+ifeq (${ADK_NATIVE},y)
+package-$(ADK_PACKAGE_LIBC) += libc
+endif
 package-$(ADK_PACKAGE_GMEDIASERVER) += gmediaserver
 package-$(ADK_COMPILE_GMP) += gmp
 package-$(ADK_COMPILE_GNUTLS) += gnutls
@@ -137,7 +140,6 @@ package-$(ADK_COMPILE_IPROUTE2) += iproute2
 package-$(ADK_PACKAGE_IPSEC_TOOLS) += ipsec-tools
 package-$(ADK_PACKAGE_IPSET) += ipset
 package-$(ADK_COMPILE_IPTABLES) += iptables
-package-$(ADK_PACKAGE_IPTABLES_SNMP) += iptables-snmp
 package-$(ADK_PACKAGE_IPTRAF) += iptraf
 package-$(ADK_PACKAGE_IRSSI) += irssi
 package-$(ADK_PACKAGE_IW) += iw
@@ -256,7 +258,6 @@ package-$(ADK_PACKAGE_NETSTAT_NAT) += netstat-nat
 package-$(ADK_PACKAGE_NFS_UTILS) += nfs-utils
 package-$(ADK_PACKAGE_NFS_KERNEL_NFSD) += nfs-utils
 package-$(ADK_PACKAGE_NMAP) += nmap
-package-$(ADK_PACKAGE_NOCATSPLASH) += nocatsplash
 package-$(ADK_PACKAGE_NTPCLIENT) += ntpclient
 package-$(ADK_PACKAGE_OBEXFTP) += obexftp
 package-$(ADK_PACKAGE_OLSRD) += olsrd
@@ -343,7 +344,6 @@ package-$(ADK_PACKAGE_SSLTUNNEL) += ssltunnel
 package-$(ADK_PACKAGE_SSMTP) += ssmtp
 package-$(ADK_PACKAGE_STRACE) += strace
 package-$(ADK_PACKAGE_STRESS) += stress
-package-$(ADK_PACKAGE_STRONGSWAN) += strongswan
 package-$(ADK_PACKAGE_SUBVERSION) += subversion
 package-$(ADK_PACKAGE_SWCONFIG) += swconfig
 package-$(ADK_PACKAGE_SYSLOG_NG) += syslog-ng
@@ -360,7 +360,9 @@ package-$(ADK_PACKAGE_TOR) += tor
 package-$(ADK_PACKAGE_TRAFSHOW) += trafshow
 package-$(ADK_PACKAGE_TTCP) += ttcp
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
+ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
+endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 endif
 package-$(ADK_PACKAGE_UDEV) += udev
@@ -408,7 +410,7 @@ package-$(ADK_PACKAGE_ZSH) += zsh
 # kernel addon packages
 package-$(ADK_PACKAGE_KMOD_EM28XX) += em28xx
 package-$(ADK_PACKAGE_KMOD_MAC80211) += mac80211
-package-$(ADK_PACKAGE_KMOD_FS_NTFS_3G) += ntfs-3g
+package-$(ADK_PACKAGE_NTFS_3G) += ntfs-3g
 
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))

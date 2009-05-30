@@ -1,7 +1,6 @@
 config ADK_PACKAGE_IPSEC_TOOLS
 	prompt "ipsec-tools....................... IPsec management tools"
 	tristate
-	depends ADK_LINUX_2_6
 	select ADK_PACKAGE_LIBOPENSSL
 	default n
 	help

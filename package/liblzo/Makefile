@@ -6,15 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lzo
-PKG_VERSION:=		2.02
+PKG_VERSION:=		2.03
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6760e5819f4238328709bf93bf10071c
-
-MASTER_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
+PKG_MD5SUM:=		0c3d078c2e8ea5a88971089a2f02a726
+PKG_DESCR:=		a real-time data compression library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.oberhumer.com/opensource/lzo
+PKG_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-static

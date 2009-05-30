@@ -1,5 +1,0 @@
-Package: opensips-mod-nathelper
-Depends: opensips
-Section: net
-Priority: optional
-Description: NAT helper support for OpenSIPS

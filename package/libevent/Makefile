@@ -9,11 +9,14 @@ PKG_NAME:=		libevent
 PKG_VERSION:=		1.3
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		d87b05143c6c2bc9464758e68e9c6e25
-MASTER_SITES:=		http://www.monkey.org/~provos/
+PKG_DESCR:=		Event notification library for event-driven network servers
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.monkey.org/~provos
+PKG_SITES:=		http://www.monkey.org/~provos/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBEVENT,libevent,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBEVENT,libevent,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

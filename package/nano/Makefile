@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nano
-PKG_VERSION:=		2.0.6
+PKG_VERSION:=		2.0.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		619107f0fc3c4383d668cef15aa3ca32
-MASTER_SITES:=		http://www.nano-editor.org/dist/v2.0/
+PKG_MD5SUM:=		2be94dc43fb60fff4626a2401a977220
+PKG_DESCR:=		An enhanced clone of the Pico text editor
+PKG_SECTION:=		admin
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://www.nano-editor.org
+PKG_SITES:=		http://www.nano-editor.org/dist/v2.0/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NANO,nano,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,NANO,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_header_regex_h=no

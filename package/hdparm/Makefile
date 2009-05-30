@@ -6,14 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hdparm
-PKG_VERSION:=		6.6
+PKG_VERSION:=		9.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ecea69f775396e4ab6112dcf9066239f
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=hdparm/}
+PKG_MD5SUM:=		0524dd10ad986285ff4eeb3507f7471c
+PKG_DESCR:=		get/set ATA drive parameters
+PKG_SECTION:=		misc
+PKG_URL:=		http://sourceforge.net/projects/hdparm
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=hdparm/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HDPARM,hdparm,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HDPARM,hdparm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 

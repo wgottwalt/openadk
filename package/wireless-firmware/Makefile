@@ -9,13 +9,16 @@ PKG_NAME:=		wireless-firmware
 PKG_VERSION:=		1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d4c690c93b470bc9a681297c2adc6281
-MASTER_SITES:=		http://www.ralinktech.com.tw/data/
+PKG_DESCR:=		firmware for rt61/rt2601 wireless cards
+PKG_SECTION:=		sys
+PKG_SITES:=		http://www.ralinktech.com.tw/data/
+
 DISTFILES:=		RT61_Firmware_V1.2.zip
 WRKDIST=		${WRKDIR}/RT61_Firmware_V1.2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_FIRMWARE_RT61,wireless-firmware-rt61,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,WIRELESS_FIRMWARE_RT61,wireless-firmware-rt61,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE=		manual
 

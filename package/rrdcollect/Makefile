@@ -9,7 +9,10 @@ PKG_NAME:=		rrdcollect
 PKG_VERSION:=		0.2.3
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		5e4305c612bc3cccbaf802c275c81a11
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=rrdcollect/}
+PKG_DESCR:=		Round-Robin Database (RRD) collecting daemon
+PKG_SECTION:=		admin
+PKG_DEPENDS:=		librrd
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rrdcollect/}
 
 ifneq (${ADK_PACKAGE_LIBRRD},)
 RRDTOOL_LIBS:=-lart_lgpl_2 -lfreetype -lpng
@@ -17,8 +20,8 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RRDCOLLECT,rrdcollect,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,RRDCOLLECT_EXAMPLE,rrdcollect-example,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RRDCOLLECT,rrdcollect,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RRDCOLLECT_EXAMPLE,rrdcollect-example,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		LIBS="${RRDTOOL_LIBS} -lz" ac_cv_func_malloc_0_nonnull=yes
@@ -37,9 +40,6 @@ post-install:
 	${INSTALL_DIR} ${IDIR_RRDCOLLECT_EXAMPLE}/etc
 	${INSTALL_DATA} ./files/rrd.conf ./files/rrdcollect.conf \
 		${IDIR_RRDCOLLECT_EXAMPLE}/etc/
-	${INSTALL_DIR} ${IDIR_RRDCOLLECT_EXAMPLE}/etc/init.d
-	${INSTALL_BIN} ./files/rrdcollect.init \
-		${IDIR_RRDCOLLECT_EXAMPLE}/etc/init.d/${PKG_NAME}
 	${INSTALL_DIR} ${IDIR_RRDCOLLECT_EXAMPLE}/usr/bin
 	${INSTALL_BIN} ./files/rrd.sh ${IDIR_RRDCOLLECT_EXAMPLE}/usr/bin/
 	${INSTALL_DIR} ${IDIR_RRDCOLLECT_EXAMPLE}/www/cgi-bin

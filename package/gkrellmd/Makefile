@@ -5,29 +5,28 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		gkrellmd
-PKG_VERSION=		2.2.10
-PKG_RELEASE=		7
-PKG_MD5SUM=		518666ce4c2ef5a7db637683778fe18b
-MASTER_SITES=		http://members.dslextreme.com/users/billw/gkrellm/
-DISTFILES=		gkrellm-${PKG_VERSION}.tar.gz
+PKG_NAME:=		gkrellmd
+PKG_VERSION:=		2.3.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		db8a983a60577a6b4886db96d6def011
+PKG_DESCR:=		The GNU Krell Monitors Server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		glib2 libpthread
+PKG_URL:=		http://members.dslextreme.com/users/billw/gkrellm/gkrellm.html
+PKG_SITES:=		http://members.dslextreme.com/users/billw/gkrellm/
 
-WRKDIST=${WRKDIR}/gkrellm-${PKG_VERSION}/server
+DISTFILES:=		gkrellm-${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/gkrellm-${PKG_VERSION}/server
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GKRELLMD,gkrellmd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GKRELLMD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=	auto
-MAKE_FLAGS+=	GLIB12_INCLUDE="-I${STAGING_DIR}/usr/include/glib-1.2 -I${STAGING_DIR}/usr/lib/glib/include" \
-		GLIB12_LIB="-L${STAGING_DIR}/usr/lib -lglib -lgmodule" \
-		glib12=1
 
 do-install:
-	${INSTALL_DIR} ${IDIR_GKRELLMD}/usr/bin
-	${INSTALL_DIR} ${IDIR_GKRELLMD}/etc/init.d
+	${INSTALL_DIR} ${IDIR_GKRELLMD}/usr/bin ${IDIR_GKRELLMD}/etc
 	${INSTALL_BIN} ${WRKBUILD}/gkrellmd ${IDIR_GKRELLMD}/usr/bin/
 	${INSTALL_DATA} ${WRKSRC}/gkrellmd.conf ${IDIR_GKRELLMD}/etc
-	${INSTALL_BIN} ./files/gkrellmd.init ${IDIR_GKRELLMD}/etc/init.d/gkrellmd
 
 include ${TOPDIR}/mk/pkg-bottom.mk

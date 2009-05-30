@@ -1,4 +1,0 @@
-Package: samba-passwd
-Priority: optional
-Section: net
-Description: samba password utility

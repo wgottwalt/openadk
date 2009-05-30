@@ -9,11 +9,14 @@ PKG_NAME:=		procmail
 PKG_VERSION:=		3.22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1678ea99b973eb77eda4ecf6acae53f1
-MASTER_SITES:=		http://www.procmail.org/
+PKG_DESCR:=		Mail processing tools
+PKG_SECTION:=		text
+PKG_URL:=		http://www.procmail.org
+PKG_SITES:=		http://www.procmail.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PROCMAIL,procmail,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PROCMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src -f ../Makefile.new  \

@@ -9,7 +9,7 @@ PKG_NAME:=		videoproto
 PKG_VERSION:=		2.2.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ace6f55cd4dcebf4b191c0c31755ed92
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

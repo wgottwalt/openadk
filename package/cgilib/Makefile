@@ -9,11 +9,14 @@ PKG_NAME:=		cgilib
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2c7053f58dfb06f7a80a112797ed7e86
-MASTER_SITES:=		http://www.infodrom.org/projects/cgilib/download/
+PKG_DESCR:=		Simple CGI Library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.infodrom.org/projects/cgilib
+PKG_SITES:=		http://www.infodrom.org/projects/cgilib/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CGILIB,cgilib,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CGILIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE=		auto

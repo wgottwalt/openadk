@@ -1,5 +1,0 @@
-Package: php-mod-pcre
-Priority: optional
-Section: net
-Depends: php, libpcre
-Description: PCRE module for PHP5

@@ -9,14 +9,30 @@ PKG_NAME:=		cbtt
 PKG_VERSION:=		20060211
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		19abea2817c49ccc9438e9671c402984
+PKG_DESCR:=		Bittorrent tracker
+PKG_SECTION:=		net
+PKG_DEPENDS:=		zlib
+PKG_URL:=		http://bnbtusermods.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bnbtusermods/}
+
+PKG_DESCR_1:=		Bittorrent tracker with mysql support
+PKG_DEPENDS_1:=		${PKG_DEPENDS} libmysqlclient
+
 DISTFILES:=		${PKG_NAME}80-${PKG_VERSION}-src.tar.gz
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=bnbtusermods/}
 WRKDIST=		${WRKDIR}/${PKG_NAME}80-${PKG_VERSION}-src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CBTT,cbtt,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,CBTT_MYSQL,cbtt-mysql,${PKG_VERSION}-${PKG_RELEASE}))
+ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
+PKG_DEPENDS+=		uclibc++
+PKG_DEPENDS_1+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+PKG_DEPENDS_1+=		libstdcxx
+endif
+
+$(eval $(call PKG_template,CBTT,cbtt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CBTT_MYSQL,cbtt-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 TLDFLAGS+=		-shared -L. -L${STAGING_DIR}/usr/lib/mysql \

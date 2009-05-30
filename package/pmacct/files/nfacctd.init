@@ -1,5 +1,7 @@
 #!/bin/sh
-#FWINIT 80
+#PKG nfacctd
+#INIT 80
+
 . /etc/rc.conf
 
 case $1 in

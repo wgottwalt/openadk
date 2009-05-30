@@ -1,5 +1,0 @@
-Package: gdbserver
-Priority: optional
-Section: devel
-Depends: libthread_db
-Description: Remote Server for the GNU Debugger

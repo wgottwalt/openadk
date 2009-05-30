@@ -9,7 +9,7 @@ PKG_NAME:=		fixesproto
 PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ed4af7fbf04a51aca684c259784520f3
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

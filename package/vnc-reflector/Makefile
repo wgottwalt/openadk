@@ -9,13 +9,17 @@ PKG_NAME:=		vnc-reflector
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c3f88bc62f228b335c25c07f9744ab0c
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=vnc-reflector/}
+PKG_DESCR:=		specialized VNC server which acts as a proxy
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libjpeg zlib
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vnc-reflector/}
+
 DISTFILES:=		vnc_reflector-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/vnc_reflector
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 TCPPFLAGS+=		-I.

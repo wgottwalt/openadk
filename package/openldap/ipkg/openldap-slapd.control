@@ -1,5 +1,0 @@
-Package: openldap-slapd
-Priority: optional
-Section: admin
-Description: OpenLDAP server
-Depends: libopenldap, libopenssl, libsasl2, libdb, libpthread

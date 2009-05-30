@@ -1,6 +1,0 @@
-Package: esound
-Version: 0.2.8
-Section: net
-Priority: optional
-Depends: libaudiofile
-Description: Enlightened Sound Daemon

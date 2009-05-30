@@ -6,11 +6,13 @@
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
+PKG_DESCR:=		GNU C library
+PKG_SECTION:=		base
 NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-extract:
 

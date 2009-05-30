@@ -5,9 +5,14 @@
 
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gmp/Makefile.inc
+
+PKG_DESCR:=		GNU multiprecision arithmetic library
+PKG_SECTION:=		libs
+PKG_URL:=		http://gmplib.org
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

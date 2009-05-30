@@ -9,17 +9,21 @@ PKG_NAME=		vim
 PKG_VERSION=		7.2
 PKG_RELEASE=		1
 PKG_MD5SUM=		f0901284b338e448bfd79ccca0041254
-PKG_PARALLEL:=		1
-MASTER_SITES=		ftp://ftp.vim.org/pub/vim/unix/
+PKG_DESCR:=		The text editor
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://www.vim.org
+PKG_SITES=		ftp://ftp.vim.org/pub/vim/unix/
+
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/vim72
 WRKSRC=			${WRKDIST}/src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VIM,vim,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,VIM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		vim_cv_toupper_broken=no \
 			vim_cv_getcwd_broken=no \
 			vim_cv_stat_ignores_slash=yes \

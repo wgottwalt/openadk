@@ -5,17 +5,22 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		glib2
-PKG_VERSION=		2.18.1
-PKG_RELEASE=		1
-PKG_MD5SUM=		d53836f7fdd9970d03e255e9d712bd83
+PKG_NAME:=		glib2
+PKG_VERSION:=		2.18.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d53836f7fdd9970d03e255e9d712bd83
+PKG_DESCR:=		low-level core library that forms the basis of GTK+
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		gettext libiconv libpthread
+PKG_URL:=		http://www.gtk.org/
+PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.18/
+
 DISTFILES=		glib-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/glib-${PKG_VERSION}
-MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.18/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GLIB2,glib2,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GLIB2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCPPFLAGS+=		-I'${STAGING_DIR}/usr/include'
 CONFIGURE_STYLE=	gnu

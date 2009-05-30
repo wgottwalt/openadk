@@ -9,21 +9,32 @@ PKG_NAME:=		quagga
 PKG_VERSION:=		0.99.12
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d2bb513f4ac113dbb300c15a0bd0a241
-MASTER_SITES:=		http://www.quagga.net/download/ \
+PKG_DESCR:=		A routing software package
+PKG_SECTION:=		net
+PKG_URL:=		http://www.quagga.net
+PKG_SITES:=		http://www.quagga.net/download/ \
 			http://www.de.quagga.net/download/ \
 			http://www.uk.quagga.net/download/
 
+PKG_DESCR_1:=		BGP daemon
+PKG_DESCR_2:=		OSPF daemon
+PKG_DESCR_3:=		OSPF IPv6 daemon
+PKG_DESCR_4:=		RIPng daemon
+PKG_DESCR_5:=		RIP daemon
+PKG_DESCR_6:=		vtysh utility
+
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
 ifeq ($(ADK_IPV6),y)
-$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
 endif
-$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
@@ -37,15 +48,12 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}
-	${INSTALL_DIR} ${IDIR_QUAGGA}/etc/init.d/
 	${CP} ${WRKINST}/usr/lib/libzebra.so.* ${IDIR_QUAGGA}/usr/lib/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/zebra \
 		${WRKINST}/usr/sbin/watchquagga ${IDIR_QUAGGA}/usr/sbin/
 	# avoid /etc being set to 0750
 	${INSTALL_DIR} ${IDIR_QUAGGA}/etc/quagga/
 	chmod 0750 ${IDIR_QUAGGA}/etc/quagga/
-	${INSTALL_BIN} ./files/quagga.init \
-		${IDIR_QUAGGA}/etc/init.d/quagga
 	${INSTALL_DIR} ${IDIR_QUAGGA}/var/run/quagga
 	${INSTALL_DIR} ${IDIR_QUAGGA_BGPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/bgpd ${IDIR_QUAGGA_BGPD}/usr/sbin/

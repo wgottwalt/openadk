@@ -1,5 +1,0 @@
-Package: php-mod-xml
-Priority: optional
-Section: net
-Depends: php, libexpat
-Description: XML module for PHP5 

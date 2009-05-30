@@ -9,13 +9,17 @@ PKG_NAME:=		mini-sendmail
 PKG_VERSION:=		1.3.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		fb1585d2ad81c519a26d83bfd783dee8
-MASTER_SITES:=		http://www.acme.com/software/mini_sendmail/
+PKG_DESCR:=		A small sendmail-compatible mail forwarder
+PKG_SECTION:=		net
+PKG_URL:=		http://www.acme.com/software/mini_sendmail
+PKG_SITES:=		http://www.acme.com/software/mini_sendmail/
+
 DISTFILES:=		mini_sendmail-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/mini_sendmail-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MINI_SENDMAIL,mini-sendmail,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MINI_SENDMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		OFLAGS="${TARGET_CFLAGS}"

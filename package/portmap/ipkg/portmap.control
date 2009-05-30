@@ -1,4 +1,0 @@
-Package: portmap
-Priority: optional
-Section: net
-Description: The RPC Portmapper

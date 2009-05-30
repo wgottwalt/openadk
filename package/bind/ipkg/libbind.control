@@ -1,4 +1,0 @@
-Package: libbind
-Priority: optional
-Section: libs
-Description: Support library for the bind tools and dns server/client.

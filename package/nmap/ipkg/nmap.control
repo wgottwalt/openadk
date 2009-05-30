@@ -1,4 +1,0 @@
-Package: nmap
-Priority: optional
-Section: net
-Description: Nmap is a free open source utility for network exploration or security auditing.

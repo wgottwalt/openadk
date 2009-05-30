@@ -9,15 +9,19 @@ PKG_NAME:=		samba
 PKG_VERSION:=		3.3.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1443165edb7cb3f56f1e77aec1ee3266
-MASTER_SITES:=		ftp://se.samba.org/pub/samba/stable/ \
+PKG_DESCR:=		NetBIOS/SMB file and print server
+PKG_SECTION:=		net
+PKG_URL:=		http://www.samba.org
+PKG_SITES:=		ftp://se.samba.org/pub/samba/stable/ \
 			ftp://ftp.easynet.be/samba/stable/
+
 WRKSRC=			${WRKDIST}/source
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba
@@ -47,13 +51,10 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_SAMBA}/etc/{init.d,samba}
-	${INSTALL_DIR} ${IDIR_SAMBA}/usr/sbin
-	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/samba
+	${INSTALL_DIR} ${IDIR_SAMBA}/etc/samba ${IDIR_SAMBA}/usr/sbin
 	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/samba/{charset,vfs}
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/charset/CP850.so \
 			${IDIR_SAMBA}/usr/lib/samba/charset
-	${INSTALL_DATA} ./files/samba.init ${IDIR_SAMBA}/etc/init.d/samba
 	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/samba/*.so* ${IDIR_SAMBA}/usr/lib/samba

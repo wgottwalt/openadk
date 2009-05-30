@@ -1,5 +1,8 @@
 #!/bin/sh
-#FWINIT 10
+#PKG monit
+#INIT 10
+
+. /etc/rc.conf
 
 case $1 in
 autostop) ;;

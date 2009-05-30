@@ -9,12 +9,17 @@ PKG_NAME:=		dsniff
 PKG_VERSION:=		2.4b1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		2f761fa3475682a7512b0b43568ee7d6
-MASTER_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
+PKG_DESCR:=		collection of tools for network auditing and penetration testing
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libnet libpcap libnids libopenssl libgdbm
+PKG_URL:=		http://www.monkey.org/~dugsong/dsniff
+PKG_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-db \
@@ -29,8 +34,7 @@ INSTALL_STYLE=		auto
 FAKE_FLAGS+=		install_prefix="${WRKINST}"
 
 post-install:
-	${INSTALL_DIR} ${IDIR_DSNIFF}/usr/lib
-	${INSTALL_DIR} ${IDIR_DSNIFF}/usr/sbin
+	${INSTALL_DIR} ${IDIR_DSNIFF}/usr/lib ${IDIR_DSNIFF}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_DSNIFF}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/* ${IDIR_DSNIFF}/usr/lib
 

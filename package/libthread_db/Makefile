@@ -12,11 +12,13 @@ include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 
 PKG_NAME:=		libthread-db
+PKG_DESCR:=		POSIX threads library for gdb/gdbserver
+PKG_SECTION:=		libs
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTHREAD_DB,libthread-db,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBTHREAD_DB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib

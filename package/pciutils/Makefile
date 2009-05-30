@@ -9,12 +9,15 @@ PKG_NAME:=		pciutils
 PKG_VERSION:=		3.0.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d07da501bb11e6af40acd036536c2e9a
-MASTER_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/ \
+PKG_DESCR:=		PCI Utilities
+PKG_SECTION:=		sys
+PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils
+PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/ \
 			ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PCIUTILS,pciutils,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PCIUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

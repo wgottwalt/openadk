@@ -9,7 +9,7 @@ PKG_NAME:=		scrnsaverproto
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		616ae17acad2b6033c981b8b526d5e67
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

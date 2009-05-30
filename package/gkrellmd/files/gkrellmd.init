@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 80
+#PKG gkrellmd
+#INIT 80
 . /etc/rc.conf
 
 case $1 in

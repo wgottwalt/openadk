@@ -9,12 +9,16 @@ PKG_NAME:=		xfsprogs
 PKG_VERSION:=		3.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ec734f935ec87ebb8be890d29380a3e6
-MASTER_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
+PKG_DESCR:=		Utilities to create and check XFS filesystems
+PKG_SECTION:=		admin
+PKG_DEPENDS:=		libuuid libpthread
+PKG_URL:=		http://oss.sgi.com/projects/xfs
+PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,XFSPROGS,xfsprogs,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	autoconf gnu
 CONFIGURE_ARGS+=	--enable-gettext=no \

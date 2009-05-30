@@ -1,4 +1,0 @@
-Package: stress
-Priority: optional
-Section: utilities
-Description: stress is a simple tool that imposes certain types of compute stress on UNIX-like operating systems.

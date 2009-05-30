@@ -5,9 +5,14 @@
 
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/mpfr/Makefile.inc
+
+PKG_DESCR:=		multi precision library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.mpfr.org
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPFR,mpfr,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MPFR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

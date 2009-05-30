@@ -6,6 +6,9 @@
 config ADK_DEVICE_NO_FPU
 	bool
 
+config ADK_NATIVE
+	tristate
+
 config ADK_alix1c
 	tristate
 
@@ -67,6 +70,7 @@ config ADK_DEVICE
 	default "qemu-mips64el"  if ADK_qemu_mips64el
 	default "qemu-cris"  if ADK_qemu_cris
 	default "foxboard"  if ADK_foxboard
+	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
 	default "rb411"  if ADK_rb411
 	default "rb433"  if ADK_rb433
@@ -85,7 +89,14 @@ menu "Target system"
 
 choice
 prompt "Embedded Device"
-	default ADK_LINUX_X86_ALIX1C 
+default ADK_LINUX_NATIVE
+
+config ADK_LINUX_NATIVE
+	bool "Native platform"
+	select ADK_NATIVE
+	help
+	  Make a native build. Use host tools.
+	  No toolchain will be created.
 
 config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
@@ -257,6 +268,7 @@ source "target/linux/config/Config.in.kernel"
 
 choice 
 prompt "Target C library"
+depends ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	help

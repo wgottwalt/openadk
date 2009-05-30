@@ -1,14 +1,14 @@
-$Id$
---- htpdate-0.9.0.orig/Makefile	Sun Dec 11 22:34:35 2005
-+++ htpdate-0.9.0/Makefile	Tue Jan 16 23:47:33 2007
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- htpdate-1.0.3.orig/Makefile	2008-09-02 22:24:09.000000000 +0200
++++ htpdate-1.0.3/Makefile	2009-05-29 14:24:39.045810534 +0200
 @@ -2,8 +2,8 @@ prefix = /usr
  bindir = ${prefix}/bin
  mandir = ${prefix}/share/man
  
 -CC = gcc
--CFLAGS += -Wall -ansi -Os -DDEBUG
+-CFLAGS += -Wall -pedantic -ansi -O2
 +CC ?= gcc
-+CFLAGS ?= -Wall -ansi -Os -DDEBUG
++CFLAGS ?= -Wall -pedantic -ansi -O2
+ #CFLAGS += -Wall -ansi -O2
  
  INSTALL = /usr/bin/install -c
- STRIP = /usr/bin/strip -s

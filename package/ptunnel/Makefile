@@ -9,11 +9,15 @@ PKG_NAME:=		ptunnel
 PKG_VERSION:=		0.61
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b45f73875f2af48f101816672f83a5fe
-MASTER_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
+PKG_DESCR:=		Tunnel TCP connections over ICMP packets
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap libpthread
+PKG_URL:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
+PKG_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PTUNNEL,ptunnel,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" \

@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- knock-0.5.orig/src/knockd.c	2005-06-27 07:11:34.000000000 +0200
++++ knock-0.5/src/knockd.c	2009-05-29 17:03:55.776378324 +0200
+@@ -1064,7 +1064,7 @@ char* get_ip(const char* iface, char *bu
+ 		return(NULL);
+ 	}
+ 
+-	bzero((void*)(&ifr.ifr_name), sizeof(ifr.ifr_name));
++	memset((void*)(&ifr.ifr_name), 0, sizeof(ifr.ifr_name));
+ 	strncpy(ifr.ifr_name, iface, sizeof(ifr.ifr_name)-1);
+ 	ifr.ifr_name[sizeof(ifr.ifr_name)-1] = '\0';
+ 	if(ioctl(s, SIOCGIFADDR, &ifr)) {

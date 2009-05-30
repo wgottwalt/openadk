@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 05
+#PKG busybox
+#INIT 05
 . /etc/rc.conf
 
 case $1 in

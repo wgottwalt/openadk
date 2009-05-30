@@ -1,5 +1,0 @@
-Package: openct
-Priority: optional
-Section: crypto
-Depends: libltdl, libusb
-Description: openct

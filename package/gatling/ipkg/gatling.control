@@ -1,5 +1,0 @@
-Package: gatling
-Priority: optional
-Section: net
-Description: non-forking webserver
-Depends: libiconv

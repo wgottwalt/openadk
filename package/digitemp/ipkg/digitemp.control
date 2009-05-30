@@ -1,5 +1,0 @@
-Package: digitemp
-Priority: optional
-Section: app
-Depends: libusb
-Description: DigiTemp is a simple to use program for reading values from 1-wire devices.

@@ -1,5 +1,0 @@
-Package: sane-backend-umax-pp
-Depends: sane-backends
-Priority: optional
-Section: misc
-Description: Scanner access now easy

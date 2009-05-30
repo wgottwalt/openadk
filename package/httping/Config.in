@@ -1,5 +1,3 @@
-#menu "httping........................... Httping is like 'ping' but for http-requests."
-
 config ADK_PACKAGE_HTTPING
 	prompt "httping........................... Httping is like 'ping' but for http-requests."
 	tristate
@@ -11,11 +9,3 @@ config ADK_PACKAGE_HTTPING
 		transmission across the network also takes time!
 
 		http://www.vanheusden.com/httping/
-
-config ADK_PACKAGE_HTTPING_WITH_SSL
-	prompt "  Enable SSL support"
-	bool
-	default y
-	depends ADK_PACKAGE_HTTPING
-
-#endmenu

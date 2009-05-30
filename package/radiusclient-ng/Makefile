@@ -9,13 +9,16 @@ PKG_NAME:=		radiusclient-ng
 PKG_VERSION:=		0.5.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6fb7d4d0aefafaee7385831ac46a8e9c
-MASTER_SITES:=		http://download.berlios.de/radiusclient-ng/ \
+PKG_DESCR:=		RADIUS client
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl
+PKG_SITES:=		http://download.berlios.de/radiusclient-ng/ \
 			http://download2.berlios.de/radiusclient-ng/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADIUSCLIENT_NG,radiusclient-ng,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBRADIUSCLIENT_NG,libradiusclient-ng,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RADIUSCLIENT_NG,radiusclient-ng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBRADIUSCLIENT_NG,libradiusclient-ng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	ac_cv_func_getdomainname=yes

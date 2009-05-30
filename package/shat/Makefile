@@ -9,11 +9,13 @@ PKG_NAME:=		shat
 PKG_VERSION:=		0.9.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		da06846f35838b14d1513523dad84d24
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=shat/}
+PKG_DESCR:=		Source Hardware Address Translation - a tool for nomadic routing
+PKG_SECTION:=		net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=shat/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SHAT,shat,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \

@@ -1,6 +1,0 @@
-Package: miau
-Version: 1
-Architecture: mipsel
-Priority: optional
-Section: net
-Description: miau is an IRC-bouncer/proxy 

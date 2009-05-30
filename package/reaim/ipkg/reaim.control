@@ -1,5 +1,0 @@
-Package: reaim
-Priority: optional
-Section: net
-Depends: iptables
-Description: A transparent AIM / MSN proxy

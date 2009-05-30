@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- linux-atm-2.5.0.orig/src/test/ttcp.c	2005-04-18 18:18:28.000000000 +0200
++++ linux-atm-2.5.0/src/test/ttcp.c	2009-05-29 21:27:32.488378268 +0200
+@@ -331,7 +331,7 @@ int no_check = 0;
+ 	/* xmitr */
+ 	if (optind == argc)
+ 	    goto usage;
+-	bzero((char *)&sinhim, sizeof(sinhim));
++	memset((char *)&sinhim, 0, sizeof(sinhim));
+ 	if (atoi(host) > 0 )  {
+ 	    /* Numeric */
+ 	    sinhim.sin_family = AF_INET;
+@@ -345,7 +345,7 @@ int no_check = 0;
+ 	    if ((addr=gethostbyname(host)) == NULL)
+ 		err("bad hostname");
+ 	    sinhim.sin_family = addr->h_addrtype;
+-	    bcopy(addr->h_addr,(char*)&addr_tmp, addr->h_length);
++	    memcpy((char*)&addr_tmp, addr->h_addr, addr->h_length);
+ #if defined(cray)
+ 	    sinhim.sin_addr = addr_tmp;
+ #else

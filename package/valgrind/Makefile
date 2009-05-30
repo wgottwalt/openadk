@@ -9,12 +9,16 @@ PKG_NAME:=		valgrind
 PKG_VERSION:=		3.3.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		0539e2fa4aadb2cd4ca4bba65b1fe8b5
+PKG_DESCR:=		memory management debugging
+PKG_SECTION:=		utils
+PKG_URL:=		http://valgrind.org
+PKG_SITES:=		http://valgrind.org/downloads/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		http://valgrind.org/downloads/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,VALGRIND,valgrind,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,VALGRIND,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-tls

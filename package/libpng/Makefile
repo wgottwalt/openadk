@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libpng
-PKG_VERSION:=		1.2.35
+PKG_VERSION:=		1.2.36
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8ca6246930a57d5be7adc7c4e7fb5e00
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
+PKG_MD5SUM:=		4779cd011409ea9b591e11638781f0bf
+PKG_DESCR:=		A library for reading/writing PNG images
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		zlib
+PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

@@ -3,7 +3,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-ifneq ($(strip ${MASTER_SITES}),)
+ifneq ($(strip ${PKG_SITES}),)
 ifeq ($(strip ${DISTFILES}),)
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif

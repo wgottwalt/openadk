@@ -9,11 +9,13 @@ PKG_NAME:=		libdaemon
 PKG_VERSION:=		0.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6812a5e4063b5016f25e9a0cebbd3dd9
-MASTER_SITES:=		http://0pointer.de/lennart/projects/libdaemon/
+PKG_DESCR:=		A lightweight C library that eases the writing of UNIX daemons
+PKG_SECTION:=		libs
+PKG_SITES:=		http://0pointer.de/lennart/projects/libdaemon/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes

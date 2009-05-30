@@ -9,15 +9,19 @@ PKG_NAME:=		setpwc
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1bc721cdfcbac24027e2afc93685d29f
-MASTER_SITES:=		http://www.vanheusden.com/setpwc/
+PKG_DESCR:=		Philips (and compatibles) WebCams (PWC) control utility
+PKG_SECTION:=		admin
+PKG_URL:=		http://www.vanheusden.com/setpwc/
+PKG_SITES:=		http://www.vanheusden.com/setpwc/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SETPWC,setpwc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SETPWC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
-	${TARGET_CC} ${TCFLAGS} -DVERSION=\"${PKG_VERSION}\" -o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c
+	${TARGET_CC} ${TARGET_CFLAGS} -DVERSION=\"${PKG_VERSION}\" -o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SETPWC}/usr/bin

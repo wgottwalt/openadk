@@ -9,12 +9,15 @@ PKG_NAME:=		6tunnel
 PKG_VERSION:=		0.11rc1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b325fa9d238e32195fbb3fc3646b0d28
-MASTER_SITES:=		http://toxygen.net/6tunnel/
+PKG_DESCR:=		IPv4/IPv6 tunnel proxy
+PKG_SECTION:=		net
+PKG_SITES:=		http://toxygen.net/6tunnel/
+
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-0.11
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,6TUNNEL,6tunnel,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,6TUNNEL,6tunnel,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_path_STRIP=$(STRIP) \

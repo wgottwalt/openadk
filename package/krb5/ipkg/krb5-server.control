@@ -1,4 +1,0 @@
-Package: krb5-server
-Priority: optional
-Section: net
-Description: MIT kerberos server

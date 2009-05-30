@@ -6,17 +6,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		less
-PKG_VERSION:=		381
+PKG_VERSION:=		429
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		40c2dd4ac137b61b6a55a6478817daf4
-MASTER_SITES:=		http://www.greenwoodsoftware.com/less/
+PKG_MD5SUM:=		206f2f13b9b0a35e45df660fcb6af31d
+PKG_DESCR:=		A text mode pager
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://www.greenwoodsoftware.com/less
+PKG_SITES:=		http://www.greenwoodsoftware.com/less/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LESS,less,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LESS,less,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--without-regex
 BUILD_STYLE=		auto
 
 do-install:

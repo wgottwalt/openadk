@@ -9,7 +9,7 @@ PKG_NAME:=		bigreqsproto
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d43f7faa2aac2f0206ea19f031494af1
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

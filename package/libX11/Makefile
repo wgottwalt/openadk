@@ -9,11 +9,13 @@ PKG_NAME:=		libX11
 PKG_VERSION:=		1.1.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2feb39a0de6f05b25c308268691d960c
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		X11 client-side library
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-xlocale \

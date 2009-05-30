@@ -1,4 +1,4 @@
-BASE=http://waldemar-brodkorb.de
+BASE=http://www.openadk.org
 TARGET=$1
 CONTROL=$2
 VERSION=$3
@@ -9,7 +9,9 @@ WD=$(pwd)
 mkdir -p "$TARGET/CONTROL"
 grep '^[^(Version|Architecture)]' "$CONTROL" > "$TARGET/CONTROL/control"
 grep '^Maintainer' "$CONTROL" 2>&1 >/dev/null || \
-        echo "Maintainer: Waldemar Brodkorb <mail@waldemar-brodkorb.de>" >> "$TARGET/CONTROL/control"
+        echo "Maintainer: Waldemar Brodkorb <wbx@openadk.org>" >> "$TARGET/CONTROL/control"
+grep '^Priority' "$CONTROL" 2>&1 >/dev/null || \
+        echo "Priority: optional" >> "$TARGET/CONTROL/control"
 grep '^Source' "$CONTROL" 2>&1 >/dev/null || {
         pkgbase=$(echo "$WD" | sed -e "s|^$TOPDIR/||g")
         [ "$pkgbase" = "$WD" ] && src="N/A" || src="$BASE/$pkgbase"

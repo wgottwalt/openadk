@@ -9,11 +9,13 @@ PKG_NAME:=		libXmu
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		48b432e84035c664ece80a33695d5254
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		a set of miscellaneous utility convenience functions for X libraries
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXMU,libxmu,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBXMU,libxmu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 #CONFIGURE_ARGS+=	--disable-malloc0returnsnull

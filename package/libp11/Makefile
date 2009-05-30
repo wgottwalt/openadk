@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libp11
-PKG_VERSION:=		0.2.2
+PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b8655b2065575eb1b96a9c924c234c63
-MASTER_SITES:=		http://www.opensc-project.org/files/libp11/
+PKG_MD5SUM:=		9e2c5cbececde245e2d2f535bd49ce35
+PKG_DESCR:=		library implementing a small layer on top of PKCS11 API
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libopenssl libltdl
+PKG_URL:=		http://www.opensc-project.org/libp11
+PKG_SITES:=		http://www.opensc-project.org/files/libp11/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBP11,libp11,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBP11,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

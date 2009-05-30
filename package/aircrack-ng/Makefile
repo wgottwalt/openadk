@@ -9,11 +9,15 @@ PKG_NAME:=		aircrack-ng
 PKG_VERSION:=		1.0-rc3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		37884de939af82eab60d3e7d165b40ad
-MASTER_SITES:=		http://download.aircrack-ng.org/
+PKG_DESCR:=		set of tools for auditing wireless networks
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpthread libopenssl libpcap
+PKG_URL:=		http://www.aircrack-ng.org
+PKG_SITES:=		http://download.aircrack-ng.org/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AIRCRACK_NG,aircrack-ng,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,AIRCRACK_NG,aircrack-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=	auto
 INSTALL_STYLE=	auto

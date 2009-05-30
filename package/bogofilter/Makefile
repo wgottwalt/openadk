@@ -5,36 +5,31 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=			bogofilter
-PKG_VERSION:=		1.1.3
+PKG_NAME:=		bogofilter
+PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a816f509324ccb9946a4d89fefe525e1
-MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/b/bogofilter/
-DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
+PKG_MD5SUM:=		4bbc9adc30d4f8e3a547f9be18a1cb74
+PKG_DESCR:=		mail filter
+PKG_SECTION:=		mail
+PKG_DEPENDS:=		libdb libiconv
+PKG_URL:=		http://bogofilter.sourceforge.net/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BOGOFILTER,bogofilter,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BOGOFILTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		ac_cv_c_bigendian=no \
-			ac_cv_sizeof_off_t=8 \
-			ac_cv_sizeof_int=4 \
-			ac_cv_sizeof_long=4 \
-		    LIBS="-liconv"
+CONFIGURE_STYLE=	autotool gnu
+CONFIGURE_ENV+=		LIBS="-liconv"
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
-					--without-libqdbm-prefix \
-					--with-included-gsl \
-					--with-libdb-prefix=${STAGING_DIR}/usr \
-					--disable-transactions
-#					--without-libdb-prefix
+			--without-libqdbm-prefix \
+			--with-included-gsl \
+			--with-libdb-prefix=${STAGING_DIR}/usr \
+			--disable-transactions
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
-PKG_DEPENDS:=		libdb libiconv
-
 post-install:
-	echo 'Depends: ${PKG_DEPENDS}' >>${IDIR_BOGOFILTER}/CONTROL/control
 	${INSTALL_DIR} ${IDIR_BOGOFILTER}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/${PKG_NAME} ${IDIR_BOGOFILTER}/usr/bin/
 ifeq (${ADK_PACKAGE_BOGOFILTER_BOGOUTIL},y)

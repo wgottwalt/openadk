@@ -10,17 +10,27 @@ PKG_VERSION:=		0.9.8k
 PKG_RELEASE:=		2
 CACERT_VER:=		12
 PKG_MD5SUM:=		e555c6d58d276aec7fdc53363e338ab3
-
-MASTER_SITES:=		http://www.openssl.org/source/ \
+PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		zlib
+PKG_URL:=		http://www.openssl.org
+PKG_SITES:=		http://www.openssl.org/source/ \
 			ftp://ftp.funet.fi/pub/crypt/cryptography/libs/openssl/source/ \
 			ftp://ftp.webmonster.de/pub/openssl/source/ \
 			ftp://ftp.sunet.se/pub/security/tools/net/openssl/source/
 
+PKG_DESCR_1:=		OpenSSL (Secure Socket Layer) command line tool
+PKG_SECTION_1:=		admin
+PKG_DEPENDS_1:=		libopenssl
+
+PKG_DESCR_2:=		X.509v3 Root CA Certificates
+PKG_SECTION_2:=		base
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,CA_CERTS,ca-certificates,${PKG_VERSION}-${CACERT_VER}))
+$(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,CA_CERTS,ca-certificates,${PKG_VERSION}-${CACERT_VER},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		auto confprog

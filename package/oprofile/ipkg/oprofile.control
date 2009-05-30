@@ -1,5 +1,0 @@
-Package: oprofile
-Priority: optional
-Section: utils
-Depends: libpopt, uclibc++
-Description: system-wide profiler

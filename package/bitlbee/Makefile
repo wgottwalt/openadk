@@ -9,14 +9,18 @@ PKG_NAME:=		bitlbee
 PKG_VERSION:=		1.2.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2b1674d98804970809de3da3edf0bed2
-MASTER_SITES:=		http://get.bitlbee.org/src/ \
+PKG_DESCR:=		IRC gateway to IM chat networks
+PKG_SECTION:=		net
+PKG_DEPENDS:=		glib2 libopenssl libiconv
+PKG_URL:=		http://www.bitlbee.org
+PKG_SITES:=		http://get.bitlbee.org/src/ \
 			http://get.bitlbee.be/src/ \
 			http://get.us.bitlbee.org/src/ \
 			http://ftp.snt.utwente.nl/pub/software/bitlbee/src/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BITLBEE,bitlbee,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 ifeq ($(ADK_IPV6),y)
 IPV6+=	--ipv6=1
 else
@@ -57,12 +61,8 @@ post-configure:
 		${WRKBUILD}/Makefile.settings
 
 post-install:
-	${INSTALL_DIR} ${IDIR_BITLBEE}/etc/bitlbee
-	${INSTALL_DIR} ${IDIR_BITLBEE}/etc/init.d
-	${INSTALL_DIR} ${IDIR_BITLBEE}/usr/sbin
+	${INSTALL_DIR} ${IDIR_BITLBEE}/etc/bitlbee ${IDIR_BITLBEE}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/bitlbee/* ${IDIR_BITLBEE}/etc/bitlbee
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/bitlbee ${IDIR_BITLBEE}/usr/sbin
-	${INSTALL_BIN} ./files/bitlbee.init \
-		${IDIR_BITLBEE}/etc/init.d/bitlbee
 
 include ${TOPDIR}/mk/pkg-bottom.mk

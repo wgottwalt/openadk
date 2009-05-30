@@ -6,11 +6,14 @@
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/uClibc/Makefile.inc
 
+PKG_DESCR:=		embedded C library
+PKG_SECTION:=		base
+
 NO_DISTFILES:=1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # do nothing, uClibc is already build in toolchain directory
 do-install:

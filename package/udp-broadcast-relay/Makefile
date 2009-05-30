@@ -9,15 +9,17 @@ PKG_NAME:=		udp-broadcast-relay
 PKG_VERSION:=		0.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a32f983b7063d6ac670e6b22be9b9d24
-
-MASTER_SITES:=		http://www.joachim-breitner.de/udp-broadcast-relay/files/
+PKG_DESCR:=		listens for packets on a specified UDP broadcast port
+PKG_SECTION:=		net
+PKG_URL:=		http://www.joachim-breitner.de/udp-broadcast-relay
+PKG_SITES:=		http://www.joachim-breitner.de/udp-broadcast-relay/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,UDP_BROADCAST_RELAY,udp-broadcast-relay,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,UDP_BROADCAST_RELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
-	${TARGET_CC} ${WRKBUILD}/main.c -o ${WRKBUILD}/${PKG_NAME}
+	${TARGET_CC} ${TARGET_CFLAGS} ${WRKBUILD}/main.c -o ${WRKBUILD}/${PKG_NAME}
 
 do-install:
 	${INSTALL_DIR} ${IDIR_UDP_BROADCAST_RELAY}/usr/sbin

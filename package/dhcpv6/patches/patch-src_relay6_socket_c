@@ -1,0 +1,48 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- dhcpv6-1.2.0.orig/src/relay6_socket.c	2009-04-03 00:53:38.000000000 +0200
++++ dhcpv6-1.2.0/src/relay6_socket.c	2009-05-28 23:09:11.155499136 +0200
+@@ -399,7 +399,7 @@ int send_message() {
+     if (mesg->sent == 1)
+         return 0;
+ 
+-    bzero((char *) &sin6, sizeof(struct sockaddr_in6));
++    memset((char *) &sin6, 0, sizeof(struct sockaddr_in6));
+     sin6.sin6_family = AF_INET6;
+     sin6.sin6_flowinfo = 0;
+     sin6.sin6_scope_id = 0;
+@@ -494,7 +494,7 @@ int send_message() {
+     if (mesg->msg_type == DH6_RELAY_FORW) {
+         for (ipv6uni = IPv6_uniaddr_list.next; ipv6uni != &IPv6_uniaddr_list;
+              ipv6uni = ipv6uni->next) {
+-            bzero((char *) &sin6, sizeof(struct sockaddr_in6));
++            memset((char *) &sin6, 0, sizeof(struct sockaddr_in6));
+             sin6.sin6_family = AF_INET6;
+ 
+             memset(dest_addr, 0, INET6_ADDRSTRLEN);
+@@ -564,7 +564,7 @@ int send_message() {
+              iface = iface->next) {
+             uservers = iface->sname;
+             while (uservers != NULL) {
+-                bzero((char *) &sin6, sizeof(struct sockaddr_in6));
++                memset((char *) &sin6, 0, sizeof(struct sockaddr_in6));
+                 sin6.sin6_family = AF_INET6;
+ 
+                 memset(dest_addr, 0, INET6_ADDRSTRLEN);
+@@ -644,7 +644,7 @@ int send_message() {
+ 
+         for (si = sifaces_list.next; si != &sifaces_list; si = si->next) {
+             *(mesg->hc_pointer) = MAXHOPCOUNT;
+-            bzero((char *) &sin6, sizeof(struct sockaddr_in6));
++            memset((char *) &sin6, 0, sizeof(struct sockaddr_in6));
+             sin6.sin6_family = AF_INET6;
+ 
+             memset(dest_addr, 0, INET6_ADDRSTRLEN);
+@@ -734,7 +734,7 @@ int send_message() {
+                     continue;
+ 
+                 *(mesg->hc_pointer) = MAXHOPCOUNT;
+-                bzero((char *) &sin6, sizeof(struct sockaddr_in6));
++                memset((char *) &sin6, 0, sizeof(struct sockaddr_in6));
+                 sin6.sin6_family = AF_INET6;
+ 
+                 memset(dest_addr, 0, INET6_ADDRSTRLEN);

@@ -1,5 +1,0 @@
-Package: mplayer
-Priority: optional
-Section: video
-Depends: zlib, libncurses, libmad, alsa-lib, libvorbis, libogg, libfaad2, libpthread
-Description: popular video player

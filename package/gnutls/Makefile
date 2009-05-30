@@ -9,24 +9,29 @@ PKG_NAME:=		gnutls
 PKG_VERSION:=		2.6.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ca2489e29f9dc313a79b9747bb1090e5
+PKG_DESCR:=		GNU TLS library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libgcrypt libtasn1 zlib
+PKG_URL:=		http://www.gnu.org/software/gnutls
+PKG_SITES:=		${MASTER_SITE_GNU:=gnutls/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		${MASTER_SITE_GNU:=gnutls/}
 
 include ${TOPDIR}/mk/package.mk
 
 ifeq (${ADK_COMPILE_GNUTLS_WITH_UCLIBCXX},y)
 TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++
-PKG_DEPENDS:=		uclibc++
+PKG_DEPENDS_1:=		${PKG_DEPENDS} uclibc++
 else
-PKG_DEPENDS:=		libstdcxx
+PKG_DEPENDS_1:=		${PKG_DEPENDS} libstdcxx
 endif
 
-$(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
-$(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
-$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
-$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
-$(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
+$(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \

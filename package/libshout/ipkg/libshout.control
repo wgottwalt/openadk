@@ -1,5 +1,0 @@
-Package: libshout
-Priority: optional
-Section: libs
-Depends: libvorbis, libogg
-Description: Library which can be used to write a source client for streaming

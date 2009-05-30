@@ -9,12 +9,13 @@ PKG_NAME:=		libnl
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ae970ccd9144e132b68664f98e7ceeb1
-MASTER_SITES:=		http://downloads.openwrt.org/sources/
-
+PKG_DESCR:=		Netlink library
+PKG_SECTION:=		libs
+PKG_SITES:=		http://downloads.openwrt.org/sources/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

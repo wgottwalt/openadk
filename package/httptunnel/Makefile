@@ -9,11 +9,14 @@ PKG_NAME:=		httptunnel
 PKG_VERSION:=		3.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2a710f377c82ab4eb201458f7b9f99c5
-MASTER_SITES:=		http://www.nocrew.org/software/httptunnel/
+PKG_DESCR:=		http tunneling software
+PKG_SECTION:=		net
+PKG_URL:=		http://www.nocrew.org/software/httptunnel
+PKG_SITES:=		http://www.nocrew.org/software/httptunnel/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTTPTUNNEL,httptunnel,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HTTPTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

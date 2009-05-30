@@ -9,7 +9,7 @@ PKG_NAME:=		xcmiscproto
 PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3c380a728697ded97a39addfe1acf2cb
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

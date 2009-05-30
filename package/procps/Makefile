@@ -9,11 +9,15 @@ PKG_NAME:=		procps
 PKG_VERSION:=		3.2.7
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		f490bca772b16472962c7b9f23b1e97d
-MASTER_SITES:=		http://procps.sourceforge.net/
+PKG_DESCR:=		The /proc file system utilities
+PKG_SECTION:=		utils
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://procps.sourceforge.net
+PKG_SITES:=		http://procps.sourceforge.net/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},libncurses))
+$(eval $(call PKG_template,PROCPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

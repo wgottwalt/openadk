@@ -9,7 +9,7 @@ PKG_NAME:=		xtrans
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5b7f447f6fe92cbc4f17441aaee0bf55
-MASTER_SITES:=		http://xorg.freedesktop.org/releases/X11R7.4/src/lib/
+PKG_SITES:=		http://xorg.freedesktop.org/releases/X11R7.4/src/lib/
 
 include $(TOPDIR)/mk/package.mk
 

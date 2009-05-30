@@ -5,9 +5,14 @@
 
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
+
+PKG_DESCR:=		GNU compiler collection
+PKG_SECTION:=		comp
+PKG_DEPENDS:=		mpfr
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''

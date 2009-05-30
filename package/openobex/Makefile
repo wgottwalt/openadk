@@ -6,18 +6,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openobex
-PKG_VERSION:=		1.3
+PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		feaa5dfe5151c0e70e8f868fa4648a43
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
+PKG_MD5SUM:=		0d83dc86445a46a1b9750107ba7ab65c
+PKG_DESCR:=		implementation of the Object Exchange (OBEX) protocol
+PKG_SECTION:=		bluetooth
+PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
+PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENOBEX,openobex,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OPENOBEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	PKG_CONFIG=""
 INSTALL_STYLE:=		auto
 
 post-install:

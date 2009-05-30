@@ -9,11 +9,13 @@ PKG_NAME:=		libfontenc
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b7bb0887b702ab03251fd9fc361d0c58
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		helps font libraries portably determine and deal with different encodings of fonts
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBFONTENC,libfontenc,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBFONTENC,libfontenc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

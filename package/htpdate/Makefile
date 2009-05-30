@@ -6,21 +6,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		htpdate
-PKG_VERSION:=		0.9.0
-PKG_RELEASE:=		9
-PKG_MD5SUM:=		12cf883c5619cf4c13a62f77f1a55b54
-MASTER_SITES:=		http://www.clevervest.com/htp/archive/c/
+PKG_VERSION:=		1.0.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		82953fe72d2f40411585222f85f2afab
+PKG_DESCR:=		an HTP (Hypertext Time Protocol) implementation
+PKG_SECTION:=		net
+PKG_URL:=		http://www.clevervest.com/twiki/bin/view/HTP
+PKG_SITES:=		http://www.clevervest.com/htp/archive/c/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTPDATE,htpdate,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HTPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 
 do-install:
-	${INSTALL_DIR} ${IDIR_HTPDATE}/etc/init.d/
-	${INSTALL_BIN} ./files/htpdate.init \
-		${IDIR_HTPDATE}/etc/init.d/htpdate
 	${INSTALL_DIR} ${IDIR_HTPDATE}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/htpdate ${IDIR_HTPDATE}/usr/sbin/
 

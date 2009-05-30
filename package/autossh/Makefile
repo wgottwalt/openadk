@@ -6,26 +6,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		autossh
-PKG_VERSION:=		1.3
+PKG_VERSION:=		1.4b
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0e7ec62eeca5d1b197f3ef2d0f0d417f
-MASTER_SITES:=		http://www.harding.motd.ca/autossh/
+PKG_MD5SUM:=		8f9aa006f6f69e912d3c2f504622d6f7
+PKG_DESCR:=		Automatically restart SSH sessions and tunnels
+PKG_SECTION:=		net
+PKG_DEPENDS:=		openssh-client
+PKG_URL:=		http://www.harding.motd.ca/autossh
+PKG_SITES:=		http://www.harding.motd.ca/autossh/
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tgz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AUTOSSH,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,AUTOSSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-Wall -DSSH_PATH=\\\"/usr/bin/ssh\\\"\ \
-			-DVER=\\\"$(PKG_VERSION)\\\"\"
-MAKE_FLAGS+=		CC="$(TARGET_CC)" BINDIR=/usr/bin MANDIR=/usr/man
-BUILD_STYLE=		auto
-
-do-configure:
-	cp $(WRKBUILD)/Makefile.linux $(WRKBUILD)/Makefile
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
 
 do-install:
-	echo $(CC)
 	$(INSTALL_DIR) $(IDIR_AUTOSSH)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/autossh $(IDIR_AUTOSSH)/usr/bin/
 

@@ -9,17 +9,20 @@ PKG_NAME:=		util-linux
 PKG_VERSION:=		2.12r
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c261230b27fc0fbcc287c76884caf2d3
+PKG_DESCR:=		Linux utilities
+PKG_SECTION:=		admin
+PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux/}
 
-MASTER_SITES:=		ftp://ftp.kernel.org/pub/linux/utils/util-linux/ \
-			http://ftp.kernel.org/pub/linux/utils/util-linux/ \
-			ftp://ftp.de.kernel.org/pub/linux/utils/util-linux/ \
-			http://ftp.de.kernel.org/pub/linux/utils/util-linux/
+PKG_DESCR_1:=		Partition table manipulation utility
+PKG_DESCR_2:=		Swap space management utilities
+PKG_DESCR_3:=		Loop devices setup and control utility
+PKG_DEPENDS_3:=		kmod-loop
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
+$(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_3},${PKG_DESCR_3},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

@@ -9,11 +9,13 @@ PKG_NAME:=		libXext
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b7749174f9b3c3227bcbabc9ffb7d1a9
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		X Window System client interface to several extensions to the X protocol
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull

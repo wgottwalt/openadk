@@ -9,12 +9,17 @@ PKG_NAME:=		gpsd
 PKG_VERSION:=		2.37
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6c96cc0b2df0279cb7baac1ebc5881d3
-MASTER_SITES:=		http://download.berlios.de/gpsd/
+PKG_DESCR:=		An interface daemon for GPS receivers
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpthread
+PKG_SITES:=		http://download.berlios.de/gpsd/
+
+PKG_DESCR_1:=		GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GPSD,gpsd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-x \

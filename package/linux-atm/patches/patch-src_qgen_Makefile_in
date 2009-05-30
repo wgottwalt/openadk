@@ -1,0 +1,33 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- linux-atm-2.5.0.orig/src/qgen/Makefile.in	2007-12-29 21:31:35.000000000 +0100
++++ linux-atm-2.5.0/src/qgen/Makefile.in	2009-05-29 22:15:30.511416896 +0200
+@@ -92,9 +92,9 @@ AWK = @AWK@
+ CC = @CC_FOR_BUILD@
+ CCDEPMODE = @CCDEPMODE@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
+-CFLAGS = @CFLAGS@
++CFLAGS = -I../include
+ CPP = @CPP@
+-CPPFLAGS = @CPPFLAGS@
++CPPFLAGS =
+ CXX = @CXX@
+ CXXCPP = @CXXCPP@
+ CXXDEPMODE = @CXXDEPMODE@
+@@ -116,7 +116,7 @@ INSTALL_DATA = @INSTALL_DATA@
+ INSTALL_PROGRAM = @INSTALL_PROGRAM@
+ INSTALL_SCRIPT = @INSTALL_SCRIPT@
+ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+-LDFLAGS = @LDFLAGS@
++LDFLAGS=
+ LEX = @LEX@
+ LEXLIB = @LEXLIB@
+ LEX_OUTPUT_ROOT = @LEX_OUTPUT_ROOT@
+@@ -208,7 +208,7 @@ top_srcdir = @top_srcdir@
+ qgen_SOURCES = common.c common.h file.c file.h first.c ql_y.y ql_l.l qgen.c \
+ 		qgen.h second.c third.c
+ 
+-qgen_LDADD = -lfl
++qgen_LDADD =
+ q_dump_SOURCES = common.c
+ q_dump_LDADD = qd.dump.standalone.o
+ # FIXME: paulsch: We don't really depend on qd.dump.o or q.out.o here, but this

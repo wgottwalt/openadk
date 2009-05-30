@@ -9,11 +9,13 @@ PKG_NAME:=		sysstat
 PKG_VERSION:=		7.0.3
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		732904b006a0224b0a9ce4d312946277
-MASTER_SITES:=		http://perso.orange.fr/sebastien.godard/
+PKG_DESCR:=		Utilities for system monitoring and performance analysis
+PKG_SECTION:=		utils
+PKG_SITES:=		http://perso.orange.fr/sebastien.godard/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SYSSTAT,sysstat,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SYSSTAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

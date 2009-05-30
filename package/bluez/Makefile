@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.12
+PKG_VERSION:=		4.40
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e599d7f4ed7e022c85e485934f29a340
-MASTER_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
+PKG_MD5SUM:=		a25fa37c97c309338649f6a5fd4cea76
+PKG_DESCR:=		bluetooth libraries and applications
+PKG_SECTION:=		bluetooth
+PKG_DEPENDS:=		kmod-bluetooth
+PKG_URL:=		http://www.bluez.org
+PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BLUEZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-tools \
@@ -40,8 +44,5 @@ post-install:
 	    ${IDIR_BLUEZ}/etc/bluetooth/
 	$(INSTALL_DATA) $(WRKINST)/etc/dbus-1/system.d/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
-	${INSTALL_DIR} ${IDIR_BLUEZ}/etc/init.d
-	${INSTALL_BIN} ./files/bluez.init \
-		${IDIR_BLUEZ}/etc/init.d/bluez
 
 include ${TOPDIR}/mk/pkg-bottom.mk

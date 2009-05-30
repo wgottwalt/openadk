@@ -9,7 +9,7 @@ PKG_NAME:=		renderproto
 PKG_VERSION:=		0.9.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ab8f3e356973d9c99810a8f092db3a2e
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

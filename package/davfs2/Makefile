@@ -9,25 +9,28 @@ PKG_NAME=		davfs2
 PKG_VERSION=		1.3.3
 PKG_RELEASE=		1
 PKG_MD5SUM=		57def26e4d6d63527e01612d10fd0515
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=dav/}
+PKG_DESCR:=		WebDAV filesystem
+PKG_SECTION:=		admin
+PKG_URL:=		http://savannah.nongnu.org/projects/davfs2
+PKG_SITES=		${MASTER_SITE_SOURCEFORGE:=dav/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DAVFS2,davfs2,${PKG_VERSION}-${PKG_RELEASE}))
+ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)
+PKG_DEPENDS:=			fuse-utils, kmod-fuse, libfuse, libiconv, neon
+else ifeq (${ADK_PACKAGE_DAVFS2_CODA},y)
+PKG_DEPENDS:=			kmod-fs-coda, libiconv, neon
+else
+PKG_DEPENDS:=			kmod-fs-coda, fuse-utils, kmod-fuse, libfuse, libiconv, neon
+endif
+
+$(eval $(call PKG_template,DAVFS2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-neon
 CONFIGURE_ENV+=		LIBS=-liconv
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
-
-ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)
-DEPS=			fuse-utils, kmod-fuse, libfuse, libiconv, neon
-else ifeq (${ADK_PACKAGE_DAVFS2_CODA},y)
-DEPS=			kmod-fs-coda, libiconv, neon
-else
-DEPS=			kmod-fs-coda, fuse-utils, kmod-fuse, libfuse, libiconv, neon
-endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DAVFS2}/etc/davfs2
@@ -38,6 +41,5 @@ post-install:
 		${IDIR_DAVFS2}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/umount.davfs \
 		${IDIR_DAVFS2}/usr/sbin
-	echo 'Depends: ${DEPS}' >>${IDIR_DAVFS2}/CONTROL/control
 
 include ${TOPDIR}/mk/pkg-bottom.mk

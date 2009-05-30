@@ -1,5 +1,0 @@
-Package: opensips-mod-auth-radius
-Depends: opensips, libradiusclient-ng
-Section: net
-Priority: optional
-Description: authentication support against RADIUS for OpenSIPS

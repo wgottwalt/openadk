@@ -5,9 +5,13 @@
 
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/binutils/Makefile.inc
+
+PKG_DESCR:=		binary utilities (nm, objdump, ar, as, ..)
+PKG_SECTION:=		comp
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BINUTILS,binutils,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-werror
@@ -16,7 +20,7 @@ INSTALL_STYLE=		auto
 
 post-patch:
 	${PREVENT_PATCH} ${PATCH} ${WRKDIST} \
-	    ${TOPDIR}/toolchain/binutils/${BINUTILS_VERSION} \*.patch
+	    ${TOPDIR}/toolchain/binutils/patches \*.patch
 
 post-install:
 	${INSTALL_DIR} ${IDIR_BINUTILS}/usr/lib

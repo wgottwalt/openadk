@@ -1,5 +1,0 @@
-Package: php-mod-sockets
-Priority: optional
-Section: net
-Depends: php
-Description: Sockets module for PHP5

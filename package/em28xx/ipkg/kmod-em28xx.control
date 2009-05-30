@@ -1,4 +1,0 @@
-Package: kmod-em28xx
-Priority: optional
-Section: net
-Description: Driver for EM28xx based TV video cards

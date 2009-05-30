@@ -6,18 +6,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		miau
-PKG_VERSION:=		0.6.0.2
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		1b78d219a03655399c165eeb021cddd8
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=miau/}
+PKG_VERSION:=		0.6.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		76f794889d47ad277c25e9c5bbddefa4
+PKG_DESCR:=		miau is an IRC-bouncer/proxy
+PKG_SECTION:=		net
+PKG_URL:=		http://miau.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=miau/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MIAU,miau,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MIAU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
-			ac_cv_func_realloc_0_nonnull=yes
 CONFIGURE_ARGS+=	--enable-automode \
 			--enable-releasenick \
 			--enable-uptime \
@@ -26,10 +27,8 @@ CONFIGURE_ARGS+=	--enable-automode \
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MIAU}/usr/bin
-	${INSTALL_DIR} ${IDIR_MIAU}/etc/{init.d,miau}
+	${INSTALL_DIR} ${IDIR_MIAU}/usr/bin ${IDIR_MIAU}/etc/miau
 	${INSTALL_BIN} ${WRKINST}/usr/bin/${PKG_NAME} ${IDIR_MIAU}/usr/bin/
-	${INSTALL_BIN} ./files/miau.init ${IDIR_MIAU}/etc/init.d/miau
 	${INSTALL_DATA} ./files/miaurc ${IDIR_MIAU}/etc/miau/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

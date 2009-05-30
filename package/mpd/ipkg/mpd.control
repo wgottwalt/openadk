@@ -1,5 +1,0 @@
-Package: mpd
-Priority: optional
-Section: net
-Depends: alsa-lib
-Description: A music player for flac, mp3 and ogg.

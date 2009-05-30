@@ -9,12 +9,16 @@ PKG_NAME:=		iptraf
 PKG_VERSION:=		3.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		377371c28ee3c21a76f7024920649ea8
-MASTER_SITES:=		ftp://iptraf.seul.org/pub/iptraf/ \
+PKG_DESCR:=		A console-based network monitoring program.
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://iptraf.seul.org
+PKG_SITES:=		ftp://iptraf.seul.org/pub/iptraf/ \
 			ftp://the.wiretapped.net/pub/security/network-monitoring/iptraf/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPTRAF,iptraf,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPTRAF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \

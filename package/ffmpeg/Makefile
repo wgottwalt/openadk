@@ -9,12 +9,16 @@ PKG_NAME:=		ffmpeg
 PKG_VERSION:=		0.5
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		be8503f15c3b81ba00eb8379ca8dcf33
-MASTER_SITES:=		http://www.ffmpeg.org/releases/
+PKG_DESCR:=		cross-platform solution to record, convert and stream audio and video
+PKG_SECTION:=		sound
+PKG_URL:=		http://www.ffmpeg.org
+PKG_SITES:=		http://www.ffmpeg.org/releases/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,FFMPEG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	manual
 BUILD_STYLE:=		auto

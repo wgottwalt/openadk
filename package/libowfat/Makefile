@@ -5,17 +5,20 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		libowfat
-PKG_VERSION=		0.25
-PKG_RELEASE=		1
-PKG_MD5SUM=		7a5ab9f5b7099b82e428cd308d170005
+PKG_NAME:=		libowfat
+PKG_VERSION:=		0.28
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6bbee9a86506419657d87123b7a6f2c1
+PKG_DESCR:=		useful C library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.fefe.de/libowfat
+PKG_SITES:=		http://dl.fefe.de/
 
-MASTER_SITES=		http://dl.fefe.de/
-DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOWFAT,libowfat,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBOWFAT,libowfat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

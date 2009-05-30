@@ -9,17 +9,21 @@ PKG_NAME:=		libnet
 PKG_VERSION:=		1.0.2a
 PKG_RELEASE:=		7
 PKG_MD5SUM:=		ddf53f0f484184390e8c2a1bd0853667
-MASTER_SITES:=		http://www.packetfactory.net/libnet/dist/deprecated/
+PKG_DESCR:=		a low-level packet creation library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libpcap
+PKG_SITES:=		http://www.packetfactory.net/libnet/dist/deprecated/
+
 WRKDIST=		${WRKDIR}/Libnet-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
 ENDIAN:=lil
-ifeq (${ARCH},mips)
+ifeq (${CPU_ARCH},mips)
 ENDIAN:=big
 endif
 
-$(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_libnet_have_pf_packet=yes \

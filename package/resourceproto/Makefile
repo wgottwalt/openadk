@@ -9,7 +9,7 @@ PKG_NAME:=		resourceproto
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		198252b76e8082958cc2228d8dcc7c2f
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

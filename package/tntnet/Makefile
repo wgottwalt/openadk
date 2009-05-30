@@ -9,19 +9,35 @@ PKG_NAME:=		tntnet
 PKG_VERSION:=		1.6.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e2c3c5075a890711a7569730493c0996
-MASTER_SITES:=		http://www.tntnet.org/download/
+PKG_DESCR:=		small C++ application server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		cxxtools zlib libpthread libiconv
+PKG_URL:=		http://www.tntnet.org
+PKG_SITES:=		http://www.tntnet.org/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TNTNET,tntnet,${PKG_VERSION}-${PKG_RELEASE}))
+ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+
+ifeq (${ADK_COMPILE_TNTNET_WITH_OPENSSL},y)
+PKG_DEPENDS+=		libopenssl
+endif
+
+ifeq (${ADK_COMPILE_TNTNET_WITH_GNUTLS},y)
+PKG_DEPENDS+=		libgnutls
+endif
+
+$(eval $(call PKG_template,TNTNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -liconv -lpthread -lcxxtools -lm
-DEPENDS=		libgcc, uclibc++, cxxtools, zlib, libpthread, libiconv
 else
 TLDFLAGS+=		-liconv -lpthread -lcxxtools -lm -ldl
-DEPENDS=		libgcc, libstdcxx, cxxtools, zlib, libpthread, libiconv
 endif
 
 CONFIGURE_STYLE:=	gnu
@@ -31,10 +47,8 @@ CONFIGURE_ARGS+=	--without-epoll \
 			--without-sendfile
 ifeq (${ADK_COMPILE_TNTNET_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl=openssl
-SSL_DEPS=		", libopenssl"
 else ifeq (${ADK_COMPILE_TNTNET_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-ssl=gnutls
-SSL_DEPS=		", libgnutls"
 else
 CONFIGURE_ARGS+=	--without-ssl
 endif
@@ -62,6 +76,5 @@ post-install:
 	${CP} ${WRKINST}/usr/bin/tntnet ${IDIR_TNTNET}/usr/bin
 	${CP} ${WRKINST}/usr/lib/tntnet/tntnet.so* ${IDIR_TNTNET}/usr/lib/tntnet
 	${CP} ${WRKINST}/usr/lib/libtntnet.so.* ${IDIR_TNTNET}/usr/lib
-	echo Depends: ${DEPENDS}${SSL_DEPS} >>${IDIR_TNTNET}/CONTROL/control
 
 include ${TOPDIR}/mk/pkg-bottom.mk

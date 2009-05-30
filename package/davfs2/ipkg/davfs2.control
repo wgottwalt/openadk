@@ -1,4 +1,0 @@
-Package: davfs2
-Priority: optional
-Section: admin
-Description: WebDAV filesystem

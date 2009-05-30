@@ -1,4 +1,0 @@
-Package: ca-certificates
-Priority: optional
-Section: base
-Description: X.509v3 Root CA Certificates

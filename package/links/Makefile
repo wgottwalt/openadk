@@ -9,11 +9,15 @@ PKG_NAME:=		links
 PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c9937f9ed0061f264973182f871fb667
-MASTER_SITES:=		http://links.twibright.com/download/
+PKG_DESCR:=		web browser with console graphic support
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpng libjpeg libtiff gpm libopenssl
+PKG_URL:=		http://links.twibright.com
+PKG_SITES:=		http://links.twibright.com/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LINKS,links,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-graphics \

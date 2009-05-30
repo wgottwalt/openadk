@@ -9,14 +9,18 @@ PKG_NAME:=		logrotate
 PKG_VERSION:=		3.7.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		552639142e163745f6bcd4f1f3816d8a
+PKG_DESCR:=		logfile rotation utility
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libpopt
+PKG_SITES:=		http://ftp.debian.org/debian/pool/main/l/logrotate/
+
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
-MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/l/logrotate/
 
 include ${TOPDIR}/mk/package.mk
 
-${eval ${call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}}}
+$(eval $(call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-D_GNU_SOURCE -DLinux -DVERSION=\"$(VERSION)\"
+TCFLAGS+=		-D_GNU_SOURCE -DLinux -DVERSION=\"$(PKG_VERSION)\"
 ALL_TARGET=		logrotate
 BUILD_STYLE=		auto
 

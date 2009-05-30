@@ -98,7 +98,7 @@ You probably want to remove them: " >&2
 	[ "$?" -ne 0 ] && PKG_ERROR=1
 	if [ -z "$section" ]; then
 	    echo "The Section field should have one of the following values:" >&2
-	    echo "admin, base, comm, editors, extras, games, graphics, kernel, libs, misc, net, text, web, x11" >&2
+	    echo "admin, base, comm, editors, extras, games, graphics, kernel, lang, libs, misc, net, text, web, x11" >&2
 	fi
 
 	priority=`required_field Priority`

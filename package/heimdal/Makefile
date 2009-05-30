@@ -9,15 +9,31 @@ PKG_NAME:=		heimdal
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
-MASTER_SITES:=		http://www.h5l.org/dist/src/
+PKG_DESCR:=		Kerberos 5 server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses
+PKG_URL:=		http://www.h5l.org
+PKG_SITES:=		http://www.h5l.org/dist/src/
+
+PKG_DESCR_1:=		Kerberos 5 server libraries
+PKG_SECTION_1:=		libs
+
+PKG_DESCR_2:=		Kerberos 5 client libraries
+PKG_SECTION_2:=		libs
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,HEIMDAL_LIBS,heimdal-libs,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,HEIMDAL_CLIENT_LIBS,heimdal-client-libs,$(PKG_VERSION)-$(PKG_RELEASE)))
+ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_BDB),y)
+PKG_DEPENDS+=		libdb
+endif
 
-PKG_DEPENDS:=		heimdal-libs, heimdal-client-libs, libncurses, 
+ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_LDAP),y)
+PKG_DEPENDS+=		libopenldap
+endif
+
+$(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,HEIMDAL_LIBS,heimdal-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,HEIMDAL_CLIENT_LIBS,heimdal-client-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
@@ -33,7 +49,6 @@ endif
 
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_BDB),y)
 CONFIGURE_ARGS+=	--enable-berkeley-db
-PKG_DEPENDS+=		libdb
 else
 CONFIGURE_ARGS+=        --disable-berkeley-db
 endif
@@ -42,7 +57,6 @@ ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_LDAP),y)
 CONFIGURE_ARGS+=	--with-openldap=yes
 CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_DIR}/usr
 CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_DIR}/usr
-PKG_DEPENDS+=		libopenldap
 else
 CONFIGURE_ARGS+=        --without-openldap
 endif
@@ -85,7 +99,6 @@ ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
 	${INSTALL_DATA} ${WRKBUILD}/lib/hdb/hdb.schema \
 		${IDIR_HEIMDAL_SERVER}/etc/openldap/schema
 endif
-	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/etc/init.d
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/etc/heimdal
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/usr/sbin
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/usr/lib
@@ -93,8 +106,6 @@ endif
 	${CP} ${WRKINST}/usr/lib/libkadm5srv.so* ${IDIR_HEIMDAL_SERVER}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libhdb.so* ${IDIR_HEIMDAL_SERVER}/usr/lib
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_HEIMDAL_SERVER}/etc/heimdal
-	${INSTALL_DATA} ./files/heimdal.init \
-		${IDIR_HEIMDAL_SERVER}/etc/init.d/heimdal
 	${INSTALL_DATA} ./files/kdc.conf ${IDIR_HEIMDAL_SERVER}/etc/heimdal
 	${INSTALL_DATA} ./files/kadmind.acl ${IDIR_HEIMDAL_SERVER}/etc/heimdal
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/kdc ${IDIR_HEIMDAL_SERVER}/usr/sbin/
@@ -121,6 +132,5 @@ endif
 	${CP} ${WRKINST}/usr/lib/libeditline.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libsl.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libkadm5clnt.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib
-	echo 'Depends: ${PKG_DEPENDS}' >> ${IDIR_HEIMDAL_SERVER}/CONTROL/control
 
 include ${TOPDIR}/mk/pkg-bottom.mk

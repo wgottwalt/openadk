@@ -7,11 +7,13 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		libstdcxx
+PKG_DESCR:=		C++ support library
+PKG_SECTION:=		libs
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSTDCXX,libstdcxx,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBSTDCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/lib

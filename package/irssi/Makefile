@@ -6,16 +6,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		irssi
-PKG_VERSION:=		0.8.12
+PKG_VERSION:=		0.8.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e407b557b3cfc7c91ce4de2571dd79cb
+PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
+PKG_DESCR:=		IRC text client
+PKG_SECTION:=		text
+PKG_DEPENDS:=		glib2 libncurses
+PKG_URL:=		http://www.irssi.org
+PKG_SITES:=		http://www.irssi.org/files/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		http://www.irssi.org/files/
-PKG_DEPENDS:=		glib2, libncurses
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IRSSI,irssi,${PKG_VERSION}-${PKG_RELEASE}))
+ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
+PKG_DEPENDS+=		libopenssl
+endif
+
+$(eval $(call PKG_template,IRSSI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-perl=no \
@@ -29,7 +37,6 @@ BUILD_STYLE=		auto
 
 ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
 CONFIGURE_ARGS+=	--enable-ssl
-PKG_DEPENDS:=		${PKG_DEPENDS}, openssl
 else
 CONFIGURE_ARGS+=	--disable-ssl
 endif
@@ -37,6 +44,5 @@ endif
 do-install:
 	${INSTALL_DIR} ${IDIR_IRSSI}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/src/fe-text/${PKG_NAME} ${IDIR_IRSSI}/usr/bin/
-	echo 'Depends: ${PKG_DEPENDS}' >>${IDIR_IRSSI}/CONTROL/control
 
 include ${TOPDIR}/mk/pkg-bottom.mk

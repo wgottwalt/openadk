@@ -9,13 +9,17 @@ PKG_NAME:=		miredo
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf49c1ddc068746760787d0cf76e40de
-MASTER_SITES:=		http://www.remlab.net/files/miredo/
+PKG_DESCR:=		A Teredo (IPv6 tunneling over UDP through NAT) client and relay daemon
+PKG_SECTION:=		net
+PKG_URL:=		http://www.remlab.net
+PKG_SITES:=		http://www.remlab.net/files/miredo/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MIREDO,miredo,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MIREDO,miredo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-chroot \

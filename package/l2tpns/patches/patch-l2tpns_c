@@ -1,0 +1,35 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- l2tpns-2.1.21.orig/l2tpns.c	2006-06-22 17:30:50.000000000 +0200
++++ l2tpns-2.1.21/l2tpns.c	2009-05-29 17:53:32.393095004 +0200
+@@ -4233,31 +4233,6 @@ int main(int argc, char *argv[])
+ 		chdir("/tmp");
+ 	}
+ 
+-	if (config->scheduler_fifo)
+-	{
+-		int ret;
+-		struct sched_param params = {0};
+-		params.sched_priority = 1;
+-
+-		if (get_nprocs() < 2)
+-		{
+-			LOG(0, 0, 0, "Not using FIFO scheduler, there is only 1 processor in the system.\n");
+-			config->scheduler_fifo = 0;
+-		}
+-		else
+-		{
+-			if ((ret = sched_setscheduler(0, SCHED_FIFO, &params)) == 0)
+-			{
+-				LOG(1, 0, 0, "Using FIFO scheduler.  Say goodbye to any other processes running\n");
+-			}
+-			else
+-			{
+-				LOG(0, 0, 0, "Error setting scheduler to FIFO: %s\n", strerror(errno));
+-				config->scheduler_fifo = 0;
+-			}
+-		}
+-	}
+-
+ 	/* Set up the cluster communications port. */
+ 	if (cluster_init() < 0)
+ 		exit(1);

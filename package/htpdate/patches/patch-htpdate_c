@@ -1,0 +1,55 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- htpdate-1.0.3.orig/htpdate.c	2008-09-02 22:24:09.000000000 +0200
++++ htpdate-1.0.3/htpdate.c	2009-05-29 14:28:27.252071728 +0200
+@@ -351,6 +351,7 @@ static int setclock( double timedelta, i
+ }
+ 
+ 
++#if 0
+ static int htpdate_adjtimex( double drift ) {
+ 	struct timex		tmx;
+ 	long				freq;
+@@ -379,6 +380,7 @@ static int htpdate_adjtimex( double drif
+ 	}
+ 
+ }
++#endif
+ 
+ 
+ static void showhelp() {
+@@ -404,7 +406,6 @@ Usage: htpdate [-046abdhlqstxD] [-i pid 
+   -s    set time\n\
+   -t    turn off sanity time check\n\
+   -u    run daemon as user\n\
+-  -x    adjust kernel clock\n\
+   host  web server hostname or ip address (maximum of 16)\n\
+   port  port number (default 80 and 8080 for proxy server)\n");
+ 
+@@ -584,9 +585,11 @@ int main( int argc, char *argv[] ) {
+ 				}
+ 			}
+ 			break;
++#if 0
+ 		case 'x':			/* adjust time and "kernel" */
+ 			setmode = 3;
+ 			break;
++#endif
+ 		case 'D':			/* run as daemon */
+ 			daemonize = 1;
+ 			logmode = 1;
+@@ -777,6 +780,7 @@ int main( int argc, char *argv[] ) {
+ 					printlog( 0, "Drift %.2f PPM, %.2f s/day", \
+ 							drift*1e6, drift*86400 );
+ 
++#if 0
+ 					/* Adjust system clock */
+ 					if ( setmode == 3 ) {
+ 						starttime = time(NULL);
+@@ -787,6 +791,7 @@ int main( int argc, char *argv[] ) {
+ 						/* Drop root privileges again */
+ 						if ( sw_uid ) seteuid( sw_uid );
+ 					}
++#endif
+ 				} else {
+ 					starttime = time(NULL);
+ 				}

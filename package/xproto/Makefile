@@ -9,7 +9,7 @@ PKG_NAME:=		xproto
 PKG_VERSION:=		7.0.13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4c736a7ba52beddaea87964047adf209
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

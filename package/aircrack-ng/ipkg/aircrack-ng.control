@@ -1,5 +1,0 @@
-Package: aircrack-ng
-Priority: optional
-Section: net
-Depends: libpthread, libopenssl, libpcap
-Description: A set of tools for auditing wireless networks

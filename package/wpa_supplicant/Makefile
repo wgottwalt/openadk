@@ -9,13 +9,16 @@ PKG_NAME:=		wpa_supplicant
 PKG_VERSION:=		0.6.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0efb8fcedf0a8acf6f423dfdb0658fdd
-MASTER_SITES:=		http://hostap.epitest.fi/releases/
+PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl
+PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CPPFLAGS='${TCPPFLAGS}' \

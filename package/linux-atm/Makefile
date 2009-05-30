@@ -6,16 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		linux-atm
-PKG_VERSION:=		2.4.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		84fef49cc39ff2605204246666f65864
-DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
-MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/l/linux-atm/
+PKG_VERSION:=		2.5.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0b45a0e801fac7093ce4b0cadf419965
+PKG_DESCR:=		ATM library for linux
+PKG_SECTION:=		net
+PKG_URL:=		http://linux-atm.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LINUX_ATM,linux-atm,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LINUX_ATM,linux-atm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

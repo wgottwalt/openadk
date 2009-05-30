@@ -1,5 +1,0 @@
-Package: cfgfs
-Priority: optional
-Section: base
-Description: compressed config filesystem
-

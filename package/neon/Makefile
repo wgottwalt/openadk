@@ -9,11 +9,15 @@ PKG_NAME=		neon
 PKG_VERSION=		0.28.4
 PKG_RELEASE=		1
 PKG_MD5SUM=		6c3b94362af743d046e198e9fcbe4a85
-MASTER_SITES=		http://webdav.org/neon/
+PKG_DESCR:=		HTTP and WebDAV library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libpthread libxml2 libopenssl zlib
+PKG_UTL:=		http://webdav.org/neon
+PKG_SITES=		http://webdav.org/neon/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NEON,neon,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,NEON,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-ssl=openssl \

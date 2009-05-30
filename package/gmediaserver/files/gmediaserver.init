@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 60
+#PKG gmediaserver
+#INIT 60
 . /etc/rc.conf
 
 case $1 in

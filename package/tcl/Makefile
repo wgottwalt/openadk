@@ -5,19 +5,21 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		tcl
-PKG_VERSION=		8.4.18
-PKG_RELEASE=		1
-PKG_MD5SUM=		7d8bc95036f797b1a2b62a5a382d2cc1
-DISTFILES=		tcl${PKG_VERSION}-src.tar.gz
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=tcl/}
+PKG_NAME:=		tcl
+PKG_VERSION:=		8.4.18
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7d8bc95036f797b1a2b62a5a382d2cc1
+PKG_DESCR:=		the TCL scripting language
+PKG_SECTION:=		lang
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
 
+DISTFILES:=		tcl${PKG_VERSION}-src.tar.gz
 WRKDIST=		${WRKDIR}/tcl${PKG_VERSION}
 WRKSRC=			${WRKDIST}/unix
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TCL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \

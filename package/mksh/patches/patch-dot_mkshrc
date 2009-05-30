@@ -1,31 +1,16 @@
-$Id$
-
-	• OpenADK patches:
-	  – no hostname(1)
-	  – ls has no -o
-	  – yofuh doesn’t like $? in $PS1
-
---- mksh.orig/dot.mkshrc	Sat May 17 18:27:55 2008
-+++ mksh/dot.mkshrc	Mon Jul 21 21:02:05 2008
-@@ -2,13 +2,15 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- mksh.orig/dot.mkshrc	2009-05-30 12:07:24.734860691 +0200
++++ mksh/dot.mkshrc	2009-05-30 12:07:18.782465058 +0200
+@@ -20,7 +20,7 @@
  #-
  # ~/.mkshrc: mksh initialisation file for interactive shells
  
 -: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
-+: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(</proc/sys/kernel/hostname)}
++: ${EDITOR:=/bin/vi} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
  [[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
  : ${HOSTNAME:=nil}; if (( USER_ID )); then PS1='$'; else PS1='#'; fi
  function precmd {
- 	typeset -i e=$?
- 
--	(( e )) && print -n "$e|"
-+# enable this back if you want the errorlevel in your prompt
-+# this is default in upstream mksh, disabled locally in fwrt
-+#	(( e )) && print -n "$e|"
- }
- PS1='$(precmd)${USER:=$(ulimit -c 0;id -un 2>&- || print \?)}@${HOSTNAME%%.*}:$(
- 	typeset pfx=~ wd=${PWD:-?}
-@@ -30,7 +32,7 @@ unalias ls
+@@ -38,7 +38,7 @@ unalias ls
  alias l='ls -F'
  alias la='l -a'
  alias ll='l -l'

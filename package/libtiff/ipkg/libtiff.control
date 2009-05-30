@@ -1,4 +1,0 @@
-Package: libtiff
-Priority: optional
-Section: libs
-Description: A library for reading/writing TIFF images

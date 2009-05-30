@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- linux-atm-2.5.0.orig/src/sigd/Makefile.in	2007-12-29 21:31:36.000000000 +0100
++++ linux-atm-2.5.0/src/sigd/Makefile.in	2009-05-29 22:17:18.374156943 +0200
+@@ -223,7 +223,7 @@ atmsigd_XTRAS = mess.o $(top_builddir)/s
+ 			$(top_builddir)/src/lib/libatm.la \
+ 			$(top_builddir)/src/saal/libsaal.a
+ 
+-atmsigd_LDADD = $(atmsigd_XTRAS) -lfl
++atmsigd_LDADD = $(atmsigd_XTRAS)
+ atmsigd_DEPENDENCIES = mess.c $(atmsigd_XTRAS)
+ CLEANFILES = mess.c
+ sysconf_DATA = atmsigd.conf

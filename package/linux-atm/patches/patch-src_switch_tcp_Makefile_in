@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- linux-atm-2.5.0.orig/src/switch/tcp/Makefile.in	2007-12-29 21:31:37.000000000 +0100
++++ linux-atm-2.5.0/src/switch/tcp/Makefile.in	2009-05-29 22:35:16.037506912 +0200
+@@ -191,7 +191,7 @@ sw_tcp_SOURCES = tcpsw.c
+ sw_tcp_XTRAS = $(top_builddir)/src/switch/libsw.a \
+ 		$(top_builddir)/src/lib/libatm.la
+ 
+-sw_tcp_LDADD = $(sw_tcp_XTRAS) -lfl
++sw_tcp_LDADD = $(sw_tcp_XTRAS)
+ sw_tcp_DEPENDENCIES = $(sw_tcp_XTRAS)
+ EXTRA_DIST = mkfiles README
+ all: all-am

@@ -9,14 +9,14 @@ PKG_NAME:=		kismet
 PKG_VERSION:=		2008-05-R1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6ee365d36354b4dee4945e67f8149294
-MASTER_SITES:=		http://www.kismetwireless.net/code/
+PKG_SITES:=		http://www.kismetwireless.net/code/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_KISMET_WITH_UCLIBCXX),y)
 TCFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ -I${STAGING_DIR}/usr/include/uClibc++

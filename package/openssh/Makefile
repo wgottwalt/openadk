@@ -9,24 +9,35 @@ PKG_NAME:=		openssh
 PKG_VERSION:=		5.2p1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ada79c7328a8551bdf55c95e631e7dad
-MASTER_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/ \
+PKG_DESCR:=		OpenSSH server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		zlib libopenssl
+PKG_URL:=		http://www.openssh.com
+PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/ \
 			ftp://openbsd.wiretapped.net/pub/OpenBSD/OpenSSH/portable/ \
 			ftp://ftp.belnet.be/packages/openbsd/OpenSSH/portable/ \
 			ftp://ftp.de.openbsd.org/pub/unix/OpenBSD/OpenSSH/portable/
 
+PKG_DESCR_1:=		OpenSSH client
+PKG_DESCR_2:=		OpenSSH client utilities
+PKG_DESCR_3:=		OpenSSH sftp client
+PKG_DESCR_4:=		OpenSSH sftp server
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE}))
+ifeq ($(ADK_COMPILE_OPENSSH_WITH_KERBEROS),y)
+PKG_DEPENDS+=		heimdal-libs
+endif
 
-PKG_DEPENDS:=		zlib, libopenssl,
+$(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
+
 
 ifeq ($(ADK_COMPILE_OPENSSH_WITH_KERBEROS),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
-PKG_DEPENDS+=		heimdal-libs
 else
 CONFIGURE_ARGS+=	--without-kerberos5
 endif
@@ -52,11 +63,8 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh
-	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/init.d
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/sbin
-	${INSTALL_SCRIPT} files/sshd.init \
-	    ${IDIR_OPENSSH_SERVER}/etc/init.d/sshd
 	${CP} ./files/sshd_config ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ssh-keygen \
 		${IDIR_OPENSSH_SERVER}/usr/bin
@@ -78,6 +86,5 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/sftp-server \
 		${IDIR_OPENSSH_SFTP_SERVER}/usr/sbin
 	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
-	echo 'Depends: ${PKG_DEPENDS}' >>${IDIR_OPENSSH_SERVER}/CONTROL/control
 
 include ${TOPDIR}/mk/pkg-bottom.mk

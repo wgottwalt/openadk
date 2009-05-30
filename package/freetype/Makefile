@@ -6,16 +6,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libfreetype
-PKG_VERSION:=		2.1.9
+PKG_VERSION:=		2.3.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec1b903e4be5f073caa72458ea58c29c
+PKG_MD5SUM:=		d76233108aca9c9606cdbd341562ad9a
+PKG_DESCR:=		A free, high-quality and portable font engine
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		zlib
+PKG_URL:=		http://www.freetype.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
+
 DISTFILES:=		freetype-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
 WRKDIST=		${WRKDIR}/freetype-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

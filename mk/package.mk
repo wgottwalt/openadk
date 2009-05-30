@@ -24,6 +24,10 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
+
+ifeq ($(ADK_NATIVE),y)
+			CONFIG_SHELL='$(strip ${SHELL})'
+else
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
@@ -36,6 +40,7 @@ CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
+endif
 MAKE_FILE?=		Makefile
 # this is environment for 'make all' and 'make install'
 MAKE_ENV?=
@@ -47,6 +52,11 @@ MAKE_FLAGS?=
 FAKE_FLAGS?=
 ALL_TARGET?=		all
 INSTALL_TARGET?=	install
+ifeq ($(ADK_NATIVE),y)
+MAKE_ENV+=		\
+			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
+			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
+else
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
@@ -60,6 +70,7 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
+endif
 MAKE_FLAGS+=		${XAKE_FLAGS}
 FAKE_FLAGS+=		${XAKE_FLAGS}
 
@@ -95,9 +106,11 @@ build-all-ipkgs: ${_IPKGS_COOKIE}
 # there are some parameters to the PKG_template function
 # 1.) Config.in identifier ADK_PACKAGE_$(1)
 # 2.) name of the package, for single package mostly $(PKG_NAME)
-# 3.) package version (upstream version) and package revision (adk revision),
-#     always $(PKG_VERSION)-$(PKG_REVISION)
+# 3.) package version (upstream version) and package release (adk version),
+#     always $(PKG_VERSION)-$(PKG_RELEASE)
 # 4.) dependencies to other packages, $(PKG_DEPENDS)
+# 5.) description for the package, $(PKG_DESCR)
+# 6.) section of the package, $(PKG_SECTION)  
 #    
 # should be package format independent and modular in the future
 define PKG_template
@@ -116,8 +129,11 @@ endif
 IDEPEND_$(1):=	$$(strip $(4))
 
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
-ICONTROL_$(1)?=	ipkg/$(2).control
+ICONTROL_$(1)?=	$(WRKDIR)/.$(2).control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
+	@echo "Package: $(2)" > $(WRKDIR)/.$(2).control
+	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
+	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
@@ -135,7 +151,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 		echo "Depends: $$$$deps" >>$${IDIR_$(1)}/CONTROL/control; \
 	fi
 	@for file in conffiles preinst postinst prerm postrm; do \
-		[ ! -f ./ipkg/$(2).$$$$file ] || cp ./ipkg/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
+		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
 # FIXME: special case for device dependent base-files package
 ifneq ($(strip $${ICONTROL_ADDON_$(1)}),)
@@ -146,6 +162,13 @@ $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
 	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
+	@for file in $$$$(ls ./files/*.init 2>/dev/null); do \
+		fname=$$$$(echo $$$$file| sed -e "s#.*/##" -e "s#.init##"); \
+		check=$$$$(grep PKG $$$$file|cut -d ' '  -f 2); \
+		if [ "$$$$check" == $(2) ];then \
+			mkdir -p $$(IDIR_$(1))/etc/init.d && cp $$$$file $$(IDIR_$(1))/etc/init.d/$$$$fname; \
+		fi; \
+	done
 	@cd $${IDIR_$(1)}; for script in etc/init.d/*; do \
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \

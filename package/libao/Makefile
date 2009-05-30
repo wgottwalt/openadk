@@ -6,14 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libao
-PKG_VERSION:=		0.8.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		12e136a4c0995068ff134997c84421ed
-MASTER_SITES:=		http://downloads.xiph.org/releases/ao/
+PKG_VERSION:=		0.8.8
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b92cba3cbcf1ee9bc221118a85d23dcd
+PKG_DESCR:=		A cross platform audio library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.xiph.org/ao
+PKG_SITES:=		http://downloads.xiph.org/releases/ao/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBAO,libao,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBAO,libao,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-esd \

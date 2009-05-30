@@ -1,5 +1,0 @@
-Package: libpri
-Priority: optional
-Section: libs
-Depends: 
-Description: C implementation of the Primary Rate ISDN specification

@@ -8,12 +8,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libelf
 PKG_VERSION:=		0.8.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e931910b6d100f6caa32239849947fbf
-MASTER_SITES:=		http://www.mr511.de/software/
+PKG_MD5SUM:=		11904a77b948bcfab671e80100b6098d
+PKG_SITES:=		http://www.mr511.de/software/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		mr_cv_target_elf=yes \

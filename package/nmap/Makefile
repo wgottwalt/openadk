@@ -9,19 +9,23 @@ PKG_NAME:=		nmap
 PKG_VERSION:=		4.76
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		278dd2e849cc3dbb947df961a1aaffd0
-MASTER_SITES:=		http://download.insecure.org/nmap/dist/
+PKG_DESCR:=		utility for network exploration or security auditing
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libdnet libpcap libpcre
+PKG_URL:=		http://nmap.org
+PKG_SITES:=		http://download.insecure.org/nmap/dist/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DEPENDS:=		libgcc libdnet libpcap libpcre
+include ${TOPDIR}/mk/package.mk
+
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 PKG_DEPENDS+=		uclibc++
 else
 PKG_DEPENDS+=		libstdcxx
 endif
 
-include ${TOPDIR}/mk/package.mk
-
-$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS}))
+$(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)

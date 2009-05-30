@@ -1,5 +1,0 @@
-Package: rtorrent
-Priority: optional
-Section: net
-Depends: libncurses, libtorrent, libcurl
-Description: console torrent application

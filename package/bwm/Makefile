@@ -9,13 +9,16 @@ PKG_NAME:=		bwm
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		51021a036acb92d2bda0c0c0483f9552
+PKG_DESCR:=		A very tiny bandwidth monitor
+PKG_SECTION:=		net
+PKG_SITES:=		http://ftp.debian.org/debian/pool/main/b/bwm/
+
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
-MASTER_SITES:=		http://ftp.debian.org/debian/pool/main/b/bwm/
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}.orig
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BWM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BWM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
 	${TARGET_CC} ${TARGET_CFLAGS} ${WRKBUILD}/bwm.c -o ${WRKBUILD}/bwm

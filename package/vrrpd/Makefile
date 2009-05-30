@@ -9,12 +9,13 @@ PKG_NAME:=		vrrpd
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		6d5066ea1a6ced817376ca0f54765447
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}
+PKG_DESCR:=		An implementation of the Virtual Router Redundancy Protocol
+PKG_SECTION:=		net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VRRPD,vrrpd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,VRRPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS:=		CC="${TARGET_CC}" \
@@ -23,9 +24,6 @@ MAKE_FLAGS:=		CC="${TARGET_CC}" \
 ALL_TARGET:=		vrrpd
 
 do-install:
-	${INSTALL_DIR} ${IDIR_VRRPD}/etc/init.d/
-	${INSTALL_BIN} ./files/vrrpd.init \
-		${IDIR_VRRPD}/etc/init.d/vrrpd
 	${INSTALL_DIR} ${IDIR_VRRPD}/usr/sbin/
 	${INSTALL_BIN} ${WRKBUILD}/vrrpd ${IDIR_VRRPD}/usr/sbin/
 

@@ -1,4 +1,0 @@
-Package: device-mapper
-Priority: optional
-Section: utils
-Description: device mapper tools and libs

@@ -9,11 +9,14 @@ PKG_NAME:=		libpcap
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		9ad1358c5dec48456405eac197a46d3d
-MASTER_SITES:=		http://www.tcpdump.org/release/
+PKG_DESCR:=		a low-level packet capture library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.tcpdump.org
+PKG_SITES:=		http://www.tcpdump.org/release/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=26

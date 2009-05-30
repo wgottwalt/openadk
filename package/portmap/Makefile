@@ -9,13 +9,21 @@ PKG_NAME:=		portmap
 PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ac108ab68bf0f34477f8317791aaf1ff
-MASTER_SITES:=		http://neil.brown.name/portmap/
+PKG_DESCR:=		RPC portmapper
+PKG_SECTION:=		net
+PKG_URL:=		http://neil.brown.name/portmap
+PKG_SITES:=		http://neil.brown.name/portmap/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PORTMAP,portmap,${PKG_VERSION}-${PKG_RELEASE}))
+ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
+PKG_DEPENDS:=		libwrap
+endif
+
+$(eval $(call PKG_template,PORTMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
 MAKE_FLAGS+=		WRAP_LIB='-L${STAGING_DIR}/usr/lib -lwrap'
@@ -28,13 +36,7 @@ MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} \
 			CFLAGS='${TCFLAGS}'
 
 do-install:
-	${INSTALL_DIR} ${IDIR_PORTMAP}/etc/init.d
 	${INSTALL_DIR} ${IDIR_PORTMAP}/usr/sbin
-	${INSTALL_BIN} ./files/portmap.init \
-	    ${IDIR_PORTMAP}/etc/init.d/portmap
 	${INSTALL_BIN} ${WRKBUILD}/portmap ${IDIR_PORTMAP}/usr/sbin/
-ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
-	echo 'Depends: libwrap' >>${IDIR_PORTMAP}/CONTROL/control
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

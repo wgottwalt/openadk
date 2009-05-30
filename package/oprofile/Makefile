@@ -9,11 +9,15 @@ PKG_NAME:=		oprofile
 PKG_VERSION:=		0.9.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		82b059379895cf125261d7d773465915
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
+PKG_DESCR:=		system-wide profiles
+PKG_SECTION:=		utils
+PKG_DEPENDS:=		libpopt
+PKG_URL:=		http://oprofile.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TLDFLAGS+=		-shared
 CONFIGURE_STYLE=	gnu

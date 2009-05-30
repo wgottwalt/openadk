@@ -9,12 +9,17 @@ PKG_NAME:=		arpd
 PKG_VERSION:=		0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e2911fa9de1b92ef50deda1489ae944d
-MASTER_SITES:=		http://niels.xtdnet.nl/honeyd/
+PKG_DESCR:=		Generates ARP responses for IP address ranges
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap libdnet libevent
+PKG_URL:=		http://niels.xtdnet.nl/honeyd/
+PKG_SITES:=		http://niels.xtdnet.nl/honeyd/
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ARPD,arpd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,ARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-libdnet=${STAGING_DIR}/usr \

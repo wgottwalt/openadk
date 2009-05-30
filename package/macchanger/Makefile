@@ -9,11 +9,14 @@ PKG_NAME:=		macchanger
 PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79b7cdaeca3d8ebafa764c4b0dd03ab7
-MASTER_SITES:=		${MASTER_SITE_GNU:=macchanger/}
+PKG_DESCR:=		utility for viewing/manipulating the MAC address
+PKG_SECTION:=		sys
+PKG_URL:=		http://www.alobbs.com/macchanger
+PKG_SITES:=		${MASTER_SITE_GNU:=macchanger/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 INSTALL_STYLE:=		auto

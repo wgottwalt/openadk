@@ -9,12 +9,16 @@ PKG_NAME:=		moc
 PKG_VERSION:=		2.4.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		647c770a5542a4ae5437386807a89796
-MASTER_SITES:=		ftp://ftp.daper.net/pub/soft/moc/stable/
+PKG_DESCR:=		console music player
+PKG_SECTION:=		sound
+PKG_DEPENDS:=		libmad libvorbis libcurl libflac ffmpeg
+PKG_URL:=		http://moc.daper.net
+PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/stable/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MOC,moc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MOC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-jack \

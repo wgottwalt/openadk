@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 75
+#PKG esound
+#INIT 75
 . /etc/rc.conf
 
 case $1 in

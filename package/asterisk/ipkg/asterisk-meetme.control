@@ -1,5 +1,0 @@
-Package: asterisk-meetme
-Priority: optional
-Section: net
-Description: MeetMe support files for asterisk
-Depends: asterisk

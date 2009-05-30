@@ -6,17 +6,25 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		axtls
-PKG_VERSION:=		1.1.0
-PKG_RELEASE:=		8
-PKG_MD5SUM:=		4a834edc93f46fdca4f9c93ec665376e
+PKG_VERSION:=		1.2.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		03471b5a5874e2ce86025f24b3fa0958
+PKG_DESCR:=		small embedded webserver
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libaxtls
+PKG_URL:=		http://axtls.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
+
+PKG_DESCR_1:=		small tls library
+PKG_SECTION_1:=		libs
+
 DISTFILES:=		axTLS-${PKG_VERSION}.tar.gz
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
 WRKDIST=		${WRKDIR}/axTLS
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,AXHTTPD,axhttpd,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,AXHTTPD,axhttpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
 
 BUILD_STYLE=		auto
 XAKE_FLAGS+=		STRIP='' \
@@ -33,11 +41,8 @@ do-install:
 	${INSTALL_DIR} ${IDIR_LIBAXTLS}/usr/lib
 	$(CP) $(WRKBUILD)/_stage/libaxtls.so.* $(IDIR_LIBAXTLS)/usr/lib/
 	# awhttpd server
-	${INSTALL_DIR} ${IDIR_AXHTTPD}/etc/init.d
 	${INSTALL_DIR} ${IDIR_AXHTTPD}/www
 	${INSTALL_DIR} ${IDIR_AXHTTPD}/usr/sbin
 	${INSTALL_BIN} $(WRKBUILD)/_stage/axhttpd $(IDIR_AXHTTPD)/usr/sbin/
-	$(INSTALL_BIN) ./files/axhttpd.init \
-	    $(IDIR_AXHTTPD)/etc/init.d/axhttpd
 
 include ${TOPDIR}/mk/pkg-bottom.mk

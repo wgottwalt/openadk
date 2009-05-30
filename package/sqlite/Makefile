@@ -9,16 +9,19 @@ PKG_NAME:=		sqlite
 PKG_VERSION:=		3.6.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		46f92e42243bc51aaa3871645ce78bd5
-MASTER_SITES:=		http://www.sqlite.org/
+PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database engine
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.sqlite.org
+PKG_SITES:=		http://www.sqlite.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		config_BUILD_CC="${HOSTCC}" \
-			config_BUILD_CFLAGS="-O2" \
+			config_BUILD_CFLAGS="${HOSTCFLAGS}" \
 			config_TARGET_CC="${TARGET_CC}" \
 			config_TARGET_CFLAGS="${TARGET_CFLAGS}" \
 			config_TARGET_READLINE_INC="-I${STAGING_DIR}/usr/include" \

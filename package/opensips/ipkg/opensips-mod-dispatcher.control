@@ -1,5 +1,0 @@
-Package: opensips-mod-dispatcher
-Depends: opensips
-Section: net
-Priority: optional
-Description: dispatcher support for OpenSIPS

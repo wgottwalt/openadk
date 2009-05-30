@@ -9,15 +9,18 @@ PKG_NAME:=		sipsak
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c4eb8e282902e75f4f040f09ea9d99d5
-MASTER_SITES:=		http://download.berlios.de/sipsak/ \
+PKG_DESCR:=		a SIP (Session Initiation Protocol) stress and diagnostics utility
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl
+PKG_URL:=		http://sipsak.org
+PKG_SITES:=		http://download.berlios.de/sipsak/ \
 			http://ftp.iptel.org/pub/sipsak/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SIPSAK,sipsak,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SIPSAK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 CONFIGURE_ARGS+=	--disable-gnutls
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

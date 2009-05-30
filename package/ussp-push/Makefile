@@ -9,12 +9,14 @@ PKG_NAME:=		ussp-push
 PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5c44983ee27809867041feff6bb4423a
-
-MASTER_SITES:=		http://xmailserver.org/
+PKG_DESCR:=		OBEX push command
+PKG_SECTION:=		bluetooth
+PKG_DEPENDS:=		openobex
+PKG_SITES:=		http://xmailserver.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,USSP_PUSH,ussp-push,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,USSP_PUSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
@@ -24,6 +26,6 @@ MAKE_FLAGS+=		OBEXINC="${TCPPFLAGS}" \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_USSP_PUSH}/usr/bin
-	${CP} ${WRKINST}/usr/bin/ussp-push ${IDIR_USSP_PUSH}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ussp-push ${IDIR_USSP_PUSH}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

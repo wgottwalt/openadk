@@ -1,4 +1,0 @@
-Package: kmod-fs-ntfs-3g
-Priority: optional
-Section: sys
-Description: ntfs filesystem driver with read and write support

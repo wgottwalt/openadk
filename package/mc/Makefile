@@ -9,18 +9,21 @@ PKG_NAME=		mc
 PKG_VERSION=		4.6.1
 PKG_RELEASE=		1
 PKG_MD5SUM=		18b20db6e40480a53bac2870c56fc3c4
-MASTER_SITES=		http://www.ibiblio.org/pub/Linux/utils/file/managers/mc/
+PKG_DESCR:=		norton commander clone
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libncurses glib2
+PKG_URL:=		http://www.midnight-commander.org
+PKG_SITES=		http://www.ibiblio.org/pub/Linux/utils/file/managers/mc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-charset \
 			--disable-background \
 			--disable-gcc-warnings \
 			--disable-glibtest \
-			--with-glib12 \
 			--without-libiconv-prefix \
 			--without-x \
 			--with-vfs \

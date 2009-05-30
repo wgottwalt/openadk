@@ -9,11 +9,14 @@ PKG_NAME:=		libid3tag
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e5808ad997ba32c498803822078748c3
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}
+PKG_DESCR:=		an ID3 tag manipulation library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		zlib
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBID3TAG,libid3tag,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBID3TAG,libid3tag,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-debugging \

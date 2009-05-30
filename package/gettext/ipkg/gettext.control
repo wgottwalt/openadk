@@ -1,5 +1,0 @@
-Package: gettext
-Priority: optional
-Section: libs
-Depends: libiconv, libpthread
-Description: internationalisation library

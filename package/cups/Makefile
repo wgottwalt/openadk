@@ -9,13 +9,18 @@ PKG_NAME:=		cups
 PKG_VERSION:=		1.3.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		84fffe96b8537c81a463faccead80026
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
-MASTER_SITES:=		http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/cups/${PKG_VERSION}/ \
+PKG_DESCR:=		Common Unix Printing System
+PKG_SECTION:=		net
+PKG_DEPENDS:=		zlib libpthread
+PKG_URL:=		http://www.cups.org
+PKG_SITES:=		http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/cups/${PKG_VERSION}/ \
 			ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
@@ -43,7 +48,6 @@ FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
 XAKE_FLAGS+=		OPTIM=''
 
 post-install:
-	${INSTALL_DIR} ${IDIR_CUPS}/etc/init.d
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/doc/cups
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/sbin
@@ -71,7 +75,5 @@ post-install:
 		${IDIR_CUPS}/usr/share/cups/templates/
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_CUPS}/usr/sbin/
 	${CP} ./files/etc/cups/* ${IDIR_CUPS}/etc/cups/
-	${INSTALL_BIN} ./files/cupsd.init \
-		${IDIR_CUPS}/etc/init.d/cupsd
 
 include ${TOPDIR}/mk/pkg-bottom.mk

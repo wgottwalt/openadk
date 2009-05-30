@@ -9,13 +9,18 @@ PKG_NAME:=		privoxy
 PKG_VERSION:=		3.0.12
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c973e608d27b248ef567b47664308da1
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ijbswa/}
+PKG_DESCR:=		web proxy with advanced filtering capabilities
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpthread
+PKG_URL:=		http://www.privoxy.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ijbswa/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-stable-src.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-stable
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PRIVOXY,privoxy,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TLDFLAGS+=		-pthread
 CONFIGURE_STYLE:=	gnu

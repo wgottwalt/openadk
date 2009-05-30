@@ -9,11 +9,15 @@ PKG_NAME:=		screen
 PKG_VERSION:=		4.0.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8506fd205028a96c741e4037de6e3c42
-MASTER_SITES:=		${MASTER_SITE_GNU:=screen/}
+PKG_DESCR:=		A window manager for the terminal session
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libncurses
+PKG_URL:=		http://www.gnu.org/software/screen
+PKG_SITES:=		${MASTER_SITE_GNU:=screen/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SCREEN,screen,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SCREEN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(foreach flag,rename fchmod fchown strerror lstat _exit utimes vsnprintf getcwd setlocale strftime,ac_cv_func_${flag}=yes)

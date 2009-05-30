@@ -1,0 +1,16 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- lua-5.1.4.orig/src/Makefile	2008-01-19 20:37:58.000000000 +0100
++++ lua-5.1.4/src/Makefile	2009-05-29 23:41:06.936423384 +0200
+@@ -14,15 +14,16 @@ RANLIB= ranlib
+ RM= rm -f
+ LIBS= -lm $(MYLIBS)
+ 
+-MYCFLAGS=
+-MYLDFLAGS=
+-MYLIBS=
++MYCFLAGS?=
++MYLDFLAGS?=
++MYLIBS?=
+ 
+ # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
+ 

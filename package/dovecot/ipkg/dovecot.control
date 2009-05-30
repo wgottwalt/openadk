@@ -1,4 +1,0 @@
-Package: dovecot
-Priority: optional
-Section: net
-Description: A minimal and secure imap server

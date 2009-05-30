@@ -9,11 +9,14 @@ PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7aca5d0dc8b824d3dff6140e381e03df
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		Xorg server
+PKG_SECTION:=		x11
+PKG_URL:=		http://www.x.org
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-xinerama \

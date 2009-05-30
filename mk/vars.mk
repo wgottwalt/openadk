@@ -86,7 +86,11 @@ IPKG:=			IPKG_TMP=$(BUILD_DIR)/tmp \
 			${BASH} ${SCRIPT_DIR}/ipkg -force-defaults -force-depends
 IPKG_STATE_DIR:=	$(TARGET_DIR)/usr/lib/ipkg
 
+ifeq ($(ADK_NATIVE),y)
+RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh
+else
 RSTRIP:=		prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
+endif
 
 EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \

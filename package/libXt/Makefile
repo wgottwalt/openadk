@@ -9,11 +9,13 @@ PKG_NAME:=		libXt
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		666305c8a2b825b276b3412d8c0d2273
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		X Toolkit Intrinsics
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull \

@@ -1,5 +1,0 @@
-Package: sane-backend-mustek-usb2
-Depends: sane-backends, libusb
-Priority: optional
-Section: misc
-Description: Scanner access now easy

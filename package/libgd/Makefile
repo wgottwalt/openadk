@@ -9,11 +9,15 @@ PKG_NAME:=		gd
 PKG_VERSION:=		2.0.35
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
-MASTER_SITES:=		http://www.libgd.org/releases/
+PKG_DESCR:=		A library for the dynamic creation of images
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libjpeg libpng
+PKG_URL:=		http://www.libgd.org
+PKG_SITES:=		http://www.libgd.org/releases/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_DIR}/usr/bin/libpng12-config"

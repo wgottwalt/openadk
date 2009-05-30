@@ -1,5 +1,0 @@
-Package: opensips-mod-sms
-Depends: opensips
-Section: net
-Priority: optional
-Description: SMS support for OpenSIPS

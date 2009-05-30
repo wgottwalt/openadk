@@ -9,11 +9,15 @@ PKG_NAME:=		mysql
 PKG_VERSION:=		5.0.81
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2d35e4980f279c839172a6efdb0f0b15
-MASTER_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.0/}
+PKG_DESCR:=		MySQL client library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libncurses zlib
+PKG_URL:=		http://www.mysql.com
+PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.0/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \

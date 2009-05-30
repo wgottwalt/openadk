@@ -9,17 +9,17 @@ PKG_NAME:=		mutt
 PKG_VERSION:=		1.5.19
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		73b3747bc7f7c805921e8d24ebac693f
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mutt/}
+PKG_DESCR:=		Mail text client
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libncurses libopenssl
+PKG_URL:=		http://www.mutt.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mutt/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MUTT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_c_bigendian=no \
-			ac_cv_sizeof_off_t=8 \
-			ac_cv_sizeof_int=4 \
-			ac_cv_sizeof_long=4
 CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
 			--enable-pop \

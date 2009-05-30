@@ -6,15 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libcli
-PKG_VERSION:=		1.8.6
+PKG_VERSION:=		1.9.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fde7103a3771f550bfd366ee3ca1ef53
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=libcli/}
+PKG_MD5SUM:=		b917617d21b90db214971efe64a33416
+PKG_DESCR:=		Cisco-like command-line interface library
+PKG_SECTION:=		libs
+PKG_URL:=		http://code.google.com/p/libcli
+PKG_SITES:=		http://libcli.googlecode.com/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBCLI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBCLI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

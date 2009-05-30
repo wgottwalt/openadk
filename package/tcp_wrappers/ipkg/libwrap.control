@@ -1,4 +1,0 @@
-Package: libwrap
-Priority: optional
-Section: net
-Description: IP based access control.

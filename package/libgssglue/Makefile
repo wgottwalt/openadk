@@ -9,11 +9,13 @@ PKG_NAME:=		libgssglue
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ce1b4c758e6de01b712d154c5c97e540
-MASTER_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/
+PKG_DESCR:=		GSS glue library for NFSv4
+PKG_SECTION:=		libs
+PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBGSSGLUE,libgssglue,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBGSSGLUE,libgssglue,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

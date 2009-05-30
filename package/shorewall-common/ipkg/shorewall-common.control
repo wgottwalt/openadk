@@ -1,5 +1,0 @@
-Package: shorewall-common
-Priority: optional
-Section: net
-Depends: iptables
-Description: high-level netfilter configuration tool

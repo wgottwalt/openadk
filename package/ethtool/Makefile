@@ -9,11 +9,13 @@ PKG_NAME:=		ethtool
 PKG_VERSION:=		5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5df7f165974e096e2de890e099f87a12
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
+PKG_DESCR:=		Display or change ethernet card settings
+PKG_SECTION:=		net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto
