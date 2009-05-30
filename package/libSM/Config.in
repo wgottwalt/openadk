@@ -2,5 +2,6 @@ config ADK_PACKAGE_LIBSM
 	prompt "libSM................................... X library"
 	tristate
 	default n
+	select ADK_PACKAGE_LIBUUID
 	help
          http://www.x.org

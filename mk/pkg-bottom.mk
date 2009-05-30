@@ -115,12 +115,12 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
-ifneq ($(filter confprog,${INSTALL_STYLE}),)
+#ifneq ($(filter confprog,${INSTALL_STYLE}),)
 	for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
-endif
+#endif
 	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
 	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \

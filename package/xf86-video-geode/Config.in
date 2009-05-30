@@ -1,0 +1,6 @@
+config ADK_PACKAGE_XF86_VIDEO_GEODE
+	prompt "xf86-video-geode........................... X11 driver for AMD Geode"
+	tristate
+	default n
+	help
+         http://www.x.org

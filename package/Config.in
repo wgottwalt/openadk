@@ -456,6 +456,7 @@ endmenu
 menu "X"
 depends ADK_XORG
 source "package/xorg-server/Config.in"
+source "package/xf86-video-geode/Config.in"
 
 menu "X Libraries"
 source "package/libICE/Config.in"
@@ -474,7 +475,6 @@ source "package/libXpm/Config.in"
 source "package/libXt/Config.in"
 source "package/pixman/Config.in"
 source "package/xf86dga/Config.in"
-source "package/xproto/Config.in"
 endmenu
 endmenu
 

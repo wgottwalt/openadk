@@ -397,6 +397,7 @@ package-$(ADK_PACKAGE_XFSPROGS) += xfsprogs
 package-$(ADK_PACKAGE_XINETD) += xinetd
 package-$(ADK_PACKAGE_XCMISCPROTO) += xcmiscproto
 package-$(ADK_PACKAGE_XEXTPROTO) += xextproto
+package-$(ADK_PACKAGE_XF86_VIDEO_GEODE) += xf86-video-geode
 package-$(ADK_PACKAGE_XF86DGA) += xf86dga
 package-$(ADK_PACKAGE_XF86DGAPROTO) += xf86dgaproto
 package-$(ADK_PACKAGE_XPROTO) += xproto
