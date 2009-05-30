@@ -20,8 +20,6 @@ else
 PKG_ID=			${DEVICE}-${FS}
 endif
 WRKDIR=			${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-${PKG_ID}
-ICONTROL_BASE_FILES=	ipkg/base-files.control
-ICONTROL_ADDON_BASE_FILES=	"Package: base-files-${PKG_ID}"
 
 include $(TOPDIR)/mk/package.mk
 
@@ -58,9 +56,6 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
-	-find $(IDIR_BASE_FILES) -type d -name CVS | xargs rm -rf
-	-find $(IDIR_BASE_FILES) -type d -name .svn | xargs rm -rf
-	-find $(IDIR_BASE_FILES) -name '.#*' | xargs rm -f
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif

@@ -153,10 +153,6 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
-# FIXME: special case for device dependent base-files package
-ifneq ($(strip $${ICONTROL_ADDON_$(1)}),)
-	echo $${ICONTROL_ADDON_$(1)} >> $${IDIR_$(1)}/CONTROL/control
-endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
