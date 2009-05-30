@@ -1,6 +1,6 @@
 config ADK_PACKAGE_UCLIBC
 	prompt "uClibc............................... embedded C library"
-	tristate
+	bool
 	default y if ADK_TARGET_LIB_UCLIBC
 	default n
 	depends on ADK_TARGET_LIB_UCLIBC
