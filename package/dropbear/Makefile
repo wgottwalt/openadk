@@ -26,7 +26,7 @@ CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-pam \
 			--enable-openpty \
 			--enable-syslog \
-			--disable-shadow \
+			--enable-shadow \
 			--disable-lastlog \
 			--disable-utmp \
 			--disable-utmpx \
