@@ -1,4 +1,0 @@
-Package: xorg-server
-Priority: optional
-Section: x11
-Description: X.org server

@@ -9,11 +9,14 @@ PKG_NAME:=		popt
 PKG_VERSION:=		1.15
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c61ef795fa450eb692602a661ec8d7f1
-MASTER_SITES:=		http://rpm5.org/files/popt/
+PKG_DESCR:=		a command line option parsing library
+PKG_SECTION:=		libs
+PKG_URL:=		http://rpm5.org
+PKG_SITES:=		http://rpm5.org/files/popt/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

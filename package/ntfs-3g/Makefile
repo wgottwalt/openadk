@@ -5,18 +5,21 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		kmod-fs-ntfs-3g
-PKG_VERSION=		2009.3.8
+PKG_NAME=		ntfs-3g
+PKG_VERSION=		2009.4.4
 PKG_RELEASE=		1
-PKG_MD5SUM=		da67f4c651649f5a463af293c347c387
-PKG_MODULE=		1
-MASTER_SITES=		http://www.ntfs-3g.org/
-DISTFILES=		ntfs-3g-${PKG_VERSION}.tgz
-WRKDIST=		${WRKDIR}/ntfs-3g-${PKG_VERSION}
+PKG_MD5SUM=		e0b5c170f088a8d82968f0a6b34d31da
+PKG_DESCR:=		ntfs filesystem driver with read and write support
+PKG_SECTION:=		sys
+PKG_DEPENDS:=		kmod-fuse-fs
+PKG_URL:=		http://www.ntfs-3g.org
+PKG_SITES=		http://www.ntfs-3g.org/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KMOD_FS_NTFS_3G,kmod-fs-ntfs-3g,${KERNEL_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,NTFS_3G,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-ldconfig \
 			--disable-library
@@ -25,8 +28,8 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_KMOD_FS_NTFS_3G}/{bin,sbin}
-	${CP} ${WRKINST}/bin/ntfs-3g ${IDIR_KMOD_FS_NTFS_3G}/bin
-	${CP} ${WRKINST}/sbin/mount.ntfs-3g ${IDIR_KMOD_FS_NTFS_3G}/sbin
+	${INSTALL_DIR} ${IDIR_NTFS_3G}/{bin,sbin}
+	${CP} ${WRKINST}/bin/ntfs-3g ${IDIR_NTFS_3G}/bin
+	${CP} ${WRKINST}/sbin/mount.ntfs-3g ${IDIR_NTFS_3G}/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

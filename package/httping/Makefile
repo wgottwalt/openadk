@@ -6,29 +6,25 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		httping
-PKG_VERSION:=		1.2.3
+PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b257586da8acec18185c134ed86d2fdd
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
-MASTER_SITES:=		http://www.vanheusden.com/httping/
+PKG_MD5SUM:=		41c912a9ecc904e51d7260053fc2195c
+PKG_DESCR:=		Httping is like 'ping' but for http-requests
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl
+PKG_SITES:=		http://www.vanheusden.com/httping/
 
-PKG_DEPEND=libopenssl
-ifneq (${ADK_PACKAGE_HTTPING_WITH_SSL},y)
-SSL_ENABLE:=".nossl"
-PKG_DEPEND:=""
-endif
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-build:
-	${MAKE} -C ${WRKBUILD} -f ${WRKBUILD}/Makefile${SSL_ENABLE} \
-		CC="${TARGET_CC}" STAGING_DIR=${STAGING_DIR}
+MAKE_FLAGS+=		STAGING_DIR=${STAGING_DIR}
+BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_HTTPING}/usr/sbin
-	echo "Depends: ${PKG_DEPEND}" >> ${IDIR_HTTPING}/CONTROL/control
 	${CP} ${WRKBUILD}/${PKG_NAME} ${IDIR_HTTPING}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

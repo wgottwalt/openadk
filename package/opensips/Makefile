@@ -6,11 +6,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		1.4.2
+PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d7f0c867d797525635f157b65bb45129
+PKG_MD5SUM:=		87c6fe40c143775d6a1be1beb75c3eb2
+PKG_DESCR:=		a high-performance, configurable, free SIP server
+PKG_SECTION:=		net
 PKG_VARIANT:=		tls
-MASTER_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
+PKG_URL:=		http://opensips.org
+PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-$(PKG_VARIANT)_src.tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-$(PKG_VARIANT)
 
@@ -27,29 +31,29 @@ ${2}-install:
 
 endef
 
-$(eval $(call PKG_template,OPENSIPS,opensips,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_ACCOUNTING,opensips-mod-acc,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_AUTH,opensips-mod-auth,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_AUTH_DB,opensips-mod-auth-db,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_AVPOPS,opensips-mod-avpops,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_DISPATCHER,opensips-mod-dispatcher,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_DIVERSION,opensips-mod-diversion,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_FLATSTORE,opensips-mod-flatstore,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_GFLAGS,opensips-mod-gflags,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_GROUP,opensips-mod-group,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_MEDIAPROXY,opensips-mod-mediaproxy,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_MSILO,opensips-mod-msilo,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_NATHELPER,opensips-mod-nathelper,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_OPTIONS,opensips-mod-options,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_PDT,opensips-mod-pdt,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_PERMISSIONS,opensips-mod-permissions,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_PIKE,opensips-mod-pike,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_SMS,opensips-mod-sms,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_UAC,opensips-mod-uac,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_UAC_REDIRECT,opensips-mod-uac-redirect,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_URI,opensips-mod-uri,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_URI_DB,opensips-mod-uri-db,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,OPENSIPS_MOD_XLOG,opensips-mod-xlog,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,OPENSIPS,opensips,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_ACCOUNTING,opensips-mod-acc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_AUTH,opensips-mod-auth,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_AUTH_DB,opensips-mod-auth-db,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_AVPOPS,opensips-mod-avpops,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_DISPATCHER,opensips-mod-dispatcher,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_DIVERSION,opensips-mod-diversion,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_FLATSTORE,opensips-mod-flatstore,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_GFLAGS,opensips-mod-gflags,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_GROUP,opensips-mod-group,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_MEDIAPROXY,opensips-mod-mediaproxy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_MSILO,opensips-mod-msilo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_NATHELPER,opensips-mod-nathelper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_OPTIONS,opensips-mod-options,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_PDT,opensips-mod-pdt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_PERMISSIONS,opensips-mod-permissions,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_PIKE,opensips-mod-pike,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_SMS,opensips-mod-sms,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_UAC,opensips-mod-uac,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_UAC_REDIRECT,opensips-mod-uac-redirect,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_URI,opensips-mod-uri,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_URI_DB,opensips-mod-uri-db,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSIPS_MOD_XLOG,opensips-mod-xlog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_ACCOUNTING,acc))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_AUTH,auth))
@@ -81,9 +85,6 @@ OPENSIPS_MODULES:=	sl tm rr maxfwd usrloc registrar db_text textops exec mi_fifo
 OPENSIPS_MODULE_FILES:=	$(foreach module,$(OPENSIPS_MODULES),modules/$(module)/$(module).so)
 OPENSIPS_MODULES:=	$(patsubst %,modules/%,$(OPENSIPS_MODULES))
 
-post-extract:
-	@rm -f ${WRKDIST}/modules/dialog/dlg_handlers.c.rej
-
 do-build:
 	$(MAKE) -C $(WRKBUILD) \
 		prefix=/ \
@@ -94,10 +95,10 @@ do-build:
 		ARCH="$(ARCH)"  \
 		CFLAGS="$(TARGET_CFLAGS)" \
 		LOCALBASE="$(STAGING_DIR)/usr" \
+		SYSBASE="$(STAGING_DIR)/usr" \
 		all modules
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} $(IDIR_OPENSIPS)/etc/init.d
 	${INSTALL_DIR} $(IDIR_OPENSIPS)/etc/opensips
 	${INSTALL_DIR} $(IDIR_OPENSIPS)/usr/sbin
 	${INSTALL_DIR} $(IDIR_OPENSIPS)/usr/lib/opensips/modules
@@ -106,6 +107,5 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 		$(CP) $(OPENSIPS_MODULE_FILES) $(IDIR_OPENSIPS)/usr/lib/opensips/modules/; \
 	)
 	$(CP) ./files/opensips.cfg $(IDIR_OPENSIPS)/etc/opensips/
-	${INSTALL_DATA} ./files/opensips.init $(IDIR_OPENSIPS)/etc/init.d/opensips
 
 include ${TOPDIR}/mk/pkg-bottom.mk

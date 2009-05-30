@@ -1,5 +1,0 @@
-Package: heimdal-libs
-Priority: optional
-Section: net
-Depends: libopenssl, libpthread
-Description: heimdal kerberos libraries

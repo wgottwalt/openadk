@@ -9,16 +9,23 @@ PKG_NAME:=		mac80211
 PKG_VERSION:=		2009-05-01
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		abc949ec3f7cc57302cca814d9b9c6cd
-DISTFILES:=		compat-wireless-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		http://www.orbit-lab.org/kernel/compat-wireless-2.6/2009/05/	\
+PKG_DESCR:=		Linux wireless framework (SoftMAC)
+PKG_SECTION:=		kernel
+PKG_URL:=		http://wireless.kernel.org
+PKG_SITES:=		http://www.orbit-lab.org/kernel/compat-wireless-2.6/2009/05/	\
 			http://wireless.kernel.org/download/compat-wireless-2.6/
+
+PKG_DESCR_1:=		ath5k driver
+PKG_DESCR_2:=		rt61/rt2x00 driver
+
+DISTFILES:=		compat-wireless-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/compat-wireless-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KMOD_MAC80211,kmod-mac80211,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
-$(eval $(call PKG_template,KMOD_MAC80211_ATH5K,kmod-mac80211-ath5k,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
-$(eval $(call PKG_template,KMOD_MAC80211_RT61,kmod-mac80211-rt61,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,KMOD_MAC80211,kmod-mac80211,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel ${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE},${PKG_DESCR},{PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_MAC80211_ATH5K,kmod-mac80211-ath5k,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel ${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE},${PKG_DESCR},{PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_MAC80211_RT61,kmod-mac80211-rt61,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel ${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE},${PKG_DESCR},{PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		manual

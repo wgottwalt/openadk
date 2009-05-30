@@ -9,11 +9,13 @@ PKG_NAME:=		libnids
 PKG_VERSION:=		1.18
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		9ee6dcdfac97bae6fe611aa27d2594a5
-MASTER_SITES:=		http://www.packetfactory.net/projects/libnids/dist/
+PKG_DESCR:=		implementation of an E-component of Network Intrusion Detection System
+PKG_SECTION:=		libs
+PKG_SITES:=		http://www.packetfactory.net/projects/libnids/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBNIDS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \

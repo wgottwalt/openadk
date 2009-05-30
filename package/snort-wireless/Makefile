@@ -9,11 +9,15 @@ PKG_NAME:=		snort-wireless
 PKG_VERSION:=		2.4.3-alpha04
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		1aa699ae279bf7a1140cf6cca02f9999
-MASTER_SITES:=		http://www.snort-wireless.org/files/
+PKG_DESCR:=		a flexible Wireless Network Intrusion Detection System (NIDS)
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libnet libpcap libpcre
+PKG_URL:=		http://www.snort-wireless.org
+PKG_SITES:=		http://www.snort-wireless.org/files/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SNORT_WIRELESS,snort-wireless,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SNORT_WIRELESS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-flexresp \
@@ -31,10 +35,7 @@ INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT_WIRELESS}/usr/bin
-	${INSTALL_DIR} ${IDIR_SNORT_WIRELESS}/etc/init.d
 	${INSTALL_DIR} ${IDIR_SNORT_WIRELESS}/etc/snort
-	${INSTALL_BIN} ./files/snort-wireless.init \
-		${IDIR_SNORT_WIRELESS}/etc/init.d/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT_WIRELESS}/etc/snort/
 	${INSTALL_DATA} ${WRKBUILD}/etc/classification.config \
 		${IDIR_SNORT_WIRELESS}/etc/snort/
@@ -44,6 +45,5 @@ post-install:
 	${INSTALL_DATA} ${WRKBUILD}/etc/threshold.conf ${IDIR_SNORT_WIRELESS}/etc/snort/
 	${INSTALL_DATA} ${WRKBUILD}/etc/unicode.map ${IDIR_SNORT_WIRELESS}/etc/snort/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/snort ${IDIR_SNORT_WIRELESS}/usr/bin
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

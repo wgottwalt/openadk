@@ -1,6 +1,7 @@
-config ADK_PACKAGE_KMOD_FS_NTFS_3G
-	prompt "kmod-fs-ntfs-3g................... Kernel driver for NTFS filesystem (rw)"
+config ADK_PACKAGE_NTFS_3G
+	prompt "ntfs-3g................... NTFS filesystem driver with read-write support"
 	tristate
+	select ADK_KPACKAGE_KMOD_FUSE_FS
 	default n
 	help
 	  http://www.ntfs-3g.org

@@ -8,12 +8,15 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		2
+PKG_DESCR:=		compressed config filesystem
+PKG_SECTION:=		base
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CFGFS,cfgfs,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 

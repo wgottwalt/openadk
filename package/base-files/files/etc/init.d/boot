@@ -1,5 +1,5 @@
 #!/bin/sh
-#FWINIT 10
+#INIT 10
 [[ $1 = autostart ]] || exit 0
 
 . /etc/functions.sh

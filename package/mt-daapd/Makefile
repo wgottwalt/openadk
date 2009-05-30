@@ -9,12 +9,15 @@ PKG_NAME:=		mt-daapd
 PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		10
 PKG_MD5SUM:=		2e1cdbe6b94ef153e915806f80a28dca
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
+PKG_DESCR:=		a multi-threaded DAAP (Digital Audio Access Protocol) daemon
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libgdbm libid3tag libpthread
+PKG_URL:=		http://www.fireflymediaserver.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MT_DAAPD,mt-daapd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MT_DAAPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
@@ -28,12 +31,9 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc/init.d
-	${INSTALL_DIR} ${IDIR_MT_DAAPD}/usr/{share,sbin}
+	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc ${IDIR_MT_DAAPD}/usr/{share,sbin}
 	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.conf ${IDIR_MT_DAAPD}/etc/
 	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.playlist ${IDIR_MT_DAAPD}/etc/
-	${INSTALL_BIN} ./files/mt-daapd.init \
-		${IDIR_MT_DAAPD}/etc/init.d/mt-daapd
 	${CP} ${WRKINST}/usr/share/mt-daapd ${IDIR_MT_DAAPD}/usr/share/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mt-daapd ${IDIR_MT_DAAPD}/usr/sbin/
 

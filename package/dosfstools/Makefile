@@ -9,11 +9,14 @@ PKG_NAME:=		dosfstools
 PKG_VERSION:=		3.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		94c2ea84b191de958f765ee239457bd9
-MASTER_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
+PKG_DESCR:=		Utilities to create and check MS-DOS FAT filesystems
+PKG_SECTION:=		admin
+PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools
+PKG_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

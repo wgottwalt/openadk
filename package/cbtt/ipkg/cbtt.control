@@ -1,5 +1,0 @@
-Package: cbtt
-Priority: optional
-Section: net
-Depends: zlib, uclibc++
-Description: Bittorrent tracker

@@ -9,11 +9,14 @@ PKG_NAME:=		ssltunnel
 PKG_VERSION:=		1.16
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4039b50566a33a4077883ea974e476d5
-MASTER_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
+PKG_DESCR:=		A PPP over SSL vpn tool
+PKG_SECTION:=		net
+PKG_DEPENDS:=		ppp
+PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SSLTUNNEL,ssltunnel,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SSLTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}"

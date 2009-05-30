@@ -6,14 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
-PKG_VERSION:=		0.11.7
+PKG_VERSION:=		0.11.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		419e9be372c2f9bbb3ce9704c929d5ec
-MASTER_SITES:=		http://www.opensc-project.org/files/opensc/
+PKG_MD5SUM:=		a269b478b18dddb648b9bd930206b5a8
+PKG_DESCR:=		a set of libraries and utilities to access smart cards
+PKG_SECTION:=		crypto
+PKG_URL:=		http://www.opensc-project.org/opensc
+PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSC,opensc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OPENSC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

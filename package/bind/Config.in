@@ -8,21 +8,6 @@ config ADK_DUMMY_BIND
 	tristate
 	default n
 
-config ADK_PACKAGE_BIND_TOOLS
-	prompt "bind-tools........................ Bind administration tools"
-	tristate
-	default n
-	depends ADK_DUMMY_BIND
-	select ADK_COMPILE_BIND
-	select ADK_PACKAGE_LIBBIND
-	help
-	  dig, host,  nsupdate, dnssec-keygen, dnssec-signzone, named-checkconf,
-	  named-checkzone, rndc, rndc-confgen
-
-	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
-
 config ADK_PACKAGE_BIND_RNDC
 	prompt "bind-rndc......................... Bind administration tools (rndc & rndc-confgen only)"
 	tristate
@@ -32,10 +17,7 @@ config ADK_PACKAGE_BIND_RNDC
 	select ADK_PACKAGE_LIBBIND
 	help
 	  rndc, rndc-confgen
-
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
 
 config ADK_PACKAGE_BIND_CHECK
 	prompt "bind-check........................ Bind administration tools (named-checkconf & named-checkzone only)"
@@ -46,10 +28,7 @@ config ADK_PACKAGE_BIND_CHECK
 	select ADK_PACKAGE_LIBBIND
 	help
 	  named-checkconf, named-checkzone
-
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
 
 config ADK_PACKAGE_BIND_DNSSEC
 	prompt "bind-dnssec....................... Bind administration tools (dnssec-keygen & dnssec-signzone only)"
@@ -60,10 +39,7 @@ config ADK_PACKAGE_BIND_DNSSEC
 	select ADK_PACKAGE_LIBBIND
 	help
 	  dnssec-keygen, dnssec-signzone
-
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
 
 config ADK_PACKAGE_BIND_HOST
 	prompt "bind-host......................... A simple DNS client"
@@ -73,11 +49,9 @@ config ADK_PACKAGE_BIND_HOST
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
-	  host
-
+	  host utility.
 	  http://www.isc.org/sw/bind/
 
-	  Depends: libopenssl
 
 config ADK_PACKAGE_BIND_DIG
 	prompt "bind-dig.......................... A DNS client"
@@ -87,11 +61,8 @@ config ADK_PACKAGE_BIND_DIG
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
-	  dig
-
+	  dig utility.
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
 
 
 config ADK_PACKAGE_BIND_CLIENT
@@ -103,10 +74,7 @@ config ADK_PACKAGE_BIND_CLIENT
 	select ADK_PACKAGE_LIBBIND
 	help
 	  A DNS dynamic client (nsupdate)
-
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
 
 config ADK_PACKAGE_BIND_SERVER
 	prompt "bind-server....................... A DNS server"
@@ -117,11 +85,7 @@ config ADK_PACKAGE_BIND_SERVER
 	select ADK_PACKAGE_LIBBIND
 	help
 	  A DNS server (named)
-
 	  http://www.isc.org/sw/bind/
-
-	  Depends: libopenssl
-
 
 config ADK_PACKAGE_LIBBIND
         prompt "libbind........................... Support library for the bind tools and dns server/client."
@@ -131,6 +95,3 @@ config ADK_PACKAGE_LIBBIND
         select ADK_COMPILE_BIND
         help
           http://www.isc.org/sw/bind/
-
-          Depends: libopenssl
-

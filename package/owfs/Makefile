@@ -6,14 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		owfs
-PKG_VERSION:=		2.4p5
+PKG_VERSION:=		2.5p2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		236f2f42b3bb4f430e6007c1a70778e6
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
+PKG_MD5SUM:=		842170565e8893001a4e78e675322144
+PKG_DESCR:=		A tool to access 1-wire devices through a fuse mounted fs
+PKG_SECTION:=		admin
+PKG_URL:=		http://owfs.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC=${TARGET_CC} \

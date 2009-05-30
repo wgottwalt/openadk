@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- libtirpc-0.1.9.orig/src/Makefile.am	2008-07-09 20:13:20.000000000 +0200
-+++ libtirpc-0.1.9/src/Makefile.am	2008-10-27 14:54:13.000000000 +0100
-@@ -20,8 +20,7 @@ libtirpc_la_SOURCES = auth_none.c auth_u
+--- libtirpc-0.2.0.orig/src/Makefile.am	2009-05-28 21:25:26.000000000 +0200
++++ libtirpc-0.2.0/src/Makefile.am	2009-05-29 20:21:57.173677835 +0200
+@@ -49,8 +49,7 @@ libtirpc_la_SOURCES = auth_none.c auth_u
          pmap_prot.c pmap_prot2.c pmap_rmt.c rpc_prot.c rpc_commondata.c \
          rpc_callmsg.c rpc_generic.c rpc_soc.c rpcb_clnt.c rpcb_prot.c \
          rpcb_st_xdr.c svc.c svc_auth.c svc_dg.c svc_auth_unix.c svc_generic.c \
@@ -11,10 +11,3 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  ## XDR
  libtirpc_la_SOURCES += xdr.c xdr_rec.c xdr_array.c xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c
-@@ -62,5 +61,5 @@ $(libtirpc_la_OBJECTS) :auth_none.c auth
-         rpcb_st_xdr.c svc.c svc_auth.c svc_dg.c svc_auth_unix.c svc_generic.c \
-         svc_raw.c svc_run.c svc_simple.c svc_vc.c \
- 	xdr.c xdr_rec.c xdr_array.c xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c \
--	getpeereid.c auth_time.c auth_des.c authdes_prot.c
-+	getpeereid.c 
- endif

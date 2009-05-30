@@ -69,7 +69,7 @@ $(1):
 	fi; \
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
-	for site in $${MASTER_SITES} $${MASTER_SITE_BACKUP}; do \
+	for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
 		: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
 		rm -f "$$$$filename"; \
 		if $${FETCH_CMD} $$$$site$$$$filename; then \

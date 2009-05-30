@@ -6,19 +6,25 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ipsec-tools
-PKG_VERSION:=		0.6.4
+PKG_VERSION:=		0.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d0242a943c82c0cbf28005966ff35e21
+PKG_MD5SUM:=		72861f005746ee27984b2ee715ecc629
+PKG_DESCR:=		IPsec management tools
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl
+PKG_URL:=		http://ipsec-tools.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPSEC_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \
 			--without-readline \
+			--disable-security-context \
 			--with-openssl="${STAGING_DIR}/usr" \
 			--without-libradius \
 			--without-libpam

@@ -1,4 +1,0 @@
-Package: wireless-firmware-rt61
-Priority: optional
-Section: sys
-Description: firmware for rt61/rt2601 wireless cards

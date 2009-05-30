@@ -1,5 +1,0 @@
-Package: php-mod-pgsql
-Priority: optional
-Section: net
-Depends: php, libpq
-Description: PostgreSQL module for PHP5

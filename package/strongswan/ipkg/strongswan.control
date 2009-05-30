@@ -1,5 +1,0 @@
-Package: strongswan
-Section: base
-Priority: optional
-Depends: libgmp, ip
-Description: StrongSwan IPSec software

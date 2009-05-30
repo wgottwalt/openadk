@@ -1,4 +1,0 @@
-Package: rdate
-Priority: base
-Section: base
-Description: A small rdate and NTP client

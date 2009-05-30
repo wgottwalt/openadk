@@ -1,7 +1,7 @@
 $Id$
---- serdisplib-1.97.3.orig/configure	2007-02-15 23:24:51.000000000 +0100
-+++ serdisplib-1.97.3/configure	2007-05-23 00:00:41.000000000 +0200
-@@ -2644,18 +2644,6 @@ echo "${ECHO_T}no" >&6
+--- serdisplib-1.97.8.orig/configure	2008-07-19 00:40:38.000000000 +0200
++++ serdisplib-1.97.8/configure	2009-05-30 18:04:39.526453915 +0200
+@@ -2661,18 +2661,6 @@ echo "${ECHO_T}no" >&6
  fi
  
  

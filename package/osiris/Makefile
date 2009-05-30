@@ -9,11 +9,15 @@ PKG_NAME:=		osiris
 PKG_VERSION:=		4.2.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1951c7dc0fe729af9ffaf58910340d12
-MASTER_SITES:=		http://osiris.shmoo.com/data/
+PKG_DESCR:=		Host Integrity Monitoring System (scanning agent)
+PKG_SECTION:=		admin
+PKG_DEPENDS:=		libopenssl libpthread
+PKG_URL:=		http://osiris.shmoo.com
+PKG_SITES:=		http://osiris.shmoo.com/data/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OSIRISD,osirisd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OSIRISD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_openssldir="${STAGING_DIR}/usr" \
@@ -32,10 +36,7 @@ post-configure:
 	(cd ${WRKDIST}/src/osirisd/modules && ./genmods.sh);
 
 post-install:
-	${INSTALL_DIR} ${IDIR_OSIRISD}/etc/init.d
 	${INSTALL_DIR} ${IDIR_OSIRISD}/usr/sbin
-	${INSTALL_BIN} ./files/osirisd.init \
-		${IDIR_OSIRISD}/etc/init.d/osirisd
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/osirisd \
 		${IDIR_OSIRISD}/usr/sbin/
 

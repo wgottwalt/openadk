@@ -1,5 +1,0 @@
-Package: fuse-utils
-Priority: optional
-Section: admin
-Depends: kmod-fuse, libfuse
-Description: Filesystem in Userspace (utilities)

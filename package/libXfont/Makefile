@@ -9,11 +9,13 @@ PKG_NAME:=		libXfont
 PKG_VERSION:=		1.3.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb202f7b1af5fc95a7f35f0a62e52e6e
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		X font Library
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXFONT,libxfont,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBXFONT,libxfont,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

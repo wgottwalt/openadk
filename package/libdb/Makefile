@@ -9,24 +9,22 @@ PKG_NAME:=		libdb
 PKG_VERSION:=		4.7.25
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ec2b87e833779681a0c3a814aa71359e
-MASTER_SITES:=		http://www.oracle.com/technology/software/products/berkeley-db/
+PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
+PKG_SITES:=		http://www.openadk.org/distfiles/
+
 DISTFILES:=		db-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/db-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBDB,libdb,${PKG_VERSION}-${PKG_RELEASE}))
-
-ifeq ($(DEBUG),1)
-PKG_CONFIGURE:=		--enable-debug
-else
-PKG_CONFIGURE:=		--disable-debug
-endif
+$(eval $(call PKG_template,LIBDB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-configure:
 	(cd ${WRKBUILD}/build_unix ; \
 		${TARGET_CONFIGURE_OPTS} \
-		CFLAGS="${TARGET_CFLAGS_ARCH} -pipe" \
+		CFLAGS="${TARGET_CFLAGS}" \
 		CPPFLAGS="-I${STAGING_DIR}/usr/include" \
 		LDFLAGS="-L${STAGING_DIR}/usr/lib" \
 		../dist/configure \
@@ -66,7 +64,6 @@ do-configure:
 		--disable-cryptography \
 		--disable-queue \
 		--with-mutex=UNIX/fcntl \
-		${PKG_CONFIGURE} \
 		);
 
 do-install:

@@ -6,15 +6,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		0.1.11
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c656b7bf47e8bddbdefcd0b6a6f77b71
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
+PKG_VERSION:=		0.2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b3b513a8825aa227deac63ea38c64f41
+PKG_DESCR:=		a transport independent RPC library
+PKG_SECTION:=		libs
+PKG_URL:=		http://sourceforge.net/projects/libtirpc
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBTIRPC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	autotool gnu
 ifneq (${ADK_COMPILE_NFS_UTILS_WITH_KERBEROS},y)

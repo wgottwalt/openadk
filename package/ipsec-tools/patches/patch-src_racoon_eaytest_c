@@ -1,0 +1,27 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ipsec-tools-0.7.2.orig/src/racoon/eaytest.c	2008-07-16 10:50:02.000000000 +0200
++++ ipsec-tools-0.7.2/src/racoon/eaytest.c	2009-05-29 15:33:04.286374004 +0200
+@@ -683,19 +683,23 @@ ciphertest(ac, av)
+ 			  eay_aes_encrypt, eay_aes_decrypt) < 0)
+ 	  return -1;
+ 
++#ifndef OPENSSL_NO_BF
+ 	if (ciphertest_1 ("BLOWFISH",
+ 			  &data, 8,
+ 			  &key, key.l,
+ 			  &iv0, 8,
+ 			  eay_bf_encrypt, eay_bf_decrypt) < 0)
+ 	  return -1;
++#endif
+ 
++#ifndef OPENSSL_NO_CAST
+ 	if (ciphertest_1 ("CAST",
+ 			  &data, 8,
+ 			  &key, key.l,
+ 			  &iv0, 8,
+ 			  eay_cast_encrypt, eay_cast_decrypt) < 0)
+ 	  return -1;
++#endif
+ 	
+ #ifdef HAVE_OPENSSL_IDEA_H
+ 	if (ciphertest_1 ("IDEA",

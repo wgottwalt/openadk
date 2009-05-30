@@ -1,5 +1,0 @@
-Package: neon
-Priority: optional
-Section: admin
-Depends: libpthread, libxml2, openssl, zlib
-Description: HTTP and WebDAV library

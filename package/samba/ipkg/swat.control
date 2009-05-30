@@ -1,5 +1,0 @@
-Package: swat
-Priority: optional
-Section: net
-Depends: samba
-Description: NetBIOS/SMB file and print server

@@ -6,16 +6,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bridge-utils
-PKG_VERSION:=		1.0.6
+PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9b7dc52656f5cbec846a7ba3299f73bd
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
+PKG_MD5SUM:=		0182fcac3a2b307113bbec34e5f1c673
+PKG_DESCR:=		Ethernet bridging tools
+PKG_SECTION:=		net
+PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BRIDGE_UTILS,bridge-utils,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BRIDGE_UTILS,bridge-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autoconf gnu
 CONFIGURE_ARGS+=	--with-linux-headers=${LINUX_DIR}
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

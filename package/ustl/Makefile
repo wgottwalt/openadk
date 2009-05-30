@@ -9,13 +9,15 @@ PKG_NAME:=		ustl
 PKG_VERSION:=		0.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		dd59483c327f1bd1356273bc5ae4dde0
+PKG_DESCR:=		An STL (Standard Template Library) for embedded systems
+PKG_SECTION:=		libs
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ustl/}
 
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ustl/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-0.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,USTL,ustl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,USTL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

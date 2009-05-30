@@ -1,12 +1,12 @@
-$Id$
---- ipsec-tools-0.6.4.orig/configure	2005-12-09 10:03:34.000000000 +0100
-+++ ipsec-tools-0.6.4/configure	2007-06-28 16:58:31.000000000 +0200
-@@ -23147,7 +23147,7 @@ echo "${ECHO_T}${crypto_dir-default}" >&
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ipsec-tools-0.7.2.orig/configure	2009-04-21 16:41:45.000000000 +0200
++++ ipsec-tools-0.7.2/configure	2009-05-29 15:28:06.991791782 +0200
+@@ -11963,7 +11963,7 @@ echo "${ECHO_T}$ac_cv_path_EGREP" >&6; }
  
- if test "x$crypto_dir" != "x"; then
- 	LIBS="$LIBS -L${crypto_dir}/lib"
--	CPPFLAGS="-I${crypto_dir}/include $CPPLAGS"
-+	CPPFLAGS="-I${crypto_dir}/include $CPPFLAGS"
- fi
- echo "$as_me:$LINENO: checking openssl version" >&5
- echo $ECHO_N "checking openssl version... $ECHO_C" >&6
+ 
+ 
+-CFLAGS_ADD="$CFLAGS_ADD -Wall -Werror -Wno-unused"
++CFLAGS_ADD="$CFLAGS_ADD -Wall -Wno-unused"
+ 
+ case $host in
+ *netbsd*)

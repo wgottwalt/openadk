@@ -1,5 +1,0 @@
-Package: opensips-mod-uri-radius
-Depends: opensips
-Section: net
-Priority: optional
-Description: uri_radius support for OpenSIPS

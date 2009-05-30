@@ -1,200 +1,31 @@
 config ADK_COMPILE_PMACCT
 	tristate
 	default n
-	depends ADK_COMPILE_PMACCT_BASIC || ADK_COMPILE_PMACCT_MYSQL || ADK_COMPILE_PMACCT_PGSQL || ADK_COMPILE_PMACCT_SQLITE || ADK_COMPILE_PMACCT_CUSTOM || ADK_PACKAGE_PMACCT_CLIENT
+	depends ADK_PACKAGE_PMACCTD || ADK_PACKAGE_PMACCT_CLIENT || ADK_PACKAGE_SFACCTD || ADK_PACKAGE_NFACCTD
 
-config ADK_COMPILE_PMACCT_BASIC
+config ADK_PACKAGE_PMACCTD
+	prompt     "pmacctd....................... IP accounting daemon (libpcap based)"
 	tristate
 	default n
-	depends ADK_PACKAGE_NFACCTD_BASIC || ADK_PACKAGE_PMACCTD_BASIC
-	select ADK_COMPILE_PMACCT
-
-config ADK_COMPILE_PMACCT_MYSQL
-	tristate
-	default n
-	depends ADK_PACKAGE_NFACCTD_MYSQL || ADK_PACKAGE_PMACCTD_MYSQL
-	select ADK_COMPILE_PMACCT
-
-config ADK_COMPILE_PMACCT_PGSQL
-	tristate
-	default n
-	depends ADK_PACKAGE_NFACCTD_PGSQL || ADK_PACKAGE_PMACCTD_PGSQL
-	select ADK_COMPILE_PMACCT
-
-config ADK_COMPILE_PMACCT_SQLITE
-	tristate
-	default n
-	depends ADK_PACKAGE_NFACCTD_SQLITE || ADK_PACKAGE_PMACCTD_SQLITE
-	select ADK_COMPILE_PMACCT
-
-config ADK_COMPILE_PMACCT_CUSTOM
-	tristate
-	default n
-	depends ADK_PACKAGE_NFACCTD_CUSTOM || ADK_PACKAGE_PMACCTD_CUSTOM
-	select ADK_COMPILE_PMACCT
-
-config ADK_SHOW_PMACCT
-	bool "pmacct/nfacct..................... IPv4/IPv6 accounting and aggregation tools"
-
-config ADK_SHOW_NFACCTD
-	prompt   "nfacctd......................... NetFlow accounting daemon"
-	bool
-	default n
-	depends ADK_SHOW_PMACCT
 	help
-	  
-	  An IPv4/IPv6 Netflow accounting and aggregation daemon
-	  
-	  http://www.ba.cnr.it/~paolo/pmacct/
-	  
-	  Depends:
-	    - libmysqlclient (for MySQL database logging support)
-	    - libpq (for PostgreSQL database logging support)
-	    - libsqlite (for SQLite database logging support)
-
-
-config ADK_PACKAGE_NFACCTD_BASIC
-	prompt     "nfacctd.......................   built without database support"
-	tristate
-	select ADK_COMPILE_PMACCT_BASIC
-	select ADK_PACKAGE_LIBPCAP
-	depends ADK_SHOW_NFACCTD
-
-config ADK_PACKAGE_NFACCTD_MYSQL
-	prompt     "nfacctd-mysql.................   built with MySQL database support"
-	tristate
-	select ADK_COMPILE_PMACCT_MYSQL
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBMYSQLCLIENT
-	depends ADK_SHOW_NFACCTD
-
-config ADK_PACKAGE_NFACCTD_PGSQL
-	prompt     "nfacctd-pgsql.................   built with PostgreSQL database support"
-	tristate
-	select ADK_COMPILE_PMACCT_PGSQL
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBPQ
-	depends ADK_SHOW_NFACCTD
-
-config ADK_PACKAGE_NFACCTD_SQLITE
-	prompt     "nfacctd-sqlite................   built with SQLite database support"
-	tristate
-	select ADK_COMPILE_PMACCT_SQLITE
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBSQLITE
-	depends ADK_SHOW_NFACCTD
-
-config ADK_PACKAGE_NFACCTD_CUSTOM
-	prompt     "nfacctd-custom................   customized to your needs"
-	tristate
-	select ADK_COMPILE_PMACCT_CUSTOM
-	select ADK_PACKAGE_LIBPCAP
-	depends ADK_SHOW_NFACCTD
-
-config ADK_COMPILE_NFACCTD_WITH_MYSQL
-	prompt "MySQL database support"
-	bool
-	default n
-	depends ADK_PACKAGE_NFACCTD_CUSTOM
-	select ADK_PACKAGE_LIBMYSQLCLIENT
-
-config ADK_COMPILE_NFACCTD_WITH_PGSQL
-	prompt "PostgreSQL database support"
-	bool
-	default n
-	depends ADK_PACKAGE_NFACCTD_CUSTOM
-	select ADK_PACKAGE_LIBPQ
-
-config ADK_COMPILE_NFACCTD_WITH_SQLITE
-	prompt "SQLite database support"
-	bool
-	default n
-	depends ADK_PACKAGE_NFACCTD_CUSTOM
-	select ADK_PACKAGE_LIBSQLITE
-
-
-config ADK_SHOW_PMACCTD
-	prompt   "pmacctd......................... IP accounting daemon (libpcap based)"
-	bool
-	default n
-	depends ADK_SHOW_PMACCT
-	help
-	  
 	  An IPv4/IPv6 libpcap-based accounting and aggregation daemon
-	  
-	  http://www.ba.cnr.it/~paolo/pmacct/
-	  
-	  Depends:
-	    - libpcap
-	    - libmysqlclient (for MySQL database logging support)
-	    - libpq (for PostgreSQL database logging support)
-	    - libsqlite (for SQLite database logging support)
 
-	
-config ADK_PACKAGE_PMACCTD_BASIC
-	prompt     "pmacctd.......................   built without database support"
+config ADK_PACKAGE_NFACCTD
+	prompt     "nfacctd....................... Netflow accounting and aggregation daemon"
 	tristate
-	select ADK_COMPILE_PMACCT_BASIC
 	select ADK_PACKAGE_LIBPCAP
-	depends ADK_SHOW_PMACCTD
+	help
+	  An IPv4/IPv6 libpcap-based accounting and aggregation daemon
 
-config ADK_PACKAGE_PMACCTD_MYSQL
-	prompt     "pmacctd-mysql.................   built with MySQL database support"
+config ADK_PACKAGE_SFACCTD
+	prompt     "sfacctd....................... sFlow accounting and aggregation daemon"
 	tristate
-	select ADK_COMPILE_PMACCT_MYSQL
 	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBMYSQLCLIENT
-	depends ADK_SHOW_PMACCTD
-
-config ADK_PACKAGE_PMACCTD_PGSQL
-	prompt     "pmacctd-pgsql.................   built with PostgreSQL database support"
-	tristate
-	select ADK_COMPILE_PMACCT_PGSQL
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBPQ
-	depends ADK_SHOW_PMACCTD
-
-config ADK_PACKAGE_PMACCTD_SQLITE
-	prompt     "pmacctd-sqlite................   built with SQLite database support"
-	tristate
-	select ADK_COMPILE_PMACCT_SQLITE
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBSQLITE
-	depends ADK_SHOW_PMACCTD
-
-config ADK_PACKAGE_PMACCTD_CUSTOM
-	prompt     "pmacctd-custom................   customized to your needs"
-	tristate
-	select ADK_COMPILE_PMACCT_CUSTOM
-	select ADK_PACKAGE_LIBPCAP
-	depends ADK_SHOW_PMACCTD
-
-config ADK_COMPILE_PMACCTD_WITH_MYSQL
-	prompt "MySQL database support"
-	bool
-	default n
-	depends ADK_PACKAGE_PMACCTD_CUSTOM
-	select ADK_PACKAGE_LIBMYSQLCLIENT
-
-config ADK_COMPILE_PMACCTD_WITH_PGSQL
-	prompt "PostgreSQL database support"
-	bool
-	default n
-	depends ADK_PACKAGE_PMACCTD_CUSTOM
-	select ADK_PACKAGE_LIBPQ
-
-config ADK_COMPILE_PMACCTD_WITH_SQLITE
-	prompt "SQLite database support"
-	bool
-	default n
-	depends ADK_PACKAGE_PMACCTD_CUSTOM
-	select ADK_PACKAGE_LIBSQLITE
-
+	help
+	  An IPv4/IPv6 libpcap-based accounting and aggregation daemon
 
 config ADK_PACKAGE_PMACCT_CLIENT
 	prompt   "pmacct-client................... Command-line client to gather data from the IMT plugin"
 	tristate
 	default n
-	select ADK_COMPILE_PMACCT
-	depends ADK_SHOW_PMACCT
-
+	help

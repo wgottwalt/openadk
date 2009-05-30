@@ -1,5 +1,0 @@
-Package: opensips-mod-acc
-Depends: opensips, libradiusclient-ng
-Section: net
-Priority: optional
-Description: accounting support for OpenSIPS

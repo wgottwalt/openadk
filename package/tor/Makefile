@@ -9,14 +9,17 @@ PKG_NAME:=		tor
 PKG_VERSION:=		0.1.1.26
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		0667df7a1f670bee5163b607aea172ba
-
-MASTER_SITES:=		http://tor.eff.org/dist/ \
+PKG_DESCR:=		An anonymous Internet communication system
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libevent libopenssl libpthread zlib
+PKG_URL:=		http://tor.eff.org
+PKG_SITES:=		http://tor.eff.org/dist/ \
 			http://ftp.se.linux.org/crypto/tor/ \
 			http://tor.meulie.net/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TOR,tor,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
@@ -31,11 +34,8 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_TOR}/etc/init.d
-	${INSTALL_BIN} ./files/tor.init ${IDIR_TOR}/etc/init.d/tor
-	${INSTALL_DIR} ${IDIR_TOR}/etc/tor
+	${INSTALL_DIR} ${IDIR_TOR}/usr/bin ${IDIR_TOR}/etc/tor
 	${INSTALL_DATA} ./files/torrc ${IDIR_TOR}/etc/tor/
-	${INSTALL_DIR} ${IDIR_TOR}/usr/bin
 	${CP} ${WRKINST}/usr/bin/tor ${IDIR_TOR}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

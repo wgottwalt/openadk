@@ -9,13 +9,16 @@ PKG_NAME:=		tcp_wrappers
 PKG_VERSION:=		7.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e6fa25f71226d090f34de3f6b122fb5a
-MASTER_SITES:=		ftp://ftp.porcupine.org/pub/security/
+PKG_DESCR:=		IP based access control
+PKG_SECTION:=		net
+PKG_SITES:=		ftp://ftp.porcupine.org/pub/security/
+
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBWRAP,libwrap,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBWRAP,libwrap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 ALL_TARGET:=		tidy all
@@ -33,8 +36,7 @@ MAKE_FLAGS+=		OPT_CFLAGS="${TARGET_CFLAGS}" \
 			STYLE="-DPROCESS_OPTIONS" \
 
 do-install:
-	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/lib
-	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/lib ${IDIR_LIBWRAP}/usr/include
 	${CP} ${WRKBUILD}/shared/libwrap.so.* ${IDIR_LIBWRAP}/usr/lib/
 	${CP} ${WRKBUILD}/tcpd.h ${IDIR_LIBWRAP}/usr/include/
 	${INSTALL_DIR} ${WRKINST}/usr/lib

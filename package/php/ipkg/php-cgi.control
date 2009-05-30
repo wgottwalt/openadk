@@ -1,6 +1,0 @@
-Package: php-cgi
-Priority: optional
-Section: net
-Provides: php
-Depends: libopenssl, zlib
-Description: PHP5 compiled as for CGI

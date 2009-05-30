@@ -12,7 +12,7 @@ NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBC,libc,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBC,libc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # do nothing, use native c library
 do-install:

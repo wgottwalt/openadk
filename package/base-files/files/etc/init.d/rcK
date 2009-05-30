@@ -4,7 +4,7 @@ busybox reboot -d 60 -f &		# just in case…
 {
 	[[ -f /proc/diag/led/power ]] && echo f >/proc/diag/led/power
 	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
-	grep '^#FWINIT ' /etc/init.d/* | \
+	grep '^#INIT ' /etc/init.d/* | \
 	    sort -rnk2 | \
 	    while read line; do
 		shebang=$(sed -n '1s/^#![	 ]*//p' ${line%%:*})

@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 50
+#PKG ez-ipupdate
+#INIT 50
 . /etc/rc.conf
 
 case $1 in

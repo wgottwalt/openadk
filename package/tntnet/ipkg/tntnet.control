@@ -1,4 +1,0 @@
-Package: tntnet
-Priority: optional
-Section: net
-Description: a modular, multithreaded webapplicationserver

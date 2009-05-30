@@ -9,11 +9,14 @@ PKG_NAME:=		lrzsz
 PKG_VERSION:=		0.12.20
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b5ce6a74abc9b9eb2af94dffdfd372a4
-MASTER_SITES:=		http://www.ohse.de/uwe/releases/
+PKG_DESCR:=		X-Modem, Y-modem, Z-modem protocol handlers
+PKG_SECTION:=		misc
+PKG_URL:=		http://www.ohse.de/uwe/software/lrzsz.html
+PKG_SITES:=		http://www.ohse.de/uwe/releases/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LRZSZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LRZSZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-libiconv-prefix \

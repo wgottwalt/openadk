@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		4.6.2
+PKG_VERSION:=		4.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9eee46a6330780d6e6b41155b159f4f9
-MASTER_SITES:=		http://verplant.org/collectd/files/
+PKG_MD5SUM:=		b077e3398bd6fac0e53e9df4794db264
+PKG_DESCR:=		System statistics collection daemon
+PKG_SECTION:=		console
+PKG_DEPENDS:=		libpthread
+PKG_URL:=		http://collectd.org
+PKG_SITES:=		http://collectd.org/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,COLLECTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifneq (${ADK_PACKAGE_COLLECTD_CPU},y)
 DISABLE_CPU:=--disable-cpu
@@ -43,9 +47,12 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-email \
 			--disable-entropy \
 			--disable-exec \
+			--disable-filecount \
+			--disable-fscache \
 			--disable-hddtemp \
 			--disable-interface \
 			--disable-iptables \
+			--disable-ipvs \
 			--disable-irq \
 			${DISABLE_LOAD} \
 			--disable-mbmon \
@@ -53,6 +60,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			${DISABLE_MEMORY} \
 			--disable-multimeter \
 			--disable-mysql \
+			--disable-openvpn \
 			--disable-postgresql \
 			--disable-powerdns \
 			--disable-network \
@@ -69,7 +77,11 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-swap \
 			--disable-syslog \
 			--disable-tape \
+			--disable-target_notification \
+			--disable-target_replace \
+			--disable-target_set \
 			--disable-teamspeak2 \
+			--disable-ted \
 			--disable-thermal \
 			--disable-unixsock \
 			--disable-users \
@@ -83,11 +95,7 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_COLLECTD}/etc/init.d
-	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/sbin
-	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/lib/collectd
-	${INSTALL_BIN} ./files/collectd.init \
-		${IDIR_COLLECTD}/etc/init.d/collectd
+	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/sbin ${IDIR_COLLECTD}/usr/lib/collectd
 	${CP} ${WRKINST}/usr/sbin/collectd ${IDIR_COLLECTD}/usr/sbin/
 	${CP} ${WRKINST}/usr/lib/collectd/*.so ${IDIR_COLLECTD}/usr/lib/collectd/
 

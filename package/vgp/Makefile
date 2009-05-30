@@ -9,12 +9,14 @@ PKG_NAME:=		vgp
 PKG_VERSION:=		0.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b8c25b5dfcb944f78bbc584be9c230c7
-
-MASTER_SITES:=		http://vgpd.freaknet.org/files/
+PKG_DESCR:=		vgp is a daemon working like Cisco HSRP 
+PKG_SECTION:=		net
+PKG_URL:=		http://vgpd.freaknet.org
+PKG_SITES:=		http://vgpd.freaknet.org/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VGP,vgp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,VGP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 INSTALL_STYLE:=		auto

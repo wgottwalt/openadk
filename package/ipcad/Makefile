@@ -9,11 +9,15 @@ PKG_NAME:=		ipcad
 PKG_VERSION:=		3.7.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		125605249958894148ec26d3c88189f5
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipcad/}
+PKG_DESCR:=		IP Cisco Accounting Daemon
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap
+PKG_URL:=		http://lionet.info/ipcad
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipcad/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPCAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPCAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-ifst=linux \
@@ -27,8 +31,7 @@ pre-build:
 	touch $(WRKBUILD)/cfglex.c $(WRKBUILD)/cslex.c
 
 post-install:
-	${INSTALL_DIR} ${IDIR_IPCAD}/usr/bin
-	${INSTALL_DIR} ${IDIR_IPCAD}/etc
+	${INSTALL_DIR} ${IDIR_IPCAD}/usr/bin ${IDIR_IPCAD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/ipcad.conf ${IDIR_IPCAD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ipcad ${IDIR_IPCAD}/usr/bin/
 

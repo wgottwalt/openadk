@@ -9,16 +9,18 @@ PKG_NAME:=		exmap
 PKG_VERSION:=		0.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
+PKG_DESCR:=		memory analysing tool
+PKG_SECTION:=		utils
+PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
-MASTER_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
 
 CONFIGURE_STYLE:=	gnu

@@ -1,4 +1,0 @@
-Package: openssh-server
-Priority: optional
-Section: net
-Description: OpenSSH server

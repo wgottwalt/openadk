@@ -6,37 +6,30 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		radvd
-PKG_VERSION:=		0.7.3
-PKG_RELEASE:=		8
-PKG_MD5SUM:=		56ce3f8cbf5966a0d531c21813320423
-
-MASTER_SITES:=		http://v6web.litech.org/radvd/dist/ \
+PKG_VERSION:=		1.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		614876420d76cd2bb5bcb49760c8b9e3
+PKG_DESCR:=		Routing Advertisement Daemon for IPv6
+PKG_SECTION:=		net
+PKG_DEPENDS:=		kmod-ipv6
+PKG_URL:=		http://www.litech.org/radvd
+PKG_SITES:=		http://v6web.litech.org/radvd/dist/ \
 			http://download.sourcemage.org/mirror/
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADVD,radvd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RADVD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-configfile=/etc/radvd.conf \
 			--with-logfile=/var/log/radvd.log \
 			--with-pidfile=/var/run/radvd.pid
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
-do-build:
-	$(MAKE) -C $(WRKBUILD) \
-		radvd_LDADD=""
-	mkdir -p $(WRKINST)
-	$(MAKE) -C $(WRKBUILD) \
-		DESTDIR="$(WRKINST)" \
-		install
-
-do-install:
-	${INSTALL_DIR} ${IDIR_RADVD}/etc
+post-install:
+	${INSTALL_DIR} ${IDIR_RADVD}/etc ${IDIR_RADVD}/usr/sbin
 	${INSTALL_DATA} ./files/radvd.conf ${IDIR_RADVD}/etc/
-	${INSTALL_DIR} ${IDIR_RADVD}/etc/init.d
-	${INSTALL_BIN} ./files/radvd.init ${IDIR_RADVD}/etc/init.d/radvd
-	${INSTALL_DIR} ${IDIR_RADVD}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radvd ${IDIR_RADVD}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radvdump ${IDIR_RADVD}/usr/sbin/
 

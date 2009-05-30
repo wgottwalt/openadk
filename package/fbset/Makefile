@@ -9,12 +9,13 @@ PKG_NAME:=		fbset
 PKG_VERSION:=		2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e547cfcbb8c1a4f2a6b8ba4acb8b7164
-
-MASTER_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
+PKG_DESCR:=		framebuffer utility
+PKG_SECTION:=		utils
+PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FBSET,fbset,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,FBSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

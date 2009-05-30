@@ -9,11 +9,15 @@ PKG_NAME:=              apr-util
 PKG_VERSION:=           0.9.15
 PKG_RELEASE:=           1
 PKG_MD5SUM:=            dc772ae295f49ddb8ee8e69a9716c53b
-MASTER_SITES:=		http://apache.mirror.clusters.cc/apr/
+PKG_DESCR:=		Apache Portable Runtime utility library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libexpat apr
+PKG_URL:=		http://apr.apache.org
+PKG_SITES:=		http://apache.mirror.clusters.cc/apr/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,APR_UTIL,$(PKG_NAME),${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,APR_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=       gnu
 CONFIGURE_ARGS+=	--without-berkeley-db

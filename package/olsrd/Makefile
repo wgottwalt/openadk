@@ -9,7 +9,10 @@ PKG_NAME:=		olsrd
 PKG_VERSION:=		0.5.6-r2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		acf15dbd0af521a6826541b567c6473a
-MASTER_SITES:=		http://www.olsr.org/releases/0.5/
+PKG_DESCR:=		implementation of the Optimized Link State Routing protocol
+PKG_SECTION:=		net
+PKG_URL:=		http://www.olsr.org
+PKG_SITES:=		http://www.olsr.org/releases/0.5/
 
 include ${TOPDIR}/mk/package.mk
 
@@ -23,11 +26,11 @@ ${2}-install:
 
 endef
 
-$(eval $(call PKG_template,OLSRD,olsrd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OLSRD_MOD_DYN_GW,olsrd-mod-dyn-gw,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OLSRD_MOD_HTTPINFO,olsrd-mod-httpinfo,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OLSRD_MOD_NAMESERVICE,olsrd-mod-nameservice,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,OLSRD_MOD_TAS,olsrd-mod-tas,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OLSRD,olsrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OLSRD_MOD_DYN_GW,olsrd-mod-dyn-gw,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OLSRD_MOD_HTTPINFO,olsrd-mod-httpinfo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OLSRD_MOD_NAMESERVICE,olsrd-mod-nameservice,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OLSRD_MOD_TAS,olsrd-mod-tas,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,OLSRD_MOD_DYN_GW,dyn_gw))
 $(eval $(call PKG_mod_template,OLSRD_MOD_HTTPINFO,httpinfo))
@@ -48,11 +51,8 @@ do-build:
 		all libs install install_libs
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} ${IDIR_OLSRD}/etc/init.d
-	${INSTALL_DIR} ${IDIR_OLSRD}/usr/sbin
+	${INSTALL_DIR} ${IDIR_OLSRD}/usr/sbin ${IDIR_OLSRD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/olsrd.conf ${IDIR_OLSRD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/olsrd ${IDIR_OLSRD}/usr/sbin/
-	${INSTALL_BIN} ./files/olsrd.init \
-		${IDIR_OLSRD}/etc/init.d/olsrd
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -9,11 +9,15 @@ PKG_NAME:=		libgcrypt
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		555488ddfc81a6e0df1fb5112e7eee13
-MASTER_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
+PKG_DESCR:=		GNU crypto library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libgpg-error
+PKG_URL:=		http://directory.fsf.org/project/libgcrypt
+PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGCRYPT,libgcrypt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBGCRYPT,libgcrypt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-asm \

@@ -9,11 +9,14 @@ PKG_NAME:=		picocom
 PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		08fcc5f6bb9e7676a2569386d5ea9f70
-MASTER_SITES:=		http://efault.net/npat/hacks/picocom/dist/
+PKG_DESCR:=		minimal dumb-terminal emulation program
+PKG_SECTION:=		misc
+PKG_URL:=		http://efault.net/npat/hacks/picocom
+PKG_SITES:=		http://efault.net/npat/hacks/picocom/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PICOCOM,picocom,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PICOCOM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 ALL_TARGET:=		picocom

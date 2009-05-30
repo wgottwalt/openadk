@@ -6,16 +6,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl-pkcs11
-PKG_VERSION:=		0.1.3
+PKG_VERSION:=		0.1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		26eb84950a10b7d869e41a50620ebf09
+PKG_MD5SUM:=		840af6e54dc21445c54f74e15005ba4d
+PKG_DESCR:=		pkcs11 engine for openssl
+PKG_SECTION:=		crypto
+PKG_URL:=		http://www.opensc-project.org/engine_pkcs11
+PKG_SITES:=		http://www.opensc-project.org/files/engine_pkcs11/
+
 DISTFILES:=		engine_pkcs11-${PKG_VERSION}.tar.gz
-MASTER_SITES:=		http://www.opensc-project.org/files/engine_pkcs11/
 WRKDIST=		${WRKDIR}/engine_pkcs11-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSSL_PKCS11,openssl-pkcs11,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,OPENSSL_PKCS11,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		cross_compiling=yes

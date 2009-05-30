@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 41
+#PKG busybox
+#INIT 41
 . /etc/rc.conf
 case $1 in
 autostart)

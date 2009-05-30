@@ -1,5 +1,0 @@
-Package: bluez-firmware
-Priority: optional
-Section: bluetooth
-Description: Bluez firmware for BCM2033
-Depends: kmod-bluetooth, bluez-libs, bluez-utils

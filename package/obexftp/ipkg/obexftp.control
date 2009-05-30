@@ -1,5 +1,0 @@
-Package: obexftp
-Priority: optional
-Section: bluetooth
-Description: obex ftp applications
-Depends: openobex, libiconv

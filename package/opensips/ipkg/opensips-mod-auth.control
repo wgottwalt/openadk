@@ -1,5 +1,0 @@
-Package: opensips-mod-auth
-Depends: opensips
-Section: net
-Priority: optional
-Description: authentication support for OpenSIPS

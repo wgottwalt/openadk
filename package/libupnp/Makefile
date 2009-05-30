@@ -9,12 +9,17 @@ PKG_NAME:=		libupnp
 PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8918dcf7428cd119d0c8275765ff2833
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=pupnp/}
+PKG_DESCR:=		The Universal Plug and Play (UPnP) SDK library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libpthread
+PKG_URL:=		http://pupnp.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pupnp/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUPNP,libupnp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ARGS+=	--disable-samples

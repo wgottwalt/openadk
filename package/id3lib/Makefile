@@ -9,18 +9,21 @@ PKG_NAME:=		id3lib
 PKG_VERSION:=		3.8.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		19f27ddd2dda4b2d26a559a4f0f402a7
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
+PKG_DESCR:=		An ID3v1/ID3v2 tagging library
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		zlib libiconv
+PKG_URL:=		http://id3lib.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
 
-PKG_DEPEND:=		zlib libiconv
 ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
-PKG_DEPEND+=		uclibc++
+PKG_DEPENDS+=		uclibc++
 else
-PKG_DEPEND+=		libstdcxx
+PKG_DEPENDS+=		libstdcxx
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
+$(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-cxx-warnings=no

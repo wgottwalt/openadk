@@ -9,18 +9,18 @@ PKG_NAME:=		wondershaper
 PKG_VERSION:=		1.1a
 PKG_RELEASE:=		7
 PKG_MD5SUM:=		bbc5a3a4485ab286e337ce8550e7b990
-MASTER_SITES:=		http://lartc.org/wondershaper/
+PKG_DESCR:=		WonderShaper is a tc based traffic shaping tool.
+PKG_SECTION:=		net
+PKG_URL:=		http://lartc.org/wondershaper
+PKG_SITES:=		http://lartc.org/wondershaper/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WONDERSHAPER,wondershaper,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,WONDERSHAPER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
-	${INSTALL_DIR} ${IDIR_WONDERSHAPER}/usr/sbin/
-	${INSTALL_DIR} ${IDIR_WONDERSHAPER}/etc/init.d/
+	${INSTALL_DIR} ${IDIR_WONDERSHAPER}/usr/sbin ${IDIR_WONDERSHAPER}/etc
 	${INSTALL_BIN} ${WRKBUILD}/wshaper.htb ${IDIR_WONDERSHAPER}/usr/sbin/wshaper
 	${INSTALL_DATA} ${WRKBUILD}/wshaper.conf ${IDIR_WONDERSHAPER}/etc/
-	$(INSTALL_BIN) ./files/wondershaper.init \
-		$(IDIR_WONDERSHAPER)/etc/init.d/wondershaper
 
 include ${TOPDIR}/mk/pkg-bottom.mk

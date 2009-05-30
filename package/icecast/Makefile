@@ -9,11 +9,15 @@ PKG_NAME:=		icecast
 PKG_VERSION:=		2.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ff516b3ccd2bcc31e68f460cd316093f
-MASTER_SITES:=		http://downloads.us.xiph.org/releases/icecast/
+PKG_DESCR:=		A streaming media server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libcurl libvorbis libpthread libxml2 libxslt
+PKG_URL:=		http://www.icecast.org/
+PKG_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ICECAST,icecast,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/libxml2
 CONFIGURE_STYLE=	autotool gnu

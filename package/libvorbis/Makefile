@@ -9,12 +9,15 @@ PKG_NAME:=		libvorbis
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		478646358c49f34aedcce58948793619
-MASTER_SITES:=		http://downloads.xiph.org/releases/vorbis/
+PKG_DESCR:=		The Vorbis General Audio Compression Codec library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.xiph.org/vorbis/
+PKG_SITES:=		http://downloads.xiph.org/releases/vorbis/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBVORBIS,libvorbis,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBVORBIS,libvorbis,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		LIBS="-lm -logg"

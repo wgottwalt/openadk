@@ -9,7 +9,25 @@ PKG_NAME:=		net-snmp
 PKG_VERSION:=		5.4.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		984932520143f0c8bf7b7ce1fc9e1da1
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
+PKG_DESCR:=		SNMP Agent
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libnetsnmp libelf
+PKG_URL:=		http://www.net-snmp.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
+
+PKG_DESCR_1:=		SNMP utilities
+PKG_DEPENDS_1:=		libnetsnmp libelf
+
+PKG_DESCR_2:=		SNMP library
+PKG_DEPENDS_2:=		libelf
+PKG_SECTION_2:=		libs
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_2},${PKG_DESCR_2},${PKG_SECTION_2}))
+
 
 SNMP_MIB_MODULES_INCLUDED =	\
 	host/hr_device \
@@ -65,12 +83,6 @@ SNMP_MIB_MODULES_EXCLUDED =	\
 SNMP_TRANSPORTS_INCLUDED=	Callback UDP
 
 SNMP_TRANSPORTS_EXCLUDED=	TCP TCPv6 UDPv6 Unix
-
-include ${TOPDIR}/mk/package.mk
-
-$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_header_pcap_h=no

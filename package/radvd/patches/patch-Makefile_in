@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- radvd-1.2.orig/Makefile.in	2008-10-28 17:38:37.000000000 +0100
++++ radvd-1.2/Makefile.in	2009-05-30 17:07:08.814794942 +0200
+@@ -222,7 +222,7 @@ COMMON_SRC = log.c socket.c recv.c util.
+ radvd_SOURCES = $(COMMON_SRC) radvd.c timer.c send.c process.c interface.c \
+ 	device.c device-common.c privsep.c gram.y gram.h scanner.l
+ 
+-radvd_LDADD = -lfl
++radvd_LDADD =
+ EXTRA_radvd_SOURCES = device-linux.c device-bsd44.c privsep-linux.c privsep-bsd44.c
+ YFLAGS = -d
+ radvdump_SOURCES = $(COMMON_SRC) radvdump.c

@@ -1,5 +1,0 @@
-Package: php-mod-openssl
-Priority: optional
-Section: net
-Depends: php, libopenssl
-Description: OpenSSL module for PHP5

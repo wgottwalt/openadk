@@ -9,15 +9,18 @@ PKG_NAME:=		aiccu
 PKG_VERSION:=		20070115
 PKG_RELEASE:=		7
 PKG_MD5SUM:=		c9bcc83644ed788e22a7c3f3d4021350
+PKG_DESCR:=		SixXS Automatic IPv6 Connectivity Client Utility
+PKG_SECTION:=		net
+PKG_DEPENDS:=		kmod-ipv6 libpthread
+PKG_URL:=		http://www.sixxs.net
+PKG_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 
-MASTER_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).tar.gz
-
 WRKDIST=		${WRKDIR}/$(PKG_NAME)
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AICCU,aiccu,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,AICCU,aiccu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=	-D_REENTRANT -D_GNU_SOURCE -DAICCU_CONSOLE \
 		-D_LINUX -DHAS_IFHEAD -DAICCU_TYPE=\"linux\"

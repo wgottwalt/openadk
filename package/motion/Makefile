@@ -6,18 +6,23 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		motion
-PKG_VERSION:=		3.2.6
+PKG_VERSION:=		3.2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		71e6bd13fcca70372e9b7c7806d62b30
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=motion/}
+PKG_MD5SUM:=		3a26c00f3250eacf6fa93c7a7e0249d9
+PKG_DESCR:=		Webcam motion sensing and logging
+PKG_SECTION:=		multimedia
+PKG_DEPENDS:=		libjpeg libpthread
+PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=motion/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MOTION,motion,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MOTION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-ffmpeg \
 			--without-jpeg-mmx \
+			--without-optimizecpu \
 			--without-mysql \
 			--without-pgsql
 BUILD_STYLE:=		auto

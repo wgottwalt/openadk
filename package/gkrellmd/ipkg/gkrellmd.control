@@ -1,5 +1,0 @@
-Package: gkrellmd
-Priority: optional
-Section: net
-Depends: glib1
-Description: The GNU Krell Monitors Server

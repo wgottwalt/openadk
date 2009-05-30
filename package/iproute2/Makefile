@@ -9,13 +9,20 @@ PKG_NAME:=		iproute2
 PKG_VERSION:=		2.6.29-1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c1bc258a6c345905e79935ac7a3cc582
+PKG_DESCR:=		iproute2 routing control utility
+PKG_SECTION:=		net
+PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
+PKG_SITES:=		http://developer.osdl.org/dev/iproute2/download/
+
+PKG_DESCR_1:=		iproute2 traffic control utility
+PKG_DEPENDS_1:=		kmod-sched
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-MASTER_SITES:=		http://developer.osdl.org/dev/iproute2/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 
 do-configure:
 	${SED} "s:-O2:${TARGET_CFLAGS}:g" ${WRKBUILD}/Makefile
@@ -31,10 +38,10 @@ do-configure:
 	${SED} "s, netem,," ${WRKBUILD}/Makefile
 
 do-build:
-	${MAKE} -j1 -C ${WRKBUILD}/netem \
+	${MAKE} -C ${WRKBUILD}/netem \
 		HOSTCC=${HOSTCC} \
 		CCOPTS="-I${LINUX_DIR}" \
-	${MAKE} -j1 -C ${WRKBUILD} ${TARGET_CONFIGURE_OPTS} \
+	${MAKE} -C ${WRKBUILD} ${TARGET_CONFIGURE_OPTS} \
 		CFLAGS="-D_GNU_SOURCE ${TARGET_CFLAGS} -I ../include -DRESOLVE_HOSTNAMES" \
 		KERNEL_INCLUDE=${LINUX_DIR}/include all tc/tc ip/ip \
 		CCOPTS="-I${LINUX_DIR}"

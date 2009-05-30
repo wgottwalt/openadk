@@ -9,12 +9,14 @@ PKG_NAME:=		usbutils
 PKG_VERSION:=		0.73
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		88978b4ad891f610620b1b8e5e0f43eb
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-usb/}
+PKG_DESCR:=		A program to list USB devices
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libusb
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-usb/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

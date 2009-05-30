@@ -1,5 +1,0 @@
-Package: gdb
-Priority: optional
-Section: devel
-Depends: libthread_db
-Description: GNU Debugger

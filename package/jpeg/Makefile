@@ -9,13 +9,17 @@ PKG_NAME:=		jpeg
 PKG_VERSION:=		6b
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		dbd5f3b47ed13132f04c685d608a7547
-MASTER_SITES:=		http://www.ijg.org/files/ \
+PKG_DESCR:=		The Independent JPEG Groups JPEG runtime library
+PKG_SECTION:=		libs
+PKG_URL:=		http://sourceforge.net/projects/libjpeg
+PKG_SITES:=		http://www.ijg.org/files/ \
 			ftp://ftp.uu.net/graphics/jpeg/
+
 DISTFILES:=		${PKG_NAME}src.v${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBJPEG,libjpeg,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBJPEG,libjpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- dhcpv6-1.2.0.orig/configure.ac	2009-04-03 04:33:56.000000000 +0200
++++ dhcpv6-1.2.0/configure.ac	2009-05-28 23:09:25.701939971 +0200
+@@ -45,7 +45,7 @@ AC_CHECK_HEADERS([sys/types.h sys/socket
+ # Check for headers we must have on the system
+ AC_CHECK_HEADERS([arpa/inet.h err.h errno.h getopt.h fcntl.h ifaddrs.h \
+                   libgen.h net/if.h net/if_arp.h netdb.h netinet/in.h \
+-                  sys/ioctl.h sys/timeb.h syslog.h],
++                  sys/ioctl.h syslog.h],
+                  [],
+                  [AC_MSG_FAILURE([*** Header file $ac_header not found.])],
+                  [[#ifdef HAVE_SYS_TYPES_H
+@@ -97,7 +97,7 @@ AC_FUNC_REALLOC
+ AC_FUNC_SELECT_ARGTYPES
+ AC_TYPE_SIGNAL
+ AC_FUNC_STAT
+-AC_CHECK_FUNCS([bzero ftime gettimeofday memset select socket strchr strdup \
++AC_CHECK_FUNCS([ftime gettimeofday memset select socket strchr strdup \
+                 strerror strrchr strstr strtol strtoul],
+                [],
+                [AC_MSG_FAILURE([*** Required function $ac_func not found.])])

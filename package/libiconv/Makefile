@@ -9,12 +9,14 @@ PKG_NAME:=		libiconv
 PKG_VERSION:=		1.13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		048032a3032ebd182150bdee30a5d533
-
-MASTER_SITES:=		${MASTER_SITE_GNU:=libiconv/}
+PKG_DESCR:=		character set conversion library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.gnu.org/software/libiconv
+PKG_SITES:=		${MASTER_SITE_GNU:=libiconv/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBICONV,libiconv,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBICONV,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

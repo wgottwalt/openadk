@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libosip2
-PKG_VERSION:=		2.2.0
+PKG_VERSION:=		3.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f1237af0250c59b318bd64a59f5750ea
-MASTER_SITES:=		${MASTER_SITE_GNU:=osip/}
+PKG_MD5SUM:=		81493bb4d4ae6d55b71a0d4369339125
+PKG_DESCR:=		GNU oSIP library, a SIP (Session Initiation Protocol) implementation
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libpthread
+PKG_URL:=		http://www.gnu.org/software/osip
+PKG_SITES:=		${MASTER_SITE_GNU:=osip/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOSIP2,libosip2,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBOSIP2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-trace \

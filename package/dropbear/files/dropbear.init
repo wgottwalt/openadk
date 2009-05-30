@@ -1,5 +1,6 @@
 #!/bin/sh
-#FWINIT 50
+#PKG dropbear
+#INIT 50
 . /etc/rc.conf
 
 bothlog() {

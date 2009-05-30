@@ -9,12 +9,16 @@ PKG_NAME:=		ipset
 PKG_VERSION:=		2.3.3a
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c7d2f165242edaef5581db0f7d5af520
-MASTER_SITES:=		http://ipset.netfilter.org/
+PKG_DESCR:=		Netfilter ip sets administration utility
+PKG_SECTION:=		net
+PKG_URL:=		http://ipset.netfilter.org
+PKG_SITES:=		http://ipset.netfilter.org/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		KERNEL_DIR=${LINUX_DIR} PREFIX=/usr LD=$(TARGET_CROSS)ld
 BUILD_STYLE=		auto

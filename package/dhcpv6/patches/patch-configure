@@ -1,0 +1,26 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- dhcpv6-1.2.0.orig/configure	2009-04-03 04:45:15.000000000 +0200
++++ dhcpv6-1.2.0/configure	2009-05-28 23:10:48.955142356 +0200
+@@ -12654,10 +12654,9 @@ done
+ 
+ 
+ 
+-
+ for ac_header in arpa/inet.h err.h errno.h getopt.h fcntl.h ifaddrs.h \
+                   libgen.h net/if.h net/if_arp.h netdb.h netinet/in.h \
+-                  sys/ioctl.h sys/timeb.h syslog.h
++                  sys/ioctl.h syslog.h
+ do
+ as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ { $as_echo "$as_me:$LINENO: checking for $ac_header" >&5
+@@ -15942,9 +15941,7 @@ fi
+ 
+ 
+ 
+-
+-
+-for ac_func in bzero ftime gettimeofday memset select socket strchr strdup \
++for ac_func in gettimeofday memset select socket strchr strdup \
+                 strerror strrchr strstr strtol strtoul
+ do
+ as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`

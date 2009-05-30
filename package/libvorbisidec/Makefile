@@ -10,13 +10,16 @@ PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_VARIANT:=		svn15687
 PKG_MD5SUM:=		cd3f62e87e38548c3e1120b1b2d3cac7
-MASTER_SITES:=		http://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec/
+PKG_DESCR:=		Fixed point vorbis library
+PKG_SECTION:=		libs
+PKG_SITES:=		http://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec/
+
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}+$(PKG_VARIANT).orig.tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)+$(PKG_VARIANT)
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBVORBISIDEC,libvorbisidec,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBVORBISIDEC,libvorbisidec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

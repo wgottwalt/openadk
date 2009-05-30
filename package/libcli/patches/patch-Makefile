@@ -1,23 +1,21 @@
-$Id$
-allow CFLAGS overwrite, change some defaults
---- libcli-1.8.6.orig/Makefile	2006-03-07 00:13:11.000000000 +0100
-+++ libcli-1.8.6/Makefile	2007-01-07 21:27:49.000000000 +0100
-@@ -1,14 +1,14 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libcli-1.9.4.orig/Makefile	2008-10-09 04:38:01.000000000 +0200
++++ libcli-1.9.4/Makefile	2009-05-29 17:42:04.310095050 +0200
+@@ -1,15 +1,12 @@
  DESTDIR =
 -PREFIX = /usr/local
 +PREFIX = /usr
  
  MAJOR = 1
- MINOR = 8
- REVISION = 6
+ MINOR = 9
+ REVISION = 3
  LIB = libcli.so
  
 -CC = gcc
 -DEBUG = -g
 -OPTIM = -O3
-+#CC := gcc
-+#DEBUG = -g
-+#OPTIM = -O3
- CFLAGS += $(DEBUG) $(OPTIM) -Wall -Wformat-security -Wno-format-zero-length
+-CFLAGS += $(DEBUG) $(OPTIM) -Wall -Wformat-security -Wno-format-zero-length
++CFLAGS += -Wall -Wformat-security -Wno-format-zero-length
  LDFLAGS += -shared -Wl,-soname,$(LIB).$(MAJOR).$(MINOR)
  LIBPATH += -L.
+ LIBS = -lcrypt

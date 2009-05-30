@@ -9,13 +9,15 @@ PKG_NAME:=		libmad
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1be543bc30c56fb6bea1d7bf6a64e66c
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/} \
+PKG_DESCR:=		An high-quality MPEG audio decoding library
+PKG_SECTION:=		libs
+PKG_URL:=		http://sourceforge.net/projects/mad
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/} \
 			ftp://ftp.mars.org/pub/mpeg/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBMAD,libmad,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBMAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 FPM:=default
 ifeq (${ARCH},i386)

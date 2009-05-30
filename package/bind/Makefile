@@ -9,19 +9,32 @@ PKG_NAME:=		bind
 PKG_VERSION:=		9.4.1
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		09b54d35036cb0423b2e618f21766285
-MASTER_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
+PKG_DESCR:=		popular DNS server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl libbind
+PKG_URL:=		https://www.isc.org/software/bind
+PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
+
+PKG_DESCR_1:=		dynamic dns client (nsupdate utility)
+PKG_DESCR_2:=		Support library for the bind tools and dns server/client
+PKG_DESCR_3:=		rndc & rndc-confgen utilities
+PKG_DESCR_4:=		named-checkconf & named-checkzone utilities
+PKG_DESCR_5:=		dnssec-keygen & dnssec-signzone utilities
+PKG_DESCR_6:=		host utility
+PKG_DESCR_7:=		dig utility
+
+PKG_SECTION_2:=		libs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_CLIENT,bind-client,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_TOOLS,bind-tools,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_CLIENT,bind-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
+$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_7},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=         BUILD_CC="${TARGET_CC}"
@@ -42,26 +55,12 @@ pre-build:
 post-install:
 	# bind server
 	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin
-	${INSTALL_DIR} ${IDIR_BIND_SERVER}/etc/init.d
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/named ${IDIR_BIND_SERVER}/usr/sbin/
 	${CP} ./files/bind ${IDIR_BIND_SERVER}/etc
-	${INSTALL_BIN} ./files/named.init \
-		${IDIR_BIND_SERVER}/etc/init.d/named
 	find ${IDIR_BIND_SERVER}/etc/bind -name ".svn" | xargs rm -rf
 	# nsupdate
 	${INSTALL_DIR} ${IDIR_BIND_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/nsupdate ${IDIR_BIND_CLIENT}/usr/bin/
-	# bind all tools
-	${INSTALL_DIR} ${IDIR_BIND_TOOLS}/usr/bin
-	${INSTALL_DIR} ${IDIR_BIND_TOOLS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_TOOLS}/usr/bin/
-	${INSTALL_BIN} ${WRKINST}/usr/bin/host ${IDIR_BIND_TOOLS}/usr/bin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-keygen ${IDIR_BIND_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-signzone ${IDIR_BIND_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/named-checkconf ${IDIR_BIND_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/named-checkzone ${IDIR_BIND_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc ${IDIR_BIND_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc-confgen ${IDIR_BIND_TOOLS}/usr/sbin/
 	# rndc
 	${INSTALL_DIR} ${IDIR_BIND_RNDC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc ${IDIR_BIND_RNDC}/usr/sbin/
@@ -82,11 +81,11 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_DIG}/usr/bin/
 	# bind lib
 	${INSTALL_DIR} ${IDIR_LIBBIND}/usr/lib
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libbind9.so.30 ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libdns.so.32 ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccc.so.30 ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccfg.so.30 ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisc.so.32 ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/liblwres.so.30 ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccc.so.* ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccfg.so.* ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

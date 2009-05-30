@@ -10,12 +10,12 @@ PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0b2f0bb23b7832138b7d841437b9e182
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
-MASTER_SITES:=		ftp://ftp.nsk.su/pub/RinetSoftware/
+PKG_SITES:=		ftp://ftp.nsk.su/pub/RinetSoftware/
 WRKDIST=		${WRKDIR}/trafshow-5.2.3
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=		-DHAVE_SOCKADDR_STORAGE -DHAVE_HAS_COLORS -I$(STAGING_DIR)/usr/include
 TLDFLAGS+=		-pthread

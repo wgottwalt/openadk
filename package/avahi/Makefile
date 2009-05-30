@@ -6,22 +6,26 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
-PKG_VERSION:=		0.6.16
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		3cbc460bbd55bae35f7b57443c063640
-MASTER_SITES:=		http://avahi.org/download/
+PKG_VERSION:=		0.6.25
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a83155a6e29e3988f07e5eea3287b21e
+PKG_DESCR:=		mDNS/DNS-SD (aka RendezVous/Bonjour/ZeroConf) daemon
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libavahi libdaemon libexpat
+PKG_URL:=		http://avahi.org
+PKG_SITES:=		http://avahi.org/download/
+PKG_DEPENDS_1:=		libavahi libdaemon avahi-daemon
+PKG_DESCR_1:=		Unicast DNS server from mDNS/DNS-SD configuration daemon
+PKG_DESCR_2:=		DNS-SD over mDNS (aka RendezVous/Bonjour/ZeroConf) library
+PKG_SECTION_2:=		libs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
-TCFLAGS+=		-DNDEBUG
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
-			ac_cv_func_realloc_0_nonnull=yes \
-			ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	--disable-glib \
 			--disable-qt3 \
 			--disable-qt4 \
@@ -50,8 +54,6 @@ CONFIGURE_ARGS+=	--disable-glib \
 			--with-avahi-group=avahi
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
-#XXX maybe unneeded?
-#XAKE_FLAGS+=		PKG_CONFIG_PATH=${STAGING_DIR}/usr/lib/pkgconfig
 
 post-install:
 	# avahi daemon
@@ -62,9 +64,6 @@ post-install:
 		${IDIR_AVAHI_DAEMON}/etc/avahi/services/http.service
 	${INSTALL_DATA} ./files/service-ssh \
 		${IDIR_AVAHI_DAEMON}/etc/avahi/services/ssh.service
-	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/init.d
-	${INSTALL_BIN} ./files/avahi-daemon.init \
-		${IDIR_AVAHI_DAEMON}/etc/init.d/avahi-daemon
 	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/avahi-daemon ${IDIR_AVAHI_DAEMON}/usr/sbin/
 	# avahi dnsconfd

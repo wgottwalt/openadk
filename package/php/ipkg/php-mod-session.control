@@ -1,5 +1,0 @@
-Package: php-mod-session
-Priority: optional
-Section: net
-Depends: php
-Description: Sessions module for PHP5

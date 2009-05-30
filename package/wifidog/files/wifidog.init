@@ -1,5 +1,7 @@
 #!/bin/sh
-#FWINIT 65
+#PKG wifidog
+#INIT 65
+
 . /etc/rc.conf
 
 case $1 in

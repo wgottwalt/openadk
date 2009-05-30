@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libnl-1.1.orig/include/netlink-local.h	2008-01-14 16:48:45.000000000 +0100
++++ libnl-1.1/include/netlink-local.h	2009-05-28 23:19:45.636686415 +0200
+@@ -337,7 +337,7 @@ static inline int nl_cb_call(struct nl_c
+ }
+ 
+ #define ARRAY_SIZE(X) (sizeof(X) / sizeof((X)[0]))
+-#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
++#define __offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
+ 
+ #define __init __attribute__ ((constructor))
+ #define __exit __attribute__ ((destructor))

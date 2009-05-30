@@ -9,21 +9,25 @@ PKG_NAME:=		asterisk
 PKG_VERSION:=		1.4.24.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2b74744350f420b3a94d5323c489426f
-MASTER_SITES:=		http://downloads.digium.com/pub/telephony/asterisk/releases/
+PKG_DESCR:=		Open Source PBX
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libncurses libpthread
+PKG_URL:=		http://www.asterisk.org
+PKG_SITES:=		http://downloads.digium.com/pub/telephony/asterisk/releases/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ASTERISK,asterisk,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
@@ -166,8 +170,6 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' $(WRKINST)/etc/asterisk/musiconhold.conf
-	${INSTALL_DIR} $(IDIR_ASTERISK)/etc/init.d
-	${INSTALL_BIN}  ./files/asterisk.init $(IDIR_ASTERISK)/etc/init.d/asterisk
 
 asterisk-pgsql-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/etc/asterisk
@@ -187,7 +189,7 @@ asterisk-voicemail-install:
 	${INSTALL_DATA} $(WRKBUILD)/configs/voicemail.conf.sample $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk/voicemail.conf
 	${CP} $(WRKBUILD)/apps/*voicemail.so $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
 	${INSTALL_BIN} $(WRKBUILD)/res/res_adsi.so $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
-	install -d -m0755 $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds
+	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds
 	$(CP) $(WRKBUILD)/sounds/vm-*.gsm $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds/
 
 asterisk-chan-mgcp-install:
@@ -211,7 +213,7 @@ asterisk-chan-iax2-install:
 
 asterisk-codec-speex-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules
-	install -m0755 $(WRKBUILD)/codecs/codec_speex.so $(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/codecs/codec_speex.so $(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules/
 
 asterisk-codec-gsm-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CODEC_GSM)/usr/lib/asterisk/modules/

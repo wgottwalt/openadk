@@ -9,14 +9,18 @@ PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0rc2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		7e27e535c2d267637df34898f1b91707
-DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		http://www7.mplayerhq.hu/MPlayer/releases/
+PKG_DESCR:=		popular video player
+PKG_SECTION:=		video
+PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthread
+PKG_URL:=		http://www.mplayerhq.hu
+PKG_SITES:=		http://www7.mplayerhq.hu/MPlayer/releases/
 
+DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPLAYER,mplayer,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

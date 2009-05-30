@@ -9,13 +9,17 @@ PKG_NAME:=		iw
 PKG_VERSION:=		0.9.14
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b5059cfe86bc7664511b79c159635a8f
-MASTER_SITES:=		http://wireless.kernel.org/download/iw/
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_DESCR:=		Tools for setting up WiFi cards via netlink (nl80211)
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libnl
+PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
+PKG_SITES:=		http://wireless.kernel.org/download/iw/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IW,iw,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IW,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS:=		V=1
 BUILD_STYLE:=		auto

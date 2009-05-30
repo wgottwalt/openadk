@@ -12,11 +12,13 @@ include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 
 PKG_NAME:=		libpthread
+PKG_DESCR:=		POSIX threading library
+PKG_SECTION:=		libs
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib

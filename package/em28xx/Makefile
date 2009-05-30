@@ -9,7 +9,7 @@ PKG_NAME:=		em28xx
 PKG_VERSION:=		20081206
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8467a1b1d495fa712c8beb617ef5f5dd
-MASTER_SITES:=		http://waldemar-brodkorb.de/openadk/distfiles/
+PKG_SITES:=		http://www.openadk.org/distfiles/
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 

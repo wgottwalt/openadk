@@ -9,7 +9,12 @@ PKG_NAME:=		squid
 PKG_VERSION:=		2.5.STABLE13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3e64468e123be1246d17486dab6bee87
-MASTER_SITES:=		http://www.squid-cache.org/Versions/v2/2.5/
+PKG_DESCR:=		squid web and cache proxy
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libopenssl libpthread
+PKG_URL:=		http://www.squid-cache.org
+PKG_SITES:=		http://www.squid-cache.org/Versions/v2/2.5/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 AUTH_MODULES:=basic digest ntlm
@@ -70,18 +75,18 @@ endef
 #endef
 
 
-$(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-auth-getpwnam,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_WINBIND,${PKG_NAME}-mod-basic-auth-winbind,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_WINBIND_GROUP,${PKG_NAME}-mod-external-acl-winbind-group,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,${PKG_NAME}-mod-ntlm-auth-smb-auth,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_WINBIND_AUTH,${PKG_NAME}-mod-ntlm-auth-winbind-auth,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-auth-getpwnam,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_WINBIND,${PKG_NAME}-mod-basic-auth-winbind,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_WINBIND_GROUP,${PKG_NAME}-mod-external-acl-winbind-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,${PKG_NAME}-mod-ntlm-auth-smb-auth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_WINBIND_AUTH,${PKG_NAME}-mod-ntlm-auth-winbind-auth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 #${eval ${call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,getpwname_auth}}
 #${eval ${call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,ldap}}

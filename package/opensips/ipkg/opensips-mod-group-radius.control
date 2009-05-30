@@ -1,5 +1,0 @@
-Package: opensips-mod-group-radius
-Depends: opensips
-Section: net
-Priority: optional
-Description: group_radius support for OpenSIPS

@@ -116,7 +116,7 @@ else
 	@exit 1
 endif
 ifneq ($(filter confprog,${INSTALL_STYLE}),)
-	for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
+	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done

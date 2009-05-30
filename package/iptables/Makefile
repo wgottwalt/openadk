@@ -9,19 +9,23 @@ PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		545698693b636cfc844aafc6729fd48a
-MASTER_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
+PKG_DESCR:=		The netfilter firewalling software
+PKG_SECTION:=		net
+PKG_URL:=		http://www.netfilter.org
+PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/iptables/ \
 			ftp://ftp.de.netfilter.org/pub/netfilter/iptables/ \
 			ftp://ftp.no.netfilter.org/pub/netfilter/iptables/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 include ${LINUX_DIR}/.config
 
-$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,IPTABLES_UTILS,iptables-utils,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IPTABLES_UTILS,iptables-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 ifeq ($(ADK_IPV6),y)
-$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 endif
 
 CONFIGURE_STYLE:=	gnu

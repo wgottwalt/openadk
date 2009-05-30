@@ -6,17 +6,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libusb
-PKG_VERSION:=		0.1.10a
+PKG_VERSION:=		1.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c6062b29acd2cef414bcc34e0decbdd1
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
+PKG_MD5SUM:=		8fb0e066678a0d294894b5b2969cb4b3
+PKG_DESCR:=		a Library for accessing Linux USB devices
+PKG_SECTION:=		libs
+PKG_URL:=		http://libusb.wiki.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUSB,libusb,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_c_bigendian=no
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto confprog
 

@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- libnl-1.1.orig/lib/object.c	2008-01-14 16:48:45.000000000 +0100
++++ libnl-1.1/lib/object.c	2009-05-28 23:20:00.925639994 +0200
+@@ -96,7 +96,7 @@ struct nl_object *nl_object_clone(struct
+ {
+ 	struct nl_object *new;
+ 	struct nl_object_ops *ops = obj_ops(obj);
+-	int doff = offsetof(struct nl_derived_object, data);
++	int doff = __offsetof(struct nl_derived_object, data);
+ 	int size;
+ 
+ 	new = nl_object_alloc(ops);

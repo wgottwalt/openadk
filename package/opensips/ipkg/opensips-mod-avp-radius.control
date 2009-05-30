@@ -1,5 +1,0 @@
-Package: opensips-mod-avp-radius
-Depends: opensips
-Section: net
-Priority: optional
-Description: avp_radius support for OpenSIPS

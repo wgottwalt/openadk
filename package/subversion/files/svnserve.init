@@ -1,14 +1,16 @@
 #!/bin/sh
-#FWINIT 80
+#PKG subversion
+#INIT 80
+
 . /etc/rc.conf
 
 case $1 in
-(autostop) ;;
-(autostart)
+autostop) ;;
+autostart)
 	[[ $svnserve = YES ]] || exit 0
 	exec sh $0 start
 	;;
-(start)
+start)
 	if [[ ! -d $svnserve_path ]]; then
 		echo "The subversion repository ($svnserve_path) does not exist."
 		echo "Create a new repository and/or change the path in /etc/rc.conf"
@@ -22,14 +24,14 @@ case $1 in
 
 	/usr/bin/svnserve -d -r $svnserve_path
 	;;
-(stop)
+stop)
 	killall svnserve
 	;;
-(restart)
+restart)
 	sh $0 stop
 	sh $0 start
 	;;
-(*)
+*)
 	echo "Usage: $0 {start|stop|restart}"
 	;;
 esac

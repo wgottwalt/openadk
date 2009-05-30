@@ -1,4 +1,0 @@
-Package: lvm
-Priority: optional
-Section: utils
-Description: logical volume management

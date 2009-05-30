@@ -6,15 +6,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		expat
-PKG_VERSION:=		1.95.8
+PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aff487543845a82fe262e6e2922b4c8e
-
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
+PKG_MD5SUM:=		ee8b492592568805593f81f8cdf2a04c
+PKG_DESCR:=		a fast, non-validating, stream-oriented XML parsing library
+PKG_SECTION:=		libs
+PKG_URL:=		http://expat.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBEXPAT,libexpat,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBEXPAT,libexpat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

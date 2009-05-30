@@ -6,16 +6,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.41.3
+PKG_VERSION:=		1.41.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b21d26fc46c584021dc9c444933ee1c2
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
+PKG_MD5SUM:=		e218df6c84fc17c1126d31de9472a76c
+PKG_DESCR:=		Ext2/3/4 filesystem utilities
+PKG_SECTION:=		admin
+PKG_URL:=		http://e2fsprogs.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
+
+PKG_DESCR_1:=		UUID library
+PKG_SECTION_1:=		libs
+PKG_DESCR_2:=		Common error library
+PKG_SECTION_2:=		libs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION_2}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-elf-shlibs \
@@ -34,8 +42,7 @@ pre-build:
 		subst
 
 post-install:
-	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib
-	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/sbin
+	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin/

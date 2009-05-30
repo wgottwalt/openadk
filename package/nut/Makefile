@@ -6,14 +6,29 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nut
-PKG_VERSION:=		2.0.5
+PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b08fde86191154bbcfda860f95a5dca2
-MASTER_SITES:=		http://www.networkupstools.org/source/2.0/
+PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
+PKG_DESCR:=		Network UPS Tools
+PKG_SECTION:=		sys
+PKG_URL:=		http://www.networkupstools.org
+PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NUT,nut,${PKG_VERSION}-${PKG_RELEASE}))
+ifneq (${ADK_PACKAGE_NUT_SNMP},)
+PKG_DEPENDS+=	libnetsnmp
+endif
+
+ifneq (${ADK_PACKAGE_NUT_USB},)
+PKG_DEPENDS+=	libusb
+endif
+
+ifneq (${ADK_PACKAGE_NUT_SSL},)
+PKG_DEPENDS+=	libopenssl
+endif
+
+$(eval $(call PKG_template,NUT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 define DRIVER_template
 
@@ -71,13 +86,13 @@ CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--without-cgi \
 			--with-drivers=${INSTALL_DRIVERS} \
+			--with-group=root \
 			--with-user=root
-IPKG_DEPEND_tmp:=
+
 ifneq (${ADK_PACKAGE_NUT_SSL},)
 CONFIGURE_ARGS+=	--with-ssl
 CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
-IPKG_DEPEND_tmp+=	libopenssl
 endif
 BUILD_STYLE:=		auto
 ALL_TARGET:=		all 
@@ -86,20 +101,14 @@ INSTALL_TARGET:=	install
 ifneq (${ADK_PACKAGE_NUT_USB},)
 ALL_TARGET+=		usb
 INSTALL_TARGET+=	install-usb
-IPKG_DEPEND_tmp+=	libusb
 endif
 ifneq (${ADK_PACKAGE_NUT_SNMP},)
 ALL_TARGET+=		snmp
 INSTALL_TARGET+=	install-snmp
-IPKG_DEPEND_tmp+=	libnetsnmp
 endif
-IPKG_DEPEND=$(shell echo ${IPKG_DEPEND_tmp} | tr ' ' ',')
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin
-	${INSTALL_DIR} ${IDIR_NUT}/etc/init.d
-	${INSTALL_BIN} ./files/upsd.init \
-		${IDIR_NUT}/etc/init.d/upsd
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
 		${IDIR_NUT}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \
@@ -107,7 +116,6 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_DATA} ./files/ups{d,}.conf ${IDIR_NUT}/etc/
-	echo "Depends: ${IPKG_DEPEND}" >> ${IDIR_NUT}/CONTROL/control
 ifneq (${ADK_PACKAGE_NUT_VARDESC},)
 	${INSTALL_DIR} ${IDIR_NUT}/usr/share
 	${INSTALL_DATA} ${WRKINST}/usr/share/cmdvartab \

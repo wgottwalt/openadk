@@ -9,11 +9,14 @@ PKG_NAME:=		snort
 PKG_VERSION:=		2.6.1.2
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		22c448e25538cdf74c62abe586aeac0a
-MASTER_SITES:=		http://www.snort.org/dl/current/
+PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libnet libpcap libpcre
+PKG_SITES:=		http://www.snort.org/dl/current/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SNORT,snort,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-flexresp \
@@ -31,10 +34,7 @@ INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin
-	${INSTALL_DIR} ${IDIR_SNORT}/etc/init.d
 	${INSTALL_DIR} ${IDIR_SNORT}/etc/snort
-	${INSTALL_BIN} ./files/snort.init \
-		${IDIR_SNORT}/etc/init.d/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT}/etc/snort/
 	${INSTALL_DATA} ${WRKBUILD}/etc/classification.config \
 		${IDIR_SNORT}/etc/snort/

@@ -36,7 +36,7 @@ endif
 davfs2-compile: libiconv-compile neon-compile
 dbus-compile: expat-compile
 deco-compile: ncurses-compile
-dhcp6-compile: ncurses-compile
+dhcpv6-compile: libnl-compile ncurses-compile
 digitemp-compile: libusb-compile
 dsniff-compile: libnids-compile openssl-compile libgdbm-compile
 elinks-compile: openssl-compile
@@ -76,7 +76,6 @@ ifeq (${ADK_COMPILE_IPERF_WITH_UCLIBCXX},y)
 iperf-compile: uclibc++-compile
 endif
 ipsec-tools-compile: openssl-compile
-iptables-snmp-compile: net-snmp-compile
 iptraf-compile: ncurses-compile
 irssi-compile: glib2-compile ncurses-compile
 iw-compile: libnl-compile
@@ -151,7 +150,6 @@ ifeq (${ADK_COMPILE_NMAP_WITH_UCLIBCXX},y)
 nmap-compile: uclibc++-compile
 endif
 nmap-compile: pcre-compile libpcap-compile
-nocatsplash-compile: glib-compile
 obexftp-compile: openobex-compile libiconv-compile
 opencdk-compile: libgcrypt-compile libgpg-error-compile zlib-compile
 openct-compile: libtool-compile libusb-compile

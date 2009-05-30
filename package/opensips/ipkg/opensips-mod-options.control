@@ -1,5 +1,0 @@
-Package: opensips-mod-options
-Depends: opensips
-Section: net
-Priority: optional
-Description: options support for OpenSIPS

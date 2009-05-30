@@ -6,27 +6,29 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		faad2
-PKG_VERSION:=		2.6.1
+PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		74e92df40c270f216a8305fc87603c8a
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
-WRKDIST=		${WRKDIR}/faad2
+PKG_MD5SUM:=		ee1b4d67ea2d76ee52c5621bc6dbf61e
+PKG_DESCR:=		A mp4 decoding library
+PKG_SECTION:=		libs
+PKG_URL:=		http://sourceforge.net/projects/faac/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autotool gnu
+CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-mpeg4ip \
 			--without-xmms
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
-pre-install:
-	${INSTALL_DIR} ${WRKINST}/usr/lib
-	${INSTALL_DIR} ${WRKINST}/usr/include
-	${CP} ${WRKBUILD}/common/mp4ff/libmp4ff.a ${WRKINST}/usr/lib
-	${CP} ${WRKBUILD}/common/mp4ff/mp4ff.h ${WRKINST}/usr/include
+#pre-install:
+#	${INSTALL_DIR} ${WRKINST}/usr/lib
+#	${INSTALL_DIR} ${WRKINST}/usr/include
+#	${CP} ${WRKBUILD}/common/mp4ff/libmp4ff.a ${WRKINST}/usr/lib
+#	${CP} ${WRKBUILD}/common/mp4ff/mp4ff.h ${WRKINST}/usr/include
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFAAD2}/usr/lib

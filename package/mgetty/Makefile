@@ -10,12 +10,15 @@ PKG_VERSION:=		1.1.35
 PKG_XVERSION:=		Feb22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6805f8e31423bb777be80e3a856001cb
-MASTER_SITES:=		ftp://alpha.greenie.net/pub/mgetty/source/1.1/
+PKG_DESCR:=		mgetty + sendfax
+PKG_SECTION:=		misc
+PKG_SITES:=		ftp://alpha.greenie.net/pub/mgetty/source/1.1/
+
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_XVERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MGETTY,mgetty,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MGETTY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 pre-configure:
 	cp ${WRKBUILD}/policy.h-dist ${WRKBUILD}/policy.h
@@ -33,19 +36,16 @@ pre-configure:
 	echo "#define	FAXSEND_FLOW FLOW_SOFT" >> ${WRKBUILD}/policy.h
 
 do-build:
-	mkdir -p ${WRKINST}/usr/bin
-	mkdir -p ${WRKINST}/usr/sbin
-	mkdir -p ${WRKINST}/usr/lib/mgetty+sendfax
-	mkdir -p ${WRKINST}/etc/mgetty+sendfax
+	${INSTALL_DIR} ${WRKINST}/usr/bin ${WRKINST}/usr/sbin
+	${INSTALL_DIR} ${WRKINST}/usr/lib/mgetty+sendfax ${WRKINST}/etc/mgetty+sendfax
 	${MAKE} -C ${WRKBUILD} \
 		${TARGET_CONFIGURE_OPTS} \
 		prefix="${WRKINST}/usr" \
 		CONFDIR=/etc/mgetty+sendfax \
 		bin-all
-	${CP} ${WRKBUILD}/mgetty ${WRKINST}/usr/sbin
-	${CP} ${WRKBUILD}/sendfax ${WRKINST}/usr/sbin
-	${CP} ${WRKBUILD}/fax/faxrunqd ${WRKINST}/usr/sbin
-	chmod 755 ${WRKINST}/usr/sbin/*
+	${INSTALL_BIN} ${WRKBUILD}/mgetty ${WRKINST}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/sendfax ${WRKINST}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/fax/faxrunqd ${WRKINST}/usr/sbin
 	${CP} ${WRKBUILD}/fax/faxq-helper ${WRKINST}/usr/lib/mgetty+sendfax
 	chmod u+s ${WRKINST}/usr/lib/mgetty+sendfax/faxq-helper
 	${CP} ${WRKBUILD}/fax/cour25n.pbm ${WRKINST}/usr/lib/mgetty+sendfax
@@ -58,10 +58,9 @@ do-build:
 	(cd ${WRKINST}/usr/bin;\
 		ln -snf g32pbm g3topbm;\
 	);
-	${CP} ${WRKBUILD}/g3/g3cat ${WRKINST}/usr/bin
-	${CP} ${WRKBUILD}/g3/pbm2g3 ${WRKINST}/usr/bin
-	${CP} ${WRKBUILD}/g3/sff2g3 ${WRKINST}/usr/bin
-	chmod 755 ${WRKINST}/usr/bin/*
+	${INSTALL_BIN} ${WRKBUILD}/g3/g3cat ${WRKINST}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/g3/pbm2g3 ${WRKINST}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/g3/sff2g3 ${WRKINST}/usr/bin
 # Installation into /etc
 	${CP} ${WRKBUILD}/dialin.config ${WRKINST}/etc/mgetty+sendfax
 	${CP} ${WRKBUILD}/fax/faxheader ${WRKINST}/etc/mgetty+sendfax

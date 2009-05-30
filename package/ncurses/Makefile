@@ -9,11 +9,14 @@ PKG_NAME:=		ncurses
 PKG_VERSION:=		5.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
-MASTER_SITES:=		${MASTER_SITE_GNU:=ncurses/}
+PKG_DESCR:=		a terminal handling library and common terminal definitions
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.gnu.org/software/ncurses
+PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2

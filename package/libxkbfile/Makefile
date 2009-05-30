@@ -9,11 +9,13 @@ PKG_NAME:=		libxkbfile
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8be68d830d227cbd52cbafe24cb4fa78
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_DESCR:=		an interface to read and manipulate description files the X11 keyboard configuration extension
+PKG_SECTION:=		x11
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXKBFILE,libxkbfile,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBXKBFILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

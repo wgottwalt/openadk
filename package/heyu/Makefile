@@ -6,15 +6,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		heyu
-PKG_VERSION:=		2.3.2
+PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		af3eeeaa8c432e5b3510f4df6dd39f4f
+PKG_MD5SUM:=		9c7624b61ea39bbfa70336dc703cd5f1
+PKG_DESCR:=		X10 home automation control using the CM11A
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		setserial
+PKG_URL:=		http://heyu.tanj.com
+PKG_SITES:=		http://heyu.tanj.com/download/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
-MASTER_SITES:=		http://heyu.tanj.com/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HEYU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HEYU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-build:
 	(cd ${WRKBUILD} && ${BASH} ./Configure);

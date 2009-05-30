@@ -1,5 +1,0 @@
-Package: libtorrent
-Priority: optional
-Section: libs
-Depends: uclibc++
-Description: A bittorrent library 

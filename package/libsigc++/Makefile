@@ -9,12 +9,15 @@ PKG_NAME:=		libsigc++
 PKG_VERSION:=		2.2.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e27a20ac9bc9100f48effdfca8e8c595
-
-MASTER_SITES:=		${MASTER_SITE_GNOME:=libsigc++/2.2/}
+PKG_DESCR:=		Callback framework for C++
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdc++
+PKG_URL:=		http://libsigc.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_GNOME:=libsigc++/2.2/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSIGCXX,libsigc++,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBSIGCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

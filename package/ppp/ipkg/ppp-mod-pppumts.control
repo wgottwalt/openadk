@@ -1,5 +1,0 @@
-Package: pppumts
-Priority: optional
-Section: net
-Depends: comgt, chat
-Description: Scripts and default configuration files to establish GPRS/UMTS connections

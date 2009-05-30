@@ -9,6 +9,9 @@ include $(TOPDIR)/mk/rootfs.mk
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		5
+PKG_DESCR:=		basic filesystem structure and scripts
+PKG_SECTION:=		base
+
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
 ifeq ($(CPU_ARCH),x86_64)
@@ -22,18 +25,11 @@ ICONTROL_ADDON_BASE_FILES=	"Package: base-files-${PKG_ID}"
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
 	$(CP) ./files/* $(IDIR_BASE_FILES)
 	$(CP) $(TOPDIR)/target/$(DEVICE)/files/* $(IDIR_BASE_FILES)
-	typeset -i REV; \
-	if fgrep xml .svn/entries >/dev/null 2>&1; then \
-		let REV="$$(sed -n '/revision=/s/^.*"\([0-9]*\)".*$$/\1/p' \
-		    .svn/entries)"; \
-	else \
-		let REV="$$(head -n 4 .svn/entries | tail -1)"; \
-	fi; ${SED} 's,$$R,'$$REV,g $(IDIR_BASE_FILES)/etc/banner
 	$(SED) 's,@TARGET@,$(DEVICE),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells

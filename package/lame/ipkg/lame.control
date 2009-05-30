@@ -1,5 +1,0 @@
-Package: lame
-Priority: optional
-Section: sound
-Depends: ncurses
-Description: LAME MP3 encoder

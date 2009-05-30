@@ -1,5 +1,0 @@
-Package: libgnutlsxx
-Priority: optional
-Section: libs
-Description: GNU TLS C++ library
-Depends: libgnutls

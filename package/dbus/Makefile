@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.0.2
-PKG_RELEASE:=		7
-PKG_MD5SUM:=		0552a9b54beb4a044951b7cdbc8fc855
-MASTER_SITES:=		http://dbus.freedesktop.org/releases/dbus/
+PKG_VERSION:=		1.0.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ce328423db5743fe9006d39113b5324d
+PKG_DESCR:=		DBUS library
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libexpat
+PKG_URL:=		http://dbus.freedesktop.org
+PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-tests \
@@ -30,9 +34,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		confprog auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_DBUS}/etc
-	${INSTALL_DIR} ${IDIR_DBUS}/usr/lib
-	${INSTALL_DIR} ${IDIR_DBUS}/usr/bin
+	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib ${IDIR_DBUS}/usr/bin
 	${INSTALL_DIR} $(STAGING_DIR)/usr/include/dbus-1.0/dbus
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc/
 	${CP} ${WRKINST}/usr/lib/libdbus-1.so.* ${IDIR_DBUS}/usr/lib/
@@ -40,8 +42,5 @@ post-install:
 		$(STAGING_DIR)/usr/include/dbus-1.0/dbus/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin/
-	${INSTALL_DIR} ${IDIR_DBUS}/etc/init.d
-	${INSTALL_BIN} ./files/dbus.init \
-		${IDIR_DBUS}/etc/init.d/dbus
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,4 +1,0 @@
-Package: alsa-lib
-Priority: optional
-Section: libs
-Description: ALSA sound library

@@ -1,5 +1,7 @@
 #!/bin/sh
-#FWINIT 70
+#PKG tinyproxy
+#INIT 70
+
 . /etc/rc.conf
 
 case $1 in

@@ -1,3 +1,0 @@
-#!/bin/sh
-. $IPKG_INSTROOT/etc/functions.sh
-add_rcconf '"NO" to disable, "@OPTIONS@" otherwise' dropbear_flags "@OPTIONS@"

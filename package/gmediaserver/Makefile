@@ -9,11 +9,15 @@ PKG_NAME:=		gmediaserver
 PKG_VERSION:=		0.13.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
-MASTER_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
+PKG_DESCR:=		An UPnP music media server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		id3lib libupnp
+PKG_URL:=		http://www.gnu.org/software/gmediaserver
+PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz" \
@@ -28,9 +32,6 @@ CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz"
 endif
 
 post-install:
-	${INSTALL_DIR} ${IDIR_GMEDIASERVER}/etc/init.d
-	${INSTALL_BIN} ./files/gmediaserver.init \
-		${IDIR_GMEDIASERVER}/etc/init.d/gmediaserver
 	${INSTALL_DIR} ${IDIR_GMEDIASERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gmediaserver ${IDIR_GMEDIASERVER}/usr/sbin/
 

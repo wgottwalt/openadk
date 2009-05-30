@@ -9,11 +9,14 @@ PKG_NAME:=		libaudiofile
 PKG_VERSION:=		0.2.6
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		460f848ce5f4a33ae66b15a4fb7720ec
-MASTER_SITES:=		http://www.freewrt.org/distfiles/
+PKG_DESCR:=		audiofile library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.68k.org/~michael/audiofile
+PKG_SITES:=		http://www.openadk.org/distfiles/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBAUDIOFILE,libaudiofile,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBAUDIOFILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2

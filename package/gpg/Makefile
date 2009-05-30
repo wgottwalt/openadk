@@ -9,12 +9,16 @@ PKG_NAME:=		gnupg
 PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3537dedea45cc09e8d88d1ef4f774246
-MASTER_SITES:=		ftp://ftp.franken.de/pub/crypt/mirror/ftp.gnupg.org/gcrypt/gnupg/ \
+PKG_DESCR:=		Gnu Privacy Guard
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libreadline
+PKG_URL:=		http://www.gnu.org
+PKG_SITES:=		ftp://ftp.franken.de/pub/crypt/mirror/ftp.gnupg.org/gcrypt/gnupg/ \
 			ftp://ftp.gnupg.org/gcrypt/gnupg/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GPG,gpg,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GPG,gpg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_c_bigendian=no \

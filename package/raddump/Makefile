@@ -9,19 +9,21 @@ PKG_NAME:=		raddump
 PKG_VERSION:=		0.3.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f8c29c67141ea78bb6ae8b97d5149480
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
+PKG_DESCR:=		interprets captured RADIUS packets
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap libopenssl
+PKG_URL:=		http://sourceforge.net/projects/raddump
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	ac_cv_c_bigendian=no \
-			ac_cv_func_malloc_0_nonnull=yes \
-			ac_cv_func_realloc_0_nonnull=yes
 INSTALL_STYLE:=		auto
 
 post-install:
-	${CP} ${WRKINST}/* ${IDIR_RADDUMP}/
+	${INSTALL_DIR} ${IDIR_RADDUMP}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/raddump ${IDIR_RADDUMP}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

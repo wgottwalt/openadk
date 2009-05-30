@@ -9,7 +9,10 @@ PKG_NAME:=		curl
 PKG_VERSION:=		7.19.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		35f51ac7bcff689b2d2d6e38a3c4d1ae
-MASTER_SITES:=		http://curl.haxx.se/download/ \
+PKG_DESCR:=		a client-side URL transfer tool
+PKG_SECTION:=		net
+PKG_URL:=		http://curl.haxx.se
+PKG_SITES:=		http://curl.haxx.se/download/ \
 			http://www.mirrorspace.org/curl/ \
 			http://curl.mirror.internet.tp/download/ \
 			ftp://ftp.sunet.se/pub/www/utilities/curl/ \
@@ -17,12 +20,17 @@ MASTER_SITES:=		http://curl.haxx.se/download/ \
 			http://www.mirrormonster.com/curl/download/ \
 			http://curl.mirrors.cyberservers.net/download/
 
+PKG_DESCR_1:=		a client-side URL transfer library
+PKG_SECTION_1:=		libs
+PKG_DEPENDS_1:=		libopenssl zlib
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
 
 CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
 			--enable-cookies \
 			--enable-crypto-auth \
@@ -47,9 +55,8 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_CURL}/usr/bin
+	${INSTALL_DIR} ${IDIR_CURL}/usr/bin ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
-	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcurl.so.* ${IDIR_LIBCURL}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

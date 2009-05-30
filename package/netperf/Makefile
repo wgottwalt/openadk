@@ -6,29 +6,27 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		netperf
-PKG_VERSION:=		2.3pl1
-PKG_RELEASE:=		8
-PKG_MD5SUM:=		b74314d78af31cb13516fb9a372d2e86
-MASTER_SITES:=		ftp://ftp.netperf.org/netperf/archive/ \
+PKG_VERSION:=		2.4.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		391a0d98954c72a6ad7f08b8a115e1ce
+PKG_DESCR:=		Program and service to do network performance measurement.
+PKG_SECTION:=		net
+PKG_URL:=		http://www.netperf.org/netperf/		
+PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/ \
 			ftp://ftp.cup.hp.com/dist/networking/benchmarks/netperf/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NETPERF,netperf,${PKG_VERSION}${PKG_RELEASE}))
+$(eval $(call PKG_template,NETPERF,${PKG_NAME},${PKG_VERSION}${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
+CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
-MAKE_FLAGS+=		TARGET_NETPERF_HOME="/etc/netperf.conf" \
-			TARGET_CC=${TARGET_CROSS}gcc \
-			TARGET_CFLAGS="${TCFLAGS}" \
-			TARGET_LIBS=""
-MAKE_FILE:=		makefile
+INSTALL_STYLE:=		auto
 
-do-install:
-	${INSTALL_DIR} ${IDIR_NETPERF}/etc/init.d
+post-install:
 	${INSTALL_DIR} ${IDIR_NETPERF}/usr/bin
-	${INSTALL_BIN} ./files/netserver.init \
-		${IDIR_NETPERF}/etc/init.d/netserver
-	${INSTALL_BIN} ${WRKBUILD}/netperf ${IDIR_NETPERF}/usr/bin/
-	${INSTALL_BIN} ${WRKBUILD}/netserver ${IDIR_NETPERF}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/netperf ${IDIR_NETPERF}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/netserver ${IDIR_NETPERF}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

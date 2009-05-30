@@ -9,11 +9,15 @@ PKG_NAME:=		socat
 PKG_VERSION:=		1.7.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		82967132b5a8ca4d07e54370fdcb2662
-MASTER_SITES:=		http://www.dest-unreach.org/socat/download/
+PKG_DESCR:=		A multipurpose relay (SOcket CAT)
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpthread libopenssl
+PKG_URL:=		http://www.dest-unreach.org/socat
+PKG_SITES:=		http://www.dest-unreach.org/socat/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,SOCAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \

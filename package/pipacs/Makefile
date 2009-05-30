@@ -5,18 +5,21 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=			pipacs
+PKG_NAME:=		pipacs
 PKG_RELEASE:=		2
-WRKDIST=				${WRKDIR}/${PKG_NAME}
+PKG_DESCR:=		an UNIX socket accounting/wiewer program
+PKG_SECTION:=		net
+
+WRKDIST=		${WRKDIR}/${PKG_NAME}
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PIPACS,pipacs,${PKG_RELEASE}))
+$(eval $(call PKG_template,PIPACS,${PKG_NAME},${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CFLAGS="${TCFLAGS} ${TCPPFLAGS}" \
-	    				${TARGET_CONFIGURE_OPTS}
+			${TARGET_CONFIGURE_OPTS}
 
 do-configure:
 	mkdir -p ${WRKBUILD}

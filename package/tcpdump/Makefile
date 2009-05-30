@@ -9,14 +9,18 @@ PKG_NAME:=		tcpdump
 PKG_VERSION:=		4.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b22ca72890df2301d922c9f2d17867f9
-MASTER_SITES:=		http://www.tcpdump.org/release/ \
+PKG_DESCR:=		A tool for network monitoring and data acquisition.
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap
+PKG_URL:=		http://www.tcpdump.org
+PKG_SITES:=		http://www.tcpdump.org/release/ \
 			http://www.sfr-fresh.com/unix/misc/ \
 			http://www.at.tcpdump.org/ \
 			http://www.br.tcpdump.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCPDUMP,tcpdump,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,TCPDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOSTCC} \

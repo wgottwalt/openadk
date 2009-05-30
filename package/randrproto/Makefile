@@ -9,7 +9,7 @@ PKG_NAME:=		randrproto
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d6b6b024d71b689628bcaf27fd491f5b
-MASTER_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

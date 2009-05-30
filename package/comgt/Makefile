@@ -9,20 +9,23 @@ PKG_NAME:=		comgt
 PKG_VERSION:=		0.32
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		db2452680c3d953631299e331daf49ef
+PKG_DESCR:=		Option GlobeTrotter GPRS/EDGE/3G/HSDPA and Vodafone 3G/GPRS datacard control tool
+PKG_SECTION:=		console
+PKG_URL:=		http://sourceforge.net/projects/comgt
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=comgt/}
+
 DISTFILES:=		${PKG_NAME}.${PKG_VERSION}.tgz
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=comgt/}
 WRKDIST=		${WRKDIR}/${PKG_NAME}.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,COMGT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,COMGT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE=		auto
 ALL_TARGET=		comgt
 
 do-install:
-	${INSTALL_DIR} ${IDIR_COMGT}/usr/bin
-	${INSTALL_DIR} ${IDIR_COMGT}/etc/comgt
+	${INSTALL_DIR} ${IDIR_COMGT}/usr/bin ${IDIR_COMGT}/etc/comgt
 	${INSTALL_BIN} ${WRKBUILD}/comgt ${IDIR_COMGT}/usr/bin/comgt
 	${INSTALL_DATA} ./files/dial.comgt ${IDIR_COMGT}/etc/comgt/dial.comgt
 

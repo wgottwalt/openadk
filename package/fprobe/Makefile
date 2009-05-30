@@ -9,12 +9,16 @@ PKG_NAME:=		fprobe
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		65850d0470078269b33eee58cba77ac2
+PKG_DESCR:=		NetFlow probe
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap libpthread
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FPROBE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,FPROBE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-piddir=/var \

@@ -1,5 +1,0 @@
-Package: opensips-mod-pdt
-Depends: opensips
-Section: net
-Priority: optional
-Description: pdt support for OpenSIPS

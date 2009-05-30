@@ -9,11 +9,14 @@ PKG_NAME:=		pptp
 PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		9a706327fb9827541d7c86d48ceb9631
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
+PKG_DESCR:=		a Point-to-Point Tunneling Protocol (PPTP) client
+PKG_SECTION:=		net
+PKG_DEPENDS:=		ppp kmod-gre
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PPTP,pptp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PPTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" \

@@ -9,11 +9,14 @@ PKG_NAME:=		libdnet
 PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		416b765e9d9961501ac85e9a366fd219
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=$(PKG_NAME)/}
+PKG_DESCR:=		a low-level networking library
+PKG_SECTION:=		libs
+PKG_URL:=		http://libdnet.sourceforge.net/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=$(PKG_NAME)/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBDNET,libdnet,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBDNET,libdnet,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_dnet_bsd_bpf=no
@@ -25,6 +28,5 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_LIBDNET)/usr/lib
 	$(INSTALL_DIR) $(IDIR_LIBDNET)/usr/sbin
 	$(CP) $(WRKINST)/usr/lib/libdnet.so.* $(IDIR_LIBDNET)/usr/lib/
-	$(INSTALL_BIN) $(WRKINST)/usr/sbin/dnet $(IDIR_LIBDNET)/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -9,9 +9,17 @@ PKG_NAME:=		lighttpd
 PKG_VERSION:=		1.4.22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		949c33a81e83f7718a47280bef21b90c
-MASTER_SITES:=		http://www.lighttpd.net/download/
+PKG_DESCR:=		a flexible and lightweight web server
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libxml2 libsqlite libpcre
+PKG_URL:=		http://www.lighttpd.net
+PKG_SITES:=		http://www.lighttpd.net/download/
 
 include $(TOPDIR)/mk/package.mk
+
+ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
+PKG_DEPENDS+= 		libopenssl
+endif
 
 define PKG_mod_template
 
@@ -23,23 +31,23 @@ ${2}-install:
 
 endef
 
-$(eval $(call PKG_template,LIGHTTPD,lighttpd,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_ACCESSLOG,lighttpd-mod-accesslog,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_ALIAS,lighttpd-mod-alias,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_AUTH,lighttpd-mod-auth,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_CGI,lighttpd-mod-cgi,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_EVASIVE,lighttpd-mod-evasive,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_EXPIRE,lighttpd-mod-expire,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_FASTCGI,lighttpd-mod-fastcgi,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_PROXY,lighttpd-mod-proxy,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_REDIRECT,lighttpd-mod-redirect,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_REWRITE,lighttpd-mod-rewrite,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_SETENV,lighttpd-mod-setenv,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_SIMPLE_VHOST,lighttpd-mod-simple-vhost,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_SSI,lighttpd-mod-ssi,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_STATUS,lighttpd-mod-status,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_USERTRACK,lighttpd-mod-usertrack,$(PKG_VERSION)-$(PKG_RELEASE)))
-$(eval $(call PKG_template,LIGHTTPD_MOD_WEBDAV,lighttpd-mod-webdav,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIGHTTPD,lighttpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_ACCESSLOG,lighttpd-mod-accesslog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_ALIAS,lighttpd-mod-alias,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_AUTH,lighttpd-mod-auth,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_CGI,lighttpd-mod-cgi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_EVASIVE,lighttpd-mod-evasive,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_EXPIRE,lighttpd-mod-expire,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_FASTCGI,lighttpd-mod-fastcgi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_PROXY,lighttpd-mod-proxy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_REDIRECT,lighttpd-mod-redirect,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_REWRITE,lighttpd-mod-rewrite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_SETENV,lighttpd-mod-setenv,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_SIMPLE_VHOST,lighttpd-mod-simple-vhost,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_SSI,lighttpd-mod-ssi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_STATUS,lighttpd-mod-status,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_USERTRACK,lighttpd-mod-usertrack,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIGHTTPD_MOD_WEBDAV,lighttpd-mod-webdav,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_ACCESSLOG,accesslog))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_ALIAS,alias))
@@ -84,21 +92,11 @@ endif
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	install -m0755 -d $(IDIR_LIGHTTPD)/etc
 	install -m0644 ./files/lighttpd.conf $(IDIR_LIGHTTPD)/etc/
-	install -m0755 -d $(IDIR_LIGHTTPD)/etc/init.d
-	install -m0644 ./files/lighttpd.init \
-		$(IDIR_LIGHTTPD)/etc/init.d/lighttpd
 	install -m0755 -d $(IDIR_LIGHTTPD)/usr/lib/lighttpd
 	for m in dirlisting indexfile staticfile; do \
 		$(CP) $(WRKINST)/usr/lib/lighttpd/mod_$$m.so $(IDIR_LIGHTTPD)/usr/lib/lighttpd/ ; \
 	done
 	install -m0755 -d $(IDIR_LIGHTTPD)/usr/sbin
 	$(CP) $(WRKINST)/usr/sbin/lighttpd $(IDIR_LIGHTTPD)/usr/sbin/
-ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
-	echo 'Depends: libxml2, libsqlite, libpcre, openssl' \
-	    >>${IDIR_LIGHTTPD}/CONTROL/control
-else
-	echo 'Depends: libxml2, libsqlite, libpcre' \
-	    >>${IDIR_LIGHTTPD}/CONTROL/control
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

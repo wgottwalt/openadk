@@ -1,5 +1,0 @@
-Package: sane-backend-umax1220u
-Depends: sane-backends, libusb
-Priority: optional
-Section: misc
-Description: Scanner access now easy

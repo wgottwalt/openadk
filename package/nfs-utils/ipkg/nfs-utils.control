@@ -1,4 +1,0 @@
-Package: nfs-utils
-Section: net
-Priority: optional
-Description: Utilities for NFS kernel server

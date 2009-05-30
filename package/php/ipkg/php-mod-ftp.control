@@ -1,5 +1,0 @@
-Package: php-mod-ftp
-Priority: optional
-Section: net
-Depends: php
-Description: FTP module for PHP5

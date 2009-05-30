@@ -9,7 +9,10 @@ PKG_NAME:=		libtasn1
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		93b43cc5013bda4d8bf64508f1566c54
-MASTER_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/ \
+PKG_DESCR:=		an ASN.1 and DER structures manipulation library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.gnupg.org
+PKG_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/ \
 			ftp://ftp.gnupg.org/gcrypt/alpha/gnutls/libtasn1/ \
 			http://www.mirrors.wiretapped.net/security/network-securitygnutls/libtasn1/ \
 			ftp://ftp.mirrors.wiretapped.net/pub/security/network-security/gnutls/libtasn1/ \
@@ -17,7 +20,7 @@ MASTER_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/ \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTASN1,libtasn1,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBTASN1,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

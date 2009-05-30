@@ -1,5 +1,0 @@
-Package: owfs
-Priority: optional
-Section: admin
-Description: A tool to access 1-wire devices through a fuse mounted fs
-Depends: fuse-utils libpthread

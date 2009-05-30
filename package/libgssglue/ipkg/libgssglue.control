@@ -1,4 +1,0 @@
-Package: libgssglue
-Priority: optional
-Section: libs
-Description: library for NFSv4

@@ -9,20 +9,25 @@ PKG_NAME:=		ulogd
 PKG_VERSION:=		1.24
 PKG_RELEASE:=		7
 PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
-MASTER_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
+PKG_DESCR:=		Netfilter userspace logging daemon
+PKG_SECTION:=		net
+PKG_DEPENDS:=		iptables
+PKG_URL:=		http://www.netfilter.org/projects/ulogd
+PKG_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/ulogd/ \
 			ftp://ftp.de.netfilter.org/pub/netfilter/ulogd/ \
 			ftp://ftp.no.netfilter.org/pub/netfilter/ulogd/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ULOGD,ulogd,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,ULOGD_MOD_MYSQL,ulogd-mod-mysql,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,ULOGD,ulogd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_MYSQL,ulogd-mod-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
@@ -55,13 +60,10 @@ CONFIGURE_ARGS+=	--with-sqlite3=${STAGING_DIR}/usr
 endif
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	${INSTALL_DIR} ${IDIR_ULOGD}/etc/init.d/
+	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin ${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_DIR} ${IDIR_ULOGD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/ulogd.conf ${IDIR_ULOGD}/etc/
-	${INSTALL_BIN} ./files/ulogd.init \
-		${IDIR_ULOGD}/etc/init.d/ulogd
-	${INSTALL_DIR} ${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_BASE.so ${IDIR_ULOGD}/usr/lib/ulogd/
-	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ulogd ${IDIR_ULOGD}/usr/sbin/
 
 ulogd-mod-extra-install:

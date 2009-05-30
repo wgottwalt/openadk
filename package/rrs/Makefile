@@ -9,21 +9,25 @@ PKG_NAME:=		rrs
 PKG_VERSION:=		1.70
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b400d03c0e39e3e78a7327ba78f789f0
-MASTER_SITES:=		http://www.cycom.se/uploads/36/19/
-PKG_DEPEND:=		libopenssl zlib
-PKG_DEPEND_NOSSL:=	zlib
+PKG_DESCR:=		A reverse (connecting) remote shell, with SSL support.
+PKG_SECTION:=		net
+PKG_URL:=		http://www.cycom.se/dl/rrs
+PKG_SITES:=		http://www.cycom.se/uploads/36/19/
+
+PKG_DEPENDS:=		libopenssl zlib
+PKG_DEPENDS_NOSSL:=	zlib
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
-PKG_DEPEND+=		uclibc++
-PKG_DEPEND_NOSSL+=	uclibc++
+PKG_DEPENDS+=		uclibc++
+PKG_DEPENDS_NOSSL+=	uclibc++
 else
-PKG_DEPEND+=		libstdcxx
-PKG_DEPEND_NOSSL+=	libstdcxx
+PKG_DEPENDS+=		libstdcxx
+PKG_DEPENDS_NOSSL+=	libstdcxx
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND}))
-$(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEND_NOSSL}))
+$(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_NOSSL},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
 PKG_CFLAGS=-fno-builtin -fno-rtti -nostdinc++

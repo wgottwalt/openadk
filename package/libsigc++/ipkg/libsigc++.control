@@ -1,5 +1,0 @@
-Package: libsigc++
-Priority: optional
-Section: libs
-Depends: libstdc++
-Description: Callback framework for C++

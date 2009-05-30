@@ -1,5 +1,0 @@
-Package: cryptsetup
-Priority: optional
-Section: crypto
-Depends: libgcrypt, device-mapper, libuuid, libpopt
-Description: LUKS cryptsetup tools

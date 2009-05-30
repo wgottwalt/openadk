@@ -10,14 +10,14 @@ PKG_VERSION:=		29
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e06c222e186f7cc013fd272d023710cb
 
-MASTER_SITES:=		http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/
+PKG_SITES:=		http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/
 DISTFILES:=		wireless_tools.${PKG_VERSION}.tar.gz
 
 WRKDIST=		${WRKDIR}/wireless_tools.29
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_TOOLS,wireless-tools,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,WIRELESS_TOOLS,wireless-tools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS} -I."

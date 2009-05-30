@@ -56,6 +56,6 @@ find $TARGETS -type f -a -exec file {} \; | \
 		continue ;;
 	esac
 	echo "$SELF: $V:$S"
-	#echo "+ $T $F"
+	echo "+ $T $F"
 	eval "$T $F"
 done

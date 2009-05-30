@@ -9,12 +9,15 @@ PKG_NAME:=		bc
 PKG_VERSION:=		1.06
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d44b5dddebd8a7a7309aea6c36fda117
-MASTER_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
+PKG_DESCR:=		An arbitrary precision calculator language
+PKG_SECTION:=		util
+PKG_URL:=		http://www.gnu.org/software/bc
+PKG_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,DC,dc,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DC,dc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

@@ -9,14 +9,14 @@ PKG_NAME:=		glib
 PKG_VERSION:=		1.2.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6fe30dad87c77b91b632def29dd69ef9
-MASTER_SITES:=		ftp://ftp.gtk.org/pub/gtk/v1.2/ \
+PKG_SITES:=		ftp://ftp.gtk.org/pub/gtk/v1.2/ \
 			http://ftp.gwdg.de/pub/misc/grafik/gimp/gtk/v1.2/ \
 			http://ftp.esat.net/mirrors/ftp.gimp.org/pub/gtk/v1.2/ \
 			http://www.mirrorservice.org/sites/ftp.gimp.org/pub/gtk/v1.2/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GLIB1,glib1,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,GLIB1,glib1,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		glib_cv_sizeof_gmutex=24 \

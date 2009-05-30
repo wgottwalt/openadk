@@ -6,14 +6,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
-PKG_VERSION:=		1.5.1
+PKG_VERSION:=		1.5.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5a82751b50391eb092c906ce64f3b6bf
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
+PKG_MD5SUM:=		ce886163658d748113b0570dfae12aea
+PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libffi zlib
+PKG_URL:=		http://jamvm.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
 include ${TOPDIR}/mk/package.mk
 
-${eval ${call PKG_template,JAMVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}}}
+$(eval $(call PKG_template,JAMVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-ffi

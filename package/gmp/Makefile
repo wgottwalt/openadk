@@ -9,12 +9,15 @@ PKG_NAME:=		gmp
 PKG_VERSION:=		4.2.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7ce52531644e6d12f16911b7e3151f3f
-MASTER_SITES:=		${MASTER_SITE_GNU:=gmp/}
+PKG_DESCR:=		GNU multiprecision arithmetic library
+PKG_SECTION:=		libs
+PKG_URL:=		http://gmplib.org
+PKG_SITES:=		${MASTER_SITE_GNU:=gmp/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

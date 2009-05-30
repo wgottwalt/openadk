@@ -1,5 +1,7 @@
 #!/bin/sh
-#FWINIT 60
+#PKG htpdate
+#INIT 60
+
 . /etc/rc.conf
 
 case $1 in
@@ -21,6 +23,5 @@ restart)
 *)
 	echo "usage: $0 {start | stop | restart}"
 	exit 1
-
 esac
 exit $?

@@ -9,11 +9,13 @@ PKG_NAME:=		pixman
 PKG_VERSION:=		0.13.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		837df4a02c61a60a880644393b57faed
-MASTER_SITES:=		http://www.cairographics.org/releases/
+PKG_DESCR:=		Pixel manipulation library
+PKG_SECTION:=		x11
+PKG_SITES:=		http://www.cairographics.org/releases/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,PIXMAN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

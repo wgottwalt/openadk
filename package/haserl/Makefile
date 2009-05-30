@@ -9,11 +9,14 @@ PKG_NAME:=		haserl
 PKG_VERSION:=		0.8.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bd9195d086566f56634c0bcbbbcbebea
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
+PKG_DESCR:=		a CGI wrapper to embed shell scripts in HTML documents
+PKG_SECTION:=		web
+PKG_URL:=		http://haserl.sourceforge.net
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HASERL,haserl,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,HASERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=		-DMAX_UPLOAD_KB=8192
 CONFIGURE_STYLE=	gnu

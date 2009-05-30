@@ -9,12 +9,16 @@ PKG_NAME:=		p910nd
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		10
 PKG_MD5SUM:=		7bf752532d26c9106f8039db95df3a6b
-MASTER_SITES:=		http://www.etherboot.org/p910nd/
+PKG_DESCR:=		A small non-spooling printer server
+PKG_SECTION:=		net
+PKG_URL:=		http://www.etherboot.org/p910nd
+PKG_SITES:=		http://www.etherboot.org/p910nd/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,P910ND,p910nd,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,P910ND,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} \
@@ -22,10 +26,7 @@ MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} \
 ALL_TARGET:=
 
 do-install:
-	${INSTALL_DIR} ${IDIR_P910ND}/etc/init.d
 	${INSTALL_DIR} ${IDIR_P910ND}/usr/sbin
-	${INSTALL_BIN} ./files/p910nd.init \
-		${IDIR_P910ND}/etc/init.d/p910nd
 	${INSTALL_BIN} ${WRKBUILD}/p910nd ${IDIR_P910ND}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

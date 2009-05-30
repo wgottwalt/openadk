@@ -1,5 +1,0 @@
-Package: php-mod-gd
-Priority: optional
-Section: net
-Depends: php, libgd, libpng
-Description: GD module for PHP5

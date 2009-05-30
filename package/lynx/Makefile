@@ -9,17 +9,22 @@ PKG_NAME=		lynx
 PKG_VERSION=		2.8.7dev.7
 PKG_RELEASE=		1
 PKG_MD5SUM=		83891107c873421e5ac917cc0ab53fe8
-MASTER_SITES=		http://lynx.isc.org/current/ \
+PKG_DESCR:=		Standard text browser
+PKG_SECTION:=		text
+PKG_DEPENDS:=		libncurses libopenssl
+PKG_URL:=		http://lynx.isc.org
+PKG_SITES=		http://lynx.isc.org/current/ \
 			${MASTER_SITE_MIRBSD}
+
 DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-7
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
-TCPPFLAGS+=		-DLYNX_VERSION=\"${PKG_VERSION}-OpenADK-${PKG_RELEASE}\"
+TCPPFLAGS+=		-DLYNX_VERSION=\"${PKG_VERSION}-${PKG_RELEASE}\"
 # do not hardcode paths; do not scan for ports stuff
 CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_TN3270=tn3270 \

@@ -9,11 +9,14 @@ PKG_NAME:=		libnfsidmap
 PKG_VERSION:=		0.21b1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a8a44bd4aa22441fb54735dd65496b72
-MASTER_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/
+PKG_DESCR:=		library for NFSv4
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.citi.umich.edu/projects/nfsv4/linux/
+PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBNFSIDMAP,libnfsidmap,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBNFSIDMAP,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto

@@ -9,12 +9,16 @@ PKG_NAME:=		fprobe-ulog
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cdb2e4edc47e8a3d5479eeabfb979ebc
+PKG_DESCR:=		NetFlow probe
+PKG_SECTION:=		net
+PKG_DEPENDS:=		libpcap libpthread
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-MASTER_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-piddir=/var \

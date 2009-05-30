@@ -9,13 +9,17 @@ PKG_NAME:=		ntpclient
 PKG_VERSION:=		2007_365
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb98711f11769cdd22fc592844cef414
-MASTER_SITES:=		http://doolittle.icarus.com/ntpclient/
+PKG_DESCR:=		NTP client for setting system time from NTP servers
+PKG_SECTION:=		net
+PKG_URL:)		http://doolittle.icarus.com/ntpclient
+PKG_SITES:=		http://doolittle.icarus.com/ntpclient/
+
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2007
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TCFLAGS}'

@@ -9,11 +9,14 @@ PKG_NAME:=		dovecot
 PKG_VERSION:=		1.1.14
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		60b1deccc0ae77e5669060d2b1894e5e
-MASTER_SITES:=		http://www.dovecot.org/releases/1.1/
+PKG_DESCR:=		A minimal and secure imap server
+PKG_SECTION:=		net
+PKG_URL:=		http://www.dovecot.org
+PKG_SITES:=		http://www.dovecot.org/releases/1.1/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DOVECOT,dovecot,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,DOVECOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ignore_signed_size=1 \

@@ -9,14 +9,17 @@ PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.45
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		440daa01b8f2ec4fe97b1cc621108220
-DISTFILES:=		LVM2.${PKG_VERSION}.tgz
-MASTER_SITES:=		ftp://sources.redhat.com/pub/lvm2/
+PKG_DESCR:=		logical volume management
+PKG_SECTION:=		utils
+PKG_URL:=		http://sourceware.org/lvm2/
+PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
+DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LVM,lvm,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
