@@ -3,7 +3,7 @@
 # Copyright (c) 2006, 2007
 #	Thorsten Glaser <tg@mirbsd.de>
 # Copyright (c) 2009
-#	Waldemar Brodkorb <openadk@waldemar-brodkorb.de>
+#	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
 # are retained or reproduced in an accompanying document, permission
@@ -44,7 +44,13 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem (cfgfs), Version 1.06'
+what='Configuration Filesystem Utility (cfgfs), Version 1.06'
+
+who=$(id -u)
+if [ $who -ne 0 ];
+	echo 'Exit. Configuration Filesystem Utility must be run as root.'
+	exit 1
+fi
 
 usage() {
 	cat >&2 <<EOF
@@ -109,6 +115,7 @@ EOF
 	exit 1 ;;
 esac
 
+# find backend device
 uname=$(uname -m)          
 if [[ "$uname" = "i586" ]];then                      
         part=/dev/sda2                               
