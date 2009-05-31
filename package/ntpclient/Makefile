@@ -11,7 +11,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb98711f11769cdd22fc592844cef414
 PKG_DESCR:=		NTP client for setting system time from NTP servers
 PKG_SECTION:=		net
-PKG_URL:)		http://doolittle.icarus.com/ntpclient
+PKG_URL:=		http://doolittle.icarus.com/ntpclient
 PKG_SITES:=		http://doolittle.icarus.com/ntpclient/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz

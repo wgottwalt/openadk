@@ -6,20 +6,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnids
-PKG_VERSION:=		1.18
+PKG_VERSION:=		1.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9ee6dcdfac97bae6fe611aa27d2594a5
-PKG_DESCR:=		implementation of an E-component of Network Intrusion Detection System
+PKG_MD5SUM:=		af35e8ef403a0ca95df2da94db856428
+PKG_DESCR:=		Network Intrusion Detection System library
 PKG_SECTION:=		libs
-PKG_SITES:=		http://www.packetfactory.net/projects/libnids/dist/
+PKG_DEPENDS:=		libnet libpcap
+PKG_URL:=		http://libnids.sourceforge.net/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnids/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNIDS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \
-			--with-libpcap="${STAGING_DIR}/usr"
 XAKE_FLAGS+=		install_prefix="${WRKINST}"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

@@ -10,6 +10,7 @@ config ADK_PACKAGE_AVAHI_DAEMON
 	select ADK_COMPILE_AVAHI
 	select ADK_PACKAGE_LIBAVAHI
 	select ADK_PACKAGE_LIBDAEMON
+	select ADK_PACKAGE_GLIB
 	help
 	  Avahi is a system which facilitates service discovery on a local network --
 	  this means that you can plug your laptop or computer into a network and

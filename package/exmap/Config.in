@@ -6,7 +6,7 @@ config ADK_PACKAGE_EXMAP
 	prompt "exmap............................. exmap-console utility"
 	tristate
 	select ADK_COMPILE_EXMAP
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBREADLINE
 	select ADK_PACKAGE_KMOD_EXMAP
 	default n
@@ -17,7 +17,7 @@ config ADK_PACKAGE_EXMAPD
 	prompt "exmapd............................ exmap daemon"
 	tristate
 	select ADK_COMPILE_EXMAP
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBREADLINE
 	select ADK_PACKAGE_KMOD_EXMAP
 	default n
@@ -28,7 +28,7 @@ config ADK_PACKAGE_EXMAPSERVER
 	prompt "exmapserver....................... exmap server"
 	tristate
 	select ADK_COMPILE_EXMAP
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBREADLINE
 	select ADK_PACKAGE_KMOD_EXMAP
 	default n

@@ -4,7 +4,7 @@ config ADK_PACKAGE_WDFS
 	default n
 	select ADK_PACKAGE_FUSE_UTILS
 	select ADK_PACKAGE_NEON
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	help
 	  WebDAV is an extension to HTTP that allows remote collaborative
 	  authoring of Web resources, defined in RFC 2518.

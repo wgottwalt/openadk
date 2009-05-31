@@ -1,11 +1,32 @@
 config ADK_PACKAGE_RTORRENT
-	prompt "rtorrent........................... file transfer utility"
+	prompt "rtorrent........................... console bittorrent client"
 	tristate
 	depends on ADK_CXX
+	# libtorrent / rtorrent does not work with uclibc++
+	# with gcc 4.4 libstdc++ needs TLS in uClibc
+	depends on ADK_TARGET_LIB_GLIBC
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_LIBTORRENT
 	select ADK_PACKAGE_LIBCURL
 	default n
 	help
-	  http://rsync.samba.org
+	  http://libtorrent.rakshasa.no/
 
+choice
+prompt "C++ library to use"
+depends on ADK_PACKAGE_RTORRENT
+default ADK_COMPILE_RTORRENT_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_RTORRENT_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+
+config ADK_COMPILE_RTORRENT_WITH_STDCXX
+	bool "Standard C++ library"
+	select ADK_PACKAGE_LIBSTDCXX
+	help
+
+config ADK_COMPILE_RTORRENT_WITH_UCLIBCXX
+	bool "Embedded uClibc++ library"
+	select ADK_PACKAGE_UCLIBCXX
+	depends ADK_BROKEN
+	help
+
+endchoice

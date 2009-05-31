@@ -8,7 +8,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libelf
 PKG_VERSION:=		0.8.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		11904a77b948bcfab671e80100b6098d
+PKG_MD5SUM:=		e931910b6d100f6caa32239849947fbf
+PKG_DESCR:=		elf library
+PKG_SECTION:=		libs
 PKG_SITES:=		http://www.mr511.de/software/
 
 include ${TOPDIR}/mk/package.mk

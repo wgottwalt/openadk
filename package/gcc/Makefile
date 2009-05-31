@@ -20,6 +20,7 @@ CONFIGURE_STYLE=	gnu
 ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
 CONFIGURE_ARGS+=	--with-abi=64
 endif
+CONFIGURE_ENV+=		ac_cv_func_fputc_unlocked=no
 CONFIGURE_ARGS+=	--enable-languages=c \
 			--libexecdir=/usr/lib \
 			--host=$(REAL_GNU_TARGET_NAME) \

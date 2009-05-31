@@ -11,7 +11,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		text
-PKG_DEPENDS:=		glib2 libncurses
+PKG_DEPENDS:=		glib libncurses
 PKG_URL:=		http://www.irssi.org
 PKG_SITES:=		http://www.irssi.org/files/
 

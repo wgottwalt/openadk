@@ -24,7 +24,7 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_CHILLISPOT}/usr/sbin
+	${INSTALL_DIR} ${IDIR_CHILLISPOT}/usr/sbin ${IDIR_CHILLISPOT}/etc
 	${INSTALL_BIN} ./files/chilli.conf \
 		${IDIR_CHILLISPOT}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/chilli ${IDIR_CHILLISPOT}/usr/sbin/

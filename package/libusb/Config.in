@@ -2,6 +2,7 @@ config ADK_PACKAGE_LIBUSB
 	prompt "libusb............................ A library for accessing Linux USB devices"
 	tristate
 	default n
+	select ADK_PACKAGE_LIBUSB_COMPAT
 	help
 	  A library for accessing Linux USB devices
 	  

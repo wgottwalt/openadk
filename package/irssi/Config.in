@@ -2,7 +2,7 @@ config ADK_PACKAGE_IRSSI
 	prompt "irssi............................. console irc client"
 	tristate
 	default n
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBNCURSES
 	help
 	  IRC client for the text console

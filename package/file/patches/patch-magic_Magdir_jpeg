@@ -1,0 +1,15 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- file-5.03.orig/magic/Magdir/jpeg	2008-10-20 19:20:03.000000000 +0200
++++ file-5.03/magic/Magdir/jpeg	2009-05-31 04:10:19.000000000 +0200
+@@ -8,11 +8,6 @@
+ #
+ # both of which turn into "JPEG image data" here.
+ #
+-0	beshort		0xffd8		JPEG image data
+-!:mime	image/jpeg
+-!:apple	8BIMJPEG
+-!:strength +1
+->6	string		JFIF		\b, JFIF standard
+ # The following added by Erik Rossen <rossen@freesurf.ch> 1999-09-06
+ # in a vain attempt to add image size reporting for JFIF.  Note that these
+ # tests are not fool-proof since some perfectly valid JPEGs are currently

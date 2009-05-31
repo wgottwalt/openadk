@@ -19,6 +19,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_COMPILE_RTORRENT_WITH_UCLIBCXX),y)
+CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
+			-I${STAGING_DIR}/usr/include/uClibc++" \
+			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
+endif
+
 CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ARGS+=	--enable-aligned
 BUILD_STYLE:=		auto

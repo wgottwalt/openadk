@@ -46,9 +46,6 @@ post-install:
 	${CP} ${WRKINST}/usr/share/build/* ${STAGING_DIR}/usr/share/build/
 	# we need to patch paths to get apr-util compiling
 	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," ${WRKINST}/usr/bin/apr-config
-	$(SED) "s,\(^libdir=\"\)\(.*\),\1${STAGING_DIR}\2," ${WRKINST}/usr/bin/apr-config
 	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," ${WRKINST}/usr/bin/apr-config
-	$(SED) "s,\(^includedir=\"\)\(.*\),\1${STAGING_DIR}\2," ${WRKINST}/usr/bin/apr-config
-	$(SED) "s,\(^bindir=\"\)\(.*\),\1${STAGING_DIR}\2," ${WRKINST}/usr/bin/apr-config
 
 include ${TOPDIR}/mk/pkg-bottom.mk
