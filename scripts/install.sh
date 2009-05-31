@@ -5,6 +5,56 @@ if [ $(id -u) -ne 0 ];then
 	exit 1
 fi
 
+printf "Checking if grub is installed"
+grub=$(which grub)
+
+if [ ! -z $grub -a -x $grub ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
+printf "Checking if sfdisk is installed"
+sfdisk=$(which sfdisk)
+
+if [ ! -z $sfdisk -a -x $sfdisk ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
+printf "Checking if parted is installed"
+parted=$(which parted)
+
+if [ ! -z $parted -a -x $parted ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
+printf "Checking if mke2fs is installed"
+mke2fs=$(which mke2fs)
+
+if [ ! -z $mke2fs -a -x $mke2fs ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
+printf "Checking if tune2fs is installed"
+tune2fs=$(which tune2fs)
+
+if [ ! -z $tune2fs -a -x $tune2fs ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
 cfgfs=1
 while getopts "n" option
 do
@@ -20,58 +70,9 @@ do
 done
 shift $(($OPTIND - 1))
 
-printf "Checking if grub is installed"
-grub=$(which grub)
-
-if [ -x $grub ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if sfdisk is installed"
-sfdisk=$(which sfdisk)
-
-if [ -x $sfdisk ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if parted is installed"
-parted=$(which parted)
-
-if [ -x $parted ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if mke2fs is installed"
-mke2fs=$(which mke2fs)
-
-if [ -x $mke2fs ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if tune2fs is installed"
-tune2fs=$(which tune2fs)
-
-if [ -x $tune2fs ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
 
 if [ -z $1 ];then
-	printf "Please give your compact flash device node as first parameter\n"
+	printf "Please give your compact flash or USB device as first parameter\n"
 	exit 1
 else
 	if [ -z $2 ];then
@@ -85,7 +86,7 @@ else
 		exit 1
 	fi
 	if [ -b $1 ];then
-		printf "Using $1 as CF disk for installation\n"
+		printf "Using $1 as CF/USB disk for installation\n"
 		printf "This will destroy all data on $1, are you sure?\n"
 		printf "Type "y" to continue\n"
 		read y
@@ -119,6 +120,7 @@ if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
 	read y
 	if [ $y = "y" ];then
 		printf "Wiping existing partitions\n"
+		dd if=/dev/zero of=$1 bs=512 count=1
 	else
 		printf "Exiting.\n"
 		exit 1
@@ -138,13 +140,14 @@ EOF
 $mke2fs ${1}1
 
 else
+$parted -s $1 mklabel msdos
+sleep 2
 declare -i maxsize
 maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 let rootsize=$maxsize-1
 
-$parted -s $1 mklabel msdos
 $parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
-$parted -s $1 unit cyl mkpart primary ext2 $rootsize $maxsize
+$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 $parted -s $1 set 1 boot on
 fi
 
