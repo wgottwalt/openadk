@@ -5,6 +5,7 @@ config ADK_COMPILE_MYSQL
 	depends ADK_CXX
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_ZLIB
+	select ADK_PACKAGE_LIBREADLINE
 
 config ADK_PACKAGE_LIBMYSQLCLIENT
 	prompt "libmysqlclient.................... MySQL client library"

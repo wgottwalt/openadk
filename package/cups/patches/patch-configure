@@ -1,7 +1,17 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- cups-1.3.10.orig/configure	2009-04-16 22:02:06.000000000 +0200
-+++ cups-1.3.10/configure	2009-05-09 22:44:29.000000000 +0200
-@@ -9254,7 +9254,7 @@ if test "$libdir" = "\${exec_prefix}/lib
++++ cups-1.3.10/configure	2009-05-31 19:41:18.000000000 +0200
+@@ -7460,9 +7460,6 @@ done
+ 
+ 
+ case $uname in
+-        Darwin* | *BSD*)
+-                ARFLAGS="-rcv"
+-                ;;
+         *)
+                 ARFLAGS="crvs"
+                 ;;
+@@ -9254,7 +9251,7 @@ if test "$libdir" = "\${exec_prefix}/lib
  			;;
  		Linux*)
  			if test -d /usr/lib64; then
@@ -10,3 +20,15 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  			fi
  			;;
  		HP-UX*)
+@@ -9587,11 +9584,6 @@ _ACEOF
+ 
+ # Server executables...
+ case "$uname" in
+-	*BSD* | Darwin*)
+-		# *BSD and Darwin (MacOS X)
+-		INSTALL_SYSV=""
+-		CUPS_SERVERBIN="$exec_prefix/libexec/cups"
+-		;;
+ 	*)
+ 		# All others
+ 		INSTALL_SYSV="install-sysv"

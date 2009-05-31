@@ -24,9 +24,9 @@ $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
-			OPTIM=''
-CONFIGURE_ARGS+=	--with-cups-user=root \
-			--with-cups-group=root \
+			OPTIM='-fPIC'
+CONFIGURE_ARGS+=	--with-cups-user=0 \
+			--with-cups-group=0 \
 			--disable-ldap \
 			--disable-gssapi \
 			--disable-pam \
@@ -45,7 +45,7 @@ CONFIGURE_ARGS+=	--with-cups-user=root \
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
-XAKE_FLAGS+=		OPTIM=''
+XAKE_FLAGS+=		OPTIM='-fPIC'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/doc/cups
