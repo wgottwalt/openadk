@@ -26,7 +26,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
-	$(CP) ./files/* $(IDIR_BASE_FILES)
+	$(CP) ./extra/* $(IDIR_BASE_FILES)
 	$(CP) $(TOPDIR)/target/$(DEVICE)/files/* $(IDIR_BASE_FILES)
 	$(SED) 's,@TARGET@,$(DEVICE),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
