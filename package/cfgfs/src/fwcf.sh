@@ -47,7 +47,7 @@ cd /
 what='Configuration Filesystem Utility (cfgfs), Version 1.06'
 
 who=$(id -u)
-if [ $who -ne 0 ];
+if [ $who -ne 0 ]; then
 	echo 'Exit. Configuration Filesystem Utility must be run as root.'
 	exit 1
 fi
@@ -115,11 +115,10 @@ EOF
 	exit 1 ;;
 esac
 
-# find backend device
-uname=$(uname -m)          
-if [[ "$uname" = "i586" ]];then                      
-        part=/dev/sda2                               
-else
+# find backend device, first try to find partition with ID 88
+part=$(fdisk -l|awk '$5 == 88 { print $1 }')
+if [ -z $part ]; then
+	# otherwise search for MTD device with name cfgfs
 	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
 fi
 

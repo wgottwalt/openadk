@@ -149,6 +149,7 @@ let rootsize=$maxsize-1
 $parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
 $parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 $parted -s $1 set 1 boot on
+$sfdisk --change-id $1 2 88
 fi
 
 if [ $? -eq 0 ];then
