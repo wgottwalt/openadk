@@ -2,6 +2,8 @@ config ADK_PACKAGE_MPLAYER
 	prompt "mplayer........................... popular movie player"
 	tristate
 	default n
+	select ADK_PACKAGE_LIBJPEG
+	select ADK_PACKAGE_LIBPNG
 	select ADK_PACKAGE_LIBPTHREAD
 	select ADK_PACKAGE_LIBOGG
 	select ADK_PACKAGE_LIBVORBIS
