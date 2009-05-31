@@ -475,6 +475,8 @@ source "package/libXpm/Config.in"
 source "package/libXt/Config.in"
 source "package/pixman/Config.in"
 source "package/xf86dga/Config.in"
+source "package/xkbcomp/Config.in"
+source "package/xkeyboard-config/Config.in"
 endmenu
 endmenu
 

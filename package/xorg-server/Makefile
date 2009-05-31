@@ -11,6 +11,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7aca5d0dc8b824d3dff6140e381e03df
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
+PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		${MASTER_SITE_XORG}
 
@@ -32,6 +33,27 @@ CONFIGURE_ARGS+=	--disable-xinerama \
 			--disable-afb \
 			--disable-xephyr \
 			--disable-xsdl \
+			--enable-freetype \
+			--disable-kdrive-vesa \
+			--disable-xfbdev \
+			--disable-xfake \
+			--disable-xsdl \
+			--disable-afb \
+			--disable-cfb \
+			--disable-mfb \
+			--disable-xnest \
+			--disable-xvfb \
+			--disable-xf86bigfont \
+			--disable-glx \
+			--disable-aiglx \
+			--enable-xv \
+			--disable-xvmc \
+			--disable-dri \
+			--disable-xace \
+			--disable-xephyr \
+			--with-xkb-output=/tmp \
+			--with-os-vendor=OpenADK \
+			--with-vendor-web="http://www.openadk.org" \
 			--enable-builtin-fonts
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
