@@ -33,36 +33,36 @@ all: install
 # 8) remove the temporary .kernelconfig.tmp
 ###
 config-prepare: $(TOPDIR)/.config
-	sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
+	@sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
 	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modules
-	sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
+	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
-	sed -n '/^ADK_MOD_KERNEL/s//CONFIG/p' ${TOPDIR}/.config | \
+	@sed -n '/^ADK_MOD_KERNEL/s//CONFIG/p' ${TOPDIR}/.config | \
 	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modkernel
-	sed -n '/^# ADK_KERNEL/s//# CONFIG/p' ${TOPDIR}/.config \
+	@sed -n '/^# ADK_KERNEL/s//# CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 # if native build, first try /proc/config.gz
 ifeq ($(ADK_NATIVE),y)
-	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board; fi
+	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board; fi
 else
-	cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board
+	@cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board
 endif
-	(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
+	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \
 		sed -i -e "/^# $$symbol/d" ${BUILD_DIR}/.kernelconfig.board; \
 	done;)
-	sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
-	sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
-	cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.nokernel \
+	@cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.nokernel \
 	    .kernelconfig.kernel .kernelconfig.modkernel .kernelconfig.modules \
 	    >.kernelconfig.tmp
-	cd ${BUILD_DIR} && cmp -s .kernelconfig.tmp .kernelconfig || \
+	@cd ${BUILD_DIR} && cmp -s .kernelconfig.tmp .kernelconfig || \
 	    cp .kernelconfig.tmp .kernelconfig
-	-rm -f ${BUILD_DIR}/.kernelconfig.tmp
+	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 
 prepare: $(DEVICE)-prepare
 compile: $(DEVICE)-compile

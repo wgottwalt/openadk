@@ -6,9 +6,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		elinks
-PKG_VERSION:=		0.11.3
+PKG_VERSION:=		0.11.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		11547e054d7afb1f5ac9e9f65728cc6a
+PKG_MD5SUM:=		fd85c1f38d4e2da8e59b60886a30a843
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		text
 PKG_DEPENDS:=		libopenssl

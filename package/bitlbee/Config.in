@@ -3,7 +3,7 @@ config ADK_PACKAGE_BITLBEE
 	tristate
 	default n
 	select ADK_PACKAGE_LIBOPENSSL
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBICONV
 	help
 

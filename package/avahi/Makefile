@@ -21,17 +21,17 @@ PKG_SECTION_2:=		libs
 
 include ${TOPDIR}/mk/package.mk
 
+TLDFLAGS+=		-lintl
 $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--disable-glib \
+CONFIGURE_ARGS+=	--enable-glib \
 			--disable-qt3 \
 			--disable-qt4 \
 			--disable-gtk \
 			--disable-dbus \
-			--enable-expat \
 			--enable-libdaemon \
 			--disable-python \
 			--disable-pygtk \
@@ -76,7 +76,5 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-common.so.* ${IDIR_LIBAVAHI}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/libavahi-core.so.* ${IDIR_LIBAVAHI}/usr/lib/
-	${SED} 's,-I$$(includedir),,g' ${WRKINST}/usr/lib/pkgconfig/avahi-core.pc
-	${SED} 's,-L$$(libdir),,g' ${WRKINST}/usr/lib/pkgconfig/avahi-core.pc
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -11,7 +11,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		64177135f64aca555887ba378de8cdfb
 PKG_DESCR:=		A music player for flac, mp3 and ogg
 PKG_SECTION:=		net
-PKG_DEPENDS:=		alsa-lib glib2 libcurl
+PKG_DEPENDS:=		alsa-lib glib libcurl
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
 

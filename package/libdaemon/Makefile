@@ -6,11 +6,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libdaemon
-PKG_VERSION:=		0.10
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6812a5e4063b5016f25e9a0cebbd3dd9
+PKG_VERSION:=		0.13
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ae9113fcd825d5a7f07e5ddccb3c3102
 PKG_DESCR:=		A lightweight C library that eases the writing of UNIX daemons
 PKG_SECTION:=		libs
+PKG_URL:=		http://0pointer.de/lennart/projects/libdaemon
 PKG_SITES:=		http://0pointer.de/lennart/projects/libdaemon/
 
 include ${TOPDIR}/mk/package.mk

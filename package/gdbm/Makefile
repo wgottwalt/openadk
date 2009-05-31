@@ -5,7 +5,7 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libgdbm
+PKG_NAME:=		gdbm
 PKG_VERSION:=		1.8.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1d1b1d5c0245b1c00aff92da751e9aa1
@@ -13,9 +13,6 @@ PKG_DESCR:=		disk file format database which stores key/data-pairs in single fil
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/gdbm
 PKG_SITES:=		${MASTER_SITE_GNU:=gdbm/}
-
-DISTFILES:=		gdbm-${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/gdbm-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 

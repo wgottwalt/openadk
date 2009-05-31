@@ -11,18 +11,37 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0831ca06f8906c7898fd67931ab239c7
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libopenssl libstdcxx libsigc++
+PKG_DEPENDS:=		libopenssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
 include ${TOPDIR}/mk/package.mk
 
+ifeq ($(ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX),y)
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+
 $(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq ($(ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX),y)
+CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ -fno-strict-aliasing -fno-inline \
+			-I${STAGING_DIR}/usr/include/uClibc++" \
+			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
+endif
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-aligned
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto confprog
+
+ifeq (${ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+post-configure:
+	${SED} 's#postdeps="-lstdc.*#postdeps=""#' \
+		${WRKBUILD}/libtool
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib

@@ -1,0 +1,12 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- sipsak-0.9.6.orig/acinclude.m4	2006-01-28 22:11:34.000000000 +0100
++++ sipsak-0.9.6/acinclude.m4	2009-05-31 16:36:57.000000000 +0200
+@@ -363,7 +363,7 @@ AC_DEFUN([SIPSAK_GCC_STACK_PROTECT_CC],[
+     AC_MSG_CHECKING([whether ${CC} accepts -fstack-protector])
+     ssp_old_cflags="$CFLAGS"
+     CFLAGS="$CFLAGS -fstack-protector"
+-    AC_TRY_COMPILE(,,, ssp_cc=no)
++    AC_TRY_LINK(,,, ssp_cc=no)
+     echo $ssp_cc
+     if test "X$ssp_cc" = "Xno"; then
+       CFLAGS="$ssp_old_cflags"

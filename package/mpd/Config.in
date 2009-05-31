@@ -5,7 +5,7 @@ config ADK_PACKAGE_MPD
 	tristate
 	default n
 	select ADK_PACKAGE_ALSA_LIB
-	select ADK_PACKAGE_GLIB2
+	select ADK_PACKAGE_GLIB
 	select ADK_PACKAGE_LIBCURL
 	help
 	  MPD is a music player supporting flac, mp3 and ogg files.

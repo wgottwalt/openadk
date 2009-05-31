@@ -6,50 +6,37 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		1.2.10
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6fe30dad87c77b91b632def29dd69ef9
-PKG_SITES:=		ftp://ftp.gtk.org/pub/gtk/v1.2/ \
-			http://ftp.gwdg.de/pub/misc/grafik/gimp/gtk/v1.2/ \
-			http://ftp.esat.net/mirrors/ftp.gimp.org/pub/gtk/v1.2/ \
-			http://www.mirrorservice.org/sites/ftp.gimp.org/pub/gtk/v1.2/
+PKG_VERSION:=		2.18.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d53836f7fdd9970d03e255e9d712bd83
+PKG_DESCR:=		low-level core library that forms the basis of GTK+
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		gettext libiconv libpthread
+PKG_URL:=		http://www.gtk.org/
+PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.18/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GLIB1,glib1,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCPPFLAGS+=		-I'${STAGING_DIR}/usr/include'
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		glib_cv_sizeof_gmutex=24 \
-			ac_cv_sizeof_char=1 \
-			ac_cv_sizeof_short=2 \
-			ac_cv_sizeof_int=4 \
-			ac_cv_sizeof_long=4 \
-			ac_cv_sizeof_long_long=8 \
-			ac_cv_sizeof_void_p=4 \
-			glib_cv_prog_cc_ansi_proto="no" \
-			glib_cv_has__inline="yes" \
-			glib_cv_has__inline__="yes" \
-			glib_cv_hasinline="yes" \
-			glib_cv_sane_realloc="yes" \
-			glib_cv_va_copy="no" \
-			glib_cv___va_copy="yes" \
-			glib_cv_va_val_copy="yes" \
-			glib_cv_rtldglobal_broken="no" \
-			glib_cv_uscore="no" \
-			ac_cv_func_getpwuid_r="yes" \
-			glib_cv_func_pthread_mutex_trylock_posix="yes" \
-			glib_cv_func_pthread_cond_timedwait_posix="yes" \
-			glib_cv_sizeof_gmutex="24" \
-			glib_cv_byte_contents_gmutex="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+CONFIGURE_ARGS+=	--enable-debug=no \
+			--disable-mem-pools \
+			--disable-rebuilds \
+			--with-libiconv=gnu \
+			--with-threads=posix
+CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
+			glib_cv_stack_grows=no \
+			glib_cv_have_strlcpy=no \
+			glib_cv_uscore=no \
+			ac_cv_func_posix_getpwuid_r=yes \
+			ac_cv_func_posix_getgrgid_r=yes
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto confprog
 
 post-install:
-	${INSTALL_DIR} ${IDIR_GLIB1}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libg{lib,module,thread}-1.2.so.* \
-		${IDIR_GLIB1}/usr/lib/
-	# needed in staging_dir
-	${INSTALL_DIR} ${WRKINST}/usr/include/glib-1.2
-	${CP} ${WRKBUILD}/glibconfig-sysdefs.h ${WRKINST}/usr/include/glib-1.2/
+	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/lib*.so.* ${IDIR_GLIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

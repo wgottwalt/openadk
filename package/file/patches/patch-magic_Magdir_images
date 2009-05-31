@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- file-5.03.orig/magic/Magdir/images	2009-02-02 16:55:49.000000000 +0100
++++ file-5.03/magic/Magdir/images	2009-05-31 03:58:58.000000000 +0200
+@@ -110,7 +110,6 @@
+ # GIF
+ 0	string		GIF8		GIF image data
+ !:mime	image/gif
+-!:apple	8BIMGIFf
+ >4	string		7a		\b, version 8%s,
+ >4	string		9a		\b, version 8%s,
+ >6	leshort		>0		%hd x

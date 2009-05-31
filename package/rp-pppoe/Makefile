@@ -15,7 +15,7 @@ PKG_DEPENDS:=		ppp
 PKG_URL:=		http://www.roaringpenguin.com
 PKG_SITES:=		http://www.roaringpenguin.com/files/download/
 
-WRKSRC:=		${WRKDIST}/src
+WRKSRC=			${WRKDIST}/src
 
 include ${TOPDIR}/mk/package.mk
 

@@ -11,7 +11,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		db8a983a60577a6b4886db96d6def011
 PKG_DESCR:=		The GNU Krell Monitors Server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		glib2 libpthread
+PKG_DEPENDS:=		glib libpthread
 PKG_URL:=		http://members.dslextreme.com/users/billw/gkrellm/gkrellm.html
 PKG_SITES:=		http://members.dslextreme.com/users/billw/gkrellm/
 

@@ -8,9 +8,9 @@ apr-util-compile: expat-compile apr-compile
 arpd-compile: libpcap-compile libdnet-compile libevent-compile
 arpwatch-compile: libpcap-compile
 atftp-compile: readline-compile ncurses-compile
-avahi-compile: libdaemon-compile expat-compile libgdbm-compile
+avahi-compile: libdaemon-compile expat-compile gdbm-compile glib-compile
 bind-compile: openssl-compile
-bitlbee-compile: libiconv-compile openssl-compile glib2-compile
+bitlbee-compile: libiconv-compile openssl-compile glib-compile
 bluez-compile: libusb-compile dbus-compile
 bogofilter-compile: libiconv-compile libdb-compile
 ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
@@ -38,11 +38,11 @@ dbus-compile: expat-compile
 deco-compile: ncurses-compile
 dhcpv6-compile: libnl-compile ncurses-compile
 digitemp-compile: libusb-compile
-dsniff-compile: libnids-compile openssl-compile libgdbm-compile
+dsniff-compile: libnids-compile openssl-compile gdbm-compile
 elinks-compile: openssl-compile
 esound-compile: libaudiofile-compile
 ettercap-compile: pcap-compile libnet-compile
-exmap-compile: glib2-compile readline-compile
+exmap-compile: glib-compile readline-compile
 fprobe-compile: libpcap-compile
 freetype-compile: zlib-compile
 gatling-compile: libowfat-compile libiconv-compile
@@ -50,7 +50,7 @@ gcc-compile: gmp-compile mpfr-compile
 gdb-compile: ncurses-compile readline-compile
 gettext-compile: libiconv-compile libpthread-compile
 gkrellmd-compile: glib-compile
-glib2-compile: gettext-compile libiconv-compile
+glib-compile: gettext-compile libiconv-compile
 gmediaserver-compile: id3lib-compile libupnp-compile
 gnutls-compile: libgcrypt-compile liblzo-compile libtasn1-compile opencdk-compile zlib-compile
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
@@ -77,7 +77,7 @@ iperf-compile: uclibc++-compile
 endif
 ipsec-tools-compile: openssl-compile
 iptraf-compile: ncurses-compile
-irssi-compile: glib2-compile ncurses-compile
+irssi-compile: glib-compile ncurses-compile
 iw-compile: libnl-compile
 jamvm-compile: libffi-compile zlib-compile
 ifeq (${ADK_COMPILE_KISMET_WITH_UCLIBCXX},y)
@@ -92,10 +92,11 @@ libgcrypt-compile: libgpg-error-compile
 libgd-compile: libpng-compile jpeg-compile
 libid3tag-compile: zlib-compile
 libnet-compile: libpcap-compile
-libnids-compile: libnet-compile
+libnids-compile: libnet-compile libpcap-compile
 libp11-compile: openssl-compile libtool-compile
 libpng-compile: zlib-compile
 libshout-compile: libvorbis-compile
+libusb-compile: libusb-compat-compile
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
 libfontenc-compile: xproto-compile zlib-compile
@@ -130,7 +131,7 @@ monit-compile: openssl-compile
 ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
 mrd6-compile: uclibc++-compile
 endif
-mt-daapd-compile: libgdbm-compile libid3tag-compile
+mt-daapd-compile: gdbm-compile libid3tag-compile
 mtr-compile: ncurses-compile
 mutt-compile: ncurses-compile openssl-compile
 mysql-compile: ncurses-compile zlib-compile readline-compile
@@ -219,7 +220,7 @@ vim-compile: ncurses-compile
 vnc-reflector-compile: jpeg-compile zlib-compile
 vpnc-compile: libgcrypt-compile libgpg-error-compile
 vtun-compile: zlib-compile openssl-compile liblzo-compile
-wdfs-compile: openssl-compile fuse-compile neon-compile glib2-compile
+wdfs-compile: openssl-compile fuse-compile neon-compile glib-compile
 weechat-compile: ncurses-compile gnutls-compile lua-compile libiconv-compile
 wknock-compile: libpcap-compile
 ifeq (${ADK_COMPILE_WPA_SUPPLICANT_WITH_OPENSSL},y)
@@ -280,7 +281,7 @@ endif
 
 mplayer-compile: alsa-lib-compile libmad-compile libvorbis-compile faad2-compile ncurses-compile zlib-compile
 
-mpd-compile: alsa-lib-compile glib2-compile curl-compile
+mpd-compile: alsa-lib-compile glib-compile curl-compile
 ifneq ($(ADK_PACKAGE_MPD_MP3),)
 mpd-compile: libid3tag-compile libmad-compile
 endif

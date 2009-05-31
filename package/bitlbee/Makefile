@@ -11,7 +11,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2b1674d98804970809de3da3edf0bed2
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		net
-PKG_DEPENDS:=		glib2 libopenssl libiconv
+PKG_DEPENDS:=		glib libopenssl libiconv
 PKG_URL:=		http://www.bitlbee.org
 PKG_SITES:=		http://get.bitlbee.org/src/ \
 			http://get.bitlbee.be/src/ \

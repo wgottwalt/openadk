@@ -54,10 +54,9 @@ pre-build:
 
 post-install:
 	# bind server
-	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin
+	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin ${IDIR_BIND_SERVER}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/named ${IDIR_BIND_SERVER}/usr/sbin/
 	${CP} ./files/bind ${IDIR_BIND_SERVER}/etc
-	find ${IDIR_BIND_SERVER}/etc/bind -name ".svn" | xargs rm -rf
 	# nsupdate
 	${INSTALL_DIR} ${IDIR_BIND_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/nsupdate ${IDIR_BIND_CLIENT}/usr/bin/
