@@ -64,7 +64,6 @@ package-$(ADK_PACKAGE_DECO) += deco
 package-$(ADK_PACKAGE_DEVICE_MAPPER) += device-mapper
 package-$(ADK_COMPILE_DHCP) += dhcp
 package-$(ADK_PACKAGE_DHCP_FORWARDER) += dhcp-forwarder
-package-$(ADK_COMPILE_DHCPV6) += dhcpv6
 package-$(ADK_PACKAGE_DIGITEMP) += digitemp
 package-$(ADK_PACKAGE_DNSMASQ) += dnsmasq
 package-$(ADK_PACKAGE_DOSFSTOOLS) += dosfstools
