@@ -291,7 +291,8 @@ source "package/rtorrent/Config.in"
 endmenu
 
 menu "PPP / PPTP / RADIUS"
-source "package/freeradius/Config.in"
+source "package/freeradius-client/Config.in"
+source "package/freeradius-server/Config.in"
 source "package/ppp/Config.in"
 source "package/pptp/Config.in"
 source "package/pptpd/Config.in"
@@ -425,7 +426,6 @@ source "package/popt/Config.in"  # libpopt
 source "package/postgresql/Config.in"  # libpq
 source "package/libpthread/Config.in"
 source "package/libthread_db/Config.in"
-source "package/radiusclient-ng/Config.in" #libradiusclient-ng
 source "package/readline/Config.in"  # libreadline
 source "package/cyrus-sasl/Config.in"  # libsasl2
 source "package/speex/Config.in" # libspeex

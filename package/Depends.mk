@@ -259,15 +259,16 @@ asterisk-compile: sqlite-compile
 endif
 
 
-freeradius-compile: libtool-compile openssl-compile
+freeradius-client-compile: openssl-compile
+freeradius-server-compile: libtool-compile openssl-compile
 ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_LDAP),)
-freeradius-compile: openldap-compile
+freeradius-server-compile: openldap-compile
 endif
 ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL),)
-freeradius-compile: mysql-compile
+freeradius-server-compile: mysql-compile
 endif
 ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL),)
-freeradius-compile: postgresql-compile
+freeradius-server-compile: postgresql-compile
 endif
 
 hostapd-compile: libnl-compile openssl-compile
