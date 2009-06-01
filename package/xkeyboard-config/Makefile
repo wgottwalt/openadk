@@ -24,5 +24,8 @@ INSTALL_STYLE=		auto
 post-install:
 	${INSTALL_DIR} ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
 	${CP} ${WRKINST}/usr/share/X11/xkb/* ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
+	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.lst 
+	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.xml
+	rm -rf ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/symbols/sun_vndr
 
 include ${TOPDIR}/mk/pkg-bottom.mk
