@@ -452,7 +452,7 @@ source "package/zlib/Config.in"
 endmenu
 
 menu "X"
-depends ADK_XORG
+depends ADK_X11
 source "package/xorg-server/Config.in"
 source "package/xf86-video-geode/Config.in"
 
@@ -460,6 +460,7 @@ menu "X Libraries"
 source "package/libICE/Config.in"
 source "package/libSM/Config.in"
 source "package/libX11/Config.in"
+source "package/libXv/Config.in"
 source "package/libXdmcp/Config.in"
 source "package/libXext/Config.in"
 source "package/libXfont/Config.in"
@@ -471,6 +472,7 @@ source "package/libXaw/Config.in"
 source "package/libXmu/Config.in"
 source "package/libXpm/Config.in"
 source "package/libXt/Config.in"
+source "package/libXxf86dga/Config.in"
 source "package/pixman/Config.in"
 source "package/xf86dga/Config.in"
 source "package/xkbcomp/Config.in"

@@ -17,44 +17,46 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--disable-xinerama \
-			--disable-aiglx \
-			--disable-dga \
-			--disable-dri \
-			--disable-glx \
-			--disable-xnest \
-			--disable-config-hal \
-			--disable-xvfb \
-			--disable-mfb \
-			--disable-cfb \
-			--disable-afb \
-			--disable-xephyr \
-			--disable-xsdl \
-			--enable-freetype \
-			--disable-kdrive-vesa \
-			--disable-xfbdev \
-			--disable-xfake \
-			--disable-xsdl \
-			--disable-afb \
-			--disable-cfb \
-			--disable-mfb \
-			--disable-xnest \
-			--disable-xvfb \
-			--disable-xf86bigfont \
-			--disable-glx \
-			--disable-aiglx \
+CONFIGURE_ARGS+=	\
+			--enable-builtin-fonts \
+			--enable-dga \
+			--enable-xorg \
 			--enable-xv \
-			--disable-xvmc \
+			--disable-afb \
+			--disable-aiglx \
+			--disable-cfb \
+			--disable-config-hal \
+			--disable-cup \
+			--disable-evi \
+			--disable-dpms \
 			--disable-dri \
+			--disable-dri2 \
+			--disable-freetype \
+			--disable-glx \
+			--disable-kdrive-vesa \
+			--disable-mfb \
 			--disable-xace \
 			--disable-xephyr \
+			--disable-xevie \
+			--disable-xf86bigfont \
+			--disable-xf86misc \
+			--disable-xf86vidmode \
+			--disable-xfake \
+			--disable-xfbdev \
+			--disable-xinerama \
+			--disable-xnest \
+			--disable-xprint \
+			--disable-xsdl \
+			--disable-xselinux \
+			--disable-xcsecurity \
+			--disable-xvfb \
+			--disable-xvmc \
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
-			--with-vendor-web="http://www.openadk.org" \
-			--enable-builtin-fonts
+			--with-vendor-web="http://www.openadk.org"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 

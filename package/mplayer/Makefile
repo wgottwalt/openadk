@@ -25,7 +25,7 @@ $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
-ifeq (${ADK_X11},y)
+ifeq ($(ADK_X11),y)
 CONFIGURE_ARG:=		--enable-x11
 else
 CONFIGURE_ARG:=		--disable-x11
@@ -83,7 +83,7 @@ pre-configure:
 		--disable-ftp \
 		--disable-v4l2 \
 		--disable-ivtv \
-		--enable-vidix-internal \
+		--disable-vidix-internal \
 		--disable-dvdread-internal \
 		--disable-libdvdcss-internal \
 		--disable-freetype \
