@@ -1,5 +1,3 @@
-# $Id: strip-script.sh 30 2008-09-04 13:31:09Z wbx $
-#-
 # Copyright (c) 2007
 #	Thorsten Glaser <tg@mirbsd.de>
 #
@@ -26,7 +24,6 @@
 # of dealing in the work, even if advised of the possibility of such
 # damage or existence of a defect, except proven that it results out
 # of said person's immediate fault when using the work as intended.
-#-
 # Shell script to strip down a shell script (filter).
 
 shopt -s extglob

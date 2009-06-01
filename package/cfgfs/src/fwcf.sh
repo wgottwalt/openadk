@@ -1,5 +1,4 @@
 #!/bin/sh
-#-
 # Copyright (c) 2006, 2007
 #	Thorsten Glaser <tg@mirbsd.de>
 # Copyright (c) 2009
@@ -19,7 +18,6 @@
 # of dealing in the work, even if advised of the possibility of such
 # damage or existence of a defect, except proven that it results out
 # of said person's immediate fault when using the work as intended.
-#-
 # Possible return values:
 # 0 - everything ok
 # 1 - syntax error

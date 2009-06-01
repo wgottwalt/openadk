@@ -1,8 +1,5 @@
-# $Id: scan-pkgs.sh 431 2009-05-09 01:01:40Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
-#-
 # Scan host-tool prerequisites of certain packages before building.
 
 if test -z "$BASH_VERSION"; then
@@ -25,7 +22,6 @@ out=0
 
 . $topdir/.config
 
-#-- start adding dependencies here --
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -44,7 +40,6 @@ if [[ -n $ADK_PACKAGE_GLIB2 ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG glib2"
 fi
 
-#-- start checking dependencies here --
 
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
@@ -96,5 +91,4 @@ fi
 #	out=1
 #fi
 
-#-- end of dependency checks
 exit $out

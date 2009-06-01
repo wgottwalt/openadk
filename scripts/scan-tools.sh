@@ -1,5 +1,3 @@
-# $Id: scan-tools.sh 436 2009-05-10 18:15:31Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 

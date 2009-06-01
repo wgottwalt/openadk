@@ -1,5 +1,3 @@
-# $Id: GNUmakefile 255 2008-12-11 16:20:28Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 

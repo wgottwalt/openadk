@@ -1,5 +1,4 @@
 #!/bin/bash
-# $Id$
 
 grubinstall=1
 
