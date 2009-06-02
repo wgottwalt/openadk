@@ -1,5 +1,4 @@
 # $MirOS: contrib/hosted/fwcf/tool/Makefile,v 1.5 2007/02/28 22:59:38 tg Exp $
-#-
 # This file is part of the FreeWRT project. FreeWRT is copyrighted
 # material, please see the LICENCE file in the top-level directory
 # or at http://www.freewrt.org/licence for details.

@@ -1,14 +1,12 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		freeradius
-PKG_VERSION:=		2.1.4
+PKG_NAME:=		freeradius-server
+PKG_VERSION:=		2.1.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		07837a2e78028a0fcf5fc3bb5ca292e9
+PKG_MD5SUM:=		078f7d29b4d2d34f7c992abf772c28a0
 PKG_DESCR:=		a flexible RADIUS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libltdl libopenssl libpthread
@@ -16,9 +14,6 @@ PKG_URL:=		http://www.freeradius.org
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
 			ftp://ftp.uk.freeradius.org/pub/radius/
-
-DISTFILES:=		${PKG_NAME}-server-${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-server-${PKG_VERSION}
 
 PKG_CONFIGURE_OPTIONS:=
 
@@ -69,18 +64,11 @@ ${2}-install:
 	done
 endef
 
-$(eval $(call PKG_template,FREERADIUS,freeradius,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_SERVER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_DEMOCERTS,freeradius-democerts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_CHAP,freeradius-mod-chap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_DETAIL,freeradius-mod-detail,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_DIGEST,freeradius-mod-digest,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP,freeradius-mod-eap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_GTC,freeradius-mod-eap-gtc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_MD5,freeradius-mod-eap-md5,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_MSCHAPV2,freeradius-mod-eap-mschapv2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_PEAP,freeradius-mod-eap-peap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_TLS,freeradius-mod-eap-tls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_EAP_TTLS,freeradius-mod-eap-ttls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_FILES,freeradius-mod-files,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_LDAP,freeradius-mod-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_MSCHAP,freeradius-mod-mschap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -95,13 +83,6 @@ $(eval $(call PKG_template,FREERADIUS_UTILS,freeradius-utils,${PKG_VERSION}-${PK
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_CHAP,rlm_chap,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_DETAIL,rlm_detail,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_DIGEST,rlm_digest,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP,libeap rlm_eap,eap.conf))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_GTC,rlm_eap_gtc,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_MD5,rlm_eap_md5,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_MSCHAPV2,rlm_eap_mschapv2,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_PEAP,rlm_eap_peap,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_TLS,rlm_eap_tls,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_EAP_TTLS,rlm_eap_ttls,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_FILES,rlm_files,acct_users preproxy_users users))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_MSCHAP,rlm_mschap,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_LDAP,rlm_ldap,ldap.attrmap))
@@ -125,6 +106,8 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS} \
 			--without-rlm_checkval \
 			--without-rlm_counter \
 			--without-rlm_dbm \
+			--without-rlm_eap \
+			--without-rlm_eap2 \
 			--without-rlm_eap_sim \
 			--without-rlm_example \
 			--without-rlm_ippool \
@@ -158,27 +141,27 @@ FAKE_FLAGS+=		R="${WRKINST}" \
 			INSTALLSTRIP=""
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} ${IDIR_FREERADIUS}/etc/freeradius
-	${CP} ./files/users ${IDIR_FREERADIUS}/etc/freeradius/
-	${INSTALL_DATA} ./files/radiusd.conf ${IDIR_FREERADIUS}/etc/freeradius
-	${INSTALL_DATA} ./files/clients.conf ${IDIR_FREERADIUS}/etc/freeradius
+	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/etc/freeradius
+	${CP} ./files/users ${IDIR_FREERADIUS_SERVER}/etc/freeradius/
+	${INSTALL_DATA} ./files/radiusd.conf ${IDIR_FREERADIUS_SERVER}/etc/freeradius
+	${INSTALL_DATA} ./files/clients.conf ${IDIR_FREERADIUS_SERVER}/etc/freeradius
 	for f in dictionary; do \
 		${CP} ${WRKINST}/etc/freeradius/$${f} \
-		  ${IDIR_FREERADIUS}/etc/freeradius/ ; \
+		  ${IDIR_FREERADIUS_SERVER}/etc/freeradius/ ; \
 	done
-	${INSTALL_DIR} ${IDIR_FREERADIUS}/usr/share/freeradius
+	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/usr/share/freeradius
 	${CP} ${WRKINST}/usr/share/freeradius/dictionary \
-		${IDIR_FREERADIUS}/usr/share/freeradius/
+		${IDIR_FREERADIUS_SERVER}/usr/share/freeradius/
 	for f in freeradius freeradius.internal rfc2865 rfc2866 rfc2867 rfc2868 rfc2869 rfc3162 rfc3576 rfc3580 rfc4072 rfc4372 rfc4675 rfc4679 rfc5176; do \
 		cp ${WRKINST}/usr/share/freeradius/dictionary.$${f} \
-		    ${IDIR_FREERADIUS}/usr/share/freeradius/ ; \
+		    ${IDIR_FREERADIUS_SERVER}/usr/share/freeradius/ ; \
 	done
-	${INSTALL_DIR} ${IDIR_FREERADIUS}/usr/lib/freeradius
+	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/usr/lib/freeradius
 	${CP} ${WRKINST}/usr/lib/freeradius/libfreeradius-radius{,-*}.so \
-	  ${IDIR_FREERADIUS}/usr/lib
-	${INSTALL_DIR} ${IDIR_FREERADIUS}/usr/sbin
+	  ${IDIR_FREERADIUS_SERVER}/usr/lib
+	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/radiusd \
-	  ${IDIR_FREERADIUS}/usr/sbin/
+	  ${IDIR_FREERADIUS_SERVER}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_FREERADIUS_DEMOCERTS}/etc/freeradius
 	${CP} ${WRKINST}/etc/freeradius/certs \
 	  ${IDIR_FREERADIUS_DEMOCERTS}/etc/freeradius/
@@ -187,9 +170,6 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	rm -rf ${IDIR_FREERADIUS_DEMOCERTS}/etc/freeradius/certs/demoCA/index*
 	rm -rf ${IDIR_FREERADIUS_DEMOCERTS}/etc/freeradius/certs/demoCA/serial*
 	${INSTALL_DIR} ${IDIR_FREERADIUS_UTILS}/usr/bin
-	for f in radclient; do \
-	  ${CP} ${WRKINST}/usr/bin/$${f} \
-	    ${IDIR_FREERADIUS_UTILS}/usr/bin/ ; \
-	done
+	${INSTALL_BIN} ${WRKINST}/usr/bin/radclient ${IDIR_FREERADIUS_UTILS}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

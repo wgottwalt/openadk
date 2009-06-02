@@ -1,5 +1,4 @@
 #!/bin/sh
-# $Id$
 if [ $(id -u) -ne 0 ];then
 	printf "Installation is only possible as root\n"
 	exit 1

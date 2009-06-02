@@ -1,12 +1,15 @@
-- rename radiusclient-ng -> freeradius-client
-- squid package update
-- check mips -mno-abicalls
-- check ac_cv_func_setpgrp_void=no
-- remove $Id$ lines
-- CONFIGURE_FILTER for unusual configure scripts, mplayer f.e.
-- eglibc support
 - rescue initramfs image (more archs, generic kernel config )
   - usb boot via stick
-- kernel 2.6.30
+- combine lvm2 + devicemapper package
+- squid package update
 - bind isc 9.6.1
-- asterisk 1.6
+- eglibc support
+- check mips -mno-abicalls
+- check ac_cv_func_setpgrp_void=no
+- kernel 2.6.30
+- freebsd build
+- win cygwin build
+- netbsd build
+- macos x build
+- openbsd build
+- publish via trac+git

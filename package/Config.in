@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -205,8 +203,6 @@ menu "IPv6"
 depends ADK_IPV6
 source "package/6tunnel/Config.in"
 source "package/aiccu/Config.in"
-# timeb.h / dn_comp issues
-#source "package/dhcpv6/Config.in"
 source "package/miredo/Config.in"
 source "package/mrd6/Config.in"
 source "package/ndisc/Config.in"
@@ -291,7 +287,8 @@ source "package/rtorrent/Config.in"
 endmenu
 
 menu "PPP / PPTP / RADIUS"
-source "package/freeradius/Config.in"
+source "package/freeradius-client/Config.in"
+source "package/freeradius-server/Config.in"
 source "package/ppp/Config.in"
 source "package/pptp/Config.in"
 source "package/pptpd/Config.in"
@@ -425,7 +422,6 @@ source "package/popt/Config.in"  # libpopt
 source "package/postgresql/Config.in"  # libpq
 source "package/libpthread/Config.in"
 source "package/libthread_db/Config.in"
-source "package/radiusclient-ng/Config.in" #libradiusclient-ng
 source "package/readline/Config.in"  # libreadline
 source "package/cyrus-sasl/Config.in"  # libsasl2
 source "package/speex/Config.in" # libspeex
