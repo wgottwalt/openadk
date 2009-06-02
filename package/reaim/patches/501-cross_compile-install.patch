@@ -1,7 +1,7 @@
 diff -urN reaim-0.8/Makefile reaim-0.8/Makefile
---- reaim-0.8/Makefile	2002-11-28 06:10:38.000000000 +0100
-+++ reaim-0.8/Makefile	2005-10-07 12:07:43.000000000 +0200
-@@ -11,7 +11,10 @@
+--- reaim-0.8.orig/Makefile	2002-11-28 06:10:38.000000000 +0100
++++ reaim-0.8/Makefile	2009-06-02 00:30:32.000000000 +0200
+@@ -11,7 +11,10 @@ FW_FLAGS="-DUSE_IPF"
  endif
  
  reaim: reaim.c

@@ -1,7 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- knock-0.5.orig/src/knockd.c	2005-06-27 07:11:34.000000000 +0200
-+++ knock-0.5/src/knockd.c	2009-05-29 17:03:55.776378324 +0200
-@@ -1064,7 +1064,7 @@ char* get_ip(const char* iface, char *bu
++++ knock-0.5/src/knockd.c	2009-06-01 21:43:53.000000000 +0200
+@@ -46,6 +46,7 @@
+ #include <syslog.h>
+ #include <pcap.h>
+ #include <errno.h>
++#include <linux/limits.h>
+ #include "list.h"
+ 
+ static char version[] = "0.5";
+@@ -1064,7 +1065,7 @@ char* get_ip(const char* iface, char *bu
  		return(NULL);
  	}
  

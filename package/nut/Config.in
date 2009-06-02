@@ -78,23 +78,8 @@ config ADK_PACKAGE_NUT_DRIVER_BESTUFERRUPS
 	boolean
 	default n
 	
-config ADK_PACKAGE_NUT_DRIVER_BLAZER
-	prompt "blazer............................ Driver for Blazer UPS models"
-	boolean
-	default n
-	
-config ADK_PACKAGE_NUT_DRIVER_CPSUPS
-	prompt "cpsups............................ Driver for CyberPower text protocol UPS"
-	boolean
-	default n
-	
 config ADK_PACKAGE_NUT_DRIVER_CYBERPOWER
 	prompt "cyberpower........................ Driver for Cyber Power Systems"
-	boolean
-	default n
-	
-config ADK_PACKAGE_NUT_DRIVER_ESUPSSMART
-	prompt "esupssmart........................ Driver for ES UPS"
 	boolean
 	default n
 	
@@ -108,11 +93,6 @@ config ADK_PACKAGE_NUT_DRIVER_EVERUPS
 	boolean
 	default n
 	
-config ADK_PACKAGE_NUT_DRIVER_FENTONUPS
-	prompt "fentonups......................... Driver for Fenton Technologies units"
-	boolean
-	default n
-	
 config ADK_PACKAGE_NUT_DRIVER_GAMATRONIC
 	prompt "gamatronic........................ Driver for Gamatronic UPS"
 	boolean
@@ -120,11 +100,6 @@ config ADK_PACKAGE_NUT_DRIVER_GAMATRONIC
 	
 config ADK_PACKAGE_NUT_DRIVER_GENERICUPS
 	prompt "genericups........................ Driver for generic contact-closure UPS models"
-	boolean
-	default n
-	
-config ADK_PACKAGE_NUT_DRIVER_IPPON
-	prompt "ippon............................. Driver for Ippon UPS devices"
 	boolean
 	default n
 	
@@ -158,11 +133,6 @@ config ADK_PACKAGE_NUT_DRIVER_MGE_UTALK
 	boolean
 	default n
 	
-config ADK_PACKAGE_NUT_DRIVER_MUSTEK
-	prompt "mustek............................ Driver for Mustek UPS models"
-	boolean
-	default n
-	
 config ADK_PACKAGE_NUT_DRIVER_ONEAC
 	prompt "oneac............................. Driver for UPS using the Oneac Advanced Interface"
 	boolean
@@ -185,6 +155,12 @@ config ADK_PACKAGE_NUT_DRIVER_POWERMUST
 	prompt "powermust......................... Driver for Powermust"
 	boolean
 	default n
+
+config ADK_PACKAGE_NUT_DRIVER_POWERPANEL
+	prompt "powerpanel........................ Driver for Powerpanel units"
+	boolean
+	default n
+	help
 	
 config ADK_PACKAGE_NUT_DRIVER_RHINO
 	prompt "rhino............................. Driver for Microsol Rhino UPS"
@@ -206,11 +182,6 @@ config ADK_PACKAGE_NUT_DRIVER_SAFENET
 	  * - Sweex 500/1000
 	  * - others using SafeNet software and serial interface
 
-config ADK_PACKAGE_NUT_DRIVER_SMS
-	prompt "sms............................... Driver for SMS UPS hardware"
-	boolean
-	default n
-	
 config ADK_PACKAGE_NUT_DRIVER_SOLIS
 	prompt "solis............................. Driver for Microsol Solis UPS"
 	boolean

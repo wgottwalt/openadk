@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- mrd6-0.9.6.orig/src/bgp/bgp.cpp	2008-01-25 11:44:46.000000000 +0100
++++ mrd6-0.9.6/src/bgp/bgp.cpp	2009-06-01 22:57:15.000000000 +0200
+@@ -29,6 +29,7 @@
+ 
+ #include <mrdpriv/bgp/def.h>
+ 
++#include <limits.h>
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
+ #include <sys/times.h> /* times */
