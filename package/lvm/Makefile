@@ -8,7 +8,8 @@ PKG_VERSION:=		2.02.45
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		440daa01b8f2ec4fe97b1cc621108220
 PKG_DESCR:=		logical volume management
-PKG_SECTION:=		utils
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		device-mapper
 PKG_URL:=		http://sourceware.org/lvm2/
 PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
@@ -18,18 +19,25 @@ WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},${PKG_SECTION},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
-			--with-lvm1=none \
-			--enable-static_link \
-			--with-kernel-dir=${LINUX_DIR}
+			--with-lvm1=none
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
+	# lvm
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/lvm.static ${IDIR_LVM}/usr/sbin/lvm
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/lvm ${IDIR_LVM}/usr/sbin/lvm
+	# device-mapper
+	${INSTALL_DIR} ${IDIR_DEVICE_MAPPER}/usr/sbin ${IDIR_DEVICE_MAPPER}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libdevmapper.so* \
+		${IDIR_DEVICE_MAPPER}/usr/lib
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/dmsetup \
+		${IDIR_DEVICE_MAPPER}/usr/sbin
+	chmod u+w ${IDIR_DEVICE_MAPPER}/usr/lib/*.so*
 
 include ${TOPDIR}/mk/pkg-bottom.mk

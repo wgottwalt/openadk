@@ -61,7 +61,6 @@ package-$(ADK_PACKAGE_DAMAGEPROTO) += damageproto
 package-$(ADK_PACKAGE_DAVFS2) += davfs2
 package-$(ADK_PACKAGE_DBUS) += dbus
 package-$(ADK_PACKAGE_DECO) += deco
-package-$(ADK_PACKAGE_DEVICE_MAPPER) += device-mapper
 package-$(ADK_COMPILE_DHCP) += dhcp
 package-$(ADK_PACKAGE_DHCP_FORWARDER) += dhcp-forwarder
 package-$(ADK_PACKAGE_DIGITEMP) += digitemp

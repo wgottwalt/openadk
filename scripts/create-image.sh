@@ -76,11 +76,11 @@ fi
 
 
 printf "Generate qemu image\n"
-$qimg create -f raw $1 200M
+$qimg create -f raw $1 300M
 
 printf "Create partition and filesystem\n"
 $parted -s $1 mklabel msdos
-$parted -s $1 mkpart primary ext2 0 200
+$parted -s $1 mkpart primary ext2 0 300
 $parted -s $1 set 1 boot on
 $parted -s $1 mkfs 1 ext2
 
