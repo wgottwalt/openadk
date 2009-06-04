@@ -18,3 +18,4 @@ config/*.o
 make.log
 dl/
 package/*/info.mk
+tools_build/

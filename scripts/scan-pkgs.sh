@@ -30,6 +30,10 @@ if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
 
+if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
+	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
+fi
+
 if [[ -n $ADK_COMPILE_AVAHI ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG avahi"
 fi
@@ -59,6 +63,13 @@ fi
 if [[ -n $NEED_RUBY ]]; then
 	if ! which ruby >/dev/null 2>&1; then
 		echo >&2 You need ruby to build $NEED_RUBY
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_XKBCOMP ]]; then
+	if ! which xkbcomp >/dev/null 2>&1; then
+		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
 		out=1
 	fi
 fi

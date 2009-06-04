@@ -10,7 +10,7 @@ config ADK_KERNEL_IP_FIB_HASH
 
 config ADK_KERNEL_SYN_COOKIES
 	boolean
-	default y
+	default n
 
 config ADK_KERNEL_IP_PNP_BOOTP
 	boolean
