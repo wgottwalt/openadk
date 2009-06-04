@@ -1,8 +1,5 @@
-# $Id: split-cfg.sh 280 2008-12-25 20:54:25Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
-#-
 # Note: this is slow, but it's not the "progress stuff" which cau-
 # ses the slow-down.
 

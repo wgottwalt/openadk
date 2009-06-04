@@ -1,8 +1,5 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
-#-
 # Comments:
 # * pre/do/post-foo are always defined here, but empty. This is so
 #   that we can call it (BSD make has .if target(foo) but GNU not)
@@ -14,7 +11,6 @@
 # * we want to use styles (configure:gnu, build/install:auto), for
 #   making the Makefiles of the packages more clear
 
-#--- configure
 pre-configure:
 do-configure:
 post-configure:
@@ -74,7 +70,6 @@ endif
 	@${MAKE} post-configure $(MAKE_TRACE)
 	touch $@
 
-#--- build
 pre-build:
 do-build:
 post-build:
@@ -95,7 +90,6 @@ endif
 	@env ${MAKE_ENV} ${MAKE} post-build $(MAKE_TRACE)
 	touch $@
 
-#--- fake
 pre-install:
 do-install:
 post-install:
@@ -152,7 +146,6 @@ endif
 	done
 	touch $@
 
-#--- package
 ${_IPKGS_COOKIE}:
 	@clean=0; \
 	for f in ${ALL_IPKGS}; do \
@@ -199,7 +192,6 @@ package: ${ALL_IPKGS}
 	done
 	touch ${_IPKGS_COOKIE}
 
-#--- clean
 clean-targets: clean-dev-generic
 
 clean-dev-generic:

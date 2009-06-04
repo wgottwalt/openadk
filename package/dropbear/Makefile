@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -26,7 +24,7 @@ CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-pam \
 			--enable-openpty \
 			--enable-syslog \
-			--disable-shadow \
+			--enable-shadow \
 			--disable-lastlog \
 			--disable-utmp \
 			--disable-utmpx \

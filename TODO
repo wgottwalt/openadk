@@ -1,16 +1,15 @@
-- rename radiusclient-ng -> freeradius-client
+- rescue initramfs image (more archs, generic kernel config )
+  - usb boot via stick
+- combine lvm2 + devicemapper package
 - squid package update
+- bind isc 9.6.1
+- eglibc support
 - check mips -mno-abicalls
 - check ac_cv_func_setpgrp_void=no
-- remove glib1
-- rename glib2, gdbm, lib?
-- update mt-daapd / rename
-- remove $Id$ lines
-- CONFIGURE_FILTER for unusual configure scripts, mplayer f.e.
-- eglibc support
-- rescue initramfs image (more archs, generic kernel config )
-  - replace ibm x40
-  - usb boot via stick
 - kernel 2.6.30
-- bind isc 9.6.1
-- asterisk 1.6
+- freebsd build
+- win cygwin build
+- netbsd build
+- macos x build
+- openbsd build
+- publish via trac+git

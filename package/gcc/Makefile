@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -43,7 +41,11 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gcc ${IDIR_GCC}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
 	${CP} ${WRKINST}/usr/lib/gcc/* ${IDIR_GCC}/usr/lib/gcc/
+ifeq ($(ADK_TARGET_LIB_GLIBC),y)
+	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GCC}/usr/lib
+else
 	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_GCC}/usr/lib
+endif
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/include-fixed
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 

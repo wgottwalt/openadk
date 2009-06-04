@@ -1,14 +1,12 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.0.3
+PKG_VERSION:=		1.2.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ce328423db5743fe9006d39113b5324d
+PKG_MD5SUM:=		2c267ccd45d0b18db8c9edacad63ec98
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libexpat
@@ -17,7 +15,7 @@ PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DBUS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-tests \

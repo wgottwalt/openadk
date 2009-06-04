@@ -1,9 +1,3 @@
-# $MirOS: contrib/hosted/fwcf/GNUmakefile,v 1.8 2007/03/09 23:09:34 tg Exp $
-#-
-# This file is part of the FreeWRT project. FreeWRT is copyrighted
-# material, please see the LICENCE file in the top-level directory
-# or at http://www.freewrt.org/licence for details.
-
 SRCS+=		tool.c
 SRCS+=		sys_linux.c
 SRCS+=		replace.c

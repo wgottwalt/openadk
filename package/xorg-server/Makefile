@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -11,28 +9,52 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7aca5d0dc8b824d3dff6140e381e03df
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
+PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--disable-xinerama \
-			--disable-aiglx \
-			--disable-dga \
-			--disable-dri \
-			--disable-glx \
-			--disable-xnest \
-			--disable-config-hal \
-			--disable-xvfb \
-			--disable-mfb \
-			--disable-cfb \
+CONFIGURE_ARGS+=	\
+			--enable-builtin-fonts \
+			--enable-dga \
+			--enable-xorg \
+			--enable-xv \
 			--disable-afb \
+			--disable-aiglx \
+			--disable-cfb \
+			--disable-config-hal \
+			--disable-cup \
+			--disable-evi \
+			--disable-dpms \
+			--disable-dri \
+			--disable-dri2 \
+			--disable-freetype \
+			--disable-glx \
+			--disable-kdrive-vesa \
+			--disable-mfb \
+			--disable-xace \
 			--disable-xephyr \
+			--disable-xevie \
+			--disable-xf86bigfont \
+			--disable-xf86misc \
+			--disable-xf86vidmode \
+			--disable-xfake \
+			--disable-xfbdev \
+			--disable-xinerama \
+			--disable-xnest \
+			--disable-xprint \
 			--disable-xsdl \
-			--enable-builtin-fonts
+			--disable-xselinux \
+			--disable-xcsecurity \
+			--disable-xvfb \
+			--disable-xvmc \
+			--with-xkb-output=/tmp \
+			--with-os-vendor=OpenADK \
+			--with-vendor-web="http://www.openadk.org"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 

@@ -1,5 +1,3 @@
-# $Id: Makefile 420 2009-05-08 19:31:15Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 

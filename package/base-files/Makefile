@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -26,7 +24,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 do-install:
-	$(CP) ./files/* $(IDIR_BASE_FILES)
+	$(CP) ./extra/* $(IDIR_BASE_FILES)
 	$(CP) $(TOPDIR)/target/$(DEVICE)/files/* $(IDIR_BASE_FILES)
 	$(SED) 's,@TARGET@,$(DEVICE),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
@@ -52,6 +50,7 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/lib
 	mkdir -p $(IDIR_BASE_FILES)/usr/bin
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
+	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	ln -sf ../tmp/resolv.conf $(IDIR_BASE_FILES)/etc/resolv.conf
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var

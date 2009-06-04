@@ -2,6 +2,10 @@ config ADK_PACKAGE_XORG_SERVER
 	prompt "xorg-server............................... X server"
 	tristate
 	default n
+	select ADK_PACKAGE_XKBCOMP
+	select ADK_PACKAGE_LIBXV
+	select ADK_PACKAGE_XKEYBOARD_CONFIG
+	select ADK_PACKAGE_LIBOPENSSL
 	select ADK_PACKAGE_LIBXKBFILE
 	select ADK_PACKAGE_LIBX11
 	select ADK_PACKAGE_LIBICE
@@ -17,5 +21,6 @@ config ADK_PACKAGE_XORG_SERVER
 	select ADK_PACKAGE_LIBXT
 	select ADK_PACKAGE_PIXMAN
 	select ADK_PACKAGE_XF86DGA
+	select ADK_PACKAGE_LIBXXF86DGA
 	help
          http://www.x.org

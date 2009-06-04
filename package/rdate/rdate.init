@@ -1,15 +1,13 @@
-#!/bin/mksh
-#FWINIT 54
-# It’s important that this is lower than openntpd’s FWinit number
+#!/bin/sh
+#PKG rdate
+#INIT 54
+
 . /etc/rc.conf
+
 case $1 in
 autostart|start|restart)
-	if [[ $(ls -l /usr/sbin/rdate) != *ucb* ]]; then
-		rm -f /usr/sbin/rdate
-		ln -s ../ucb/rdate /usr/sbin/rdate
-	fi
 	[[ $rdate_flags = NO ]] && exit 0
-	/usr/ucb/rdate $rdate_flags
+	rdate $rdate_flags
 	;;
 autostop|stop)
 	;;

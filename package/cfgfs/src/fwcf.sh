@@ -1,9 +1,8 @@
 #!/bin/sh
-#-
 # Copyright (c) 2006, 2007
 #	Thorsten Glaser <tg@mirbsd.de>
 # Copyright (c) 2009
-#	Waldemar Brodkorb <openadk@waldemar-brodkorb.de>
+#	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
 # are retained or reproduced in an accompanying document, permission
@@ -19,7 +18,6 @@
 # of dealing in the work, even if advised of the possibility of such
 # damage or existence of a defect, except proven that it results out
 # of said person's immediate fault when using the work as intended.
-#-
 # Possible return values:
 # 0 - everything ok
 # 1 - syntax error
@@ -44,7 +42,13 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem (cfgfs), Version 1.06'
+what='Configuration Filesystem Utility (cfgfs), Version 1.06'
+
+who=$(id -u)
+if [ $who -ne 0 ]; then
+	echo 'Exit. Configuration Filesystem Utility must be run as root.'
+	exit 1
+fi
 
 usage() {
 	cat >&2 <<EOF
@@ -109,10 +113,10 @@ EOF
 	exit 1 ;;
 esac
 
-uname=$(uname -m)          
-if [[ "$uname" = "i586" ]];then                      
-        part=/dev/sda2                               
-else
+# find backend device, first try to find partition with ID 88
+part=$(fdisk -l|awk '$5 == 88 { print $1 }')
+if [ -z $part ]; then
+	# otherwise search for MTD device with name cfgfs
 	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
 fi
 

@@ -1,7 +1,5 @@
-- lvm package and device-mapper combine and shared
 - use kmod-template for external kernel modules
 - optimize iptables package (libdirs depending on choosen kernel features)
 - checksum for toolchain packages
 - network scripts for wireless client / ap
-- x11 support completion
 - disable platforms zaurus / qemu etrax

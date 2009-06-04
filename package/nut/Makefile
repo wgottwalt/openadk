@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -38,12 +36,12 @@ endef
 
 DRIVERS_y:=
 $(eval $(call DRIVER_template,BESTUPS,bestups))
-$(eval $(call DRIVER_template,FENTONUPS,fentonups))
 $(eval $(call DRIVER_template,APCSMART,apcsmart))
 $(eval $(call DRIVER_template,EVERUPS,everups))
 $(eval $(call DRIVER_template,BELKIN,belkin))
 $(eval $(call DRIVER_template,MASTERGUARD,masterguard))
 $(eval $(call DRIVER_template,POWERCOM,powercom))
+$(eval $(call DRIVER_template,POWERPANEL,powerpanel))
 $(eval $(call DRIVER_template,CYBERPOWER,cyberpower))
 $(eval $(call DRIVER_template,TRIPPLITE,tripplite))
 $(eval $(call DRIVER_template,VICTRONUPS,victronups))
@@ -53,16 +51,10 @@ $(eval $(call DRIVER_template,BESTUFERRUPS,bestuferrups))
 $(eval $(call DRIVER_template,ISBMEX,isbmex))
 $(eval $(call DRIVER_template,ETAPRO,etapro))
 $(eval $(call DRIVER_template,LIEBERT,liebert))
-$(eval $(call DRIVER_template,SMS,sms))
-$(eval $(call DRIVER_template,ESUPSSMART,esupssmart))
 $(eval $(call DRIVER_template,TRIPPLITESU,tripplitesu))
-$(eval $(call DRIVER_template,BLAZER,blazer))
 $(eval $(call DRIVER_template,SAFENET,safenet))
 $(eval $(call DRIVER_template,BELKINUNV,belkinunv))
 $(eval $(call DRIVER_template,ONEAC,oneac))
-$(eval $(call DRIVER_template,IPPON,ippon))
-$(eval $(call DRIVER_template,CPSUPS,cpsups))
-$(eval $(call DRIVER_template,MUSTEK,mustek))
 $(eval $(call DRIVER_template,METASYS,metasys))
 $(eval $(call DRIVER_template,BESTFCOM,bestfcom))
 $(eval $(call DRIVER_template,UPSCODE2,upscode2))
@@ -75,7 +67,7 @@ CONFIG_DRIVERS=$(shell echo ${DRIVERS_y} | tr ' ' ',')
 
 INSTALL_DRIVERS_tmp=${DRIVERS_y}
 ifneq (${ADK_PACKAGE_NUT_USB},)
-INSTALL_DRIVERS_tmp+=	hidups energizerups newhidups tripplite_usb
+INSTALL_DRIVERS_tmp+=	usbhid-ups tripplite_usb
 endif
 ifneq (${ADK_PACKAGE_NUT_SNMP},)
 INSTALL_DRIVERS_tmp+=	snmp-ups
@@ -86,8 +78,8 @@ CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--without-cgi \
 			--with-drivers=${INSTALL_DRIVERS} \
-			--with-group=root \
-			--with-user=root
+			--with-group=0 \
+			--with-user=0
 
 ifneq (${ADK_PACKAGE_NUT_SSL},)
 CONFIGURE_ARGS+=	--with-ssl
@@ -108,7 +100,7 @@ INSTALL_TARGET+=	install-snmp
 endif
 
 post-install:
-	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin
+	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin ${IDIR_NUT}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
 		${IDIR_NUT}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \

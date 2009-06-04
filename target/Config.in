@@ -1,5 +1,3 @@
-# $Id: Config.in 446 2009-05-16 23:47:24Z wbx $
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -109,6 +107,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
@@ -408,10 +407,12 @@ config ADK_IPV6
 	  Enable basic IPv6 support (kmod-ipv6) and
 	  make the IPv6 support options in packages visible.
 
-config ADK_XORG
+config ADK_X11
 	bool "Enable X.org/X11 support"
 	default n
 	help
-	  Enable Xorg/X11 server and applications
+	  Enable Xorg/X11 server and applications in menu.
+	  Try to compile other packages with X11 support. 
+	  (f.e. mplayer)
 
 endmenu

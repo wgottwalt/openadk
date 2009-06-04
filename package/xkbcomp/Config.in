@@ -1,0 +1,6 @@
+config ADK_PACKAGE_XKBCOMP
+	prompt "xkbcomp........................... X11 keyboard compiler"
+	tristate
+	default n
+	help
+         http://www.x.org

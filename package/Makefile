@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -63,10 +61,8 @@ package-$(ADK_PACKAGE_DAMAGEPROTO) += damageproto
 package-$(ADK_PACKAGE_DAVFS2) += davfs2
 package-$(ADK_PACKAGE_DBUS) += dbus
 package-$(ADK_PACKAGE_DECO) += deco
-package-$(ADK_PACKAGE_DEVICE_MAPPER) += device-mapper
 package-$(ADK_COMPILE_DHCP) += dhcp
 package-$(ADK_PACKAGE_DHCP_FORWARDER) += dhcp-forwarder
-package-$(ADK_COMPILE_DHCPV6) += dhcpv6
 package-$(ADK_PACKAGE_DIGITEMP) += digitemp
 package-$(ADK_PACKAGE_DNSMASQ) += dnsmasq
 package-$(ADK_PACKAGE_DOSFSTOOLS) += dosfstools
@@ -96,7 +92,8 @@ package-$(ADK_PACKAGE_FONTCACHEPROTO) += fontcacheproto
 package-$(ADK_PACKAGE_FPING) += fping
 package-$(ADK_PACKAGE_FPROBE) += fprobe
 package-$(ADK_PACKAGE_FPROBE_ULOG) += fprobe-ulog
-package-$(ADK_PACKAGE_FREERADIUS) += freeradius
+package-$(ADK_COMPILE_FREERADIUS_CLIENT) += freeradius-client
+package-$(ADK_PACKAGE_FREERADIUS_SERVER) += freeradius-server
 package-$(ADK_COMPILE_FREETYPE) += freetype
 package-$(ADK_PACKAGE_FRICKIN) += frickin
 package-$(ADK_COMPILE_FUSE) += fuse
@@ -206,10 +203,12 @@ package-$(ADK_PACKAGE_LIBX11) += libX11
 package-$(ADK_PACKAGE_LIBXAU) += libXau
 package-$(ADK_PACKAGE_LIBXAW) += libXaw
 package-$(ADK_PACKAGE_LIBXPM) += libXpm
+package-$(ADK_PACKAGE_LIBXV) += libXv
 package-$(ADK_PACKAGE_LIBXDMCP) += libXdmcp
 package-$(ADK_PACKAGE_LIBXEXT) += libXext
 package-$(ADK_PACKAGE_LIBXFONT) += libXfont
 package-$(ADK_PACKAGE_LIBXKBFILE) += libxkbfile
+package-$(ADK_PACKAGE_LIBXXF86DGA) += libXxf86dga
 package-$(ADK_PACKAGE_LIBXML2) += libxml2
 package-$(ADK_PACKAGE_LIBXMU) += libXmu
 package-$(ADK_PACKAGE_LIBXSLT) += libxslt
@@ -298,7 +297,6 @@ package-$(ADK_PACKAGE_PROCMAIL) += procmail
 package-$(ADK_PACKAGE_PROCPS) += procps
 package-$(ADK_PACKAGE_PTUNNEL) += ptunnel
 package-$(ADK_PACKAGE_QUAGGA) += quagga
-package-$(ADK_COMPILE_RADIUSCLIENT_NG) += radiusclient-ng
 package-$(ADK_PACKAGE_RADDUMP) += raddump
 package-$(ADK_PACKAGE_RADVD) += radvd
 package-$(ADK_PACKAGE_RANDRPROTO) += randrproto
@@ -397,6 +395,8 @@ package-$(ADK_PACKAGE_XFSPROGS) += xfsprogs
 package-$(ADK_PACKAGE_XINETD) += xinetd
 package-$(ADK_PACKAGE_XCMISCPROTO) += xcmiscproto
 package-$(ADK_PACKAGE_XEXTPROTO) += xextproto
+package-$(ADK_PACKAGE_XKBCOMP) += xkbcomp
+package-$(ADK_PACKAGE_XKEYBOARD_CONFIG) += xkeyboard-config
 package-$(ADK_PACKAGE_XF86_VIDEO_GEODE) += xf86-video-geode
 package-$(ADK_PACKAGE_XF86DGA) += xf86dga
 package-$(ADK_PACKAGE_XF86DGAPROTO) += xf86dgaproto

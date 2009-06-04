@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
-# $MirOS: ports/infrastructure/scripts/update-patches,v 1.5 2006/06/15 19:18:43 tg Exp $
-#-
 # Copyright (c) 2006
 #	Thorsten Glaser <tg@freewrt.org>
 #
@@ -157,9 +154,7 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 	# Build a sensible name for the new patch file
 	patchname=patch-$(echo "$file" | sed -e 's#[/. ]#_#g')
 	echo "No patch-* found for $file, creating $patchname" >&2
-	( echo '$Id: update-patches 24 2008-08-31 14:56:13Z wbx $'; \
-	  cd $D_BASE && do_diff "$file" "$D_SUB.orig" "$D_SUB" \
-	) >$patchname
+	( cd $D_BASE && do_diff "$file" "$D_SUB.orig" "$D_SUB" ) >$patchname
 	edit="$edit $patchname"
 	accounted="$accounted $patchname"
 done

@@ -1,27 +1,28 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.11.2
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		dc9cbe88f38f82e27dbfb66f9f99fc98
-MASTER_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
+PKG_VERSION:=		2.10.1
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		4e331f6f608f23b64f0a5354908af09a
+PKG_DESCR:=		X11 driver for AMD Geode VGA chip
+PKG_SECTION:=		x11
+PKG_DEPENDS:=		xorg-server
+PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_VIDEO_GEODE,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,XF86_VIDEO_GEODE,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_GEODE}/usr/lib/xorg/modules/drivers
-	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/*.so \
+	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/geode_drv.so \
 		${IDIR_XF86_VIDEO_GEODE}/usr/lib/xorg/modules/drivers/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

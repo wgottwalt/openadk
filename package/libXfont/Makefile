@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -11,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb202f7b1af5fc95a7f35f0a62e52e6e
 PKG_DESCR:=		X font Library
 PKG_SECTION:=		x11
+PKG_DEPENDS:=		libfreetype
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

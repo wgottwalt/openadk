@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -26,7 +24,7 @@ ifeq ($(ADK_SSP),y)
 endif
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so.* $(IDIR_GLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld-*.so* $(IDIR_GLIBC)/lib/
-	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done

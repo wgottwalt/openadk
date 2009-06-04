@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -80,11 +78,11 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_DIG}/usr/bin/
 	# bind lib
 	${INSTALL_DIR} ${IDIR_LIBBIND}/usr/lib
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccc.so.* ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisccfg.so.* ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libisccc.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libisccfg.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

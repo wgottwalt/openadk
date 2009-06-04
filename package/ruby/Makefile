@@ -1,5 +1,3 @@
-# $Id$
-#-
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
@@ -33,9 +31,8 @@ post-configure:
 	echo "socket" >> ${WRKBUILD}/ext/Setup
 
 post-install:
-	${INSTALL_DIR} ${IDIR_RUBY}/usr
 	rm -rf ${WRKINST}/usr/lib/site_ruby
 	find ${WRKINST}/usr -name "*.h" -delete
-	${CP} ${WRKINST}/usr ${IDIR_RUBY}/usr
+	${CP} ${WRKINST}/usr ${IDIR_RUBY}/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
