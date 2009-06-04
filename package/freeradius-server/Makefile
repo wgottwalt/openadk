@@ -118,6 +118,7 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS} \
 			--without-rlm_perl \
 			--without-rlm_python \
 			--without-rlm_radutmp \
+			--without-rlm_ruby \
 			--without-rlm_smb \
 			--without-rlm_sqlcounter \
 			--without-rlm_sql_db2 \

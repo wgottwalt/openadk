@@ -75,16 +75,17 @@ config BUSYBOX_FEATURE_INIT_COREDUMPS
 	  core file sizes. If this option is disabled, processes
 	  will not generate any core files.
 
-config BUSYBOX_FEATURE_INITRD
-	bool "Support running init from within an initrd (not initramfs)"
-	default n
-	depends on BUSYBOX_INIT
-	help
-	  Legacy support for running init under the old-style initrd. Allows
-	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
-
-	  This does not apply to initramfs, which runs /init as PID 1 and
-	  requires no special support.
+# you should never need this, breaks allconfig images
+#config BUSYBOX_FEATURE_INITRD
+#	bool "Support running init from within an initrd (not initramfs)"
+#	default n
+#	depends on BUSYBOX_INIT
+#	help
+#	  Legacy support for running init under the old-style initrd. Allows
+#	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
+#
+#	  This does not apply to initramfs, which runs /init as PID 1 and
+#	  requires no special support.
 
 config BUSYBOX_HALT
 	bool "poweroff, halt, and reboot"

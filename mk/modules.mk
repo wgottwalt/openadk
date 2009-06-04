@@ -54,6 +54,7 @@ $(eval $(call KMOD_template,ATM,atm,\
 ,50))
 
 $(eval $(call KMOD_template,BRIDGE,bridge,\
+	$(MODULES_DIR)/kernel/net/802/stp \
 	$(MODULES_DIR)/kernel/net/llc/llc \
 	$(MODULES_DIR)/kernel/net/bridge/bridge \
 ,10))
@@ -62,14 +63,17 @@ $(eval $(call KMOD_template,NET_IPGRE,gre,\
 	$(MODULES_DIR)/kernel/net/ipv4/ip_gre \
 ,50))
 
-$(eval $(call KMOD_template,NET_IPIP,ipip,\
+$(eval $(call KMOD_template,INET_TUNNEL,tunnel,\
 	$(MODULES_DIR)/kernel/net/ipv4/tunnel4 \
+,20))
+
+$(eval $(call KMOD_template,NET_IPIP,ipip,\
 	$(MODULES_DIR)/kernel/net/ipv4/ipip \
 ,60))
 
 $(eval $(call KMOD_template,IPV6,ipv6,\
 	$(MODULES_DIR)/kernel/net/ipv6/ipv6 \
-,20))
+,19))
 
 $(eval $(call KMOD_template,IPV6_SIT,ipv6-sit,\
 	$(MODULES_DIR)/kernel/net/ipv6/sit \
@@ -503,6 +507,7 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
 
@@ -518,6 +523,7 @@ $(eval $(call KMOD_template,DM_CRYPT,dm-crypt,\
 ,40))
 
 $(eval $(call KMOD_template,DM_MIRROR,dm-mirror,\
+    $(MODULES_DIR)/kernel/drivers/md/dm-region-hash \
     $(MODULES_DIR)/kernel/drivers/md/dm-mirror \
 ,40))
 
@@ -668,6 +674,7 @@ $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
+    $(MODULES_DIR)/kernel/lib/lzo/lzo_decompress \
     $(MODULES_DIR)/kernel/crypto/lzo \
 ,10))
 
@@ -810,6 +817,7 @@ $(eval $(call KMOD_template,SND_AC97_CODEC,sound-alsa-ac97-codec,\
 ,50))
 
 $(eval $(call KMOD_template,SND_VIA82XX,sound-alsa-via82xx,\
+	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 	$(MODULES_DIR)/kernel/sound/drivers/mpu401/snd-mpu401-uart \
 	$(MODULES_DIR)/kernel/sound/pci/snd-via82xx \
 ,55))
@@ -1230,7 +1238,7 @@ $(eval $(call KMOD_template,CRC32,crc32, \
 
 $(eval $(call KMOD_template,LIBCRC32C,libcrc32c, \
 	$(MODULES_DIR)/kernel/lib/libcrc32c \
-,01))
+,10))
 
 #
 # parallel port support

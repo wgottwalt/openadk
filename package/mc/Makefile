@@ -22,6 +22,7 @@ CONFIGURE_ARGS+=	--disable-charset \
 			--disable-background \
 			--disable-gcc-warnings \
 			--disable-glibtest \
+			--disable-netcode \
 			--without-libiconv-prefix \
 			--without-x \
 			--with-vfs \
@@ -34,6 +35,8 @@ CONFIGURE_ARGS+=	--disable-charset \
 			--with-screen=ncurses \
 			--with-edit
 CONFIGURE_ENV+=		mc_cv_have_zipinfo=yes \
+			ac_cv_lib_nsl_t_accept=no \
+			ac_cv_lib_nsl_gethostbyname=no \
 			am_cv_func_iconv=no
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

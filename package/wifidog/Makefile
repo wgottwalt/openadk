@@ -10,6 +10,7 @@ PKG_MD5SUM:=		abe5f7123179a0f08c493ce59fb3cb31
 PKG_DESCR:=		a complete and embeddable captive portal
 PKG_SECTION:=		net
 PKG_DEPENDS:=		iptables
+PKG_URL:=		http://dev.wifidog.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
@@ -18,6 +19,7 @@ $(eval $(call PKG_template,WIFIDOG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes \
+			ac_cv_lib_nsl_main=no \
 			ac_cv_func_setvbuf_reversed=no
 BUILD_STYLE+=		auto
 INSTALL_STYLE:=		auto

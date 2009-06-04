@@ -146,7 +146,7 @@ if test $1 = setup; then
 	mkdir /tmp/.cfgfs/root
 	mount --bind /etc /tmp/.cfgfs/root
 	mkdir /tmp/.cfgfs/temp
-	mount -t tmpfs -o size=960k cfgfs /tmp/.cfgfs/temp
+	mount -t tmpfs -o cfgfs /tmp/.cfgfs/temp
 	(cd /tmp/.cfgfs/root; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf -)
 	unclean=0
 	if [[ $1 = -N ]]; then
@@ -225,7 +225,7 @@ if test $1 = commit; then
 		EOF
 		[[ $1 = -f ]] || exit 7
 	fi
-	mount -t tmpfs -o size=960k swap /tmp/.cfgfs/temp
+	mount -t tmpfs -o swap /tmp/.cfgfs/temp
 	(cd /etc; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf -)
 	cd /tmp/.cfgfs/temp
 	find . -type f | grep -v -e '^./.cfgfs' -e '^./.rnd$' | sort | \

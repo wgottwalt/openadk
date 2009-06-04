@@ -55,7 +55,7 @@ add_service() {
 add_rcconf() {
 	rcconf_exists ${2-$1} || {
 		echo "adding service ${2-$1} to /etc/rc.conf"
-		printf '%s\t\t# %s\n' "${2:-$1}=${3:-NO}" "$1" \
+		printf '%s="%s"\t\t# %s\n' "${2:-$1}" "${3:-NO}" "$1" \
 			>>$IPKG_INSTROOT/etc/rc.conf
 	}
 }

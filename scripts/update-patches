@@ -72,7 +72,7 @@ ORGDIST=${D_BASE}/${D_SUB}.orig
 
 [[ -d $EXTRADIR ]] && \
     (cd $EXTRADIR; find . -print0) | \
-    (cd $WRKDIST; pax -rw -0 -d $ORGDIST/) >/dev/null 2>&1
+    (cd $WRKDIST; pax -rw -0 -d $ORGDIST/)
 
 if [[ -e $WRKDIST/.patched-newfiles ]]; then
 	touch $ORGDIST/.patched-newfiles

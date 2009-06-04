@@ -21,19 +21,10 @@ $(eval $(call PKG_template,FPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_STYLE=	gnu
 
 do-build:
-	${MAKE} CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS}" -C ${WRKBUILD} clean ${PKG_NAME}
-	mv ${WRKBUILD}/${PKG_NAME} ${WRKBUILD}/${PKG_NAME}4
-ifeq ($(ADK_IPV6),y)
-	${MAKE} CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS} -DIPV6=1" -C ${WRKBUILD} clean ${PKG_NAME}
-	mv ${WRKBUILD}/${PKG_NAME} ${WRKBUILD}/${PKG_NAME}6
-
-endif
+	${MAKE} CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS}" -C ${WRKBUILD} ${PKG_NAME}
 
 do-install:
 	${INSTALL_DIR} ${IDIR_FPING}/usr/bin
-	${CP} ${WRKBUILD}/${PKG_NAME}4 ${IDIR_FPING}/usr/bin/${PKG_NAME}
-ifeq ($(ADK_IPV6),y)
-	${CP} ${WRKBUILD}/${PKG_NAME}6 ${IDIR_FPING}/usr/bin/
-endif
+	${CP} ${WRKBUILD}/${PKG_NAME} ${IDIR_FPING}/usr/bin/${PKG_NAME}
 
 include ${TOPDIR}/mk/pkg-bottom.mk

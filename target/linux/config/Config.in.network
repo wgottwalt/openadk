@@ -84,9 +84,15 @@ config ADK_KPACKAGE_KMOD_BRIDGE
 	  Enabling arptables support when bridging will let arptables see
 	  bridged ARP traffic in the arptables FORWARD chain.
 
+config ADK_KPACKAGE_KMOD_INET_TUNNEL
+	tristate
+	default n
+	help
+
 config ADK_KPACKAGE_KMOD_NET_IPIP
 	prompt "kmod-net-ipip..................... IP in IP encapsulation support"
 	tristate
+	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
@@ -134,6 +140,7 @@ config ADK_KPACKAGE_KMOD_IPV6_SIT
 	prompt "kmod-ipv6-sit..................... IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
 	depends ADK_IPV6
+	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
