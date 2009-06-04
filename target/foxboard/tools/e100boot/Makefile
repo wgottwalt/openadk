@@ -7,7 +7,7 @@ PKG_NAME:=		e100boot
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		11fd53e7824dc550e4cffbc4cd114c3e
-MASTER_SITES:=		http://download.tuxfamily.org/crisos/repository/source/
+PKG_SITES:=		http://download.tuxfamily.org/crisos/repository/source/
 DISTFILES:=		${PKG_NAME}.tar.bz2
 WRKDIST=                ${WRKDIR}/${PKG_NAME}
 

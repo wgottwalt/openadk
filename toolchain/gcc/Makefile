@@ -89,7 +89,6 @@ $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR2)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH=$(TARGET_PATH) $(MAKE) -C $(GCC_BUILD_DIR2) install
-	echo $(GCC_VERSION) > $(STAGING_TOOLS)/gcc_version
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
 	(cd $(STAGING_TOOLS); \

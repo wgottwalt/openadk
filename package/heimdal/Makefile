@@ -65,6 +65,7 @@ else
 CONFIGURE_OPTS+=	--disable-pk-init
 endif
 
+TCFLAGS+=              -pthread
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS}
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes

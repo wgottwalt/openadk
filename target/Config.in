@@ -58,6 +58,9 @@ config ADK_rescue_mips
 config ADK_rescue_mipsel
 	tristate
 
+config ADK_wag54g
+	tristate
+
 config ADK_DEVICE
 	string
 	default "alix1c"  if ADK_alix1c
@@ -74,6 +77,7 @@ config ADK_DEVICE
 	default "rb433"  if ADK_rb433
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
+	default "wag54g"  if ADK_wag54g
 	default "rescue-x86"  if ADK_rescue_x86
 	default "rescue-x86_64"  if ADK_rescue_x86_64
 	default "rescue-mips"  if ADK_rescue_mips
@@ -101,6 +105,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_alix1c
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
@@ -123,9 +128,21 @@ config ADK_LINUX_MIPS64_LEMOTE
 	help
 	  Lemote Subnotebook
 
+config ADK_LINUX_MIPS_WAG54G
+	bool "Linksys WAG54G"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_wag54g
+	help
+	  Linksys WAG54G DSL router with Wireless
+	  TI AR7 platform
+
 config ADK_LINUX_MIPS_RB411
 	bool "Mikrotik Routerboard 411"
 	select ADK_rb411
+	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
@@ -135,6 +152,7 @@ config ADK_LINUX_MIPS_RB411
 config ADK_LINUX_MIPS_RB433
 	bool "Mikrotik Routerboard 433"
 	select ADK_rb433
+	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
@@ -144,6 +162,7 @@ config ADK_LINUX_MIPS_RB433
 config ADK_LINUX_MIPS_RB532
 	bool "Mikrotik Routerboard 532"
 	select ADK_rb532
+	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
@@ -308,7 +327,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 
 config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "squashfs read-only root filesystem"
-	depends on ADK_LINUX_CRIS_FOXBOARD
+	depends on ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_MIPS_WAG54G
 	help
 	  highly compressed read-only filesystem for flash.
 
@@ -327,6 +347,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_WAG54G || \
 		ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_NFS_V3

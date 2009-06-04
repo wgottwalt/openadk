@@ -16,7 +16,7 @@ cbtt-compile: uclibc++-compile
 endif
 cbtt-compile: mysql-compile zlib-compile
 collectd-compile: libpthread-compile
-cryptsetup-compile: libgcrypt-compile popt-compile e2fsprogs-compile device-mapper-compile
+cryptsetup-compile: libgcrypt-compile popt-compile e2fsprogs-compile lvm-compile
 ifeq (${ADK_COMPILE_CTORRENT_WITH_UCLIBCXX},y)
 ctorrent-compile: uclibc++-compile
 endif

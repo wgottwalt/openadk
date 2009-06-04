@@ -1,9 +1,9 @@
-#menu "squid............................. proxy and web cache"
 
 config ADK_PACKAGE_SQUID
 	prompt "squid............................. full-featured Web proxy cache"
 	tristate
 	default n
+	depends ADK_CXX
 	select ADK_PACKAGE_LIBOPENSSL
 	help
 	  Squid is a high-performance proxy caching server for web clients, 
@@ -12,6 +12,8 @@ config ADK_PACKAGE_SQUID
 	  non-blocking, I/O-driven process.
 
 	  http://www.squid-cache.org
+
+menu "squid............................. proxy and web cache modules"
 
 config ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM
 	prompt "  squid-mod-basic-auth-getpwnam....... getpwnam basic authentication helper"
@@ -34,13 +36,6 @@ config ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_SMB
 	help
 	  Samba basic authentication helper
 
-config ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_WINBIND
-	prompt "  squid-mod-basic-auth-winbind........ Winbind basic authentication helper"
-	tristate
-	depends ADK_PACKAGE_SQUID
-	help
-	  Winbind basic authentication helper
-
 config ADK_PACKAGE_SQUID_MOD_DIGEST_AUTH_PASSWORD
 	prompt "  squid-mod-digest-auth-password...... Password digest authentication ehlper"
 	tristate
@@ -62,13 +57,6 @@ config ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
 	help
 	  Unix group external ACL helper
 
-config ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_WINBIND_GROUP
-	prompt "  squid-mod-external-acl-winbind-group Winbind group external ACL helper"
-	tristate
-	depends ADK_PACKAGE_SQUID
-	help
-	  Winbind group external ACL helper
-
 config ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_FAKEAUTH
 	prompt "  squid-mod-ntlm-auth-fakeauth........ Fakeauth NTLM authentication helper"
 	tristate
@@ -83,11 +71,4 @@ config ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_SMB_AUTH
 	help
 	  Samba NTLM authentication helper
 
-config ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_WINBIND_AUTH
-	prompt "  squid-mod-ntlm-auth-winbind-auth.... Winbind NTLM authentication helper"
-	tristate
-	depends ADK_PACKAGE_SQUID
-	help
-	  Winbind NTLM authentication helper
-
-#endmenu
+endmenu
