@@ -1,0 +1,21 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- valgrind-3.3.1.orig/configure	2008-06-01 03:44:42.000000000 +0200
++++ valgrind-3.3.1/configure	2009-06-02 01:28:04.000000000 +0200
+@@ -4742,6 +4742,17 @@ _ACEOF
+ 	DEFAULT_SUPP="glibc-2.8.supp ${DEFAULT_SUPP}"
+ 	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
+ 	;;
++     2.10.90)
++	echo "$as_me:$LINENO: result: 2.10 family" >&5
++echo "${ECHO_T}2.10 family" >&6
++
++cat >>confdefs.h <<\_ACEOF
++#define GLIBC_2_10 1
++_ACEOF
++
++	DEFAULT_SUPP="glibc-2.8.supp ${DEFAULT_SUPP}"
++	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
++	;;
+      aix5)
+ 	echo "$as_me:$LINENO: result: AIX 5.1 or 5.2 or 5.3" >&5
+ echo "${ECHO_T}AIX 5.1 or 5.2 or 5.3" >&6

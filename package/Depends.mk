@@ -35,7 +35,7 @@ davfs2-compile: libiconv-compile neon-compile
 dbus-compile: expat-compile
 deco-compile: ncurses-compile
 dhcpv6-compile: libnl-compile ncurses-compile
-digitemp-compile: libusb-compile
+digitemp-compile: libusb-compile libusb-compat-compile
 dsniff-compile: libnids-compile openssl-compile gdbm-compile
 elinks-compile: openssl-compile
 esound-compile: libaudiofile-compile
@@ -94,13 +94,14 @@ libnids-compile: libnet-compile libpcap-compile
 libp11-compile: openssl-compile libtool-compile
 libpng-compile: zlib-compile
 libshout-compile: libvorbis-compile
-libusb-compile: libusb-compat-compile
+libusb-compat-compile: libusb-compile
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
 libfontenc-compile: xproto-compile zlib-compile
 libICE-compile: xtrans-compile
 libSM-compile: libICE-compile
 libXt-compile: libSM-compile
+libXv-compile: libX11-compile videoproto-compile
 libXmu-compile: libXt-compile
 libXext-compile: libX11-compile
 libXaw-compile: libXext-compile libXmu-compile libXpm-compile
@@ -227,6 +228,7 @@ endif
 wx200d-compile: postgresql-compile
 xfsprogs-compile: e2fsprogs-compile
 libXxf86dga-compile: xf86dgaproto-compile libXext-compile libXaw-compile
+xkeyboard-config-compile: xkbcomp-compile
 xf86-video-geode-compile: xorg-server-compile
 xf86dga-compile: libXxf86dga-compile 
 xorg-server-compile: libX11-compile randrproto-compile renderproto-compile fixesproto-compile \

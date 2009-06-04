@@ -4,11 +4,11 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		digitemp
-PKG_VERSION:=		3.3.2
+PKG_VERSION:=		3.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0b6cfb36d198767836de54d9fb11bbdb
+PKG_MD5SUM:=		9be2e48db37920f21925ae6e88f83b84
 PKG_DESCR:=		simple to use program for reading values from 1-wire devices
-PKG_SECTION:=		app
+PKG_SECTION:=		misc
 PKG_DEPENDS:=		libusb
 PKG_URL:=		http://www.digitemp.com/software/linux
 PKG_SITES:=		http://www.digitemp.com/software/linux/
@@ -17,6 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-I./src -I./userial
 ALL_TARGET=		ds2490
 BUILD_STYLE=		auto
 

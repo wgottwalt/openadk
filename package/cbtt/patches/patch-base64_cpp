@@ -1,0 +1,20 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- cbtt80-20060211-src.orig/base64.cpp	2006-02-07 18:44:58.000000000 +0100
++++ cbtt80-20060211-src/base64.cpp	2009-06-01 19:00:07.000000000 +0200
+@@ -112,7 +112,7 @@ uchar   pBase64[]   =   {               
+ /* Returns:     bool    - True (!0) if the operation was successful.         */
+ /*                        False (0) if the operation was unsuccessful.       */
+ /*---------------------------------------------------------------------------*/
+-char *b64decode(const char *s)
++char *b64decode(char *s)
+ {
+     int     l = strlen(s);                  // Get length of Base64 string.
+     char   *b;                              // Decoding buffer pointers.
+@@ -121,7 +121,6 @@ char *b64decode(const char *s)
+     int     y = 0;
+ 
+     static                                  // Collating sequence...
+-    const                                   // ...independant "===".
+     char    pPad[]  =   {0x3d, 0x3d, 0x3d, 0x00};
+ 
+     if  (l % 4)                             // If it's not modulo 4, then it...

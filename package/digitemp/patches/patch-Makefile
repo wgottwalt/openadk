@@ -1,0 +1,14 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- digitemp-3.6.0.orig/Makefile	2008-08-28 23:37:00.000000000 +0200
++++ digitemp-3.6.0/Makefile	2009-06-01 20:04:20.000000000 +0200
+@@ -11,8 +11,8 @@
+ 
+ VERSION = 3.6.0
+ 
+-CC	= gcc
+-CFLAGS	= -I./src -I./userial -O2 -Wall # -g
++CC	?= gcc
++CFLAGS	?= -I./src -I./userial 
+ 
+ OBJS		=	src/digitemp.o src/device_name.o src/ds2438.o
+ HDRS		= 	src/digitemp.h src/device_name.h

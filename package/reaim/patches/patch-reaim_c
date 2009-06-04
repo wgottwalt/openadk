@@ -1,0 +1,11 @@
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- reaim-0.8.orig/reaim.c	2003-03-25 13:35:31.000000000 +0100
++++ reaim-0.8/reaim.c	2009-06-02 00:30:51.000000000 +0200
+@@ -190,6 +190,7 @@
+ #include <netdb.h>
+ #include <time.h>
+ #include <ctype.h>
++#include <limits.h>
+ 
+ #include <getopt.h>
+ #include <sys/ioctl.h>
