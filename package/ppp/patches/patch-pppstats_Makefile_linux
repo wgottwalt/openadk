@@ -1,0 +1,11 @@
+--- ppp-2.4.4.orig/pppstats/Makefile.linux	2006-06-04 07:07:46.000000000 +0200
++++ ppp-2.4.4/pppstats/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
+@@ -22,7 +22,7 @@ all: pppstats
+ 
+ install: pppstats
+ 	-mkdir -p $(MANDIR)
+-	$(INSTALL) -s -c pppstats $(BINDIR)
++	$(INSTALL) -c pppstats $(BINDIR)
+ 	$(INSTALL) -c -m 444 pppstats.8 $(MANDIR)
+ 
+ pppstats: $(PPPSTATSRCS)

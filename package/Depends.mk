@@ -154,6 +154,7 @@ obexftp-compile: openobex-compile libiconv-compile
 opencdk-compile: libgcrypt-compile libgpg-error-compile zlib-compile
 openct-compile: libtool-compile libusb-compile
 openldap-compile: cyrus-sasl-compile openssl-compile libdb-compile
+openobex-compile: bluez-compile
 opensips-compile: openssl-compile
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
 openssh-compile: krb5-compile

@@ -52,7 +52,8 @@ CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-gss
 endif
 
-CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no
+CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
+			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--disable-uuid
 BUILD_STYLE=		auto

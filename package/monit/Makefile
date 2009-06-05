@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--without-ssl
 endif
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_addr=no
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

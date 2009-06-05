@@ -22,7 +22,6 @@ BUILD_STYLE:=		auto
 ALL_TARGET:=		tidy all
 MAKE_FLAGS+=		OPT_CFLAGS="${TARGET_CFLAGS}" \
 			CC="${TARGET_CC}" \
-			LIBS=-lnsl \
 			NETGROUP= \
 			VSYSLOG= \
 			BUGS= \
@@ -34,10 +33,7 @@ MAKE_FLAGS+=		OPT_CFLAGS="${TARGET_CFLAGS}" \
 			STYLE="-DPROCESS_OPTIONS" \
 
 do-install:
-	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/lib ${IDIR_LIBWRAP}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/lib
 	${CP} ${WRKBUILD}/shared/libwrap.so.* ${IDIR_LIBWRAP}/usr/lib/
-	${CP} ${WRKBUILD}/tcpd.h ${IDIR_LIBWRAP}/usr/include/
-	${INSTALL_DIR} ${WRKINST}/usr/lib
-	${CP} ${WRKBUILD}/shared/libwrap.so* ${WRKINST}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

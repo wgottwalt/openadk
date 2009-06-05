@@ -29,14 +29,19 @@ TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/includ
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
 endif
 
+XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}" 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
-XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}" 
 
 post-install:
-	${INSTALL_DIR} ${WRKINST}/etc
-	${INSTALL_DATA} ./files/${PKG_NAME}.conf ${WRKINST}/etc
-	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin
-	${CP} ${WRKINST}/* ${IDIR_MRD6}/
+	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc
+	${INSTALL_DIR} ${IDIR_MRD6}/usr/lib/mrd6 ${IDIR_MRD6}/bin
+	${INSTALL_DATA} ./files/${PKG_NAME}.conf ${IDIR_MRD6}/etc
+	${INSTALL_BIN} ${WRKINST}/usr/local/sbin/mrd \
+		 ${IDIR_MRD6}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/local/bin/mrd6sh \
+		 ${IDIR_MRD6}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/local/lib/mrd6/bgp.so \
+		 ${IDIR_MRD6}/usr/lib/mrd6/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

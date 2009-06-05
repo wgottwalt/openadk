@@ -105,23 +105,20 @@ CONFIGURE_ARGS+=	--with-endianness=little \
 			--without-libwrap \
 			--without-rpm \
 			--without-zlib
-ifneq ($(ADK_IPV6),y)
-CONFIGURE_ARGS+=	--disable-ipv6
-endif
+
 BUILD_STYLE:=		auto
-INSTALL_STYLE:=		confprog auto
+INSTALL_STYLE:=		auto
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBNETSNMP}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libnetsnmp.so* ${IDIR_LIBNETSNMP}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libnetsnmp*.so* ${IDIR_LIBNETSNMP}/usr/lib/
 	${INSTALL_DIR} ${IDIR_SNMPD}/etc/snmp
-	${INSTALL_DIR} ${IDIR_SNMPD}/etc/init.d
 	${INSTALL_DIR} ${IDIR_SNMPD}/usr/sbin
 	${INSTALL_DATA} ./files/snmpd.conf ${IDIR_SNMPD}/etc/snmp/snmpd.conf
-	${INSTALL_BIN} ./files/snmpd.init ${IDIR_SNMPD}/etc/init.d/snmpd
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/snmpd ${IDIR_SNMPD}/usr/sbin/snmpd
 	${INSTALL_DIR} ${IDIR_SNMP_UTILS}/usr/bin
-	${CP} ${WRKINST}/usr/bin/snmp{get,set,status,test,trap,walk} ${IDIR_SNMP_UTILS}/usr/bin/
+	${CP} ${WRKINST}/usr/bin/snmp{get,set,status,test,trap,walk} \
+		${IDIR_SNMP_UTILS}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

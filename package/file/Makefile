@@ -21,6 +21,14 @@ CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
+pre-configure:
+	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
+		CFLAGS="-static" ./configure --enable-static --disable-shared \
+	);
+	${MAKE} -C ${WRKBUILD}
+	${INSTALL_BIN} ${WRKBUILD}/src/file ${STAGING_TOOLS}/bin
+	${MAKE} -C ${WRKBUILD} clean
+
 post-install:
 	${INSTALL_DIR} ${IDIR_FILE}/usr/bin ${IDIR_FILE}/usr/lib ${IDIR_FILE}/usr/share/misc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/file ${IDIR_FILE}/usr/bin

@@ -24,15 +24,14 @@ CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
 			tcl_cv_strtod_buggy=ok \
 			tcl_cv_strtod_unbroken=ok \
 			tcl_cv_strtoul_unbroken=ok
-CONFIGURE_ARGS+=	--enable-man-symlinks \
-			--enable-shared
+CONFIGURE_ARGS+=	--enable-man-symlinks
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TCL}/usr/lib ${IDIR_TCL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_TCL}/usr/bin
-	${CP} ${WRKINST}/usr/lib/* ${IDIR_TCL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_TCL}/usr/lib
 	chmod u+w ${IDIR_TCL}/usr/lib/libtcl8.4.so	# for strip
 
 include ${TOPDIR}/mk/pkg-bottom.mk

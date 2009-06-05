@@ -22,7 +22,8 @@ $(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 TLDFLAGS+=		-pthread
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
+CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no \
+			ac_cv_lib_nsl_gethostbyname=no
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		SPECIAL_CFLAGS='${TLDFLAGS}'
 MAKE_FILE:=		GNUmakefile

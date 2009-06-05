@@ -46,11 +46,9 @@ define PKG_mod_template
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=	${2}-install
 
 ${2}-install:
-	if [ -e ${WRKINST}/usr/lib/squid/${2} ]; then \
-		${INSTALL_DIR} ${IDIR_${1}}/usr/lib/squid/ ; \
-		${INSTALL_BIN} ${WRKINST}/usr/lib/squid/${2} ${IDIR_${1}}/usr/lib/squid/ ; \
-		
-	fi
+	${INSTALL_DIR} $${IDIR_${1}}/usr/lib/squid
+	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/${2} \
+		$${IDIR_${1}}/usr/lib/squid/
 endef
 
 $(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -74,7 +72,7 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_grou
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 
-CONFIGURE_STYLE:=	gnu
+CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \
@@ -94,6 +92,7 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_func_va_copy=no \
 			ac_cv_func___va_copy=no \
 			ac_cv_epoll_works=yes \
+			ac_cv_lib_nsl_main=no \
 			ac_cv_func_strnstr=no
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \
@@ -117,6 +116,8 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-cache-digests \
 			--enable-referer-log \
 			--enable-delay-pools \
+			--disable-wccp \
+			--disable-wccpv2 \
 			--enable-useragent-log \
 			--with-openssl=${STAGING_DIR}/usr \
 			--enable-auth="${AUTH_MODULES}" \

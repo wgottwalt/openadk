@@ -20,6 +20,7 @@ $(eval $(call PKG_template,MIREDO,miredo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_file__proc_self_maps=yes
 CONFIGURE_ARGS+=	--disable-chroot \
 			--without-Judy \
 			--enable-teredo-client \
@@ -33,25 +34,19 @@ XAKE_FLAGS+		 CXXLINK="\$${LINK}" \
 ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
 TLDFLAGS+=		-nodefaultlibs
-CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm" \
-			ac_cv_file__proc_self_maps=yes
-else
-CONFIGURE_ENV+=		LIBS="-lc -lm" \
-			ac_cv_file__proc_self_maps=yes
+CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm"
 endif
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MIREDO}/etc/init.d
-	${INSTALL_DIR} ${IDIR_MIREDO}/etc/miredo
-	${INSTALL_DIR} ${IDIR_MIREDO}/usr/sbin
-	${INSTALL_DATA} ${WRKINST}/etc/miredo/miredo.conf ${IDIR_MIREDO}/etc/miredo/miredo.conf
-	${INSTALL_BIN} ./files/miredo.init \
-		${IDIR_MIREDO}/etc/init.d/miredo
+	${INSTALL_DIR} ${IDIR_MIREDO}/etc/miredo ${IDIR_MIREDO}/usr/sbin
+	${INSTALL_DIR} ${IDIR_MIREDO}/usr/lib
+	${INSTALL_DATA} ${WRKINST}/etc/miredo/miredo.conf \
+		${IDIR_MIREDO}/etc/miredo
+	${CP} ${WRKINST}/usr/lib/libtun*.so* ${IDIR_MIREDO}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libteredo.so* ${IDIR_MIREDO}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo ${IDIR_MIREDO}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_MIREDO_SERVER}/usr/sbin
-	${INSTALL_DIR} ${IDIR_MIREDO_SERVER}/etc/init.d
-	${INSTALL_BIN} ./files/miredo-server.init \
-		${IDIR_MIREDO_SERVER}/etc/init.d/miredo-server
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo-server ${IDIR_MIREDO_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo-server \
+		${IDIR_MIREDO_SERVER}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

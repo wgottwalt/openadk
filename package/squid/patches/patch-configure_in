@@ -1,0 +1,13 @@
+--- squid-3.0.STABLE15.orig/configure.in	2009-05-06 13:11:43.000000000 +0200
++++ squid-3.0.STABLE15/configure.in	2009-06-04 20:20:15.000000000 +0200
+@@ -1820,6 +1820,10 @@ case "$host" in
+ 	;;
+ esac
+ 
++dnl Define HOSTCXX
++HOSTCXX="g++"
++AC_SUBST(HOSTCXX)
++
+ dnl Check for programs
+ AC_PROG_CPP
+ AC_PROG_INSTALL

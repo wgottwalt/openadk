@@ -55,6 +55,6 @@ INSTALL_TARGET:=	external-install local-install
 post-install:
 	${INSTALL_DIR} ${IDIR_SUBVERSION}/usr/{bin,lib}
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_SUBVERSION}/usr/bin
-	${CP} ${WRKINST}/usr/lib/* ${IDIR_SUBVERSION}/usr/lib
+	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_SUBVERSION}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

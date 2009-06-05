@@ -7,7 +7,7 @@ PKG_NAME:=		stress
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d693ff044ac7d34f8aaea202cd96f679
-PKG_DESCR:=		a simple tool that imposes certain types of compute stress on UNIX-like operating systems
+PKG_DESCR:=		a simple tool that imposes certain types of compute stress
 PKG_SECTION:=		utils
 PKG_SITES:=		http://weather.ou.edu/~apw/projects/stress/
 
@@ -16,6 +16,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,STRESS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--disable-static
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

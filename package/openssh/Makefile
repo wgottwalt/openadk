@@ -41,7 +41,8 @@ CONFIGURE_ARGS+=	--without-kerberos5
 endif
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
-			ac_cv_func_setlogin=no
+			ac_cv_func_setlogin=no \
+			ac_cv_lib_nsl_yp_match=no
 CONFIGURE_ARGS+=	--disable-strip \
 			--disable-etc-default-login \
 			--disable-lastlog \

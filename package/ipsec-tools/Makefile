@@ -30,15 +30,16 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/usr/sbin
-	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/usr/lib/
+	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/usr/sbin ${IDIR_IPSEC_TOOLS}/usr/lib
 	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/etc
-	${INSTALL_DATA} ${WRKBUILD}/src/racoon/samples/racoon.conf ${IDIR_IPSEC_TOOLS}/etc/
-	${CP} ${WRKINST}/usr/lib/libipsec.so.* ${IDIR_IPSEC_TOOLS}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libracoon.so.* ${IDIR_IPSEC_TOOLS}/usr/lib/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/plainrsa-gen ${IDIR_IPSEC_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/racoon ${IDIR_IPSEC_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/racoonctl ${IDIR_IPSEC_TOOLS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/setkey ${IDIR_IPSEC_TOOLS}/usr/sbin/
+	${INSTALL_DATA} ${WRKBUILD}/src/racoon/samples/racoon.conf \
+		${IDIR_IPSEC_TOOLS}/etc/
+	${CP} ${WRKINST}/usr/lib/libipsec.so.* ${IDIR_IPSEC_TOOLS}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libracoon.so.* ${IDIR_IPSEC_TOOLS}/usr/lib
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/plainrsa-gen \
+		${IDIR_IPSEC_TOOLS}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/racoon ${IDIR_IPSEC_TOOLS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/racoonctl ${IDIR_IPSEC_TOOLS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/setkey ${IDIR_IPSEC_TOOLS}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

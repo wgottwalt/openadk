@@ -18,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBOSIP2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_nis_add=no
 CONFIGURE_ARGS+=	--disable-trace \
 			--enable-pthread \
 			--enable-semaphore \

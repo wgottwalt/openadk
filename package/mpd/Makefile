@@ -46,6 +46,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	\
 			--enable-alsa \
 			--disable-mod \

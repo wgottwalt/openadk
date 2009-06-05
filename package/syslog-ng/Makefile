@@ -21,6 +21,7 @@ CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-full-dynamic \
 			--enable-tcp-wrapper
 CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_DIR}/usr/bin
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

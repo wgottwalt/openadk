@@ -31,8 +31,9 @@ post-configure:
 	echo "socket" >> ${WRKBUILD}/ext/Setup
 
 post-install:
+	rm ${WRKINST}/usr/lib/*.a
 	rm -rf ${WRKINST}/usr/lib/site_ruby
-	find ${WRKINST}/usr -name "*.h" -delete
+	rm -rf ${WRKINST}/usr/include
 	${CP} ${WRKINST}/usr ${IDIR_RUBY}/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

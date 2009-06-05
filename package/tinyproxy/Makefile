@@ -16,10 +16,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TINYPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+CONFIGURE_STYLE:=	autoconf gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
-CONFIGURE_ENV+=		ac_cv_header_libintl_h=no
+CONFIGURE_ENV+=		ac_cv_header_libintl_h=no \
+			ac_cv_lib_nsl_gethostbyaddr=no \
+			ac_cv_lib_nsl_gethostname=no
 
 ifeq (${ADK_COMPILE_TINYPROXY_WITH_TRANSPARENT_PROXY},y)
 CONFIGURE_ARGS+=	--enable-transparent-proxy

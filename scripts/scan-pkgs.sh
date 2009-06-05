@@ -34,6 +34,10 @@ if [[ -n $ADK_COMPILE_AVAHI ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG avahi"
 fi
 
+if [[ -n $ADK_PACKAGE_SQUID ]]; then
+	NEED_SSLDEV="$NEED_SSLDEV squid"
+fi
+
 #if [[ -n $ADK_PACKAGE_RUBY ]]; then
 #	NEED_RUBY="$NEED_RUBY ruby"
 #fi
@@ -51,6 +55,13 @@ if [[ -n $NEED_GETTEXT ]]; then
 		out=1
 	elif ! which msgfmt >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_SSLDEV ]]; then
+	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
+		echo >&2 You need openssl headers to build $NEED_SQUID
 		out=1
 	fi
 fi

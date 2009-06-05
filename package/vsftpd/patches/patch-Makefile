@@ -1,19 +1,19 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- vsftpd-2.0.7.orig/Makefile	2008-02-12 04:52:15.000000000 +0100
-+++ vsftpd-2.0.7/Makefile	2008-08-31 21:53:34.000000000 +0200
+--- vsftpd-2.1.2.orig/Makefile	2009-05-22 21:44:52.000000000 +0200
++++ vsftpd-2.1.2/Makefile	2009-06-04 22:15:07.000000000 +0200
 @@ -5,8 +5,8 @@ IFLAGS  = -idirafter dummyinc
  #CFLAGS = -g
  CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
  
 -LIBS	=	`./vsf_findlibs.sh`
 -LINK	=	-Wl,-s
-+LIBS	=	-lcrypt -lnsl
++LIBS	=	-lcrypt
 +LINK	=
  
  OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
  		tunables.o ftpdataio.o secbuf.o ls.o \
 @@ -17,6 +17,8 @@ OBJS	=	main.o utility.o prelogin.o ftpcm
-     ssl.o sysutil.o sysdeputil.o
+     ssl.o sslslave.o ptracesandbox.o ftppolicy.o sysutil.o sysdeputil.o
  
  
 +DESTDIR =

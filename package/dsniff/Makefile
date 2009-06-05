@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-db \
 			--without-x \
 			--with-gdbm="${STAGING_DIR}/usr" \

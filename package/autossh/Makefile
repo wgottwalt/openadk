@@ -20,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,AUTOSSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	ac_cv_lib_nsl_gethostbyname=no
 BUILD_STYLE:=		auto
 
 do-install:

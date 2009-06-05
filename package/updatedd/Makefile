@@ -32,6 +32,7 @@ $(eval $(call PKG_template,UPDATEDD_MOD_REGFISH,updatedd-mod-regfish,${PKG_VERSI
 $(eval $(call PKG_template,UPDATEDD_MOD_TZO,updatedd-mod-tzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	ac_cv_lib_nsl_gethostbyname=no
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

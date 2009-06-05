@@ -31,6 +31,6 @@ pre-build:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBJPEG}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libjpeg.* ${IDIR_LIBJPEG}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libjpeg.so* ${IDIR_LIBJPEG}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,23 @@
+--- ppp-2.4.4.orig/pppd/plugins/rp-pppoe/Makefile.linux	2006-06-04 07:07:46.000000000 +0200
++++ ppp-2.4.4/pppd/plugins/rp-pppoe/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
+@@ -39,9 +39,9 @@ rp-pppoe.so: libplugin.a plugin.o
+ 
+ install: all
+ 	$(INSTALL) -d -m 755 $(LIBDIR)
+-	$(INSTALL) -s -c -m 4550 rp-pppoe.so $(LIBDIR)
++	$(INSTALL) -c -m 4550 rp-pppoe.so $(LIBDIR)
+ 	$(INSTALL) -d -m 755 $(BINDIR)
+-	$(INSTALL) -s -c -m 555 pppoe-discovery $(BINDIR)
++	$(INSTALL) -c -m 555 pppoe-discovery $(BINDIR)
+ 
+ clean:
+ 	rm -f *.o *.so
+@@ -50,7 +50,7 @@ plugin.o: plugin.c
+ 	$(CC) '-DRP_VERSION="$(VERSION)"' $(CFLAGS) -I../../..  -c -o plugin.o -fPIC plugin.c
+ 
+ libplugin.a: discovery.o if.o common.o debug.o
+-	$(AR) -rc $@ $^
++	$(TARGET_AR) -rcs $@ $^
+ 
+ discovery.o: discovery.c
+ 	$(CC) $(CFLAGS) '-DVERSION="$(VERSION)"' -c -o discovery.o -fPIC discovery.c

@@ -1,7 +1,6 @@
-diff -Nur ppp-2.4.4.orig/pppd/Makefile.linux ppp-2.4.4/pppd/Makefile.linux
 --- ppp-2.4.4.orig/pppd/Makefile.linux	2006-06-04 07:07:46.000000000 +0200
-+++ ppp-2.4.4/pppd/Makefile.linux	2007-10-04 08:53:26.000000000 +0200
-@@ -48,7 +48,7 @@
++++ ppp-2.4.4/pppd/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
+@@ -48,7 +48,7 @@ MPPE=y
  # Uncomment the next line to include support for PPP packet filtering.
  # This requires that the libpcap library and headers be installed
  # and that the kernel driver support PPP packet filtering.
@@ -10,7 +9,7 @@ diff -Nur ppp-2.4.4.orig/pppd/Makefile.linux ppp-2.4.4/pppd/Makefile.linux
  
  # Uncomment the next line to enable multilink PPP (enabled by default)
  # Linux distributions: Please leave multilink ENABLED in your builds
-@@ -58,9 +58,9 @@
+@@ -58,9 +58,9 @@ HAVE_MULTILINK=y
  # Uncomment the next line to enable the TDB database (enabled by default.)
  # If you enable multilink, then TDB is automatically enabled also.
  # Linux distributions: Please leave TDB ENABLED in your builds.
@@ -22,7 +21,7 @@ diff -Nur ppp-2.4.4.orig/pppd/Makefile.linux ppp-2.4.4/pppd/Makefile.linux
  #USE_PAM=y
  #HAVE_INET6=y
  
-@@ -77,7 +77,7 @@
+@@ -77,7 +77,7 @@ MAXOCTETS=y
  
  INCLUDE_DIRS= -I../include
  
@@ -31,7 +30,16 @@ diff -Nur ppp-2.4.4.orig/pppd/Makefile.linux ppp-2.4.4/pppd/Makefile.linux
  
  CFLAGS= $(COPTS) $(COMPILE_FLAGS) $(INCLUDE_DIRS) '-DDESTDIR="@DESTDIR@"'
  
-@@ -117,10 +117,8 @@
+@@ -99,7 +99,7 @@ ifdef USE_SRP
+ CFLAGS	+= -DUSE_SRP -DOPENSSL -I/usr/local/ssl/include
+ LIBS	+= -lsrp -L/usr/local/ssl/lib -lcrypto
+ TARGETS	+= srp-entry
+-EXTRAINSTALL = $(INSTALL) -s -c -m 555 srp-entry $(BINDIR)/srp-entry
++EXTRAINSTALL = $(INSTALL) -c -m 555 srp-entry $(BINDIR)/srp-entry
+ MANPAGES += srp-entry.8
+ EXTRACLEAN += srp-entry.o
+ NEEDDES=y
+@@ -117,10 +117,8 @@ CFLAGS   += -DHAS_SHADOW
  #LIBS     += -lshadow $(LIBS)
  endif
  
@@ -42,3 +50,12 @@ diff -Nur ppp-2.4.4.orig/pppd/Makefile.linux ppp-2.4.4/pppd/Makefile.linux
  
  ifdef NEEDDES
  ifndef USE_CRYPT
+@@ -200,7 +198,7 @@ all: $(TARGETS)
+ install: pppd
+ 	mkdir -p $(BINDIR) $(MANDIR)
+ 	$(EXTRAINSTALL)
+-	$(INSTALL) -s -c -m 555 pppd $(BINDIR)/pppd
++	$(INSTALL) -c -m 555 pppd $(BINDIR)/pppd
+ 	if chgrp pppusers $(BINDIR)/pppd 2>/dev/null; then \
+ 	  chmod o-rx,u+s $(BINDIR)/pppd; fi
+ 	$(INSTALL) -c -m 444 pppd.8 $(MANDIR)

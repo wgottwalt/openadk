@@ -17,13 +17,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPCAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_pton=no
 CONFIGURE_ARGS+=	--with-ifst=linux \
 			--with-psrc=pcap \
 			--with-pcap-include="${STAGING_DIR}/usr/include" \
 			--with-pcap-libraries="${STAGING_DIR}/usr/lib"
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 pre-build:
 	touch $(WRKBUILD)/cfglex.c $(WRKBUILD)/cslex.c

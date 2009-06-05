@@ -1,6 +1,5 @@
-diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
---- ppp.old/pppd/main.c	2005-11-11 19:19:28.177790000 +0100
-+++ ppp.dev/pppd/main.c	2005-11-11 20:18:05.957363000 +0100
+--- ppp-2.4.4.orig/pppd/main.c	2006-06-04 05:52:50.000000000 +0200
++++ ppp-2.4.4/pppd/main.c	2009-06-05 19:12:00.000000000 +0200
 @@ -90,6 +90,7 @@
  #include <sys/socket.h>
  #include <netinet/in.h>
@@ -9,7 +8,7 @@ diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
  
  #include "pppd.h"
  #include "magic.h"
-@@ -227,6 +228,7 @@
+@@ -227,6 +228,7 @@ static struct subprocess *children;
  
  /* Prototypes for procedures local to this file. */
  
@@ -17,7 +16,7 @@ diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
  static void setup_signals __P((void));
  static void create_pidfile __P((int pid));
  static void create_linkpidfile __P((int pid));
-@@ -531,6 +533,7 @@
+@@ -529,6 +531,7 @@ main(argc, argv)
  	    info("Starting link");
  	}
  
@@ -25,7 +24,7 @@ diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
  	gettimeofday(&start_time, NULL);
  	script_unsetenv("CONNECT_TIME");
  	script_unsetenv("BYTES_SENT");
-@@ -1195,6 +1198,36 @@
+@@ -1262,6 +1265,36 @@ struct	callout {
  
  static struct callout *callout = NULL;	/* Callout list */
  static struct timeval timenow;		/* Current time */
@@ -62,7 +61,7 @@ diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
  
  /*
   * timeout - Schedule a timeout.
-@@ -1265,6 +1298,8 @@
+@@ -1332,6 +1365,8 @@ calltimeout()
  {
      struct callout *p;
  
@@ -71,7 +70,7 @@ diff -urN ppp.old/pppd/main.c ppp.dev/pppd/main.c
      while (callout != NULL) {
  	p = callout;
  
-@@ -1292,6 +1327,8 @@
+@@ -1359,6 +1394,8 @@ timeleft(tvp)
  {
      if (callout == NULL)
  	return NULL;

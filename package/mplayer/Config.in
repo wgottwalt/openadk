@@ -12,7 +12,6 @@ config ADK_PACKAGE_MPLAYER
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_LIBFAAD2
-	depends on ADK_LINUX_X86_ALIX1C
 	help
           http://www.mplayerhq.hu
 

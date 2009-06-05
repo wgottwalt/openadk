@@ -31,6 +31,7 @@ TLDFLAGS+=		-liconv -shared
 endif
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_setsockopt=no
 CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_DIR}/usr'
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto confprog

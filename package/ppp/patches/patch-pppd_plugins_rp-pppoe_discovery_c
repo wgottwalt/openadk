@@ -1,7 +1,6 @@
-diff -urN ppp.old/pppd/plugins/rp-pppoe/discovery.c ppp.dev/pppd/plugins/rp-pppoe/discovery.c
---- ppp.old/pppd/plugins/rp-pppoe/discovery.c	2005-09-05 15:25:35.917232000 +0200
-+++ ppp.dev/pppd/plugins/rp-pppoe/discovery.c	2005-09-05 15:29:17.233586872 +0200
-@@ -593,12 +593,14 @@
+--- ppp-2.4.4.orig/pppd/plugins/rp-pppoe/discovery.c	2005-03-22 11:22:32.000000000 +0100
++++ ppp-2.4.4/pppd/plugins/rp-pppoe/discovery.c	2009-06-05 19:12:00.000000000 +0200
+@@ -607,12 +607,14 @@ discovery(PPPoEConnection *conn)
  	conn->discoveryState = STATE_SENT_PADI;
  	waitForPADO(conn, timeout);
  
@@ -16,7 +15,7 @@ diff -urN ppp.old/pppd/plugins/rp-pppoe/discovery.c ppp.dev/pppd/plugins/rp-pppo
  	if (conn->printACNames && conn->numPADOs) {
  	    break;
  	}
-@@ -621,7 +623,9 @@
+@@ -635,7 +637,9 @@ discovery(PPPoEConnection *conn)
  	sendPADR(conn);
  	conn->discoveryState = STATE_SENT_PADR;
  	waitForPADS(conn, timeout);

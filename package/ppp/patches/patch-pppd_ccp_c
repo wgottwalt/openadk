@@ -1,107 +1,6 @@
-diff -ruN ppp-2.4.3.orig/include/linux/ppp-comp.h ppp-2.4.3/include/linux/ppp-comp.h
---- ppp-2.4.3.orig/include/linux/ppp-comp.h	2002-12-06 10:49:15.000000000 +0100
-+++ ppp-2.4.3/include/linux/ppp-comp.h	2004-11-21 13:54:09.000000000 +0100
-@@ -36,7 +36,7 @@
-  */
- 
- /*
-- *  ==FILEVERSION 20020319==
-+ *  ==FILEVERSION 20020715==
-  *
-  *  NOTE TO MAINTAINERS:
-  *     If you modify this file at all, please set the above date.
-@@ -86,7 +86,7 @@
- 
- 	/* Compress a packet */
- 	int     (*compress) (void *state, unsigned char *rptr,
--			      unsigned char *obuf, int isize, int osize);
-+			     unsigned char *obuf, int isize, int osize);
- 
- 	/* Return compression statistics */
- 	void	(*comp_stat) (void *state, struct compstat *stats);
-@@ -107,7 +107,7 @@
- 
- 	/* Decompress a packet. */
- 	int	(*decompress) (void *state, unsigned char *ibuf, int isize,
--				unsigned char *obuf, int osize);
-+			       unsigned char *obuf, int osize);
- 
- 	/* Update state for an incompressible packet received */
- 	void	(*incomp) (void *state, unsigned char *ibuf, int icnt);
-@@ -288,6 +288,33 @@
- 	    opts |= MPPE_OPT_UNKNOWN;		\
-     } while (/* CONSTCOND */ 0)
- 
-+/* MPPE/MPPC definitions by J.D.*/
-+#define MPPE_STATELESS          MPPE_H_BIT	/* configuration bit H */
-+#define MPPE_40BIT              MPPE_L_BIT	/* configuration bit L */
-+#define MPPE_56BIT              MPPE_M_BIT	/* configuration bit M */
-+#define MPPE_128BIT             MPPE_S_BIT	/* configuration bit S */
-+#define MPPE_MPPC               MPPE_C_BIT	/* configuration bit C */
-+
-+/*
-+ * Definitions for Stac LZS.
-+ */
-+
-+#define CI_LZS			17	/* config option for Stac LZS */
-+#define CILEN_LZS		5	/* length of config option */
-+
-+#define LZS_OVHD		4	/* max. LZS overhead */
-+#define LZS_HIST_LEN		2048	/* LZS history size */
-+#define LZS_MAX_CCOUNT		0x0FFF	/* max. coherency counter value */
-+
-+#define LZS_MODE_NONE		0
-+#define LZS_MODE_LCB		1
-+#define LZS_MODE_CRC		2
-+#define LZS_MODE_SEQ		3
-+#define LZS_MODE_EXT		4
-+
-+#define LZS_EXT_BIT_FLUSHED	0x80	/* bit A */
-+#define LZS_EXT_BIT_COMP	0x20	/* bit C */
-+
- /*
-  * Definitions for other, as yet unsupported, compression methods.
-  */
-diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
---- ppp-2.4.3.orig/include/net/ppp-comp.h	2002-12-06 10:49:15.000000000 +0100
-+++ ppp-2.4.3/include/net/ppp-comp.h	2004-11-21 13:54:09.000000000 +0100
-@@ -255,6 +255,33 @@
- 	    opts |= MPPE_OPT_UNKNOWN;		\
-     } while (/* CONSTCOND */ 0)
- 
-+/* MPPE/MPPC definitions by J.D.*/
-+#define MPPE_STATELESS          MPPE_H_BIT	/* configuration bit H */
-+#define MPPE_40BIT              MPPE_L_BIT	/* configuration bit L */
-+#define MPPE_56BIT              MPPE_M_BIT	/* configuration bit M */
-+#define MPPE_128BIT             MPPE_S_BIT	/* configuration bit S */
-+#define MPPE_MPPC               MPPE_C_BIT	/* configuration bit C */
-+
-+/*
-+ * Definitions for Stac LZS.
-+ */
-+
-+#define CI_LZS			17	/* config option for Stac LZS */
-+#define CILEN_LZS		5	/* length of config option */
-+
-+#define LZS_OVHD		4	/* max. LZS overhead */
-+#define LZS_HIST_LEN		2048	/* LZS history size */
-+#define LZS_MAX_CCOUNT		0x0FFF	/* max. coherency counter value */
-+
-+#define LZS_MODE_NONE		0
-+#define LZS_MODE_LCB		1
-+#define LZS_MODE_CRC		2
-+#define LZS_MODE_SEQ		3
-+#define LZS_MODE_EXT		4
-+
-+#define LZS_EXT_BIT_FLUSHED	0x80	/* bit A */
-+#define LZS_EXT_BIT_COMP	0x20	/* bit C */
-+
- /*
-  * Definitions for other, as yet unsupported, compression methods.
-  */
---- ppp-2.4.4/pppd/ccp.c.orig	2005-07-09 02:23:05.000000000 +0200
-+++ ppp-2.4.4/pppd/ccp.c	2006-07-21 23:34:12.121546000 +0200
-@@ -62,12 +62,10 @@
+--- ppp-2.4.4.orig/pppd/ccp.c	2005-07-09 02:23:05.000000000 +0200
++++ ppp-2.4.4/pppd/ccp.c	2009-06-05 19:12:00.000000000 +0200
+@@ -62,12 +62,10 @@ static int setdeflate __P((char **));
  static char bsd_value[8];
  static char deflate_value[8];
  
@@ -117,22 +16,11 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  
  static option_t ccp_option_list[] = {
      { "noccp", o_bool, &ccp_protent.enabled_flag,
-@@ -108,54 +106,36 @@
+@@ -108,54 +106,36 @@ static option_t ccp_option_list[] = {
        "don't allow Predictor-1", OPT_ALIAS | OPT_PRIOSUB | OPT_A2CLR,
        &ccp_allowoptions[0].predictor_1 },
  
-+    { "lzs", o_bool, &ccp_wantoptions[0].lzs,
-+      "request Stac LZS", 1, &ccp_allowoptions[0].lzs, OPT_PRIO },
-+    { "+lzs", o_bool, &ccp_wantoptions[0].lzs,
-+      "request Stac LZS", 1, &ccp_allowoptions[0].lzs, OPT_ALIAS | OPT_PRIO },
-+    { "nolzs", o_bool, &ccp_wantoptions[0].lzs,
-+      "don't allow Stac LZS", OPT_PRIOSUB | OPT_A2CLR,
-+      &ccp_allowoptions[0].lzs },
-+    { "-lzs", o_bool, &ccp_wantoptions[0].lzs,
-+      "don't allow Stac LZS", OPT_ALIAS | OPT_PRIOSUB | OPT_A2CLR,
-+      &ccp_allowoptions[0].lzs },
-+
- #ifdef MPPE
+-#ifdef MPPE
 -    /* MPPE options are symmetrical ... we only set wantoptions here */
 -    { "require-mppe", o_bool, &ccp_wantoptions[0].mppe,
 -      "require MPPE encryption",
@@ -174,12 +62,23 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 -      "don't allow MPPE 128-bit encryption",
 -      OPT_ALIAS | OPT_PRIOSUB | OPT_A2CLRB | MPPE_OPT_128,
 -      &ccp_wantoptions[0].mppe },
--
++    { "lzs", o_bool, &ccp_wantoptions[0].lzs,
++      "request Stac LZS", 1, &ccp_allowoptions[0].lzs, OPT_PRIO },
++    { "+lzs", o_bool, &ccp_wantoptions[0].lzs,
++      "request Stac LZS", 1, &ccp_allowoptions[0].lzs, OPT_ALIAS | OPT_PRIO },
++    { "nolzs", o_bool, &ccp_wantoptions[0].lzs,
++      "don't allow Stac LZS", OPT_PRIOSUB | OPT_A2CLR,
++      &ccp_allowoptions[0].lzs },
++    { "-lzs", o_bool, &ccp_wantoptions[0].lzs,
++      "don't allow Stac LZS", OPT_ALIAS | OPT_PRIOSUB | OPT_A2CLR,
++      &ccp_allowoptions[0].lzs },
+ 
 -    /* strange one; we always request stateless, but will we allow stateful? */
 -    { "mppe-stateful", o_bool, &refuse_mppe_stateful,
 -      "allow MPPE stateful mode", OPT_PRIO },
 -    { "nomppe-stateful", o_bool, &refuse_mppe_stateful,
 -      "disallow MPPE stateful mode", OPT_PRIO | 1 },
++#ifdef MPPE
 +    { "mppc", o_bool, &ccp_wantoptions[0].mppc,
 +      "request MPPC compression", 1, &ccp_allowoptions[0].mppc },
 +    { "+mppc", o_bool, &ccp_wantoptions[0].mppc,
@@ -201,7 +100,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  #endif /* MPPE */
  
      { NULL }
-@@ -241,7 +221,7 @@
+@@ -241,7 +221,7 @@ static fsm_callbacks ccp_callbacks = {
   */
  #define ANY_COMPRESS(opt)	((opt).deflate || (opt).bsd_compress \
  				 || (opt).predictor_1 || (opt).predictor_2 \
@@ -210,7 +109,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  
  /*
   * Local state (mainly for handling reset-reqs and reset-acks).
-@@ -344,6 +324,100 @@
+@@ -344,6 +324,100 @@ setdeflate(argv)
      return 1;
  }
  
@@ -311,7 +210,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  /*
   * ccp_init - initialize CCP.
   */
-@@ -378,6 +452,30 @@
+@@ -378,6 +452,30 @@ ccp_init(unit)
      ccp_allowoptions[0].bsd_bits = BSD_MAX_BITS;
  
      ccp_allowoptions[0].predictor_1 = 1;
@@ -342,7 +241,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  }
  
  /*
-@@ -455,11 +553,11 @@
+@@ -455,11 +553,11 @@ ccp_input(unit, p, len)
      if (oldstate == OPENED && p[0] == TERMREQ && f->state != OPENED) {
  	notice("Compression disabled by peer.");
  #ifdef MPPE
@@ -356,7 +255,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      }
  
      /*
-@@ -487,6 +585,15 @@
+@@ -487,6 +585,15 @@ ccp_extcode(f, code, id, p, len)
  	    break;
  	/* send a reset-ack, which the transmitter will see and
  	   reset its compression state. */
@@ -372,7 +271,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	fsm_sdata(f, CCP_RESETACK, id, NULL, 0);
  	break;
  
-@@ -515,12 +622,11 @@
+@@ -515,12 +622,11 @@ ccp_protrej(unit)
      fsm_lowerdown(&ccp_fsm[unit]);
  
  #ifdef MPPE
@@ -387,7 +286,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  }
  
  /*
-@@ -537,7 +643,7 @@
+@@ -537,7 +643,7 @@ ccp_resetci(f)
      all_rejected[f->unit] = 0;
  
  #ifdef MPPE
@@ -396,7 +295,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	ccp_options *ao = &ccp_allowoptions[f->unit];
  	int auth_mschap_bits = auth_done[f->unit];
  	int numbits;
-@@ -551,80 +657,109 @@
+@@ -551,80 +657,109 @@ ccp_resetci(f)
  	 * NB: If MPPE is required, all other compression opts are invalid.
  	 *     So, we return right away if we can't do it.
  	 */
@@ -441,36 +340,19 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 -	    error("MPPE required, but MS-CHAP[v2] auth not performed.");
 -	    lcp_close(f->unit, "MPPE required but not available");
 -	    return;
--	}
--
--	/* A plugin (eg radius) may not have obtained key material. */
--	if (!mppe_keys_set) {
--	    error("MPPE required, but keys are not available.  "
--		  "Possible plugin problem?");
--	    lcp_close(f->unit, "MPPE required but not available");
--	    return;
--	}
--
--	/* LM auth not supported for MPPE */
--	if (auth_done[f->unit] & (CHAP_MS_WITHPEER | CHAP_MS_PEER)) {
--	    /* This might be noise */
--	    if (go->mppe & MPPE_OPT_40) {
--		notice("Disabling 40-bit MPPE; MS-CHAP LM not supported");
--		go->mppe &= ~MPPE_OPT_40;
--		ccp_wantoptions[f->unit].mppe &= ~MPPE_OPT_40;
 +	    /* A plugin (eg radius) may not have obtained key material. */
 +	    if (!mppe_keys_set) {
 +		error("MPPE required, but keys are not available.  "
 +		      "Possible plugin problem?");
 +		lcp_close(f->unit, "MPPE required but not available");
 +		return;
- 	    }
++	    }
  	}
  
--	/* Last check: can we actually negotiate something? */
--	if (!(go->mppe & (MPPE_OPT_40 | MPPE_OPT_128))) {
--	    /* Could be misconfig, could be 40-bit disabled above. */
--	    error("MPPE required, but both 40-bit and 128-bit disabled.");
+-	/* A plugin (eg radius) may not have obtained key material. */
+-	if (!mppe_keys_set) {
+-	    error("MPPE required, but keys are not available.  "
+-		  "Possible plugin problem?");
 -	    lcp_close(f->unit, "MPPE required but not available");
 -	    return;
 +	/*
@@ -487,7 +369,16 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +	    opt_buf[5] = MPPE_MPPC;
 +	    if (ccp_test(f->unit, opt_buf, CILEN_MPPE, 0) <= 0)
 +		go->mppc = 0;
-+	}
+ 	}
+-
+-	/* LM auth not supported for MPPE */
+-	if (auth_done[f->unit] & (CHAP_MS_WITHPEER | CHAP_MS_PEER)) {
+-	    /* This might be noise */
+-	    if (go->mppe & MPPE_OPT_40) {
+-		notice("Disabling 40-bit MPPE; MS-CHAP LM not supported");
+-		go->mppe &= ~MPPE_OPT_40;
+-		ccp_wantoptions[f->unit].mppe &= ~MPPE_OPT_40;
+-	    }
 +	if (go->mppe_40) {
 +	    opt_buf[0] = CI_MPPE;
 +	    opt_buf[1] = CILEN_MPPE;
@@ -497,7 +388,14 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +	    opt_buf[5] = MPPE_40BIT;
 +	    if (ccp_test(f->unit, opt_buf, CILEN_MPPE + MPPE_MAX_KEY_LEN, 0) <= 0)
 +		go->mppe_40 = 0;
-+	}
+ 	}
+-
+-	/* Last check: can we actually negotiate something? */
+-	if (!(go->mppe & (MPPE_OPT_40 | MPPE_OPT_128))) {
+-	    /* Could be misconfig, could be 40-bit disabled above. */
+-	    error("MPPE required, but both 40-bit and 128-bit disabled.");
+-	    lcp_close(f->unit, "MPPE required but not available");
+-	    return;
 +	if (go->mppe_56) {
 +	    opt_buf[0] = CI_MPPE;
 +	    opt_buf[1] = CILEN_MPPE;
@@ -572,7 +470,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      if (go->bsd_compress) {
  	opt_buf[0] = CI_BSD_COMPRESS;
  	opt_buf[1] = CILEN_BSD_COMPRESS;
-@@ -679,7 +814,8 @@
+@@ -679,7 +814,8 @@ ccp_cilen(f)
  	+ (go->deflate? CILEN_DEFLATE: 0)
  	+ (go->predictor_1? CILEN_PREDICTOR_1: 0)
  	+ (go->predictor_2? CILEN_PREDICTOR_2: 0)
@@ -582,7 +480,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  }
  
  /*
-@@ -693,6 +829,8 @@
+@@ -693,6 +829,8 @@ ccp_addci(f, p, lenp)
  {
      int res;
      ccp_options *go = &ccp_gotoptions[f->unit];
@@ -591,7 +489,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      u_char *p0 = p;
  
      /*
-@@ -701,22 +839,43 @@
+@@ -701,22 +839,43 @@ ccp_addci(f, p, lenp)
       * in case it gets Acked.
       */
  #ifdef MPPE
@@ -644,7 +542,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      if (go->deflate) {
  	p[0] = go->deflate_correct? CI_DEFLATE: CI_DEFLATE_DRAFT;
  	p[1] = CILEN_DEFLATE;
-@@ -802,7 +961,7 @@
+@@ -802,7 +961,7 @@ ccp_addci(f, p, lenp)
  
  /*
   * ccp_ackci - process a received configure-ack, and return
@@ -653,7 +551,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
   */
  static int
  ccp_ackci(f, p, len)
-@@ -811,24 +970,44 @@
+@@ -811,24 +970,44 @@ ccp_ackci(f, p, len)
      int len;
  {
      ccp_options *go = &ccp_gotoptions[f->unit];
@@ -707,7 +605,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      if (go->deflate) {
  	if (len < CILEN_DEFLATE
  	    || p[0] != (go->deflate_correct? CI_DEFLATE: CI_DEFLATE_DRAFT)
-@@ -891,7 +1070,7 @@
+@@ -891,7 +1070,7 @@ ccp_ackci(f, p, len)
  
  /*
   * ccp_nakci - process received configure-nak.
@@ -716,7 +614,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
   */
  static int
  ccp_nakci(f, p, len, treat_as_reject)
-@@ -901,6 +1080,8 @@
+@@ -901,6 +1080,8 @@ ccp_nakci(f, p, len, treat_as_reject)
      int treat_as_reject;
  {
      ccp_options *go = &ccp_gotoptions[f->unit];
@@ -725,7 +623,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      ccp_options no;		/* options we've seen already */
      ccp_options try;		/* options to ask for next time */
  
-@@ -908,28 +1089,100 @@
+@@ -908,28 +1089,100 @@ ccp_nakci(f, p, len, treat_as_reject)
      try = *go;
  
  #ifdef MPPE
@@ -743,19 +641,18 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 -	} else if (((go->mppe | MPPE_OPT_STATEFUL) & try.mppe) != try.mppe) {
 -	    /* Peer must have set options we didn't request (suggest) */
 -	    try.mppe = 0;
--	}
 +    if ((go->mppe || go->mppc || (!wo->mppe && ao->mppe)) &&
 +	len >= CILEN_MPPE && p[0] == CI_MPPE && p[1] == CILEN_MPPE) {
- 
--	if (!try.mppe) {
--	    error("MPPE required but peer negotiation failed");
--	    lcp_close(f->unit, "MPPE required but peer negotiation failed");
++
 +	if (go->mppc) {
 +	    no.mppc = 1;
 +	    if (!(p[5] & MPPE_MPPC))
 +		try.mppc = 0;
-+	}
-+
+ 	}
+ 
+-	if (!try.mppe) {
+-	    error("MPPE required but peer negotiation failed");
+-	    lcp_close(f->unit, "MPPE required but peer negotiation failed");
 +	if (go->mppe)
 +	    no.mppe = 1;
 +	if (go->mppe_40)
@@ -772,7 +669,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +		try.mppe_40 = 1;
 +	    else
 +		try.mppe_40 = (p[5] == 0) ? 1 : 0;
-+	}
+ 	}
 +	if (ao->mppe_56) {
 +	    if ((p[5] & MPPE_56BIT))
 +		try.mppe_56 = 1;
@@ -810,7 +707,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +	    wo->mppc = wo->mppe = wo->mppe_stateless = wo->mppe_40 =
 +		wo->mppe_56 = wo->mppe_128 = 0;
 +	    lcp_close(f->unit, "Cannot negotiate MPPE key length");
- 	}
++	}
 +	if (try.mppe_40 && try.mppe_56 && try.mppe_128)
 +	    try.mppe_40 = try.mppe_56 = 0;
 +	else
@@ -844,7 +741,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      if (go->deflate && len >= CILEN_DEFLATE
  	&& p[0] == (go->deflate_correct? CI_DEFLATE: CI_DEFLATE_DRAFT)
  	&& p[1] == CILEN_DEFLATE) {
-@@ -1002,14 +1255,50 @@
+@@ -1002,14 +1255,50 @@ ccp_rejci(f, p, len)
  	return -1;
  
  #ifdef MPPE
@@ -899,7 +796,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      if (go->deflate_correct && len >= CILEN_DEFLATE
  	&& p[0] == CI_DEFLATE && p[1] == CILEN_DEFLATE) {
  	if (p[2] != DEFLATE_MAKE_OPT(go->deflate_size)
-@@ -1073,14 +1362,15 @@
+@@ -1073,14 +1362,15 @@ ccp_reqci(f, p, lenp, dont_nak)
      int dont_nak;
  {
      int ret, newret, res;
@@ -919,7 +816,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  
      ret = CONFACK;
      retp = p0 = p;
-@@ -1103,106 +1393,307 @@
+@@ -1103,106 +1393,307 @@ ccp_reqci(f, p, lenp, dont_nak)
  	    switch (type) {
  #ifdef MPPE
  	    case CI_MPPE:
@@ -983,9 +880,13 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +			    p[5] &= ~MPPE_MPPC;
 +			    newret = CONFNAK;
 +			}
-+		    }
-+		}
-+
+ 		    }
+ 		}
+ 
+-		/* Find out which of {S,L} are set. */
+-		if ((ho->mppe & MPPE_OPT_128)
+-		     && (ho->mppe & MPPE_OPT_40)) {
+-		    /* Both are set, negotiate the strongest. */
 +		if (ao->mppe)
 +		    ho->mppe = 1;
 +
@@ -1008,13 +909,9 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
 +			wo->mppe_stateless = 0;
 +			newret = CONFNAK;
 +			p[2] |= MPPE_STATELESS;
- 		    }
- 		}
- 
--		/* Find out which of {S,L} are set. */
--		if ((ho->mppe & MPPE_OPT_128)
--		     && (ho->mppe & MPPE_OPT_40)) {
--		    /* Both are set, negotiate the strongest. */
++		    }
++		}
++
 +		if ((p[5] & ~MPPE_MPPC) == (MPPE_40BIT|MPPE_56BIT|MPPE_128BIT)) {
  		    newret = CONFNAK;
 -		    if (ao->mppe & MPPE_OPT_128)
@@ -1300,7 +1197,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	    case CI_DEFLATE:
  	    case CI_DEFLATE_DRAFT:
  		if (!ao->deflate || clen != CILEN_DEFLATE
-@@ -1344,12 +1835,6 @@
+@@ -1344,12 +1835,6 @@ ccp_reqci(f, p, lenp, dont_nak)
  	else
  	    *lenp = retp - p0;
      }
@@ -1313,7 +1210,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      return ret;
  }
  
-@@ -1371,24 +1856,35 @@
+@@ -1371,24 +1856,35 @@ method_name(opt, opt2)
  	char *p = result;
  	char *q = result + sizeof(result); /* 1 past result */
  
@@ -1365,7 +1262,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
      case CI_DEFLATE:
      case CI_DEFLATE_DRAFT:
  	if (opt2 != NULL && opt2->deflate_size != opt->deflate_size)
-@@ -1444,12 +1940,12 @@
+@@ -1444,12 +1940,12 @@ ccp_up(f)
      } else if (ANY_COMPRESS(*ho))
  	notice("%s transmit compression enabled", method_name(ho, NULL));
  #ifdef MPPE
@@ -1380,7 +1277,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  }
  
  /*
-@@ -1472,7 +1968,7 @@
+@@ -1472,7 +1968,7 @@ ccp_down(f)
  	    lcp_close(f->unit, "MPPE disabled");
  	}
      }
@@ -1389,7 +1286,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  }
  
  /*
-@@ -1532,24 +2028,28 @@
+@@ -1532,24 +2028,28 @@ ccp_printpkt(p, plen, printer, arg)
  #ifdef MPPE
  	    case CI_MPPE:
  		if (optlen >= CILEN_MPPE) {
@@ -1430,7 +1327,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	    case CI_DEFLATE:
  	    case CI_DEFLATE_DRAFT:
  		if (optlen >= CILEN_DEFLATE) {
-@@ -1635,6 +2135,7 @@
+@@ -1635,6 +2135,7 @@ ccp_datainput(unit, pkt, len)
  	    error("Lost compression sync: disabling compression");
  	    ccp_close(unit, "Lost compression sync");
  #ifdef MPPE
@@ -1438,7 +1335,7 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	    /*
  	     * If we were doing MPPE, we must also take the link down.
  	     */
-@@ -1642,9 +2143,18 @@
+@@ -1642,9 +2143,18 @@ ccp_datainput(unit, pkt, len)
  		error("Too many MPPE errors, closing LCP");
  		lcp_close(unit, "Too many MPPE errors");
  	    }
@@ -1458,130 +1355,8 @@ diff -ruN ppp-2.4.3.orig/include/net/ppp-comp.h ppp-2.4.3/include/net/ppp-comp.h
  	     * Send a reset-request to reset the peer's compressor.
  	     * We don't do that if we are still waiting for an
  	     * acknowledgement to a previous reset-request.
-@@ -1675,4 +2185,3 @@
+@@ -1675,4 +2185,3 @@ ccp_rack_timeout(arg)
      } else
  	ccp_localstate[f->unit] &= ~RACK_PENDING;
  }
 -
-diff -ruN ppp-2.4.3.orig/pppd/ccp.h ppp-2.4.3/pppd/ccp.h
---- ppp-2.4.3.orig/pppd/ccp.h	2004-11-04 11:02:26.000000000 +0100
-+++ ppp-2.4.3/pppd/ccp.h	2004-11-21 13:54:09.000000000 +0100
-@@ -37,9 +37,17 @@
-     bool predictor_2;		/* do Predictor-2? */
-     bool deflate_correct;	/* use correct code for deflate? */
-     bool deflate_draft;		/* use draft RFC code for deflate? */
-+    bool lzs;			/* do Stac LZS? */
-+    bool mppc;			/* do MPPC? */
-     bool mppe;			/* do MPPE? */
-+    bool mppe_40;		/* allow 40 bit encryption? */
-+    bool mppe_56;		/* allow 56 bit encryption? */
-+    bool mppe_128;		/* allow 128 bit encryption? */
-+    bool mppe_stateless;	/* allow stateless encryption */
-     u_short bsd_bits;		/* # bits/code for BSD Compress */
-     u_short deflate_size;	/* lg(window size) for Deflate */
-+    u_short lzs_mode;		/* LZS check mode */
-+    u_short lzs_hists;		/* number of LZS histories */
-     short method;		/* code for chosen compression method */
- } ccp_options;
- 
-diff -ruN ppp-2.4.3.orig/pppd/chap_ms.c ppp-2.4.3/pppd/chap_ms.c
---- ppp-2.4.3.orig/pppd/chap_ms.c	2004-11-12 10:57:43.000000000 +0100
-+++ ppp-2.4.3/pppd/chap_ms.c	2004-11-21 13:54:09.000000000 +0100
-@@ -895,13 +895,17 @@
-     /*
-      * Disable undesirable encryption types.  Note that we don't ENABLE
-      * any encryption types, to avoid overriding manual configuration.
-+     *
-+     * It seems that 56 bit keys are unsupported in MS-RADIUS (see RFC 2548)
-      */
-     switch(types) {
- 	case MPPE_ENC_TYPES_RC4_40:
--	    ccp_wantoptions[0].mppe &= ~MPPE_OPT_128;	/* disable 128-bit */
-+	    ccp_wantoptions[0].mppe_128 = 0;	/* disable 128-bit */
-+	    ccp_wantoptions[0].mppe_56 = 0;	/* disable 56-bit */
- 	    break;
- 	case MPPE_ENC_TYPES_RC4_128:
--	    ccp_wantoptions[0].mppe &= ~MPPE_OPT_40;	/* disable 40-bit */
-+	    ccp_wantoptions[0].mppe_56 = 0;	/* disable 56-bit */
-+	    ccp_wantoptions[0].mppe_40 = 0;	/* disable 40-bit */
- 	    break;
- 	default:
- 	    break;
-diff -ruN ppp-2.4.3.orig/pppd/pppd.8 ppp-2.4.3/pppd/pppd.8
---- ppp-2.4.3.orig/pppd/pppd.8	2004-11-13 13:22:49.000000000 +0100
-+++ ppp-2.4.3/pppd/pppd.8	2004-11-21 14:24:47.000000000 +0100
-@@ -622,9 +622,29 @@
- Enables the use of PPP multilink; this is an alias for the `multilink'
- option.  This option is currently only available under Linux.
- .TP
--.B mppe\-stateful
--Allow MPPE to use stateful mode.  Stateless mode is still attempted first.
--The default is to disallow stateful mode.  
-+.B mppc
-+Enables MPPC (Microsoft Point to Point Compression).  This is the default.
-+.TP
-+.B mppe \fIsubopt1[,subopt2[,subopt3[..]]]
-+Modify MPPE (Microsoft Point to Point Encryption) parameters. In order
-+for MPPE to successfully come up, you must have authenticated with either
-+MS-CHAP or MS-CHAPv2. By default MPPE is optional, it means that pppd will
-+not propose MPPE to the peer, but will negotiate MPPE if peer wants that.
-+You can change this using \fIrequired\fR suboption.
-+This option is presently only supported under Linux, and only if your
-+kernel has been configured to include MPPE support.
-+.IP
-+MPPE suboptions:
-+.br
-+\fIrequired\fR - require MPPE; disconnect if peer doesn't support it,
-+.br
-+\fIstateless\fR - try to negotiate stateless mode; default is stateful,
-+.br
-+\fIno40\fR - disable 40 bit keys,
-+.br
-+\fIno56\fR - disable 56 bit keys,
-+.br
-+\fIno128\fR - disable 128 bit keys
- .TP
- .B mpshortseq
- Enables the use of short (12-bit) sequence numbers in multilink
-@@ -757,17 +777,11 @@
- Disables the use of PPP multilink.  This option is currently only
- available under Linux.
- .TP
--.B nomppe
--Disables MPPE (Microsoft Point to Point Encryption).  This is the default.
--.TP
--.B nomppe\-40
--Disable 40-bit encryption with MPPE.
-+.B nomppc
-+Disables MPPC (Microsoft Point to Point Compression).
- .TP
--.B nomppe\-128
--Disable 128-bit encryption with MPPE.
--.TP
--.B nomppe\-stateful
--Disable MPPE stateful mode.  This is the default.
-+.B nomppe
-+Disables MPPE (Microsoft Point to Point Encryption).
- .TP
- .B nompshortseq
- Disables the use of short (12-bit) sequence numbers in the PPP
-@@ -948,19 +962,6 @@
- Require the peer to authenticate itself using CHAP [Challenge
- Handshake Authentication Protocol] authentication.
- .TP
--.B require\-mppe
--Require the use of MPPE (Microsoft Point to Point Encryption).  This
--option disables all other compression types.  This option enables
--both 40-bit and 128-bit encryption.  In order for MPPE to successfully
--come up, you must have authenticated with either MS\-CHAP or MS\-CHAPv2.
--This option is presently only supported under Linux, and only if your
--kernel has been configured to include MPPE support.
--.TP
--.B require\-mppe\-40
--Require the use of MPPE, with 40-bit encryption.
--.TP
--.B require\-mppe\-128
--Require the use of MPPE, with 128-bit encryption.
- .TP
- .B require\-mschap
- Require the peer to authenticate itself using MS\-CHAP [Microsoft Challenge

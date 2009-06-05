@@ -32,6 +32,6 @@ INSTALL_STYLE:=		auto
 post-install:
 	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin ${IDIR_OBEXFTP}/usr/lib
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_OBEXFTP}/usr/bin/
-	${CP} ${WRKINST}/usr/lib/* ${IDIR_OBEXFTP}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_OBEXFTP}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

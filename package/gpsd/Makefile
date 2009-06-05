@@ -23,7 +23,8 @@ CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
 			ac_cv_func_strlcpy=no \
-			ac_cv_func_strlcat=no
+			ac_cv_func_strlcat=no \
+			ac_cv_lib_nsl_gethostbyname=no
 # --disable-python breaks configure script
 CONFIGURE_ARGS+=	--without-x \
 			--disable-dbus

@@ -1,0 +1,19 @@
+--- ppp-2.4.4.orig/pppdump/Makefile.linux	2006-06-04 07:04:14.000000000 +0200
++++ ppp-2.4.4/pppdump/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
+@@ -2,7 +2,8 @@ DESTDIR = $(INSTROOT)@DESTDIR@
+ BINDIR = $(DESTDIR)/sbin
+ MANDIR = $(DESTDIR)/share/man/man8
+ 
+-CFLAGS= -O -I../include/net
++COPTS = -O
++CFLAGS= $(COPTS) -I../include/net
+ OBJS = pppdump.o bsd-comp.o deflate.o zlib.o
+ 
+ INSTALL= install
+@@ -17,5 +18,5 @@ clean:
+ 
+ install:
+ 	mkdir -p $(BINDIR) $(MANDIR)
+-	$(INSTALL) -s -c pppdump $(BINDIR)
++	$(INSTALL) -c pppdump $(BINDIR)
+ 	$(INSTALL) -c -m 444 pppdump.8 $(MANDIR)

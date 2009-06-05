@@ -1,0 +1,23 @@
+--- squid-3.0.STABLE15.orig/src/Makefile.am	2009-05-06 13:11:40.000000000 +0200
++++ squid-3.0.STABLE15/src/Makefile.am	2009-06-04 20:21:37.000000000 +0200
+@@ -1007,6 +1007,8 @@ DEFAULT_HOSTS		= @OPT_DEFAULT_HOSTS@
+ 
+ DEFS = @DEFS@ -DDEFAULT_CONFIG_FILE=\"$(DEFAULT_CONFIG_FILE)\"
+ 
++HOSTCXX ?= @HOSTCXX@
++
+ $(OBJS): $(top_srcdir)/include/version.h ../include/autoconf.h
+ 
+ snmp_core.o snmp_agent.o: ../snmplib/libsnmp.a $(top_srcdir)/include/cache_snmp.h
+@@ -1030,6 +1032,11 @@ cache_cf.o: cf_parser.h
+ squid.conf.default: cf_parser.h
+ 	true
+ 
++cf_gen$(EXEEXT): $(cf_gen_SOURCES) $(cf_gen_DEPENDENCIES)
++	$(HOSTCXX) -o $@ $(srcdir)/cf_gen.cc \
++		$(top_srcdir)/lib/util.c $(top_srcdir)/lib/assert.c \
++		-DNDEBUG -DBUILD_HOST_TOOL ${INCLUDES}
++
+ cf_parser.h: cf.data cf_gen$(EXEEXT)
+ 	./cf_gen cf.data $(srcdir)/cf.data.depend
+ 

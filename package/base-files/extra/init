@@ -1,8 +1,9 @@
 #!/bin/sh
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
+size=$(awk '/MemTotal:/ { if ($2 > 16000) { print 4096 } else { print 2048 }}' /proc/meminfo)
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
-mount none /tmp -t tmpfs -o size=2M
+mount none /tmp -t tmpfs -o size=$size
 mount none /tmp -t tmpfs -o remount,nosuid,nodev,mode=1777
 mount -o nosuid,size=64k,mode=0755 -t tmpfs mdev /dev
 mkdir /dev/pts /dev/shm

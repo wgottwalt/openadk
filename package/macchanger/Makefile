@@ -17,10 +17,12 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MACCHANGER}
-	${CP} ${WRKINST}/* ${IDIR_MACCHANGER}/
+	${INSTALL_DIR} ${IDIR_MACCHANGER}/usr/bin ${IDIR_MACCHANGER}/usr/share
+	${INSTALL_BIN} ${WRKINST}/usr/bin/macchanger ${IDIR_MACCHANGER}/usr/bin
+	${CP} ${WRKINST}/usr/share/macchanger ${IDIR_MACCHANGER}/usr/share
 
 include ${TOPDIR}/mk/pkg-bottom.mk

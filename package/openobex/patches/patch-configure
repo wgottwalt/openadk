@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- openobex-1.5.orig/configure	2009-02-08 19:32:25.000000000 +0100
-+++ openobex-1.5/configure	2009-05-30 14:32:22.786455567 +0200
++++ openobex-1.5/configure	2009-06-04 21:43:21.000000000 +0200
+@@ -10943,7 +10943,7 @@ $as_echo "no" >&6; }
+ fi
+ 
+ 	case $host in
+-	*-*-linux*)
++	*)
+ 
+ 
+ pkg_failed=no
 @@ -11270,60 +11270,6 @@ fi
  
  

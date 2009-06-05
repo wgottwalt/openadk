@@ -1,7 +1,6 @@
-diff -Nur ppp-2.4.4-orig/pppd/plugins/radius/etc/radiusclient.conf ppp-2.4.4/pppd/plugins/radius/etc/radiusclient.conf
---- ppp-2.4.4-orig/pppd/plugins/radius/etc/radiusclient.conf	2004-11-14 00:48:39.000000000 +0100
-+++ ppp-2.4.4/pppd/plugins/radius/etc/radiusclient.conf	2007-01-23 23:56:52.000000000 +0100
-@@ -22,7 +22,7 @@
+--- ppp-2.4.4.orig/pppd/plugins/radius/etc/radiusclient.conf	2004-11-14 00:48:39.000000000 +0100
++++ ppp-2.4.4/pppd/plugins/radius/etc/radiusclient.conf	2009-06-05 19:12:00.000000000 +0200
+@@ -22,7 +22,7 @@ nologin /etc/nologin
  
  # name of the issue file. it's only display when no username is passed
  # on the radlogin command line  (default /etc/radiusclient/issue)
@@ -10,7 +9,7 @@ diff -Nur ppp-2.4.4-orig/pppd/plugins/radius/etc/radiusclient.conf ppp-2.4.4/ppp
  
  # RADIUS settings
  
-@@ -43,22 +43,22 @@
+@@ -43,22 +43,22 @@ acctserver 	localhost:1813
  
  # file holding shared secrets used for the communication
  # between the RADIUS client and server

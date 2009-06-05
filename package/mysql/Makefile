@@ -20,6 +20,8 @@ $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RE
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			OPTIMIZE_CXXFLAGS="${TARGET_CFLAGS}" \
+			ac_cv_lib_nsl_gethostbyname_r=no \
+			ac_cv_lib_nsl_yp_get_default_domain=no \
 			ac_cv_sys_restartable_syscalls=yes \
 			mysql_cv_sys_os=Linux \
 			mysql_cv_compress=yes \
@@ -79,8 +81,8 @@ do-build:
 		all install
 
 do-install:
-	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT}/usr/lib/mysql
+	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/mysql/libmysqlclient.so* \
-	    ${IDIR_LIBMYSQLCLIENT}/usr/lib/mysql
+	    ${IDIR_LIBMYSQLCLIENT}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

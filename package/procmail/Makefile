@@ -16,9 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PROCMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-DPROCMAIL
+
 do-build:
-	${MAKE} -C ${WRKBUILD}/src -f ../Makefile.new  \
-		CC="${TARGET_CC}"
+	${MAKE} -C ${WRKBUILD}/src -f ../Makefile.new
 
 do-install:
 	${INSTALL_DIR} ${IDIR_PROCMAIL}/usr/bin

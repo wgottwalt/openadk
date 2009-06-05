@@ -94,6 +94,7 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
 CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_ntoa=no
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS} \
 			--with-openssl-includes=${STAGING_DIR}/usr/include \
 			--with-openssl-libraries=${STAGING_DIR}/usr/lib \

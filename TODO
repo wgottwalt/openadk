@@ -1,7 +1,7 @@
 - rescue initramfs image (more archs, generic kernel config )
   - usb boot via stick
-- combine lvm2 + devicemapper package
-- squid package update
+- fix init scripts pidof? vs. killall
+- rpath libtool problem fix
 - bind isc 9.6.1
 - eglibc support
 - check mips -mno-abicalls
@@ -12,4 +12,11 @@
 - netbsd build
 - macos x build
 - openbsd build
+- use kmod-template for external kernel modules
+- optimize iptables package (libdirs depending on choosen kernel features)
+- checksum for toolchain packages
+- network scripts for wireless client / ap
+- network scripts for pppoe
+- fix platform zaurus 
+- test qemu etrax again
 - publish via trac+git

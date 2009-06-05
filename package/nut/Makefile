@@ -101,8 +101,10 @@ endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin ${IDIR_NUT}/etc
+	${INSTALL_DIR} ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
 		${IDIR_NUT}/usr/sbin/
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib 
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \

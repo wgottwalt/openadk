@@ -1,0 +1,18 @@
+--- tcp_wrappers_7.6.orig/scaffold.c	1997-03-21 19:27:24.000000000 +0100
++++ tcp_wrappers_7.6/scaffold.c	2009-06-05 18:45:03.000000000 +0200
+@@ -180,10 +180,12 @@ struct request_info *request;
+ 
+ /* ARGSUSED */
+ 
+-void    rfc931(request)
+-struct request_info *request;
++void    rfc931(rmt_sin, our_sin, dest)
++struct sockaddr_in *rmt_sin;
++struct sockaddr_in *our_sin;
++char   *dest;
+ {
+-    strcpy(request->user, unknown);
++    strcpy(dest, unknown);
+ }
+ 
+ /* check_path - examine accessibility */

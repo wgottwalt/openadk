@@ -26,6 +26,7 @@ CONFIGURE_ENV+=		ac_cv_sizeof_size_t=4
 CONFIGURE_ENV+=		ac_cv_sizeof_ssize_t=4
 CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes
 CONFIGURE_ENV+=		apr_cv_process_shared_works=no
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom
 
 ifeq (${ADK_PACKAGE_APR_THREADING},y)

@@ -64,7 +64,7 @@ post-install:
 	${CP} ${WRKINST}/usr/share/doc/cups/images \
 		${IDIR_CUPS}/usr/share/doc/cups/
 	rm -f ${IDIR_CUPS}/usr/bin/cups-config
-	${CP} ${WRKINST}/usr/lib/libcups.so* ${IDIR_CUPS}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libcups*.so* ${IDIR_CUPS}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/cups/cgi-bin/* ${IDIR_CUPS}/usr/lib/cups/cgi-bin/
 	${CP} ${WRKINST}/usr/lib/cups/daemon/* ${IDIR_CUPS}/usr/lib/cups/daemon/
 	${CP} ${WRKINST}/usr/share/cups/banners/* \

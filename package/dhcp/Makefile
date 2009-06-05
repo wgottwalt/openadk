@@ -25,6 +25,7 @@ else
 CONFIGURE_ARGS+=       --disable-dhcpv6                
 endif
 
+TCFLAGS+=		-D_GNU_SOURCE
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_file__dev_random=yes
 BUILD_STYLE=		auto
