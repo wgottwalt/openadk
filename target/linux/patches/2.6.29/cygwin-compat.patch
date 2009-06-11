@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.30.orig/scripts/mod/file2alias.c linux-2.6.30/scripts/mod/file2alias.c
---- linux-2.6.30.orig/scripts/mod/file2alias.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/scripts/mod/file2alias.c	2009-06-11 09:17:10.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/scripts/mod/file2alias.c linux-2.6.29.1/scripts/mod/file2alias.c
+--- linux-2.6.29.1.orig/scripts/mod/file2alias.c	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/scripts/mod/file2alias.c	2009-05-06 19:05:47.367234820 +0200
 @@ -29,7 +29,11 @@
  
  #include <ctype.h>
@@ -13,9 +13,9 @@ diff -Nur linux-2.6.30.orig/scripts/mod/file2alias.c linux-2.6.30/scripts/mod/fi
  typedef uint16_t	__u16;
  typedef unsigned char	__u8;
  
-diff -Nur linux-2.6.30.orig/scripts/mod/modpost.h linux-2.6.30/scripts/mod/modpost.h
---- linux-2.6.30.orig/scripts/mod/modpost.h	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/scripts/mod/modpost.h	2009-06-11 09:17:10.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/scripts/mod/modpost.h linux-2.6.29.1/scripts/mod/modpost.h
+--- linux-2.6.29.1.orig/scripts/mod/modpost.h	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/scripts/mod/modpost.h	2009-05-06 19:06:14.068903184 +0200
 @@ -9,6 +9,11 @@
  #include <unistd.h>
  #include <elf.h>
