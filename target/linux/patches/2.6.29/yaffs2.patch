@@ -1,7 +1,7 @@
-diff -Nur linux-2.6.30.orig/fs/Kconfig linux-2.6.30/fs/Kconfig
---- linux-2.6.30.orig/fs/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/fs/Kconfig	2009-06-11 09:21:04.000000000 +0200
-@@ -162,6 +162,10 @@
+diff -Nur linux-2.6.29.1.orig/fs/Kconfig linux-2.6.29.1/fs/Kconfig
+--- linux-2.6.29.1.orig/fs/Kconfig	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/fs/Kconfig	2009-04-17 19:10:08.832961234 +0200
+@@ -209,6 +209,10 @@
  source "fs/befs/Kconfig"
  source "fs/bfs/Kconfig"
  source "fs/efs/Kconfig"
@@ -12,17 +12,19 @@ diff -Nur linux-2.6.30.orig/fs/Kconfig linux-2.6.30/fs/Kconfig
  source "fs/jffs2/Kconfig"
  # UBIFS File system configuration
  source "fs/ubifs/Kconfig"
-diff -Nur linux-2.6.30.orig/fs/Makefile linux-2.6.30/fs/Makefile
---- linux-2.6.30.orig/fs/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/fs/Makefile	2009-06-11 09:21:31.000000000 +0200
-@@ -124,3 +124,4 @@
+diff -Nur linux-2.6.29.1.orig/fs/Makefile linux-2.6.29.1/fs/Makefile
+--- linux-2.6.29.1.orig/fs/Makefile	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/fs/Makefile	2009-04-17 19:10:08.868964144 +0200
+@@ -124,3 +124,6 @@
+ obj-$(CONFIG_OCFS2_FS)		+= ocfs2/
  obj-$(CONFIG_BTRFS_FS)		+= btrfs/
  obj-$(CONFIG_GFS2_FS)           += gfs2/
- obj-$(CONFIG_EXOFS_FS)          += exofs/
++
++# Patched by YAFFS
 +obj-$(CONFIG_YAFFS_FS)		+= yaffs2/
-diff -Nur linux-2.6.30.orig/fs/Makefile.pre.yaffs linux-2.6.30/fs/Makefile.pre.yaffs
---- linux-2.6.30.orig/fs/Makefile.pre.yaffs	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/Makefile.pre.yaffs	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/Makefile.pre.yaffs linux-2.6.29.1/fs/Makefile.pre.yaffs
+--- linux-2.6.29.1.orig/fs/Makefile.pre.yaffs	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/Makefile.pre.yaffs	2009-04-17 19:10:08.864962796 +0200
 @@ -0,0 +1,126 @@
 +#
 +# Makefile for the Linux filesystems.
@@ -150,9 +152,183 @@ diff -Nur linux-2.6.30.orig/fs/Makefile.pre.yaffs linux-2.6.30/fs/Makefile.pre.y
 +obj-$(CONFIG_OCFS2_FS)		+= ocfs2/
 +obj-$(CONFIG_BTRFS_FS)		+= btrfs/
 +obj-$(CONFIG_GFS2_FS)           += gfs2/
-diff -Nur linux-2.6.30.orig/fs/yaffs2/devextras.h linux-2.6.30/fs/yaffs2/devextras.h
---- linux-2.6.30.orig/fs/yaffs2/devextras.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/devextras.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/Kconfig linux-2.6.29.1/fs/yaffs2/Kconfig
+--- linux-2.6.29.1.orig/fs/yaffs2/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/Kconfig	2009-04-17 19:10:08.880965952 +0200
+@@ -0,0 +1,156 @@
++#
++# YAFFS file system configurations
++#
++
++config YAFFS_FS
++	tristate "YAFFS2 file system support"
++	default n
++	depends on MTD_BLOCK
++	select YAFFS_YAFFS1
++	select YAFFS_YAFFS2
++	help
++	  YAFFS2, or Yet Another Flash Filing System, is a filing system
++	  optimised for NAND Flash chips.
++
++	  To compile the YAFFS2 file system support as a module, choose M
++	  here: the module will be called yaffs2.
++
++	  If unsure, say N.
++
++	  Further information on YAFFS2 is available at
++	  <http://www.aleph1.co.uk/yaffs/>.
++
++config YAFFS_YAFFS1
++	bool "512 byte / page devices"
++	depends on YAFFS_FS
++	default y
++	help
++	  Enable YAFFS1 support -- yaffs for 512 byte / page devices
++
++	  Not needed for 2K-page devices.
++
++	  If unsure, say Y.
++
++config YAFFS_9BYTE_TAGS
++	bool "Use older-style on-NAND data format with pageStatus byte"
++	depends on YAFFS_YAFFS1
++	default n
++	help
++
++	  Older-style on-NAND data format has a "pageStatus" byte to record
++	  chunk/page state.  This byte is zero when the page is discarded.
++	  Choose this option if you have existing on-NAND data using this
++	  format that you need to continue to support.  New data written
++	  also uses the older-style format.  Note: Use of this option
++	  generally requires that MTD's oob layout be adjusted to use the
++	  older-style format.  See notes on tags formats and MTD versions
++	  in yaffs_mtdif1.c.
++
++	  If unsure, say N.
++
++config YAFFS_DOES_ECC
++	bool "Lets Yaffs do its own ECC"
++	depends on YAFFS_FS && YAFFS_YAFFS1 && !YAFFS_9BYTE_TAGS
++	default n
++	help
++	  This enables Yaffs to use its own ECC functions instead of using
++	  the ones from the generic MTD-NAND driver.
++
++	  If unsure, say N.
++
++config YAFFS_ECC_WRONG_ORDER
++	bool "Use the same ecc byte order as Steven Hill's nand_ecc.c"
++	depends on YAFFS_FS && YAFFS_DOES_ECC && !YAFFS_9BYTE_TAGS
++	default n
++	help
++	  This makes yaffs_ecc.c use the same ecc byte order as Steven
++	  Hill's nand_ecc.c. If not set, then you get the same ecc byte
++	  order as SmartMedia.
++
++	  If unsure, say N.
++
++config YAFFS_YAFFS2
++	bool "2048 byte (or larger) / page devices"
++	depends on YAFFS_FS
++	default y
++	help
++	  Enable YAFFS2 support -- yaffs for >= 2K bytes per page devices
++
++	  If unsure, say Y.
++
++config YAFFS_AUTO_YAFFS2
++	bool "Autoselect yaffs2 format"
++	depends on YAFFS_YAFFS2
++	default y
++	help
++	  Without this, you need to explicitely use yaffs2 as the file
++	  system type. With this, you can say "yaffs" and yaffs or yaffs2
++	  will be used depending on the device page size (yaffs on
++	  512-byte page devices, yaffs2 on 2K page devices).
++
++	  If unsure, say Y.
++
++config YAFFS_DISABLE_LAZY_LOAD
++	bool "Disable lazy loading"
++	depends on YAFFS_YAFFS2
++	default n
++	help
++	  "Lazy loading" defers loading file details until they are
++	  required. This saves mount time, but makes the first look-up
++	  a bit longer.
++
++	  Lazy loading will only happen if enabled by this option being 'n'
++	  and if the appropriate tags are available, else yaffs2 will
++	  automatically fall back to immediate loading and do the right
++	  thing.
++
++	  Lazy laoding will be required by checkpointing.
++
++	  Setting this to 'y' will disable lazy loading.
++
++	  If unsure, say N.
++
++
++config YAFFS_DISABLE_WIDE_TNODES
++	bool "Turn off wide tnodes"
++	depends on YAFFS_FS
++	default n
++	help
++	  Wide tnodes are only used for NAND arrays >=32MB for 512-byte
++	  page devices and >=128MB for 2k page devices. They use slightly
++	  more RAM but are faster since they eliminate chunk group
++	  searching.
++
++	  Setting this to 'y' will force tnode width to 16 bits and save
++	  memory but make large arrays slower.
++
++	  If unsure, say N.
++
++config YAFFS_ALWAYS_CHECK_CHUNK_ERASED
++	bool "Force chunk erase check"
++	depends on YAFFS_FS
++	default n
++	help
++          Normally YAFFS only checks chunks before writing until an erased
++	  chunk is found. This helps to detect any partially written
++	  chunks that might have happened due to power loss.
++
++	  Enabling this forces on the test that chunks are erased in flash
++	  before writing to them. This takes more time but is potentially
++	  a bit more secure.
++
++	  Suggest setting Y during development and ironing out driver
++	  issues etc. Suggest setting to N if you want faster writing.
++
++	  If unsure, say Y.
++
++config YAFFS_SHORT_NAMES_IN_RAM
++	bool "Cache short names in RAM"
++	depends on YAFFS_FS
++	default y
++	help
++	  If this config is set, then short names are stored with the
++	  yaffs_Object.  This costs an extra 16 bytes of RAM per object,
++	  but makes look-ups faster.
++
++	  If unsure, say Y.
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/Makefile linux-2.6.29.1/fs/yaffs2/Makefile
+--- linux-2.6.29.1.orig/fs/yaffs2/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/Makefile	2009-04-17 19:10:08.872964654 +0200
+@@ -0,0 +1,10 @@
++#
++# Makefile for the linux YAFFS filesystem routines.
++#
++
++obj-$(CONFIG_YAFFS_FS) += yaffs.o
++
++yaffs-y := yaffs_ecc.o yaffs_fs.o yaffs_guts.o yaffs_checkptrw.o
++yaffs-y += yaffs_packedtags1.o yaffs_packedtags2.o yaffs_nand.o yaffs_qsort.o
++yaffs-y += yaffs_tagscompat.o yaffs_tagsvalidity.o
++yaffs-y += yaffs_mtdif.o yaffs_mtdif1.o yaffs_mtdif2.o
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/devextras.h linux-2.6.29.1/fs/yaffs2/devextras.h
+--- linux-2.6.29.1.orig/fs/yaffs2/devextras.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/devextras.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,196 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -350,183 +526,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/devextras.h linux-2.6.30/fs/yaffs2/devextr
 +
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/Kconfig linux-2.6.30/fs/yaffs2/Kconfig
---- linux-2.6.30.orig/fs/yaffs2/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/Kconfig	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,156 @@
-+#
-+# YAFFS file system configurations
-+#
-+
-+config YAFFS_FS
-+	tristate "YAFFS2 file system support"
-+	default n
-+	depends on MTD_BLOCK
-+	select YAFFS_YAFFS1
-+	select YAFFS_YAFFS2
-+	help
-+	  YAFFS2, or Yet Another Flash Filing System, is a filing system
-+	  optimised for NAND Flash chips.
-+
-+	  To compile the YAFFS2 file system support as a module, choose M
-+	  here: the module will be called yaffs2.
-+
-+	  If unsure, say N.
-+
-+	  Further information on YAFFS2 is available at
-+	  <http://www.aleph1.co.uk/yaffs/>.
-+
-+config YAFFS_YAFFS1
-+	bool "512 byte / page devices"
-+	depends on YAFFS_FS
-+	default y
-+	help
-+	  Enable YAFFS1 support -- yaffs for 512 byte / page devices
-+
-+	  Not needed for 2K-page devices.
-+
-+	  If unsure, say Y.
-+
-+config YAFFS_9BYTE_TAGS
-+	bool "Use older-style on-NAND data format with pageStatus byte"
-+	depends on YAFFS_YAFFS1
-+	default n
-+	help
-+
-+	  Older-style on-NAND data format has a "pageStatus" byte to record
-+	  chunk/page state.  This byte is zero when the page is discarded.
-+	  Choose this option if you have existing on-NAND data using this
-+	  format that you need to continue to support.  New data written
-+	  also uses the older-style format.  Note: Use of this option
-+	  generally requires that MTD's oob layout be adjusted to use the
-+	  older-style format.  See notes on tags formats and MTD versions
-+	  in yaffs_mtdif1.c.
-+
-+	  If unsure, say N.
-+
-+config YAFFS_DOES_ECC
-+	bool "Lets Yaffs do its own ECC"
-+	depends on YAFFS_FS && YAFFS_YAFFS1 && !YAFFS_9BYTE_TAGS
-+	default n
-+	help
-+	  This enables Yaffs to use its own ECC functions instead of using
-+	  the ones from the generic MTD-NAND driver.
-+
-+	  If unsure, say N.
-+
-+config YAFFS_ECC_WRONG_ORDER
-+	bool "Use the same ecc byte order as Steven Hill's nand_ecc.c"
-+	depends on YAFFS_FS && YAFFS_DOES_ECC && !YAFFS_9BYTE_TAGS
-+	default n
-+	help
-+	  This makes yaffs_ecc.c use the same ecc byte order as Steven
-+	  Hill's nand_ecc.c. If not set, then you get the same ecc byte
-+	  order as SmartMedia.
-+
-+	  If unsure, say N.
-+
-+config YAFFS_YAFFS2
-+	bool "2048 byte (or larger) / page devices"
-+	depends on YAFFS_FS
-+	default y
-+	help
-+	  Enable YAFFS2 support -- yaffs for >= 2K bytes per page devices
-+
-+	  If unsure, say Y.
-+
-+config YAFFS_AUTO_YAFFS2
-+	bool "Autoselect yaffs2 format"
-+	depends on YAFFS_YAFFS2
-+	default y
-+	help
-+	  Without this, you need to explicitely use yaffs2 as the file
-+	  system type. With this, you can say "yaffs" and yaffs or yaffs2
-+	  will be used depending on the device page size (yaffs on
-+	  512-byte page devices, yaffs2 on 2K page devices).
-+
-+	  If unsure, say Y.
-+
-+config YAFFS_DISABLE_LAZY_LOAD
-+	bool "Disable lazy loading"
-+	depends on YAFFS_YAFFS2
-+	default n
-+	help
-+	  "Lazy loading" defers loading file details until they are
-+	  required. This saves mount time, but makes the first look-up
-+	  a bit longer.
-+
-+	  Lazy loading will only happen if enabled by this option being 'n'
-+	  and if the appropriate tags are available, else yaffs2 will
-+	  automatically fall back to immediate loading and do the right
-+	  thing.
-+
-+	  Lazy laoding will be required by checkpointing.
-+
-+	  Setting this to 'y' will disable lazy loading.
-+
-+	  If unsure, say N.
-+
-+
-+config YAFFS_DISABLE_WIDE_TNODES
-+	bool "Turn off wide tnodes"
-+	depends on YAFFS_FS
-+	default n
-+	help
-+	  Wide tnodes are only used for NAND arrays >=32MB for 512-byte
-+	  page devices and >=128MB for 2k page devices. They use slightly
-+	  more RAM but are faster since they eliminate chunk group
-+	  searching.
-+
-+	  Setting this to 'y' will force tnode width to 16 bits and save
-+	  memory but make large arrays slower.
-+
-+	  If unsure, say N.
-+
-+config YAFFS_ALWAYS_CHECK_CHUNK_ERASED
-+	bool "Force chunk erase check"
-+	depends on YAFFS_FS
-+	default n
-+	help
-+          Normally YAFFS only checks chunks before writing until an erased
-+	  chunk is found. This helps to detect any partially written
-+	  chunks that might have happened due to power loss.
-+
-+	  Enabling this forces on the test that chunks are erased in flash
-+	  before writing to them. This takes more time but is potentially
-+	  a bit more secure.
-+
-+	  Suggest setting Y during development and ironing out driver
-+	  issues etc. Suggest setting to N if you want faster writing.
-+
-+	  If unsure, say Y.
-+
-+config YAFFS_SHORT_NAMES_IN_RAM
-+	bool "Cache short names in RAM"
-+	depends on YAFFS_FS
-+	default y
-+	help
-+	  If this config is set, then short names are stored with the
-+	  yaffs_Object.  This costs an extra 16 bytes of RAM per object,
-+	  but makes look-ups faster.
-+
-+	  If unsure, say Y.
-diff -Nur linux-2.6.30.orig/fs/yaffs2/Makefile linux-2.6.30/fs/yaffs2/Makefile
---- linux-2.6.30.orig/fs/yaffs2/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/Makefile	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,10 @@
-+#
-+# Makefile for the linux YAFFS filesystem routines.
-+#
-+
-+obj-$(CONFIG_YAFFS_FS) += yaffs.o
-+
-+yaffs-y := yaffs_ecc.o yaffs_fs.o yaffs_guts.o yaffs_checkptrw.o
-+yaffs-y += yaffs_packedtags1.o yaffs_packedtags2.o yaffs_nand.o yaffs_qsort.o
-+yaffs-y += yaffs_tagscompat.o yaffs_tagsvalidity.o
-+yaffs-y += yaffs_mtdif.o yaffs_mtdif1.o yaffs_mtdif2.o
-diff -Nur linux-2.6.30.orig/fs/yaffs2/moduleconfig.h linux-2.6.30/fs/yaffs2/moduleconfig.h
---- linux-2.6.30.orig/fs/yaffs2/moduleconfig.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/moduleconfig.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/moduleconfig.h linux-2.6.29.1/fs/yaffs2/moduleconfig.h
+--- linux-2.6.29.1.orig/fs/yaffs2/moduleconfig.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/moduleconfig.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,65 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -593,9 +595,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/moduleconfig.h linux-2.6.30/fs/yaffs2/modu
 +#endif /* YAFFS_OUT_OF_TREE */
 +
 +#endif /* __YAFFS_CONFIG_H__ */
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.c linux-2.6.30/fs/yaffs2/yaffs_checkptrw.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_checkptrw.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_checkptrw.c linux-2.6.29.1/fs/yaffs2/yaffs_checkptrw.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_checkptrw.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_checkptrw.c	2009-04-17 19:10:08.880965952 +0200
 @@ -0,0 +1,394 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -991,9 +993,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.c linux-2.6.30/fs/yaffs2/y
 +
 +
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.h linux-2.6.30/fs/yaffs2/yaffs_checkptrw.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_checkptrw.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_checkptrw.h linux-2.6.29.1/fs/yaffs2/yaffs_checkptrw.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_checkptrw.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_checkptrw.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,35 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -1030,9 +1032,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_checkptrw.h linux-2.6.30/fs/yaffs2/y
 +
 +#endif
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.c linux-2.6.30/fs/yaffs2/yaffs_ecc.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_ecc.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_ecc.c linux-2.6.29.1/fs/yaffs2/yaffs_ecc.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_ecc.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_ecc.c	2009-04-17 19:10:08.880965952 +0200
 @@ -0,0 +1,326 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -1360,9 +1362,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.c linux-2.6.30/fs/yaffs2/yaffs_e
 +
 +	return -1;
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.h linux-2.6.30/fs/yaffs2/yaffs_ecc.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_ecc.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_ecc.h linux-2.6.29.1/fs/yaffs2/yaffs_ecc.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_ecc.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_ecc.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,44 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -1408,9 +1410,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_ecc.h linux-2.6.30/fs/yaffs2/yaffs_e
 +			yaffs_ECCOther *read_ecc,
 +			const yaffs_ECCOther *test_ecc);
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_fs.c linux-2.6.30/fs/yaffs2/yaffs_fs.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_fs.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_fs.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_fs.c linux-2.6.29.1/fs/yaffs2/yaffs_fs.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_fs.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_fs.c	2009-04-17 19:10:08.880965952 +0200
 @@ -0,0 +1,2529 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -3941,9 +3943,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_fs.c linux-2.6.30/fs/yaffs2/yaffs_fs
 +MODULE_DESCRIPTION("YAFFS2 - a NAND specific flash file system");
 +MODULE_AUTHOR("Charles Manning, Aleph One Ltd., 2002-2006");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_getblockinfo.h linux-2.6.30/fs/yaffs2/yaffs_getblockinfo.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_getblockinfo.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_getblockinfo.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_getblockinfo.h linux-2.6.29.1/fs/yaffs2/yaffs_getblockinfo.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_getblockinfo.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_getblockinfo.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,34 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -3979,9 +3981,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_getblockinfo.h linux-2.6.30/fs/yaffs
 +}
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_guts.c linux-2.6.30/fs/yaffs2/yaffs_guts.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_guts.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_guts.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_guts.c linux-2.6.29.1/fs/yaffs2/yaffs_guts.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_guts.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_guts.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,7552 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -11535,9 +11537,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_guts.c linux-2.6.30/fs/yaffs2/yaffs_
 +#endif
 +	return YAFFS_OK;
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_guts.h linux-2.6.30/fs/yaffs2/yaffs_guts.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_guts.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_guts.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_guts.h linux-2.6.29.1/fs/yaffs2/yaffs_guts.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_guts.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_guts.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,904 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -12443,10 +12445,255 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_guts.h linux-2.6.30/fs/yaffs2/yaffs_
 +void yaffs_ReleaseTempBuffer(yaffs_Device *dev, __u8 *buffer, int lineNo);
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffsinterface.h linux-2.6.30/fs/yaffs2/yaffsinterface.h
---- linux-2.6.30.orig/fs/yaffs2/yaffsinterface.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffsinterface.h	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,21 @@
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif.c linux-2.6.29.1/fs/yaffs2/yaffs_mtdif.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif.c	2009-04-17 19:10:08.888966133 +0200
+@@ -0,0 +1,241 @@
++/*
++ * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
++ *
++ * Copyright (C) 2002-2007 Aleph One Ltd.
++ *   for Toby Churchill Ltd and Brightstar Engineering
++ *
++ * Created by Charles Manning <charles@aleph1.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ */
++
++const char *yaffs_mtdif_c_version =
++	"$Id: yaffs_mtdif.c,v 1.22 2009-03-06 17:20:51 wookey Exp $";
++
++#include "yportenv.h"
++
++
++#include "yaffs_mtdif.h"
++
++#include "linux/mtd/mtd.h"
++#include "linux/types.h"
++#include "linux/time.h"
++#include "linux/mtd/nand.h"
++
++#if (MTD_VERSION_CODE < MTD_VERSION(2, 6, 18))
++static struct nand_oobinfo yaffs_oobinfo = {
++	.useecc = 1,
++	.eccbytes = 6,
++	.eccpos = {8, 9, 10, 13, 14, 15}
++};
++
++static struct nand_oobinfo yaffs_noeccinfo = {
++	.useecc = 0,
++};
++#endif
++
++#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
++static inline void translate_spare2oob(const yaffs_Spare *spare, __u8 *oob)
++{
++	oob[0] = spare->tagByte0;
++	oob[1] = spare->tagByte1;
++	oob[2] = spare->tagByte2;
++	oob[3] = spare->tagByte3;
++	oob[4] = spare->tagByte4;
++	oob[5] = spare->tagByte5 & 0x3f;
++	oob[5] |= spare->blockStatus == 'Y' ? 0 : 0x80;
++	oob[5] |= spare->pageStatus == 0 ? 0 : 0x40;
++	oob[6] = spare->tagByte6;
++	oob[7] = spare->tagByte7;
++}
++
++static inline void translate_oob2spare(yaffs_Spare *spare, __u8 *oob)
++{
++	struct yaffs_NANDSpare *nspare = (struct yaffs_NANDSpare *)spare;
++	spare->tagByte0 = oob[0];
++	spare->tagByte1 = oob[1];
++	spare->tagByte2 = oob[2];
++	spare->tagByte3 = oob[3];
++	spare->tagByte4 = oob[4];
++	spare->tagByte5 = oob[5] == 0xff ? 0xff : oob[5] & 0x3f;
++	spare->blockStatus = oob[5] & 0x80 ? 0xff : 'Y';
++	spare->pageStatus = oob[5] & 0x40 ? 0xff : 0;
++	spare->ecc1[0] = spare->ecc1[1] = spare->ecc1[2] = 0xff;
++	spare->tagByte6 = oob[6];
++	spare->tagByte7 = oob[7];
++	spare->ecc2[0] = spare->ecc2[1] = spare->ecc2[2] = 0xff;
++
++	nspare->eccres1 = nspare->eccres2 = 0; /* FIXME */
++}
++#endif
++
++int nandmtd_WriteChunkToNAND(yaffs_Device *dev, int chunkInNAND,
++			     const __u8 *data, const yaffs_Spare *spare)
++{
++	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
++#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
++	struct mtd_oob_ops ops;
++#endif
++	size_t dummy;
++	int retval = 0;
++
++	loff_t addr = ((loff_t) chunkInNAND) * dev->nDataBytesPerChunk;
++#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
++	__u8 spareAsBytes[8]; /* OOB */
++
++	if (data && !spare)
++		retval = mtd->write(mtd, addr, dev->nDataBytesPerChunk,
++				&dummy, data);
++	else if (spare) {
++		if (dev->useNANDECC) {
++			translate_spare2oob(spare, spareAsBytes);
++			ops.mode = MTD_OOB_AUTO;
++			ops.ooblen = 8; /* temp hack */
++		} else {
++			ops.mode = MTD_OOB_RAW;
++			ops.ooblen = YAFFS_BYTES_PER_SPARE;
++		}
++		ops.len = data ? dev->nDataBytesPerChunk : ops.ooblen;
++		ops.datbuf = (u8 *)data;
++		ops.ooboffs = 0;
++		ops.oobbuf = spareAsBytes;
++		retval = mtd->write_oob(mtd, addr, &ops);
++	}
++#else
++	__u8 *spareAsBytes = (__u8 *) spare;
++
++	if (data && spare) {
++		if (dev->useNANDECC)
++			retval =
++			    mtd->write_ecc(mtd, addr, dev->nDataBytesPerChunk,
++					   &dummy, data, spareAsBytes,
++					   &yaffs_oobinfo);
++		else
++			retval =
++			    mtd->write_ecc(mtd, addr, dev->nDataBytesPerChunk,
++					   &dummy, data, spareAsBytes,
++					   &yaffs_noeccinfo);
++	} else {
++		if (data)
++			retval =
++			    mtd->write(mtd, addr, dev->nDataBytesPerChunk, &dummy,
++				       data);
++		if (spare)
++			retval =
++			    mtd->write_oob(mtd, addr, YAFFS_BYTES_PER_SPARE,
++					   &dummy, spareAsBytes);
++	}
++#endif
++
++	if (retval == 0)
++		return YAFFS_OK;
++	else
++		return YAFFS_FAIL;
++}
++
++int nandmtd_ReadChunkFromNAND(yaffs_Device *dev, int chunkInNAND, __u8 *data,
++			      yaffs_Spare *spare)
++{
++	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
++#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
++	struct mtd_oob_ops ops;
++#endif
++	size_t dummy;
++	int retval = 0;
++
++	loff_t addr = ((loff_t) chunkInNAND) * dev->nDataBytesPerChunk;
++#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
++	__u8 spareAsBytes[8]; /* OOB */
++
++	if (data && !spare)
++		retval = mtd->read(mtd, addr, dev->nDataBytesPerChunk,
++				&dummy, data);
++	else if (spare) {
++		if (dev->useNANDECC) {
++			ops.mode = MTD_OOB_AUTO;
++			ops.ooblen = 8; /* temp hack */
++		} else {
++			ops.mode = MTD_OOB_RAW;
++			ops.ooblen = YAFFS_BYTES_PER_SPARE;
++		}
++		ops.len = data ? dev->nDataBytesPerChunk : ops.ooblen;
++		ops.datbuf = data;
++		ops.ooboffs = 0;
++		ops.oobbuf = spareAsBytes;
++		retval = mtd->read_oob(mtd, addr, &ops);
++		if (dev->useNANDECC)
++			translate_oob2spare(spare, spareAsBytes);
++	}
++#else
++	__u8 *spareAsBytes = (__u8 *) spare;
++
++	if (data && spare) {
++		if (dev->useNANDECC) {
++			/* Careful, this call adds 2 ints */
++			/* to the end of the spare data.  Calling function */
++			/* should allocate enough memory for spare, */
++			/* i.e. [YAFFS_BYTES_PER_SPARE+2*sizeof(int)]. */
++			retval =
++			    mtd->read_ecc(mtd, addr, dev->nDataBytesPerChunk,
++					  &dummy, data, spareAsBytes,
++					  &yaffs_oobinfo);
++		} else {
++			retval =
++			    mtd->read_ecc(mtd, addr, dev->nDataBytesPerChunk,
++					  &dummy, data, spareAsBytes,
++					  &yaffs_noeccinfo);
++		}
++	} else {
++		if (data)
++			retval =
++			    mtd->read(mtd, addr, dev->nDataBytesPerChunk, &dummy,
++				      data);
++		if (spare)
++			retval =
++			    mtd->read_oob(mtd, addr, YAFFS_BYTES_PER_SPARE,
++					  &dummy, spareAsBytes);
++	}
++#endif
++
++	if (retval == 0)
++		return YAFFS_OK;
++	else
++		return YAFFS_FAIL;
++}
++
++int nandmtd_EraseBlockInNAND(yaffs_Device *dev, int blockNumber)
++{
++	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
++	__u32 addr =
++	    ((loff_t) blockNumber) * dev->nDataBytesPerChunk
++		* dev->nChunksPerBlock;
++	struct erase_info ei;
++	int retval = 0;
++
++	ei.mtd = mtd;
++	ei.addr = addr;
++	ei.len = dev->nDataBytesPerChunk * dev->nChunksPerBlock;
++	ei.time = 1000;
++	ei.retries = 2;
++	ei.callback = NULL;
++	ei.priv = (u_long) dev;
++
++	/* Todo finish off the ei if required */
++
++	sema_init(&dev->sem, 0);
++
++	retval = mtd->erase(mtd, &ei);
++
++	if (retval == 0)
++		return YAFFS_OK;
++	else
++		return YAFFS_FAIL;
++}
++
++int nandmtd_InitialiseNAND(yaffs_Device *dev)
++{
++	return YAFFS_OK;
++}
++
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif.h linux-2.6.29.1/fs/yaffs2/yaffs_mtdif.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif.h	2009-04-17 19:10:08.892967760 +0200
+@@ -0,0 +1,32 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
 + *
@@ -12462,15 +12709,26 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffsinterface.h linux-2.6.30/fs/yaffs2/ya
 + * Note: Only YAFFS headers are LGPL, YAFFS C code is covered by GPL.
 + */
 +
-+#ifndef __YAFFSINTERFACE_H__
-+#define __YAFFSINTERFACE_H__
++#ifndef __YAFFS_MTDIF_H__
++#define __YAFFS_MTDIF_H__
 +
-+int yaffs_Initialise(unsigned nBlocks);
++#include "yaffs_guts.h"
 +
++#if (MTD_VERSION_CODE < MTD_VERSION(2, 6, 18))
++extern struct nand_oobinfo yaffs_oobinfo;
++extern struct nand_oobinfo yaffs_noeccinfo;
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.c linux-2.6.30/fs/yaffs2/yaffs_mtdif1.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif1.c	2009-06-11 09:21:04.000000000 +0200
++
++int nandmtd_WriteChunkToNAND(yaffs_Device *dev, int chunkInNAND,
++			const __u8 *data, const yaffs_Spare *spare);
++int nandmtd_ReadChunkFromNAND(yaffs_Device *dev, int chunkInNAND, __u8 *data,
++			yaffs_Spare *spare);
++int nandmtd_EraseBlockInNAND(yaffs_Device *dev, int blockNumber);
++int nandmtd_InitialiseNAND(yaffs_Device *dev);
++#endif
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif1.c linux-2.6.29.1/fs/yaffs2/yaffs_mtdif1.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif1.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif1.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,365 @@
 +/*
 + * YAFFS: Yet another FFS. A NAND-flash specific file system.
@@ -12837,9 +13095,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.c linux-2.6.30/fs/yaffs2/yaff
 +}
 +
 +#endif /*MTD_VERSION*/
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.h linux-2.6.30/fs/yaffs2/yaffs_mtdif1.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif1.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif1.h linux-2.6.29.1/fs/yaffs2/yaffs_mtdif1.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif1.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif1.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,28 @@
 +/*
 + * YAFFS: Yet another Flash File System. A NAND-flash specific file system.
@@ -12869,9 +13127,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif1.h linux-2.6.30/fs/yaffs2/yaff
 +	yaffs_BlockState *state, __u32 *sequenceNumber);
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.c linux-2.6.30/fs/yaffs2/yaffs_mtdif2.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif2.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif2.c linux-2.6.29.1/fs/yaffs2/yaffs_mtdif2.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif2.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif2.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,246 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -13119,9 +13377,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.c linux-2.6.30/fs/yaffs2/yaff
 +		return YAFFS_FAIL;
 +}
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.h linux-2.6.30/fs/yaffs2/yaffs_mtdif2.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif2.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif2.h linux-2.6.29.1/fs/yaffs2/yaffs_mtdif2.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_mtdif2.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_mtdif2.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,29 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -13152,290 +13410,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif2.h linux-2.6.30/fs/yaffs2/yaff
 +			yaffs_BlockState *state, __u32 *sequenceNumber);
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif.c linux-2.6.30/fs/yaffs2/yaffs_mtdif.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif.c	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,241 @@
-+/*
-+ * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
-+ *
-+ * Copyright (C) 2002-2007 Aleph One Ltd.
-+ *   for Toby Churchill Ltd and Brightstar Engineering
-+ *
-+ * Created by Charles Manning <charles@aleph1.co.uk>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ */
-+
-+const char *yaffs_mtdif_c_version =
-+	"$Id: yaffs_mtdif.c,v 1.22 2009-03-06 17:20:51 wookey Exp $";
-+
-+#include "yportenv.h"
-+
-+
-+#include "yaffs_mtdif.h"
-+
-+#include "linux/mtd/mtd.h"
-+#include "linux/types.h"
-+#include "linux/time.h"
-+#include "linux/mtd/nand.h"
-+
-+#if (MTD_VERSION_CODE < MTD_VERSION(2, 6, 18))
-+static struct nand_oobinfo yaffs_oobinfo = {
-+	.useecc = 1,
-+	.eccbytes = 6,
-+	.eccpos = {8, 9, 10, 13, 14, 15}
-+};
-+
-+static struct nand_oobinfo yaffs_noeccinfo = {
-+	.useecc = 0,
-+};
-+#endif
-+
-+#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
-+static inline void translate_spare2oob(const yaffs_Spare *spare, __u8 *oob)
-+{
-+	oob[0] = spare->tagByte0;
-+	oob[1] = spare->tagByte1;
-+	oob[2] = spare->tagByte2;
-+	oob[3] = spare->tagByte3;
-+	oob[4] = spare->tagByte4;
-+	oob[5] = spare->tagByte5 & 0x3f;
-+	oob[5] |= spare->blockStatus == 'Y' ? 0 : 0x80;
-+	oob[5] |= spare->pageStatus == 0 ? 0 : 0x40;
-+	oob[6] = spare->tagByte6;
-+	oob[7] = spare->tagByte7;
-+}
-+
-+static inline void translate_oob2spare(yaffs_Spare *spare, __u8 *oob)
-+{
-+	struct yaffs_NANDSpare *nspare = (struct yaffs_NANDSpare *)spare;
-+	spare->tagByte0 = oob[0];
-+	spare->tagByte1 = oob[1];
-+	spare->tagByte2 = oob[2];
-+	spare->tagByte3 = oob[3];
-+	spare->tagByte4 = oob[4];
-+	spare->tagByte5 = oob[5] == 0xff ? 0xff : oob[5] & 0x3f;
-+	spare->blockStatus = oob[5] & 0x80 ? 0xff : 'Y';
-+	spare->pageStatus = oob[5] & 0x40 ? 0xff : 0;
-+	spare->ecc1[0] = spare->ecc1[1] = spare->ecc1[2] = 0xff;
-+	spare->tagByte6 = oob[6];
-+	spare->tagByte7 = oob[7];
-+	spare->ecc2[0] = spare->ecc2[1] = spare->ecc2[2] = 0xff;
-+
-+	nspare->eccres1 = nspare->eccres2 = 0; /* FIXME */
-+}
-+#endif
-+
-+int nandmtd_WriteChunkToNAND(yaffs_Device *dev, int chunkInNAND,
-+			     const __u8 *data, const yaffs_Spare *spare)
-+{
-+	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
-+#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
-+	struct mtd_oob_ops ops;
-+#endif
-+	size_t dummy;
-+	int retval = 0;
-+
-+	loff_t addr = ((loff_t) chunkInNAND) * dev->nDataBytesPerChunk;
-+#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
-+	__u8 spareAsBytes[8]; /* OOB */
-+
-+	if (data && !spare)
-+		retval = mtd->write(mtd, addr, dev->nDataBytesPerChunk,
-+				&dummy, data);
-+	else if (spare) {
-+		if (dev->useNANDECC) {
-+			translate_spare2oob(spare, spareAsBytes);
-+			ops.mode = MTD_OOB_AUTO;
-+			ops.ooblen = 8; /* temp hack */
-+		} else {
-+			ops.mode = MTD_OOB_RAW;
-+			ops.ooblen = YAFFS_BYTES_PER_SPARE;
-+		}
-+		ops.len = data ? dev->nDataBytesPerChunk : ops.ooblen;
-+		ops.datbuf = (u8 *)data;
-+		ops.ooboffs = 0;
-+		ops.oobbuf = spareAsBytes;
-+		retval = mtd->write_oob(mtd, addr, &ops);
-+	}
-+#else
-+	__u8 *spareAsBytes = (__u8 *) spare;
-+
-+	if (data && spare) {
-+		if (dev->useNANDECC)
-+			retval =
-+			    mtd->write_ecc(mtd, addr, dev->nDataBytesPerChunk,
-+					   &dummy, data, spareAsBytes,
-+					   &yaffs_oobinfo);
-+		else
-+			retval =
-+			    mtd->write_ecc(mtd, addr, dev->nDataBytesPerChunk,
-+					   &dummy, data, spareAsBytes,
-+					   &yaffs_noeccinfo);
-+	} else {
-+		if (data)
-+			retval =
-+			    mtd->write(mtd, addr, dev->nDataBytesPerChunk, &dummy,
-+				       data);
-+		if (spare)
-+			retval =
-+			    mtd->write_oob(mtd, addr, YAFFS_BYTES_PER_SPARE,
-+					   &dummy, spareAsBytes);
-+	}
-+#endif
-+
-+	if (retval == 0)
-+		return YAFFS_OK;
-+	else
-+		return YAFFS_FAIL;
-+}
-+
-+int nandmtd_ReadChunkFromNAND(yaffs_Device *dev, int chunkInNAND, __u8 *data,
-+			      yaffs_Spare *spare)
-+{
-+	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
-+#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
-+	struct mtd_oob_ops ops;
-+#endif
-+	size_t dummy;
-+	int retval = 0;
-+
-+	loff_t addr = ((loff_t) chunkInNAND) * dev->nDataBytesPerChunk;
-+#if (MTD_VERSION_CODE > MTD_VERSION(2, 6, 17))
-+	__u8 spareAsBytes[8]; /* OOB */
-+
-+	if (data && !spare)
-+		retval = mtd->read(mtd, addr, dev->nDataBytesPerChunk,
-+				&dummy, data);
-+	else if (spare) {
-+		if (dev->useNANDECC) {
-+			ops.mode = MTD_OOB_AUTO;
-+			ops.ooblen = 8; /* temp hack */
-+		} else {
-+			ops.mode = MTD_OOB_RAW;
-+			ops.ooblen = YAFFS_BYTES_PER_SPARE;
-+		}
-+		ops.len = data ? dev->nDataBytesPerChunk : ops.ooblen;
-+		ops.datbuf = data;
-+		ops.ooboffs = 0;
-+		ops.oobbuf = spareAsBytes;
-+		retval = mtd->read_oob(mtd, addr, &ops);
-+		if (dev->useNANDECC)
-+			translate_oob2spare(spare, spareAsBytes);
-+	}
-+#else
-+	__u8 *spareAsBytes = (__u8 *) spare;
-+
-+	if (data && spare) {
-+		if (dev->useNANDECC) {
-+			/* Careful, this call adds 2 ints */
-+			/* to the end of the spare data.  Calling function */
-+			/* should allocate enough memory for spare, */
-+			/* i.e. [YAFFS_BYTES_PER_SPARE+2*sizeof(int)]. */
-+			retval =
-+			    mtd->read_ecc(mtd, addr, dev->nDataBytesPerChunk,
-+					  &dummy, data, spareAsBytes,
-+					  &yaffs_oobinfo);
-+		} else {
-+			retval =
-+			    mtd->read_ecc(mtd, addr, dev->nDataBytesPerChunk,
-+					  &dummy, data, spareAsBytes,
-+					  &yaffs_noeccinfo);
-+		}
-+	} else {
-+		if (data)
-+			retval =
-+			    mtd->read(mtd, addr, dev->nDataBytesPerChunk, &dummy,
-+				      data);
-+		if (spare)
-+			retval =
-+			    mtd->read_oob(mtd, addr, YAFFS_BYTES_PER_SPARE,
-+					  &dummy, spareAsBytes);
-+	}
-+#endif
-+
-+	if (retval == 0)
-+		return YAFFS_OK;
-+	else
-+		return YAFFS_FAIL;
-+}
-+
-+int nandmtd_EraseBlockInNAND(yaffs_Device *dev, int blockNumber)
-+{
-+	struct mtd_info *mtd = (struct mtd_info *)(dev->genericDevice);
-+	__u32 addr =
-+	    ((loff_t) blockNumber) * dev->nDataBytesPerChunk
-+		* dev->nChunksPerBlock;
-+	struct erase_info ei;
-+	int retval = 0;
-+
-+	ei.mtd = mtd;
-+	ei.addr = addr;
-+	ei.len = dev->nDataBytesPerChunk * dev->nChunksPerBlock;
-+	ei.time = 1000;
-+	ei.retries = 2;
-+	ei.callback = NULL;
-+	ei.priv = (u_long) dev;
-+
-+	/* Todo finish off the ei if required */
-+
-+	sema_init(&dev->sem, 0);
-+
-+	retval = mtd->erase(mtd, &ei);
-+
-+	if (retval == 0)
-+		return YAFFS_OK;
-+	else
-+		return YAFFS_FAIL;
-+}
-+
-+int nandmtd_InitialiseNAND(yaffs_Device *dev)
-+{
-+	return YAFFS_OK;
-+}
-+
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif.h linux-2.6.30/fs/yaffs2/yaffs_mtdif.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_mtdif.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_mtdif.h	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,32 @@
-+/*
-+ * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
-+ *
-+ * Copyright (C) 2002-2007 Aleph One Ltd.
-+ *   for Toby Churchill Ltd and Brightstar Engineering
-+ *
-+ * Created by Charles Manning <charles@aleph1.co.uk>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License version 2.1 as
-+ * published by the Free Software Foundation.
-+ *
-+ * Note: Only YAFFS headers are LGPL, YAFFS C code is covered by GPL.
-+ */
-+
-+#ifndef __YAFFS_MTDIF_H__
-+#define __YAFFS_MTDIF_H__
-+
-+#include "yaffs_guts.h"
-+
-+#if (MTD_VERSION_CODE < MTD_VERSION(2, 6, 18))
-+extern struct nand_oobinfo yaffs_oobinfo;
-+extern struct nand_oobinfo yaffs_noeccinfo;
-+#endif
-+
-+int nandmtd_WriteChunkToNAND(yaffs_Device *dev, int chunkInNAND,
-+			const __u8 *data, const yaffs_Spare *spare);
-+int nandmtd_ReadChunkFromNAND(yaffs_Device *dev, int chunkInNAND, __u8 *data,
-+			yaffs_Spare *spare);
-+int nandmtd_EraseBlockInNAND(yaffs_Device *dev, int blockNumber);
-+int nandmtd_InitialiseNAND(yaffs_Device *dev);
-+#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_nand.c linux-2.6.30/fs/yaffs2/yaffs_nand.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_nand.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_nand.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_nand.c linux-2.6.29.1/fs/yaffs2/yaffs_nand.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_nand.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_nand.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,135 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -13572,52 +13549,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_nand.c linux-2.6.30/fs/yaffs2/yaffs_
 +
 +
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_nandemul2k.h linux-2.6.30/fs/yaffs2/yaffs_nandemul2k.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_nandemul2k.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_nandemul2k.h	2009-06-11 09:21:04.000000000 +0200
-@@ -0,0 +1,39 @@
-+/*
-+ * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
-+ *
-+ * Copyright (C) 2002-2007 Aleph One Ltd.
-+ *   for Toby Churchill Ltd and Brightstar Engineering
-+ *
-+ * Created by Charles Manning <charles@aleph1.co.uk>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License version 2.1 as
-+ * published by the Free Software Foundation.
-+ *
-+ * Note: Only YAFFS headers are LGPL, YAFFS C code is covered by GPL.
-+ */
-+
-+/* Interface to emulated NAND functions (2k page size) */
-+
-+#ifndef __YAFFS_NANDEMUL2K_H__
-+#define __YAFFS_NANDEMUL2K_H__
-+
-+#include "yaffs_guts.h"
-+
-+int nandemul2k_WriteChunkWithTagsToNAND(struct yaffs_DeviceStruct *dev,
-+					int chunkInNAND, const __u8 *data,
-+					const yaffs_ExtendedTags *tags);
-+int nandemul2k_ReadChunkWithTagsFromNAND(struct yaffs_DeviceStruct *dev,
-+					 int chunkInNAND, __u8 *data,
-+					 yaffs_ExtendedTags *tags);
-+int nandemul2k_MarkNANDBlockBad(struct yaffs_DeviceStruct *dev, int blockNo);
-+int nandemul2k_QueryNANDBlock(struct yaffs_DeviceStruct *dev, int blockNo,
-+			      yaffs_BlockState *state, __u32 *sequenceNumber);
-+int nandemul2k_EraseBlockInNAND(struct yaffs_DeviceStruct *dev,
-+				int blockInNAND);
-+int nandemul2k_InitialiseNAND(struct yaffs_DeviceStruct *dev);
-+int nandemul2k_GetBytesPerChunk(void);
-+int nandemul2k_GetChunksPerBlock(void);
-+int nandemul2k_GetNumberOfBlocks(void);
-+
-+#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_nand.h linux-2.6.30/fs/yaffs2/yaffs_nand.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_nand.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_nand.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_nand.h linux-2.6.29.1/fs/yaffs2/yaffs_nand.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_nand.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_nand.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,44 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -13663,9 +13597,52 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_nand.h linux-2.6.30/fs/yaffs2/yaffs_
 +
 +#endif
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.c linux-2.6.30/fs/yaffs2/yaffs_packedtags1.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_packedtags1.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_nandemul2k.h linux-2.6.29.1/fs/yaffs2/yaffs_nandemul2k.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_nandemul2k.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_nandemul2k.h	2009-04-17 19:10:08.892967760 +0200
+@@ -0,0 +1,39 @@
++/*
++ * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
++ *
++ * Copyright (C) 2002-2007 Aleph One Ltd.
++ *   for Toby Churchill Ltd and Brightstar Engineering
++ *
++ * Created by Charles Manning <charles@aleph1.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License version 2.1 as
++ * published by the Free Software Foundation.
++ *
++ * Note: Only YAFFS headers are LGPL, YAFFS C code is covered by GPL.
++ */
++
++/* Interface to emulated NAND functions (2k page size) */
++
++#ifndef __YAFFS_NANDEMUL2K_H__
++#define __YAFFS_NANDEMUL2K_H__
++
++#include "yaffs_guts.h"
++
++int nandemul2k_WriteChunkWithTagsToNAND(struct yaffs_DeviceStruct *dev,
++					int chunkInNAND, const __u8 *data,
++					const yaffs_ExtendedTags *tags);
++int nandemul2k_ReadChunkWithTagsFromNAND(struct yaffs_DeviceStruct *dev,
++					 int chunkInNAND, __u8 *data,
++					 yaffs_ExtendedTags *tags);
++int nandemul2k_MarkNANDBlockBad(struct yaffs_DeviceStruct *dev, int blockNo);
++int nandemul2k_QueryNANDBlock(struct yaffs_DeviceStruct *dev, int blockNo,
++			      yaffs_BlockState *state, __u32 *sequenceNumber);
++int nandemul2k_EraseBlockInNAND(struct yaffs_DeviceStruct *dev,
++				int blockInNAND);
++int nandemul2k_InitialiseNAND(struct yaffs_DeviceStruct *dev);
++int nandemul2k_GetBytesPerChunk(void);
++int nandemul2k_GetChunksPerBlock(void);
++int nandemul2k_GetNumberOfBlocks(void);
++
++#endif
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags1.c linux-2.6.29.1/fs/yaffs2/yaffs_packedtags1.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags1.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_packedtags1.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,50 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -13717,9 +13694,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.c linux-2.6.30/fs/yaffs2
 +		memset(t, 0, sizeof(yaffs_ExtendedTags));
 +	}
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.h linux-2.6.30/fs/yaffs2/yaffs_packedtags1.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_packedtags1.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags1.h linux-2.6.29.1/fs/yaffs2/yaffs_packedtags1.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags1.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_packedtags1.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,37 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -13758,9 +13735,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags1.h linux-2.6.30/fs/yaffs2
 +void yaffs_PackTags1(yaffs_PackedTags1 *pt, const yaffs_ExtendedTags *t);
 +void yaffs_UnpackTags1(yaffs_ExtendedTags *t, const yaffs_PackedTags1 *pt);
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.c linux-2.6.30/fs/yaffs2/yaffs_packedtags2.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_packedtags2.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags2.c linux-2.6.29.1/fs/yaffs2/yaffs_packedtags2.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags2.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_packedtags2.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,206 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -13968,9 +13945,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.c linux-2.6.30/fs/yaffs2
 +
 +}
 +
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.h linux-2.6.30/fs/yaffs2/yaffs_packedtags2.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_packedtags2.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags2.h linux-2.6.29.1/fs/yaffs2/yaffs_packedtags2.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_packedtags2.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_packedtags2.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,43 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -14015,9 +13992,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_packedtags2.h linux-2.6.30/fs/yaffs2
 +void yaffs_PackTags2TagsPart(yaffs_PackedTags2TagsPart *pt, const yaffs_ExtendedTags *t);
 +void yaffs_UnpackTags2TagsPart(yaffs_ExtendedTags *t, yaffs_PackedTags2TagsPart *pt);
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.c linux-2.6.30/fs/yaffs2/yaffs_qsort.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_qsort.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_qsort.c linux-2.6.29.1/fs/yaffs2/yaffs_qsort.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_qsort.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_qsort.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,163 @@
 +/*
 + * Copyright (c) 1992, 1993
@@ -14182,9 +14159,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.c linux-2.6.30/fs/yaffs2/yaffs
 +	}
 +/*		yaffs_qsort(pn - r, r / es, es, cmp);*/
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.h linux-2.6.30/fs/yaffs2/yaffs_qsort.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_qsort.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_qsort.h linux-2.6.29.1/fs/yaffs2/yaffs_qsort.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_qsort.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_qsort.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,23 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -14209,9 +14186,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_qsort.h linux-2.6.30/fs/yaffs2/yaffs
 +			int (*cmp)(const void *, const void *));
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.c linux-2.6.30/fs/yaffs2/yaffs_tagscompat.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_tagscompat.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagscompat.c linux-2.6.29.1/fs/yaffs2/yaffs_tagscompat.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagscompat.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_tagscompat.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,541 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -14754,9 +14731,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.c linux-2.6.30/fs/yaffs2/
 +
 +	return YAFFS_OK;
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.h linux-2.6.30/fs/yaffs2/yaffs_tagscompat.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_tagscompat.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagscompat.h linux-2.6.29.1/fs/yaffs2/yaffs_tagscompat.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagscompat.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_tagscompat.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,39 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -14797,9 +14774,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagscompat.h linux-2.6.30/fs/yaffs2/
 +int yaffs_CountBits(__u8 byte);
 +
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.c linux-2.6.30/fs/yaffs2/yaffs_tagsvalidity.c
---- linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_tagsvalidity.c	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagsvalidity.c linux-2.6.29.1/fs/yaffs2/yaffs_tagsvalidity.c
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagsvalidity.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_tagsvalidity.c	2009-04-17 19:10:08.888966133 +0200
 @@ -0,0 +1,28 @@
 +/*
 + * YAFFS: Yet Another Flash File System. A NAND-flash specific file system.
@@ -14829,9 +14806,9 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.c linux-2.6.30/fs/yaffs
 +		tags->validMarker1 == 0x55555555);
 +
 +}
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.h linux-2.6.30/fs/yaffs2/yaffs_tagsvalidity.h
---- linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yaffs_tagsvalidity.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagsvalidity.h linux-2.6.29.1/fs/yaffs2/yaffs_tagsvalidity.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffs_tagsvalidity.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffs_tagsvalidity.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,24 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
@@ -14857,9 +14834,34 @@ diff -Nur linux-2.6.30.orig/fs/yaffs2/yaffs_tagsvalidity.h linux-2.6.30/fs/yaffs
 +void yaffs_InitialiseTags(yaffs_ExtendedTags *tags);
 +int yaffs_ValidateTags(yaffs_ExtendedTags *tags);
 +#endif
-diff -Nur linux-2.6.30.orig/fs/yaffs2/yportenv.h linux-2.6.30/fs/yaffs2/yportenv.h
---- linux-2.6.30.orig/fs/yaffs2/yportenv.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/fs/yaffs2/yportenv.h	2009-06-11 09:21:04.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yaffsinterface.h linux-2.6.29.1/fs/yaffs2/yaffsinterface.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yaffsinterface.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yaffsinterface.h	2009-04-17 19:10:08.892967760 +0200
+@@ -0,0 +1,21 @@
++/*
++ * YAFFS: Yet another Flash File System . A NAND-flash specific file system.
++ *
++ * Copyright (C) 2002-2007 Aleph One Ltd.
++ *   for Toby Churchill Ltd and Brightstar Engineering
++ *
++ * Created by Charles Manning <charles@aleph1.co.uk>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU Lesser General Public License version 2.1 as
++ * published by the Free Software Foundation.
++ *
++ * Note: Only YAFFS headers are LGPL, YAFFS C code is covered by GPL.
++ */
++
++#ifndef __YAFFSINTERFACE_H__
++#define __YAFFSINTERFACE_H__
++
++int yaffs_Initialise(unsigned nBlocks);
++
++#endif
+diff -Nur linux-2.6.29.1.orig/fs/yaffs2/yportenv.h linux-2.6.29.1/fs/yaffs2/yportenv.h
+--- linux-2.6.29.1.orig/fs/yaffs2/yportenv.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/fs/yaffs2/yportenv.h	2009-04-17 19:10:08.892967760 +0200
 @@ -0,0 +1,203 @@
 +/*
 + * YAFFS: Yet another Flash File System . A NAND-flash specific file system.

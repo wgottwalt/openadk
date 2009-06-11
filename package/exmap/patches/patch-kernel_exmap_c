@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- exmap-console-0.4.1.orig/kernel/exmap.c	2006-10-24 20:45:11.000000000 +0200
-+++ exmap-console-0.4.1/kernel/exmap.c	2008-12-14 13:34:01.000000000 +0100
++++ exmap-console-0.4.1/kernel/exmap.c	2009-06-11 12:31:45.000000000 +0200
 @@ -392,7 +392,11 @@ int setup_from_pid(pid_t pid)
  	struct task_struct *tsk;
  	int errcode = -EINVAL;
@@ -22,7 +22,15 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		printk (KERN_ALERT "/proc/%s: could not initialize\n",
  			PROCFS_NAME);
  		return -ENOMEM;
-@@ -532,5 +536,5 @@ int init_module ()
+@@ -515,7 +519,6 @@ int init_module ()
+ 	
+ 	exmap_proc_file->read_proc = procfile_read;
+ 	exmap_proc_file->write_proc = procfile_write;
+-	exmap_proc_file->owner = THIS_MODULE;
+ 	
+ 	/*     exmap_proc_file->mode         = S_IFREG | S_IRUGO; */
+ 	/* TODO - this is quite probably a security problem */
+@@ -532,5 +535,5 @@ int init_module ()
  void cleanup_module ()
  {
  	printk (KERN_INFO "/proc/%s: remove\n", PROCFS_NAME);

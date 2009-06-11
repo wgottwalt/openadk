@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.30.orig/drivers/net/phy/Kconfig linux-2.6.30/drivers/net/phy/Kconfig
---- linux-2.6.30.orig/drivers/net/phy/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/drivers/net/phy/Kconfig	2009-06-11 09:22:50.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/drivers/net/phy/Kconfig linux-2.6.29.1/drivers/net/phy/Kconfig
+--- linux-2.6.29.1.orig/drivers/net/phy/Kconfig	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/drivers/net/phy/Kconfig	2009-04-16 18:23:27.308513617 +0200
 @@ -13,6 +13,12 @@
  
  if PHYLIB
@@ -14,9 +14,9 @@ diff -Nur linux-2.6.30.orig/drivers/net/phy/Kconfig linux-2.6.30/drivers/net/phy
  comment "MII PHY device drivers"
  
  config MARVELL_PHY
-diff -Nur linux-2.6.30.orig/drivers/net/phy/Makefile linux-2.6.30/drivers/net/phy/Makefile
---- linux-2.6.30.orig/drivers/net/phy/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/drivers/net/phy/Makefile	2009-06-11 09:22:50.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/drivers/net/phy/Makefile linux-2.6.29.1/drivers/net/phy/Makefile
+--- linux-2.6.29.1.orig/drivers/net/phy/Makefile	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/drivers/net/phy/Makefile	2009-04-16 18:23:27.308513617 +0200
 @@ -3,6 +3,7 @@
  libphy-objs			:= phy.o phy_device.o mdio_bus.o
  
@@ -25,9 +25,9 @@ diff -Nur linux-2.6.30.orig/drivers/net/phy/Makefile linux-2.6.30/drivers/net/ph
  obj-$(CONFIG_MARVELL_PHY)	+= marvell.o
  obj-$(CONFIG_DAVICOM_PHY)	+= davicom.o
  obj-$(CONFIG_CICADA_PHY)	+= cicada.o
-diff -Nur linux-2.6.30.orig/drivers/net/phy/swconfig.c linux-2.6.30/drivers/net/phy/swconfig.c
---- linux-2.6.30.orig/drivers/net/phy/swconfig.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/drivers/net/phy/swconfig.c	2009-06-11 09:22:50.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/drivers/net/phy/swconfig.c linux-2.6.29.1/drivers/net/phy/swconfig.c
+--- linux-2.6.29.1.orig/drivers/net/phy/swconfig.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/drivers/net/phy/swconfig.c	2009-04-16 18:21:39.053756855 +0200
 @@ -0,0 +1,872 @@
 +/*
 + * swconfig.c: Switch configuration API
@@ -901,9 +901,9 @@ diff -Nur linux-2.6.30.orig/drivers/net/phy/swconfig.c linux-2.6.30/drivers/net/
 +module_init(swconfig_init);
 +module_exit(swconfig_exit);
 +
-diff -Nur linux-2.6.30.orig/include/linux/switch.h linux-2.6.30/include/linux/switch.h
---- linux-2.6.30.orig/include/linux/switch.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30/include/linux/switch.h	2009-06-11 09:22:50.000000000 +0200
+diff -Nur linux-2.6.29.1.orig/include/linux/switch.h linux-2.6.29.1/include/linux/switch.h
+--- linux-2.6.29.1.orig/include/linux/switch.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.29.1/include/linux/switch.h	2009-04-16 18:21:57.228115363 +0200
 @@ -0,0 +1,168 @@
 +/*
 + * switch.h: Switch configuration API
