@@ -107,7 +107,7 @@ CONFIGURE_ARGS+=	--without-misdn \
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		STRIP=${STRIP}
 BUILD_STYLE:=		auto
-MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} ${TCFLAGS}" \
+MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} ${TCFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TLDFLAGS}"
 MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 			OPTIMIZE="${TARGET_OPTIMIZATION}" \
@@ -149,6 +149,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 			*zapateller* *jpeg*; \
 		rm -f chan_bluetooth.so ; \
 		rm -f chan_h323.so ; \
+		rm -f chan_iax2.so ; \
 		rm -f chan_mgcp.so ; \
 		rm -f chan_skinny.so ; \
 		rm -f {codec,format}_ilbc.so ; \
@@ -158,7 +159,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -f res_agi.so ; \
 	)
 	(cd $(IDIR_ASTERISK)/etc/asterisk; \
-		rm -f 	*odbc* *mysql* *postgres* *pgsql* *voicemail* *adsi* *oss* *alsa* \
+		rm -f 	*iax* *odbc* *mysql* *postgres* *pgsql* *voicemail* *adsi* *oss* *alsa* \
 			*festival* *modem* *meetme* *phone* *tds* *vofr* *rpt* *vpb* \
 			*zapata*; \
 		rm -f bluetooth.conf ; \

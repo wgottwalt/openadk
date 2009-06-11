@@ -7,8 +7,6 @@
 /etc/asterisk/extconfig.conf
 /etc/asterisk/extensions.conf
 /etc/asterisk/features.conf
-/etc/asterisk/iax.conf
-/etc/asterisk/iaxprov.conf
 /etc/asterisk/indications.conf
 /etc/asterisk/logger.conf
 /etc/asterisk/manager.conf
