@@ -2,5 +2,5 @@
 . $IPKG_INSTROOT/etc/functions.sh
 add_rcconf network network YES
 add_rcconf crond crond NO
-add_rcconf 'use "-C16" normally, "NO" to disable' syslogd_flags '-C16'
+add_rcconf 'use "-C32" normally, "NO" to disable' syslogd_flags '-C32'
 add_rcconf inetd

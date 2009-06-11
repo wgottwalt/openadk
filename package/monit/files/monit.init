@@ -6,7 +6,11 @@
 
 case $1 in
 autostop) ;;
-autostart|start)
+autostart)
+	test x"${monit:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
 	monit $monit_flags
 	;;
 stop)
