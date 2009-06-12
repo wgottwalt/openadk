@@ -9,7 +9,6 @@ KERNEL_IDIR:=$(LINUX_BUILD_DIR)/kernel-ipkg
 
 $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/$(DEVICE)-kernel-patch
-	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../linux/patches *.patch $(MAKE_TRACE)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../$(DEVICE)/patches *.patch $(MAKE_TRACE)
 	touch $@

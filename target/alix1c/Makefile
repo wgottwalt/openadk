@@ -14,11 +14,11 @@ ifeq ($(FS),ext2-cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
-	@echo "To install everything to CompactFlash use scripts/install.sh."
+	@echo "To install everything to CompactFlash use scripts/install.sh"
 endif
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
-	@echo "To install everything to CompactFlash use scripts/install.sh."
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 endif
