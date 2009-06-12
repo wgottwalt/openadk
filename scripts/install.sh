@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 if [ $(id -u) -ne 0 ];then
 	printf "Installation is only possible as root\n"
 	exit 1
@@ -55,16 +55,20 @@ else
 fi
 
 cfgfs=1
-while getopts "n" option
+rb532=0
+while getopts "nr" option
 do
 	case $option in
 		n)
-		cfgfs=0
-		;;
+			cfgfs=0
+			;;
+		r)
+			rb532=1
+			;;
 		*)
-		printf "Option not recognized\n"
-		exit 1
-		;;
+			printf "Option not recognized\n"
+			exit 1
+			;;
 	esac
 done
 shift $(($OPTIND - 1))
@@ -83,6 +87,18 @@ else
 	else
 		printf "$2 is not a file, Exiting\n"
 		exit 1
+	fi
+	if [ $rb532 -eq 1 ];then
+		if [ -z $3 ];then
+			printf "Please give the kernel as third parameter\n"
+			exit 2
+		fi
+		if [ -f $3 ];then
+			printf "Installing $3 on $1\n"
+		else
+			printf "$3 is not a file, Exiting\n"
+			exit 1
+		fi
 	fi
 	if [ -b $1 ];then
 		printf "Using $1 as CF/USB disk for installation\n"
@@ -127,7 +143,23 @@ if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
 fi
 
 printf "Create partition and filesystem\n"
-if [ $cfgfs -eq 0 ];then
+if [ $rb532 -ne 0 ];then
+	rootpart=${1}2
+	$parted -s $1 mklabel msdos
+	sleep 2
+	maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+	rootsize=$(($maxsize-2))
+
+	$parted -s $1 unit cyl mkpart primary ext2 0 1
+	$parted -s $1 unit cyl mkpartfs primary ext2 1 $rootsize
+	$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
+	$parted -s $1 set 1 boot on
+	$sfdisk --change-id $1 1 27
+	$sfdisk --change-id $1 3 88
+	dd if=$3 of=${1}1
+else
+	rootpart=${1}1
+	if [ $cfgfs -eq 0 ];then
 $sfdisk $1 << EOF
 ,,L
 ;
@@ -135,51 +167,50 @@ $sfdisk $1 << EOF
 ;
 y
 EOF
+		$mke2fs ${rootpart}
+	else
+		$parted -s $1 mklabel msdos
+		sleep 2
+		maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+		rootsize=$(($maxsize-1))
 
-$mke2fs ${1}1
-
-else
-$parted -s $1 mklabel msdos
-sleep 2
-declare -i maxsize
-maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-let rootsize=$maxsize-1
-
-$parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
-$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
-$parted -s $1 set 1 boot on
-$sfdisk --change-id $1 2 88
+		$parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
+		$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
+		$parted -s $1 set 1 boot on
+		$sfdisk --change-id $1 2 88
+	fi
 fi
 
 if [ $? -eq 0 ];then
-	printf "Successfully created partition ${1}1\n"
+	printf "Successfully created partition ${rootpart}\n"
 else
 	printf "Partition creation failed, Exiting.\n"
 	exit 1
 fi
 
-sleep 4
-$tune2fs -c 0 -i 0 ${1}1 >/dev/null
-
+sleep 2
+$tune2fs -c 0 -i 0 ${rootpart} >/dev/null
 if [ $? -eq 0 ];then
-	printf "Successfully disabled filesystem checks on ${1}1\n"
+	printf "Successfully disabled filesystem checks on ${rootpart}\n"
 else	
 	printf "Disabling filesystem checks failed, Exiting.\n"
+	exit 1
 fi	
 
 tmp=$(mktemp -d)
-mount -t ext2 ${1}1 $tmp
+mount -t ext2 ${rootpart} $tmp
 printf "Extracting install archive\n"
 tar -C $tmp -xzpf $2 
 printf "Fixing permissions\n"
 chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
 
-printf "Copying grub files\n"
-mkdir $tmp/boot/grub
-cp /boot/grub/stage1 $tmp/boot/grub
-cp /boot/grub/stage2 $tmp/boot/grub
-cp /boot/grub/e2fs_stage1_5 $tmp/boot/grub
+if [ $rb532 -ne 0 ];then
+	printf "Copying grub files\n"
+	mkdir $tmp/boot/grub
+	cp /boot/grub/stage1 $tmp/boot/grub
+	cp /boot/grub/stage2 $tmp/boot/grub
+	cp /boot/grub/e2fs_stage1_5 $tmp/boot/grub
 
 cat << EOF > $tmp/boot/grub/menu.lst
 serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
@@ -192,13 +223,14 @@ root (hd0,0)
 kernel /boot/kernel root=/dev/sda1 init=/init console=ttyS0,115200 console=tty0 panic=10 rw
 EOF
 
-printf "Installing Grub bootloader\n"
+	printf "Installing Grub bootloader\n"
 $grub --batch --no-curses --no-floppy --device-map=/dev/null >/dev/null << EOF
 device (hd0) $1
 root (hd0,0)
 setup (hd0)
 quit
 EOF
+fi
 
 printf "Creating device nodes\n"
 mknod -m 666 $tmp/dev/null c 1 3

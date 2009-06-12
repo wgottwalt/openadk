@@ -128,6 +128,11 @@ config ADK_LINUX_MIPS64_LEMOTE
 	help
 	  Lemote Subnotebook
 
+config ADK_LINUX_MIKROTIK
+	bool "Mikrotik Routerboards"
+	help
+	 Support for Mikrotik Routerboards
+
 config ADK_LINUX_MIPS_WAG54G
 	bool "Linksys WAG54G"
 	select ADK_KERNEL_NETDEVICES
@@ -139,38 +144,10 @@ config ADK_LINUX_MIPS_WAG54G
 	  Linksys WAG54G DSL router with Wireless
 	  TI AR7 platform
 
-config ADK_LINUX_MIPS_RB411
-	bool "Mikrotik Routerboard 411"
-	select ADK_rb411
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KERNEL_NET_ETHERNET
-	help
-	 Support for Mikrotik RB411.
-
-config ADK_LINUX_MIPS_RB433
-	bool "Mikrotik Routerboard 433"
-	select ADK_rb433
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KERNEL_NET_ETHERNET
-	help
-	 Support for Mikrotik RB433.
-
-config ADK_LINUX_MIPS_RB532
-	bool "Mikrotik Routerboard 532"
-	select ADK_rb532
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	help
-	 Support for Mikrotik RB532.
 
 config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
+	depends on ADK_BROKEN
 	select ADK_zaurus
 	select ADK_DEVICE_NO_FPU
 	help
@@ -261,6 +238,42 @@ config ADK_LINUX_CRIS_QEMU
 	help
 	 Qemu support for CRISv32 architecture.
 
+endchoice
+
+choice
+prompt "Routerboard model"
+default ADK_LINUX_MIPS_RB433
+depends on ADK_LINUX_MIKROTIK
+
+config ADK_LINUX_MIPS_RB411
+	bool "Mikrotik Routerboard 411"
+	select ADK_rb411
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KERNEL_NET_ETHERNET
+	help
+	 Support for Mikrotik RB411.
+
+config ADK_LINUX_MIPS_RB433
+	bool "Mikrotik Routerboard 433"
+	select ADK_rb433
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KERNEL_NET_ETHERNET
+	help
+	 Support for Mikrotik RB433.
+
+config ADK_LINUX_MIPS_RB532
+	bool "Mikrotik Routerboard 532"
+	select ADK_rb532
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	help
+	 Support for Mikrotik RB532.
 endchoice
 
 choice
