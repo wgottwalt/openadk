@@ -9,7 +9,7 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_NO_FPU),y)
+ifeq ($(ADK_DEVICE_NO_FPU),y)
 GLIBC_CONFOPTS:=          --without-fp
 endif
 

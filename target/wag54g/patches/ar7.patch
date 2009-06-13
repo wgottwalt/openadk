@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.29.1.orig/arch/mips/Kconfig linux-2.6.29.1/arch/mips/Kconfig
---- linux-2.6.29.1.orig/arch/mips/Kconfig	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/arch/mips/Kconfig	2009-06-05 23:38:22.964942366 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/Kconfig linux-2.6.30/arch/mips/Kconfig
+--- linux-2.6.30.orig/arch/mips/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/Kconfig	2009-06-11 20:55:34.588179514 +0200
 @@ -19,6 +19,24 @@
  	prompt "System type"
  	default SGI_IP22
@@ -26,10 +26,10 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/Kconfig linux-2.6.29.1/arch/mips/Kconfig
  config MACH_ALCHEMY
  	bool "Alchemy processor based machines"
  
-diff -Nur linux-2.6.29.1.orig/arch/mips/Makefile linux-2.6.29.1/arch/mips/Makefile
---- linux-2.6.29.1.orig/arch/mips/Makefile	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/arch/mips/Makefile	2009-06-05 23:38:22.972943665 +0200
-@@ -173,6 +173,13 @@
+diff -Nur linux-2.6.30.orig/arch/mips/Makefile linux-2.6.30/arch/mips/Makefile
+--- linux-2.6.30.orig/arch/mips/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/Makefile	2009-06-11 20:55:34.591474348 +0200
+@@ -174,6 +174,13 @@
  #
  
  #
@@ -43,9 +43,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/Makefile linux-2.6.29.1/arch/mips/Makefi
  # Acer PICA 61, Mips Magnum 4000 and Olivetti M700.
  #
  core-$(CONFIG_MACH_JAZZ)	+= arch/mips/jazz/
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/Makefile linux-2.6.29.1/arch/mips/ar7/Makefile
---- linux-2.6.29.1.orig/arch/mips/ar7/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/Makefile	2009-06-05 23:38:22.900939237 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/Makefile linux-2.6.30/arch/mips/ar7/Makefile
+--- linux-2.6.30.orig/arch/mips/ar7/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/Makefile	2009-06-11 20:55:34.591474348 +0200
 @@ -0,0 +1,10 @@
 +
 +obj-y := \
@@ -57,9 +57,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/Makefile linux-2.6.29.1/arch/mips/ar
 +	platform.o \
 +	gpio.o \
 +	clock.o
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/clock.c linux-2.6.29.1/arch/mips/ar7/clock.c
---- linux-2.6.29.1.orig/arch/mips/ar7/clock.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/clock.c	2009-06-05 23:38:22.890200159 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/clock.c linux-2.6.30/arch/mips/ar7/clock.c
+--- linux-2.6.30.orig/arch/mips/ar7/clock.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/clock.c	2009-06-11 20:55:34.591474348 +0200
 @@ -0,0 +1,483 @@
 +/*
 + * Copyright (C) 2007 Felix Fietkau <nbd@openwrt.org>
@@ -544,9 +544,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/clock.c linux-2.6.29.1/arch/mips/ar7
 +		break;
 +	}
 +}
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/gpio.c linux-2.6.29.1/arch/mips/ar7/gpio.c
---- linux-2.6.29.1.orig/arch/mips/ar7/gpio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/gpio.c	2009-06-05 23:38:22.896939006 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/gpio.c linux-2.6.30/arch/mips/ar7/gpio.c
+--- linux-2.6.30.orig/arch/mips/ar7/gpio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/gpio.c	2009-06-11 20:55:34.595485753 +0200
 @@ -0,0 +1,49 @@
 +/*
 + * Copyright (C) 2007 Felix Fietkau <nbd@openwrt.org>
@@ -597,9 +597,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/gpio.c linux-2.6.29.1/arch/mips/ar7/
 +	ar7_gpio_list[gpio] = NULL;
 +}
 +EXPORT_SYMBOL(gpio_free);
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/irq.c linux-2.6.29.1/arch/mips/ar7/irq.c
---- linux-2.6.29.1.orig/arch/mips/ar7/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/irq.c	2009-06-05 23:38:22.896939006 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/irq.c linux-2.6.30/arch/mips/ar7/irq.c
+--- linux-2.6.30.orig/arch/mips/ar7/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/irq.c	2009-06-11 20:55:34.595485753 +0200
 @@ -0,0 +1,183 @@
 +/*
 + * Copyright (C) 2006,2007 Felix Fietkau <nbd@openwrt.org>
@@ -784,9 +784,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/irq.c linux-2.6.29.1/arch/mips/ar7/i
 +	else
 +		spurious_interrupt();
 +}
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/memory.c linux-2.6.29.1/arch/mips/ar7/memory.c
---- linux-2.6.29.1.orig/arch/mips/ar7/memory.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/memory.c	2009-06-05 23:38:22.900939237 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/memory.c linux-2.6.30/arch/mips/ar7/memory.c
+--- linux-2.6.30.orig/arch/mips/ar7/memory.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/memory.c	2009-06-11 20:55:34.595485753 +0200
 @@ -0,0 +1,74 @@
 +/*
 + * Based on arch/mips/mm/init.c
@@ -862,9 +862,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/memory.c linux-2.6.29.1/arch/mips/ar
 +{
 +	return;
 +}
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/platform.c linux-2.6.29.1/arch/mips/ar7/platform.c
---- linux-2.6.29.1.orig/arch/mips/ar7/platform.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/platform.c	2009-06-11 11:03:47.318484670 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/platform.c linux-2.6.30/arch/mips/ar7/platform.c
+--- linux-2.6.30.orig/arch/mips/ar7/platform.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/platform.c	2009-06-11 20:55:34.599474529 +0200
 @@ -0,0 +1,554 @@
 +/*
 + * Copyright (C) 2006,2007 Felix Fietkau <nbd@openwrt.org>
@@ -1420,9 +1420,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/platform.c linux-2.6.29.1/arch/mips/
 +
 +
 +arch_initcall(ar7_register_devices);
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/prom.c linux-2.6.29.1/arch/mips/ar7/prom.c
---- linux-2.6.29.1.orig/arch/mips/ar7/prom.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/prom.c	2009-06-05 23:38:22.904938908 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/prom.c linux-2.6.30/arch/mips/ar7/prom.c
+--- linux-2.6.30.orig/arch/mips/ar7/prom.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/prom.c	2009-06-11 20:55:34.599474529 +0200
 @@ -0,0 +1,321 @@
 +/*
 + * Carsten Langgaard, carstenl@mips.com
@@ -1745,9 +1745,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/prom.c linux-2.6.29.1/arch/mips/ar7/
 +       return prom_getchar();
 +}
 +#endif
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/setup.c linux-2.6.29.1/arch/mips/ar7/setup.c
---- linux-2.6.29.1.orig/arch/mips/ar7/setup.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/setup.c	2009-06-05 23:38:22.908939139 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/setup.c linux-2.6.30/arch/mips/ar7/setup.c
+--- linux-2.6.30.orig/arch/mips/ar7/setup.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/setup.c	2009-06-11 20:55:34.603475038 +0200
 @@ -0,0 +1,105 @@
 +/*
 + * Carsten Langgaard, carstenl@mips.com
@@ -1854,9 +1854,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/setup.c linux-2.6.29.1/arch/mips/ar7
 +}
 +
 +console_initcall(ar7_init_console);
-diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/time.c linux-2.6.29.1/arch/mips/ar7/time.c
---- linux-2.6.29.1.orig/arch/mips/ar7/time.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/ar7/time.c	2009-06-05 23:38:22.908939139 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/ar7/time.c linux-2.6.30/arch/mips/ar7/time.c
+--- linux-2.6.30.orig/arch/mips/ar7/time.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/ar7/time.c	2009-06-11 20:55:34.603475038 +0200
 @@ -0,0 +1,28 @@
 +/*
 + * Carsten Langgaard, carstenl@mips.com
@@ -1886,9 +1886,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/ar7/time.c linux-2.6.29.1/arch/mips/ar7/
 +{
 +	mips_hpt_frequency = ar7_cpu_freq() / 2;
 +}
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/ar7.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/ar7.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/ar7.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/ar7.h	2009-06-05 23:38:22.912938811 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/ar7.h linux-2.6.30/arch/mips/include/asm/mach-ar7/ar7.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/ar7.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/ar7.h	2009-06-11 20:55:34.603475038 +0200
 @@ -0,0 +1,170 @@
 +/*
 + * Copyright (C) 2006,2007 Felix Fietkau <nbd@openwrt.org>
@@ -2060,9 +2060,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/ar7.h linux-2.6.29.
 +}
 +
 +#endif /* __AR7_H__ */
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/gpio.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/gpio.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/gpio.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/gpio.h	2009-06-05 23:38:22.920939272 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/gpio.h linux-2.6.30/arch/mips/include/asm/mach-ar7/gpio.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/gpio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/gpio.h	2009-06-11 20:55:34.603475038 +0200
 @@ -0,0 +1,109 @@
 +/*
 + * Copyright (C) 2007 Florian Fainelli <florian@openwrt.org>
@@ -2173,9 +2173,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/gpio.h linux-2.6.29
 +#include <asm-generic/gpio.h>
 +
 +#endif
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/irq.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/irq.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/irq.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/irq.h	2009-06-05 23:38:22.957186350 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/irq.h linux-2.6.30/arch/mips/include/asm/mach-ar7/irq.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/irq.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/irq.h	2009-06-11 20:55:34.607474989 +0200
 @@ -0,0 +1,16 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -2193,9 +2193,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/irq.h linux-2.6.29.
 +#include_next <irq.h>
 +
 +#endif /* __ASM_AR7_IRQ_H */
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/prom.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/prom.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/prom.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/prom.h	2009-06-05 23:38:22.957186350 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/prom.h linux-2.6.30/arch/mips/include/asm/mach-ar7/prom.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/prom.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/prom.h	2009-06-11 20:55:34.607474989 +0200
 @@ -0,0 +1,26 @@
 +/*
 + * Copyright (C) 2006, 2007 Florian Fainelli <florian@openwrt.org>
@@ -2223,9 +2223,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/prom.h linux-2.6.29
 +extern void prom_meminit(void);
 +
 +#endif /* __PROM_H__ */
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/spaces.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/spaces.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/spaces.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/spaces.h	2009-06-05 23:38:22.957186350 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/spaces.h linux-2.6.30/arch/mips/include/asm/mach-ar7/spaces.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/spaces.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/spaces.h	2009-06-11 20:55:34.607474989 +0200
 @@ -0,0 +1,32 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -2259,9 +2259,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/spaces.h linux-2.6.
 +#endif
 +
 +#endif /* __ASM_AR7_SPACES_H */
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/war.h linux-2.6.29.1/arch/mips/include/asm/mach-ar7/war.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/war.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/arch/mips/include/asm/mach-ar7/war.h	2009-06-05 23:38:22.957186350 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/war.h linux-2.6.30/arch/mips/include/asm/mach-ar7/war.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-ar7/war.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-ar7/war.h	2009-06-11 20:55:34.607474989 +0200
 @@ -0,0 +1,25 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -2288,10 +2288,10 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/mach-ar7/war.h linux-2.6.29.
 +#define MIPS34K_MISSED_ITLB_WAR		0
 +
 +#endif /* __ASM_MIPS_MACH_BCM947XX_WAR_H */
-diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/page.h linux-2.6.29.1/arch/mips/include/asm/page.h
---- linux-2.6.29.1.orig/arch/mips/include/asm/page.h	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/arch/mips/include/asm/page.h	2009-06-05 23:38:22.964942366 +0200
-@@ -182,8 +182,11 @@
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/page.h linux-2.6.30/arch/mips/include/asm/page.h
+--- linux-2.6.30.orig/arch/mips/include/asm/page.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/page.h	2009-06-11 20:55:34.607474989 +0200
+@@ -185,8 +185,11 @@
  #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
  				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
  
@@ -2305,9 +2305,9 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/include/asm/page.h linux-2.6.29.1/arch/m
  
  #include <asm-generic/memory_model.h>
  #include <asm-generic/page.h>
-diff -Nur linux-2.6.29.1.orig/arch/mips/kernel/traps.c linux-2.6.29.1/arch/mips/kernel/traps.c
---- linux-2.6.29.1.orig/arch/mips/kernel/traps.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/arch/mips/kernel/traps.c	2009-06-05 23:38:22.972943665 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/traps.c linux-2.6.30/arch/mips/kernel/traps.c
+--- linux-2.6.30.orig/arch/mips/kernel/traps.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/kernel/traps.c	2009-06-11 20:55:34.619476239 +0200
 @@ -1256,9 +1256,22 @@
  
  	exception_handlers[n] = handler;
@@ -2334,9 +2334,20 @@ diff -Nur linux-2.6.29.1.orig/arch/mips/kernel/traps.c linux-2.6.29.1/arch/mips/
  	}
  	return (void *)old_handler;
  }
-diff -Nur linux-2.6.29.1.orig/drivers/Kconfig linux-2.6.29.1/drivers/Kconfig
---- linux-2.6.29.1.orig/drivers/Kconfig	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/Kconfig	2009-06-05 23:38:22.988945146 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/lib/delay.c linux-2.6.30/arch/mips/lib/delay.c
+--- linux-2.6.30.orig/arch/mips/lib/delay.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lib/delay.c	2009-06-11 21:10:53.309003369 +0200
+@@ -51,6 +51,6 @@
+ {
+ 	unsigned int lpj = current_cpu_data.udelay_val;
+ 
+-	__delay((us * 0x00000005 * HZ * lpj) >> 32);
++	__delay((ns * 0x00000005 * HZ * lpj) >> 32);
+ }
+ EXPORT_SYMBOL(__ndelay);
+diff -Nur linux-2.6.30.orig/drivers/Kconfig linux-2.6.30/drivers/Kconfig
+--- linux-2.6.30.orig/drivers/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/Kconfig	2009-06-11 20:55:34.619476239 +0200
 @@ -104,6 +104,8 @@
  
  source "drivers/uio/Kconfig"
@@ -2346,10 +2357,10 @@ diff -Nur linux-2.6.29.1.orig/drivers/Kconfig linux-2.6.29.1/drivers/Kconfig
  source "drivers/xen/Kconfig"
  
  source "drivers/staging/Kconfig"
-diff -Nur linux-2.6.29.1.orig/drivers/Makefile linux-2.6.29.1/drivers/Makefile
---- linux-2.6.29.1.orig/drivers/Makefile	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/Makefile	2009-06-05 23:38:22.988945146 +0200
-@@ -102,6 +102,7 @@
+diff -Nur linux-2.6.30.orig/drivers/Makefile linux-2.6.30/drivers/Makefile
+--- linux-2.6.30.orig/drivers/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/Makefile	2009-06-11 20:55:34.619476239 +0200
+@@ -103,6 +103,7 @@
  obj-$(CONFIG_HID)		+= hid/
  obj-$(CONFIG_PPC_PS3)		+= ps3/
  obj-$(CONFIG_OF)		+= of/
@@ -2357,9 +2368,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/Makefile linux-2.6.29.1/drivers/Makefile
  obj-$(CONFIG_SSB)		+= ssb/
  obj-$(CONFIG_VIRTIO)		+= virtio/
  obj-$(CONFIG_STAGING)		+= staging/
-diff -Nur linux-2.6.29.1.orig/drivers/char/Kconfig linux-2.6.29.1/drivers/char/Kconfig
---- linux-2.6.29.1.orig/drivers/char/Kconfig	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/char/Kconfig	2009-06-05 23:38:22.984944077 +0200
+diff -Nur linux-2.6.30.orig/drivers/char/Kconfig linux-2.6.30/drivers/char/Kconfig
+--- linux-2.6.30.orig/drivers/char/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/char/Kconfig	2009-06-11 20:55:34.623477307 +0200
 @@ -974,6 +974,15 @@
  	  To compile this driver as a module, choose M here: the
  	  module will be called mwave.
@@ -2376,9 +2387,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/char/Kconfig linux-2.6.29.1/drivers/char/K
  config SCx200_GPIO
  	tristate "NatSemi SCx200 GPIO Support"
  	depends on SCx200
-diff -Nur linux-2.6.29.1.orig/drivers/char/Makefile linux-2.6.29.1/drivers/char/Makefile
---- linux-2.6.29.1.orig/drivers/char/Makefile	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/char/Makefile	2009-06-05 23:38:22.984944077 +0200
+diff -Nur linux-2.6.30.orig/drivers/char/Makefile linux-2.6.30/drivers/char/Makefile
+--- linux-2.6.30.orig/drivers/char/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/char/Makefile	2009-06-11 20:55:34.623477307 +0200
 @@ -90,6 +90,7 @@
  obj-$(CONFIG_PPDEV)		+= ppdev.o
  obj-$(CONFIG_NWBUTTON)		+= nwbutton.o
@@ -2387,9 +2398,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/char/Makefile linux-2.6.29.1/drivers/char/
  obj-$(CONFIG_SCx200_GPIO)	+= scx200_gpio.o
  obj-$(CONFIG_PC8736x_GPIO)	+= pc8736x_gpio.o
  obj-$(CONFIG_NSC_GPIO)		+= nsc_gpio.o
-diff -Nur linux-2.6.29.1.orig/drivers/char/ar7_gpio.c linux-2.6.29.1/drivers/char/ar7_gpio.c
---- linux-2.6.29.1.orig/drivers/char/ar7_gpio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/drivers/char/ar7_gpio.c	2009-06-05 23:38:22.980943288 +0200
+diff -Nur linux-2.6.30.orig/drivers/char/ar7_gpio.c linux-2.6.30/drivers/char/ar7_gpio.c
+--- linux-2.6.30.orig/drivers/char/ar7_gpio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/char/ar7_gpio.c	2009-06-11 20:55:34.623477307 +0200
 @@ -0,0 +1,158 @@
 +/*
 + * Copyright (C) 2007 Nicolas Thill <nico@openwrt.org>
@@ -2549,9 +2560,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/char/ar7_gpio.c linux-2.6.29.1/drivers/cha
 +
 +module_init(ar7_gpio_init);
 +module_exit(ar7_gpio_exit);
-diff -Nur linux-2.6.29.1.orig/drivers/mtd/maps/physmap.c linux-2.6.29.1/drivers/mtd/maps/physmap.c
---- linux-2.6.29.1.orig/drivers/mtd/maps/physmap.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/mtd/maps/physmap.c	2009-06-05 23:38:22.996945327 +0200
+diff -Nur linux-2.6.30.orig/drivers/mtd/maps/physmap.c linux-2.6.30/drivers/mtd/maps/physmap.c
+--- linux-2.6.30.orig/drivers/mtd/maps/physmap.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/mtd/maps/physmap.c	2009-06-11 20:55:34.627477258 +0200
 @@ -80,7 +80,7 @@
  					"map_rom",
  					NULL };
@@ -2561,10 +2572,10 @@ diff -Nur linux-2.6.29.1.orig/drivers/mtd/maps/physmap.c linux-2.6.29.1/drivers/
  #endif
  
  static int physmap_flash_probe(struct platform_device *dev)
-diff -Nur linux-2.6.29.1.orig/drivers/net/Kconfig linux-2.6.29.1/drivers/net/Kconfig
---- linux-2.6.29.1.orig/drivers/net/Kconfig	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/net/Kconfig	2009-06-05 23:38:23.012945970 +0200
-@@ -1741,7 +1741,7 @@
+diff -Nur linux-2.6.30.orig/drivers/net/Kconfig linux-2.6.30/drivers/net/Kconfig
+--- linux-2.6.30.orig/drivers/net/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/net/Kconfig	2009-06-11 20:55:34.627477258 +0200
+@@ -1760,7 +1760,7 @@
  
  config CPMAC
  	tristate "TI AR7 CPMAC Ethernet support (EXPERIMENTAL)"
@@ -2573,9 +2584,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/net/Kconfig linux-2.6.29.1/drivers/net/Kco
  	select PHYLIB
  	help
  	  TI AR7 CPMAC Ethernet support
-diff -Nur linux-2.6.29.1.orig/drivers/net/cpmac.c linux-2.6.29.1/drivers/net/cpmac.c
---- linux-2.6.29.1.orig/drivers/net/cpmac.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/net/cpmac.c	2009-06-11 11:03:25.823065413 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/cpmac.c linux-2.6.30/drivers/net/cpmac.c
+--- linux-2.6.30.orig/drivers/net/cpmac.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/net/cpmac.c	2009-06-11 20:55:34.635477718 +0200
 @@ -615,13 +615,13 @@
  
  		dev_kfree_skb_irq(desc->skb);
@@ -2652,7 +2663,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/net/cpmac.c linux-2.6.29.1/drivers/net/cpm
  	priv->msg_enable = netif_msg_init(debug_level, 0xff);
  	memcpy(dev->dev_addr, pdata->dev_addr, sizeof(dev->dev_addr));
  
--	priv->phy = phy_connect(dev, cpmac_mii->phy_map[phy_id]->dev.bus_id,
+-	priv->phy = phy_connect(dev, dev_name(&cpmac_mii->phy_map[phy_id]->dev),
 +	snprintf(priv->phy_name, BUS_ID_SIZE, PHY_ID_FMT, mdio_bus_id, phy_id);
 +	priv->phy = phy_connect(dev, priv->phy_name,
  				&cpmac_adjust_link, 0, PHY_INTERFACE_MODE_MII);
@@ -2699,9 +2710,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/net/cpmac.c linux-2.6.29.1/drivers/net/cpm
  	res = platform_driver_register(&cpmac_driver);
  	if (res)
  		goto fail_cpmac;
-diff -Nur linux-2.6.29.1.orig/drivers/vlynq/Kconfig linux-2.6.29.1/drivers/vlynq/Kconfig
---- linux-2.6.29.1.orig/drivers/vlynq/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/drivers/vlynq/Kconfig	2009-06-05 23:38:23.016945921 +0200
+diff -Nur linux-2.6.30.orig/drivers/vlynq/Kconfig linux-2.6.30/drivers/vlynq/Kconfig
+--- linux-2.6.30.orig/drivers/vlynq/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/vlynq/Kconfig	2009-06-11 20:55:34.635477718 +0200
 @@ -0,0 +1,13 @@
 +menu "TI VLYNQ"
 +
@@ -2716,19 +2727,19 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/Kconfig linux-2.6.29.1/drivers/vlynq
 +	  If unsure, say N
 +
 +endmenu
-diff -Nur linux-2.6.29.1.orig/drivers/vlynq/Makefile linux-2.6.29.1/drivers/vlynq/Makefile
---- linux-2.6.29.1.orig/drivers/vlynq/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/drivers/vlynq/Makefile	2009-06-05 23:38:23.016945921 +0200
+diff -Nur linux-2.6.30.orig/drivers/vlynq/Makefile linux-2.6.30/drivers/vlynq/Makefile
+--- linux-2.6.30.orig/drivers/vlynq/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/vlynq/Makefile	2009-06-11 20:55:34.635477718 +0200
 @@ -0,0 +1,5 @@
 +#
 +# Makefile for kernel vlynq drivers
 +#
 +
 +obj-$(CONFIG_VLYNQ) += vlynq.o
-diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq/vlynq.c
---- linux-2.6.29.1.orig/drivers/vlynq/vlynq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/drivers/vlynq/vlynq.c	2009-06-05 23:38:23.020946151 +0200
-@@ -0,0 +1,783 @@
+diff -Nur linux-2.6.30.orig/drivers/vlynq/vlynq.c linux-2.6.30/drivers/vlynq/vlynq.c
+--- linux-2.6.30.orig/drivers/vlynq/vlynq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/vlynq/vlynq.c	2009-06-11 20:55:52.962219898 +0200
+@@ -0,0 +1,782 @@
 +/*
 + * Copyright (C) 2006, 2007 Eugene Konev <ejka@openwrt.org>
 + *
@@ -2928,7 +2939,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	u32 status = vlynq_reg_read(dev->local->status);
 +	if (printk_ratelimit())
 +		printk(KERN_DEBUG "%s: local status: 0x%08x\n",
-+		       dev->dev.bus_id, status);
++		       dev_name(&dev->dev), status);
 +	vlynq_reg_write(dev->local->status, status);
 +}
 +
@@ -2938,7 +2949,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	u32 status = vlynq_reg_read(dev->remote->status);
 +	if (printk_ratelimit())
 +		printk(KERN_DEBUG "%s: remote status: 0x%08x\n",
-+		       dev->dev.bus_id, status);
++		       dev_name(&dev->dev), status);
 +	vlynq_reg_write(dev->remote->status, status);
 +}
 +
@@ -2993,7 +3004,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	if (dev->local_irq == dev->remote_irq) {
 +		printk(KERN_ERR
 +		       "%s: local vlynq irq should be different from remote\n",
-+		       dev->dev.bus_id);
++		       dev_name(&dev->dev));
 +		return -EINVAL;
 +	}
 +
@@ -3035,7 +3046,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	}
 +
 +	if (request_irq(dev->irq, vlynq_irq, IRQF_SHARED, "vlynq", dev)) {
-+		printk(KERN_ERR "%s: request_irq failed\n", dev->dev.bus_id);
++		printk(KERN_ERR "%s: request_irq failed\n", dev_name(&dev->dev));
 +		return -EAGAIN;
 +	}
 +
@@ -3134,7 +3145,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +		if (vlynq_linked(dev)) {
 +			printk(KERN_DEBUG
 +				"%s: using remote clock divisor %d\n",
-+				dev->dev.bus_id, i - vlynq_rdiv1 + 1);
++				dev_name(&dev->dev), i - vlynq_rdiv1 + 1);
 +			dev->divisor = i;
 +			return 0;
 +		} else {
@@ -3164,7 +3175,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +		if (vlynq_linked(dev)) {
 +			printk(KERN_DEBUG
 +				"%s: using local clock divisor %d\n",
-+				dev->dev.bus_id, i - vlynq_ldiv1 + 1);
++				dev_name(&dev->dev), i - vlynq_ldiv1 + 1);
 +			dev->divisor = i;
 +			return 0;
 +		} else {
@@ -3191,7 +3202,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +
 +	if (vlynq_linked(dev)) {
 +		printk(KERN_DEBUG "%s: using external clock\n",
-+			dev->dev.bus_id);
++			dev_name(&dev->dev));
 +			dev->divisor = vlynq_div_external;
 +		return 0;
 +	}
@@ -3238,7 +3249,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +		if (vlynq_linked(dev)) {
 +			printk(KERN_DEBUG
 +			       "%s: using local clock divisor %d\n",
-+			       dev->dev.bus_id, dev->divisor - vlynq_ldiv1 + 1);
++			       dev_name(&dev->dev), dev->divisor - vlynq_ldiv1 + 1);
 +			return 0;
 +		}
 +		break;
@@ -3252,7 +3263,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +		if (vlynq_linked(dev)) {
 +			printk(KERN_DEBUG
 +			       "%s: using remote clock divisor %d\n",
-+			       dev->dev.bus_id, dev->divisor - vlynq_rdiv1 + 1);
++			       dev_name(&dev->dev), dev->divisor - vlynq_rdiv1 + 1);
 +			return 0;
 +		}
 +		break;
@@ -3393,8 +3404,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	dev->id = pdev->id;
 +	dev->dev.bus = &vlynq_bus_type;
 +	dev->dev.parent = &pdev->dev;
-+	snprintf(dev->dev.bus_id, BUS_ID_SIZE, "vlynq%d", dev->id);
-+	dev->dev.bus_id[BUS_ID_SIZE - 1] = 0;
++	dev_set_name(&dev->dev, "vlynq%d", dev->id);
 +	dev->dev.platform_data = pdev->dev.platform_data;
 +	dev->dev.release = vlynq_device_release;
 +
@@ -3404,9 +3414,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	dev->mem_end = mem_res->end;
 +
 +	len = regs_res->end - regs_res->start;
-+	if (!request_mem_region(regs_res->start, len, dev->dev.bus_id)) {
++	if (!request_mem_region(regs_res->start, len, dev_name(&dev->dev))) {
 +		printk(KERN_ERR "%s: Can't request vlynq registers\n",
-+		       dev->dev.bus_id);
++		       dev_name(&dev->dev));
 +		result = -ENXIO;
 +		goto fail_request;
 +	}
@@ -3414,7 +3424,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	dev->local = ioremap(regs_res->start, len);
 +	if (!dev->local) {
 +		printk(KERN_ERR "%s: Can't remap vlynq registers\n",
-+		       dev->dev.bus_id);
++		       dev_name(&dev->dev));
 +		result = -ENXIO;
 +		goto fail_remap;
 +	}
@@ -3433,7 +3443,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +	platform_set_drvdata(pdev, dev);
 +
 +	printk(KERN_INFO "%s: regs 0x%p, irq %d, mem 0x%p\n",
-+	       dev->dev.bus_id, (void *)dev->regs_start, dev->irq,
++	       dev_name(&dev->dev), (void *)dev->regs_start, dev->irq,
 +	       (void *)dev->mem_start);
 +
 +	dev->dev_id = 0;
@@ -3512,9 +3522,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/vlynq/vlynq.c linux-2.6.29.1/drivers/vlynq
 +
 +module_init(vlynq_init);
 +module_exit(vlynq_exit);
-diff -Nur linux-2.6.29.1.orig/drivers/watchdog/ar7_wdt.c linux-2.6.29.1/drivers/watchdog/ar7_wdt.c
---- linux-2.6.29.1.orig/drivers/watchdog/ar7_wdt.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/watchdog/ar7_wdt.c	2009-06-05 23:38:23.024946661 +0200
+diff -Nur linux-2.6.30.orig/drivers/watchdog/ar7_wdt.c linux-2.6.30/drivers/watchdog/ar7_wdt.c
+--- linux-2.6.30.orig/drivers/watchdog/ar7_wdt.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/watchdog/ar7_wdt.c	2009-06-11 20:55:34.639477111 +0200
 @@ -69,8 +69,7 @@
  	u32 prescale;
  };
@@ -3651,9 +3661,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/watchdog/ar7_wdt.c linux-2.6.29.1/drivers/
  	rc = register_reboot_notifier(&ar7_wdt_notifier);
  	if (rc) {
  		printk(KERN_ERR DRVNAME
-diff -Nur linux-2.6.29.1.orig/include/linux/vlynq.h linux-2.6.29.1/include/linux/vlynq.h
---- linux-2.6.29.1.orig/include/linux/vlynq.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.29.1/include/linux/vlynq.h	2009-06-05 23:38:23.032946563 +0200
+diff -Nur linux-2.6.30.orig/include/linux/vlynq.h linux-2.6.30/include/linux/vlynq.h
+--- linux-2.6.30.orig/include/linux/vlynq.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/include/linux/vlynq.h	2009-06-11 20:55:34.639477111 +0200
 @@ -0,0 +1,161 @@
 +/*
 + * Copyright (C) 2006, 2007 Eugene Konev <ejka@openwrt.org>
@@ -3816,10 +3826,10 @@ diff -Nur linux-2.6.29.1.orig/include/linux/vlynq.h linux-2.6.29.1/include/linux
 +extern int vlynq_set_remote_irq(struct vlynq_device *dev, int virq);
 +
 +#endif /* __VLYNQ_H__ */
-diff -Nur linux-2.6.29.1.orig/kernel/futex.c linux-2.6.29.1/kernel/futex.c
---- linux-2.6.29.1.orig/kernel/futex.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/kernel/futex.c	2009-06-05 23:38:23.036947073 +0200
-@@ -2027,9 +2027,11 @@
+diff -Nur linux-2.6.30.orig/kernel/futex.c linux-2.6.30/kernel/futex.c
+--- linux-2.6.30.orig/kernel/futex.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/kernel/futex.c	2009-06-11 20:55:34.643477901 +0200
+@@ -1985,9 +1985,11 @@
  	 * implementation, the non functional ones will return
  	 * -ENOSYS.
  	 */
@@ -3834,10 +3844,10 @@ diff -Nur linux-2.6.29.1.orig/kernel/futex.c linux-2.6.29.1/kernel/futex.c
  
  	for (i = 0; i < ARRAY_SIZE(futex_queues); i++) {
  		plist_head_init(&futex_queues[i].chain, &futex_queues[i].lock);
-diff -Nur linux-2.6.29.1.orig/kernel/printk.c linux-2.6.29.1/kernel/printk.c
---- linux-2.6.29.1.orig/kernel/printk.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/kernel/printk.c	2009-06-05 23:38:23.036947073 +0200
-@@ -1253,6 +1253,7 @@
+diff -Nur linux-2.6.30.orig/kernel/printk.c linux-2.6.30/kernel/printk.c
+--- linux-2.6.30.orig/kernel/printk.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/kernel/printk.c	2009-06-11 20:55:34.643477901 +0200
+@@ -1272,6 +1272,7 @@
  
  static int __init disable_boot_consoles(void)
  {
@@ -3845,7 +3855,7 @@ diff -Nur linux-2.6.29.1.orig/kernel/printk.c linux-2.6.29.1/kernel/printk.c
  	if (console_drivers != NULL) {
  		if (console_drivers->flags & CON_BOOT) {
  			printk(KERN_INFO "turn off boot console %s%d\n",
-@@ -1260,6 +1261,7 @@
+@@ -1279,6 +1280,7 @@
  			return unregister_console(console_drivers);
  		}
  	}
