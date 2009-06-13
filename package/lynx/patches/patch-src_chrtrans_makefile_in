@@ -1,0 +1,11 @@
+--- lynx2-8-7.orig/src/chrtrans/makefile.in	2007-08-03 01:24:27.000000000 +0200
++++ lynx2-8-7/src/chrtrans/makefile.in	2009-06-13 12:29:28.000000000 +0200
+@@ -50,7 +50,7 @@ CPP_OPTS	= \
+ 		-I$(top_srcdir)/$(WWWINC) \
+ 		-I$(top_srcdir)/ \
+ 		$(INTLDIR_CPPFLAGS) $(SITE_DEFS) $(BUILD_CPPFLAGS)
+-CC_OPTS		= $(CPP_OPTS) $(BUILD_CFLAGS)
++CC_OPTS		= $(CPP_OPTS) $(BUILD_CFLAGS) -DHOSTBUILD
+ 
+ #
+ # This file contains the font map for the default (hardware) font

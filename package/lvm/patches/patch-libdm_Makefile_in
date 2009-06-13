@@ -1,0 +1,33 @@
+--- LVM2.2.02.45.orig/libdm/Makefile.in	2008-11-14 21:59:56.000000000 +0100
++++ LVM2.2.02.45/libdm/Makefile.in	2009-06-11 23:26:48.000000000 +0200
+@@ -70,7 +70,8 @@ install: $(INSTALL_TYPE) install_include
+ install_device-mapper: install
+ 
+ install_include:
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 libdevmapper.h \
++	$(INSTALL) -d $(includedir)
++	$(INSTALL) $(OWNER) $(GROUP) -m 444 libdevmapper.h \
+ 		$(includedir)/libdevmapper.h
+ 
+ install_dynamic: install_@interface@
+@@ -81,15 +82,17 @@ install_static: install_@interface@_stat
+ 	$(LN_S) -f libdevmapper.a.$(LIB_VERSION_DM) $(libdir)/libdevmapper.a
+ 
+ install_ioctl: ioctl/libdevmapper.$(LIB_SUFFIX)
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
++	$(INSTALL) -d $(libdir)
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
+ 		$(libdir)/libdevmapper.$(LIB_SUFFIX).$(LIB_VERSION_DM)
+ 
+ install_pkgconfig:
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 libdevmapper.pc \
++	$(INSTALL) -d $(usrlibdir)/pkgconfig
++	$(INSTALL) $(OWNER) $(GROUP) -m 444 libdevmapper.pc \
+ 		$(usrlibdir)/pkgconfig/devmapper.pc
+ 
+ install_ioctl_static: ioctl/libdevmapper.a
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
+ 		$(libdir)/libdevmapper.a.$(LIB_VERSION_DM)
+ 
+ $(VERSIONED_SHLIB): %.$(LIB_SUFFIX).$(LIB_VERSION_DM): $(interface)/%.$(LIB_SUFFIX)

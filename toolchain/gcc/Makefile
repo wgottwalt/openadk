@@ -21,7 +21,6 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-__cxa_atexit \
 			--enable-target-optspace \
 			--with-gnu-ld \
-			--without-headers \
 			--disable-libmudflap \
 			--enable-sjlj-exceptions \
 			--disable-libgomp \
@@ -35,12 +34,16 @@ else
 GCC_CONFOPTS+=		--disable-libssp
 endif
 
-ifeq ($(ADK_NO_FPU),y)
+ifeq ($(ADK_DEVICE_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 
 ifeq ($(ADK_LINUX_MIPS64),y)
 GCC_CONFOPTS+=		--with-abi=64
+endif
+
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+GCC_CONFOPTS+=		--disable-tls
 endif
 
 include ${TOPDIR}/mk/buildhlp.mk

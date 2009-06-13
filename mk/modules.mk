@@ -30,6 +30,7 @@ $(eval $(call KMOD_template,ATH5K,mac80211-ath5k,\
 ,20, kmod-led-class))
 
 $(eval $(call KMOD_template,RT2X00,mac80211-rt2x00,\
+	$(MODULES_DIR)/kernel/drivers/input/input-polldev \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00lib \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00pci \
 ,17))
@@ -507,6 +508,8 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
@@ -523,6 +526,7 @@ $(eval $(call KMOD_template,DM_CRYPT,dm-crypt,\
 ,40))
 
 $(eval $(call KMOD_template,DM_MIRROR,dm-mirror,\
+    $(MODULES_DIR)/kernel/drivers/md/dm-log \
     $(MODULES_DIR)/kernel/drivers/md/dm-region-hash \
     $(MODULES_DIR)/kernel/drivers/md/dm-mirror \
 ,40))
@@ -549,6 +553,7 @@ $(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
 ,04))
 
 $(eval $(call KMOD_template,CRYPTO_BLKCIPHER,crypto-blkcipher,\
+    $(MODULES_DIR)/kernel/crypto/crypto_wq \
     $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
     $(MODULES_DIR)/kernel/crypto/rng \
     $(MODULES_DIR)/kernel/crypto/krng \
@@ -561,6 +566,7 @@ $(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
 ,05))
 
 $(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
+    $(MODULES_DIR)/kernel/crypto/pcompress \
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
 ,06))
 

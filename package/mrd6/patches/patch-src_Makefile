@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- mrd6-0.9.6.orig/src/Makefile	2007-06-25 01:58:28.000000000 +0200
-+++ mrd6-0.9.6/src/Makefile	2009-05-22 00:43:30.000000000 +0200
++++ mrd6-0.9.6/src/Makefile	2009-06-13 13:39:39.000000000 +0200
 @@ -26,7 +26,7 @@ ifeq ($(SUPPORT_MODULES),yes)
  	MODULES ?= BGP
  	LDCMD = -rdynamic
@@ -42,7 +42,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  TEST_OBJECTS = $(addprefix $(OBJ_DIR)/,$(TEST_SOURCES:.cpp=.o))
  MRD_OBJECTS = $(addprefix $(OBJ_DIR)/,$(MRD_SOURCES:.cpp=.o))
  
-@@ -151,7 +142,7 @@ $(foreach test,$(TESTS),$(eval $(call un
+@@ -151,23 +142,25 @@ $(foreach test,$(TESTS),$(eval $(call un
  
  $(TARGET): $(MRD_OBJECTS)
  	@echo "Linking $(TARGET)"
@@ -50,8 +50,16 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 +	$(CXX) $(LDCMD) $(CXXFLAGS) -o $@ $(MRD_OBJECTS) $(LDFLAGS)
  
  install: $(TARGET) $(EXTERNAL_MODULES)
- 	install -D $(TARGET) $(DEST_PREFIX)/sbin/$(TARGET)
-@@ -162,12 +153,12 @@ ifneq (,$(EXTERNAL_MODULES))
+-	install -D $(TARGET) $(DEST_PREFIX)/sbin/$(TARGET)
+-	install -D ../tools/mrd6sh $(DEST_PREFIX)/bin/mrd6sh
++	install -d $(DEST_PREFIX)/sbin
++	install -d $(DEST_PREFIX)/bin
++	install $(TARGET) $(DEST_PREFIX)/sbin/$(TARGET)
++	install ../tools/mrd6sh $(DEST_PREFIX)/bin/mrd6sh
+ ifneq (,$(EXTERNAL_MODULES))
+ 	mkdir -p $(DEST_PREFIX)/lib/mrd6/
+-	install -D $(EXTERNAL_MODULES) $(DEST_PREFIX)/lib/mrd6/
++	install $(EXTERNAL_MODULES) $(DEST_PREFIX)/lib/mrd6/
  endif
  
  $(MRD_VERSION_CPP): $(SOURCES) Makefile Makefile.options
@@ -66,7 +74,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		echo "Generating modules.cpp"; \
  		scripts/generate-modules-cpp.pl $(STATIC_MODULES) > $(MODULES_CPP)
  
-@@ -181,7 +172,7 @@ $(OPTIONS):
+@@ -181,7 +174,7 @@ $(OPTIONS):
  
  $(DEPS_DIR)/%.d: %.cpp $(OPTIONS)
  	@echo "Deps $<"
@@ -75,7 +83,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		$(CXX) -MM -MT $@ -MT $(addprefix $(OBJ_DIR)/,$(<:.cpp=.o)) \
  		       $(CXXFLAGS) $< > $@
  
-@@ -195,7 +186,7 @@ endif
+@@ -195,7 +188,7 @@ endif
  
  $(OBJ_DIR)/%.o: %.cpp $(OPTIONS)
  	@echo "C++ $<"

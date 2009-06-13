@@ -30,14 +30,14 @@ kernel-install: tools-compile
 		-o $(BIN_DIR)/${DEVICE}-${ARCH}-kernel	
 
 ifeq ($(FS),squashfs)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+	${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
-	@echo 'You can flash the kernel via tftp:'
+	@echo The image file is $(ROOTFSSQUASHFS)
+	@echo 'You can flash the image via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
-	@echo 'tftp> put wag54g-mips-kernel upgrade_code.bin'
+	@echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
 
 endif
 

@@ -35,5 +35,9 @@ MAKE_FLAGS+=		OPT_CFLAGS="${TARGET_CFLAGS}" \
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBWRAP}/usr/lib
 	${CP} ${WRKBUILD}/shared/libwrap.so.* ${IDIR_LIBWRAP}/usr/lib/
+	${INSTALL_DIR} ${WRKINST}/usr/lib ${WRKINST}/usr/include
+	${CP} ${WRKBUILD}/tcpd.h ${WRKINST}/usr/include
+	${CP} ${WRKBUILD}/shared/libwrap.so* ${WRKINST}/usr/lib
+
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,11 @@
+--- Libnet-1.0.2a.orig/install-sh	2001-02-05 18:51:48.000000000 +0100
++++ Libnet-1.0.2a/install-sh	2009-06-12 21:48:27.000000000 +0200
+@@ -44,7 +44,7 @@ mkdirprog="${MKDIRPROG-mkdir}"
+ transformbasename=""
+ transform_arg=""
+ instcmd="$cpprog"
+-chmodcmd="$chmodprog 0755"
++chmodcmd=""
+ chowncmd=""
+ chgrpcmd=""
+ stripcmd=""

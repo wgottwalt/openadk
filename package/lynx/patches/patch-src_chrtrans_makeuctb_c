@@ -1,0 +1,12 @@
+--- lynx2-8-7.orig/src/chrtrans/makeuctb.c	2007-08-03 01:24:27.000000000 +0200
++++ lynx2-8-7/src/chrtrans/makeuctb.c	2009-06-13 11:54:42.000000000 +0200
+@@ -31,6 +31,9 @@
+ #include <UCDefs.h>
+ #include <UCkd.h>
+ 
++#include <stdlib.h>
++#include <unistd.h>
++
+ /*
+  *  Don't try to use LYexit() since this is a standalone file.
+  */

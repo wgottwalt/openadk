@@ -1,0 +1,11 @@
+--- openswan-2.6.21.orig/Makefile.inc	2009-03-30 15:11:28.000000000 +0200
++++ openswan-2.6.21/Makefile.inc	2009-06-13 14:48:55.000000000 +0200
+@@ -163,7 +163,7 @@ INSTALL=install
+ # how backup names are composed.
+ # Note that the install procedures will never overwrite an existing config
+ # file, which is why -b is not specified for them.
+-INSTBINFLAGS=-b --suffix=.old
++INSTBINFLAGS=
+ INSTSUIDFLAGS=--mode=u+rxs,g+rx,o+rx --group=root -b --suffix=.old
+ INSTMANFLAGS=
+ INSTCONFFLAGS=

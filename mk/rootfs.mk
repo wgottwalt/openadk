@@ -8,7 +8,11 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
-$(eval $(call rootfs_template,ext2-cf,EXT2_CF))
+ifeq ($(ADK_LINUX_MIPS_RB532),y)
+ROOTFS:=	root=/dev/sda2
+endif
+
+$(eval $(call rootfs_template,ext2-cf,EXT2_CF,$(ROOTFS)))
 $(eval $(call rootfs_template,ext2-mmc,EXT2_MMC))
 $(eval $(call rootfs_template,ext2,EXT2))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))

@@ -15,6 +15,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-xf86bigfont \

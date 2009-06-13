@@ -1,0 +1,54 @@
+--- ffmpeg-0.5.orig/configure	2009-03-01 18:57:14.000000000 +0100
++++ ffmpeg-0.5/configure	2009-06-12 23:27:05.000000000 +0200
+@@ -2486,51 +2486,6 @@ cmp -s $TMPH config.h &&
+ 
+ rm -f $TMPC $TMPE $TMPH $TMPO $TMPS $TMPSH
+ 
+-# build tree in object directory if source path is different from current one
+-if enabled source_path_used; then
+-    DIRS="\
+-        doc               \
+-        libavcodec        \
+-        libavcodec/alpha  \
+-        libavcodec/arm    \
+-        libavcodec/bfin   \
+-        libavcodec/mlib   \
+-        libavcodec/ppc    \
+-        libavcodec/sh4    \
+-        libavcodec/sparc  \
+-        libavcodec/x86    \
+-        libavdevice       \
+-        libavfilter       \
+-        libavformat       \
+-        libavutil         \
+-        libpostproc       \
+-        libswscale        \
+-        tests             \
+-        tools             \
+-        vhook             \
+-        "
+-    FILES="\
+-        Makefile             \
+-        common.mak           \
+-        subdir.mak           \
+-        doc/texi2pod.pl      \
+-        libavcodec/Makefile  \
+-        libavdevice/Makefile \
+-        libavfilter/Makefile \
+-        libavformat/Makefile \
+-        libavutil/Makefile   \
+-        libpostproc/Makefile \
+-        libswscale/Makefile  \
+-        "
+-    for dir in $DIRS ; do
+-        mkdir -p $dir
+-    done
+-    for f in $FILES ; do
+-        $ln_s "$source_path/$f" $f
+-    done
+-fi
+-
+-
+ # build pkg-config files
+ 
+ pkgconfig_generate(){

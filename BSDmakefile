@@ -26,6 +26,5 @@ _subdir: ${_subdir_dep}
 .  include "${.CURDIR}/prereq.mk"
 .  include "${.CURDIR}/mk/split-cfg.mk"
 .else
-.  include "${.CURDIR}/prereq.mk"
 .  include "${.CURDIR}/Makefile"
 .endif

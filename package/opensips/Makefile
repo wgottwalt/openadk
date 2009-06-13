@@ -90,6 +90,7 @@ do-build:
 		TLS=1 \
 		NO_EPOLL=1 \
 		CC="$(TARGET_CC)" \
+		OS="linux" \
 		ARCH="$(ARCH)"  \
 		CFLAGS="$(TARGET_CFLAGS)" \
 		LOCALBASE="$(STAGING_DIR)/usr" \

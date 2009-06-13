@@ -55,6 +55,7 @@ pre-configure:
 		--prefix=/usr \
 		--confdir=/etc \
 		--enable-cross-compile \
+		--enable-runtime-cpudetection \
 		--target=$(REAL_GNU_TARGET_NAME) \
 		--cc=$(TARGET_CC) \
 		--host-cc=$(HOSTCC) \

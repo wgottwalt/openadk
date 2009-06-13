@@ -1,5 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
+#
 # Scan host-tool prerequisites of certain packages before building.
 
 if test -z "$BASH_VERSION"; then
@@ -61,8 +62,10 @@ fi
 
 if [[ -n $NEED_SSLDEV ]]; then
 	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
-		echo >&2 You need openssl headers to build $NEED_SQUID
-		out=1
+		if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
+			echo >&2 You need openssl headers to build $NEED_SQUID
+			out=1
+		fi
 	fi
 fi
 

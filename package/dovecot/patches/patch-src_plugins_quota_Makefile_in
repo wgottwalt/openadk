@@ -1,7 +1,22 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dovecot-1.1.7.orig/src/plugins/quota/Makefile.in	2008-11-23 23:16:42.000000000 +0100
-+++ dovecot-1.1.7/src/plugins/quota/Makefile.in	2008-12-22 14:17:55.000000000 +0100
-@@ -239,9 +239,6 @@ lib10_quota_plugin_la_LDFLAGS = -module 
+--- dovecot-1.1.14.orig/src/plugins/quota/Makefile.in	2009-04-17 04:38:14.000000000 +0200
++++ dovecot-1.1.14/src/plugins/quota/Makefile.in	2009-05-14 00:44:46.000000000 +0200
+@@ -55,12 +55,11 @@ LTLIBRARIES = $(module_LTLIBRARIES)
+ lib10_quota_plugin_la_DEPENDENCIES =
+ am__lib10_quota_plugin_la_SOURCES_DIST = quota.c quota-count.c \
+ 	quota-fs.c quota-dict.c quota-dirsize.c quota-maildir.c \
+-	quota-plugin.c quota-storage.c rquota_xdr.c
++	quota-plugin.c quota-storage.c
+ am__objects_1 = quota.lo quota-count.lo quota-fs.lo quota-dict.lo \
+ 	quota-dirsize.lo quota-maildir.lo quota-plugin.lo \
+ 	quota-storage.lo
+-@HAVE_RQUOTA_TRUE@am__objects_2 = rquota_xdr.lo
+-am_lib10_quota_plugin_la_OBJECTS = $(am__objects_1) $(am__objects_2)
++am_lib10_quota_plugin_la_OBJECTS = $(am__objects_1)
+ lib10_quota_plugin_la_OBJECTS = $(am_lib10_quota_plugin_la_OBJECTS)
+ lib10_quota_plugin_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+@@ -244,9 +243,6 @@ lib10_quota_plugin_la_LDFLAGS = -module 
  module_LTLIBRARIES = \
  	lib10_quota_plugin.la
  
@@ -11,3 +26,45 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  quota_dist_sources = \
  	quota.c \
  	quota-count.c \
+@@ -258,11 +254,8 @@ quota_dist_sources = \
+ 	quota-storage.c
+ 
+ lib10_quota_plugin_la_SOURCES = \
+-	$(quota_dist_sources) \
+-	$(RQUOTA_XDR)
++	$(quota_dist_sources) 
+ 
+-@HAVE_RQUOTA_TRUE@RQUOTA_XDR = rquota_xdr.c
+-@HAVE_RQUOTA_TRUE@RQUOTA_X = /usr/include/rpcsvc/rquota.x
+ noinst_HEADERS = \
+ 	quota.h \
+ 	quota-fs.h \
+@@ -347,7 +340,6 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/quota-plugin.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/quota-storage.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/quota.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rquota_xdr.Plo@am__quote@
+ 
+ .c.o:
+ @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@@ -553,20 +545,6 @@ uninstall-am: uninstall-moduleLTLIBRARIE
+ 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+ 	tags uninstall uninstall-am uninstall-moduleLTLIBRARIES
+ 
+-@HAVE_RQUOTA_TRUE@rquota_xdr.c: Makefile $(RQUOTA_X)
+-@HAVE_RQUOTA_TRUE@	(echo '#include "lib.h"'; \
+-@HAVE_RQUOTA_TRUE@	 echo '#include <rpc/rpc.h>'; \
+-@HAVE_RQUOTA_TRUE@	 $(RPCGEN) -c $(RQUOTA_X) | \
+-@HAVE_RQUOTA_TRUE@	  sed -e 's/IXDR_PUT/(void)IXDR_PUT/g' \
+-@HAVE_RQUOTA_TRUE@	    -e 's,/usr/include/rpcsvc/rquota.h,rquota.h,' \
+-@HAVE_RQUOTA_TRUE@	    -e 's/int32_t \*buf/int32_t *buf ATTR_UNUSED/' \
+-@HAVE_RQUOTA_TRUE@	    -e 's/^static char rcsid.*//' ) > rquota_xdr.c
+-
+-@HAVE_RQUOTA_TRUE@rquota.h: Makefile $(RQUOTA_X)
+-@HAVE_RQUOTA_TRUE@	$(RPCGEN) -h $(RQUOTA_X) > rquota.h
+-
+-@HAVE_RQUOTA_TRUE@quota-fs.lo: rquota.h
+-
+ install-exec-local:
+ 	for d in imap pop3 lda; do \
+ 	  $(mkdir_p) $(DESTDIR)$(moduledir)/$$d; \

@@ -3,8 +3,8 @@ $MirOS: ports/www/lynx/patches/patch-lynx_cfg,v 1.7 2007/05/20 12:06:19 tg Exp $
 
 	mostly site policy and compatibility, usability
 
---- lynx2-8-7/lynx.cfg.orig	Thu May 17 22:52:59 2007
-+++ lynx2-8-7/lynx.cfg	Sun May 20 11:17:21 2007
+--- lynx2-8-7.orig/lynx.cfg	2007-05-18 00:53:22.000000000 +0200
++++ lynx2-8-7/lynx.cfg	2009-06-13 11:46:29.000000000 +0200
 @@ -93,12 +93,12 @@
  #
  # Normally we expect you will connect to a remote site, e.g., the Lynx starting
@@ -148,12 +148,12 @@ $MirOS: ports/www/lynx/patches/patch-lynx_cfg,v 1.7 2007/05/20 12:06:19 tg Exp $
 -# This option mirrors command-line option with same name.  Default is TRUE.  If
 -# true, most of text (except headers and like this) will be justified.  This
 -# has no influence on CJK text rendering.
+-#
+-# This option is only available if Lynx was compiled with EXP_JUSTIFY_ELTS.
 +# This option mirrors command-line option with same name.  Default is FALSE.
 +# If true, most of text (except headers and like this) will be justified.
 +# This has no influence on CJK text rendering.
  #
--# This option is only available if Lynx was compiled with EXP_JUSTIFY_ELTS.
--#
 -#JUSTIFY:FALSE
 +JUSTIFY:TRUE
  
