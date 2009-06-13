@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ipset
-PKG_VERSION:=		2.3.3a
+PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c7d2f165242edaef5581db0f7d5af520
+PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
 PKG_DESCR:=		Netfilter ip sets administration utility
 PKG_SECTION:=		net
 PKG_URL:=		http://ipset.netfilter.org
@@ -18,7 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		KERNEL_DIR=${LINUX_DIR} PREFIX=/usr LD=$(TARGET_CROSS)ld
+XAKE_FLAGS+=		V=1 ARCH=${ARCH} KERNEL_DIR=${LINUX_DIR} \
+			PREFIX=/usr LD=$(TARGET_CROSS)ld \
+			CROSS_COMPILE="${TARGET_CROSS}"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 INSTALL_TARGET=		binaries_install

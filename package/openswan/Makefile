@@ -31,6 +31,8 @@ do-build:
 		IPSECDIR="/usr/lib/ipsec" \
 		INC_USRLOCAL="/usr" \
 		MODPROBE="insmod" \
+		OSDEP="linux" \
+		BUILDENV="linux" \
 		programs
 
 do-install:
@@ -43,6 +45,8 @@ do-install:
 		IPSECDIR="/usr/lib/ipsec" \
 		INC_USRLOCAL="/usr" \
 		MODPROBE="insmod" \
+		OSDEP="linux" \
+		BUILDENV="linux" \
 		install
 	rm -rf ${IDIR_OPENSWAN}/usr/share
 	rm -rf ${IDIR_OPENSWAN}/usr/man

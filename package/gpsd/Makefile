@@ -16,6 +16,12 @@ PKG_DESCR_1:=		GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
 
+ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
@@ -31,8 +37,9 @@ CONFIGURE_ARGS+=	--without-x \
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
-ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
+ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
+TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
+			-I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-luClibc++ -lc -lm -nodefaultlibs
 else
 TLDFLAGS+=		-shared
@@ -40,6 +47,13 @@ endif
 
 post-extract:
 	@find ${WRKBUILD} -name *.rej -delete
+
+ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+post-configure:
+	${SED} 's#postdeps="-lstdc.*#postdeps=""#' \
+		${WRKBUILD}/libtool
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin

@@ -1,7 +1,7 @@
 $Id$
---- fetchmail-6.3.8.orig/mxget.c	2006-03-14 11:00:02.000000000 +0100
-+++ fetchmail-6.3.8/mxget.c	2008-04-07 23:56:13.000000000 +0200
-@@ -54,6 +54,123 @@
+--- fetchmail-6.3.9.orig/mxget.c	2007-06-10 10:32:47.000000000 +0200
++++ fetchmail-6.3.9/mxget.c	2009-06-12 22:24:29.000000000 +0200
+@@ -56,6 +56,123 @@
  /* minimum possible size of MX record in packet */
  #define MIN_MX_SIZE	8	/* corresp to "a.com 0" w/ terminating space */
  

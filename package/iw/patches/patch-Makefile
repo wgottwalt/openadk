@@ -1,0 +1,15 @@
+--- iw-0.9.14.orig/Makefile	2009-05-13 00:10:08.000000000 +0200
++++ iw-0.9.14/Makefile	2009-06-13 09:45:08.000000000 +0200
+@@ -81,10 +81,10 @@ check:
+ install: iw iw.8.gz
+ 	@$(NQ) ' INST iw'
+ 	$(Q)$(MKDIR) $(DESTDIR)$(BINDIR)
+-	$(Q)$(INSTALL) -m 755 -t $(DESTDIR)$(BINDIR) iw
++	$(Q)$(INSTALL) -m 755 iw $(DESTDIR)$(BINDIR)
+ 	@$(NQ) ' INST iw.8'
+ 	$(Q)$(MKDIR) $(DESTDIR)$(MANDIR)/man8/
+-	$(Q)$(INSTALL) -m 644 -t $(DESTDIR)$(MANDIR)/man8/ iw.8.gz
++	$(Q)$(INSTALL) -m 644 iw.8.gz $(DESTDIR)$(MANDIR)/man8/
+ 
+ clean:
+ 	$(Q)rm -f iw *.o *~ *.gz version.c *-stamp

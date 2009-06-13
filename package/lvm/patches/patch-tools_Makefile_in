@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- LVM2.2.02.45.orig/tools/Makefile.in	2009-02-17 12:07:59.000000000 +0100
-+++ LVM2.2.02.45/tools/Makefile.in	2009-05-16 21:29:01.474640998 +0200
++++ LVM2.2.02.45/tools/Makefile.in	2009-06-11 23:24:12.000000000 +0200
 @@ -62,19 +62,18 @@ SOURCES =\
  	vgscan.c \
  	vgsplit.c
@@ -27,3 +27,31 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  endif
  
  LVMLIBS = -llvm
+@@ -170,7 +169,8 @@ install_cmdlib_static: liblvm2cmd-static
+ 		$(includedir)/lvm2cmd.h
+ 
+ install_tools_dynamic: lvm .commands
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) lvm \
++	$(INSTALL) -d $(sbindir)
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) lvm \
+ 		$(sbindir)/lvm
+ 	@echo Creating symbolic links for individual commands in $(sbindir)
+ 	@( \
+@@ -181,14 +181,14 @@ install_tools_dynamic: lvm .commands
+ 	)
+ 
+ install_tools_static: lvm.static
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) lvm.static \
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) lvm.static \
+ 		$(staticdir)/lvm.static
+ 
+ install_dmsetup_dynamic: dmsetup
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
+ 
+ install_dmsetup_static: dmsetup.static
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
+ 
+ install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
+ 

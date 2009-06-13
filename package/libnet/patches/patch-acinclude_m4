@@ -1,0 +1,131 @@
+--- Libnet-1.0.2a.orig/acinclude.m4	2000-12-12 19:31:54.000000000 +0100
++++ Libnet-1.0.2a/acinclude.m4	2009-06-12 21:48:27.000000000 +0200
+@@ -30,65 +30,43 @@ AC_DEFUN(AC_LIBNET_CHECK_PF_PACKET,
+         *)
+ 
+     cat > pf_packet-test.c << EOF
+-#include <net/if.h>
+-#if (__GLIBC__)
+-#include <netinet/if_ether.h>
+-#include <net/if_arp.h>
++#include <stdio.h>
++#include <errno.h>
++#include <stdlib.h>
++#include <netinet/in.h>
++#include <sys/socket.h>
++#include <features.h>    /* for the glibc version number */
++#if __GLIBC__ >= 2 && __GLIBC_MINOR >= 1
++#include <netpacket/packet.h>
++#include <net/ethernet.h>     /* the L2 protocols */
+ #else
+-#include <linux/if_arp.h>
+-#include <linux/if_ether.h>
++#include <asm/types.h>
++#include <linux/if_packet.h>
++#include <linux/if_ether.h>   /* The L2 protocols */
+ #endif
+-#if (PF_PACKET)
++
+ #ifndef SOL_PACKET
+ #define SOL_PACKET 263
+ #endif  /* SOL_PACKET */
+-#include <linux/if_packet.h>
+-#endif
+-#include "./include/libnet.h"
+ 
+ int
+ main()
+ {
+-#if (PF_PACKET)
+     int fd;
+-    struct sockaddr_ll sa;
+-    struct ifreq ifr;
+-    struct packet_mreq mr;
+-    char *device ="lo";
+ 
+     fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+     if (fd == -1)
+     {
+-        printf("choked");
+-        exit (EXIT_FAILURE);
+-    }
+-
+-    memset(&sa, 0, sizeof(sa));
+-    strcpy(ifr.ifr_name, device);
+-    if (ioctl(fd, SIOCGIFINDEX, &ifr) < 0)
+-    {
+-        printf("choked");
+-        exit (EXIT_FAILURE);
+-    }
+-    sa.sll_family = AF_PACKET;
+-    sa.sll_ifindex = ifr.ifr_ifindex;
+-    sa.sll_protocol = htons(ETH_P_ALL);
+-
+-    memset(&mr, 0, sizeof (mr));
+-    mr.mr_ifindex = sa.sll_ifindex;
+-    mr.mr_type = PACKET_MR_ALLMULTI;
+-
+-    if (setsockopt(fd, SOL_PACKET, PACKET_ADD_MEMBERSHIP, (char *)&mr,
+-            sizeof (mr)) < 0)
+-    {
+-        printf("choked\n");
++        if (errno == EPERM)
++        {
++            /* user's UID != 0 */
++            printf("probably");
++            exit (EXIT_FAILURE);
++        }
++        printf("no");
+         exit (EXIT_FAILURE);
+     }
+-    /* yay.  we made it and it workz! */
+     printf("yes");
+-#else   /* PF_PACKET */
+-    printf("no");
+-#endif
+     exit (EXIT_SUCCESS);
+ }
+ EOF
+@@ -104,16 +82,21 @@ EOF
+     if test $ac_libnet_have_pf_packet = choked; then
+         AC_MSG_RESULT(test program choked... assuming no)
+     elif test $ac_libnet_have_pf_packet = yes; then
+-        AC_DEFINE(HAVE_PF_PACKET)
++        AC_MSG_RESULT(yes)
+         LIBNET_CONFIG_DEFINES="$LIBNET_CONFIG_DEFINES -DHAVE_PF_PACKET"
++    elif test $ac_libnet_have_pf_packet = probably; then
++        AC_MSG_RESULT(test program got EPERM... assuming yes)
++    elif test $ac_libnet_have_pf_packet = no; then
++        AC_MSG_RESULT(no)
+     fi
+ 
+-    if test $ac_libnet_have_pf_packet != choked; then
+-        AC_MSG_RESULT($ac_libnet_have_pf_packet)
+-    fi
+     rm -f pf_packet-test* core core.pf_packet-test
+     ;;
+     esac])
++
++    if test $ac_libnet_have_pf_packet = yes -o $ac_libnet_have_pf_packet = probably; then
++        AC_DEFINE(HAVE_PF_PACKET)
++    fi
+ ])
+ 
+ dnl
+@@ -279,6 +262,8 @@ dnl
+ 
+ AC_DEFUN(AC_LIBNET_ENDIAN_CHECK,
+     [AC_MSG_CHECKING(machine endianess)
++    AC_CACHE_VAL(ac_cv_libnet_endianess,
++        [
+ 
+     cat > conftest.c << EOF
+ #       include <stdio.h>
+@@ -332,6 +317,7 @@ dnl failed to compile for some reason
+         fi
+         rm -f conftest* core core.conftest
+ 
++        ])
+         AC_MSG_RESULT($ac_cv_libnet_endianess)
+ 
+         if test $ac_cv_libnet_endianess = big ; then

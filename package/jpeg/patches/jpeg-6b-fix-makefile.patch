@@ -1,7 +1,7 @@
 diff -ruN jpeg-6b-old/makefile.cfg jpeg-6b/makefile.cfg
---- jpeg-6b-old/makefile.cfg	2006-11-02 12:36:36.000000000 +0100
-+++ jpeg-6b/makefile.cfg	2006-11-02 12:37:09.000000000 +0100
-@@ -168,7 +168,7 @@
+--- jpeg-6b.orig/makefile.cfg	1998-03-21 20:08:57.000000000 +0100
++++ jpeg-6b/makefile.cfg	2009-06-12 17:58:24.000000000 +0200
+@@ -168,7 +168,7 @@ libjpeg.a: @A2K_DEPS@ $(LIBOBJECTS)
  
  # with libtool:
  libjpeg.la: @A2K_DEPS@ $(LIBOBJECTS)

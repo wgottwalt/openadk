@@ -25,8 +25,8 @@ $(eval $(call PKG_template,LIBNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_libnet_have_pf_packet=yes \
-			ac_cv_lbl_unaligned_fail=no \
-			ac_cv_libnet_endianess=${ENDIAN}
+			ac_cv_libnet_endianess=${ENDIAN} \
+			ac_cv_lbl_unaligned_fail=no
 CONFIGURE_ARGS+=	--with-pf_packet=yes
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

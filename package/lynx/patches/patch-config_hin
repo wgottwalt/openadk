@@ -1,11 +1,9 @@
-$MirOS: ports/www/lynx/patches/patch-config_hin,v 1.1 2007/08/03 16:01:22 tg Exp $
+This will expand to
+| #define ICONV_CONST <tabs> AM_ICONV */
+otherwise.
 
-	This will expand to
-	| #define ICONV_CONST <tabs> AM_ICONV */
-	otherwise.
-
---- lynx2-8-7/config.hin.orig	Thu Aug  2 23:24:04 2007
-+++ lynx2-8-7/config.hin	Fri Aug  3 15:58:53 2007
+--- lynx2-8-7.orig/config.hin	2007-08-03 01:24:27.000000000 +0200
++++ lynx2-8-7/config.hin	2009-06-13 11:46:29.000000000 +0200
 @@ -176,7 +176,7 @@
  #undef HAVE___ARGZ_COUNT	/* AM_GNU_GETTEXT */
  #undef HAVE___ARGZ_NEXT		/* AM_GNU_GETTEXT */

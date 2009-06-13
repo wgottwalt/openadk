@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dovecot-1.1.7.orig/configure	2008-11-23 23:16:38.000000000 +0100
-+++ dovecot-1.1.7/configure	2008-12-22 14:15:16.000000000 +0100
-@@ -34792,23 +34792,6 @@ if ! $RPCGEN -c /dev/null > /dev/null; t
+--- dovecot-1.1.14.orig/configure	2009-04-17 04:38:09.000000000 +0200
++++ dovecot-1.1.14/configure	2009-05-14 00:37:04.000000000 +0200
+@@ -30129,23 +30129,6 @@ if ! $RPCGEN -c /dev/null > /dev/null; t
  fi
  
  
@@ -25,7 +25,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  if test "$want_solr" != "no"; then
    # Extract the first word of "curl-config", so it can be a program name with args.
-@@ -35340,13 +35323,6 @@ echo "$as_me: error: conditional \"BUILD
+@@ -30684,13 +30667,6 @@ echo "$as_me: error: conditional \"BUILD
  Usually this means the macro was only invoked conditionally." >&2;}
     { (exit 1); exit 1; }; }
  fi
