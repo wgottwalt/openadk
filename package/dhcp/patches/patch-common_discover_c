@@ -1,0 +1,13 @@
+--- dhcp-4.1.0.orig/common/discover.c	2008-08-29 19:48:57.000000000 +0200
++++ dhcp-4.1.0/common/discover.c	2009-06-12 21:18:42.000000000 +0200
+@@ -684,8 +684,8 @@ next_iface6(struct iface_info *info, int
+ 	for (i=0; i<16; i++) {
+ 		unsigned char byte;
+                 static const char hex[] = "0123456789abcdef";
+-                byte = ((index(hex, buf[i * 2]) - hex) << 4) |
+-			(index(hex, buf[i * 2 + 1]) - hex);
++                byte = ((strchr(hex, buf[i * 2]) - hex) << 4) |
++			(strchr(hex, buf[i * 2 + 1]) - hex);
+ 		addr.sin6_addr.s6_addr[i] = byte;
+ 	}
+ 	memcpy(&info->addr, &addr, sizeof(addr));

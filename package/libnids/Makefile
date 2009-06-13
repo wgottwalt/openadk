@@ -17,7 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNIDS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+CONFIGURE_STYLE:=	autoconf gnu
+CONFIGURE_ARGS+=	--with-libpcap=${STAGING_DIR}/usr
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 XAKE_FLAGS+=		install_prefix="${WRKINST}"
 BUILD_STYLE:=		auto

@@ -1,0 +1,11 @@
+--- gpsd-2.39.orig/contrib/binlog.c	2009-01-28 21:53:46.000000000 +0100
++++ gpsd-2.39/contrib/binlog.c	2009-06-13 09:13:00.000000000 +0200
+@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
+ 		if (l > 0)
+ 			write(ofd, buf, l);
+ 		usleep(1000);
+-		bzero(buf, BUFSIZ);
++		memset(buf, 0, BUFSIZ);
+ 		spinner( n++ );
+ 	}
+ 	return 0;

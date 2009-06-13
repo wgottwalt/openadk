@@ -1,0 +1,12 @@
+--- Libnet-1.0.2a.orig/include/libnet/Makefile.am	1970-01-01 00:00:00.000000000 +0100
++++ Libnet-1.0.2a/include/libnet/Makefile.am	2009-06-12 21:48:27.000000000 +0200
+@@ -0,0 +1,9 @@
++include $(top_srcdir)/Makefile.am.common
++
++pkginclude_HEADERS = \
++	libnet-asn1.h \
++	libnet-functions.h \
++	libnet-headers.h \
++	libnet-macros.h \
++	libnet-ospf.h \
++	libnet-structures.h

@@ -45,7 +45,7 @@ do-build:
 		OFLAGS="${TARGET_CFLAGS}" \
 		OS="linux" \
 		DESTDIR="${WRKINST}" \
-		STRIP="/bin/true" \
+		STRIP="true" \
 		all libs install install_libs
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}

@@ -1,0 +1,24 @@
+--- knock-0.5.orig/Makefile.in	2005-06-27 07:11:34.000000000 +0200
++++ knock-0.5/Makefile.in	2009-06-13 09:49:14.000000000 +0200
+@@ -68,11 +68,16 @@ dist: distclean
+ 	(cd ..; tar czvf knock-$(VERSION).tar.gz knock-$(VERSION))
+ 
+ install: all
+-	$(INSTALL) -D -m0755 knockd $(DESTDIR)$(SBINDIR)/knockd
+-	$(INSTALL) -D -m0755 knock $(DESTDIR)$(BINDIR)/knock
+-	$(INSTALL) -D -m0644 $(MANSRC)knockd.1 $(DESTDIR)$(MANDIR)/man1/knockd.1
+-	$(INSTALL) -D -m0644 $(MANSRC)knock.1 $(DESTDIR)$(MANDIR)/man1/knock.1
+-	$(INSTALL) -D -m0644 knockd.conf $(DESTDIR)/etc/knockd.conf
++	$(INSTALL) -d -m0755 $(DESTDIR)$(SBINDIR)
++	$(INSTALL) -d -m0755 $(DESTDIR)$(BINDIR)
++	$(INSTALL) -d -m0755 $(DESTDIR)$(MANDIR)/man1
++	$(INSTALL) -d -m0755 $(DESTDIR)/etc
++	$(INSTALL) -m0755 knock $(DESTDIR)$(BINDIR)/knock
++	$(INSTALL) -m0755 knockd $(DESTDIR)$(SBINDIR)/knockd
++	$(INSTALL) -m0755 knock $(DESTDIR)$(BINDIR)/knock
++	$(INSTALL) -m0644 $(MANSRC)knockd.1 $(DESTDIR)$(MANDIR)/man1/knockd.1
++	$(INSTALL) -m0644 $(MANSRC)knock.1 $(DESTDIR)$(MANDIR)/man1/knock.1
++	$(INSTALL) -m0644 knockd.conf $(DESTDIR)/etc/knockd.conf
+ 
+ clean:
+ 	rm -f *~ $(OBJDIR)*.o $(MANSRC)*.1

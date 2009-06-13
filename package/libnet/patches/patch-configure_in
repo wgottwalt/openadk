@@ -1,0 +1,81 @@
+--- Libnet-1.0.2a.orig/configure.in	2001-01-17 21:59:30.000000000 +0100
++++ Libnet-1.0.2a/configure.in	2009-06-12 21:48:27.000000000 +0200
+@@ -8,6 +8,14 @@ dnl Process this file with autoconf to p
+ 
+ AC_INIT(src/libnet_build_ip.c)
+ 
++dnl
++dnl Determine hosttype and set the root install directory.
++dnl
++AC_CANONICAL_SYSTEM
++AC_PREFIX_DEFAULT(/usr)
++
++AM_INIT_AUTOMAKE(libnet, 1.0.2a)
++
+ VER=`cat VERSION`
+ AC_MSG_RESULT(Beginning autoconfiguration process for libnet-$VER...)
+ 
+@@ -25,16 +33,14 @@ AC_SUBST(LIBNET_CONFIG_DEFINES)
+ AC_SUBST(LIBNET_CONFIG_LIBS)
+ AC_SUBST(LIBNET_CONFIG_CFLAGS)
+ 
+-dnl
+-dnl Determine hosttype and set the root install directory.
+-dnl
+-AC_CANONICAL_SYSTEM
+-AC_PREFIX_DEFAULT(/usr)
+-
+ if test "$prefix" = "NONE"; then
+     prefix="/usr"
+ fi
+ 
++if test "$mandir" = "NONE"; then
++    mandir="$prefix/man"
++fi
++
+ dnl
+ dnl Check compiler type.
+ dnl
+@@ -74,6 +80,8 @@ AC_CHECK_PROGS(RANLIB, ranlib, @true)
+ AC_CHECK_PROGS(AR, ar, @true)
+ AC_CHECK_PROGS(LN, ln, @true)
+ 
++AC_PROG_LIBTOOL
++
+ dnl
+ dnl Check for library functions.
+ dnl
+@@ -110,7 +118,7 @@ elif test -r /usr/include/sys/dlpi.h ; t
+     AC_DEFINE(HAVE_DLPI)
+ elif test -r /usr/include/linux/socket.h ; then
+     LL_INT_TYPE=sockpacket
+-    AC_MSG_RESULT(found SOCK_PACKET)
++    AC_MSG_RESULT(found linux primitives)
+     if test $with_pf_packet = yes; then
+          AC_LIBNET_CHECK_PF_PACKET
+     fi
+@@ -147,7 +155,7 @@ case "$target_os" in
+     LIBNET_CONFIG_DEFINES="-D_BSD_SOURCE -D__BSD_SOURCE -D__FAVOR_BSD"
+     AC_CHECK_HEADERS(net/ethernet.h, \
+         LIBNET_CONFIG_DEFINES="$LIBNET_CONFIG_DEFINES -DHAVE_NET_ETHERNET_H")
+-    MAN_PREFIX="$prefix/man/man3/"
++    MAN_PREFIX="$mandir/man3/"
+     LIB_PREFIX="$prefix/lib/"
+     INC_PREFIX="$prefix/include/"
+     BIN_PREFIX="$prefix/bin/"
+@@ -258,9 +266,11 @@ AC_LBL_UNALIGNED_ACCESS
+ 
+ AC_CHECK_HEADERS(sys/sockio.h)
+ AC_CONFIG_HEADER(include/config.h)
+-AC_OUTPUT(Makefile test/Makefile test/TCP/Makefile test/Ethernet/Makefile \
+-    test/UDP/Makefile test/ICMP/Makefile test/Random/Makefile \
+-    test/OSPF/Makefile util/Makefile util/Get-mac/Makefile example/Makefile \
+-    libnet-config, chmod +x libnet-config)
++AC_OUTPUT( \
++	Makefile \
++	src/Makefile \
++	include/Makefile \
++	include/libnet/Makefile \
++    libnet-config)
+ 
+ dnl EOF

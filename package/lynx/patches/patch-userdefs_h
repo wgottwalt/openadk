@@ -1,7 +1,7 @@
 $Id$
 $MirOS: ports/www/lynx/patches/patch-userdefs_h,v 1.9 2007/08/03 12:14:24 tg Exp $
---- lynx2-8-7/userdefs.h.orig	Thu Aug  2 23:24:04 2007
-+++ lynx2-8-7/userdefs.h	Fri Aug  3 12:01:19 2007
+--- lynx2-8-7.orig/userdefs.h	2007-08-03 01:24:27.000000000 +0200
++++ lynx2-8-7/userdefs.h	2009-06-13 11:46:29.000000000 +0200
 @@ -461,7 +461,7 @@
   * Normally we expect you will connect to a remote site, e.g., the Lynx starting
   * site:
