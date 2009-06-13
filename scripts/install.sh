@@ -157,6 +157,7 @@ if [ $rb532 -ne 0 ];then
 	$sfdisk --change-id $1 1 27
 	$sfdisk --change-id $1 3 88
 	dd if=$3 of=${1}1
+	sync
 else
 	rootpart=${1}1
 	if [ $cfgfs -eq 0 ];then
