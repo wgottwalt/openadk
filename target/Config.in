@@ -122,9 +122,13 @@ config ADK_LINUX_CRIS_FOXBOARD
 	  Foxboard support
 
 config ADK_LINUX_MIPS64_LEMOTE
-	bool "Lemote Subnotebook"
+	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
 	select ADK_LINUX_MIPS64
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
 	help
 	  Lemote Subnotebook
 

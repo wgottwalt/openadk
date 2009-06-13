@@ -23,6 +23,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--with-gnu-ld \
 			--without-headers \
 			--disable-libmudflap \
+			--enable-sjlj-exceptions \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-multilib \
