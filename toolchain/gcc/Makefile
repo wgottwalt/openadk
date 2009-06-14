@@ -22,7 +22,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--enable-target-optspace \
 			--with-gnu-ld \
 			--disable-libmudflap \
-			--enable-sjlj-exceptions \
+			--disable-sjlj-exceptions \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-multilib \
