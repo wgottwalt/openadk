@@ -1,0 +1,11 @@
+--- squid-3.0.STABLE15.orig/src/HttpHeaderTools.cc	2009-05-06 13:11:40.000000000 +0200
++++ squid-3.0.STABLE15/src/HttpHeaderTools.cc	2009-06-15 18:29:41.000000000 +0200
+@@ -356,7 +356,7 @@ httpHeaderParseQuotedString (const char 
+     pos = start + 1;
+ 
+     while (1) {
+-        if (!(end = index (pos,'"'))) {
++        if (!(end = strchr (pos,'"'))) {
+             debugs(66, 2, "failed to parse a quoted-string header field near '" << start << "'");
+             return 0;
+         }
