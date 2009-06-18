@@ -8,6 +8,11 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
+#workaround for mips and gcc 4.4, where -Os does not inline code in ld.so
+ifeq ($(ARCH),mips)
+TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+endif
+
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
@@ -64,7 +69,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
-	echo $(PKG_VERSION) >$(STAGING_DIR)/uclibc_version
 	rm -rf $(STAGING_DIR)/lib/libc.so
 	ln -s libc.so.0 $(STAGING_DIR)/lib/libc.so
 	touch $@
