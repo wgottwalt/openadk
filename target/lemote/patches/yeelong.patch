@@ -1,223 +1,6 @@
-diff -Nur linux-2.6.30/.gitignore rt4ls/.gitignore
---- linux-2.6.30/.gitignore	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/.gitignore	2009-06-12 16:27:01.954006636 +0200
-@@ -32,6 +32,7 @@
- tags
- TAGS
- vmlinux
-+vmlinux.32
- System.map
- Module.markers
- Module.symvers
-diff -Nur linux-2.6.30/Documentation/kernel-parameters.txt rt4ls/Documentation/kernel-parameters.txt
---- linux-2.6.30/Documentation/kernel-parameters.txt	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/Documentation/kernel-parameters.txt	2009-06-12 16:27:02.534042890 +0200
-@@ -1220,6 +1220,10 @@
- 			(machvec) in a generic kernel.
- 			Example: machvec=hpzx1_swiotlb
- 
-+	machtype=	[Loongson] Share the same kernel image file between different
-+			 yeeloong laptop.
-+			Example: machtype=lemote-yeeloong-2f-7inch
-+
- 	max_addr=nn[KMG]	[KNL,BOOT,ia64] All physical memory greater
- 			than or equal to this physical address is ignored.
- 
-diff -Nur linux-2.6.30/arch/mips/Kconfig rt4ls/arch/mips/Kconfig
---- linux-2.6.30/arch/mips/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/Kconfig	2009-06-12 16:27:08.186400556 +0200
-@@ -6,7 +6,7 @@
- 	select HAVE_ARCH_KGDB
- 	# Horrible source of confusion.  Die, die, die ...
- 	select EMBEDDED
--	select RTC_LIB
-+	select RTC_LIB if !MACH_LOONGSON
- 
- mainmenu "Linux/MIPS Kernel Configuration"
- 
-@@ -154,30 +154,15 @@
- 	select SYS_SUPPORTS_64BIT_KERNEL if BROKEN
- 	select SYS_SUPPORTS_LITTLE_ENDIAN
- 
--config LEMOTE_FULONG
--	bool "Lemote Fulong mini-PC"
--	select ARCH_SPARSEMEM_ENABLE
--	select CEVT_R4K
--	select CSRC_R4K
--	select SYS_HAS_CPU_LOONGSON2
--	select DMA_NONCOHERENT
--	select BOOT_ELF32
--	select BOARD_SCACHE
--	select HAVE_STD_PC_SERIAL_PORT
--	select HW_HAS_PCI
--	select I8259
--	select ISA
--	select IRQ_CPU
--	select SYS_SUPPORTS_32BIT_KERNEL
--	select SYS_SUPPORTS_64BIT_KERNEL
--	select SYS_SUPPORTS_LITTLE_ENDIAN
--	select SYS_SUPPORTS_HIGHMEM
--	select SYS_HAS_EARLY_PRINTK
--	select GENERIC_ISA_DMA_SUPPORT_BROKEN
--	select CPU_HAS_WB
-+config MACH_LOONGSON
-+	bool "Loongson family of machines"
- 	help
--	  Lemote Fulong mini-PC board based on the Chinese Loongson-2E CPU and
--	  an FPGA northbridge
-+	  This enables the support of Loongson family of machines.
-+
-+	  Loongson is a family of general-purpose MIPS-compatible CPUs.
-+	  developed at Institute of Computing Technology (ICT),
-+	  Chinese Academy of Sciences (CAS) in the People's Republic
-+	  of China. The chief architect is Professor Weiwu Hu.
- 
- config MIPS_MALTA
- 	bool "MIPS Malta board"
-@@ -643,6 +628,7 @@
- source "arch/mips/txx9/Kconfig"
- source "arch/mips/vr41xx/Kconfig"
- source "arch/mips/cavium-octeon/Kconfig"
-+source "arch/mips/loongson/Kconfig"
- 
- endmenu
- 
-@@ -1005,16 +991,29 @@
- 	prompt "CPU type"
- 	default CPU_R4X00
- 
--config CPU_LOONGSON2
--	bool "Loongson 2"
--	depends on SYS_HAS_CPU_LOONGSON2
--	select CPU_SUPPORTS_32BIT_KERNEL
--	select CPU_SUPPORTS_64BIT_KERNEL
--	select CPU_SUPPORTS_HIGHMEM
-+config CPU_LOONGSON2E
-+	bool "Loongson 2E"
-+	depends on SYS_HAS_CPU_LOONGSON2E
-+	select CPU_LOONGSON2
- 	help
- 	  The Loongson 2E processor implements the MIPS III instruction set
- 	  with many extensions.
- 
-+	  It has an internal FPGA northbridge, which is compatiable to
-+	  bonito64.
-+
-+config CPU_LOONGSON2F
-+	bool "Loongson 2F"
-+	depends on SYS_HAS_CPU_LOONGSON2F
-+	select CPU_LOONGSON2
-+	help
-+	  The Loongson 2F processor implements the MIPS III instruction set
-+	  with many extensions.
-+
-+	  Loongson2F have built-in DDR2 and PCIX controller. The PCIX controller
-+	  have a similar programming interface with FPGA northbridge used in
-+	  Loongson2E.
-+
- config CPU_MIPS32_R1
- 	bool "MIPS32 Release 1"
- 	depends on SYS_HAS_CPU_MIPS32_R1
-@@ -1253,7 +1252,16 @@
- 
- endchoice
- 
--config SYS_HAS_CPU_LOONGSON2
-+config CPU_LOONGSON2
-+	bool
-+	select CPU_SUPPORTS_32BIT_KERNEL
-+	select CPU_SUPPORTS_64BIT_KERNEL
-+	select CPU_SUPPORTS_HIGHMEM
-+
-+config SYS_HAS_CPU_LOONGSON2E
-+	bool
-+
-+config SYS_HAS_CPU_LOONGSON2F
- 	bool
- 
- config SYS_HAS_CPU_MIPS32_R1
-@@ -2121,6 +2129,9 @@
- 
- menu "Power management options"
- 
-+config ARCH_HIBERNATION_POSSIBLE
-+	def_bool y
-+
- config ARCH_SUSPEND_POSSIBLE
- 	def_bool y
- 	depends on !SMP
-@@ -2129,6 +2140,23 @@
- 
- endmenu
- 
-+menu "CPU Frequency scaling"
-+
-+source "drivers/cpufreq/Kconfig"
-+
-+config LOONGSON2F_CPU_FREQ
-+	bool "Loongson-2F CPU Frequency driver"
-+	depends on CPU_LOONGSON2F && CPU_FREQ && (CS5536_MFGPT || I8253)
-+	select CPU_FREQ_TABLE
-+	help
-+	  This adds the cpufreq driver for Loongson-2F.
-+
-+	  For details, take a look at <file:Documentation/cpu-freq>.
-+
-+	  If unsure, say N.
-+
-+endmenu
-+
- source "net/Kconfig"
- 
- source "drivers/Kconfig"
-diff -Nur linux-2.6.30/arch/mips/Makefile rt4ls/arch/mips/Makefile
---- linux-2.6.30/arch/mips/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/Makefile	2009-06-12 16:27:08.186400556 +0200
-@@ -120,7 +120,14 @@
- cflags-$(CONFIG_CPU_VR41XX)	+= -march=r4100 -Wa,--trap
- cflags-$(CONFIG_CPU_R4X00)	+= -march=r4600 -Wa,--trap
- cflags-$(CONFIG_CPU_TX49XX)	+= -march=r4600 -Wa,--trap
--cflags-$(CONFIG_CPU_LOONGSON2)	+= -march=r4600 -Wa,--trap
-+
-+# only gcc >= 4.4 have the loongson-specific support
-+cflags-$(CONFIG_CPU_LOONGSON2)	+= -Wa,--trap
-+cflags-$(CONFIG_CPU_LOONGSON2E) += \
-+	$(call cc-option,-march=loongson2e,-march=r4600) $(call cc-option,-mtune=loongson2e)
-+cflags-$(CONFIG_CPU_LOONGSON2F) += \
-+	$(call cc-option,-march=loongson2f,-march=r4600) $(call cc-optoin,-mtune=loongson2f)
-+
- cflags-$(CONFIG_CPU_MIPS32_R1)	+= $(call cc-option,-march=mips32,-mips32 -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS32) \
- 			-Wa,-mips32 -Wa,--trap
- cflags-$(CONFIG_CPU_MIPS32_R2)	+= $(call cc-option,-march=mips32r2,-mips32r2 -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS32) \
-@@ -307,9 +314,12 @@
- #
- # lemote fulong mini-PC board
- #
--core-$(CONFIG_LEMOTE_FULONG) +=arch/mips/lemote/lm2e/
--load-$(CONFIG_LEMOTE_FULONG) +=0xffffffff80100000
--cflags-$(CONFIG_LEMOTE_FULONG) += -I$(srctree)/arch/mips/include/asm/mach-lemote
-+core-$(CONFIG_MACH_LOONGSON) +=arch/mips/loongson/
-+cflags-$(CONFIG_MACH_LOONGSON) += -I$(srctree)/arch/mips/include/asm/mach-loongson \
-+					-mno-branch-likely
-+load-$(CONFIG_LEMOTE_FULOONG2E) +=0xffffffff80100000
-+load-$(CONFIG_LEMOTE_FULOONG2F) +=0xffffffff80200000
-+load-$(CONFIG_LEMOTE_YEELOONG2F) +=0xffffffff80200000
- 
- #
- # MIPS Malta board
-@@ -675,6 +685,9 @@
- 
- drivers-$(CONFIG_OPROFILE)	+= arch/mips/oprofile/
- 
-+# suspend and hibernation support
-+drivers-$(CONFIG_PM)	+= arch/mips/power/
-+
- ifdef CONFIG_LASAT
- rom.bin rom.sw: vmlinux
- 	$(Q)$(MAKE) $(build)=arch/mips/lasat/image $@
-diff -Nur linux-2.6.30/arch/mips/configs/fulong_defconfig rt4ls/arch/mips/configs/fulong_defconfig
---- linux-2.6.30/arch/mips/configs/fulong_defconfig	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/configs/fulong_defconfig	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/configs/fulong_defconfig linux-2.6.30/arch/mips/configs/fulong_defconfig
+--- linux-2.6.30.orig/arch/mips/configs/fulong_defconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/configs/fulong_defconfig	1970-01-01 01:00:00.000000000 +0100
 @@ -1,1912 +0,0 @@
 -#
 -# Automatically generated make config: don't edit
@@ -2131,9 +1914,9 @@ diff -Nur linux-2.6.30/arch/mips/configs/fulong_defconfig rt4ls/arch/mips/config
 -CONFIG_HAS_IOMEM=y
 -CONFIG_HAS_IOPORT=y
 -CONFIG_HAS_DMA=y
-diff -Nur linux-2.6.30/arch/mips/configs/fuloong2e_defconfig rt4ls/arch/mips/configs/fuloong2e_defconfig
---- linux-2.6.30/arch/mips/configs/fuloong2e_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/configs/fuloong2e_defconfig	2009-06-12 16:27:08.246405134 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/configs/fuloong2e_defconfig linux-2.6.30/arch/mips/configs/fuloong2e_defconfig
+--- linux-2.6.30.orig/arch/mips/configs/fuloong2e_defconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/configs/fuloong2e_defconfig	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,2018 @@
 +#
 +# Automatically generated make config: don't edit
@@ -4153,9 +3936,9 @@ diff -Nur linux-2.6.30/arch/mips/configs/fuloong2e_defconfig rt4ls/arch/mips/con
 +CONFIG_HAS_IOPORT=y
 +CONFIG_HAS_DMA=y
 +CONFIG_NLATTR=y
-diff -Nur linux-2.6.30/arch/mips/configs/fuloong2f_defconfig rt4ls/arch/mips/configs/fuloong2f_defconfig
---- linux-2.6.30/arch/mips/configs/fuloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/configs/fuloong2f_defconfig	2009-06-12 16:27:08.246405134 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/configs/fuloong2f_defconfig linux-2.6.30/arch/mips/configs/fuloong2f_defconfig
+--- linux-2.6.30.orig/arch/mips/configs/fuloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/configs/fuloong2f_defconfig	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,2637 @@
 +#
 +# Automatically generated make config: don't edit
@@ -6794,9 +6577,9 @@ diff -Nur linux-2.6.30/arch/mips/configs/fuloong2f_defconfig rt4ls/arch/mips/con
 +CONFIG_HAS_IOPORT=y
 +CONFIG_HAS_DMA=y
 +CONFIG_NLATTR=y
-diff -Nur linux-2.6.30/arch/mips/configs/yeeloong2f_defconfig rt4ls/arch/mips/configs/yeeloong2f_defconfig
---- linux-2.6.30/arch/mips/configs/yeeloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/configs/yeeloong2f_defconfig	2009-06-12 16:27:08.290407950 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/configs/yeeloong2f_defconfig linux-2.6.30/arch/mips/configs/yeeloong2f_defconfig
+--- linux-2.6.30.orig/arch/mips/configs/yeeloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/configs/yeeloong2f_defconfig	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,2711 @@
 +#
 +# Automatically generated make config: don't edit
@@ -9509,9 +9292,9 @@ diff -Nur linux-2.6.30/arch/mips/configs/yeeloong2f_defconfig rt4ls/arch/mips/co
 +CONFIG_HAS_IOPORT=y
 +CONFIG_HAS_DMA=y
 +CONFIG_NLATTR=y
-diff -Nur linux-2.6.30/arch/mips/include/asm/bootinfo.h rt4ls/arch/mips/include/asm/bootinfo.h
---- linux-2.6.30/arch/mips/include/asm/bootinfo.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/bootinfo.h	2009-06-12 16:27:08.306407755 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/bootinfo.h linux-2.6.30/arch/mips/include/asm/bootinfo.h
+--- linux-2.6.30.orig/arch/mips/include/asm/bootinfo.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/bootinfo.h	2009-06-14 20:25:19.000000000 +0200
 @@ -7,6 +7,7 @@
   * Copyright (C) 1995, 1996 Andreas Busse
   * Copyright (C) 1995, 1996 Stoned Elipot
@@ -9537,9 +9320,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/bootinfo.h rt4ls/arch/mips/include/
  #define CL_SIZE			COMMAND_LINE_SIZE
  
  extern char *system_type;
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h rt4ls/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h
---- linux-2.6.30/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h linux-2.6.30/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,59 +0,0 @@
 -/*
 - * This file is subject to the terms and conditions of the GNU General Public
@@ -9600,9 +9383,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/cpu-feature-overrides.h
 -#define cpu_icache_snoops_remote_store	1
 -
 -#endif /* __ASM_MACH_LEMOTE_CPU_FEATURE_OVERRIDES_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/dma-coherence.h rt4ls/arch/mips/include/asm/mach-lemote/dma-coherence.h
---- linux-2.6.30/arch/mips/include/asm/mach-lemote/dma-coherence.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mach-lemote/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/dma-coherence.h linux-2.6.30/arch/mips/include/asm/mach-lemote/dma-coherence.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/dma-coherence.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mach-lemote/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,66 +0,0 @@
 -/*
 - * This file is subject to the terms and conditions of the GNU General Public
@@ -9670,9 +9453,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/dma-coherence.h rt4ls/a
 -}
 -
 -#endif /* __ASM_MACH_LEMOTE_DMA_COHERENCE_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/mc146818rtc.h rt4ls/arch/mips/include/asm/mach-lemote/mc146818rtc.h
---- linux-2.6.30/arch/mips/include/asm/mach-lemote/mc146818rtc.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mach-lemote/mc146818rtc.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/mc146818rtc.h linux-2.6.30/arch/mips/include/asm/mach-lemote/mc146818rtc.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/mc146818rtc.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mach-lemote/mc146818rtc.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,36 +0,0 @@
 -/*
 - * This file is subject to the terms and conditions of the GNU General Public
@@ -9710,9 +9493,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/mc146818rtc.h rt4ls/arc
 -#endif
 -
 -#endif /* __ASM_MACH_LEMOTE_MC146818RTC_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/pci.h rt4ls/arch/mips/include/asm/mach-lemote/pci.h
---- linux-2.6.30/arch/mips/include/asm/mach-lemote/pci.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mach-lemote/pci.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/pci.h linux-2.6.30/arch/mips/include/asm/mach-lemote/pci.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/pci.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mach-lemote/pci.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,30 +0,0 @@
 -/*
 - * Copyright (c) 2008 Zhang Le <r0bertz@gentoo.org>
@@ -9744,9 +9527,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/pci.h rt4ls/arch/mips/i
 -#define LOONGSON2E_IO_PORT_BASE		0x1fd00000UL
 -
 -#endif /* !_LEMOTE_PCI_H_ */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/war.h rt4ls/arch/mips/include/asm/mach-lemote/war.h
---- linux-2.6.30/arch/mips/include/asm/mach-lemote/war.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mach-lemote/war.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/war.h linux-2.6.30/arch/mips/include/asm/mach-lemote/war.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-lemote/war.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mach-lemote/war.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,25 +0,0 @@
 -/*
 - * This file is subject to the terms and conditions of the GNU General Public
@@ -9773,9 +9556,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-lemote/war.h rt4ls/arch/mips/i
 -#define MIPS34K_MISSED_ITLB_WAR		0
 -
 -#endif /* __ASM_MIPS_MACH_LEMOTE_WAR_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/clock.h rt4ls/arch/mips/include/asm/mach-loongson/clock.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/clock.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/clock.h	2009-06-12 16:27:08.506427365 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/clock.h linux-2.6.30/arch/mips/include/asm/mach-loongson/clock.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/clock.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/clock.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,64 @@
 +#ifndef __ASM_MIPS_CLOCK_H
 +#define __ASM_MIPS_CLOCK_H
@@ -9841,9 +9624,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/clock.h rt4ls/arch/mi
 +int clk_set_rate_ex(struct clk *clk, unsigned long rate, int algo_id);
 +
 +#endif				/* __ASM_MIPS_CLOCK_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cmdline.h rt4ls/arch/mips/include/asm/mach-loongson/cmdline.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cmdline.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cmdline.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cmdline.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cmdline.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cmdline.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cmdline.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,9 @@
 +/* machine-specific command line initialization */
 +#ifdef CONFIG_SYS_HAS_MACH_PROM_INIT_CMDLINE
@@ -9854,9 +9637,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cmdline.h rt4ls/arch/
 +}
 +#endif
 +
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h rt4ls/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -9917,9 +9700,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cpu-feature-overrides
 +#define cpu_icache_snoops_remote_store	1
 +
 +#endif /* __ASM_MACH_LEMOTE_CPU_FEATURE_OVERRIDES_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,382 @@
 +/*
 + * The header file of cs5536 sourth bridge.
@@ -10303,9 +10086,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h rt4ls
 +#define	GPIOL_OUT_EN		0x04
 +
 +#endif				/* _CS5536_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,26 @@
 +/*
 + * cs5536 mfgpt header file
@@ -10333,9 +10116,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
 +#define MFGPT0_SETUP	(MFGPT_BASE + 6)
 +
 +#endif /*!_CS5536_MFGPT_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,174 @@
 +/*
 + * the definition file of cs5536 Virtual Support Module(VSM).
@@ -10511,9 +10294,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h r
 +#define	PCI_EHCI_FLADJ_REG	0x60
 +
 +#endif				/* _CS5536_PCI_H_ */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * the Virtual Support Module(VSM) read/write interfaces
@@ -10574,9 +10357,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h r
 +    DEFINE_CS5536_MODULE(udc)
 +#endif
 +#endif				/* _CS5536_VSM_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/dma-coherence.h rt4ls/arch/mips/include/asm/mach-loongson/dma-coherence.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/dma-coherence.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/dma-coherence.h linux-2.6.30/arch/mips/include/asm/mach-loongson/dma-coherence.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/dma-coherence.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,70 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -10648,9 +10431,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/dma-coherence.h rt4ls
 +}
 +
 +#endif /* __ASM_MACH_LOONGSON_DMA_COHERENCE_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/loongson.h rt4ls/arch/mips/include/asm/mach-loongson/loongson.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/loongson.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/loongson.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/loongson.h linux-2.6.30/arch/mips/include/asm/mach-loongson/loongson.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/loongson.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/loongson.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,319 @@
 +/*
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -10971,9 +10754,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/loongson.h rt4ls/arch
 +
 +#endif	/* __LOONGSON_H */
 +
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/machine.h rt4ls/arch/mips/include/asm/mach-loongson/machine.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/machine.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/machine.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/machine.h linux-2.6.30/arch/mips/include/asm/mach-loongson/machine.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/machine.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/machine.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,76 @@
 +/*
 + * board-specific header file
@@ -11051,9 +10834,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/machine.h rt4ls/arch/
 +#endif
 +
 +#endif				/* ! __MACHINE_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/mc146818rtc.h rt4ls/arch/mips/include/asm/mach-loongson/mc146818rtc.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/mc146818rtc.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/mc146818rtc.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/mc146818rtc.h linux-2.6.30/arch/mips/include/asm/mach-loongson/mc146818rtc.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/mc146818rtc.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/mc146818rtc.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,36 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -11091,9 +10874,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/mc146818rtc.h rt4ls/a
 +#endif
 +
 +#endif /* __ASM_MACH_LOONGSON_MC146818RTC_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/mem.h rt4ls/arch/mips/include/asm/mach-loongson/mem.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/mem.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/mem.h	2009-06-12 16:27:08.510427596 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/mem.h linux-2.6.30/arch/mips/include/asm/mach-loongson/mem.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/mem.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/mem.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,31 @@
 +#ifndef __MEM_H
 +#define __MEM_H
@@ -11126,9 +10909,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/mem.h rt4ls/arch/mips
 +#endif
 +
 +#endif	/* !__MEM_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/pci.h rt4ls/arch/mips/include/asm/mach-loongson/pci.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/pci.h	2009-06-12 16:27:08.514429781 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/pci.h linux-2.6.30/arch/mips/include/asm/mach-loongson/pci.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/pci.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * Copyright (c) 2008 Zhang Le <r0bertz@gentoo.org>
@@ -11189,9 +10972,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/pci.h rt4ls/arch/mips
 +
 +
 +#endif /* !_LOONGSON_PCI_H_ */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/war.h rt4ls/arch/mips/include/asm/mach-loongson/war.h
---- linux-2.6.30/arch/mips/include/asm/mach-loongson/war.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/include/asm/mach-loongson/war.h	2009-06-12 16:27:08.514429781 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/war.h linux-2.6.30/arch/mips/include/asm/mach-loongson/war.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mach-loongson/war.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/include/asm/mach-loongson/war.h	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,25 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -11218,9 +11001,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mach-loongson/war.h rt4ls/arch/mips
 +#define MIPS34K_MISSED_ITLB_WAR		0
 +
 +#endif /* __ASM_MIPS_MACH_LOONGSON_WAR_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/mips-boards/bonito64.h rt4ls/arch/mips/include/asm/mips-boards/bonito64.h
---- linux-2.6.30/arch/mips/include/asm/mips-boards/bonito64.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/mips-boards/bonito64.h	2009-06-12 16:27:08.574431556 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/mips-boards/bonito64.h linux-2.6.30/arch/mips/include/asm/mips-boards/bonito64.h
+--- linux-2.6.30.orig/arch/mips/include/asm/mips-boards/bonito64.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/mips-boards/bonito64.h	2009-06-14 20:25:19.000000000 +0200
 @@ -26,11 +26,6 @@
  /* offsets from base register */
  #define BONITO(x)	(x)
@@ -11233,9 +11016,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/mips-boards/bonito64.h rt4ls/arch/m
  #else
  
  /*
-diff -Nur linux-2.6.30/arch/mips/include/asm/page.h rt4ls/arch/mips/include/asm/page.h
---- linux-2.6.30/arch/mips/include/asm/page.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/page.h	2009-06-12 16:27:08.602426182 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/page.h linux-2.6.30/arch/mips/include/asm/page.h
+--- linux-2.6.30.orig/arch/mips/include/asm/page.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/page.h	2009-06-14 20:25:19.000000000 +0200
 @@ -179,8 +179,9 @@
  
  #endif
@@ -11248,9 +11031,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/page.h rt4ls/arch/mips/include/asm/
  
  #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
  				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
-diff -Nur linux-2.6.30/arch/mips/include/asm/pci.h rt4ls/arch/mips/include/asm/pci.h
---- linux-2.6.30/arch/mips/include/asm/pci.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/pci.h	2009-06-12 16:27:08.606433396 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/pci.h linux-2.6.30/arch/mips/include/asm/pci.h
+--- linux-2.6.30.orig/arch/mips/include/asm/pci.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/pci.h	2009-06-14 20:25:19.000000000 +0200
 @@ -56,7 +56,7 @@
  /*
   * board supplied pci irq fixup routine
@@ -11260,9 +11043,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/pci.h rt4ls/arch/mips/include/asm/p
  
  
  /* Can be used to override the logic in pci_scan_bus for skipping
-diff -Nur linux-2.6.30/arch/mips/include/asm/pgtable.h rt4ls/arch/mips/include/asm/pgtable.h
---- linux-2.6.30/arch/mips/include/asm/pgtable.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/pgtable.h	2009-06-12 16:27:08.610435582 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/pgtable.h linux-2.6.30/arch/mips/include/asm/pgtable.h
+--- linux-2.6.30.orig/arch/mips/include/asm/pgtable.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/pgtable.h	2009-06-14 20:25:19.000000000 +0200
 @@ -370,6 +370,19 @@
  #include <asm-generic/pgtable.h>
  
@@ -11283,9 +11066,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/pgtable.h rt4ls/arch/mips/include/a
   * We provide our own get_unmapped area to cope with the virtual aliasing
   * constraints placed on us by the cache architecture.
   */
-diff -Nur linux-2.6.30/arch/mips/include/asm/stackframe.h rt4ls/arch/mips/include/asm/stackframe.h
---- linux-2.6.30/arch/mips/include/asm/stackframe.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/stackframe.h	2009-06-12 16:27:08.674441225 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/stackframe.h linux-2.6.30/arch/mips/include/asm/stackframe.h
+--- linux-2.6.30.orig/arch/mips/include/asm/stackframe.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/stackframe.h	2009-06-14 20:25:19.000000000 +0200
 @@ -117,6 +117,20 @@
  		.endm
  #else
@@ -11307,9 +11090,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/stackframe.h rt4ls/arch/mips/includ
  #if defined(CONFIG_32BIT) || defined(KBUILD_64BIT_SYM32)
  		lui	k1, %hi(kernelsp)
  #else
-diff -Nur linux-2.6.30/arch/mips/include/asm/suspend.h rt4ls/arch/mips/include/asm/suspend.h
---- linux-2.6.30/arch/mips/include/asm/suspend.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/suspend.h	2009-06-12 16:27:08.678439779 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/suspend.h linux-2.6.30/arch/mips/include/asm/suspend.h
+--- linux-2.6.30.orig/arch/mips/include/asm/suspend.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/suspend.h	2009-06-14 20:25:19.000000000 +0200
 @@ -1,6 +1,9 @@
  #ifndef __ASM_SUSPEND_H
  #define __ASM_SUSPEND_H
@@ -11321,9 +11104,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/suspend.h rt4ls/arch/mips/include/a
 +extern const void __nosave_begin, __nosave_end;
  
  #endif /* __ASM_SUSPEND_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/generic.h rt4ls/arch/mips/include/asm/txx9/generic.h
---- linux-2.6.30/arch/mips/include/asm/txx9/generic.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/generic.h	2009-06-12 16:27:08.686439682 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/generic.h linux-2.6.30/arch/mips/include/asm/txx9/generic.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/generic.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/generic.h	2009-06-14 20:25:19.000000000 +0200
 @@ -37,7 +37,7 @@
  	void (*arch_init)(void);
  	void (*device_init)(void);
@@ -11333,9 +11116,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/generic.h rt4ls/arch/mips/incl
  #endif
  };
  extern struct txx9_board_vec *txx9_board_vec;
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/jmr3927.h rt4ls/arch/mips/include/asm/txx9/jmr3927.h
---- linux-2.6.30/arch/mips/include/asm/txx9/jmr3927.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/jmr3927.h	2009-06-12 16:27:08.686439682 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/jmr3927.h linux-2.6.30/arch/mips/include/asm/txx9/jmr3927.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/jmr3927.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/jmr3927.h	2009-06-14 20:25:19.000000000 +0200
 @@ -175,6 +175,6 @@
  void jmr3927_prom_init(void);
  void jmr3927_irq_setup(void);
@@ -11344,9 +11127,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/jmr3927.h rt4ls/arch/mips/incl
 +int jmr3927_pci_map_irq(struct pci_dev *dev, u8 slot, u8 pin);
  
  #endif /* __ASM_TXX9_JMR3927_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/rbtx4927.h rt4ls/arch/mips/include/asm/txx9/rbtx4927.h
---- linux-2.6.30/arch/mips/include/asm/txx9/rbtx4927.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/rbtx4927.h	2009-06-12 16:27:08.690440751 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/rbtx4927.h linux-2.6.30/arch/mips/include/asm/txx9/rbtx4927.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/rbtx4927.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/rbtx4927.h	2009-06-14 20:25:19.000000000 +0200
 @@ -87,6 +87,6 @@
  void rbtx4927_prom_init(void);
  void rbtx4927_irq_setup(void);
@@ -11355,9 +11138,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/rbtx4927.h rt4ls/arch/mips/inc
 +int rbtx4927_pci_map_irq(struct pci_dev *dev, u8 slot, u8 pin);
  
  #endif /* __ASM_TXX9_RBTX4927_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/rbtx4938.h rt4ls/arch/mips/include/asm/txx9/rbtx4938.h
---- linux-2.6.30/arch/mips/include/asm/txx9/rbtx4938.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/rbtx4938.h	2009-06-12 16:27:08.690440751 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/rbtx4938.h linux-2.6.30/arch/mips/include/asm/txx9/rbtx4938.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/rbtx4938.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/rbtx4938.h	2009-06-14 20:25:19.000000000 +0200
 @@ -140,6 +140,6 @@
  void rbtx4938_prom_init(void);
  void rbtx4938_irq_setup(void);
@@ -11366,9 +11149,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/rbtx4938.h rt4ls/arch/mips/inc
 +int rbtx4938_pci_map_irq(struct pci_dev *dev, u8 slot, u8 pin);
  
  #endif /* __ASM_TXX9_RBTX4938_H */
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/tx4938.h rt4ls/arch/mips/include/asm/txx9/tx4938.h
---- linux-2.6.30/arch/mips/include/asm/txx9/tx4938.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/tx4938.h	2009-06-12 16:27:08.690440751 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/tx4938.h linux-2.6.30/arch/mips/include/asm/txx9/tx4938.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/tx4938.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/tx4938.h	2009-06-14 20:25:19.000000000 +0200
 @@ -287,7 +287,7 @@
  void tx4938_report_pci1clk(void);
  int tx4938_pciclk66_setup(void);
@@ -11378,9 +11161,9 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/tx4938.h rt4ls/arch/mips/inclu
  void tx4938_setup_pcierr_irq(void);
  void tx4938_irq_init(void);
  void tx4938_mtd_init(int ch);
-diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/tx4939.h rt4ls/arch/mips/include/asm/txx9/tx4939.h
---- linux-2.6.30/arch/mips/include/asm/txx9/tx4939.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/include/asm/txx9/tx4939.h	2009-06-12 16:27:08.694430645 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/include/asm/txx9/tx4939.h linux-2.6.30/arch/mips/include/asm/txx9/tx4939.h
+--- linux-2.6.30.orig/arch/mips/include/asm/txx9/tx4939.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/include/asm/txx9/tx4939.h	2009-06-14 20:25:19.000000000 +0200
 @@ -534,8 +534,8 @@
  int tx4939_report_pciclk(void);
  void tx4939_report_pci1clk(void);
@@ -11392,20 +11175,156 @@ diff -Nur linux-2.6.30/arch/mips/include/asm/txx9/tx4939.h rt4ls/arch/mips/inclu
  void tx4939_setup_pcierr_irq(void);
  void tx4939_irq_init(void);
  int tx4939_irq(void);
-diff -Nur linux-2.6.30/arch/mips/kernel/Makefile rt4ls/arch/mips/kernel/Makefile
---- linux-2.6.30/arch/mips/kernel/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/kernel/Makefile	2009-06-12 16:27:08.710440787 +0200
-@@ -73,6 +73,7 @@
- obj-$(CONFIG_MIPS32_COMPAT)	+= linux32.o ptrace32.o signal32.o
- obj-$(CONFIG_MIPS32_N32)	+= binfmt_elfn32.o scall64-n32.o signal_n32.o
- obj-$(CONFIG_MIPS32_O32)	+= binfmt_elfo32.o scall64-o32.o
-+obj-$(CONFIG_LOONGSON2F_CPU_FREQ) += loongson2f_freq.o
+diff -Nur linux-2.6.30.orig/arch/mips/Kconfig linux-2.6.30/arch/mips/Kconfig
+--- linux-2.6.30.orig/arch/mips/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/Kconfig	2009-06-14 20:25:19.000000000 +0200
+@@ -6,7 +6,7 @@
+ 	select HAVE_ARCH_KGDB
+ 	# Horrible source of confusion.  Die, die, die ...
+ 	select EMBEDDED
+-	select RTC_LIB
++	select RTC_LIB if !MACH_LOONGSON
  
- obj-$(CONFIG_KGDB)		+= kgdb.o
- obj-$(CONFIG_PROC_FS)		+= proc.o
-diff -Nur linux-2.6.30/arch/mips/kernel/asm-offsets.c rt4ls/arch/mips/kernel/asm-offsets.c
---- linux-2.6.30/arch/mips/kernel/asm-offsets.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/kernel/asm-offsets.c	2009-06-12 16:27:08.710440787 +0200
+ mainmenu "Linux/MIPS Kernel Configuration"
+ 
+@@ -154,30 +154,15 @@
+ 	select SYS_SUPPORTS_64BIT_KERNEL if BROKEN
+ 	select SYS_SUPPORTS_LITTLE_ENDIAN
+ 
+-config LEMOTE_FULONG
+-	bool "Lemote Fulong mini-PC"
+-	select ARCH_SPARSEMEM_ENABLE
+-	select CEVT_R4K
+-	select CSRC_R4K
+-	select SYS_HAS_CPU_LOONGSON2
+-	select DMA_NONCOHERENT
+-	select BOOT_ELF32
+-	select BOARD_SCACHE
+-	select HAVE_STD_PC_SERIAL_PORT
+-	select HW_HAS_PCI
+-	select I8259
+-	select ISA
+-	select IRQ_CPU
+-	select SYS_SUPPORTS_32BIT_KERNEL
+-	select SYS_SUPPORTS_64BIT_KERNEL
+-	select SYS_SUPPORTS_LITTLE_ENDIAN
+-	select SYS_SUPPORTS_HIGHMEM
+-	select SYS_HAS_EARLY_PRINTK
+-	select GENERIC_ISA_DMA_SUPPORT_BROKEN
+-	select CPU_HAS_WB
++config MACH_LOONGSON
++	bool "Loongson family of machines"
+ 	help
+-	  Lemote Fulong mini-PC board based on the Chinese Loongson-2E CPU and
+-	  an FPGA northbridge
++	  This enables the support of Loongson family of machines.
++
++	  Loongson is a family of general-purpose MIPS-compatible CPUs.
++	  developed at Institute of Computing Technology (ICT),
++	  Chinese Academy of Sciences (CAS) in the People's Republic
++	  of China. The chief architect is Professor Weiwu Hu.
+ 
+ config MIPS_MALTA
+ 	bool "MIPS Malta board"
+@@ -643,6 +628,7 @@
+ source "arch/mips/txx9/Kconfig"
+ source "arch/mips/vr41xx/Kconfig"
+ source "arch/mips/cavium-octeon/Kconfig"
++source "arch/mips/loongson/Kconfig"
+ 
+ endmenu
+ 
+@@ -1005,16 +991,29 @@
+ 	prompt "CPU type"
+ 	default CPU_R4X00
+ 
+-config CPU_LOONGSON2
+-	bool "Loongson 2"
+-	depends on SYS_HAS_CPU_LOONGSON2
+-	select CPU_SUPPORTS_32BIT_KERNEL
+-	select CPU_SUPPORTS_64BIT_KERNEL
+-	select CPU_SUPPORTS_HIGHMEM
++config CPU_LOONGSON2E
++	bool "Loongson 2E"
++	depends on SYS_HAS_CPU_LOONGSON2E
++	select CPU_LOONGSON2
+ 	help
+ 	  The Loongson 2E processor implements the MIPS III instruction set
+ 	  with many extensions.
+ 
++	  It has an internal FPGA northbridge, which is compatiable to
++	  bonito64.
++
++config CPU_LOONGSON2F
++	bool "Loongson 2F"
++	depends on SYS_HAS_CPU_LOONGSON2F
++	select CPU_LOONGSON2
++	help
++	  The Loongson 2F processor implements the MIPS III instruction set
++	  with many extensions.
++
++	  Loongson2F have built-in DDR2 and PCIX controller. The PCIX controller
++	  have a similar programming interface with FPGA northbridge used in
++	  Loongson2E.
++
+ config CPU_MIPS32_R1
+ 	bool "MIPS32 Release 1"
+ 	depends on SYS_HAS_CPU_MIPS32_R1
+@@ -1253,7 +1252,16 @@
+ 
+ endchoice
+ 
+-config SYS_HAS_CPU_LOONGSON2
++config CPU_LOONGSON2
++	bool
++	select CPU_SUPPORTS_32BIT_KERNEL
++	select CPU_SUPPORTS_64BIT_KERNEL
++	select CPU_SUPPORTS_HIGHMEM
++
++config SYS_HAS_CPU_LOONGSON2E
++	bool
++
++config SYS_HAS_CPU_LOONGSON2F
+ 	bool
+ 
+ config SYS_HAS_CPU_MIPS32_R1
+@@ -2121,6 +2129,9 @@
+ 
+ menu "Power management options"
+ 
++config ARCH_HIBERNATION_POSSIBLE
++	def_bool y
++
+ config ARCH_SUSPEND_POSSIBLE
+ 	def_bool y
+ 	depends on !SMP
+@@ -2129,6 +2140,23 @@
+ 
+ endmenu
+ 
++menu "CPU Frequency scaling"
++
++source "drivers/cpufreq/Kconfig"
++
++config LOONGSON2F_CPU_FREQ
++	bool "Loongson-2F CPU Frequency driver"
++	depends on CPU_LOONGSON2F && CPU_FREQ && (CS5536_MFGPT || I8253)
++	select CPU_FREQ_TABLE
++	help
++	  This adds the cpufreq driver for Loongson-2F.
++
++	  For details, take a look at <file:Documentation/cpu-freq>.
++
++	  If unsure, say N.
++
++endmenu
++
+ source "net/Kconfig"
+ 
+ source "drivers/Kconfig"
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/asm-offsets.c linux-2.6.30/arch/mips/kernel/asm-offsets.c
+--- linux-2.6.30.orig/arch/mips/kernel/asm-offsets.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/kernel/asm-offsets.c	2009-06-14 20:25:19.000000000 +0200
 @@ -14,6 +14,7 @@
  #include <linux/mm.h>
  #include <linux/interrupt.h>
@@ -11430,9 +11349,9 @@ diff -Nur linux-2.6.30/arch/mips/kernel/asm-offsets.c rt4ls/arch/mips/kernel/asm
 +	BLANK();
 +}
 +#endif
-diff -Nur linux-2.6.30/arch/mips/kernel/i8259.c rt4ls/arch/mips/kernel/i8259.c
---- linux-2.6.30/arch/mips/kernel/i8259.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/kernel/i8259.c	2009-06-12 16:27:08.722442317 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/i8259.c linux-2.6.30/arch/mips/kernel/i8259.c
+--- linux-2.6.30.orig/arch/mips/kernel/i8259.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/kernel/i8259.c	2009-06-14 20:25:19.000000000 +0200
 @@ -177,10 +177,12 @@
  		outb(cached_slave_mask, PIC_SLAVE_IMR);
  		outb(0x60+(irq&7), PIC_SLAVE_CMD);/* 'Specific EOI' to slave */
@@ -11446,9 +11365,9 @@ diff -Nur linux-2.6.30/arch/mips/kernel/i8259.c rt4ls/arch/mips/kernel/i8259.c
  	}
  	smtc_im_ack_irq(irq);
  	spin_unlock_irqrestore(&i8259A_lock, flags);
-diff -Nur linux-2.6.30/arch/mips/kernel/loongson2f_freq.c rt4ls/arch/mips/kernel/loongson2f_freq.c
---- linux-2.6.30/arch/mips/kernel/loongson2f_freq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/kernel/loongson2f_freq.c	2009-06-12 16:27:08.726441989 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/loongson2f_freq.c linux-2.6.30/arch/mips/kernel/loongson2f_freq.c
+--- linux-2.6.30.orig/arch/mips/kernel/loongson2f_freq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/kernel/loongson2f_freq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,216 @@
 +/*
 + * arch/mips/kernel/cpufreq.c
@@ -11666,9 +11585,20 @@ diff -Nur linux-2.6.30/arch/mips/kernel/loongson2f_freq.c rt4ls/arch/mips/kernel
 +MODULE_AUTHOR("Yanhua <yanh@lemote.com>");
 +MODULE_DESCRIPTION("cpufreq driver for Loongson2F");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.30/arch/mips/kernel/smtc.c rt4ls/arch/mips/kernel/smtc.c
---- linux-2.6.30/arch/mips/kernel/smtc.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/kernel/smtc.c	2009-06-12 16:27:08.746436158 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/Makefile linux-2.6.30/arch/mips/kernel/Makefile
+--- linux-2.6.30.orig/arch/mips/kernel/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/kernel/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -73,6 +73,7 @@
+ obj-$(CONFIG_MIPS32_COMPAT)	+= linux32.o ptrace32.o signal32.o
+ obj-$(CONFIG_MIPS32_N32)	+= binfmt_elfn32.o scall64-n32.o signal_n32.o
+ obj-$(CONFIG_MIPS32_O32)	+= binfmt_elfo32.o scall64-o32.o
++obj-$(CONFIG_LOONGSON2F_CPU_FREQ) += loongson2f_freq.o
+ 
+ obj-$(CONFIG_KGDB)		+= kgdb.o
+ obj-$(CONFIG_PROC_FS)		+= proc.o
+diff -Nur linux-2.6.30.orig/arch/mips/kernel/smtc.c linux-2.6.30/arch/mips/kernel/smtc.c
+--- linux-2.6.30.orig/arch/mips/kernel/smtc.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/kernel/smtc.c	2009-06-14 20:25:19.000000000 +0200
 @@ -924,6 +924,7 @@
  	int irq = MIPS_CPU_IRQ_BASE + 1;
  
@@ -11677,20 +11607,9 @@ diff -Nur linux-2.6.30/arch/mips/kernel/smtc.c rt4ls/arch/mips/kernel/smtc.c
  	switch (type_copy) {
  	case SMTC_CLOCK_TICK:
  		irq_enter();
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/Makefile rt4ls/arch/mips/lemote/lm2e/Makefile
---- linux-2.6.30/arch/mips/lemote/lm2e/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/Makefile	1970-01-01 01:00:00.000000000 +0100
-@@ -1,7 +0,0 @@
--#
--# Makefile for Lemote Fulong mini-PC board.
--#
--
--obj-y += setup.o prom.o reset.o irq.o pci.o bonito-irq.o dbg_io.o mem.o
--
--EXTRA_CFLAGS += -Werror
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/bonito-irq.c rt4ls/arch/mips/lemote/lm2e/bonito-irq.c
---- linux-2.6.30/arch/mips/lemote/lm2e/bonito-irq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/bonito-irq.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/bonito-irq.c linux-2.6.30/arch/mips/lemote/lm2e/bonito-irq.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/bonito-irq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/bonito-irq.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,74 +0,0 @@
 -/*
 - * Copyright 2001 MontaVista Software Inc.
@@ -11766,9 +11685,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/bonito-irq.c rt4ls/arch/mips/lemote
 -
 -	setup_irq(BONITO_IRQ_BASE + 10, &dma_timeout_irqaction);
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/dbg_io.c rt4ls/arch/mips/lemote/lm2e/dbg_io.c
---- linux-2.6.30/arch/mips/lemote/lm2e/dbg_io.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/dbg_io.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/dbg_io.c linux-2.6.30/arch/mips/lemote/lm2e/dbg_io.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/dbg_io.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/dbg_io.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,146 +0,0 @@
 -/*
 - * Copyright 2001 MontaVista Software Inc.
@@ -11916,9 +11835,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/dbg_io.c rt4ls/arch/mips/lemote/lm2
 -	UART16550_WRITE(OFS_SEND_BUFFER, byte);
 -	return 1;
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/irq.c rt4ls/arch/mips/lemote/lm2e/irq.c
---- linux-2.6.30/arch/mips/lemote/lm2e/irq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/irq.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/irq.c linux-2.6.30/arch/mips/lemote/lm2e/irq.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/irq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/irq.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,143 +0,0 @@
 -/*
 - * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -12063,9 +11982,20 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/irq.c rt4ls/arch/mips/lemote/lm2e/i
 -	setup_irq(MIPS_CPU_IRQ_BASE + 5, &cascade_irqaction);
 -
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/mem.c rt4ls/arch/mips/lemote/lm2e/mem.c
---- linux-2.6.30/arch/mips/lemote/lm2e/mem.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/mem.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/Makefile linux-2.6.30/arch/mips/lemote/lm2e/Makefile
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/Makefile	1970-01-01 01:00:00.000000000 +0100
+@@ -1,7 +0,0 @@
+-#
+-# Makefile for Lemote Fulong mini-PC board.
+-#
+-
+-obj-y += setup.o prom.o reset.o irq.o pci.o bonito-irq.o dbg_io.o mem.o
+-
+-EXTRA_CFLAGS += -Werror
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/mem.c linux-2.6.30/arch/mips/lemote/lm2e/mem.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/mem.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/mem.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,23 +0,0 @@
 -/*
 - * This program is free software; you can redistribute  it and/or modify it
@@ -12090,9 +12020,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/mem.c rt4ls/arch/mips/lemote/lm2e/m
 -	return addr >= __pa(high_memory) ||
 -		((addr >= 0x10000000) && (addr < 0x20000000));
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/pci.c rt4ls/arch/mips/lemote/lm2e/pci.c
---- linux-2.6.30/arch/mips/lemote/lm2e/pci.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/pci.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/pci.c linux-2.6.30/arch/mips/lemote/lm2e/pci.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/pci.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/pci.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,97 +0,0 @@
 -/*
 - * pci.c
@@ -12191,9 +12121,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/pci.c rt4ls/arch/mips/lemote/lm2e/p
 -}
 -
 -arch_initcall(pcibios_init);
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/prom.c rt4ls/arch/mips/lemote/lm2e/prom.c
---- linux-2.6.30/arch/mips/lemote/lm2e/prom.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/prom.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/prom.c linux-2.6.30/arch/mips/lemote/lm2e/prom.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/prom.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/prom.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,97 +0,0 @@
 -/*
 - * Based on Ocelot Linux port, which is
@@ -12292,9 +12222,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/prom.c rt4ls/arch/mips/lemote/lm2e/
 -{
 -	putDebugChar(c);
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/reset.c rt4ls/arch/mips/lemote/lm2e/reset.c
---- linux-2.6.30/arch/mips/lemote/lm2e/reset.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/reset.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/reset.c linux-2.6.30/arch/mips/lemote/lm2e/reset.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/reset.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/reset.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,41 +0,0 @@
 -/*
 - * This program is free software; you can redistribute  it and/or modify it
@@ -12337,9 +12267,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/reset.c rt4ls/arch/mips/lemote/lm2e
 -	_machine_halt = loongson2e_halt;
 -	pm_power_off = loongson2e_power_off;
 -}
-diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/setup.c rt4ls/arch/mips/lemote/lm2e/setup.c
---- linux-2.6.30/arch/mips/lemote/lm2e/setup.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lemote/lm2e/setup.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/lemote/lm2e/setup.c linux-2.6.30/arch/mips/lemote/lm2e/setup.c
+--- linux-2.6.30.orig/arch/mips/lemote/lm2e/setup.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/lemote/lm2e/setup.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,111 +0,0 @@
 -/*
 - * BRIEF MODULE DESCRIPTION
@@ -12452,236 +12382,9 @@ diff -Nur linux-2.6.30/arch/mips/lemote/lm2e/setup.c rt4ls/arch/mips/lemote/lm2e
 -#endif
 -
 -}
-diff -Nur linux-2.6.30/arch/mips/lib/delay.c rt4ls/arch/mips/lib/delay.c
---- linux-2.6.30/arch/mips/lib/delay.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/lib/delay.c	2009-06-12 16:27:08.762444064 +0200
-@@ -43,7 +43,7 @@
- {
- 	unsigned int lpj = current_cpu_data.udelay_val;
- 
--	__delay((us * 0x000010c7 * HZ * lpj) >> 32);
-+	__delay((us * 0x000010c7ull * HZ * lpj) >> 32);
- }
- EXPORT_SYMBOL(__udelay);
- 
-@@ -51,6 +51,6 @@
- {
- 	unsigned int lpj = current_cpu_data.udelay_val;
- 
--	__delay((us * 0x00000005 * HZ * lpj) >> 32);
-+	__delay((ns * 0x00000005ull * HZ * lpj) >> 32);
- }
- EXPORT_SYMBOL(__ndelay);
-diff -Nur linux-2.6.30/arch/mips/loongson/Kconfig rt4ls/arch/mips/loongson/Kconfig
---- linux-2.6.30/arch/mips/loongson/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/Kconfig	2009-06-12 16:27:08.770446201 +0200
-@@ -0,0 +1,135 @@
-+choice
-+	prompt "Machine Type"
-+	depends on MACH_LOONGSON
-+
-+config LEMOTE_FULOONG2E
-+	bool "Lemote Fuloong(2e) mini-PC"
-+	select ARCH_SPARSEMEM_ENABLE
-+	select CEVT_R4K
-+	select CSRC_R4K
-+	select SYS_HAS_CPU_LOONGSON2E
-+	select DMA_NONCOHERENT
-+	select BOOT_ELF32
-+	select BOARD_SCACHE
-+	select HW_HAS_PCI
-+	select I8259
-+	select ISA
-+	select IRQ_CPU
-+	select SYS_SUPPORTS_32BIT_KERNEL
-+	select SYS_SUPPORTS_64BIT_KERNEL
-+	select SYS_SUPPORTS_LITTLE_ENDIAN
-+	select SYS_SUPPORTS_HIGHMEM
-+	select SYS_HAS_EARLY_PRINTK
-+	select GENERIC_HARDIRQS_NO__DO_IRQ
-+	select GENERIC_ISA_DMA_SUPPORT_BROKEN
-+	select CPU_HAS_WB
-+	help
-+	  Lemote Fuloong(2e) mini-PC board based on the Chinese Loongson-2E CPU and
-+	  an FPGA northbridge
-+
-+	  Lemote Fuloong(2e) mini PC have a VIA686B south bridge.
-+
-+config LEMOTE_FULOONG2F
-+	bool "Lemote Fuloong(2f) mini-PC"
-+	select ARCH_SPARSEMEM_ENABLE
-+	select CEVT_R4K if !CS5536_MFGPT
-+	select CSRC_R4K if !CS5536_MFGPT
-+	select SYS_HAS_CPU_LOONGSON2F
-+	select DMA_NONCOHERENT
-+	select BOOT_ELF32
-+	select BOARD_SCACHE
-+	select HW_HAS_PCI
-+	select I8259
-+	select ISA
-+	select IRQ_CPU
-+	select SYS_SUPPORTS_32BIT_KERNEL
-+	select SYS_SUPPORTS_64BIT_KERNEL
-+	select SYS_SUPPORTS_LITTLE_ENDIAN
-+	select SYS_SUPPORTS_HIGHMEM
-+	select SYS_HAS_EARLY_PRINTK
-+	select GENERIC_HARDIRQS_NO__DO_IRQ
-+	select GENERIC_ISA_DMA_SUPPORT_BROKEN
-+	select CPU_HAS_WB
-+	select CS5536
-+	help
-+	  Lemote Fuloong(2f) mini-PC board based on the Chinese Loongson-2F
-+	  CPU, which has an internal DDR and PCIX controller. the PCIX
-+	  controller have the similiar programming interface of the FPGA north
-+	  bridge of LOONGSON2E.
-+
-+	  Lemote Fuloong(2f) mini PC have an AMD CS5536 south bridge.
-+
-+config LEMOTE_YEELOONG2F
-+	bool "Lemote Yeeloong(2f) mini Notebook"
-+	select ARCH_SPARSEMEM_ENABLE
-+	select CEVT_R4K if !CS5536_MFGPT
-+	select CSRC_R4K if !CS5536_MFGPT
-+	select SYS_HAS_CPU_LOONGSON2F
-+	select DMA_NONCOHERENT
-+	select BOOT_ELF32
-+	select BOARD_SCACHE
-+	select HW_HAS_PCI
-+	select I8259
-+	select ISA
-+	select IRQ_CPU
-+	select SYS_SUPPORTS_32BIT_KERNEL
-+	select SYS_SUPPORTS_64BIT_KERNEL
-+	select SYS_SUPPORTS_LITTLE_ENDIAN
-+	select SYS_SUPPORTS_HIGHMEM
-+	select SYS_HAS_EARLY_PRINTK
-+	select SYS_HAS_MACH_PROM_INIT_CMDLINE
-+	select GENERIC_HARDIRQS_NO__DO_IRQ
-+	select GENERIC_ISA_DMA_SUPPORT_BROKEN
-+	select CPU_HAS_WB
-+	select CS5536
-+	help
-+	  Lemote Laptop based on the Chinese Loongson-2F CPU, which has an
-+	  internal DDR and PCIX controller. the PCIX controller have the
-+	  similiar programming interface of the FPGA north bridge of
-+	  LOONGSON2E.
-+
-+	  Lemote Yeeloong(2f) laptop have an AMD CS5536 south bridge and an EC
-+	  controller.
-+
-+endchoice
-+
-+config CS5536
-+	bool
-+
-+config CS5536_FLASH
-+	bool
-+	depends on CS5536
-+
-+config CS5536_NOR_FLASH
-+	bool
-+	depends on CS5536_FLASH
-+
-+config CS5536_OTG
-+	bool
-+	depends on CS5536
-+
-+config CS5536_UDC
-+	bool
-+	depends on CS5536
-+
-+config SYS_HAS_MACH_PROM_INIT_CMDLINE
-+	bool
-+
-+config CS5536_MFGPT
-+	bool "Using cs5536's MFGPT as system clock"
-+	depends on CS5536
-+	help
-+	  This is needed if cpufreq and oprofile is enabled in Loongson2(F)
-+	  machines
-+
-+config UCA_SIZE
-+	hex "Uncache Accelerated Region size"
-+	depends on CPU_LOONGSON2F
-+	default 0x400000 if LEMOTE_YEELOONG2F
-+	default 0x2000000 if LEMOTE_FULOONG2F
-+	help
-+	  Uncached Acceleration(UCA) can greatly improve video performance.
-+	  Normally the Video memory can be accessed in Uncached Accelerated mode,
-+	  other peripheral spaces not.
-+
-+	  Specify a zeroed size to disable this feature.
-diff -Nur linux-2.6.30/arch/mips/loongson/Makefile rt4ls/arch/mips/loongson/Makefile
---- linux-2.6.30/arch/mips/loongson/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/Makefile	2009-06-12 16:27:08.770446201 +0200
-@@ -0,0 +1,23 @@
-+#
-+# Common code for all Loongson based systems
-+#
-+
-+obj-$(CONFIG_MACH_LOONGSON) += common/
-+
-+#
-+# Lemote Fuloong mini-PC (Loongson 2E-based)
-+#
-+
-+obj-$(CONFIG_LEMOTE_FULOONG2E)	+= fuloong-2e/
-+
-+#
-+# Lemote Fuloong mini-PC (Loongson 2F-based)
-+#
-+
-+obj-$(CONFIG_LEMOTE_FULOONG2F)	+= fuloong-2f/
-+
-+#
-+# Lemote Yeeloong mini-PC (Loongson 2F-based)
-+#
-+
-+obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= yeeloong-2f/
-diff -Nur linux-2.6.30/arch/mips/loongson/common/Makefile rt4ls/arch/mips/loongson/common/Makefile
---- linux-2.6.30/arch/mips/loongson/common/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/Makefile	2009-06-12 16:27:08.774444476 +0200
-@@ -0,0 +1,37 @@
-+#
-+# Makefile for loongson based machines.
-+#
-+
-+obj-y += setup.o init.o cmdline.o env.o time.o reset.o irq.o \
-+	pci.o bonito-irq.o mem.o machtype.o
-+
-+#
-+# Early printk support
-+#
-+obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
-+
-+#
-+# Enable RTC Class support
-+#
-+# please enable CONFIG_RTC_DRV_CMOS
-+#
-+obj-$(CONFIG_RTC_DRV_CMOS) += rtc.o
-+
-+#
-+# Enable CS5536 Virtual Support Module(VSM) for virtulize the PCI configure
-+# space
-+#
-+obj-$(CONFIG_CS5536) += cs5536/
-+
-+#
-+# Enable fuloong(2f) and yeeloong(2f) cpu frequency scaling support
-+# This is based on CS5536 mfgpt timer
-+#
-+obj-$(CONFIG_LOONGSON2F_CPU_FREQ) += clock.o
-+
-+#
-+# Enable serial port
-+#
-+obj-$(CONFIG_SERIAL_8250) += serial.o
-+
-+EXTRA_CFLAGS += -Werror
-diff -Nur linux-2.6.30/arch/mips/loongson/common/bonito-irq.c rt4ls/arch/mips/loongson/common/bonito-irq.c
---- linux-2.6.30/arch/mips/loongson/common/bonito-irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/bonito-irq.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/bonito-irq.c linux-2.6.30/arch/mips/loongson/common/bonito-irq.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/bonito-irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/bonito-irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,78 @@
 +/*
 + * Copyright 2001 MontaVista Software Inc.
@@ -12761,9 +12464,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/bonito-irq.c rt4ls/arch/mips/lo
 +	setup_irq(LOONGSON_DMATIMEOUT_IRQ, &dma_timeout_irqaction);
 +#endif
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/clock.c rt4ls/arch/mips/loongson/common/clock.c
---- linux-2.6.30/arch/mips/loongson/common/clock.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/clock.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/clock.c linux-2.6.30/arch/mips/loongson/common/clock.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/clock.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/clock.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,166 @@
 +/*
 + * arch/mips/loongson/common/clock.c
@@ -12931,9 +12634,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/clock.c rt4ls/arch/mips/loongso
 +	spin_unlock_irqrestore(&loongson2f_wait_lock, flags);
 +}
 +EXPORT_SYMBOL_GPL(loongson2f_cpu_wait);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cmdline.c rt4ls/arch/mips/loongson/common/cmdline.c
---- linux-2.6.30/arch/mips/loongson/common/cmdline.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cmdline.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cmdline.c linux-2.6.30/arch/mips/loongson/common/cmdline.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cmdline.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cmdline.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,57 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -12992,38 +12695,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cmdline.c rt4ls/arch/mips/loong
 +	if ((strstr(arcs_cmdline, "root=")) == NULL)
 +		strcat(arcs_cmdline, " root=/dev/hda1");
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/Makefile rt4ls/arch/mips/loongson/common/cs5536/Makefile
---- linux-2.6.30/arch/mips/loongson/common/cs5536/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/Makefile	2009-06-12 16:27:08.774444476 +0200
-@@ -0,0 +1,25 @@
-+#
-+# Makefile for CS5536 support.
-+#
-+
-+#
-+# core modules
-+#
-+obj-$(CONFIG_CS5536) += cs5536_pci.o cs5536_ide.o cs5536_acc.o cs5536_ohci.o \
-+			cs5536_isa.o cs5536_ehci.o
-+#
-+# selective modules
-+#
-+# add a CS5536_[MODULE] to your board in arch/mips/loongson/Kconfig
-+#
-+obj-$(CONFIG_CS5536_FLASH) += cs5536_flash.o
-+obj-$(CONFIG_CS5536_NOR_FLASH) += cs5536_flash.o
-+obj-$(CONFIG_CS5536_OTG) += cs5536_otg.o
-+obj-$(CONFIG_CS5536_UDC) += cs5536_udc.o
-+
-+#
-+# Enable cs5536 mfgpt Timer
-+#
-+obj-$(CONFIG_CS5536_MFGPT) += cs5536_mfgpt.o
-+
-+EXTRA_CFLAGS += -Werror
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_acc.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_acc.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_acc.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_acc.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_acc.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_acc.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,156 @@
 +/*
 + * the ACC Virtual Support Module of AMD CS5536
@@ -13181,9 +12855,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_acc.c rt4ls/arch/
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ehci.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_ehci.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ehci.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ehci.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,166 @@
 +/*
 + * the EHCI Virtual Support Module of AMD CS5536
@@ -13351,9 +13025,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ehci.c rt4ls/arch
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_flash.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_flash.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_flash.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_flash.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_flash.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_flash.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_flash.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_flash.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,452 @@
 +/*
 + * the FLASH Virtual Support Module of AMD CS5536
@@ -13807,9 +13481,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_flash.c rt4ls/arc
 +	return conf_data;
 +}
 +#endif				/* CONFIG_CS5536_NOR_FLASH */
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ide.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_ide.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ide.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_ide.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ide.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ide.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,194 @@
 +/*
 + * the IDE Virtual Support Module of AMD CS5536
@@ -14005,9 +13679,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ide.c rt4ls/arch/
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_isa.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_isa.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_isa.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_isa.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_isa.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_isa.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_isa.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_isa.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,376 @@
 +/*
 + * the ISA Virtual Support Module of AMD CS5536
@@ -14385,9 +14059,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_isa.c rt4ls/arch/
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	2009-06-12 16:27:08.774444476 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,257 @@
 +/*
 + * CS5536 General timer functions
@@ -14646,9 +14320,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c rt4ls/arc
 +}
 +
 +arch_initcall(init_mfgpt_clocksource);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ohci.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_ohci.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ohci.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ohci.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,168 @@
 +/*
 + * the OHCI Virtual Support Module of AMD CS5536
@@ -14818,9 +14492,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_ohci.c rt4ls/arch
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_otg.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_otg.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_otg.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_otg.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_otg.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_otg.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_otg.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_otg.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,138 @@
 +/*
 + * the OTG Virtual Support Module of AMD CS5536
@@ -14960,9 +14634,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_otg.c rt4ls/arch/
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_pci.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_pci.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_pci.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_pci.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_pci.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_pci.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,126 @@
 +/*
 + * read/write operation to the PCI config space of CS5536
@@ -15090,9 +14764,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_pci.c rt4ls/arch/
 +	}
 +	return data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_udc.c rt4ls/arch/mips/loongson/common/cs5536/cs5536_udc.c
---- linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_udc.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/cs5536/cs5536_udc.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_udc.c linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_udc.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/cs5536_udc.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_udc.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,143 @@
 +/*
 + * the UDC Virtual Support Module of AMD CS5536
@@ -15237,9 +14911,38 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/cs5536/cs5536_udc.c rt4ls/arch/
 +
 +	return conf_data;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/early_printk.c rt4ls/arch/mips/loongson/common/early_printk.c
---- linux-2.6.30/arch/mips/loongson/common/early_printk.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/early_printk.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/cs5536/Makefile linux-2.6.30/arch/mips/loongson/common/cs5536/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/common/cs5536/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/cs5536/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,25 @@
++#
++# Makefile for CS5536 support.
++#
++
++#
++# core modules
++#
++obj-$(CONFIG_CS5536) += cs5536_pci.o cs5536_ide.o cs5536_acc.o cs5536_ohci.o \
++			cs5536_isa.o cs5536_ehci.o
++#
++# selective modules
++#
++# add a CS5536_[MODULE] to your board in arch/mips/loongson/Kconfig
++#
++obj-$(CONFIG_CS5536_FLASH) += cs5536_flash.o
++obj-$(CONFIG_CS5536_NOR_FLASH) += cs5536_flash.o
++obj-$(CONFIG_CS5536_OTG) += cs5536_otg.o
++obj-$(CONFIG_CS5536_UDC) += cs5536_udc.o
++
++#
++# Enable cs5536 mfgpt Timer
++#
++obj-$(CONFIG_CS5536_MFGPT) += cs5536_mfgpt.o
++
++EXTRA_CFLAGS += -Werror
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/early_printk.c linux-2.6.30/arch/mips/loongson/common/early_printk.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/early_printk.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/early_printk.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,28 @@
 +/*  early printk support
 + *
@@ -15269,9 +14972,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/early_printk.c rt4ls/arch/mips/
 +
 +	writeb(c, (u8 *) (uart_base + UART_TX));
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/env.c rt4ls/arch/mips/loongson/common/env.c
---- linux-2.6.30/arch/mips/loongson/common/env.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/env.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/env.c linux-2.6.30/arch/mips/loongson/common/env.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/env.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/env.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -15332,9 +15035,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/env.c rt4ls/arch/mips/loongson/
 +	pr_info("busclock=%ld, cpuclock=%ld, memsize=%ld, highmemsize=%ld\n",
 +		bus_clock, cpu_clock_freq, memsize, highmemsize);
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/init.c rt4ls/arch/mips/loongson/common/init.c
---- linux-2.6.30/arch/mips/loongson/common/init.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/init.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/init.c linux-2.6.30/arch/mips/loongson/common/init.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/init.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/init.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,54 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -15390,9 +15093,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/init.c rt4ls/arch/mips/loongson
 +void __init prom_free_prom_memory(void)
 +{
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/irq.c rt4ls/arch/mips/loongson/common/irq.c
---- linux-2.6.30/arch/mips/loongson/common/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/irq.c	2009-06-12 16:27:08.778446663 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/irq.c linux-2.6.30/arch/mips/loongson/common/irq.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,132 @@
 +/*
 + * Copyright 2001 MontaVista Software Inc.
@@ -15526,9 +15229,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/irq.c rt4ls/arch/mips/loongson/
 +	/* setup source bridge irq (i8259) */
 +	setup_irq(LOONGSON_SOUTH_BRIDGE_IRQ, &cascade_irqaction);
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/machtype.c rt4ls/arch/mips/loongson/common/machtype.c
---- linux-2.6.30/arch/mips/loongson/common/machtype.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/machtype.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/machtype.c linux-2.6.30/arch/mips/loongson/common/machtype.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/machtype.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/machtype.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,50 @@
 +/*
 + * Copyright (C) 2009 Lemote Inc. & Insititute of Computing Technology
@@ -15580,9 +15283,50 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/machtype.c rt4ls/arch/mips/loon
 +	return 0;
 +}
 +__setup("machtype=", machtype_setup);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/mem.c rt4ls/arch/mips/loongson/common/mem.c
---- linux-2.6.30/arch/mips/loongson/common/mem.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/mem.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/Makefile linux-2.6.30/arch/mips/loongson/common/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/common/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,37 @@
++#
++# Makefile for loongson based machines.
++#
++
++obj-y += setup.o init.o cmdline.o env.o time.o reset.o irq.o \
++	pci.o bonito-irq.o mem.o machtype.o
++
++#
++# Early printk support
++#
++obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
++
++#
++# Enable RTC Class support
++#
++# please enable CONFIG_RTC_DRV_CMOS
++#
++obj-$(CONFIG_RTC_DRV_CMOS) += rtc.o
++
++#
++# Enable CS5536 Virtual Support Module(VSM) for virtulize the PCI configure
++# space
++#
++obj-$(CONFIG_CS5536) += cs5536/
++
++#
++# Enable fuloong(2f) and yeeloong(2f) cpu frequency scaling support
++# This is based on CS5536 mfgpt timer
++#
++obj-$(CONFIG_LOONGSON2F_CPU_FREQ) += clock.o
++
++#
++# Enable serial port
++#
++obj-$(CONFIG_SERIAL_8250) += serial.o
++
++EXTRA_CFLAGS += -Werror
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/mem.c linux-2.6.30/arch/mips/loongson/common/mem.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/mem.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/mem.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,116 @@
 +/*
 + * This program is free software; you can redistribute  it and/or modify it
@@ -15700,9 +15444,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/mem.c rt4ls/arch/mips/loongson/
 +
 +late_initcall(find_vga_mem_init);
 +#endif /* !CONFIG_CPU_LOONGSON2F */
-diff -Nur linux-2.6.30/arch/mips/loongson/common/pci.c rt4ls/arch/mips/loongson/common/pci.c
---- linux-2.6.30/arch/mips/loongson/common/pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/pci.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/pci.c linux-2.6.30/arch/mips/loongson/common/pci.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/pci.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,109 @@
 +/*
 + * Copyright (C) 2007 Lemote, Inc. & Institute of Computing Technology
@@ -15813,9 +15557,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/pci.c rt4ls/arch/mips/loongson/
 +}
 +
 +arch_initcall(pcibios_init);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/reset.c rt4ls/arch/mips/loongson/common/reset.c
---- linux-2.6.30/arch/mips/loongson/common/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/reset.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/reset.c linux-2.6.30/arch/mips/loongson/common/reset.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/reset.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/reset.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,38 @@
 +/*
 + * This program is free software; you can redistribute  it and/or modify it
@@ -15855,9 +15599,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/reset.c rt4ls/arch/mips/loongso
 +	_machine_halt = loongson_halt;
 +	pm_power_off = loongson_halt;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/rtc.c rt4ls/arch/mips/loongson/common/rtc.c
---- linux-2.6.30/arch/mips/loongson/common/rtc.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/rtc.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/rtc.c linux-2.6.30/arch/mips/loongson/common/rtc.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/rtc.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/rtc.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,54 @@
 +/*
 + *  Registration of Cobalt RTC platform device.
@@ -15913,9 +15657,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/rtc.c rt4ls/arch/mips/loongson/
 +}
 +
 +device_initcall(rtc_cmos_init);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/serial.c rt4ls/arch/mips/loongson/common/serial.c
---- linux-2.6.30/arch/mips/loongson/common/serial.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/serial.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/serial.c linux-2.6.30/arch/mips/loongson/common/serial.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/serial.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/serial.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,66 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -15983,9 +15727,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/serial.c rt4ls/arch/mips/loongs
 +}
 +
 +device_initcall(serial_init);
-diff -Nur linux-2.6.30/arch/mips/loongson/common/setup.c rt4ls/arch/mips/loongson/common/setup.c
---- linux-2.6.30/arch/mips/loongson/common/setup.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/setup.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/setup.c linux-2.6.30/arch/mips/loongson/common/setup.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/setup.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/setup.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,74 @@
 +/*
 + * board dependent setup routines
@@ -16061,9 +15805,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/setup.c rt4ls/arch/mips/loongso
 +
 +	loongson_screeninfo_setup();
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/common/time.c rt4ls/arch/mips/loongson/common/time.c
---- linux-2.6.30/arch/mips/loongson/common/time.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/common/time.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/common/time.c linux-2.6.30/arch/mips/loongson/common/time.c
+--- linux-2.6.30.orig/arch/mips/loongson/common/time.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/common/time.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,34 @@
 +/*
 + * board dependent boot routines
@@ -16099,20 +15843,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/common/time.c rt4ls/arch/mips/loongson
 +	setup_mfgpt_timer();
 +#endif
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2e/Makefile rt4ls/arch/mips/loongson/fuloong-2e/Makefile
---- linux-2.6.30/arch/mips/loongson/fuloong-2e/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2e/Makefile	2009-06-12 16:27:08.782445496 +0200
-@@ -0,0 +1,7 @@
-+#
-+# Makefile for fuloong-2e
-+#
-+
-+obj-y += irq.o reset.o
-+
-+EXTRA_CFLAGS += -Werror
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2e/irq.c rt4ls/arch/mips/loongson/fuloong-2e/irq.c
---- linux-2.6.30/arch/mips/loongson/fuloong-2e/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2e/irq.c	2009-06-12 16:27:08.782445496 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/irq.c linux-2.6.30/arch/mips/loongson/fuloong-2e/irq.c
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2e/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,58 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -16172,9 +15905,20 @@ diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2e/irq.c rt4ls/arch/mips/loong
 +	LOONGSON_INTEDGE = LOONGSON_ICU_SYSTEMERR | LOONGSON_ICU_MASTERERR |
 +		LOONGSON_ICU_RETRYERR | LOONGSON_ICU_MBOXES;
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2e/reset.c rt4ls/arch/mips/loongson/fuloong-2e/reset.c
---- linux-2.6.30/arch/mips/loongson/fuloong-2e/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2e/reset.c	2009-06-12 16:27:08.786446844 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/Makefile linux-2.6.30/arch/mips/loongson/fuloong-2e/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2e/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,7 @@
++#
++# Makefile for fuloong-2e
++#
++
++obj-y += irq.o reset.o
++
++EXTRA_CFLAGS += -Werror
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/reset.c linux-2.6.30/arch/mips/loongson/fuloong-2e/reset.c
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2e/reset.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2e/reset.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,26 @@
 +/* Board-specific reboot/shutdown routines
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -16202,18 +15946,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2e/reset.c rt4ls/arch/mips/loo
 +void mach_prepare_shutdown(void)
 +{
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2f/Makefile rt4ls/arch/mips/loongson/fuloong-2f/Makefile
---- linux-2.6.30/arch/mips/loongson/fuloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2f/Makefile	2009-06-12 16:27:08.786446844 +0200
-@@ -0,0 +1,5 @@
-+#
-+# Makefile for fuloong-2f
-+#
-+
-+obj-y += irq.o reset.o
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2f/irq.c rt4ls/arch/mips/loongson/fuloong-2f/irq.c
---- linux-2.6.30/arch/mips/loongson/fuloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2f/irq.c	2009-06-12 16:27:08.786446844 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/irq.c linux-2.6.30/arch/mips/loongson/fuloong-2f/irq.c
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2f/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,53 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -16268,9 +16003,18 @@ diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2f/irq.c rt4ls/arch/mips/loong
 +	LOONGSON_INTPOL = LOONGSON_INT_BIT_INT0 | LOONGSON_INT_BIT_INT1;
 +	LOONGSON_INTEDGE &= ~(LOONGSON_INT_BIT_INT0 | LOONGSON_INT_BIT_INT1);
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2f/reset.c rt4ls/arch/mips/loongson/fuloong-2f/reset.c
---- linux-2.6.30/arch/mips/loongson/fuloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/fuloong-2f/reset.c	2009-06-12 16:27:08.786446844 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/Makefile linux-2.6.30/arch/mips/loongson/fuloong-2f/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2f/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,5 @@
++#
++# Makefile for fuloong-2f
++#
++
++obj-y += irq.o reset.o
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/reset.c linux-2.6.30/arch/mips/loongson/fuloong-2f/reset.c
+--- linux-2.6.30.orig/arch/mips/loongson/fuloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/fuloong-2f/reset.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,65 @@
 +/* Board-specific reboot/shutdown routines
 + *
@@ -16337,19 +16081,176 @@ diff -Nur linux-2.6.30/arch/mips/loongson/fuloong-2f/reset.c rt4ls/arch/mips/loo
 +	writel(val, (u32 *) (gpio_base + GPIOL_OUT_VAL));
 +	mmiowb();
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/Makefile rt4ls/arch/mips/loongson/yeeloong-2f/Makefile
---- linux-2.6.30/arch/mips/loongson/yeeloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/yeeloong-2f/Makefile	2009-06-12 16:27:08.786446844 +0200
-@@ -0,0 +1,5 @@
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/Kconfig linux-2.6.30/arch/mips/loongson/Kconfig
+--- linux-2.6.30.orig/arch/mips/loongson/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/Kconfig	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,135 @@
++choice
++	prompt "Machine Type"
++	depends on MACH_LOONGSON
++
++config LEMOTE_FULOONG2E
++	bool "Lemote Fuloong(2e) mini-PC"
++	select ARCH_SPARSEMEM_ENABLE
++	select CEVT_R4K
++	select CSRC_R4K
++	select SYS_HAS_CPU_LOONGSON2E
++	select DMA_NONCOHERENT
++	select BOOT_ELF32
++	select BOARD_SCACHE
++	select HW_HAS_PCI
++	select I8259
++	select ISA
++	select IRQ_CPU
++	select SYS_SUPPORTS_32BIT_KERNEL
++	select SYS_SUPPORTS_64BIT_KERNEL
++	select SYS_SUPPORTS_LITTLE_ENDIAN
++	select SYS_SUPPORTS_HIGHMEM
++	select SYS_HAS_EARLY_PRINTK
++	select GENERIC_HARDIRQS_NO__DO_IRQ
++	select GENERIC_ISA_DMA_SUPPORT_BROKEN
++	select CPU_HAS_WB
++	help
++	  Lemote Fuloong(2e) mini-PC board based on the Chinese Loongson-2E CPU and
++	  an FPGA northbridge
++
++	  Lemote Fuloong(2e) mini PC have a VIA686B south bridge.
++
++config LEMOTE_FULOONG2F
++	bool "Lemote Fuloong(2f) mini-PC"
++	select ARCH_SPARSEMEM_ENABLE
++	select CEVT_R4K if !CS5536_MFGPT
++	select CSRC_R4K if !CS5536_MFGPT
++	select SYS_HAS_CPU_LOONGSON2F
++	select DMA_NONCOHERENT
++	select BOOT_ELF32
++	select BOARD_SCACHE
++	select HW_HAS_PCI
++	select I8259
++	select ISA
++	select IRQ_CPU
++	select SYS_SUPPORTS_32BIT_KERNEL
++	select SYS_SUPPORTS_64BIT_KERNEL
++	select SYS_SUPPORTS_LITTLE_ENDIAN
++	select SYS_SUPPORTS_HIGHMEM
++	select SYS_HAS_EARLY_PRINTK
++	select GENERIC_HARDIRQS_NO__DO_IRQ
++	select GENERIC_ISA_DMA_SUPPORT_BROKEN
++	select CPU_HAS_WB
++	select CS5536
++	help
++	  Lemote Fuloong(2f) mini-PC board based on the Chinese Loongson-2F
++	  CPU, which has an internal DDR and PCIX controller. the PCIX
++	  controller have the similiar programming interface of the FPGA north
++	  bridge of LOONGSON2E.
++
++	  Lemote Fuloong(2f) mini PC have an AMD CS5536 south bridge.
++
++config LEMOTE_YEELOONG2F
++	bool "Lemote Yeeloong(2f) mini Notebook"
++	select ARCH_SPARSEMEM_ENABLE
++	select CEVT_R4K if !CS5536_MFGPT
++	select CSRC_R4K if !CS5536_MFGPT
++	select SYS_HAS_CPU_LOONGSON2F
++	select DMA_NONCOHERENT
++	select BOOT_ELF32
++	select BOARD_SCACHE
++	select HW_HAS_PCI
++	select I8259
++	select ISA
++	select IRQ_CPU
++	select SYS_SUPPORTS_32BIT_KERNEL
++	select SYS_SUPPORTS_64BIT_KERNEL
++	select SYS_SUPPORTS_LITTLE_ENDIAN
++	select SYS_SUPPORTS_HIGHMEM
++	select SYS_HAS_EARLY_PRINTK
++	select SYS_HAS_MACH_PROM_INIT_CMDLINE
++	select GENERIC_HARDIRQS_NO__DO_IRQ
++	select GENERIC_ISA_DMA_SUPPORT_BROKEN
++	select CPU_HAS_WB
++	select CS5536
++	help
++	  Lemote Laptop based on the Chinese Loongson-2F CPU, which has an
++	  internal DDR and PCIX controller. the PCIX controller have the
++	  similiar programming interface of the FPGA north bridge of
++	  LOONGSON2E.
++
++	  Lemote Yeeloong(2f) laptop have an AMD CS5536 south bridge and an EC
++	  controller.
++
++endchoice
++
++config CS5536
++	bool
++
++config CS5536_FLASH
++	bool
++	depends on CS5536
++
++config CS5536_NOR_FLASH
++	bool
++	depends on CS5536_FLASH
++
++config CS5536_OTG
++	bool
++	depends on CS5536
++
++config CS5536_UDC
++	bool
++	depends on CS5536
++
++config SYS_HAS_MACH_PROM_INIT_CMDLINE
++	bool
++
++config CS5536_MFGPT
++	bool "Using cs5536's MFGPT as system clock"
++	depends on CS5536
++	help
++	  This is needed if cpufreq and oprofile is enabled in Loongson2(F)
++	  machines
++
++config UCA_SIZE
++	hex "Uncache Accelerated Region size"
++	depends on CPU_LOONGSON2F
++	default 0x400000 if LEMOTE_YEELOONG2F
++	default 0x2000000 if LEMOTE_FULOONG2F
++	help
++	  Uncached Acceleration(UCA) can greatly improve video performance.
++	  Normally the Video memory can be accessed in Uncached Accelerated mode,
++	  other peripheral spaces not.
++
++	  Specify a zeroed size to disable this feature.
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/Makefile linux-2.6.30/arch/mips/loongson/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,23 @@
 +#
-+# Makefile for fuloong-2f
++# Common code for all Loongson based systems
 +#
 +
-+obj-y += init.o irq.o reset.o
-diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c rt4ls/arch/mips/loongson/yeeloong-2f/init.c
---- linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/yeeloong-2f/init.c	2009-06-12 16:27:08.786446844 +0200
-@@ -0,0 +1,81 @@
++obj-$(CONFIG_MACH_LOONGSON) += common/
++
++#
++# Lemote Fuloong mini-PC (Loongson 2E-based)
++#
++
++obj-$(CONFIG_LEMOTE_FULOONG2E)	+= fuloong-2e/
++
++#
++# Lemote Fuloong mini-PC (Loongson 2F-based)
++#
++
++obj-$(CONFIG_LEMOTE_FULOONG2F)	+= fuloong-2f/
++
++#
++# Lemote Yeeloong mini-PC (Loongson 2F-based)
++#
++
++obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= yeeloong-2f/
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/init.c linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c
+--- linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/init.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c	2009-06-14 20:26:27.000000000 +0200
+@@ -0,0 +1,80 @@
 +/*
 + * board specific init routines
 + *
@@ -16417,8 +16318,7 @@ diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c rt4ls/arch/mips/loo
 +		strcat(arcs_cmdline, ec_version);
 +		strcat(arcs_cmdline, " ");
 +		strcat(arcs_cmdline, default_root);
-+		strcat(arcs_cmdline, " console=tty2");
-+		strcat(arcs_cmdline, " quiet");
++		strcat(arcs_cmdline, " console=tty");
 +	}
 +
 +	/*
@@ -16431,9 +16331,9 @@ diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/init.c rt4ls/arch/mips/loo
 +				&& (strstr(arcs_cmdline, "7inch") != NULL))
 +		strcat(arcs_cmdline, " vga=800x480x16");
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/irq.c rt4ls/arch/mips/loongson/yeeloong-2f/irq.c
---- linux-2.6.30/arch/mips/loongson/yeeloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/yeeloong-2f/irq.c	2009-06-12 16:27:08.786446844 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/irq.c linux-2.6.30/arch/mips/loongson/yeeloong-2f/irq.c
+--- linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/yeeloong-2f/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,53 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -16488,9 +16388,18 @@ diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/irq.c rt4ls/arch/mips/loon
 +	LOONGSON_INTPOL = LOONGSON_INT_BIT_INT0 | LOONGSON_INT_BIT_INT1;
 +	LOONGSON_INTEDGE &= ~(LOONGSON_INT_BIT_INT0 | LOONGSON_INT_BIT_INT1);
 +}
-diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/reset.c rt4ls/arch/mips/loongson/yeeloong-2f/reset.c
---- linux-2.6.30/arch/mips/loongson/yeeloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/loongson/yeeloong-2f/reset.c	2009-06-12 16:27:08.786446844 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/Makefile linux-2.6.30/arch/mips/loongson/yeeloong-2f/Makefile
+--- linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/yeeloong-2f/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1,5 @@
++#
++# Makefile for fuloong-2f
++#
++
++obj-y += init.o irq.o reset.o
+diff -Nur linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/reset.c linux-2.6.30/arch/mips/loongson/yeeloong-2f/reset.c
+--- linux-2.6.30.orig/arch/mips/loongson/yeeloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/loongson/yeeloong-2f/reset.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,91 @@
 +/* Board-specific reboot/shutdown routines
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -16583,17 +16492,54 @@ diff -Nur linux-2.6.30/arch/mips/loongson/yeeloong-2f/reset.c rt4ls/arch/mips/lo
 +	} else
 +		printk(KERN_INFO "you can shutdown the power safely now!\n");
 +}
-diff -Nur linux-2.6.30/arch/mips/oprofile/Makefile rt4ls/arch/mips/oprofile/Makefile
---- linux-2.6.30/arch/mips/oprofile/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/oprofile/Makefile	2009-06-12 16:27:08.846439406 +0200
-@@ -15,3 +15,4 @@
- oprofile-$(CONFIG_CPU_R10000)		+= op_model_mipsxx.o
- oprofile-$(CONFIG_CPU_SB1)		+= op_model_mipsxx.o
- oprofile-$(CONFIG_CPU_RM9000)		+= op_model_rm9000.o
-+oprofile-$(CONFIG_CPU_LOONGSON2)  	+= op_model_loongson2.o
-diff -Nur linux-2.6.30/arch/mips/oprofile/common.c rt4ls/arch/mips/oprofile/common.c
---- linux-2.6.30/arch/mips/oprofile/common.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/oprofile/common.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/Makefile linux-2.6.30/arch/mips/Makefile
+--- linux-2.6.30.orig/arch/mips/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -120,7 +120,14 @@
+ cflags-$(CONFIG_CPU_VR41XX)	+= -march=r4100 -Wa,--trap
+ cflags-$(CONFIG_CPU_R4X00)	+= -march=r4600 -Wa,--trap
+ cflags-$(CONFIG_CPU_TX49XX)	+= -march=r4600 -Wa,--trap
+-cflags-$(CONFIG_CPU_LOONGSON2)	+= -march=r4600 -Wa,--trap
++
++# only gcc >= 4.4 have the loongson-specific support
++cflags-$(CONFIG_CPU_LOONGSON2)	+= -Wa,--trap
++cflags-$(CONFIG_CPU_LOONGSON2E) += \
++	$(call cc-option,-march=loongson2e,-march=r4600) $(call cc-option,-mtune=loongson2e)
++cflags-$(CONFIG_CPU_LOONGSON2F) += \
++	$(call cc-option,-march=loongson2f,-march=r4600) $(call cc-optoin,-mtune=loongson2f)
++
+ cflags-$(CONFIG_CPU_MIPS32_R1)	+= $(call cc-option,-march=mips32,-mips32 -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS32) \
+ 			-Wa,-mips32 -Wa,--trap
+ cflags-$(CONFIG_CPU_MIPS32_R2)	+= $(call cc-option,-march=mips32r2,-mips32r2 -U_MIPS_ISA -D_MIPS_ISA=_MIPS_ISA_MIPS32) \
+@@ -307,9 +314,12 @@
+ #
+ # lemote fulong mini-PC board
+ #
+-core-$(CONFIG_LEMOTE_FULONG) +=arch/mips/lemote/lm2e/
+-load-$(CONFIG_LEMOTE_FULONG) +=0xffffffff80100000
+-cflags-$(CONFIG_LEMOTE_FULONG) += -I$(srctree)/arch/mips/include/asm/mach-lemote
++core-$(CONFIG_MACH_LOONGSON) +=arch/mips/loongson/
++cflags-$(CONFIG_MACH_LOONGSON) += -I$(srctree)/arch/mips/include/asm/mach-loongson \
++					-mno-branch-likely
++load-$(CONFIG_LEMOTE_FULOONG2E) +=0xffffffff80100000
++load-$(CONFIG_LEMOTE_FULOONG2F) +=0xffffffff80200000
++load-$(CONFIG_LEMOTE_YEELOONG2F) +=0xffffffff80200000
+ 
+ #
+ # MIPS Malta board
+@@ -675,6 +685,9 @@
+ 
+ drivers-$(CONFIG_OPROFILE)	+= arch/mips/oprofile/
+ 
++# suspend and hibernation support
++drivers-$(CONFIG_PM)	+= arch/mips/power/
++
+ ifdef CONFIG_LASAT
+ rom.bin rom.sw: vmlinux
+ 	$(Q)$(MAKE) $(build)=arch/mips/lasat/image $@
+diff -Nur linux-2.6.30.orig/arch/mips/oprofile/common.c linux-2.6.30/arch/mips/oprofile/common.c
+--- linux-2.6.30.orig/arch/mips/oprofile/common.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/oprofile/common.c	2009-06-14 20:25:19.000000000 +0200
 @@ -16,6 +16,7 @@
  
  extern struct op_mips_model op_model_mipsxx_ops __attribute__((weak));
@@ -16613,9 +16559,17 @@ diff -Nur linux-2.6.30/arch/mips/oprofile/common.c rt4ls/arch/mips/oprofile/comm
  	};
  
  	if (!lmodel)
-diff -Nur linux-2.6.30/arch/mips/oprofile/op_model_loongson2.c rt4ls/arch/mips/oprofile/op_model_loongson2.c
---- linux-2.6.30/arch/mips/oprofile/op_model_loongson2.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/oprofile/op_model_loongson2.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/oprofile/Makefile linux-2.6.30/arch/mips/oprofile/Makefile
+--- linux-2.6.30.orig/arch/mips/oprofile/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/oprofile/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -15,3 +15,4 @@
+ oprofile-$(CONFIG_CPU_R10000)		+= op_model_mipsxx.o
+ oprofile-$(CONFIG_CPU_SB1)		+= op_model_mipsxx.o
+ oprofile-$(CONFIG_CPU_RM9000)		+= op_model_rm9000.o
++oprofile-$(CONFIG_CPU_LOONGSON2)  	+= op_model_loongson2.o
+diff -Nur linux-2.6.30.orig/arch/mips/oprofile/op_model_loongson2.c linux-2.6.30/arch/mips/oprofile/op_model_loongson2.c
+--- linux-2.6.30.orig/arch/mips/oprofile/op_model_loongson2.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/oprofile/op_model_loongson2.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,186 @@
 +/*
 + * Loongson2 performance counter driver for oprofile
@@ -16803,23 +16757,9 @@ diff -Nur linux-2.6.30/arch/mips/oprofile/op_model_loongson2.c rt4ls/arch/mips/o
 +	.cpu_type = LOONGSON_CPU_TYPE,
 +	.num_counters = 2
 +};
-diff -Nur linux-2.6.30/arch/mips/pci/Makefile rt4ls/arch/mips/pci/Makefile
---- linux-2.6.30/arch/mips/pci/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/Makefile	2009-06-12 16:27:08.846439406 +0200
-@@ -26,7 +26,9 @@
- obj-$(CONFIG_SOC_AU1500)	+= fixup-au1000.o ops-au1000.o
- obj-$(CONFIG_SOC_AU1550)	+= fixup-au1000.o ops-au1000.o
- obj-$(CONFIG_SOC_PNX8550)	+= fixup-pnx8550.o ops-pnx8550.o
--obj-$(CONFIG_LEMOTE_FULONG)	+= fixup-lm2e.o ops-bonito64.o
-+obj-$(CONFIG_LEMOTE_FULOONG2E)	+= fixup-fuloong2e.o ops-loongson2.o
-+obj-$(CONFIG_LEMOTE_FULOONG2F)	+= fixup-lemote2f.o ops-loongson2.o
-+obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= fixup-lemote2f.o ops-loongson2.o
- obj-$(CONFIG_MIPS_MALTA)	+= fixup-malta.o
- obj-$(CONFIG_PMC_MSP7120_GW)	+= fixup-pmcmsp.o ops-pmcmsp.o
- obj-$(CONFIG_PMC_MSP7120_EVAL)	+= fixup-pmcmsp.o ops-pmcmsp.o
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-au1000.c rt4ls/arch/mips/pci/fixup-au1000.c
---- linux-2.6.30/arch/mips/pci/fixup-au1000.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-au1000.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-au1000.c linux-2.6.30/arch/mips/pci/fixup-au1000.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-au1000.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-au1000.c	2009-06-14 20:25:19.000000000 +0200
 @@ -31,7 +31,7 @@
  
  extern char irq_tab_alchemy[][5];
@@ -16829,9 +16769,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-au1000.c rt4ls/arch/mips/pci/fixup-au
  {
  	return irq_tab_alchemy[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-capcella.c rt4ls/arch/mips/pci/fixup-capcella.c
---- linux-2.6.30/arch/mips/pci/fixup-capcella.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-capcella.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-capcella.c linux-2.6.30/arch/mips/pci/fixup-capcella.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-capcella.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-capcella.c	2009-06-14 20:25:19.000000000 +0200
 @@ -38,7 +38,7 @@
   [14] = { -1, INTA, INTB, INTC, INTD }
  };
@@ -16841,9 +16781,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-capcella.c rt4ls/arch/mips/pci/fixup-
  {
  	return irq_tab_capcella[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-cobalt.c rt4ls/arch/mips/pci/fixup-cobalt.c
---- linux-2.6.30/arch/mips/pci/fixup-cobalt.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-cobalt.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-cobalt.c linux-2.6.30/arch/mips/pci/fixup-cobalt.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-cobalt.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-cobalt.c	2009-06-14 20:25:19.000000000 +0200
 @@ -175,7 +175,7 @@
    [COBALT_PCICONF_ETH1]    = ETH1_IRQ
  };
@@ -16853,9 +16793,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-cobalt.c rt4ls/arch/mips/pci/fixup-co
  {
  	if (cobalt_board_id <= COBALT_BRD_ID_QUBE1)
  		return irq_tab_qube1[slot];
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-emma2rh.c rt4ls/arch/mips/pci/fixup-emma2rh.c
---- linux-2.6.30/arch/mips/pci/fixup-emma2rh.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-emma2rh.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-emma2rh.c linux-2.6.30/arch/mips/pci/fixup-emma2rh.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-emma2rh.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-emma2rh.c	2009-06-14 20:25:19.000000000 +0200
 @@ -88,7 +88,7 @@
  DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_NEC, PCI_DEVICE_ID_NEC_EMMA2RH,
  			 emma2rh_pci_host_fixup);
@@ -16865,9 +16805,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-emma2rh.c rt4ls/arch/mips/pci/fixup-e
  {
  	return irq_map[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-excite.c rt4ls/arch/mips/pci/fixup-excite.c
---- linux-2.6.30/arch/mips/pci/fixup-excite.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-excite.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-excite.c linux-2.6.30/arch/mips/pci/fixup-excite.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-excite.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-excite.c	2009-06-14 20:25:19.000000000 +0200
 @@ -21,7 +21,7 @@
  #include <linux/pci.h>
  #include <excite.h>
@@ -16877,9 +16817,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-excite.c rt4ls/arch/mips/pci/fixup-ex
  {
  	if (pin == 0)
  		return -1;
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-fuloong2e.c rt4ls/arch/mips/pci/fixup-fuloong2e.c
---- linux-2.6.30/arch/mips/pci/fixup-fuloong2e.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/pci/fixup-fuloong2e.c	2009-06-12 16:27:08.846439406 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-fuloong2e.c linux-2.6.30/arch/mips/pci/fixup-fuloong2e.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-fuloong2e.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/pci/fixup-fuloong2e.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,243 @@
 +/*
 + * fixup-fuloong2e.c
@@ -17124,9 +17064,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-fuloong2e.c rt4ls/arch/mips/pci/fixup
 +			 fuloong2e_686b_func5_fixup);
 +DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_NEC, PCI_DEVICE_ID_NEC_USB,
 +			 fuloong2e_nec_fixup);
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-ip32.c rt4ls/arch/mips/pci/fixup-ip32.c
---- linux-2.6.30/arch/mips/pci/fixup-ip32.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-ip32.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-ip32.c linux-2.6.30/arch/mips/pci/fixup-ip32.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-ip32.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-ip32.c	2009-06-14 20:25:19.000000000 +0200
 @@ -39,7 +39,7 @@
   * irqs.  I suppose a device without a pin A will thank us for doing it
   * right if there exists such a broken piece of crap.
@@ -17136,9 +17076,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-ip32.c rt4ls/arch/mips/pci/fixup-ip32
  {
  	return irq_tab_mace[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-jmr3927.c rt4ls/arch/mips/pci/fixup-jmr3927.c
---- linux-2.6.30/arch/mips/pci/fixup-jmr3927.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-jmr3927.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-jmr3927.c linux-2.6.30/arch/mips/pci/fixup-jmr3927.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-jmr3927.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-jmr3927.c	2009-06-14 20:25:19.000000000 +0200
 @@ -31,7 +31,7 @@
  #include <asm/txx9/pci.h>
  #include <asm/txx9/jmr3927.h>
@@ -17148,9 +17088,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-jmr3927.c rt4ls/arch/mips/pci/fixup-j
  {
  	unsigned char irq = pin;
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-lemote2f.c rt4ls/arch/mips/pci/fixup-lemote2f.c
---- linux-2.6.30/arch/mips/pci/fixup-lemote2f.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/pci/fixup-lemote2f.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-lemote2f.c linux-2.6.30/arch/mips/pci/fixup-lemote2f.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-lemote2f.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/pci/fixup-lemote2f.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,171 @@
 +/*
 + * Copyright (C) 2008 Lemote Technology
@@ -17323,9 +17263,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-lemote2f.c rt4ls/arch/mips/pci/fixup-
 +			 loongson_cs5536_ide_fixup);
 +DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_NEC, PCI_DEVICE_ID_NEC_USB,
 +			 loongson_nec_fixup);
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-lm2e.c rt4ls/arch/mips/pci/fixup-lm2e.c
---- linux-2.6.30/arch/mips/pci/fixup-lm2e.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-lm2e.c	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-lm2e.c linux-2.6.30/arch/mips/pci/fixup-lm2e.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-lm2e.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-lm2e.c	1970-01-01 01:00:00.000000000 +0100
 @@ -1,242 +0,0 @@
 -/*
 - * fixup-lm2e.c
@@ -17569,9 +17509,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-lm2e.c rt4ls/arch/mips/pci/fixup-lm2e
 -			 loongson2e_686b_func5_fixup);
 -DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_NEC, PCI_DEVICE_ID_NEC_USB,
 -			 loongson2e_nec_fixup);
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-malta.c rt4ls/arch/mips/pci/fixup-malta.c
---- linux-2.6.30/arch/mips/pci/fixup-malta.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-malta.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-malta.c linux-2.6.30/arch/mips/pci/fixup-malta.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-malta.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-malta.c	2009-06-14 20:25:19.000000000 +0200
 @@ -36,7 +36,7 @@
  	{0,	PCID,	PCIA,	PCIB,	PCIC }	/* 21: PCI Slot 4 */
  };
@@ -17581,9 +17521,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-malta.c rt4ls/arch/mips/pci/fixup-mal
  {
  	int virq;
  	virq = irq_tab[slot][pin];
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-mpc30x.c rt4ls/arch/mips/pci/fixup-mpc30x.c
---- linux-2.6.30/arch/mips/pci/fixup-mpc30x.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-mpc30x.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-mpc30x.c linux-2.6.30/arch/mips/pci/fixup-mpc30x.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-mpc30x.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-mpc30x.c	2009-06-14 20:25:19.000000000 +0200
 @@ -34,7 +34,7 @@
   [29] = MQ200_IRQ,
  };
@@ -17593,9 +17533,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-mpc30x.c rt4ls/arch/mips/pci/fixup-mp
  {
  	if (slot == 30)
  		return internal_func_irqs[PCI_FUNC(dev->devfn)];
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-pmcmsp.c rt4ls/arch/mips/pci/fixup-pmcmsp.c
---- linux-2.6.30/arch/mips/pci/fixup-pmcmsp.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-pmcmsp.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-pmcmsp.c linux-2.6.30/arch/mips/pci/fixup-pmcmsp.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-pmcmsp.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-pmcmsp.c	2009-06-14 20:25:19.000000000 +0200
 @@ -202,7 +202,7 @@
   *  RETURNS:     IRQ number
   *
@@ -17605,9 +17545,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-pmcmsp.c rt4ls/arch/mips/pci/fixup-pm
  {
  #if !defined(CONFIG_PMC_MSP7120_GW) && !defined(CONFIG_PMC_MSP7120_EVAL)
  	printk(KERN_WARNING "PCI: unknown board, no PCI IRQs assigned.\n");
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-pnx8550.c rt4ls/arch/mips/pci/fixup-pnx8550.c
---- linux-2.6.30/arch/mips/pci/fixup-pnx8550.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-pnx8550.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-pnx8550.c linux-2.6.30/arch/mips/pci/fixup-pnx8550.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-pnx8550.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-pnx8550.c	2009-06-14 20:25:19.000000000 +0200
 @@ -45,7 +45,7 @@
  	/* nothing to do here */
  }
@@ -17617,9 +17557,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-pnx8550.c rt4ls/arch/mips/pci/fixup-p
  {
  	return pnx8550_irq_tab[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-rbtx4927.c rt4ls/arch/mips/pci/fixup-rbtx4927.c
---- linux-2.6.30/arch/mips/pci/fixup-rbtx4927.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-rbtx4927.c	2009-06-12 16:27:08.850451649 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-rbtx4927.c linux-2.6.30/arch/mips/pci/fixup-rbtx4927.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-rbtx4927.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-rbtx4927.c	2009-06-14 20:25:19.000000000 +0200
 @@ -36,7 +36,7 @@
  #include <asm/txx9/pci.h>
  #include <asm/txx9/rbtx4927.h>
@@ -17629,9 +17569,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-rbtx4927.c rt4ls/arch/mips/pci/fixup-
  {
  	unsigned char irq = pin;
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-rbtx4938.c rt4ls/arch/mips/pci/fixup-rbtx4938.c
---- linux-2.6.30/arch/mips/pci/fixup-rbtx4938.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-rbtx4938.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-rbtx4938.c linux-2.6.30/arch/mips/pci/fixup-rbtx4938.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-rbtx4938.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-rbtx4938.c	2009-06-14 20:25:19.000000000 +0200
 @@ -13,7 +13,7 @@
  #include <asm/txx9/pci.h>
  #include <asm/txx9/rbtx4938.h>
@@ -17641,9 +17581,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-rbtx4938.c rt4ls/arch/mips/pci/fixup-
  {
  	int irq = tx4938_pcic1_map_irq(dev, slot);
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-rc32434.c rt4ls/arch/mips/pci/fixup-rc32434.c
---- linux-2.6.30/arch/mips/pci/fixup-rc32434.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-rc32434.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-rc32434.c linux-2.6.30/arch/mips/pci/fixup-rc32434.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-rc32434.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-rc32434.c	2009-06-14 20:25:19.000000000 +0200
 @@ -37,7 +37,7 @@
  	{0, 0, 1, 3, 0, 2, 1, 3, 0, 2, 1, 3}
  };
@@ -17653,9 +17593,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-rc32434.c rt4ls/arch/mips/pci/fixup-r
  {
  	int irq = 0;
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-sni.c rt4ls/arch/mips/pci/fixup-sni.c
---- linux-2.6.30/arch/mips/pci/fixup-sni.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-sni.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-sni.c linux-2.6.30/arch/mips/pci/fixup-sni.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-sni.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-sni.c	2009-06-14 20:25:19.000000000 +0200
 @@ -130,7 +130,7 @@
  	return (csmsr & 0xa0) == 0x20;
  }
@@ -17665,9 +17605,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-sni.c rt4ls/arch/mips/pci/fixup-sni.c
  {
  	switch (sni_brd_type) {
  	case SNI_BRD_PCI_TOWER_CPLUS:
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0219.c rt4ls/arch/mips/pci/fixup-tb0219.c
---- linux-2.6.30/arch/mips/pci/fixup-tb0219.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-tb0219.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-tb0219.c linux-2.6.30/arch/mips/pci/fixup-tb0219.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-tb0219.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-tb0219.c	2009-06-14 20:25:19.000000000 +0200
 @@ -23,7 +23,7 @@
  
  #include <asm/vr41xx/tb0219.h>
@@ -17677,9 +17617,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0219.c rt4ls/arch/mips/pci/fixup-tb
  {
  	int irq = -1;
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0226.c rt4ls/arch/mips/pci/fixup-tb0226.c
---- linux-2.6.30/arch/mips/pci/fixup-tb0226.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-tb0226.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-tb0226.c linux-2.6.30/arch/mips/pci/fixup-tb0226.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-tb0226.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-tb0226.c	2009-06-14 20:25:19.000000000 +0200
 @@ -23,7 +23,7 @@
  #include <asm/vr41xx/giu.h>
  #include <asm/vr41xx/tb0226.h>
@@ -17689,9 +17629,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0226.c rt4ls/arch/mips/pci/fixup-tb
  {
  	int irq = -1;
  
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0287.c rt4ls/arch/mips/pci/fixup-tb0287.c
---- linux-2.6.30/arch/mips/pci/fixup-tb0287.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-tb0287.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-tb0287.c linux-2.6.30/arch/mips/pci/fixup-tb0287.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-tb0287.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-tb0287.c	2009-06-14 20:25:19.000000000 +0200
 @@ -22,7 +22,7 @@
  
  #include <asm/vr41xx/tb0287.h>
@@ -17701,9 +17641,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-tb0287.c rt4ls/arch/mips/pci/fixup-tb
  {
  	unsigned char bus;
  	int irq = -1;
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-wrppmc.c rt4ls/arch/mips/pci/fixup-wrppmc.c
---- linux-2.6.30/arch/mips/pci/fixup-wrppmc.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-wrppmc.c	2009-06-12 16:27:08.854451321 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-wrppmc.c linux-2.6.30/arch/mips/pci/fixup-wrppmc.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-wrppmc.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-wrppmc.c	2009-06-14 20:25:19.000000000 +0200
 @@ -25,7 +25,7 @@
  	[6] = {0, WRPPMC_PCI_INTA_IRQ, 0, 0, 0},
  };
@@ -17713,9 +17653,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-wrppmc.c rt4ls/arch/mips/pci/fixup-wr
  {
  	return pci_irq_tab[slot][pin];
  }
-diff -Nur linux-2.6.30/arch/mips/pci/fixup-yosemite.c rt4ls/arch/mips/pci/fixup-yosemite.c
---- linux-2.6.30/arch/mips/pci/fixup-yosemite.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/fixup-yosemite.c	2009-06-12 16:27:08.886440592 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/fixup-yosemite.c linux-2.6.30/arch/mips/pci/fixup-yosemite.c
+--- linux-2.6.30.orig/arch/mips/pci/fixup-yosemite.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/fixup-yosemite.c	2009-06-14 20:25:19.000000000 +0200
 @@ -26,7 +26,7 @@
  #include <linux/init.h>
  #include <linux/pci.h>
@@ -17725,9 +17665,23 @@ diff -Nur linux-2.6.30/arch/mips/pci/fixup-yosemite.c rt4ls/arch/mips/pci/fixup-
  {
  	if (pin == 0)
  		return -1;
-diff -Nur linux-2.6.30/arch/mips/pci/ops-bonito64.c rt4ls/arch/mips/pci/ops-bonito64.c
---- linux-2.6.30/arch/mips/pci/ops-bonito64.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/ops-bonito64.c	2009-06-12 16:27:08.890441660 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/Makefile linux-2.6.30/arch/mips/pci/Makefile
+--- linux-2.6.30.orig/arch/mips/pci/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -26,7 +26,9 @@
+ obj-$(CONFIG_SOC_AU1500)	+= fixup-au1000.o ops-au1000.o
+ obj-$(CONFIG_SOC_AU1550)	+= fixup-au1000.o ops-au1000.o
+ obj-$(CONFIG_SOC_PNX8550)	+= fixup-pnx8550.o ops-pnx8550.o
+-obj-$(CONFIG_LEMOTE_FULONG)	+= fixup-lm2e.o ops-bonito64.o
++obj-$(CONFIG_LEMOTE_FULOONG2E)	+= fixup-fuloong2e.o ops-loongson2.o
++obj-$(CONFIG_LEMOTE_FULOONG2F)	+= fixup-lemote2f.o ops-loongson2.o
++obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= fixup-lemote2f.o ops-loongson2.o
+ obj-$(CONFIG_MIPS_MALTA)	+= fixup-malta.o
+ obj-$(CONFIG_PMC_MSP7120_GW)	+= fixup-pmcmsp.o ops-pmcmsp.o
+ obj-$(CONFIG_PMC_MSP7120_EVAL)	+= fixup-pmcmsp.o ops-pmcmsp.o
+diff -Nur linux-2.6.30.orig/arch/mips/pci/ops-bonito64.c linux-2.6.30/arch/mips/pci/ops-bonito64.c
+--- linux-2.6.30.orig/arch/mips/pci/ops-bonito64.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/ops-bonito64.c	2009-06-14 20:25:19.000000000 +0200
 @@ -29,20 +29,16 @@
  #define PCI_ACCESS_READ  0
  #define PCI_ACCESS_WRITE 1
@@ -17783,9 +17737,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/ops-bonito64.c rt4ls/arch/mips/pci/ops-boni
  			return -1;
  
  		if (size == 1)
-diff -Nur linux-2.6.30/arch/mips/pci/ops-loongson2.c rt4ls/arch/mips/pci/ops-loongson2.c
---- linux-2.6.30/arch/mips/pci/ops-loongson2.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/pci/ops-loongson2.c	2009-06-12 16:27:08.890441660 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/ops-loongson2.c linux-2.6.30/arch/mips/pci/ops-loongson2.c
+--- linux-2.6.30.orig/arch/mips/pci/ops-loongson2.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/pci/ops-loongson2.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,213 @@
 +/*
 + * Copyright (C) 1999, 2000, 2004  MIPS Technologies, Inc.
@@ -18000,9 +17954,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/ops-loongson2.c rt4ls/arch/mips/pci/ops-loo
 +}
 +EXPORT_SYMBOL(_wrmsr);
 +#endif
-diff -Nur linux-2.6.30/arch/mips/pci/pci-bcm1480.c rt4ls/arch/mips/pci/pci-bcm1480.c
---- linux-2.6.30/arch/mips/pci/pci-bcm1480.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-bcm1480.c	2009-06-12 16:27:09.146457490 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-bcm1480.c linux-2.6.30/arch/mips/pci/pci-bcm1480.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-bcm1480.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-bcm1480.c	2009-06-14 20:25:19.000000000 +0200
 @@ -74,7 +74,7 @@
  	*(u32 *)(cfg_space + (addr & ~3)) = data;
  }
@@ -18012,9 +17966,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-bcm1480.c rt4ls/arch/mips/pci/pci-bcm14
  {
  	if (pin == 0)
  		return -1;
-diff -Nur linux-2.6.30/arch/mips/pci/pci-bcm47xx.c rt4ls/arch/mips/pci/pci-bcm47xx.c
---- linux-2.6.30/arch/mips/pci/pci-bcm47xx.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-bcm47xx.c	2009-06-12 16:27:09.146457490 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-bcm47xx.c linux-2.6.30/arch/mips/pci/pci-bcm47xx.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-bcm47xx.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-bcm47xx.c	2009-06-14 20:25:19.000000000 +0200
 @@ -26,7 +26,7 @@
  #include <linux/pci.h>
  #include <linux/ssb/ssb.h>
@@ -18024,9 +17978,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-bcm47xx.c rt4ls/arch/mips/pci/pci-bcm47
  {
  	return 0;
  }
-diff -Nur linux-2.6.30/arch/mips/pci/pci-ip27.c rt4ls/arch/mips/pci/pci-ip27.c
---- linux-2.6.30/arch/mips/pci/pci-ip27.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-ip27.c	2009-06-12 16:27:09.150468058 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-ip27.c linux-2.6.30/arch/mips/pci/pci-ip27.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-ip27.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-ip27.c	2009-06-14 20:25:19.000000000 +0200
 @@ -141,7 +141,7 @@
   * A given PCI device, in general, should be able to intr any of the cpus
   * on any one of the hubs connected to its xbow.
@@ -18036,9 +17990,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-ip27.c rt4ls/arch/mips/pci/pci-ip27.c
  {
  	return 0;
  }
-diff -Nur linux-2.6.30/arch/mips/pci/pci-lasat.c rt4ls/arch/mips/pci/pci-lasat.c
---- linux-2.6.30/arch/mips/pci/pci-lasat.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-lasat.c	2009-06-12 16:27:09.150468058 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-lasat.c linux-2.6.30/arch/mips/pci/pci-lasat.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-lasat.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-lasat.c	2009-06-14 20:25:19.000000000 +0200
 @@ -61,7 +61,7 @@
  #define LASAT_IRQ_PCIC   (LASAT_IRQ_BASE + 7)
  #define LASAT_IRQ_PCID   (LASAT_IRQ_BASE + 8)
@@ -18048,9 +18002,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-lasat.c rt4ls/arch/mips/pci/pci-lasat.c
  {
  	switch (slot) {
  	case 1:
-diff -Nur linux-2.6.30/arch/mips/pci/pci-sb1250.c rt4ls/arch/mips/pci/pci-sb1250.c
---- linux-2.6.30/arch/mips/pci/pci-sb1250.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-sb1250.c	2009-06-12 16:27:09.150468058 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-sb1250.c linux-2.6.30/arch/mips/pci/pci-sb1250.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-sb1250.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-sb1250.c	2009-06-14 20:25:19.000000000 +0200
 @@ -84,7 +84,7 @@
  	*(u32 *) (cfg_space + (addr & ~3)) = data;
  }
@@ -18060,9 +18014,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-sb1250.c rt4ls/arch/mips/pci/pci-sb1250
  {
  	return dev->irq;
  }
-diff -Nur linux-2.6.30/arch/mips/pci/pci-tx4938.c rt4ls/arch/mips/pci/pci-tx4938.c
---- linux-2.6.30/arch/mips/pci/pci-tx4938.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-tx4938.c	2009-06-12 16:27:09.154469127 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-tx4938.c linux-2.6.30/arch/mips/pci/pci-tx4938.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-tx4938.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-tx4938.c	2009-06-14 20:25:19.000000000 +0200
 @@ -114,7 +114,7 @@
  	return pciclk;
  }
@@ -18072,9 +18026,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-tx4938.c rt4ls/arch/mips/pci/pci-tx4938
  {
  	if (get_tx4927_pcicptr(dev->bus->sysdata) == tx4938_pcic1ptr) {
  		switch (slot) {
-diff -Nur linux-2.6.30/arch/mips/pci/pci-tx4939.c rt4ls/arch/mips/pci/pci-tx4939.c
---- linux-2.6.30/arch/mips/pci/pci-tx4939.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/pci/pci-tx4939.c	2009-06-12 16:27:09.154469127 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/pci/pci-tx4939.c linux-2.6.30/arch/mips/pci/pci-tx4939.c
+--- linux-2.6.30.orig/arch/mips/pci/pci-tx4939.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/pci/pci-tx4939.c	2009-06-14 20:25:19.000000000 +0200
 @@ -50,7 +50,7 @@
  		((pciclk + 50000) / 100000) % 10);
  }
@@ -18093,14 +18047,9 @@ diff -Nur linux-2.6.30/arch/mips/pci/pci-tx4939.c rt4ls/arch/mips/pci/pci-tx4939
  {
  	int irq = tx4939_pcic1_map_irq(dev, slot);
  
-diff -Nur linux-2.6.30/arch/mips/power/Makefile rt4ls/arch/mips/power/Makefile
---- linux-2.6.30/arch/mips/power/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/power/Makefile	2009-06-12 16:27:09.166460321 +0200
-@@ -0,0 +1 @@
-+obj-$(CONFIG_HIBERNATION) += cpu.o hibernate.o
-diff -Nur linux-2.6.30/arch/mips/power/cpu.c rt4ls/arch/mips/power/cpu.c
---- linux-2.6.30/arch/mips/power/cpu.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/power/cpu.c	2009-06-12 16:27:09.170469770 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/power/cpu.c linux-2.6.30/arch/mips/power/cpu.c
+--- linux-2.6.30.orig/arch/mips/power/cpu.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/power/cpu.c	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,43 @@
 +/*
 + * Suspend support for mips.
@@ -18145,9 +18094,9 @@ diff -Nur linux-2.6.30/arch/mips/power/cpu.c rt4ls/arch/mips/power/cpu.c
 +
 +	return	(pfn >= nosave_begin_pfn) && (pfn < nosave_end_pfn);
 +}
-diff -Nur linux-2.6.30/arch/mips/power/hibernate.S rt4ls/arch/mips/power/hibernate.S
---- linux-2.6.30/arch/mips/power/hibernate.S	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/arch/mips/power/hibernate.S	2009-06-12 16:27:09.170469770 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/power/hibernate.S linux-2.6.30/arch/mips/power/hibernate.S
+--- linux-2.6.30.orig/arch/mips/power/hibernate.S	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/power/hibernate.S	2009-06-14 20:25:19.000000000 +0200
 @@ -0,0 +1,70 @@
 +/*
 + * Hibernation support for mips - temporary page tables
@@ -18219,9 +18168,14 @@ diff -Nur linux-2.6.30/arch/mips/power/hibernate.S rt4ls/arch/mips/power/hiberna
 +	PTR_LI v0, 0x0
 +	jr ra
 +END(swsusp_arch_resume)
-diff -Nur linux-2.6.30/arch/mips/sibyte/bcm1480/irq.c rt4ls/arch/mips/sibyte/bcm1480/irq.c
---- linux-2.6.30/arch/mips/sibyte/bcm1480/irq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/sibyte/bcm1480/irq.c	2009-06-12 16:27:09.190461705 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/power/Makefile linux-2.6.30/arch/mips/power/Makefile
+--- linux-2.6.30.orig/arch/mips/power/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/arch/mips/power/Makefile	2009-06-14 20:25:19.000000000 +0200
+@@ -0,0 +1 @@
++obj-$(CONFIG_HIBERNATION) += cpu.o hibernate.o
+diff -Nur linux-2.6.30.orig/arch/mips/sibyte/bcm1480/irq.c linux-2.6.30/arch/mips/sibyte/bcm1480/irq.c
+--- linux-2.6.30.orig/arch/mips/sibyte/bcm1480/irq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/sibyte/bcm1480/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -116,10 +116,6 @@
  	unsigned long flags;
  	unsigned int irq_dirty;
@@ -18233,9 +18187,9 @@ diff -Nur linux-2.6.30/arch/mips/sibyte/bcm1480/irq.c rt4ls/arch/mips/sibyte/bcm
  	i = cpumask_first(mask);
  
  	/* Convert logical CPU to physical CPU */
-diff -Nur linux-2.6.30/arch/mips/sibyte/sb1250/irq.c rt4ls/arch/mips/sibyte/sb1250/irq.c
---- linux-2.6.30/arch/mips/sibyte/sb1250/irq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/sibyte/sb1250/irq.c	2009-06-12 16:27:09.194461656 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/sibyte/sb1250/irq.c linux-2.6.30/arch/mips/sibyte/sb1250/irq.c
+--- linux-2.6.30.orig/arch/mips/sibyte/sb1250/irq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/sibyte/sb1250/irq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -111,11 +111,6 @@
  
  	i = cpumask_first(mask);
@@ -18248,9 +18202,9 @@ diff -Nur linux-2.6.30/arch/mips/sibyte/sb1250/irq.c rt4ls/arch/mips/sibyte/sb12
  	/* Convert logical CPU to physical CPU */
  	cpu = cpu_logical_map(i);
  
-diff -Nur linux-2.6.30/arch/mips/txx9/generic/pci.c rt4ls/arch/mips/txx9/generic/pci.c
---- linux-2.6.30/arch/mips/txx9/generic/pci.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/mips/txx9/generic/pci.c	2009-06-12 16:27:09.214461413 +0200
+diff -Nur linux-2.6.30.orig/arch/mips/txx9/generic/pci.c linux-2.6.30/arch/mips/txx9/generic/pci.c
+--- linux-2.6.30.orig/arch/mips/txx9/generic/pci.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/mips/txx9/generic/pci.c	2009-06-14 20:25:19.000000000 +0200
 @@ -382,7 +382,7 @@
  	return 0;
  }
@@ -18260,9 +18214,9 @@ diff -Nur linux-2.6.30/arch/mips/txx9/generic/pci.c rt4ls/arch/mips/txx9/generic
  {
  	return txx9_board_vec->pci_map_irq(dev, slot, pin);
  }
-diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c rt4ls/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c
---- linux-2.6.30/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c	2009-06-12 16:27:12.750683917 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c linux-2.6.30/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c
+--- linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -550,7 +550,7 @@
  		return -ENOMEM;
  	}
@@ -18272,9 +18226,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/acpi-cpufreq.c rt4ls/arch/x86
  			&per_cpu_ptr(acpi_perf_data, i)->shared_cpu_map,
  			GFP_KERNEL, cpu_to_node(i))) {
  
-diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k7.c rt4ls/arch/x86/kernel/cpu/cpufreq/powernow-k7.c
---- linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k7.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/cpu/cpufreq/powernow-k7.c	2009-06-12 16:27:12.758683819 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/powernow-k7.c linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k7.c
+--- linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/powernow-k7.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k7.c	2009-06-14 20:25:19.000000000 +0200
 @@ -322,7 +322,7 @@
  		goto err0;
  	}
@@ -18284,9 +18238,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k7.c rt4ls/arch/x86/
  								GFP_KERNEL)) {
  		retval = -ENOMEM;
  		goto err05;
-diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k8.c rt4ls/arch/x86/kernel/cpu/cpufreq/powernow-k8.c
---- linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k8.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/cpu/cpufreq/powernow-k8.c	2009-06-12 16:27:12.758683819 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/powernow-k8.c linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k8.c
+--- linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/powernow-k8.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k8.c	2009-06-14 20:25:19.000000000 +0200
 @@ -887,7 +887,7 @@
  	/* notify BIOS that we exist */
  	acpi_processor_notify_smm(THIS_MODULE);
@@ -18296,9 +18250,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/powernow-k8.c rt4ls/arch/x86/
  		printk(KERN_ERR PFX
  				"unable to alloc powernow_k8_data cpumask\n");
  		ret_val = -ENOMEM;
-diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c rt4ls/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c
---- linux-2.6.30/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c	2009-06-12 16:27:12.758683819 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c linux-2.6.30/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c
+--- linux-2.6.30.orig/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c	2009-06-14 20:25:19.000000000 +0200
 @@ -471,7 +471,7 @@
  
  	if (unlikely(!alloc_cpumask_var(&saved_mask, GFP_KERNEL)))
@@ -18308,9 +18262,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/cpu/cpufreq/speedstep-centrino.c rt4ls/ar
  		free_cpumask_var(saved_mask);
  		return -ENOMEM;
  	}
-diff -Nur linux-2.6.30/arch/x86/kernel/cpu/mcheck/mce_64.c rt4ls/arch/x86/kernel/cpu/mcheck/mce_64.c
---- linux-2.6.30/arch/x86/kernel/cpu/mcheck/mce_64.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/cpu/mcheck/mce_64.c	2009-06-12 16:27:12.766685398 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/cpu/mcheck/mce_64.c linux-2.6.30/arch/x86/kernel/cpu/mcheck/mce_64.c
+--- linux-2.6.30.orig/arch/x86/kernel/cpu/mcheck/mce_64.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/cpu/mcheck/mce_64.c	2009-06-14 20:25:19.000000000 +0200
 @@ -1163,7 +1163,7 @@
  	if (!mce_available(&boot_cpu_data))
  		return -EIO;
@@ -18320,9 +18274,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/cpu/mcheck/mce_64.c rt4ls/arch/x86/kernel
  
  	err = mce_init_banks();
  	if (err)
-diff -Nur linux-2.6.30/arch/x86/kernel/tlb_uv.c rt4ls/arch/x86/kernel/tlb_uv.c
---- linux-2.6.30/arch/x86/kernel/tlb_uv.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/arch/x86/kernel/tlb_uv.c	2009-06-12 16:27:13.002711263 +0200
+diff -Nur linux-2.6.30.orig/arch/x86/kernel/tlb_uv.c linux-2.6.30/arch/x86/kernel/tlb_uv.c
+--- linux-2.6.30.orig/arch/x86/kernel/tlb_uv.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/arch/x86/kernel/tlb_uv.c	2009-06-14 20:25:19.000000000 +0200
 @@ -832,7 +832,7 @@
  		return 0;
  
@@ -18332,9 +18286,9 @@ diff -Nur linux-2.6.30/arch/x86/kernel/tlb_uv.c rt4ls/arch/x86/kernel/tlb_uv.c
  				       GFP_KERNEL, cpu_to_node(cur_cpu));
  
  	uv_bau_retry_limit = 1;
-diff -Nur linux-2.6.30/block/bsg.c rt4ls/block/bsg.c
---- linux-2.6.30/block/bsg.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/block/bsg.c	2009-06-12 16:27:13.226714938 +0200
+diff -Nur linux-2.6.30.orig/block/bsg.c linux-2.6.30/block/bsg.c
+--- linux-2.6.30.orig/block/bsg.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/block/bsg.c	2009-06-14 20:25:19.000000000 +0200
 @@ -315,7 +315,6 @@
  	blk_put_request(rq);
  	if (next_rq) {
@@ -18359,9 +18313,23 @@ diff -Nur linux-2.6.30/block/bsg.c rt4ls/block/bsg.c
  	blk_put_request(rq);
  
  	return ret;
-diff -Nur linux-2.6.30/drivers/acpi/processor_core.c rt4ls/drivers/acpi/processor_core.c
---- linux-2.6.30/drivers/acpi/processor_core.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/acpi/processor_core.c	2009-06-12 16:27:13.558736838 +0200
+diff -Nur linux-2.6.30.orig/Documentation/kernel-parameters.txt linux-2.6.30/Documentation/kernel-parameters.txt
+--- linux-2.6.30.orig/Documentation/kernel-parameters.txt	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/Documentation/kernel-parameters.txt	2009-06-14 20:25:19.000000000 +0200
+@@ -1220,6 +1220,10 @@
+ 			(machvec) in a generic kernel.
+ 			Example: machvec=hpzx1_swiotlb
+ 
++	machtype=	[Loongson] Share the same kernel image file between different
++			 yeeloong laptop.
++			Example: machtype=lemote-yeeloong-2f-7inch
++
+ 	max_addr=nn[KMG]	[KNL,BOOT,ia64] All physical memory greater
+ 			than or equal to this physical address is ignored.
+ 
+diff -Nur linux-2.6.30.orig/drivers/acpi/processor_core.c linux-2.6.30/drivers/acpi/processor_core.c
+--- linux-2.6.30.orig/drivers/acpi/processor_core.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/acpi/processor_core.c	2009-06-14 20:25:19.000000000 +0200
 @@ -844,7 +844,7 @@
  	if (!pr)
  		return -ENOMEM;
@@ -18371,9 +18339,9 @@ diff -Nur linux-2.6.30/drivers/acpi/processor_core.c rt4ls/drivers/acpi/processo
  		kfree(pr);
  		return -ENOMEM;
  	}
-diff -Nur linux-2.6.30/drivers/char/mxser.c rt4ls/drivers/char/mxser.c
---- linux-2.6.30/drivers/char/mxser.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/char/mxser.c	2009-06-12 16:27:13.878756104 +0200
+diff -Nur linux-2.6.30.orig/drivers/char/mxser.c linux-2.6.30/drivers/char/mxser.c
+--- linux-2.6.30.orig/drivers/char/mxser.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/char/mxser.c	2009-06-14 20:25:19.000000000 +0200
 @@ -2711,7 +2711,7 @@
  			continue;
  
@@ -18383,9 +18351,9 @@ diff -Nur linux-2.6.30/drivers/char/mxser.c rt4ls/drivers/char/mxser.c
  		if (retval <= 0) {
  			brd->info = NULL;
  			continue;
-diff -Nur linux-2.6.30/drivers/cpufreq/cpufreq.c rt4ls/drivers/cpufreq/cpufreq.c
---- linux-2.6.30/drivers/cpufreq/cpufreq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/cpufreq/cpufreq.c	2009-06-12 16:27:23.183344589 +0200
+diff -Nur linux-2.6.30.orig/drivers/cpufreq/cpufreq.c linux-2.6.30/drivers/cpufreq/cpufreq.c
+--- linux-2.6.30.orig/drivers/cpufreq/cpufreq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/cpufreq/cpufreq.c	2009-06-14 20:25:19.000000000 +0200
 @@ -808,7 +808,7 @@
  		ret = -ENOMEM;
  		goto nomem_out;
@@ -18395,9 +18363,9 @@ diff -Nur linux-2.6.30/drivers/cpufreq/cpufreq.c rt4ls/drivers/cpufreq/cpufreq.c
  		free_cpumask_var(policy->cpus);
  		kfree(policy);
  		ret = -ENOMEM;
-diff -Nur linux-2.6.30/drivers/ide/amd74xx.c rt4ls/drivers/ide/amd74xx.c
---- linux-2.6.30/drivers/ide/amd74xx.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/ide/amd74xx.c	2009-06-12 16:27:31.515864613 +0200
+diff -Nur linux-2.6.30.orig/drivers/ide/amd74xx.c linux-2.6.30/drivers/ide/amd74xx.c
+--- linux-2.6.30.orig/drivers/ide/amd74xx.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/ide/amd74xx.c	2009-06-14 20:25:19.000000000 +0200
 @@ -23,6 +23,11 @@
  
  #define DRV_NAME "amd74xx"
@@ -18438,9 +18406,9 @@ diff -Nur linux-2.6.30/drivers/ide/amd74xx.c rt4ls/drivers/ide/amd74xx.c
  	.cable_detect		= amd_cable_detect,
  };
  
-diff -Nur linux-2.6.30/drivers/md/raid5.c rt4ls/drivers/md/raid5.c
---- linux-2.6.30/drivers/md/raid5.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/md/raid5.c	2009-06-12 16:27:48.380919207 +0200
+diff -Nur linux-2.6.30.orig/drivers/md/raid5.c linux-2.6.30/drivers/md/raid5.c
+--- linux-2.6.30.orig/drivers/md/raid5.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/md/raid5.c	2009-06-14 20:25:20.000000000 +0200
 @@ -362,7 +362,7 @@
  
  static struct stripe_head *
@@ -18559,9 +18527,9 @@ diff -Nur linux-2.6.30/drivers/md/raid5.c rt4ls/drivers/md/raid5.c
  
  		if (!sh) {
  			/* failed to get a stripe - must wait */
-diff -Nur linux-2.6.30/drivers/net/Kconfig rt4ls/drivers/net/Kconfig
---- linux-2.6.30/drivers/net/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/net/Kconfig	2009-06-12 16:28:08.898195438 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/Kconfig linux-2.6.30/drivers/net/Kconfig
+--- linux-2.6.30.orig/drivers/net/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/net/Kconfig	2009-06-14 20:25:20.000000000 +0200
 @@ -2362,6 +2362,13 @@
  	  Some boards that use the Discovery chipset are the Momenco
  	  Ocelot C and Jaguar ATX and Pegasos II.
@@ -18576,9 +18544,9 @@ diff -Nur linux-2.6.30/drivers/net/Kconfig rt4ls/drivers/net/Kconfig
  config QLA3XXX
  	tristate "QLogic QLA3XXX Network Driver Support"
  	depends on PCI
-diff -Nur linux-2.6.30/drivers/net/Makefile rt4ls/drivers/net/Makefile
---- linux-2.6.30/drivers/net/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/net/Makefile	2009-06-12 16:28:08.910193335 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/Makefile linux-2.6.30/drivers/net/Makefile
+--- linux-2.6.30.orig/drivers/net/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/net/Makefile	2009-06-14 20:25:20.000000000 +0200
 @@ -137,6 +137,8 @@
  obj-$(CONFIG_QLA3XXX) += qla3xxx.o
  obj-$(CONFIG_QLGE) += qlge/
@@ -18588,9 +18556,9 @@ diff -Nur linux-2.6.30/drivers/net/Makefile rt4ls/drivers/net/Makefile
  obj-$(CONFIG_PPP) += ppp_generic.o
  obj-$(CONFIG_PPP_ASYNC) += ppp_async.o
  obj-$(CONFIG_PPP_SYNC_TTY) += ppp_synctty.o
-diff -Nur linux-2.6.30/drivers/net/r8169.c rt4ls/drivers/net/r8169.c
---- linux-2.6.30/drivers/net/r8169.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/net/r8169.c	2009-06-12 16:28:14.650663877 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/r8169.c linux-2.6.30/drivers/net/r8169.c
+--- linux-2.6.30.orig/drivers/net/r8169.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/net/r8169.c	2009-06-14 20:25:20.000000000 +0200
 @@ -66,6 +66,7 @@
  #define RX_DMA_BURST	6	/* Maximum PCI burst, '6' is 1024 */
  #define TX_DMA_BURST	6	/* Maximum PCI burst, '6' is 1024 */
@@ -18639,9 +18607,9 @@ diff -Nur linux-2.6.30/drivers/net/r8169.c rt4ls/drivers/net/r8169.c
  
  	tp->cp_cmd |= rtl_rw_cpluscmd(ioaddr) | PCIMulRW;
  
-diff -Nur linux-2.6.30/drivers/net/titan_ge.c rt4ls/drivers/net/titan_ge.c
---- linux-2.6.30/drivers/net/titan_ge.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/net/titan_ge.c	2009-06-12 16:28:16.835950077 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/titan_ge.c linux-2.6.30/drivers/net/titan_ge.c
+--- linux-2.6.30.orig/drivers/net/titan_ge.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/net/titan_ge.c	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,2069 @@
 +/*
 + * drivers/net/titan_ge.c - Driver for Titan ethernet ports
@@ -20712,9 +20680,9 @@ diff -Nur linux-2.6.30/drivers/net/titan_ge.c rt4ls/drivers/net/titan_ge.c
 +
 +module_init(titan_ge_init_module);
 +module_exit(titan_ge_cleanup_module);
-diff -Nur linux-2.6.30/drivers/net/titan_ge.h rt4ls/drivers/net/titan_ge.h
---- linux-2.6.30/drivers/net/titan_ge.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/net/titan_ge.h	2009-06-12 16:28:16.835950077 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/titan_ge.h linux-2.6.30/drivers/net/titan_ge.h
+--- linux-2.6.30.orig/drivers/net/titan_ge.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/net/titan_ge.h	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,415 @@
 +#ifndef _TITAN_GE_H_
 +#define _TITAN_GE_H_
@@ -21131,9 +21099,9 @@ diff -Nur linux-2.6.30/drivers/net/titan_ge.h rt4ls/drivers/net/titan_ge.h
 +
 +#endif 				/* _TITAN_GE_H_ */
 +
-diff -Nur linux-2.6.30/drivers/net/titan_mdio.c rt4ls/drivers/net/titan_mdio.c
---- linux-2.6.30/drivers/net/titan_mdio.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/net/titan_mdio.c	2009-06-12 16:28:16.835950077 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/titan_mdio.c linux-2.6.30/drivers/net/titan_mdio.c
+--- linux-2.6.30.orig/drivers/net/titan_mdio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/net/titan_mdio.c	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,217 @@
 +/*
 + * drivers/net/titan_mdio.c - Driver for Titan ethernet ports
@@ -21352,9 +21320,9 @@ diff -Nur linux-2.6.30/drivers/net/titan_mdio.c rt4ls/drivers/net/titan_mdio.c
 +	return TITAN_GE_MDIO_GOOD;
 +}
 +
-diff -Nur linux-2.6.30/drivers/net/titan_mdio.h rt4ls/drivers/net/titan_mdio.h
---- linux-2.6.30/drivers/net/titan_mdio.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/net/titan_mdio.h	2009-06-12 16:28:16.835950077 +0200
+diff -Nur linux-2.6.30.orig/drivers/net/titan_mdio.h linux-2.6.30/drivers/net/titan_mdio.h
+--- linux-2.6.30.orig/drivers/net/titan_mdio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/net/titan_mdio.h	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,56 @@
 +/*
 + * MDIO used to interact with the PHY when using GMII/MII
@@ -21412,9 +21380,9 @@ diff -Nur linux-2.6.30/drivers/net/titan_mdio.h rt4ls/drivers/net/titan_mdio.h
 +int titan_ge_mdio_write(int, int, unsigned int);
 +
 +#endif /* _TITAN_MDIO_H */
-diff -Nur linux-2.6.30/drivers/rtc/rtc-cmos.c rt4ls/drivers/rtc/rtc-cmos.c
---- linux-2.6.30/drivers/rtc/rtc-cmos.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/rtc/rtc-cmos.c	2009-06-12 16:28:34.779818333 +0200
+diff -Nur linux-2.6.30.orig/drivers/rtc/rtc-cmos.c linux-2.6.30/drivers/rtc/rtc-cmos.c
+--- linux-2.6.30.orig/drivers/rtc/rtc-cmos.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/rtc/rtc-cmos.c	2009-06-14 20:25:20.000000000 +0200
 @@ -691,7 +691,8 @@
  	 */
  #if	defined(CONFIG_ATARI)
@@ -21437,9 +21405,9 @@ diff -Nur linux-2.6.30/drivers/rtc/rtc-cmos.c rt4ls/drivers/rtc/rtc-cmos.c
  		retval = -ENXIO;
  		goto cleanup1;
  	}
-diff -Nur linux-2.6.30/drivers/video/Kconfig rt4ls/drivers/video/Kconfig
---- linux-2.6.30/drivers/video/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/video/Kconfig	2009-06-12 16:28:47.484606170 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/Kconfig linux-2.6.30/drivers/video/Kconfig
+--- linux-2.6.30.orig/drivers/video/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/video/Kconfig	2009-06-14 20:25:20.000000000 +0200
 @@ -1930,6 +1930,28 @@
  	  Turn on debugging messages. Note that you can set/unset at run time
  	  through sysfs
@@ -21469,9 +21437,9 @@ diff -Nur linux-2.6.30/drivers/video/Kconfig rt4ls/drivers/video/Kconfig
  config FB_SM501
  	tristate "Silicon Motion SM501 framebuffer support"
  	depends on FB && MFD_SM501
-diff -Nur linux-2.6.30/drivers/video/Makefile rt4ls/drivers/video/Makefile
---- linux-2.6.30/drivers/video/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/drivers/video/Makefile	2009-06-12 16:28:47.484606170 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/Makefile linux-2.6.30/drivers/video/Makefile
+--- linux-2.6.30.orig/drivers/video/Makefile	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/drivers/video/Makefile	2009-06-14 20:25:20.000000000 +0200
 @@ -70,6 +70,7 @@
  obj-$(CONFIG_FB_TCX)              += tcx.o sbuslib.o
  obj-$(CONFIG_FB_LEO)              += leo.o sbuslib.o
@@ -21480,16 +21448,16 @@ diff -Nur linux-2.6.30/drivers/video/Makefile rt4ls/drivers/video/Makefile
  obj-$(CONFIG_FB_ACORN)            += acornfb.o
  obj-$(CONFIG_FB_ATARI)            += atafb.o c2p_iplan2.o atafb_mfb.o \
                                       atafb_iplan2p2.o atafb_iplan2p4.o atafb_iplan2p8.o
-diff -Nur linux-2.6.30/drivers/video/sm7xx/Makefile rt4ls/drivers/video/sm7xx/Makefile
---- linux-2.6.30/drivers/video/sm7xx/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/video/sm7xx/Makefile	2009-06-12 16:28:47.728622169 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/sm7xx/Makefile linux-2.6.30/drivers/video/sm7xx/Makefile
+--- linux-2.6.30.orig/drivers/video/sm7xx/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/video/sm7xx/Makefile	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,3 @@
 +obj-$(CONFIG_FB_SM7XX) += sm7xx.o
 +
 +sm7xx-y := smtcfb.o
-diff -Nur linux-2.6.30/drivers/video/sm7xx/smtc2d.c rt4ls/drivers/video/sm7xx/smtc2d.c
---- linux-2.6.30/drivers/video/sm7xx/smtc2d.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/video/sm7xx/smtc2d.c	2009-06-12 16:28:47.728622169 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/sm7xx/smtc2d.c linux-2.6.30/drivers/video/sm7xx/smtc2d.c
+--- linux-2.6.30.orig/drivers/video/sm7xx/smtc2d.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/video/sm7xx/smtc2d.c	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,979 @@
 +/*
 + * smtc2d.c -- Silicon Motion SM7xx 2D drawing engine functions.
@@ -22470,9 +22438,9 @@ diff -Nur linux-2.6.30/drivers/video/sm7xx/smtc2d.c rt4ls/drivers/video/sm7xx/sm
 +
 +	return de_ctrl;
 +}
-diff -Nur linux-2.6.30/drivers/video/sm7xx/smtc2d.h rt4ls/drivers/video/sm7xx/smtc2d.h
---- linux-2.6.30/drivers/video/sm7xx/smtc2d.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/video/sm7xx/smtc2d.h	2009-06-12 16:28:47.728622169 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/sm7xx/smtc2d.h linux-2.6.30/drivers/video/sm7xx/smtc2d.h
+--- linux-2.6.30.orig/drivers/video/sm7xx/smtc2d.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/video/sm7xx/smtc2d.h	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,530 @@
 +/*
 + * smtc2d.h -- Silicon Motion SM7xx 2D drawing engine functions.
@@ -23004,9 +22972,9 @@ diff -Nur linux-2.6.30/drivers/video/sm7xx/smtc2d.h rt4ls/drivers/video/sm7xx/sm
 +
 +extern unsigned long deGetTransparency(void);
 +extern void deSetPixelFormat(unsigned long bpp);
-diff -Nur linux-2.6.30/drivers/video/sm7xx/smtcfb.c rt4ls/drivers/video/sm7xx/smtcfb.c
---- linux-2.6.30/drivers/video/sm7xx/smtcfb.c	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/video/sm7xx/smtcfb.c	2009-06-12 16:28:47.728622169 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/sm7xx/smtcfb.c linux-2.6.30/drivers/video/sm7xx/smtcfb.c
+--- linux-2.6.30.orig/drivers/video/sm7xx/smtcfb.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/video/sm7xx/smtcfb.c	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,1135 @@
 +/*
 + * smtcfb.c -- Silicon Motion SM7xx frame buffer device
@@ -24143,9 +24111,9 @@ diff -Nur linux-2.6.30/drivers/video/sm7xx/smtcfb.c rt4ls/drivers/video/sm7xx/sm
 +MODULE_AUTHOR("Siliconmotion ");
 +MODULE_DESCRIPTION("Framebuffer driver for SMI Graphic Cards");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.30/drivers/video/sm7xx/smtcfb.h rt4ls/drivers/video/sm7xx/smtcfb.h
---- linux-2.6.30/drivers/video/sm7xx/smtcfb.h	1970-01-01 01:00:00.000000000 +0100
-+++ rt4ls/drivers/video/sm7xx/smtcfb.h	2009-06-12 16:28:47.728622169 +0200
+diff -Nur linux-2.6.30.orig/drivers/video/sm7xx/smtcfb.h linux-2.6.30/drivers/video/sm7xx/smtcfb.h
+--- linux-2.6.30.orig/drivers/video/sm7xx/smtcfb.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.30/drivers/video/sm7xx/smtcfb.h	2009-06-14 20:25:20.000000000 +0200
 @@ -0,0 +1,793 @@
 +/*
 + * smtcfb.h -- Silicon Motion SM7xx frame buffer device
@@ -24940,9 +24908,9 @@ diff -Nur linux-2.6.30/drivers/video/sm7xx/smtcfb.h rt4ls/drivers/video/sm7xx/sm
 +};
 +
 +#define numVGAModes		(sizeof(VGAMode) / sizeof(struct ModeInit))
-diff -Nur linux-2.6.30/fs/autofs4/waitq.c rt4ls/fs/autofs4/waitq.c
---- linux-2.6.30/fs/autofs4/waitq.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/fs/autofs4/waitq.c	2009-06-12 16:28:48.180649291 +0200
+diff -Nur linux-2.6.30.orig/fs/autofs4/waitq.c linux-2.6.30/fs/autofs4/waitq.c
+--- linux-2.6.30.orig/fs/autofs4/waitq.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/fs/autofs4/waitq.c	2009-06-14 20:25:20.000000000 +0200
 @@ -297,14 +297,20 @@
  	 */
  	if (notify == NFY_MOUNT) {
@@ -24972,9 +24940,9 @@ diff -Nur linux-2.6.30/fs/autofs4/waitq.c rt4ls/fs/autofs4/waitq.c
  	}
  
  	return 1;
-diff -Nur linux-2.6.30/fs/jbd/commit.c rt4ls/fs/jbd/commit.c
---- linux-2.6.30/fs/jbd/commit.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/fs/jbd/commit.c	2009-06-12 16:28:48.464665929 +0200
+diff -Nur linux-2.6.30.orig/fs/jbd/commit.c linux-2.6.30/fs/jbd/commit.c
+--- linux-2.6.30.orig/fs/jbd/commit.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/fs/jbd/commit.c	2009-06-14 20:25:20.000000000 +0200
 @@ -241,7 +241,7 @@
  			spin_lock(&journal->j_list_lock);
  		}
@@ -24995,9 +24963,20 @@ diff -Nur linux-2.6.30/fs/jbd/commit.c rt4ls/fs/jbd/commit.c
  			__journal_unfile_buffer(jh);
  			jbd_unlock_bh_state(bh);
  			journal_remove_journal_head(bh);
-diff -Nur linux-2.6.30/include/linux/cpumask.h rt4ls/include/linux/cpumask.h
---- linux-2.6.30/include/linux/cpumask.h	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/include/linux/cpumask.h	2009-06-12 16:29:16.018395927 +0200
+diff -Nur linux-2.6.30.orig/.gitignore linux-2.6.30/.gitignore
+--- linux-2.6.30.orig/.gitignore	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/.gitignore	2009-06-14 20:25:19.000000000 +0200
+@@ -32,6 +32,7 @@
+ tags
+ TAGS
+ vmlinux
++vmlinux.32
+ System.map
+ Module.markers
+ Module.symvers
+diff -Nur linux-2.6.30.orig/include/linux/cpumask.h linux-2.6.30/include/linux/cpumask.h
+--- linux-2.6.30.orig/include/linux/cpumask.h	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/include/linux/cpumask.h	2009-06-14 20:25:20.000000000 +0200
 @@ -1022,8 +1022,6 @@
  
  bool alloc_cpumask_var_node(cpumask_var_t *mask, gfp_t flags, int node);
@@ -25027,9 +25006,9 @@ diff -Nur linux-2.6.30/include/linux/cpumask.h rt4ls/include/linux/cpumask.h
  static inline void alloc_bootmem_cpumask_var(cpumask_var_t *mask)
  {
  }
-diff -Nur linux-2.6.30/ipc/shm.c rt4ls/ipc/shm.c
---- linux-2.6.30/ipc/shm.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/ipc/shm.c	2009-06-12 16:29:47.289072291 +0200
+diff -Nur linux-2.6.30.orig/ipc/shm.c linux-2.6.30/ipc/shm.c
+--- linux-2.6.30.orig/ipc/shm.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/ipc/shm.c	2009-06-14 20:25:20.000000000 +0200
 @@ -969,13 +969,10 @@
  SYSCALL_DEFINE1(shmdt, char __user *, shmaddr)
  {
@@ -25046,9 +25025,9 @@ diff -Nur linux-2.6.30/ipc/shm.c rt4ls/ipc/shm.c
  
  	if (addr & ~PAGE_MASK)
  		return retval;
-diff -Nur linux-2.6.30/kernel/sched_cpupri.c rt4ls/kernel/sched_cpupri.c
---- linux-2.6.30/kernel/sched_cpupri.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/kernel/sched_cpupri.c	2009-06-12 16:29:48.957102637 +0200
+diff -Nur linux-2.6.30.orig/kernel/sched_cpupri.c linux-2.6.30/kernel/sched_cpupri.c
+--- linux-2.6.30.orig/kernel/sched_cpupri.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/kernel/sched_cpupri.c	2009-06-14 20:25:20.000000000 +0200
 @@ -165,7 +165,7 @@
  		vec->count = 0;
  		if (bootmem)
@@ -25058,9 +25037,9 @@ diff -Nur linux-2.6.30/kernel/sched_cpupri.c rt4ls/kernel/sched_cpupri.c
  			goto cleanup;
  	}
  
-diff -Nur linux-2.6.30/kernel/sched_rt.c rt4ls/kernel/sched_rt.c
---- linux-2.6.30/kernel/sched_rt.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/kernel/sched_rt.c	2009-06-12 16:29:48.969124560 +0200
+diff -Nur linux-2.6.30.orig/kernel/sched_rt.c linux-2.6.30/kernel/sched_rt.c
+--- linux-2.6.30.orig/kernel/sched_rt.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/kernel/sched_rt.c	2009-06-14 20:25:20.000000000 +0200
 @@ -1591,7 +1591,7 @@
  	unsigned int i;
  
@@ -25070,9 +25049,9 @@ diff -Nur linux-2.6.30/kernel/sched_rt.c rt4ls/kernel/sched_rt.c
  					GFP_KERNEL, cpu_to_node(i));
  }
  #endif /* CONFIG_SMP */
-diff -Nur linux-2.6.30/kernel/smp.c rt4ls/kernel/smp.c
---- linux-2.6.30/kernel/smp.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/kernel/smp.c	2009-06-12 16:29:48.969124560 +0200
+diff -Nur linux-2.6.30.orig/kernel/smp.c linux-2.6.30/kernel/smp.c
+--- linux-2.6.30.orig/kernel/smp.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/kernel/smp.c	2009-06-14 20:25:20.000000000 +0200
 @@ -52,7 +52,7 @@
  	switch (action) {
  	case CPU_UP_PREPARE:
@@ -25082,9 +25061,9 @@ diff -Nur linux-2.6.30/kernel/smp.c rt4ls/kernel/smp.c
  				cpu_to_node(cpu)))
  			return NOTIFY_BAD;
  		break;
-diff -Nur linux-2.6.30/lib/cpumask.c rt4ls/lib/cpumask.c
---- linux-2.6.30/lib/cpumask.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/lib/cpumask.c	2009-06-12 16:29:49.032452180 +0200
+diff -Nur linux-2.6.30.orig/lib/cpumask.c linux-2.6.30/lib/cpumask.c
+--- linux-2.6.30.orig/lib/cpumask.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/lib/cpumask.c	2009-06-14 20:25:20.000000000 +0200
 @@ -119,12 +119,6 @@
  }
  EXPORT_SYMBOL(alloc_cpumask_var_node);
@@ -25111,9 +25090,9 @@ diff -Nur linux-2.6.30/lib/cpumask.c rt4ls/lib/cpumask.c
  /**
   * alloc_bootmem_cpumask_var - allocate a struct cpumask from the bootmem arena.
   * @mask: pointer to cpumask_var_t where the cpumask is returned
-diff -Nur linux-2.6.30/net/sched/cls_cgroup.c rt4ls/net/sched/cls_cgroup.c
---- linux-2.6.30/net/sched/cls_cgroup.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/net/sched/cls_cgroup.c	2009-06-12 16:29:50.516543166 +0200
+diff -Nur linux-2.6.30.orig/net/sched/cls_cgroup.c linux-2.6.30/net/sched/cls_cgroup.c
+--- linux-2.6.30.orig/net/sched/cls_cgroup.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/net/sched/cls_cgroup.c	2009-06-14 20:25:20.000000000 +0200
 @@ -167,9 +167,6 @@
  	struct tcf_exts e;
  	int err;
@@ -25124,9 +25103,9 @@ diff -Nur linux-2.6.30/net/sched/cls_cgroup.c rt4ls/net/sched/cls_cgroup.c
  	if (head == NULL) {
  		if (!handle)
  			return -EINVAL;
-diff -Nur linux-2.6.30/sound/core/pcm_native.c rt4ls/sound/core/pcm_native.c
---- linux-2.6.30/sound/core/pcm_native.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/sound/core/pcm_native.c	2009-06-12 16:29:54.880818910 +0200
+diff -Nur linux-2.6.30.orig/sound/core/pcm_native.c linux-2.6.30/sound/core/pcm_native.c
+--- linux-2.6.30.orig/sound/core/pcm_native.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/sound/core/pcm_native.c	2009-06-14 20:25:20.000000000 +0200
 @@ -3091,7 +3091,11 @@
  			return VM_FAULT_SIGBUS;
  	} else {
@@ -25151,9 +25130,9 @@ diff -Nur linux-2.6.30/sound/core/pcm_native.c rt4ls/sound/core/pcm_native.c
  	offset = area->vm_pgoff << PAGE_SHIFT;
  	switch (offset) {
  	case SNDRV_PCM_MMAP_OFFSET_STATUS:
-diff -Nur linux-2.6.30/sound/core/sgbuf.c rt4ls/sound/core/sgbuf.c
---- linux-2.6.30/sound/core/sgbuf.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/sound/core/sgbuf.c	2009-06-12 16:29:54.904819175 +0200
+diff -Nur linux-2.6.30.orig/sound/core/sgbuf.c linux-2.6.30/sound/core/sgbuf.c
+--- linux-2.6.30.orig/sound/core/sgbuf.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/sound/core/sgbuf.c	2009-06-14 20:25:20.000000000 +0200
 @@ -114,7 +114,11 @@
  			if (!i)
  				table->addr |= chunk; /* mark head */
@@ -25179,9 +25158,9 @@ diff -Nur linux-2.6.30/sound/core/sgbuf.c rt4ls/sound/core/sgbuf.c
  	if (! dmab->area)
  		goto _failed;
  	if (res_size)
-diff -Nur linux-2.6.30/sound/pci/Kconfig rt4ls/sound/pci/Kconfig
---- linux-2.6.30/sound/pci/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/sound/pci/Kconfig	2009-06-12 16:29:55.036828170 +0200
+diff -Nur linux-2.6.30.orig/sound/pci/Kconfig linux-2.6.30/sound/pci/Kconfig
+--- linux-2.6.30.orig/sound/pci/Kconfig	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/sound/pci/Kconfig	2009-06-14 20:25:20.000000000 +0200
 @@ -259,7 +259,6 @@
  
  config SND_CS5535AUDIO
@@ -25190,9 +25169,9 @@ diff -Nur linux-2.6.30/sound/pci/Kconfig rt4ls/sound/pci/Kconfig
  	select SND_PCM
  	select SND_AC97_CODEC
  	help
-diff -Nur linux-2.6.30/virt/kvm/kvm_main.c rt4ls/virt/kvm/kvm_main.c
---- linux-2.6.30/virt/kvm/kvm_main.c	2009-06-10 05:05:27.000000000 +0200
-+++ rt4ls/virt/kvm/kvm_main.c	2009-06-12 16:29:55.860876705 +0200
+diff -Nur linux-2.6.30.orig/virt/kvm/kvm_main.c linux-2.6.30/virt/kvm/kvm_main.c
+--- linux-2.6.30.orig/virt/kvm/kvm_main.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/virt/kvm/kvm_main.c	2009-06-14 20:25:20.000000000 +0200
 @@ -2301,7 +2301,7 @@
  
  	bad_pfn = page_to_pfn(bad_page);

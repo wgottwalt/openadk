@@ -55,8 +55,8 @@ $(eval $(call KMOD_template,ATM,atm,\
 ,50))
 
 $(eval $(call KMOD_template,BRIDGE,bridge,\
-	$(MODULES_DIR)/kernel/net/802/stp \
 	$(MODULES_DIR)/kernel/net/llc/llc \
+	$(MODULES_DIR)/kernel/net/802/stp \
 	$(MODULES_DIR)/kernel/net/bridge/bridge \
 ,10))
 
@@ -236,12 +236,12 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NOTRACK,nf-notrack,\
 #
 $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack \
-,50))
+,45))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_defrag_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
-,51))
+,50))
 
 $(eval $(call KMOD_template,IP_NF_FTP,nf-ip-conntrack-ftp,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_ftp \
@@ -508,8 +508,8 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
-    $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
@@ -546,29 +546,32 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-hw-geode,\
 
 $(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
-,03))
+,02))
 
 $(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
     $(MODULES_DIR)/kernel/crypto/aead \
+,03))
+
+$(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
+    $(MODULES_DIR)/kernel/crypto/crypto_hash \
 ,04))
 
 $(eval $(call KMOD_template,CRYPTO_BLKCIPHER,crypto-blkcipher,\
     $(MODULES_DIR)/kernel/crypto/crypto_wq \
     $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
-    $(MODULES_DIR)/kernel/crypto/rng \
-    $(MODULES_DIR)/kernel/crypto/krng \
-    $(MODULES_DIR)/kernel/crypto/eseqiv \
-    $(MODULES_DIR)/kernel/crypto/chainiv \
 ,05))
 
-$(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
-    $(MODULES_DIR)/kernel/crypto/crypto_hash \
-,05))
+$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng,\
+    $(MODULES_DIR)/kernel/crypto/rng \
+    $(MODULES_DIR)/kernel/crypto/krng \
+,06))
 
 $(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/pcompress \
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
-,06))
+    $(MODULES_DIR)/kernel/crypto/eseqiv \
+    $(MODULES_DIR)/kernel/crypto/chainiv \
+,07))
 
 $(eval $(call KMOD_template,CRYPTO_HMAC,crypto-hmac,\
     $(MODULES_DIR)/kernel/crypto/hmac \
@@ -676,6 +679,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
+    $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))
 
