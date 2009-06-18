@@ -1,0 +1,25 @@
+diff -Nur uClibc-0.9.30.1.orig/Rules.mak uClibc-0.9.30.1/Rules.mak
+--- uClibc-0.9.30.1.orig/Rules.mak	2009-03-02 22:10:04.000000000 +0100
++++ uClibc-0.9.30.1/Rules.mak	2009-06-18 16:02:34.000000000 +0200
+@@ -150,9 +150,10 @@
+ # Flags in OPTIMIZATION are used only for non-debug builds
+ OPTIMIZATION:=
+ # Use '-Os' optimization if available, else use -O2, allow Config to override
+-OPTIMIZATION+=$(call check_gcc,-Os,-O2)
++# disable, let OpenADK do the optimization
++#OPTIMIZATION+=$(call check_gcc,-Os,-O2)
+ # Use the gcc 3.4 -funit-at-a-time optimization when available
+-OPTIMIZATION+=$(call check_gcc,-funit-at-a-time,)
++#OPTIMIZATION+=$(call check_gcc,-funit-at-a-time,)
+ 
+ GCC_MAJOR_VER?=$(shell $(CC) -dumpversion | cut -d . -f 1)
+ #GCC_MINOR_VER?=$(shell $(CC) -dumpversion | cut -d . -f 2)
+@@ -547,7 +548,7 @@
+ 
+ LDFLAGS:=$(LDFLAGS_NOSTRIP) -Wl,-z,defs
+ ifeq ($(DODEBUG),y)
+-CFLAGS += -O0 -g3
++CFLAGS += 
+ else
+ CFLAGS += $(OPTIMIZATION) $(XARCH_CFLAGS)
+ endif
