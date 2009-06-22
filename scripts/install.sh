@@ -206,7 +206,7 @@ printf "Fixing permissions\n"
 chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
 
-if [ $rb532 -ne 0 ];then
+if [ $rb532 -eq 0 ];then
 	printf "Copying grub files\n"
 	mkdir $tmp/boot/grub
 	cp /boot/grub/stage1 $tmp/boot/grub
