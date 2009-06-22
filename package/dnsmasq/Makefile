@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.47
+PKG_VERSION:=		2.49
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4524081e56d0b935717d493e8e8d3e11
+PKG_MD5SUM:=		7ccc861d8a733474f9c0a0a127006ee9
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		net
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq
