@@ -29,10 +29,10 @@ $(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 $(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_NOSSL},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
-PKG_CFLAGS=-fno-builtin -fno-rtti -nostdinc++
+PKG_FLAGS=-fno-builtin -fno-rtti -nostdinc++ -fPIC
 PKG_LDFLAGS=-nodefaultlibs -luClibc++ -lc -lm
 else
-PKG_CFLAGS=
+PKG_FLAGS=-fPIC
 PKG_LDFLAGS=-shared
 endif
 

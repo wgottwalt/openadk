@@ -4,6 +4,7 @@ config ADK_PACKAGE_ID3LIB
 	default n
 	depends on ADK_CXX
 	select ADK_PACKAGE_ZLIB
+	select ADK_PACKAGE_LIBICONV
 	help
 	  An ID3v1/ID3v2 tagging library.
 

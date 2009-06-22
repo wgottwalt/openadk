@@ -18,6 +18,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TLDFLAGS+=		-shared
+TCFLAGS+=		-fPIC
+TCXXFLAGS+=		-fPIC
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-kernel-support --with-linux=${LINUX_DIR}
 BUILD_STYLE=		auto

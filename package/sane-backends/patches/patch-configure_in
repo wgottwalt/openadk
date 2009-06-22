@@ -1,0 +1,11 @@
+--- sane-backends-1.0.20.orig/configure.in	2009-05-03 03:25:23.000000000 +0200
++++ sane-backends-1.0.20/configure.in	2009-06-19 23:27:39.000000000 +0200
+@@ -513,7 +513,7 @@ ALL_BACKENDS="abaton agfafocus apple art
+         hp5590 hpsj5s hpljm1005 hs2p ibm leo lexmark ma1509 \
+         matsushita microtek microtek2 mustek mustek_pp \
+         mustek_usb mustek_usb2 nec net niash pie pint \
+-        pixma plustek plustek_pp qcam ricoh rts8891 s9036 \
++        pixma plustek plustek_pp ricoh rts8891 s9036 \
+         sceptre sharp sm3600 sm3840 snapscan sp15c st400 \
+         stv680 tamarack teco1 teco2 teco3 test u12 umax 
+         umax_pp umax1220u v4l xerox_mfp"

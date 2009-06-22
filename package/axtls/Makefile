@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PK
 BUILD_STYLE=		auto
 XAKE_FLAGS+=		STRIP='' \
 			CC='${TARGET_CC}' \
-			OPT_CFLAGS='${TARGET_CFLAGS}' \
+			OPT_CFLAGS='${TARGET_CFLAGS} -fPIC' \
 			OPT_LDFLAGS=""
 
 do-configure:
