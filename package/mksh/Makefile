@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME=		mksh
-PKG_VERSION=		38
+PKG_VERSION=		38c
 PKG_RELEASE=		1
-PKG_MD5SUM=		e2fa1f50690abf763cc3e4d8e1612728
-PKG_DESCR:=		popular MirOS KSH
+PKG_MD5SUM=		692192a6468b5f5c5e559756f1851766
+PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org
 PKG_SITES=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
@@ -26,11 +26,11 @@ endif
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' \
 	    CPPFLAGS='${TCPPFLAGS}' LDFLAGS='${TLDFLAGS}' \
-	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r
+	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -combine
 
 do-install:
-	install -d -m 0755 ${IDIR_MKSH}/bin
-	install -c -m 755 ${WRKBUILD}/mksh ${IDIR_MKSH}/bin/
-	install -c -m 644 ${WRKSRC}/dot.mkshrc ${IDIR_MKSH}/.mkshrc
+	${INSTALL_DIR} ${IDIR_MKSH}/bin ${IDIR_MKSH}/root
+	${INSTALL_BIN} ${WRKBUILD}/mksh ${IDIR_MKSH}/bin/
+	${CP} ${WRKSRC}/dot.mkshrc ${IDIR_MKSH}/root/.mkshrc
 
 include ${TOPDIR}/mk/pkg-bottom.mk
