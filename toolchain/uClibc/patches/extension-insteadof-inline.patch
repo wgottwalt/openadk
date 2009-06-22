@@ -1,0 +1,77 @@
+diff -Nur uClibc-0.9.30.1.orig/ldso/ldso/mips/dl-sysdep.h uClibc-0.9.30.1/ldso/ldso/mips/dl-sysdep.h
+--- uClibc-0.9.30.1.orig/ldso/ldso/mips/dl-sysdep.h	2008-09-15 18:36:11.000000000 +0200
++++ uClibc-0.9.30.1/ldso/ldso/mips/dl-sysdep.h	2009-06-21 19:08:44.487613137 +0200
+@@ -163,22 +163,25 @@
+ 
+ #define OFFSET_GP_GOT 0x7ff0
+ 
+-static __inline__ ElfW(Addr) *
+-elf_mips_got_from_gpreg (ElfW(Addr) gpreg)
+-{
+-	/* FIXME: the offset of gp from GOT may be system-dependent. */
+-	return (ElfW(Addr) *) (gpreg - OFFSET_GP_GOT);
+-}
++#define elf_mips_got_from_gpreg(gpreg) __extension__({			\
++	ElfW(Addr) *elf_mips_got_from_gpreg_res;			\
++									\
++	/* FIXME: the offset of gp from GOT may be system-dependent. */	\
++	elf_mips_got_from_gpreg_res = gpreg - OFFSET_GP_GOT;		\
++	(elf_mips_got_from_gpreg_res);					\
++})
+ 
+ /* Return the link-time address of _DYNAMIC.  Conveniently, this is the
+    first element of the GOT.  This must be inlined in a function which
+    uses global data.  We assume its $gp points to the primary GOT.  */
+-static __inline__ ElfW(Addr)
+-elf_machine_dynamic (void)
+-{
+-	register ElfW(Addr) gp __asm__ ("$28");
+-	return *elf_mips_got_from_gpreg (gp);
+-}
++#define elf_machine_dynamic() __extension__({				\
++	register ElfW(Addr) elf_machine_dynamic_gp __asm__("$28");	\
++	ElfW(Addr) elf_machine_dynamic_res;				\
++									\
++	elf_machine_dynamic_res = *elf_mips_got_from_gpreg(		\
++	    elf_machine_dynamic_gp);					\
++	(elf_machine_dynamic_res);					\
++})
+ 
+ #define STRINGXP(X) __STRING(X)
+ #define STRINGXV(X) STRINGV_(X)
+@@ -192,21 +195,20 @@
+ #endif
+ 
+ /* Return the run-time load address of the shared object.  */
+-static __inline__ ElfW(Addr)
+-elf_machine_load_address (void)
+-{
+-	ElfW(Addr) addr;
+-	__asm__ ("        .set noreorder\n"
+-	     "        " STRINGXP (PTR_LA) " %0, 0f\n"
+-	     "        bltzal $0, 0f\n"
+-	     "        nop\n"
+-	     "0:      " STRINGXP (PTR_SUBU) " %0, $31, %0\n"
+-	     "        .set reorder\n"
+-	     :        "=r" (addr)
+-	     :        /* No inputs */
+-	     :        "$31");
+-	return addr;
+-}
++#define elf_machine_load_address() __extension__({			\
++	ElfW(Addr) elf_machine_load_address_addr;			\
++									\
++	__asm__ ("        .set noreorder\n"				\
++	     "        " STRINGXP (PTR_LA) " %0, 0f\n"			\
++	     "        bltzal $0, 0f\n"					\
++	     "        nop\n"						\
++	     "0:      " STRINGXP (PTR_SUBU) " %0, $31, %0\n"		\
++	     "        .set reorder\n"					\
++	     :        "=r" (elf_machine_load_address_addr)		\
++	     :        /* No inputs */					\
++	     :        "$31");						\
++	(elf_machine_load_address_addr);				\
++})
+ 
+ static __inline__ void
+ elf_machine_relative (ElfW(Addr) load_off, const ElfW(Addr) rel_addr,
