@@ -1,0 +1,13 @@
+--- util-linux-ng-2.15.orig/login-utils/Makefile.in	2009-05-05 23:21:34.000000000 +0200
++++ util-linux-ng-2.15/login-utils/Makefile.in	2009-06-22 23:05:58.000000000 +0200
+@@ -1164,10 +1164,6 @@ $(ul_libblkid_la):
+ @BUILD_LOGIN_UTILS_TRUE@install-exec-hook::
+ @BUILD_LOGIN_UTILS_TRUE@	cd $(DESTDIR)$(usrsbinexecdir) && ln -sf vipw vigr
+ 
+-@BUILD_WALL_TRUE@@MAKEINSTALL_DO_CHOWN_TRUE@@USE_TTY_GROUP_TRUE@install-exec-hook::
+-@BUILD_WALL_TRUE@@MAKEINSTALL_DO_CHOWN_TRUE@@USE_TTY_GROUP_TRUE@	chgrp tty $(DESTDIR)$(usrbinexecdir)/wall
+-@BUILD_WALL_TRUE@@MAKEINSTALL_DO_CHOWN_TRUE@@USE_TTY_GROUP_TRUE@	chmod g+s $(DESTDIR)$(usrbinexecdir)/wall
+-
+ @BUILD_INIT_TRUE@install-exec-hook::
+ @BUILD_INIT_TRUE@	cd $(DESTDIR)$(sbindir) && ln -sf shutdown reboot
+ @BUILD_INIT_TRUE@	cd $(DESTDIR)$(sbindir) && ln -sf shutdown fastboot

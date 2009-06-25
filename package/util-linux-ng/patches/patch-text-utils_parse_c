@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- util-linux-2.12r.orig/text-utils/parse.c	2002-03-09 00:07:00.000000000 +0100
-+++ util-linux-2.12r/text-utils/parse.c	2008-10-16 12:51:11.000000000 +0200
+--- util-linux-ng-2.15.orig/text-utils/parse.c	2009-02-24 16:39:30.000000000 +0100
++++ util-linux-ng-2.15/text-utils/parse.c	2009-06-22 22:54:37.000000000 +0200
 @@ -64,7 +64,7 @@ void addfile(char *name)
  		exit(1);
  	}

@@ -1,0 +1,11 @@
+--- util-linux-ng-2.15.orig/login-utils/wall.c	2009-02-24 16:39:30.000000000 +0100
++++ util-linux-ng-2.15/login-utils/wall.c	2009-06-22 22:43:36.000000000 +0200
+@@ -95,7 +95,7 @@ main(int argc, char **argv) {
+         textdomain(PACKAGE);
+ 
+ 	progname = argv[0];
+-	p = rindex(progname, '/');
++	p = strrchr(progname, '/');
+ 	if (p)
+ 	     progname = p+1;
+ 

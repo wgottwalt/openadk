@@ -3,13 +3,14 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		util-linux
-PKG_VERSION:=		2.12r
+PKG_NAME:=		util-linux-ng
+PKG_VERSION:=		2.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c261230b27fc0fbcc287c76884caf2d3
+PKG_MD5SUM:=		18c9f263a44db67a73c12caf49b03e22
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		admin
-PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux/}
+PKG_URL:=		http://userweb.kernel.org/~kzak/util-linux-ng
+PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v2.15/}
 
 PKG_DESCR_1:=		Partition table manipulation utility
 PKG_DESCR_2:=		Swap space management utilities

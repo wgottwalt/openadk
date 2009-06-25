@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- util-linux-2.12r.orig/text-utils/display.c	2002-03-09 00:05:39.000000000 +0100
-+++ util-linux-2.12r/text-utils/display.c	2008-10-16 12:52:48.000000000 +0200
+--- util-linux-ng-2.15.orig/text-utils/display.c	2009-02-24 16:39:30.000000000 +0100
++++ util-linux-ng-2.15/text-utils/display.c	2009-06-22 22:56:12.000000000 +0200
 @@ -163,7 +163,7 @@ static void bpad(PR *pr)
  	pr->cchar[0] = 's';
  	pr->cchar[1] = 0;

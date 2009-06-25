@@ -2,6 +2,7 @@ config ADK_PACKAGE_XF86_VIDEO_GEODE
 	prompt "xf86-video-geode........................... X11 driver for AMD Geode"
 	tristate
 	default n
+	depends on ADK_LINUX_X86_ALIX1C
 	select ADK_PACKAGE_XORG_SERVER
 	help
          http://www.x.org

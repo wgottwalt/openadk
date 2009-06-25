@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- util-linux-2.12r.orig/mount/mount.c	2004-12-21 23:00:36.000000000 +0100
-+++ util-linux-2.12r/mount/mount.c	2008-10-16 12:00:29.000000000 +0200
-@@ -488,11 +488,11 @@ guess_fstype_and_mount(const char *spec,
+--- util-linux-ng-2.15.orig/mount/mount.c	2009-03-27 13:13:20.000000000 +0100
++++ util-linux-ng-2.15/mount/mount.c	2009-06-22 22:58:48.000000000 +0200
+@@ -914,11 +914,11 @@ guess_fstype_and_mount(const char *spec,
  
     /* Accept a comma-separated list of types, and try them one by one */
     /* A list like "nonfs,.." indicates types not to use */
@@ -14,4 +13,4 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 +      while((p = strchr(t,',')) != NULL) {
  	 *p = 0;
  	 args.type = *types = t;
- 	 if(do_mount_syscall (&args) == 0)
+ 	 if (do_mount (&args, special, status) == 0)
