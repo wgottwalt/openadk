@@ -273,20 +273,20 @@ endmenu
 
 menu 'Build Options'
 
-#config BUSYBOX_STATIC
-#	bool "Build BusyBox as a static binary (no shared libs)"
-#	default n
-#	help
-#	  If you want to build a static BusyBox binary, which does not
-#	  use or require any shared libraries, then enable this option.
-#	  This can cause BusyBox to be considerably larger, so you should
-#	  leave this option false unless you have a good reason (i.e.
-#	  your target platform does not support shared libraries, or
-#	  you are building an initrd which doesn't need anything but
-#	  BusyBox, etc).
-#
-#	  Most people will leave this set to 'N'.
-#
+config BUSYBOX_STATIC
+	bool "Build BusyBox as a static binary (no shared libs)"
+	default n
+	help
+	  If you want to build a static BusyBox binary, which does not
+	  use or require any shared libraries, then enable this option.
+	  This can cause BusyBox to be considerably larger, so you should
+	  leave this option false unless you have a good reason (i.e.
+	  your target platform does not support shared libraries, or
+	  you are building an initrd which doesn't need anything but
+	  BusyBox, etc).
+
+	  Most people will leave this set to 'N'.
+
 #config BUSYBOX_PIE
 #	bool "Build BusyBox as a position independent executable"
 #	default n

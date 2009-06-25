@@ -1,0 +1,15 @@
+--- nss-3.12.3.orig/mozilla/security/coreconf/Linux.mk	2008-09-06 01:17:23.000000000 +0200
++++ nss-3.12.3/mozilla/security/coreconf/Linux.mk	2009-06-24 19:11:27.470840369 +0200
+@@ -46,9 +46,9 @@ ifeq ($(USE_PTHREADS),1)
+ 	IMPL_STRATEGY = _PTH
+ endif
+ 
+-CC			= gcc
+-CCC			= g++
+-RANLIB			= ranlib
++CC			?= gcc
++CCC			?= g++
++RANLIB			?= ranlib
+ 
+ DEFAULT_COMPILER = gcc
+ 

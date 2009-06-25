@@ -9,4 +9,4 @@ cat /etc/banner 2>&-
 [ -x /usr/bin/less ] || alias less=more
 [ -x /usr/bin/vim ] || alias vim=vi
 [ -x /usr/bin/arp ] || arp() { cat /proc/net/arp; }
-[ -x /usr/bin/ldd ] || ldd() { LD_TRACE_LOADED_OBJECTS=1 /lib/ld.so "$@"; }
+[ -x /usr/bin/ldd ] || ldd() { LD_TRACE_LOADED_OBJECTS=1 "$@"; }

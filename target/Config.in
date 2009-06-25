@@ -1,7 +1,14 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+# mark broken devices
+config ADK_BROKEN
+	bool
+
 config ADK_DEVICE_NO_FPU
+	bool
+
+config ADK_LINUX_64
 	bool
 
 config ADK_NATIVE
@@ -83,10 +90,6 @@ config ADK_DEVICE
 	default "rescue-mips"  if ADK_rescue_mips
 	default "rescue-mipsel"  if ADK_rescue_mipsel
 
-config ADK_LINUX_MIPS64
-	bool
-	default n	
-
 menu "Target system"
 
 choice
@@ -124,7 +127,8 @@ config ADK_LINUX_CRIS_FOXBOARD
 config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
-	select ADK_LINUX_MIPS64
+	select ADK_LINUX_64
+	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
@@ -176,6 +180,7 @@ depends on ADK_LINUX_RESCUE
 config ADK_LINUX_X86_64_RESCUE
 	bool "x86_64"
 	select ADK_rescue_x86_64
+	select ADK_LINUX_64
 	help
 	 X86 architecture.
 
@@ -226,20 +231,21 @@ config ADK_LINUX_MIPSEL_QEMU
 config ADK_LINUX_MIPS64_QEMU
 	bool "mips64 (big endian)"
 	select ADK_qemu_mips64
-	select ADK_LINUX_MIPS64
+	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 BE architecture.
 
 config ADK_LINUX_MIPS64EL_QEMU
 	bool "mips64 (little endian)"
 	select ADK_qemu_mips64el
-	select ADK_LINUX_MIPS64
+	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 LE architecture.
 
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
 	select ADK_qemu_cris
+	select ADK_BROKEN
 	help
 	 Qemu support for CRISv32 architecture.
 

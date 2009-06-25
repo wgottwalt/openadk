@@ -2334,17 +2334,6 @@ diff -Nur linux-2.6.30.orig/arch/mips/kernel/traps.c linux-2.6.30/arch/mips/kern
  	}
  	return (void *)old_handler;
  }
-diff -Nur linux-2.6.30.orig/arch/mips/lib/delay.c linux-2.6.30/arch/mips/lib/delay.c
---- linux-2.6.30.orig/arch/mips/lib/delay.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30/arch/mips/lib/delay.c	2009-06-11 21:10:53.309003369 +0200
-@@ -51,6 +51,6 @@
- {
- 	unsigned int lpj = current_cpu_data.udelay_val;
- 
--	__delay((us * 0x00000005 * HZ * lpj) >> 32);
-+	__delay((ns * 0x00000005 * HZ * lpj) >> 32);
- }
- EXPORT_SYMBOL(__ndelay);
 diff -Nur linux-2.6.30.orig/drivers/Kconfig linux-2.6.30/drivers/Kconfig
 --- linux-2.6.30.orig/drivers/Kconfig	2009-06-10 05:05:27.000000000 +0200
 +++ linux-2.6.30/drivers/Kconfig	2009-06-11 20:55:34.619476239 +0200

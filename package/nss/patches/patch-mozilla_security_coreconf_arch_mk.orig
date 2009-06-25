@@ -1,0 +1,11 @@
+--- nss-3.12.3.orig/mozilla/security/coreconf/arch.mk	2009-03-11 19:54:24.000000000 +0100
++++ nss-3.12.3/mozilla/security/coreconf/arch.mk	2009-06-24 21:38:51.010734431 +0200
+@@ -329,7 +329,7 @@ endif
+ # IMPL_STRATEGY may be defined too.
+ #
+ 
+-OBJDIR_NAME = $(OS_TARGET)$(OS_RELEASE)$(CPU_TAG)$(COMPILER_TAG)$(LIBC_TAG)$(IMPL_STRATEGY)$(OBJDIR_TAG).OBJ
++OBJDIR_NAME = $(OS_TARGET)$(OS_RELEASE)$(CPU_TAG)$(LIBC_TAG)$(OBJDIR_TAG).OBJ
+ 
+ ifeq (,$(filter-out WIN%,$(OS_TARGET)))
+ ifndef BUILD_OPT

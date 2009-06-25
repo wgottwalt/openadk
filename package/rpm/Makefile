@@ -1,0 +1,37 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		rpm
+PKG_VERSION:=		4.7.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		74791d638c571ec79f06227d453a6a03
+PKG_DESCR:=		GNU rpm
+PKG_SECTION:=		base
+PKG_URL:=		http://www.rpm.org
+PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
+
+DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,RPM,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr \
+			-I${STAGING_DIR}/usr/include/nss
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS:=	--with-external-db \
+			--without-lua
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_RPM)/usr/bin $(IDIR_RPM)/usr/lib
+	$(INSTALL_DIR) $(IDIR_RPM)/usr/lib/rpm
+	$(INSTALL_BIN) $(WRKINST)/bin/rpm $(IDIR_RPM)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/rpm* $(IDIR_RPM)/usr/bin
+	$(CP) $(WRKINST)/usr/lib/*.so* $(IDIR_RPM)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/rpm/* $(IDIR_RPM)/usr/lib/rpm
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,11 @@
+config ADK_PACKAGE_RPM
+	prompt "rpm............................... Red Hat package manager"
+	tristate
+	depends on ADK_CXX
+	select ADK_PACKAGE_NSS
+	select ADK_PACKAGE_NSPR
+	select ADK_PACKAGE_ZLIB
+	select ADK_PACKAGE_LIBDB
+	default n
+	help
+	  Red Hat package manager

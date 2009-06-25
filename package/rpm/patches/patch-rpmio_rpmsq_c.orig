@@ -1,0 +1,30 @@
+--- rpm-4.7.0.orig/rpmio/rpmsq.c	2009-03-03 07:51:52.000000000 +0100
++++ rpm-4.7.0/rpmio/rpmsq.c	2009-06-25 20:02:58.903020248 +0200
+@@ -115,6 +115,7 @@ fprintf(stderr, "    Insert(%p): %p\n", 
+  */
+ static int rpmsqRemove(void * elem)
+ {
++    sigset_t new_set, old_set;
+     rpmsq sq = (rpmsq) elem;
+     int ret = -1;
+ 
+@@ -124,7 +125,9 @@ static int rpmsqRemove(void * elem)
+ if (_rpmsq_debug)
+ fprintf(stderr, "    Remove(%p): %p\n", ME(), sq);
+ #endif
+-	ret = sighold (SIGCHLD);
++	sigemptyset( &new_set );
++	sigaddset( &new_set, SIGCHLD );
++	ret = sigprocmask(SIG_BLOCK, &new_set, &old_set);
+ 	if (ret == 0) {
+ 	    remque(elem);
+ 	   
+@@ -142,7 +145,7 @@ fprintf(stderr, "    Remove(%p): %p\n", 
+ 	    sq->reaped = 0;
+ 	    sq->child = 0;
+ #endif
+-	    ret = sigrelse(SIGCHLD);
++	    ret = sigprocmask( SIG_SETMASK, &old_set, NULL );
+ 	}
+     }
+     return ret;

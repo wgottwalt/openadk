@@ -1,0 +1,12 @@
+--- rpm-4.7.0.orig/rpmio/fts.c	2009-03-03 07:51:52.000000000 +0100
++++ rpm-4.7.0/rpmio/fts.c	2009-06-25 20:23:10.374967519 +0200
+@@ -64,6 +64,9 @@ static char sccsid[] = "@(#)fts.c	8.6 (B
+ #include "rpmio/fts.h"
+ #include <rpm/rpmio.h>
+ #include <rpm/rpmurl.h>
++#ifdef __UCLIBC__
++#   define __fxstat64(_stat_ver, _fd, _sbp)	fstat64((_fd), (_sbp))
++#endif
+ #   define __set_errno(val) (*__errno_location ()) = (val)
+ #   define __open	open
+ #   define __close	close

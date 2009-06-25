@@ -182,6 +182,8 @@ raddump-compile: openssl-compile libpcap-compile
 radiusclient-ng-compile: openssl-compile
 rarpd-compile: libnet-compile
 readline-compile: ncurses-compile
+nss-compile: nspr-compile zlib-compile
+rpm-compile: nss-compile libdb-compile
 rrdcollect-compile: rrdtool-compile
 rrdtool-compile: libxml2-compile cgilib-compile freetype-compile libart-compile libpng-compile
 rsync-compile: popt-compile

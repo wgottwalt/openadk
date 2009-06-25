@@ -101,8 +101,10 @@ image:
 switch:
 	echo "Saving configuration for device: ${DEVICE}"
 	cp .config .config.${DEVICE}
+	mv .cfg .cfg.${DEVICE}
 	if [ -f .config.${DEV} ];then cp .config.${DEV} .config; \
 	cp .config.${DEV} .config.old; \
+	mv .cfg.${DEV} .cfg; \
 	echo "Setting configuration to device: ${DEV}"; \
 	else echo "No old device config found";mv .config .config.bak;fi
 

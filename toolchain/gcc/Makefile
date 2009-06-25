@@ -38,7 +38,7 @@ ifeq ($(ADK_DEVICE_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 
-ifeq ($(ADK_LINUX_MIPS64),y)
+ifeq ($(ADK_LINUX_64),y)
 GCC_CONFOPTS+=		--with-abi=64
 endif
 

@@ -12,7 +12,7 @@ else
 CONFOPTS+=		--disable-libssp
 endif
 
-ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
+ifeq ($(ADK_LINUX_64),y)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 

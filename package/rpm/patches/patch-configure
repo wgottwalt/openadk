@@ -1,0 +1,11 @@
+--- rpm-4.7.0.orig/configure	2009-04-16 10:10:33.000000000 +0200
++++ rpm-4.7.0/configure	2009-06-23 19:55:16.747272696 +0200
+@@ -21839,7 +21839,7 @@ if test "$GCC" = yes; then
+     CFLAGS="$CFLAGS -fPIC -DPIC -D_REENTRANT -Wall -Wpointer-arith -Wmissing-prototypes -Wno-char-subscripts"
+     # XXX disabled for now due to noise from NSPR headers
+     # CFLAGS="$CFLAGS -Wstrict-prototypes"
+-    cflags_to_try="-fno-strict-aliasing -fstack-protector"
++    cflags_to_try="-fno-strict-aliasing"
+     { $as_echo "$as_me:$LINENO: checking supported compiler flags" >&5
+ $as_echo_n "checking supported compiler flags... " >&6; }
+     old_cflags=$CFLAGS

@@ -1,0 +1,6 @@
+config ADK_PACKAGE_MAKE
+	prompt "make.............................. GNU make"
+	tristate
+	default n
+	help
+	  GNU make

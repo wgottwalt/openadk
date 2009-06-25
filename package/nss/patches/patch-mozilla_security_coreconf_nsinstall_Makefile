@@ -1,0 +1,13 @@
+--- nss-3.12.3.orig/mozilla/security/coreconf/nsinstall/Makefile	2005-10-06 00:25:37.000000000 +0200
++++ nss-3.12.3/mozilla/security/coreconf/nsinstall/Makefile	2009-06-24 19:48:52.858310011 +0200
+@@ -65,6 +65,10 @@ ifdef NATIVE_FLAGS
+ OS_CFLAGS=$(NATIVE_FLAGS)
+ endif
+ 
++ifdef NATIVE_LDFLAGS
++LDFLAGS=$(NATIVE_LDFLAGS)
++endif
++
+ include $(DEPTH)/coreconf/rules.mk
+ 
+ # Redefine MAKE_OBJDIR for just this directory
