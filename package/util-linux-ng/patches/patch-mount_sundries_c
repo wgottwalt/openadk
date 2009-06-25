@@ -1,0 +1,11 @@
+--- util-linux-ng-2.15.orig/mount/sundries.c	2009-03-25 13:20:18.000000000 +0100
++++ util-linux-ng-2.15/mount/sundries.c	2009-06-22 22:59:31.000000000 +0200
+@@ -157,7 +157,7 @@ matching_type (const char *type, const c
+ 	     if (strncmp(p, type, len) == 0 &&
+ 		 (p[len] == 0 || p[len] == ','))
+ 		     return !no;
+-	     p = index(p,',');
++	     p = strchr(p,',');
+ 	     if (!p)
+ 		     break;
+ 	     p++;

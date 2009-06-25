@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-fPIC
 CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ARGS+=	--disable-samples
 BUILD_STYLE:=		auto

@@ -30,6 +30,8 @@ else
 TLDFLAGS+=		-liconv -shared
 endif
 
+TCFLAGS+=		-fPIC
+TCXXFLAGS+=		-fPIC
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_nsl_setsockopt=no
 CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_DIR}/usr'

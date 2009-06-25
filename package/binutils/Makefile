@@ -11,6 +11,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-fPIC
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-werror
 BUILD_STYLE=		auto

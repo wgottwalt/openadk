@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- util-linux-2.12r.orig/fdisk/fdiskbsdlabel.c	2003-07-13 23:12:47.000000000 +0200
-+++ util-linux-2.12r/fdisk/fdiskbsdlabel.c	2008-10-16 12:28:32.000000000 +0200
+--- util-linux-ng-2.15.orig/fdisk/fdiskbsdlabel.c	2009-02-24 16:39:30.000000000 +0100
++++ util-linux-ng-2.15/fdisk/fdiskbsdlabel.c	2009-06-22 22:42:04.000000000 +0200
 @@ -538,10 +538,10 @@ xbsd_write_bootstrap (void)
  
    /* We need a backup of the disklabel (xbsd_dlabel might have changed). */
@@ -10,7 +9,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
    /* The disklabel will be overwritten by 0's from bootxx anyway */
 -  bzero (d, sizeof (struct xbsd_disklabel));
-+  memset (d, 0 ,sizeof (struct xbsd_disklabel));
++  memset (d, 0, sizeof (struct xbsd_disklabel));
  
    snprintf (path, sizeof(path), "%s/boot%s", bootdir, dkbasename);
    if (!xbsd_get_bootstrap (path, &disklabelbuffer[xbsd_dlabel.d_secsize],

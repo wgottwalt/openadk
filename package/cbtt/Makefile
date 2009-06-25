@@ -40,6 +40,7 @@ TLDFLAGS+=		-nodefaultlibs -lz -lpthread \
 			-luClibc++ -lc -lm -lgcc
 TCFLAGS+=		-fno-builtin -nostdinc++
 endif
+TCFLAGS+=		-fPIC
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CBTT}/usr/bin

@@ -1,0 +1,18 @@
+--- util-linux-ng-2.15.orig/misc-utils/cal.c	2009-03-25 13:20:18.000000000 +0100
++++ util-linux-ng-2.15/misc-utils/cal.c	2009-06-22 22:49:19.000000000 +0200
+@@ -291,6 +291,7 @@ main(int argc, char **argv) {
+  * the locale database, which can be overridden with the
+  * -s (Sunday) or -m (Monday) options.
+  */
++#if 0
+ #ifdef HAVE_LANGINFO_H
+ 	/*
+ 	 * You need to use 2 locale variables to get the first day of the week.
+@@ -315,6 +316,7 @@ main(int argc, char **argv) {
+ 		weekstart = (wfd + *nl_langinfo(_NL_TIME_FIRST_WEEKDAY) - 1) % 7;
+ 	}
+ #endif
++#endif
+ 
+ 	yflag = 0;
+ 	while ((ch = getopt(argc, argv, "13mjsyV")) != -1)

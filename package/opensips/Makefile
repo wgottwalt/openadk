@@ -92,7 +92,7 @@ do-build:
 		CC="$(TARGET_CC)" \
 		OS="linux" \
 		ARCH="$(ARCH)"  \
-		CFLAGS="$(TARGET_CFLAGS)" \
+		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
 		LOCALBASE="$(STAGING_DIR)/usr" \
 		SYSBASE="$(STAGING_DIR)/usr" \
 		all modules

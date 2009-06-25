@@ -22,7 +22,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBGSM,libgsm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GSM_UTILS,gsm-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 
-XAKE_FLAGS+=		COPTS="${TARGET_CFLAGS}" \
+XAKE_FLAGS+=		COPTS="${TARGET_CFLAGS} -fPIC" \
 			INSTALL_ROOT="${WRKINST}"
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

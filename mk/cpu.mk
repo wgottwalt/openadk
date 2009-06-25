@@ -13,7 +13,6 @@ CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 else
 CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse \
-			--disable-mmxext \
 			--disable-amd3dnow \
 			--disable-amd3dnowext \
 			--disable-mmx \

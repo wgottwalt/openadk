@@ -2,16 +2,17 @@ config ADK_PACKAGE_MPLAYER
 	prompt "mplayer........................... popular movie player"
 	tristate
 	default n
+	select ADK_PACKAGE_ALSA_LIB
 	select ADK_PACKAGE_LIBJPEG
 	select ADK_PACKAGE_LIBPNG
 	select ADK_PACKAGE_LIBPTHREAD
 	select ADK_PACKAGE_LIBOGG
-	select ADK_PACKAGE_LIBVORBIS
 	select ADK_PACKAGE_LIBMAD
-	select ADK_PACKAGE_ALSA_LIB
-	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_LIBFAAD2
+	select ADK_PACKAGE_LIBVORBIS
+	select ADK_PACKAGE_ZLIB
+	depends on ADK_LINUX_X86_ALIX1C
 	help
           http://www.mplayerhq.hu
 

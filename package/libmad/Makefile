@@ -21,16 +21,17 @@ FPM:=default
 ifeq (${ARCH},i386)
 FPM:=intel
 endif
-ifeq (${ARCH},mips)
-FPM:=mips
-endif
+# MIPS optimization is broken for gcc 4.4 (removed h constraint)
+#ifeq (${ARCH},mips)
+#FPM:=mips
+#endif
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-fpm=${FPM} \
 			--disable-debugging \
 			--enable-speed
 BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+INSTALL_STYLE=		auto
 
 pre-install:
 	${INSTALL_DIR} ${WRKINST}/usr/lib/pkgconfig
