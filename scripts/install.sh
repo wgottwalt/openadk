@@ -156,7 +156,9 @@ if [ $rb532 -ne 0 ];then
 	$parted -s $1 set 1 boot on
 	$sfdisk --change-id $1 1 27
 	$sfdisk --change-id $1 3 88
-	dd if=$3 of=${1}1
+	sleep 2
+	sync
+	dd if=$3 of=${1}1 bs=2048
 	sync
 else
 	rootpart=${1}1
