@@ -7,8 +7,11 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+
 kernel-install:
-	cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+	$(KERNEL_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
+		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
 
 ifeq ($(FS),ext2-cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)

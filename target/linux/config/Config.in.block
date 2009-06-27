@@ -36,6 +36,10 @@ config ADK_KERNEL_SCSI
 	boolean
 	default n
 
+config ADK_KERNEL_BLK_DEV_SD
+	boolean
+	default n
+
 #config ADK_KERNEL_IDE
 #	boolean
 #	default n

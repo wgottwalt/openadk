@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
-PKG_VERSION:=		1.0.19
+PKG_VERSION:=		1.0.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		73db3666c211e5fb023bb77450cf430d
+PKG_MD5SUM:=		6e9080ba1faa5d3739d14dd76c62d8dc
 PKG_DESCR:=		ALSA sound library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.alsa-project.org
@@ -22,7 +22,7 @@ $(eval $(call PKG_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-python
 BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa
