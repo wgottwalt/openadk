@@ -380,6 +380,8 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	bool "read-write filesystem for compact flash (ext2)"
 	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SD
 	help
 	  Use this option if you have a compact flash
 	  inside your hardware and want to boot from it.

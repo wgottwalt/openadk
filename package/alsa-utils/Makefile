@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
-PKG_VERSION:=		1.0.19
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		5ff0379c707c1a29083233edc9ab4e06
+PKG_VERSION:=		1.0.20
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6837e673ef19da96d8bd2f9e18cd9574
 PKG_DESCR:=		ALSA mixer utility
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.alsa-project.org
@@ -17,7 +17,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ALSA_UTILS,alsa-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ALSA_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-alsamixer
