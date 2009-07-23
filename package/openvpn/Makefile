@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.0.9
-PKG_RELEASE:=		7
-PKG_MD5SUM:=		60745008b90b7dbe25fe8337c550fec6
+PKG_VERSION:=		2.1_rc19
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ba2ee667a8b7606b125b7d32f47ca578
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-tun
