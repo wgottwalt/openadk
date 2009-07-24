@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.4.25.1
+PKG_VERSION:=		1.4.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b42210127d6622c90fc5338de2b4aa9
+PKG_MD5SUM:=		f54d6685533a149a0241c3468a88e02a
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libncurses libpthread
+PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.digium.com/pub/telephony/asterisk/releases/
 
@@ -60,7 +60,6 @@ CONFIGURE_ARGS=		--with-z=${STAGING_DIR}/usr \
 			--without-oss \
 			--without-pri \
 			--without-pwlib \
-			--without-qt \
 			--without-tds \
 			--without-termcap \
 			--without-tinfo \
@@ -78,12 +77,6 @@ ifneq (${ADK_PACKAGE_ASTERISK_FORMAT_VORBIS},)
 CONFIGURE_ARGS+=	--with-ogg=${STAGING_DIR}/usr \
 			--with-vorbis=${STAGING_DIR}/usr
 TLDFLAGS+=		-logg
-endif
-ifneq (${ADK_PACKAGE_ASTERISK_RADIUS},)
-CONFIGURE_ARGS+=	--with-radius=${STAGING_DIR}/usr
-endif
-ifneq (${ADK_PACKAGE_ASTERISK_GNUTLS},)
-CONFIGURE_ARGS+=	--with-gnutls=${STAGING_DIR}/usr
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_CURL},)
 CONFIGURE_ARGS+=	--with-curl=${STAGING_DIR}/usr
