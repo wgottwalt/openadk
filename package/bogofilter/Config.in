@@ -15,12 +15,12 @@ config ADK_PACKAGE_BOGOFILTER_BOGOUTIL
 	prompt "    include bogoutil in firmware image and package file"
 	bool
 	default n
-	depends ADK_PACKAGE_BOGOFILTER
+	depends on ADK_PACKAGE_BOGOFILTER
 
 config ADK_PACKAGE_BOGOFILTER_BOGOTUNE
 	prompt "    include bogotune in firmware image and package file"
 	bool
 	default n
-	depends ADK_PACKAGE_BOGOFILTER
+	depends on ADK_PACKAGE_BOGOFILTER
 
 

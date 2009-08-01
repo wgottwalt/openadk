@@ -15,12 +15,12 @@ config ADK_COMPILE_WEECHAT_WITH_TLS
 	prompt "  Enable TLS support"
 	bool
 	select ADK_PACKAGE_LIBGNUTLS
-	depends ADK_PACKAGE_WEECHAT
+	depends on ADK_PACKAGE_WEECHAT
 
 config ADK_COMPILE_WEECHAT_WITH_LUA
 	prompt "  Enable LUA scripting"
 	bool
 	select ADK_PACKAGE_LIBLUA
-	depends ADK_PACKAGE_WEECHAT
+	depends on ADK_PACKAGE_WEECHAT
 
 #endmenu

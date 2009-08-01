@@ -1,7 +1,7 @@
 config ADK_COMPILE_UTIL_LINUX_NG
 	tristate
 	default n
-	depends ADK_PACKAGE_FDISK || ADK_PACKAGE_SWAP_UTILS
+	depends on ADK_PACKAGE_FDISK || ADK_PACKAGE_SWAP_UTILS
 
 config ADK_PACKAGE_FDISK
 	prompt "fdisk............................. Partition table manipulation utility"

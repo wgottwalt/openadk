@@ -3,13 +3,13 @@ config ADK_COMPILE_MIREDO
 	default n
 	depends on ADK_CXX
 	depends on ADK_IPV6
-	depends ADK_PACKAGE_MIREDO || ADK_PACKAGE_MIREDO_SERVER
+	depends on ADK_PACKAGE_MIREDO || ADK_PACKAGE_MIREDO_SERVER
 
 config ADK_PACKAGE_MIREDO
 	prompt "miredo............................ Teredo (IPv6 tunneling over UDP through NAT) client and relay daemon"
 	tristate
 	default n
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	depends on ADK_CXX
 	select ADK_COMPILE_MIREDO
 	select ADK_KPACKAGE_KMOD_IPV6
@@ -23,7 +23,7 @@ config ADK_PACKAGE_MIREDO_SERVER
 	prompt "miredo-server..................... Teredo (IPv6 tunneling over UDP through NAT) server daemon"
 	tristate
 	default n
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	depends on ADK_CXX
 	select ADK_COMPILE_MIREDO
 	select ADK_KPACKAGE_KMOD_IPV6

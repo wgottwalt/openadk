@@ -310,7 +310,7 @@ source "target/linux/config/Config.in.kernel"
 
 choice 
 prompt "Target C library"
-depends ! ADK_NATIVE
+depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	help

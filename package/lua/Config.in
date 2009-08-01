@@ -3,7 +3,7 @@
 config ADK_COMPILE_LUA
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBLUA
+	depends on ADK_PACKAGE_LIBLUA
 
 config ADK_PACKAGE_LIBLUA
 	prompt "liblua............................ LUA programming language shared libraries"

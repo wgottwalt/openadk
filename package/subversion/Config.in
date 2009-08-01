@@ -15,7 +15,7 @@ config ADK_PACKAGE_SUBVERSION_NEON
 	prompt "  Enable interaction with remote repositories over WebDAV"
 	bool
 	default n
-	depends ADK_PACKAGE_SUBVERSION
+	depends on ADK_PACKAGE_SUBVERSION
 	select ADK_PACKAGE_NEON
 	help
 	 Allows a Subversion client to interact with remote

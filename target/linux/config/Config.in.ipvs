@@ -10,10 +10,10 @@ config ADK_KERNEL_IP_VS_DEBUG
 	prompt "enable debugging support"
 	boolean
 	default n
-	depends ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 menu "IPVS transport protocol load balancing support"
-	depends ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 config ADK_KERNEL_IP_VS_PROTO_TCP
 	prompt "TCP load balancing support"
@@ -50,7 +50,7 @@ config ADK_KERNEL_IP_VS_PROTO_AH
 endmenu
 
 menu "IPVS Scheduler"
-	depends ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 config ADK_KPACKAGE_KMOD_IP_VS_RR
 	prompt "kmod-ip-vs-rr......................... round-robin"
@@ -105,7 +105,7 @@ config ADK_KPACKAGE_KMOD_IP_VS_NQ
 endmenu
 
 menu "IPVS application helper"
-	depends ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 config ADK_KPACKAGE_KMOD_IP_VS_FTP
 	prompt "kmod-ip-vs-ftp........................ FTP protocol"

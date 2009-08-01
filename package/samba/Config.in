@@ -1,7 +1,7 @@
 config ADK_COMPILE_SAMBA
 	tristate
 	default n
-	depends ADK_PACKAGE_SAMBA || ADK_PACKAGE_SAMBA_CLIENT || ADK_PACKAGE_SMBFS
+	depends on ADK_PACKAGE_SAMBA || ADK_PACKAGE_SAMBA_CLIENT || ADK_PACKAGE_SMBFS
 
 config ADK_PACKAGE_SAMBA
 	prompt "samba............................. NetBIOS/SMB file and print server"

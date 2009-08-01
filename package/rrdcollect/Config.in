@@ -2,7 +2,7 @@ config ADK_PACKAGE_RRDCOLLECT
 	prompt "  rrdcollect...................... Round-Robin Database (RRD) collecting daemon"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBRRD || ADK_PACKAGE_LIBRRD1
+	depends on ADK_PACKAGE_LIBRRD || ADK_PACKAGE_LIBRRD1
 	help
 	  RRDcollect is a daemon which polls ceratin files in /proc/
 	  directory, gathering data and storing it inside RRDtool's
@@ -18,7 +18,7 @@ config ADK_PACKAGE_RRDCOLLECT_EXAMPLE
 	prompt   "    rrdcollect-example.......... Example setup for RRD collecting daemon above"
 	tristate
 	default n
-	depends ADK_PACKAGE_RRDCOLLECT
+	depends on ADK_PACKAGE_RRDCOLLECT
 	help
 	  RRDcollect is a daemon which polls ceratin files in /proc/
 	  directory, gathering data and storing it inside RRDtool's

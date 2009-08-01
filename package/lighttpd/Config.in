@@ -20,94 +20,94 @@ config ADK_PACKAGE_LIGHTTPD_MOD_ACCESSLOG
 	prompt   "  lighttpd-mod-accesslog........ Access logging module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_ALIAS
 	prompt   "  lighttpd-mod-alias............ Directory alias module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_AUTH
 	prompt   "  lighttpd-mod-auth............. Authentication module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_CGI
 	prompt   "  lighttpd-mod-cgi.............. CGI module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_EVASIVE
 	prompt   "  lighttpd-mod-evasive.......... Evasive module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_EXPIRE
 	prompt   "  lighttpd-mod-expire........... Expire module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_FASTCGI
 	prompt   "  lighttpd-mod-fastcgi.......... FastCGI module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_PROXY
 	prompt   "  lighttpd-mod-proxy............ Proxy module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_REDIRECT
 	prompt   "  lighttpd-mod-redirect......... URL redirection module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_REWRITE
 	prompt   "  lighttpd-mod-rewrite.......... URL rewriting module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_SETENV
 	prompt   "  lighttpd-mod-setenv........... Environment variable setting module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_SIMPLE_VHOST
 	prompt   "  lighttpd-mod-simple-vhost..... Simple virtual hosting module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_SSI
 	prompt   "  lighttpd-mod-ssi.............. SSI module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_STATUS
 	prompt   "  lighttpd-mod-status........... Server status display module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_USERTRACK
 	prompt   "  lighttpd-mod-usertrack........ User tracking module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD
 
 config ADK_PACKAGE_LIGHTTPD_MOD_WEBDAV
 	prompt   "  lighttpd-mod-webdav........... webdav module"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIGHTTPD
+	depends on ADK_PACKAGE_LIGHTTPD

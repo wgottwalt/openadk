@@ -22,7 +22,7 @@ config ADK_PACKAGE_MKSH
 
 config ADK_PACKAGE_MKSH_FULL
 	bool "  Include all features"
-	depends ADK_PACKAGE_MKSH
+	depends on ADK_PACKAGE_MKSH
 	default y
 	help
 	  Disable this to remove a few functions from mksh to make it smaller.

@@ -14,54 +14,54 @@ config ADK_PACKAGE_UPDATEDD
 config ADK_PACKAGE_UPDATEDD_MOD_CHANGEIP
 	prompt "updatedd-mod-changeip........... changeip.com"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_DYNDNS
 	prompt "updatedd-mod-dyndns............. dyndns.org"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_EURODYNDNS
 	prompt "updatedd-mod-eurodyndns......... eurodyndns.org"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_HN
 	prompt "updatedd-mod-hn................. hn.org"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_NOIP
 	prompt "updatedd-mod-noip............... no-ip.com"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_ODS
 	prompt "updatedd-mod-ods................ ods.org"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_OVH
 	prompt "updatedd-mod-ovh................ ovh.com"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_REGFISH
 	prompt "updatedd-mod-regfish............ regfish.com"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 
 config ADK_PACKAGE_UPDATEDD_MOD_TZO
 	prompt "updatedd-mod-tzo................ tzo.com"
 	tristate
-	depends ADK_PACKAGE_UPDATEDD
+	depends on ADK_PACKAGE_UPDATEDD
 	default n
 

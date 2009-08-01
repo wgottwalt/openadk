@@ -13,14 +13,14 @@ config ADK_PACKAGE_E2FSPROGS
 
 config ADK_PACKAGE_LIBUUID
 	prompt "libuuid......................... UUID library"
-	depends ADK_PACKAGE_E2FSPROGS
+	depends on ADK_PACKAGE_E2FSPROGS
 	tristate
 	default n
 	help
 
 config ADK_PACKAGE_LIBCOM_ERR
 	prompt "libcom_err...................... Common error library"
-	depends ADK_PACKAGE_E2FSPROGS
+	depends on ADK_PACKAGE_E2FSPROGS
 	tristate
 	default n
 	help

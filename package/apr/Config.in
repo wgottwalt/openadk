@@ -11,6 +11,6 @@ config ADK_PACKAGE_APR_THREADING
         prompt "  Enable threading support"
         bool
         default n
-        depends ADK_PACKAGE_APR
+        depends on ADK_PACKAGE_APR
         help
 	  Enable threading support in APR.

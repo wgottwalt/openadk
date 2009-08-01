@@ -1,7 +1,7 @@
 config ADK_COMPILE_AVAHI
 	tristate
 	default n
-	depends ADK_PACKAGE_AVAHI_DAEMON || ADK_PACKAGE_AVAHI_DNSCONFD || ADK_PACKAGE_LIBAVAHI
+	depends on ADK_PACKAGE_AVAHI_DAEMON || ADK_PACKAGE_AVAHI_DNSCONFD || ADK_PACKAGE_LIBAVAHI
 
 config ADK_PACKAGE_AVAHI_DAEMON
 	prompt   "avahi-daemon...................... An mDNS/DNS-SD (ZeroConf) implementation (daemon)"
@@ -28,7 +28,7 @@ config ADK_PACKAGE_AVAHI_DNSCONFD
 	tristate
 	default n
 	select ADK_COMPILE_AVAHI
-	depends ADK_PACKAGE_AVAHI_DAEMON
+	depends on ADK_PACKAGE_AVAHI_DAEMON
 	help
 	  Avahi is a system which facilitates service discovery on a local network --
 	  this means that you can plug your laptop or computer into a network and

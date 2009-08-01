@@ -1,7 +1,7 @@
 config ADK_COMPILE_HOSTAPD
 	tristate
 	default n
-	depends ADK_PACKAGE_HOSTAPD || ADK_PACKAGE_HOSTAPD_UTILS
+	depends on ADK_PACKAGE_HOSTAPD || ADK_PACKAGE_HOSTAPD_UTILS
 
 config ADK_PACKAGE_HOSTAPD
 	prompt "hostapd........................... An IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator"

@@ -1,8 +1,8 @@
 config ADK_COMPILE_SPEEX
 	tristate
 	default n
-	depends ADK_CXX
-	depends ADK_PACKAGE_LIBSPEEX
+	depends on ADK_CXX
+	depends on ADK_PACKAGE_LIBSPEEX
 
 config ADK_PACKAGE_LIBSPEEX
 	prompt "libspeex.......................... Open source patent-free speech compression codec"

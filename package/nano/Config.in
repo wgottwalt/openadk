@@ -12,7 +12,7 @@ config ADK_PACKAGE_NANO_TINY
 	prompt "   only compile a minimal nano (using --enable-tiny)"
 	bool
 	default y
-	depends ADK_PACKAGE_NANO
+	depends on ADK_PACKAGE_NANO
 	help
 	  If not selected, nano will support justify, line wrapping, tab completion and multiple open file buffers.
 

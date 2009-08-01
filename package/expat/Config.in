@@ -1,7 +1,7 @@
 config ADK_COMPILE_EXPAT
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBEXPAT
+	depends on ADK_PACKAGE_LIBEXPAT
 
 config ADK_PACKAGE_LIBEXPAT
 	prompt "libexpat.......................... A fast, non-validating, stream-oriented XML parsing library"

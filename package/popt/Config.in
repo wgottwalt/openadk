@@ -1,6 +1,6 @@
 config ADK_COMPILE_POPT
 	tristate
-	depends ADK_PACKAGE_LIBPOPT
+	depends on ADK_PACKAGE_LIBPOPT
 
 config ADK_PACKAGE_LIBPOPT
 	prompt "libpopt........................... Command line option parsing library"

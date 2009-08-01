@@ -13,7 +13,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_ACCOUNTING
 	prompt   "  opensips-mod-acc............... Accounting support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable accounting support
 
@@ -21,7 +21,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_AUTH
 	prompt   "  opensips-mod-auth.............. Authentication support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable authentication support
 
@@ -29,7 +29,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_AUTH_DB
 	prompt     "  opensips-mod-auth-db......... Authentication with database support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS_MOD_AUTH
+	depends on ADK_PACKAGE_OPENSIPS_MOD_AUTH
 	help
 	  Enable authentication with database support
 
@@ -37,7 +37,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_AVPOPS
 	prompt   "  opensips-mod-avpops............ AVP options support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable AVP options support
 
@@ -45,7 +45,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_DISPATCHER
 	prompt   "  opensips-mod-dispatcher........ dispatcher support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable dispatcher options support
 
@@ -53,7 +53,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_DIVERSION
 	prompt   "  opensips-mod-diversion......... diversion support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable diversion options support
 
@@ -61,7 +61,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_FLATSTORE
 	prompt   "  opensips-mod-flatstore......... flatstore support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable flatstore support
 
@@ -69,7 +69,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_GFLAGS
 	prompt   "  opensips-mod-gflags............ gflags support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable GFlags support
 
@@ -77,7 +77,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_GROUP
 	prompt   "  opensips-mod-group............. group support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable group support
 
@@ -85,7 +85,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_MEDIAPROXY
 	prompt   "  opensips-mod-mediaproxy........ Mediaproxy support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable mediaproxy support
 
@@ -93,7 +93,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_MSILO
 	prompt   "  opensips-mod-msilo............. MSilo support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable msilo support
 
@@ -101,7 +101,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_NATHELPER
 	prompt   "  opensips-mod-nathelper......... NAT helper support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  NAT helper support
 
@@ -109,7 +109,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_OPTIONS
 	prompt   "  opensips-mod-options........... options support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable options support
 
@@ -117,7 +117,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_PDT
 	prompt   "  opensips-mod-pdt............... PDT support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable pdt support
 
@@ -125,7 +125,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_PERMISSIONS
 	prompt   "  opensips-mod-permissions....... Permissions support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable permissions support
 
@@ -133,7 +133,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_PIKE
 	prompt   "  opensips-mod-pike.............. PIKE support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable pike support
 
@@ -141,7 +141,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_SMS
 	prompt   "  opensips-mod-sms............... SMS support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  SMS support
 
@@ -149,7 +149,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_SPEEDDIAL
 	prompt   "  opensips-mod-speeddial......... Speed Dial support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Speed Dial support
 
@@ -157,7 +157,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_UAC
 	prompt   "  opensips-mod-uac............... UAC support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable UAC support
 
@@ -165,7 +165,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_UAC_REDIRECT
 	prompt   "  opensips-mod-uac............... UAC redirect support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable UAC redirect support
 
@@ -173,7 +173,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_URI
 	prompt   "  opensips-mod-uri............... URI support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable URI support
 
@@ -181,7 +181,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_URI_DB
 	prompt   "  opensips-mod-uri-db............ URI database support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Enable URI database support
 
@@ -189,7 +189,7 @@ config ADK_PACKAGE_OPENSIPS_MOD_XLOG
 	prompt   "  opensips-mod-xlog.............. Logging support"
 	tristate
 	default n
-	depends ADK_PACKAGE_OPENSIPS
+	depends on ADK_PACKAGE_OPENSIPS
 	help
 	  Logging support
 

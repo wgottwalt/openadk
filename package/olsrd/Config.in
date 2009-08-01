@@ -13,24 +13,24 @@ config ADK_PACKAGE_OLSRD_MOD_DYN_GW
 	prompt   "  olsrd-mod-dyn-gw.............. Dynamic internet gateway plugin"
 	tristate
 	default n
-	depends ADK_PACKAGE_OLSRD
+	depends on ADK_PACKAGE_OLSRD
 
 config ADK_PACKAGE_OLSRD_MOD_HTTPINFO
 	prompt   "  olsrd-mod-httpinfo............ Small informative web server plugin"
 	tristate
 	default n
-	depends ADK_PACKAGE_OLSRD
+	depends on ADK_PACKAGE_OLSRD
 
 config ADK_PACKAGE_OLSRD_MOD_NAMESERVICE
 	prompt   "  olsrd-mod-nameservice......... Lightweight hostname resolver plugin"
 	tristate
 	default n
-	depends ADK_PACKAGE_OLSRD
+	depends on ADK_PACKAGE_OLSRD
 
 config ADK_PACKAGE_OLSRD_MOD_TAS
 	prompt   "  olsrd-mod-tas................. Tiny Application Server (TAS) plugin for olsrd"
 	tristate
 	default n
-	depends ADK_PACKAGE_OLSRD
+	depends on ADK_PACKAGE_OLSRD
 
 #endmenu

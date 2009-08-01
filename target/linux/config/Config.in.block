@@ -157,8 +157,8 @@ config ADK_KPACKAGE_KMOD_SCSI
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 	prompt "kmod-scsi-disk.................... SCSI disk support"
-	depends !ADK_KERNEL_SCSI
-	depends ADK_KPACKAGE_KMOD_SCSI
+	depends on !ADK_KERNEL_SCSI
+	depends on ADK_KPACKAGE_KMOD_SCSI
 	tristate
 	help
 	  If you want to use SCSI hard disks, Fibre Channel disks,
@@ -170,8 +170,8 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 	prompt "kmod-scsi-cdrom................... SCSI CDROM support"
-	depends !ADK_KERNEL_SCSI
-	depends ADK_KPACKAGE_KMOD_SCSI
+	depends on !ADK_KERNEL_SCSI
+	depends on ADK_KPACKAGE_KMOD_SCSI
 	tristate
 	help
 	  If you want to use a SCSI or FireWire CD-ROM under Linux,
@@ -188,19 +188,19 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 config ADK_KPACKAGE_KMOD_MD_RAID0
 	prompt "kmod-md-raid0..................... RAID0 support"
 	tristate
-	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID1
 	prompt "kmod-md-raid1..................... RAID1 support"
 	tristate
-	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID456
 	prompt "kmod-md-raid456................... RAID456 support"
 	tristate
-	depends ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_DM

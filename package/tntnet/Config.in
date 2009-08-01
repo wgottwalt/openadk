@@ -24,13 +24,13 @@ config ADK_COMPILE_TNTNET_WITHOUT_OPENSSL
 
 config ADK_COMPILE_TNTNET_WITH_OPENSSL
 	bool "enable openssl encryption support"
-	depends ADK_PACKAGE_TNTNET
+	depends on ADK_PACKAGE_TNTNET
 	select ADK_PACKAGE_LIBOPENSSL
 	help
 
 config ADK_COMPILE_TNTNET_WITH_GNUTLS
 	bool "enable gnutls encryption support"
-	depends ADK_PACKAGE_TNTNET
+	depends on ADK_PACKAGE_TNTNET
 	select ADK_PACKAGE_LIBGNUTLS
 	help
 

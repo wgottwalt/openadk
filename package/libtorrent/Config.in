@@ -22,7 +22,7 @@ config ADK_COMPILE_LIBTORRENT_WITH_STDCXX
 config ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX
 	bool "Embedded uClibc++ library"
 	select ADK_PACKAGE_UCLIBCXX
-	depends ADK_BROKEN
+	depends on ADK_BROKEN
 	help
 
 endchoice

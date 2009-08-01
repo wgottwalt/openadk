@@ -1,7 +1,7 @@
 config ADK_COMPILE_DB
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBDB
+	depends on ADK_PACKAGE_LIBDB
 
 config ADK_PACKAGE_LIBDB
 	prompt "libdb............................. Berkeley DB"

@@ -17,7 +17,7 @@ config ADK_PACKAGE_SHOREWALL_STRIPCONF
 	prompt "Strip shorewall configuration files"
 	bool
 	default n
-	depends ADK_PACKAGE_SHOREWALL
+	depends on ADK_PACKAGE_SHOREWALL
 	help
 	  To save space, all shorewall files in /etc/shorewall will get striped.
 	  This means that all comments, empty lines etc. are removed.
@@ -29,7 +29,7 @@ config ADK_PACKAGE_SHOREWALL_STRIPSHARED
 	prompt "Strip shared shorewall files (macros & actions mainly)"
 	bool
 	default y
-	depends ADK_PACKAGE_SHOREWALL
+	depends on ADK_PACKAGE_SHOREWALL
 	help
 	  To save space, all shared shorewall files in /usr/share/shorewall
 	  will get striped. This means that all comments, empty lines etc. 

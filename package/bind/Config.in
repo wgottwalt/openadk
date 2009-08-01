@@ -12,7 +12,7 @@ config ADK_PACKAGE_BIND_RNDC
 	prompt "bind-rndc......................... Bind administration tools (rndc & rndc-confgen only)"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -23,7 +23,7 @@ config ADK_PACKAGE_BIND_CHECK
 	prompt "bind-check........................ Bind administration tools (named-checkconf & named-checkzone only)"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -34,7 +34,7 @@ config ADK_PACKAGE_BIND_DNSSEC
 	prompt "bind-dnssec....................... Bind administration tools (dnssec-keygen & dnssec-signzone only)"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -45,7 +45,7 @@ config ADK_PACKAGE_BIND_HOST
 	prompt "bind-host......................... A simple DNS client"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -57,7 +57,7 @@ config ADK_PACKAGE_BIND_DIG
 	prompt "bind-dig.......................... A DNS client"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -69,7 +69,7 @@ config ADK_PACKAGE_BIND_CLIENT
 	prompt "bind-client....................... A dynamic DNS client"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -80,7 +80,7 @@ config ADK_PACKAGE_BIND_SERVER
 	prompt "bind-server....................... A DNS server"
 	tristate
 	default n
-	depends ADK_DUMMY_BIND
+	depends on ADK_DUMMY_BIND
 	select ADK_COMPILE_BIND
 	select ADK_PACKAGE_LIBBIND
 	help
@@ -91,7 +91,7 @@ config ADK_PACKAGE_LIBBIND
         prompt "libbind........................... Support library for the bind tools and dns server/client."
         tristate
         default n
-        depends ADK_DUMMY_BIND
+        depends on ADK_DUMMY_BIND
         select ADK_COMPILE_BIND
         help
           http://www.isc.org/sw/bind/

@@ -1,7 +1,7 @@
 config ADK_COMPILE_PMACCT
 	tristate
 	default n
-	depends ADK_PACKAGE_PMACCTD || ADK_PACKAGE_PMACCT_CLIENT || ADK_PACKAGE_SFACCTD || ADK_PACKAGE_NFACCTD
+	depends on ADK_PACKAGE_PMACCTD || ADK_PACKAGE_PMACCT_CLIENT || ADK_PACKAGE_SFACCTD || ADK_PACKAGE_NFACCTD
 
 config ADK_PACKAGE_PMACCTD
 	prompt     "pmacctd....................... IP accounting daemon (libpcap based)"

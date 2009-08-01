@@ -1,7 +1,7 @@
 config ADK_COMPILE_CURL
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBCURL
+	depends on ADK_PACKAGE_LIBCURL
 
 config ADK_PACKAGE_LIBCURL
 	prompt "libcurl........................... A client-side URL transfer library"
@@ -19,7 +19,7 @@ config ADK_PACKAGE_CURL
 	prompt   "curl............................ A client-side URL transfer tool"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBCURL
+	depends on ADK_PACKAGE_LIBCURL
 	help
 	  A client-side URL transfer tool.
 

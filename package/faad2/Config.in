@@ -1,7 +1,7 @@
 config ADK_COMPILE_FAAD2
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBFAAD2
+	depends on ADK_PACKAGE_LIBFAAD2
 
 config ADK_PACKAGE_LIBFAAD2
 	prompt "libfaad2.......................... MP4 decoding library"
