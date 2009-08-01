@@ -245,7 +245,7 @@ config ADK_LINUX_MIPS64EL_QEMU
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
 	select ADK_qemu_cris
-	select ADK_BROKEN
+#	select ADK_BROKEN
 	help
 	 Qemu support for CRISv32 architecture.
 
