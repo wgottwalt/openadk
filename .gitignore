@@ -1,7 +1,10 @@
 config/conf
+config/lex.backup
 config/lex.zconf.c
 config/lkc_defs.h
 config/mconf
+config/zconf.hash.c
+config/zconf.output
 config/zconf.tab.c
 config/zconf.tab.h
 prereq.mk
@@ -15,6 +18,7 @@ root_*/
 bin_*/
 build_*/
 config/*.o
+config/lxdialog/*.o
 make.log
 dl/
 package/*/info.mk
