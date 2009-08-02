@@ -364,10 +364,10 @@ static void set_config_filename(const char *config_filename)
 	int size;
 	struct symbol *sym;
 
-	sym = sym_lookup("KERNELVERSION", 0);
+	sym = sym_lookup("ADKVERSION", 0);
 	sym_calc_value(sym);
 	size = snprintf(menu_backtitle, sizeof(menu_backtitle),
-	                _("%s - Linux Kernel v%s Configuration"),
+	                _("%s - OpenADK v%s Configuration"),
 		        config_filename, sym_get_string_value(sym));
 	if (size >= sizeof(menu_backtitle))
 		menu_backtitle[sizeof(menu_backtitle)-1] = '\0';
@@ -904,7 +904,7 @@ int main(int ac, char **av)
 		if (conf_get_changed())
 			res = dialog_yesno(NULL,
 					   _("Do you wish to save your "
-					     "new kernel configuration?\n"
+					     "new OpenADK configuration?\n"
 					     "<ESC><ESC> to continue."),
 					   6, 60);
 		else
@@ -916,20 +916,20 @@ int main(int ac, char **av)
 	case 0:
 		if (conf_write(filename)) {
 			fprintf(stderr, _("\n\n"
-				"Error during writing of the kernel configuration.\n"
-				"Your kernel configuration changes were NOT saved."
+				"Error during writing of the OpenADK configuration.\n"
+				"Your OpenADK configuration changes were NOT saved."
 				"\n\n"));
 			return 1;
 		}
 	case -1:
 		printf(_("\n\n"
-			"*** End of Linux kernel configuration.\n"
-			"*** Execute 'make' to build the kernel or try 'make help'."
+			"*** End of OpenADK configuration.\n"
+			"*** Execute 'make' to build the firmware or try 'make help'."
 			"\n\n"));
 		break;
 	default:
 		fprintf(stderr, _("\n\n"
-			"Your kernel configuration changes were NOT saved."
+			"Your OpenADK configuration changes were NOT saved."
 			"\n\n"));
 	}
 
