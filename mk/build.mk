@@ -158,6 +158,9 @@ all: menuconfig
 # configuration
 # ---------------------------------------------------------------------------
 
+# force entering the subdir, as dependency checking is done there
+.PHONY: $(CONFIG)/conf $(CONFIG)/mconf
+
 $(CONFIG)/conf:
 	@$(MAKE) -C $(CONFIG) conf
 
