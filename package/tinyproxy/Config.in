@@ -10,19 +10,19 @@ config ADK_PACKAGE_TINYPROXY
 		http://tinyproxy.sourceforge.net
 
 config ADK_COMPILE_TINYPROXY_WITH_TRANSPARENT_PROXY
-	prompt "  Enable transparent proxying"
+	prompt "Enable transparent proxying"
 	bool
 	default y
 	depends on ADK_PACKAGE_TINYPROXY
 
 config ADK_COMPILE_TINYPROXY_WITH_FILTER
-	prompt "  Enable filtering support"
+	prompt "Enable filtering support"
 	bool
 	default y
 	depends on ADK_PACKAGE_TINYPROXY
 
 config ADK_COMPILE_TINYPROXY_WITH_UPSTREAM
-	prompt "  Enable upstream support"
+	prompt "Enable upstream support"
 	bool
 	default y
 	depends on ADK_PACKAGE_TINYPROXY

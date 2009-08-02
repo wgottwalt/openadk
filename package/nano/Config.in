@@ -9,7 +9,7 @@ config ADK_PACKAGE_NANO
 	  http://www.nano-editor.org/
 
 config ADK_PACKAGE_NANO_TINY
-	prompt "   only compile a minimal nano (using --enable-tiny)"
+	prompt "only compile a minimal nano (using --enable-tiny)"
 	bool
 	default y
 	depends on ADK_PACKAGE_NANO

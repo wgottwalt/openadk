@@ -1,5 +1,5 @@
 config ADK_PACKAGE_RRDCOLLECT
-	prompt "  rrdcollect...................... Round-Robin Database (RRD) collecting daemon"
+	prompt "rrdcollect...................... Round-Robin Database (RRD) collecting daemon"
 	tristate
 	default n
 	depends on ADK_PACKAGE_LIBRRD || ADK_PACKAGE_LIBRRD1
@@ -15,7 +15,7 @@ config ADK_PACKAGE_RRDCOLLECT
 	  This package contains only the deamon program.
 
 config ADK_PACKAGE_RRDCOLLECT_EXAMPLE
-	prompt   "    rrdcollect-example.......... Example setup for RRD collecting daemon above"
+	prompt   "rrdcollect-example.......... Example setup for RRD collecting daemon above"
 	tristate
 	default n
 	depends on ADK_PACKAGE_RRDCOLLECT

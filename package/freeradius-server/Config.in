@@ -10,74 +10,74 @@ config ADK_PACKAGE_FREERADIUS_SERVER
 	  http://www.freeradius.org/
 
 config ADK_PACKAGE_FREERADIUS_DEMOCERTS
-	prompt   "  freeradius-democerts.......... Demo certificates to test the server"
+	prompt   "freeradius-democerts.......... Demo certificates to test the server"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_CHAP
-	prompt   "  freeradius-mod-chap........... CHAP module"
+	prompt   "freeradius-mod-chap........... CHAP module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_DETAIL
-	prompt   "  freeradius-mod-detail......... Detailed accounting module"
+	prompt   "freeradius-mod-detail......... Detailed accounting module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_DIGEST
-	prompt   "  freeradius-mod-digest......... Digest authentication"
+	prompt   "freeradius-mod-digest......... Digest authentication"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_FILES
-	prompt   "  freeradius-mod-files.......... Module using local files for authorization"
+	prompt   "freeradius-mod-files.......... Module using local files for authorization"
 	tristate
 	default y
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_LDAP
-	prompt   "  freeradius-mod-ldap........... LDAP module"
+	prompt   "freeradius-mod-ldap........... LDAP module"
 	tristate
 	default n
 	select ADK_PACKAGE_LIBOPENLDAP
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_MSCHAP
-	prompt   "  freeradius-mod-mschap......... MS-CHAP and MS-CHAPv2 module"
+	prompt   "freeradius-mod-mschap......... MS-CHAP and MS-CHAPv2 module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_PAP
-	prompt   "  freeradius-mod-pap............ PAP module"
+	prompt   "freeradius-mod-pap............ PAP module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_PREPROCESS
-	prompt   "  freeradius-mod-preprocess..... Request pre-processing module"
+	prompt   "freeradius-mod-preprocess..... Request pre-processing module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_REALM
-	prompt   "  freeradius-mod-realm.......... Realms handling module"
+	prompt   "freeradius-mod-realm.......... Realms handling module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_SQL
-	prompt   "  freeradius-mod-sql............ Base SQL module"
+	prompt   "freeradius-mod-sql............ Base SQL module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER
 
 config ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL
-	prompt     "  freeradius-mod-sql-mysql.... MySQL module"
+	prompt     "freeradius-mod-sql-mysql.... MySQL module"
 	tristate
 	default n
 	depends on ADK_CXX
@@ -85,14 +85,14 @@ config ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL
 	select ADK_PACKAGE_LIBMYSQLCLIENT
 
 config ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL
-	prompt     "  freeradius-mod-sql-pgsql.... PostgreSQL module"
+	prompt     "freeradius-mod-sql-pgsql.... PostgreSQL module"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_MOD_SQL
 	select ADK_PACKAGE_LIBPQ
 
 config ADK_PACKAGE_FREERADIUS_UTILS
-	prompt   "  freeradius-utils.............. Misc. client utilities"
+	prompt   "freeradius-utils.............. Misc. client utilities"
 	tristate
 	default n
 	depends on ADK_PACKAGE_FREERADIUS_SERVER

@@ -15,7 +15,7 @@ config ADK_PACKAGE_MPD
 	  http://www.musicpd.org/
 
 config ADK_COMPILE_MPD_WITH_MP3
-	prompt   "  MP3 support"
+	prompt   "MP3 support"
 	bool
 	default y
 	depends on ADK_PACKAGE_MPD
@@ -25,7 +25,7 @@ config ADK_COMPILE_MPD_WITH_MP3
 	  Enable mp3 support (libmad).
 
 config ADK_COMPILE_MPD_WITH_MP4
-	prompt   "  MP4/AAC support"
+	prompt   "MP4/AAC support"
 	bool
 	default y
 	depends on ADK_PACKAGE_MPD
@@ -34,7 +34,7 @@ config ADK_COMPILE_MPD_WITH_MP4
 	  Enable mp4/aac support (libfaad2).
 
 config ADK_COMPILE_MPD_OGG
-	prompt   "  Ogg/Vorbis Support"
+	prompt   "Ogg/Vorbis Support"
 	tristate
 	depends on ADK_PACKAGE_MPD
 	select ADK_COMPILE_MPD_WITH_OGG if ADK_COMPILE_MPD_OGG_FLOAT
@@ -73,7 +73,7 @@ config ADK_COMPILE_MPD_WITH_TREMOR
           Can not be used with shout plugin.
 
 config ADK_COMPILE_MPD_WITH_FLAC
-	prompt   "  FLAC Support"
+	prompt   "FLAC Support"
 	bool
 	default y
 	depends on ADK_PACKAGE_MPD
@@ -82,7 +82,7 @@ config ADK_COMPILE_MPD_WITH_FLAC
 	  Enable flac support (libflac).
 
 config ADK_COMPILE_MPD_WITH_SHOUT
-	prompt   "  Shout Support (Streaming support)"
+	prompt   "Shout Support (Streaming support)"
 	bool
 	default y
 	depends on ADK_PACKAGE_MPD

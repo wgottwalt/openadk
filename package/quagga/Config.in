@@ -13,7 +13,7 @@ config ADK_PACKAGE_QUAGGA
 	  http://www.quagga.net/
 
 config ADK_PACKAGE_QUAGGA_BGPD
-	prompt   "  quagga-bgpd................... BGPv4, BGPv4+, BGPv4- routing engine"
+	prompt   "quagga-bgpd................... BGPv4, BGPv4+, BGPv4- routing engine"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
@@ -22,7 +22,7 @@ config ADK_PACKAGE_QUAGGA_BGPD
 	  software.
 
 config ADK_PACKAGE_QUAGGA_OSPFD
-	prompt   "  quagga-ospfd.................. OSPFv2 routing engine"
+	prompt   "quagga-ospfd.................. OSPFv2 routing engine"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
@@ -30,7 +30,7 @@ config ADK_PACKAGE_QUAGGA_OSPFD
 	  An OSPFv2 (IPv4) routing engine for use with Quagga routing software.
 
 config ADK_PACKAGE_QUAGGA_OSPF6D
-	prompt   "  quagga-ospf6d................. OSPFv3 routing engine"
+	prompt   "quagga-ospf6d................. OSPFv3 routing engine"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
@@ -39,7 +39,7 @@ config ADK_PACKAGE_QUAGGA_OSPF6D
 	  An OSPFv3 (IPv6) routing engine for use with Quagga routing software.
 
 config ADK_PACKAGE_QUAGGA_RIPD
-	prompt   "  quagga-ripd................... RIP routing engine"
+	prompt   "quagga-ripd................... RIP routing engine"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
@@ -47,7 +47,7 @@ config ADK_PACKAGE_QUAGGA_RIPD
 	  A RIP (IPv4) routing engine for use with Quagga routing software.
 
 config ADK_PACKAGE_QUAGGA_RIPNGD
-	prompt   "  quagga-ripngd................. RIPNG routing engine"
+	prompt   "quagga-ripngd................. RIPNG routing engine"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
@@ -56,7 +56,7 @@ config ADK_PACKAGE_QUAGGA_RIPNGD
 	  A RIPNG (IPv6) routing engine for use with Quagga routing software.
 
 config ADK_PACKAGE_QUAGGA_VTYSH
-	prompt   "  quagga-vtysh.................. integrated shell for Quagga routing software"
+	prompt   "quagga-vtysh.................. integrated shell for Quagga routing software"
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA

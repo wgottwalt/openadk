@@ -12,7 +12,7 @@ config ADK_PACKAGE_SUBVERSION
 	  http://subversion.tigris.org
 
 config ADK_PACKAGE_SUBVERSION_NEON
-	prompt "  Enable interaction with remote repositories over WebDAV"
+	prompt "Enable interaction with remote repositories over WebDAV"
 	bool
 	default n
 	depends on ADK_PACKAGE_SUBVERSION

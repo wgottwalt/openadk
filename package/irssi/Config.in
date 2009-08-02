@@ -10,7 +10,7 @@ config ADK_PACKAGE_IRSSI
 	  http://irssi.org
 
 config ADK_PACKAGE_IRSSI_SSL
-	bool "  Enable SSL/TLS support"
+	bool "Enable SSL/TLS support"
 	depends on ADK_PACKAGE_IRSSI
 	select ADK_PACKAGE_LIBOPENSSL
 	default n

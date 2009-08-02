@@ -21,7 +21,7 @@ config ADK_PACKAGE_MKSH
 	  http://mirbsd.de/mksh
 
 config ADK_PACKAGE_MKSH_FULL
-	bool "  Include all features"
+	bool "Include all features"
 	depends on ADK_PACKAGE_MKSH
 	default y
 	help
