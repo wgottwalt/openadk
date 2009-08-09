@@ -346,6 +346,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_MIPS64_LEMOTE
+	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
 
@@ -393,12 +394,13 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	  inside your hardware and want to boot from it.
 
 config ADK_TARGET_ROOTFS_EXT2
-	bool "read-write filesystem for qemu emulator"
+	bool "Ext2 read-write filesystem"
 	depends on ADK_LINUX_QEMU || \
-		ADK_LINUX_XSCALE_ZAURUS
+		ADK_LINUX_XSCALE_ZAURUS || \
+		ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_EXT2_FS
 	help
-	  Use this option if you compile for qemu.
+	  Use this option if your rootfs is ext2.
 endchoice
 
 config ADK_SSP
