@@ -11,7 +11,7 @@ config ADK_PACKAGE_OPENSWAN
 
 choice
 prompt "IPSec stack to use"
-depends ADK_PACKAGE_OPENSWAN
+depends on ADK_PACKAGE_OPENSWAN
 config ADK_COMPILE_OPENSWAN_WITH_NETKEY
 	prompt "NETKEY - use Linux integrated IPSec Stack"
 	select ADK_KPACKAGE_KMOD_NET_KEY
