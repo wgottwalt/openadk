@@ -1,0 +1,9 @@
+config ADK_PACKAGE_GIT
+	prompt "git............................... fast version control system"
+	tristate
+	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_LIBCURL
+	select ADK_PACKAGE_LIBEXPAT
+	default n
+	help
+	  Fast version control system.

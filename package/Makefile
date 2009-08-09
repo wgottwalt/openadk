@@ -102,6 +102,7 @@ package-$(ADK_PACKAGE_GCC) += gcc
 package-$(ADK_PACKAGE_GDB) += gdb
 package-$(ADK_PACKAGE_GDBSERVER) += gdbserver
 package-$(ADK_PACKAGE_GETTEXT) += gettext
+package-$(ADK_PACKAGE_GIT) += git
 package-$(ADK_PACKAGE_GKRELLMD) += gkrellmd
 package-$(ADK_PACKAGE_GLIB) += glib
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
