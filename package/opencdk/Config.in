@@ -1,7 +1,7 @@
 config ADK_PACKAGE_OPENCDK
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBOPENCDK
+	depends on ADK_PACKAGE_LIBOPENCDK
 
 config ADK_PACKAGE_LIBOPENCDK
 	prompt "libopencdk........................ The Open Crypto Development Kit library"

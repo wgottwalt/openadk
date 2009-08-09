@@ -1,7 +1,7 @@
 config ADK_COMPILE_PCRE
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBPCRE
+	depends on ADK_PACKAGE_LIBPCRE
 
 config ADK_PACKAGE_LIBPCRE
 	prompt "libpcre........................... A Perl Compatible Regular Expression library"

@@ -15,22 +15,22 @@ config ADK_PACKAGE_COLLECTD_CPU
         prompt "Enable cpu support"
 	bool
 	default y
-	depends ADK_PACKAGE_COLLECTD
+	depends on ADK_PACKAGE_COLLECTD
 
 config ADK_PACKAGE_COLLECTD_LOAD
         prompt "Enable load support"
 	bool
 	default y
-	depends ADK_PACKAGE_COLLECTD
+	depends on ADK_PACKAGE_COLLECTD
 
 config ADK_PACKAGE_COLLECTD_MEMORY
 	prompt "Enable memory support"
 	bool
 	default y
-	depends ADK_PACKAGE_COLLECTD
+	depends on ADK_PACKAGE_COLLECTD
 
 config ADK_PACKAGE_COLLECTD_PING
 	prompt "Enable ping support"
 	bool
 	default y
-	depends ADK_PACKAGE_COLLECTD
+	depends on ADK_PACKAGE_COLLECTD

@@ -1,7 +1,7 @@
 config ADK_COMPILE_GMP
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBGMP
+	depends on ADK_PACKAGE_LIBGMP
 
 config ADK_PACKAGE_LIBGMP
 	prompt "libgmp............................ GNU multiprecision arithmetic library"

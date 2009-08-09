@@ -1,6 +1,6 @@
 config ADK_COMPILE_LIBTOOL
 	tristate
-	depends ADK_PACKAGE_LIBLTDL
+	depends on ADK_PACKAGE_LIBLTDL
 
 config ADK_PACKAGE_LIBLTDL
 	prompt "libltdl........................... A generic dynamic object loading library"

@@ -17,3 +17,4 @@
 - network scripts for wireless client / ap
 - network scripts for pppoe
 - publish via trac+git
+- customise mconf help texts to better fit for OpenADK

@@ -1,7 +1,7 @@
 config ADK_COMPILE_MINI_HTTPD
 	tristate
 	default n
-	depends ADK_PACKAGE_MINI_HTTPD || ADK_PACKAGE_MINI_HTTPD_OPENSSL
+	depends on ADK_PACKAGE_MINI_HTTPD || ADK_PACKAGE_MINI_HTTPD_OPENSSL
 
 config ADK_PACKAGE_MINI_HTTPD
 	prompt "mini-httpd........................ A small web server"

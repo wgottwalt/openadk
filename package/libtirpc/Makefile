@@ -16,11 +16,19 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
+ifeq (${ADK_IPV6},y)
+PKG_DEPENDS+=	libgssglue
+endif
+
 $(eval $(call PKG_template,LIBTIRPC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	autotool gnu
 ifneq (${ADK_COMPILE_NFS_UTILS_WITH_KERBEROS},y)
+ifneq (${ADK_IPV6},y)
 CONFIGURE_ARGS+=	--disable-gss
+else
+CONFIGURE_ARGS+=	--enable-gss
+endif
 endif
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

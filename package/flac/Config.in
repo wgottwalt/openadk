@@ -1,7 +1,7 @@
 config ADK_COMPILE_FLAC
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBFLAC
+	depends on ADK_PACKAGE_LIBFLAC
 
 config ADK_PACKAGE_LIBFLAC
 	prompt "libflac........................... Free Lossless Audio Codec library"

@@ -1,7 +1,7 @@
 config ADK_COMPILE_OPENSSL
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBOPENSSL
+	depends on ADK_PACKAGE_LIBOPENSSL
 	
 config ADK_PACKAGE_LIBOPENSSL
 	prompt "openssl........................... Open source SSL (Secure Socket Layer) libraries"
@@ -23,7 +23,7 @@ config ADK_PACKAGE_OPENSSL_UTIL
 	prompt   "openssl-util.................... OpenSSL command line tool"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBOPENSSL
+	depends on ADK_PACKAGE_LIBOPENSSL
 	help
 	  The OpenSSL Project is a collaborative effort to develop a robust, 
 	  commercial-grade, full-featured, and Open Source toolkit implementing 
@@ -38,4 +38,4 @@ config ADK_PACKAGE_CA_CERTS
 	prompt "ca-certificates................... X.509 Root CA Certs of common CAs"
 	tristate
 	default n
-	depends ADK_COMPILE_OPENSSL
+	depends on ADK_COMPILE_OPENSSL

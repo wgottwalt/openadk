@@ -17,7 +17,7 @@ config ADK_KPACKAGE_KMOD_CRC_ITU_T
 config ADK_KPACKAGE_KMOD_CRC32
 	prompt "kmod-crc32.......................... provide CRC32 library functions"
 	tristate
-        depends ! ADK_KERNEL_CRC32
+        depends on ! ADK_KERNEL_CRC32
 	default n
 	help
 
