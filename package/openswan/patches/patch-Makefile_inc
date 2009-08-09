@@ -1,5 +1,5 @@
---- openswan-2.6.21.orig/Makefile.inc	2009-03-30 15:11:28.000000000 +0200
-+++ openswan-2.6.21/Makefile.inc	2009-06-13 14:48:55.000000000 +0200
+--- openswan-2.6.22.orig/Makefile.inc	2009-06-23 04:53:08.000000000 +0200
++++ openswan-2.6.22/Makefile.inc	2009-07-23 20:09:34.556071786 +0200
 @@ -163,7 +163,7 @@ INSTALL=install
  # how backup names are composed.
  # Note that the install procedures will never overwrite an existing config
@@ -9,3 +9,18 @@
  INSTSUIDFLAGS=--mode=u+rxs,g+rx,o+rx --group=root -b --suffix=.old
  INSTMANFLAGS=
  INSTCONFFLAGS=
+@@ -262,12 +262,12 @@ RH_KERNELSRC?=/lib/modules/2.6.9-1.681_F
+ # Note you need a locally running bind9 nameserver with lwres{} enabled
+ # to use this, or have the "lwres" package installed and running.
+ # This only affects conns that use DNS for keys in lookups.
+-USE_LWRES?=false
++USE_LWRES?=true
+ 
+ # Do a new lookup every time a connection is (re)started. This works better
+ # on hosts with some dyndns service, since DPD will cause a new dns lookup,
+ # but it could be a potential security issue if receiving spoofed dns.
+-USE_DYNAMICDNS?=true
++USE_DYNAMICDNS?=false
+ 
+ # Do we want all the configuration files like ipsec.conf and ipsec.secrets
+ # and any certificates to be in a single directory defined by 
