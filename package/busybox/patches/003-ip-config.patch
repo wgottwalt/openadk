@@ -1,0 +1,18 @@
+diff -Nur busybox-1.13.4.orig/networking/Config.in busybox-1.13.4/networking/Config.in
+--- busybox-1.13.4.orig/networking/Config.in	2008-11-09 18:27:59.000000000 +0100
++++ busybox-1.13.4/networking/Config.in	2009-08-12 23:12:27.132893048 +0200
+@@ -338,10 +338,10 @@
+ 	bool "Use busybox ip applet"
+ 	default y
+ 	depends on FEATURE_IFUPDOWN_IP
+-	select IP
+-	select FEATURE_IP_ADDRESS
+-	select FEATURE_IP_LINK
+-	select FEATURE_IP_ROUTE
++	#select IP
++	#select FEATURE_IP_ADDRESS
++	#select FEATURE_IP_LINK
++	#select FEATURE_IP_ROUTE
+ 	help
+ 	  Use the busybox iproute "ip" applet to implement "ifupdown".
+ 

@@ -33,8 +33,8 @@ POSTCONFIG=		-@\
 	done; \
 	fi; \
 	if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
-		if [ -f build_$(CPU_ARCH)/w-busybox*/busybox*/.configure_done ];then \
-			rm build_$(CPU_ARCH)/w-busybox*/busybox*/.configure_done; \
+		if [ -f build_*/w-busybox*/busybox*/.configure_done ];then \
+			rm build_*/w-busybox*/busybox*/.configure_done; \
 		fi; \
 	fi; \
 	fi
