@@ -17,6 +17,7 @@ config ADK_KPACKAGE_KMOD_INET_AH
 config ADK_KPACKAGE_KMOD_INET_ESP
 	prompt "kmod-net-ipsec-esp................ IPsec ESP support"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD
 	default n
 	help
 	  Support for IPsec ESP.
