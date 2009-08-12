@@ -114,10 +114,12 @@ EOF
 esac
 
 # find backend device, first try to find partition with ID 88
+mtd=0
 part=$(fdisk -l|awk '$5 == 88 { print $1 }')
 if [ -z $part ]; then
 	# otherwise search for MTD device with name cfgfs
 	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
+	mtd=1
 fi
 
 if [[ ! -e $part ]]; then
@@ -127,7 +129,11 @@ fi
 
 if test $1 = erase; then
 	dd if="$part" 2>&1 | md5sum 2>&1 >/dev/urandom
-	cfgfs.helper -Me | cfgfs.write
+	if [ $mtd -eq 1 ]; then
+		cfgfs.helper -Me | mtd -F write - cfgfs
+	else
+		cfgfs.helper -Me | cat > $part
+	fi
 	exit $?
 fi
 
@@ -153,7 +159,12 @@ if test $1 = setup; then
 		unclean=2
 	else
 		x=$(dd if="$part" bs=4 count=1 2>/dev/null)
-		[[ "$x" = "FWCF" ]] || cfgfs.helper -Me | cfgfs.write
+		[[ "$x" = "FWCF" ]] || \
+			if [ $mtd -eq 1 ]; then
+				cfgfs.helper -Me | mtd -F write - cfgfs
+			else
+				cfgfs.helper -Me | cat > $part
+			fi
 		if ! cfgfs.helper -U /tmp/.cfgfs/temp <"$part"; then
 			unclean=1
 			echo 'cfgfs: error: cannot extract'
@@ -246,9 +257,16 @@ if test $1 = commit; then
 		[[ "$x" = "$y" ]] && rm "../temp/$f"
 	done
 	rv=0
-	if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | cfgfs.write ); then
-		echo 'cfgfs: error: cannot write to $part!'
-		rv=6
+	if [ $mtd -eq 1 ]; then
+		if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | mtd -F write - cfgfs ); then
+			echo 'cfgfs: error: cannot write to $part!'
+			rv=6
+		fi
+	else
+		if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | cat > $part ); then
+			echo 'cfgfs: error: cannot write to $part!'
+			rv=6
+		fi
 	fi
 	umount /tmp/.cfgfs/temp
 	exit $rv
@@ -368,9 +386,16 @@ if test $1 = restore; then
 		rm -rf /tmp/.cfgfs.restore
 		exit 12
 	fi
-	if ! ( cfgfs.helper -MD dump | cfgfs.write ); then
-		echo 'cfgfs: error: cannot write to $part!'
-		exit 6
+	if [ $mtd -eq 1 ]; then
+		if ! ( cfgfs.helper -MD dump | mtd -F write - cfgfs ); then
+			echo 'cfgfs: error: cannot write to $part!'
+			exit 6
+		fi
+	else
+		if ! ( cfgfs.helper -MD dump | cat > $part ); then
+			echo 'cfgfs: error: cannot write to $part!'
+			exit 6
+		fi
 	fi
 	cd /
 	rm -rf /tmp/.cfgfs.restore
