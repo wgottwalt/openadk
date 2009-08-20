@@ -17,7 +17,7 @@ CONFOPTS+=		--enable-64-bit-bfd
 endif
 
 $(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configure_done: 
+$(WRKBUILD)/.configured: 
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
@@ -35,7 +35,7 @@ $(WRKBUILD)/.configure_done:
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled: $(WRKBUILD)/.configure_done
+$(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	$(MAKE) -C $(WRKBUILD) all
 	touch $@
 

@@ -35,7 +35,7 @@ endif
 		HOSTCC="$(HOSTCC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
-	touch $(WRKBUILD)/.configure_done
+	touch $(WRKBUILD)/.configured
 	touch $@
 
 $(WRKBUILD)/.compiled: 

@@ -8,7 +8,7 @@ include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers:
-$(WRKBUILD)/.configure_done:
+$(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		gdb_cv_func_sigsetjmp=yes \
 		./configure \

@@ -1,5 +1,5 @@
 prepare: ${WRKDIST}/.prepared $(WRKBUILD)/.headers
-configure: ${WRKBUILD}/.configure_done
+configure: ${WRKBUILD}/.configured
 compile: $(WRKBUILD)/.compiled
 install: $(WRKBUILD)/.installed
 clean:
