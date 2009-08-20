@@ -1,9 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- vsftpd-2.1.2.orig/Makefile	2009-05-22 21:44:52.000000000 +0200
-+++ vsftpd-2.1.2/Makefile	2009-06-04 22:15:07.000000000 +0200
-@@ -5,8 +5,8 @@ IFLAGS  = -idirafter dummyinc
+--- vsftpd-2.2.0.orig/Makefile	2009-05-22 21:44:52.000000000 +0200
++++ vsftpd-2.2.0/Makefile	2009-08-21 00:46:32.980346849 +0200
+@@ -1,12 +1,12 @@
+ # Makefile for systems with GNU tools
+-CC 	=	gcc
++CC 	?=	gcc
+ INSTALL	=	install
+ IFLAGS  = -idirafter dummyinc
  #CFLAGS = -g
- CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
+-CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
++CFLAGS	?=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
  
 -LIBS	=	`./vsf_findlibs.sh`
 -LINK	=	-Wl,-s
