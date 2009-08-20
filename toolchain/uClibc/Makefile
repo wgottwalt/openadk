@@ -12,6 +12,10 @@ include ${TOPDIR}/mk/buildhlp.mk
 ifeq ($(ARCH),mips)
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 endif
+#workaround for cris and gcc 4.4, where -Os generates ICE
+ifeq ($(ARCH),cris)
+TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
