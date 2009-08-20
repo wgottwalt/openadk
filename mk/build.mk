@@ -179,7 +179,7 @@ _config: $(CONFIG)/conf
 .NOTPARALLEL: _mconfig
 _mconfig: ${CONFIG}/conf _mconfig2 _config
 _mconfig2: ${CONFIG}/conf
-	@${CONFIG}/conf -M ${RCONFIG} >/dev/null
+	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
