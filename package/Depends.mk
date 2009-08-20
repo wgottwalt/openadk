@@ -96,6 +96,9 @@ libp11-compile: openssl-compile libtool-compile
 libpng-compile: zlib-compile
 libshout-compile: libvorbis-compile
 libusb-compat-compile: libusb-compile
+ifeq (${ADK_IPV6},y)
+libtirpc-compile: libgssglue-compile
+endif
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
 libfontenc-compile: xproto-compile zlib-compile
