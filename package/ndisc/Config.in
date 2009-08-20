@@ -3,14 +3,14 @@
 config ADK_COMPILE_NDISC6
 	tristate
 	default n
-	depends ADK_IPV6
-	depends ADK_PACKAGE_NDISC6 || ADK_PACKAGE_RDISC6 || ADK_PACKAGE_TCPTRACEROUTE6
+	depends on ADK_IPV6
+	depends on ADK_PACKAGE_NDISC6 || ADK_PACKAGE_RDISC6 || ADK_PACKAGE_TCPTRACEROUTE6
 
 config ADK_PACKAGE_NDISC6
 	prompt "ndisc6............................ An ICMPv6 neighbour discovery tool"
 	tristate
 	default n
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	select ADK_COMPILE_NDISC6
 	help
 	  
@@ -22,7 +22,7 @@ config ADK_PACKAGE_RDISC6
 	prompt "rdisc6............................ An ICMPv6 router discovery tool"
 	tristate
 	default n
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	select ADK_COMPILE_NDISC6
 	help
 	  
@@ -34,7 +34,7 @@ config ADK_PACKAGE_TCPTRACEROUTE6
 	prompt "tcptraceroute6.................... A TCP/IPv6-based traceroute implementation"
 	tristate
 	default n
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	select ADK_COMPILE_NDISC6
 	help
 	  

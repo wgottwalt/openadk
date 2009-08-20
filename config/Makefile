@@ -36,9 +36,9 @@ endif
 endif
 
 CONF_SRC  =conf.c
-MCONF_SRC =mconf.c checklist.c menubox.c textbox.c yesno.c inputbox.c util.c msgbox.c
-SHARED_SRC=zconf.tab.c glob.c
-SHARED_DEPS:=lkc.h lkc_proto.h lkc_defs.h expr.h zconf.tab.h glob.h
+MCONF_SRC =mconf.c $(wildcard lxdialog/*.c)
+SHARED_SRC=zconf.tab.c
+SHARED_DEPS:=lkc.h lkc_proto.h lkc_defs.h expr.h zconf.tab.h
 CONF_OBJS =$(patsubst %.c,%.o, $(CONF_SRC))
 MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
@@ -72,13 +72,16 @@ ifdef LKC_GENPARSER
 %.tab.c %.tab.h: %.y
 	bison -t -d -v -b $* -p $(notdir $*) $<
 
+%.hash.c: %.gperf
+	gperf < $< > $@
+
 lex.%.c: %.l
 	flex -P$(notdir $*) -o$@ $<
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
-zconf.tab.o: zconf.tab.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
+zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 else
@@ -89,7 +92,10 @@ lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
 lex.zconf.c: lex.zconf.c_shipped
 	$(CP) lex.zconf.c_shipped lex.zconf.c
 
-zconf.tab.o: zconf.tab.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
+zconf.hash.c: zconf.hash.c_shipped
+	$(CP) zconf.hash.c_shipped zconf.hash.c
+
+zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 zconf.tab.c: zconf.tab.c_shipped

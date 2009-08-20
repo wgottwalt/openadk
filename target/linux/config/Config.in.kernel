@@ -1,3 +1,15 @@
+config ADK_KERNEL_BLK_DEV_INITRD
+	bool
+	default n
+
+config ADK_KERNEL_RD_LZMA
+	bool
+	default n
+
+config ADK_KERNEL_INITRAMFS_SOURCE
+	string
+	default ""
+
 config ADK_KERNEL_ETRAX_MTD_SIZE
 	hex
         depends on ADK_LINUX_CRIS_FOXBOARD_CLASSIC || ADK_LINUX_CRIS_FOXBOARD_LX

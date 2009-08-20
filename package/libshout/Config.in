@@ -1,7 +1,7 @@
 config ADK_COMPILE_LIBSHOUT
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBSHOUT
+	depends on ADK_PACKAGE_LIBSHOUT
 
 config ADK_PACKAGE_LIBSHOUT
 	prompt "libshout.......................... Streaming library"

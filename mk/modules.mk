@@ -205,6 +205,38 @@ $(eval $(call KMOD_template,NET_ACT_PEDIT,net-act-pedit,\
 	$(MODULES_DIR)/kernel/net/sched/act_pedit \
 ,45))
 
+#
+# IPsec 
+#
+$(eval $(call KMOD_template,NET_KEY,net-ipsec-netkey,\
+	$(MODULES_DIR)/kernel/net/key/af_key \
+,60))
+
+$(eval $(call KMOD_template,INET_AH,net-ipsec-ah,\
+	$(MODULES_DIR)/kernel/net/ipv4/ah4 \
+,65))
+
+$(eval $(call KMOD_template,INET_ESP,net-ipsec-esp,\
+	$(MODULES_DIR)/kernel/net/ipv4/esp4 \
+,65))
+
+$(eval $(call KMOD_template,INET_IPCOMP,net-ipsec-comp,\
+	$(MODULES_DIR)/kernel/net/ipv4/ipcomp \
+	$(MODULES_DIR)/kernel/net/xfrm/xfrm_ipcomp \
+,70))
+
+$(eval $(call KMOD_template,INET_XFRM_MODE_TRANSPORT,net-ipsec-transport,\
+	$(MODULES_DIR)/kernel/net/ipv4/xfrm4_mode_transport \
+,75))
+
+$(eval $(call KMOD_template,INET_XFRM_MODE_TUNNEL,net-ipsec-tunnel,\
+	$(MODULES_DIR)/kernel/net/ipv4/xfrm4_mode_tunnel \
+,75))
+
+$(eval $(call KMOD_template,INET_XFRM_MODE_BEET,net-ipsec-beet,\
+	$(MODULES_DIR)/kernel/net/ipv4/xfrm4_mode_beet \
+,75))
+
 ##
 ## Filtering / Firewalling
 ##

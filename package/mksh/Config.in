@@ -21,8 +21,8 @@ config ADK_PACKAGE_MKSH
 	  http://mirbsd.de/mksh
 
 config ADK_PACKAGE_MKSH_FULL
-	bool "  Include all features"
-	depends ADK_PACKAGE_MKSH
+	bool "Include all features"
+	depends on ADK_PACKAGE_MKSH
 	default y
 	help
 	  Disable this to remove a few functions from mksh to make it smaller.

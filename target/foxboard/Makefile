@@ -18,7 +18,7 @@ tools-compile: $(TOOLS_BUILD_DIR)
 
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' \
-	mkfimage $(LINUX_DIR)/arch/cris/arch-v10/boot/zImage \
+	mkfimage $(LINUX_DIR)/arch/cris/boot/zImage \
 		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel $(MAKE_TRACE)
 
 ifeq ($(FS),squashfs)

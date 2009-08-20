@@ -7,8 +7,11 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+
 kernel-install:
-	cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+	$(KERNEL_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
+		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
 
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -17,7 +20,12 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+endif
+ifeq ($(FS),ext2)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo
+	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 endif

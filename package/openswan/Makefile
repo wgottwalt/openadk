@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.21
+PKG_VERSION:=		2.6.22
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ba9da6c90e0f5fe856767d7510ce371f
+PKG_MD5SUM:=		9a30009bade8a1b09fba27680c87cf72
 PKG_DESCR:=		IPSec software
 PKG_SECTION:=		net
 PKG_DEPENDS:=		ip libgmp
@@ -18,42 +18,36 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-FLAGS:=			${TCFLAGS} ${TCPPFLAGS} ${TLDFLAGS}
+#ifeq ($(ADK_COMPILE_OPENSWAN_WITH_NETKEY),y)
+#XAKE_FLAGS+=		USE_KLIPS=false USE_NETKEY=true
+#endif
 
-do-build:
-	${MAKE} -C ${WRKBUILD} \
-		${TARGET_CONFIGURE_OPTS} \
-		KERNELSRC="${LINUX_DIR}" \
-		ARCH="${ARCH}" \
-		USERCOMPILE="${FLAGS}" \
-		EXTRA_INCLUDE="${TCPPFLAGS}" \
-		EXTRA_LIBS="${TLDFLAGS}" \
-		IPSECDIR="/usr/lib/ipsec" \
-		INC_USRLOCAL="/usr" \
-		MODPROBE="insmod" \
-		OSDEP="linux" \
-		BUILDENV="linux" \
-		programs
+#ifeq ($(ADK_COMPILE_OPENSWAN_WITH_KLIPS),y)
+#XAKE_FLAGS+=		USE_KLIPS=true USE_NETKEY=false
+#endif
 
-do-install:
-	${MAKE} -C ${WRKBUILD} \
-		${TARGET_CONFIGURE_OPTS} \
-		DESTDIR="${IDIR_OPENSWAN}" \
-		KERNELSRC="${LINUX_DIR}" \
-		ARCH="${ARCH}" \
-		USERCOMPILE="${FLAGS}" \
-		IPSECDIR="/usr/lib/ipsec" \
-		INC_USRLOCAL="/usr" \
-		MODPROBE="insmod" \
-		OSDEP="linux" \
-		BUILDENV="linux" \
-		install
-	rm -rf ${IDIR_OPENSWAN}/usr/share
-	rm -rf ${IDIR_OPENSWAN}/usr/man
-	rm -rf ${IDIR_OPENSWAN}/var
-	mv ${IDIR_OPENSWAN}/etc/rc.d/init.d/ipsec \
+XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
+			IPSECDIR="/usr/lib/ipsec" \
+			INC_USRLOCAL="/usr" \
+			MODPROBE="insmod" \
+			OSDEP="linux" \
+			BUILDENV="linux"
+
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+ALL_TARGET:=		programs
+
+post-install:
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/lib/ipsec
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d 
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/sbin
+	${CP} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
+	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d
+	${CP} ${WRKINST}/usr/lib/ipsec/* ${IDIR_OPENSWAN}/usr/lib/ipsec
+	${CP} ${WRKINST}/usr/libexec/ipsec/* ${IDIR_OPENSWAN}/usr/libexec/ipsec
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipsec ${IDIR_OPENSWAN}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/etc/rc.d/init.d/ipsec \
 		${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
-	rm -rf ${IDIR_OPENSWAN}/etc/rc*.d
-	find ${IDIR_OPENSWAN} -name \*.old -print0 | xargs -0 rm -rf
 
 include ${TOPDIR}/mk/pkg-bottom.mk

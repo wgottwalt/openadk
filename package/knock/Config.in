@@ -1,7 +1,7 @@
 config ADK_COMPILE_KNOCK
 	tristate
 	default n
-	depends ADK_PACKAGE_KNOCK || ADK_PACKAGE_KNOCKD
+	depends on ADK_PACKAGE_KNOCK || ADK_PACKAGE_KNOCKD
 
 config ADK_PACKAGE_KNOCK
 	prompt "knock............................. A port-knocking client"

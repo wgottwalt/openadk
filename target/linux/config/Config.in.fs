@@ -21,8 +21,8 @@ config ADK_KPACKAGE_KMOD_EXT2_FS
 	prompt "kmod-fs-ext2...................... EXT2 filesystem support"
 	tristate
 	default n
-	depends !ADK_TARGET_ROOTFS_EXT2_CF
-	depends !ADK_KERNEL_EXT2_FS
+	depends on !ADK_TARGET_ROOTFS_EXT2_CF
+	depends on !ADK_KERNEL_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 

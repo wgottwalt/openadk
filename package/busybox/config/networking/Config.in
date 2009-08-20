@@ -338,6 +338,7 @@ config BUSYBOX_FEATURE_IFUPDOWN_IP_BUILTIN
 	bool "Use busybox ip applet"
 	default y
 	depends on BUSYBOX_FEATURE_IFUPDOWN_IP
+	depends on !ADK_PACKAGE_IP
 	select BUSYBOX_IP
 	select BUSYBOX_FEATURE_IP_ADDRESS
 	select BUSYBOX_FEATURE_IP_LINK
@@ -456,6 +457,7 @@ config BUSYBOX_FEATURE_INETD_RPC
 config BUSYBOX_IP
 	bool "ip"
 	default y
+	depends on !ADK_PACKAGE_IP
 	help
 	  The "ip" applet is a TCP/IP interface configuration and routing
 	  utility. You generally don't need "ip" to use busybox with

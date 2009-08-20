@@ -202,7 +202,7 @@ source "package/wput/Config.in"
 endmenu
 
 menu "IPv6"
-depends ADK_IPV6
+depends on ADK_IPV6
 source "package/6tunnel/Config.in"
 source "package/aiccu/Config.in"
 source "package/miredo/Config.in"
@@ -246,6 +246,7 @@ menu "Misc"
 source "package/cups/Config.in"
 source "package/fakeidentd/Config.in"
 source "package/gkrellmd/Config.in"
+source "package/git/Config.in"
 source "package/net-snmp/Config.in"
 source "package/nut/Config.in"
 source "package/openldap/Config.in"
@@ -453,7 +454,7 @@ source "package/zlib/Config.in"
 endmenu
 
 menu "X"
-depends ADK_X11
+depends on ADK_X11
 source "package/xorg-server/Config.in"
 source "package/xf86-video-geode/Config.in"
 

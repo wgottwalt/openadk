@@ -11,4 +11,4 @@ config ADK_PACKAGE_DBCONVERT
 	prompt   "dropbearconvert................. Utility for converting SSH keys"
 	tristate
 	default n
-	depends ADK_PACKAGE_DROPBEAR
+	depends on ADK_PACKAGE_DROPBEAR

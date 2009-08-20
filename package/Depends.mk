@@ -47,6 +47,7 @@ gatling-compile: libowfat-compile libiconv-compile
 gcc-compile: gmp-compile mpfr-compile
 gdb-compile: ncurses-compile readline-compile
 gettext-compile: libiconv-compile libpthread-compile
+git-compile: openssl-compile curl-compile expat-compile
 gkrellmd-compile: glib-compile
 glib-compile: gettext-compile libiconv-compile
 gmediaserver-compile: id3lib-compile libupnp-compile
@@ -245,22 +246,12 @@ apr-compile: libpthread-compile
 endif
 
 asterisk-compile: ncurses-compile openssl-compile zlib-compile curl-compile popt-compile
-ifneq ($(ADK_PACKAGE_ASTERISK_CHAN_BLUETOOTH),)
-asterisk-compile: bluez-compile
-endif
 ifneq ($(ADK_PACKAGE_ASTERISK_CODEC_SPEEX),)
 asterisk-compile: speex-compile
 endif
 ifneq ($(ADK_PACKAGE_ASTERISK_PGSQL),)
 asterisk-compile: postgresql-compile
 endif
-ifneq ($(ADK_PACKAGE_ASTERISK_MYSQL),)
-asterisk-compile: mysql-compile
-endif
-ifneq ($(ADK_PACKAGE_ASTERISK_SQLITE),)
-asterisk-compile: sqlite-compile
-endif
-
 
 freeradius-client-compile: openssl-compile
 freeradius-server-compile: libtool-compile openssl-compile

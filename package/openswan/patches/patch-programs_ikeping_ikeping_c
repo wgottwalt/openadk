@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- openswan-2.6.18.orig/programs/ikeping/ikeping.c	2008-10-06 18:52:49.000000000 +0200
-+++ openswan-2.6.18/programs/ikeping/ikeping.c	2008-10-14 13:09:06.000000000 +0200
-@@ -316,7 +316,7 @@ main(int argc, char **argv)
+--- openswan-2.6.22.orig/programs/ikeping/ikeping.c	2009-06-23 04:53:08.000000000 +0200
++++ openswan-2.6.22/programs/ikeping/ikeping.c	2009-07-23 19:46:18.643265912 +0200
+@@ -319,7 +319,7 @@ main(int argc, char **argv)
    natt=0;
    listen_only=0;
    noDNS=0;

@@ -108,7 +108,7 @@ config ADK_KPACKAGE_KMOD_NET_IPIP
 config ADK_KPACKAGE_KMOD_NET_IPGRE
 	prompt "kmod-net-ipgre.................... GRE tunnels over IP"
 	tristate
-	#depends ADK_KPACKAGE_KMOD_NET_IPGRE_BROADCAST
+	#depends on ADK_KPACKAGE_KMOD_NET_IPGRE_BROADCAST
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
@@ -124,7 +124,7 @@ config ADK_KPACKAGE_KMOD_NET_IPGRE
 config ADK_KPACKAGE_KMOD_IPV6
 	prompt "kmod-ipv6......................... IPv6 support"
 	tristate
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	default n
 	help
 	  This is complemental support for the IP version 6.
@@ -139,7 +139,7 @@ config ADK_KPACKAGE_KMOD_IPV6
 config ADK_KPACKAGE_KMOD_IPV6_SIT
 	prompt "kmod-ipv6-sit..................... IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
-	depends ADK_IPV6
+	depends on ADK_IPV6
 	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help
@@ -182,7 +182,7 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	prompt   "kmod-ppp-mppe................... PPP MPPE/MPPC module"
 	tristate
 	default n
-	depends ADK_KPACKAGE_KMOD_PPP
+	depends on ADK_KPACKAGE_KMOD_PPP
 	select ADK_KERNEL_CRYPTO
 	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
 	select ADK_KPACKAGE_KMOD_CRYPTO_SHA1
@@ -198,7 +198,7 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 #	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
 #	tristate
 #	default n
-#	depends ADK_KPACKAGE_KMOD_PPP
+#	depends on ADK_KPACKAGE_KMOD_PPP
 #	select ADK_KPACKAGE_KMOD_ATM
 #	help
 #	  Support for PPP over ATM
@@ -207,7 +207,7 @@ config ADK_KPACKAGE_KMOD_PPPOE
 	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"
 	tristate
 	default n
-	depends ADK_KPACKAGE_KMOD_PPP
+	depends on ADK_KPACKAGE_KMOD_PPP
 	help
 	  Support for PPP over Ethernet
 
@@ -234,6 +234,7 @@ config ADK_KPACKAGE_KMOD_BONDING
 	  information.
 
 source target/linux/config/Config.in.sched
+source target/linux/config/Config.in.ipsec
 
 endmenu
 

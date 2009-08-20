@@ -1,7 +1,7 @@
 config ADK_COMPILE_KISMET
 	tristate
 	default n
-	depends ADK_PACKAGE_KISMET_CLIENT || ADK_PACKAGE_KISMET_DRONE || ADK_PACKAGE_KISMET_SERVER
+	depends on ADK_PACKAGE_KISMET_CLIENT || ADK_PACKAGE_KISMET_DRONE || ADK_PACKAGE_KISMET_SERVER
 
 config ADK_PACKAGE_KISMET_CLIENT
 	prompt "kismet-client..................... The Kismet client"

@@ -8,3 +8,23 @@ config ADK_PACKAGE_OPENSWAN
 	  Openswan is an implementation of IPsec for Linux.
 	  
 	  http://www.openswan.org/
+
+choice
+prompt "IPSec stack to use"
+depends on ADK_PACKAGE_OPENSWAN
+config ADK_COMPILE_OPENSWAN_WITH_NETKEY
+	prompt "NETKEY - use Linux integrated IPSec Stack"
+	select ADK_KPACKAGE_KMOD_NET_KEY
+	select ADK_KPACKAGE_KMOD_INET_XFRM_MODE_TUNNEL
+	select ADK_KPACKAGE_KMOD_INET_XFRM_MODE_TRANSPORT
+	select ADK_KPACKAGE_KMOD_INET_ESP
+	select ADK_KPACKAGE_KMOD_INET_AH
+	bool
+	help
+
+config ADK_COMPILE_OPENSWAN_WITH_KLIPS
+	prompt "KLIPS - use OpenS/WAN IPSec Stack"
+	bool
+	help
+
+endchoice

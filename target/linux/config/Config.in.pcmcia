@@ -12,14 +12,14 @@ config ADK_KPACKAGE_KMOD_PCCARD
 config ADK_KPACKAGE_KMOD_PCMCIA
 	prompt "kmod-pcmcia....................... 16-bit PCMCIA support"
 	tristate
-	depends ADK_KPACKAGE_KMOD_PCCARD
+	depends on ADK_KPACKAGE_KMOD_PCCARD
 	select ADK_KERNEL_CRC32
 	default n
 
 config ADK_KPACKAGE_KMOD_YENTA
 	prompt "kmod-cardbus...................... 32-bit CardBus support"
 	tristate
-	depends ADK_KPACKAGE_KMOD_PCCARD
+	depends on ADK_KPACKAGE_KMOD_PCCARD
 	select ADK_KERNEL_CARDBUS
 	default n
 

@@ -94,7 +94,7 @@ config ADK_KPACKAGE_KMOD_NFSD
 	default n
 	select ADK_KPACKAGE_KMOD_EXPORTFS
 	select ADK_KERNEL_NFSD_V3
-	depends ADK_KPACKAGE_KMOD_NFS_FS
+	depends on ADK_KPACKAGE_KMOD_NFS_FS
 	help
 	  If you want your Linux box to act as an NFS *server*, so that other
 	  computers on your local network which support NFS can access certain

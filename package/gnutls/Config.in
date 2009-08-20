@@ -1,7 +1,7 @@
 config ADK_COMPILE_GNUTLS
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBGNUTLS
+	depends on ADK_PACKAGE_LIBGNUTLS
 
 config ADK_PACKAGE_LIBGNUTLS
 	prompt "libgnutls......................... The GNU TLS library"
@@ -41,7 +41,7 @@ config ADK_PACKAGE_LIBGNUTLS_EXTRA
 	prompt "libgnutls-extra................... The GNU TLS extra library"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBGNUTLS
+	depends on ADK_PACKAGE_LIBGNUTLS
 	select ADK_PACKAGE_LIBOPENCDK
 	select ADK_PACKAGE_LIBLZO
 	help
@@ -58,7 +58,7 @@ config ADK_PACKAGE_LIBGNUTLS_OPENSSL
 	prompt "libgnutls-openssl................. The GNU TLS OpenSSL compatibility layer library"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBGNUTLS
+	depends on ADK_PACKAGE_LIBGNUTLS
 	help
 	  GnuTLS is a project that aims to develop a library which provides a
 	  secure layer, over a reliable transport layer. Currently the GnuTLS
@@ -73,7 +73,7 @@ config ADK_PACKAGE_LIBGNUTLSXX
 	tristate
 	default n
 	depends on ADK_CXX
-	depends ADK_PACKAGE_LIBGNUTLS
+	depends on ADK_PACKAGE_LIBGNUTLS
 	help
 	  GnuTLS is a project that aims to develop a library which provides a
 	  secure layer, over a reliable transport layer. Currently the GnuTLS
@@ -104,7 +104,7 @@ config ADK_PACKAGE_GNUTLS_UTILS
 	prompt "gnutls-utils...................... The GNU TLS utilities"
 	tristate
 	default n
-	depends ADK_PACKAGE_LIBGNUTLS
+	depends on ADK_PACKAGE_LIBGNUTLS
 	select ADK_PACKAGE_LIBGNUTLS_EXTRA
 	help
 	  GnuTLS is a project that aims to develop a library which provides a

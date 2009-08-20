@@ -1,6 +1,6 @@
 config ADK_COMPILE_USBUTILS
 	tristate
-	depends ADK_PACKAGE_LSUSB
+	depends on ADK_PACKAGE_LSUSB
 
 config ADK_PACKAGE_LSUSB
 	prompt "lsusb............................. USB devices listing program"
