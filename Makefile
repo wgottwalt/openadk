@@ -89,18 +89,18 @@ download: .prereq_done
 	@${GMAKE_INV} toolchain/download
 	@${GMAKE_INV} package/download
 
-cleankernel: .prereq_done
+cleankernel kernelclean: .prereq_done
 	-@${GMAKE_INV} cleankernel
 
-cleandir: .prereq_done
+cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} clean cleandir
 	@-rm -f make.log .prereq_done
 
-cleandevice: .prereq_done
+cleandevice deviceclean: .prereq_done
 	-@${GMAKE_INV} clean cleandevice
 	@-rm -f make.log
 
-distclean: .prereq_done
+distclean cleandist: .prereq_done
 	-@${GMAKE_INV} clean cleandir distclean
 	@-rm -f make.log .prereq_done
 
@@ -110,7 +110,7 @@ image: .prereq_done
 switch: .prereq_done
 	@${GMAKE_INV} switch
 
-image_clean: .prereq_done
+image_clean imageclean cleanimage: .prereq_done
 	@${GMAKE_INV} image_clean
 
 menuconfig: .prereq_done
