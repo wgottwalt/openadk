@@ -1,0 +1,101 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+include ../rules.mk
+include Makefile.inc
+
+include ${TOPDIR}/mk/buildhlp.mk
+
+EGLIBC_CONFOPTS:=	\
+			--build=$(GNU_HOST_NAME) \
+			--host=$(REAL_GNU_TARGET_NAME) \
+			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--disable-nls \
+			--without-cvs \
+			--disable-profile \
+			--disable-debug \
+			--without-gd \
+			--enable-add-ons
+
+EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
+			BUILD_CC=${HOSTCC} \
+			CC=${REAL_GNU_TARGET_NAME}-gcc \
+			CXX=${REAL_GNU_TARGET_NAME}-g++ \
+			AR=${REAL_GNU_TARGET_NAME}-ar \
+			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+			libc_cv_forced_unwind=yes \
+			libc_cv_c_cleanup=yes \
+			libc_cv_gnu99_inline=yes
+
+ifeq ($(ADK_DEVICE_NO_FPU),y)
+EGLIBC_CONFOPTS+=       --without-fp
+endif
+
+EGLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
+EGLIBC_BUILD_DIR_FINAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
+
+$(WRKBUILD)/.headers_configure:
+	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
+		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
+	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc; autoconf --force);
+	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
+	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
+		$(EGLIBC_BUILD_DIR_INITIAL)
+	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
+		${EGLIBC_ENV} \
+		$(WRKBUILD)/libc/configure \
+			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
+			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			${EGLIBC_CONFOPTS} \
+	);
+	touch $@
+
+$(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
+	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
+		install-headers install-bootstrap-headers=yes
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
+		csu/subdir_lib
+	( cd $(EGLIBC_BUILD_DIR_INITIAL); \
+		$(CP) csu/crt1.o csu/crti.o csu/crtn.o \
+		$(TOOLCHAIN_SYSROOT)/usr/lib \
+	);
+	PATH='${TARGET_PATH}' \
+	$(TARGET_CC) -nostdlib -nostartfiles -shared -x c /dev/null \
+		-o $(TOOLCHAIN_SYSROOT)/usr/lib/libc.so
+	touch $@
+
+$(WRKBUILD)/.configured: 
+	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)
+	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
+		$(EGLIBC_BUILD_DIR_FINAL)
+	(cd $(EGLIBC_BUILD_DIR_FINAL); \
+		${EGLIBC_ENV} \
+		$(WRKBUILD)/libc/configure \
+			--prefix=/usr \
+			--enable-shared \
+			--enable-stackguard-randomization \
+			--with-__thread \
+			--with-tls \
+			--enable-kernel=2.6.0 \
+			${EGLIBC_CONFOPTS} \
+	);
+	touch $@
+
+$(WRKBUILD)/.compiled:
+	${EGLIBC_ENV} \
+	CFLAGS="$(TARGET_CFLAGS)" \
+	$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
+	touch $@
+
+$(WRKBUILD)/.installed:
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) \
+		install_root=$(STAGING_DIR) \
+		install
+	touch $@
+
+include ${TOPDIR}/mk/toolchain.mk

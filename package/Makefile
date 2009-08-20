@@ -108,6 +108,9 @@ package-$(ADK_PACKAGE_GLIB) += glib
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 endif
+ifeq (${ADK_TARGET_LIB_EGLIBC},y)
+package-$(ADK_PACKAGE_EGLIBC) += eglibc
+endif
 ifeq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_LIBC) += libc
 endif

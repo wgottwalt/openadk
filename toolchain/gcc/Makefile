@@ -48,51 +48,81 @@ endif
 
 include ${TOPDIR}/mk/buildhlp.mk
 
-GCC_BUILD_DIR1:=	$(WRKBUILD)-initial
-GCC_BUILD_DIR2:=	$(WRKBUILD)-final
+GCC_BUILD_DIR_MINIMAL:=	$(WRKBUILD)-minimal
+GCC_BUILD_DIR_INITIAL:=	$(WRKBUILD)-initial
+GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
-$(WRKBUILD)/.headers:
-$(GCC_BUILD_DIR1)/.configured:
+$(GCC_BUILD_DIR_MINIMAL)/.configured:
+	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
+	(cd $(GCC_BUILD_DIR_MINIMAL); rm -f config.cache; \
+		PATH=$(TARGET_PATH) \
+		$(WRKBUILD)/configure \
+			${GCC_CONFOPTS} \
+			--enable-languages=c \
+			--disable-shared \
+			--with-newlib \
+			--without-headers \
+	);
+	touch $@
+
+$(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) all-gcc 
+	touch $@
+
+$(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) install-gcc
+	touch $@
+
+$(GCC_BUILD_DIR_INITIAL)/.configured:
 	rm -rf $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/sys-include
 	ln -sf ${STAGING_DIR}/include $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/sys-include
 	rm -rf ${STAGING_TOOLS}/$(REAL_GNU_TARGET_NAME)/lib
 	ln -sf ${STAGING_DIR}/lib $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/lib
-	mkdir -p $(GCC_BUILD_DIR1)
-	(cd $(GCC_BUILD_DIR1); rm -f config.cache; PATH=$(TARGET_PATH) \
+	mkdir -p $(GCC_BUILD_DIR_INITIAL)
+	(cd $(GCC_BUILD_DIR_INITIAL); rm -f config.cache; \
+		PATH=$(TARGET_PATH) \
 		$(WRKBUILD)/configure \
-		${GCC_CONFOPTS} \
-		--enable-languages=c \
-		--disable-shared \
-		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+			${GCC_CONFOPTS} \
+			--enable-languages=c \
+			--disable-shared \
+			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 	);
 	touch $@
 
-$(GCC_BUILD_DIR1)/.compiled: $(GCC_BUILD_DIR1)/.configured
-	PATH=$(TARGET_PATH) $(MAKE) -C $(GCC_BUILD_DIR1) all-gcc all-target-libgcc
+
+$(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) all
 	touch $@
 
-$(WRKBUILD)/.configure_done: $(GCC_BUILD_DIR1)/.compiled
-	PATH=$(TARGET_PATH) $(MAKE) -C $(GCC_BUILD_DIR1) install-gcc install-target-libgcc
+$(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install
 	touch $@
 
-$(GCC_BUILD_DIR2)/.configured:
-	mkdir -p $(GCC_BUILD_DIR2)
-	(cd $(GCC_BUILD_DIR2); rm -f config.cache; PATH=$(TARGET_PATH) \
+$(GCC_BUILD_DIR_FINAL)/.configured:
+	mkdir -p $(GCC_BUILD_DIR_FINAL)
+	(cd $(GCC_BUILD_DIR_FINAL); rm -f config.cache; \
+		PATH=$(TARGET_PATH) \
 		$(WRKBUILD)/configure \
-		${GCC_CONFOPTS} \
-		--enable-languages=$(TARGET_LANGUAGES) \
-		--with-sysroot=$(STAGING_DIR) \
-		--with-slibdir=$(STAGING_DIR)/lib \
-		--enable-shared \
+			${GCC_CONFOPTS} \
+			--enable-languages=$(TARGET_LANGUAGES) \
+			--with-sysroot=$(STAGING_DIR) \
+			--with-slibdir=$(STAGING_DIR)/lib \
+			--enable-shared \
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled: $(GCC_BUILD_DIR2)/.configured
-	PATH=$(TARGET_PATH) $(MAKE) -C $(GCC_BUILD_DIR2) all
+$(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	PATH=$(TARGET_PATH) $(MAKE) -C $(GCC_BUILD_DIR2) install
+	PATH=$(TARGET_PATH) \
+	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
 	(cd $(STAGING_TOOLS); \

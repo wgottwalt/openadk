@@ -316,6 +316,21 @@ config ADK_TARGET_LIB_UCLIBC
 	help
  	 http://uclibc.org
 
+config ADK_TARGET_LIB_EGLIBC
+	bool "Embedded GNU C library"
+	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_MIPS_QEMU || \
+		ADK_LINUX_MIPS64_QEMU || \
+		ADK_LINUX_MIPSEL_QEMU || \
+		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_RESCUE || \
+		ADK_LINUX_MIPS64_LEMOTE
+	help
+	 http://www.eglibc.org
+
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	depends on ADK_LINUX_X86_QEMU || \
@@ -330,6 +345,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.gnu.org/libc
+
 endchoice
 
 choice

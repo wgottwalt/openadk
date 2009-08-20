@@ -1,5 +1,15 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
+#
+# Steps to build toolchains
+# 1) build and install binutils
+# 2) build and install mpfr and gmp
+# 3) build and install gcc c compiler
+# 4) install kernel-headers
+# 5) install libc headers
+# 6) build and install full gcc 
+# 7) build and install full libc
+# 8) build and install gdb debugger
 
 include $(TOPDIR)/rules.mk
 
@@ -7,7 +17,12 @@ TARGETS:=binutils gmp mpfr gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
 LIBC:=glibc
-else
+endif
+ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+TARGETS+=eglibc
+LIBC:=eglibc
+endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uClibc
 LIBC:=uClibc
 endif
@@ -22,9 +37,9 @@ install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 
-$(LIBC)-prepare: kernel-headers-prepare
-binutils-prepare: $(LIBC)-prepare
-gcc-configure: binutils-install gmp-install mpfr-install
+gcc-prepare: binutils-install gmp-install mpfr-install
+$(LIBC)-prepare: gcc-prepare kernel-headers-prepare 
+gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install
 

@@ -7,7 +7,7 @@ include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configure_done: 
+$(WRKBUILD)/.configured: 
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
@@ -19,7 +19,7 @@ $(WRKBUILD)/.configure_done:
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled: $(WRKBUILD)/.configure_done
+$(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	$(MAKE) -C $(WRKBUILD) all
 	touch $@
 
