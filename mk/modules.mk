@@ -84,7 +84,6 @@ $(eval $(call KMOD_template,PPP,ppp,\
 	$(MODULES_DIR)/kernel/drivers/net/slhc \
 	$(MODULES_DIR)/kernel/drivers/net/ppp_generic \
 	$(MODULES_DIR)/kernel/drivers/net/ppp_async \
-	$(MODULES_DIR)/kernel/drivers/net/pppox \
 ,50))
 
 $(eval $(call KMOD_template,MPPE,mppe,\
@@ -97,6 +96,7 @@ $(eval $(call KMOD_template,PPPOATM,pppoatm,\
 
 $(eval $(call KMOD_template,PPPOE,pppoe,\
 	$(MODULES_DIR)/kernel/drivers/net/pppoe \
+	$(MODULES_DIR)/kernel/drivers/net/pppox \
 ,60))
 
 $(eval $(call KMOD_template,TUN,tun,\
