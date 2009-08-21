@@ -1,13 +1,14 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-#_IN_CVTC=		1
-
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
+
+# glibc does not compile with Os
+TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 
 GLIBC_CONFOPTS:=          \
 			--build=$(GNU_HOST_NAME) \
@@ -27,7 +28,7 @@ GLIBC_CONFOPTS:=          \
 
 GLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${HOSTCC} \
-			CFLAGS="$(TARGET_CFLAGS_ARCH) -O2 -pipe" \
+			CFLAGS="$(TARGET_CFLAGS)" \
 			CC=${REAL_GNU_TARGET_NAME}-gcc \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \
 			AR=${REAL_GNU_TARGET_NAME}-ar \
@@ -35,10 +36,10 @@ GLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			LD=${REAL_GNU_TARGET_NAME}-ld \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
-			libc_cv_gnu99_inline=yes \
+			libc_cv_gnu99_inline=yes
 
 ifeq ($(ADK_DEVICE_NO_FPU),y)
-GLIBC_CONFOPTS+=          --without-fp
+GLIBC_CONFOPTS+=	--without-fp
 endif
 
 GLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
@@ -58,7 +59,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
-		CFLAGS="-DBOOTSTRAP_GCC" install-headers
+		install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/bits/stdio_lim.h
 	touch $@
@@ -76,18 +77,11 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	${GLIBC_ENV} \
-	CFLAGS="$(TARGET_CFLAGS_ARCH) -O2 -pipe" \
-	$(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) lib \
-		cross-compiling=yes
+	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed:
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
-		install_root=$(STAGING_DIR) \
-		install-lib-all install-headers \
-		install-others cross-compiling=yes
+	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
 	touch $(STAGING_DIR)/usr/include/gnu/stubs.h
 	touch $@
 

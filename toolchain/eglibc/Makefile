@@ -15,11 +15,15 @@ EGLIBC_CONFOPTS:=	\
 			--without-cvs \
 			--disable-profile \
 			--disable-debug \
+			--enable-kernel=2.6.0 \
 			--without-gd \
+			--with-__thread \
+			--with-tls \
 			--enable-add-ons
 
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${HOSTCC} \
+			CFLAGS="$(TARGET_CFLAGS)" \
 			CC=${REAL_GNU_TARGET_NAME}-gcc \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \
 			AR=${REAL_GNU_TARGET_NAME}-ar \
@@ -36,10 +40,10 @@ EGLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
 EGLIBC_BUILD_DIR_FINAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
 $(WRKBUILD)/.headers_configure:
+	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
 		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc; autoconf --force);
-	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_INITIAL)
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
@@ -78,24 +82,16 @@ $(WRKBUILD)/.configured:
 			--prefix=/usr \
 			--enable-shared \
 			--enable-stackguard-randomization \
-			--with-__thread \
-			--with-tls \
-			--enable-kernel=2.6.0 \
 			${EGLIBC_CONFOPTS} \
 	);
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	${EGLIBC_ENV} \
-	CFLAGS="$(TARGET_CFLAGS)" \
-	$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
+	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed:
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) \
-		install_root=$(STAGING_DIR) \
-		install
+	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

@@ -42,8 +42,8 @@ FreeBSD)
 CYG*)
 	# mkdir /openadk 
 	# mount -b -s -o managed "C:/openadk" "/openadk"
-	# cd /openadk
-	# svn co svn+ssh://waldemar-brodkorb.de/svn .
+	# cd /
+	# git clone git+ssh://openadk.org/git/openadk.git
 	echo "Building OpenADK on $os is needs a managed mount point."
 	echo '"mount -b -s -o managed "C:/openadk" "/openadk"'
 	;;
@@ -129,6 +129,12 @@ fi
 
 if ! which bison >/dev/null 2>&1; then
 	echo You must install GNU bison to continue.
+	echo
+	out=1
+fi
+
+if ! which gperf >/dev/null 2>&1; then
+	echo You must install gperf to continue.
 	echo
 	out=1
 fi
