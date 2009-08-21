@@ -1,3 +1,4 @@
+- stripping of kernel is not working for all targets
 - rescue initramfs image (more archs, generic kernel config )
   - usb boot via stick
 - fix init scripts pidof? vs. killall

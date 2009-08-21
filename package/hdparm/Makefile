@@ -16,6 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HDPARM,hdparm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+MAKE_ENV+=		STRIP=${TARGET_CROSS}strip
 BUILD_STYLE=		auto
 
 post-install:

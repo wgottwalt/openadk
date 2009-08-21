@@ -50,8 +50,6 @@ ENABLE_SMALL:=--enable-small
 endif
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		CPPFLAGS="-I$(STAGING_DIR)/usr/include" \
-			LDFLAGS="-L$(STAGING_DIR)/usr/lib"
 CONFIGURE_ARGS+=	--disable-pthread \
 			--disable-plugins \
 			--disable-management \

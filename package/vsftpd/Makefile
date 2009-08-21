@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vsftpd
-PKG_VERSION:=		2.1.2
+PKG_VERSION:=		2.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6a8c8579d50adf0d0fc07226c03bfb52
+PKG_MD5SUM:=		e4eb190af270ae65d57a84274a38ec31
 PKG_DESCR:=		a fast and secure FTP server
 PKG_SECTION:=		net
 PKG_URL:=		http://vsftpd.beasts.org
@@ -17,7 +17,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,VSFTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
-XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 ALL_TARGET:=		vsftpd
 INSTALL_STYLE:=		auto
 
