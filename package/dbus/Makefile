@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.2.14
+PKG_VERSION:=		1.2.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2c267ccd45d0b18db8c9edacad63ec98
+PKG_MD5SUM:=		c7a47b851ebe02f6726b65b78d1b730b
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libexpat
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-tests \
 			--disable-doxygen-docs
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 BUILD_STYLE:=		auto
-INSTALL_STYLE:=		confprog auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib ${IDIR_DBUS}/usr/bin
