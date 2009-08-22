@@ -24,6 +24,19 @@ CONFIGURE_ARGS+=	--disable-static
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
+# hackish way to although build the static libraries for cryptinit
+pre-configure:
+	(cd ${WRKBUILD}; \
+		env ${CONFIGURE_ENV} \
+		./configure --enable-static \
+			--build=${GNU_HOST_NAME} \
+			--host=${GNU_TARGET_NAME} \
+			--target=${GNU_TARGET_NAME} \
+	);
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)"
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)" DESTDIR='${WRKINST}' install
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)" clean
+
 post-install:
 	${INSTALL_DIR} ${IDIR_CRYPTSETUP}/usr/sbin ${IDIR_CRYPTSETUP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcryptsetup.so.* \
