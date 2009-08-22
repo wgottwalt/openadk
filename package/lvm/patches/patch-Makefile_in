@@ -1,5 +1,5 @@
---- LVM2.2.02.45.orig/Makefile.in	2008-11-18 14:16:03.000000000 +0100
-+++ LVM2.2.02.45/Makefile.in	2009-06-11 23:21:31.000000000 +0200
+--- LVM2.2.02.51.orig/Makefile.in	2009-07-31 13:49:53.000000000 +0200
++++ LVM2.2.02.51/Makefile.in	2009-08-22 15:24:06.000000000 +0200
 @@ -16,7 +16,7 @@ srcdir = @srcdir@
  top_srcdir = @top_srcdir@
  VPATH = @srcdir@
@@ -7,9 +7,9 @@
 -SUBDIRS = doc include man scripts
 +SUBDIRS = doc include
  
- ifeq ("@INTL@", "yes")
-   SUBDIRS += po
-@@ -49,7 +49,7 @@ po: tools daemons
+ ifeq ("@UDEV_RULES@", "yes")
+   SUBDIRS += udev
+@@ -60,7 +60,7 @@ po: tools daemons
  libdm.device-mapper: include.device-mapper
  daemons.device-mapper: libdm.device-mapper
  tools.device-mapper: libdm.device-mapper

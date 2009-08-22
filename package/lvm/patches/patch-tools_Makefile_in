@@ -1,33 +1,24 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- LVM2.2.02.45.orig/tools/Makefile.in	2009-02-17 12:07:59.000000000 +0100
-+++ LVM2.2.02.45/tools/Makefile.in	2009-06-11 23:24:12.000000000 +0200
-@@ -62,19 +62,18 @@ SOURCES =\
- 	vgscan.c \
- 	vgsplit.c
- 
--TARGETS =\
--	.commands \
--	lvm
--
--INSTALL_LVM_TARGETS = install_tools_dynamic
--INSTALL_DMSETUP_TARGETS = install_dmsetup_dynamic
--INSTALL_CMDLIB_TARGETS = install_cmdlib_dynamic
-+TARGETS = .commands
- 
- ifeq ("@STATIC_LINK@", "yes")
-   TARGETS += lvm.static
-   INSTALL_LVM_TARGETS += install_tools_static
-   INSTALL_DMSETUP_TARGETS += install_dmsetup_static
-   INSTALL_CMDLIB_TARGETS += install_cmdlib_static
-+else
-+  TARGETS += lvm
-+  INSTALL_LVM_TARGETS = install_tools_dynamic
-+  INSTALL_DMSETUP_TARGETS = install_dmsetup_dynamic
-+  INSTALL_CMDLIB_TARGETS = install_cmdlib_dynamic
+--- LVM2.2.02.51.orig/tools/Makefile.in	2009-05-21 13:11:29.000000000 +0200
++++ LVM2.2.02.51/tools/Makefile.in	2009-08-22 15:30:31.000000000 +0200
+@@ -160,21 +160,24 @@ cflow: lvm.cflow lvm.xref lvm.tree lvm.r
  endif
  
- LVMLIBS = -llvm
-@@ -170,7 +169,8 @@ install_cmdlib_static: liblvm2cmd-static
+ install_cmdlib_dynamic: liblvm2cmd.$(LIB_SUFFIX)
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) liblvm2cmd.$(LIB_SUFFIX) \
++	$(INSTALL) -d $(libdir)
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) liblvm2cmd.$(LIB_SUFFIX) \
+ 		$(libdir)/liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION)
+ 	$(LN_S) -f liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION) $(libdir)/liblvm2cmd.$(LIB_SUFFIX)
+ 	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 lvm2cmd.h \
+ 		$(includedir)/lvm2cmd.h
+ 
+ install_cmdlib_static: liblvm2cmd-static.a
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) liblvm2cmd-static.a \
++	$(INSTALL) -d $(libdir)
++	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) liblvm2cmd-static.a \
+ 		$(libdir)/liblvm2cmd.a.$(LIB_VERSION)
+ 	$(LN_S) -f liblvm2cmd.a.$(LIB_VERSION) $(libdir)/liblvm2cmd.a
+ 	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 lvm2cmd.h \
  		$(includedir)/lvm2cmd.h
  
  install_tools_dynamic: lvm .commands
@@ -37,20 +28,23 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		$(sbindir)/lvm
  	@echo Creating symbolic links for individual commands in $(sbindir)
  	@( \
-@@ -181,14 +181,14 @@ install_tools_dynamic: lvm .commands
+@@ -185,14 +188,17 @@ install_tools_dynamic: lvm .commands
  	)
  
  install_tools_static: lvm.static
 -	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) lvm.static \
++	$(INSTALL) -d $(sbindir)
 +	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) lvm.static \
  		$(staticdir)/lvm.static
  
  install_dmsetup_dynamic: dmsetup
 -	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
++	$(INSTALL) -d $(sbindir)
 +	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
  
  install_dmsetup_static: dmsetup.static
 -	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
++	$(INSTALL) -d $(sbindir)
 +	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
  
  install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
