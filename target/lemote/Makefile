@@ -17,6 +17,10 @@ ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'Boot your lemote and type following commands in PMON:'
+	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
+	@echo 'PMON> load tftp://<ip-address-server>/lemote-mips-kernel'
+	@echo 'PMON> g console=tty root=/dev/nfs ip=dhcp init=/init'
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
