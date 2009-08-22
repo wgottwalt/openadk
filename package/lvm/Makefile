@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.45
+PKG_VERSION:=		2.02.51
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		440daa01b8f2ec4fe97b1cc621108220
+PKG_MD5SUM:=		725d07794007e021bfc592b1636100c7
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		device-mapper

@@ -1,6 +1,31 @@
---- LVM2.2.02.45.orig/libdm/Makefile.in	2008-11-14 21:59:56.000000000 +0100
-+++ LVM2.2.02.45/libdm/Makefile.in	2009-06-11 23:26:48.000000000 +0200
-@@ -70,7 +70,8 @@ install: $(INSTALL_TYPE) install_include
+always install static library
+--- LVM2.2.02.51.orig/libdm/Makefile.in	2009-04-08 16:04:35.000000000 +0200
++++ LVM2.2.02.51/libdm/Makefile.in	2009-08-22 15:37:53.000000000 +0200
+@@ -34,9 +34,9 @@ SOURCES =\
+ 
+ INCLUDES = -I$(interface) -I.
+ 
+-ifeq ("@STATIC_LINK@", "yes")
++#ifeq ("@STATIC_LINK@", "yes")
+ LIB_STATIC = $(interface)/libdevmapper.a
+-endif
++#endif
+ 
+ ifeq ("@LIB_SUFFIX@","dylib")
+   LIB_SHARED = $(interface)/libdevmapper.dylib
+@@ -59,9 +59,9 @@ device-mapper: all
+ 
+ INSTALL_TYPE = install_dynamic
+ 
+-ifeq ("@STATIC_LINK@", "yes")
++#ifeq ("@STATIC_LINK@", "yes")
+   INSTALL_TYPE += install_static
+-endif
++#endif
+ 
+ ifeq ("@PKGCONFIG@", "yes")
+   INSTALL_TYPE += install_pkgconfig
+@@ -72,7 +72,8 @@ install: $(INSTALL_TYPE) install_include
  install_device-mapper: install
  
  install_include:
@@ -10,7 +35,7 @@
  		$(includedir)/libdevmapper.h
  
  install_dynamic: install_@interface@
-@@ -81,15 +82,17 @@ install_static: install_@interface@_stat
+@@ -83,15 +84,17 @@ install_static: install_@interface@_stat
  	$(LN_S) -f libdevmapper.a.$(LIB_VERSION_DM) $(libdir)/libdevmapper.a
  
  install_ioctl: ioctl/libdevmapper.$(LIB_SUFFIX)

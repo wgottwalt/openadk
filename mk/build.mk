@@ -117,9 +117,24 @@ root_clean:
 	@$(TRACE) root_clean
 	rm -rf $(TARGET_DIR)
 
+# Do a per-package clean here, too. This way stale headers and
+# libraries from cross_*/target/ get wiped away, which keeps
+# future package build's configure scripts from returning false
+# dependencies information.
+
 clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
+	for d in ${STAGING_PARENT_PFX}; do \
+		echo "clean: entering $$d" ; \
+		for f in $$d/pkg/[a-z]*; do  \
+			echo "clean: cleaning for $$f" ; \
+			while read file ; do \
+				rm $$d/target/$$file ; \
+			done < $$f ; \
+			rm $$f ; \
+		done \
+	done
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
 	rm -f ${TOPDIR}/package/*/info.mk
 

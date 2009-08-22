@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptsetup
-PKG_VERSION:=		1.0.6
+PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		00d452eb7a76e39f5749545d48934a10
+PKG_MD5SUM:=		5eea2a77391a8a1a651b31cbaef59e22
 PKG_DESCR:=		LUKS cryptsetup tools
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
@@ -23,6 +23,19 @@ CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-static
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
+
+# hackish way to although build the static libraries for cryptinit
+pre-configure:
+	(cd ${WRKBUILD}; \
+		env ${CONFIGURE_ENV} \
+		./configure --enable-static \
+			--build=${GNU_HOST_NAME} \
+			--host=${GNU_TARGET_NAME} \
+			--target=${GNU_TARGET_NAME} \
+	);
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)"
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)" DESTDIR='${WRKINST}' install
+	$(MAKE) -C $(WRKBUILD) CC="$(TARGET_CC)" clean
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CRYPTSETUP}/usr/sbin ${IDIR_CRYPTSETUP}/usr/lib

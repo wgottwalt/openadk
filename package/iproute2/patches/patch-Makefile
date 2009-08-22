@@ -1,19 +1,30 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iproute2-2.6.26.orig/Makefile	2008-07-25 22:46:07.000000000 +0200
-+++ iproute2-2.6.26/Makefile	2008-10-09 17:08:16.000000000 +0200
-@@ -21,13 +21,13 @@ ADDLIB+=ipx_ntop.o ipx_pton.o
+	- allow variables to be overridden
+	- allow passing TARGET_CFLAGS
+	  overriding CCOPTS instead wont work, as this variable is being
+	  used to compile host-utils in netem/
+	- define LIBUTIL for misc/ss to compile correctly
+--- iproute2-2.6.29-1.orig/Makefile	2009-03-24 23:40:54.000000000 +0100
++++ iproute2-2.6.29-1/Makefile	2009-08-22 02:42:31.939603104 +0200
+@@ -20,10 +20,10 @@ ADDLIB+=dnet_ntop.o dnet_pton.o
+ #options for ipx
+ ADDLIB+=ipx_ntop.o ipx_pton.o
  
- CC = gcc
- HOSTCC = gcc
+-CC = gcc
+-HOSTCC = gcc
 -CCOPTS = -D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall
-+CCOPTS = -D_GNU_SOURCE -fwrapv -fno-ident -fwrapv -fno-ident -O2 -pipe -march=i586 -funit-at-a-time -pipe -march=i586 -funit-at-a-time -Wstrict-prototypes -Wall
- CFLAGS = $(CCOPTS) -I../include $(DEFINES)
+-CFLAGS = $(CCOPTS) -I../include $(DEFINES)
++CC := gcc
++HOSTCC := gcc
++CCOPTS := -D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall
++CFLAGS = $(CCOPTS) -I../include $(DEFINES) ${TARGET_CFLAGS}
  YACCFLAGS = -d -t -v
  
  LDLIBS += -L../lib -lnetlink -lutil
- 
--SUBDIRS=lib ip tc misc netem genl
-+SUBDIRS=lib ip tc genl
+@@ -31,6 +31,7 @@ LDLIBS += -L../lib -lnetlink -lutil
+ SUBDIRS=lib ip tc misc netem genl
  
  LIBNETLINK=../lib/libnetlink.a ../lib/libutil.a
++LIBUTIL=../lib/libutil.a
  
+ all: Config
+ 	@set -e; \

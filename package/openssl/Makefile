@@ -72,7 +72,5 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}
 	${CP} ${WRKSRC}/apps/openssl.cnf ${IDIR_OPENSSL_UTIL}/etc/ssl/
 	chmod 0700 ${IDIR_OPENSSL_UTIL}/etc/ssl/private
-	${INSTALL_DIR} ${IDIR_CA_CERTS}/etc/ssl
-	${INSTALL_DATA} cert.pem ${IDIR_CA_CERTS}/etc/ssl/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
