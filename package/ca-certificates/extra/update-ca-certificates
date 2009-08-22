@@ -1,0 +1,80 @@
+#!/bin/sh
+#
+# update-ca-certificates script for embedded systems.
+#
+# Copyright (C) 2009  Phil Sutter <phil@nwl.cc>
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+CRTCONF=/etc/ca-certificates.conf
+CRTDIR=/usr/share/ca-certificates
+LNKDIR=/etc/ssl/certs
+OPENSSL="openssl"
+
+cert_type() { # (certfile)
+	grep -qE '^-----BEGIN (X509 |TRUSTED |)CERTIFICATE-----' $1 && {
+		echo "cert"
+		return 0
+	}
+	grep -qE '^-----BEGIN X509 CRL-----' $1 && {
+		echo "crl"
+		return 0
+	}
+	echo "unknown"
+	return 1
+}
+
+${OPENSSL} version >/dev/null 2>&1 || {
+	echo "Fatal: no openssl executable found, bailing out"
+	exit 1
+}
+
+for l in $(ls ${DESTDIR}${LNKDIR}/* 2>/dev/null); do
+	[ -L "$l" ] && rm -f "$l"
+done
+
+cat ${DESTDIR}$CRTCONF | while read crt; do
+	[ -n "$crt" ] || continue
+	[[ "$crt" = -* ]] && continue
+
+	cname="$(basename $crt)"
+
+	ln -s ${CRTDIR}/$crt ${DESTDIR}${LNKDIR}/$cname
+
+	ctype="$(cert_type ${DESTDIR}${CRTDIR}/$crt)"
+	case $ctype in
+		cert)
+			sslcmd="x509"
+			pfx=""
+		;;
+		crl)
+			sslcmd="crl"
+			pfx="r"
+		;;
+		*)
+			echo "Warning: ignoring unknown filetype ${DESTDIR}${CRTDIR}/$crt"
+			continue
+		;;
+	esac
+
+	hsh="$(${OPENSSL} $sslcmd -hash -noout -in ${DESTDIR}${CRTDIR}/$crt)"
+	idx=0
+	while [ -e ${DESTDIR}${LNKDIR}/${hsh}.${pfx}${idx} ]; do
+		let "idx++"
+	done
+	ln -s ${CRTDIR}/$crt ${DESTDIR}${LNKDIR}/${hsh}.${pfx}${idx}
+done
+
+exit 0
