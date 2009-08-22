@@ -36,7 +36,8 @@ GLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			LD=${REAL_GNU_TARGET_NAME}-ld \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
-			libc_cv_gnu99_inline=yes
+			libc_cv_gnu99_inline=yes \
+			libc_cv_slibdir="/lib"
 
 ifeq ($(ADK_DEVICE_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp

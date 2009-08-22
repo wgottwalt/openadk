@@ -28,7 +28,7 @@ endif
 		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
-	# create ld.so link for ldd
-	cd $(IDIR_GLIBC)/lib && ln -sf ld-linux.so.2 ld.so
+	# create ld.so link for mips gcc linker option
+	cd $(IDIR_GLIBC)/lib && ln -sf ld-linux.so.2 ld.so.1
 
 include ${TOPDIR}/mk/pkg-bottom.mk

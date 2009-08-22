@@ -23,12 +23,11 @@ ifeq ($(ADK_SSP),y)
 	$(CP) $(STAGING_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
 endif
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so.* $(IDIR_EGLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld-*.so* $(IDIR_EGLIBC)/lib/
-	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc ld libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
-	# create ld.so link for ldd
-	cd $(IDIR_EGLIBC)/lib && ln -sf ld-$(PKG_VERSION).so ld.so
+	# create ld.so link for x86 linker 
+	cd $(IDIR_EGLIBC)/lib && ln -sf ld-$(PKG_VERSION).so ld-linux.so.2
 
 include ${TOPDIR}/mk/pkg-bottom.mk
