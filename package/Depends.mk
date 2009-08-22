@@ -75,6 +75,9 @@ ipcad-compile: libpcap-compile
 ifeq (${ADK_COMPILE_IPERF_WITH_UCLIBCXX},y)
 iperf-compile: uclibc++-compile
 endif
+ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
+iproute2-compile: linux-atm-compile
+endif
 ipsec-tools-compile: openssl-compile
 iptraf-compile: ncurses-compile
 irssi-compile: glib-compile ncurses-compile
