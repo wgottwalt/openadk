@@ -20,7 +20,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
 	@echo 'PMON> load tftp://<ip-address-server>/lemote-mips-kernel'
-	@echo 'PMON> g console=tty root=/dev/nfs ip=dhcp init=/init'
+	@echo 'PMON> g no_auto_cmd root=/dev/nfs ip=dhcp init=/init'
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
