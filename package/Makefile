@@ -32,6 +32,7 @@ package-$(ADK_COMPILE_AVAHI) += avahi
 package-$(ADK_COMPILE_AXTLS) += axtls
 package-$(ADK_PACKAGE_BASH) += bash
 package-$(ADK_COMPILE_BC) += bc
+package-$(ADK_PACKAGE_CA_CERTS) += ca-certificates
 package-$(ADK_PACKAGE_CFGFS) += cfgfs
 package-$(ADK_PACKAGE_CRYPTINIT) += cryptinit
 package-$(ADK_PACKAGE_BIGREQSPROTO) += bigreqsproto

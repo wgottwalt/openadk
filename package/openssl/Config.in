@@ -33,9 +33,3 @@ config ADK_PACKAGE_OPENSSL_UTIL
 	  http://www.openssl.org/
 	  
 	  This package contains the multi-purpose OpenSSL binary tool.
-
-config ADK_PACKAGE_CA_CERTS
-	prompt "ca-certificates................... X.509 Root CA Certs of common CAs"
-	tristate
-	default n
-	depends on ADK_COMPILE_OPENSSL
