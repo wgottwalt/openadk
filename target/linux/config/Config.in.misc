@@ -1,3 +1,8 @@
+config ADK_LINUX_INITRAMFS_BUILTIN
+	select ADK_KERNEL_BLK_DEV_INITRD
+	boolean
+	default n
+
 menu "Miscellaneous devices support"
 
 source target/linux/config/Config.in.leds

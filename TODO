@@ -4,7 +4,6 @@
 - fix init scripts pidof? vs. killall
 - rpath libtool problem fix
 - bind isc 9.6.1
-- check mips -mno-abicalls
 - check ac_cv_func_setpgrp_void=no
 - freebsd build
 - win cygwin build

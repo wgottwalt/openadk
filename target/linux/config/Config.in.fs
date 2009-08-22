@@ -121,10 +121,20 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	  The VFAT support enlarges your kernel by about 10 KB Please read the
 	  file <file:Documentation/filesystems/vfat.txt> for details.
 
+config ADK_KERNEL_EXPORTFS
+	boolean
+	default n
+
+config ADK_KERNEL_XFS_FS
+	boolean
+	select ADK_KERNEL_EXPORTFS
+	default n
+
 config ADK_KPACKAGE_KMOD_XFS_FS
 	prompt "kmod-fs-xfs....................... XFS filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_EXPORTFS
+	depends on !ADK_KERNEL_XFS_FS
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated

@@ -33,6 +33,7 @@ package-$(ADK_COMPILE_AXTLS) += axtls
 package-$(ADK_PACKAGE_BASH) += bash
 package-$(ADK_COMPILE_BC) += bc
 package-$(ADK_PACKAGE_CFGFS) += cfgfs
+package-$(ADK_PACKAGE_CRYPTINIT) += cryptinit
 package-$(ADK_PACKAGE_BIGREQSPROTO) += bigreqsproto
 package-$(ADK_COMPILE_BIND) += bind
 package-$(ADK_PACKAGE_BINUTILS) += binutils

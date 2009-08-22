@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "Starting system"
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
 size=$(awk '/MemTotal:/ { if ($2 > 16000) { print 4096 } else { print 2048 }}' /proc/meminfo)
