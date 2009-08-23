@@ -361,8 +361,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
-		ADK_LINUX_RESCUE || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_NATIVE || \
+		ADK_LINUX_RESCUE
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
@@ -418,6 +418,33 @@ config ADK_TARGET_ROOTFS_EXT2
 	select ADK_KERNEL_EXT2_FS
 	help
 	  Use this option if your rootfs is ext2.
+
+config ADK_TARGET_ROOTFS_ENCRYPTED
+	bool "Encrypted read-write root filesystem"
+	depends on ADK_LINUX_MIPS64_LEMOTE
+	select ADK_LINUX_INITRAMFS_BUILTIN
+	select ADK_PACKAGE_CRYPTINIT
+	select ADK_KERNEL_BLK_DEV_DM
+	select ADK_KERNEL_DM_CRYPT
+	select ADK_KERNEL_CRYPTO_AES
+	select ADK_KERNEL_CRYPTO_CBC
+	select ADK_KERNEL_CRYPTO_SHA256
+	select ADK_KERNEL_XFS_FS
+	help
+	  Use this option if you want an encrypted rootfs.
+	  Default is XFS filesystem. Use following commands to setup 
+	  your hard disk, after booting via NFS or USB:
+	  cryptsetup luksFormat /dev/sda2 
+	  cryptsetup luksOpen /dev/sda2 crypt
+          mkfs.xfs /dev/mapper/crypt
+          mount /dev/mapper/crypt /mnt
+          tar xzvf lemote-mips-encryptedroot.tar.gz -C /mnt
+	  umount /mnt
+          mount /dev/sda1 /mnt
+	  cp lemote-mips-kernel /mnt/ 
+	  mkdir /mnt/boot
+	  Create boot.cfg ... 
+
 endchoice
 
 config ADK_SSP

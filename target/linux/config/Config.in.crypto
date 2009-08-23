@@ -22,6 +22,18 @@ config ADK_KERNEL_OCF_OCF
 	select ADK_KERNEL_OCF_FIPS
 	select ADK_KERNEL_OCF_CRYPTODEV
 
+config ADK_KERNEL_CRYPTO_AES
+	boolean
+	default n
+
+config ADK_KERNEL_CRYPTO_SHA256
+	boolean
+	default n
+
+config ADK_KERNEL_CRYPTO_CBC
+	boolean
+	default n
+	
 comment "Hardware cryptography"
 
 menu "Hardware crypto devices"
@@ -136,6 +148,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
 config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	prompt "kmod-crypto-cbc...................... CBC support"
 	tristate
+	depends on !ADK_KERNEL_CRYPTO_CBC
 	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
 	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
 	default n
@@ -205,6 +218,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SHA256
 	prompt "kmod-crypto-sha256................... SHA256 digest algorithm"
 	tristate
 	default n
+	depends on !ADK_KERNEL_CRYPTO_SHA256
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
 	help
@@ -267,6 +281,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_AES
 	prompt "kmod-crypto-aes...................... AES cipher algorithms"
 	tristate
 	default n
+	depends on !ADK_KERNEL_CRYPTO_AES
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 

@@ -121,10 +121,20 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	  The VFAT support enlarges your kernel by about 10 KB Please read the
 	  file <file:Documentation/filesystems/vfat.txt> for details.
 
+config ADK_KERNEL_EXPORTFS
+	boolean
+	default n
+
+config ADK_KERNEL_XFS_FS
+	boolean
+	select ADK_KERNEL_EXPORTFS
+	default n
+
 config ADK_KPACKAGE_KMOD_XFS_FS
 	prompt "kmod-fs-xfs....................... XFS filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_EXPORTFS
+	depends on !ADK_KERNEL_XFS_FS
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated
@@ -196,7 +206,30 @@ config ADK_KPACKAGE_KMOD_UDF_FS
 	  if written to by other UDF utilities, such as DirectCD.
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
+config ADK_KERNEL_INOTIFY
+	prompt "inotify........................... Inotify file change notification support"
+	boolean
+	default y
+	help
+	  Say Y here to enable inotify support.  Inotify is a file change
+	  notification system and a replacement for dnotify.  Inotify fixes
+	  numerous shortcomings in dnotify and introduces several new features
+	  including multiple file events, one-shot support, and unmount
+	  notification.
+
+config ADK_KERNEL_INOTIFY_USER
+	prompt "inotify-user...................... Inotify support for userspace"
+	boolean
+	depends on ADK_KERNEL_INOTIFY
+	default y
+	help
+	  Say Y here to enable inotify support for userspace, including the
+	  associated system calls.  Inotify allows monitoring of both files and
+	  directories via a single open fd.  Events are read from the file
+	  descriptor, which is also select()- and poll()-able.
+
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
+source target/linux/config/Config.in.aufs
 
 endmenu

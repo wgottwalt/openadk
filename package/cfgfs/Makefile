@@ -27,5 +27,8 @@ do-install:
 	${INSTALL_DIR} ${IDIR_CFGFS}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/fwcf.sh ${IDIR_CFGFS}/sbin/cfgfs
 	${INSTALL_BIN} ${WRKBUILD}/fwcf.helper.out ${IDIR_CFGFS}/sbin/cfgfs.helper
+ifeq ($(ARCH),cris)
+	${INSTALL_BIN} ${WRKBUILD}/mtd ${IDIR_CFGFS}/sbin/mtd
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

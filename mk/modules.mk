@@ -751,6 +751,10 @@ $(eval $(call KMOD_template,OCF_TALITOS,cryptodev-talitos,\
 #
 # Filesystems
 #
+$(eval $(call KMOD_template,AUFS_FS,fs-aufs,\
+	$(MODULES_DIR)/kernel/fs/aufs/aufs \
+,30))
+
 $(eval $(call KMOD_template,CIFS,fs-cifs,\
 	$(MODULES_DIR)/kernel/fs/cifs/cifs \
 ,30))

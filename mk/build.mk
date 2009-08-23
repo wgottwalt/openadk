@@ -127,7 +127,7 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PARENT_PFX}; do \
 		echo "clean: entering $$d" ; \
-		for f in $$d/pkg/[a-z]*; do  \
+		for f in $$(ls $$d/pkg/[a-z]* 2>/dev/null); do  \
 			echo "clean: cleaning for $$f" ; \
 			while read file ; do \
 				rm $$d/target/$$file ; \

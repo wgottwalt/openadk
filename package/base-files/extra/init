@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Starting system"
+echo "Pre-boot initializing"
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
 size=$(awk '/MemTotal:/ { if ($2 > 16000) { print 4096 } else { print 2048 }}' /proc/meminfo)
@@ -17,4 +17,5 @@ mount -o remount,rw /
 cat /etc/.rnd >/dev/urandom 2>&1
 [ -f /etc/fstab ] && mount -a
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
+echo "Starting system"
 exec /sbin/init
