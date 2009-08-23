@@ -41,7 +41,7 @@ config-prepare: $(TOPDIR)/.config
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 # if native build, first try /proc/config.gz
 ifeq ($(ADK_NATIVE),y)
-	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board; fi
+	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${DEVICE}/kernel.config.$(CPU_ARCH) ${BUILD_DIR}/.kernelconfig.board; fi
 else
 	@cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board
 endif
