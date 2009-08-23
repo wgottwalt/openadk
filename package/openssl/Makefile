@@ -28,7 +28,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
-$(eval $(call PKG_template,CA_CERTS,ca-certificates,${PKG_VERSION}-${CACERT_VER},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		auto confprog
