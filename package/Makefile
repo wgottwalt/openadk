@@ -27,6 +27,7 @@ package-$(ADK_PACKAGE_ARPD) += arpd
 package-$(ADK_PACKAGE_ARPWATCH) += arpwatch
 package-$(ADK_PACKAGE_ASTERISK) += asterisk
 package-$(ADK_COMPILE_ATFTP) += atftp
+package-$(ADK_PACKAGE_AUFS_UTIL) += aufs2-util
 package-$(ADK_PACKAGE_AUTOSSH) += autossh
 package-$(ADK_COMPILE_AVAHI) += avahi
 package-$(ADK_COMPILE_AXTLS) += axtls
