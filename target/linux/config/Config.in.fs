@@ -229,5 +229,6 @@ config ADK_KERNEL_INOTIFY_USER
 
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
+source target/linux/config/Config.in.aufs
 
 endmenu
