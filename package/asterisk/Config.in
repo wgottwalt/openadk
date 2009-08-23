@@ -1,5 +1,6 @@
 config ADK_PACKAGE_ASTERISK
 	bool "asterisk................... Telephony server"
+	depends on !ADK_LINUX_CRIS_FOXBOARD
         select ADK_PACKAGE_LIBCURL
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_LIBPTHREAD

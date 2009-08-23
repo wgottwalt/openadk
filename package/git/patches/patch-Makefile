@@ -1,16 +1,6 @@
-use symlinks instead of hardlinks
---- git-1.6.3.3.orig/Makefile	2009-06-22 08:24:25.000000000 +0200
-+++ git-1.6.3.3/Makefile	2009-07-24 20:59:26.186421458 +0200
-@@ -215,7 +215,7 @@ bindir_relative = bin
- bindir = $(prefix)/$(bindir_relative)
- mandir = share/man
- infodir = share/info
--gitexecdir = libexec/git-core
-+gitexecdir = bin
- sharedir = $(prefix)/share
- template_dir = share/git-core/templates
- htmldir = share/doc/git-doc
-@@ -1239,7 +1239,6 @@ builtin-help.o: builtin-help.c common-cm
+--- git-1.6.4.1.orig/Makefile	2009-08-22 06:54:01.000000000 +0200
++++ git-1.6.4.1/Makefile	2009-08-23 12:11:07.755226105 +0200
+@@ -1345,7 +1345,6 @@ builtin-help.o: builtin-help.c common-cm
  
  $(BUILT_INS): git$X
  	$(QUIET_BUILT_IN)$(RM) $@ && \
@@ -18,15 +8,17 @@ use symlinks instead of hardlinks
  	ln -s git$X $@ 2>/dev/null || \
  	cp git$X $@
  
-@@ -1554,11 +1553,9 @@ endif
- 	execdir=$$(cd '$(DESTDIR_SQ)$(gitexec_instdir_SQ)' && pwd) && \
- 	{ $(RM) "$$execdir/git-add$X" && \
+@@ -1663,11 +1662,11 @@ endif
+ 	{ test "$$bindir/" = "$$execdir/" || \
+ 		{ $(RM) "$$execdir/git$X" && \
  		test -z "$(NO_CROSS_DIRECTORY_HARDLINKS)" && \
--		ln "$$bindir/git$X" "$$execdir/git-add$X" 2>/dev/null || \
- 		cp "$$bindir/git$X" "$$execdir/git-add$X"; } && \
- 	{ for p in $(filter-out git-add$X,$(BUILT_INS)); do \
+-		ln "$$bindir/git$X" "$$execdir/git$X" 2>/dev/null || \
++		ln -s "$$bindir/git$X" "$$execdir/git$X" 2>/dev/null || \
+ 		cp "$$bindir/git$X" "$$execdir/git$X"; } ; } && \
+ 	{ for p in $(BUILT_INS); do \
  		$(RM) "$$execdir/$$p" && \
--		ln "$$execdir/git-add$X" "$$execdir/$$p" 2>/dev/null || \
- 		ln -s "git-add$X" "$$execdir/$$p" 2>/dev/null || \
- 		cp "$$execdir/git-add$X" "$$execdir/$$p" || exit; \
+-		ln "$$execdir/git$X" "$$execdir/$$p" 2>/dev/null || \
++		ln -s "$$execdir/git$X" "$$execdir/$$p" 2>/dev/null || \
+ 		ln -s "git$X" "$$execdir/$$p" 2>/dev/null || \
+ 		cp "$$execdir/git$X" "$$execdir/$$p" || exit; \
  	  done; } && \

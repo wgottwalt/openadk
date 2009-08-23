@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- nmap-4.76.orig/output.cc	2008-09-10 20:32:35.000000000 +0200
-+++ nmap-4.76/output.cc	2008-10-29 13:29:04.000000000 +0100
-@@ -2003,7 +2003,7 @@ struct data_file_record {
+--- nmap-5.00.orig/output.cc	2009-06-24 23:35:54.000000000 +0200
++++ nmap-5.00/output.cc	2009-07-20 20:33:41.267403513 +0200
+@@ -1966,7 +1966,7 @@ struct data_file_record {
  
    /* Compares this record to another. First compare the directory names, then
       compare the file names. */

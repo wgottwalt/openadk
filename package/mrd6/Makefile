@@ -35,7 +35,7 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc
-	${INSTALL_DIR} ${IDIR_MRD6}/usr/lib/mrd6 ${IDIR_MRD6}/bin
+	${INSTALL_DIR} ${IDIR_MRD6}/usr/lib/mrd6 ${IDIR_MRD6}/usr/bin
 	${INSTALL_DATA} ./files/${PKG_NAME}.conf ${IDIR_MRD6}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/local/sbin/mrd \
 		 ${IDIR_MRD6}/usr/sbin

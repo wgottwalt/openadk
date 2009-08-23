@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.6.2
+PKG_VERSION:=		3.6.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		46f92e42243bc51aaa3871645ce78bd5
-PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database engine
+PKG_MD5SUM:=		f89f62afc765e08b3f0e47cdc47a15d4
+PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.sqlite.org
 PKG_SITES:=		http://www.sqlite.org/

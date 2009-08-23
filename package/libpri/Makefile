@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libpri
-PKG_VERSION:=		1.4.10
+PKG_VERSION:=		1.4.10.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2a80f0cea1271f3143aaad57c5de42e6
+PKG_MD5SUM:=		55ce81cd0b2cf0c40e287fc5bd5b4883
 PKG_DESCR:=		C implementation of the Primary Rate ISDN specification
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.asterisk.org

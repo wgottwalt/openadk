@@ -1,0 +1,10 @@
+--- nmap-5.00.orig/tcpip.cc	2009-06-24 23:35:54.000000000 +0200
++++ nmap-5.00/tcpip.cc	2009-07-20 20:58:55.362028065 +0200
+@@ -99,6 +99,7 @@
+ #include "NmapOps.h"
+ #include "Target.h"
+ #include "utils.h"
++#include "sctp.h"
+ 
+ #if HAVE_SYS_TIME_H
+ #include <sys/time.h>

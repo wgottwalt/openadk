@@ -188,6 +188,7 @@ config ADK_KPACKAGE_KMOD_UDF_FS
 	prompt "kmod-fs-udf....................... UDF file system support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 	help
 	  This is the new file system used on some CD-ROMs and DVDs. Say Y if

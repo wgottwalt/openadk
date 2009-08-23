@@ -1,8 +1,8 @@
---- nmap-5.00.orig/configure	2009-06-24 23:35:54.000000000 +0200
-+++ nmap-5.00/configure	2009-07-20 20:36:51.023261444 +0200
-@@ -7074,90 +7074,6 @@ if test $needs_cpp_precomp = yes; then
-   CXXFLAGS="-no-cpp-precomp $CXXFLAGS"
+--- nmap-5.00.orig/ncat/configure	2009-06-11 08:15:24.000000000 +0200
++++ nmap-5.00/ncat/configure	2009-07-20 20:47:33.391408119 +0200
+@@ -7044,90 +7044,6 @@ fi
  fi
+ 
  
 -if test $have_libpcap = yes; then
 -  if test "${LIBPCAP_INC+set}" = "set"; then
@@ -89,5 +89,5 @@
 -LIBS="$LIBS_OLD"
 -fi
  
- LIBPCAP_LIBS="-lpcap"
+ PCAP_LIBS="-lpcap"
  if test $have_libpcap = yes; then

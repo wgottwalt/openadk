@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.0.81
+PKG_VERSION:=		5.0.83
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d35e4980f279c839172a6efdb0f0b15
+PKG_MD5SUM:=		051392064a1e32cca5c23a593908b10e
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libncurses zlib

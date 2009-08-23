@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.6.6
+PKG_VERSION:=		2.8.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ca2489e29f9dc313a79b9747bb1090e5
+PKG_MD5SUM:=		72b77092c5d1ae01306cd14c0f22d6e4
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
@@ -31,6 +31,7 @@ $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-lncurses
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--without-libz-prefix

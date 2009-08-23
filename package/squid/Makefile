@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.0.STABLE15
+PKG_VERSION:=		3.0.STABLE18
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4c41585af1d90ccbcf1d23ec0dda6f8d
+PKG_MD5SUM:=		8cb529bb8e973c068366e453b9444614
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
@@ -105,7 +105,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
 			--enable-ssl \
-			--enable-htcp \
+			--disable-htcp \
 			--disable-esi \
 			--enable-err-languages=English \
 			--enable-default-err-language=English \
@@ -134,7 +134,8 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 			${WRKINST}/etc/squid/squid.conf ${IDIR_SQUID}/etc/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid
 	${CP} ${WRKINST}/usr/share/squid/* ${IDIR_SQUID}/usr/share/squid/
-	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin
+	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd ${IDIR_SQUID}/usr/lib/squid
 
 include ${TOPDIR}/mk/pkg-bottom.mk

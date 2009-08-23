@@ -1,6 +1,6 @@
---- squid-3.0.STABLE15.orig/configure.in	2009-05-06 13:11:43.000000000 +0200
-+++ squid-3.0.STABLE15/configure.in	2009-06-04 20:20:15.000000000 +0200
-@@ -1820,6 +1820,10 @@ case "$host" in
+--- squid-3.0.STABLE18.orig/configure.in	2009-08-04 13:57:50.000000000 +0200
++++ squid-3.0.STABLE18/configure.in	2009-08-23 18:00:46.944417936 +0200
+@@ -1895,6 +1895,10 @@ case "$host" in
  	;;
  esac
  
