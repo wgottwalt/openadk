@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
-PKG_VERSION:=		4.76
+PKG_VERSION:=		5.00
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		278dd2e849cc3dbb947df961a1aaffd0
+PKG_MD5SUM:=		32d27de32166c02d670bb4a086185886
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libdnet libpcap libpcre
@@ -29,11 +29,12 @@ TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
+			LIBS="-nodefaultlibs -luClibc++ -lgcc"
 endif
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
+			--without-ndiff \
 			--without-liblua \
 			--with-libdnet="${STAGING_DIR}/usr" \
 			--with-libpcap="${STAGING_DIR}/usr" \

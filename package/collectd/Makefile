@@ -86,6 +86,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-vserver \
 			--enable-wireless \
 			--with-fp-layout=nothing \
+			--without-java \
 			--with-nan-emulation
 
 XAKE_FLAGS+=		LIBS='-lm'

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.6.2
+PKG_VERSION:=		1.6.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		93f128306b11e1a1c64ff51338777952
+PKG_MD5SUM:=		9649be6c47b7d915dce75a1198900c25
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat

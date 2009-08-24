@@ -23,7 +23,7 @@ endif
 
 $(eval $(call PKG_template,LIBNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autotool gnu
 CONFIGURE_ENV+=		ac_libnet_have_pf_packet=yes \
 			ac_cv_libnet_endianess=${ENDIAN} \
 			ac_cv_lbl_unaligned_fail=no

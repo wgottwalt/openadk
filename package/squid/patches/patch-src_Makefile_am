@@ -1,15 +1,14 @@
---- squid-3.0.STABLE15.orig/src/Makefile.am	2009-05-06 13:11:40.000000000 +0200
-+++ squid-3.0.STABLE15/src/Makefile.am	2009-06-04 20:21:37.000000000 +0200
-@@ -1007,6 +1007,8 @@ DEFAULT_HOSTS		= @OPT_DEFAULT_HOSTS@
+--- squid-3.0.STABLE18.orig/src/Makefile.am	2009-08-04 13:57:48.000000000 +0200
++++ squid-3.0.STABLE18/src/Makefile.am	2009-08-23 18:12:19.744829620 +0200
+@@ -1010,6 +1010,7 @@ DEFAULT_MIB_PATH	= $(datadir)/mib.txt
+ DEFAULT_HOSTS		= @OPT_DEFAULT_HOSTS@
  
  DEFS = @DEFS@ -DDEFAULT_CONFIG_FILE=\"$(DEFAULT_CONFIG_FILE)\"
- 
 +HOSTCXX ?= @HOSTCXX@
-+
+ 
  $(OBJS): $(top_srcdir)/include/version.h ../include/autoconf.h
  
- snmp_core.o snmp_agent.o: ../snmplib/libsnmp.a $(top_srcdir)/include/cache_snmp.h
-@@ -1030,6 +1032,11 @@ cache_cf.o: cf_parser.h
+@@ -1034,6 +1035,11 @@ cache_cf.o: cf_parser.h
  squid.conf.default: cf_parser.h
  	true
  

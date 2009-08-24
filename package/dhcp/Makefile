@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp
-PKG_VERSION:=		4.1.0
+PKG_VERSION:=		4.1.0p1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1fffed2e8c3d67b111316d6a9b33db7a
+PKG_MD5SUM:=		325ff8338c5a21f89d5304ac13ffebdf
 PKG_DESCR:=		ISC DHCP server
 PKG_SECTION:=		net
 PKG_URL:=		https://www.isc.org/software/dhcp

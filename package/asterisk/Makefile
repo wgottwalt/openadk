@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.4.26
+PKG_VERSION:=		1.4.26.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f54d6685533a149a0241c3468a88e02a
+PKG_MD5SUM:=		9b46f8628f43e1d3c275460ceee26646
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
 PKG_URL:=		http://www.asterisk.org
-PKG_SITES:=		http://downloads.digium.com/pub/telephony/asterisk/releases/
+PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
 include $(TOPDIR)/mk/package.mk
 
@@ -39,6 +39,11 @@ SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_SPEEX}+=	asterisk-codec-speex-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_GSM}+=	asterisk-codec-gsm-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_PBX_DUNDI}+=	asterisk-pbx-dundi-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_RES_AGI}+=		asterisk-res-agi-install
+
+#workaround for cris and gcc 4.4, where -Os generates ICE
+ifeq ($(ARCH),cris)
+TARGET_OPTIMIZATION:=$(subst Os,O2,$(TARGET_OPTIMIZATION))
+endif
 
 CONFIGURE_ARGS=		--with-z=${STAGING_DIR}/usr \
 			--with-ncurses=${STAGING_DIR}/usr \
@@ -100,7 +105,7 @@ CONFIGURE_ARGS+=	--without-misdn \
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		STRIP=${STRIP}
 BUILD_STYLE:=		auto
-MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} ${TCFLAGS} -DHAVE_STRTOQ" \
+MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TLDFLAGS}"
 MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 			OPTIMIZE="${TARGET_OPTIMIZATION}" \

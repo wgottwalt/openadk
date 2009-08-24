@@ -28,7 +28,7 @@ INSTALL_STYLE:=		auto
 pre-configure:
 	(cd ${WRKBUILD}; \
 		env ${CONFIGURE_ENV} \
-		./configure --enable-static \
+		./configure --enable-static --disable-nls \
 			--build=${GNU_HOST_NAME} \
 			--host=${GNU_TARGET_NAME} \
 			--target=${GNU_TARGET_NAME} \

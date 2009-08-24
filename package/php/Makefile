@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.2.9
+PKG_VERSION:=		5.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		98b647561dc664adefe296106056cf11
+PKG_MD5SUM:=		f4905eca4497da3f0beb5c96863196b4
 PKG_DESCR:=		PHP cli
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl zlib
@@ -47,12 +47,14 @@ PKG_CONFIGURE_OPTS:=	\
 	--without-libxml-dir \
 	--disable-mbstring \
 	--disable-mbregex \
+	--disable-phar \
 	--with-openssl=shared,"$(STAGING_DIR)/usr" \
 	--with-kerberos=no \
 	--with-openssl-dir="$(STAGING_DIR)/usr" \
 	--enable-session=shared \
 	--disable-simplexml \
 	--disable-soap \
+	--disable-fileinfo \
 	--enable-sockets=shared \
 	--disable-tokenizer \
 	--disable-filter \
@@ -101,9 +103,9 @@ else
 PKG_CONFIGURE_OPTS+=	--without-mysql
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_PCRE),)
-PKG_CONFIGURE_OPTS+=	--with-pcre-regex=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-pcre-dir=shared,"$(STAGING_DIR)/usr"
 else
-PKG_CONFIGURE_OPTS+=	--without-pcre-regex
+PKG_CONFIGURE_OPTS+=	--without-pcre-dir
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
 PKG_CONFIGURE_OPTS+=	--with-pgsql=shared,"$(STAGING_DIR)/usr"
@@ -131,7 +133,7 @@ $(eval $(call PKG_template,PHP_MOD_GMP,php-mod-gmp,$(PKG_VERSION)-${PKG_RELEASE}
 $(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_MOD_PCRE,php-mod-pcre,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+#$(eval $(call PKG_template,PHP_MOD_PCRE,php-mod-pcre,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SESSION,php-mod-session,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -145,7 +147,6 @@ $(eval $(call PKG_mod_template,PHP_MOD_GMP,gmp))
 $(eval $(call PKG_mod_template,PHP_MOD_LDAP,ldap))
 $(eval $(call PKG_mod_template,PHP_MOD_MYSQL,mysql))
 $(eval $(call PKG_mod_template,PHP_MOD_OPENSSL,openssl))
-$(eval $(call PKG_mod_template,PHP_MOD_PCRE,pcre))
 $(eval $(call PKG_mod_template,PHP_MOD_PGSQL,pgsql))
 $(eval $(call PKG_mod_template,PHP_MOD_SESSION,session))
 $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
@@ -153,6 +154,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_SQLITE,pdo))
 $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 
 TLDFLAGS+=		-L$(STAGING_DIR)/usr/lib/mysql
+CONFIGURE_ENV+=		LIBS="-ldl"
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
 BUILD_STYLE:=		auto

@@ -1,4 +1,7 @@
 - stripping of kernel is not working for all targets
+- implement a non-interactive allmodconfig for different targets
+  (make TARGET=foo defconfig allmodconfig) 
+  needed for ADK buildserver
 - rescue initramfs image (more archs, generic kernel config )
   - usb boot via stick
 - fix init scripts pidof? vs. killall
