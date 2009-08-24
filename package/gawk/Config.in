@@ -1,0 +1,6 @@
+config ADK_PACKAGE_GAWK
+	prompt "gawk.............................. GNU awk"
+	tristate
+	default n
+	help
+	  http://www.gnu.org/software/gawk/

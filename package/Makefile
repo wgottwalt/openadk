@@ -103,6 +103,7 @@ package-$(ADK_COMPILE_FREETYPE) += freetype
 package-$(ADK_PACKAGE_FRICKIN) += frickin
 package-$(ADK_COMPILE_FUSE) += fuse
 package-$(ADK_PACKAGE_GATLING) += gatling
+package-$(ADK_PACKAGE_GAWK) += gawk
 package-$(ADK_PACKAGE_GCC) += gcc
 package-$(ADK_PACKAGE_GDB) += gdb
 package-$(ADK_PACKAGE_GDBSERVER) += gdbserver

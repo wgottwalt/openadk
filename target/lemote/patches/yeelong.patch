@@ -11007,8 +11007,16 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Kconfig linux-2.6.30.5/arch/mips/Kconfig
  source "drivers/Kconfig"
 diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/asm-offsets.c linux-2.6.30.5/arch/mips/kernel/asm-offsets.c
 --- linux-2.6.30.5.orig/arch/mips/kernel/asm-offsets.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/kernel/asm-offsets.c	2009-08-23 21:23:19.000000000 +0200
-@@ -326,3 +326,15 @@
++++ linux-2.6.30.5/arch/mips/kernel/asm-offsets.c	2009-08-23 21:30:52.000000000 +0200
+@@ -14,6 +14,7 @@
+ #include <linux/mm.h>
+ #include <linux/interrupt.h>
+ #include <linux/kbuild.h>
++#include <linux/suspend.h>
+ #include <asm/ptrace.h>
+ #include <asm/processor.h>
+ 
+@@ -326,3 +327,15 @@
  	BLANK();
  }
  #endif

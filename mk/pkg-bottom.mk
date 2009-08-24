@@ -124,7 +124,7 @@ endif
 	fi
 	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
 	@cd ${WRKINST}; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
