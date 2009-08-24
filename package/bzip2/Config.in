@@ -1,0 +1,6 @@
+config ADK_PACKAGE_BZIP2
+	prompt "bzip2.............................. bzip2 compression utility"
+	tristate
+	default n
+	help
+ 	  http://www.bzip.org

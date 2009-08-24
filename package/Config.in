@@ -70,6 +70,7 @@ source "package/vilistextum/Config.in"
 endmenu
 
 menu "Misc"
+source "package/bzip2/Config.in"
 source "package/collectd/Config.in"
 source "package/deco/Config.in"
 source "package/digitemp/Config.in"

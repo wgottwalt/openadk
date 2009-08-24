@@ -225,6 +225,7 @@ tor-compile: libevent-compile openssl-compile zlib-compile
 trafshow: ncurses-compile libpcap-compile
 usbutils-compile: libusb-compile
 ussp-push-compile: openobex-compile
+util-linux-ng-compile: e2fsprogs-compile ncurses-compile
 vilistextum-compile: libiconv-compile
 vim-compile: ncurses-compile
 vnc-reflector-compile: jpeg-compile zlib-compile

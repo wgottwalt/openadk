@@ -25,6 +25,7 @@ config ADK_PACKAGE_SWAP_UTILS
 	tristate
 	default n
 	select ADK_COMPILE_UTIL_LINUX_NG
+	select ADK_PACKAGE_LIBBLKID
 	help
 	  A collection of tools to manage swap space :
 	    * mkswap
