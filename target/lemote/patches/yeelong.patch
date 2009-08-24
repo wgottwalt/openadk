@@ -1916,7 +1916,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/configs/fulong_defconfig linux-2.6.30.5/
 -CONFIG_HAS_DMA=y
 diff -Nur linux-2.6.30.5.orig/arch/mips/configs/fuloong2e_defconfig linux-2.6.30.5/arch/mips/configs/fuloong2e_defconfig
 --- linux-2.6.30.5.orig/arch/mips/configs/fuloong2e_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/configs/fuloong2e_defconfig	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/configs/fuloong2e_defconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1919 @@
 +#
 +# Automatically generated make config: don't edit
@@ -3839,7 +3839,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/configs/fuloong2e_defconfig linux-2.6.30
 +CONFIG_NLATTR=y
 diff -Nur linux-2.6.30.5.orig/arch/mips/configs/fuloong2f_defconfig linux-2.6.30.5/arch/mips/configs/fuloong2f_defconfig
 --- linux-2.6.30.5.orig/arch/mips/configs/fuloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/configs/fuloong2f_defconfig	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/configs/fuloong2f_defconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,2637 @@
 +#
 +# Automatically generated make config: don't edit
@@ -6480,7 +6480,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/configs/fuloong2f_defconfig linux-2.6.30
 +CONFIG_NLATTR=y
 diff -Nur linux-2.6.30.5.orig/arch/mips/configs/yeeloong2f_defconfig linux-2.6.30.5/arch/mips/configs/yeeloong2f_defconfig
 --- linux-2.6.30.5.orig/arch/mips/configs/yeeloong2f_defconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/configs/yeeloong2f_defconfig	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/configs/yeeloong2f_defconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,2591 @@
 +#
 +# Automatically generated make config: don't edit
@@ -9075,7 +9075,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/configs/yeeloong2f_defconfig linux-2.6.3
 +CONFIG_NLATTR=y
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/bootinfo.h linux-2.6.30.5/arch/mips/include/asm/bootinfo.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/bootinfo.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/bootinfo.h	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/bootinfo.h	2009-08-23 19:01:04.000000000 +0200
 @@ -7,6 +7,7 @@
   * Copyright (C) 1995, 1996 Andreas Busse
   * Copyright (C) 1995, 1996 Stoned Elipot
@@ -9103,7 +9103,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/bootinfo.h linux-2.6.30.5/ar
  extern char *system_type;
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/bug.h linux-2.6.30.5/arch/mips/include/asm/bug.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/bug.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/bug.h	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/bug.h	2009-08-23 19:01:04.000000000 +0200
 @@ -5,6 +5,8 @@
  
  #ifdef CONFIG_BUG
@@ -9281,7 +9281,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-lemote/war.h linux-2.6.
 -#endif /* __ASM_MIPS_MACH_LEMOTE_WAR_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/clock.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/clock.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/clock.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/clock.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/clock.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,64 @@
 +#ifndef __ASM_MIPS_CLOCK_H
 +#define __ASM_MIPS_CLOCK_H
@@ -9349,7 +9349,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/clock.h linux-
 +#endif				/* __ASM_MIPS_CLOCK_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cmdline.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cmdline.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cmdline.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cmdline.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cmdline.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,9 @@
 +/* machine-specific command line initialization */
 +#ifdef CONFIG_SYS_HAS_MACH_PROM_INIT_CMDLINE
@@ -9362,7 +9362,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cmdline.h linu
 +
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cpu-feature-overrides.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -9425,7 +9425,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cpu-feature-ov
 +#endif /* __ASM_MACH_LEMOTE_CPU_FEATURE_OVERRIDES_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,382 @@
 +/*
 + * The header file of cs5536 sourth bridge.
@@ -9811,7 +9811,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.
 +#endif				/* _CS5536_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,27 @@
 +/*
 + * cs5536 mfgpt header file
@@ -9842,7 +9842,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_
 +#endif /*!_CS5536_MFGPT_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_pci.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,174 @@
 +/*
 + * the definition file of cs5536 Virtual Support Module(VSM).
@@ -10020,7 +10020,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_
 +#endif				/* _CS5536_PCI_H_ */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/cs5536/cs5536_vsm.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * the Virtual Support Module(VSM) read/write interfaces
@@ -10083,7 +10083,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_
 +#endif				/* _CS5536_VSM_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dbg.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dbg.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dbg.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dbg.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dbg.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,17 @@
 +/*
 + * Copyright (C) 2009 Lemote Inc. & Insititute of Computing Technology
@@ -10104,7 +10104,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dbg.h linux-2.
 +#endif /* _ASM_MACH_LOONGSON_DBG_H_ */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dma-coherence.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dma-coherence.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dma-coherence.h	2009-08-22 11:43:28.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/dma-coherence.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,70 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -10178,7 +10178,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/dma-coherence.
 +#endif /* __ASM_MACH_LOONGSON_DMA_COHERENCE_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/loongson.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/loongson.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/loongson.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/loongson.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/loongson.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,319 @@
 +/*
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -10501,7 +10501,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/loongson.h lin
 +
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/machine.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/machine.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/machine.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/machine.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/machine.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,76 @@
 +/*
 + * board-specific header file
@@ -10581,7 +10581,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/machine.h linu
 +#endif				/* ! __MACHINE_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mc146818rtc.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mc146818rtc.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mc146818rtc.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mc146818rtc.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mc146818rtc.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,36 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -10621,7 +10621,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mc146818rtc.h 
 +#endif /* __ASM_MACH_LOONGSON_MC146818RTC_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mem.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mem.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mem.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mem.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/mem.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,31 @@
 +#ifndef __MEM_H
 +#define __MEM_H
@@ -10656,7 +10656,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/mem.h linux-2.
 +#endif	/* !__MEM_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/pci.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/pci.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/pci.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/pci.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * Copyright (c) 2008 Zhang Le <r0bertz@gentoo.org>
@@ -10719,7 +10719,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/pci.h linux-2.
 +#endif /* !_LOONGSON_PCI_H_ */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/war.h linux-2.6.30.5/arch/mips/include/asm/mach-loongson/war.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/war.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/war.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mach-loongson/war.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,25 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -10748,7 +10748,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mach-loongson/war.h linux-2.
 +#endif /* __ASM_MIPS_MACH_LOONGSON_WAR_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mips-boards/bonito64.h linux-2.6.30.5/arch/mips/include/asm/mips-boards/bonito64.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/mips-boards/bonito64.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/mips-boards/bonito64.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/mips-boards/bonito64.h	2009-08-23 19:01:04.000000000 +0200
 @@ -26,11 +26,6 @@
  /* offsets from base register */
  #define BONITO(x)	(x)
@@ -10763,7 +10763,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/mips-boards/bonito64.h linux
  /*
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/page.h linux-2.6.30.5/arch/mips/include/asm/page.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/page.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/page.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/page.h	2009-08-23 19:01:04.000000000 +0200
 @@ -179,8 +179,9 @@
  
  #endif
@@ -10778,7 +10778,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/page.h linux-2.6.30.5/arch/m
  				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/pci.h linux-2.6.30.5/arch/mips/include/asm/pci.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/pci.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/pci.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/pci.h	2009-08-23 19:01:04.000000000 +0200
 @@ -56,7 +56,7 @@
  /*
   * board supplied pci irq fixup routine
@@ -10790,7 +10790,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/pci.h linux-2.6.30.5/arch/mi
  /* Can be used to override the logic in pci_scan_bus for skipping
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/pgtable.h linux-2.6.30.5/arch/mips/include/asm/pgtable.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/pgtable.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/pgtable.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/pgtable.h	2009-08-23 19:01:04.000000000 +0200
 @@ -370,6 +370,19 @@
  #include <asm-generic/pgtable.h>
  
@@ -10813,7 +10813,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/pgtable.h linux-2.6.30.5/arc
   */
 diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/stackframe.h linux-2.6.30.5/arch/mips/include/asm/stackframe.h
 --- linux-2.6.30.5.orig/arch/mips/include/asm/stackframe.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/include/asm/stackframe.h	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/stackframe.h	2009-08-23 19:01:04.000000000 +0200
 @@ -117,6 +117,20 @@
  		.endm
  #else
@@ -10835,9 +10835,23 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/stackframe.h linux-2.6.30.5/
  #if defined(CONFIG_32BIT) || defined(KBUILD_64BIT_SYM32)
  		lui	k1, %hi(kernelsp)
  #else
+diff -Nur linux-2.6.30.5.orig/arch/mips/include/asm/suspend.h linux-2.6.30.5/arch/mips/include/asm/suspend.h
+--- linux-2.6.30.5.orig/arch/mips/include/asm/suspend.h	2009-08-16 23:19:38.000000000 +0200
++++ linux-2.6.30.5/arch/mips/include/asm/suspend.h	2009-08-23 20:29:58.000000000 +0200
+@@ -1,6 +1,9 @@
+ #ifndef __ASM_SUSPEND_H
+ #define __ASM_SUSPEND_H
+ 
+-/* Somewhen...  Maybe :-)  */
++static inline int arch_prepare_suspend(void) { return 0; }
++
++/* References to section boundaries */
++extern const void __nosave_begin, __nosave_end;
+ 
+ #endif /* __ASM_SUSPEND_H */
 diff -Nur linux-2.6.30.5.orig/arch/mips/Kconfig linux-2.6.30.5/arch/mips/Kconfig
 --- linux-2.6.30.5.orig/arch/mips/Kconfig	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/Kconfig	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/Kconfig	2009-08-23 19:01:56.000000000 +0200
 @@ -6,7 +6,7 @@
  	select HAVE_ARCH_KGDB
  	# Horrible source of confusion.  Die, die, die ...
@@ -10953,7 +10967,21 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Kconfig linux-2.6.30.5/arch/mips/Kconfig
  	bool
  
  config SYS_HAS_CPU_MIPS32_R1
-@@ -2129,6 +2141,23 @@
+@@ -2121,14 +2133,35 @@
+ 
+ menu "Power management options"
+ 
++config ARCH_HIBERNATION_POSSIBLE
++        def_bool y
++        depends on SYS_SUPPORTS_HOTPLUG_CPU || !SMP
++
+ config ARCH_SUSPEND_POSSIBLE
+-	def_bool y
+-	depends on !SMP
++        def_bool y
++        depends on SYS_SUPPORTS_HOTPLUG_CPU || !SMP
+ 
+ source "kernel/power/Kconfig"
  
  endmenu
  
@@ -10977,9 +11005,28 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Kconfig linux-2.6.30.5/arch/mips/Kconfig
  source "net/Kconfig"
  
  source "drivers/Kconfig"
+diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/asm-offsets.c linux-2.6.30.5/arch/mips/kernel/asm-offsets.c
+--- linux-2.6.30.5.orig/arch/mips/kernel/asm-offsets.c	2009-08-16 23:19:38.000000000 +0200
++++ linux-2.6.30.5/arch/mips/kernel/asm-offsets.c	2009-08-23 21:23:19.000000000 +0200
+@@ -326,3 +326,15 @@
+ 	BLANK();
+ }
+ #endif
++
++#ifdef CONFIG_HIBERNATION
++void output_pbe_defines(void)
++{
++        COMMENT(" Linux struct pbe offsets. ");
++        OFFSET(PBE_ADDRESS, pbe, address);
++        OFFSET(PBE_ORIG_ADDRESS, pbe, orig_address);
++        OFFSET(PBE_NEXT, pbe, next);
++        DEFINE(PBE_SIZE, sizeof(struct pbe));
++        BLANK();
++}
++#endif
 diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/i8259.c linux-2.6.30.5/arch/mips/kernel/i8259.c
 --- linux-2.6.30.5.orig/arch/mips/kernel/i8259.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/kernel/i8259.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/kernel/i8259.c	2009-08-23 19:01:04.000000000 +0200
 @@ -177,10 +177,12 @@
  		outb(cached_slave_mask, PIC_SLAVE_IMR);
  		outb(0x60+(irq&7), PIC_SLAVE_CMD);/* 'Specific EOI' to slave */
@@ -10995,7 +11042,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/i8259.c linux-2.6.30.5/arch/mips/
  	spin_unlock_irqrestore(&i8259A_lock, flags);
 diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/loongson2f_freq.c linux-2.6.30.5/arch/mips/kernel/loongson2f_freq.c
 --- linux-2.6.30.5.orig/arch/mips/kernel/loongson2f_freq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/kernel/loongson2f_freq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/kernel/loongson2f_freq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,216 @@
 +/*
 + * arch/mips/kernel/cpufreq.c
@@ -11215,7 +11262,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/loongson2f_freq.c linux-2.6.30.5/
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/arch/mips/kernel/Makefile linux-2.6.30.5/arch/mips/kernel/Makefile
 --- linux-2.6.30.5.orig/arch/mips/kernel/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/kernel/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/kernel/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -73,6 +73,7 @@
  obj-$(CONFIG_MIPS32_COMPAT)	+= linux32.o ptrace32.o signal32.o
  obj-$(CONFIG_MIPS32_N32)	+= binfmt_elfn32.o scall64-n32.o signal_n32.o
@@ -12001,7 +12048,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/lemote/lm2e/setup.c linux-2.6.30.5/arch/
 -}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/bonito-irq.c linux-2.6.30.5/arch/mips/loongson/common/bonito-irq.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/bonito-irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/bonito-irq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/bonito-irq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,78 @@
 +/*
 + * Copyright 2001 MontaVista Software Inc.
@@ -12083,7 +12130,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/bonito-irq.c linux-2.6.3
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/clock.c linux-2.6.30.5/arch/mips/loongson/common/clock.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/clock.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/clock.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/clock.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,166 @@
 +/*
 + * arch/mips/loongson/common/clock.c
@@ -12253,7 +12300,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/clock.c linux-2.6.30.5/a
 +EXPORT_SYMBOL_GPL(loongson2f_cpu_wait);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cmdline.c linux-2.6.30.5/arch/mips/loongson/common/cmdline.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cmdline.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cmdline.c	2009-08-22 13:40:56.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cmdline.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,57 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -12314,7 +12361,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cmdline.c linux-2.6.30.5
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_acc.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_acc.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_acc.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,156 @@
 +/*
 + * the ACC Virtual Support Module of AMD CS5536
@@ -12474,7 +12521,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ehci.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,166 @@
 +/*
 + * the EHCI Virtual Support Module of AMD CS5536
@@ -12644,7 +12691,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c lin
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_flash.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_flash.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_flash.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_flash.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_flash.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,452 @@
 +/*
 + * the FLASH Virtual Support Module of AMD CS5536
@@ -13100,7 +13147,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_flash.c li
 +#endif				/* CONFIG_CS5536_NOR_FLASH */
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ide.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ide.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ide.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,194 @@
 +/*
 + * the IDE Virtual Support Module of AMD CS5536
@@ -13298,7 +13345,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_isa.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_isa.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_isa.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_isa.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_isa.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,376 @@
 +/*
 + * the ISA Virtual Support Module of AMD CS5536
@@ -13678,7 +13725,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_isa.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,241 @@
 +/*
 + * CS5536 General timer functions
@@ -13923,7 +13970,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_mfgpt.c li
 +arch_initcall(init_mfgpt_clocksource);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ohci.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,168 @@
 +/*
 + * the OHCI Virtual Support Module of AMD CS5536
@@ -14095,7 +14142,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c lin
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_otg.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_otg.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_otg.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_otg.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_otg.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,138 @@
 +/*
 + * the OTG Virtual Support Module of AMD CS5536
@@ -14237,7 +14284,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_otg.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_pci.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_pci.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_pci.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_pci.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,126 @@
 +/*
 + * read/write operation to the PCI config space of CS5536
@@ -14367,7 +14414,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_pci.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_udc.c linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_udc.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_udc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_udc.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/cs5536_udc.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,143 @@
 +/*
 + * the UDC Virtual Support Module of AMD CS5536
@@ -14514,7 +14561,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/cs5536_udc.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/Makefile linux-2.6.30.5/arch/mips/loongson/common/cs5536/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/cs5536/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,25 @@
 +#
 +# Makefile for CS5536 support.
@@ -14543,7 +14590,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/cs5536/Makefile linux-2.
 +EXTRA_CFLAGS += -Werror
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/dbg.c linux-2.6.30.5/arch/mips/loongson/common/dbg.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/dbg.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/dbg.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/dbg.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,34 @@
 +/*
 + * Copyright (C) 2009 Lemote Inc. & Insititute of Computing Technology
@@ -14581,7 +14628,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/dbg.c linux-2.6.30.5/arc
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/early_printk.c linux-2.6.30.5/arch/mips/loongson/common/early_printk.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/early_printk.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/early_printk.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/early_printk.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,28 @@
 +/*  early printk support
 + *
@@ -14613,7 +14660,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/early_printk.c linux-2.6
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/env.c linux-2.6.30.5/arch/mips/loongson/common/env.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/env.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/env.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/env.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,59 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -14676,7 +14723,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/env.c linux-2.6.30.5/arc
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/init.c linux-2.6.30.5/arch/mips/loongson/common/init.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/init.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/init.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/init.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,65 @@
 +/*
 + * Based on Ocelot Linux port, which is
@@ -14745,7 +14792,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/init.c linux-2.6.30.5/ar
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/irq.c linux-2.6.30.5/arch/mips/loongson/common/irq.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/irq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/irq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,120 @@
 +/*
 + * Copyright 2001 MontaVista Software Inc.
@@ -14869,7 +14916,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/irq.c linux-2.6.30.5/arc
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/machtype.c linux-2.6.30.5/arch/mips/loongson/common/machtype.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/machtype.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/machtype.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/machtype.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,50 @@
 +/*
 + * Copyright (C) 2009 Lemote Inc. & Insititute of Computing Technology
@@ -14923,7 +14970,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/machtype.c linux-2.6.30.
 +__setup("machtype=", machtype_setup);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/Makefile linux-2.6.30.5/arch/mips/loongson/common/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,37 @@
 +#
 +# Makefile for loongson based machines.
@@ -14964,7 +15011,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/Makefile linux-2.6.30.5/
 +EXTRA_CFLAGS += -Werror
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/mem.c linux-2.6.30.5/arch/mips/loongson/common/mem.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/mem.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/mem.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/mem.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,116 @@
 +/*
 + * This program is free software; you can redistribute  it and/or modify it
@@ -15084,7 +15131,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/mem.c linux-2.6.30.5/arc
 +#endif /* !CONFIG_CPU_LOONGSON2F */
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/pci.c linux-2.6.30.5/arch/mips/loongson/common/pci.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/pci.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/pci.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,109 @@
 +/*
 + * Copyright (C) 2007 Lemote, Inc. & Institute of Computing Technology
@@ -15197,7 +15244,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/pci.c linux-2.6.30.5/arc
 +arch_initcall(pcibios_init);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/reset.c linux-2.6.30.5/arch/mips/loongson/common/reset.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/reset.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/reset.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,38 @@
 +/*
 + * This program is free software; you can redistribute  it and/or modify it
@@ -15239,7 +15286,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/reset.c linux-2.6.30.5/a
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/rtc.c linux-2.6.30.5/arch/mips/loongson/common/rtc.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/rtc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/rtc.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/rtc.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,54 @@
 +/*
 + *  Registration of Cobalt RTC platform device.
@@ -15297,7 +15344,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/rtc.c linux-2.6.30.5/arc
 +device_initcall(rtc_cmos_init);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/serial.c linux-2.6.30.5/arch/mips/loongson/common/serial.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/serial.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/serial.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/serial.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,66 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -15367,7 +15414,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/serial.c linux-2.6.30.5/
 +device_initcall(serial_init);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/setup.c linux-2.6.30.5/arch/mips/loongson/common/setup.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/setup.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/setup.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/setup.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,74 @@
 +/*
 + * board dependent setup routines
@@ -15445,7 +15492,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/setup.c linux-2.6.30.5/a
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/time.c linux-2.6.30.5/arch/mips/loongson/common/time.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/common/time.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/common/time.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/common/time.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,34 @@
 +/*
 + * board dependent boot routines
@@ -15483,7 +15530,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/common/time.c linux-2.6.30.5/ar
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/irq.c linux-2.6.30.5/arch/mips/loongson/fuloong-2e/irq.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/irq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/irq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,58 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -15545,7 +15592,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/irq.c linux-2.6.30.5
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/Makefile linux-2.6.30.5/arch/mips/loongson/fuloong-2e/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,7 @@
 +#
 +# Makefile for fuloong-2e
@@ -15556,7 +15603,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/Makefile linux-2.6.3
 +EXTRA_CFLAGS += -Werror
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/reset.c linux-2.6.30.5/arch/mips/loongson/fuloong-2e/reset.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/reset.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2e/reset.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,26 @@
 +/* Board-specific reboot/shutdown routines
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -15586,7 +15633,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2e/reset.c linux-2.6.30
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/irq.c linux-2.6.30.5/arch/mips/loongson/fuloong-2f/irq.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/irq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/irq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,53 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -15643,7 +15690,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/irq.c linux-2.6.30.5
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/Makefile linux-2.6.30.5/arch/mips/loongson/fuloong-2f/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,5 @@
 +#
 +# Makefile for fuloong-2f
@@ -15652,7 +15699,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/Makefile linux-2.6.3
 +obj-y += irq.o reset.o
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/reset.c linux-2.6.30.5/arch/mips/loongson/fuloong-2f/reset.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/reset.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/fuloong-2f/reset.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,65 @@
 +/* Board-specific reboot/shutdown routines
 + *
@@ -15721,7 +15768,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/fuloong-2f/reset.c linux-2.6.30
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/cache.c linux-2.6.30.5/arch/mips/loongson/image/cache.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/cache.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/cache.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/cache.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,42 @@
 +#include <asm/addrspace.h>
 +
@@ -15767,7 +15814,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/cache.c linux-2.6.30.5/ar
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/dbg.c linux-2.6.30.5/arch/mips/loongson/image/dbg.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/dbg.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/dbg.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/dbg.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,61 @@
 +/* serial port debug support */
 +
@@ -15832,7 +15879,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/dbg.c linux-2.6.30.5/arch
 +#endif
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/decompress.c linux-2.6.30.5/arch/mips/loongson/image/decompress.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/decompress.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/decompress.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/decompress.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,134 @@
 +/*
 + * Misc. bootloader code for many machines.
@@ -15970,7 +16017,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/decompress.c linux-2.6.30
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/dummy.c linux-2.6.30.5/arch/mips/loongson/image/dummy.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/dummy.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/dummy.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/dummy.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,4 @@
 +int main(void)
 +{
@@ -15978,7 +16025,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/dummy.c linux-2.6.30.5/ar
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/head.S linux-2.6.30.5/arch/mips/loongson/image/head.S
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/head.S	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/head.S	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/head.S	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,100 @@
 +/*
 + * arch/mips/kernel/head.S
@@ -16082,7 +16129,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/head.S linux-2.6.30.5/arc
 +	.comm .stack,4096*2,4
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/ld.script linux-2.6.30.5/arch/mips/loongson/image/ld.script
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/ld.script	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/ld.script	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/ld.script	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,152 @@
 +OUTPUT_ARCH(mips)
 +ENTRY(start)
@@ -16238,7 +16285,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/ld.script linux-2.6.30.5/
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/Makefile linux-2.6.30.5/arch/mips/loongson/image/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,61 @@
 +#
 +# arch/mips/zboot/Makefile
@@ -16303,7 +16350,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/Makefile linux-2.6.30.5/a
 +	       $(objtree)/vmlinuz
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/mem.c linux-2.6.30.5/arch/mips/loongson/image/mem.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/image/mem.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/image/mem.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/image/mem.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,24 @@
 +/* memory opernation support */
 +
@@ -16331,7 +16378,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/image/mem.c linux-2.6.30.5/arch
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/Kconfig linux-2.6.30.5/arch/mips/loongson/Kconfig
 --- linux-2.6.30.5.orig/arch/mips/loongson/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/Kconfig	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,136 @@
 +choice
 +	prompt "Machine Type"
@@ -16471,7 +16518,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/Kconfig linux-2.6.30.5/arch/mip
 +	  Specify a zeroed size to disable this feature.
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/Makefile linux-2.6.30.5/arch/mips/loongson/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,23 @@
 +#
 +# Common code for all Loongson based systems
@@ -16498,7 +16545,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/Makefile linux-2.6.30.5/arch/mi
 +obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= yeeloong-2f/
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/init.c linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/init.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/init.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/init.c	2009-08-22 13:41:28.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/init.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,80 @@
 +/*
 + * board specific init routines
@@ -16582,7 +16629,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/init.c linux-2.6.30
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/irq.c linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/irq.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/irq.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/irq.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,53 @@
 +/*
 + * Copyright (C) 2007 Lemote Inc. & Insititute of Computing Technology
@@ -16639,7 +16686,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/irq.c linux-2.6.30.
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/Makefile linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/Makefile
 --- linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,11 @@
 +#
 +# Makefile for fuloong-2f
@@ -16654,7 +16701,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/Makefile linux-2.6.
 +obj-$(CONFIG_PM) += pm.o
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/pm.c linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/pm.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/pm.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/pm.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/pm.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,321 @@
 +/*
 + * loongson-specific STR/Standby
@@ -16979,7 +17026,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/pm.c linux-2.6.30.5
 +arch_initcall(loongson_pm_init);
 diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/reset.c linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/reset.c
 --- linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/reset.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/loongson/yeeloong-2f/reset.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,91 @@
 +/* Board-specific reboot/shutdown routines
 + * Copyright (c) 2009 Philippe Vachon <philippe@cowpig.ca>
@@ -17074,7 +17121,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/loongson/yeeloong-2f/reset.c linux-2.6.3
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/Makefile linux-2.6.30.5/arch/mips/Makefile
 --- linux-2.6.30.5.orig/arch/mips/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/Makefile	2009-08-21 21:17:59.000000000 +0200
++++ linux-2.6.30.5/arch/mips/Makefile	2009-08-23 20:58:41.000000000 +0200
 @@ -120,7 +120,14 @@
  cflags-$(CONFIG_CPU_VR41XX)	+= -march=r4100 -Wa,--trap
  cflags-$(CONFIG_CPU_R4X00)	+= -march=r4600 -Wa,--trap
@@ -17111,7 +17158,15 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Makefile linux-2.6.30.5/arch/mips/Makefi
  
  #
  # MIPS Malta board
-@@ -680,6 +691,11 @@
+@@ -675,11 +686,19 @@
+ 
+ drivers-$(CONFIG_OPROFILE)	+= arch/mips/oprofile/
+ 
++# suspend and hibernation support
++drivers-$(CONFIG_PM)    += arch/mips/power/
++
+ ifdef CONFIG_LASAT
+ rom.bin rom.sw: vmlinux
  	$(Q)$(MAKE) $(build)=arch/mips/lasat/image $@
  endif
  
@@ -17123,7 +17178,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Makefile linux-2.6.30.5/arch/mips/Makefi
  #
  # Some machines like the Indy need 32-bit ELF binaries for booting purposes.
  # Other need ECOFF, so we build a 32-bit ELF binary for them which we then
-@@ -728,6 +744,7 @@
+@@ -728,6 +747,7 @@
  
  archclean:
  	@$(MAKE) $(clean)=arch/mips/boot
@@ -17133,7 +17188,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/Makefile linux-2.6.30.5/arch/mips/Makefi
  define archhelp
 diff -Nur linux-2.6.30.5.orig/arch/mips/mm/uasm.c linux-2.6.30.5/arch/mips/mm/uasm.c
 --- linux-2.6.30.5.orig/arch/mips/mm/uasm.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/mm/uasm.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/mm/uasm.c	2009-08-23 19:01:04.000000000 +0200
 @@ -15,6 +15,7 @@
  #include <linux/kernel.h>
  #include <linux/types.h>
@@ -17144,7 +17199,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/mm/uasm.c linux-2.6.30.5/arch/mips/mm/ua
  #include <asm/elf.h>
 diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/common.c linux-2.6.30.5/arch/mips/oprofile/common.c
 --- linux-2.6.30.5.orig/arch/mips/oprofile/common.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/oprofile/common.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/oprofile/common.c	2009-08-23 19:01:04.000000000 +0200
 @@ -16,6 +16,7 @@
  
  extern struct op_mips_model op_model_mipsxx_ops __attribute__((weak));
@@ -17166,7 +17221,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/common.c linux-2.6.30.5/arch/mi
  	if (!lmodel)
 diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/Makefile linux-2.6.30.5/arch/mips/oprofile/Makefile
 --- linux-2.6.30.5.orig/arch/mips/oprofile/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/oprofile/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/oprofile/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -15,3 +15,4 @@
  oprofile-$(CONFIG_CPU_R10000)		+= op_model_mipsxx.o
  oprofile-$(CONFIG_CPU_SB1)		+= op_model_mipsxx.o
@@ -17174,7 +17229,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/Makefile linux-2.6.30.5/arch/mi
 +oprofile-$(CONFIG_CPU_LOONGSON2)  	+= op_model_loongson2.o
 diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/op_model_loongson2.c linux-2.6.30.5/arch/mips/oprofile/op_model_loongson2.c
 --- linux-2.6.30.5.orig/arch/mips/oprofile/op_model_loongson2.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/oprofile/op_model_loongson2.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/oprofile/op_model_loongson2.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,186 @@
 +/*
 + * Loongson2 performance counter driver for oprofile
@@ -17364,7 +17419,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/oprofile/op_model_loongson2.c linux-2.6.
 +};
 diff -Nur linux-2.6.30.5.orig/arch/mips/pci/fixup-fuloong2e.c linux-2.6.30.5/arch/mips/pci/fixup-fuloong2e.c
 --- linux-2.6.30.5.orig/arch/mips/pci/fixup-fuloong2e.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/pci/fixup-fuloong2e.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/pci/fixup-fuloong2e.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,243 @@
 +/*
 + * fixup-fuloong2e.c
@@ -17611,7 +17666,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/pci/fixup-fuloong2e.c linux-2.6.30.5/arc
 +			 fuloong2e_nec_fixup);
 diff -Nur linux-2.6.30.5.orig/arch/mips/pci/fixup-lemote2f.c linux-2.6.30.5/arch/mips/pci/fixup-lemote2f.c
 --- linux-2.6.30.5.orig/arch/mips/pci/fixup-lemote2f.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/pci/fixup-lemote2f.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/pci/fixup-lemote2f.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,171 @@
 +/*
 + * Copyright (C) 2008 Lemote Technology
@@ -18032,7 +18087,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/pci/fixup-lm2e.c linux-2.6.30.5/arch/mip
 -			 loongson2e_nec_fixup);
 diff -Nur linux-2.6.30.5.orig/arch/mips/pci/Makefile linux-2.6.30.5/arch/mips/pci/Makefile
 --- linux-2.6.30.5.orig/arch/mips/pci/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/pci/Makefile	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/pci/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -26,7 +26,9 @@
  obj-$(CONFIG_SOC_AU1500)	+= fixup-au1000.o ops-au1000.o
  obj-$(CONFIG_SOC_AU1550)	+= fixup-au1000.o ops-au1000.o
@@ -18046,7 +18101,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/pci/Makefile linux-2.6.30.5/arch/mips/pc
  obj-$(CONFIG_PMC_MSP7120_EVAL)	+= fixup-pmcmsp.o ops-pmcmsp.o
 diff -Nur linux-2.6.30.5.orig/arch/mips/pci/ops-bonito64.c linux-2.6.30.5/arch/mips/pci/ops-bonito64.c
 --- linux-2.6.30.5.orig/arch/mips/pci/ops-bonito64.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/arch/mips/pci/ops-bonito64.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/pci/ops-bonito64.c	2009-08-23 19:01:04.000000000 +0200
 @@ -29,20 +29,16 @@
  #define PCI_ACCESS_READ  0
  #define PCI_ACCESS_WRITE 1
@@ -18104,7 +18159,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/pci/ops-bonito64.c linux-2.6.30.5/arch/m
  		if (size == 1)
 diff -Nur linux-2.6.30.5.orig/arch/mips/pci/ops-loongson2.c linux-2.6.30.5/arch/mips/pci/ops-loongson2.c
 --- linux-2.6.30.5.orig/arch/mips/pci/ops-loongson2.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/pci/ops-loongson2.c	2009-08-21 21:18:06.000000000 +0200
++++ linux-2.6.30.5/arch/mips/pci/ops-loongson2.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,213 @@
 +/*
 + * Copyright (C) 1999, 2000, 2004  MIPS Technologies, Inc.
@@ -18321,7 +18376,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/pci/ops-loongson2.c linux-2.6.30.5/arch/
 +#endif
 diff -Nur linux-2.6.30.5.orig/arch/mips/power/cpu.c linux-2.6.30.5/arch/mips/power/cpu.c
 --- linux-2.6.30.5.orig/arch/mips/power/cpu.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/power/cpu.c	2009-08-21 21:22:15.000000000 +0200
++++ linux-2.6.30.5/arch/mips/power/cpu.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,60 @@
 +/*
 + * Suspend support specific for mips.
@@ -18385,7 +18440,7 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/power/cpu.c linux-2.6.30.5/arch/mips/pow
 +}
 diff -Nur linux-2.6.30.5.orig/arch/mips/power/hibernate.S linux-2.6.30.5/arch/mips/power/hibernate.S
 --- linux-2.6.30.5.orig/arch/mips/power/hibernate.S	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/power/hibernate.S	2009-08-21 21:22:15.000000000 +0200
++++ linux-2.6.30.5/arch/mips/power/hibernate.S	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,61 @@
 +/*
 + * Hibernation support specific for mips - temporary page tables
@@ -18450,12 +18505,12 @@ diff -Nur linux-2.6.30.5.orig/arch/mips/power/hibernate.S linux-2.6.30.5/arch/mi
 +END(swsusp_arch_resume)
 diff -Nur linux-2.6.30.5.orig/arch/mips/power/Makefile linux-2.6.30.5/arch/mips/power/Makefile
 --- linux-2.6.30.5.orig/arch/mips/power/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/arch/mips/power/Makefile	2009-08-21 21:22:15.000000000 +0200
++++ linux-2.6.30.5/arch/mips/power/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1 @@
 +obj-$(CONFIG_HIBERNATION) += cpu.o hibernate.o
 diff -Nur linux-2.6.30.5.orig/drivers/input/serio/i8042.c linux-2.6.30.5/drivers/input/serio/i8042.c
 --- linux-2.6.30.5.orig/drivers/input/serio/i8042.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/input/serio/i8042.c	2009-08-22 11:56:23.000000000 +0200
++++ linux-2.6.30.5/drivers/input/serio/i8042.c	2009-08-23 19:01:04.000000000 +0200
 @@ -143,7 +143,7 @@
   * of the i8042 down the toilet.
   */
@@ -18480,7 +18535,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/input/serio/i8042.c linux-2.6.30.5/drivers
  	i8042_ctr |= I8042_CTR_KBDINT;
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/Kconfig linux-2.6.30.5/drivers/net/wireless/Kconfig
 --- linux-2.6.30.5.orig/drivers/net/wireless/Kconfig	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/net/wireless/Kconfig	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -416,7 +416,7 @@
  
  config RTL8187
@@ -18509,7 +18564,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/Kconfig linux-2.6.30.5/driver
  	depends on MAC80211 && PCI && WLAN_80211 && EXPERIMENTAL
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/Makefile linux-2.6.30.5/drivers/net/wireless/Makefile
 --- linux-2.6.30.5.orig/drivers/net/wireless/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/net/wireless/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -34,6 +34,7 @@
  obj-$(CONFIG_ZD1211RW)		+= zd1211rw/
  obj-$(CONFIG_RTL8180)		+= rtl818x/
@@ -18520,7 +18575,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/Makefile linux-2.6.30.5/drive
  obj-$(CONFIG_PCMCIA_RAYCS)	+= ray_cs.o
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/dot11d.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/dot11d.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/dot11d.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/dot11d.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/dot11d.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,102 @@
 +#ifndef __INC_DOT11D_H
 +#define __INC_DOT11D_H
@@ -18626,7 +18681,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/dot11d.h linux-2.6.3
 +#endif // #ifndef __INC_DOT11D_H
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/arc4.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/arc4.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/arc4.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/arc4.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/arc4.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,103 @@
 +/* 
 + * Cryptographic API
@@ -18733,7 +18788,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/arc4.c lin
 +MODULE_AUTHOR("Jon Oberheide <jon@oberheide.org>");
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,245 @@
 +#ifdef ENABLE_DOT11D
 +//-----------------------------------------------------------------------------
@@ -18982,7 +19037,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.c l
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,102 @@
 +#ifndef __INC_DOT11D_H
 +#define __INC_DOT11D_H
@@ -19088,7 +19143,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/dot11d.h l
 +#endif // #ifndef __INC_DOT11D_H
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,275 @@
 +/*
 + * Host AP crypto routines
@@ -19367,7 +19422,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_ccmp.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_ccmp.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_ccmp.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_ccmp.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_ccmp.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,524 @@
 +/*
 + * Host AP crypt: host-based CCMP encryption implementation for Host AP driver
@@ -19895,7 +19950,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,91 @@
 +/*
 + * Original code based on Host AP (software wireless LAN access point) driver
@@ -19990,7 +20045,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_tkip.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_tkip.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_tkip.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_tkip.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_tkip.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,996 @@
 +/*
 + * Host AP crypt: host-based TKIP encryption implementation for Host AP driver
@@ -20990,7 +21045,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_wep.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_wep.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_wep.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_wep.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_crypt_wep.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,383 @@
 +/*
 + * Host AP crypt: host-based WEP encryption implementation for Host AP driver
@@ -21377,7 +21432,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1913 @@
 +/*
 + * Merged with mainline ieee80211.h in Aug 2004.  Original ieee802_11
@@ -23294,7 +23349,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211.
 +#endif /* IEEE80211_H */
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_module.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_module.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_module.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_module.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_module.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,385 @@
 +/*******************************************************************************
 +
@@ -23683,7 +23738,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_rx.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_rx.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_rx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_rx.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_rx.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,2074 @@
 +/*
 + * Original code based Host AP (software wireless LAN access point) driver
@@ -25761,7 +25816,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,4083 @@
 +/* IEEE 802.11 SoftMAC layer
 + * Copyright (c) 2005 Andrea Merello <andreamrl@tiscali.it>
@@ -29848,7 +29903,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +//EXPORT_SYMBOL(ieee80211_sta_ps_send_null_frame);
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac_wx.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac_wx.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac_wx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac_wx.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_softmac_wx.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,629 @@
 +/* IEEE 802.11 SoftMAC layer
 + * Copyright (c) 2005 Andrea Merello <andreamrl@tiscali.it>
@@ -30481,7 +30536,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_tx.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_tx.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_tx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_tx.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_tx.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,876 @@
 +/******************************************************************************
 +
@@ -31361,7 +31416,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_wx.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_wx.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_wx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_wx.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_wx.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,926 @@
 +/******************************************************************************
 +
@@ -32291,7 +32346,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/ieee80211_
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/internal.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/internal.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/internal.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/internal.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/internal.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,115 @@
 +/*
 + * Cryptographic API.
@@ -32410,7 +32465,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/internal.h
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/kmap_types.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/kmap_types.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/kmap_types.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/kmap_types.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/kmap_types.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,20 @@
 +#ifndef __KMAP_TYPES_H
 +
@@ -32434,7 +32489,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/kmap_types
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/readme linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/readme
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/readme	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/readme	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/readme	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,162 @@
 +What this layer should do
 +
@@ -32600,7 +32655,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/readme lin
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_mesh.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_mesh.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_mesh.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_mesh.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_mesh.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,282 @@
 +#ifndef _RTL8187_MESH_H_
 +#define _RTL8187_MESH_H_
@@ -32886,7 +32941,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl8187_me
 +#endif // _RTL8187_MESH_H_
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,399 @@
 +/*
 + * Scatterlist Cryptographic API.
@@ -33289,7 +33344,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/rtl_crypto
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/scatterwalk.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/scatterwalk.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/scatterwalk.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/scatterwalk.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/ieee80211/scatterwalk.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,51 @@
 +/*
 + * Cryptographic API.
@@ -33344,7 +33399,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/ieee80211/scatterwal
 +#endif  /* _CRYPTO_SCATTERWALK_H */
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/Makefile linux-2.6.30.5/drivers/net/wireless/rtl8187b/Makefile
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,41 @@
 +obj-$(CONFIG_RTL8187B)	+= rtl8187b.o
 +
@@ -33389,7 +33444,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/Makefile linux-2.6.3
 +EXTRA_CFLAGS += -DENABLE_DOT11D
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/msh_class.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/msh_class.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/msh_class.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/msh_class.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/msh_class.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,117 @@
 +/*!	\file	msh_class.h
 +	\brief	msh CLASS extension
@@ -33510,7 +33565,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/msh_class.h linux-2.
 +#endif // _MESH_CLASS_HDR_H_
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,146 @@
 +/* 
 +   This files contains card eeprom (93c46 or 93c56) programming routines,
@@ -33660,7 +33715,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.c linux-
 +}
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_93cx6.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,46 @@
 +/* 
 +	This is part of rtl8187 OpenSource driver
@@ -33710,7 +33765,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_93cx6.h linux-
 +u32 eprom_read(struct net_device *dev,u32 addr); //reads a 16 bits word
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,882 @@
 +/*++
 +Copyright (c) Realtek Semiconductor Corp. All rights reserved.
@@ -34596,7 +34651,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.c linux-2.6
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_dm.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,38 @@
 +/* 
 +       Hardware dynamic mechanism for RTL8187B. 
@@ -34638,7 +34693,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_dm.h linux-2.6
 +#endif //R8180_PM_H
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_hw.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_hw.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_hw.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_hw.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_hw.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,788 @@
 +/* 
 +	This is part of rtl8187 OpenSource driver.
@@ -35430,7 +35485,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_hw.h linux-2.6
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,99 @@
 +/* 
 +   Power management interface routines. 
@@ -35533,7 +35588,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.c linux-2.6
 +#endif //CONFIG_RTL8180_PM
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_pm.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,28 @@
 +/* 
 +        Power management interface routines. 
@@ -35565,7 +35620,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_pm.h linux-2.6
 +#endif // CONFIG_RTL8180_PM
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1007 @@
 +/*
 +  This is part of the rtl8180-sa2400 driver
@@ -36576,7 +36631,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.c linu
 +}
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,77 @@
 +/*
 +  This is part of the rtl8180-sa2400 driver
@@ -36657,7 +36712,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225.h linu
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,2090 @@
 +/*
 +  This is part of the rtl8180-sa2400 driver
@@ -38751,7 +38806,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_rtl8225z2.c li
 +}
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,2067 @@
 +/* 
 +   This file contains wireless extension handlers.
@@ -40822,7 +40877,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.c linux-2.6
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8180_wx.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,21 @@
 +/* 
 +	This is part of rtl8180 OpenSource driver - v 0.3
@@ -40847,7 +40902,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8180_wx.h linux-2.6
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_core.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_core.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_core.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_core.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_core.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,7194 @@
 +/*
 +   This is part of rtl8187 OpenSource driver - v 0.1
@@ -48045,7 +48100,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_core.c linux-2
 +module_exit(rtl8187_usb_module_exit);
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,816 @@
 +/* 
 +   This is part of rtl8187 OpenSource driver.
@@ -48865,7 +48920,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187.h linux-2.6.30
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.c linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.c
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1629 @@
 +/*++
 +Copyright (c) Realtek Semiconductor Corp. All rights reserved.
@@ -50498,7 +50553,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.c linux-2.
 +
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.h linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.h
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/r8187_led.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,276 @@
 +/*++
 +
@@ -50778,7 +50833,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/r8187_led.h linux-2.
 +#endif
 diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/readme linux-2.6.30.5/drivers/net/wireless/rtl8187b/readme
 --- linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/readme	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/readme	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/net/wireless/rtl8187b/readme	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,124 @@
 +rtl8187 Linux kernel driver
 +Released under the terms of GNU General Public Licence (GPL)
@@ -50906,7 +50961,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/net/wireless/rtl8187b/readme linux-2.6.30.
 +
 diff -Nur linux-2.6.30.5.orig/drivers/platform/Kconfig linux-2.6.30.5/drivers/platform/Kconfig
 --- linux-2.6.30.5.orig/drivers/platform/Kconfig	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/platform/Kconfig	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -3,3 +3,7 @@
  if X86
  source "drivers/platform/x86/Kconfig"
@@ -50917,7 +50972,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/Kconfig linux-2.6.30.5/drivers/pl
 +endif
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_bat.c linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_bat.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_bat.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_bat.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_bat.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,388 @@
 +/*
 + * EC(Embedded Controller) KB3310B battery management driver on Linux
@@ -51309,7 +51364,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_bat.c linu
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_ft.c linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_ft.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_ft.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_ft.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_ft.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,216 @@
 +/*
 + * EC(Embedded Controller) KB3310B Fan and Temperature management driver on
@@ -51529,7 +51584,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_ft.c linux
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec.h linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec.h
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,218 @@
 +/*
 + * EC(Embedded Controller) KB3310B misc device driver header for Linux
@@ -51751,7 +51806,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec.h linux-2.
 +extern void _wrmsr(u32 addr, u32 hi, u32 lo);
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.c linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,913 @@
 +/*
 + * EC(Embedded Controller) KB3310B misc device driver on Linux
@@ -52668,7 +52723,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.c lin
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,16 @@
 +
 +/*
@@ -52688,7 +52743,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc_fn.h 
 +extern int ec_query_seq(unsigned char cmd);
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.h linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.h
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_misc.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,191 @@
 +/*
 + * EC(Embedded Controller) KB3310B Misc device driver header file in linux
@@ -52883,7 +52938,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_misc.h lin
 +};
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_sci.c linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_sci.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_sci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_sci.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/ec_sci.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1026 @@
 +/*
 + * EC(Embedded Controller) KB3310B SCI EVENT management driver on Linux
@@ -53913,7 +53968,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/ec_sci.c linu
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/io_msr_debug.c linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/io_msr_debug.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/io_msr_debug.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/io_msr_debug.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/io_msr_debug.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,198 @@
 +/*
 + * Debug IO and MSR resources driver on Linux
@@ -54115,7 +54170,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/io_msr_debug.
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/Makefile linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/Makefile
 --- linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/ec_kb3310b/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,14 @@
 +#
 +# Embedded Controller(kb3310b) Driver for Yeeloong laptop
@@ -54133,7 +54188,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/ec_kb3310b/Makefile linu
 +io_msr_debugd-objs	:= io_msr_debug.o
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/Kconfig linux-2.6.30.5/drivers/platform/loongson/Kconfig
 --- linux-2.6.30.5.orig/drivers/platform/loongson/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/Kconfig	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,68 @@
 +#
 +# Loongson Platform Specific Drivers
@@ -54205,7 +54260,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/Kconfig linux-2.6.30.5/d
 +endif # LOONGSON_PLATFORM_DEVICES
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/Makefile linux-2.6.30.5/drivers/platform/loongson/Makefile
 --- linux-2.6.30.5.orig/drivers/platform/loongson/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,6 @@
 +#
 +# loongson platform specific drivers
@@ -54215,7 +54270,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/Makefile linux-2.6.30.5/
 +obj-$(CONFIG_PMON_FLASH) += pmon_flash/
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/Makefile linux-2.6.30.5/drivers/platform/loongson/pmon_flash/Makefile
 --- linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/pmon_flash/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/pmon_flash/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,7 @@
 +#
 +# MTD map driver for flushing pmon flash
@@ -54226,7 +54281,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/Makefile linu
 +pmon_flashd-objs := pmon_flash.o
 diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/pmon_flash.c linux-2.6.30.5/drivers/platform/loongson/pmon_flash/pmon_flash.c
 --- linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/pmon_flash.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/platform/loongson/pmon_flash/pmon_flash.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/loongson/pmon_flash/pmon_flash.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,85 @@
 +/*
 + *  Copyright www.lemote.com
@@ -54315,7 +54370,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/loongson/pmon_flash/pmon_flash.c 
 +MODULE_DESCRIPTION("MTD map driver for pmon programming module");
 diff -Nur linux-2.6.30.5.orig/drivers/platform/Makefile linux-2.6.30.5/drivers/platform/Makefile
 --- linux-2.6.30.5.orig/drivers/platform/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/platform/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/platform/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -3,3 +3,4 @@
  #
  
@@ -54323,7 +54378,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/platform/Makefile linux-2.6.30.5/drivers/p
 +obj-$(CONFIG_MACH_LOONGSON)	+= loongson/
 diff -Nur linux-2.6.30.5.orig/drivers/rtc/rtc-cmos.c linux-2.6.30.5/drivers/rtc/rtc-cmos.c
 --- linux-2.6.30.5.orig/drivers/rtc/rtc-cmos.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/rtc/rtc-cmos.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/rtc/rtc-cmos.c	2009-08-23 19:01:04.000000000 +0200
 @@ -691,7 +691,8 @@
  	 */
  #if	defined(CONFIG_ATARI)
@@ -54348,7 +54403,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/rtc/rtc-cmos.c linux-2.6.30.5/drivers/rtc/
  	}
 diff -Nur linux-2.6.30.5.orig/drivers/video/Kconfig linux-2.6.30.5/drivers/video/Kconfig
 --- linux-2.6.30.5.orig/drivers/video/Kconfig	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/video/Kconfig	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -1930,6 +1930,28 @@
  	  Turn on debugging messages. Note that you can set/unset at run time
  	  through sysfs
@@ -54380,7 +54435,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/Kconfig linux-2.6.30.5/drivers/video
  	depends on FB && MFD_SM501
 diff -Nur linux-2.6.30.5.orig/drivers/video/Makefile linux-2.6.30.5/drivers/video/Makefile
 --- linux-2.6.30.5.orig/drivers/video/Makefile	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/drivers/video/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -70,6 +70,7 @@
  obj-$(CONFIG_FB_TCX)              += tcx.o sbuslib.o
  obj-$(CONFIG_FB_LEO)              += leo.o sbuslib.o
@@ -54391,14 +54446,14 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/Makefile linux-2.6.30.5/drivers/vide
                                       atafb_iplan2p2.o atafb_iplan2p4.o atafb_iplan2p8.o
 diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/Makefile linux-2.6.30.5/drivers/video/sm7xx/Makefile
 --- linux-2.6.30.5.orig/drivers/video/sm7xx/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/video/sm7xx/Makefile	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/sm7xx/Makefile	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,3 @@
 +obj-$(CONFIG_FB_SM7XX) += sm7xx.o
 +
 +sm7xx-y := smtcfb.o
 diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.c linux-2.6.30.5/drivers/video/sm7xx/smtc2d.c
 --- linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/video/sm7xx/smtc2d.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/sm7xx/smtc2d.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,979 @@
 +/*
 + * smtc2d.c -- Silicon Motion SM7xx 2D drawing engine functions.
@@ -55381,7 +55436,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.c linux-2.6.30.5/driver
 +}
 diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.h linux-2.6.30.5/drivers/video/sm7xx/smtc2d.h
 --- linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/video/sm7xx/smtc2d.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/sm7xx/smtc2d.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,530 @@
 +/*
 + * smtc2d.h -- Silicon Motion SM7xx 2D drawing engine functions.
@@ -55915,7 +55970,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtc2d.h linux-2.6.30.5/driver
 +extern void deSetPixelFormat(unsigned long bpp);
 diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.c linux-2.6.30.5/drivers/video/sm7xx/smtcfb.c
 --- linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/video/sm7xx/smtcfb.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/sm7xx/smtcfb.c	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,1138 @@
 +/*
 + * smtcfb.c -- Silicon Motion SM7xx frame buffer device
@@ -57057,7 +57112,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.c linux-2.6.30.5/driver
 +MODULE_LICENSE("GPL");
 diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.h linux-2.6.30.5/drivers/video/sm7xx/smtcfb.h
 --- linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.5/drivers/video/sm7xx/smtcfb.h	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/drivers/video/sm7xx/smtcfb.h	2009-08-23 19:01:04.000000000 +0200
 @@ -0,0 +1,793 @@
 +/*
 + * smtcfb.h -- Silicon Motion SM7xx frame buffer device
@@ -57854,7 +57909,7 @@ diff -Nur linux-2.6.30.5.orig/drivers/video/sm7xx/smtcfb.h linux-2.6.30.5/driver
 +#define numVGAModes		(sizeof(VGAMode) / sizeof(struct ModeInit))
 diff -Nur linux-2.6.30.5.orig/include/linux/fb.h linux-2.6.30.5/include/linux/fb.h
 --- linux-2.6.30.5.orig/include/linux/fb.h	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/include/linux/fb.h	2009-08-22 11:50:27.000000000 +0200
++++ linux-2.6.30.5/include/linux/fb.h	2009-08-23 19:01:04.000000000 +0200
 @@ -814,6 +814,7 @@
  	int node;
  	int flags;
@@ -57865,7 +57920,7 @@ diff -Nur linux-2.6.30.5.orig/include/linux/fb.h linux-2.6.30.5/include/linux/fb
  	struct fb_monspecs monspecs;	/* Current Monitor specs */
 diff -Nur linux-2.6.30.5.orig/sound/core/pcm_native.c linux-2.6.30.5/sound/core/pcm_native.c
 --- linux-2.6.30.5.orig/sound/core/pcm_native.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/sound/core/pcm_native.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/sound/core/pcm_native.c	2009-08-23 19:01:04.000000000 +0200
 @@ -3091,7 +3091,11 @@
  			return VM_FAULT_SIGBUS;
  	} else {
@@ -57892,7 +57947,7 @@ diff -Nur linux-2.6.30.5.orig/sound/core/pcm_native.c linux-2.6.30.5/sound/core/
  	case SNDRV_PCM_MMAP_OFFSET_STATUS:
 diff -Nur linux-2.6.30.5.orig/sound/core/sgbuf.c linux-2.6.30.5/sound/core/sgbuf.c
 --- linux-2.6.30.5.orig/sound/core/sgbuf.c	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/sound/core/sgbuf.c	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/sound/core/sgbuf.c	2009-08-23 19:01:04.000000000 +0200
 @@ -114,7 +114,11 @@
  			if (!i)
  				table->addr |= chunk; /* mark head */
@@ -57920,7 +57975,7 @@ diff -Nur linux-2.6.30.5.orig/sound/core/sgbuf.c linux-2.6.30.5/sound/core/sgbuf
  	if (res_size)
 diff -Nur linux-2.6.30.5.orig/sound/pci/Kconfig linux-2.6.30.5/sound/pci/Kconfig
 --- linux-2.6.30.5.orig/sound/pci/Kconfig	2009-08-16 23:19:38.000000000 +0200
-+++ linux-2.6.30.5/sound/pci/Kconfig	2009-08-21 21:18:15.000000000 +0200
++++ linux-2.6.30.5/sound/pci/Kconfig	2009-08-23 19:01:04.000000000 +0200
 @@ -259,7 +259,6 @@
  
  config SND_CS5535AUDIO

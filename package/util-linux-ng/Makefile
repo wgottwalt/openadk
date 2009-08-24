@@ -14,13 +14,14 @@ PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v2.15/}
 
 PKG_DESCR_1:=		Partition table manipulation utility
 PKG_DESCR_2:=		Swap space management utilities
+PKG_DEPENDS_SWAP:=	libblkid
 PKG_DESCR_3:=		Loop devices setup and control utility
 PKG_DEPENDS_3:=		kmod-loop
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
-$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
+$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SWAP},${PKG_DESCR_2},${PKG_SECTION}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_3},${PKG_DESCR_3},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu

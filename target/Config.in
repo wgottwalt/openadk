@@ -134,6 +134,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
+	select ADK_KERNEL_SWAP
 	help
 	  Lemote Subnotebook
 
@@ -314,6 +315,8 @@ prompt "Target C library"
 depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
+	# broken, because of 16kB pagesize
+	depends on !ADK_LINUX_MIPS64_LEMOTE
 	help
  	 http://uclibc.org
 
@@ -432,17 +435,26 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 	help
 	  Use this option if you want an encrypted rootfs.
 	  Default is XFS filesystem. Use following commands to setup 
-	  your hard disk, after booting via NFS or USB:
+	  your hard disk, after booting via NFS or USB.
+	  Create at least three partitions with fdisk
+	  /dev/sda1 (ext2)
+          /dev/sda2 (encrypted root)
+          /dev/sda3 (swap)
+
+	  mkdir /mnt/{boot,root}
 	  cryptsetup luksFormat /dev/sda2 
-	  cryptsetup luksOpen /dev/sda2 crypt
-          mkfs.xfs /dev/mapper/crypt
-          mount /dev/mapper/crypt /mnt
-          tar xzvf lemote-mips-encryptedroot.tar.gz -C /mnt
-	  umount /mnt
-          mount /dev/sda1 /mnt
-	  cp lemote-mips-kernel /mnt/ 
-	  mkdir /mnt/boot
-	  Create boot.cfg ... 
+	  cryptsetup luksOpen /dev/sda2 root
+	  cryptsetup luksFormat /dev/sda3
+	  cryptsetup luksOpen /dev/sda3 swap
+	  mkswap /dev/mapper/swap
+          mkfs.xfs /dev/mapper/root
+          mount /dev/mapper/root /mnt/root
+          tar xzvf lemote-mips-encryptedroot.tar.gz -C /mnt/root
+          mount /dev/sda1 /mnt/boot
+	  mkdir /mnt/boot/boot
+	  cp lemote-mips-kernel /mnt/boot/boot
+	  mv /mnt/root/boot/boot.cfg /mnt/boot/boot
+	  cd /mnt/root ; mknod -m 644 console c 5 1
 
 endchoice
 
@@ -485,5 +497,21 @@ config ADK_X11
 	  Enable Xorg/X11 server and applications in menu.
 	  Try to compile other packages with X11 support. 
 	  (f.e. mplayer)
+
+config ADK_DEVELSYSTEM
+	bool "Compile a OpenADK development system"
+	default n
+	select ADK_PACKAGE_BASH
+	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_PATCH
+	select ADK_PACKAGE_GCC
+	select ADK_PACKAGE_BINUTILS
+	select ADK_PACKAGE_TAR
+	select ADK_PACKAGE_BZIP2
+	help
+	  After bootstrapping a Linux system you might want to
+	  switch to native builds with your target. 
+	  If you choose this option, all necessary software needed
+	  for native building will be selected.
 
 endmenu

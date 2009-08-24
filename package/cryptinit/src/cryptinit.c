@@ -56,8 +56,7 @@
 #define DEF_KERN_ROOT_SRC "/dev/mapper/root"
 #define DEF_KERN_ROOT_TGT "/mnt"
 #define DEF_KERN_ROOT_FS "xfs"
-#define DEF_KERN_INIT "/start"
-#define DEF_KERN_RUNLEVEL "3"
+#define DEF_KERN_INIT "/init"
 
 #ifndef MS_MOVE
 #define MS_MOVE         8192
@@ -76,7 +75,6 @@ struct commandline {
         struct mntopts root;
         char *init;
         char *resume;
-        char *runlevel;
         ushort do_resume;
         ushort debug;
 };
@@ -116,7 +114,7 @@ static void cmdLineLog(int class, char *msg) {
 	}
 }
 
-int switch_root(char *console, char *newroot, char *init, char *initarg) {
+int switch_root(char *console, char *newroot, char *init) {
 
 	if (chdir(newroot)) {
 		fprintf(stderr,"bad newroot %s\n",newroot);
@@ -203,11 +201,6 @@ int parse_cmdline(char *line) {
 		} else if(!strncmp(tmpstr, "debug", 5)) {
 			cmdline.debug=1;
 
-		} else if(strlen(tmpstr) == 1) {
-			tmpnum = (int)strtol(tmpstr, invchars, 10);
-			if(**invchars == '\0' && tmpnum >= 0) {
-				cmdline.runlevel = tmpstr;
-			}
 		} else {
 			if(cmdline.debug)
 				printf("unknown bootparam flag %s\n",tmpstr);
@@ -217,8 +210,8 @@ int parse_cmdline(char *line) {
 	debug_printf("\n Bootparams scanned:\n");
 	debug_printf("root\t%s\nrootfstype\t%s\ninit\t%s\nresume\t%s\ndo_resume\t%i\n",
 			cmdline.root.source,cmdline.root.fstype,cmdline.init,cmdline.resume,cmdline.do_resume);
-	debug_printf("debug\t%i\nrunlevel\t%s\n\n",
-			cmdline.debug,cmdline.runlevel);
+	debug_printf("debug\t%i\n\n",
+			cmdline.debug);
 	return 0;
 }
 
@@ -234,7 +227,6 @@ int get_cmdline() {
 	cmdline.resume = DEF_KERN_SWAP;
 	cmdline.do_resume = 1;
 	cmdline.debug = 0;
-	cmdline.runlevel = DEF_KERN_RUNLEVEL;
 
 	/* read out cmdline from /proc */
 	str = read_cmdline();
@@ -261,11 +253,11 @@ void kmsg_log(int level) {
 void do_resume(void) {
 	FILE *fd;
 
-	debug_msg("Running tuxonice-resume\n");
-	if((fd = fopen("/sys/power/tuxonice/do_resume", "a")) == NULL) {
+	debug_msg("Trying to resume\n");
+	if((fd = fopen("/sys/power/resume", "a")) == NULL) {
 		return;
 	}
-	fprintf(fd, "1\n");
+	fprintf(fd, "254:0\n");
 	fclose(fd);
 }
 
@@ -338,7 +330,7 @@ int main(void) {
 
 	ret = uname(&info);
 	if (ret < 0)
-		fprintf(stderr, "Error calling uname\n");
+		fprintf(stderr, "Error calling uname function\n");
 
 	/* security by obscurity */
 	printf("This is %s.%s (Linux %s %s)\n", hostname, domainname, info.machine, info.release);
@@ -413,7 +405,7 @@ int main(void) {
 	memset(pass, 0, strlen(pass)*sizeof(char));
 
 	debug_msg("Switching root\n");
-	switch_root(DEF_KERN_CONS, cmdline.root.target, cmdline.init, cmdline.runlevel);
+	switch_root(DEF_KERN_CONS, cmdline.root.target, cmdline.init);
 	
 	return(0);
 }
