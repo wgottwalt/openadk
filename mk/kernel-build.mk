@@ -7,6 +7,11 @@ include ${TOPDIR}/mk/buildhlp.mk
 
 KERNEL_IDIR:=$(LINUX_BUILD_DIR)/kernel-ipkg
 
+KERNEL_MAKE_OPTS:=	-C "${LINUX_DIR}" V=1
+ifneq ($(ADK_NATIVE),y)
+KERNEL_MAKE_OPTS+=	CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)"
+endif
+
 $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/$(DEVICE)-kernel-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
@@ -23,28 +28,18 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 	$(TRACE) target/$(DEVICE)-kernel-configure
 	for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done $(MAKE_TRACE)
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config
-ifeq ($(ADK_NATIVE),y)
-	echo N | $(MAKE) -C $(LINUX_DIR) oldconfig $(MAKE_TRACE)
-	$(MAKE) -C $(LINUX_DIR) V=1 prepare scripts $(MAKE_TRACE)
-else
-	echo N | $(MAKE) -C $(LINUX_DIR) CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE)
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)" prepare scripts $(MAKE_TRACE)
-endif
+	echo N | $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
+	$(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	$(TRACE) target/$(DEVICE)-kernel-compile
-ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -C $(LINUX_DIR) V=1 $(MAKE_TRACE)
+	$(MAKE) ${KERNEL_MAKE_OPTS} $(MAKE_TRACE)
 	$(TRACE) target/$(DEVICE)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
-	$(MAKE) -C "$(LINUX_DIR)" V=1 DEPMOD=true INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules modules_install $(MAKE_TRACE)
-else
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)" $(MAKE_TRACE)
-	$(TRACE) target/$(DEVICE)-kernel-modules-install
-	rm -rf $(LINUX_BUILD_DIR)/modules
-	$(MAKE) -C "$(LINUX_DIR)" V=1 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) DEPMOD=true INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules modules_install $(MAKE_TRACE)
-endif
+	$(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
+		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
+		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(DEVICE)-create-packages
 	$(MAKE) $(KERNEL_IPKG) $(TARGETS) 
 	touch -c $(LINUX_DIR)/vmlinux
