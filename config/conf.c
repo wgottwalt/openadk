@@ -435,9 +435,11 @@ int main(int ac, char **av)
 	const char *name;
 	struct stat tmpstat;
 
+#ifndef KBUILD_NO_NLS 
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
+#endif
 
 	while ((opt = getopt(ac, av, "osdD:nmyrh")) != -1) {
 		switch (opt) {

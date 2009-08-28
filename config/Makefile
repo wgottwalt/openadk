@@ -44,16 +44,16 @@ MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	$(HOSTCC) $(NATIVE_LDFLAGS) $^ -o $@
+	$(HOSTCC) -DKBUILD_NO_NLS $(NATIVE_LDFLAGS) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	$(HOSTCC) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
+	$(HOSTCC) -DKBUILD_NO_NLS $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	$(HOSTCC) -DKBUILD_NO_NLS $(HOSTCFLAGS) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
+	$(HOSTCC) -DKBUILD_NO_NLS $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c glob.c -o $@

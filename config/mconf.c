@@ -875,9 +875,11 @@ int main(int ac, char **av)
 	char *mode;
 	int res;
 
+#ifndef KBUILD_NO_NLS
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
+#endif
 
 	conf_parse(av[1]);
 	conf_read(NULL);
