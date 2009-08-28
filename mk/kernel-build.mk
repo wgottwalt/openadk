@@ -34,7 +34,7 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	$(TRACE) target/$(DEVICE)-kernel-compile
-	$(MAKE) ${KERNEL_MAKE_OPTS} $(MAKE_TRACE)
+	$(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} $(MAKE_TRACE)
 	$(TRACE) target/$(DEVICE)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	$(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \

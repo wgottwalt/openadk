@@ -70,6 +70,13 @@ endif
 	@${MAKE} post-configure $(MAKE_TRACE)
 	touch $@
 
+# do a parallel build if requested && package doesn't force disable it
+ifeq (${PKG_BUILD_PARALLEL},y)
+ifeq ($(strip ${PKG_NOPARALLEL}),)
+MAKE_FLAGS+=		-j${ADK_MAKE_JOBS}
+endif
+endif
+
 pre-build:
 do-build:
 post-build:
@@ -78,7 +85,7 @@ ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@$(CMD_TRACE) "compiling... "
 ifneq ($(filter auto,${BUILD_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-	    ${MAKEJOBS} ${MAKE_FLAGS} ${ALL_TARGET} $(MAKE_TRACE)
+	    ${MAKE_FLAGS} ${ALL_TARGET} $(MAKE_TRACE)
 else ifneq ($(filter manual,${BUILD_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)

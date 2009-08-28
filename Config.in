@@ -15,5 +15,34 @@ config ADK_HAVE_DOT_CONFIG
 	bool
 	default y
 
+menu "ADK settings"
+
+config ADK_MAKE_JOBS
+	int
+	default 1 if ! ADK_MAKE_PARALLEL
+
+config ADK_MAKE_PARALLEL
+	prompt "Enable parallel building of packages that claim to support it"
+	boolean
+	default n
+
+config ADK_MAKE_JOBS
+	prompt "How many jobs to use"
+	int
+	default 2
+	depends on ADK_MAKE_PARALLEL
+	help
+	  The number specified here will be passed to make as N in '-jN'
+
+config ADK_FORCE_PARALLEL
+	prompt "Force parallel building of all packages (DANGEROUS)"
+	bool
+	default n
+	depends on ADK_MAKE_PARALLEL
+	help
+	  Do not enable this! It's for testing purposes only.
+
+endmenu
+
 source "target/Config.in"
 source "package/Config.in"

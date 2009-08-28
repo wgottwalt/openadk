@@ -10,6 +10,7 @@ PKG_MD5SUM:=		9b46f8628f43e1d3c275460ceee26646
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
+PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 

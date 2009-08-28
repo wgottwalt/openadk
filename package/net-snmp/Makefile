@@ -10,6 +10,7 @@ PKG_MD5SUM:=		984932520143f0c8bf7b7ce1fc9e1da1
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libnetsnmp libelf
+PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.net-snmp.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
