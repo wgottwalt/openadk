@@ -1,0 +1,10 @@
+--- jamvm-1.5.3.orig/configure.ac	2009-04-14 03:05:57.000000000 +0200
++++ jamvm-1.5.3/configure.ac	2009-08-28 14:10:40.855322815 +0200
+@@ -39,6 +39,7 @@ i386-*-solaris*) host_cpu=x86 host_os=so
+ x86_64-*-linux*) host_os=linux ;;
+ hppa*-*-linux*) host_cpu=parisc host_os=linux ;;
+ mipsel-*-linux*) host_cpu=mips host_os=linux ;;
++mips64el-*-linux*) host_cpu=mips host_os=linux ;;
+ amd64-*-openbsd*) host_os=bsd libdl_needed=no ;;
+ amd64-*-freebsd*) host_os=bsd libdl_needed=no ;;
+ arm*-*-linux*) host_cpu=arm host_os=linux ;;

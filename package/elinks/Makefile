@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		elinks
-PKG_VERSION:=		0.11.6
+PKG_VERSION:=		0.11.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fd85c1f38d4e2da8e59b60886a30a843
+PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		text
 PKG_DEPENDS:=		libopenssl
@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--enable-small \
 			--without-x \
 			--without-zlib
 BUILD_STYLE:=		auto
-MAKE_FLAGS+=		CC='${TARGET_CC}' LD='${TARGET_CROSS}ld'
+MAKE_FLAGS+=		V=1 CC='${TARGET_CC}' LD='${TARGET_CC}'
 
 do-install:
 	${INSTALL_DIR} ${IDIR_ELINKS}/usr/bin

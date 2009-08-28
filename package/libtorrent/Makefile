@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
-PKG_VERSION:=		0.12.2
+PKG_VERSION:=		0.12.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0831ca06f8906c7898fd67931ab239c7
+PKG_MD5SUM:=		7e4b4c29a69c86c38e3e60ec11fc2255
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
@@ -32,7 +32,7 @@ endif
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-aligned
 BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+INSTALL_STYLE=		auto
 
 ifeq (${ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++

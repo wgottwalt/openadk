@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- mysql-5.0.81.orig/include/my_global.h	2009-04-16 13:48:04.000000000 +0200
-+++ mysql-5.0.81/include/my_global.h	2009-05-12 10:59:28.000000000 +0200
+--- mysql-5.0.85.orig/include/my_global.h	2009-08-11 12:50:17.000000000 +0200
++++ mysql-5.0.85/include/my_global.h	2009-08-27 22:21:39.363259500 +0200
 @@ -350,29 +350,32 @@ C_MODE_END
  #ifdef HAVE_UNISTD_H
  #include <unistd.h>
@@ -45,7 +45,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  /*
    A lot of our programs uses asserts, so better to always include it
-@@ -826,9 +829,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
+@@ -791,9 +794,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
  #define finite(x) (1.0 / fabs(x) > 0.0)
  #endif
  
@@ -56,4 +56,4 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 +*/
  
  #ifdef HAVE_ISINF
- /* isinf() can be used in both C and C++ code */
+ /* Check if C compiler is affected by GCC bug #39228 */

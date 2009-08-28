@@ -1,11 +1,10 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- libtorrent-0.12.2.orig/src/tracker/tracker_dht.cc	2008-05-07 14:19:13.000000000 +0200
-+++ libtorrent-0.12.2/src/tracker/tracker_dht.cc	2009-05-21 23:43:05.000000000 +0200
-@@ -36,6 +36,7 @@
- 
+--- libtorrent-0.12.4.orig/src/tracker/tracker_dht.cc	2008-08-26 22:18:34.000000000 +0200
++++ libtorrent-0.12.4/src/tracker/tracker_dht.cc	2009-08-28 17:44:05.940697717 +0200
+@@ -37,6 +37,7 @@
  #include "config.h"
  
-+#include <cstdio>
  #include <sstream>
++#include <cstdio>
  
  #include "dht/dht_router.h"
+ #include "torrent/connection_manager.h"

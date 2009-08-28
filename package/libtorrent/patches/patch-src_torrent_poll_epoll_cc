@@ -1,0 +1,10 @@
+--- libtorrent-0.12.4.orig/src/torrent/poll_epoll.cc	2008-10-28 12:49:47.000000000 +0100
++++ libtorrent-0.12.4/src/torrent/poll_epoll.cc	2009-08-28 17:34:23.579476292 +0200
+@@ -37,6 +37,7 @@
+ #include "config.h"
+ 
+ #include <cerrno>
++#include <cstdio>
+ #include <cstring>
+ 
+ #include <unistd.h>

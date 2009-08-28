@@ -1,0 +1,24 @@
+--- bitlbee-1.2.3.orig/protocols/Makefile	2008-09-06 14:33:13.000000000 +0200
++++ bitlbee-1.2.3/protocols/Makefile	2009-08-28 11:13:32.079800935 +0200
+@@ -21,7 +21,7 @@ subdirobjs = $(PROTOOBJS)
+ # Expansion of variables
+ subdirobjs := $(join $(subdirs),$(addprefix /,$(subdirobjs)))
+ CFLAGS += -Wall
+-LFLAGS += -r
++#LFLAGS += -r
+ 
+ # [SH] Phony targets
+ all: protocols.o
+@@ -44,10 +44,10 @@ $(subdirs):
+ 
+ protocols.o: $(objects) $(subdirs)
+ 	@echo '*' Linking protocols.o
+-	@$(LD) $(LFLAGS) $(objects) $(subdirobjs) -o protocols.o
++	$(CC) -shared $(LDFLAGS) $(objects) $(subdirobjs) -o protocols.o
+ 
+ $(objects): ../Makefile.settings Makefile
+ 
+ $(objects): %.o: %.c
+ 	@echo '*' Compiling $<
+-	@$(CC) -c $(CFLAGS) $< -o $@
++	$(CC) -c $(CFLAGS) $< -o $@

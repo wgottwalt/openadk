@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--without-jdk
 CONFIGURE_ARGS+=	--disable-javahl
 CONFIGURE_ARGS+=	--without-berkeley-db
 
-LIBS= 			-laprutil-0 -lapr-0 -lexpat -liconv
+LIBS= 			-laprutil-0 -lapr-0 -lexpat -liconv -lsqlite3
 
 ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
 CONFIGURE_ARGS+=	-disable-neon-version-check

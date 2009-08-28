@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		1.9.1-p129
+PKG_VERSION:=		1.9.1-p243
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c71f413514ee6341c627be2957023a5c
+PKG_MD5SUM:=		515bfd965814e718c0943abf3dde5494
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		net
 PKG_URL:=		http://www.ruby-lang.org

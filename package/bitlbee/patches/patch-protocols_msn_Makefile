@@ -1,0 +1,24 @@
+--- bitlbee-1.2.3.orig/protocols/msn/Makefile	2008-09-06 14:33:13.000000000 +0200
++++ bitlbee-1.2.3/protocols/msn/Makefile	2009-08-28 11:13:50.455844911 +0200
+@@ -12,7 +12,7 @@
+ objects = msn.o msn_util.o ns.o passport.o sb.o tables.o
+ 
+ CFLAGS += -Wall
+-LFLAGS += -r
++#LFLAGS += -r
+ 
+ # [SH] Phony targets
+ all: msn_mod.o
+@@ -34,10 +34,10 @@ $(objects): ../../Makefile.settings Make
+ 
+ $(objects): %.o: %.c
+ 	@echo '*' Compiling $<
+-	@$(CC) -c $(CFLAGS) $< -o $@
++	$(CC) -c $(CFLAGS) $< -o $@
+ 
+ msn_mod.o: $(objects)
+ 	@echo '*' Linking msn_mod.o
+-	@$(LD) $(LFLAGS) $(objects) -o msn_mod.o
++	$(CC) -shared $(LDFLAGS) $(objects) -o msn_mod.o
+ 	
+ 

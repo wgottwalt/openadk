@@ -433,17 +433,6 @@ config ADK_PACKAGE_SANE_BACKEND_PLUSTEK
 	  
 	  http://www.sane-project.org
 
-config ADK_PACKAGE_SANE_BACKEND_QCAM
-	prompt "sane-backend-qcam............... Scanner Access Now Easy (QCAM)"
-	tristate
-	default n
-	depends on ADK_PACKAGE_SANE_BACKENDS
-	select ADK_PACKAGE_LIBUSB
-	help
-	  SANE (Scanner Access Now Easy) is a universal scanner interface.
-	  
-	  http://www.sane-project.org
-
 config ADK_PACKAGE_SANE_BACKEND_RICOH
 	prompt "sane-backend-ricoh.............. Scanner Access Now Easy (RICOH)"
 	tristate

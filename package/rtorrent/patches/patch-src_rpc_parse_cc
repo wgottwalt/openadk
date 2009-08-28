@@ -1,9 +1,9 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- rtorrent-0.8.2.orig/src/rpc/parse.cc	2008-05-07 14:19:10.000000000 +0200
-+++ rtorrent-0.8.2/src/rpc/parse.cc	2009-05-29 01:27:36.000000000 +0200
-@@ -37,6 +37,8 @@
- #include "config.h"
+--- rtorrent-0.8.4.orig/src/rpc/parse.cc	2008-08-26 22:14:33.000000000 +0200
++++ rtorrent-0.8.4/src/rpc/parse.cc	2009-08-28 17:58:13.616282106 +0200
+@@ -38,6 +38,8 @@
  
+ #include <cstring>
  #include <locale>
 +#include <cstdio>
 +#include <cstring>

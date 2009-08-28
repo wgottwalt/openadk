@@ -34,6 +34,8 @@ $(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE}
 TCFLAGS+=		-lncurses
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
+			--disable-camellia \
+			--with-libgcrypt-prefix=${STAGING_DIR}/usr \
 			--without-libz-prefix
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto

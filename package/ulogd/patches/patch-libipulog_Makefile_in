@@ -1,7 +1,7 @@
 $Id$
---- ulogd-1.24.orig/libipulog/Makefile.in	2005-11-25 19:58:25.000000000 +0000
-+++ ulogd-1.24/libipulog/Makefile.in	2007-02-15 21:29:49.000000000 +0000
-@@ -1,7 +1,7 @@
+--- ulogd-1.24.orig/libipulog/Makefile.in	2005-11-25 20:58:25.000000000 +0100
++++ ulogd-1.24/libipulog/Makefile.in	2009-08-28 20:28:09.339447238 +0200
+@@ -1,10 +1,10 @@
  #
  
  include @top_srcdir@/Rules.make
@@ -9,4 +9,8 @@ $Id$
 +CFLAGS+=-Iinclude
  
  libipulog.a: libipulog.o
- 	$(LD) -i $< -o $@
+-	$(LD) -i $< -o $@
++	$(CC) -shared $< -o $@
+ 
+ distrib:
+ 

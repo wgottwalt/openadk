@@ -1,0 +1,11 @@
+--- nmap-5.00.orig/ncat/Makefile.in	2009-04-29 06:14:04.000000000 +0200
++++ nmap-5.00/ncat/Makefile.in	2009-08-28 16:01:37.061874972 +0200
+@@ -126,7 +126,7 @@ $(NSOCKDIR)/libnsock.a: $(NSOCKDIR)/Make
+ install: $(TARGET)
+ 	@echo Installing Ncat;
+ 	$(SHTOOL) mkdir -f -p -m 755 $(DESTDIR)$(bindir) $(DESTDIR)$(pkgdatadir) $(DESTDIR)$(mandir)/man1
+-	$(INSTALL) -c -m 755 -s ncat $(DESTDIR)$(bindir)/ncat
++	$(INSTALL) -c -m 755 ncat $(DESTDIR)$(bindir)/ncat
+ 	$(INSTALL) -c -m 644 $(DATAFILES) $(DESTDIR)$(pkgdatadir)/
+ 	$(INSTALL) -c -m 644 docs/$(TARGET).1 $(DESTDIR)$(mandir)/man1/$(TARGET).1
+ 
