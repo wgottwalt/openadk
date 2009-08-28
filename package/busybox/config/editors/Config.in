@@ -30,6 +30,7 @@ config BUSYBOX_CMP
 config BUSYBOX_DIFF
 	bool "diff"
 	default y
+	depends on !ADK_PACKAGE_DIFFUTILS
 	help
 	  diff compares two files or directories and outputs the
 	  differences between them in a form that can be given to

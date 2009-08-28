@@ -18,6 +18,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ZLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	manual
 BUILD_STYLE=		auto
@@ -38,5 +39,7 @@ do-configure:
 post-install:
 	${INSTALL_DIR} ${IDIR_ZLIB}/usr/lib
 	${CP} ${WRKBUILD}/libz.so* ${IDIR_ZLIB}/usr/lib
+	${INSTALL_DIR} ${IDIR_ZLIB_DEV}/usr/include
+	${CP} ${WRKBUILD}/*.h ${IDIR_ZLIB_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

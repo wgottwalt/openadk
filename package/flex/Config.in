@@ -1,0 +1,6 @@
+config ADK_PACKAGE_FLEX
+	prompt "flex.............................. Fast lexical analyzer"
+	tristate
+	default n
+	help
+	  http://www.gnu.org/software/flex/

@@ -109,7 +109,11 @@ build-all-ipkgs: ${_IPKGS_COOKIE}
 # 4.) dependencies to other packages, $(PKG_DEPENDS)
 # 5.) description for the package, $(PKG_DESCR)
 # 6.) section of the package, $(PKG_SECTION)  
-#    
+# 7.) special package options
+#     noscripts -> do not install scripts to $(STAGING_DIR)/target/scripts
+#		  (needed for example for autoconf/automake)
+#     noremove -> do not remove files from $(STAGING_DIR)/target while
+#                 cleaning (needed for toolchain packages like glibc/eglibc)
 # should be package format independent and modular in the future
 define PKG_template
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.ipk
@@ -169,12 +173,15 @@ endif
 	done
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
 	    '$${STAGING_DIR}/scripts'
-	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+ifneq ($(strip $(7)),noremove)
+	echo "Calling from package.mk"
+	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PARENT}/pkg/$(1)'; \
 	fi
+endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
 	@cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
@@ -190,7 +197,7 @@ endif
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
 	    cpio -apdlmu --quiet '$${STAGING_DIR}'
-	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
@@ -207,12 +214,15 @@ endif
 clean-targets: clean-dev-$(1)
 
 clean-dev-$(1):
-	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+ifneq ($(strip $(7)),noremove)
+	echo "Calling from package.mk clean-dev"
+	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PARENT}/pkg/$(1)'; \
 	fi
+endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))

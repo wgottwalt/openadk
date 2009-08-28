@@ -12,3 +12,11 @@ config ADK_PACKAGE_LIBLTDL
 	  
 	  http://www.gnu.org/software/libtool/
 
+config ADK_PACKAGE_LIBTOOL
+	prompt "libtool........................... Libtool"
+	tristate
+	default n
+	select ADK_COMPILE_LIBTOOL
+	help
+	  http://www.gnu.org/software/libtool/
+

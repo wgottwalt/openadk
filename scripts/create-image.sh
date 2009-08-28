@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 grubinstall=1
 
@@ -30,7 +30,7 @@ fi
 printf "Checking if grub is installed"
 grub=$(which grub)
 
-if [ -x $grub ];then
+if [ ! -z $grub -a -x $grub ];then
 	printf "...okay\n"
 else
 	printf "...failed\n"
@@ -40,7 +40,7 @@ fi
 printf "Checking if parted is installed"
 parted=$(which parted)
 
-if [ -x $parted ];then
+if [ ! -z $parted -a -x $parted ];then
 	printf "...okay\n"
 else
 	printf "...failed\n"
@@ -50,7 +50,7 @@ fi
 printf "Checking if qemu-img is installed"
 qimg=$(which qemu-img)
 
-if [ -x $qimg ];then
+if [ ! -z $qimg -a -x $qimg ];then
 	printf "...okay\n"
 else
 	printf "...failed\n"

@@ -7,10 +7,11 @@ include ${TOPDIR}/toolchain/gcc/Makefile.inc
 PKG_DESCR:=		GNU compiler collection
 PKG_SECTION:=		comp
 PKG_DEPENDS:=		mpfr
+PKG_OPTS:=		noremove
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''
@@ -46,7 +47,6 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 else
 	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GCC}/usr/lib
 endif
-	rm ${IDIR_GCC}/usr/lib/gcc/*/*/crtendS.o
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/include-fixed
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 

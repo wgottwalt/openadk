@@ -1,0 +1,6 @@
+config ADK_PACKAGE_M4
+	prompt "m4.............................. macro processor"
+	tristate
+	default n
+	help
+	  http://www.gnu.org/software/m4/

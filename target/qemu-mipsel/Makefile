@@ -16,8 +16,9 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -n qemu-mips.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Be sure to change permissions after image creation."
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-mipsel -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -hda qemu-mips.img -append="root=/dev/hda1 init=/init"'
+	@echo 'qemu-system-mipsel -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -hda qemu-mips.img -append "root=/dev/hda1"'
 endif
 
 ifeq ($(FS),initramfs)

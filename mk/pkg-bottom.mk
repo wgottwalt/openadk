@@ -109,19 +109,19 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
-#ifneq ($(filter confprog,${INSTALL_STYLE}),)
 	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
-#endif
 	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
-	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+ifneq ($(strip ${PKG_OPTS}),noremove)
+	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
 	fi
+endif
 	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
 	@cd ${WRKINST}; \
 	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
@@ -144,6 +144,7 @@ endif
 		echo "scripts/$$(basename "$$fn")" \
 		    >>'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
 	done
+	echo "calling from pkg-bottom.mk"
 	touch $@
 
 ${_IPKGS_COOKIE}:
@@ -195,10 +196,12 @@ package: ${ALL_IPKGS}
 clean-targets: clean-dev-generic
 
 clean-dev-generic:
-	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+ifneq ($(strip ${PKG_OPTS}),noremove)
+	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
 	fi
+endif
 	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'

@@ -4,6 +4,7 @@ config ADK_PACKAGE_GIT
 	select ADK_PACKAGE_LIBOPENSSL
 	select ADK_PACKAGE_LIBCURL
 	select ADK_PACKAGE_LIBEXPAT
+	select ADK_PACKAGE_LIBPTHREAD
 	default n
 	help
 	  Fast version control system.
