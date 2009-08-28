@@ -15,6 +15,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
@@ -58,7 +59,7 @@ post-install:
 	# libcurses will not show up in the IPKG, only in STAGING_DIR
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so.* \
+	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
 	for f in a/ansi d/dumb l/linux r/rxvt s/screen v/vt100 v/vt102 \
 	    v/vt220 w/wsvt25 x/xterm x/xterm-color x/xterm-xfree86; do \
@@ -67,5 +68,7 @@ post-install:
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$f; \
 	done
+	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBNCURSES_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -7,25 +7,25 @@ menu "Archival Utilities"
 
 config BUSYBOX_FEATURE_SEAMLESS_LZMA
 	bool "Make tar, rpm, modprobe etc understand .lzma data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .lzma data.
 
 config BUSYBOX_FEATURE_SEAMLESS_BZ2
 	bool "Make tar, rpm, modprobe etc understand .bz2 data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .bz2 data.
 
 config BUSYBOX_FEATURE_SEAMLESS_GZ
 	bool "Make tar, rpm, modprobe etc understand .gz data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .gz data.
 
 config BUSYBOX_FEATURE_SEAMLESS_Z
 	bool "Make tar and gunzip understand .Z data"
-	default n
+	default y
 	help
 	  Make tar and gunzip understand .Z data.
 
@@ -78,6 +78,7 @@ config BUSYBOX_BUNZIP2
 config BUSYBOX_BZIP2
 	bool "bzip2"
 	default n
+	depends on !ADK_PACKAGE_BZIP2
 	help
 	  bzip2 is a compression utility using the Burrows-Wheeler block
 	  sorting text compression algorithm, and Huffman coding. Compression
@@ -174,6 +175,7 @@ config BUSYBOX_RPM2CPIO
 
 config BUSYBOX_RPM
 	bool "rpm"
+	depends on !ADK_PACKAGE_RPM
 	default n
 	help
 	  Mini RPM applet - queries and extracts RPM packages.
@@ -181,6 +183,7 @@ config BUSYBOX_RPM
 config BUSYBOX_TAR
 	bool "tar"
 	default y
+	depends on !ADK_PACKAGE_TAR
 	help
 	  tar is an archiving program. It's commonly used with gzip to
 	  create compressed archives. It's probably the most widely used

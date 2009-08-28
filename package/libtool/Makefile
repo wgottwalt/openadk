@@ -14,6 +14,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
 
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE=	gnu
@@ -23,5 +24,8 @@ INSTALL_STYLE=		auto
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBLTDL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libltdl.so.* ${IDIR_LIBLTDL}/usr/lib/
+	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/libtool ${IDIR_LIBTOOL}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/libtoolize ${IDIR_LIBTOOL}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

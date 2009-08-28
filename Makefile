@@ -4,6 +4,7 @@
 ADKVERSION=	0.1.0
 export ADKVERSION
 
+CC=		gcc
 GMAKE?=		$(PWD)/scripts/make
 GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
 GMAKE_INV=	${GMAKE_FMK} --no-print-directory

@@ -14,3 +14,12 @@ config ADK_PACKAGE_LIBNCURSES
 	  
 	  http://www.gnu.org/software/ncurses/
 
+config ADK_PACKAGE_LIBNCURSES_DEV
+	prompt "libncurses-dev.................. Ncurses development package"
+	tristate
+	default n
+	depends on ADK_PACKAGE_LIBNCURSES
+	select ADK_COMPILE_NCURSES
+	help
+	  A terminal handling library
+

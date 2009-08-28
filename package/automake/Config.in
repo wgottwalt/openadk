@@ -1,0 +1,6 @@
+config ADK_PACKAGE_AUTOMAKE
+	prompt "automake.......................... Automake"
+	tristate
+	default n
+	help
+	  http://www.gnu.org/software/automake/

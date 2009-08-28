@@ -7,3 +7,13 @@ config ADK_PACKAGE_ZLIB
 	  
 	  http://www.zlib.net/
 
+config ADK_PACKAGE_ZLIB_DEV
+	prompt "zlib-dev........................ Zlib development files"
+	tristate
+	depends on ADK_PACKAGE_ZLIB
+	default n
+	help
+	  A library implementing the 'deflate' compression method
+	  http://www.zlib.net/
+
+

@@ -34,6 +34,17 @@ config ADK_KPACKAGE_KMOD_NE2K_PCI
 	help
 	  NE2000 pci driver
 
+config ADK_KPACKAGE_KMOD_PCNET32
+	prompt "kmod-net-pcnet32.............. AMD PCNet32 PCI driver"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	tristate
+	default n
+	help
+	  AMD PCnet32 driver
+
 config ADK_KPACKAGE_KMOD_E100
 	prompt "kmod-net-e100................. Intel(R) PRO/100+ driver"
 	select ADK_KERNEL_NETDEVICES

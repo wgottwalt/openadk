@@ -6,12 +6,13 @@ include $(TOPDIR)/toolchain/uClibc/Makefile.inc
 
 PKG_DESCR:=		embedded C library
 PKG_SECTION:=		base
-
-NO_DISTFILES:=1
+NO_DISTFILES:=		1
+PKG_OPTS:=		noremove
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 # do nothing, uClibc is already build in toolchain directory
 do-install:
@@ -31,5 +32,15 @@ do-install:
 	cd $(IDIR_UCLIBC)/lib && ln -sf ld-uClibc.so.0 ld.so
 	cd $(IDIR_UCLIBC)/lib && ln -sf libc.so.0 libc.so
 	cd $(IDIR_UCLIBC)/lib && ln -sf libgcc_s.so.1 libgcc_s.so
+	# header package
+	${INSTALL_DIR} $(IDIR_UCLIBC_DEV)/usr/include/{sys,bits}
+	for file in alloca stdint locale ctype stdlib string sgidefs \
+		libintl sched pthread wchar _G_config getopt endian \
+		features libio stdio error signal time unistd;do \
+			${CP} $(STAGING_DIR)/usr/include/$$file.h \
+			$(IDIR_UCLIBC_DEV)/usr/include; \
+	done
+	${CP} $(STAGING_DIR)/usr/include/sys/*.h $(IDIR_UCLIBC_DEV)/usr/include/sys
+	${CP} $(STAGING_DIR)/usr/include/bits/*.h $(IDIR_UCLIBC_DEV)/usr/include/bits
 
 include ${TOPDIR}/mk/pkg-bottom.mk
