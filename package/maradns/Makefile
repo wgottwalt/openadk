@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		maradns
-PKG_VERSION:=		1.0.41
+PKG_VERSION:=		1.3.07.09
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9abc13da25c1103d788ee9def1c8e764
+PKG_MD5SUM:=		1d221438fb4d9317263555262b9c652c
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.maradns.org
-PKG_SITES:=		http://www.maradns.org/download/1.0/
+PKG_SITES:=		http://www.maradns.org/download/1.3/${PKG_VERSION}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
