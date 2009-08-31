@@ -252,6 +252,8 @@ source "package/fakeidentd/Config.in"
 source "package/gkrellmd/Config.in"
 source "package/git/Config.in"
 source "package/net-snmp/Config.in"
+# intentionally inserted here, as it depends on the above
+source "package/iptables-snmp/Config.in"
 source "package/nut/Config.in"
 source "package/openldap/Config.in"
 source "package/p910nd/Config.in"

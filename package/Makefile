@@ -152,6 +152,7 @@ package-$(ADK_COMPILE_IPROUTE2) += iproute2
 package-$(ADK_PACKAGE_IPSEC_TOOLS) += ipsec-tools
 package-$(ADK_PACKAGE_IPSET) += ipset
 package-$(ADK_COMPILE_IPTABLES) += iptables
+package-$(ADK_PACKAGE_IPTABLES_SNMP) += iptables-snmp
 package-$(ADK_PACKAGE_IPTRAF) += iptraf
 package-$(ADK_PACKAGE_IRSSI) += irssi
 package-$(ADK_PACKAGE_IW) += iw
