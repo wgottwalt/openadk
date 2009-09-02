@@ -45,6 +45,7 @@ image-prepare-post:
 INITRAMFS=	${DEVICE}-${ARCH}-${FS}
 ROOTFSSQUASHFS=	${DEVICE}-${ARCH}-${FS}.img
 ROOTFSTARBALL=	${DEVICE}-${ARCH}-${FS}.tar.gz
+INITRAMFS_PIGGYBACK=	${DEVICE}-${ARCH}-${FS}.cpio
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
@@ -52,6 +53,10 @@ ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
 	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc | gzip -n9 >$@
+
+${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
+	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
+	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc >$@
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	PATH='${TARGET_PATH}' \
@@ -64,4 +69,4 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 		bs=4063232 conv=sync $(MAKE_TRACE)
 
 imageclean:
-	rm -f $(BIN_DIR)/$(DEVICE)-*
+	rm -f $(BIN_DIR)/$(DEVICE)-* ${BUILD_DIR}/$(DEVICE)-*

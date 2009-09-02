@@ -49,6 +49,20 @@ config ADK_KERNEL_BLK_DEV_DM
 	boolean
 	default n
 
+config ADK_KERNEL_ATA
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_SATA_AHCI
+	prompt "kmod-sata-ahci.................... AHCI SATA driver"
+	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_ATA
+	select ADK_KPACKAGE_KMOD_BLK_DEV_SD
+	default n
+	help
+	  Enables support for AHCI Serial ATA.
+
 #config ADK_KERNEL_IDE
 #	boolean
 #	default n

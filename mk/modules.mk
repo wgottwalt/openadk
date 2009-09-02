@@ -2,6 +2,13 @@
 # material, please see the LICENCE file in the top-level directory.
 
 #
+# Serial ATA devices
+#
+$(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\
+	$(MODULES_DIR)/kernel/drivers/ata/ahci \
+,10))
+
+#
 # Ethernet network devices
 # 
 $(eval $(call KMOD_template,NE2K_PCI,ne2k-pci,\
@@ -16,6 +23,11 @@ $(eval $(call KMOD_template,E100,e100,\
 $(eval $(call KMOD_template,E1000,e1000,\
 	$(MODULES_DIR)/kernel/drivers/net/e1000/e1000 \
 ,20))
+
+$(eval $(call KMOD_template,SKY2,sky2,\
+	$(MODULES_DIR)/kernel/drivers/net/sky2 \
+,20))
+
 
 # 
 # Wireless network devices

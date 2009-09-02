@@ -6,6 +6,10 @@ config ADK_KERNEL_RD_LZMA
 	bool
 	default n
 
+config ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+	bool
+	default n
+
 config ADK_KERNEL_INITRAMFS_SOURCE
 	string
 	default ""

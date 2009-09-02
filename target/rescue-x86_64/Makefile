@@ -9,9 +9,27 @@ include $(TOPDIR)/mk/image.mk
 
 kernel-install:
 
+createinit:
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.lzma
+	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' $(LINUX_DIR)/.config
+	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
+	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
+	echo 'CONFIG_INITRAMFS_COMPRESSION_LZMA=y' >> $(LINUX_DIR)/.config
+	echo N |$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/x86/boot/bzImage \
+		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+endif
+
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 endif

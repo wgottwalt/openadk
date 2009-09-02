@@ -164,6 +164,7 @@ config ADK_LINUX_XSCALE_ZAURUS
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
+	select ADK_KERNEL_INPUT_KEYBOARD
 	help
 	 Rescuesystem with can be used to Boot from Disk or USB stick.
 
@@ -184,7 +185,6 @@ depends on ADK_LINUX_RESCUE
 config ADK_LINUX_X86_64_RESCUE
 	bool "x86_64"
 	select ADK_rescue_x86_64
-	select ADK_LINUX_64
 	help
 	 X86 architecture.
 
@@ -368,6 +368,20 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_NATIVE || \
 		ADK_LINUX_RESCUE
 	select ADK_KERNEL_BLK_DEV_INITRD
+	help
+	  create an read-only initramfs system.
+
+config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
+	bool "initramfs filesystem included into kernel image"
+	select ADK_LINUX_INITRAMFS_BUILTIN
+	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_CRIS_QEMU || \
+		ADK_LINUX_MIPS_QEMU || \
+		ADK_LINUX_MIPSEL_QEMU || \
+		ADK_LINUX_MIPS64_QEMU || \
+		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_NATIVE || \
+		ADK_LINUX_RESCUE
 	help
 	  create an read-only initramfs system.
 

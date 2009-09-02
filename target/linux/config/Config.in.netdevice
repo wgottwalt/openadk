@@ -69,6 +69,15 @@ config ADK_KPACKAGE_KMOD_E1000
 
 	  <http://support.intel.com/support/network/adapter/pro100/21397.htm>
 
+config ADK_KPACKAGE_KMOD_SKY2
+	prompt "kmod-net-sky2................. Marvell Yukon driver"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NETDEV_1000
+	tristate
+	default n
+	help
+
 endmenu
 
 config ADK_KERNEL_WIRELESS

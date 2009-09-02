@@ -4,6 +4,7 @@
 include ${TOPDIR}/rules.mk
 
 CP=cp -fpR
+HOSTCFLAGS+=-DKBUILD_NO_NLS
 
 all: ncurses conf mconf
 
