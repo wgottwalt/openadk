@@ -245,6 +245,7 @@ package-$(ADK_PACKAGE_MAKE) += make
 package-$(ADK_PACKAGE_MARADNS) += maradns
 package-$(ADK_PACKAGE_MGETTY) += mgetty
 package-$(ADK_PACKAGE_MC) += mc
+package-$(ADK_PACKAGE_MDADM) += mdadm
 package-$(ADK_PACKAGE_MIAU) += miau
 package-$(ADK_PACKAGE_MIAX) += miax
 package-$(ADK_PACKAGE_MICROPERL) += microperl
