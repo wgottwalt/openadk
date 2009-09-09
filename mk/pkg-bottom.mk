@@ -151,7 +151,6 @@ endif
 		echo "scripts/$$(basename "$$fn")" \
 		    >>'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
 	done
-	echo "calling from pkg-bottom.mk"
 	touch $@
 
 ${_IPKGS_COOKIE}:
