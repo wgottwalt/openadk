@@ -17,6 +17,41 @@ config ADK_HAVE_DOT_CONFIG
 
 menu "ADK settings"
 
+config ADK_DEVELSYSTEM
+	bool "Compile a ADK development system"
+	default n
+	select ADK_CXX
+	select ADK_PACKAGE_AUTOCONF
+	select ADK_PACKAGE_AUTOMAKE
+	select ADK_PACKAGE_BASH
+	select ADK_PACKAGE_BINUTILS
+	select ADK_PACKAGE_BISON
+	select ADK_PACKAGE_BZIP2
+	select ADK_PACKAGE_DIFFUTILS
+	select ADK_PACKAGE_FILE
+	select ADK_PACKAGE_FLEX
+	select ADK_PACKAGE_GAWK
+	select ADK_PACKAGE_GCC
+	select ADK_PACKAGE_GIT
+	select ADK_PACKAGE_GPERF
+	select ADK_PACKAGE_UCLIBC_DEV if ADK_TARGET_LIB_UCLIBC
+	select ADK_PACKAGE_EGLIBC_DEV if ADK_TARGET_LIB_EGLIBC
+	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
+	select ADK_PACKAGE_LIBNCURSES
+	select ADK_PACKAGE_LIBNCURSES_DEV
+	select ADK_PACKAGE_LIBTOOL
+	select ADK_PACKAGE_M4
+	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_PATCH
+	select ADK_PACKAGE_TAR
+	select ADK_PACKAGE_ZLIB
+	select ADK_PACKAGE_ZLIB_DEV
+	help
+	  After bootstrapping a Linux system you might want to
+	  switch to native builds with your target. 
+	  If you choose this option, all necessary software needed
+	  for native building will be selected.
+
 config ADK_MAKE_JOBS
 	int
 	default 1 if ! ADK_MAKE_PARALLEL

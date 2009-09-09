@@ -58,7 +58,11 @@ world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg/ADK_H
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
+ifeq ($(ADK_TOOLCHAIN_ONLY),y)
+	$(MAKE) -f mk/build.mk toolchain/install package/compile
+else
 	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+endif
 endif
 
 package_index:

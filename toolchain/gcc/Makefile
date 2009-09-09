@@ -22,11 +22,16 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--enable-target-optspace \
 			--with-gnu-ld \
 			--disable-libmudflap \
-			--disable-sjlj-exceptions \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-multilib \
 			--disable-nls 
+
+ifeq ($(ADK_LINUX_ARM_TOMTOM),y)
+GCC_CONFOPTS+=		--enable-sjlj-exceptions
+else
+GCC_CONFOPTS+=		--disable-sjlj-exceptions
+endif
 
 ifeq ($(ADK_SSP),y)
 GCC_CONFOPTS+=		--enable-libssp

@@ -5,7 +5,13 @@
 config ADK_BROKEN
 	bool
 
+config ADK_TOOLCHAIN_ONLY
+	bool
+
 config ADK_DEVICE_NO_FPU
+	bool
+
+config ADK_EABI
 	bool
 
 config ADK_LINUX_64
@@ -47,6 +53,9 @@ config ADK_rb433
 config ADK_zaurus
 	tristate
 
+config ADK_tomtom
+	tristate
+
 config ADK_foxboard
 	tristate
 
@@ -66,6 +75,9 @@ config ADK_rescue_mipsel
 	tristate
 
 config ADK_wag54g
+	tristate
+
+config ADK_shuttle
 	tristate
 
 config ADK_DEVICE
@@ -89,6 +101,8 @@ config ADK_DEVICE
 	default "rescue-x86_64"  if ADK_rescue_x86_64
 	default "rescue-mips"  if ADK_rescue_mips
 	default "rescue-mipsel"  if ADK_rescue_mipsel
+	default "shuttle"  if ADK_shuttle
+	default "tomtom"  if ADK_tomtom
 
 menu "Target system"
 
@@ -153,14 +167,25 @@ config ADK_LINUX_MIPS_WAG54G
 	  Linksys WAG54G DSL router with Wireless
 	  TI AR7 platform
 
-
-config ADK_LINUX_XSCALE_ZAURUS
-	bool "Zaurus SL-C3200"
-	depends on ADK_BROKEN
-	select ADK_zaurus
+config ADK_LINUX_ARM_TOMTOM
+	bool "TomTom Applications"
+	select ADK_tomtom
 	select ADK_DEVICE_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
 	help
-	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
+	 Support for TomTom Rider 2 (or others).
+	 Just toolchain support to cross-compile your own
+	 applications.
+
+
+#config ADK_LINUX_XSCALE_ZAURUS
+#	bool "Zaurus SL-C3200"
+#	depends on ADK_BROKEN
+#	select ADK_zaurus
+#	select ADK_DEVICE_NO_FPU
+#	help
+#	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
@@ -175,6 +200,24 @@ config ADK_LINUX_QEMU
 	select ADK_KERNEL_NET_ETHERNET
 	help
 	 Support for Qemu Emulator
+
+config ADK_LINUX_X86_64_SHUTTLE
+	bool "Shuttle PC"
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_shuttle
+	select ADK_KPACKAGE_KMOD_SKY2
+	select ADK_KPACKAGE_KMOD_SATA_AHCI
+	select ADK_KPACKAGE_KMOD_XFS_FS
+	select ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	select ADK_KPACKAGE_KMOD_MD_RAID0
+	select ADK_KPACKAGE_KMOD_MD_RAID1
+	help
+	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
+	  Known as OpenADK multi operating system buildserver.
+	  System is on RAID1, kvm guests are on RAID1.
 
 endchoice
 
@@ -333,6 +376,8 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
+		ADK_LINUX_X86_64_SHUTTLE || \
+		ADK_LINUX_ARM_TOMTOM || \
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.eglibc.org
@@ -347,14 +392,25 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_RESCUE || \
+		ADK_LINUX_X86_64_SHUTTLE || \
+		ADK_LINUX_ARM_TOMTOM || \
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.gnu.org/libc
 
 endchoice
 
+config ADK_TARGET_SUFFIX
+	string
+	default "gnueabi" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABI
+	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
+	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
+	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
+
+
 choice
 prompt "Target Firmware type"
+	depends on !ADK_TOOLCHAIN_ONLY
 	default ADK_TARGET_ROOTFS_EXT2_CF
 
 config ADK_TARGET_ROOTFS_INITRAMFS
@@ -428,14 +484,14 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	  Use this option if you have a compact flash
 	  inside your hardware and want to boot from it.
 
-config ADK_TARGET_ROOTFS_EXT2
-	bool "Ext2 read-write filesystem"
+config ADK_TARGET_ROOTFS_ARCHIVE
+	bool "Archive usable for different filesystems"
 	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
-		ADK_LINUX_MIPS64_LEMOTE
-	select ADK_KERNEL_EXT2_FS
+		ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_X86_64_SHUTTLE
 	help
-	  Use this option if your rootfs is ext2.
+	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
 config ADK_TARGET_ROOTFS_ENCRYPTED
 	bool "Encrypted read-write root filesystem"
@@ -514,39 +570,5 @@ config ADK_X11
 	  Try to compile other packages with X11 support. 
 	  (f.e. mplayer)
 
-config ADK_DEVELSYSTEM
-	bool "Compile a OpenADK development system"
-	default n
-	select ADK_CXX
-	select ADK_PACKAGE_AUTOCONF
-	select ADK_PACKAGE_AUTOMAKE
-	select ADK_PACKAGE_BASH
-	select ADK_PACKAGE_BINUTILS
-	select ADK_PACKAGE_BISON
-	select ADK_PACKAGE_BZIP2
-	select ADK_PACKAGE_DIFFUTILS
-	select ADK_PACKAGE_FILE
-	select ADK_PACKAGE_FLEX
-	select ADK_PACKAGE_GAWK
-	select ADK_PACKAGE_GCC
-	select ADK_PACKAGE_GIT
-	select ADK_PACKAGE_GPERF
-	select ADK_PACKAGE_UCLIBC_DEV if ADK_TARGET_LIB_UCLIBC
-	select ADK_PACKAGE_EGLIBC_DEV if ADK_TARGET_LIB_EGLIBC
-	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
-	select ADK_PACKAGE_LIBNCURSES
-	select ADK_PACKAGE_LIBNCURSES_DEV
-	select ADK_PACKAGE_LIBTOOL
-	select ADK_PACKAGE_M4
-	select ADK_PACKAGE_MAKE
-	select ADK_PACKAGE_PATCH
-	select ADK_PACKAGE_TAR
-	select ADK_PACKAGE_ZLIB
-	select ADK_PACKAGE_ZLIB_DEV
-	help
-	  After bootstrapping a Linux system you might want to
-	  switch to native builds with your target. 
-	  If you choose this option, all necessary software needed
-	  for native building will be selected.
 
 endmenu

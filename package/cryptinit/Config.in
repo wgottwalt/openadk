@@ -1,5 +1,5 @@
 config ADK_PACKAGE_CRYPTINIT
-	prompt "cryptinit............................. crypt initramfs application"
+	prompt "cryptinit............................ crypt initramfs application"
 	tristate
 	default n
 	help

@@ -1,14 +1,14 @@
 config ADK_PACKAGE_BASE_FILES
 	prompt "base-files........................... basic filesystem layout"
 	bool
-	default y
+	default y if !ADK_TOOLCHAIN_ONLY
 	help
 	  Basic filesystem layout.
 
 config ADK_PACKAGE_CONFIG_IN_ETC
 	prompt ".config in /etc...................... include gzipped version of .config in image"
 	bool
-	default y
+	default y if !ADK_TOOLCHAIN_ONLY
 	help
 	  Copy the configuration file (.config) to the image.  The
 	  file will be found in /etc/adkconfig.gz. This takes about

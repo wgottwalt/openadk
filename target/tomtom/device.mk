@@ -1,0 +1,7 @@
+ARCH:=			arm
+CPU_ARCH:=		armel
+KERNEL_VERSION:=	2.6.30.5
+KERNEL_RELEASE:=	1
+KERNEL_MD5SUM:=		be9c3a697a54ac099c910d068ff0dc03
+TARGET_OPTIMIZATION:=	-Os -pipe
+TARGET_CFLAGS_ARCH:=    -march=armv4t -msoft-float

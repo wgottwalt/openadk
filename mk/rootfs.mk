@@ -14,7 +14,7 @@ endif
 
 $(eval $(call rootfs_template,ext2-cf,EXT2_CF,$(ROOTFS)))
 $(eval $(call rootfs_template,ext2-mmc,EXT2_MMC))
-$(eval $(call rootfs_template,ext2,EXT2))
+$(eval $(call rootfs_template,archive,ARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
 $(eval $(call rootfs_template,squashfs,SQUASHFS))
