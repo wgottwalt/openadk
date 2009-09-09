@@ -174,7 +174,6 @@ endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
 	    '$${STAGING_DIR}/scripts'
 ifneq ($(strip $(7)),noremove)
-	echo "Calling from package.mk"
 	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
@@ -215,7 +214,6 @@ clean-targets: clean-dev-$(1)
 
 clean-dev-$(1):
 ifneq ($(strip $(7)),noremove)
-	echo "Calling from package.mk clean-dev"
 	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \

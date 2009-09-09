@@ -25,5 +25,5 @@ ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-mipsel -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "init=/init"'
+	@echo 'qemu-system-mipsel -nographic -M malta -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
