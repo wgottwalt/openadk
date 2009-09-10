@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.6.4.1
+PKG_VERSION:=		1.6.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d16be619150bdab188ba2c269472f496
+PKG_MD5SUM:=		d7732d13a227d89f05122d230c5c8048
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		openssl curl
@@ -27,6 +27,9 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/sbin/git-core
+	$(INSTALL_DIR) $(IDIR_GIT)/usr/share/git-core/templates
+	$(CP) $(WRKINST)/usr/share/git-core/templates/* \
+		$(IDIR_GIT)/usr/share/git-core/templates
 	$(CP) $(WRKINST)/usr/bin/git $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-shell $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-receive-pack $(IDIR_GIT)/usr/bin
