@@ -1,0 +1,8 @@
+config ADK_PACKAGE_GRUB_BIN
+	prompt "grub-bin............................. GRUB 2 bootloader (binary)"
+	tristate
+	depends on ADK_LINUX_X86_64_SHUTTLE
+	select BUSYBOX_FEATURE_STAT_FORMAT
+	default y if ADK_LINUX_X86_64_SHUTTLE
+	help
+
