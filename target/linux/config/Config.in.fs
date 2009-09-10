@@ -17,6 +17,10 @@ config ADK_KPACKAGE_KMOD_EXPORTFS
 	default n
 	help
 
+config ADK_KERNEL_EXT2_FS
+	boolean
+	default n
+
 config ADK_KPACKAGE_KMOD_EXT2_FS
 	prompt "kmod-fs-ext2...................... EXT2 filesystem support"
 	tristate
@@ -26,9 +30,14 @@ config ADK_KPACKAGE_KMOD_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
+config ADK_KERNEL_EXT3_FS
+	boolean
+	default n
+
 config ADK_KPACKAGE_KMOD_EXT3_FS
 	prompt "kmod-fs-ext3...................... EXT3 filesystem support"
 	tristate
+	depends on !ADK_KERNEL_EXT3_FS
 	default n
 	help
 	  This is the journalling version of the Second extended file system
@@ -53,6 +62,19 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 	  file systems, use chattr ("man chattr").  You need to be using
 	  e2fsprogs version 1.20 or later in order to create ext3 journals
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
+
+config ADK_KERNEL_EXT4_FS
+	boolean
+	select ADK_KERNEL_CRC16
+	default n
+
+config ADK_KPACKAGE_KMOD_EXT4_FS
+	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
+	tristate
+	depends on !ADK_KERNEL_EXT4_FS
+	select ADK_KPACKAGE_KMOD_CRC16
+	default n
+	help
 
 config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	prompt "kmod-fs-hfsplus................... HFS+ filesystem support"
