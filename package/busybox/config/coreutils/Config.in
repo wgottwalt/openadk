@@ -572,7 +572,7 @@ config BUSYBOX_FEATURE_SPLIT_FANCY
 
 config BUSYBOX_STAT
 	bool "stat"
-	default n
+	default y
 	help
 	  display file or filesystem status.
 

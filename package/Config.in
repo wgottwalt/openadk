@@ -15,6 +15,7 @@ source "package/glibc/Config.in"
 source "package/eglibc/Config.in"
 source "package/libc/Config.in"
 source "package/rpm/Config.in"
+source "package/grub-bin/Config.in"
 endmenu
 
 menu "Bluetooth"

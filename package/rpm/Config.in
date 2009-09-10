@@ -1,5 +1,5 @@
 config ADK_PACKAGE_RPM
-	prompt "rpm............................... Red Hat package manager"
+	prompt "rpm.................................. Red Hat package manager"
 	tristate
 	depends on ADK_CXX
 	select ADK_PACKAGE_NSS

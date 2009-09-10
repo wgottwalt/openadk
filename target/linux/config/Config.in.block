@@ -53,12 +53,20 @@ config ADK_KERNEL_ATA
 	boolean
 	default n
 
+config ADK_KERNEL_SATA_AHCI
+	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	default n	
+
 config ADK_KPACKAGE_KMOD_SATA_AHCI
 	prompt "kmod-sata-ahci.................... AHCI SATA driver"
 	tristate
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
 	select ADK_KPACKAGE_KMOD_BLK_DEV_SD
+	depends on !ADK_KERNEL_SATA_AHCI
 	default n
 	help
 	  Enables support for AHCI Serial ATA.
@@ -202,16 +210,32 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 	  <http://www.tldp.org/docs.html#howto>. Also make sure to say
 	  Y or M to "ISO 9660 CD-ROM file system support" later.
 
+config ADK_KERNEL_BLK_DEV_MD
+	tristate
+	select ADK_KERNEL_MD
+	default n
+
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	prompt "kmod-md........................... RAID support"
 	tristate
+	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
+	help
+
+config ADK_KERNEL_MD_RAID0
+	tristate
+	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID0
 	prompt "kmod-md-raid0..................... RAID0 support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	help
+
+config ADK_KERNEL_MD_RAID1
+	tristate
+	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID1
