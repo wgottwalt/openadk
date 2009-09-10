@@ -440,8 +440,13 @@ INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
 all: compile
 clean: $(patsubst %,%-clean,$(package-) $(package-y) $(package-m) base-files)
+ifeq ($(ADK_TOOLCHAIN_ONLY),y)
+compile: $(COMPILE_PACKAGES)
+install: $(INSTALL_PACKAGES)
+else
 compile: base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
+endif
 download: $(DOWNLOAD)
 
 $(COMPILE_PACKAGES): base-files-compile
