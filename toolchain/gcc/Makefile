@@ -25,13 +25,14 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-multilib \
+			--disable-sjlj-exceptions \
 			--disable-nls 
 
-ifeq ($(ADK_LINUX_ARM_TOMTOM),y)
-GCC_CONFOPTS+=		--enable-sjlj-exceptions
-else
-GCC_CONFOPTS+=		--disable-sjlj-exceptions
-endif
+#ifeq ($(ADK_LINUX_ARM_TOMTOM),y)
+#GCC_CONFOPTS+=		--enable-sjlj-exceptions
+#else
+#GCC_CONFOPTS+=		--disable-sjlj-exceptions
+#endif
 
 ifeq ($(ADK_SSP),y)
 GCC_CONFOPTS+=		--enable-libssp
