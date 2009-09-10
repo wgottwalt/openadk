@@ -786,6 +786,12 @@ $(eval $(call KMOD_template,EXT3_FS,fs-ext3,\
 	$(MODULES_DIR)/kernel/fs/ext3/ext3 \
 ,30))
 
+$(eval $(call KMOD_template,EXT4_FS,fs-ext4,\
+	$(MODULES_DIR)/kernel/fs/mbcache \
+	$(MODULES_DIR)/kernel/fs/jbd2/jbd2 \
+	$(MODULES_DIR)/kernel/fs/ext4/ext4 \
+,30))
+
 $(eval $(call KMOD_template,FUSE_FS,fs-fuse,\
 	$(MODULES_DIR)/kernel/fs/fuse/fuse \
 ,30))
@@ -1288,6 +1294,10 @@ $(eval $(call KMOD_template,CRC_CCITT,crc-ccitt, \
 
 $(eval $(call KMOD_template,CRC_ITU_T,crc-itu-t, \
 	$(MODULES_DIR)/kernel/lib/crc-itu-t \
+,01))
+
+$(eval $(call KMOD_template,CRC16,crc16, \
+	$(MODULES_DIR)/kernel/lib/crc16 \
 ,01))
 
 $(eval $(call KMOD_template,CRC32,crc32, \

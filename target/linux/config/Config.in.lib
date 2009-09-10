@@ -1,5 +1,9 @@
 menu "Library Routines"
 
+config ADK_KERNEL_CRC16
+	bool
+	default n
+
 config ADK_KERNEL_CRC32
 	bool
 	default n
@@ -13,6 +17,13 @@ config ADK_KPACKAGE_KMOD_CRC_ITU_T
 	  modules require CRC ITU-T V.41 functions, but a module built outside
 	  the kernel tree does. Such modules that use library CRC ITU-T V.41
 	  functions require M here.
+
+config ADK_KPACKAGE_KMOD_CRC16
+	prompt "kmod-crc16.......................... provide CRC16 library functions"
+	tristate
+        depends on ! ADK_KERNEL_CRC16
+	default n
+	help
 
 config ADK_KPACKAGE_KMOD_CRC32
 	prompt "kmod-crc32.......................... provide CRC32 library functions"

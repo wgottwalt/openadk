@@ -92,7 +92,4 @@ config ADK_KERNEL_SUNRPC
 #	boolean
 #	default n
 
-config ADK_KERNEL_EXT2_FS
-	boolean
-	default n
 
