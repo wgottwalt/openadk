@@ -363,7 +363,7 @@ depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
-	depends on !ADK_LINUX_MIPS64_LEMOTE
+	#depends on !ADK_LINUX_MIPS64_LEMOTE
 	help
  	 http://uclibc.org
 

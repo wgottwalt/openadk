@@ -10,14 +10,14 @@ include $(TOPDIR)/mk/image.mk
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 kernel-install:
-	$(KERNEL_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
 		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
 
 createinit:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(KERNEL_CROSS)" ARCH=$(ARCH) \
+	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
 	$(CP) $(LINUX_DIR)/arch/mips/loongson/image/vmlinuz \
 		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
