@@ -121,7 +121,7 @@ endif
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
 	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
-ifneq ($(strip ${PKG_OPTS}),noremove)
+ifeq (,$(filter noremove,${PKG_OPTS}))
 	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
@@ -143,7 +143,10 @@ endif
 	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
-	done; grep 'usr/s*bin/' '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
+	done
+ifeq (,$(filter noscripts,${PKG_OPTS}))
+	@cd '${STAGING_DIR}'; grep 'usr/s*bin/' \
+	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
 	    while read fn; do \
 		b="$$(dd if="$$fn" bs=2 count=1 2>/dev/null)"; \
 		[[ $$b = '#!' ]] || continue; \
@@ -151,6 +154,7 @@ endif
 		echo "scripts/$$(basename "$$fn")" \
 		    >>'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
 	done
+endif
 	touch $@
 
 ${_IPKGS_COOKIE}:
@@ -202,7 +206,7 @@ package: ${ALL_IPKGS}
 clean-targets: clean-dev-generic
 
 clean-dev-generic:
-ifneq ($(strip ${PKG_OPTS}),noremove)
+ifeq (,$(filter noremove,${PKG_OPTS}))
 	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
