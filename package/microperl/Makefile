@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		microperl
 PKG_VERSION:=		5.10.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d2c39b002ebfd2c3c5dba589365c5a71
 PKG_DESCR:=		Perl without operating-specific functions
 PKG_SECTION:=		net
@@ -26,8 +26,11 @@ BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}" OPTIMIZE="${TCFLAGS}"
 MAKE_FILE:=		Makefile.micro
 
+pre-configure:
+	$(CP) ./files/uconfig.h.$(CPU_ARCH) $(WRKBUILD)/uconfig.h
+
 do-install:
 	${INSTALL_DIR} ${IDIR_MICROPERL}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/microperl ${IDIR_MICROPERL}/usr/bin/
+	${INSTALL_BIN} ${WRKBUILD}/microperl ${IDIR_MICROPERL}/usr/bin/perl
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -105,6 +105,7 @@ libtirpc-compile: libgssglue-compile
 endif
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
+libvirt-compile: libxml2-compile gnutls-compile
 libfontenc-compile: xproto-compile zlib-compile
 libICE-compile: xtrans-compile
 libSM-compile: libICE-compile

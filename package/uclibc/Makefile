@@ -19,34 +19,27 @@ do-install:
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	echo 'CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00' > $(IDIR_UCLIBC)/etc/TZ
-	$(CP) $(STAGING_DIR)/lib/libgcc_s.so.* $(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libuClibc-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib/
 	-for file in libcrypt libdl libm libnsl libresolv librt libutil; do \
-		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_UCLIBC)/lib/; \
+		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/; \
 	done
-	# create links for ldd / gcc
-	cd $(IDIR_UCLIBC)/lib && ln -sf ld-uClibc.so.0 ld.so
-	cd $(IDIR_UCLIBC)/lib && ln -sf libc.so.0 libc.so
-	cd $(IDIR_UCLIBC)/lib && ln -sf libgcc_s.so.1 libgcc_s.so
 	# header package
-	${INSTALL_DIR} $(IDIR_UCLIBC_DEV)/usr/include/{sys,bits,linux,asm,asm-generic}
-	for file in \
-		regex errno limits alloca stdint locale ctype \
-		stdlib string sgidefs fcntl \
-		libintl sched pthread wchar _G_config getopt endian \
-		features libio stdio error signal time unistd \
-	;do \
-		${CP} $(STAGING_DIR)/usr/include/$$file.h \
-		$(IDIR_UCLIBC_DEV)/usr/include; \
-	done
-	${CP} $(STAGING_DIR)/usr/include/asm/*.h $(IDIR_UCLIBC_DEV)/usr/include/asm
-	${CP} $(STAGING_DIR)/usr/include/asm-generic/*.h $(IDIR_UCLIBC_DEV)/usr/include/asm-generic
-	${CP} $(STAGING_DIR)/usr/include/sys/*.h $(IDIR_UCLIBC_DEV)/usr/include/sys
-	${CP} $(STAGING_DIR)/usr/include/bits/*.h $(IDIR_UCLIBC_DEV)/usr/include/bits
-	${CP} $(STAGING_DIR)/usr/include/linux/*.h $(IDIR_UCLIBC_DEV)/usr/include/linux
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
+		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
+		headers_install
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/${PKG_NAME}-${PKG_VERSION} \
+		PREFIX=$(IDIR_UCLIBC_DEV)/ \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=$(IDIR_UCLIBC_DEV)/ \
+		HOSTCC="$(HOSTCC)" \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		install_headers
+	@find $(IDIR_UCLIBC_DEV) -name .install -delete
+	@find $(IDIR_UCLIBC_DEV) -name ..install.cmd -delete
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,6 @@
+config ADK_PACKAGE_CPIO
+	prompt "cpio............................... copies files into or out of a cpio archive"
+	tristate
+	default n
+	help
+	  http://www.gnu.org/software/cpio/

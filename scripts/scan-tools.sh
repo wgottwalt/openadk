@@ -107,37 +107,37 @@ if ! which cpp >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which flex >/dev/null 2>&1; then
-	echo You must install flex to continue.
-	echo
-	out=1
-else
-	echo '%%' | flex -
-	if fgrep _POSIX_SOURCE lex.yy.c; then
-		echo Your lexer \(flex\) contains a broken skeleton.
-		if [[ $NO_ERROR = 1 ]]; then
-			echo WARNING: continue at your own risk.
-			echo Some packages may be broken.
-		else
-			echo You can continue the build by issuing \'make prereq-noerror\'
-			echo However, several packages may faild to build correctly.
-			out=1
-		fi
-		echo
-	fi
-fi
+#if ! which flex >/dev/null 2>&1; then
+#	echo You must install flex to continue.
+#	echo
+#	out=1
+#else
+#	echo '%%' | flex -
+#	if fgrep _POSIX_SOURCE lex.yy.c; then
+#		echo Your lexer \(flex\) contains a broken skeleton.
+#		if [[ $NO_ERROR = 1 ]]; then
+#			echo WARNING: continue at your own risk.
+#			echo Some packages may be broken.
+#		else
+#			echo You can continue the build by issuing \'make prereq-noerror\'
+#			echo However, several packages may faild to build correctly.
+#			out=1
+#		fi
+#		echo
+#	fi
+#fi
 
-if ! which bison >/dev/null 2>&1; then
-	echo You must install GNU bison to continue.
-	echo
-	out=1
-fi
+#if ! which bison >/dev/null 2>&1; then
+#	echo You must install GNU bison to continue.
+#	echo
+#	out=1
+#fi
 
-if ! which gperf >/dev/null 2>&1; then
-	echo You must install gperf to continue.
-	echo
-	out=1
-fi
+#if ! which gperf >/dev/null 2>&1; then
+#	echo You must install gperf to continue.
+#	echo
+#	out=1
+#fi
 
 if ! which tar >/dev/null 2>&1; then
 	echo You must install GNU tar to continue.
@@ -273,6 +273,12 @@ fi
 
 if ! which file >/dev/null 2>&1; then
 	echo You must install \"file\" to continue.
+	echo
+	out=1
+fi
+
+if ! which perl >/dev/null 2>&1; then
+	echo You must install perl to continue.
 	echo
 	out=1
 fi

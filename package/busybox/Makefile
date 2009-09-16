@@ -35,10 +35,10 @@ endif
 do-build:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD)
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) busybox
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD)
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) busybox
 endif
 
 do-install: ${TOPDIR}/.config

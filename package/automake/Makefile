@@ -11,11 +11,11 @@ PKG_DESCR:=		GNU automake
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.gnu.org/software/${PKG_NAME}/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
-PKG_SKIP_SCRIPTS:=      1
+PKG_OPTS:=		noscripts
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,AUTOMAKE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,AUTOMAKE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

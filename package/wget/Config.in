@@ -1,0 +1,6 @@
+config ADK_PACKAGE_WGET
+	prompt "wget............................. retrieving files using HTTP, HTTPS and FTP"
+	tristate
+	default n
+	help
+ 	  http://www.gnu.org/software/wget/

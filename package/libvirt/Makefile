@@ -1,0 +1,33 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include ${TOPDIR}/rules.mk
+
+PKG_NAME:=		libvirt
+PKG_VERSION:=		0.7.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8c2c14a7695c9c661004bcfc6468d62d
+PKG_DESCR:=		virtualization API
+PKG_SECTION:=		utils
+PKG_DEPENDS:=		libxml2 libgnutls
+PKG_URL:=		http://www.libvirt.org
+PKG_SITES:=		ftp://libvirt.org/libvirt/
+
+include ${TOPDIR}/mk/package.mk
+
+$(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+TCFLAGS+=		-std=c99
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--without-xen \
+			--without-uml \
+			--without-esx \
+			--without-openvz \
+			--without-sasl
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
+
+post-install:
+	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

@@ -13,4 +13,5 @@ source target/linux/config/Config.in.bluetooth
 source target/linux/config/Config.in.isdn
 source target/linux/config/Config.in.misc
 source target/linux/config/Config.in.lib
+source target/linux/config/Config.in.kvm
 source target/linux/config/Config.in.debug

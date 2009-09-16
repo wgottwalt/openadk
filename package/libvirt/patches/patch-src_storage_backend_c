@@ -1,0 +1,11 @@
+--- libvirt-0.7.0.orig/src/storage_backend.c	2009-08-05 14:50:01.000000000 +0200
++++ libvirt-0.7.0/src/storage_backend.c	2009-09-11 13:23:38.000000000 +0200
+@@ -128,7 +128,7 @@ virStorageBackendCopyToFD(virConnectPtr 
+         }
+     }
+ 
+-    bzero(&zerobuf, sizeof(zerobuf));
++    memset(&zerobuf, 0, sizeof(zerobuf));
+ 
+     if (VIR_ALLOC_N(buf, bytes) < 0) {
+         virReportOOMError(conn);

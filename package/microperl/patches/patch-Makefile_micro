@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- perl-5.10.0.orig/Makefile.micro	2007-12-18 11:47:07.000000000 +0100
-+++ perl-5.10.0/Makefile.micro	2009-05-30 11:47:02.610977016 +0200
++++ perl-5.10.0/Makefile.micro	2009-09-14 18:52:23.000000000 +0200
+@@ -46,7 +46,7 @@ Config = '$$Config{$$1}'
+ patch_uconfig:
+ 	$(PERL) -MConfig -pi -e "s/^((?:short|int|long(?:dbl|long)?|ptr|double|[iun]v|u?quad|[iu]\d+|fpos|lseek)(?:size|type)|byteorder|d_quad|quadkind|use64.+)=.*/\\1='"$(Config)"'/g" uconfig.shx
+ 
+-regen_uconfig uconfig.h: uconfig.sh
++regen_uconfig uconfig.h:
+ 	$(ENV) CONFIG_SH=uconfig.sh CONFIG_H=uconfig.h sh ./config_h.SH
+ 
+ # Do not regenerate perly.c and perly.h.
 @@ -177,9 +177,9 @@ uudmap.h: generate_uudmap$(_X)
  	$(RUN) ./generate_uudmap$(_X) >uudmap.h
  

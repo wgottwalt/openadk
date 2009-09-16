@@ -278,7 +278,7 @@ config BUSYBOX_ID
 
 config BUSYBOX_INSTALL
 	bool "install"
-	default n
+	default y
 	help
 	  Copy files and set attributes.
 
@@ -485,7 +485,7 @@ config BUSYBOX_RM
 
 config BUSYBOX_RMDIR
 	bool "rmdir"
-	default n
+	default y
 	help
 	  rmdir is used to remove empty directories.
 
