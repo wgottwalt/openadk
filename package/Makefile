@@ -321,6 +321,7 @@ package-$(ADK_PACKAGE_PRIVOXY) += privoxy
 package-$(ADK_PACKAGE_PROCMAIL) += procmail
 package-$(ADK_PACKAGE_PROCPS) += procps
 package-$(ADK_PACKAGE_PTUNNEL) += ptunnel
+package-$(ADK_PACKAGE_PYTHON) += python
 package-$(ADK_PACKAGE_QUAGGA) += quagga
 package-$(ADK_PACKAGE_RADDUMP) += raddump
 package-$(ADK_PACKAGE_RADVD) += radvd

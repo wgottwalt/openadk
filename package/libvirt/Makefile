@@ -23,11 +23,17 @@ CONFIGURE_ARGS+=	--without-xen \
 			--without-uml \
 			--without-esx \
 			--without-openvz \
+			--without-vbox \
 			--without-sasl
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib
+	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib ${IDIR_LIBVIRT}/usr/bin
+	${INSTALL_DIR} ${IDIR_LIBVIRT}/etc/libvirt ${IDIR_LIBVIRT}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/virsh ${IDIR_LIBVIRT}/usr/bin
+	${CP} ${WRKINST}/usr/lib/libvirt.so* ${IDIR_LIBVIRT}/usr/lib
+	${CP} ${WRKINST}/etc/libvirt/* ${IDIR_LIBVIRT}/etc/libvirt
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/libvirtd ${IDIR_LIBVIRT}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

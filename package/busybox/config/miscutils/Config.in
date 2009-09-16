@@ -523,7 +523,7 @@ config BUSYBOX_STRINGS
 
 config BUSYBOX_TIME
 	bool "time"
-	default n
+	default y
 	help
 	  The time command runs the specified program with the given arguments.
 	  When the command finishes, time writes a message to standard output

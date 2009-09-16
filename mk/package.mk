@@ -196,13 +196,13 @@ endif
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
 	    cpio -apdlmu --quiet '$${STAGING_DIR}'
-	cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
 	done
 ifeq (,$(filter noscripts,$(7)))
-	cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
+	@cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | \
 	    while read fn; do \
 		b="$$$$(dd if="$$$$fn" bs=2 count=1 2>/dev/null)"; \
@@ -218,7 +218,7 @@ clean-targets: clean-dev-$(1)
 
 clean-dev-$(1):
 ifeq (,$(filter noremove,$(7)))
-	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \

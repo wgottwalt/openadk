@@ -122,7 +122,7 @@ endif
 	done
 	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
 ifeq (,$(filter noremove,${PKG_OPTS}))
-	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
@@ -207,7 +207,7 @@ clean-targets: clean-dev-generic
 
 clean-dev-generic:
 ifeq (,$(filter noremove,${PKG_OPTS}))
-	if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
+	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
