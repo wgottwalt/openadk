@@ -3,7 +3,11 @@
 # material, please see the LICENCE file in the top-level directory.
 
 if [ -z "$(which gtar 2>/dev/null)" ];then
-	/bin/tar "$@"
+	if [ -x /usr/bin/tar ];then
+		/usr/bin/tar "$@"
+	else
+		/bin/tar "$@"
+	fi
 else
 	gtar "$@"
 fi

@@ -1,0 +1,6 @@
+config ADK_PACKAGE_XZ
+	prompt "xz............................... lzma compression utility"
+	tristate
+	default n
+	help
+ 	  http://tukaani.org/xz/

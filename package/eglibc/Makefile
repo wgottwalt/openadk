@@ -24,31 +24,25 @@ do-install:
 ifeq ($(ADK_SSP),y)
 	$(CP) $(STAGING_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
 endif
-	$(CP) $(STAGING_DIR)/lib/libgcc_s.so.* $(IDIR_EGLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
 	-for file in libc ld libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
-		$(CP) $(STAGING_DIR)/lib/$$file.so.* $(IDIR_EGLIBC)/lib/; \
+		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
 	# create ld.so link for x86 linker and gcc
 	cd $(IDIR_EGLIBC)/lib && ln -sf ld-$(PKG_VERSION).so ld-linux.so.2
-	cd $(IDIR_EGLIBC)/lib && ln -sf libc.so.6 libc.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf libgcc_s.so.1 libgcc_s.so
 	# header package
-	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/usr/include/{sys,bits,gnu,linux,asm,asm-generic}
-	for file in \
-		regex errno limits alloca stdint locale ctype \
-		stdlib string sgidefs fcntl \
-		libintl sched pthread wchar _G_config getopt endian \
-		features libio stdio error signal time unistd \
-	;do \
-		${CP} $(STAGING_DIR)/usr/include/$$file.h \
-		$(IDIR_EGLIBC_DEV)/usr/include; \
-	done
-	${CP} $(STAGING_DIR)/usr/include/asm/*.h $(IDIR_EGLIBC_DEV)/usr/include/asm
-	${CP} $(STAGING_DIR)/usr/include/asm-generic/*.h $(IDIR_EGLIBC_DEV)/usr/include/asm-generic
-	${CP} $(STAGING_DIR)/usr/include/sys/*.h $(IDIR_EGLIBC_DEV)/usr/include/sys
-	${CP} $(STAGING_DIR)/usr/include/bits/*.h $(IDIR_EGLIBC_DEV)/usr/include/bits
-	${CP} $(STAGING_DIR)/usr/include/gnu/*.h $(IDIR_EGLIBC_DEV)/usr/include/gnu
-	${CP} $(STAGING_DIR)/usr/include/linux/*.h $(IDIR_EGLIBC_DEV)/usr/include/linux
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
+		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \
+		headers_install
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/${PKG_NAME}-${PKG_VERSION} \
+		PREFIX=$(IDIR_EGLIBC_DEV)/ \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=$(IDIR_EGLIBC_DEV)/ \
+		HOSTCC="$(HOSTCC)" \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		install_headers
+	@find $(IDIR_EGLIBC_DEV) -name .install -delete
+	@find $(IDIR_EGLIBC_DEV) -name ..install.cmd -delete
 
 include ${TOPDIR}/mk/pkg-bottom.mk

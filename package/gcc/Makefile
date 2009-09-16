@@ -47,7 +47,6 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 else
 	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GCC}/usr/lib
 endif
-	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/include-fixed
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 
 include ${TOPDIR}/mk/pkg-bottom.mk
