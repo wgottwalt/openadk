@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		zlib
 PKG_VERSION:=		1.2.3
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		dee233bf288ee795ac96a98cc2e369b6
 PKG_DESCR:=		implementation of the deflate compression method (library)
 PKG_SECTION:=		libs
@@ -24,9 +24,12 @@ CONFIGURE_STYLE=	manual
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
+ifeq ($(ADK_NATIVE),n)                                                              
+COPTS:=                 $(TARGET_CONFIGURE_OPTS)    
+endif
+
 do-configure:
-		(cd $(WRKBUILD); \
-			$(TARGET_CONFIGURE_OPTS) \
+		(cd $(WRKBUILD); $(COPTS) \
 			CFLAGS="$(TARGET_CFLAGS) -fPIC" \
 			CPPFLAGS="-I$(STAGING_DIR)/usr/include" \
 			LDFLAGS="-L$(STAGING_DIR)/usr/lib" \
