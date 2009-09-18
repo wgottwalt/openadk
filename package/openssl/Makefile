@@ -5,8 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		0.9.8k
-PKG_RELEASE:=		2
-CACERT_VER:=		12
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		e555c6d58d276aec7fdc53363e338ab3
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
@@ -17,20 +16,17 @@ PKG_SITES:=		http://www.openssl.org/source/ \
 			ftp://ftp.webmonster.de/pub/openssl/source/ \
 			ftp://ftp.sunet.se/pub/security/tools/net/openssl/source/
 
-PKG_DESCR_1:=		OpenSSL (Secure Socket Layer) command line tool
-PKG_SECTION_1:=		admin
-PKG_DEPENDS_1:=		libopenssl
-
-PKG_DESCR_2:=		X.509v3 Root CA Certificates
-PKG_SECTION_2:=		base
+PKG_DESCR_UTIL:=	OpenSSL (Secure Socket Layer) command line tool
+PKG_SECTION_UTIL:=	admin
+PKG_DEPENDS_UTIL:=	libopenssl
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTIL},${PKG_DESCR_UTIL},${PKG_SECTION_UTIL}))
 
 BUILD_STYLE:=		manual
-INSTALL_STYLE:=		auto confprog
+INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
@@ -64,8 +60,8 @@ do-build:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so.* ${IDIR_LIBOPENSSL}/usr/lib
-	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so.*
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
+	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so*
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/openssl ${IDIR_OPENSSL_UTIL}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}
