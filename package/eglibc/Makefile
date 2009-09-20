@@ -14,6 +14,32 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,EGLIBC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,EGLIBC_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+EGLIBC_CONFOPTS:=	\
+			--build=$(GNU_HOST_NAME) \
+			--host=$(REAL_GNU_TARGET_NAME) \
+			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--disable-nls \
+			--without-cvs \
+			--disable-profile \
+			--disable-debug \
+			--enable-kernel=2.6.0 \
+			--without-gd \
+			--with-__thread \
+			--with-tls \
+			--enable-add-ons
+
+EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
+			BUILD_CC=${HOSTCC} \
+			CFLAGS="$(TARGET_CFLAGS)" \
+			CC=${REAL_GNU_TARGET_NAME}-gcc \
+			CXX=${REAL_GNU_TARGET_NAME}-g++ \
+			AR=${REAL_GNU_TARGET_NAME}-ar \
+			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+			libc_cv_forced_unwind=yes \
+			libc_cv_c_cleanup=yes \
+			libc_cv_gnu99_inline=yes \
+			libc_cv_slibdir="/lib" 
+
 do-extract:
 
 # do nothing, eglibc is already build in toolchain directory
@@ -35,14 +61,15 @@ endif
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \
 		headers_install
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/${PKG_NAME}-${PKG_VERSION} \
-		PREFIX=$(IDIR_EGLIBC_DEV)/ \
-		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=$(IDIR_EGLIBC_DEV)/ \
-		HOSTCC="$(HOSTCC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		install_headers
-	@find $(IDIR_EGLIBC_DEV) -name .install -delete
-	@find $(IDIR_EGLIBC_DEV) -name ..install.cmd -delete
+	(cd $(WRKBUILD); \
+		${EGLIBC_ENV} \
+		$(TOOLCHAIN_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
+			--prefix=$(IDIR_EGLIBC_DEV)/usr \
+			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
+			${EGLIBC_CONFOPTS} \
+	);
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C $(WRKBUILD) \
+		install-headers install-bootstrap-headers=yes
 
 include ${TOPDIR}/mk/pkg-bottom.mk
