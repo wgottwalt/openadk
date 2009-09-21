@@ -11,6 +11,22 @@ PKG_OPTS:=		noremove
 
 include $(TOPDIR)/mk/package.mk
 
+GLIBC_CONFOPTS:=          \
+			--build=$(GNU_HOST_NAME) \
+			--host=$(REAL_GNU_TARGET_NAME) \
+			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--disable-nls \
+			--disable-sanity-checks \
+			--disable-nls \
+			--without-cvs \
+			--disable-profile \
+			--disable-debug \
+			--without-gd \
+			--with-__thread \
+			--with-tls \
+			--enable-kernel="2.6.0" \
+			--enable-add-ons
+
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 do-extract:
@@ -35,14 +51,17 @@ endif
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/${PKG_NAME}-${PKG_VERSION} \
-		PREFIX=$(IDIR_GLIBC_DEV)/ \
-		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=$(IDIR_GLIBC_DEV)/ \
-		HOSTCC="$(HOSTCC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		install_headers
-	@find $(IDIR_GLIBC_DEV) -name .install -delete
-	@find $(IDIR_GLIBC_DEV) -name ..install.cmd -delete
+	(cd $(WRKBUILD); \
+		$(TOOLCHAIN_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/configure \
+		--prefix=/usr \
+		--with-sysroot=$(IDIR_GLIBC_DEV) \
+		${GLIBC_CONFOPTS} \
+	);
+	$(MAKE) -C $(WRKBUILD) \
+		cross-compiling=yes \
+		install_root=$(IDIR_GLIBC_DEV) \
+		install-headers
+	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
+	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h
 
 include ${TOPDIR}/mk/pkg-bottom.mk
