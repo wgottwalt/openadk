@@ -3,9 +3,15 @@
 
 all: build-all-ipkgs
 
+ifeq ($(ADK_STATIC),y)
+TCFLAGS:=		${TARGET_CFLAGS} -static
+TCXXFLAGS:=		${TARGET_CFLAGS} -static
+TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
+else
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
+endif
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
@@ -176,7 +182,7 @@ endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
 	    '$${STAGING_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
-	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
