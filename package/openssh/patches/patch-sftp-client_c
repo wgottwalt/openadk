@@ -1,0 +1,11 @@
+--- openssh-5.2p1.orig/sftp-client.c	2008-07-04 15:10:49.000000000 +0200
++++ openssh-5.2p1/sftp-client.c	2009-09-18 12:30:56.000000000 +0200
+@@ -273,7 +273,7 @@ get_decode_statvfs(int fd, struct sftp_s
+ 		    SSH2_FXP_EXTENDED_REPLY, type);
+ 	}
+ 
+-	bzero(st, sizeof(*st));
++	memset(st, 0, sizeof(*st));
+ 	st->f_bsize = buffer_get_int64(&msg);
+ 	st->f_frsize = buffer_get_int64(&msg);
+ 	st->f_blocks = buffer_get_int64(&msg);

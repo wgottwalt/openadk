@@ -1,0 +1,62 @@
+--- openssh-5.2p1.orig/monitor.c	2009-02-14 06:33:31.000000000 +0100
++++ openssh-5.2p1/monitor.c	2009-09-18 12:31:53.000000000 +0200
+@@ -2029,8 +2029,8 @@ mm_answer_jpake_step1(int sock, Buffer *
+ 	debug3("%s: sending step1", __func__);
+ 	mm_request_send(sock, MONITOR_ANS_JPAKE_STEP1, m);
+ 
+-	bzero(x3_proof, x3_proof_len);
+-	bzero(x4_proof, x4_proof_len);
++	memset(x3_proof, 0, x3_proof_len);
++	memset(x4_proof, 0, x4_proof_len);
+ 	xfree(x3_proof);
+ 	xfree(x4_proof);
+ 
+@@ -2059,8 +2059,8 @@ mm_answer_jpake_get_pwdata(int sock, Buf
+ 	debug3("%s: sending pwdata", __func__);
+ 	mm_request_send(sock, MONITOR_ANS_JPAKE_GET_PWDATA, m);
+ 
+-	bzero(hash_scheme, strlen(hash_scheme));
+-	bzero(salt, strlen(salt));
++	memset(hash_scheme, 0, strlen(hash_scheme));
++	memset(salt, 0, strlen(salt));
+ 	xfree(hash_scheme);
+ 	xfree(salt);
+ 
+@@ -2099,8 +2099,8 @@ mm_answer_jpake_step2(int sock, Buffer *
+ 
+ 	JPAKE_DEBUG_CTX((pctx, "step2 done in %s", __func__));
+ 
+-	bzero(x1_proof, x1_proof_len);
+-	bzero(x2_proof, x2_proof_len);
++	memset(x1_proof, 0, x1_proof_len);
++	memset(x2_proof, 0, x2_proof_len);
+ 	xfree(x1_proof);
+ 	xfree(x2_proof);
+ 
+@@ -2112,7 +2112,7 @@ mm_answer_jpake_step2(int sock, Buffer *
+ 	debug3("%s: sending step2", __func__);
+ 	mm_request_send(sock, MONITOR_ANS_JPAKE_STEP2, m);
+ 
+-	bzero(x4_s_proof, x4_s_proof_len);
++	memset(x4_s_proof, 0, x4_s_proof_len);
+ 	xfree(x4_s_proof);
+ 
+ 	monitor_permit(mon_dispatch, MONITOR_REQ_JPAKE_KEY_CONFIRM, 1);
+@@ -2146,7 +2146,7 @@ mm_answer_jpake_key_confirm(int sock, Bu
+ 
+ 	JPAKE_DEBUG_CTX((pctx, "key_confirm done in %s", __func__));
+ 
+-	bzero(x2_s_proof, x2_s_proof_len);
++	memset(x2_s_proof, 0, x2_s_proof_len);
+ 	buffer_clear(m);
+ 
+ 	/* pctx->k is sensitive, not sent */
+@@ -2180,7 +2180,7 @@ mm_answer_jpake_check_confirm(int sock, 
+ 
+ 	JPAKE_DEBUG_CTX((pctx, "check_confirm done in %s", __func__));
+ 
+-	bzero(peer_confirm_hash, peer_confirm_hash_len);
++	memset(peer_confirm_hash, 0, peer_confirm_hash_len);
+ 	xfree(peer_confirm_hash);
+ 
+ 	buffer_clear(m);

@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- openssh-5.1p1.orig/openbsd-compat/port-tun.c	2008-05-19 07:28:36.000000000 +0200
-+++ openssh-5.1p1/openbsd-compat/port-tun.c	2008-10-14 10:20:42.000000000 +0200
+--- openssh-5.2p1.orig/openbsd-compat/port-tun.c	2008-05-19 07:28:36.000000000 +0200
++++ openssh-5.2p1/openbsd-compat/port-tun.c	2009-09-18 12:25:49.000000000 +0200
+@@ -67,7 +67,7 @@ sys_tun_open(int tun, int mode)
+ 		return (-1);
+ 	}
+ 
+-	bzero(&ifr, sizeof(ifr));	
++	memset(&ifr, 0, sizeof(ifr));	
+ 
+ 	if (mode == SSH_TUNMODE_ETHERNET) {
+ 		ifr.ifr_flags = IFF_TAP;
 @@ -213,7 +213,7 @@ sys_tun_infilter(struct Channel *c, char
  	if (len <= 0 || len > (int)(sizeof(rbuf) - sizeof(*af)))
  		return (-1);

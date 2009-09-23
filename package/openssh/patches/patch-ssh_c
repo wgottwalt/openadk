@@ -1,0 +1,13 @@
+--- openssh-5.2p1.orig/ssh.c	2009-02-14 06:28:21.000000000 +0100
++++ openssh-5.2p1/ssh.c	2009-09-18 12:26:46.000000000 +0200
+@@ -1277,8 +1277,8 @@ load_public_identity_files(void)
+ 		options.identity_files[i] = filename;
+ 		options.identity_keys[i] = public;
+ 	}
+-	bzero(pwname, strlen(pwname));
++	memset(pwname, 0, strlen(pwname));
+ 	xfree(pwname);
+-	bzero(pwdir, strlen(pwdir));
++	memset(pwdir, 0, strlen(pwdir));
+ 	xfree(pwdir);
+ }
