@@ -136,6 +136,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $(2)" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
@@ -155,6 +156,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
@@ -212,7 +214,12 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
 	done
 endif
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	$${IPKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_PACKAGE_TGZ),y)
+	(cd $${IDIR_$(1)} && tar czf $(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.tar.gz .);
+endif
 
 clean-targets: clean-dev-$(1)
 
