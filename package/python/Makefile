@@ -20,8 +20,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PYTHON,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
-			HOSTPYTHON=./hostpython \
-			HOSTPGEN=./hostpgen \
+			HOSTPYTHON=hostpython \
+			HOSTPGEN=hostpgen \
 			CROSS_COMPILE=yes
 
 CONFIGURE_STYLE:=	gnu
@@ -39,9 +39,10 @@ pre-configure:
 		--prefix=$(STAGING_TOOLS) \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
-	(cd $(WRKBUILD);mv Parser/pgen hostpgen)
-	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
-	$(MAKE) -C ${WRKBUILD} HOSTPYTHON="./hostpython" sharedmods install
+	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/hostpgen
+	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C ${WRKBUILD} HOSTPYTHON="hostpython" sharedmods install
 	$(MAKE) -C ${WRKBUILD} distclean
 
 post-install:
