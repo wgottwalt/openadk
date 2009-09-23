@@ -38,7 +38,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
 	@echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
-
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
 ifeq ($(FS),nfsroot)
@@ -50,5 +50,5 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
 	@echo 'tftp> put wag54g-mips-kernel upgrade_code.bin'
-
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif

@@ -14,6 +14,7 @@ ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),yaffs)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -23,4 +24,5 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'then install kernel and filesystem:'
 	@echo 'mount -t yaffs2 /dev/mtdblock0 /mnt'
 	@echo 'cp ${DEVICE}-${ARCH}-kernel /mnt/kernel'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
