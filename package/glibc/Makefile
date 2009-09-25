@@ -63,5 +63,6 @@ endif
 		install-headers
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h
+	@find $(IDIR_GLIBC_DEV) -name .install -delete
 
 include ${TOPDIR}/mk/pkg-bottom.mk
