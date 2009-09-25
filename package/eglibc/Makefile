@@ -71,5 +71,6 @@ endif
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
+	@find $(IDIR_EGLIBC_DEV) -name .install -delete
 
 include ${TOPDIR}/mk/pkg-bottom.mk
