@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		autoconf
 PKG_VERSION:=		2.64
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		30a198cef839471dd4926e92ab485361
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		utils
@@ -23,6 +23,9 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/bin
+	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/share/autoconf
 	${CP} ${WRKINST}/usr/bin/auto* ${IDIR_AUTOCONF}/usr/bin
+	${CP} ${WRKINST}/usr/share/autoconf/* \
+		${IDIR_AUTOCONF}/usr/share/autoconf
 
 include ${TOPDIR}/mk/pkg-bottom.mk
