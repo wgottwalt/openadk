@@ -1,3 +1,5 @@
 - openssh on amd64 does not work, ssh-keygen endless loop
 - uclibc on lemote mips64 target does not work (only uclibc-trunk with patches)
 - qemu-mips64* targets does not boot, kernel problem?
+- (cross-)compile from debian amd64 to f.e. qemu-x86_64 or shuttle with
+  either glibc or eglibc is broken, have sth. todo with target == host
