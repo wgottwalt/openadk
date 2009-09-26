@@ -25,6 +25,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	@echo 
 	@echo Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash
 	@echo Do not forget to set network boot jumper, before you start the foxboard
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),nfsroot)
 imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
@@ -32,4 +33,5 @@ imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
 	@echo Use sudo ./boot_linux -F -i ${DEVICE}-${ARCH}-kernel to flash the kernel
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSTARBALL} is your nfs root and can be extracted on your nfs server
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif

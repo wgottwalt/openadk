@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
 PKG_VERSION:=		5.2p1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ada79c7328a8551bdf55c95e631e7dad
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net
@@ -56,7 +56,8 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--without-zlib-version-check \
 			--sysconfdir=/etc/ssh \
 			--with-privsep-user=sshd \
-			--with-privsep-path=/var/run/sshd
+			--with-privsep-path=/var/run/sshd \
+			--with-ssl-dir="${STAGING_DIR}/usr"
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

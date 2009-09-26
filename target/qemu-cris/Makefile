@@ -24,10 +24,12 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh qemu.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif

@@ -2,6 +2,22 @@
 # material, please see the LICENCE file in the top-level directory.
 
 #
+# Virtualization
+#
+$(eval $(call KMOD_template,KVM,kvm,\
+	$(MODULES_DIR)/kernel/arch/${ARCH}/kvm/kvm \
+,90))
+
+$(eval $(call KMOD_template,KVM_AMD,kvm-adm,\
+	$(MODULES_DIR)/kernel/arch/${ARCH}/kvm/kvm-amd \
+,95))
+
+$(eval $(call KMOD_template,KVM_INTEL,kvm-intel,\
+	$(MODULES_DIR)/kernel/arch/${ARCH}/kvm/kvm-intel \
+,95))
+
+
+#
 # Serial ATA devices
 #
 $(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\

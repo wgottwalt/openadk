@@ -3,9 +3,15 @@
 
 all: build-all-ipkgs
 
+ifeq ($(ADK_STATIC),y)
+TCFLAGS:=		${TARGET_CFLAGS} -static
+TCXXFLAGS:=		${TARGET_CFLAGS} -static
+TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
+else
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
+endif
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
@@ -136,6 +142,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $(2)" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
@@ -155,6 +162,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
@@ -174,7 +182,7 @@ endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
 	    '$${STAGING_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
-	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
@@ -196,13 +204,13 @@ endif
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
 	    cpio -apdlmu --quiet '$${STAGING_DIR}'
-	cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
 	done
 ifeq (,$(filter noscripts,$(7)))
-	cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
+	@cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | \
 	    while read fn; do \
 		b="$$$$(dd if="$$$$fn" bs=2 count=1 2>/dev/null)"; \
@@ -212,13 +220,18 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
 	done
 endif
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	$${IPKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_PACKAGE_TGZ),y)
+	(cd $${IDIR_$(1)} && tar czf $(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.tar.gz .);
+endif
 
 clean-targets: clean-dev-$(1)
 
 clean-dev-$(1):
 ifeq (,$(filter noremove,$(7)))
-	if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
+	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
 		cd '$${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \

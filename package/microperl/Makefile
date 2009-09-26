@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		microperl
 PKG_VERSION:=		5.10.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		d2c39b002ebfd2c3c5dba589365c5a71
 PKG_DESCR:=		Perl without operating-specific functions
 PKG_SECTION:=		net
@@ -31,6 +31,9 @@ pre-configure:
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MICROPERL}/usr/bin
+	${INSTALL_DIR} ${IDIR_MICROPERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKBUILD}/microperl ${IDIR_MICROPERL}/usr/bin/perl
+	${INSTALL_DATA} ${WRKBUILD}/lib/strict.pm \
+		${IDIR_MICROPERL}/usr/lib/perl5/${PKG_VERSION}
 
 include ${TOPDIR}/mk/pkg-bottom.mk

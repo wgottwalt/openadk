@@ -80,6 +80,9 @@ config ADK_wag54g
 config ADK_shuttle
 	tristate
 
+config ADK_g1
+	tristate
+
 config ADK_DEVICE
 	string
 	default "alix1c"  if ADK_alix1c
@@ -103,6 +106,7 @@ config ADK_DEVICE
 	default "rescue-mipsel"  if ADK_rescue_mipsel
 	default "shuttle"  if ADK_shuttle
 	default "tomtom"  if ADK_tomtom
+	default "g1"  if ADK_g1
 
 menu "Target system"
 
@@ -178,6 +182,16 @@ config ADK_LINUX_ARM_TOMTOM
 	 Just toolchain support to cross-compile your own
 	 applications.
 
+config ADK_LINUX_ARM_G1
+	bool "Google G1 Applications"
+	select ADK_g1
+	select ADK_DEVICE_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
+	help
+	 Support for Google G1.
+	 Just toolchain support to cross-compile your own
+	 applications.
 
 #config ADK_LINUX_XSCALE_ZAURUS
 #	bool "Zaurus SL-C3200"
@@ -379,6 +393,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_ARM_TOMTOM || \
+		ADK_LINUX_ARM_G1 || \
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.eglibc.org
@@ -395,6 +410,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_ARM_TOMTOM || \
+		ADK_LINUX_ARM_G1 || \
 		ADK_LINUX_MIPS64_LEMOTE
 	help
 	 http://www.gnu.org/libc
@@ -606,6 +622,25 @@ config ADK_TARGET_ROOT_EXT4
 
 endchoice
 
+choice
+prompt "Package backend format"
+	default ADK_TARGET_PACKAGE_IPKG
+
+config ADK_TARGET_PACKAGE_IPKG
+	boolean
+	prompt "ipkg package format"
+	select BUSYBOX_IPKG
+	help
+	  Use ipkg package format.
+
+config ADK_TARGET_PACKAGE_TGZ
+	boolean
+	prompt "gzip compressed tar archive"
+	help
+	  Use simple compressed tar archive.
+
+endchoice
+
 #config ADK_SSP
 #	bool "Enable Stack Smashing Protection"
 #	default n
@@ -619,13 +654,6 @@ config ADK_CXX
 	default n
 	help
 	  Enable C++ Compiler and Libraries
-
-config ADK_DEBUG
-	bool "Enable debug support"
-	default n
-	help
-	  All packages and libc will be compiled and packaged with debug information.
-	  Mostly useful for NFS root or big USB/CF disk setups.
 
 config ADK_IPV6
 	bool "Enable IPv6 support"

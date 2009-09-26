@@ -30,6 +30,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
 	@echo 'PMON> load tftp://<ip-address-server>/lemote-mips-kernel'
 	@echo 'PMON> g no_auto_cmd root=/dev/nfs ip=dhcp init=/init'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
@@ -58,15 +59,18 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
 	@echo 'Move boot.cfg to /mnt/boot/boot'
 	@echo 'mv /mnt/root/boot/boot.cfg /mnt/boot/boot'
 	@echo 'cd /mnt/root ; mknod -m 644 console c 5 1'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif

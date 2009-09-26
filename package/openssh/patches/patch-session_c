@@ -1,0 +1,11 @@
+--- openssh-5.2p1.orig/session.c	2009-01-28 06:29:49.000000000 +0100
++++ openssh-5.2p1/session.c	2009-09-18 12:25:29.000000000 +0200
+@@ -1865,7 +1865,7 @@ session_unused(int id)
+ 		fatal("%s: insane session id %d (max %d nalloc %d)",
+ 		    __func__, id, options.max_sessions, sessions_nalloc);
+ 	}
+-	bzero(&sessions[id], sizeof(*sessions));
++	memset(&sessions[id], 0, sizeof(*sessions));
+ 	sessions[id].self = id;
+ 	sessions[id].used = 0;
+ 	sessions[id].chanid = -1;

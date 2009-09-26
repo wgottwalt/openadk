@@ -18,6 +18,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
 ifeq ($(FS),nfsroot)
@@ -25,4 +26,5 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'Login as user root with password linux123 via ssh or console'
 endif

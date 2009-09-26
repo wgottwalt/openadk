@@ -1,8 +1,10 @@
 config ADK_PACKAGE_LIBVIRT
 	prompt "libvirt........................... virtualization API"
 	tristate
+	select ADK_PACKAGE_PYTHON
 	select ADK_PACKAGE_LIBXML2
 	select ADK_PACKAGE_LIBGNUTLS
+	select ADK_PACKAGE_BRIDGE_UTILS
 	default n
 	help
 	  http://www.libvirt.org
