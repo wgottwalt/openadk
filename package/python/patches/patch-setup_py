@@ -1,0 +1,83 @@
+--- Python-3.1.1.orig/setup.py	2009-08-12 20:39:44.000000000 +0200
++++ Python-3.1.1/setup.py	2009-09-28 19:12:33.550271196 +0200
+@@ -255,36 +255,6 @@ class PyBuildExt(build_ext):
+         # cached.  Clear that cache before trying to import.
+         sys.path_importer_cache.clear()
+ 
+-        try:
+-            imp.load_dynamic(ext.name, ext_filename)
+-        except ImportError as why:
+-            self.failed.append(ext.name)
+-            self.announce('*** WARNING: renaming "%s" since importing it'
+-                          ' failed: %s' % (ext.name, why), level=3)
+-            assert not self.inplace
+-            basename, tail = os.path.splitext(ext_filename)
+-            newname = basename + "_failed" + tail
+-            if os.path.exists(newname):
+-                os.remove(newname)
+-            os.rename(ext_filename, newname)
+-
+-            # XXX -- This relies on a Vile HACK in
+-            # distutils.command.build_ext.build_extension().  The
+-            # _built_objects attribute is stored there strictly for
+-            # use here.
+-            # If there is a failure, _built_objects may not be there,
+-            # so catch the AttributeError and move on.
+-            try:
+-                for filename in self._built_objects:
+-                    os.remove(filename)
+-            except AttributeError:
+-                self.announce('unable to remove files (ignored)')
+-        except:
+-            exc_type, why, tb = sys.exc_info()
+-            self.announce('*** WARNING: importing extension "%s" '
+-                          'failed with %s: %s' % (ext.name, exc_type, why),
+-                          level=3)
+-            self.failed.append(ext.name)
+ 
+     def get_platform(self):
+         # Get value of sys.platform
+@@ -295,8 +265,8 @@ class PyBuildExt(build_ext):
+ 
+     def detect_modules(self):
+         # Ensure that /usr/local is always used
+-        add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
+-        add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
++        #add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
++        #add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+ 
+         # Add paths specified in the environment variables LDFLAGS and
+         # CPPFLAGS for header and library files.
+@@ -332,20 +302,22 @@ class PyBuildExt(build_ext):
+                     for directory in reversed(options.dirs):
+                         add_dir_to_list(dir_list, directory)
+ 
+-        if os.path.normpath(sys.prefix) != '/usr':
+-            add_dir_to_list(self.compiler.library_dirs,
+-                            sysconfig.get_config_var("LIBDIR"))
+-            add_dir_to_list(self.compiler.include_dirs,
+-                            sysconfig.get_config_var("INCLUDEDIR"))
++        #if os.path.normpath(sys.prefix) != '/usr':
++        #    add_dir_to_list(self.compiler.library_dirs,
++        #                    sysconfig.get_config_var("LIBDIR"))
++        #    add_dir_to_list(self.compiler.include_dirs,
++        #                    sysconfig.get_config_var("INCLUDEDIR"))
+ 
+         # lib_dirs and inc_dirs are used to search for files;
+         # if a file is found in one of those directories, it can
+         # be assumed that no additional -I,-L directives are needed.
+-        lib_dirs = self.compiler.library_dirs + [
+-            '/lib64', '/usr/lib64',
+-            '/lib', '/usr/lib',
+-            ]
+-        inc_dirs = self.compiler.include_dirs + ['/usr/include']
++        #lib_dirs = self.compiler.library_dirs + [
++        #    '/lib64', '/usr/lib64',
++        #    '/lib', '/usr/lib',
++        #    ]
++        #inc_dirs = self.compiler.include_dirs + ['/usr/include']
++        inc_dirs = self.compiler.include_dirs
++        lib_dirs = self.compiler.library_dirs
+         exts = []
+         missing = []
+ 
