@@ -46,6 +46,7 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_GCC}/usr/lib
 else
 	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GCC}/usr/lib
+	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_GCC}/usr/lib
 endif
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 

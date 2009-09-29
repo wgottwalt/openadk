@@ -52,7 +52,7 @@ git-compile: openssl-compile curl-compile expat-compile
 gkrellmd-compile: glib-compile
 glib-compile: gettext-compile libiconv-compile
 gmediaserver-compile: id3lib-compile libupnp-compile
-gnutls-compile: libgcrypt-compile liblzo-compile libtasn1-compile opencdk-compile zlib-compile
+gnutls-compile: libgcrypt-compile liblzo-compile libtasn1-compile opencdk-compile zlib-compile ncurses-compile
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
 gpsd-compile: uclibc++-compile
 endif
@@ -105,7 +105,7 @@ libtirpc-compile: libgssglue-compile
 endif
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
-libvirt-compile: libxml2-compile gnutls-compile
+libvirt-compile: libxml2-compile gnutls-compile python-compile
 libfontenc-compile: xproto-compile zlib-compile
 libICE-compile: xtrans-compile
 libSM-compile: libICE-compile

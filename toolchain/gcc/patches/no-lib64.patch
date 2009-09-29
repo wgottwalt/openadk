@@ -6,7 +6,7 @@ diff -Nur gcc-4.4.1.orig/gcc/config/i386/linux64.h gcc-4.4.1/gcc/config/i386/lin
  
  #define GLIBC_DYNAMIC_LINKER32 "/lib/ld-linux.so.2"
 -#define GLIBC_DYNAMIC_LINKER64 "/lib64/ld-linux-x86-64.so.2"
-+#define GLIBC_DYNAMIC_LINKER64 "/lib/ld-linux.so.2"
++#define GLIBC_DYNAMIC_LINKER64 "/lib/ld-linux-x86-64.so.2"
  
  #undef ASM_SPEC
  #define ASM_SPEC "%{v:-V} %{Qy:} %{!Qn:-Qy} %{n} %{T} %{Ym,*} %{Yd,*} \
