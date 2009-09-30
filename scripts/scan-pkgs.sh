@@ -23,6 +23,10 @@ out=0
 
 . $topdir/.config
 
+if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
+	NEED_RPM="$NEED_RPM rpm"
+fi
+
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -109,6 +113,13 @@ if [[ -n $ADK_USE_CCACHE ]]; then
                 echo >&2 You have selected to build with ccache, but ccache could not be found.
                 out=1
         fi
+fi
+
+if [[ -n $NEED_RPM ]]; then
+	if ! which rpmbuild >/dev/null 2>&1; then
+		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
+		out=1
+	fi
 fi
 
 #if [[ -n $ADK_COMPILE_MYSQL && $OStype != Linux ]]; then

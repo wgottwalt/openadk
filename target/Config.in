@@ -631,13 +631,19 @@ config ADK_TARGET_PACKAGE_IPKG
 	prompt "ipkg package format"
 	select BUSYBOX_IPKG
 	help
-	  Use ipkg package format.
+	  Create ipkg packages.
 
 config ADK_TARGET_PACKAGE_TGZ
 	boolean
 	prompt "gzip compressed tar archive"
 	help
-	  Use simple compressed tar archive.
+	  Create simple compressed tar archives.
+
+config ADK_TARGET_PACKAGE_RPM
+	boolean
+	prompt "rpm package format"
+	help
+	  Create rpm binary packages.
 
 endchoice
 

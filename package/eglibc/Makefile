@@ -61,6 +61,7 @@ endif
 	cd $(IDIR_EGLIBC)/lib && ln -sf libm.so.6 libm.so
 	cd $(IDIR_EGLIBC)/lib && ln -sf libutil.so.1 libutil.so
 	cd $(IDIR_EGLIBC)/lib && ln -sf librt.so.1 librt.so
+	cd $(IDIR_EGLIBC)/lib && ln -sf libcrypt.so.1 libcrypt.so
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \
