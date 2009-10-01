@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.19.0
+PKG_VERSION:=		7.19.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		35f51ac7bcff689b2d2d6e38a3c4d1ae
+PKG_MD5SUM:=		6625de9d42d1b8d3af372d3241a576fd
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		net
 PKG_URL:=		http://curl.haxx.se
@@ -26,6 +26,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
@@ -54,7 +55,9 @@ INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CURL}/usr/bin ${IDIR_LIBCURL}/usr/lib
+	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
 	${CP} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
 	${CP} ${WRKINST}/usr/lib/libcurl.so.* ${IDIR_LIBCURL}/usr/lib/
+	${CP} ${WRKINST}/usr/include/curl/*.h ${IDIR_LIBCURL_DEV}/usr/include/curl/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

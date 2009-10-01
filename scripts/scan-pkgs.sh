@@ -23,6 +23,13 @@ out=0
 
 . $topdir/.config
 
+if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_GIT ]];then
+		NEED_CURLDEV="$NEED_CURLDEV git"
+		NEED_SSLDEV="$NEED_SSLDEV git"
+	fi
+fi
+
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -56,6 +63,13 @@ if [[ -n $NEED_GETTEXT ]]; then
 		out=1
 	elif ! which msgfmt >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_CURLDEV ]];then
+	if ! test -f /usr/include/curl/curl.h >/dev/null; then
+		echo >&2 You need curl headers to build $NEED_CURLDEV
 		out=1
 	fi
 fi

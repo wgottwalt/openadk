@@ -19,10 +19,12 @@ PKG_SITES:=		http://www.openssl.org/source/ \
 PKG_DESCR_UTIL:=	OpenSSL (Secure Socket Layer) command line tool
 PKG_SECTION_UTIL:=	admin
 PKG_DEPENDS_UTIL:=	libopenssl
+PKG_DEPENDS_DEV:=	libopenssl
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTIL},${PKG_DESCR_UTIL},${PKG_SECTION_UTIL}))
 
 BUILD_STYLE:=		manual
@@ -67,5 +69,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}
 	${CP} ${WRKSRC}/apps/openssl.cnf ${IDIR_OPENSSL_UTIL}/etc/ssl/
 	chmod 0700 ${IDIR_OPENSSL_UTIL}/etc/ssl/private
+	${INSTALL_DIR} ${IDIR_LIBOPENSSL_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBOPENSSL_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

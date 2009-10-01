@@ -88,7 +88,7 @@ endif
 	    ${BASH} ${TOPDIR}/scripts/update-patches); \
 	    if [[ -n $$toedit && $$toedit != FAIL ]]; then \
 		echo -n 'edit patches: '; read i; \
-		cd patches && $${VISUAL:-$${EDITOR:-/usr/bin/vi}} $$toedit; \
+		cd patches && $${VISUAL:-$${EDITOR:-vi}} $$toedit; \
 	    fi; \
 	    rm -rf ${WRKDIR}.orig; \
 	    [[ $$toedit != FAIL ]]

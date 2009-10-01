@@ -7,17 +7,23 @@ ifeq ($(ADK_STATIC),y)
 TCFLAGS:=		${TARGET_CFLAGS} -static
 TCXXFLAGS:=		${TARGET_CFLAGS} -static
 TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
+ifeq ($(ADK_NATIVE),y)
+TCFLAGS:=
+TCXXFLAGS:=
+TCPPFLAGS:=
+TLDFLAGS:=
 else
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
+TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
+			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
+endif
 endif
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
-TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
-			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
 ifneq ($(ADK_DEBUG),)
 CONFIGURE_ARGS+=	--enable-debug
 else
@@ -30,7 +36,11 @@ CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
 ifeq ($(ADK_NATIVE),y)
-			CONFIG_SHELL='$(strip ${SHELL})'
+CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
+			CFLAGS='$(strip ${TCFLAGS})' \
+			CXXFLAGS='$(strip ${TCXXFLAGS})' \
+			CPPFLAGS='$(strip ${TCPPFLAGS})' \
+			LDFLAGS='$(strip ${TLDFLAGS})'
 else
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \
@@ -59,7 +69,11 @@ INSTALL_TARGET?=	install
 ifeq ($(ADK_NATIVE),y)
 MAKE_ENV+=		\
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
-			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
+			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
+			CFLAGS='$(strip ${TCFLAGS})' \
+			CXXFLAGS='$(strip ${TCXXFLAGS})' \
+			CPPFLAGS='$(strip ${TCPPFLAGS})' \
+			LDFLAGS='$(strip ${TLDFLAGS})'
 else
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
