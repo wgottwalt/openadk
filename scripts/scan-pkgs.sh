@@ -28,6 +28,9 @@ if [[ -n $ADK_NATIVE ]];then
 		NEED_CURLDEV="$NEED_CURLDEV git"
 		NEED_SSLDEV="$NEED_SSLDEV git"
 	fi
+	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
+		NEED_RPM="$NEED_RPM rpm"
+	fi
 fi
 
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
@@ -123,6 +126,13 @@ if [[ -n $ADK_USE_CCACHE ]]; then
                 echo >&2 You have selected to build with ccache, but ccache could not be found.
                 out=1
         fi
+fi
+
+if [[ -n $NEED_RPM ]]; then
+	if ! which rpmbuild >/dev/null 2>&1; then
+		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
+		out=1
+	fi
 fi
 
 #if [[ -n $ADK_COMPILE_MYSQL && $OStype != Linux ]]; then
