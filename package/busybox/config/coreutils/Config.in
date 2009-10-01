@@ -67,7 +67,7 @@ config BUSYBOX_CKSUM
 
 config BUSYBOX_COMM
 	bool "comm"
-	default n
+	default y
 	help
 	  comm is used to compare two files line by line and return
 	  a three-column output.
@@ -557,7 +557,7 @@ config BUSYBOX_FEATURE_SORT_BIG
 
 config BUSYBOX_SPLIT
 	bool "split"
-	default n
+	default y
 	help
 	  split a file into pieces.
 

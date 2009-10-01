@@ -16,7 +16,9 @@ noconfig_targets:=	menuconfig \
 			_mconfig \
 			tags
 
-MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC ADK_TARGET_LIB_GLIBC ADK_SSP \
+MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
+			ADK_TARGET_LIB_GLIBC \
+			ADK_TARGET_LIB_ECLIBC \
 			ADK_IPV6 ADK_CXX ADK_DEBUG
 POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
@@ -66,8 +68,10 @@ endif
 endif
 
 package_index:
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	-cd ${PACKAGE_DIR} && \
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
+endif
 
 $(DISTDIR):
 	mkdir -p $(DISTDIR)
@@ -120,6 +124,7 @@ switch:
 root_clean:
 	@$(TRACE) root_clean
 	rm -rf $(TARGET_DIR)
+	mkdir -p $(TARGET_DIR)
 
 # Do a per-package clean here, too. This way stale headers and
 # libraries from cross_*/target/ get wiped away, which keeps
@@ -130,11 +135,11 @@ clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PARENT_PFX}; do \
-		echo "clean: entering $$d" ; \
+		#echo "clean: entering $$d" ; \
 		for f in $$(ls $$d/pkg/[a-z]* 2>/dev/null); do  \
-			echo "clean: cleaning for $$f" ; \
+			#echo "clean: cleaning for $$f" ; \
 			while read file ; do \
-				rm $$d/target/$$file ; \
+				rm $$d/target/$$file 2>/dev/null; \
 			done < $$f ; \
 			rm $$f ; \
 		done \

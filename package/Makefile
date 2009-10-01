@@ -307,6 +307,7 @@ package-$(ADK_PACKAGE_PARPROUTED) += parprouted
 package-$(ADK_PACKAGE_PATCH) += patch
 package-$(ADK_PACKAGE_PCIUTILS) += pciutils
 package-$(ADK_COMPILE_PCRE) += pcre
+package-$(ADK_PACKAGE_PERL) += perl
 package-$(ADK_COMPILE_PHP) += php
 package-$(ADK_PACKAGE_PICOCOM) += picocom
 package-$(ADK_PACKAGE_PIPACS) += pipacs
@@ -471,7 +472,7 @@ $(TARGET_DIR):
 
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
-	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-ipkgs
+	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-pkgs
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 

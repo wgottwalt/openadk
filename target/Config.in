@@ -622,6 +622,13 @@ config ADK_TARGET_ROOT_EXT4
 
 endchoice
 
+config ADK_PACKAGE_SUFFIX
+	string
+	default "ipk" if ADK_TARGET_PACKAGE_IPKG
+	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
+	default "rpm" if ADK_TARGET_PACKAGE_RPM
+	help
+
 choice
 prompt "Package backend format"
 	default ADK_TARGET_PACKAGE_IPKG
