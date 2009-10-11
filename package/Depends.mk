@@ -9,7 +9,7 @@ atftp-compile: readline-compile ncurses-compile
 avahi-compile: libdaemon-compile expat-compile gdbm-compile glib-compile
 bind-compile: openssl-compile
 bitlbee-compile: libiconv-compile openssl-compile glib-compile
-bluez-compile: libusb-compile dbus-compile
+bluez-compile: libusb-compile dbus-compile glib-compile
 bogofilter-compile: libiconv-compile libdb-compile
 ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
 cbtt-compile: uclibc++-compile

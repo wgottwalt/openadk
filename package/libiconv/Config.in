@@ -3,7 +3,6 @@ config ADK_PACKAGE_LIBICONV
 	tristate
 	default n
 	help
-
 	  This package contains a _very_ stripped down version of GNU Libiconv,
 	  all charsets have been removed, except ASCII, various unicode charsets
 	  and iso8896-1.
