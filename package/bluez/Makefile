@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.40
+PKG_VERSION:=		4.56
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a25fa37c97c309338649f6a5fd4cea76
+PKG_MD5SUM:=		92ea2e86a5489f0d16567920f2ec9b36
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bluetooth
@@ -17,7 +17,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BLUEZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_STATIC),y)
+XAKE_FLAGS+=		V=1 CCLD="$(TARGET_CC) -all-static -pthread"
+else
+XAKE_FLAGS+=            V=1
+endif
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \
 			--enable-alsa \
 			--enable-usb \
@@ -30,8 +36,10 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
+ifeq ($(ADK_STATIC),n)
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libbluetooth.so.* ${IDIR_BLUEZ}/usr/lib/
+endif
 	${INSTALL_DIR} $(IDIR_BLUEZ)/etc/dbus-1/system.d
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_BLUEZ}/usr/bin/

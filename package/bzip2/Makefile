@@ -16,6 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BZIP2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-fPIC
 XAKE_FLAGS+=		PREFIX=${WRKINST}/usr
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

@@ -69,17 +69,24 @@ HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${HOSTCC}' \
 			CPPFLAGS_FOR_BUILD='${HOSTCPPFLAGS}' \
 			LDFLAGS_FOR_BUILD='${HOSTLDFLAGS}'
 
-# invoke ipkg-build with some default options
-IPKG_BUILD:=		PATH='${TARGET_PATH}' ${BASH} \
-			    ${TOPDIR}/scripts/ipkg-build -c -o 0 -g 0
-# where to build (and put) .ipk packages
-IPKG_TARGET_DIR:=	$(PACKAGE_DIR)
-IPKG:=			IPKG_TMP=$(BUILD_DIR)/tmp \
+PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))
+
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/ipkg-build -c -o 0 -g 0
+
+PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
 			IPKG_CONF_DIR=$(STAGING_DIR)/etc \
 			IPKG_OFFLINE_ROOT=$(TARGET_DIR) \
-			${BASH} ${SCRIPT_DIR}/ipkg -force-defaults -force-depends
-IPKG_STATE_DIR:=	$(TARGET_DIR)/usr/lib/ipkg
+			${BASH} ${SCRIPT_DIR}/ipkg \
+			-force-defaults -force-depends install
+PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
+else
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/tarpkg build
+PKG_INSTALL:=		INSTROOT=$(TARGET_DIR) \
+			${BASH} ${SCRIPT_DIR}/tarpkg install
+PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
+endif
 
 ifeq ($(ADK_NATIVE),y)
 RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh

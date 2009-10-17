@@ -23,6 +23,16 @@ out=0
 
 . $topdir/.config
 
+if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_GIT ]];then
+		NEED_CURLDEV="$NEED_CURLDEV git"
+		NEED_SSLDEV="$NEED_SSLDEV git"
+	fi
+	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
+		NEED_RPM="$NEED_RPM rpm"
+	fi
+fi
+
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -39,14 +49,10 @@ if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_SSLDEV="$NEED_SSLDEV squid"
 fi
 
-#if [[ -n $ADK_PACKAGE_RUBY ]]; then
-#	NEED_RUBY="$NEED_RUBY ruby"
-#fi
-
-if [[ -n $ADK_PACKAGE_GLIB2 ]]; then
-	NEED_GLIBZWO="$NEED_GLIBZWO glib2"
-	NEED_GETTEXT="$NEED_GETTEXT glib2"
-	NEED_PKGCONFIG="$NEED_PKGCONFIG glib2"
+if [[ -n $ADK_PACKAGE_GLIB ]]; then
+	NEED_GLIBZWO="$NEED_GLIBZWO glib"
+	NEED_GETTEXT="$NEED_GETTEXT glib"
+	NEED_PKGCONFIG="$NEED_PKGCONFIG glib"
 fi
 
 
@@ -56,6 +62,13 @@ if [[ -n $NEED_GETTEXT ]]; then
 		out=1
 	elif ! which msgfmt >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_CURLDEV ]];then
+	if ! test -f /usr/include/curl/curl.h >/dev/null; then
+		echo >&2 You need curl headers to build $NEED_CURLDEV
 		out=1
 	fi
 fi
@@ -109,6 +122,13 @@ if [[ -n $ADK_USE_CCACHE ]]; then
                 echo >&2 You have selected to build with ccache, but ccache could not be found.
                 out=1
         fi
+fi
+
+if [[ -n $NEED_RPM ]]; then
+	if ! which rpmbuild >/dev/null 2>&1; then
+		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
+		out=1
+	fi
 fi
 
 #if [[ -n $ADK_COMPILE_MYSQL && $OStype != Linux ]]; then

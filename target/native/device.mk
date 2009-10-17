@@ -1,4 +1,4 @@
-ARCH:=			$(shell uname -m|sed -e "s/i.*86/x86/")
+ARCH:=			$(shell uname -m|sed -e "s/i.*86/x86/" -e "s/_64//")
 CPU_ARCH:=		$(shell uname -m)
 KERNEL_VERSION:=	2.6.30.5
 KERNEL_RELEASE:=	1

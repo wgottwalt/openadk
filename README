@@ -16,9 +16,6 @@ Before you can start you need to install some tools:
 - bzip2
 - cpio 
 - wget
-- flex
-- bison
-- gperf
 - file
 - unzip
 - autoconf
@@ -26,6 +23,7 @@ Before you can start you need to install some tools:
 - zlib-dev / libz-dev
 - libncurses5-dev
 - libc-dev
+- perl
 
 There is a check for the required versions of these tools in advance, though
 (to re-issue the checks, use "make prereq").

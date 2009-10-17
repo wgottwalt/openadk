@@ -11,15 +11,18 @@ PKG_DESCR:=		internationalisation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
-PKG_SITES=		${MASTER_SITE_GNU:=gettext/}
+PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GETTEXT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GETTEXT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-java \
 			--disable-native-java \
 			--disable-csharp \
@@ -33,8 +36,8 @@ CONFIGURE_ARGS+=	--disable-java \
 CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
 			ac_cv_gnu_library_2=no \
 			gt_use_preinstalled_gnugettext=no
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib

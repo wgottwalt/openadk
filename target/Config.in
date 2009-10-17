@@ -622,6 +622,13 @@ config ADK_TARGET_ROOT_EXT4
 
 endchoice
 
+config ADK_PACKAGE_SUFFIX
+	string
+	default "ipk" if ADK_TARGET_PACKAGE_IPKG
+	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
+	default "rpm" if ADK_TARGET_PACKAGE_RPM
+	help
+
 choice
 prompt "Package backend format"
 	default ADK_TARGET_PACKAGE_IPKG
@@ -631,13 +638,19 @@ config ADK_TARGET_PACKAGE_IPKG
 	prompt "ipkg package format"
 	select BUSYBOX_IPKG
 	help
-	  Use ipkg package format.
+	  Create ipkg packages.
 
 config ADK_TARGET_PACKAGE_TGZ
 	boolean
 	prompt "gzip compressed tar archive"
 	help
-	  Use simple compressed tar archive.
+	  Create simple compressed tar archives.
+
+config ADK_TARGET_PACKAGE_RPM
+	boolean
+	prompt "rpm package format"
+	help
+	  Create rpm binary packages.
 
 endchoice
 

@@ -44,19 +44,24 @@ do-extract:
 
 # do nothing, eglibc is already build in toolchain directory
 do-install:
-	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc
+	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc $(IDIR_EGLIBC)/usr/lib
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_EGLIBC)/etc
 ifeq ($(ADK_SSP),y)
 	$(CP) $(STAGING_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
 endif
+	$(CP) $(STAGING_DIR)/lib/ld-* $(IDIR_EGLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
-	-for file in libc ld libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
-	# create ld.so link for x86 linker and gcc
-	cd $(IDIR_EGLIBC)/lib && ln -sf ld-$(PKG_VERSION).so ld-linux.so.2
+	# install linker script
+	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC)/usr/lib/libc.so
+	cd $(IDIR_EGLIBC)/lib && ln -sf libm.so.6 libm.so
+	cd $(IDIR_EGLIBC)/lib && ln -sf libutil.so.1 libutil.so
+	cd $(IDIR_EGLIBC)/lib && ln -sf librt.so.1 librt.so
+	cd $(IDIR_EGLIBC)/lib && ln -sf libcrypt.so.1 libcrypt.so
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \

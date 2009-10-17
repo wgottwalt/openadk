@@ -38,7 +38,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--enable-const \
 			--enable-echo
 BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+INSTALL_STYLE=		auto
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 

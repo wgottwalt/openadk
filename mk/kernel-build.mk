@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
-KERNEL_IDIR:=$(LINUX_BUILD_DIR)/kernel-ipkg
+KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 
 KERNEL_MAKE_OPTS:=	-C "${LINUX_DIR}" V=1
 ifneq ($(ADK_NATIVE),y)
@@ -41,23 +41,23 @@ $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(DEVICE)-create-packages
-	$(MAKE) $(KERNEL_IPKG) $(TARGETS) 
+	$(MAKE) $(KERNEL_PKG) $(TARGETS) 
 	touch -c $(LINUX_DIR)/vmlinux
 
-$(KERNEL_IPKG):
+$(KERNEL_PKG):
 	$(TRACE) target/$(DEVICE)-create-kernel-package
-	rm -rf $(KERNEL_IDIR)
-	@mkdir -p $(KERNEL_IDIR)/etc
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_IDIR} \
+	rm -rf $(KERNEL_PKGDIR)
+	@mkdir -p $(KERNEL_PKGDIR)/etc
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${DEVICE}-${KERNEL_VERSION} ${CPU_ARCH}
-	$(IPKG_BUILD) $(KERNEL_IDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
+	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 
 prepare:
 compile: $(LINUX_DIR)/vmlinux
 install: compile
 ifneq ($(strip $(INSTALL_TARGETS)),)
 	$(TRACE) target/${DEVICE}-modules-install
-	$(IPKG) install $(INSTALL_TARGETS) $(MAKE_TRACE)
+	$(PKG_INSTALL) $(INSTALL_TARGETS) $(MAKE_TRACE)
 endif
 
 clean:

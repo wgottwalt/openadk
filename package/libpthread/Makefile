@@ -5,7 +5,11 @@ include ${TOPDIR}/rules.mk
 
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
-else
+endif
+ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+include ${TOPDIR}/toolchain/eglibc/Makefile.inc
+endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 
