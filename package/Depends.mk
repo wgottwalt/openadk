@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 aircrack-ng-compile: openssl-compile libpcap-compile
+alsa-utils-compile: alsa-lib-compile
 apr-util-compile: expat-compile apr-compile
 arpd-compile: libpcap-compile libdnet-compile libevent-compile
 arpwatch-compile: libpcap-compile

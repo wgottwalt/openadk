@@ -1,6 +1,4 @@
-- cleanup dots in menu (script is in test phase)
 - rpm package backend
-- ALSA updates
 - port htop software
 - stripping of kernel is not working for all targets
 - implement a non-interactive allmodconfig for different targets
