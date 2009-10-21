@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.29.1.orig/drivers/mtd/Kconfig linux-2.6.29.1/drivers/mtd/Kconfig
---- linux-2.6.29.1.orig/drivers/mtd/Kconfig	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/mtd/Kconfig	2009-05-02 19:24:14.444062164 +0200
+diff -Nur linux-2.6.31.4.orig/drivers/mtd/Kconfig linux-2.6.31.4/drivers/mtd/Kconfig
+--- linux-2.6.31.4.orig/drivers/mtd/Kconfig	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/drivers/mtd/Kconfig	2009-10-21 11:45:10.557679089 +0200
 @@ -53,6 +53,11 @@
  	  should normally be compiled as kernel modules. The modules perform
  	  various checks and verifications when loaded.
@@ -13,9 +13,9 @@ diff -Nur linux-2.6.29.1.orig/drivers/mtd/Kconfig linux-2.6.29.1/drivers/mtd/Kco
  config MTD_REDBOOT_PARTS
  	tristate "RedBoot partition table parsing"
  	depends on MTD_PARTITIONS
-diff -Nur linux-2.6.29.1.orig/drivers/mtd/mtdpart.c linux-2.6.29.1/drivers/mtd/mtdpart.c
---- linux-2.6.29.1.orig/drivers/mtd/mtdpart.c	2009-04-02 22:55:27.000000000 +0200
-+++ linux-2.6.29.1/drivers/mtd/mtdpart.c	2009-05-02 19:26:39.038093851 +0200
+diff -Nur linux-2.6.31.4.orig/drivers/mtd/mtdpart.c linux-2.6.31.4/drivers/mtd/mtdpart.c
+--- linux-2.6.31.4.orig/drivers/mtd/mtdpart.c	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/drivers/mtd/mtdpart.c	2009-10-21 11:46:39.593679219 +0200
 @@ -18,6 +18,7 @@
  #include <linux/mtd/mtd.h>
  #include <linux/mtd/partitions.h>
@@ -24,7 +24,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/mtd/mtdpart.c linux-2.6.29.1/drivers/mtd/m
  
  /* Our partition linked list */
  static LIST_HEAD(mtd_partitions);
-@@ -37,7 +38,7 @@
+@@ -35,7 +36,7 @@
   * the pointer to that structure with this macro.
   */
  #define PART(x)  ((struct mtd_part *)(x))
@@ -33,12 +33,12 @@ diff -Nur linux-2.6.29.1.orig/drivers/mtd/mtdpart.c linux-2.6.29.1/drivers/mtd/m
  
  /*
   * MTD methods which simply translate the effective address and pass through
-@@ -502,14 +503,23 @@
+@@ -517,14 +518,23 @@
  {
  	struct mtd_part *slave;
  	uint64_t cur_offset = 0;
 -	int i;
-+	int i, j, ret;
++	int i, j;
  
  	printk(KERN_NOTICE "Creating %d MTD partitions on \"%s\":\n", nbparts, master->name);
  
@@ -48,7 +48,7 @@ diff -Nur linux-2.6.29.1.orig/drivers/mtd/mtdpart.c linux-2.6.29.1/drivers/mtd/m
 + 		slave = add_one_partition(master, parts + i, j++, cur_offset);
  		if (!slave)
  			return -ENOMEM;
-+ 		if (!strcmp(parts[i].name, "rootfs") && slave->registered) {
++ 		if (!strcmp(parts[i].name, "rootfs")) {
 +#ifdef CONFIG_MTD_ROOTFS_ROOT_DEV
 +			if (ROOT_DEV == 0) {
 +				printk(KERN_NOTICE "mtd: partition \"rootfs\" "
