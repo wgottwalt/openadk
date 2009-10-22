@@ -120,7 +120,9 @@ endif
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
+ifeq (,$(filter libonly,${PKG_OPTS}))
 	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
+endif
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \

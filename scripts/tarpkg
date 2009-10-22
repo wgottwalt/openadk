@@ -9,16 +9,11 @@ if [ "$1" = "build" ];then
 	pkgname=$(grep "^Package:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
 	version=$(grep "^Version:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
 	arch=$(grep "^Architecture:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
-	cd $2
-	rm -rf CONTROL 
-	tar -czf $3/${pkgname}_${version}_${arch}.tar.gz .
-	cd -
-	exit 0
+	rm -rf $2/CONTROL 
+	(cd $2 && tar -czf $3/${pkgname}_${version}_${arch}.tar.gz .)
 elif [ "$1" = "install" ];then
 	tar -xzpf $2 -C ${INSTROOT}
-	exit 0
 else
 	echo "unknown command"
 	exit 1
 fi
-exit 0

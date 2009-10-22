@@ -3,6 +3,9 @@ config ADK_PACKAGE_BLUEZ
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_BT
+	select ADK_PACKAGE_GLIB
+	select ADK_PACKAGE_DBUS
+	select ADK_PACKAGE_LIBUSB
 	help
 	  Bluez libs and apps. 
 	  

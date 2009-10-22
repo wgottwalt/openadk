@@ -3,23 +3,26 @@
 
 all: build-all-pkgs
 
-ifeq ($(ADK_STATIC),y)
-TCFLAGS:=		${TARGET_CFLAGS} -static
-TCXXFLAGS:=		${TARGET_CFLAGS} -static
-TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
-endif
-ifeq ($(ADK_NATIVE),y)
-TCFLAGS:=
-TCXXFLAGS:=
-TCPPFLAGS:=
-TLDFLAGS:=
-else
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
 TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
 			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
+ifeq ($(ADK_STATIC),y)
+TCFLAGS:=		${TARGET_CFLAGS} -static
+TCXXFLAGS:=		${TARGET_CFLAGS} -static
+TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
+TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
+			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib \
+			-static
+endif
+ifeq ($(ADK_NATIVE),y)
+TCFLAGS:=
+TCXXFLAGS:=
+TCPPFLAGS:=
+TLDFLAGS:=
 endif
 
 ifeq ($(ADK_DEBUG),)
@@ -233,7 +236,9 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
 	done
 endif
+ifeq (,$(filter libonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+endif
 
 clean-targets: clean-dev-$(1)
 

@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gcc
-PKG_VERSION:=		4.4.1
+PKG_VERSION:=		4.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		927eaac3d44b22f31f9c83df82f26436
+PKG_MD5SUM:=		70f5ac588a79e3c9901d5b34f58d896d
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2

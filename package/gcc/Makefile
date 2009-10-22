@@ -20,7 +20,7 @@ ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
 CONFIGURE_ARGS+=	--with-abi=64
 endif
 CONFIGURE_ENV+=		ac_cv_func_fputc_unlocked=no
-CONFIGURE_ARGS+=	--enable-languages=c \
+CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--libexecdir=/usr/lib \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
@@ -29,18 +29,27 @@ CONFIGURE_ARGS+=	--enable-languages=c \
 			--with-gnu-ld \
 			--disable-libssp \
 			--disable-nls \
+			--disable-sjlj-exceptions \
+			--disable-biarch \
 			--disable-libmudflap \
 			--disable-libgomp \
-			--disable-multilib
+			--disable-multilib \
+			--disable-libstdcxx-pch
 BUILD_STYLE:=		auto
-ALL_TARGET:=		all-gcc all-target-libgcc
+#ALL_TARGET:=		all-gcc all-target-libgcc
 INSTALL_STYLE:=		auto
-INSTALL_TARGET:=	install-gcc install-target-libgcc
+#INSTALL_TARGET:=	install-gcc install-target-libgcc
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin
+	${INSTALL_DIR} ${IDIR_GCC}/lib ${IDIR_GCC}/usr/include/c++
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gcc ${IDIR_GCC}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GCC}/usr/bin/
+	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
 	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
+	${CP} ${WRKINST}/usr/lib/libstdc++*so* ${IDIR_GCC}/usr/lib/
+	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
+	cd ${IDIR_GCC}/lib && ln -sf ../usr/bin/cpp .
 	${CP} ${WRKINST}/usr/lib/gcc/* ${IDIR_GCC}/usr/lib/gcc/
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_GCC}/usr/lib

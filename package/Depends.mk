@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 aircrack-ng-compile: openssl-compile libpcap-compile
+alsa-utils-compile: alsa-lib-compile
 apr-util-compile: expat-compile apr-compile
 arpd-compile: libpcap-compile libdnet-compile libevent-compile
 arpwatch-compile: libpcap-compile
@@ -9,7 +10,7 @@ atftp-compile: readline-compile ncurses-compile
 avahi-compile: libdaemon-compile expat-compile gdbm-compile glib-compile
 bind-compile: openssl-compile
 bitlbee-compile: libiconv-compile openssl-compile glib-compile
-bluez-compile: libusb-compile dbus-compile
+bluez-compile: libusb-compile dbus-compile glib-compile
 bogofilter-compile: libiconv-compile libdb-compile
 ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
 cbtt-compile: uclibc++-compile

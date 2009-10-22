@@ -19,6 +19,15 @@ config ADK_PACKAGE_LIBOPENSSL
 	  
 	  This package contains the shared SSL libraries, needed by other programs.
 
+config ADK_PACKAGE_LIBOPENSSL_DEV
+	prompt "libopenssl-dev.................... SSL development files"
+	tristate
+	default n
+	select ADK_COMPILE_OPENSSL
+	depends on ADK_PACKAGE_LIBOPENSSL
+	help
+	  http://www.openssl.org/
+
 config ADK_PACKAGE_OPENSSL_UTIL
 	prompt   "openssl-util.................... OpenSSL command line tool"
 	tristate
