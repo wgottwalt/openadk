@@ -7,6 +7,7 @@ ifeq ($(ADK_STATIC),y)
 TCFLAGS:=		${TARGET_CFLAGS} -static
 TCXXFLAGS:=		${TARGET_CFLAGS} -static
 TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
+endif
 ifeq ($(ADK_NATIVE),y)
 TCFLAGS:=
 TCXXFLAGS:=
@@ -20,7 +21,7 @@ TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
 			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
 endif
-endif
+
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
