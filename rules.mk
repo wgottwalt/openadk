@@ -27,6 +27,7 @@ endif
 # Strip off the annoying quoting
 DEVICE:=		$(strip $(subst ",, $(ADK_DEVICE)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
+ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
 include $(TOPDIR)/target/$(DEVICE)/device.mk

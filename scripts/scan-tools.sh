@@ -127,6 +127,12 @@ if ! which gzip >/dev/null 2>&1; then
 	out=1
 fi
 
+if ! which lzma >/dev/null 2>&1; then
+	echo You must install lzma to continue.
+	echo
+	out=1
+fi
+
 if ! which bzip2 >/dev/null 2>&1; then
 	echo You must install bzip2 to continue.
 	echo

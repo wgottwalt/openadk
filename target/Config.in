@@ -23,6 +23,9 @@ config ADK_NATIVE
 config ADK_alix1c
 	tristate
 
+config ADK_qemu_arm
+	tristate
+
 config ADK_qemu_x86
 	tristate
 
@@ -86,6 +89,7 @@ config ADK_g1
 config ADK_DEVICE
 	string
 	default "alix1c"  if ADK_alix1c
+	default "qemu-arm"  if ADK_qemu_arm
 	default "qemu-x86"  if ADK_qemu_x86
 	default "qemu-mips"  if ADK_qemu_mips
 	default "qemu-mipsel"  if ADK_qemu_mipsel
@@ -270,6 +274,14 @@ choice
 prompt "Architecture"
 depends on ADK_LINUX_QEMU
 
+config ADK_LINUX_ARM_QEMU
+	bool "arm"
+	select ADK_qemu_arm
+	select ADK_EABI
+	help
+	 Qemu support for ARM architecture.
+	 Right now this is optimized for Zaurus PDA spitz. 
+
 config ADK_LINUX_X86_QEMU
 	bool "x86"
 	select ADK_qemu_x86
@@ -383,6 +395,7 @@ config ADK_TARGET_LIB_UCLIBC
 config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
 	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
@@ -401,6 +414,7 @@ config ADK_TARGET_LIB_EGLIBC
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
@@ -433,6 +447,7 @@ prompt "Target Firmware type"
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_CRIS_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
@@ -448,6 +463,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_CRIS_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
@@ -547,6 +563,43 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 	  cd /mnt/root ; mknod -m 644 console c 5 1
 
 endchoice
+
+choice
+prompt "Compression method for initramfs and kernel"
+	depends on ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
+	
+config ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
+	boolean
+	prompt "gzip"
+	select ADK_KERNEL_RD_GZIP
+	select ADK_KERNEL_KERNEL_GZIP
+	help
+	  Select gzip compression.
+
+config ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
+	boolean
+	prompt "bzip2"
+	select ADK_KERNEL_RD_BZIP2
+	select ADK_KERNEL_KERNEL_BZIP2
+	help
+	  Select BZIP2 compression.
+
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression.
+
+endchoice
+
+config ADK_COMPRESSION_TOOL
+	string
+	default "gzip -n9" if ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
+	default "bzip2" if ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
+	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	help
 
 choice
 prompt "Root filesystem type"
