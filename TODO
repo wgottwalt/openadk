@@ -1,3 +1,5 @@
+- busybox update to latest version
+- more qemu-targets (ppc/sparc)
 - rpm package backend
 - port htop software
 - stripping of kernel is not working for all targets

@@ -1,6 +1,6 @@
 diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.31.4/arch/cris/include/arch-v10/arch/Kbuild
 --- linux-2.6.31.4.orig/arch/cris/include/arch-v10/arch/Kbuild	2009-10-12 22:15:40.000000000 +0200
-+++ linux-2.6.31.4/arch/cris/include/arch-v10/arch/Kbuild	2009-10-17 20:19:49.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/arch-v10/arch/Kbuild	2009-10-25 09:57:06.167232146 +0100
 @@ -1,4 +1,9 @@
 +header-y += dma.h
 +header-y += io_interface_mux.h
@@ -13,7 +13,7 @@ diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.3
 +header-y += ptrace.h
 diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.31.4/arch/cris/include/arch-v32/arch/Kbuild
 --- linux-2.6.31.4.orig/arch/cris/include/arch-v32/arch/Kbuild	2009-10-12 22:15:40.000000000 +0200
-+++ linux-2.6.31.4/arch/cris/include/arch-v32/arch/Kbuild	2009-10-17 20:19:49.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/arch-v32/arch/Kbuild	2009-10-25 09:57:06.167232146 +0100
 @@ -1,2 +1,6 @@
  header-y += user.h
  header-y += cryptocop.h
@@ -23,7 +23,7 @@ diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.3
 +
 diff -Nur linux-2.6.31.4.orig/arch/cris/include/asm/Kbuild linux-2.6.31.4/arch/cris/include/asm/Kbuild
 --- linux-2.6.31.4.orig/arch/cris/include/asm/Kbuild	2009-10-12 22:15:40.000000000 +0200
-+++ linux-2.6.31.4/arch/cris/include/asm/Kbuild	2009-10-17 20:19:49.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/asm/Kbuild	2009-10-25 09:57:06.167232146 +0100
 @@ -1,11 +1,14 @@
  include include/asm-generic/Kbuild.asm
  
@@ -43,8 +43,12 @@ diff -Nur linux-2.6.31.4.orig/arch/cris/include/asm/Kbuild linux-2.6.31.4/arch/c
  unifdef-y += rs485.h
 diff -Nur linux-2.6.31.4.orig/include/asm-generic/Kbuild linux-2.6.31.4/include/asm-generic/Kbuild
 --- linux-2.6.31.4.orig/include/asm-generic/Kbuild	2009-10-12 22:15:40.000000000 +0200
-+++ linux-2.6.31.4/include/asm-generic/Kbuild	2009-10-17 20:20:38.000000000 +0200
-@@ -6,9 +6,11 @@
++++ linux-2.6.31.4/include/asm-generic/Kbuild	2009-10-25 10:00:20.743354404 +0100
+@@ -3,12 +3,15 @@
+ header-y += errno-base.h
+ header-y += errno.h
+ header-y += fcntl.h
++header-y += getorder.h
  header-y += ioctl.h
  header-y += ioctls.h
  header-y += ipcbuf.h
@@ -58,7 +62,7 @@ diff -Nur linux-2.6.31.4.orig/include/asm-generic/Kbuild linux-2.6.31.4/include/
  header-y += posix_types.h
 diff -Nur linux-2.6.31.4.orig/include/linux/Kbuild linux-2.6.31.4/include/linux/Kbuild
 --- linux-2.6.31.4.orig/include/linux/Kbuild	2009-10-12 22:15:40.000000000 +0200
-+++ linux-2.6.31.4/include/linux/Kbuild	2009-10-17 20:19:49.000000000 +0200
++++ linux-2.6.31.4/include/linux/Kbuild	2009-10-25 09:57:06.207234174 +0100
 @@ -160,6 +160,7 @@
  header-y += udf_fs_i.h
  header-y += ultrasound.h
