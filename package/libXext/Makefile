@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXext
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7749174f9b3c3227bcbabc9ffb7d1a9
-PKG_DESCR:=		X Window System client interface to several extensions to the X protocol
+PKG_MD5SUM:=		6b61b3f657befded8ae66e04085c413e
+PKG_DESCR:=		X client interface to extensions of the X protocol
 PKG_SECTION:=		x11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
@@ -15,10 +15,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXEXT}/usr/lib

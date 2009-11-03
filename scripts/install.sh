@@ -4,16 +4,6 @@ if [ $(id -u) -ne 0 ];then
 	exit 1
 fi
 
-printf "Checking if grub is installed"
-grub=$(which grub)
-
-if [ ! -z $grub -a -x $grub ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
 printf "Checking if sfdisk is installed"
 sfdisk=$(which sfdisk)
 
@@ -79,7 +69,7 @@ if [ -z $1 ];then
 	exit 1
 else
 	if [ -z $2 ];then
-		printf "Please give your install tar as second parameter\n"
+		printf "Please give your install tar archive as second parameter\n"
 		exit 2
 	fi
 	if [ -f $2 ];then
@@ -135,7 +125,7 @@ if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
 	read y
 	if [ $y = "y" ];then
 		printf "Wiping existing partitions\n"
-		dd if=/dev/zero of=$1 bs=512 count=1
+		dd if=/dev/zero of=$1 bs=512 count=1 >/dev/null 2>&1
 	else
 		printf "Exiting.\n"
 		exit 1
@@ -147,7 +137,7 @@ if [ $rb532 -ne 0 ];then
 	rootpart=${1}2
 	$parted -s $1 mklabel msdos
 	sleep 2
-	maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+	maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 	rootsize=$(($maxsize-2))
 
 	$parted -s $1 unit cyl mkpart primary ext2 0 1
@@ -174,8 +164,8 @@ EOF
 	else
 		$parted -s $1 mklabel msdos
 		sleep 2
-		maxsize=$(parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-		rootsize=$(($maxsize-1))
+		maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+		rootsize=$(($maxsize-2))
 
 		$parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
 		$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
@@ -209,30 +199,28 @@ chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
 
 if [ $rb532 -eq 0 ];then
-	printf "Copying grub files\n"
-	mkdir $tmp/boot/grub
-	cp /boot/grub/stage1 $tmp/boot/grub
-	cp /boot/grub/stage2 $tmp/boot/grub
-	cp /boot/grub/e2fs_stage1_5 $tmp/boot/grub
+	mkdir -p $tmp/boot/grub
+	mount -o bind /dev $tmp/dev
+	chroot $tmp mount -t proc /proc /proc
+	chroot $tmp mount -t sysfs /sys /sys
+cat << EOF > $tmp/boot/grub/grub.cfg
+set default=0
+set timeout=5
+insmod terminal
+insmod serial
+serial --unit=0 --speed=115200
+terminal serial
 
-cat << EOF > $tmp/boot/grub/menu.lst
-serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-terminal --timeout=2 serial console
-timeout 2
-default 0
-hiddenmenu
-title linux
-root (hd0,0)
-kernel /boot/kernel root=/dev/sda1 init=/init console=ttyS0,115200 console=tty0 panic=10 rw
+menuentry "GNU/Linux (OpenADK)" {
+	insmod ext2
+	set root=(hd0,1)
+	linux /boot/vmlinuz-adk root=/dev/sda1 ro init=/init console=ttyS0,115200 console=tty0 panic=10
+}
 EOF
-
-	printf "Installing Grub bootloader\n"
-$grub --batch --no-curses --no-floppy --device-map=/dev/null >/dev/null << EOF
-device (hd0) $1
-root (hd0,0)
-setup (hd0)
-quit
-EOF
+	chroot $tmp grub-install $1
+	umount $tmp/proc
+	umount $tmp/sys
+	umount $tmp/dev
 fi
 
 printf "Creating device nodes\n"

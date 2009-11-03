@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kbproto
-PKG_VERSION:=		1.0.3
+PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1efc6a4d97acb3ec3f34c4b2508478dc
+PKG_MD5SUM:=		4deef518a03bc94a7a25902bb7c98dd6
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 include ${TOPDIR}/mk/pkg-bottom.mk

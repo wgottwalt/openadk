@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		evieext
-PKG_VERSION:=		1.0.2
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cff7b68b228d255f582cb64879619a44
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_MD5SUM:=		68e61ce53caa495a3ad4085f66010eb8
+PKG_SITES:=		ftp://ftp.x.org/pub/individual/proto/
 
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 include ${TOPDIR}/mk/pkg-bottom.mk

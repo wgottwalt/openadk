@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXaw
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d27375737f323849cf7ca2fa8566afa5
+PKG_MD5SUM:=		67662e6b2dceb2907159215c83364c5a
 PKG_DESCR:=		X11 Athena Widget library
 PKG_SECTION:=		x11
 PKG_SITES:=		${MASTER_SITE_XORG}
@@ -15,9 +15,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXAW,libxaw,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--disable-docs
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXAW}/usr/lib

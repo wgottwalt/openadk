@@ -1,14 +1,14 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- samba-3.3.3.orig/source/configure	2009-04-01 14:19:36.000000000 +0200
-+++ samba-3.3.3/source/configure	2009-04-18 22:56:27.047962181 +0200
-@@ -44062,194 +44062,6 @@ fi
+--- samba-3.4.3.orig/source3/configure	2009-10-29 09:18:27.000000000 +0100
++++ samba-3.4.3/source3/configure	2009-11-01 14:23:21.339243541 +0100
+@@ -45625,193 +45625,6 @@ fi
+ 
  rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
  
- #
+-#
 -#
 -#
 -case "$host_os" in
--    *linux*)
+-    *linux* | gnu* | k*bsd*-gnu | kopensolaris*-gnu)
 -       # glibc <= 2.3.2 has a broken getgrouplist
 -       if test "$cross_compiling" = yes; then
 -  { { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
@@ -191,8 +191,6 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 -
 -       ;;
 -esac
--
--#
- # stat64 family may need <sys/stat.h> on some systems, notably ReliantUNIX
- #
  
+ #
+ # stat64 family may need <sys/stat.h> on some systems, notably ReliantUNIX

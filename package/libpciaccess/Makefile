@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpciaccess
-PKG_VERSION:=		0.10.3
+PKG_VERSION:=		0.10.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3c4a7578cb63c63ccb1ebca87e10407f
+PKG_MD5SUM:=		5dad6221c2766d5a727ef32e83a0a878
 PKG_DESCR:=		X.org libpciaccess library
 PKG_SECTION:=		x11
 PKG_SITES:=		${MASTER_SITE_XORG}
@@ -15,9 +15,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCIACCESS,libpciaccess,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autotool gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPCIACCESS}/usr/lib

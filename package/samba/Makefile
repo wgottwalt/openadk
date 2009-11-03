@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.3.4
+PKG_VERSION:=		3.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1443165edb7cb3f56f1e77aec1ee3266
+PKG_MD5SUM:=		322379680c12057f57685652a35a6b05
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net
 PKG_URL:=		http://www.samba.org
 PKG_SITES:=		ftp://se.samba.org/pub/samba/stable/ \
 			ftp://ftp.easynet.be/samba/stable/
 
-WRKSRC=			${WRKDIST}/source
+WRKSRC=			${WRKDIST}/source3
 
 include ${TOPDIR}/mk/package.mk
 

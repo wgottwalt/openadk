@@ -17,8 +17,9 @@ MASTER_SITE_KERNEL?=	\
 	http://www.kernel.org/pub/linux/ \
 
 MASTER_SITE_XORG?=	\
-	http://ftp.gwdg.de/pub/x11/x.org/pub/X11R7.4/src/everything/ \
-	http://xorg.freedesktop.org/releases/X11R7.4/src/everything/ \
+	http://ftp.gwdg.de/pub/x11/x.org/pub/X11R7.5/src/everything/ \
+	http://www.x.org/releases/X11R7.5/src/everything/ \
+	http://xorg.freedesktop.org/releases/X11R7.5/src/everything/ \
 	http://xorg.freedesktop.org/releases/individual/lib/ \
 	
 MASTER_SITE_GNU?=	\

@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xextproto
-PKG_VERSION:=		7.0.3
+PKG_VERSION:=		7.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6a8f9f9559e9065858905043c17e05a1
+PKG_MD5SUM:=		6c55283718dbeb826bcf899b9e89faba
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -101,6 +101,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
 	prompt "kmod-bluetooth-hci-bcm203x........ HCI BCM203x USB driver"
 	tristate
 	default n
+	select ADK_KPACKAGE_KMOD_FW_LOADER
 	depends on ADK_KPACKAGE_KMOD_BT
 	help
 	  Bluetooth HCI BCM203x USB driver.

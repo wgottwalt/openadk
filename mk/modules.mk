@@ -1032,6 +1032,10 @@ $(eval $(call KMOD_template,$(BLUETOOTH_PREFIX),bluetooth,\
 	$(MODULES_DIR)/kernel/net/bluetooth/$(BLUETOOTH) \
 ,70))
 
+$(eval $(call KMOD_template,$(BLUETOOTH_PREFIX)_HCIBCM203X,bluetooth-hci-bcm203x,\
+	$(MODULES_DIR)/kernel/drivers/bluetooth/bcm203x \
+,75))
+
 $(eval $(call KMOD_template,$(BLUETOOTH_PREFIX)_HCIUSB,bluetooth-hci-usb,\
 	$(MODULES_DIR)/kernel/drivers/bluetooth/hci_usb \
 ,75))

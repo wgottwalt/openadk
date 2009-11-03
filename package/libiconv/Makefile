@@ -29,6 +29,6 @@ INSTALL_TARGET=		install-lib
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBICONV}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libiconv.so.* ${IDIR_LIBICONV}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libiconv.so* ${IDIR_LIBICONV}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

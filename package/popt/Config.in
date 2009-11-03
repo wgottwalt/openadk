@@ -6,6 +6,7 @@ config ADK_PACKAGE_LIBPOPT
 	prompt "libpopt........................... Command line option parsing library"
 	tristate
 	default n
+	select ADK_PACKAGE_LIBICONV
 	select ADK_COMPILE_POPT
 	help
 	  A command line option parsing library

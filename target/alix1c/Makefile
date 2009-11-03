@@ -8,7 +8,7 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
-	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/kernel
+	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/vmlinuz-adk
 
 ifeq ($(FS),ext2-cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)

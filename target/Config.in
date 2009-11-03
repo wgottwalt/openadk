@@ -133,6 +133,7 @@ config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
 	select ADK_alix1c
 	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES

@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		renderproto
-PKG_VERSION:=		0.9.3
+PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ab8f3e356973d9c99810a8f092db3a2e
+PKG_MD5SUM:=		57216f25b9a5edc561b83a7484cb17e8
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -180,6 +180,7 @@ oprofile-compile: popt-compile
 osiris-compile: openssl-compile
 palantir-compile: jpeg-compile
 pciutils-compile: zlib-compile
+popt-compile: libiconv-compile
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
 portmap-compile: tcp_wrappers-compile
 endif
@@ -249,7 +250,7 @@ xorg-server-compile: libX11-compile randrproto-compile renderproto-compile fixes
 	damageproto-compile scrnsaverproto-compile resourceproto-compile \
 	fontsproto-compile videoproto-compile compositeproto-compile \
 	evieext-compile libxkbfile-compile libXfont-compile pixman-compile \
-	libpciaccess-compile openssl-compile xf86dga-compile
+	libpciaccess-compile openssl-compile 
 
 ifeq ($(ADK_PACKAGE_APR_THREADING),y)
 apr-compile: libpthread-compile

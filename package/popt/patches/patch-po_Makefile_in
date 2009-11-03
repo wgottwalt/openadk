@@ -1,0 +1,100 @@
+--- popt-1.15.orig/po/Makefile.in	2009-04-12 21:31:23.000000000 +0200
++++ popt-1.15/po/Makefile.in	2009-10-31 23:15:58.617450982 +0100
+@@ -22,42 +22,42 @@ srcdir = .
+ top_srcdir = ..
+ 
+ 
+-prefix = /usr/local
++prefix = /usr
+ exec_prefix = ${prefix}
+ datarootdir = ${prefix}/share
+-datadir = ${datarootdir}
++datadir = /usr/share
+ localedir = ${datarootdir}/locale
+ gettextsrcdir = $(datadir)/gettext/po
+ 
+-INSTALL = /usr/opkg/bin/ginstall -c
++INSTALL = /usr/bin/install -c
+ INSTALL_DATA = ${INSTALL} -m 644
+ 
+ # We use $(mkdir_p).
+ # In automake <= 1.9.x, $(mkdir_p) is defined either as "mkdir -p --" or as
+ # "$(mkinstalldirs)" or as "$(install_sh) -d". For these automake versions,
+-# $(SHELL) /d2/u/rse/prj/rpm/src.popt/install-sh does not start with $(SHELL), so we add it.
+-# In automake >= 1.10, /usr/opkg/bin/gmkdir -p is derived from ${MKDIR_P}, which is defined
++# $(SHELL) /home/wbx/adk/build_i586/w-popt-1.15-2/popt-1.15/install-sh does not start with $(SHELL), so we add it.
++# In automake >= 1.10, /bin/mkdir -p is derived from ${MKDIR_P}, which is defined
+ # either as "/path/to/mkdir -p" or ".../install-sh -c -d". For these automake
+ # versions, $(mkinstalldirs) and $(install_sh) are unused.
+-mkinstalldirs = $(SHELL) $(SHELL) /d2/u/rse/prj/rpm/src.popt/install-sh -d
+-install_sh = $(SHELL) $(SHELL) /d2/u/rse/prj/rpm/src.popt/install-sh
+-MKDIR_P = /usr/opkg/bin/gmkdir -p
+-mkdir_p = /usr/opkg/bin/gmkdir -p
++mkinstalldirs = $(SHELL) $(SHELL) /home/wbx/adk/build_i586/w-popt-1.15-2/popt-1.15/install-sh -d
++install_sh = $(SHELL) $(SHELL) /home/wbx/adk/build_i586/w-popt-1.15-2/popt-1.15/install-sh
++MKDIR_P = /bin/mkdir -p
++mkdir_p = /bin/mkdir -p
+ 
+-GMSGFMT_ = /usr/opkg/bin/msgfmt
+-GMSGFMT_no = /usr/opkg/bin/msgfmt
+-GMSGFMT_yes = /usr/opkg/bin/msgfmt
++GMSGFMT_ = /usr/bin/msgfmt
++GMSGFMT_no = /usr/bin/msgfmt
++GMSGFMT_yes = /usr/bin/msgfmt
+ GMSGFMT = $(GMSGFMT_$(USE_MSGCTXT))
+-MSGFMT_ = /usr/opkg/bin/msgfmt
+-MSGFMT_no = /usr/opkg/bin/msgfmt
+-MSGFMT_yes = /usr/opkg/bin/msgfmt
++MSGFMT_ = /usr/bin/msgfmt
++MSGFMT_no = /usr/bin/msgfmt
++MSGFMT_yes = /usr/bin/msgfmt
+ MSGFMT = $(MSGFMT_$(USE_MSGCTXT))
+-XGETTEXT_ = /usr/opkg/bin/xgettext
+-XGETTEXT_no = /usr/opkg/bin/xgettext
+-XGETTEXT_yes = /usr/opkg/bin/xgettext
++XGETTEXT_ = /usr/bin/xgettext
++XGETTEXT_no = /usr/bin/xgettext
++XGETTEXT_yes = /usr/bin/xgettext
+ XGETTEXT = $(XGETTEXT_$(USE_MSGCTXT))
+ MSGMERGE = msgmerge
+-MSGMERGE_UPDATE = /usr/opkg/bin/msgmerge --update
++MSGMERGE_UPDATE = /usr/bin/msgmerge --update
+ MSGINIT = msginit
+ MSGCONV = msgconv
+ MSGFILTER = msgfilter
+@@ -96,7 +96,7 @@ CATALOGS = @CATALOGS@
+ 	mv t-$@ $@
+ 
+ 
+-all: check-macro-version all-yes
++all: check-macro-version all-no
+ 
+ all-yes: stamp-po
+ all-no:
+@@ -202,7 +202,7 @@ $(POFILES): $(srcdir)/$(DOMAIN).pot
+ 
+ install: install-exec install-data
+ install-exec:
+-install-data: install-data-yes
++install-data: install-data-no
+ 	if test "$(PACKAGE)" = "gettext-tools"; then \
+ 	  $(mkdir_p) $(DESTDIR)$(gettextsrcdir); \
+ 	  for file in $(DISTFILES.common) Makevars.template; do \
+@@ -261,7 +261,7 @@ install-strip: install
+ 
+ installdirs: installdirs-exec installdirs-data
+ installdirs-exec:
+-installdirs-data: installdirs-data-yes
++installdirs-data: installdirs-data-no
+ 	if test "$(PACKAGE)" = "gettext-tools"; then \
+ 	  $(mkdir_p) $(DESTDIR)$(gettextsrcdir); \
+ 	else \
+@@ -306,7 +306,7 @@ installcheck:
+ 
+ uninstall: uninstall-exec uninstall-data
+ uninstall-exec:
+-uninstall-data: uninstall-data-yes
++uninstall-data: uninstall-data-no
+ 	if test "$(PACKAGE)" = "gettext-tools"; then \
+ 	  for file in $(DISTFILES.common) Makevars.template; do \
+ 	    rm -f $(DESTDIR)$(gettextsrcdir)/$$file; \

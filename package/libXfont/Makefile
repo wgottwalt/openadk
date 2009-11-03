@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXfont
-PKG_VERSION:=		1.3.3
+PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cb202f7b1af5fc95a7f35f0a62e52e6e
+PKG_MD5SUM:=		bf134b9f79a7fc6507577bf5b6d4f412
 PKG_DESCR:=		X font Library
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libfreetype
@@ -16,9 +16,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXFONT,libxfont,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXFONT}/usr/lib

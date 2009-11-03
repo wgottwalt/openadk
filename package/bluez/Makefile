@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.56
+PKG_VERSION:=		4.57
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		92ea2e86a5489f0d16567920f2ec9b36
+PKG_MD5SUM:=		dc29e54f1204ac4215caeeee062b26f6
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bluetooth
@@ -36,7 +36,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-ifeq ($(ADK_STATIC),n)
+ifneq ($(ADK_STATIC),y)
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libbluetooth.so.* ${IDIR_BLUEZ}/usr/lib/
 endif

@@ -64,7 +64,7 @@ get_next_uid() {
 	uid=1
 	while grep "^[^:]*:[^:]*:$uid:" $IPKG_INSTROOT/etc/passwd \
 	    >/dev/null 2>&1; do
-		let uid++
+		uid=$(($uid+1))
 	done
 	echo $uid
 }
@@ -73,7 +73,7 @@ get_next_gid() {
 	gid=1
 	while grep "^[^:]*:[^:]*:$gid:" $IPKG_INSTROOT/etc/group \
 	    >/dev/null 2>&1; do
-		let gid++
+		gid=$(($gid+1))
 	done
 	echo $gid
 }
