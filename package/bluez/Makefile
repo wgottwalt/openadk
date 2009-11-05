@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
 PKG_VERSION:=		4.57
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dc29e54f1204ac4215caeeee062b26f6
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
@@ -31,6 +31,8 @@ CONFIGURE_ARGS+=	--enable-tools \
 			--enable-hidd \
 			--enable-pand \
 			--enable-dund \
+			--enable-netlink \
+			--disable-pie \
 			--disable-cups
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
@@ -46,9 +48,9 @@ endif
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_BLUEZ}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_BLUEZ}/etc/bluetooth
-	${CP} ${WRKINST}/etc/bluetooth/rfcomm.conf \
-	    ${IDIR_BLUEZ}/etc/bluetooth/
-	$(INSTALL_DATA) $(WRKINST)/etc/dbus-1/system.d/bluetooth.conf \
+	$(INSTALL_DATA) ./files/main.conf \
+		${IDIR_BLUEZ}/etc/bluetooth/
+	$(INSTALL_DATA) ./files/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
 
 include ${TOPDIR}/mk/pkg-bottom.mk

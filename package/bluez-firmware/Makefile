@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1cc3cefad872e937e05de5a0a2b390dd
 PKG_DESCR:=		Bluez firmware for BCM2033
 PKG_SECTION:=		bluetooth
-PKG_DEPENDS:=		kmod-bluetooth bluez-libs bluez-utils
+PKG_DEPENDS:=		kmod-bluetooth bluez
 PKG_URL:=		http://www.bluez.org
 PKG_SITES:=		http://bluez.sourceforge.net/download/
 
