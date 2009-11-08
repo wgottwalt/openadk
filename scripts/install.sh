@@ -206,10 +206,9 @@ if [ $rb532 -eq 0 ];then
 cat << EOF > $tmp/boot/grub/grub.cfg
 set default=0
 set timeout=5
-insmod terminal
-insmod serial
 serial --unit=0 --speed=115200
-terminal serial
+terminal_output serial 
+terminal_input serial 
 
 menuentry "GNU/Linux (OpenADK)" {
 	insmod ext2
