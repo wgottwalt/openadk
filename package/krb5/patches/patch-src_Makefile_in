@@ -1,0 +1,10 @@
+--- krb5-1.7.orig/src/Makefile.in	2009-04-15 22:07:03.000000000 +0200
++++ krb5-1.7/src/Makefile.in	2009-11-11 19:45:39.281234175 +0100
+@@ -13,7 +13,6 @@ SUBDIRS=util include lib kdc kadmin @lda
+ 	plugins/kdb/db2 \
+ 	plugins/preauth/pkinit \
+ 	plugins/preauth/encrypted_challenge \
+-	appl tests \
+ 	config-files gen-manpages
+ BUILDTOP=$(REL)$(C)
+ LOCALINCLUDES = -I$(srcdir) 

@@ -1,5 +1,9 @@
 menu "Native Language support"
 
+config ADK_KERNEL_NLS
+	boolean
+	default n
+
 config ADK_KERNEL_NLS_DEFAULT
 	string
 	default "iso8859-1"
@@ -7,6 +11,7 @@ config ADK_KERNEL_NLS_DEFAULT
 config ADK_KPACKAGE_KMOD_NLS
 	prompt "kmod-nls.......................... Base native language support"
 	tristate
+	depends on !ADK_KERNEL_NLS
 	default n
 	help
 	  The base Native Language Support. A number of filesystems

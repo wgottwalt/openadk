@@ -147,6 +147,7 @@ config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
 	select ADK_foxboard
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_NLS
 	help
 	  Foxboard support
 
