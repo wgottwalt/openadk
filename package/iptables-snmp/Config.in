@@ -1,7 +1,7 @@
 config ADK_PACKAGE_IPTABLES_SNMP
 	prompt "export iptables information via snmp"
 	tristate
-	default ADK_PACKAGE_IPTABLES
+	select ADK_PACKAGE_IPTABLES
 	depends on ADK_PACKAGE_SNMPD
 	help
 	  This is a library for the netkit snmp daemon, allowing it to export

@@ -80,6 +80,7 @@ ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
 iproute2-compile: linux-atm-compile
 endif
 ipsec-tools-compile: openssl-compile
+iptables-snmp-compile: net-snmp-compile
 iptraf-compile: ncurses-compile
 irssi-compile: glib-compile ncurses-compile
 iw-compile: libnl-compile
