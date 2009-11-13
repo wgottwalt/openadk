@@ -1,7 +1,13 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-imageprepare: kernel-install image-prepare-post
+imageprepare: kernel-install image-prepare-post extra-install
+
+# if an extra directory exist in TOPDIR, copy all content over the 
+# root directory, do the same if make extra=/dir/to/extra is used
+extra-install:
+	if [ -d $(TOPDIR)/extra ];then $(CP) $(TOPDIR)/extra/* ${TARGET_DIR};fi
+	if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
 
 image-prepare-post:
 	rng=/dev/arandom; test -e $$rng || rng=/dev/urandom; \
