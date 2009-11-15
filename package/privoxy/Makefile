@@ -4,17 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		privoxy
-PKG_VERSION:=		3.0.12
+PKG_VERSION:=		3.0.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c973e608d27b248ef567b47664308da1
+PKG_VARIANT:=		beta
+PKG_MD5SUM:=		6571dc9524e945e79c2af62fefe7b107
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.privoxy.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-stable-src.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-stable
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-${PKG_VARIANT}-src.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_VARIANT}
 
 include ${TOPDIR}/mk/package.mk
 
@@ -22,6 +23,9 @@ $(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 TLDFLAGS+=		-pthread
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--disable-editor \
+			--disable-jar-files \
+			--sysconfdir=/etc/privoxy
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no \
 			ac_cv_lib_nsl_gethostbyname=no
 BUILD_STYLE:=		auto
@@ -29,11 +33,9 @@ MAKE_FLAGS+=		SPECIAL_CFLAGS='${TLDFLAGS}'
 MAKE_FILE:=		GNUmakefile
 INSTALL_STYLE:=		auto
 
-post-extract:
-	@find ${WRKBUILD} -name *.rej -delete
-
 post-install:
-	${INSTALL_DIR} ${IDIR_PRIVOXY}/usr/sbin 
+	${INSTALL_DIR} ${IDIR_PRIVOXY}/usr/sbin ${IDIR_PRIVOXY}/etc/privoxy
+	${CP} ${WRKINST}/etc/privoxy/* ${IDIR_PRIVOXY}/etc/privoxy
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/privoxy ${IDIR_PRIVOXY}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

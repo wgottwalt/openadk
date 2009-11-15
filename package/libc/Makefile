@@ -21,7 +21,7 @@ do-install:
 	$(CP) /lib/ld*-*.so* $(IDIR_LIBC)/lib/
 	if test -f /lib/libuClibc-*.so; then $(CP) /lib/libuClibc-*.so \
 		$(IDIR_LIBC)/lib/;fi
-	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libpthread libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) /lib/$$file.so.* $(IDIR_LIBC)/lib/; \
 		$(CP) /lib/$$file-*.so $(IDIR_LIBC)/lib/; \
 	done

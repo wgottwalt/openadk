@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG privoxy
+#INIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $privoxy = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/privoxy/config ] || exit
+	/usr/sbin/privoxy /etc/privoxy
+	;;
+stop)
+	pkill privoxy
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

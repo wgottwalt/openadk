@@ -1,6 +1,7 @@
 config ADK_PACKAGE_PRIVOXY
 	prompt "privoxy........................... web proxy with advanced filtering capabilities"
 	tristate
+	select ADK_PACKAGE_LIBPTHREAD
 	default n
 	help
 	  Privoxy is a web proxy with advanced filtering capabilities for
@@ -11,7 +12,3 @@ config ADK_PACKAGE_PRIVOXY
 	  has application for both stand-alone systems and multi-user networks.
 	  
 	  http://www.privoxy.org/
-	  
-	  WARNING: no init script is installed at the moment. You must also
-	  fix file permissions on your own and create a privoxy user. This
-	  may change in a future revision of this package.
