@@ -33,6 +33,12 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_SQUID ]]; then
+		NEED_GXX="$NEED_GXX squid"
+	fi
+fi
+
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -79,6 +85,13 @@ if [[ -n $NEED_SSLDEV ]]; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_GXX ]]; then
+	if ! which g++ >/dev/null 2>&1; then
+		echo >&2 You need GNU c++ compiler to build $NEED_GXX
+		out=1
 	fi
 fi
 

@@ -13,6 +13,24 @@ config ADK_PACKAGE_SQUID
 
 	  http://www.squid-cache.org
 
+choice
+prompt "C++ library to use"
+depends on ADK_PACKAGE_SQUID
+default ADK_COMPILE_SQUID_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_SQUID_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+
+config ADK_COMPILE_SQUID_WITH_STDCXX
+        bool "Standard C++ library"
+        select ADK_PACKAGE_LIBSTDCXX
+        help
+
+config ADK_COMPILE_SQUID_WITH_UCLIBCXX
+        bool "Embedded uClibc++ library"
+        select ADK_PACKAGE_UCLIBCXX
+        help
+
+endchoice
+
 menu "squid............................. proxy and web cache modules"
 
 config ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM

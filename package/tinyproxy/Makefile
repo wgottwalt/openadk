@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tinyproxy
-PKG_VERSION:=		1.6.4
+PKG_VERSION:=		1.6.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3157b9159a8d005f4248cf4d4d6c65e2
+PKG_MD5SUM:=		2b2862ba33d2939e4572688d442ba415
 PKG_DESCR:=		Tinyproxy is a lightweight HTTP and HTTPS proxy.
 PKG_SECTION:=		net
 PKG_URL:=		https://www.banu.com/tinyproxy
@@ -16,7 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TINYPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autoconf gnu
+CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 CONFIGURE_ENV+=		ac_cv_header_libintl_h=no \
