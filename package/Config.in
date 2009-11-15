@@ -311,8 +311,9 @@ source "package/raddump/Config.in"
 endmenu
 
 menu "Proxy"
-source "package/igmpproxy/Config.in"
+source "package/dansguardian/Config.in"
 source "package/frickin/Config.in"
+source "package/igmpproxy/Config.in"
 source "package/parprouted/Config.in"
 source "package/privoxy/Config.in"
 source "package/siproxd/Config.in"

@@ -55,6 +55,10 @@ if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_SSLDEV="$NEED_SSLDEV squid"
 fi
 
+if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then
+	NEED_PKGCONFIG="$NEED_PKGCONFIG dansguardian"
+fi
+
 if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GLIBZWO="$NEED_GLIBZWO glib"
 	NEED_GETTEXT="$NEED_GETTEXT glib"

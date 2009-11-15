@@ -44,7 +44,9 @@ CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
-			LDFLAGS='$(strip ${TLDFLAGS})'
+			LDFLAGS='$(strip ${TLDFLAGS})' \
+			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_LIBDIR=/dev/null
 else
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \

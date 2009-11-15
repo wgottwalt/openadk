@@ -66,6 +66,7 @@ package-$(ADK_PACKAGE_CRYPTSETUP) += cryptsetup
 package-$(ADK_COMPILE_CYRUS_SASL) += cyrus-sasl
 package-$(ADK_PACKAGE_CXXTOOLS) += cxxtools
 package-$(ADK_PACKAGE_DAMAGEPROTO) += damageproto
+package-$(ADK_PACKAGE_DANSGUARDIAN) += dansguardian
 package-$(ADK_PACKAGE_DAVFS2) += davfs2
 package-$(ADK_PACKAGE_DBUS) += dbus
 package-$(ADK_PACKAGE_DECO) += deco

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pcre
-PKG_VERSION:=		7.9
+PKG_VERSION:=		8.00
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2256d0a1d0a358265165ca70e7cfc47a
+PKG_MD5SUM:=		c95500eeda12c8c7edc6b0926d60952c
 PKG_DESCR:=		a Perl Compatible Regular Expression library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.pcre.org
