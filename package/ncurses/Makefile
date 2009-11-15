@@ -21,6 +21,7 @@ CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
+			--with-build-cc=${HOSTCC} \
 			--without-progs \
 			--with-fallbacks \
 			--without-ada \

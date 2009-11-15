@@ -54,7 +54,7 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 ,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb kmod-crc32))
 
 $(eval $(call KMOD_template,ATH5K,mac80211-ath5k,\
-	$(MODULES_DIR)/kernel/drivers/net/wireless/ath5k/ath5k \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \
 ,20, kmod-led-class))
 
 $(eval $(call KMOD_template,RT2X00,mac80211-rt2x00,\
