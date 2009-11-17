@@ -123,8 +123,8 @@ $(eval $(call KMOD_template,PPPOATM,pppoatm,\
 ,60))
 
 $(eval $(call KMOD_template,PPPOE,pppoe,\
-	$(MODULES_DIR)/kernel/drivers/net/pppoe \
 	$(MODULES_DIR)/kernel/drivers/net/pppox \
+	$(MODULES_DIR)/kernel/drivers/net/pppoe \
 ,60))
 
 $(eval $(call KMOD_template,TUN,tun,\
