@@ -17,6 +17,7 @@ config ADK_KPACKAGE_KMOD_USB
 	tristate
 	default y if ADK_LINUX_X86_ALIX1C || ADK_LINUX_CRIS_FOXBOARD
 	default n
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_DEVICEFS
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
