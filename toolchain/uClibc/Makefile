@@ -20,7 +20,7 @@ endif
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
-	    $(TOPDIR)/target/$(DEVICE)/uclibc.config >${WRKBUILD}/.config
+	    $(TOPDIR)/target/$(ADK_TARGET)/uclibc.config >${WRKBUILD}/.config
 ifeq ($(ADK_IPV6),y)
 	$(SED) 's,# UCLIBC_HAS_IPV6.*,UCLIBC_HAS_IPV6=y,' \
 		${WRKBUILD}/.config

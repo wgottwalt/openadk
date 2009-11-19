@@ -41,9 +41,9 @@ config-prepare: $(TOPDIR)/.config
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 # if native build, first try /proc/config.gz
 ifeq ($(ADK_NATIVE),y)
-	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${DEVICE}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi
+	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi
 else
-	@cp ${DEVICE}/kernel.config ${BUILD_DIR}/.kernelconfig.board
+	@cp ${ADK_TARGET}/kernel.config ${BUILD_DIR}/.kernelconfig.board
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \
@@ -62,11 +62,11 @@ endif
 	    cp .kernelconfig.tmp .kernelconfig
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 
-prepare: $(DEVICE)-prepare
-compile: $(DEVICE)-compile
-image: $(DEVICE)-imageclean $(DEVICE)-imageinstall
-install: $(DEVICE)-imageclean $(DEVICE)-install $(DEVICE)-imageinstall
-clean: $(DEVICE)-clean $(DEVICE)-imageclean
+prepare: $(ADK_TARGET)-prepare
+compile: $(ADK_TARGET)-compile
+image: $(ADK_TARGET)-imageclean $(ADK_TARGET)-imageinstall
+install: $(ADK_TARGET)-imageclean $(ADK_TARGET)-install $(ADK_TARGET)-imageinstall
+clean: $(ADK_TARGET)-clean $(ADK_TARGET)-imageclean
 
 %-clean:
 	$(TRACE) target/$(patsubst %-clean,%,$@)-clean

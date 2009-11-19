@@ -25,12 +25,12 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
-DEVICE:=		$(strip $(subst ",, $(ADK_DEVICE)))
+ADK_TARGET:=		$(strip $(subst ",, $(ADK_TARGET)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
 ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
-include $(TOPDIR)/target/$(DEVICE)/device.mk
+include $(TOPDIR)/target/$(ADK_TARGET)/target.mk
 endif
 
 include $(TOPDIR)/mk/vars.mk
@@ -43,7 +43,7 @@ TARGET_CFLAGS:=		$(strip -fwrapv -fno-ident ${TARGET_CFLAGS})
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
 
-ifneq (${show},)
-_show:
-	@echo '$($(show))'
-endif
+#ifneq (${show},)
+#_show:
+#	@echo '$($(show))'
+#endif

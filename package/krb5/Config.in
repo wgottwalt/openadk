@@ -8,6 +8,7 @@ config ADK_PACKAGE_KRB5_SERVER
 	prompt "krb5-server....................... MIT kerberos server"
 	tristate
 	depends on ADK_COMPILE_KRB5
+	depends on !ADK_COMPILE_HEIMDAL
 	select ADK_PACKAGE_LIBPTHREAD
 	select ADK_PACKAGE_KRB5_LIBS
 	default n

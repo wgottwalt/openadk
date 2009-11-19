@@ -8,7 +8,7 @@ config ADK_BROKEN
 config ADK_TOOLCHAIN_ONLY
 	bool
 
-config ADK_DEVICE_NO_FPU
+config ADK_TARGET_NO_FPU
 	bool
 
 config ADK_EABI
@@ -23,28 +23,28 @@ config ADK_NATIVE
 config ADK_alix1c
 	tristate
 
-config ADK_qemu_arm
+config ADK_arm_qemu
 	tristate
 
-config ADK_qemu_mips
+config ADK_mips_qemu
 	tristate
 
-config ADK_qemu_mipsel
+config ADK_mipsel_qemu
 	tristate
 
-config ADK_qemu_mips64
+config ADK_mips64_qemu
 	tristate
 
-config ADK_qemu_mips64el
+config ADK_mips64el_qemu
 	tristate
 
-config ADK_qemu_cris
+config ADK_cris_qemu
 	tristate
 
-config ADK_qemu_x86
+config ADK_x86_qemu
 	tristate
 
-config ADK_qemu_x86_64
+config ADK_x86_64_qemu
 	tristate
 
 config ADK_rb532
@@ -68,16 +68,16 @@ config ADK_foxboard
 config ADK_lemote
 	tristate
 
-config ADK_rescue_x86
+config ADK_x86_rescue
 	tristate
 
-config ADK_rescue_x86_64
+config ADK_x86_64_rescue
 	tristate
 
-config ADK_rescue_mips
+config ADK_mips_rescue
 	tristate
 
-config ADK_rescue_mipsel
+config ADK_mipsel_rescue
 	tristate
 
 config ADK_wag54g
@@ -89,17 +89,17 @@ config ADK_shuttle
 config ADK_g1
 	tristate
 
-config ADK_DEVICE
+config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
-	default "qemu-arm"  if ADK_qemu_arm
-	default "qemu-cris"  if ADK_qemu_cris
-	default "qemu-mips"  if ADK_qemu_mips
-	default "qemu-mipsel"  if ADK_qemu_mipsel
-	default "qemu-mips64"  if ADK_qemu_mips64
-	default "qemu-mips64el"  if ADK_qemu_mips64el
-	default "qemu-x86"  if ADK_qemu_x86
-	default "qemu-x86_64"  if ADK_qemu_x86_64
+	default "qemu-arm"  if ADK_arm_qemu
+	default "qemu-cris"  if ADK_cris_qemu
+	default "qemu-mips"  if ADK_mips_qemu
+	default "qemu-mipsel"  if ADK_mipsel_qemu
+	default "qemu-mips64"  if ADK_mips64_qemu
+	default "qemu-mips64el"  if ADK_mips64el_qemu
+	default "qemu-x86"  if ADK_x86_qemu
+	default "qemu-x86_64"  if ADK_x86_64_qemu
 	default "foxboard"  if ADK_foxboard
 	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
@@ -108,10 +108,10 @@ config ADK_DEVICE
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
 	default "wag54g"  if ADK_wag54g
-	default "rescue-x86"  if ADK_rescue_x86
-	default "rescue-x86_64"  if ADK_rescue_x86_64
-	default "rescue-mips"  if ADK_rescue_mips
-	default "rescue-mipsel"  if ADK_rescue_mipsel
+	default "rescue-x86"  if ADK_x86_rescue
+	default "rescue-x86_64"  if ADK_x86_64_rescue
+	default "rescue-mips"  if ADK_mips_rescue
+	default "rescue-mipsel"  if ADK_mipsel_rescue
 	default "shuttle"  if ADK_shuttle
 	default "tomtom"  if ADK_tomtom
 	default "g1"  if ADK_g1
@@ -119,7 +119,7 @@ config ADK_DEVICE
 menu "Target system"
 
 choice
-prompt "Embedded Device"
+prompt "Embedded Device or Emulator"
 default ADK_LINUX_NATIVE
 
 config ADK_LINUX_NATIVE
@@ -184,7 +184,7 @@ config ADK_LINUX_MIPS_WAG54G
 config ADK_LINUX_ARM_TOMTOM
 	bool "TomTom Applications"
 	select ADK_tomtom
-	select ADK_DEVICE_NO_FPU
+	select ADK_TARGET_NO_FPU
 	select ADK_EABI
 	select ADK_TOOLCHAIN_ONLY
 	help
@@ -195,7 +195,7 @@ config ADK_LINUX_ARM_TOMTOM
 config ADK_LINUX_ARM_G1
 	bool "Google G1 Applications"
 	select ADK_g1
-	select ADK_DEVICE_NO_FPU
+	select ADK_TARGET_NO_FPU
 	select ADK_EABI
 	select ADK_TOOLCHAIN_ONLY
 	help
@@ -205,9 +205,8 @@ config ADK_LINUX_ARM_G1
 
 #config ADK_LINUX_XSCALE_ZAURUS
 #	bool "Zaurus SL-C3200"
-#	depends on ADK_BROKEN
 #	select ADK_zaurus
-#	select ADK_DEVICE_NO_FPU
+#	select ADK_TARGET_NO_FPU
 #	help
 #	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
 
@@ -242,7 +241,6 @@ config ADK_LINUX_X86_64_SHUTTLE
 	select ADK_KPACKAGE_KMOD_MD_RAID1 if ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	help
 	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
-	  Known as OpenADK multi operating system buildserver.
 
 endchoice
 
@@ -252,25 +250,25 @@ depends on ADK_LINUX_RESCUE
 
 config ADK_LINUX_X86_64_RESCUE
 	bool "x86_64"
-	select ADK_rescue_x86_64
+	select ADK_x86_64_rescue
 	help
 	 X86 architecture.
 
 config ADK_LINUX_X86_RESCUE
 	bool "x86"
-	select ADK_rescue_x86
+	select ADK_x86_rescue
 	help
 	 X86 architecture.
 
 config ADK_LINUX_MIPSEL_RESCUE
 	bool "mips (little endian)"
-	select ADK_rescue_mipsel
+	select ADK_mipsel_rescue
 	help
 	 MIPS LE architecture.
 
 config ADK_LINUX_MIPS_RESCUE
 	bool "mips (big endian)"
-	select ADK_rescue_mips
+	select ADK_mips_rescue
 	help
 	 MIPS BE architecture.
 
@@ -282,7 +280,7 @@ depends on ADK_LINUX_QEMU
 
 config ADK_LINUX_ARM_QEMU
 	bool "arm"
-	select ADK_qemu_arm
+	select ADK_arm_qemu
 	select ADK_EABI
 	help
 	 Qemu support for ARM architecture.
@@ -290,40 +288,40 @@ config ADK_LINUX_ARM_QEMU
 
 config ADK_LINUX_MIPS_QEMU
 	bool "mips (big endian)"
-	select ADK_qemu_mips
+	select ADK_mips_qemu
 	help
 	 Qemu support for MIPS BE architecture.
 
 config ADK_LINUX_MIPSEL_QEMU
 	bool "mipsel (little endian)"
-	select ADK_qemu_mipsel
+	select ADK_mipsel_qemu
 	help
 	 Qemu support for MIPS LE architecture.
 
 config ADK_LINUX_MIPS64_QEMU
 	bool "mips64 (big endian)"
-	select ADK_qemu_mips64
+	select ADK_mips64_qemu
 	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 BE architecture.
 
 config ADK_LINUX_MIPS64EL_QEMU
 	bool "mips64 (little endian)"
-	select ADK_qemu_mips64el
+	select ADK_mips64el_qemu
 	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 LE architecture.
 
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
-	select ADK_qemu_cris
+	select ADK_cris_qemu
 #	select ADK_BROKEN
 	help
 	 Qemu support for CRISv32 architecture.
 
 config ADK_LINUX_X86_QEMU
 	bool "x86"
-	select ADK_qemu_x86
+	select ADK_x86_qemu
 	select ADK_KPACKAGE_KMOD_NE2K_PCI
 	select ADK_KERNEL_INPUT_KEYBOARD
 	help
@@ -331,7 +329,7 @@ config ADK_LINUX_X86_QEMU
 
 config ADK_LINUX_X86_64_QEMU
 	bool "x86_64"
-	select ADK_qemu_x86_64
+	select ADK_x86_64_qemu
 	select ADK_KPACKAGE_KMOD_NE2K_PCI
 	select ADK_KERNEL_INPUT_KEYBOARD
 	help
@@ -416,6 +414,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
@@ -435,6 +434,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_ARM_TOMTOM || \
@@ -456,7 +456,7 @@ config ADK_TARGET_SUFFIX
 choice
 prompt "Target Firmware type"
 	depends on !ADK_TOOLCHAIN_ONLY
-	default ADK_TARGET_ROOTFS_EXT2_CF
+	default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
@@ -699,13 +699,13 @@ config ADK_TARGET_PACKAGE_TGZ
 	boolean
 	prompt "gzip compressed tar archive"
 	help
-	  Create simple compressed tar archives.
+	  Create compressed tar archives.
 
 config ADK_TARGET_PACKAGE_RPM
 	boolean
 	prompt "rpm package format"
 	help
-	  Create rpm binary packages.
+	  Create rpm packages.
 
 endchoice
 
@@ -721,7 +721,7 @@ config ADK_CXX
 	bool "Enable C++ support"
 	default n
 	help
-	  Enable C++ Compiler and Libraries
+	  Enable C++ compiler and libraries.
 
 config ADK_IPV6
 	bool "Enable IPv6 support"
@@ -731,7 +731,7 @@ config ADK_IPV6
 	select BUSYBOX_FEATURE_IFUPDOWN_IPV6
 	select BUSYBOX_PING6
 	help
-	  Enable basic IPv6 support (kmod-ipv6) and
+	  Enable basic IPv6 support and
 	  make the IPv6 support options in packages visible.
 
 config ADK_X11
@@ -741,6 +741,5 @@ config ADK_X11
 	  Enable Xorg/X11 server and applications in menu.
 	  Try to compile other packages with X11 support. 
 	  (f.e. mplayer)
-
 
 endmenu

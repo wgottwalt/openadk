@@ -10,6 +10,10 @@ endif
 
 CONFIG_CONFIG_IN = Config.in
 CONFIG = config
+DEFCONFIG= 		ADK_DEVELSYSTEM=n \
+			ADK_DEBUG=n \
+			ADK_STATIC=n \
+			ADK_FORCE_PARALLEL=n
 
 noconfig_targets:=	menuconfig \
 			_config \
@@ -20,10 +24,11 @@ MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
 			ADK_TARGET_LIB_GLIBC \
 			ADK_TARGET_LIB_ECLIBC \
 			ADK_IPV6 ADK_CXX ADK_DEBUG
+
 POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
 	if [ -d .cfg ];then \
-	what=cleandevice; \
+	what=cleantarget; \
 	for symbol in ${MAKECLEAN_SYMBOLS}; do \
 		newval=$$(grep -e "^$$symbol=" -e "^\# $$symbol " .config); \
 		oldval=$$(cat .cfg/"$$symbol" 2>&-); \
@@ -53,7 +58,7 @@ include ${TOPDIR}/mk/split-cfg.mk
 all: world
 
 .NOTPARALLEL:
-.PHONY: all world clean cleandevice cleandir distclean image_clean
+.PHONY: all world clean cleantarget cleandir distclean image_clean
 
 world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
@@ -107,14 +112,15 @@ image:
 	$(MAKE) -C target image
 
 switch:
-	echo "Saving configuration for device: ${DEVICE}"
-	cp .config .config.${DEVICE}
-	mv .cfg .cfg.${DEVICE}
-	if [ -f .config.${DEV} ];then cp .config.${DEV} .config; \
-	cp .config.${DEV} .config.old; \
-	mv .cfg.${DEV} .cfg; \
-	echo "Setting configuration to device: ${DEV}"; \
-	else echo "No old device config found";mv .config .config.bak;fi
+	echo "Saving configuration for target: ${ADK_TARGET}"
+	cp -p .config .config.${ADK_TARGET}
+	if [ -f .config.old ];then cp -p .config.old .config.old.${ADK_TARGET};fi
+	mv .cfg .cfg.${ADK_TARGET}
+	if [ -f .config.${TARGET} ];then cp -p .config.${TARGET} .config; \
+	cp -p .config.old.${TARGET} .config.old; \
+	mv .cfg.${TARGET} .cfg; \
+	echo "Setting configuration to target: ${TARGET}"; \
+	else echo "No old target config found";mv .config .config.bak;fi
 
 #############################################################
 #
@@ -135,9 +141,9 @@ clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PARENT_PFX}; do \
-		#echo "clean: entering $$d" ; \
+		echo "clean: entering $$d" ; \
 		for f in $$(ls $$d/pkg/[a-z]* 2>/dev/null); do  \
-			#echo "clean: cleaning for $$f" ; \
+			echo "clean: cleaning for $$f" ; \
 			while read file ; do \
 				rm $$d/target/$$file 2>/dev/null; \
 			done < $$f ; \
@@ -158,8 +164,8 @@ cleandir:
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
-cleandevice:
-	@$(TRACE) cleandevice
+cleantarget:
+	@$(TRACE) cleantarget
 	$(MAKE) -C $(CONFIG) clean
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
 	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT)
@@ -167,8 +173,8 @@ cleandevice:
 
 distclean:
 	@$(TRACE) distclean
-	$(MAKE) -C $(CONFIG) clean
-	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) ${TOPDIR}/.cfg
+	@$(MAKE) -C $(CONFIG) clean
+	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) ${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	rm -f .config* .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
@@ -191,7 +197,38 @@ $(CONFIG)/conf:
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
-menuconfig: $(CONFIG)/mconf
+defconfig:
+	@if [ ! -z "$(TARGET)" ];then \
+		grep "^config" target/Config.in |grep -i "$(TARGET)"|sed -e "s#^config \(.*\)#\1=y#" > $(TOPDIR)/.defconfig; \
+		for symbol in ${DEFCONFIG}; do \
+			echo $$symbol >> $(TOPDIR)/.defconfig; \
+		done; \
+	fi
+ifneq (,$(filter %_qemu,${TARGET}))
+	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
+endif
+ifneq (,$(filter %_rescue,${TARGET}))
+	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/.defconfig
+endif
+	@if [ ! -z "$(TARGET)" ];then \
+		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+	fi
+
+modconfig:
+	@if [ ! -z "$(TARGET)" ];then \
+		grep "^config" target/Config.in |grep -i "$(TARGET)"|sed -e "s#^config \(.*\)#\1=y#" > $(TOPDIR)/all.config; \
+		for symbol in ${DEFCONFIG}; do \
+			echo $$symbol >> $(TOPDIR)/all.config; \
+		done; \
+	fi
+ifneq (,$(filter %_qemu,${TARGET}))
+	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/all.config
+endif
+ifneq (,$(filter %_rescue,${TARGET}))
+	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/all.config
+endif
+
+menuconfig: $(CONFIG)/mconf defconfig
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
@@ -202,13 +239,13 @@ _config: $(CONFIG)/conf
 
 .NOTPARALLEL: _mconfig
 _mconfig: ${CONFIG}/conf _mconfig2 _config
-_mconfig2: ${CONFIG}/conf
+_mconfig2: ${CONFIG}/conf modconfig
 	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
-	rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) ${TOPDIR}/.cfg
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
-	rm -f .config* .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) ${TOPDIR}/.cfg*
+	@rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
+	@rm -f .config* .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)

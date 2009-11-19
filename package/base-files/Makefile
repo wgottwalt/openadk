@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_DESCR:=		basic filesystem structure and scripts
 PKG_SECTION:=		base
 
@@ -15,7 +15,7 @@ NO_DISTFILES:=		1
 ifeq ($(CPU_ARCH),x86_64)
 PKG_ID=			x86-64-${FS}
 else
-PKG_ID=			${DEVICE}-${FS}
+PKG_ID=			${ADK_TARGET}-${FS}
 endif
 WRKDIR=			${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-${PKG_ID}
 
@@ -25,8 +25,8 @@ $(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_
 
 do-install:
 	$(CP) ./extra/* $(IDIR_BASE_FILES)
-	$(CP) $(TOPDIR)/target/$(DEVICE)/files/* $(IDIR_BASE_FILES)
-	$(SED) 's,@TARGET@,$(DEVICE),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(CP) $(TOPDIR)/target/$(ADK_TARGET)/files/* $(IDIR_BASE_FILES)
+	$(SED) 's,@TARGET@,$(ADK_TARGET),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
 	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells

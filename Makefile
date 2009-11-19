@@ -17,12 +17,14 @@ v: .prereq_done
 	    set -x; ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
-	@echo '  switch DEV=device  - Backup current config and copy old saved device config'
+	@echo 'Common targets:'
+	@echo '  switch TARGET=targetname  - Backup current config and copy old saved target config'
+	@echo '  download     - fetches all needed distfiles'
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove bin and build_dir directories'
-	@echo '  cleandevice  - Same as "clean", but also remove toolchain for device'
+	@echo '  cleantarget  - Same as "clean", but also remove toolchain for target'
 	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
-	@echo '  cleankernel  - Remove kernel dir'
+	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
 	@echo '                 distfiles and .config'
 	@echo ''
@@ -53,13 +55,13 @@ pkg-help:
 	@echo '  patch        - Same as "extract", but also patch the source'
 	@echo '  build        - Same as "patch", but also build the binaries'
 	@echo '  fake         - Same as "build", but also install the binaries'
-	@echo '  package      - Same as "fake", but also create the ipkg package'
+	@echo '  package      - Same as "fake", but also create the package'
 	@echo '  clean        - Deinstall and remove the build area'
 	@echo '  distclean    - Same as "clean", but also remove the distfiles'
 	@echo ''
 	@echo 'Short package rebuilding guide:'
 	@echo '  run "make package=<pkgname> clean" to remove all generated binaries'
-	@echo '  run "make package=<pkgname> package" to build everything and create the ipkg'
+	@echo '  run "make package=<pkgname> package" to build everything and create the package(s)'
 	@echo ''
 	@echo 'This does not automatically resolve package dependencies!'
 
@@ -97,12 +99,12 @@ cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} clean cleandir
 	@-rm -f make.log .prereq_done
 
-cleandevice deviceclean: .prereq_done
-	-@${GMAKE_INV} clean cleandevice
+cleantarget targetclean: .prereq_done
+	-@${GMAKE_INV} clean cleantarget
 	@-rm -f make.log
 
-distclean cleandist: .prereq_done
-	-@${GMAKE_INV} clean cleandir distclean
+distclean cleandist:
+	@-${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done
 
 image: .prereq_done
@@ -125,6 +127,11 @@ allconfig: .prereq_done
 
 allmodconfig: .prereq_done
 	@${GMAKE_INV} _mconfig W=-o RCONFIG=Config.in
+
+allmoddefconfig: .prereq_done
+	@if [ -z "$(TARGET)" ];then echo "You need to specify a target"; exit 1;fi
+	cp $(TOPDIR)/target/$(TARGET)/default.config $(TOPDIR)/.defconfig
+	@${GMAKE_INV} _mconfig W="-m -o -D .defconfig" RCONFIG=Config.in
 
 package_index: .prereq_done
 	@${GMAKE_INV} package_index

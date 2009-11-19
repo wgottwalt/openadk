@@ -1,6 +1,7 @@
 config ADK_COMPILE_HEIMDAL
 	prompt "heimdal........................... Heimdal kerberos software"
 	bool
+	depends on !ADK_COMPILE_KRB5
 	default n
 
 config ADK_COMPILE_HEIMDAL_WITH_PKINIT

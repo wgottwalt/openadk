@@ -28,19 +28,13 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-sjlj-exceptions \
 			--disable-nls 
 
-#ifeq ($(ADK_LINUX_ARM_TOMTOM),y)
-#GCC_CONFOPTS+=		--enable-sjlj-exceptions
-#else
-#GCC_CONFOPTS+=		--disable-sjlj-exceptions
-#endif
-
 ifeq ($(ADK_SSP),y)
 GCC_CONFOPTS+=		--enable-libssp
 else
 GCC_CONFOPTS+=		--disable-libssp
 endif
 
-ifeq ($(ADK_DEVICE_NO_FPU),y)
+ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 

@@ -33,7 +33,7 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_gnu99_inline=yes \
 			libc_cv_slibdir="/lib" 
 
-ifeq ($(ADK_DEVICE_NO_FPU),y)
+ifeq ($(ADK_TARGET_NO_FPU),y)
 EGLIBC_CONFOPTS+=       --without-fp
 endif
 

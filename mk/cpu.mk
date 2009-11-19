@@ -3,7 +3,7 @@
 # 
 # optimization configure options for CPU features
 
-ifeq ($(DEVICE),alix1c)
+ifeq ($(ADK_TARGET),alix1c)
 CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse \
 			--enable-amd3dnow \

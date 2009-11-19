@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 include ${TOPDIR}/mk/package.mk
 
 
-$(eval $(call PKG_template,KMOD_EM28XX,kmod-em28xx,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE})))
+$(eval $(call PKG_template,KMOD_EM28XX,kmod-em28xx,${KERNEL_VERSION}+${PKG_VERSION}-${TARGET}-${PKG_RELEASE},kernel (${KERNEL_VERSION}-${TARGET}-${KERNEL_RELEASE})))
 
 CONFIGURE_STYLE:=	manual
 BUILD_STYLE:=		manual
@@ -22,7 +22,6 @@ BUILD_STYLE:=		manual
 EM28XX_MAKEOPTS=	-C ${WRKBUILD} \
 			ARCH="${ARCH}" \
 			CROSS_COMPILE="${TARGET_CROSS}" \
-			TARGET="${HAL_TARGET}" \
 			TOOLPREFIX="${TARGET_CROSS}" \
 			TOOLPATH="${TARGET_CROSS}" \
 			KERNELPATH="${LINUX_DIR}" \
@@ -35,7 +34,7 @@ do-build:
 post-install:
 	${INSTALL_DIR} ${IDIR_KMOD_EM28XX}/etc/modules.d/
 	${INSTALL_DIR} ${IDIR_KMOD_EM28XX}/lib/modules/${KERNEL_VERSION}/
-	${CP}	${WRKBUILD}/*.ko \
+	${CP} ${WRKBUILD}/*.ko \
 		${IDIR_KMOD_EM28XX}/lib/modules/${KERNEL_VERSION}/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

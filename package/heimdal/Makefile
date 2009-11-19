@@ -66,11 +66,11 @@ CONFIGURE_OPTS+=	--disable-pk-init
 endif
 
 TCFLAGS+=              -pthread
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS}
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
@@ -93,6 +93,7 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD} clean
 
 post-install:
+	-rm $(STAGING_DIR)/usr/lib/libcom_err*
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/etc/openldap/schema
 	${INSTALL_DATA} ${WRKBUILD}/lib/hdb/hdb.schema \
