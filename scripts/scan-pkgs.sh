@@ -39,6 +39,10 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
+	NEED_BISON="$NEED_BISON heimdal-server"
+fi
+
 if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
 	NEED_XMLTO="$NEED_XMLTO alsa-utils"
 fi
@@ -89,6 +93,13 @@ if [[ -n $NEED_SSLDEV ]]; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_BISON ]]; then
+	if ! which bison >/dev/null 2>&1; then
+		echo >&2 You need bison to build $NEED_BISON
+		out=1
 	fi
 fi
 
