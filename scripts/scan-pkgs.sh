@@ -69,6 +69,10 @@ if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG glib"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
+	NEED_FLEX="$NEED_FLEX libpcap"
+fi
+
 
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
@@ -155,6 +159,13 @@ fi
 if [[ -n $NEED_RPM ]]; then
 	if ! which rpmbuild >/dev/null 2>&1; then
 		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_FLEX ]]; then
+	if ! which flex >/dev/null 2>&1; then
+		echo >&2 You need flex to to use $NEED_FLEX package
 		out=1
 	fi
 fi
