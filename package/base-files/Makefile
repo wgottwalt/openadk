@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_DESCR:=		basic filesystem structure and scripts
 PKG_SECTION:=		base
 
@@ -44,6 +44,10 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/root
 	mkdir -p $(IDIR_BASE_FILES)/sys
 	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-pre-up.d
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-up.d
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-down.d
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-post-down.d
 	mkdir -p $(IDIR_BASE_FILES)/mnt
 	mkdir -p $(IDIR_BASE_FILES)/proc
 	mkdir -p $(IDIR_BASE_FILES)/tmp
