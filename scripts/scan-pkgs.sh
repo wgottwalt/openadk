@@ -39,6 +39,10 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_PACKAGE_RUBY ]]; then
+	NEED_RUBY="$NEED_RUBY ruby"
+fi
+
 if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
 	NEED_BISON="$NEED_BISON libusb"
 fi

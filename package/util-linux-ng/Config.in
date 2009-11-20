@@ -1,7 +1,7 @@
 config ADK_COMPILE_UTIL_LINUX_NG
 	tristate
 	default n
-	depends on ADK_PACKAGE_FDISK || ADK_PACKAGE_SWAP_UTILS
+	depends on ADK_PACKAGE_FDISK || ADK_PACKAGE_SWAP_UTILS || ADK_PACKAGE_SFDISK || ADK_PACKAGE_LOSETUP
 
 config ADK_PACKAGE_FDISK
 	prompt "fdisk............................. Partition table manipulation utility"
@@ -10,6 +10,14 @@ config ADK_PACKAGE_FDISK
 	select ADK_COMPILE_UTIL_LINUX_NG
 	help
 	  A partition table manipulation utility
+
+config ADK_PACKAGE_SFDISK
+	prompt "sfdisk............................ Scriptable Partition table manipulation utility"
+	tristate
+	default n
+	select ADK_COMPILE_UTIL_LINUX_NG
+	help
+	  A scriptable partition table manipulation utility
 	  
 config ADK_PACKAGE_LOSETUP
 	prompt "losetup........................... Loop devices setup and control utility"

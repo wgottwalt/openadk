@@ -1,0 +1,7 @@
+config ADK_PACKAGE_PARTED
+	prompt "parted............................ GNU parted"
+	tristate
+	default n
+	select ADK_PACKAGE_LIBUUID
+	help
+	  GNU parted.

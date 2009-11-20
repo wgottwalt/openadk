@@ -23,7 +23,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_CTORRENT_WITH_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
+TCXXFLAGS+=		-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++
 TLDFLAGS+=		-lgcc_s -luClibc++ -lc -lm -nodefaultlibs
 endif
 

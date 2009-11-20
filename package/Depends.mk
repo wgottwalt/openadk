@@ -181,6 +181,7 @@ openswan-compile: gmp-compile
 oprofile-compile: popt-compile
 osiris-compile: openssl-compile
 palantir-compile: jpeg-compile
+parted-compile: e2fsprogs-compile
 pciutils-compile: zlib-compile
 popt-compile: libiconv-compile
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)

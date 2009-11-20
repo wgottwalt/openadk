@@ -1,6 +1,6 @@
---- nss-3.12.3.orig/mozilla/security/nss/cmd/shlibsign/sign.sh	2006-01-18 21:56:28.000000000 +0100
-+++ nss-3.12.3/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-06-24 21:27:49.462838938 +0200
-@@ -53,6 +53,7 @@ OpenVMS)
+--- nss-3.12.4.orig/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-06-05 04:30:52.000000000 +0200
++++ nss-3.12.4/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-11-20 18:51:43.000000000 +0100
+@@ -35,6 +35,7 @@ WIN*)
      ADDON_PATH=${1}/lib:${4}:$ADDON_PATH
      export ADDON_PATH
      echo ${2}/shlibsign -v -i ${5}

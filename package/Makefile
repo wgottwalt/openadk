@@ -305,6 +305,7 @@ package-$(ADK_PACKAGE_OWFS) += owfs
 package-$(ADK_PACKAGE_P910ND) += p910nd
 package-$(ADK_PACKAGE_PALANTIR) += palantir
 package-$(ADK_PACKAGE_PARPROUTED) += parprouted
+package-$(ADK_PACKAGE_PARTED) += parted
 package-$(ADK_PACKAGE_PATCH) += patch
 package-$(ADK_PACKAGE_PCIUTILS) += pciutils
 package-$(ADK_COMPILE_PCRE) += pcre

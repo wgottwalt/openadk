@@ -27,9 +27,9 @@ $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
+CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lgcc"
+			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-openssl \
