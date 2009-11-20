@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- freeradius-server-2.1.6.orig/src/modules/rlm_eap/Makefile.in	2009-05-18 13:13:55.000000000 +0200
-+++ freeradius-server-2.1.6/src/modules/rlm_eap/Makefile.in	2009-06-01 17:23:33.047631797 +0200
+--- freeradius-server-2.1.7.orig/src/modules/rlm_eap/Makefile.in	2009-09-14 16:43:29.000000000 +0200
++++ freeradius-server-2.1.7/src/modules/rlm_eap/Makefile.in	2009-11-19 22:37:45.000000000 +0100
 @@ -37,7 +37,7 @@ radeapclient.lo: radeapclient.c $(HEADER
  
  install-subdirs:

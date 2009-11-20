@@ -39,6 +39,10 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
+	NEED_BISON="$NEED_BISON libusb"
+fi
+
 if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
 	NEED_BISON="$NEED_BISON heimdal-server"
 fi
@@ -71,6 +75,7 @@ fi
 
 if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
 	NEED_FLEX="$NEED_FLEX libpcap"
+	NEED_BISON="$NEED_BISON libpcap"
 fi
 
 

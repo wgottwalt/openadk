@@ -12,6 +12,8 @@ toolchain_build_*/
 .tmpconfig.h
 .prereq_done
 .config*
+.defconfig
+all.config
 .cfg/
 .cfg.*/
 cross_*/

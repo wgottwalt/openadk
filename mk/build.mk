@@ -160,7 +160,8 @@ cleankernel:
 cleandir:
 	@$(TRACE) cleandir
 	$(MAKE) -C $(CONFIG) clean
-	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) ${TOPDIR}/.cfg
+	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
+		${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
@@ -174,9 +175,11 @@ cleantarget:
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean
-	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) ${TOPDIR}/.cfg*
+	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+		${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
-	rm -f .config* .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	rm -f .config* .defconfig .tmpconfig.h all.config \
+		${TOPDIR}/package/*/info.mk
 
 else # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -244,8 +247,10 @@ _mconfig2: ${CONFIG}/conf modconfig
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
-	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) ${TOPDIR}/.cfg*
+	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) \
+		${TOPDIR}/.cfg*
 	@rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
-	@rm -f .config* .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	@rm -f .config* .defconfig all.config .tmpconfig.h \
+		${TOPDIR}/package/*/info.mk
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)

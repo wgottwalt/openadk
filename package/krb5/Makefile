@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f7b3402b4731a7fa543db193bf1b564
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		krb5-libs
+PKG_DEPENDS:=		krb5-libs libncurses libss libcom_err
 PKG_URL:=		http://web.mit.edu/kerberos
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.7/
 
@@ -24,8 +24,12 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_LIBS,krb5-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 
+TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	--disable-static --without-tcl
+CONFIGURE_ARGS+=	--disable-static \
+			--with-system-ss \
+			--with-system-et \
+			--without-tcl
 CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_func_regcomp=yes \
 			ac_cv_printf_positional=yes \
@@ -56,7 +60,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_KRB5_LIBS}/etc
 	${INSTALL_DIR} ${IDIR_KRB5_LIBS}/usr/lib
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_KRB5_LIBS}/etc
-	${CP} ${WRKINST}/usr/lib/lib{com_err,gssapi_krb5,k5crypto,krb5,krb5support}.so* \
+	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
 		${IDIR_KRB5_LIBS}/usr/lib
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' > ${IDIR_KRB5_LIBS}/etc/gssapi_mech.conf
 

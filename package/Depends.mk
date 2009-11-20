@@ -65,7 +65,7 @@ endif
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
 heimdal-compile: openldap-compile
 endif
-heimdal-compile: openssl-compile ncurses-compile
+heimdal-compile: openssl-compile ncurses-compile e2fsprogs-compile
 httping-compile: openssl-compile
 icecast-compile: curl-compile libvorbis-compile libxml2-compile libxslt-compile
 ifeq (${ADK_COMPILE_ID3LIB_WITH_UCLIBCXX},y)
@@ -91,7 +91,7 @@ kismet-compile: uclibc++-compile
 endif
 kismet-compile: libpcap-compile ncurses-compile
 knock-compile: libpcap-compile
-krb5-compile: ncurses-compile
+krb5-compile: ncurses-compile e2fsprogs-compile
 l2tpns-compile: libcli-compile
 less-compile: ncurses-compile
 libgcrypt-compile: libgpg-error-compile
@@ -129,7 +129,7 @@ endif
 lighttpd-compile: pcre-compile libxml2-compile sqlite-compile
 links-compile: openssl-compile libpng-compile jpeg-compile gpm-compile
 logrotate-compile: popt-compile
-lynx-compile: ncurses-compile openssl-compile
+lynx-compile: ncurses-compile openssl-compile zlib-compile
 madplay-compile: libid3tag-compile libmad-compile
 maradns-compile: libpthread-compile
 mc-compile: glib-compile ncurses-compile

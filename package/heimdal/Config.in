@@ -1,7 +1,6 @@
 config ADK_COMPILE_HEIMDAL
 	prompt "heimdal........................... Heimdal kerberos software"
 	bool
-	depends on !ADK_COMPILE_KRB5
 	default n
 
 config ADK_COMPILE_HEIMDAL_WITH_PKINIT
@@ -14,6 +13,7 @@ config ADK_PACKAGE_HEIMDAL_SERVER
 	prompt "heimdal-server.................... heimdal kerberos server"
 	tristate
 	depends on ADK_COMPILE_HEIMDAL
+	select ADK_PACKAGE_LIBCOM_ERR
 	select ADK_PACKAGE_LIBPTHREAD
 	select ADK_PACKAGE_LIBOPENSSL
 	select ADK_PACKAGE_LIBNCURSES

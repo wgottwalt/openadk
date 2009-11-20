@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		2.1.6
+PKG_VERSION:=		2.1.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		078f7d29b4d2d34f7c992abf772c28a0
+PKG_MD5SUM:=		b1f77c5e3116bcb0ac0aa9080a06ebf1
 PKG_DESCR:=		a flexible RADIUS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libltdl libopenssl libpthread

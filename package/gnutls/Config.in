@@ -68,38 +68,6 @@ config ADK_PACKAGE_LIBGNUTLS_OPENSSL
 	  This packages contains the GnuTLS OpenSSL compatibility
 	  layer shared library.
 
-config ADK_PACKAGE_LIBGNUTLSXX
-	prompt "libgnutlsxx....................... The GNU TLS C++ library"
-	tristate
-	default n
-	depends on ADK_CXX
-	depends on ADK_PACKAGE_LIBGNUTLS
-	help
-	  GnuTLS is a project that aims to develop a library which provides a
-	  secure layer, over a reliable transport layer. Currently the GnuTLS
-	  library implements the proposed standards by the IETF's TLS working
-	  group.
-
-	  This packages contains the GnuTLS C++ shared library.
-
-choice
-prompt "C++ library to use"
-depends on ADK_PACKAGE_LIBGNUTLSXX
-default ADK_COMPILE_GNUTLS_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-default ADK_COMPILE_GNUTLS_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
-
-config ADK_COMPILE_GNUTLS_WITH_STDCXX
-	bool "Standard C++ library"
-	select ADK_PACKAGE_LIBSTDCXX
-	help
-
-config ADK_COMPILE_GNUTLS_WITH_UCLIBCXX
-	bool "Embedded uClibc++ library"
-	select ADK_PACKAGE_UCLIBCXX
-	help
-
-endchoice
-
 config ADK_PACKAGE_GNUTLS_UTILS
 	prompt "gnutls-utils...................... The GNU TLS utilities"
 	tristate

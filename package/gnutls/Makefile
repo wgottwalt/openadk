@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.8.3
+PKG_VERSION:=		2.8.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		72b77092c5d1ae01306cd14c0f22d6e4
+PKG_MD5SUM:=		e3b2788b79bfc82acbe717e3c54d4e92
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
@@ -17,35 +17,18 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-ifeq (${ADK_COMPILE_GNUTLS_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-nodefaultlibs -luClibc++
-PKG_DEPENDS_1:=		${PKG_DEPENDS} uclibc++
-else
-PKG_DEPENDS_1:=		${PKG_DEPENDS} libstdcxx
-endif
-
 $(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGNUTLSXX,libgnutlsxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-lncurses
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--disable-camellia \
 			--with-libgcrypt-prefix=${STAGING_DIR}/usr \
 			--without-libz-prefix
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
-ifeq (${ADK_COMPILE_GNUTLS_WITH_UCLIBCXX},y)
-# add workaround because libtool tries to link libstdc++
-post-configure:
-	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
-	    ${WRKBUILD}/libtool
-endif
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib
@@ -57,9 +40,5 @@ post-install:
 	${INSTALL_DIR} ${IDIR_GNUTLS_UTILS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/{{cert,srp,psk}tool,gnutls-{cli,serv}} \
 	    ${IDIR_GNUTLS_UTILS}/usr/bin
-ifeq ($(ADK_CXX),y)
-	${INSTALL_DIR} ${IDIR_LIBGNUTLSXX}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgnutlsxx.so.* ${IDIR_LIBGNUTLSXX}/usr/lib
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

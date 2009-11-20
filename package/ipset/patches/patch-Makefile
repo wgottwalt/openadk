@@ -1,0 +1,11 @@
+--- ipset-3.0.orig/Makefile	2009-05-16 21:09:38.000000000 +0200
++++ ipset-3.0/Makefile	2009-11-19 23:32:37.000000000 +0100
+@@ -5,7 +5,7 @@
+ ######################################################################
+ 
+ ifndef KERNEL_DIR
+-KERNEL_DIR=/usr/src/linux
++KERNEL_DIR?=/usr/src/linux
+ endif
+ ifndef KBUILD_OUTPUT
+ KBUILD_OUTPUT=$(KERNEL_DIR)
