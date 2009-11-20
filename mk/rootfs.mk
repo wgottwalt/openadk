@@ -19,7 +19,7 @@ $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
 $(eval $(call rootfs_template,squashfs,SQUASHFS))
 $(eval $(call rootfs_template,yaffs,YAFFS))
-$(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp))
+$(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp init=/init))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
 
 export FS
