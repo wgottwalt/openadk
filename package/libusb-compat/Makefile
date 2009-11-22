@@ -14,13 +14,17 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUSB_COMPAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBUSB_COMPAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto confprog
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB_COMPAT}/usr/lib
