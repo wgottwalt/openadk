@@ -1,4 +1,62 @@
 #!/bin/sh
 # installs a rootfs tar archive from OpenADK onto a Compact Flash disk
 
+if [ -z $1 ];then
+        printf "Please give your root tar archive as parameter\n"
+        exit 1
+fi
+# create empty partition table
+parted -s /dev/sda mklabel msdos
+sleep 2
+maxsize=$(env LC_ALL=C parted /dev/sda -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+rootsize=$(($maxsize-2))
+parted -s /dev/sda unit cyl mkpartfs primary ext2 0 $rootsize
+parted -s /dev/sda unit cyl mkpart primary fat32 $rootsize $maxsize
+parted -s /dev/sda set 1 boot on
+sfdisk --change-id /dev/sda 2 88
+if [ $? -eq 0 ];then
+        printf "Successfully created partition ${rootpart}\n"
+else
+        printf "Partition creation failed, Exiting.\n"
+        exit 1
+fi
+mount -t ext2 /dev/sda1 /mnt
+printf "Extracting install archive\n"
+tar -C /mnt -xzpf $1
+chmod 1777 /mnt/tmp
+chmod 4755 /mnt/bin/busybox
+
+speed=$(awk -F \, '/console=ttyS0/ { print $2 }' /proc/cmdline|sed -e "s/ .*$//")
+
+printf "Install bootloader\n"
+mkdir -p /mnt/boot/grub
+mount -o bind /dev /mnt/dev
+chroot /mnt mount -t proc /proc /proc
+chroot /mnt mount -t sysfs /sys /sys
+cat << EOF > /mnt/boot/grub/grub.cfg
+set default=0
+set timeout=5
+serial --unit=0 --speed=$speed
+terminal_output serial 
+terminal_input serial 
+
+menuentry "GNU/Linux (OpenADK)" {
+        insmod ext2
+        set root=(hd0,1)
+        linux /boot/vmlinuz-adk root=/dev/sda1 ro init=/init panic=10
+}
+EOF
+chroot /mnt grub-install /dev/sda
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt/dev
+
+printf "Creating device nodes\n"
+mknod -m 666 /mnt/dev/null c 1 3
+mknod -m 622 /mnt/dev/console c 5 1
+mknod -m 666 /mnt/dev/tty c 5 0
+
+umount /mnt
+printf "Successfully installed.\n"
+exit 0
 

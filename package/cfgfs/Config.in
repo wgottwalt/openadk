@@ -4,8 +4,13 @@ config ADK_PACKAGE_CFGFS
 	select BUSYBOX_COMM
 	select BUSYBOX_MD5SUM
 	select BUSYBOX_FEATURE_SORT_BIG
-	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_CRIS_FOXBOARD || \
+	depends on \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_MIPS_RB532
 	default y
 	help
-	  Adopted from FreeWRT fwcf
+	  Compressed config filesystem for /etc.
+	  This makes smooth updates of your embedded device possible.
+	  (Adopted from FreeWRT fwcf)
