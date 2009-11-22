@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.6.4
+PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9649be6c47b7d915dce75a1198900c25
+PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat
@@ -18,7 +18,7 @@ ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
 PKG_DEPENDS+=		neon
 endif
 
-$(eval $(call PKG_template,SUBVERSION,$(PKG_NAME),${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr/bin/apr-config
@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--without-jdk
 CONFIGURE_ARGS+=	--disable-javahl
 CONFIGURE_ARGS+=	--without-berkeley-db
 
-LIBS= 			-laprutil-0 -lapr-0 -lexpat -liconv -lsqlite3
+LIBS= 			-lsqlite3 -laprutil-0 -lapr-0 -lexpat -liconv 
 
 ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
 CONFIGURE_ARGS+=	-disable-neon-version-check

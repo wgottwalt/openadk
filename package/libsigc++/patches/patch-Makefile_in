@@ -1,12 +1,20 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- libsigc++-2.2.2.orig/Makefile.in	2008-03-10 13:11:44.000000000 +0100
-+++ libsigc++-2.2.2/Makefile.in	2008-10-10 11:05:33.000000000 +0200
-@@ -206,7 +206,7 @@ top_srcdir = @top_srcdir@
- # other stuff here
- EXTRA_DIST = autogen.sh sigc++config.h.in libsigc++-2.0.spec.in
- # ACLOCAL_FLAGS = -I scripts
--SUBDIRS = sigc++ tests docs examples scripts MSVC_Net2003
-+SUBDIRS = sigc++ scripts
- DIST_SUBDIRS = $(SUBDIRS)
- sigc_configdir = $(libdir)/sigc++-2.0/include
- sigc_config_DATA = sigc++config.h
+--- libsigc++-2.2.4.2.orig/Makefile.in	2009-09-02 17:55:19.000000000 +0200
++++ libsigc++-2.2.4.2/Makefile.in	2009-11-20 20:31:56.000000000 +0100
+@@ -89,7 +89,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
+   distclean-recursive maintainer-clean-recursive
+ ETAGS = etags
+ CTAGS = ctags
+-DIST_SUBDIRS = sigc++ tests examples docs
++DIST_SUBDIRS = sigc++
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ distdir = $(PACKAGE)-$(VERSION)
+ top_distdir = $(distdir)
+@@ -239,7 +239,7 @@ top_srcdir = @top_srcdir@
+ ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
+ @ENABLE_DOCUMENTATION_FALSE@doc_subdirs = 
+ @ENABLE_DOCUMENTATION_TRUE@doc_subdirs = docs
+-SUBDIRS = sigc++ tests examples $(doc_subdirs)
++SUBDIRS = sigc++ 
+ sigc_configdir = $(libdir)/$(SIGCXX_MODULE_NAME)/include
+ nodist_sigc_config_HEADERS = sigc++config.h
+ pkgconfigdir = $(libdir)/pkgconfig

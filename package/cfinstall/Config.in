@@ -1,0 +1,10 @@
+config ADK_PACKAGE_CFINSTALL
+	prompt "cfinstall........................... compact flash installer"
+	tristate
+	select ADK_PACKAGE_SFDISK
+	select ADK_PACKAGE_PARTED
+	select ADK_PACKAGE_GRUB_BIN
+	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB532
+	default n
+	help
+	  Installs a rootfs tar archive onto a Compact Flash disk.

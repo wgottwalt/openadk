@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- uClibc++-0.2.1.orig/src/string.cpp	2006-09-04 04:28:07.000000000 +0200
-+++ uClibc++-0.2.1/src/string.cpp	2008-12-14 18:23:21.000000000 +0100
-@@ -74,11 +74,11 @@ namespace std{
+--- uClibc++-0.2.2.orig/src/string.cpp	2007-06-04 00:51:13.000000000 +0200
++++ uClibc++-0.2.2/src/string.cpp	2009-11-20 22:52:48.000000000 +0100
+@@ -76,11 +76,11 @@ namespace std{
  
  	template _UCXXEXPORT bool operator==(const string & lhs, const string & rhs);
  	template _UCXXEXPORT bool operator==(const char * lhs, const string & rhs);

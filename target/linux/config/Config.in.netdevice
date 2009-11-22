@@ -211,7 +211,5 @@ config ADK_KERNEL_RT2X00_DEBUG
 	boolean
 	help
 
-source package/mac80211/Config.in
-
 endmenu
 endmenu
