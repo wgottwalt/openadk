@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
-PKG_VERSION:=		0.8.4
+PKG_VERSION:=		0.8.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dc0f37d933b0b6c713ad617e09441f3b
+PKG_MD5SUM:=		e701095e1824b7e512a17000f4c0a783
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libtorrent libcurl
@@ -23,8 +23,7 @@ CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
 			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
 endif
 
-CONFIGURE_STYLE:=	autotool gnu
-CONFIGURE_ARGS+=	--enable-aligned
+CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

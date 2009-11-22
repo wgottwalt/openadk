@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBFONTENC
-	prompt "libfontenc.............................. X font encoding library"
+	prompt "libfontenc........................... X font encoding library"
 	tristate
 	select ADK_PACKAGE_ZLIB
 	default n

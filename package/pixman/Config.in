@@ -1,5 +1,5 @@
 config ADK_PACKAGE_PIXMAN
-	prompt "pixman.............................. pixman library"
+	prompt "pixman............................... pixman library"
 	tristate
 	default n
 	help

@@ -1,7 +1,8 @@
 config ADK_PACKAGE_GLIB
-	prompt "glib............................. low-level core library that forms the basis of GTK+"
+	prompt "glib.............................. low-level core library that forms the basis of GTK+"
 	tristate
-	default n
 	select ADK_PACKAGE_LIBPTHREAD
 	select ADK_PACKAGE_LIBICONV
 	select ADK_PACKAGE_GETTEXT
+	default n
+	help

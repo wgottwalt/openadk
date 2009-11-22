@@ -1,5 +1,5 @@
 config ADK_PACKAGE_XKEYBOARD_CONFIG
-	prompt "xkeyboard-config............................ X keyboard config"
+	prompt "xkeyboard-config..................... X keyboard config"
 	tristate
 	default n
 	help

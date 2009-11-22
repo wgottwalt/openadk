@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libsigc++
-PKG_VERSION:=		2.2.2
+PKG_VERSION:=		2.2.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e27a20ac9bc9100f48effdfca8e8c595
+PKG_MD5SUM:=		a79b2fe9de69b40e020617c7a652d704
 PKG_DESCR:=		Callback framework for C++
 PKG_SECTION:=		libs
 PKG_URL:=		http://libsigc.sourceforge.net
@@ -30,7 +30,7 @@ endif
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto confprog
+INSTALL_STYLE:=		auto
 
 ifeq (${ADK_COMPILE_LIBSIGCXX_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++

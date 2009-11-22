@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- uClibc++-0.2.1.orig/include/string	2006-09-04 04:28:07.000000000 +0200
-+++ uClibc++-0.2.1/include/string	2008-12-14 18:22:26.000000000 +0100
-@@ -1010,11 +1010,11 @@ template<class charT, class traits, clas
+--- uClibc++-0.2.2.orig/include/string	2007-06-04 00:51:12.000000000 +0200
++++ uClibc++-0.2.2/include/string	2009-11-20 22:52:48.000000000 +0100
+@@ -1017,11 +1017,11 @@ template<class charT, class traits, clas
  
  template <> _UCXXEXPORT bool operator==(const string & lhs, const string & rhs);
  template <> _UCXXEXPORT bool operator==(const char * lhs, const string & rhs);

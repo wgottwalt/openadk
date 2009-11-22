@@ -39,6 +39,7 @@ package-$(ADK_PACKAGE_BISON) += bison
 package-$(ADK_PACKAGE_BZIP2) += bzip2
 package-$(ADK_PACKAGE_CA_CERTS) += ca-certificates
 package-$(ADK_PACKAGE_CFGFS) += cfgfs
+package-$(ADK_PACKAGE_CFINSTALL) += cfinstall
 package-$(ADK_PACKAGE_CPIO) += cpio
 package-$(ADK_PACKAGE_CRYPTINIT) += cryptinit
 package-$(ADK_PACKAGE_BIGREQSPROTO) += bigreqsproto
@@ -442,7 +443,6 @@ package-$(ADK_PACKAGE_ZLIB_DEV) += zlib
 package-$(ADK_PACKAGE_ZSH) += zsh
 # kernel addon packages
 package-$(ADK_PACKAGE_KMOD_EM28XX) += em28xx
-package-$(ADK_PACKAGE_KMOD_MAC80211) += mac80211
 package-$(ADK_PACKAGE_NTFS_3G) += ntfs-3g
 
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))

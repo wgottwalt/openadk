@@ -71,6 +71,10 @@ if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG dansguardian"
 fi
 
+if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
+	NEED_INTL="$NEED_INTL xkeyboard-config"
+fi
+
 if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GLIBZWO="$NEED_GLIBZWO glib"
 	NEED_GETTEXT="$NEED_GETTEXT glib"
@@ -106,6 +110,13 @@ if [[ -n $NEED_SSLDEV ]]; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_INTL ]]; then
+	if ! which intltool-update >/dev/null 2>&1; then
+		echo >&2 You need intltool-update to build $NEED_INTL
+		out=1
 	fi
 fi
 

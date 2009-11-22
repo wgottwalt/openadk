@@ -13,30 +13,3 @@ config ADK_PACKAGE_E2FSPROGS
 
 	  http://e2fsprogs.sourceforge.net/
 
-config ADK_PACKAGE_LIBUUID
-	prompt "libuuid......................... UUID library"
-	depends on ADK_PACKAGE_E2FSPROGS
-	tristate
-	default n
-	help
-
-config ADK_PACKAGE_LIBBLKID
-	prompt "libblkid........................ BlockID library"
-	depends on ADK_PACKAGE_E2FSPROGS
-	tristate
-	default n
-	help
-
-config ADK_PACKAGE_LIBCOM_ERR
-	prompt "libcom_err...................... Common error library"
-	depends on ADK_PACKAGE_E2FSPROGS
-	tristate
-	default n
-	help
-
-config ADK_PACKAGE_LIBSS
-	prompt "libss........................... Subsystem command parsing library"
-	depends on ADK_PACKAGE_E2FSPROGS
-	tristate
-	default n
-	help

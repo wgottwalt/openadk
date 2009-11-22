@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXMU
-	prompt "libXmu................................. X library"
+	prompt "libXmu............................... miscellaneous utility functions for X libraries"
 	tristate
 	default n
 	help

@@ -1,13 +1,9 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iw-0.9.14.orig/version.sh	2009-05-13 00:10:08.000000000 +0200
-+++ iw-0.9.14/version.sh	2009-05-21 23:14:24.000000000 +0200
-@@ -1,23 +1,7 @@
--#!/bin/sh
-+#!/usr/bin/env bash
+--- iw-0.9.17.orig/version.sh	2009-08-26 11:41:41.000000000 +0200
++++ iw-0.9.17/version.sh	2009-11-20 23:11:10.000000000 +0100
+@@ -5,20 +5,6 @@ OUT="$1"
  
- VERSION="0.9.14"
- OUT="$1"
--
+ echo '#include "iw.h"' > "$OUT"
+ 
 -if head=`git rev-parse --verify HEAD 2>/dev/null`; then
 -	git update-index --refresh --unmerged > /dev/null
 -	descr=$(git describe)
@@ -16,7 +12,6 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 -	# is correct...
 -	[ "${descr%%-*}" = "v$VERSION" ] || exit 2
 -
--	echo -n 'const char iw_version[] = "' > "$OUT"
 -	v="${descr#v}"
 -	if git diff-index --name-only HEAD | read dummy ; then
 -		v="$v"-dirty
@@ -26,4 +21,4 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 -fi
 +v="$VERSION"
  
- echo "const char iw_version[] = \"$v\";" > "$OUT"
+ echo "const char iw_version[] = \"$v\";" >> "$OUT"

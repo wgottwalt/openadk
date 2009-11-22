@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXXF86DGA
-	prompt "libXxf86dga................................. X library"
+	prompt "libXxf86dga.......................... client library for the XFree86-DGA extension"
 	tristate
 	default n
 	help

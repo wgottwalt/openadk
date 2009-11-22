@@ -1,5 +1,5 @@
 config ADK_PACKAGE_PYTHON
-	prompt "python........................... Python scripting language"
+	prompt "python............................ Python scripting language"
 	tristate
 	default n
 	help

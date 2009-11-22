@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXKBFILE
-	prompt "libxkbfile.............................. X keyboard library"
+	prompt "libxkbfile........................... X keyboard library"
 	tristate
 	default n
 	help

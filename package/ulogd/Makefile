@@ -10,6 +10,7 @@ PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
 PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		iptables
+PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.netfilter.org/projects/ulogd
 PKG_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/ulogd/ \

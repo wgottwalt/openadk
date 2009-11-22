@@ -1,0 +1,20 @@
+--- samba-3.4.3.orig/source3/registry/reg_perfcount.c	2009-10-29 08:47:16.000000000 +0100
++++ samba-3.4.3/source3/registry/reg_perfcount.c	2009-11-20 21:11:54.000000000 +0100
+@@ -613,14 +613,14 @@ static bool _reg_perfcount_add_counter(P
+ 	obj = NULL;
+ 	memset(buf, 0, PERFCOUNT_MAX_LEN);
+ 	memcpy(buf, data.dptr, data.dsize);
+-	begin = index(buf, '[');
+-	end = index(buf, ']');
++	begin = strchr(buf, '[');
++	end = strchr(buf, ']');
+ 	if(begin == NULL || end == NULL)
+ 		return False;
+ 	start = begin+1;
+ 
+ 	while(start < end) {
+-		stop = index(start, ',');
++		stop = strchr(start, ',');
+ 		if(stop == NULL)
+ 			stop = end;
+ 		*stop = '\0';

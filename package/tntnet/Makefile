@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.tntnet.org/download/
 
 include ${TOPDIR}/mk/package.mk
 
-ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+ifeq (${ADK_COMPILE_TNTNET_WITH_UCLIBCXX},y)
 PKG_DEPENDS+=		uclibc++
 else
 PKG_DEPENDS+=		libstdcxx
@@ -31,9 +31,9 @@ endif
 
 $(eval $(call PKG_template,TNTNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-nodefaultlibs -luClibc++ -liconv -lpthread -lcxxtools -lm
+ifeq (${ADK_COMPILE_TNTNET_WITH_UCLIBCXX},y)
+TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++ -Wl,-E
+TLDFLAGS+=		-nodefaultlibs -luClibc++ -liconv -lpthread -lcxxtools -lm -ldl
 else
 TLDFLAGS+=		-liconv -lpthread -lcxxtools -lm -ldl
 endif
@@ -55,7 +55,7 @@ CONFIGURE_ENV+= 	CXXFLAGS='${TCXXFLAGS}' \
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
-ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+ifeq (${ADK_COMPILE_TNTNET_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++
 post-configure:
 	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \

@@ -71,7 +71,7 @@ endif
 	touch $@
 
 # do a parallel build if requested && package doesn't force disable it
-ifeq (${PKG_BUILD_PARALLEL},y)
+ifeq (${ADK_MAKE_PARALLEL},y)
 ifeq ($(strip ${PKG_NOPARALLEL}),)
 MAKE_FLAGS+=		-j${ADK_MAKE_JOBS}
 endif
