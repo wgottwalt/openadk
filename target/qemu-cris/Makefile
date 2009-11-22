@@ -16,7 +16,7 @@ tools-compile: $(TOOLS_BUILD_DIR)
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' \
 	mkfimage $(LINUX_DIR)/arch/cris/arch-v32/boot/zImage \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel $(MAKE_TRACE)
+		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel $(MAKE_TRACE)
 
 ifeq ($(FS),ext2)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -29,7 +29,7 @@ endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

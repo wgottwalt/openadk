@@ -23,6 +23,9 @@ config ADK_NATIVE
 config ADK_alix1c
 	tristate
 
+config ADK_wrap
+	tristate
+
 config ADK_arm_qemu
 	tristate
 
@@ -92,6 +95,7 @@ config ADK_g1
 config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
+	default "wrap"  if ADK_wrap
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
@@ -141,6 +145,22 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
 	help
+	  Support for ALIX boards.
+	  http://www.pcengines.ch/
+
+config ADK_LINUX_X86_WRAP
+	bool "PC Engines WRAP"
+	select ADK_wrap
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	help
+	  End of life, but I still have one board.
 	  http://www.pcengines.ch/
 
 config ADK_LINUX_CRIS_FOXBOARD
@@ -149,7 +169,8 @@ config ADK_LINUX_CRIS_FOXBOARD
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_NLS
 	help
-	  Foxboard support
+	  Support for Foxboard targets.
+	  http://foxlx.acmesystems.it/
 
 config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
@@ -163,12 +184,16 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_MII
 	select ADK_KERNEL_SWAP
 	help
-	  Lemote Subnotebook
+	  Lemote Subnotebook.
+	  http://www.lemote.com/english/index.html
+	  http://www.tekmote.nl/
 
 config ADK_LINUX_MIKROTIK
 	bool "Mikrotik Routerboards"
 	help
-	 Support for Mikrotik Routerboards
+	  Support for Mikrotik Routerboards
+	  http://www.mikrotik.com
+	  http://www.routerboards.com
 
 config ADK_LINUX_MIPS_WAG54G
 	bool "Linksys WAG54G"
@@ -178,8 +203,8 @@ config ADK_LINUX_MIPS_WAG54G
 	select ADK_KERNEL_MII
 	select ADK_wag54g
 	help
-	  Linksys WAG54G DSL router with Wireless
-	  TI AR7 platform
+	  Linksys WAG54G DSL router with Wireless.
+	  (Texas Instruments AR7 platform)
 
 config ADK_LINUX_ARM_TOMTOM
 	bool "TomTom Applications"
@@ -201,7 +226,7 @@ config ADK_LINUX_ARM_G1
 	help
 	 Support for Google G1.
 	 Just toolchain support to cross-compile your own
-	 applications.
+	 applications. Use static linking for your packages.
 
 #config ADK_LINUX_XSCALE_ZAURUS
 #	bool "Zaurus SL-C3200"
@@ -315,7 +340,7 @@ config ADK_LINUX_MIPS64EL_QEMU
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
 	select ADK_cris_qemu
-#	select ADK_BROKEN
+	depends on ADK_BROKEN
 	help
 	 Qemu support for CRISv32 architecture.
 
@@ -413,6 +438,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB532 || \
@@ -433,6 +459,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_RESCUE || \
@@ -460,7 +487,8 @@ prompt "Target Firmware type"
 
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
-	depends on ADK_LINUX_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
 		ADK_LINUX_NATIVE || \
 		ADK_LINUX_RESCUE
 	select ADK_KERNEL_BLK_DEV_INITRD
@@ -470,7 +498,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
-	depends on ADK_LINUX_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
 		ADK_LINUX_RESCUE
@@ -479,14 +508,16 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 
 config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "squashfs read-only root filesystem"
-	depends on ADK_LINUX_CRIS_FOXBOARD || \
+	depends on \
+		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_MIPS_WAG54G
 	help
 	  highly compressed read-only filesystem for flash.
 
 config ADK_TARGET_ROOTFS_YAFFS
 	bool "YAFFS2 rootfilesystem (NAND)"
-	depends on ADK_LINUX_MIPS_RB532 || \
+	depends on \
+		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411
 	help
@@ -494,8 +525,10 @@ config ADK_TARGET_ROOTFS_YAFFS
 
 config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
-	depends on ADK_LINUX_CRIS_FOXBOARD || \
+	depends on \
+		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411 || \
@@ -512,17 +545,21 @@ config ADK_TARGET_ROOTFS_NFSROOT
 
 config ADK_TARGET_ROOTFS_EXT2_CF
 	bool "read-write filesystem for compact flash (ext2)"
-	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB532
+	depends on \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
 	help
-	  Use this option if you have a compact flash
+	  Use this option if you have a compact flash reader
 	  inside your hardware and want to boot from it.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
-	depends on ADK_LINUX_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_MIPS64_LEMOTE || \
 		ADK_LINUX_X86_64_SHUTTLE
@@ -709,6 +746,7 @@ config ADK_TARGET_PACKAGE_RPM
 
 endchoice
 
+# broken and untested right now
 #config ADK_SSP
 #	bool "Enable Stack Smashing Protection"
 #	default n

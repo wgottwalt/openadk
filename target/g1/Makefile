@@ -8,7 +8,7 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
-	cp $(LINUX_DIR)/arch/arm/boot/zImage $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+	cp $(LINUX_DIR)/arch/arm/boot/zImage $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)

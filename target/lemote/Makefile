@@ -11,7 +11,7 @@ OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build
 
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
 createinit:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
@@ -20,11 +20,11 @@ createinit:
 	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
 	$(CP) $(LINUX_DIR)/arch/mips/loongson/image/vmlinuz \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
@@ -34,7 +34,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
-	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo 'Boot your lemote via NFS or USB.'
 	@echo 'Then create at least three partitions with fdisk:'
@@ -55,7 +55,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
 	@echo 
 	@echo 'Copy $(ROOTFSTARBALL) via scp to /mnt/root and extract it'
 	@echo 'cd /mnt/root ; gunzip $(ROOTFSTARBALL); tar xpvf $(ROOTFSTARBALL)'
-	@echo 'Copy ${DEVICE}-${ARCH}-kernel via scp to /mnt/boot/boot'
+	@echo 'Copy ${ADK_TARGET}-${ARCH}-kernel via scp to /mnt/boot/boot'
 	@echo 'Move boot.cfg to /mnt/boot/boot'
 	@echo 'mv /mnt/root/boot/boot.cfg /mnt/boot/boot'
 	@echo 'cd /mnt/root ; mknod -m 644 console c 5 1'
@@ -63,14 +63,14 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

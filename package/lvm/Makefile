@@ -13,13 +13,14 @@ PKG_DEPENDS:=		device-mapper libncurses
 PKG_URL:=		http://sourceware.org/lvm2/
 PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
+PKG_DESCR_DM:=		device-mapper library and utility
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_DM},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \

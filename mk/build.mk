@@ -120,7 +120,7 @@ switch:
 	cp -p .config.old.${TARGET} .config.old; \
 	mv .cfg.${TARGET} .cfg; \
 	echo "Setting configuration to target: ${TARGET}"; \
-	else echo "No old target config found";mv .config .config.bak;fi
+	else echo "No old target config found";mv .config .config.bak; make TARGET=${TARGET};fi
 
 #############################################################
 #
@@ -140,10 +140,8 @@ root_clean:
 clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
-	for d in ${STAGING_PARENT_PFX}; do \
-		echo "clean: entering $$d" ; \
+	for d in ${STAGING_PARENT}; do \
 		for f in $$(ls $$d/pkg/[a-z]* 2>/dev/null); do  \
-			echo "clean: cleaning for $$f" ; \
 			while read file ; do \
 				rm $$d/target/$$file 2>/dev/null; \
 			done < $$f ; \
