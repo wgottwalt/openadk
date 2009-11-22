@@ -1,7 +1,13 @@
+config ADK_COMPILE_OBEXFTP
+	tristate
+	default n
+	depends on ADK_PACKAGE_OBEXFTP
+
 config ADK_PACKAGE_OBEXFTP
 	prompt "obexftp........................... obexftp applications"
 	tristate
 	default n
+	select ADK_COMPILE_OBEXFTP
 	select ADK_PACKAGE_LIBICONV
 	select ADK_PACKAGE_OPENOBEX
 	help

@@ -443,6 +443,7 @@ source "package/libnl/Config.in"
 source "package/libogg/Config.in"
 source "package/libol/Config.in"
 source "package/opencdk/Config.in"  # libopencdk
+source "package/obexftp/Config.in.lib"
 source "package/openobex/Config.in"
 source "package/libosip2/Config.in"
 source "package/libowfat/Config.in"

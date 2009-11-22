@@ -12,9 +12,13 @@ PKG_SECTION:=		bluetooth
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENOBEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENOBEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

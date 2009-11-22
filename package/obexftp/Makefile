@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		obexftp
 PKG_VERSION:=		0.23
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
 PKG_DESCR:=		bluetooth ftp application
 PKG_SECTION:=		bluetooth
@@ -13,11 +13,18 @@ PKG_DEPENDS:=		openobex libiconv
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 
+PKG_DESCR_LIB:=		obexftp library
+PKG_SECTION_LIB:=	libs
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OBEXFTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBOBEXFTP,libobexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB},${PKG_SECTION_LIB},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_DIR}/usr/include" \
@@ -30,8 +37,9 @@ CONFIGURE_ARGS+=	--disable-perl \
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin ${IDIR_OBEXFTP}/usr/lib
+	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin 
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_OBEXFTP}/usr/bin/
-	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_OBEXFTP}/usr/lib/
+	${INSTALL_DIR} ${IDIR_LIBOBEXFTP}/usr/lib
+	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_LIBOBEXFTP}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

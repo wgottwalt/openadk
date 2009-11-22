@@ -18,9 +18,13 @@ PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
 NO_DISTFILES:=		1
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
