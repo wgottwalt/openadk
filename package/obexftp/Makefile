@@ -18,13 +18,17 @@ PKG_SECTION_LIB:=	libs
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS:=		libmix
 endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OBEXFTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBOBEXFTP,libobexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB},${PKG_SECTION_LIB},${PKG_OPTS}))
+
+ifeq ($(ADK_STATIC),y)
+XAKE_FLAGS+=		STATIC_CFLAGS=-all-static
+endif
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_DIR}/usr/include" \
@@ -34,12 +38,15 @@ CONFIGURE_ARGS+=	--disable-perl \
 			--disable-ruby \
 			--disable-tcl \
 			--disable-python
+BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin 
-	${CP} ${WRKINST}/usr/bin/* ${IDIR_OBEXFTP}/usr/bin/
+	${CP} ${WRKINST}/usr/bin/obexftp{,d} ${IDIR_OBEXFTP}/usr/bin/
+ifneq ($(ADK_STATIC),y)
 	${INSTALL_DIR} ${IDIR_LIBOBEXFTP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_LIBOBEXFTP}/usr/lib/
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -10,5 +10,6 @@ config ADK_PACKAGE_OBEXFTP
 	select ADK_COMPILE_OBEXFTP
 	select ADK_PACKAGE_LIBICONV
 	select ADK_PACKAGE_OPENOBEX
+	select ADK_PACKAGE_LIBOBEXFTP
 	help
 	  http://openobex.triq.net/
