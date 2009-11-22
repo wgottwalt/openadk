@@ -238,8 +238,10 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
 	done
 endif
+ifeq (,$(filter libmix,$(7)))
 ifeq (,$(filter libonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+endif
 endif
 
 clean-targets: clean-dev-$(1)
