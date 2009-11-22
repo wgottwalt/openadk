@@ -42,7 +42,7 @@ pre-configure:
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
 	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/pgen
-	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/python
+	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} distclean

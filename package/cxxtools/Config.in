@@ -21,6 +21,7 @@ config ADK_COMPILE_CXXTOOLS_WITH_STDCXX
 config ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX
 	bool "Embedded uClibc++ library"
 	select ADK_PACKAGE_UCLIBCXX
+	depends on ADK_BROKEN
 	help
 
 endchoice

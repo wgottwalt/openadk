@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXFONT
-	prompt "libxfont................................ X font library"
+	prompt "libxfont............................. X font library"
 	tristate
 	default n
 	select ADK_PACKAGE_LIBFREETYPE

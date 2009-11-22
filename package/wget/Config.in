@@ -1,5 +1,5 @@
 config ADK_PACKAGE_WGET
-	prompt "wget............................. retrieving files using HTTP, HTTPS and FTP"
+	prompt "wget.............................. retrieving files using HTTP, HTTPS and FTP"
 	tristate
 	default n
 	help

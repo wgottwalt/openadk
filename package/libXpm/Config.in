@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXPM
-	prompt "libXpm................................. X library"
+	prompt "libXpm............................... common operation for the XPM pixmap format"
 	tristate
 	default n
 	help

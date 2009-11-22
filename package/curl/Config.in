@@ -3,30 +3,8 @@ config ADK_COMPILE_CURL
 	default n
 	depends on ADK_PACKAGE_LIBCURL
 
-config ADK_PACKAGE_LIBCURL
-	prompt "libcurl........................... A client-side URL transfer library"
-	tristate
-	default n
-	select ADK_COMPILE_CURL
-	select ADK_PACKAGE_LIBOPENSSL
-	select ADK_PACKAGE_ZLIB
-	help
-	  http://curl.haxx.se/
-
-config ADK_PACKAGE_LIBCURL_DEV
-	prompt "libcurl-dev....................... development files for libcurl"
-	tristate
-	default n
-	depends on ADK_PACKAGE_LIBCURL
-	select ADK_COMPILE_CURL
-	select ADK_PACKAGE_LIBOPENSSL
-	select ADK_PACKAGE_ZLIB
-	help
-	  http://curl.haxx.se/
-
-
 config ADK_PACKAGE_CURL
-	prompt   "curl............................ A client-side URL transfer tool"
+	prompt   "curl.............................. A client-side URL transfer tool"
 	tristate
 	default n
 	depends on ADK_PACKAGE_LIBCURL

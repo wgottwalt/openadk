@@ -1,34 +1,9 @@
-#menu "lua............................... LUA programming language"
+menu "lua............................... LUA programming language"
 
 config ADK_COMPILE_LUA
 	tristate
 	default n
 	depends on ADK_PACKAGE_LIBLUA
-
-config ADK_PACKAGE_LIBLUA
-	prompt "liblua............................ LUA programming language shared libraries"
-	tristate
-	select ADK_COMPILE_LUA
-	help
-	  Lua is a powerful light-weight programming language designed for extending 
-	  applications. Lua is also frequently used as a general-purpose, stand-alone 
-	  language. Lua is free software.
-	  
-	  Lua combines simple procedural syntax with powerful data description 
-	  constructs based on associative arrays and extensible semantics. Lua is 
-	  dynamically typed, interpreted from bytecodes, and has automatic memory 
-	  management with garbage collection, making it ideal for configuration, 
-	  scripting, and rapid prototyping.
-	  
-	  Lua is implemented as a small library of C functions, written in ANSI C, and 
-	  compiles unmodified in all known platforms. The implementation goals are 
-	  simplicity, efficiency, portability, and low embedding cost. The result is a 
-	  fast language engine with small footprint, making it ideal in embedded systems 
-	  too.
-	  
-	  http://www.lua.org/
-	  
-	  This package contains the LUA shared libraries, needed by other programs.
 
 config ADK_PACKAGE_LUA
 	prompt "lua............................... LUA programming language interpreter"
@@ -108,4 +83,4 @@ config ADK_PACKAGE_LUA_EXAMPLES
 	  
 	  This package contains LUA language examples.
 
-#endmenu
+endmenu

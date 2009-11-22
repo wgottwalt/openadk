@@ -15,11 +15,10 @@ $(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
 CONFIGURE_ARGS+=	--with-abi=64
 endif
-CONFIGURE_ENV+=		ac_cv_func_fputc_unlocked=no
 CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--libexecdir=/usr/lib \
 			--host=$(REAL_GNU_TARGET_NAME) \

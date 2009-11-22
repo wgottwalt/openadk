@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXAU
-	prompt "libXau................................. X library"
+	prompt "libXau............................... X11 authorisation library"
 	tristate
 	default n
 	help

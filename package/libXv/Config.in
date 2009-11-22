@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXV
-	prompt "libXv................................. X library"
+	prompt "libXv................................ X11 Xvideo extensions"
 	tristate
 	default n
 	help

@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXDMCP
-	prompt "libXdmcp............................... X library"
+	prompt "libXdmcp............................. X11 display manager control protocol library"
 	tristate
 	default n
 	help

@@ -1,5 +1,5 @@
 config ADK_PACKAGE_CFINSTALL
-	prompt "cfinstall........................... compact flash installer"
+	prompt "cfinstall............................ compact flash installer"
 	tristate
 	select ADK_PACKAGE_SFDISK
 	select ADK_PACKAGE_PARTED

@@ -1,4 +1,4 @@
-menu "php.............................. PHP Hypertext preprocessor"
+menu "php............................... PHP Hypertext preprocessor"
 
 config ADK_COMPILE_PHP
 	prompt "php.............................. PHP Hypertext preprocessor"

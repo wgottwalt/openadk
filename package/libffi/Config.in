@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBFFI
-	prompt "libffi.......................... Foreign Function Interface library"
+	prompt "libffi............................ Foreign Function Interface library"
 	tristate
 	default n
 	help

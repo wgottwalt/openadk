@@ -1,5 +1,5 @@
 config ADK_PACKAGE_GPERF
-	prompt "gperf.............................. perfect hash function generator"
+	prompt "gperf............................. perfect hash function generator"
 	tristate
 	default n
 	select ADK_PACKAGE_LIBSTDCXX

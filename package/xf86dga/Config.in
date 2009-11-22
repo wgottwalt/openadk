@@ -1,5 +1,5 @@
 config ADK_PACKAGE_XF86DGA
-	prompt "xf86dga................................ X library"
+	prompt "xf86dga.............................. X library"
 	tristate
 	default n
 	help

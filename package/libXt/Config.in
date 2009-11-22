@@ -1,5 +1,5 @@
 config ADK_PACKAGE_LIBXT
-	prompt "libXt................................... X library"
+	prompt "libXt................................ X Toolkit Intrinsics"
 	tristate
 	default n
 	help

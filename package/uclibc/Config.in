@@ -8,11 +8,10 @@ config ADK_PACKAGE_UCLIBC
 	  Embedded C library.
 
 config ADK_PACKAGE_UCLIBC_DEV
-	prompt "uclibc-dev........................... development files"
+	prompt "uClibc-dev........................... development files"
 	bool
 	default n
 	depends on ADK_TARGET_LIB_UCLIBC
 	help
 	  C library header files.
-
 
