@@ -122,6 +122,11 @@ switch:
 	echo "Setting configuration to target: ${TARGET}"; \
 	else echo "No old target config found";mv .config .config.bak; make TARGET=${TARGET};fi
 
+kernelconfig:
+	cp $(TOPDIR)/target/$(ADK_TARGET)/kernel.config $(BUILD_DIR)/linux/.config
+	make -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
+
 #############################################################
 #
 # Cleanup and misc junk

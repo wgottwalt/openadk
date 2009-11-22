@@ -37,6 +37,7 @@ help:
 	@echo '  allmodconfig - New config selecting all packages as modules when possible'
 	@echo '  allconfig    - New config selecting all packages when possible'
 	@echo '  allnoconfig  - New config where all options are answered with no'
+	@echo '  kernelconfig - Modify the target kernel configuration'
 	@echo ''
 	@echo 'Help targets:'
 	@echo '  help         - Print this help text'
@@ -112,6 +113,9 @@ image: .prereq_done
 
 switch: .prereq_done
 	@${GMAKE_INV} switch
+
+kernelconfig: .prereq_done
+	@${GMAKE_INV} kernelconfig
 
 image_clean imageclean cleanimage: .prereq_done
 	@${GMAKE_INV} image_clean

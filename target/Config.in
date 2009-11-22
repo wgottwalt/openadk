@@ -138,6 +138,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_alix1c
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES
@@ -153,6 +154,7 @@ config ADK_LINUX_X86_WRAP
 	select ADK_wrap
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES
@@ -394,6 +396,7 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
+	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Support for Mikrotik RB532.
 endchoice
@@ -551,7 +554,6 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_BLK_DEV_SD
 	help
 	  Use this option if you have a compact flash reader
 	  inside your hardware and want to boot from it.
