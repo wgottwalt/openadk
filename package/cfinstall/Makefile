@@ -24,6 +24,6 @@ pre-configure:
 
 do-install:
 	${INSTALL_DIR} $(IDIR_CFINSTALL)/sbin
-	${INSTALL_BIN} ./src/cfinstall.sh $(IDIR_CFINSTALL)/sbin
+	${INSTALL_BIN} ./src/cfinstall $(IDIR_CFINSTALL)/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

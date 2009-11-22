@@ -18,7 +18,7 @@ tools-compile: $(TOOLS_BUILD_DIR)
 
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' mkfimage $(LINUX_DIR)/arch/cris/boot/zImage \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel $(MAKE_TRACE)
+		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel $(MAKE_TRACE)
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
@@ -30,7 +30,7 @@ endif
 ifeq ($(FS),nfsroot)
 imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
 	@echo 
-	@echo Use sudo ./boot_linux -F -i ${DEVICE}-${ARCH}-kernel to flash the kernel
+	@echo Use sudo ./boot_linux -F -i ${ADK_TARGET}-${ARCH}-kernel to flash the kernel
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSTARBALL} is your nfs root and can be extracted on your nfs server
 	@echo 'Login as user root with password linux123 via ssh or console'

@@ -21,9 +21,9 @@ endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-x86_64 -nographic -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "console=ttyS0"'
+	@echo 'qemu-system-x86_64 -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "console=ttyS0"'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

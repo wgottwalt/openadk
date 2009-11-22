@@ -27,7 +27,7 @@ kernel-install: tools-compile
 		$(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' \
 	addpattern -p WA21 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/${DEVICE}-${ARCH}-kernel	
+		-o $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel	
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
@@ -44,7 +44,7 @@ endif
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'You can flash the kernel via tftp:'
 	@echo 'tftp 192.168.1.1'
