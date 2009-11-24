@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.16
+PKG_VERSION:=		2.4.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ed5b86e9d2b372d10edfe3bb59fee165
+PKG_MD5SUM:=		4a6dab2711fcf141f19bb680bc335887
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2
@@ -65,11 +65,11 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/libraries/liblutil clean
 	${MAKE} -C ${WRKBUILD}/libraries/liblunicode clean
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS}
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 XAKE_FLAGS+=		STRIP="" CPPFLAGS="-D_GNU_SOURCE"
 
 post-install:

@@ -1,18 +1,35 @@
-#menu "mpd............................... Music Player Daemon"
+menu "mpd............................... Music Player Daemon"
 
 config ADK_PACKAGE_MPD
 	prompt "mpd............................... Music Player Daemon"
 	tristate
 	default n
-	select ADK_PACKAGE_ALSA_LIB
 	select ADK_PACKAGE_GLIB
-	select ADK_PACKAGE_LIBCURL
 	help
 	  MPD is a music player supporting flac, mp3 and ogg files.
 	  It is typically controlled over a network using one of it's many
 	  clients including mpc(console), gmpc(gnome), phpmp(php) etc.
-
 	  http://www.musicpd.org/
+
+config ADK_COMPILE_MPD_WITH_ALSA
+	prompt   "ALSA playback support"
+	bool
+	default y
+	depends on ADK_PACKAGE_MPD
+	select ADK_PACKAGE_ALSA_LIB
+	help
+	  Enable ALSA playback support.
+
+config ADK_COMPILE_MPD_WITH_SHOUT
+	prompt   "Shoutcast playback support"
+	bool
+	default y
+	depends on ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBSHOUT
+	select ADK_PACKAGE_LIBVORBISENC
+	select ADK_PACKAGE_LIBLAME
+	help
+	  Enable shout support (libshout).
 
 config ADK_COMPILE_MPD_WITH_MP3
 	prompt   "MP3 support"
@@ -35,7 +52,7 @@ config ADK_COMPILE_MPD_WITH_MP4
 
 config ADK_COMPILE_MPD_OGG
 	prompt   "Ogg/Vorbis Support"
-	tristate
+	bool
 	depends on ADK_PACKAGE_MPD
 	select ADK_COMPILE_MPD_WITH_OGG if ADK_COMPILE_MPD_OGG_FLOAT
 	select ADK_COMPILE_MPD_WITH_TREMOR if ADK_COMPILE_MPD_OGG_FIXED
@@ -81,16 +98,41 @@ config ADK_COMPILE_MPD_WITH_FLAC
 	help
 	  Enable flac support (libflac).
 
-config ADK_COMPILE_MPD_WITH_SHOUT
-	prompt   "Shout Support (Streaming support)"
+config ADK_COMPILE_MPD_WITH_WAV
+	prompt   "WAVE/AU Support"
 	bool
 	default y
 	depends on ADK_PACKAGE_MPD
-	depends on ADK_COMPILE_MPD_WITH_OGG
-	select ADK_PACKAGE_LIBSHOUT
-	select ADK_PACKAGE_LIBVORBISENC
-	select ADK_PACKAGE_LIBLAME
+	select ADK_PACKAGE_LIBAUDIOFILE
 	help
-	  Enable shout support (libshout).
+	  Enable wave support (libaudiofile).
 
-#endmenu
+config ADK_COMPILE_MPD_WITH_CURL
+	prompt   "HTTP streaming support"
+	bool
+	default y
+	depends on ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBCURL
+	help
+	  Enable http streaming support (libcurl).
+
+config ADK_COMPILE_MPD_WITH_MMS
+	prompt   "MMS streaming support"
+	bool
+	default n
+	depends on ADK_PACKAGE_MPD
+	select ADK_PACKAGE_LIBMMS
+	help
+	  Enable mms streaming support (libmms).
+
+config ADK_COMPILE_MPD_WITH_FFMPEG
+	prompt   "FFMPEG support"
+	bool
+	default n
+	depends on ADK_PACKAGE_MPD
+	select ADK_PACKAGE_FFMPEG
+	help
+	  Enable FFMPEG support (ffmpeg).
+
+
+endmenu

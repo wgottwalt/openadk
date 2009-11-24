@@ -101,7 +101,7 @@ cleandir dirclean: .prereq_done
 	@-rm -f make.log .prereq_done
 
 cleantarget targetclean: .prereq_done
-	-@${GMAKE_INV} clean cleantarget
+	-@${GMAKE_INV} cleantarget
 	@-rm -f make.log
 
 distclean cleandist:

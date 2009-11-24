@@ -1,9 +1,5 @@
 - busybox update to latest version
-- more qemu-targets (ppc/sparc)
 - rpm package backend
-- port htop software
-- rescue initramfs image (more archs, generic kernel config )
-  - usb boot via stick
 - fix init scripts pidof? vs. killall
 - freebsd build
 - win cygwin build
@@ -14,3 +10,4 @@
 - network scripts for pppoe
 - customise mconf help texts to better fit for OpenADK
 - publish via trac
+

@@ -189,6 +189,7 @@ package-$(ADK_PACKAGE_LIBICONV) += libiconv
 package-$(ADK_PACKAGE_LIBID3TAG) += libid3tag
 package-$(ADK_PACKAGE_LIBLZO) += liblzo
 package-$(ADK_PACKAGE_LIBMAD) += libmad
+package-$(ADK_PACKAGE_LIBMMS) += libmms
 package-$(ADK_PACKAGE_LIBNET) += libnet
 package-$(ADK_PACKAGE_LIBNFSIDMAP) += libnfsidmap
 package-$(ADK_PACKAGE_LIBNIDS) += libnids

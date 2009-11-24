@@ -4,23 +4,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.0
+PKG_VERSION:=		5.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f4905eca4497da3f0beb5c96863196b4
-PKG_DESCR:=		PHP cli
+PKG_MD5SUM:=		41fbb368d86acb13fc3519657d277681
+PKG_DESCR:=		PHP CLI
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl zlib
 PHP_URL:=		http://www.php.net
 PKG_SITES:=		http://de.php.net/distributions/
 
-PKG_DESCR_1:=		PHP for FastCGI usage
+PKG_DESCR_FCGI:=	PHP for FastCGI usage
 
 # FIX PKG_DEPENDS
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_FCGI},${PKG_SECTION}))
 
 define PKG_mod_template
 

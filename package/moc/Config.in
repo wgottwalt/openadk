@@ -1,5 +1,5 @@
 config ADK_PACKAGE_MOC
-	tristate "moc................................ console audio player"
+	tristate "moc............................... console audio player"
 	default n
 	select ADK_PACKAGE_LIBVORBIS
 	select ADK_PACKAGE_LIBMAD

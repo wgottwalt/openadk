@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
-PKG_VERSION:=		0.7.0
+PKG_VERSION:=		0.7.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8c2c14a7695c9c661004bcfc6468d62d
+PKG_MD5SUM:=		1645975662a326969d2f42d5c04574aa
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libxml2 libgnutls python

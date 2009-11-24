@@ -291,12 +291,13 @@ endif
 
 mplayer-compile: alsa-lib-compile libmad-compile libvorbis-compile faad2-compile ncurses-compile zlib-compile
 
-mpd-compile: alsa-lib-compile glib-compile curl-compile
-ifneq ($(ADK_PACKAGE_MPD_MP3),)
+mpd-compile: alsa-lib-compile glib-compile
+
+ifneq ($(ADK_COMPILE_MPD_WITH_MP3),)
 mpd-compile: libid3tag-compile libmad-compile
 endif
-ifneq ($(ADK_PACKAGE_MPD_MP4),)
-mpd-compile: libfaad2
+ifneq ($(ADK_COMPILE_MPD_WITH_MP4),)
+mpd-compile: faad2-compile
 endif
 ifneq ($(ADK_COMPILE_MPD_WITH_OGG),)
 mpd-compile: libvorbis-compile
@@ -304,11 +305,23 @@ endif
 ifneq ($(ADK_COMPILE_MPD_WITH_TREMOR),)
 mpd-compile: libvorbisidec-compile
 endif
-ifneq ($(ADK_PACKAGE_MPD_FLAC),)
+ifneq ($(ADK_COMPILE_MPD_WITH_FLAC),)
 mpd-compile: flac-compile
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_WAV),)
+mpd-compile: libaudiofile-compile
 endif
 ifneq ($(ADK_COMPILE_MPD_WITH_SHOUT),)
 mpd-compile: lame-compile
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_CURL),)
+mpd-compile: curl-compile
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_MMS),)
+mpd-compile: libmms-compile
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_FFMPEG),)
+mpd-compile: ffmpeg-compile
 endif
 
 ifneq (${ADK_PACKAGE_NUT_SSL},)

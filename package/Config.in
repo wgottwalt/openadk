@@ -434,6 +434,7 @@ source "package/libtool/Config.in"  # libltdl
 source "package/openldap/Config.in.lib"
 source "package/liblzo/Config.in"
 source "package/libmad/Config.in"
+source "package/libmms/Config.in"
 source "package/ncurses/Config.in"  # libncurses
 source "package/neon/Config.in"
 source "package/libnet/Config.in"
