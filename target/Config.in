@@ -23,6 +23,9 @@ config ADK_NATIVE
 config ADK_alix1c
 	tristate
 
+config ADK_alix2d
+	tristate
+
 config ADK_wrap
 	tristate
 
@@ -95,6 +98,7 @@ config ADK_g1
 config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
+	default "alix2d"  if ADK_alix2d
 	default "wrap"  if ADK_wrap
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
@@ -146,7 +150,23 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
 	help
-	  Support for ALIX boards.
+	  Support for ALIX1C boards.
+	  http://www.pcengines.ch/
+
+config ADK_LINUX_X86_ALIX2D
+	bool "PC Engines Alix2D"
+	select ADK_alix2d
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	help
+	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
 
 config ADK_LINUX_X86_WRAP
@@ -441,6 +461,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -462,6 +483,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -531,6 +553,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -550,6 +573,7 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	bool "read-write filesystem for compact flash (ext2)"
 	depends on \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS

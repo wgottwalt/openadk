@@ -1,8 +1,9 @@
 config ADK_PACKAGE_DANSGUARDIAN
-	prompt "dansguardian......................... web content filter proxy"
+	prompt "dansguardian...................... web content filter proxy"
 	tristate
 	depends on ADK_CXX
 	select ADK_PACKAGE_LIBPCRE
+	select ADK_PACKAGE_ZLIB
 	default n
 	help
 		http://dansguardian.org

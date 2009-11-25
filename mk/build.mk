@@ -162,7 +162,7 @@ cleankernel:
 
 cleandir:
 	@$(TRACE) cleandir
-	$(MAKE) -C $(CONFIG) clean
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
 		${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
@@ -170,14 +170,14 @@ cleandir:
 
 cleantarget:
 	@$(TRACE) cleantarget
-	$(MAKE) -C $(CONFIG) clean
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
 	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT)
 	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
 distclean:
 	@$(TRACE) distclean
-	@$(MAKE) -C $(CONFIG) clean
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
 		${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)

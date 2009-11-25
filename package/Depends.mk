@@ -30,7 +30,7 @@ ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 cxxtools-compile: uclibc++-compile
 endif
 cyrus-sasl-compile: openssl-compile
-dansguardian-compile: pcre-compile
+dansguardian-compile: pcre-compile zlib-compile
 ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
 davfs2-compile: fuse-compile
 endif

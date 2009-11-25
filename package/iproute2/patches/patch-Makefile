@@ -4,7 +4,7 @@
 	  used to compile host-utils in netem/
 	- define LIBUTIL for misc/ss to compile correctly
 --- iproute2-2.6.29-1.orig/Makefile	2009-03-24 23:40:54.000000000 +0100
-+++ iproute2-2.6.29-1/Makefile	2009-08-22 02:42:31.939603104 +0200
++++ iproute2-2.6.29-1/Makefile	2009-11-25 08:59:58.000000000 +0100
 @@ -20,10 +20,10 @@ ADDLIB+=dnet_ntop.o dnet_pton.o
  #options for ipx
  ADDLIB+=ipx_ntop.o ipx_pton.o
@@ -15,7 +15,7 @@
 -CFLAGS = $(CCOPTS) -I../include $(DEFINES)
 +CC := gcc
 +HOSTCC := gcc
-+CCOPTS := -D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall
++CCOPTS ?= -D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall
 +CFLAGS = $(CCOPTS) -I../include $(DEFINES) ${TARGET_CFLAGS}
  YACCFLAGS = -d -t -v
  

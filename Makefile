@@ -97,7 +97,7 @@ cleankernel kernelclean: .prereq_done
 	-@${GMAKE_INV} cleankernel
 
 cleandir dirclean: .prereq_done
-	-@${GMAKE_INV} clean cleandir
+	-@${GMAKE_INV} cleandir
 	@-rm -f make.log .prereq_done
 
 cleantarget targetclean: .prereq_done
@@ -105,7 +105,7 @@ cleantarget targetclean: .prereq_done
 	@-rm -f make.log
 
 distclean cleandist:
-	@-${GMAKE_INV} distclean
+	-@${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done
 
 image: .prereq_done
