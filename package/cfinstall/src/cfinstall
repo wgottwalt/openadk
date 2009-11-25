@@ -13,7 +13,7 @@ rootsize=$(($maxsize-2))
 parted -s /dev/sda unit cyl mkpartfs primary ext2 0 $rootsize
 parted -s /dev/sda unit cyl mkpart primary fat32 $rootsize $maxsize
 parted -s /dev/sda set 1 boot on
-sfdisk --change-id /dev/sda 2 88
+sfdisk --change-id /dev/sda 2 88 >/dev/null 2>&1
 if [ $? -eq 0 ];then
         printf "Successfully created partition ${rootpart}\n"
 else
@@ -46,7 +46,7 @@ menuentry "GNU/Linux (OpenADK)" {
         linux /boot/vmlinuz-adk root=/dev/sda1 ro init=/init panic=10
 }
 EOF
-chroot /mnt grub-install /dev/sda
+chroot /mnt grub-install /dev/sda >/dev/null 2>&1
 umount /mnt/proc
 umount /mnt/sys
 umount /mnt/dev
@@ -59,4 +59,3 @@ mknod -m 666 /mnt/dev/tty c 5 0
 umount /mnt
 printf "Successfully installed.\n"
 exit 0
-

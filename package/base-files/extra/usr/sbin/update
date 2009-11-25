@@ -1,0 +1,63 @@
+#!/bin/sh
+
+who=$(id -u)
+if [ $who -ne 0 ]; then
+  echo 'Exit. System update must be run as root.'
+  exit 1
+fi
+
+cd /
+
+mount -o remount,rw /
+
+check_exit() {
+	if [ $? -ne 0 ];then
+		echo "Update failed."
+		exit 1
+	fi
+}
+
+extract_from_file() {
+        tar -xzvf $1
+	check_exit
+}
+
+extract_from_ssh() {
+        ssh $1 "cat $2" | tar -xzvf -
+	check_exit
+}
+
+extract_from_http() {
+        wget -O - $1 | tar -xzvf -
+	check_exit
+}
+                
+case $1 in
+        file://*|/*)
+                url=$(echo $1|sed -e "s#file://##")
+		echo "Updating system from $1"
+                extract_from_file $url
+                ;;
+        ssh://*)
+                host=$(echo $1|sed -e "s#ssh://\(.*\):.*#\1#")
+                file=$(echo $1|sed -e "s#ssh://.*:\(.*\)#\1#")
+		echo "Updating system from $1"
+                extract_from_ssh $host $file
+                ;;
+        http://*|ftp://*)
+		echo "Updating system from $1"
+                extract_from_http $1
+                ;;
+        *)
+                echo "No or wrong uri given. exit."
+		echo "Use one of the following uri:"
+		echo "http://myserver/myupdate.tar.gz"
+		echo "ssh://myuser@myserver:/my/path/myupdate.tar.gz"
+		echo "file:///mypath/myupdate.tar.gz"
+                exit 1
+                ;;
+esac
+
+sync
+
+echo "You should reboot now."
