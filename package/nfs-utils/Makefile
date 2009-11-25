@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		779cf81044e92cb51ad590960e7b3671
 PKG_DESCR:= 		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net
-PKG_DEPENDS:=		portmap
+PKG_DEPENDS:=		portmap libtirpc
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
@@ -25,13 +25,9 @@ ifeq ($(ADK_COMPILE_NFS_UTILS_WITH_HEIMDAL),y)
 PKG_DEPENDS+=		heimdal-libs libevent libnfsidmap librpcsecgss libcom_err
 endif
 
-ifeq (${ADK_IPV6},y)
-PKG_DEPENDS+=		libtirpc
-endif
-
 $(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autotool gnu
+TCPPFLAGS+=		-I${LINUX_DIR}/include
 
 ifeq ($(ADK_COMPILE_NFS_UTILS_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
@@ -55,15 +51,13 @@ endif
 CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
+			--enable-tirpc \
+			--with-tirpcinclude=${STAGING_DIR}/usr/include/tirpc \
 			--disable-uuid
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-TCPPFLAGS+=		-I${LINUX_DIR}/include
 
-ifeq (${ADK_IPV6},y)
-CONFIGURE_ARGS+=	--enable-tirpc \
-			--with-tirpcinclude=${STAGING_DIR}/usr/include/tirpc
-endif
+CONFIGURE_STYLE:=	autotool gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NFS_UTILS}/usr/sbin

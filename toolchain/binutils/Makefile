@@ -6,12 +6,6 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_SSP),y)
-CONFOPTS+=		--enable-libssp
-else
-CONFOPTS+=		--disable-libssp
-endif
-
 ifeq ($(ADK_LINUX_64),y)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
@@ -31,6 +25,7 @@ $(WRKBUILD)/.configured:
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-werror \
+		--disable-libssp \
 		${CONFOPTS} \
 	);
 	touch $@

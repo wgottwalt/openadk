@@ -1,7 +1,6 @@
 config ADK_PACKAGE_DANSGUARDIAN
 	prompt "dansguardian...................... web content filter proxy"
 	tristate
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBPCRE
 	select ADK_PACKAGE_ZLIB
 	default n
@@ -11,7 +10,7 @@ config ADK_PACKAGE_DANSGUARDIAN
 choice
 prompt "C++ library to use"
 depends on ADK_PACKAGE_DANSGUARDIAN
-default ADK_COMPILE_DANSGUARDIAN_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_DANSGUARDIAN_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 default ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
 
 config ADK_COMPILE_DANSGUARDIAN_WITH_STDCXX

@@ -5,13 +5,6 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
-
-ifeq ($(ADK_CXX),y)
-TARGET_LANGUAGES:=	c,c++
-else
-TARGET_LANGUAGES:=	c
-endif
-
 GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
@@ -26,13 +19,8 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-biarch \
 			--disable-multilib \
 			--disable-sjlj-exceptions \
+			--disable-libssp \
 			--disable-nls 
-
-ifeq ($(ADK_SSP),y)
-GCC_CONFOPTS+=		--enable-libssp
-else
-GCC_CONFOPTS+=		--disable-libssp
-endif
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
@@ -108,7 +96,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		PATH=$(TARGET_PATH) \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
-			--enable-languages=$(TARGET_LANGUAGES) \
+			--enable-languages=c,c++ \
 			--with-sysroot=$(STAGING_DIR) \
 			--with-slibdir=$(STAGING_DIR)/lib \
 			--enable-shared \

@@ -80,7 +80,6 @@ config ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL
 	prompt     "freeradius-mod-sql-mysql.... MySQL module"
 	tristate
 	default n
-	depends on ADK_CXX
 	depends on ADK_PACKAGE_FREERADIUS_MOD_SQL
 	select ADK_PACKAGE_LIBMYSQLCLIENT
 

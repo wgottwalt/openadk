@@ -33,11 +33,6 @@ CONFIGURE_ARGS+=	--enable-debug
 else
 CONFIGURE_ARGS+=	--disable-debug
 endif
-ifeq ($(ADK_IPV6),y)
-CONFIGURE_ARGS+=	--enable-ipv6
-else
-CONFIGURE_ARGS+=	--disable-ipv6
-endif
 
 ifeq ($(ADK_NATIVE),y)
 CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \

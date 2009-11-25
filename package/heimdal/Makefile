@@ -38,13 +38,8 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
+			--with-ipv6 \
 			--sysconfdir=/etc/heimdal
-
-ifeq ($(ADK_IPV6),y)
-CONFIGURE_OPTS+=	--with-ipv6
-else
-CONFIGURE_OPTS+=	--without-ipv6
-endif
 
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_BDB),y)
 CONFIGURE_ARGS+=	--enable-berkeley-db
@@ -66,8 +61,8 @@ else
 CONFIGURE_OPTS+=	--disable-pk-init
 endif
 
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
-TCFLAGS+=              -pthread
+TCFLAGS+=		-I${STAGING_DIR}/usr/include/et -pthread
+
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS}
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes

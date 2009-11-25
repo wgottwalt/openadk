@@ -2,7 +2,6 @@ config ADK_COMPILE_MYSQL
 	tristate
 	default n
 	depends on ADK_PACKAGE_LIBMYSQLCLIENT
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_LIBREADLINE
@@ -11,10 +10,8 @@ config ADK_PACKAGE_LIBMYSQLCLIENT
 	prompt "libmysqlclient.................... MySQL client library"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_COMPILE_MYSQL
 	help
 	  MySQL client library.
-	  
 	  http://dev.mysql.com/
 

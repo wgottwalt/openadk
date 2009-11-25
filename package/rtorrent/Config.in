@@ -1,7 +1,6 @@
 config ADK_PACKAGE_RTORRENT
 	prompt "rtorrent........................... console bittorrent client"
 	tristate
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBNCURSES
 	select ADK_PACKAGE_LIBTORRENT
 	select ADK_PACKAGE_LIBCURL

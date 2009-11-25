@@ -1,6 +1,5 @@
 config ADK_PACKAGE_AICCU
 	prompt "aiccu............................. SixXS Automatic IPv6 Connectivity Client Utility"
-	depends on ADK_IPV6
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_IPV6

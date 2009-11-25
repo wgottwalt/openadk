@@ -1,7 +1,6 @@
 config ADK_COMPILE_SPEEX
 	tristate
 	default n
-	depends on ADK_CXX
 	depends on ADK_PACKAGE_LIBSPEEX
 
 config ADK_PACKAGE_LIBSPEEX
@@ -17,8 +16,6 @@ config ADK_PACKAGE_LIBSPEEX
 	  alternative to expensive proprietary speech codecs. Moreover, Speex 
 	  is well-adapted to Internet applications and provides useful features 
 	  that are not present in most other codecs.
-	  
 	  http://www.speex.org/
 	  
-	  This package contains the shared codec library, needed by other programs.
 

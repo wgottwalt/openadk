@@ -2,7 +2,6 @@ config ADK_PACKAGE_GPSD
 	prompt "gpsd.............................. An interface daemon for GPS receivers"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBPTHREAD
 	help
 	  gpsd is a monitor daemon that watches a TCP/IP port (2947 by default),
@@ -28,7 +27,7 @@ config ADK_PACKAGE_GPSD_CLIENTS
 choice
 prompt "C++ library to use"
 depends on ADK_PACKAGE_GPSD
-default ADK_COMPILE_GPSD_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_GPSD_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 default ADK_COMPILE_GPSD_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
 
 config ADK_COMPILE_GPSD_WITH_STDCXX

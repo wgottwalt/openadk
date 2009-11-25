@@ -2,12 +2,10 @@ config ADK_PACKAGE_ID3LIB
 	prompt "id3lib............................ An ID3v1/ID3v2 tagging library"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_LIBICONV
 	help
 	  An ID3v1/ID3v2 tagging library.
-
 	  http://www.id3lib.org/
 
 choice

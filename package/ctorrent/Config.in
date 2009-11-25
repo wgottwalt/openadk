@@ -2,7 +2,6 @@ config ADK_PACKAGE_CTORRENT
 	prompt "ctorrent.......................... console-based BitTorrent client"
 	tristate
 	default n
-	depends on ADK_CXX
 	help
 	  CTorrent is a BitTorrent client written in the C programming language, known to
 	  be a very robust and mature programming language, which produces fast and

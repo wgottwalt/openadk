@@ -24,16 +24,13 @@ $(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_IPV6),y)
-IPV6+=HAVE_INET6="1"
-endif
-
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
+
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
-			${IPV6} \
+			HAVE_INET6="1" \
 			STAGING_DIR=${STAGING_DIR} \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'

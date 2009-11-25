@@ -3,7 +3,6 @@
 config ADK_PACKAGE_QUAGGA
 	prompt "quagga............................ The Quagga Software Routing Suite"
 	tristate
-	depends on ADK_IPV6
 	default n
 	help
 	  A routing software package that provides TCP/IP based routing services
@@ -34,7 +33,6 @@ config ADK_PACKAGE_QUAGGA_OSPF6D
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
-	depends on ADK_IPV6
 	help
 	  An OSPFv3 (IPv6) routing engine for use with Quagga routing software.
 
@@ -51,7 +49,6 @@ config ADK_PACKAGE_QUAGGA_RIPNGD
 	tristate
 	default n
 	depends on ADK_PACKAGE_QUAGGA
-	depends on ADK_IPV6
 	help
 	  A RIPNG (IPv6) routing engine for use with Quagga routing software.
 

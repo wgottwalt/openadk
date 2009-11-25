@@ -1,20 +1,18 @@
 config ADK_PACKAGE_IPERF
 	prompt "iperf............................. Internet Protocol bandwidth measuring tool"
 	tristate
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBPTHREAD
 	default n
 	help
 	  Iperf is a modern alternative for measuring TCP and UDP bandwidth 
 	  performance, allowing the tuning of various parameters and 
 	  characteristics.
-	  
 	  http://dast.nlanr.net/Projects/Iperf/
 
 choice
 prompt "C++ library to use"
 depends on ADK_PACKAGE_IPERF
-default ADK_COMPILE_IPERF_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_IPERF_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 default ADK_COMPILE_IPERF_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
 
 config ADK_COMPILE_IPERF_WITH_STDCXX

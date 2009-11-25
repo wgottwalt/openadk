@@ -19,11 +19,6 @@ PKG_SITES:=		http://get.bitlbee.org/src/ \
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-ifeq ($(ADK_IPV6),y)
-IPV6+=	--ipv6=1
-else
-IPV6+=	--ipv6=0
-endif
 
 do-configure:
 		(cd $(WRKBUILD); \
@@ -34,6 +29,7 @@ do-configure:
 			STAGING_DIR="$(STAGING_DIR)" \
 			STRIP="$(STRIP)" \
 			./configure \
+			--target=${REAL_GNU_TARGET_NAME} \
 			--prefix=/usr/ \
 			--bindir=/usr/sbin/ \
 			--etcdir=/etc/bitlbee/ \
@@ -43,13 +39,12 @@ do-configure:
 			--cpu="${ARCH}" \
 			--debug=0 \
 			--strip=1 \
+			--ipv6=1 \
 			--ssl=openssl \
-			--target=${REAL_GNU_TARGET_NAME} \
-			${IPV6} \
 		);
 
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 INSTALL_TARGET=		install-etc install-bin
 
 post-configure:

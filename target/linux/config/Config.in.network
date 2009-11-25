@@ -124,7 +124,6 @@ config ADK_KPACKAGE_KMOD_NET_IPGRE
 config ADK_KPACKAGE_KMOD_IPV6
 	prompt "kmod-ipv6......................... IPv6 support"
 	tristate
-	depends on ADK_IPV6
 	default n
 	help
 	  This is complemental support for the IP version 6.
@@ -139,7 +138,6 @@ config ADK_KPACKAGE_KMOD_IPV6
 config ADK_KPACKAGE_KMOD_IPV6_SIT
 	prompt "kmod-ipv6-sit..................... IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
-	depends on ADK_IPV6
 	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help

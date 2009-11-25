@@ -12,24 +12,18 @@ PKG_SECTION:=		net
 PKG_URL:=		https://www.isc.org/software/dhcp
 PKG_SITES:=		ftp://ftp.isc.org/isc/dhcp/
 
-PKG_DESCR_1:=		ISC DHCP relay server
+PKG_DESCR_RELAY:=	ISC DHCP relay server
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DHCP_SERVER,dhcp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
-
-ifeq ($(ADK_IPV6),y)
-CONFIGURE_ARGS+=       --enable-dhcpv6         
-else
-CONFIGURE_ARGS+=       --disable-dhcpv6                
-endif
+$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_RELAY},${PKG_SECTION}))
 
 TCFLAGS+=		-D_GNU_SOURCE
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_file__dev_random=yes
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DHCP_RELAY}/usr/sbin

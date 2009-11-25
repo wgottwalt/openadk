@@ -2,7 +2,6 @@ config ADK_PACKAGE_TNTNET
 	prompt "tntnet............................ a modular, multithreaded webapplicationserver"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_PACKAGE_CXXTOOLS
 	select ADK_PACKAGE_LIBICONV
 	select ADK_PACKAGE_LIBPTHREAD

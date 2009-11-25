@@ -103,9 +103,7 @@ libp11-compile: openssl-compile libtool-compile
 libpng-compile: zlib-compile
 libshout-compile: libvorbis-compile
 libusb-compat-compile: libusb-compile
-ifeq (${ADK_IPV6},y)
 libtirpc-compile: libgssglue-compile
-endif
 libtorrent-compile: openssl-compile libsigc++-compile
 libvorbis-compile: libogg-compile
 libvirt-compile: libxml2-compile gnutls-compile python-compile
@@ -155,9 +153,7 @@ endif
 ifeq (${ADK_COMPILE_NFS_UTILS_WITH_HEIMDAL},y)
 nfs-utils-compile: libnfsidmap-compile heimdal-compile libevent-compile librpcsecgss-compile
 endif
-ifeq (${ADK_IPV6},y)
 nfs-utils-compile: libtirpc-compile
-endif
 ifeq (${ADK_COMPILE_NMAP_WITH_UCLIBCXX},y)
 nmap-compile: uclibc++-compile
 endif

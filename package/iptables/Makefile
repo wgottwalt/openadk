@@ -25,9 +25,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,IPTABLES_UTILS,iptables-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-ifeq ($(ADK_IPV6),y)
 $(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-endif
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-devel
@@ -35,9 +33,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 SUB_INSTALL-${ADK_PACKAGE_IPTABLES_UTILS}+=		iptables-utils-install
-ifeq ($(ADK_IPV6),y)
 SUB_INSTALL-${ADK_PACKAGE_IP6TABLES}+=			ip6tables-install
-endif
 
 post-install: ${SUB_INSTALL-m} ${SUB_INSTALL-y}
 	${INSTALL_DIR} ${IDIR_IPTABLES}/usr/lib

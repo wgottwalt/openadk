@@ -23,7 +23,7 @@ noconfig_targets:=	menuconfig \
 MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
 			ADK_TARGET_LIB_GLIBC \
 			ADK_TARGET_LIB_ECLIBC \
-			ADK_IPV6 ADK_CXX ADK_DEBUG
+			ADK_DEBUG
 
 POSTCONFIG=		-@\
 	if [ -f .config.old ];then \

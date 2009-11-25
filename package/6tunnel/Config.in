@@ -1,6 +1,5 @@
 config ADK_PACKAGE_6TUNNEL
 	prompt "6tunnel........................... IPv4 / IPv6 tunnel proxy"
-	depends on ADK_IPV6
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_IPV6

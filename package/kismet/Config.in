@@ -7,7 +7,6 @@ config ADK_PACKAGE_KISMET_CLIENT
 	prompt "kismet-client..................... The Kismet client"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_COMPILE_KISMET
 	select ADK_PACKAGE_LIBNCURSES
 	help
@@ -22,7 +21,6 @@ config ADK_PACKAGE_KISMET_DRONE
 	prompt "kismet-drone...................... The Kismet drone"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_COMPILE_KISMET
 	select ADK_PACKAGE_LIBPCAP
 	help
@@ -37,7 +35,6 @@ config ADK_PACKAGE_KISMET_SERVER
 	prompt "kismet-server..................... The Kismet server"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_COMPILE_KISMET
 	select ADK_PACKAGE_LIBPCAP
 	help
@@ -51,7 +48,7 @@ config ADK_PACKAGE_KISMET_SERVER
 choice
 prompt "C++ library to use"
 depends on ADK_PACKAGE_KISMET_CLIENT || ADK_PACKAGE_KISMET_DRONE || ADK_PACKAGE_KISMET_SERVER
-default ADK_COMPILE_KISMET_WITH_STDCXX if ADK_TARGET_LIB_GLIBC
+default ADK_COMPILE_KISMET_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 default ADK_COMPILE_KISMET_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
 
 config ADK_COMPILE_KISMET_WITH_STDCXX

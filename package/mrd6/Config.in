@@ -1,6 +1,5 @@
 config ADK_PACKAGE_MRD6
 	prompt "mrd6.............................. IPv6 multicast routing daemon"
-	depends on ADK_IPV6
 	tristate
 	default n
 	help

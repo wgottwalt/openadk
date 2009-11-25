@@ -17,10 +17,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DNSMASQ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		auto
+INSTALL_STYLE:=		manual
 MAKE_FLAGS+=		BINDIR=/usr/sbin MANDIR=/usr/man COPTS="${TCFLAGS}"
-ifneq ($(ADK_IPV6),y)
-MAKE_FLAGS+=		COPTS="${TCFLAGS} -DNO_IPV6"
-endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_DNSMASQ}/usr/sbin ${IDIR_DNSMASQ}/etc

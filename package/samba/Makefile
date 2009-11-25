@@ -21,18 +21,13 @@ $(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba
+
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \
 			ac_cv_search_yp_get_default_domain=no \
 			ac_cv_lib_ext_nsl_gethostbyname=no
-ifeq ($(ADK_IPV6),y)
-CONFIGURE_ENV+=		libreplace_cv_HAVE_IPV6=yes
-else
-CONFIGURE_ENV+=		libreplace_cv_HAVE_IPV6=no
-endif
 CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 			--localstatedir=/var/log/samba \
 			--with-configdir=/etc/samba \
@@ -48,6 +43,8 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 			--with-ldap=no \
 			--without-cluster-support \
 			--without-sendfile-support
+
+CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

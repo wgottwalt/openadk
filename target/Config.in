@@ -250,12 +250,12 @@ config ADK_LINUX_ARM_G1
 	 Just toolchain support to cross-compile your own
 	 applications. Use static linking for your packages.
 
-#config ADK_LINUX_XSCALE_ZAURUS
-#	bool "Zaurus SL-C3200"
-#	select ADK_zaurus
-#	select ADK_TARGET_NO_FPU
-#	help
-#	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
+config ADK_LINUX_XSCALE_ZAURUS
+	bool "Zaurus SL-C3200"
+	select ADK_zaurus
+	select ADK_TARGET_NO_FPU
+	help
+	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
@@ -771,39 +771,5 @@ config ADK_TARGET_PACKAGE_RPM
 	  Create rpm packages.
 
 endchoice
-
-# broken and untested right now
-#config ADK_SSP
-#	bool "Enable Stack Smashing Protection"
-#	default n
-#	depends on ADK_LINUX_X86_ALIX1C || \
-#		ADK_LINUX_CRIS_FOXBOARD
-#	help
-#	  Enable Stack Smashing Protection
-
-config ADK_CXX
-	bool "Enable C++ support"
-	default n
-	help
-	  Enable C++ compiler and libraries.
-
-config ADK_IPV6
-	bool "Enable IPv6 support"
-	default n
-	select ADK_KPACKAGE_KMOD_IPV6
-	select BUSYBOX_FEATURE_IPV6
-	select BUSYBOX_FEATURE_IFUPDOWN_IPV6
-	select BUSYBOX_PING6
-	help
-	  Enable basic IPv6 support and
-	  make the IPv6 support options in packages visible.
-
-config ADK_X11
-	bool "Enable X.org/X11 support"
-	default n
-	help
-	  Enable Xorg/X11 server and applications in menu.
-	  Try to compile other packages with X11 support. 
-	  (f.e. mplayer)
 
 endmenu

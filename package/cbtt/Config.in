@@ -3,7 +3,6 @@ config ADK_PACKAGE_CBTT
 	tristate
 	default n
 	select ADK_PACKAGE_ZLIB
-	depends on ADK_CXX
 	help
 	 A C BitTorrent Tracker
 
@@ -13,6 +12,5 @@ config ADK_PACKAGE_CBTT_MYSQL
 	default n
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_LIBMYSQLCLIENT
-	depends on ADK_CXX
 	help
 	 A C BitTorrent Tracker

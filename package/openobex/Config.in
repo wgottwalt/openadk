@@ -2,8 +2,6 @@ config ADK_PACKAGE_OPENOBEX
 	prompt "openobex.......................... openobex library"
 	tristate
 	default n
-	# openobex does not work without ipv6
-	select ADK_IPV6	
 	select ADK_PACKAGE_BLUEZ
 	help
 	  Open source implementation of the Object Exchange (OBEX) protocol.  

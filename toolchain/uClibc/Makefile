@@ -21,19 +21,6 @@ $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
 	    $(TOPDIR)/target/$(ADK_TARGET)/uclibc.config >${WRKBUILD}/.config
-ifeq ($(ADK_IPV6),y)
-	$(SED) 's,# UCLIBC_HAS_IPV6.*,UCLIBC_HAS_IPV6=y,' \
-		${WRKBUILD}/.config
-endif
-ifeq ($(ADK_SSP),y)
-	$(SED) 's,# UCLIBC_HAS_SSP.*,UCLIBC_HAS_SSP=y,' \
-		${WRKBUILD}/.config
-	echo 'UCLIBC_BUILD_SSP=y' >> ${WRKBUILD}/.config
-	echo '# UCLIBC_HAS_SSP_COMPAT is not set' >> ${WRKBUILD}/.config
-	echo '# SSP_QUICK_CANARY is not set' >> ${WRKBUILD}/.config
-	echo 'PROPOLICE_BLOCK_ABRT=y' >> ${WRKBUILD}/.config
-	echo '# PROPOLICE_BLOCK_SEGV is not set' >> ${WRKBUILD}/.config
-endif
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif

@@ -5,7 +5,7 @@ config ADK_PACKAGE_NFS_UTILS
 	select ADK_PACKAGE_PORTMAP
 	select ADK_KPACKAGE_KMOD_NFSD
 	select ADK_KPACKAGE_KMOD_NFS_FS
-	select ADK_PACKAGE_LIBTIRPC if ADK_IPV6
+	select ADK_PACKAGE_LIBTIRPC
 	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  NFS server utilities (namely, exportfs), and an NFS server.

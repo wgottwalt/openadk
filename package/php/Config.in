@@ -62,7 +62,6 @@ config ADK_PACKAGE_PHP_MOD_MYSQL
 	prompt "php-mod-mysql.................... MySQL module"
 	tristate 
 	default n
-	depends on ADK_CXX
 	depends on ADK_COMPILE_PHP
 	select ADK_PACKAGE_LIBMYSQLCLIENT
 

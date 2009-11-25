@@ -2,7 +2,6 @@ config ADK_PACKAGE_CXXTOOLS
 	prompt "cxxtools.......................... cxxtools"
 	tristate
 	default n
-	depends on ADK_CXX
 	select ADK_PACKAGE_LIBICONV
 	help
 	  http://www.tntnet.org

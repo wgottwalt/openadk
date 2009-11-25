@@ -20,7 +20,6 @@ menu "ADK settings"
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
-	select ADK_CXX
 	select ADK_PACKAGE_AUTOCONF
 	select ADK_PACKAGE_AUTOMAKE
 	select ADK_PACKAGE_BASH
