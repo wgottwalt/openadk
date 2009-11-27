@@ -9,6 +9,7 @@ fi
 cd /
 
 mount -o remount,rw /
+umount /etc
 
 check_exit() {
 	if [ $? -ne 0 ];then
@@ -59,5 +60,7 @@ case $1 in
 esac
 
 sync
+mount --bind /etc /tmp/.cfgfs/root
 
+echo "Check with cfgfs status if you need to merge and save any changes in /etc."
 echo "You should reboot now."

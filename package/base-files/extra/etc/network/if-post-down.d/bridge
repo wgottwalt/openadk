@@ -1,5 +1,5 @@
 #!/bin/sh
-
+  
 if [ ! -x /usr/sbin/brctl ]
 then
   exit 0
@@ -16,17 +16,9 @@ case "$IF_BRIDGE_PORTS" in
         INTERFACES="$IF_BRIDGE_PORTS"
         ;;
 esac
-
-brctl addbr $IFACE || exit 1
-
+  
 for IF in $INTERFACES; do
-  if ! grep -q $IF /proc/net/dev; then
-    echo "Error: interface '$IF' does not exist!"
-    brctl delbr $IFACE
-    exit 1
-  fi
-  brctl addif $IFACE $IF
-  ip link set up dev $IF
+  ip link set down dev $IF && brctl delif $IFACE $IF
 done
 
-exit 0
+ip link set down dev $IFACE || exit 1
