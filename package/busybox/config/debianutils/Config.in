@@ -7,7 +7,7 @@ menu "Debian Utilities"
 
 config BUSYBOX_MKTEMP
 	bool "mktemp"
-	default y
+	default n
 	help
 	  mktemp is used to create unique temporary files
 
@@ -19,7 +19,7 @@ config BUSYBOX_PIPE_PROGRESS
 
 config BUSYBOX_RUN_PARTS
 	bool "run-parts"
-	default y
+	default n
 	help
 	  run-parts is a utility designed to run all the scripts in a directory.
 
@@ -35,7 +35,7 @@ config BUSYBOX_RUN_PARTS
 config BUSYBOX_FEATURE_RUN_PARTS_LONG_OPTIONS
 	bool "Enable long options"
 	default n
-	depends on BUSYBOX_RUN_PARTS && BUSYBOX_GETOPT_LONG
+	depends on BUSYBOX_RUN_PARTS && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the run-parts applet.
 
@@ -69,13 +69,13 @@ config BUSYBOX_FEATURE_START_STOP_DAEMON_FANCY
 config BUSYBOX_FEATURE_START_STOP_DAEMON_LONG_OPTIONS
 	bool "Enable long options"
 	default n
-	depends on BUSYBOX_START_STOP_DAEMON && BUSYBOX_GETOPT_LONG
+	depends on BUSYBOX_START_STOP_DAEMON && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the start-stop-daemon applet.
 
 config BUSYBOX_WHICH
 	bool "which"
-	default y
+	default n
 	help
 	  which is used to find programs in your PATH and
 	  print out their pathnames.

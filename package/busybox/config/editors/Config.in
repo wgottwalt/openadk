@@ -14,7 +14,7 @@ config BUSYBOX_AWK
 
 config BUSYBOX_FEATURE_AWK_LIBM
 	bool "Enable math functions (requires libm)"
-	default y
+	default n
 	depends on BUSYBOX_AWK
 	help
 	  Enable math functions of the Awk programming language.
@@ -22,15 +22,15 @@ config BUSYBOX_FEATURE_AWK_LIBM
 
 config BUSYBOX_CMP
 	bool "cmp"
-	default y
+	default n
 	help
 	  cmp is used to compare two files and returns the result
 	  to standard output.
 
 config BUSYBOX_DIFF
 	bool "diff"
-	default y
 	depends on !ADK_PACKAGE_DIFFUTILS
+	default n
 	help
 	  diff compares two files or directories and outputs the
 	  differences between them in a form that can be given to
@@ -70,12 +70,14 @@ config BUSYBOX_ED
 
 config BUSYBOX_PATCH
 	bool "patch"
+	depends on !ADK_PACKAGE_PATCH
 	default n
 	help
 	  Apply a unified diff formatted patch.
 
 config BUSYBOX_SED
 	bool "sed"
+	depends on !ADK_PACKAGE_SED
 	default y
 	help
 	  sed is used to perform text transformations on a file
@@ -83,6 +85,7 @@ config BUSYBOX_SED
 
 config BUSYBOX_VI
 	bool "vi"
+	depends on !ADK_PACKAGE_VIM
 	default y
 	help
 	  'vi' is a text editor. More specifically, it is the One True
