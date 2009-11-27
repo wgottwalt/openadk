@@ -23,6 +23,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
+CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+			-I${STAGING_DIR}/usr/include/uClibc++" \
+			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
+endif
+
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \

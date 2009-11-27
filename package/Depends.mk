@@ -19,22 +19,32 @@ cbtt-compile: mysql-compile zlib-compile
 collectd-compile: libpthread-compile
 cryptinit-compile: cryptsetup-compile
 cryptsetup-compile: libgcrypt-compile popt-compile e2fsprogs-compile lvm-compile
+
 ifeq (${ADK_COMPILE_CTORRENT_WITH_UCLIBCXX},y)
 ctorrent-compile: uclibc++-compile
 endif
 ctorrent-compile: openssl-compile
+
 cups-compile: zlib-compile
 curl-compile: openssl-compile zlib-compile
-cxxtools-compile: libiconv-compile
+
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 cxxtools-compile: uclibc++-compile
 endif
+cxxtools-compile: libiconv-compile
+
 cyrus-sasl-compile: openssl-compile
+
+ifeq (${ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX},y)
+dansguardian-compile: uclibc++-compile
+endif
 dansguardian-compile: pcre-compile zlib-compile
+
 ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
 davfs2-compile: fuse-compile
 endif
 davfs2-compile: libiconv-compile neon-compile
+
 dbus-compile: expat-compile
 deco-compile: ncurses-compile
 dhcpv6-compile: libnl-compile ncurses-compile

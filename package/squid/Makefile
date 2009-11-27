@@ -78,6 +78,12 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_grou
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 
+ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
+CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+			-I${STAGING_DIR}/usr/include/uClibc++" \
+			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
+endif
+
 CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
@@ -133,6 +139,13 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
+
+ifeq (${ADK_COMPILE_SQUID_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+post-configure:
+	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
+	    ${WRKBUILD}/libtool
+endif
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid
