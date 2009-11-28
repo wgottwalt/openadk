@@ -471,7 +471,7 @@ config BUSYBOX_READLINK
 
 config BUSYBOX_FEATURE_READLINK_FOLLOW
 	bool "Enable canonicalization by following all symlinks (-f)"
-	default n
+	default y
 	depends on BUSYBOX_READLINK
 	help
 	  Enable the readlink option (-f).

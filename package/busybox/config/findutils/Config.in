@@ -214,7 +214,7 @@ config BUSYBOX_FEATURE_GREP_CONTEXT
 
 config BUSYBOX_XARGS
 	bool "xargs"
-	default n
+	default y
 	help
 	  xargs is used to execute a specified command for
 	  every item from standard input.
@@ -244,7 +244,7 @@ config BUSYBOX_FEATURE_XARGS_SUPPORT_TERMOPT
 
 config BUSYBOX_FEATURE_XARGS_SUPPORT_ZERO_TERM
 	bool "Enable -0: NUL-terminated input"
-	default n
+	default y
 	depends on BUSYBOX_XARGS
 	help
 	  Support -0: input items are terminated by a NUL character

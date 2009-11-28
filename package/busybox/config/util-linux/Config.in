@@ -117,7 +117,7 @@ config BUSYBOX_FDFORMAT
 
 config BUSYBOX_FDISK
 	bool "fdisk"
-	default n
+	default y
 	help
 	  The fdisk utility is used to divide hard disks into one or more
 	  logical disks, which are generally called partitions. This utility
