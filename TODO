@@ -1,6 +1,5 @@
-- busybox update to latest version
-- rpm package backend
 - fix init scripts pidof? vs. killall
+- rpm package backend
 - freebsd build
 - win cygwin build
 - netbsd build
