@@ -1,0 +1,6 @@
+config ADK_PACKAGE_GRUB
+	prompt "grub................................. GRUB"
+	tristate
+	default n
+	help
+	  http://www.grub.org

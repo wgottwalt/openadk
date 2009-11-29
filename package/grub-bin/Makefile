@@ -3,10 +3,12 @@
 
 include ${TOPDIR}/rules.mk
 
+# compiled with i486 toolchain, statically linked with uClibc
+# cross-compile on amd64 does not work, so provide a binary package
 PKG_NAME:=		grub-bin
-PKG_VERSION:=		1.97
+PKG_VERSION:=		1.97.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		db8dff73e119b51529d2a087c9d7d527
+PKG_MD5SUM:=		99ddead9dcb689a7ec2431c1e6b3cf0d
 PKG_DESCR:=		GRUB bootloader
 PKG_SECTION:=		sys
 PKG_SITES:=		http://openadk.org/distfiles/
