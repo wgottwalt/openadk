@@ -136,6 +136,7 @@ package-$(ADK_PACKAGE_GPERF) += gperf
 package-$(ADK_PACKAGE_GPG) += gpg
 package-$(ADK_PACKAGE_GPM) += gpm
 package-$(ADK_PACKAGE_GPSD) += gpsd
+package-$(ADK_PACKAGE_GRUB) += grub
 package-$(ADK_PACKAGE_GRUB_BIN) += grub-bin
 package-$(ADK_COMPILE_GSM) += gsm
 package-$(ADK_PACKAGE_HASERL) += haserl

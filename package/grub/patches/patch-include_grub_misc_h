@@ -1,0 +1,17 @@
+--- grub-1.97.1.orig/include/grub/misc.h	2009-11-09 16:48:16.000000000 +0100
++++ grub-1.97.1/include/grub/misc.h	2009-11-29 12:07:10.920475755 +0100
+@@ -74,14 +74,6 @@ grub_strncat (char *dest, const char *sr
+   return dest;
+ }
+ 
+-/* Prototypes for aliases.  */
+-#ifndef GRUB_UTIL
+-int EXPORT_FUNC(memcmp) (const void *s1, const void *s2, grub_size_t n);
+-void *EXPORT_FUNC(memmove) (void *dest, const void *src, grub_size_t n);
+-void *EXPORT_FUNC(memcpy) (void *dest, const void *src, grub_size_t n);
+-void *EXPORT_FUNC(memset) (void *s, int c, grub_size_t n);
+-#endif
+-
+ int EXPORT_FUNC(grub_memcmp) (const void *s1, const void *s2, grub_size_t n);
+ int EXPORT_FUNC(grub_strcmp) (const char *s1, const char *s2);
+ int EXPORT_FUNC(grub_strncmp) (const char *s1, const char *s2, grub_size_t n);
