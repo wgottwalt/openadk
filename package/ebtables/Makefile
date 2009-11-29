@@ -23,7 +23,9 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
+	${INSTALL_DIR} ${IDIR_EBTABLES}/etc
 	${INSTALL_DIR} ${IDIR_EBTABLES}/usr/sbin ${IDIR_EBTABLES}/usr/lib
+	${INSTALL_DATA} ${WRKINST}/etc/ethertypes ${IDIR_EBTABLES}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ebtables ${IDIR_EBTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/*.so ${IDIR_EBTABLES}/usr/lib
 

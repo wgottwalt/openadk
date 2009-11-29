@@ -18,17 +18,17 @@ check_exit() {
 }
 
 extract_from_file() {
-        cat $1 | gunzip -c | tar -xvf -
+        cat $1 | gunzip -c | tar -xf -
 	check_exit
 }
 
 extract_from_ssh() {
-        ssh $1 "cat $2" | gunzip -c | tar -xvf -
+        ssh $1 "cat $2" | gunzip -c | tar -xf -
 	check_exit
 }
 
 extract_from_http() {
-        wget -O - $1 | gunzip -c | tar -xvf -
+        wget -O - $1 | gunzip -c | tar -xf -
 	check_exit
 }
                 
@@ -61,5 +61,4 @@ esac
 sync
 mount -o bind /etc /tmp/.cfgfs/root
 
-echo "Check with cfgfs status if you need to merge and save any changes in /etc."
-echo "You should reboot now."
+echo "Update sucessful. You should reboot now."

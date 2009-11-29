@@ -146,6 +146,9 @@ post-configure:
 	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
 	    ${WRKBUILD}/libtool
 endif
+post-configure:
+	${SED} 's#\(hardcode_into_libs=\).*$$#\1no#' \
+		${WRKBUILD}/libtool
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid

@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Pre-boot initializing"
+echo "Starting system ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
@@ -19,5 +19,4 @@ mount -o remount,rw /
 cat /etc/.rnd >/dev/urandom 2>&1
 [ -f /etc/fstab ] && mount -a
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
-echo "Starting system"
 exec /sbin/init
