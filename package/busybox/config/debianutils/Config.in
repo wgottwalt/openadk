@@ -19,7 +19,7 @@ config BUSYBOX_PIPE_PROGRESS
 
 config BUSYBOX_RUN_PARTS
 	bool "run-parts"
-	default n
+	default y
 	help
 	  run-parts is a utility designed to run all the scripts in a directory.
 
@@ -75,7 +75,7 @@ config BUSYBOX_FEATURE_START_STOP_DAEMON_LONG_OPTIONS
 
 config BUSYBOX_WHICH
 	bool "which"
-	default n
+	default y
 	help
 	  which is used to find programs in your PATH and
 	  print out their pathnames.

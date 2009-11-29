@@ -3,6 +3,7 @@ config ADK_PACKAGE_CFGFS
 	tristate
 	select BUSYBOX_COMM
 	select BUSYBOX_MD5SUM
+	select BUSYBOX_XARGS
 	select BUSYBOX_FEATURE_SORT_BIG
 	depends on \
 		ADK_LINUX_X86_ALIX1C || \
