@@ -1,0 +1,6 @@
+config ADK_PACKAGE_EBTABLES
+	prompt "ebtables.......................... Ethernet bridging firewall tool"
+	tristate
+	default n
+	help
+	  http://ebtables.sourceforge.net/

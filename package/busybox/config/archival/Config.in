@@ -7,19 +7,19 @@ menu "Archival Utilities"
 
 config BUSYBOX_FEATURE_SEAMLESS_LZMA
 	bool "Make tar, rpm, modprobe etc understand .lzma data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .lzma data.
 
 config BUSYBOX_FEATURE_SEAMLESS_BZ2
 	bool "Make tar, rpm, modprobe etc understand .bz2 data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .bz2 data.
 
 config BUSYBOX_FEATURE_SEAMLESS_GZ
 	bool "Make tar, rpm, modprobe etc understand .gz data"
-	default n
+	default y
 	help
 	  Make tar, rpm, modprobe etc understand .gz data.
 
@@ -163,7 +163,7 @@ config BUSYBOX_GUNZIP
 
 config BUSYBOX_GZIP
 	bool "gzip"
-	default n
+	default y
 	help
 	  gzip is used to compress files.
 	  It's probably the most widely used UNIX compression program.
@@ -276,7 +276,7 @@ config BUSYBOX_FEATURE_TAR_LONG_OPTIONS
 
 config BUSYBOX_FEATURE_TAR_UNAME_GNAME
 	bool "Enable use of user and group names"
-	default n
+	default p
 	depends on BUSYBOX_TAR
 	help
 	  Enables use of user and group names in tar. This affects contents

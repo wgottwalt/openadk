@@ -83,6 +83,7 @@ package-$(ADK_PACKAGE_DSNIFF) += dsniff
 package-$(ADK_PACKAGE_E2FSPROGS) += e2fsprogs
 package-$(ADK_PACKAGE_LIBUUID) += e2fsprogs
 package-$(ADK_PACKAGE_LIBBLKID) += e2fsprogs
+package-$(ADK_PACKAGE_EBTABLES) += ebtables
 package-$(ADK_PACKAGE_ELINKS) += elinks
 package-$(ADK_PACKAGE_ESOUND) += esound
 package-$(ADK_PACKAGE_ETHER_WAKE) += ether-wake

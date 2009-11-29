@@ -21,7 +21,7 @@ config BUSYBOX_FEATURE_USE_INITTAB
 
 config BUSYBOX_FEATURE_KILL_REMOVED
 	bool "Support killing processes that have been removed from inittab"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_USE_INITTAB
 	help
 	  When respawn entries are removed from inittab and a SIGHUP is
@@ -41,7 +41,7 @@ config BUSYBOX_FEATURE_KILL_DELAY
 
 config BUSYBOX_FEATURE_INIT_SCTTY
 	bool "Run commands with leading dash with controlling tty"
-	default n
+	default y
 	depends on BUSYBOX_INIT
 	help
 	  If this option is enabled, init will try to give a controlling
@@ -56,7 +56,7 @@ config BUSYBOX_FEATURE_INIT_SCTTY
 
 config BUSYBOX_FEATURE_INIT_SYSLOG
 	bool "Enable init to write to syslog"
-	default n
+	default y
 	depends on BUSYBOX_INIT
 
 config BUSYBOX_FEATURE_EXTRA_QUIET

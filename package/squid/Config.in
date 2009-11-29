@@ -4,6 +4,7 @@ config ADK_PACKAGE_SQUID
 	tristate
 	default n
 	select ADK_PACKAGE_LIBOPENSSL
+	select ADK_PACKAGE_LIBPTHREAD
 	help
 	  Squid is a high-performance proxy caching server for web clients, 
 	  supporting FTP, gopher, and HTTP data objects. Unlike traditional 

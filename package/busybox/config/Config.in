@@ -65,7 +65,7 @@ config BUSYBOX_SHOW_USAGE
 
 config BUSYBOX_FEATURE_VERBOSE_USAGE
 	bool "Show verbose applet usage messages"
-	default n
+	default y
 	select BUSYBOX_SHOW_USAGE
 	help
 	  All BusyBox applets will show more verbose help messages when
@@ -155,7 +155,7 @@ config BUSYBOX_FEATURE_CLEAN_UP
 
 config BUSYBOX_FEATURE_PIDFILE
 	bool "Support writing pidfiles"
-	default n
+	default y
 	help
 	  This option makes some applets (e.g. crond, syslogd, inetd) write
 	  a pidfile in /var/run. Some applications rely on them.
