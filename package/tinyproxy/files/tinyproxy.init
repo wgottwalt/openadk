@@ -14,7 +14,7 @@ start)
 	tinyproxy
 	;;
 stop)
-	killall tinyproxy
+	pkill tinyproxy
 	;;
 restart)
 	sh $0 stop

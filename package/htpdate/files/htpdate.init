@@ -14,7 +14,7 @@ start)
 	htpdate -l -s -t $htpdate_flags && htpdate -D $htpdate_flags
 	;;
 stop)
-	killall htpdate
+	pkill htpdate
 	;;
 restart)
 	sh $0 stop

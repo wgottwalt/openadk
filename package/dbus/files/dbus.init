@@ -14,7 +14,7 @@ start)
 	dbus-daemon --config-file=/etc/dbus-1/system.conf
 	;;
 stop)
-	killall dbus-daemon
+	pkill dbus-daemon
 	;;
 restart)
 	sh $0 stop

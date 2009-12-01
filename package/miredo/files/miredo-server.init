@@ -14,7 +14,7 @@ start)
 	miredo-server
 	;;
 stop)
-	killall miredo-server
+	pkill miredo-server
 	;;
 restart)
 	sh $0 stop

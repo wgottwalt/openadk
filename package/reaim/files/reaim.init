@@ -21,7 +21,7 @@ start)
 	reaim
 	;;
 stop)
-	killall reaim
+	pkill reaim
 	;;
 restart)
 	sh $0 stop

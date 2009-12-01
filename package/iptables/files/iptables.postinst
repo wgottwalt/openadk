@@ -1,7 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
 
-if [ -f $IPKG_INSTROOT/etc/init.d/S45firewall ]; then
-    add_rcconf iptables firewall NO
-fi
-
+add_rcconf iptables firewall NO

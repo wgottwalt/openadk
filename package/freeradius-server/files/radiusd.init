@@ -14,7 +14,7 @@ start)
 	radiusd
 	;;
 stop)
-	killall radiusd
+	pkill radiusd
 	;;
 restart)
 	sh $0 stop

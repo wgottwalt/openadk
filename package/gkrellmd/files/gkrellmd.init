@@ -13,7 +13,7 @@ start)
 	gkrellmd -d
 	;;
 stop)
-	killall gkrellmd
+	pkill gkrellmd
 	;;
 restart)
 	sh $0 stop

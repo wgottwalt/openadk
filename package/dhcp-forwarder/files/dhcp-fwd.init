@@ -13,7 +13,7 @@ start)
 	dhcp-fwd
 	;;
 stop)
-	killall dhcp-fwd
+	pkill dhcp-fwd
 	;;
 restart)
 	sh $0 stop

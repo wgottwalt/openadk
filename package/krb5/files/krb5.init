@@ -14,8 +14,8 @@ start)
 	/usr/sbin/kadmind &
 	;;
 stop)
-	killall krb5kdc
-	killall kadmind
+	pkill krb5kdc
+	pkill kadmind
 	;;
 restart)
 	sh $0 stop

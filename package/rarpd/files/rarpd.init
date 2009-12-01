@@ -14,7 +14,7 @@ start)
 	rarpd $rarpd_flags
 	;;
 stop)
-	killall rarpd
+	pkill rarpd
 	;;
 restart)
 	sh $0 stop

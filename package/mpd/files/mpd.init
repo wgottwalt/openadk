@@ -17,6 +17,10 @@ start)
 		echo "mpd user must be in group audio."
 		exit 1
 	fi
+	if [ ! -d /var/run/mpd ];then
+		mkdir -p /var/run/mpd
+		chown mpd:mpd /var/run/mpd
+	fi
 	mpd
 	;;
 stop)

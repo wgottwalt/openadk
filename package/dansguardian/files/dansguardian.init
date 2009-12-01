@@ -11,10 +11,14 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	if [ ! -f /var/log/dansguardian-access.log ];then
+		touch /var/log/dansguardian-access.log
+		chown proxy:proxy /var/log/dansguardian-access.log
+	fi
 	dansguardian
 	;;
 stop)
-	killall dansguardian
+	pkill dansguardian
 	;;
 restart)
 	sh $0 stop

@@ -14,7 +14,7 @@ start)
 	snort $snort_flags
 	;;
 stop)
-	killall snort
+	pkill snort
 	;;
 *)
 	echo "usage: $0 {start | stop | restart}"

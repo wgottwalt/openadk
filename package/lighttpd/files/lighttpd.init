@@ -14,7 +14,7 @@ start)
 	lighttpd $lighttpd_flags
 	;;
 stop)
-	killall lighttpd
+	pkill lighttpd
 	;;
 restart)
 	sh $0 stop

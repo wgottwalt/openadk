@@ -18,7 +18,7 @@ start)
 	[ -x /usr/sbin/syslog-ng ] && /usr/sbin/syslog-ng
 	;;
 stop)
-	killall syslog-ng
+	pkill syslog-ng
 	;;
 restart)
 	sh $0 stop

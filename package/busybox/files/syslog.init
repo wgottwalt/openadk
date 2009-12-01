@@ -14,8 +14,8 @@ start)
 	klogd
 	;;
 stop)
-	killall klogd
-	killall syslogd
+	pkill klogd
+	pkill syslogd
 	;;
 restart)
 	sh $0 stop

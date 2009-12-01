@@ -15,7 +15,7 @@ start)
 	vsftpd
   	;;
 stop)
-	killall vsftpd
+	pkill vsftpd
 	;;
 restart)
 	sh $0 stop

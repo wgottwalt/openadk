@@ -14,7 +14,7 @@ start)
 	netserver
 	;;
 stop)
-	killall netserver
+	pkill netserver
 	;;
 restart)
 	sh $0 stop

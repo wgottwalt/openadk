@@ -14,7 +14,7 @@ start)
 	pppoe-relay $pppoe_relay_flags
 	;;
 stop)
-	killall pppoe-relay
+	pkill pppoe-relay
 	;;
 restart)
 	sh $0 stop

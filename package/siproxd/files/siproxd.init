@@ -14,7 +14,7 @@ autostop) ;;
 		siproxd
 		;;
 	stop)
-  		killall siproxd
+  		pkill siproxd
 		;;
 	restart)
 		sh $0 stop

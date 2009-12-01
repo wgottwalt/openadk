@@ -16,7 +16,7 @@ start)
 	done
 	;;
 stop)
-	killall openvpn
+	pkill openvpn
 	;;
 restart)
 	sh $0 stop

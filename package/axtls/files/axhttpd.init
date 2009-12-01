@@ -17,7 +17,7 @@ start)
 	/usr/sbin/axhttpd >>/var/log/axhttpd.access
 	;;
 stop)
-	killall axhttpd
+	pkill axhttpd
 	;;
 restart)
 	sh $0 stop

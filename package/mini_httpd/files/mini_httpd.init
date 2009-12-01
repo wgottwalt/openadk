@@ -14,7 +14,7 @@ start)
 	mini_httpd $mini_httpd_flags
 	;;
 stop)
-	killall mini_httpd
+	pkill mini_httpd
 	;;
 restart)
 	sh $0 stop

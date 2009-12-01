@@ -15,7 +15,7 @@ start)
 	scanlogd $scanlogd_flags
 	;;
 stop)
-	killall scanlogd
+	pkill scanlogd
 	;;
 restart)
 	sh $0 stop

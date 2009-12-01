@@ -15,7 +15,7 @@ start)
 	osirisd
 	;;
 stop)
-	killall osirisd
+	pkill osirisd
 	;;
 restart)
 	sh $0 stop

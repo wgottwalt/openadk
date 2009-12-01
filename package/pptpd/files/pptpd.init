@@ -14,7 +14,7 @@ start)
 	pptpd
 	;;
 stop)
-	killall pptpd
+	pkill pptpd
 	;;
 restart)
 	sh $0 stop

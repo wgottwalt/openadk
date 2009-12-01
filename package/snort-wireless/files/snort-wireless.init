@@ -15,7 +15,7 @@ start)
 	snort ${snort_wireless_flags}
 	;;
 stop)
-	killall snort
+	pkill snort
 	;;
 restart)
 	sh $0 stop

@@ -13,7 +13,7 @@ start)
 	chilli
 	;;
 stop)
-	killall chilli
+	pkill chilli
 	;;
 restart)
 	sh $0 stop

@@ -14,7 +14,7 @@ autostop) ;;
 		pmacctd $pmacctd_flags
 		;;
 	stop)
-		killall pmacctd
+		pkill pmacctd
 		;;
 	restart)
 		sh $0 stop
