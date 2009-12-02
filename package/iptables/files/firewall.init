@@ -1,0 +1,35 @@
+#!/bin/sh
+#PKG iptables
+#INIT 45
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${firewall:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	. /etc/firewall.conf
+	;;
+stop)
+	### Clear tables
+	iptables -F
+	iptables -X
+	iptables -t nat -F
+	iptables -t nat -X
+	iptables -P INPUT ACCEPT
+	iptables -P FORWARD ACCEPT
+	iptables -P OUTPUT ACCEPT
+	iptables -t nat -P PREROUTING ACCEPT
+	iptables -t nat -P POSTROUTING ACCEPT
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?
