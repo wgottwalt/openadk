@@ -11,9 +11,13 @@ PKG_DESCR:=		Pixel manipulation library
 PKG_SECTION:=		x11
 PKG_SITES:=		http://www.cairographics.org/releases/
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PIXMAN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PIXMAN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

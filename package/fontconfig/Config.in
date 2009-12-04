@@ -1,0 +1,5 @@
+config ADK_PACKAGE_FONTCONFIG
+	prompt "fontconfig........................ fontconfig library"
+	tristate
+	default n
+	help

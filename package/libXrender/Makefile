@@ -3,11 +3,11 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		libXext
-PKG_VERSION:=		1.1.1
+PKG_NAME:=		libXrender
+PKG_VERSION:=		0.9.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6b61b3f657befded8ae66e04085c413e
-PKG_DESCR:=		X client interface to extensions of the X protocol
+PKG_MD5SUM:=		1791473c18a83a333a048b72d719fc55
+PKG_DESCR:=		X11 rendering library
 PKG_SECTION:=		x11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
@@ -17,7 +17,7 @@ endif
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBXRENDER,libxrender,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
@@ -25,7 +25,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_LIBXEXT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libXext.so* ${IDIR_LIBXEXT}/usr/lib/
+	${INSTALL_DIR} ${IDIR_LIBXAU}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libXrender.so* ${IDIR_LIBXAU}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

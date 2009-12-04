@@ -13,13 +13,17 @@ PKG_DEPENDS:=		zlib
 PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPNG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib

@@ -21,6 +21,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GTK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		gio_can_sniff=no
+CONFIGURE_ARGS+=	--without-libtiff \
+			--without-libjpeg
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

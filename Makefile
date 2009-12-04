@@ -132,13 +132,11 @@ allconfig: .prereq_done
 allmodconfig: .prereq_done
 	@${GMAKE_INV} _mconfig W=-o RCONFIG=Config.in
 
-allmoddefconfig: .prereq_done
-	@if [ -z "$(TARGET)" ];then echo "You need to specify a target"; exit 1;fi
-	cp $(TOPDIR)/target/$(TARGET)/default.config $(TOPDIR)/.defconfig
-	@${GMAKE_INV} _mconfig W="-m -o -D .defconfig" RCONFIG=Config.in
-
 package_index: .prereq_done
 	@${GMAKE_INV} package_index
+
+bulk: .prereq_done
+	@${GMAKE_INV} bulk
 
 world: .prereq_done
 	@${GMAKE_INV} world

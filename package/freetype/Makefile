@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libfreetype
-PKG_VERSION:=		2.3.9
+PKG_VERSION:=		2.3.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d76233108aca9c9606cdbd341562ad9a
+PKG_MD5SUM:=		519c7cbf5cbd72ffa822c66844d3114c
 PKG_DESCR:=		A free, high-quality and portable font engine
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -16,13 +16,17 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
 DISTFILES:=		freetype-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/freetype-${PKG_VERSION}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFREETYPE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFREETYPE}/usr/lib

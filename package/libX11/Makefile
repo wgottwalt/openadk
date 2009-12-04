@@ -11,9 +11,13 @@ PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
 CONFIGURE_STYLE:=	gnu

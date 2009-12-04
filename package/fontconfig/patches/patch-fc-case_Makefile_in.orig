@@ -1,0 +1,24 @@
+--- fontconfig-2.8.0.orig/fc-case/Makefile.in	2009-11-19 00:49:38.000000000 +0100
++++ fontconfig-2.8.0/fc-case/Makefile.in	2009-12-04 19:59:20.431178533 +0100
+@@ -114,10 +114,10 @@ AUTOCONF = @AUTOCONF@
+ AUTOHEADER = @AUTOHEADER@
+ AUTOMAKE = @AUTOMAKE@
+ AWK = @AWK@
+-CC = @CC_FOR_BUILD@
++CC = @CC@
+ CCDEPMODE = @CCDEPMODE@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
+-CFLAGS = @CFLAGS@
++CFLAGS = 
+ CONFDIR = @CONFDIR@
+ CPP = @CPP@
+ CPPFLAGS = @CPPFLAGS@
+@@ -252,7 +252,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
++LINK = $(CCLD) $(AM_CFLAGS) $(AM_LDFLAGS) -o $@
+ INCLUDES = -I${top_srcdir}/src -I${top_srcdir} $(WARN_CFLAGS)
+ TMPL = fccase.tmpl.h
+ STMPL = ${top_srcdir}/fc-case/${TMPL}

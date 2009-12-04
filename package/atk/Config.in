@@ -1,0 +1,5 @@
+config ADK_PACKAGE_ATK
+	prompt "atk............................... ATK library"
+	tristate
+	default n
+	help

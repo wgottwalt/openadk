@@ -12,9 +12,12 @@ bind-compile: openssl-compile
 bitlbee-compile: libiconv-compile openssl-compile glib-compile
 bluez-compile: libusb-compile dbus-compile glib-compile
 bogofilter-compile: libiconv-compile libdb-compile
+cairo-compile: libpng-compile pixman-compile freetype-compile fontconfig-compile libX11-compile
+
 ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
 cbtt-compile: uclibc++-compile
 endif
+
 cbtt-compile: mysql-compile zlib-compile
 collectd-compile: libpthread-compile
 cryptinit-compile: cryptsetup-compile
@@ -65,10 +68,14 @@ gkrellmd-compile: glib-compile
 glib-compile: gettext-compile libiconv-compile
 gmediaserver-compile: id3lib-compile libupnp-compile
 gnutls-compile: libgcrypt-compile liblzo-compile libtasn1-compile opencdk-compile zlib-compile ncurses-compile
+
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
 gpsd-compile: uclibc++-compile
 endif
 gpsd-compile: ncurses-compile
+
+gtk+-compile: cairo-compile atk-compile pango-compile libXext-compile renderproto-compile libXrender-compile
+
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
 heimdal-compile: libdb-compile
 endif
@@ -76,6 +83,7 @@ ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
 heimdal-compile: openldap-compile
 endif
 heimdal-compile: openssl-compile ncurses-compile e2fsprogs-compile
+
 httping-compile: openssl-compile
 icecast-compile: curl-compile libvorbis-compile libxml2-compile libxslt-compile
 ifeq (${ADK_COMPILE_ID3LIB_WITH_UCLIBCXX},y)
