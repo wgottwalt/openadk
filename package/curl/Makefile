@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.19.6
+PKG_VERSION:=		7.19.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6625de9d42d1b8d3af372d3241a576fd
+PKG_MD5SUM:=		ecb2e37e45c9933e2a963cabe03670ab
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		net
 PKG_URL:=		http://curl.haxx.se
@@ -28,7 +28,7 @@ $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
 $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
 			--enable-cookies \
@@ -50,14 +50,14 @@ CONFIGURE_ARGS+=	--disable-thread \
 			--without-ca-bundle \
 			--without-gnutls \
 			--without-libidn
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CURL}/usr/bin ${IDIR_LIBCURL}/usr/lib
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
 	${CP} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
-	${CP} ${WRKINST}/usr/lib/libcurl.so.* ${IDIR_LIBCURL}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
 	${CP} ${WRKINST}/usr/include/curl/*.h ${IDIR_LIBCURL_DEV}/usr/include/curl/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

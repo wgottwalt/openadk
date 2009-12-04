@@ -13,7 +13,24 @@ CONFIG = config
 DEFCONFIG= 		ADK_DEVELSYSTEM=n \
 			ADK_DEBUG=n \
 			ADK_STATIC=n \
-			ADK_FORCE_PARALLEL=n
+			ADK_FORCE_PARALLEL=n \
+			BUSYBOX_SELINUX=n \
+			BUSYBOX_LOCALE_SUPPORT=n \
+			BUSYBOX_FEATURE_PREFER_APPLETS=n \
+			BUSYBOX_FEATURE_SUID=n \
+			BUSYBOX_SELINUXENABLED=n \
+			BUSYBOX_FEATURE_INSTALLER=n \
+			BUSYBOX_PAM=n \
+			BUSYBOX_FLASH_LOCK=n \
+			BUSYBOX_FLASH_UNLOCK=n \
+			BUSYBOX_FLASH_ERASEALL=n \
+			BUSYBOX_PIE=n \
+			BUSYBOX_DEBUG=n \
+			BUSYBOX_NOMMU=n \
+			BUSYBOX_WERROR=n \
+			BUSYBOX_STATIC=n \
+			ADK_KERNEL_RT2X00_DEBUG=n \
+			ADK_KERNEL_ATH5K_DEBUG=n
 
 noconfig_targets:=	menuconfig \
 			_config \
@@ -227,7 +244,26 @@ modconfig:
 			echo $$symbol >> $(TOPDIR)/all.config; \
 		done; \
 	fi
+	@if [ ! -z "$(FS)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(FS)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/all.config; \
+	fi
+	@if [ ! -z "$(PKG)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(PKG)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/all.config; \
+	fi
+	@if [ ! -z "$(LIBC)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(LIBC)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/all.config; \
+	fi
 ifneq (,$(filter %_qemu,${TARGET}))
+
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/all.config
 endif
 ifneq (,$(filter %_rescue,${TARGET}))
@@ -248,6 +284,14 @@ _mconfig: ${CONFIG}/conf _mconfig2 _config
 _mconfig2: ${CONFIG}/conf modconfig
 	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
+# build all targets and combinations
+bulk:
+	mkdir $(TOPDIR)/bulk
+	$(MAKE) TARGET=alix1c LIBC=uclibc FS=nfsroot PKG=ipkg allmodconfig
+	$(MAKE) v
+	$(CP) $(BIN_DIR) $(TOPDIR)/bulk
+	$(MAKE) cleantarget
+	
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) \

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		radvd
-PKG_VERSION:=		1.2
+PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		614876420d76cd2bb5bcb49760c8b9e3
+PKG_MD5SUM:=		78598b60ed9d64920739189c3dc0934d
 PKG_DESCR:=		Routing Advertisement Daemon for IPv6
 PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-ipv6

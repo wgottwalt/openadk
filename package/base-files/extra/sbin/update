@@ -6,9 +6,6 @@ if [ $who -ne 0 ]; then
   exit 1
 fi
 
-cd /
-umount -f /etc
-mount -o remount,rw /
 
 check_exit() {
 	if [ $? -ne 0 ];then
@@ -17,17 +14,26 @@ check_exit() {
 	fi
 }
 
+prepare() {
+	cd /
+	umount -f /etc
+	mount -o remount,rw /
+}
+
 extract_from_file() {
+	prepare
         cat $1 | gunzip -c | tar -xf -
 	check_exit
 }
 
 extract_from_ssh() {
+	prepare
         ssh $1 "cat $2" | gunzip -c | tar -xf -
 	check_exit
 }
 
 extract_from_http() {
+	prepare
         wget -O - $1 | gunzip -c | tar -xf -
 	check_exit
 }

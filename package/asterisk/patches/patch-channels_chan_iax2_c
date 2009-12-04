@@ -1,0 +1,20 @@
+--- asterisk-1.4.27.1.orig/channels/chan_iax2.c	2009-11-10 18:15:57.000000000 +0100
++++ asterisk-1.4.27.1/channels/chan_iax2.c	2009-12-03 20:57:05.000000000 +0100
+@@ -7076,7 +7076,7 @@ static int try_transfer(struct chan_iax2
+ 	
+ 	memset(&ied, 0, sizeof(ied));
+ 	if (ies->apparent_addr)
+-		bcopy(ies->apparent_addr, &new, sizeof(new));
++		memcpy(&new, ies->apparent_addr, sizeof(new));
+ 	if (ies->callno)
+ 		newcall = ies->callno;
+ 	if (!newcall || !new.sin_addr.s_addr || !new.sin_port) {
+@@ -7235,7 +7235,7 @@ static int iax2_ack_registry(struct iax_
+ 
+ 	memset(&us, 0, sizeof(us));
+ 	if (ies->apparent_addr)
+-		bcopy(ies->apparent_addr, &us, sizeof(us));
++		memcpy(&us, ies->apparent_addr, sizeof(us));
+ 	if (ies->username)
+ 		ast_copy_string(peer, ies->username, sizeof(peer));
+ 	if (ies->refresh)

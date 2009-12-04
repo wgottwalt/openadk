@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpm
-PKG_VERSION:=		4.7.0
+PKG_VERSION:=		4.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		74791d638c571ec79f06227d453a6a03
-PKG_DESCR:=		GNU rpm
+PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
+PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
 PKG_URL:=		http://www.rpm.org
 PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/

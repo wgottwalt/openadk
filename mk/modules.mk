@@ -58,7 +58,6 @@ $(eval $(call KMOD_template,ATH5K,mac80211-ath5k,\
 ,20, kmod-led-class))
 
 $(eval $(call KMOD_template,RT2X00,mac80211-rt2x00,\
-	$(MODULES_DIR)/kernel/drivers/input/input-polldev \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00lib \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00pci \
 ,17))
@@ -488,10 +487,6 @@ $(eval $(call KMOD_template,IP_NF_TARGET_REDIRECT,nf-ip-target-redirect,\
 
 $(eval $(call KMOD_template,IP_NF_TARGET_NETMAP,nf-ip-target-netmap,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_NETMAP \
-,65))
-
-$(eval $(call KMOD_template,IP_NF_TARGET_SAME,nf-ip-target-same,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_SAME \
 ,65))
 
 #
