@@ -119,6 +119,7 @@ package-$(ADK_PACKAGE_GETTEXT) += gettext
 package-$(ADK_PACKAGE_GIT) += git
 package-$(ADK_PACKAGE_GKRELLMD) += gkrellmd
 package-$(ADK_PACKAGE_GLIB) += glib
+package-$(ADK_PACKAGE_GTK) += gtk+
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 endif
