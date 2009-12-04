@@ -132,8 +132,8 @@ if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
 	fi
 fi
 
-printf "Create partition and filesystem\n"
 if [ $rb532 -ne 0 ];then
+	printf "Create partition and filesystem for rb532\n"
 	rootpart=${1}2
 	$parted -s $1 mklabel msdos
 	sleep 2
@@ -153,6 +153,7 @@ if [ $rb532 -ne 0 ];then
 else
 	rootpart=${1}1
 	if [ $cfgfs -eq 0 ];then
+		printf "Create partition and filesystem without cfgfs\n"
 $sfdisk $1 << EOF
 ,,L
 ;
@@ -162,6 +163,7 @@ y
 EOF
 		$mke2fs ${rootpart}
 	else
+		printf "Create partition and filesystem with cfgfs\n"
 		$parted -s $1 mklabel msdos
 		sleep 2
 		maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
@@ -182,7 +184,7 @@ else
 fi
 
 sleep 2
-$tune2fs -c 0 -i 0 ${rootpart} >/dev/null
+$tune2fs -c 0 -i 0 -m 1 ${rootpart} >/dev/null
 if [ $? -eq 0 ];then
 	printf "Successfully disabled filesystem checks on ${rootpart}\n"
 else	
@@ -199,13 +201,14 @@ chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
 
 if [ $rb532 -eq 0 ];then
+	printf "Installing GRUB bootloader\n"
 	mkdir -p $tmp/boot/grub
 	mount -o bind /dev $tmp/dev
 	chroot $tmp mount -t proc /proc /proc
 	chroot $tmp mount -t sysfs /sys /sys
 cat << EOF > $tmp/boot/grub/grub.cfg
 set default=0
-set timeout=5
+set timeout=1
 serial --unit=0 --speed=115200
 terminal_output serial 
 terminal_input serial 
