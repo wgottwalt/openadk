@@ -65,7 +65,7 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	tristate
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
-	select ADK_KPACKAGE_KMOD_BLK_DEV_SD
+	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
 	default n
 	help
@@ -188,7 +188,7 @@ config ADK_KPACKAGE_KMOD_SCSI
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 	prompt "kmod-scsi-disk.................... SCSI disk support"
-	depends on !ADK_KERNEL_SCSI
+	depends on !ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_KPACKAGE_KMOD_SCSI
 	tristate
 	help

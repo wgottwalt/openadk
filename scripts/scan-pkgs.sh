@@ -31,9 +31,6 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
 		NEED_RPM="$NEED_RPM rpm"
 	fi
-fi
-
-if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_SQUID ]]; then
 		NEED_GXX="$NEED_GXX squid"
 	fi
@@ -85,7 +82,6 @@ if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
 	NEED_FLEX="$NEED_FLEX libpcap"
 	NEED_BISON="$NEED_BISON libpcap"
 fi
-
 
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
@@ -189,10 +185,5 @@ if [[ -n $NEED_FLEX ]]; then
 		out=1
 	fi
 fi
-
-#if [[ -n $ADK_COMPILE_MYSQL && $OStype != Linux ]]; then
-#	echo >&2 mySQL does not build on non-GNU/Linux.
-#	out=1
-#fi
 
 exit $out

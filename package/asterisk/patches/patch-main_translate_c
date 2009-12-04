@@ -1,0 +1,11 @@
+--- asterisk-1.4.27.1.orig/main/translate.c	2009-10-21 18:44:49.000000000 +0200
++++ asterisk-1.4.27.1/main/translate.c	2009-12-03 20:53:36.000000000 +0100
+@@ -442,7 +442,7 @@ static void rebuild_matrix(int samples)
+ 	if (option_debug)
+ 		ast_log(LOG_DEBUG, "Resetting translation matrix\n");
+ 
+-	bzero(tr_matrix, sizeof(tr_matrix));
++	memset(tr_matrix, 0, sizeof(tr_matrix));
+ 
+ 	/* first, compute all direct costs */
+ 	AST_LIST_TRAVERSE(&translators, t, list) {

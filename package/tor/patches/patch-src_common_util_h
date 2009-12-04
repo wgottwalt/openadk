@@ -1,12 +1,23 @@
-$Id$
---- tor-0.1.1.26.orig/src/common/util.h	2006-09-24 19:47:57.000000000 +0200
-+++ tor-0.1.1.26/src/common/util.h	2007-02-17 23:09:46.000000000 +0100
-@@ -36,7 +36,7 @@
-  * And I'm not just saying that because some of our asserts check
-  * security-critical properties.
-  */
+--- tor-0.2.1.20.orig/src/common/util.h	2009-06-19 08:13:53.000000000 +0200
++++ tor-0.2.1.20/src/common/util.h	2009-12-03 23:47:21.000000000 +0100
+@@ -24,20 +24,6 @@
+ #define O_TEXT 0
+ #endif
+ 
+-/* Replace assert() with a variant that sends failures to the log before
+- * calling assert() normally.
+- */
+-#ifdef NDEBUG
+-/* Nobody should ever want to build with NDEBUG set.  99% of our asserts will
+- * be outside the critical path anyway, so it's silly to disable bug-checking
+- * throughout the entire program just because a few asserts are slowing you
+- * down.  Profile, optimize the critical path, and keep debugging on.
+- *
+- * And I'm not just saying that because some of our asserts check
+- * security-critical properties.
+- */
 -#error "Sorry; we don't support building with NDEBUG."
-+#define tor_assert(expr) ((void)(0))
- #else
- #define tor_assert(expr) do {                                           \
-     if (!(expr)) {                                                      \
+-#endif
+ 
+ /** Like assert(3), but send assertion failures to the log as well as to
+  * stderr. */

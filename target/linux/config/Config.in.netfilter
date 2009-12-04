@@ -417,13 +417,6 @@ config ADK_KPACKAGE_KMOD_IP_NF_TARGET_NETMAP
 	  address part intact. It is similar to Fast NAT, except that
 	  Netfilter's connection tracking doesn't work well with Fast NAT.
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_SAME
-	tristate 'SAME target support'
-	depends on ADK_KPACKAGE_KMOD_NF_NAT
-	help
-	  This option adds a `SAME' target, which works like the standard SNAT
-	  target, but attempts to give clients the same IP for all connections.
-
 config ADK_KPACKAGE_KMOD_IP_NF_MANGLE
 	tristate 'Packet mangling'
 	depends on ADK_KPACKAGE_KMOD_NF_NAT

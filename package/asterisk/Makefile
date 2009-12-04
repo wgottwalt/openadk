@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.4.26.3
+PKG_VERSION:=		1.4.27.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		04017dfdc8caeb8f4663b5dc4a9e1019
+PKG_MD5SUM:=		e09ca163a6e90018c92c65a50b9ec398
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
@@ -121,8 +121,8 @@ pre-configure:
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \
-	tar xzf asterisk-core-sounds-en-gsm-1.4.15.tar.gz ; \
-	rm asterisk-core-sounds-en-gsm-1.4.15.tar.gz
+	tar xzf asterisk-core-sounds-en-gsm-1.4.16.tar.gz ; \
+	rm asterisk-core-sounds-en-gsm-1.4.16.tar.gz
 	@echo
 	@echo "---> have to install ${SUB_INSTALLS-m} ${SUB_INSTALLS-y} <---"
 	@echo

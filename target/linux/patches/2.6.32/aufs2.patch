@@ -1,6 +1,6 @@
-diff -Naurp linux-2.6.30/Documentation/ABI/testing/debugfs-aufs linux-2.6.30.patched/Documentation/ABI/testing/debugfs-aufs
---- linux-2.6.30/Documentation/ABI/testing/debugfs-aufs	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/Documentation/ABI/testing/debugfs-aufs	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/Documentation/ABI/testing/debugfs-aufs linux-2.6.31.5/Documentation/ABI/testing/debugfs-aufs
+--- linux-2.6.31.5.orig/Documentation/ABI/testing/debugfs-aufs	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/Documentation/ABI/testing/debugfs-aufs	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,40 @@
 +What:		/debug/aufs/si_<id>/
 +Date:		March 2009
@@ -42,9 +42,9 @@ diff -Naurp linux-2.6.30/Documentation/ABI/testing/debugfs-aufs linux-2.6.30.pat
 +		When the aufs mount option 'noxino' is specified, it
 +		will be empty. About XINO files, see
 +		Documentation/filesystems/aufs/aufs.5 in detail.
-diff -Naurp linux-2.6.30/Documentation/ABI/testing/sysfs-aufs linux-2.6.30.patched/Documentation/ABI/testing/sysfs-aufs
---- linux-2.6.30/Documentation/ABI/testing/sysfs-aufs	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/Documentation/ABI/testing/sysfs-aufs	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/Documentation/ABI/testing/sysfs-aufs linux-2.6.31.5/Documentation/ABI/testing/sysfs-aufs
+--- linux-2.6.31.5.orig/Documentation/ABI/testing/sysfs-aufs	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/Documentation/ABI/testing/sysfs-aufs	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,25 @@
 +What:		/sys/fs/aufs/si_<id>/
 +Date:		March 2009
@@ -71,9 +71,9 @@ diff -Naurp linux-2.6.30/Documentation/ABI/testing/sysfs-aufs linux-2.6.30.patch
 +		When the aufs mount option 'noxino' is specified, it
 +		will be empty. About XINO files, see
 +		Documentation/filesystems/aufs/aufs.5 in detail.
-diff -Naurp linux-2.6.30/fs/aufs/aufs.h linux-2.6.30.patched/fs/aufs/aufs.h
---- linux-2.6.30/fs/aufs/aufs.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/aufs.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/aufs.h linux-2.6.31.5/fs/aufs/aufs.h
+--- linux-2.6.31.5.orig/fs/aufs/aufs.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/aufs.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,51 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -126,9 +126,9 @@ diff -Naurp linux-2.6.30/fs/aufs/aufs.h linux-2.6.30.patched/fs/aufs/aufs.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/branch.c linux-2.6.30.patched/fs/aufs/branch.c
---- linux-2.6.30/fs/aufs/branch.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/branch.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/branch.c linux-2.6.31.5/fs/aufs/branch.c
+--- linux-2.6.31.5.orig/fs/aufs/branch.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/branch.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,974 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -1104,9 +1104,9 @@ diff -Naurp linux-2.6.30/fs/aufs/branch.c linux-2.6.30.patched/fs/aufs/branch.c
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/branch.h linux-2.6.30.patched/fs/aufs/branch.h
---- linux-2.6.30/fs/aufs/branch.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/branch.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/branch.h linux-2.6.31.5/fs/aufs/branch.h
+--- linux-2.6.31.5.orig/fs/aufs/branch.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/branch.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,219 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -1327,9 +1327,9 @@ diff -Naurp linux-2.6.30/fs/aufs/branch.h linux-2.6.30.patched/fs/aufs/branch.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_BRANCH_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/cpup.c linux-2.6.30.patched/fs/aufs/cpup.c
---- linux-2.6.30/fs/aufs/cpup.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/cpup.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/cpup.c linux-2.6.31.5/fs/aufs/cpup.c
+--- linux-2.6.31.5.orig/fs/aufs/cpup.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/cpup.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,1048 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -2379,9 +2379,9 @@ diff -Naurp linux-2.6.30/fs/aufs/cpup.c linux-2.6.30.patched/fs/aufs/cpup.c
 +	dput(parent);
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/cpup.h linux-2.6.30.patched/fs/aufs/cpup.h
---- linux-2.6.30/fs/aufs/cpup.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/cpup.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/cpup.h linux-2.6.31.5/fs/aufs/cpup.h
+--- linux-2.6.31.5.orig/fs/aufs/cpup.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/cpup.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,81 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -2464,9 +2464,9 @@ diff -Naurp linux-2.6.30/fs/aufs/cpup.h linux-2.6.30.patched/fs/aufs/cpup.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_CPUP_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/dbgaufs.c linux-2.6.30.patched/fs/aufs/dbgaufs.c
---- linux-2.6.30/fs/aufs/dbgaufs.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dbgaufs.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dbgaufs.c linux-2.6.31.5/fs/aufs/dbgaufs.c
+--- linux-2.6.31.5.orig/fs/aufs/dbgaufs.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dbgaufs.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,331 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -2799,9 +2799,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dbgaufs.c linux-2.6.30.patched/fs/aufs/dbgaufs.
 +		err = 0;
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/dbgaufs.h linux-2.6.30.patched/fs/aufs/dbgaufs.h
---- linux-2.6.30/fs/aufs/dbgaufs.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dbgaufs.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dbgaufs.h linux-2.6.31.5/fs/aufs/dbgaufs.h
+--- linux-2.6.31.5.orig/fs/aufs/dbgaufs.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dbgaufs.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,79 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -2882,9 +2882,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dbgaufs.h linux-2.6.30.patched/fs/aufs/dbgaufs.
 +
 +#endif /* __KERNEL__ */
 +#endif /* __DBGAUFS_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/dcsub.c linux-2.6.30.patched/fs/aufs/dcsub.c
---- linux-2.6.30/fs/aufs/dcsub.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dcsub.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dcsub.c linux-2.6.31.5/fs/aufs/dcsub.c
+--- linux-2.6.31.5.orig/fs/aufs/dcsub.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dcsub.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,223 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -3109,9 +3109,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dcsub.c linux-2.6.30.patched/fs/aufs/dcsub.c
 + out:
 +	return trap;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/dcsub.h linux-2.6.30.patched/fs/aufs/dcsub.h
---- linux-2.6.30/fs/aufs/dcsub.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dcsub.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dcsub.h linux-2.6.31.5/fs/aufs/dcsub.h
+--- linux-2.6.31.5.orig/fs/aufs/dcsub.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dcsub.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,54 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -3167,9 +3167,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dcsub.h linux-2.6.30.patched/fs/aufs/dcsub.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_DCSUB_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/debug.c linux-2.6.30.patched/fs/aufs/debug.c
---- linux-2.6.30/fs/aufs/debug.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/debug.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/debug.c linux-2.6.31.5/fs/aufs/debug.c
+--- linux-2.6.31.5.orig/fs/aufs/debug.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/debug.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,427 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -3598,10 +3598,10 @@ diff -Naurp linux-2.6.30/fs/aufs/debug.c linux-2.6.30.patched/fs/aufs/debug.c
 +
 +	return 0;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/debug.h linux-2.6.30.patched/fs/aufs/debug.h
---- linux-2.6.30/fs/aufs/debug.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/debug.h	2009-08-23 17:24:54.001941277 +0200
-@@ -0,0 +1,260 @@
+diff -Nur linux-2.6.31.5.orig/fs/aufs/debug.h linux-2.6.31.5/fs/aufs/debug.h
+--- linux-2.6.31.5.orig/fs/aufs/debug.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/debug.h	2009-11-15 22:16:14.000000000 +0100
+@@ -0,0 +1,261 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
 + *
@@ -3629,9 +3629,10 @@ diff -Naurp linux-2.6.30/fs/aufs/debug.h linux-2.6.30.patched/fs/aufs/debug.h
 +
 +#ifdef __KERNEL__
 +
++#include <asm/system.h>
 +#include <linux/bug.h>
 +/* #include <linux/err.h> */
-+/* #include <linux/init.h> */
++#include <linux/init.h>
 +/* #include <linux/kernel.h> */
 +#include <linux/delay.h>
 +/* #include <linux/kd.h> */
@@ -3862,9 +3863,9 @@ diff -Naurp linux-2.6.30/fs/aufs/debug.h linux-2.6.30.patched/fs/aufs/debug.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_DEBUG_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/dentry.c linux-2.6.30.patched/fs/aufs/dentry.c
---- linux-2.6.30/fs/aufs/dentry.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dentry.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dentry.c linux-2.6.31.5/fs/aufs/dentry.c
+--- linux-2.6.31.5.orig/fs/aufs/dentry.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dentry.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,880 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -4746,9 +4747,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dentry.c linux-2.6.30.patched/fs/aufs/dentry.c
 +	.d_revalidate	= aufs_d_revalidate,
 +	.d_release	= aufs_d_release
 +};
-diff -Naurp linux-2.6.30/fs/aufs/dentry.h linux-2.6.30.patched/fs/aufs/dentry.h
---- linux-2.6.30/fs/aufs/dentry.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dentry.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dentry.h linux-2.6.31.5/fs/aufs/dentry.h
+--- linux-2.6.31.5.orig/fs/aufs/dentry.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dentry.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,231 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -4981,9 +4982,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dentry.h linux-2.6.30.patched/fs/aufs/dentry.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_DENTRY_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/dinfo.c linux-2.6.30.patched/fs/aufs/dinfo.c
---- linux-2.6.30/fs/aufs/dinfo.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dinfo.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dinfo.c linux-2.6.31.5/fs/aufs/dinfo.c
+--- linux-2.6.31.5.orig/fs/aufs/dinfo.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dinfo.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,367 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -5352,9 +5353,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dinfo.c linux-2.6.30.patched/fs/aufs/dinfo.c
 +			return bindex;
 +	return -1;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/dir.c linux-2.6.30.patched/fs/aufs/dir.c
---- linux-2.6.30/fs/aufs/dir.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dir.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dir.c linux-2.6.31.5/fs/aufs/dir.c
+--- linux-2.6.31.5.orig/fs/aufs/dir.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dir.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,538 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -5894,9 +5895,9 @@ diff -Naurp linux-2.6.30/fs/aufs/dir.c linux-2.6.30.patched/fs/aufs/dir.c
 +	.flush		= aufs_flush,
 +	.fsync		= aufs_fsync_dir
 +};
-diff -Naurp linux-2.6.30/fs/aufs/dir.h linux-2.6.30.patched/fs/aufs/dir.h
---- linux-2.6.30/fs/aufs/dir.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/dir.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/dir.h linux-2.6.31.5/fs/aufs/dir.h
+--- linux-2.6.31.5.orig/fs/aufs/dir.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/dir.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,114 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -6012,10 +6013,10 @@ diff -Naurp linux-2.6.30/fs/aufs/dir.h linux-2.6.30.patched/fs/aufs/dir.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_DIR_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/export.c linux-2.6.30.patched/fs/aufs/export.c
---- linux-2.6.30/fs/aufs/export.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/export.c	2009-08-23 17:24:54.005965979 +0200
-@@ -0,0 +1,745 @@
+diff -Nur linux-2.6.31.5.orig/fs/aufs/export.c linux-2.6.31.5/fs/aufs/export.c
+--- linux-2.6.31.5.orig/fs/aufs/export.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/export.c	2009-11-15 22:27:33.000000000 +0100
+@@ -0,0 +1,746 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
 + *
@@ -6041,6 +6042,7 @@ diff -Naurp linux-2.6.30/fs/aufs/export.c linux-2.6.30.patched/fs/aufs/export.c
 +#include <linux/exportfs.h>
 +#include <linux/file.h>
 +#include <linux/mnt_namespace.h>
++#include <linux/nsproxy.h>
 +#include <linux/namei.h>
 +#include <linux/random.h>
 +#include "aufs.h"
@@ -6761,9 +6763,9 @@ diff -Naurp linux-2.6.30/fs/aufs/export.c linux-2.6.30.patched/fs/aufs/export.c
 +	BUILD_BUG_ON(sizeof(u) != sizeof(int));
 +	atomic_set(&sbinfo->si_xigen_next, u);
 +}
-diff -Naurp linux-2.6.30/fs/aufs/file.c linux-2.6.30.patched/fs/aufs/file.c
---- linux-2.6.30/fs/aufs/file.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/file.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/file.c linux-2.6.31.5/fs/aufs/file.c
+--- linux-2.6.31.5.orig/fs/aufs/file.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/file.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,578 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -7343,9 +7345,9 @@ diff -Naurp linux-2.6.30/fs/aufs/file.c linux-2.6.30.patched/fs/aufs/file.c
 +	.direct_IO	= aufs_direct_IO,
 +#endif /* CONFIG_AUFS_DEBUG */
 +};
-diff -Naurp linux-2.6.30/fs/aufs/file.h linux-2.6.30.patched/fs/aufs/file.h
---- linux-2.6.30/fs/aufs/file.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/file.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/file.h linux-2.6.31.5/fs/aufs/file.h
+--- linux-2.6.31.5.orig/fs/aufs/file.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/file.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,175 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -7522,9 +7524,9 @@ diff -Naurp linux-2.6.30/fs/aufs/file.h linux-2.6.30.patched/fs/aufs/file.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_FILE_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/finfo.c linux-2.6.30.patched/fs/aufs/finfo.c
---- linux-2.6.30/fs/aufs/finfo.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/finfo.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/finfo.c linux-2.6.31.5/fs/aufs/finfo.c
+--- linux-2.6.31.5.orig/fs/aufs/finfo.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/finfo.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,133 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -7659,9 +7661,9 @@ diff -Naurp linux-2.6.30/fs/aufs/finfo.c linux-2.6.30.patched/fs/aufs/finfo.c
 +
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/f_op.c linux-2.6.30.patched/fs/aufs/f_op.c
---- linux-2.6.30/fs/aufs/f_op.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/f_op.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/f_op.c linux-2.6.31.5/fs/aufs/f_op.c
+--- linux-2.6.31.5.orig/fs/aufs/f_op.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/f_op.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,802 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -8465,9 +8467,9 @@ diff -Naurp linux-2.6.30/fs/aufs/f_op.c linux-2.6.30.patched/fs/aufs/f_op.c
 +	.aio_splice_read  = aufs_aio_splice_read
 +#endif
 +};
-diff -Naurp linux-2.6.30/fs/aufs/fstype.h linux-2.6.30.patched/fs/aufs/fstype.h
---- linux-2.6.30/fs/aufs/fstype.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/fstype.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/fstype.h linux-2.6.31.5/fs/aufs/fstype.h
+--- linux-2.6.31.5.orig/fs/aufs/fstype.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/fstype.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,474 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -8943,9 +8945,9 @@ diff -Naurp linux-2.6.30/fs/aufs/fstype.h linux-2.6.30.patched/fs/aufs/fstype.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_FSTYPE_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/hinotify.c linux-2.6.30.patched/fs/aufs/hinotify.c
---- linux-2.6.30/fs/aufs/hinotify.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/hinotify.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/hinotify.c linux-2.6.31.5/fs/aufs/hinotify.c
+--- linux-2.6.31.5.orig/fs/aufs/hinotify.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/hinotify.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,755 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -9702,9 +9704,9 @@ diff -Naurp linux-2.6.30/fs/aufs/hinotify.c linux-2.6.30.patched/fs/aufs/hinotif
 +	if (au_cachep[AuCache_HINOTIFY])
 +		au_hin_destroy_cache();
 +}
-diff -Naurp linux-2.6.30/fs/aufs/iinfo.c linux-2.6.30.patched/fs/aufs/iinfo.c
---- linux-2.6.30/fs/aufs/iinfo.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/iinfo.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/iinfo.c linux-2.6.31.5/fs/aufs/iinfo.c
+--- linux-2.6.31.5.orig/fs/aufs/iinfo.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/iinfo.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,283 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -9989,9 +9991,9 @@ diff -Naurp linux-2.6.30/fs/aufs/iinfo.c linux-2.6.30.patched/fs/aufs/iinfo.c
 +	kfree(iinfo->ii_hinode);
 +	AuRwDestroy(&iinfo->ii_rwsem);
 +}
-diff -Naurp linux-2.6.30/fs/aufs/inode.c linux-2.6.30.patched/fs/aufs/inode.c
---- linux-2.6.30/fs/aufs/inode.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/inode.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/inode.c linux-2.6.31.5/fs/aufs/inode.c
+--- linux-2.6.31.5.orig/fs/aufs/inode.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/inode.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,380 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -10373,9 +10375,9 @@ diff -Naurp linux-2.6.30/fs/aufs/inode.c linux-2.6.30.patched/fs/aufs/inode.c
 +		mask |= MAY_READ; /* force permission check */
 +	return au_test_h_perm(h_inode, mask);
 +}
-diff -Naurp linux-2.6.30/fs/aufs/inode.h linux-2.6.30.patched/fs/aufs/inode.h
---- linux-2.6.30/fs/aufs/inode.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/inode.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/inode.h linux-2.6.31.5/fs/aufs/inode.h
+--- linux-2.6.31.5.orig/fs/aufs/inode.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/inode.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,484 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -10861,9 +10863,9 @@ diff -Naurp linux-2.6.30/fs/aufs/inode.h linux-2.6.30.patched/fs/aufs/inode.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_INODE_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/ioctl.c linux-2.6.30.patched/fs/aufs/ioctl.c
---- linux-2.6.30/fs/aufs/ioctl.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/ioctl.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/ioctl.c linux-2.6.31.5/fs/aufs/ioctl.c
+--- linux-2.6.31.5.orig/fs/aufs/ioctl.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/ioctl.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,67 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -10932,9 +10934,9 @@ diff -Naurp linux-2.6.30/fs/aufs/ioctl.c linux-2.6.30.patched/fs/aufs/ioctl.c
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/i_op_add.c linux-2.6.30.patched/fs/aufs/i_op_add.c
---- linux-2.6.30/fs/aufs/i_op_add.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/i_op_add.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/i_op_add.c linux-2.6.31.5/fs/aufs/i_op_add.c
+--- linux-2.6.31.5.orig/fs/aufs/i_op_add.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/i_op_add.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,649 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -11585,9 +11587,9 @@ diff -Naurp linux-2.6.30/fs/aufs/i_op_add.c linux-2.6.30.patched/fs/aufs/i_op_ad
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/i_op.c linux-2.6.30.patched/fs/aufs/i_op.c
---- linux-2.6.30/fs/aufs/i_op.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/i_op.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/i_op.c linux-2.6.31.5/fs/aufs/i_op.c
+--- linux-2.6.31.5.orig/fs/aufs/i_op.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/i_op.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,872 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -12461,9 +12463,9 @@ diff -Naurp linux-2.6.30/fs/aufs/i_op.c linux-2.6.30.patched/fs/aufs/i_op.c
 +	.getattr	= aufs_getattr,
 +	.truncate_range	= aufs_truncate_range
 +};
-diff -Naurp linux-2.6.30/fs/aufs/i_op_del.c linux-2.6.30.patched/fs/aufs/i_op_del.c
---- linux-2.6.30/fs/aufs/i_op_del.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/i_op_del.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/i_op_del.c linux-2.6.31.5/fs/aufs/i_op_del.c
+--- linux-2.6.31.5.orig/fs/aufs/i_op_del.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/i_op_del.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,468 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -12933,9 +12935,9 @@ diff -Naurp linux-2.6.30/fs/aufs/i_op_del.c linux-2.6.30.patched/fs/aufs/i_op_de
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/i_op_ren.c linux-2.6.30.patched/fs/aufs/i_op_ren.c
---- linux-2.6.30/fs/aufs/i_op_ren.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/i_op_ren.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/i_op_ren.c linux-2.6.31.5/fs/aufs/i_op_ren.c
+--- linux-2.6.31.5.orig/fs/aufs/i_op_ren.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/i_op_ren.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,948 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -13885,9 +13887,9 @@ diff -Naurp linux-2.6.30/fs/aufs/i_op_ren.c linux-2.6.30.patched/fs/aufs/i_op_re
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/Kconfig linux-2.6.30.patched/fs/aufs/Kconfig
---- linux-2.6.30/fs/aufs/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/Kconfig	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/Kconfig linux-2.6.31.5/fs/aufs/Kconfig
+--- linux-2.6.31.5.orig/fs/aufs/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/Kconfig	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,132 @@
 +config AUFS_FS
 +	tristate "Aufs (Advanced multi layered unification filesystem) support"
@@ -14021,9 +14023,9 @@ diff -Naurp linux-2.6.30/fs/aufs/Kconfig linux-2.6.30.patched/fs/aufs/Kconfig
 +	help
 +	Automatic configuration for internal use.
 +endif
-diff -Naurp linux-2.6.30/fs/aufs/loop.c linux-2.6.30.patched/fs/aufs/loop.c
---- linux-2.6.30/fs/aufs/loop.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/loop.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/loop.c linux-2.6.31.5/fs/aufs/loop.c
+--- linux-2.6.31.5.orig/fs/aufs/loop.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/loop.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,55 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -14080,9 +14082,9 @@ diff -Naurp linux-2.6.30/fs/aufs/loop.c linux-2.6.30.patched/fs/aufs/loop.c
 +	       && '0' <= c && c <= '9'
 +	       && strncmp(current->comm, "loop", 4) == 0;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/loop.h linux-2.6.30.patched/fs/aufs/loop.h
---- linux-2.6.30/fs/aufs/loop.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/loop.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/loop.h linux-2.6.31.5/fs/aufs/loop.h
+--- linux-2.6.31.5.orig/fs/aufs/loop.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/loop.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,51 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -14135,9 +14137,9 @@ diff -Naurp linux-2.6.30/fs/aufs/loop.h linux-2.6.30.patched/fs/aufs/loop.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_LOOP_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/magic.mk linux-2.6.30.patched/fs/aufs/magic.mk
---- linux-2.6.30/fs/aufs/magic.mk	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/magic.mk	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/magic.mk linux-2.6.31.5/fs/aufs/magic.mk
+--- linux-2.6.31.5.orig/fs/aufs/magic.mk	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/magic.mk	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,52 @@
 +
 +# defined in ${srctree}/fs/fuse/inode.c
@@ -14191,9 +14193,9 @@ diff -Naurp linux-2.6.30/fs/aufs/magic.mk linux-2.6.30.patched/fs/aufs/magic.mk
 +ifdef CONFIG_UBIFS_FS
 +ccflags-y += -DUBIFS_SUPER_MAGIC=0x24051905
 +endif
-diff -Naurp linux-2.6.30/fs/aufs/Makefile linux-2.6.30.patched/fs/aufs/Makefile
---- linux-2.6.30/fs/aufs/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/Makefile	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/Makefile linux-2.6.31.5/fs/aufs/Makefile
+--- linux-2.6.31.5.orig/fs/aufs/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/Makefile	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,23 @@
 +
 +include ${src}/magic.mk
@@ -14218,9 +14220,9 @@ diff -Naurp linux-2.6.30/fs/aufs/Makefile linux-2.6.30.patched/fs/aufs/Makefile
 +aufs-$(CONFIG_AUFS_POLL) += poll.o
 +aufs-$(CONFIG_AUFS_DEBUG) += debug.o
 +aufs-$(CONFIG_AUFS_MAGIC_SYSRQ) += sysrq.o
-diff -Naurp linux-2.6.30/fs/aufs/module.c linux-2.6.30.patched/fs/aufs/module.c
---- linux-2.6.30/fs/aufs/module.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/module.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/module.c linux-2.6.31.5/fs/aufs/module.c
+--- linux-2.6.31.5.orig/fs/aufs/module.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/module.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,173 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -14395,9 +14397,9 @@ diff -Naurp linux-2.6.30/fs/aufs/module.c linux-2.6.30.patched/fs/aufs/module.c
 +
 +module_init(aufs_init);
 +module_exit(aufs_exit);
-diff -Naurp linux-2.6.30/fs/aufs/module.h linux-2.6.30.patched/fs/aufs/module.h
---- linux-2.6.30/fs/aufs/module.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/module.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/module.h linux-2.6.31.5/fs/aufs/module.h
+--- linux-2.6.31.5.orig/fs/aufs/module.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/module.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,78 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -14477,9 +14479,9 @@ diff -Naurp linux-2.6.30/fs/aufs/module.h linux-2.6.30.patched/fs/aufs/module.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_MODULE_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/opts.c linux-2.6.30.patched/fs/aufs/opts.c
---- linux-2.6.30/fs/aufs/opts.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/opts.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/opts.c linux-2.6.31.5/fs/aufs/opts.c
+--- linux-2.6.31.5.orig/fs/aufs/opts.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/opts.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,1543 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -16024,9 +16026,9 @@ diff -Naurp linux-2.6.30/fs/aufs/opts.c linux-2.6.30.patched/fs/aufs/opts.c
 +{
 +	return au_mntflags(sb) & AuOptMask_UDBA;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/opts.h linux-2.6.30.patched/fs/aufs/opts.h
---- linux-2.6.30/fs/aufs/opts.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/opts.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/opts.h linux-2.6.31.5/fs/aufs/opts.h
+--- linux-2.6.31.5.orig/fs/aufs/opts.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/opts.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,196 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -16224,9 +16226,9 @@ diff -Naurp linux-2.6.30/fs/aufs/opts.h linux-2.6.30.patched/fs/aufs/opts.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_OPTS_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/plink.c linux-2.6.30.patched/fs/aufs/plink.c
---- linux-2.6.30/fs/aufs/plink.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/plink.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/plink.c linux-2.6.31.5/fs/aufs/plink.c
+--- linux-2.6.31.5.orig/fs/aufs/plink.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/plink.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,354 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -16582,9 +16584,9 @@ diff -Naurp linux-2.6.30/fs/aufs/plink.c linux-2.6.30.patched/fs/aufs/plink.c
 +		iput(inode);
 +	}
 +}
-diff -Naurp linux-2.6.30/fs/aufs/poll.c linux-2.6.30.patched/fs/aufs/poll.c
---- linux-2.6.30/fs/aufs/poll.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/poll.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/poll.c linux-2.6.31.5/fs/aufs/poll.c
+--- linux-2.6.31.5.orig/fs/aufs/poll.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/poll.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,56 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -16642,9 +16644,9 @@ diff -Naurp linux-2.6.30/fs/aufs/poll.c linux-2.6.30.patched/fs/aufs/poll.c
 +	AuTraceErr((int)mask);
 +	return mask;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/rwsem.h linux-2.6.30.patched/fs/aufs/rwsem.h
---- linux-2.6.30/fs/aufs/rwsem.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/rwsem.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/rwsem.h linux-2.6.31.5/fs/aufs/rwsem.h
+--- linux-2.6.31.5.orig/fs/aufs/rwsem.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/rwsem.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,186 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -16832,9 +16834,9 @@ diff -Naurp linux-2.6.30/fs/aufs/rwsem.h linux-2.6.30.patched/fs/aufs/rwsem.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_RWSEM_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/sbinfo.c linux-2.6.30.patched/fs/aufs/sbinfo.c
---- linux-2.6.30/fs/aufs/sbinfo.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/sbinfo.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/sbinfo.c linux-2.6.31.5/fs/aufs/sbinfo.c
+--- linux-2.6.31.5.orig/fs/aufs/sbinfo.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/sbinfo.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,208 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -17044,9 +17046,9 @@ diff -Naurp linux-2.6.30/fs/aufs/sbinfo.c linux-2.6.30.patched/fs/aufs/sbinfo.c
 +	di_write_unlock2(d1, d2);
 +	si_read_unlock(d1->d_sb);
 +}
-diff -Naurp linux-2.6.30/fs/aufs/spl.h linux-2.6.30.patched/fs/aufs/spl.h
---- linux-2.6.30/fs/aufs/spl.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/spl.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/spl.h linux-2.6.31.5/fs/aufs/spl.h
+--- linux-2.6.31.5.orig/fs/aufs/spl.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/spl.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,57 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -17105,9 +17107,9 @@ diff -Naurp linux-2.6.30/fs/aufs/spl.h linux-2.6.30.patched/fs/aufs/spl.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_SPL_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/super.c linux-2.6.30.patched/fs/aufs/super.c
---- linux-2.6.30/fs/aufs/super.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/super.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/super.c linux-2.6.31.5/fs/aufs/super.c
+--- linux-2.6.31.5.orig/fs/aufs/super.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/super.c	2009-11-15 22:20:26.000000000 +0100
 @@ -0,0 +1,874 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -17494,7 +17496,7 @@ diff -Naurp linux-2.6.30/fs/aufs/super.c linux-2.6.30.patched/fs/aufs/super.c
 +		lockdep_off();
 +		down_write(&h_sb->s_umount);
 +		shrink_dcache_sb(h_sb);
-+		fsync_super(h_sb);
++		sync_filesystem(h_sb);
 +		up_write(&h_sb->s_umount);
 +		lockdep_on();
 +	}
@@ -17983,9 +17985,9 @@ diff -Naurp linux-2.6.30/fs/aufs/super.c linux-2.6.30.patched/fs/aufs/super.c
 +	/* no need to __module_get() and module_put(). */
 +	.owner		= THIS_MODULE,
 +};
-diff -Naurp linux-2.6.30/fs/aufs/super.h linux-2.6.30.patched/fs/aufs/super.h
---- linux-2.6.30/fs/aufs/super.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/super.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/super.h linux-2.6.31.5/fs/aufs/super.h
+--- linux-2.6.31.5.orig/fs/aufs/super.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/super.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,384 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -18371,9 +18373,9 @@ diff -Naurp linux-2.6.30/fs/aufs/super.h linux-2.6.30.patched/fs/aufs/super.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_SUPER_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/sysaufs.c linux-2.6.30.patched/fs/aufs/sysaufs.c
---- linux-2.6.30/fs/aufs/sysaufs.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/sysaufs.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/sysaufs.c linux-2.6.31.5/fs/aufs/sysaufs.c
+--- linux-2.6.31.5.orig/fs/aufs/sysaufs.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/sysaufs.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,104 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -18479,9 +18481,9 @@ diff -Naurp linux-2.6.30/fs/aufs/sysaufs.c linux-2.6.30.patched/fs/aufs/sysaufs.
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/sysaufs.h linux-2.6.30.patched/fs/aufs/sysaufs.h
---- linux-2.6.30/fs/aufs/sysaufs.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/sysaufs.h	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/sysaufs.h linux-2.6.31.5/fs/aufs/sysaufs.h
+--- linux-2.6.31.5.orig/fs/aufs/sysaufs.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/sysaufs.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,120 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -18603,9 +18605,9 @@ diff -Naurp linux-2.6.30/fs/aufs/sysaufs.h linux-2.6.30.patched/fs/aufs/sysaufs.
 +
 +#endif /* __KERNEL__ */
 +#endif /* __SYSAUFS_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/sysfs.c linux-2.6.30.patched/fs/aufs/sysfs.c
---- linux-2.6.30/fs/aufs/sysfs.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/sysfs.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/sysfs.c linux-2.6.31.5/fs/aufs/sysfs.c
+--- linux-2.6.31.5.orig/fs/aufs/sysfs.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/sysfs.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,210 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -18817,9 +18819,9 @@ diff -Naurp linux-2.6.30/fs/aufs/sysfs.c linux-2.6.30.patched/fs/aufs/sysfs.c
 +			AuWarn("failed %s under sysfs(%d)\n", br->br_name, err);
 +	}
 +}
-diff -Naurp linux-2.6.30/fs/aufs/sysrq.c linux-2.6.30.patched/fs/aufs/sysrq.c
---- linux-2.6.30/fs/aufs/sysrq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/sysrq.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/sysrq.c linux-2.6.31.5/fs/aufs/sysrq.c
+--- linux-2.6.31.5.orig/fs/aufs/sysrq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/sysrq.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,115 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -18936,9 +18938,9 @@ diff -Naurp linux-2.6.30/fs/aufs/sysrq.c linux-2.6.30.patched/fs/aufs/sysrq.c
 +	if (unlikely(err))
 +		AuErr("err %d (ignored)\n", err);
 +}
-diff -Naurp linux-2.6.30/fs/aufs/vdir.c linux-2.6.30.patched/fs/aufs/vdir.c
---- linux-2.6.30/fs/aufs/vdir.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/vdir.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/vdir.c linux-2.6.31.5/fs/aufs/vdir.c
+--- linux-2.6.31.5.orig/fs/aufs/vdir.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/vdir.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,882 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -19822,9 +19824,9 @@ diff -Naurp linux-2.6.30/fs/aufs/vdir.c linux-2.6.30.patched/fs/aufs/vdir.c
 +	/* smp_mb(); */
 +	return 0;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/vfsub.c linux-2.6.30.patched/fs/aufs/vfsub.c
---- linux-2.6.30/fs/aufs/vfsub.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/vfsub.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/vfsub.c linux-2.6.31.5/fs/aufs/vfsub.c
+--- linux-2.6.31.5.orig/fs/aufs/vfsub.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/vfsub.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,740 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -20566,9 +20568,9 @@ diff -Naurp linux-2.6.30/fs/aufs/vfsub.c linux-2.6.30.patched/fs/aufs/vfsub.c
 +
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/vfsub.h linux-2.6.30.patched/fs/aufs/vfsub.h
---- linux-2.6.30/fs/aufs/vfsub.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/vfsub.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/vfsub.h linux-2.6.31.5/fs/aufs/vfsub.h
+--- linux-2.6.31.5.orig/fs/aufs/vfsub.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/vfsub.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,172 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -20742,9 +20744,9 @@ diff -Naurp linux-2.6.30/fs/aufs/vfsub.h linux-2.6.30.patched/fs/aufs/vfsub.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_VFSUB_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/wbr_policy.c linux-2.6.30.patched/fs/aufs/wbr_policy.c
---- linux-2.6.30/fs/aufs/wbr_policy.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/wbr_policy.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/wbr_policy.c linux-2.6.31.5/fs/aufs/wbr_policy.c
+--- linux-2.6.31.5.orig/fs/aufs/wbr_policy.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/wbr_policy.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,641 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -21387,9 +21389,9 @@ diff -Naurp linux-2.6.30/fs/aufs/wbr_policy.c linux-2.6.30.patched/fs/aufs/wbr_p
 +		.fin	= au_wbr_create_fin_mfs
 +	}
 +};
-diff -Naurp linux-2.6.30/fs/aufs/whout.c linux-2.6.30.patched/fs/aufs/whout.c
---- linux-2.6.30/fs/aufs/whout.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/whout.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/whout.c linux-2.6.31.5/fs/aufs/whout.c
+--- linux-2.6.31.5.orig/fs/aufs/whout.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/whout.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,1048 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -22439,9 +22441,9 @@ diff -Naurp linux-2.6.30/fs/aufs/whout.c linux-2.6.30.patched/fs/aufs/whout.c
 +		au_whtmp_rmdir_free(args);
 +	}
 +}
-diff -Naurp linux-2.6.30/fs/aufs/whout.h linux-2.6.30.patched/fs/aufs/whout.h
---- linux-2.6.30/fs/aufs/whout.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/whout.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/whout.h linux-2.6.31.5/fs/aufs/whout.h
+--- linux-2.6.31.5.orig/fs/aufs/whout.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/whout.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,87 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -22530,9 +22532,9 @@ diff -Naurp linux-2.6.30/fs/aufs/whout.h linux-2.6.30.patched/fs/aufs/whout.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_WHOUT_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/wkq.c linux-2.6.30.patched/fs/aufs/wkq.c
---- linux-2.6.30/fs/aufs/wkq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/wkq.c	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/wkq.c linux-2.6.31.5/fs/aufs/wkq.c
+--- linux-2.6.31.5.orig/fs/aufs/wkq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/wkq.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,259 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -22793,9 +22795,9 @@ diff -Naurp linux-2.6.30/fs/aufs/wkq.c linux-2.6.30.patched/fs/aufs/wkq.c
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/aufs/wkq.h linux-2.6.30.patched/fs/aufs/wkq.h
---- linux-2.6.30/fs/aufs/wkq.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/wkq.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/wkq.h linux-2.6.31.5/fs/aufs/wkq.h
+--- linux-2.6.31.5.orig/fs/aufs/wkq.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/wkq.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,82 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -22879,9 +22881,9 @@ diff -Naurp linux-2.6.30/fs/aufs/wkq.h linux-2.6.30.patched/fs/aufs/wkq.h
 +
 +#endif /* __KERNEL__ */
 +#endif /* __AUFS_WKQ_H__ */
-diff -Naurp linux-2.6.30/fs/aufs/xino.c linux-2.6.30.patched/fs/aufs/xino.c
---- linux-2.6.30/fs/aufs/xino.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/fs/aufs/xino.c	2009-08-23 17:24:54.001941277 +0200
+diff -Nur linux-2.6.31.5.orig/fs/aufs/xino.c linux-2.6.31.5/fs/aufs/xino.c
+--- linux-2.6.31.5.orig/fs/aufs/xino.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/fs/aufs/xino.c	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,1200 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -24083,21 +24085,21 @@ diff -Naurp linux-2.6.30/fs/aufs/xino.c linux-2.6.30.patched/fs/aufs/xino.c
 + out:
 +	return err;
 +}
-diff -Naurp linux-2.6.30/fs/Kconfig linux-2.6.30.patched/fs/Kconfig
---- linux-2.6.30/fs/Kconfig	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/Kconfig	2009-08-23 17:21:29.021473535 +0200
-@@ -176,6 +176,7 @@ source "fs/romfs/Kconfig"
- source "fs/sysv/Kconfig"
+diff -Nur linux-2.6.31.5.orig/fs/Kconfig linux-2.6.31.5/fs/Kconfig
+--- linux-2.6.31.5.orig/fs/Kconfig	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/Kconfig	2009-11-15 22:02:37.000000000 +0100
+@@ -187,6 +187,7 @@
  source "fs/ufs/Kconfig"
  source "fs/exofs/Kconfig"
+ source "fs/nilfs2/Kconfig"
 +source "fs/aufs/Kconfig"
  
- config NILFS2_FS
- 	tristate "NILFS2 file system support (EXPERIMENTAL)"
-diff -Naurp linux-2.6.30/fs/Makefile linux-2.6.30.patched/fs/Makefile
---- linux-2.6.30/fs/Makefile	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/Makefile	2009-08-23 17:21:59.925457390 +0200
-@@ -85,6 +85,7 @@ obj-$(CONFIG_HFSPLUS_FS)	+= hfsplus/ # B
+ endif # MISC_FILESYSTEMS
+ 
+diff -Nur linux-2.6.31.5.orig/fs/Makefile linux-2.6.31.5/fs/Makefile
+--- linux-2.6.31.5.orig/fs/Makefile	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/Makefile	2009-11-15 22:02:37.000000000 +0100
+@@ -85,6 +85,7 @@
  obj-$(CONFIG_HFS_FS)		+= hfs/
  obj-$(CONFIG_ECRYPT_FS)		+= ecryptfs/
  obj-$(CONFIG_VXFS_FS)		+= freevxfs/
@@ -24105,10 +24107,10 @@ diff -Naurp linux-2.6.30/fs/Makefile linux-2.6.30.patched/fs/Makefile
  obj-$(CONFIG_NFS_FS)		+= nfs/
  obj-$(CONFIG_EXPORTFS)		+= exportfs/
  obj-$(CONFIG_NFSD)		+= nfsd/
-diff -Naurp linux-2.6.30/fs/namei.c linux-2.6.30.patched/fs/namei.c
---- linux-2.6.30/fs/namei.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/namei.c	2009-08-23 17:21:23.586918393 +0200
-@@ -337,6 +337,7 @@ int deny_write_access(struct file * file
+diff -Nur linux-2.6.31.5.orig/fs/namei.c linux-2.6.31.5/fs/namei.c
+--- linux-2.6.31.5.orig/fs/namei.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/namei.c	2009-11-15 22:02:37.000000000 +0100
+@@ -337,6 +337,7 @@
  
  	return 0;
  }
@@ -24116,7 +24118,7 @@ diff -Naurp linux-2.6.30/fs/namei.c linux-2.6.30.patched/fs/namei.c
  
  /**
   * path_get - get a reference to a path
-@@ -1200,7 +1201,7 @@ out:
+@@ -1219,7 +1220,7 @@
   * needs parent already locked. Doesn't follow mounts.
   * SMP-safe.
   */
@@ -24125,7 +24127,7 @@ diff -Naurp linux-2.6.30/fs/namei.c linux-2.6.30.patched/fs/namei.c
  {
  	int err;
  
-@@ -1209,8 +1210,9 @@ static struct dentry *lookup_hash(struct
+@@ -1228,8 +1229,9 @@
  		return ERR_PTR(err);
  	return __lookup_hash(&nd->last, nd->path.dentry, nd);
  }
@@ -24136,7 +24138,7 @@ diff -Naurp linux-2.6.30/fs/namei.c linux-2.6.30.patched/fs/namei.c
  		struct dentry *base, int len)
  {
  	unsigned long hash;
-@@ -1231,6 +1233,7 @@ static int __lookup_one_len(const char *
+@@ -1250,6 +1252,7 @@
  	this->hash = end_name_hash(hash);
  	return 0;
  }
@@ -24144,10 +24146,10 @@ diff -Naurp linux-2.6.30/fs/namei.c linux-2.6.30.patched/fs/namei.c
  
  /**
   * lookup_one_len - filesystem helper to lookup single pathname component
-diff -Naurp linux-2.6.30/fs/namespace.c linux-2.6.30.patched/fs/namespace.c
---- linux-2.6.30/fs/namespace.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/namespace.c	2009-08-23 17:21:23.589450118 +0200
-@@ -38,6 +38,7 @@
+diff -Nur linux-2.6.31.5.orig/fs/namespace.c linux-2.6.31.5/fs/namespace.c
+--- linux-2.6.31.5.orig/fs/namespace.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/namespace.c	2009-11-15 22:02:37.000000000 +0100
+@@ -39,6 +39,7 @@
  
  /* spinlock for vfsmount related operations, inplace of dcache_lock */
  __cacheline_aligned_in_smp DEFINE_SPINLOCK(vfsmount_lock);
@@ -24155,10 +24157,10 @@ diff -Naurp linux-2.6.30/fs/namespace.c linux-2.6.30.patched/fs/namespace.c
  
  static int event;
  static DEFINE_IDA(mnt_id_ida);
-diff -Naurp linux-2.6.30/fs/open.c linux-2.6.30.patched/fs/open.c
---- linux-2.6.30/fs/open.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/open.c	2009-08-23 17:21:23.617712379 +0200
-@@ -221,6 +221,7 @@ int do_truncate(struct dentry *dentry, l
+diff -Nur linux-2.6.31.5.orig/fs/open.c linux-2.6.31.5/fs/open.c
+--- linux-2.6.31.5.orig/fs/open.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/open.c	2009-11-15 22:02:37.000000000 +0100
+@@ -221,6 +221,7 @@
  	mutex_unlock(&dentry->d_inode->i_mutex);
  	return err;
  }
@@ -24166,10 +24168,10 @@ diff -Naurp linux-2.6.30/fs/open.c linux-2.6.30.patched/fs/open.c
  
  static long do_sys_truncate(const char __user *pathname, loff_t length)
  {
-diff -Naurp linux-2.6.30/fs/splice.c linux-2.6.30.patched/fs/splice.c
---- linux-2.6.30/fs/splice.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/fs/splice.c	2009-08-23 17:21:23.617712379 +0200
-@@ -905,8 +905,8 @@ EXPORT_SYMBOL(generic_splice_sendpage);
+diff -Nur linux-2.6.31.5.orig/fs/splice.c linux-2.6.31.5/fs/splice.c
+--- linux-2.6.31.5.orig/fs/splice.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/fs/splice.c	2009-11-15 22:02:37.000000000 +0100
+@@ -1057,8 +1057,8 @@
  /*
   * Attempt to initiate a splice from pipe to file.
   */
@@ -24178,11 +24180,11 @@ diff -Naurp linux-2.6.30/fs/splice.c linux-2.6.30.patched/fs/splice.c
 +long do_splice_from(struct pipe_inode_info *pipe, struct file *out,
 +		    loff_t *ppos, size_t len, unsigned int flags)
  {
- 	int ret;
+ 	ssize_t (*splice_write)(struct pipe_inode_info *, struct file *,
+ 				loff_t *, size_t, unsigned int);
+@@ -1080,13 +1080,14 @@
  
-@@ -925,13 +925,14 @@ static long do_splice_from(struct pipe_i
- 
- 	return out->f_op->splice_write(pipe, out, ppos, len, flags);
+ 	return splice_write(pipe, out, ppos, len, flags);
  }
 +EXPORT_SYMBOL(do_splice_from);
  
@@ -24196,19 +24198,19 @@ diff -Naurp linux-2.6.30/fs/splice.c linux-2.6.30.patched/fs/splice.c
 +		  struct pipe_inode_info *pipe, size_t len,
 +		  unsigned int flags)
  {
- 	int ret;
+ 	ssize_t (*splice_read)(struct file *, loff_t *,
+ 			       struct pipe_inode_info *, size_t, unsigned int);
+@@ -1105,6 +1106,7 @@
  
-@@ -947,6 +948,7 @@ static long do_splice_to(struct file *in
- 
- 	return in->f_op->splice_read(in, ppos, pipe, len, flags);
+ 	return splice_read(in, ppos, pipe, len, flags);
  }
 +EXPORT_SYMBOL(do_splice_to);
  
  /**
   * splice_direct_to_actor - splices data directly between two non-pipes
-diff -Naurp linux-2.6.30/include/linux/aufs_type.h linux-2.6.30.patched/include/linux/aufs_type.h
---- linux-2.6.30/include/linux/aufs_type.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.30.patched/include/linux/aufs_type.h	2009-08-23 17:24:54.005965979 +0200
+diff -Nur linux-2.6.31.5.orig/include/linux/aufs_type.h linux-2.6.31.5/include/linux/aufs_type.h
+--- linux-2.6.31.5.orig/include/linux/aufs_type.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.31.5/include/linux/aufs_type.h	2009-11-15 22:02:37.000000000 +0100
 @@ -0,0 +1,109 @@
 +/*
 + * Copyright (C) 2005-2009 Junjiro R. Okajima
@@ -24319,10 +24321,10 @@ diff -Naurp linux-2.6.30/include/linux/aufs_type.h linux-2.6.30.patched/include/
 +#define AUFS_CTL_PLINK_CLEAN	_IO(AuCtlType, AuCtl_PLINK_CLEAN)
 +
 +#endif /* __AUFS_TYPE_H__ */
-diff -Naurp linux-2.6.30/include/linux/Kbuild linux-2.6.30.patched/include/linux/Kbuild
---- linux-2.6.30/include/linux/Kbuild	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/include/linux/Kbuild	2009-08-23 17:21:29.021473535 +0200
-@@ -34,6 +34,7 @@ header-y += atmppp.h
+diff -Nur linux-2.6.31.5.orig/include/linux/Kbuild linux-2.6.31.5/include/linux/Kbuild
+--- linux-2.6.31.5.orig/include/linux/Kbuild	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/include/linux/Kbuild	2009-11-15 22:02:38.000000000 +0100
+@@ -34,6 +34,7 @@
  header-y += atmsap.h
  header-y += atmsvc.h
  header-y += atm_zatm.h
@@ -24330,10 +24332,10 @@ diff -Naurp linux-2.6.30/include/linux/Kbuild linux-2.6.30.patched/include/linux
  header-y += auto_fs4.h
  header-y += ax25.h
  header-y += b1lli.h
-diff -Naurp linux-2.6.30/include/linux/namei.h linux-2.6.30.patched/include/linux/namei.h
---- linux-2.6.30/include/linux/namei.h	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/include/linux/namei.h	2009-08-23 17:21:23.617712379 +0200
-@@ -74,6 +74,9 @@ extern struct file *lookup_instantiate_f
+diff -Nur linux-2.6.31.5.orig/include/linux/namei.h linux-2.6.31.5/include/linux/namei.h
+--- linux-2.6.31.5.orig/include/linux/namei.h	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/include/linux/namei.h	2009-11-15 22:02:38.000000000 +0100
+@@ -75,6 +75,9 @@
  extern struct file *nameidata_to_filp(struct nameidata *nd, int flags);
  extern void release_open_intent(struct nameidata *);
  
@@ -24343,10 +24345,10 @@ diff -Naurp linux-2.6.30/include/linux/namei.h linux-2.6.30.patched/include/linu
  extern struct dentry *lookup_one_len(const char *, struct dentry *, int);
  extern struct dentry *lookup_one_noperm(const char *, struct dentry *);
  
-diff -Naurp linux-2.6.30/include/linux/splice.h linux-2.6.30.patched/include/linux/splice.h
---- linux-2.6.30/include/linux/splice.h	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/include/linux/splice.h	2009-08-23 17:21:23.617712379 +0200
-@@ -83,4 +83,10 @@ extern ssize_t splice_to_pipe(struct pip
+diff -Nur linux-2.6.31.5.orig/include/linux/splice.h linux-2.6.31.5/include/linux/splice.h
+--- linux-2.6.31.5.orig/include/linux/splice.h	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/include/linux/splice.h	2009-11-15 22:02:38.000000000 +0100
+@@ -82,4 +82,10 @@
  extern ssize_t splice_direct_to_actor(struct file *, struct splice_desc *,
  				      splice_direct_actor *);
  
@@ -24357,10 +24359,10 @@ diff -Naurp linux-2.6.30/include/linux/splice.h linux-2.6.30.patched/include/lin
 +			 unsigned int flags);
 +
  #endif
-diff -Naurp linux-2.6.30/security/device_cgroup.c linux-2.6.30.patched/security/device_cgroup.c
---- linux-2.6.30/security/device_cgroup.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/security/device_cgroup.c	2009-08-23 17:21:23.617712379 +0200
-@@ -512,6 +512,7 @@ acc_check:
+diff -Nur linux-2.6.31.5.orig/security/device_cgroup.c linux-2.6.31.5/security/device_cgroup.c
+--- linux-2.6.31.5.orig/security/device_cgroup.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/security/device_cgroup.c	2009-11-15 22:02:38.000000000 +0100
+@@ -513,6 +513,7 @@
  
  	return -EPERM;
  }
@@ -24368,10 +24370,10 @@ diff -Naurp linux-2.6.30/security/device_cgroup.c linux-2.6.30.patched/security/
  
  int devcgroup_inode_mknod(int mode, dev_t dev)
  {
-diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/security.c
---- linux-2.6.30/security/security.c	2009-06-10 05:05:27.000000000 +0200
-+++ linux-2.6.30.patched/security/security.c	2009-08-23 17:21:23.621506835 +0200
-@@ -389,6 +389,7 @@ int security_path_mkdir(struct path *pat
+diff -Nur linux-2.6.31.5.orig/security/security.c linux-2.6.31.5/security/security.c
+--- linux-2.6.31.5.orig/security/security.c	2009-10-23 00:57:56.000000000 +0200
++++ linux-2.6.31.5/security/security.c	2009-11-15 22:02:38.000000000 +0100
+@@ -386,6 +386,7 @@
  		return 0;
  	return security_ops->path_mkdir(path, dentry, mode);
  }
@@ -24379,7 +24381,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_rmdir(struct path *path, struct dentry *dentry)
  {
-@@ -396,6 +397,7 @@ int security_path_rmdir(struct path *pat
+@@ -393,6 +394,7 @@
  		return 0;
  	return security_ops->path_rmdir(path, dentry);
  }
@@ -24387,7 +24389,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_unlink(struct path *path, struct dentry *dentry)
  {
-@@ -403,6 +405,7 @@ int security_path_unlink(struct path *pa
+@@ -400,6 +402,7 @@
  		return 0;
  	return security_ops->path_unlink(path, dentry);
  }
@@ -24395,7 +24397,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_symlink(struct path *path, struct dentry *dentry,
  			  const char *old_name)
-@@ -411,6 +414,7 @@ int security_path_symlink(struct path *p
+@@ -408,6 +411,7 @@
  		return 0;
  	return security_ops->path_symlink(path, dentry, old_name);
  }
@@ -24403,7 +24405,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_link(struct dentry *old_dentry, struct path *new_dir,
  		       struct dentry *new_dentry)
-@@ -419,6 +423,7 @@ int security_path_link(struct dentry *ol
+@@ -416,6 +420,7 @@
  		return 0;
  	return security_ops->path_link(old_dentry, new_dir, new_dentry);
  }
@@ -24411,7 +24413,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_rename(struct path *old_dir, struct dentry *old_dentry,
  			 struct path *new_dir, struct dentry *new_dentry)
-@@ -429,6 +434,7 @@ int security_path_rename(struct path *ol
+@@ -426,6 +431,7 @@
  	return security_ops->path_rename(old_dir, old_dentry, new_dir,
  					 new_dentry);
  }
@@ -24419,7 +24421,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_path_truncate(struct path *path, loff_t length,
  			   unsigned int time_attrs)
-@@ -437,6 +443,7 @@ int security_path_truncate(struct path *
+@@ -434,6 +440,7 @@
  		return 0;
  	return security_ops->path_truncate(path, length, time_attrs);
  }
@@ -24427,7 +24429,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  #endif
  
  int security_inode_create(struct inode *dir, struct dentry *dentry, int mode)
-@@ -508,6 +515,7 @@ int security_inode_readlink(struct dentr
+@@ -505,6 +512,7 @@
  		return 0;
  	return security_ops->inode_readlink(dentry);
  }
@@ -24435,7 +24437,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_inode_follow_link(struct dentry *dentry, struct nameidata *nd)
  {
-@@ -522,6 +530,7 @@ int security_inode_permission(struct ino
+@@ -519,6 +527,7 @@
  		return 0;
  	return security_ops->inode_permission(inode, mask);
  }
@@ -24443,7 +24445,7 @@ diff -Naurp linux-2.6.30/security/security.c linux-2.6.30.patched/security/secur
  
  int security_inode_setattr(struct dentry *dentry, struct iattr *attr)
  {
-@@ -622,6 +631,7 @@ int security_file_permission(struct file
+@@ -619,6 +628,7 @@
  {
  	return security_ops->file_permission(file, mask);
  }

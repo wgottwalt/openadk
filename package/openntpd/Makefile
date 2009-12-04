@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openntpd
 PKG_VERSION:=		3.9p1
-PKG_RELEASE:=		17
+PKG_RELEASE:=		18
 PKG_MD5SUM:=		afc34175f38d08867c1403d9008600b3
 PKG_DESCR:=		NTP server daemon
 PKG_SECTION:=		net

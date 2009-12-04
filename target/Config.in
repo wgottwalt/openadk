@@ -419,6 +419,7 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Support for Mikrotik RB532.
+
 endchoice
 
 choice
