@@ -15,7 +15,7 @@ start)
 	snmpd $snmpd_flags
 	;;
 stop)
-	killall snmpd
+	pkill snmpd
 	;;
 restart)
 	sh $0 stop

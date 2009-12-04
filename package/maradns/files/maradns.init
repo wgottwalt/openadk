@@ -16,7 +16,7 @@ start)
 	maradns &
 	;;
 stop)
-	killall maradns
+	pkill maradns
 	;;
 restart)
 	sh $0 stop

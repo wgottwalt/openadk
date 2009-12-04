@@ -1,5 +1,4 @@
-- fix init scripts pidof? vs. killall
-- rpm package backend
+- make rpm package backend working
 - freebsd build
 - win cygwin build
 - netbsd build
@@ -9,4 +8,3 @@
 - network scripts for pppoe
 - customise mconf help texts to better fit for OpenADK
 - publish via trac
-

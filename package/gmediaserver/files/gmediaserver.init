@@ -13,7 +13,7 @@ autostop) ;;
 		gmediaserver $gmediaserver_flags
 		;;
 	stop)
-		killall gmediaserver
+		pkill gmediaserver
 		;;
 	restart)
 		sh $0 stop

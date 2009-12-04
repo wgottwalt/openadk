@@ -14,7 +14,7 @@ start)
 	/usr/sbin/watchdog
 	;;
 stop)
-	killall watchdog
+	pkill watchdog
   	;;
 restart)
 	sh $0 stop

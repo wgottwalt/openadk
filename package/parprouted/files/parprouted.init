@@ -14,7 +14,7 @@ start)
 	parprouted ${parprouted_flags}
 	;;
 stop)
-	killall parprouted
+	pkill parprouted
 	;;
 restart)
 	sh $0 stop

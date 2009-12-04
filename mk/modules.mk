@@ -269,6 +269,45 @@ $(eval $(call KMOD_template,INET_XFRM_MODE_BEET,net-ipsec-beet,\
 ## Filtering / Firewalling
 ##
 #
+# Ethernet Bridging firewall
+#
+$(eval $(call KMOD_template,BRIDGE_NF_EBTABLES,nf-ebtables,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebtables \
+,55))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_BROUTE,nf-ebtables-broute,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebtable_broute \
+,60))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_T_FILTER,nf-ebtables-filter,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebtable_filter \
+,60))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_T_NAT,nf-ebtables-nat,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebtable_nat \
+,60))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_802_3,nf-ebtables-802-3,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebt_802_3 \
+,65))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_AMONG,nf-ebtables-among,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebt_among \
+,65))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_ARP,nf-ebtables-arp,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebt_arpreply \
+,65))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_IP,nf-ebtables-ip,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebt_ip \
+,65))
+
+$(eval $(call KMOD_template,BRIDGE_EBT_REDIRECT,nf-ebtables-redirect,\
+	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebt_redirect \
+,65))
+
+#
 # Netfilter Core
 #
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CLASSIFY,nf-classify,\

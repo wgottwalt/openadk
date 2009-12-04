@@ -12,7 +12,7 @@ start)
 	esd -d /dev/sound/dsp -public -tcp -nobeeps
 	;;
 stop)
-	killall esd
+	pkill esd
 	;;
 restart)
 	sh $0 stop

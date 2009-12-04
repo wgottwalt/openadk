@@ -14,7 +14,7 @@ start)
 	collectd
 	;;
 stop)
-	killall collectd
+	pkill collectd
 	;;
 restart)
 	sh $0 stop

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
 PKG_VERSION:=		3.0.STABLE20
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
@@ -113,12 +113,9 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-x-accelerator-vary \
 			--with-pthreads \
 			--with-dl \
-			--enable-icmp \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
 			--enable-ssl \
-			--disable-htcp \
-			--disable-esi \
 			--enable-err-languages=English \
 			--enable-default-err-language=English \
 			--enable-linux-netfilter \
@@ -128,6 +125,9 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-cache-digests \
 			--enable-referer-log \
 			--enable-delay-pools \
+			--disable-snmp \
+			--disable-esi \
+			--disable-htcp \
 			--disable-wccp \
 			--disable-wccpv2 \
 			--enable-useragent-log \
@@ -146,11 +146,14 @@ post-configure:
 	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
 	    ${WRKBUILD}/libtool
 endif
+post-configure:
+	${SED} 's#\(hardcode_into_libs=\).*$$#\1no#' \
+		${WRKBUILD}/libtool
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid
-	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf \
-			${WRKINST}/etc/squid/squid.conf ${IDIR_SQUID}/etc/squid/
+	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf ${IDIR_SQUID}/etc/squid/
+	${INSTALL_DATA} ./files/squid.conf ${IDIR_SQUID}/etc/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid
 	${CP} ${WRKINST}/usr/share/squid/* ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid

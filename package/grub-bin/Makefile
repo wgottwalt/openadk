@@ -8,7 +8,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		grub-bin
 PKG_VERSION:=		1.97.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		99ddead9dcb689a7ec2431c1e6b3cf0d
+PKG_MD5SUM:=		24961a39e63d8ec16d765aad3a301cda
 PKG_DESCR:=		GRUB bootloader
 PKG_SECTION:=		sys
 PKG_SITES:=		http://openadk.org/distfiles/

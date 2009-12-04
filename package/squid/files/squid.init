@@ -1,0 +1,37 @@
+#!/bin/sh
+#PKG squid
+#INIT 70
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${squid:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	if [ ! -f /var/log/squid-cache.log ];then
+		touch /var/log/squid-cache.log
+		chown squid:squid /var/log/squid-cache.log
+	fi
+	if [ ! -d /var/squid/cache ];then
+		mkdir -p /var/squid/cache
+		chown squid:squid /var/squid/cache
+		squid -z 
+	fi
+	squid
+	;;
+stop)
+	squid -k kill
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

@@ -14,7 +14,7 @@ start)
 	/usr/sbin/opensips
 	;;
 stop)
-	killall opensips
+	pkill opensips
 	;;
 restart)
 	sh $0 stop

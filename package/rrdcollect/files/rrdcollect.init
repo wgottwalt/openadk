@@ -22,7 +22,7 @@ start)
 	rrdcollect
 	;;
 stop)
-	killall rrdcollect
+	pkill rrdcollect
 	;;
 restart)
 	sh $0 stop

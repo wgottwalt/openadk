@@ -16,7 +16,7 @@ start)
 	;;
 
 stop)
-	killall radvd
+	pkill radvd
 	echo 0 > /proc/sys/net/ipv6/conf/all/forwarding
 	;;
 

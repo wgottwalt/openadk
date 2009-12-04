@@ -14,7 +14,7 @@ start)
 	p910nd $p910nd_flags
 	;;
 stop)
-	killall p910nd
+	pkill p910nd
 	;;
 restart)
 	sh $0 stop

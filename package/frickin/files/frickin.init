@@ -13,7 +13,7 @@ start)
 	frickin ${frickin_flags}
 	;;
 stop)
-	killall frickin
+	pkill frickin
 	;;
 restart)
 	sh $0 stop

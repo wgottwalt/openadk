@@ -16,7 +16,7 @@ start)
 	php ${php_flags} &
 	;;
 stop)
-	killall php
+	pkill php
 	;;
 restart)
 	sh $0 stop

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tinyproxy
 PKG_VERSION:=		1.6.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2b2862ba33d2939e4572688d442ba415
 PKG_DESCR:=		Tinyproxy is a lightweight HTTP and HTTPS proxy.
 PKG_SECTION:=		net
@@ -37,9 +37,9 @@ post-install:
 	${INSTALL_DIR} ${IDIR_TINYPROXY}/usr/sbin \
 		       ${IDIR_TINYPROXY}/etc/tinyproxy \
 		       ${IDIR_TINYPROXY}/usr/share/tinyproxy
+	${INSTALL_DATA} ./files/tinyproxy.conf ${IDIR_TINYPROXY}/etc/tinyproxy
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tinyproxy ${IDIR_TINYPROXY}/usr/sbin/
 	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/{debug,default,stats}.html ${IDIR_TINYPROXY}/usr/share/tinyproxy/
 	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/HTML_VARIABLES ${IDIR_TINYPROXY}/usr/share/tinyproxy/
-	${INSTALL_DATA} ${WRKINST}/etc/tinyproxy/tinyproxy.conf ${IDIR_TINYPROXY}/etc/tinyproxy/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -14,7 +14,7 @@ start)
 autostop)
 	;;
 stop)
-	killall inetd
+	pkill inetd
 	;;
 restart)
 	sh $0 stop

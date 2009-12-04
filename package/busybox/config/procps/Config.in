@@ -64,7 +64,7 @@ config BUSYBOX_PIDOF
 
 config BUSYBOX_FEATURE_PIDOF_SINGLE
 	bool "Enable argument for single shot (-s)"
-	default n
+	default y
 	depends on BUSYBOX_PIDOF
 	help
 	  Support argument '-s' for returning only the first pid found.

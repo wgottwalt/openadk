@@ -14,7 +14,7 @@ start)
 	dhcpd $dhcpd_flags
 	;;
 autostop|stop)
-	killall dhcpd
+	pkill dhcpd
 	;;
 restart)
 	sh $0 stop

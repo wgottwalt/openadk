@@ -14,7 +14,7 @@ autostop) ;;
 		vrrpd $vrrpd_flags
 		;;
 	stop)
-		killall vrrpd
+		pkill vrrpd
 		;;
 	restart)
 		sh $0 stop

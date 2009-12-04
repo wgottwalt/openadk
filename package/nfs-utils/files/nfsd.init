@@ -30,12 +30,12 @@ start)
 	fi
 	;;
 stop)
-	killall nfsd
-	killall mountd
-	killall statd
+	pkill nfsd
+	pkill mountd
+	pkill statd
 	if [ ${nfs_server_version} -eq 4 ];then
-		killall idmapd
-		killall svcgssd
+		pkill idmapd
+		pkill svcgssd
 	fi
 	;;
 restart)

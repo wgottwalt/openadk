@@ -14,7 +14,7 @@ start)
 	mt-daapd
 	;;
 stop)
-	killall mt-daapd
+	pkill mt-daapd
 	;;
 restart)
 	sh $0 stop

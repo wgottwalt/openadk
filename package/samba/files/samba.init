@@ -17,8 +17,8 @@ start)
 	smbd -D
 	;;
 stop)
-	killall nmbd
-	killall smbd
+	pkill nmbd
+	pkill smbd
 	;;
 restart)
 	sh $0 stop
