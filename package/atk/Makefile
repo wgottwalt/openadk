@@ -26,6 +26,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ATK}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libatk.so* ${IDIR_ATK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libatk-*.so* ${IDIR_ATK}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

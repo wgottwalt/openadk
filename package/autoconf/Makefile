@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		autoconf
-PKG_VERSION:=		2.64
+PKG_VERSION:=		2.65
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		30a198cef839471dd4926e92ab485361
+PKG_MD5SUM:=		46cfb40e0babf4c64f8325f03da81c9b
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.gnu.org/software/autoconf/

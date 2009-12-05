@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.22
+PKG_VERSION:=		1.4.25
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		949c33a81e83f7718a47280bef21b90c
+PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
 PKG_DESCR:=		a flexible and lightweight web server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libxml2 libsqlite libpcre
 PKG_URL:=		http://www.lighttpd.net
-PKG_SITES:=		http://www.lighttpd.net/download/
+PKG_SITES:=		http://download.lighttpd.net/lighttpd/releases-1.4.x/
 
 include $(TOPDIR)/mk/package.mk
 
@@ -65,7 +65,7 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_USERTRACK,usertrack))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
 TCPPFLAGS+=		-I$(STAGING_DIR)/usr/include/libxml2
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		PCRE_LIB="-lpcre"
 CONFIGURE_ARGS+=	--without-openssl \
 			--libdir=/usr/lib/lighttpd \
@@ -81,8 +81,8 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-pcre \
 			--without-valgrind \
 			--with-webdav-props
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-openssl='${STAGING_DIR}/usr'
 endif

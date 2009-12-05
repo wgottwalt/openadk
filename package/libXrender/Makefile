@@ -25,7 +25,7 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_LIBXAU}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libXrender.so* ${IDIR_LIBXAU}/usr/lib/
+	${INSTALL_DIR} ${IDIR_LIBXRENDER}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libXrender.so* ${IDIR_LIBXRENDER}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

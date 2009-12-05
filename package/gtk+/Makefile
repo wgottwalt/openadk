@@ -21,7 +21,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GTK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		gio_can_sniff=no
+CONFIGURE_ENV+=		gio_can_sniff=no \
+			ac_cv_path_GTK_UPDATE_ICON_CACHE="" 
 CONFIGURE_ARGS+=	--without-libtiff \
 			--without-libjpeg
 BUILD_STYLE:=		auto
@@ -29,5 +30,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GTK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_GTK}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

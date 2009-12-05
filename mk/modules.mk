@@ -54,6 +54,7 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 ,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb kmod-crc32))
 
 $(eval $(call KMOD_template,ATH5K,mac80211-ath5k,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \
 ,20, kmod-led-class))
 
@@ -639,6 +640,7 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-hw-geode,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
+    $(MODULES_DIR)/kernel/crypto/pcompress \
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
 ,02))
 
@@ -661,7 +663,6 @@ $(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng,\
 ,06))
 
 $(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
-    $(MODULES_DIR)/kernel/crypto/pcompress \
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
     $(MODULES_DIR)/kernel/crypto/eseqiv \
     $(MODULES_DIR)/kernel/crypto/chainiv \
@@ -773,6 +774,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
+    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
     $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))

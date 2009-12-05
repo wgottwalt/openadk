@@ -1,6 +1,6 @@
---- openssh-5.2p1.orig/auth2-jpake.c	2008-11-11 06:33:03.000000000 +0100
-+++ openssh-5.2p1/auth2-jpake.c	2009-09-18 12:28:10.000000000 +0200
-@@ -172,7 +172,7 @@ derive_rawsalt(const char *username, u_c
+--- openssh-5.3p1.orig/auth2-jpake.c	2009-06-21 11:50:08.000000000 +0200
++++ openssh-5.3p1/auth2-jpake.c	2009-12-05 12:10:19.000000000 +0100
+@@ -173,7 +173,7 @@ derive_rawsalt(const char *username, u_c
  		fatal("%s: not enough bytes for rawsalt (want %u have %u)",
  		    __func__, len, digest_len);
  	memcpy(rawsalt, digest, len);
@@ -9,7 +9,7 @@
  	xfree(digest);
  }
  
-@@ -197,10 +197,10 @@ makesalt(u_int want, const char *user)
+@@ -198,10 +198,10 @@ makesalt(u_int want, const char *user)
  		fatal("%s: want %u", __func__, want);
  
  	derive_rawsalt(user, rawsalt, sizeof(rawsalt));
@@ -22,7 +22,7 @@
  
  	return ret;
  }
-@@ -354,7 +354,7 @@ auth2_jpake_get_pwdata(Authctxt *authctx
+@@ -355,7 +355,7 @@ auth2_jpake_get_pwdata(Authctxt *authctx
  	debug3("%s: scheme = %s", __func__, *hash_scheme);
  	JPAKE_DEBUG_BN((*s, "%s: s = ", __func__));
  #endif
@@ -31,7 +31,7 @@
  	xfree(secret);
  }
  
-@@ -395,12 +395,12 @@ auth2_jpake_start(Authctxt *authctxt)
+@@ -396,12 +396,12 @@ auth2_jpake_start(Authctxt *authctxt)
  	packet_send();
  	packet_write_wait();
  
@@ -48,7 +48,7 @@
  	xfree(x3_proof);
  	xfree(x4_proof);
  
-@@ -447,8 +447,8 @@ input_userauth_jpake_client_step1(int ty
+@@ -448,8 +448,8 @@ input_userauth_jpake_client_step1(int ty
  	    &pctx->b,
  	    &x4_s_proof, &x4_s_proof_len));
  
@@ -59,7 +59,7 @@
  	xfree(x1_proof);
  	xfree(x2_proof);
  
-@@ -462,7 +462,7 @@ input_userauth_jpake_client_step1(int ty
+@@ -463,7 +463,7 @@ input_userauth_jpake_client_step1(int ty
  	packet_send();
  	packet_write_wait();
  
@@ -68,7 +68,7 @@
  	xfree(x4_s_proof);
  
  	/* Expect step 2 packet from peer */
-@@ -503,7 +503,7 @@ input_userauth_jpake_client_step2(int ty
+@@ -504,7 +504,7 @@ input_userauth_jpake_client_step2(int ty
  	    &pctx->k,
  	    &pctx->h_k_sid_sessid, &pctx->h_k_sid_sessid_len));
  

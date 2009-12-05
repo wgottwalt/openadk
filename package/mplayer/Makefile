@@ -4,17 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0rc2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		7e27e535c2d267637df34898f1b91707
+PKG_VERSION:=		1.0-29973
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a2fd085d18fc92c70389e7b4d2b6ad43
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
 PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthread libpng libjpeg
 PKG_URL:=		http://www.mplayerhq.hu
-PKG_SITES:=		http://www7.mplayerhq.hu/MPlayer/releases/
+PKG_SITES:=		http://openadk.org/distfiles/
 
-DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
+#DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
+#WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
@@ -22,12 +22,6 @@ $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
-
-ifeq ($(ADK_X11),y)
-CONFIGURE_ARG:=		--enable-x11
-else
-CONFIGURE_ARG:=		--disable-x11
-endif
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
 CONFIGURE_CPU_OPTS:=	\
@@ -52,21 +46,19 @@ endif
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
+		--enable-x11 \
 		--prefix=/usr \
 		--confdir=/etc \
 		--enable-cross-compile \
 		--target=$(REAL_GNU_TARGET_NAME) \
 		--cc=$(TARGET_CC) \
 		--host-cc=$(HOSTCC) \
-		--with-extraincdir=$(STAGING_DIR)/usr/include \
-		--with-extralibdir=$(STAGING_DIR)/usr/lib \
 		--disable-mencoder \
 		--enable-fbdev \
 		--enable-alsa \
 		--enable-png \
 		--enable-jpeg \
 		--enable-mad \
-		--enable-faad-external \
 		--disable-faad-internal \
 		--enable-libvorbis \
 		--disable-ossaudio \
@@ -81,14 +73,12 @@ pre-configure:
 		--disable-ftp \
 		--disable-v4l2 \
 		--disable-ivtv \
-		--disable-vidix-internal \
 		--disable-dvdread-internal \
 		--disable-libdvdcss-internal \
 		--disable-freetype \
 		--disable-tremor-internal \
 		--disable-arts \
 		--disable-esd \
-		--disable-polyp \
 		--disable-jack \
 		--disable-openal \
 		--disable-nas \

@@ -1,15 +1,6 @@
---- openssh-5.2p1.orig/jpake.c	2008-11-05 06:20:46.000000000 +0100
-+++ openssh-5.2p1/jpake.c	2009-09-18 12:26:24.000000000 +0200
-@@ -160,7 +160,7 @@ hash_buffer(const u_char *buf, u_int len
- 	success = 0;
-  out:
- 	EVP_MD_CTX_cleanup(&evp_md_ctx);
--	bzero(digest, sizeof(digest));
-+	memset(digest, 0, sizeof(digest));
- 	digest_len = 0;
- 	return success;
- }
-@@ -259,7 +259,7 @@ jpake_free(struct jpake_ctx *pctx)
+--- openssh-5.3p1.orig/jpake.c	2009-03-05 14:58:22.000000000 +0100
++++ openssh-5.3p1/jpake.c	2009-12-05 12:10:19.000000000 +0100
+@@ -104,7 +104,7 @@ jpake_free(struct jpake_ctx *pctx)
  #define JPAKE_BUF_CLEAR_FREE(v, l)		\
  	do {					\
  		if ((v) != NULL) {		\
@@ -18,7 +9,7 @@
  			xfree(v);		\
  			(v) = NULL;		\
  			(l) = 0;		\
-@@ -287,7 +287,7 @@ jpake_free(struct jpake_ctx *pctx)
+@@ -132,7 +132,7 @@ jpake_free(struct jpake_ctx *pctx)
  #undef JPAKE_BN_CLEAR_FREE
  #undef JPAKE_BUF_CLEAR_FREE
  
@@ -27,7 +18,7 @@
  	xfree(pctx);
  }
  
-@@ -592,7 +592,7 @@ jpake_check_confirm(const BIGNUM *k,
+@@ -437,7 +437,7 @@ jpake_check_confirm(const BIGNUM *k,
  	else if (memcmp(peer_confirm_hash, expected_confirm_hash,
  	    expected_confirm_hash_len) == 0)
  		success = 1;

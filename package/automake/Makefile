@@ -4,12 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		automake
-PKG_VERSION:=		1.9.6
+PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c60f77a42f103606981d456f1615f5b4
+PKG_MD5SUM:=		452163c32d061c53a7acc0e8c1b689ba
 PKG_DESCR:=		GNU automake
 PKG_SECTION:=		utils
-PKG_URL:=		http://www.gnu.org/software/${PKG_NAME}/
+PKG_URL:=		http://www.gnu.org/software/automake/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 PKG_OPTS:=		noscripts
 

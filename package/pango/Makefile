@@ -26,6 +26,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PANGO}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpango.so* ${IDIR_PANGO}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpango*.so* ${IDIR_PANGO}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

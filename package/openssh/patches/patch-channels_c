@@ -1,5 +1,5 @@
---- openssh-5.2p1.orig/channels.c	2009-02-14 06:28:21.000000000 +0100
-+++ openssh-5.2p1/channels.c	2009-09-18 12:29:28.000000000 +0200
+--- openssh-5.3p1.orig/channels.c	2009-08-28 03:02:37.000000000 +0200
++++ openssh-5.3p1/channels.c	2009-12-05 12:10:19.000000000 +0100
 @@ -411,7 +411,7 @@ channel_free(Channel *c)
  		if (cc->abandon_cb != NULL)
  			cc->abandon_cb(c, cc->ctx);
@@ -9,7 +9,7 @@
  		xfree(cc);
  	}
  	if (c->filter_cleanup != NULL && c->filter_ctx != NULL)
-@@ -2447,7 +2447,7 @@ channel_input_status_confirm(int type, u
+@@ -2449,7 +2449,7 @@ channel_input_status_confirm(int type, u
  		return;
  	cc->cb(type, c, cc->ctx);
  	TAILQ_REMOVE(&c->status_confirms, cc, entry);
@@ -18,7 +18,7 @@
  	xfree(cc);
  }
  
-@@ -2941,7 +2941,7 @@ channel_connect_ctx_free(struct channel_
+@@ -2943,7 +2943,7 @@ channel_connect_ctx_free(struct channel_
  	xfree(cctx->host);
  	if (cctx->aitop)
  		freeaddrinfo(cctx->aitop);

@@ -1,6 +1,6 @@
---- openssh-5.2p1.orig/sshconnect2.c	2008-11-05 06:20:47.000000000 +0100
-+++ openssh-5.2p1/sshconnect2.c	2009-09-18 12:30:37.000000000 +0200
-@@ -921,14 +921,14 @@ jpake_password_to_secret(Authctxt *authc
+--- openssh-5.3p1.orig/sshconnect2.c	2009-03-05 14:58:22.000000000 +0100
++++ openssh-5.3p1/sshconnect2.c	2009-12-05 12:10:19.000000000 +0100
+@@ -922,14 +922,14 @@ jpake_password_to_secret(Authctxt *authc
  	    &secret, &secret_len) != 0)
  		fatal("%s: hash_buffer", __func__);
  
@@ -18,7 +18,7 @@
  	xfree(secret);
  
  	return ret;
-@@ -965,8 +965,8 @@ input_userauth_jpake_server_step1(int ty
+@@ -966,8 +966,8 @@ input_userauth_jpake_server_step1(int ty
  
  	/* Obtain password and derive secret */
  	pctx->s = jpake_password_to_secret(authctxt, crypt_scheme, salt);
@@ -29,7 +29,7 @@
  	xfree(crypt_scheme);
  	xfree(salt);
  	JPAKE_DEBUG_BN((pctx->s, "%s: s = ", __func__));
-@@ -981,8 +981,8 @@ input_userauth_jpake_server_step1(int ty
+@@ -982,8 +982,8 @@ input_userauth_jpake_server_step1(int ty
  	    &pctx->a,
  	    &x2_s_proof, &x2_s_proof_len);
  
@@ -40,7 +40,7 @@
  	xfree(x3_proof);
  	xfree(x4_proof);
  
-@@ -994,7 +994,7 @@ input_userauth_jpake_server_step1(int ty
+@@ -995,7 +995,7 @@ input_userauth_jpake_server_step1(int ty
  	packet_put_string(x2_s_proof, x2_s_proof_len);
  	packet_send();
  
@@ -49,7 +49,7 @@
  	xfree(x2_s_proof);
  
  	/* Expect step 2 packet from peer */
-@@ -1034,7 +1034,7 @@ input_userauth_jpake_server_step2(int ty
+@@ -1035,7 +1035,7 @@ input_userauth_jpake_server_step2(int ty
  	    &pctx->k,
  	    &pctx->h_k_cid_sessid, &pctx->h_k_cid_sessid_len);
  
@@ -58,7 +58,7 @@
  	xfree(x4_s_proof);
  
  	JPAKE_DEBUG_CTX((pctx, "confirm sending in %s", __func__));
-@@ -1700,8 +1700,8 @@ userauth_jpake(Authctxt *authctxt)
+@@ -1701,8 +1701,8 @@ userauth_jpake(Authctxt *authctxt)
  	packet_put_string(x2_proof, x2_proof_len);
  	packet_send();
  
