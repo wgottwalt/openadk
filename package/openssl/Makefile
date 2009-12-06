@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		0.9.8j
+PKG_VERSION:=		0.9.8l
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a5cb5f6c3d11affb387ecf7a997cac0c
+PKG_MD5SUM:=		05a0ece1372392a2cf310ebb96333025
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -32,7 +32,10 @@ INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
-OPENSSL_OPTIONS = shared no-ec no-err no-hw no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast no-bf
+OPENSSL_OPTIONS = shared no-ec no-err no-hw no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
+
+post-extract:
+	@find ${WRKBUILD} -name *.rej -delete
 
 do-configure:
 	(cd $(WRKBUILD); \

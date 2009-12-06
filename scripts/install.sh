@@ -95,7 +95,7 @@ else
 		printf "This will destroy all data on $1, are you sure?\n"
 		printf "Type "y" to continue\n"
 		read y
-		if [ $y = "y" ];then
+		if [ "$y" = "y" ];then
 			$sfdisk -l $1 2>&1 |grep 'No medium'
 			if [ $? -eq 0 ];then
 				exit 1

@@ -249,8 +249,8 @@ $(eval $(call KMOD_template,INET_ESP,net-ipsec-esp,\
 ,65))
 
 $(eval $(call KMOD_template,INET_IPCOMP,net-ipsec-comp,\
-	$(MODULES_DIR)/kernel/net/ipv4/ipcomp \
 	$(MODULES_DIR)/kernel/net/xfrm/xfrm_ipcomp \
+	$(MODULES_DIR)/kernel/net/ipv4/ipcomp \
 ,70))
 
 $(eval $(call KMOD_template,INET_XFRM_MODE_TRANSPORT,net-ipsec-transport,\
@@ -603,6 +603,7 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
+    $(MODULES_DIR)/kernel/crypto/xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
@@ -640,8 +641,8 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-hw-geode,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
-    $(MODULES_DIR)/kernel/crypto/pcompress \
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
+    $(MODULES_DIR)/kernel/crypto/pcompress \
 ,02))
 
 $(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
@@ -780,6 +781,7 @@ $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
+    $(MODULES_DIR)/kernel/lib/lzo/lzo_compress \
     $(MODULES_DIR)/kernel/lib/lzo/lzo_decompress \
     $(MODULES_DIR)/kernel/crypto/lzo \
 ,10))
@@ -1020,43 +1022,43 @@ $(eval $(call KMOD_template,USB_ACM,usb-acm,\
 
 $(eval $(call KMOD_template,USB_HID,usb-hid,\
 	$(MODULES_DIR)/kernel/drivers/hid/usbhid/usbhid \
-,60))
+,70))
 
 $(eval $(call KMOD_template,USB_PRINTER,usb-printer,\
 	$(foreach mod,$(USB_PRINTER_MODULES),$(MODULES_DIR)/kernel/$(mod)) \
-,60))
+,70))
 
 $(eval $(call KMOD_template,USB_SERIAL,usb-serial,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/usbserial \
-,60))
+,70))
 
 $(eval $(call KMOD_template,USB_SERIAL_BELKIN,usb-serial-belkin,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/belkin_sa \
-,61))
+,71))
 
 $(eval $(call KMOD_template,USB_SERIAL_FTDI_SIO,usb-serial-ftdi,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/ftdi_sio \
-,61))
+,71))
 
 $(eval $(call KMOD_template,USB_SERIAL_MCT_U232,usb-serial-mct-u232,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/mct_u232 \
-,61))
+,71))
 
 $(eval $(call KMOD_template,USB_SERIAL_PL2303,usb-serial-pl2303,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/pl2303 \
-,61))
+,71))
 
 $(eval $(call KMOD_template,USB_SERIAL_VISOR,usb-serial-visor,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/visor \
-,61))
+,71))
 
 $(eval $(call KMOD_template,USB_STORAGE,usb-storage,\
 	$(MODULES_DIR)/kernel/drivers/usb/storage/usb-storage \
-,65))
+,75))
 
 $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
-,65))
+,75))
 
 #
 # Bluetooth

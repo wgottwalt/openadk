@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tinc
-PKG_VERSION:=		1.0.9
+PKG_VERSION:=		1.0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f907acebada53512e01235bea6b4cdf1
+PKG_MD5SUM:=		ee0b1a3366c6e379cae34be6fa5dcb15
 PKG_DESCR:=		VPN tunnel daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib liblzo libopenssl kmod-tun

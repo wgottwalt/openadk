@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xinetd
-PKG_VERSION:=		2.3.13
-PKG_RELEASE:=		9
-PKG_MD5SUM:=		4295b5fe12350f09b5892b363348ac8b
+PKG_VERSION:=		2.3.14
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		567382d7972613090215c6c54f9b82d9
 PKG_DESCR:=		a powerful and secure superserver
 PKG_SECTION:=		net
 PKG_URL:=		http://www.xinetd.org
