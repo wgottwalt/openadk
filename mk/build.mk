@@ -45,7 +45,7 @@ MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
 			ADK_TARGET_LIB_ECLIBC \
 			ADK_DEBUG
 
-POSTCONFIG=		-@\
+POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
 	if [ -d .cfg ];then \
 	what=cleantarget; \

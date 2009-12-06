@@ -1,22 +1,15 @@
 #!/usr/bin/env bash
 
-grubinstall=1
 filesystem=ext2
 
-while getopts "f:t:in" option
+while getopts "f:i" option
 do
 	case $option in
 		f)
 		filesystem=$OPTARG
 		;;
-		t)
-		emul=$OPTARG
-		;;
 		i)
 		initramfs=1
-		;;
-		n)
-		grubinstall=0
 		;;
 		*)
 		printf "Option not recognized\n"
@@ -28,16 +21,6 @@ shift $(($OPTIND - 1))
 
 if [ $(id -u) -ne 0 ];then
 	printf "Installation is only possible as root\n"
-	exit 1
-fi
-
-printf "Checking if grub is installed"
-grub=$(which grub)
-
-if [ ! -z $grub -a -x $grub ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
 	exit 1
 fi
 
@@ -113,7 +96,6 @@ rm mbr
 tmp=$(mktemp -d)
 
 mount -o loop,offset=16384 -t $filesystem $1 $tmp
-#mount -o loop -t $filesystem $1 $tmp
 
 if [ -z $initramfs ];then
 	printf "Extracting install archive\n"
@@ -128,56 +110,14 @@ else
 	cp $2-initramfs $tmp/boot/initramfs
 fi
 
-if [ $grubinstall -eq 1 ];then
-printf "Copying grub files\n"
-mkdir $tmp/boot/grub
-cp /boot/grub/stage1 $tmp/boot/grub
-cp /boot/grub/stage2 $tmp/boot/grub
-cp /boot/grub/e2fs_stage1_5 $tmp/boot/grub
-
-if [ -z $initramfs ];then
-cat << EOF > $tmp/boot/grub/menu.lst
-serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-terminal --timeout=2 serial console
-timeout 2
-default 0
-hiddenmenu
-title linux
-root (hd0,0)
-kernel /boot/kernel root=/dev/sda1 init=/init console=ttyS0,115200 console=tty0 panic=10 rw
-EOF
-else
-cat << EOF > $tmp/boot/grub/menu.lst
-serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-terminal --timeout=2 serial console
-timeout 4
-default 0
-hiddenmenu
-title linux
-root (hd0,0)
-kernel /boot/kernel root=/dev/sda1 console=ttyS0,115200 console=tty0 rw
-initrd /boot/initramfs
-EOF
-fi
-
-printf "Installing Grub bootloader\n"
-$grub --batch --no-curses --no-floppy --device-map=/dev/null >/dev/null << EOF
-device (hd0) $1
-root (hd0,0)
-setup (hd0)
-quit
-EOF
-
-fi
-
 printf "Creating device nodes\n"
 mknod -m 666 $tmp/dev/zero c 1 5
 mknod -m 666 $tmp/dev/null c 1 3
 mknod -m 622 $tmp/dev/console c 5 1
 mknod -m 666 $tmp/dev/tty c 5 0
 mknod -m 666 $tmp/dev/tty0 c 4 0
-mknod -m 660 $tmp/dev/hda b 3 0
-mknod -m 660 $tmp/dev/hda1 b 3 1
+#mknod -m 660 $tmp/dev/hda b 3 0
+#mknod -m 660 $tmp/dev/hda1 b 3 1
 mknod -m 666 $tmp/dev/ttyS0 c 4 64
 
 umount $tmp

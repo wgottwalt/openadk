@@ -371,6 +371,9 @@ config ADK_LINUX_X86_QEMU
 	select ADK_x86_qemu
 	select ADK_KPACKAGE_KMOD_NE2K_PCI
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Qemu support for x86 architecture.
 

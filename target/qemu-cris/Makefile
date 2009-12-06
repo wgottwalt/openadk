@@ -18,12 +18,14 @@ kernel-install: tools-compile
 	mkfimage $(LINUX_DIR)/arch/cris/arch-v32/boot/zImage \
 		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel $(MAKE_TRACE)
 
-ifeq ($(FS),ext2)
+ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo "Use following command to create a QEMU Image:"
-	@echo "sudo ./scripts/create-image.sh qemu.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-cris -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel qemu-${CPU_ARCH}.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
