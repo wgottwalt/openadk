@@ -25,9 +25,9 @@ ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
 	$(MAKE) -C $(WRKBUILD) \
-		PREFIX=$(TOOLCHAIN_SYSROOT)/ \
+		PREFIX=$(TOOLCHAIN_SYSROOT) \
 		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=$(TOOLCHAIN_SYSROOT)/ \
+		RUNTIME_PREFIX=$(TOOLCHAIN_SYSROOT) \
 		HOSTCC="$(HOSTCC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
@@ -47,7 +47,7 @@ $(WRKBUILD)/.compiled:
 $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_DIR) \
-		DEVEL_PREFIX=/ \
+		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_dev
@@ -56,7 +56,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_DIR) \
-		DEVEL_PREFIX=/ \
+		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime

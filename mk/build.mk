@@ -111,9 +111,8 @@ $(PACKAGE_DIR):
 	mkdir -p ${PACKAGE_DIR}/.stamps
 
 ${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_TOOLS}:
-	mkdir -p ${STAGING_DIR}/{bin,etc,include,lib,usr} \
+	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/include} \
 		${STAGING_TOOLS}/{bin,lib}
-	cd ${STAGING_DIR}/usr; ln -s ../include include
 
 ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
 	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf

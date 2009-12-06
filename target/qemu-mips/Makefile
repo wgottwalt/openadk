@@ -10,12 +10,12 @@ include $(TOPDIR)/mk/image.mk
 kernel-install:
 	cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
-ifeq ($(FS),ext2)
+ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo "Use following command to create a QEMU Image:"
-	@echo "sudo ./scripts/create-image.sh -n qemu-mips.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) -n qemu-mips.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel -hda qemu-mips.img -append "root=/dev/hda1"'
 	@echo 'Login as user root with password linux123 via ssh or console'

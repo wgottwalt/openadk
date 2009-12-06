@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 grubinstall=1
+filesystem=ext2
 
-while getopts ":tin" option
+while getopts "f:t:in" option
 do
 	case $option in
+		f)
+		filesystem=$OPTARG
+		;;
 		t)
 		emul=$OPTARG
 		;;
@@ -76,26 +80,40 @@ fi
 
 
 printf "Generate qemu image\n"
-$qimg create -f raw $1 300M
+$qimg create -f raw $1 512M >/dev/null
+
+printf "Creating filesystem $filesystem\n"
 
 printf "Create partition and filesystem\n"
 $parted -s $1 mklabel msdos
-$parted -s $1 mkpart primary ext2 0 300
+$parted -s $1 mkpart primary ext2 0 100%
 $parted -s $1 set 1 boot on
-$parted -s $1 mkfs 1 ext2
+
+dd if=$1 of=mbr bs=16384 count=1 2>/dev/null
+dd if=$1 skip=16384 of=$1.new 2>/dev/null
+
+if [ "$filesystem" = "ext2" -o "$filesystem" = "ext3" -o "$filesystem" = "ext4" ];then
+	mkfsopts=-F
+fi
+
+mkfs.$filesystem $mkfsopts ${1}.new >/dev/null
 
 if [ $? -eq 0 ];then
 	printf "Successfully created partition\n"
-	$parted $1 print
+	#$parted $1 print
 else
 	printf "Partition creation failed, Exiting.\n"
 	exit 1
 fi
 
+cat mbr ${1}.new > $1
+rm ${1}.new 
+rm mbr
 
 tmp=$(mktemp -d)
 
-mount -o loop,offset=16384 -t ext2 $1 $tmp
+mount -o loop,offset=16384 -t $filesystem $1 $tmp
+#mount -o loop -t $filesystem $1 $tmp
 
 if [ -z $initramfs ];then
 	printf "Extracting install archive\n"
@@ -165,4 +183,5 @@ mknod -m 666 $tmp/dev/ttyS0 c 4 64
 umount $tmp
 
 printf "Successfully installed.\n"
+printf "Be sure $1 is writable for the user which use qemu\n"
 exit 0

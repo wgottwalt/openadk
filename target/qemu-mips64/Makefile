@@ -10,7 +10,7 @@ include $(TOPDIR)/mk/image.mk
 kernel-install:
 	cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
-ifeq ($(FS),ext2)
+ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"

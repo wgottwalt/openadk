@@ -379,6 +379,9 @@ config ADK_LINUX_X86_64_QEMU
 	select ADK_x86_64_qemu
 	select ADK_KPACKAGE_KMOD_NE2K_PCI
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Qemu support for x86_64 architecture.
 
@@ -461,6 +464,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
@@ -483,6 +487,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_WRAP || \
@@ -740,6 +745,14 @@ config ADK_TARGET_ROOT_EXT4
 	  Compile EXT4 filesystem into kernel and use it as root filesystem.
 
 endchoice
+
+config ADK_TARGET_ROOTFS
+	string
+	default "xfs" if ADK_TARGET_ROOT_XFS
+	default "ext2" if ADK_TARGET_ROOT_EXT2
+	default "ext3" if ADK_TARGET_ROOT_EXT3
+	default "ext4" if ADK_TARGET_ROOT_EXT4
+	help
 
 config ADK_PACKAGE_SUFFIX
 	string
