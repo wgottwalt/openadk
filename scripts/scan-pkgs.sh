@@ -95,8 +95,10 @@ fi
 
 if [[ -n $NEED_CURLDEV ]];then
 	if ! test -f /usr/include/curl/curl.h >/dev/null; then
-		echo >&2 You need curl headers to build $NEED_CURLDEV
-		out=1
+		if ! test -f /usr/local/include/curl/curl.h >/dev/null; then
+			echo >&2 You need curl headers to build $NEED_CURLDEV
+			out=1
+		fi
 	fi
 fi
 
