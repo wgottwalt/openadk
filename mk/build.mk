@@ -185,7 +185,7 @@ cleandir:
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
 		${TOPDIR}/.cfg*
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	rm -f all.config .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
 cleantarget:
 	@$(TRACE) cleantarget
