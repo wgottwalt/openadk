@@ -48,6 +48,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_DIR) \
 		DEVEL_PREFIX=/usr/ \
+		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_dev
@@ -57,6 +58,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_DIR) \
 		DEVEL_PREFIX=/usr/ \
+		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
