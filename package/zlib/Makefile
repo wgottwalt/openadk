@@ -28,11 +28,11 @@ CONFIGURE_STYLE:=	manual
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
-ifeq ($(ADK_NATIVE),n)
+ifeq ($(ADK_NATIVE),)
 COPTS:=                 $(TARGET_CONFIGURE_OPTS)
 endif
 
-ifeq ($(ADK_STATIC),n)
+ifeq ($(ADK_STATIC),)
 CONFIGURE_OPTS:=	--shared
 endif
 
