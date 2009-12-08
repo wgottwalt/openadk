@@ -45,6 +45,28 @@ config ADK_KPACKAGE_KMOD_PCNET32
 	help
 	  AMD PCnet32 driver
 
+config ADK_KPACKAGE_KMOD_8139CP
+	prompt "kmod-net-rtl8139cp............ RTL8139C+ PCI driver"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	tristate
+	default n
+	help
+	  RTL8139C+ pci driver
+
+config ADK_KPACKAGE_KMOD_8139TOO
+	prompt "kmod-net-rtl8139.............. RTL8139 PCI driver"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	tristate
+	default n
+	help
+	  RTL8139 pci driver
+
 config ADK_KPACKAGE_KMOD_E100
 	prompt "kmod-net-e100................. Intel(R) PRO/100+ driver"
 	select ADK_KERNEL_NETDEVICES

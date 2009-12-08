@@ -32,6 +32,14 @@ $(eval $(call KMOD_template,NE2K_PCI,ne2k-pci,\
 	$(MODULES_DIR)/kernel/drivers/net/ne2k-pci \
 ,20))
 
+$(eval $(call KMOD_template,8139CP,rtl8139cp,\
+	$(MODULES_DIR)/kernel/drivers/net/8139cp \
+,20))
+
+$(eval $(call KMOD_template,8139TOO,rtl8139,\
+	$(MODULES_DIR)/kernel/drivers/net/8139too \
+,20))
+
 $(eval $(call KMOD_template,E100,e100,\
 	$(MODULES_DIR)/kernel/drivers/net/e100 \
 ,20))
