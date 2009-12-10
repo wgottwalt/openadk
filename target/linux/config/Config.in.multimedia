@@ -64,6 +64,14 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	help
 	 ALSA VIA82XX driver
 
+config ADK_KPACKAGE_KMOD_SND_ENS1370
+	prompt "kmod-sound-alsa-ens1370........ ALSA Ensoniq 1370 driver"
+	depends on ADK_KPACKAGE_KMOD_SND
+	tristate
+	default n
+	help
+	 ALSA Ensonique 1370 driver
+
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver (ALIX1C)"
 	depends on ADK_KPACKAGE_KMOD_SND
