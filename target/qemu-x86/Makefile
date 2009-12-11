@@ -28,7 +28,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel qemu-${CPU_ARCH}.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel qemu-${CPU_ARCH}.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
@@ -39,7 +39,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'You need a dummy qemu.img, create it with:'
 	@echo 'qemu-img create -f raw qemu.img 1M'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} qemu.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} qemu.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
@@ -49,6 +49,6 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
 	@echo 'You need a dummy qemu.img, create it with:'
 	@echo 'qemu-img create -f raw qemu.img 1M'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel qemu.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic -kernel $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel qemu.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

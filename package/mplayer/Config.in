@@ -12,7 +12,8 @@ config ADK_PACKAGE_MPLAYER
 	select ADK_PACKAGE_LIBFAAD2
 	select ADK_PACKAGE_LIBVORBIS
 	select ADK_PACKAGE_ZLIB
-	depends on ADK_LINUX_X86_ALIX1C
+	depends on ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_QEMU
 	help
           http://www.mplayerhq.hu
 

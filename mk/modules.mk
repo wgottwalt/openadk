@@ -32,6 +32,14 @@ $(eval $(call KMOD_template,NE2K_PCI,ne2k-pci,\
 	$(MODULES_DIR)/kernel/drivers/net/ne2k-pci \
 ,20))
 
+$(eval $(call KMOD_template,8139CP,rtl8139cp,\
+	$(MODULES_DIR)/kernel/drivers/net/8139cp \
+,20))
+
+$(eval $(call KMOD_template,8139TOO,rtl8139,\
+	$(MODULES_DIR)/kernel/drivers/net/8139too \
+,20))
+
 $(eval $(call KMOD_template,E100,e100,\
 	$(MODULES_DIR)/kernel/drivers/net/e100 \
 ,20))
@@ -922,6 +930,7 @@ $(eval $(call KMOD_template,SND,sound-alsa,\
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
+	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 ,40))
 
 $(eval $(call KMOD_template,SND_OSSEMUL,sound-alsa-oss-emul,\
@@ -935,9 +944,12 @@ $(eval $(call KMOD_template,SND_AC97_CODEC,sound-alsa-ac97-codec,\
 ,50))
 
 $(eval $(call KMOD_template,SND_VIA82XX,sound-alsa-via82xx,\
-	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 	$(MODULES_DIR)/kernel/sound/drivers/mpu401/snd-mpu401-uart \
 	$(MODULES_DIR)/kernel/sound/pci/snd-via82xx \
+,55))
+
+$(eval $(call KMOD_template,SND_ENS1370,sound-alsa-ens1370,\
+	$(MODULES_DIR)/kernel/sound/pci/snd-ens1370 \
 ,55))
 
 $(eval $(call KMOD_template,SND_CS5535AUDIO,sound-alsa-cs5535,\

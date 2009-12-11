@@ -258,6 +258,7 @@ xfsprogs-compile: e2fsprogs-compile
 libXxf86dga-compile: xf86dgaproto-compile libXext-compile libXaw-compile
 xkeyboard-config-compile: xkbcomp-compile
 xf86-video-geode-compile: xorg-server-compile
+xf86-video-cirrus-compile: xorg-server-compile
 xf86dga-compile: libXxf86dga-compile 
 xorg-server-compile: libX11-compile randrproto-compile renderproto-compile fixesproto-compile \
 	damageproto-compile scrnsaverproto-compile resourceproto-compile \
