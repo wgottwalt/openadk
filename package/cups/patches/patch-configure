@@ -1,0 +1,14 @@
+--- cups-1.4.2.orig/configure	2009-11-10 00:04:25.000000000 +0100
++++ cups-1.4.2/configure	2009-12-11 09:59:57.000000000 +0100
+@@ -10260,11 +10260,6 @@ _ACEOF
+ 
+ # Server executables...
+ case "$uname" in
+-	*BSD* | Darwin*)
+-		# *BSD and Darwin (MacOS X)
+-		INSTALL_SYSV=""
+-		CUPS_SERVERBIN="$exec_prefix/libexec/cups"
+-		;;
+ 	*)
+ 		# All others
+ 		INSTALL_SYSV="install-sysv"
