@@ -4,17 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-29973
+PKG_VERSION:=		1.0-29987
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a2fd085d18fc92c70389e7b4d2b6ad43
+PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
 PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthread libpng libjpeg
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
-
-#DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
-#WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
@@ -29,8 +26,8 @@ CONFIGURE_CPU_OPTS:=	\
 			--disable-sse2 \
 			--disable-sse \
 			--enable-mmxext \
-			--enable-3dnowext \
 			--enable-mmx \
+			--enable-3dnowext \
 			--enable-3dnow
 else
 CONFIGURE_CPU_OPTS:=	\
@@ -41,6 +38,10 @@ CONFIGURE_CPU_OPTS:=	\
 			--disable-3dnowext \
 			--disable-mmx \
 			--disable-3dnow
+endif
+
+ifneq ($(ADK_DEBUG),)
+	CONFIGURE_DEBUG=--enable-debug
 endif
 
 pre-configure:
@@ -90,7 +91,7 @@ pre-configure:
 		--disable-md5sum \
 		--disable-liblzo \
 		${CONFIGURE_CPU_OPTS} \
-		${CONFIGURE_ARG} \
+		${CONFIGURE_DEBUG} \
 	);
 	
 
