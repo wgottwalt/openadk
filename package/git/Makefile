@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
 PKG_VERSION:=		1.6.5.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		50fb736021ef89916af622cb4772bbea
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		misc
@@ -18,8 +18,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 \
-			NO_CROSS_DIRECTORY_HARDLINKS=1
-XAKE_FLAGS+=		V=1
+			NO_CROSS_DIRECTORY_HARDLINKS=1 \
+			CURLDIR=${STAGING_DIR} EXPATDIR=${STAGING_DIR}
+XAKE_FLAGS+=		V=1 uname_S=Linux
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_fread_reads_directories=no \
