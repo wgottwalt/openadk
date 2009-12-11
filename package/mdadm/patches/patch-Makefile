@@ -1,0 +1,50 @@
+--- mdadm-3.0.orig/Makefile	2009-06-02 07:48:29.000000000 +0200
++++ mdadm-3.0/Makefile	2009-12-11 19:01:17.000000000 +0100
+@@ -186,29 +186,36 @@ sha1.o : sha1.c sha1.h md5.h
+ 	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
+ 
+ install : mdadm mdmon install-man install-udev
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
+-	$(INSTALL) -D $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
+ 
+ install-static : mdadm.static install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-tcc : mdadm.tcc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.tcc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.tcc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-uclibc : mdadm.uclibc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.uclibc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.uclibc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-klibc : mdadm.klibc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.klibc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.klibc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-man: mdadm.8 md.4 mdadm.conf.5 mdmon.8
+-	$(INSTALL) -D -m 644 mdadm.8 $(DESTDIR)$(MAN8DIR)/mdadm.8
+-	$(INSTALL) -D -m 644 mdmon.8 $(DESTDIR)$(MAN8DIR)/mdmon.8
+-	$(INSTALL) -D -m 644 md.4 $(DESTDIR)$(MAN4DIR)/md.4
+-	$(INSTALL) -D -m 644 mdadm.conf.5 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5
++	$(INSTALL) -d $(DESTDIR)$(MAN8DIR) $(DESTDIR)$(MAN4DIR) $(DESTDIR)$(MAN5DIR)
++	$(INSTALL) -m 644 mdadm.8 $(DESTDIR)$(MAN8DIR)/mdadm.8
++	$(INSTALL) -m 644 mdmon.8 $(DESTDIR)$(MAN8DIR)/mdmon.8
++	$(INSTALL) -m 644 md.4 $(DESTDIR)$(MAN4DIR)/md.4
++	$(INSTALL) -m 644 mdadm.conf.5 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5
+ 
+ install-udev: udev-md-raid.rules
+-	$(INSTALL) -D -m 644 udev-md-raid.rules $(DESTDIR)/lib/udev/rules.d/64-md-raid.rules
++	$(INSTALL) -d $(DESTDIR)/lib/udev/rules.d/
++	$(INSTALL) -m 644 udev-md-raid.rules $(DESTDIR)/lib/udev/rules.d/64-md-raid.rules
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(MAN8DIR)/mdadm.8 $(DESTDIR)$(MAN8DIR)/mdmon.8 $(DESTDIR)$(MAN4DIR)/md.4 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5 $(DESTDIR)$(BINDIR)/mdadm
