@@ -1,6 +1,6 @@
 $Id$
 --- dsniff-2.4.orig/record.c	2001-03-15 09:33:04.000000000 +0100
-+++ dsniff-2.4/record.c	2007-01-23 00:20:48.000000000 +0100
++++ dsniff-2.4/record.c	2009-12-11 12:49:32.000000000 +0100
 @@ -15,12 +15,7 @@
  #include <stdio.h>
  #include <time.h>
@@ -24,14 +24,18 @@ $Id$
  
  static int
  xdr_rec(XDR *xdrs, struct rec *rec)
-@@ -64,7 +59,6 @@ record_print(struct rec *rec)
+@@ -64,9 +59,8 @@ record_print(struct rec *rec)
  	
  	tm = localtime(&rec->time);
  	strftime(tstr, sizeof(tstr), "%x %X", tm);
 -	
- 	srcp = libnet_host_lookup(rec->src, Opt_dns);
- 	dstp = libnet_host_lookup(rec->dst, Opt_dns);
+-	srcp = libnet_host_lookup(rec->src, Opt_dns);
+-	dstp = libnet_host_lookup(rec->dst, Opt_dns);
++	srcp = libnet_addr2name4(rec->src, Opt_dns);
++	dstp = libnet_addr2name4(rec->dst, Opt_dns);
  
+ 	if ((pr = getprotobynumber(rec->proto)) == NULL)
+ 		protop = "unknown";
 @@ -89,10 +83,10 @@ record_print(struct rec *rec)
  	fflush(stdout);
  }
