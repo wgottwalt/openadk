@@ -14,6 +14,7 @@ DEFCONFIG= 		ADK_DEVELSYSTEM=n \
 			ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_FORCE_PARALLEL=n \
+			ADK_PACKAGE_GRUB=n \
 			BUSYBOX_SELINUX=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
@@ -248,14 +249,20 @@ endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
 endif
-	@$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN)
+	@$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN) >/dev/null
 
 modconfig:
+ifeq (${OStype},Linux)
+	@echo ADK_HOST_LINUX=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},FreeBSD)
+	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/all.config
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			> $(TOPDIR)/all.config; \
+			>> $(TOPDIR)/all.config; \
 		for symbol in ${DEFCONFIG}; do \
 			echo $$symbol >> $(TOPDIR)/all.config; \
 		done; \
