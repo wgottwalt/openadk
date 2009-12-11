@@ -7,6 +7,7 @@ config ADKVERSION
 
 mainmenu "OpenADK Configuration"
 
+
 config MODULES
 	bool
 	default y
@@ -89,6 +90,18 @@ config ADK_FORCE_PARALLEL
 	depends on ADK_MAKE_PARALLEL
 	help
 	  Do not enable this! It's for testing purposes only.
+
+choice 
+prompt "Hostsystem (do not change!)"
+config ADK_HOST_LINUX
+	prompt "Linux"
+	boolean
+
+config ADK_HOST_FREEBSD
+	prompt "FreeBSD"
+	boolean
+
+endchoice
 
 endmenu
 

@@ -789,4 +789,6 @@ config ADK_TARGET_PACKAGE_RPM
 
 endchoice
 
+
 endmenu
+

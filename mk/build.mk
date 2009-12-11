@@ -224,11 +224,17 @@ $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
 defconfig:
+ifeq (${OStype},Linux)
+	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
+endif
+ifeq (${OStype},FreeBSD)
+	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			 > $(TOPDIR)/.defconfig; \
+			 >> $(TOPDIR)/.defconfig; \
 		for symbol in ${DEFCONFIG}; do \
 			echo $$symbol >> $(TOPDIR)/.defconfig; \
 		done; \
@@ -242,9 +248,7 @@ endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
 endif
-	@if [ ! -z "$(TARGET)" ];then \
-		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
-	fi
+	@$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN)
 
 modconfig:
 	@if [ ! -z "$(TARGET)" ];then \
