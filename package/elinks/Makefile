@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		elinks
 PKG_VERSION:=		0.11.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		text
@@ -17,6 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ELINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-fPIC
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=yes
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_${WRKBUILD}/features.conf | tr [:blank:]-/. _)=yes
