@@ -248,7 +248,9 @@ endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
 endif
-	@$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN)
+	@if [ ! -z "$(TARGET)" ];then \
+		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+	fi
 
 modconfig:
 	@if [ ! -z "$(TARGET)" ];then \
