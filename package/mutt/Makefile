@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.5.19
+PKG_VERSION:=		1.5.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		73b3747bc7f7c805921e8d24ebac693f
+PKG_MD5SUM:=		027cdd9959203de0c3c64149a7ee351c
 PKG_DESCR:=		Mail text client
 PKG_SECTION:=		text
 PKG_DEPENDS:=		libncurses libopenssl
@@ -25,11 +25,10 @@ CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--with-ssl
 BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}"
-#ALL_TARGET:=
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MUTT}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_MUTT}/usr/bin/
+	${INSTALL_BIN} ${WRKBUILD}/mutt ${IDIR_MUTT}/usr/bin/
 ifeq (${ADK_PACKAGE_GPG},y)
 	${INSTALL_BIN} ${WRKBUILD}/pgpewrap ${IDIR_MUTT}/usr/bin/
 endif
