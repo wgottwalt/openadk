@@ -5,6 +5,7 @@ config ADK_PACKAGE_LIBVIRT
 	select ADK_PACKAGE_LIBXML2
 	select ADK_PACKAGE_LIBGNUTLS
 	select ADK_PACKAGE_BRIDGE_UTILS
+	depends on !ADK_HOST_FREEBSD
 	default n
 	help
 	  http://www.libvirt.org

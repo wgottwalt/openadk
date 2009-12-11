@@ -4,6 +4,7 @@ config ADK_PACKAGE_GCC
 	default n
 	select ADK_PACKAGE_LIBGMP
 	select ADK_PACKAGE_MPFR
+	depends on !ADK_HOST_FREEBSD
 	help
 	  GCC
 	  http://www.gnu.org/gcc

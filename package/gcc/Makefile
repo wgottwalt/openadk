@@ -35,9 +35,7 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--disable-multilib \
 			--disable-libstdcxx-pch
 BUILD_STYLE:=		auto
-#ALL_TARGET:=		all-gcc all-target-libgcc
 INSTALL_STYLE:=		auto
-#INSTALL_TARGET:=	install-gcc install-target-libgcc
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin

@@ -7,6 +7,7 @@ config ADK_PACKAGE_LIBATM
 	prompt "libatm............................. ATM Library for Linux"
 	tristate
 	default n
+	depends on !ADK_HOST_FREEBSD
 	help
 	  ATM Library for linux
 	  
@@ -15,6 +16,7 @@ config ADK_PACKAGE_BR2684CTL
 	tristate
 	default n
 	select ADK_PACKAGE_LIBATM
+	depends on !ADK_HOST_FREEBSD
 	help
 	  Utility for setting up ATM RFC2684 bridging mode.
 	  (Useful for PPPoE)

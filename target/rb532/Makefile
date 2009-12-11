@@ -10,7 +10,7 @@ include $(TOPDIR)/mk/image.mk
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 kernel-install:
-	$(KERNEL_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
 		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
 
 ifeq ($(FS),ext2-cf)

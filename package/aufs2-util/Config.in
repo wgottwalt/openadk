@@ -3,7 +3,7 @@ config ADK_PACKAGE_AUFS_UTIL
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_AUFS_FS
+	depends on !ADK_HOST_FREEBSD
 	help
 	  Utilities for use with aufs2.
-	  
 	  http://aufs.sf.net

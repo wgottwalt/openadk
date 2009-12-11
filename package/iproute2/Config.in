@@ -24,7 +24,7 @@ config ADK_PACKAGE_TC_ATM
 	prompt   "atm support....................... atm support for tc"
 	tristate
 	default n
-	depends on ADK_PACKAGE_TC
+	depends on ADK_PACKAGE_TC && !ADK_HOST_FREEBSD
 	select ADK_PACKAGE_LIBATM
 	help
 	  ATM traffic control support library.
