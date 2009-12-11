@@ -7,42 +7,38 @@ apr-util-compile: expat-compile apr-compile
 arpd-compile: libpcap-compile libdnet-compile libevent-compile
 arpwatch-compile: libpcap-compile
 atftp-compile: readline-compile ncurses-compile
+atk-compile: glib-compile
 avahi-compile: libdaemon-compile expat-compile gdbm-compile glib-compile
+
 bind-compile: openssl-compile
 bitlbee-compile: libiconv-compile openssl-compile glib-compile
 bluez-compile: libusb-compile dbus-compile glib-compile
 bogofilter-compile: libiconv-compile libdb-compile
-cairo-compile: libpng-compile pixman-compile freetype-compile fontconfig-compile libX11-compile
 
+cairo-compile: libpng-compile pixman-compile freetype-compile fontconfig-compile libX11-compile
 ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
 cbtt-compile: uclibc++-compile
 endif
-
 cbtt-compile: mysql-compile zlib-compile
 collectd-compile: libpthread-compile
 cryptinit-compile: cryptsetup-compile
 cryptsetup-compile: libgcrypt-compile popt-compile e2fsprogs-compile lvm-compile
-
 ifeq (${ADK_COMPILE_CTORRENT_WITH_UCLIBCXX},y)
 ctorrent-compile: uclibc++-compile
 endif
 ctorrent-compile: openssl-compile
-
 cups-compile: zlib-compile
 curl-compile: openssl-compile zlib-compile
-
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 cxxtools-compile: uclibc++-compile
 endif
 cxxtools-compile: libiconv-compile
-
 cyrus-sasl-compile: openssl-compile
 
 ifeq (${ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX},y)
 dansguardian-compile: uclibc++-compile
 endif
 dansguardian-compile: pcre-compile zlib-compile
-
 ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
 davfs2-compile: fuse-compile
 endif
