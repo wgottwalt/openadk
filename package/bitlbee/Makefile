@@ -23,7 +23,7 @@ $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 do-configure:
 		(cd $(WRKBUILD); \
 			$(TARGET_CONFIGURE_OPTS) \
-			CFLAGS="$(TARGET_CFLAGS)" \
+			CFLAGS="$(TARGET_CFLAGS) -fPIC" \
 			CPPFLAGS="-I$(STAGING_DIR)/usr/include" \
 			LDFLAGS="-L$(STAGING_DIR)/usr/lib" \
 			STAGING_DIR="$(STAGING_DIR)" \
