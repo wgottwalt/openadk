@@ -214,7 +214,6 @@ rsync-compile: popt-compile
 rtorrent-compile: ncurses-compile libtorrent-compile curl-compile
 sane-backends-compile: libpthread-compile libusb-compile
 scanlogd-compile: libpcap-compile libnids-compile libnet-compile
-scdp-compile: libnet-compile
 screen-compile: ncurses-compile
 serdisplib-compile: libgd-compile libusb-compile
 siproxd-compile: libosip2-compile
