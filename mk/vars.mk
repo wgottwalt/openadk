@@ -54,6 +54,7 @@ TARGET_LDFLAGS+=	-Wl,-O2
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
+LINUX_HEADER_DIR:=	$(STAGING_DIR)/linux-header
 
 TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			AR=$(TARGET_CROSS)ar \

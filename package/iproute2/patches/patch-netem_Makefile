@@ -1,0 +1,27 @@
+--- iproute2-2.6.29-1.orig/netem/Makefile	2009-03-24 23:40:54.000000000 +0100
++++ iproute2-2.6.29-1/netem/Makefile	2009-12-11 16:39:15.000000000 +0100
+@@ -2,13 +2,13 @@ DISTGEN = maketable normal pareto pareto
+ DISTDATA = normal.dist pareto.dist paretonormal.dist experimental.dist
+ 
+ HOSTCC ?= $(CC)
+-CCOPTS  = $(CBUILD_CFLAGS)
++HOSTCFLAGS ?= 
+ LDLIBS += -lm 
+ 
+ all: $(DISTGEN) $(DISTDATA)
+ 
+ $(DISTGEN):
+-	$(HOSTCC) $(CCOPTS) -I../include -o $@ $@.c -lm
++	$(HOSTCC) $(HOSTCFLAGS) -I../include -o $@ $@.c -lm
+ 
+ %.dist: %
+ 	./$* > $@
+@@ -17,7 +17,7 @@ experimental.dist: maketable experimenta
+ 	./maketable experimental.dat > experimental.dist
+ 
+ stats: stats.c
+-	$(HOSTCC) $(CCOPTS) -I../include -o $@ $@.c -lm
++	$(HOSTCC) $(HOSTCFLAGS) -I../include -o $@ $@.c -lm
+ 
+ install: all
+ 	mkdir -p $(DESTDIR)/lib/tc

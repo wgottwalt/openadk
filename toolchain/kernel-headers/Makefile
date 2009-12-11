@@ -13,6 +13,9 @@ $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(TOOLCHAIN_SYSROOT)/usr \
 		headers_install
+	$(MAKE) -C $(WRKBUILD) ARCH=$(ARCH) V=1 \
+		INSTALL_HDR_PATH=$(LINUX_HEADER_DIR) \
+		headers_install
 	# cryptodev.h from ocf-linux-20080917
 	mkdir -p ${STAGING_DIR}/usr/include/crypto
 	cp files/cryptodev.h ${STAGING_DIR}/usr/include/crypto/

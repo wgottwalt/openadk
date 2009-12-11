@@ -4,6 +4,9 @@
 TOPDIR:=	$(shell pwd)
 PWD:=		${TOPDIR}
 
+ADKVERSION=	0.1.0
+export ADKVERSION
+
 ifneq (${package},)
 subdir:=	package/${package}
 _subdir_dep:=	${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
