@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.1_rc22
+PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a4ca5d79f7467fc537b216bff1c744f2
+PKG_MD5SUM:=		452a83326ae198cf961e9ae02539c8fb
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-tun
@@ -49,7 +49,7 @@ ifeq ($(ADK_COMPILE_OPENVPN_WITH_SMALL),y)
 ENABLE_SMALL:=--enable-small
 endif
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-pthread \
 			--disable-plugins \
 			--disable-management \
@@ -64,8 +64,8 @@ CONFIGURE_ARGS+=	--disable-pthread \
 			$(DISABLE_HTTP) \
 			$(ENABLE_PASSWORD_SAVE) \
 			$(ENABLE_SMALL)
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	# main package
