@@ -1,7 +1,7 @@
 $Id$
---- shorewall-3.4.5.orig/shorewall.conf	2007-06-20 14:30:57.000000000 +0000
-+++ shorewall-3.4.5/shorewall.conf	2007-07-17 11:08:12.000000000 +0000
-@@ -71,7 +71,7 @@ SHOREWALL_SHELL=/bin/sh
+--- shorewall-common-4.0.7.orig/shorewall.conf	2007-12-10 22:17:04.000000000 +0100
++++ shorewall-common-4.0.7/shorewall.conf	2009-12-11 22:58:41.000000000 +0100
+@@ -72,7 +72,7 @@ SHOREWALL_SHELL=/bin/sh
  
  SUBSYSLOCK=/var/lock/subsys/shorewall
  

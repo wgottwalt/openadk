@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- valgrind-3.3.1.orig/configure	2008-06-01 03:44:42.000000000 +0200
-+++ valgrind-3.3.1/configure	2009-06-02 01:32:59.000000000 +0200
++++ valgrind-3.3.1/configure	2009-12-12 00:28:43.000000000 +0100
+@@ -4129,7 +4129,7 @@ echo "${ECHO_T}ok (${host_os})" >&6
+         echo "$as_me:$LINENO: checking for the kernel version" >&5
+ echo $ECHO_N "checking for the kernel version... $ECHO_C" >&6
+ 
+-        kernel=`uname -r`
++        kernel=2.6.32
+ 
+         case "${kernel}" in
+              2.6.*)
 @@ -4637,6 +4637,27 @@ if (eval "$ac_cpp conftest.$ac_ext") 2>&
  fi
  rm -f conftest*

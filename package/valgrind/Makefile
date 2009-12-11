@@ -29,7 +29,7 @@ post-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/valgrind $(IDIR_VALGRIND)/usr/bin/
 	$(CP) $(WRKINST)/usr/lib/valgrind/${ARCH}-linux/* \
 		$(IDIR_VALGRIND)/usr/lib/valgrind/${ARCH}-linux
-	rm $(IDIR_VALGRIND)/usr/lib/valgrind/${ARCH}-linux/*.a
+	-rm $(IDIR_VALGRIND)/usr/lib/valgrind/${ARCH}-linux/*.a
 	touch $(IDIR_VALGRIND)/usr/lib/valgrind/default.supp
 
 include ${TOPDIR}/mk/pkg-bottom.mk

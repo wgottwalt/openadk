@@ -1,6 +1,6 @@
 $Id$
---- shorewall-common-4.0.5.orig/install.sh	2007-10-19 16:33:06.000000000 +0000
-+++ shorewall-common-4.0.5/install.sh	2007-10-23 23:33:47.000000000 +0000
+--- shorewall-common-4.0.7.orig/install.sh	2007-12-26 22:15:47.000000000 +0100
++++ shorewall-common-4.0.7/install.sh	2009-12-11 23:10:40.000000000 +0100
 @@ -183,7 +183,6 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/
  #
  # Determine where to install the firewall script
@@ -52,7 +52,28 @@ $Id$
  #
  # Install the zones file
  #
-@@ -704,43 +683,6 @@ echo "Man Pages Installed"
+@@ -683,15 +662,18 @@ fi
+ 
+ cd manpages
+ 
++run_install -d ${PREFIX}/usr/share/man/man5
++run_install -d ${PREFIX}/usr/share/man/man8
++
+ for f in *.5; do
+     gzip -c $f > $f.gz
+-    run_install -D  -m 0644 $f.gz ${PREFIX}/usr/share/man/man5/$f.gz
++    run_install -m 0644 $f.gz ${PREFIX}/usr/share/man/man5/$f.gz
+     echo "Man page $f.gz installed to /usr/share/man/man5/$f.gz"
+ done
+ 
+ for f in *.8; do
+     gzip -c $f > $f.gz
+-    run_install -D  -m 0644 $f.gz ${PREFIX}/usr/share/man/man8/$f.gz
++    run_install -m 0644 $f.gz ${PREFIX}/usr/share/man/man8/$f.gz
+     echo "Man page $f.gz installed to /usr/share/man/man8/$f.gz"
+ done
+ 
+@@ -704,43 +686,6 @@ echo "Man Pages Installed"
  #
  install_file firewall ${PREFIX}/usr/share/shorewall/firewall 0755
  

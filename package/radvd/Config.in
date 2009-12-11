@@ -3,6 +3,7 @@ config ADK_PACKAGE_RADVD
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_IPV6
+	depends on !ADK_HOST_FREEBSD # flex problem
 	help
 	  Routing Advertisement Daemon for IPv6
 	  http://v6web.litech.org/radvd/

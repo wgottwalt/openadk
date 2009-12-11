@@ -1,0 +1,26 @@
+--- squid-3.0.STABLE20.orig/include/squid_types.h	2009-10-29 11:05:43.000000000 +0100
++++ squid-3.0.STABLE20/include/squid_types.h	2009-12-11 23:40:46.000000000 +0100
+@@ -60,9 +60,11 @@
+ #if HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+ #endif
++#ifndef __FreeBSD__
+ #if HAVE_LINUX_TYPES_H
+ #include <linux/types.h>
+ #endif
++#endif
+ #if STDC_HEADERS
+ #include <stdlib.h>
+ #include <stddef.h>
+@@ -70,9 +72,11 @@
+ #if HAVE_INTTYPES_H
+ #include <inttypes.h>
+ #endif
++#ifndef __FreeBSD__
+ #if HAVE_SYS_BITYPES_H
+ #include <sys/bitypes.h>
+ #endif
++#endif
+ #if HAVE_SYS_SELECT_H
+ #include <sys/select.h>
+ #endif

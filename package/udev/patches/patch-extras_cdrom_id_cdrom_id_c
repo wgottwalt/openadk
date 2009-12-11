@@ -1,0 +1,11 @@
+--- udev-142.orig/extras/cdrom_id/cdrom_id.c	2009-04-23 15:02:36.000000000 +0200
++++ udev-142/extras/cdrom_id/cdrom_id.c	2009-12-12 00:20:04.000000000 +0100
+@@ -140,7 +140,7 @@ static void scsi_cmd_set(struct udev *ud
+ 		cmd->sg_io.mx_sb_len = sizeof(cmd->_sense);
+ 		cmd->sg_io.cmdp = cmd->cgc.cmd;
+ 		cmd->sg_io.sbp = cmd->_sense.u;
+-		cmd->sg_io.flags = SG_FLAG_LUN_INHIBIT | SG_FLAG_DIRECT_IO;
++		cmd->sg_io.flags = SG_FLAG_UNUSED_LUN_INHIBIT | SG_FLAG_DIRECT_IO;
+ 	}
+ 	cmd->sg_io.cmd_len = i + 1;
+ 	cmd->cgc.cmd[i] = arg;

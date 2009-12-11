@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.4
-PKG_RELEASE:=		16
+PKG_RELEASE:=		17
 PKG_MD5SUM:=		183800762e266132218b204dfb428d29
 PKG_DESCR:=		a PPP (Point-to-Point Protocol) software (with MPPE/MPPC support)
 PKG_SECTION:=		net
@@ -25,6 +25,7 @@ $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PK
 $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		UNAME_S="Linux"
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 

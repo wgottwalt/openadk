@@ -47,7 +47,5 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/ipsec/* ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${CP} ${WRKINST}/usr/libexec/ipsec/* ${IDIR_OPENSWAN}/usr/libexec/ipsec
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipsec ${IDIR_OPENSWAN}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/etc/rc.d/init.d/ipsec \
-		${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
 
 include ${TOPDIR}/mk/pkg-bottom.mk

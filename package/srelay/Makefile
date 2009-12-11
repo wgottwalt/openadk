@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		srelay
-PKG_VERSION:=		0.4.6
-PKG_RELEASE:=		9
-PKG_MD5SUM:=		4a9f3298b38d8588f0ffde31b946a47f
+PKG_VERSION:=		0.4.7b2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		73904ecbb5d305135b3e8907ce7d0513
 PKG_DESCR:=		A socks 4/5 proxy server
 PKG_SECTION:=		net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=socks-relay/}
@@ -15,7 +15,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SRELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autoconf gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_nsl_getaddrinfo=no
 CONFIGURE_ARGS+=	--disable-thread \
 			--with-libwrap=no

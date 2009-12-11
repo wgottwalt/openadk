@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TCL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-ldl
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
 			tcl_cv_strtod_buggy=ok \

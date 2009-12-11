@@ -5,6 +5,7 @@ config ADK_PACKAGE_VTUN
 	select ADK_PACKAGE_LIBLZO
 	select ADK_PACKAGE_LIBOPENSSL
 	select ADK_PACKAGE_ZLIB
+	depends on !ADK_HOST_FREEBSD # flex problem
 	help
 	  A VPN tunneling daemon
 	  
