@@ -358,7 +358,6 @@ package-$(ADK_PACKAGE_RTORRENT) += rtorrent
 package-$(ADK_COMPILE_SAMBA) += samba
 package-$(ADK_PACKAGE_SANE_BACKENDS) += sane-backends
 package-$(ADK_PACKAGE_SCANLOGD) += scanlogd
-package-$(ADK_PACKAGE_SCDP) += scdp
 package-$(ADK_PACKAGE_SCREEN) += screen
 package-$(ADK_PACKAGE_SCRNSAVERPROTO) += scrnsaverproto
 package-$(ADK_PACKAGE_SCSI_SPIN) += scsi-spin
