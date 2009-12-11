@@ -83,6 +83,11 @@ if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
 	NEED_BISON="$NEED_BISON libpcap"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
+	NEED_WWW="$NEED_WWW libXfont"
+	NEED_XMLTO="$NEED_XMLTO libXfont"
+fi
+
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
@@ -115,6 +120,17 @@ if [[ -n $NEED_INTL ]]; then
 	if ! which intltool-update >/dev/null 2>&1; then
 		echo >&2 You need intltool-update to build $NEED_INTL
 		out=1
+	fi
+fi
+
+if [[ -n $NEED_WWW ]]; then
+	if ! which w3m >/dev/null 2>&1; then
+		if ! which lynx >/dev/null 2>&1; then
+			if ! which links >/dev/null 2>&1; then
+				echo >&2 You need w3m/links/lynx to build $NEED_WWW
+				out=1
+			fi
+		fi
 	fi
 fi
 
