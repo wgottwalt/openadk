@@ -1,0 +1,16 @@
+--- xfsprogs-3.0.0.orig/aclocal.m4	2009-02-04 23:29:25.000000000 +0100
++++ xfsprogs-3.0.0/aclocal.m4	2009-12-12 00:50:23.000000000 +0100
+@@ -148,11 +148,11 @@ AC_DEFUN([AC_PACKAGE_GLOBALS],
+     test -z "$INSTALL_GROUP" || pkg_group="$INSTALL_GROUP"
+     AC_SUBST(pkg_group)
+ 
+-    pkg_distribution=`uname -s`
++    pkg_distribution=Linux
+     test -z "$DISTRIBUTION" || pkg_distribution="$DISTRIBUTION"
+     AC_SUBST(pkg_distribution)
+ 
+-    pkg_platform=`uname -s | tr 'A-Z' 'a-z' | sed -e 's/irix64/irix/'`
++    pkg_platform=linux
+     test -z "$PLATFORM" || pkg_platform="$PLATFORM"
+     AC_SUBST(pkg_platform)
+   ])
