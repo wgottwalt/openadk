@@ -298,6 +298,9 @@ ifneq (,$(filter rb%,${TARGET}))
 endif
 
 menuconfig: $(CONFIG)/mconf defconfig
+	if [ ! -f .config ];then \
+		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 

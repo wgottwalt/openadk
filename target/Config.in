@@ -133,6 +133,7 @@ default ADK_LINUX_NATIVE
 config ADK_LINUX_NATIVE
 	bool "Native platform"
 	select ADK_NATIVE
+	depends on ADK_HOST_LINUX
 	help
 	  Make a native build. Use host tools.
 	  No toolchain will be created.
