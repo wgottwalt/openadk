@@ -1,6 +1,6 @@
 diff -Nur linux-2.6.32.orig/arch/mips/ar7/platform.c linux-2.6.32/arch/mips/ar7/platform.c
 --- linux-2.6.32.orig/arch/mips/ar7/platform.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/ar7/platform.c	2009-12-15 18:27:15.208942638 +0100
++++ linux-2.6.32/arch/mips/ar7/platform.c	2009-12-16 20:10:47.564817191 +0100
 @@ -509,7 +509,7 @@
  
  	memset(uart_port, 0, sizeof(struct uart_port) * 2);
@@ -21,7 +21,7 @@ diff -Nur linux-2.6.32.orig/arch/mips/ar7/platform.c linux-2.6.32/arch/mips/ar7/
  		uart_port[1].uartclk = ar7_bus_freq() / 2;
 diff -Nur linux-2.6.32.orig/arch/mips/include/asm/page.h linux-2.6.32/arch/mips/include/asm/page.h
 --- linux-2.6.32.orig/arch/mips/include/asm/page.h	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/include/asm/page.h	2009-12-14 22:03:51.157752807 +0100
++++ linux-2.6.32/arch/mips/include/asm/page.h	2009-12-16 20:10:47.576432079 +0100
 @@ -200,8 +200,11 @@
  #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
  				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
@@ -38,7 +38,7 @@ diff -Nur linux-2.6.32.orig/arch/mips/include/asm/page.h linux-2.6.32/arch/mips/
  #include <asm-generic/getorder.h>
 diff -Nur linux-2.6.32.orig/arch/mips/Kconfig linux-2.6.32/arch/mips/Kconfig
 --- linux-2.6.32.orig/arch/mips/Kconfig	2009-12-14 21:11:40.737752912 +0100
-+++ linux-2.6.32/arch/mips/Kconfig	2009-12-14 21:00:48.533738664 +0100
++++ linux-2.6.32/arch/mips/Kconfig	2009-12-16 20:10:47.592420151 +0100
 @@ -30,7 +30,6 @@
  	select CEVT_R4K
  	select CSRC_R4K
@@ -49,7 +49,7 @@ diff -Nur linux-2.6.32.orig/arch/mips/Kconfig linux-2.6.32/arch/mips/Kconfig
  	select SYS_HAS_EARLY_PRINTK
 diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kernel/traps.c
 --- linux-2.6.32.orig/arch/mips/kernel/traps.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/kernel/traps.c	2009-12-14 22:25:58.329754617 +0100
++++ linux-2.6.32/arch/mips/kernel/traps.c	2009-12-16 20:10:47.596422057 +0100
 @@ -1255,9 +1255,22 @@
  
  	exception_handlers[n] = handler;
@@ -76,3 +76,42 @@ diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kern
  	}
  	return (void *)old_handler;
  }
+diff -Nur linux-2.6.32.orig/drivers/mtd/maps/physmap.c linux-2.6.32/drivers/mtd/maps/physmap.c
+--- linux-2.6.32.orig/drivers/mtd/maps/physmap.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/drivers/mtd/maps/physmap.c	2009-12-16 20:12:01.388510102 +0100
+@@ -80,7 +80,7 @@
+ 					"map_rom",
+ 					NULL };
+ #ifdef CONFIG_MTD_PARTITIONS
+-static const char *part_probe_types[] = { "cmdlinepart", "RedBoot", NULL };
++static const char *part_probe_types[] = { "cmdlinepart", "RedBoot", "ar7part", NULL };
+ #endif
+ 
+ static int physmap_flash_probe(struct platform_device *dev)
+diff -Nur linux-2.6.32.orig/drivers/net/cpmac.c linux-2.6.32/drivers/net/cpmac.c
+--- linux-2.6.32.orig/drivers/net/cpmac.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/drivers/net/cpmac.c	2009-12-16 21:24:20.356422767 +0100
+@@ -1165,7 +1165,7 @@
+ 	priv->dev = dev;
+ 	priv->ring_size = 64;
+ 	priv->msg_enable = netif_msg_init(debug_level, 0xff);
+-	memcpy(dev->dev_addr, pdata->dev_addr, sizeof(dev->dev_addr));
++	memcpy(dev->dev_addr, pdata->dev_addr, ETH_ALEN);
+ 
+ 	snprintf(priv->phy_name, MII_BUS_ID_SIZE, PHY_ID_FMT, mdio_bus_id, phy_id);
+ 
+diff -Nur linux-2.6.32.orig/drivers/serial/8250.c linux-2.6.32/drivers/serial/8250.c
+--- linux-2.6.32.orig/drivers/serial/8250.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/drivers/serial/8250.c	2009-12-16 20:10:58.820421544 +0100
+@@ -2714,7 +2714,11 @@
+ {
+ 	struct uart_8250_port *up = (struct uart_8250_port *)port;
+ 
++#ifdef CONFIG_AR7
++	wait_for_xmitr(up, BOTH_EMPTY);
++#else
+ 	wait_for_xmitr(up, UART_LSR_THRE);
++#endif
+ 	serial_out(up, UART_TX, ch);
+ }
+ 
