@@ -86,6 +86,9 @@ config ADK_mips_rescue
 config ADK_mipsel_rescue
 	tristate
 
+config ADK_ag241
+	tristate
+
 config ADK_wag54g
 	tristate
 
@@ -116,6 +119,7 @@ config ADK_TARGET
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
 	default "wag54g"  if ADK_wag54g
+	default "ag241"  if ADK_ag241
 	default "rescue-x86"  if ADK_x86_rescue
 	default "rescue-x86_64"  if ADK_x86_64_rescue
 	default "rescue-mips"  if ADK_mips_rescue
@@ -218,15 +222,26 @@ config ADK_LINUX_MIKROTIK
 	  http://www.mikrotik.com
 	  http://www.routerboards.com
 
-config ADK_LINUX_MIPS_WAG54G
-	bool "Linksys WAG54G"
+#config ADK_LINUX_MIPS_WAG54G
+#	bool "Linksys WAG54G"
+#	select ADK_KERNEL_NETDEVICES
+#	select ADK_KERNEL_NET_PCI
+#	select ADK_KERNEL_NET_ETHERNET
+#	select ADK_KERNEL_MII
+#	select ADK_wag54g
+#	help
+#	  Linksys WAG54G DSL router with Wireless.
+#	  (Texas Instruments AR7 platform)
+
+config ADK_LINUX_MIPS_AG241
+	bool "Linksys AG241v2"
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
-	select ADK_wag54g
+	select ADK_ag241
 	help
-	  Linksys WAG54G DSL router with Wireless.
+	  Linksys AG241 DSL router.
 	  (Texas Instruments AR7 platform)
 
 config ADK_LINUX_ARM_TOMTOM
@@ -545,6 +560,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "squashfs read-only root filesystem"
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS_WAG54G
 	help
 	  highly compressed read-only filesystem for flash.
@@ -569,6 +585,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_WAG54G || \
+		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_NFS_V3

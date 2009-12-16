@@ -1,0 +1,78 @@
+diff -Nur linux-2.6.32.orig/arch/mips/ar7/platform.c linux-2.6.32/arch/mips/ar7/platform.c
+--- linux-2.6.32.orig/arch/mips/ar7/platform.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/arch/mips/ar7/platform.c	2009-12-15 18:27:15.208942638 +0100
+@@ -509,7 +509,7 @@
+ 
+ 	memset(uart_port, 0, sizeof(struct uart_port) * 2);
+ 
+-	uart_port[0].type = PORT_16550A;
++	uart_port[0].type = PORT_AR7;
+ 	uart_port[0].line = 0;
+ 	uart_port[0].irq = AR7_IRQ_UART0;
+ 	uart_port[0].uartclk = ar7_bus_freq() / 2;
+@@ -524,7 +524,7 @@
+ 
+ 	/* Only TNETD73xx have a second serial port */
+ 	if (ar7_has_second_uart()) {
+-		uart_port[1].type = PORT_16550A;
++		uart_port[1].type = PORT_AR7;
+ 		uart_port[1].line = 1;
+ 		uart_port[1].irq = AR7_IRQ_UART1;
+ 		uart_port[1].uartclk = ar7_bus_freq() / 2;
+diff -Nur linux-2.6.32.orig/arch/mips/include/asm/page.h linux-2.6.32/arch/mips/include/asm/page.h
+--- linux-2.6.32.orig/arch/mips/include/asm/page.h	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/arch/mips/include/asm/page.h	2009-12-14 22:03:51.157752807 +0100
+@@ -200,8 +200,11 @@
+ #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
+ 				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
+ 
+-#define UNCAC_ADDR(addr)	((addr) - PAGE_OFFSET + UNCAC_BASE)
+-#define CAC_ADDR(addr)		((addr) - UNCAC_BASE + PAGE_OFFSET)
++#define UNCAC_ADDR(addr)       ((addr) - PAGE_OFFSET + UNCAC_BASE +    \
++                                PHYS_OFFSET)
++#define CAC_ADDR(addr)         ((addr) - UNCAC_BASE + PAGE_OFFSET -    \
++                                PHYS_OFFSET)
++
+ 
+ #include <asm-generic/memory_model.h>
+ #include <asm-generic/getorder.h>
+diff -Nur linux-2.6.32.orig/arch/mips/Kconfig linux-2.6.32/arch/mips/Kconfig
+--- linux-2.6.32.orig/arch/mips/Kconfig	2009-12-14 21:11:40.737752912 +0100
++++ linux-2.6.32/arch/mips/Kconfig	2009-12-14 21:00:48.533738664 +0100
+@@ -30,7 +30,6 @@
+ 	select CEVT_R4K
+ 	select CSRC_R4K
+ 	select IRQ_CPU
+-	select NO_EXCEPT_FILL
+ 	select SWAP_IO_SPACE
+ 	select SYS_HAS_CPU_MIPS32_R1
+ 	select SYS_HAS_EARLY_PRINTK
+diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kernel/traps.c
+--- linux-2.6.32.orig/arch/mips/kernel/traps.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/arch/mips/kernel/traps.c	2009-12-14 22:25:58.329754617 +0100
+@@ -1255,9 +1255,22 @@
+ 
+ 	exception_handlers[n] = handler;
+ 	if (n == 0 && cpu_has_divec) {
+-		*(u32 *)(ebase + 0x200) = 0x08000000 |
+-					  (0x03ffffff & (handler >> 2));
+-		local_flush_icache_range(ebase + 0x200, ebase + 0x204);
++              if ((handler ^ (ebase + 4)) & 0xfc000000) {
++                      /* lui k0, 0x0000 */
++                      *(u32 *)(ebase + 0x200) = 0x3c1a0000 | (handler >> 16);
++                      /* ori k0, 0x0000 */
++                      *(u32 *)(ebase + 0x204) =
++                                      0x375a0000 | (handler & 0xffff);
++                      /* jr k0 */
++                      *(u32 *)(ebase + 0x208) = 0x03400008;
++                      /* nop */
++                      *(u32 *)(ebase + 0x20C) = 0x00000000;
++                      flush_icache_range(ebase + 0x200, ebase + 0x210);
++              } else {
++                      *(u32 *)(ebase + 0x200) =
++                              0x08000000 | (0x03ffffff & (handler >> 2));
++                      flush_icache_range(ebase + 0x200, ebase + 0x204);
++              }
+ 	}
+ 	return (void *)old_handler;
+ }
