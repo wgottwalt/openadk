@@ -4,13 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		linux-atm
-PKG_VERSION:=		2.5.0
+PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0b45a0e801fac7093ce4b0cadf419965
-PKG_DESCR:=		ATM library for linux
+PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
+PKG_DESCR:=		ATM library and tools for Linux
 PKG_SECTION:=		libs
 PKG_URL:=		http://linux-atm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 PKG_DESCR_1:=		br2684ctl
 PKG_DEPENDS_1:=		libatm

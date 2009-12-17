@@ -557,7 +557,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
-	bool "squashfs read-only root filesystem"
+	bool "Compressed read-only root filesystem (squashfs)"
+	select ADK_KERNEL_SQUASHFS
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_MIPS_AG241 || \

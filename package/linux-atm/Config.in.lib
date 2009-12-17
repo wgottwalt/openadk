@@ -1,0 +1,10 @@
+config ADK_PACKAGE_LIBATM
+	prompt "libatm............................ ATM Library for Linux"
+	tristate
+	default n
+	select ADK_COMPILE_LINUX_ATM
+	select ADK_KPACKAGE_KMOD_ATM
+	depends on !ADK_HOST_FREEBSD
+	help
+	  ATM Library for linux.
+

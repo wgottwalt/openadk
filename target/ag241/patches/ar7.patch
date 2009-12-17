@@ -76,6 +76,40 @@ diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kern
  	}
  	return (void *)old_handler;
  }
+diff -Nur linux-2.6.32.orig/drivers/mtd/ar7part.c linux-2.6.32/drivers/mtd/ar7part.c
+--- linux-2.6.32.orig/drivers/mtd/ar7part.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/drivers/mtd/ar7part.c	2009-12-17 10:51:32.044434005 +0100
+@@ -28,7 +28,7 @@
+ #include <linux/bootmem.h>
+ #include <linux/magic.h>
+ 
+-#define AR7_PARTS	4
++#define AR7_PARTS	5
+ #define ROOT_OFFSET	0xe0000
+ 
+ #define LOADER_MAGIC1	le32_to_cpu(0xfeedfa42)
+@@ -122,14 +122,19 @@
+ 
+ 	ar7_parts[2].name = "linux";
+ 	ar7_parts[2].offset = pre_size;
+-	ar7_parts[2].size = master->size - pre_size - post_size;
++	ar7_parts[2].size = master->size - pre_size - post_size - 2*master->erasesize;
+ 	ar7_parts[2].mask_flags = 0;
+ 
+ 	ar7_parts[3].name = "rootfs";
+ 	ar7_parts[3].offset = root_offset;
+-	ar7_parts[3].size = master->size - root_offset - post_size;
++	ar7_parts[3].size = master->size - root_offset - post_size - 2*master->erasesize;
+ 	ar7_parts[3].mask_flags = 0;
+ 
++	ar7_parts[4].name = "cfgfs";
++	ar7_parts[4].offset = master->size - 2*master->erasesize;
++	ar7_parts[4].size = 2*master->erasesize;
++	ar7_parts[4].mask_flags = 0;
++
+ 	*pparts = ar7_parts;
+ 	return AR7_PARTS;
+ }
 diff -Nur linux-2.6.32.orig/drivers/mtd/maps/physmap.c linux-2.6.32/drivers/mtd/maps/physmap.c
 --- linux-2.6.32.orig/drivers/mtd/maps/physmap.c	2009-12-03 04:51:21.000000000 +0100
 +++ linux-2.6.32/drivers/mtd/maps/physmap.c	2009-12-16 20:12:01.388510102 +0100

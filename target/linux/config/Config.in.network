@@ -40,23 +40,23 @@ config ADK_KERNEL_LLC
 	tristate
 	default n
 
-#config ADK_KPACKAGE_KMOD_ATM
-#	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
-#	tristate
-#	default n
-#	help
-#	 ATM is a high-speed networking technology for Local Area Networks
-#	 and Wide Area Networks.  It uses a fixed packet size and is
-#	 connection oriented, allowing for the negotiation of minimum
-#	 bandwidth requirements.
-#
-#	 In order to participate in an ATM network, your Linux box needs an
-#	 ATM networking card. If you have that, say Y here and to the driver
-#	 of your ATM card below.
-#
-#	 Note that you need a set of user-space programs to actually make use
-#	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
-#	 further details.
+config ADK_KPACKAGE_KMOD_ATM
+	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
+	tristate
+	default n
+	help
+	 ATM is a high-speed networking technology for Local Area Networks
+	 and Wide Area Networks.  It uses a fixed packet size and is
+	 connection oriented, allowing for the negotiation of minimum
+	 bandwidth requirements.
+
+	 In order to participate in an ATM network, your Linux box needs an
+	 ATM networking card. If you have that, say Y here and to the driver
+	 of your ATM card below.
+
+	 Note that you need a set of user-space programs to actually make use
+	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
+	 further details.
 
 config ADK_KPACKAGE_KMOD_BRIDGE
 	prompt "kmod-net-bridge................... 802.1d Ethernet Bridging"
