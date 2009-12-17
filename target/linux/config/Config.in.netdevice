@@ -245,4 +245,11 @@ config ADK_KERNEL_RT2X00_DEBUG
 	help
 
 endmenu
+
+menu "ATM driver support"
+
+source package/sangam-atm/Config.in
+
+endmenu
+
 endmenu

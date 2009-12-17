@@ -4,13 +4,9 @@
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/buildhlp.mk
+include ${TOPDIR}/mk/kernel-vars.mk
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
-
-KERNEL_MAKE_OPTS:=	-C "${LINUX_DIR}" V=1
-ifneq ($(ADK_NATIVE),y)
-KERNEL_MAKE_OPTS+=	CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)"
-endif
 
 $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/$(ADK_TARGET)-kernel-patch

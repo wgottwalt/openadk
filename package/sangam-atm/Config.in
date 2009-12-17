@@ -1,0 +1,23 @@
+config ADK_PACKAGE_KMOD_SANGAM_ATM
+	prompt "kmod-sangam-atm.......................... Driver for TI AR7 DSL modem"
+	tristate
+	select ADK_KPACKAGE_KMOD_FW_LOADER
+	default n
+	help
+	  ATM driver for AR7 DSL modem.
+
+choice
+prompt "Firmware type"
+depends on ADK_PACKAGE_KMOD_SANGAM_ATM
+
+config ADK_PACKAGE_SANGAM_ATM_ANNEX_A
+	prompt "Annex A, ADSL over POTS"
+	boolean
+	help
+
+config ADK_PACKAGE_SANGAM_ATM_ANNEX_B
+	prompt "Annex B, ADSL over ISDN"
+	boolean
+	help
+
+endchoice

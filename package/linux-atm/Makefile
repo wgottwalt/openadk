@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		linux-atm
 PKG_VERSION:=		2.5.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		ATM library and tools for Linux
 PKG_SECTION:=		libs
@@ -29,7 +29,7 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBATM}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libatm.so.1 ${IDIR_LIBATM}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libatm.so* ${IDIR_LIBATM}/usr/lib
 	${INSTALL_DIR} ${IDIR_BR2684CTL}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/br2684ctl ${IDIR_BR2684CTL}/usr/sbin
 
