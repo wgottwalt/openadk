@@ -31,14 +31,17 @@ kernel-install: tools-compile
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
-	${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} $(BIN_DIR)/$(ROOTFSSQUASHFS)
-	@echo
-	@echo The image file is $(ROOTFSSQUASHFS)
-	@echo 'You can flash the image via tftp:'
-	@echo 'tftp 192.168.1.1'
-	@echo 'tftp> binary'
-	@echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
-	@echo 'Login as user root with password linux123 via ssh or console'
+	@if [ $$(stat --format=%s ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 4063233 ];then \
+		echo 'Image is too big!'; \
+	else \
+		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} $(BIN_DIR)/$(ROOTFSSQUASHFS); \
+		echo The image file is $(ROOTFSSQUASHFS); \
+		echo 'You can flash the image via tftp:'; \
+		echo 'tftp 192.168.1.1'; \
+		echo 'tftp> binary'; \
+		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"; \
+		echo 'Login as user root with password linux123 via ssh or console'; \
+	fi
 endif
 
 ifeq ($(FS),nfsroot)
