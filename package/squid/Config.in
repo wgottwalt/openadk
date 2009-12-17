@@ -32,7 +32,8 @@ config ADK_COMPILE_SQUID_WITH_UCLIBCXX
 
 endchoice
 
-menu "squid............................. proxy and web cache modules"
+menu "squid-modules...................... proxy and web cache modules"
+depends on ADK_PACKAGE_SQUID
 
 config ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM
 	prompt "squid-mod-basic-auth-getpwnam....... getpwnam basic authentication helper"
