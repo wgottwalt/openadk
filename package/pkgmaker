@@ -1,0 +1,29 @@
+export TOPDIR=$(realpath ..)
+if gmake --help >/dev/null 2>&1; then
+	export GMAKE=gmake
+else
+	export GMAKE=make
+fi
+
+for subdir in bash; do
+	cd $subdir
+	pn=$($GMAKE show=PKG_NAME)
+	typeset -u pnu=$pn
+	pd=$($GMAKE show=PKG_DESCR)
+	ph=$($GMAKE show=PKG_URL)
+	(print "config ADK_PACKAGE_$pnu"
+	pnf=$pn
+	while (( ${#pnf} < 34 )); do
+		pnf=$pnf.
+	done
+	print "\tprompt \"$pnf ${pd:-$pn}\""
+	print \\ttristate
+	print \\tdefault n
+	if [[ -n $pd$ph ]]; then
+		print \\thelp
+		[[ -n $pd ]] && print "\t  $pd"
+		[[ -n $pd && -n $ph ]] && print '\t  '
+		[[ -n $ph ]] && print "\t  $ph"
+	fi
+	) >Config.in
+done
