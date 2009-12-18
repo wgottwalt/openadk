@@ -42,3 +42,9 @@ HOSTLDFLAGS?=
 TARGET_CFLAGS:=		$(strip -fwrapv -fno-ident ${TARGET_CFLAGS})
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
+
+ifneq (${show},)
+.DEFAULT_GOAL:=		show
+show:
+	@$(info ${${show}})
+endif
