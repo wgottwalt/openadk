@@ -10,6 +10,7 @@ PKG_MD5SUM:=		3b27365772d918050b2251d98a9c7c82
 PKG_DESCR:=		TFTP client
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libreadline libncurses
+PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://freshmeat.net/projects/atftp
 PKG_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
 PKG_DESCR_1:=		TFTP server

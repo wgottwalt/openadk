@@ -8,6 +8,7 @@ PKG_VERSION:=		0.9.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ca1e22d98081a03a33c2a0b8684eb192
 PKG_DESCR:=		Apache Portable Runtime library
+PKG_BUILDDEP:=		expat apr
 PKG_SECTION:=		libs
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
