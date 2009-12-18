@@ -15,6 +15,9 @@ PKG_SITES=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.cpio.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
+PKG_FLAVOURS=		FULL
+PKGFD_FULL=		Include all features
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MKSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

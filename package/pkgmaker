@@ -5,10 +5,11 @@ else
 	export GMAKE=make
 fi
 
-for subdir in bash bc; do
+for subdir in bash bc mksh; do
 	cd $subdir
 	pn=$($GMAKE show=PKG_NAME)
 	pa=$($GMAKE show=ALL_PKGOPTS)
+	pfl=$($GMAKE show=PKG_FLAVOURS)
 	typeset -u pnu=$pn
 	pd=$($GMAKE show=PKG_DESCR)
 	ph=$($GMAKE show=PKG_URL)
@@ -42,6 +43,17 @@ for subdir in bash bc; do
 			[[ -n $pd && -n $ph ]] && print '\t  '
 			[[ -n $ph ]] && print "\t  $ph"
 		fi
+	done
+
+	for pf in $pfl; do
+		pfd=$($GMAKE show=PKGFD_$pf)
+		print
+		print config ADK_PACKAGE_${pnu}_$pf
+		print "\tbool \"${pfd:-flavour ADK_PACKAGE_${pnu}_$pf}\""
+		print \\tdefault n
+		print \\tdepends on ADK_COMPILE_$pnu
+		print \\thelp
+		print "\t  flavour ADK_PACKAGE_${pnu}_$pf"
 	done
 	) >Config.in
 	cd ..
