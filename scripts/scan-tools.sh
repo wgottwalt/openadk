@@ -39,6 +39,9 @@ Linux)
 FreeBSD)
 	# supported with no extra quirks at the moment
 	;;
+MirBSD)
+	# supported with no extra quirks at the moment
+	;;
 CYG*)
 	# mkdir /openadk 
 	# mount -b -s -o managed "C:/openadk" "/openadk"

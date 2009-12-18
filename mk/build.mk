@@ -231,6 +231,9 @@ endif
 ifeq (${OStype},FreeBSD)
 	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/.defconfig
 endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \
