@@ -234,6 +234,12 @@ endif
 ifeq (${OStype},MirBSD)
 	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/.defconfig
 endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/.defconfig
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \
@@ -262,6 +268,15 @@ ifeq (${OStype},Linux)
 endif
 ifeq (${OStype},FreeBSD)
 	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
