@@ -5,25 +5,44 @@ else
 	export GMAKE=make
 fi
 
-for subdir in bash; do
+for subdir in bash bc; do
 	cd $subdir
 	pn=$($GMAKE show=PKG_NAME)
+	pa=$($GMAKE show=ALL_PKGOPTS)
 	typeset -u pnu=$pn
 	pd=$($GMAKE show=PKG_DESCR)
 	ph=$($GMAKE show=PKG_URL)
-	(print "config ADK_PACKAGE_$pnu"
-	pnf=$pn
-	while (( ${#pnf} < 34 )); do
-		pnf=$pnf.
-	done
-	print "\tprompt \"$pnf ${pd:-$pn}\""
+
+	(
+	print "config ADK_COMPILE_$pnu"
 	print \\ttristate
+	print -n \\tdepends on
+	sp=' '
+	for xu in $pa; do
+		print -n "${sp}ADK_PACKAGE_$xu"
+		sp=' || '
+	done
+	print
 	print \\tdefault n
-	if [[ -n $pd$ph ]]; then
-		print \\thelp
-		[[ -n $pd ]] && print "\t  $pd"
-		[[ -n $pd && -n $ph ]] && print '\t  '
-		[[ -n $ph ]] && print "\t  $ph"
-	fi
+
+	for xu in $pa; do
+		x=$($GMAKE show=PKGNAME_$xu)
+		print \\nconfig ADK_PACKAGE_$xu
+		xf=$x
+		while (( ${#xf} < 34 )); do
+			xf=$xf.
+		done
+		print "\tprompt \"$xf ${pd:-$pn}\""
+		print \\ttristate
+		print \\tdefault n
+		print \\tselect ADK_COMPILE_$pnu
+		if [[ -n $pd$ph ]]; then
+			print \\thelp
+			[[ -n $pd ]] && print "\t  $pd"
+			[[ -n $pd && -n $ph ]] && print '\t  '
+			[[ -n $ph ]] && print "\t  $ph"
+		fi
+	done
 	) >Config.in
+	cd ..
 done
