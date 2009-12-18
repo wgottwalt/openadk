@@ -104,11 +104,11 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
-if ! which cpp >/dev/null 2>&1; then
-	echo You must install a C preprocessor to continue.
-	echo
-	out=1
-fi
+#if ! which cpp >/dev/null 2>&1; then
+#	echo You must install a C preprocessor to continue.
+#	echo
+#	out=1
+#fi
 
 if ! which tar >/dev/null 2>&1; then
 	echo You must install GNU tar to continue.
