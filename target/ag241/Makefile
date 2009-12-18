@@ -31,10 +31,10 @@ kernel-install: tools-compile
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
-	@if [ $$(stat --format=%s ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 4063233 ];then \
+	@if [ $$(stat --format=%s ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
 		echo 'Image is too big!'; \
 	else \
-		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} $(BIN_DIR)/$(ROOTFSSQUASHFS); \
+		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${BIN_DIR}/${ROOTFSSQUASHFS}; \
 		echo The image file is $(ROOTFSSQUASHFS); \
 		echo 'You can flash the image via tftp:'; \
 		echo 'tftp 192.168.1.1'; \

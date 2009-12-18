@@ -39,6 +39,7 @@ XAKE_FLAGS+=		CC="${TARGET_CC}" \
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOE}+=		mod-pppoe-install
+SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOA}+=		mod-pppoa-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_RADIUS}+=		mod-radius-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_CHAT}+=		mod-chat-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPDUMP}+=		mod-pppdump-install
@@ -80,6 +81,11 @@ mod-pppoe-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/rp-pppoe.so \
 		${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
+
+mod-pppoa-install:
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/pppoatm.so \
+		${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
 
 mod-chat-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_CHAT}/usr/sbin

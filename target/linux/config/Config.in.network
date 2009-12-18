@@ -193,14 +193,14 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	 See http://pptpclient.sourceforge.net/ for information on
 	 configuring PPTP clients and servers to utilize this method.
 
-#config ADK_KPACKAGE_KMOD_PPPOATM
-#	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
-#	tristate
-#	default n
-#	depends on ADK_KPACKAGE_KMOD_PPP
-#	select ADK_KPACKAGE_KMOD_ATM
-#	help
-#	  Support for PPP over ATM
+config ADK_KPACKAGE_KMOD_PPPOATM
+	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PPP
+	select ADK_KPACKAGE_KMOD_ATM
+	help
+	  Support for PPP over ATM
 
 config ADK_KPACKAGE_KMOD_PPPOE
 	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"

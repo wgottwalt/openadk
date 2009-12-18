@@ -1,5 +1,5 @@
 --- sangam-atm-1.0.orig/tn7dsl.c	2007-01-04 09:04:14.000000000 +0100
-+++ sangam-atm-1.0/tn7dsl.c	2009-12-17 19:22:19.372420289 +0100
++++ sangam-atm-1.0/tn7dsl.c	2009-12-17 23:40:56.457448616 +0100
 @@ -94,7 +94,6 @@
  *  1/02/07  JZ     CQ11054: Data Precision and Range Changes for TR-069 Conformance
  *  UR8_MERGE_END   CQ11054*
@@ -82,7 +82,17 @@
  
  //kthread_t overlay_thread;
  /* end of module wide declars */
-@@ -323,6 +353,14 @@ static int tn7dsl_proc_snr_print (char *
+@@ -309,8 +339,7 @@ static void tn7dsl_chng_modulation(void*
+ static unsigned int tn7dsl_set_modulation(void* data, int flag);
+ static void tn7dsl_ctrl_fineGain(int value);
+ static void tn7dsl_set_fineGainValue(int value);
+-static int dslmod_sysctl (ctl_table * ctl, int write, struct file *filp,
+-                          void *buffer, size_t * lenp);
++static int dslmod_sysctl (ctl_table * ctl, int write, void *buffer, size_t * lenp, loff_t *ppos);
+ static void tn7dsl_register_dslss_led(void);
+ void tn7dsl_dslmod_sysctl_register(void);
+ void tn7dsl_dslmod_sysctl_unregister(void);
+@@ -323,6 +352,14 @@ static int tn7dsl_proc_snr_print (char *
  #define gDot1(a) ((a>0)?(a%10):((-a)%10))
  //  UR8_MERGE_END   CQ11054*
  
@@ -97,7 +107,7 @@
  int os_atoi(const char *pStr)
  {
    int MulNeg = (*pStr == '-' ? -1 : 1);
-@@ -359,39 +397,6 @@ void dprintf (int uDbgLevel, char *szFmt
+@@ -359,39 +396,6 @@ void dprintf (int uDbgLevel, char *szFmt
  #endif
  }
  
@@ -137,7 +147,7 @@
  // * UR8_MERGE_START CQ10640   Jack Zhang
  int tn7dsl_dump_dsp_memory(char *input_str) //cph99
    {
-@@ -441,101 +446,79 @@ unsigned int shim_osGetCpuFrequency(void
+@@ -441,101 +445,79 @@ unsigned int shim_osGetCpuFrequency(void
    return CpuFrequency;
  }
  
@@ -302,7 +312,15 @@
  }
  
  int shim_osLoadDebugFWImage(unsigned char *ptr)
-@@ -2845,98 +2828,82 @@ static int tn7dsl_set_dsl(void)
+@@ -2834,7 +2816,6 @@ static int tn7dsl_set_dsl(void)
+   int value;
+   int i, offset[2]={4,11},oamFeature=0;
+   char tmp[4];
+-  char dspVer[10];
+ 
+   // OAM Feature Configuration
+   dslhal_api_dspInterfaceRead (pIhw, (unsigned int) pIhw->pmainAddr, 2,
+@@ -2845,98 +2826,82 @@ static int tn7dsl_set_dsl(void)
                                  (unsigned int *) &offset,
                                  (unsigned char *) &oamFeature, 4);
  
@@ -436,7 +454,7 @@
  
      tn7dsl_generic_read(2, offset);
      dslReg &= dslhal_support_byteSwap32(0xFFFFFF00);
-@@ -2954,46 +2921,47 @@ static int tn7dsl_set_dsl(void)
+@@ -2954,46 +2919,47 @@ static int tn7dsl_set_dsl(void)
    // maximum bits per carrier
    ptr = NULL;
    ptr = prom_getenv("maximum_bits_per_carrier");
@@ -495,7 +513,7 @@
      for(i=0;i<8;i++)
      {
        tmp[0]=ptr[i*2];
-@@ -3018,26 +2986,26 @@ static int tn7dsl_set_dsl(void)
+@@ -3018,26 +2984,26 @@ static int tn7dsl_set_dsl(void)
    }
    ptr = NULL;
    ptr = prom_getenv("eoc_vendor_revision");
@@ -528,7 +546,7 @@
    }
  
    return 0;
-@@ -3064,6 +3032,7 @@ int tn7dsl_init(void *priv)
+@@ -3064,6 +3030,7 @@ int tn7dsl_init(void *priv)
    int high_precision_selected = 0;  
  //  UR8_MERGE_END   CQ11054*
  
@@ -536,7 +554,7 @@
    /*
     * start dsl
     */
-@@ -3081,7 +3050,7 @@ int tn7dsl_init(void *priv)
+@@ -3081,7 +3048,7 @@ int tn7dsl_init(void *priv)
     * backward compatibility.
     */
    cp = prom_getenv("DSL_BIT_TMODE");
@@ -545,7 +563,7 @@
    {
      printk("%s : env var DSL_BIT_TMODE is set\n", __FUNCTION__);
      /*
-@@ -3110,9 +3079,9 @@ int tn7dsl_init(void *priv)
+@@ -3110,9 +3077,9 @@ int tn7dsl_init(void *priv)
  
  //  UR8_MERGE_START CQ11054   Jack Zhang
    cp = prom_getenv("high_precision");
@@ -557,21 +575,40 @@
    }
    if ( high_precision_selected)
    {
-@@ -3442,7 +3411,7 @@ static int dslmod_sysctl(ctl_table *ctl,
+@@ -3419,8 +3386,7 @@ unsigned int tn7dsl_get_memory(unsigned 
+ 
+ 
+ 
+-static int dslmod_sysctl(ctl_table *ctl, int write, struct file * filp,
+-      void *buffer, size_t *lenp)
++static int dslmod_sysctl(ctl_table *ctl, int write, void *buffer, size_t *lenp, loff_t *ppos)
+ {
+   char *ptr;
+   int ret, len = 0;
+@@ -3432,7 +3398,7 @@ static int dslmod_sysctl(ctl_table *ctl,
+   char mod_req[16] = { '\t' };
+   char fst_byt;
+ 
+-  if (!*lenp || (filp->f_pos && !write))
++  if (!*lenp || (!*ppos && !write))
+   {
+     *lenp = 0;
+     return 0;
+@@ -3442,7 +3408,7 @@ static int dslmod_sysctl(ctl_table *ctl,
     */
    if(write)
      {
 -    ret = proc_dostring(ctl, write, filp, buffer, lenp);
-+    ret = proc_dostring(ctl, write, buffer, lenp, filp);
++    ret = proc_dostring(ctl, write, buffer, lenp, ppos);
  
      switch (ctl->ctl_name)
        {
-@@ -3528,14 +3497,14 @@ static int dslmod_sysctl(ctl_table *ctl,
+@@ -3528,14 +3494,14 @@ static int dslmod_sysctl(ctl_table *ctl,
    else
      {
      len += sprintf(info+len, mod_req);
 -    ret = proc_dostring(ctl, write, filp, buffer, lenp);
-+    ret = proc_dostring(ctl, write, buffer, lenp, filp);
++    ret = proc_dostring(ctl, write, buffer, lenp, ppos);
      }
    return ret;
  }
@@ -583,7 +620,7 @@
    ,
    {0}
    };
-@@ -3558,8 +3527,7 @@ void tn7dsl_dslmod_sysctl_register(void)
+@@ -3558,8 +3524,7 @@ void tn7dsl_dslmod_sysctl_register(void)
    if (initialized == 1)
      return;
  
@@ -593,7 +630,7 @@
  
    /*
     * set the defaults
-@@ -4821,4 +4789,4 @@ int tn7dsl_proc_PMDus(char* buf, char **
+@@ -4821,4 +4786,4 @@ int tn7dsl_proc_PMDus(char* buf, char **
  }
  #endif //NO_ADV_STATS
  #endif //TR69_PMD_IN
