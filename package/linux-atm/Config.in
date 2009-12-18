@@ -8,6 +8,7 @@ config ADK_PACKAGE_BR2684CTL
 	tristate
 	default n
 	select ADK_PACKAGE_LIBATM
+	select ADK_KPACKAGE_KMOD_ATM_BR2684
 	select ADK_COMPILE_LINUX_ATM
 	depends on !ADK_HOST_FREEBSD
 	help

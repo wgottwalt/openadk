@@ -58,6 +58,12 @@ config ADK_KPACKAGE_KMOD_ATM
 	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
 	 further details.
 
+config ADK_KPACKAGE_KMOD_ATM_BR2684
+	prompt "kmod-atm-br2684................... BR2684 ATM module"
+	tristate
+	default n
+	help
+
 config ADK_KPACKAGE_KMOD_BRIDGE
 	prompt "kmod-net-bridge................... 802.1d Ethernet Bridging"
 	tristate
