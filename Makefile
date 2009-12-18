@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-CC=		gcc
+CC?=		gcc
 GMAKE?=		$(PWD)/scripts/make
 GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
 GMAKE_INV=	${GMAKE_FMK} --no-print-directory
