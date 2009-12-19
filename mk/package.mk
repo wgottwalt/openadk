@@ -139,6 +139,7 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 define PKG_template
 ALL_PKGOPTS+=	$(1)
 PKGNAME_$(1)=	$(2)
+PKGDEPS_$(1)=	$(4)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)

@@ -1,9 +1,0 @@
-config ADK_PACKAGE_KMOD_EM28XX
-	prompt "kmod-em28xx...................... EM28xx driver"
-	tristate
-	default n
-	select ADK_KPACKAGE_KMOD_VIDEO_DEV
-	select ADK_KPACKAGE_KMOD_VIDEO_V4L1
-	help
-	  Driver for EM28xx based TV cards
-	  
