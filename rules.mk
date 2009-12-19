@@ -26,6 +26,7 @@ endif
 
 # Strip off the annoying quoting
 ADK_TARGET:=		$(strip $(subst ",, $(ADK_TARGET)))
+ADK_LIBC:=		$(strip $(subst ",, $(ADK_LIBC)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
 ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
 

@@ -128,6 +128,22 @@ config ADK_TARGET
 	default "tomtom"  if ADK_tomtom
 	default "g1"  if ADK_g1
 
+# c library
+config ADK_uclibc
+	tristate
+
+config ADK_eglibc
+	tristate
+
+config ADK_glibc
+	tristate
+
+config ADK_LIBC
+	string
+	default "uclibc"  if ADK_uclibc
+	default "eglibc"  if ADK_eglibc
+	default "glibc"  if ADK_glibc
+
 menu "Target system"
 
 choice
@@ -472,11 +488,13 @@ config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
 	depends on !ADK_LINUX_MIPS64_LEMOTE
+	select ADK_uclibc
 	help
  	 http://uclibc.org
 
 config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
+	select ADK_eglibc
 	depends on ADK_LINUX_X86_QEMU || \
 		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
@@ -500,6 +518,7 @@ config ADK_TARGET_LIB_EGLIBC
 
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
+	select ADK_glibc
 	depends on ADK_LINUX_X86_QEMU || \
 		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
@@ -770,6 +789,4 @@ config ADK_TARGET_PACKAGE_RPM
 
 endchoice
 
-
 endmenu
-

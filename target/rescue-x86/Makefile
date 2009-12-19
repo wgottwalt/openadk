@@ -8,11 +8,12 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
+		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

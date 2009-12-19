@@ -48,10 +48,10 @@ image-prepare-post:
 	chmod 4511 ${TARGET_DIR}/bin/busybox
 	chmod 1777 ${TARGET_DIR}/tmp
 
-INITRAMFS=	${ADK_TARGET}-${ARCH}-${FS}
-ROOTFSSQUASHFS=	${ADK_TARGET}-${ARCH}-${FS}.img
-ROOTFSTARBALL=	${ADK_TARGET}-${ARCH}-${FS}.tar.gz
-INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ARCH}-${FS}.cpio
+INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
+ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
+ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
+INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
@@ -68,7 +68,8 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	PATH='${TARGET_PATH}' \
 	mksquashfs ${TARGET_DIR} ${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-	cat ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel ${BUILD_DIR}/root.squashfs > \
+	cat ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel \
+		${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
 	# padding of images is required, foxboard only?
 	#dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
