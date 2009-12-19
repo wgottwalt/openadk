@@ -19,11 +19,11 @@ PKG_SITES=		${MASTER_SITE_SOURCEFORGE:=dav/}
 include ${TOPDIR}/mk/package.mk
 
 ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)
-PKG_DEPENDS:=			fuse-utils, kmod-fuse, libfuse, libiconv, neon
+PKG_DEPENDS:=			fuse-utils kmod-fuse libfuse libiconv neon
 else ifeq (${ADK_PACKAGE_DAVFS2_CODA},y)
-PKG_DEPENDS:=			kmod-fs-coda, libiconv, neon
+PKG_DEPENDS:=			kmod-fs-coda libiconv neon
 else
-PKG_DEPENDS:=			kmod-fs-coda, fuse-utils, kmod-fuse, libfuse, libiconv, neon
+PKG_DEPENDS:=			kmod-fs-coda fuse-utils kmod-fuse libfuse libiconv neon
 endif
 
 $(eval $(call PKG_template,DAVFS2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
