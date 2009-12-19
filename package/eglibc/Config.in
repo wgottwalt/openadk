@@ -9,7 +9,7 @@ config ADK_PACKAGE_EGLIBC
 
 config ADK_PACKAGE_EGLIBC_DEV
 	prompt "eglibc-dev........................... development files"
-	bool
+	tristate
 	default n
 	depends on ADK_TARGET_LIB_EGLIBC
 	help
