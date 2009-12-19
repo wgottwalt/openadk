@@ -11,12 +11,13 @@ for subdir in alsa-lib bash bc mksh; do
 	pn=$($GMAKE show=PKG_NAME)		# pn: package name
 	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
 	pfl=$($GMAKE show=PKG_FLAVOURS)		# pfl: all package flavours
-	typeset -u pnu=${pn//-/_}		# pnu: package name uppercase
+	typeset -u dnu=${subdir//-/_}		# dnu: subdir name uppercase
+	dnu=${dnu//+/X}
 	pd=$($GMAKE show=PKG_DESCR)		# pd: package description
 	ph=$($GMAKE show=PKG_URL)		# ph: package homepage
 
 	(
-	print "config ADK_COMPILE_$pnu"
+	print "config ADK_COMPILE_$dnu"
 	print \\ttristate
 	print -n \\tdepends on
 	sp=' '					# local sp: space (or ' || ')
@@ -37,7 +38,7 @@ for subdir in alsa-lib bash bc mksh; do
 		print "\tprompt \"$xf ${pd:-$pn}\""
 		print \\ttristate
 		print \\tdefault n
-		print \\tselect ADK_COMPILE_$pnu
+		print \\tselect ADK_COMPILE_$dnu
 		if [[ -n $pd$ph ]]; then
 			print \\thelp
 			[[ -n $pd ]] && print "\t  $pd"
@@ -49,12 +50,12 @@ for subdir in alsa-lib bash bc mksh; do
 	for pf in $pfl; do			# pf: package flavour
 		pfd=$($GMAKE show=PKGFD_$pf)
 		print
-		print config ADK_PACKAGE_${pnu}_$pf
-		print "\tbool \"${pfd:-flavour ADK_PACKAGE_${pnu}_$pf}\""
+		print config ADK_PACKAGE_${dnu}_$pf
+		print "\tbool \"${pfd:-flavour ADK_PACKAGE_${dnu}_$pf}\""
 		print \\tdefault n
-		print \\tdepends on ADK_COMPILE_$pnu
+		print \\tdepends on ADK_COMPILE_$dnu
 		print \\thelp
-		print "\t  flavour ADK_PACKAGE_${pnu}_$pf"
+		print "\t  flavour ADK_PACKAGE_${dnu}_$pf"
 	done
 	) >Config.in
 	cd ..

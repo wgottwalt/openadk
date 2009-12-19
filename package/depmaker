@@ -8,6 +8,14 @@ fi
 
 for subdir in */Makefile; do
 	subdir=${subdir%/*}
+	case $subdir {
+	(@(?(e)g|uc|)libc|libpthread|uclibc++) ;;
+	(*)
+		typeset -u dnu=${subdir//-/_}
+		dnu=${dnu//+/X}
+		print "package-\$(ADK_COMPILE_${dnu}) += $subdir"
+		;;
+	}
 	cd $subdir
 	deps=$($GMAKE show=PKG_BUILDDEP)
 	cd ..
