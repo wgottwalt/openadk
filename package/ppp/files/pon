@@ -1,8 +1,2 @@
 #!/bin/sh
-insmod slhc.o 2>/dev/null
-insmod ppp_generic.o 2>/dev/null
-insmod pppox.o 2>/dev/null
-insmod pppoe.o 2>/dev/null
-insmod ppp_async.o 2>/dev/null
-
 exec /usr/sbin/pppd call $@ >/dev/null 2>&1

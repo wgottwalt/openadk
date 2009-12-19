@@ -1,0 +1,119 @@
+#!/bin/sh
+
+[ "$METHOD" == "ppp" ] || exit 0
+[ "$IF_USE_TEMPLATE" ] || exit 0
+
+[ -d /var/lock ] || mkdir /var/lock
+
+[ -f "/etc/ppp/templates/$IF_USE_TEMPLATE" ] || {
+	logger "$0: requested template '/etc/ppp/templates/$IF_USE_TEMPLATE' not found."
+	exit 1
+}
+
+IDLEOPTIONS="persist\nmaxfail 0"
+if [ "$IF_PPP_IDLETIME" -gt 0 ]; then
+	IDLEOTPIONS="idletime $IF_PPP_IDLETIME"
+fi
+
+if [ "$IF_PPP_MTU" -gt 0 ] ; then 
+	NETWORKOPTIONS="mtu $IF_PPP_MTU\nmru $IF_PPP_MTU"
+fi
+
+REPLACE="
+	s,#IDLEOPTIONS#,$IDLEOPTIONS,
+	s,#ENCAPS#,$IF_PPP_ENCAPS,
+	s,#VPI#,$IF_PPP_VPI,
+	s,#VCI#,$IF_PPP_VCI,
+	s,#USERNAME#,$IF_PPP_USERNAME,
+	s,#PASSWORD#,$IF_PPP_PASSWORD,
+	s,#DEVICE#,$IF_PPP_DEVICE,
+	s,#MODEMIP#,$IF_PPP_MODEMIP,
+	s,#NETWORKOPTIONS#,$NETWORKOPTIONS,
+"
+
+sed "$REPLACE" < /etc/ppp/templates/$IF_USE_TEMPLATE > /etc/ppp/peers/$IF_PROVIDER
+
+[ "$IF_PPP_ENCAPS" ] || encap=0
+[ "$IF_PPP_PAYLOAD" ] || payload=1
+[ "$IF_PPP_VPI" ] || $IF_PPP_VPI=1
+[ "$IF_PPP_PAYLOAD" ] || $IF_PPP_VCI=32
+
+case "$IF_PPP_PAYLOAD" in
+bridged)
+	payload=1
+	;;
+routed)
+	payload=0
+	;;
+*)
+	echo "Wrong payload, use either bridged or routed"
+	exit 1
+	;;
+esac
+
+case "$IF_PPP_ENCAPS" in
+llc)
+	encap=0
+	;;
+vc)
+	encap=1
+	;;
+*)
+	echo "Wrong Encapsulation use either llc or vc"
+	exit 1
+	;;
+esac
+
+case "$IF_PPP_DEVICE" in
+nas*)
+	count=$(echo $IF_PPP_DEVICE|sed -e "s/nas//")
+	br2684ctl -b -c $count -e $encap -p $payload -a $IF_PPP_VPI.$IF_PPP_VCI
+	ip link set up dev $IF_PPP_DEVICE
+	;;
+esac
+
+case "$IF_USE_TEMPLATE" in
+umts)
+	# set UMTS-LED to green (bit 3)
+	LED=$(cat /proc/sys/diag)
+	echo $((LED | 8)) > /proc/sys/diag
+
+	# wait for card to initialize
+	COUNT=0
+	while [ $((COUNT++)) -lt 20 ]; do
+		[ -c "$IF_PPP_DEVICE" ] && break
+		[ $COUNT -eq 20 ] && {
+			logger "$0: '$IF_PPP_DEVICE' not found"
+			exit 1
+		}
+		sleep 1
+	done
+
+	# wait till the SIM is ready
+	comgt -s /etc/comgt/waitready.comgt -d $IF_PPP_DEVICE || exit 1
+
+	# set pincode
+	if [ "$IF_UMTS_PINCODE" ]; then
+		COMGTPIN="$IF_UMTS_PINCODE" comgt PIN -d $IF_PPP_DEVICE || ERROR=1
+	fi
+
+	# set APN
+	COMGTAPN="$IF_UMTS_APN" comgt APN -d $IF_PPP_DEVICE || ERROR=1
+
+	# set umts/gprs mode if available (Option cards only)
+	case "$IF_UMTS_MODE" in
+		gprs_only)	comgt 2G -d $IF_PPP_DEVICE ;;
+		umts_only)	comgt 3G -d $IF_PPP_DEVICE ;;
+		umts_first)	comgt 3G2G -d $IF_PPP_DEVICE ;;
+		"")		;;
+		*)		echo "unknown umts-mode, exiting"
+				ERROR=1
+				;;
+	esac
+
+	if [ "$ERROR" == "1" ]; then
+		echo "$LED" > /proc/sys/diag
+		exit 1
+	fi
+	;;
+esac

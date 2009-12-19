@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.6
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 
@@ -21,14 +21,11 @@ BUILD_STYLE:=		auto
 do-configure:
 	mkdir -p ${WRKBUILD}
 	${CP} ./src/* ${WRKBUILD}
-	${TARGET_CC} ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/mtd ${WRKBUILD}/mtd.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CFGFS}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/fwcf.sh ${IDIR_CFGFS}/sbin/cfgfs
-	${INSTALL_BIN} ${WRKBUILD}/fwcf.helper.out ${IDIR_CFGFS}/sbin/cfgfs.helper
-ifeq ($(ARCH),cris)
-	${INSTALL_BIN} ${WRKBUILD}/mtd ${IDIR_CFGFS}/sbin/mtd
-endif
+	${INSTALL_BIN} ${WRKBUILD}/fwcf.helper.out \
+		${IDIR_CFGFS}/sbin/cfgfs.helper
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -40,23 +40,29 @@ config ADK_KERNEL_LLC
 	tristate
 	default n
 
-#config ADK_KPACKAGE_KMOD_ATM
-#	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
-#	tristate
-#	default n
-#	help
-#	 ATM is a high-speed networking technology for Local Area Networks
-#	 and Wide Area Networks.  It uses a fixed packet size and is
-#	 connection oriented, allowing for the negotiation of minimum
-#	 bandwidth requirements.
-#
-#	 In order to participate in an ATM network, your Linux box needs an
-#	 ATM networking card. If you have that, say Y here and to the driver
-#	 of your ATM card below.
-#
-#	 Note that you need a set of user-space programs to actually make use
-#	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
-#	 further details.
+config ADK_KPACKAGE_KMOD_ATM
+	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
+	tristate
+	default n
+	help
+	 ATM is a high-speed networking technology for Local Area Networks
+	 and Wide Area Networks.  It uses a fixed packet size and is
+	 connection oriented, allowing for the negotiation of minimum
+	 bandwidth requirements.
+
+	 In order to participate in an ATM network, your Linux box needs an
+	 ATM networking card. If you have that, say Y here and to the driver
+	 of your ATM card below.
+
+	 Note that you need a set of user-space programs to actually make use
+	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
+	 further details.
+
+config ADK_KPACKAGE_KMOD_ATM_BR2684
+	prompt "kmod-atm-br2684................... BR2684 ATM module"
+	tristate
+	default n
+	help
 
 config ADK_KPACKAGE_KMOD_BRIDGE
 	prompt "kmod-net-bridge................... 802.1d Ethernet Bridging"
@@ -193,14 +199,14 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	 See http://pptpclient.sourceforge.net/ for information on
 	 configuring PPTP clients and servers to utilize this method.
 
-#config ADK_KPACKAGE_KMOD_PPPOATM
-#	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
-#	tristate
-#	default n
-#	depends on ADK_KPACKAGE_KMOD_PPP
-#	select ADK_KPACKAGE_KMOD_ATM
-#	help
-#	  Support for PPP over ATM
+config ADK_KPACKAGE_KMOD_PPPOATM
+	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PPP
+	select ADK_KPACKAGE_KMOD_ATM
+	help
+	  Support for PPP over ATM
 
 config ADK_KPACKAGE_KMOD_PPPOE
 	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"

@@ -39,13 +39,12 @@ Linux)
 FreeBSD)
 	# supported with no extra quirks at the moment
 	;;
+MirBSD)
+	# supported with no extra quirks at the moment
+	;;
 CYG*)
-	# mkdir /openadk 
-	# mount -b -s -o managed "C:/openadk" "/openadk"
-	# cd /
-	# git clone git+ssh://openadk.org/git/openadk.git
-	echo "Building OpenADK on $os is needs a managed mount point."
-	echo '"mount -b -s -o managed "C:/openadk" "/openadk"'
+	echo "Building OpenADK on $os needs a small registry change."
+	echo 'See http://www.cygwin.com/1.7/cygwin-ug-net/using-specialnames.html'
 	;;
 NetBSD)
 	echo "Building OpenADK on $os is currently unsupported."
@@ -101,11 +100,11 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
-if ! which cpp >/dev/null 2>&1; then
-	echo You must install a C preprocessor to continue.
-	echo
-	out=1
-fi
+#if ! which cpp >/dev/null 2>&1; then
+#	echo You must install a C preprocessor to continue.
+#	echo
+#	out=1
+#fi
 
 if ! which tar >/dev/null 2>&1; then
 	echo You must install GNU tar to continue.

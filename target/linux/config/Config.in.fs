@@ -17,6 +17,10 @@ config ADK_KPACKAGE_KMOD_EXPORTFS
 	default n
 	help
 
+config ADK_KERNEL_SQUASHFS
+	boolean
+	default n
+
 config ADK_KERNEL_EXT2_FS
 	boolean
 	default n

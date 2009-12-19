@@ -453,6 +453,7 @@ package-$(ADK_PACKAGE_ZSH) += zsh
 # kernel addon packages
 package-$(ADK_PACKAGE_KMOD_EM28XX) += em28xx
 package-$(ADK_PACKAGE_NTFS_3G) += ntfs-3g
+package-$(ADK_PACKAGE_KMOD_SANGAM_ATM) += sangam-atm
 
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))

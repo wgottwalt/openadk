@@ -1,0 +1,18 @@
+--- busybox-1.15.2.orig/include/libbb.h	Thu Oct  8 03:04:16 2009
++++ busybox-1.15.2/include/libbb.h	Sat Dec 19 12:42:57 2009
+@@ -48,6 +48,7 @@
+ #define PATH_MAX 256
+ #endif
+ 
++#if !(defined __APPLE__ || defined __FreeBSD__ || defined __MirBSD__ )
+ #ifdef HAVE_MNTENT_H
+ #include <mntent.h>
+ #endif
+@@ -61,6 +62,7 @@
+ #include <selinux/context.h>
+ #include <selinux/flask.h>
+ #include <selinux/av_permissions.h>
++#endif
+ #endif
+ 
+ #if ENABLE_LOCALE_SUPPORT

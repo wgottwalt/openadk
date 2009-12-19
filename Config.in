@@ -101,6 +101,18 @@ config ADK_HOST_FREEBSD
 	prompt "FreeBSD"
 	boolean
 
+config ADK_HOST_MIRBSD
+	prompt "MirBSD"
+	boolean
+
+config ADK_HOST_OPENBSD
+	prompt "OpenBSD"
+	boolean
+
+config ADK_HOST_NETBSD
+	prompt "OpenBSD"
+	boolean
+
 endchoice
 
 endmenu

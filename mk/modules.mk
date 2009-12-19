@@ -90,6 +90,10 @@ $(eval $(call KMOD_template,ATM,atm,\
 	$(MODULES_DIR)/kernel/net/atm/atm \
 ,50))
 
+$(eval $(call KMOD_template,ATM_BR2684,atm-br2684,\
+	$(MODULES_DIR)/kernel/net/atm/br2684 \
+,51))
+
 $(eval $(call KMOD_template,BRIDGE,bridge,\
 	$(MODULES_DIR)/kernel/net/llc/llc \
 	$(MODULES_DIR)/kernel/net/802/stp \

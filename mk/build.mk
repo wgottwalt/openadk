@@ -231,6 +231,15 @@ endif
 ifeq (${OStype},FreeBSD)
 	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/.defconfig
 endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/.defconfig
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/.defconfig
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \
@@ -240,10 +249,10 @@ endif
 			echo $$symbol >> $(TOPDIR)/.defconfig; \
 		done; \
 	fi
-ifneq (,$(filter %_qemu,${TARGET}))
+ifneq (,$(filter qemu%,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
-ifneq (,$(filter %_rescue,${TARGET}))
+ifneq (,$(filter rescue%,${TARGET}))
 	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/.defconfig
 endif
 ifneq (,$(filter rb%,${TARGET}))
@@ -259,6 +268,15 @@ ifeq (${OStype},Linux)
 endif
 ifeq (${OStype},FreeBSD)
 	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/all.config
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
@@ -298,7 +316,7 @@ ifneq (,$(filter rb%,${TARGET}))
 endif
 
 menuconfig: $(CONFIG)/mconf defconfig
-	if [ ! -f .config ];then \
+	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)

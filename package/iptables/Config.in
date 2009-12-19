@@ -21,16 +21,6 @@ config ADK_PACKAGE_IPTABLES
 
 	  http://www.iptables.org/
 
-config ADK_PACKAGE_IPTABLES_UTILS
-	prompt   "iptables-utils.................. Save and restore utilities"
-	tristate
-	default n
-	depends on ADK_PACKAGE_IPTABLES
-	help
-	  iptables-save and iptables-restore for Iptables (IPv4)
-
-	  http://www.iptables.org/
-
 config ADK_PACKAGE_IP6TABLES
 	prompt "ip6tables......................... IPv6 firewall administration tool"
 	tristate

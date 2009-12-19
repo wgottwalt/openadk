@@ -1,0 +1,9 @@
+config ADK_PACKAGE_MTD
+	prompt "mtd................................ mtd utility"
+	tristate
+	depends on \
+		ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_MIPS_AG241
+	default n
+	help
+	  MTD utility.

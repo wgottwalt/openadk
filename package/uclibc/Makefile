@@ -39,7 +39,7 @@ do-install:
 		HOSTCC="$(HOSTCC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
-	@find $(IDIR_UCLIBC_DEV) -name .install -delete
-	@find $(IDIR_UCLIBC_DEV) -name ..install.cmd -delete
+	@find $(IDIR_UCLIBC_DEV) -name .install -exec rm {} \;
+	@find $(IDIR_UCLIBC_DEV) -name ..install.cmd -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk

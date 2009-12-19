@@ -6,8 +6,8 @@ imageprepare: kernel-install image-prepare-post extra-install
 # if an extra directory exist in TOPDIR, copy all content over the 
 # root directory, do the same if make extra=/dir/to/extra is used
 extra-install:
-	if [ -d $(TOPDIR)/extra ];then $(CP) $(TOPDIR)/extra/* ${TARGET_DIR};fi
-	if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
+	@if [ -d $(TOPDIR)/extra ];then $(CP) $(TOPDIR)/extra/* ${TARGET_DIR};fi
+	@if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
 
 image-prepare-post:
 	rng=/dev/arandom; test -e $$rng || rng=/dev/urandom; \
@@ -58,11 +58,11 @@ ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
+	    cpio -R 0:0 -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc >$@
+	    cpio -R 0:0 -oC512 -Mdist -Hnewc >$@
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	PATH='${TARGET_PATH}' \
@@ -70,8 +70,8 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 	cat ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel ${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
-	# padding of images is required
-	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
+	# padding of images is required, foxboard only?
+	#dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
 		bs=4063232 conv=sync $(MAKE_TRACE)
 
 imageclean:

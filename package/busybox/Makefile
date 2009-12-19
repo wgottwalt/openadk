@@ -24,30 +24,30 @@ ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(ARCH)" \
-	    ARCH="$(ARCH)" -C $(WRKBUILD) oldconfig
+	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig
 else
 	yes '' | \
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    EXTRA_CFLAGS="$(TARGET_CFLAGS)" IPKG_ARCH="$(ARCH)" \
-	    ARCH="$(ARCH)" -C $(WRKBUILD) oldconfig
+	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig
 endif
 
 do-build:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) busybox
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) busybox
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
 do-install: ${TOPDIR}/.config
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) install
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" -C $(WRKBUILD) install
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install
 endif
 ifeq ($(DEBUG),1)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \

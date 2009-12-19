@@ -1,17 +1,18 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-CC=		gcc
+CC?=		gcc
 GMAKE?=		$(PWD)/scripts/make
 GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
 GMAKE_INV=	${GMAKE_FMK} --no-print-directory
+_UNLIMIT=	ulimit -dS $$(ulimit -dH);
 
 all: .prereq_done
-	@${GMAKE_INV} all
+	@${_UNLIMIT} ${GMAKE_INV} all
 
 v: .prereq_done
 	@(echo; echo "Build started on $$(LC_ALL=C LANGUAGE=C date)"; \
-	    set -x; ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
+	    set -x; ${_UNLIMIT} ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
 	@echo 'Common targets:'

@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- linux-atm-2.5.0.orig/src/switch/debug/Makefile.in	2007-12-29 21:31:36.000000000 +0100
-+++ linux-atm-2.5.0/src/switch/debug/Makefile.in	2009-05-29 22:23:13.656360541 +0200
-@@ -191,7 +191,7 @@ sw_debug_SOURCES = debug.c
+--- linux-atm-2.5.1.orig/src/switch/debug/Makefile.in	2009-11-30 17:21:19.000000000 +0100
++++ linux-atm-2.5.1/src/switch/debug/Makefile.in	2009-12-17 16:28:31.520542232 +0100
+@@ -199,7 +199,7 @@ sw_debug_SOURCES = debug.c
  sw_debug_XTRAS = $(top_builddir)/src/switch/libsw.a \
  			$(top_builddir)/src/lib/libatm.la
  

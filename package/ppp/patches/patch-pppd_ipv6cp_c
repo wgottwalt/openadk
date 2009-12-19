@@ -1,0 +1,10 @@
+--- ppp-2.4.4.orig/pppd/ipv6cp.c	2005-08-26 01:59:34.000000000 +0200
++++ ppp-2.4.4/pppd/ipv6cp.c	2009-12-18 09:06:00.333449663 +0100
+@@ -151,6 +151,7 @@
+  */
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
+ #include <netdb.h>

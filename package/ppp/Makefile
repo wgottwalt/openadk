@@ -5,9 +5,9 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.4
-PKG_RELEASE:=		17
+PKG_RELEASE:=		18
 PKG_MD5SUM:=		183800762e266132218b204dfb428d29
-PKG_DESCR:=		a PPP (Point-to-Point Protocol) software (with MPPE/MPPC support)
+PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-ppp
 PKG_URL:=		http://ppp.samba.org
@@ -39,6 +39,7 @@ XAKE_FLAGS+=		CC="${TARGET_CC}" \
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOE}+=		mod-pppoe-install
+SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOA}+=		mod-pppoa-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_RADIUS}+=		mod-radius-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_CHAT}+=		mod-chat-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPDUMP}+=		mod-pppdump-install
@@ -56,7 +57,6 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_FILTER}
 	${INSTALL_BIN} ./files/etc/ppp/ip-up ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-up.d
-	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/if-rename ${IDIR_PPP}/etc/ppp/ip-up.d/
 	${INSTALL_BIN} ./files/etc/ppp/ip-down ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-down.d
 	${INSTALL_DIR} ${IDIR_PPP}/usr/sbin
@@ -65,8 +65,10 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_BIN} ./files/pon ${IDIR_PPP}/usr/sbin/
 	${INSTALL_BIN} ./files/poff ${IDIR_PPP}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/peers
-	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/templates
-	${INSTALL_DATA} ./files/etc/ppp/templates/dsl ${IDIR_PPP}/etc/ppp/templates/
+	$(INSTALL_DIR) ${IDIR_PPP}/etc/network/if-pre-up.d
+	$(INSTALL_BIN) ./files/ppp.pre-up \
+		${IDIR_PPP}/etc/network/if-pre-up.d/ppp
+
 
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
@@ -80,6 +82,17 @@ mod-pppoe-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/rp-pppoe.so \
 		${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/etc/ppp/templates
+	${INSTALL_DATA} ./files/etc/ppp/templates/pppoe \
+		${IDIR_PPP_MOD_PPPOE}/etc/ppp/templates/
+
+mod-pppoa-install:
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/pppoatm.so \
+		${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/etc/ppp/templates
+	${INSTALL_DATA} ./files/etc/ppp/templates/pppoa \
+		${IDIR_PPP_MOD_PPPOA}/etc/ppp/templates/
 
 mod-chat-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_CHAT}/usr/sbin
