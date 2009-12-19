@@ -676,44 +676,6 @@ config ADK_COMPRESSION_TOOL
 	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
 	help
 
-choice
-prompt "Root filesystem type"
-	depends on ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
-	default ADK_TARGET_ROOT_XFS
-
-config ADK_TARGET_ROOT_XFS_MOD
-	boolean
-	prompt "XFS filesystem"
-	select ADK_KPACKAGE_KMOD_XFS_FS
-	select ADK_PACKAGE_XFSPROGS
-	help
-	  Select XFS filesystem kernel module and filesystem utilities.
-
-config ADK_TARGET_ROOT_EXT2_MOD
-	boolean
-	prompt "EXT2 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT2_FS
-	select ADK_PACKAGE_E2FSPROGS
-	help
-	  Select EXT2 filesystem kernel module and filesystem utilities.
-
-config ADK_TARGET_ROOT_EXT3_MOD
-	boolean
-	prompt "EXT3 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT3_FS
-	select ADK_PACKAGE_E2FSPROGS
-	help
-	  Select EXT3 filesystem kernel module and filesystem utilities.
-
-config ADK_TARGET_ROOT_EXT4_MOD
-	boolean
-	prompt "EXT4 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT4_FS
-	select ADK_PACKAGE_E2FSPROGS
-	help
-	  Select EXT4 filesystem kernel module and filesystem utilities.
-
-endchoice
 
 choice
 prompt "Root filesystem type"

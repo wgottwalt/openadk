@@ -18,7 +18,7 @@ test -z "$BASH_VERSION$KSH_VERSION" && exec $BASH $0 "$@"
 
 [[ -n $BASH_VERSION ]] && shopt -s extglob
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-OStype=$(env NOFAKE=yes uname)
+OStype=$(uname)
 out=0
 
 . $topdir/.config
@@ -88,6 +88,10 @@ if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
 	NEED_XMLTO="$NEED_XMLTO libXfont"
 fi
 
+if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
+	NEED_GPERF="$NEED_GPERF eglibc"
+fi
+
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
@@ -137,6 +141,13 @@ fi
 if [[ -n $NEED_BISON ]]; then
 	if ! which bison >/dev/null 2>&1; then
 		echo >&2 You need bison to build $NEED_BISON
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_GPERF ]]; then
+	if ! which gperf >/dev/null 2>&1; then
+		echo >&2 You need gperf to build $NEED_GPERF
 		out=1
 	fi
 fi

@@ -28,6 +28,7 @@ GLIBC_CONFOPTS:=          \
 			--enable-add-ons
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 do-extract:
 
@@ -36,9 +37,6 @@ do-install:
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_GLIBC)/etc
-ifeq ($(ADK_SSP),y)
-	$(CP) $(STAGING_DIR)/lib/libssp.so* $(IDIR_GLIBC)/lib/
-endif
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld-*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
