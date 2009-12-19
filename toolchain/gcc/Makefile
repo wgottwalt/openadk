@@ -20,7 +20,6 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-multilib \
 			--disable-sjlj-exceptions \
 			--disable-libssp \
-			--disable-libstdcxx-pch \
 			--disable-nls 
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
