@@ -249,10 +249,10 @@ endif
 			echo $$symbol >> $(TOPDIR)/.defconfig; \
 		done; \
 	fi
-ifneq (,$(filter %_qemu,${TARGET}))
+ifneq (,$(filter qemu%,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
-ifneq (,$(filter %_rescue,${TARGET}))
+ifneq (,$(filter rescue%,${TARGET}))
 	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/.defconfig
 endif
 ifneq (,$(filter rb%,${TARGET}))
