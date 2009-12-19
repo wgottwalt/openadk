@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gpsd
 PKG_VERSION:=		2.39
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
+ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		3db437196a6840c252fca99b6c19d4d0
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		net

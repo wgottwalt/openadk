@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		curl
 PKG_VERSION:=		7.19.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl zlib
 PKG_MD5SUM:=		ecb2e37e45c9933e2a963cabe03670ab
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		net

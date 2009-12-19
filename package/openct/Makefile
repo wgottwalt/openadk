@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openct
 PKG_VERSION:=		0.6.16
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libtool libusb
 PKG_MD5SUM:=		d8d8c63269985303a303a218c4b953d7
 PKG_DESCR:=		drivers for several smart card readers
 PKG_SECTION:=		libs

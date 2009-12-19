@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.7
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		ncurses e2fsprogs
 PKG_MD5SUM:=		9f7b3402b4731a7fa543db193bf1b564
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		net

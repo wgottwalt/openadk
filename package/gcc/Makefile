@@ -8,6 +8,7 @@ PKG_DESCR:=		GNU compiler collection
 PKG_SECTION:=		comp
 PKG_DEPENDS:=		mpfr
 PKG_OPTS:=		noremove
+PKG_BUILDDEP+=		gmp mpfr
 
 include ${TOPDIR}/mk/package.mk
 

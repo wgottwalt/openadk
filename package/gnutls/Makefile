@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gnutls
 PKG_VERSION:=		2.8.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libgcrypt liblzo libtasn1 opencdk zlib ncurses
 PKG_MD5SUM:=		e3b2788b79bfc82acbe717e3c54d4e92
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		libs

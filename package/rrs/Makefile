@@ -6,6 +6,13 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rrs
 PKG_VERSION:=		1.70
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		zlib
+ifeq (${ADK_COMPILE_RRS_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
+ifneq ($(ADK_PACKAGE_RRS),)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		b400d03c0e39e3e78a7327ba78f789f0
 PKG_DESCR:=		A reverse (connecting) remote shell, with SSL support.
 PKG_SECTION:=		net

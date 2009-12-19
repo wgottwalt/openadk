@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		irssi
 PKG_VERSION:=		0.8.13
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		glib ncurses
+ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		text

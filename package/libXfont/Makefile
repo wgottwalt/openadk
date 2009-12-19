@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libXfont
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		freetype fontcacheproto fontsproto libfontenc
 PKG_MD5SUM:=		bf134b9f79a7fc6507577bf5b6d4f412
 PKG_DESCR:=		X font Library
 PKG_SECTION:=		x11

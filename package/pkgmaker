@@ -1,3 +1,4 @@
+cd "$(dirname "$0")"
 export TOPDIR=$(realpath ..)
 if gmake --help >/dev/null 2>&1; then
 	export GMAKE=gmake

@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cbtt
 PKG_VERSION:=		20060211
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		mysql zlib
+ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		19abea2817c49ccc9438e9671c402984
 PKG_DESCR:=		Bittorrent tracker
 PKG_SECTION:=		net

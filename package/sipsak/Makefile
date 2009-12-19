@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		sipsak
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		c4eb8e282902e75f4f040f09ea9d99d5
 PKG_DESCR:=		a SIP stress and diagnostics utility
 PKG_SECTION:=		net

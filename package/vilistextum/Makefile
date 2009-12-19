@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		vilistextum
 PKG_VERSION:=		2.6.9
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libiconv
 PKG_MD5SUM:=            5ba56ffdc56758da716bb46c3e0f517e
 PKG_DESCR:=		html to ascii converter
 PKG_SECTION:=		text

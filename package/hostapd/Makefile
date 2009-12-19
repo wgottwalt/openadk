@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		hostapd
 PKG_VERSION:=		0.6.9
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libnl openssl
 PKG_MD5SUM:=		83630d11fa66ade9091f1b304fccd74c
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		net

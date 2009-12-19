@@ -6,11 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		atftp
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		readline ncurses
 PKG_MD5SUM:=		3b27365772d918050b2251d98a9c7c82
 PKG_DESCR:=		TFTP client
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libreadline libncurses
-PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://freshmeat.net/projects/atftp
 PKG_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
 PKG_DESCR_1:=		TFTP server

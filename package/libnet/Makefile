@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libnet
 PKG_VERSION:=		1.1.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		c5e06418a89cc4209f677a776a798fd9
 PKG_DESCR:=		a low-level packet creation library
 PKG_SECTION:=		libs

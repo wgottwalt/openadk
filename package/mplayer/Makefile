@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-29987
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video

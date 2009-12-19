@@ -6,6 +6,19 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ulogd
 PKG_VERSION:=		1.24
 PKG_RELEASE:=		7
+PKG_BUILDDEP+=		iptables
+ifneq ($(ADK_PACKAGE_ULOGD_MOD_MYSQL),)
+PKG_BUILDDEP+=		mysql
+endif
+ifneq ($(ADK_PACKAGE_ULOGD_MOD_PCAP),)
+PKG_BUILDDEP+=		libpcap
+endif
+ifneq ($(ADK_PACKAGE_ULOGD_MOD_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
+ifneq ($(ADK_PACKAGE_ULOGD_MOD_SQLITE),)
+PKG_BUILDDEP+=		sqlite
+endif
 PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
 PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		net

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libfreetype
 PKG_VERSION:=		2.3.11
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		519c7cbf5cbd72ffa822c66844d3114c
 PKG_DESCR:=		A free, high-quality and portable font engine
 PKG_SECTION:=		libs

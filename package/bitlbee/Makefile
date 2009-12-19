@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bitlbee
 PKG_VERSION:=		1.2.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libiconv openssl glib
 PKG_MD5SUM:=		2b1674d98804970809de3da3edf0bed2
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		net

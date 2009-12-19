@@ -6,11 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		aircrack-ng
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl libpcap
 PKG_MD5SUM:=		dafbfaf944ca9d523fde4bae86f0c067
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread libopenssl libpcap
-PKG_BUILDDEP:=		openssl libpcap
 PKG_URL:=		http://www.aircrack-ng.org
 PKG_SITES:=		http://download.aircrack-ng.org/
 

@@ -6,9 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		atk
 PKG_VERSION:=		1.29.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		glib
 PKG_MD5SUM:=		f587d9285b2d0ac35ea95acef673517c
 PKG_DESCR:=		atk library
-PKG_BUILDDEP:=		glib
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnome.org
 PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/1.29/}

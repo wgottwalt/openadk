@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		iproute2
 PKG_VERSION:=		2.6.29-1
 PKG_RELEASE:=		2
+ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
+PKG_BUILDDEP+=		linux-atm
+endif
 PKG_MD5SUM:=		c1bc258a6c345905e79935ac7a3cc582
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		net

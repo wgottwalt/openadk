@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		wdfs
 PKG_VERSION=		1.4.2
 PKG_RELEASE=		2
+PKG_BUILDDEP+=		openssl fuse neon glib
 PKG_MD5SUM=		628bb44194d04c1cf8aacc446ed0a230
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		net

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ussp-push
 PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openobex
 PKG_MD5SUM:=		5c44983ee27809867041feff6bb4423a
 PKG_DESCR:=		OBEX push command
 PKG_SECTION:=		bluetooth

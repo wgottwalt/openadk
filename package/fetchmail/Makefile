@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		fetchmail
 PKG_VERSION:=		6.3.9
 PKG_RELEASE:=		1
+ifeq (${ADK_PACKAGE_FETCHMAIL_SSL},y)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		72c20ad2b9629f1a109668b05a84d823
 PKG_DESCR:=		fetch mail from a POP, IMAP, ETRN, or ODMR-capable server
 PKG_SECTION:=		text

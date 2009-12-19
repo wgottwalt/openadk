@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		usbutils
 PKG_VERSION:=		0.73
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libusb
 PKG_MD5SUM:=		88978b4ad891f610620b1b8e5e0f43eb
 PKG_DESCR:=		A program to list USB devices
 PKG_SECTION:=		misc

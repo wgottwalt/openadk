@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		dansguardian
 PKG_VERSION:=		2.10.1.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		pcre zlib
+ifeq (${ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		0987a1c9bfbdf398118386f10279611a
 PKG_DESCR:=		web content filter proxy
 PKG_SECTION:=		net

@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mrd6
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
+ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
 PKG_DESCR:=		IPv6 multicast routing daemon
 PKG_SECTION:=		net

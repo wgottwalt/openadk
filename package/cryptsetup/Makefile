@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cryptsetup
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libgcrypt popt e2fsprogs lvm
 PKG_MD5SUM:=		5eea2a77391a8a1a651b31cbaef59e22
 PKG_DESCR:=		LUKS cryptsetup tools
 PKG_SECTION:=		crypto

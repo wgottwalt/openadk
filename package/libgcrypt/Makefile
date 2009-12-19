@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libgcrypt
 PKG_VERSION:=		1.4.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libgpg-error
 PKG_MD5SUM:=		9e6dcf7fef1ae96b57207a1de91fdaa4
 PKG_DESCR:=		GNU crypto library
 PKG_SECTION:=		libs

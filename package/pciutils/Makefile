@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		pciutils
 PKG_VERSION:=		3.0.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		d07da501bb11e6af40acd036536c2e9a
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		sys

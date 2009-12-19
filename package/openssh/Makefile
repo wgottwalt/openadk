@@ -6,6 +6,13 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openssh
 PKG_VERSION:=		5.3p1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib openssl
+ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
+PKG_BUILDDEP+=		krb5
+endif
+ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
+PKG_BUILDDEP+=		heimdal
+endif
 PKG_MD5SUM:=		13563dbf61f36ca9a1e4254260131041
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net

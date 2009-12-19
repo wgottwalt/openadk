@@ -1,0 +1,20 @@
+cd "$(dirname "$0")"
+export TOPDIR=$(realpath ..)
+if gmake --help >/dev/null 2>&1; then
+	export GMAKE=gmake
+else
+	export GMAKE=make
+fi
+
+for subdir in */Makefile; do
+	subdir=${subdir%/*}
+	cd $subdir
+	deps=$($GMAKE show=PKG_BUILDDEP)
+	cd ..
+	[[ -n $deps ]] || continue
+	x="${subdir}-compile:"
+	for dep in $deps; do
+		x="$x ${dep}-compile"
+	done
+	print -r -- $x
+done >Depends.mk

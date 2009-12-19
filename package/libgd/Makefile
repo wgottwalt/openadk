@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gd
 PKG_VERSION:=		2.0.35
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpng jpeg
 PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
 PKG_DESCR:=		A library for the dynamic creation of images
 PKG_SECTION:=		libs

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		collectd
 PKG_VERSION:=		4.7.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpthread
 PKG_MD5SUM:=		b077e3398bd6fac0e53e9df4794db264
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		console

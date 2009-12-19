@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rrdcollect
 PKG_VERSION:=		0.2.3
 PKG_RELEASE:=		8
+PKG_BUILDDEP+=		rrdtool
 PKG_MD5SUM:=		5e4305c612bc3cccbaf802c275c81a11
 PKG_DESCR:=		Round-Robin Database (RRD) collecting daemon
 PKG_SECTION:=		admin

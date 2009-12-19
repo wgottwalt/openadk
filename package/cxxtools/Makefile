@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cxxtools
 PKG_VERSION:=		1.4.8
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libiconv
+ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		16ce92a83beb925fa5138fc9a52d55af
 PKG_DESCR:=		a collection of general-purpose C++ classes
 PKG_SECTION:=		net

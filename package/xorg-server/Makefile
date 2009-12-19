@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.7.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto scrnsaverproto resourceproto fontsproto videoproto compositeproto evieext libxkbfile libXfont pixman libpciaccess openssl
 PKG_MD5SUM:=		913a672cbd6da516de15965d594e20b9
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gmediaserver
 PKG_VERSION:=		0.13.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		id3lib libupnp
 PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
 PKG_DESCR:=		An UPnP music media server
 PKG_SECTION:=		net

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		serdisplib
 PKG_VERSION:=		1.97.8
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libgd libusb
 PKG_MD5SUM:=		2aa91c43d01d2dfc9fbc1116e3063ae1
 PKG_DESCR:=		display drivers (serial, parallel, USB)
 PKG_SECTION:=		misc

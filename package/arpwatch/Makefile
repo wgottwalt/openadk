@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		arpwatch
 PKG_VERSION:=		2.1a15
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		cebfeb99c4a7c2a6cee2564770415fe7
 PKG_DESCR:=		Ethernet monitor program for keeping track of ethernet/ip address pairings
 PKG_SECTION:=		net

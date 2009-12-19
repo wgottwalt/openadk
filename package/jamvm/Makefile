@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libffi zlib
 PKG_MD5SUM:=		ce886163658d748113b0570dfae12aea
 PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		misc

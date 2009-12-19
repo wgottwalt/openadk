@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		deco
 PKG_VERSION:=		39
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		f77f60e8be0cae1f814cba1ef61bf4d0
 PKG_DESCR:=		Text-based, full featured file manager
 PKG_SECTION:=		misc

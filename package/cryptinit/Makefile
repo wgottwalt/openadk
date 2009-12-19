@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cryptinit
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		cryptsetup
 PKG_DESCR:=		init for encrypted rootfilesystem
 PKG_SECTION:=		base
 

@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		iperf
 PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
+ifeq (${ADK_COMPILE_IPERF_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		8c5bc14cc2ea55f18f22afe3c23e3dcb
 PKG_DESCR:=		Internet Protocol bandwidth measuring tool
 PKG_SECTION:=		net

@@ -6,6 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		tntnet
 PKG_VERSION:=		1.6.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		cxxtools zlib
+ifneq (${ADK_COMPILE_TNTNET_WITH_OPENSSL},)
+PKG_BUILDDEP+=		openssl
+else ifneq (${ADK_COMPILE_TNTNET_WITH_GNUTLS},)
+PKG_BUILDDEP+=		gnutls
+endif
 PKG_MD5SUM:=		e2c3c5075a890711a7569730493c0996
 PKG_DESCR:=		small C++ application server
 PKG_SECTION:=		net

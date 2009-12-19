@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libid3tag
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		e5808ad997ba32c498803822078748c3
 PKG_DESCR:=		an ID3 tag manipulation library
 PKG_SECTION:=		libs

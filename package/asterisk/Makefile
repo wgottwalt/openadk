@@ -6,6 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		asterisk
 PKG_VERSION:=		1.4.27.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses openssl zlib curl popt
+ifneq ($(ADK_PACKAGE_ASTERISK_CODEC_SPEEX),)
+PKG_BUILDDEP+=		speex
+endif
+ifneq ($(ADK_PACKAGE_ASTERISK_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
 PKG_MD5SUM:=		e09ca163a6e90018c92c65a50b9ec398
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net

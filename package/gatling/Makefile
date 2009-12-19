@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		gatling
 PKG_VERSION=		0.10
 PKG_RELEASE=		1
+PKG_BUILDDEP+=		libowfat libiconv
 PKG_MD5SUM=		04e8434156d91657c77a8a038c5b27cf
 PKG_DESCR:=		small non-forking webserver
 PKG_SECTION:=		net

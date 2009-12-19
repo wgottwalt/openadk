@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		readline
 PKG_VERSION:=		5.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		e39331f32ad14009b9ff49cc10c5e751
 PKG_DESCR:=		Command line editing library
 PKG_SECTION:=		libs

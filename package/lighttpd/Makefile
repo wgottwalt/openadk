@@ -6,6 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		lighttpd
 PKG_VERSION:=		1.4.25
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		pcre libxml2 sqlite
+ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
 PKG_DESCR:=		a flexible and lightweight web server
 PKG_SECTION:=		net

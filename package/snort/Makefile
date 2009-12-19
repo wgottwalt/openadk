@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		snort
 PKG_VERSION:=		2.6.1.2
 PKG_RELEASE:=		8
+PKG_BUILDDEP+=		libnet libpcap pcre
 PKG_MD5SUM:=		22c448e25538cdf74c62abe586aeac0a
 PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net

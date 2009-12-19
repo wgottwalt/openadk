@@ -6,6 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl ncurses e2fsprogs
+ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
+PKG_BUILDDEP+=		libdb
+endif
+ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
+PKG_BUILDDEP+=		openldap
+endif
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		net

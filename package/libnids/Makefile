@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libnids
 PKG_VERSION:=		1.23
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libnet libpcap
 PKG_MD5SUM:=		af35e8ef403a0ca95df2da94db856428
 PKG_DESCR:=		Network Intrusion Detection System library
 PKG_SECTION:=		libs

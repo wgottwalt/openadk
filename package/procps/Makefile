@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		procps
 PKG_VERSION:=		3.2.7
 PKG_RELEASE:=		4
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		f490bca772b16472962c7b9f23b1e97d
 PKG_DESCR:=		The /proc file system utilities
 PKG_SECTION:=		utils

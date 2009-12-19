@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xkeyboard-config
 PKG_VERSION:=		1.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		xkbcomp
 PKG_MD5SUM:=		c024a6e2a5b8c4ce3d9d1f1286466163
 PKG_DESCR:=		X keyboard config
 PKG_SECTION:=		x11

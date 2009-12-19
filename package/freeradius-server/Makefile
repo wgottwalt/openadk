@@ -6,6 +6,16 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-server
 PKG_VERSION:=		2.1.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libtool openssl
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_LDAP),)
+PKG_BUILDDEP+=		openldap
+endif
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL),)
+PKG_BUILDDEP+=		mysql
+endif
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
 PKG_MD5SUM:=		b1f77c5e3116bcb0ac0aa9080a06ebf1
 PKG_DESCR:=		a flexible RADIUS server
 PKG_SECTION:=		net

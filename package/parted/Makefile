@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		parted
 PKG_VERSION:=		1.9.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		e2fsprogs lvm readline
 PKG_MD5SUM:=		055305bc7bcf472ce38f9abf69a9d94d
 PKG_DESCR:=		GNU parted
 PKG_DEPENDS:=		libuuid libreadline device-mapper

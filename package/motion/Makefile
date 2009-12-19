@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		motion
 PKG_VERSION:=		3.2.11
 PKG_RELEASE:=		1
+ifneq ($(ADK_PACKAGE_MOTION),)
+PKG_BUILDDEP+=		jpeg
+endif
 PKG_MD5SUM:=		3a26c00f3250eacf6fa93c7a7e0249d9
 PKG_DESCR:=		Webcam motion sensing and logging
 PKG_SECTION:=		multimedia

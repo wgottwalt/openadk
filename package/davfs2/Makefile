@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		davfs2
 PKG_VERSION=		1.3.3
 PKG_RELEASE=		1
+PKG_BUILDDEP+=		libiconv neon
+ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
+PKG_BUILDDEP+=		fuse
+endif
 PKG_MD5SUM=		57def26e4d6d63527e01612d10fd0515
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		admin

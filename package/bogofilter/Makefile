@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bogofilter
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libiconv libdb
 PKG_MD5SUM:=		4bbc9adc30d4f8e3a547f9be18a1cb74
 PKG_DESCR:=		mail filter
 PKG_SECTION:=		mail

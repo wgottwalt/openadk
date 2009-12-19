@@ -79,6 +79,9 @@ include ${TOPDIR}/mk/split-cfg.mk
 
 all: world
 
+${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config
+	mksh ${TOPDIR}/package/depmaker
+
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
@@ -120,7 +123,7 @@ ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
 	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
 
-package/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf
+package/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG

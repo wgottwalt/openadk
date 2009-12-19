@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ctorrent
 PKG_VERSION:=		dnh3.3.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
+ifeq (${ADK_COMPILE_CTORRENT_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
 PKG_DESCR:=		console-based BitTorrent client
 PKG_SECTION:=		net

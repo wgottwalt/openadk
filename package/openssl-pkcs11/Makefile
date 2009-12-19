@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openssl-pkcs11
 PKG_VERSION:=		0.1.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libp11
 PKG_MD5SUM:=		840af6e54dc21445c54f74e15005ba4d
 PKG_DESCR:=		pkcs11 engine for openssl
 PKG_SECTION:=		crypto

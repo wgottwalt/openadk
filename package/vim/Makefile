@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		vim
 PKG_VERSION=		7.2
 PKG_RELEASE=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM=		f0901284b338e448bfd79ccca0041254
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		text

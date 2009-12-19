@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libxslt
 PKG_VERSION:=		1.1.24
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libxml2
 PKG_MD5SUM:=		e83ec5d27fc4c10c6f612879bea9a153
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs

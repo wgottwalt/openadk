@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cairo
 PKG_VERSION:=		1.8.8
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpng pixman freetype fontconfig libX11
 PKG_MD5SUM:=		d3e1a1035ae563812d4dd44a74fb0dd0
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs

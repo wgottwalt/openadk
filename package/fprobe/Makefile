@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		fprobe
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		65850d0470078269b33eee58cba77ac2
 PKG_DESCR:=		NetFlow probe
 PKG_SECTION:=		net

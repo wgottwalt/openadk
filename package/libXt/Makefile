@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libXt
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libSM
 PKG_MD5SUM:=		28f627c7a5ca08c2413ce91d21c177d8
 PKG_DESCR:=		X Toolkit Intrinsics
 PKG_SECTION:=		x11

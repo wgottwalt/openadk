@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ptunnel
 PKG_VERSION:=		0.61
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		b45f73875f2af48f101816672f83a5fe
 PKG_DESCR:=		Tunnel TCP connections over ICMP packets
 PKG_SECTION:=		net

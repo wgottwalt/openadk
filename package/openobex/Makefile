@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openobex
 PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		bluez
 PKG_MD5SUM:=		0d83dc86445a46a1b9750107ba7ab65c
 PKG_DESCR:=		implementation of the Object Exchange (OBEX) protocol
 PKG_SECTION:=		bluetooth

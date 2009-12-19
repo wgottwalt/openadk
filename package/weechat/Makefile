@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		weechat
 PKG_VERSION:=		0.1.8
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		ncurses gnutls lua libiconv
 PKG_MD5SUM:=		73d6bc211ac32c597f0d278506480a20
 PKG_DESCR:=		Lightweight IRC client
 PKG_SECTION:=		net
