@@ -7,9 +7,7 @@ PKG_NAME:=		rrs
 PKG_VERSION:=		1.70
 PKG_RELEASE:=		2
 PKG_BUILDDEP+=		zlib
-ifeq (${ADK_COMPILE_RRS_WITH_UCLIBCXX},y)
-PKG_BUILDDEP+=		uclibc++
-endif
+PKG_CXX:=		RRS
 ifneq ($(ADK_PACKAGE_RRS),)
 PKG_BUILDDEP+=		openssl
 endif
@@ -23,10 +21,8 @@ PKG_DEPENDS:=		libopenssl zlib
 PKG_DEPENDS_NOSSL:=	zlib
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
 PKG_DEPENDS_NOSSL+=	uclibc++
 else
-PKG_DEPENDS+=		libstdcxx
 PKG_DEPENDS_NOSSL+=	libstdcxx
 endif
 

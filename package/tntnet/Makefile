@@ -18,20 +18,13 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		cxxtools zlib libpthread libiconv
 PKG_URL:=		http://www.tntnet.org
 PKG_SITES:=		http://www.tntnet.org/download/
+PKG_CXX:=		TNTNET
 
 include ${TOPDIR}/mk/package.mk
 
-ifeq (${ADK_COMPILE_TNTNET_WITH_UCLIBCXX},y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
-
-ifeq (${ADK_COMPILE_TNTNET_WITH_OPENSSL},y)
+ifneq (${ADK_COMPILE_TNTNET_WITH_OPENSSL},)
 PKG_DEPENDS+=		libopenssl
-endif
-
-ifeq (${ADK_COMPILE_TNTNET_WITH_GNUTLS},y)
+else ifneq (${ADK_COMPILE_TNTNET_WITH_GNUTLS},)
 PKG_DEPENDS+=		libgnutls
 endif
 

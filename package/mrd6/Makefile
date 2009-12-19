@@ -6,9 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mrd6
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
-PKG_BUILDDEP+=		uclibc++
-endif
+PKG_CXX:=		MRD6
 PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
 PKG_DESCR:=		IPv6 multicast routing daemon
 PKG_SECTION:=		net
@@ -18,12 +16,6 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
-PKG_DEPENDS:=		uclibc++
-else
-PKG_DEPENDS:=		libstdcxx
-endif
 
 $(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

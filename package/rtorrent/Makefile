@@ -13,6 +13,7 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libtorrent libcurl
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_CXX:=		RTORRENT
 
 include ${TOPDIR}/mk/package.mk
 

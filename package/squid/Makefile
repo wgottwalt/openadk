@@ -13,12 +13,7 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
 PKG_URL:=		http://www.squid-cache.org
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
-
-ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
+PKG_CXX:=		SQUID
 
 AUTH_MODULES:=		basic digest ntlm
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)

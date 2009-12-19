@@ -3,6 +3,15 @@
 
 all: build-all-pkgs
 
+ifneq (${PKG_CXX},)
+ifeq (${ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+endif
+
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}

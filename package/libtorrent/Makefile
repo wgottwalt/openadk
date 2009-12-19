@@ -13,14 +13,9 @@ PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_CXX:=		LIBTORRENT
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
 
 $(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

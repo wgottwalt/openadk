@@ -32,6 +32,7 @@ for sd in */Makefile; do
 	dnu=${dnu//+/X}
 	pd=$($GMAKE show=PKG_DESCR)		# pd: package description
 	ph=$($GMAKE show=PKG_URL)		# ph: package homepage
+	usecxx=$($GMAKE show=PKG_CXX)
 
 	(
 	print "config ADK_COMPILE_$dnu"
@@ -57,6 +58,8 @@ for sd in */Makefile; do
 		print \\tdefault n
 		deps=$($GMAKE show=PKGDEPS_$xu)
 		for dep in $deps; do
+			[[ -n $usecxx && $dep = @(uclibc++|libstdcxx) ]] && \
+			    continue
 			case $dep {
 			(kmod-*)
 				typeset -u udep=${dep//-/_}
@@ -76,6 +79,25 @@ for sd in */Makefile; do
 			[[ -n $ph ]] && print "\t  $ph"
 		fi
 	done
+
+	[[ -n $usecxx ]] && cat <<EOF
+
+choice
+prompt "C++ library to use"
+depends on ADK_COMPILE_$dnu
+default ADK_COMPILE_${usecxx}_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+default ADK_COMPILE_${usecxx}_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+
+config ADK_COMPILE_${usecxx}_WITH_STDCXX
+	bool "GNU C++ library"
+	select ADK_PACKAGE_LIBSTDCXX
+
+config ADK_COMPILE_${usecxx}_WITH_UCLIBCXX
+	bool "uClibc++ library"
+	select ADK_PACKAGE_UCLIBCXX
+
+endchoice
+EOF
 
 	for pf in $pfl; do			# pf: package flavour
 		pfd=$($GMAKE show=PKGFD_$pf)
