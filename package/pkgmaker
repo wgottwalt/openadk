@@ -6,12 +6,28 @@ else
 	export GMAKE=make
 fi
 
-for subdir in alsa-lib bash bc expat mksh; do
-	cd $subdir
-	pn=$($GMAKE show=PKG_NAME)		# pn: package name
+rm -rf pkglist.d pkgopts.d
+mkdir pkglist.d pkgopts.d
+for a in */Makefile; do
+	sd=${a%/*}
+	cd $sd
 	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
+	print -r -- $pa >../pkgopts.d/pa-"$sd"
+	xa=
+	for xu in $pa; do			# xu: package option uppercase
+		x=$($GMAKE show=PKGNAME_$xu)	# x: subpackage name
+		print -r -- "$xu" >../pkglist.d/"$x"
+		xa="$xa $x"
+	done
+	print -r -- $xa >../pkgopts.d/xa-"$sd"
+	cd ..
+done
+
+for sd in 6tunnel aiccu alsa-lib bash bc expat mksh; do
+	cd $sd
+	pn=$($GMAKE show=PKG_NAME)		# pn: package name
 	pfl=$($GMAKE show=PKG_FLAVOURS)		# pfl: all package flavours
-	typeset -u dnu=${subdir//-/_}		# dnu: subdir name uppercase
+	typeset -u dnu=${sd//-/_}		# dnu: subdir name uppercase
 	dnu=${dnu//+/X}
 	pd=$($GMAKE show=PKG_DESCR)		# pd: package description
 	ph=$($GMAKE show=PKG_URL)		# ph: package homepage
@@ -21,15 +37,15 @@ for subdir in alsa-lib bash bc expat mksh; do
 	print \\ttristate
 	print -n \\tdepends on
 	sp=' '					# local sp: space (or ' || ')
-	for xu in $pa; do			# xu: package option uppercase
+	for xu in $(<../pkgopts.d/pa-"$sd"); do	# xu: package option uppercase
 		print -n "${sp}ADK_PACKAGE_$xu"
 		sp=' || '
 	done
 	print
 	print \\tdefault n
 
-	for xu in $pa; do			# xu: package option uppercase
-		x=$($GMAKE show=PKGNAME_$xu)	# x: subpackage name
+	for x in $(<../pkgopts.d/xa-"$sd"); do	# x: subpackage name
+		xu=$(<../pkglist.d/"$x")	# xu: package option uppercase
 		print \\nconfig ADK_PACKAGE_$xu
 		xf=$x				# xf: subpackage name ........
 		while (( ${#xf} < 34 )); do
@@ -38,6 +54,19 @@ for subdir in alsa-lib bash bc expat mksh; do
 		print "\tprompt \"$xf ${pd:-$pn}\""
 		print \\ttristate
 		print \\tdefault n
+		deps=$($GMAKE show=PKGDEPS_$xu)
+		for dep in $deps; do
+			case $dep {
+			(kmod-*)
+				typeset -u udep=${dep//-/_}
+				print "\tselect ADK_KPACKAGE_$udep"
+				;;
+			(*)
+				print '\tselect' \
+				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
+				;;
+			}
+		done
 		print \\tselect ADK_COMPILE_$dnu
 		if [[ -n $pd$ph ]]; then
 			print \\thelp
