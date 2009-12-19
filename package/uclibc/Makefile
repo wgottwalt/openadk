@@ -14,8 +14,12 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
+
 # do nothing, uClibc is already build in toolchain directory
-do-install:
+do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	echo 'CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00' > $(IDIR_UCLIBC)/etc/TZ
@@ -28,6 +32,8 @@ do-install:
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/; \
 	done
+
+uclibc-dev-install:
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \

@@ -9,7 +9,7 @@ config ADK_PACKAGE_UCLIBC
 
 config ADK_PACKAGE_UCLIBC_DEV
 	prompt "uClibc-dev........................... development files"
-	bool
+	tristate
 	default n
 	depends on ADK_TARGET_LIB_UCLIBC
 	help

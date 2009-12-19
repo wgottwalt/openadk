@@ -9,7 +9,7 @@ config ADK_PACKAGE_GLIBC
 
 config ADK_PACKAGE_GLIBC_DEV
 	prompt "glibc-dev........................... development files"
-	bool
+	tristate
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
 	help

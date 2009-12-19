@@ -44,7 +44,7 @@ $(WRKBUILD)/.headers_configure:
 	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
 		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
-	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc; autoconf --force);
+	#(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc; autoconf --force);
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_INITIAL)
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
