@@ -43,12 +43,8 @@ MirBSD)
 	# supported with no extra quirks at the moment
 	;;
 CYG*)
-	# mkdir /openadk 
-	# mount -b -s -o managed "C:/openadk" "/openadk"
-	# cd /
-	# git clone git+ssh://openadk.org/git/openadk.git
-	echo "Building OpenADK on $os is needs a managed mount point."
-	echo '"mount -b -s -o managed "C:/openadk" "/openadk"'
+	echo "Building OpenADK on $os needs a small registry change."
+	echo 'See http://www.cygwin.com/1.7/cygwin-ug-net/using-specialnames.html'
 	;;
 NetBSD)
 	echo "Building OpenADK on $os is currently unsupported."
