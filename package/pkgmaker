@@ -8,8 +8,8 @@ fi
 
 rm -rf pkglist.d pkgopts.d
 mkdir pkglist.d pkgopts.d
-for a in */Makefile; do
-	sd=${a%/*}
+for sd in */Makefile; do
+	sd=${sd%/*}
 	cd $sd
 	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
 	print -r -- $pa >../pkgopts.d/pa-"$sd"
@@ -23,7 +23,8 @@ for a in */Makefile; do
 	cd ..
 done
 
-for sd in 6tunnel aiccu alsa-lib bash bc expat mksh; do
+for sd in */Makefile; do
+	sd=${sd%/*}
 	cd $sd
 	pn=$($GMAKE show=PKG_NAME)		# pn: package name
 	pfl=$($GMAKE show=PKG_FLAVOURS)		# pfl: all package flavours
@@ -86,6 +87,6 @@ for sd in 6tunnel aiccu alsa-lib bash bc expat mksh; do
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pf"
 	done
-	) >Config.in
+	) >Config.new
 	cd ..
 done

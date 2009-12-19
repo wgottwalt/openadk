@@ -1,3 +1,5 @@
+*/Config.in
+*/Config.new
 Depends.mk
 pkglist.d
 pkgopts.d

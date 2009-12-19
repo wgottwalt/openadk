@@ -13,6 +13,7 @@ PKG_SECTION:=		admin
 PKG_DEPENDS:=		libncurses
 PKG_URL:=		http://www.nano-editor.org
 PKG_SITES:=		http://www.nano-editor.org/dist/v2.0/
+PKG_FLAVOURS:=		TINY
 
 include ${TOPDIR}/mk/package.mk
 
