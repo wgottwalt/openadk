@@ -30,10 +30,12 @@ GLIBC_CONFOPTS:=          \
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-do-extract:
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install
 
-# do nothing, glibc is already build in toolchain directory
-do-install:
+# compile nothing, glibc is already build in toolchain directory
+do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_GLIBC)/etc
@@ -45,8 +47,11 @@ do-install:
 	done
 	# create ld.so link for mips gcc linker option
 	cd $(IDIR_GLIBC)/lib && ln -sf ld-linux.so.2 ld.so.1
+
+glibc-dev-install:
 	# header package
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
+		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
@@ -61,6 +66,6 @@ do-install:
 		install-headers
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h
-	@find $(IDIR_GLIBC_DEV) -name .install -delete
+	@find $(IDIR_GLIBC_DEV) -name .install -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
