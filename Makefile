@@ -4,7 +4,7 @@
 CC?=		gcc
 GMAKE?=		$(PWD)/scripts/make
 GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
-GMAKE_INV=	${GMAKE_FMK} --no-print-directory
+GMAKE_INV=	ulimit -dS $$(ulimit -dH); ${GMAKE_FMK} --no-print-directory
 
 all: .prereq_done
 	@${GMAKE_INV} all

@@ -140,7 +140,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
-	    cpio -apdlmu --quiet '${STAGING_DIR}'
+	    cpio -apdlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \

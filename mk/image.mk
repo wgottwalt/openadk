@@ -58,11 +58,11 @@ ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
+	    cpio -R 0:0 -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 --quiet -oC512 -Mdist -Hnewc >$@
+	    cpio -R 0:0 -oC512 -Mdist -Hnewc >$@
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	PATH='${TARGET_PATH}' \
