@@ -240,6 +240,9 @@ endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
 endif
+ifneq (,$(filter CYGWIN%,${OStype}))
+	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)" \

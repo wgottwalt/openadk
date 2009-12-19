@@ -5,7 +5,8 @@ CC?=		gcc
 GMAKE?=		$(PWD)/scripts/make
 GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
 GMAKE_INV=	${GMAKE_FMK} --no-print-directory
-_UNLIMIT=	ulimit -dS $$(ulimit -dH);
+
+_UNLIMIT=	ulimit -dS $$(ulimit -dH 2>/dev/null ) 2>/dev/null;
 
 all: .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all
@@ -160,7 +161,7 @@ NO_ERROR=0
 	fi
 	@echo "TOPDIR:=$$(readlink -nf . 2>/dev/null || pwd -P)" >prereq.mk
 	@echo "BASH:=$$(which bash)" >>prereq.mk
-	@if [ -z "$$(which gmake)" ]; then \
+	@if [ -z "$$(which gmake 2>/dev/null )" ]; then \
 		echo "GMAKE:=$$(which make)" >>prereq.mk ;\
 	else \
 		echo "GMAKE:=$$(which gmake)" >>prereq.mk ;\
