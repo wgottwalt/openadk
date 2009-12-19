@@ -10,7 +10,7 @@ PKG_BUILDDEP+=		openssl fuse neon glib
 PKG_MD5SUM=		628bb44194d04c1cf8aacc446ed0a230
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl fuse-utils kmod-fuse libfuse neon glib
+PKG_DEPENDS:=		libopenssl fuse-utils kmod-fuse neon glib
 PKG_SITES=		http://noedler.de/projekte/wdfs/
 
 include ${TOPDIR}/mk/package.mk

@@ -10,7 +10,7 @@ PKG_BUILDDEP+=		openssl curl expat
 PKG_MD5SUM:=		50fb736021ef89916af622cb4772bbea
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		openssl curl
+PKG_DEPENDS:=		libopenssl curl
 PKG_URL:=		http://git-scm.com
 PKG_SITES:=		http://kernel.org/pub/software/scm/git/
 

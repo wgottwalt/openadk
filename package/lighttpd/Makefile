@@ -13,7 +13,7 @@ endif
 PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
 PKG_DESCR:=		a flexible and lightweight web server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libxml2 libsqlite libpcre
+PKG_DEPENDS:=		libxml2 libsqlite pcre
 PKG_URL:=		http://www.lighttpd.net
 PKG_SITES:=		http://download.lighttpd.net/lighttpd/releases-1.4.x/
 

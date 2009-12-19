@@ -10,7 +10,7 @@ PKG_BUILDDEP+=		ncurses e2fsprogs
 PKG_MD5SUM:=		9f7b3402b4731a7fa543db193bf1b564
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		krb5-libs libncurses libss libcom_err
+PKG_DEPENDS:=		krb5-libs libncurses libss libcom-err
 PKG_URL:=		http://web.mit.edu/kerberos
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.7/
 

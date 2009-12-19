@@ -16,7 +16,7 @@ endif
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses libcom_err
+PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses libcom-err
 PKG_URL:=		http://www.h5l.org
 PKG_SITES:=		http://www.h5l.org/dist/src/
 

@@ -6,7 +6,7 @@ else
 	export GMAKE=make
 fi
 
-for subdir in alsa-lib bash bc mksh; do
+for subdir in alsa-lib bash bc expat mksh; do
 	cd $subdir
 	pn=$($GMAKE show=PKG_NAME)		# pn: package name
 	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
