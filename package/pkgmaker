@@ -6,12 +6,12 @@ else
 	export GMAKE=make
 fi
 
-for subdir in bash bc mksh; do
+for subdir in alsa-lib bash bc mksh; do
 	cd $subdir
 	pn=$($GMAKE show=PKG_NAME)		# pn: package name
 	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
 	pfl=$($GMAKE show=PKG_FLAVOURS)		# pfl: all package flavours
-	typeset -u pnu=$pn			# pnu: package name uppercase
+	typeset -u pnu=${pn//-/_}		# pnu: package name uppercase
 	pd=$($GMAKE show=PKG_DESCR)		# pd: package description
 	ph=$($GMAKE show=PKG_URL)		# ph: package homepage
 
