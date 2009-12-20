@@ -13,6 +13,8 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl zlib kmod-tun
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
 
+PKG_HOST_DEPENDS:=	!freebsd
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VTUN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

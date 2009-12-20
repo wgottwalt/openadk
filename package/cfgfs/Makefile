@@ -5,9 +5,10 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.6
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
+PKG_TARGET_DEPENDS:=	alix1c alix2d wrap foxboard ag241 rb532
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
