@@ -193,7 +193,7 @@ cleandir:
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
 	    $(TOOLS_BUILD_DIR)
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk \
+	rm -f .menu .tmpconfig.h ${TOPDIR}/package/*/info.mk \
 	    ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
 cleantarget:
@@ -210,7 +210,7 @@ distclean:
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
+	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -236,7 +236,7 @@ $(CONFIG)/conf:
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
-defconfig: _menu
+defconfig: .menu
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
 endif
@@ -327,21 +327,21 @@ ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/all.config
 endif
 
-menuconfig: $(CONFIG)/mconf defconfig _menu
+menuconfig: $(CONFIG)/mconf defconfig .menu
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf _menu
+_config: $(CONFIG)/conf .menu
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN) >/dev/null
 	${POSTCONFIG}
 
 .NOTPARALLEL: _mconfig
 _mconfig: ${CONFIG}/conf _mconfig2 _config
-_mconfig2: ${CONFIG}/conf modconfig _menu
+_mconfig2: ${CONFIG}/conf modconfig .menu
 	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
 # build all targets and combinations
@@ -358,9 +358,12 @@ distclean:
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
 	@rm -f .config* .defconfig all.config .tmpconfig.h ${TOPDIR}/prereq.mk \
-	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
+	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
-_menu: .PHONY
+.menu menu:
 	mksh $(TOPDIR)/package/pkgmaker
+	@:>.menu
+
+.PHONY: menu
