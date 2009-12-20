@@ -6,112 +6,166 @@ else
 	export GMAKE=make
 fi
 
-rm -rf pkglist.d pkgopts.d
-mkdir pkglist.d pkgopts.d
-for sd in */Makefile; do
-	sd=${sd%/*}
-	cd $sd
-	pa=$($GMAKE show=ALL_PKGOPTS)		# pa: all subpackage options
-	print -r -- $pa >../pkgopts.d/pa-"$sd"
-	xa=
-	for xu in $pa; do			# xu: package option uppercase
-		x=$($GMAKE show=PKGNAME_$xu)	# x: subpackage name
-		print -r -- "$xu" >../pkglist.d/"$x"
-		xa="$xa $x"
-	done
-	print -r -- $xa >../pkgopts.d/xa-"$sd"
+# build a cache of “ipkg package name” → “package conf option” for
+# use with dependency resolution
+rm -rf pkglist.d
+mkdir pkglist.d
+for dn in */Makefile; do
+	dn=${dn%/*}
+	cd $dn
+
+	# ALL_PKGOPTS: all subpackage conf options
+	# PKGNAME_*: subpackage (ipkg) package name, by subpackage option
+	eval $($GMAKE dump="ALL_PKGOPTS \
+	    \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x})")
 	cd ..
+
+	if [[ -z $ALL_PKGOPTS ]]; then
+		print -u2 "Warning: $dn/Makefile contains no packages, skipped"
+		continue
+	fi
+
+	for spcu in $ALL_PKGOPTS; do		# spcu: package option, ucase
+		eval sppn=\$PKGNAME_$spcu	# sppn: subpackage (ipkg) name
+		# once mksh R40 is out, use its new associative arrays here!
+		print -r -- "$spcu" >pkglist.d/"$sppn"
+	done
 done
 
-for sd in */Makefile; do
-	sd=${sd%/*}
-	cd $sd
-	pn=$($GMAKE show=PKG_NAME)		# pn: package name
-	pfl=$($GMAKE show=PKG_FLAVOURS)		# pfl: all package flavours
-	typeset -u dnu=${sd//-/_}		# dnu: subdir name uppercase
+# build Config.in files and resolve dependencies
+for dn in */Makefile; do
+	dn=${dn%/*}
+	cd $dn
+
+	# PKG_NAME: package name (directory, free-format)
+	# PKG_FLAVOURS: all package flavours (boolean options), uppercase
+	# PKG_DESCR: package description (directory)
+	# PKG_URL: package homepage
+	# PKG_CXX: uppercase varname part to use for CFrustFrust checks
+	# ALL_PKGOPTS: all subpackage conf options
+	# PKGNAME_*: subpackage (ipkg) package name, by subpackage option
+	# PKGDESC_*: subpackage description, by subpackage option
+	# PKGDEPS_*: subpackage depends on ipkg packages, by subpkg option
+	# CFLINE_*: one free-format Config.in line per subpackage option
+	# PKGFD_*: flavour description, per package flavour option
+	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_CXX \
+	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
+	    PKGDESC_\${x} PKGDEPS_\${x} CFLINE_\${x}) \
+	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x})")
+
+	# dnu: directory name, uppercase, y/-+/_X/
+	typeset -u dnu=${dn//-/_}
 	dnu=${dnu//+/X}
-	pd=$($GMAKE show=PKG_DESCR)		# pd: package description
-	ph=$($GMAKE show=PKG_URL)		# ph: package homepage
-	usecxx=$($GMAKE show=PKG_CXX)
 
 	(
+
+	# Handle master package (directory)
 	print "config ADK_COMPILE_$dnu"
+	if [[ -z $ALL_PKGOPTS ]]; then
+		# pseudo package, does not produce an ipkg package
+		ppnf=$PKG_NAME			# ppnf: pseudopkg name, filled
+		if [[ -n $PKG_DESCR ]]; then
+			while (( ${#ppnf} < 34 )); do
+				ppnf=$ppnf.
+			done
+			ppnf="$ppnf $PKG_DESCR"
+		fi
+		print "\tprompt \"$ppnf\""
+	fi
 	print \\ttristate
-	print -n \\tdepends on
-	sp=' '					# local sp: space (or ' || ')
-	for xu in $(<../pkgopts.d/pa-"$sd"); do	# xu: package option uppercase
-		print -n "${sp}ADK_PACKAGE_$xu"
-		sp=' || '
-	done
-	print
+	if [[ -n $ALL_PKGOPTS ]]; then
+		# real (master) package, contains 1+ ipkg (sub)packages
+		print -n \\tdepends on
+		sp=' '				# local sp: space (or ' || ')
+		for spcu in $ALL_PKGOPTS; do	# spcu: package option, ucase
+			print -n "${sp}ADK_PACKAGE_$spcu"
+			sp=' || '
+		done
+		print
+	fi
 	print \\tdefault n
 
-	for x in $(<../pkgopts.d/xa-"$sd"); do	# x: subpackage name
-		xu=$(<../pkglist.d/"$x")	# xu: package option uppercase
-		print \\nconfig ADK_PACKAGE_$xu
-		xf=$x				# xf: subpackage name ........
-		while (( ${#xf} < 34 )); do
-			xf=$xf.
-		done
-		desc=$($GMAKE show=PKGDESC_$xu)
-		print "\tprompt \"$xf ${desc:-${pd:-$pn}}\""
+	# Handle subpackages / multipackages
+	for spcu in $ALL_PKGOPTS; do		# spcu: package option, ucase
+		eval sppn=\$PKGNAME_$spcu	# sppn: subpackage (ipkg) name
+		eval desc=\$PKGDESC_$spcu	# desc: subpackage description
+		: ${desc:=$PKG_DESCR}		# take from main pkg if empty
+		eval deps=\$PKGDEPS_$spcu	# deps: subpackage dependencies
+		eval xline=\$PKGDESC_$spcu	# xline: one free-format line
+		print \\nconfig ADK_PACKAGE_$spcu
+		spnf=$sppn			# spnf: subpackage name, filled
+		if [[ -n ${desc:-$PKG_NAME} ]]; then
+			while (( ${#spnf} < 34 )); do
+				spnf=$spnf.
+			done
+			spnf="$spnf ${desc:-$PKG_NAME}"
+		fi
+		print "\tprompt \"$spnf\""
 		print \\ttristate
 		print \\tdefault n
-		deps=$($GMAKE show=PKGDEPS_$xu)
-		for dep in $deps; do
-			[[ -n $usecxx && $dep = @(uclibc++|libstdcxx) ]] && \
+		for dep in $deps; do		# dep: ipkg name of one rundep.
+			# skip dependencies on uclibc++ and libstdcxx iff
+			# we produce these automatically
+			[[ -n $PKG_CXX && $dep = @(uclibc++|libstdcxx) ]] && \
 			    continue
 			case $dep {
 			(kmod-*)
+				# produce dependency on kernel package
+				# which have special name→sym mangling
 				typeset -u udep=${dep//-/_}
 				print "\tselect ADK_KPACKAGE_$udep"
 				;;
 			(*)
+				# produce dependency on regular package
+				# where the symbol is cached (see above)
 				print '\tselect' \
 				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
 				;;
 			}
 		done
 		print \\tselect ADK_COMPILE_$dnu
-		dep=$($GMAKE show=CFLINE_$xu)	# one free-format line
-		[[ -n $dep ]] && print "\t$dep"
-		if [[ -n $pd$ph ]]; then
+		[[ -n $xline ]] && print "\t$xline"
+		if [[ -n $desc$PKG_URL ]]; then
+			# produce (optional) help text
 			print \\thelp
-			[[ -n $pd ]] && print "\t  $pd"
-			[[ -n $pd && -n $ph ]] && print '\t  '
-			[[ -n $ph ]] && print "\t  $ph"
+			[[ -n $desc ]] && print "\t  $desc"
+			[[ -n $desc && -n $PKG_URL ]] && print '\t  '
+			[[ -n $PKG_URL ]] && print "\t  WWW: $PKG_URL"
 		fi
 	done
 
-	[[ -n $usecxx ]] && cat <<EOF
+	# Handle CFrustFrust library selection, if necessary
+	[[ -n $PKG_CXX ]] && cat <<EOF
 
 choice
 prompt "C++ library to use"
 depends on ADK_COMPILE_$dnu
-default ADK_COMPILE_${usecxx}_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-default ADK_COMPILE_${usecxx}_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
+default ADK_COMPILE_${PKG_CXX}_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+default ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC
 
-config ADK_COMPILE_${usecxx}_WITH_STDCXX
+config ADK_COMPILE_${PKG_CXX}_WITH_STDCXX
 	bool "GNU C++ library"
 	select ADK_PACKAGE_LIBSTDCXX
 
-config ADK_COMPILE_${usecxx}_WITH_UCLIBCXX
+config ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX
 	bool "uClibc++ library"
 	select ADK_PACKAGE_UCLIBCXX
 
 endchoice
 EOF
 
-	for pf in $pfl; do			# pf: package flavour
-		pfd=$($GMAKE show=PKGFD_$pf)
+	# Handle flavours (per directory)
+	for pfcu in $PKG_FLAVOURS; do		# pfcu: pkg flavour conf opt.
+		eval pfd=\$PKGFD_$pfcu		# pfd: pkg flavour description
 		print
-		print config ADK_PACKAGE_${dnu}_$pf
-		print "\tbool \"${pfd:-flavour ADK_PACKAGE_${dnu}_$pf}\""
+		print config ADK_PACKAGE_${dnu}_$pfcu
+		print "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
 		print \\tdefault n
 		print \\tdepends on ADK_COMPILE_$dnu
 		print \\thelp
-		print "\t  flavour ADK_PACKAGE_${dnu}_$pf"
+		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
 	done
-	) >Config.new
+
+	) >Config.in
 	cd ..
 done
