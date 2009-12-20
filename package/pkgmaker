@@ -65,10 +65,11 @@ for dn in */Makefile; do
 	typeset -u dnu=${dn//-/_}
 	dnu=${dnu//+/X}
 
-	(
+	(	# fd 4 = Config.in; fd 5 = Config.in.lib
+	g5=0
 
 	# Handle master package (directory)
-	print "config ADK_COMPILE_$dnu"
+	print -u4 "config ADK_COMPILE_$dnu"
 	if [[ -z $ALL_PKGOPTS ]]; then
 		# pseudo package, does not produce an ipkg package
 		ppnf=$PKG_NAME			# ppnf: pseudopkg name, filled
@@ -78,20 +79,20 @@ for dn in */Makefile; do
 			done
 			ppnf="$ppnf $PKG_DESCR"
 		fi
-		print "\tprompt \"$ppnf\""
+		print -u4 "\tprompt \"$ppnf\""
 	fi
-	print \\ttristate
+	print -u4 \\ttristate
 	if [[ -n $ALL_PKGOPTS ]]; then
 		# real (master) package, contains 1+ ipkg (sub)packages
-		print -n \\tdepends on
+		print -nu4 \\tdepends on
 		sp=' '				# local sp: space (or ' || ')
 		for spcu in $ALL_PKGOPTS; do	# spcu: package option, ucase
-			print -n "${sp}ADK_PACKAGE_$spcu"
+			print -nu4 "${sp}ADK_PACKAGE_$spcu"
 			sp=' || '
 		done
-		print
+		print -u4
 	fi
-	print \\tdefault n
+	print -u4 \\tdefault n
 
 	# Handle subpackages / multipackages
 	for spcu in $ALL_PKGOPTS; do		# spcu: package option, ucase
@@ -100,7 +101,16 @@ for dn in */Makefile; do
 		: ${desc:=$PKG_DESCR}		# take from main pkg if empty
 		eval deps=\$PKGDEPS_$spcu	# deps: subpackage dependencies
 		eval xline=\$PKGDESC_$spcu	# xline: one free-format line
-		print \\nconfig ADK_PACKAGE_$spcu
+
+		if [[ $spcu = LIB* ]]; then
+			h=5			# divert to Config.in.lib
+			(( g5++ )) && print -u5	# been here before
+		else
+			h=4			# divert to Config.in
+			print -u4
+		fi
+
+		print -u$h config ADK_PACKAGE_$spcu
 		spnf=$sppn			# spnf: subpackage name, filled
 		if [[ -n ${desc:-$PKG_NAME} ]]; then
 			while (( ${#spnf} < 34 )); do
@@ -108,9 +118,9 @@ for dn in */Makefile; do
 			done
 			spnf="$spnf ${desc:-$PKG_NAME}"
 		fi
-		print "\tprompt \"$spnf\""
-		print \\ttristate
-		print \\tdefault n
+		print -u$h "\tprompt \"$spnf\""
+		print -u$h \\ttristate
+		print -u$h \\tdefault n
 		for dep in $deps; do		# dep: ipkg name of one rundep.
 			# skip dependencies on uclibc++ and libstdcxx iff
 			# we produce these automatically
@@ -121,29 +131,29 @@ for dn in */Makefile; do
 				# produce dependency on kernel package
 				# which have special name→sym mangling
 				typeset -u udep=${dep//-/_}
-				print "\tselect ADK_KPACKAGE_$udep"
+				print -u$h "\tselect ADK_KPACKAGE_$udep"
 				;;
 			(*)
 				# produce dependency on regular package
 				# where the symbol is cached (see above)
-				print '\tselect' \
+				print -u$h '\tselect' \
 				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
 				;;
 			}
 		done
-		print \\tselect ADK_COMPILE_$dnu
-		[[ -n $xline ]] && print "\t$xline"
+		print -u$h \\tselect ADK_COMPILE_$dnu
+		[[ -n $xline ]] && print -u$h "\t$xline"
 		if [[ -n $desc$PKG_URL ]]; then
 			# produce (optional) help text
-			print \\thelp
-			[[ -n $desc ]] && print "\t  $desc"
-			[[ -n $desc && -n $PKG_URL ]] && print '\t  '
-			[[ -n $PKG_URL ]] && print "\t  WWW: $PKG_URL"
+			print -u$h \\thelp
+			[[ -n $desc ]] && print -u$h "\t  $desc"
+			[[ -n $desc && -n $PKG_URL ]] && print -u$h '\t  '
+			[[ -n $PKG_URL ]] && print -u$h "\t  WWW: $PKG_URL"
 		fi
 	done
 
 	# Handle CFrustFrust library selection, if necessary
-	[[ -n $PKG_CXX ]] && cat <<EOF
+	[[ -n $PKG_CXX ]] && cat >&4 <<EOF
 
 choice
 prompt "C++ library to use"
@@ -172,9 +182,9 @@ EOF
 		print \\tdepends on ADK_COMPILE_$dnu
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
-	done
+	done >&4
 
-	) >Config.in
+	) 4>Config.in 5>Config.in.lib
 	cd ..
 done
 pbar=done
