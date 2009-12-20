@@ -57,10 +57,12 @@ for dn in */Makefile; do
 	# PKGDFLT_*: subpackage 'default {:-n}', by subpackage option
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
+	# PKG_{HOST,TARGET}_DEPENDS: wbx@’s weird ideas
 	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
-	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x})")
+	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
+	    PKG_HOST_DEPENDS PKG_TARGET_DEPENDS")
 
 	# dnu: directory name, uppercase, y/-+/_X/
 	typeset -u dnu=${dn//-/_}
@@ -95,6 +97,46 @@ for dn in */Makefile; do
 	fi
 	print -u4 \\tdefault n
 
+	# Handle NOT/ONLY_FOR_PLATFORM alikes
+	phd=					# phd: PKG_HOST_DEPENDS expand.
+	if [[ -n $PKG_HOST_DEPENDS ]]; then
+		phd='\tdepends on'
+		if [[ $PKG_HOST_DEPENDS = *\!* ]]; then
+			sp=' !'
+		else
+			sp=' '
+		fi
+		for x in $PKG_HOST_DEPENDS; do
+			typeset -u x=${x#!}
+			phd="$phd${sp}ADK_HOST_$x"
+			if [[ $PKG_HOST_DEPENDS = *\!* ]]; then
+				sp=' && !'
+			else
+				sp=' || '
+			fi
+		done
+	fi
+	ptd=					# ptd: PKG_TARGET_DEPENDS exp.
+	if [[ -n $PKG_TARGET_DEPENDS ]]; then
+		ptd='\tdepends on'
+		sp=' '				# local sp: space (or ' || ')
+		for x in $PKG_TARGET_DEPENDS; do
+			#XXX cache this with mksh R40+
+			found=0
+			while read friendlyname sym; do
+				[[ $friendlyname = $x ]] || continue
+				found=1
+				break
+			done <../../target/target.lst
+			if (( !found )); then
+				print -u2 "$dn: Target '$x' not found!"
+				exit 1
+			fi
+			ptd="$ptd${sp}$sym"
+			sp=' || '
+		done
+	fi
+
 	# Handle subpackages / multipackages
 	for spcu in $ALL_PKGOPTS; do		# spcu: package option, ucase
 		eval sppn=\$PKGNAME_$spcu	# sppn: subpackage (ipkg) name
@@ -122,6 +164,8 @@ for dn in */Makefile; do
 		fi
 		print -u$h "\tprompt \"$spnf\""
 		print -u$h \\ttristate
+		[[ -n $phd ]] && print -u$h "$phd"
+		[[ -n $ptd ]] && print -u$h "$ptd"
 		print -u$h "\tdefault ${dflt:-n}"
 		for dep in $deps; do		# dep: ipkg name of one rundep.
 			# skip dependencies on uclibc++ and libstdcxx iff
