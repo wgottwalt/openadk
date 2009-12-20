@@ -6,22 +6,18 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		8
+PKG_RELEASE:=		9
 PKG_DESCR:=		basic filesystem structure and scripts
 PKG_SECTION:=		base
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
-ifeq ($(CPU_ARCH),x86_64)
-PKG_ID=			x86-64-${FS}
-else
-PKG_ID=			${ADK_TARGET}-${FS}
-endif
-WRKDIR=			${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-${PKG_ID}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BASE_FILES,base-files-${PKG_ID},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+PKGDFLT_BASE_FILES=	y
 
 do-install:
 	$(CP) ./extra/* $(IDIR_BASE_FILES)
