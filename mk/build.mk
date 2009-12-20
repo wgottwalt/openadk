@@ -40,6 +40,7 @@ DEFCONFIG= 		ADK_DEVELSYSTEM=n \
 noconfig_targets:=	menuconfig \
 			_config \
 			_mconfig \
+			distclean \
 			tags
 
 MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
@@ -211,9 +212,11 @@ distclean:
 	rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
-else # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
+else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
+ifneq ($(filter-out distclean,${MAKECMDGOALS}),)
 include $(TOPDIR)/prereq.mk
+endif
 
 all: menuconfig
 	@echo "Start the build with \"make\" or with \"make v\" to be verbose"
