@@ -10,6 +10,8 @@ PKG_DEPENDS:=		mpfr
 PKG_OPTS:=		noremove
 PKG_BUILDDEP+=		gmp mpfr
 
+PKG_HOST_DEPENDS:=	!freebsd
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

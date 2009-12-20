@@ -14,6 +14,8 @@ PKG_URL:=		http://www.litech.org/radvd
 PKG_SITES:=		http://v6web.litech.org/radvd/dist/ \
 			http://download.sourcemage.org/mirror/
 
+PKG_HOST_DEPENDS:=	!freebsd
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADVD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

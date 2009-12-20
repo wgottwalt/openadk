@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libxml2 libgnutls python
 PKG_URL:=		http://www.libvirt.org
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
+PKG_HOST_DEPENDS:=	!freebsd
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
