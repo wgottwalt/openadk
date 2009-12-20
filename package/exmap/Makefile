@@ -8,19 +8,23 @@ PKG_VERSION:=		0.4.1
 PKG_RELEASE:=		1
 PKG_BUILDDEP+=		glib readline
 PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
-PKG_DESCR:=		memory analysing tool
+PKG_DESCR:=		memory analysing toolsuite
 PKG_SECTION:=		utils
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
+PKG_DESCR_EXMAPD:=	exmap daemon
+PKG_DESCR_EXMAPSERVER:=	exmap server
+PKG_DESCR_KMOD_EXMAP:=	exmap kernel module
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_EXMAPD},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_EXMAPSERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR_KMOD_EXMAP},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-doc
