@@ -288,6 +288,7 @@ endmenu
 menu "Network Filesystems"
 source "package/davfs2/Config.in"
 source "package/nfs-utils/Config.in"
+source "package/nfs-utils/Config.in.kerberos"
 source "package/samba/Config.in"
 endmenu
 
@@ -338,6 +339,7 @@ source "package/httptunnel/Config.in"
 source "package/ipsec-tools/Config.in"
 source "package/l2tpns/Config.in"
 source "package/openssh/Config.in"
+source "package/openssh/Config.in.kerberos"
 source "package/openswan/Config.in"
 source "package/openvpn/Config.in"
 source "package/portsentry/Config.in"
