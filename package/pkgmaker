@@ -54,11 +54,12 @@ for dn in */Makefile; do
 	# PKGNAME_*: subpackage (ipkg) package name, by subpackage option
 	# PKGDESC_*: subpackage description, by subpackage option
 	# PKGDEPS_*: subpackage depends on ipkg packages, by subpkg option
+	# PKGDFLT_*: subpackage 'default {:-n}', by subpackage option
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
 	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
-	    PKGDESC_\${x} PKGDEPS_\${x} CFLINE_\${x}) \
+	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x})")
 
 	# dnu: directory name, uppercase, y/-+/_X/
@@ -100,6 +101,7 @@ for dn in */Makefile; do
 		eval desc=\$PKGDESC_$spcu	# desc: subpackage description
 		: ${desc:=$PKG_DESCR}		# take from main pkg if empty
 		eval deps=\$PKGDEPS_$spcu	# deps: subpackage dependencies
+		eval dflt=\$PKGDFLT_$spcu	# dflt: config 'default' opt.
 		eval xline=\$CFLINE_$spcu	# xline: one free-format line
 
 		if [[ $spcu = LIB* ]]; then
@@ -120,7 +122,7 @@ for dn in */Makefile; do
 		fi
 		print -u$h "\tprompt \"$spnf\""
 		print -u$h \\ttristate
-		print -u$h \\tdefault n
+		print -u$h "\tdefault ${dflt:-n}"
 		for dep in $deps; do		# dep: ipkg name of one rundep.
 			# skip dependencies on uclibc++ and libstdcxx iff
 			# we produce these automatically
