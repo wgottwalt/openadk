@@ -1,0 +1,21 @@
+config ADK_COMPILE_GLIBC
+	tristate
+	depends on ADK_PACKAGE_GLIBC
+	default n
+
+config ADK_PACKAGE_GLIBC
+	prompt "glibc............................. GNU C library"
+	boolean
+	select ADK_COMPILE_GLIBC
+	depends on ADK_TARGET_LIB_GLIBC
+	default y if ADK_TARGET_LIB_GLIBC && !ADK_TOOLCHAIN_ONLY
+	help
+	  GNU C library
+
+config ADK_PACKAGE_GLIBC_DEV
+	prompt "glibc-dev.......................... GNU C library header files"
+	tristate
+	default n
+	depends on ADK_TARGET_LIB_GLIBC
+	help
+	  GNU C library header files

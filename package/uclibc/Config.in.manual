@@ -1,0 +1,22 @@
+config ADK_COMPILE_UCLIBC
+	tristate
+	depends on ADK_PACKAGE_UCLIBC || ADK_PACKAGE_UCLIBC_DEV
+	default n
+
+config ADK_PACKAGE_UCLIBC
+	prompt "uclibc............................ embedded C library"
+	boolean
+	select ADK_COMPILE_UCLIBC
+	depends on ADK_TARGET_LIB_UCLIBC
+	default y if ADK_TARGET_LIB_UCLIBC && !ADK_TOOLCHAIN_ONLY
+	help
+	  embedded C library
+
+config ADK_PACKAGE_UCLIBC_DEV
+	prompt "uclibc-dev........................ embedded C library header files"
+	tristate
+	depends on ADK_TARGET_LIB_UCLIBC
+	select ADK_COMPILE_UCLIBC
+	default n
+	help
+	  embedded C library header files

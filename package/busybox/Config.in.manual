@@ -1,0 +1,19 @@
+config ADK_COMPILE_BUSYBOX
+	tristate
+	depends on ADK_PACKAGE_BUSYBOX
+	default n
+
+config ADK_PACKAGE_BUSYBOX
+	prompt "busybox........................... Core utilities for embedded Linux systems"
+	boolean
+	select ADK_COMPILE_BUSYBOX
+	default y if !ADK_TOOLCHAIN_ONLY
+	help
+	  Core utilities for embedded Linux systems
+	  
+	  WWW: http://www.busybox.net
+
+menu "Busybox Configuration"
+source "package/busybox/config/Config.in"
+endmenu
+

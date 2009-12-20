@@ -1,0 +1,22 @@
+config ADK_COMPILE_EGLIBC
+	tristate
+	depends on ADK_PACKAGE_EGLIBC || ADK_PACKAGE_EGLIBC_DEV
+	default n
+
+config ADK_PACKAGE_EGLIBC
+	prompt "eglibc............................ embedded GNU C library"
+	boolean
+	select ADK_COMPILE_EGLIBC
+	depends on ADK_TARGET_LIB_EGLIBC
+	default y if ADK_TARGET_LIB_EGLIBC && !ADK_TOOLCHAIN_ONLY
+	help
+	  embedded GNU C library
+
+config ADK_PACKAGE_EGLIBC_DEV
+	prompt "eglibc-dev........................ embedded GNU C library header files"
+	tristate
+	default n
+	select ADK_COMPILE_EGLIBC
+	depends on ADK_TARGET_LIB_EGLIBC
+	help
+	  embedded GNU C library header files
