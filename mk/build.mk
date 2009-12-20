@@ -177,8 +177,9 @@ clean:
 			rm $$f ; \
 		done \
 	done
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
-	rm -f ${TOPDIR}/package/*/info.mk
+	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg \
+	    ${TOPDIR}/package/pkglist.d
+	rm -f ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 cleankernel:
 	@$(TRACE) cleankernel
@@ -188,9 +189,11 @@ cleandir:
 	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
-		${TOPDIR}/.cfg*
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
+	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
+	    $(TOOLS_BUILD_DIR)
+	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk \
+	    ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
 cleantarget:
 	@$(TRACE) cleantarget
@@ -203,10 +206,10 @@ distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-		${TOPDIR}/.cfg*
+	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
-	rm -f .config* .defconfig .tmpconfig.h all.config \
-		${TOPDIR}/package/*/info.mk
+	rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
+	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 else # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -346,10 +349,10 @@ bulk:
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) \
-		${TOPDIR}/.cfg*
+	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
-	@rm -f .config* .defconfig all.config .tmpconfig.h \
-		${TOPDIR}/package/*/info.mk
+	@rm -f .config* .defconfig all.config .tmpconfig.h ${TOPDIR}/prereq.mk \
+	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
