@@ -100,7 +100,7 @@ for dn in */Makefile; do
 		eval desc=\$PKGDESC_$spcu	# desc: subpackage description
 		: ${desc:=$PKG_DESCR}		# take from main pkg if empty
 		eval deps=\$PKGDEPS_$spcu	# deps: subpackage dependencies
-		eval xline=\$PKGDESC_$spcu	# xline: one free-format line
+		eval xline=\$CFLINE_$spcu	# xline: one free-format line
 
 		if [[ $spcu = LIB* ]]; then
 			h=5			# divert to Config.in.lib
