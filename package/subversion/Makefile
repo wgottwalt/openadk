@@ -13,7 +13,7 @@ endif
 PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		net
-PKG_DEPENDS:=		zlib apr apr-util libiconv expat
+PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat
 PKG_SITES:=		http://subversion.tigris.org/downloads/
 
 include ${TOPDIR}/mk/package.mk

@@ -10,7 +10,7 @@ PKG_BUILDDEP+=		expat apr
 PKG_MD5SUM:=            dc772ae295f49ddb8ee8e69a9716c53b
 PKG_DESCR:=		Apache Portable Runtime utility library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		expat apr
+PKG_DEPENDS:=		libexpat apr
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://apache.mirror.clusters.cc/apr/
 
