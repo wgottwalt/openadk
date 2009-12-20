@@ -65,7 +65,7 @@ dev-help:
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
 	@echo '  edit the package sources at build_dir/w-<pkgname>-*/<pkgname>-<version>'
-	@echo '  run "make package=<pkgname> update-patches to regenerate patch files'
+	@echo '  run "make package=<pkgname> update-patches" to regenerate patch files'
 	@echo ''
 	@echo 'All changed patches will be opened with your $$EDITOR,'
 	@echo 'so you can add a description and verify the modifications.'
