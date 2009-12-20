@@ -5,6 +5,8 @@ if gmake --help >/dev/null 2>&1; then
 else
 	export GMAKE=make
 fi
+(( x_cols = (COLUMNS > 10) ? COLUMNS - 2 : 80 ))
+typeset -L$x_cols pbar
 
 # build a cache of “ipkg package name” → “package conf option” for
 # use with dependency resolution
@@ -12,6 +14,8 @@ rm -rf pkglist.d
 mkdir pkglist.d
 for dn in */Makefile; do
 	dn=${dn%/*}
+	pbar="Pass 1: $dn ..."
+	print -nu2 "$pbar\r"
 	cd $dn
 
 	# ALL_PKGOPTS: all subpackage conf options
@@ -35,6 +39,8 @@ done
 # build Config.in files and resolve dependencies
 for dn in */Makefile; do
 	dn=${dn%/*}
+	pbar="Pass 2: $dn ..."
+	print -nu2 "$pbar\r"
 	cd $dn
 
 	# PKG_NAME: package name (directory, free-format)
@@ -169,3 +175,5 @@ EOF
 	) >Config.in
 	cd ..
 done
+pbar=done
+print -u2 "$pbar"

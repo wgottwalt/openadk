@@ -5,9 +5,13 @@ if gmake --help >/dev/null 2>&1; then
 else
 	export GMAKE=make
 fi
+(( x_cols = (COLUMNS > 10) ? COLUMNS - 2 : 80 ))
+typeset -L$x_cols pbar
 
 for dn in */Makefile; do
 	dn=${dn%/*}
+	pbar="$dn ..."
+	print -nu2 "$pbar\r"
 	case $dn {
 	(@(?(e)g|uc|)libc|libpthread|uclibc++) ;;
 	(*)
@@ -27,3 +31,5 @@ for dn in */Makefile; do
 	done
 	print -r -- $x
 done >Depends.mk
+pbar=done
+print -u2 "$pbar"
