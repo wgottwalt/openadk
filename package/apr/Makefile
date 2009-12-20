@@ -15,6 +15,10 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
 
+PKG_FLAVOURS=		THREADING
+PKGFD_FULL=		Enable threading support
+
+
 include ${TOPDIR}/mk/package.mk
 
 ifeq (${ADK_PACKAGE_APR_THREADING},y)
