@@ -21,6 +21,8 @@ PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 PKG_DEPENDS_MAIN:=		asterisk
 PKG_DESCR_CHAN_MGCP:=		Media Gateway Control Protocol implementation
 PKG_DESCR_CHAN_SKINNY:=		Skinny Client Control Protocol implementation

@@ -14,6 +14,8 @@ PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthr
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

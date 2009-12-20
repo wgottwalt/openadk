@@ -8,6 +8,7 @@ PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		comp
 PKG_DEPENDS:=		libthread-db libncurses
 PKG_BUILDDEP+=		ncurses readline
+PKG_TARGET_DEPENDS:=	!foxboard
 
 include ${TOPDIR}/mk/package.mk
 

@@ -57,7 +57,7 @@ for dn in */Makefile; do
 	# PKGDFLT_*: subpackage 'default {:-n}', by subpackage option
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
-	# PKG_{HOST,TARGET}_DEPENDS: wbx@’s weird ideas
+	# PKG_{HOST,TARGET}_DEPENDS: add host or target dependencies
 	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
@@ -120,7 +120,13 @@ for dn in */Makefile; do
 	if [[ -n $PKG_TARGET_DEPENDS ]]; then
 		ptd='\tdepends on'
 		sp=' '				# local sp: space (or ' || ')
+		if [[ $PKG_TARGET_DEPENDS = *\!* ]]; then
+			sp=' !'
+		else
+			sp=' '
+		fi
 		for x in $PKG_TARGET_DEPENDS; do
+			x=${x#!}
 			#XXX cache this with mksh R40+
 			found=0
 			while read friendlyname sym; do
@@ -133,7 +139,11 @@ for dn in */Makefile; do
 				exit 1
 			fi
 			ptd="$ptd${sp}$sym"
-			sp=' || '
+			if [[ $PKG_TARGET_DEPENDS = *\!* ]]; then
+				sp=' && !'
+			else
+				sp=' || '
+			fi
 		done
 	fi
 

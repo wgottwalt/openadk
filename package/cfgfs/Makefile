@@ -13,6 +13,8 @@ PKG_TARGET_DEPENDS:=	alix1c alix2d wrap foxboard ag241 rb532
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
+CFLINE_CFGFS:= 		select BUSYBOX_COMM\\n\\tselect BUSYBOX_MD5SUM
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

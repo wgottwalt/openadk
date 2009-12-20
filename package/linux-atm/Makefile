@@ -12,14 +12,13 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://linux-atm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 
+PKG_HOST_DEPENDS:=	!freebsd
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 PKG_DESCR_1:=		br2684ctl
 PKG_DEPENDS_1:=		libatm
 PKG_SECTION_1:=		net
-
-CFLINE_LIBATM:=		depends on !ADK_HOST_FREEBSD
-CFLINE_BR2684CTL:=	depends on !ADK_HOST_FREEBSD
 
 include ${TOPDIR}/mk/package.mk
 
