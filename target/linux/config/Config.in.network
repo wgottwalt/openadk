@@ -61,6 +61,7 @@ config ADK_KPACKAGE_KMOD_ATM
 config ADK_KPACKAGE_KMOD_ATM_BR2684
 	prompt "kmod-atm-br2684................... BR2684 ATM module"
 	tristate
+	select ADK_KPACKAGE_KMOD_ATM
 	default n
 	help
 
