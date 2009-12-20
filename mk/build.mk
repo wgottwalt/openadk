@@ -216,6 +216,7 @@ else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 ifneq ($(filter-out distclean,${MAKECMDGOALS}),)
 include $(TOPDIR)/prereq.mk
+export BASH HOSTCC HOSTCFLAGS MAKE LANGUAGE LC_ALL OStype PATH
 endif
 
 all: menuconfig
