@@ -112,6 +112,6 @@ EOF
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pf"
 	done
-	) >Config.in
+	) >Config.new
 	cd ..
 done
