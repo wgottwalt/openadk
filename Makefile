@@ -1,11 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-CC?=		gcc
-GMAKE?=		$(PWD)/scripts/make
-GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
-GMAKE_INV=	${GMAKE_FMK} --no-print-directory
-
 all: .prereq_done
 	@${GMAKE_INV} all
 
@@ -145,11 +140,11 @@ world: .prereq_done
 
 prereq:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done --no-print-directory
+	@${GMAKE} .prereq_done
 
 prereq-noerror:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done NO_ERROR=1
+	@${GMAKE} .prereq_done NO_ERROR=1
 
 NO_ERROR=0
 .prereq_done:

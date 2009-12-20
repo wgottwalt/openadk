@@ -4,6 +4,8 @@
 TOPDIR:=	$(shell pwd)
 PWD:=		${TOPDIR}
 
+include Makefile.inc
+
 ADKVERSION=	0.1.0
 export ADKVERSION
 
