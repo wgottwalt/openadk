@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		MTD utility
 PKG_SECTION:=		base
 
+PKG_TARGET_DEPENDS:=	ag241 foxboard
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
@@ -27,6 +29,6 @@ do-build:
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MTD}/sbin
-	${INSTALL_BIN} ${WRKBUILD}/mtd ${IDIR_MTD}/sbin/mtd
+	${INSTALL_BIN} ${WRKBUILD}/mtd ${IDIR_MTD}/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
