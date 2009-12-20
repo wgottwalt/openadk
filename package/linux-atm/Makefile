@@ -18,6 +18,9 @@ PKG_DESCR_1:=		br2684ctl
 PKG_DEPENDS_1:=		libatm
 PKG_SECTION_1:=		net
 
+CFLINE_LIBATM:=		depends on !ADK_HOST_FREEBSD
+CFLINE_BR2684CTL:=	depends on !ADK_HOST_FREEBSD
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBATM,libatm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -72,6 +72,8 @@ for sd in */Makefile; do
 			}
 		done
 		print \\tselect ADK_COMPILE_$dnu
+		dep=$($GMAKE show=CFLINE_$xu)	# one free-format line
+		[[ -n $dep ]] && print "\t$dep"
 		if [[ -n $pd$ph ]]; then
 			print \\thelp
 			[[ -n $pd ]] && print "\t  $pd"
