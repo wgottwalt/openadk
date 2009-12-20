@@ -43,8 +43,15 @@ TARGET_CFLAGS:=		$(strip -fwrapv -fno-ident ${TARGET_CFLAGS})
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
 
+# I hate GNU make!	--mirabilos
 ifneq (${show},)
 .DEFAULT_GOAL:=		show
 show:
 	@$(info ${${show}})
+else ifneq (${dump},)
+__shquote=		'$(subst ','\'',$(1))'
+__dumpvar=		echo $(call __shquote,$(1)=$(call __shquote,${$(1)}))
+.DEFAULT_GOAL:=		show
+show:
+	@$(foreach _s,${dump},$(call __dumpvar,${_s});)
 endif
