@@ -227,7 +227,7 @@ $(CONFIG)/conf:
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
-defconfig:
+defconfig: _menu
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
 endif
@@ -318,21 +318,21 @@ ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/all.config
 endif
 
-menuconfig: $(CONFIG)/mconf defconfig
+menuconfig: $(CONFIG)/mconf defconfig _menu
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf
+_config: $(CONFIG)/conf _menu
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN) >/dev/null
 	${POSTCONFIG}
 
 .NOTPARALLEL: _mconfig
 _mconfig: ${CONFIG}/conf _mconfig2 _config
-_mconfig2: ${CONFIG}/conf modconfig
+_mconfig2: ${CONFIG}/conf modconfig _menu
 	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
 # build all targets and combinations
@@ -342,7 +342,7 @@ bulk:
 	$(MAKE) v
 	$(CP) $(BIN_DIR) $(TOPDIR)/bulk
 	$(MAKE) cleantarget
-	
+
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) \
@@ -353,6 +353,5 @@ distclean:
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
-menu:
+_menu: .PHONY
 	mksh $(TOPDIR)/package/pkgmaker
-
