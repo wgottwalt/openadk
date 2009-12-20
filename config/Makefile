@@ -126,5 +126,5 @@ ncurses:
 	fi
 
 clean:
-	rm -f *.o *~ core $(TARGETS) $(MCONF_OBJS) $(CONF_OBJS) zconf.hash.c \
+	@rm -f *.o *~ core $(TARGETS) $(MCONF_OBJS) $(CONF_OBJS) zconf.hash.c \
 		conf mconf zconf.tab.c zconf.tab.h lex.zconf.c lkc_defs.h

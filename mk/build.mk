@@ -206,10 +206,10 @@ cleantarget:
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
-	rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
+	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
+	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)

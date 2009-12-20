@@ -25,7 +25,7 @@ for dn in */Makefile; do
 	cd ..
 
 	if [[ -z $ALL_PKGOPTS ]]; then
-		print -u2 "Warning: $dn/Makefile contains no packages, skipped"
+		#print -u2 "Warning: $dn/Makefile contains no packages, skipped"
 		continue
 	fi
 
