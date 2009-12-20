@@ -8,7 +8,7 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
-	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/vmlinuz-adk
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/vmlinuz-adk
 
 ifeq ($(FS),ext2-cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -20,9 +20,9 @@ endif
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
-		$(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel $(MAKE_TRACE)
+		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel $(MAKE_TRACE)
 	@echo
-	@echo 'The linux kernel is here: $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel'
+	@echo 'The linux kernel is here: $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

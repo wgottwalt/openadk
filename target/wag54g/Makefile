@@ -19,7 +19,7 @@ tools-compile: $(TOOLS_BUILD_DIR)
 
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' \
-	mipsel-linux-objcopy -S -O srec $(LINUX_DIR)/vmlinux \
+	$(TARGET_CROSS)objcopy -S -O srec $(LINUX_DIR)/vmlinux \
 		$(LINUX_DIR)/vmlinux.srec
 	PATH='${TARGET_PATH}' \
 	srec2bin $(LINUX_DIR)/vmlinux.srec $(LINUX_DIR)/vmlinux.bin
@@ -27,7 +27,7 @@ kernel-install: tools-compile
 		$(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' \
 	addpattern -p WA21 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/${ADK_TARGET}-${ARCH}-kernel	
+		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel	
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
@@ -44,11 +44,11 @@ endif
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'You can flash the kernel via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
-	@echo 'tftp> put wag54g-mips-kernel upgrade_code.bin'
+	@echo 'tftp> put ${ADK_TARGET}-${FS}-kernel upgrade_code.bin'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
