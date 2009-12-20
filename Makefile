@@ -64,6 +64,8 @@ pkg-help:
 	@echo 'This does not automatically resolve package dependencies!'
 
 dev-help:
+	@echo 'Regenerate menu information via "make menu"'
+	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
@@ -134,6 +136,9 @@ package_index: .prereq_done
 
 bulk: .prereq_done
 	@${GMAKE_INV} bulk
+
+menu: .prereq_done
+	@${GMAKE_INV} menu
 
 world: .prereq_done
 	@${GMAKE_INV} world

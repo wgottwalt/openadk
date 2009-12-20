@@ -53,7 +53,8 @@ for sd in */Makefile; do
 		while (( ${#xf} < 34 )); do
 			xf=$xf.
 		done
-		print "\tprompt \"$xf ${pd:-$pn}\""
+		desc=$($GMAKE show=PKGDESC_$xu)
+		print "\tprompt \"$xf ${desc:-${pd:-$pn}}\""
 		print \\ttristate
 		print \\tdefault n
 		deps=$($GMAKE show=PKGDEPS_$xu)
@@ -111,6 +112,6 @@ EOF
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pf"
 	done
-	) >Config.new
+	) >Config.in
 	cd ..
 done

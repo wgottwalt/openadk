@@ -352,3 +352,7 @@ distclean:
 		${TOPDIR}/package/*/info.mk
 
 endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
+
+menu:
+	mksh $(TOPDIR)/package/pkgmaker
+
