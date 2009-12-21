@@ -110,7 +110,11 @@ config ADK_HOST_OPENBSD
 	boolean
 
 config ADK_HOST_NETBSD
-	prompt "OpenBSD"
+	prompt "NetBSD"
+	boolean
+
+config ADK_HOST_CYGWIN
+	prompt "Cygwin"
 	boolean
 
 endchoice

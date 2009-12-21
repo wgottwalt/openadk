@@ -1,5 +1,4 @@
 - netbsd build
-- win cygwin build
 - macos x build
 - openbsd build
 - make rpm package backend working

@@ -48,6 +48,7 @@ pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
 		--with-build-cc=${HOSTCC} \
+		--with-shared \
 		--with-progs \
 	);
 	${MAKE} -C ${WRKBUILD}/include

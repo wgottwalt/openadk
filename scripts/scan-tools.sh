@@ -5,10 +5,10 @@ shopt -s extglob
 topdir=$(pwd)
 opath=$PATH
 out=0
-if [ -z $(which gmake) ];then
-	makecmd=$(which make)
+if [ -z $(which gmake 2>/dev/null ) ];then
+	makecmd=$(which make 2>/dev/null )
 else
-	makecmd=$(which gmake)
+	makecmd=$(which gmake 2>/dev/null )
 fi
 
 if [[ $NO_ERROR != @(0|1) ]]; then
