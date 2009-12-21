@@ -352,11 +352,12 @@ bulk:
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(MAKE) prereq && \
-		$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
-		    defconfig && \
 		if [ "x$$p" = xy ];then \
 			$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
 				allmodconfig; \
+		else \
+			$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+				defconfig; \
 		fi && \
 		$(MAKE) VERBOSE=1 -f mk/build.mk allcopy \
 		    d=$$target-$$libc-$$fs && \
