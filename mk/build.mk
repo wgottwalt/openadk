@@ -79,6 +79,9 @@ include ${TOPDIR}/mk/split-cfg.mk
 
 all: world
 
+allcopy: all
+	$(CP) $(BIN_DIR) $(TOPDIR)/bulkdir/${d}/
+
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
@@ -200,7 +203,7 @@ distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-		${TOPDIR}/.cfg*
+		${TOPDIR}/.cfg* $(TOPDIR)/bulkdir
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	rm -f .config* .defconfig .tmpconfig.h all.config \
 		${TOPDIR}/package/*/info.mk
@@ -224,7 +227,7 @@ $(CONFIG)/conf:
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
-defconfig:
+defconfig: $(CONFIG)/conf
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
 endif
@@ -332,20 +335,32 @@ _mconfig: ${CONFIG}/conf _mconfig2 _config
 _mconfig2: ${CONFIG}/conf modconfig
 	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
-# build all targets and combinations
-bulk:
-	mkdir $(TOPDIR)/bulk
-	$(MAKE) TARGET=alix1c LIBC=uclibc FS=nfsroot PKG=ipkg allmodconfig
-	$(MAKE) v
-	$(CP) $(BIN_DIR) $(TOPDIR)/bulk
-	$(MAKE) cleantarget
-	
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR) $(TOOLS_BUILD_DIR) $(BIN_DIR) $(DISTDIR) \
-		${TOPDIR}/.cfg*
+		${TOPDIR}/.cfg* $(TOPDIR)/bulkdir
 	@rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) $(TARGET_DIR)
 	@rm -f .config* .defconfig all.config .tmpconfig.h \
 		${TOPDIR}/package/*/info.mk
 
-endif # ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
+endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
+
+# build all targets and combinations
+bulk:
+	while read target libc fs p; do \
+		mkdir -p $(TOPDIR)/bulkdir/$$target-$$libc-$$fs; \
+	    ( \
+		echo === building $$target $$libc $$fs on $$(date); \
+		$(MAKE) prereq && \
+		$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+		    defconfig && \
+		if [ "x$$p" = xy ];then \
+			$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+				allmodconfig; \
+		fi && \
+		$(MAKE) VERBOSE=1 -f mk/build.mk allcopy \
+		    d=$$target-$$libc-$$fs && \
+		$(MAKE) cleantarget; \
+		rm .*config; \
+	    ) 2>&1 | tee $(TOPDIR)/bulkdir/$$target-$$libc-$$fs/log; \
+	done <${TOPDIR}/target/bulk.lst

@@ -27,3 +27,4 @@ dl/
 package/*/info.mk
 tools_build/
 extra/
+bulkdir/

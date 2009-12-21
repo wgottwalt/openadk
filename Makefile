@@ -121,6 +121,9 @@ image_clean imageclean cleanimage: .prereq_done
 menuconfig: .prereq_done
 	@${GMAKE_INV} menuconfig
 
+defconfig: .prereq_done
+	@${GMAKE_INV} defconfig
+
 allnoconfig: .prereq_done
 	@${GMAKE_INV} _config W=-n
 
