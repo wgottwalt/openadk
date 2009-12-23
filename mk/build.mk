@@ -196,7 +196,7 @@ cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT)
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) all.config .defconfig
 	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
 
 distclean:
