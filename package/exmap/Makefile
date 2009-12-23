@@ -6,18 +6,19 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		exmap
 PKG_VERSION:=		0.4.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		glib readline
 PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
-PKG_DESCR:=		memory analysing toolsuite
+PKG_DESCR:=		memory analysing client tool
 PKG_SECTION:=		utils
+PKG_DEPENDS:=		kmod-exmap libreadline glib
+PKG_BUILDDEP+=		glib readline
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
-PKG_DESCR_EXMAPD:=	exmap daemon
-PKG_DESCR_EXMAPSERVER:=	exmap server
-PKG_DESCR_KMOD_EXMAP:=	exmap kernel module
+PKG_DESCR_EXMAPD:=	memory analysing daemon
+PKG_DESCR_EXMAPSERVER:=	memory analysing server
+PKG_DESCR_KMOD_EXMAP:=	memory analysing kernel module
 
 include ${TOPDIR}/mk/package.mk
 

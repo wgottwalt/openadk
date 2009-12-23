@@ -6,13 +6,18 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		collectd
 PKG_VERSION:=		4.7.0
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libpthread
 PKG_MD5SUM:=		b077e3398bd6fac0e53e9df4794db264
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		console
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://collectd.org
 PKG_SITES:=		http://collectd.org/files/
+
+PKG_FLAVOURS:=		CPU LOAD MEMORY PING
+PKGFD_CPU:=		collect CPU statistics
+PKGFD_LOAD:=		collect system load statistics
+PKGFD_MEMORY:=		collect memory usage statistics
+PKGFD_PING:=		enable ping statistic plugin
 
 include ${TOPDIR}/mk/package.mk
 
@@ -31,7 +36,7 @@ ifneq (${ADK_PACKAGE_COLLECTD_PING},y)
 DISABLE_PING:=--disable-ping
 endif
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-apache \
 			--disable-apcups \
 			--disable-apple_sensors \
@@ -91,8 +96,8 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--with-nan-emulation
 
 XAKE_FLAGS+=		LIBS='-lm'
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/sbin ${IDIR_COLLECTD}/usr/lib/collectd

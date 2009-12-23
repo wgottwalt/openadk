@@ -6,8 +6,8 @@ include ${TOPDIR}/toolchain/gcc/Makefile.inc
 
 PKG_DESCR:=		GNU compiler collection
 PKG_SECTION:=		comp
-PKG_DEPENDS:=		mpfr
 PKG_OPTS:=		noremove
+PKG_DEPENDS:=		libgmp mpfr
 PKG_BUILDDEP+=		gmp mpfr
 
 PKG_HOST_DEPENDS:=	!freebsd

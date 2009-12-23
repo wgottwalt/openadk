@@ -8,6 +8,9 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		compact flash installer
 PKG_SECTION:=		base
+PKG_DEPENDS:=		parted sfdisk
+
+PKG_TARGET_DEPENDS:=	alix1c alix2d wrap rb532
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1

@@ -6,6 +6,7 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		comp
+PKG_DEPENDS:=		libthread-db
 
 include ${TOPDIR}/mk/package.mk
 

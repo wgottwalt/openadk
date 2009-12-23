@@ -6,24 +6,42 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-server
 PKG_VERSION:=		2.1.7
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libtool openssl
-ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_LDAP),)
-PKG_BUILDDEP+=		openldap
-endif
-ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL),)
-PKG_BUILDDEP+=		mysql
-endif
-ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL),)
-PKG_BUILDDEP+=		postgresql
-endif
 PKG_MD5SUM:=		b1f77c5e3116bcb0ac0aa9080a06ebf1
 PKG_DESCR:=		a flexible RADIUS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libltdl libopenssl libpthread
+PKG_BUILDDEP+=		libtool openssl
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_LDAP),)
+PKG_BUILDDEP+=		openldap
+PKG_DEPENDS_LDAP:=	libopenldap
+endif
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL),)
+PKG_BUILDDEP+=		mysql
+PKG_DEPENDS_MYSQL:=	libmysqlclient
+endif
+ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+PKG_DEPENDS_PGSQL:=	libpq
+endif
 PKG_URL:=		http://www.freeradius.org
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
 			ftp://ftp.uk.freeradius.org/pub/radius/
+
+PKG_DESCR_DEMOCERTS:=	Demo certificates to test the server
+PKG_DESCR_CHAP:=	CHAP authentication module
+PKG_DESCR_DETAIL:=	Detailed accounting module
+PKG_DESCR_DIGEST:=	Digest authentication module
+PKG_DESCR_FILES:=	Module using local files for authorization
+PKG_DESCR_LDAP:=	LDAP module
+PKG_DESCR_MSCHAP:=	MS-CHAP and MS-CHAPv2 module
+PKG_DESCR_PAP:=		PAP authentication module
+PKG_DESCR_PREPROCESS:=	Request pre-processing module
+PKG_DESCR_REALM:=	Realms handling module
+PKG_DESCR_SQL:=		Base SQL module
+PKG_DESCR_MYSQL:=	MySQL module
+PKG_DESCR_PGSQL:=	PostgreSQL module
+PKG_DESCR_UTILS:=	Misc. client utilities
 
 PKG_CONFIGURE_OPTIONS:=
 
@@ -75,20 +93,20 @@ ${2}-install:
 endef
 
 $(eval $(call PKG_template,FREERADIUS_SERVER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_DEMOCERTS,freeradius-democerts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_CHAP,freeradius-mod-chap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_DETAIL,freeradius-mod-detail,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_DIGEST,freeradius-mod-digest,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_FILES,freeradius-mod-files,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_LDAP,freeradius-mod-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_MSCHAP,freeradius-mod-mschap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_PAP,freeradius-mod-pap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_PREPROCESS,freeradius-mod-preprocess,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_REALM,freeradius-mod-realm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_SQL,freeradius-mod-sql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_SQL_MYSQL,freeradius-mod-sql-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_MOD_SQL_PGSQL,freeradius-mod-sql-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FREERADIUS_UTILS,freeradius-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_DEMOCERTS,freeradius-democerts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_DEMOCERTS},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_CHAP,freeradius-mod-chap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CHAP},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_DETAIL,freeradius-mod-detail,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_DETAIL},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_DIGEST,freeradius-mod-digest,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_DIGEST},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_FILES,freeradius-mod-files,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_FILES},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_LDAP,freeradius-mod-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LDAP},${PKG_DESCR_LDAP},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_MSCHAP,freeradius-mod-mschap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_MSCHAP},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_PAP,freeradius-mod-pap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_PAP},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_PREPROCESS,freeradius-mod-preprocess,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_PREPROCESS},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_REALM,freeradius-mod-realm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_REALM},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_SQL,freeradius-mod-sql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SQL},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_SQL_MYSQL,freeradius-mod-sql-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_MYSQL},${PKG_DESCR_MYSQL},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_MOD_SQL_PGSQL,freeradius-mod-sql-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_PGSQL},${PKG_DESCR_PGSQL},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_UTILS,freeradius-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_UTILS},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_CHAP,rlm_chap,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_DETAIL,rlm_detail,))
@@ -103,7 +121,7 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL,rlm_sql,sql.conf))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_ntoa=no
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS} \
 			--with-openssl-includes=${STAGING_DIR}/usr/include \
@@ -147,8 +165,8 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS} \
 			--without-rlm_sql_sqlite \
 			--libdir=/usr/lib/freeradius \
 			--libexecdir=/usr/lib/freeradius
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 FAKE_FLAGS+=		R="${WRKINST}" \
 			INSTALLSTRIP=""
 
