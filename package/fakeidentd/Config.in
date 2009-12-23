@@ -1,8 +1,0 @@
-config ADK_PACKAGE_FAKEIDENTD
-	prompt "fakeidentd........................ A static, secure identd."
-	tristate
-	default n
-	help
-	  A static secure identd, only one source file.
-
-	  http://www.guru-group.fi/~too/sw/releases/

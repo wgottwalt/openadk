@@ -1,7 +1,0 @@
-config ADK_PACKAGE_LIBLAME
-	prompt "liblame........................... MP3 encoding library"
-	tristate
-	default n
-        select ADK_COMPILE_LAME
-	help
-	  http://lame.sourceforge.net

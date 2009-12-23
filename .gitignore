@@ -25,6 +25,8 @@ config/lxdialog/*.o
 make.log
 dl/
 package/*/info.mk
+package/*/Config.in
+package/*/Config.in.lib
 tools_build/
 extra/
 .menu

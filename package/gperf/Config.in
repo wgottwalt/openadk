@@ -1,7 +1,0 @@
-config ADK_PACKAGE_GPERF
-	prompt "gperf............................. perfect hash function generator"
-	tristate
-	default n
-	select ADK_PACKAGE_LIBSTDCXX
-	help
-	  http://www.gnu.org/software/gperf/

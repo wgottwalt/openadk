@@ -1,6 +1,0 @@
-config ADK_PACKAGE_GETTEXT
-	prompt "gettext........................... internationalisation library"
-	tristate
-	default n
-	help 
-	  GNU gettext

@@ -1,8 +1,0 @@
-config ADK_PACKAGE_XFSPROGS
-	prompt "xfsprogs.......................... Utilities to create and check XFS filesystems"
-	tristate
-	select ADK_PACKAGE_LIBUUID
-	select ADK_PACKAGE_LIBPTHREAD
-	default n
-	help
-           Utilities to create and check XFS filesystems.

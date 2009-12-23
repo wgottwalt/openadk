@@ -1,9 +1,0 @@
-config ADK_PACKAGE_SISPMCTL
-	prompt "sispmctl.......................... control application for power sockets"
-	tristate
-	default n
-	select ADK_PACKAGE_LIBUSB
-	help
-	switch USB controlled outlets of Gembird Silver Shield PM.
-  
-	http://sispmctl.sourceforge.net/

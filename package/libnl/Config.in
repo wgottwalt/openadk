@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBNL
-	prompt "libnl........................... netlink library"
-	tristate
-	default n
-	help
-	  Netlink library.

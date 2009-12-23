@@ -1,7 +1,0 @@
-config ADK_PACKAGE_LIBX11
-	prompt "libX11............................... X11 client-side library"
-	tristate
-	select ADK_PACKAGE_LIBXDMCP
-	default n
-	help
-         http://www.x.org

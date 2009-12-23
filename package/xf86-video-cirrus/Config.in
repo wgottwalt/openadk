@@ -1,8 +1,0 @@
-config ADK_PACKAGE_XF86_VIDEO_CIRRUS
-	prompt "xf86-video-cirrus.......................... X11 driver for Cirrus chips"
-	tristate
-	default n
-	depends on ADK_LINUX_X86_QEMU || ADK_LINUX_X86_64_QEMU
-	select ADK_PACKAGE_XORG_SERVER
-	help
-         http://www.x.org

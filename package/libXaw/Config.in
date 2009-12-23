@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBXAW
-	prompt "libXaw............................... X11 Athena Widget library"
-	tristate
-	default n
-	help
-         http://www.x.org

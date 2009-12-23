@@ -1,6 +1,0 @@
-config ADK_PACKAGE_DIFFUTILS
-	prompt "diffutils......................... show differences between two files"
-	tristate
-	default n
-	help
-	  http://www.gnu.org/software/diffutils/

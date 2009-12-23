@@ -1,8 +1,0 @@
-config ADK_PACKAGE_PERL
-	prompt "perl.............................. A full blown perl"
-	tristate
-	depends on ADK_NATIVE
-	default n
-	help
-	  Complete Perl.
-

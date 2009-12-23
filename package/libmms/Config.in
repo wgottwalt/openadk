@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBMMS
-	prompt "libmms........................... common library for parsing mms:// and mmsh:// type network streams"
-	tristate
-	default n
-	help
-          http://launchpad.net/libmms/

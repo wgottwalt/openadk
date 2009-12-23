@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBXEXT
-	prompt "libXext.............................. X client interface to extensions of the X protocol"
-	tristate
-	default n
-	help
-         http://www.x.org

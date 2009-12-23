@@ -1,7 +1,0 @@
-config ADK_PACKAGE_UCLIBCXX
-	prompt "uClibc++.......................... C++ library for embedded systems"
-	tristate
-	default n
-	help
-	  A standard C++ library for embedded systems
-

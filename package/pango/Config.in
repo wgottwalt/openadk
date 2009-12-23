@@ -1,5 +1,0 @@
-config ADK_PACKAGE_PANGO
-	prompt "pango............................. Pango library"
-	tristate
-	default n
-	help

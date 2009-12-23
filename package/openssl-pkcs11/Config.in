@@ -1,7 +1,0 @@
-config ADK_PACKAGE_OPENSSL_PKCS11
-	prompt "openssl-pkcs11.................... openssl pkcs11 engine"
-	tristate
-	default n
-	select ADK_PACKAGE_LIBP11
-	help
-	  openssl pkcs11 engine
