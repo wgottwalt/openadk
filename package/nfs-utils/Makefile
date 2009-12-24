@@ -6,6 +6,13 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libtirpc
+ifeq (${ADK_COMPILE_NFS_UTILS_WITH_KRB5},y)
+PKG_BUILDDEP+=		libnfsidmap krb5 libevent libgssglue librpcsecgss
+endif
+ifeq (${ADK_COMPILE_NFS_UTILS_WITH_HEIMDAL},y)
+PKG_BUILDDEP+=		libnfsidmap heimdal libevent librpcsecgss
+endif
 PKG_MD5SUM:=		779cf81044e92cb51ad590960e7b3671
 PKG_DESCR:= 		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net

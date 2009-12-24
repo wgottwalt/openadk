@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libshout
 PKG_VERSION:=		2.2.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libvorbis
 PKG_MD5SUM:=		4f75fc9901c724b712c371c9a1e782d3
 PKG_DESCR:=		Library which can be used to write a source client for streaming
 PKG_SECTION:=		libs

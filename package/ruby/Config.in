@@ -1,7 +1,0 @@
-config ADK_PACKAGE_RUBY
-	prompt "ruby.............................. Object-Oriented scripting language"
-	tristate
-	default n
-	help
-	  Ruby is the interpreter for the ruby language.
-

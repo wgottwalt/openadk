@@ -6,6 +6,16 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		pmacct
 PKG_VERSION:=		0.11.6
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
+ifneq ($(ADK_COMPILE_PMACCT_MYSQL),)
+PKG_BUILDDEP+=		mysql
+endif
+ifneq ($(ADK_COMPILE_PMACCT_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
+ifneq ($(ADK_COMPILE_PMACCT_SQLITE),)
+PKG_BUILDDEP+=		sqlite
+endif
 PKG_MD5SUM:=		e0f3bcba9a73b7a70bbf5a303cd22f77
 PKG_DESCR:=		IP accounting daemons
 PKG_SECTION:=		net

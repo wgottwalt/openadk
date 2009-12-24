@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mtr
 PKG_VERSION:=		0.75
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		23baca52d0922c2ecba7eba05317868c
 PKG_DESCR:=		ncurses traceroute/ping tool
 PKG_SECTION:=		net

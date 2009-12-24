@@ -1,9 +1,0 @@
-config ADK_PACKAGE_GMEDIASERVER
-	prompt "gmediaserver...................... An UPnP music media server"
-	tristate
-	default n
-	select ADK_PACKAGE_ID3LIB
-	select ADK_PACKAGE_LIBUPNP
-	help
-	  An UPnP music media server.
-	  http://www.nongnu.org/gmediaserver/

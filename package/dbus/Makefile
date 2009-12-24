@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		dbus
 PKG_VERSION:=		1.2.16
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		expat
 PKG_MD5SUM:=		c7a47b851ebe02f6726b65b78d1b730b
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		net

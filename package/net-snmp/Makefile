@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		net-snmp
 PKG_VERSION:=		5.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libelf
 PKG_MD5SUM:=		5b2551e7bd024fbbee84dca22a5f13a1
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net

@@ -6,6 +6,34 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		php
 PKG_VERSION:=		5.3.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl zlib
+ifneq ($(ADK_PACKAGE_PHP_MOD_CURL),)
+PKG_BUILDDEP+=		curl
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
+PKG_BUILDDEP+=		libgd libpng
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_GMP),)
+PKG_BUILDDEP+=		gmp
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
+PKG_BUILDDEP+=		openldap
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
+PKG_BUILDDEP+=		mysql
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_PCRE),)
+PKG_BUILDDEP+=		pcre
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_SQLITE),)
+PKG_BUILDDEP+=		sqlite
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
+PKG_BUILDDEP+=		expat
+endif
 PKG_MD5SUM:=		41fbb368d86acb13fc3519657d277681
 PKG_DESCR:=		PHP CLI
 PKG_SECTION:=		net

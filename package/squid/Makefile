@@ -6,18 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		squid
 PKG_VERSION:=		3.0.STABLE20
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
 PKG_URL:=		http://www.squid-cache.org
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
-
-ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
+PKG_CXX:=		SQUID
 
 AUTH_MODULES:=		basic digest ntlm
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)

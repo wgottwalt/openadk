@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		neon
 PKG_VERSION=		0.28.4
 PKG_RELEASE=		1
+PKG_BUILDDEP+=		libpthread libxml2 openssl zlib
 PKG_MD5SUM=		6c3b94362af743d046e198e9fcbe4a85
 PKG_DESCR:=		HTTP and WebDAV library
 PKG_SECTION:=		libs

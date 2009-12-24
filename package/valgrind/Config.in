@@ -1,8 +1,0 @@
-config ADK_PACKAGE_VALGRIND
-	prompt "valgrind.......................... a memory error detector and more"
-	tristate
-	default n
-	depends on ADK_LINUX_X86_ALIX1C || \
-		   ADK_LINUX_X86_QEMU
-	help
-	  http://valgrind.org/

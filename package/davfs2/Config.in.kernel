@@ -1,0 +1,16 @@
+choice
+prompt "kernel filesystem interface"
+depends on ADK_PACKAGE_DAVFS2
+
+config ADK_PACKAGE_DAVFS2_FUSE
+       bool "use the FUSE filesystem interface"
+       select ADK_PACKAGE_FUSE_UTILS
+config ADK_PACKAGE_DAVFS2_CODA
+       bool "use the CODA filesystem interface"
+       select ADK_KPACKAGE_KMOD_CODA_FS
+config ADK_PACKAGE_DAVFS2_BOTH
+       bool "use both filesystem interfaces"
+       select ADK_PACKAGE_FUSE_UTILS
+       select ADK_KPACKAGE_KMOD_CODA_FS
+endchoice
+

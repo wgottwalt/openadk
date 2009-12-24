@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		rpm
 PKG_VERSION:=		4.7.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		nss libdb
 PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
 PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base

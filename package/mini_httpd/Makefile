@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mini-httpd
 PKG_VERSION:=		1.19
 PKG_RELEASE:=		10
+ifneq ($(ADK_PACKAGE_MINI_HTTPD_OPENSSL),)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		7c68293ad265ecfe2edea917912f6f1f
 PKG_DESCR:=		A small HTTP server
 PKG_SECTION:=		net

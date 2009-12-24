@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		portmap
 PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
+ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
+PKG_BUILDDEP+=		tcp_wrappers
+endif
 PKG_MD5SUM:=		ac108ab68bf0f34477f8317791aaf1ff
 PKG_DESCR:=		RPC portmapper
 PKG_SECTION:=		net

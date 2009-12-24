@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libpng
 PKG_VERSION:=		1.2.36
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		4779cd011409ea9b591e11638781f0bf
 PKG_DESCR:=		A library for reading/writing PNG images
 PKG_SECTION:=		libs

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openldap
 PKG_VERSION:=		2.4.19
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		cyrus-sasl openssl libdb
 PKG_MD5SUM:=		4a6dab2711fcf141f19bb680bc335887
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		maradns
 PKG_VERSION:=		1.3.07.09
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpthread
 PKG_MD5SUM:=		1d221438fb4d9317263555262b9c652c
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		net

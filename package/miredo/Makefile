@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		miredo
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
+ifeq (${ADK_COMPILE_MIREDO_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_MD5SUM:=		bf49c1ddc068746760787d0cf76e40de
 PKG_DESCR:=		A Teredo (IPv6 tunneling over UDP through NAT) client and relay daemon
 PKG_SECTION:=		net

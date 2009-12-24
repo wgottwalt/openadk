@@ -1,9 +1,0 @@
-config ADK_PACKAGE_MC
-	prompt "mc................................ The Midnight Commander (CUI filemanager)"
-	tristate
-	default n
-	select ADK_PACKAGE_GLIB
-	select ADK_PACKAGE_LIBNCURSES
-	help
-	  Clone of the widely known Norton/Volkov Commander for DOS;
-	  console-mode UI file manager with many extended functions

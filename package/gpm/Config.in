@@ -1,6 +1,0 @@
-config ADK_PACKAGE_GPM
-	prompt "gpm .............................. GPM"
-	tristate
-	default n
-	help
-	  http://unix.schottelius.org/gpm/

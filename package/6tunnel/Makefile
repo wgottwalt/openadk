@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b325fa9d238e32195fbb3fc3646b0d28
 PKG_DESCR:=		IPv4/IPv6 tunnel proxy
 PKG_SECTION:=		net
+PKG_DEPENDS:=		kmod-ipv6
 PKG_SITES:=		http://toxygen.net/6tunnel/
 
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-0.11

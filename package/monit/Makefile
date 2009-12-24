@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		monit
 PKG_VERSION:=		5.0.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		dae7859ec10551fc941daeae60dee9d3
 PKG_DESCR:=		An utility for system services monitoring
 PKG_SECTION:=		admin

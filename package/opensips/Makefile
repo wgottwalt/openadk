@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		opensips
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		87c6fe40c143775d6a1be1beb75c3eb2
 PKG_DESCR:=		a high-performance, configurable, free SIP server
 PKG_SECTION:=		net

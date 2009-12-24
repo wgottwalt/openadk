@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		opencdk
 PKG_VERSION:=		0.6.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libgcrypt libgpg-error zlib
 PKG_MD5SUM:=		7bfc820bcdc08f0c31f860710368071e
 PKG_DESCR:=		Open Crypto Development Kit library
 PKG_SECTION:=		libs

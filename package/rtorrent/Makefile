@@ -6,12 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rtorrent
 PKG_VERSION:=		0.8.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses libtorrent curl
 PKG_MD5SUM:=		e701095e1824b7e512a17000f4c0a783
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libtorrent libcurl
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_CXX:=		RTORRENT
 
 include ${TOPDIR}/mk/package.mk
 

@@ -6,10 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		snort-wireless
 PKG_VERSION:=		2.4.3-alpha04
 PKG_RELEASE:=		9
+PKG_BUILDDEP+=		libnet libpcap pcre
 PKG_MD5SUM:=		1aa699ae279bf7a1140cf6cca02f9999
 PKG_DESCR:=		a flexible Wireless Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libnet libpcap libpcre
+PKG_DEPENDS:=		libnet libpcap pcre
 PKG_URL:=		http://www.snort-wireless.org
 PKG_SITES:=		http://www.snort-wireless.org/files/
 

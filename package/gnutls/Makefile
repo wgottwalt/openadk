@@ -10,6 +10,7 @@ PKG_MD5SUM:=		e3b2788b79bfc82acbe717e3c54d4e92
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
+PKG_BUILDDEP+=		libgcrypt liblzo libtasn1 opencdk zlib ncurses
 PKG_URL:=		http://www.gnu.org/software/gnutls
 PKG_SITES:=		${MASTER_SITE_GNU:=gnutls/}
 

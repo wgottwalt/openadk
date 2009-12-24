@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		lynx
 PKG_VERSION=		2.8.7dev.7
 PKG_RELEASE=		2
+PKG_BUILDDEP+=		ncurses openssl zlib
 PKG_MD5SUM=		83891107c873421e5ac917cc0ab53fe8
 PKG_DESCR:=		Standard text browser
 PKG_SECTION:=		text

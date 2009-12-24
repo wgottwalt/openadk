@@ -6,6 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		kismet
 PKG_VERSION:=		2008-05-R1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap ncurses
+PKG_CXX:=		KISMET
 PKG_MD5SUM:=		6ee365d36354b4dee4945e67f8149294
 PKG_SITES:=		http://www.kismetwireless.net/code/
 

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		vnc-reflector
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		jpeg zlib
 PKG_MD5SUM:=		c3f88bc62f228b335c25c07f9744ab0c
 PKG_DESCR:=		specialized VNC server which acts as a proxy
 PKG_SECTION:=		net

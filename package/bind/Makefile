@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bind
 PKG_VERSION:=		9.4.1
 PKG_RELEASE:=		4
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		09b54d35036cb0423b2e618f21766285
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		net

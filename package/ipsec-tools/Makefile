@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ipsec-tools
 PKG_VERSION:=		0.7.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		72861f005746ee27984b2ee715ecc629
 PKG_DESCR:=		IPsec management tools
 PKG_SECTION:=		net

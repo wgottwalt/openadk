@@ -10,6 +10,7 @@ PKG_MD5SUM:=		bf134b9f79a7fc6507577bf5b6d4f412
 PKG_DESCR:=		X font Library
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libfreetype
+PKG_BUILDDEP+=		freetype fontcacheproto fontsproto libfontenc
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

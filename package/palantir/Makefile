@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		palantir
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		jpeg
 PKG_MD5SUM:=		3a5b1fb340857f6d8e357bf39b77583e
 PKG_DESCR:=		A multichannel interactive streaming solution
 PKG_SECTION:=		net

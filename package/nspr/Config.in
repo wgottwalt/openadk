@@ -1,6 +1,0 @@
-config ADK_PACKAGE_NSPR
-	prompt "nspr.............................. Netscape Portable Runtime library"
-	tristate
-	default n
-	help
-	http://www.mozilla.org/projects/nspr/

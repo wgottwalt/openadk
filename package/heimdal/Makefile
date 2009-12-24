@@ -9,7 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses libcom_err
+PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses libcom-err
+PKG_BUILDDEP+=		openssl ncurses e2fsprogs
+ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
+PKG_BUILDDEP+=		libdb
+endif
+ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
+PKG_BUILDDEP+=		openldap
+endif
 PKG_URL:=		http://www.h5l.org
 PKG_SITES:=		http://www.h5l.org/dist/src/
 
@@ -18,6 +25,9 @@ PKG_SECTION_1:=		libs
 
 PKG_DESCR_2:=		Kerberos 5 client libraries
 PKG_SECTION_2:=		libs
+
+PKG_FLAVOURS:=		PKINIT
+PKGFD_PKINIT:=		Enable PK-INIT
 
 include $(TOPDIR)/mk/package.mk
 
@@ -55,7 +65,7 @@ else
 CONFIGURE_ARGS+=        --without-openldap
 endif
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_PKINIT),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_PKINIT),y)
 CONFIGURE_OPTS+=	--enable-pk-init
 else
 CONFIGURE_OPTS+=	--disable-pk-init

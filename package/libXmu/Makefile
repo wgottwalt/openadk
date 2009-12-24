@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libXmu
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libXt
 PKG_MD5SUM:=		f49e3587cdc299707da0786a681f9c05
 PKG_DESCR:=		miscellaneous utility functions for X libraries
 PKG_SECTION:=		x11

@@ -13,9 +13,13 @@ PKG_DESCR:=		GRUB bootloader
 PKG_SECTION:=		sys
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_TARGET_DEPENDS:=	shuttle wrap alix1c alix2d
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GRUB_BIN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+PKGDFLT_GRUB_BIN=	y
 
 INSTALL_STYLE:=		manual
 

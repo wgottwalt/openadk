@@ -6,12 +6,15 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libvirt
 PKG_VERSION:=		0.7.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libxml2 gnutls python
 PKG_MD5SUM:=		1645975662a326969d2f42d5c04574aa
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libxml2 libgnutls python
 PKG_URL:=		http://www.libvirt.org
 PKG_SITES:=		ftp://libvirt.org/libvirt/
+
+PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 

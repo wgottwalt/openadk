@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		logrotate
 PKG_VERSION:=		3.7.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		popt
 PKG_MD5SUM:=		552639142e163745f6bcd4f1f3816d8a
 PKG_DESCR:=		logfile rotation utility
 PKG_SECTION:=		misc

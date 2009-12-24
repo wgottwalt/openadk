@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		raddump
 PKG_VERSION:=		0.3.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl libpcap
 PKG_MD5SUM:=		f8c29c67141ea78bb6ae8b97d5149480
 PKG_DESCR:=		interprets captured RADIUS packets
 PKG_SECTION:=		net

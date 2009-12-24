@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gkrellmd
 PKG_VERSION:=		2.3.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		glib
 PKG_MD5SUM:=		db8a983a60577a6b4886db96d6def011
 PKG_DESCR:=		The GNU Krell Monitors Server
 PKG_SECTION:=		net

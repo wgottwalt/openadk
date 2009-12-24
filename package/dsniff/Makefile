@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		dsniff
 PKG_VERSION:=		2.4b1
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		libnids openssl gdbm
 PKG_MD5SUM:=		2f761fa3475682a7512b0b43568ee7d6
 PKG_DESCR:=		tools for network auditing and penetration testing
 PKG_SECTION:=		net

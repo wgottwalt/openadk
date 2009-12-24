@@ -6,6 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gpsd
 PKG_VERSION:=		2.39
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
+PKG_CXX:=		GPSD
 PKG_MD5SUM:=		3db437196a6840c252fca99b6c19d4d0
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		net
@@ -15,12 +17,6 @@ PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_DESCR_1:=		GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
 
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))

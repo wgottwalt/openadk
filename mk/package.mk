@@ -3,6 +3,15 @@
 
 all: build-all-pkgs
 
+ifneq (${PKG_CXX},)
+ifeq (${ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+endif
+
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
@@ -137,6 +146,10 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
 # should be package format independent and modular in the future
 define PKG_template
+ALL_PKGOPTS+=	$(1)
+PKGNAME_$(1)=	$(2)
+PKGDEPS_$(1)=	$(4)
+PKGDESC_$(1)=	$(5)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)

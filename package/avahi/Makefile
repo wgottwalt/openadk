@@ -6,12 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.25
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libdaemon expat gdbm glib
 PKG_MD5SUM:=		a83155a6e29e3988f07e5eea3287b21e
 PKG_DESCR:=		mDNS/DNS-SD (aka RendezVous/Bonjour/ZeroConf) daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libavahi libdaemon libexpat
 PKG_URL:=		http://avahi.org
 PKG_SITES:=		http://avahi.org/download/
+
 PKG_DEPENDS_1:=		libavahi libdaemon avahi-daemon
 PKG_DESCR_1:=		Unicast DNS server from mDNS/DNS-SD configuration daemon
 PKG_DESCR_2:=		DNS-SD over mDNS (aka RendezVous/Bonjour/ZeroConf) library

@@ -6,6 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		wpa_supplicant
 PKG_VERSION:=		0.6.9
 PKG_RELEASE:=		1
+ifeq (${ADK_COMPILE_WPA_SUPPLICANT_WITH_OPENSSL},y)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_MD5SUM:=		0efb8fcedf0a8acf6f423dfdb0658fdd
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		net

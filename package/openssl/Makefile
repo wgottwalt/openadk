@@ -10,6 +10,7 @@ PKG_MD5SUM:=		05a0ece1372392a2cf310ebb96333025
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.openssl.org
 PKG_SITES:=		http://www.openssl.org/source/ \
 			ftp://ftp.funet.fi/pub/crypt/cryptography/libs/openssl/source/ \

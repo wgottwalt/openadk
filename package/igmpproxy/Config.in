@@ -1,9 +1,0 @@
-config ADK_PACKAGE_IGMPPROXY
-	prompt "igmpproxy......................... Multicast Routing Daemon"
-	tristate
-	default n
-	help
-	  IGMPproxy is a simple dynamic Multicast Routing Daemon using 
-	  only IGMP signalling (Internet Group Management Protocol).
-
-	  http://sourceforge.net/projects/igmpproxy

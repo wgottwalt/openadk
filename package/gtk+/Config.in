@@ -1,6 +1,0 @@
-config ADK_PACKAGE_GTK
-	prompt "gtk+.............................. GTK+ library"
-	tristate
-	select ADK_PACKAGE_GLIB
-	default n
-	help

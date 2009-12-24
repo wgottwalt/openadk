@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-client
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
 PKG_SECTION:=		net

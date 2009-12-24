@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		quagga
 PKG_VERSION:=		0.99.15
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		readline ncurses
 PKG_MD5SUM:=		8975414c76a295f4855a417af0b5ddce
 PKG_DESCR:=		A routing software package
 PKG_SECTION:=		net

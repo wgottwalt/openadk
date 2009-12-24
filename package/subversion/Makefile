@@ -6,6 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		subversion
 PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		apr-util expat apr zlib libiconv
+ifneq ($(ADK_PACKAGE_SUBVERSION_NEON),)
+PKG_BUILDDEP+=		neon
+endif
 PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		net
