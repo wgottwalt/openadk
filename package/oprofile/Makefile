@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		oprofile
 PKG_VERSION:=		0.9.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		popt
 PKG_MD5SUM:=		82b059379895cf125261d7d773465915
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		utils

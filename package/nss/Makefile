@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		nss
 PKG_VERSION:=		3.12.4
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		nspr zlib
 PKG_MD5SUM:=		1ee3ed9c1900079319bd1de51388d856
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs

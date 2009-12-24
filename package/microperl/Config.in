@@ -1,7 +1,0 @@
-config ADK_PACKAGE_MICROPERL
-	prompt "microperl......................... A really minimal perl"
-	tristate
-	default n
-	help
-	  Perl without operating-specific functions such as readdir.
-

@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		385c58055723ebc6c38062acd2db9c2c
 PKG_DESCR:=		A layer 2 tunneling protocol network server (LNS)
 PKG_SECTION:=		net
+PKG_DEPENDS:=		libcli
+PKG_BUILDDEP+=		libcli
 PKG_URL:=		http://l2tpns.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=l2tpns/}
 
@@ -16,8 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,L2TPNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_FLAGS=		auto
-INSTALL_STYLE=		auto
+BUILD_FLAGS:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_L2TPNS}/etc/l2tpns

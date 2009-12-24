@@ -1,5 +1,0 @@
-config ADK_PACKAGE_NSS
-	prompt "nss............................... NSS library"
-	tristate
-	default n
-	help

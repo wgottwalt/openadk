@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBPCIACCESS
-	prompt "libpciaccess......................... PCI access library"
-	tristate
-	default n
-	help
-	  http://www.x.org

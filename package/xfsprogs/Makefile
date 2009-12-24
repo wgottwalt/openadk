@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		xfsprogs
 PKG_VERSION:=		3.0.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		e2fsprogs
 PKG_MD5SUM:=		ec734f935ec87ebb8be890d29380a3e6
 PKG_DESCR:=		Utilities to create and check XFS filesystems
 PKG_SECTION:=		admin

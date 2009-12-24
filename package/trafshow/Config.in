@@ -1,9 +1,0 @@
-config ADK_PACKAGE_TRAFSHOW
-	prompt "trafshow.......................... network traffic monitor"
-	tristate
-	select ADK_PACKAGE_LIBPCAP
-	select ADK_PACKAGE_LIBNCURSES
-	select ADK_PACKAGE_LIBPTHREAD
-	default n
-	help
-

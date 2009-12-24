@@ -6,17 +6,13 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ctorrent
 PKG_VERSION:=		dnh3.3.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
+PKG_CXX:=		CTORRENT
 PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
 PKG_DESCR:=		console-based BitTorrent client
 PKG_SECTION:=		net
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
-
-ifeq ($(ADK_COMPILE_CTORRENT_WITH_UCLIBCXX),y)
-PKG_DEPENDS:=            uclibc++
-else
-PKG_DEPENDS:=            libstdcxx
-endif
 
 include ${TOPDIR}/mk/package.mk
 

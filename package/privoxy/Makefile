@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		privoxy
 PKG_VERSION:=		3.0.15
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		pcre
 PKG_VARIANT:=		beta
 PKG_MD5SUM:=		6571dc9524e945e79c2af62fefe7b107
 PKG_DESCR:=		web proxy with advanced filtering capabilities

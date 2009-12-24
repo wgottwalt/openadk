@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		tcpdump
 PKG_VERSION:=		4.0.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		b22ca72890df2301d922c9f2d17867f9
 PKG_DESCR:=		A tool for network monitoring and data acquisition.
 PKG_SECTION:=		net

@@ -1,9 +1,0 @@
-config ADK_PACKAGE_HASERL
-	prompt "haserl............................ A CGI wrapper to embed shell scripts in HTML documents"
-	tristate
-	default n
-	help
-	  A CGI wrapper to embed shell scripts in HTML documents.
-	  
-	  http://haserl.sourceforge.net/
-

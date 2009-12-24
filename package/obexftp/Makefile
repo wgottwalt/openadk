@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		obexftp
 PKG_VERSION:=		0.23
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		openobex libiconv
 PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
 PKG_DESCR:=		bluetooth ftp application
 PKG_SECTION:=		bluetooth

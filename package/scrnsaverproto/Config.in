@@ -1,6 +1,0 @@
-config ADK_PACKAGE_SCRNSAVERPROTO
-	prompt "scrnsaverproto............................. X protocol library"
-	tristate
-	default n
-	help
-         http://www.x.org

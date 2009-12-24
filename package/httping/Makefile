@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		httping
 PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		41c912a9ecc904e51d7260053fc2195c
 PKG_DESCR:=		Httping is like 'ping' but for http-requests
 PKG_SECTION:=		net

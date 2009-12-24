@@ -6,6 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		asterisk
 PKG_VERSION:=		1.4.27.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses openssl zlib curl popt
+ifneq ($(ADK_PACKAGE_ASTERISK_CODEC_SPEEX),)
+PKG_BUILDDEP+=		speex
+endif
+ifneq ($(ADK_PACKAGE_ASTERISK_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
 PKG_MD5SUM:=		e09ca163a6e90018c92c65a50b9ec398
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
@@ -14,16 +21,24 @@ PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
+PKG_DEPENDS_MAIN:=		asterisk
+PKG_DESCR_CHAN_MGCP:=		Media Gateway Control Protocol implementation
+PKG_DESCR_CHAN_SKINNY:=		Skinny Client Control Protocol implementation
+PKG_DESCR_CHAN_IAX2:=		Support for the Inter Asterisk Protocol
+PKG_DESCR_CODEC_SPEEX:=		Speex/PCM16 Codec Translator
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_MGCP},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_SKINNY},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_IAX2},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_SPEEX},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

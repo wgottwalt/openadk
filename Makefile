@@ -1,11 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-CC?=		gcc
-GMAKE?=		$(PWD)/scripts/make
-GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
-GMAKE_INV=	${GMAKE_FMK} --no-print-directory
-
 _UNLIMIT=	ulimit -dS $$(ulimit -dH 2>/dev/null ) 2>/dev/null;
 
 all: .prereq_done
@@ -66,11 +61,13 @@ pkg-help:
 	@echo 'This does not automatically resolve package dependencies!'
 
 dev-help:
+	@echo 'Regenerate menu information via "make menu"'
+	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
 	@echo '  edit the package sources at build_dir/w-<pkgname>-*/<pkgname>-<version>'
-	@echo '  run "make package=<pkgname> update-patches to regenerate patch files'
+	@echo '  run "make package=<pkgname> update-patches" to regenerate patch files'
 	@echo ''
 	@echo 'All changed patches will be opened with your $$EDITOR,'
 	@echo 'so you can add a description and verify the modifications.'
@@ -122,6 +119,9 @@ image_clean imageclean cleanimage: .prereq_done
 menuconfig: .prereq_done
 	@${GMAKE_INV} menuconfig
 
+defconfig: .prereq_done
+	@${GMAKE_INV} defconfig
+
 allnoconfig: .prereq_done
 	@${GMAKE_INV} _config W=-n
 
@@ -137,22 +137,29 @@ package_index: .prereq_done
 bulk: .prereq_done
 	@${GMAKE_INV} bulk
 
+menu: .prereq_done
+	@${GMAKE_INV} menu
+
 world: .prereq_done
 	@${GMAKE_INV} world
 
 prereq:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done --no-print-directory
+	@${GMAKE} .prereq_done
 
 prereq-noerror:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done NO_ERROR=1
+	@${GMAKE} .prereq_done NO_ERROR=1
 
 NO_ERROR=0
 .prereq_done:
 	@-rm -rf .prereq_done
 	@if ! bash --version 2>&1 | fgrep 'GNU bash' >/dev/null 2>&1; then \
 		echo "GNU bash needs to be installed."; \
+		exit 1; \
+	fi
+	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | fgrep 'MIRBSD' >/dev/null 2>&1; then \
+		echo "MirBSD ksh (mksh) needs to be installed."; \
 		exit 1; \
 	fi
 	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \

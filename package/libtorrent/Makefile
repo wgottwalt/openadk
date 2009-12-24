@@ -6,20 +6,16 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.12.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl libsigc++
 PKG_MD5SUM:=		fe8155d364b220713074423100d4bf29
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_CXX:=		LIBTORRENT
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_LIBTORRENT_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
 
 $(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

@@ -14,7 +14,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 include ${TOPDIR}/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
-$(eval $(call PKG_template,KMOD_SANGAM_ATM,kmod-sangam-atm,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},kernel ${KERNEL_VERSION}-${KERNEL_RELEASE},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_SANGAM_ATM,kmod-sangam-atm,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

@@ -112,7 +112,7 @@ if ! which tar >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! tar --version|grep GNU >/dev/null 2>&1;then
+if ! (tar --version | grep GNU) >/dev/null 2>&1;then
 	if ! which gtar >/dev/null 2>&1; then
 		echo You must install GNU tar to continue.
 		echo

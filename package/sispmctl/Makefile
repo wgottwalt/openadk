@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		sispmctl
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libusb
 PKG_MD5SUM:=		2457f76cd129f880634f3381be0aeb76
 PKG_DESCR:=		control application for power sockets
 PKG_SECTION:=		misc

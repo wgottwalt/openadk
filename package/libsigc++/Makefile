@@ -11,14 +11,9 @@ PKG_DESCR:=		Callback framework for C++
 PKG_SECTION:=		libs
 PKG_URL:=		http://libsigc.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_GNOME:=libsigc++/2.2/}
+PKG_CXX:=		LIBSIGCXX
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_LIBSIGCXX_WITH_UCLIBCXX),y)
-PKG_DEPENDS:=		uclibc++
-else
-PKG_DEPENDS:=		libstdcxx
-endif
 
 $(eval $(call PKG_template,LIBSIGCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

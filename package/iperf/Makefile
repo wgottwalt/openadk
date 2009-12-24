@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		iperf
 PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
+PKG_CXX:=		IPERF
 PKG_MD5SUM:=		8c5bc14cc2ea55f18f22afe3c23e3dcb
 PKG_DESCR:=		Internet Protocol bandwidth measuring tool
 PKG_SECTION:=		net
@@ -14,12 +15,6 @@ PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
 
 $(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

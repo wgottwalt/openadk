@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mt-daapd
 PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		10
+PKG_BUILDDEP+=		gdbm libid3tag
 PKG_MD5SUM:=		2e1cdbe6b94ef153e915806f80a28dca
 PKG_DESCR:=		a multi-threaded DAAP (Digital Audio Access Protocol) daemon
 PKG_SECTION:=		net

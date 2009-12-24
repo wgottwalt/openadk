@@ -1,9 +1,0 @@
-config ADK_PACKAGE_IPSET
-	prompt "ipset............................. Netfilter ip sets administration utility"
-	tristate
-	default n
-	help
-	  Netfilter ip sets administration utility
-	  
-	  http://ipset.netfilter.org/
-

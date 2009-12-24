@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.7.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		8f4fda3969237c2a33bdb1583b5d06b2
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs

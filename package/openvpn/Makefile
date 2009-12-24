@@ -6,6 +6,12 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
+ifeq ($(ADK_PACKAGE_LIBOPENSSL),y)
+PKG_BUILDDEP+=		openssl
+endif
+ifeq ($(ADK_PACKAGE_OPENVPN_LZO),y)
+PKG_BUILDDEP+=		liblzo
+endif
 PKG_MD5SUM:=		452a83326ae198cf961e9ae02539c8fb
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net

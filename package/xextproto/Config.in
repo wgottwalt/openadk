@@ -1,6 +1,0 @@
-config ADK_PACKAGE_XEXTPROTO
-	prompt "xextproto.............................. Xextproto headers"
-	tristate
-	default n
-	help
-         http://www.x.org

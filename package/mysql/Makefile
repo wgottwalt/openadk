@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mysql
 PKG_VERSION:=		5.0.85
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses zlib readline
 PKG_MD5SUM:=		f672ec5154f8ea3db87fec5e0b227f4c
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		libs

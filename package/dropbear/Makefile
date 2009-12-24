@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
+PKGDFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
+
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-pam \
 			--enable-openpty \

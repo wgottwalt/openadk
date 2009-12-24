@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		sqlite
 PKG_VERSION:=		3.6.20
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses readline
 PKG_MD5SUM:=		0faf8fc8ccff5297513c6532b2b4ce23
 PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database
 PKG_SECTION:=		libs

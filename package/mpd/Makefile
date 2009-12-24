@@ -6,6 +6,37 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.15.6
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		alsa-lib glib
+ifneq ($(ADK_COMPILE_MPD_WITH_MP3),)
+PKG_BUILDDEP+=		libid3tag libmad
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_MP4),)
+PKG_BUILDDEP+=		faad2
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_OGG),)
+PKG_BUILDDEP+=		libvorbis
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_TREMOR),)
+PKG_BUILDDEP+=		libvorbisidec
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_FLAC),)
+PKG_BUILDDEP+=		flac
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_WAV),)
+PKG_BUILDDEP+=		libaudiofile
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_SHOUT),)
+PKG_BUILDDEP+=		lame
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_CURL),)
+PKG_BUILDDEP+=		curl
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_MMS),)
+PKG_BUILDDEP+=		libmms
+endif
+ifneq ($(ADK_COMPILE_MPD_WITH_FFMPEG),)
+PKG_BUILDDEP+=		ffmpeg
+endif
 PKG_MD5SUM:=		c78b8933e4902c5dc407d59925f8b10e
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net

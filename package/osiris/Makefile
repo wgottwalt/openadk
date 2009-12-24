@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		osiris
 PKG_VERSION:=		4.2.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		1951c7dc0fe729af9ffaf58910340d12
 PKG_DESCR:=		Host Integrity Monitoring System (scanning agent)
 PKG_SECTION:=		admin

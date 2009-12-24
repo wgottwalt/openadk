@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		moc
 PKG_VERSION:=		2.4.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libvorbis curl libmad flac ffmpeg
 PKG_MD5SUM:=		647c770a5542a4ae5437386807a89796
 PKG_DESCR:=		console music player
 PKG_SECTION:=		sound

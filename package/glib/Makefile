@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		glib
 PKG_VERSION:=		2.22.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		gettext libiconv
 PKG_MD5SUM:=		00eb873975e2ef9361b8177131c7c943
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs

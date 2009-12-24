@@ -1,6 +1,0 @@
-config ADK_PACKAGE_PATCH
-	prompt "patch............................. patch"
-	tristate
-	default n
-	help
-	  patch

@@ -6,6 +6,15 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		nut
 PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
+ifneq (${ADK_PACKAGE_NUT_SSL},)
+PKG_BUILDDEP+=		openssl
+endif
+ifneq (${ADK_PACKAGE_NUT_USB},)
+PKG_BUILDDEP+=		libusb
+endif
+ifneq (${ADK_PACKAGE_NUT_SNMP},)
+PKG_BUILDDEP+=		net-snmp
+endif
 PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
 PKG_DESCR:=		Network UPS Tools
 PKG_SECTION:=		sys

@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		postgresql
 PKG_VERSION:=		8.3.7
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		6e36f3b4dd27ae0c352376ea9f843de2
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		libs

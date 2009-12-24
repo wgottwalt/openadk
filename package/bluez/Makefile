@@ -9,7 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		dc29e54f1204ac4215caeeee062b26f6
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
-PKG_DEPENDS:=		kmod-bluetooth
+PKG_DEPENDS:=		kmod-bluetooth libusb glib dbus
+PKG_BUILDDEP+=		libusb dbus glib
 PKG_URL:=		http://www.bluez.org
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 

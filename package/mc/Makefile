@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		mc
 PKG_VERSION=		4.6.1
 PKG_RELEASE=		1
+PKG_BUILDDEP+=		glib ncurses
 PKG_MD5SUM=		18b20db6e40480a53bac2870c56fc3c4
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc

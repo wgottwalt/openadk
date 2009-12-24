@@ -6,11 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		vtun
 PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		zlib openssl liblzo
 PKG_MD5SUM:=		c342ffe77055d4248a38f0b380f28c1b
 PKG_DESCR:=		A VPN tunnel daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl zlib kmod-tun
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
+
+PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 

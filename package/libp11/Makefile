@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libp11
 PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl libtool
 PKG_MD5SUM:=		9e2c5cbececde245e2d2f535bd49ce35
 PKG_DESCR:=		library implementing a small layer on top of PKCS11 API
 PKG_SECTION:=		libs

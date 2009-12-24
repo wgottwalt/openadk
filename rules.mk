@@ -48,4 +48,10 @@ ifneq (${show},)
 .DEFAULT_GOAL:=		show
 show:
 	@$(info ${${show}})
+else ifneq (${dump},)
+__shquote=		'$(subst ','\'',$(1))'
+__dumpvar=		echo $(call __shquote,$(1)=$(call __shquote,${$(1)}))
+.DEFAULT_GOAL:=		show
+show:
+	@$(foreach _s,${dump},$(call __dumpvar,${_s});)
 endif

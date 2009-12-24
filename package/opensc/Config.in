@@ -1,6 +1,0 @@
-config ADK_PACKAGE_OPENSC
-	prompt "opensc............................ opensc"
-	tristate
-	default n
-	help
-	 opensc

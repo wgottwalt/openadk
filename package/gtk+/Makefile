@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		gtk+
 PKG_VERSION:=		2.18.3
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		cairo atk pango libXext renderproto libXrender
 PKG_MD5SUM:=		8b34f75642ff6cc783dfa7e3af0ba443
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs

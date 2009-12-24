@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ssltunnel
 PKG_VERSION:=		1.16
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl ppp
 PKG_MD5SUM:=		4039b50566a33a4077883ea974e476d5
 PKG_DESCR:=		A PPP over SSL vpn tool
 PKG_SECTION:=		net

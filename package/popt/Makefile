@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		popt
 PKG_VERSION:=		1.15
 PKG_RELEASE:=		2
+PKG_BUILDDEP+=		libiconv
 PKG_MD5SUM:=		c61ef795fa450eb692602a661ec8d7f1
 PKG_DESCR:=		a command line option parsing library
 PKG_SECTION:=		libs

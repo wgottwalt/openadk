@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a90a1b5a6db4838483f05438e05e8eb9
 PKG_DESCR:=		Bourne-Again SHell
 PKG_SECTION:=		shells
-PKG_URL:=		http://www.gnu.org/software/bash
+PKG_URL:=		http://www.gnu.org/software/bash/
 PKG_SITES:=		http://ftp.gnu.org/gnu/bash/
 
 include $(TOPDIR)/mk/package.mk

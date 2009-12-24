@@ -1,0 +1,5 @@
+*/Config.in
+*/Config.in.lib
+Depends.mk
+pkglist.d
+pkgopts.d

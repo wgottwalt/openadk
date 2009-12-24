@@ -1,8 +1,0 @@
-config ADK_PACKAGE_BINUTILS
-	prompt "binutils.......................... binary utilities (assembler,strip,nm,..)"
-	tristate
-	default n
-	help
-	  binary utilities
-
-	  http://www.gnu.org/binutils

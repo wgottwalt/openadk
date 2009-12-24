@@ -4,4 +4,4 @@
 
 ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG: ${TOPDIR}/.config \
     ${TOPDIR}/mk/split-cfg.mk ${TOPDIR}/scripts/split-cfg.sh
-	${BASH} ${TOPDIR}/scripts/split-cfg.sh '${TOPDIR}'
+	mksh ${TOPDIR}/scripts/split-cfg.sh '${TOPDIR}'

@@ -1,6 +1,0 @@
-config ADK_PACKAGE_MDADM
-	prompt "mdadm............................. tool for managing Linux Software RAID arrays"
-	tristate
-	default n
-	help
- 	  http://neil.brown.name/blog/mdadm

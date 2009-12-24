@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		less
 PKG_VERSION:=		429
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		206f2f13b9b0a35e45df660fcb6af31d
 PKG_DESCR:=		A text mode pager
 PKG_SECTION:=		text

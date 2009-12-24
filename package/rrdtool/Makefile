@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.2.30
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libxml2 cgilib freetype libart libpng
 PKG_MD5SUM:=		19b24f7184a8dbf7b48c1bbb565ad9fb
 PKG_DESCR:=		Round Robin Database (RRD) management library and tools
 PKG_SECTION:=		libs

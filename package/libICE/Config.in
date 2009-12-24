@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBICE
-	prompt "libICE............................... Inter-Client Exchange library"
-	tristate
-	default n
-	help
-         http://www.x.org

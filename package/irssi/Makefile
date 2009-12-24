@@ -10,16 +10,20 @@ PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		text
 PKG_DEPENDS:=		glib libncurses
+PKG_BUILDDEP+=		glib ncurses
+ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
+PKG_DEPENDS+=		libopenssl
+PKG_BUILDDEP+=		openssl
+endif
 PKG_URL:=		http://www.irssi.org
 PKG_SITES:=		http://www.irssi.org/files/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include ${TOPDIR}/mk/package.mk
+PKG_FLAVOURS:=		SSL
+PKGFD_SSL:=		SSL/TLS support
 
-ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
-PKG_DEPENDS+=		libopenssl
-endif
+include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IRSSI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,6 +45,7 @@ endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_IRSSI}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/src/fe-text/${PKG_NAME} ${IDIR_IRSSI}/usr/bin/
+	${INSTALL_BIN} ${WRKBUILD}/src/fe-text/${PKG_NAME} \
+		${IDIR_IRSSI}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

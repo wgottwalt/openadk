@@ -1,7 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+ifneq ($(filter-out clean,${MAKECMDGOALS}),)
 include ${TOPDIR}/rules.mk
+endif
 
 CP=cp -fpR
 HOSTCFLAGS+=-DKBUILD_NO_NLS
@@ -124,5 +126,5 @@ ncurses:
 	fi
 
 clean:
-	rm -f *.o *~ core $(TARGETS) $(MCONF_OBJS) $(CONF_OBJS) \
+	@rm -f *.o *~ core $(TARGETS) $(MCONF_OBJS) $(CONF_OBJS) zconf.hash.c \
 		conf mconf zconf.tab.c zconf.tab.h lex.zconf.c lkc_defs.h

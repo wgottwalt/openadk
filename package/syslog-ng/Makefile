@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		syslog-ng
 PKG_VERSION:=		1.6.12
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libol tcp_wrappers
 PKG_MD5SUM:=		a3cbfdb6e1e5beea181a7349749719f3
 PKG_DESCR:=		A powerful syslog daemon
 PKG_SECTION:=		admin

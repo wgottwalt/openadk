@@ -6,16 +6,17 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		comp
+PKG_DEPENDS:=		libthread-db
 
 include ${TOPDIR}/mk/package.mk
 
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 
-$(eval $(call PKG_template,GDBSERVER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GDBSERVER,gdbserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GDBSERVER}/usr/bin

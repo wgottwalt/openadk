@@ -6,11 +6,18 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		apr
 PKG_VERSION:=		0.9.17
 PKG_RELEASE:=		1
+ifeq ($(ADK_PACKAGE_APR_THREADING),y)
+PKG_BUILDDEP+=		libpthread
+endif
 PKG_MD5SUM:=		ca1e22d98081a03a33c2a0b8684eb192
 PKG_DESCR:=		Apache Portable Runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
+
+PKG_FLAVOURS=		THREADING
+PKGFD_FULL=		Enable threading support
+
 
 include ${TOPDIR}/mk/package.mk
 

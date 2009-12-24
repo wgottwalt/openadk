@@ -6,12 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		nano
 PKG_VERSION:=		2.0.9
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		2be94dc43fb60fff4626a2401a977220
 PKG_DESCR:=		An enhanced clone of the Pico text editor
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libncurses
 PKG_URL:=		http://www.nano-editor.org
 PKG_SITES:=		http://www.nano-editor.org/dist/v2.0/
+PKG_FLAVOURS:=		TINY
 
 include ${TOPDIR}/mk/package.mk
 

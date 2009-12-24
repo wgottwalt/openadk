@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		83630d11fa66ade9091f1b304fccd74c
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl
+PKG_DEPENDS:=		libnl libopenssl
+PKG_BUILDDEP+=		libnl openssl
 PKG_URL:=		http://hostap.epitest.fi
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
@@ -20,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,HOSTAPD,hostapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE=		auto
+BUILD_STYLE:=		auto
 
 do-configure:
 	${CP} ./files/hostapd.config ${WRKBUILD}/.config

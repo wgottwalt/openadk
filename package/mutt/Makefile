@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mutt
 PKG_VERSION:=		1.5.20
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		ncurses openssl
 PKG_MD5SUM:=		027cdd9959203de0c3c64149a7ee351c
 PKG_DESCR:=		Mail text client
 PKG_SECTION:=		text

@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libfontenc
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		xproto zlib
 PKG_MD5SUM:=		0fa1988d08021225d18ced519a30d2b1
 PKG_DESCR:=		helps to deal with different encodings of fonts
 PKG_SECTION:=		x11

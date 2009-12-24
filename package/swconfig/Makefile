@@ -6,8 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		swconfig
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libnl
 PKG_DESCR:=		switch configuration utility
 PKG_SECTION:=		misc
+
+PKG_TARGET_CONFIG:=	rb433
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1

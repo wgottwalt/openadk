@@ -11,6 +11,9 @@ PKG_DESCR:=		ATM library and tools for Linux
 PKG_SECTION:=		libs
 PKG_URL:=		http://linux-atm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
+PKG_NOPARALLEL:=	1
+
+PKG_HOST_DEPENDS:=	!freebsd
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
