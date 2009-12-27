@@ -18,6 +18,7 @@ endif
 ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 endif
+
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
 ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
@@ -30,6 +31,7 @@ COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
 all: compile
+download: $(DOWNLOAD)
 clean: $(patsubst %,%-clean,$(package-) $(package-y) $(package-m) base-files)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 compile: $(COMPILE_PACKAGES)
@@ -38,10 +40,9 @@ else
 compile: base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
-download: $(DOWNLOAD)
 
-$(COMPILE_PACKAGES): base-files-compile
-$(INSTALL_PACKAGES): base-files-install
+#$(COMPILE_PACKAGES): base-files-compile
+#$(INSTALL_PACKAGES): base-files-install
 
 $(TARGET_DIR):
 	mkdir -p $(TARGET_DIR)

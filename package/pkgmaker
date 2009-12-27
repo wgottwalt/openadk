@@ -61,7 +61,7 @@ for dn in */Makefile; do
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
 	# PKG_{HOST,TARGET}_DEPENDS: add host or target dependencies
-	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_CXX \
+	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_MULTI PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
@@ -93,8 +93,18 @@ for dn in */Makefile; do
 		print -nu4 \\tdepends on
 		sp=' '				# local sp: space (or ' || ')
 		for spcu in $ALL_PKGOPTS; do	# spcu: package option, ucase
-			print -nu4 "${sp}ADK_PACKAGE_$spcu"
-			sp=' || '
+			if [[ -n $PKG_MULTI ]]; then
+				if [[ $dnu != $spcu ]]; then
+					print -nu4 "${sp}ADK_PACKAGE_$spcu"
+					sp=' || '
+				else
+					print -nu4 "${sp}ADK_HAVE_DOT_CONFIG"
+					sp=' || '
+				fi
+			else
+				print -nu4 "${sp}ADK_PACKAGE_$spcu"
+				sp=' || '
+			fi
 		done
 		print -u4
 	fi
@@ -177,6 +187,11 @@ for dn in */Makefile; do
 		fi
 		print -u$h "\tprompt \"$spnf\""
 		print -u$h \\ttristate
+		if [[ -n $PKG_MULTI ]]; then
+			if [[ $spcu != $dnu ]]; then
+				print -u$h "\tdepends on ADK_PACKAGE_$dnu"
+			fi
+		fi
 		[[ -n $phd ]] && print -u$h "$phd"
 		[[ -n $ptd ]] && print -u$h "$ptd"
 		print -u$h "\tdefault ${dflt:-n}"

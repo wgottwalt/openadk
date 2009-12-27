@@ -1,0 +1,38 @@
+--- snort-2.8.5.1.orig/src/detection-plugins/sp_replace.c	2009-07-07 17:37:04.000000000 +0200
++++ snort-2.8.5.1/src/detection-plugins/sp_replace.c	2009-12-27 17:23:47.000000000 +0100
+@@ -111,7 +111,7 @@ static PatternMatchData * Replace_Parse(
+             file_name, file_line);
+     }
+     /* clear out the temp buffer */
+-    bzero(tmp_buf, MAX_PATTERN_SIZE);
++    memset(tmp_buf, 0, MAX_PATTERN_SIZE);
+ 
+     while(isspace((int)*rule))
+         rule++;
+@@ -122,7 +122,7 @@ static PatternMatchData * Replace_Parse(
+     }
+ 
+     /* find the start of the data */
+-    start_ptr = index(rule, '"');
++    start_ptr = strchr(rule, '"');
+ 
+     if(start_ptr == NULL)
+     {
+@@ -163,7 +163,7 @@ static PatternMatchData * Replace_Parse(
+     dummy_end = (dummy_idx + size);
+ 
+     /* why is this buffer so small? */
+-    bzero(hex_buf, 3);
++    memset(hex_buf, 0, 3);
+     memset(hex_buf, '0', 2);
+ 
+     /* BEGIN BAD JUJU..... */
+@@ -269,7 +269,7 @@ static PatternMatchData * Replace_Parse(
+                                     strtol(hex_buf, (char **) NULL, 16)&0xFF;
+ 
+                                 dummy_size++;
+-                                bzero(hex_buf, 3);
++                                memset(hex_buf, 0, 3);
+                                 memset(hex_buf, '0', 2);
+                             }
+                             else

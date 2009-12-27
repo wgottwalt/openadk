@@ -1,0 +1,32 @@
+--- snort-2.8.5.1.orig/src/output-plugins/spo_alert_unixsock.c	2009-05-07 00:29:12.000000000 +0200
++++ snort-2.8.5.1/src/output-plugins/spo_alert_unixsock.c	2009-12-27 17:12:45.000000000 +0100
+@@ -176,16 +176,16 @@ void AlertUnixSock(Packet *p, char *msg,
+ 
+     DEBUG_WRAP(DebugMessage(DEBUG_LOG, "Logging Alert data!\n"););
+ 
+-    bzero((char *)&alertpkt,sizeof(alertpkt));
++    memset((char *)&alertpkt, 0, sizeof(alertpkt));
+     if (event)
+     {
+-        bcopy((const void *)event,(void *)&alertpkt.event,sizeof(Event));
++        memcpy((void *)&alertpkt.event,(const void *)event,sizeof(Event));
+     }
+ 
+     if(p && p->pkt)
+     {
+-        bcopy((const void *)p->pkth,(void *)&alertpkt.pkth,sizeof(struct pcap_pkthdr));
+-        bcopy((const void *)p->pkt,alertpkt.pkt,
++        memcpy((void *)&alertpkt.pkth,(const void *)p->pkth,sizeof(struct pcap_pkthdr));
++        memcpy(alertpkt.pkt,(const void *)p->pkt,
+               alertpkt.pkth.caplen > SNAPLEN? SNAPLEN : alertpkt.pkth.caplen);
+     }
+     else
+@@ -193,7 +193,7 @@ void AlertUnixSock(Packet *p, char *msg,
+ 
+     if (msg)
+     {
+-        bcopy((const void *)msg,(void *)alertpkt.alertmsg,
++        memcpy((void *)alertpkt.alertmsg,(const void *)msg,
+                strlen(msg)>ALERTMSG_LENGTH-1 ? ALERTMSG_LENGTH - 1 : strlen(msg));
+     }
+ 

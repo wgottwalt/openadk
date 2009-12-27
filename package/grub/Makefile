@@ -12,6 +12,9 @@ PKG_SECTION:=		base
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://alpha.gnu.org/gnu/grub/
 
+PKG_HOST_DEPENDS:=	linux
+PKG_TARGET_DEPENDS:=    shuttle wrap alix1c alix2d x86_qemu x86_64_qemu
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GRUB,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

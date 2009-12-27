@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b1f77c5e3116bcb0ac0aa9080a06ebf1
 PKG_DESCR:=		a flexible RADIUS server
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_DEPENDS:=		libltdl libopenssl libpthread
 PKG_BUILDDEP+=		libtool openssl
 ifneq ($(ADK_PACKAGE_FREERADIUS_MOD_LDAP),)

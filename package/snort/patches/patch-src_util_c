@@ -1,0 +1,20 @@
+--- snort-2.8.5.1.orig/src/util.c	2009-08-10 22:41:42.000000000 +0200
++++ snort-2.8.5.1/src/util.c	2009-12-27 17:21:05.000000000 +0100
+@@ -227,7 +227,7 @@ void ts_print(register const struct time
+     if(!tvp)
+     {
+         /* manual page (for linux) says tz is never used, so.. */
+-        bzero((char *) &tz, sizeof(tz));
++        memset((char *) &tz, 0, sizeof(tz));
+         gettimeofday(&tv, &tz);
+         tvp = &tv;
+     }
+@@ -2714,7 +2714,7 @@ char *GetCurrentTimestamp()
+ 
+     buf = (char *)SnortAlloc(SMALLBUFFER * sizeof(char));
+ 
+-    bzero((char *)&tz,sizeof(tz));
++    memset((char *)&tz, 0, sizeof(tz));
+     gettimeofday(&tv,&tz);
+     tvp = &tv;
+ 

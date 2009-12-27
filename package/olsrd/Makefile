@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		acf15dbd0af521a6826541b567c6473a
 PKG_DESCR:=		implementation of the Optimized Link State Routing protocol
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_URL:=		http://www.olsr.org
 PKG_SITES:=		http://www.olsr.org/releases/0.5/
 

@@ -265,7 +265,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 
 config ADK_KPACKAGE_KMOD_DM_CRYPT
 	prompt "kmod-dm-crypt................... Crypt target support"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	depends on !ADK_KERNEL_DM_CRYPT
 	select ADK_KERNEL_MD
 	select ADK_KERNEL_CRYPTO
@@ -283,14 +283,14 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
 	prompt "kmod-dm-snapshot................ Snapshot target"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KPACKAGE_KMOD_DM_MIRROR
 	prompt "kmod-dm-mirror.................. Mirror target"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
          Allow volume managers to mirror logical volumes, also

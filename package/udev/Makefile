@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		udev
-PKG_VERSION:=		142
+PKG_VERSION:=		149
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3edc4cf383dccb06d866c5156d59ddd5
+PKG_MD5SUM:=		b218bd15939e8afc6368e1907a48bb26
 PKG_DESCR:=		Dynamic device management subsystem
 PKG_SECTION:=		base
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html

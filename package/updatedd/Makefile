@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		95655596eb6e0e381d60a458f6a45fee
 PKG_DESCR:=		A tool to update dynamic dns services.
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_SITES:=		http://savannah.nongnu.org/download/updatedd/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz

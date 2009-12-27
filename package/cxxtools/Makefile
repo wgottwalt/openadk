@@ -6,14 +6,15 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cxxtools
 PKG_VERSION:=		1.4.8
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libiconv
-PKG_CXX:=		CXXTOOLS
 PKG_MD5SUM:=		16ce92a83beb925fa5138fc9a52d55af
 PKG_DESCR:=		a collection of general-purpose C++ classes
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libiconv
+PKG_BUILDDEP+=		libiconv
 PKG_URL:=		http://www.tntnet.org
 PKG_SITES:=		http://www.tntnet.org/download/
+#PKG_CXX:=		CXXTOOLS
+
 
 include ${TOPDIR}/mk/package.mk
 
@@ -34,12 +35,12 @@ CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_DIR}/usr'
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto confprog
 
-ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+#ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++
-post-configure:
-	${SED} 's#postdeps="-lstdc.*#postdeps=""#' \
-		${WRKBUILD}/libtool
-endif
+#post-configure:
+#	${SED} 's#postdeps="-lstdc.*#postdeps=""#' \
+#		${WRKBUILD}/libtool
+#endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CXXTOOLS}/usr/lib

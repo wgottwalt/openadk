@@ -1,0 +1,15 @@
+--- snort-2.8.5.1.orig/src/output-plugins/spo_log_ascii.c	2009-05-07 00:29:14.000000000 +0200
++++ snort-2.8.5.1/src/output-plugins/spo_log_ascii.c	2009-12-27 17:22:59.000000000 +0100
+@@ -198,9 +198,9 @@ FILE *OpenLogFile(int mode, Packet * p)
+ #endif
+ 
+     /* zero out our buffers */
+-    bzero((char *) log_path, STD_BUF);
+-    bzero((char *) log_file, STD_BUF);
+-    bzero((char *) proto, 5);
++    memset((char *) log_path, 0, STD_BUF);
++    memset((char *) log_file, 0, STD_BUF);
++    memset((char *) proto, 0, 5);
+ 
+     if (mode == GENERIC_LOG || mode == DUMP || mode == BOGUS ||
+         mode == NON_IP || mode == ARP)

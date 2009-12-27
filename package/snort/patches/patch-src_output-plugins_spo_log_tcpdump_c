@@ -1,0 +1,11 @@
+--- snort-2.8.5.1.orig/src/output-plugins/spo_log_tcpdump.c	2009-05-07 00:29:15.000000000 +0200
++++ snort-2.8.5.1/src/output-plugins/spo_log_tcpdump.c	2009-12-27 17:22:31.000000000 +0100
+@@ -469,7 +469,7 @@ static void SpoLogTcpdumpCleanup(int sig
+         free (data->filename);
+     }
+ 
+-    bzero(data, sizeof(LogTcpdumpData));
++    memset(data, 0, sizeof(LogTcpdumpData));
+     free(data);
+ }
+ 

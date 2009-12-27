@@ -1,0 +1,47 @@
+--- snort-2.8.5.1.orig/src/dynamic-preprocessors/dns/spp_dns.c	2009-10-02 22:29:57.000000000 +0200
++++ snort-2.8.5.1/src/dynamic-preprocessors/dns/spp_dns.c	2009-12-27 17:17:22.000000000 +0100
+@@ -749,7 +749,7 @@ static uint16_t ParseDNSQuestion(const u
+         if (dnsSessionData->curr_txt.name_state == DNS_RESP_STATE_NAME_COMPLETE)
+         {
+             dnsSessionData->curr_rec_state = DNS_RESP_STATE_Q_TYPE;
+-            bzero(&dnsSessionData->curr_txt, sizeof(DNSNameState));
++            memset(&dnsSessionData->curr_txt, 0, sizeof(DNSNameState));
+             data = data + bytes_used;
+             bytes_unused = new_bytes_unused;
+ 
+@@ -837,7 +837,7 @@ uint16_t ParseDNSAnswer(const unsigned c
+         if (dnsSessionData->curr_txt.name_state == DNS_RESP_STATE_NAME_COMPLETE)
+         {
+             dnsSessionData->curr_rec_state = DNS_RESP_STATE_RR_TYPE;
+-            bzero(&dnsSessionData->curr_txt, sizeof(DNSNameState));
++            memset(&dnsSessionData->curr_txt, 0, sizeof(DNSNameState));
+             data = data + bytes_used;
+         }
+         bytes_unused = new_bytes_unused;
+@@ -1272,7 +1272,7 @@ void ParseDNSResponseMessage(SFSnortPack
+                         if (dnsSessionData->curr_rr.type == DNS_RR_TYPE_TXT)
+                         {
+                             /* Reset the state tracking for this record */
+-                            bzero(&dnsSessionData->curr_txt, sizeof(DNSNameState));
++                            memset(&dnsSessionData->curr_txt, 0, sizeof(DNSNameState));
+                         }
+                         data = p->payload + (p->payload_size - bytes_unused);
+                     }
+@@ -1328,7 +1328,7 @@ void ParseDNSResponseMessage(SFSnortPack
+                         if (dnsSessionData->curr_rr.type == DNS_RR_TYPE_TXT)
+                         {
+                             /* Reset the state tracking for this record */
+-                            bzero(&dnsSessionData->curr_txt, sizeof(DNSNameState));
++                            memset(&dnsSessionData->curr_txt, 0, sizeof(DNSNameState));
+                         }
+                         data = p->payload + (p->payload_size - bytes_unused);
+                     }
+@@ -1384,7 +1384,7 @@ void ParseDNSResponseMessage(SFSnortPack
+                         if (dnsSessionData->curr_rr.type == DNS_RR_TYPE_TXT)
+                         {
+                             /* Reset the state tracking for this record */
+-                            bzero(&dnsSessionData->curr_txt, sizeof(DNSNameState));
++                            memset(&dnsSessionData->curr_txt, 0, sizeof(DNSNameState));
+                         }
+                         data = p->payload + (p->payload_size - bytes_unused);
+                     }

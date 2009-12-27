@@ -13,17 +13,17 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses libtorrent libcurl
 PKG_URL:=		http://libtorrent.rakshasa.no
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
-PKG_CXX:=		RTORRENT
+#PKG_CXX:=		RTORRENT
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_COMPILE_RTORRENT_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
-endif
+#ifeq ($(ADK_COMPILE_RTORRENT_WITH_UCLIBCXX),y)
+#CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
+#			-I${STAGING_DIR}/usr/include/uClibc++" \
+#			LIBS="-nodefaultlibs -luClibc++ -lc -lm -lgcc"
+#endif
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto

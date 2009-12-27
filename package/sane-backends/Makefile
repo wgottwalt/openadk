@@ -6,11 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		sane-backends
 PKG_VERSION:=		1.0.20
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libpthread libusb
 PKG_MD5SUM:=		a0cfdfdebca2feb4f2ba5d3418b15a42
 PKG_DESCR:=		Scanner access now easy
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
+PKG_BUILDDEP+=		libpthread libusb
+PKG_MULTI:=		1
 PKG_URL:=		http://www.sane-project.org
 PKG_SITES:=		ftp://ftp2.sane-project.org/pub/sane/${PKG_NAME}-${PKG_VERSION}/ \
 			ftp://ftp3.sane-project.org/pub/sane/${PKG_NAME}-${PKG_VERSION}/ \

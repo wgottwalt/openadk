@@ -6,6 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		php
 PKG_VERSION:=		5.3.1
 PKG_RELEASE:=		1
+PKG_MD5SUM:=		41fbb368d86acb13fc3519657d277681
+PKG_DESCR:=		PHP CLI
+PKG_SECTION:=		net
+PKG_MULTI:=		1
+PKG_DEPENDS:=		libopenssl zlib
 PKG_BUILDDEP+=		openssl zlib
 ifneq ($(ADK_PACKAGE_PHP_MOD_CURL),)
 PKG_BUILDDEP+=		curl
@@ -34,10 +39,6 @@ endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
 PKG_BUILDDEP+=		expat
 endif
-PKG_MD5SUM:=		41fbb368d86acb13fc3519657d277681
-PKG_DESCR:=		PHP CLI
-PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl zlib
 PHP_URL:=		http://www.php.net
 PKG_SITES:=		http://de.php.net/distributions/
 

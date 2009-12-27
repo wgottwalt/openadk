@@ -15,6 +15,7 @@ DEFCONFIG= 		ADK_DEVELSYSTEM=n \
 			ADK_STATIC=n \
 			ADK_FORCE_PARALLEL=n \
 			ADK_PACKAGE_GRUB=n \
+			ADK_PACKAGE_BASE_FILES=y \
 			BUSYBOX_SELINUX=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
@@ -81,7 +82,7 @@ include ${TOPDIR}/mk/split-cfg.mk
 all: world
 
 allcopy: all
-	$(CP) $(BIN_DIR) $(TOPDIR)/bulkdir/${d}/
+	$(CP) $(BIN_DIR) $(TOPDIR)/bulkdir/${targetdir}/
 
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config
 	mksh ${TOPDIR}/package/depmaker
@@ -375,9 +376,9 @@ bulk:
 				defconfig; \
 		fi && \
 		$(MAKE) VERBOSE=1 -f mk/build.mk allcopy \
-		    d=$$target-$$libc-$$fs && \
+		    targetdir=$$target-$$libc-$$fs; \
 		$(MAKE) cleantarget; \
-		rm .*config; \
+		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bulkdir/$$target-$$libc-$$fs/log; \
 	done <${TOPDIR}/target/bulk.lst
 
