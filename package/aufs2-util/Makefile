@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		aufs2 utilities
 PKG_SECTION:=		admin
 PKG_URL:=		http://aufs.sf.net/
+PKG_HOST_DEPENDS:=	!cygwin !freebsd
 
 NO_DISTFILES:=		1
 
@@ -23,11 +24,5 @@ INSTALL_STYLE=		auto
 do-extract:
 	mkdir -p ${WRKBUILD}
 	${CP} ./src/* ${WRKBUILD}/
-
-do-configure:
-
-#post-install:
-#	$(INSTALL_DIR) $(IDIR_BASH)/bin
-#	$(INSTALL_BIN) $(WRKINST)/usr/bin/bash $(IDIR_BASH)/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
