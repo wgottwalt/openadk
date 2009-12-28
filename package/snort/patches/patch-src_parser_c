@@ -1,0 +1,40 @@
+--- snort-2.8.5.1.orig/src/parser.c	2009-10-02 22:29:56.000000000 +0200
++++ snort-2.8.5.1/src/parser.c	2009-12-27 17:20:27.000000000 +0100
+@@ -4362,7 +4362,7 @@ static char * ExpandVars(SnortConfig *sc
+     if(!string || !*string || !strchr(string, '$'))
+         return(string);
+ 
+-    bzero((char *) estring, PARSERULE_SIZE);
++    memset((char *) estring, 0, PARSERULE_SIZE);
+ 
+     i = j = 0;
+     l_string = strlen(string);
+@@ -4381,7 +4381,7 @@ static char * ExpandVars(SnortConfig *sc
+ 
+         if(c == '$' && !quote_toggle)
+         {
+-            bzero((char *) rawvarname, sizeof(rawvarname));
++            memset((char *) rawvarname, 0, sizeof(rawvarname));
+             varname_completed = 0;
+             name_only = 1;
+             iv = i;
+@@ -4421,8 +4421,8 @@ static char * ExpandVars(SnortConfig *sc
+ 
+                 varcontents = NULL;
+ 
+-                bzero((char *) varname, sizeof(varname));
+-                bzero((char *) varaux, sizeof(varaux));
++                memset((char *) varname, 0, sizeof(varname));
++                memset((char *) varaux, 0, sizeof(varaux));
+                 varmodifier = ' ';
+ 
+                 p = strchr(rawvarname, ':');
+@@ -4439,7 +4439,7 @@ static char * ExpandVars(SnortConfig *sc
+                 else
+                     SnortStrncpy(varname, rawvarname, sizeof(varname));
+ 
+-                bzero((char *) varbuffer, sizeof(varbuffer));
++                memset((char *) varbuffer, 0, sizeof(varbuffer));
+ 
+                 varcontents = VarSearch(sc, varname);
+ 

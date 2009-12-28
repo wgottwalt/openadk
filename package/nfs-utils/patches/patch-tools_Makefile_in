@@ -1,16 +1,15 @@
-$Id$
---- nfs-utils-1.1.4.orig/tools/Makefile.in	2008-10-17 16:23:52.000000000 +0200
-+++ nfs-utils-1.1.4/tools/Makefile.in	2009-01-03 13:46:50.000000000 +0100
-@@ -59,7 +59,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
-   distclean-recursive maintainer-clean-recursive
+--- nfs-utils-1.2.1.orig/tools/Makefile.in	2009-11-04 12:15:52.000000000 +0100
++++ nfs-utils-1.2.1/tools/Makefile.in	2009-12-25 19:25:33.000000000 +0100
+@@ -71,7 +71,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGE
+ 	distdir
  ETAGS = etags
  CTAGS = ctags
 -DIST_SUBDIRS = locktest rpcdebug nlmtest rpcgen
 +DIST_SUBDIRS = rpcgen
  DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
- ACLOCAL = @ACLOCAL@
- ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
-@@ -210,7 +210,7 @@ target_alias = @target_alias@
+ am__relativize = \
+   dir0=`pwd`; \
+@@ -257,7 +257,7 @@ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  OPTDIRS = $(am__append_1)

@@ -43,12 +43,15 @@ INSTALL_STYLE=		auto
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
+ifeq (${ADK_HOST_CYGWIN},y)
+CONFOPT:=		--with-shared
+endif
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
+		${CONFOPT} \
 		--with-build-cc=${HOSTCC} \
-		--with-shared \
 		--with-progs \
 	);
 	${MAKE} -C ${WRKBUILD}/include

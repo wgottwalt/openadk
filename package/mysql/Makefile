@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.0.85
+PKG_VERSION:=		5.1.41
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		ncurses zlib readline
-PKG_MD5SUM:=		f672ec5154f8ea3db87fec5e0b227f4c
+PKG_MD5SUM:=		b5d39e8789174753f3c782959729e68c
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libncurses zlib
+PKG_BUILDDEP+=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com
-PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.0/}
+PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
 
 include ${TOPDIR}/mk/package.mk
 
@@ -28,10 +28,12 @@ CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			mysql_cv_compress=yes \
 			ac_cv_sys_restartable_syscalls=no \
 			ac_cv_conv_longlong_to_float=yes \
+			mysql_cv_gcc_atomic_builtins=yes \
 			mysql_cv_gethostname_style=glibc2
 CONFIGURE_ARGS+=	--disable-assembler \
 			--with-pthread \
 			--without-raid \
+			--with-atomic-ops=rwlocks \
 			--with-unix-socket-path=/tmp/.mysql.sock \
 			--with-named-thread-libs=-lpthread \
 			--without-libwrap \
@@ -42,7 +44,7 @@ CONFIGURE_ARGS+=	--disable-assembler \
 			--without-query-cache \
 			--without-mysqlfs \
 			--without-vio \
-			--without-openssl \
+			--without-ssl \
 			--without-docs \
 			--without-bench \
 			--without-innodb \

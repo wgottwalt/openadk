@@ -1,0 +1,11 @@
+--- snort-2.8.5.1.orig/src/preprocessors/Stream5/snort_stream5_tcp.c	2009-10-02 22:30:01.000000000 +0200
++++ snort-2.8.5.1/src/preprocessors/Stream5/snort_stream5_tcp.c	2009-12-27 17:16:36.000000000 +0100
+@@ -6913,7 +6913,7 @@ static int ProcessTcp(Stream5LWSession *
+                     char timestamp[TIMEBUF_SIZE];
+                     char src_addr[17];
+                     char dst_addr[17];
+-                    bzero((char *)timestamp, TIMEBUF_SIZE);
++                    memset((char *)timestamp, 0, TIMEBUF_SIZE);
+                     ts_print((struct timeval *) &p->pkth->ts, timestamp);
+                     SnortSnprintf(src_addr, 17, "%s",
+                         inet_ntoa(GET_SRC_ADDR(p)));

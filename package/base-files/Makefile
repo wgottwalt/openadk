@@ -18,6 +18,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 PKGDFLT_BASE_FILES=	y if !ADK_TOOLCHAIN_ONLY
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-install:
 	$(CP) ./extra/* $(IDIR_BASE_FILES)

@@ -9,6 +9,7 @@ PKG_RELEASE:=		18
 PKG_MD5SUM:=		183800762e266132218b204dfb428d29
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_DEPENDS:=		kmod-ppp
 PKG_URL:=		http://ppp.samba.org
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/

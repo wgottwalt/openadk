@@ -7,86 +7,99 @@ PKG_NAME:=		mpd
 PKG_VERSION:=		0.15.6
 PKG_RELEASE:=		1
 PKG_BUILDDEP+=		alsa-lib glib
-ifneq ($(ADK_COMPILE_MPD_WITH_MP3),)
-PKG_BUILDDEP+=		libid3tag libmad
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_MP4),)
-PKG_BUILDDEP+=		faad2
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_OGG),)
-PKG_BUILDDEP+=		libvorbis
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_TREMOR),)
-PKG_BUILDDEP+=		libvorbisidec
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_FLAC),)
-PKG_BUILDDEP+=		flac
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_WAV),)
-PKG_BUILDDEP+=		libaudiofile
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_SHOUT),)
-PKG_BUILDDEP+=		lame
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_CURL),)
-PKG_BUILDDEP+=		curl
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_MMS),)
-PKG_BUILDDEP+=		libmms
-endif
-ifneq ($(ADK_COMPILE_MPD_WITH_FFMPEG),)
-PKG_BUILDDEP+=		ffmpeg
-endif
 PKG_MD5SUM:=		c78b8933e4902c5dc407d59925f8b10e
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		glib
+ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
+PKG_BUILDDEP+=		libid3tag libmad
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_MP4),)
+PKG_BUILDDEP+=		faad2
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_OGG),)
+PKG_BUILDDEP+=		libvorbis
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_TREMOR),)
+PKG_BUILDDEP+=		libvorbisidec
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_FLAC),)
+PKG_BUILDDEP+=		flac
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
+PKG_BUILDDEP+=		libaudiofile
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
+PKG_BUILDDEP+=		lame
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
+PKG_BUILDDEP+=		curl
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_MMS),)
+PKG_BUILDDEP+=		libmms
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),)
+PKG_BUILDDEP+=		ffmpeg
+endif
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
 
+PKG_FLAVOURS:=		WITH_ALSA WITH_MP3 WITH_MP4 WITH_TREMOR WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG WITH_SHOUT WITH_CURL
+PKGFD_WITH_ALSA:=	enable ALSA output
+PKGFD_WITH_MP3:=	enable MP3 support
+PKGFD_WITH_MP4:=	enable MP4 support
+PKGFD_WITH_OGG:=	enable OGG support
+PKGFD_WITH_TREMOR:=	enable fixpoint Vorbis/OGG support
+PKGFD_WITH_FLAC:=	enable FLAC support
+PKGFD_WITH_WAV:=	enable WAVE support
+PKGFD_WITH_MMS:=	enable MMS support
+PKGFD_WITH_FFMPEG:=	enable FFMPEG support
+PKGFD_WITH_SHOUT:=	enable Shoutcast output support
+PKGFD_WITH_CURL:=	enable CURL support
+
 include ${TOPDIR}/mk/package.mk
 
-ifneq (${ADK_COMPILE_MPD_WITH_ALSA},)
+ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
 PKG_DEPENDS+=		alsa-lib
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MP3},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MP3},)
 PKG_DEPENDS+=		libid3tag libmad
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MP4},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MP4},)
 PKG_DEPENDS+=		libfaad2
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_OGG},)
+ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
 PKG_DEPENDS+=		libvorbis libogg
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_TREMOR},)
+ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)
 PKG_DEPENDS+=		libvorbisidec
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_FLAC},)
+ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
 PKG_DEPENDS+=		libflac
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_WAV},)
+ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)
 PKG_DEPENDS+=		libaudiofile
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_SHOUT},)
+ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
 PKG_DEPENDS+=		libshout liblame
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_CURL},)
+ifneq (${ADK_PACKAGE_MPD_WITH_CURL},)
 PKG_DEPENDS+=		libcurl
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MMS},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MMS},)
 PKG_DEPENDS+=		libmms
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_FFMPEG},)
+ifneq (${ADK_PACKAGE_MPD_WITH_FFMPEG},)
 PKG_DEPENDS+=		ffmpeg
 endif
 
@@ -110,31 +123,31 @@ CONFIGURE_ARGS+=	\
 			--disable-sqlite \
 			--with-zeroconf=no
 
-ifneq (${ADK_COMPILE_MPD_WITH_ALSA},)
+ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
 CONFIGURE_ARGS+=	--enable-alsa
 else
 CONFIGURE_ARGS+=	--disable-alsa
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MP3},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MP3},)
 CONFIGURE_ARGS+=	--enable-id3 --enable-mad
 else
 CONFIGURE_ARGS+=	--disable-id3 --disable-mad
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MP4},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MP4},)
 CONFIGURE_ARGS+=	--enable-aac
 else
 CONFIGURE_ARGS+=	--disable-aac
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_OGG},)
+ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
 CONFIGURE_ARGS+=	--enable-vorbis 
 else
 CONFIGURE_ARGS+=	--disable-vorbis 
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_TREMOR},)
+ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)
 CONFIGURE_ARGS+=	\
 			--disable-vorbis \
 			--with-tremor \
@@ -142,19 +155,19 @@ CONFIGURE_ARGS+=	\
 			--with-tremor-libraries=${STAGING_DIR}/usr/lib
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_FLAC},)
+ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
 CONFIGURE_ARGS+=	--enable-flac
 else
 CONFIGURE_ARGS+=	--disable-flac
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_WAV},)
+ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)
 CONFIGURE_ARGS+=	--enable-audiofile
 else
 CONFIGURE_ARGS+=	--disable-audiofile
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_SHOUT},)
+ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
 CONFIGURE_ARGS+=	--enable-shout \
 			--enable-lame-encoder \
 			--enable-vorbis-encoder \
@@ -166,19 +179,19 @@ CONFIGURE_ARGS+=	--disable-shout \
 			--disable-vorbis-encoder
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_CURL},)
+ifneq (${ADK_PACKAGE_MPD_WITH_CURL},)
 CONFIGURE_ARGS+=	--enable-curl
 else
 CONFIGURE_ARGS+=	--disable-curl
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_MMS},)
+ifneq (${ADK_PACKAGE_MPD_WITH_MMS},)
 CONFIGURE_ARGS+=	--enable-mms
 else
 CONFIGURE_ARGS+=	--disable-mms
 endif
 
-ifneq (${ADK_COMPILE_MPD_WITH_FFMPEG},)
+ifneq (${ADK_PACKAGE_MPD_WITH_FFMPEG},)
 CONFIGURE_ARGS+=	--enable-ffmpeg
 else
 CONFIGURE_ARGS+=	--disable-ffmpeg

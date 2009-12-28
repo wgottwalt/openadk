@@ -4,21 +4,23 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		snort
-PKG_VERSION:=		2.6.1.2
-PKG_RELEASE:=		8
-PKG_BUILDDEP+=		libnet libpcap pcre
-PKG_MD5SUM:=		22c448e25538cdf74c62abe586aeac0a
+PKG_VERSION:=		2.8.5.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b1abf3a9fa3486720c9a2b5eff920417
 PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net
+PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libnet libpcap pcre
-PKG_SITES:=		http://www.snort.org/dl/current/
+PKG_BUILDDEP+=		libnet libpcap pcre
+PKG_URL:=		http://www.snort.org/
+PKG_SITES:=		http://dl.snort.org/snort-current/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--enable-flexresp \
+CONFIGURE_STYLE:=	gnu
+CONFIGURE_ARGS+=	--disable-flexresp \
 			--with-libnet-includes="${STAGING_DIR}/usr/include" \
 			--with-libnet-libraries="${STAGING_DIR}/usr/lib" \
 			--with-libpcap-includes="${STAGING_DIR}/usr/include" \
@@ -28,8 +30,8 @@ CONFIGURE_ARGS+=	--enable-flexresp \
 			--without-mysql \
 			--without-postgresql \
 			--disable-inline
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin

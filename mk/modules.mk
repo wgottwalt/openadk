@@ -934,7 +934,6 @@ $(eval $(call KMOD_template,SND,sound-alsa,\
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
-	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 ,40))
 
 $(eval $(call KMOD_template,SND_OSSEMUL,sound-alsa-oss-emul,\

@@ -1,0 +1,26 @@
+--- snort-2.8.5.1.orig/src/detection-plugins/sp_ip_tos_check.c	2009-05-07 00:28:33.000000000 +0200
++++ snort-2.8.5.1/src/detection-plugins/sp_ip_tos_check.c	2009-12-27 16:51:48.000000000 +0100
+@@ -191,19 +191,19 @@ void ParseIpTos(char *data, OptTreeNode 
+         ds_ptr->not_flag = 1;
+     }
+ 
+-    if(index(data, (int) 'x') == NULL && index(data, (int)'X') == NULL)
++    if(strchr(data, (int) 'x') == NULL && strchr(data, (int)'X') == NULL)
+     {
+         ds_ptr->ip_tos = atoi(data);
+     }
+     else
+     {
+-        if(index(data,(int)'x'))
++        if(strchr(data,(int)'x'))
+         {
+-            ds_ptr->ip_tos = (u_char) strtol((index(data, (int)'x')+1), NULL, 16);
++            ds_ptr->ip_tos = (u_char) strtol((strchr(data, (int)'x')+1), NULL, 16);
+         }
+         else
+         {
+-            ds_ptr->ip_tos = (u_char) strtol((index(data, (int)'X')+1), NULL, 16);
++            ds_ptr->ip_tos = (u_char) strtol((strchr(data, (int)'X')+1), NULL, 16);
+         }
+     }
+ 

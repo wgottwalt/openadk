@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		freetype
 PKG_VERSION:=		2.3.11
 PKG_RELEASE:=		2
-PKG_BUILDDEP+=		zlib
-PKG_MD5SUM:=		519c7cbf5cbd72ffa822c66844d3114c
+PKG_MD5SUM:=		a693c9a4b0121890ca71e39364ffea4a
 PKG_DESCR:=		A free, high-quality and portable font engine
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.freetype.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
 

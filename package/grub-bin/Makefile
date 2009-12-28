@@ -13,7 +13,7 @@ PKG_DESCR:=		GRUB bootloader
 PKG_SECTION:=		sys
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_TARGET_DEPENDS:=	shuttle wrap alix1c alix2d
+PKG_TARGET_DEPENDS:=	shuttle wrap alix1c alix2d x86_qemu x86_64_qemu
 
 include ${TOPDIR}/mk/package.mk
 

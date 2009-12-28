@@ -6,6 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ulogd
 PKG_VERSION:=		1.24
 PKG_RELEASE:=		7
+PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
+PKG_DESCR:=		Netfilter userspace logging daemon
+PKG_SECTION:=		net
+PKG_MULTI:=		1
+PKG_NOPARALLEL:=	1
+PKG_DEPENDS:=		iptables
 PKG_BUILDDEP+=		iptables
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_MYSQL),)
 PKG_BUILDDEP+=		mysql
@@ -19,11 +25,6 @@ endif
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_SQLITE),)
 PKG_BUILDDEP+=		sqlite
 endif
-PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
-PKG_DESCR:=		Netfilter userspace logging daemon
-PKG_SECTION:=		net
-PKG_DEPENDS:=		iptables
-PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.netfilter.org/projects/ulogd
 PKG_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/ulogd/ \
