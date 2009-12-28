@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
-PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthread libpng libjpeg libx11 libxv
-PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib libX11 libXv libpng
+PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses libogg libpng libpthread libvorbis
+PKG_DEPENDS+=		libx11 libxext libxv zlib 
+PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -99,7 +100,6 @@ pre-configure:
 		${CONFIGURE_DEBUG} \
 	);
 	
-
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
 	${CP} ${WRKINST}/usr/bin/mplayer ${IDIR_MPLAYER}/usr/bin

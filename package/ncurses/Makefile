@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
 PKG_DESCR:=		a terminal handling library and common terminal definitions
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnu.org/software/ncurses
+PKG_URL:=		http://www.gnu.org/software/ncurses/
 PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 
 include ${TOPDIR}/mk/package.mk
@@ -17,7 +17,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
@@ -38,8 +38,8 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--without-rcs-ids \
 			--enable-const \
 			--enable-echo
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 

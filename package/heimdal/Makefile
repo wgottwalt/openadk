@@ -79,19 +79,22 @@ CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
+ifeq ($(ADK_HOST_CYGWIN),y)
+EXEEXT:=		.exe
+endif
+
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		CFLAGS="-static" \
 		./configure ${CONFIGURE_OPTS} \
 	);
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/editline
-	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile
-	${MAKE} -C ${WRKBUILD}/lib/sl slc
-	${INSTALL_BIN} ${WRKBUILD}/lib/asn1/asn1_compile \
+	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
+	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
+	${INSTALL_BIN} ${WRKBUILD}/lib/asn1/asn1_compile$(EXEEXT) \
 		${STAGING_TOOLS}/bin
-	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc \
+	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
 		${STAGING_TOOLS}/bin
 	${MAKE} -C ${WRKBUILD} clean
 
