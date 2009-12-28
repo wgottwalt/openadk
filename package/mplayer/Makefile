@@ -10,12 +10,12 @@ PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses libogg libpng libpthread libvorbis
-PKG_DEPENDS+=		libx11 libxext libxv zlib 
+PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
 PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle
 
 include ${TOPDIR}/mk/package.mk
 
