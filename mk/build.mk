@@ -44,21 +44,35 @@ noconfig_targets:=	menuconfig \
 			distclean \
 			tags
 
-MAKECLEAN_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
+MAKECLEANDIR_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
 			ADK_TARGET_LIB_GLIBC \
 			ADK_TARGET_LIB_ECLIBC \
 			ADK_DEBUG
+
+MAKECLEAN_SYMBOLS=	ADK_TARGET_PACKAGE_IPKG \
+			ADK_TARGET_PACKAGE_RPM \
+			ADK_TARGET_PACKAGE_TGZ
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
 	if [ -d .cfg ];then \
 	what=cleantarget; \
-	for symbol in ${MAKECLEAN_SYMBOLS}; do \
+	for symbol in ${MAKECLEANDIR_SYMBOLS}; do \
 		newval=$$(grep -e "^$$symbol=" -e "^\# $$symbol " .config); \
 		oldval=$$(cat .cfg/"$$symbol" 2>&-); \
 		[[ $$newval = $$oldval ]] && continue; \
 		echo; \
 		echo >&2 "WARNING: Toolchain related options have changed, 'make" \
+		    "$$what' might be required!"; \
+		break; \
+	done; \
+	what=clean; \
+	for symbol in ${MAKECLEAN_SYMBOLS}; do \
+		newval=$$(grep -e "^$$symbol=" -e "^\# $$symbol " .config); \
+		oldval=$$(cat .cfg/"$$symbol" 2>&-); \
+		[[ $$newval = $$oldval ]] && continue; \
+		echo; \
+		echo >&2 "WARNING: Package backend related options have changed, 'make" \
 		    "$$what' might be required!"; \
 		break; \
 	done; \

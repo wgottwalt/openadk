@@ -84,7 +84,7 @@ PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
 else
 PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/tarpkg build
-PKG_INSTALL:=		INSTROOT=$(TARGET_DIR) \
+PKG_INSTALL:=		PKG_INSTROOT=$(TARGET_DIR) \
 			${BASH} ${SCRIPT_DIR}/tarpkg install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
 endif
