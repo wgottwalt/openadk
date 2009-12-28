@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
 
+PKG_HOST_DEPENDS:=	!cygwin
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
