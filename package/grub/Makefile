@@ -13,7 +13,7 @@ PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://alpha.gnu.org/gnu/grub/
 
 PKG_HOST_DEPENDS:=	linux
-PKG_TARGET_DEPENDS:=    shuttle wrap alix1c alix2d x86_qemu x86_64_qemu
+PKG_TARGET_DEPENDS:=    x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 

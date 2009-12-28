@@ -6,11 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.15.6
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		alsa-lib glib
 PKG_MD5SUM:=		c78b8933e4902c5dc407d59925f8b10e
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		glib
+PKG_BUILDDEP+=		glib
+ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
+PKG_BUILDDEP+=		alsa-lib
+endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
 PKG_BUILDDEP+=		libid3tag libmad
 endif
@@ -30,7 +33,7 @@ ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
 PKG_BUILDDEP+=		libaudiofile
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
-PKG_BUILDDEP+=		lame
+PKG_BUILDDEP+=		lame libvorbis
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
 PKG_BUILDDEP+=		curl
@@ -88,7 +91,7 @@ PKG_DEPENDS+=		libaudiofile
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
-PKG_DEPENDS+=		libshout liblame
+PKG_DEPENDS+=		libshout liblame libvorbisenc
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_CURL},)
