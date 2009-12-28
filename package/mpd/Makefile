@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c78b8933e4902c5dc407d59925f8b10e
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
-PKG_DEPENDS:=		glib
+PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
 PKG_BUILDDEP+=		alsa-lib
