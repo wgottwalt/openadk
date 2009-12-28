@@ -40,7 +40,7 @@ export BASH HOSTCC HOSTCFLAGS MAKE LANGUAGE LC_ALL OStype PATH
 
 HOSTCPPFLAGS?=
 HOSTLDFLAGS?=
-TARGET_CFLAGS:=		$(strip -fwrapv -fno-ident ${TARGET_CFLAGS})
+TARGET_CFLAGS:=		$(strip -fno-ident ${TARGET_CFLAGS})
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
 

@@ -1,6 +1,5 @@
 - netbsd build
 - macos x build
-- openbsd build
 - make rpm package backend working
 - network scripts for wireless client / ap
 - network scripts for pppoe
