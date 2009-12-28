@@ -1,0 +1,31 @@
+--- alsa-utils-1.0.21.orig/alsactl/Makefile.in	2009-08-31 17:14:23.000000000 +0200
++++ alsa-utils-1.0.21/alsactl/Makefile.in	2009-12-28 17:27:46.140625000 +0100
+@@ -573,7 +573,7 @@ distdir: $(DISTFILES)
+ 	done
+ check-am: all-am
+ check: check-recursive
+-all-am: Makefile $(PROGRAMS) $(MANS) $(HEADERS)
++all-am: Makefile $(PROGRAMS) $(HEADERS)
+ installdirs: installdirs-recursive
+ installdirs-am:
+ 	for dir in "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(man1dir)" "$(DESTDIR)$(man7dir)"; do \
+@@ -623,7 +623,7 @@ info: info-recursive
+ 
+ info-am:
+ 
+-install-data-am: install-man
++install-data-am:
+ 
+ install-exec-am: install-sbinPROGRAMS
+ 
+@@ -672,8 +672,8 @@ uninstall-man: uninstall-man1 uninstall-
+ 	uninstall-man1 uninstall-man7 uninstall-sbinPROGRAMS
+ 
+ 
+-%.7: %.xml
+-	xmlto man $?
++#%.7: %.xml
++#	xmlto man $?
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+ .NOEXPORT:

@@ -66,11 +66,10 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
-	for f in a/ansi d/dumb l/linux r/rxvt s/screen v/vt100 v/vt102 \
-	    v/vt220 w/wsvt25 x/xterm x/xterm-color x/xterm-xfree86; do \
-		${INSTALL_DIR} \
-		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$(dirname $$f); \
-		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/$$f \
+	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
+	for f in ansi dumb linux rxvt screen vt100 vt102 \
+	    vt220 wsvt25 xterm xterm-color xterm-xfree86; do \
+		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$f; \
 	done
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
