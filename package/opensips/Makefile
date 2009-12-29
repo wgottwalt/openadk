@@ -10,6 +10,7 @@ PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		87c6fe40c143775d6a1be1beb75c3eb2
 PKG_DESCR:=		a high-performance, configurable, free SIP server
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_VARIANT:=		tls
 PKG_URL:=		http://opensips.org
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/

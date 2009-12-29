@@ -3,8 +3,6 @@
 
 menu "Package selection"
 
-menu "Applications"
-
 menu "Basesystem"
 source "package/base-files/Config.in"
 source "package/busybox/Config.in.manual"
@@ -28,10 +26,20 @@ source "package/obexftp/Config.in"
 source "package/ussp-push/Config.in"
 endmenu
 
-menu "Browser"
+menu "Browser / Editor / Pager"
+source "package/less/Config.in"
+source "package/nano/Config.in"
+source "package/vim/Config.in"
 source "package/links/Config.in"
 source "package/elinks/Config.in"
 source "package/lynx/Config.in"
+endmenu
+
+menu "Archivers / Compression"
+source "package/bzip2/Config.in"
+source "package/cpio/Config.in"
+source "package/tar/Config.in"
+source "package/xz/Config.in"
 endmenu
 
 menu "Debugging / Analyzing"
@@ -41,12 +49,6 @@ source "package/gdbserver/Config.in"
 source "package/oprofile/Config.in"
 source "package/strace/Config.in"
 source "package/valgrind/Config.in"
-endmenu
-
-menu "Editors / Pager"
-source "package/less/Config.in"
-source "package/nano/Config.in"
-source "package/vim/Config.in"
 endmenu
 
 menu "Filesystem / Blockdevice utilities"
@@ -63,7 +65,6 @@ source "package/wdfs/Config.in"
 source "package/xfsprogs/Config.in"
 endmenu
 
-
 menu "Mail"
 source "package/bogofilter/Config.in"
 source "package/dovecot/Config.in"
@@ -76,12 +77,9 @@ source "package/vilistextum/Config.in"
 endmenu
 
 menu "Misc"
-source "package/bzip2/Config.in"
-source "package/cpio/Config.in"
 source "package/collectd/Config.in"
 source "package/deco/Config.in"
 source "package/digitemp/Config.in"
-source "package/gawk/Config.in"
 source "package/gpm/Config.in"
 source "package/gpsd/Config.in"
 source "package/logrotate/Config.in"
@@ -98,8 +96,6 @@ source "package/scsi-spin/Config.in"
 source "package/ser2net/Config.in"
 source "package/sqlite/Config.in"
 source "package/syslog-ng/Config.in"
-source "package/tar/Config.in"
-source "package/xz/Config.in"
 endmenu
 
 menu "Multimedia"
@@ -131,7 +127,7 @@ source "package/heimdal/Config.in"
 source "package/krb5/Config.in"
 source "package/openct/Config.in"
 source "package/opensc/Config.in"
-source "package/openssl/Config.in"  # libopenssl
+source "package/openssl/Config.in"
 source "package/openssl-pkcs11/Config.in"
 endmenu
 
@@ -161,16 +157,35 @@ source "package/procps/Config.in"
 source "package/sispmctl/Config.in"
 source "package/stress/Config.in"
 source "package/sysstat/Config.in"
+source "package/swconfig/Config.in"
 #source "package/udev/Config.in"
 source "package/watchdog/Config.in"
 endmenu
 
-
+menu "Programming / Languages"
+source "package/autoconf/Config.in"
+source "package/automake/Config.in"
+source "package/binutils/Config.in"
+source "package/bison/Config.in"
+source "package/diffutils/Config.in"
+source "package/flex/Config.in"
+source "package/gawk/Config.in"
+source "package/gcc/Config.in"
+source "package/gperf/Config.in"
+source "package/haserl/Config.in"
+source "package/jamvm/Config.in"
+source "package/lua/Config.in"
+source "package/m4/Config.in"
+source "package/make/Config.in"
+source "package/microperl/Config.in"
+source "package/perl/Config.in"
+source "package/php/Config.in"
+source "package/python/Config.in"
+source "package/ruby/Config.in"
+source "package/tcl/Config.in"
 endmenu
 
-menu "Networking"
-
-menu "Analyze / Debugging / Monitoring"
+menu "Network - Analyze / Debugging / Monitoring"
 source "package/bwm/Config.in"
 source "package/dsniff/Config.in"
 source "package/ethtool/Config.in"
@@ -223,7 +238,6 @@ source "package/ndisc/Config.in"
 source "package/radvd/Config.in"
 endmenu
 
-
 menu "IRC / ICQ / JABBER"
 source "package/bitlbee/Config.in"
 source "package/irssi/Config.in"
@@ -231,7 +245,6 @@ source "package/miau/Config.in"
 source "package/reaim/Config.in"
 source "package/tmsnc/Config.in"
 endmenu
-
 
 menu "Firewall / Routing / Bridging"
 source "package/arpd/Config.in"
@@ -255,7 +268,7 @@ source "package/wondershaper/Config.in"
 source "package/vrrpd/Config.in"
 endmenu
 
-menu "Misc"
+menu "Networking Misc"
 source "package/cups/Config.in"
 source "package/fakeidentd/Config.in"
 source "package/gkrellmd/Config.in"
@@ -275,7 +288,6 @@ source "package/rsync/Config.in"
 source "package/shat/Config.in"
 source "package/socat/Config.in"
 source "package/subversion/Config.in"
-source "package/swconfig/Config.in"
 source "package/udp-broadcast-relay/Config.in"
 source "package/vgp/Config.in"
 source "package/vnstat/Config.in"
@@ -328,7 +340,7 @@ source "package/tor/Config.in"
 source "package/vnc-reflector/Config.in"
 endmenu
 
-menu "Security"
+menu "Networking Security"
 source "package/arpwatch/Config.in"
 source "package/autossh/Config.in"
 source "package/axtls/Config.in"
@@ -361,31 +373,6 @@ source "package/wifidog/Config.in"
 source "package/wireless-firmware/Config.in"
 source "package/wpa_supplicant/Config.in"
 endmenu
-
-endmenu
-
-menu "Programming"
-source "package/autoconf/Config.in"
-source "package/automake/Config.in"
-source "package/binutils/Config.in"
-source "package/bison/Config.in"
-source "package/diffutils/Config.in"
-source "package/flex/Config.in"
-source "package/gcc/Config.in"
-source "package/gperf/Config.in"
-source "package/haserl/Config.in"
-source "package/jamvm/Config.in"
-source "package/lua/Config.in"
-source "package/m4/Config.in"
-source "package/make/Config.in"
-source "package/microperl/Config.in"
-source "package/perl/Config.in"
-source "package/php/Config.in"
-source "package/python/Config.in"
-source "package/ruby/Config.in"
-source "package/tcl/Config.in"
-endmenu
-
 
 
 menu "Libraries"
@@ -452,6 +439,8 @@ source "package/jpeg/Config.in"
 source "package/jpeg/Config.in.lib"
 source "package/lame/Config.in.lib"
 source "package/mpfr/Config.in"
+source "package/mysql/Config.in"
+source "package/mysql/Config.in.lib"
 source "package/nspr/Config.in"
 source "package/nss/Config.in"
 source "package/libtool/Config.in" 
@@ -462,8 +451,6 @@ source "package/libmad/Config.in"
 source "package/libmad/Config.in.lib"
 source "package/libmms/Config.in"
 source "package/libmms/Config.in.lib"
-source "package/mysql/Config.in"
-source "package/mysql/Config.in.lib"
 source "package/ncurses/Config.in"  
 source "package/ncurses/Config.in.lib" 
 source "package/neon/Config.in"
