@@ -34,7 +34,6 @@ CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			mysql_cv_gethostname_style=glibc2
 CONFIGURE_ARGS+=	--disable-assembler \
 			--with-pthread \
-			--without-raid \
 			--with-atomic-ops=rwlocks \
 			--with-unix-socket-path=/tmp/.mysql.sock \
 			--with-named-thread-libs=-lpthread \
@@ -44,12 +43,8 @@ CONFIGURE_ARGS+=	--disable-assembler \
 			--without-server \
 			--without-embedded-server \
 			--without-query-cache \
-			--without-mysqlfs \
-			--without-vio \
 			--without-ssl \
 			--without-docs \
-			--without-bench \
-			--without-innodb \
 			--without-readline \
 			--with-machine-type=${CPU_ARCH}
 HOSTTOOLFLAGS=		CC="${HOSTCC}" \
