@@ -28,5 +28,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FONTCONFIG}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libfontconfig.so* ${IDIR_FONTCONFIG}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
