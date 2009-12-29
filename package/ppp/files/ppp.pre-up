@@ -36,7 +36,7 @@ sed "$REPLACE" < /etc/ppp/templates/$IF_USE_TEMPLATE > /etc/ppp/peers/$IF_PROVID
 [ "$IF_PPP_ENCAPS" ] || encap=0
 [ "$IF_PPP_PAYLOAD" ] || payload=1
 [ "$IF_PPP_VPI" ] || $IF_PPP_VPI=1
-[ "$IF_PPP_PAYLOAD" ] || $IF_PPP_VCI=32
+[ "$IF_PPP_VCI" ] || $IF_PPP_VCI=32
 
 case "$IF_PPP_PAYLOAD" in
 bridged)

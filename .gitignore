@@ -1,8 +1,10 @@
 config/conf
+config/conf.exe
 config/lex.backup
 config/lex.zconf.c
 config/lkc_defs.h
 config/mconf
+config/mconf.exe
 config/zconf.hash.c
 config/zconf.output
 config/zconf.tab.c

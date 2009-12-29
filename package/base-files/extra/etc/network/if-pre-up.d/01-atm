@@ -1,0 +1,43 @@
+#!/bin/sh
+
+if [ ! -x /usr/sbin/br2684ctl ]
+then
+  exit 0
+fi
+
+[ "$METHOD" == "atm" ] || exit 0
+
+[ "$IF_ATM_ENCAPS" ] || encap=0
+[ "$IF_ATM_PAYLOAD" ] || payload=1
+[ "$IF_ATM_VPI" ] || $IF_ATM_VPI=1
+[ "$IF_ATM_VCI" ] || $IF_ATM_VCI=32
+
+case "$IF_ATM_PAYLOAD" in
+bridged)
+        payload=1
+        ;;
+routed)
+        payload=0
+        ;;
+*)
+        echo "Wrong payload, use either bridged or routed"
+        exit 1
+        ;;
+esac
+
+case "$IF_ATM_ENCAPS" in
+llc)
+        encap=0
+        ;;
+vc)
+        encap=1
+        ;;
+*)
+        echo "Wrong Encapsulation use either llc or vc"
+        exit 1
+        ;;
+esac
+
+br2684ctl -b -c 0 -e $encap -p $payload -a $IF_ATM_VPI.$IF_ATM_VCI
+ifconfig nas0 up
+exit 0

@@ -43,6 +43,7 @@
 #include <string.h>
 
 #include <mtd/mtd-user.h>
+#include <linux/reboot.h>
 
 #define BUFSIZE (16 * 1024)
 #define MAX_ARGS 8
@@ -253,15 +254,16 @@ usage(void)
 	"        -q                      quiet mode (once: no [w] on writing,\n"
 	"                                           twice: no status messages)\n"
 	"        -e <device>             erase <device> before executing the command\n\n"
-	"Example: To write linux.trx to mtd1 labeled as linux\n"
-	"         mtd write linux.trx linux\n\n");
+	"        -r                      reboot after successful command\n"
+	"Example: To write linux.img to mtd partition labeled as linux\n"
+	"         mtd write linux.img linux\n\n");
 	exit(1);
 }
 
 int
 main(int argc, char **argv)
 {
-	int ch, i, imagefd = -1, quiet, unlocked;
+	int ch, i, imagefd = -1, quiet, unlocked, boot;
 	char *erase[MAX_ARGS], *device;
 	const char *imagefile = NULL;
 	enum {
@@ -271,6 +273,7 @@ main(int argc, char **argv)
 	} cmd;
 
 	erase[0] = NULL;
+	boot = 0;
 	buflen = 0;
 	quiet = 0;
 
@@ -281,6 +284,9 @@ main(int argc, char **argv)
 				/* FALLTHROUGH */
 			case 'q':
 				quiet++;
+				break;
+			case 'r':
+				boot = 1;
 				break;
 			case 'e':
 				i = 0;
@@ -373,7 +379,13 @@ main(int argc, char **argv)
 				fprintf(stderr, "\n");
 			break;
 	}
-
+	
 	sync();
+	if (boot) {
+		fprintf(stderr, "\nRebooting ... ");
+		fflush(stdout);
+		fflush(stderr);
+		syscall(SYS_reboot,LINUX_REBOOT_MAGIC1,LINUX_REBOOT_MAGIC2,LINUX_REBOOT_CMD_RESTART,NULL);
+	}	
 	return 0;
 }
