@@ -277,7 +277,7 @@ main(int argc, char **argv)
 	buflen = 0;
 	quiet = 0;
 
-	while ((ch = getopt(argc, argv, "Fqe:")) != -1)
+	while ((ch = getopt(argc, argv, "Fqre:")) != -1)
 		switch (ch) {
 			case 'F':
 				quiet = 1;
