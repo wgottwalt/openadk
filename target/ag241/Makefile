@@ -15,7 +15,7 @@ $(TOOLS_BUILD_DIR):
 tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C tools/addpattern
 	$(MAKE) -C tools/srec2bin
-	$(MAKE) -C tools/squashfs prepare compile install
+	$(MAKE) -C ../tools/squashfs prepare compile install
 
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' \
