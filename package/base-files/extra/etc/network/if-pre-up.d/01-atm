@@ -1,9 +1,6 @@
 #!/bin/sh
 
-if [ ! -x /usr/sbin/br2684ctl ]
-then
-  exit 0
-fi
+[ -x /usr/sbin/br2684ctl ] || exit 0
 
 [ "${IFACE%%[0-9]*}" = "nas" ] || exit 0
 
@@ -40,4 +37,5 @@ esac
 
 br2684ctl -b -c ${IFACE##*[a-z]} -e $encap -p $payload -a $IF_ATM_VPI.$IF_ATM_VCI
 ifconfig nas${IFACE##*[a-z]} up
+
 exit 0

@@ -1,0 +1,10 @@
+#!/bin/sh
+  
+[ -x /sbin/vconfig ] || exit 0
+
+[ -e /proc/net/vlan/$IFACE ] && (
+	ip link set down dev $IFACE 
+	vconfig rem $IFACE
+)
+
+exit 0

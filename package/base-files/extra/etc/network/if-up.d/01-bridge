@@ -1,3 +1,4 @@
 #!/bin/sh
 
 [ "${IFACE%%[0-9]*}" = "br" ] && ip link set up dev $IFACE
+exit 0

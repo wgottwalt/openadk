@@ -1,9 +1,6 @@
 #!/bin/sh
 
-if [ ! -x /usr/sbin/brctl ]
-then
-  exit 0
-fi
+[ -x /usr/sbin/brctl ] || exit 0
 
 case "$IF_BRIDGE_PORTS" in
     "")
