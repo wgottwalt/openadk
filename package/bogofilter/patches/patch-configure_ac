@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- bogofilter-1.2.0.orig/configure.ac	2009-02-21 21:41:43.000000000 +0100
-+++ bogofilter-1.2.0/configure.ac	2009-05-28 19:47:00.466710794 +0200
-@@ -550,49 +550,6 @@ Cannot link against libdb? Try these ste
+--- bogofilter-1.2.0.orig/configure.ac	Sat Feb 21 21:41:43 2009
++++ bogofilter-1.2.0/configure.ac	Tue Dec 29 01:38:12 2009
+@@ -550,49 +550,6 @@ Cannot link against libdb? Try these steps to solve th
  	AH_TEMPLATE([HAVE_DB_H], [Have suitable db.h header])
  	AC_SUBST(LIBDB)
  
