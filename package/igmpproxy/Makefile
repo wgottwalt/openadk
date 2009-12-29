@@ -4,12 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		igmpproxy
-PKG_VERSION:=		0.1_beta4
+PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0a16178aeca5d1bf54c129cec9597f85
-PKG_DESCR:=		IGMPproxy is a simple dynamic Multicast Routing Daemon
+PKG_MD5SUM:=		c56f41ec195bc1fe016369bf74efc5a1
+PKG_DESCR:=		a simple dynamic Multicast Routing Daemon
 PKG_SECTION:=		net
-PKG_URL:=		http://sourceforge.net/projects/igmpproxy
+PKG_URL:=		http://sourceforge.net/projects/igmpproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=igmpproxy/}
 
 include ${TOPDIR}/mk/package.mk
