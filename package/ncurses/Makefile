@@ -24,6 +24,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--with-build-cc=${HOSTCC} \
 			--without-progs \
 			--with-fallbacks \
+			--disable-termcap \
 			--without-ada \
 			--with-shared \
 			--with-normal \
@@ -69,8 +70,9 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
 	for f in ansi dumb linux rxvt screen vt100 vt102 \
 	    vt220 wsvt25 xterm xterm-color xterm-xfree86; do \
+		${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}; \
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
-		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$f; \
+		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
 	done
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBNCURSES_DEV}/usr/include
