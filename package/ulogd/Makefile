@@ -33,6 +33,8 @@ PKG_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_HOST_DEPENDS:=	!cygwin
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ULOGD,ulogd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

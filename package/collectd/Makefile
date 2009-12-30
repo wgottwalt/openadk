@@ -93,6 +93,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--enable-wireless \
 			--with-fp-layout=nothing \
 			--without-java \
+			--without-libiptc \
 			--with-nan-emulation
 
 XAKE_FLAGS+=		LIBS='-lm'

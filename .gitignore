@@ -1,5 +1,6 @@
 config/conf
 config/conf.exe
+config/a.exe
 config/lex.backup
 config/lex.zconf.c
 config/lkc_defs.h
