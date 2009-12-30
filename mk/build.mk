@@ -168,7 +168,7 @@ switch:
 
 kernelconfig:
 	cp $(TOPDIR)/target/$(ADK_TARGET)/kernel.config $(BUILD_DIR)/linux/.config
-	make -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
+	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
 
 #############################################################
@@ -311,6 +311,9 @@ ifeq (${OStype},OpenBSD)
 endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
+endif
+ifneq (,$(filter CYGWIN%,${OStype}))
+	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \

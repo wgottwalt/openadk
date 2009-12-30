@@ -6,16 +6,18 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cbtt
 PKG_VERSION:=		20060211
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		mysql zlib
-ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
-PKG_BUILDDEP+=		uclibc++
-endif
 PKG_MD5SUM:=		19abea2817c49ccc9438e9671c402984
 PKG_DESCR:=		Bittorrent tracker
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		mysql zlib
+ifeq (${ADK_COMPILE_CBTT_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+endif
 PKG_URL:=		http://bnbtusermods.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bnbtusermods/}
+
+PKG_HOST_DEPENDS:=	!cygwin
 
 PKG_DESCR_1:=		Bittorrent tracker with mysql support
 PKG_DEPENDS_1:=		${PKG_DEPENDS} libmysqlclient

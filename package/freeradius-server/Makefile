@@ -29,6 +29,8 @@ PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
 			ftp://ftp.uk.freeradius.org/pub/radius/
 
+PKG_HOST_DEPENDS:=	!cygwin
+
 PKG_DESCR_DEMOCERTS:=	Demo certificates to test the server
 PKG_DESCR_CHAP:=	CHAP authentication module
 PKG_DESCR_DETAIL:=	Detailed accounting module
