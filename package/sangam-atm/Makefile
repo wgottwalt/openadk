@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3843f3e670967fe81561770ac960c1cd
 PKG_DESCR:=		sangam-atm DSL modem driver for TI AR7 boards
 PKG_SECTION:=		kernel
+PKG_DEPENDS:=		kmod-fw-loader kmod-atm
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_TARGET_DEPENDS:=	ag241
@@ -16,7 +17,7 @@ PKG_TARGET_DEPENDS:=	ag241
 include ${TOPDIR}/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
-$(eval $(call PKG_template,KMOD_SANGAM_ATM,kmod-sangam-atm,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_SANGAM_ATM,kmod-sangam-atm,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

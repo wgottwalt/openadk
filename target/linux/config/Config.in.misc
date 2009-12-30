@@ -68,7 +68,7 @@ config ADK_KPACKAGE_KMOD_PPDEV
 	  Kernel module for userland parallel port access
 
 config ADK_KPACKAGE_KMOD_FW_LOADER
-	prompt "kmod-fw-loader.................. userspace firmware loading support"
+	prompt "kmod-fw-loader.................... userspace firmware loading support"
 	tristate
 	default n
 	help
@@ -76,7 +76,7 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 	  loading of external firmware files.
 
 config ADK_KPACKAGE_KMOD_EEPROM_93CX6
-	prompt "kmod-eeprom-93cx6................ 93cx6 eeprom support"
+	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
 	tristate
 	default n
 	help
