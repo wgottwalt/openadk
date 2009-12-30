@@ -23,6 +23,7 @@ $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-xlocale \
+			--disable-specs \
 			--disable-xf86bigfont \
 			--disable-malloc0returnsnull \
 			--without-xcb

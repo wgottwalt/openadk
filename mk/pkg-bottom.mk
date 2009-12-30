@@ -20,11 +20,13 @@ ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 
 ifneq ($(filter autotool,${CONFIGURE_STYLE}),)
 	cd ${WRKBUILD}; \
-	    autoreconf -vif $(MAKE_TRACE)
+	    env AUTOCONF_VERSION=2.62 \
+		AUTOMAKE_VERSION=1.9 \
+		autoreconf -vif $(MAKE_TRACE)
 endif
 ifneq ($(filter autoconf,${CONFIGURE_STYLE}),)
 	cd ${WRKBUILD}; \
-	    autoconf $(MAKE_TRACE)
+	    env AUTOCONF_VERSION=2.62 autoconf $(MAKE_TRACE)
 endif
 ifneq ($(filter gnu,${CONFIGURE_STYLE}),)
 	@$(CMD_TRACE) "configuring... "

@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		miax
 PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		bluez
 PKG_MD5SUM:=		44f0d2ef46ee2697d890b7b96846adc7
 PKG_DESCR:=		A console iax (asterisk) client
 PKG_SECTION:=		bluetooth
-PKG_DEPENDS:=		kmod-bluetooth bluez libpthread
+PKG_DEPENDS:=		kmod-bt bluez libpthread
+PKG_BUILDDEP+=		bluez
 PKG_URL:=		http://sourceforge.net/projects/miax
 PKG_SITES:=		http://mesh.dl.sourceforge.net/sourceforge/miax/
 

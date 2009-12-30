@@ -6,10 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		util-linux-ng
 PKG_VERSION:=		2.16.1
 PKG_RELEASE:=		2
-PKG_BUILDDEP+=		e2fsprogs ncurses
 PKG_MD5SUM:=		fc57e5fd5be9e569b026b5077fafe84f
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		admin
+PKG_BUILDDEP+=		e2fsprogs ncurses
 PKG_URL:=		http://userweb.kernel.org/~kzak/util-linux-ng
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v2.16/}
 
@@ -18,7 +18,7 @@ PKG_DESCR_SFDISK:=	Scriptable Partition table manipulation utility
 PKG_DESCR_SWAP:=	Swap space management utilities
 PKG_DEPENDS_SWAP:=	libblkid
 PKG_DESCR_LOOP:=	Loop devices setup and control utility
-PKG_DEPENDS_LOOP:=	kmod-loop
+PKG_DEPENDS_LOOP:=	kmod-blk-dev-loop
 
 include ${TOPDIR}/mk/package.mk
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c67cf30e281a924def6426be0973df56
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		net
-PKG_DEPENDS:=		kmod-nf-ip-iptables kmod-nf-conntrack kmod-nf-conntrack-ipv4 kmod-nf-nat kmod-nf-ip-target-masquerade kmod-nf-ip-target-reject kmod-nf-ip-filter
+PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack kmod-nf-conntrack-ipv4 kmod-nf-nat kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject kmod-ip-nf-filter
 PKG_URL:=		http://www.netfilter.org
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/iptables/ \

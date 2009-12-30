@@ -33,10 +33,10 @@ INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
-OPENSSL_OPTIONS = shared no-ec no-err no-hw no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
+OPENSSL_OPTIONS = shared no-ec no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
 
 post-extract:
-	@find ${WRKBUILD} -name *.rej -delete
+	@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 do-configure:
 	(cd $(WRKBUILD); \

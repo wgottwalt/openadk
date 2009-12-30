@@ -22,3 +22,5 @@ for IF in $INTERFACES; do
 done
 
 ip link set down dev $IFACE || exit 1
+brctl delbr $IFACE
+exit 0

@@ -24,7 +24,6 @@ TCFLAGS+=		-DSBINDIR=\\\"/usr/sbin\\\"
 FAKE_FLAGS+=		INSTALL="install"
 
 post-install:
-	${INSTALL_DIR} ${IDIR_PPTPD}/etc
 	${INSTALL_DIR} ${IDIR_PPTPD}/etc/ppp
 	${INSTALL_DIR} ${IDIR_PPTPD}/usr/sbin
 	${INSTALL_DATA} ./files/pptpd.conf ${IDIR_PPTPD}/etc/

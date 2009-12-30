@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-_UNLIMIT=	ulimit -dS $$(ulimit -dH 2>/dev/null ) 2>/dev/null;
+_UNLIMIT=	ulimit -dS $(shell ulimit -dH >/dev/null 2>/dev/null ) >/dev/null 2>/dev/null;
 
 all: .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all
@@ -161,6 +161,11 @@ NO_ERROR=0
 	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | fgrep 'MIRBSD' >/dev/null 2>&1; then \
 		echo "MirBSD ksh (mksh) needs to be installed."; \
 		exit 1; \
+	else \
+		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 38 ]; then \
+			echo "MirBSD ksh is too old. R38 or higher needed."; \
+			exit 1; \
+		fi \
 	fi
 	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
 		echo >&2 Error: you must build with umask 022, sorry.; \
@@ -187,7 +192,7 @@ NO_ERROR=0
 	    -e 's/i[3-9]86/i386/' \
 	    )" >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
-	@echo 'HOSTCFLAGS:=-O2 -fwrapv' >>prereq.mk
+	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
