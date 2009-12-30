@@ -62,7 +62,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/bits/stdio_lim.h
 	touch $@
 
 $(WRKBUILD)/.configured: 
