@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-client
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl
+PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.freeradius.org
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
@@ -26,7 +26,7 @@ CONFIGURE_ENV+=		ac_cv_func_uname=no
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_FREERADIUS_CLIENT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radiusclient \
 		${IDIR_FREERADIUS_CLIENT}/usr/sbin

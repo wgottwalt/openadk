@@ -39,5 +39,6 @@ do-build:
 do-install:
 	$(CP) ./files/initramfs_list $(LINUX_DIR)
 	$(CP) ${WRKBUILD}/cryptinit $(LINUX_DIR)
+	@touch $(IDIR_CRYPTINIT)/.cryptinit
 
 include ${TOPDIR}/mk/pkg-bottom.mk

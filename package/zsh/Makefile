@@ -9,16 +9,16 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1b08c063f02d595709eaad1548c4e392
 PKG_DESCR:=		Z Shell
 PKG_SECTION:=		shells
-PKG_URL:=		http://www.zsh.org
+PKG_URL:=		http://www.zsh.org/
 PKG_SITES:=		ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ZSH,zsh,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_ZSH)/bin

@@ -18,12 +18,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IFTOP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		auto
+INSTALL_STYLE:=		auto
 
-pots-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_IFTOP}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/${PKG_NAME} ${IDIR_IFTOP}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/iftop ${IDIR_IFTOP}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
