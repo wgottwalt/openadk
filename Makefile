@@ -162,8 +162,8 @@ NO_ERROR=0
 		echo "MirBSD ksh (mksh) needs to be installed."; \
 		exit 1; \
 	else \
-		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 38 ]; then \
-			echo "MirBSD ksh is too old. R38 or higher needed."; \
+		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 34 ]; then \
+			echo "MirBSD ksh is too old. R35 or higher needed."; \
 			exit 1; \
 		fi \
 	fi
