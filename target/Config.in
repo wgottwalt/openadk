@@ -173,6 +173,7 @@ config ADK_LINUX_X86_ALIX1C
 	help
 	  Support for ALIX1C boards.
 	  http://www.pcengines.ch/
+	  Status: stable
 
 config ADK_LINUX_X86_ALIX2D
 	bool "PC Engines Alix2D"
@@ -189,6 +190,7 @@ config ADK_LINUX_X86_ALIX2D
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
+	  Status: stable
 
 config ADK_LINUX_X86_WRAP
 	bool "PC Engines WRAP"
@@ -205,6 +207,7 @@ config ADK_LINUX_X86_WRAP
 	help
 	  End of life, but I still have one board.
 	  http://www.pcengines.ch/
+	  Status: stable
 
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
@@ -214,6 +217,7 @@ config ADK_LINUX_CRIS_FOXBOARD
 	help
 	  Support for Foxboard targets.
 	  http://foxlx.acmesystems.it/
+	  Status: stable
 
 config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
@@ -230,6 +234,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	  Lemote Subnotebook.
 	  http://www.lemote.com/english/index.html
 	  http://www.tekmote.nl/
+	  Status: testing
 
 config ADK_LINUX_MIKROTIK
 	bool "Mikrotik Routerboards"
@@ -262,6 +267,7 @@ config ADK_LINUX_MIPS_AG241
 	help
 	  Linksys AG241 DSL router.
 	  (Texas Instruments AR7 platform)
+	  Status: stable
 
 config ADK_LINUX_ARM_TOMTOM
 	bool "TomTom Applications"
@@ -270,9 +276,10 @@ config ADK_LINUX_ARM_TOMTOM
 	select ADK_EABI
 	select ADK_TOOLCHAIN_ONLY
 	help
-	 Support for TomTom Rider 2 (or others).
-	 Just toolchain support to cross-compile your own
-	 applications.
+	  Support for TomTom Rider 2 (or others).
+	  Just toolchain support to cross-compile your own
+	  applications. 
+	  Status: toolchain only
 
 config ADK_LINUX_ARM_G1
 	bool "Google G1 Applications"
@@ -281,9 +288,10 @@ config ADK_LINUX_ARM_G1
 	select ADK_EABI
 	select ADK_TOOLCHAIN_ONLY
 	help
-	 Support for Google G1.
-	 Just toolchain support to cross-compile your own
-	 applications. Use static linking for your packages.
+	  Support for Google G1.
+	  Just toolchain support to cross-compile your own
+	  applications. Use static linking for your packages.
+	  Status: toolchain only
 
 config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
@@ -291,12 +299,14 @@ config ADK_LINUX_XSCALE_ZAURUS
 	select ADK_TARGET_NO_FPU
 	help
 	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
+	 Status: development
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
 	select ADK_KERNEL_INPUT_KEYBOARD
 	help
 	 Rescuesystem with can be used to Boot from Disk or USB stick.
+	 Status: development
 
 config ADK_LINUX_QEMU
 	bool "Qemu Emulator"
@@ -323,6 +333,7 @@ config ADK_LINUX_X86_64_SHUTTLE
 	select ADK_KPACKAGE_KMOD_MD_RAID1 if ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	help
 	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
+	  Status: development
 
 endchoice
 
@@ -367,18 +378,21 @@ config ADK_LINUX_ARM_QEMU
 	help
 	 Qemu support for ARM architecture.
 	 Right now this is optimized for Zaurus PDA spitz. 
+	 Status: development
 
 config ADK_LINUX_MIPS_QEMU
 	bool "mips (big endian)"
 	select ADK_mips_qemu
 	help
 	 Qemu support for MIPS BE architecture.
+	 Status: stable
 
 config ADK_LINUX_MIPSEL_QEMU
 	bool "mipsel (little endian)"
 	select ADK_mipsel_qemu
 	help
 	 Qemu support for MIPS LE architecture.
+	 Status: stable
 
 config ADK_LINUX_MIPS64_QEMU
 	bool "mips64 (big endian)"
@@ -386,6 +400,7 @@ config ADK_LINUX_MIPS64_QEMU
 	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 BE architecture.
+	 Status: development
 
 config ADK_LINUX_MIPS64EL_QEMU
 	bool "mips64 (little endian)"
@@ -393,6 +408,7 @@ config ADK_LINUX_MIPS64EL_QEMU
 	select ADK_LINUX_64
 	help
 	 Qemu support for MIPS64 LE architecture.
+	 Status: development
 
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
@@ -411,6 +427,7 @@ config ADK_LINUX_X86_QEMU
 	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Qemu support for x86 architecture.
+	 Status: stable
 
 config ADK_LINUX_X86_64_QEMU
 	bool "x86_64"
@@ -422,6 +439,7 @@ config ADK_LINUX_X86_64_QEMU
 	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Qemu support for x86_64 architecture.
+	 Status: stable
 
 endchoice
 
@@ -439,6 +457,7 @@ config ADK_LINUX_MIPS_RB411
 	select ADK_KERNEL_NET_ETHERNET
 	help
 	 Support for Mikrotik RB411.
+	 Status: development
 
 config ADK_LINUX_MIPS_RB433
 	bool "Mikrotik Routerboard 433"
@@ -449,6 +468,7 @@ config ADK_LINUX_MIPS_RB433
 	select ADK_KERNEL_NET_ETHERNET
 	help
 	 Support for Mikrotik RB433.
+	 Status: development
 
 config ADK_LINUX_MIPS_RB532
 	bool "Mikrotik Routerboard 532"
@@ -460,6 +480,7 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_BLK_DEV_SD
 	help
 	 Support for Mikrotik RB532.
+	 Status: stable
 
 endchoice
 
