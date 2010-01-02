@@ -6,17 +6,19 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openssh
 PKG_VERSION:=		5.3p1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		zlib openssl
-ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
-PKG_BUILDDEP+=		krb5
-endif
-ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
-PKG_BUILDDEP+=		heimdal
-endif
 PKG_MD5SUM:=		13563dbf61f36ca9a1e4254260131041
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib libopenssl
+PKG_BUILDDEP+=		zlib openssl
+ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
+PKG_DEPENDS+=		krb5-libs
+PKG_BUILDDEP+=		krb5
+endif
+ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
+PKG_DEPENDS+=		heimdal-libs
+PKG_BUILDDEP+=		heimdal
+endif
 PKG_URL:=		http://www.openssh.com
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/ \
 			ftp://openbsd.wiretapped.net/pub/OpenBSD/OpenSSH/portable/ \
@@ -29,10 +31,6 @@ PKG_DESCR_3:=		OpenSSH sftp client
 PKG_DESCR_4:=		OpenSSH sftp server
 
 include ${TOPDIR}/mk/package.mk
-
-ifeq ($(ADK_COMPILE_OPENSSH_WITH_KERBEROS),y)
-PKG_DEPENDS+=		heimdal-libs
-endif
 
 $(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
