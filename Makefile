@@ -71,6 +71,9 @@ dev-help:
 	@echo ''
 	@echo 'All changed patches will be opened with your $$EDITOR,'
 	@echo 'so you can add a description and verify the modifications.'
+	@echo ''
+	@echo 'Adding a new package:'
+	@echo 'make PKG=foo VER=1.0 newpackage'
 
 clean: .prereq_done
 	-@rm -f nohup.out
@@ -112,6 +115,9 @@ switch: .prereq_done
 
 kernelconfig: .prereq_done
 	@${GMAKE_INV} kernelconfig
+
+newpackage: .prereq_done
+	@${GMAKE_INV} newpackage
 
 image_clean imageclean cleanimage: .prereq_done
 	@${GMAKE_INV} image_clean
