@@ -140,8 +140,10 @@ ${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_TOOLS}:
 		${STAGING_TOOLS}/{bin,lib}
 
 ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
+endif
 
 package/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
@@ -170,6 +172,17 @@ kernelconfig:
 	cp $(TOPDIR)/target/$(ADK_TARGET)/kernel.config $(BUILD_DIR)/linux/.config
 	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
+
+# create a new package from package/template
+newpackage:
+	@echo "Creating new package $(PKG)"
+	$(CP) $(TOPDIR)/package/template $(TOPDIR)/package/$(PKG)
+	pkg=$$(echo $(PKG)|tr '[:lower:]' '[:upper:]'); \
+		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
+	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
+	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
+	@echo "Edit package/$(PKG)/Makefile to complete"
+	@echo "Do not forget to add package to package/Config.in"
 
 #############################################################
 #
