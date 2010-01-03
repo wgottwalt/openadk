@@ -10,6 +10,7 @@ PKG_BUILDDEP+=		readline ncurses
 PKG_MD5SUM:=		8975414c76a295f4855a417af0b5ddce
 PKG_DESCR:=		A routing software package
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_URL:=		http://www.quagga.net
 PKG_SITES:=		http://www.quagga.net/download/ \
 			http://www.de.quagga.net/download/ \
