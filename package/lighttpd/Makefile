@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
 PKG_DESCR:=		a flexible and lightweight web server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libxml2 libsqlite pcre
+PKG_DEPENDS:=		libxml2 libsqlite libpcre
 PKG_BUILDDEP+=		pcre libxml2 sqlite
 ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
 PKG_DEPENDS+= 		libopenssl

@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCRE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-cpp
