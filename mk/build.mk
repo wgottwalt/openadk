@@ -403,17 +403,17 @@ bulk:
 		mkdir -p $(TOPDIR)/bulkdir/$$target-$$libc-$$fs; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
-		$(MAKE) prereq && \
+		$(GMAKE) prereq && \
 		if [ "x$$p" = xy ];then \
-			$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
 				allmodconfig; \
 		else \
-			$(MAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
 				defconfig; \
 		fi && \
-		$(MAKE) VERBOSE=1 -f mk/build.mk allcopy \
+		$(GMAKE) VERBOSE=1 -f mk/build.mk allcopy \
 		    targetdir=$$target-$$libc-$$fs; \
-		$(MAKE) cleantarget; \
+		$(GMAKE) cleantarget; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bulkdir/$$target-$$libc-$$fs/log; \
 	done <${TOPDIR}/target/bulk.lst
