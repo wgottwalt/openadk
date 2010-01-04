@@ -24,6 +24,6 @@ XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} CFLAGS='${TCFLAGS}'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so.* ${IDIR_LIBPCRE}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

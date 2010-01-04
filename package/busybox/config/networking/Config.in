@@ -884,6 +884,7 @@ config BUSYBOX_IFUPDOWN_UDHCPC_CMD_OPTIONS
 
 config BUSYBOX_VCONFIG
 	bool "vconfig"
+	select ADK_KPACKAGE_KMOD_VLAN_8021Q
 	default n
 	help
 	  Creates, removes, and configures VLAN interfaces

@@ -31,6 +31,6 @@ pre-install:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libpcap.so.* ${IDIR_LIBPCAP}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpcap.so* ${IDIR_LIBPCAP}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

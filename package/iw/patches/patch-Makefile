@@ -1,11 +1,11 @@
---- iw-0.9.17.orig/Makefile	2009-08-26 11:41:41.000000000 +0200
-+++ iw-0.9.17/Makefile	2009-11-20 23:10:19.000000000 +0100
+--- iw-0.9.18.orig/Makefile	2009-11-20 17:35:56.000000000 +0100
++++ iw-0.9.18/Makefile	2010-01-04 23:00:34.031210816 +0100
 @@ -86,10 +86,10 @@ check:
  install: iw iw.8.gz
  	@$(NQ) ' INST iw'
- 	$(Q)$(MKDIR) $(DESTDIR)$(BINDIR)
--	$(Q)$(INSTALL) -m 755 -t $(DESTDIR)$(BINDIR) iw
-+	$(Q)$(INSTALL) -m 755 iw $(DESTDIR)$(BINDIR)
+ 	$(Q)$(MKDIR) $(DESTDIR)$(SBINDIR)
+-	$(Q)$(INSTALL) -m 755 -t $(DESTDIR)$(SBINDIR) iw
++	$(Q)$(INSTALL) -m 755 iw $(DESTDIR)$(SBINDIR)
  	@$(NQ) ' INST iw.8'
  	$(Q)$(MKDIR) $(DESTDIR)$(MANDIR)/man8/
 -	$(Q)$(INSTALL) -m 644 -t $(DESTDIR)$(MANDIR)/man8/ iw.8.gz
