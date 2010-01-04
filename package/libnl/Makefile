@@ -17,7 +17,7 @@ $(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto confprog
+INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib
