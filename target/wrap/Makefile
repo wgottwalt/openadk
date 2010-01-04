@@ -13,7 +13,7 @@ kernel-install:
 ifeq ($(FS),ext2-cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to CompactFlash use scripts/install.sh"
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
