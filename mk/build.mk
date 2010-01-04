@@ -178,10 +178,10 @@ kernelconfig:
 	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
 
-# create a new package from package/template
+# create a new package from package/.template
 newpackage:
 	@echo "Creating new package $(PKG)"
-	$(CP) $(TOPDIR)/package/template $(TOPDIR)/package/$(PKG)
+	$(CP) $(TOPDIR)/package/.template $(TOPDIR)/package/$(PKG)
 	pkg=$$(echo $(PKG)|tr '[:lower:]' '[:upper:]'); \
 		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
