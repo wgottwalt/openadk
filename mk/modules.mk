@@ -342,6 +342,10 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NFQUEUE,netfilter-xt-target-nfqu
 	$(MODULES_DIR)/kernel/net/netfilter/xt_NFQUEUE \
 ,50))
 
+$(eval $(call KMOD_template,NETFILTER_XT_TARGET_TCPMSS,netfilter-xt-target-tcpmss,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_TCPMSS \
+,50))
+
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NOTRACK,netfilter-xt-target-notrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_NOTRACK \
 ,50))
