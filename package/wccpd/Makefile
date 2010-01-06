@@ -18,8 +18,6 @@ $(eval $(call PKG_template,WCCPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_STYLE:=	gnu
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
-CONFIGURE_ARGS+=	--enable-static \
-			--with-gnu-ld
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
