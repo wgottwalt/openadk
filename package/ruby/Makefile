@@ -20,6 +20,7 @@ MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags=''
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
+# uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

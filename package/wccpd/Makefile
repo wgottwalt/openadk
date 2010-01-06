@@ -16,6 +16,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,WCCPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+# uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--enable-static \
 			--with-gnu-ld

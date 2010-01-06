@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mt-daapd
 PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		10
-PKG_BUILDDEP+=		gdbm libid3tag
 PKG_MD5SUM:=		2e1cdbe6b94ef153e915806f80a28dca
 PKG_DESCR:=		a multi-threaded DAAP (Digital Audio Access Protocol) daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libgdbm libid3tag libpthread
+PKG_BUILDDEP+=		gdbm libid3tag
 PKG_URL:=		http://www.fireflymediaserver.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
 
@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MT_DAAPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
+# uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--enable-mdns \
 			--disable-howl \
