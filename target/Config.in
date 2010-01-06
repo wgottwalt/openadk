@@ -814,7 +814,7 @@ config ADK_TARGET_PACKAGE_RPM
 	prompt "rpm package format"
 	help
 	  Create rpm packages and use rpm package management on the
-          target.
+          target. WARNING: NOT YET IMPLEMENTED
 
 endchoice
 

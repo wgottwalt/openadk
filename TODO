@@ -1,5 +1,5 @@
 - netbsd build
 - macos x build
-- make rpm package backend working
-- network scripts for wireless client / ap
+- implement rpm package backend 
+- network scripts for wireless client and acess point
 - customise mconf help texts to better fit for OpenADK
