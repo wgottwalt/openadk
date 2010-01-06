@@ -12,6 +12,8 @@ PKG_SECTION:=		net
 PKG_URL:=		http://sourceforge.net/projects/igmpproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=igmpproxy/}
 
+CFLINE_IGMPPROXY=	select ADK_KERNEL_IP_MULTICAST\n\tselect ADK_KERNEL_IP_MROUTE
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IGMPPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

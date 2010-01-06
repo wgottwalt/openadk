@@ -1,5 +1,6 @@
 - netbsd build
 - macos x build
 - implement rpm package backend 
+- implement update for MTD devices (foxboard,rb532,ag241)
 - network scripts for wireless client and acess point
 - customise mconf help texts to better fit for OpenADK
