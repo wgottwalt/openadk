@@ -23,12 +23,14 @@ $(eval $(call PKG_template,@UPKG@,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PK
 CONFIGURE_STYLE:=	gnu
 # use following to add ./configure options
 #CONFIGURE_ARGS+=	--disable-foo
+# overwrite any configure variables
+#CONFIGURE_ENV+=	ac_cv_func_setpgrp_void=yes
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 # please install all files and directories to the package dir
 post-install:
-	$(INSTALL_DIR) $(IDIR_@UPKG@)/bin
+	$(INSTALL_DIR) $(IDIR_@UPKG@)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/@PKG@ $(IDIR_@UPKG@)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

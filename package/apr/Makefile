@@ -28,7 +28,8 @@ endif
 $(eval $(call PKG_template,APR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
+# uClibc setpgrp does not take arguments
+CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ENV+=		ac_cv_sizeof_size_t=4
 CONFIGURE_ENV+=		ac_cv_sizeof_ssize_t=4
 CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes

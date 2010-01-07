@@ -17,7 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NETPERF,${PKG_NAME},${PKG_VERSION}${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
+# uClibc setpgrp does not take arguments
+CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
