@@ -67,6 +67,7 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241)
 	default n
 	help
 	  Enables support for AHCI Serial ATA.

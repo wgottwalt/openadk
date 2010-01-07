@@ -405,10 +405,10 @@ bulk:
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 		if [ "x$$p" = xy ];then \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs \
 				allmodconfig; \
 		else \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs PKG=ipkg \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs \
 				defconfig; \
 		fi && \
 		$(GMAKE) VERBOSE=1 -f mk/build.mk allcopy \

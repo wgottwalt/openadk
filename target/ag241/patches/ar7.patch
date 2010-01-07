@@ -149,3 +149,21 @@ diff -Nur linux-2.6.32.orig/drivers/serial/8250.c linux-2.6.32/drivers/serial/82
  	serial_out(up, UART_TX, ch);
  }
  
+diff -Nur linux-2.6.32.orig/arch/mips/ar7/prom.c linux-2.6.32/arch/mips/ar7/prom.c
+--- linux-2.6.32.orig/arch/mips/ar7/prom.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/arch/mips/ar7/prom.c	2010-01-05 20:39:11.000000000 +0100
+@@ -219,14 +219,6 @@
+ 	if (strstr(prom_getcmdline(), "console="))
+ 		return;
+ 
+-#ifdef CONFIG_KGDB
+-	if (!strstr(prom_getcmdline(), "nokgdb")) {
+-		strcat(prom_getcmdline(), " console=kgdb");
+-		kgdb_enabled = 1;
+-		return;
+-	}
+-#endif
+-
+ 	s = prom_getenv("modetty0");
+ 	if (s) {
+ 		baud = simple_strtoul(s, &p, 10);
