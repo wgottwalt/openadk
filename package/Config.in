@@ -79,6 +79,7 @@ endmenu
 menu "Misc"
 source "package/collectd/Config.in"
 source "package/deco/Config.in"
+source "package/dialog/Config.in"
 source "package/digitemp/Config.in"
 source "package/gpm/Config.in"
 source "package/gpsd/Config.in"
