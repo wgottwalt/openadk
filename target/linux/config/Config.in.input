@@ -38,4 +38,10 @@ config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
 	tristate
 	default n
 
+config ADK_KPACKAGE_KMOD_INPUT_EVDEV
+	prompt "kmod-input-evdev................. Event support"
+	select ADK_KERNEL_INPUT
+	tristate
+	default n
+
 endmenu
