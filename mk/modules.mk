@@ -1106,6 +1106,23 @@ $(eval $(call KMOD_template,LEDS_CLASS,leds-class,\
 	$(MODULES_DIR)/kernel/drivers/leds/led-class \
 ,05))
 
+$(eval $(call KMOD_template,LEDS_TRIGGER_TIMER,leds-trigger-timer,\
+	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-timer \
+,10))
+
+$(eval $(call KMOD_template,LEDS_TRIGGER_HEARTBEAT,leds-trigger-heartbeat,\
+	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-heartbeat \
+,10))
+
+$(eval $(call KMOD_template,LEDS_TRIGGER_DEFAULT_ON,leds-trigger-default-on,\
+	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-default-on \
+,10))
+
+$(eval $(call KMOD_template,NETFILTER_XT_TARGET_LED,netfilter-xt-target-led,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_LED \
+,90))
+
+
 #
 # NLS
 #
