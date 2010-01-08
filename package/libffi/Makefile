@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libffi
-PKG_VERSION:=		3.0.8
+PKG_VERSION:=		3.0.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		188a4f79fdac2310044b44b7d3918ef9
+PKG_MD5SUM:=		1f300a7a7f975d4046f51c3022fa5ff1
 PKG_DESCR:=		Foreign Function Interface library
 PKG_SECTION:=		libs
 PKG_URL:=		http://sourceware.org/libffi
@@ -16,7 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autotool gnu
+CONFIGURE_STYLE=	gnu
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
