@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		dialog
 PKG_VERSION:=		1.1-20080819
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3caebd641a9f337b980becb4444336c5	
+PKG_MD5SUM:=		3caebd641a9f337b980becb4444336c5
 PKG_DESCR:=		A text gui interface
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses
