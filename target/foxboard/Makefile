@@ -12,7 +12,7 @@ $(TOOLS_BUILD_DIR):
 
 tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C tools/mkfimage
-	#$(MAKE) -C tools/e100boot prepare compile install $(MAKE_TRACE)
+	$(MAKE) -C tools/e100boot prepare compile install $(MAKE_TRACE)
 	$(MAKE) -C ../tools/squashfs prepare compile install
 	$(INSTALL_BIN) tools/boot_linux $(BIN_DIR)/
 
