@@ -544,6 +544,7 @@ source "package/xf86-video-cirrus/Config.in"
 source "package/xf86-video-geode/Config.in"
 source "package/xf86-input-mouse/Config.in"
 source "package/xf86-input-keyboard/Config.in"
+source "package/xf86-input-evtouch/Config.in"
 
 menu "X Libraries"
 source "package/libICE/Config.in"
