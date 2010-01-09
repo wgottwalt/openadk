@@ -22,6 +22,8 @@ kernel-install: tools-compile
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
+		bs=4063232 conv=sync $(MAKE_TRACE)
 	@echo 
 	@echo Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash
 	@echo Do not forget to set network boot jumper, before you start the foxboard
