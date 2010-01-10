@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
-PKG_VERSION:=		1.0.21
+PKG_VERSION:=		1.0.22
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		alsa-lib
-PKG_MD5SUM:=		3672287c2608040d111ce45495ba7602
+PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
-PKG_DEPENDS:=		alsa-lib libpthread
 PKG_SECTION:=		utils
+PKG_DEPENDS:=		alsa-lib libpthread
+PKG_BUILDDEP+=		alsa-lib
 PKG_URL:=		http://www.alsa-project.org
 PKG_SITES:=		ftp://ftp.task.gda.pl/pub/linux/misc/alsa/utils/ \
 			ftp://ftp.alsa-project.org/pub/utils/
