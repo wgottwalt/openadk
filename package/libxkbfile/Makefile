@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a1384a9a48430397aff236f97e26ed05
 PKG_DESCR:=		X11 keyboard configuration extension library
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		kbproto libX11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

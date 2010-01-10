@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.41.9
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		52f60a9e19a02f142f5546f1b5681927
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		admin
+PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
@@ -24,10 +25,10 @@ PKG_SECTION_SS:=	libs
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_UUID},${PKG_SECTION_UUID}))
-$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_COM_ERR},${PKG_SECTION_COM_ERR}))
-$(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SS},${PKG_SECTION_SS}))
-$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
+$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_UUID},${PKG_SECTION_UUID}))
+$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_COM_ERR},${PKG_SECTION_COM_ERR}))
+$(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_SS},${PKG_SECTION_SS}))
+$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-elf-shlibs \

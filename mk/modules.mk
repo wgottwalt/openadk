@@ -568,6 +568,7 @@ $(eval $(call KMOD_template,BLK_DEV_NBD,blk-dev-nbd,\
 
 $(eval $(call KMOD_template,SCSI,scsi,\
     $(MODULES_DIR)/kernel/drivers/scsi/scsi_wait_scan \
+    $(MODULES_DIR)/kernel/drivers/scsi/scsi_mod \
 ,20))
 
 $(eval $(call KMOD_template,BLK_DEV_SD,blk-dev-sd,\
@@ -977,6 +978,10 @@ $(eval $(call KMOD_template,KEYBOARD_ATKBD,keyboard-atkbd,\
 
 $(eval $(call KMOD_template,INPUT_MOUSEDEV,input-mousedev,\
 	$(MODULES_DIR)/kernel/drivers/input/mousedev \
+,45))
+
+$(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
+	$(MODULES_DIR)/kernel/drivers/input/evdev \
 ,45))
 
 #

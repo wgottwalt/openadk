@@ -1,0 +1,11 @@
+--- xf86-input-evtouch-0.8.8.orig/ev_calibrate.c	2008-11-10 12:25:32.000000000 +0100
++++ xf86-input-evtouch-0.8.8/ev_calibrate.c	2010-01-08 17:13:52.000000000 +0100
+@@ -218,7 +218,7 @@ int main (void)
+         int cap_style = CapButt;        /* style of the line's edje and */
+         int join_style = JoinBevel;        /*  joined lines.                */
+ 
+-        int event_mask = ExposureMask | ButtonReleaseMask | PointerMotionMask | KeyPressMask;
++        int event_mask = ExposureMask | ButtonPressMask | ButtonReleaseMask | PointerMotionMask | KeyPressMask;
+ 
+         int depth;
+         int screen_num;

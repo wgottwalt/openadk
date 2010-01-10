@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.22
+PKG_VERSION:=		2.6.24
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		gmp
-PKG_MD5SUM:=		9a30009bade8a1b09fba27680c87cf72
+PKG_MD5SUM:=		1c76b6982c05392f7c360afb92699661
 PKG_DESCR:=		IPSec software
 PKG_SECTION:=		net
 PKG_DEPENDS:=		ip libgmp
+PKG_BUILDDEP+=		gmp
 PKG_URL:=		http://www.openswan.org
 PKG_SITES:=		http://www.openswan.org/download/ \
 			ftp://ftp.openswan.org/openswan/

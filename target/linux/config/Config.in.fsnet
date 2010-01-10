@@ -1,6 +1,6 @@
 config ADK_KPACKAGE_KMOD_CIFS
 	prompt "kmod-fs-cifs...................... CIFS support"
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	tristate
 	default n
 	help
