@@ -24,10 +24,13 @@ ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
 		bs=4063232 conv=sync $(MAKE_TRACE)
-	@echo 
-	@echo Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash
-	@echo Do not forget to set network boot jumper, before you start the foxboard
-	@echo 'Login as user root with password linux123 via ssh or console'
+	@if [ $$(stat --format=%s ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \
+		echo 'Image is too big!'; \
+	else \
+		echo 'Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash'; \
+		echo 'Do not forget to set the network boot jumper, before you start the foxboard'; \
+		echo 'Login as user root with password linux123 via ssh or console'; \
+	fi
 endif
 ifeq ($(FS),nfsroot)
 imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
