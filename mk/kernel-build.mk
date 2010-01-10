@@ -53,7 +53,11 @@ compile: $(LINUX_DIR)/vmlinux
 install: compile
 ifneq ($(strip $(INSTALL_TARGETS)),)
 	$(TRACE) target/${ADK_TARGET}-modules-install
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
+	$(PKG_INSTALL) $(INSTALL_TARGETS) $(MAKE_TRACE)
+else
 	$(foreach pkg,$(INSTALL_TARGETS),$(shell $(PKG_INSTALL) $(pkg)))
+endif
 endif
 
 clean:

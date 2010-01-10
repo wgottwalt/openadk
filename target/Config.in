@@ -26,6 +26,9 @@ config ADK_alix1c
 config ADK_alix2d
 	tristate
 
+config ADK_alix2d13
+	tristate
+
 config ADK_wrap
 	tristate
 
@@ -102,6 +105,7 @@ config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
 	default "alix2d"  if ADK_alix2d
+	default "alix2d13"  if ADK_alix2d13
 	default "wrap"  if ADK_wrap
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
@@ -189,6 +193,24 @@ config ADK_LINUX_X86_ALIX2D
 	select BUSYBOX_HWCLOCK
 	help
 	  Support for ALIX2D boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_ALIX2D13
+	bool "PC Engines Alix2D13"
+	select ADK_alix2d13
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NEW_LEDS
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	help
+	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
 	  Status: stable
 
@@ -528,6 +550,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -552,6 +575,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -624,6 +648,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
@@ -645,6 +670,7 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	depends on \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS

@@ -6,6 +6,11 @@ if [ $who -ne 0 ]; then
   exit 1
 fi
 
+if [ -x /sbin/mtd ];then
+	updatecmd="mtd -r write - linux"
+else
+	updatecmd="gunzip -c | tar -xf -"
+fi
 
 check_exit() {
 	if [ $? -ne 0 ];then
@@ -22,19 +27,19 @@ prepare() {
 
 extract_from_file() {
 	prepare
-        cat $1 | gunzip -c | tar -xf -
+        cat $1 | $updatecmd
 	check_exit
 }
 
 extract_from_ssh() {
 	prepare
-        ssh $1 "cat $2" | gunzip -c | tar -xf -
+        ssh $1 "cat $2" | $updatecmd
 	check_exit
 }
 
 extract_from_http() {
 	prepare
-        wget -O - $1 | gunzip -c | tar -xf -
+        wget -O - $1 | $updatecmd
 	check_exit
 }
                 

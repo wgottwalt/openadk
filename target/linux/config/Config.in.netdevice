@@ -1,5 +1,5 @@
 menu "Network devices support"
-depends on !ADK_LINUX_CRIS_FOXBOARD
+depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241)
 
 config ADK_KERNEL_NETDEVICES
 	boolean

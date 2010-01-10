@@ -12,7 +12,7 @@ $(TOOLS_BUILD_DIR):
 
 tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C tools/mkfimage
-	#$(MAKE) -C tools/e100boot prepare compile install $(MAKE_TRACE)
+	$(MAKE) -C tools/e100boot prepare compile install
 	$(MAKE) -C ../tools/squashfs prepare compile install
 	$(INSTALL_BIN) tools/boot_linux $(BIN_DIR)/
 
@@ -22,10 +22,15 @@ kernel-install: tools-compile
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
-	@echo 
-	@echo Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash
-	@echo Do not forget to set network boot jumper, before you start the foxboard
-	@echo 'Login as user root with password linux123 via ssh or console'
+	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
+		bs=4063232 conv=sync $(MAKE_TRACE)
+	@if [ $$(stat --format=%s ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \
+		echo 'Image is too big!'; \
+	else \
+		echo 'Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash'; \
+		echo 'Do not forget to set the network boot jumper, before you start the foxboard'; \
+		echo 'Login as user root with password linux123 via ssh or console'; \
+	fi
 endif
 ifeq ($(FS),nfsroot)
 imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
@@ -33,5 +38,6 @@ imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
 	@echo Use sudo ./boot_linux -F -i ${ADK_TARGET}-${FS}-kernel to flash the kernel
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSTARBALL} is your nfs root and can be extracted on your nfs server
+	@echo 'Do not forget to create device nodes for console,null and tty in your nfsroot'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
