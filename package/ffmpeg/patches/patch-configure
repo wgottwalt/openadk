@@ -1,5 +1,14 @@
 --- ffmpeg-0.5.orig/configure	2009-03-01 18:57:14.000000000 +0100
-+++ ffmpeg-0.5/configure	2009-06-12 23:27:05.000000000 +0200
++++ ffmpeg-0.5/configure	2010-01-06 20:34:48.343750000 +0100
+@@ -1167,7 +1167,7 @@ arch=`uname -m`
+ cpu="generic"
+ 
+ # OS
+-target_os=$(tolower $(uname -s))
++target_os=linux
+ 
+ # configurable options
+ enable debug
 @@ -2486,51 +2486,6 @@ cmp -s $TMPH config.h &&
  
  rm -f $TMPC $TMPE $TMPH $TMPO $TMPS $TMPSH
