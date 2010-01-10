@@ -12,7 +12,7 @@ $(TOOLS_BUILD_DIR):
 
 tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C tools/mkfimage
-	#$(MAKE) -C tools/e100boot prepare compile install $(MAKE_TRACE)
+	$(MAKE) -C tools/e100boot prepare compile install $(MAKE_TRACE)
 	$(MAKE) -C ../tools/squashfs prepare compile install
 	$(INSTALL_BIN) tools/boot_linux $(BIN_DIR)/
 
@@ -22,6 +22,8 @@ kernel-install: tools-compile
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
+		bs=4063232 conv=sync $(MAKE_TRACE)
 	@echo 
 	@echo Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash
 	@echo Do not forget to set network boot jumper, before you start the foxboard
