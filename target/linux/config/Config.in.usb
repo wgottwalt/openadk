@@ -15,8 +15,9 @@ config ADK_KERNEL_USB_SERIAL
 config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb-core..................... USB support"
 	tristate
-	default y if ADK_LINUX_X86_ALIX1C || ADK_LINUX_CRIS_FOXBOARD
+	default y if ADK_LINUX_X86_ALIX1C
 	default n
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_DEVICEFS
 	help
