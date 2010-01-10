@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.6.5.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		50fb736021ef89916af622cb4772bbea
+PKG_VERSION:=		1.6.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		08af805fd59f68d9ad00a2f878cf820e
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libopenssl libcurl libexpat
