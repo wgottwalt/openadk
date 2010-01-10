@@ -23,10 +23,10 @@ INSTALL_STYLE:=		auto
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		CFLAGS="-static" ./configure --enable-static --disable-shared \
+		./configure \
 	);
 	${MAKE} -C ${WRKBUILD}
-	${INSTALL_BIN} ${WRKBUILD}/src/file ${STAGING_TOOLS}/bin
+	${INSTALL_BIN} ${WRKBUILD}/src/.libs/file ${STAGING_TOOLS}/bin
 	${MAKE} -C ${WRKBUILD} clean
 
 post-install:
