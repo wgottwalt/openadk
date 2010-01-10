@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libICE
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		xtrans
 PKG_MD5SUM:=		4a8f09f15fc92196b91d61e2dc9afcea
 PKG_DESCR:=		Inter-Client Exchange library
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		xtrans xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
