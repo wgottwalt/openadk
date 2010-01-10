@@ -71,9 +71,6 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	cat ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel \
 		${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
-	# padding of images is required, foxboard only?
-	#dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
-		bs=4063232 conv=sync $(MAKE_TRACE)
 
 imageclean:
 	rm -f $(BIN_DIR)/$(ADK_TARGET)-* ${BUILD_DIR}/$(ADK_TARGET)-*

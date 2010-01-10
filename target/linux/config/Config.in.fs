@@ -83,7 +83,7 @@ config ADK_KPACKAGE_KMOD_EXT4_FS
 config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	prompt "kmod-fs-hfsplus................... HFS+ filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_UTF8
 	default n
 	help
@@ -101,7 +101,7 @@ source "package/ntfs-3g/Config.in"
 config ADK_KPACKAGE_KMOD_NTFS_FS
 	prompt "kmod-fs-ntfs...................... NTFS file system support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	default n
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
@@ -133,7 +133,7 @@ config ADK_KERNEL_FAT_FS
 config ADK_KPACKAGE_KMOD_VFAT_FS
 	prompt "kmod-fs-vfat...................... VFAT filesystem support"
 	select ADK_KERNEL_FAT_FS
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	tristate

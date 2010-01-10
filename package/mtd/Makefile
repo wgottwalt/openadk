@@ -18,6 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+PKGDFLT_MTD=		y
+
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
