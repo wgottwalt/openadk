@@ -979,6 +979,10 @@ $(eval $(call KMOD_template,INPUT_MOUSEDEV,input-mousedev,\
 	$(MODULES_DIR)/kernel/drivers/input/mousedev \
 ,45))
 
+$(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
+	$(MODULES_DIR)/kernel/drivers/input/evdev \
+,45))
+
 #
 # USB
 #

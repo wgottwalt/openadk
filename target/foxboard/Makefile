@@ -35,5 +35,6 @@ imageinstall: ${BIN_DIR}/${ROOTFSTARBALL}
 	@echo Use sudo ./boot_linux -F -i ${ADK_TARGET}-${FS}-kernel to flash the kernel
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSTARBALL} is your nfs root and can be extracted on your nfs server
+	@echo 'Do not forget to create device nodes for console,null and tty in your nfsroot'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
