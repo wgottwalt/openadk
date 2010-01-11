@@ -34,7 +34,7 @@ TCPPFLAGS+=		-I${LINUX_DIR}/include
 
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
-			--with-krb5-config=${STAGING_DIR}/usr/bin/krb5-config \
+			--with-krb5=${STAGING_DIR}/usr/ \
 			--enable-gss
 CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else

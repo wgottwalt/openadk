@@ -33,7 +33,7 @@ ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
 PKG_BUILDDEP+=		libaudiofile
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
-PKG_BUILDDEP+=		lame libvorbis
+PKG_BUILDDEP+=		lame libvorbis libshout
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
 PKG_BUILDDEP+=		curl
