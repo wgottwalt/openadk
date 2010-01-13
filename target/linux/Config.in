@@ -11,6 +11,7 @@ source target/linux/config/Config.in.multimedia
 source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.bluetooth
 source target/linux/config/Config.in.isdn
+source target/linux/config/Config.in.leds
 source target/linux/config/Config.in.misc
 source target/linux/config/Config.in.lib
 source target/linux/config/Config.in.kvm

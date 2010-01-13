@@ -7,8 +7,6 @@ config ADK_LINUX_INITRAMFS_BUILTIN
 
 menu "Miscellaneous devices support"
 
-source target/linux/config/Config.in.leds
-
 config ADK_KERNEL_WATCHDOG
 	boolean
 	default n
@@ -23,19 +21,20 @@ config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
 	  from some situations that the hardware watchdog will recover
 	  from. Equally it's a lot cheaper to install.
 
-config ADK_KPACKAGE_KMOD_WD1100
-	prompt "kmod-wd1100....................... Soekris net4801 watchdog"
-	tristate
-	select ADK_KERNEL_WATCHDOG
-	default n
-	help
-	  Driver for the NatSemi SC1x00 series Watchdog
-	  found on Soekris net4801 boards
+#config ADK_KPACKAGE_KMOD_WD1100
+#	prompt "kmod-wd1100....................... Soekris net4801 watchdog"
+#	tristate
+#	select ADK_KERNEL_WATCHDOG
+#	default n
+#	help
+#	  Driver for the NatSemi SC1x00 series Watchdog
+#	  found on Soekris net4801 boards
 
 config ADK_KPACKAGE_KMOD_PARPORT
 	prompt "kmod-parport...................... generic parallel port support"
 	tristate
 	default n
+	depends on ADK_TARGET_WITH_PP
 	help
 	  Kernel module for generic parallel port support
 
@@ -78,6 +77,7 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
 	tristate
+	depends on ADK_KPACKAGE_KMOD_MAC80211
 	default n
 	help
 

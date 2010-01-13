@@ -1,5 +1,4 @@
 menu "Network devices support"
-depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241)
 
 config ADK_KERNEL_NETDEVICES
 	boolean
@@ -22,6 +21,7 @@ config ADK_KERNEL_NETDEV_1000
 	default n
 
 menu "Ethernet card support"
+depends on ADK_TARGET_WITH_PCI
 
 config ADK_KPACKAGE_KMOD_NE2K_PCI
 	prompt "kmod-net-ne2k-pci............. NE2000 PCI driver"
@@ -154,6 +154,7 @@ config ADK_MOD_KERNEL_MAC80211
 	default n
 
 menu "Wireless card support"
+depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 
 config ADK_KPACKAGE_KMOD_MAC80211
 	prompt "kmod-mac80211................... mac80211 softmac"

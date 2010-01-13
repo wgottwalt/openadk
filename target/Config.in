@@ -5,6 +5,30 @@
 config ADK_BROKEN
 	bool
 
+config ADK_TARGET_WITH_USB
+	bool
+
+config ADK_TARGET_WITH_PCI
+	bool
+
+config ADK_TARGET_WITH_MINIPCI
+	bool
+
+config ADK_TARGET_WITH_VGA
+	bool
+
+config ADK_TARGET_WITH_INPUT
+	bool
+
+config ADK_TARGET_WITH_LEDS
+	bool
+
+config ADK_TARGET_WITH_PP
+	bool
+
+config ADK_TARGET_WITH_CARDBUS
+	bool
+
 config ADK_TOOLCHAIN_ONLY
 	bool
 
@@ -174,6 +198,10 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_INPUT
 	help
 	  Support for ALIX1C boards.
 	  http://www.pcengines.ch/
@@ -191,6 +219,8 @@ config ADK_LINUX_X86_ALIX2D
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
@@ -209,6 +239,8 @@ config ADK_LINUX_X86_ALIX2D13
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
@@ -236,6 +268,7 @@ config ADK_LINUX_CRIS_FOXBOARD
 	select ADK_foxboard
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_NLS
+	select ADK_TARGET_WITH_USB
 	help
 	  Support for Foxboard targets.
 	  http://foxlx.acmesystems.it/
@@ -252,6 +285,9 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_KERNEL_SWAP
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
 	help
 	  Lemote Subnotebook.
 	  http://www.lemote.com/english/index.html
@@ -319,6 +355,7 @@ config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
 	select ADK_zaurus
 	select ADK_TARGET_NO_FPU
+	select ADK_TARGET_WITH_INPUT
 	help
 	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
 	 Status: development
@@ -326,6 +363,7 @@ config ADK_LINUX_XSCALE_ZAURUS
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_TARGET_WITH_INPUT
 	help
 	 Rescuesystem with can be used to Boot from Disk or USB stick.
 	 Status: development
@@ -335,12 +373,18 @@ config ADK_LINUX_QEMU
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_INPUT
 	help
 	 Support for Qemu Emulator
 
 config ADK_LINUX_X86_64_SHUTTLE
 	bool "Shuttle PC"
 	select ADK_shuttle
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PP
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
@@ -447,6 +491,7 @@ config ADK_LINUX_X86_QEMU
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_TARGET_WITH_VGA
 	help
 	 Qemu support for x86 architecture.
 	 Status: stable
@@ -459,6 +504,7 @@ config ADK_LINUX_X86_64_QEMU
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_TARGET_WITH_VGA
 	help
 	 Qemu support for x86_64 architecture.
 	 Status: stable
@@ -477,6 +523,7 @@ config ADK_LINUX_MIPS_RB411
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_MINIPCI
 	help
 	 Support for Mikrotik RB411.
 	 Status: development
@@ -488,6 +535,7 @@ config ADK_LINUX_MIPS_RB433
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_MINIPCI
 	help
 	 Support for Mikrotik RB433.
 	 Status: development
@@ -500,6 +548,7 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_TARGET_WITH_MINIPCI
 	help
 	 Support for Mikrotik RB532.
 	 Status: stable

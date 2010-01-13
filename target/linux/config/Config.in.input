@@ -1,4 +1,5 @@
 menu "Input devices"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT
 
 config ADK_KERNEL_INPUT
 	bool
@@ -23,6 +24,7 @@ config ADK_KPACKAGE_KMOD_USB_HID
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_TARGET_USB
 	default n
 
 config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD

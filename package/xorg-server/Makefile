@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto scrnsaverpr
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+CFLINE_XORG_SERVER:=	depends on ADK_TARGET_WITH_VGA
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

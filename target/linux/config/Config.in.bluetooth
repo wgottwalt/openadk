@@ -1,4 +1,5 @@
 menu "Bluetooth"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI
 
 config ADK_KPACKAGE_KMOD_BT
 	prompt "kmod-bluetooth.................... Bluetooth drivers and network stack"

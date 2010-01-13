@@ -28,7 +28,7 @@ INSTALL_TARGET:=	binaries_install
 pre-build:
 	V=1 ARCH=${ARCH} KERNEL_DIR=${LINUX_DIR} \
 	PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-	LD=$(TARGET_CROSS)gcc \
+	LD=$(TARGET_CROSS)gcc LDFLAGS="" \
 	$(MAKE) -C ${WRKBUILD} modules
 
 post-install:
