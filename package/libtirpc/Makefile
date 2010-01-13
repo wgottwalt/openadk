@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		0.2.0
+PKG_VERSION:=		0.2.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libgssglue
-PKG_MD5SUM:=		b3b513a8825aa227deac63ea38c64f41
+PKG_MD5SUM:=		d77eb15f464bf9d6e66259eaf78b2a4e
 PKG_DESCR:=		a transport independent RPC library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgssglue
+PKG_BUILDDEP+=		libgssglue
 PKG_URL:=		http://sourceforge.net/projects/libtirpc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 
@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIRPC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autotool gnu
+CONFIGURE_STYLE:=	gnu
 
 ifneq (${ADK_COMPILE_NFS_UTILS_WITH_KERBEROS},y)
 CONFIGURE_ARGS+=	--disable-gss
