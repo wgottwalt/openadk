@@ -52,6 +52,7 @@ SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_PGSQL}+=		ulogd-mod-pgsql-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_SQLITE}+=		ulogd-mod-sqlite-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_EXTRA}+=		ulogd-mod-extra-install
 
+TCFLAGS+=		-fPIC
 CONFIGURE_STYLE:=	gnu
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

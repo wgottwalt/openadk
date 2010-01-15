@@ -153,6 +153,7 @@ $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX1220U,umax1220u))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX_PP,umax_pp))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX,umax))
 
+CONFIGURE_ENV+=		ac_cv_func_ioperm=no
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-translations \
 			--without-gphoto2 \
