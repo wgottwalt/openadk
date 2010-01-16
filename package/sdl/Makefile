@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e52086d1b508fa0b76c52ee30b55bec4
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libusb alsa-lib libpthread
+PKG_BUILDDEP+=		libusb alsa-lib
 PKG_URL:=		http://www.libsdl.org
 PKG_SITES:=		http://www.libsdl.org/release/
 
@@ -20,7 +22,13 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	--disable-esd
+CONFIGURE_ARGS+=	--disable-esd \
+			--disable-oss \
+			--enable-alsa \
+			--enable-video-fbcon \
+			--disable-video-directfb \
+			--disable-video-opengl \
+			--without-x
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
