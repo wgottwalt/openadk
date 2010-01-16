@@ -423,4 +423,7 @@ bulk:
 	mksh $(TOPDIR)/package/pkgmaker
 	@:>.menu
 
-.PHONY: menu
+dep:
+	mksh $(TOPDIR)/package/depmaker
+
+.PHONY: menu dep
