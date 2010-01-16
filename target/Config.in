@@ -221,6 +221,7 @@ config ADK_LINUX_X86_ALIX2D
 	select BUSYBOX_HWCLOCK
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
@@ -241,6 +242,7 @@ config ADK_LINUX_X86_ALIX2D13
 	select BUSYBOX_HWCLOCK
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
