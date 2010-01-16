@@ -27,19 +27,19 @@ prepare() {
 
 extract_from_file() {
 	prepare
-        cat $1 | $updatecmd
+        cat $1 | eval $updatecmd
 	check_exit
 }
 
 extract_from_ssh() {
 	prepare
-        ssh $1 "cat $2" | $updatecmd
+        ssh $1 "cat $2" | eval $updatecmd
 	check_exit
 }
 
 extract_from_http() {
 	prepare
-        wget -O - $1 | $updatecmd
+        wget -O - $1 | eval $updatecmd
 	check_exit
 }
                 
