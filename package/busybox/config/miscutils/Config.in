@@ -617,7 +617,7 @@ config BUSYBOX_VOLNAME
 config BUSYBOX_WATCHDOG
 	bool "watchdog"
 	depends on !ADK_PACKAGE_WATCHDOG
-	default n
+	default y
 	help
 	  The watchdog utility is used with hardware or software watchdog
 	  device drivers. It opens the specified watchdog device special file
