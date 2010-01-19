@@ -10,7 +10,7 @@ endif
 
 CONFIG_CONFIG_IN = Config.in
 CONFIG = config
-DEFCONFIG= 		ADK_DEVELSYSTEM=n \
+DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_MAKE_PARALLEL=n \
@@ -105,7 +105,7 @@ all: world
 allcopy: all
 	$(CP) $(BIN_DIR) $(TOPDIR)/bulkdir/${targetdir}/
 
-${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config
+${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
 	mksh ${TOPDIR}/package/depmaker
 
 .NOTPARALLEL:
@@ -419,7 +419,7 @@ bulk:
 	    ) 2>&1 | tee $(TOPDIR)/bulkdir/$$target-$$libc-$$fs/log; \
 	done <${TOPDIR}/target/bulk.lst
 
-.menu menu:
+menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)
 	mksh $(TOPDIR)/package/pkgmaker
 	@:>.menu
 
