@@ -1,5 +1,5 @@
---- snort-2.8.5.1.orig/src/detection-plugins/sp_ip_tos_check.c	2009-05-07 00:28:33.000000000 +0200
-+++ snort-2.8.5.1/src/detection-plugins/sp_ip_tos_check.c	2009-12-27 16:51:48.000000000 +0100
+--- snort-2.8.5.2.orig/src/detection-plugins/sp_ip_tos_check.c	2009-05-07 00:28:33.000000000 +0200
++++ snort-2.8.5.2/src/detection-plugins/sp_ip_tos_check.c	2010-01-19 19:58:18.000000000 +0100
 @@ -191,19 +191,19 @@ void ParseIpTos(char *data, OptTreeNode 
          ds_ptr->not_flag = 1;
      }

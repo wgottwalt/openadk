@@ -1,5 +1,5 @@
---- snort-2.8.5.1.orig/src/detection-plugins/sp_tcp_win_check.c	2009-05-07 00:28:39.000000000 +0200
-+++ snort-2.8.5.1/src/detection-plugins/sp_tcp_win_check.c	2009-12-27 16:11:37.000000000 +0100
+--- snort-2.8.5.2.orig/src/detection-plugins/sp_tcp_win_check.c	2009-05-07 00:28:39.000000000 +0200
++++ snort-2.8.5.2/src/detection-plugins/sp_tcp_win_check.c	2010-01-19 20:06:29.000000000 +0100
 @@ -196,19 +196,19 @@ void ParseTcpWin(char *data, OptTreeNode
          ds_ptr->not_flag = 1;
      }

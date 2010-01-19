@@ -29,3 +29,11 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'Do not forget to create device nodes for console,null and tty in your nfsroot'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
+
+ifeq ($(FS),yaffs)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif

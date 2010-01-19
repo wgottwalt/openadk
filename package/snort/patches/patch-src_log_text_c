@@ -1,5 +1,5 @@
---- snort-2.8.5.1.orig/src/log_text.c	2009-05-07 00:28:15.000000000 +0200
-+++ snort-2.8.5.1/src/log_text.c	2009-12-27 16:08:42.000000000 +0100
+--- snort-2.8.5.2.orig/src/log_text.c	2009-05-07 00:28:15.000000000 +0200
++++ snort-2.8.5.2/src/log_text.c	2010-01-19 20:00:30.000000000 +0100
 @@ -1604,7 +1604,7 @@ void LogArpHeader(TextLog* log, Packet *
      switch(ntohs(p->ah->ea_hdr.ar_op))
      {
