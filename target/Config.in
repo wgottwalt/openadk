@@ -548,6 +548,7 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_SCSI
 	select ADK_TARGET_WITH_MINIPCI
 	help
 	 Support for Mikrotik RB532.

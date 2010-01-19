@@ -1,6 +1,16 @@
 --- mdadm-3.0.orig/Makefile	2009-06-02 07:48:29.000000000 +0200
-+++ mdadm-3.0/Makefile	2009-12-11 19:01:17.000000000 +0100
-@@ -186,29 +186,36 @@ sha1.o : sha1.c sha1.h md5.h
++++ mdadm-3.0/Makefile	2010-01-16 09:36:14.000000000 +0100
+@@ -58,7 +58,8 @@ CONFFILE = $(SYSCONFDIR)/mdadm.conf
+ CONFFILE2 = $(SYSCONFDIR)/mdadm/mdadm.conf
+ MAILCMD =/usr/sbin/sendmail -t
+ CONFFILEFLAGS = -DCONFFILE=\"$(CONFFILE)\" -DCONFFILE2=\"$(CONFFILE2)\"
+-CFLAGS = $(CWFLAGS) $(CXFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS)
++CFLAGS ?=
++CFLAGS += $(CWFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS)
+ 
+ # If you want a static binary, you might uncomment these
+ # LDFLAGS = -static
+@@ -186,29 +187,36 @@ sha1.o : sha1.c sha1.h md5.h
  	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
  
  install : mdadm mdmon install-man install-udev

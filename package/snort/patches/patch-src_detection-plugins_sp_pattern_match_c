@@ -1,0 +1,47 @@
+--- snort-2.8.5.2.orig/src/detection-plugins/sp_pattern_match.c	2009-08-10 22:41:44.000000000 +0200
++++ snort-2.8.5.2/src/detection-plugins/sp_pattern_match.c	2010-01-19 19:58:58.000000000 +0100
+@@ -831,7 +831,7 @@ void PayloadSearchListInit(char *data, O
+         data++;
+ 
+     /* grab everything between the starting " and the end one */
+-    sptr = index(data, '"');
++    sptr = strchr(data, '"');
+     eptr = strrchr(data, '"');
+ 
+     if(sptr != NULL && eptr != NULL)
+@@ -862,21 +862,21 @@ static char *PayloadExtractParameter(cha
+     char *quote_one = NULL, *quote_two = NULL;
+     char *comma = NULL;
+ 
+-    quote_one = index(data, '"');
++    quote_one = strchr(data, '"');
+     if (quote_one)
+     {
+-        quote_two = index(quote_one+1, '"');
++        quote_two = strchr(quote_one+1, '"');
+         while ( quote_two && quote_two[-1] == '\\' )
+-            quote_two = index(quote_two+1, '"');
++            quote_two = strchr(quote_two+1, '"');
+     }
+ 
+     if (quote_one && quote_two)
+     {
+-        comma = index(quote_two, ',');
++        comma = strchr(quote_two, ',');
+     }
+     else if (!quote_one)
+     {
+-        comma = index(data, ',');
++        comma = strchr(data, ',');
+     }
+ 
+     if (comma)
+@@ -2035,7 +2035,7 @@ void ParsePattern(char *rule, OptTreeNod
+     }
+ 
+     /* find the start of the data */
+-    start_ptr = index(rule, '"');
++    start_ptr = strchr(rule, '"');
+ 
+     if(start_ptr != rule)
+     {
