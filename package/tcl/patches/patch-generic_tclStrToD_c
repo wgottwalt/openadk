@@ -1,0 +1,30 @@
+--- tcl8.5.8.orig/generic/tclStrToD.c	2009-07-16 22:50:54.000000000 +0200
++++ tcl8.5.8/generic/tclStrToD.c	2010-01-14 20:44:55.000000000 +0100
+@@ -73,9 +73,11 @@ typedef unsigned int fpu_control_t __att
+  * MIPS floating-point units need special settings in control registers
+  * to use gradual underflow as we expect.
+  */
++/*
+ #if defined(__mips)
+ #include <sys/fpu.h>
+ #endif
++*/
+ /*
+  * HP's PA_RISC architecture uses 7ff4000000000000 to represent a quiet NaN.
+  * Everyone else uses 7ff8000000000000. (Why, HP, why?)
+@@ -2166,6 +2168,7 @@ TclInitDoubleConversion(void)
+     } bitwhack;
+ #endif
+ 
++/*
+ #if defined(__mips)
+     union fpc_csr mipsCR;
+ 
+@@ -2173,6 +2176,7 @@ TclInitDoubleConversion(void)
+     mipsCR.fc_struct.flush = 0;
+     set_fpc_csr(mipsCR.fc_word);
+ #endif
++*/
+ 
+     /*
+      * Initialize table of powers of 10 expressed as wide integers.

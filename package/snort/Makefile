@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		snort
-PKG_VERSION:=		2.8.5.1
+PKG_VERSION:=		2.8.5.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b1abf3a9fa3486720c9a2b5eff920417
+PKG_MD5SUM:=		e6a8bc5aa1ebe4d2100533d7709c4a9e
 PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net
 PKG_NOPARALLEL:=	1

@@ -15,6 +15,8 @@ PKG_SITES:=		ftp://ftp.cpan.org/pub/CPAN/src/5.0/ \
 			ftp://ftp.gmd.de/mirrors/CPAN/src/5.0/ \
 			ftp://ftp.funet.fi/pub/languages/perl/CPAN/src/5.0/
 
+CFLINE_PERL:=		depends on ADK_NATIVE
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

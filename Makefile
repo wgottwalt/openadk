@@ -62,6 +62,7 @@ pkg-help:
 
 dev-help:
 	@echo 'Regenerate menu information via "make menu"'
+	@echo 'Regenerate dependency information via "make dep"'
 	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
@@ -145,6 +146,9 @@ bulk: .prereq_done
 
 menu: .prereq_done
 	@${GMAKE_INV} menu
+
+dep: .prereq_done
+	@${GMAKE_INV} dep
 
 world: .prereq_done
 	@${GMAKE_INV} world

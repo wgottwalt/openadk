@@ -18,6 +18,10 @@ ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
 
+ifneq ($(filter autogen,${CONFIGURE_STYLE}),)
+	cd ${WRKBUILD}; \
+		./autogen.sh $(MAKE_TRACE)
+endif
 ifneq ($(filter autotool,${CONFIGURE_STYLE}),)
 	cd ${WRKBUILD}; \
 	    env AUTOCONF_VERSION=2.62 \

@@ -1,5 +1,5 @@
---- snort-2.8.5.1.orig/src/detection-plugins/sp_pattern_match.c	2009-08-10 22:41:44.000000000 +0200
-+++ snort-2.8.5.1/src/detection-plugins/sp_pattern_match.c	2009-12-27 17:24:45.000000000 +0100
+--- snort-2.8.5.2.orig/src/detection-plugins/sp_pattern_match.c	2009-08-10 22:41:44.000000000 +0200
++++ snort-2.8.5.2/src/detection-plugins/sp_pattern_match.c	2010-01-19 19:58:58.000000000 +0100
 @@ -831,7 +831,7 @@ void PayloadSearchListInit(char *data, O
          data++;
  
@@ -36,15 +36,6 @@
      }
  
      if (comma)
-@@ -2016,7 +2016,7 @@ void ParsePattern(char *rule, OptTreeNod
-     PatternMatchData *ds_idx;
- 
-     /* clear out the temp buffer */
--    bzero(tmp_buf, MAX_PATTERN_SIZE);
-+    memset(tmp_buf, 0, MAX_PATTERN_SIZE);
- 
-     if(rule == NULL)
-     {
 @@ -2035,7 +2035,7 @@ void ParsePattern(char *rule, OptTreeNod
      }
  
@@ -54,32 +45,3 @@
  
      if(start_ptr != rule)
      {
-@@ -2089,7 +2089,7 @@ void ParsePattern(char *rule, OptTreeNod
-     dummy_end = (dummy_idx + size);
- 
-     /* why is this buffer so small? */
--    bzero(hex_buf, 3);
-+    memset(hex_buf, 0, 3);
-     memset(hex_buf, '0', 2);
- 
-     /* BEGIN BAD JUJU..... */
-@@ -2204,7 +2204,7 @@ void ParsePattern(char *rule, OptTreeNod
-                                     strtol(hex_buf, (char **) NULL, 16)&0xFF;
- 
-                                 dummy_size++;
--                                bzero(hex_buf, 3);
-+                                memset(hex_buf, 0, 3);
-                                 memset(hex_buf, '0', 2);
-                             }
-                             else
-@@ -2759,8 +2759,8 @@ static void ParseContentListFile(char *f
-     }
- 
-     /* clear the line and rule buffers */
--    bzero((char *) buf, STD_BUF);
--    bzero((char *) rule_buf, STD_BUF);
-+    memset((char *) buf, 0, STD_BUF);
-+    memset((char *) rule_buf, 0, STD_BUF);
-     frazes_count = 0;
- 
-     /* loop thru each list_file line and content to the rule */

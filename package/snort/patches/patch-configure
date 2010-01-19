@@ -1,13 +1,13 @@
---- snort-2.8.5.1.orig/configure	2009-10-19 23:08:11.000000000 +0200
-+++ snort-2.8.5.1/configure	2009-12-27 15:59:57.000000000 +0100
-@@ -24242,70 +24242,7 @@ _ACEOF
+--- snort-2.8.5.2.orig/configure	2009-10-19 23:18:06.000000000 +0200
++++ snort-2.8.5.2/configure	2010-01-14 20:16:49.000000000 +0100
+@@ -25882,81 +25882,7 @@ _ACEOF
  fi
  
  
 -# In case INADDR_NONE is not defined (like on Solaris)
 -have_inaddr_none="no"
--echo "$as_me:$LINENO: checking for INADDR_NONE" >&5
--echo $ECHO_N "checking for INADDR_NONE... $ECHO_C" >&6
+-{ echo "$as_me:$LINENO: checking for INADDR_NONE" >&5
+-echo $ECHO_N "checking for INADDR_NONE... $ECHO_C" >&6; }
 -if test "$cross_compiling" = yes; then
 -  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
 -See \`config.log' for more details." >&5
@@ -38,13 +38,22 @@
 -}
 -_ACEOF
 -rm -f conftest$ac_exeext
--if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
--  (eval $ac_link) 2>&5
+-if { (ac_try="$ac_link"
+-case "(($ac_try" in
+-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+-  *) ac_try_echo=$ac_try;;
+-esac
+-eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+-  (eval "$ac_link") 2>&5
 -  ac_status=$?
 -  echo "$as_me:$LINENO: \$? = $ac_status" >&5
 -  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
--  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
--  (eval $ac_try) 2>&5
+-  { (case "(($ac_try" in
+-  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+-  *) ac_try_echo=$ac_try;;
+-esac
+-eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+-  (eval "$ac_try") 2>&5
 -  ac_status=$?
 -  echo "$as_me:$LINENO: \$? = $ac_status" >&5
 -  (exit $ac_status); }; }; then
@@ -57,10 +66,12 @@
 -( exit $ac_status )
 -have_inaddr_none="no"
 -fi
--rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+-rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
 -fi
--echo "$as_me:$LINENO: result: $have_inaddr_none" >&5
--echo "${ECHO_T}$have_inaddr_none" >&6
+-
+-
+-{ echo "$as_me:$LINENO: result: $have_inaddr_none" >&5
+-echo "${ECHO_T}$have_inaddr_none" >&6; }
 -if test "x$have_inaddr_none" = "xno"; then
 -
 -cat >>confdefs.h <<\_ACEOF
@@ -72,7 +83,7 @@
  
  cat >conftest.$ac_ext <<_ACEOF
  /* confdefs.h.  */
-@@ -24959,7 +24896,7 @@ fi
+@@ -26580,7 +26506,7 @@ fi
  # that versions < 0.9 do not accumulate packet statistics whereas >= 0.9 do accumulate.
  # This is Linux only.  The check is done after pcre because the code below uses pcre.
  # It seems Phil Wood's pcap does not accumulate - 0.9x
@@ -80,4 +91,4 @@
 +pcap_version_check="no"
  if test "x$linux" = "xyes"; then
      if test "x$pcap_version_check" = "xyes"; then
-         echo "$as_me:$LINENO: checking for libpcap version >= 0.9" >&5
+         { echo "$as_me:$LINENO: checking for libpcap version >= 0.9" >&5
