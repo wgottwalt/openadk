@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e52086d1b508fa0b76c52ee30b55bec4
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libusb alsa-lib libpthread
-PKG_BUILDDEP+=		libusb alsa-lib
+PKG_DEPENDS:=		libusb alsa-lib libpthread tslib
+PKG_BUILDDEP+=		libusb alsa-lib tslib
 PKG_URL:=		http://www.libsdl.org
 PKG_SITES:=		http://www.libsdl.org/release/
 
@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--disable-esd \
 			--enable-video-fbcon \
 			--disable-video-directfb \
 			--disable-video-opengl \
+			--enable-input-tslib \
 			--without-x
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
