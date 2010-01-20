@@ -1,6 +1,4 @@
-$Id$
-
-OpenADK is Copyright © 2008 Waldemar Brodkorb
+OpenADK is Copyright © 2008-2010 Waldemar Brodkorb <wbx@openadk.org>
 All rights reserved.
 
 This licence file covers all of the OpenADK meta distribution
@@ -19,16 +17,12 @@ by the GNU General Public License, Version 2 or later, as shown
 in the file COPYING in this directory. Individual files may be
 covered by the LGPL or BSD-style licences instead. OpenADK also
 contains tools that are possibly covered by non-GPL-compatible,
-but OSD/DFSG-compliant, licences. Specifically, some of these
-components may require acknowledgements to be displayed in the
-advertising materials; these are listed here:
-‣ This product includes material provided by Thorsten Glaser.
+but OSD/DFSG-compliant, licences. 
 
 OpenADK is based upon several other projects which are listed
 below, in no particular order. If you think you should be li-
-sted here but we have forgotten you, please forgive and drop
-us an email.
-
+sted here but I have forgotten you, please forgive and drop
+me an email.
 
 • The FreeWRT Project
 • The OpenWrt Project
