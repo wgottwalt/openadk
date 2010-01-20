@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		libgcrypt popt e2fsprogs lvm
 PKG_URL:=		http://cryptsetup.googlecode.com
 PKG_SITES:=		http://cryptsetup.googlecode.com/files/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

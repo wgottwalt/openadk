@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libpng libtiff libjpeg
-PKG_BUILDDEP:=		libpng libtiff jpeg
+PKG_DEPENDS:=		libpng libtiff libjpeg libsdl
+PKG_BUILDDEP:=		libpng libtiff jpeg sdl
 PKG_URL:=		http://www.libsdl.org
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
 

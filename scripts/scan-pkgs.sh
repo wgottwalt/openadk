@@ -31,9 +31,6 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
 		NEED_RPM="$NEED_RPM rpm"
 	fi
-	if [[ -n $ADK_PACKAGE_SQUID ]]; then
-		NEED_GXX="$NEED_GXX squid"
-	fi
 fi
 
 if [[ -n $ADK_PACKAGE_RUBY ]]; then
@@ -58,6 +55,7 @@ fi
 
 if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_SSLDEV="$NEED_SSLDEV squid"
+	NEED_GXX="$NEED_GXX squid"
 fi
 
 if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then

@@ -14,6 +14,8 @@ PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
 PKG_SITES:=		https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_12_4_RTM/src/
 
+PKG_TARGET_DEPENDS:=    !foxboard
+
 WRKSRC=			${WRKDIST}/mozilla/security/nss
 
 include $(TOPDIR)/mk/package.mk

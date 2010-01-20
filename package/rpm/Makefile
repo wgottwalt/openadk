@@ -6,12 +6,14 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		rpm
 PKG_VERSION:=		4.7.2
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		nss libdb
 PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
 PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
+PKG_BUILDDEP+=		nss libdb
 PKG_URL:=		http://www.rpm.org
 PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
+
+PKG_TARGET_DEPENDS:=    !foxboard
 
 DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
 

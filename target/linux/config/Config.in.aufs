@@ -1,8 +1,7 @@
 config ADK_KPACKAGE_KMOD_AUFS_FS
 	prompt "Aufs (Advanced multi layered unification filesystem) support"
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
-	select ADK_KERNEL_EXPERIMENTAL
-	select FWRT_KPACKAGE_KMOD_EXPORTFS if ADK_KERNEL_AUFS_EXPORT
 	help
 	  Aufs is a stackable unification filesystem such as Unionfs,
 	  which unifies several directories and provides a merged single

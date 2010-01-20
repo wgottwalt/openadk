@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux-ng
 PKG_VERSION:=		2.16.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		fc57e5fd5be9e569b026b5077fafe84f
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		admin
@@ -29,6 +29,7 @@ $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-use-tty-group \
+			--disable-schedutils \
 			--disable-cramfs \
 			--disable-libblkid \
 			--disable-libuuid

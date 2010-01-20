@@ -70,12 +70,14 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 config ADK_KERNEL_EXT4_FS
 	boolean
 	select ADK_KERNEL_CRC16
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
 	tristate
-	depends on !ADK_KERNEL_EXT4_FS
+	depends on !ADK_KERNEL_EXT4_FS 
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KPACKAGE_KMOD_CRC16
 	default n
 	help
