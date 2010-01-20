@@ -1,3 +1,5 @@
+- fix watchdog for alix1c (mfgpt timers)
+- update uclibc
 - netbsd build
 - macos x build
 - implement rpm package backend 
