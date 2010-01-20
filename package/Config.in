@@ -205,6 +205,7 @@ source "package/netperf/Config.in"
 source "package/nmap/Config.in"
 source "package/sipsak/Config.in"
 source "package/tcpdump/Config.in"
+source "package/tptest/Config.in"
 #source "package/trafshow/Config.in"
 source "package/ttcp/Config.in"
 endmenu
