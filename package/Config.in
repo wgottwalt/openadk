@@ -149,6 +149,7 @@ endmenu
 menu "Utilities"
 source "package/bc/Config.in"
 source "package/comgt/Config.in"
+source "package/cpufrequtils/Config.in"
 source "package/fbset/Config.in"
 source "package/file/Config.in"
 source "package/findutils/Config.in"
