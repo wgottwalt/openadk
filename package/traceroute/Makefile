@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d400573042d41559fc3e5260275300d8
 PKG_DESCR:=		Utility to trace the route of IP packets
 PKG_SECTION:=		utils
-PKG_DEPENDS:=
 PKG_URL:=		http://traceroute.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
 
@@ -24,9 +23,9 @@ MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			LDFLAGS="-L${WRKSRC}/libsupp"
 INSTALL_STYLE:=		auto
 
-# please install all files and directories to the package dir
 post-install:
 	$(INSTALL_DIR) $(IDIR_TRACEROUTE)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/local/bin/traceroute $(IDIR_TRACEROUTE)/usr/bin/
+	$(INSTALL_BIN) $(WRKINST)/usr/local/bin/traceroute \
+		$(IDIR_TRACEROUTE)/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

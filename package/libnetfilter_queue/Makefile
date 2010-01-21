@@ -21,16 +21,12 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBNETFILTER_QUEUE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_STYLE:=	gnu
-# use following to add ./configure options
-#CONFIGURE_ARGS+=	--disable-foo
-# overwrite any configure variables
-#CONFIGURE_ENV+=	ac_cv_func_setpgrp_void=yes
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
-# please install all files and directories to the package dir
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBNETFILTER_QUEUE)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libnetfilter_queue* $(IDIR_LIBNETFILTER_QUEUE)/usr/lib/
+	$(CP) $(WRKINST)/usr/lib/libnetfilter_queue*so* \
+		$(IDIR_LIBNETFILTER_QUEUE)/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

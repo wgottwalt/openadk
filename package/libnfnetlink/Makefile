@@ -7,9 +7,8 @@ PKG_NAME:=		libnfnetlink
 PKG_VERSION:=		0.0.41
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5d844ea1f557bad0364d5b85cd10c796
-PKG_DESCR:=		the low-level library for netfilter related kernel/userspace communication
+PKG_DESCR:=		low-level library for netfilter related kernel/userspace communication
 PKG_SECTION:=		libs
-PKG_DEPENDS:=
 PKG_URL:=		http://www.netfilter.org/projects/libnfnetlink/
 PKG_SITES:=		http://www.netfilter.org/projects/libnfnetlink/files/
 
@@ -25,6 +24,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBNFNETLINK)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libnfnetlink.* $(IDIR_LIBNFNETLINK)/usr/lib/
+	$(CP) $(WRKINST)/usr/lib/libnfnetlink.so* $(IDIR_LIBNFNETLINK)/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
