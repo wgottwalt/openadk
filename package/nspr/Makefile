@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.mozilla.org/projects/nspr/
 PKG_SITES:=		https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 WRKSRC=			${WRKDIST}/mozilla/nsprpub
 
 include $(TOPDIR)/mk/package.mk

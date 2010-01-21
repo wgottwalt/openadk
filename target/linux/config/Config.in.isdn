@@ -38,6 +38,7 @@ config ADK_KPACKAGE_KMOD_ISDN_CAPI
 	tristate
 	select ADK_KERNEL_ISDN_CAPI_CAPI20
 	select ADK_KERNEL_ISDN
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 	help
 	 Kernel support for CAPI 2.0 and /dev/capi20

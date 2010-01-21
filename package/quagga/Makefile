@@ -41,6 +41,7 @@ CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--enable-vtysh \
 			--enable-user=quagga \
 			--enable-group=quagga \
+			--disable-pie \
 			--enable-multipath=8
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto

@@ -1,5 +1,5 @@
 menu "Multimedia devices support"
-depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
+depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB && !ADK_LINUX_CRIS_FOXBOARD
 
 config ADK_KERNEL_SND_TIMER
 	boolean
