@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,JAMVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

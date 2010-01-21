@@ -1,0 +1,118 @@
+--- cpufrequtils-007.orig/utils/set.c	Sat Jan 16 14:47:44 2010
++++ cpufrequtils-007/utils/set.c	Thu Jan 21 19:01:22 2010
+@@ -12,9 +12,6 @@
+ #include <limits.h>
+ #include <string.h>
+ #include <ctype.h>
+-#include <libintl.h>
+-#include <locale.h>
+-
+ #include <getopt.h>
+ 
+ #include "cpufreq.h"
+@@ -28,29 +25,29 @@
+ static void print_header(void)
+ {
+         printf(PACKAGE " " VERSION ": cpufreq-set (C) Dominik Brodowski 2004-2009\n");
+-	printf(gettext("Report errors and bugs to %s, please.\n"), PACKAGE_BUGREPORT);
++	printf("Report errors and bugs to %s, please.\n", PACKAGE_BUGREPORT);
+ }
+ 
+ static void print_help(void)
+ {
+-	printf(gettext("Usage: cpufreq-set [options]\n"));
+-	printf(gettext("Options:\n"));
+-	printf(gettext("  -c CPU, --cpu CPU        number of CPU where cpufreq settings shall be modified\n"));
+-	printf(gettext("  -d FREQ, --min FREQ      new minimum CPU frequency the governor may select\n"));
+-	printf(gettext("  -u FREQ, --max FREQ      new maximum CPU frequency the governor may select\n"));
+-	printf(gettext("  -g GOV, --governor GOV   new cpufreq governor\n"));
+-	printf(gettext("  -f FREQ, --freq FREQ     specific frequency to be set. Requires userspace\n"
+-	       "                           governor to be available and loaded\n"));
+-	printf(gettext("  -r, --related            Switches all hardware-related CPUs\n"));
+-	printf(gettext("  -h, --help               Prints out this screen\n"));
++	printf("Usage: cpufreq-set [options]\n");
++	printf("Options:\n");
++	printf("  -c CPU, --cpu CPU        number of CPU where cpufreq settings shall be modified\n");
++	printf("  -d FREQ, --min FREQ      new minimum CPU frequency the governor may select\n");
++	printf("  -u FREQ, --max FREQ      new maximum CPU frequency the governor may select\n");
++	printf("  -g GOV, --governor GOV   new cpufreq governor\n");
++	printf("  -f FREQ, --freq FREQ     specific frequency to be set. Requires userspace\n"
++	       "                           governor to be available and loaded\n");
++	printf("  -r, --related            Switches all hardware-related CPUs\n");
++	printf("  -h, --help               Prints out this screen\n");
+ 	printf("\n");
+-	printf(gettext("Notes:\n"
++	printf("Notes:\n"
+ 	       "1. Omitting the -c or --cpu argument is equivalent to setting it to zero\n"
+ 	       "2. The -f FREQ, --freq FREQ parameter cannot be combined with any other parameter\n"
+ 	       "   except the -c CPU, --cpu CPU parameter\n"
+ 	       "3. FREQuencies can be passed in Hz, kHz (default), MHz, GHz, or THz\n"
+ 	       "   by postfixing the value with the wanted unit name, without any space\n"
+-	       "   (FREQuency in kHz =^ Hz * 0.001 =^ MHz * 1000 =^ GHz * 1000000).\n"));
++	       "   (FREQuency in kHz =^ Hz * 0.001 =^ MHz * 1000 =^ GHz * 1000000).\n");
+ 
+ }
+ 
+@@ -66,13 +63,13 @@ static struct option set_opts[] = {
+ 
+ static void print_error(void)
+ {
+-	printf(gettext("Error setting new values. Common errors:\n"
++	printf("Error setting new values. Common errors:\n"
+ 			"- Do you have proper administration rights? (super-user?)\n"
+ 			"- Is the governor you requested available and modprobed?\n"
+ 			"- Trying to set an invalid policy?\n"
+ 			"- Trying to set a specific frequency, but userspace governor is not available,\n"
+ 			"   for example because of hardware which cannot be set to a specific frequency\n"
+-			"   or because the userspace governor isn't loaded?\n"));
++			"   or because the userspace governor isn't loaded?\n");
+ };
+ 
+ struct freq_units {
+@@ -92,7 +89,7 @@ const struct freq_units def_units[] = {
+ static void print_unknown_arg(void)
+ {
+ 	print_header();
+-	printf(gettext("invalid or unknown argument\n"));
++	printf("invalid or unknown argument\n");
+ 	print_help();
+ }
+ 
+@@ -180,7 +177,7 @@ static int do_new_policy(unsigned int cpu, struct cpuf
+ 	int ret;
+ 
+ 	if (!cur_pol) {
+-		printf(gettext("wrong, unknown or unhandled CPU?\n"));
++		printf("wrong, unknown or unhandled CPU?\n");
+ 		return -EINVAL;
+ 	}
+ 
+@@ -248,9 +245,6 @@ int main(int argc, char **argv)
+ 	};
+ 	struct cpufreq_affected_cpus *cpus = NULL;
+ 
+-	setlocale(LC_ALL, "");
+-	textdomain (PACKAGE);
+-
+ 	/* parameter parsing */
+ 	do {
+ 		ret = getopt_long(argc, argv, "c:d:u:g:f:hr", set_opts, NULL);
+@@ -333,14 +327,14 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	if (freq && policychange) {
+-		printf(gettext("the -f/--freq parameter cannot be combined with -d/--min, -u/--max or\n"
+-				"-g/--governor parameters\n"));
++		printf("the -f/--freq parameter cannot be combined with -d/--min, -u/--max or\n"
++				"-g/--governor parameters\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	if (!freq && !policychange) {
+-		printf(gettext("At least one parameter out of -f/--freq, -d/--min, -u/--max, and\n"
+-				"-g/--governor must be passed\n"));
++		printf("At least one parameter out of -f/--freq, -d/--min, -u/--max, and\n"
++				"-g/--governor must be passed\n");
+ 		return -EINVAL;
+ 	}
+ 

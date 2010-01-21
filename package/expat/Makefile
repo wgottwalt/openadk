@@ -25,6 +25,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBEXPAT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libexpat.so.* ${IDIR_LIBEXPAT}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libexpat.so* ${IDIR_LIBEXPAT}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
