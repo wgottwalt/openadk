@@ -1,8 +1,75 @@
 	- allow passing libtool options via environment variables
 	- drop hard-coded -rpath flag when linking with libtool (distracts tagged configs)
---- cpufrequtils-007.orig/Makefile	2010-01-16 14:47:44.000000000 +0100
-+++ cpufrequtils-007/Makefile	2010-01-20 14:09:02.171177883 +0100
-@@ -147,11 +147,11 @@ CFLAGS += $(WARNINGS)
+--- cpufrequtils-007.orig/Makefile	Sat Jan 16 14:47:44 2010
++++ cpufrequtils-007/Makefile	Thu Jan 21 19:05:16 2010
+@@ -27,11 +27,11 @@
+ DEBUG ?=	false
+ 
+ # make the build silent. Set this to something else to make it noisy again.
+-V ?=		false
++V ?=		true
+ 
+ # Internationalization support (output in different languages).
+ # Requires gettext.
+-NLS ?=		true
++NLS ?=		false
+ 
+ # Set the following to 'true' to build/install the
+ # cpufreq-bench benchmarking tool
+@@ -42,7 +42,7 @@ CPUFRQ_BENCH ?= false
+ SYSFS ?=	true
+ 
+ # Use the proc-based interface which is used in the 2.4 patch for cpufreq
+-PROC ?=		true
++PROC ?=		false
+ 
+ # Prefix to the directories we're installing to
+ DESTDIR ?=	
+@@ -55,7 +55,7 @@ DESTDIR ?=	
+ # and _should_ modify the PACKAGE_BUGREPORT definition
+ 
+ VERSION =			007
+-LIB_VERSION =			0:0:0
++LIB_VERSION =			0.0.0
+ PACKAGE =			cpufrequtils
+ PACKAGE_BUGREPORT =		cpufreq@vger.kernel.org
+ LANGUAGES = 			de fr it cs pt
+@@ -80,7 +80,6 @@ INSTALL = /usr/bin/install -c
+ INSTALL_PROGRAM = ${INSTALL}
+ INSTALL_DATA  = ${INSTALL} -m 644
+ INSTALL_SCRIPT = ${INSTALL_PROGRAM}
+-LIBTOOL = /usr/bin/libtool
+ 
+ # If you are running a cross compiler, you may want to set this
+ # to something more interesting, like "arm-linux-".  If you want
+@@ -113,23 +112,18 @@ WARNINGS += $(call cc-supports,-Wno-pointer-sign)
+ WARNINGS += $(call cc-supports,-Wdeclaration-after-statement)
+ WARNINGS += -Wshadow
+ 
+-CPPFLAGS += -DVERSION=\"$(VERSION)\" -DPACKAGE=\"$(PACKAGE)\" \
++CPPFLAGS += -I./lib -DVERSION=\"$(VERSION)\" -DPACKAGE=\"$(PACKAGE)\" \
+ 		-DPACKAGE_BUGREPORT=\"$(PACKAGE_BUGREPORT)\" -D_GNU_SOURCE
+ 
+-UTIL_OBJS = 	utils/info.c utils/set.c
++UTIL_OBJS = 	utils/info.o utils/set.o
+ LIB_HEADERS = 	lib/cpufreq.h lib/interfaces.h
+-LIB_OBJS = 	lib/cpufreq.c lib/proc.c lib/sysfs.c
+-LIB_PARTS = 	lib/cpufreq.lo
++LIB_OBJS = 	lib/cpufreq.o lib/sysfs.o
+ 
+-CFLAGS +=	-pipe
+-
+ ifeq ($(strip $(PROC)),true)
+-	LIB_PARTS += lib/proc.lo
+ 	CPPFLAGS += -DINTERFACE_PROC
+ endif
+ 
+ ifeq ($(strip $(SYSFS)),true)
+-	LIB_PARTS += lib/sysfs.lo
+ 	CPPFLAGS += -DINTERFACE_SYSFS
+ endif
+ 
+@@ -147,11 +141,11 @@ CFLAGS += $(WARNINGS)
  
  ifeq ($(strip $(V)),false)
  	QUIET=@$(PWD)/build/ccdv
@@ -16,23 +83,78 @@
  	HOST_PROGS=
  endif
  
-@@ -185,8 +185,8 @@ libcpufreq.la: $(LIB_OBJS) $(LIB_HEADERS
+@@ -175,27 +169,36 @@ all: ccdv libcpufreq utils $(COMPILE_NLS) $(COMPILE_BE
+ ccdv: build/ccdv
+ build/ccdv: build/ccdv.c
+ 	@echo "Building ccdv"
+-	@$(HOSTCC) -O1  -O1 $< -o $@
++	$(HOSTCC) -O1 $< -o $@
+ 
+-%.lo: $(LIB_OBJS) $(LIB_HEADERS) ccdv
+-	$(QUIET) $(LIBTOOL) $(LIBTOOL_OPT) --mode=compile $(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $*.c
++lib/cpufreq.o: $(LIB_HEADERS)
++	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c lib/cpufreq.c
+ 
+-libcpufreq.la: $(LIB_OBJS) $(LIB_HEADERS) $(LIB_PARTS) Makefile
++lib/sysfs.o: $(LIB_HEADERS)
++	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c lib/sysfs.c
++
++utils/info.o: 
++	$(CC) $(CPPFLAGS) $(CFLAGS) -o utils/cpufreq-info.o -c utils/info.c
++
++utils/set.o: 
++	$(CC) $(CPPFLAGS) $(CFLAGS) -o utils/cpufreq-set.o -c utils/set.c
++
++libcpufreq.so: $(LIB_OBJS)
+ 	@if [ $(strip $(SYSFS)) != true -a $(strip $(PROC)) != true ]; then \
  		echo '*** At least one of /sys support or /proc support MUST be enabled ***'; \
  		exit -1; \
  	fi;
 -	$(QUIET) $(LIBTOOL) $(LIBTOOL_OPT) --mode=link $(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o libcpufreq.la -rpath \
 -		${libdir} -version-info $(LIB_VERSION) $(LIB_PARTS)
-+	$(QUIET) $(LIBTOOL) $(LIBTOOL_OPT) --mode=link $(CC) $(CPPFLAGS) $(CFLAGS) -rpath ${libdir} $(LDFLAGS) -o libcpufreq.la \
-+		-version-info $(LIB_VERSION) $(LIB_PARTS)
++	$(CC) -shared $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o libcpufreq.so.${LIB_VERSION} \
++		-Wl,-soname,libcpufreq.so $(LIB_OBJS)
++	ln -s libcpufreq.so.${LIB_VERSION} $@
++	ln -s libcpufreq.so.${LIB_VERSION} $@.0
  
- libcpufreq: libcpufreq.la
+-libcpufreq: libcpufreq.la
++libcpufreq: libcpufreq.so
  
-@@ -232,7 +232,7 @@ clean:
+-cpufreq-%: libcpufreq.la $(UTIL_OBJS)
+-	$(QUIET) $(CC) $(CPPFLAGS) $(CFLAGS) -I. -I./lib/ -c -o utils/$@.o utils/$*.c
+-	$(QUIET) $(CC) $(CFLAGS) $(LDFLAGS) -L. -L./.libs/ -o $@ utils/$@.o -lcpufreq
+-	$(QUIET) $(STRIPCMD) $@
++cpufreq-%: libcpufreq.so $(UTIL_OBJS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -L. -L./ -o $@ utils/$@.o -lcpufreq
+ 
+-utils: cpufreq-info cpufreq-set cpufreq-aperf
++utils: cpufreq-info cpufreq-set
+ 
+ po/$(PACKAGE).pot: $(UTIL_OBJS)
+ 	@xgettext --default-domain=$(PACKAGE) --add-comments \
+@@ -232,7 +235,7 @@ clean:
  
  install-lib:
  	$(INSTALL) -d $(DESTDIR)${libdir}
 -	$(LIBTOOL) --mode=install $(INSTALL) libcpufreq.la $(DESTDIR)${libdir}/libcpufreq.la
-+	sh -x $(LIBTOOL) --mode=install $(INSTALL) libcpufreq.la $(DESTDIR)${libdir}/libcpufreq.la
++	$(INSTALL) libcpufreq.so $(DESTDIR)${libdir}/libcpufreq.so
  	$(INSTALL) -d $(DESTDIR)${includedir}
  	$(INSTALL_DATA) lib/cpufreq.h $(DESTDIR)${includedir}/cpufreq.h
  
+@@ -240,7 +243,6 @@ install-tools:
+ 	$(INSTALL) -d $(DESTDIR)${bindir}
+ 	$(INSTALL_PROGRAM) cpufreq-set $(DESTDIR)${bindir}/cpufreq-set
+ 	$(INSTALL_PROGRAM) cpufreq-info $(DESTDIR)${bindir}/cpufreq-info
+-	$(INSTALL_PROGRAM) cpufreq-aperf $(DESTDIR)${bindir}/cpufreq-aperf
+ 
+ install-man:
+ 	$(INSTALL_DATA) -D man/cpufreq-set.1 $(DESTDIR)${mandir}/man1/cpufreq-set.1
+@@ -257,7 +259,7 @@ install-bench:
+ 	@#DESTDIR must be set from outside to survive
+ 	@sbindir=$(sbindir) bindir=$(bindir) docdir=$(docdir) confdir=$(confdir) make -C bench install
+        
+-install: install-lib install-tools install-man $(INSTALL_NLS) $(INSTALL_BENCH)
++install: install-lib install-tools $(INSTALL_NLS) $(INSTALL_BENCH)
+ 
+ uninstall:
+ 	- rm -f $(DESTDIR)${libdir}/libcpufreq.*
