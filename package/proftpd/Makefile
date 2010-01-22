@@ -25,11 +25,10 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/etc
-	$(INSTALL_DATA) $(WRKINST)/etc/proftpd.conf $(IDIR_PROFTPD)/etc/
+	$(INSTALL_DATA) ./files/proftpd.conf $(IDIR_PROFTPD)/etc/
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/usr/{s,}bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/ftp{count,dctl,top,who} \
 		$(IDIR_PROFTPD)/usr/bin/
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/prxs $(IDIR_PROFTPD)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/{ftpshut,proftpd} \
 		$(IDIR_PROFTPD)/usr/sbin/
 
