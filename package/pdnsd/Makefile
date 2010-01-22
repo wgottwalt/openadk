@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pdnsd
 PKG_VERSION:=		1.2.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		114b3b21b09b43cbfcccdde726b84c12
 PKG_DESCR:=		Proxy DNS server with permanent caching
 PKG_SECTION:=		net
@@ -24,6 +24,8 @@ BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
+	$(INSTALL_DIR) $(IDIR_PDNSD)/etc
+	${INSTALL_DATA} ./files/pdnsd.conf ${IDIR_PDNSD}/etc/
 	$(INSTALL_DIR) $(IDIR_PDNSD)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/pdnsd{,-ctl} $(IDIR_PDNSD)/usr/sbin/
 
