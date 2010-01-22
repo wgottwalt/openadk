@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		114b3b21b09b43cbfcccdde726b84c12
 PKG_DESCR:=		Proxy DNS server with permanent caching
 PKG_SECTION:=		net
-PKG_DEPENDS:=
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.phys.uu.nl/~rombouts/pdnsd.html
 PKG_SITES:=		http://www.phys.uu.nl/~rombouts/pdnsd/releases/
 
