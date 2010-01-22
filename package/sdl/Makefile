@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-esd \
 			--disable-video-directfb \
 			--disable-video-opengl \
 			--enable-input-tslib \
-			--without-x
+			--with-x
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
