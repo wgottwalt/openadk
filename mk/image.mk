@@ -13,7 +13,6 @@ image-prepare-post:
 	rng=/dev/arandom; test -e $$rng || rng=/dev/urandom; \
 	    dd if=$$rng bs=512 count=1 >>${TARGET_DIR}/etc/.rnd 2>/dev/null; \
 	    chmod 600 ${TARGET_DIR}/etc/.rnd
-	# Sanity checks
 	@cd ${TARGET_DIR}; ls=; ln=; li=; x=1; md5sum $$(find . -type f) | \
 	    sed -e "s/*//" | \
 	    while read sum name; do \
@@ -47,6 +46,11 @@ image-prepare-post:
 	done
 	chmod 4511 ${TARGET_DIR}/bin/busybox
 	chmod 1777 ${TARGET_DIR}/tmp
+	@if [ -d ${TARGET_DIR}/usr/share/fonts/X11 ];then \
+		for i in $$(ls ${TARGET_DIR}/usr/share/fonts/X11/);do \
+			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
+		done; \
+	fi
 
 INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
 ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img

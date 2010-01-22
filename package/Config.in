@@ -572,9 +572,12 @@ source "package/evilwm/Config.in"
 source "package/font-util/Config.in"
 source "package/rxvt-unicode/Config.in"
 source "package/xauth/Config.in"
+source "package/xlsfonts/Config.in"
 endmenu
 
 menu "X Fonts"
+source "package/font-adobe-75dpi/Config.in"
+source "package/font-adobe-100dpi/Config.in"
 source "package/font-bitstream-75dpi/Config.in"
 source "package/font-bitstream-100dpi/Config.in"
 source "package/font-misc-misc/Config.in"
