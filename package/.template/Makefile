@@ -31,6 +31,7 @@ INSTALL_STYLE:=		auto
 # please install all files and directories to the package dir
 post-install:
 	$(INSTALL_DIR) $(IDIR_@UPKG@)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/@PKG@ $(IDIR_@UPKG@)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/@PKG@ \
+		$(IDIR_@UPKG@)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

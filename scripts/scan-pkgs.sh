@@ -86,6 +86,10 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
+if [[ -n $ADK_PACKAGE_FONT-BITSTREAM-100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
+fi
+
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
@@ -111,6 +115,13 @@ if [[ -n $NEED_SSLDEV ]]; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_MKFONTDIR ]]; then
+	if ! which mkfontdir >/dev/null 2>&1; then
+		echo >&2 You need mkfontdir to build $NEED_MKFONTDIR
+		out=1
 	fi
 fi
 
