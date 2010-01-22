@@ -188,7 +188,7 @@ kernelconfig:
 newpackage:
 	@echo "Creating new package $(PKG)"
 	$(CP) $(TOPDIR)/package/.template $(TOPDIR)/package/$(PKG)
-	pkg=$$(echo $(PKG)|tr '[:lower:]' '[:upper:]'); \
+	pkg=$$(echo $(PKG)|tr '[:lower:]' '[:upper:]'|sed -e "s/-/_/g"); \
 		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
