@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rng-tools
 PKG_VERSION:=		2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		63d503191eabed630324c104cc024475
 PKG_DESCR:=		Daemon to use hardware random number generators.
 PKG_SECTION:=		utils
