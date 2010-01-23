@@ -1,5 +1,5 @@
---- cpufrequtils-007.orig/utils/info.c	Sat Jan 16 14:47:44 2010
-+++ cpufrequtils-007/utils/info.c	Thu Jan 21 18:59:12 2010
+--- cpufrequtils-007.orig/utils/info.c	2010-01-16 14:47:44.000000000 +0100
++++ cpufrequtils-007/utils/info.c	2010-01-23 18:51:50.165866845 +0100
 @@ -10,9 +10,6 @@
  #include <errno.h>
  #include <stdlib.h>
@@ -28,7 +28,7 @@
  
  	nr_cpus = count_cpus();
  	for (cpu=0; cpu < nr_cpus; cpu++) {
-@@ -153,26 +150,26 @@ static void debug_output_one(unsigned int cpu)
+@@ -153,26 +150,26 @@ static void debug_output_one(unsigned in
  	struct cpufreq_stats *stats;
  
  	if (cpufreq_cpu_exists(cpu)) {
@@ -60,7 +60,7 @@
  		while (cpus->next) {
  			printf("%d ", cpus->cpu);
  			cpus = cpus->next;
-@@ -183,7 +180,7 @@ static void debug_output_one(unsigned int cpu)
+@@ -183,7 +180,7 @@ static void debug_output_one(unsigned in
  
  	cpus = cpufreq_get_affected_cpus(cpu);
  	if (cpus) {
@@ -69,7 +69,7 @@
  		while (cpus->next) {
  			printf("%d ", cpus->cpu);
  			cpus = cpus->next;
-@@ -194,13 +191,13 @@ static void debug_output_one(unsigned int cpu)
+@@ -194,13 +191,13 @@ static void debug_output_one(unsigned in
  
  	latency = cpufreq_get_transition_latency(cpu);
  	if (latency) {
@@ -85,7 +85,7 @@
  		print_speed(min);
  		printf(" - ");
  		print_speed(max);
-@@ -209,7 +206,7 @@ static void debug_output_one(unsigned int cpu)
+@@ -209,7 +206,7 @@ static void debug_output_one(unsigned in
  
  	freqs = cpufreq_get_available_frequencies(cpu);
  	if (freqs) {
@@ -94,7 +94,7 @@
  		while (freqs->next) {
  			print_speed(freqs->frequency);
  			printf(", ");
-@@ -222,7 +219,7 @@ static void debug_output_one(unsigned int cpu)
+@@ -222,7 +219,7 @@ static void debug_output_one(unsigned in
  
  	governors = cpufreq_get_available_governors(cpu);
  	if (governors) {
@@ -103,7 +103,7 @@
  		while (governors->next) {
  			printf("%s, ", governors->governor);
  			governors = governors->next;
-@@ -233,23 +230,23 @@ static void debug_output_one(unsigned int cpu)
+@@ -233,23 +230,23 @@ static void debug_output_one(unsigned in
  
  	policy = cpufreq_get_policy(cpu);
  	if (policy) {
@@ -133,7 +133,7 @@
  		}
  		else
  			print_speed(freq_kernel);
-@@ -257,7 +254,7 @@ static void debug_output_one(unsigned int cpu)
+@@ -257,7 +254,7 @@ static void debug_output_one(unsigned in
  	}
  	stats = cpufreq_get_stats(cpu, &total_time);
  	if (stats) {
@@ -142,7 +142,7 @@
  		while (stats) {
  			print_speed(stats->frequency);
  			printf(":%.2f%%", (100.0 * stats->time_in_state) / total_time);
-@@ -437,37 +434,37 @@ static int get_latency(unsigned int cpu, unsigned int 
+@@ -437,37 +434,37 @@ static int get_latency(unsigned int cpu,
  
  static void print_header(void) {
  	printf(PACKAGE " " VERSION ": cpufreq-info (C) Dominik Brodowski 2004-2009\n");
