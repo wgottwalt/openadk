@@ -13,7 +13,7 @@ PKG_TARGET_DEPENDS:=	alix1c alix2d alix2d13 wrap foxboard ag241 rb532
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
-CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG
+CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG\n\tdepends on !ADK_TARGET_ROOTFS_NFSROOT
 
 include ${TOPDIR}/mk/package.mk
 
