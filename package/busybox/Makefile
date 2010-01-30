@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.15.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		495e320537f0772125f2db3c098e437c
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
@@ -51,7 +51,7 @@ else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install
 endif
-ifeq ($(DEBUG),1)
+ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox
 endif

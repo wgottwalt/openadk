@@ -8,7 +8,8 @@
 - netbsd build
 - macos x build
 - network scripts for wireless client and acess point
-- update to 2.6.33 and test lemote
+- update to 2.6.33 
+- use LZMA kernels for MIPS targets
 - package drbd
 - new packages for openais and pacemaker
 - realize parallel build for target-libc combinations

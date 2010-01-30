@@ -10,7 +10,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	watchdog /dev/watchdog
+	watchdog $watchdog_flags /dev/watchdog
 	;;
 stop)
 	pkill watchdog
