@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		compact flash installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk
@@ -27,6 +27,11 @@ pre-configure:
 
 do-install:
 	${INSTALL_DIR} $(IDIR_CFINSTALL)/sbin
+ifeq ($(ADK_LINUX_MIPS_RB532),y)
+	${INSTALL_BIN} ./src/cfinstall.rb532 \
+		$(IDIR_CFINSTALL)/sbin/cfinstall
+else
 	${INSTALL_BIN} ./src/cfinstall $(IDIR_CFINSTALL)/sbin
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
