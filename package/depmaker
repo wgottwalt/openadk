@@ -34,5 +34,5 @@ for dn in */Makefile; do
 	done
 	print -r -- $x
 done >Depends.mk
-pbar=done
-print -u2 "$pbar"
+#pbar=done
+#print -u2 "$pbar"
