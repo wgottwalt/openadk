@@ -12,7 +12,6 @@
 - use LZMA kernels for MIPS targets
 - package drbd
 - new packages for openais and pacemaker
-- realize parallel build for target-libc combinations
 - continuos build via hudson or sth. like that
 - implement rpm package backend 
 - implement dpkg package backend 

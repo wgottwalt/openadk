@@ -41,9 +41,6 @@ compile: base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
 
-#$(COMPILE_PACKAGES): base-files-compile
-#$(INSTALL_PACKAGES): base-files-install
-
 $(TARGET_DIR):
 	mkdir -p $(TARGET_DIR)
 
@@ -59,7 +56,8 @@ $(TARGET_DIR):
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
-%-install: %-compile
+#%-install: %-compile
+%-install:
 	@$(START_TRACE) "package/$(patsubst %-install,%,$@)-install: "
 	@$(MAKE) -C $(patsubst %-install,%,$@) install
 	@$(CMD_TRACE) " done"
