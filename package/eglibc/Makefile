@@ -58,13 +58,14 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	done
 
 eglibc-dev-install:
+	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib
 	# install linker script
-	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC)/usr/lib/libc.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf libm.so.6 libm.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf libutil.so.1 libutil.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf librt.so.1 librt.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf libcrypt.so.1 libcrypt.so
-	cd $(IDIR_EGLIBC)/lib && ln -sf libdl.so.2 libdl.so
+	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libm.so.6 libm.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libutil.so.1 libutil.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf librt.so.1 librt.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libcrypt.so.1 libcrypt.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libdl.so.2 libdl.so
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \

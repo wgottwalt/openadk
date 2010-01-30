@@ -189,84 +189,12 @@ config ADK_LINUX_NATIVE
 	  Make a native build. Use host tools.
 	  No toolchain will be created.
 
-config ADK_LINUX_X86_ALIX1C
-	bool "PC Engines Alix1C"
-	select ADK_alix1c
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_VGA
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_INPUT
+config ADK_LINUX_ALIX
+	bool "ALIX and WRAP boards"
 	help
-	  Support for ALIX1C boards.
-	  http://www.pcengines.ch/
-	  Status: stable
+	  Support for Alix and Wrap boards.
+	  http://www.pcengines.ch
 
-config ADK_LINUX_X86_ALIX2D
-	bool "PC Engines Alix2D"
-	select ADK_alix2d
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_LEDS
-	help
-	  Support for ALIX2D boards.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-config ADK_LINUX_X86_ALIX2D13
-	bool "PC Engines Alix2D13"
-	select ADK_alix2d13
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NEW_LEDS
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_LEDS
-	help
-	  Support for ALIX2D13 boards.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-config ADK_LINUX_X86_WRAP
-	bool "PC Engines WRAP"
-	select ADK_wrap
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	help
-	  End of life, but I still have one board.
-	  http://www.pcengines.ch/
-	  Status: stable
 
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
@@ -516,6 +444,92 @@ config ADK_LINUX_X86_64_QEMU
 	help
 	 Qemu support for x86_64 architecture.
 	 Status: stable
+
+endchoice
+
+choice
+prompt "Alix/Wrap model"
+default ADK_LINUX_X86_ALIX1C
+depends on ADK_LINUX_ALIX
+
+config ADK_LINUX_X86_ALIX1C
+	bool "PC Engines Alix1C"
+	select ADK_alix1c
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_INPUT
+	help
+	  Support for ALIX1C boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_ALIX2D
+	bool "PC Engines Alix2D"
+	select ADK_alix2d
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
+	help
+	  Support for ALIX2D boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_ALIX2D13
+	bool "PC Engines Alix2D13"
+	select ADK_alix2d13
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NEW_LEDS
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
+	help
+	  Support for ALIX2D13 boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_WRAP
+	bool "PC Engines WRAP"
+	select ADK_wrap
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	help
+	  End of life, but I still have one board.
+	  http://www.pcengines.ch/
+	  Status: stable
 
 endchoice
 
