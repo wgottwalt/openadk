@@ -86,8 +86,12 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
-if [[ -n $ADK_PACKAGE_FONT-BITSTREAM-100DPI ]]; then
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
 fi
 
 if [[ -n $NEED_GETTEXT ]]; then

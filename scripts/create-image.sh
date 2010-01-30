@@ -24,6 +24,16 @@ if [ $(id -u) -ne 0 ];then
 	exit 1
 fi
 
+printf "Checking if mkfs is installed"
+mkfs=$(which mkfs.$filesystem)
+
+if [ ! -z $mkfs -a -x $mkfs ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
 printf "Checking if parted is installed"
 parted=$(which parted)
 

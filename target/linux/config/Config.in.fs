@@ -14,6 +14,7 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 
 config ADK_KPACKAGE_KMOD_EXPORTFS
 	tristate
+	depends on !ADK_KERNEL_EXPORTFS
 	default n
 	help
 

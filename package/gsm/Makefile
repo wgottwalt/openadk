@@ -12,6 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
 PKG_SITES:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
 
+PKG_NOPARALLEL:=	1
 PKG_DESCR_1:=		A GSM 06.10 full-rate speech transcoding implementation (utilities)
 PKG_DEPENDS_1:=		libgsm
 
