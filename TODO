@@ -1,9 +1,17 @@
-- fix watchdog for alix1c (mfgpt timers)
-- update uclibc
+- group alix and wrap boards
+- tryout internal kernel device management
+- implement update for MTD devices (foxboard,rb532,ag241)
+- do a make bulk for all targets
+- add tcsh and describe new package creation procedure in wiki
+- add toolchain only support for generic toolchains (mips/ppc/..)
+- fix watchdog for alix1c (mfgpt timers problem)
 - netbsd build
 - macos x build
+- network scripts for wireless client and acess point
+- update to 2.6.33 and test lemote
+- package drbd
+- new packages for openais and pacemaker
+- realize parallel build for target-libc combinations
+- continuos build via hudson or sth. like that
 - implement rpm package backend 
 - implement dpkg package backend 
-- implement update for MTD devices (foxboard,rb532,ag241)
-- network scripts for wireless client and acess point
-- customise mconf help texts to better fit for OpenADK
