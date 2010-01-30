@@ -45,10 +45,10 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
-	# create ld.so link for mips gcc linker option
-	cd $(IDIR_GLIBC)/lib && ln -sf ld-linux.so.2 ld.so.1
 
 glibc-dev-install:
+	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/lib
+	cd $(IDIR_GLIBC_DEV)/lib && ln -sf ld-linux.so.2 ld.so.1
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \

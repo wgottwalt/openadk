@@ -94,6 +94,14 @@ if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_75DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
 fi
 
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
+fi
+
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
