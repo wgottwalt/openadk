@@ -8,12 +8,12 @@ PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		5
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
-PKG_TARGET_DEPENDS:=	alix1c alix2d alix2d13 wrap foxboard ag241 rb532
+PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 rb532
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
-CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG\n\tdepends on !ADK_TARGET_ROOTFS_NFSROOT
+CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG\n\tdepends on !ADK_TARGET_ROOTFS_NFSROOT\n\tdepends on !ADK_TARGET_ROOTFS_YAFFS
 
 include ${TOPDIR}/mk/package.mk
 

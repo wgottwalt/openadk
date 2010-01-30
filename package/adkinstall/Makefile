@@ -3,10 +3,10 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		cfinstall
+PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		3
-PKG_DESCR:=		compact flash installer
+PKG_DESCR:=		installer for compact flash or nand/mtd devices
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk
 
@@ -17,7 +17,7 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CFINSTALL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ADKINSTALL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
@@ -26,12 +26,12 @@ pre-configure:
 	mkdir -p ${WRKBUILD}
 
 do-install:
-	${INSTALL_DIR} $(IDIR_CFINSTALL)/sbin
+	${INSTALL_DIR} $(IDIR_ADKINSTALL)/sbin
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
-	${INSTALL_BIN} ./src/cfinstall.rb532 \
-		$(IDIR_CFINSTALL)/sbin/cfinstall
+	${INSTALL_BIN} ./src/adkinstall.rb532 \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else
-	${INSTALL_BIN} ./src/cfinstall $(IDIR_CFINSTALL)/sbin
+	${INSTALL_BIN} ./src/adkinstall $(IDIR_ADKINSTALL)/sbin
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
