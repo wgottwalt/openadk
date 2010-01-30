@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		compact flash installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk
 
-PKG_TARGET_DEPENDS:=	alix1c alix2d wrap rb532
+PKG_TARGET_DEPENDS:=	alix wrap rb532
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
