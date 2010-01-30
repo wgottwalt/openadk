@@ -46,15 +46,18 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 
 # compile nothing, eglibc is already build in toolchain directory
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc $(IDIR_EGLIBC)/usr/lib
+	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
+		$(IDIR_EGLIBC)/usr/lib
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_EGLIBC)/etc
-	$(CP) $(STAGING_DIR)/lib/ld-* $(IDIR_EGLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
+
+eglibc-dev-install:
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC)/usr/lib/libc.so
 	cd $(IDIR_EGLIBC)/lib && ln -sf libm.so.6 libm.so
@@ -62,8 +65,6 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	cd $(IDIR_EGLIBC)/lib && ln -sf librt.so.1 librt.so
 	cd $(IDIR_EGLIBC)/lib && ln -sf libcrypt.so.1 libcrypt.so
 	cd $(IDIR_EGLIBC)/lib && ln -sf libdl.so.2 libdl.so
-
-eglibc-dev-install:
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
