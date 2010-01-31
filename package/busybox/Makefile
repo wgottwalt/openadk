@@ -56,11 +56,11 @@ else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
 endif
+	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox
 endif
-	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 
 fake:	$(TOPDIR)/.busyboxcfg do-configure do-install
 

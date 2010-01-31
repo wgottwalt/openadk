@@ -1,13 +1,11 @@
-- group alix and wrap boards
-- tryout internal kernel device management
-- implement update for MTD devices (foxboard,rb532,ag241)
 - do a make bulk for all targets
+- implement update for MTD devices (foxboard,rb532,ag241)
+- network scripts for wireless client and acess point
 - add tcsh and describe new package creation procedure in wiki
 - add toolchain only support for generic toolchains (mips/ppc/..)
 - fix watchdog for alix1c (mfgpt timers problem)
 - netbsd build
 - macos x build
-- network scripts for wireless client and acess point
 - update to 2.6.33 
 - use LZMA kernels for MIPS targets
 - package drbd

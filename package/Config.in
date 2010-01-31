@@ -27,19 +27,31 @@ source "package/ussp-push/Config.in"
 endmenu
 
 menu "Browser / Editor / Pager"
+source "package/elinks/Config.in"
 source "package/less/Config.in"
+source "package/links/Config.in"
+source "package/lynx/Config.in"
 source "package/nano/Config.in"
 source "package/vim/Config.in"
-source "package/links/Config.in"
-source "package/elinks/Config.in"
-source "package/lynx/Config.in"
 endmenu
 
-menu "Archivers / Compression"
+menu "Compression and Archivers"
 source "package/bzip2/Config.in"
 source "package/cpio/Config.in"
 source "package/tar/Config.in"
 source "package/xz/Config.in"
+endmenu
+
+menu "Cryptography"
+source "package/cryptsetup/Config.in"
+source "package/gpg/Config.in"
+source "package/heimdal/Config.in"
+source "package/krb5/Config.in"
+source "package/openct/Config.in"
+source "package/opensc/Config.in"
+source "package/openssl/Config.in"
+source "package/openssl-pkcs11/Config.in"
+source "package/rng-tools/Config.in"
 endmenu
 
 menu "Debugging / Analyzing"
@@ -121,17 +133,6 @@ source "package/mksh/Config.in"
 source "package/zsh/Config.in"
 endmenu
 
-menu "Security"
-source "package/cryptsetup/Config.in"
-source "package/gpg/Config.in"
-source "package/heimdal/Config.in"
-source "package/krb5/Config.in"
-source "package/openct/Config.in"
-source "package/opensc/Config.in"
-source "package/openssl/Config.in"
-source "package/openssl-pkcs11/Config.in"
-source "package/rng-tools/Config.in"
-endmenu
 
 menu "Serial communications & terminal emulation"
 source "package/heyu/Config.in"
