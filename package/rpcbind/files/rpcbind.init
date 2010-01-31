@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG portmap
+#PKG rpcbind
 #INIT 60
 
 . /etc/rc.conf
@@ -7,15 +7,14 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"${portmap:-NO}" = x"NO" && exit 0
+	test x"${rpcbind:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)
-	mkdir -p /tmp/.portmap
-	portmap -t /tmp/.portmap
+	rpcbind
 	;;
 stop)
-	pkill portmap
+	pkill rpcbind
 	;;
 restart)
 	sh $0 stop

@@ -858,9 +858,12 @@ $(eval $(call KMOD_template,RPCSEC_GSS_KRB5,rpcsec-gss-krb5,\
 	$(MODULES_DIR)/kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5 \
 ,26))
 
+$(eval $(call KMOD_template,LOCKD,lockd,\
+	$(MODULES_DIR)/kernel/fs/lockd/lockd \
+,27))
+
 ifneq ($(ADK_KERNEL_NFS_FS),y)
 $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
-	$(MODULES_DIR)/kernel/fs/lockd/lockd \
 	$(MODULES_DIR)/kernel/fs/nfs/nfs \
 ,30))
 endif

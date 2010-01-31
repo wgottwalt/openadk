@@ -3,3 +3,6 @@
 add_rcconf portmap
 add_group portmap 20
 add_user portmap 20 20 /tmp/.portmap
+add_service sunrpc 111/tcp
+add_service sunrpc 111/udp
+
