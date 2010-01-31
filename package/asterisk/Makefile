@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.4.28
+PKG_VERSION:=		1.6.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e8006ce319e18ce07ce1335ad583330a
+PKG_MD5SUM:=		8fbc60f9d80e686c749ae95292e225d8
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
 PKG_MULTI:=		1
@@ -24,10 +24,10 @@ PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
 PKG_TARGET_DEPENDS:=	!foxboard
 
-PKG_DESCR_CHAN_MGCP:=		Media Gateway Control Protocol implementation
-PKG_DESCR_CHAN_SKINNY:=		Skinny Client Control Protocol implementation
-PKG_DESCR_CHAN_IAX2:=		Support for the Inter Asterisk Protocol
-PKG_DESCR_CODEC_SPEEX:=		Speex/PCM16 Codec Translator
+PKG_DESCR_CHAN_MGCP:=	Media Gateway Control Protocol implementation
+PKG_DESCR_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
+PKG_DESCR_CHAN_IAX2:=	Support for the Inter Asterisk Protocol
+PKG_DESCR_CODEC_SPEEX:=	Speex/PCM16 Codec Translator
 
 include $(TOPDIR)/mk/package.mk
 
@@ -64,27 +64,31 @@ endif
 CONFIGURE_ARGS=		--with-z=${STAGING_DIR}/usr \
 			--with-ncurses=${STAGING_DIR}/usr \
 			--with-ssl=${STAGING_DIR}/usr \
-			--without-zaptel \
+			--disable-xmldoc \
 			--without-tonezone \
 			--without-asound \
 			--without-curses \
-			--without-gnutls \
+			--without-gtk \
+			--without-gtk2 \
 			--without-h323 \
 			--without-iksemel \
 			--without-imap \
-			--without-kde \
 			--without-nbs \
 			--without-netsnmp \
 			--without-newt \
-			--without-odbc \
 			--without-osptk \
 			--without-oss \
+			--without-popt \
 			--without-pri \
 			--without-pwlib \
 			--without-tds \
 			--without-termcap \
 			--without-tinfo \
-			--without-vpb
+			--without-vpb \
+			--without-misdn \
+			--without-isdnnet \
+			--without-suppserv
+
 ifneq (${ADK_PACKAGE_ASTERISK_CODEC_GSM},)
 CONFIGURE_ARGS+=	--with-gsm=internal
 else
@@ -109,17 +113,9 @@ CONFIGURE_ARGS+=	--with-postgres=${STAGING_DIR}/usr
 else
 CONFIGURE_ARGS+=	--without-postgres
 endif
-ifneq (${ADK_PACKAGE_LIBPOPT},)
-CONFIGURE_ARGS+=	--with-popt=${STAGING_DIR}/usr
-else
-CONFIGURE_ARGS+=	--without-popt
-endif
-CONFIGURE_ARGS+=	--without-misdn \
-			--without-isdnnet \
-			--without-suppserv
 
+TLDFLAGS+=		-lm
 CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		STRIP=${STRIP}
 BUILD_STYLE:=		auto
 MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TLDFLAGS}"
@@ -131,13 +127,12 @@ MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 ALL_TARGET:=		all install samples
 
 pre-configure:
-	rm ${WRKBUILD}/apps/app_followme.c
 	cd "$(WRKBUILD)/menuselect"; ./configure 
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \
-	tar xzf asterisk-core-sounds-en-gsm-1.4.16.tar.gz ; \
-	rm asterisk-core-sounds-en-gsm-1.4.16.tar.gz
+	tar xzf asterisk-core-sounds-en-gsm-1.4.17.tar.gz ; \
+	rm asterisk-core-sounds-en-gsm-1.4.17.tar.gz
 	@echo
 	@echo "---> have to install ${SUB_INSTALLS-m} ${SUB_INSTALLS-y} <---"
 	@echo
@@ -156,8 +151,9 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -rf mohmp3/*.mp3; \
 		rm -rf sounds/*; \
 		cd modules; \
-		rm -rf	*adsi* *festival* *modem* *meetme* *oss* *phone* *intercom* \
-			*mp3* *nbscat* *mysql* *postgres* *pgsql* *voicemail* *speex* \
+		rm -rf	*adsi* *festival* *modem* *meetme* *oss* \
+			*phone* *intercom* *mp3* *nbscat* *mysql* \
+			*postgres* *pgsql* *voicemail* *speex* \
 			*zapateller* *jpeg*; \
 		rm -f chan_bluetooth.so ; \
 		rm -f chan_h323.so ; \
@@ -171,80 +167,105 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -f res_agi.so ; \
 	)
 	(cd $(IDIR_ASTERISK)/etc/asterisk; \
-		rm -f 	*iax* *odbc* *mysql* *postgres* *pgsql* *voicemail* *adsi* *oss* *alsa* \
-			*festival* *modem* *meetme* *phone* *tds* *vofr* *rpt* *vpb* \
+		rm -f 	*iax* *odbc* *mysql* *postgres* *pgsql* \
+			*voicemail* *adsi* *oss* *alsa* \
+			*festival* *modem* *meetme* *phone* *tds* \
+			*vofr* *rpt* *vpb* \
 			*zapata*; \
 		rm -f bluetooth.conf ; \
 		rm -f mgcp.conf ; \
+		rm -f gtalk.conf ; \
 		rm -f skinny.conf ; \
 		rm -f dundi.conf ; \
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
-	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' $(WRKINST)/etc/asterisk/musiconhold.conf
+	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
+		$(WRKINST)/etc/asterisk/musiconhold.conf
 
 asterisk-pgsql-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/etc/asterisk
-	${INSTALL_DATA} $(WRKBUILD)/configs/cdr_pgsql.conf.sample $(IDIR_ASTERISK_PGSQL)/etc/asterisk/cdr_pgsql.conf
+	${INSTALL_DATA} $(WRKBUILD)/configs/cdr_pgsql.conf.sample \
+		$(IDIR_ASTERISK_PGSQL)/etc/asterisk/cdr_pgsql.conf
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/cdr/cdr_pgsql.so $(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/cdr/cdr_pgsql.so \
+		$(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules/
 
 asterisk-sounds-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds
-	$(CP) $(WRKBUILD)/sounds/* $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/
+	$(CP) $(WRKBUILD)/sounds/* \
+		$(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/
 	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/*.mp3
 	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/vm-*
 
 asterisk-voicemail-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules
-	${INSTALL_DATA} $(WRKBUILD)/configs/voicemail.conf.sample $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk/voicemail.conf
-	${CP} $(WRKBUILD)/apps/*voicemail.so $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
-	${INSTALL_BIN} $(WRKBUILD)/res/res_adsi.so $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
+	${INSTALL_DATA} $(WRKBUILD)/configs/voicemail.conf.sample \
+		$(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk/voicemail.conf
+	${CP} $(WRKBUILD)/apps/*voicemail.so \
+		$(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/res/res_adsi.so \
+		$(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/modules/
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds
-	$(CP) $(WRKBUILD)/sounds/vm-*.gsm $(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds/
+	$(CP) $(WRKBUILD)/sounds/vm-*.gsm \
+		$(IDIR_ASTERISK_VOICEMAIL)/usr/lib/asterisk/sounds/
 
 asterisk-chan-mgcp-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_MGCP)/etc/asterisk
-	${INSTALL_DATA} $(WRKBUILD)/configs/mgcp.conf.sample $(IDIR_ASTERISK_CHAN_MGCP)/etc/asterisk/mgcp.conf
+	${INSTALL_DATA} $(WRKBUILD)/configs/mgcp.conf.sample \
+		$(IDIR_ASTERISK_CHAN_MGCP)/etc/asterisk/mgcp.conf
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_MGCP)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/channels/chan_mgcp.so $(IDIR_ASTERISK_CHAN_MGCP)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/channels/chan_mgcp.so \
+		$(IDIR_ASTERISK_CHAN_MGCP)/usr/lib/asterisk/modules/
 
 asterisk-chan-skinny-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_SKINNY)/etc/asterisk
-	${INSTALL_DATA} $(WRKBUILD)/configs/skinny.conf.sample $(IDIR_ASTERISK_CHAN_SKINNY)/etc/asterisk/skinny.conf
+	${INSTALL_DATA} $(WRKBUILD)/configs/skinny.conf.sample \
+		$(IDIR_ASTERISK_CHAN_SKINNY)/etc/asterisk/skinny.conf
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_SKINNY)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/channels/chan_skinny.so $(IDIR_ASTERISK_CHAN_SKINNY)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/channels/chan_skinny.so \
+		$(IDIR_ASTERISK_CHAN_SKINNY)/usr/lib/asterisk/modules/
 
 asterisk-chan-iax2-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_IAX2)/etc/asterisk
 	${INSTALL_DIR} $(IDIR_ASTERISK_CHAN_IAX2)/usr/lib/asterisk/modules
-	${INSTALL_DATA} $(WRKBUILD)/configs/iax.conf.sample $(IDIR_ASTERISK_CHAN_IAX2)/etc/asterisk/iax.conf
-	${INSTALL_DATA} $(WRKBUILD)/configs/iaxprov.conf.sample $(IDIR_ASTERISK_CHAN_IAX2)/etc/asterisk/iaxprov.conf
-	${INSTALL_BIN} $(WRKBUILD)/channels/chan_iax2.so $(IDIR_ASTERISK_CHAN_IAX2)/usr/lib/asterisk/modules/
+	${INSTALL_DATA} $(WRKBUILD)/configs/iax.conf.sample \
+		$(IDIR_ASTERISK_CHAN_IAX2)/etc/asterisk/iax.conf
+	${INSTALL_DATA} $(WRKBUILD)/configs/iaxprov.conf.sample \
+		$(IDIR_ASTERISK_CHAN_IAX2)/etc/asterisk/iaxprov.conf
+	${INSTALL_BIN} $(WRKBUILD)/channels/chan_iax2.so \
+		$(IDIR_ASTERISK_CHAN_IAX2)/usr/lib/asterisk/modules/
 
 asterisk-codec-speex-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/codecs/codec_speex.so $(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/codecs/codec_speex.so \
+		$(IDIR_ASTERISK_CODEC_SPEEX)/usr/lib/asterisk/modules/
 
 asterisk-codec-gsm-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_CODEC_GSM)/usr/lib/asterisk/modules/
-	${INSTALL_BIN} $(WRKBUILD)/codecs/codec_gsm.so $(IDIR_ASTERISK_CODEC_GSM)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/codecs/codec_gsm.so \
+		$(IDIR_ASTERISK_CODEC_GSM)/usr/lib/asterisk/modules/
 
 asterisk-pbx-dundi-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_PBX_DUNDI)/etc/asterisk
-	${INSTALL_DATA} $(WRKBUILD)/configs/dundi.conf.sample $(IDIR_ASTERISK_PBX_DUNDI)/etc/asterisk/dundi.conf
+	${INSTALL_DATA} $(WRKBUILD)/configs/dundi.conf.sample \
+		$(IDIR_ASTERISK_PBX_DUNDI)/etc/asterisk/dundi.conf
 	${INSTALL_DIR} $(IDIR_ASTERISK_PBX_DUNDI)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/pbx/pbx_dundi.so $(IDIR_ASTERISK_PBX_DUNDI)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/pbx/pbx_dundi.so \
+		$(IDIR_ASTERISK_PBX_DUNDI)/usr/lib/asterisk/modules/
 
 asterisk-res-agi-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_RES_AGI)/usr/lib/asterisk/agi-bin
 	${INSTALL_DIR} $(IDIR_ASTERISK_RES_AGI)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/res/res_agi.so $(IDIR_ASTERISK_RES_AGI)/usr/lib/asterisk/modules/
+	${INSTALL_BIN} $(WRKBUILD)/res/res_agi.so \
+		$(IDIR_ASTERISK_RES_AGI)/usr/lib/asterisk/modules/
 
 asterisk-meetme-install:
 	${INSTALL_DIR} ${IDIR_ASTERISK_MEETME}/etc/asterisk/
 	${INSTALL_DIR} ${IDIR_ASTERISK_MEETME}/usr/lib/asterisk/modules
-	${INSTALL_DATA} ${WRKBUILD}/configs/meetme.conf.sample ${IDIR_ASTERISK_MEETME}/etc/asterisk/meetme.conf
-	${INSTALL_BIN} ${WRKBUILD}/apps/app_meetme.so ${IDIR_ASTERISK_MEETME}/usr/lib/asterisk/modules
+	${INSTALL_DATA} ${WRKBUILD}/configs/meetme.conf.sample \
+		${IDIR_ASTERISK_MEETME}/etc/asterisk/meetme.conf
+	${INSTALL_BIN} ${WRKBUILD}/apps/app_meetme.so \
+		${IDIR_ASTERISK_MEETME}/usr/lib/asterisk/modules
 
 include ${TOPDIR}/mk/pkg-bottom.mk
