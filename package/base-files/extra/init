@@ -11,6 +11,7 @@ mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 mount -o nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 mkdir /dev/pts /dev/shm
 mount -o nosuid,noexec -t devpts devpts /dev/pts
+exec 0<>/dev/console >&0 2>&0
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
@@ -18,6 +19,4 @@ mount -o remount,rw /
 cat /etc/.rnd >/dev/urandom 2>&1
 [ -f /etc/fstab ] && mount -a
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
-echo "Starting system init ..."
-exec 0<>/dev/console >&0 2>&0
 exec /sbin/init
