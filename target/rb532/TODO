@@ -1,2 +1,1 @@
-- enable watchdog
-- test yaffs2 support
+- implement cfgfs for NAND/YAFFS2 rootfs

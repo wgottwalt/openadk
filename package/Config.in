@@ -4,18 +4,18 @@
 menu "Package selection"
 
 menu "Basesystem"
+source "package/adkinstall/Config.in"
 source "package/base-files/Config.in"
 source "package/busybox/Config.in.manual"
 source "package/cfgfs/Config.in"
-source "package/cfinstall/Config.in"
 source "package/cryptinit/Config.in"
 source "package/uclibc/Config.in.manual"
 source "package/glibc/Config.in.manual"
 source "package/eglibc/Config.in.manual"
 source "package/libc/Config.in.manual"
-source "package/rpm/Config.in"
 source "package/grub/Config.in"
 source "package/grub-bin/Config.in"
+source "package/rpm/Config.in"
 endmenu
 
 menu "Bluetooth"
