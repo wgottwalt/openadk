@@ -58,9 +58,11 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	done
 
 eglibc-dev-install:
-	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib
+	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
 	# install linker script
-	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
+	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libm.so.6 libm.so
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libutil.so.1 libutil.so
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf librt.so.1 librt.so

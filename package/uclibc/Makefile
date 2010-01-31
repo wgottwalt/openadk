@@ -34,6 +34,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	done
 
 uclibc-dev-install:
+	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
