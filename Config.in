@@ -7,7 +7,6 @@ config ADKVERSION
 
 mainmenu "OpenADK Configuration"
 
-
 config MODULES
 	bool
 	default y
@@ -21,6 +20,11 @@ menu "ADK settings"
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
+	select BUSYBOX_CMP
+	select BUSYBOX_EXPR
+	select BUSYBOX_MKTEMP
+	select BUSYBOX_UNZIP
+	select BUSYBOX_TEE
 	select ADK_PACKAGE_AUTOCONF
 	select ADK_PACKAGE_AUTOMAKE
 	select ADK_PACKAGE_BASH
