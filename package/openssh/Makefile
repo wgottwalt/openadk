@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		13563dbf61f36ca9a1e4254260131041
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		zlib libopenssl
+PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
 PKG_DEPENDS+=		krb5-libs libcom-err
