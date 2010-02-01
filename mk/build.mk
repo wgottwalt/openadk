@@ -38,12 +38,18 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			BUSYBOX_FLASH_UNLOCK=n \
 			BUSYBOX_FLASH_ERASEALL=n \
 			BUSYBOX_PIE=n \
+			BUSYBOX_TASKSET=n \
 			BUSYBOX_DEBUG=n \
 			BUSYBOX_NOMMU=n \
 			BUSYBOX_WERROR=n \
 			BUSYBOX_STATIC=n \
+			BUSYBOX_FEATURE_AIX_LABEL=n \
+			BUSYBOX_FEATURE_SUN_LABEL=n \
+			BUSYBOX_FEATURE_OSF_LABEL=n \
+			BUSYBOX_FEATURE_SGI_LABEL=n \
 			ADK_KERNEL_RT2X00_DEBUG=n \
-			ADK_KERNEL_ATH5K_DEBUG=n
+			ADK_KERNEL_ATH5K_DEBUG=n \
+			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
 			_config \
@@ -51,10 +57,7 @@ noconfig_targets:=	menuconfig \
 			distclean \
 			tags
 
-MAKECLEANDIR_SYMBOLS=	ADK_TARGET_LIB_UCLIBC \
-			ADK_TARGET_LIB_GLIBC \
-			ADK_TARGET_LIB_ECLIBC \
-			ADK_DEBUG
+MAKECLEANDIR_SYMBOLS=	ADK_DEBUG
 
 MAKECLEAN_SYMBOLS=	ADK_TARGET_PACKAGE_IPKG \
 			ADK_TARGET_PACKAGE_RPM \
@@ -83,11 +86,7 @@ POSTCONFIG=		-@ \
 		    "$$what' might be required!"; \
 		break; \
 	done; \
-	fi; \
-	if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
-		if [ -f build_*/w-busybox*/busybox*/.configure_done ];then \
-			rm build_*/w-busybox*/busybox*/.configure_done; \
-		fi; \
+	if [ -f .busyboxcfg ];then rm .busyboxcfg;fi; \
 	fi; \
 	fi
 
@@ -183,7 +182,7 @@ kernelconfig:
 newpackage:
 	@echo "Creating new package $(PKG)"
 	$(CP) $(TOPDIR)/package/.template $(TOPDIR)/package/$(PKG)
-	pkg=$$(echo $(PKG)|tr '[:lower:]' '[:upper:]'); \
+	pkg=$$(echo $(PKG)|tr '[:lower:]-' '[:upper:]_'); \
 		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
@@ -232,14 +231,15 @@ cleandir:
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
 	    $(TOOLS_BUILD_DIR)
 	rm -f .menu .tmpconfig.h ${TOPDIR}/package/*/info.mk \
-	    ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	    ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk \
+	    .busyboxcfg
 
 cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
 	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) all.config .defconfig
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk
+	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk .busyboxcfg
 
 distclean:
 	@$(TRACE) distclean
@@ -248,7 +248,8 @@ distclean:
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d $(TOPDIR)/bulkdir
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
+	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk \
+	    .busyboxcfg
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 

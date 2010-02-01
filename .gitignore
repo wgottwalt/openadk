@@ -15,13 +15,14 @@ toolchain_build_*/
 .tmpconfig.h
 .prereq_done
 .config*
+.busyboxcfg
 .defconfig
 all.config
 .cfg/
 .cfg.*/
 cross_*/
 root_*/
-bin_*/
+bin/
 build_*/
 config/*.o
 config/lxdialog/*.o

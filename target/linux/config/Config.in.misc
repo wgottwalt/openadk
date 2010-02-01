@@ -9,6 +9,7 @@ menu "Miscellaneous devices support"
 
 config ADK_KERNEL_WATCHDOG
 	boolean
+	default y if ADK_TARGET_WITH_WATCHDOG
 	default n
 
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG

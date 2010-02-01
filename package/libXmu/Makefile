@@ -23,5 +23,6 @@ INSTALL_STYLE:=		auto
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXMU}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXmu.so* ${IDIR_LIBXMU}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libXmuu.so* ${IDIR_LIBXMU}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

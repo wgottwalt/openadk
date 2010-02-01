@@ -1,6 +1,15 @@
-- netbsd build
-- macos x build
-- implement rpm package backend 
+- do a make bulk for all targets
 - implement update for MTD devices (foxboard,rb532,ag241)
 - network scripts for wireless client and acess point
-- customise mconf help texts to better fit for OpenADK
+- add tcsh and describe new package creation procedure in wiki
+- add toolchain only support for generic toolchains (mips/ppc/..)
+- fix watchdog for alix1c (mfgpt timers problem)
+- netbsd build
+- macos x build
+- update to 2.6.33 
+- use LZMA kernels for MIPS targets
+- package drbd
+- new packages for openais and pacemaker
+- continuos build via hudson or sth. like that
+- implement rpm package backend 
+- implement dpkg package backend 

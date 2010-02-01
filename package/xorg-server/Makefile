@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.7.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		913a672cbd6da516de15965d594e20b9
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
@@ -23,6 +23,7 @@ $(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE}
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		V=1
 CONFIGURE_ARGS+=	\
+			--with-fontdir=/usr/share/fonts/X11 \
 			--enable-dga \
 			--enable-xorg \
 			--enable-xv \
@@ -47,13 +48,15 @@ CONFIGURE_ARGS+=	\
 			--disable-xvmc \
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
-			--with-vendor-web="http://www.openadk.org"
+			--with-vendor-web="http://openadk.org"
 BUILD_STYLE:=		auto
 INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/{extensions,fonts,linux,multimedia}
+	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
+		$(IDIR_XORG_SERVER)/usr/lib/xorg/
 	${CP} ${WRKINST}/usr/bin/* $(IDIR_XORG_SERVER)/usr/bin
 	${CP} ${WRKINST}/usr/lib/xorg/modules/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules

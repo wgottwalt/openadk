@@ -31,9 +31,6 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
 		NEED_RPM="$NEED_RPM rpm"
 	fi
-	if [[ -n $ADK_PACKAGE_SQUID ]]; then
-		NEED_GXX="$NEED_GXX squid"
-	fi
 fi
 
 if [[ -n $ADK_PACKAGE_RUBY ]]; then
@@ -58,6 +55,7 @@ fi
 
 if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_SSLDEV="$NEED_SSLDEV squid"
+	NEED_GXX="$NEED_GXX squid"
 fi
 
 if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then
@@ -88,6 +86,22 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
+fi
+
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
@@ -113,6 +127,13 @@ if [[ -n $NEED_SSLDEV ]]; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_MKFONTDIR ]]; then
+	if ! which mkfontdir >/dev/null 2>&1; then
+		echo >&2 You need mkfontdir to build $NEED_MKFONTDIR
+		out=1
 	fi
 fi
 

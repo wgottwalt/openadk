@@ -1,5 +1,16 @@
 --- cups-1.4.2.orig/configure	2009-11-10 00:04:25.000000000 +0100
-+++ cups-1.4.2/configure	2009-12-11 09:59:57.000000000 +0100
++++ cups-1.4.2/configure	2010-01-07 23:11:46.635118361 +0100
+@@ -9850,8 +9850,8 @@ if test "$libdir" = "\${exec_prefix}/lib
+ 			libdir="$exec_prefix/lib32"
+ 			;;
+ 		Linux*)
+-			if test -d /usr/lib64; then
+-				libdir="$exec_prefix/lib64"
++			if test -d /usr/lib; then
++				libdir="$exec_prefix/lib"
+ 			fi
+ 			;;
+ 		HP-UX*)
 @@ -10260,11 +10260,6 @@ _ACEOF
  
  # Server executables...

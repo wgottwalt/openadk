@@ -14,6 +14,7 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 
 config ADK_KPACKAGE_KMOD_EXPORTFS
 	tristate
+	depends on !ADK_KERNEL_EXPORTFS
 	default n
 	help
 
@@ -70,12 +71,14 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 config ADK_KERNEL_EXT4_FS
 	boolean
 	select ADK_KERNEL_CRC16
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
 	tristate
-	depends on !ADK_KERNEL_EXT4_FS
+	depends on !ADK_KERNEL_EXT4_FS 
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KPACKAGE_KMOD_CRC16
 	default n
 	help
@@ -174,20 +177,6 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
-#config ADK_KPACKAGE_KMOD_YAFFS_FS
-#	prompt "kmod-fs-yaffs..................... YAFFS1/2 filesystem support"
-#	tristate
-#	default n
-#	select ADK_KERNEL_YAFFS_FS
-#	select ADK_KERNEL_YAFFS_YAFFS1
-#	select ADK_KERNEL_YAFFS_YAFFS2
-#	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-#	select ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-#	help
-#	  Support for the YAFFS1 and YAFFS2 filesystems for the rb532 NAND
-#	  internal flash (for example). Say 'yes' here if you want to build
-#	  an initramfs for the Routerboard with access to internal flash.
-#
 config ADK_KPACKAGE_KMOD_FUSE_FS
 	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
 	tristate

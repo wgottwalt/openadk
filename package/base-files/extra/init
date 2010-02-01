@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Starting system ..."
+echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys

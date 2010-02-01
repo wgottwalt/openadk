@@ -29,6 +29,7 @@ elif [ "$1" = "install" ];then
    	  IPKG_INSTROOT="$PKG_INSTROOT" ${PKG_INSTROOT}/usr/lib/pkg/${pkg}.postinst
 	  rm ${PKG_INSTROOT}/usr/lib/pkg/${pkg}.postinst
 	fi
+	rm -rf ${PKG_INSTROOT}/usr/lib/pkg
 else
 	echo "unknown command"
 	exit 1

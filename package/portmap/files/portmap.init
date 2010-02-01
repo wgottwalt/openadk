@@ -15,7 +15,7 @@ start)
 	portmap -t /tmp/.portmap
 	;;
 stop)
-	kill $(pidof portmap|cut -d ' ' -f 3)
+	pkill portmap
 	;;
 restart)
 	sh $0 stop

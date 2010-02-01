@@ -13,7 +13,9 @@ $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 
 TCFLAGS+=		-fPIC
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--disable-werror
+CONFIGURE_ARGS+=	--disable-werror \
+			--host=$(REAL_GNU_TARGET_NAME) \
+			--target=$(REAL_GNU_TARGET_NAME)
 BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 

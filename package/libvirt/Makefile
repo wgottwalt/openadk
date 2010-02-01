@@ -15,6 +15,7 @@ PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
 PKG_HOST_DEPENDS:=	!freebsd
+PKG_TARGET_DEPENDS:=	!foxboard
 
 include ${TOPDIR}/mk/package.mk
 

@@ -1,0 +1,2 @@
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf rngd rngd NO

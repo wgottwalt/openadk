@@ -1,0 +1,31 @@
+#!/bin/sh
+#PKG pdnsd
+#INIT 60
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${pdnsd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/pdnsd.conf ] || exit
+	mkdir -p /var/cache/pdnsd
+	pdnsd -s -t -d
+	;;
+stop)
+	pkill pdnsd
+	;;
+restart)
+	sh $0 stop
+	sleep 1
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

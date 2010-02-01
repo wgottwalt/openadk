@@ -1,0 +1,40 @@
+#!/bin/sh
+#PKG rng-tools
+#INIT 60
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${rngd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	devnode=""
+	for node in hw_random hwrandom i810_rng hwrng; do
+		if [ -e /dev/$node ]; then
+			devnode=/dev/$node
+			break
+		fi
+	done
+	if [ -z "$devnode" ]; then
+		echo "no hardware RNG found, falling back to /dev/urandom"
+		devnode=/dev/urandom
+	fi
+	rngd -b -r $devnode
+	;;
+stop)
+	pkill rngd
+	;;
+restart)
+	sh $0 stop
+	sleep 1
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

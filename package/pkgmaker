@@ -261,5 +261,5 @@ EOF
 	) 4>Config.in 5>Config.in.lib
 	cd ..
 done
-pbar=done
-print -u2 "$pbar"
+#pbar=done
+#print -u2 "$pbar"

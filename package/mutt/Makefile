@@ -21,6 +21,7 @@ $(eval $(call PKG_template,MUTT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
+			--with-homespool="~/Maildir" \
 			--enable-pop \
 			--enable-imap \
 			--with-ssl
