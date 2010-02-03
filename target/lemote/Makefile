@@ -28,7 +28,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
-	@echo 'PMON> load tftp://<ip-address-server>/lemote-mips-kernel'
+	@echo 'PMON> load tftp://<ip-address-server>/${ADK_TARGET}-${FS}-kernel'
 	@echo 'PMON> g no_auto_cmd root=/dev/nfs ip=dhcp init=/init'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
