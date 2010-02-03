@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		heimdal-libs heimdal-client-libs libncurses libcom-err
+PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
 PKG_BUILDDEP+=		openssl ncurses e2fsprogs
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
 PKG_BUILDDEP+=		libdb
@@ -40,8 +40,8 @@ PKG_DEPENDS+=		libopenldap
 endif
 
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,HEIMDAL_LIBS,heimdal-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
-$(eval $(call PKG_template,HEIMDAL_CLIENT_LIBS,heimdal-client-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
+$(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,LIBHEIMDAL_CLIENT,libheimdal-client,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
 
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
@@ -107,34 +107,53 @@ endif
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/etc/heimdal
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/usr/sbin
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libkdc.so* ${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5srv.so* ${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libhdb.so* ${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
-	${INSTALL_DATA} ./files/krb5.conf ${IDIR_HEIMDAL_SERVER}/etc/heimdal
-	${INSTALL_DATA} ./files/kdc.conf ${IDIR_HEIMDAL_SERVER}/etc/heimdal
-	${INSTALL_DATA} ./files/kadmind.acl ${IDIR_HEIMDAL_SERVER}/etc/heimdal
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/kdc ${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/kadmind ${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/kpasswdd ${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/kstash ${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/ktutil ${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/kadmin ${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${CP} ${WRKINST}/usr/lib/heimdal/libkdc.so* \
+		${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5srv.so* \
+		${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libhdb.so* \
+		${IDIR_HEIMDAL_SERVER}/usr/lib/heimdal
+	${INSTALL_DATA} ./files/{krb5.conf,kdc.conf,kadmind.acl} \
+		${IDIR_HEIMDAL_SERVER}/etc/heimdal
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/kdc \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/kadmind \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/kpasswdd \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/kstash \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ktutil \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/kadmin \
+		${IDIR_HEIMDAL_SERVER}/usr/sbin/
 	# heimdal libs
-	${INSTALL_DIR} ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
+	${INSTALL_DIR} ${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_PKINIT),y)
-	${CP} ${WRKINST}/usr/lib/heimdal/libhx509.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libhx509.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 endif
-	${CP} ${WRKINST}/usr/lib/heimdal/libheimntlm.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libwind.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libgssapi.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libkafs.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libkrb5.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libasn1.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libroken.so* ${IDIR_HEIMDAL_LIBS}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libheimntlm.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libwind.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libgssapi.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libkafs.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libkrb5.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libasn1.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libroken.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	# heimdal client libs
-	${INSTALL_DIR} ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libeditline.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libsl.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* ${IDIR_HEIMDAL_CLIENT_LIBS}/usr/lib/heimdal
+	${INSTALL_DIR} ${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libeditline.so* \
+		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libsl.so* \
+		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* \
+		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
 
 include ${TOPDIR}/mk/pkg-bottom.mk

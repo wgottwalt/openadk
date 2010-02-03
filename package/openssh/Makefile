@@ -12,11 +12,11 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib libopenssl
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
-PKG_DEPENDS+=		krb5-libs libcom-err
+PKG_DEPENDS+=		libkrb5 libcom-err
 PKG_BUILDDEP+=		krb5
 endif
 ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
-PKG_DEPENDS+=		heimdal-libs libcom-err
+PKG_DEPENDS+=		libheimdal libcom-err
 PKG_BUILDDEP+=		heimdal
 endif
 PKG_URL:=		http://www.openssh.com

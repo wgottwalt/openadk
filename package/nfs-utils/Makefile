@@ -12,7 +12,7 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-nfsd
 
 ifeq (${ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS},y)
-PKG_DEPENDS+=		krb5-libs libevent libnfsidmap librpcsecgss libcom-err libgssglue
+PKG_DEPENDS+=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKG_BUILDDEP+=		libnfsidmap krb5 libevent libgssglue librpcsecgss
 endif
 

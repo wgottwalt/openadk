@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME=		gettext
 PKG_VERSION=		0.16.1
 PKG_RELEASE=		1
-PKG_BUILDDEP+=		libiconv libpthread
 PKG_MD5SUM=		3d9ad24301c6d6b17ec30704a13fe127
 PKG_DESCR:=		internationalisation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv libpthread
+PKG_BUILDDEP+=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
 PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
 ifeq ($(ADK_STATIC),y)
@@ -42,6 +42,6 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/*.so.* ${IDIR_GETTEXT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_GETTEXT}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
