@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp
-PKG_VERSION:=		4.1.0p1
+PKG_VERSION:=		4.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		325ff8338c5a21f89d5304ac13ffebdf
+PKG_MD5SUM:=		38a74c89d8913b9b5f33737047623c18
 PKG_DESCR:=		ISC DHCP server
 PKG_SECTION:=		net
 PKG_URL:=		https://www.isc.org/software/dhcp
@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DHCP_SERVER,dhcp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_RELAY},${PKG_SECTION}))
 
-TCFLAGS+=		-D_GNU_SOURCE
+#TCFLAGS+=		-D_GNU_SOURCE
 CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_file__dev_random=yes
 BUILD_STYLE:=		auto
@@ -27,8 +27,10 @@ INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DHCP_RELAY}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcrelay ${IDIR_DHCP_RELAY}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcrelay \
+		${IDIR_DHCP_RELAY}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_DHCP_SERVER}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcpd ${IDIR_DHCP_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcpd \
+		${IDIR_DHCP_SERVER}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
