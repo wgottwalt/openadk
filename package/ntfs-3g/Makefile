@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME=		ntfs-3g
-PKG_VERSION=		2009.4.4
+PKG_VERSION=		2010.1.16
 PKG_RELEASE=		1
-PKG_MD5SUM=		e0b5c170f088a8d82968f0a6b34d31da
+PKG_MD5SUM=		e104c914e8d7d29ee83e63d46afbba25
 PKG_DESCR:=		ntfs filesystem driver with read and write support
 PKG_SECTION:=		sys
 PKG_DEPENDS:=		kmod-fuse-fs
-PKG_URL:=		http://www.ntfs-3g.org
-PKG_SITES=		http://www.ntfs-3g.org/
+PKG_URL:=		http://tuxera.com
+PKG_SITES=		http://tuxera.com/opensource/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
@@ -26,8 +26,8 @@ BUILD_STYLE=		auto
 INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_NTFS_3G}/{bin,sbin}
-	${CP} ${WRKINST}/bin/ntfs-3g ${IDIR_NTFS_3G}/bin
-	${CP} ${WRKINST}/sbin/mount.ntfs-3g ${IDIR_NTFS_3G}/sbin
+	${INSTALL_DIR} ${IDIR_NTFS_3G}/bin
+	${INSTALL_BIN} ${WRKINST}/bin/ntfs-3g ${IDIR_NTFS_3G}/bin
+	cd ${WRKINST}/bin && ln -sf ntfs-3g mount.ntfs-3g
 
 include ${TOPDIR}/mk/pkg-bottom.mk
