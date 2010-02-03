@@ -4,17 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		maradns
-PKG_VERSION:=		1.3.07.09
+PKG_VERSION:=		1.4.03
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libpthread
-PKG_MD5SUM:=		1d221438fb4d9317263555262b9c652c
+PKG_MD5SUM:=		9e715104234cc9bf01e2afaad27eb787
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.maradns.org
-PKG_SITES:=		http://www.maradns.org/download/1.3/${PKG_VERSION}/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SITES:=		http://www.maradns.org/download/1.4/${PKG_VERSION}/
 
 include ${TOPDIR}/mk/package.mk
 
@@ -37,8 +34,10 @@ post-install:
 	${INSTALL_DIR} ${IDIR_MARADNS}/etc/maradns
 	${INSTALL_DIR} ${IDIR_MARADNS}/usr/bin ${IDIR_MARADNS}/usr/sbin
 	${INSTALL_DATA} ./files/mararc ${IDIR_MARADNS}/etc/mararc
-	${INSTALL_DATA} ./files/sample.{zone,ptr} ${IDIR_MARADNS}/etc/maradns/
+	${INSTALL_DATA} ./files/sample.{zone,ptr} \
+		${IDIR_MARADNS}/etc/maradns/
 	${CP} ${WRKINST}/usr/bin/{askmara,getzone} ${IDIR_MARADNS}/usr/bin/
-	${CP} ${WRKINST}/usr/sbin/{maradns,zoneserver} ${IDIR_MARADNS}/usr/sbin/
+	${CP} ${WRKINST}/usr/sbin/{maradns,zoneserver} \
+		${IDIR_MARADNS}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
