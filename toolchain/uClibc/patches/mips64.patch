@@ -1,0 +1,22 @@
+diff -Nur uClibc-0.9.30.2.orig/libc/sysdeps/linux/common/getdents.c uClibc-0.9.30.2/libc/sysdeps/linux/common/getdents.c
+--- uClibc-0.9.30.2.orig/libc/sysdeps/linux/common/getdents.c	2010-01-13 22:22:31.000000000 +0100
++++ uClibc-0.9.30.2/libc/sysdeps/linux/common/getdents.c	2010-02-03 20:21:34.000000000 +0100
+@@ -136,9 +136,6 @@
+     return (char *) dp - buf;
+ }
+ 
+-#if defined __UCLIBC_HAS_LFS__ && ! defined __NR_getdents64
+-attribute_hidden strong_alias(__getdents,__getdents64)
+-#endif
+ 
+ #elif __WORDSIZE == 32
+ 
+@@ -171,4 +168,8 @@
+ }
+ #endif
+ 
++#if defined __UCLIBC_HAS_LFS__ && ! defined __NR_getdents64
++attribute_hidden strong_alias(__getdents,__getdents64)
++#endif
++
+ #endif
