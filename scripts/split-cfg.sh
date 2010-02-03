@@ -4,13 +4,15 @@
 # ses the slow-down.
 
 TOPDIR=$1
+TARGET=$2
+LIBC=$3
 (( x_cols = (COLUMNS > 10) ? COLUMNS - 2 : 80 ))
 typeset -L$x_cols pbar
 
 grep -v '^BUSYBOX\|^# BUSYBOX' $TOPDIR/.config > $TOPDIR/.config.split
 
-mkdir -p $TOPDIR/.cfg
-cd $TOPDIR/.cfg
+mkdir -p $TOPDIR/.cfg_${TARGET}_${LIBC}
+cd $TOPDIR/.cfg_${TARGET}_${LIBC}
 
 oldfiles=$(print -r -- *)
 newfiles=:
@@ -66,7 +68,7 @@ print -nu2 '\r'
 # and the entire Config.in will be auto-generated anyway,
 # so we're better off placing it here
 #XXX this is too slow @868 configure options
-cd $TOPDIR/.cfg
+cd $TOPDIR/.cfg_${TARGET}_${LIBC}
 rm -f $TOPDIR/package/*/info.mk
 for option in *; do
 	pbar="$option ..."
@@ -78,7 +80,7 @@ for option in *; do
 	done | while read fname; do
 		[[ $ao = *:$fname:* ]] && continue
 		ao=$ao$fname:
-		echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg/$option" >>$fname
+		echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg_${TARGET}_${LIBC}/$option" >>$fname
 	done
 done
 pbar=done

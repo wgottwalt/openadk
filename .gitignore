@@ -19,7 +19,7 @@ toolchain_build_*/
 .defconfig
 all.config
 .cfg/
-.cfg.*/
+.cfg_*/
 cross_*/
 root_*/
 bin/
