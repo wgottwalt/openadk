@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2006, 2007
 #	Thorsten Glaser <tg@mirbsd.de>
-# Copyright (c) 2009
+# Copyright (c) 2009, 2010
 #	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
@@ -21,7 +21,7 @@
 # Possible return values:
 # 0 - everything ok
 # 1 - syntax error
-# 1 - no 'cfgfs' mtd/cf partition found
+# 1 - no 'cfgfs' mtd/cf/nand partition found
 # 1 - cfgfs erase: failed
 # 1 - cfgfs setup: already run
 # 3 - cfgfs setup: mount --bind problems
@@ -42,7 +42,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem Utility (cfgfs), Version 1.06'
+what='Configuration Filesystem Utility (cfgfs), Version 1.07'
 
 who=$(id -u)
 if [ $who -ne 0 ]; then
@@ -113,8 +113,17 @@ EOF
 	exit 1 ;;
 esac
 
-# find backend device, first try to find partition with ID 88
 mtd=0
+
+if [ -x /sbin/nand ];then
+	mtdtool=/sbin/nand
+fi
+
+if [ -x /sbin/mtd ];then
+	mtdtool=/sbin/mtd
+fi
+
+# find backend device, first try to find partition with ID 88
 part=$(fdisk -l|awk '$5 == 88 { print $1 }')
 if [ -z $part ]; then
 	# otherwise search for MTD device with name cfgfs
@@ -130,7 +139,7 @@ fi
 if test $1 = erase; then
 	dd if="$part" 2>&1 | md5sum 2>&1 >/dev/urandom
 	if [ $mtd -eq 1 ]; then
-		cfgfs.helper -Me | mtd -F write - cfgfs
+		cfgfs.helper -Me | eval $mtdtool -F write - cfgfs
 	else
 		cfgfs.helper -Me | cat > $part
 	fi
@@ -161,7 +170,7 @@ if test $1 = setup; then
 		x=$(dd if="$part" bs=4 count=1 2>/dev/null)
 		[[ "$x" = "FWCF" ]] || \
 			if [ $mtd -eq 1 ]; then
-				cfgfs.helper -Me | mtd -F write - cfgfs
+				cfgfs.helper -Me | eval $mtdtool -F write - cfgfs
 			else
 				cfgfs.helper -Me | cat > $part
 			fi
@@ -258,7 +267,7 @@ if test $1 = commit; then
 	done
 	rv=0
 	if [ $mtd -eq 1 ]; then
-		if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | mtd -F write - cfgfs ); then
+		if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | eval $mtdtool -F write - cfgfs ); then
 			echo 'cfgfs: error: cannot write to $part!'
 			rv=6
 		fi
@@ -387,7 +396,7 @@ if test $1 = restore; then
 		exit 12
 	fi
 	if [ $mtd -eq 1 ]; then
-		if ! ( cfgfs.helper -MD dump | mtd -F write - cfgfs ); then
+		if ! ( cfgfs.helper -MD dump | eval $mtdtool -F write - cfgfs ); then
 			echo 'cfgfs: error: cannot write to $part!'
 			exit 6
 		fi

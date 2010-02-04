@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nand
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_DESCR:=		NAND utility
 PKG_SECTION:=		base
 
@@ -25,15 +25,11 @@ INSTALL_STYLE:=		manual
 
 do-build:
 	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}
-	${TARGET_CC} ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/nandwrite \
-		${WRKBUILD}/nandwrite.c
-	${TARGET_CC} ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/nanddump \
-		${WRKBUILD}/nanddump.c
+	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/nand \
+		./src/nand.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_NAND}/sbin
-	${INSTALL_BIN} ${WRKBUILD}/nandwrite ${IDIR_NAND}/sbin
-	${INSTALL_BIN} ${WRKBUILD}/nanddump ${IDIR_NAND}/sbin
+	${INSTALL_BIN} ${WRKBUILD}/nand ${IDIR_NAND}/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
