@@ -55,6 +55,7 @@ noconfig_targets:=	menuconfig \
 			_config \
 			_mconfig \
 			distclean \
+			defconfig \
 			tags
 
 MAKECLEANDIR_SYMBOLS=	ADK_DEBUG
@@ -101,16 +102,13 @@ include ${TOPDIR}/mk/split-cfg.mk
 
 all: world
 
-allcopy: all
-	$(CP) $(BIN_DIR) $(TOPDIR)/bulkdir/${targetdir}/
-
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
 	mksh ${TOPDIR}/package/depmaker
 
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
-world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
@@ -150,10 +148,10 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
-target/%: ${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+target/%: ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
 toolchain/%: ${STAGING_DIR}
@@ -215,8 +213,9 @@ clean:
 			rm $$f ; \
 		done \
 	done
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg \
-	    ${TOPDIR}/package/pkglist.d
+	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) \
+		${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC} \
+	    	${TOPDIR}/package/pkglist.d
 	rm -f ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
 
 cleankernel:
@@ -237,16 +236,19 @@ cleandir:
 cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) ${TOPDIR}/.cfg
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT) all.config .defconfig
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk .busyboxcfg
+	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) \
+		${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT)
+	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk \
+		.busyboxcfg all.config .defconfig
 
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d $(TOPDIR)/bulkdir
-	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
+	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
+	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
+		$(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk \
 	    .busyboxcfg
@@ -303,7 +305,25 @@ endif
 			echo $$symbol >> $(TOPDIR)/.defconfig; \
 		done; \
 	fi
-ifneq (,$(filter qemu%,${TARGET}))
+	@if [ ! -z "$(FS)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(FS)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(PKG)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(PKG)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(LIBC)" ];then \
+		grep "^config" target/Config.in \
+			|grep -i "$(LIBC)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
+ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
 ifneq (,$(filter rescue%,${TARGET}))
@@ -311,6 +331,12 @@ ifneq (,$(filter rescue%,${TARGET}))
 endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
+endif
+ifneq (,$(filter alix%,${TARGET}))
+	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/.defconfig
+endif
+ifneq (,$(filter wrap%,${TARGET}))
+	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/.defconfig
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
@@ -371,6 +397,12 @@ endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/all.config
 endif
+ifneq (,$(filter alix%,${TARGET}))
+	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/all.config
+endif
+ifneq (,$(filter wrap%,${TARGET}))
+	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/all.config
+endif
 
 menuconfig: $(CONFIG)/mconf defconfig .menu
 	@if [ ! -f .config ];then \
@@ -392,7 +424,7 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d $(TOPDIR)/bulkdir
+	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d 
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
@@ -401,23 +433,39 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all targets and combinations
 bulk:
-	while read target libc fs p; do \
-		mkdir -p $(TOPDIR)/bulkdir/$$target-$$libc-$$fs; \
+	while read target libc fs; do \
+		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
-		if [ "x$$p" = xy ];then \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs \
-				allmodconfig; \
-		else \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs \
-				defconfig; \
-		fi && \
-		$(GMAKE) VERBOSE=1 -f mk/build.mk allcopy \
-		    targetdir=$$target-$$libc-$$fs; \
-		$(GMAKE) cleantarget; \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs defconfig; \
+			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
-	    ) 2>&1 | tee $(TOPDIR)/bulkdir/$$target-$$libc-$$fs/log; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
+	done <${TOPDIR}/target/bulk.lst
+
+bulkall:
+	while read target libc fs; do \
+		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
+	    ( \
+		echo === building $$target $$libc $$fs on $$(date); \
+		$(GMAKE) prereq && \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allconfig; \
+			$(GMAKE) VERBOSE=1 all; \
+		rm .config; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
+	done <${TOPDIR}/target/bulk.lst
+
+bulkallmod:
+	while read target libc fs; do \
+		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
+	    ( \
+		echo === building $$target $$libc $$fs on $$(date); \
+		$(GMAKE) prereq && \
+			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allmodconfig; \
+			$(GMAKE) VERBOSE=1 all; \
+		rm .config; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
 
 menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)

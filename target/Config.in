@@ -195,7 +195,6 @@ config ADK_LINUX_ALIX
 	  Support for Alix and Wrap boards.
 	  http://www.pcengines.ch
 
-
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
 	select ADK_foxboard
@@ -400,6 +399,7 @@ config ADK_LINUX_MIPS64_QEMU
 	bool "mips64 (big endian)"
 	select ADK_mips64_qemu
 	select ADK_LINUX_64
+	depends on ADK_BROKEN
 	help
 	 Qemu support for MIPS64 BE architecture.
 	 Status: development
@@ -408,6 +408,7 @@ config ADK_LINUX_MIPS64EL_QEMU
 	bool "mips64 (little endian)"
 	select ADK_mips64el_qemu
 	select ADK_LINUX_64
+	depends on ADK_BROKEN
 	help
 	 Qemu support for MIPS64 LE architecture.
 	 Status: development
@@ -608,7 +609,7 @@ depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
-	depends on !ADK_LINUX_MIPS64_LEMOTE
+	#depends on !ADK_LINUX_MIPS64_LEMOTE
 	select ADK_uclibc
 	help
  	 http://uclibc.org
