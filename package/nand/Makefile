@@ -24,9 +24,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	mkdir -p ${WRKBUILD}
 	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/nand \
-		./src/nand.c
+		${WRKBUILD}/nand.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_NAND}/sbin
