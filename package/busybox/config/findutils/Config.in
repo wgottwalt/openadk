@@ -8,6 +8,7 @@ menu "Finding Utilities"
 config BUSYBOX_FIND
 	bool "find"
 	default y
+	depends on !ADK_PACKAGE_FINDUTILS
 	help
 	  find is used to search your system to find specified files.
 

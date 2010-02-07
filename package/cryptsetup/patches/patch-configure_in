@@ -1,0 +1,31 @@
+--- cryptsetup-1.1.0.orig/configure.in	2010-01-17 11:26:31.000000000 +0100
++++ cryptsetup-1.1.0/configure.in	2010-02-05 17:05:34.911823330 +0100
+@@ -80,7 +80,7 @@ LIBS=$saved_LIBS
+ if test "x$enable_selinux" != xno; then
+ 	AC_CHECK_LIB(sepol, sepol_bool_set)
+ 	AC_CHECK_LIB(selinux, is_selinux_enabled)
+-	if test x$enable_static = xyes; then
++	if test x$enable_static_cryptsetup = xyes; then
+ 		SELINUX_STATIC_LIBS=$LIBS
+ 		# Check if we need -pthread with --enable-static and selinux
+ 		saved_LIBS2=$LIBS
+@@ -91,7 +91,7 @@ if test "x$enable_selinux" != xno; then
+ 	fi
+ fi
+ 
+-if test x$enable_static = xyes; then
++if test x$enable_static_cryptsetup = xyes; then
+ 	saved_LIBS2=$LIBS
+ 	LIBS="$LIBS -static"
+ 	# Check if it there is still not some missing dependency like static selinux libs
+@@ -135,8 +135,8 @@ CS_NUM_WITH([luks1-keybits],[key length 
+ 
+ dnl ==========================================================================
+ 
+-AM_CONDITIONAL(STATIC_CRYPTSETUP, test x$enable_static = xyes)
+-AM_CONDITIONAL(DYNAMIC_CRYPTSETUP, test x$enable_static = xno)
++AM_CONDITIONAL(STATIC_CRYPTSETUP, test x$enable_static_cryptsetup = xyes)
++AM_CONDITIONAL(DYNAMIC_CRYPTSETUP, test x$enable_static_cryptsetup = xno)
+ 
+ dnl ==========================================================================
+ 

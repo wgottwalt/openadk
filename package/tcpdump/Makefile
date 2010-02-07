@@ -21,14 +21,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TCPDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOSTCC} \
 			ac_cv_linux_vers=2 \
 			td_cv_buggygetaddrinfo="no"
 CONFIGURE_ARGS+=	--without-crypto
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" INCLS="-I. -I${STAGING_DIR}/usr/include"
+XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
+			INCLS="-I. -I${STAGING_DIR}/usr/include"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin

@@ -11,6 +11,7 @@ PKG_DESCR:=		character set conversion library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/libiconv
 PKG_SITES:=		${MASTER_SITE_GNU:=libiconv/}
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -20,9 +21,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBICONV,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TCFLAGS+=		-fPIC
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 FAKE_FLAGS+=		libdir="${WRKINST}/usr/lib" \
 			includedir="${WRKINST}/usr/include" \
 INSTALL_TARGET=		install-lib

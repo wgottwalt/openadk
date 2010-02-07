@@ -1,5 +1,5 @@
---- mdadm-3.0.orig/platform-intel.c	2009-06-02 07:48:29.000000000 +0200
-+++ mdadm-3.0/platform-intel.c	2009-09-02 19:30:09.000000000 +0200
+--- mdadm-3.1.1.orig/platform-intel.c	2009-11-16 23:55:41.000000000 +0100
++++ mdadm-3.1.1/platform-intel.c	2010-02-06 01:07:51.781825419 +0100
 @@ -47,6 +47,7 @@ struct sys_dev *find_driver_devices(cons
  	char path[256];
  	char link[256];
@@ -18,8 +18,8 @@
 +		list->path = realpath(path, rpath);
  		list->next = NULL;
  	}
- 
-@@ -198,9 +201,11 @@ const struct imsm_orom *find_imsm_orom(v
+ 	closedir(driver_dir);
+@@ -203,9 +206,11 @@ const struct imsm_orom *find_imsm_orom(v
  char *devt_to_devpath(dev_t dev)
  {
  	char device[40];

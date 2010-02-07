@@ -21,10 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,RPCBIND,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/tirpc
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-libwrap
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_RPCBIND)/usr/bin

@@ -23,11 +23,8 @@ $(eval $(call PKG_template,RPM,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr \
 			-I${STAGING_DIR}/usr/include/nss
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS:=	--with-external-db \
 			--without-lua
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_RPM)/usr/bin $(IDIR_RPM)/usr/lib

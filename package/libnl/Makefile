@@ -13,11 +13,7 @@ PKG_SITES:=		http://downloads.openwrt.org/sources/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+$(eval $(call PKG_template,LIBNL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib

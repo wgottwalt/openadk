@@ -16,13 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFLAC,libflac,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-asm-optimizations \
 			--disable-xmms-plugin \
 			--disable-cpplibs \
 			--disable-ogg
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFLAC}/usr/lib

@@ -17,11 +17,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-MAKE_FILE=		GNUmakefile
-BUILD_STYLE=		auto
+CONFIG_STYLE:=          manual
 
-do-install:
+MAKE_FILE=		GNUmakefile
+
+post-install:
 	${INSTALL_DIR} ${IDIR_RDATE}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/rdate ${IDIR_RDATE}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/rdate ${IDIR_RDATE}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

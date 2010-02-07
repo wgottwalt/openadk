@@ -6,22 +6,19 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libid3tag
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		e5808ad997ba32c498803822078748c3
 PKG_DESCR:=		an ID3 tag manipulation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		zlib
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBID3TAG,libid3tag,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-debugging \
 			--disable-profiling
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 pre-install:
 	${INSTALL_DIR} ${WRKINST}/usr/lib/pkgconfig

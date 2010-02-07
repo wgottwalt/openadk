@@ -20,10 +20,12 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AICCU,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=	manual
+INSTALL_STYLE:=	manual
+
 TCFLAGS+=	-D_REENTRANT -D_GNU_SOURCE -DAICCU_CONSOLE \
 		-D_LINUX -DHAS_IFHEAD -DAICCU_TYPE=\"linux\"
 TLDFLAGS+=	-lpthread -lresolv
-BUILD_STYLE:=	auto
 MAKE_FLAGS+=	CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' LDFLAGS='${TLDFLAGS}'
 
 do-install:

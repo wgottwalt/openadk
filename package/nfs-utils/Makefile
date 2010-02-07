@@ -12,7 +12,7 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-nfsd
 
 ifeq (${ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS},y)
-PKG_DEPENDS+=		krb5-libs libevent libnfsidmap librpcsecgss libcom-err libgssglue
+PKG_DEPENDS+=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKG_BUILDDEP+=		libnfsidmap krb5 libevent libgssglue librpcsecgss
 endif
 
@@ -36,8 +36,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-#TCPPFLAGS+=		-I${LINUX_DIR}/include
-
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
 			--with-krb5=${STAGING_DIR}/usr/ \
@@ -59,10 +57,6 @@ CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--disable-uuid
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NFS_UTILS}/usr/sbin ${IDIR_NFS_UTILS}/etc

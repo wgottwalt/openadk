@@ -18,6 +18,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BWM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=	manual
+BUILD_STYLE:=	manual
+INSTALL_STYLE:=	manual
+
 do-build:
 	${TARGET_CC} ${TARGET_CFLAGS} ${WRKBUILD}/bwm.c -o ${WRKBUILD}/bwm
 

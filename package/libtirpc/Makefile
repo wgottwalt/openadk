@@ -20,16 +20,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIRPC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-
 ifneq (${ADK_COMPILE_NFS_UTILS_WITH_KERBEROS},y)
 CONFIGURE_ARGS+=	--disable-gss
 else
 CONFIGURE_ARGS+=	--enable-gss
 endif
-
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTIRPC}/usr/lib ${IDIR_LIBTIRPC}/etc

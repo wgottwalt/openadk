@@ -17,9 +17,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AUFS_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		KDIR=${LINUX_DIR}
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 do-extract:
 	mkdir -p ${WRKBUILD}

@@ -14,9 +14,11 @@ if [ -z $2 ];then
         printf "Please give your root tar archive as second parameter\n"
         exit 1
 fi
-if [ -z $3 ];then
-        printf "Please give your kernel as third parameter\n"
-        exit 1
+if [ $cfinstall -eq 1 ];then
+	if [ -z $3 ];then
+       	 printf "Please give your kernel as third parameter\n"
+       	 exit 1
+	fi
 fi
 case $1 in
 	nand)
@@ -26,7 +28,7 @@ case $1 in
 		cfinstall=1
 		;;
 	*)
-		printf "Target not recognized\n"
+		printf "Target device not known.\n"
 		exit 1
 		;;
 esac
@@ -53,26 +55,33 @@ if [ $cfinstall -eq 1 ];then
 fi
 
 if [ $nandinstall -eq 1 ];then
-	printf "Installing kernel\n"
-	mount -t yaffs2 /dev/mtdblock0 /mnt
-	cp $3 /mnt/kernel
-	sync
-	umount /mnt
+	printf "Preparing mountpoints\n"
 	mount -t yaffs2 /dev/mtdblock1 /mnt
 	rm -rf /mnt/* >/dev/null 2>&1
+	mkdir /mnt/boot
+	mount -t yaffs2 /dev/mtdblock0 /mnt/boot
 fi
 
 printf "Extracting install archive\n"
 tar -C /mnt -xzpf $2
+if [ $? -ne 0 ];then
+	printf "Extracting of install archive failed"
+	exit 1
+fi
 
 chmod 1777 /mnt/tmp
 chmod 4755 /mnt/bin/busybox
 
-printf "Creating device nodes\n"
-mknod -m 666 /mnt/dev/null c 1 3
-mknod -m 622 /mnt/dev/console c 5 1
-mknod -m 666 /mnt/dev/tty c 5 0
+sync
 
+if [ $nandinstall -eq 1 ];then
+	umount /mnt/boot
+fi
 umount /mnt
-printf "Successfully installed.\n"
-exit 0
+if [ $? -ne 0 ];then
+	printf "Unmounting filesystem failed"
+	exit 1
+else
+	printf "Successfully installed.\n"
+	exit 0
+fi

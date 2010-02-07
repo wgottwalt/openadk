@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		squid
 PKG_VERSION:=		3.0.STABLE20
 PKG_RELEASE:=		2
-PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
+PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.squid-cache.org
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
 PKG_MULTI:=		1
@@ -81,7 +81,7 @@ $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 #			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
 #endif
 
-CONFIGURE_STYLE:=	autotool gnu
+AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \
@@ -134,8 +134,6 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-ntlm-auth-helpers="${NTLM_AUTH_HELPERS}" \
 			--enable-digest-auth-helpers="${DIGEST_AUTH_HELPERS}" \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 #ifeq (${ADK_COMPILE_SQUID_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++
@@ -146,12 +144,14 @@ INSTALL_STYLE:=		auto
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid
-	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf ${IDIR_SQUID}/etc/squid/
+	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf \
+		${IDIR_SQUID}/etc/squid/
 	${INSTALL_DATA} ./files/squid.conf ${IDIR_SQUID}/etc/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid
 	${CP} ${WRKINST}/usr/share/squid/* ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd ${IDIR_SQUID}/usr/lib/squid
+	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd \
+		${IDIR_SQUID}/usr/lib/squid
 
 include ${TOPDIR}/mk/pkg-bottom.mk

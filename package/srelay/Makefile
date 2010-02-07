@@ -15,11 +15,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SRELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ENV+=		ac_cv_lib_nsl_getaddrinfo=no
 CONFIGURE_ARGS+=	--disable-thread \
 			--with-libwrap=no
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SRELAY}/usr/bin ${IDIR_SRELAY}/etc

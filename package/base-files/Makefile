@@ -18,11 +18,13 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 PKGDFLT_BASE_FILES=	y if !ADK_TOOLCHAIN_ONLY
+
+CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
-	$(CP) ./extra/* $(IDIR_BASE_FILES)
+	$(CP) ./src/* $(IDIR_BASE_FILES)
 	$(CP) $(TOPDIR)/target/$(ADK_TARGET)/files/* $(IDIR_BASE_FILES)
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@-rm $(IDIR_BASE_FILES)/etc/network/interfaces

@@ -27,15 +27,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IRSSI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-perl=no \
 			--with-gnu-ld \
 			--with-textui \
 			--with-terminfo \
 			--without-bot \
-			--without-proxy \
-			--enable-static
-BUILD_STYLE=		auto
+			--without-proxy
 
 ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
 CONFIGURE_ARGS+=	--enable-ssl
@@ -43,9 +40,8 @@ else
 CONFIGURE_ARGS+=	--disable-ssl
 endif
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_IRSSI}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/src/fe-text/${PKG_NAME} \
-		${IDIR_IRSSI}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/irssi ${IDIR_IRSSI}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

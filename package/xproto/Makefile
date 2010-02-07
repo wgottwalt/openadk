@@ -11,10 +11,6 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 # workaround for makekeys compile on non-Linux systems
 post-install:
 	${INSTALL_DIR} ${STAGING_DIR}/usr/include/xproto

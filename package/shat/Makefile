@@ -15,6 +15,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \
 		CC="${TARGET_CC}" LD=${TARGET_CROSS}ld \

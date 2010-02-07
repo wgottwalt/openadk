@@ -16,17 +16,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libopensc.so.* \
+	${CP} ${WRKINST}/usr/lib/libopensc.so* \
 		${IDIR_OPENSC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpkcs15init.so.* \
+	${CP} ${WRKINST}/usr/lib/libpkcs15init.so* \
 		${IDIR_OPENSC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libscconf.so.* \
+	${CP} ${WRKINST}/usr/lib/libscconf.so* \
 		${IDIR_OPENSC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/opensc-pkcs11.so \
 		${IDIR_OPENSC}/usr/lib

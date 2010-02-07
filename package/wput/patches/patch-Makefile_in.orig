@@ -1,0 +1,13 @@
+--- wput-0.6.1.orig/Makefile.in	2007-12-12 18:30:04.000000000 +0100
++++ wput-0.6.1/Makefile.in	2010-02-06 04:45:29.434334308 +0100
+@@ -16,8 +16,8 @@ win-clean:
+ 
+ install: all
+ 	cd po && $(MAKE) $(MAKEDEFS) $@
+-	install -m0755 wput $(bindir)
+-	install -m0644 doc/wput.1.gz $(mandir)
++	install -m0755 wput $(DESTDIR)$(bindir)
++	install -m0644 doc/wput.1.gz $(DESTDIR)$(mandir)
+ 	@echo "----------------"
+ 	@echo "Wput installed. See 'wput -h' or 'man wput' for usage information."
+ 	@echo "Further documentation is located in the doc/USAGE.* files."

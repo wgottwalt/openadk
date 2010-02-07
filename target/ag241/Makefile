@@ -25,7 +25,7 @@ kernel-install: tools-compile
 		$(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' \
 	addpattern -p AG3B -b -r 2.0 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel	
+		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel 2>/dev/null
 
 ifeq ($(FS),squashfs)
 imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
@@ -43,10 +43,10 @@ imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 endif
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'You can flash the kernel via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'

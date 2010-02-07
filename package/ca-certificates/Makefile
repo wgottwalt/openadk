@@ -22,8 +22,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CA_CERTS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
 
 post-install:
 ifeq (${ADK_PACKAGE_CA_CERTS_SMALL},n)
@@ -38,6 +37,5 @@ else
 	${INSTALL_DIR} ${IDIR_CA_CERTS}/etc/ssl
 	${INSTALL_DATA} ./cert.pem ${IDIR_CA_CERTS}/etc/ssl/
 endif
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

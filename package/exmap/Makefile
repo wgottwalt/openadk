@@ -27,10 +27,10 @@ $(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_EXMAPSERVER},${PKG_SECTION}))
 $(eval $(call PKG_template,KMOD_EXMAP,kmod-exmap,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR_KMOD_EXMAP},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--disable-doc
 CONFIGURE_ENV+=		LIBS="-lncurses"
-BUILD_STYLE:=		auto
 
 pre-build:
 	KERNEL_PATH=${LINUX_DIR} \

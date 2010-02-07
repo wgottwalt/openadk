@@ -1,5 +1,5 @@
 --- cpufrequtils-007.orig/Makefile	2010-01-16 14:47:44.000000000 +0100
-+++ cpufrequtils-007/Makefile	2010-01-23 18:52:15.905985935 +0100
++++ cpufrequtils-007/Makefile	2010-02-05 18:20:59.944334337 +0100
 @@ -27,11 +27,11 @@
  DEBUG ?=	false
  
@@ -133,7 +133,7 @@
  install-lib:
  	$(INSTALL) -d $(DESTDIR)${libdir}
 -	$(LIBTOOL) --mode=install $(INSTALL) libcpufreq.la $(DESTDIR)${libdir}/libcpufreq.la
-+	$(INSTALL) libcpufreq.so* $(DESTDIR)${libdir}/
++	cp -Rp libcpufreq.so* $(DESTDIR)${libdir}/
  	$(INSTALL) -d $(DESTDIR)${includedir}
  	$(INSTALL_DATA) lib/cpufreq.h $(DESTDIR)${includedir}/cpufreq.h
  

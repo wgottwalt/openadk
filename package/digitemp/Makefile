@@ -18,9 +18,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 TCFLAGS+=		-I./src -I./userial
 ALL_TARGET=		ds2490
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_DIGITEMP}/usr/sbin

@@ -16,17 +16,15 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MIAU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-automode \
 			--enable-releasenick \
 			--enable-uptime \
 			--enable-privlog \
 			--enable-onconnect
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MIAU}/usr/bin ${IDIR_MIAU}/etc/miau
-	${INSTALL_BIN} ${WRKINST}/usr/bin/${PKG_NAME} ${IDIR_MIAU}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/miau ${IDIR_MIAU}/usr/bin/
 	${INSTALL_DATA} ./files/miaurc ${IDIR_MIAU}/etc/miau/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

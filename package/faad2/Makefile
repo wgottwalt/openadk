@@ -16,14 +16,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-mpeg4ip \
 			--without-xmms
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFAAD2}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libfaad.so.* ${IDIR_LIBFAAD2}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libfaad.so* ${IDIR_LIBFAAD2}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

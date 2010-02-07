@@ -6,10 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mrd6
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-PKG_CXX:=		MRD6
 PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
 PKG_DESCR:=		IPv6 multicast routing daemon
 PKG_SECTION:=		net
+PKG_CXX:=		MRD6
 PKG_DEPENDS:=		kmod-ipv6
 PKG_SITES:=		http://www.openadk.org/distfiles/
 
@@ -19,14 +19,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+
 ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs -I${STAGING_DIR}/usr/include/uClibc++
+TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs \
+			-I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
 endif
-
 XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}" 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc

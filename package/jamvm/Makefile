@@ -20,7 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,JAMVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--enable-ffi
 
 do-build:
@@ -36,6 +38,7 @@ do-install:
 	${INSTALL_DIR} ${IDIR_JAMVM}/usr/bin
 	${INSTALL_DIR} ${IDIR_JAMVM}/usr/share/jamvm
 	${INSTALL_BIN} ${WRKINST}/usr/bin/jamvm ${IDIR_JAMVM}/usr/bin
-	${CP} ${WRKINST}/usr/share/jamvm/classes.zip ${IDIR_JAMVM}/usr/share/jamvm
+	${CP} ${WRKINST}/usr/share/jamvm/classes.zip \
+		${IDIR_JAMVM}/usr/share/jamvm
 
 include ${TOPDIR}/mk/pkg-bottom.mk

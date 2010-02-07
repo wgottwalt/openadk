@@ -18,8 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,L2TPNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_FLAGS:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_L2TPNS}/etc/l2tpns

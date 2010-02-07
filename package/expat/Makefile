@@ -11,6 +11,7 @@ PKG_DESCR:=		a XML parsing library
 PKG_SECTION:=		libs
 PKG_URL:=		http://expat.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -18,10 +19,6 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBEXPAT,libexpat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBEXPAT}/usr/lib

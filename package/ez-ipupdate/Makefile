@@ -19,8 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,EZIPUPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_EZIPUPDATE}/etc ${IDIR_EZIPUPDATE}/usr/sbin

@@ -1,0 +1,83 @@
+#!/bin/sh
+
+who=$(id -u)
+if [ $who -ne 0 ]; then
+  echo 'Exit. System update must be run as root.'
+  exit 1
+fi
+
+if [ -x /sbin/mtd ];then
+	updatecmd="mtd -r write - linux"
+else
+	updatecmd="gunzip -c | tar -xf -"
+fi
+
+system=$(awk '/system type/ { print $5 }' /proc/cpuinfo 2>/dev/null)
+
+check_exit() {
+	if [ $? -ne 0 ];then
+		echo "Update failed."
+		exit 1
+	fi
+}
+
+prepare() {
+	cd /
+	umount -f /etc
+	mount -o remount,rw /
+	if [ "$system" == "RB532" ];then
+		mount -t yaffs2 /dev/mtdblock0 /boot
+	fi
+}
+
+extract_from_file() {
+	prepare
+        cat $1 | eval $updatecmd
+	check_exit
+}
+
+extract_from_ssh() {
+	prepare
+        ssh $1 "cat $2" | eval $updatecmd
+	check_exit
+}
+
+extract_from_http() {
+	prepare
+        wget -O - $1 | eval $updatecmd
+	check_exit
+}
+                
+case $1 in
+        file://*|/*)
+                url=$(echo $1|sed -e "s#file://##")
+		echo "Updating system from $1"
+                extract_from_file $url
+                ;;
+        ssh://*)
+                host=$(echo $1|sed -e "s#ssh://\(.*\):.*#\1#")
+                file=$(echo $1|sed -e "s#ssh://.*:\(.*\)#\1#")
+		echo "Updating system from $1"
+                extract_from_ssh $host $file
+                ;;
+        http://*|ftp://*)
+		echo "Updating system from $1"
+                extract_from_http $1
+                ;;
+        *)
+                echo "No or wrong uri given. exit."
+		echo "Use one of the following uri:"
+		echo "http://myserver/myupdate.tar.gz"
+		echo "ssh://myuser@myserver:/my/path/myupdate.tar.gz"
+		echo "file:///mypath/myupdate.tar.gz"
+                exit 1
+                ;;
+esac
+
+sync
+mount -o bind /etc /tmp/.cfgfs/root
+if [ "$system" == "RB532" ];then
+	umount -f /boot
+fi
+
+echo "Update sucessful. You should reboot now."

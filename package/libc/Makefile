@@ -14,6 +14,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBC,libc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 # do nothing, use native c library
 do-install:
 	${INSTALL_DIR} $(IDIR_LIBC)/lib

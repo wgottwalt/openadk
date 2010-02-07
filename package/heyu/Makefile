@@ -19,8 +19,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HEYU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-build:
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
+do-configure:
 	(cd ${WRKBUILD} && ${BASH} ./Configure linux);
+
+do-build:
 	${MAKE} -C ${WRKBUILD} \
 		CC="${TARGET_CC}" LD=${TARGET_CROSS}ld \
 		CFLAGS="${TARGET_CFLAGS} -I${WRKBUILD} -DSYSV -DPOSIX -DHAS_ITIMER -DLINUX -DHASSELECT -DHASTZ"

@@ -12,11 +12,11 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
-PKG_DEPENDS+=		krb5-libs libcom-err
+PKG_DEPENDS+=		libkrb5 libcom-err
 PKG_BUILDDEP+=		krb5
 endif
 ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
-PKG_DEPENDS+=		heimdal-libs libcom-err
+PKG_DEPENDS+=		libheimdal libcom-err
 PKG_BUILDDEP+=		heimdal
 endif
 PKG_URL:=		http://www.openssh.com
@@ -44,7 +44,6 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
 else
 CONFIGURE_ARGS+=	--without-kerberos5
 endif
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
 			ac_cv_func_setlogin=no \
 			ac_cv_lib_nsl_yp_match=no
@@ -63,8 +62,6 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--with-privsep-user=sshd \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_DIR}/usr"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh

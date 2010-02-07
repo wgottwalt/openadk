@@ -15,7 +15,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VRRPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 MAKE_FLAGS:=		CC="${TARGET_CC}" \
 			DBG_OPT="" \
 			MAIN_OPT="${TARGET_CFLAGS}"

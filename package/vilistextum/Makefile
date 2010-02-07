@@ -17,12 +17,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VILISTEXTUM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_VILISTEXTUM}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/${PKG_NAME} ${IDIR_VILISTEXTUM}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/vilistextum \
+		 ${IDIR_VILISTEXTUM}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

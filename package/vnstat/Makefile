@@ -15,7 +15,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VNSTAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 ALL_TARGET:=		vnstat
 

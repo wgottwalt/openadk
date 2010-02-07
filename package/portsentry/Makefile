@@ -18,7 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PORTSENTRY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 ALL_TARGET:=		linux
 MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TCFLAGS}"
 

@@ -17,9 +17,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SSMTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostname=no
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SSMTP}/etc/ssmtp

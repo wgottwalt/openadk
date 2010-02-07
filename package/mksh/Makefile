@@ -26,6 +26,10 @@ ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
 TCPPFLAGS+=		-DMKSH_SMALL=1
 endif
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' \
 	    CPPFLAGS='${TCPPFLAGS}' LDFLAGS='${TLDFLAGS}' \

@@ -25,14 +25,10 @@ MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
 			HOSTPYTHON=./hostpython \
 			HOSTPGEN=./Parser/hostpgen \
 			PYTHON_DISABLE_MODULES="$(DISMOD)"
-
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPT="$(TARGET_CFLAGS)"
 CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--without-cxx-main
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \

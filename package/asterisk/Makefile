@@ -114,20 +114,22 @@ else
 CONFIGURE_ARGS+=	--without-postgres
 endif
 
+INSTALL_STYLE:=		manual
+
 TLDFLAGS+=		-lm
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
 MAKE_ENV=		ASTCFLAGS="${TCPPFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TLDFLAGS}"
 MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 			OPTIMIZE="${TARGET_OPTIMIZATION}" \
-			CXX="${TARGET_CC}" \
 			STRIP="${TARGET_CROSS}strip" \
 			NOISY_BUILD=1
 ALL_TARGET:=		all install samples
 
 pre-configure:
 	cd "$(WRKBUILD)/menuselect"; ./configure 
+
+pre-build:
+	$(MAKE) -C $(WRKBUILD)/menuselect
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \

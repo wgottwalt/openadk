@@ -4,33 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bitlbee
-PKG_VERSION:=		1.2.3
+PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libiconv openssl glib
-PKG_MD5SUM:=		2b1674d98804970809de3da3edf0bed2
+PKG_MD5SUM:=		26b9bfc5446bdf0e932e8074d117be67
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		net
-PKG_DEPENDS:=		glib libopenssl libiconv
+PKG_DEPENDS:=		glib libiconv libopenssl
+PKG_BUILDDEP+=		glib libiconv openssl
 PKG_URL:=		http://www.bitlbee.org
-PKG_SITES:=		http://get.bitlbee.org/src/ \
-			http://get.bitlbee.be/src/ \
-			http://get.us.bitlbee.org/src/ \
-			http://ftp.snt.utwente.nl/pub/software/bitlbee/src/
+PKG_SITES:=		http://get.bitlbee.org/src/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-configure:
-		(cd $(WRKBUILD); \
-			$(TARGET_CONFIGURE_OPTS) \
-			CFLAGS="$(TARGET_CFLAGS) -fPIC" \
-			CPPFLAGS="-I$(STAGING_DIR)/usr/include" \
-			LDFLAGS="-L$(STAGING_DIR)/usr/lib" \
-			STAGING_DIR="$(STAGING_DIR)" \
-			STRIP="$(STRIP)" \
-			./configure \
-			--target=${REAL_GNU_TARGET_NAME} \
+CONFIG_STYLE:=		minimal
+
+TCFLAGS+=		-fPIC
+CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
 			--prefix=/usr/ \
 			--bindir=/usr/sbin/ \
 			--etcdir=/etc/bitlbee/ \
@@ -39,19 +30,16 @@ do-configure:
 			--arch=Linux \
 			--cpu="${ARCH}" \
 			--debug=0 \
-			--strip=1 \
+			--strip=0 \
 			--ipv6=1 \
-			--ssl=openssl \
-		);
+			--ssl=openssl
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 INSTALL_TARGET=		install-etc install-bin
 
 post-configure:
 	@echo 'CFLAGS+="-I${STAGING_DIR}/usr/include/iconv"' >> \
 		${WRKBUILD}/Makefile.settings
-	@echo 'LFLAGS+="-L${STAGING_DIR}/usr/lib/iconv"' >> \
+	@echo 'LFLAGS+="-L${STAGING_DIR}/usr/lib"' >> \
 		${WRKBUILD}/Makefile.settings
 
 post-install:
