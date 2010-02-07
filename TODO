@@ -1,5 +1,4 @@
-- do a make bulk for all targets
-- implement update for MTD devices (foxboard,rb532,ag241)
+- implement update for MTD devices (rb532,ag241)
 - network scripts for wireless client and acess point
 - add tcsh and describe new package creation procedure in wiki
 - add toolchain only support for generic toolchains (mips/ppc/..)
