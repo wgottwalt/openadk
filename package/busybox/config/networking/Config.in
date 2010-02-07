@@ -94,6 +94,7 @@ config BUSYBOX_DNSD
 config BUSYBOX_ETHER_WAKE
 	bool "ether-wake"
 	default n
+	depends on !ADK_PACKAGE_ETHER_WAKE
 	help
 	  Send a magic packet to wake up sleeping machines.
 

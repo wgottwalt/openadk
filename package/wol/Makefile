@@ -15,12 +15,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	ac_cv_func_mmap_fixed_mapped=yes \
 			jm_cv_func_working_malloc=yes \
 			ac_cv_func_alloca_works=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WOL}/usr/bin

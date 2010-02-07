@@ -18,9 +18,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,EVILWM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+
 MAKE_FLAGS+=		XROOT="$(STAGING_DIR)/usr"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_EVILWM)/usr/bin

@@ -19,13 +19,16 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MINI_SENDMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 MAKE_FLAGS+=		OFLAGS="${TARGET_CFLAGS}"
 MAKE_FLAGS+=		CC="${TARGET_CC}"
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MINI_SENDMAIL}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/mini_sendmail ${IDIR_MINI_SENDMAIL}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/mini_sendmail \
+		${IDIR_MINI_SENDMAIL}/usr/sbin/
 	ln -sf mini_sendmail ${IDIR_MINI_SENDMAIL}/usr/sbin/sendmail
 
 include ${TOPDIR}/mk/pkg-bottom.mk

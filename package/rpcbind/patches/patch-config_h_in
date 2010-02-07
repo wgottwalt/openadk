@@ -1,0 +1,12 @@
+--- rpcbind-0.2.0.orig/config.h.in	2009-05-29 18:37:50.000000000 +0200
++++ rpcbind-0.2.0/config.h.in	2010-02-06 01:51:38.000000000 +0100
+@@ -96,6 +96,9 @@
+ /* Define to the one symbol short name of this package. */
+ #undef PACKAGE_TARNAME
+ 
++/* Define to the home page for this package. */
++#undef PACKAGE_URL
++
+ /* Define to the version of this package. */
+ #undef PACKAGE_VERSION
+ 

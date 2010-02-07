@@ -18,7 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WIRELESS_FIRMWARE_RT61,wireless-firmware-rt61,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-INSTALL_STYLE=		manual
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_WIRELESS_FIRMWARE_RT61}/lib/firmware

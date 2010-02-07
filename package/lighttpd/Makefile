@@ -67,7 +67,6 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_USERTRACK,usertrack))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
 TCPPFLAGS+=		-I$(STAGING_DIR)/usr/include/libxml2
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		PCRE_LIB="-lpcre"
 CONFIGURE_ARGS+=	\
 			--libdir=/usr/lib/lighttpd \
@@ -83,8 +82,6 @@ CONFIGURE_ARGS+=	\
 			--with-pcre \
 			--without-valgrind \
 			--with-webdav-props
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-openssl='${STAGING_DIR}/usr'
 else

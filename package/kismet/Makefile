@@ -18,6 +18,8 @@ $(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELE
 $(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+INSTALL_STYLE:=		manual
+
 ifeq ($(ADK_COMPILE_KISMET_WITH_UCLIBCXX),y)
 TCFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ -I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-luClibc++ -lc -lm -lgcc_s -nodefaultlibs 
@@ -26,12 +28,10 @@ CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
 else
 TLDFLAGS+=		-shared
 endif
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--sysconfdir=/etc/kismet \
 			--enable-syspcap=yes \
 			--disable-setuid \
 			--disable-gpsmap
-BUILD_STYLE=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_KISMET}/usr/bin/

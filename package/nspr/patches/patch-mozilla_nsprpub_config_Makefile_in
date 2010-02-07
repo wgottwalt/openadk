@@ -1,0 +1,11 @@
+--- nspr-4.8.2.orig/mozilla/nsprpub/config/Makefile.in	2009-03-03 23:04:23.000000000 +0100
++++ nspr-4.8.2/mozilla/nsprpub/config/Makefile.in	2010-02-06 02:01:27.321836181 +0100
+@@ -145,7 +145,7 @@ endif
+ 
+ $(OBJDIR)/%$(PROG_SUFFIX): $(OBJDIR)/%.$(OBJ_SUFFIX)
+ 	@$(MAKE_OBJDIR)
+-	$(CC) $(XCFLAGS) $< $(LDFLAGS) $(XLDOPTS) $(OUTOPTION)$@
++	$(CC_FOR_BUILD) $(XCFLAGS) $< $(LDFLAGS) $(XLDOPTS) $(OUTOPTION)$@
+ 
+ install:: nspr.m4
+ 	$(NSINSTALL) -D $(DESTDIR)$(datadir)/aclocal

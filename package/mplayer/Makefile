@@ -9,9 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
-PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses libogg libpng libpthread libvorbis
+PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
+PKG_DEPENDS+=		libogg libpng libpthread libvorbis
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
-PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib libX11 libXv libpng libXext
+PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
+PKG_BUILDDEP+=		libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -21,8 +23,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
 CONFIGURE_CPU_OPTS:=	\
@@ -44,7 +45,7 @@ CONFIGURE_CPU_OPTS:=	\
 			--disable-3dnow
 endif
 
-ifneq ($(ADK_DEBUG),)
+ifeq ($(ADK_DEBUG),y)
 	CONFIGURE_DEBUG=--enable-debug
 endif
 

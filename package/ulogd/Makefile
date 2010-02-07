@@ -53,9 +53,6 @@ SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_SQLITE}+=		ulogd-mod-sqlite-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_EXTRA}+=		ulogd-mod-extra-install
 
 TCFLAGS+=		-fPIC
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_PCAP},)
 CONFIGURE_ENV+=		ac_cv_header_pcap_h=yes
@@ -79,7 +76,8 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin ${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_DIR} ${IDIR_ULOGD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/ulogd.conf ${IDIR_ULOGD}/etc/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_BASE.so ${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_BASE.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ulogd ${IDIR_ULOGD}/usr/sbin/
 
 ulogd-mod-extra-install:

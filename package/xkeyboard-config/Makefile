@@ -16,13 +16,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XKEYBOARD_CONFIG,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
-	${CP} ${WRKINST}/usr/share/X11/xkb/* ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
+	${CP} ${WRKINST}/usr/share/X11/xkb/* \
+		${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
 	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.lst 
 	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.xml
 	rm -rf ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/symbols/sun_vndr

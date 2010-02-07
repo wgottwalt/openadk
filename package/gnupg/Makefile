@@ -18,9 +18,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GNUPG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-CONFIGURE_ENV+=		ac_cv_c_bigendian=no \
-			ac_cv_sizeof_off_t=8
 CONFIGURE_ARGS+=	--disable-asm \
 			--disable-gnupg-iconv \
 			--disable-card-support \
@@ -34,11 +31,13 @@ CONFIGURE_ARGS+=	--disable-asm \
 			--disable-dns-srv \
 			--enable-fake-curl \
 			--disable-regex
-BUILD_STYLE:=		auto
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_GNUPG}/usr/bin/
-	${INSTALL_BIN} ${WRKBUILD}/g10/gpg ${IDIR_GNUPG}/usr/bin/
+	${INSTALL_DIR} ${IDIR_GNUPG}/usr/share/gnupg
+	${INSTALL_DATA} ${WRKINST}/usr/share/gnupg/options.skel \
+		${IDIR_GNUPG}/usr/share/gnupg
+	${INSTALL_BIN} ${WRKINST}/usr/bin/gpg ${IDIR_GNUPG}/usr/bin/
 # we need root privileges for secure memory (locked pages)
 	chmod u+s ${IDIR_GNUPG}/usr/bin/gpg
 

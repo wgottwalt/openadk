@@ -11,14 +11,18 @@ PKG_DESCR:=		Utility to spin down scsi disks
 PKG_SECTION:=		misc
 
 NO_DISTFILES:=		1
-WRKDIST=		${WRKDIR}/scsi-spin
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SCSI_SPIN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
-	${TARGET_CC} ${TARGET_CFLAGS} -o ${WRKBUILD}/scsi-spin files/scsi-spin.c
+	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/scsi-spin \
+		${WRKBUILD}/scsi-spin.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SCSI_SPIN}/usr/sbin

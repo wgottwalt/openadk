@@ -23,10 +23,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-cxx
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTIFF}/usr/lib

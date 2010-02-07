@@ -22,6 +22,8 @@ $(eval $(call PKG_template,GRUB_BIN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 
 PKGDFLT_GRUB_BIN=	y
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:

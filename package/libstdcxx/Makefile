@@ -13,6 +13,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSTDCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/lib
 ifeq ($(ADK_NATIVE),y)

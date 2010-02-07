@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.2.30
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libxml2 cgilib freetype libart libpng
 PKG_MD5SUM:=		19b24f7184a8dbf7b48c1bbb565ad9fb
 PKG_DESCR:=		Round Robin Database (RRD) management library and tools
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libart libfreetype libpng zlib
+PKG_BUILDDEP+=		libxml2 cgilib freetype libart libpng
 PKG_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
 
 include ${TOPDIR}/mk/package.mk
@@ -19,7 +19,6 @@ $(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		rd_cv_ieee_works=yes
 CONFIGURE_ARGS+=	--enable-rrdcgi \
 			--disable-mmap \
@@ -30,8 +29,6 @@ CONFIGURE_ARGS+=	--enable-rrdcgi \
 			--without-x \
 			--with-rrd-default-font=/usr/share/rrdtool/fonts/DejaVuSansMono-Roman.ttf
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/freetype2
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RRDTOOL}/usr/bin

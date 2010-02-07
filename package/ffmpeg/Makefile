@@ -9,6 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		be8503f15c3b81ba00eb8379ca8dcf33
 PKG_DESCR:=		solution to record, convert and stream audio and video
 PKG_SECTION:=		sound
+PKG_DEPENDS:=		libfaad2
+PKG_BUILDDEP+=		faad2
 PKG_URL:=		http://www.ffmpeg.org
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 
@@ -18,37 +20,31 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FFMPEG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	manual
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		minimal
 
 include ${TOPDIR}/mk/cpu.mk
 
-do-configure:
-	cd ${WRKBUILD}; \
-		env ${CONFIGURE_ENV} \
-		${BASH} ${WRKSRC}/configure \
-		--prefix=/usr \
-		--arch=${CPU_ARCH} \
-		--enable-cross-compile \
-		--source-path=${WRKSRC} \
-		--cross-prefix=${TARGET_CROSS} \
-		--cc=$(TARGET_CC) \
-		--host-cc=$(HOSTCC) \
-		--disable-debug \
-		--disable-stripping \
-		--enable-small \
-		--enable-shared \
-		--enable-static \
-		--disable-ffmpeg \
-		--disable-ffplay \
-		--disable-ffserver \
-		--disable-vhook \
-		--enable-gpl \
-		--enable-swscale \
-		--enable-postproc \
-		--enable-libfaad \
-		${CONFIGURE_CPU_OPTS}
+CONFIGURE_ARGS:=	--prefix=/usr \
+			--arch=${CPU_ARCH} \
+			--enable-cross-compile \
+			--source-path=${WRKSRC} \
+			--cross-prefix=${TARGET_CROSS} \
+			--cc=$(TARGET_CC) \
+			--host-cc=$(HOSTCC) \
+			--disable-debug \
+			--disable-stripping \
+			--enable-small \
+			--enable-shared \
+			--enable-static \
+			--disable-ffmpeg \
+			--disable-ffplay \
+			--disable-ffserver \
+			--disable-vhook \
+			--enable-gpl \
+			--enable-swscale \
+			--enable-postproc \
+			--enable-libfaad \
+			${CONFIGURE_CPU_OPTS}
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FFMPEG}/usr/lib

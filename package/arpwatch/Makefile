@@ -6,11 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		arpwatch
 PKG_VERSION:=		2.1a15
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libpcap
 PKG_MD5SUM:=		cebfeb99c4a7c2a6cee2564770415fe7
-PKG_DESCR:=		Ethernet monitor program for keeping track of ethernet/ip address pairings
+PKG_DESCR:=		Ethernet monitor program
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap
+PKG_BUILDDEP+=		libpcap
 PKG_URL:=		http://www-nrg.ee.lbl.gov
 PKG_SITES:=		ftp://ftp.ee.lbl.gov/
 
@@ -18,8 +18,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ARPWATCH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
+INSTALL_STYLE:=		manual
+
 MAKE_FLAGS+=		ARPDIR=/etc/arpwatch \
 			CCOPT="$(TARGET_CFLAGS)" \
 			INCLS="-I. -I$(STAGING_DIR)/usr/include" \

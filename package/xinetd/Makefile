@@ -16,12 +16,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINETD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-libwrap \
 			--with-loadavg
-BUILD_STYLE:=		auto
 ALL_TARGET:=		build
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_XINETD}/etc/xinetd.d ${IDIR_XINETD}/usr/sbin

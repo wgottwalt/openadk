@@ -25,7 +25,6 @@ $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIB},libs))
 
 TLDFLAGS+=		-lintl
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-glib \
 			--disable-qt3 \
 			--disable-qt4 \
@@ -51,8 +50,6 @@ CONFIGURE_ARGS+=	--enable-glib \
 			--with-distro=none \
 			--with-avahi-user=avahi \
 			--with-avahi-group=avahi
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	# avahi daemon

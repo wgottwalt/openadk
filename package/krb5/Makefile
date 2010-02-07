@@ -26,7 +26,6 @@ $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE}
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
 			--with-system-ss \
@@ -37,8 +36,6 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_printf_positional=yes \
 			ac_cv_file__etc_environment=no \
 			ac_cv_file__etc_TIMEZONE=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)

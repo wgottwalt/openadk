@@ -14,59 +14,29 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 
 DISTFILES:=		db-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/db-${PKG_VERSION}
+WRKBUILD=		${WRKSRC}/build_unix
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBDB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-configure:
-	(cd ${WRKBUILD}/build_unix ; \
-		${TARGET_CONFIGURE_OPTS} \
-		CFLAGS="${TARGET_CFLAGS}" \
-		CPPFLAGS="-I${STAGING_DIR}/usr/include" \
-		LDFLAGS="-L${STAGING_DIR}/usr/lib" \
-		../dist/configure \
-		--target=${GNU_TARGET_NAME} \
-		--host=${GNU_TARGET_NAME} \
-		--build=${GNU_HOST_NAME} \
-		--program-prefix="" \
-		--program-suffix="" \
-		--prefix=/usr \
-		--exec-prefix=/usr \
-		--bindir=/usr/bin \
-		--datadir=/usr/share \
-		--includedir=/usr/include \
-		--infodir=/usr/share/info \
-		--libdir=/usr/lib \
-		--libexecdir=/usr/lib \
-		--localstatedir=/var \
-		--mandir=/usr/share/man \
-		--sbindir=/usr/sbin \
-		--sysconfdir=/etc \
-		--disable-nls \
-		--enable-shared \
-		--enable-static \
-		--enable-smallbuild \
-		--disable-debug_rop \
-		--disable-debug_wop \
-		--disable-diagnostic \
-		--disable-java \
-		--disable-cxx \
-		--disable-posixmutexes \
-		--disable-uimutexes \
-		--disable-tcl \
-		--disable-rpc \
-		--disable-compat185 \
-		--disable-statistics \
-		--disable-replication \
-		--disable-cryptography \
-		--disable-queue \
-		--with-mutex=UNIX/fcntl \
-		);
-
-do-install:
-	${MAKE} -C ${WRKBUILD}/build_unix \
-		DESTDIR="${WRKINST}" install
+CONFIGURE_PROG:=	dist/configure
+CONFIGURE_ARGS+=	--enable-smallbuild \
+			--disable-debug_rop \
+			--disable-debug_wop \
+			--disable-diagnostic \
+			--disable-java \
+			--disable-cxx \
+			--disable-posixmutexes \
+			--disable-uimutexes \
+			--disable-tcl \
+			--disable-rpc \
+			--disable-compat185 \
+			--disable-statistics \
+			--disable-replication \
+			--disable-cryptography \
+			--disable-queue \
+			--with-mutex=UNIX/fcntl
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBDB}/usr/lib

@@ -9,26 +9,25 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9e715104234cc9bf01e2afaad27eb787
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		net
+PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.maradns.org
 PKG_SITES:=		http://www.maradns.org/download/1.4/${PKG_VERSION}/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MARADNS,maradns,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MARADNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-MAKE_FLAGS+=		CFLAGS="${TCFLAGS}" \
-			FLAGS="${TCFLAGS}" \
-			CC="${TARGET_CC}" \
-			HOSTCC="${HOSTCC}"
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
+
 FAKE_FLAGS+=		PREFIX="${WRKINST}/usr" \
 			RPM_BUILD_ROOT="${WRKINST}"
 
 pre-install:
-	mkdir -p ${WRKINST}/usr/{bin,sbin}
-	mkdir -p ${WRKINST}/usr/man/man{1,5,8}
+	@mkdir -p ${WRKINST}/usr/man/man{1,5,8}
+
+do-configure:
+	(cd ${WRKBUILD} && ./configure);
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MARADNS}/etc/maradns

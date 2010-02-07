@@ -1,0 +1,32 @@
+--- maradns-1.4.03.orig/build/Makefile.linux	2006-11-24 12:44:29.000000000 +0100
++++ maradns-1.4.03/build/Makefile.linux	2010-02-06 00:23:58.393084387 +0100
+@@ -23,23 +23,23 @@ EXECS=server/maradns
+ # LDFLAGS=-L/usr/ucblib -lucb -lxnet
+ # end the Solaris section
+ # Non-Solaris version of "M"
+-V="VERSION=$(VERSION)"
++VER="VERSION=$(VERSION)"
+ Q="DEFINES=-DSELECT_PROBLEM"
+ 
+ # Debug
+ 
+-FLAGS = -O2 -Wall -DSELECT_PROBLEM
+-M="CC=$(CC) $(FLAGS)"
+-D="CC=$(CC) $(FLAGS) -DDEBUG -DTHREADS"
++CFLAGS ?= -O2 -Wall -DSELECT_PROBLEM
++M="CC=$(CC) $(CFLAGS)"
++D="CC=$(CC) $(CFLAGS) -DDEBUG -DTHREADS"
+ #FLAGS = -g
+ 
+ all: 
+ 	cd libs ; make $(M) ; cd ../dns ; make $(M) ; \
+ 	cd ../rng ; make $(M) ; cd ../parse ; make $(M) ; \
+ 	cd ../qual ; make $(M) ; cd ../server ; \
+-	make $(M) $(V) COMPILED=\"$(COMPILED)\" ; \
++	make $(M) $(VER) COMPILED=\"$(COMPILED)\" ; \
+ 	cd ../tools ; make $(M) ; \
+-	cd ../tcp ; make $(M) $(V) ; cat ../00README.FIRST
++	cd ../tcp ; make $(M) $(VER)
+ 
+ debug: 
+ 	cd libs ; make $(D) DEBUG="-DDEBUG -DTHREADS" ; \

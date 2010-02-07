@@ -11,7 +11,6 @@ PKG_SECTION:=		base
 
 PKG_TARGET_DEPENDS:=	rb532
 
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
@@ -20,6 +19,7 @@ $(eval $(call PKG_template,NAND,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 PKGDFLT_NAND=		y
 
+CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 

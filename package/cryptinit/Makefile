@@ -15,15 +15,13 @@ NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
+CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-pre-configure:
-	mkdir -p ${WRKBUILD}
-
 do-build:
 	${TARGET_CC} ${TCPPFLAGS} ${TCFLAGS} -c -o ${WRKBUILD}/cryptinit.o \
-		./src/cryptinit.c
+		${WRKBUILD}/cryptinit.c
 	( cd ${WRKBUILD}; \
 	${TARGET_CC} -static -o cryptinit cryptinit.o \
 		 ${STAGING_DIR}/usr/lib/libcryptsetup.a \

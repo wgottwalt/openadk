@@ -58,7 +58,7 @@ post-patch:
 ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
 	[ ! -d ./patches ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
 	    '{patch-!(*.orig),*.patch}' $(MAKE_TRACE)
-	[ ! -d ./extra ] || (cd extra; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
+	[ ! -d ./src ] || (cd src; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
 		$(MAKE_TRACE)
 	@${MAKE} post-patch $(MAKE_TRACE)
 	touch $@

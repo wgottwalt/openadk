@@ -21,9 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,NSPR,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}"
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_NSPR)/usr/lib

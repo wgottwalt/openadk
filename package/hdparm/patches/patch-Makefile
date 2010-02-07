@@ -1,0 +1,19 @@
+--- hdparm-9.15.orig/Makefile	2008-12-10 01:14:28.000000000 +0100
++++ hdparm-9.15/Makefile	2010-02-05 22:40:21.943083430 +0100
+@@ -13,7 +13,7 @@ oldmandir = $(manprefix)/man
+ CC ?= gcc
+ STRIP ?= strip
+ 
+-CFLAGS := -O2 -W -Wall -Wbad-function-cast -Wcast-align -Wpointer-arith -Wcast-qual -Wshadow -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -fkeep-inline-functions -Wwrite-strings -Waggregate-return -Wnested-externs -Wtrigraphs $(CFLAGS)
++CFLAGS ?= -O2 -W -Wall -Wbad-function-cast -Wcast-align -Wpointer-arith -Wcast-qual -Wshadow -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -fkeep-inline-functions -Wwrite-strings -Waggregate-return -Wnested-externs -Wtrigraphs $(CFLAGS)
+ 
+ #LDFLAGS = -s -static
+ LDFLAGS = -s
+@@ -28,7 +28,6 @@ all: hdparm
+ 
+ hdparm: hdparm.h sgio.h $(OBJS)
+ 	$(CC) $(LDFLAGS) -o hdparm $(OBJS)
+-	$(STRIP) hdparm
+ 
+ hdparm.o:	hdparm.h sgio.h
+ 

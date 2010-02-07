@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		net
+PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
 PKG_BUILDDEP+=		openssl ncurses e2fsprogs
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
@@ -73,11 +74,8 @@ endif
 
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/et -pthread
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS}
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
@@ -96,6 +94,8 @@ pre-configure:
 		${STAGING_TOOLS}/bin
 	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
 		${STAGING_TOOLS}/bin
+	${MAKE} -C ${WRKBUILD}/lib/asn1 clean
+	${MAKE} -C ${WRKBUILD}/lib/roken clean
 	${MAKE} -C ${WRKBUILD} clean
 
 post-install:

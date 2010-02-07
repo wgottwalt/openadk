@@ -154,12 +154,9 @@ $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX_PP,umax_pp))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX,umax))
 
 CONFIGURE_ENV+=		ac_cv_func_ioperm=no
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-translations \
 			--without-gphoto2 \
 			--enable-libusb
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SANE_BACKENDS}/etc/sane.d 

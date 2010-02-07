@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		scanlogd
 PKG_VERSION:=		2.2.6
 PKG_RELEASE:=		8
-PKG_BUILDDEP+=		libpcap libnids libnet
 PKG_MD5SUM:=		7b8187ea718ebe47f22805b921b909ab
 PKG_DESCR:=		Portscan logger
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap libnet libnids
+PKG_BUILDDEP+=		libpcap libnids libnet
 PKG_URL:=		http://www.openwall.com/scanlogd
 PKG_SITES:=		http://www.openwall.com/scanlogd/ \
 			ftp://ftp.wiretapped.net/pub/openwall/ \
@@ -20,8 +20,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SCANLOGD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-MAKE_FLAGS+=		CC="${TARGET_CC}" LD="${TARGET_CC}" CFLAGS="-c ${TARGET_CFLAGS}" \
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
+MAKE_FLAGS+=		CC="${TARGET_CC}" LD="${TARGET_CC}" \
+			CFLAGS="-c ${TARGET_CFLAGS}" \
 			LDFLAGS= \
 			PCAP_H="-I${STAGING_DIR}/usr/include" \
 			NIDS_H="-I${STAGING_DIR}/usr/include" \

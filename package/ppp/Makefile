@@ -25,11 +25,7 @@ $(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		UNAME_S="Linux"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
 			HAVE_INET6="1" \
@@ -70,10 +66,10 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	$(INSTALL_BIN) ./files/ppp.pre-up \
 		${IDIR_PPP}/etc/network/if-pre-up.d/ppp
 
-
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
-	${CP} ${WRKBUILD}/pppd/plugins/radius/etc/* ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
+	${CP} ${WRKBUILD}/pppd/plugins/radius/etc/* \
+		${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
 	rm ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient/radiusclient.conf.in
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/radius.so \

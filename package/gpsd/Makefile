@@ -21,7 +21,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
 			ac_cv_func_strlcpy=no \
@@ -30,8 +29,6 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 # --disable-python breaks configure script
 CONFIGURE_ARGS+=	--without-x \
 			--disable-dbus
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \

@@ -17,10 +17,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WDFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_WDFS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/wdfs ${IDIR_WDFS}/usr/bin

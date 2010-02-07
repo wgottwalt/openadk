@@ -21,9 +21,6 @@ $(eval $(call PKG_template,NTFS_3G,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIGURE_ARGS+=	--disable-ldconfig \
 			--disable-library
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NTFS_3G}/bin

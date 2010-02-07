@@ -21,11 +21,8 @@ $(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 PKGDFLT_CFGFS=		y
 
-BUILD_STYLE:=		auto
-
-do-configure:
-	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CFGFS}/sbin

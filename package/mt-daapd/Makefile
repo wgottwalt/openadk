@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mt-daapd
-PKG_VERSION:=		0.2.4
-PKG_RELEASE:=		10
-PKG_MD5SUM:=		2e1cdbe6b94ef153e915806f80a28dca
-PKG_DESCR:=		a multi-threaded DAAP (Digital Audio Access Protocol) daemon
+PKG_VERSION:=		0.2.4.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8117141e8a88bfab54fe98b6bbd5cb3a
+PKG_DESCR:=		a multi-threaded DAAP daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libgdbm libid3tag libpthread
 PKG_BUILDDEP+=		gdbm libid3tag
@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MT_DAAPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--enable-mdns \
@@ -27,14 +26,15 @@ CONFIGURE_ARGS+=	--enable-mdns \
 			--with-gdbm-includes="${STAGING_DIR}/usr/include" \
 			--with-gdbm-libs="${STAGING_DIR}/usr/lib" \
 			--without-static-libs
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc ${IDIR_MT_DAAPD}/usr/{share,sbin}
-	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.conf ${IDIR_MT_DAAPD}/etc/
-	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.playlist ${IDIR_MT_DAAPD}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.conf \
+		${IDIR_MT_DAAPD}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.playlist \
+		${IDIR_MT_DAAPD}/etc/
 	${CP} ${WRKINST}/usr/share/mt-daapd ${IDIR_MT_DAAPD}/usr/share/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/mt-daapd ${IDIR_MT_DAAPD}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mt-daapd \
+		${IDIR_MT_DAAPD}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

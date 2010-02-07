@@ -26,13 +26,10 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_LIBSDL_IMAGE_DEV}+=	libsdl-image-dev-install
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
 			--enable-bmp \
 			--enable-tif
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib

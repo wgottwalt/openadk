@@ -18,6 +18,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTHREAD_DB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib
 	${CP} ${STAGING_DIR}/lib/libthread_db*.so* ${IDIR_LIBTHREAD_DB}/lib

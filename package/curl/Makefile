@@ -32,7 +32,11 @@ $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LIB},${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
 
-CONFIGURE_STYLE:=	gnu
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_CURL}+=		curl-install
+SUB_INSTALLS-${ADK_PACKAGE_LIBCURL_DEV}+=	libcurl-dev-install
+
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
 			--enable-cookies \
@@ -54,14 +58,18 @@ CONFIGURE_ARGS+=	--disable-thread \
 			--without-ca-bundle \
 			--without-gnutls \
 			--without-libidn
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
-post-install:
-	${INSTALL_DIR} ${IDIR_CURL}/usr/bin ${IDIR_LIBCURL}/usr/lib
-	${CP} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
+
+curl-install:
+	${INSTALL_DIR} ${IDIR_CURL}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
+
+libcurl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
-	${CP} ${WRKINST}/usr/include/curl/*.h ${IDIR_LIBCURL_DEV}/usr/include/curl/
+	${CP} ${WRKINST}/usr/include/curl/*.h \
+		${IDIR_LIBCURL_DEV}/usr/include/curl/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

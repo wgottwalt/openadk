@@ -17,9 +17,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 TCFLAGS+=		-DSBINDIR=\\\"/usr/sbin\\\"
 FAKE_FLAGS+=		INSTALL="install"
 

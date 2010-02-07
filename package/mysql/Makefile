@@ -20,7 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			OPTIMIZE_CXXFLAGS="${TARGET_CFLAGS}" \
 			ac_cv_lib_nsl_gethostbyname_r=no \

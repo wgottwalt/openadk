@@ -6,29 +6,23 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
-ifeq ($(ADK_PACKAGE_LIBOPENSSL),y)
-PKG_BUILDDEP+=		openssl
-endif
-ifeq ($(ADK_PACKAGE_OPENVPN_LZO),y)
-PKG_BUILDDEP+=		liblzo
-endif
 PKG_MD5SUM:=		452a83326ae198cf961e9ae02539c8fb
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net
 PKG_DEPENDS:=		kmod-tun
+ifeq ($(ADK_COMPILE_OPENVPN_WITH_OPENSSL),y)
+PKG_DEPENDS+=		libopenssl
+PKG_BUILDDEP+=		openssl
+endif
+ifneq ($(ADK_COMPILE_OPENVPN_WITH_LZO),y)
+PKG_DEPENDS+=		liblzo
+PKG_BUILDDEP+=		liblzo
+endif
 PKG_URL:=		http://openvpn.net
 PKG_SITES:=		http://openvpn.net/release/ \
 			${MASTER_SITE_SOURCEFORGE:=openvpn/}
 
 include $(TOPDIR)/mk/package.mk
-
-ifeq ($(ADK_COMPILE_OPENVPN_WITH_OPENSSL),y)
-PKG_DEPENDS+=		libopenssl
-endif
-
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_LZO),y)
-PKG_DEPENDS+=		liblzo
-endif
 
 $(eval $(call PKG_template,OPENVPN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENVPN_EASY_RSA,openvpn-easy-rsa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -44,7 +38,6 @@ endif
 ifneq ($(ADK_COMPILE_OPENVPN_WITH_SERVER),y)
 DISABLE_SERVER:=--disable-server
 endif
-
 ifneq ($(ADK_COMPILE_OPENVPN_WITH_HTTP),y)
 DISABLE_HTTP:=--disable-http
 endif
@@ -55,7 +48,6 @@ ifeq ($(ADK_COMPILE_OPENVPN_WITH_SMALL),y)
 ENABLE_SMALL:=--enable-small
 endif
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-pthread \
 			--disable-plugins \
 			--disable-management \
@@ -70,8 +62,6 @@ CONFIGURE_ARGS+=	--disable-pthread \
 			$(DISABLE_HTTP) \
 			$(ENABLE_PASSWORD_SAVE) \
 			$(ENABLE_SMALL)
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	# main package
@@ -79,12 +69,15 @@ post-install:
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
 	$(CP) ./files/openvpn.conf $(IDIR_OPENVPN)/etc/openvpn/
 	# subpackage easy-rsa
-	${INSTALL_DIR} $(IDIR_OPENVPN_EASY_RSA)/usr/sbin $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys
+	${INSTALL_DIR} $(IDIR_OPENVPN_EASY_RSA)/usr/sbin \
+		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys
 	touch $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys/index.txt
 	$(CP) ./files/serial $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys
 	$(CP) $(WRKBUILD)/easy-rsa/2.0/{build-*,clean-all,inherit-inter,list-crl,pkitool,revoke-full,sign-req,whichopensslcnf} \
 		$(IDIR_OPENVPN_EASY_RSA)/usr/sbin
-	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/openssl.cnf $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/openssl.cnf
-	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/vars $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/vars
+	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/openssl.cnf \
+		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/openssl.cnf
+	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/vars \
+		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/vars
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -9,8 +9,14 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		913a672cbd6da516de15965d594e20b9
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
-PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile libfontenc xkeyboard-config xkbcomp libxau libxaw libxmu libxpm libxrender libxt libxxf86dga libxext libxdmcp libxv libsm libice libx11
-PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto scrnsaverproto resourceproto fontsproto videoproto compositeproto evieext libxkbfile libXfont pixman libpciaccess openssl xf86dgaproto
+PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile \
+			libfontenc xkeyboard-config xkbcomp libxau libxaw \
+			libxmu libxpm libxrender libxt libxxf86dga libxext \
+			libxdmcp libxv libsm libice libx11
+PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
+			scrnsaverproto resourceproto fontsproto videoproto \
+			compositeproto evieext libxkbfile libXfont pixman \
+			libpciaccess openssl xf86dgaproto
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		${MASTER_SITE_XORG}
 
@@ -20,7 +26,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		V=1
 CONFIGURE_ARGS+=	\
 			--with-fontdir=/usr/share/fonts/X11 \
@@ -49,12 +54,13 @@ CONFIGURE_ARGS+=	\
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
 			--with-vendor-web="http://openadk.org"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/{extensions,fonts,linux,multimedia}
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts	
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/
 	${CP} ${WRKINST}/usr/bin/* $(IDIR_XORG_SERVER)/usr/bin

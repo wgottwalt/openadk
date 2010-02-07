@@ -17,13 +17,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CHILLISPOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_CHILLISPOT}/usr/sbin ${IDIR_CHILLISPOT}/etc
-	${INSTALL_BIN} ./files/chilli.conf \
+	${INSTALL_DATA} ./files/chilli.conf \
 		${IDIR_CHILLISPOT}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/chilli ${IDIR_CHILLISPOT}/usr/sbin/
 

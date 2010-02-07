@@ -22,12 +22,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFREETYPE}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libfreetype.so.* ${IDIR_LIBFREETYPE}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libfreetype.so* ${IDIR_LIBFREETYPE}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

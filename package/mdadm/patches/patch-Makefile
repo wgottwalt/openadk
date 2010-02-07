@@ -1,5 +1,14 @@
---- mdadm-3.0.orig/Makefile	2009-06-02 07:48:29.000000000 +0200
-+++ mdadm-3.0/Makefile	2010-01-16 09:36:14.000000000 +0100
+--- mdadm-3.1.1.orig/Makefile	2009-11-16 23:55:41.000000000 +0100
++++ mdadm-3.1.1/Makefile	2010-02-06 01:09:39.963074463 +0100
+@@ -42,7 +42,7 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
+ 
+ CC = $(CROSS_COMPILE)gcc
+ CXFLAGS = -ggdb
+-CWFLAGS = -Wall -Werror -Wstrict-prototypes
++CWFLAGS = -Wall -Wstrict-prototypes
+ ifdef WARN_UNUSED
+ CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O
+ endif
 @@ -58,7 +58,8 @@ CONFFILE = $(SYSCONFDIR)/mdadm.conf
  CONFFILE2 = $(SYSCONFDIR)/mdadm/mdadm.conf
  MAILCMD =/usr/sbin/sendmail -t
@@ -17,8 +26,8 @@
 -	$(INSTALL) -D $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
 -	$(INSTALL) -D $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
 +	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
-+	$(INSTALL) $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
-+	$(INSTALL) $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
++	$(INSTALL) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
  
  install-static : mdadm.static install-man
 -	$(INSTALL) -D $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
