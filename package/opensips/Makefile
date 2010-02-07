@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		opensips
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		87c6fe40c143775d6a1be1beb75c3eb2
 PKG_DESCR:=		a high-performance, configurable, free SIP server
 PKG_SECTION:=		net
+PKG_BUILDDEP+=		openssl
 PKG_MULTI:=		1
 PKG_VARIANT:=		tls
 PKG_URL:=		http://opensips.org
@@ -85,6 +85,10 @@ OPENSIPS_MODULES:=	sl tm rr maxfwd usrloc registrar db_text textops exec mi_fifo
 OPENSIPS_MODULE_FILES:=	$(foreach module,$(OPENSIPS_MODULES),modules/$(module)/$(module).so)
 OPENSIPS_MODULES:=	$(patsubst %,modules/%,$(OPENSIPS_MODULES))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
 	$(MAKE) -C $(WRKBUILD) \
 		prefix=/ \
@@ -105,7 +109,8 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_OPENSIPS)/usr/lib/opensips/modules
 	$(CP) $(WRKBUILD)/$(PKG_NAME) $(IDIR_OPENSIPS)/usr/sbin/
 	(cd $(WRKBUILD);\
-		$(CP) $(OPENSIPS_MODULE_FILES) $(IDIR_OPENSIPS)/usr/lib/opensips/modules/; \
+		$(CP) $(OPENSIPS_MODULE_FILES) \
+		$(IDIR_OPENSIPS)/usr/lib/opensips/modules/; \
 	)
 	$(CP) ./files/opensips.cfg $(IDIR_OPENSIPS)/etc/opensips/
 

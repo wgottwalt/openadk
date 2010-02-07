@@ -1,0 +1,18 @@
+--- 6tunnel-0.11rc2.orig/Makefile.in	2002-11-24 02:18:47.000000000 +0100
++++ 6tunnel-0.11rc2/Makefile.in	2010-02-05 14:21:39.992115665 +0100
+@@ -10,14 +10,13 @@ INSTALL = @INSTALL@
+ STRIP = @STRIP@
+ VERSION = @VERSION@
+ 
+-default:	6tunnel
++all:	6tunnel
+ 
+ 6tunnel:	6tunnel.c
+ 
+ .PHONY:	install
+ 
+ install:
+-	$(STRIP) 6tunnel
+ 	$(INSTALL) -d $(bindir)
+ 	$(INSTALL) 6tunnel $(bindir)
+ 

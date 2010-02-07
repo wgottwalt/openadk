@@ -15,10 +15,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_ETHTOOL}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ethtool ${IDIR_ETHTOOL}/usr/sbin

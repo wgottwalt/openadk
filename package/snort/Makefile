@@ -19,7 +19,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-flexresp \
 			--with-libnet-includes="${STAGING_DIR}/usr/include" \
 			--with-libnet-libraries="${STAGING_DIR}/usr/lib" \
@@ -30,8 +29,6 @@ CONFIGURE_ARGS+=	--disable-flexresp \
 			--without-mysql \
 			--without-postgresql \
 			--disable-inline
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin
@@ -39,11 +36,16 @@ post-install:
 	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT}/etc/snort/
 	${INSTALL_DATA} ${WRKBUILD}/etc/classification.config \
 		${IDIR_SNORT}/etc/snort/
-	${INSTALL_DATA} ${WRKBUILD}/etc/gen-msg.map ${IDIR_SNORT}/etc/snort/
-	${INSTALL_DATA} ${WRKBUILD}/etc/reference.config ${IDIR_SNORT}/etc/snort/
-	${INSTALL_DATA} ${WRKBUILD}/etc/sid-msg.map ${IDIR_SNORT}/etc/snort/
-	${INSTALL_DATA} ${WRKBUILD}/etc/threshold.conf ${IDIR_SNORT}/etc/snort/
-	${INSTALL_DATA} ${WRKBUILD}/etc/unicode.map ${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/gen-msg.map \
+		${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/reference.config \
+		${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/sid-msg.map \
+		${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/threshold.conf \
+		${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/unicode.map \
+		${IDIR_SNORT}/etc/snort/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/snort ${IDIR_SNORT}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

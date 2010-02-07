@@ -20,13 +20,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,VALGRIND,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_file__proc_self_fd=yes \
 			ac_cv_file__proc_self_exe=yes \
 			ac_cv_file__proc_self_maps=yes
 CONFIGURE_ARGS+=	--disable-tls
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_VALGRIND)/usr/bin

@@ -18,6 +18,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=	manual
+BUILD_STYLE:=	manual
+INSTALL_STYLE:=	manual
+
 ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${TOPDIR}/.busyboxcfg

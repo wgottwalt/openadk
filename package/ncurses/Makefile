@@ -17,7 +17,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBNCURSES_DEV}+=	libncurses-dev-install
+
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
@@ -39,8 +42,6 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--without-rcs-ids \
 			--enable-const \
 			--enable-echo
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
@@ -58,7 +59,7 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/progs
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	# this is installed as libncurses - make libcurses a "link"
 	rm -f ${WRKINST}/usr/lib/libcurses.so*
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so
@@ -74,6 +75,8 @@ post-install:
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
 	done
+
+libncurses-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBNCURSES_DEV}/usr/include
 

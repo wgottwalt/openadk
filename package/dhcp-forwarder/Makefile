@@ -19,14 +19,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DHCP_FORWARDER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-dietlibc
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 XAKE_FLAGS+=		cfg_filename="/etc/dhcp-fwd.conf"
 
 post-install:
-	${INSTALL_DIR} ${IDIR_DHCP_FORWARDER}/usr/sbin ${IDIR_DHCP_FORWARDER}/etc
+	${INSTALL_DIR} ${IDIR_DHCP_FORWARDER}/usr/sbin \
+		${IDIR_DHCP_FORWARDER}/etc
 	${INSTALL_DATA} ${WRKBUILD}/contrib/dhcp-fwd.conf \
 		${IDIR_DHCP_FORWARDER}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcp-fwd \

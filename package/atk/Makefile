@@ -21,10 +21,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ATK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_ATK}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libatk-*.so* ${IDIR_ATK}/usr/lib

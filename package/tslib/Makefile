@@ -19,7 +19,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TSLIB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autogen gnu
+AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-corgi \
 			--disable-collie \
@@ -27,8 +27,6 @@ CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-mk712 \
 			--disable-linear-h2200 \
 			--disable-arctic2
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_TSLIB)/etc

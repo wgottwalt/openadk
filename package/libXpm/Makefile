@@ -15,10 +15,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXPM,libxpm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_search_gettext=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXPM}/usr/lib

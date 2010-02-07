@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.7.3
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		8f4fda3969237c2a33bdb1583b5d06b2
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/ \
 			ftp://fr.rpmfind.net/pub/libxml/
@@ -19,7 +19,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBXML2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--without-c14n \
 			--without-catalog \
 			--without-debug \
@@ -48,11 +47,8 @@ CONFIGURE_ARGS+=	--without-c14n \
 			--with-xptr \
 			--with-zlib
 
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXML2}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libxml2.so.* ${IDIR_LIBXML2}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libxml2.so* ${IDIR_LIBXML2}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

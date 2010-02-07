@@ -16,12 +16,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NETSTAT_NAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_NETSTAT_NAT}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/netstat-nat ${IDIR_NETSTAT_NAT}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/netstat-nat \
+		${IDIR_NETSTAT_NAT}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

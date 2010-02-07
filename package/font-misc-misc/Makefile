@@ -17,10 +17,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FONT_MISC_MISC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	$(INSTALL_DIR) $(IDIR_FONT_MISC_MISC)/usr/share/fonts/X11/misc
 	$(CP) ${WRKINST}/usr/share/fonts/X11/misc/* \

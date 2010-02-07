@@ -18,8 +18,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SETPWC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 do-build:
-	${TARGET_CC} ${TARGET_CFLAGS} -DVERSION=\"${PKG_VERSION}\" -o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c
+	${TARGET_CC} -Wall ${TCFLAGS} -DVERSION=\"${PKG_VERSION}\" \
+		-o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SETPWC}/usr/bin

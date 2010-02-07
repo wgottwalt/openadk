@@ -18,18 +18,17 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BOGOFILTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autotool gnu
+AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ENV+=		LIBS="-liconv"
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \
 			--with-included-gsl \
 			--with-libdb-prefix=${STAGING_DIR}/usr \
 			--disable-transactions
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_BOGOFILTER}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/${PKG_NAME} ${IDIR_BOGOFILTER}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/bogofilter \
+		 ${IDIR_BOGOFILTER}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

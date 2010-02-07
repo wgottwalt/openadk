@@ -15,11 +15,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WCCPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WCCPD}/usr/sbin

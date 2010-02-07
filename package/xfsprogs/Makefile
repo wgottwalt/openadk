@@ -19,12 +19,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autoconf gnu
+AUTOTOOL_STYLE:=	autoconf
 CONFIGURE_ARGS+=	--enable-gettext=no \
 			--with-gnu-ld
 CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" "
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 ALL_TARGET=		
 
 post-install:

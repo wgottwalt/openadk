@@ -34,7 +34,6 @@ $(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELE
 $(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
 $(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		quagga_cv_ipforward_method="proc"
 CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--sysconfdir=/etc/quagga \
@@ -43,8 +42,6 @@ CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--enable-group=quagga \
 			--disable-pie \
 			--enable-multipath=8
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}

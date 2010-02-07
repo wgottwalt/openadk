@@ -1,7 +1,7 @@
 diff -urN maradns-1.0.26.old/rng/Makefile maradns-1.0.26.dev/rng/Makefile
---- maradns-1.0.26.old/rng/Makefile	2003-08-02 21:39:36.000000000 +0200
-+++ maradns-1.0.26.dev/rng/Makefile	2005-04-30 23:29:30.000000000 +0200
-@@ -20,7 +20,7 @@
+--- maradns-1.4.03.orig/rng/Makefile	2006-01-02 17:59:33.000000000 +0100
++++ maradns-1.4.03/rng/Makefile	2010-02-06 00:19:48.241836878 +0100
+@@ -25,7 +25,7 @@ rng-api-fst.o: rng-alg-fst.o rng-api-fst
  	$(CC) -c $(FLAGS) -o rng-api-fst.o rng-api-fst.c
  
  make_32bit_tables: make_32bit_tables.c

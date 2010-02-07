@@ -19,13 +19,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GRUB,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-grub-emu \
 			--disable-efiemu \
 			--disable-grub-mkfont \
 			--disable-grub-fstest
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} $(IDIR_GRUB)/usr/{sbin,lib,bin} 

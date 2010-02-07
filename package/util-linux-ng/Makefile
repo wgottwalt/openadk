@@ -27,14 +27,11 @@ $(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SWAP},${PKG_DESCR_SWAP},${PKG_SECTION}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LOOP},${PKG_DESCR_LOOP},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
 			--disable-libblkid \
 			--disable-libuuid
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 MAKE_FLAGS+=		OPT="${TCFLAGS}" ARCH="${ARCH}"
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TCFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK

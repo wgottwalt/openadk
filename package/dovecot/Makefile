@@ -4,19 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dovecot
-PKG_VERSION:=		1.1.14
+PKG_VERSION:=		1.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		60b1deccc0ae77e5669060d2b1894e5e
+PKG_MD5SUM:=		b7d0081b17ff6afae85e8dc14157fa57
 PKG_DESCR:=		A minimal and secure imap server
 PKG_SECTION:=		net
 PKG_URL:=		http://www.dovecot.org
-PKG_SITES:=		http://www.dovecot.org/releases/1.1/
+PKG_SITES:=		http://www.dovecot.org/releases/1.2/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOVECOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ignore_signed_size=1 \
 			have_rquota=no \
 			signed_size_t=no \
@@ -40,12 +39,10 @@ CONFIGURE_ARGS+=	--with-notify=none \
 			--with-ioloop=epoll \
 			--with-ssl \
                 	--with-moduledir=/usr/lib/dovecot/modules
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DOVECOT}/etc
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/sbin/dovecot
+	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot
 	${INSTALL_DATA} ./files/dovecot.conf ${IDIR_DOVECOT}/etc
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot/modules/{imap,lda,pop3}
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/*.so \
@@ -56,7 +53,9 @@ post-install:
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/lda/
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/pop3/*.so \
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/pop3/
-	$(CP) ${WRKINST}/usr/sbin/dovecot/* \
-	    ${IDIR_DOVECOT}/usr/sbin/dovecot/
+	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot/* \
+		${IDIR_DOVECOT}/usr/lib/dovecot/
+	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot \
+		${IDIR_DOVECOT}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

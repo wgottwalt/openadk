@@ -428,6 +428,7 @@ config ADK_LINUX_X86_QEMU
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_CRC32
 	select ADK_TARGET_WITH_VGA
 	help
 	 Qemu support for x86 architecture.

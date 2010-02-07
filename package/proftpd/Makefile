@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4918908fcae9e591ba84c66edff73410
 PKG_DESCR:=		An advanced and very configurable FTP server
 PKG_SECTION:=		utils
+PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 
@@ -16,12 +17,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PROFTPD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-cap
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes \
 			ac_cv_func_setgrent_void=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/etc

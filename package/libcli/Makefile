@@ -16,11 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBCLI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBCLI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcli.so.* ${IDIR_LIBCLI}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libcli.so* ${IDIR_LIBCLI}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

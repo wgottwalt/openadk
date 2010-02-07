@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		deco
 PKG_VERSION:=		39
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		f77f60e8be0cae1f814cba1ef61bf4d0
 PKG_DESCR:=		Text-based, full featured file manager
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP+=		ncurses
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=deco/}
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tgz
@@ -20,8 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DECO,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_DECO}/usr/bin ${IDIR_DECO}/usr/lib/deco

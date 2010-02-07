@@ -6,10 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libvorbis
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libogg
 PKG_MD5SUM:=		478646358c49f34aedcce58948793619
 PKG_DESCR:=		The Vorbis General Audio Compression Codec library
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		libogg
 PKG_URL:=		http://www.xiph.org/vorbis/
 PKG_SITES:=		http://downloads.xiph.org/releases/vorbis/
 
@@ -18,13 +18,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBVORBIS,libvorbis,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		LIBS="-lm -logg"
 CONFIGURE_ARGS+=	--with-ogg="${STAGING_DIR}/usr" \
 			--with-ogg-includes="${STAGING_DIR}/usr/include" \
 			--with-ogg-libraries="${STAGING_DIR}/usr/lib"
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBVORBIS}/usr/lib

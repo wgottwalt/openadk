@@ -6,21 +6,17 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		iperf
 PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
-PKG_CXX:=		IPERF
 PKG_MD5SUM:=		8c5bc14cc2ea55f18f22afe3c23e3dcb
 PKG_DESCR:=		Internet Protocol bandwidth measuring tool
 PKG_SECTION:=		net
+PKG_CXX:=		IPERF
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+$(eval $(call PKG_template,IPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++

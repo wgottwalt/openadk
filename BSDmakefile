@@ -12,7 +12,7 @@ GMAKE_ENV+=	ADKVERSION=${ADKVERSION:Q}
 .if defined(package) && !empty(package)
 subdir:=	package/${package}
 .  if !make(clean)
-_subdir_dep:=	${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 .  endif
 .endif
 

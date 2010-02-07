@@ -1,0 +1,12 @@
+--- rdate.orig/GNUmakefile	2007-08-16 12:45:06.000000000 +0200
++++ rdate/GNUmakefile	2010-02-06 02:36:00.723431141 +0100
+@@ -15,8 +15,7 @@ CPPFLAGS+=	-D'__RCSID(x)=static const ch
+ all: rdate
+ 
+ install:
+-	install -c -s -m 555 rdate ${DESTDIR}${BINDIR}/
+-	install -c -m 444 rdate.8 ${DESTDIR}${MANDIR}/man8/
++	install -c -m 755 rdate ${DESTDIR}${BINDIR}/
+ 
+ clean:
+ 	-rm -f rdate *.o

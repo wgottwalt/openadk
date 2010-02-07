@@ -12,42 +12,55 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
+PKG_DEPENDS+=		alsa-lib
 PKG_BUILDDEP+=		alsa-lib
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
+PKG_DEPENDS+=		libid3tag libmad
 PKG_BUILDDEP+=		libid3tag libmad
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP4),)
+PKG_DEPENDS+=		libfaad2
 PKG_BUILDDEP+=		faad2
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_OGG),)
+PKG_DEPENDS+=		libvorbis libogg
 PKG_BUILDDEP+=		libvorbis
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_TREMOR),)
+PKG_DEPENDS+=		libvorbisidec
 PKG_BUILDDEP+=		libvorbisidec
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_FLAC),)
+PKG_DEPENDS+=		libflac
 PKG_BUILDDEP+=		flac
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
+PKG_DEPENDS+=		libaudiofile
 PKG_BUILDDEP+=		libaudiofile
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
+PKG_DEPENDS+=		libshout liblame libvorbis
 PKG_BUILDDEP+=		lame libvorbis libshout
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
+PKG_DEPENDS+=		libcurl
 PKG_BUILDDEP+=		curl
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MMS),)
+PKG_DEPENDS+=		libmms
 PKG_BUILDDEP+=		libmms
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),)
+PKG_DEPENDS+=		ffmpeg
 PKG_BUILDDEP+=		ffmpeg
 endif
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
 
-PKG_FLAVOURS:=		WITH_ALSA WITH_MP3 WITH_MP4 WITH_TREMOR WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG WITH_SHOUT WITH_CURL
+PKG_FLAVOURS:=		WITH_ALSA WITH_MP3 WITH_MP4 WITH_TREMOR \
+			WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG \
+			WITH_SHOUT WITH_CURL
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFD_WITH_MP3:=	enable MP3 support
 PKGFD_WITH_MP4:=	enable MP4 support
@@ -62,60 +75,28 @@ PKGFD_WITH_CURL:=	enable CURL support
 
 include ${TOPDIR}/mk/package.mk
 
-ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
-PKG_DEPENDS+=		alsa-lib
-endif
-
-ifneq (${ADK_PACKAGE_MPD_WITH_MP3},)
-PKG_DEPENDS+=		libid3tag libmad
-endif
-
-ifneq (${ADK_PACKAGE_MPD_WITH_MP4},)
-PKG_DEPENDS+=		libfaad2
-endif
-
-ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
-PKG_DEPENDS+=		libvorbis libogg
-endif
-
-ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)
-PKG_DEPENDS+=		libvorbisidec
-endif
-
-ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
-PKG_DEPENDS+=		libflac
-endif
-
 ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)
-PKG_DEPENDS+=		libaudiofile
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
-PKG_DEPENDS+=		libshout liblame libvorbisenc
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_CURL},)
-PKG_DEPENDS+=		libcurl
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_MMS},)
-PKG_DEPENDS+=		libmms
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_FFMPEG},)
-PKG_DEPENDS+=		ffmpeg
 endif
 
 $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu autotool
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
+AUTOTOOL_STYLE:=	autotool
 
-CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
-CONFIGURE_ARGS+=	\
-			--disable-httpd-output \
+TCFLAGS+=		-std=gnu99
+XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
+CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-ao \
 			--disable-jack \
 			--disable-fifo \

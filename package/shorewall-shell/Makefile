@@ -18,18 +18,26 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SHOREWALL_SHELL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-install:
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
+do-build:
 	PREFIX="${WRKINST}" ${WRKBUILD}/install.sh -n
 
 ifeq ($(ADK_PACKAGE_SHOREWALL_STRIPSHARED),y)
 	${BASH} ./files/downstrip ${WRKINST}/usr/share/${PKG_NAME}
 endif
 
-post-install:
+do-install:
 	${INSTALL_DIR} ${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}
-	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/version ${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
-	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/lib.* ${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
-	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/prog.* ${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
-	${INSTALL_BIN} ${WRKINST}/usr/share/${PKG_NAME}/compiler ${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
+	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/version \
+		${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
+	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/lib.* \
+		${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
+	${INSTALL_DATA} ${WRKINST}/usr/share/${PKG_NAME}/prog.* \
+		${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
+	${INSTALL_BIN} ${WRKINST}/usr/share/${PKG_NAME}/compiler \
+		${IDIR_SHOREWALL_SHELL}/usr/share/${PKG_NAME}/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

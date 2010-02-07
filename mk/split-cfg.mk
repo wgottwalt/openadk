@@ -2,7 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 # must work with both BSD and GNU make
 
-${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG: \
+${TOPDIR}/.ADK_HAVE_DOT_CONFIG: \
 	${TOPDIR}/.config ${TOPDIR}/mk/split-cfg.mk \
 	${TOPDIR}/scripts/split-cfg.sh
 	mksh ${TOPDIR}/scripts/split-cfg.sh '${TOPDIR}' '${ADK_TARGET}' '${ADK_LIBC}'
+	touch ${TOPDIR}/.ADK_HAVE_DOT_CONFIG

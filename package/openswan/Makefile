@@ -27,15 +27,14 @@ $(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 #XAKE_FLAGS+=		USE_KLIPS=true USE_NETKEY=false
 #endif
 
+CONFIG_STYLE:=		manual
+
 XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
 			IPSECDIR="/usr/lib/ipsec" \
 			INC_USRLOCAL="/usr" \
 			MODPROBE="insmod" \
 			OSDEP="linux" \
 			BUILDENV="linux"
-
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ALL_TARGET:=		programs
 
 post-install:
@@ -43,7 +42,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d 
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/sbin
-	${CP} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
+	${INSTALL_DATA} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
 	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d
 	${CP} ${WRKINST}/usr/lib/ipsec/* ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${CP} ${WRKINST}/usr/libexec/ipsec/* ${IDIR_OPENSWAN}/usr/libexec/ipsec

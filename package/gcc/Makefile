@@ -18,7 +18,6 @@ $(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''
-CONFIGURE_STYLE:=	gnu
 ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
 CONFIGURE_ARGS+=	--with-abi=64
 endif
@@ -37,8 +36,6 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--disable-libgomp \
 			--disable-multilib \
 			--disable-libstdcxx-pch
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin

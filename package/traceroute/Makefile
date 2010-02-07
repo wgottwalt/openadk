@@ -16,12 +16,12 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TRACEROUTE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			AR="${TARGET_CROSS}ar" \
 			RANLIB="${TARGET_CROSS}ranlib" \
 			LDFLAGS="-L${WRKSRC}/libsupp"
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_TRACEROUTE)/usr/bin

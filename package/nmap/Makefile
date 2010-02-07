@@ -27,7 +27,6 @@ CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostd
 			-I${STAGING_DIR}/usr/include/uClibc++" \
 			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
@@ -35,8 +34,6 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-libdnet="${STAGING_DIR}/usr" \
 			--with-libpcap="${STAGING_DIR}/usr" \
 			--with-libpcre="${STAGING_DIR}/usr"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap

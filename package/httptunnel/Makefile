@@ -16,10 +16,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HTTPTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_HTTPTUNNEL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/hts ${IDIR_HTTPTUNNEL}/usr/bin/

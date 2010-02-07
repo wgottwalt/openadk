@@ -30,6 +30,10 @@ GLIBC_CONFOPTS:=          \
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install

@@ -13,8 +13,8 @@ PKG_DEPENDS:=		libaxtls
 PKG_URL:=		http://axtls.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
 
-PKG_DESCR_1:=		small tls library
-PKG_SECTION_1:=		libs
+PKG_DESCR_LIB:=		small tls library
+PKG_SECTION_LIB:=		libs
 
 DISTFILES:=		axTLS-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/axTLS
@@ -22,9 +22,11 @@ WRKDIST=		${WRKDIR}/axTLS
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AXHTTPD,axhttpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 
-BUILD_STYLE=		auto
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 XAKE_FLAGS+=		STRIP='' \
 			CC='${TARGET_CC}' \
 			OPT_CFLAGS='${TARGET_CFLAGS} -fPIC' \
@@ -37,7 +39,7 @@ do-configure:
 do-install:
 	# axtls library
 	${INSTALL_DIR} ${IDIR_LIBAXTLS}/usr/lib
-	$(CP) $(WRKBUILD)/_stage/libaxtls.so.* $(IDIR_LIBAXTLS)/usr/lib/
+	$(CP) $(WRKBUILD)/_stage/libaxtls.so* $(IDIR_LIBAXTLS)/usr/lib/
 	# awhttpd server
 	${INSTALL_DIR} ${IDIR_AXHTTPD}/www
 	${INSTALL_DIR} ${IDIR_AXHTTPD}/usr/sbin

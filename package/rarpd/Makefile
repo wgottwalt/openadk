@@ -17,12 +17,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \
 			--with-pcap="${STAGING_DIR}/usr"
 TCFLAGS+=		-DNEW_LIBNET_INTERFACE
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RARPD}/usr/sbin

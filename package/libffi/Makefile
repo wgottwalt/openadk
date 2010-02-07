@@ -14,14 +14,10 @@ PKG_SITES:=		ftp://sourceware.org/pub/libffi/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+$(eval $(call PKG_template,LIBFFI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFFI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libffi.so.* ${IDIR_LIBFFI}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libffi.so* ${IDIR_LIBFFI}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

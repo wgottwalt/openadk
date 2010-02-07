@@ -17,7 +17,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FUSE_UTILS,fuse-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-lib \
 			--disable-shared \
 			--enable-static \
@@ -26,8 +25,6 @@ CONFIGURE_ARGS+=	--enable-lib \
 			--disable-auto-modprobe \
 			--disable-mtab \
 			--disable-kernel-module
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FUSE_UTILS}/usr/bin

@@ -17,11 +17,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,STRACE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_STRACE}/usr/sbin/
-	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_STRACE}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/strace ${IDIR_STRACE}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -6,20 +6,17 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		raddump
 PKG_VERSION:=		0.3.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		openssl libpcap
 PKG_MD5SUM:=		f8c29c67141ea78bb6ae8b97d5149480
 PKG_DESCR:=		interprets captured RADIUS packets
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap libopenssl
+PKG_BUILDDEP+=		openssl libpcap
 PKG_URL:=		http://sourceforge.net/projects/raddump
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RADDUMP}/usr/bin

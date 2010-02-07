@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libexpat
 PKG_BUILDDEP+=		expat
 PKG_URL:=		http://dbus.freedesktop.org
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -21,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DBUS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--without-x \
@@ -32,8 +32,6 @@ CONFIGURE_ARGS+=	--disable-tests \
 			--disable-xml-docs \
 			--disable-doxygen-docs
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 pre-install:
 	${INSTALL_DIR} $(STAGING_DIR)/usr/include/dbus-1.0/dbus
@@ -41,7 +39,8 @@ pre-install:
 		$(STAGING_DIR)/usr/include/dbus-1.0/dbus/
 
 post-install:
-	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib ${IDIR_DBUS}/usr/bin
+	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib \
+		${IDIR_DBUS}/usr/bin
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc/
 	${CP} ${WRKINST}/usr/lib/libdbus-1.so.* ${IDIR_DBUS}/usr/lib/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin/

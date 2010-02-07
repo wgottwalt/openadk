@@ -25,15 +25,13 @@ CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
 			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \
 			--with-proxygroup=proxy
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_DANSGUARDIAN}/usr/sbin ${IDIR_DANSGUARDIAN}/etc/dansguardian \
+	${INSTALL_DIR} ${IDIR_DANSGUARDIAN}/usr/sbin \
+		${IDIR_DANSGUARDIAN}/etc/dansguardian \
 		${IDIR_DANSGUARDIAN}/usr/share/dansguardian/languages/ukenglish
 	${CP} ${WRKINST}/usr/share/dansguardian/languages/ukenglish/* \
 		${IDIR_DANSGUARDIAN}/usr/share/dansguardian/languages/ukenglish
@@ -41,6 +39,7 @@ post-install:
 		${IDIR_DANSGUARDIAN}/usr/share/dansguardian
 	${CP} ${WRKINST}/etc/dansguardian/* \
 		${IDIR_DANSGUARDIAN}/etc/dansguardian
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dansguardian ${IDIR_DANSGUARDIAN}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/dansguardian \
+		${IDIR_DANSGUARDIAN}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

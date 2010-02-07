@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=		-std=c99
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-xen \
 			--without-uml \
 			--without-esx \
@@ -31,8 +30,6 @@ CONFIGURE_ARGS+=	--without-xen \
 			--without-vbox \
 			--disable-silent-rules \
 			--without-sasl
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib ${IDIR_LIBVIRT}/usr/bin

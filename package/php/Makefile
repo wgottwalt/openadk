@@ -182,11 +182,11 @@ $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
 $(eval $(call PKG_mod_template,PHP_MOD_SQLITE,pdo))
 $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 
+INSTALL_STYLE:=		manual
+
 TLDFLAGS+=		-L$(STAGING_DIR)/usr/lib/mysql
 CONFIGURE_ENV+=		LIBS="-ldl"
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
-BUILD_STYLE:=		auto
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/etc
@@ -196,6 +196,7 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc/
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/sbin
-	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi $(IDIR_PHP_FASTCGI)/usr/sbin/php
+	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
+		$(IDIR_PHP_FASTCGI)/usr/sbin/php
 
 include ${TOPDIR}/mk/pkg-bottom.mk

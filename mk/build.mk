@@ -21,8 +21,8 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_COMPILE_HEIMDAL=n \
 			ADK_PACKAGE_HEIMDAL_PKINIT=n \
 			ADK_PACKAGE_HEIMDAL_SERVER=n \
-			ADK_PACKAGE_HEIMDAL_LIBS=n \
-			ADK_PACKAGE_HEIMDAL_CLIENT_LIBS=n \
+			ADK_PACKAGE_LIBHEIMDAL=n \
+			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
 			BUSYBOX_SELINUX=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
@@ -58,37 +58,11 @@ noconfig_targets:=	menuconfig \
 			defconfig \
 			tags
 
-MAKECLEANDIR_SYMBOLS=	ADK_DEBUG
-
-MAKECLEAN_SYMBOLS=	ADK_TARGET_PACKAGE_IPKG \
-			ADK_TARGET_PACKAGE_RPM \
-			ADK_TARGET_PACKAGE_TGZ
-
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
-	if [ -d .cfg ];then \
-	what=cleantarget; \
-	for symbol in ${MAKECLEANDIR_SYMBOLS}; do \
-		newval=$$(grep -e "^$$symbol=" -e "^\# $$symbol " .config); \
-		oldval=$$(cat .cfg/"$$symbol" 2>&-); \
-		[[ $$newval = $$oldval ]] && continue; \
-		echo; \
-		echo >&2 "WARNING: Toolchain related options have changed, 'make" \
-		    "$$what' might be required!"; \
-		break; \
-	done; \
-	what=clean; \
-	for symbol in ${MAKECLEAN_SYMBOLS}; do \
-		newval=$$(grep -e "^$$symbol=" -e "^\# $$symbol " .config); \
-		oldval=$$(cat .cfg/"$$symbol" 2>&-); \
-		[[ $$newval = $$oldval ]] && continue; \
-		echo; \
-		echo >&2 "WARNING: Package backend related options have changed, 'make" \
-		    "$$what' might be required!"; \
-		break; \
-	done; \
-	if [ -f .busyboxcfg ];then rm .busyboxcfg;fi; \
-	fi; \
+		if [ -f .busyboxcfg ];then \
+			rm .busyboxcfg; \
+		fi; \
 	fi
 
 # Pull in the user's configuration file
@@ -108,7 +82,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
-world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG
+world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
@@ -148,10 +122,10 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
-target/%: ${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}/ADK_HAVE_DOT_CONFIG
+target/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
 toolchain/%: ${STAGING_DIR}
@@ -164,10 +138,8 @@ switch:
 	echo "Saving configuration for target: ${ADK_TARGET}"
 	cp -p .config .config.${ADK_TARGET}
 	if [ -f .config.old ];then cp -p .config.old .config.old.${ADK_TARGET};fi
-	mv .cfg .cfg.${ADK_TARGET}
 	if [ -f .config.${TARGET} ];then cp -p .config.${TARGET} .config; \
 	cp -p .config.old.${TARGET} .config.old; \
-	mv .cfg.${TARGET} .cfg; \
 	echo "Setting configuration to target: ${TARGET}"; \
 	else echo "No old target config found";mv .config .config.bak; make TARGET=${TARGET};fi
 
@@ -251,7 +223,7 @@ distclean:
 		$(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk \
-	    .busyboxcfg
+	    .busyboxcfg .ADK_HAVE_DOT_CONFIG
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -427,7 +399,7 @@ distclean:
 	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d 
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
+	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 

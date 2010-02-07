@@ -19,9 +19,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SHOREWALL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-install:
-	PREFIX="${WRKINST}" ${WRKBUILD}/install.sh -n
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
+do-build:
+	PREFIX="${WRKINST}" ${WRKBUILD}/install.sh -n
 	# remove configfiles folder
 	${RM} -R ${WRKINST}/usr/share/shorewall/configfiles
 
@@ -35,22 +38,34 @@ ifeq ($(ADK_PACKAGE_SHOREWALL_STRIPSHARED),y)
 	gzip -9 ${WRKINST}/usr/share/shorewall/*.template
 endif
 
-post-install:
+do-install:
 	${INSTALL_DIR} ${IDIR_SHOREWALL}/etc/shorewall
 	${INSTALL_DIR} ${IDIR_SHOREWALL}/usr/share/shorewall
 	${INSTALL_DIR} ${IDIR_SHOREWALL}/sbin
-	${INSTALL_DATA} ${WRKINST}/etc/shorewall/* ${IDIR_SHOREWALL}/etc/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/actions.std ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/configpath ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/modules ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/rfc1918 ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/version ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/action.* ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/macro.* ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/lib.* ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/firewall ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/functions ${IDIR_SHOREWALL}/usr/share/shorewall/
-	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/wait4ifup ${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/etc/shorewall/* \
+		${IDIR_SHOREWALL}/etc/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/actions.std \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/configpath \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/modules \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/rfc1918 \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/version \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/action.* \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/macro.* \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_DATA} ${WRKINST}/usr/share/shorewall/lib.* \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/firewall \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/functions \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
+	${INSTALL_BIN} ${WRKINST}/usr/share/shorewall/wait4ifup \
+		${IDIR_SHOREWALL}/usr/share/shorewall/
 	${INSTALL_BIN} ${WRKINST}/sbin/shorewall ${IDIR_SHOREWALL}/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

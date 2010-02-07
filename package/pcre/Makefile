@@ -16,10 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-cpp
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} CFLAGS='${TCFLAGS}'
 
 post-install:

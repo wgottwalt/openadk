@@ -16,10 +16,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTASN1,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTASN1}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libtasn1.so* ${IDIR_LIBTASN1}/usr/lib

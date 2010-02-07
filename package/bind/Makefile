@@ -33,16 +33,11 @@ $(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE}
 $(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
 $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_7},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=         BUILD_CC="${TARGET_CC}" \
-			ac_cv_lib_nsl_inet_ntoa=no
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--disable-threads \
 			--with-openssl=${STAGING_DIR}/usr/ \
 			--enable-epoll \
 			--with-libtool
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/lib/dns \

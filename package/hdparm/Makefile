@@ -14,10 +14,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=hdparm/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HDPARM,hdparm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,HDPARM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-MAKE_ENV+=		STRIP=${TARGET_CROSS}strip
-BUILD_STYLE=		auto
+CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_HDPARM}/usr/sbin

@@ -20,12 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADVD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-configfile=/etc/radvd.conf \
 			--with-logfile=/var/log/radvd.log \
 			--with-pidfile=/var/run/radvd.pid
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RADVD}/etc ${IDIR_RADVD}/usr/sbin

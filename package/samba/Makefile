@@ -4,14 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.4.3
+PKG_VERSION:=		3.4.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		322379680c12057f57685652a35a6b05
+PKG_MD5SUM:=		8e8a484782f2b7716b6c6bd9a7d2bf71
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net
 PKG_URL:=		http://www.samba.org
-PKG_SITES:=		ftp://se.samba.org/pub/samba/stable/ \
-			ftp://ftp.easynet.be/samba/stable/
+PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
 WRKSRC=			${WRKDIST}/source3
 
@@ -22,7 +21,6 @@ $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba
-
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \
@@ -43,10 +41,6 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 			--with-ldap=no \
 			--without-cluster-support \
 			--without-sendfile-support
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SAMBA}/etc/samba ${IDIR_SAMBA}/usr/sbin

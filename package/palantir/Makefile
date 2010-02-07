@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		palantir
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		jpeg
 PKG_MD5SUM:=		3a5b1fb340857f6d8e357bf39b77583e
 PKG_DESCR:=		A multichannel interactive streaming solution
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libjpeg libpthread
+PKG_BUILDDEP+=		jpeg
 PKG_URL:=		http://www.fastpath.it/products/palantir
 PKG_SITES:=		http://www.fastpath.it/products/palantir/pub/
 
@@ -19,6 +19,10 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PALANTIR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
 
 do-build:
 	mkdir -p ${WRKINST}/usr

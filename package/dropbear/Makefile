@@ -7,22 +7,23 @@ PKG_NAME:=		dropbear
 PKG_VERSION:=		0.52
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1c69ec674481d7745452f68f2ea5597e
-PKG_DESCR:=		SSH 2 server/client designed for small memory environments
+PKG_DESCR:=		SSH 2 server/client designed for embedded systems 
 PKG_SECTION:=		net
 PKG_URL:=		http://matt.ucc.asn.au/dropbear
-PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/ \
-			http://www.mirrors.wiretapped.net/security/cryptography/apps/ssh/dropbear/
+PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 
-PKG_DESCR_1:=		Utility for converting SSH keys
+PKG_DESCR_UTIL:=	Utility for converting SSH keys
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_UTIL},${PKG_SECTION}))
 
 PKGDFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
 
-CONFIGURE_STYLE=	gnu
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--disable-pam \
 			--enable-openpty \
 			--enable-syslog \

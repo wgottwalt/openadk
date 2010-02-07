@@ -20,10 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENCDK,libopencdk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-libgcrypt-prefix='${STAGING_DIR}/usr'
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENCDK}/usr/lib

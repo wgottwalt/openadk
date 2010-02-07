@@ -30,12 +30,10 @@ $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_SS},${PKG_SECTION_SS}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
 
-CONFIGURE_STYLE:=	gnu
+XAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-tls \
 			--enable-dynamic-e2fsck
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 INSTALL_TARGET+=	install-libs
 
 pre-build:

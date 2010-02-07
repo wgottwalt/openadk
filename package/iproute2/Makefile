@@ -42,10 +42,7 @@ TCFLAGS+=		-D_GNU_SOURCE
 XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \
 			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 INSTALL_y:=
 INSTALL_m:=
@@ -72,7 +69,8 @@ install-tc:
 
 install-tc-atm:
 	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
-	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so ${IDIR_TC_ATM}/usr/lib/tc/
+	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/usr/lib/tc/
 
 install-ifstat:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin
