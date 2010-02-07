@@ -76,5 +76,8 @@ esac
 
 sync
 mount -o bind /etc /tmp/.cfgfs/root
+if [ "$system" == "RB532" ];then
+	umount -f /boot
+fi
 
 echo "Update sucessful. You should reboot now."
