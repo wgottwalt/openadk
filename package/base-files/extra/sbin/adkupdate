@@ -12,6 +12,8 @@ else
 	updatecmd="gunzip -c | tar -xf -"
 fi
 
+system=$(awk '/system type/ { print $5 }' /proc/cpuinfo 2>/dev/null)
+
 check_exit() {
 	if [ $? -ne 0 ];then
 		echo "Update failed."
@@ -23,6 +25,9 @@ prepare() {
 	cd /
 	umount -f /etc
 	mount -o remount,rw /
+	if [ "$system" == "RB532" ];then
+		mount -t yaffs2 /dev/mtdblock0 /boot
+	fi
 }
 
 extract_from_file() {
