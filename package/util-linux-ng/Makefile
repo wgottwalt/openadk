@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux-ng
-PKG_VERSION:=		2.16.1
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		fc57e5fd5be9e569b026b5077fafe84f
+PKG_VERSION:=		2.17
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b4c0f196de2f583a4ed91d6f53ba2d88
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		admin
 PKG_BUILDDEP+=		e2fsprogs ncurses
 PKG_URL:=		http://userweb.kernel.org/~kzak/util-linux-ng
-PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v2.16/}
+PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v${PKG_VERSION}/}
 
 PKG_DESCR_FDISK:=	Partition table manipulation utility
 PKG_DESCR_SFDISK:=	Scriptable Partition table manipulation utility
