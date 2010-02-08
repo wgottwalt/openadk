@@ -56,7 +56,6 @@ $(TARGET_DIR):
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
-#%-install: %-compile
 %-install:
 	@$(START_TRACE) "package/$(patsubst %-install,%,$@)-install: "
 	@$(MAKE) -C $(patsubst %-install,%,$@) install

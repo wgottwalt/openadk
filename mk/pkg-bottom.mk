@@ -136,6 +136,9 @@ ifneq ($(filter manual,${INSTALL_STYLE}),)
 else ifeq ($(strip ${INSTALL_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='${WRKINST}' ${FAKE_FLAGS} ${INSTALL_TARGET} $(MAKE_TRACE)
+ifeq (,$(filter libonly,${PKG_OPTS}))
+	env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
+endif
 else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
@@ -144,9 +147,6 @@ endif
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
-ifeq (,$(filter libonly,${PKG_OPTS}))
-	@env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
-endif
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
@@ -156,7 +156,7 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 	fi
 endif
 	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
-	@cd ${WRKINST}; \
+	@-cd ${WRKINST}; \
 	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
@@ -164,7 +164,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
-	    cpio -apdlmu '${STAGING_DIR}'
+	    cpio -padlmuv '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
