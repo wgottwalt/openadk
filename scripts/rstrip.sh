@@ -58,3 +58,4 @@ find $TARGETS -type f -a -exec file {} \; | \
 	echo "-> $T $F"
 	eval "$T $F"
 done
+exit 0

@@ -220,7 +220,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	@cd $${IDIR_$(1)}; \
+	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
@@ -233,7 +233,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    cpio -apdlmu '$${STAGING_DIR}'
+	    cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
