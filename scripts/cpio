@@ -2,4 +2,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-/bin/cpio --quiet "$@"
+if [ -x /usr/bin/cpio ];then
+	/usr/bin/cpio --quiet "$@"
+else
+	/bin/cpio --quiet "$@"
+fi
