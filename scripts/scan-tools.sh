@@ -47,12 +47,7 @@ CYG*)
 	echo 'See http://www.cygwin.com/1.7/cygwin-ug-net/using-specialnames.html'
 	;;
 NetBSD)
-	echo "Building OpenADK on $os is currently unsupported."
-	echo "Sorry."
-	echo
-	echo There are unresolved issues relating to ncurses not
-	echo being included in NetBSD®, and these provided by pkgsrc®
-	echo lack important header files.
+	# supported with no extra quirks at the moment
 	;;
 OpenBSD)
 	# supported with no extra quirks at the moment
@@ -191,13 +186,12 @@ if [[ $X != *@(Native compiler works)* ]]; then
 	out=1
 fi
 
-[[ -s /usr/include/ncurses.h ]] || if [[ -s /usr/pkg/include/ncurses.h ]]; then
-	echo 'HOSTCFLAGS+= -isystem /usr/pkg/include' >>$topdir/prereq.mk
-	echo 'HOSTLDFLAGS+=-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' >>$topdir/prereq.mk
-else
-	echo Install ncurses header files, please.
-	echo
-	out=1
+if [[ ! -s /usr/include/ncurses.h ]]; then
+	if [[ ! -s /usr/include/curses.h ]]; then
+		echo Install ncurses header files, please.
+		echo
+		out=1
+	fi
 fi
 
 if ! which gawk >/dev/null 2>&1; then
