@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # create/install compressed tar balls
-set -x
+#set -x
 
 if [ "$1" = "build" ];then
 	if [ ! -d $2 ];then
