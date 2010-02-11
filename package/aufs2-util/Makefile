@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		aufs2 utilities
 PKG_SECTION:=		admin
 PKG_URL:=		http://aufs.sf.net/
-PKG_HOST_DEPENDS:=	!cygwin !freebsd !openbsd
+PKG_HOST_DEPENDS:=	!cygwin !freebsd !openbsd !netbsd
 
 NO_DISTFILES:=		1
 
