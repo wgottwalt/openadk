@@ -97,6 +97,7 @@ config ADK_KPACKAGE_KMOD_NFSD
 	select ADK_KERNEL_NFSD_V3
 	select ADK_KPACKAGE_KMOD_SUNRPC
 	select ADK_KPACKAGE_KMOD_LOCKD
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  If you want your Linux box to act as an NFS *server*, so that other
 	  computers on your local network which support NFS can access certain
@@ -120,6 +121,7 @@ config ADK_KPACKAGE_KMOD_NFSD
 config ADK_KERNEL_NFSD_V4
 	prompt "Enable NFSv4 and RPC Kerberos"
 	boolean
+	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	depends on ADK_KPACKAGE_KMOD_NFSD
 	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
 	select ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
@@ -134,6 +136,7 @@ config ADK_KPACKAGE_KMOD_LOCKD
 
 config ADK_KPACKAGE_KMOD_SUNRPC
 	tristate
+	depends on !ADK_KERNEL_SUNRPC
 	default n
 
 config ADK_KPACKAGE_KMOD_SUNRPC_GSS
