@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a0952d589b3051538033387be4c983f9
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl libbind
-PKG_BUILDDEP+=		openssl
+PKG_DEPENDS:=		libopenssl libbind libxml2
+PKG_BUILDDEP+=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 
@@ -36,6 +36,7 @@ $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--disable-threads \
 			--with-openssl=${STAGING_DIR}/usr/ \
+			--with-libxml2=${STAGING_DIR}/usr/ \
 			--enable-epoll \
 			--with-libtool
 

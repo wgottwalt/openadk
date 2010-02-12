@@ -1,54 +1,59 @@
-diff -Nur cbtt80-20060211-src/Makefile cbtt80-20060211-src.patched/Makefile
 --- cbtt80-20060211-src.orig/Makefile	2006-02-07 18:44:58.000000000 +0100
-+++ cbtt80-20060211-src/Makefile	2009-05-09 16:11:42.000000000 +0200
-@@ -1,10 +1,9 @@
++++ cbtt80-20060211-src/Makefile	2010-02-11 20:13:13.000000000 +0100
+@@ -1,10 +1,8 @@
 -SHELL = /bin/sh
 -SYSTEM = $(shell uname)
 -C++ = g++
-+SHELL ?= /bin/bash
++SHELL ?= /bin/sh
 +SYSTEM = Linux
  DFLAGS =
 -OFLAGS = -O2 -w
-+#OFLAGS = -O2 -w
  LFLAGS = -L. -lz
 -CFLAGS =
-+CFLAGS ?= 
- 
- ifeq ($(SYSTEM),Linux) 
- DFLAGS += -D__LINUX__ 
-@@ -30,6 +29,7 @@ CFLAGS =
++CFLAGS ?=
+
+ ifeq ($(SYSTEM),Linux)
+ DFLAGS += -D__LINUX__
+@@ -29,30 +27,31 @@ LFLAGS = -lresolv -lsocket -lnsl -lpthre
+ CFLAGS =
  endif
- 
- CFLAGS += $(OFLAGS) $(DFLAGS) -I.
+
+-CFLAGS += $(OFLAGS) $(DFLAGS) -I.
 +LDFLAGS += $(LFLAGS)
- 
++CFLAGS += $(LDFLAGS) -I.
+
  OBJS = atom.o base64.o bencode.o client.o config.o link.o md5.o server.o sha1.o sort.o tracker_admin.o tracker_comments.o tracker_file.o tracker_index.o tracker_info.o tracker_login.o tracker_signup.o tracker_stats.o tracker_torrent.o tracker_upload.o tracker_users.o util.o
  OBJS_BNBT = bnbt.o tracker.o tracker_announce.o tracker_scrape.o
-@@ -40,19 +40,19 @@ PROGS = ./bnbt ./bnbtmysql
- all: $(OBJS) $(OBJS_BNBT) $(OBJS_BNBTMYSQL) $(PROGS)
- 
+ OBJS_BNBTMYSQL = bnbt.mysql.o bnbt_mysql.mysql.o tracker.mysql.o tracker_announce.mysql.o tracker_scrape.mysql.o
+
+-PROGS = ./bnbt ./bnbtmysql
++PROGS = ./bnbt
+
+-all: $(OBJS) $(OBJS_BNBT) $(OBJS_BNBTMYSQL) $(PROGS)
++all: $(OBJS) $(OBJS_BNBT) $(PROGS)
+
  ./bnbt: $(OBJS) $(OBJS_BNBT)
 -	$(C++) -o ./bnbt $(OBJS) $(OBJS_BNBT) $(LFLAGS)
 +	$(CXX) -o ./bnbt $(OBJS) $(OBJS_BNBT) $(LDFLAGS)
- 
+
  ./bnbtmysql: $(OBJS) $(OBJS_BNBTMYSQL)
 -	$(C++) -o ./bnbtmysql $(OBJS) $(OBJS_BNBTMYSQL) $(LFLAGS) -L/usr/lib/mysql -lmysqlclient
-+	$(CXX) -o ./bnbtmysql $(OBJS) $(OBJS_BNBTMYSQL) $(LDFLAGS)
- 
++	$(CXX) -o ./bnbtmysql $(OBJS) $(OBJS_BNBTMYSQL) $(LDFLAGS) -L/usr/lib/mysql -lmysqlclient
+
  clean:
- 	rm -f $(OBJS) $(OBJS_BNBT) $(OBJS_BNBTMYSQL) $(PROGS)
- 
+	rm -f $(OBJS) $(OBJS_BNBT) $(OBJS_BNBTMYSQL) $(PROGS)
+
  %.o: %.cpp
 -	$(C++) -o $@ $(CFLAGS) -c $<
-+	$(CXX) -o $@ $(CPPFLAGS) $(CFLAGS) -c $<
- 
++	$(CXX) -o $@ $(CFLAGS) -c $<
+
  %.mysql.o: %.cpp
 -	$(C++) -o $@ $(CFLAGS) -DBNBT_MYSQL -c $<
-+	$(CXX) -o $@ $(CPPFLAGS) $(CFLAGS) -DBNBT_MYSQL -c $<
- 
++	$(CXX) -o $@ $(CFLAGS) -DBNBT_MYSQL -c $<
+
  ./bnbt: $(OBJS) $(OBJS_BNBT)
- 
-@@ -91,4 +91,4 @@ bnbt.mysql.o: bnbt.h bnbt_mysql.h config
+
+@@ -91,4 +90,4 @@ bnbt.mysql.o: bnbt.h bnbt_mysql.h config
  bnbt_mysql.mysql.o: bnbt.h bnbt_mysql.h util.h
  tracker.mysql.o: bnbt.h bnbt_mysql.h atom.h bencode.h config.h md5.h server.h sort.h tracker.h util.h
  tracker_announce.mysql.o: bnbt.h bnbt_mysql.h atom.h bencode.h link.h tracker.h util.h
