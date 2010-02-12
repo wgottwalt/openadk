@@ -72,8 +72,8 @@ else
 fi
 
 
-printf "Generate qemu image (2 GB)\n"
-$qimg create -f raw $1 2048M >/dev/null
+printf "Generate qemu image (512 MB)\n"
+$qimg create -f raw $1 512M >/dev/null
 
 printf "Creating filesystem $filesystem\n"
 

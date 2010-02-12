@@ -915,9 +915,14 @@ $(eval $(call KMOD_template,SOUND,sound,\
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
 	$(MODULES_DIR)/kernel/sound/core/snd \
+	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
+
+$(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
+	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
+,41))
 
 $(eval $(call KMOD_template,SND_OSSEMUL,snd-ossemul,\
 	$(MODULES_DIR)/kernel/sound/core/oss/snd-mixer-oss \
@@ -1050,6 +1055,11 @@ $(eval $(call KMOD_template,USB_STORAGE,usb-storage,\
 
 $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
+,75))
+
+$(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
+	$(MODULES_DIR)/kernel/sound/usb/snd-usb-lib \
+	$(MODULES_DIR)/kernel/sound/usb/snd-usb-audio \
 ,75))
 
 #
