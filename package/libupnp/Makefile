@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autotool
+AUTOTOOL_STYLE:=	autoconf
 
 TCFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-samples

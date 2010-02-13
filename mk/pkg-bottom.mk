@@ -26,7 +26,7 @@ ifneq ($(filter autotool,${AUTOTOOL_STYLE}),)
 	cd ${WRKBUILD}; \
 	    env AUTOCONF_VERSION=2.62 \
 		AUTOMAKE_VERSION=1.9 \
-		autoreconf -vf $(MAKE_TRACE)
+		autoreconf -vf;libtoolize $(MAKE_TRACE)
 endif
 ifneq ($(filter autoconf,${AUTOTOOL_STYLE}),)
 	cd ${WRKBUILD}; \

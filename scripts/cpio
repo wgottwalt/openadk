@@ -16,4 +16,3 @@ if [ -x /usr/bin/cpio ];then
 else
 	/bin/cpio $quiet "$@"
 fi
-

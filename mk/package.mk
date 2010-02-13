@@ -45,6 +45,7 @@ endif
 
 ifeq ($(ADK_NATIVE),y)
 CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
+			SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \

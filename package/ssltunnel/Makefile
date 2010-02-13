@@ -21,12 +21,14 @@ CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}"
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" INCLS="-I. -I${STAGING_DIR}/usr/include"
 
 post-install:
-	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/{bin,sbin}
+	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/bin
+	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/sbin
+	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/libexec
 	${INSTALL_BIN} ${WRKINST}/usr/bin/pppclient \
 		${IDIR_SSLTUNNEL}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppwho \
 		${IDIR_SSLTUNNEL}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppserver \
-		${IDIR_SSLTUNNEL}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/libexec/pppserver \
+		${IDIR_SSLTUNNEL}/usr/libexec/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

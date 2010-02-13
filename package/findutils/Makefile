@@ -20,10 +20,10 @@ $(eval $(call PKG_template,FINDUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},$
 CONFIGURE_ENV+=		gl_cv_func_wcwidth_works=yes
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_FINDUTILS)/usr/{s,}bin
+	$(INSTALL_DIR) $(IDIR_FINDUTILS)/usr/bin $(IDIR_FINDUTILS)/usr/libexec
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/{find,locate,oldfind,updatedb,xargs} \
 		 $(IDIR_FINDUTILS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/sbin/{bigram,code,frcode} \
-		$(IDIR_FINDUTILS)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/libexec/{bigram,code,frcode} \
+		$(IDIR_FINDUTILS)/usr/libexec
 
 include ${TOPDIR}/mk/pkg-bottom.mk

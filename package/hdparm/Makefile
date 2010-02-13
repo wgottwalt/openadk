@@ -20,6 +20,6 @@ CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_HDPARM}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/hdparm ${IDIR_HDPARM}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/sbin/hdparm ${IDIR_HDPARM}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
