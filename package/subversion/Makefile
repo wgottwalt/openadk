@@ -8,9 +8,9 @@ PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
 PKG_DESCR:=		revision control program
-PKG_SECTION:=		net
-PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat
-PKG_BUILDDEP+=		apr-util expat apr zlib libiconv
+PKG_SECTION:=		scm
+PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite
+PKG_BUILDDEP+=		apr-util expat apr zlib libiconv sqlite
 ifneq ($(ADK_PACKAGE_SUBVERSION_NEON),)
 PKG_DEPENDS+=		neon
 PKG_BUILDDEP+=		neon
