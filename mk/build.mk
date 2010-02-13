@@ -272,7 +272,7 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
-			|grep -i "$(TARGET)" \
+			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(TOPDIR)/.defconfig; \
 		for symbol in ${DEFCONFIG}; do \
@@ -337,7 +337,7 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
-			|grep -i "$(TARGET)" \
+			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 		for symbol in ${DEFCONFIG}; do \

@@ -133,6 +133,7 @@ endmenu
 menu "Shells"
 source "package/bash/Config.in"
 source "package/mksh/Config.in"
+source "package/tcsh/Config.in"
 source "package/zsh/Config.in"
 endmenu
 
@@ -445,7 +446,6 @@ menu "Networking Misc"
 source "package/cups/Config.in"
 source "package/fakeidentd/Config.in"
 source "package/gkrellmd/Config.in"
-source "package/git/Config.in"
 source "package/net-snmp/Config.in"
 # intentionally inserted here, as it depends on the above
 source "package/iptables-snmp/Config.in"
@@ -461,7 +461,6 @@ source "package/rrs/Config.in"
 source "package/rsync/Config.in"
 source "package/shat/Config.in"
 source "package/socat/Config.in"
-source "package/subversion/Config.in"
 source "package/udp-broadcast-relay/Config.in"
 source "package/vgp/Config.in"
 source "package/vnstat/Config.in"
@@ -534,6 +533,7 @@ source "package/microperl/Config.in"
 source "package/perl/Config.in"
 source "package/php/Config.in"
 source "package/python/Config.in"
+source "package/python2/Config.in"
 source "package/ruby/Config.in"
 source "package/tcl/Config.in"
 endmenu
@@ -560,6 +560,13 @@ source "package/tinc/Config.in"
 source "package/vpnc/Config.in"
 endmenu
 
+menu "SCM"
+#source "package/bzr/Config.in"
+source "package/cvs/Config.in"
+source "package/git/Config.in"
+source "package/subversion/Config.in"
+endmenu
+
 menu "Wireless"
 source "package/aircrack-ng/Config.in"
 source "package/chillispot/Config.in"
@@ -567,8 +574,9 @@ source "package/hostapd/Config.in"
 source "package/iw/Config.in"
 #source "package/kismet/Config.in"
 source "package/olsrd/Config.in"
+source "package/p54-firmware/Config.in"
+source "package/rt61-firmware/Config.in"
 source "package/wifidog/Config.in"
-source "package/wireless-firmware/Config.in"
 source "package/wpa_supplicant/Config.in"
 endmenu
 

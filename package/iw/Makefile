@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
-PKG_VERSION:=		0.9.18
+PKG_VERSION:=		0.9.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9734080d8a5c4b768c5e0da665a48950
+PKG_MD5SUM:=		3b88743f9c6ce8a7e2f5fd7d18fdea42
 PKG_DESCR:=		Tools for setting up WiFi cards via netlink (nl80211)
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libnl
@@ -21,8 +21,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IW,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
-XAKE_FLAGS:=		V=1
 
 post-install:
 	${INSTALL_DIR} ${IDIR_IW}/usr/sbin

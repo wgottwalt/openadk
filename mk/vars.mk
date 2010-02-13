@@ -112,6 +112,8 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
 				unzip -qd ${WRKDIR} $$file ;; \
+			*.arm) \
+				cp $$file ${WRKDIR} ;; \
 			*) \
 				echo "Cannot extract '$$file'" >&2; \
 				false ;; \

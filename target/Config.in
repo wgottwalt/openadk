@@ -490,6 +490,7 @@ config ADK_LINUX_X86_ALIX2D
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_WATCHDOG
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
