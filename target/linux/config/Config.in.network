@@ -250,6 +250,7 @@ config ADK_KPACKAGE_KMOD_TUN
 config ADK_KPACKAGE_KMOD_BONDING
 	prompt "kmod-bonding...................... Bonding driver support"
 	tristate
+	select BUSYBOX_IFENSLAVE
 	default n
 	help
   	  Say 'Y' or 'M' if you wish to be able to 'bond' multiple Ethernet

@@ -18,12 +18,11 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel $(MAKE_TRACE)	
 	@echo
 	@echo 'The linux kernel is here: $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The nfs root tarball is here: ${BIN_DIR}/${ROOTFSTARBALL}'
-	@echo 'Do not forget to create device nodes for console,null and tty in your nfsroot'
+	@echo 'The nfs root tarball is here: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

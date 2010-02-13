@@ -27,6 +27,11 @@ config ADK_KPACKAGE_KMOD_SOUND
 	help
 	  Basic support for sound.
 
+config ADK_KPACKAGE_KMOD_SND_RAWMIDI
+	tristate
+	default n
+	help
+
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-sound-alsa................. ALSA sound support"
 	select ADK_KPACKAGE_KMOD_SOUND
