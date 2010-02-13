@@ -66,6 +66,14 @@ $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \
 ,20, kmod-led-class))
 
+$(eval $(call KMOD_template,P54_COMMON,p54-common,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54common \
+,68))
+
+$(eval $(call KMOD_template,P54_USB,p54-usb,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54usb \
+,70))
+
 $(eval $(call KMOD_template,RT2X00,rt2x00,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00lib \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00pci \

@@ -20,10 +20,6 @@ $(eval $(call PKG_template,AUFS_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		KDIR=${LINUX_DIR}
 
-do-extract:
-	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}/
-
 post-install:
 	$(INSTALL_DIR) $(IDIR_AUFS_UTIL)/sbin
 	$(INSTALL_BIN) ${WRKINST}/sbin/{u,}mount.aufs \

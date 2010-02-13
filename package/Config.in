@@ -567,8 +567,9 @@ source "package/hostapd/Config.in"
 source "package/iw/Config.in"
 #source "package/kismet/Config.in"
 source "package/olsrd/Config.in"
+source "package/p54-firmware/Config.in"
+source "package/rt61-firmware/Config.in"
 source "package/wifidog/Config.in"
-source "package/wireless-firmware/Config.in"
 source "package/wpa_supplicant/Config.in"
 endmenu
 
