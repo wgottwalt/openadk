@@ -133,6 +133,7 @@ endmenu
 menu "Shells"
 source "package/bash/Config.in"
 source "package/mksh/Config.in"
+source "package/tcsh/Config.in"
 source "package/zsh/Config.in"
 endmenu
 

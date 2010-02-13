@@ -1,6 +1,4 @@
-- implement update for MTD devices (rb532,ag241)
-- network scripts for wireless client and acess point
-- add tcsh and describe new package creation procedure in wiki
+- implement update for MTD devices (ag241)
 - add toolchain only support for generic toolchains (mips/ppc/..)
 - fix watchdog for alix1c (mfgpt timers problem)
 - netbsd build

@@ -49,5 +49,6 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python ${IDIR_PYTHON2}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.6/* ${IDIR_PYTHON2}/usr/lib/python2.6
+	-find ${IDIR_PYTHON2} -name \*.pyo -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
