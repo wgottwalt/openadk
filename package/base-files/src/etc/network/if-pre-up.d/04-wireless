@@ -2,8 +2,6 @@
 #set -x
 set -e 
 
-[ -x /usr/sbin/iw ] || exit 0
-
 [ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
 
 [ "$IF_WIRELESS_SSID" ] || exit 1
@@ -76,6 +74,29 @@ case "$IF_WIRELESS_MODE" in
 		}
 		logger -t hostap "Starting hostapd"
 		hostapd -B /tmp/hostapd.conf
+		;;
+	sta)
+		[ -x /usr/sbin/iw ] || {
+			logger -t wireless "No iw utility found"
+			exit 1
+		}
+		ip link set up dev ${IFACE}
+		iw dev ${IFACE} set channel $IF_WIRELESS_CHANNEL
+		iw dev ${IFACE} connect $IF_WIRELESS_SSID
+		[ $wpa2 -eq 1 ] && {
+			[ -x /usr/sbin/wpa_supplicant ] || {
+				logger -t wireless "No wpa_supplicant found"
+				exit 1
+			}
+			touch /tmp/wpa_supplicant.conf
+			chmod 600 /tmp/wpa_supplicant.conf
+			echo "network={" > /tmp/wpa_supplicant.conf
+			echo " ssid=\"$IF_WIRELESS_SSID\"" >> /tmp/wpa_supplicant.conf
+		 	echo " psk=\"$IF_WIRELESS_PASSPHRASE\"" >> /tmp/wpa_supplicant.conf
+			echo " priority=5" >> /tmp/wpa_supplicant.conf
+			echo "}"  >> /tmp/wpa_supplicant.conf
+			wpa_supplicant -B -Dnl80211 -i${IFACE} -c/tmp/wpa_supplicant.conf
+		}
 		;;
 	*)
 		echo "Unknown operation mode $IF_WIRELESS_MODE given!"

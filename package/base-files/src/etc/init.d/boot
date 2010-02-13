@@ -24,4 +24,6 @@ for f in /etc/modules.d/*; do
 	[[ -e $f ]] && load_modules /etc/modules.d/*
 	break
 done
+# settle down, after module load
+sleep 2
 exit 0
