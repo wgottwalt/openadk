@@ -42,9 +42,10 @@ CONFIGURE_ARGS+=	--with-notify=none \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DOVECOT}/etc
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot
-	${INSTALL_DATA} ./files/dovecot.conf ${IDIR_DOVECOT}/etc
+	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/sbin
+	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/libexec/dovecot
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot/modules/{imap,lda,pop3}
+	${INSTALL_DATA} ./files/dovecot.conf ${IDIR_DOVECOT}/etc
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/*.so \
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/imap/*.so \
@@ -53,9 +54,9 @@ post-install:
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/lda/
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/pop3/*.so \
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/pop3/
-	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot/* \
-		${IDIR_DOVECOT}/usr/lib/dovecot/
-	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot \
+	$(INSTALL_BIN) ${WRKINST}/usr/libexec/dovecot/* \
+		${IDIR_DOVECOT}/usr/libexec/dovecot/
+	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot* \
 		${IDIR_DOVECOT}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -26,7 +26,7 @@ ifneq ($(filter autotool,${AUTOTOOL_STYLE}),)
 	cd ${WRKBUILD}; \
 	    env AUTOCONF_VERSION=2.62 \
 		AUTOMAKE_VERSION=1.9 \
-		autoreconf -vif $(MAKE_TRACE)
+		autoreconf -vf $(MAKE_TRACE)
 endif
 ifneq ($(filter autoconf,${AUTOTOOL_STYLE}),)
 	cd ${WRKBUILD}; \
@@ -79,7 +79,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --prefix=/usr \
 	    --datadir=/usr/share \
 	    --mandir=/usr/share/man \
-	    --libexecdir=/usr/sbin \
+	    --libexecdir=/usr/libexec \
 	    --localstatedir=/var \
 	    --sysconfdir=/etc \
 	    --disable-nls \
