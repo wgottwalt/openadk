@@ -22,8 +22,6 @@ endif
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
-PKG_TARGET_DEPENDS:=	!foxboard
-
 PKG_DESCR_CHAN_MGCP:=	Media Gateway Control Protocol implementation
 PKG_DESCR_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
 PKG_DESCR_CHAN_IAX2:=	Support for the Inter Asterisk Protocol
@@ -55,11 +53,6 @@ SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_SPEEX}+=	asterisk-codec-speex-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_GSM}+=	asterisk-codec-gsm-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_PBX_DUNDI}+=	asterisk-pbx-dundi-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_RES_AGI}+=		asterisk-res-agi-install
-
-#workaround for cris and gcc 4.4, where -Os generates ICE
-ifeq ($(ARCH),cris)
-TARGET_OPTIMIZATION:=$(subst Os,O2,$(TARGET_OPTIMIZATION))
-endif
 
 CONFIGURE_ARGS=		--with-z=${STAGING_DIR}/usr \
 			--with-ncurses=${STAGING_DIR}/usr \
