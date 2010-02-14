@@ -14,7 +14,7 @@ PKG_BUILDDEP+=		libxml2 gnutls python
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
-PKG_HOST_DEPENDS:=	!freebsd
+PKG_HOST_DEPENDS:=	!freebsd !netbsd
 PKG_TARGET_DEPENDS:=	!foxboard
 
 include ${TOPDIR}/mk/package.mk

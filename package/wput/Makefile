@@ -17,7 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WPUT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-g-switch
+CONFIGURE_ARGS+=	--disable-g-switch \
+			--without-ssl
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WPUT}/usr/bin

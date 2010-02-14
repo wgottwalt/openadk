@@ -18,19 +18,24 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,RUBY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		GNUmakefile
-XAKE_FLAGS+=		optflags='' debugflags=''
-CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
+XAKE_FLAGS+=		optflags='' debugflags='' BASERUBY="${WRKBUILD}/hostruby"
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes
 INSTALL_TARGET:=	install-nodoc
 
-# Enable some ruby extension / options
-post-configure:
-	#echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
-	#echo "socket" >> ${WRKBUILD}/ext/Setup
+pre-configure:
+	cp ${WRKBUILD}/ext/Setup ${WRKBUILD}/ext/Setup.orig
+	echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
+	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
+		./configure --prefix=$(STAGING_TOOLS) \
+	);
+	$(MAKE) -C ${WRKBUILD} ruby
+	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby
+	cp ${WRKBUILD}/ext/Setup.orig ${WRKBUILD}/ext/Setup
+	$(MAKE) -C ${WRKBUILD} install-nodoc
+	$(MAKE) -C ${WRKBUILD} clean
 
 post-install:
-	rm ${WRKINST}/usr/lib/*.a
 	rm -rf ${WRKINST}/usr/lib/site_ruby
 	rm -rf ${WRKINST}/usr/include
 	${CP} ${WRKINST}/usr ${IDIR_RUBY}/

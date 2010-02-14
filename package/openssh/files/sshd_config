@@ -104,7 +104,7 @@ UsePrivilegeSeparation yes
 #Banner none
 
 # override default of no subsystems
-Subsystem	sftp	/usr/sbin/sftp-server
+Subsystem	sftp	/usr/libexec/sftp-server
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs

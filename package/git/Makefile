@@ -27,7 +27,7 @@ CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_snprintf_returns_bogus=no
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/sbin/git-core
+	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/libexec/git-core
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/share/git-core/templates
 	$(CP) $(WRKINST)/usr/share/git-core/templates/* \
 		$(IDIR_GIT)/usr/share/git-core/templates
@@ -36,6 +36,6 @@ post-install:
 	$(CP) $(WRKINST)/usr/bin/git-receive-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-archive $(IDIR_GIT)/usr/bin
-	${CP} $(WRKINST)/usr/sbin/git-core/* $(IDIR_GIT)/usr/sbin/git-core
+	${CP} $(WRKINST)/usr/libexec/git-core/* $(IDIR_GIT)/usr/libexec/git-core
 
 include ${TOPDIR}/mk/pkg-bottom.mk

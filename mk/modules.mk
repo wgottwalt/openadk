@@ -923,12 +923,12 @@ $(eval $(call KMOD_template,SOUND,sound,\
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
 	$(MODULES_DIR)/kernel/sound/core/snd \
-	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
 
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
+	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 ,41))
 

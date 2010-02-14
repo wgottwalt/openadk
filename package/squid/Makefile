@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
 PKG_MULTI:=		1
 #PKG_CXX:=		SQUID
 
+PKG_HOST_DEPENDS:=	!netbsd
+
 AUTH_MODULES:=		basic digest ntlm
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)
 BASIC_AUTH_HELPERS+=	getpwnam
