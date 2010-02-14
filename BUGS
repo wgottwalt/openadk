@@ -1,3 +1,2 @@
-- packages with subpackages get recompiled
 - openssh on amd64 does not work, ssh-keygen endless loop
 - uclibc on lemote mips64 target does not work (only uclibc-trunk with patches)
