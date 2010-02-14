@@ -300,6 +300,9 @@ endif
 ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
+ifneq (,$(filter %_toolchain,${TARGET}))
+	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/.defconfig
+endif
 ifneq (,$(filter rescue%,${TARGET}))
 	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/.defconfig
 endif
@@ -364,6 +367,9 @@ endif
 	fi
 ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/all.config
+endif
+ifneq (,$(filter %_toolchain,${TARGET}))
+	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/all.config
 endif
 ifneq (,$(filter %_rescue,${TARGET}))
 	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/all.config

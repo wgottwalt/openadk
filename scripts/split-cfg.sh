@@ -62,28 +62,22 @@ for oldfile in $oldfiles; do
 done
 print -nu2 '\r'
 
-# now scan for dependencies of packages; the information
-# should probably be in build_mipsel because it's generated
-# at build time, but OTOH, soon enough, parts of Makefile
-# and the entire Config.in will be auto-generated anyway,
-# so we're better off placing it here
-#XXX this is too slow @868 configure options
+# now handle package dependencies
 cd $TOPDIR/.cfg_${TARGET}_${LIBC}
 rm -f $TOPDIR/package/*/info.mk
 for option in *; do
 	pbar="$option ..."
 	print -nu2 "$pbar\r"
 	ao=:
-	fgrep -l $option $TOPDIR/package/*/{Makefile,Config.*} 2>&- | \
+	fgrep -l $option $TOPDIR/package/*/Config.* 2>&- | \
 	    while read line; do
 		print -r -- ${line%/*}/info.mk
 	done | while read fname; do
 		[[ $ao = *:$fname:* ]] && continue
 		ao=$ao$fname:
-		echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg_${TARGET}_${LIBC}/$option" >>$fname
+		if [ "$option" != "ADK_HAVE_DOT_CONFIG" ];then
+			echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg_${TARGET}_${LIBC}/$option" >>$fname
+		fi
 	done
 done
-pbar=done
-print -u2 "$pbar"
-
 exit 0
