@@ -23,6 +23,6 @@ CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_HTTPING}/usr/bin
-	${CP} ${WRKINST}/usr/bin/httping ${IDIR_HTTPING}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/httping ${IDIR_HTTPING}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
