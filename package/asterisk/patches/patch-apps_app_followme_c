@@ -1,0 +1,26 @@
+--- asterisk-1.6.2.1.orig/apps/app_followme.c	2009-09-15 18:06:24.000000000 +0200
++++ asterisk-1.6.2.1/apps/app_followme.c	2010-02-14 10:33:51.540422962 +0100
+@@ -172,7 +172,9 @@ static int ynlongest = 0;
+ 
+ static const char *featuredigittostr;
+ static int featuredigittimeout = 5000;		/*!< Feature Digit Timeout */
+-static const char *defaultmoh = "default";    	/*!< Default Music-On-Hold Class */
++static const char *defaultmoh;		    	/*!< Default Music-On-Hold Class */
++
++
+ 
+ static char takecall[20] = "1", nextindp[20] = "2";
+ static char callfromprompt[PATH_MAX] = "followme/call-from";
+@@ -236,6 +238,7 @@ static struct call_followme *alloc_profi
+ 
+ static void init_profile(struct call_followme *f)
+ {
++	defaultmoh = "default";
+ 	f->active = 1;
+ 	ast_copy_string(f->moh, defaultmoh, sizeof(f->moh));
+ }
+@@ -1195,3 +1198,4 @@ AST_MODULE_INFO(ASTERISK_GPL_KEY, AST_MO
+ 		.unload = unload_module,
+ 		.reload = reload,
+ 	       );
++
