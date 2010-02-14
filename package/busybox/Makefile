@@ -9,8 +9,6 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		495e320537f0772125f2db3c098e437c
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
-PKG_DEPENDS:=		base-files
-PKG_BUILDDEP+=		base-files
 PKG_URL:=		http://www.busybox.net
 PKG_SITES:=		http://www.busybox.net/downloads/
 
