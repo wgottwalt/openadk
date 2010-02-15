@@ -1,0 +1,36 @@
+--- kismet-2010-01-R1.orig/iwcontrol.cc	2009-08-17 21:51:36.000000000 +0200
++++ kismet-2010-01-R1/iwcontrol.cc	2010-02-14 22:27:00.000000000 +0100
+@@ -32,7 +32,6 @@
+ #include <linux/if.h>
+ #include <linux/wireless.h>
+ 
+-#endif // wireless
+ 
+ #ifndef rintf
+ #define rintf(x) (float) rint((double) (x))
+@@ -697,7 +696,7 @@ int Iwconfig_Get_Chanlist(const char *in
+ 		return -1;
+ 	}
+ 
+-	bzero(buffer, sizeof(buffer));
++	memset(buffer, 0, sizeof(buffer));
+ 
+ 	memset(&wrq, 0, sizeof(struct iwreq));
+ 
+@@ -732,7 +731,7 @@ int Iwconfig_Get_Chanlist(const char *in
+ 		memcpy((char *) &range, buffer, sizeof(iw_range));
+ 	} else {
+ 		/* Zero unknown fields */
+-		bzero((char *) &range, sizeof(struct iw_range));
++		memset((char *) &range, 0, sizeof(struct iw_range));
+ 
+ 		/* Initial part unmoved */
+ 		memcpy((char *) &range, buffer, iwr15_off(num_channels));
+@@ -798,5 +797,7 @@ int Iwconfig_Get_Chanlist(const char *in
+ 	return chan_list->size();
+ }
+ 
++#endif // wireless
++
+ #endif
+ 
