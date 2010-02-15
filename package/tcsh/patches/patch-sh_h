@@ -1,0 +1,14 @@
+--- tcsh-6.17.00.orig/sh.h	2009-06-25 23:27:37.000000000 +0200
++++ tcsh-6.17.00/sh.h	2010-02-15 18:45:11.000000000 +0100
+@@ -375,9 +375,11 @@ static inline void ignore(intptr_t a)
+ #include <pwd.h>
+ #include <grp.h>
+ #endif /* WINNT_NATIVE */
++#if !defined(BSD)
+ #ifdef HAVE_SHADOW_H
+ # include <shadow.h>
+ #endif /* HAVE_SHADOW_H */
++#endif
+ #ifdef HAVE_AUTH_H
+ # include <auth.h>
+ #endif /* HAVE_AUTH_H */

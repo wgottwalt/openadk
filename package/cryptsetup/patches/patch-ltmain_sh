@@ -1,0 +1,20 @@
+--- cryptsetup-1.1.0.orig/ltmain.sh	2010-01-17 11:29:15.000000000 +0100
++++ cryptsetup-1.1.0/ltmain.sh	2010-02-14 18:24:56.000000000 +0100
+@@ -65,7 +65,7 @@
+ #       compiler:		$LTCC
+ #       compiler flags:		$LTCFLAGS
+ #       linker:		$LD (gnu? $with_gnu_ld)
+-#       $progname:		(GNU libtool) 2.2.6b Debian-2.2.6b-2
++#       $progname:		(GNU libtool) 2.2.6b Debian-2.2.6b-2ubuntu1
+ #       automake:		$automake_version
+ #       autoconf:		$autoconf_version
+ #
+@@ -73,7 +73,7 @@
+ 
+ PROGRAM=ltmain.sh
+ PACKAGE=libtool
+-VERSION="2.2.6b Debian-2.2.6b-2"
++VERSION="2.2.6b Debian-2.2.6b-2ubuntu1"
+ TIMESTAMP=""
+ package_revision=1.3017
+ 
