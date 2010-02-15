@@ -4,14 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		1.5.1
+PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		87c6fe40c143775d6a1be1beb75c3eb2
+PKG_MD5SUM:=		e7e59910183ca8a213c76a7a80789ea1
 PKG_DESCR:=		a high-performance, configurable, free SIP server
 PKG_SECTION:=		net
-PKG_BUILDDEP+=		openssl
 PKG_MULTI:=		1
 PKG_VARIANT:=		tls
+PKG_DEPENDS:=		libopenssl
+PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://opensips.org
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
 
@@ -52,7 +53,6 @@ $(eval $(call PKG_template,OPENSIPS_MOD_SMS,opensips-mod-sms,$(PKG_VERSION)-${PK
 $(eval $(call PKG_template,OPENSIPS_MOD_UAC,opensips-mod-uac,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_UAC_REDIRECT,opensips-mod-uac-redirect,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_URI,opensips-mod-uri,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSIPS_MOD_URI_DB,opensips-mod-uri-db,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_XLOG,opensips-mod-xlog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_ACCOUNTING,acc))
@@ -76,11 +76,10 @@ $(eval $(call PKG_mod_template,OPENSIPS_MOD_SPEEDIAL,speeddial))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_UAC,uac))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_UAC_REDIRECT,uac_redirect))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_URI,uri))
-$(eval $(call PKG_mod_template,OPENSIPS_MOD_URI_DB,uri_db))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_XLOG,xlog))
 
-# Select here the modules for the ipk package
-OPENSIPS_MODULES:=	sl tm rr maxfwd usrloc registrar db_text textops exec mi_fifo
+# Select here the modules for the main package
+OPENSIPS_MODULES:=	sl tm rr maxfwd usrloc registrar db_text textops exec mi_fifo signaling
 
 OPENSIPS_MODULE_FILES:=	$(foreach module,$(OPENSIPS_MODULES),modules/$(module)/$(module).so)
 OPENSIPS_MODULES:=	$(patsubst %,modules/%,$(OPENSIPS_MODULES))
