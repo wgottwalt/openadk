@@ -393,7 +393,7 @@ menuconfig: $(CONFIG)/mconf defconfig .menu
 
 _config: $(CONFIG)/conf .menu
 	-@touch .config
-	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN) >/dev/null
+	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
 .NOTPARALLEL: _mconfig
