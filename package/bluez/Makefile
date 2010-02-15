@@ -23,7 +23,6 @@ XAKE_FLAGS+=		V=1 CCLD="$(TARGET_CC) -all-static -pthread"
 else
 XAKE_FLAGS+=            V=1
 endif
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \
 			--enable-alsa \
@@ -35,8 +34,6 @@ CONFIGURE_ARGS+=	--enable-tools \
 			--enable-netlink \
 			--disable-pie \
 			--disable-cups
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 ifneq ($(ADK_STATIC),y)

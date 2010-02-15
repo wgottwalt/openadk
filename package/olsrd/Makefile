@@ -36,6 +36,10 @@ $(eval $(call PKG_mod_template,OLSRD_MOD_HTTPINFO,httpinfo))
 $(eval $(call PKG_mod_template,OLSRD_MOD_NAMESERVICE,nameservice))
 $(eval $(call PKG_mod_template,OLSRD_MOD_TAS,tas))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 TCFLAGS+=	-fPIC
 
 do-build:

@@ -21,7 +21,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,HOSTAPD,hostapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-configure:
 	${CP} ./files/hostapd.config ${WRKBUILD}/.config

@@ -11,6 +11,7 @@ PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
 PKG_URL:=		http://libusb.wiki.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -20,10 +21,6 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB}/usr/lib

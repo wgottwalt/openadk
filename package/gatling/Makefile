@@ -20,7 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GATLING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 MAKE_FILE:=		GNUmakefile
 ALL_TARGET:=		gatling
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/owfat

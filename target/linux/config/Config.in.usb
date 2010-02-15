@@ -258,6 +258,14 @@ config ADK_KPACKAGE_KMOD_USB_USBNET
 	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 
+config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
+	prompt "kmod-snd-usb-audio................ USB sound adapter"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+
 config ADK_KPACKAGE_KMOD_USB_SISUSBVGA
         prompt "kmod-usb-svga..................... USB 2.0 SVGA dongle support (Net2280/SiS315)"
 	tristate

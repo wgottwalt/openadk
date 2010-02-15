@@ -16,14 +16,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-ogg --disable-oggtest --enable-fixed-point
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 XAKE_FLAGS+=		bin_PROGRAMS=""
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBSPEEX}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libspeex.so.* ${IDIR_LIBSPEEX}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libspeex.so* ${IDIR_LIBSPEEX}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

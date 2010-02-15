@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- xfsprogs-3.0.0.orig/libxfs/linux.c	2009-02-04 23:29:25.000000000 +0100
-+++ xfsprogs-3.0.0/libxfs/linux.c	2009-03-27 11:43:17.000000000 +0100
+--- xfsprogs-3.1.1.orig/libxfs/linux.c	2010-01-29 20:46:13.000000000 +0100
++++ xfsprogs-3.1.1/libxfs/linux.c	2010-02-13 23:45:27.000000000 +0100
 @@ -20,8 +20,6 @@
  #include <xfs/libxfs.h>
  #include <mntent.h>

@@ -20,14 +20,11 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,TCL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCFLAGS+=		-ldl
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
 			tcl_cv_strtod_buggy=ok \
 			tcl_cv_strtod_unbroken=ok \
 			tcl_cv_strtoul_unbroken=ok
 CONFIGURE_ARGS+=	--enable-man-symlinks
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 INSTALL_TARGET=		install-binaries install-libraries
 
 post-install:

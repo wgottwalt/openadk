@@ -8,7 +8,7 @@ PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		08af805fd59f68d9ad00a2f878cf820e
 PKG_DESCR:=		fast version control system
-PKG_SECTION:=		misc
+PKG_SECTION:=		scm
 PKG_DEPENDS:=		libopenssl libcurl libexpat
 PKG_BUILDDEP+=		openssl curl expat
 PKG_URL:=		http://git-scm.com
@@ -21,16 +21,13 @@ $(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 \
 			NO_CROSS_DIRECTORY_HARDLINKS=1 \
 			CURLDIR=${STAGING_DIR} EXPATDIR=${STAGING_DIR}
-XAKE_FLAGS+=		V=1 uname_S=Linux uname_O=GNU/Linux
-CONFIGURE_STYLE:=	gnu
+XAKE_FLAGS+=		uname_S=Linux uname_O=GNU/Linux
 CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_fread_reads_directories=no \
 			ac_cv_snprintf_returns_bogus=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/sbin/git-core
+	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/libexec/git-core
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/share/git-core/templates
 	$(CP) $(WRKINST)/usr/share/git-core/templates/* \
 		$(IDIR_GIT)/usr/share/git-core/templates
@@ -39,6 +36,6 @@ post-install:
 	$(CP) $(WRKINST)/usr/bin/git-receive-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-archive $(IDIR_GIT)/usr/bin
-	${CP} $(WRKINST)/usr/sbin/git-core/* $(IDIR_GIT)/usr/sbin/git-core
+	${CP} $(WRKINST)/usr/libexec/git-core/* $(IDIR_GIT)/usr/libexec/git-core
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -10,10 +10,9 @@ if [ "$1" = "build" ];then
 	pkgname=$(grep "^Package:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
 	version=$(grep "^Version:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
 	arch=$(grep "^Architecture:" $2/CONTROL/control | sed -e "s/^[^:]*:[[:space:]]*//")
-	mkdir -p ${2}/usr/lib/pkg
 	for file in preinst postinst prerm postrm; do
-	  [ ! -f $2/CONTROL/$file ] || ( cp $2/CONTROL/$file \
-		${2}/usr/lib/pkg/${pkgname}.$file && \
+	  [ ! -f $2/CONTROL/$file ] || ( mkdir -p ${2}/usr/lib/pkg && \
+		cp $2/CONTROL/$file ${2}/usr/lib/pkg/${pkgname}.$file && \
 		chmod +x ${2}/usr/lib/pkg/${pkgname}.$file )
 	done
 	rm -rf $2/CONTROL 
@@ -29,6 +28,7 @@ elif [ "$1" = "install" ];then
    	  IPKG_INSTROOT="$PKG_INSTROOT" ${PKG_INSTROOT}/usr/lib/pkg/${pkg}.postinst
 	  rm ${PKG_INSTROOT}/usr/lib/pkg/${pkg}.postinst
 	fi
+	rm -rf ${PKG_INSTROOT}/usr/lib/pkg
 else
 	echo "unknown command"
 	exit 1

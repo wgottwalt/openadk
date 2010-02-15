@@ -1,0 +1,13 @@
+--- asterisk-1.6.2.1.orig/Makefile	2009-12-10 22:04:20.000000000 +0100
++++ asterisk-1.6.2.1/Makefile	2010-02-05 21:05:41.313084404 +0100
+@@ -366,8 +366,8 @@ makeopts: configure
+ 	@exit 1
+ 
+ menuselect.makeopts: menuselect/menuselect menuselect-tree makeopts build_tools/menuselect-deps $(GLOBAL_MAKEOPTS) $(USER_MAKEOPTS)
+-	menuselect/menuselect --check-deps $@
+-	menuselect/menuselect --check-deps $@ $(GLOBAL_MAKEOPTS) $(USER_MAKEOPTS)
++	./menuselect/menuselect --check-deps $@
++	./menuselect/menuselect --check-deps $@ $(GLOBAL_MAKEOPTS) $(USER_MAKEOPTS)
+ 
+ $(MOD_SUBDIRS_EMBED_LDSCRIPT):
+ 	+@echo "EMBED_LDSCRIPTS+="`$(SILENTMAKE) -C $(@:-embed-ldscript=) SUBDIR=$(@:-embed-ldscript=) __embed_ldscript` >> makeopts.embed_rules

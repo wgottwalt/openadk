@@ -1,0 +1,12 @@
+use host compiler and flags
+--- tcsh-6.17.00.orig/Makefile.in	2009-06-25 00:09:05.000000000 +0200
++++ tcsh-6.17.00/Makefile.in	2010-02-13 21:01:33.000000000 +0100
+@@ -365,7 +365,7 @@ pure:$(P) ${OBJS} 
+ 
+ gethost:  gethost.c sh.err.h tc.const.h sh.h
+ 	rm -f gethost
+-	${CC} -o gethost ${LDFLAGS} ${CFLAGS} ${CPPFLAGS} ${DFLAGS} $(srcdir)/gethost.c ${LIBES} ${EXTRALIBS}
++	${HOSTCC} -o gethost ${HOSTLDFLAGS} ${HOSTCFLAGS} ${HOSTCPPFLAGS} $(srcdir)/gethost.c ${LIBES}
+ 
+ tc.defs.c:	gethost host.defs
+ 	@rm -f $@.tmp

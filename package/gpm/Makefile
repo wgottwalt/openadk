@@ -16,10 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GPM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 TCFLAGS+=		-I${WRKSRC}/src/headers
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GPM}/usr/sbin ${IDIR_GPM}/usr/lib

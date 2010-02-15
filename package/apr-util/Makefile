@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=              apr-util
 PKG_VERSION:=           0.9.15
 PKG_RELEASE:=           1
-PKG_BUILDDEP+=		expat apr
 PKG_MD5SUM:=            dc772ae295f49ddb8ee8e69a9716c53b
 PKG_DESCR:=		Apache Portable Runtime utility library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat apr
+PKG_BUILDDEP+=		expat apr
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://apache.mirror.clusters.cc/apr/
 
@@ -18,12 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,APR_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=       gnu
 CONFIGURE_ARGS+=	--without-berkeley-db
 CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr
 CONFIGURE_ARGS+=	--with-expat=${STAGING_DIR}/usr
-BUILD_STYLE:=           auto
-INSTALL_STYLE:=         auto
 XAKE_FLAGS+=		apr_builddir=${STAGING_DIR}/usr/share/build \
 			apr_builders=${STAGING_DIR}/usr/share/build
 

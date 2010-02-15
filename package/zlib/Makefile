@@ -24,9 +24,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,ZLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	manual
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
 
 ifeq ($(ADK_NATIVE),)
 COPTS:=                 $(TARGET_CONFIGURE_OPTS)

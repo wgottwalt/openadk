@@ -177,20 +177,6 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
-#config ADK_KPACKAGE_KMOD_YAFFS_FS
-#	prompt "kmod-fs-yaffs..................... YAFFS1/2 filesystem support"
-#	tristate
-#	default n
-#	select ADK_KERNEL_YAFFS_FS
-#	select ADK_KERNEL_YAFFS_YAFFS1
-#	select ADK_KERNEL_YAFFS_YAFFS2
-#	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-#	select ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-#	help
-#	  Support for the YAFFS1 and YAFFS2 filesystems for the rb532 NAND
-#	  internal flash (for example). Say 'yes' here if you want to build
-#	  an initramfs for the Routerboard with access to internal flash.
-#
 config ADK_KPACKAGE_KMOD_FUSE_FS
 	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
 	tristate

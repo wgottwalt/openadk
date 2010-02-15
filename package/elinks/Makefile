@@ -6,20 +6,21 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		elinks
 PKG_VERSION:=		0.11.7
 PKG_RELEASE:=		2
-PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		text
 PKG_DEPENDS:=		libopenssl
-PKG_URL:=		http://elinks.or.cz
+PKG_BUILDDEP+=		openssl
+PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ELINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+INSTALL_STYLE:=		manual
+
 TCFLAGS+=		-fPIC
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=yes
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_${WRKBUILD}/features.conf | tr [:blank:]-/. _)=yes
 CONFIGURE_ARGS+=	--enable-small \
@@ -43,8 +44,7 @@ CONFIGURE_ARGS+=	--enable-small \
 			--without-spidermonkey \
 			--without-x \
 			--without-zlib
-BUILD_STYLE:=		auto
-MAKE_FLAGS+=		V=1 CC='${TARGET_CC}' LD='${TARGET_CC}'
+MAKE_FLAGS+=		CC='${TARGET_CC}' LD='${TARGET_LD}'
 
 do-install:
 	${INSTALL_DIR} ${IDIR_ELINKS}/usr/bin

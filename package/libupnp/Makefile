@@ -19,14 +19,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoconf
+
 TCFLAGS+=		-fPIC
-CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ARGS+=	--disable-samples
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto confprog
 
 post-build:
-	sed -i -e 's#^libdir=.*#libdir=#' ${WRKBUILD}/threadutil/libthreadutil.la
+	sed -i -e 's#^libdir=.*#libdir=#' \
+		${WRKBUILD}/threadutil/libthreadutil.la
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBUPNP}/usr/lib

@@ -1,0 +1,38 @@
+--- cryptsetup-1.1.0.orig/configure	2010-01-17 11:29:24.000000000 +0100
++++ cryptsetup-1.1.0/configure	2010-02-14 18:24:56.000000000 +0100
+@@ -14619,7 +14619,7 @@ _ACEOF
+ 
+ fi
+ 
+-	if test x$enable_static = xyes; then
++	if test x$enable_static_cryptsetup = xyes; then
+ 		SELINUX_STATIC_LIBS=$LIBS
+ 		# Check if we need -pthread with --enable-static and selinux
+ 		saved_LIBS2=$LIBS
+@@ -14684,7 +14684,7 @@ fi
+ 	fi
+ fi
+ 
+-if test x$enable_static = xyes; then
++if test x$enable_static_cryptsetup = xyes; then
+ 	saved_LIBS2=$LIBS
+ 	LIBS="$LIBS -static"
+ 	# Check if it there is still not some missing dependency like static selinux libs
+@@ -14916,7 +14916,7 @@ fi
+ 
+ 
+ 
+- if test x$enable_static = xyes; then
++ if test x$enable_static_cryptsetup = xyes; then
+   STATIC_CRYPTSETUP_TRUE=
+   STATIC_CRYPTSETUP_FALSE='#'
+ else
+@@ -14924,7 +14924,7 @@ else
+   STATIC_CRYPTSETUP_FALSE=
+ fi
+ 
+- if test x$enable_static = xno; then
++ if test x$enable_static_cryptsetup = xno; then
+   DYNAMIC_CRYPTSETUP_TRUE=
+   DYNAMIC_CRYPTSETUP_FALSE='#'
+ else

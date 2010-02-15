@@ -9,6 +9,7 @@ menu "Miscellaneous devices support"
 
 config ADK_KERNEL_WATCHDOG
 	boolean
+	default y if ADK_TARGET_WITH_WATCHDOG
 	default n
 
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
@@ -80,5 +81,8 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	default n
 	help
+
+
+source package/exmap/Config.in.kmod
 
 endmenu

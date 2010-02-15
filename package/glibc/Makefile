@@ -30,6 +30,10 @@ GLIBC_CONFOPTS:=          \
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install
@@ -45,10 +49,13 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
-	# create ld.so link for mips gcc linker option
-	cd $(IDIR_GLIBC)/lib && ln -sf ld-linux.so.2 ld.so.1
 
 glibc-dev-install:
+	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/lib $(IDIR_GLIBC_DEV)/usr/lib
+	# install linker script
+	-cp ./files/libc.so.$(ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
+	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \

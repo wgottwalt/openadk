@@ -144,6 +144,12 @@ package_index: .prereq_done
 bulk: .prereq_done
 	@${GMAKE_INV} bulk
 
+bulkall: .prereq_done
+	@${GMAKE_INV} bulkall
+
+bulkallmod: .prereq_done
+	@${GMAKE_INV} bulkallmod
+
 menu: .prereq_done
 	@${GMAKE_INV} menu
 

@@ -45,6 +45,7 @@ endif
 
 ifeq ($(ADK_NATIVE),y)
 CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
+			SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
@@ -54,7 +55,6 @@ CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
 else
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \
-			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
@@ -65,6 +65,7 @@ CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
 endif
+CONFIGURE_PROG?=	configure
 MAKE_FILE?=		Makefile
 # this is environment for 'make all' and 'make install'
 MAKE_ENV?=
@@ -91,15 +92,19 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
 			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
 			PKG_CONFIG_LIBDIR=/dev/null \
-			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
-			AR='${TARGET_CROSS}ar' RANLIB='${TARGET_CROSS}ranlib' \
+			CC='${TARGET_CC}' \
+			CXX='${TARGET_CXX}' \
+			AR='${TARGET_CROSS}ar' \
+			RANLIB='${TARGET_CROSS}ranlib' \
 			NM='${TARGET_CROSS}nm' \
+			STRIP='${TARGET_CROSS}strip' \
+			CROSS="$(TARGET_CROSS)" \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
 endif
-MAKE_FLAGS+=		${XAKE_FLAGS}
+MAKE_FLAGS+=		${XAKE_FLAGS} V=1
 FAKE_FLAGS+=		${XAKE_FLAGS}
 
 ifeq ($(strip ${WRKDIR_BSD}),)
@@ -216,7 +221,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	@cd $${IDIR_$(1)}; \
+	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
@@ -229,7 +234,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    cpio -apdlmu '$${STAGING_DIR}'
+	    cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \

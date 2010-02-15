@@ -9,7 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c67cf30e281a924def6426be0973df56
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		net
-PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack kmod-nf-conntrack-ipv4 kmod-nf-nat kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject kmod-ip-nf-filter kmod-ip-nf-match-state kmod-netfilter-xt-target-tcpmss
+PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack 
+PKG_DEPENDS+=		kmod-nf-conntrack-ipv4 kmod-nf-nat 
+PKG_DEPENDS+=		kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject
+PKG_DEPENDS+=		kmod-ip-nf-filter kmod-ip-nf-match-state 
+PKG_DEPENDS+=		kmod-netfilter-xt-target-tcpmss
 PKG_URL:=		http://www.netfilter.org
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/iptables/ \
@@ -27,10 +31,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-devel
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 SUB_INSTALL-${ADK_PACKAGE_IP6TABLES}+=			ip6tables-install
 

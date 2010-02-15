@@ -19,14 +19,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_INPUT_KEYBOARD,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86_INPUT_KEYBOARD}/usr/lib/xorg/modules/input
 	${CP} ${WRKINST}/usr/lib/xorg/modules/input/kbd_drv.so \
 		${IDIR_XF86_INPUT_KEYBOARD}/usr/lib/xorg/modules/input/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
-

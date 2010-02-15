@@ -1,4 +1,3 @@
-$Id$
 --- icecast-2.3.2.orig/m4/xiph_curl.m4	2008-04-19 03:54:26.000000000 +0200
 +++ icecast-2.3.2/m4/xiph_curl.m4	2008-08-29 12:34:17.000000000 +0200
 @@ -52,7 +52,7 @@ AC_CHECK_HEADERS([curl/curl.h],, curl_ok

@@ -14,15 +14,11 @@ PKG_SITES:=		http://www.monkey.org/~provos/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBEVENT,libevent,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+$(eval $(call PKG_template,LIBEVENT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBEVENT)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libevent-$(PKG_VERSION).so.* \
+	$(CP) $(WRKINST)/usr/lib/libevent-$(PKG_VERSION).so* \
 		$(IDIR_LIBEVENT)/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

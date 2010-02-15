@@ -19,8 +19,9 @@ include ${TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,KMOD_SANGAM_ATM,kmod-sangam-atm,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		manual
-INSTALL_STYLE:=		manual
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
 
 do-build:
 	$(MAKE) ${KERNEL_MAKE_OPTS} LDFLAGS="" SUBDIRS="${WRKBUILD}" modules

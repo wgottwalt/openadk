@@ -11,7 +11,7 @@ export ADKVERSION
 
 ifneq (${package},)
 subdir:=	package/${package}
-_subdir_dep:=	${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 endif
 
 ifneq (${subdir},)

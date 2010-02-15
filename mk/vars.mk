@@ -15,23 +15,26 @@ else
 TARGET_DEBUGGING:=	-fomit-frame-pointer
 endif
 TARGET_CFLAGS:=		$(TARGET_OPTIMIZATION) $(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING)
+ifneq ($(ADK_TARGET_ARCH_OPTIMIZATION),)
+TARGET_CFLAGS+=		-march=$(ADK_TARGET_ARCH_OPTIMIZATION)
+endif
 
 BASE_DIR:=		$(TOPDIR)
 DISTDIR?=		${BASE_DIR}/dl
-BUILD_DIR:=		${BASE_DIR}/build_${CPU_ARCH}
+BUILD_DIR:=		${BASE_DIR}/build_${ADK_TARGET}_${ADK_LIBC}
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
-STAGING_PARENT:=	${BASE_DIR}/cross_${CPU_ARCH}
+STAGING_PARENT:=	${BASE_DIR}/cross_${ADK_TARGET}_${ADK_LIBC}
 STAGING_PARENT_PFX:=	${BASE_DIR}/cross_*
 STAGING_TOOLS:=		${STAGING_PARENT}/host
 STAGING_DIR:=		${STAGING_PARENT}/target
-TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}
+TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${ADK_TARGET}_${ADK_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
-BIN_DIR:=		$(BASE_DIR)/bin_${ADK_TARGET}
-BIN_DIR_PFX:=		$(BASE_DIR)/bin_*
+BIN_DIR:=		$(BASE_DIR)/bin/${ADK_TARGET}_${ADK_LIBC}
+BIN_DIR_PFX:=		$(BASE_DIR)/bin
 PACKAGE_DIR:=		$(BIN_DIR)/packages
-TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET}
+TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET}_${ADK_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
 TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TOOLS}/bin:${STAGING_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-linux-$(ADK_TARGET_SUFFIX)
@@ -46,6 +49,7 @@ TARGET_CROSS:=		$(STAGING_TOOLS)/bin/$(CPU_ARCH)-linux-$(ADK_TARGET_SUFFIX)-
 endif
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
+TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 TARGET_CPPFLAGS+=	-I${STAGING_DIR}/usr/include
 TARGET_LDFLAGS+=	-Wl,-O2
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
@@ -58,11 +62,13 @@ TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			AS=$(TARGET_CROSS)as \
 			LD=$(TARGET_CROSS)ld \
 			NM=$(TARGET_CROSS)nm \
-			CC="$(TARGET_CC)" \
-			GCC="$(TARGET_CC)" \
-			CXX="$(TARGET_CXX)" \
-			RANLIB=$(TARGET_CROSS)ranlib
+			RANLIB=$(TARGET_CROSS)ranlib \
+			CC='$(TARGET_CC)' \
+			GCC='$(TARGET_CC)' \
+			CXX='$(TARGET_CXX)' \
+			CROSS='$(TARGET_CROSS)'
 HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${HOSTCC}' \
+			BUILD_CC='${HOSTCC}' \
 			CFLAGS_FOR_BUILD='${HOSTCFLAGS}' \
 			CPPFLAGS_FOR_BUILD='${HOSTCPPFLAGS}' \
 			LDFLAGS_FOR_BUILD='${HOSTLDFLAGS}'
@@ -96,19 +102,21 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | cpio -i -d --quiet ;; \
+				cat $$file | cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | cpio -i -d --quiet ;; \
+				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				bzip2 -dc $$file | cpio -i -d --quiet ;; \
+				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
 				unzip -qd ${WRKDIR} $$file ;; \
+			*.arm) \
+				cp $$file ${WRKDIR} ;; \
 			*) \
 				echo "Cannot extract '$$file'" >&2; \
 				false ;; \

@@ -54,11 +54,16 @@ image-prepare-post:
 
 INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
 ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
-ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
+ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
+ROOTFSUSERTARBALL=	${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
 INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
+
+${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
+	cd ${TARGET_DIR}; tar --exclude ./boot -cf - --owner=0 --group=0 . \
+		| gzip -n9 >$@
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \

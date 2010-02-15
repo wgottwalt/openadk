@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		net-snmp
 PKG_VERSION:=		5.5
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libelf
 PKG_MD5SUM:=		5b2551e7bd024fbbee84dca22a5f13a1
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libnetsnmp libelf
+PKG_BUILDDEP+=		libelf
 PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.net-snmp.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
@@ -32,7 +32,6 @@ SNMP_TRANSPORTS_INCLUDED=	UDP TCP Callback Unix
 SNMP_TRANSPORTS_EXCLUDED=	TCPIPv6 UDPIPv6 Alias
 TLDFLAGS+=		-pthread
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-logfile=/var/log/snmpd.log \
 			--with-persistent-directory=/usr/lib/snmp/ \
 			--with-default-snmp-version=3 \
@@ -54,8 +53,6 @@ CONFIGURE_ARGS+=	--with-logfile=/var/log/snmpd.log \
 			--without-rpm \
 			--without-zlib
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 
 post-install:

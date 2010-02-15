@@ -18,12 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBART,libart,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBART}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libart_lgpl_2.so.* ${IDIR_LIBART}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libart_lgpl_2.so* ${IDIR_LIBART}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

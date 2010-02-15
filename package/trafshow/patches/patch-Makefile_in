@@ -1,0 +1,24 @@
+--- trafshow-5.2.3.orig/Makefile.in	2004-06-15 10:29:14.000000000 +0200
++++ trafshow-5.2.3/Makefile.in	2010-02-05 23:07:13.164334256 +0100
+@@ -59,6 +59,8 @@ OBJ	= $(CSRC:.c=.o) $(YSRC:.y=.o) $(LSRC
+ 
+ CLEANFILES = $(PROG) $(OBJ) $(GENSRC) y.tab.h
+ 
++all:	$(PROG)
++
+ $(PROG): $(OBJ)
+ 	@rm -f $@
+ 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LIBS)
+@@ -73,9 +75,9 @@ version.c: VERSION Makefile
+ 	@echo 'char compiled[] = "$(CC) $(CFLAGS) $(LIBS)";' >> $@
+ 
+ install:
+-	./install-sh -c -s -m 555 -o bin -g bin $(PROG) $(BINDEST)/$(PROG)
+-	./install-sh -c -m 444 -o bin -g bin $(PROG).1 $(MANDEST)/man1/$(PROG).1
+-	[ -f /etc/$(PROG) ] || ./install-sh -c -m 444 .trafshow /etc/$(PROG)
++	./install-sh -c -m 755 $(PROG) $(DESTDIR)$(BINDEST)/$(PROG)
++	./install-sh -c -m 644 $(PROG).1 $(DESTDIR)$(MANDEST)/man1/$(PROG).1
++	./install-sh -c -m 644 .trafshow $(DESTDIR)/etc/$(PROG)
+ 
+ clean:
+ 	rm -f $(CLEANFILES)

@@ -5,12 +5,10 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.15.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		495e320537f0772125f2db3c098e437c
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
-PKG_DEPENDS:=		base-files
-PKG_BUILDDEP+=		base-files
 PKG_URL:=		http://www.busybox.net
 PKG_SITES:=		http://www.busybox.net/downloads/
 
@@ -18,23 +16,32 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-do-configure:
+CONFIG_STYLE:=	manual
+BUILD_STYLE:=	manual
+INSTALL_STYLE:=	manual
+
+${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
-		${WRKBUILD}/.config
-	$(SED) 's@IDIR@${WRKINST}' ${WRKBUILD}/.config
+		${TOPDIR}/.busyboxcfg
+
+${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
+	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
+	
+do-configure: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig
+	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 else
 	yes '' | \
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    EXTRA_CFLAGS="$(TARGET_CFLAGS)" IPKG_ARCH="$(ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig
+	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 endif
 
-do-build:
+do-build: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
@@ -43,18 +50,20 @@ else
 	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: ${TOPDIR}/.config
+do-install: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install
+	    IPKG_ARCH="$(ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
 endif
-ifeq ($(DEBUG),1)
+	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
+ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox
 endif
-	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
+
+fake:	$(TOPDIR)/.busyboxcfg do-configure do-install
 
 include ${TOPDIR}/mk/pkg-bottom.mk

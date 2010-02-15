@@ -72,7 +72,7 @@ else
 fi
 
 
-printf "Generate qemu image\n"
+printf "Generate qemu image (512 MB)\n"
 $qimg create -f raw $1 512M >/dev/null
 
 printf "Creating filesystem $filesystem\n"
@@ -120,14 +120,12 @@ else
 	cp $2-initramfs $tmp/boot/initramfs
 fi
 
-printf "Creating device nodes\n"
+#printf "Creating device nodes\n"
 mknod -m 666 $tmp/dev/zero c 1 5
 mknod -m 666 $tmp/dev/null c 1 3
 mknod -m 622 $tmp/dev/console c 5 1
 mknod -m 666 $tmp/dev/tty c 5 0
 mknod -m 666 $tmp/dev/tty0 c 4 0
-#mknod -m 660 $tmp/dev/hda b 3 0
-#mknod -m 660 $tmp/dev/hda1 b 3 1
 mknod -m 666 $tmp/dev/ttyS0 c 4 64
 
 umount $tmp

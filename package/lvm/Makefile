@@ -22,12 +22,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_DM},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--with-lvm1=none
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	# lvm

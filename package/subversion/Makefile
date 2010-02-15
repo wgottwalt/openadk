@@ -6,25 +6,21 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		subversion
 PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		apr-util expat apr zlib libiconv
-ifneq ($(ADK_PACKAGE_SUBVERSION_NEON),)
-PKG_BUILDDEP+=		neon
-endif
 PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
 PKG_DESCR:=		revision control program
-PKG_SECTION:=		net
-PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat
+PKG_SECTION:=		scm
+PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite
+PKG_BUILDDEP+=		apr-util expat apr zlib libiconv sqlite
+ifneq ($(ADK_PACKAGE_SUBVERSION_NEON),)
+PKG_DEPENDS+=		neon
+PKG_BUILDDEP+=		neon
+endif
 PKG_SITES:=		http://subversion.tigris.org/downloads/
 
 include ${TOPDIR}/mk/package.mk
 
-ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
-PKG_DEPENDS+=		neon
-endif
-
 $(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr/bin/apr-config
 CONFIGURE_ARGS+=	--with-apr-util=${STAGING_DIR}/usr/bin/apr-config
 CONFIGURE_ARGS+=	--disable-mod-activation
@@ -36,7 +32,6 @@ CONFIGURE_ARGS+=	--without-jikes
 CONFIGURE_ARGS+=	--without-jdk
 CONFIGURE_ARGS+=	--disable-javahl
 CONFIGURE_ARGS+=	--without-berkeley-db
-
 LIBS= 			-lsqlite3 -laprutil-0 -lapr-0 -lexpat -liconv 
 
 ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
@@ -51,9 +46,6 @@ LIBS+=			-pthread
 endif
 
 CONFIGURE_ENV+=		LIBS='${LIBS}'
-
-BUILD_STYLE:=           auto
-INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	external-install local-install
 
 post-install:

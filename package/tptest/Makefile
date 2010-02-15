@@ -16,6 +16,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TPTEST,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
 	(cd ${WRKSRC}/apps/unix/server && ${MAKE} && ${MAKE} install DESTDIR="${WRKINST}")
 	(cd ${WRKSRC}/apps/unix/client && ${MAKE} && ${MAKE} install DESTDIR="${WRKINST}")

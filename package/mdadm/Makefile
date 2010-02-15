@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mdadm
-PKG_VERSION:=		3.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		1eb89885b2b881562fc79ed2f5e1a056
+PKG_VERSION:=		3.1.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8bfeea282d21b5ef8e825122fb359457
 PKG_DESCR:=		tool for managing Linux Software RAID arrays
 PKG_SECTION:=		utils
 PKG_URL:=		http://neil.brown.name/blog/mdadm
@@ -16,9 +16,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MDADM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+
 XAKE_FLAGS+=		CROSS_COMPILE="${TARGET_CROSS}"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MDADM}/usr/sbin

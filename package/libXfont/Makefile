@@ -17,11 +17,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXFONT,libxfont,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		V=1
 CONFIGURE_ENV+=		ac_cv_path_XMLTO=true
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXFONT}/usr/lib

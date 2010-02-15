@@ -14,6 +14,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
@@ -34,6 +38,8 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	done
 
 uclibc-dev-install:
+	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \

@@ -16,13 +16,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPRI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=		manual
+
 MAKE_FLAGS+=		CC='${TARGET_CC}' LDCONFIG=''
 FAKE_FLAGS+=		INSTALL_BASE=/usr
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPRI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpri.so.* ${IDIR_LIBPRI}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpri.so* ${IDIR_LIBPRI}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

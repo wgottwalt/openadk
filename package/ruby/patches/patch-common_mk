@@ -1,0 +1,10 @@
+--- ruby-1.9.1-p378.orig/common.mk	2009-11-12 17:01:28.000000000 +0100
++++ ruby-1.9.1-p378/common.mk	2010-02-13 20:20:27.000000000 +0100
+@@ -400,7 +400,7 @@ extconf: $(PREP)
+	$(RUNRUBY) -C "$(EXTCONFDIR)" $(EXTCONF) $(EXTCONFARGS)
+
+ $(RBCONFIG): $(srcdir)/mkconfig.rb config.status $(PREP)
+-	@$(MINIRUBY) $(srcdir)/mkconfig.rb -timestamp=$@ \
++	$(MINIRUBY) $(srcdir)/mkconfig.rb -timestamp=$@ \
+		-install_name=$(RUBY_INSTALL_NAME) \
+		-so_name=$(RUBY_SO_NAME) rbconfig.rb

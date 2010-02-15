@@ -8,15 +8,6 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-#workaround for mips and gcc 4.4, where -Os does not inline code in ld.so
-ifeq ($(ARCH),mips)
-TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
-endif
-#workaround for cris and gcc 4.4, where -Os generates ICE
-ifeq ($(ARCH),cris)
-TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
-endif
-
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \

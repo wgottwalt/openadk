@@ -1,0 +1,11 @@
+--- ruby-1.9.1-p378.orig/Makefile.in	2009-11-12 17:01:28.000000000 +0100
++++ ruby-1.9.1-p378/Makefile.in	2010-02-13 21:10:02.000000000 +0100
+@@ -274,7 +274,7 @@ INSNS	= opt_sc.inc optinsn.inc optunifs.
+
+ $(INSNS):
+	@$(RM) $(PROGRAM)
+-	$(BASERUBY) -Ks $(srcdir)/tool/insns2vm.rb $(INSNS2VMOPT) $@
++	$(BASERUBY) $(srcdir)/tool/insns2vm.rb $(INSNS2VMOPT) $@
+
+ node_name.inc:
+	$(BASERUBY) -n $(srcdir)/tool/node_name.rb $? > $@

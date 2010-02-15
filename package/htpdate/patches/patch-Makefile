@@ -1,14 +1,35 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- htpdate-1.0.3.orig/Makefile	2008-09-02 22:24:09.000000000 +0200
-+++ htpdate-1.0.3/Makefile	2009-05-29 14:24:39.045810534 +0200
+--- htpdate-1.0.4.orig/Makefile	2008-10-13 21:04:08.000000000 +0200
++++ htpdate-1.0.4/Makefile	2010-02-05 22:49:58.954334284 +0100
 @@ -2,8 +2,8 @@ prefix = /usr
  bindir = ${prefix}/bin
  mandir = ${prefix}/share/man
  
 -CC = gcc
--CFLAGS += -Wall -pedantic -ansi -O2
+-CFLAGS += -Wall -O2
 +CC ?= gcc
-+CFLAGS ?= -Wall -pedantic -ansi -O2
- #CFLAGS += -Wall -ansi -O2
++CFLAGS ?= -Wall -O2
+ #CFLAGS += -Wall -pedantic -ansi -O2
  
  INSTALL = /usr/bin/install -c
+@@ -15,15 +15,14 @@ htpdate: htpdate.c
+ 	$(CC) $(CFLAGS) -o htpdate htpdate.c
+ 
+ install: all
+-	$(STRIP) htpdate
+-	mkdir -p $(bindir)
+-	$(INSTALL) -m 755 htpdate $(bindir)/htpdate
+-	mkdir -p $(mandir)/man8
+-	$(INSTALL) -m 644 htpdate.8.gz $(mandir)/man8/htpdate.8.gz
++	mkdir -p $(DESTDIR)$(bindir)
++	$(INSTALL) -m 755 htpdate $(DESTDIR)$(bindir)/htpdate
++	mkdir -p $(DESTDIR)$(mandir)/man8
++	$(INSTALL) -m 644 htpdate.8.gz $(DESTDIR)$(mandir)/man8/htpdate.8.gz
+ 
+ clean:
+ 	rm -rf htpdate
+ 
+ uninstall:
+-	rm -rf $(bindir)/htpdate
+-	rm -rf $(mandir)/man8/htpdate.8.gz
++	rm -rf $(DESTDIR)$(bindir)/htpdate
++	rm -rf $(DESTDIR)$(mandir)/man8/htpdate.8.gz

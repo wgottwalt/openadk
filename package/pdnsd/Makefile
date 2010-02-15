@@ -13,15 +13,13 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.phys.uu.nl/~rombouts/pdnsd.html
 PKG_SITES:=		http://www.phys.uu.nl/~rombouts/pdnsd/releases/
 
+PKG_HOST_DEPENDS:=	!netbsd
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-par.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PDNSD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_PDNSD)/etc

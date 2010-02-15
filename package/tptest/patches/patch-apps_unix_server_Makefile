@@ -4,7 +4,7 @@
         - drop the local subdir (openadk doesnt use this path)
         - create the directories to install into
 --- tptest-3.1.7.orig/apps/unix/server/Makefile	2003-01-22 11:42:45.000000000 +0100
-+++ tptest-3.1.7/apps/unix/server/Makefile	2010-01-20 12:01:24.758178270 +0100
++++ tptest-3.1.7/apps/unix/server/Makefile	2010-01-28 00:00:23.000000000 +0100
 @@ -1,4 +1,4 @@
 -CC		= gcc
 +CC		?= gcc
@@ -28,7 +28,7 @@
  install:
 -	install -c -s -o bin -g bin -m 555 tptestserver /usr/local/bin
 +	install -d -m 755 ${DESTDIR}/usr/bin
-+	install -c -s -m 555 tptestserver ${DESTDIR}/usr/bin
++	install -c -m 755 tptestserver ${DESTDIR}/usr/bin
  
  depend: 
  	${MAKEDEPEND} ${INCL} ${SRCS} ${LIBSRCS}

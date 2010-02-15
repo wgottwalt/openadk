@@ -6,13 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		glib
 PKG_VERSION:=		2.22.2
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		gettext libiconv
 PKG_MD5SUM:=		00eb873975e2ef9361b8177131c7c943
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		gettext libiconv libpthread
+PKG_BUILDDEP+=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.22/
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -21,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-debug=no \
 			--disable-mem-pools \
 			--disable-rebuilds \
@@ -34,11 +34,13 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_uscore=no \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so.* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgio*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libglib*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -4,16 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
-PKG_VERSION:=		1.0.6
-PKG_RELEASE:=		5
+PKG_VERSION:=		1.0.7
+PKG_RELEASE:=		1
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
-PKG_TARGET_DEPENDS:=	alix1c alix2d alix2d13 wrap foxboard ag241 rb532
+
+PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 rb532
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
-CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG
+CFLINE_CFGFS:= 		select BUSYBOX_COMM\n\tselect BUSYBOX_MD5SUM\n\tselect BUSYBOX_XARGS\n\tselect BUSYBOX_FEATURE_SORT_BIG\n\tselect BUSYBOX_DIFF\n\tdepends on !ADK_TARGET_ROOTFS_NFSROOT
 
 include ${TOPDIR}/mk/package.mk
 
@@ -21,11 +22,8 @@ $(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 PKGDFLT_CFGFS=		y
 
-BUILD_STYLE:=		auto
-
-do-configure:
-	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CFGFS}/sbin

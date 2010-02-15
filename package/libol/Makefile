@@ -16,13 +16,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libol.so.* ${IDIR_LIBOL}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libol.so* ${IDIR_LIBOL}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

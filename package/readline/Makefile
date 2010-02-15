@@ -6,21 +6,18 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		readline
 PKG_VERSION:=		5.2
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM:=		e39331f32ad14009b9ff49cc10c5e751
 PKG_DESCR:=		Command line editing library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP+=		ncurses
 PKG_SITES:=		${MASTER_SITE_GNU:=readline/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBREADLINE,libreadline,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+= 	--with-curses
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBREADLINE}/usr/lib

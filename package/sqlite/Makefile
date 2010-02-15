@@ -6,10 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		sqlite
 PKG_VERSION:=		3.6.20
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		ncurses readline
 PKG_MD5SUM:=		0faf8fc8ccff5297513c6532b2b4ce23
 PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		ncurses readline
 PKG_URL:=		http://www.sqlite.org
 PKG_SITES:=		http://www.sqlite.org/
 
@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		config_BUILD_CC="${HOSTCC}" \
 			config_BUILD_CFLAGS="${HOSTCFLAGS}" \
 			config_TARGET_CC="${TARGET_CC}" \
@@ -29,8 +28,6 @@ MAKE_FLAGS+=		LIBPTHREAD=-lm
 CONFIGURE_ARGS+=	--disable-tcl \
 			--without-tcl \
 			--disable-amalgamation
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBSQLITE}/usr/lib

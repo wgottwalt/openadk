@@ -9,16 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		93bd04e2fb348a0c48e13ab3933f2381
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11
+PKG_DEPENDS:=		font-util
+PKG_BUILDDEP+=		font-util
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FONT_ADOBE_100DPI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_FONT_ADOBE_100DPI)/usr/share/fonts/X11/100dpi

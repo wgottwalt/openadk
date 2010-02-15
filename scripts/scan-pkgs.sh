@@ -33,10 +33,6 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
-if [[ -n $ADK_PACKAGE_RUBY ]]; then
-	NEED_RUBY="$NEED_RUBY ruby"
-fi
-
 if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
 	NEED_BISON="$NEED_BISON libusb"
 fi
@@ -92,6 +88,14 @@ fi
 
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_75DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
 fi
 
 if [[ -n $NEED_GETTEXT ]]; then

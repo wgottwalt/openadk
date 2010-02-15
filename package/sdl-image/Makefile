@@ -20,17 +20,24 @@ WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBSDL_IMAGE_DEV}+=	libsdl-image-dev-install
+
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
 			--enable-bmp \
 			--enable-tif
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL_IMAGE)/usr/lib
+
+libsdl-image-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
+	$(CP) ${WRKINST}/usr/include/SDL/*.h \
+		$(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
 
 include ${TOPDIR}/mk/pkg-bottom.mk

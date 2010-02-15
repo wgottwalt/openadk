@@ -16,11 +16,17 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UDP_BROADCAST_RELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
-	${TARGET_CC} ${TARGET_CFLAGS} ${WRKBUILD}/main.c -o ${WRKBUILD}/${PKG_NAME}
+	${TARGET_CC} -Wall ${TARGET_CFLAGS} ${WRKBUILD}/main.c \
+		-o ${WRKBUILD}/udp-broadcast-relay
 
 do-install:
 	${INSTALL_DIR} ${IDIR_UDP_BROADCAST_RELAY}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_UDP_BROADCAST_RELAY}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/udp-broadcast-relay \
+		${IDIR_UDP_BROADCAST_RELAY}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

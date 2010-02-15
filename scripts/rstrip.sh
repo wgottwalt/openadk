@@ -33,10 +33,8 @@ find $TARGETS -type f -a -exec file {} \; | \
 	T=$T$stripcomm
 	case $line in
 	*ELF*executable*statically\ linked*)
-		echo >&2 "$SELF: *WARNING* '$V' is not dynamically linked!"
 		;;
 	*ELF*relocatable*,\ not\ stripped*)
-		echo >&2 "$SELF: *WARNING* '$V' is a relocatable!"
 		;;
 	esac
 	case $line in
@@ -58,3 +56,4 @@ find $TARGETS -type f -a -exec file {} \; | \
 	echo "-> $T $F"
 	eval "$T $F"
 done
+exit 0

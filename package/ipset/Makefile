@@ -19,9 +19,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+
 XAKE_FLAGS+=		PREFIX=/usr
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ALL_TARGET:=		binaries
 INSTALL_TARGET:=	binaries_install
 

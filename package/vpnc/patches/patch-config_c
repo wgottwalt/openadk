@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- vpnc-0.4.0.orig/config.c	2007-02-16 18:22:06.000000000 +0100
-+++ vpnc-0.4.0/config.c	2008-10-16 12:55:57.000000000 +0200
-@@ -485,7 +485,7 @@ static char *get_config_filename(const c
+--- vpnc-0.5.3.orig/config.c	2008-11-19 21:36:12.000000000 +0100
++++ vpnc-0.5.3/config.c	2010-02-06 04:35:05.394334473 +0100
+@@ -456,7 +456,7 @@ static char *get_config_filename(const c
  {
  	char *realname;
  	

@@ -19,10 +19,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENNTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--with-privsep-user=ntp \
 			--with-adjtimex
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_OPENNTPD}/etc

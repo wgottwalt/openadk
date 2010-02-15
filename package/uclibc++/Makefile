@@ -18,7 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBCXX,uclibc++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 MAKE_FLAGS+=		TOPDIR="${WRKBUILD}/" \
 			${TARGET_CONFIGURE_OPTS} \
 			ARCH_CFLAGS="${TARGET_CFLAGS}" \

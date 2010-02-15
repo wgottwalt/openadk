@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		aufs2 utilities
 PKG_SECTION:=		admin
 PKG_URL:=		http://aufs.sf.net/
-PKG_HOST_DEPENDS:=	!cygwin !freebsd !openbsd
+PKG_HOST_DEPENDS:=	!cygwin !freebsd !openbsd !netbsd
 
 NO_DISTFILES:=		1
 
@@ -17,13 +17,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AUFS_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		KDIR=${LINUX_DIR}
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
-do-extract:
-	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}/
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_AUFS_UTIL)/sbin

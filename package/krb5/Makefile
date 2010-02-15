@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		9f7b3402b4731a7fa543db193bf1b564
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		krb5-libs libncurses libss libcom-err
+PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err
 PKG_BUILDDEP+=		ncurses e2fsprogs
 PKG_URL:=		http://web.mit.edu/kerberos
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.7/
@@ -23,10 +23,9 @@ WRKSRC=			${WRKDIST}/src
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KRB5_LIBS,krb5-libs,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
+$(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
 			--with-system-ss \
@@ -37,8 +36,6 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_printf_positional=yes \
 			ac_cv_file__etc_environment=no \
 			ac_cv_file__etc_TIMEZONE=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
@@ -59,11 +56,11 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt,kadm5srv,kdb5}.so* \
 		${IDIR_KRB5_SERVER}/usr/lib
 	# krb5-libs
-	${INSTALL_DIR} ${IDIR_KRB5_LIBS}/etc
-	${INSTALL_DIR} ${IDIR_KRB5_LIBS}/usr/lib
-	${INSTALL_DATA} ./files/krb5.conf ${IDIR_KRB5_LIBS}/etc
+	${INSTALL_DIR} ${IDIR_LIBKRB5}/etc
+	${INSTALL_DIR} ${IDIR_LIBKRB5}/usr/lib
+	${INSTALL_DATA} ./files/krb5.conf ${IDIR_LIBKRB5}/etc
 	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
-		${IDIR_KRB5_LIBS}/usr/lib
-	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' > ${IDIR_KRB5_LIBS}/etc/gssapi_mech.conf
+		${IDIR_LIBKRB5}/usr/lib
+	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' > ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
 
 include ${TOPDIR}/mk/pkg-bottom.mk

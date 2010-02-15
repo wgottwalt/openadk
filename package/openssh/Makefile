@@ -9,14 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		13563dbf61f36ca9a1e4254260131041
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net
-PKG_DEPENDS:=		zlib libopenssl
+PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
-PKG_DEPENDS+=		krb5-libs
+PKG_DEPENDS+=		libkrb5 libcom-err
 PKG_BUILDDEP+=		krb5
 endif
 ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
-PKG_DEPENDS+=		heimdal-libs
+PKG_DEPENDS+=		libheimdal libcom-err
 PKG_BUILDDEP+=		heimdal
 endif
 PKG_URL:=		http://www.openssh.com
@@ -44,7 +44,6 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
 else
 CONFIGURE_ARGS+=	--without-kerberos5
 endif
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
 			ac_cv_func_setlogin=no \
 			ac_cv_lib_nsl_yp_match=no
@@ -63,13 +62,12 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--with-privsep-user=sshd \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_DIR}/usr"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/sbin
+	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/libexec
 	${CP} ./files/sshd_config ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ssh-keygen \
 		${IDIR_OPENSSH_SERVER}/usr/bin
@@ -88,8 +86,8 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sftp \
 		${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/sftp-server \
-		${IDIR_OPENSSH_SFTP_SERVER}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/libexec/sftp-server \
+		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
 
 include ${TOPDIR}/mk/pkg-bottom.mk

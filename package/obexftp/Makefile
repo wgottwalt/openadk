@@ -6,17 +6,18 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		obexftp
 PKG_VERSION:=		0.23
 PKG_RELEASE:=		2
-PKG_BUILDDEP+=		openobex libiconv
 PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
 PKG_DESCR:=		bluetooth ftp application
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		openobex libiconv
+PKG_BUILDDEP+=		openobex libiconv
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
 PKG_DESCR_LIB:=		obexftp library
 PKG_SECTION_LIB:=	libs
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libmix
@@ -31,7 +32,6 @@ ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		STATIC_CFLAGS=-all-static
 endif
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_DIR}/usr/include" \
 			OPENOBEX_LIBS="-L${STAGING_DIR}/usr/lib \
 			    -lopenobex -lbluetooth -liconv"
@@ -39,8 +39,6 @@ CONFIGURE_ARGS+=	--disable-perl \
 			--disable-ruby \
 			--disable-tcl \
 			--disable-python
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin 

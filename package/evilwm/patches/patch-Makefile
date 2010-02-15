@@ -1,5 +1,6 @@
+do not strip by install
 --- evilwm-1.0.1.orig/Makefile	2009-03-30 12:37:06.000000000 +0200
-+++ evilwm-1.0.1/Makefile	2010-01-22 17:14:53.000000000 +0100
++++ evilwm-1.0.1/Makefile	2010-01-27 08:14:46.000000000 +0100
 @@ -1,11 +1,11 @@
  # If you don't use CC 
 -CC       = gcc
@@ -34,3 +35,12 @@
  #CFLAGS  += $(INCLUDES) $(DEFINES) -g -Wall
  CFLAGS  += -W -Wstrict-prototypes -Wpointer-arith -Wcast-align -Wcast-qual -Wshadow -Waggregate-return -Wnested-externs -Winline -Wwrite-strings -Wundef -Wsign-compare -Wmissing-prototypes -Wredundant-decls
  LDFLAGS += $(LDPATH) $(LIBS)
+@@ -93,7 +93,7 @@ evilwm: $(OBJS)
+ install: evilwm
+ 	if [ -f evilwm.exe ]; then mv evilwm.exe evilwm; fi
+ 	mkdir -p $(prefix)/bin $(prefix)/share/man/man1
+-	install -s evilwm $(prefix)/bin
++	install evilwm $(prefix)/bin
+ 	install evilwm.1 $(prefix)/share/man/man1
+ 	#gzip -9 $(prefix)/share/man/man1/evilwm.1
+ 

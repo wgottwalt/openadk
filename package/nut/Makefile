@@ -79,7 +79,6 @@ INSTALL_DRIVERS_tmp+=	snmp-ups
 endif
 INSTALL_DRIVERS=$(shell echo ${INSTALL_DRIVERS_tmp} | tr ' ' ',')
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--without-cgi \
 			--with-drivers=${INSTALL_DRIVERS} \
@@ -92,9 +91,7 @@ CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
 endif
 
-BUILD_STYLE:=		auto
 ALL_TARGET:=		all 
-INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install
 
 ifneq (${ADK_PACKAGE_NUT_USB},)

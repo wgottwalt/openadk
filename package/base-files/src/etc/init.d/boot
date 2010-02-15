@@ -1,0 +1,29 @@
+#!/bin/sh
+#INIT 10
+[[ $1 = autostart ]] || exit 0
+
+. /etc/functions.sh
+
+mkdir -p /var/log
+mkdir -p /var/run
+touch /var/log/lastlog
+touch /var/log/wtmp
+ln -s /var/tmp /tmp
+
+echo 0 > /proc/sys/kernel/printk
+
+HOSTNAME=
+[[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)
+HOSTNAME=${HOSTNAME%%.*}
+echo ${HOSTNAME:=linux} >/proc/sys/kernel/hostname
+
+chown 0:0 /tmp; chmod 1777 /tmp
+
+load_modules /etc/modules
+for f in /etc/modules.d/*; do
+	[[ -e $f ]] && load_modules /etc/modules.d/*
+	break
+done
+# settle down, after module load
+sleep 2
+exit 0

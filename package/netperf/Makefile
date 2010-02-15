@@ -19,9 +19,6 @@ $(eval $(call PKG_template,NETPERF,${PKG_NAME},${PKG_VERSION}${PKG_RELEASE},${PK
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NETPERF}/usr/bin

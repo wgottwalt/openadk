@@ -18,10 +18,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RNG_TOOLS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 post-install:
 	$(INSTALL_DIR) $(IDIR_RNG_TOOLS)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/rngd $(IDIR_RNG_TOOLS)/usr/sbin

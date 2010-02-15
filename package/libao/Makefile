@@ -16,16 +16,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBAO,libao,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-esd \
 			--disable-arts \
 			--disable-nas \
 			--disable-polyp
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBAO}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libao.so.* ${IDIR_LIBAO}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libao.so* ${IDIR_LIBAO}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

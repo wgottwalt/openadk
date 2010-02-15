@@ -1,0 +1,20 @@
+--- moc-2.4.4.orig/configure	2009-01-04 09:28:51.000000000 +0100
++++ moc-2.4.4/configure	2010-02-06 01:22:38.464334671 +0100
+@@ -13910,7 +13910,7 @@ DECODER_PLUGIN_DIR=decoder_plugins
+ PLUGIN_LDFLAGS='-module -avoid-version'
+ 
+ 
+-OS=`uname 2>/dev/null`
++OS=Linux
+ 
+ case "$OS" in
+ 	Linux)
+@@ -13929,7 +13929,7 @@ _ACEOF
+ 		;;
+ esac
+ 
+-LDFLAGS="$LDFLAGS -export-dynamic"
++LDFLAGS="$LDFLAGS"
+ 
+ { echo "$as_me:$LINENO: checking for ANSI C header files" >&5
+ echo $ECHO_N "checking for ANSI C header files... $ECHO_C" >&6; }

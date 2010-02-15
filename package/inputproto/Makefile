@@ -10,9 +10,4 @@ PKG_MD5SUM:=		13d91739cf70a781f1db24d8d3677574
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
-
 include ${TOPDIR}/mk/pkg-bottom.mk
