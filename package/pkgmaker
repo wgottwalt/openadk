@@ -172,6 +172,9 @@ for dn in */Makefile; do
 		if [[ $spcu = LIB* ]]; then
 			h=5			# divert to Config.in.lib
 			(( g5++ )) && print -u5	# been here before
+		elif [[ $spcu = KMOD* ]]; then
+			h=6
+			(( g6++ )) && print -u6
 		else
 			h=4			# divert to Config.in
 			print -u4
@@ -258,8 +261,6 @@ EOF
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
 	done >&4
 
-	) 4>Config.in 5>Config.in.lib
+	) 4>Config.in 5>Config.in.lib 6>Config.in.kmod
 	cd ..
 done
-#pbar=done
-#print -u2 "$pbar"
