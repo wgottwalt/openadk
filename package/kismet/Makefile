@@ -4,54 +4,46 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		kismet
-PKG_VERSION:=		2008-05-R1
+PKG_VERSION:=		2010-01-R1
 PKG_RELEASE:=		1
+PKG_DESCR:=		Kismet
 PKG_BUILDDEP+=		libpcap ncurses
-PKG_CXX:=		KISMET
-PKG_MD5SUM:=		6ee365d36354b4dee4945e67f8149294
+PKG_DEPENDS:=		libpcap libncurses
+PKG_MD5SUM:=		a6d6edcf65d5bb2cb5de6472bcc16f19
+PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
+
+PKG_DESCR_CLIENT:=	Kismet client
+PKG_DESCR_SERVER:=	Kismet server
+PKG_DESCR_DRONE:=	Kismet drone
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_DRONE},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SERVER},${PKG_SECTION}))
 
-INSTALL_STYLE:=		manual
-
-ifeq ($(ADK_COMPILE_KISMET_WITH_UCLIBCXX),y)
-TCFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ -I${STAGING_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-luClibc++ -lc -lm -lgcc_s -nodefaultlibs 
-CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++"
-else
-TLDFLAGS+=		-shared
-endif
 CONFIGURE_ARGS+=	--sysconfdir=/etc/kismet \
-			--enable-syspcap=yes \
-			--disable-setuid \
-			--disable-gpsmap
+			--disable-linuxwext
 
-do-install:
+pre-build:
+	(cd ${WRKBUILD} && ${MAKE} dep);
+
+post-install:
 	${INSTALL_DIR} ${IDIR_KISMET}/usr/bin/
-	${INSTALL_BIN} ${WRKBUILD}/kismet ${IDIR_KISMET}/usr/bin/kismet
+	${INSTALL_BIN} ${WRKINST}/usr/bin/kismet ${IDIR_KISMET}/usr/bin/kismet
 	${INSTALL_DIR} ${IDIR_KISMET_CLIENT}/usr/bin
-	${INSTALL_DIR} ${IDIR_KISMET_CLIENT}/etc/kismet/
-	${INSTALL_DATA} ./files/ap_manuf ${IDIR_KISMET_CLIENT}/etc/kismet/
-	${INSTALL_DATA} ./files/client_manuf ${IDIR_KISMET_CLIENT}/etc/kismet/
-	${INSTALL_DATA} ./files/kismet.conf ${IDIR_KISMET_CLIENT}/etc/kismet/
-	${INSTALL_DATA} ./files/kismet_ui.conf ${IDIR_KISMET_CLIENT}/etc/kismet/
-	${CP} ${WRKBUILD}/kismet_client ${IDIR_KISMET_CLIENT}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/kismet_client \
+		${IDIR_KISMET_CLIENT}/usr/bin/
 	${INSTALL_DIR} ${IDIR_KISMET_DRONE}/usr/bin
-	${INSTALL_DIR} ${IDIR_KISMET_DRONE}/etc/kismet/
-	${INSTALL_DATA} ./files/kismet_drone.conf ${IDIR_KISMET_DRONE}/etc/kismet/
-	${CP} ${WRKBUILD}/kismet_drone ${IDIR_KISMET_DRONE}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/kismet_drone \
+		${IDIR_KISMET_DRONE}/usr/bin/
 	${INSTALL_DIR} ${IDIR_KISMET_SERVER}/usr/bin
-	${INSTALL_DIR} ${IDIR_KISMET_SERVER}/etc/kismet/
-	${INSTALL_DATA} ./files/ap_manuf ${IDIR_KISMET_SERVER}/etc/kismet/
-	${INSTALL_DATA} ./files/client_manuf ${IDIR_KISMET_SERVER}/etc/kismet/
-	${INSTALL_DATA} ./files/kismet.conf ${IDIR_KISMET_SERVER}/etc/kismet/
-	${CP}  ${WRKBUILD}/kismet_server ${IDIR_KISMET_SERVER}/usr/bin/
+	${INSTALL_DIR} ${IDIR_KISMET_SERVER}/etc/kismet
+	${INSTALL_BIN} ${WRKINST}/usr/bin/kismet_server \
+		${IDIR_KISMET_SERVER}/usr/bin/
+	${INSTALL_DATA} ${WRKINST}/etc/kismet/kismet.conf \
+		${IDIR_KISMET_SERVER}/etc/kismet
 
 include ${TOPDIR}/mk/pkg-bottom.mk
