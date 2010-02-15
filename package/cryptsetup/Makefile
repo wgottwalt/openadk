@@ -24,7 +24,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CRYPTSETUP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ARGS+=	--disable-selinux
 
 post-install:

@@ -59,6 +59,30 @@ config ADK_alix2d13
 config ADK_wrap
 	tristate
 
+config ADK_arm_toolchain
+	tristate
+
+config ADK_armel_toolchain
+	tristate
+
+config ADK_mips_toolchain
+	tristate
+
+config ADK_mipsel_toolchain
+	tristate
+
+config ADK_ppc_toolchain
+	tristate
+
+config ADK_sparc_toolchain
+	tristate
+
+config ADK_x86_toolchain
+	tristate
+
+config ADK_x86_64_toolchain
+	tristate
+
 config ADK_arm_qemu
 	tristate
 
@@ -95,9 +119,6 @@ config ADK_rb433
 config ADK_zaurus
 	tristate
 
-config ADK_tomtom
-	tristate
-
 config ADK_foxboard
 	tristate
 
@@ -125,21 +146,24 @@ config ADK_wag54g
 config ADK_shuttle
 	tristate
 
-config ADK_g1
-	tristate
-
 config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
 	default "alix2d"  if ADK_alix2d
 	default "alix2d13"  if ADK_alix2d13
 	default "wrap"  if ADK_wrap
+	default "toolchain-arm"  if ADK_arm_toolchain
+	default "toolchain-armel"  if ADK_armel_toolchain
+	default "toolchain-mips"  if ADK_mips_toolchain
+	default "toolchain-mipsel"  if ADK_mipsel_toolchain
+	default "toolchain-ppc"  if ADK_ppc_toolchain
+	default "toolchain-sparc"  if ADK_sparc_toolchain
+	default "toolchain-x86"  if ADK_x86_toolchain
+	default "toolchain-x86_64"  if ADK_x86_64_toolchain
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
 	default "qemu-mipsel"  if ADK_mipsel_qemu
-	default "qemu-mips64"  if ADK_mips64_qemu
-	default "qemu-mips64el"  if ADK_mips64el_qemu
 	default "qemu-x86"  if ADK_x86_qemu
 	default "qemu-x86_64"  if ADK_x86_64_qemu
 	default "foxboard"  if ADK_foxboard
@@ -156,8 +180,6 @@ config ADK_TARGET
 	default "rescue-mips"  if ADK_mips_rescue
 	default "rescue-mipsel"  if ADK_mipsel_rescue
 	default "shuttle"  if ADK_shuttle
-	default "tomtom"  if ADK_tomtom
-	default "g1"  if ADK_g1
 
 # c library
 config ADK_uclibc
@@ -174,6 +196,7 @@ config ADK_LIBC
 	default "uclibc"  if ADK_uclibc
 	default "eglibc"  if ADK_eglibc
 	default "glibc"  if ADK_glibc
+	default "native"  if ADK_NATIVE
 
 menu "Target system"
 
@@ -259,30 +282,6 @@ config ADK_LINUX_MIPS_AG241
 	  (Texas Instruments AR7 platform)
 	  Status: stable
 
-config ADK_LINUX_ARM_TOMTOM
-	bool "TomTom Applications"
-	select ADK_tomtom
-	select ADK_TARGET_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Support for TomTom Rider 2 (or others).
-	  Just toolchain support to cross-compile your own
-	  applications. 
-	  Status: toolchain only
-
-config ADK_LINUX_ARM_G1
-	bool "Google G1 Applications"
-	select ADK_g1
-	select ADK_TARGET_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Support for Google G1.
-	  Just toolchain support to cross-compile your own
-	  applications. Use static linking for your packages.
-	  Status: toolchain only
-
 config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
 	select ADK_zaurus
@@ -309,6 +308,11 @@ config ADK_LINUX_QEMU
 	select ADK_TARGET_WITH_INPUT
 	help
 	 Support for Qemu Emulator
+
+config ADK_LINUX_TOOLCHAIN
+	bool "Toolchain only support"
+	help
+	 Toolchain only support
 
 config ADK_LINUX_X86_64_SHUTTLE
 	bool "Shuttle PC"
@@ -367,6 +371,92 @@ config ADK_LINUX_MIPS_RESCUE
 	 MIPS BE architecture.
 
 endchoice
+
+choice
+prompt "Architecture"
+depends on ADK_LINUX_TOOLCHAIN
+
+config ADK_LINUX_ARM_TOOLCHAIN
+	bool "ARM BE Toolchain"
+	select ADK_arm_toolchain
+	select ADK_TARGET_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_ARMEL_TOOLCHAIN
+	bool "ARM LE Toolchain"
+	select ADK_armel_toolchain
+	select ADK_TARGET_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_MIPS_TOOLCHAIN
+	bool "MIPS BE Toolchain (32 Bit)"
+	select ADK_mips_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_MIPSEL_TOOLCHAIN
+	bool "MIPS EL Toolchain (32 Bit)"
+	select ADK_mipsel_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_PPC_TOOLCHAIN
+	bool "PPC Toolchain (32 Bit)"
+	select ADK_ppc_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_SPARC_TOOLCHAIN
+	bool "SPARC Toolchain (32 Bit)"
+	select ADK_sparc_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_X86_TOOLCHAIN
+	bool "X86 Toolchain (32 Bit)"
+	select ADK_x86_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_X86_64_TOOLCHAIN
+	bool "X86 Toolchain (64 Bit)"
+	select ADK_x86_64_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+endchoice
+
+
+choice 
+prompt "Target Optimization"
+depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+
+config ADK_LINUX_ARM_V5TE
+	bool "armv5te"
+	help
+
+config ADK_LINUX_ARM_V4T
+	bool "armv4t"
+	help
+
+endchoice
+
+config ADK_TARGET_ARCH_OPTIMIZATION
+	string
+	default "armv5te" if ADK_LINUX_ARM_V5TE
+	default "armv4t" if ADK_LINUX_ARM_V4T
 
 choice
 prompt "Architecture"
@@ -637,7 +727,8 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_ARM_TOMTOM || \
 		ADK_LINUX_ARM_G1 || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.eglibc.org
 
@@ -661,7 +752,8 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_ARM_TOMTOM || \
 		ADK_LINUX_ARM_G1 || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.gnu.org/libc
 
@@ -673,7 +765,6 @@ config ADK_TARGET_SUFFIX
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
-
 
 choice
 prompt "Target Firmware type"

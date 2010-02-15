@@ -31,6 +31,7 @@ dl/
 package/*/info.mk
 package/*/Config.in
 package/*/Config.in.lib
+package/*/Config.in.kmod
 tools_build/
 extra/
 .menu

@@ -678,4 +678,6 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_NFLOG
 
 endmenu
 
+source package/ipset/Config.in.kmod
+
 endmenu

@@ -265,6 +265,7 @@ endmenu
 menu "ATM driver support"
 
 source package/sangam-atm/Config.in
+source package/sangam-atm/Config.in.kmod
 source package/sangam-atm/Config.in.fw
 
 endmenu
