@@ -67,7 +67,6 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/sbin
-	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/libexec
 	${CP} ./files/sshd_config ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ssh-keygen \
 		${IDIR_OPENSSH_SERVER}/usr/bin
@@ -86,6 +85,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sftp \
 		${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
+	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 	${INSTALL_BIN} ${WRKINST}/usr/libexec/sftp-server \
 		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
