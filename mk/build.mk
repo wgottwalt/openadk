@@ -23,6 +23,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_PACKAGE_HEIMDAL_SERVER=n \
 			ADK_PACKAGE_LIBHEIMDAL=n \
 			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
+			BUSYBOX_BBCONFIG=n \
 			BUSYBOX_SELINUX=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
@@ -393,7 +394,7 @@ menuconfig: $(CONFIG)/mconf defconfig .menu
 
 _config: $(CONFIG)/conf .menu
 	-@touch .config
-	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN) >/dev/null
+	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
 .NOTPARALLEL: _mconfig
