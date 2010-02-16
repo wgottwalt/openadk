@@ -304,6 +304,7 @@ config ADK_LINUX_XSCALE_ZAURUS
 	select ADK_zaurus
 	select ADK_TARGET_NO_FPU
 	select ADK_TARGET_WITH_INPUT
+	depends on ADK_BROKEN
 	help
 	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
 	 Status: development
@@ -378,12 +379,14 @@ config ADK_LINUX_X86_RESCUE
 config ADK_LINUX_MIPSEL_RESCUE
 	bool "mips (little endian)"
 	select ADK_mipsel_rescue
+	depends on ADK_BROKEN
 	help
 	 MIPS LE architecture.
 
 config ADK_LINUX_MIPS_RESCUE
 	bool "mips (big endian)"
 	select ADK_mips_rescue
+	depends on ADK_BROKEN
 	help
 	 MIPS BE architecture.
 
@@ -645,7 +648,7 @@ endchoice
 
 choice
 prompt "Routerboard model"
-default ADK_LINUX_MIPS_RB433
+default ADK_LINUX_MIPS_RB532
 depends on ADK_LINUX_MIKROTIK
 
 config ADK_LINUX_MIPS_RB411
@@ -656,6 +659,7 @@ config ADK_LINUX_MIPS_RB411
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_TARGET_WITH_MINIPCI
+	depends on ADK_BROKEN
 	help
 	 Support for Mikrotik RB411.
 	 Status: development
@@ -668,6 +672,7 @@ config ADK_LINUX_MIPS_RB433
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_TARGET_WITH_MINIPCI
+	depends on ADK_BROKEN
 	help
 	 Support for Mikrotik RB433.
 	 Status: development
@@ -718,7 +723,7 @@ depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
-	#depends on !ADK_LINUX_MIPS64_LEMOTE
+	depends on !ADK_LINUX_MIPS64_LEMOTE
 	select ADK_uclibc
 	help
  	 http://uclibc.org
