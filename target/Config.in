@@ -119,6 +119,9 @@ config ADK_rb433
 config ADK_zaurus
 	tristate
 
+config ADK_foxg20
+	tristate
+
 config ADK_foxboard
 	tristate
 
@@ -167,6 +170,7 @@ config ADK_TARGET
 	default "qemu-x86"  if ADK_x86_qemu
 	default "qemu-x86_64"  if ADK_x86_64_qemu
 	default "foxboard"  if ADK_foxboard
+	default "foxg20"  if ADK_foxg20
 	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
 	default "rb411"  if ADK_rb411
@@ -217,6 +221,19 @@ config ADK_LINUX_ALIX
 	help
 	  Support for Alix and Wrap boards.
 	  http://www.pcengines.ch
+
+config ADK_LINUX_ARM_FOXBOARD
+	bool "Foxboard (FOXG20)"
+	select ADK_foxg20
+	select ADK_EABI
+	select ADK_KERNEL_NLS
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+	  Support for Foxboard target (foxg20).
+	  http://foxg20.acmesystems.it/doku.php
+	  Status: development
 
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
@@ -815,6 +832,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_ARM_FOXBOARD || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
