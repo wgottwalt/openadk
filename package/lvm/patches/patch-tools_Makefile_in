@@ -1,6 +1,15 @@
---- LVM2.2.02.51.orig/tools/Makefile.in	2009-05-21 13:11:29.000000000 +0200
-+++ LVM2.2.02.51/tools/Makefile.in	2009-08-22 15:30:31.000000000 +0200
-@@ -160,21 +160,24 @@ cflow: lvm.cflow lvm.xref lvm.tree lvm.r
+--- LVM2.2.02.51.orig/tools/Makefile.in	Thu May 21 13:11:29 2009
++++ LVM2.2.02.51/tools/Makefile.in	Mon Feb 15 23:30:04 2010
+@@ -137,7 +137,7 @@ liblvm2cmd.$(LIB_SUFFIX): liblvm2cmd.a $(LDDEPS)
+ 
+ .commands: commands.h cmdnames.h Makefile
+ 	$(CC) -E -P cmdnames.h 2> /dev/null | \
+-		egrep -v '^ *(|#.*|dumpconfig|formats|help|pvdata|segtypes|version) *$$' > .commands
++		egrep -v '^ *\(|#.*|dumpconfig|formats|help|pvdata|segtypes|version\) *$$' > .commands
+ 
+ .PHONY: install_cmdlib_dynamic install_cmdlib_static \
+ 	install_tools_dynamic install_tools_static
+@@ -160,21 +160,24 @@ cflow: lvm.cflow lvm.xref lvm.tree lvm.rtree lvm.rxref
  endif
  
  install_cmdlib_dynamic: liblvm2cmd.$(LIB_SUFFIX)

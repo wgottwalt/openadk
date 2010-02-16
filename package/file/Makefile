@@ -21,6 +21,7 @@ pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		CFLAGS="-static" \
 		./configure --enable-static --disable-shared \
+		--disable-warnings \
 	);
 	${MAKE} -C ${WRKBUILD}
 	${INSTALL_BIN} ${WRKBUILD}/src/file ${WRKBUILD}/magic

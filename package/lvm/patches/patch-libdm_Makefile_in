@@ -1,6 +1,6 @@
 always install static library
---- LVM2.2.02.51.orig/libdm/Makefile.in	2009-04-08 16:04:35.000000000 +0200
-+++ LVM2.2.02.51/libdm/Makefile.in	2009-08-22 15:37:53.000000000 +0200
+--- LVM2.2.02.51.orig/libdm/Makefile.in	Wed Apr  8 16:04:35 2009
++++ LVM2.2.02.51/libdm/Makefile.in	Mon Feb 15 23:25:01 2010
 @@ -34,9 +34,9 @@ SOURCES =\
  
  INCLUDES = -I$(interface) -I.
@@ -35,7 +35,7 @@ always install static library
  		$(includedir)/libdevmapper.h
  
  install_dynamic: install_@interface@
-@@ -83,15 +84,17 @@ install_static: install_@interface@_stat
+@@ -83,15 +84,17 @@ install_static: install_@interface@_static
  	$(LN_S) -f libdevmapper.a.$(LIB_VERSION_DM) $(libdir)/libdevmapper.a
  
  install_ioctl: ioctl/libdevmapper.$(LIB_SUFFIX)
