@@ -4,7 +4,7 @@
 
 os=$(uname)
 case $os in
-	NetBSD|MirBSD)
+	NetBSD|MirBSD|OpenBSD)
 		quiet=""
 		;;
 	*)
