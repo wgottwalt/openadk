@@ -161,7 +161,7 @@ config ADK_MOD_KERNEL_MAC80211
 	default n
 
 menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
+depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
 
 config ADK_KPACKAGE_KMOD_MAC80211
 	prompt "kmod-mac80211.................. mac80211 softmac"
@@ -263,6 +263,7 @@ config ADK_KERNEL_RT2X00_DEBUG
 endmenu
 
 menu "ATM driver support"
+depends on ADK_TARGET_WITH_DSL
 
 source package/sangam-atm/Config.in
 source package/sangam-atm/Config.in.kmod

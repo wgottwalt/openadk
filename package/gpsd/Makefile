@@ -21,6 +21,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoconf
+
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
 			ac_cv_func_strlcpy=no \
@@ -39,7 +41,7 @@ TLDFLAGS+=		-shared
 endif
 
 post-extract:
-	@find ${WRKBUILD} -name *.rej -delete
+	@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++

@@ -1,6 +1,6 @@
---- gpsd-2.39.orig/hex.c	2009-03-18 18:37:56.000000000 +0100
-+++ gpsd-2.39/hex.c	2009-06-13 09:13:58.000000000 +0200
-@@ -61,7 +61,7 @@ int gpsd_hexpack(char *src, char *dst, s
+--- gpsd-2.39.orig/hex.c	Wed Mar 18 18:37:56 2009
++++ gpsd-2.39/hex.c	Tue Feb 16 21:33:16 2010
+@@ -61,7 +61,7 @@ int gpsd_hexpack(char *src, char *dst, size_t len){
      if ((l < 1) || ((size_t)l > len))
  	return -2;
  

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gkrellmd
-PKG_VERSION:=		2.3.2
+PKG_VERSION:=		2.3.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		db8a983a60577a6b4886db96d6def011
+PKG_MD5SUM:=		600f4daa395112ed19a3633deb0829ff
 PKG_DESCR:=		The GNU Krell Monitors Server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		glib libpthread
