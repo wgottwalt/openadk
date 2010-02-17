@@ -11,10 +11,26 @@
 # * if you have a style -> define a pre-foo: and post-foo: if they
 #   are required, but the do-foo: magic is done here
 
+REORDER_DEPENDENCIES=	${TOPDIR}/scripts/automake.dep
+
 pre-configure:
 do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
+	tsort | tac | while read f; do \
+		cd ${WRKSRC}; \
+		case $$f in \
+		/*) \
+			find . -name "$${f#/}" -print | while read i; do \
+				touch "$$i"; \
+			done;; \
+		*) \
+			if test -e "$$f" ; then \
+				touch "$$f"; \
+			fi;; \
+		esac; \
+	done
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
 
@@ -161,7 +177,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
 	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
-	    cpio -padlmuv '${STAGING_DIR}'
+	    cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
