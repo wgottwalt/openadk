@@ -19,7 +19,6 @@ $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		CFLAGS="-static" \
 		./configure --enable-static --disable-shared \
 		--disable-warnings \
 	);
