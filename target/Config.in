@@ -32,6 +32,9 @@ config ADK_TARGET_WITH_CARDBUS
 config ADK_TARGET_WITH_WATCHDOG
 	bool
 
+config ADK_TARGET_WITH_DSL
+	bool
+
 config ADK_TOOLCHAIN_ONLY
 	bool
 
@@ -297,6 +300,7 @@ config ADK_LINUX_MIPS_AG241
 	select ADK_PACKAGE_KMOD_SANGAM_ATM
 	select ADK_KPACKAGE_KMOD_ATM_BR2684
 	select ADK_PACKAGE_BR2684CTL
+	select ADK_TARGET_WITH_DSL
 	select ADK_ag241
 	help
 	  Linksys AG241 DSL router.
