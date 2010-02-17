@@ -24,13 +24,10 @@ ifneq ($(filter autogen,${AUTOTOOL_STYLE}),)
 endif
 ifneq ($(filter autotool,${AUTOTOOL_STYLE}),)
 	cd ${WRKBUILD}; \
-	    env AUTOCONF_VERSION=2.62 \
-		AUTOMAKE_VERSION=1.9 \
 		autoreconf -vf;libtoolize $(MAKE_TRACE)
 endif
 ifneq ($(filter autoconf,${AUTOTOOL_STYLE}),)
-	cd ${WRKBUILD}; \
-	    env AUTOCONF_VERSION=2.62 autoconf $(MAKE_TRACE)
+	cd ${WRKBUILD}; autoconf $(MAKE_TRACE)
 endif
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)

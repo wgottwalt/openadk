@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+ac262=$(which autoconf-2.62)
+ac261=$(which autoconf-2.61)
+
+if [ ! -z "$ac262" -a -x "$ac262" ];then
+	if [ -x /usr/bin/autoconf ];then
+		AUTOCONF_VERSION=2.62 /usr/bin/autoconf "$@"
+	else
+		AUTOCONF_VERSION=2.62 /usr/local/bin/autoconf "$@"
+	fi
+elif [ ! -z "$ac261" -a -x "$ac261" ];then
+	if [ -x /usr/bin/autoconf ];then
+		AUTOCONF_VERSION=2.61 /usr/bin/autoconf "$@"
+	else
+		AUTOCONF_VERSION=2.61 /usr/local/bin/autoconf "$@"
+	fi
+fi

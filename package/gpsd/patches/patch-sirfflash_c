@@ -1,6 +1,6 @@
---- gpsd-2.39.orig/sirfflash.c	2009-01-28 21:53:47.000000000 +0100
-+++ gpsd-2.39/sirfflash.c	2010-01-16 09:27:49.000000000 +0100
-@@ -193,7 +193,7 @@ sirfSetProto(int pfd, struct termios *te
+--- gpsd-2.39.orig/sirfflash.c	Wed Jan 28 21:53:47 2009
++++ gpsd-2.39/sirfflash.c	Tue Feb 16 21:33:16 2010
+@@ -193,7 +193,7 @@ sirfSetProto(int pfd, struct termios *term, unsigned i
  
  	sirf[7] = sirf[6] = (unsigned char)proto;
  	/*@i@*/i = htonl(speed); /* borrow "i" to put speed into proper byte order */
