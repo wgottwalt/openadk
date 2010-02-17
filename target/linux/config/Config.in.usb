@@ -18,7 +18,7 @@ config ADK_KPACKAGE_KMOD_USB
 	tristate
 	default y if ADK_LINUX_X86_ALIX1C
 	default n
-	depends on !ADK_LINUX_CRIS_FOXBOARD
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXBOARD)
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_DEVICEFS
 	help
