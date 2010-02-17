@@ -17,4 +17,10 @@ elif [ ! -z "$ac261" -a -x "$ac261" ];then
 	else
 		AUTOCONF_VERSION=2.61 /usr/local/bin/autoconf "$@"
 	fi
+else
+	if [ -x /usr/bin/autoconf ];then
+		/usr/bin/autoconf "$@"
+	else
+		/usr/local/bin/autoconf "$@"
+	fi
 fi
