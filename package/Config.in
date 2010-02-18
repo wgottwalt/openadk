@@ -484,7 +484,6 @@ source "package/rdate/Config.in"
 endmenu
 
 menu "P2P"
-source "package/cbtt/Config.in"
 source "package/ctorrent/Config.in"
 source "package/rtorrent/Config.in"
 endmenu

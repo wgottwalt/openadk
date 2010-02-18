@@ -1,5 +1,5 @@
---- kismet-2010-01-R1.orig/Makefile.in	2009-12-14 20:04:11.000000000 +0100
-+++ kismet-2010-01-R1/Makefile.in	2010-02-14 20:19:50.000000000 +0100
+--- kismet-2010-01-R1.orig/Makefile.in	Mon Dec 14 20:04:11 2009
++++ kismet-2010-01-R1/Makefile.in	Wed Feb 17 22:09:41 2010
 @@ -100,25 +100,25 @@ commoninstall:
  	mkdir -p $(ETC)
  	mkdir -p $(BIN)
@@ -39,3 +39,47 @@
  
  suidinstall: $(CS)
  	-groupadd -f $(SUIDGROUP)
+@@ -129,8 +129,8 @@ suidinstall: $(CS)
+ 		echo "if there have been any changes to the base config you will need"; \
+ 		echo "to add them to your config file."; \
+     else \
+-		$(INSTALL) -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
+-		echo install -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
++		$(INSTALL) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
++		echo install -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
+ 		echo "Installed config into $(ETC)/kismet.conf."; \
+ 	fi
+ 	@if test -f $(ETC)/kismet_drone.conf; then \
+@@ -138,8 +138,8 @@ suidinstall: $(CS)
+ 		echo "if there have been any changes to the base config you will need"; \
+ 		echo "to add them to your config file."; \
+     else \
+-		$(INSTALL) -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
+-		echo install -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
++		$(INSTALL) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
++		echo install -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
+ 		echo "Installed drone config into $(ETC)/kismet_drone.conf."; \
+ 	fi
+ 
+@@ -161,8 +161,8 @@ install: $(PS) $(CS) $(DRONE) $(NC)
+ 		echo "if there have been any changes to the base config you will need"; \
+ 		echo "to add them to your config file."; \
+     else \
+-		$(INSTALL) -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
+-		echo install -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
++		$(INSTALL) -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
++		echo install -m 644 conf/kismet.conf $(ETC)/kismet.conf;  \
+ 		echo "Installed config into $(ETC)/kismet.conf."; \
+ 	fi
+ 	@if test -f $(ETC)/kismet_drone.conf; then \
+@@ -170,8 +170,8 @@ install: $(PS) $(CS) $(DRONE) $(NC)
+ 		echo "if there have been any changes to the base config you will need"; \
+ 		echo "to add them to your config file."; \
+     else \
+-		$(INSTALL) -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
+-		echo install -o $(INSTUSR) -g $(INSTGRP) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
++		$(INSTALL) -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
++		echo install -m 644 conf/kismet_drone.conf $(ETC)/kismet_drone.conf;  \
+ 		echo "Installed drone config into $(ETC)/kismet_drone.conf."; \
+ 	fi
+ 	@echo "Installed kismet into $(BIN)/."

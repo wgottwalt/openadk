@@ -1,16 +1,18 @@
---- kismet-2010-01-R1.orig/configure	2010-01-08 00:33:30.000000000 +0100
-+++ kismet-2010-01-R1/configure	2010-02-14 20:32:44.000000000 +0100
-@@ -26,7 +26,8 @@ esac
+--- kismet-2010-01-R1.orig/configure	Fri Jan  8 00:33:30 2010
++++ kismet-2010-01-R1/configure	Wed Feb 17 21:59:01 2010
+@@ -26,9 +26,10 @@ esac
  
  fi
  
--
 +oCC="$CC"
 +CC="$CXX"
  
  
+-
  # PATH needs CR
-@@ -6836,73 +6837,6 @@ else
+ # Avoid depending upon Character Ranges.
+ as_cr_letters='abcdefghijklmnopqrstuvwxyz'
+@@ -6836,74 +6837,7 @@ else
  $as_echo "yes" >&6; }
  fi
  
@@ -31,7 +33,7 @@
 -cat confdefs.h >>conftest.$ac_ext
 -cat >>conftest.$ac_ext <<_ACEOF
 -/* end confdefs.h.  */
--
+ 
 -
 -int
 -main ()
@@ -81,9 +83,10 @@
 -  foundcxxl="uclibc" CXXLIBS="$CXXLIBS -luClibc++"
 -fi
 -
- 
+-
  # Do we use uclibc++?
  if test "$foundcxxl"x == "x"; then
+ 	{ $as_echo "$as_me:$LINENO: checking for main in -lstdc++" >&5
 @@ -7017,7 +6951,7 @@ fi
  
  
