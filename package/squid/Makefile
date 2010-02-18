@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
 PKG_VERSION:=		3.0.STABLE20
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
@@ -83,7 +83,6 @@ $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 #			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
 #endif
 
-AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \

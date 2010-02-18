@@ -5,13 +5,9 @@
 os=$(uname)
 case $os in
 	NetBSD|MirBSD|OpenBSD)
-		targ="-r"
+		/usr/bin/tsort -r
 		;;
 	*)
-		targ="|tac"
+		/usr/bin/tsort | tac
 		;;
 esac
-if [ -x /usr/bin/tsort ];then
-        /usr/bin/tsort $targ "$@"
-fi
-

@@ -17,8 +17,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,6TUNNEL,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoconf
-
 post-install:
 	$(INSTALL_DIR) $(IDIR_6TUNNEL)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/6tunnel $(IDIR_6TUNNEL)/usr/sbin/
