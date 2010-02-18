@@ -18,7 +18,7 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
-	tsort | tac | while read f; do \
+	tsort | while read f; do \
 		cd ${WRKSRC}; \
 		case $$f in \
 		/*) \
