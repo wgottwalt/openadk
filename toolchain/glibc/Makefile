@@ -57,11 +57,22 @@ $(WRKBUILD)/.headers_configure:
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
+	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
 	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
+	PATH='${TARGET_PATH}' \
+	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
+		csu/subdir_lib
+	( cd $(GLIBC_BUILD_DIR_INITIAL); \
+		$(CP) csu/crt1.o csu/crti.o csu/crtn.o \
+		$(TOOLCHAIN_SYSROOT)/usr/lib \
+	);
+	PATH='${TARGET_PATH}' \
+	$(TARGET_CC) -nostdlib -nostartfiles -shared -x c /dev/null \
+		-o $(TOOLCHAIN_SYSROOT)/usr/lib/libc.so
 	touch $@
 
 $(WRKBUILD)/.configured: 
