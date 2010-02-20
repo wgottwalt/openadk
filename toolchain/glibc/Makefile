@@ -63,16 +63,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
-		csu/subdir_lib
-	( cd $(GLIBC_BUILD_DIR_INITIAL); \
-		$(CP) csu/crt1.o csu/crti.o csu/crtn.o \
-		$(TOOLCHAIN_SYSROOT)/usr/lib \
-	);
-	PATH='${TARGET_PATH}' \
-	$(TARGET_CC) -nostdlib -nostartfiles -shared -x c /dev/null \
-		-o $(TOOLCHAIN_SYSROOT)/usr/lib/libc.so
 	touch $@
 
 $(WRKBUILD)/.configured: 
@@ -92,7 +82,8 @@ $(WRKBUILD)/.compiled:
 	touch $@
 
 $(WRKBUILD)/.installed:
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
+	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
+		install_root=$(STAGING_DIR) install
 	touch $(STAGING_DIR)/usr/include/gnu/stubs.h
 	touch $@
 

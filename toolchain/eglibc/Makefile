@@ -60,16 +60,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
 		install-headers install-bootstrap-headers=yes
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
-		csu/subdir_lib
-	( cd $(EGLIBC_BUILD_DIR_INITIAL); \
-		$(CP) csu/crt1.o csu/crti.o csu/crtn.o \
-		$(TOOLCHAIN_SYSROOT)/usr/lib \
-	);
-	PATH='${TARGET_PATH}' \
-	$(TARGET_CC) -nostdlib -nostartfiles -shared -x c /dev/null \
-		-o $(TOOLCHAIN_SYSROOT)/usr/lib/libc.so
 	touch $@
 
 $(WRKBUILD)/.configured: 
