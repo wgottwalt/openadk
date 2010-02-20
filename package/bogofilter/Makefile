@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BOGOFILTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ENV+=		LIBS="-liconv"
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \

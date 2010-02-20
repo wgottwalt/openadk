@@ -1,8 +1,8 @@
+- update to 2.6.33 
+- microsd filesystem for foxg20
 - implement update for MTD devices (ag241)
 - fix watchdog for alix1c (mfgpt timers problem)
-- netbsd build
 - macos x build
-- update to 2.6.33 
 - use LZMA kernels for MIPS targets
 - package drbd
 - new packages for openais and pacemaker

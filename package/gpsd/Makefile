@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
 PKG_VERSION:=		2.39
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		3db437196a6840c252fca99b6c19d4d0
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		net
@@ -21,14 +21,11 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoconf
-
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
 			ac_cv_func_strlcpy=no \
 			ac_cv_func_strlcat=no \
 			ac_cv_lib_nsl_gethostbyname=no
-# --disable-python breaks configure script
 CONFIGURE_ARGS+=	--without-x \
 			--disable-dbus
 
