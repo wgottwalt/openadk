@@ -17,7 +17,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}  \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MADPLAY,madplay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MADPLAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOST_CC} \
 			LIBS="-lz" \
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-debugging \
 			--without-libiconv-prefix \
 			--without-libintl-prefix \
 			--without-esd \
-			--with-alsa
+			--without-alsa
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MADPLAY}/usr/bin
