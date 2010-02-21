@@ -16,8 +16,7 @@ tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C ../tools/squashfs prepare compile install
 
 kernel-install: tools-compile
-	PATH='${TARGET_PATH}' \
-	mipsel-linux-objcopy -S -O srec $(LINUX_DIR)/vmlinux \
+	${TARGET_CROSS}objcopy -S -O srec $(LINUX_DIR)/vmlinux \
 		$(LINUX_DIR)/vmlinux.srec
 	PATH='${TARGET_PATH}' \
 	srec2bin $(LINUX_DIR)/vmlinux.srec $(LINUX_DIR)/vmlinux.bin

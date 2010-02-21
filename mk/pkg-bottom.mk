@@ -18,7 +18,7 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
-	tsort | tac | while read f; do \
+	tsort | while read f; do \
 		cd ${WRKSRC}; \
 		case $$f in \
 		/*) \
@@ -34,17 +34,6 @@ ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
 
-ifneq ($(filter autogen,${AUTOTOOL_STYLE}),)
-	cd ${WRKBUILD}; \
-		./autogen.sh $(MAKE_TRACE)
-endif
-ifneq ($(filter autotool,${AUTOTOOL_STYLE}),)
-	cd ${WRKBUILD}; \
-		autoreconf -vf;libtoolize $(MAKE_TRACE)
-endif
-ifneq ($(filter autoconf,${AUTOTOOL_STYLE}),)
-	cd ${WRKBUILD}; autoconf $(MAKE_TRACE)
-endif
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)

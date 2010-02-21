@@ -95,12 +95,6 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
-#if ! which cpp >/dev/null 2>&1; then
-#	echo You must install a C preprocessor to continue.
-#	echo
-#	out=1
-#fi
-
 if ! which tar >/dev/null 2>&1; then
 	echo You must install GNU tar to continue.
 	echo
@@ -216,24 +210,6 @@ fi
 
 if ! which wget >/dev/null 2>&1; then
 	echo You must install wget to continue.
-	echo
-	out=1
-fi
-
-if ! which autoconf >/dev/null 2>&1; then
-	echo You must install autoconf to continue.
-	echo
-	out=1
-fi
-
-if ! which automake >/dev/null 2>&1; then
-	echo You must install automake to continue.
-	echo
-	out=1
-fi
-
-if ! which libtool >/dev/null 2>&1; then
-	echo You must install libtool to continue.
 	echo
 	out=1
 fi

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+os=$(uname)
+case $os in
+	NetBSD|MirBSD|OpenBSD)
+		/usr/bin/tsort -r
+		;;
+	*)
+		/usr/bin/tsort | tac
+		;;
+esac

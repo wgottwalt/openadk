@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tslib
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		92b2eb55b1e4ef7e2c0347069389390e
 PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
@@ -19,7 +19,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TSLIB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-corgi \
 			--disable-collie \

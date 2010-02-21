@@ -11,6 +11,8 @@ aclocal.m4 acinclude.m4
 config.h.in configure.in
 config.h.in configure.ac
 config.h.in aclocal.m4
+config.h.in autoconfig.h.in
+config.h.in gpsd_config.h.in
 configure configure.in
 configure configure.ac
 configure aclocal.m4

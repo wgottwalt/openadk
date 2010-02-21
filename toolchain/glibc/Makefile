@@ -57,6 +57,7 @@ $(WRKBUILD)/.headers_configure:
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
+	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
 	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
@@ -81,7 +82,8 @@ $(WRKBUILD)/.compiled:
 	touch $@
 
 $(WRKBUILD)/.installed:
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
+	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
+		install_root=$(STAGING_DIR) install
 	touch $(STAGING_DIR)/usr/include/gnu/stubs.h
 	touch $@
 

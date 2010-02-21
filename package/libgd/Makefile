@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gd
 PKG_VERSION:=		2.0.35
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_BUILDDEP+=		libpng jpeg
 PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
 PKG_DESCR:=		A library for the dynamic creation of images
@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autotool
 CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \

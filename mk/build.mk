@@ -415,38 +415,38 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 # build all targets and combinations
 bulk:
 	while read target libc fs; do \
-		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
+		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs defconfig; \
 			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
-	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
 
 bulkall:
 	while read target libc fs; do \
-		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
+		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allconfig; \
 			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
-	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
 
 bulkallmod:
 	while read target libc fs; do \
-		mkdir -p $(TOPDIR)/bin/$$target_$$libc; \
+		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
-	    ) 2>&1 | tee $(TOPDIR)/bin/$$target_$$libc/$$target-$$libc-$$fs.log; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
 
 menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)

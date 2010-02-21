@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.15.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6680970274c389fd07e2b35721de1764
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
@@ -77,8 +77,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autotool
-
 TCFLAGS+=		-std=gnu99
 XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 CONFIGURE_ARGS+=	--disable-httpd-output \
@@ -125,9 +123,9 @@ CONFIGURE_ARGS+=	\
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
-CONFIGURE_ARGS+=	--enable-flac
+CONFIGURE_ARGS+=	--enable-flac --enable-oggflac
 else
-CONFIGURE_ARGS+=	--disable-flac
+CONFIGURE_ARGS+=	--disable-flac --disable-oggflac
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)

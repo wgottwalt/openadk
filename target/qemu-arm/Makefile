@@ -8,7 +8,8 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
-	@cp $(LINUX_DIR)/arch/arm/boot/zImage $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(LINUX_DIR)/arch/arm/boot/zImage \
+		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 createinit:
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.*
