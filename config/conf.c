@@ -68,9 +68,9 @@ static void strip(char *str)
 static void check_stdin(void)
 {
 	if (!valid_stdin) {
-		printf(_("aborted!\n\n"));
-		printf(_("Console input/output is redirected. "));
-		printf(_("Run 'make oldconfig' to update configuration.\n\n"));
+		printf("aborted!\n\n");
+		printf("Console input/output is redirected. ");
+		printf("Run 'make oldconfig' to update configuration.\n\n");
 		exit(1);
 	}
 }
@@ -80,7 +80,7 @@ static int conf_askvalue(struct symbol *sym, const char *def)
 	enum symbol_type type = sym_get_type(sym);
 
 	if (!sym_has_value(sym))
-		printf(_("(NEW) "));
+		printf("(NEW) ");
 
 	line[0] = '\n';
 	line[1] = 0;
@@ -102,8 +102,8 @@ static int conf_askvalue(struct symbol *sym, const char *def)
 		check_stdin();
 	case ask_all:
 		fflush(stdout);
-		fgets(line, 128, stdin);
-		return 1;
+		if (fgets(line, 128, stdin) != NULL)
+			return 1;
 	default:
 		break;
 	}
@@ -281,7 +281,7 @@ static int conf_choice(struct menu *menu)
 			if (child->sym->name)
 				printf(" (%s)", child->sym->name);
 			if (!sym_has_value(child->sym))
-				printf(_(" (NEW)"));
+				printf(" (NEW)");
 			printf("\n");
 		}
 		printf(_("%*schoice"), indent - 1, "");
@@ -304,8 +304,8 @@ static int conf_choice(struct menu *menu)
 			check_stdin();
 		case ask_all:
 			fflush(stdout);
-			fgets(line, 128, stdin);
-			strip(line);
+			if (fgets(line, 128, stdin) != NULL)
+				strip(line);
 			if (line[0] == '?') {
 				printf("\n%s\n", get_help(menu));
 				continue;
@@ -419,7 +419,7 @@ static void check_conf(struct menu *menu)
 		if (sym_is_changable(sym) ||
 		    (sym_is_choice(sym) && sym_get_tristate_value(sym) == yes)) {
 			if (!conf_cnt++)
-				printf(_("*\n* Restart config...\n*\n"));
+				printf("*\n* Restart config...\n*\n");
 			rootEntry = menu_get_parent_menu(menu);
 			conf(rootEntry);
 		}
@@ -484,11 +484,11 @@ int main(int ac, char **av)
 			break;
 		}
 		case 'h':
-			printf(_("See README for usage info\n"));
+			printf("See README for usage info\n");
 			exit(0);
 			break;
 		default:
-			fprintf(stderr, _("See README for usage info\n"));
+			fprintf(stderr, "See README for usage info\n");
 			exit(1);
 		}
 	}
@@ -559,7 +559,7 @@ int main(int ac, char **av)
 			name = getenv("KCONFIG_NOSILENTUPDATE");
 			if (name && *name) {
 				fprintf(stderr,
-					_("\n*** Kernel configuration requires explicit update.\n\n"));
+					"\n*** Kernel configuration requires explicit update.\n\n");
 				return 1;
 			}
 		}
@@ -602,16 +602,16 @@ int main(int ac, char **av)
 		 * All other commands are only used to generate a config.
 		 */
 		if (conf_get_changed() && conf_write(NULL)) {
-			fprintf(stderr, _("\n*** Error during writing of the kernel configuration.\n\n"));
+			fprintf(stderr, "\n*** Error during writing of the kernel configuration.\n\n");
 			exit(1);
 		}
 		if (conf_write_autoconf()) {
-			fprintf(stderr, _("\n*** Error during update of the kernel configuration.\n\n"));
+			fprintf(stderr, "\n*** Error during update of the kernel configuration.\n\n");
 			return 1;
 		}
 	} else {
 		if (conf_write(NULL)) {
-			fprintf(stderr, _("\n*** Error during writing of the kernel configuration.\n\n"));
+			fprintf(stderr, "\n*** Error during writing of the kernel configuration.\n\n");
 			exit(1);
 		}
 	}
