@@ -25,7 +25,7 @@ PKG_BUILDDEP+=		faad2
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_OGG),)
 PKG_DEPENDS+=		libvorbis libogg
-PKG_BUILDDEP+=		libvorbis
+PKG_BUILDDEP+=		libvorbis libogg
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_TREMOR),)
 PKG_DEPENDS+=		libvorbisidec
