@@ -44,7 +44,7 @@ config ADK_KPACKAGE_KMOD_SND
 	 Basic ALSA sound support.
 
 config ADK_KPACKAGE_KMOD_SND_OSSEMUL
-	prompt "kmod-sound-alsa-oss-emul........ ALSA OSS Emulation"
+	prompt "kmod-sound-alsa-oss-emul....... ALSA OSS Emulation"
 	depends on ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_MIXER_OSS
 	select ADK_KERNEL_SND_PCM_OSS

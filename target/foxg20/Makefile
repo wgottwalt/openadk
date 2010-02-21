@@ -20,3 +20,13 @@ imageinstall: ${BIN_DIR}/${ROOTFSUSERTARBALL}
 	@echo 'After that type bootm to load the kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
+
+ifeq ($(FS),ext2-block)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@echo
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
+	@echo "Boot the board via network and use adkinstall."
+	@echo "If you just want to update, use adkupdate."
+	@echo 'Login as user root with password linux123 via ssh or console.'
+endif

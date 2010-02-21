@@ -12,8 +12,11 @@ ifeq ($(ADK_LINUX_MIPS_RB532),y)
 ROOTFS:=	root=/dev/sda2
 endif
 
-$(eval $(call rootfs_template,ext2-cf,EXT2_CF,$(ROOTFS)))
-$(eval $(call rootfs_template,ext2-mmc,EXT2_MMC))
+ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
+ROOTFS:=	root=/dev/mmcblk0p2
+endif
+
+$(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
 $(eval $(call rootfs_template,archive,ARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))

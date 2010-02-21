@@ -10,7 +10,7 @@ include $(TOPDIR)/mk/image.mk
 kernel-install:
 	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/vmlinuz-adk
 
-ifeq ($(FS),ext2-cf)
+ifeq ($(FS),ext2-block)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"

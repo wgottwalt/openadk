@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		3
-PKG_DESCR:=		installer for compact flash or nand/mtd devices
+PKG_RELEASE:=		4
+PKG_DESCR:=		installer for cf, mmc, sd or mtd devices
 PKG_SECTION:=		base
-PKG_DEPENDS:=		parted sfdisk
+PKG_DEPENDS:=		parted sfdisk e2fsprogs
 
-PKG_TARGET_DEPENDS:=	alix wrap rb532
+PKG_TARGET_DEPENDS:=	alix wrap rb532 foxg20
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
@@ -30,6 +30,9 @@ do-install:
 	${INSTALL_DIR} $(IDIR_ADKINSTALL)/sbin
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
 	${INSTALL_BIN} ./src/adkinstall.rb532 \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
+else ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
+	${INSTALL_BIN} ./src/adkinstall.foxg20 \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else
 	${INSTALL_BIN} ./src/adkinstall $(IDIR_ADKINSTALL)/sbin

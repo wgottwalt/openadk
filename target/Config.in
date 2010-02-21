@@ -866,8 +866,8 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  Root filesystem mounted via NFS. (DHCP)
 
-config ADK_TARGET_ROOTFS_EXT2_CF
-	bool "read-write filesystem for compact flash (ext2)"
+config ADK_TARGET_ROOTFS_EXT2_BLOCK
+	bool "read-write filesystem for block devices with ext2"
 	depends on \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
@@ -878,8 +878,8 @@ config ADK_TARGET_ROOTFS_EXT2_CF
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	help
-	  Use this option if you have a compact flash reader
-	  inside your hardware and want to boot from it.
+	  Use this option if you have a compact flash or mmc/sd card 
+	  reader inside your hardware and want to boot from it.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"

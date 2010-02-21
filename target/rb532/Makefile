@@ -15,7 +15,7 @@ kernel-install:
 	@cp $(TARGET_DIR)/boot/kernel \
 		$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
-ifeq ($(FS),ext2-cf)
+ifeq ($(FS),ext2-block)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
