@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
 PKG_VERSION:=		1.0.22
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
 PKG_SECTION:=		utils
