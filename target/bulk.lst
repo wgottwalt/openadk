@@ -1,5 +1,6 @@
 ag241		uclibc		nfsroot
 foxboard	uclibc		nfsroot
+foxg20		uclibc		nfsroot
 rb532		uclibc		nfsroot
 rb532		eglibc		nfsroot
 alix1c		uclibc		nfsroot
