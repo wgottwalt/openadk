@@ -48,6 +48,7 @@ PKG_DESCR_FCGI:=	PHP for FastCGI usage
 
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call PKG_template,PHP,php,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_FCGI},${PKG_SECTION}))
 
@@ -189,8 +190,8 @@ CONFIGURE_ENV+=		LIBS="-ldl"
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} $(IDIR_PHP_CLI)/etc
-	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_CLI)/etc/
+	${INSTALL_DIR} $(IDIR_PHP)/etc
+	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP)/etc/
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
