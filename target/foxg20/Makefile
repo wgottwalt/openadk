@@ -7,10 +7,12 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+LOADADDR:=	0x20008000
+
 kernel-install: 
 	gzip -v9 < $(LINUX_DIR)/arch/arm/boot/Image > ${BUILD_DIR}/Image.gz
 	mkimage -A arm -O linux -T kernel -C gzip \
-		-a 0x20008000 -e 0x20008000 -d ${BUILD_DIR}/Image.gz \
+		-a ${LOADADDR} -e ${LOADADDR} -d ${BUILD_DIR}/Image.gz \
 		-n foxg20 $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
@@ -26,6 +28,9 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
+	@echo 'Before booting from MicroSD card you need to set following u-boot environment variables:'
+	@echo "setenv bootcmd 'mmc init; sleep 1; fatload mmc 0 0x22000000 uimage; bootm 0x22000000'"
+	@echo
 	@echo "Boot the board via network and use adkinstall."
 	@echo "If you just want to update, use adkupdate."
 	@echo 'Login as user root with password linux123 via ssh or console.'

@@ -7,8 +7,17 @@ if [ -z $1 ];then
         exit 1
 fi
 if [ -z $2 ];then
-       	 printf "Please give your kernel as second parameter\n"
-       	 exit 1
+	printf "Please give your kernel as second parameter\n"
+	exit 1
+fi
+
+if [ ! -f $1 ];then
+	printf "given root tar archive does not exist\n"
+	exit 1
+fi
+if [ ! -f $2 ];then
+	printf "given kernel does not exist\n"
+	exit 1
 fi
 
 printf "Creating partition scheme\n"
@@ -28,7 +37,9 @@ mount -t vfat /dev/mmcblk0p1 /mnt
 cp $2 /mnt/uImage
 sync
 umount /mnt
-mke2fs /dev/mmcblk0p2
+printf "Creating ext2 filesystem\n"
+mke2fs /dev/mmcblk0p2 >/dev/null 2>&1
+tune2fs -c0 -i0 /dev/mmcblk0p2 >/dev/null 2>&1
 mount -t ext2 /dev/mmcblk0p2 /mnt
 
 printf "Extracting install archive\n"

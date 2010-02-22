@@ -13,7 +13,7 @@ ROOTFS:=	root=/dev/sda2
 endif
 
 ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
-ROOTFS:=	root=/dev/mmcblk0p2
+ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
 $(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
