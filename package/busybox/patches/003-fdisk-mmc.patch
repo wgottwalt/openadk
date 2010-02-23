@@ -1,0 +1,14 @@
+diff -Nur busybox-1.15.2.orig/util-linux/fdisk.c busybox-1.15.2/util-linux/fdisk.c
+--- busybox-1.15.2.orig/util-linux/fdisk.c	2009-10-08 03:04:40.000000000 +0200
++++ busybox-1.15.2/util-linux/fdisk.c	2010-02-23 20:41:01.000000000 +0100
+@@ -2770,7 +2770,9 @@
+ 		for (s = ptname; *s; s++)
+ 			continue;
+ 		if (isdigit(s[-1]))
+-			continue;
++			if (s[-1] != '0')
++				continue;
++		
+ 		sprintf(devname, "/dev/%s", ptname);
+ 		open_list_and_close(devname, 0);
+ 	}
