@@ -1,0 +1,12 @@
+--- gawk-3.1.7.orig/Makefile.in	2009-07-21 21:29:59.000000000 +0200
++++ gawk-3.1.7/Makefile.in	2010-02-23 21:42:10.887094938 +0100
+@@ -364,8 +364,7 @@ SUBDIRS = \
+ 	. \
+ 	awklib \
+ 	doc \
+-	po \
+-	test
++	po
+ 
+ 
+ # sources for both gawk and pgawk

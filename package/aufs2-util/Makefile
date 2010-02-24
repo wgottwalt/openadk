@@ -15,14 +15,14 @@ NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AUFS_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,AUFS2_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		KDIR=${LINUX_DIR}
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_AUFS_UTIL)/sbin
+	$(INSTALL_DIR) $(IDIR_AUFS2_UTIL)/sbin
 	$(INSTALL_BIN) ${WRKINST}/sbin/{u,}mount.aufs \
-		$(IDIR_AUFS_UTIL)/sbin
+		$(IDIR_AUFS2_UTIL)/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

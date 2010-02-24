@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		automake
 PKG_VERSION:=		1.10
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		452163c32d061c53a7acc0e8c1b689ba
 PKG_DESCR:=		GNU automake
 PKG_SECTION:=		utils
