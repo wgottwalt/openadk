@@ -3,12 +3,13 @@
 # special script for foxboard netus aka foxg20
 
 if [ -z $1 ];then
-        printf "Please give your root tar archive as first parameter\n"
+        printf "Please give your root tar archive as parameter\n"
         exit 1
 fi
-if [ -z $2 ];then
-       	 printf "Please give your kernel as second parameter\n"
-       	 exit 1
+
+if [ ! -f $1 ];then
+	printf "given root tar archive does not exist\n"
+	exit 1
 fi
 
 printf "Creating partition scheme\n"
@@ -23,13 +24,12 @@ parted -s /dev/mmcblk0 set 1 boot on
 sfdisk --change-id /dev/mmcblk0 3 88 >/dev/null 2>&1
 sleep 2
 sync
-printf "Installing kernel\n"
-mount -t vfat /dev/mmcblk0p1 /mnt
-cp $2 /mnt/uImage
-sync
-umount /mnt
-mke2fs /dev/mmcblk0p2
+printf "Creating ext2 filesystem\n"
+mke2fs /dev/mmcblk0p2 >/dev/null 2>&1
+tune2fs -c0 -i0 /dev/mmcblk0p2 >/dev/null 2>&1
 mount -t ext2 /dev/mmcblk0p2 /mnt
+mkdir /mnt/boot
+mount -t vfat /dev/mmcblk0p1 /mnt/boot
 
 printf "Extracting install archive\n"
 tar -C /mnt -xzpf $1
@@ -41,6 +41,7 @@ fi
 chmod 1777 /mnt/tmp
 chmod 4755 /mnt/bin/busybox
 sync
+umount /mnt/boot
 umount /mnt
 if [ $? -ne 0 ];then
 	printf "Unmounting filesystem failed"
