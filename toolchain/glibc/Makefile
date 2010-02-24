@@ -43,6 +43,10 @@ ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp
 endif
 
+ifeq (${ADK_MAKE_PARALLEL},y)
+GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j${ADK_MAKE_JOBS}"
+endif
+
 GLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
 GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
@@ -58,7 +62,7 @@ $(WRKBUILD)/.headers_configure:
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
-	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
+	$(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers
@@ -78,7 +82,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) all
+	${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed:

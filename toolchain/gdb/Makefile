@@ -7,6 +7,10 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifeq (${ADK_MAKE_PARALLEL},y)
+GDB_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
+endif
+
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
@@ -33,7 +37,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled: 
-	$(MAKE) -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
+	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
 	touch $@
 
 $(WRKBUILD)/.installed: 

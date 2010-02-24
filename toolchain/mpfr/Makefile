@@ -7,6 +7,10 @@ include $(TOPDIR)/toolchain/gmp/Makefile.inc
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifeq (${ADK_MAKE_PARALLEL},y)
+MPFR_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
+endif
+
 $(WRKBUILD)/.headers: 
 $(WRKBUILD)/.configured: 
 	(cd $(WRKBUILD); \
@@ -21,7 +25,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) -C $(WRKBUILD) all
+	$(MAKE) ${MPFR_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
