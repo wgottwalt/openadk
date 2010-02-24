@@ -11,8 +11,8 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 MPFR_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
-$(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configured: 
+$(WRKBUILD)/.headers:
+$(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \

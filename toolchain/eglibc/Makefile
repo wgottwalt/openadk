@@ -31,7 +31,7 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
-			libc_cv_slibdir="/lib" 
+			libc_cv_slibdir="/lib"
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 EGLIBC_CONFOPTS+=       --without-fp
@@ -62,7 +62,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		install-headers install-bootstrap-headers=yes
 	touch $@
 
-$(WRKBUILD)/.configured: 
+$(WRKBUILD)/.configured:
 	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_FINAL)

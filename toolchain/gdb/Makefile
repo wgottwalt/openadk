@@ -36,11 +36,11 @@ $(WRKBUILD)/.configured:
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled: 
+$(WRKBUILD)/.compiled:
 	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
 	touch $@
 
-$(WRKBUILD)/.installed: 
+$(WRKBUILD)/.installed:
 	install -c $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
 	cd $(STAGING_TOOLS)/bin && \
 	ln -fs $(TARGET_CROSS)gdb $(GNU_TARGET_NAME)-gdb

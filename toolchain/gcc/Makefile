@@ -22,7 +22,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-sjlj-exceptions \
 			--disable-libssp \
 			--disable-libstdcxx-pch \
-			--disable-nls 
+			--disable-nls
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
@@ -128,7 +128,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		cd bin; \
 		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
 			ln -sf $${app} \
-		   	$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
+				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done; \
 	)
 	touch $@

@@ -69,7 +69,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
 	touch $@
 
-$(WRKBUILD)/.configured: 
+$(WRKBUILD)/.configured:
 	mkdir -p $(GLIBC_BUILD_DIR_FINAL)
 	(cd $(GLIBC_BUILD_DIR_FINAL); \
 		${GLIBC_ENV} \
