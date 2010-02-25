@@ -51,6 +51,7 @@ GLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
 GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
 $(WRKBUILD)/.headers_configure:
+	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); ln -sf ../glibc-ports-2.11/ ports);
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		$(WRKBUILD)/configure \
@@ -62,7 +63,7 @@ $(WRKBUILD)/.headers_configure:
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
-	$(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_INITIAL) \
+	-$(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers

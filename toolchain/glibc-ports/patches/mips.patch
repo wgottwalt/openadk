@@ -1,0 +1,41 @@
+diff -Nur glibc-ports-2.11.orig/sysdeps/mips/mips32/Makefile glibc-ports-2.11/sysdeps/mips/mips32/Makefile
+--- glibc-ports-2.11.orig/sysdeps/mips/mips32/Makefile	2009-11-15 21:53:20.000000000 +0100
++++ glibc-ports-2.11/sysdeps/mips/mips32/Makefile	2010-02-25 05:06:53.093359450 +0100
+@@ -1,3 +1,3 @@
+-ifeq ($(filter -mabi=32,$(CC)),)
+-CC += -mabi=32
+-endif
++#ifeq ($(filter -mabi=32,$(CC)),)
++#CC += -mabi=32
++#endif
+diff -Nur glibc-ports-2.11.orig/sysdeps/mips/nptl/tls.h glibc-ports-2.11/sysdeps/mips/nptl/tls.h
+--- glibc-ports-2.11.orig/sysdeps/mips/nptl/tls.h	2009-11-15 21:53:20.000000000 +0100
++++ glibc-ports-2.11/sysdeps/mips/nptl/tls.h	2010-02-25 19:16:31.338162548 +0100
+@@ -55,12 +55,6 @@
+ 	.set	pop
+ #endif /* __ASSEMBLER__ */
+ 
+-
+-/* We require TLS support in the tools.  */
+-#ifndef HAVE_TLS_SUPPORT
+-# error "TLS support is required."
+-#endif
+-
+ /* Signal that TLS support is available.  */
+ #define USE_TLS	1
+ 
+diff -Nur glibc-ports-2.11.orig/sysdeps/mips/preconfigure glibc-ports-2.11/sysdeps/mips/preconfigure
+--- glibc-ports-2.11.orig/sysdeps/mips/preconfigure	2009-11-15 21:53:20.000000000 +0100
++++ glibc-ports-2.11/sysdeps/mips/preconfigure	2010-02-25 05:07:40.565358364 +0100
+@@ -19,11 +19,6 @@
+ 		32) machine=mips/mips32/kern64 ;;
+ 		esac
+ 		machine=$machine/$config_machine
+-		if test $mips_config_abi != $mips_cc_abi; then
+-		  # This won't make it to config.make, but we want to
+-		  # set this in case configure tests depend on it.
+-		  CPPFLAGS="$CPPFLAGS -mabi=$mips_config_abi"
+-		fi
+ 		;;
+ mips*)		base_machine=mips machine=mips/mips32/$machine ;;
+ esac
