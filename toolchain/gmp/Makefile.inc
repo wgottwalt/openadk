@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gmp
-PKG_VERSION:=		4.3.1
+PKG_VERSION:=		4.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		26cec15a90885042dd4a15c4003b08ae
 PKG_SITES:=		${MASTER_SITE_GNU:=gmp/}
