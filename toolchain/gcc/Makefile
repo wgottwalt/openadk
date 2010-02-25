@@ -34,6 +34,8 @@ endif
 
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 GCC_CONFOPTS+=		--disable-tls
+else
+GCC_CONFOPTS+=		--enable-tls
 endif
 
 include ${TOPDIR}/mk/buildhlp.mk

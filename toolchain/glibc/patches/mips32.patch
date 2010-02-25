@@ -1,7 +1,0 @@
-diff -Nur glibc-2.10-current.orig/ports/sysdeps/mips/mips32/Makefile glibc-2.10-current/ports/sysdeps/mips/mips32/Makefile
---- glibc-2.10-current.orig/ports/sysdeps/mips/mips32/Makefile	2009-05-26 22:53:27.000000000 +0200
-+++ glibc-2.10-current/ports/sysdeps/mips/mips32/Makefile	2009-05-30 13:59:48.000000000 +0200
-@@ -1,3 +0,0 @@
--ifeq ($(filter -mabi=32,$(CC)),)
--CC += -mabi=32
--endif
