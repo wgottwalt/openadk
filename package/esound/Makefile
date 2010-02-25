@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		esound
 PKG_VERSION:=		0.2.41
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3d8973ed87053d7acc1f4d44af2c4688
 PKG_DESCR:=		Enlightened Sound Daemon
 PKG_SECTION:=		net
@@ -17,6 +17,8 @@ PKG_SITES:=		ftp://ftp.gnome.org/pub/gnome/sources/esound/0.2/
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ESOUND,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-alsa
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ESOUND}/usr/bin ${IDIR_ESOUND}/usr/lib
