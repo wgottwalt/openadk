@@ -22,7 +22,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-sjlj-exceptions \
 			--disable-libssp \
 			--disable-libstdcxx-pch \
-			--disable-nls 
+			--disable-nls
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
@@ -36,6 +36,10 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 GCC_CONFOPTS+=		--disable-tls
 else
 GCC_CONFOPTS+=		--enable-tls
+endif
+
+ifeq (${ADK_MAKE_PARALLEL},y)
+GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
 include ${TOPDIR}/mk/buildhlp.mk
@@ -59,7 +63,7 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 
 $(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
 	touch $@
 
 $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
@@ -88,7 +92,7 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
@@ -111,7 +115,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) all
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -126,7 +130,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		cd bin; \
 		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
 			ln -sf $${app} \
-		   	$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
+				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done; \
 	)
 	touch $@

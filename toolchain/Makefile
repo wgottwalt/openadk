@@ -7,7 +7,7 @@
 # 3) build and install gcc c compiler
 # 4) install kernel-headers
 # 5) install libc headers
-# 6) build and install full gcc 
+# 6) build and install full gcc
 # 7) build and install full libc
 # 8) build and install gdb debugger
 
@@ -38,11 +38,15 @@ clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 
 gcc-prepare: binutils-install gmp-install mpfr-install
+<<<<<<< HEAD
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare glibc-ports-prepare
 else
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare
 endif
+=======
+$(LIBC)-prepare: gcc-prepare kernel-headers-prepare
+>>>>>>> 92de2ee1c2848fe50b9908bb679e0c9edcd4a867
 gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install

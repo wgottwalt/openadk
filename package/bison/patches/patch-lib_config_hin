@@ -1,0 +1,12 @@
+--- bison-2.4.1.orig/lib/config.hin	2008-12-11 23:05:52.000000000 +0100
++++ bison-2.4.1/lib/config.hin	2010-02-23 20:09:49.477285615 +0100
+@@ -399,6 +399,9 @@
+ /* Define to the one symbol short name of this package. */
+ #undef PACKAGE_TARNAME
+ 
++/* Define to the home page for this package. */
++#undef PACKAGE_URL
++
+ /* Define to the version of this package. */
+ #undef PACKAGE_VERSION
+ 

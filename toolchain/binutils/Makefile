@@ -10,8 +10,12 @@ ifeq ($(ADK_LINUX_64),y)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 
-$(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configured: 
+ifeq (${ADK_MAKE_PARALLEL},y)
+BINUTILS_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+endif
+
+$(WRKBUILD)/.headers:
+$(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
@@ -31,7 +35,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) -C $(WRKBUILD) all
+	$(MAKE) ${BINUTILS_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled

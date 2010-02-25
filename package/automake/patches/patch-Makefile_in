@@ -1,0 +1,11 @@
+--- automake-1.10.orig/Makefile.in	2006-10-15 19:25:23.000000000 +0200
++++ automake-1.10/Makefile.in	2010-02-23 19:50:59.178535678 +0100
+@@ -162,7 +162,7 @@ sysconfdir = @sysconfdir@
+ target_alias = @target_alias@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = lib . doc m4 tests
++SUBDIRS = lib . m4
+ bin_SCRIPTS = automake aclocal
+ CLEANFILES = $(bin_SCRIPTS)
+ AUTOMAKESOURCES = automake.in aclocal.in

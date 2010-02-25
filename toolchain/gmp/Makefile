@@ -6,8 +6,12 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-$(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configured: 
+ifeq (${ADK_MAKE_PARALLEL},y)
+GMP_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
+endif
+
+$(WRKBUILD)/.headers:
+$(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
@@ -20,7 +24,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) -C $(WRKBUILD) all
+	$(MAKE) ${GMP_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled

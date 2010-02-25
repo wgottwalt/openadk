@@ -31,7 +31,7 @@ _CHECKSUM_COOKIE?=	${WRKDIR}/.checksum_done
 checksum: ${_CHECKSUM_COOKIE}
 ifeq ($(strip ${NO_CHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
-	rm -rf ${WRKDIR}
+	-rm -rf ${WRKDIR}
 	@OK=n; \
 	(md5sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \

@@ -25,7 +25,7 @@ endif
 	touch $(WRKBUILD)/.configured
 	touch $@
 
-$(WRKBUILD)/.compiled: 
+$(WRKBUILD)/.compiled:
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX= \
 		DEVEL_PREFIX=/ \
