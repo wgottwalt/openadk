@@ -18,6 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ESOUND,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--disable-alsa
+
 post-install:
 	${INSTALL_DIR} ${IDIR_ESOUND}/usr/bin ${IDIR_ESOUND}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/esd ${IDIR_ESOUND}/usr/bin/
