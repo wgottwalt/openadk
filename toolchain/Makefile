@@ -38,15 +38,11 @@ clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 
 gcc-prepare: binutils-install gmp-install mpfr-install
-<<<<<<< HEAD
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare glibc-ports-prepare
 else
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare
 endif
-=======
-$(LIBC)-prepare: gcc-prepare kernel-headers-prepare
->>>>>>> 92de2ee1c2848fe50b9908bb679e0c9edcd4a867
 gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install
