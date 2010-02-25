@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.15.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		6680970274c389fd07e2b35721de1764
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
@@ -14,6 +14,10 @@ PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
 PKG_DEPENDS+=		alsa-lib
 PKG_BUILDDEP+=		alsa-lib
+endif
+ifneq ($(ADK_PACKAGE_MPD_WITH_AO),)
+PKG_DEPENDS+=		libao
+PKG_BUILDDEP+=		libao
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
 PKG_DEPENDS+=		libid3tag libmad
@@ -58,10 +62,11 @@ endif
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
 
-PKG_FLAVOURS:=		WITH_ALSA WITH_MP3 WITH_MP4 WITH_TREMOR \
+PKG_FLAVOURS:=		WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR \
 			WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG \
 			WITH_SHOUT WITH_CURL
 PKGFD_WITH_ALSA:=	enable ALSA output
+PKGFD_WITH_AO:=		enable Libao/ESD output
 PKGFD_WITH_MP3:=	enable MP3 support
 PKGFD_WITH_MP4:=	enable MP4 support
 PKGFD_WITH_OGG:=	enable OGG support
@@ -80,7 +85,6 @@ $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 TCFLAGS+=		-std=gnu99
 XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 CONFIGURE_ARGS+=	--disable-httpd-output \
-			--disable-ao \
 			--disable-jack \
 			--disable-fifo \
 			--disable-pulse \
@@ -94,6 +98,12 @@ ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
 CONFIGURE_ARGS+=	--enable-alsa
 else
 CONFIGURE_ARGS+=	--disable-alsa
+endif
+
+ifneq (${ADK_PACKAGE_MPD_WITH_AO},)
+CONFIGURE_ARGS+=	--enable-ao
+else
+CONFIGURE_ARGS+=	--disable-ao
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_MP3},)
