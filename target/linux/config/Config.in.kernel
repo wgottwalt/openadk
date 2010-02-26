@@ -26,7 +26,11 @@ config ADK_KERNEL_KERNEL_LZMA
 	bool
 	default n
 
-config ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+config ADK_KERNEL_RD_LZO
+	bool
+	default n
+
+config ADK_KERNEL_KERNEL_LZO
 	bool
 	default n
 

@@ -496,6 +496,7 @@ config ADK_LINUX_ARM_QEMU
 	bool "arm"
 	select ADK_arm_qemu
 	select ADK_EABI
+	select ADK_KERNEL_INPUT_KEYBOARD
 	help
 	 Qemu support for ARM architecture.
 	 Right now this is optimized for Zaurus PDA spitz. 
@@ -961,6 +962,14 @@ config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
 	help
 	  Select LZMA compression.
 
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+	boolean
+	prompt "lzo"
+	select ADK_KERNEL_RD_LZO
+	select ADK_KERNEL_KERNEL_LZO
+	help
+	  Select LZO compression.
+
 endchoice
 
 choice
@@ -989,6 +998,13 @@ config ADK_TARGET_KERNEL_COMPRESSION_LZMA
 	help
 	  Select LZMA compression for Kernel.
 
+config ADK_TARGET_KERNEL_COMPRESSION_LZO
+	boolean
+	prompt "lzo"
+	select ADK_KERNEL_KERNEL_LZO
+	help
+	  Select LZO compression for Kernel.
+
 endchoice
 
 config ADK_COMPRESSION_TOOL
@@ -996,6 +1012,7 @@ config ADK_COMPRESSION_TOOL
 	default "gzip -n9" if ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
 	default "bzip2" if ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	default "lzop" if ADK_TARGET_INITRAMFS_COMPRESSION_LZO
 	help
 
 choice
