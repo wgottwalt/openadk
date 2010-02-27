@@ -132,6 +132,15 @@ if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
 	fi
 fi
 
+case $2 in
+	wrap*)
+		speed=38400
+		;;
+	*)
+		speed=115200
+		;;
+esac
+
 if [ $rb532 -ne 0 ];then
 	printf "Create partition and filesystem for rb532\n"
 	rootpart=${1}2
@@ -209,14 +218,14 @@ if [ $rb532 -eq 0 ];then
 cat << EOF > $tmp/boot/grub/grub.cfg
 set default=0
 set timeout=1
-serial --unit=0 --speed=115200
+serial --unit=0 --speed=$speed
 terminal_output serial 
 terminal_input serial 
 
 menuentry "GNU/Linux (OpenADK)" {
 	insmod ext2
 	set root=(hd0,1)
-	linux /boot/vmlinuz-adk root=/dev/sda1 ro init=/init console=ttyS0,115200 console=tty0 panic=10
+	linux /boot/vmlinuz-adk root=/dev/sda1 ro init=/init console=ttyS0,$speed console=tty0 panic=10
 }
 EOF
 	chroot $tmp grub-install $1
