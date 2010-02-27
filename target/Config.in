@@ -496,6 +496,7 @@ config ADK_LINUX_ARM_QEMU
 	bool "arm"
 	select ADK_arm_qemu
 	select ADK_EABI
+	select ADK_KERNEL_INPUT_KEYBOARD
 	help
 	 Qemu support for ARM architecture.
 	 Right now this is optimized for Zaurus PDA spitz. 
@@ -543,7 +544,8 @@ config ADK_LINUX_CRIS_QEMU
 config ADK_LINUX_X86_QEMU
 	bool "x86"
 	select ADK_x86_qemu
-	select ADK_KPACKAGE_KMOD_8139CP
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -557,7 +559,8 @@ config ADK_LINUX_X86_QEMU
 config ADK_LINUX_X86_64_QEMU
 	bool "x86_64"
 	select ADK_x86_64_qemu
-	select ADK_KPACKAGE_KMOD_8139CP
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -959,11 +962,20 @@ config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
 	help
 	  Select LZMA compression.
 
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+	boolean
+	prompt "lzo"
+	select ADK_KERNEL_RD_LZO
+	select ADK_KERNEL_KERNEL_LZO
+	help
+	  Select LZO compression.
+
 endchoice
 
 choice
 prompt "Compression method for Kernel"
 	depends on ADK_LINUX_QEMU || ADK_LINUX_ALIX
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK)
 	
 config ADK_TARGET_KERNEL_COMPRESSION_GZIP
 	boolean
@@ -986,6 +998,13 @@ config ADK_TARGET_KERNEL_COMPRESSION_LZMA
 	help
 	  Select LZMA compression for Kernel.
 
+config ADK_TARGET_KERNEL_COMPRESSION_LZO
+	boolean
+	prompt "lzo"
+	select ADK_KERNEL_KERNEL_LZO
+	help
+	  Select LZO compression for Kernel.
+
 endchoice
 
 config ADK_COMPRESSION_TOOL
@@ -993,6 +1012,7 @@ config ADK_COMPRESSION_TOOL
 	default "gzip -n9" if ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
 	default "bzip2" if ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	default "lzop" if ADK_TARGET_INITRAMFS_COMPRESSION_LZO
 	help
 
 choice

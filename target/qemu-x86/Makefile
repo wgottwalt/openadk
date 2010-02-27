@@ -12,7 +12,7 @@ kernel-install:
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.*
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
 		$(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
@@ -29,7 +29,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=rtl8139 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel qemu-${CPU_ARCH}.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel qemu-${CPU_ARCH}.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
@@ -37,19 +37,15 @@ ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'You need a dummy qemu.img, create it with:'
-	@echo 'qemu-img create -f raw qemu.img 1M'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=rtl8139 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel -initrd ${BIN_DIR}/${INITRAMFS} qemu.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel -initrd ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
 ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'You need a dummy qemu.img, create it with:'
-	@echo 'qemu-img create -f raw qemu.img 1M'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=rtl8139 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel qemu.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

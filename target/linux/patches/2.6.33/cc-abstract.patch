@@ -1,0 +1,14 @@
+diff -Nur linux-2.6.32.orig/Makefile linux-2.6.32/Makefile
+--- linux-2.6.32.orig/Makefile	Thu Dec  3 04:50:57 2009
++++ linux-2.6.32/Makefile	Fri Dec 18 20:53:57 2009
+@@ -219,8 +219,8 @@
+ 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
+ 	  else echo sh; fi ; fi)
+ 
+-HOSTCC       = gcc
+-HOSTCXX      = g++
++HOSTCC       ?= gcc
++HOSTCXX      ?= g++
+ HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer
+ HOSTCXXFLAGS = -O2
+ 

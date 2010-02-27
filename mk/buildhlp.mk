@@ -18,11 +18,7 @@ WRKBUILD?=		${WRKSRC}
 # This is where make install (fake) writes to
 WRKINST?=		${WRKDIR}/fake-${CPU_ARCH}/root
 
-ifeq ($(strip ${NO_CHECKSUM}),)
 _CHECKSUM_COOKIE=	${WRKDIR}/.checksum_done
-else
-_CHECKSUM_COOKIE=
-endif
 
 post-extract:
 

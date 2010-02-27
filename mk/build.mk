@@ -196,7 +196,7 @@ clean:
 
 cleankernel:
 	@$(TRACE) cleankernel
-	rm -rf $(TOOLCHAIN_BUILD_DIR)/linux* $(BUILD_DIR)/linux
+	rm -rf $(TOOLCHAIN_BUILD_DIR)/w-linux* $(BUILD_DIR)/linux
 
 cleandir:
 	@$(TRACE) cleandir
