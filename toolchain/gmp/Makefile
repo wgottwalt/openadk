@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
-include ../rules.mk
 include Makefile.inc
+include ../rules.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
 ifeq (${ADK_MAKE_PARALLEL},y)
