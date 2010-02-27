@@ -2,6 +2,10 @@ config ADK_KERNEL_BLK_DEV_INITRD
 	bool
 	default n
 
+config ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
+	bool
+	default n
+
 config ADK_KERNEL_RD_GZIP
 	bool
 	default n

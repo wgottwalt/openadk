@@ -1,9 +1,7 @@
-- update to 2.6.33 
-- microsd filesystem for foxg20
+- fix glibc build for MIPS targets
 - implement update for MTD devices (ag241)
 - fix watchdog for alix1c (mfgpt timers problem)
 - macos x build
-- use LZMA kernels for MIPS targets
 - package drbd
 - new packages for openais and pacemaker
 - continuos build via hudson or sth. like that

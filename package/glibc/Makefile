@@ -57,12 +57,12 @@ glibc-dev-install:
 	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	# header package
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
-		$(TOOLCHAIN_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/configure \
+		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/configure \
 		--prefix=/usr \
 		--with-sysroot=$(IDIR_GLIBC_DEV) \
 		${GLIBC_CONFOPTS} \
