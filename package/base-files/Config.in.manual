@@ -1,0 +1,10 @@
+config ADK_PACKAGE_CONFIG_IN_ETC
+	prompt ".config in /etc.................. include buildsystem configuration in image"
+	bool
+	depends on ADK_PACKAGE_BASE_FILES
+	default y if !ADK_TOOLCHAIN_ONLY
+	help
+         Copy the configuration file (.config) to the image.  The
+         file will be found in /etc/adkconfig.gz. This takes about
+         7kBytes of file system space. From this file you can always rebuild
+         the image from source.
