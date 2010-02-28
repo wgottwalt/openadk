@@ -18,15 +18,12 @@ $(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''
-ifeq ($(ADK_LINUX_MIPS64_LEMOTE),y)
-CONFIGURE_ARGS+=	--with-abi=64
-endif
 CONFIGURE_ARGS+=	--enable-languages=c,c++ \
-			--libexecdir=/usr/lib \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
 			--disable-__cxa_atexit \
 			--without-headers \
+			--libexecdir=/usr/lib \
 			--with-gnu-ld \
 			--disable-libssp \
 			--disable-nls \
