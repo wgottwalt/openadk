@@ -73,13 +73,13 @@ eglibc-dev-install:
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libcrypt.so.1 libcrypt.so
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libdl.so.2 libdl.so
 	# header package
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
 		${EGLIBC_ENV} \
-		$(TOOLCHAIN_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
+		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
 			--prefix=$(IDIR_EGLIBC_DEV)/usr \
 			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
 			${EGLIBC_CONFOPTS} \
