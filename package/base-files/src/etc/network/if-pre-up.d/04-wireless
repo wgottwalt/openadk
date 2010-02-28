@@ -38,10 +38,6 @@ esac
 
 case "$IF_WIRELESS_MODE" in
 	ap)
-		[ -x /usr/sbin/hostapd ] || {
-			logger -t hostap "No hostapd program found"
-			exit 1
-		}
 		logger -t hostap "Creating hostapd configuration"
 		cat /etc/hostapd.conf > /tmp/hostapd.conf
 		chmod 600 /tmp/hostapd.conf
@@ -50,6 +46,10 @@ case "$IF_WIRELESS_MODE" in
 		echo "channel=$IF_WIRELESS_CHANNEL" >> /tmp/hostapd.conf
 		echo "hw_mode=$IF_WIRELESS_HWMODE" >> /tmp/hostapd.conf
 		echo "auth_algs=$sec" >> /tmp/hostapd.conf
+		[ $wpa -eq 0 ] && {
+			logger -t hostap "using no security mechanism"
+			echo "wpa=0" >> /tmp/hostapd.conf
+		}
 		[ $wpa1 -eq 1 ] && {
 			logger -t hostap "using WPA for security"
 			echo "wpa=1" >> /tmp/hostapd.conf
@@ -72,8 +72,6 @@ case "$IF_WIRELESS_MODE" in
 			echo "rsn_pairwise=CCMP" >> /tmp/hostapd.conf
 			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
 		}
-		logger -t hostap "Starting hostapd"
-		hostapd -B /tmp/hostapd.conf
 		;;
 	sta)
 		[ -x /usr/sbin/iw ] || {
@@ -103,5 +101,4 @@ case "$IF_WIRELESS_MODE" in
 		exit 1
 		;;
 esac
-
 exit 0

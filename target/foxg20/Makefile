@@ -31,7 +31,7 @@ ifeq ($(FS),ext2-block)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
 	@echo "The RootFS tarball is:"
-	@echo "$(BIN_DIR)/$(ROOTFSUSERTARBALL)"
+	@echo "$(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo 'Before booting from MicroSD card you need to set following u-boot environment variables:'
 	@echo "setenv bootcmd 'mmc init; sleep 1; fatload mmc 0 0x22000000 uimage; bootm 0x22000000'"
 	@echo
