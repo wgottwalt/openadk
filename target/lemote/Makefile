@@ -7,33 +7,41 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
-
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 createinit:
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
+	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
+		$(LINUX_DIR)/.config
+	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" $(MAKE_TRACE)
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+
+createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/mips/loongson/image/vmlinuz \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
 	@echo 'PMON> load tftp://<ip-address-server>/${ADK_TARGET}-${FS}-kernel'
-	@echo 'PMON> g no_auto_cmd root=/dev/nfs ip=dhcp init=/init'
+	@echo 'PMON> g'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),encrypted)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinitcrypt
 	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo 'Boot your lemote via NFS or USB.'
@@ -62,9 +70,14 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
+imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),archive)
