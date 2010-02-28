@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp
 PKG_VERSION:=		4.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		38a74c89d8913b9b5f33737047623c18
 PKG_DESCR:=		ISC DHCP server
 PKG_SECTION:=		net
@@ -27,6 +27,8 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcrelay \
 		${IDIR_DHCP_RELAY}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_DHCP_SERVER}/usr/sbin
+	${INSTALL_DIR} ${IDIR_DHCP_SERVER}/etc
+	${INSTALL_DATA} ./files/dhcpd.conf ${IDIR_DHCP_SERVER}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcpd \
 		${IDIR_DHCP_SERVER}/usr/sbin/
 
