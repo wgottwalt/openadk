@@ -43,7 +43,7 @@ endif
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinitcrypt
 	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo 'Boot your lemote via NFS or USB.'
 	@echo 'Then create at least three partitions with fdisk:'
 	@echo '/dev/sda1 (ext2)'
