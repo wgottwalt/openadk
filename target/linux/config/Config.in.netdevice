@@ -172,6 +172,10 @@ config ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 	boolean
 	default n
 
+config ADK_KERNEL_MAC80211_DEBUGFS
+	boolean
+	default n
+
 config ADK_KPACKAGE_KMOD_MAC80211
 	prompt "kmod-mac80211.................. mac80211 softmac"
 	tristate
@@ -189,6 +193,8 @@ config ADK_DEBUG_MAC80211
 	boolean
 	prompt "enable verbose debugging messages in mac80211"
 	select ADK_KERNEL_MAC80211_VERBOSE_DEBUG
+	select ADK_KERNEL_MAC80211_DEBUGFS
+	select ADK_KERNEL_DEBUG_FS
 	default n
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	help
