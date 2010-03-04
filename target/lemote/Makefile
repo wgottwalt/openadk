@@ -41,9 +41,9 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),encrypted)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinitcrypt
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFUSERSTARBALL)"
 	@echo 'Boot your lemote via NFS or USB.'
 	@echo 'Then create at least three partitions with fdisk:'
 	@echo '/dev/sda1 (ext2)'
