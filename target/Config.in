@@ -259,6 +259,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
 	select ADK_LINUX_64
+	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
