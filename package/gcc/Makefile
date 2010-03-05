@@ -27,10 +27,15 @@ PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GCC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TCFLAGS:=		''
 TCPPFLAGS:=		''
+
+ifeq ($(ADK_LINUX_64),y)
+CONFIGURE_ARGS+=       --with-abi=64
+endif
+
 CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
@@ -53,6 +58,7 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gcc ${IDIR_GCC}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GCC}/usr/bin/
 	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
+	cd ${IDIR_GCC}/usr/bin/ && ln -sf gcc cc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
 	${CP} ${WRKINST}/usr/lib/libstdc++*so* ${IDIR_GCC}/usr/lib/
 	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
