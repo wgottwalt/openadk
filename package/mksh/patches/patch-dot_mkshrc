@@ -1,8 +1,8 @@
---- mksh.orig/dot.mkshrc	2010-02-16 20:13:59.000000000 +0100
-+++ mksh/dot.mkshrc	2010-02-16 20:13:50.000000000 +0100
+--- mksh/dot.mkshrc~	Thu Feb 25 20:48:10 2010
++++ mksh/dot.mkshrc	Sun Feb 28 18:05:10 2010
 @@ -21,7 +21,7 @@
  #-
- # ~/.mkshrc: mksh initialisation file for interactive shells
+ # ${ENV:-~/.mkshrc}: mksh initialisation file for interactive shells
  
 -: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
 +: ${EDITOR:=/bin/vi} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}

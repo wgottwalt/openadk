@@ -19,9 +19,6 @@ Before you can start you need to install some tools:
 - wget
 - file
 - unzip
-- autoconf
-- automake
-- Ãlibtool
 - libc headers
 - ncurses5 headers
 - zlib headers
