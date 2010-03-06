@@ -11,15 +11,15 @@ PKG_DEPENDS:=		libgmp mpfr
 PKG_BUILDDEP+=		gmp mpfr
 
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-PKG_DEPENDS:=		uclibc-dev
+PKG_DEPENDS+=		uclibc-dev
 PKG_BUILDDEP+=		uclibc
 endif
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
-PKG_DEPENDS:=		eglibc-dev
+PKG_DEPENDS+=		eglibc-dev
 PKG_BUILDDEP+=		eglibc
 endif
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
-PKG_DEPENDS:=		glibc-dev
+PKG_DEPENDS+=		glibc-dev
 PKG_BUILDDEP+=		glibc
 endif
 
