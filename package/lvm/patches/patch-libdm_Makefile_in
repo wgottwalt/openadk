@@ -1,41 +1,21 @@
-always install static library
---- LVM2.2.02.51.orig/libdm/Makefile.in	Wed Apr  8 16:04:35 2009
-+++ LVM2.2.02.51/libdm/Makefile.in	Mon Feb 15 23:25:01 2010
-@@ -34,9 +34,9 @@ SOURCES =\
- 
- INCLUDES = -I$(interface) -I.
- 
--ifeq ("@STATIC_LINK@", "yes")
-+#ifeq ("@STATIC_LINK@", "yes")
- LIB_STATIC = $(interface)/libdevmapper.a
--endif
-+#endif
- 
- ifeq ("@LIB_SUFFIX@","dylib")
-   LIB_SHARED = $(interface)/libdevmapper.dylib
-@@ -59,9 +59,9 @@ device-mapper: all
- 
- INSTALL_TYPE = install_dynamic
- 
--ifeq ("@STATIC_LINK@", "yes")
-+#ifeq ("@STATIC_LINK@", "yes")
-   INSTALL_TYPE += install_static
--endif
-+#endif
- 
- ifeq ("@PKGCONFIG@", "yes")
-   INSTALL_TYPE += install_pkgconfig
-@@ -72,7 +72,8 @@ install: $(INSTALL_TYPE) install_include
+--- LVM2.2.02.61.orig/libdm/Makefile.in	2009-10-02 21:10:36.000000000 +0200
++++ LVM2.2.02.61/libdm/Makefile.in	2010-03-03 19:48:02.316248648 +0100
+@@ -73,26 +73,32 @@ install: $(INSTALL_TYPE) install_include
  install_device-mapper: install
  
  install_include:
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 libdevmapper.h \
+-	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 $(srcdir)/libdevmapper.h \
 +	$(INSTALL) -d $(includedir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 444 libdevmapper.h \
++	$(INSTALL) $(OWNER) $(GROUP) -m 444 $(srcdir)/libdevmapper.h \
  		$(includedir)/libdevmapper.h
  
  install_dynamic: install_@interface@
-@@ -83,15 +84,17 @@ install_static: install_@interface@_static
++	$(INSTALL) -d $(libdir)
+ 	$(LN_S) -f libdevmapper.$(LIB_SUFFIX).$(LIB_VERSION_DM) \
+ 		$(libdir)/libdevmapper.$(LIB_SUFFIX)
+ 
+ install_static: install_@interface@_static
++	$(INSTALL) -d $(libdir)
  	$(LN_S) -f libdevmapper.a.$(LIB_VERSION_DM) $(libdir)/libdevmapper.a
  
  install_ioctl: ioctl/libdevmapper.$(LIB_SUFFIX)
@@ -52,6 +32,7 @@ always install static library
  
  install_ioctl_static: ioctl/libdevmapper.a
 -	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
++	$(INSTALL) -d $(libdir)
 +	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
  		$(libdir)/libdevmapper.a.$(LIB_VERSION_DM)
  
