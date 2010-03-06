@@ -608,6 +608,8 @@ $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
+    $(MODULES_DIR)/kernel/drivers/md/raid6_pq \
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_raid6_recov \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
 
@@ -776,6 +778,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
+    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
     $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))

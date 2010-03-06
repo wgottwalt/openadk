@@ -17,6 +17,8 @@ $(eval $(call PKG_template,SETSERIAL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 
 INSTALL_STYLE:=         manual
 
+TCFLAGS+=		-DFIOQSIZE=1
+
 do-install:
 	${INSTALL_DIR} ${IDIR_SETSERIAL}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/setserial ${IDIR_SETSERIAL}/usr/sbin/

@@ -4,16 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxml2
-PKG_VERSION:=		2.7.3
+PKG_VERSION:=		2.7.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8f4fda3969237c2a33bdb1583b5d06b2
+PKG_MD5SUM:=		7740a8ec23878a2f50120e1faa2730f2
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.xmlsoft.org/
-PKG_SITES:=		http://xmlsoft.org/sources/ \
-			ftp://fr.rpmfind.net/pub/libxml/
+PKG_SITES:=		http://xmlsoft.org/sources/
 
 include ${TOPDIR}/mk/package.mk
 

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
-PKG_VERSION:=		9.6.1-P3
+PKG_VERSION:=		9.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a0952d589b3051538033387be4c983f9
+PKG_MD5SUM:=		c245b5d1aa0a4f53d9538faa1efe2c3f
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libbind libxml2
