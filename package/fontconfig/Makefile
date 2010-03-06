@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		77e15a92006ddc2adbb06f840d591c0e
 PKG_DESCR:=		fontconfig
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		freetype
 PKG_URL:=		http://fontconfig.org
 PKG_SITES:=		http://fontconfig.org/release/
 
