@@ -150,12 +150,13 @@ if [ $rb532 -ne 0 ];then
 	rootsize=$(($maxsize-2))
 
 	$parted -s $1 unit cyl mkpart primary ext2 0 1
-	$parted -s $1 unit cyl mkpartfs primary ext2 1 $rootsize
+	$parted -s $1 unit cyl mkpart primary ext2 1 $rootsize
 	$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 	$parted -s $1 set 1 boot on
 	$sfdisk --change-id $1 1 27
 	$sfdisk --change-id $1 3 88
 	sleep 2
+	$mke2fs ${1}2
 	sync
 	dd if=$3 of=${1}1 bs=2048
 	sync
@@ -178,10 +179,11 @@ EOF
 		maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 		rootsize=$(($maxsize-2))
 
-		$parted -s $1 unit cyl mkpartfs primary ext2 0 $rootsize
+		$parted -s $1 unit cyl mkpart primary ext2 0 $rootsize
 		$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 		$parted -s $1 set 1 boot on
 		$sfdisk --change-id $1 2 88
+		$mke2fs ${1}1
 	fi
 fi
 
