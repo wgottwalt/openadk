@@ -82,7 +82,7 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver (ALIX1C)"
 	depends on ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
-	depends on ADK_LINUX_X86_ALIX1C
+	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS64_LEMOTE
 	tristate
 	default n
 	help

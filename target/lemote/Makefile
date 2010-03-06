@@ -33,7 +33,7 @@ createinitcrypt:
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
 	@echo 'PMON> load tftp://<ip-address-server>/${ADK_TARGET}-${FS}-kernel'
@@ -61,8 +61,8 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'mount /dev/mapper/crypt /mnt/root'
 	@echo 'mkdir /mnt/boot/boot'
 	@echo 
-	@echo 'Copy $(ROOTFSTARBALL) via scp to /mnt/root and extract it'
-	@echo 'cd /mnt/root ; gunzip $(ROOTFSTARBALL); tar xpvf $(ROOTFSTARBALL)'
+	@echo 'Copy $(ROOTFSUSERTARBALL) via scp to /mnt/root and extract it'
+	@echo 'cd /mnt/root ; gunzip $(ROOTFSUSERTARBALL); tar xpvf $(ROOTFSUSERTARBALL)'
 	@echo 'Copy ${ADK_TARGET}-${FS}-kernel via scp to /mnt/boot/boot'
 	@echo 'Move boot.cfg to /mnt/boot/boot'
 	@echo 'mv /mnt/root/boot/boot.cfg /mnt/boot/boot'
