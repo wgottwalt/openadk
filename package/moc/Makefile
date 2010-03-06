@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		moc
-PKG_VERSION:=		2.4.4
+PKG_VERSION:=		2.5.0-alpha4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		647c770a5542a4ae5437386807a89796
+PKG_MD5SUM:=		2dd0cb6481d77fda09c58ec3154a21c0
 PKG_DESCR:=		console music player
 PKG_SECTION:=		sound
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac ffmpeg libiconv
@@ -14,7 +14,7 @@ PKG_DEPENDS+=		libncurses libid3tag
 PKG_BUILDDEP+=		ncurses libvorbis curl libmad flac ffmpeg libiconv
 PKG_BUILDDEP+=		libid3tag
 PKG_URL:=		http://moc.daper.net
-PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/stable/
+PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/unstable/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
