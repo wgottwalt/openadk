@@ -16,14 +16,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GREP,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-#CONFIG_STYLE:=		manual
-# use following to add ./configure options
-#CONFIGURE_ARGS+=	--disable-foo
-# overwrite any configure variables
-#CONFIGURE_ENV+=	ac_cv_func_setpgrp_void=yes
-#BUILD_STYLE:=		manual
-#INSTALL_STYLE:=	manual
-
 post-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/grep \
