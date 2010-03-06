@@ -17,13 +17,15 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+
+FAKE_FLAGS+=		INSTALLSTRIP=''
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
 CONFIGURE_CPU_OPTS:=	\
