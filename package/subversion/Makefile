@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.6.6
+PKG_VERSION:=		1.6.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ab0f26f6eb056add1b9d3059a3f4247
+PKG_MD5SUM:=		facaa0ee78c8f24b9af12c74662bbd24
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite
@@ -50,7 +50,7 @@ INSTALL_TARGET:=	external-install local-install
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SUBVERSION}/usr/{bin,lib}
-	${CP} ${WRKINST}/usr/bin/* ${IDIR_SUBVERSION}/usr/bin
-	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_SUBVERSION}/usr/lib
+	${INSTALL_BIN} ${WRKINST}/usr/bin/svn ${IDIR_SUBVERSION}/usr/bin
+	${CP} ${WRKINST}/usr/lib/libsvn*.so* ${IDIR_SUBVERSION}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

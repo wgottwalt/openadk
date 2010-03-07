@@ -27,3 +27,4 @@ x86_qemu	glibc		archive
 x86_64_qemu	uclibc		archive
 x86_64_qemu	eglibc		archive
 x86_64_qemu	glibc		archive
+lemote		eglibc		archive

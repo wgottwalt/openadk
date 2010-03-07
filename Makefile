@@ -27,7 +27,6 @@ help:
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  wconfig      - Same as "oldconfig", but also writes out hidden symbols'
 	@echo '  allmodconfig - New config selecting all packages as modules when possible'
 	@echo '  allconfig    - New config selecting all packages when possible'
 	@echo '  allnoconfig  - New config where all options are answered with no'
@@ -85,9 +84,6 @@ config: .prereq_done
 
 oldconfig: .prereq_done
 	@${GMAKE_INV} _config W=-o
-
-wconfig: .prereq_done
-	@${GMAKE_INV} _config W=-A
 
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download

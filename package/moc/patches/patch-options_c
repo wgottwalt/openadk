@@ -1,0 +1,11 @@
+--- moc-2.5.0-alpha4.orig/options.c	2009-09-16 12:04:53.000000000 +0200
++++ moc-2.5.0-alpha4/options.c	2010-03-06 11:38:50.596035001 +0100
+@@ -327,7 +327,7 @@ static void option_add_symb (const char 
+ 		char *val = va_arg (va, char *);
+ 		if (strlen (val) == 0 ||
+ 		    strlen (val) != strspn (val, valid) ||
+-		    index (first, val[0]) != NULL)
++		    strchr (first, val[0]) != NULL)
+ 			fatal ("Invalid symbol in '%s' constraint list.", name);
+ 		((char **) options[pos].constraints)[ix] = xstrdup (val);
+ 		if (!strcasecmp (val, value))
