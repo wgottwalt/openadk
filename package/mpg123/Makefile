@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0005c9a89c381484e2d2ff450b3dfe5e
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		sound
-PKG_DEPENDS:=		libpthread alsa-lib
+PKG_DEPENDS:=		libpthread alsa-lib libltdl
 PKG_BUILDDEP+=		alsa-lib
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mpg123/}
@@ -22,7 +22,9 @@ $(eval $(call PKG_template,MPG123,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PK
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MPG123)/usr/bin $(IDIR_MPG123)/usr/lib
+	$(INSTALL_DIR) $(IDIR_MPG123)/usr/lib/mpg123
 	$(CP) $(WRKINST)/usr/lib/libmpg123.so* $(IDIR_MPG123)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/mpg123/*.so $(IDIR_MPG123)/usr/lib/mpg123
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/mpg123 \
 		$(IDIR_MPG123)/usr/bin
 
