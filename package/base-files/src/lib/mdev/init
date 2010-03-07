@@ -1,9 +1,4 @@
 #!/bin/sh
-if [ "$ACTION" == "add" ];then
-        if [ "$DEVPATH" == "/bus/usb" ];then
-                mount -t usbfs usbfs /proc/bus/usb
-        fi
-fi
 if [ "$SUBSYSTEM" == "firmware" ];then
         logger "Firmware load for $FIRMWARE requested"
         if [ "$ACTION" == "add" ];then
