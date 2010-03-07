@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.7.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		913a672cbd6da516de15965d594e20b9
+PKG_VERSION:=		1.7.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		866917789c71e7616a016ad256fe9b8f
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile \
@@ -18,7 +18,7 @@ PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
 			compositeproto evieext libxkbfile libXfont pixman \
 			libpciaccess openssl xf86dgaproto
 PKG_URL:=		http://www.x.org
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
 
 CFLINE_XORG_SERVER:=	depends on ADK_TARGET_WITH_VGA
 
@@ -32,6 +32,7 @@ CONFIGURE_ARGS+=	\
 			--enable-dga \
 			--enable-xorg \
 			--enable-xv \
+			--enable-xaa \
 			--disable-aiglx \
 			--disable-config-hal \
 			--disable-dpms \
@@ -56,6 +57,7 @@ CONFIGURE_ARGS+=	\
 			--with-vendor-web="http://openadk.org"
 
 post-install:
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/etc/X11
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
@@ -72,5 +74,7 @@ post-install:
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	${CP} ${WRKINST}/usr/lib/xorg/modules/multimedia/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
+	-$(CP) $(TOPDIR)/target/$(ADK_TARGET)/xorg.conf \
+		$(IDIR_XORG_SERVER)/etc/X11
 
 include ${TOPDIR}/mk/pkg-bottom.mk
