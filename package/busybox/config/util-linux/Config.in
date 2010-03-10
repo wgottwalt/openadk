@@ -283,6 +283,7 @@ config BUSYBOX_HD
 
 config BUSYBOX_HWCLOCK
 	bool "hwclock"
+	default y if ADK_TARGET_WITH_RTC
 	default n
 	help
 	  The hwclock utility is used to read and set the hardware clock

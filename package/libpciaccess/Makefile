@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpciaccess
-PKG_VERSION:=		0.10.9
+PKG_VERSION:=		0.11.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5dad6221c2766d5a727ef32e83a0a878
+PKG_MD5SUM:=		8f7ea197384e5ddd1c355f55e639f677
 PKG_DESCR:=		X.org libpciaccess library
 PKG_SECTION:=		x11
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk
 

@@ -1,0 +1,25 @@
+--- xorg-server-1.7.5.orig/hw/xfree86/os-support/linux/lnx_video.c	2010-02-16 01:24:23.000000000 +0100
++++ xorg-server-1.7.5/hw/xfree86/os-support/linux/lnx_video.c	2010-03-07 16:38:06.000000000 +0100
+@@ -497,7 +497,7 @@ volatile unsigned char *ioBase = NULL;
+ Bool
+ xf86EnableIO(void)
+ {
+-#if defined(__powerpc__)
++#if defined(__powerpc__) || defined(__mips__)
+ 	int fd;
+ 	unsigned int ioBase_phys;
+ #endif
+@@ -537,6 +537,13 @@ xf86EnableIO(void)
+ 	ioperm(0x40,4,0); /* trap access to the timer chip */
+ 	ioperm(0x60,4,0); /* trap access to the keyboard controller */
+ # endif
++#else
++	fd = open("/dev/mem", O_RDWR);
++	if (IOPortBase == NULL) {
++		IOPortBase = (volatile unsigned char *)mmap(0, 0x20000,
++			PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0x1fd00000);
++	}
++	close(fd);
+ #endif
+ 	ExtendedEnabled = TRUE;
+ 

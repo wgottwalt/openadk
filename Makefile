@@ -166,11 +166,11 @@ prereq-noerror:
 NO_ERROR=0
 .prereq_done:
 	@-rm -rf .prereq_done
-	@if ! bash --version 2>&1 | fgrep 'GNU bash' >/dev/null 2>&1; then \
+	@if ! bash --version 2>&1 | grep -F 'GNU bash' >/dev/null 2>&1; then \
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
 	fi
-	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | fgrep 'MIRBSD' >/dev/null 2>&1; then \
+	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | grep -F 'MIRBSD' >/dev/null 2>&1; then \
 		echo "MirBSD ksh (mksh) needs to be installed."; \
 		exit 1; \
 	else \

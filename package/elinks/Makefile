@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		elinks
 PKG_VERSION:=		0.11.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		text
@@ -44,7 +44,7 @@ CONFIGURE_ARGS+=	--enable-small \
 			--without-spidermonkey \
 			--without-x \
 			--without-zlib
-MAKE_FLAGS+=		CC='${TARGET_CC}' LD='${TARGET_LD}'
+MAKE_FLAGS+=		CC='${TARGET_CC}'
 
 do-install:
 	${INSTALL_DIR} ${IDIR_ELINKS}/usr/bin

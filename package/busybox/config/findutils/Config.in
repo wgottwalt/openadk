@@ -182,7 +182,8 @@ config BUSYBOX_FEATURE_FIND_CONTEXT
 
 config BUSYBOX_GREP
 	bool "grep"
-	default y
+	default y if !ADK_PACKAGE_GREP
+	depends on !ADK_PACKAGE_GREP
 	help
 	  grep is used to search files for a specified pattern.
 
