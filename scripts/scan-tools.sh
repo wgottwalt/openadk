@@ -44,7 +44,8 @@ MirBSD)
 	;;
 CYG*)
 	echo "Building OpenADK on $os needs a small registry change."
-	echo 'See http://www.cygwin.com/1.7/cygwin-ug-net/using-specialnames.html'
+	echo 'http://cygwin.com/cygwin-ug-net/using-specialnames.html'
+	sleep 5
 	;;
 NetBSD)
 	# supported with no extra quirks at the moment
