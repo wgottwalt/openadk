@@ -1,5 +1,9 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_MISC_FILESYSTEMS
+	boolean
+	default n
+
 config ADK_KERNEL_EXT3_FS_XATTR
 	boolean
 	default n
@@ -88,6 +92,7 @@ config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_UTF8
+	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
 	help
 	  If you say Y here, you will be able to mount extended format
