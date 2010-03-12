@@ -1,6 +1,27 @@
 --- LVM2.2.02.61.orig/libdm/Makefile.in	2009-10-02 21:10:36.000000000 +0200
-+++ LVM2.2.02.61/libdm/Makefile.in	2010-03-03 19:48:02.316248648 +0100
-@@ -73,26 +73,32 @@ install: $(INSTALL_TYPE) install_include
++++ LVM2.2.02.61/libdm/Makefile.in	2010-03-08 06:27:03.000000000 +0100
+@@ -35,9 +35,7 @@ SOURCES =\
+ 
+ INCLUDES = -I$(srcdir)/$(interface) -I$(srcdir)
+ 
+-ifeq ("@STATIC_LINK@", "yes")
+ LIB_STATIC = $(interface)/libdevmapper.a
+-endif
+ 
+ ifeq ("@LIB_SUFFIX@","dylib")
+   LIB_SHARED = $(interface)/libdevmapper.dylib
+@@ -60,9 +58,7 @@ device-mapper: all
+ 
+ INSTALL_TYPE = install_dynamic
+ 
+-ifeq ("@STATIC_LINK@", "yes")
+-  INSTALL_TYPE += install_static
+-endif
++INSTALL_TYPE += install_static
+ 
+ ifeq ("@PKGCONFIG@", "yes")
+   INSTALL_TYPE += install_pkgconfig
+@@ -73,26 +69,32 @@ install: $(INSTALL_TYPE) install_include
  install_device-mapper: install
  
  install_include:

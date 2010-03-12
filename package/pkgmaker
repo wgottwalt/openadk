@@ -43,7 +43,7 @@ done
 for dn in */Makefile; do
 	dn=${dn%/*}
 	# skip if we take care of this one manually
-	[[ -s $dn/Config.in.manual ]] && continue
+	[[ $dn != "base-files" ]] && [[ -s $dn/Config.in.manual ]] && continue
 	pbar="Pass 2: $dn ..."
 	print -nu2 "$pbar\r"
 	cd $dn
