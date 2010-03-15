@@ -1,3 +1,4 @@
+- help text for config/ needs adoption
 - fix glibc build for MIPS targets
 - implement update for MTD devices (ag241)
 - fix watchdog for alix1c (mfgpt timers problem)
