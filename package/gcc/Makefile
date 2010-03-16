@@ -24,6 +24,7 @@ PKG_BUILDDEP+=		glibc
 endif
 
 PKG_HOST_DEPENDS:=	!freebsd
+PKG_TARGET_DEPENDS:=	!ag241
 
 include ${TOPDIR}/mk/package.mk
 
