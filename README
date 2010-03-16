@@ -9,6 +9,7 @@ Before you can start you need to install some tools:
 - gcc 
 - binutils 
 - GNU make
+- GNU m4
 - GNU tar
 - GNU awk
 - GNU sed
