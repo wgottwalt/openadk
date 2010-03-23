@@ -7,6 +7,10 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifneq ($(ADK_DEBUG),)
+TARGET_CFLAGS+=		-O2
+endif
+
 EGLIBC_CONFOPTS:=	\
 			--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \

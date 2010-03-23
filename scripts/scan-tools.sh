@@ -44,7 +44,9 @@ MirBSD)
 	;;
 CYG*)
 	echo "Building OpenADK on $os needs a small registry change."
-	echo 'See http://www.cygwin.com/1.7/cygwin-ug-net/using-specialnames.html'
+	echo 'http://cygwin.com/cygwin-ug-net/using-specialnames.html'
+	echo "You can ignore this message, when you already done the change"
+	sleep 3
 	;;
 NetBSD)
 	# supported with no extra quirks at the moment
@@ -222,6 +224,12 @@ fi
 
 if ! which perl >/dev/null 2>&1; then
 	echo You must install perl to continue.
+	echo
+	out=1
+fi
+
+if ! which m4 >/dev/null 2>&1; then
+	echo "You must install m4 (macro processor) to continue."
 	echo
 	out=1
 fi
