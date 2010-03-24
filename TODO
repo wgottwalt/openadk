@@ -1,10 +1,12 @@
+- check ncurses headers in latest cygwin
+- macos x build
+- test on OpenSuSE
+- test on CentOS
+- test on Fedora Core
 - help text for config/ needs adoption
 - fix glibc build for MIPS targets
 - implement update for MTD devices (ag241)
 - fix watchdog for alix1c (mfgpt timers problem)
-- macos x build
 - package drbd
-- new packages for openais and pacemaker
-- continuos build via hudson or sth. like that
 - implement rpm package backend 
 - implement dpkg package backend 
