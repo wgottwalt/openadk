@@ -478,24 +478,24 @@ config ADK_LINUX_X86_64_TOOLCHAIN
 endchoice
 
 
-choice 
-prompt "Target Optimization"
-depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+#choice 
+#prompt "Target Optimization"
+#depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+#
+#config ADK_LINUX_ARM_V5TE
+#	bool "armv5te"
+#	help
+#
+#config ADK_LINUX_ARM_V4T
+#	bool "armv4t"
+#	help
+#
+#endchoice
 
-config ADK_LINUX_ARM_V5TE
-	bool "armv5te"
-	help
-
-config ADK_LINUX_ARM_V4T
-	bool "armv4t"
-	help
-
-endchoice
-
-config ADK_TARGET_ARCH_OPTIMIZATION
-	string
-	default "armv5te" if ADK_LINUX_ARM_V5TE
-	default "armv4t" if ADK_LINUX_ARM_V4T
+#config ADK_TARGET_ARCH_OPTIMIZATION
+#	string
+#	default "armv5te" if ADK_LINUX_ARM_V5TE
+#	default "armv4t" if ADK_LINUX_ARM_V4T
 
 choice
 prompt "Architecture"
@@ -785,6 +785,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_TOOLCHAIN 
