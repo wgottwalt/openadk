@@ -50,7 +50,8 @@ GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
-	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); ln -sf ../glibc-ports-2.11/ ports);
+	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
+	ln -sf ../../w-glibc-ports-2.11-1/glibc-ports-2.11/ ports);
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
