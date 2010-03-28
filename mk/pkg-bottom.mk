@@ -164,7 +164,7 @@ endif
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
 	    find usr ! -type d 2>/dev/null | \
-	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
+	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
 	    cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \

@@ -34,6 +34,7 @@ XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
 			INC_USRLOCAL="/usr" \
 			MODPROBE="insmod" \
 			OSDEP="linux" \
+			WERROR="" \
 			BUILDENV="linux"
 ALL_TARGET:=		programs
 

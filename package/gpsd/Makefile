@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
-PKG_VERSION:=		2.39
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		3db437196a6840c252fca99b6c19d4d0
+PKG_VERSION:=		2.92
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		50b60d9f6dd51e001f4dfbaeb825c988
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP+=		ncurses
 PKG_CXX:=		GPSD
 PKG_SITES:=		http://download.berlios.de/gpsd/
+PKG_URL:=		http://gpsd.berlios.de/
 
 PKG_DESCR_1:=		GPS client utilities
 
@@ -23,18 +24,21 @@ $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEAS
 
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
+			PYTHON="none" \
 			ac_cv_func_strlcpy=no \
 			ac_cv_func_strlcat=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-x \
 			--disable-dbus
 
+TCFLAGS+=		-fPIC
+
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-luClibc++ -lc -lm -nodefaultlibs
+TLDFLAGS+=		-luClibc++ -lc -lm -pthread -nodefaultlibs
 else
-TLDFLAGS+=		-shared
+TLDFLAGS+=		-shared -pthread
 endif
 
 post-extract:

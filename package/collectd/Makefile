@@ -66,6 +66,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-multimeter \
 			--disable-mysql \
 			--disable-openvpn \
+			--disable-python \
 			--disable-postgresql \
 			--disable-powerdns \
 			--disable-network \
@@ -95,6 +96,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-write_http \
 			--with-fp-layout=nothing \
 			--without-java \
+			--without-python \
 			--without-libiptc \
 			--with-nan-emulation
 

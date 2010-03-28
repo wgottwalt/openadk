@@ -15,7 +15,7 @@ PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
 PKG_HOST_DEPENDS:=	!freebsd !netbsd !openbsd
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_TARGET_DEPENDS:=	shuttle
 
 include ${TOPDIR}/mk/package.mk
 
