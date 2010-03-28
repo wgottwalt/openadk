@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.32.orig/arch/mips/ar7/platform.c linux-2.6.32/arch/mips/ar7/platform.c
---- linux-2.6.32.orig/arch/mips/ar7/platform.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/ar7/platform.c	2009-12-16 20:10:47.564817191 +0100
+diff -Nur linux-2.6.33.orig/arch/mips/ar7/platform.c linux-2.6.33/arch/mips/ar7/platform.c
+--- linux-2.6.33.orig/arch/mips/ar7/platform.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/mips/ar7/platform.c	2010-03-06 11:00:39.000000000 +0100
 @@ -509,7 +509,7 @@
  
  	memset(uart_port, 0, sizeof(struct uart_port) * 2);
@@ -19,9 +19,27 @@ diff -Nur linux-2.6.32.orig/arch/mips/ar7/platform.c linux-2.6.32/arch/mips/ar7/
  		uart_port[1].line = 1;
  		uart_port[1].irq = AR7_IRQ_UART1;
  		uart_port[1].uartclk = ar7_bus_freq() / 2;
-diff -Nur linux-2.6.32.orig/arch/mips/include/asm/page.h linux-2.6.32/arch/mips/include/asm/page.h
---- linux-2.6.32.orig/arch/mips/include/asm/page.h	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/include/asm/page.h	2009-12-16 20:10:47.576432079 +0100
+diff -Nur linux-2.6.33.orig/arch/mips/ar7/prom.c linux-2.6.33/arch/mips/ar7/prom.c
+--- linux-2.6.33.orig/arch/mips/ar7/prom.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/mips/ar7/prom.c	2010-03-06 11:00:45.000000000 +0100
+@@ -219,6 +219,14 @@
+ 	if (strstr(prom_getcmdline(), "console="))
+ 		return;
+ 
++#ifdef CONFIG_KGDB
++	if (!strstr(prom_getcmdline(), "nokgdb")) {
++		strcat(prom_getcmdline(), " console=kgdb");
++		kgdb_enabled = 1;
++		return;
++	}
++#endif
++
+ 	s = prom_getenv("modetty0");
+ 	if (s) {
+ 		baud = simple_strtoul(s, &p, 10);
+diff -Nur linux-2.6.33.orig/arch/mips/include/asm/page.h linux-2.6.33/arch/mips/include/asm/page.h
+--- linux-2.6.33.orig/arch/mips/include/asm/page.h	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/mips/include/asm/page.h	2010-03-06 11:00:39.000000000 +0100
 @@ -200,8 +200,11 @@
  #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
  				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
@@ -36,10 +54,10 @@ diff -Nur linux-2.6.32.orig/arch/mips/include/asm/page.h linux-2.6.32/arch/mips/
  
  #include <asm-generic/memory_model.h>
  #include <asm-generic/getorder.h>
-diff -Nur linux-2.6.32.orig/arch/mips/Kconfig linux-2.6.32/arch/mips/Kconfig
---- linux-2.6.32.orig/arch/mips/Kconfig	2009-12-14 21:11:40.737752912 +0100
-+++ linux-2.6.32/arch/mips/Kconfig	2009-12-16 20:10:47.592420151 +0100
-@@ -30,7 +30,6 @@
+diff -Nur linux-2.6.33.orig/arch/mips/Kconfig linux-2.6.33/arch/mips/Kconfig
+--- linux-2.6.33.orig/arch/mips/Kconfig	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/mips/Kconfig	2010-03-06 11:00:39.000000000 +0100
+@@ -34,7 +34,6 @@
  	select CEVT_R4K
  	select CSRC_R4K
  	select IRQ_CPU
@@ -47,10 +65,10 @@ diff -Nur linux-2.6.32.orig/arch/mips/Kconfig linux-2.6.32/arch/mips/Kconfig
  	select SWAP_IO_SPACE
  	select SYS_HAS_CPU_MIPS32_R1
  	select SYS_HAS_EARLY_PRINTK
-diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kernel/traps.c
---- linux-2.6.32.orig/arch/mips/kernel/traps.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/kernel/traps.c	2009-12-16 20:10:47.596422057 +0100
-@@ -1255,9 +1255,22 @@
+diff -Nur linux-2.6.33.orig/arch/mips/kernel/traps.c linux-2.6.33/arch/mips/kernel/traps.c
+--- linux-2.6.33.orig/arch/mips/kernel/traps.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/mips/kernel/traps.c	2010-03-06 11:00:39.000000000 +0100
+@@ -1283,9 +1283,22 @@
  
  	exception_handlers[n] = handler;
  	if (n == 0 && cpu_has_divec) {
@@ -76,9 +94,9 @@ diff -Nur linux-2.6.32.orig/arch/mips/kernel/traps.c linux-2.6.32/arch/mips/kern
  	}
  	return (void *)old_handler;
  }
-diff -Nur linux-2.6.32.orig/drivers/mtd/ar7part.c linux-2.6.32/drivers/mtd/ar7part.c
---- linux-2.6.32.orig/drivers/mtd/ar7part.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/drivers/mtd/ar7part.c	2009-12-17 10:51:32.044434005 +0100
+diff -Nur linux-2.6.33.orig/drivers/mtd/ar7part.c linux-2.6.33/drivers/mtd/ar7part.c
+--- linux-2.6.33.orig/drivers/mtd/ar7part.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/drivers/mtd/ar7part.c	2010-03-06 11:00:39.000000000 +0100
 @@ -28,7 +28,7 @@
  #include <linux/bootmem.h>
  #include <linux/magic.h>
@@ -110,10 +128,10 @@ diff -Nur linux-2.6.32.orig/drivers/mtd/ar7part.c linux-2.6.32/drivers/mtd/ar7pa
  	*pparts = ar7_parts;
  	return AR7_PARTS;
  }
-diff -Nur linux-2.6.32.orig/drivers/mtd/maps/physmap.c linux-2.6.32/drivers/mtd/maps/physmap.c
---- linux-2.6.32.orig/drivers/mtd/maps/physmap.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/drivers/mtd/maps/physmap.c	2009-12-16 20:12:01.388510102 +0100
-@@ -80,7 +80,7 @@
+diff -Nur linux-2.6.33.orig/drivers/mtd/maps/physmap.c linux-2.6.33/drivers/mtd/maps/physmap.c
+--- linux-2.6.33.orig/drivers/mtd/maps/physmap.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/drivers/mtd/maps/physmap.c	2010-03-06 11:00:39.000000000 +0100
+@@ -79,7 +79,7 @@
  					"map_rom",
  					NULL };
  #ifdef CONFIG_MTD_PARTITIONS
@@ -122,22 +140,10 @@ diff -Nur linux-2.6.32.orig/drivers/mtd/maps/physmap.c linux-2.6.32/drivers/mtd/
  #endif
  
  static int physmap_flash_probe(struct platform_device *dev)
-diff -Nur linux-2.6.32.orig/drivers/net/cpmac.c linux-2.6.32/drivers/net/cpmac.c
---- linux-2.6.32.orig/drivers/net/cpmac.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/drivers/net/cpmac.c	2009-12-16 21:24:20.356422767 +0100
-@@ -1165,7 +1165,7 @@
- 	priv->dev = dev;
- 	priv->ring_size = 64;
- 	priv->msg_enable = netif_msg_init(debug_level, 0xff);
--	memcpy(dev->dev_addr, pdata->dev_addr, sizeof(dev->dev_addr));
-+	memcpy(dev->dev_addr, pdata->dev_addr, ETH_ALEN);
- 
- 	snprintf(priv->phy_name, MII_BUS_ID_SIZE, PHY_ID_FMT, mdio_bus_id, phy_id);
- 
-diff -Nur linux-2.6.32.orig/drivers/serial/8250.c linux-2.6.32/drivers/serial/8250.c
---- linux-2.6.32.orig/drivers/serial/8250.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/drivers/serial/8250.c	2009-12-16 20:10:58.820421544 +0100
-@@ -2714,7 +2714,11 @@
+diff -Nur linux-2.6.33.orig/drivers/serial/8250.c linux-2.6.33/drivers/serial/8250.c
+--- linux-2.6.33.orig/drivers/serial/8250.c	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/drivers/serial/8250.c	2010-03-06 11:00:39.000000000 +0100
+@@ -2715,7 +2715,11 @@
  {
  	struct uart_8250_port *up = (struct uart_8250_port *)port;
  
@@ -149,21 +155,3 @@ diff -Nur linux-2.6.32.orig/drivers/serial/8250.c linux-2.6.32/drivers/serial/82
  	serial_out(up, UART_TX, ch);
  }
  
-diff -Nur linux-2.6.32.orig/arch/mips/ar7/prom.c linux-2.6.32/arch/mips/ar7/prom.c
---- linux-2.6.32.orig/arch/mips/ar7/prom.c	2009-12-03 04:51:21.000000000 +0100
-+++ linux-2.6.32/arch/mips/ar7/prom.c	2010-01-05 20:39:11.000000000 +0100
-@@ -219,14 +219,6 @@
- 	if (strstr(prom_getcmdline(), "console="))
- 		return;
- 
--#ifdef CONFIG_KGDB
--	if (!strstr(prom_getcmdline(), "nokgdb")) {
--		strcat(prom_getcmdline(), " console=kgdb");
--		kgdb_enabled = 1;
--		return;
--	}
--#endif
--
- 	s = prom_getenv("modetty0");
- 	if (s) {
- 		baud = simple_strtoul(s, &p, 10);
