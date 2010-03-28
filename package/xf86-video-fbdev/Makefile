@@ -13,6 +13,8 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP+=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
+PKG_TARGET_DEPENDS:=	alix1c lemote
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_FBDEV,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
