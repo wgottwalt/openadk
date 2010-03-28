@@ -27,7 +27,6 @@ help:
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  wconfig      - Same as "oldconfig", but also writes out hidden symbols'
 	@echo '  allmodconfig - New config selecting all packages as modules when possible'
 	@echo '  allconfig    - New config selecting all packages when possible'
 	@echo '  allnoconfig  - New config where all options are answered with no'
@@ -85,9 +84,6 @@ config: .prereq_done
 
 oldconfig: .prereq_done
 	@${GMAKE_INV} _config W=-o
-
-wconfig: .prereq_done
-	@${GMAKE_INV} _config W=-A
 
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download
@@ -170,11 +166,11 @@ prereq-noerror:
 NO_ERROR=0
 .prereq_done:
 	@-rm -rf .prereq_done
-	@if ! bash --version 2>&1 | fgrep 'GNU bash' >/dev/null 2>&1; then \
+	@if ! bash --version 2>&1 | grep -F 'GNU bash' >/dev/null 2>&1; then \
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
 	fi
-	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | fgrep 'MIRBSD' >/dev/null 2>&1; then \
+	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | grep -F 'MIRBSD' >/dev/null 2>&1; then \
 		echo "MirBSD ksh (mksh) needs to be installed."; \
 		exit 1; \
 	else \

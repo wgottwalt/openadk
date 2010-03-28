@@ -29,6 +29,9 @@ config ADK_TARGET_WITH_PP
 config ADK_TARGET_WITH_CARDBUS
 	bool
 
+config ADK_TARGET_WITH_RTC
+	bool
+
 config ADK_TARGET_WITH_WATCHDOG
 	bool
 
@@ -273,6 +276,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_RTC
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Lemote Subnotebook.
@@ -475,24 +479,24 @@ config ADK_LINUX_X86_64_TOOLCHAIN
 endchoice
 
 
-choice 
-prompt "Target Optimization"
-depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+#choice 
+#prompt "Target Optimization"
+#depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+#
+#config ADK_LINUX_ARM_V5TE
+#	bool "armv5te"
+#	help
+#
+#config ADK_LINUX_ARM_V4T
+#	bool "armv4t"
+#	help
+#
+#endchoice
 
-config ADK_LINUX_ARM_V5TE
-	bool "armv5te"
-	help
-
-config ADK_LINUX_ARM_V4T
-	bool "armv4t"
-	help
-
-endchoice
-
-config ADK_TARGET_ARCH_OPTIMIZATION
-	string
-	default "armv5te" if ADK_LINUX_ARM_V5TE
-	default "armv4t" if ADK_LINUX_ARM_V4T
+#config ADK_TARGET_ARCH_OPTIMIZATION
+#	string
+#	default "armv5te" if ADK_LINUX_ARM_V5TE
+#	default "armv4t" if ADK_LINUX_ARM_V4T
 
 choice
 prompt "Architecture"
@@ -782,6 +786,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_TOOLCHAIN 
@@ -972,7 +977,7 @@ endchoice
 
 choice
 prompt "Compression method for Kernel"
-	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK)
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY)
 	
 config ADK_TARGET_KERNEL_COMPRESSION_GZIP
 	boolean

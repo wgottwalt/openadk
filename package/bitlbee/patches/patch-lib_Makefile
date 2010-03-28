@@ -1,0 +1,20 @@
+--- bitlbee-1.2.4.orig/lib/Makefile	2009-10-17 17:26:46.000000000 +0200
++++ bitlbee-1.2.4/lib/Makefile	2010-03-07 19:58:49.626028152 +0100
+@@ -12,7 +12,7 @@
+ objects = arc.o base64.o $(EVENT_HANDLER) http_client.o ini.o md5.o misc.o proxy.o sha1.o $(SSL_CLIENT) url.o xmltree.o
+ 
+ CFLAGS += -Wall
+-LFLAGS += -r
++LFLAGS += -Wl,-r -nostdlib
+ 
+ # [SH] Phony targets
+ all: lib.o
+@@ -32,7 +32,7 @@ distclean: clean $(subdirs)
+ 
+ lib.o: $(objects) $(subdirs)
+ 	@echo '*' Linking lib.o
+-	@$(LD) $(LFLAGS) $(objects) -o lib.o
++	@$(CC) $(LFLAGS) $(objects) -o lib.o
+ 
+ $(objects): ../Makefile.settings Makefile
+ 

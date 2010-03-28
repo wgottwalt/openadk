@@ -1,10 +1,6 @@
 menu "USB support"
 depends on ADK_TARGET_WITH_USB
 
-config ADK_KERNEL_USB_DEVICEFS
-	boolean
-	default n
-
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
 	default n
@@ -17,10 +13,10 @@ config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb-core..................... USB support"
 	tristate
 	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXBOARD || ADK_LINUX_MIPS64_LEMOTE )
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXBOARD)
 	select ADK_KERNEL_NLS
-	select ADK_KERNEL_USB_DEVICEFS
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
 	  subsystem which offers higher speeds and more features than the
@@ -70,6 +66,7 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
 	tristate
 	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
 	depends on !ADK_LINUX_CRIS_FOXBOARD
 	depends on ADK_KPACKAGE_KMOD_USB
@@ -116,6 +113,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	tristate
 	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
@@ -141,7 +139,6 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_UHCI_HCD || ADK_KPACKAGE_KMOD_USB_OHCI_HCD || ADK_KPACKAGE_KMOD_EHCI_HCD || ADK_LINUX_CRIS_FOXBOARD
-	select ADK_KERNEL_USB_DEVICEFS
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_ACM

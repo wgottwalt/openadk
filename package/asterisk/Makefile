@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.6.2.1
+PKG_VERSION:=		1.6.2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8fbc60f9d80e686c749ae95292e225d8
+PKG_MD5SUM:=		9d1f7bcf6833605ced4b2740d14bd576
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		net
 PKG_MULTI:=		1

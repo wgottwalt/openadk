@@ -23,7 +23,9 @@ check_exit() {
 
 prepare() {
 	cd /
-	umount -f /etc
+	if [ -x /sbin/cfgfs ];then
+		umount -f /etc
+	fi
 	mount -o remount,rw /
 	if [ "$system" == "RB532" ];then
 		mount -t yaffs2 /dev/mtdblock0 /boot
@@ -77,7 +79,9 @@ case $1 in
 esac
 
 sync
-mount -o bind /etc /tmp/.cfgfs/root
+if [ -x /sbin/cfgfs ];then
+	mount -o bind /etc /tmp/.cfgfs/root
+fi
 if [ "$system" == "RB532" ];then
 	umount -f /boot
 elif [ "$system" == "FOXG20" ];then

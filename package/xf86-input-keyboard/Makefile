@@ -13,7 +13,7 @@ PKG_BUILDDEP+=		xorg-server
 PKG_DEPENDS:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_TARGET_DEPENDS:=	alix1c
+PKG_TARGET_DEPENDS:=	alix1c lemote
 
 include $(TOPDIR)/mk/package.mk
 

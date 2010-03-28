@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0a1e129b1d8b2d3905dc02a64255b781
 PKG_DESCR:=		X FreeType library
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		libXrender
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

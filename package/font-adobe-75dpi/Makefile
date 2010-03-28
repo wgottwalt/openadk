@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		font-util
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FONT_ADOBE_75DPI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
