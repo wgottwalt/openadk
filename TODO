@@ -1,9 +1,7 @@
 - macos x build
 - test on OpenSuSE
-- test on CentOS
 - test on Fedora Core
 - help text for config/ needs adoption
-- implement update for MTD devices (ag241)
 - fix watchdog for alix1c (mfgpt timers problem)
 - implement rpm package backend 
 - implement dpkg package backend 

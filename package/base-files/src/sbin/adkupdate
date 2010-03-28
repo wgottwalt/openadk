@@ -6,13 +6,18 @@ if [ $who -ne 0 ]; then
   exit 1
 fi
 
+system=$(awk '/system type/ { print $5 }' /proc/cpuinfo 2>/dev/null)
+
 if [ -x /sbin/mtd ];then
-	updatecmd="mtd -r write - linux"
+	if [ "$system" == "AR7" ];then
+		updatecmd="dd bs=16 skip=3 | mtd -r write - linux"
+	else
+		updatecmd="mtd -r write - linux"
+	fi
 else
 	updatecmd="gunzip -c | tar -xf -"
 fi
 
-system=$(awk '/system type/ { print $5 }' /proc/cpuinfo 2>/dev/null)
 
 check_exit() {
 	if [ $? -ne 0 ];then
