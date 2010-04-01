@@ -157,7 +157,6 @@ config ADK_MOD_KERNEL_MAC80211
 	select ADK_KERNEL_CRC32
 	select ADK_KERNEL_WIRELESS
 	select ADK_KERNEL_WLAN_80211
-	select ADK_KERNEL_MAC80211_LEDS
 	default n
 
 menu "Wireless card support"
@@ -205,6 +204,7 @@ config ADK_KPACKAGE_KMOD_ATH5K
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KERNEL_ATH_COMMON
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
 	help
 	  Driver for Atheros 5xxx/24xx cards.
@@ -246,6 +246,7 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	help
 	  This adds support for rt2400 wireless chipset family.
 	  Supported chips: RT2460.
@@ -257,6 +258,7 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	help
 	  This adds support for rt2500 wireless chipset family.
 	  Supported chips: RT2560.
@@ -270,6 +272,7 @@ config ADK_KPACKAGE_KMOD_RT61PCI
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
 	select ADK_PACKAGE_RT61_FIRMWARE
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	help
 	  This adds support for rt2501 wireless chipset family.
 	  Supported chips: RT2561, RT2561S & RT2661.

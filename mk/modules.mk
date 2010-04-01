@@ -778,7 +778,6 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
-    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
     $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))

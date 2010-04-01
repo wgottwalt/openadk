@@ -1,6 +1,6 @@
---- udev-142.orig/extras/cdrom_id/cdrom_id.c	2009-04-23 15:02:36.000000000 +0200
-+++ udev-142/extras/cdrom_id/cdrom_id.c	2009-12-12 00:20:04.000000000 +0100
-@@ -140,7 +140,7 @@ static void scsi_cmd_set(struct udev *ud
+--- udev-151.orig/extras/cdrom_id/cdrom_id.c	2009-12-03 13:45:03.000000000 +0100
++++ udev-151/extras/cdrom_id/cdrom_id.c	2010-03-17 22:10:24.984418969 +0100
+@@ -141,7 +141,7 @@ static void scsi_cmd_set(struct udev *ud
  		cmd->sg_io.mx_sb_len = sizeof(cmd->_sense);
  		cmd->sg_io.cmdp = cmd->cgc.cmd;
  		cmd->sg_io.sbp = cmd->_sense.u;

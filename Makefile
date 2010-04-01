@@ -140,6 +140,9 @@ package_index: .prereq_done
 bulk: .prereq_done
 	@${GMAKE_INV} bulk
 
+bulktoolchain: .prereq_done
+	@${GMAKE_INV} bulktoolchain
+
 bulkall: .prereq_done
 	@${GMAKE_INV} bulkall
 

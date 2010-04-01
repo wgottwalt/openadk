@@ -20,6 +20,8 @@ PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 CFLINE_XORG_SERVER:=	depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
