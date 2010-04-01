@@ -4,20 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
-PKG_VERSION:=		1.24
-PKG_RELEASE:=		7
-PKG_MD5SUM:=		05b4ed2926b9a22aaeaf642917bbf8ff
+PKG_VERSION:=		2.0.0beta3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		be8137d3b7ae70ebbce7ca8852b9e901
 PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		net
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
-PKG_DEPENDS:=		iptables
-PKG_BUILDDEP+=		iptables
+PKG_DEPENDS:=		iptables libnetfilter_conntrack libnetfilter_log
+PKG_BUILDDEP+=		iptables libnetfilter_conntrack libnetfilter_log
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_MYSQL),)
 PKG_BUILDDEP+=		mysql
-endif
-ifneq ($(ADK_PACKAGE_ULOGD_MOD_PCAP),)
-PKG_BUILDDEP+=		libpcap
 endif
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_PGSQL),)
 PKG_BUILDDEP+=		postgresql
@@ -25,11 +22,8 @@ endif
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_SQLITE),)
 PKG_BUILDDEP+=		sqlite
 endif
-PKG_URL:=		http://www.netfilter.org/projects/ulogd
-PKG_SITES:=		ftp://ftp.netfilter.org/pub/ulogd/ \
-			ftp://ftp.be.netfilter.org/pub/netfilter/ulogd/ \
-			ftp://ftp.de.netfilter.org/pub/netfilter/ulogd/ \
-			ftp://ftp.no.netfilter.org/pub/netfilter/ulogd/
+PKG_URL:=		http://www.netfilter.org/projects/ulogd/
+PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -46,19 +40,12 @@ $(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_PCAP}+=		ulogd-mod-pcap-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_MYSQL}+=		ulogd-mod-mysql-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_PGSQL}+=		ulogd-mod-pgsql-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_SQLITE}+=		ulogd-mod-sqlite-install
 SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_EXTRA}+=		ulogd-mod-extra-install
 
 TCFLAGS+=		-fPIC
-
-ifneq (${ADK_PACKAGE_ULOGD_MOD_PCAP},)
-CONFIGURE_ENV+=		ac_cv_header_pcap_h=yes
-else
-CONFIGURE_ENV+=		ac_cv_header_pcap_h=no
-endif
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
 CONFIGURE_ARGS+=	--with-mysql=${STAGING_DIR}/usr
@@ -74,35 +61,28 @@ endif
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin ${IDIR_ULOGD}/usr/lib/ulogd/
-	${INSTALL_DIR} ${IDIR_ULOGD}/etc
-	${INSTALL_DATA} ${WRKINST}/etc/ulogd.conf ${IDIR_ULOGD}/etc/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_BASE.so \
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_raw2packet_BASE.so \
 		${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ulogd ${IDIR_ULOGD}/usr/sbin/
 
 ulogd-mod-extra-install:
 	${INSTALL_DIR} ${IDIR_ULOGD_MOD_EXTRA}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_{LOCAL,LOGEMU,OPRINT,PWSNIFF,SYSLOG}.so \
+	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_output_{LOGEMU,OPRINT,SYSLOG}.so \
 		${IDIR_ULOGD_MOD_EXTRA}/usr/lib/ulogd
-
-ulogd-mod-pcap-install:
-	${INSTALL_DIR} ${IDIR_ULOGD_MOD_PCAP}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_PCAP.so \
-		${IDIR_ULOGD_MOD_PCAP}/usr/lib/ulogd
 
 ulogd-mod-sqlite-install:
 	${INSTALL_DIR} ${IDIR_ULOGD_MOD_SQLITE}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_SQLITE3.so \
+	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_output_SQLITE3.so \
 		${IDIR_ULOGD_MOD_SQLITE}/usr/lib/ulogd
 
 ulogd-mod-pgsql-install:
 	${INSTALL_DIR} ${IDIR_ULOGD_MOD_PGSQL}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_PGSQL.so \
+	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_output_PGSQL.so \
 		${IDIR_ULOGD_MOD_PGSQL}/usr/lib/ulogd
 
 ulogd-mod-mysql-install:
 	${INSTALL_DIR} ${IDIR_ULOGD_MOD_MYSQL}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_MYSQL.so \
+	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_output_MYSQL.so \
 		${IDIR_ULOGD_MOD_MYSQL}/usr/lib/ulogd
 
 include ${TOPDIR}/mk/pkg-bottom.mk
