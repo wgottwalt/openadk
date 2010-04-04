@@ -7,7 +7,6 @@
 /etc/profile
 /etc/protocols
 /etc/sysctl.conf
-/etc/network/interfaces
 /etc/rc.conf
 /etc/sysctl.conf
 /etc/shadow

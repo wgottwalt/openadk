@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- openssh-5.2p1.orig/cipher.c	2009-01-28 06:38:41.000000000 +0100
-+++ openssh-5.2p1/cipher.c	2009-05-01 13:39:23.000000000 +0200
+--- openssh-5.4p1.orig/cipher.c	2009-01-28 06:38:41.000000000 +0100
++++ openssh-5.4p1/cipher.c	2010-03-17 16:24:25.000000000 +0100
 @@ -69,21 +69,30 @@ struct Cipher {
  	{ "none",		SSH_CIPHER_NONE, 8, 0, 0, 0, EVP_enc_null },
  	{ "des",		SSH_CIPHER_DES, 8, 8, 0, 1, EVP_des_cbc },
