@@ -9,7 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		32d27de32166c02d670bb4a086185886
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
+PKG_CXX:=		NMAP
 PKG_DEPENDS:=		libdnet libpcap libpcre
+PKG_BUILDDEP+=		libdnet libpcap pcre
 PKG_URL:=		http://nmap.org
 PKG_SITES:=		http://download.insecure.org/nmap/dist/
 
@@ -17,21 +19,14 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
-else
-PKG_DEPENDS+=		libstdcxx
-endif
-
 $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-builtin -fno-rtti -nostdinc++ \
+CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lgcc"
+			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
@@ -39,8 +34,6 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-libdnet="${STAGING_DIR}/usr" \
 			--with-libpcap="${STAGING_DIR}/usr" \
 			--with-libpcre="${STAGING_DIR}/usr"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap

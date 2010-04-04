@@ -1,0 +1,140 @@
+--- setserial-2.17.orig/setserial.c	2000-01-27 16:40:52.000000000 +0100
++++ setserial-2.17/setserial.c	2010-03-12 17:34:40.961901844 +0100
+@@ -11,6 +11,7 @@
+  */
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <fcntl.h>
+ #include <termios.h>
+ #include <string.h>
+@@ -19,9 +20,6 @@
+ #ifdef HAVE_ASM_IOCTLS_H
+ #include <asm/ioctls.h>
+ #endif
+-#ifdef HAVE_LINUX_HAYESESP_H
+-#include <linux/hayesesp.h>
+-#endif
+ #include <linux/serial.h>
+ 
+ #include "version.h"
+@@ -118,14 +116,6 @@ struct flag_type_table {
+ 	CMD_CONFIG,	"autoconfigure",0,		0,		0, 0,
+ 	CMD_GETMULTI,	"get_multiport",0,		0,		0, 0,
+ 	CMD_SETMULTI,	"set_multiport",0,		0,		0, 0,
+-#ifdef TIOCGHAYESESP
+-	CMD_RX_TRIG,    "rx_trigger",   0,              0,              0, FLAG_NEED_ARG,
+-	CMD_TX_TRIG,    "tx_trigger",   0,              0,              0, FLAG_NEED_ARG,
+-	CMD_FLOW_OFF,   "flow_off",     0,              0,              0, FLAG_NEED_ARG,
+-	CMD_FLOW_ON,    "flow_on",      0,              0,              0, FLAG_NEED_ARG,
+-	CMD_RX_TMOUT,   "rx_timeout",   0,              0,              0, FLAG_NEED_ARG,
+-	CMD_DMA_CHAN,   "dma_channel",  0,              0,              0, FLAG_NEED_ARG,
+-#endif
+ 	0,		0,		0,		0,		0, 0,
+ };
+ 	
+@@ -356,62 +346,6 @@ void set_multiport(char *device, int fd,
+ }
+ #endif
+ 
+-#ifdef TIOCGHAYESESP
+-void print_hayesesp(int fd)
+-{
+-	struct hayes_esp_config esp;
+-
+-	if (ioctl(fd, TIOCGHAYESESP, &esp) < 0)
+-		return;
+-
+-	printf("\tHayes ESP enhanced mode configuration:\n");
+-	printf("\t\tRX trigger level: %d, TX trigger level: %d\n",
+-	       (int)esp.rx_trigger, (int)esp.tx_trigger);
+-	printf("\t\tFlow off level: %d, Flow on level: %d\n",
+-	       (int)esp.flow_off, (int)esp.flow_on);
+-	printf("\t\tRX timeout: %u, DMA channel: %d\n\n",
+-	       (unsigned int)esp.rx_timeout, (int)esp.dma_channel);
+-}
+-
+-void set_hayesesp(int fd, int cmd, int arg)
+-{
+-	struct hayes_esp_config esp;
+-
+-	if (ioctl(fd, TIOCGHAYESESP, &esp) < 0) {
+-		printf("\nError: rx_trigger, tx_trigger, flow_off, "
+-		       "flow_on, rx_timeout, and dma_channel\n"
+-		       "are only valid for Hayes ESP ports.\n\n");
+-		exit(1);
+-	}
+-
+-	switch (cmd) {
+-	case CMD_RX_TRIG:
+-		esp.rx_trigger = arg;
+-		break;
+-	case CMD_TX_TRIG:
+-		esp.tx_trigger = arg;
+-		break;
+-	case CMD_FLOW_OFF:
+-		esp.flow_off = arg;
+-		break;
+-	case CMD_FLOW_ON:
+-		esp.flow_on = arg;
+-		break;
+-	case CMD_RX_TMOUT:
+-		esp.rx_timeout = arg;
+-		break;
+-	case CMD_DMA_CHAN:
+-		esp.dma_channel = arg;
+-		break;
+-	}
+-
+-	if (ioctl(fd, TIOCSHAYESESP, &esp) < 0) {
+-		printf("Cannot set Hayes ESP info\n");
+-		exit(1);
+-	}
+-}
+-#endif
+-
+ void get_serial(char *device)
+ {
+ 	struct serial_struct serinfo;
+@@ -453,9 +387,6 @@ void get_serial(char *device)
+ 		print_flags(&serinfo, "\tFlags: ", "");
+ 		printf("\n\n");
+ 
+-#ifdef TIOCGHAYESESP
+-		print_hayesesp(fd);
+-#endif
+ 	} else if (verbosity==0) {
+ 		if (serinfo.type) {
+ 			printf("%s at 0x%.4x (irq = %d) is a %s",
+@@ -593,16 +524,6 @@ void set_serial(char *device, char ** ar
+ 			}
+ 			set_multiport(device, fd, &arg);
+ 			break;
+-#ifdef TIOCGHAYESESP
+-		case CMD_RX_TRIG:
+-		case CMD_TX_TRIG:
+-		case CMD_FLOW_OFF:
+-		case CMD_FLOW_ON:
+-		case CMD_RX_TMOUT:
+-		case CMD_DMA_CHAN:
+-			set_hayesesp(fd, p->cmd, atonum(*arg++));
+-			break;
+-#endif
+ 		default:
+ 			fprintf(stderr, "Internal error: unhandled cmd #%d\n", p->cmd);
+ 			exit(1);
+@@ -692,14 +613,6 @@ fprintf(stderr, "\t* port\t\tset the I/O
+ 	fprintf(stderr, "\t  get_multiport\tDisplay the multiport configuration\n");
+ 	fprintf(stderr, "\t  set_multiport\tSet the multiport configuration\n");
+ 	fprintf(stderr, "\n");
+-#ifdef TIOCGHAYESESP
+-	fprintf(stderr, "\t* rx_trigger\tSet RX trigger level (ESP-only)\n");
+-	fprintf(stderr, "\t* tx_trigger\tSet TX trigger level (ESP-only)\n");
+-	fprintf(stderr, "\t* flow_off\tSet hardware flow off level (ESP-only)\n");
+-	fprintf(stderr, "\t* flow_on\tSet hardware flow on level (ESP-only)\n");
+-	fprintf(stderr, "\t* rx_timeout\tSet receive timeout (ESP-only)\n");
+-	fprintf(stderr, "\t* dma_channel\tSet DMA channel (ESP-only)\n");
+-#endif
+ 	fprintf(stderr, "\n");
+ 	fprintf(stderr, "\t  spd_hi\tuse 56kb instead of 38.4kb\n");
+ 	fprintf(stderr, "\t  spd_vhi\tuse 115kb instead of 38.4kb\n");

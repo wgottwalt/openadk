@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openntpd
 PKG_VERSION:=		3.9p1
-PKG_RELEASE:=		17
+PKG_RELEASE:=		18
 PKG_MD5SUM:=		afc34175f38d08867c1403d9008600b3
 PKG_DESCR:=		NTP server daemon
 PKG_SECTION:=		net
@@ -19,10 +19,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENNTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--with-privsep-user=ntp \
 			--with-adjtimex
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_OPENNTPD}/etc

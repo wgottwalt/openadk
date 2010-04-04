@@ -14,7 +14,7 @@ start)
 	bitlbee -D
 	;;
 stop)
-	killall bitlbee
+	pkill bitlbee
 	;;
 restart)
 	sh $0 stop

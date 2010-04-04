@@ -15,11 +15,16 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ETHER_WAKE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
-	${TARGET_CC} ${TARGET_CFLAGS} -o ${WRKBUILD}/${PKG_NAME} ${WRKBUILD}/${PKG_NAME}.c
+	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o \
+		${WRKBUILD}/ether-wake ${WRKBUILD}/ether-wake.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_ETHER_WAKE}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_ETHER_WAKE}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/ether-wake ${IDIR_ETHER_WAKE}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

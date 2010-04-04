@@ -1,7 +1,0 @@
-config ADK_PACKAGE_ALSA_LIB
-	prompt "alsa-lib............................ alsa library"
-	tristate
-	default n
-	help
-	  
-	  http://www.alsa-project.org/

@@ -1,7 +1,0 @@
-config ADK_PACKAGE_IW
-	prompt "iw................................ Tools for manipulating Linux Wireless cards"
-	tristate
-	select ADK_PACKAGE_LIBNL
-	default n
-	help
-	  Tools for configuring Wireless Adapters.

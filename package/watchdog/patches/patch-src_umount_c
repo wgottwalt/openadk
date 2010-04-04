@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- watchdog-5.2.4.orig.orig/src/umount.c	2003-01-28 07:47:38.000000000 +0100
-+++ watchdog-5.2.4.orig/src/umount.c	2008-10-16 13:00:07.000000000 +0200
-@@ -210,7 +210,7 @@ umount_one (const char *spec, const char
+--- watchdog-5.7.orig/src/umount.c	2010-01-06 13:42:08.000000000 +0100
++++ watchdog-5.7/src/umount.c	2010-02-06 04:39:47.664334843 +0100
+@@ -212,7 +212,7 @@ umount_one (const char *spec, const char
  	    if (res < 0)
  		 umnt_err2 = errno;
  	    /* Do not complain about remote NFS mount points */

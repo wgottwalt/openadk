@@ -1,0 +1,104 @@
+#!/bin/sh 
+#set -x
+set -e 
+
+[ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
+
+[ "$IF_WIRELESS_SSID" ] || exit 1
+[ "$IF_WIRELESS_CHANNEL" ] || exit 1
+[ "$IF_WIRELESS_HWMODE" ] || IF_WIRELESS_HWMODE=g
+
+wpa=0
+wpa1=0
+wpa2=0
+
+case "$IF_WIRELESS_SECURITY" in
+	none)
+		sec=1
+		;;
+	wep)
+		sec=2
+		;;
+	wpa)
+		sec=1
+		wpa1=1
+		;;
+	wpa2)
+		sec=1
+		wpa2=1
+		;;
+	wpa+wpa2)
+		sec=1
+		wpa=1
+		;;
+	*)
+		sec=1
+		;;
+esac
+
+case "$IF_WIRELESS_MODE" in
+	ap)
+		logger -t hostap "Creating hostapd configuration"
+		cat /etc/hostapd.conf > /tmp/hostapd.conf
+		chmod 600 /tmp/hostapd.conf
+		echo "interface=${IFACE}" >> /tmp/hostapd.conf
+		echo "ssid=$IF_WIRELESS_SSID" >> /tmp/hostapd.conf
+		echo "channel=$IF_WIRELESS_CHANNEL" >> /tmp/hostapd.conf
+		echo "hw_mode=$IF_WIRELESS_HWMODE" >> /tmp/hostapd.conf
+		echo "auth_algs=$sec" >> /tmp/hostapd.conf
+		[ $wpa -eq 0 ] && {
+			logger -t hostap "using no security mechanism"
+			echo "wpa=0" >> /tmp/hostapd.conf
+		}
+		[ $wpa1 -eq 1 ] && {
+			logger -t hostap "using WPA for security"
+			echo "wpa=1" >> /tmp/hostapd.conf
+			echo "wpa_key_mgmt=WPA-PSK" >> /tmp/hostapd.conf
+			echo "wpa_pairwise=TKIP" >> /tmp/hostapd.conf
+			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
+		}
+		[ $wpa2 -eq 1 ] && {
+			logger -t hostap "using WPA2 for security"
+			echo "wpa=2" >> /tmp/hostapd.conf
+			echo "wpa_key_mgmt=WPA-PSK" >> /tmp/hostapd.conf
+			echo "rsn_pairwise=CCMP" >> /tmp/hostapd.conf
+			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
+		}
+		[ $wpa -eq 1 ] && {
+			logger -t hostap "using WPA and WPA2 for security"
+			echo "wpa=3" >> /tmp/hostapd.conf
+			echo "wpa_key_mgmt=WPA-PSK" >> /tmp/hostapd.conf
+			echo "wpa_pairwise=TKIP" >> /tmp/hostapd.conf
+			echo "rsn_pairwise=CCMP" >> /tmp/hostapd.conf
+			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
+		}
+		;;
+	sta)
+		[ -x /usr/sbin/iw ] || {
+			logger -t wireless "No iw utility found"
+			exit 1
+		}
+		ip link set up dev ${IFACE}
+		iw dev ${IFACE} set channel $IF_WIRELESS_CHANNEL
+		iw dev ${IFACE} connect $IF_WIRELESS_SSID
+		[ $wpa2 -eq 1 ] && {
+			[ -x /usr/sbin/wpa_supplicant ] || {
+				logger -t wireless "No wpa_supplicant found"
+				exit 1
+			}
+			touch /tmp/wpa_supplicant.conf
+			chmod 600 /tmp/wpa_supplicant.conf
+			echo "network={" > /tmp/wpa_supplicant.conf
+			echo " ssid=\"$IF_WIRELESS_SSID\"" >> /tmp/wpa_supplicant.conf
+		 	echo " psk=\"$IF_WIRELESS_PASSPHRASE\"" >> /tmp/wpa_supplicant.conf
+			echo " priority=5" >> /tmp/wpa_supplicant.conf
+			echo "}"  >> /tmp/wpa_supplicant.conf
+			wpa_supplicant -B -Dnl80211 -i${IFACE} -c/tmp/wpa_supplicant.conf
+		}
+		;;
+	*)
+		echo "Unknown operation mode $IF_WIRELESS_MODE given!"
+		exit 1
+		;;
+esac
+exit 0

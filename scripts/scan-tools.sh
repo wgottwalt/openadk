@@ -5,10 +5,10 @@ shopt -s extglob
 topdir=$(pwd)
 opath=$PATH
 out=0
-if [ -z $(which gmake) ];then
-	makecmd=$(which make)
+if [ -z $(which gmake 2>/dev/null ) ];then
+	makecmd=$(which make 2>/dev/null )
 else
-	makecmd=$(which gmake)
+	makecmd=$(which gmake 2>/dev/null )
 fi
 
 if [[ $NO_ERROR != @(0|1) ]]; then
@@ -39,21 +39,17 @@ Linux)
 FreeBSD)
 	# supported with no extra quirks at the moment
 	;;
+MirBSD)
+	# supported with no extra quirks at the moment
+	;;
 CYG*)
-	# mkdir /openadk 
-	# mount -b -s -o managed "C:/openadk" "/openadk"
-	# cd /
-	# git clone git+ssh://openadk.org/git/openadk.git
-	echo "Building OpenADK on $os is needs a managed mount point."
-	echo '"mount -b -s -o managed "C:/openadk" "/openadk"'
+	echo "Building OpenADK on $os needs a small registry change."
+	echo 'http://cygwin.com/cygwin-ug-net/using-specialnames.html'
+	echo "You can ignore this message, when you already done the change"
+	sleep 3
 	;;
 NetBSD)
-	echo "Building OpenADK on $os is currently unsupported."
-	echo "Sorry."
-	echo
-	echo There are unresolved issues relating to ncurses not
-	echo being included in NetBSD®, and these provided by pkgsrc®
-	echo lack important header files.
+	# supported with no extra quirks at the moment
 	;;
 OpenBSD)
 	# supported with no extra quirks at the moment
@@ -101,51 +97,13 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
-if ! which cpp >/dev/null 2>&1; then
-	echo You must install a C preprocessor to continue.
-	echo
-	out=1
-fi
-
-#if ! which flex >/dev/null 2>&1; then
-#	echo You must install flex to continue.
-#	echo
-#	out=1
-#else
-#	echo '%%' | flex -
-#	if fgrep _POSIX_SOURCE lex.yy.c; then
-#		echo Your lexer \(flex\) contains a broken skeleton.
-#		if [[ $NO_ERROR = 1 ]]; then
-#			echo WARNING: continue at your own risk.
-#			echo Some packages may be broken.
-#		else
-#			echo You can continue the build by issuing \'make prereq-noerror\'
-#			echo However, several packages may faild to build correctly.
-#			out=1
-#		fi
-#		echo
-#	fi
-#fi
-
-#if ! which bison >/dev/null 2>&1; then
-#	echo You must install GNU bison to continue.
-#	echo
-#	out=1
-#fi
-
-#if ! which gperf >/dev/null 2>&1; then
-#	echo You must install gperf to continue.
-#	echo
-#	out=1
-#fi
-
 if ! which tar >/dev/null 2>&1; then
 	echo You must install GNU tar to continue.
 	echo
 	out=1
 fi
 
-if ! tar --version|grep GNU >/dev/null 2>&1;then
+if ! (tar --version | grep GNU) >/dev/null 2>&1;then
 	if ! which gtar >/dev/null 2>&1; then
 		echo You must install GNU tar to continue.
 		echo
@@ -155,6 +113,12 @@ fi
 
 if ! which gzip >/dev/null 2>&1; then
 	echo You must install gzip to continue.
+	echo
+	out=1
+fi
+
+if ! which lzma >/dev/null 2>&1; then
+	echo You must install lzma to continue.
 	echo
 	out=1
 fi
@@ -218,13 +182,12 @@ if [[ $X != *@(Native compiler works)* ]]; then
 	out=1
 fi
 
-[[ -s /usr/include/ncurses.h ]] || if [[ -s /usr/pkg/include/ncurses.h ]]; then
-	echo 'HOSTCFLAGS+= -isystem /usr/pkg/include' >>$topdir/prereq.mk
-	echo 'HOSTLDFLAGS+=-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' >>$topdir/prereq.mk
-else
-	echo Install ncurses header files, please.
-	echo
-	out=1
+if [[ ! -s /usr/include/ncurses.h ]]; then
+	if [[ ! -s /usr/include/curses.h ]]; then
+		echo Install ncurses header files, please.
+		echo
+		out=1
+	fi
 fi
 
 if ! which gawk >/dev/null 2>&1; then
@@ -253,24 +216,6 @@ if ! which wget >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which autoconf >/dev/null 2>&1; then
-	echo You must install autoconf to continue.
-	echo
-	out=1
-fi
-
-if ! which automake >/dev/null 2>&1; then
-	echo You must install automake to continue.
-	echo
-	out=1
-fi
-
-if ! which libtool >/dev/null 2>&1; then
-	echo You must install libtool to continue.
-	echo
-	out=1
-fi
-
 if ! which file >/dev/null 2>&1; then
 	echo You must install \"file\" to continue.
 	echo
@@ -279,6 +224,12 @@ fi
 
 if ! which perl >/dev/null 2>&1; then
 	echo You must install perl to continue.
+	echo
+	out=1
+fi
+
+if ! which m4 >/dev/null 2>&1; then
+	echo "You must install m4 (macro processor) to continue."
 	echo
 	out=1
 fi

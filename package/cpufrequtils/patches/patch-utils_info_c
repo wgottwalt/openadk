@@ -1,0 +1,244 @@
+--- cpufrequtils-007.orig/utils/info.c	2010-01-16 14:47:44.000000000 +0100
++++ cpufrequtils-007/utils/info.c	2010-01-23 18:51:50.165866845 +0100
+@@ -10,9 +10,6 @@
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <libintl.h>
+-#include <locale.h>
+-
+ #include <getopt.h>
+ 
+ #include "cpufreq.h"
+@@ -33,7 +30,7 @@ static unsigned int count_cpus(void)
+ 
+ 	fp = fopen("/proc/stat", "r");
+ 	if(!fp) {
+-		printf(gettext("Couldn't count the number of CPUs (%s: %s), assuming 1\n"), "/proc/stat", strerror(errno));
++		printf("Couldn't count the number of CPUs (%s: %s), assuming 1\n", "/proc/stat", strerror(errno));
+ 		return 1;
+ 	}
+ 
+@@ -65,7 +62,7 @@ static void proc_cpufreq_output(void)
+ 	unsigned int max_pctg = 0;
+ 	unsigned long min, max;
+ 
+-	printf(gettext("          minimum CPU frequency  -  maximum CPU frequency  -  governor\n"));
++	printf("          minimum CPU frequency  -  maximum CPU frequency  -  governor\n");
+ 
+ 	nr_cpus = count_cpus();
+ 	for (cpu=0; cpu < nr_cpus; cpu++) {
+@@ -153,26 +150,26 @@ static void debug_output_one(unsigned in
+ 	struct cpufreq_stats *stats;
+ 
+ 	if (cpufreq_cpu_exists(cpu)) {
+-		printf(gettext ("couldn't analyze CPU %d as it doesn't seem to be present\n"), cpu);
++		printf("couldn't analyze CPU %d as it doesn't seem to be present\n", cpu);
+ 		return;
+ 	}
+ 
+-	printf(gettext ("analyzing CPU %d:\n"), cpu);
++	printf("analyzing CPU %d:\n", cpu);
+ 
+ 	freq_kernel = cpufreq_get_freq_kernel(cpu);
+ 	freq_hardware = cpufreq_get_freq_hardware(cpu);
+ 
+ 	driver = cpufreq_get_driver(cpu);
+ 	if (!driver) {
+-		printf(gettext ("  no or unknown cpufreq driver is active on this CPU\n"));
++		printf("  no or unknown cpufreq driver is active on this CPU\n");
+ 	} else {
+-		printf(gettext ("  driver: %s\n"), driver);
++		printf("  driver: %s\n", driver);
+ 		cpufreq_put_driver(driver);
+ 	}
+ 
+ 	cpus = cpufreq_get_related_cpus(cpu);
+ 	if (cpus) {
+-		printf(gettext ("  CPUs which run at the same hardware frequency: "));
++		printf("  CPUs which run at the same hardware frequency: ");
+ 		while (cpus->next) {
+ 			printf("%d ", cpus->cpu);
+ 			cpus = cpus->next;
+@@ -183,7 +180,7 @@ static void debug_output_one(unsigned in
+ 
+ 	cpus = cpufreq_get_affected_cpus(cpu);
+ 	if (cpus) {
+-		printf(gettext ("  CPUs which need to have their frequency coordinated by software: "));
++		printf("  CPUs which need to have their frequency coordinated by software: ");
+ 		while (cpus->next) {
+ 			printf("%d ", cpus->cpu);
+ 			cpus = cpus->next;
+@@ -194,13 +191,13 @@ static void debug_output_one(unsigned in
+ 
+ 	latency = cpufreq_get_transition_latency(cpu);
+ 	if (latency) {
+-		printf(gettext ("  maximum transition latency: "));
++		printf("  maximum transition latency: ");
+ 		print_duration(latency);
+ 		printf(".\n");
+ 	}
+ 
+ 	if (!(cpufreq_get_hardware_limits(cpu, &min, &max))) {
+-		printf(gettext ("  hardware limits: "));
++		printf("  hardware limits: ");
+ 		print_speed(min);
+ 		printf(" - ");
+ 		print_speed(max);
+@@ -209,7 +206,7 @@ static void debug_output_one(unsigned in
+ 
+ 	freqs = cpufreq_get_available_frequencies(cpu);
+ 	if (freqs) {
+-		printf(gettext ("  available frequency steps: "));
++		printf("  available frequency steps: ");
+ 		while (freqs->next) {
+ 			print_speed(freqs->frequency);
+ 			printf(", ");
+@@ -222,7 +219,7 @@ static void debug_output_one(unsigned in
+ 
+ 	governors = cpufreq_get_available_governors(cpu);
+ 	if (governors) {
+-		printf(gettext ("  available cpufreq governors: "));
++		printf("  available cpufreq governors: ");
+ 		while (governors->next) {
+ 			printf("%s, ", governors->governor);
+ 			governors = governors->next;
+@@ -233,23 +230,23 @@ static void debug_output_one(unsigned in
+ 
+ 	policy = cpufreq_get_policy(cpu);
+ 	if (policy) {
+-		printf(gettext ("  current policy: frequency should be within "));
++		printf("  current policy: frequency should be within ");
+ 		print_speed(policy->min);
+-		printf(gettext (" and "));
++		printf(" and ");
+ 		print_speed(policy->max);
+ 
+ 		printf(".\n                  ");
+-		printf(gettext ("The governor \"%s\" may"
+-		       " decide which speed to use\n                  within this range.\n"),
++		printf("The governor \"%s\" may"
++		       " decide which speed to use\n                  within this range.\n",
+ 		       policy->governor);
+ 		cpufreq_put_policy(policy);
+ 	}
+ 
+ 	if (freq_kernel || freq_hardware) {
+-		printf(gettext ("  current CPU frequency is "));
++		printf("  current CPU frequency is ");
+ 		if (freq_hardware) {
+ 			print_speed(freq_hardware);
+-			printf(gettext (" (asserted by call to hardware)"));
++			printf(" (asserted by call to hardware)");
+ 		}
+ 		else
+ 			print_speed(freq_kernel);
+@@ -257,7 +254,7 @@ static void debug_output_one(unsigned in
+ 	}
+ 	stats = cpufreq_get_stats(cpu, &total_time);
+ 	if (stats) {
+-		printf(gettext ("  cpufreq stats: "));
++		printf("  cpufreq stats: ");
+ 		while (stats) {
+ 			print_speed(stats->frequency);
+ 			printf(":%.2f%%", (100.0 * stats->time_in_state) / total_time);
+@@ -437,37 +434,37 @@ static int get_latency(unsigned int cpu,
+ 
+ static void print_header(void) {
+ 	printf(PACKAGE " " VERSION ": cpufreq-info (C) Dominik Brodowski 2004-2009\n");
+-	printf(gettext ("Report errors and bugs to %s, please.\n"), PACKAGE_BUGREPORT);
++	printf("Report errors and bugs to %s, please.\n", PACKAGE_BUGREPORT);
+ }
+ 
+ static void print_help(void) {
+-	printf(gettext ("Usage: cpufreq-info [options]\n"));
+-	printf(gettext ("Options:\n"));
+-	printf(gettext ("  -c CPU, --cpu CPU    CPU number which information shall be determined about\n"));
+-	printf(gettext ("  -e, --debug          Prints out debug information\n"));
+-	printf(gettext ("  -f, --freq           Get frequency the CPU currently runs at, according\n"
+-	       "                       to the cpufreq core *\n"));
+-	printf(gettext ("  -w, --hwfreq         Get frequency the CPU currently runs at, by reading\n"
+-	       "                       it from hardware (only available to root) *\n"));
+-	printf(gettext ("  -l, --hwlimits       Determine the minimum and maximum CPU frequency allowed *\n"));
+-	printf(gettext ("  -d, --driver         Determines the used cpufreq kernel driver *\n"));
+-	printf(gettext ("  -p, --policy         Gets the currently used cpufreq policy *\n"));
+-	printf(gettext ("  -g, --governors      Determines available cpufreq governors *\n"));
+-	printf(gettext ("  -r, --related-cpus   Determines which CPUs run at the same hardware frequency *\n"));
+-	printf(gettext ("  -a, --affected-cpus  Determines which CPUs need to have their frequency\n"
+-			"                       coordinated by software *\n"));
+-	printf(gettext ("  -s, --stats          Shows cpufreq statistics if available\n"));
+-	printf(gettext ("  -y, --latency        Determines the maximum latency on CPU frequency changes *\n"));
+-	printf(gettext ("  -o, --proc           Prints out information like provided by the /proc/cpufreq\n"
+-	       "                       interface in 2.4. and early 2.6. kernels\n"));
+-	printf(gettext ("  -m, --human          human-readable output for the -f, -w, -s and -y parameters\n"));
+-	printf(gettext ("  -h, --help           Prints out this screen\n"));
++	printf("Usage: cpufreq-info [options]\n");
++	printf("Options:\n");
++	printf("  -c CPU, --cpu CPU    CPU number which information shall be determined about\n");
++	printf("  -e, --debug          Prints out debug information\n");
++	printf("  -f, --freq           Get frequency the CPU currently runs at, according\n"
++	       "                       to the cpufreq core *\n");
++	printf("  -w, --hwfreq         Get frequency the CPU currently runs at, by reading\n"
++	       "                       it from hardware (only available to root) *\n");
++	printf("  -l, --hwlimits       Determine the minimum and maximum CPU frequency allowed *\n");
++	printf("  -d, --driver         Determines the used cpufreq kernel driver *\n");
++	printf("  -p, --policy         Gets the currently used cpufreq policy *\n");
++	printf("  -g, --governors      Determines available cpufreq governors *\n");
++	printf("  -r, --related-cpus   Determines which CPUs run at the same hardware frequency *\n");
++	printf("  -a, --affected-cpus  Determines which CPUs need to have their frequency\n"
++			"                       coordinated by software *\n");
++	printf("  -s, --stats          Shows cpufreq statistics if available\n");
++	printf("  -y, --latency        Determines the maximum latency on CPU frequency changes *\n");
++	printf("  -o, --proc           Prints out information like provided by the /proc/cpufreq\n"
++	       "                       interface in 2.4. and early 2.6. kernels\n");
++	printf("  -m, --human          human-readable output for the -f, -w, -s and -y parameters\n");
++	printf("  -h, --help           Prints out this screen\n");
+ 
+ 	printf("\n");
+-	printf(gettext ("If no argument or only the -c, --cpu parameter is given, debug output about\n"
+-	       "cpufreq is printed which is useful e.g. for reporting bugs.\n"));
+-	printf(gettext ("For the arguments marked with *, omitting the -c or --cpu argument is\n"
+-	"equivalent to setting it to zero\n"));
++	printf("If no argument or only the -c, --cpu parameter is given, debug output about\n"
++	       "cpufreq is printed which is useful e.g. for reporting bugs.\n");
++	printf("For the arguments marked with *, omitting the -c or --cpu argument is\n"
++	"equivalent to setting it to zero\n");
+ }
+ 
+ static struct option info_opts[] = {
+@@ -497,9 +494,6 @@ int main(int argc, char **argv) {
+ 	unsigned int human = 0;
+ 	int output_param = 0;
+ 
+-	setlocale(LC_ALL, "");
+-	textdomain (PACKAGE);
+-
+ 	do {
+ 		ret = getopt_long(argc, argv, "c:hoefwldpgrasmy", info_opts, NULL);
+ 		switch (ret) {
+@@ -560,7 +554,7 @@ int main(int argc, char **argv) {
+ 	case 'o':
+ 		if (cpu_defined) {
+ 			print_header();
+-			printf(gettext ("The argument passed to this tool can't be combined with passing a --cpu argument\n"));
++			printf("The argument passed to this tool can't be combined with passing a --cpu argument\n");
+ 			return -EINVAL;
+ 		}
+ 		break;
+@@ -573,13 +567,13 @@ int main(int argc, char **argv) {
+ 	switch (output_param) {
+ 	case -1:
+ 		print_header();
+-		printf(gettext ("You can't specify more than one --cpu parameter and/or\n"
+-		       "more than one output-specific argument\n"));
++		printf("You can't specify more than one --cpu parameter and/or\n"
++		       "more than one output-specific argument\n");
+ 		return -EINVAL;
+ 		break;
+ 	case '?':
+ 		print_header();
+-		printf(gettext ("invalid or unknown argument\n"));
++		printf("invalid or unknown argument\n");
+ 		print_help();
+ 		ret = -EINVAL;
+ 		break;

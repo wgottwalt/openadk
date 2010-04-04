@@ -1,6 +1,26 @@
---- git-1.6.4.1.orig/Makefile	2009-08-22 06:54:01.000000000 +0200
-+++ git-1.6.4.1/Makefile	2009-08-23 12:11:07.755226105 +0200
-@@ -1345,7 +1345,6 @@ builtin-help.o: builtin-help.c common-cm
+--- git-1.6.5.5.orig/Makefile	2009-12-06 04:51:25.000000000 +0100
++++ git-1.6.5.5/Makefile	2009-12-07 20:13:40.753866786 +0100
+@@ -218,8 +218,8 @@ uname_V := $(shell sh -c 'uname -v 2>/de
+ 
+ # CFLAGS and LDFLAGS are for the users to override from the command line.
+ 
+-CFLAGS = -g -O2 -Wall
+-LDFLAGS =
++CFLAGS ?= -g -O2 -Wall
++LDFLAGS ?=
+ ALL_CFLAGS = $(CFLAGS)
+ ALL_LDFLAGS = $(LDFLAGS)
+ STRIP ?= strip
+@@ -241,7 +241,7 @@ bindir_relative = bin
+ bindir = $(prefix)/$(bindir_relative)
+ mandir = share/man
+ infodir = share/info
+-gitexecdir = libexec/git-core
++gitexecdir = sbin/git-core
+ sharedir = $(prefix)/share
+ template_dir = share/git-core/templates
+ htmldir = share/doc/git-doc
+@@ -1417,7 +1417,6 @@ builtin-help.o: builtin-help.c common-cm
  
  $(BUILT_INS): git$X
  	$(QUIET_BUILT_IN)$(RM) $@ && \
@@ -8,17 +28,11 @@
  	ln -s git$X $@ 2>/dev/null || \
  	cp git$X $@
  
-@@ -1663,11 +1662,11 @@ endif
- 	{ test "$$bindir/" = "$$execdir/" || \
- 		{ $(RM) "$$execdir/git$X" && \
- 		test -z "$(NO_CROSS_DIRECTORY_HARDLINKS)" && \
--		ln "$$bindir/git$X" "$$execdir/git$X" 2>/dev/null || \
-+		ln -s "$$bindir/git$X" "$$execdir/git$X" 2>/dev/null || \
+@@ -1749,7 +1748,6 @@ endif
  		cp "$$bindir/git$X" "$$execdir/git$X"; } ; } && \
  	{ for p in $(BUILT_INS); do \
  		$(RM) "$$execdir/$$p" && \
 -		ln "$$execdir/git$X" "$$execdir/$$p" 2>/dev/null || \
-+		ln -s "$$execdir/git$X" "$$execdir/$$p" 2>/dev/null || \
  		ln -s "git$X" "$$execdir/$$p" 2>/dev/null || \
  		cp "$$execdir/git$X" "$$execdir/$$p" || exit; \
  	  done; } && \

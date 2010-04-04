@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/vars.mk
 include $(TOPDIR)/mk/kernel.mk
 include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
@@ -11,8 +12,8 @@ kernel-install:
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

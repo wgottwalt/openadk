@@ -17,14 +17,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 TCFLAGS+=		-DSBINDIR=\\\"/usr/sbin\\\"
 FAKE_FLAGS+=		INSTALL="install"
 
 post-install:
-	${INSTALL_DIR} ${IDIR_PPTPD}/etc
 	${INSTALL_DIR} ${IDIR_PPTPD}/etc/ppp
 	${INSTALL_DIR} ${IDIR_PPTPD}/usr/sbin
 	${INSTALL_DATA} ./files/pptpd.conf ${IDIR_PPTPD}/etc/

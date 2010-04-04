@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.22
+PKG_VERSION:=		2.6.24
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9a30009bade8a1b09fba27680c87cf72
+PKG_MD5SUM:=		1c76b6982c05392f7c360afb92699661
 PKG_DESCR:=		IPSec software
 PKG_SECTION:=		net
 PKG_DEPENDS:=		ip libgmp
+PKG_BUILDDEP+=		gmp
 PKG_URL:=		http://www.openswan.org
 PKG_SITES:=		http://www.openswan.org/download/ \
 			ftp://ftp.openswan.org/openswan/
@@ -26,15 +27,15 @@ $(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 #XAKE_FLAGS+=		USE_KLIPS=true USE_NETKEY=false
 #endif
 
+CONFIG_STYLE:=		manual
+
 XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
 			IPSECDIR="/usr/lib/ipsec" \
 			INC_USRLOCAL="/usr" \
 			MODPROBE="insmod" \
 			OSDEP="linux" \
+			WERROR="" \
 			BUILDENV="linux"
-
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ALL_TARGET:=		programs
 
 post-install:
@@ -42,12 +43,10 @@ post-install:
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d 
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/sbin
-	${CP} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
+	${INSTALL_DATA} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
 	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d
 	${CP} ${WRKINST}/usr/lib/ipsec/* ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${CP} ${WRKINST}/usr/libexec/ipsec/* ${IDIR_OPENSWAN}/usr/libexec/ipsec
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipsec ${IDIR_OPENSWAN}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/etc/rc.d/init.d/ipsec \
-		${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
 
 include ${TOPDIR}/mk/pkg-bottom.mk

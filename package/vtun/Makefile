@@ -9,17 +9,20 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c342ffe77055d4248a38f0b380f28c1b
 PKG_DESCR:=		A VPN tunnel daemon
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl zlib kmod-tun
+PKG_DEPENDS:=		zlib libopenssl liblzo kmod-tun
+PKG_BUILDDEP+=		zlib openssl liblzo
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
+
+PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VTUN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--with-ssl-headers=$(STAGING_DIR)/usr/include/openssl \
 			--disable-lzo
-BUILD_STYLE:=		auto
 ALL_TARGET:=		vtund
 
 do-install:

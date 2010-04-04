@@ -1,0 +1,21 @@
+#!/bin/sh 
+set -e 
+
+[ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
+
+case "$IF_WIRELESS_MODE" in
+	ap)
+		logger -t hostap "Killing hostapd"
+		pkill hostapd
+		;;
+	sta)
+		[ "$IF_WIRELESS_SECURITY" != "none" ] && {
+			logger -t wireless "Killing wpa_supplicant"
+			pkill wpa_supplicant
+		}
+		;;
+	*)
+		exit 0
+		;;
+esac
+exit 0

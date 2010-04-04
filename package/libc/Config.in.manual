@@ -1,0 +1,6 @@
+config ADK_COMPILE_LIBC
+	boolean
+	depends on ADK_NATIVE
+	default y if ADK_NATIVE
+	help 
+	 Native C library from host system.

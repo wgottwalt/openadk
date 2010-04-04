@@ -10,7 +10,7 @@ bothlog() {
 case $1 in
 autostop) ;;
 autostart)
-	[[ $dropbear_flags = NO ]] && exit 0
+	test x"${dropbear:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)
@@ -30,7 +30,7 @@ start)
 	/usr/sbin/dropbear $dropbear_flags
 	;;
 stop)
-	killall dropbear
+	pkill dropbear
 	;;
 restart)
 	sh $0 stop

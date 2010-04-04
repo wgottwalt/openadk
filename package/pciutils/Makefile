@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d07da501bb11e6af40acd036536c2e9a
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		sys
+PKG_DEPENDS:=		zlib
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils
 PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/ \
 			ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/
@@ -17,7 +19,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PCIUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			CFLAGS="${TCFLAGS}" \
 			IDSDIR="/usr/share" \

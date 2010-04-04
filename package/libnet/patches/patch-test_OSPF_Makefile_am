@@ -1,8 +1,0 @@
---- Libnet-1.0.2a.orig/test/OSPF/Makefile.am	1970-01-01 00:00:00.000000000 +0100
-+++ Libnet-1.0.2a/test/OSPF/Makefile.am	2009-06-12 21:48:27.000000000 +0200
-@@ -0,0 +1,5 @@
-+include $(top_srcdir)/Makefile.am.common
-+
-+noinst_PROGRAMS = ospf_hello ospf_lsa ospf_request
-+
-+LDFLAGS = ../../src/libnet.la

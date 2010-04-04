@@ -15,7 +15,7 @@ start)
 	tor
 	;;
 stop)
-	killall tor
+	pkill tor
 	;;
 restart)
 	sh $0 stop

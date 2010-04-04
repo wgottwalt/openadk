@@ -12,6 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
 PKG_SITES:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
 
+PKG_NOPARALLEL:=	1
 PKG_DESCR_1:=		A GSM 06.10 full-rate speech transcoding implementation (utilities)
 PKG_DEPENDS_1:=		libgsm
 
@@ -22,14 +23,14 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBGSM,libgsm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GSM_UTILS,gsm-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+
 XAKE_FLAGS+=		COPTS="${TARGET_CFLAGS} -fPIC" \
 			INSTALL_ROOT="${WRKINST}"
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGSM}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgsm.so.1.0.10 ${IDIR_LIBGSM}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgsm.so* ${IDIR_LIBGSM}/usr/lib
 	${INSTALL_DIR} ${IDIR_GSM_UTILS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/toast ${IDIR_GSM_UTILS}/usr/bin
 

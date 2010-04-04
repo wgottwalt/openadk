@@ -14,7 +14,7 @@ start)
 	xinetd
 	;;
 stop)
-	killall xinetd
+	pkill xinetd
 	;;
 restart)
 	sh $0 stop

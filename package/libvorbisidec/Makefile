@@ -17,17 +17,14 @@ WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)+$(PKG_VARIANT)
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBVORBISIDEC,libvorbisidec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVORBISIDEC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
-post-extract:
-	cd ${WRKBUILD}; ./autogen.sh
+pre-configure:
+	@chmod 755 ${WRKBUILD}/install-sh
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBVORBISIDEC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libvorbisidec.so.* ${IDIR_LIBVORBISIDEC}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libvorbisidec.so* \
+		${IDIR_LIBVORBISIDEC}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

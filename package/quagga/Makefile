@@ -4,11 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		quagga
-PKG_VERSION:=		0.99.12
+PKG_VERSION:=		0.99.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d2bb513f4ac113dbb300c15a0bd0a241
+PKG_BUILDDEP+=		readline ncurses
+PKG_MD5SUM:=		8975414c76a295f4855a417af0b5ddce
 PKG_DESCR:=		A routing software package
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_URL:=		http://www.quagga.net
 PKG_SITES:=		http://www.quagga.net/download/ \
 			http://www.de.quagga.net/download/ \
@@ -27,22 +29,19 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
 $(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
-ifeq ($(ADK_IPV6),y)
 $(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
 $(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
-endif
 $(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
 $(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+CONFIGURE_ENV+=		quagga_cv_ipforward_method="proc"
 CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--sysconfdir=/etc/quagga \
 			--enable-vtysh \
 			--enable-user=quagga \
 			--enable-group=quagga \
+			--disable-pie \
 			--enable-multipath=8
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}
@@ -52,18 +51,15 @@ post-install:
 	# avoid /etc being set to 0750
 	${INSTALL_DIR} ${IDIR_QUAGGA}/etc/quagga/
 	chmod 0750 ${IDIR_QUAGGA}/etc/quagga/
-	${INSTALL_DIR} ${IDIR_QUAGGA}/var/run/quagga
 	${INSTALL_DIR} ${IDIR_QUAGGA_BGPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/bgpd ${IDIR_QUAGGA_BGPD}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPFD}/usr/{lib,sbin}
 	${CP} ${WRKINST}/usr/lib/libospf.so.* ${IDIR_QUAGGA_OSPFD}/usr/lib/
 	${CP} ${WRKINST}/usr/sbin/ospfd ${IDIR_QUAGGA_OSPFD}/usr/sbin/
-ifeq ($(ADK_IPV6),y)
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPF6D}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ospf6d ${IDIR_QUAGGA_OSPF6D}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPNGD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ripngd ${IDIR_QUAGGA_RIPNGD}/usr/sbin/
-endif
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ripd ${IDIR_QUAGGA_RIPD}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_QUAGGA_VTYSH}/usr/bin

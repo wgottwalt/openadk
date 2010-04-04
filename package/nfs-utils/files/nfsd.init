@@ -21,7 +21,6 @@ start)
 	/usr/sbin/exportfs -r
 	/usr/sbin/mountd
 	/usr/sbin/nfsd
-	/usr/sbin/statd
 	if [ ${nfs_server_version} -eq 4 ];then
 		mkdir -p /var/lib/nfs/rpc_pipefs
 		mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs
@@ -30,12 +29,11 @@ start)
 	fi
 	;;
 stop)
-	killall nfsd
-	killall mountd
-	killall statd
+	pkill nfsd
+	pkill mountd
 	if [ ${nfs_server_version} -eq 4 ];then
-		killall idmapd
-		killall svcgssd
+		pkill idmapd
+		pkill svcgssd
 	fi
 	;;
 restart)

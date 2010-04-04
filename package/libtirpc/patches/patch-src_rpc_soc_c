@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- libtirpc-0.2.0.orig/src/rpc_soc.c	2009-05-28 21:25:26.000000000 +0200
-+++ libtirpc-0.2.0/src/rpc_soc.c	2009-05-31 06:11:27.000000000 +0200
+--- libtirpc-0.2.1.orig/src/rpc_soc.c	2009-11-30 15:04:55.000000000 +0100
++++ libtirpc-0.2.1/src/rpc_soc.c	2010-01-13 22:16:08.000000000 +0100
 @@ -479,37 +479,6 @@ clnt_broadcast(prog, vers, proc, xargs, 
  	    (resultproc_t) rpc_wrap_bcast, "udp");
  }

@@ -4,12 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.6.4.2
+PKG_VERSION:=		1.7.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d7732d13a227d89f05122d230c5c8048
+PKG_MD5SUM:=		05485caf5c503ce378a87759bc3a0509
 PKG_DESCR:=		fast version control system
-PKG_SECTION:=		misc
-PKG_DEPENDS:=		openssl curl
+PKG_SECTION:=		scm
+PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
+PKG_BUILDDEP+=		openssl curl expat
 PKG_URL:=		http://git-scm.com
 PKG_SITES:=		http://kernel.org/pub/software/scm/git/
 
@@ -17,16 +18,16 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-DNO_NSEC -DNO_TCLTK -DNO_PERL
-CONFIGURE_STYLE:=	gnu
+MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 \
+			NO_CROSS_DIRECTORY_HARDLINKS=1 \
+			CURLDIR=${STAGING_DIR} EXPATDIR=${STAGING_DIR}
+XAKE_FLAGS+=		uname_S=Linux uname_O=GNU/Linux
 CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_fread_reads_directories=no \
 			ac_cv_snprintf_returns_bogus=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/sbin/git-core
+	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/libexec/git-core
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/share/git-core/templates
 	$(CP) $(WRKINST)/usr/share/git-core/templates/* \
 		$(IDIR_GIT)/usr/share/git-core/templates
@@ -35,6 +36,6 @@ post-install:
 	$(CP) $(WRKINST)/usr/bin/git-receive-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-pack $(IDIR_GIT)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/git-upload-archive $(IDIR_GIT)/usr/bin
-	${CP} $(WRKINST)/usr/sbin/git-core/* $(IDIR_GIT)/usr/sbin/git-core
+	${CP} $(WRKINST)/usr/libexec/git-core/* $(IDIR_GIT)/usr/libexec/git-core
 
 include ${TOPDIR}/mk/pkg-bottom.mk

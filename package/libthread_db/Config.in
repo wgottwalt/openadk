@@ -1,7 +1,0 @@
-config ADK_PACKAGE_LIBTHREAD_DB
-	prompt "libthread_db...................... POSIX threads library for Debugging"
-	tristate
-	default n
-	help
-	  POSIX threads library
-

@@ -1,0 +1,12 @@
+--- nfs-utils-1.2.1.orig/tools/rpcgen/rpc_main.c	2009-11-04 12:13:56.000000000 +0100
++++ nfs-utils-1.2.1/tools/rpcgen/rpc_main.c	2010-01-16 11:22:02.359375000 +0100
+@@ -562,9 +562,6 @@ s_output(int argc, char **argv, char *in
+ 	  f_print(fout, "#include <sys/types.h>\n");
+ 
+ 	f_print(fout, "#include <memory.h>\n");
+-#ifndef linux
+-	f_print(fout, "#include <stropts.h>\n");
+-#endif
+ 	if (inetdflag || !tirpcflag ) {
+ 		f_print(fout, "#include <sys/socket.h>\n");
+ 		f_print(fout, "#include <netinet/in.h>\n");

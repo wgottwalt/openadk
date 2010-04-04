@@ -9,22 +9,27 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
 PKG_DESCR:=		Network UPS Tools
 PKG_SECTION:=		sys
+ifneq (${ADK_PACKAGE_NUT_SSL},)
+PKG_DEPENDS+=		libopenssl
+PKG_BUILDDEP+=		openssl
+endif
+ifneq (${ADK_PACKAGE_NUT_USB},)
+PKG_DEPENDS+=		libusb
+PKG_BUILDDEP+=		libusb
+endif
+ifneq (${ADK_PACKAGE_NUT_SNMP},)
+PKG_DEPENDS+=		libnetsnmp
+PKG_BUILDDEP+=		net-snmp
+endif
 PKG_URL:=		http://www.networkupstools.org
 PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
+PKG_FLAVOURS:=		SSL SNMP USB
+PKGFD_SSL:=		enable SSL support
+PKGFD_SNMP:=		enable SNMP support
+PKGFD_USB:=		enable USB support
+
 include ${TOPDIR}/mk/package.mk
-
-ifneq (${ADK_PACKAGE_NUT_SNMP},)
-PKG_DEPENDS+=	libnetsnmp
-endif
-
-ifneq (${ADK_PACKAGE_NUT_USB},)
-PKG_DEPENDS+=	libusb
-endif
-
-ifneq (${ADK_PACKAGE_NUT_SSL},)
-PKG_DEPENDS+=	libopenssl
-endif
 
 $(eval $(call PKG_template,NUT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -74,7 +79,6 @@ INSTALL_DRIVERS_tmp+=	snmp-ups
 endif
 INSTALL_DRIVERS=$(shell echo ${INSTALL_DRIVERS_tmp} | tr ' ' ',')
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--without-cgi \
 			--with-drivers=${INSTALL_DRIVERS} \
@@ -86,10 +90,10 @@ CONFIGURE_ARGS+=	--with-ssl
 CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
 endif
-BUILD_STYLE:=		auto
+
 ALL_TARGET:=		all 
-INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install
+
 ifneq (${ADK_PACKAGE_NUT_USB},)
 ALL_TARGET+=		usb
 INSTALL_TARGET+=	install-usb

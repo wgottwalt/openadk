@@ -1,28 +1,24 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-ADKVERSION=	0.1.0
-export ADKVERSION
-
-CC=		gcc
-GMAKE?=		$(PWD)/scripts/make
-GMAKE_FMK=	${GMAKE} -f $(PWD)/mk/build.mk
-GMAKE_INV=	${GMAKE_FMK} --no-print-directory
+_UNLIMIT=	ulimit -dS $(shell ulimit -dH >/dev/null 2>/dev/null ) >/dev/null 2>/dev/null;
 
 all: .prereq_done
-	@${GMAKE_INV} all
+	@${_UNLIMIT} ${GMAKE_INV} all
 
 v: .prereq_done
 	@(echo; echo "Build started on $$(LC_ALL=C LANGUAGE=C date)"; \
-	    set -x; ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
+	    set -x; ${_UNLIMIT} ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
-	@echo '  switch DEV=device  - Backup current config and copy old saved device config'
+	@echo 'Common targets:'
+	@echo '  switch TARGET=targetname  - Backup current config and copy old saved target config'
+	@echo '  download     - fetches all needed distfiles'
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove bin and build_dir directories'
-	@echo '  cleandevice  - Same as "clean", but also remove toolchain for device'
+	@echo '  cleantarget  - Same as "clean", but also remove toolchain for target'
 	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
-	@echo '  cleankernel  - Remove kernel dir'
+	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
 	@echo '                 distfiles and .config'
 	@echo ''
@@ -31,10 +27,10 @@ help:
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  wconfig      - Same as "oldconfig", but also writes out hidden symbols'
 	@echo '  allmodconfig - New config selecting all packages as modules when possible'
 	@echo '  allconfig    - New config selecting all packages when possible'
 	@echo '  allnoconfig  - New config where all options are answered with no'
+	@echo '  kernelconfig - Modify the target kernel configuration'
 	@echo ''
 	@echo 'Help targets:'
 	@echo '  help         - Print this help text'
@@ -53,25 +49,31 @@ pkg-help:
 	@echo '  patch        - Same as "extract", but also patch the source'
 	@echo '  build        - Same as "patch", but also build the binaries'
 	@echo '  fake         - Same as "build", but also install the binaries'
-	@echo '  package      - Same as "fake", but also create the ipkg package'
+	@echo '  package      - Same as "fake", but also create the package'
 	@echo '  clean        - Deinstall and remove the build area'
 	@echo '  distclean    - Same as "clean", but also remove the distfiles'
 	@echo ''
 	@echo 'Short package rebuilding guide:'
 	@echo '  run "make package=<pkgname> clean" to remove all generated binaries'
-	@echo '  run "make package=<pkgname> package" to build everything and create the ipkg'
+	@echo '  run "make package=<pkgname> package" to build everything and create the package(s)'
 	@echo ''
 	@echo 'This does not automatically resolve package dependencies!'
 
 dev-help:
+	@echo 'Regenerate menu information via "make menu"'
+	@echo 'Regenerate dependency information via "make dep"'
+	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
 	@echo '  edit the package sources at build_dir/w-<pkgname>-*/<pkgname>-<version>'
-	@echo '  run "make package=<pkgname> update-patches to regenerate patch files'
+	@echo '  run "make package=<pkgname> update-patches" to regenerate patch files'
 	@echo ''
 	@echo 'All changed patches will be opened with your $$EDITOR,'
 	@echo 'so you can add a description and verify the modifications.'
+	@echo ''
+	@echo 'Adding a new package:'
+	@echo 'make PKG=foo VER=1.0 newpackage'
 
 clean: .prereq_done
 	-@rm -f nohup.out
@@ -83,9 +85,6 @@ config: .prereq_done
 oldconfig: .prereq_done
 	@${GMAKE_INV} _config W=-o
 
-wconfig: .prereq_done
-	@${GMAKE_INV} _config W=-A
-
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download
 	@${GMAKE_INV} package/download
@@ -94,15 +93,15 @@ cleankernel kernelclean: .prereq_done
 	-@${GMAKE_INV} cleankernel
 
 cleandir dirclean: .prereq_done
-	-@${GMAKE_INV} clean cleandir
+	-@${GMAKE_INV} cleandir
 	@-rm -f make.log .prereq_done
 
-cleandevice deviceclean: .prereq_done
-	-@${GMAKE_INV} clean cleandevice
+cleantarget targetclean: .prereq_done
+	-@${GMAKE_INV} cleantarget
 	@-rm -f make.log
 
-distclean cleandist: .prereq_done
-	-@${GMAKE_INV} clean cleandir distclean
+distclean cleandist:
+	-@${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done
 
 image: .prereq_done
@@ -111,11 +110,20 @@ image: .prereq_done
 switch: .prereq_done
 	@${GMAKE_INV} switch
 
+kernelconfig: .prereq_done
+	@${GMAKE_INV} kernelconfig
+
+newpackage: .prereq_done
+	@${GMAKE_INV} newpackage
+
 image_clean imageclean cleanimage: .prereq_done
 	@${GMAKE_INV} image_clean
 
 menuconfig: .prereq_done
 	@${GMAKE_INV} menuconfig
+
+defconfig: .prereq_done
+	@${GMAKE_INV} defconfig
 
 allnoconfig: .prereq_done
 	@${GMAKE_INV} _config W=-n
@@ -129,23 +137,50 @@ allmodconfig: .prereq_done
 package_index: .prereq_done
 	@${GMAKE_INV} package_index
 
+bulk: .prereq_done
+	@${GMAKE_INV} bulk
+
+bulktoolchain: .prereq_done
+	@${GMAKE_INV} bulktoolchain
+
+bulkall: .prereq_done
+	@${GMAKE_INV} bulkall
+
+bulkallmod: .prereq_done
+	@${GMAKE_INV} bulkallmod
+
+menu: .prereq_done
+	@${GMAKE_INV} menu
+
+dep: .prereq_done
+	@${GMAKE_INV} dep
+
 world: .prereq_done
 	@${GMAKE_INV} world
 
 prereq:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done --no-print-directory
+	@${GMAKE} .prereq_done
 
 prereq-noerror:
 	@rm -f .prereq_done
-	@${MAKE} .prereq_done NO_ERROR=1
+	@${GMAKE} .prereq_done NO_ERROR=1
 
 NO_ERROR=0
 .prereq_done:
 	@-rm -rf .prereq_done
-	@if ! bash --version 2>&1 | fgrep 'GNU bash' >/dev/null 2>&1; then \
+	@if ! bash --version 2>&1 | grep -F 'GNU bash' >/dev/null 2>&1; then \
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
+	fi
+	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | grep -F 'MIRBSD' >/dev/null 2>&1; then \
+		echo "MirBSD ksh (mksh) needs to be installed."; \
+		exit 1; \
+	else \
+		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 34 ]; then \
+			echo "MirBSD ksh is too old. R35 or higher needed."; \
+			exit 1; \
+		fi \
 	fi
 	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
 		echo >&2 Error: you must build with umask 022, sorry.; \
@@ -153,7 +188,7 @@ NO_ERROR=0
 	fi
 	@echo "TOPDIR:=$$(readlink -nf . 2>/dev/null || pwd -P)" >prereq.mk
 	@echo "BASH:=$$(which bash)" >>prereq.mk
-	@if [ -z "$$(which gmake)" ]; then \
+	@if [ -z "$$(which gmake 2>/dev/null )" ]; then \
 		echo "GMAKE:=$$(which make)" >>prereq.mk ;\
 	else \
 		echo "GMAKE:=$$(which gmake)" >>prereq.mk ;\
@@ -172,7 +207,7 @@ NO_ERROR=0
 	    -e 's/i[3-9]86/i386/' \
 	    )" >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
-	@echo 'HOSTCFLAGS:=-O2 -fwrapv' >>prereq.mk
+	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk

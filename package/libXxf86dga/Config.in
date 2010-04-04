@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBXXF86DGA
-	prompt "libXxf86dga................................. X library"
-	tristate
-	default n
-	help
-         http://www.x.org

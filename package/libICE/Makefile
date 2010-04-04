@@ -4,20 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libICE
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d80aab5b32434251cf4732f0e760e9d8
+PKG_MD5SUM:=		4a8f09f15fc92196b91d61e2dc9afcea
 PKG_DESCR:=		Inter-Client Exchange library
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		xtrans xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBICE,libice,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBICE}/usr/lib

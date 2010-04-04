@@ -14,7 +14,7 @@ start)
 	miredo
 	;;
 stop)
-	killall miredo
+	pkill miredo
 	;;
 restart)
 	sh $0 stop

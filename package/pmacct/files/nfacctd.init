@@ -14,7 +14,7 @@ autostop) ;;
 		nfacctd $nfaccd_flags
 		;;
 	stop)
-		killall nfacctd
+		pkill nfacctd
 		;;
 	restart)
 		sh $0 stop

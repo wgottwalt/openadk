@@ -10,6 +10,7 @@ PKG_MD5SUM:=		65850d0470078269b33eee58cba77ac2
 PKG_DESCR:=		NetFlow probe
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap libpthread
+PKG_BUILDDEP+=		libpcap
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -18,14 +19,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FPROBE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-piddir=/var \
 			--with-pcap=${STAGING_DIR}/usr/include \
 			--with-libpcap=${STAGING_DIR}/usr/lib \
 			--with-membulk=index8 \
 			--with-hash=xor8 \
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FPROBE}/usr/sbin

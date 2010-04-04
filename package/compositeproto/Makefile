@@ -4,15 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		compositeproto
-PKG_VERSION:=		0.4
+PKG_VERSION:=		0.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		33a79f6ba950bc5b41e077c951871bd5
+PKG_MD5SUM:=		6994a209774fe7877fd8e0c9fafe2466
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 include ${TOPDIR}/mk/pkg-bottom.mk

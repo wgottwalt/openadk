@@ -16,9 +16,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WONDERSHAPER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 do-install:
 	${INSTALL_DIR} ${IDIR_WONDERSHAPER}/usr/sbin ${IDIR_WONDERSHAPER}/etc
-	${INSTALL_BIN} ${WRKBUILD}/wshaper.htb ${IDIR_WONDERSHAPER}/usr/sbin/wshaper
+	${INSTALL_BIN} ${WRKBUILD}/wshaper.htb \
+		${IDIR_WONDERSHAPER}/usr/sbin/wshaper
 	${INSTALL_DATA} ${WRKBUILD}/wshaper.conf ${IDIR_WONDERSHAPER}/etc/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

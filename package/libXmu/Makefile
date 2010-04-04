@@ -4,24 +4,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXmu
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		48b432e84035c664ece80a33695d5254
-PKG_DESCR:=		a set of miscellaneous utility convenience functions for X libraries
+PKG_MD5SUM:=		f49e3587cdc299707da0786a681f9c05
+PKG_DESCR:=		miscellaneous utility functions for X libraries
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		libXt
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXMU,libxmu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-#CONFIGURE_ARGS+=	--disable-malloc0returnsnull
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXMU}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXmu.so* ${IDIR_LIBXMU}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libXmuu.so* ${IDIR_LIBXMU}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,21 +1,11 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- mksh.orig/dot.mkshrc	2009-05-30 12:07:24.734860691 +0200
-+++ mksh/dot.mkshrc	2009-05-30 12:07:18.782465058 +0200
-@@ -20,7 +20,7 @@
+--- mksh/dot.mkshrc~	Thu Feb 25 20:48:10 2010
++++ mksh/dot.mkshrc	Sun Feb 28 18:05:10 2010
+@@ -21,7 +21,7 @@
  #-
- # ~/.mkshrc: mksh initialisation file for interactive shells
+ # ${ENV:-~/.mkshrc}: mksh initialisation file for interactive shells
  
 -: ${EDITOR:=/bin/ed} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
 +: ${EDITOR:=/bin/vi} ${TERM:=vt100} ${HOSTNAME:=$(ulimit -c 0;hostname -s 2>&-)}
  [[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
  : ${HOSTNAME:=nil}; if (( USER_ID )); then PS1='$'; else PS1='#'; fi
  function precmd {
-@@ -38,7 +38,7 @@ unalias ls
- alias l='ls -F'
- alias la='l -a'
- alias ll='l -l'
--alias lo='l -alo'
-+alias lo='l -al'
- alias which='whence -p'
- whence -p rot13 >&- || alias rot13='tr \
-     abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ \

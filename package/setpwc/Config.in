@@ -1,9 +1,0 @@
-config ADK_PACKAGE_SETPWC
-	prompt "setpwc............................ Philips (and compatibles) WebCams (PWC) control utility"
-	tristate
-	default n
-	help
-	  Philips (and compatibles) WebCams (PWC) control utility.
-	  
-	  http://www.vanheusden.com/setpwc/
-

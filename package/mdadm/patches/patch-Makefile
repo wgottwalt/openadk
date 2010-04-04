@@ -1,0 +1,69 @@
+--- mdadm-3.1.1.orig/Makefile	2009-11-16 23:55:41.000000000 +0100
++++ mdadm-3.1.1/Makefile	2010-02-06 01:09:39.963074463 +0100
+@@ -42,7 +42,7 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
+ 
+ CC = $(CROSS_COMPILE)gcc
+ CXFLAGS = -ggdb
+-CWFLAGS = -Wall -Werror -Wstrict-prototypes
++CWFLAGS = -Wall -Wstrict-prototypes
+ ifdef WARN_UNUSED
+ CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O
+ endif
+@@ -58,7 +58,8 @@ CONFFILE = $(SYSCONFDIR)/mdadm.conf
+ CONFFILE2 = $(SYSCONFDIR)/mdadm/mdadm.conf
+ MAILCMD =/usr/sbin/sendmail -t
+ CONFFILEFLAGS = -DCONFFILE=\"$(CONFFILE)\" -DCONFFILE2=\"$(CONFFILE2)\"
+-CFLAGS = $(CWFLAGS) $(CXFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS)
++CFLAGS ?=
++CFLAGS += $(CWFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS)
+ 
+ # If you want a static binary, you might uncomment these
+ # LDFLAGS = -static
+@@ -186,29 +187,36 @@ sha1.o : sha1.c sha1.h md5.h
+ 	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
+ 
+ install : mdadm mdmon install-man install-udev
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
+-	$(INSTALL) -D $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
+ 
+ install-static : mdadm.static install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-tcc : mdadm.tcc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.tcc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.tcc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-uclibc : mdadm.uclibc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.uclibc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.uclibc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-klibc : mdadm.klibc install-man
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm.klibc $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -d $(DESTDIR)$(BINDIR) 
++	$(INSTALL) $(STRIP) -m 755 mdadm.klibc $(DESTDIR)$(BINDIR)/mdadm
+ 
+ install-man: mdadm.8 md.4 mdadm.conf.5 mdmon.8
+-	$(INSTALL) -D -m 644 mdadm.8 $(DESTDIR)$(MAN8DIR)/mdadm.8
+-	$(INSTALL) -D -m 644 mdmon.8 $(DESTDIR)$(MAN8DIR)/mdmon.8
+-	$(INSTALL) -D -m 644 md.4 $(DESTDIR)$(MAN4DIR)/md.4
+-	$(INSTALL) -D -m 644 mdadm.conf.5 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5
++	$(INSTALL) -d $(DESTDIR)$(MAN8DIR) $(DESTDIR)$(MAN4DIR) $(DESTDIR)$(MAN5DIR)
++	$(INSTALL) -m 644 mdadm.8 $(DESTDIR)$(MAN8DIR)/mdadm.8
++	$(INSTALL) -m 644 mdmon.8 $(DESTDIR)$(MAN8DIR)/mdmon.8
++	$(INSTALL) -m 644 md.4 $(DESTDIR)$(MAN4DIR)/md.4
++	$(INSTALL) -m 644 mdadm.conf.5 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5
+ 
+ install-udev: udev-md-raid.rules
+-	$(INSTALL) -D -m 644 udev-md-raid.rules $(DESTDIR)/lib/udev/rules.d/64-md-raid.rules
++	$(INSTALL) -d $(DESTDIR)/lib/udev/rules.d/
++	$(INSTALL) -m 644 udev-md-raid.rules $(DESTDIR)/lib/udev/rules.d/64-md-raid.rules
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(MAN8DIR)/mdadm.8 $(DESTDIR)$(MAN8DIR)/mdmon.8 $(DESTDIR)$(MAN4DIR)/md.4 $(DESTDIR)$(MAN5DIR)/mdadm.conf.5 $(DESTDIR)$(BINDIR)/mdadm

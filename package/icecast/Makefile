@@ -5,7 +5,8 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		icecast
 PKG_VERSION:=		2.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
+PKG_BUILDDEP+=		curl libvorbis libxml2 libxslt
 PKG_MD5SUM:=		ff516b3ccd2bcc31e68f460cd316093f
 PKG_DESCR:=		A streaming media server
 PKG_SECTION:=		net
@@ -18,7 +19,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/libxml2
-CONFIGURE_STYLE=	autotool gnu
 CONFIGURE_ARGS+=	--disable-yp \
 			--with-curl="yes" \
 			--with-curl-config="${STAGING_DIR}/usr/bin/curl-config" \
@@ -27,8 +27,6 @@ CONFIGURE_ARGS+=	--disable-yp \
 			--with-speex="no" \
 			--with-theora="no" \
 			--with-xslt-config="${STAGING_DIR}/usr/bin/xslt-config"
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ICECAST}/etc
@@ -36,7 +34,9 @@ post-install:
 	${INSTALL_DIR} ${IDIR_ICECAST}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/icecast ${IDIR_ICECAST}/usr/bin/
 	${INSTALL_DIR} ${IDIR_ICECAST}/usr/share/icecast
-	${CP} ${WRKINST}/usr/share/icecast/admin ${IDIR_ICECAST}/usr/share/icecast/
-	${CP} ${WRKINST}/usr/share/icecast/web ${IDIR_ICECAST}/usr/share/icecast/
+	${CP} ${WRKINST}/usr/share/icecast/admin \
+		${IDIR_ICECAST}/usr/share/icecast/
+	${CP} ${WRKINST}/usr/share/icecast/web \
+		${IDIR_ICECAST}/usr/share/icecast/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

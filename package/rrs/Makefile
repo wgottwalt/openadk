@@ -9,6 +9,11 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		b400d03c0e39e3e78a7327ba78f789f0
 PKG_DESCR:=		A reverse (connecting) remote shell, with SSL support.
 PKG_SECTION:=		net
+PKG_CXX:=		RRS
+PKG_BUILDDEP+=		zlib
+ifneq ($(ADK_PACKAGE_RRS),)
+PKG_BUILDDEP+=		openssl
+endif
 PKG_URL:=		http://www.cycom.se/dl/rrs
 PKG_SITES:=		http://www.cycom.se/uploads/36/19/
 
@@ -16,10 +21,8 @@ PKG_DEPENDS:=		libopenssl zlib
 PKG_DEPENDS_NOSSL:=	zlib
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
-PKG_DEPENDS+=		uclibc++
 PKG_DEPENDS_NOSSL+=	uclibc++
 else
-PKG_DEPENDS+=		libstdcxx
 PKG_DEPENDS_NOSSL+=	libstdcxx
 endif
 
@@ -27,6 +30,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RRS,rrs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,RRS_NOSSL,rrs-nossl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_NOSSL},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=          manual
+INSTALL_STYLE:=         manual
 
 ifeq ($(ADK_COMPILE_RRS_WITH_UCLIBCXX),y)
 PKG_FLAGS=-fno-builtin -fno-rtti -nostdinc++ -fPIC
@@ -36,7 +43,7 @@ PKG_FLAGS=-fPIC
 PKG_LDFLAGS=-shared
 endif
 
-do-configure:
+do-build:
 ifneq (${ADK_PACKAGE_RRS},)
 	${MAKE} -C ${WRKBUILD} \
 		CC="${TARGET_CC}" \

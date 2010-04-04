@@ -10,6 +10,7 @@ PKG_MD5SUM:=		82b059379895cf125261d7d773465915
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libpopt
+PKG_BUILDDEP+=		popt
 PKG_URL:=		http://oprofile.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
@@ -20,10 +21,7 @@ $(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${
 TLDFLAGS+=		-shared
 TCFLAGS+=		-fPIC
 TCXXFLAGS+=		-fPIC
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-kernel-support --with-linux=${LINUX_DIR}
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/bin

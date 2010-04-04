@@ -21,7 +21,7 @@ config BUSYBOX_FEATURE_USE_INITTAB
 
 config BUSYBOX_FEATURE_KILL_REMOVED
 	bool "Support killing processes that have been removed from inittab"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_USE_INITTAB
 	help
 	  When respawn entries are removed from inittab and a SIGHUP is
@@ -32,15 +32,16 @@ config BUSYBOX_FEATURE_KILL_DELAY
 	int "How long to wait between TERM and KILL (0 - send TERM only)" if FEATURE_KILL_REMOVED
 	range 0 1024
 	default 0
+	depends on BUSYBOX_FEATURE_KILL_REMOVED
 	help
 	  With nonzero setting, init sends TERM, forks, child waits N
 	  seconds, sends KILL and exits. Setting it too high is unwise
-	  (child will hang around for too long and can actually kill
-	  wrong process!)
+	  (child will hang around for too long and could actually kill
+	  the wrong process!)
 
 config BUSYBOX_FEATURE_INIT_SCTTY
 	bool "Run commands with leading dash with controlling tty"
-	default n
+	default y
 	depends on BUSYBOX_INIT
 	help
 	  If this option is enabled, init will try to give a controlling
@@ -60,7 +61,7 @@ config BUSYBOX_FEATURE_INIT_SYSLOG
 
 config BUSYBOX_FEATURE_EXTRA_QUIET
 	bool "Be _extra_ quiet on boot"
-	default n
+	default y
 	depends on BUSYBOX_INIT
 	help
 	  Prevent init from logging some messages to the console during boot.
@@ -75,23 +76,42 @@ config BUSYBOX_FEATURE_INIT_COREDUMPS
 	  core file sizes. If this option is disabled, processes
 	  will not generate any core files.
 
-# you should never need this, breaks allconfig images
-#config BUSYBOX_FEATURE_INITRD
-#	bool "Support running init from within an initrd (not initramfs)"
-#	default n
-#	depends on BUSYBOX_INIT
-#	help
-#	  Legacy support for running init under the old-style initrd. Allows
-#	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
-#
-#	  This does not apply to initramfs, which runs /init as PID 1 and
-#	  requires no special support.
+config BUSYBOX_FEATURE_INITRD
+	bool "Support running init from within an initrd (not initramfs)"
+	default n
+	depends on BUSYBOX_INIT
+	help
+	  Legacy support for running init under the old-style initrd. Allows
+	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
+
+	  This does not apply to initramfs, which runs /init as PID 1 and
+	  requires no special support.
 
 config BUSYBOX_HALT
 	bool "poweroff, halt, and reboot"
 	default y
 	help
 	  Stop all processes and either halt, reboot, or power off the system.
+
+config BUSYBOX_FEATURE_CALL_TELINIT
+	bool "Call telinit on shutdown and reboot"
+	default n
+	depends on BUSYBOX_HALT && !BUSYBOX_INIT
+	help
+	  Call an external program (normally telinit) to facilitate
+	  a switch to a proper runlevel.
+
+	  This option is only available if you selected halt and friends,
+	  but did not select init.
+
+config BUSYBOX_TELINIT_PATH
+	string "Path to telinit executable"
+	default "/sbin/telinit"
+	depends on BUSYBOX_FEATURE_CALL_TELINIT
+	help
+	  When busybox halt and friends have to call external telinit
+	  to facilitate proper shutdown, this path is to be used when
+	  locating telinit executable.
 
 config BUSYBOX_MESG
 	bool "mesg"

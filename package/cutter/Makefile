@@ -18,8 +18,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CUTTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 do-build:
-	${TARGET_CC} ${TARGET_CFLAGS} ${WRKBUILD}/cutter.c -o ${WRKBUILD}/cutter
+	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} ${WRKBUILD}/cutter.c \
+		-o ${WRKBUILD}/cutter
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CUTTER}/usr/sbin

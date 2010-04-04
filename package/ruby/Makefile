@@ -4,11 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		1.9.1-p243
+PKG_VERSION:=		1.9.1-p378
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		515bfd965814e718c0943abf3dde5494
+PKG_MD5SUM:=		9fc5941bda150ac0a33b299e1e53654c
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		net
+PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.ruby-lang.org
 PKG_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/1.9/
 
@@ -17,21 +18,24 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,RUBY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		GNUmakefile
-XAKE_FLAGS+=		optflags='' debugflags=''
-CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
+XAKE_FLAGS+=		optflags='' debugflags='' BASERUBY="${WRKBUILD}/hostruby"
+# uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 INSTALL_TARGET:=	install-nodoc
 
-# Enable some ruby extension / options
-post-configure:
-	#echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
-	echo "socket" >> ${WRKBUILD}/ext/Setup
+pre-configure:
+	cp ${WRKBUILD}/ext/Setup ${WRKBUILD}/ext/Setup.orig
+	echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
+	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
+		./configure --prefix=$(STAGING_TOOLS) \
+	);
+	$(MAKE) -C ${WRKBUILD} ruby
+	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby
+	cp ${WRKBUILD}/ext/Setup.orig ${WRKBUILD}/ext/Setup
+	$(MAKE) -C ${WRKBUILD} install-nodoc
+	$(MAKE) -C ${WRKBUILD} clean
 
 post-install:
-	rm ${WRKINST}/usr/lib/*.a
 	rm -rf ${WRKINST}/usr/lib/site_ruby
 	rm -rf ${WRKINST}/usr/include
 	${CP} ${WRKINST}/usr ${IDIR_RUBY}/

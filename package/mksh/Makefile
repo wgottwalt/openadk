@@ -3,17 +3,20 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		mksh
-PKG_VERSION=		39
-PKG_RELEASE=		1
-PKG_MD5SUM=		b2eeb4fe4ccac2704e1440e53cd2672c
+PKG_NAME:=		mksh
+PKG_VERSION:=		39c
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0c3cd172b47eefcdf9a302baa42f5092
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org
-PKG_SITES=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
+PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 
 DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.cpio.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
+
+PKG_FLAVOURS:=		FULL
+PKGFD_FULL:=		Include all features
 
 include ${TOPDIR}/mk/package.mk
 
@@ -22,6 +25,10 @@ $(eval $(call PKG_template,MKSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
 TCPPFLAGS+=		-DMKSH_SMALL=1
 endif
+
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' \

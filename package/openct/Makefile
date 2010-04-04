@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		openct
 PKG_VERSION:=		0.6.16
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libtool libusb
 PKG_MD5SUM:=		d8d8c63269985303a303a218c4b953d7
 PKG_DESCR:=		drivers for several smart card readers
 PKG_SECTION:=		libs
@@ -16,10 +17,6 @@ PKG_SITES:=		http://www.opensc-project.org/files/openct/
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENCT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENCT}/etc ${IDIR_OPENCT}/usr/bin
@@ -35,5 +32,4 @@ post-install:
 	${INSTALL_DATA} ${WRKBUILD}/etc/openct.conf \
 		${IDIR_OPENCT}/etc
 
-		
 include ${TOPDIR}/mk/pkg-bottom.mk

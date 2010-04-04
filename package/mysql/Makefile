@@ -4,20 +4,25 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.0.85
+PKG_VERSION:=		5.1.41
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f672ec5154f8ea3db87fec5e0b227f4c
+PKG_MD5SUM:=		b5d39e8789174753f3c782959729e68c
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libncurses zlib
+PKG_BUILDDEP+=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com
-PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.0/}
+PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
+
+PKG_HOST_DEPENDS:=	!cygwin
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			OPTIMIZE_CXXFLAGS="${TARGET_CFLAGS}" \
 			ac_cv_lib_nsl_gethostbyname_r=no \
@@ -27,10 +32,11 @@ CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
 			mysql_cv_compress=yes \
 			ac_cv_sys_restartable_syscalls=no \
 			ac_cv_conv_longlong_to_float=yes \
+			mysql_cv_gcc_atomic_builtins=yes \
 			mysql_cv_gethostname_style=glibc2
 CONFIGURE_ARGS+=	--disable-assembler \
 			--with-pthread \
-			--without-raid \
+			--with-atomic-ops=rwlocks \
 			--with-unix-socket-path=/tmp/.mysql.sock \
 			--with-named-thread-libs=-lpthread \
 			--without-libwrap \
@@ -39,12 +45,8 @@ CONFIGURE_ARGS+=	--disable-assembler \
 			--without-server \
 			--without-embedded-server \
 			--without-query-cache \
-			--without-mysqlfs \
-			--without-vio \
-			--without-openssl \
+			--without-ssl \
 			--without-docs \
-			--without-bench \
-			--without-innodb \
 			--without-readline \
 			--with-machine-type=${CPU_ARCH}
 HOSTTOOLFLAGS=		CC="${HOSTCC}" \

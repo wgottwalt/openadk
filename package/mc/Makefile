@@ -4,21 +4,23 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME=		mc
-PKG_VERSION=		4.6.1
+PKG_VERSION=		4.7.0.2
 PKG_RELEASE=		1
-PKG_MD5SUM=		18b20db6e40480a53bac2870c56fc3c4
+PKG_MD5SUM=		f48b2c8dd140aeb36f59d16a662f0779
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		libncurses glib
-PKG_URL:=		http://www.midnight-commander.org
-PKG_SITES=		http://www.ibiblio.org/pub/Linux/utils/file/managers/mc/
+PKG_NOPARALLEL:=	1
+PKG_DEPENDS:=		glib libncurses
+PKG_BUILDDEP+=		glib ncurses
+PKG_URL:=		http://www.midnight-commander.org/
+PKG_SITES=		http://openadk.org/distfiles/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-CONFIGURE_ARGS+=	--disable-charset \
+CONFIGURE_ARGS+=	--enable-charset \
+			--disable-extcharset \
 			--disable-background \
 			--disable-gcc-warnings \
 			--disable-glibtest \
@@ -35,20 +37,14 @@ CONFIGURE_ARGS+=	--disable-charset \
 			--with-screen=ncurses \
 			--with-edit
 CONFIGURE_ENV+=		mc_cv_have_zipinfo=yes \
-			ac_cv_lib_nsl_t_accept=no \
-			ac_cv_lib_nsl_gethostbyname=no \
 			am_cv_func_iconv=no
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
-pre-install:
-	cp ${WRKSRC}/doc/xnc.hlp ${WRKSRC}/doc/mc.hlp
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MC}/usr/{bin,share/mc}
-	${CP} ${WRKINST}/usr/bin/mc ${IDIR_MC}/usr/bin/
-	cd ${IDIR_MC}/usr/bin && ln -s mc mcedit && ln -s mc mcview
-	cd ${WRKINST}/usr/share/mc && ${CP} cedit.menu mc.ext mc.hint \
-	    mc.lib mc.menu syntax extfs ${IDIR_MC}/usr/share/mc/
+	${INSTALL_DIR} ${IDIR_MC}/etc/mc
+	${INSTALL_DIR} ${IDIR_MC}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/mc ${IDIR_MC}/usr/bin/
+	cd ${IDIR_MC}/usr/bin && ln -fs mc mcedit && ln -fs mc mcview
+	cd ${WRKINST}/etc/mc && ${CP} cedit.menu mc.ext \
+	    mc.lib mc.menu extfs ${IDIR_MC}/etc/mc/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

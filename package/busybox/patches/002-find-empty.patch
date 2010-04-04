@@ -1,6 +1,6 @@
-diff -Nur busybox-1.12.3/findutils/Config.in busybox-1.12.3-find/findutils/Config.in
---- busybox-1.12.3/findutils/Config.in	2008-09-28 20:04:28.000000000 +0200
-+++ busybox-1.12.3-find/findutils/Config.in	2009-01-06 22:24:46.086215240 +0100
+diff -Nur busybox-1.15.2.orig/findutils/Config.in busybox-1.15.2/findutils/Config.in
+--- busybox-1.15.2.orig/findutils/Config.in	2009-09-26 15:14:57.000000000 +0200
++++ busybox-1.15.2/findutils/Config.in	2009-11-28 12:41:31.000000000 +0100
 @@ -81,6 +81,14 @@
  	help
  	  Support the 'find -inum' option for searching by inode number.
@@ -14,20 +14,20 @@ diff -Nur busybox-1.12.3/findutils/Config.in busybox-1.12.3-find/findutils/Confi
 +	  and directories.
 +
  config FEATURE_FIND_EXEC
- 	bool "Enable -exec option allowing execution of commands"
+ 	bool "Enable -exec: execute commands"
  	default y
-diff -Nur busybox-1.12.3/findutils/find.c busybox-1.12.3-find/findutils/find.c
---- busybox-1.12.3/findutils/find.c	2008-09-28 20:04:28.000000000 +0200
-+++ busybox-1.12.3-find/findutils/find.c	2009-01-06 23:33:53.201386585 +0100
+diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
+--- busybox-1.15.2.orig/findutils/find.c	2009-10-08 03:04:40.000000000 +0200
++++ busybox-1.15.2/findutils/find.c	2009-11-28 12:48:36.000000000 +0100
 @@ -93,6 +93,7 @@
- USE_FEATURE_FIND_CONTEXT(ACTS(context, security_context_t context;))
- USE_FEATURE_FIND_PAREN(  ACTS(paren, action ***subexpr;))
- USE_FEATURE_FIND_PRUNE(  ACTS(prune))
-+USE_FEATURE_FIND_EMPTY(  ACTS(empty))
- USE_FEATURE_FIND_DELETE( ACTS(delete))
- USE_FEATURE_FIND_EXEC(   ACTS(exec,  char **exec_argv; unsigned *subst_count; int exec_argc;))
- USE_FEATURE_FIND_GROUP(  ACTS(group, gid_t gid;))
-@@ -318,6 +319,34 @@
+ IF_FEATURE_FIND_CONTEXT(ACTS(context, security_context_t context;))
+ IF_FEATURE_FIND_PAREN(  ACTS(paren, action ***subexpr;))
+ IF_FEATURE_FIND_PRUNE(  ACTS(prune))
++IF_FEATURE_FIND_EMPTY(  ACTS(empty))
+ IF_FEATURE_FIND_DELETE( ACTS(delete))
+ IF_FEATURE_FIND_EXEC(   ACTS(exec,  char **exec_argv; unsigned *subst_count; int exec_argc;))
+ IF_FEATURE_FIND_GROUP(  ACTS(group, gid_t gid;))
+@@ -333,6 +334,34 @@
  	return exec_actions(ap->subexpr, fileName, statbuf);
  }
  #endif
@@ -62,44 +62,44 @@ diff -Nur busybox-1.12.3/findutils/find.c busybox-1.12.3-find/findutils/find.c
  #if ENABLE_FEATURE_FIND_SIZE
  ACTF(size)
  {
-@@ -459,6 +488,7 @@
- 	USE_FEATURE_FIND_PRINT0( PARM_print0    ,)
- 	USE_FEATURE_FIND_DEPTH(  PARM_depth     ,)
- 	USE_FEATURE_FIND_PRUNE(  PARM_prune     ,)
-+	USE_FEATURE_FIND_EMPTY(  PARM_empty     ,)
- 	USE_FEATURE_FIND_DELETE( PARM_delete    ,)
- 	USE_FEATURE_FIND_EXEC(   PARM_exec      ,)
- 	USE_FEATURE_FIND_PAREN(  PARM_char_brace,)
-@@ -492,6 +522,7 @@
- 	USE_FEATURE_FIND_PRINT0( "-print0\0" )
- 	USE_FEATURE_FIND_DEPTH(  "-depth\0"  )
- 	USE_FEATURE_FIND_PRUNE(  "-prune\0"  )
-+	USE_FEATURE_FIND_EMPTY(  "-empty\0"  )
- 	USE_FEATURE_FIND_DELETE( "-delete\0" )
- 	USE_FEATURE_FIND_EXEC(   "-exec\0"   )
- 	USE_FEATURE_FIND_PAREN(  "(\0"       )
-@@ -610,6 +641,12 @@
+@@ -476,6 +505,7 @@
+ 	IF_FEATURE_FIND_PRINT0( PARM_print0    ,)
+ 	IF_FEATURE_FIND_DEPTH(  PARM_depth     ,)
+ 	IF_FEATURE_FIND_PRUNE(  PARM_prune     ,)
++	IF_FEATURE_FIND_EMPTY(  PARM_empty     ,)
+ 	IF_FEATURE_FIND_DELETE( PARM_delete    ,)
+ 	IF_FEATURE_FIND_EXEC(   PARM_exec      ,)
+ 	IF_FEATURE_FIND_PAREN(  PARM_char_brace,)
+@@ -509,6 +539,7 @@
+ 	IF_FEATURE_FIND_PRINT0( "-print0\0" )
+ 	IF_FEATURE_FIND_DEPTH(  "-depth\0"  )
+ 	IF_FEATURE_FIND_PRUNE(  "-prune\0"  )
++	IF_FEATURE_FIND_EMPTY(  "-empty\0"  )
+ 	IF_FEATURE_FIND_DELETE( "-delete\0" )
+ 	IF_FEATURE_FIND_EXEC(   "-exec\0"   )
+ 	IF_FEATURE_FIND_PAREN(  "(\0"       )
+@@ -627,6 +658,12 @@
  			(void) ALLOC_ACTION(prune);
  		}
  #endif
 +#if ENABLE_FEATURE_FIND_EMPTY
 +		else if (parm == PARM_empty) {
-+			USE_FEATURE_FIND_NOT( invert_flag = 0; )
++			IF_FEATURE_FIND_NOT( invert_flag = 0; )
 +			(void) ALLOC_ACTION(empty);
 +		}
 +#endif
  #if ENABLE_FEATURE_FIND_DELETE
  		else if (parm == PARM_delete) {
- 			need_print = 0;
-diff -Nur busybox-1.12.3/include/usage.h busybox-1.12.3-find/include/usage.h
---- busybox-1.12.3/include/usage.h	2008-09-28 20:04:26.000000000 +0200
-+++ busybox-1.12.3-find/include/usage.h	2009-01-07 00:07:49.832669156 +0100
-@@ -1140,6 +1140,8 @@
+ 			G.need_print = 0;
+diff -Nur busybox-1.15.2.orig/include/usage.h busybox-1.15.2/include/usage.h
+--- busybox-1.15.2.orig/include/usage.h	2009-10-08 02:59:09.000000000 +0200
++++ busybox-1.15.2/include/usage.h	2009-11-28 12:42:43.000000000 +0100
+@@ -1239,6 +1239,8 @@
       "\n	-group NAME	File belongs to group NAME (numeric group ID allowed)") \
- 	USE_FEATURE_FIND_DEPTH( \
+ 	IF_FEATURE_FIND_DEPTH( \
       "\n	-depth		Process directory name after traversing it") \
-+	USE_FEATURE_FIND_EMPTY( \
++ 	IF_FEATURE_FIND_EMPTY( \
 +     "\n	-empty		File or directory is empty") \
- 	USE_FEATURE_FIND_SIZE( \
+ 	IF_FEATURE_FIND_SIZE( \
       "\n	-size N[bck]	File size is N (c:bytes,k:kbytes,b:512 bytes(def.))." \
       "\n			+/-N: file size is bigger/smaller than N") \

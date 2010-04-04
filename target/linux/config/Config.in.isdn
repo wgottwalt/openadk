@@ -1,4 +1,5 @@
 menu "ISDN"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
 
 config ADK_KERNEL_ISDN
 	bool
@@ -37,6 +38,7 @@ config ADK_KPACKAGE_KMOD_ISDN_CAPI
 	tristate
 	select ADK_KERNEL_ISDN_CAPI_CAPI20
 	select ADK_KERNEL_ISDN
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 	help
 	 Kernel support for CAPI 2.0 and /dev/capi20

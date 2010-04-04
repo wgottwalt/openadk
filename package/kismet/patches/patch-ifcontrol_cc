@@ -1,0 +1,11 @@
+--- kismet-2010-01-R1.orig/ifcontrol.cc	Mon Aug 31 01:36:19 2009
++++ kismet-2010-01-R1/ifcontrol.cc	Wed Feb 17 21:59:02 2010
+@@ -149,7 +149,7 @@ string Linux_GetSysDrv(const char *in_dev) {
+ 	devlinklen = readlink(devlink.c_str(), devlinktarget, 511);
+ 	if (devlinklen > 0) {
+ 		devlinktarget[devlinklen] = '\0';
+-		rind = rindex(devlinktarget, '/');
++		rind = strchr(devlinktarget, '/');
+ 		// If we found it and not at the end of the line
+ 		if (rind != NULL && (rind - devlinktarget) + 1 < devlinklen)
+ 			return string(rind + 1);

@@ -1,0 +1,26 @@
+#!/bin/sh
+  
+if [ ! -x /usr/sbin/brctl ]
+then
+  exit 0
+fi
+
+case "$IF_BRIDGE_PORTS" in
+    "")
+        exit 0
+        ;;
+    none)
+        INTERFACES=""
+        ;;
+    *)
+        INTERFACES="$IF_BRIDGE_PORTS"
+        ;;
+esac
+  
+for IF in $INTERFACES; do
+  ip link set down dev $IF && brctl delif $IFACE $IF
+done
+
+ip link set down dev $IFACE || exit 1
+brctl delbr $IFACE
+exit 0

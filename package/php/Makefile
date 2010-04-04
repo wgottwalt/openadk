@@ -4,23 +4,53 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.0
+PKG_VERSION:=		5.3.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f4905eca4497da3f0beb5c96863196b4
-PKG_DESCR:=		PHP cli
+PKG_MD5SUM:=		4480d7c6d6b4a86de7b8ec8f0c2d1871
+PKG_DESCR:=		PHP CLI
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_DEPENDS:=		libopenssl zlib
+PKG_BUILDDEP+=		openssl zlib
+ifneq ($(ADK_PACKAGE_PHP_MOD_CURL),)
+PKG_BUILDDEP+=		curl
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
+PKG_BUILDDEP+=		libgd libpng
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_GMP),)
+PKG_BUILDDEP+=		gmp
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
+PKG_BUILDDEP+=		openldap
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
+PKG_BUILDDEP+=		mysql
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_PCRE),)
+PKG_BUILDDEP+=		pcre
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
+PKG_BUILDDEP+=		postgresql
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_SQLITE),)
+PKG_BUILDDEP+=		sqlite
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
+PKG_BUILDDEP+=		expat
+endif
 PHP_URL:=		http://www.php.net
 PKG_SITES:=		http://de.php.net/distributions/
 
-PKG_DESCR_1:=		PHP for FastCGI usage
+PKG_DESCR_FCGI:=	PHP for FastCGI usage
 
 # FIX PKG_DEPENDS
 
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call PKG_template,PHP,php,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_FCGI},${PKG_SECTION}))
 
 define PKG_mod_template
 
@@ -153,20 +183,21 @@ $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
 $(eval $(call PKG_mod_template,PHP_MOD_SQLITE,pdo))
 $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 
+INSTALL_STYLE:=		manual
+
 TLDFLAGS+=		-L$(STAGING_DIR)/usr/lib/mysql
 CONFIGURE_ENV+=		LIBS="-ldl"
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
-BUILD_STYLE:=		auto
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} $(IDIR_PHP_CLI)/etc
-	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_CLI)/etc/
+	${INSTALL_DIR} $(IDIR_PHP)/etc
+	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP)/etc/
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc/
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/sbin
-	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi $(IDIR_PHP_FASTCGI)/usr/sbin/php
+	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
+		$(IDIR_PHP_FASTCGI)/usr/sbin/php
 
 include ${TOPDIR}/mk/pkg-bottom.mk

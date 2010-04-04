@@ -1,6 +1,0 @@
-config ADK_PACKAGE_BISON
-	prompt "bison.............................. GNU parser generator"
-	tristate
-	default n
-	help
-	  http://www.gnu.org/software/bison/

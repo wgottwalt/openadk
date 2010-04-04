@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cups
-PKG_VERSION:=		1.3.10
+PKG_VERSION:=		1.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		84fffe96b8537c81a463faccead80026
+PKG_BUILDDEP+=		zlib
+PKG_MD5SUM:=		d95e2d588e3d36e563027a963b117b1b
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net
 PKG_DEPENDS:=		zlib libpthread
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.cups.org
-PKG_SITES:=		http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/cups/${PKG_VERSION}/ \
-			ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
+PKG_SITES:=		ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
@@ -20,7 +21,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
 CONFIGURE_ARGS+=	--with-cups-user=0 \
@@ -40,19 +40,18 @@ CONFIGURE_ARGS+=	--with-cups-user=0 \
 			--disable-cdsassl \
 			--disable-dbus \
 			--disable-ssl
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
+
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
 XAKE_FLAGS+=		OPTIM='-fPIC'
 
 post-install:
-	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/doc/cups
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/sbin
 	${INSTALL_DIR} ${IDIR_CUPS}/etc/cups
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/lib/cups/cgi-bin
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/lib/cups/daemon
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/cups/banners
+	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/doc/cups
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/share/cups/templates
 	${CP} ${WRKINST}/etc/cups/* ${IDIR_CUPS}/etc/cups/
 	rm ${IDIR_CUPS}/etc/cups/cupsd.conf.default
@@ -65,8 +64,10 @@ post-install:
 		${IDIR_CUPS}/usr/share/doc/cups/
 	rm -f ${IDIR_CUPS}/usr/bin/cups-config
 	${CP} ${WRKINST}/usr/lib/libcups*.so* ${IDIR_CUPS}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/cups/cgi-bin/* ${IDIR_CUPS}/usr/lib/cups/cgi-bin/
-	${CP} ${WRKINST}/usr/lib/cups/daemon/* ${IDIR_CUPS}/usr/lib/cups/daemon/
+	${CP} ${WRKINST}/usr/lib/cups/cgi-bin/* \
+		${IDIR_CUPS}/usr/lib/cups/cgi-bin/
+	${CP} ${WRKINST}/usr/lib/cups/daemon/* \
+		${IDIR_CUPS}/usr/lib/cups/daemon/
 	${CP} ${WRKINST}/usr/share/cups/banners/* \
 		${IDIR_CUPS}/usr/share/cups/banners/
 	${CP} ${WRKINST}/usr/share/cups/templates/*.tmpl \

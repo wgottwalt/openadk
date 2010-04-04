@@ -7,6 +7,10 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifneq ($(ADK_DEBUG),)
+TARGET_CFLAGS+=		-O2
+endif
+
 EGLIBC_CONFOPTS:=	\
 			--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
@@ -31,9 +35,9 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
-			libc_cv_slibdir="/lib" 
+			libc_cv_slibdir="/lib"
 
-ifeq ($(ADK_DEVICE_NO_FPU),y)
+ifeq ($(ADK_TARGET_NO_FPU),y)
 EGLIBC_CONFOPTS+=       --without-fp
 endif
 
@@ -44,7 +48,6 @@ $(WRKBUILD)/.headers_configure:
 	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
 		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
-	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc; autoconf --force);
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_INITIAL)
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
@@ -61,19 +64,9 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
 		install-headers install-bootstrap-headers=yes
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
-		csu/subdir_lib
-	( cd $(EGLIBC_BUILD_DIR_INITIAL); \
-		$(CP) csu/crt1.o csu/crti.o csu/crtn.o \
-		$(TOOLCHAIN_SYSROOT)/usr/lib \
-	);
-	PATH='${TARGET_PATH}' \
-	$(TARGET_CC) -nostdlib -nostartfiles -shared -x c /dev/null \
-		-o $(TOOLCHAIN_SYSROOT)/usr/lib/libc.so
 	touch $@
 
-$(WRKBUILD)/.configured: 
+$(WRKBUILD)/.configured:
 	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_FINAL)

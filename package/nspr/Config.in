@@ -1,5 +1,0 @@
-config ADK_PACKAGE_NSPR
-	prompt "nspr.............................. Red Hat package manager"
-	tristate
-	default n
-	help

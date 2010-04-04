@@ -1,21 +1,36 @@
-$Id$
---- logrotate-3.7.1.orig/Makefile	Thu Oct  9 22:05:07 2003
-+++ logrotate-3.7.1/Makefile	Sat Jan 20 19:25:23 2007
-@@ -3,7 +3,7 @@ CVSROOT = $(shell cat CVS/Root)
- CVSTAG = r$(subst .,-,$(VERSION))
- OS_NAME = $(shell uname -s)
+--- logrotate-3.7.8.orig/Makefile	2008-05-19 12:25:54.000000000 +0200
++++ logrotate-3.7.8/Makefile	2010-02-06 00:00:58.853084930 +0100
+@@ -1,7 +1,7 @@
+ VERSION = $(shell awk '/Version:/ { print $$2 }' logrotate.spec)
+-OS_NAME = $(shell uname -s)
++OS_NAME = Linux
  LFS = $(shell echo `getconf LFS_CFLAGS 2>/dev/null`)
 -CFLAGS = -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
 +CFLAGS ?= -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
  PROG = logrotate
  MAN = logrotate.8
  LOADLIBES = -lpopt
-@@ -69,7 +69,7 @@ SOURCES = $(subst .o,.c,$(OBJS) $(LIBOBJ
+@@ -96,16 +96,16 @@ test: $(TARGET)
+ 	(cd test; ./test)
  
- ifeq ($(RPM_OPT_FLAGS),)
- CFLAGS += -g
--LDFLAGS = -g
-+LDFLAGS ?= -g
- endif
+ install:
+-	[ -d $(PREFIX)/$(BINDIR) ] || mkdir -p $(PREFIX)/$(BINDIR)
+-	[ -d $(PREFIX)/$(MANDIR) ] || mkdir -p $(PREFIX)/$(MANDIR)
+-	[ -d $(PREFIX)/$(MANDIR)/man8 ] || mkdir -p $(PREFIX)/$(MANDIR)/man8
++	[ -d $(DESTDIR)/$(BINDIR) ] || mkdir -p $(DESTDIR)/$(BINDIR)
++	[ -d $(DESTDIR)/$(MANDIR) ] || mkdir -p $(DESTDIR)/$(MANDIR)
++	[ -d $(DESTDIR)/$(MANDIR)/man8 ] || mkdir -p $(DESTDIR)/$(MANDIR)/man8
  
- ifeq (.depend,$(wildcard .depend))
+ 	if [ "$(OS_NAME)" = HP-UX ]; then \
+-	$(INSTALL) $(PROG) $(PREFIX)/$(BINDIR) 0755 bin bin; \
+-	$(INSTALL) $(MAN) $(PREFIX)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"` 0644 bin bin; \
++	$(INSTALL) $(PROG) $(DESTDIR)/$(BINDIR) 0755 bin bin; \
++	$(INSTALL) $(MAN) $(DESTDIR)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"` 0644 bin bin; \
+ 	else \
+-	$(INSTALL) -m 755 $(PROG) $(PREFIX)/$(BINDIR); \
+-	$(INSTALL) -m 644 $(MAN) $(PREFIX)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"`/$(MAN); \
++	$(INSTALL) -m 755 $(PROG) $(DESTDIR)/$(BINDIR); \
++	$(INSTALL) -m 644 $(MAN) $(DESTDIR)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"`/$(MAN); \
+ 	fi
+ 
+ co:

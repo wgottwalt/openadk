@@ -10,13 +10,14 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	[ -d /var/run ] || mkdir -p /var/run
+	[ -d /var/run/asterisk ] || mkdir -p /var/run/asterisk
 	[ -d /var/log/asterisk ] || mkdir -p /var/log/asterisk
 	[ -d /var/spool/asterisk ] || mkdir -p /var/spool/asterisk
 	/usr/sbin/asterisk 
 	;;
 stop)
-	[ -f /var/run/asterisk.pid ] && kill $(cat /var/run/asterisk.pid) >/dev/null 2>&1
+	[ -f /var/run/asterisk/asterisk.pid ] && \
+		kill $(cat /var/run/asterisk/asterisk.pid) >/dev/null 2>&1
 	;;
 restart)
 	sh $0 stop

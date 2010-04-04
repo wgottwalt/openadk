@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		95655596eb6e0e381d60a458f6a45fee
 PKG_DESCR:=		A tool to update dynamic dns services.
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_SITES:=		http://savannah.nongnu.org/download/updatedd/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
@@ -31,10 +32,7 @@ $(eval $(call PKG_template,UPDATEDD_MOD_OVH,updatedd-mod-ovh,${PKG_VERSION}-${PK
 $(eval $(call PKG_template,UPDATEDD_MOD_REGFISH,updatedd-mod-regfish,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,UPDATEDD_MOD_TZO,updatedd-mod-tzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	ac_cv_lib_nsl_gethostbyname=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_UPDATEDD}/usr/bin

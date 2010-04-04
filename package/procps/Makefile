@@ -10,6 +10,7 @@ PKG_MD5SUM:=		f490bca772b16472962c7b9f23b1e97d
 PKG_DESCR:=		The /proc file system utilities
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP+=		ncurses
 PKG_URL:=		http://procps.sourceforge.net
 PKG_SITES:=		http://procps.sourceforge.net/
 
@@ -17,8 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PROCPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=          manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PROCPS}/{bin,sbin,usr/bin}

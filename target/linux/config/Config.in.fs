@@ -1,5 +1,9 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_MISC_FILESYSTEMS
+	boolean
+	default n
+
 config ADK_KERNEL_EXT3_FS_XATTR
 	boolean
 	default n
@@ -14,8 +18,14 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 
 config ADK_KPACKAGE_KMOD_EXPORTFS
 	tristate
+	depends on !ADK_KERNEL_EXPORTFS
 	default n
 	help
+
+config ADK_KERNEL_SQUASHFS
+	boolean
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	default n
 
 config ADK_KERNEL_EXT2_FS
 	boolean
@@ -25,7 +35,7 @@ config ADK_KPACKAGE_KMOD_EXT2_FS
 	prompt "kmod-fs-ext2...................... EXT2 filesystem support"
 	tristate
 	default n
-	depends on !ADK_TARGET_ROOTFS_EXT2_CF
+	depends on !ADK_TARGET_ROOTFS_EXT2_BLOCK
 	depends on !ADK_KERNEL_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
@@ -66,12 +76,14 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 config ADK_KERNEL_EXT4_FS
 	boolean
 	select ADK_KERNEL_CRC16
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
 	tristate
-	depends on !ADK_KERNEL_EXT4_FS
+	depends on !ADK_KERNEL_EXT4_FS 
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KPACKAGE_KMOD_CRC16
 	default n
 	help
@@ -79,8 +91,9 @@ config ADK_KPACKAGE_KMOD_EXT4_FS
 config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	prompt "kmod-fs-hfsplus................... HFS+ filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_UTF8
+	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
 	help
 	  If you say Y here, you will be able to mount extended format
@@ -97,7 +110,7 @@ source "package/ntfs-3g/Config.in"
 config ADK_KPACKAGE_KMOD_NTFS_FS
 	prompt "kmod-fs-ntfs...................... NTFS file system support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	default n
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
@@ -129,7 +142,7 @@ config ADK_KERNEL_FAT_FS
 config ADK_KPACKAGE_KMOD_VFAT_FS
 	prompt "kmod-fs-vfat...................... VFAT filesystem support"
 	select ADK_KERNEL_FAT_FS
-	select ADK_KPACKAGE_KMOD_NLS
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	tristate
@@ -170,20 +183,6 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
-#config ADK_KPACKAGE_KMOD_YAFFS_FS
-#	prompt "kmod-fs-yaffs..................... YAFFS1/2 filesystem support"
-#	tristate
-#	default n
-#	select ADK_KERNEL_YAFFS_FS
-#	select ADK_KERNEL_YAFFS_YAFFS1
-#	select ADK_KERNEL_YAFFS_YAFFS2
-#	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-#	select ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-#	help
-#	  Support for the YAFFS1 and YAFFS2 filesystems for the rb532 NAND
-#	  internal flash (for example). Say 'yes' here if you want to build
-#	  an initramfs for the Routerboard with access to internal flash.
-#
 config ADK_KPACKAGE_KMOD_FUSE_FS
 	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
 	tristate
@@ -231,7 +230,7 @@ config ADK_KPACKAGE_KMOD_UDF_FS
 config ADK_KERNEL_INOTIFY
 	prompt "inotify........................... Inotify file change notification support"
 	boolean
-	default y
+	default n
 	help
 	  Say Y here to enable inotify support.  Inotify is a file change
 	  notification system and a replacement for dnotify.  Inotify fixes
@@ -243,7 +242,7 @@ config ADK_KERNEL_INOTIFY_USER
 	prompt "inotify-user...................... Inotify support for userspace"
 	boolean
 	depends on ADK_KERNEL_INOTIFY
-	default y
+	default n
 	help
 	  Say Y here to enable inotify support for userspace, including the
 	  associated system calls.  Inotify allows monitoring of both files and

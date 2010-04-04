@@ -1,0 +1,157 @@
+diff -Nur linux-2.6.33.1.orig/arch/mips/ar7/platform.c linux-2.6.33.1/arch/mips/ar7/platform.c
+--- linux-2.6.33.1.orig/arch/mips/ar7/platform.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/arch/mips/ar7/platform.c	2010-03-28 19:26:53.000000000 +0200
+@@ -509,7 +509,7 @@
+ 
+ 	memset(uart_port, 0, sizeof(struct uart_port) * 2);
+ 
+-	uart_port[0].type = PORT_16550A;
++	uart_port[0].type = PORT_AR7;
+ 	uart_port[0].line = 0;
+ 	uart_port[0].irq = AR7_IRQ_UART0;
+ 	uart_port[0].uartclk = ar7_bus_freq() / 2;
+@@ -524,7 +524,7 @@
+ 
+ 	/* Only TNETD73xx have a second serial port */
+ 	if (ar7_has_second_uart()) {
+-		uart_port[1].type = PORT_16550A;
++		uart_port[1].type = PORT_AR7;
+ 		uart_port[1].line = 1;
+ 		uart_port[1].irq = AR7_IRQ_UART1;
+ 		uart_port[1].uartclk = ar7_bus_freq() / 2;
+diff -Nur linux-2.6.33.1.orig/arch/mips/ar7/prom.c linux-2.6.33.1/arch/mips/ar7/prom.c
+--- linux-2.6.33.1.orig/arch/mips/ar7/prom.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/arch/mips/ar7/prom.c	2010-03-28 19:26:53.000000000 +0200
+@@ -219,6 +219,14 @@
+ 	if (strstr(prom_getcmdline(), "console="))
+ 		return;
+ 
++#ifdef CONFIG_KGDB
++	if (!strstr(prom_getcmdline(), "nokgdb")) {
++		strcat(prom_getcmdline(), " console=kgdb");
++		kgdb_enabled = 1;
++		return;
++	}
++#endif
++
+ 	s = prom_getenv("modetty0");
+ 	if (s) {
+ 		baud = simple_strtoul(s, &p, 10);
+diff -Nur linux-2.6.33.1.orig/arch/mips/include/asm/page.h linux-2.6.33.1/arch/mips/include/asm/page.h
+--- linux-2.6.33.1.orig/arch/mips/include/asm/page.h	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/arch/mips/include/asm/page.h	2010-03-28 19:26:53.000000000 +0200
+@@ -200,8 +200,11 @@
+ #define VM_DATA_DEFAULT_FLAGS	(VM_READ | VM_WRITE | VM_EXEC | \
+ 				 VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC)
+ 
+-#define UNCAC_ADDR(addr)	((addr) - PAGE_OFFSET + UNCAC_BASE)
+-#define CAC_ADDR(addr)		((addr) - UNCAC_BASE + PAGE_OFFSET)
++#define UNCAC_ADDR(addr)       ((addr) - PAGE_OFFSET + UNCAC_BASE +    \
++                                PHYS_OFFSET)
++#define CAC_ADDR(addr)         ((addr) - UNCAC_BASE + PAGE_OFFSET -    \
++                                PHYS_OFFSET)
++
+ 
+ #include <asm-generic/memory_model.h>
+ #include <asm-generic/getorder.h>
+diff -Nur linux-2.6.33.1.orig/arch/mips/Kconfig linux-2.6.33.1/arch/mips/Kconfig
+--- linux-2.6.33.1.orig/arch/mips/Kconfig	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/arch/mips/Kconfig	2010-03-28 19:26:53.000000000 +0200
+@@ -34,7 +34,6 @@
+ 	select CEVT_R4K
+ 	select CSRC_R4K
+ 	select IRQ_CPU
+-	select NO_EXCEPT_FILL
+ 	select SWAP_IO_SPACE
+ 	select SYS_HAS_CPU_MIPS32_R1
+ 	select SYS_HAS_EARLY_PRINTK
+diff -Nur linux-2.6.33.1.orig/arch/mips/kernel/traps.c linux-2.6.33.1/arch/mips/kernel/traps.c
+--- linux-2.6.33.1.orig/arch/mips/kernel/traps.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/arch/mips/kernel/traps.c	2010-03-28 19:26:53.000000000 +0200
+@@ -1283,9 +1283,22 @@
+ 
+ 	exception_handlers[n] = handler;
+ 	if (n == 0 && cpu_has_divec) {
+-		*(u32 *)(ebase + 0x200) = 0x08000000 |
+-					  (0x03ffffff & (handler >> 2));
+-		local_flush_icache_range(ebase + 0x200, ebase + 0x204);
++              if ((handler ^ (ebase + 4)) & 0xfc000000) {
++                      /* lui k0, 0x0000 */
++                      *(u32 *)(ebase + 0x200) = 0x3c1a0000 | (handler >> 16);
++                      /* ori k0, 0x0000 */
++                      *(u32 *)(ebase + 0x204) =
++                                      0x375a0000 | (handler & 0xffff);
++                      /* jr k0 */
++                      *(u32 *)(ebase + 0x208) = 0x03400008;
++                      /* nop */
++                      *(u32 *)(ebase + 0x20C) = 0x00000000;
++                      flush_icache_range(ebase + 0x200, ebase + 0x210);
++              } else {
++                      *(u32 *)(ebase + 0x200) =
++                              0x08000000 | (0x03ffffff & (handler >> 2));
++                      flush_icache_range(ebase + 0x200, ebase + 0x204);
++              }
+ 	}
+ 	return (void *)old_handler;
+ }
+diff -Nur linux-2.6.33.1.orig/drivers/mtd/ar7part.c linux-2.6.33.1/drivers/mtd/ar7part.c
+--- linux-2.6.33.1.orig/drivers/mtd/ar7part.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/drivers/mtd/ar7part.c	2010-03-28 19:26:53.000000000 +0200
+@@ -28,7 +28,7 @@
+ #include <linux/bootmem.h>
+ #include <linux/magic.h>
+ 
+-#define AR7_PARTS	4
++#define AR7_PARTS	5
+ #define ROOT_OFFSET	0xe0000
+ 
+ #define LOADER_MAGIC1	le32_to_cpu(0xfeedfa42)
+@@ -122,14 +122,19 @@
+ 
+ 	ar7_parts[2].name = "linux";
+ 	ar7_parts[2].offset = pre_size;
+-	ar7_parts[2].size = master->size - pre_size - post_size;
++	ar7_parts[2].size = master->size - pre_size - post_size - 2*master->erasesize;
+ 	ar7_parts[2].mask_flags = 0;
+ 
+ 	ar7_parts[3].name = "rootfs";
+ 	ar7_parts[3].offset = root_offset;
+-	ar7_parts[3].size = master->size - root_offset - post_size;
++	ar7_parts[3].size = master->size - root_offset - post_size - 2*master->erasesize;
+ 	ar7_parts[3].mask_flags = 0;
+ 
++	ar7_parts[4].name = "cfgfs";
++	ar7_parts[4].offset = master->size - 2*master->erasesize;
++	ar7_parts[4].size = 2*master->erasesize;
++	ar7_parts[4].mask_flags = 0;
++
+ 	*pparts = ar7_parts;
+ 	return AR7_PARTS;
+ }
+diff -Nur linux-2.6.33.1.orig/drivers/mtd/maps/physmap.c linux-2.6.33.1/drivers/mtd/maps/physmap.c
+--- linux-2.6.33.1.orig/drivers/mtd/maps/physmap.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/drivers/mtd/maps/physmap.c	2010-03-28 19:26:53.000000000 +0200
+@@ -79,7 +79,7 @@
+ 					"map_rom",
+ 					NULL };
+ #ifdef CONFIG_MTD_PARTITIONS
+-static const char *part_probe_types[] = { "cmdlinepart", "RedBoot", NULL };
++static const char *part_probe_types[] = { "cmdlinepart", "RedBoot", "ar7part", NULL };
+ #endif
+ 
+ static int physmap_flash_probe(struct platform_device *dev)
+diff -Nur linux-2.6.33.1.orig/drivers/serial/8250.c linux-2.6.33.1/drivers/serial/8250.c
+--- linux-2.6.33.1.orig/drivers/serial/8250.c	2010-03-15 17:09:39.000000000 +0100
++++ linux-2.6.33.1/drivers/serial/8250.c	2010-03-28 19:26:53.000000000 +0200
+@@ -2715,7 +2715,11 @@
+ {
+ 	struct uart_8250_port *up = (struct uart_8250_port *)port;
+ 
++#ifdef CONFIG_AR7
++	wait_for_xmitr(up, BOTH_EMPTY);
++#else
+ 	wait_for_xmitr(up, UART_LSR_THRE);
++#endif
+ 	serial_out(up, UART_TX, ch);
+ }
+ 

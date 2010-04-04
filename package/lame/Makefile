@@ -18,17 +18,13 @@ PKG_SECTION_1:=		libs
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LAME,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/lame $(IDIR_LAME)/usr/bin/
 	$(INSTALL_DIR) $(IDIR_LIBLAME)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/lib*.so* $(IDIR_LIBLAME)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libmp3lame.so* $(IDIR_LIBLAME)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

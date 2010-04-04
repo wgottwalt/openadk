@@ -4,9 +4,14 @@
 TOPDIR:=	$(shell pwd)
 PWD:=		${TOPDIR}
 
+include Makefile.inc
+
+ADKVERSION=	0.1.0
+export ADKVERSION
+
 ifneq (${package},)
 subdir:=	package/${package}
-_subdir_dep:=	${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 endif
 
 ifneq (${subdir},)

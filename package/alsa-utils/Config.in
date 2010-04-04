@@ -1,7 +1,0 @@
-config ADK_PACKAGE_ALSA_UTILS
-	prompt "alsa-utils........................ ALSA utilities / mixer"
-	tristate
-	default n
-	help
-	  
-	  http://www.alsa-project.org/

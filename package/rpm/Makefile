@@ -4,13 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpm
-PKG_VERSION:=		4.7.0
+PKG_VERSION:=		4.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		74791d638c571ec79f06227d453a6a03
-PKG_DESCR:=		GNU rpm
+PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
+PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
+PKG_BUILDDEP+=		nss libdb
 PKG_URL:=		http://www.rpm.org
 PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
+
+PKG_TARGET_DEPENDS:=    !foxboard
 
 DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
 
@@ -20,11 +23,8 @@ $(eval $(call PKG_template,RPM,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr \
 			-I${STAGING_DIR}/usr/include/nss
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS:=	--with-external-db \
 			--without-lua
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_RPM)/usr/bin $(IDIR_RPM)/usr/lib

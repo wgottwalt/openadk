@@ -16,14 +16,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBAUDIOFILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--with-build-cc=${HOSTCC}
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBAUDIOFILE}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libaudiofile.so.* ${IDIR_LIBAUDIOFILE}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libaudiofile.so* ${IDIR_LIBAUDIOFILE}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

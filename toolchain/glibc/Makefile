@@ -10,20 +10,19 @@ include ${TOPDIR}/mk/buildhlp.mk
 # glibc does not compile with Os
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 
-GLIBC_CONFOPTS:=          \
+GLIBC_CONFOPTS:=        \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
 			--disable-nls \
 			--disable-sanity-checks \
-			--disable-nls \
 			--without-cvs \
 			--disable-profile \
 			--disable-debug \
+			--enable-kernel="2.6.0" \
 			--without-gd \
 			--with-__thread \
 			--with-tls \
-			--enable-kernel="2.6.0" \
 			--enable-add-ons
 
 GLIBC_ENV:=		PATH='${TARGET_PATH}' \
@@ -33,14 +32,17 @@ GLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \
 			AR=${REAL_GNU_TARGET_NAME}-ar \
 			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
-			LD=${REAL_GNU_TARGET_NAME}-ld \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
 			libc_cv_slibdir="/lib"
 
-ifeq ($(ADK_DEVICE_NO_FPU),y)
+ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp
+endif
+
+ifeq (${ADK_MAKE_PARALLEL},y)
+GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j${ADK_MAKE_JOBS}"
 endif
 
 GLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
@@ -48,24 +50,27 @@ GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
+	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
+	ln -sf ../../w-glibc-ports-2.11-1/glibc-ports-2.11/ ports);
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
+		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
-		--prefix=/usr \
-		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
-		${GLIBC_CONFOPTS} \
+			--prefix=/usr \
+			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+			${GLIBC_CONFOPTS} \
 	);
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	$(MAKE) -C $(GLIBC_BUILD_DIR_INITIAL) \
+	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
+	-${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_INITIAL) \
 		cross-compiling=yes \
 		install_root=$(TOOLCHAIN_SYSROOT) \
 		install-headers
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/bits/stdio_lim.h
 	touch $@
 
-$(WRKBUILD)/.configured: 
+$(WRKBUILD)/.configured:
 	mkdir -p $(GLIBC_BUILD_DIR_FINAL)
 	(cd $(GLIBC_BUILD_DIR_FINAL); \
 		${GLIBC_ENV} \
@@ -78,11 +83,12 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) all
+	${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed:
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
+	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
+		install_root=$(STAGING_DIR) install
 	touch $(STAGING_DIR)/usr/include/gnu/stubs.h
 	touch $@
 

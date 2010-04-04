@@ -1,5 +1,5 @@
---- nss-3.12.3.orig/mozilla/security/coreconf/Linux.mk	2008-09-06 01:17:23.000000000 +0200
-+++ nss-3.12.3/mozilla/security/coreconf/Linux.mk	2009-06-24 19:11:27.470840369 +0200
+--- nss-3.12.4.orig/mozilla/security/coreconf/Linux.mk	2009-07-30 01:43:41.000000000 +0200
++++ nss-3.12.4/mozilla/security/coreconf/Linux.mk	2009-12-11 20:45:13.000000000 +0100
 @@ -46,9 +46,9 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif
@@ -13,3 +13,21 @@
  
  DEFAULT_COMPILER = gcc
  
+@@ -135,7 +135,7 @@ OS_PTHREAD = -lpthread 
+ endif
+ 
+ OS_CFLAGS		= $(DSO_CFLAGS) $(OS_REL_CFLAGS) $(ARCHFLAG) -ansi -Wall -Werror-implicit-function-declaration -Wno-switch -pipe -DLINUX -Dlinux -D_POSIX_SOURCE -D_BSD_SOURCE -DHAVE_STRERROR
+-OS_LIBS			= $(OS_PTHREAD) -ldl -lc
++OS_LIBS			= $(OS_PTHREAD)
+ 
+ ifdef USE_PTHREADS
+ 	DEFINES		+= -D_REENTRANT
+@@ -151,7 +151,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG)
+ ZDEFS_FLAG		= -Wl,-z,defs
+ DSO_LDOPTS		+= $(if $(findstring 2.11.90.0.8,$(shell ld -v)),,$(ZDEFS_FLAG))
+ DSO_LDFLAGS		=
+-LDFLAGS			+= $(ARCHFLAG)
++#LDFLAGS			+= $(ARCHFLAG)
+ 
+ # INCLUDES += -I/usr/include -Y/usr/include/linux
+ G++INCLUDES		= -I/usr/include/g++

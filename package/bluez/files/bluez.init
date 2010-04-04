@@ -13,7 +13,7 @@ start)
 	bluetoothd
 	;;
 stop)
-	killall bluetoothd
+	pkill bluetoothd
 	;;
 restart)
 	sh $0 stop

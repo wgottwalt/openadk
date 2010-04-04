@@ -5,13 +5,6 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
-
-ifeq ($(ADK_CXX),y)
-TARGET_LANGUAGES:=	c,c++
-else
-TARGET_LANGUAGES:=	c
-endif
-
 GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
@@ -24,23 +17,14 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-biarch \
+			--disable-decimal-float \
 			--disable-multilib \
 			--disable-sjlj-exceptions \
-			--disable-nls 
+			--disable-libssp \
+			--disable-libstdcxx-pch \
+			--disable-nls
 
-#ifeq ($(ADK_LINUX_ARM_TOMTOM),y)
-#GCC_CONFOPTS+=		--enable-sjlj-exceptions
-#else
-#GCC_CONFOPTS+=		--disable-sjlj-exceptions
-#endif
-
-ifeq ($(ADK_SSP),y)
-GCC_CONFOPTS+=		--enable-libssp
-else
-GCC_CONFOPTS+=		--disable-libssp
-endif
-
-ifeq ($(ADK_DEVICE_NO_FPU),y)
+ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 
@@ -50,6 +34,12 @@ endif
 
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 GCC_CONFOPTS+=		--disable-tls
+else
+GCC_CONFOPTS+=		--enable-tls
+endif
+
+ifeq (${ADK_MAKE_PARALLEL},y)
+GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
 include ${TOPDIR}/mk/buildhlp.mk
@@ -73,7 +63,7 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 
 $(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) all-gcc 
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
 	touch $@
 
 $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
@@ -93,6 +83,8 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
+			--disable-threads \
+			--with-newlib \
 			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 	);
 	touch $@
@@ -100,12 +92,12 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) all
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install
+	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 	touch $@
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
@@ -114,7 +106,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		PATH=$(TARGET_PATH) \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
-			--enable-languages=$(TARGET_LANGUAGES) \
+			--enable-languages=c,c++ \
 			--with-sysroot=$(STAGING_DIR) \
 			--with-slibdir=$(STAGING_DIR)/lib \
 			--enable-shared \
@@ -123,7 +115,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 	PATH=$(TARGET_PATH) \
-	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) all
+	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -138,7 +130,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		cd bin; \
 		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
 			ln -sf $${app} \
-		   	$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
+				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done; \
 	)
 	touch $@

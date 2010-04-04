@@ -4,11 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
-PKG_VERSION:=		1.0.20
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		6837e673ef19da96d8bd2f9e18cd9574
+PKG_VERSION:=		1.0.22
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
-PKG_SECTION:=		libs
+PKG_SECTION:=		utils
+PKG_DEPENDS:=		alsa-lib libpthread
+PKG_BUILDDEP+=		alsa-lib
 PKG_URL:=		http://www.alsa-project.org
 PKG_SITES:=		ftp://ftp.task.gda.pl/pub/linux/misc/alsa/utils/ \
 			ftp://ftp.alsa-project.org/pub/utils/
@@ -19,10 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ALSA_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-alsamixer
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ALSA_UTILS}/usr/bin 

@@ -5,9 +5,11 @@ This is a menu based buildsystem for your home made embedded Linux system.
 
 Before you can start you need to install some tools: 
 - bash
+- mksh
 - gcc 
 - binutils 
 - GNU make
+- GNU m4
 - GNU tar
 - GNU awk
 - GNU sed
@@ -16,22 +18,18 @@ Before you can start you need to install some tools:
 - bzip2
 - cpio 
 - wget
-- flex
-- bison
-- gperf
 - file
 - unzip
-- autoconf
-- automake
-- zlib-dev / libz-dev
-- libncurses5-dev
-- libc-dev
+- libc headers
+- ncurses5 headers
+- zlib headers
+- perl
 
-There is a check for the required versions of these tools in advance, though
+There is a check for the required versions of these tools in advance, though.
 (to re-issue the checks, use "make prereq").
 
-Please use "make menuconfig" to choose your embedded system and configure like you
-want to.
+Please use "make menuconfig" to choose your embedded system and configure 
+like you want to.
 
 Simply running 'make' will build the firmware for your embedded system.  The
 buildsystem will download all sources, build the toolchain, the kernel and all

@@ -12,25 +12,25 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.python.org
 PKG_SITES:=		http://www.python.org/ftp/python/3.1.1/
 
+PKG_HOST_DEPENDS:=	!netbsd !openbsd
+
 DISTFILES=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
+
+DISMOD:=		readline _curses _curses_panel _tkinter nis
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PYTHON,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
-			HOSTPYTHON=hostpython \
-			HOSTPGEN=hostpgen \
-			CROSS_COMPILE=yes
-
-CONFIGURE_STYLE:=	gnu
+			HOSTPYTHON=./hostpython \
+			HOSTPGEN=./Parser/hostpgen \
+			PYTHON_DISABLE_MODULES="$(DISMOD)"
 CONFIGURE_ENV+=		OPT="$(TARGET_CFLAGS)"
-CONFGIURE_ARGS:=	--with-threads \
+CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--without-cxx-main
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
@@ -39,10 +39,10 @@ pre-configure:
 		--prefix=$(STAGING_TOOLS) \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
-	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/hostpgen
+	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/pgen
 	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C ${WRKBUILD} HOSTPYTHON="hostpython" sharedmods install
+	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
+	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} distclean
 
 post-install:

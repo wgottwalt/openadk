@@ -6,13 +6,9 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xf86dga
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libXxf86dga
 PKG_MD5SUM:=		ac30b5705f487554c5de0b466e846c31
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 include ${TOPDIR}/mk/pkg-bottom.mk

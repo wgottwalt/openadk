@@ -8,20 +8,22 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		switch configuration utility
 PKG_SECTION:=		misc
+PKG_DEPENDS:=		libnl
+PKG_BUILDDEP+=		libnl
 
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
+PKG_TARGET_CONFIG:=	rb433
+
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SWCONFIG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS:=		LIBS="-lnl -lm" CFLAGS="$(TARGET_CFLAGS) -I$(LINUX_DIR)/include"
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
-do-configure:
-	mkdir -p ${WRKBUILD}
-	${CP} ./src/* ${WRKBUILD}
+XAKE_FLAGS:=		LIBS="-lnl -lm" CFLAGS="$(TARGET_CFLAGS) \
+			-I$(LINUX_DIR)/include"
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SWCONFIG}/sbin

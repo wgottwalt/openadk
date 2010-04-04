@@ -1,9 +1,0 @@
-$Id$
---- dsniff-2.4.orig/dsniff.services	2000-12-15 21:10:58.000000000 +0100
-+++ dsniff-2.4/dsniff.services	2007-01-23 00:20:48.000000000 +0100
-@@ -66,5 +66,3 @@ napster		8888/tcp
- aim		9898/tcp
- pcanywhere	65301/tcp
- mountd		100005/rpc
--ypserv		100004/rpc
--yppasswd	100009/rpc

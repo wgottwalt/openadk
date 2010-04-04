@@ -4,22 +4,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
-PKG_VERSION:=		0.1.1.26
-PKG_RELEASE:=		9
-PKG_MD5SUM:=		0667df7a1f670bee5163b607aea172ba
+PKG_VERSION:=		0.2.1.24
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		cb5629b2709ada82d34c22fef3ed77a9
 PKG_DESCR:=		An anonymous Internet communication system
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libevent libopenssl libpthread zlib
+PKG_DEPENDS:=		libevent libopenssl zlib libpthread
+PKG_BUILDDEP+=		libevent openssl zlib
 PKG_URL:=		http://tor.eff.org
 PKG_SITES:=		http://tor.eff.org/dist/ \
-			http://ftp.se.linux.org/crypto/tor/ \
-			http://tor.meulie.net/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			ac_cv_libevent_linker_option="" \
 			ac_cv_libevent_dir="${STAGING_DIR}/usr" \
@@ -28,8 +26,6 @@ CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			tor_cv_time_t_signed=yes \
 			tor_cv_null_is_zero=yes \
 			tor_cv_unaligned_ok=yes
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TOR}/usr/bin ${IDIR_TOR}/etc/tor

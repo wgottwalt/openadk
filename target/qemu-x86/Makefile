@@ -8,22 +8,44 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 kernel-install:
-	cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/kernel
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
+		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+
+createinit:
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
+	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
+		$(LINUX_DIR)/.config
+	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
+	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
+	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" $(MAKE_TRACE)
+	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo "Use following command to create a QEMU Image:"
-	@echo "sudo ./scripts/create-image.sh qemu.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following command line:"
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel qemu-${CPU_ARCH}.img'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${DEVICE}-${ARCH}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu -nographic -kernel $(BIN_DIR)/${DEVICE}-${ARCH}-kernel -initrd ${BIN_DIR}/${INITRAMFS} -append "console=ttyS0"'
+	@echo "Start qemu with following command line:"
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif
+
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo "Start qemu with following command line:"
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

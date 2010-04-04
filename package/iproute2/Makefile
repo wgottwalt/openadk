@@ -9,13 +9,16 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		c1bc258a6c345905e79935ac7a3cc582
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		net
+ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
+PKG_BUILDDEP+=		linux-atm
+endif
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://developer.osdl.org/dev/iproute2/download/
 
 PKG_DESCR_TC:=		iproute2 traffic control utility
 PKG_DEPENDS_TC:=	kmod-sched
 PKG_DESCR_TC_ATM:=	iproute2 traffic control ATM support library
-PKG_DEPENDS_TC_ATM:=	tc
+PKG_DEPENDS_TC_ATM:=	tc libatm
 PKG_DESCR_IFSTAT:=	iproute2 interface statistics utility
 PKG_DESCR_LNSTAT:=	iproute2 network statistics utilities
 PKG_DESCR_ROUTEL:=	iproute2 route list and flush utilities
@@ -35,11 +38,11 @@ $(eval $(call PKG_template,ROUTEL,routel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,RTMON,rtmon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_RTMON},${PKG_DESCR_RTMON},${PKG_SECTION}))
 $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SS},${PKG_DESCR_SS},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+TCFLAGS+=		-D_GNU_SOURCE
+XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \
+			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
+
 CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
-MAKE_FLAGS+=		MFLAGS="CC=${TARGET_CC}"
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 INSTALL_y:=
 INSTALL_m:=
@@ -66,7 +69,8 @@ install-tc:
 
 install-tc-atm:
 	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
-	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so ${IDIR_TC_ATM}/usr/lib/tc/
+	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/usr/lib/tc/
 
 install-ifstat:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin

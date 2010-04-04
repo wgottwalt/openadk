@@ -5,33 +5,35 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.41.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		52f60a9e19a02f142f5546f1b5681927
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		admin
+PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
-PKG_DESCR_1:=		UUID library
-PKG_SECTION_1:=		libs
-PKG_DESCR_2:=		Common error library
-PKG_SECTION_2:=		libs
-PKG_DESCR_3:=		Libblkid
-PKG_SECTION_3:=		libs
+PKG_DESCR_UUID:=	UUID library
+PKG_SECTION_UUID:=	libs
+PKG_DESCR_COM_ERR:=	Common error library
+PKG_SECTION_COM_ERR:=	libs
+PKG_DESCR_BLKID:=	Libblkid
+PKG_SECTION_BLKID:=	libs
+PKG_DESCR_SS:=		Subsystem command parsing library
+PKG_SECTION_SS:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION_1}))
-$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION_2}))
-$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION_3}))
+$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_UUID},${PKG_SECTION_UUID}))
+$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_COM_ERR},${PKG_SECTION_COM_ERR}))
+$(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_SS},${PKG_SECTION_SS}))
+$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
 
-CONFIGURE_STYLE=	gnu
+XAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-tls \
 			--enable-dynamic-e2fsck
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 INSTALL_TARGET+=	install-libs
 
 pre-build:
@@ -51,19 +53,24 @@ post-install:
 		${IDIR_E2FSPROGS}/usr/lib/
 	# subpackage libblkid
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libblkid.so.* \
+	${CP} ${WRKINST}/usr/lib/libblkid.so* \
 		${IDIR_LIBBLKID}/usr/lib/
 	# subpackage libcom_err
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcom_err.so.* \
+	${CP} ${WRKINST}/usr/lib/libcom_err.so* \
 		${IDIR_LIBCOM_ERR}/usr/lib/
+	# subpackage libss
+	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libss.so* \
+		${IDIR_LIBSS}/usr/lib/
 	# subpackage libuuid
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libuuid.so.* \
+	${CP} ${WRKINST}/usr/lib/libuuid.so* \
 		${IDIR_LIBUUID}/usr/lib/
-	# install some headers explicitely
+	# install some headers/apps explicitely
 	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
 		${STAGING_DIR}/usr/include/uuid
+	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_TOOLS}/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

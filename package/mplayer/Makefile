@@ -4,30 +4,28 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0rc2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		7e27e535c2d267637df34898f1b91707
+PKG_VERSION:=		1.0-29987
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
-PKG_DEPENDS:=		zlib libncurses libmad alsa-lib libvorbis libogg libfaad2 libpthread libpng libjpeg
+PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
+PKG_DEPENDS+=		libogg libpng libpthread libvorbis
+PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
+PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
+PKG_BUILDDEP+=		libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu
-PKG_SITES:=		http://www7.mplayerhq.hu/MPlayer/releases/
+PKG_SITES:=		http://openadk.org/distfiles/
 
-DISTFILES:=             MPlayer-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIG_STYLE:=		manual
 
-ifeq ($(ADK_X11),y)
-CONFIGURE_ARG:=		--enable-x11
-else
-CONFIGURE_ARG:=		--disable-x11
-endif
+FAKE_FLAGS+=		INSTALLSTRIP=''
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
 CONFIGURE_CPU_OPTS:=	\
@@ -35,8 +33,8 @@ CONFIGURE_CPU_OPTS:=	\
 			--disable-sse2 \
 			--disable-sse \
 			--enable-mmxext \
-			--enable-3dnowext \
 			--enable-mmx \
+			--enable-3dnowext \
 			--enable-3dnow
 else
 CONFIGURE_CPU_OPTS:=	\
@@ -49,24 +47,26 @@ CONFIGURE_CPU_OPTS:=	\
 			--disable-3dnow
 endif
 
+ifeq ($(ADK_DEBUG),y)
+	CONFIGURE_DEBUG=--enable-debug
+endif
+
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
+		--enable-x11 \
 		--prefix=/usr \
 		--confdir=/etc \
 		--enable-cross-compile \
 		--target=$(REAL_GNU_TARGET_NAME) \
 		--cc=$(TARGET_CC) \
 		--host-cc=$(HOSTCC) \
-		--with-extraincdir=$(STAGING_DIR)/usr/include \
-		--with-extralibdir=$(STAGING_DIR)/usr/lib \
 		--disable-mencoder \
 		--enable-fbdev \
 		--enable-alsa \
 		--enable-png \
 		--enable-jpeg \
 		--enable-mad \
-		--enable-faad-external \
 		--disable-faad-internal \
 		--enable-libvorbis \
 		--disable-ossaudio \
@@ -81,14 +81,12 @@ pre-configure:
 		--disable-ftp \
 		--disable-v4l2 \
 		--disable-ivtv \
-		--disable-vidix-internal \
 		--disable-dvdread-internal \
 		--disable-libdvdcss-internal \
 		--disable-freetype \
 		--disable-tremor-internal \
 		--disable-arts \
 		--disable-esd \
-		--disable-polyp \
 		--disable-jack \
 		--disable-openal \
 		--disable-nas \
@@ -99,11 +97,12 @@ pre-configure:
 		--disable-pnm \
 		--disable-md5sum \
 		--disable-liblzo \
+		--disable-xinerama \
+		--disable-vidix \
 		${CONFIGURE_CPU_OPTS} \
-		${CONFIGURE_ARG} \
+		${CONFIGURE_DEBUG} \
 	);
 	
-
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
 	${CP} ${WRKINST}/usr/bin/mplayer ${IDIR_MPLAYER}/usr/bin

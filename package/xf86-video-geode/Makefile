@@ -4,21 +4,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.10.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4e331f6f608f23b64f0a5354908af09a
+PKG_VERSION:=		2.11.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a673c0f88037d12fbb96d9fefc82785b
 PKG_DESCR:=		X11 driver for AMD Geode VGA chip
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		xorg-server
+PKG_BUILDDEP+=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
+
+PKG_TARGET_DEPENDS:=	alix1c
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_GEODE,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_GEODE}/usr/lib/xorg/modules/drivers

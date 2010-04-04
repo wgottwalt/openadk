@@ -46,6 +46,7 @@ config ADK_KERNEL_DM_CRYPT
 
 config ADK_KERNEL_BLK_DEV_DM
 	select ADK_KERNEL_MD
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	boolean
 	default n
 
@@ -58,6 +59,7 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
+	depends on ADK_LINUX_X86_64_SHUTTLE
 	default n	
 
 config ADK_KPACKAGE_KMOD_SATA_AHCI
@@ -65,8 +67,9 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	tristate
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
-	select ADK_KPACKAGE_KMOD_BLK_DEV_SD
+	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
+	depends on ADK_LINUX_X86_64_SHUTTLE
 	default n
 	help
 	  Enables support for AHCI Serial ATA.
@@ -173,6 +176,7 @@ config ADK_KPACKAGE_KMOD_SCSI
 	select ADK_KERNEL_LSF
 	select ADK_KERNEL_IOSCHED_AS
 	depends on !ADK_KERNEL_SCSI
+	depends on !ADK_KERNEL_SATA_AHCI
 	tristate
 	help
 	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
@@ -188,8 +192,8 @@ config ADK_KPACKAGE_KMOD_SCSI
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 	prompt "kmod-scsi-disk.................... SCSI disk support"
-	depends on !ADK_KERNEL_SCSI
-	depends on ADK_KPACKAGE_KMOD_SCSI
+	select ADK_KPACKAGE_KMOD_SCSI
+	depends on !ADK_KERNEL_BLK_DEV_SD
 	tristate
 	help
 	  If you want to use SCSI hard disks, Fibre Channel disks,
@@ -213,12 +217,14 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 config ADK_KERNEL_BLK_DEV_MD
 	tristate
 	select ADK_KERNEL_MD
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	prompt "kmod-md........................... RAID support"
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KERNEL_MD
 	help
 
@@ -253,7 +259,7 @@ config ADK_KPACKAGE_KMOD_MD_RAID456
 config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	prompt "kmod-dm........................... Device Mapper support"
 	select ADK_KERNEL_MD
-	depends on !ADK_KERNEL_BLK_DEV_DM
+	depends on !(ADK_KERNEL_BLK_DEV_DM || ADK_LINUX_CRIS_FOXBOARD)
 	tristate
 	help
 	  Device-mapper is a low level volume manager.  It works by allowing
@@ -265,8 +271,8 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 
 config ADK_KPACKAGE_KMOD_DM_CRYPT
 	prompt "kmod-dm-crypt................... Crypt target support"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
-	depends on !ADK_KERNEL_DM_CRYPT
+	depends on !(ADK_KERNEL_DM_CRYPT || ADK_LINUX_CRIS_FOXBOARD)
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	select ADK_KERNEL_MD
 	select ADK_KERNEL_CRYPTO
 	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
@@ -283,14 +289,16 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
 	prompt "kmod-dm-snapshot................ Snapshot target"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KPACKAGE_KMOD_DM_MIRROR
 	prompt "kmod-dm-mirror.................. Mirror target"
-	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
          Allow volume managers to mirror logical volumes, also

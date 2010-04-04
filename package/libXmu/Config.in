@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBXMU
-	prompt "libXmu................................. X library"
-	tristate
-	default n
-	help
-         http://www.x.org

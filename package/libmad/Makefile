@@ -26,12 +26,9 @@ endif
 #FPM:=mips
 #endif
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-fpm=${FPM} \
 			--disable-debugging \
 			--enable-speed
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 pre-install:
 	${INSTALL_DIR} ${WRKINST}/usr/lib/pkgconfig

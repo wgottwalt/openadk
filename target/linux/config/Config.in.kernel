@@ -2,11 +2,39 @@ config ADK_KERNEL_BLK_DEV_INITRD
 	bool
 	default n
 
+config ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
+	bool
+	default n
+
+config ADK_KERNEL_RD_GZIP
+	bool
+	default n
+
+config ADK_KERNEL_KERNEL_GZIP
+	bool
+	default n
+
+config ADK_KERNEL_RD_BZIP2
+	bool
+	default n
+
+config ADK_KERNEL_KERNEL_BZIP2
+	bool
+	default n
+
 config ADK_KERNEL_RD_LZMA
 	bool
 	default n
 
-config ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+config ADK_KERNEL_KERNEL_LZMA
+	bool
+	default n
+
+config ADK_KERNEL_RD_LZO
+	bool
+	default n
+
+config ADK_KERNEL_KERNEL_LZO
 	bool
 	default n
 
@@ -67,29 +95,3 @@ config ADK_KERNEL_NFS_COMMON
 config ADK_KERNEL_SUNRPC
 	boolean
 	default n
-
-#config ADK_KERNEL_YAFFS_FS
-#	tristate
-#	default n
-
-#config ADK_KERNEL_YAFFS_YAFFS1
-#	boolean
-#	default n
-
-#config ADK_KERNEL_YAFFS_YAFFS2
-#	boolean
-#	default n
-
-#config ADK_KERNEL_YAFFS_AUTO_YAFFS2
-#	boolean
-#	default n
-
-#config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
-#	int
-#	default 0
-
-#config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-#	boolean
-#	default n
-
-

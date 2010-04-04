@@ -18,13 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-
-do-build:
-	${MAKE} CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS}" -C ${WRKBUILD} ${PKG_NAME}
-
-do-install:
-	${INSTALL_DIR} ${IDIR_FPING}/usr/bin
-	${CP} ${WRKBUILD}/${PKG_NAME} ${IDIR_FPING}/usr/bin/${PKG_NAME}
+post-install:
+	${INSTALL_DIR} ${IDIR_FPING}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/fping ${IDIR_FPING}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

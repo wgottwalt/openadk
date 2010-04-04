@@ -4,14 +4,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		4.7.0
+PKG_VERSION:=		4.9.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b077e3398bd6fac0e53e9df4794db264
+PKG_MD5SUM:=		31a63d8e3a796dee247024f70426ed1c
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		console
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://collectd.org
 PKG_SITES:=		http://collectd.org/files/
+
+PKG_FLAVOURS:=		CPU LOAD MEMORY PING
+PKGFD_CPU:=		collect CPU statistics
+PKGFD_LOAD:=		collect system load statistics
+PKGFD_MEMORY:=		collect memory usage statistics
+PKGFD_PING:=		enable ping statistic plugin
 
 include ${TOPDIR}/mk/package.mk
 
@@ -30,7 +36,6 @@ ifneq (${ADK_PACKAGE_COLLECTD_PING},y)
 DISABLE_PING:=--disable-ping
 endif
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-apache \
 			--disable-apcups \
 			--disable-apple_sensors \
@@ -38,6 +43,7 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-battery \
 			${DISABLE_CPU} \
 			--disable-cpufreq \
+			--disable-contextswitch \
 			--disable-disk \
 			--enable-csv \
 			--disable-df \
@@ -53,12 +59,14 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-ipvs \
 			--disable-irq \
 			${DISABLE_LOAD} \
+			--disable-madwifi \
 			--disable-mbmon \
 			--disable-memcached \
 			${DISABLE_MEMORY} \
 			--disable-multimeter \
 			--disable-mysql \
 			--disable-openvpn \
+			--disable-python \
 			--disable-postgresql \
 			--disable-powerdns \
 			--disable-network \
@@ -84,18 +92,23 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--disable-unixsock \
 			--disable-users \
 			--disable-vserver \
-			--enable-wireless \
+			--disable-wireless \
+			--disable-write_http \
 			--with-fp-layout=nothing \
 			--without-java \
+			--without-python \
+			--without-libiptc \
 			--with-nan-emulation
 
 XAKE_FLAGS+=		LIBS='-lm'
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
-	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/sbin ${IDIR_COLLECTD}/usr/lib/collectd
-	${CP} ${WRKINST}/usr/sbin/collectd ${IDIR_COLLECTD}/usr/sbin/
-	${CP} ${WRKINST}/usr/lib/collectd/*.so ${IDIR_COLLECTD}/usr/lib/collectd/
+	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/lib/collectd \
+		${IDIR_COLLECTD}/usr/sbin/ ${IDIR_COLLECTD}/etc
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/collectd ${IDIR_COLLECTD}/usr/sbin/
+	${CP} ${WRKINST}/usr/lib/collectd/*.so \
+		${IDIR_COLLECTD}/usr/lib/collectd/
+	${INSTALL_DATA} ./files/collectd.conf \
+		${IDIR_COLLECTD}/etc
 
 include ${TOPDIR}/mk/pkg-bottom.mk

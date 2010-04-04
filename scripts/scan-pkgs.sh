@@ -18,13 +18,27 @@ test -z "$BASH_VERSION$KSH_VERSION" && exec $BASH $0 "$@"
 
 [[ -n $BASH_VERSION ]] && shopt -s extglob
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-OStype=$(env NOFAKE=yes uname)
+OStype=$(uname)
 out=0
 
 . $topdir/.config
 
-if [[ -n $ADK_PACKAGE_ALSA_UTILS ]]; then
-	NEED_XMLTO="$NEED_XMLTO alsa-utils"
+if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_GIT ]];then
+		NEED_CURLDEV="$NEED_CURLDEV git"
+		NEED_SSLDEV="$NEED_SSLDEV git"
+	fi
+	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
+		NEED_RPM="$NEED_RPM rpm"
+	fi
+fi
+
+if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
+	NEED_BISON="$NEED_BISON libusb"
+fi
+
+if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
+	NEED_BISON="$NEED_BISON heimdal-server"
 fi
 
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
@@ -37,18 +51,52 @@ fi
 
 if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_SSLDEV="$NEED_SSLDEV squid"
+	NEED_GXX="$NEED_GXX squid"
 fi
 
-#if [[ -n $ADK_PACKAGE_RUBY ]]; then
-#	NEED_RUBY="$NEED_RUBY ruby"
-#fi
-
-if [[ -n $ADK_PACKAGE_GLIB2 ]]; then
-	NEED_GLIBZWO="$NEED_GLIBZWO glib2"
-	NEED_GETTEXT="$NEED_GETTEXT glib2"
-	NEED_PKGCONFIG="$NEED_PKGCONFIG glib2"
+if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then
+	NEED_PKGCONFIG="$NEED_PKGCONFIG dansguardian"
 fi
 
+if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
+	NEED_INTL="$NEED_INTL xkeyboard-config"
+fi
+
+if [[ -n $ADK_PACKAGE_GLIB ]]; then
+	NEED_GLIBZWO="$NEED_GLIBZWO glib"
+	NEED_GETTEXT="$NEED_GETTEXT glib"
+	NEED_PKGCONFIG="$NEED_PKGCONFIG glib"
+fi
+
+if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
+	NEED_FLEX="$NEED_FLEX libpcap"
+	NEED_BISON="$NEED_BISON libpcap"
+fi
+
+if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
+	NEED_WWW="$NEED_WWW libXfont"
+	NEED_XMLTO="$NEED_XMLTO libXfont"
+fi
+
+if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
+	NEED_GPERF="$NEED_GPERF eglibc"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_100DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-100dpi"
+fi
+
+if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
+	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
+fi
 
 if [[ -n $NEED_GETTEXT ]]; then
 	if ! which xgettext >/dev/null 2>&1; then
@@ -60,12 +108,67 @@ if [[ -n $NEED_GETTEXT ]]; then
 	fi
 fi
 
+if [[ -n $NEED_CURLDEV ]];then
+	if ! test -f /usr/include/curl/curl.h >/dev/null; then
+		if ! test -f /usr/local/include/curl/curl.h >/dev/null; then
+			echo >&2 You need curl headers to build $NEED_CURLDEV
+			out=1
+		fi
+	fi
+fi
+
 if [[ -n $NEED_SSLDEV ]]; then
 	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
 		if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
 			echo >&2 You need openssl headers to build $NEED_SQUID
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_MKFONTDIR ]]; then
+	if ! which mkfontdir >/dev/null 2>&1; then
+		echo >&2 You need mkfontdir to build $NEED_MKFONTDIR
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_INTL ]]; then
+	if ! which intltool-update >/dev/null 2>&1; then
+		echo >&2 You need intltool-update to build $NEED_INTL
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_WWW ]]; then
+	if ! which w3m >/dev/null 2>&1; then
+		if ! which lynx >/dev/null 2>&1; then
+			if ! which links >/dev/null 2>&1; then
+				echo >&2 You need w3m/links/lynx to build $NEED_WWW
+				out=1
+			fi
+		fi
+	fi
+fi
+
+if [[ -n $NEED_BISON ]]; then
+	if ! which bison >/dev/null 2>&1; then
+		echo >&2 You need bison to build $NEED_BISON
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_GPERF ]]; then
+	if ! which gperf >/dev/null 2>&1; then
+		echo >&2 You need gperf to build $NEED_GPERF
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_GXX ]]; then
+	if ! which g++ >/dev/null 2>&1; then
+		echo >&2 You need GNU c++ compiler to build $NEED_GXX
+		out=1
 	fi
 fi
 
@@ -79,13 +182,6 @@ fi
 if [[ -n $NEED_XKBCOMP ]]; then
 	if ! which xkbcomp >/dev/null 2>&1; then
 		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_XMLTO ]]; then
-	if ! which xmlto >/dev/null 2>&1; then
-		echo >&2 You need xmlto to build $NEED_XMLTO
 		out=1
 	fi
 fi
@@ -111,9 +207,18 @@ if [[ -n $ADK_USE_CCACHE ]]; then
         fi
 fi
 
-#if [[ -n $ADK_COMPILE_MYSQL && $OStype != Linux ]]; then
-#	echo >&2 mySQL does not build on non-GNU/Linux.
-#	out=1
-#fi
+if [[ -n $NEED_RPM ]]; then
+	if ! which rpmbuild >/dev/null 2>&1; then
+		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_FLEX ]]; then
+	if ! which flex >/dev/null 2>&1; then
+		echo >&2 You need flex to to use $NEED_FLEX package
+		out=1
+	fi
+fi
 
 exit $out

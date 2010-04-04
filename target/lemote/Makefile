@@ -7,35 +7,43 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
-
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 createinit:
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
+	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
+		$(LINUX_DIR)/.config
+	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" $(MAKE_TRACE)
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+
+createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/mips/loongson/image/vmlinuz \
-		$(BIN_DIR)/${DEVICE}-${ARCH}-kernel
+	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
-	@echo 'PMON> load tftp://<ip-address-server>/lemote-mips-kernel'
-	@echo 'PMON> g no_auto_cmd root=/dev/nfs ip=dhcp init=/init'
+	@echo 'PMON> load tftp://<ip-address-server>/${ADK_TARGET}-${FS}-kernel'
+	@echo 'PMON> g'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),encrypted)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
-	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
+	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
 	@echo 'Boot your lemote via NFS or USB.'
 	@echo 'Then create at least three partitions with fdisk:'
 	@echo '/dev/sda1 (ext2)'
@@ -53,24 +61,29 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL) createinit
 	@echo 'mount /dev/mapper/crypt /mnt/root'
 	@echo 'mkdir /mnt/boot/boot'
 	@echo 
-	@echo 'Copy $(ROOTFSTARBALL) via scp to /mnt/root and extract it'
-	@echo 'cd /mnt/root ; gunzip $(ROOTFSTARBALL); tar xpvf $(ROOTFSTARBALL)'
-	@echo 'Copy ${DEVICE}-${ARCH}-kernel via scp to /mnt/boot/boot'
+	@echo 'Copy $(ROOTFSUSERTARBALL) via scp to /mnt/root and extract it'
+	@echo 'cd /mnt/root ; gunzip $(ROOTFSUSERTARBALL); tar xpvf $(ROOTFSUSERTARBALL)'
+	@echo 'Copy ${ADK_TARGET}-${FS}-kernel via scp to /mnt/boot/boot'
 	@echo 'Move boot.cfg to /mnt/boot/boot'
 	@echo 'mv /mnt/root/boot/boot.cfg /mnt/boot/boot'
 	@echo 'cd /mnt/root ; mknod -m 644 console c 5 1'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${DEVICE}-${ARCH}-kernel'
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

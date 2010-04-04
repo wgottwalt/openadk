@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4879f06570d2225667534c37fea04213
 PKG_DESCR:=		Filesystem in Userspace (utilities)
 PKG_SECTION:=		admin
-PKG_DEPENDS:=		kmod-fuse libfuse
+PKG_DEPENDS:=		kmod-fuse-fs
 PKG_URL:=		http://fuse.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
@@ -17,7 +17,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FUSE_UTILS,fuse-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-lib \
 			--disable-shared \
 			--enable-static \
@@ -26,8 +25,6 @@ CONFIGURE_ARGS+=	--enable-lib \
 			--disable-auto-modprobe \
 			--disable-mtab \
 			--disable-kernel-module
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FUSE_UTILS}/usr/bin

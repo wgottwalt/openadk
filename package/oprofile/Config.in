@@ -1,9 +1,0 @@
-config ADK_PACKAGE_OPROFILE
-	prompt "oprofile.......................... a system-wide profiler"
-	tristate
-	select ADK_PACKAGE_LIBPOPT
-	depends on ADK_CXX
-	default n
-	help
-	  http://oprofile.sourceforge.net
-

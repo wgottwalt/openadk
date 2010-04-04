@@ -14,7 +14,7 @@ start)
 	/usr/sbin/dnsmasq
 	;;
 stop)
-	killall dnsmasq
+	pkill dnsmasq
 	;;
 restart)
 	sh $0 stop

@@ -1,0 +1,32 @@
+#!/bin/sh
+#PKG dansguardian
+#INIT 80
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${dansguardian:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	if [ ! -f /var/log/dansguardian-access.log ];then
+		touch /var/log/dansguardian-access.log
+		chown proxy:proxy /var/log/dansguardian-access.log
+	fi
+	dansguardian
+	;;
+stop)
+	pkill dansguardian
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

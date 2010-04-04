@@ -1,6 +1,6 @@
---- squid-3.0.STABLE15.orig/src/HttpHeaderTools.cc	2009-05-06 13:11:40.000000000 +0200
-+++ squid-3.0.STABLE15/src/HttpHeaderTools.cc	2009-06-15 18:29:41.000000000 +0200
-@@ -356,7 +356,7 @@ httpHeaderParseQuotedString (const char 
+--- squid-3.0.STABLE20.orig/src/HttpHeaderTools.cc	2009-10-29 11:05:45.000000000 +0100
++++ squid-3.0.STABLE20/src/HttpHeaderTools.cc	2009-12-11 23:14:13.000000000 +0100
+@@ -357,7 +357,7 @@ httpHeaderParseQuotedString (const char 
      pos = start + 1;
  
      while (1) {

@@ -1,0 +1,24 @@
+config ADK_COMPILE_OPENSSH_WITH_KERBEROS
+       prompt "Enable Kerberos support"
+       bool
+       depends on ADK_COMPILE_OPENSSH
+
+choice
+prompt "Kerberos implementation"
+depends on ADK_COMPILE_OPENSSH_WITH_KERBEROS
+config ADK_COMPILE_OPENSSH_WITH_KRB5
+       prompt "MIT"
+       bool
+       select ADK_PACKAGE_KRB5_LIBS
+       help
+         Use MIT kerberos libraries.
+
+config ADK_COMPILE_OPENSSH_WITH_HEIMDAL
+       prompt "Heimdal"
+       bool
+       select ADK_COMPILE_HEIMDAL
+       select ADK_PACKAGE_HEIMDAL_LIBS
+       help 
+         Use heimdal kerberos libraries.
+
+endchoice

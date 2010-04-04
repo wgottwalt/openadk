@@ -9,26 +9,27 @@ PKG_RELEASE=		1
 PKG_MD5SUM=		57def26e4d6d63527e01612d10fd0515
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		admin
+PKG_BUILDDEP+=		libiconv neon
+ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
+PKG_BUILDDEP+=		fuse
+endif
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2
 PKG_SITES=		${MASTER_SITE_SOURCEFORGE:=dav/}
 
 include ${TOPDIR}/mk/package.mk
 
 ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)
-PKG_DEPENDS:=			fuse-utils, kmod-fuse, libfuse, libiconv, neon
+PKG_DEPENDS:=			fuse-utils kmod-fuse-fs libiconv neon
 else ifeq (${ADK_PACKAGE_DAVFS2_CODA},y)
-PKG_DEPENDS:=			kmod-fs-coda, libiconv, neon
+PKG_DEPENDS:=			kmod-coda-fs libiconv neon
 else
-PKG_DEPENDS:=			kmod-fs-coda, fuse-utils, kmod-fuse, libfuse, libiconv, neon
+PKG_DEPENDS:=			kmod-coda-fs fuse-utils kmod-fuse-fs libiconv neon
 endif
 
 $(eval $(call PKG_template,DAVFS2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-neon
 CONFIGURE_ENV+=		LIBS=-liconv
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DAVFS2}/etc/davfs2

@@ -4,14 +4,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.0.STABLE18
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		8cb529bb8e973c068366e453b9444614
+PKG_VERSION:=		3.0.STABLE20
+PKG_RELEASE:=		3
+PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
+PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.squid-cache.org
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
+PKG_MULTI:=		1
+#PKG_CXX:=		SQUID
+
+PKG_HOST_DEPENDS:=	!netbsd
 
 AUTH_MODULES:=		basic digest ntlm
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)
@@ -72,7 +77,12 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_grou
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 
-CONFIGURE_STYLE:=	autotool gnu
+#ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
+#CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+#			-I${STAGING_DIR}/usr/include/uClibc++" \
+#			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
+#endif
+
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \
@@ -101,12 +111,9 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-x-accelerator-vary \
 			--with-pthreads \
 			--with-dl \
-			--enable-icmp \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
 			--enable-ssl \
-			--disable-htcp \
-			--disable-esi \
 			--enable-err-languages=English \
 			--enable-default-err-language=English \
 			--enable-linux-netfilter \
@@ -116,6 +123,9 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-cache-digests \
 			--enable-referer-log \
 			--enable-delay-pools \
+			--disable-snmp \
+			--disable-esi \
+			--disable-htcp \
 			--disable-wccp \
 			--disable-wccpv2 \
 			--enable-useragent-log \
@@ -125,17 +135,24 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-ntlm-auth-helpers="${NTLM_AUTH_HELPERS}" \
 			--enable-digest-auth-helpers="${DIGEST_AUTH_HELPERS}" \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+
+#ifeq (${ADK_COMPILE_SQUID_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+#post-configure:
+#	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
+#	    ${WRKBUILD}/libtool
+#endif
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid
 	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf \
-			${WRKINST}/etc/squid/squid.conf ${IDIR_SQUID}/etc/squid/
+		${IDIR_SQUID}/etc/squid/
+	${INSTALL_DATA} ./files/squid.conf ${IDIR_SQUID}/etc/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid
 	${CP} ${WRKINST}/usr/share/squid/* ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd ${IDIR_SQUID}/usr/lib/squid
+	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd \
+		${IDIR_SQUID}/usr/lib/squid
 
 include ${TOPDIR}/mk/pkg-bottom.mk

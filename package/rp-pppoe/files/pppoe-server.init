@@ -14,7 +14,7 @@ start)
 	pppoe-server
 	;;
 stop)
-	killall pppoe-server
+	pkill pppoe-server
 	;;
 restart)
 	sh $0 stop

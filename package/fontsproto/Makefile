@@ -4,15 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fontsproto
-PKG_VERSION:=		2.0.2
+PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6c1efa12ae50262b45c91e9a120632b7
+PKG_MD5SUM:=		6819fc82585daac68cec17938b659bf0
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 include ${TOPDIR}/mk/pkg-bottom.mk

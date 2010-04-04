@@ -1,7 +1,0 @@
-config ADK_PACKAGE_LIBSTDCXX
-	prompt "libstdc++......................... C++ support library"
-	tristate
-	depends on ADK_CXX
-	default n
-	help
-	  C++ support library

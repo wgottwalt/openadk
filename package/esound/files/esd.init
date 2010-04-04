@@ -9,10 +9,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	esd -d /dev/sound/dsp -public -tcp -nobeeps
+	esd -public -tcp -nobeeps -noterminate &
 	;;
 stop)
-	killall esd
+	pkill esd
 	;;
 restart)
 	sh $0 stop

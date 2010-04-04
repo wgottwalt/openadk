@@ -15,17 +15,18 @@ PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
 DISTFILES:=		tiff-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/tiff-${PKG_VERSION}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--disable-cxx
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTIFF}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libtiff.so.* ${IDIR_LIBTIFF}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libtiff.so* ${IDIR_LIBTIFF}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

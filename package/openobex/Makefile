@@ -9,16 +9,17 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0d83dc86445a46a1b9750107ba7ab65c
 PKG_DESCR:=		implementation of the Object Exchange (OBEX) protocol
 PKG_SECTION:=		bluetooth
+PKG_BUILDDEP+=		bluez
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENOBEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+$(eval $(call PKG_template,OPENOBEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENOBEX}/usr/lib

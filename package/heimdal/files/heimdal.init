@@ -15,9 +15,9 @@ start)
 	/usr/sbin/kpasswdd &
 	;;
 stop)
-	killall kdc
-	killall kadmind
-	killall kpasswdd
+	pkill kdc
+	pkill kadmind
+	pkill kpasswdd
 	;;
 restart)
 	sh $0 stop

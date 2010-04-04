@@ -4,25 +4,29 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.18.1
+PKG_VERSION:=		2.22.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d53836f7fdd9970d03e255e9d712bd83
+PKG_MD5SUM:=		e699a93d62c01e0ee07caef3e11eddd8
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		gettext libiconv libpthread
+PKG_BUILDDEP+=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.18/
+PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.22/
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TCPPFLAGS+=		-I'${STAGING_DIR}/usr/include'
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-debug=no \
 			--disable-mem-pools \
 			--disable-rebuilds \
 			--with-libiconv=gnu \
+			--disable-fam \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_stack_grows=no \
@@ -30,11 +34,13 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_uscore=no \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so.* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgio*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libglib*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

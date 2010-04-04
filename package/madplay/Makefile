@@ -6,6 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		madplay
 PKG_VERSION:=		0.15.2b
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		libid3tag libmad
 PKG_MD5SUM:=		6814b47ceaa99880c754c5195aa1aac1
 PKG_DESCR:=		MPEG audio player in fixed point
 PKG_SECTION:=		sound
@@ -16,9 +17,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}  \
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MADPLAY,madplay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MADPLAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOST_CC} \
 			LIBS="-lz" \
 			ac_cv_linux_vers=2 \
@@ -29,9 +29,7 @@ CONFIGURE_ARGS+=	--disable-debugging \
 			--without-libiconv-prefix \
 			--without-libintl-prefix \
 			--without-esd \
-			--with-alsa
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+			--without-alsa
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MADPLAY}/usr/bin

@@ -1,17 +1,11 @@
 --- elinks-0.11.7.orig/Makefile.lib	2009-08-22 13:15:08.000000000 +0200
-+++ elinks-0.11.7/Makefile.lib	2009-08-28 12:26:30.526558172 +0200
-@@ -43,12 +43,12 @@ quiet_cmd_compile = '      [$(CC_COLOR)C
++++ elinks-0.11.7/Makefile.lib	2010-03-06 11:28:58.000000000 +0100
+@@ -43,7 +43,7 @@ quiet_cmd_compile = '      [$(CC_COLOR)C
  
  # Rule to compile a set of .o files into one .o file
  quiet_cmd_ld_objs = "      [$(LD_COLOR)LD$(END_COLOR)]   $(RELPATH)$@"
 -      cmd_ld_objs = $(LD) -r -o $@ $(filter $(OBJS), $^) \
-+      cmd_ld_objs = $(LD) -shared -o $@ $(filter $(OBJS), $^) \
++      cmd_ld_objs = $(CC) -Wl,-r -nostdlib -o $@ $(filter $(OBJS), $^) \
        		    $(foreach subdir,$(sort $(filter-out src,$(SUBDIRS))), \
  			    `test -e $(subdir)/$(LIB_O_NAME) && echo $(subdir)/$(LIB_O_NAME)`)
  
-    quiet_cmd_link = '    [$(LINK_COLOR)LINK$(END_COLOR)]   $(RELPATH)$@'
--         cmd_link = $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
-+         cmd_link = $(CC) -shared $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
- 
-  quiet_cmd_sparse = '    [SPARSE]   $(RELPATH)$(2)'
-        cmd_sparse = $(SPARSE) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(SPARSE_FLAGS) $(2)

@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- openswan-2.6.18.orig/lib/libopenswan/alg_info.c	2008-10-06 18:52:49.000000000 +0200
-+++ openswan-2.6.18/lib/libopenswan/alg_info.c	2008-10-14 13:08:49.000000000 +0200
-@@ -749,7 +749,7 @@ alg_info_discover_pfsgroup_hack(struct a
+--- openswan-2.6.24.orig/lib/libopenswan/alg_info.c	2010-01-10 02:34:38.000000000 +0100
++++ openswan-2.6.24/lib/libopenswan/alg_info.c	2010-01-19 23:28:18.000000000 +0100
+@@ -765,7 +765,7 @@ alg_info_discover_pfsgroup_hack(struct a
      static char err_buf[256];
      int ret;
      

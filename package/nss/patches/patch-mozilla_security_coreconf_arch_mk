@@ -1,6 +1,6 @@
---- nss-3.12.3.orig/mozilla/security/coreconf/arch.mk	2009-03-11 19:54:24.000000000 +0100
-+++ nss-3.12.3/mozilla/security/coreconf/arch.mk	2009-06-24 21:46:32.910214640 +0200
-@@ -329,7 +329,7 @@ endif
+--- nss-3.12.4.orig/mozilla/security/coreconf/arch.mk	2009-06-05 04:14:49.000000000 +0200
++++ nss-3.12.4/mozilla/security/coreconf/arch.mk	2009-11-20 18:51:43.000000000 +0100
+@@ -324,7 +324,7 @@ endif
  # IMPL_STRATEGY may be defined too.
  #
  

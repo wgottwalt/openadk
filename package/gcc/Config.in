@@ -1,9 +1,0 @@
-config ADK_PACKAGE_GCC
-	prompt "gcc............................... GNU Compiler Collection"
-	tristate
-	default n
-	select ADK_PACKAGE_LIBGMP
-	select ADK_PACKAGE_MPFR
-	help
-	  GCC
-	  http://www.gnu.org/gcc

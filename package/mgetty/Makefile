@@ -18,6 +18,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MGETTY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 pre-configure:
 	cp ${WRKBUILD}/policy.h-dist ${WRKBUILD}/policy.h
 	echo "#define	AUTO_PPP" >> ${WRKBUILD}/policy.h

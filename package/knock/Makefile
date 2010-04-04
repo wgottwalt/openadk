@@ -10,6 +10,7 @@ PKG_MD5SUM:=		ca09d61458974cff90a700aba6120891
 PKG_DESCR:=		A port-knocking client
 PKG_SECTION:=		net
 PKG_URL:=		http://www.zeroflux.org/projects/knock
+PKG_BUILDDEP+=		libpcap
 PKG_SITES:=		http://www.zeroflux.org/proj/knock/files/
 
 PKG_DESCR_1:=		A port-knocking server
@@ -21,10 +22,7 @@ $(eval $(call PKG_template,KNOCK,knock,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESC
 $(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
 
 TCXXFLAGS+=		${TCPPFLAGS} ${TCFLAGS}
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_pcap_pcap_open_live=yes
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_KNOCK}/usr/bin

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		uClibc++
-PKG_VERSION:=		0.2.1
+PKG_VERSION:=		0.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6e6032c49916b199ffe6a585552fd46b
+PKG_MD5SUM:=		1ceef3209cca88be8f1bd9de99735954
 PKG_DESCR:=		A standard c++ library for embedded systems
 PKG_SECTION:=		libs
 PKG_URL:=		http://cxx.uclibc.org
@@ -18,7 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBCXX,uclibc++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
+CONFIG_STYLE:=          manual
+INSTALL_STYLE:=         manual
+
 MAKE_FLAGS+=		TOPDIR="${WRKBUILD}/" \
 			${TARGET_CONFIGURE_OPTS} \
 			ARCH_CFLAGS="${TARGET_CFLAGS}" \

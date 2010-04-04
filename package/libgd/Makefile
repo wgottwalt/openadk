@@ -5,7 +5,8 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gd
 PKG_VERSION:=		2.0.35
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
+PKG_BUILDDEP+=		libpng jpeg
 PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
 PKG_DESCR:=		A library for the dynamic creation of images
 PKG_SECTION:=		libs
@@ -17,18 +18,15 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	autotool gnu
 CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \
 			--with-jpeg=${STAGING_DIR}/usr \
 			--with-png=${STAGING_DIR}/usr \
 			--without-xpm 
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGD}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgd.so.* ${IDIR_LIBGD}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libgd.so* ${IDIR_LIBGD}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

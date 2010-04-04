@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.4
-PKG_RELEASE:=		16
+PKG_RELEASE:=		18
 PKG_MD5SUM:=		183800762e266132218b204dfb428d29
-PKG_DESCR:=		a PPP (Point-to-Point Protocol) software (with MPPE/MPPC support)
+PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_DEPENDS:=		kmod-ppp
 PKG_URL:=		http://ppp.samba.org
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
@@ -24,16 +25,10 @@ $(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_IPV6),y)
-IPV6+=HAVE_INET6="1"
-endif
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIGURE_ENV+=		UNAME_S="Linux"
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
-			${IPV6} \
+			HAVE_INET6="1" \
 			STAGING_DIR=${STAGING_DIR} \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'
@@ -41,6 +36,7 @@ XAKE_FLAGS+=		CC="${TARGET_CC}" \
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOE}+=		mod-pppoe-install
+SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOA}+=		mod-pppoa-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_RADIUS}+=		mod-radius-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_CHAT}+=		mod-chat-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPDUMP}+=		mod-pppdump-install
@@ -58,7 +54,6 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_FILTER}
 	${INSTALL_BIN} ./files/etc/ppp/ip-up ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-up.d
-	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/if-rename ${IDIR_PPP}/etc/ppp/ip-up.d/
 	${INSTALL_BIN} ./files/etc/ppp/ip-down ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-down.d
 	${INSTALL_DIR} ${IDIR_PPP}/usr/sbin
@@ -67,12 +62,14 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_BIN} ./files/pon ${IDIR_PPP}/usr/sbin/
 	${INSTALL_BIN} ./files/poff ${IDIR_PPP}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/peers
-	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/templates
-	${INSTALL_DATA} ./files/etc/ppp/templates/dsl ${IDIR_PPP}/etc/ppp/templates/
+	$(INSTALL_DIR) ${IDIR_PPP}/etc/network/if-pre-up.d
+	$(INSTALL_BIN) ./files/ppp.pre-up \
+		${IDIR_PPP}/etc/network/if-pre-up.d/ppp
 
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
-	${CP} ${WRKBUILD}/pppd/plugins/radius/etc/* ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
+	${CP} ${WRKBUILD}/pppd/plugins/radius/etc/* \
+		${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
 	rm ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient/radiusclient.conf.in
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/radius.so \
@@ -82,6 +79,17 @@ mod-pppoe-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/rp-pppoe.so \
 		${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/etc/ppp/templates
+	${INSTALL_DATA} ./files/etc/ppp/templates/pppoe \
+		${IDIR_PPP_MOD_PPPOE}/etc/ppp/templates/
+
+mod-pppoa-install:
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/pppoatm.so \
+		${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
+	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/etc/ppp/templates
+	${INSTALL_DATA} ./files/etc/ppp/templates/pppoa \
+		${IDIR_PPP_MOD_PPPOA}/etc/ppp/templates/
 
 mod-chat-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_CHAT}/usr/sbin

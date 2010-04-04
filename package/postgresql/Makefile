@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6e36f3b4dd27ae0c352376ea9f843de2
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.postgresql.org
 PKG_SITES:=		ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/source/v${PKG_VERSION}/ \
 			ftp://ftp8.de.postgresql.org/pub/ftp.postgresql.org/source/v${PKG_VERSION}/ \
@@ -19,7 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
 PKG_CONFIGURE_ARGS:=\
 			--disable-integer-datetimes \
 			--without-java \

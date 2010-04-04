@@ -15,6 +15,10 @@ config ADK_KERNEL_OCF_CRYPTODEV
 	boolean
 	default n
 
+config ADK_KERNEL_CRYPTO_MANAGER
+	tristate
+	default n
+
 config ADK_KERNEL_OCF_OCF
 	boolean
 	default n
@@ -62,7 +66,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 endmenu
 
 menu "OpenBSD Cryptographic framework"
-depends on !ADK_LINUX_CRIS_FOXBOARD
+depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241)
 
 config ADK_KPACKAGE_KMOD_OCF_HIFN
 	prompt "kmod-cryptodev-hifn................ hifn engine"
@@ -125,6 +129,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
 	prompt "kmod-crypto-manager.................. Crypto algorithm manager"
 	tristate
 	default n
+	depends on !ADK_KERNEL_CRYPTO_MANAGER
 	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD

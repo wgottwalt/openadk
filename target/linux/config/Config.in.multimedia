@@ -1,4 +1,5 @@
 menu "Multimedia devices support"
+depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB && !ADK_LINUX_CRIS_FOXBOARD
 
 config ADK_KERNEL_SND_TIMER
 	boolean
@@ -26,6 +27,11 @@ config ADK_KPACKAGE_KMOD_SOUND
 	help
 	  Basic support for sound.
 
+config ADK_KPACKAGE_KMOD_SND_RAWMIDI
+	tristate
+	default n
+	help
+
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-sound-alsa................. ALSA sound support"
 	select ADK_KPACKAGE_KMOD_SOUND
@@ -38,7 +44,7 @@ config ADK_KPACKAGE_KMOD_SND
 	 Basic ALSA sound support.
 
 config ADK_KPACKAGE_KMOD_SND_OSSEMUL
-	prompt "kmod-sound-alsa-oss-emul........ ALSA OSS Emulation"
+	prompt "kmod-sound-alsa-oss-emul....... ALSA OSS Emulation"
 	depends on ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_MIXER_OSS
 	select ADK_KERNEL_SND_PCM_OSS
@@ -64,11 +70,19 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	help
 	 ALSA VIA82XX driver
 
+config ADK_KPACKAGE_KMOD_SND_ENS1370
+	prompt "kmod-sound-alsa-ens1370........ ALSA Ensoniq 1370 driver"
+	depends on ADK_KPACKAGE_KMOD_SND
+	tristate
+	default n
+	help
+	 ALSA Ensonique 1370 driver
+
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver (ALIX1C)"
 	depends on ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
-	depends on ADK_LINUX_X86_ALIX1C
+	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS64_LEMOTE
 	tristate
 	default n
 	help

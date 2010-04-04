@@ -1,0 +1,18 @@
+--- cups-1.4.2.orig/conf/Makefile	2009-09-22 23:53:31.000000000 +0200
++++ cups-1.4.2/conf/Makefile	2009-11-19 22:02:20.000000000 +0100
+@@ -72,12 +72,12 @@ install:	all install-data install-header
+ install-data:
+ 	for file in $(KEEP); do \
+ 		if test -r $(SERVERROOT)/$$file ; then \
+-			$(INSTALL_CONFIG) -g $(CUPS_GROUP) $$file $(SERVERROOT)/$$file.N ; \
++			$(INSTALL_CONFIG) $$file $(SERVERROOT)/$$file.N ; \
+ 		else \
+-			$(INSTALL_CONFIG) -g $(CUPS_GROUP) $$file $(SERVERROOT) ; \
++			$(INSTALL_CONFIG) $$file $(SERVERROOT) ; \
+ 		fi ; \
+ 	done
+-	$(INSTALL_CONFIG) -g $(CUPS_GROUP) cupsd.conf $(SERVERROOT)/cupsd.conf.default
++	$(INSTALL_CONFIG) cupsd.conf $(SERVERROOT)/cupsd.conf.default
+ 	$(INSTALL_DIR) -m 755 $(DATADIR)/mime
+ 	for file in $(REPLACE); do \
+ 		if test -r $(DATADIR)/mime/$$file ; then \

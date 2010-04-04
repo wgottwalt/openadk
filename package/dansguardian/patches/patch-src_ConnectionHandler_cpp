@@ -1,0 +1,10 @@
+--- dansguardian-2.10.1.1.orig/src/ConnectionHandler.cpp	2009-02-25 12:36:22.000000000 +0100
++++ dansguardian-2.10.1.1/src/ConnectionHandler.cpp	2009-12-30 13:19:14.000000000 +0100
+@@ -42,6 +42,7 @@
+ #include <fcntl.h>
+ #include <sys/stat.h>
+ #include <istream>
++#include <limits.h>
+ 
+ #ifdef ENABLE_ORIG_IP
+ #include <linux/types.h>

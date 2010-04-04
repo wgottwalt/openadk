@@ -1,0 +1,41 @@
+#!/bin/sh
+
+[ -x /usr/sbin/br2684ctl ] || exit 0
+
+[ "${IFACE%%[0-9]*}" = "nas" ] || exit 0
+
+[ "$IF_ATM_ENCAPS" ] || encap=0
+[ "$IF_ATM_PAYLOAD" ] || payload=1
+[ "$IF_ATM_VPI" ] || IF_ATM_VPI=1
+[ "$IF_ATM_VCI" ] || IF_ATM_VCI=32
+
+[ "$IF_ATM_PAYLOAD" ] && case "$IF_ATM_PAYLOAD" in
+bridged)
+        payload=1
+        ;;
+routed)
+        payload=0
+        ;;
+*)
+        echo "Wrong payload, use either bridged or routed"
+        exit 1
+        ;;
+esac
+
+[ "$IF_ATM_ENCAPS" ] && case "$IF_ATM_ENCAPS" in
+llc)
+        encap=0
+        ;;
+vc)
+        encap=1
+        ;;
+*)
+        echo "Wrong Encapsulation use either llc or vc"
+        exit 1
+        ;;
+esac
+
+br2684ctl -b -c ${IFACE##*[a-z]} -e $encap -p $payload -a $IF_ATM_VPI.$IF_ATM_VCI
+ifconfig nas${IFACE##*[a-z]} up
+
+exit 0

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
 PKG_DESCR:=		a terminal handling library and common terminal definitions
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnu.org/software/ncurses
+PKG_URL:=		http://www.gnu.org/software/ncurses/
 PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 
 include ${TOPDIR}/mk/package.mk
@@ -17,12 +17,17 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBNCURSES_DEV}+=	libncurses-dev-install
+
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
+			--with-build-cc=${HOSTCC} \
 			--without-progs \
 			--with-fallbacks \
+			--disable-termcap \
 			--without-ada \
 			--with-shared \
 			--with-normal \
@@ -37,22 +42,24 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--without-rcs-ids \
 			--enable-const \
 			--enable-echo
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
+ifeq (${ADK_HOST_CYGWIN},y)
+CONFOPT:=		--with-shared
+endif
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
+		${CONFOPT} \
 		--with-build-cc=${HOSTCC} \
 		--with-progs \
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/progs
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	# this is installed as libncurses - make libcurses a "link"
 	rm -f ${WRKINST}/usr/lib/libcurses.so*
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so
@@ -61,13 +68,15 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
-	for f in a/ansi d/dumb l/linux r/rxvt s/screen v/vt100 v/vt102 \
-	    v/vt220 w/wsvt25 x/xterm x/xterm-color x/xterm-xfree86; do \
-		${INSTALL_DIR} \
-		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$(dirname $$f); \
-		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/$$f \
-		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$$f; \
+	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
+	for f in ansi dumb linux rxvt screen vt100 vt102 \
+	    vt220 wsvt25 xterm xterm-color xterm-xfree86; do \
+		${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}; \
+		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
+		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
 	done
+
+libncurses-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBNCURSES_DEV}/usr/include
 

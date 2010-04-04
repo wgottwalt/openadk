@@ -17,18 +17,18 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${DEVICE}-${PKG_RELEASE},kernel ${KERNEL_VERSION}-${DEVICE}-${KERNEL_RELEASE},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=		manual
 
 XAKE_FLAGS+=		PREFIX=/usr
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 ALL_TARGET:=		binaries
 INSTALL_TARGET:=	binaries_install
 
 pre-build:
 	V=1 ARCH=${ARCH} KERNEL_DIR=${LINUX_DIR} \
 	PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-	LD=$(TARGET_CROSS)gcc
+	LD=$(TARGET_CROSS)gcc LDFLAGS="" \
 	$(MAKE) -C ${WRKBUILD} modules
 
 post-install:

@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- screen-4.0.3.orig/configure	2003-12-05 14:46:53.000000000 +0100
-+++ screen-4.0.3/configure	2008-10-08 13:33:43.000000000 +0200
++++ screen-4.0.3/configure	2010-01-23 10:18:22.000000000 +0100
 @@ -124,7 +124,7 @@ done
    fi
    if test ! -f "$as_myself"; then
@@ -227,7 +226,19 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  fi
  ac_config_guess="$SHELL $ac_aux_dir/config.guess"
  ac_config_sub="$SHELL $ac_aux_dir/config.sub"
-@@ -4149,7 +4149,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
+@@ -3335,6 +3335,11 @@ _ACEOF
+ fi
+ rm -f conftest.$ac_objext conftest.$ac_ext
+ 
++# always SYSV
++cat >>confdefs.h <<\_ACEOF
++#define SYSV 1
++_ACEOF
++
+ { echo "$as_me:$LINENO: checking for sequent/ptx..." >&5
+ echo "$as_me: checking for sequent/ptx..." >&6;}
+ cat >conftest.$ac_ext <<_ACEOF
+@@ -4149,7 +4154,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
  
  { { echo "$as_me:$LINENO: error: !!! no select - no screen" >&5
  echo "$as_me: error: !!! no select - no screen" >&2;}
@@ -236,7 +247,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  fi
  rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
  
-@@ -4163,7 +4163,7 @@ if test "$cross_compiling" = yes; then
+@@ -4163,7 +4168,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -245,7 +256,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -4272,7 +4272,7 @@ if test "$cross_compiling" = yes; then
+@@ -4272,7 +4277,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -254,7 +265,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -4365,7 +4365,7 @@ if test "$cross_compiling" = yes; then
+@@ -4365,7 +4370,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -263,7 +274,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -4460,7 +4460,7 @@ if test "$cross_compiling" = yes; then
+@@ -4460,7 +4465,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -272,7 +283,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -4562,7 +4562,7 @@ elif test -n "$sock"; then
+@@ -4562,7 +4567,7 @@ elif test -n "$sock"; then
  else
    { { echo "$as_me:$LINENO: error: you have neither usable sockets nor usable pipes -> no screen" >&5
  echo "$as_me: error: you have neither usable sockets nor usable pipes -> no screen" >&2;}
@@ -281,7 +292,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  fi
  
  
-@@ -4573,7 +4573,7 @@ if test "$cross_compiling" = yes; then
+@@ -4573,7 +4578,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -290,7 +301,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -4898,7 +4898,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
+@@ -4898,7 +4903,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
  
  { { echo "$as_me:$LINENO: error: !!! no tgetent - no screen" >&5
  echo "$as_me: error: !!! no tgetent - no screen" >&2;}
@@ -299,7 +310,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  fi
  rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
  fi
-@@ -4915,7 +4915,7 @@ if test "$cross_compiling" = yes; then
+@@ -4915,7 +4920,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -308,7 +319,58 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -5359,7 +5359,7 @@ if test "$cross_compiling" = yes; then
+@@ -5008,50 +5013,6 @@ _ACEOF
+ 
+ fi
+ 
+-{ echo "$as_me:$LINENO: checking for SVR4 ptys..." >&5
+-echo "$as_me: checking for SVR4 ptys..." >&6;}
+-sysvr4ptys=
+-if test -c /dev/ptmx ; then
+-cat >conftest.$ac_ext <<_ACEOF
+-#line $LINENO "configure"
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-
+-int
+-main ()
+-{
+-ptsname(0);grantpt(0);unlockpt(0);
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-rm -f conftest.$ac_objext conftest$ac_exeext
+-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+-  (eval $ac_link) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } &&
+-         { ac_try='test -s conftest$ac_exeext'
+-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+-  (eval $ac_try) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); }; }; then
+-  cat >>confdefs.h <<\_ACEOF
+-#define HAVE_SVR4_PTYS 1
+-_ACEOF
+-
+-sysvr4ptys=1
+-else
+-  echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-fi
+-rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
+-fi
+ 
+ 
+ for ac_func in getpt
+@@ -5359,7 +5320,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -317,7 +379,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -6206,7 +6206,7 @@ echo "$as_me: checking for avenrun symbo
+@@ -6206,7 +6167,7 @@ echo "$as_me: checking for avenrun symbo
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -326,7 +388,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -6482,7 +6482,7 @@ if test "$cross_compiling" = yes; then
+@@ -6482,7 +6443,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -335,7 +397,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -6598,8 +6598,6 @@ sed 's/^/| /' conftest.$ac_ext >&5
+@@ -6598,8 +6559,6 @@ sed 's/^/| /' conftest.$ac_ext >&5
  LIBS="$oldlibs"
  fi
  rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
@@ -344,7 +406,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  oldlibs="$LIBS"
  LIBS="$LIBS -lsun"
  { echo "$as_me:$LINENO: checking IRIX sun library..." >&5
-@@ -7004,7 +7002,7 @@ if test "$cross_compiling" = yes; then
+@@ -7004,7 +6963,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -353,7 +415,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -7056,7 +7054,7 @@ if test "$cross_compiling" = yes; then
+@@ -7056,7 +7015,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -362,7 +424,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -7110,7 +7108,7 @@ if test "$cross_compiling" = yes; then
+@@ -7110,7 +7069,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -371,7 +433,19 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -7951,7 +7949,7 @@ if test "$cross_compiling" = yes; then
+@@ -7158,6 +7117,11 @@ fi
+ rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+ fi
+ 
++# always use memcpy
++cat >>confdefs.h <<\_ACEOF
++#define USEMEMCPY 1
++_ACEOF
++
+ echo "$as_me:$LINENO: checking long file names" >&5
+ echo $ECHO_N "checking long file names... $ECHO_C" >&6
+ (echo 1 > /tmp/conftest9012345) 2>/dev/null
+@@ -7951,7 +7915,7 @@ if test "$cross_compiling" = yes; then
  See \`config.log' for more details." >&5
  echo "$as_me: error: cannot run test program while cross compiling
  See \`config.log' for more details." >&2;}
@@ -380,7 +454,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  else
    cat >conftest.$ac_ext <<_ACEOF
  #line $LINENO "configure"
-@@ -7982,7 +7980,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
+@@ -7982,7 +7946,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
  ( exit $ac_status )
  { { echo "$as_me:$LINENO: error: Can't run the compiler - internal error. Sorry." >&5
  echo "$as_me: error: Can't run the compiler - internal error. Sorry." >&2;}
@@ -389,7 +463,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  fi
  rm -f core core.* *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
  fi
-@@ -8251,7 +8249,7 @@ done
+@@ -8251,7 +8215,7 @@ done
    if test ! -f "$as_myself"; then
      { { echo "$as_me:$LINENO: error: cannot find myself; rerun with an absolute path" >&5
  echo "$as_me: error: cannot find myself; rerun with an absolute path" >&2;}
@@ -398,7 +472,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
    fi
    case $CONFIG_SHELL in
    '')
-@@ -8302,7 +8300,7 @@ done
+@@ -8302,7 +8266,7 @@ done
    chmod +x $as_me.lineno ||
      { { echo "$as_me:$LINENO: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&5
  echo "$as_me: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&2;}
@@ -407,7 +481,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
    # Don't try to exec as it changes $[0], causing all sort of problems
    # (the dirname of $[0] is not the place where we might find the
-@@ -8494,7 +8492,7 @@ cat >>$CONFIG_STATUS <<\_ACEOF
+@@ -8494,7 +8458,7 @@ cat >>$CONFIG_STATUS <<\_ACEOF
  Try \`$0 --help' for more information." >&5
  echo "$as_me: error: ambiguous option: $1
  Try \`$0 --help' for more information." >&2;}
@@ -416,7 +490,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
    --help | --hel | -h )
      echo "$ac_cs_usage"; exit 0 ;;
    --debug | --d* | -d )
-@@ -8516,7 +8514,7 @@ Try \`$0 --help' for more information." 
+@@ -8516,7 +8480,7 @@ Try \`$0 --help' for more information." 
  Try \`$0 --help' for more information." >&5
  echo "$as_me: error: unrecognized option: $1
  Try \`$0 --help' for more information." >&2;}
@@ -425,7 +499,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
    *) ac_config_targets="$ac_config_targets $1" ;;
  
-@@ -8555,7 +8553,7 @@ do
+@@ -8555,7 +8519,7 @@ do
    "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
    *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
  echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
@@ -434,7 +508,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
    esac
  done
  
-@@ -8750,7 +8748,7 @@ echo X"$as_dir" |
+@@ -8750,7 +8714,7 @@ echo X"$as_dir" |
      test ! -n "$as_dirs" || mkdir $as_dirs
    fi || { { echo "$as_me:$LINENO: error: cannot create directory \"$ac_dir\"" >&5
  echo "$as_me: error: cannot create directory \"$ac_dir\"" >&2;}
@@ -443,7 +517,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
    ac_builddir=.
  
-@@ -8816,7 +8814,7 @@ echo "$as_me: creating $ac_file" >&6;}
+@@ -8816,7 +8780,7 @@ echo "$as_me: creating $ac_file" >&6;}
           # Absolute (can't be DOS-style, as IFS=:)
           test -f "$f" || { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
  echo "$as_me: error: cannot find input file: $f" >&2;}
@@ -452,7 +526,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
           echo $f;;
        *) # Relative
           if test -f "$f"; then
-@@ -8829,7 +8827,7 @@ echo "$as_me: error: cannot find input f
+@@ -8829,7 +8793,7 @@ echo "$as_me: error: cannot find input f
             # /dev/null tree
             { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
  echo "$as_me: error: cannot find input file: $f" >&2;}
@@ -461,7 +535,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
           fi;;
        esac
      done` || { (exit 1); exit 1; }
-@@ -8907,7 +8905,7 @@ echo "$as_me: creating $ac_file" >&6;}
+@@ -8907,7 +8871,7 @@ echo "$as_me: creating $ac_file" >&6;}
           # Absolute (can't be DOS-style, as IFS=:)
           test -f "$f" || { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
  echo "$as_me: error: cannot find input file: $f" >&2;}
@@ -470,7 +544,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
           echo $f;;
        *) # Relative
           if test -f "$f"; then
-@@ -8920,7 +8918,7 @@ echo "$as_me: error: cannot find input f
+@@ -8920,7 +8884,7 @@ echo "$as_me: error: cannot find input f
             # /dev/null tree
             { { echo "$as_me:$LINENO: error: cannot find input file: $f" >&5
  echo "$as_me: error: cannot find input file: $f" >&2;}
@@ -479,7 +553,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
           fi;;
        esac
      done` || { (exit 1); exit 1; }
-@@ -9073,7 +9071,7 @@ echo X"$as_dir" |
+@@ -9073,7 +9037,7 @@ echo X"$as_dir" |
      test ! -n "$as_dirs" || mkdir $as_dirs
    fi || { { echo "$as_me:$LINENO: error: cannot create directory \"$ac_dir\"" >&5
  echo "$as_me: error: cannot create directory \"$ac_dir\"" >&2;}

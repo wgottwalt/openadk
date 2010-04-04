@@ -3,29 +3,25 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
-include ${TOPDIR}/mk/buildhlp.mk
+#include ${TOPDIR}/mk/buildhlp.mk
+include ${TOPDIR}/mk/kernel-vars.mk
 
-KERNEL_IDIR:=$(LINUX_BUILD_DIR)/kernel-ipkg
+KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 
-KERNEL_MAKE_OPTS:=	-C "${LINUX_DIR}" V=1
-ifneq ($(ADK_NATIVE),y)
-KERNEL_MAKE_OPTS+=	CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) CC="$(TARGET_CC)"
-endif
-
-$(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION)/.patched:
-	$(TRACE) target/$(DEVICE)-kernel-patch
-	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
-	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ../$(DEVICE)/patches *.patch $(MAKE_TRACE)
+$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
+	$(TRACE) target/$(ADK_TARGET)-kernel-patch
+	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
+	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../$(ADK_TARGET)/patches *.patch $(MAKE_TRACE)
 	touch $@
 
-$(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION)/.patched
-	$(TRACE) target/$(DEVICE)-kernel-prepare
-	ln -sf $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) $(LINUX_DIR)
+$(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
+	$(TRACE) target/$(ADK_TARGET)-kernel-prepare
+	ln -sf $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) $(LINUX_DIR)
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
 $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
-	$(TRACE) target/$(DEVICE)-kernel-configure
+	$(TRACE) target/$(ADK_TARGET)-kernel-configure
 	for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done $(MAKE_TRACE)
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config
 	echo N | $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
@@ -33,31 +29,35 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
-	$(TRACE) target/$(DEVICE)-kernel-compile
+	$(TRACE) target/$(ADK_TARGET)-kernel-compile
 	$(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} $(MAKE_TRACE)
-	$(TRACE) target/$(DEVICE)-kernel-modules-install
+	$(TRACE) target/$(ADK_TARGET)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	$(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		modules_install $(MAKE_TRACE)
-	$(TRACE) target/$(DEVICE)-create-packages
-	$(MAKE) $(KERNEL_IPKG) $(TARGETS) 
+	$(TRACE) target/$(ADK_TARGET)-create-packages
+	$(MAKE) $(KERNEL_PKG) $(TARGETS) 
 	touch -c $(LINUX_DIR)/vmlinux
 
-$(KERNEL_IPKG):
-	$(TRACE) target/$(DEVICE)-create-kernel-package
-	rm -rf $(KERNEL_IDIR)
-	@mkdir -p $(KERNEL_IDIR)/etc
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_IDIR} \
-	    ../linux/kernel.control ${DEVICE}-${KERNEL_VERSION} ${CPU_ARCH}
-	$(IPKG_BUILD) $(KERNEL_IDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
+$(KERNEL_PKG):
+	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
+	rm -rf $(KERNEL_PKGDIR)
+	@mkdir -p $(KERNEL_PKGDIR)/etc
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
+	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
+	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 
 prepare:
 compile: $(LINUX_DIR)/vmlinux
 install: compile
 ifneq ($(strip $(INSTALL_TARGETS)),)
-	$(TRACE) target/${DEVICE}-modules-install
-	$(IPKG) install $(INSTALL_TARGETS) $(MAKE_TRACE)
+	$(TRACE) target/${ADK_TARGET}-modules-install
+ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
+	$(PKG_INSTALL) $(INSTALL_TARGETS) $(MAKE_TRACE)
+else
+	$(foreach pkg,$(INSTALL_TARGETS),$(shell $(PKG_INSTALL) $(pkg)))
+endif
 endif
 
 clean:

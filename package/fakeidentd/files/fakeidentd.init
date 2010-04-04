@@ -13,7 +13,7 @@ start)
 	fakeidentd ${fakeidentd_flags}
 	;;
 stop)
-	killall fakeidentd
+	pkill fakeidentd
 	;;
 restart)
 	sh $0 stop

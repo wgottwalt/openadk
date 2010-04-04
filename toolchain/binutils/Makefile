@@ -2,22 +2,20 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
-include ../rules.mk
 include Makefile.inc
+include ../rules.mk
 include ${TOPDIR}/mk/buildhlp.mk
-
-ifeq ($(ADK_SSP),y)
-CONFOPTS+=		--enable-libssp
-else
-CONFOPTS+=		--disable-libssp
-endif
 
 ifeq ($(ADK_LINUX_64),y)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 
-$(WRKBUILD)/.headers: 
-$(WRKBUILD)/.configured: 
+ifeq (${ADK_MAKE_PARALLEL},y)
+BINUTILS_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+endif
+
+$(WRKBUILD)/.headers:
+$(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
@@ -31,12 +29,13 @@ $(WRKBUILD)/.configured:
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-werror \
+		--disable-libssp \
 		${CONFOPTS} \
 	);
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) -C $(WRKBUILD) all
+	$(MAKE) ${BINUTILS_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled

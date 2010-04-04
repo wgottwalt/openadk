@@ -1,4 +1,5 @@
 menu "PCMCIA/CardBus support"
+depends on ADK_TARGET_WITH_CARDBUS
 
 config ADK_KERNEL_CARDBUS
 	boolean 

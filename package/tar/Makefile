@@ -17,9 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TAR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
+CONFIGURE_ENV+=		gl_cv_func_mbrtowc_incomplete_state=no \
+			gl_cv_func_wcrtomb_retval=no
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TAR}/usr/bin

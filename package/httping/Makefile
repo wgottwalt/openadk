@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		httping
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		41c912a9ecc904e51d7260053fc2195c
+PKG_MD5SUM:=		bde1ff3c01343d2371d8f34fbf8a1d9a
 PKG_DESCR:=		Httping is like 'ping' but for http-requests
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl
+PKG_BUILDDEP+=		openssl
 PKG_SITES:=		http://www.vanheusden.com/httping/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
@@ -18,11 +19,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-MAKE_FLAGS+=		STAGING_DIR=${STAGING_DIR}
-BUILD_STYLE:=		auto
+TCFLAGS+=		-D_GNU_SOURCE
 
-do-install:
-	${INSTALL_DIR} ${IDIR_HTTPING}/usr/sbin
-	${CP} ${WRKBUILD}/${PKG_NAME} ${IDIR_HTTPING}/usr/sbin/
+CONFIG_STYLE:=		manual
+
+post-install:
+	${INSTALL_DIR} ${IDIR_HTTPING}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/httping ${IDIR_HTTPING}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

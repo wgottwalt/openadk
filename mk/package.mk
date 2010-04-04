@@ -1,50 +1,62 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-all: build-all-ipkgs
+all: build-all-pkgs
 
+ifneq (${PKG_CXX},)
+ifeq (${ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX},y)
+PKG_BUILDDEP+=		uclibc++
+PKG_DEPENDS+=		uclibc++
+else
+PKG_DEPENDS+=		libstdcxx
+endif
+endif
+
+TCFLAGS:=		${TARGET_CFLAGS}
+TCXXFLAGS:=		${TARGET_CFLAGS}
+TCPPFLAGS:=		${TARGET_CPPFLAGS}
+TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
+			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
 ifeq ($(ADK_STATIC),y)
 TCFLAGS:=		${TARGET_CFLAGS} -static
 TCXXFLAGS:=		${TARGET_CFLAGS} -static
 TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
-else
-TCFLAGS:=		${TARGET_CFLAGS}
-TCXXFLAGS:=		${TARGET_CFLAGS}
-TCPPFLAGS:=		${TARGET_CPPFLAGS}
+TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
+			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib \
+			-static
 endif
+ifeq ($(ADK_NATIVE),y)
+TCFLAGS:=
+TCXXFLAGS:=
+TCPPFLAGS:=
+TLDFLAGS:=
+endif
+
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
-TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
-			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
 ifneq ($(ADK_DEBUG),)
 CONFIGURE_ARGS+=	--enable-debug
 else
 CONFIGURE_ARGS+=	--disable-debug
 endif
-ifeq ($(ADK_IPV6),y)
-CONFIGURE_ARGS+=	--enable-ipv6
-else
-CONFIGURE_ARGS+=	--disable-ipv6
-endif
 
-ifeq ($(ADK_NATIVE),y)
-			CONFIG_SHELL='$(strip ${SHELL})'
-else
-CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
-			${HOST_CONFIGURE_OPTS} \
-			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
+CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})' \
-			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
-			PKG_CONFIG_LIBDIR=/dev/null \
-			CONFIG_SHELL='$(strip ${SHELL})' \
+			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig'
+ifeq ($(ADK_NATIVE),)
+CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
+			${HOST_CONFIGURE_OPTS} \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
 endif
+
+CONFIGURE_PROG?=	configure
 MAKE_FILE?=		Makefile
 # this is environment for 'make all' and 'make install'
 MAKE_ENV?=
@@ -56,26 +68,27 @@ MAKE_FLAGS?=
 FAKE_FLAGS?=
 ALL_TARGET?=		all
 INSTALL_TARGET?=	install
-ifeq ($(ADK_NATIVE),y)
-MAKE_ENV+=		\
-			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
-			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
-else
-MAKE_ENV+=		PATH='${TARGET_PATH}' \
-			${HOST_CONFIGURE_OPTS} \
-			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
+
+MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
-			PKG_CONFIG_PATH='${STAGING_DIR}/usr/lib/pkgconfig' \
-			PKG_CONFIG_LIBDIR=/dev/null \
-			CC='${TARGET_CC}' CXX='${TARGET_CXX}' \
-			AR='${TARGET_CROSS}ar' RANLIB='${TARGET_CROSS}ranlib' \
-			NM='${TARGET_CROSS}nm' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
+ifeq ($(ADK_NATIVE),)
+MAKE_ENV+=		PATH='${TARGET_PATH}' \
+			${HOST_CONFIGURE_OPTS} \
+			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig' \
+			CC='${TARGET_CC}' \
+			CXX='${TARGET_CXX}' \
+			AR='${TARGET_CROSS}ar' \
+			RANLIB='${TARGET_CROSS}ranlib' \
+			NM='${TARGET_CROSS}nm' \
+			STRIP='${TARGET_CROSS}strip' \
+			CROSS="$(TARGET_CROSS)"
 endif
-MAKE_FLAGS+=		${XAKE_FLAGS}
+
+MAKE_FLAGS+=		${XAKE_FLAGS} V=1
 FAKE_FLAGS+=		${XAKE_FLAGS}
 
 ifeq ($(strip ${WRKDIR_BSD}),)
@@ -105,7 +118,7 @@ build: ${_BUILD_COOKIE}
 fake: ${_FAKE_COOKIE}
 
 # our recursive build entry point
-build-all-ipkgs: ${_IPKGS_COOKIE}
+build-all-pkgs: ${_IPKGS_COOKIE}
 
 # there are some parameters to the PKG_template function
 # 1.) Config.in identifier ADK_PACKAGE_$(1)
@@ -122,13 +135,17 @@ build-all-ipkgs: ${_IPKGS_COOKIE}
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
 # should be package format independent and modular in the future
 define PKG_template
-IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.ipk
-IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/ipkg-$(2)
+ALL_PKGOPTS+=	$(1)
+PKGNAME_$(1)=	$(2)
+PKGDEPS_$(1)=	$(4)
+PKGDESC_$(1)=	$(5)
+IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
+IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
 endif
-INFO_$(1)=	$(IPKG_STATE_DIR)/info/$(2).list
+INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
 
 ifeq ($(ADK_PACKAGE_$(1)),y)
 install-targets: $$(INFO_$(1))
@@ -142,7 +159,6 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $(2)" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
-ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
@@ -162,7 +178,6 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
-endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
@@ -190,24 +205,24 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	@cd $${IDIR_$(1)}; \
+	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
 		echo "$$$$x" | sed 's/^/- /' >&2; \
 	    fi; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' | \
+	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    cpio -apdlmu --quiet '$${STAGING_DIR}'
+	    cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
-		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
+		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$$$fn; \
 	done
 ifeq (,$(filter noscripts,$(7)))
 	@cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
@@ -220,11 +235,10 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
 	done
 endif
-ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-	$${IPKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+ifeq (,$(filter libmix,$(7)))
+ifeq (,$(filter libonly,$(7)))
+	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
-ifeq ($(ADK_TARGET_PACKAGE_TGZ),y)
-	(cd $${IDIR_$(1)} && tar czf $(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.tar.gz .);
 endif
 
 clean-targets: clean-dev-$(1)
@@ -241,7 +255,7 @@ endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
-	$(IPKG) install $$(IPKG_$(1))
+	$(PKG_INSTALL) $$(IPKG_$(1))
 endef
 
 install-targets:
@@ -259,4 +273,4 @@ distclean: clean
 	rm -f ${FULLDISTFILES}
 
 .PHONY:	all refetch extract patch configure \
-	build fake package install clean build-all-ipkgs
+	build fake package install clean build-all-pkgs

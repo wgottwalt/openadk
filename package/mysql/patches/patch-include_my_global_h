@@ -1,37 +1,32 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- mysql-5.0.85.orig/include/my_global.h	2009-08-11 12:50:17.000000000 +0200
-+++ mysql-5.0.85/include/my_global.h	2009-08-27 22:21:39.363259500 +0200
-@@ -350,29 +350,32 @@ C_MODE_END
- #ifdef HAVE_UNISTD_H
- #include <unistd.h>
- #endif
+--- mysql-5.1.41.orig/include/my_global.h	Wed Nov  4 19:28:15 2009
++++ mysql-5.1.41/include/my_global.h	Tue Dec 29 13:39:20 2009
+@@ -18,6 +18,8 @@
+ #ifndef _global_h
+ #define _global_h
+ 
++#include <sys/param.h>
 +
- #if defined(__cplusplus) && defined(NO_CPLUSPLUS_ALLOCA)
+ /*
+   InnoDB depends on some MySQL internals which other plugins should not
+   need.  This is because of InnoDB's foreign key support, "safe" binlog
+@@ -424,7 +426,7 @@ C_MODE_END
+ #ifdef HAVE_FLOAT_H
+ #include <float.h>
+ #endif
+-#ifdef HAVE_FENV_H
++#if defined(HAVE_FENV_H) && !defined(BSD)
+ #include <fenv.h> /* For fesetround() */
+ #endif
+ 
+@@ -454,15 +456,20 @@ C_MODE_END
  #undef HAVE_ALLOCA
  #undef HAVE_ALLOCA_H
  #endif
 -#ifdef HAVE_ALLOCA_H
--#include <alloca.h>
-+
-+#if defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD__)
-+#ifndef BSD
-+#define BSD
- #endif
--#ifdef HAVE_ATOMIC_ADD
--#define new my_arg_new
--#define need_to_restore_new 1
--C_MODE_START
--#include <asm/atomic.h>
--C_MODE_END
--#ifdef need_to_restore_new /* probably safer than #ifdef new */
--#undef new
--#undef need_to_restore_new
- #endif
-+
 +#if defined(HAVE_ALLOCA_H) && !defined(BSD)
-+#include <alloca.h>
+ #include <alloca.h>
  #endif
-+
+ 
  #include <errno.h>				/* Recommended by debian */
  /* We need the following to go around a problem with openssl on solaris */
 +#ifdef BSD
@@ -45,9 +40,9 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  /*
    A lot of our programs uses asserts, so better to always include it
-@@ -791,9 +794,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
- #define finite(x) (1.0 / fabs(x) > 0.0)
- #endif
+@@ -879,9 +886,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
+ #endif /* HAVE_FINITE */
+ #endif /* isfinite */
  
 +/*
  #ifndef HAVE_ISNAN

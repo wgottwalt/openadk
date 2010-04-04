@@ -1,0 +1,52 @@
+diff -Nur linux-2.6.28.orig/arch/mips/include/asm/mips-boards/generic.h linux-2.6.28/arch/mips/include/asm/mips-boards/generic.h
+--- linux-2.6.28.orig/arch/mips/include/asm/mips-boards/generic.h	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/mips/include/asm/mips-boards/generic.h	2009-01-09 23:03:02.000000000 +0100
+@@ -92,7 +92,7 @@
+ extern void mips_reboot_setup(void);
+ 
+ #ifdef CONFIG_PCI
+-extern void mips_pcibios_init(void);
++extern int mips_pcibios_init(void);
+ #else
+ #define mips_pcibios_init() do { } while (0)
+ #endif
+diff -Nur linux-2.6.28.orig/arch/mips/mti-malta/malta-pci.c linux-2.6.28/arch/mips/mti-malta/malta-pci.c
+--- linux-2.6.28.orig/arch/mips/mti-malta/malta-pci.c	2008-12-25 00:26:37.000000000 +0100
++++ linux-2.6.28/arch/mips/mti-malta/malta-pci.c	2009-01-09 23:02:02.000000000 +0100
+@@ -87,10 +87,11 @@
+ 	.mem_resource	= &msc_mem_resource,
+ };
+ 
+-void __init mips_pcibios_init(void)
++int __init mips_pcibios_init(void)
+ {
+ 	struct pci_controller *controller;
+ 	resource_size_t start, end, map, start1, end1, map1, map2, map3, mask;
++	void __iomem *io_map_base;
+ 
+ 	switch (mips_revision_sconid) {
+ 	case MIPS_REVISION_SCON_GT64120:
+@@ -230,7 +231,7 @@
+ 		controller = &msc_controller;
+ 		break;
+ 	default:
+-		return;
++		return 0;
+ 	}
+ 
+ 	if (controller->io_resource->start < 0x00001000UL)	/* FIXME */
+@@ -239,5 +240,14 @@
+ 	iomem_resource.end &= 0xfffffffffULL;			/* 64 GB */
+ 	ioport_resource.end = controller->io_resource->end;
+ 
++	io_map_base = ioremap(MIPS_MSC01_PCI_REG_BASE,
++				controller->io_resource->end - controller->io_resource->start + 1);
++	if (!io_map_base)
++		return -EBUSY;
++
++	controller->io_map_base = (unsigned long)io_map_base;
++
+ 	register_pci_controller(controller);
++	
++	return 0;
+ }

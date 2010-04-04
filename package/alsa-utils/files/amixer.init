@@ -10,14 +10,11 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	amixer set Master on
-	amixer set PCM on
-	amixer set Master 75%
-	amixer set PCM 75%
+	amixer set $amixer_mixer on
+	amixer set $amixer_mixer $amixer_volume
 	;;
 stop)
-	amixer set Master off
-	amixer set PCM off
+	amixer set $amixer_mixer off
 	;;
 restart)
 	sh $0 stop

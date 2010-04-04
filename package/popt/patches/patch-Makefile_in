@@ -1,0 +1,11 @@
+--- popt-1.15.orig/Makefile.in	2009-04-12 21:31:13.000000000 +0200
++++ popt-1.15/Makefile.in	2009-10-31 23:17:36.793465302 +0100
+@@ -80,7 +80,7 @@ libpopt_la_OBJECTS = $(am_libpopt_la_OBJ
+ libpopt_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+ 	$(libpopt_la_LDFLAGS) $(LDFLAGS) -o $@
+-PROGRAMS = $(noinst_PROGRAMS)
++PROGRAMS = 
+ am_test1_OBJECTS = test1.$(OBJEXT)
+ test1_OBJECTS = $(am_test1_OBJECTS)
+ test1_DEPENDENCIES = $(usrlib_LTLIBRARIES)

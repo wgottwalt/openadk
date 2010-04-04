@@ -7,6 +7,10 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifeq (${ADK_MAKE_PARALLEL},y)
+GDB_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
+endif
+
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
@@ -32,11 +36,11 @@ $(WRKBUILD)/.configured:
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled: 
-	$(MAKE) -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
+$(WRKBUILD)/.compiled:
+	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
 	touch $@
 
-$(WRKBUILD)/.installed: 
+$(WRKBUILD)/.installed:
 	install -c $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
 	cd $(STAGING_TOOLS)/bin && \
 	ln -fs $(TARGET_CROSS)gdb $(GNU_TARGET_NAME)-gdb

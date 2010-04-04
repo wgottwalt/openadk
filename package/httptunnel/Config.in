@@ -1,9 +1,0 @@
-config ADK_PACKAGE_HTTPTUNNEL
-	prompt "httptunnel........................ http tunneling software"
-	tristate
-	default n
-	help
-	  httptunnel creates a bidirectional virtual data connection tunnelled 
-	  in HTTP requests.
-	  
-	  http://www.nocrew.org/software/httptunnel.html

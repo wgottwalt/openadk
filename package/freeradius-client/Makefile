@@ -10,6 +10,7 @@ PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl
+PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.freeradius.org
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
@@ -20,12 +21,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FREERADIUS_CLIENT,freeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBFREERADIUS_CLIENT,libfreeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ENV+=		ac_cv_func_uname=no
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_FREERADIUS_CLIENT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radiusclient \
 		${IDIR_FREERADIUS_CLIENT}/usr/sbin

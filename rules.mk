@@ -25,11 +25,13 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
-DEVICE:=		$(strip $(subst ",, $(ADK_DEVICE)))
+ADK_TARGET:=		$(strip $(subst ",, $(ADK_TARGET)))
+ADK_LIBC:=		$(strip $(subst ",, $(ADK_LIBC)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
+ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
-include $(TOPDIR)/target/$(DEVICE)/device.mk
+include $(TOPDIR)/target/$(ADK_TARGET)/target.mk
 endif
 
 include $(TOPDIR)/mk/vars.mk
@@ -38,11 +40,18 @@ export BASH HOSTCC HOSTCFLAGS MAKE LANGUAGE LC_ALL OStype PATH
 
 HOSTCPPFLAGS?=
 HOSTLDFLAGS?=
-TARGET_CFLAGS:=		$(strip -fwrapv -fno-ident ${TARGET_CFLAGS})
+TARGET_CFLAGS:=		$(strip -fno-ident ${TARGET_CFLAGS})
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
 
 ifneq (${show},)
-_show:
-	@echo '$($(show))'
+.DEFAULT_GOAL:=		show
+show:
+	@$(info ${${show}})
+else ifneq (${dump},)
+__shquote=		'$(subst ','\'',$(1))'
+__dumpvar=		echo $(call __shquote,$(1)=$(call __shquote,${$(1)}))
+.DEFAULT_GOAL:=		show
+show:
+	@$(foreach _s,${dump},$(call __dumpvar,${_s});)
 endif

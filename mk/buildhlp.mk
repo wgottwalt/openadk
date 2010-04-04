@@ -19,7 +19,7 @@ WRKBUILD?=		${WRKSRC}
 WRKINST?=		${WRKDIR}/fake-${CPU_ARCH}/root
 
 ifeq ($(strip ${NO_CHECKSUM}),)
-_CHECKSUM_COOKIE=	${WRKDIR}/.checksum_done
+_CHECKSUM_COOKIE=      ${WRKDIR}/.checksum_done
 else
 _CHECKSUM_COOKIE=
 endif
@@ -58,7 +58,7 @@ post-patch:
 ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
 	[ ! -d ./patches ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
 	    '{patch-!(*.orig),*.patch}' $(MAKE_TRACE)
-	[ ! -d ./extra ] || (cd extra; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
+	[ ! -d ./src ] || (cd src; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
 		$(MAKE_TRACE)
 	@${MAKE} post-patch $(MAKE_TRACE)
 	touch $@
@@ -88,7 +88,7 @@ endif
 	    ${BASH} ${TOPDIR}/scripts/update-patches); \
 	    if [[ -n $$toedit && $$toedit != FAIL ]]; then \
 		echo -n 'edit patches: '; read i; \
-		cd patches && $${VISUAL:-$${EDITOR:-/usr/bin/vi}} $$toedit; \
+		cd patches && $${VISUAL:-$${EDITOR:-vi}} $$toedit; \
 	    fi; \
 	    rm -rf ${WRKDIR}.orig; \
 	    [[ $$toedit != FAIL ]]

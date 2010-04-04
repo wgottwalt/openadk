@@ -18,12 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-piddir=/var \
 			--with-membulk=index8 \
 			--with-hash=xor8
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FPROBE_ULOG}/usr/sbin

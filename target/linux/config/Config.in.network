@@ -40,26 +40,43 @@ config ADK_KERNEL_LLC
 	tristate
 	default n
 
-#config ADK_KPACKAGE_KMOD_ATM
-#	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
-#	tristate
-#	default n
-#	help
-#	 ATM is a high-speed networking technology for Local Area Networks
-#	 and Wide Area Networks.  It uses a fixed packet size and is
-#	 connection oriented, allowing for the negotiation of minimum
-#	 bandwidth requirements.
-#
-#	 In order to participate in an ATM network, your Linux box needs an
-#	 ATM networking card. If you have that, say Y here and to the driver
-#	 of your ATM card below.
-#
-#	 Note that you need a set of user-space programs to actually make use
-#	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
-#	 further details.
+config ADK_KERNEL_IP_MULTICAST
+	prompt "Enable IP Multicasting"
+	boolean
+	default n
+
+config ADK_KERNEL_IP_MROUTE
+	prompt "Enable IP Multicasting Routing"
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_ATM
+	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
+	tristate
+	default n
+	help
+	 ATM is a high-speed networking technology for Local Area Networks
+	 and Wide Area Networks.  It uses a fixed packet size and is
+	 connection oriented, allowing for the negotiation of minimum
+	 bandwidth requirements.
+
+	 In order to participate in an ATM network, your Linux box needs an
+	 ATM networking card. If you have that, say Y here and to the driver
+	 of your ATM card below.
+
+	 Note that you need a set of user-space programs to actually make use
+	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
+	 further details.
+
+config ADK_KPACKAGE_KMOD_ATM_BR2684
+	prompt "kmod-atm-br2684................... BR2684 ATM module"
+	tristate
+	select ADK_KPACKAGE_KMOD_ATM
+	default n
+	help
 
 config ADK_KPACKAGE_KMOD_BRIDGE
-	prompt "kmod-net-bridge................... 802.1d Ethernet Bridging"
+	prompt "kmod-bridge....................... 802.1d Ethernet Bridging"
 	tristate
 	select ADK_KERNEL_LLC
 	default n
@@ -83,6 +100,19 @@ config ADK_KPACKAGE_KMOD_BRIDGE
 	  take this into account when setting up your firewall rules.
 	  Enabling arptables support when bridging will let arptables see
 	  bridged ARP traffic in the arptables FORWARD chain.
+
+config ADK_KPACKAGE_KMOD_VLAN_8021Q
+	prompt "kmod-vlan......................... 802.1q VLAN support"
+	tristate
+	default n
+	help
+          Select this and you will be able to create 802.1Q VLAN interfaces
+          on your ethernet interfaces.  802.1Q VLAN supports almost
+          everything a regular ethernet interface does, including
+          firewalling, bridging, and of course IP traffic.  You will need
+          the 'vconfig' tool from the VLAN project in order to effectively
+          use VLANs.  See the VLAN web page for more information:
+          <http://www.candelatech.com/~greear/vlan.html>
 
 config ADK_KPACKAGE_KMOD_INET_TUNNEL
 	tristate
@@ -124,7 +154,6 @@ config ADK_KPACKAGE_KMOD_NET_IPGRE
 config ADK_KPACKAGE_KMOD_IPV6
 	prompt "kmod-ipv6......................... IPv6 support"
 	tristate
-	depends on ADK_IPV6
 	default n
 	help
 	  This is complemental support for the IP version 6.
@@ -139,7 +168,6 @@ config ADK_KPACKAGE_KMOD_IPV6
 config ADK_KPACKAGE_KMOD_IPV6_SIT
 	prompt "kmod-ipv6-sit..................... IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
-	depends on ADK_IPV6
 	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help
@@ -195,14 +223,14 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	 See http://pptpclient.sourceforge.net/ for information on
 	 configuring PPTP clients and servers to utilize this method.
 
-#config ADK_KPACKAGE_KMOD_PPPOATM
-#	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
-#	tristate
-#	default n
-#	depends on ADK_KPACKAGE_KMOD_PPP
-#	select ADK_KPACKAGE_KMOD_ATM
-#	help
-#	  Support for PPP over ATM
+config ADK_KPACKAGE_KMOD_PPPOATM
+	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PPP
+	select ADK_KPACKAGE_KMOD_ATM
+	help
+	  Support for PPP over ATM
 
 config ADK_KPACKAGE_KMOD_PPPOE
 	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"
@@ -222,6 +250,7 @@ config ADK_KPACKAGE_KMOD_TUN
 config ADK_KPACKAGE_KMOD_BONDING
 	prompt "kmod-bonding...................... Bonding driver support"
 	tristate
+	select BUSYBOX_IFENSLAVE
 	default n
 	help
   	  Say 'Y' or 'M' if you wish to be able to 'bond' multiple Ethernet

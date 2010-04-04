@@ -1,8 +1,0 @@
---- jpeg-6b.orig/configure	1998-03-21 20:08:57.000000000 +0100
-+++ jpeg-6b/configure	2009-06-12 18:04:41.000000000 +0200
-@@ -1,4 +1,4 @@
--#! /bin/sh
-+#! /bin/sh -x
- 
- # Guess values for system-dependent variables and create Makefiles.
- # Generated automatically using autoconf version 2.12 

@@ -4,23 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libusb-compat
-PKG_VERSION:=		0.1.1
+PKG_VERSION:=		0.1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		32c775b97da7a11c6be7c487a0c9fc00
-PKG_DESCR:=		a Library for accessing Linux USB devices
+PKG_MD5SUM:=		570ac2ea085b80d1f74ddc7c6a93c0eb
+PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		libusb
 PKG_URL:=		http://libusb.wiki.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUSB_COMPAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto confprog
+$(eval $(call PKG_template,LIBUSB_COMPAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB_COMPAT}/usr/lib

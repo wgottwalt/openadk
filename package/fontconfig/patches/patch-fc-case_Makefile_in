@@ -1,0 +1,45 @@
+--- fontconfig-2.8.0.orig/fc-case/Makefile.in	2009-11-19 00:49:38.000000000 +0100
++++ fontconfig-2.8.0/fc-case/Makefile.in	2009-12-04 20:03:05.536919385 +0100
+@@ -87,17 +87,17 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUD
+ 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ AM_V_CC = $(am__v_CC_$(V))
+ am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+-am__v_CC_0 = @echo "  CC    " $@;
++am__v_CC_0 = echo "  CC    " $@;
+ AM_V_at = $(am__v_at_$(V))
+ am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
+ am__v_at_0 = @
+ CCLD = $(CC)
+ AM_V_CCLD = $(am__v_CCLD_$(V))
+ am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
+-am__v_CCLD_0 = @echo "  CCLD  " $@;
++am__v_CCLD_0 = echo "  CCLD  " $@;
+ AM_V_GEN = $(am__v_GEN_$(V))
+ am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
+-am__v_GEN_0 = @echo "  GEN   " $@;
++am__v_GEN_0 = echo "  GEN   " $@;
+ SOURCES = fc-case.c
+ DIST_SOURCES = fc-case.c
+ HEADERS = $(noinst_HEADERS)
+@@ -117,10 +117,10 @@ AWK = @AWK@
+ CC = @CC_FOR_BUILD@
+ CCDEPMODE = @CCDEPMODE@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
+-CFLAGS = @CFLAGS@
++CFLAGS = 
+ CONFDIR = @CONFDIR@
+ CPP = @CPP@
+-CPPFLAGS = @CPPFLAGS@
++CPPFLAGS = 
+ CYGPATH_W = @CYGPATH_W@
+ DEFS = @DEFS@
+ DEPDIR = @DEPDIR@
+@@ -252,7 +252,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
++LINK = $(CCLD) $(AM_CFLAGS) $(AM_LDFLAGS) -o $@
+ INCLUDES = -I${top_srcdir}/src -I${top_srcdir} $(WARN_CFLAGS)
+ TMPL = fccase.tmpl.h
+ STMPL = ${top_srcdir}/fc-case/${TMPL}

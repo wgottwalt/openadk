@@ -1,6 +1,6 @@
 #!/bin/sh
 #PKG mpd 
-#INIT 60
+#INIT 80
 
 . /etc/rc.conf
 
@@ -16,6 +16,10 @@ start)
 	if [ $? -ne 0 ];then
 		echo "mpd user must be in group audio."
 		exit 1
+	fi
+	if [ ! -d /var/run/mpd ];then
+		mkdir -p /var/run/mpd
+		chown mpd:mpd /var/run/mpd
 	fi
 	mpd
 	;;

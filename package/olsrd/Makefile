@@ -7,8 +7,9 @@ PKG_NAME:=		olsrd
 PKG_VERSION:=		0.5.6-r2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		acf15dbd0af521a6826541b567c6473a
-PKG_DESCR:=		implementation of the Optimized Link State Routing protocol
+PKG_DESCR:=		Optimized Link State Routing protocol
 PKG_SECTION:=		net
+PKG_MULTI:=		1
 PKG_URL:=		http://www.olsr.org
 PKG_SITES:=		http://www.olsr.org/releases/0.5/
 
@@ -35,6 +36,11 @@ $(eval $(call PKG_mod_template,OLSRD_MOD_HTTPINFO,httpinfo))
 $(eval $(call PKG_mod_template,OLSRD_MOD_NAMESERVICE,nameservice))
 $(eval $(call PKG_mod_template,OLSRD_MOD_TAS,tas))
 
+CONFIG_STYLE:=          manual
+BUILD_STYLE:=           manual
+INSTALL_STYLE:=         manual
+
+TCFLAGS+=	-fPIC
 
 do-build:
 	rm -rf ${WRKINST}

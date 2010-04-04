@@ -4,15 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		randrproto
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d6b6b024d71b689628bcaf27fd491f5b
+PKG_MD5SUM:=		15266124b9e2dfcfb25ce6cba24cdd66
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
-
 include ${TOPDIR}/mk/pkg-bottom.mk

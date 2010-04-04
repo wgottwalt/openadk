@@ -1,13 +1,18 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+ADKVERSION=	0.1.0
 TOPDIR=		${.CURDIR}
 PWD=		${.CURDIR}
+
+.include "${.CURDIR}/Makefile.inc"
+
+GMAKE_ENV+=	ADKVERSION=${ADKVERSION:Q}
 
 .if defined(package) && !empty(package)
 subdir:=	package/${package}
 .  if !make(clean)
-_subdir_dep:=	${TOPDIR}/.cfg/ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 .  endif
 .endif
 
@@ -21,7 +26,7 @@ _subdir: ${_subdir_dep}
 		exit 1; \
 	fi
 	cd ${.CURDIR}/${subdir} && TOPDIR=${.CURDIR} DEVELOPER=1 \
-	    gmake VERBOSE=1 ${.MFLAGS} ${_subdir}
+	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
 
 .  include "${.CURDIR}/prereq.mk"
 .  include "${.CURDIR}/mk/split-cfg.mk"

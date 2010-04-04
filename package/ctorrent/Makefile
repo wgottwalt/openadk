@@ -4,37 +4,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ctorrent
-PKG_VERSION:=		1.3.4-dnh2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6635e2d0d0ee21faeb85d95cd93c137b
+PKG_VERSION:=		dnh3.3.2
+PKG_RELEASE:=		1
+PKG_BUILDDEP+=		openssl
+PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
 PKG_DESCR:=		console-based BitTorrent client
 PKG_SECTION:=		net
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
-PKG_SITES:=		http://www.rahul.net/dholmes/ctorrent/
-
-WRKDIST=		${WRKDIR}/${PKG_NAME}-dnh2
-
-ifeq ($(ADK_COMPILE_CTORRENT_WITH_UCLIBCXX),y)
-PKG_DEPENDS:=            uclibc++
-else
-PKG_DEPENDS:=            libstdcxx
-endif
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_COMPILE_CTORRENT_WITH_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
-TLDFLAGS+=		-lgcc_s -luClibc++ -lc -lm -nodefaultlibs
-endif
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
-
 post-install:
-	${INSTALL_DIR} ${IDIR_CTORRENT}
-	${CP} ${WRKINST}/* ${IDIR_CTORRENT}/
+	${INSTALL_DIR} ${IDIR_CTORRENT}/usr/bin
+	${CP} ${WRKINST}/usr/bin/ctorrent ${IDIR_CTORRENT}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

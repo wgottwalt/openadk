@@ -16,14 +16,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
 CONFIGURE_ARGS+=	--enable-static
-BUILD_STYLE:=		auto
 MAKE_FLAGS+=		CFLAGS_O="${TARGET_CFLAGS}"
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBLZO}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/liblzo2.so.* ${IDIR_LIBLZO}/usr/lib
+	${CP} ${WRKINST}/usr/lib/liblzo2.so* ${IDIR_LIBLZO}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -4,25 +4,28 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
-PKG_VERSION:=		1.1.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		2feb39a0de6f05b25c308268691d960c
+PKG_VERSION:=		1.3.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b68aebbfcac1174c4c95d260e9369766
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11
+PKG_BUILDDEP+=		xproto xextproto xtrans libXdmcp libXau xcmiscproto bigreqsproto kbproto inputproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--enable-xlocale \
+			--disable-specs \
 			--disable-xf86bigfont \
 			--disable-malloc0returnsnull \
 			--without-xcb
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto confprog
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11

@@ -14,23 +14,17 @@ PKG_SITES:=		http://www.tcpdump.org/release/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCAP,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+=		ac_cv_linux_vers=26
 CONFIGURE_ARGS+=	--disable-yydebug \
 			--with-build-cc=$(HOSTCC) \
 			--with-pcap=linux
-BUILD_STYLE=		auto
 TCFLAGS+=		${TCPPFLAGS}
-INSTALL_STYLE=		auto
 INSTALL_TARGET=		install install-shared
-
-pre-install:
-	${INSTALL_DIR} ${WRKINST}/usr/bin
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libpcap.so.* ${IDIR_LIBPCAP}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpcap.so* ${IDIR_LIBPCAP}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

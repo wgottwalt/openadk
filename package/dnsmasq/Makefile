@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.49
+PKG_VERSION:=		2.51
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7ccc861d8a733474f9c0a0a127006ee9
+PKG_MD5SUM:=		97465261a6de5258a3c3edfe51ca16a4
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		net
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq
@@ -16,12 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DNSMASQ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-BUILD_STYLE:=		auto
-INSTALL_STYLE=		manual
+CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
 MAKE_FLAGS+=		BINDIR=/usr/sbin MANDIR=/usr/man COPTS="${TCFLAGS}"
-ifneq ($(ADK_IPV6),y)
-MAKE_FLAGS+=		COPTS="${TCFLAGS} -DNO_IPV6"
-endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_DNSMASQ}/usr/sbin ${IDIR_DNSMASQ}/etc

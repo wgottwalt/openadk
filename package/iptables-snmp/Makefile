@@ -6,6 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		iptables-snmp
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
+PKG_BUILDDEP+=		net-snmp
 PKG_MD5SUM:=		8370d2f0c899461a053da491400119d1
 PKG_DESCR:=		iptables support for net-snmp
 PKG_SECTION:=		net
@@ -16,9 +17,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,IPTABLES_SNMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 
 post-install:

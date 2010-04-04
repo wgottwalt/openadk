@@ -5,7 +5,11 @@ include ${TOPDIR}/rules.mk
 
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
-else
+endif
+ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+include ${TOPDIR}/toolchain/eglibc/Makefile.inc
+endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 
@@ -14,9 +18,17 @@ PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
 NO_DISTFILES:=		1
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPTHREAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib

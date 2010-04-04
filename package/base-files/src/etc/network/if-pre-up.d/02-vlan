@@ -1,0 +1,36 @@
+#!/bin/sh
+
+[ -x /sbin/vconfig ] || exit 0
+[ -d /proc/net/vlan ] || exit 0
+
+case "$IFACE" in
+        vlan*)
+               	vconfig set_name_type VLAN_PLUS_VID_NO_PAD
+               	VLANID=`echo $IFACE|sed "s/vlan*//"`
+		;;
+	eth*.*)
+		vconfig set_name_type DEV_PLUS_VID_NO_PAD
+		VLANID=`echo $IFACE|sed "s/eth[0-9][0-9]*\.*//g"`
+		IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/"`
+		;;
+	*)
+		exit 0
+		;;
+esac
+
+if [ "$IF_VLAN_RAW_DEVICE" != "" ]; then
+	if ! grep -q "$IF_VLAN_RAW_DEVICE" /proc/net/dev
+	then
+		echo "$IF_VLAN_RAW_DEVICE does not exist, unable to create $IFACE"
+		exit 1
+	fi
+	ip link set up dev $IF_VLAN_RAW_DEVICE
+	vconfig add $IF_VLAN_RAW_DEVICE $VLANID
+	if [ "$IF_MAC_ADDRESS" != "" ]
+	then
+		ip link set $IF_VLAN_RAW_DEVICE.$VLANID address $IF_MAC_ADDRESS
+	fi
+	ip link set up dev $IF_VLAN_RAW_DEVICE.$VLANID
+fi
+
+exit 0

@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.40
+PKG_VERSION:=		4.59
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a25fa37c97c309338649f6a5fd4cea76
+PKG_MD5SUM:=		1c7cee215bc84656b1edee019cee78f5
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
-PKG_DEPENDS:=		kmod-bluetooth
+PKG_DEPENDS:=		kmod-bt libusb glib dbus
+PKG_BUILDDEP+=		libusb dbus glib
 PKG_URL:=		http://www.bluez.org
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
@@ -17,7 +18,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BLUEZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
+ifeq ($(ADK_STATIC),y)
+XAKE_FLAGS+=		V=1 CCLD="$(TARGET_CC) -all-static -pthread"
+else
+XAKE_FLAGS+=            V=1
+endif
+CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \
 			--enable-alsa \
 			--enable-usb \
@@ -25,22 +31,24 @@ CONFIGURE_ARGS+=	--enable-tools \
 			--enable-hidd \
 			--enable-pand \
 			--enable-dund \
+			--enable-netlink \
+			--disable-pie \
 			--disable-cups
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
+ifneq ($(ADK_STATIC),y)
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libbluetooth.so.* ${IDIR_BLUEZ}/usr/lib/
+endif
 	${INSTALL_DIR} $(IDIR_BLUEZ)/etc/dbus-1/system.d
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_BLUEZ}/usr/bin/
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_BLUEZ}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_BLUEZ}/etc/bluetooth
-	${CP} ${WRKINST}/etc/bluetooth/rfcomm.conf \
-	    ${IDIR_BLUEZ}/etc/bluetooth/
-	$(INSTALL_DATA) $(WRKINST)/etc/dbus-1/system.d/bluetooth.conf \
+	$(INSTALL_DATA) ./files/main.conf \
+		${IDIR_BLUEZ}/etc/bluetooth/
+	$(INSTALL_DATA) ./files/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
 
 include ${TOPDIR}/mk/pkg-bottom.mk

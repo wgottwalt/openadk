@@ -1,9 +1,0 @@
-config ADK_PACKAGE_OPENOBEX
-	prompt "openobex.......................... openobex library"
-	tristate
-	default n
-	select ADK_PACKAGE_BLUEZ
-	help
-	  Free open source implementation of the Object Exchange (OBEX) protocol.  
-
-	  http://openobex.triq.net/

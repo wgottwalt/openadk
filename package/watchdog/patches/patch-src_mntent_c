@@ -1,16 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- watchdog-5.2.4.orig.orig/src/mntent.c	2003-01-28 07:47:38.000000000 +0100
-+++ watchdog-5.2.4.orig/src/mntent.c	2008-10-16 13:00:20.000000000 +0200
-@@ -6,7 +6,7 @@
- #endif
- 
- #include <stdio.h>
--#include <string.h>		/* for index */
-+#include <string.h>		/* for strchr */
- #include <ctype.h>		/* for isdigit */
- #include "wd_mntent.h"
- #include "sundries.h"		/* for xmalloc */
-@@ -155,7 +155,7 @@ my_getmntent (mntFILE *mfp) {
+--- watchdog-5.7.orig/src/mntent.c	2010-01-06 13:42:08.000000000 +0100
++++ watchdog-5.7/src/mntent.c	2010-02-06 04:39:34.804334839 +0100
+@@ -157,7 +157,7 @@ my_getmntent (mntFILE *mfp) {
  		if (fgets (buf, sizeof(buf), mfp->mntent_fp) == NULL)
  			return NULL;
  

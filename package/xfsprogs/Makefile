@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
-PKG_VERSION:=		3.0.0
+PKG_VERSION:=		3.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec734f935ec87ebb8be890d29380a3e6
+PKG_MD5SUM:=		c2308b46ee707597ac50aae418d321b8
 PKG_DESCR:=		Utilities to create and check XFS filesystems
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libuuid libpthread
+PKG_BUILDDEP+=		e2fsprogs
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
@@ -18,17 +19,16 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE=	autoconf gnu
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--enable-gettext=no \
 			--with-gnu-ld
 CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" "
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 ALL_TARGET=		
 
-post-install:
-	${INSTALL_DIR} ${IDIR_XFSPROGS}/sbin
-	${CP} ${WRKINST}/usr/sbin/mkfs.xfs ${IDIR_XFSPROGS}/sbin/
-	${CP} ${WRKINST}/usr/sbin/xfs_repair ${IDIR_XFSPROGS}/sbin/
+do-install:
+	${INSTALL_DIR} ${IDIR_XFSPROGS}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/mkfs/mkfs.xfs ${IDIR_XFSPROGS}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/repair/xfs_repair ${IDIR_XFSPROGS}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

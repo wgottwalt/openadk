@@ -1,22 +1,17 @@
---- bitlbee-1.2.3.orig/protocols/jabber/Makefile	2008-09-06 14:33:13.000000000 +0200
-+++ bitlbee-1.2.3/protocols/jabber/Makefile	2009-08-28 11:15:01.100110500 +0200
+--- bitlbee-1.2.4.orig/protocols/jabber/Makefile	2009-10-17 17:26:46.000000000 +0200
++++ bitlbee-1.2.4/protocols/jabber/Makefile	2010-03-07 20:00:36.426039459 +0100
 @@ -12,7 +12,7 @@
  objects = conference.o io.o iq.o jabber.o jabber_util.o message.o presence.o sasl.o
  
  CFLAGS += -Wall
 -LFLAGS += -r
-+#LFLAGS += -r
++LFLAGS += -Wl,-r -nostdlib
  
  # [SH] Phony targets
  all: jabber_mod.o
-@@ -34,8 +34,8 @@ $(objects): ../../Makefile.settings Make
- 
- $(objects): %.o: %.c
- 	@echo '*' Compiling $<
--	@$(CC) -c $(CFLAGS) $< -o $@
-+	$(CC) -c $(CFLAGS) $< -o $@
+@@ -38,4 +38,4 @@ $(objects): %.o: %.c
  
  jabber_mod.o: $(objects)
  	@echo '*' Linking jabber_mod.o
 -	@$(LD) $(LFLAGS) $(objects) -o jabber_mod.o
-+	$(CC) -shared $(LDFLAGS) $(objects) -o jabber_mod.o
++	@$(CC) $(LFLAGS) $(objects) -o jabber_mod.o

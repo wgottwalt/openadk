@@ -15,7 +15,7 @@ start)
 	srelay ${srelay_flags}
 	;;
 stop)
-	killall srelay
+	pkill srelay
 	;;
 restart)
 	sh $0 stop

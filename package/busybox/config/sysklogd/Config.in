@@ -30,7 +30,7 @@ config BUSYBOX_FEATURE_ROTATE_LOGFILE
 
 config BUSYBOX_FEATURE_REMOTE_LOG
 	bool "Remote Log support"
-	default n
+	default y
 	depends on BUSYBOX_SYSLOGD
 	help
 	  When you enable this feature, the syslogd utility can
@@ -85,7 +85,7 @@ config BUSYBOX_LOGREAD
 
 config BUSYBOX_FEATURE_LOGREAD_REDUCED_LOCKING
 	bool "Double buffering"
-	default y
+	default n
 	depends on BUSYBOX_LOGREAD
 	help
 	  'logread' ouput to slow serial terminals can have

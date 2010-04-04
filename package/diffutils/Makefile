@@ -17,9 +17,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DIFFUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_use_included_regex=no
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DIFFUTILS}/usr/bin

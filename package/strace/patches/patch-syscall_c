@@ -1,81 +1,13 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- strace-4.5.18.orig/syscall.c	2008-08-25 05:16:26.000000000 +0200
-+++ strace-4.5.18/syscall.c	2009-01-02 21:24:05.514097112 +0100
-@@ -772,6 +772,8 @@ internal_syscall(struct tcb *tcp)
-        static long r9;
- #elif defined(X86_64)
-        static long rax;
-+#elif defined(CRISV10) || defined(CRISV32)
-+	static long r10;
- #endif
- #endif /* LINUX */
- #ifdef FREEBSD
-@@ -1273,7 +1275,10 @@ struct tcb *tcp;
- 			return 0;
- 		}
- 	}
--#endif /* SH64 */
-+#elif defined(CRISV10) || defined(CRISV32)
-+	if (upeek(pid, 4*PT_R9, &scno) < 0)
-+		       return -1;
-+#endif /* CRISV10/CRISV32 */
- #endif /* LINUX */
- #ifdef SUNOS4
- 	if (upeek(pid, uoff(u_arg[7]), &scno) < 0)
-@@ -1468,6 +1473,14 @@ struct tcb *tcp;
- 			fprintf(stderr, "stray syscall exit: r8 = %ld\n", r8);
- 		return 0;
- 	}
-+#elif defined(CRISV10) || defined(CRISV32)
-+	if (upeek(pid, 4*PT_R10, &r10) < 0)
-+		return -1;
-+	if (r10 != -ENOSYS && !(tcp->flags & TCB_INSYSCALL)) {
-+		if (debug)
-+			fprintf(stderr, "stray syscall exit: r10 = %ld\n", r10);
-+		return 0;
-+	}
- #endif
- #endif /* LINUX */
- 	return 1;
-@@ -1649,6 +1662,17 @@ struct tcb *tcp;
-                         tcp->u_rval = r9;
- 	                u_error = 0;
-                 }
-+#else
-+#if defined(CRISV10) || defined(CRISV32)
-+		if (r10 && (unsigned) -r10 < nerrnos) {
-+			tcp->u_rval = -1;
-+			u_error = -r10;
-+		}
-+		else {
-+			tcp->u_rval = r10;
-+			u_error = 0;
-+		}
-+#endif /* CRISV10/CRISV32 */
- #endif /* SH64 */
- #endif /* SH */
- #endif /* HPPA */
-@@ -2169,6 +2193,23 @@ struct tcb *tcp;
- 				return -1;
- 		}
- 	}
-+#elif defined(CRISV10) || defined(CRISV32)
-+	{
-+		int i;
-+		static const int crisregs[] = {
-+			4*PT_ORIG_R10, 4*PT_R11, 4*PT_R12,
-+			4*PT_R13, 4*PT_MOF, 4*PT_SRP
-+		};
-+		
-+		if (tcp->scno >= 0 && tcp->scno < nsyscalls)
-+			tcp->u_nargs = sysent[tcp->scno].nargs;
-+		else
-+			tcp->u_nargs = 0;
-+		for (i = 0; i < tcp->u_nargs; i++) {
-+			if (upeek(pid, crisregs[i], &tcp->u_arg[i]) < 0)
-+				return -1;
-+		}
-+	}
- #else /* Other architecture (like i386) (32bits specific) */
- 	{
- 		int i;
+from git
+http://strace.git.sourceforge.net/git/gitweb.cgi?p=strace/strace;a=blobdiff;f=syscall.c;h=a56d7df44874389fbd1d171a94698d07a1e5555a;hp=4f46bf63d180feae18480b697764257947af699b;hb=2ee50b7;hpb=c8c6698ef7cde83a496b273672a51ec2a8f14fb3
+--- strace-4.5.19.orig/syscall.c	2009-10-12 21:54:21.000000000 +0200
++++ strace-4.5.19/syscall.c	2010-02-28 19:14:28.000000000 +0100
+@@ -2035,7 +2035,7 @@ syscall_enter(struct tcb *tcp)
+ 		else
+ 			nargs = tcp->u_nargs = MAX_ARGS;
+ 
+-		if (ptrace (PTRACE_GETREGS, pid, NULL, (long) &regs) < 0)
++		if (ptrace (PTRACE_GETREGS, tcp->pid, NULL, (long) &regs) < 0)
+ 			return -1;
+ 
+ 		for(i = 0; i < nargs; i++) {

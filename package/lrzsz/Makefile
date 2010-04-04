@@ -16,11 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LRZSZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-CONFIGURE_ARGS+=	ac_cv_lib_nsl_gethostbyname=no
+INSTALL_STYLE:=		manual
+
 CONFIGURE_ARGS+=	--without-libiconv-prefix \
 			--without-libintl-prefix
-BUILD_STYLE:=		auto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LRZSZ}/usr/bin

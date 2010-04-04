@@ -1,0 +1,46 @@
+do not strip by install
+--- evilwm-1.0.1.orig/Makefile	2009-03-30 12:37:06.000000000 +0200
++++ evilwm-1.0.1/Makefile	2010-01-27 08:14:46.000000000 +0100
+@@ -1,11 +1,11 @@
+ # If you don't use CC 
+-CC       = gcc
++CC       ?= gcc
+ 
+ # Edit this line if you don't want evilwm to install under /usr.
+ # Note that $(DESTDIR) is used by the Debian build process.
+ prefix = $(DESTDIR)/usr
+ 
+-XROOT    = /usr/X11R6
++XROOT    ?= /usr/X11R6
+ INCLUDES = -I$(XROOT)/include
+ LDPATH   = -L$(XROOT)/lib
+ LIBS     = -lX11
+@@ -35,8 +35,8 @@ LIBS    += -lXext
+ # Be sure that libXrandr is in your library search directory (e.g., under
+ # Solaris, it is in /usr/X11R6/lib, so can be built against with the default
+ # XPATH above, but won't necessarily be in the library search path).
+-DEFINES += -DRANDR
+-LIBS    += -lXrandr
++#DEFINES += -DRANDR
++#LIBS    += -lXrandr
+ 
+ # Uncomment for mouse support.  You probably want this.
+ DEFINES += -DMOUSE
+@@ -71,7 +71,7 @@ distname = evilwm-$(version)
+ #DEFINES += -DXDEBUG  # show some X calls
+ 
+ DEFINES += -DVERSION=\"$(version)\" $(DEBIAN)
+-CFLAGS  += $(INCLUDES) $(DEFINES) -Os -Wall
++CFLAGS  += $(INCLUDES) $(DEFINES) -Wall
+ #CFLAGS  += $(INCLUDES) $(DEFINES) -g -Wall
+ CFLAGS  += -W -Wstrict-prototypes -Wpointer-arith -Wcast-align -Wcast-qual -Wshadow -Waggregate-return -Wnested-externs -Winline -Wwrite-strings -Wundef -Wsign-compare -Wmissing-prototypes -Wredundant-decls
+ LDFLAGS += $(LDPATH) $(LIBS)
+@@ -93,7 +93,7 @@ evilwm: $(OBJS)
+ install: evilwm
+ 	if [ -f evilwm.exe ]; then mv evilwm.exe evilwm; fi
+ 	mkdir -p $(prefix)/bin $(prefix)/share/man/man1
+-	install -s evilwm $(prefix)/bin
++	install evilwm $(prefix)/bin
+ 	install evilwm.1 $(prefix)/share/man/man1
+ 	#gzip -9 $(prefix)/share/man/man1/evilwm.1
+ 

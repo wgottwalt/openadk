@@ -9,16 +9,13 @@ PKG_RELEASE=		2
 PKG_MD5SUM=		628bb44194d04c1cf8aacc446ed0a230
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libopenssl fuse-utils kmod-fuse libfuse neon glib
+PKG_DEPENDS:=		libopenssl fuse-utils kmod-fuse-fs neon glib
+PKG_BUILDDEP+=		openssl fuse neon glib
 PKG_SITES=		http://noedler.de/projekte/wdfs/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WDFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-CONFIGURE_STYLE=	gnu
-BUILD_STYLE=		auto
-INSTALL_STYLE=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WDFS}/usr/bin

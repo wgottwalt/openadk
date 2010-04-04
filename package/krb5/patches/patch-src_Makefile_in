@@ -1,10 +1,9 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- krb5-1.6.3.orig/src/Makefile.in	2007-09-18 05:38:17.000000000 +0200
-+++ krb5-1.6.3/src/Makefile.in	2009-01-29 11:50:21.000000000 +0100
-@@ -7,7 +7,6 @@ mydir=.
- SUBDIRS=util include lib @krb524@ kdc kadmin @ldap_plugin_dir@ slave clients \
+--- krb5-1.7.orig/src/Makefile.in	Wed Apr 15 22:07:03 2009
++++ krb5-1.7/src/Makefile.in	Mon Dec 28 16:13:47 2009
+@@ -13,7 +13,6 @@ SUBDIRS=util include lib kdc kadmin @ldap_plugin_dir@ 
  	plugins/kdb/db2 \
  	plugins/preauth/pkinit \
+ 	plugins/preauth/encrypted_challenge \
 -	appl tests \
  	config-files gen-manpages
  BUILDTOP=$(REL)$(C)

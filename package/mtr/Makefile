@@ -10,6 +10,7 @@ PKG_MD5SUM:=		23baca52d0922c2ecba7eba05317868c
 PKG_DESCR:=		ncurses traceroute/ping tool
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP+=		ncurses
 PKG_URL:=		http://www.bitwizard.nl/mtr
 PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
@@ -17,11 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MTR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE+=	gnu
 CONFIGURE_ENV+=		ac_cv_lib_resolv_res_mkquery=yes
 CONFIGURE_ARGS+=	--without-gtk
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MTR}/usr/sbin

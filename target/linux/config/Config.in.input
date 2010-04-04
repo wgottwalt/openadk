@@ -1,4 +1,5 @@
 menu "Input devices"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT
 
 config ADK_KERNEL_INPUT
 	bool
@@ -13,7 +14,7 @@ config ADK_KERNEL_HID_SUPPORT
 	default n
 
 config ADK_KERNEL_HID
-	tristate
+	bool
 	select ADK_KERNEL_HID_SUPPORT
 	default n
 
@@ -23,6 +24,8 @@ config ADK_KPACKAGE_KMOD_USB_HID
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_TARGET_WITH_USB
+	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
@@ -34,6 +37,12 @@ config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
 
 config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
 	prompt "kmod-input-mouse................. Mouse support (PS/2)"
+	select ADK_KERNEL_INPUT
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_INPUT_EVDEV
+	prompt "kmod-input-evdev................. Event support"
 	select ADK_KERNEL_INPUT
 	tristate
 	default n

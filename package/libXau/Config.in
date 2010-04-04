@@ -1,6 +1,0 @@
-config ADK_PACKAGE_LIBXAU
-	prompt "libXau................................. X library"
-	tristate
-	default n
-	help
-         http://www.x.org

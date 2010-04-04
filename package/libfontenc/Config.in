@@ -1,7 +1,0 @@
-config ADK_PACKAGE_LIBFONTENC
-	prompt "libfontenc.............................. X font encoding library"
-	tristate
-	select ADK_PACKAGE_ZLIB
-	default n
-	help
-         http://www.x.org

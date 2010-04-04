@@ -1,0 +1,11 @@
+--- cvs-1.11.23.orig/lib/getline.c	2005-04-04 22:46:05.000000000 +0200
++++ cvs-1.11.23/lib/getline.c	2010-03-07 20:38:26.117286460 +0100
+@@ -155,7 +155,7 @@ getstr (lineptr, n, stream, terminator, 
+ }
+ 
+ int
+-getline (lineptr, n, stream)
++get_line (lineptr, n, stream)
+      char **lineptr;
+      size_t *n;
+      FILE *stream;

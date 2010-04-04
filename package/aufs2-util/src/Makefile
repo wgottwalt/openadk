@@ -34,7 +34,7 @@ LibUtil = libautil.a
 LibUtilObj = proc_mnt.o br.o plink.o mtab.o
 LibUtilHdr = au_util.h
 
-all: ${Man} ${Bin} ${Etc} #${LibSo}
+all: ${Bin} ${Etc} #${LibSo}
 
 ${Bin}: LDFLAGS += -static -s
 ${Bin}: LDLIBS = -L. -lautil
@@ -94,7 +94,7 @@ install_etc: ${File}
 	install -m 644 -o root -g root -p -T ${File} ${Tgt}
 
 # do not inlcude install_ulib here
-install: install_man install_sbin install_ubin install_etc
+install: install_sbin install_ubin install_etc
 
 clean:
 	${RM} ${Man} ${Bin} ${Etc} ${LibUtil} ${LibSo} *~

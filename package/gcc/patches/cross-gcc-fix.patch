@@ -1,0 +1,13 @@
+diff -Nur gcc-4.4.2.orig/gcc/Makefile.in gcc-4.4.2/gcc/Makefile.in
+--- gcc-4.4.2.orig/gcc/Makefile.in	2009-07-25 19:53:35.000000000 +0200
++++ gcc-4.4.2/gcc/Makefile.in	2009-11-22 15:30:27.000000000 +0100
+@@ -898,7 +898,8 @@
+ # Likewise.  Put INCLUDES at the beginning: this way, if some autoconf macro
+ # puts -I options in CPPFLAGS, our include files in the srcdir will always
+ # win against random include files in /usr/include.
+-ALL_CPPFLAGS = $(INCLUDES) $(CPPFLAGS)
++#ALL_CPPFLAGS = $(INCLUDES) $(CPPFLAGS)
++ALL_CPPFLAGS = $(INCLUDES)
+ 
+ # Build and host support libraries.
+ LIBIBERTY = ../libiberty/libiberty.a

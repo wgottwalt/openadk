@@ -4,28 +4,27 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		logrotate
-PKG_VERSION:=		3.7.1
+PKG_VERSION:=		3.7.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		552639142e163745f6bcd4f1f3816d8a
+PKG_MD5SUM:=		b3589bea6d8d5afc8a84134fddaae973
 PKG_DESCR:=		logfile rotation utility
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpopt
-PKG_SITES:=		http://ftp.debian.org/debian/pool/main/l/logrotate/
-
-DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
+PKG_BUILDDEP+=		popt
+PKG_SITES:=		https://fedorahosted.org/releases/l/o/logrotate/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-D_GNU_SOURCE -DLinux -DVERSION=\"$(PKG_VERSION)\"
-ALL_TARGET=		logrotate
-BUILD_STYLE=		auto
+CONFIG_STYLE:=		manual
 
-do-install:
+TCFLAGS+=              -D_GNU_SOURCE -DVERSION=\"$(PKG_VERSION)\"
+
+post-install:
 	${INSTALL_DIR} ${IDIR_LOGROTATE}/usr/sbin
-	${CP} ${WRKBUILD}/logrotate ${IDIR_LOGROTATE}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/logrotate ${IDIR_LOGROTATE}/usr/sbin
 	${INSTALL_DIR} ${IDIR_LOGROTATE}/etc/logrotate.d
-	${CP} ./files/logrotate.conf ${IDIR_LOGROTATE}/etc
+	${INSTALL_DATA} ./files/logrotate.conf ${IDIR_LOGROTATE}/etc
 
 include ${TOPDIR}/mk/pkg-bottom.mk

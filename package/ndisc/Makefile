@@ -20,9 +20,6 @@ $(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_STYLE:=	gnu
-BUILD_STYLE:=		auto
-INSTALL_STYLE:=		auto
 MAKE_FLAGS+=		CC="${TARGET_CC}"
 
 post-install:
@@ -31,6 +28,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_RDISC6}/usr/bin
 	${INSTALL_BIN} ${WRKINST}//usr/bin/rdisc6 ${IDIR_RDISC6}/usr/bin/
 	${INSTALL_DIR} ${IDIR_TCPTRACEROUTE6}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/tcptraceroute6 ${IDIR_TCPTRACEROUTE6}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/tcptraceroute6 \
+		${IDIR_TCPTRACEROUTE6}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

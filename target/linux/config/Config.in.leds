@@ -1,14 +1,47 @@
-menu "LEDS driver support"
-
 config ADK_KERNEL_NEW_LEDS
 	bool
 	default n
 	help
 
+config ADK_KERNEL_LEDS_TRIGGERS
+	bool
+	default n
+	select ADK_KERNEL_NEW_LEDS
+	help
+
+menu "LEDS driver support"
+depends on ADK_TARGET_WITH_LEDS
+
 config ADK_KPACKAGE_KMOD_LEDS_CLASS
 	prompt "LED Class support"
 	tristate
+	select ADK_KERNEL_NEW_LEDS
 	default n
 	help
+
+config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_TIMER
+	prompt "LED Timer trigger"
+	tristate
+	select ADK_KERNEL_LEDS_TRIGGERS
+	default n
+
+config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_HEARTBEAT
+	prompt "LED Heartbeat trigger"
+	tristate
+	select ADK_KERNEL_LEDS_TRIGGERS
+	default n
+
+config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_DEFAULT_ON
+	prompt "LED Default On trigger"
+	tristate
+	select ADK_KERNEL_LEDS_TRIGGERS
+	default n
+
+config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_LED
+	prompt "LED IPTables trigger"
+	tristate
+	select ADK_KERNEL_LEDS_TRIGGERS
+	select ADK_PACKAGE_IPTABLES
+	default n
 
 endmenu

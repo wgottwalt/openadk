@@ -5,10 +5,43 @@
 config ADK_BROKEN
 	bool
 
+config ADK_TARGET_WITH_USB
+	bool
+
+config ADK_TARGET_WITH_PCI
+	bool
+
+config ADK_TARGET_WITH_MINIPCI
+	bool
+
+config ADK_TARGET_WITH_VGA
+	bool
+
+config ADK_TARGET_WITH_INPUT
+	bool
+
+config ADK_TARGET_WITH_LEDS
+	bool
+
+config ADK_TARGET_WITH_PP
+	bool
+
+config ADK_TARGET_WITH_CARDBUS
+	bool
+
+config ADK_TARGET_WITH_RTC
+	bool
+
+config ADK_TARGET_WITH_WATCHDOG
+	bool
+
+config ADK_TARGET_WITH_DSL
+	bool
+
 config ADK_TOOLCHAIN_ONLY
 	bool
 
-config ADK_DEVICE_NO_FPU
+config ADK_TARGET_NO_FPU
 	bool
 
 config ADK_EABI
@@ -23,22 +56,61 @@ config ADK_NATIVE
 config ADK_alix1c
 	tristate
 
-config ADK_qemu_x86
+config ADK_alix2d
 	tristate
 
-config ADK_qemu_mips
+config ADK_alix2d13
 	tristate
 
-config ADK_qemu_mipsel
+config ADK_wrap
 	tristate
 
-config ADK_qemu_mips64
+config ADK_arm_toolchain
 	tristate
 
-config ADK_qemu_mips64el
+config ADK_armel_toolchain
 	tristate
 
-config ADK_qemu_cris
+config ADK_mips_toolchain
+	tristate
+
+config ADK_mipsel_toolchain
+	tristate
+
+config ADK_ppc_toolchain
+	tristate
+
+config ADK_sparc_toolchain
+	tristate
+
+config ADK_x86_toolchain
+	tristate
+
+config ADK_x86_64_toolchain
+	tristate
+
+config ADK_arm_qemu
+	tristate
+
+config ADK_mips_qemu
+	tristate
+
+config ADK_mipsel_qemu
+	tristate
+
+config ADK_mips64_qemu
+	tristate
+
+config ADK_mips64el_qemu
+	tristate
+
+config ADK_cris_qemu
+	tristate
+
+config ADK_x86_qemu
+	tristate
+
+config ADK_x86_64_qemu
 	tristate
 
 config ADK_rb532
@@ -53,7 +125,7 @@ config ADK_rb433
 config ADK_zaurus
 	tristate
 
-config ADK_tomtom
+config ADK_foxg20
 	tristate
 
 config ADK_foxboard
@@ -62,16 +134,19 @@ config ADK_foxboard
 config ADK_lemote
 	tristate
 
-config ADK_rescue_x86
+config ADK_x86_rescue
 	tristate
 
-config ADK_rescue_x86_64
+config ADK_x86_64_rescue
 	tristate
 
-config ADK_rescue_mips
+config ADK_mips_rescue
 	tristate
 
-config ADK_rescue_mipsel
+config ADK_mipsel_rescue
+	tristate
+
+config ADK_ag241
 	tristate
 
 config ADK_wag54g
@@ -80,19 +155,28 @@ config ADK_wag54g
 config ADK_shuttle
 	tristate
 
-config ADK_g1
-	tristate
-
-config ADK_DEVICE
+config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
-	default "qemu-x86"  if ADK_qemu_x86
-	default "qemu-mips"  if ADK_qemu_mips
-	default "qemu-mipsel"  if ADK_qemu_mipsel
-	default "qemu-mips64"  if ADK_qemu_mips64
-	default "qemu-mips64el"  if ADK_qemu_mips64el
-	default "qemu-cris"  if ADK_qemu_cris
+	default "alix2d"  if ADK_alix2d
+	default "alix2d13"  if ADK_alix2d13
+	default "wrap"  if ADK_wrap
+	default "toolchain-arm"  if ADK_arm_toolchain
+	default "toolchain-armel"  if ADK_armel_toolchain
+	default "toolchain-mips"  if ADK_mips_toolchain
+	default "toolchain-mipsel"  if ADK_mipsel_toolchain
+	default "toolchain-ppc"  if ADK_ppc_toolchain
+	default "toolchain-sparc"  if ADK_sparc_toolchain
+	default "toolchain-x86"  if ADK_x86_toolchain
+	default "toolchain-x86_64"  if ADK_x86_64_toolchain
+	default "qemu-arm"  if ADK_arm_qemu
+	default "qemu-cris"  if ADK_cris_qemu
+	default "qemu-mips"  if ADK_mips_qemu
+	default "qemu-mipsel"  if ADK_mipsel_qemu
+	default "qemu-x86"  if ADK_x86_qemu
+	default "qemu-x86_64"  if ADK_x86_64_qemu
 	default "foxboard"  if ADK_foxboard
+	default "foxg20"  if ADK_foxg20
 	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
 	default "rb411"  if ADK_rb411
@@ -100,51 +184,87 @@ config ADK_DEVICE
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
 	default "wag54g"  if ADK_wag54g
-	default "rescue-x86"  if ADK_rescue_x86
-	default "rescue-x86_64"  if ADK_rescue_x86_64
-	default "rescue-mips"  if ADK_rescue_mips
-	default "rescue-mipsel"  if ADK_rescue_mipsel
+	default "ag241"  if ADK_ag241
+	default "rescue-x86"  if ADK_x86_rescue
+	default "rescue-x86_64"  if ADK_x86_64_rescue
+	default "rescue-mips"  if ADK_mips_rescue
+	default "rescue-mipsel"  if ADK_mipsel_rescue
 	default "shuttle"  if ADK_shuttle
-	default "tomtom"  if ADK_tomtom
-	default "g1"  if ADK_g1
+
+# c library
+config ADK_uclibc
+	tristate
+
+config ADK_eglibc
+	tristate
+
+config ADK_glibc
+	tristate
+
+config ADK_LIBC
+	string
+	default "uclibc"  if ADK_uclibc
+	default "eglibc"  if ADK_eglibc
+	default "glibc"  if ADK_glibc
+	default "native"  if ADK_NATIVE
 
 menu "Target system"
 
 choice
-prompt "Embedded Device"
+prompt "Embedded Device or Emulator"
 default ADK_LINUX_NATIVE
 
 config ADK_LINUX_NATIVE
 	bool "Native platform"
 	select ADK_NATIVE
+	depends on ADK_HOST_LINUX
 	help
 	  Make a native build. Use host tools.
 	  No toolchain will be created.
 
-config ADK_LINUX_X86_ALIX1C
-	bool "PC Engines Alix1C"
-	select ADK_alix1c
-	select ADK_KERNEL_SCSI
+config ADK_LINUX_ALIX
+	bool "ALIX and WRAP boards"
+	help
+	  Support for Alix and Wrap boards.
+	  http://www.pcengines.ch
+
+config ADK_LINUX_ARM_FOXBOARD
+	bool "Foxboard (FOXG20)"
+	select ADK_foxg20
+	select ADK_EABI
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
+	select ADK_KPACKAGE_KMOD_VFAT_FS
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_WATCHDOG
 	help
-	  http://www.pcengines.ch/
+	  Support for Foxboard target (foxg20).
+	  http://foxg20.acmesystems.it/doku.php
+	  Status: development
 
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
 	select ADK_foxboard
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_NLS
+	select ADK_TARGET_WITH_USB
 	help
-	  Foxboard support
+	  Support for Foxboard targets.
+	  http://foxlx.acmesystems.it/
+	  Status: stable
 
 config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
 	select ADK_LINUX_64
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_NETDEVICES
@@ -152,77 +272,101 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_KERNEL_SWAP
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_RTC
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
-	  Lemote Subnotebook
+	  Lemote Subnotebook.
+	  http://www.lemote.com/english/index.html
+	  http://www.tekmote.nl/
+	  Status: testing
 
 config ADK_LINUX_MIKROTIK
 	bool "Mikrotik Routerboards"
 	help
-	 Support for Mikrotik Routerboards
+	  Support for Mikrotik Routerboards
+	  http://www.mikrotik.com
+	  http://www.routerboards.com
 
-config ADK_LINUX_MIPS_WAG54G
-	bool "Linksys WAG54G"
+#config ADK_LINUX_MIPS_WAG54G
+#	bool "Linksys WAG54G"
+#	select ADK_KERNEL_NETDEVICES
+#	select ADK_KERNEL_NET_PCI
+#	select ADK_KERNEL_NET_ETHERNET
+#	select ADK_KERNEL_MII
+#	select ADK_wag54g
+#	help
+#	  Linksys WAG54G DSL router with Wireless.
+#	  (Texas Instruments AR7 platform)
+
+config ADK_LINUX_MIPS_AG241
+	bool "Linksys AG241v2"
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
-	select ADK_wag54g
+	select ADK_PACKAGE_KMOD_SANGAM_ATM
+	select ADK_KPACKAGE_KMOD_ATM_BR2684
+	select ADK_PACKAGE_BR2684CTL
+	select ADK_TARGET_WITH_DSL
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_ag241
 	help
-	  Linksys WAG54G DSL router with Wireless
-	  TI AR7 platform
+	  Linksys AG241 DSL router.
+	  (Texas Instruments AR7 platform)
+	  Status: stable
 
-config ADK_LINUX_ARM_TOMTOM
-	bool "TomTom Applications"
-	select ADK_tomtom
-	select ADK_DEVICE_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
+config ADK_LINUX_XSCALE_ZAURUS
+	bool "Zaurus SL-C3200"
+	select ADK_zaurus
+	select ADK_TARGET_NO_FPU
+	select ADK_TARGET_WITH_INPUT
+	depends on ADK_BROKEN
 	help
-	 Support for TomTom Rider 2 (or others).
-	 Just toolchain support to cross-compile your own
-	 applications.
-
-config ADK_LINUX_ARM_G1
-	bool "Google G1 Applications"
-	select ADK_g1
-	select ADK_DEVICE_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
-	help
-	 Support for Google G1.
-	 Just toolchain support to cross-compile your own
-	 applications.
-
-#config ADK_LINUX_XSCALE_ZAURUS
-#	bool "Zaurus SL-C3200"
-#	depends on ADK_BROKEN
-#	select ADK_zaurus
-#	select ADK_DEVICE_NO_FPU
-#	help
-#	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
+	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
+	 Status: development
 
 config ADK_LINUX_RESCUE
 	bool "Minimal Linux Rescuesystem"
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_TARGET_WITH_INPUT
 	help
 	 Rescuesystem with can be used to Boot from Disk or USB stick.
+	 Status: development
 
 config ADK_LINUX_QEMU
 	bool "Qemu Emulator"
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_MII
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_INPUT
 	help
 	 Support for Qemu Emulator
+
+config ADK_LINUX_TOOLCHAIN
+	bool "Toolchain only support"
+	help
+	 Toolchain only support
 
 config ADK_LINUX_X86_64_SHUTTLE
 	bool "Shuttle PC"
 	select ADK_shuttle
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PP
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_SATA_AHCI if ADK_TARGET_ROOTFS_ARCHIVE
+	select ADK_KERNEL_BLK_DEV_SD if ADK_TARGET_ROOTFS_ARCHIVE
 	select ADK_KERNEL_BLK_DEV_MD if ADK_TARGET_ROOTFS_ARCHIVE
 	select ADK_KERNEL_MD_RAID0 if ADK_TARGET_ROOTFS_ARCHIVE
 	select ADK_KERNEL_MD_RAID1 if ADK_TARGET_ROOTFS_ARCHIVE
@@ -232,7 +376,7 @@ config ADK_LINUX_X86_64_SHUTTLE
 	select ADK_KPACKAGE_KMOD_MD_RAID1 if ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	help
 	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
-	  Known as OpenADK multi operating system buildserver.
+	  Status: development
 
 endchoice
 
@@ -242,25 +386,27 @@ depends on ADK_LINUX_RESCUE
 
 config ADK_LINUX_X86_64_RESCUE
 	bool "x86_64"
-	select ADK_rescue_x86_64
+	select ADK_x86_64_rescue
 	help
 	 X86 architecture.
 
 config ADK_LINUX_X86_RESCUE
 	bool "x86"
-	select ADK_rescue_x86
+	select ADK_x86_rescue
 	help
 	 X86 architecture.
 
 config ADK_LINUX_MIPSEL_RESCUE
 	bool "mips (little endian)"
-	select ADK_rescue_mipsel
+	select ADK_mipsel_rescue
+	depends on ADK_BROKEN
 	help
 	 MIPS LE architecture.
 
 config ADK_LINUX_MIPS_RESCUE
 	bool "mips (big endian)"
-	select ADK_rescue_mips
+	select ADK_mips_rescue
+	depends on ADK_BROKEN
 	help
 	 MIPS BE architecture.
 
@@ -268,54 +414,266 @@ endchoice
 
 choice
 prompt "Architecture"
+depends on ADK_LINUX_TOOLCHAIN
+
+config ADK_LINUX_ARM_TOOLCHAIN
+	bool "ARM BE Toolchain"
+	select ADK_arm_toolchain
+	select ADK_TARGET_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_ARMEL_TOOLCHAIN
+	bool "ARM LE Toolchain"
+	select ADK_armel_toolchain
+	select ADK_TARGET_NO_FPU
+	select ADK_EABI
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_MIPS_TOOLCHAIN
+	bool "MIPS BE Toolchain (32 Bit)"
+	select ADK_mips_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_MIPSEL_TOOLCHAIN
+	bool "MIPS EL Toolchain (32 Bit)"
+	select ADK_mipsel_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_PPC_TOOLCHAIN
+	bool "PPC Toolchain (32 Bit)"
+	select ADK_ppc_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_SPARC_TOOLCHAIN
+	bool "SPARC Toolchain (32 Bit)"
+	select ADK_sparc_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_X86_TOOLCHAIN
+	bool "X86 Toolchain (32 Bit)"
+	select ADK_x86_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+config ADK_LINUX_X86_64_TOOLCHAIN
+	bool "X86 Toolchain (64 Bit)"
+	select ADK_x86_64_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Status: toolchain only
+
+endchoice
+
+
+#choice 
+#prompt "Target Optimization"
+#depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
+#
+#config ADK_LINUX_ARM_V5TE
+#	bool "armv5te"
+#	help
+#
+#config ADK_LINUX_ARM_V4T
+#	bool "armv4t"
+#	help
+#
+#endchoice
+
+#config ADK_TARGET_ARCH_OPTIMIZATION
+#	string
+#	default "armv5te" if ADK_LINUX_ARM_V5TE
+#	default "armv4t" if ADK_LINUX_ARM_V4T
+
+choice
+prompt "Architecture"
 depends on ADK_LINUX_QEMU
 
-config ADK_LINUX_X86_QEMU
-	bool "x86"
-	select ADK_qemu_x86
-	select ADK_KPACKAGE_KMOD_NE2K_PCI
+config ADK_LINUX_ARM_QEMU
+	bool "arm"
+	select ADK_arm_qemu
+	select ADK_EABI
 	select ADK_KERNEL_INPUT_KEYBOARD
 	help
-	 Qemu support for x86 architecture.
+	 Qemu support for ARM architecture.
+	 Right now this is optimized for Zaurus PDA spitz. 
+	 Status: development
 
 config ADK_LINUX_MIPS_QEMU
 	bool "mips (big endian)"
-	select ADK_qemu_mips
+	select ADK_mips_qemu
 	help
 	 Qemu support for MIPS BE architecture.
+	 Status: stable
 
 config ADK_LINUX_MIPSEL_QEMU
 	bool "mipsel (little endian)"
-	select ADK_qemu_mipsel
+	select ADK_mipsel_qemu
 	help
 	 Qemu support for MIPS LE architecture.
+	 Status: stable
 
 config ADK_LINUX_MIPS64_QEMU
 	bool "mips64 (big endian)"
-	select ADK_qemu_mips64
+	select ADK_mips64_qemu
 	select ADK_LINUX_64
+	depends on ADK_BROKEN
 	help
 	 Qemu support for MIPS64 BE architecture.
+	 Status: development
 
 config ADK_LINUX_MIPS64EL_QEMU
 	bool "mips64 (little endian)"
-	select ADK_qemu_mips64el
+	select ADK_mips64el_qemu
 	select ADK_LINUX_64
+	depends on ADK_BROKEN
 	help
 	 Qemu support for MIPS64 LE architecture.
+	 Status: development
 
 config ADK_LINUX_CRIS_QEMU
 	bool "cris"
-	select ADK_qemu_cris
-#	select ADK_BROKEN
+	select ADK_cris_qemu
+	depends on ADK_BROKEN
 	help
 	 Qemu support for CRISv32 architecture.
+
+config ADK_LINUX_X86_QEMU
+	bool "x86"
+	select ADK_x86_qemu
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KPACKAGE_KMOD_E1000
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_CRC32
+	select ADK_TARGET_WITH_VGA
+	help
+	 Qemu support for x86 architecture.
+	 Status: stable
+
+config ADK_LINUX_X86_64_QEMU
+	bool "x86_64"
+	select ADK_x86_64_qemu
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KPACKAGE_KMOD_E1000
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_TARGET_WITH_VGA
+	help
+	 Qemu support for x86_64 architecture.
+	 Status: stable
+
+endchoice
+
+choice
+prompt "Alix/Wrap model"
+default ADK_LINUX_X86_ALIX1C
+depends on ADK_LINUX_ALIX
+
+config ADK_LINUX_X86_ALIX1C
+	bool "PC Engines Alix1C"
+	select ADK_alix1c
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_INPUT
+	help
+	  Support for ALIX1C boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_ALIX2D
+	bool "PC Engines Alix2D"
+	select ADK_alix2d
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+	  Support for ALIX2D boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_ALIX2D13
+	bool "PC Engines Alix2D13"
+	select ADK_alix2d13
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NEW_LEDS
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select BUSYBOX_HWCLOCK
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_LEDS
+	help
+	  Support for ALIX2D13 boards.
+	  http://www.pcengines.ch/
+	  Status: stable
+
+config ADK_LINUX_X86_WRAP
+	bool "PC Engines WRAP"
+	select ADK_wrap
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_CRC32
+	select ADK_TARGET_WITH_WATCHDOG
+	select BUSYBOX_HWCLOCK
+	help
+	  End of life, but I still have one board.
+	  http://www.pcengines.ch/
+	  Status: stable
 
 endchoice
 
 choice
 prompt "Routerboard model"
-default ADK_LINUX_MIPS_RB433
+default ADK_LINUX_MIPS_RB532
 depends on ADK_LINUX_MIKROTIK
 
 config ADK_LINUX_MIPS_RB411
@@ -325,8 +683,11 @@ config ADK_LINUX_MIPS_RB411
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_MINIPCI
+	depends on ADK_BROKEN
 	help
 	 Support for Mikrotik RB411.
+	 Status: development
 
 config ADK_LINUX_MIPS_RB433
 	bool "Mikrotik Routerboard 433"
@@ -335,8 +696,11 @@ config ADK_LINUX_MIPS_RB433
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_MINIPCI
+	depends on ADK_BROKEN
 	help
 	 Support for Mikrotik RB433.
+	 Status: development
 
 config ADK_LINUX_MIPS_RB532
 	bool "Mikrotik Routerboard 532"
@@ -345,8 +709,16 @@ config ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_EXT2_FS
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
 	help
 	 Support for Mikrotik RB532.
+	 Status: stable
+
 endchoice
 
 choice
@@ -377,41 +749,47 @@ config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
 	depends on !ADK_LINUX_MIPS64_LEMOTE
+	select ADK_uclibc
 	help
  	 http://uclibc.org
 
 config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
+	select ADK_eglibc
 	depends on ADK_LINUX_X86_QEMU || \
+		ADK_LINUX_ARM_QEMU || \
 		ADK_LINUX_MIPS_QEMU || \
 		ADK_LINUX_MIPS64_QEMU || \
 		ADK_LINUX_MIPSEL_QEMU || \
 		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
-		ADK_LINUX_ARM_TOMTOM || \
-		ADK_LINUX_ARM_G1 || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.eglibc.org
 
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
+	select ADK_glibc
 	depends on ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_MIPS64_QEMU || \
-		ADK_LINUX_MIPSEL_QEMU || \
-		ADK_LINUX_MIPS64EL_QEMU || \
+		ADK_LINUX_X86_64_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
-		ADK_LINUX_ARM_TOMTOM || \
-		ADK_LINUX_ARM_G1 || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.gnu.org/libc
 
@@ -424,21 +802,18 @@ config ADK_TARGET_SUFFIX
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
 
-
 choice
 prompt "Target Firmware type"
 	depends on !ADK_TOOLCHAIN_ONLY
-	default ADK_TARGET_ROOTFS_EXT2_CF
+	default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
-	depends on ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_CRIS_QEMU || \
-		ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_MIPSEL_QEMU || \
-		ADK_LINUX_MIPS64_QEMU || \
-		ADK_LINUX_MIPS64EL_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
+		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
+		ADK_LINUX_MIPS64_LEMOTE || \
 		ADK_LINUX_RESCUE
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
@@ -447,28 +822,29 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
-	depends on ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_CRIS_QEMU || \
-		ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_MIPSEL_QEMU || \
-		ADK_LINUX_MIPS64_QEMU || \
-		ADK_LINUX_MIPS64EL_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
+		ADK_LINUX_MIPS64_LEMOTE || \
 		ADK_LINUX_RESCUE
 	help
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
-	bool "squashfs read-only root filesystem"
-	depends on ADK_LINUX_CRIS_FOXBOARD || \
+	bool "Compressed read-only root filesystem (squashfs)"
+	select ADK_KERNEL_SQUASHFS
+	depends on \
+		ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS_WAG54G
 	help
 	  highly compressed read-only filesystem for flash.
 
 config ADK_TARGET_ROOTFS_YAFFS
 	bool "YAFFS2 rootfilesystem (NAND)"
-	depends on ADK_LINUX_MIPS_RB532 || \
+	depends on \
+		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411
 	help
@@ -476,13 +852,20 @@ config ADK_TARGET_ROOTFS_YAFFS
 
 config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
-	depends on ADK_LINUX_CRIS_FOXBOARD || \
+	depends on \
+		ADK_LINUX_CRIS_FOXBOARD || \
+		ADK_LINUX_ARM_FOXBOARD || \
 		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_WAG54G || \
+		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS64_LEMOTE
+	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_NFS_V3
 	select ADK_KERNEL_ROOT_NFS
@@ -492,19 +875,25 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  Root filesystem mounted via NFS. (DHCP)
 
-config ADK_TARGET_ROOTFS_EXT2_CF
-	bool "read-write filesystem for compact flash (ext2)"
-	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_MIPS_RB532
+config ADK_TARGET_ROOTFS_EXT2_BLOCK
+	bool "read-write filesystem for block devices with ext2"
+	depends on \
+		ADK_LINUX_X86_ALIX1C || \
+		ADK_LINUX_X86_ALIX2D || \
+		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_ARM_FOXBOARD || \
+		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_BLK_DEV_SD
 	help
-	  Use this option if you have a compact flash
-	  inside your hardware and want to boot from it.
+	  Use this option if you have a compact flash or mmc/sd card 
+	  reader inside your hardware and want to boot from it.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
-	depends on ADK_LINUX_QEMU || \
+	depends on \
+		ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_MIPS64_LEMOTE || \
 		ADK_LINUX_X86_64_SHUTTLE
@@ -549,43 +938,84 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 endchoice
 
 choice
-prompt "Root filesystem type"
-	depends on ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
-	default ADK_TARGET_ROOT_XFS
-
-config ADK_TARGET_ROOT_XFS_MOD
+prompt "Compression method for initramfs and kernel"
+	depends on ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
+	
+config ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
 	boolean
-	prompt "XFS filesystem"
-	select ADK_KPACKAGE_KMOD_XFS_FS
-	select ADK_PACKAGE_XFSPROGS
+	prompt "gzip"
+	select ADK_KERNEL_RD_GZIP
+	select ADK_KERNEL_KERNEL_GZIP
 	help
-	  Select XFS filesystem kernel module and filesystem utilities.
+	  Select gzip compression.
 
-config ADK_TARGET_ROOT_EXT2_MOD
+config ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	boolean
-	prompt "EXT2 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT2_FS
-	select ADK_PACKAGE_E2FSPROGS
+	prompt "bzip2"
+	select ADK_KERNEL_RD_BZIP2
+	select ADK_KERNEL_KERNEL_BZIP2
 	help
-	  Select EXT2 filesystem kernel module and filesystem utilities.
+	  Select BZIP2 compression.
 
-config ADK_TARGET_ROOT_EXT3_MOD
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
 	boolean
-	prompt "EXT3 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT3_FS
-	select ADK_PACKAGE_E2FSPROGS
+	prompt "lzma"
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
 	help
-	  Select EXT3 filesystem kernel module and filesystem utilities.
+	  Select LZMA compression.
 
-config ADK_TARGET_ROOT_EXT4_MOD
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
 	boolean
-	prompt "EXT4 filesystem"
-	select ADK_KPACKAGE_KMOD_EXT4_FS
-	select ADK_PACKAGE_E2FSPROGS
+	prompt "lzo"
+	select ADK_KERNEL_RD_LZO
+	select ADK_KERNEL_KERNEL_LZO
 	help
-	  Select EXT4 filesystem kernel module and filesystem utilities.
+	  Select LZO compression.
 
 endchoice
+
+choice
+prompt "Compression method for Kernel"
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY)
+	
+config ADK_TARGET_KERNEL_COMPRESSION_GZIP
+	boolean
+	prompt "gzip"
+	select ADK_KERNEL_KERNEL_GZIP
+	help
+	  Select gzip compression for Kernel.
+
+config ADK_TARGET_KERNEL_COMPRESSION_BZIP2
+	boolean
+	prompt "bzip2"
+	select ADK_KERNEL_KERNEL_BZIP2
+	help
+	  Select BZIP2 compression for Kernel.
+
+config ADK_TARGET_KERNEL_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression for Kernel.
+
+config ADK_TARGET_KERNEL_COMPRESSION_LZO
+	boolean
+	prompt "lzo"
+	select ADK_KERNEL_KERNEL_LZO
+	help
+	  Select LZO compression for Kernel.
+
+endchoice
+
+config ADK_COMPRESSION_TOOL
+	string
+	default "gzip -n9" if ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
+	default "bzip2" if ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
+	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	default "lzop" if ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+	help
 
 choice
 prompt "Root filesystem type"
@@ -622,57 +1052,48 @@ config ADK_TARGET_ROOT_EXT4
 
 endchoice
 
+config ADK_TARGET_ROOTFS
+	string
+	default "xfs" if ADK_TARGET_ROOT_XFS
+	default "ext2" if ADK_TARGET_ROOT_EXT2
+	default "ext3" if ADK_TARGET_ROOT_EXT3
+	default "ext4" if ADK_TARGET_ROOT_EXT4
+	help
+
+config ADK_PACKAGE_SUFFIX
+	string
+	default "ipk" if ADK_TARGET_PACKAGE_IPKG
+	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
+#	default "rpm" if ADK_TARGET_PACKAGE_RPM
+	help
+
 choice
 prompt "Package backend format"
-	default ADK_TARGET_PACKAGE_IPKG
+	default ADK_TARGET_PACKAGE_TGZ
 
 config ADK_TARGET_PACKAGE_IPKG
 	boolean
 	prompt "ipkg package format"
 	select BUSYBOX_IPKG
 	help
-	  Use ipkg package format.
+	  Create ipkg packages and use ipkg package management on
+          the target.
 
 config ADK_TARGET_PACKAGE_TGZ
 	boolean
-	prompt "gzip compressed tar archive"
+	prompt "tar archive (no package manager)"
 	help
-	  Use simple compressed tar archive.
+	  Create compressed tar archives of packages.
+	  Pre- and post install scripts will be executed in the target
+	  directory. There will be no package manager installed onto the target.
+	  
+
+#config ADK_TARGET_PACKAGE_RPM
+#	boolean
+#	prompt "rpm package format"
+#	help
+#	  Create rpm packages and use rpm package management on the
+#         target. WARNING: NOT YET IMPLEMENTED
 
 endchoice
-
-#config ADK_SSP
-#	bool "Enable Stack Smashing Protection"
-#	default n
-#	depends on ADK_LINUX_X86_ALIX1C || \
-#		ADK_LINUX_CRIS_FOXBOARD
-#	help
-#	  Enable Stack Smashing Protection
-
-config ADK_CXX
-	bool "Enable C++ support"
-	default n
-	help
-	  Enable C++ Compiler and Libraries
-
-config ADK_IPV6
-	bool "Enable IPv6 support"
-	default n
-	select ADK_KPACKAGE_KMOD_IPV6
-	select BUSYBOX_FEATURE_IPV6
-	select BUSYBOX_FEATURE_IFUPDOWN_IPV6
-	select BUSYBOX_PING6
-	help
-	  Enable basic IPv6 support (kmod-ipv6) and
-	  make the IPv6 support options in packages visible.
-
-config ADK_X11
-	bool "Enable X.org/X11 support"
-	default n
-	help
-	  Enable Xorg/X11 server and applications in menu.
-	  Try to compile other packages with X11 support. 
-	  (f.e. mplayer)
-
-
 endmenu

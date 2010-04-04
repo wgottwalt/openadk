@@ -4,21 +4,23 @@
 # ses the slow-down.
 
 TOPDIR=$1
-
-[[ -n $BASH_VERSION ]] && shopt -s extglob
+TARGET=$2
+LIBC=$3
+(( x_cols = (COLUMNS > 10) ? COLUMNS - 2 : 80 ))
+typeset -L$x_cols pbar
 
 grep -v '^BUSYBOX\|^# BUSYBOX' $TOPDIR/.config > $TOPDIR/.config.split
 
-mkdir -p $TOPDIR/.cfg
-cd $TOPDIR/.cfg
+mkdir -p $TOPDIR/.cfg_${TARGET}_${LIBC}
+cd $TOPDIR/.cfg_${TARGET}_${LIBC}
 
-oldfiles=$(echo *)
+oldfiles=$(print -r -- *)
 newfiles=:
 
-echo -n 'autosplitting main config...'
+print -nu2 'autosplitting main config...'
 while read line; do
 	oline=$line
-	[[ -n $line ]] && if [[ $line = @(# [A-Z])* ]]; then
+	[[ -n $line ]] && if [[ $line = @(\# [A-Z])* ]]; then
 		line=${line#? }
 		if [[ $line = *@( is not set) ]]; then
 			line=${line% is not set}
@@ -28,12 +30,12 @@ while read line; do
 		fi
 	elif [[ $line = @([A-Z])*@(=)* ]]; then
 		line=${line%%=*}
-	elif [[ $line = @(#)* ]]; then
+	elif [[ $line = \#* ]]; then
 		# valid comment
 		line=
 	else
 		# invalid non-comment
-		echo "Warning: line '$oline' invalid!" >&2
+		print -u2 "\nWarning: line '$oline' invalid!"
 		line=
 	fi
 	# if the line is a valid yes/no/whatever, write it
@@ -44,9 +46,9 @@ while read line; do
 		else
 			fline=
 		fi
-		[[ $oline = $fline ]] || echo "$oline" >$line
+		[[ $oline = $fline ]] || print -r -- "$oline" >$line
 		if [[ $newfiles = *:$line:* ]]; then
-			echo "Error: duplicate Config.in option '$line'!" >&2
+			print -u2 "\nError: duplicate Config.in option '$line'!"
 			exit 1
 		fi
 		newfiles=$newfiles$line:
@@ -54,33 +56,28 @@ while read line; do
 done <$TOPDIR/.config.split
 
 # now handle the case of removals
-echo -n ' removals...'
+print -nu2 ' removals...'
 for oldfile in $oldfiles; do
 	[[ $newfiles = *:$oldfile:* ]] || rm -f $oldfile
 done
-printf '\r%60s\r' ''
+print -nu2 '\r'
 
-# now scan for dependencies of packages; the information
-# should probably be in build_mipsel because it's generated
-# at build time, but OTOH, soon enough, parts of Makefile
-# and the entire Config.in will be auto-generated anyway,
-# so we're better off placing it here
-#XXX this is too slow @868 configure options
-cd $TOPDIR/.cfg
+# now handle package dependencies
+cd $TOPDIR/.cfg_${TARGET}_${LIBC}
 rm -f $TOPDIR/package/*/info.mk
 for option in *; do
-	echo -n "$option ..."
-	x=$(( ${#option} + 4 ))
+	pbar="$option ..."
+	print -nu2 "$pbar\r"
 	ao=:
-	fgrep -l $option $TOPDIR/package/*/{Makefile,Config.*} 2>&- | \
+	fgrep -l $option $TOPDIR/package/*/Config.* 2>&- | \
 	    while read line; do
-		echo ${line%/*}/info.mk
+		print -r -- ${line%/*}/info.mk
 	done | while read fname; do
 		[[ $ao = *:$fname:* ]] && continue
 		ao=$ao$fname:
-		echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg/$option" >>$fname
+		if [ "$option" != "ADK_HAVE_DOT_CONFIG" ];then
+			echo "\${_IPKGS_COOKIE}: \${TOPDIR}/.cfg_${TARGET}_${LIBC}/$option" >>$fname
+		fi
 	done
-	printf '\r%'$x's\r' ''
 done
-
 exit 0

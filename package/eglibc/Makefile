@@ -14,6 +14,14 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,EGLIBC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,EGLIBC_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_EGLIBC_DEV}+=	eglibc-dev-install
+
 EGLIBC_CONFOPTS:=	\
 			--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
@@ -40,30 +48,38 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_gnu99_inline=yes \
 			libc_cv_slibdir="/lib" 
 
-do-extract:
-
-# do nothing, eglibc is already build in toolchain directory
-do-install:
-	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc
+# compile nothing, eglibc is already build in toolchain directory
+do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
+		$(IDIR_EGLIBC)/usr/lib
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_EGLIBC)/etc
-ifeq ($(ADK_SSP),y)
-	$(CP) $(STAGING_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
-endif
+	$(CP) $(STAGING_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
-	-for file in libc ld libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
-	# create ld.so link for x86 linker and gcc
-	cd $(IDIR_EGLIBC)/lib && ln -sf ld-$(PKG_VERSION).so ld-linux.so.2
+
+eglibc-dev-install:
+	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
+	# install linker script
+	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
+	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libm.so.6 libm.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libutil.so.1 libutil.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf librt.so.1 librt.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libcrypt.so.1 libcrypt.so
+	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libdl.so.2 libdl.so
 	# header package
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
+		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_EGLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
 		${EGLIBC_ENV} \
-		$(TOOLCHAIN_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
+		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
 			--prefix=$(IDIR_EGLIBC_DEV)/usr \
 			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
 			${EGLIBC_CONFOPTS} \
@@ -71,6 +87,6 @@ endif
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
-	@find $(IDIR_EGLIBC_DEV) -name .install -delete
+	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
