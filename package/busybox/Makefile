@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.15.2
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		495e320537f0772125f2db3c098e437c
+PKG_VERSION:=		1.16.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		319486ec65078d07fde26eb620fecde7
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
 PKG_URL:=		http://www.busybox.net
 PKG_SITES:=		http://www.busybox.net/downloads/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
