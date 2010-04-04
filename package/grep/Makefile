@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grep
 PKG_VERSION:=		2.5.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		92258031d98d4f12dfc6a6d24057e672
 PKG_DESCR:=		global search for a regular expression and print out matched lines
 PKG_SECTION:=		text
@@ -16,9 +16,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GREP,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--without-included-regex
+
 post-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/grep \
-		$(IDIR_GREP)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/grep $(IDIR_GREP)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

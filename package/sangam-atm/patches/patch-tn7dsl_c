@@ -1,5 +1,5 @@
 --- sangam-atm-1.0.orig/tn7dsl.c	2007-01-04 09:04:14.000000000 +0100
-+++ sangam-atm-1.0/tn7dsl.c	2009-12-17 23:40:56.457448616 +0100
++++ sangam-atm-1.0/tn7dsl.c	2010-03-06 12:40:16.000000000 +0100
 @@ -94,7 +94,6 @@
  *  1/02/07  JZ     CQ11054: Data Precision and Range Changes for TR-069 Conformance
  *  UR8_MERGE_END   CQ11054*
@@ -64,16 +64,15 @@
  int testflag1 = 0;
  extern int  __guDbgLevel;
  extern sar_stat_t sarStat;
-@@ -173,7 +203,7 @@ led_reg_t ledreg[2];
+@@ -173,7 +203,6 @@ led_reg_t ledreg[2];
  static struct led_funcs ledreg[2];
  #endif
  
 -#define DEV_DSLMOD       1
-+#define DEV_DSLMOD       CTL_UNNUMBERED
  #define MAX_STR_SIZE     256
  #define DSL_MOD_SIZE     256
  
-@@ -299,7 +329,7 @@ static PITIDSLHW_T    pIhw;
+@@ -299,7 +328,7 @@ static PITIDSLHW_T    pIhw;
  static volatile int bshutdown;
  static char info[MAX_STR_SIZE];
  /* Used for DSL Polling enable */
@@ -82,7 +81,7 @@
  
  //kthread_t overlay_thread;
  /* end of module wide declars */
-@@ -309,8 +339,7 @@ static void tn7dsl_chng_modulation(void*
+@@ -309,8 +338,7 @@ static void tn7dsl_chng_modulation(void*
  static unsigned int tn7dsl_set_modulation(void* data, int flag);
  static void tn7dsl_ctrl_fineGain(int value);
  static void tn7dsl_set_fineGainValue(int value);
@@ -92,7 +91,7 @@
  static void tn7dsl_register_dslss_led(void);
  void tn7dsl_dslmod_sysctl_register(void);
  void tn7dsl_dslmod_sysctl_unregister(void);
-@@ -323,6 +352,14 @@ static int tn7dsl_proc_snr_print (char *
+@@ -323,6 +351,14 @@ static int tn7dsl_proc_snr_print (char *
  #define gDot1(a) ((a>0)?(a%10):((-a)%10))
  //  UR8_MERGE_END   CQ11054*
  
@@ -107,7 +106,7 @@
  int os_atoi(const char *pStr)
  {
    int MulNeg = (*pStr == '-' ? -1 : 1);
-@@ -359,39 +396,6 @@ void dprintf (int uDbgLevel, char *szFmt
+@@ -359,39 +395,6 @@ void dprintf (int uDbgLevel, char *szFmt
  #endif
  }
  
@@ -147,7 +146,7 @@
  // * UR8_MERGE_START CQ10640   Jack Zhang
  int tn7dsl_dump_dsp_memory(char *input_str) //cph99
    {
-@@ -441,101 +445,79 @@ unsigned int shim_osGetCpuFrequency(void
+@@ -441,101 +444,79 @@ unsigned int shim_osGetCpuFrequency(void
    return CpuFrequency;
  }
  
@@ -312,7 +311,7 @@
  }
  
  int shim_osLoadDebugFWImage(unsigned char *ptr)
-@@ -2834,7 +2816,6 @@ static int tn7dsl_set_dsl(void)
+@@ -2834,7 +2815,6 @@ static int tn7dsl_set_dsl(void)
    int value;
    int i, offset[2]={4,11},oamFeature=0;
    char tmp[4];
@@ -320,7 +319,7 @@
  
    // OAM Feature Configuration
    dslhal_api_dspInterfaceRead (pIhw, (unsigned int) pIhw->pmainAddr, 2,
-@@ -2845,98 +2826,82 @@ static int tn7dsl_set_dsl(void)
+@@ -2845,98 +2825,82 @@ static int tn7dsl_set_dsl(void)
                                  (unsigned int *) &offset,
                                  (unsigned char *) &oamFeature, 4);
  
@@ -454,7 +453,7 @@
  
      tn7dsl_generic_read(2, offset);
      dslReg &= dslhal_support_byteSwap32(0xFFFFFF00);
-@@ -2954,46 +2919,47 @@ static int tn7dsl_set_dsl(void)
+@@ -2954,46 +2918,47 @@ static int tn7dsl_set_dsl(void)
    // maximum bits per carrier
    ptr = NULL;
    ptr = prom_getenv("maximum_bits_per_carrier");
@@ -513,7 +512,7 @@
      for(i=0;i<8;i++)
      {
        tmp[0]=ptr[i*2];
-@@ -3018,26 +2984,26 @@ static int tn7dsl_set_dsl(void)
+@@ -3018,26 +2983,26 @@ static int tn7dsl_set_dsl(void)
    }
    ptr = NULL;
    ptr = prom_getenv("eoc_vendor_revision");
@@ -546,7 +545,7 @@
    }
  
    return 0;
-@@ -3064,6 +3030,7 @@ int tn7dsl_init(void *priv)
+@@ -3064,6 +3029,7 @@ int tn7dsl_init(void *priv)
    int high_precision_selected = 0;  
  //  UR8_MERGE_END   CQ11054*
  
@@ -554,7 +553,7 @@
    /*
     * start dsl
     */
-@@ -3081,7 +3048,7 @@ int tn7dsl_init(void *priv)
+@@ -3081,7 +3047,7 @@ int tn7dsl_init(void *priv)
     * backward compatibility.
     */
    cp = prom_getenv("DSL_BIT_TMODE");
@@ -563,7 +562,7 @@
    {
      printk("%s : env var DSL_BIT_TMODE is set\n", __FUNCTION__);
      /*
-@@ -3110,9 +3077,9 @@ int tn7dsl_init(void *priv)
+@@ -3110,9 +3076,9 @@ int tn7dsl_init(void *priv)
  
  //  UR8_MERGE_START CQ11054   Jack Zhang
    cp = prom_getenv("high_precision");
@@ -575,7 +574,7 @@
    }
    if ( high_precision_selected)
    {
-@@ -3419,8 +3386,7 @@ unsigned int tn7dsl_get_memory(unsigned 
+@@ -3419,8 +3385,7 @@ unsigned int tn7dsl_get_memory(unsigned 
  
  
  
@@ -585,7 +584,7 @@
  {
    char *ptr;
    int ret, len = 0;
-@@ -3432,7 +3398,7 @@ static int dslmod_sysctl(ctl_table *ctl,
+@@ -3432,7 +3397,7 @@ static int dslmod_sysctl(ctl_table *ctl,
    char mod_req[16] = { '\t' };
    char fst_byt;
  
@@ -594,16 +593,76 @@
    {
      *lenp = 0;
      return 0;
-@@ -3442,7 +3408,7 @@ static int dslmod_sysctl(ctl_table *ctl,
+@@ -3442,11 +3407,10 @@ static int dslmod_sysctl(ctl_table *ctl,
     */
    if(write)
      {
 -    ret = proc_dostring(ctl, write, filp, buffer, lenp);
 +    ret = proc_dostring(ctl, write, buffer, lenp, ppos);
  
-     switch (ctl->ctl_name)
+-    switch (ctl->ctl_name)
++    if (strcmp(ctl->procname, "dslmod") == 0) 
        {
-@@ -3528,14 +3494,14 @@ static int dslmod_sysctl(ctl_table *ctl,
+-      case DEV_DSLMOD:
+       ptr = strpbrk(info, " \t");
+       strcpy(mod_req, info);
+ 
+@@ -3456,7 +3420,7 @@ static int dslmod_sysctl(ctl_table *ctl,
+       if (!strcmp (info, "dspfreq"))
+       {
+         printk("dsp_freq = %d\n", SAR_FREQUNCY * 4);
+-        break;
++	return 0;
+       }
+       else if (!strncmp(info,"nohost", 6))
+       {
+@@ -3481,14 +3445,14 @@ static int dslmod_sysctl(ctl_table *ctl,
+             i, curr_setting.phyEnableDisableWord,
+             i, curr_setting.phyControlWord);
+         }
+-        break;
++	return 0;
+       }
+ // * UR8_MERGE_START CQ10880   Jack Zhang
+       else if (!strcmp(info,"dsp_l3msg"))
+       {
+         //printk("dsp_l3msg sent to DSP\n");
+         dslhal_api_sendL3Command(pIhw);
+-        break;
++	return 0;
+       }
+ // * UR8_MERGE_END   CQ10880*
+ 
+@@ -3503,51 +3467,57 @@ static int dslmod_sysctl(ctl_table *ctl,
+                 if( fst_byt == 'S') type = type | (1 << 1);
+                 ret = tn7sar_oam_generation (pIhw->pOsContext, chan, type, vpi, vci, timeout);
+                 break;
+-
+-       case 'F':
++      case 'F':
+                 chan = tn7dsl_process_txflush_string (&queue, mod_req);
+                 if (chan < 16)
+                     tn7sar_tx_flush (pIhw->pOsContext, chan, queue, 0);
+                 break;
+       case 'D':
+-// * UR8_MERGE_START CQ10640   Jack Zhang
+-                if (mod_req[0]=='d') //cph99
++                if (mod_req[0]=='d')
+                   tn7dsl_dump_dsp_memory (&mod_req[1]);
+                 else 
+                   tn7dsl_dump_memory (&mod_req[1]);
+-// * UR8_MERGE_END   CQ10640*
+-      break;
++      		break;
+       case 'W':
+                 tn7dsl_write_memory(&mod_req[1]);
+                 break;
+       default:
+                tn7dsl_chng_modulation (info);
+       }
+-      }
++     }
+     }
    else
      {
      len += sprintf(info+len, mod_req);
@@ -616,11 +675,39 @@
  
  ctl_table dslmod_table[] = {
 -  {DEV_DSLMOD, "dslmod", info, DSL_MOD_SIZE, 0644, NULL, &dslmod_sysctl}
-+  {DEV_DSLMOD, "dslmod", info, DSL_MOD_SIZE, 0644, NULL, NULL, &dslmod_sysctl, &sysctl_string}
-   ,
-   {0}
-   };
-@@ -3558,8 +3524,7 @@ void tn7dsl_dslmod_sysctl_register(void)
+-  ,
+-  {0}
+-  };
++  	{
++		.procname	= "dslmod", 
++		.data		= info, 
++		.maxlen		= DSL_MOD_SIZE, 
++		.mode		= 0644, 
++		.proc_handler	= &dslmod_sysctl
++	},
++ 	{ }
++};
+ 
+ /* Make sure that /proc/sys/dev is there */
+ ctl_table dslmod_root_table[] = {
+ #ifdef CONFIG_PROC_FS
+-  {CTL_DEV, "dev", NULL, 0, 0555, dslmod_table}
+-  ,
++  {
++		.procname	= "dev", 
++		.maxlen		= 0, 
++		.mode		= 0555, 
++		.child		= dslmod_table,
++  },
+ #endif /* CONFIG_PROC_FS */
+-  {0}
+-  };
++  { }
++};
+ 
+ static struct ctl_table_header *dslmod_sysctl_header;
+ 
+@@ -3558,8 +3528,7 @@ void tn7dsl_dslmod_sysctl_register(void)
    if (initialized == 1)
      return;
  
@@ -630,7 +717,7 @@
  
    /*
     * set the defaults
-@@ -4821,4 +4786,4 @@ int tn7dsl_proc_PMDus(char* buf, char **
+@@ -4821,4 +4790,4 @@ int tn7dsl_proc_PMDus(char* buf, char **
  }
  #endif //NO_ADV_STATS
  #endif //TR69_PMD_IN

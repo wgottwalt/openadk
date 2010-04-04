@@ -18,6 +18,8 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_BASE_FILES=y \
+			ADK_PACKAGE_GCC=n \
+			ADK_PACKAGE_MGETTY=n \
 			ADK_COMPILE_HEIMDAL=n \
 			ADK_PACKAGE_HEIMDAL_PKINIT=n \
 			ADK_PACKAGE_HEIMDAL_SERVER=n \
@@ -424,6 +426,18 @@ bulk:
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
+
+bulktoolchain:
+	while read target libc; do \
+		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
+	    ( \
+		echo === building $$target $$libc on $$(date); \
+		$(GMAKE) prereq && \
+			$(GMAKE) TARGET=$$target LIBC=$$libc defconfig; \
+			$(GMAKE) VERBOSE=1 all; \
+		rm .config; \
+	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc.log; \
+	done <${TOPDIR}/target/bulktool.lst
 
 bulkall:
 	while read target libc fs; do \

@@ -1,0 +1,118 @@
+--- udev-151.orig/Makefile.in	2010-01-27 09:34:59.000000000 +0100
++++ udev-151/Makefile.in	2010-03-17 22:14:17.343159812 +0100
+@@ -48,7 +48,6 @@ sbin_PROGRAMS = udev/udevd$(EXEEXT) udev
+ check_PROGRAMS = libudev/test-libudev$(EXEEXT) udev/test-udev$(EXEEXT)
+ libexec_PROGRAMS = extras/firmware/firmware$(EXEEXT) \
+ 	extras/ata_id/ata_id$(EXEEXT) \
+-	extras/cdrom_id/cdrom_id$(EXEEXT) \
+ 	extras/collect/collect$(EXEEXT) extras/edd_id/edd_id$(EXEEXT) \
+ 	extras/floppy/create_floppy_devices$(EXEEXT) \
+ 	extras/input_id/input_id$(EXEEXT) \
+@@ -221,11 +220,6 @@ PROGRAMS = $(libexec_PROGRAMS) $(sbin_PR
+ am_extras_ata_id_ata_id_OBJECTS = extras/ata_id/ata_id.$(OBJEXT)
+ extras_ata_id_ata_id_OBJECTS = $(am_extras_ata_id_ata_id_OBJECTS)
+ extras_ata_id_ata_id_DEPENDENCIES = libudev/libudev-private.la
+-am_extras_cdrom_id_cdrom_id_OBJECTS =  \
+-	extras/cdrom_id/cdrom_id.$(OBJEXT)
+-extras_cdrom_id_cdrom_id_OBJECTS =  \
+-	$(am_extras_cdrom_id_cdrom_id_OBJECTS)
+-extras_cdrom_id_cdrom_id_DEPENDENCIES = libudev/libudev-private.la
+ am_extras_collect_collect_OBJECTS = extras/collect/collect.$(OBJEXT)
+ extras_collect_collect_OBJECTS = $(am_extras_collect_collect_OBJECTS)
+ extras_collect_collect_DEPENDENCIES = libudev/libudev-private.la
+@@ -366,7 +360,6 @@ SOURCES = $(extras_gudev_libgudev_1_0_la
+ 	$(dist_extras_gudev_libgudev_1_0_la_SOURCES) \
+ 	$(libudev_libudev_private_la_SOURCES) \
+ 	$(libudev_libudev_la_SOURCES) $(extras_ata_id_ata_id_SOURCES) \
+-	$(extras_cdrom_id_cdrom_id_SOURCES) \
+ 	$(extras_collect_collect_SOURCES) \
+ 	$(extras_edd_id_edd_id_SOURCES) \
+ 	$(extras_firmware_firmware_SOURCES) \
+@@ -390,7 +383,6 @@ DIST_SOURCES = $(am__extras_gudev_libgud
+ 	$(am__dist_extras_gudev_libgudev_1_0_la_SOURCES_DIST) \
+ 	$(am__libudev_libudev_private_la_SOURCES_DIST) \
+ 	$(libudev_libudev_la_SOURCES) $(extras_ata_id_ata_id_SOURCES) \
+-	$(extras_cdrom_id_cdrom_id_SOURCES) \
+ 	$(extras_collect_collect_SOURCES) \
+ 	$(extras_edd_id_edd_id_SOURCES) \
+ 	$(extras_firmware_firmware_SOURCES) \
+@@ -477,7 +469,6 @@ am__dist_udevrules_DATA_DIST = rules/rul
+ 	extras/rule_generator/75-cd-aliases-generator.rules \
+ 	extras/rule_generator/75-persistent-net-generator.rules \
+ 	extras/firmware/50-firmware.rules \
+-	extras/cdrom_id/60-cdrom_id.rules \
+ 	extras/edd_id/61-persistent-storage-edd.rules \
+ 	extras/floppy/60-floppy.rules \
+ 	extras/fstab_import/79-fstab_import.rules \
+@@ -748,7 +739,6 @@ dist_udevrules_DATA = rules/rules.d/50-u
+ 	extras/rule_generator/75-cd-aliases-generator.rules \
+ 	extras/rule_generator/75-persistent-net-generator.rules \
+ 	extras/firmware/50-firmware.rules \
+-	extras/cdrom_id/60-cdrom_id.rules \
+ 	extras/edd_id/61-persistent-storage-edd.rules \
+ 	extras/floppy/60-floppy.rules \
+ 	extras/fstab_import/79-fstab_import.rules \
+@@ -820,12 +810,6 @@ extras_ata_id_ata_id_SOURCES = extras/at
+ extras_ata_id_ata_id_LDADD = libudev/libudev-private.la
+ 
+ # ------------------------------------------------------------------------------
+-# cdrom_id - optical drive/media capability
+-# ------------------------------------------------------------------------------
+-extras_cdrom_id_cdrom_id_SOURCES = extras/cdrom_id/cdrom_id.c
+-extras_cdrom_id_cdrom_id_LDADD = libudev/libudev-private.la
+-
+-# ------------------------------------------------------------------------------
+ # collect - trigger action when a collection of devices appeared
+ # ------------------------------------------------------------------------------
+ extras_collect_collect_SOURCES = extras/collect/collect.c
+@@ -1314,17 +1298,6 @@ extras/ata_id/ata_id.$(OBJEXT): extras/a
+ extras/ata_id/ata_id$(EXEEXT): $(extras_ata_id_ata_id_OBJECTS) $(extras_ata_id_ata_id_DEPENDENCIES) extras/ata_id/$(am__dirstamp)
+ 	@rm -f extras/ata_id/ata_id$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(extras_ata_id_ata_id_OBJECTS) $(extras_ata_id_ata_id_LDADD) $(LIBS)
+-extras/cdrom_id/$(am__dirstamp):
+-	@$(MKDIR_P) extras/cdrom_id
+-	@: > extras/cdrom_id/$(am__dirstamp)
+-extras/cdrom_id/$(DEPDIR)/$(am__dirstamp):
+-	@$(MKDIR_P) extras/cdrom_id/$(DEPDIR)
+-	@: > extras/cdrom_id/$(DEPDIR)/$(am__dirstamp)
+-extras/cdrom_id/cdrom_id.$(OBJEXT): extras/cdrom_id/$(am__dirstamp) \
+-	extras/cdrom_id/$(DEPDIR)/$(am__dirstamp)
+-extras/cdrom_id/cdrom_id$(EXEEXT): $(extras_cdrom_id_cdrom_id_OBJECTS) $(extras_cdrom_id_cdrom_id_DEPENDENCIES) extras/cdrom_id/$(am__dirstamp)
+-	@rm -f extras/cdrom_id/cdrom_id$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(extras_cdrom_id_cdrom_id_OBJECTS) $(extras_cdrom_id_cdrom_id_LDADD) $(LIBS)
+ extras/collect/$(am__dirstamp):
+ 	@$(MKDIR_P) extras/collect
+ 	@: > extras/collect/$(am__dirstamp)
+@@ -1598,7 +1571,6 @@ uninstall-dist_libexecSCRIPTS:
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+ 	-rm -f extras/ata_id/ata_id.$(OBJEXT)
+-	-rm -f extras/cdrom_id/cdrom_id.$(OBJEXT)
+ 	-rm -f extras/collect/collect.$(OBJEXT)
+ 	-rm -f extras/edd_id/edd_id.$(OBJEXT)
+ 	-rm -f extras/firmware/firmware.$(OBJEXT)
+@@ -1670,7 +1642,6 @@ distclean-compile:
+ 	-rm -f *.tab.c
+ 
+ @AMDEP_TRUE@@am__include@ @am__quote@extras/ata_id/$(DEPDIR)/ata_id.Po@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@extras/cdrom_id/$(DEPDIR)/cdrom_id.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@extras/collect/$(DEPDIR)/collect.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@extras/edd_id/$(DEPDIR)/edd_id.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@extras/firmware/$(DEPDIR)/firmware.Po@am__quote@
+@@ -1931,7 +1902,6 @@ mostlyclean-libtool:
+ clean-libtool:
+ 	-rm -rf .libs _libs
+ 	-rm -rf extras/ata_id/.libs extras/ata_id/_libs
+-	-rm -rf extras/cdrom_id/.libs extras/cdrom_id/_libs
+ 	-rm -rf extras/collect/.libs extras/collect/_libs
+ 	-rm -rf extras/edd_id/.libs extras/edd_id/_libs
+ 	-rm -rf extras/firmware/.libs extras/firmware/_libs
+@@ -2729,8 +2699,6 @@ distclean-generic:
+ 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+ 	-rm -f extras/ata_id/$(DEPDIR)/$(am__dirstamp)
+ 	-rm -f extras/ata_id/$(am__dirstamp)
+-	-rm -f extras/cdrom_id/$(DEPDIR)/$(am__dirstamp)
+-	-rm -f extras/cdrom_id/$(am__dirstamp)
+ 	-rm -f extras/collect/$(DEPDIR)/$(am__dirstamp)
+ 	-rm -f extras/collect/$(am__dirstamp)
+ 	-rm -f extras/edd_id/$(DEPDIR)/$(am__dirstamp)

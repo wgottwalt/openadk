@@ -24,6 +24,7 @@ config ADK_KPACKAGE_KMOD_EXPORTFS
 
 config ADK_KERNEL_SQUASHFS
 	boolean
+	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
 
 config ADK_KERNEL_EXT2_FS

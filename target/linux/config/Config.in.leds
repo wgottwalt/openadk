@@ -1,15 +1,5 @@
-menu "LEDS driver support"
-depends on ADK_TARGET_WITH_LEDS
-
 config ADK_KERNEL_NEW_LEDS
 	bool
-	default n
-	help
-
-config ADK_KPACKAGE_KMOD_LEDS_CLASS
-	prompt "LED Class support"
-	tristate
-	select ADK_KERNEL_NEW_LEDS
 	default n
 	help
 
@@ -17,6 +7,16 @@ config ADK_KERNEL_LEDS_TRIGGERS
 	bool
 	default n
 	select ADK_KERNEL_NEW_LEDS
+	help
+
+menu "LEDS driver support"
+depends on ADK_TARGET_WITH_LEDS
+
+config ADK_KPACKAGE_KMOD_LEDS_CLASS
+	prompt "LED Class support"
+	tristate
+	select ADK_KERNEL_NEW_LEDS
+	default n
 	help
 
 config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_TIMER

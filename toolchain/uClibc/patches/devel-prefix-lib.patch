@@ -1,6 +1,6 @@
-diff -Nur uClibc-0.9.30.1.orig/Makefile.in uClibc-0.9.30.1/Makefile.in
---- uClibc-0.9.30.1.orig/Makefile.in	2008-11-17 23:38:34.000000000 +0100
-+++ uClibc-0.9.30.1/Makefile.in	2009-12-07 20:34:07.000000000 +0100
+diff -Nur uClibc-0.9.30.3.orig/Makefile.in uClibc-0.9.30.3/Makefile.in
+--- uClibc-0.9.30.3.orig/Makefile.in	2010-03-12 20:32:42.000000000 +0100
++++ uClibc-0.9.30.3/Makefile.in	2010-03-12 22:05:15.486918488 +0100
 @@ -190,7 +190,7 @@
  install: install_runtime install_dev
  
@@ -8,12 +8,12 @@ diff -Nur uClibc-0.9.30.1.orig/Makefile.in uClibc-0.9.30.1/Makefile.in
 -RUNTIME_PREFIX_LIB_FROM_DEVEL_PREFIX_LIB=$(shell $(top_srcdir)extra/scripts/relative_path.sh $(DEVEL_PREFIX)lib $(RUNTIME_PREFIX)lib)
 +RUNTIME_PREFIX_LIB_FROM_DEVEL_PREFIX_LIB=$(shell $(top_srcdir)extra/scripts/relative_path.sh $(DEVEL_PREFIX_LIB)lib $(RUNTIME_PREFIX)lib)
  
- $(top_builddir)extra/scripts/unifdef: $(top_srcdir)extra/scripts/unifdef.c
+ $(top_builddir)extra/scripts/unifdef: $(top_srcdir)extra/scripts/unifdef.c|$(@D)
  	$(hcompile.u)
-@@ -370,41 +370,41 @@
+@@ -371,41 +371,41 @@
  
  # Installs development library links.
- install_dev: install_headers all
+ install_dev: install_headers install_runtime
 -	$(INSTALL) -d $(PREFIX)$(DEVEL_PREFIX)lib
 -	-$(INSTALL) -m 644 lib/*.[ao] $(PREFIX)$(DEVEL_PREFIX)lib/
 +	$(INSTALL) -d $(PREFIX)$(DEVEL_PREFIX_LIB)lib
@@ -64,7 +64,7 @@ diff -Nur uClibc-0.9.30.1.orig/Makefile.in uClibc-0.9.30.1/Makefile.in
  				| $(SED) -e 's/\.a$$/_pic.a/'`; \
  		done ; \
  	fi
-@@ -413,9 +413,9 @@
+@@ -414,9 +414,9 @@
  ifeq ($(UCLIBC_FORMAT_SHARED_FLAT),y)
  	for file in lib/lib*.gdb; do \
  		if test -f $$file; then \
