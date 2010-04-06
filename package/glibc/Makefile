@@ -44,7 +44,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	# install /etc/localtime from host system (FIXME)
 	${CP} /etc/localtime $(IDIR_GLIBC)/etc
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld-*.so* $(IDIR_GLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
