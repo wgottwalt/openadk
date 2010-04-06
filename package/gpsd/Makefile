@@ -24,7 +24,6 @@ $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEAS
 
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
-			PYTHON="none" \
 			ac_cv_func_strlcpy=no \
 			ac_cv_func_strlcat=no \
 			ac_cv_lib_nsl_gethostbyname=no
