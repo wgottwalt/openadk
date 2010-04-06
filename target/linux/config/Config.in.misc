@@ -70,6 +70,7 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 	prompt "kmod-fw-loader.................... userspace firmware loading support"
 	tristate
 	default n
+	depends on !ADK_LINUX_QEMU
 	help
 	  This may be necessary when using drivers which require
 	  loading of external firmware files.

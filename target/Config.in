@@ -228,7 +228,7 @@ config ADK_LINUX_ALIX
 	  Support for Alix and Wrap boards.
 	  http://www.pcengines.ch
 
-config ADK_LINUX_ARM_FOXBOARD
+config ADK_LINUX_ARM_FOXG20
 	bool "Foxboard (FOXG20)"
 	select ADK_foxg20
 	select ADK_EABI
@@ -241,11 +241,10 @@ config ADK_LINUX_ARM_FOXBOARD
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_WATCHDOG
 	help
 	  Support for Foxboard target (foxg20).
 	  http://foxg20.acmesystems.it/doku.php
-	  Status: development
+	  Status: stable
 
 config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
@@ -507,6 +506,7 @@ config ADK_LINUX_ARM_QEMU
 	select ADK_arm_qemu
 	select ADK_EABI
 	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_CRC32
 	help
 	 Qemu support for ARM architecture.
 	 Right now this is optimized for Zaurus PDA spitz. 
@@ -756,13 +756,7 @@ config ADK_TARGET_LIB_UCLIBC
 config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
 	select ADK_eglibc
-	depends on ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_ARM_QEMU || \
-		ADK_LINUX_MIPS_QEMU || \
-		ADK_LINUX_MIPS64_QEMU || \
-		ADK_LINUX_MIPSEL_QEMU || \
-		ADK_LINUX_MIPS64EL_QEMU || \
-		ADK_LINUX_X86_64_QEMU || \
+	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
@@ -770,9 +764,9 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS_RB411 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_RESCUE || \
 		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.eglibc.org
@@ -780,15 +774,14 @@ config ADK_TARGET_LIB_EGLIBC
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	select ADK_glibc
-	depends on ADK_LINUX_X86_QEMU || \
-		ADK_LINUX_X86_64_QEMU || \
+	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_RESCUE || \
 		ADK_LINUX_X86_64_SHUTTLE || \
+		ADK_LINUX_RESCUE || \
 		ADK_LINUX_TOOLCHAIN 
 	help
 	 http://www.gnu.org/libc
@@ -854,7 +847,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
-		ADK_LINUX_ARM_FOXBOARD || \
+		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_X86_ALIX1C || \
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
@@ -882,7 +875,7 @@ config ADK_TARGET_ROOTFS_EXT2_BLOCK
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
-		ADK_LINUX_ARM_FOXBOARD || \
+		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_MIPS_RB532
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
