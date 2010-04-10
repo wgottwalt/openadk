@@ -160,7 +160,7 @@ IDEPEND_$(1):=	$$(strip $(4))
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
 ICONTROL_$(1)?=	$(WRKDIR)/.$(2).control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
-	@echo "Package: $(2)" > $(WRKDIR)/.$(2).control
+	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
@@ -177,7 +177,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 			comma=", "; \
 			last=$$$$dep; \
 		done; \
-		echo "Depends: $$$$deps" >>$${IDIR_$(1)}/CONTROL/control; \
+		echo "Depends: $$$$deps" | tr '_' '-' >>$${IDIR_$(1)}/CONTROL/control; \
 	fi
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
