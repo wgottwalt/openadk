@@ -13,7 +13,10 @@ autostart)
 start)
 	[ -f /etc/pdnsd.conf ] || exit
 	mkdir -p /var/cache/pdnsd
-	pdnsd -s -t -d
+	touch /var/cache/pdnsd/pdnsd.cache
+	# this allows for strict_setuid
+	chown -R nobody:nogroup /var/cache/pdnsd
+	pdnsd -d
 	;;
 stop)
 	pkill pdnsd
