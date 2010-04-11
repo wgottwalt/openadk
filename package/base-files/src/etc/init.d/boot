@@ -8,7 +8,7 @@ mkdir -p /var/log
 mkdir -p /var/run
 touch /var/log/lastlog
 touch /var/log/wtmp
-ln -s /var/tmp /tmp
+ln -s /tmp /var/tmp
 
 echo 0 > /proc/sys/kernel/printk
 
