@@ -71,7 +71,7 @@ for dn in */Makefile; do
 	typeset -u dnu=${dn//-/_}
 	dnu=${dnu//+/X}
 
-	(	# fd 4 = Config.in; fd 5 = Config.in.lib
+	(	# fd 4 = Config.in; fd 5 = Config.in.lib; fd 6 = Config.in.kmod
 	g5=0
 
 	# Handle master package (directory)
@@ -264,3 +264,79 @@ EOF
 	) 4>Config.in 5>Config.in.lib 6>Config.in.kmod
 	cd ..
 done
+
+# return good if given file exists and is non-empty
+function non_empty_file() {
+	[[ -f "$1" ]] || return 1
+	[[ -n "$(cat "$1")" ]] || return 1
+	return 0
+}
+
+# print the verbose section name for a given section tag
+function lookup_section_string() {
+	str="$(grep ^$1\  SECTIONS.list | cut -d ' ' -f '2-')"
+	[[ -n $str ]] && { echo $str; return; }
+	echo $1
+}
+
+# print the first prompt's first word's value in a given Config.in file
+function get_first_prompt() {
+	prompt="$(grep -m 1 "prompt " $1 | sed -n 's/.*"\([^ \.]*\)[ \.].*"/\1/p')"
+	[[ -n $prompt ]] && echo $prompt
+}
+
+# collect packages along with their section and
+# create a list of '<name> <path to config.in> <section string>' for later sorting
+rm -f package_section_list
+for dn in */Makefile; do
+	dn=${dn%/*}
+	pbar="Pass 3: $dn ..."
+	print -nu2 "$pbar\r"
+
+	cd $dn
+	eval $($GMAKE dump="PKG_NAME PKG_SECTION")
+	cd ..
+
+	# ignore section kernel, these are included inside target/config
+	[[ $PKG_SECTION = kernel ]] && continue
+
+	PKG_SECTION=${PKG_SECTION:-none}
+
+	has_config_in=false
+	if non_empty_file $dn/Config.in; then
+		prompt="$(get_first_prompt $dn/Config.in)"
+		prompt="${prompt:-$PKG_NAME}"
+		echo "$prompt $dn/Config.in $(lookup_section_string $PKG_SECTION)"
+		has_config_in=true
+	fi
+	if non_empty_file $dn/Config.in.lib; then
+		prompt="$(get_first_prompt $dn/Config.in.lib)"
+		prompt="${prompt:-$PKG_NAME}"
+		echo "$prompt $dn/Config.in.lib $(lookup_section_string libs)"
+		has_config_in=true
+	fi
+	if non_empty_file $dn/Config.in.manual; then
+		prompt="$(get_first_prompt $dn/Config.in.manual)"
+		prompt="${prompt:-$PKG_NAME}"
+		echo "$prompt $dn/Config.in.manual $(lookup_section_string $PKG_SECTION)"
+		has_config_in=true
+	fi
+	$has_config_in || print -u2 "$dn: No Config.in file found?!"
+done >package_section_list
+
+# create the Config.in.auto from the sorted list from above
+cursec=""
+sort -k 3 -k 1 -f package_section_list | while read name file section; do
+	pbar="Pass 4: $name ..."
+	print -nu2 "$pbar\r"
+
+	if [[ $cursec != $section ]]; then
+		[[ -n $cursec ]] && print "endmenu\n"
+
+		print "menu \"$section\""
+		cursec="$section"
+	fi
+	print "source \"package/$file\""
+done >Config.in.auto
+print "endmenu\n" >>Config.in.auto
+rm -f package_section_list

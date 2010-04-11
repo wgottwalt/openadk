@@ -28,6 +28,7 @@ config/*.o
 config/lxdialog/*.o
 make.log
 dl/
+package/Config.in.auto
 package/*/info.mk
 package/*/Config.in
 package/*/Config.in.lib
