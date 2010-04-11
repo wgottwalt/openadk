@@ -3,6 +3,15 @@
 
 menu "Package selection"
 
+config ADK_ENABLE_IPV6
+	prompt "enable IPv6 globally"
+	boolean
+	default y
+	help
+	  This enables IPv6 support in all related applications. Basically this
+	  just means passing --enable-ipv6 to the configure script, but the
+	  exception proves the rule. ;)
+
 menu "Basesystem"
 source "package/adkinstall/Config.in"
 source "package/base-files/Config.in"
