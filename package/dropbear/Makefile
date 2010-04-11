@@ -5,14 +5,14 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		0.52
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1c69ec674481d7745452f68f2ea5597e
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems 
 PKG_SECTION:=		net
 PKG_URL:=		http://matt.ucc.asn.au/dropbear
 PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 
-PKG_DESCR_UTIL:=	Utility for converting SSH keys
+PKG_DESCR_UTIL:=	Utility for converting SSH private keys
 
 include $(TOPDIR)/mk/package.mk
 
