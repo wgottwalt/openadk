@@ -192,8 +192,11 @@ asterisk-sounds-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds
 	$(CP) $(WRKBUILD)/sounds/* \
 		$(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/*.mp3
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/vm-*
+	(cd $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds; \
+		rm -f *.mp3 vm-*; \
+		rm -f CHANGES* CREDITS* LICENSE* *.txt ; \
+		rm -f *.tar.gz Makefile ; \
+	)
 
 asterisk-voicemail-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk
