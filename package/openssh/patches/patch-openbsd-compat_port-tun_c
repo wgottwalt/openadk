@@ -1,0 +1,11 @@
+--- openssh-5.5p1.orig/openbsd-compat/port-tun.c	2008-05-19 07:28:36.000000000 +0200
++++ openssh-5.5p1/openbsd-compat/port-tun.c	2010-04-21 20:14:00.000000000 +0200
+@@ -213,7 +213,7 @@ sys_tun_infilter(struct Channel *c, char
+ 	if (len <= 0 || len > (int)(sizeof(rbuf) - sizeof(*af)))
+ 		return (-1);
+ 	ptr = (char *)&rbuf[0];
+-	bcopy(buf, ptr + sizeof(u_int32_t), len);
++	memcpy(ptr + sizeof(u_int32_t), buf, len);
+ 	len += sizeof(u_int32_t);
+ 	af = (u_int32_t *)ptr;
+ 

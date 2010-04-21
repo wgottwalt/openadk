@@ -26,13 +26,15 @@ PKG_DESCR_CHAN_MGCP:=	Media Gateway Control Protocol implementation
 PKG_DESCR_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
 PKG_DESCR_CHAN_IAX2:=	Support for the Inter Asterisk Protocol
 PKG_DESCR_CODEC_SPEEX:=	Speex/PCM16 Codec Translator
+PKG_DESCR_SOUNDS:=	Various soundfiles in GSM format
+PKG_DEPENDS_SOUNDS:=	${PKG_DEPENDS} asterisk-codec-gsm
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_SOUNDS},${PKG_DESCR_SOUNDS},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_MGCP},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_SKINNY},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS_MAIN},${PKG_DESCR_CHAN_IAX2},${PKG_SECTION}))

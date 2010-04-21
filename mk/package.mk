@@ -43,6 +43,10 @@ else
 CONFIGURE_ARGS+=	--disable-debug
 endif
 
+ifeq ($(ADK_ENABLE_IPV6),y)
+CONFIGURE_ARGS+=	--enable-ipv6
+endif
+
 CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \

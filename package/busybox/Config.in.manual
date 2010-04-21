@@ -17,3 +17,6 @@ menu "Busybox Configuration"
 source "package/busybox/config/Config.in"
 endmenu
 
+config ADK_PACKAGE_UDHCPD
+	boolean
+	default BUSYBOX_APP_UDHCPD

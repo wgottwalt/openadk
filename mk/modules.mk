@@ -510,6 +510,67 @@ $(eval $(call KMOD_template,IP_NF_TARGET_TTL,ip-nf-target-ttl,\
 ,65))
 
 #
+# IPv6: Netfilter
+#
+$(eval $(call KMOD_template,NF_CONNTRACK_IPV6,nf-conntrack-ipv6,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/nf_conntrack_ipv6 \
+,50))
+
+$(eval $(call KMOD_template,IP6_NF_IPTABLES,ip6-nf-iptables,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6_tables \
+,50))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_AH,ip6-nf-match-AH,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_ah \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_EUI64,ip6-nf-match-eui64,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_eui64 \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_FRAG,ip6-nf-match-frag,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_frag \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_OPTS,ip6-nf-match-opts,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_hbh \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_IPV6HEADER,ip6-nf-match-ipv6header,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_ipv6header \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_MH,ip6-nf-match-mh,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_mh \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_MATCH_RT,ip6-nf-match-rt,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_rt \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_TARGET_LOG,ip6-nf-target-log,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_LOG \
+,55))
+
+#
+# IPv6: Filtering
+#
+$(eval $(call KMOD_template,IP6_NF_FILTER,ip6-nf-filter,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6table_filter \
+,55))
+
+$(eval $(call KMOD_template,IP6_NF_TARGET_REJECT,ip6-nf-target-reject,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_REJECT \
+,60))
+
+#
+# IPv6: Mangle
+#
+$(eval $(call KMOD_template,IP6_NF_MANGLE,ip6-nf-mangle,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6table_mangle \
+,60))
+
+#
 # IPVS
 #
 

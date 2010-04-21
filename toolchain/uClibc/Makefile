@@ -8,6 +8,10 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifeq (${ADK_MAKE_PARALLEL},y)
+UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+endif
+
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
@@ -15,7 +19,7 @@ $(WRKBUILD)/.headers:
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
-	$(MAKE) -C $(WRKBUILD) \
+	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(TOOLCHAIN_SYSROOT) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(TOOLCHAIN_SYSROOT) \
@@ -26,7 +30,7 @@ endif
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) -C $(WRKBUILD) \
+	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX= \
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
