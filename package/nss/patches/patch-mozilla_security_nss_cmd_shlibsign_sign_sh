@@ -1,11 +1,10 @@
---- nss-3.12.4.orig/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-06-05 04:30:52.000000000 +0200
-+++ nss-3.12.4/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-11-20 18:51:43.000000000 +0100
-@@ -35,6 +35,7 @@ WIN*)
+--- nss-3.12.6.orig/mozilla/security/nss/cmd/shlibsign/sign.sh	2009-12-08 02:33:37.000000000 +0100
++++ nss-3.12.6/mozilla/security/nss/cmd/shlibsign/sign.sh	2010-04-12 20:21:23.000000000 +0200
+@@ -35,6 +35,6 @@ WIN*)
      ADDON_PATH=${1}/lib:${4}:$ADDON_PATH
      export ADDON_PATH
-     echo ${2}/shlibsign -v -i ${5}
--    ${2}/shlibsign -v -i ${5}
-+    #disable for cross-compile
-+    #${2}/shlibsign -v -i ${5}
+     echo "${2}"/shlibsign -v -i "${5}"
+-    "${2}"/shlibsign -v -i "${5}"
++    #"${2}"/shlibsign -v -i "${5}"
      ;;
  esac

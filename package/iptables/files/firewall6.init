@@ -1,0 +1,31 @@
+#!/bin/sh
+#PKG iptables
+#INIT 45
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${firewall6:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	. /etc/firewall6.conf
+	;;
+stop)
+	### Clear tables
+	ip6tables -F
+	ip6tables -X
+	ip6tables -P INPUT ACCEPT
+	ip6tables -P FORWARD ACCEPT
+	ip6tables -P OUTPUT ACCEPT
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

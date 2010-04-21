@@ -66,7 +66,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 endmenu
 
 menu "OpenBSD Cryptographic framework"
-depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241)
+depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241 || ADK_LINUX_QEMU || ADK_LINUX_ARM_FOXG20)
 
 config ADK_KPACKAGE_KMOD_OCF_HIFN
 	prompt "kmod-cryptodev-hifn................ hifn engine"

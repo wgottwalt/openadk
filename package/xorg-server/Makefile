@@ -17,12 +17,19 @@ PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
 			scrnsaverproto resourceproto fontsproto videoproto \
 			compositeproto evieext libxkbfile libXfont pixman \
 			libpciaccess openssl xf86dgaproto
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
+PKG_BUILDDEP+=		xf86driproto glproto dri2proto MesaLib
+PKG_DEPENDS+=		xf86driproto glproto dri2proto mesalib
+endif
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
 
 PKG_TARGET_DEPENDS:=	!foxboard
 
 CFLINE_XORG_SERVER:=	depends on ADK_TARGET_WITH_VGA
+
+PKG_FLAVOURS:=		WITH_DRI
+PKGFD_WITH_DRI:=	enable DRI/DRI2 support
 
 include $(TOPDIR)/mk/package.mk
 
@@ -38,8 +45,6 @@ CONFIGURE_ARGS+=	\
 			--disable-aiglx \
 			--disable-config-hal \
 			--disable-dpms \
-			--disable-dri \
-			--disable-dri2 \
 			--disable-glx \
 			--disable-xace \
 			--disable-xephyr \
@@ -57,6 +62,12 @@ CONFIGURE_ARGS+=	\
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
 			--with-vendor-web="http://openadk.org"
+
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
+CONFIGURE_ARGS+=	--enable-dri --enable-dri2
+else
+CONFIGURE_ARGS+=	--disable-dri --disable-dri2
+endif
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/etc/X11
@@ -78,5 +89,9 @@ post-install:
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 	-$(CP) $(TOPDIR)/target/$(ADK_TARGET)/xorg.conf \
 		$(IDIR_XORG_SERVER)/etc/X11
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
+	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
+		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -208,6 +208,8 @@ NO_ERROR=0
 	    )" >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
 	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
+	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
+	@echo 'HOSTCXXFLAGS:=-O2' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk

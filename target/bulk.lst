@@ -3,6 +3,7 @@ foxboard	uclibc		nfsroot
 foxg20		uclibc		nfsroot
 rb532		uclibc		nfsroot
 rb532		eglibc		nfsroot
+rb532		glibc		nfsroot
 alix1c		uclibc		nfsroot
 alix1c		eglibc		nfsroot
 alix1c		glibc		nfsroot
@@ -17,10 +18,13 @@ wrap		eglibc		nfsroot
 wrap		glibc		nfsroot
 arm_qemu	uclibc		archive
 arm_qemu	eglibc		archive
+arm_qemu	glibc		archive
 mips_qemu	uclibc		archive
 mips_qemu	eglibc		archive
+mips_qemu	glibc		archive
 mipsel_qemu	uclibc		archive
 mipsel_qemu	eglibc		archive
+mipsel_qemu	glibc		archive
 x86_qemu	uclibc		archive
 x86_qemu	eglibc		archive
 x86_qemu	glibc		archive

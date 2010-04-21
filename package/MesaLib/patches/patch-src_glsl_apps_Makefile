@@ -1,0 +1,15 @@
+--- Mesa-7.8.1.orig/src/glsl/apps/Makefile	2010-04-05 01:46:26.000000000 +0200
++++ Mesa-7.8.1/src/glsl/apps/Makefile	2010-04-19 21:20:55.000000000 +0200
+@@ -26,10 +26,10 @@ INCLUDES = -I.
+ .SUFFIXES: .c
+ 
+ .c:
+-	$(APP_CC) $(INCLUDES) $(CFLAGS) $(LDFLAGS) $< $(LIBS) -o $@
++	$(APP_CC) $(HOSTCFLAGS) $< $(LIBS) -o $@
+ 
+ .c.o:
+-	$(APP_CC) -c $(INCLUDES) $(CFLAGS) $(DEFINES) $< -o $@
++	$(APP_CC) -c $(HOSTCFLAGS) $(DEFINES) $< -o $@
+ 
+ 
+ ##### TARGETS #####

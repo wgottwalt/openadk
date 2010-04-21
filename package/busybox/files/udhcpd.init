@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG udhcpd
+#INIT 50
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $udhcpd = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	touch /var/udhcp.leases
+	udhcpd -S
+	;;
+stop)
+	pkill udhcpd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

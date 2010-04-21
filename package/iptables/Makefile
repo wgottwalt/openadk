@@ -14,6 +14,8 @@ PKG_DEPENDS+=		kmod-nf-conntrack-ipv4 kmod-nf-nat
 PKG_DEPENDS+=		kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject
 PKG_DEPENDS+=		kmod-ip-nf-filter kmod-ip-nf-match-state 
 PKG_DEPENDS+=		kmod-netfilter-xt-target-tcpmss
+PKG_DEPENDS6:=		kmod-ip6-nf-iptables kmod-nf-conntrack-ipv6
+PKG_DEPENDS6+=		kmod-ip6-nf-filter kmod-ip6-nf-target-reject
 PKG_URL:=		http://www.netfilter.org
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
 			ftp://ftp.be.netfilter.org/pub/netfilter/iptables/ \
@@ -29,7 +31,7 @@ include ${TOPDIR}/mk/package.mk
 #include ${LINUX_DIR}/.config
 
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS6},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-devel
 
@@ -44,8 +46,8 @@ post-install: ${SUB_INSTALL-m} ${SUB_INSTALL-y}
 	${CP} ${WRKINST}/usr/lib/libxtables.so* ${IDIR_IPTABLES}/usr/lib
 
 ip6tables-install:
-	${INSTALL_DIR} ${IDIR_IP6TABLES}/usr/lib
-	${INSTALL_DIR} ${IDIR_IP6TABLES}/usr/sbin
+	${INSTALL_DIR} ${IDIR_IP6TABLES}/{usr/lib,etc,usr/sbin}
+	${INSTALL_DATA} ./files/firewall6.conf ${IDIR_IP6TABLES}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IP6TABLES}/usr/sbin/
 	${CP} ${WRKINST}/usr/lib/libip6tc.so* ${IDIR_IP6TABLES}/usr/lib
 

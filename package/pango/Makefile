@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pango
-PKG_VERSION:=		1.26.1
+PKG_VERSION:=		1.28.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		629f653adfdcfd6e4d89e95f74b8d370
+PKG_MD5SUM:=		aa3dee16506275a36c6c9239c9e2dfdd
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.pango.org
-PKG_SITES:=		${MASTER_SITE_GNOME:=/pango/1.26/}
+PKG_SITES:=		${MASTER_SITE_GNOME:=/pango/1.28/}
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

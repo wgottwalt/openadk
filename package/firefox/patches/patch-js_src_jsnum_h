@@ -1,0 +1,11 @@
+--- mozilla-1.9.2.orig/js/src/jsnum.h	2010-04-02 18:02:28.000000000 +0200
++++ mozilla-1.9.2/js/src/jsnum.h	2010-04-11 14:04:14.000000000 +0200
+@@ -98,7 +98,7 @@ JSDOUBLE_IS_FINITE(jsdouble d)
+ #ifdef WIN32
+     return _finite(d);
+ #else
+-    return finite(d);
++    return isfinite(d);
+ #endif
+ }
+ 

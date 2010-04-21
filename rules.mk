@@ -31,7 +31,9 @@ ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
 ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
+ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET)/target.mk)),)
 include $(TOPDIR)/target/$(ADK_TARGET)/target.mk
+endif
 endif
 
 include $(TOPDIR)/mk/vars.mk

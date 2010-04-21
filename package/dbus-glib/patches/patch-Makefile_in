@@ -1,0 +1,13 @@
+--- dbus-glib-0.86.orig/Makefile.in	2010-03-25 01:20:00.000000000 +0100
++++ dbus-glib-0.86/Makefile.in	2010-04-11 12:29:52.000000000 +0200
+@@ -312,8 +312,8 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ ACLOCAL_AMFLAGS = -I m4
+ GLIB_PC = dbus-glib-1.pc
+-SUBDIRS = dbus tools test doc
+-DIST_SUBDIRS = dbus tools test doc m4
++SUBDIRS = dbus
++DIST_SUBDIRS = dbus tools m4
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = $(GLIB_PC)
+ DISTCLEANFILES = \

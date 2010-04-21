@@ -33,6 +33,11 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
+	NEED_ZIP="$NEED_ZIP firefox"
+	NEED_LIBIDL="$NEED_LIBIDL firefox"
+fi
+
 if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
 	NEED_BISON="$NEED_BISON libusb"
 fi
@@ -154,6 +159,20 @@ fi
 if [[ -n $NEED_BISON ]]; then
 	if ! which bison >/dev/null 2>&1; then
 		echo >&2 You need bison to build $NEED_BISON
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_ZIP ]]; then
+	if ! which zip >/dev/null 2>&1; then
+		echo >&2 You need zip to build $NEED_ZIP
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_LIBIDL ]]; then
+	if ! which libIDL-config-2 >/dev/null 2>&1; then
+		echo >&2 You need libIDL-config-2 to build $NEED_LIBIDL
 		out=1
 	fi
 fi
