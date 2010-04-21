@@ -1,0 +1,24 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		libnotify
+PKG_VERSION:=		0.4.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		472e2c1f808848365572a9b024d9e8f5
+PKG_DESCR:=		notify library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.galago-project.org/
+PKG_SITES:=		http://www.galago-project.org/files/releases/source/libnotify/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,LIBNOTIFY,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_LIBNOTIFY)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libnotify*.so* \
+		$(IDIR_LIBNOTIFY)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

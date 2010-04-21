@@ -1,0 +1,29 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		dbus-glib
+PKG_VERSION:=		0.86
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		cd0ab148fb0c786fc88be49d19971f50
+PKG_DESCR:=		DBUS glib bindings
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		dbus
+PKG_BUILDDEP+=		dbus
+PKG_URL:=		http://www.freedesktop.org/wiki/Software/DBusBindings
+PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-glib/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,DBUS_GLIB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-checks
+CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_DBUS_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libdbus-glib-1.so* \
+		$(IDIR_DBUS_GLIB)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

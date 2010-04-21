@@ -1,0 +1,10 @@
+--- Mesa-7.8.1.orig/src/mesa/drivers/dri/savage/savageioctl.c	2010-04-05 01:46:26.000000000 +0200
++++ Mesa-7.8.1/src/mesa/drivers/dri/savage/savageioctl.c	2010-04-19 21:26:28.000000000 +0200
+@@ -41,7 +41,6 @@
+ #include "savagespan.h"
+ 
+ #include "drm.h"
+-#include <sys/timeb.h>
+ 
+ #define DEPTH_SCALE_16 ((1<<16)-1)
+ #define DEPTH_SCALE_24 ((1<<24)-1)

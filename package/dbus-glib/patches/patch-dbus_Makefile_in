@@ -1,0 +1,11 @@
+--- dbus-glib-0.86.orig/dbus/Makefile.in	2010-03-25 01:19:59.000000000 +0100
++++ dbus-glib-0.86/dbus/Makefile.in	2010-04-11 12:15:19.000000000 +0200
+@@ -369,7 +369,7 @@ target_vendor = @target_vendor@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = . examples
++SUBDIRS = .
+ INCLUDES = \
+ 	-I$(top_srcdir)						\
+ 	-I$(top_builddir)					\

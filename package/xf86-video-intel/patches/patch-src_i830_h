@@ -1,0 +1,109 @@
+--- xf86-video-intel-2.9.1.orig/src/i830.h	2009-10-26 12:48:05.000000000 +0100
++++ xf86-video-intel-2.9.1/src/i830.h	2010-04-19 20:20:51.000000000 +0200
+@@ -61,6 +61,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ #include "xorg-server.h"
+ #include <pciaccess.h>
+ 
++#ifdef XF86DRI
+ #include "xf86drm.h"
+ #include "sarea.h"
+ #define _XF86DRI_SERVER_
+@@ -69,16 +70,19 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ #include "i830_dri.h"
+ #include "intel_bufmgr.h"
+ #include "i915_drm.h"
++#endif
+ 
+ #include "uxa.h"
+ Bool i830_uxa_init(ScreenPtr pScreen);
+ void i830_uxa_create_screen_resources(ScreenPtr pScreen);
+ void i830_uxa_block_handler (ScreenPtr pScreen);
++#ifdef XF86DRI
+ Bool i830_get_aperture_space(ScrnInfoPtr pScrn, drm_intel_bo **bo_table,
+ 			     int num_bos);
+ 
+ dri_bo *i830_get_pixmap_bo (PixmapPtr pixmap);
+ void i830_set_pixmap_bo(PixmapPtr pixmap, dri_bo *bo);
++#endif
+ 
+ typedef struct _I830OutputRec I830OutputRec, *I830OutputPtr;
+ 
+@@ -168,7 +172,9 @@ struct _i830_memory {
+     i830_memory *prev;
+     /** @} */
+ 
++#ifdef XF86DRI
+     dri_bo *bo;
++#endif
+     uint32_t alignment;
+     uint32_t gem_name;
+     Bool lifetime_fixed_offset;
+@@ -370,7 +376,9 @@ typedef struct _I830Rec {
+    /** Offset in the ring for the next DWORD emit */
+    uint32_t ring_next;
+ 
++#ifdef XF86DRI
+    dri_bufmgr *bufmgr;
++#endif
+ 
+    uint8_t *batch_ptr;
+    /** Byte offset in batch_ptr for the next dword to be emitted. */
+@@ -379,8 +387,10 @@ typedef struct _I830Rec {
+    unsigned int batch_emit_start;
+    /** Number of bytes to be emitted in the current BEGIN_BATCH. */
+    uint32_t batch_emitting;
++#ifdef XF86DRI
+    dri_bo *batch_bo;
+    dri_bo *last_batch_bo;
++#endif
+    /** Whether we're in a section of code that can't tolerate flushing */
+    Bool in_batch_atomic;
+    /** Ending batch_used that was verified by i830_start_batch_atomic() */
+@@ -451,6 +461,7 @@ typedef struct _I830Rec {
+    ScreenBlockHandlerProcPtr BlockHandler;
+    Bool overlayOn;
+ 
++#ifdef XF86DRI
+    struct {
+       drm_intel_bo *gen4_vs_bo;
+       drm_intel_bo *gen4_sf_bo;
+@@ -461,6 +472,7 @@ typedef struct _I830Rec {
+       drm_intel_bo *gen4_sampler_bo;
+       drm_intel_bo *gen4_sip_kernel_bo;
+    } video;
++#endif
+ 
+    /* Render accel state */
+    float scale_units[2][2];
+@@ -687,6 +699,7 @@ i830_pipe_a_require_activate (ScrnInfoPt
+ void
+ i830_pipe_a_require_deactivate (ScrnInfoPtr scrn);
+ 
++#ifdef XF86DRI
+ Bool I830DRI2ScreenInit(ScreenPtr pScreen);
+ void I830DRI2CloseScreen(ScreenPtr pScreen);
+ 
+@@ -696,6 +709,7 @@ extern void drmmode_closefb(ScrnInfoPtr 
+ extern int drmmode_output_dpms_status(xf86OutputPtr output);
+ void
+ drmmode_crtc_set_cursor_bo(xf86CrtcPtr crtc, dri_bo *cursor);
++#endif
+ 
+ extern Bool i830_crtc_on(xf86CrtcPtr crtc);
+ extern int i830_crtc_to_pipe(xf86CrtcPtr crtc);
+@@ -882,6 +896,7 @@ Bool i830_pixmap_tiled(PixmapPtr p);
+     if (pitch > KB(8)) I830FALLBACK("pitch exceeds 3d limit 8K\n");\
+ } while(0)
+ 
++#ifdef XF86DRI
+ /**
+  * Little wrapper around drm_intel_bo_reloc to return the initial value you
+  * should stuff into the relocation entry.
+@@ -913,6 +928,7 @@ intel_bo_alloc_for_data(ScrnInfoPtr scrn
+ 
+     return bo;
+ }
++#endif
+ 
+ extern const int I830PatternROP[16];
+ extern const int I830CopyROP[16];

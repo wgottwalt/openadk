@@ -1,5 +1,5 @@
---- nss-3.12.4.orig/mozilla/security/coreconf/Linux.mk	2009-07-30 01:43:41.000000000 +0200
-+++ nss-3.12.4/mozilla/security/coreconf/Linux.mk	2009-12-11 20:45:13.000000000 +0100
+--- nss-3.12.6.orig/mozilla/security/coreconf/Linux.mk	2010-01-15 23:19:00.000000000 +0100
++++ nss-3.12.6/mozilla/security/coreconf/Linux.mk	2010-04-12 20:18:32.000000000 +0200
 @@ -46,9 +46,9 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif
@@ -13,19 +13,19 @@
  
  DEFAULT_COMPILER = gcc
  
-@@ -135,7 +135,7 @@ OS_PTHREAD = -lpthread 
- endif
- 
- OS_CFLAGS		= $(DSO_CFLAGS) $(OS_REL_CFLAGS) $(ARCHFLAG) -ansi -Wall -Werror-implicit-function-declaration -Wno-switch -pipe -DLINUX -Dlinux -D_POSIX_SOURCE -D_BSD_SOURCE -DHAVE_STRERROR
+@@ -133,7 +133,7 @@ endif
+ # not build with -ansi.
+ STANDARDS_CFLAGS	= -ansi -D_POSIX_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE
+ OS_CFLAGS		= $(STANDARDS_CFLAGS) $(DSO_CFLAGS) $(OS_REL_CFLAGS) $(ARCHFLAG) -Wall -Werror-implicit-function-declaration -Wno-switch -pipe -DLINUX -Dlinux -DHAVE_STRERROR
 -OS_LIBS			= $(OS_PTHREAD) -ldl -lc
 +OS_LIBS			= $(OS_PTHREAD)
  
  ifdef USE_PTHREADS
  	DEFINES		+= -D_REENTRANT
-@@ -151,7 +151,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG)
+@@ -148,7 +148,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG)
+ # we don't use -z defs there.
  ZDEFS_FLAG		= -Wl,-z,defs
  DSO_LDOPTS		+= $(if $(findstring 2.11.90.0.8,$(shell ld -v)),,$(ZDEFS_FLAG))
- DSO_LDFLAGS		=
 -LDFLAGS			+= $(ARCHFLAG)
 +#LDFLAGS			+= $(ARCHFLAG)
  

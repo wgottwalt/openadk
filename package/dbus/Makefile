@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.2.16
+PKG_VERSION:=		1.2.24
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c7a47b851ebe02f6726b65b78d1b730b
+PKG_MD5SUM:=		565346cecd9cfecf1463540c6086cc2c
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libexpat
@@ -42,7 +42,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib \
 		${IDIR_DBUS}/usr/bin
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc/
-	${CP} ${WRKINST}/usr/lib/libdbus-1.so.* ${IDIR_DBUS}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_DBUS}/usr/lib/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin/
 

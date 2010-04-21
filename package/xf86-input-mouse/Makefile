@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP+=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_TARGET_DEPENDS:=	alix1c lemote
+PKG_TARGET_DEPENDS:=	alix1c lemote ibmx40 shuttle
 
 include $(TOPDIR)/mk/package.mk
 

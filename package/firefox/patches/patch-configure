@@ -1,0 +1,13 @@
+--- mozilla-1.9.2.orig/configure	2010-04-02 18:07:41.000000000 +0200
++++ mozilla-1.9.2/configure	2010-04-11 14:38:39.000000000 +0200
+@@ -21012,8 +21012,8 @@ if test -n "$CROSS_COMPILE"; then
+         HOST_LIBIDL_CONFIG="$LIBIDL_CONFIG"
+     fi
+     if test -n "$HOST_LIBIDL_CONFIG" && test "$HOST_LIBIDL_CONFIG" != "no"; then
+-        HOST_LIBIDL_CFLAGS=`${HOST_LIBIDL_CONFIG} --cflags`
+-        HOST_LIBIDL_LIBS=`${HOST_LIBIDL_CONFIG} --libs`
++        HOST_LIBIDL_CFLAGS=`PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig ${HOST_LIBIDL_CONFIG} --cflags`
++        HOST_LIBIDL_LIBS=`PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig ${HOST_LIBIDL_CONFIG} --libs`
+     else
+         HOST_LIBIDL_CFLAGS="$LIBIDL_CFLAGS"
+         HOST_LIBIDL_LIBS="$LIBIDL_LIBS"

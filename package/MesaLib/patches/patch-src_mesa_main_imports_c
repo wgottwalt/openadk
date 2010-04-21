@@ -1,0 +1,17 @@
+--- Mesa-7.8.1.orig/src/mesa/main/imports.c	2010-04-05 01:46:26.000000000 +0200
++++ Mesa-7.8.1/src/mesa/main/imports.c	2010-04-19 21:22:52.000000000 +0200
+@@ -799,13 +799,7 @@ _mesa_strdup( const char *s )
+ float
+ _mesa_strtof( const char *s, char **end )
+ {
+-#ifdef _GNU_SOURCE
+-   static locale_t loc = NULL;
+-   if (!loc) {
+-      loc = newlocale(LC_CTYPE_MASK, "C", NULL);
+-   }
+-   return strtof_l(s, end, loc);
+-#elif defined(_ISOC99_SOURCE) || (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 600)
++#if defined(_ISOC99_SOURCE) || (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 600)
+    return strtof(s, end);
+ #else
+    return (float)strtod(s, end);
