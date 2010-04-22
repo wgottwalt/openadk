@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f8f19f747c8445213d5409ae8b8b2f0a
 PKG_DESCR:=		add short description
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		libXfixes
+PKG_BUILDDEP+=		libXfixes damageproto
 PKG_URL:=		add project url
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 

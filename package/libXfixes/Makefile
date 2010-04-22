@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		86eb4b916cd5948c0e20d279107b3331
 PKG_DESCR:=		add short description
 PKG_SECTION:=		libs
+PKG_BUILDDEP+=		fixesproto
 PKG_URL:=		add project url
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 

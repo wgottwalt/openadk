@@ -416,7 +416,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all targets and combinations
 bulk:
-	while read target libc fs; do \
+	@while read target libc fs; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
@@ -428,7 +428,7 @@ bulk:
 	done <${TOPDIR}/target/bulk.lst
 
 bulktoolchain:
-	while read target libc; do \
+	@while read target libc; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc on $$(date); \
@@ -440,7 +440,7 @@ bulktoolchain:
 	done <${TOPDIR}/target/bulktool.lst
 
 bulkall:
-	while read target libc fs; do \
+	@while read target libc fs; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \
@@ -452,7 +452,7 @@ bulkall:
 	done <${TOPDIR}/target/bulk.lst
 
 bulkallmod:
-	while read target libc fs; do \
+	@while read target libc fs; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
 		echo === building $$target $$libc $$fs on $$(date); \

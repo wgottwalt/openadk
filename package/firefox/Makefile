@@ -19,6 +19,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.6.3/
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle
 
 include $(TOPDIR)/mk/package.mk
 

@@ -16,6 +16,8 @@ PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
+PKG_TARGET_DEPENDS:=  	x86 x86_64
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
