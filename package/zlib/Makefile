@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		zlib
-PKG_VERSION:=		1.2.4
+PKG_VERSION:=		1.2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		763c6a0b4ad1cdf5549e3ab3f140f4cb
+PKG_MD5SUM:=		be1e89810e66150f5b0327984d8625a0
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.zlib.net
