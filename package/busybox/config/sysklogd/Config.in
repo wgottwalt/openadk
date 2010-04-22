@@ -66,7 +66,7 @@ config BUSYBOX_FEATURE_IPC_SYSLOG
 
 config BUSYBOX_FEATURE_IPC_SYSLOG_BUFFER_SIZE
 	int "Circular buffer size in Kbytes (minimum 4KB)"
-	default 16
+	default 32
 	range 4 2147483647
 	depends on BUSYBOX_FEATURE_IPC_SYSLOG
 	help
