@@ -1,5 +1,29 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_YAFFS_FS
+	tristate
+	default n
+
+config ADK_KERNEL_YAFFS_YAFFS1
+	boolean
+	default n
+
+config ADK_KERNEL_YAFFS_YAFFS2
+	boolean
+	default n
+
+config ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	boolean
+	default n
+
+config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
+	int
+	default 0
+
+config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
+	boolean
+	default n
+
 config ADK_KERNEL_MISC_FILESYSTEMS
 	boolean
 	default n
