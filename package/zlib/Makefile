@@ -38,7 +38,6 @@ ifeq ($(ADK_STATIC),)
 CONFIGURE_OPTS:=	--shared
 endif
 
-#--includedir=$(STAGING_DIR)/usr/include 
 do-configure:
 	(cd $(WRKBUILD); $(COPTS) \
 		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
