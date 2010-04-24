@@ -8,7 +8,7 @@ PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
 PKG_DESCR:=		Network UPS Tools
-PKG_SECTION:=		sys
+PKG_SECTION:=		net/misc
 ifneq (${ADK_PACKAGE_NUT_SSL},)
 PKG_DEPENDS+=		libopenssl
 PKG_BUILDDEP+=		openssl

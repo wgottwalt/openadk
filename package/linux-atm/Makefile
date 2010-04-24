@@ -8,7 +8,7 @@ PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		ATM library and tools for Linux
-PKG_SECTION:=		libs
+PKG_SECTION:=		route
 PKG_URL:=		http://linux-atm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 PKG_NOPARALLEL:=	1

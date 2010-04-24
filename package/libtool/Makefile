@@ -8,7 +8,7 @@ PKG_VERSION:=		2.2.6b
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		07da460450490148c6d2df0f21481a25
 PKG_DESCR:=		a generic dynamic object loading library
-PKG_SECTION:=		libs
+PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/libtool
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
 

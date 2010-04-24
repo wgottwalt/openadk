@@ -8,7 +8,7 @@ PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b68aebbfcac1174c4c95d260e9369766
 PKG_DESCR:=		X11 client-side library
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_BUILDDEP+=		xproto xextproto xtrans libXdmcp libXau xcmiscproto bigreqsproto kbproto inputproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 

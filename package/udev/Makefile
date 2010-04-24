@@ -8,7 +8,7 @@ PKG_VERSION:=		151
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		aeae0e6273dcbec246c3c1b9868ebed1
 PKG_DESCR:=		Dynamic device management subsystem
-PKG_SECTION:=		base
+PKG_SECTION:=		utils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/hotplug/}
 

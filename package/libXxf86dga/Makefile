@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ecb81708157e1a1eeaba0e124f0ade08
 PKG_DESCR:=		client library for the XFree86-DGA extension
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_BUILDDEP+=		xf86dgaproto libXext libXaw
 PKG_SITES:=		${MASTER_SITE_XORG}
 

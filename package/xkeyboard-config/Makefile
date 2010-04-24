@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_BUILDDEP+=		xkbcomp
 PKG_MD5SUM:=		c024a6e2a5b8c4ce3d9d1f1286466163
 PKG_DESCR:=		X keyboard config
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://xlibs.freedesktop.org/xkbdesc/
 
 include $(TOPDIR)/mk/package.mk

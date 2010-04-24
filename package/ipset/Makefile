@@ -8,7 +8,7 @@ PKG_VERSION:=		3.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
 PKG_DESCR:=		Netfilter ip sets administration utility
-PKG_SECTION:=		net
+PKG_SECTION:=		firewall
 PKG_URL:=		http://ipset.netfilter.org
 PKG_SITES:=		http://ipset.netfilter.org/
 

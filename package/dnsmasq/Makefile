@@ -8,7 +8,7 @@ PKG_VERSION:=		2.51
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		97465261a6de5258a3c3edfe51ca16a4
 PKG_DESCR:=		A lightweight DNS and DHCP server
-PKG_SECTION:=		net
+PKG_SECTION:=		dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
 

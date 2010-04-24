@@ -8,7 +8,7 @@ PKG_VERSION:=		0.9.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb8d70564b8d40aae95e19592c6be183
 PKG_DESCR:=		ICMPv6 Neighbour Discovery tools
-PKG_SECTION:=		net
+PKG_SECTION:=		ipv6
 PKG_URL:=		http://www.remlab.net
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
 

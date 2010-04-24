@@ -8,7 +8,7 @@ PKG_VERSION:=		3.4.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8e8a484782f2b7716b6c6bd9a7d2bf71
 PKG_DESCR:=		NetBIOS/SMB file and print server
-PKG_SECTION:=		net
+PKG_SECTION:=		net/fs
 PKG_URL:=		http://www.samba.org
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 

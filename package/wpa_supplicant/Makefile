@@ -8,7 +8,7 @@ PKG_VERSION:=		0.7.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		02c475f949e5c131856915bbb87fa55d
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
-PKG_SECTION:=		net
+PKG_SECTION:=		wifi
 ifeq (${ADK_COMPILE_WPA_SUPPLICANT_WITH_OPENSSL},y)
 PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP+=		openssl

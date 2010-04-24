@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
 
 PKG_DESCR:=		GNU compiler collection
-PKG_SECTION:=		comp
+PKG_SECTION:=		lang
 PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libgmp mpfr
 PKG_BUILDDEP+=		gmp mpfr

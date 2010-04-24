@@ -8,7 +8,7 @@ PKG_VERSION:=		0.4.7p3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		214ca8bc476c5e0eab54adb01972be6a
 PKG_DESCR:=		A socks 4/5 proxy server
-PKG_SECTION:=		net
+PKG_SECTION:=		proxy
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=socks-relay/}
 
 include ${TOPDIR}/mk/package.mk

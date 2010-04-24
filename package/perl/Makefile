@@ -8,7 +8,7 @@ PKG_VERSION:=		5.10.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d2c39b002ebfd2c3c5dba589365c5a71
 PKG_DESCR:=		Perl without operating-specific functions
-PKG_SECTION:=		net
+PKG_SECTION:=		lang
 PKG_URL:=		www.perl.org
 PKG_SITES:=		ftp://ftp.cpan.org/pub/CPAN/src/5.0/ \
 			ftp://ftp.mpi-sb.mpg.de/pub/perl/CPAN/src/5.0/ \

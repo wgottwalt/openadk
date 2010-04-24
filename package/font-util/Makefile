@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		171ebfd3733aeae3af91ad57d126d29d
 PKG_DESCR:=		font util
-PKG_SECTION:=		libs
+PKG_SECTION:=		x11/apps
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

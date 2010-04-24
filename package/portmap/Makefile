@@ -8,7 +8,7 @@ PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ac108ab68bf0f34477f8317791aaf1ff
 PKG_DESCR:=		RPC portmapper
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
 PKG_DEPENDS:=		libwrap
 PKG_BUILDDEP+=		tcp_wrappers

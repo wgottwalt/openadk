@@ -8,7 +8,7 @@ PKG_VERSION:=		0.15.8
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		6680970274c389fd07e2b35721de1764
 PKG_DESCR:=		A music player daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)

@@ -8,7 +8,7 @@ PKG_VERSION:=		5.5p1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		88633408f4cb1eb11ec7e2ec58b519eb
 PKG_DESCR:=		OpenSSH server
-PKG_SECTION:=		net
+PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)

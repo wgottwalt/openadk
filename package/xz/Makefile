@@ -8,7 +8,7 @@ PKG_VERSION:=		4.999.9beta
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f2073579b6da2fe35d453adee1aaf1b2
 PKG_DESCR:=		lzma compression utility
-PKG_SECTION:=		net
+PKG_SECTION:=		archive
 PKG_URL:=		http://tukaani.org/xz/
 PKG_SITES:=		http://tukaani.org/xz/
 

@@ -8,7 +8,7 @@ PKG_VERSION:=		398-2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		719dae0ee675d0c16e0e89952930ed35
 PKG_DESCR:=		LAME MP3 encoder
-PKG_SECTION:=		sound
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libncurses
 PKG_URL:=		http://lame.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=lame/}

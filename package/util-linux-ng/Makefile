@@ -8,7 +8,7 @@ PKG_VERSION:=		2.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b4c0f196de2f583a4ed91d6f53ba2d88
 PKG_DESCR:=		Linux utilities
-PKG_SECTION:=		admin
+PKG_SECTION:=		fs
 PKG_BUILDDEP+=		e2fsprogs ncurses
 PKG_URL:=		http://userweb.kernel.org/~kzak/util-linux-ng
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v${PKG_VERSION}/}

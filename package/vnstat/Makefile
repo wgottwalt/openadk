@@ -8,7 +8,7 @@ PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		9184f79b5e60499bc059f670032291e5
 PKG_DESCR:=		Console-based network traffic monitor
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_SITES:=		http://humdi.net/vnstat/
 
 include ${TOPDIR}/mk/package.mk

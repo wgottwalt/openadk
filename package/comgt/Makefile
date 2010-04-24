@@ -8,7 +8,7 @@ PKG_VERSION:=		0.32
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		db2452680c3d953631299e331daf49ef
 PKG_DESCR:=		3G/GPRS datacard control tool
-PKG_SECTION:=		console
+PKG_SECTION:=		utils
 PKG_URL:=		http://sourceforge.net/projects/comgt
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=comgt/}
 

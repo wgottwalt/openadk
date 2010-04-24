@@ -8,7 +8,7 @@ PKG_VERSION:=		0.9.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		da06846f35838b14d1513523dad84d24
 PKG_DESCR:=		Source Hardware Address Translation - a tool for nomadic routing
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=shat/}
 
 include ${TOPDIR}/mk/package.mk

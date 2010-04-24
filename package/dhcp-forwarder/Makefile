@@ -8,7 +8,7 @@ PKG_VERSION:=		0.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		fb3670dee9f71af1e55ac5dcd64e213e
 PKG_DESCR:=		DHCP relay agent
-PKG_SECTION:=		net
+PKG_SECTION:=		dhcp
 PKG_URL:=		http://www.nongnu.org/dhcp-fwd
 PKG_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/ \
 			http://ftp.cc.uoc.gr/mirrors/nongnu.org/dhcp-fwd/ 

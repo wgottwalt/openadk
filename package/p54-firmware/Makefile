@@ -8,7 +8,7 @@ PKG_VERSION:=		1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8e8ab005a4f8f0123bcdc51bc25b47f6
 PKG_DESCR:=		firmware for USB prism54 wireless cards (isl3887)
-PKG_SECTION:=		sys
+PKG_SECTION:=		wifi
 PKG_SITES:=		http://daemonizer.de/prism54/prism54-fw/fw-usb/
 
 DISTFILES:=		2.13.24.0.lm87.arm

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b273ed2b5ec8616fb9834cde8634bce7
 PKG_DESCR:=		Open Source VPN solution using SSL
-PKG_SECTION:=		net
+PKG_SECTION:=		net/security
 PKG_DEPENDS:=		kmod-tun
 ifeq ($(ADK_COMPILE_OPENVPN_WITH_OPENSSL),y)
 PKG_DEPENDS+=		libopenssl
