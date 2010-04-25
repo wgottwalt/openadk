@@ -10,7 +10,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/igmpproxy /etc/igmpproxy.conf
+	/usr/sbin/igmpproxy /etc/igmpproxy.conf &
 	;;
 stop)
 	pkill igmpproxy
