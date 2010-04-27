@@ -177,14 +177,15 @@ rtsp_parse_transport(char* ptran, uint tranlen,
 		pr_info("sanity check failed\n");
 		return 0;
 	}
-	
-	pr_debug("tran='%.*s'\n", (int)tranlen, ptran);
+
+	pr_debug("t='%.*s'\n", (int)tranlen-2, ptran);
 	off += 10;
 	SKIP_WSPACE(ptran, tranlen, off);
 	
 	/* Transport: tran;field;field=val,tran;field;field=val,... */
 	while (off < tranlen) {
 		const char* pparamend;
+		const char* pdestport;
 		uint        nextparamoff;
 		
 		pparamend = memchr(ptran+off, ',', tranlen-off);
@@ -233,6 +234,31 @@ rtsp_parse_transport(char* ptran, uint tranlen,
 						prtspexp->pbtype = pb_discon;
 						prtspexp->hiport = port;
 					}
+					rc = 1;
+				}
+			}
+			else if ((strncmp(ptran+off, "destination=",12) == 0) &&
+				((pdestport = memchr(ptran+off, ':', nextparamoff-off)) != NULL))
+			{
+				u_int16_t   port;
+				uint        numlen;
+
+				off += 12;
+				pdestport++;
+
+				off = pdestport - ptran;
+				numlen = nf_strtou16(ptran + off, &port);
+				off += numlen + 1;
+
+				if (prtspexp->loport != 0 && prtspexp->loport != port)
+				{
+					pr_debug("multiple ports found, port %hu ignored\n", port);
+				}
+				else
+				{
+					prtspexp->pbtype = pb_single;
+					prtspexp->loport = port;
+					prtspexp->hiport = port;
 					rc = 1;
 				}
 			}

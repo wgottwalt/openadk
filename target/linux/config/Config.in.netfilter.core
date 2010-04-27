@@ -82,11 +82,11 @@ config ADK_KPACKAGE_KMOD_NF_CONNTRACK_FTP
 	  required for tracking them, and doing masquerading and other forms
 	  of Network Address Translation on them.
 
-config ADK_KPACKAGE_KMOD_NF_CONNTRACK_RTSP
-	tristate 'RTSP protocol support'
-	depends on ADK_KPACKAGE_KMOD_NF_CONNTRACK
-	help
-	  Tracking RTSP connections might be required for IPTV.
+#config ADK_KPACKAGE_KMOD_NF_CONNTRACK_RTSP
+#	tristate 'RTSP protocol support'
+#	depends on ADK_KPACKAGE_KMOD_NF_CONNTRACK
+#	help
+#	  Tracking RTSP connections might be required for IPTV.
 
 config ADK_KPACKAGE_KMOD_NF_CONNTRACK_IRC
 	tristate 'IRC protocol support'

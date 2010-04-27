@@ -129,7 +129,7 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
         tranlen < 10 || !iseol(ptran[tranlen-1]) ||
         nf_strncasecmp(ptran, "Transport:", 10) != 0)
     {
-        pr_info("sanity check failed\n");
+        pr_debug("sanity check failed\n");
         return 0;
     }
     off += 10;
@@ -245,6 +245,7 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
             pfieldend = memchr(ptran+off, ';', nextparamoff-off);
             nextfieldoff = (pfieldend == NULL) ? nextparamoff : pfieldend-ptran+1;
 
+	    /*
             if (dstact != DSTACT_NONE && strncmp(ptran+off, "destination=", 12) == 0)
             {
                 if (strncmp(ptran+off+12, szextaddr, extaddrlen) == 0)
@@ -257,7 +258,6 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
                     if (!nf_nat_mangle_tcp_packet(skb, ct, ctinfo,
                                                          off, diff, NULL, 0))
                     {
-                        /* mangle failed, all we can do is bail */
 			nf_ct_unexpect_related(exp);
                         return 0;
                     }
@@ -268,6 +268,7 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
                     nextfieldoff -= diff;
                 }
             }
+	    */
 
             off = nextfieldoff;
         }
@@ -279,6 +280,7 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
         while (off < nextparamoff)
         {
             const char* pfieldend;
+            const char* pdestport;
             uint        nextfieldoff;
 
             pfieldend = memchr(ptran+off, ';', nextparamoff-off);
@@ -338,6 +340,46 @@ rtsp_mangle_tran(enum ip_conntrack_info ctinfo,
                     nextfieldoff -= diff;
                 }
             }
+            else if ((strncmp(ptran+off, "destination=", 12) == 0) && ((pdestport = memchr(ptran+off+12, ':', nextparamoff-(off + 12))) != NULL))
+	        {
+                u_int16_t   port;
+                uint        numlen;
+                uint        origoff;
+                uint        origlen;
+                char        rbuf[32];
+                uint        rbuflen = sprintf(rbuf, "%s:%s",szextaddr,rbuf1);
+
+	        pdestport++;
+
+                off += 12;
+                origoff = (ptran + off) - ptcp;
+                origlen = pdestport - (ptran + off);
+		off += origlen;
+                numlen = nf_strtou16(ptran+off, &port);
+                off += numlen;
+                origlen += numlen;
+		
+		if (port != prtspexp->loport)
+                {
+                    pr_debug("multiple ports found, port %hu ignored\n", port);
+                }
+                else
+                {
+	            diff = origlen-rbuflen;
+                    if (!nf_nat_mangle_tcp_packet(skb, ct, ctinfo,
+                                                  origoff, origlen, rbuf, rbuflen))
+                    {
+                        /* mangle failed, all we can do is bail */
+                        nf_ct_unexpect_related(exp);
+                        return 0;
+                    }
+                    get_skb_tcpdata(skb, &ptcp, &tcplen);
+                    ptran = ptcp+tranoff;
+                    tranlen -= diff;
+                    nextparamoff -= diff;
+                    nextfieldoff -= diff;
+                }
+            }
 
             off = nextfieldoff;
         }
@@ -378,7 +420,7 @@ help_out(struct sk_buff *skb, enum ip_conntrack_info ctinfo,
         }
         if (off > hdrsoff+hdrslen)
         {
-            pr_info("!! overrun !!");
+            pr_debug("!! overrun !!");
             break;
         }
         pr_debug("hdr: len=%u, %.*s", linelen, (int)linelen, ptcp+lineoff);

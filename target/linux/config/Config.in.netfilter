@@ -156,6 +156,7 @@ endmenu
 
 menu "Netfilter Addons"
 source package/ipset/Config.in.kmod
+source package/rtsp/Config.in.kmod
 endmenu
 
 endmenu

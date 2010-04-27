@@ -394,10 +394,10 @@ $(eval $(call KMOD_template,NF_CONNTRACK_TFTP,nf-conntrack-tftp,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_tftp \
 ,55))
 
-$(eval $(call KMOD_template,NF_CONNTRACK_RTSP,nf-conntrack-rtsp,\
-	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_rtsp \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_rtsp \
-,55))
+#$(eval $(call KMOD_template,NF_CONNTRACK_RTSP,nf-conntrack-rtsp,\
+#	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_rtsp \
+#	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_rtsp \
+#,55))
 
 # broken
 #$(eval $(call KMOD_template,NF_CONNTRACK_AMANDA,nf-conntrack-amanda,\
