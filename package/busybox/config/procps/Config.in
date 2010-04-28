@@ -57,21 +57,21 @@ config BUSYBOX_PGREP
 
 config BUSYBOX_PIDOF
 	bool "pidof"
-	default y
+	default n
 	help
 	  Pidof finds the process id's (pids) of the named programs. It prints
 	  those id's on the standard output.
 
 config BUSYBOX_FEATURE_PIDOF_SINGLE
 	bool "Enable argument for single shot (-s)"
-	default y
+	default n
 	depends on BUSYBOX_PIDOF
 	help
 	  Support argument '-s' for returning only the first pid found.
 
 config BUSYBOX_FEATURE_PIDOF_OMIT
 	bool "Enable argument for omitting pids (-o)"
-	default y
+	default n
 	depends on BUSYBOX_PIDOF
 	help
 	  Support argument '-o' for omitting the given pids in output.
@@ -188,6 +188,13 @@ config BUSYBOX_FEATURE_TOPMEM
 	help
 	  Enable 's' in top (gives lots of memory info).
 
+config BUSYBOX_FEATURE_SHOW_THREADS
+	bool "Support for showing threads in ps/top"
+	default y
+	depends on BUSYBOX_PS || BUSYBOX_TOP
+	help
+	  Enables ps -T option and 'h' command in top
+
 config BUSYBOX_UPTIME
 	bool "uptime"
 	default y
@@ -202,6 +209,5 @@ config BUSYBOX_WATCH
 	help
 	  watch is used to execute a program periodically, showing
 	  output to the screen.
-
 
 endmenu

@@ -494,7 +494,7 @@ usage(void)
 	"        -q                      quiet mode\n"
 	"        -r                      reboot after successful command\n"
 	"Example: To write linux.img to mtd partition labeled as linux\n"
-	"         mtd write linux.img linux\n\n");
+	"         nand write linux.img linux\n\n");
 	exit(1);
 }
 

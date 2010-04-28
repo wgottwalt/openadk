@@ -25,6 +25,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
 
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBKRB5}+=	libkrb5-install
+
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
@@ -40,7 +44,7 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin
@@ -55,12 +59,14 @@ post-install:
 		${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
 	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt,kadm5srv,kdb5}.so* \
 		${IDIR_KRB5_SERVER}/usr/lib
-	# krb5-libs
+
+libkrb5-install:
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/etc
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/usr/lib
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_LIBKRB5}/etc
 	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
 		${IDIR_LIBKRB5}/usr/lib
-	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' > ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
+	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
+		> ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
 
 include ${TOPDIR}/mk/pkg-bottom.mk

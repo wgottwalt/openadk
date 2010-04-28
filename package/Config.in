@@ -693,4 +693,5 @@ endmenu
 
 menu "Kernel configuration"
 source "target/linux/Config.in"
+source "package/rtsp/Config.in"
 endmenu

@@ -1,0 +1,26 @@
+#!/bin/sh
+#PKG igmpproxy
+#INIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${igmpproxy:-NO}" = x"NO"
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/igmpproxy /etc/igmpproxy.conf &
+	;;
+stop)
+	pkill igmpproxy
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

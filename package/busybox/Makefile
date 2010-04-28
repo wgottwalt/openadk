@@ -22,6 +22,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKG_DESCR_UDHCPD},${PKG_SECTION_UDHCPD}))
 
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_UDHCPD}+=	udhcpd-install
+
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
@@ -56,7 +60,7 @@ else
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+do-install: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
@@ -69,10 +73,10 @@ ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox
 endif
-ifeq ($(ADK_PACKAGE_UDHCPD),y)
+
+udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
-endif
 
 fake:	$(TOPDIR)/.busyboxcfg do-configure do-install
 

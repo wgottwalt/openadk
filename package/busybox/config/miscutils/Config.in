@@ -137,11 +137,11 @@ config BUSYBOX_FEATURE_CROND_D
 	  -d sets loglevel to 0 (most verbose) and directs all output to stderr.
 
 config BUSYBOX_FEATURE_CROND_CALL_SENDMAIL
-	bool "Using /usr/sbin/sendmail?"
+	bool "Report command output via email (using sendmail)"
 	default n
 	depends on BUSYBOX_CROND
 	help
-	  Support calling /usr/sbin/sendmail for send cmd outputs.
+	  Command output will be sent to corresponding user via email.
 
 config BUSYBOX_FEATURE_CROND_DIR
 	string "crond spool directory"
@@ -272,6 +272,13 @@ config BUSYBOX_FBSPLASH
 	    "NN" (ASCII decimal number) - percentage to show on progress bar
 	    "exit" - well you guessed it
 
+config BUSYBOX_FLASHCP
+	bool "flashcp"
+	default n
+	help
+	  The flashcp binary, inspired by mtd-utils as of git head 5eceb74f7.
+	  This utility is used to copy images into a MTD device.
+
 config BUSYBOX_FLASH_LOCK
 	bool "flash_lock"
 	default n
@@ -334,8 +341,8 @@ endchoice
 
 config BUSYBOX_LESS
 	bool "less"
-	default y
 	depends on !ADK_PACKAGE_LESS
+	default y
 	help
 	  'less' is a pager, meaning that it displays text files. It possesses
 	  a wide array of features, and is an improvement over 'more'.
@@ -347,7 +354,7 @@ config BUSYBOX_FEATURE_LESS_MAXLINES
 
 config BUSYBOX_FEATURE_LESS_BRACKETS
 	bool "Enable bracket searching"
-	default n
+	default y
 	depends on BUSYBOX_LESS
 	help
 	  This option adds the capability to search for matching left and right
@@ -355,7 +362,7 @@ config BUSYBOX_FEATURE_LESS_BRACKETS
 
 config BUSYBOX_FEATURE_LESS_FLAGS
 	bool "Enable extra flags"
-	default n
+	default y
 	depends on BUSYBOX_LESS
 	help
 	  The extra flags provided do the following:
@@ -613,6 +620,12 @@ config BUSYBOX_VOLNAME
 	default n
 	help
 	  Prints a CD-ROM volume name.
+
+config BUSYBOX_WALL
+	bool "wall"
+	default n
+	help
+	  Write a message to all users that are logged in.
 
 config BUSYBOX_WATCHDOG
 	bool "watchdog"

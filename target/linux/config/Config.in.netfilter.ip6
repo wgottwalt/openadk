@@ -1,6 +1,7 @@
 config ADK_KPACKAGE_KMOD_NF_CONNTRACK_IPV6
 	tristate "IPv6 connection tracking support"
 	select ADK_KPACKAGE_KMOD_NF_CONNTRACK
+	select ADK_KPACKAGE_KMOD_IPV6
 	---help---
 	  Connection tracking keeps a record of what packets have passed
 	  through your machine, in order to figure out how they are related
@@ -15,6 +16,7 @@ config ADK_KPACKAGE_KMOD_NF_CONNTRACK_IPV6
 config ADK_KPACKAGE_KMOD_IP6_NF_IPTABLES
 	tristate "IP6 tables support (required for filtering)"
 	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_KPACKAGE_KMOD_IPV6
 	help
 	  ip6tables is a general, extensible packet identification framework.
 	  Currently only the packet filtering and packet mangling subsystem

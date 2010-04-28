@@ -328,6 +328,8 @@ if test $1 = status; then
 		echo "<NULL> $name" >>$f
 	done
 	# this implementation of sort -o sucks: doesn't do in-place edits
+	# workaround a busybox bug?
+	touch sold_status snew_status
 	sort -k2 -o sold_status $f
 	sort -k2 -o snew_status cur_status
 	gotany=0

@@ -370,36 +370,55 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
 ,50))
 
-$(eval $(call KMOD_template,IP_NF_FTP,ip-nf-ftp,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_ftp \
+$(eval $(call KMOD_template,NF_NAT,nf-nat,\
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
+,50))
+
+$(eval $(call KMOD_template,NF_CONNTRACK_FTP,nf-conntrack-ftp,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_ftp \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ftp \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_IRC,ip-nf-irc,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_irc \
+$(eval $(call KMOD_template,NF_CONNTRACK_IRC,nf-conntrack-irc,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_irc \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_irc \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_NETBIOS_NS,ip-nf-netbios-ns,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_netbios_ns \
+$(eval $(call KMOD_template,NF_CONNTRACK_NETBIOS_NS,nf-conntrack-netbios-ns,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_netbios_ns \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_TFTP,ip-nf-tftp,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_tftp \
+$(eval $(call KMOD_template,NF_CONNTRACK_TFTP,nf-conntrack-tftp,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_tftp \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_tftp \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_AMANDA,ip-nf-amanda,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_amanda \
+#$(eval $(call KMOD_template,NF_CONNTRACK_RTSP,nf-conntrack-rtsp,\
+#	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_rtsp \
+#	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_rtsp \
+#,55))
+
+# broken
+#$(eval $(call KMOD_template,NF_CONNTRACK_AMANDA,nf-conntrack-amanda,\
+#	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_amanda \
+#	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_amanda \
+#,55))
+
+$(eval $(call KMOD_template,NF_CONNTRACK_PPTP,nf-conntrack-pptp,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_proto_gre \
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_pptp \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_pptp \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_PPTP,ip-nf-pptp,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_pptp \
+$(eval $(call KMOD_template,NF_CONNTRACK_H323,nf-conntrack-h323,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_h323 \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_h323 \
 ,55))
 
-$(eval $(call KMOD_template,IP_NF_H323,ip-nf-h323,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_h323 \
-,55))
-
-$(eval $(call KMOD_template,IP_NF_SIP,ip-nf-sip,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_conntrack_sip \
+$(eval $(call KMOD_template,NF_CONNTRACK_SIP,nf-conntrack-sip,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_sip \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_sip \
 ,55))
 
 $(eval $(call KMOD_template,IP_NF_IPTABLES,ip-nf-iptables,\
@@ -473,11 +492,6 @@ $(eval $(call KMOD_template,IP_NF_TARGET_TCPMSS,ip-nf-target-tcpmss,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_TCPMSS \
 ,60))
 
-$(eval $(call KMOD_template,NF_NAT,nf-nat,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
-,60))
-
 $(eval $(call KMOD_template,IP_NF_TARGET_MASQUERADE,ip-nf-target-masquerade,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_MASQUERADE \
 ,65))
@@ -520,7 +534,7 @@ $(eval $(call KMOD_template,IP6_NF_IPTABLES,ip6-nf-iptables,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6_tables \
 ,50))
 
-$(eval $(call KMOD_template,IP6_NF_MATCH_AH,ip6-nf-match-AH,\
+$(eval $(call KMOD_template,IP6_NF_MATCH_AH,ip6-nf-match-ah,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_ah \
 ,55))
 
