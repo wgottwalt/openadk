@@ -9,6 +9,9 @@ include ${TOPDIR}/mk/buildhlp.mk
 
 # glibc does not compile with Os
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+ifneq ($(ADK_DEBUG),)
+TARGET_CFLAGS+=-O2
+endif
 
 GLIBC_CONFOPTS:=        \
 			--build=$(GNU_HOST_NAME) \
