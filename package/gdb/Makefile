@@ -10,6 +10,8 @@ PKG_DEPENDS:=		libthread-db libncurses libiconv
 PKG_BUILDDEP+=		ncurses readline libiconv
 PKG_TARGET_DEPENDS:=	!foxboard !ag241
 
+PKG_NOPARALLEL:=	1
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

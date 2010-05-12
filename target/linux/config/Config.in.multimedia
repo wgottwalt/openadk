@@ -1,5 +1,9 @@
 menu "Multimedia devices support"
-depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB && !ADK_LINUX_CRIS_FOXBOARD
+depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
+
+config ADK_KERNEL_SND_AC97_CODEC
+	boolean
+	default n
 
 config ADK_KERNEL_SND_TIMER
 	boolean
@@ -56,6 +60,8 @@ config ADK_KPACKAGE_KMOD_SND_OSSEMUL
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	prompt "kmod-sound-alsa-ac97-codec..... ALSA AC97 codec"
 	depends on ADK_KPACKAGE_KMOD_SND
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
+	select ADK_KERNEL_SND_AC97_CODEC
 	tristate
 	default n
 	help
@@ -64,6 +70,7 @@ config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	prompt "kmod-sound-alsa-via82xx........ ALSA VIA82XX driver"
 	depends on ADK_KPACKAGE_KMOD_SND
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
 	default n
@@ -73,6 +80,7 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 config ADK_KPACKAGE_KMOD_SND_ENS1370
 	prompt "kmod-sound-alsa-ens1370........ ALSA Ensoniq 1370 driver"
 	depends on ADK_KPACKAGE_KMOD_SND
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
 	tristate
 	default n
 	help
