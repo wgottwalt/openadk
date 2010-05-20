@@ -38,12 +38,13 @@ if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
 fi
 
-if [[ -n $ADK_PACKAGE_LIBUSB ]]; then
-	NEED_BISON="$NEED_BISON libusb"
-fi
-
 if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
 	NEED_BISON="$NEED_BISON heimdal-server"
+fi
+
+if [[ -n $ADK_COMPILE_PCMCIAUTILS ]]; then
+	NEED_BISON="$NEED_BISON pcmciautils"
+	NEED_FLEX="$NEED_FLEX pcmciautils"
 fi
 
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then

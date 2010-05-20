@@ -10,6 +10,11 @@ endef
 
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
 ROOTFS:=	root=/dev/sda2
+MTDDEV:=	root=/dev/mtdblock1
+endif
+
+ifeq ($(ADK_LINUX_MIPS_RB433),y)
+MTDDEV:=	root=/dev/mtdblock2
 endif
 
 ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
@@ -22,7 +27,7 @@ $(eval $(call rootfs_template,archive,ARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
 $(eval $(call rootfs_template,squashfs,SQUASHFS))
-$(eval $(call rootfs_template,yaffs,YAFFS,root=/dev/mtdblock1 panic=3))
+$(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV) panic=3))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp init=/init))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
 

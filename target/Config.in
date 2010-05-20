@@ -116,10 +116,7 @@ config ADK_x86_64_qemu
 config ADK_rb532
 	tristate
 
-config ADK_rb411
-	tristate
-
-config ADK_rb433
+config ADK_rb4xx
 	tristate
 
 config ADK_zaurus
@@ -182,8 +179,7 @@ config ADK_TARGET
 	default "foxg20"  if ADK_foxg20
 	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
-	default "rb411"  if ADK_rb411
-	default "rb433"  if ADK_rb433
+	default "rb4xx"  if ADK_rb4xx
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
 	default "ibmx40"  if ADK_ibmx40
@@ -699,35 +695,30 @@ prompt "Routerboard model"
 default ADK_LINUX_MIPS_RB532
 depends on ADK_LINUX_MIKROTIK
 
-config ADK_LINUX_MIPS_RB411
-	bool "Mikrotik Routerboard 411"
-	select ADK_rb411
+config ADK_LINUX_MIPS_RB4XX
+	bool "Mikrotik Routerboard 411/433"
+	select ADK_rb4xx
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_TARGET_WITH_MINIPCI
-	depends on ADK_BROKEN
+	select ADK_TARGET_WITH_WATCHDOG
 	help
-	 Support for Mikrotik RB411.
-	 Status: development
-
-config ADK_LINUX_MIPS_RB433
-	bool "Mikrotik Routerboard 433"
-	select ADK_rb433
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_TARGET_WITH_MINIPCI
-	depends on ADK_BROKEN
-	help
-	 Support for Mikrotik RB433.
-	 Status: development
+	 Support for Mikrotik RB411/RB433.
+	 Status: stable
 
 config ADK_LINUX_MIPS_RB532
 	bool "Mikrotik Routerboard 532"
 	select ADK_rb532
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
@@ -785,8 +776,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
-		ADK_LINUX_MIPS_RB411 || \
-		ADK_LINUX_MIPS_RB433 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_MIPS64_LEMOTE || \
@@ -805,6 +795,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_MIPS64_LEMOTE || \
@@ -868,8 +859,7 @@ config ADK_TARGET_ROOTFS_YAFFS
 	select ADK_KERNEL_YAFFS_YAFFS2
 	depends on \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS_RB433 || \
-		ADK_LINUX_MIPS_RB411
+		ADK_LINUX_MIPS_RB4XX
 	help
 	  Root filesystem on NAND.
 
@@ -883,8 +873,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS_RB433 || \
-		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_MIPS_WAG54G || \
 		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS64_LEMOTE

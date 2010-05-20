@@ -14,3 +14,9 @@ if [ "$SUBSYSTEM" == "firmware" ];then
                 fi
         fi
 fi
+if [ "$SUBSYSTEM" == "pcmcia_socket" ];then
+	logger "Setting up PCMCIA socket resource database"
+	if [ "$ACTION" == "add" ];then
+		/usr/sbin/pcmcia-socket-startup
+	fi
+fi

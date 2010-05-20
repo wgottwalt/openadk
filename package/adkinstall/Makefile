@@ -10,7 +10,7 @@ PKG_DESCR:=		installer for cf, mmc, sd or mtd devices
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
 
-PKG_TARGET_DEPENDS:=	alix wrap rb532 foxg20
+PKG_TARGET_DEPENDS:=	alix wrap rb532 foxg20 rb411 rb433
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
@@ -33,6 +33,12 @@ ifeq ($(ADK_LINUX_MIPS_RB532),y)
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
 	${INSTALL_BIN} ./src/adkinstall.foxg20 \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
+else ifeq ($(ADK_LINUX_MIPS_RB433),y)
+	${INSTALL_BIN} ./src/adkinstall.rb4xx \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
+else ifeq ($(ADK_LINUX_MIPS_RB411),y)
+	${INSTALL_BIN} ./src/adkinstall.rb4xx \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else
 	${INSTALL_BIN} ./src/adkinstall $(IDIR_ADKINSTALL)/sbin
