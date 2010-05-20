@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 
-PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 rb532 foxg20
+PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 rb532 foxg20 rb411 rb433
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
