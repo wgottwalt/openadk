@@ -6,8 +6,8 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		comp
-PKG_DEPENDS:=		libthread-db libncurses libiconv
-PKG_BUILDDEP+=		ncurses readline libiconv
+PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat
+PKG_BUILDDEP+=		ncurses readline libiconv expat
 PKG_TARGET_DEPENDS:=	!foxboard !ag241
 
 PKG_NOPARALLEL:=	1
@@ -21,7 +21,7 @@ CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--disable-tui --disable-gdbtk --without-x \
 			--without-included-gettext --disable-sim \
 			--enable-threads --with-curses --disable-werror \
-			--enable-static
+			--enable-static --without-python
 XAKE_FLAGS+=		LDFLAGS='${TLDFLAGS}'
 
 post-install:
