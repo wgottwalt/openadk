@@ -1,0 +1,12 @@
+diff -Nur linux-2.6.33.orig/arch/cris/Kconfig linux-2.6.33/arch/cris/Kconfig
+--- linux-2.6.33.orig/arch/cris/Kconfig	2010-02-24 19:52:17.000000000 +0100
++++ linux-2.6.33/arch/cris/Kconfig	2010-04-28 21:41:58.831386913 +0200
+@@ -677,6 +688,8 @@
+ 
+ source "fs/Kconfig"
+ 
++source "sound/Kconfig"
++
+ source "drivers/usb/Kconfig"
+ 
+ source "drivers/uwb/Kconfig"

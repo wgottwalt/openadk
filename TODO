@@ -1,9 +1,4 @@
-- php update
-- openssh update
+- add support for brcm 2.6
 - macos x build
-- test on OpenSuSE
-- test on Fedora Core
 - help text for config/ needs adoption
 - fix watchdog for alix1c (mfgpt timers problem)
-- implement rpm package backend 
-- implement dpkg package backend 

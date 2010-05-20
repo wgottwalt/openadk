@@ -15,6 +15,8 @@ PKG_URL:=		http://www.openswan.org
 PKG_SITES:=		http://www.openswan.org/download/ \
 			ftp://ftp.openswan.org/openswan/
 
+PKG_NOPARALLEL:=	1
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
