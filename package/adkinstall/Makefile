@@ -10,7 +10,7 @@ PKG_DESCR:=		installer for cf, mmc, sd or mtd devices
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
 
-PKG_TARGET_DEPENDS:=	alix wrap rb532 foxg20 rb411 rb433
+PKG_TARGET_DEPENDS:=	alix wrap routerboard foxg20
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1

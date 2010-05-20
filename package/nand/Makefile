@@ -9,7 +9,7 @@ PKG_RELEASE:=		3
 PKG_DESCR:=		NAND utility
 PKG_SECTION:=		base
 
-PKG_TARGET_DEPENDS:=	rb532 rb411 rb433
+PKG_TARGET_DEPENDS:=	routerboard
 
 NO_DISTFILES:=		1
 
