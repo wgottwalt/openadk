@@ -11,7 +11,7 @@ PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm
 PKG_BUILDDEP+=		libXdamage libXfixes libXxf86vm libdrm 
-PKG_BUILDDEP+=		dri2proto glproto
+PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
@@ -25,9 +25,26 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium \
+			--disable-glw \
+			--with-driver=dri \
 			--without-demos
 
 XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
+
+pre-configure:
+	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+		./configure \
+		--disable-static \
+		--disable-glw \
+		--disable-gallium \
+		--with-driver=xlib \
+		--without-demos \
+	);
+	${MAKE} -C ${WRKBUILD}/src/glsl
+	${MAKE} -C ${WRKBUILD}/src/glsl/apps
+	cp ${WRKBUILD}/src/glsl/apps/compile \
+		${STAGING_TOOLS}/bin
+	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib

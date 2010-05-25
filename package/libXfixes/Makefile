@@ -7,10 +7,10 @@ PKG_NAME:=		libXfixes
 PKG_VERSION:=		4.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		86eb4b916cd5948c0e20d279107b3331
-PKG_DESCR:=		add short description
+PKG_DESCR:=		X Fixes Library
 PKG_SECTION:=		libs
 PKG_BUILDDEP+=		fixesproto
-PKG_URL:=		add project url
+PKG_URL:=		http://xorg.freedesktop.org
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk

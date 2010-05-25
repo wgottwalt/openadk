@@ -11,6 +11,7 @@ PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib gtk+ libnotify libidl
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
+PKG_DEPENDS+=		libxdamage libxfixes
 PKG_BUILDDEP+=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11 libXt
 PKG_BUILDDEP+=		nspr nss jpeg
 PKG_URL:=		http://www.mozilla.org/

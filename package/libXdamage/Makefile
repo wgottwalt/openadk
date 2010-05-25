@@ -7,7 +7,7 @@ PKG_NAME:=		libXdamage
 PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f8f19f747c8445213d5409ae8b8b2f0a
-PKG_DESCR:=		add short description
+PKG_DESCR:=		X Window System client interface to the DAMAGE extension to the X protocol
 PKG_SECTION:=		libs
 PKG_BUILDDEP+=		libXfixes damageproto
 PKG_URL:=		add project url
@@ -19,7 +19,7 @@ $(eval $(call PKG_template,LIBXDAMAGE,libxdamage,$(PKG_VERSION)-${PKG_RELEASE},$
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libXdamage* \
+	$(INSTALL_BIN) $(WRKINST)/usr/lib/libXdamage*.so* \
 		$(IDIR_LIBXDAMAGE)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

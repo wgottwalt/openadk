@@ -970,6 +970,14 @@ choice
 prompt "Compression method for initramfs and kernel"
 	depends on ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression.
+
 config ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
 	boolean
 	prompt "gzip"
@@ -986,14 +994,6 @@ config ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	help
 	  Select BZIP2 compression.
 
-config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
-	boolean
-	prompt "lzma"
-	select ADK_KERNEL_RD_LZMA
-	select ADK_KERNEL_KERNEL_LZMA
-	help
-	  Select LZMA compression.
-
 config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
 	boolean
 	prompt "lzo"
@@ -1008,6 +1008,13 @@ choice
 prompt "Compression method for Kernel"
 	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY)
 	
+config ADK_TARGET_KERNEL_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression for Kernel.
+
 config ADK_TARGET_KERNEL_COMPRESSION_GZIP
 	boolean
 	prompt "gzip"
@@ -1021,13 +1028,6 @@ config ADK_TARGET_KERNEL_COMPRESSION_BZIP2
 	select ADK_KERNEL_KERNEL_BZIP2
 	help
 	  Select BZIP2 compression for Kernel.
-
-config ADK_TARGET_KERNEL_COMPRESSION_LZMA
-	boolean
-	prompt "lzma"
-	select ADK_KERNEL_KERNEL_LZMA
-	help
-	  Select LZMA compression for Kernel.
 
 config ADK_TARGET_KERNEL_COMPRESSION_LZO
 	boolean
