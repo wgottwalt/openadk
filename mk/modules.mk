@@ -1047,18 +1047,18 @@ $(eval $(call KMOD_template,PCCARD,pccard,\
 	$(MODULES_DIR)/kernel/drivers/pcmcia/pcmcia_core \
 ,40))
 
-$(eval $(call KMOD_template,PCMCIA,pcmcia,\
-	$(MODULES_DIR)/kernel/drivers/pcmcia/pcmcia \
-,50))
-
-$(eval $(call KMOD_template,CARDBUS,cardbus,\
+$(eval $(call KMOD_template,YENTA,yenta,\
 	$(MODULES_DIR)/kernel/drivers/pcmcia/rsrc_nonstatic \
 	$(MODULES_DIR)/kernel/drivers/pcmcia/yenta_socket \
 ,50))
 
-$(eval $(call KMOD_template,PCMCIA_SERIAL_CS,pcmcia-serial-cs,\
+$(eval $(call KMOD_template,PCMCIA,pcmcia,\
+	$(MODULES_DIR)/kernel/drivers/pcmcia/pcmcia \
+,60))
+
+$(eval $(call KMOD_template,SERIAL_8250_CS,serial-8250-cs,\
 	$(MODULES_DIR)/kernel/drivers/serial/serial_cs \
-,55))
+,70))
 
 #
 # Input

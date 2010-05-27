@@ -1,0 +1,11 @@
+diff -Nur linux-2.6.32.orig/kernel/pid.c linux-2.6.32/kernel/pid.c
+--- linux-2.6.32.orig/kernel/pid.c	2009-12-03 04:51:21.000000000 +0100
++++ linux-2.6.32/kernel/pid.c	2009-12-06 01:04:41.000000000 +0100
+@@ -387,6 +387,7 @@
+ {
+ 	return find_task_by_pid_ns(vnr, current->nsproxy->pid_ns);
+ }
++EXPORT_SYMBOL(find_task_by_vpid);
+ 
+ struct pid *get_task_pid(struct task_struct *task, enum pid_type type)
+ {

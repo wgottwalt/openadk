@@ -1,15 +1,6 @@
---- xorg-server-1.7.5.orig/hw/xfree86/loader/sdksyms.c	2010-02-16 02:42:49.000000000 +0100
-+++ xorg-server-1.7.5/hw/xfree86/loader/sdksyms.c	2010-04-21 19:50:58.000000000 +0200
-@@ -429,8 +429,6 @@ _X_HIDDEN void *xorg_symbols[] = {
-     (void *) &AbortDDX,
-     (void *) &ddxGiveUp,
-     (void *) &TimeSinceLastInputEvent,
--    (void *) &strlcpy,
--    (void *) &strlcat,
-     (void *) &LogInit,
-     (void *) &LogClose,
-     (void *) &LogSetParameter,
-@@ -634,7 +632,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+--- xorg-server-1.7.6.orig/hw/xfree86/loader/sdksyms.c	2010-03-17 01:56:04.000000000 +0100
++++ xorg-server-1.7.6/hw/xfree86/loader/sdksyms.c	2010-05-14 15:54:56.232212764 +0200
+@@ -634,7 +634,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &NewCurrentScreen,
      (void *) &PointerConfinedToScreen,
      (void *) &GetSpritePosition,
@@ -17,7 +8,7 @@
      (void *) &GEExtensions,
      (void *) &GERegisterExtension,
      (void *) &GEInitEvent,
-@@ -724,7 +721,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -724,7 +723,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &PickPointer,
      (void *) &PickKeyboard,
      (void *) &IsInterferingGrab,
@@ -25,7 +16,7 @@
      (void *) &ScreenRestructured,
      (void *) &ffs,
      (void *) &AddCallback,
-@@ -874,8 +870,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -874,8 +872,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &CreateLinearGradientPicture,
      (void *) &CreateRadialGradientPicture,
      (void *) &CreateConicalGradientPicture,
@@ -34,7 +25,7 @@
      (void *) &PictTransform_from_xRenderTransform,
      (void *) &xRenderTransform_from_PictTransform,
      (void *) &PictureTransformPoint,
-@@ -977,25 +971,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -977,25 +973,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &ShmSegType,
      (void *) &ShmCompletionCode,
      (void *) &BadShmSegCode,
@@ -60,7 +51,7 @@
      (void *) &xf86CreateI2CBusRec,
      (void *) &xf86DestroyI2CBusRec,
      (void *) &xf86I2CBusInit,
-@@ -1034,19 +1009,9 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -1034,31 +1011,17 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &noTestExtensions,
      (void *) &dixScreenOrigins,
      (void *) &ConnectionInfo,
@@ -80,16 +71,18 @@
      (void *) &noScreenSaverExtension,
      (void *) &noMITShmExtension,
      (void *) &noRRExtension,
-@@ -1054,9 +1019,7 @@ _X_HIDDEN void *xorg_symbols[] = {
+     (void *) &noRenderExtension,
      (void *) &noResExtension,
      (void *) &noXFree86DGAExtension,
-     (void *) &noXFree86DRIExtension,
+-    (void *) &noXFree86DRIExtension,
 -    (void *) &noXFree86VidModeExtension,
      (void *) &noXFixesExtension,
 -    (void *) &noPanoramiXExtension,
      (void *) &noXvExtension,
-     (void *) &noDRI2Extension,
+-    (void *) &noDRI2Extension,
      (void *) &defaultTextFont,
+     (void *) &defaultCursorFont,
+     (void *) &MaxClients,
 @@ -1193,7 +1156,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &ProcRRQueryOutputProperty,
      (void *) &ProcRRConfigureOutputProperty,
@@ -116,7 +109,7 @@
      (void *) &xf86fpFlag,
      (void *) &xf86sFlag,
      (void *) &xf86bsEnableFlag,
-@@ -1935,7 +1893,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -1937,7 +1895,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &ProcGrabButton,
      (void *) &ProcUngrabButton,
      (void *) &ProcRecolorCursor,
@@ -124,7 +117,7 @@
      (void *) &SetDefaultFont,
      (void *) &QueueFontWakeup,
      (void *) &RemoveFontWakeup,
-@@ -2185,15 +2142,6 @@ _X_HIDDEN void *xorg_symbols[] = {
+@@ -2187,15 +2144,6 @@ _X_HIDDEN void *xorg_symbols[] = {
      (void *) &SProcUngrabButton,
      (void *) &SProcUngrabKey,
      (void *) &SProcWarpPointer,

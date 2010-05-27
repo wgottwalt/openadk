@@ -20,7 +20,12 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NSPR,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		OS_TARGET="Linux" HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}"
+CONFIGURE_ENV+=		OS_TARGET="Linux" HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}" \
+			cross_compiling=yes
+
+ifeq (${ADK_LINUX_64},y)
+CONFIGURE_ARGS+=	--enable-64bit
+endif
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_NSPR)/usr/lib
