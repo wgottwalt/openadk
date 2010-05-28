@@ -6,6 +6,7 @@ include ${TOPDIR}/toolchain/binutils/Makefile.inc
 
 PKG_DESCR:=		binary utilities (nm, objdump, ar, as, ..)
 PKG_SECTION:=		comp
+PKG_HOST_DEPENDS:=      !cygwin
 
 include ${TOPDIR}/mk/package.mk
 
@@ -15,10 +16,6 @@ TCFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME)
-
-post-patch:
-	${PREVENT_PATCH} ${PATCH} ${WRKDIST} \
-	    ${TOPDIR}/toolchain/binutils/patches \*.patch
 
 post-install:
 	${INSTALL_DIR} ${IDIR_BINUTILS}/usr/lib
