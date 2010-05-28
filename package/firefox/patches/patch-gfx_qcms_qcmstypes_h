@@ -1,6 +1,6 @@
 --- mozilla-1.9.2.orig/gfx/qcms/qcmstypes.h	2010-04-02 18:02:27.000000000 +0200
-+++ mozilla-1.9.2/gfx/qcms/qcmstypes.h	2010-04-11 14:57:54.000000000 +0200
-@@ -11,22 +11,11 @@
++++ mozilla-1.9.2/gfx/qcms/qcmstypes.h	2010-04-30 17:58:33.490975825 +0200
+@@ -11,22 +11,12 @@
  /* int_types.h gets included somehow, so avoid redefining the types differently */
  #include <sys/int_types.h>
  #else
@@ -13,6 +13,7 @@
 -typedef PRInt64 int64_t;
 -typedef PRUint64 uint64_t;
 -
++#include <stdint.h>
  #ifdef __OS2__
  /* OS/2's stdlib typdefs uintptr_t. So we'll just include that so we don't collide */
  #include <stdlib.h>

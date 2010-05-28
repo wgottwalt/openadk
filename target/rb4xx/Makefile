@@ -7,23 +7,27 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+
 kernel-install:
-	@cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
+		$(TARGET_DIR)/boot/kernel 
+	@cp $(TARGET_DIR)/boot/kernel \
+		$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel \
+		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
-	@echo 'Do not forget to create device nodes for console,null and tty in your nfsroot'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),yaffs)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Format your NAND with Routerboot, boot via NFS and'
 	@echo 'then install kernel and filesystem:'
-	@echo 'mount -t yaffs2 /dev/mtdblock0 /mnt'
-	@echo 'cp ${ADK_TARGET}-${FS}-kernel /mnt/kernel'
+	@echo 'adkinstall ${ROOTFSTARBALL}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

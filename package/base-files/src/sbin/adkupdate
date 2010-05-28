@@ -34,6 +34,8 @@ prepare() {
 	mount -o remount,rw /
 	if [ "$system" == "RB532" ];then
 		mount -t yaffs2 /dev/mtdblock0 /boot
+	elif [ "$system" == "AR7130" ];then
+		mount -t yaffs2 /dev/mtdblock1 /boot
 	elif [ "$system" == "FOXG20" ];then
 		mount -t vfat /dev/mmcblk0p1 /boot
 	fi
@@ -88,6 +90,8 @@ if [ -x /sbin/cfgfs ];then
 	mount -o bind /etc /tmp/.cfgfs/root
 fi
 if [ "$system" == "RB532" ];then
+	umount -f /boot
+elif [ "$system" == "AR7130" ];then
 	umount -f /boot
 elif [ "$system" == "FOXG20" ];then
 	umount -f /boot

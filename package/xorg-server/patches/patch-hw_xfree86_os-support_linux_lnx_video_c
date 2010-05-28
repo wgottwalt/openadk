@@ -1,6 +1,15 @@
---- xorg-server-1.7.5.orig/hw/xfree86/os-support/linux/lnx_video.c	2010-02-16 01:24:23.000000000 +0100
-+++ xorg-server-1.7.5/hw/xfree86/os-support/linux/lnx_video.c	2010-03-08 21:31:20.000000000 +0100
-@@ -497,7 +497,7 @@ volatile unsigned char *ioBase = NULL;
+--- xorg-server-1.7.6.orig/hw/xfree86/os-support/linux/lnx_video.c	2010-03-12 05:38:22.000000000 +0100
++++ xorg-server-1.7.6/hw/xfree86/os-support/linux/lnx_video.c	2010-05-14 19:06:06.873473002 +0200
+@@ -64,6 +64,8 @@ static Bool ExtendedEnabled = FALSE;
+       !defined(__mips__) && \
+       !defined(__arm__)
+ 
++#include "compiler.h"
++
+ /*
+  * Due to conflicts with "compiler.h", don't rely on <sys/io.h> to declare
+  * these.
+@@ -497,7 +499,7 @@ volatile unsigned char *ioBase = NULL;
  Bool
  xf86EnableIO(void)
  {
@@ -9,7 +18,7 @@
  	int fd;
  	unsigned int ioBase_phys;
  #endif
-@@ -524,6 +524,20 @@ xf86EnableIO(void)
+@@ -524,6 +526,20 @@ xf86EnableIO(void)
  #endif
  	}
  	close(fd);

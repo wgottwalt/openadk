@@ -1,0 +1,11 @@
+--- Mesa-7.8.1.orig/src/glsl/Makefile	2010-04-05 01:46:26.000000000 +0200
++++ Mesa-7.8.1/src/glsl/Makefile	2010-05-21 17:17:54.621613561 +0200
+@@ -4,7 +4,7 @@ TOP = ../..
+ 
+ include $(TOP)/configs/current
+ 
+-SUBDIRS = pp cl apps
++SUBDIRS = pp cl
+ 
+ default install clean:
+ 	@for dir in $(SUBDIRS) ; do \

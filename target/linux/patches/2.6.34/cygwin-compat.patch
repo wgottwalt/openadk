@@ -1,0 +1,14 @@
+diff -Nur linux-2.6.30.orig/scripts/mod/file2alias.c linux-2.6.30/scripts/mod/file2alias.c
+--- linux-2.6.30.orig/scripts/mod/file2alias.c	2009-06-10 05:05:27.000000000 +0200
++++ linux-2.6.30/scripts/mod/file2alias.c	2009-06-11 09:17:10.000000000 +0200
+@@ -29,7 +29,11 @@
+ 
+ #include <ctype.h>
+ 
++#ifdef __CYGWIN__
++typedef __uint32_t      __u32;
++#else
+ typedef uint32_t	__u32;
++#endif
+ typedef uint16_t	__u16;
+ typedef unsigned char	__u8;
