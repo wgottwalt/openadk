@@ -149,6 +149,9 @@ config ADK_mips_rescue
 config ADK_mipsel_rescue
 	tristate
 
+config ADK_brcm
+	tristate
+
 config ADK_ag241
 	tristate
 
@@ -164,6 +167,7 @@ config ADK_TARGET
 	default "alix2d"  if ADK_alix2d
 	default "alix2d13"  if ADK_alix2d13
 	default "wrap"  if ADK_wrap
+	default "brcm"  if ADK_brcm
 	default "toolchain-arm"  if ADK_arm_toolchain
 	default "toolchain-armel"  if ADK_armel_toolchain
 	default "toolchain-mips"  if ADK_mips_toolchain
@@ -321,6 +325,17 @@ config ADK_LINUX_MIPS_AG241
 	  Linksys AG241 DSL router.
 	  (Texas Instruments AR7 platform)
 	  Status: stable
+
+config ADK_LINUX_MIPS_BRCM
+	bool "Linksys/Asus Broadcom 47xx Routers"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_brcm
+	help
+	  Linksys/Asus Broadcom 47xx based router.
+	  Status: development
 
 config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
@@ -879,6 +894,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_BRCM || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB433 || \
 		ADK_LINUX_MIPS_RB411 || \
