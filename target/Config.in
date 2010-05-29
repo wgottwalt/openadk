@@ -614,6 +614,7 @@ config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
 	select ADK_alix1c
 	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -635,6 +636,8 @@ config ADK_LINUX_X86_ALIX1C
 config ADK_LINUX_X86_ALIX2D
 	bool "PC Engines Alix2D"
 	select ADK_alix2d
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -656,6 +659,8 @@ config ADK_LINUX_X86_ALIX2D
 config ADK_LINUX_X86_ALIX2D13
 	bool "PC Engines Alix2D13"
 	select ADK_alix2d13
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD

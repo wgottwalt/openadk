@@ -587,7 +587,6 @@ source "package/sispmctl/Config.in"
 source "package/stress/Config.in"
 source "package/sysfsutils/Config.in"
 source "package/sysstat/Config.in"
-source "package/swconfig/Config.in"
 source "package/udev/Config.in"
 source "package/watchdog/Config.in"
 endmenu
