@@ -172,6 +172,7 @@ config ADK_TARGET
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
+	default "qemu-mips64"  if ADK_mips64_qemu
 	default "qemu-mipsel"  if ADK_mipsel_qemu
 	default "qemu-x86"  if ADK_x86_qemu
 	default "qemu-x86_64"  if ADK_x86_64_qemu
@@ -253,6 +254,7 @@ config ADK_LINUX_CRIS_FOXBOARD
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
+	select ADK_KERNEL_NETDEVICES
 	select ADK_TARGET_WITH_USB
 	help
 	  Support for Foxboard targets.
@@ -263,6 +265,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
 	select ADK_LINUX_64
+	select ADK_KERNEL_USB
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -610,6 +613,7 @@ depends on ADK_LINUX_ALIX
 config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
 	select ADK_alix1c
+	select ADK_KERNEL_USB
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -1006,7 +1010,7 @@ endchoice
 
 choice
 prompt "Compression method for Kernel"
-	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY)
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY || ADK_LINUX_ARM_FOXG20 || ADK_LINUX_ARM_QEMU )
 	
 config ADK_TARGET_KERNEL_COMPRESSION_LZMA
 	boolean

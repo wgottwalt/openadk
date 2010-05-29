@@ -11,16 +11,6 @@ kernel-install:
 	@cp $(LINUX_DIR)/arch/cris/boot/zImage \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel $(MAKE_TRACE)
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' $(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/cris/boot/zImage \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo
@@ -42,7 +32,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 endif
 
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-cris -nographic -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'

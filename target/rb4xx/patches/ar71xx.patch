@@ -1,6 +1,6 @@
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/ar71xx.c linux-2.6.33.3/arch/mips/ar71xx/ar71xx.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/ar71xx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/ar71xx.c	2010-04-02 11:07:51.850954806 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/ar71xx.c linux-2.6.34/arch/mips/ar71xx/ar71xx.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/ar71xx.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/ar71xx.c	2010-05-25 18:46:03.110979012 +0200
 @@ -0,0 +1,177 @@
 +/*
 + *  AR71xx SoC routines
@@ -179,9 +179,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/ar71xx.c linux-2.6.33.3/arch/mips
 +	mutex_unlock(&ar71xx_flash_mutex);
 +}
 +EXPORT_SYMBOL_GPL(ar71xx_flash_release);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.c linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-eth.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-eth.c	2010-03-23 20:31:04.580708993 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-eth.c linux-2.6.34/arch/mips/ar71xx/dev-ap91-eth.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-eth.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap91-eth.c	2010-05-25 18:46:03.723464300 +0200
 @@ -0,0 +1,70 @@
 +/*
 + *  Atheros AP91 reference board ethernet initialization
@@ -253,9 +253,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.c linux-2.6.33.3/arc
 +
 +	ar71xx_add_device_dsa(1, &ap91_dsa_data);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.h linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-eth.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-eth.h	2010-03-12 19:31:46.886045750 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-eth.h linux-2.6.34/arch/mips/ar71xx/dev-ap91-eth.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-eth.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap91-eth.h	2010-05-25 18:46:03.783696759 +0200
 @@ -0,0 +1,23 @@
 +/*
 + *  Atheros AP91 reference board ethernet initialization
@@ -280,9 +280,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-eth.h linux-2.6.33.3/arc
 +
 +#endif /* _AR71XX_DEV_AP91_ETH_H */
 +
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.c linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-pci.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-pci.c	2009-12-25 12:10:59.596028998 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-pci.c linux-2.6.34/arch/mips/ar71xx/dev-ap91-pci.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap91-pci.c	2010-05-25 18:46:03.822223125 +0200
 @@ -0,0 +1,114 @@
 +/*
 + *  Atheros AP91 reference board PCI initialization
@@ -398,9 +398,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.c linux-2.6.33.3/arc
 +
 +	ap91_pci_fixup_enabled = 1;
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.h linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-pci.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap91-pci.h	2010-01-05 20:38:52.249392561 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-pci.h linux-2.6.34/arch/mips/ar71xx/dev-ap91-pci.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap91-pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap91-pci.h	2010-05-25 18:46:03.863464064 +0200
 @@ -0,0 +1,21 @@
 +/*
 + *  Atheros AP91 reference board PCI initialization
@@ -423,9 +423,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap91-pci.h linux-2.6.33.3/arc
 +
 +#endif /* _AR71XX_DEV_AP91_PCI_H */
 +
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.c linux-2.6.33.3/arch/mips/ar71xx/dev-ap94-pci.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap94-pci.c	2010-02-13 16:30:07.244691791 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap94-pci.c linux-2.6.34/arch/mips/ar71xx/dev-ap94-pci.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap94-pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap94-pci.c	2010-05-25 18:46:03.902223120 +0200
 @@ -0,0 +1,159 @@
 +/*
 + *  Atheros AP94 reference board PCI initialization
@@ -586,9 +586,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.c linux-2.6.33.3/arc
 +
 +	ap94_pci_fixup_enabled = 1;
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.h linux-2.6.33.3/arch/mips/ar71xx/dev-ap94-pci.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ap94-pci.h	2010-02-13 16:30:07.244691791 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ap94-pci.h linux-2.6.34/arch/mips/ar71xx/dev-ap94-pci.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ap94-pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ap94-pci.h	2010-05-25 18:46:03.941521735 +0200
 @@ -0,0 +1,28 @@
 +/*
 + *  Atheros AP94 reference board PCI initialization
@@ -618,9 +618,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ap94-pci.h linux-2.6.33.3/arc
 +
 +#endif /* _AR71XX_DEV_AP94_PCI_H */
 +
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.c linux-2.6.33.3/arch/mips/ar71xx/dev-ar913x-wmac.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ar913x-wmac.c	2010-03-23 20:31:04.941023040 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ar913x-wmac.c linux-2.6.34/arch/mips/ar71xx/dev-ar913x-wmac.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ar913x-wmac.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ar913x-wmac.c	2010-05-25 18:46:03.983064993 +0200
 @@ -0,0 +1,68 @@
 +/*
 + *  Atheros AR913x SoC built-in WMAC device support
@@ -690,9 +690,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.c linux-2.6.33.3/
 +
 +	platform_device_register(&ar913x_wmac_device);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.h linux-2.6.33.3/arch/mips/ar71xx/dev-ar913x-wmac.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-ar913x-wmac.h	2010-01-05 20:38:52.185278525 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-ar913x-wmac.h linux-2.6.34/arch/mips/ar71xx/dev-ar913x-wmac.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-ar913x-wmac.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-ar913x-wmac.h	2010-05-25 18:46:04.023464010 +0200
 @@ -0,0 +1,19 @@
 +/*
 + *  Atheros AR913x SoC built-in WMAC device support
@@ -713,9 +713,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-ar913x-wmac.h linux-2.6.33.3/
 +void ar913x_add_device_wmac(u8 *cal_data, u8 *mac_addr) __init;
 +
 +#endif /* _AR71XX_DEV_AR913X_WMAC_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.c linux-2.6.33.3/arch/mips/ar71xx/dev-dsa.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-dsa.c	2010-01-05 20:38:52.058900684 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-dsa.c linux-2.6.34/arch/mips/ar71xx/dev-dsa.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-dsa.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-dsa.c	2010-05-25 18:46:04.063473081 +0200
 @@ -0,0 +1,50 @@
 +/*
 + *  Atheros AR71xx DSA switch device support
@@ -767,9 +767,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.c linux-2.6.33.3/arch/mip
 +
 +	platform_device_register(&ar71xx_dsa_switch_device);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.h linux-2.6.33.3/arch/mips/ar71xx/dev-dsa.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-dsa.h	2010-01-05 20:38:52.137278273 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-dsa.h linux-2.6.34/arch/mips/ar71xx/dev-dsa.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-dsa.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-dsa.h	2010-05-25 18:46:04.100970143 +0200
 @@ -0,0 +1,20 @@
 +/*
 + *  Atheros AR71xx DSA switch device support
@@ -791,9 +791,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-dsa.h linux-2.6.33.3/arch/mip
 +			   struct dsa_platform_data *d) __init;
 +
 +#endif /* _AR71XX_DEV_DSA_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.c linux-2.6.33.3/arch/mips/ar71xx/dev-gpio-buttons.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-gpio-buttons.c	2010-01-05 20:38:52.310262885 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-gpio-buttons.c linux-2.6.34/arch/mips/ar71xx/dev-gpio-buttons.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-gpio-buttons.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-gpio-buttons.c	2010-05-25 18:46:04.200967942 +0200
 @@ -0,0 +1,58 @@
 +/*
 + *  Atheros AR71xx GPIO button support
@@ -853,9 +853,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.c linux-2.6.33.3
 +err_free_buttons:
 +	kfree(p);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.h linux-2.6.33.3/arch/mips/ar71xx/dev-gpio-buttons.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-gpio-buttons.h	2010-01-05 20:38:52.385278021 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-gpio-buttons.h linux-2.6.34/arch/mips/ar71xx/dev-gpio-buttons.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-gpio-buttons.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-gpio-buttons.h	2010-05-25 18:46:04.242223118 +0200
 @@ -0,0 +1,25 @@
 +/*
 + *  Atheros AR71xx GPIO button support
@@ -882,9 +882,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-gpio-buttons.h linux-2.6.33.3
 +				    struct gpio_button *buttons) __init;
 +
 +#endif /* _AR71XX_DEV_GPIO_BUTTONS_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/devices.c linux-2.6.33.3/arch/mips/ar71xx/devices.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/devices.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/devices.c	2010-04-02 11:07:51.658955496 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/devices.c linux-2.6.34/arch/mips/ar71xx/devices.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/devices.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/devices.c	2010-05-25 18:46:04.280978624 +0200
 @@ -0,0 +1,575 @@
 +/*
 + *  Atheros AR71xx SoC platform devices
@@ -1461,9 +1461,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/devices.c linux-2.6.33.3/arch/mip
 +	return 1;
 +}
 +__setup("kmac=", ar71xx_kmac_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/devices.h linux-2.6.33.3/arch/mips/ar71xx/devices.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/devices.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/devices.h	2010-01-05 20:38:52.093279648 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/devices.h linux-2.6.34/arch/mips/ar71xx/devices.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/devices.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/devices.h	2010-05-25 18:46:04.736028570 +0200
 @@ -0,0 +1,48 @@
 +/*
 + *  Atheros AR71xx SoC device definitions
@@ -1513,10 +1513,10 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/devices.h linux-2.6.33.3/arch/mip
 +void ar71xx_add_device_wdt(void) __init;
 +
 +#endif /* __AR71XX_DEVICES_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.c linux-2.6.33.3/arch/mips/ar71xx/dev-leds-gpio.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-leds-gpio.c	2010-01-05 20:38:51.933280770 +0100
-@@ -0,0 +1,56 @@
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-leds-gpio.c linux-2.6.34/arch/mips/ar71xx/dev-leds-gpio.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-leds-gpio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-leds-gpio.c	2010-05-25 19:12:50.194723129 +0200
+@@ -0,0 +1,57 @@
 +/*
 + *  Atheros AR71xx GPIO LED device support
 + *
@@ -1532,6 +1532,7 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.c linux-2.6.33.3/ar
 +
 +#include <linux/init.h>
 +#include <linux/platform_device.h>
++#include <linux/slab.h>
 +
 +#include "dev-leds-gpio.h"
 +
@@ -1573,9 +1574,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.c linux-2.6.33.3/ar
 +err_free_leds:
 +	kfree(p);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.h linux-2.6.33.3/arch/mips/ar71xx/dev-leds-gpio.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-leds-gpio.h	2010-01-05 20:38:51.937279883 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-leds-gpio.h linux-2.6.34/arch/mips/ar71xx/dev-leds-gpio.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-leds-gpio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-leds-gpio.h	2010-05-25 18:46:04.812922530 +0200
 @@ -0,0 +1,21 @@
 +/*
 + *  Atheros AR71xx GPIO LED device support
@@ -1598,9 +1599,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-leds-gpio.h linux-2.6.33.3/ar
 +				 struct gpio_led *leds) __init;
 +
 +#endif /* _AR71XX_DEV_LEDS_GPIO_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.c linux-2.6.33.3/arch/mips/ar71xx/dev-m25p80.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-m25p80.c	2009-12-25 12:10:59.660426865 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-m25p80.c linux-2.6.34/arch/mips/ar71xx/dev-m25p80.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-m25p80.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-m25p80.c	2010-05-25 18:46:04.852223056 +0200
 @@ -0,0 +1,30 @@
 +/*
 + *  Copyright (C) 2009 Gabor Juhos <juhosg@openwrt.org>
@@ -1632,9 +1633,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.c linux-2.6.33.3/arch/
 +	ar71xx_add_device_spi(NULL, ar71xx_spi_info,
 +			      ARRAY_SIZE(ar71xx_spi_info));
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.h linux-2.6.33.3/arch/mips/ar71xx/dev-m25p80.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-m25p80.h	2009-12-25 12:10:59.660426865 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-m25p80.h linux-2.6.34/arch/mips/ar71xx/dev-m25p80.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-m25p80.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-m25p80.h	2010-05-25 18:46:04.892223453 +0200
 @@ -0,0 +1,16 @@
 +/*
 + *  Copyright (C) 2009 Gabor Juhos <juhosg@openwrt.org>
@@ -1652,9 +1653,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-m25p80.h linux-2.6.33.3/arch/
 +void ar71xx_add_device_m25p80(struct flash_platform_data *pdata) __init;
 +
 +#endif /* _AR71XX_DEV_M25P80_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.c linux-2.6.33.3/arch/mips/ar71xx/dev-pb42-pci.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-pb42-pci.c	2010-01-05 20:38:52.185278525 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-pb42-pci.c linux-2.6.34/arch/mips/ar71xx/dev-pb42-pci.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-pb42-pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-pb42-pci.c	2010-05-25 18:46:04.932223237 +0200
 @@ -0,0 +1,40 @@
 +/*
 + *  Atheros PB42 reference board PCI initialization
@@ -1696,9 +1697,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.c linux-2.6.33.3/arc
 +{
 +	ar71xx_pci_init(ARRAY_SIZE(pb42_pci_irqs), pb42_pci_irqs);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.h linux-2.6.33.3/arch/mips/ar71xx/dev-pb42-pci.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-pb42-pci.h	2010-01-05 20:38:52.217277854 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-pb42-pci.h linux-2.6.34/arch/mips/ar71xx/dev-pb42-pci.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-pb42-pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-pb42-pci.h	2010-05-25 18:46:04.972223148 +0200
 @@ -0,0 +1,21 @@
 +/*
 + *  Atheros PB42 reference board PCI initialization
@@ -1721,9 +1722,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb42-pci.h linux-2.6.33.3/arc
 +#endif
 +
 +#endif /* _AR71XX_DEV_PB42_PCI_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.c linux-2.6.33.3/arch/mips/ar71xx/dev-pb9x-pci.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-pb9x-pci.c	2010-04-02 11:07:51.650955594 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-pb9x-pci.c linux-2.6.34/arch/mips/ar71xx/dev-pb9x-pci.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-pb9x-pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-pb9x-pci.c	2010-05-25 18:46:05.003473097 +0200
 @@ -0,0 +1,33 @@
 +/*
 + *  Atheros PB9x reference board PCI initialization
@@ -1758,9 +1759,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.c linux-2.6.33.3/arc
 +{
 +	ar71xx_pci_init(ARRAY_SIZE(pb9x_pci_irqs), pb9x_pci_irqs);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.h linux-2.6.33.3/arch/mips/ar71xx/dev-pb9x-pci.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-pb9x-pci.h	2010-04-02 11:07:51.654953031 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-pb9x-pci.h linux-2.6.34/arch/mips/ar71xx/dev-pb9x-pci.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-pb9x-pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-pb9x-pci.h	2010-05-25 18:46:05.042263698 +0200
 @@ -0,0 +1,22 @@
 +/*
 + *  Atheros PB9x reference board PCI initialization
@@ -1784,9 +1785,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-pb9x-pci.h linux-2.6.33.3/arc
 +#endif
 +
 +#endif /* _AR71XX_DEV_PB9X_PCI_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.c linux-2.6.33.3/arch/mips/ar71xx/dev-usb.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-usb.c	2010-04-02 11:07:51.694953375 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-usb.c linux-2.6.34/arch/mips/ar71xx/dev-usb.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-usb.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-usb.c	2010-05-25 18:46:05.082223074 +0200
 @@ -0,0 +1,181 @@
 +/*
 + *  Atheros AR71xx USB host device support
@@ -1969,9 +1970,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.c linux-2.6.33.3/arch/mip
 +		BUG();
 +	}
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.h linux-2.6.33.3/arch/mips/ar71xx/dev-usb.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/dev-usb.h	2010-01-05 20:38:52.326200390 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/dev-usb.h linux-2.6.34/arch/mips/ar71xx/dev-usb.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/dev-usb.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/dev-usb.h	2010-05-25 18:46:05.123473207 +0200
 @@ -0,0 +1,17 @@
 +/*
 + *  Atheros AR71xx USB host device support
@@ -1990,9 +1991,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/dev-usb.h linux-2.6.33.3/arch/mip
 +void ar71xx_add_device_usb(void) __init;
 +
 +#endif /* _AR71XX_DEV_USB_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/early_printk.c linux-2.6.33.3/arch/mips/ar71xx/early_printk.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/early_printk.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/early_printk.c	2009-12-13 20:45:21.280039916 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/early_printk.c linux-2.6.34/arch/mips/ar71xx/early_printk.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/early_printk.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/early_printk.c	2010-05-25 18:46:05.161773008 +0200
 @@ -0,0 +1,30 @@
 +/*
 + *  Atheros AR71xx SoC early printk support
@@ -2024,9 +2025,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/early_printk.c linux-2.6.33.3/arc
 +	while (((UART_READ(UART_LSR)) & UART_LSR_THRE) == 0);
 +}
 +
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/gpio.c linux-2.6.33.3/arch/mips/ar71xx/gpio.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/gpio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/gpio.c	2010-04-02 11:07:51.646954247 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/gpio.c linux-2.6.34/arch/mips/ar71xx/gpio.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/gpio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/gpio.c	2010-05-25 18:46:05.241889944 +0200
 @@ -0,0 +1,182 @@
 +/*
 + *  Atheros AR71xx SoC GPIO API support
@@ -2210,9 +2211,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/gpio.c linux-2.6.33.3/arch/mips/a
 +	if (err)
 +		panic("cannot add AR71xx GPIO chip, error=%d", err);
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/irq.c linux-2.6.33.3/arch/mips/ar71xx/irq.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/irq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/irq.c	2010-05-16 13:17:31.871599360 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/irq.c linux-2.6.34/arch/mips/ar71xx/irq.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/irq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/irq.c	2010-05-25 18:46:05.283464015 +0200
 @@ -0,0 +1,295 @@
 +/*
 + *  Atheros AR71xx SoC specific interrupt handling
@@ -2509,9 +2510,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/irq.c linux-2.6.33.3/arch/mips/ar
 +
 +	ar71xx_gpio_irq_init();
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/Kconfig linux-2.6.33.3/arch/mips/ar71xx/Kconfig
---- linux-2.6.33.3.orig/arch/mips/ar71xx/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/Kconfig	2010-05-16 13:17:31.779600220 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/Kconfig linux-2.6.34/arch/mips/ar71xx/Kconfig
+--- linux-2.6.34.orig/arch/mips/ar71xx/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/Kconfig	2010-05-25 18:46:05.333473006 +0200
 @@ -0,0 +1,264 @@
 +if ATHEROS_AR71XX
 +
@@ -2777,9 +2778,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/Kconfig linux-2.6.33.3/arch/mips/
 +	def_bool n
 +
 +endif
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap81.c linux-2.6.33.3/arch/mips/ar71xx/mach-ap81.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap81.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-ap81.c	2010-03-23 20:31:04.604705903 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-ap81.c linux-2.6.34/arch/mips/ar71xx/mach-ap81.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-ap81.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-ap81.c	2010-05-25 18:46:05.373464152 +0200
 @@ -0,0 +1,140 @@
 +/*
 + *  Atheros AP81 board support
@@ -2921,9 +2922,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap81.c linux-2.6.33.3/arch/m
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_AP81, "AP81", "Atheros AP81", ap81_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap83.c linux-2.6.33.3/arch/mips/ar71xx/mach-ap83.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap83.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-ap83.c	2010-05-16 13:17:31.787602077 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-ap83.c linux-2.6.34/arch/mips/ar71xx/mach-ap83.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-ap83.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-ap83.c	2010-05-25 18:46:05.413464137 +0200
 @@ -0,0 +1,266 @@
 +/*
 + *  Atheros AP83 board support
@@ -3191,9 +3192,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ap83.c linux-2.6.33.3/arch/m
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_AP83, "AP83", "Atheros AP83", ap83_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-aw-nr580.c linux-2.6.33.3/arch/mips/ar71xx/mach-aw-nr580.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-aw-nr580.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-aw-nr580.c	2010-05-16 13:17:33.024519409 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-aw-nr580.c linux-2.6.34/arch/mips/ar71xx/mach-aw-nr580.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-aw-nr580.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-aw-nr580.c	2010-05-25 18:46:05.443473125 +0200
 @@ -0,0 +1,101 @@
 +/*
 + *  AzureWave AW-NR580 board support
@@ -3296,9 +3297,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-aw-nr580.c linux-2.6.33.3/ar
 +
 +MIPS_MACHINE(AR71XX_MACH_AW_NR580, "AW-NR580", "AzureWave AW-NR580",
 +	     aw_nr580_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-600-a1.c linux-2.6.33.3/arch/mips/ar71xx/mach-dir-600-a1.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-600-a1.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-dir-600-a1.c	2010-05-16 13:17:31.839599757 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-600-a1.c linux-2.6.34/arch/mips/ar71xx/mach-dir-600-a1.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-600-a1.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-dir-600-a1.c	2010-05-25 18:46:05.483473151 +0200
 @@ -0,0 +1,138 @@
 +/*
 + *  D-Link DIR-600 rev. A1 board support
@@ -3438,9 +3439,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-600-a1.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_DIR_600_A1, "DIR-600-A1", "D-Link DIR-600 rev. A1",
 +	     dir_600_a1_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-615-c1.c linux-2.6.33.3/arch/mips/ar71xx/mach-dir-615-c1.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-615-c1.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-dir-615-c1.c	2010-05-16 13:17:31.775600829 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-615-c1.c linux-2.6.34/arch/mips/ar71xx/mach-dir-615-c1.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-615-c1.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-dir-615-c1.c	2010-05-25 18:46:05.520978530 +0200
 @@ -0,0 +1,173 @@
 +/*
 + *  D-Link DIR-615 rev C1 board support
@@ -3615,9 +3616,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-615-c1.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_DIR_615_C1, "DIR-615-C1", "D-Link DIR-615 rev. C1",
 +	     dir_615c1_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-825-b1.c linux-2.6.33.3/arch/mips/ar71xx/mach-dir-825-b1.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-825-b1.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-dir-825-b1.c	2010-05-16 13:17:32.715628389 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-825-b1.c linux-2.6.34/arch/mips/ar71xx/mach-dir-825-b1.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-dir-825-b1.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-dir-825-b1.c	2010-05-25 18:46:05.560978790 +0200
 @@ -0,0 +1,192 @@
 +/*
 + *  D-Link DIR-825 rev. B1 board support
@@ -3811,9 +3812,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-dir-825-b1.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_DIR_825_B1, "DIR-825-B1", "D-Link DIR-825 rev. B1",
 +	     dir825b1_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w04nu.c linux-2.6.33.3/arch/mips/ar71xx/mach-mzk-w04nu.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w04nu.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-mzk-w04nu.c	2010-05-16 13:17:31.807598757 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-mzk-w04nu.c linux-2.6.34/arch/mips/ar71xx/mach-mzk-w04nu.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-mzk-w04nu.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-mzk-w04nu.c	2010-05-25 18:46:05.603464127 +0200
 @@ -0,0 +1,165 @@
 +/*
 + *  Planex MZK-W04NU board support
@@ -3980,9 +3981,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w04nu.c linux-2.6.33.3/a
 +
 +MIPS_MACHINE(AR71XX_MACH_MZK_W04NU, "MZK-W04NU", "Planex MZK-W04NU",
 +	     mzk_w04nu_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w300nh.c linux-2.6.33.3/arch/mips/ar71xx/mach-mzk-w300nh.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w300nh.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-mzk-w300nh.c	2010-05-16 13:17:32.931648635 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-mzk-w300nh.c linux-2.6.34/arch/mips/ar71xx/mach-mzk-w300nh.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-mzk-w300nh.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-mzk-w300nh.c	2010-05-25 18:46:05.666212661 +0200
 @@ -0,0 +1,158 @@
 +/*
 + *  Planex MZK-W300NH board support
@@ -4142,9 +4143,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-mzk-w300nh.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_MZK_W300NH, "MZK-W300NH", "Planex MZK-W300NH",
 +	     mzk_w300nh_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-nbg460n.c linux-2.6.33.3/arch/mips/ar71xx/mach-nbg460n.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-nbg460n.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-nbg460n.c	2010-05-16 13:17:32.947611843 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-nbg460n.c linux-2.6.34/arch/mips/ar71xx/mach-nbg460n.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-nbg460n.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-nbg460n.c	2010-05-25 18:46:05.721448622 +0200
 @@ -0,0 +1,222 @@
 +/*
 + *  Zyxel NBG 460N/550N/550NH board support
@@ -4368,9 +4369,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-nbg460n.c linux-2.6.33.3/arc
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_NBG460N, "NBG460N", "Zyxel NBG460N/550N/550NH", nbg460n_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb42.c linux-2.6.33.3/arch/mips/ar71xx/mach-pb42.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb42.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-pb42.c	2010-03-23 20:31:05.092710513 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-pb42.c linux-2.6.34/arch/mips/ar71xx/mach-pb42.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-pb42.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-pb42.c	2010-05-25 18:46:05.763464059 +0200
 @@ -0,0 +1,71 @@
 +/*
 + *  Atheros PB42 board support
@@ -4443,9 +4444,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb42.c linux-2.6.33.3/arch/m
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_PB42, "PB42", "Atheros PB42", pb42_init);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb44.c linux-2.6.33.3/arch/mips/ar71xx/mach-pb44.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb44.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-pb44.c	2010-05-16 13:17:32.783600171 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-pb44.c linux-2.6.34/arch/mips/ar71xx/mach-pb44.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-pb44.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-pb44.c	2010-05-25 18:46:05.802223137 +0200
 @@ -0,0 +1,207 @@
 +/*
 + *  Atheros PB44 board support
@@ -4654,9 +4655,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb44.c linux-2.6.33.3/arch/m
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_PB44, "PB44", "Atheros PB44", pb44_init);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb92.c linux-2.6.33.3/arch/mips/ar71xx/mach-pb92.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb92.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-pb92.c	2010-04-14 21:17:12.138345698 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-pb92.c linux-2.6.34/arch/mips/ar71xx/mach-pb92.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-pb92.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-pb92.c	2010-05-25 18:46:05.830967287 +0200
 @@ -0,0 +1,109 @@
 +/*
 + *  Atheros PB92 board support
@@ -4767,9 +4768,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-pb92.c linux-2.6.33.3/arch/m
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_PB92, "PB92", "Atheros PB92", pb92_init);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb4xx.c linux-2.6.33.3/arch/mips/ar71xx/mach-rb4xx.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb4xx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-rb4xx.c	2010-05-16 13:17:32.763620812 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-rb4xx.c linux-2.6.34/arch/mips/ar71xx/mach-rb4xx.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-rb4xx.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-rb4xx.c	2010-05-25 18:46:05.873464062 +0200
 @@ -0,0 +1,290 @@
 +/*
 + *  MikroTik RouterBOARD 4xx series support
@@ -5061,9 +5062,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb4xx.c linux-2.6.33.3/arch/
 +
 +MIPS_MACHINE(AR71XX_MACH_RB_493, "493", "MikroTik RouterBOARD 493/AH",
 +	     rb493_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb750.c linux-2.6.33.3/arch/mips/ar71xx/mach-rb750.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb750.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-rb750.c	2010-03-12 19:31:46.886045750 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-rb750.c linux-2.6.34/arch/mips/ar71xx/mach-rb750.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-rb750.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-rb750.c	2010-05-25 18:46:05.912223101 +0200
 @@ -0,0 +1,133 @@
 +/*
 + *  MikroTik RouterBOARD 750 support
@@ -5198,9 +5199,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-rb750.c linux-2.6.33.3/arch/
 +
 +MIPS_MACHINE(AR71XX_MACH_RB_750, "750i", "MikroTik RouterBOARD 750",
 +	     rb750_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tew-632brp.c linux-2.6.33.3/arch/mips/ar71xx/mach-tew-632brp.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tew-632brp.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-tew-632brp.c	2010-05-16 13:17:32.899597622 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-tew-632brp.c linux-2.6.34/arch/mips/ar71xx/mach-tew-632brp.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-tew-632brp.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-tew-632brp.c	2010-05-25 18:46:05.952223131 +0200
 @@ -0,0 +1,149 @@
 +/*
 + *  TrendNET TEW-632BRP board support
@@ -5351,9 +5352,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tew-632brp.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_TEW_632BRP, "TEW-632BRP", "TRENDnet TEW-632BRP",
 +	     tew_632brp_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr1043nd.c linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr1043nd.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr1043nd.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr1043nd.c	2010-05-16 13:17:31.779600220 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr1043nd.c linux-2.6.34/arch/mips/ar71xx/mach-tl-wr1043nd.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr1043nd.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-tl-wr1043nd.c	2010-05-25 18:46:05.990964132 +0200
 @@ -0,0 +1,156 @@
 +/*
 + *  TP-LINK TL-WR1043ND board support
@@ -5511,9 +5512,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr1043nd.c linux-2.6.33.3
 +
 +MIPS_MACHINE(AR71XX_MACH_TL_WR1043ND, "TL-WR1043ND", "TP-LINK TL-WR1043ND",
 +	     tl_wr1043nd_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr741nd.c linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr741nd.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr741nd.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr741nd.c	2010-05-16 13:17:33.043600332 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr741nd.c linux-2.6.34/arch/mips/ar71xx/mach-tl-wr741nd.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr741nd.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-tl-wr741nd.c	2010-05-25 18:46:06.033464057 +0200
 @@ -0,0 +1,115 @@
 +/*
 + *  TP-LINK TL-WR741ND board support
@@ -5630,9 +5631,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr741nd.c linux-2.6.33.3/
 +}
 +MIPS_MACHINE(AR71XX_MACH_TL_WR741ND, "TL-WR741ND", "TP-LINK TL-WR741ND",
 +	     tl_wr741nd_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr841n.c linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr841n.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr841n.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr841n.c	2010-05-16 13:17:32.951604530 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr841n.c linux-2.6.34/arch/mips/ar71xx/mach-tl-wr841n.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr841n.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-tl-wr841n.c	2010-05-25 18:46:06.091873727 +0200
 @@ -0,0 +1,143 @@
 +/*
 + *  TP-LINK TL-WR841N board support
@@ -5777,9 +5778,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr841n.c linux-2.6.33.3/a
 +
 +MIPS_MACHINE(AR71XX_MACH_TL_WR841N_V1, "TL-WR841N-v1.5", "TP-LINK TL-WR841N v1",
 +	     tl_wr841n_v1_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr941nd.c linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr941nd.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr941nd.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-tl-wr941nd.c	2010-05-16 13:17:33.088566117 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr941nd.c linux-2.6.34/arch/mips/ar71xx/mach-tl-wr941nd.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-tl-wr941nd.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-tl-wr941nd.c	2010-05-25 18:46:06.132223001 +0200
 @@ -0,0 +1,142 @@
 +/*
 + *  TP-LINK TL-WR941ND board support
@@ -5923,9 +5924,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-tl-wr941nd.c linux-2.6.33.3/
 +
 +MIPS_MACHINE(AR71XX_MACH_TL_WR941ND, "TL-WR941ND", "TP-LINK TL-WR941ND",
 +	     tl_wr941nd_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/machtype.h linux-2.6.33.3/arch/mips/ar71xx/machtype.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/machtype.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/machtype.h	2010-05-16 13:17:32.799599694 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/machtype.h linux-2.6.34/arch/mips/ar71xx/machtype.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/machtype.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/machtype.h	2010-05-25 18:46:06.170978587 +0200
 @@ -0,0 +1,60 @@
 +/*
 + *  Atheros AR71xx machine type definitions
@@ -5987,9 +5988,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/machtype.h linux-2.6.33.3/arch/mi
 +};
 +
 +#endif /* _AR71XX_MACHTYPE_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ubnt.c linux-2.6.33.3/arch/mips/ar71xx/mach-ubnt.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ubnt.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-ubnt.c	2010-05-16 13:17:31.783601847 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-ubnt.c linux-2.6.34/arch/mips/ar71xx/mach-ubnt.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-ubnt.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-ubnt.c	2010-05-25 18:46:06.210978842 +0200
 @@ -0,0 +1,281 @@
 +/*
 + *  Ubiquiti RouterStation support
@@ -6272,9 +6273,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-ubnt.c linux-2.6.33.3/arch/m
 +
 +MIPS_MACHINE(AR71XX_MACH_UBNT_NANO_M, "UBNT-NM", "Ubiquiti Nanostation M",
 +	     ubnt_nano_m_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wndr3700.c linux-2.6.33.3/arch/mips/ar71xx/mach-wndr3700.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wndr3700.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wndr3700.c	2010-05-16 13:17:33.059599577 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wndr3700.c linux-2.6.34/arch/mips/ar71xx/mach-wndr3700.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wndr3700.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wndr3700.c	2010-05-25 18:46:06.250979126 +0200
 @@ -0,0 +1,209 @@
 +/*
 + *  Netgear WNDR3700 board support
@@ -6485,9 +6486,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wndr3700.c linux-2.6.33.3/ar
 +
 +MIPS_MACHINE(AR71XX_MACH_WNDR3700, "WNDR3700", "NETGEAR WNDR3700",
 +	     wndr3700_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wnr2000.c linux-2.6.33.3/arch/mips/ar71xx/mach-wnr2000.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wnr2000.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wnr2000.c	2010-05-16 13:17:31.783601847 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wnr2000.c linux-2.6.34/arch/mips/ar71xx/mach-wnr2000.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wnr2000.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wnr2000.c	2010-05-25 18:46:06.290978653 +0200
 @@ -0,0 +1,148 @@
 +/*
 + *  NETGEAR WNR2000 board support
@@ -6637,9 +6638,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wnr2000.c linux-2.6.33.3/arc
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_WNR2000, "WNR2000", "NETGEAR WNR2000", wnr2000_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wp543.c linux-2.6.33.3/arch/mips/ar71xx/mach-wp543.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wp543.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wp543.c	2010-03-23 20:31:05.506280502 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wp543.c linux-2.6.34/arch/mips/ar71xx/mach-wp543.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wp543.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wp543.c	2010-05-25 18:46:06.340979863 +0200
 @@ -0,0 +1,99 @@
 +/*
 + *  Compex WP543/WPJ543 board support
@@ -6740,9 +6741,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wp543.c linux-2.6.33.3/arch/
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_WP543, "WP543", "Compex WP543", wp543_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt160nl.c linux-2.6.33.3/arch/mips/ar71xx/mach-wrt160nl.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt160nl.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wrt160nl.c	2010-05-16 13:17:32.731626515 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wrt160nl.c linux-2.6.34/arch/mips/ar71xx/mach-wrt160nl.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wrt160nl.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wrt160nl.c	2010-05-25 18:46:06.390978782 +0200
 @@ -0,0 +1,158 @@
 +/*
 + *  Linksys WRT160NL board support
@@ -6902,9 +6903,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt160nl.c linux-2.6.33.3/ar
 +
 +MIPS_MACHINE(AR71XX_MACH_WRT160NL, "WRT160NL", "Linksys WRT160NL",
 +	     wrt160nl_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt400n.c linux-2.6.33.3/arch/mips/ar71xx/mach-wrt400n.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt400n.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wrt400n.c	2010-05-16 13:17:31.823599676 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wrt400n.c linux-2.6.34/arch/mips/ar71xx/mach-wrt400n.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wrt400n.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wrt400n.c	2010-05-25 18:46:06.432223100 +0200
 @@ -0,0 +1,168 @@
 +/*
 + *  Linksys WRT400N board support
@@ -7074,9 +7075,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wrt400n.c linux-2.6.33.3/arc
 +}
 +
 +MIPS_MACHINE(AR71XX_MACH_WRT400N, "WRT400N", "Linksys WRT400N", wrt400n_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wzr-hp-g300nh.c linux-2.6.33.3/arch/mips/ar71xx/mach-wzr-hp-g300nh.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wzr-hp-g300nh.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/mach-wzr-hp-g300nh.c	2010-05-16 13:17:31.855600117 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/mach-wzr-hp-g300nh.c linux-2.6.34/arch/mips/ar71xx/mach-wzr-hp-g300nh.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/mach-wzr-hp-g300nh.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/mach-wzr-hp-g300nh.c	2010-05-25 18:46:06.480978988 +0200
 @@ -0,0 +1,265 @@
 +/*
 + *  Buffalo WZR-HP-G300NH board support
@@ -7343,9 +7344,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/mach-wzr-hp-g300nh.c linux-2.6.33
 +
 +MIPS_MACHINE(AR71XX_MACH_WZR_HP_G300NH, "WZR-HP-G300NH",
 +	     "Buffalo WZR-HP-G300NH", wzrhpg300nh_setup);
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/Makefile linux-2.6.33.3/arch/mips/ar71xx/Makefile
---- linux-2.6.33.3.orig/arch/mips/ar71xx/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/Makefile	2010-05-17 21:19:51.539114190 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/Makefile linux-2.6.34/arch/mips/ar71xx/Makefile
+--- linux-2.6.34.orig/arch/mips/ar71xx/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/Makefile	2010-05-25 18:46:06.523464007 +0200
 @@ -0,0 +1,54 @@
 +#
 +# Makefile for the Atheros AR71xx SoC specific parts of the kernel
@@ -7401,9 +7402,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/Makefile linux-2.6.33.3/arch/mips
 +obj-$(CONFIG_AR71XX_MACH_WP543)		+= mach-wp543.o
 +obj-$(CONFIG_AR71XX_MACH_WRT160NL)	+= mach-wrt160nl.o
 +obj-$(CONFIG_AR71XX_MACH_WRT400N)	+= mach-wrt400n.o
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.c linux-2.6.33.3/arch/mips/ar71xx/nvram.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/nvram.c	2010-01-05 20:38:52.061278082 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/nvram.c linux-2.6.34/arch/mips/ar71xx/nvram.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/nvram.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/nvram.c	2010-05-25 18:46:06.563464058 +0200
 @@ -0,0 +1,75 @@
 +/*
 + *  Atheros AR71xx minimal nvram support
@@ -7480,9 +7481,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.c linux-2.6.33.3/arch/mips/
 +	vfree(buf);
 +	return ret;
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.h linux-2.6.33.3/arch/mips/ar71xx/nvram.h
---- linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/nvram.h	2010-01-05 20:38:52.137278273 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/nvram.h linux-2.6.34/arch/mips/ar71xx/nvram.h
+--- linux-2.6.34.orig/arch/mips/ar71xx/nvram.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/nvram.h	2010-05-25 18:46:06.602223088 +0200
 @@ -0,0 +1,19 @@
 +/*
 + *  Atheros AR71xx minimal nvram support
@@ -7503,9 +7504,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/nvram.h linux-2.6.33.3/arch/mips/
 +			 const char *name, char *mac) __init;
 +
 +#endif /* _AR71XX_NVRAM_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/pci.c linux-2.6.33.3/arch/mips/ar71xx/pci.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/pci.c	2010-04-02 11:07:51.847025813 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/pci.c linux-2.6.34/arch/mips/ar71xx/pci.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/pci.c	2010-05-25 18:46:06.641506945 +0200
 @@ -0,0 +1,93 @@
 +/*
 + *  Atheros AR71xx PCI setup code
@@ -7600,9 +7601,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/pci.c linux-2.6.33.3/arch/mips/ar
 +
 +	return ret;
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/prom.c linux-2.6.33.3/arch/mips/ar71xx/prom.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/prom.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/prom.c	2010-05-20 17:47:32.151849828 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/prom.c linux-2.6.34/arch/mips/ar71xx/prom.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/prom.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/prom.c	2010-05-25 18:46:06.682223087 +0200
 @@ -0,0 +1,105 @@
 +/*
 + *  Atheros AR71xx SoC specific prom routines
@@ -7709,9 +7710,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/prom.c linux-2.6.33.3/arch/mips/a
 +{
 +	/* We do not have to prom memory to free */
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/setup.c linux-2.6.33.3/arch/mips/ar71xx/setup.c
---- linux-2.6.33.3.orig/arch/mips/ar71xx/setup.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/ar71xx/setup.c	2010-04-02 11:07:51.650955594 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/ar71xx/setup.c linux-2.6.34/arch/mips/ar71xx/setup.c
+--- linux-2.6.34.orig/arch/mips/ar71xx/setup.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/ar71xx/setup.c	2010-05-25 18:46:06.747917885 +0200
 @@ -0,0 +1,310 @@
 +/*
 + *  Atheros AR71xx SoC specific setup
@@ -8023,9 +8024,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/ar71xx/setup.c linux-2.6.33.3/arch/mips/
 +
 +MIPS_MACHINE(AR71XX_MACH_GENERIC, "Generic", "Generic AR71xx board",
 +	     ar71xx_generic_init);
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar71xx.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/ar71xx.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar71xx.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/ar71xx.h	2010-04-02 11:07:50.806953666 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/ar71xx.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/ar71xx.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/ar71xx.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/ar71xx.h	2010-05-25 18:46:06.783464047 +0200
 @@ -0,0 +1,514 @@
 +/*
 + *  Atheros AR71xx SoC specific definitions
@@ -8541,9 +8542,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar71xx.h linux-2
 +#endif /* __ASSEMBLER__ */
 +
 +#endif /* __ASM_MACH_AR71XX_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h	2009-12-13 20:45:20.439922318 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h	2010-05-25 18:46:06.842223171 +0200
 @@ -0,0 +1,26 @@
 +/*
 + *  AR91xx parallel flash driver platform data definitions
@@ -8571,9 +8572,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/ar91xx_flash.h l
 +};
 +
 +#endif /* __AR91XX_FLASH_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h	2009-12-13 20:45:20.471921431 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/cpu-feature-overrides.h	2010-05-25 18:46:06.883464235 +0200
 @@ -0,0 +1,56 @@
 +/*
 + *  Atheros AR71xx specific CPU feature overrides
@@ -8631,9 +8632,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/cpu-feature-over
 +#define cpu_icache_line_size()	32
 +
 +#endif /* __ASM_MACH_AR71XX_CPU_FEATURE_OVERRIDES_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/gpio.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/gpio.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/gpio.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/gpio.h	2009-12-13 20:45:20.471921431 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/gpio.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/gpio.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/gpio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/gpio.h	2010-05-25 18:46:06.922223109 +0200
 @@ -0,0 +1,53 @@
 +/*
 + *  Atheros AR71xx GPIO API definitions
@@ -8688,9 +8689,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/gpio.h linux-2.6
 +#define gpio_cansleep	__gpio_cansleep
 +
 +#endif /* __ASM_MACH_AR71XX_GPIO_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/irq.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/irq.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/irq.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/irq.h	2009-12-13 20:45:20.447923983 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/irq.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/irq.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/irq.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/irq.h	2010-05-25 18:46:06.961120355 +0200
 @@ -0,0 +1,17 @@
 +/*
 + *  Copyright (C) 2008-2009 Gabor Juhos <juhosg@openwrt.org>
@@ -8709,9 +8710,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/irq.h linux-2.6.
 +#include_next <irq.h>
 +
 +#endif /* __ASM_MACH_AR71XX_IRQ_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h	2009-12-13 20:45:20.611920954 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/kernel-entry-init.h	2010-05-25 18:46:07.003473055 +0200
 @@ -0,0 +1,32 @@
 +/*
 + *  Atheros AR71xx specific kernel entry setup
@@ -8745,9 +8746,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/kernel-entry-ini
 +	.endm
 +
 +#endif /* __ASM_MACH_AR71XX_KERNEL_ENTRY_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mach-rb750.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/mach-rb750.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mach-rb750.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/mach-rb750.h	2010-03-12 19:31:45.750044904 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/mach-rb750.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/mach-rb750.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/mach-rb750.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/mach-rb750.h	2010-05-25 18:46:07.040970889 +0200
 @@ -0,0 +1,66 @@
 +/*
 + *  MikroTik RouterBOARD 750 definitions
@@ -8816,9 +8817,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mach-rb750.h lin
 +
 +#endif /* _MACH_RB750_H */
 \ No newline at end of file
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mangle-port.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/mangle-port.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mangle-port.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/mangle-port.h	2009-12-13 20:45:20.615923464 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/mangle-port.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/mangle-port.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/mangle-port.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/mangle-port.h	2010-05-25 18:46:07.080975596 +0200
 @@ -0,0 +1,45 @@
 +/*
 + *  Copyright (C) 2008 Gabor Juhos <juhosg@openwrt.org>
@@ -8865,9 +8866,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/mangle-port.h li
 +#endif
 +
 +#endif /* __ASM_MACH_AR71XX_MANGLE_PORT_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/pci.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/pci.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/pci.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/pci.h	2009-12-13 20:45:20.471921431 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/pci.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/pci.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/pci.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/pci.h	2010-05-25 18:46:07.122223041 +0200
 @@ -0,0 +1,39 @@
 +/*
 + *  Atheros AR71xx SoC specific PCI definitions
@@ -8908,9 +8909,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/pci.h linux-2.6.
 +int ar71xx_pci_init(unsigned nr_irqs, struct ar71xx_pci_irq *map) __init;
 +
 +#endif /* __ASM_MACH_AR71XX_PCI_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/platform.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/platform.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/platform.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/platform.h	2009-12-13 20:45:20.611920954 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/platform.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/platform.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/platform.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/platform.h	2010-05-25 18:46:07.171468638 +0200
 @@ -0,0 +1,61 @@
 +/*
 + *  Atheros AR71xx SoC specific platform data definitions
@@ -8973,9 +8974,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/platform.h linux
 +#define AR71XX_SPI_CS_ACTIVE	1
 +
 +#endif /* __ASM_MACH_AR71XX_PLATFORM_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/war.h linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/war.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/war.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mach-ar71xx/war.h	2009-12-13 20:45:20.443925666 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/war.h linux-2.6.34/arch/mips/include/asm/mach-ar71xx/war.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mach-ar71xx/war.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mach-ar71xx/war.h	2010-05-25 18:46:07.220978398 +0200
 @@ -0,0 +1,25 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -9002,9 +9003,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mach-ar71xx/war.h linux-2.6.
 +#define MIPS34K_MISSED_ITLB_WAR		0
 +
 +#endif /* __ASM_MACH_AR71XX_WAR_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mips_machine.h linux-2.6.33.3/arch/mips/include/asm/mips_machine.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/mips_machine.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/include/asm/mips_machine.h	2010-05-17 19:36:16.051124934 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/mips_machine.h linux-2.6.34/arch/mips/include/asm/mips_machine.h
+--- linux-2.6.34.orig/arch/mips/include/asm/mips_machine.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/include/asm/mips_machine.h	2010-05-25 18:46:07.270971848 +0200
 @@ -0,0 +1,54 @@
 +/*
 + *  Copyright (C) 2008-2009 Gabor Juhos <juhosg@openwrt.org>
@@ -9060,9 +9061,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/mips_machine.h linux-2.6.33.
 +pure_initcall(register_machine_##_type)
 +
 +#endif /* __ASM_MIPS_MACHINE_H */
-diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/time.h linux-2.6.33.3/arch/mips/include/asm/time.h
---- linux-2.6.33.3.orig/arch/mips/include/asm/time.h	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/include/asm/time.h	2010-05-18 19:33:35.811338021 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/include/asm/time.h linux-2.6.34/arch/mips/include/asm/time.h
+--- linux-2.6.34.orig/arch/mips/include/asm/time.h	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/include/asm/time.h	2010-05-25 18:46:07.320975755 +0200
 @@ -52,6 +52,7 @@
   */
  #ifdef CONFIG_CEVT_R4K_LIB
@@ -9071,9 +9072,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/include/asm/time.h linux-2.6.33.3/arch/m
  extern int r4k_clockevent_init(void);
  #endif
  
-diff -Nur linux-2.6.33.3.orig/arch/mips/Kconfig linux-2.6.33.3/arch/mips/Kconfig
---- linux-2.6.33.3.orig/arch/mips/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/Kconfig	2010-05-20 16:39:56.083849540 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/Kconfig linux-2.6.34/arch/mips/Kconfig
+--- linux-2.6.34.orig/arch/mips/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/Kconfig	2010-05-25 18:46:07.382337624 +0200
 @@ -48,6 +48,23 @@
  	  Support for the Texas Instruments AR7 System-on-a-Chip
  	  family: TNETD7100, 7200 and 7300.
@@ -9096,9 +9097,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/Kconfig linux-2.6.33.3/arch/mips/Kconfig
 +	  Support for Atheros AR71xx based boards.
 +
  config BCM47XX
- 	bool "BCM47XX based boards"
+ 	bool "Broadcom BCM47XX based boards"
  	select CEVT_R4K
-@@ -682,6 +699,7 @@
+@@ -684,6 +701,7 @@
  endchoice
  
  source "arch/mips/alchemy/Kconfig"
@@ -9106,7 +9107,7 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/Kconfig linux-2.6.33.3/arch/mips/Kconfig
  source "arch/mips/bcm63xx/Kconfig"
  source "arch/mips/jazz/Kconfig"
  source "arch/mips/lasat/Kconfig"
-@@ -848,9 +866,15 @@
+@@ -850,9 +868,15 @@
  config MIPS_DISABLE_OBSOLETE_IDE
  	bool
  
@@ -9122,21 +9123,21 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/Kconfig linux-2.6.33.3/arch/mips/Kconfig
  config NO_IOPORT
  	def_bool n
  
-diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/Makefile linux-2.6.33.3/arch/mips/kernel/Makefile
---- linux-2.6.33.3.orig/arch/mips/kernel/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/kernel/Makefile	2010-05-17 18:51:38.331117283 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/kernel/Makefile linux-2.6.34/arch/mips/kernel/Makefile
+--- linux-2.6.34.orig/arch/mips/kernel/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/kernel/Makefile	2010-05-25 19:00:48.342223057 +0200
 @@ -93,6 +93,7 @@
  
  obj-$(CONFIG_KEXEC)		+= machine_kexec.o relocate_kernel.o
  obj-$(CONFIG_EARLY_PRINTK)	+= early_printk.o
 +obj-$(CONFIG_MIPS_MACHINE)	+= mips_machine.o
+ obj-$(CONFIG_SPINLOCK_TEST)	+= spinlock_test.o
  
  CFLAGS_cpu-bugs64.o	= $(shell if $(CC) $(KBUILD_CFLAGS) -Wa,-mdaddi -c -o /dev/null -xc /dev/null >/dev/null 2>&1; then echo "-DHAVE_AS_SET_DADDI"; fi)
- 
-diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/mips_machine.c linux-2.6.33.3/arch/mips/kernel/mips_machine.c
---- linux-2.6.33.3.orig/arch/mips/kernel/mips_machine.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/kernel/mips_machine.c	2010-05-17 19:36:16.035122334 +0200
-@@ -0,0 +1,120 @@
+diff -Nur linux-2.6.34.orig/arch/mips/kernel/mips_machine.c linux-2.6.34/arch/mips/kernel/mips_machine.c
+--- linux-2.6.34.orig/arch/mips/kernel/mips_machine.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/kernel/mips_machine.c	2010-05-25 19:08:53.143473119 +0200
+@@ -0,0 +1,121 @@
 +/*
 + *  Copyright (C) 2008-2009 Gabor Juhos <juhosg@openwrt.org>
 + *
@@ -9146,6 +9147,7 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/mips_machine.c linux-2.6.33.3/arc
 + *
 + */
 +#include <linux/mm.h>
++#include <linux/slab.h>
 +#include <linux/string.h>
 +
 +#include <asm/mips_machine.h>
@@ -9257,9 +9259,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/mips_machine.c linux-2.6.33.3/arc
 +}
 +
 +core_initcall(mips_machtype_init);
-diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/proc.c linux-2.6.33.3/arch/mips/kernel/proc.c
---- linux-2.6.33.3.orig/arch/mips/kernel/proc.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/kernel/proc.c	2010-05-17 18:51:38.335115558 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/kernel/proc.c linux-2.6.34/arch/mips/kernel/proc.c
+--- linux-2.6.34.orig/arch/mips/kernel/proc.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/kernel/proc.c	2010-05-25 18:46:08.072223162 +0200
 @@ -12,6 +12,7 @@
  #include <asm/cpu-features.h>
  #include <asm/mipsregs.h>
@@ -9282,18 +9284,18 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/proc.c linux-2.6.33.3/arch/mips/k
  
  	seq_printf(m, "processor\t\t: %ld\n", n);
  	sprintf(fmt, "cpu model\t\t: %%s V%%d.%%d%s\n",
-diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/traps.c linux-2.6.33.3/arch/mips/kernel/traps.c
---- linux-2.6.33.3.orig/arch/mips/kernel/traps.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/kernel/traps.c	2010-05-18 19:33:35.691116007 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/kernel/traps.c linux-2.6.34/arch/mips/kernel/traps.c
+--- linux-2.6.34.orig/arch/mips/kernel/traps.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/kernel/traps.c	2010-05-25 19:01:23.272222993 +0200
 @@ -50,6 +50,7 @@
  #include <asm/types.h>
  #include <asm/stacktrace.h>
  #include <asm/irq.h>
 +#include <asm/time.h>
+ #include <asm/uasm.h>
  
  extern void check_wait(void);
- extern asmlinkage void r4k_wait(void);
-@@ -1496,6 +1497,8 @@
+@@ -1506,6 +1507,8 @@
  	if (cpu_has_mips_r2) {
  		cp0_compare_irq_shift = CAUSEB_TI - CAUSEB_IP;
  		cp0_compare_irq = (read_c0_intctl() >> INTCTLB_IPTI) & 7;
@@ -9302,10 +9304,10 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/kernel/traps.c linux-2.6.33.3/arch/mips/
  		cp0_perfcount_irq = (read_c0_intctl() >> INTCTLB_IPPCI) & 7;
  		if (cp0_perfcount_irq == cp0_compare_irq)
  			cp0_perfcount_irq = -1;
-diff -Nur linux-2.6.33.3.orig/arch/mips/Makefile linux-2.6.33.3/arch/mips/Makefile
---- linux-2.6.33.3.orig/arch/mips/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/Makefile	2010-05-20 17:40:10.159860905 +0200
-@@ -166,6 +166,13 @@
+diff -Nur linux-2.6.34.orig/arch/mips/Makefile linux-2.6.34/arch/mips/Makefile
+--- linux-2.6.34.orig/arch/mips/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/Makefile	2010-05-25 18:46:08.530007292 +0200
+@@ -179,6 +179,13 @@
  cflags-$(CONFIG_CPU_CAVIUM_OCTEON) += -Wa,-march=octeon
  endif
  
@@ -9319,9 +9321,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/Makefile linux-2.6.33.3/arch/mips/Makefi
  cflags-$(CONFIG_CPU_R4000_WORKAROUNDS)	+= $(call cc-option,-mfix-r4000,)
  cflags-$(CONFIG_CPU_R4400_WORKAROUNDS)	+= $(call cc-option,-mfix-r4400,)
  cflags-$(CONFIG_CPU_DADDI_WORKAROUNDS)	+= $(call cc-option,-mno-daddi,)
-diff -Nur linux-2.6.33.3.orig/arch/mips/pci/Makefile linux-2.6.33.3/arch/mips/pci/Makefile
---- linux-2.6.33.3.orig/arch/mips/pci/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/arch/mips/pci/Makefile	2010-05-17 16:28:23.988293766 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/pci/Makefile linux-2.6.34/arch/mips/pci/Makefile
+--- linux-2.6.34.orig/arch/mips/pci/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/arch/mips/pci/Makefile	2010-05-25 18:46:08.712416500 +0200
 @@ -18,6 +18,7 @@
  obj-$(CONFIG_BCM47XX)		+= pci-bcm47xx.o
  obj-$(CONFIG_BCM63XX)		+= pci-bcm63xx.o fixup-bcm63xx.o \
@@ -9330,9 +9332,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/pci/Makefile linux-2.6.33.3/arch/mips/pc
  
  #
  # These are still pretty much in the old state, watch, go blind.
-diff -Nur linux-2.6.33.3.orig/arch/mips/pci/pci-ar71xx.c linux-2.6.33.3/arch/mips/pci/pci-ar71xx.c
---- linux-2.6.33.3.orig/arch/mips/pci/pci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/pci/pci-ar71xx.c	2010-03-23 20:31:05.824706267 +0100
+diff -Nur linux-2.6.34.orig/arch/mips/pci/pci-ar71xx.c linux-2.6.34/arch/mips/pci/pci-ar71xx.c
+--- linux-2.6.34.orig/arch/mips/pci/pci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/pci/pci-ar71xx.c	2010-05-25 18:46:08.752223161 +0200
 @@ -0,0 +1,409 @@
 +/*
 + *  Atheros AR71xx PCI host controller driver
@@ -9743,9 +9745,9 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/pci/pci-ar71xx.c linux-2.6.33.3/arch/mip
 +
 +	return 0;
 +}
-diff -Nur linux-2.6.33.3.orig/arch/mips/pci/pci-ar724x.c linux-2.6.33.3/arch/mips/pci/pci-ar724x.c
---- linux-2.6.33.3.orig/arch/mips/pci/pci-ar724x.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/arch/mips/pci/pci-ar724x.c	2010-04-02 11:07:52.002954061 +0200
+diff -Nur linux-2.6.34.orig/arch/mips/pci/pci-ar724x.c linux-2.6.34/arch/mips/pci/pci-ar724x.c
+--- linux-2.6.34.orig/arch/mips/pci/pci-ar724x.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/arch/mips/pci/pci-ar724x.c	2010-05-25 18:46:08.793464075 +0200
 @@ -0,0 +1,395 @@
 +/*
 + *  Atheros AR724x PCI host controller driver
@@ -10142,10 +10144,10 @@ diff -Nur linux-2.6.33.3.orig/arch/mips/pci/pci-ar724x.c linux-2.6.33.3/arch/mip
 + err:
 +	return ret;
 +}
-diff -Nur linux-2.6.33.3.orig/drivers/char/Kconfig linux-2.6.33.3/drivers/char/Kconfig
---- linux-2.6.33.3.orig/drivers/char/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/char/Kconfig	2010-05-17 20:29:49.263661210 +0200
-@@ -1016,6 +1016,14 @@
+diff -Nur linux-2.6.34.orig/drivers/char/Kconfig linux-2.6.34/drivers/char/Kconfig
+--- linux-2.6.34.orig/drivers/char/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/char/Kconfig	2010-05-25 18:46:08.833464040 +0200
+@@ -1024,6 +1024,14 @@
  
  	  If compiled as a module, it will be called cs5535_gpio.
  
@@ -10160,9 +10162,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/char/Kconfig linux-2.6.33.3/drivers/char/K
  config RAW_DRIVER
  	tristate "RAW driver (/dev/raw/rawN)"
  	depends on BLOCK
-diff -Nur linux-2.6.33.3.orig/drivers/char/Makefile linux-2.6.33.3/drivers/char/Makefile
---- linux-2.6.33.3.orig/drivers/char/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/char/Makefile	2010-05-17 20:29:49.267113605 +0200
+diff -Nur linux-2.6.34.orig/drivers/char/Makefile linux-2.6.34/drivers/char/Makefile
+--- linux-2.6.34.orig/drivers/char/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/char/Makefile	2010-05-25 18:46:08.873463967 +0200
 @@ -95,6 +95,7 @@
  obj-$(CONFIG_PC8736x_GPIO)	+= pc8736x_gpio.o
  obj-$(CONFIG_NSC_GPIO)		+= nsc_gpio.o
@@ -10171,9 +10173,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/char/Makefile linux-2.6.33.3/drivers/char/
  obj-$(CONFIG_GPIO_TB0219)	+= tb0219.o
  obj-$(CONFIG_TELCLOCK)		+= tlclk.o
  
-diff -Nur linux-2.6.33.3.orig/drivers/gpio/nxp_74hc153.c linux-2.6.33.3/drivers/gpio/nxp_74hc153.c
---- linux-2.6.33.3.orig/drivers/gpio/nxp_74hc153.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/gpio/nxp_74hc153.c	2010-01-19 19:26:38.721436935 +0100
+diff -Nur linux-2.6.34.orig/drivers/gpio/nxp_74hc153.c linux-2.6.34/drivers/gpio/nxp_74hc153.c
+--- linux-2.6.34.orig/drivers/gpio/nxp_74hc153.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/gpio/nxp_74hc153.c	2010-05-25 18:46:08.913464115 +0200
 @@ -0,0 +1,246 @@
 +/*
 + *  NXP 74HC153 - Dual 4-input multiplexer GPIO driver
@@ -10421,9 +10423,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/gpio/nxp_74hc153.c linux-2.6.33.3/drivers/
 +MODULE_DESCRIPTION("GPIO expander driver for NXP 74HC153");
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS("platform:" NXP_74HC153_DRIVER_NAME);
-diff -Nur linux-2.6.33.3.orig/drivers/input/misc/gpio_buttons.c linux-2.6.33.3/drivers/input/misc/gpio_buttons.c
---- linux-2.6.33.3.orig/drivers/input/misc/gpio_buttons.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/input/misc/gpio_buttons.c	2010-05-16 13:16:51.715600731 +0200
+diff -Nur linux-2.6.34.orig/drivers/input/misc/gpio_buttons.c linux-2.6.34/drivers/input/misc/gpio_buttons.c
+--- linux-2.6.34.orig/drivers/input/misc/gpio_buttons.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/input/misc/gpio_buttons.c	2010-05-25 18:46:08.953464216 +0200
 @@ -0,0 +1,216 @@
 +/*
 + *  Driver for buttons on GPIO lines not capable of generating interrupts
@@ -10641,10 +10643,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/input/misc/gpio_buttons.c linux-2.6.33.3/d
 +MODULE_VERSION(DRV_VERSION);
 +MODULE_DESCRIPTION("Polled buttons driver for CPU GPIOs");
 +
-diff -Nur linux-2.6.33.3.orig/drivers/input/misc/Kconfig linux-2.6.33.3/drivers/input/misc/Kconfig
---- linux-2.6.33.3.orig/drivers/input/misc/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/input/misc/Kconfig	2010-05-17 20:29:41.363933213 +0200
-@@ -319,4 +319,20 @@
+diff -Nur linux-2.6.34.orig/drivers/input/misc/Kconfig linux-2.6.34/drivers/input/misc/Kconfig
+--- linux-2.6.34.orig/drivers/input/misc/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/input/misc/Kconfig	2010-05-25 18:46:08.990963497 +0200
+@@ -340,4 +340,20 @@
  	  To compile this driver as a module, choose M here: the
  	  module will be called pcap_keys.
  
@@ -10665,18 +10667,18 @@ diff -Nur linux-2.6.33.3.orig/drivers/input/misc/Kconfig linux-2.6.33.3/drivers/
 +	  module will be called gpio-buttons.
 +
  endif
-diff -Nur linux-2.6.33.3.orig/drivers/input/misc/Makefile linux-2.6.33.3/drivers/input/misc/Makefile
---- linux-2.6.33.3.orig/drivers/input/misc/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/input/misc/Makefile	2010-05-17 20:29:41.363933213 +0200
-@@ -30,4 +30,5 @@
+diff -Nur linux-2.6.34.orig/drivers/input/misc/Makefile linux-2.6.34/drivers/input/misc/Makefile
+--- linux-2.6.34.orig/drivers/input/misc/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/input/misc/Makefile	2010-05-25 18:46:09.023464096 +0200
+@@ -32,4 +32,5 @@
  obj-$(CONFIG_INPUT_WISTRON_BTNS)	+= wistron_btns.o
  obj-$(CONFIG_INPUT_WM831X_ON)		+= wm831x-on.o
  obj-$(CONFIG_INPUT_YEALINK)		+= yealink.o
 +obj-$(CONFIG_INPUT_GPIO_BUTTONS)	+= gpio_buttons.o
  
-diff -Nur linux-2.6.33.3.orig/drivers/leds/leds-rb750.c linux-2.6.33.3/drivers/leds/leds-rb750.c
---- linux-2.6.33.3.orig/drivers/leds/leds-rb750.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/leds/leds-rb750.c	2010-03-12 19:31:47.358041350 +0100
+diff -Nur linux-2.6.34.orig/drivers/leds/leds-rb750.c linux-2.6.34/drivers/leds/leds-rb750.c
+--- linux-2.6.34.orig/drivers/leds/leds-rb750.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/leds/leds-rb750.c	2010-05-25 18:46:09.073472968 +0200
 @@ -0,0 +1,140 @@
 +/*
 + * LED driver for the RouterBOARD 750
@@ -10818,9 +10820,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/leds/leds-rb750.c linux-2.6.33.3/drivers/l
 +MODULE_DESCRIPTION("LED driver for the RouterBOARD 750");
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/leds/leds-wndr3700-usb.c linux-2.6.33.3/drivers/leds/leds-wndr3700-usb.c
---- linux-2.6.33.3.orig/drivers/leds/leds-wndr3700-usb.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/leds/leds-wndr3700-usb.c	2009-12-13 20:45:24.579920576 +0100
+diff -Nur linux-2.6.34.orig/drivers/leds/leds-wndr3700-usb.c linux-2.6.34/drivers/leds/leds-wndr3700-usb.c
+--- linux-2.6.34.orig/drivers/leds/leds-wndr3700-usb.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/leds/leds-wndr3700-usb.c	2010-05-25 18:46:09.111217247 +0200
 @@ -0,0 +1,75 @@
 +/*
 + *  USB LED driver for the NETGEAR WNDR3700
@@ -10897,9 +10899,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/leds/leds-wndr3700-usb.c linux-2.6.33.3/dr
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS("platform:" DRIVER_NAME);
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/maps/ar91xx_flash.c linux-2.6.33.3/drivers/mtd/maps/ar91xx_flash.c
---- linux-2.6.33.3.orig/drivers/mtd/maps/ar91xx_flash.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/mtd/maps/ar91xx_flash.c	2009-12-13 20:45:22.067931737 +0100
+diff -Nur linux-2.6.34.orig/drivers/mtd/maps/ar91xx_flash.c linux-2.6.34/drivers/mtd/maps/ar91xx_flash.c
+--- linux-2.6.34.orig/drivers/mtd/maps/ar91xx_flash.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/mtd/maps/ar91xx_flash.c	2010-05-25 18:46:09.152223170 +0200
 @@ -0,0 +1,310 @@
 +/*
 + * Parallel flash driver for the Atheros AR91xx SoC
@@ -11211,12 +11213,12 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/maps/ar91xx_flash.c linux-2.6.33.3/dri
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_DESCRIPTION("Parallel flash driver for the Atheros AR91xx SoC");
 +MODULE_ALIAS("platform:" DRV_NAME);
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/maps/Kconfig linux-2.6.33.3/drivers/mtd/maps/Kconfig
---- linux-2.6.33.3.orig/drivers/mtd/maps/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/mtd/maps/Kconfig	2010-05-17 16:28:48.419315145 +0200
-@@ -257,6 +257,13 @@
+diff -Nur linux-2.6.34.orig/drivers/mtd/maps/Kconfig linux-2.6.34/drivers/mtd/maps/Kconfig
+--- linux-2.6.34.orig/drivers/mtd/maps/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/mtd/maps/Kconfig	2010-05-25 18:46:09.183472999 +0200
+@@ -251,6 +251,13 @@
  	help
- 	  Flash memory access on AMD Alchemy Pb/Db/RDK Reference Boards
+ 	  Support for flash chips on NETtel/SecureEdge/SnapGear boards.
  
 +config MTD_AR91XX_FLASH
 +	tristate "Atheros AR91xx parallel flash support"
@@ -11228,20 +11230,20 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/maps/Kconfig linux-2.6.33.3/drivers/mt
  config MTD_DILNETPC
  	tristate "CFI Flash device mapped on DIL/Net PC"
  	depends on X86 && MTD_CONCAT && MTD_PARTITIONS && MTD_CFI_INTELEXT && BROKEN
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/maps/Makefile linux-2.6.33.3/drivers/mtd/maps/Makefile
---- linux-2.6.33.3.orig/drivers/mtd/maps/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/mtd/maps/Makefile	2010-05-17 16:28:48.419315145 +0200
-@@ -41,6 +41,7 @@
- obj-$(CONFIG_MTD_SOLUTIONENGINE)+= solutionengine.o
- obj-$(CONFIG_MTD_PCI)		+= pci.o
- obj-$(CONFIG_MTD_ALCHEMY)       += alchemy-flash.o
+diff -Nur linux-2.6.34.orig/drivers/mtd/maps/Makefile linux-2.6.34/drivers/mtd/maps/Makefile
+--- linux-2.6.34.orig/drivers/mtd/maps/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/mtd/maps/Makefile	2010-05-25 19:02:05.812223036 +0200
+@@ -7,6 +7,7 @@
+ endif
+ 
+ # Chip mappings
 +obj-$(CONFIG_MTD_AR91XX_FLASH)	+= ar91xx_flash.o
- obj-$(CONFIG_MTD_AUTCPU12)	+= autcpu12-nvram.o
- obj-$(CONFIG_MTD_EDB7312)	+= edb7312.o
- obj-$(CONFIG_MTD_IMPA7)		+= impa7.o
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/Kconfig linux-2.6.33.3/drivers/mtd/nand/Kconfig
---- linux-2.6.33.3.orig/drivers/mtd/nand/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/mtd/nand/Kconfig	2010-05-17 16:29:54.255116284 +0200
+ obj-$(CONFIG_MTD_CDB89712)	+= cdb89712.o
+ obj-$(CONFIG_MTD_ARM_INTEGRATOR)+= integrator-flash.o
+ obj-$(CONFIG_MTD_CFI_FLAGADM)	+= cfi_flagadm.o
+diff -Nur linux-2.6.34.orig/drivers/mtd/nand/Kconfig linux-2.6.34/drivers/mtd/nand/Kconfig
+--- linux-2.6.34.orig/drivers/mtd/nand/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/mtd/nand/Kconfig	2010-05-25 18:46:09.253473064 +0200
 @@ -488,4 +488,8 @@
  	  This enables the driver for the NAND Flash on evaluation board based
  	  on w90p910.
@@ -11251,9 +11253,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/Kconfig linux-2.6.33.3/drivers/mt
 +	depends on MTD_NAND && AR71XX_MACH_RB4XX
 +
  endif # MTD_NAND
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/Makefile linux-2.6.33.3/drivers/mtd/nand/Makefile
---- linux-2.6.33.3.orig/drivers/mtd/nand/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/mtd/nand/Makefile	2010-05-17 16:29:54.255116284 +0200
+diff -Nur linux-2.6.34.orig/drivers/mtd/nand/Makefile linux-2.6.34/drivers/mtd/nand/Makefile
+--- linux-2.6.34.orig/drivers/mtd/nand/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/mtd/nand/Makefile	2010-05-25 18:46:09.291161582 +0200
 @@ -30,6 +30,7 @@
  obj-$(CONFIG_MTD_NAND_PXA3xx)		+= pxa3xx_nand.o
  obj-$(CONFIG_MTD_NAND_TMIO)		+= tmio_nand.o
@@ -11262,10 +11264,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/Makefile linux-2.6.33.3/drivers/m
  obj-$(CONFIG_MTD_ALAUDA)		+= alauda.o
  obj-$(CONFIG_MTD_NAND_PASEMI)		+= pasemi_nand.o
  obj-$(CONFIG_MTD_NAND_ORION)		+= orion_nand.o
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/rb4xx_nand.c linux-2.6.33.3/drivers/mtd/nand/rb4xx_nand.c
---- linux-2.6.33.3.orig/drivers/mtd/nand/rb4xx_nand.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/mtd/nand/rb4xx_nand.c	2010-05-19 18:58:03.499116406 +0200
-@@ -0,0 +1,512 @@
+diff -Nur linux-2.6.34.orig/drivers/mtd/nand/rb4xx_nand.c linux-2.6.34/drivers/mtd/nand/rb4xx_nand.c
+--- linux-2.6.34.orig/drivers/mtd/nand/rb4xx_nand.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/mtd/nand/rb4xx_nand.c	2010-05-25 19:20:29.870979934 +0200
+@@ -0,0 +1,513 @@
 +/*
 + *  NAND flash driver for the MikroTik RouterBoard 4xx series
 + *
@@ -11288,6 +11290,7 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/rb4xx_nand.c linux-2.6.33.3/drive
 +#include <linux/delay.h>
 +#include <linux/io.h>
 +#include <linux/gpio.h>
++#include <linux/slab.h>
 +
 +#include <asm/mach-ar71xx/ar71xx.h>
 +
@@ -11778,9 +11781,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/rb4xx_nand.c linux-2.6.33.3/drive
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/rb750_nand.c linux-2.6.33.3/drivers/mtd/nand/rb750_nand.c
---- linux-2.6.33.3.orig/drivers/mtd/nand/rb750_nand.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/mtd/nand/rb750_nand.c	2010-03-12 19:31:47.026043474 +0100
+diff -Nur linux-2.6.34.orig/drivers/mtd/nand/rb750_nand.c linux-2.6.34/drivers/mtd/nand/rb750_nand.c
+--- linux-2.6.34.orig/drivers/mtd/nand/rb750_nand.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/mtd/nand/rb750_nand.c	2010-05-25 18:46:09.381633487 +0200
 @@ -0,0 +1,360 @@
 +/*
 + *  NAND flash driver for the MikroTik RouterBOARD 750
@@ -12142,9 +12145,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/nand/rb750_nand.c linux-2.6.33.3/drive
 +MODULE_VERSION(DRV_VERSION);
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/mtd/wrt160nl_part.c linux-2.6.33.3/drivers/mtd/wrt160nl_part.c
---- linux-2.6.33.3.orig/drivers/mtd/wrt160nl_part.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/mtd/wrt160nl_part.c	2010-04-02 11:07:52.154964482 +0200
+diff -Nur linux-2.6.34.orig/drivers/mtd/wrt160nl_part.c linux-2.6.34/drivers/mtd/wrt160nl_part.c
+--- linux-2.6.34.orig/drivers/mtd/wrt160nl_part.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/mtd/wrt160nl_part.c	2010-05-25 18:46:09.413464327 +0200
 @@ -0,0 +1,181 @@
 +/*
 + * Copyright (C) 2009 Christian Daniel <cd@maintech.de>
@@ -12327,9 +12330,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/mtd/wrt160nl_part.c linux-2.6.33.3/drivers
 +
 +MODULE_LICENSE("GPL");
 +MODULE_AUTHOR("Christian Daniel <cd@maintech.de>");
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ar8216.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_ar8216.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ar8216.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_ar8216.c	2010-05-16 13:17:33.387600561 +0200
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_ar8216.c linux-2.6.34/drivers/net/ag71xx/ag71xx_ar8216.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_ar8216.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_ar8216.c	2010-05-25 18:46:09.453464158 +0200
 @@ -0,0 +1,44 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -12375,9 +12378,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ar8216.c linux-2.6.33.3/
 +	skb_pull(skb, AR8216_HEADER_LEN);
 +	return 0;
 +}
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_debugfs.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_debugfs.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_debugfs.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_debugfs.c	2010-01-11 19:25:55.893395656 +0100
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_debugfs.c linux-2.6.34/drivers/net/ag71xx/ag71xx_debugfs.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_debugfs.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_debugfs.c	2010-05-25 18:46:09.493464124 +0200
 @@ -0,0 +1,197 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -12576,9 +12579,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_debugfs.c linux-2.6.33.3
 +	debugfs_remove(ag71xx_debugfs_root);
 +	ag71xx_debugfs_root = NULL;
 +}
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ethtool.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_ethtool.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ethtool.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_ethtool.c	2010-01-05 20:38:53.433277722 +0100
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_ethtool.c linux-2.6.34/drivers/net/ag71xx/ag71xx_ethtool.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_ethtool.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_ethtool.c	2010-05-25 18:46:09.523473138 +0200
 @@ -0,0 +1,71 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -12651,9 +12654,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_ethtool.c linux-2.6.33.3
 +	.set_msglevel	= ag71xx_ethtool_set_msglevel,
 +	.get_link	= ethtool_op_get_link,
 +};
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx.h linux-2.6.33.3/drivers/net/ag71xx/ag71xx.h
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx.h	2010-04-14 21:17:13.718345809 +0200
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx.h linux-2.6.34/drivers/net/ag71xx/ag71xx.h
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx.h	2010-05-25 18:46:09.553473141 +0200
 @@ -0,0 +1,500 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -13155,9 +13158,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx.h linux-2.6.33.3/drivers
 +#endif /* CONFIG_AG71XX_DEBUG_FS */
 +
 +#endif /* _AG71XX_H */
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_main.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_main.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_main.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_main.c	2010-05-16 13:17:33.403605954 +0200
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_main.c linux-2.6.34/drivers/net/ag71xx/ag71xx_main.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_main.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_main.c	2010-05-25 18:46:09.593464126 +0200
 @@ -0,0 +1,1184 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -14343,9 +14346,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_main.c linux-2.6.33.3/dr
 +MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS("platform:" AG71XX_DRV_NAME);
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_mdio.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_mdio.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_mdio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_mdio.c	2010-01-05 20:38:53.413280204 +0100
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_mdio.c linux-2.6.34/drivers/net/ag71xx/ag71xx_mdio.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_mdio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_mdio.c	2010-05-25 18:46:09.633464081 +0200
 @@ -0,0 +1,243 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -14590,9 +14593,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_mdio.c linux-2.6.33.3/dr
 +{
 +	platform_driver_unregister(&ag71xx_mdio_driver);
 +}
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_phy.c linux-2.6.33.3/drivers/net/ag71xx/ag71xx_phy.c
---- linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_phy.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/ag71xx_phy.c	2010-03-23 20:31:06.040706961 +0100
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_phy.c linux-2.6.34/drivers/net/ag71xx/ag71xx_phy.c
+--- linux-2.6.34.orig/drivers/net/ag71xx/ag71xx_phy.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/ag71xx_phy.c	2010-05-25 18:46:09.663473144 +0200
 @@ -0,0 +1,213 @@
 +/*
 + *  Atheros AR71xx built-in ethernet mac driver
@@ -14807,9 +14810,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/ag71xx_phy.c linux-2.6.33.3/dri
 +	if (ag->phy_dev)
 +		phy_disconnect(ag->phy_dev);
 +}
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/Kconfig linux-2.6.33.3/drivers/net/ag71xx/Kconfig
---- linux-2.6.33.3.orig/drivers/net/ag71xx/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/Kconfig	2010-04-02 11:07:52.574971060 +0200
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/Kconfig linux-2.6.34/drivers/net/ag71xx/Kconfig
+--- linux-2.6.34.orig/drivers/net/ag71xx/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/Kconfig	2010-05-25 18:46:09.693473072 +0200
 @@ -0,0 +1,33 @@
 +config AG71XX
 +	tristate "Atheros AR71xx built-in ethernet mac support"
@@ -14844,9 +14847,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/Kconfig linux-2.6.33.3/drivers/
 +	  Atheros AR8216 switch found on some boards.
 +
 +endif
-diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/Makefile linux-2.6.33.3/drivers/net/ag71xx/Makefile
---- linux-2.6.33.3.orig/drivers/net/ag71xx/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/ag71xx/Makefile	2010-01-05 20:38:53.413280204 +0100
+diff -Nur linux-2.6.34.orig/drivers/net/ag71xx/Makefile linux-2.6.34/drivers/net/ag71xx/Makefile
+--- linux-2.6.34.orig/drivers/net/ag71xx/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/net/ag71xx/Makefile	2010-05-25 18:46:09.733464200 +0200
 @@ -0,0 +1,14 @@
 +#
 +# Makefile for the Atheros AR71xx built-in ethernet macs
@@ -14862,10 +14865,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/ag71xx/Makefile linux-2.6.33.3/drivers
 +
 +obj-$(CONFIG_AG71XX)	+= ag71xx.o
 +
-diff -Nur linux-2.6.33.3.orig/drivers/net/Kconfig linux-2.6.33.3/drivers/net/Kconfig
---- linux-2.6.33.3.orig/drivers/net/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/net/Kconfig	2010-05-17 16:28:38.519115009 +0200
-@@ -2005,6 +2005,8 @@
+diff -Nur linux-2.6.34.orig/drivers/net/Kconfig linux-2.6.34/drivers/net/Kconfig
+--- linux-2.6.34.orig/drivers/net/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/net/Kconfig	2010-05-25 18:46:09.773464179 +0200
+@@ -2038,6 +2038,8 @@
  
  	  The safe and default value for this is N.
  
@@ -14874,10 +14877,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/Kconfig linux-2.6.33.3/drivers/net/Kco
  config DL2K
  	tristate "DL2000/TC902x-based Gigabit Ethernet support"
  	depends on PCI
-diff -Nur linux-2.6.33.3.orig/drivers/net/Makefile linux-2.6.33.3/drivers/net/Makefile
---- linux-2.6.33.3.orig/drivers/net/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/net/Makefile	2010-05-17 16:28:38.519115009 +0200
-@@ -106,6 +106,7 @@
+diff -Nur linux-2.6.34.orig/drivers/net/Makefile linux-2.6.34/drivers/net/Makefile
+--- linux-2.6.34.orig/drivers/net/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/net/Makefile	2010-05-25 18:46:09.813473236 +0200
+@@ -109,6 +109,7 @@
  # end link order section
  #
  
@@ -14885,12 +14888,12 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/Makefile linux-2.6.33.3/drivers/net/Ma
  obj-$(CONFIG_SUNDANCE) += sundance.o
  obj-$(CONFIG_HAMACHI) += hamachi.o
  obj-$(CONFIG_NET) += Space.o loopback.o
-diff -Nur linux-2.6.33.3.orig/drivers/net/phy/Kconfig linux-2.6.33.3/drivers/net/phy/Kconfig
---- linux-2.6.33.3.orig/drivers/net/phy/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/net/phy/Kconfig	2010-05-17 22:25:24.119127715 +0200
-@@ -88,6 +88,10 @@
+diff -Nur linux-2.6.34.orig/drivers/net/phy/Kconfig linux-2.6.34/drivers/net/phy/Kconfig
+--- linux-2.6.34.orig/drivers/net/phy/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/net/phy/Kconfig	2010-05-25 18:46:09.863473083 +0200
+@@ -93,6 +93,10 @@
  	---help---
- 	  Supports the LSI ET1011C PHY.
+ 	  Supports the KSZ9021, VSC8201, KS8001 PHYs.
  
 +config IP175C_PHY
 +	tristate "Driver for IC+ IP175C/IP178C switches"
@@ -14899,96 +14902,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/phy/Kconfig linux-2.6.33.3/drivers/net
  config FIXED_PHY
  	bool "Driver for MDIO Bus/PHY emulation with fixed speed/link PHYs"
  	depends on PHYLIB=y
-diff -Nur linux-2.6.33.3.orig/drivers/net/phy/micrel.c linux-2.6.33.3/drivers/net/phy/micrel.c
---- linux-2.6.33.3.orig/drivers/net/phy/micrel.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/net/phy/micrel.c	2009-12-13 20:45:24.083925758 +0100
-@@ -0,0 +1,82 @@
-+/*
-+ *  Driver for Micrel/Kendin PHYs
-+ *
-+ *  Copyright (c) 2008-2009 Gabor Juhos <juhosg@openwrt.org>
-+ *  Copyright (C) 2008 Imre Kaloz <kaloz@openwrt.org>
-+ *
-+ *  This program is free software; you can redistribute it and/or modify it
-+ *  under the terms of the GNU General Public License version 2 as published
-+ *  by the Free Software Foundation.
-+ *
-+ */
-+
-+#include <linux/delay.h>
-+#include <linux/skbuff.h>
-+#include <linux/phy.h>
-+
-+#define KSZ_REG_INT_CTRL	0x1b
-+
-+#define KSZ_INT_LU_EN	(1 << 8)	/* enable Link Up interrupt */
-+#define KSZ_INT_RF_EN	(1 << 9)	/* enable Remote Fault interrupt */
-+#define KSZ_INT_LD_EN	(1 << 10)	/* enable Link Down interrupt */
-+
-+#define KSZ_INT_INIT	(KSZ_INT_LU_EN | KSZ_INT_LD_EN)
-+
-+static int ksz8041_ack_interrupt(struct phy_device *phydev)
-+{
-+	int err;
-+
-+	err = phy_read(phydev, KSZ_REG_INT_CTRL);
-+
-+	return (err < 0) ? err : 0;
-+}
-+
-+static int ksz8041_config_intr(struct phy_device *phydev)
-+{
-+	int err;
-+
-+	if (phydev->interrupts == PHY_INTERRUPT_ENABLED)
-+		err = phy_write(phydev, KSZ_REG_INT_CTRL,
-+				KSZ_INT_INIT);
-+	else
-+		err = phy_write(phydev, KSZ_REG_INT_CTRL, 0);
-+
-+	return err;
-+}
-+
-+static struct phy_driver ksz8041_phy_driver = {
-+	.phy_id		= 0x00221512,
-+	.name		= "Micrel KSZ8041",
-+	.phy_id_mask	= 0x001fffff,
-+	.features	= PHY_BASIC_FEATURES,
-+	.flags		= PHY_HAS_INTERRUPT,
-+	.config_aneg	= genphy_config_aneg,
-+	.read_status	= genphy_read_status,
-+	.ack_interrupt	= ksz8041_ack_interrupt,
-+	.config_intr	= ksz8041_config_intr,
-+	.driver	= {
-+		.owner	= THIS_MODULE,
-+	},
-+};
-+
-+static int __init micrel_phy_init(void)
-+{
-+	return phy_driver_register(&ksz8041_phy_driver);
-+}
-+
-+static void __exit micrel_phy_exit(void)
-+{
-+	phy_driver_unregister(&ksz8041_phy_driver);
-+}
-+
-+#ifdef MODULE
-+module_init(micrel_phy_init);
-+module_exit(micrel_phy_exit);
-+#else
-+subsys_initcall(micrel_phy_init);
-+#endif
-+
-+MODULE_DESCRIPTION("Micrel/Kendin PHY driver");
-+MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
-+MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org>");
-+MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy.c linux-2.6.33.3/drivers/net/phy/phy.c
---- linux-2.6.33.3.orig/drivers/net/phy/phy.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/net/phy/phy.c	2010-05-17 21:40:09.635111896 +0200
-@@ -299,6 +299,50 @@
+diff -Nur linux-2.6.34.orig/drivers/net/phy/phy.c linux-2.6.34/drivers/net/phy/phy.c
+--- linux-2.6.34.orig/drivers/net/phy/phy.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/net/phy/phy.c	2010-05-25 18:46:12.573473234 +0200
+@@ -298,6 +298,50 @@
  }
  EXPORT_SYMBOL(phy_ethtool_gset);
  
@@ -15039,7 +14956,7 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy.c linux-2.6.33.3/drivers/net/p
  /**
   * phy_mii_ioctl - generic PHY MII ioctl interface
   * @phydev: the phy_device struct
-@@ -352,7 +396,7 @@
+@@ -351,7 +395,7 @@
  		}
  
  		phy_write(phydev, mii_data->reg_num, val);
@@ -15048,7 +14965,7 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy.c linux-2.6.33.3/drivers/net/p
  		if (mii_data->reg_num == MII_BMCR &&
  		    val & BMCR_RESET &&
  		    phydev->drv->config_init) {
-@@ -466,7 +510,7 @@
+@@ -465,7 +509,7 @@
  	int idx;
  
  	idx = phy_find_setting(phydev->speed, phydev->duplex);
@@ -15057,9 +14974,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy.c linux-2.6.33.3/drivers/net/p
  	idx++;
  
  	idx = phy_find_valid(idx, phydev->supported);
-diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy_device.c linux-2.6.33.3/drivers/net/phy/phy_device.c
---- linux-2.6.33.3.orig/drivers/net/phy/phy_device.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/net/phy/phy_device.c	2010-05-17 21:40:17.019371728 +0200
+diff -Nur linux-2.6.34.orig/drivers/net/phy/phy_device.c linux-2.6.34/drivers/net/phy/phy_device.c
+--- linux-2.6.34.orig/drivers/net/phy/phy_device.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/net/phy/phy_device.c	2010-05-25 18:46:12.660978620 +0200
 @@ -146,6 +146,18 @@
  }
  EXPORT_SYMBOL(phy_scan_fixups);
@@ -15088,9 +15005,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/net/phy/phy_device.c linux-2.6.33.3/driver
  
  	mutex_init(&dev->lock);
  	INIT_DELAYED_WORK(&dev->state_queue, phy_state_machine);
-diff -Nur linux-2.6.33.3.orig/drivers/spi/ap83_spi.c linux-2.6.33.3/drivers/spi/ap83_spi.c
---- linux-2.6.33.3.orig/drivers/spi/ap83_spi.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/spi/ap83_spi.c	2009-12-13 20:45:24.855922705 +0100
+diff -Nur linux-2.6.34.orig/drivers/spi/ap83_spi.c linux-2.6.34/drivers/spi/ap83_spi.c
+--- linux-2.6.34.orig/drivers/spi/ap83_spi.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/spi/ap83_spi.c	2010-05-25 18:46:12.703464112 +0200
 @@ -0,0 +1,282 @@
 +/*
 + * Atheros AP83 board specific SPI Controller driver
@@ -15374,9 +15291,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/ap83_spi.c linux-2.6.33.3/drivers/spi/
 +MODULE_VERSION(DRV_VERSION);
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/spi/ar71xx_spi.c linux-2.6.33.3/drivers/spi/ar71xx_spi.c
---- linux-2.6.33.3.orig/drivers/spi/ar71xx_spi.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/spi/ar71xx_spi.c	2009-12-13 20:45:24.851921034 +0100
+diff -Nur linux-2.6.34.orig/drivers/spi/ar71xx_spi.c linux-2.6.34/drivers/spi/ar71xx_spi.c
+--- linux-2.6.34.orig/drivers/spi/ar71xx_spi.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/spi/ar71xx_spi.c	2010-05-25 18:46:12.743464042 +0200
 @@ -0,0 +1,283 @@
 +/*
 + * Atheros AR71xx SPI Controller driver
@@ -15661,9 +15578,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/ar71xx_spi.c linux-2.6.33.3/drivers/sp
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_AUTHOR("Imre Kaloz <kaloz@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/spi/Kconfig linux-2.6.33.3/drivers/spi/Kconfig
---- linux-2.6.33.3.orig/drivers/spi/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/spi/Kconfig	2010-05-17 16:28:32.431125868 +0200
+diff -Nur linux-2.6.34.orig/drivers/spi/Kconfig linux-2.6.34/drivers/spi/Kconfig
+--- linux-2.6.34.orig/drivers/spi/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/spi/Kconfig	2010-05-25 18:46:12.800978217 +0200
 @@ -53,6 +53,13 @@
  
  comment "SPI Master Controller Drivers"
@@ -15678,9 +15595,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/Kconfig linux-2.6.33.3/drivers/spi/Kco
  config SPI_ATMEL
  	tristate "Atmel SPI Controller"
  	depends on (ARCH_AT91 || AVR32)
-diff -Nur linux-2.6.33.3.orig/drivers/spi/Makefile linux-2.6.33.3/drivers/spi/Makefile
---- linux-2.6.33.3.orig/drivers/spi/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/spi/Makefile	2010-05-17 16:28:32.431125868 +0200
+diff -Nur linux-2.6.34.orig/drivers/spi/Makefile linux-2.6.34/drivers/spi/Makefile
+--- linux-2.6.34.orig/drivers/spi/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/spi/Makefile	2010-05-25 18:46:12.843464070 +0200
 @@ -11,6 +11,7 @@
  obj-$(CONFIG_SPI_MASTER)		+= spi.o
  
@@ -15689,9 +15606,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/Makefile linux-2.6.33.3/drivers/spi/Ma
  obj-$(CONFIG_SPI_ATMEL)			+= atmel_spi.o
  obj-$(CONFIG_SPI_BFIN)			+= spi_bfin5xx.o
  obj-$(CONFIG_SPI_BITBANG)		+= spi_bitbang.o
-diff -Nur linux-2.6.33.3.orig/drivers/spi/pb44_spi.c linux-2.6.33.3/drivers/spi/pb44_spi.c
---- linux-2.6.33.3.orig/drivers/spi/pb44_spi.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/spi/pb44_spi.c	2009-12-13 20:45:24.847920760 +0100
+diff -Nur linux-2.6.34.orig/drivers/spi/pb44_spi.c linux-2.6.34/drivers/spi/pb44_spi.c
+--- linux-2.6.34.orig/drivers/spi/pb44_spi.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/spi/pb44_spi.c	2010-05-25 18:46:12.882113964 +0200
 @@ -0,0 +1,299 @@
 +/*
 + * Atheros PB44 board SPI controller driver
@@ -15992,9 +15909,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/pb44_spi.c linux-2.6.33.3/drivers/spi/
 +MODULE_VERSION(DRV_VERSION);
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-2.6.33.3.orig/drivers/spi/spi_vsc7385.c linux-2.6.33.3/drivers/spi/spi_vsc7385.c
---- linux-2.6.33.3.orig/drivers/spi/spi_vsc7385.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/spi/spi_vsc7385.c	2009-12-13 20:45:24.863922134 +0100
+diff -Nur linux-2.6.34.orig/drivers/spi/spi_vsc7385.c linux-2.6.34/drivers/spi/spi_vsc7385.c
+--- linux-2.6.34.orig/drivers/spi/spi_vsc7385.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/spi/spi_vsc7385.c	2010-05-25 18:46:12.923471407 +0200
 @@ -0,0 +1,620 @@
 +/*
 + * SPI driver for the Vitesse VSC7385 ethernet switch
@@ -16616,9 +16533,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/spi/spi_vsc7385.c linux-2.6.33.3/drivers/s
 +MODULE_AUTHOR("Gabor Juhos <juhosg@openwrt.org>");
 +MODULE_LICENSE("GPL v2");
 +
-diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ehci-ar71xx.c linux-2.6.33.3/drivers/usb/host/ehci-ar71xx.c
---- linux-2.6.33.3.orig/drivers/usb/host/ehci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/usb/host/ehci-ar71xx.c	2010-02-09 00:28:55.636370581 +0100
+diff -Nur linux-2.6.34.orig/drivers/usb/host/ehci-ar71xx.c linux-2.6.34/drivers/usb/host/ehci-ar71xx.c
+--- linux-2.6.34.orig/drivers/usb/host/ehci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/usb/host/ehci-ar71xx.c	2010-05-25 18:46:12.962223093 +0200
 @@ -0,0 +1,242 @@
 +/*
 + *  Bus Glue for Atheros AR71xx built-in EHCI controller.
@@ -16862,10 +16779,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ehci-ar71xx.c linux-2.6.33.3/driv
 +		.name	= "ar71xx-ehci",
 +	}
 +};
-diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ehci-hcd.c linux-2.6.33.3/drivers/usb/host/ehci-hcd.c
---- linux-2.6.33.3.orig/drivers/usb/host/ehci-hcd.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/usb/host/ehci-hcd.c	2010-05-17 16:28:28.159113855 +0200
-@@ -1158,6 +1158,11 @@
+diff -Nur linux-2.6.34.orig/drivers/usb/host/ehci-hcd.c linux-2.6.34/drivers/usb/host/ehci-hcd.c
+--- linux-2.6.34.orig/drivers/usb/host/ehci-hcd.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/usb/host/ehci-hcd.c	2010-05-25 18:46:13.003464099 +0200
+@@ -1159,6 +1159,11 @@
  #define	PLATFORM_DRIVER		ehci_atmel_driver
  #endif
  
@@ -16877,9 +16794,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ehci-hcd.c linux-2.6.33.3/drivers
  #if !defined(PCI_DRIVER) && !defined(PLATFORM_DRIVER) && \
      !defined(PS3_SYSTEM_BUS_DRIVER) && !defined(OF_PLATFORM_DRIVER)
  #error "missing bus glue for ehci-hcd"
-diff -Nur linux-2.6.33.3.orig/drivers/usb/host/Kconfig linux-2.6.33.3/drivers/usb/host/Kconfig
---- linux-2.6.33.3.orig/drivers/usb/host/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/usb/host/Kconfig	2010-05-17 16:28:28.155130666 +0200
+diff -Nur linux-2.6.34.orig/drivers/usb/host/Kconfig linux-2.6.34/drivers/usb/host/Kconfig
+--- linux-2.6.34.orig/drivers/usb/host/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/usb/host/Kconfig	2010-05-25 18:46:13.040970869 +0200
 @@ -109,6 +109,13 @@
  		support both high speed and full speed devices, or high speed
  		devices only.
@@ -16908,9 +16825,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/usb/host/Kconfig linux-2.6.33.3/drivers/us
  config USB_OHCI_HCD_PPC_SOC
  	bool "OHCI support for on-chip PPC USB controller"
  	depends on USB_OHCI_HCD && (STB03xxx || PPC_MPC52xx)
-diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ohci-ar71xx.c linux-2.6.33.3/drivers/usb/host/ohci-ar71xx.c
---- linux-2.6.33.3.orig/drivers/usb/host/ohci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/usb/host/ohci-ar71xx.c	2009-12-13 20:45:24.747935158 +0100
+diff -Nur linux-2.6.34.orig/drivers/usb/host/ohci-ar71xx.c linux-2.6.34/drivers/usb/host/ohci-ar71xx.c
+--- linux-2.6.34.orig/drivers/usb/host/ohci-ar71xx.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/usb/host/ohci-ar71xx.c	2010-05-25 18:46:13.093473080 +0200
 @@ -0,0 +1,165 @@
 +/*
 + *  OHCI HCD (Host Controller Driver) for USB.
@@ -17077,10 +16994,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ohci-ar71xx.c linux-2.6.33.3/driv
 +		.owner	= THIS_MODULE,
 +	},
 +};
-diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ohci-hcd.c linux-2.6.33.3/drivers/usb/host/ohci-hcd.c
---- linux-2.6.33.3.orig/drivers/usb/host/ohci-hcd.c	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/usb/host/ohci-hcd.c	2010-05-17 16:28:28.163114085 +0200
-@@ -1085,6 +1085,11 @@
+diff -Nur linux-2.6.34.orig/drivers/usb/host/ohci-hcd.c linux-2.6.34/drivers/usb/host/ohci-hcd.c
+--- linux-2.6.34.orig/drivers/usb/host/ohci-hcd.c	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/usb/host/ohci-hcd.c	2010-05-25 18:46:13.132223090 +0200
+@@ -1090,6 +1090,11 @@
  #define TMIO_OHCI_DRIVER	ohci_hcd_tmio_driver
  #endif
  
@@ -17092,9 +17009,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/usb/host/ohci-hcd.c linux-2.6.33.3/drivers
  #if	!defined(PCI_DRIVER) &&		\
  	!defined(PLATFORM_DRIVER) &&	\
  	!defined(OF_PLATFORM_DRIVER) &&	\
-diff -Nur linux-2.6.33.3.orig/drivers/watchdog/ar71xx_wdt.c linux-2.6.33.3/drivers/watchdog/ar71xx_wdt.c
---- linux-2.6.33.3.orig/drivers/watchdog/ar71xx_wdt.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/drivers/watchdog/ar71xx_wdt.c	2009-12-13 20:45:21.895926395 +0100
+diff -Nur linux-2.6.34.orig/drivers/watchdog/ar71xx_wdt.c linux-2.6.34/drivers/watchdog/ar71xx_wdt.c
+--- linux-2.6.34.orig/drivers/watchdog/ar71xx_wdt.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/drivers/watchdog/ar71xx_wdt.c	2010-05-25 18:46:13.163473025 +0200
 @@ -0,0 +1,270 @@
 +/*
 + * Driver for the Atheros AR71xx SoC's built-in hardware watchdog timer.
@@ -17366,10 +17283,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/watchdog/ar71xx_wdt.c linux-2.6.33.3/drive
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS("platform:" DRV_NAME);
 +MODULE_ALIAS_MISCDEV(WATCHDOG_MINOR);
-diff -Nur linux-2.6.33.3.orig/drivers/watchdog/Kconfig linux-2.6.33.3/drivers/watchdog/Kconfig
---- linux-2.6.33.3.orig/drivers/watchdog/Kconfig	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/watchdog/Kconfig	2010-05-17 16:28:43.991113674 +0200
-@@ -840,6 +840,13 @@
+diff -Nur linux-2.6.34.orig/drivers/watchdog/Kconfig linux-2.6.34/drivers/watchdog/Kconfig
+--- linux-2.6.34.orig/drivers/watchdog/Kconfig	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/watchdog/Kconfig	2010-05-25 18:46:13.203464018 +0200
+@@ -857,6 +857,13 @@
  	help
  	  Hardware driver for the built-in watchdog timer on TXx9 MIPS SoCs.
  
@@ -17383,10 +17300,10 @@ diff -Nur linux-2.6.33.3.orig/drivers/watchdog/Kconfig linux-2.6.33.3/drivers/wa
  # PARISC Architecture
  
  # POWERPC Architecture
-diff -Nur linux-2.6.33.3.orig/drivers/watchdog/Makefile linux-2.6.33.3/drivers/watchdog/Makefile
---- linux-2.6.33.3.orig/drivers/watchdog/Makefile	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/drivers/watchdog/Makefile	2010-05-17 16:28:43.991113674 +0200
-@@ -112,6 +112,7 @@
+diff -Nur linux-2.6.34.orig/drivers/watchdog/Makefile linux-2.6.34/drivers/watchdog/Makefile
+--- linux-2.6.34.orig/drivers/watchdog/Makefile	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/drivers/watchdog/Makefile	2010-05-25 18:46:13.242223206 +0200
+@@ -113,6 +113,7 @@
  obj-$(CONFIG_SIBYTE_WDOG) += sb_wdog.o
  obj-$(CONFIG_AR7_WDT) += ar7_wdt.o
  obj-$(CONFIG_TXX9_WDT) += txx9wdt.o
@@ -17394,9 +17311,9 @@ diff -Nur linux-2.6.33.3.orig/drivers/watchdog/Makefile linux-2.6.33.3/drivers/w
  
  # PARISC Architecture
  
-diff -Nur linux-2.6.33.3.orig/include/linux/ath9k_platform.h linux-2.6.33.3/include/linux/ath9k_platform.h
---- linux-2.6.33.3.orig/include/linux/ath9k_platform.h	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/include/linux/ath9k_platform.h	2010-02-13 16:30:06.932691714 +0100
+diff -Nur linux-2.6.34.orig/include/linux/ath9k_platform.h linux-2.6.34/include/linux/ath9k_platform.h
+--- linux-2.6.34.orig/include/linux/ath9k_platform.h	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/include/linux/ath9k_platform.h	2010-05-25 18:46:13.283473018 +0200
 @@ -1,19 +1,11 @@
  /*
 - * Copyright (c) 2008 Atheros Communications Inc.
@@ -17432,9 +17349,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/ath9k_platform.h linux-2.6.33.3/incl
  };
  
  #endif /* _LINUX_ATH9K_PLATFORM_H */
-diff -Nur linux-2.6.33.3.orig/include/linux/gpio_buttons.h linux-2.6.33.3/include/linux/gpio_buttons.h
---- linux-2.6.33.3.orig/include/linux/gpio_buttons.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/include/linux/gpio_buttons.h	2010-05-17 20:56:04.279120442 +0200
+diff -Nur linux-2.6.34.orig/include/linux/gpio_buttons.h linux-2.6.34/include/linux/gpio_buttons.h
+--- linux-2.6.34.orig/include/linux/gpio_buttons.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/include/linux/gpio_buttons.h	2010-05-25 18:46:13.322223192 +0200
 @@ -0,0 +1,33 @@
 +/*
 + *  Definitions for the GPIO buttons interface driver
@@ -17469,9 +17386,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/gpio_buttons.h linux-2.6.33.3/includ
 +};
 +
 +#endif /* _GPIO_BUTTONS_H_ */
-diff -Nur linux-2.6.33.3.orig/include/linux/gpio_dev.h linux-2.6.33.3/include/linux/gpio_dev.h
---- linux-2.6.33.3.orig/include/linux/gpio_dev.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/include/linux/gpio_dev.h	2010-05-17 20:56:04.293291521 +0200
+diff -Nur linux-2.6.34.orig/include/linux/gpio_dev.h linux-2.6.34/include/linux/gpio_dev.h
+--- linux-2.6.34.orig/include/linux/gpio_dev.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/include/linux/gpio_dev.h	2010-05-25 18:46:13.380969951 +0200
 @@ -0,0 +1,11 @@
 +#ifndef _GPIODEV_H__
 +#define _GPIODEV_H__
@@ -17484,10 +17401,10 @@ diff -Nur linux-2.6.33.3.orig/include/linux/gpio_dev.h linux-2.6.33.3/include/li
 +#define GPIO_DIR_OUT    _IO(IOC_GPIODEV_MAGIC, 14)
 +
 +#endif
-diff -Nur linux-2.6.33.3.orig/include/linux/netdevice.h linux-2.6.33.3/include/linux/netdevice.h
---- linux-2.6.33.3.orig/include/linux/netdevice.h	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/include/linux/netdevice.h	2010-05-17 21:40:17.027115732 +0200
-@@ -844,6 +844,7 @@
+diff -Nur linux-2.6.34.orig/include/linux/netdevice.h linux-2.6.34/include/linux/netdevice.h
+--- linux-2.6.34.orig/include/linux/netdevice.h	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/include/linux/netdevice.h	2010-05-25 18:46:13.412222988 +0200
+@@ -863,6 +863,7 @@
  	void			*ax25_ptr;	/* AX.25 specific data */
  	struct wireless_dev	*ieee80211_ptr;	/* IEEE 802.11 specific data,
  						   assign before registering */
@@ -17495,9 +17412,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/netdevice.h linux-2.6.33.3/include/l
  
  /*
   * Cache line mostly used on receive path (including eth_type_trans())
-diff -Nur linux-2.6.33.3.orig/include/linux/nxp_74hc153.h linux-2.6.33.3/include/linux/nxp_74hc153.h
---- linux-2.6.33.3.orig/include/linux/nxp_74hc153.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/include/linux/nxp_74hc153.h	2010-01-19 19:26:36.441435904 +0100
+diff -Nur linux-2.6.34.orig/include/linux/nxp_74hc153.h linux-2.6.34/include/linux/nxp_74hc153.h
+--- linux-2.6.34.orig/include/linux/nxp_74hc153.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/include/linux/nxp_74hc153.h	2010-05-25 18:46:13.463473072 +0200
 @@ -0,0 +1,24 @@
 +/*
 + *  NXP 74HC153 - Dual 4-input multiplexer defines
@@ -17523,9 +17440,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/nxp_74hc153.h linux-2.6.33.3/include
 +};
 +
 +#endif /* _NXP_74HC153_H */
-diff -Nur linux-2.6.33.3.orig/include/linux/phy.h linux-2.6.33.3/include/linux/phy.h
---- linux-2.6.33.3.orig/include/linux/phy.h	2010-04-26 16:48:30.000000000 +0200
-+++ linux-2.6.33.3/include/linux/phy.h	2010-05-17 21:40:17.023114663 +0200
+diff -Nur linux-2.6.34.orig/include/linux/phy.h linux-2.6.34/include/linux/phy.h
+--- linux-2.6.34.orig/include/linux/phy.h	2010-05-16 23:17:36.000000000 +0200
++++ linux-2.6.34/include/linux/phy.h	2010-05-25 18:46:13.503473452 +0200
 @@ -325,6 +325,20 @@
  	void (*adjust_link)(struct net_device *dev);
  
@@ -17547,7 +17464,7 @@ diff -Nur linux-2.6.33.3.orig/include/linux/phy.h linux-2.6.33.3/include/linux/p
  };
  #define to_phy_device(d) container_of(d, struct phy_device, dev)
  
-@@ -491,6 +505,7 @@
+@@ -492,6 +506,7 @@
  void phy_stop_machine(struct phy_device *phydev);
  int phy_ethtool_sset(struct phy_device *phydev, struct ethtool_cmd *cmd);
  int phy_ethtool_gset(struct phy_device *phydev, struct ethtool_cmd *cmd);
@@ -17555,9 +17472,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/phy.h linux-2.6.33.3/include/linux/p
  int phy_mii_ioctl(struct phy_device *phydev,
  		struct mii_ioctl_data *mii_data, int cmd);
  int phy_start_interrupts(struct phy_device *phydev);
-diff -Nur linux-2.6.33.3.orig/include/linux/spi/vsc7385.h linux-2.6.33.3/include/linux/spi/vsc7385.h
---- linux-2.6.33.3.orig/include/linux/spi/vsc7385.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/include/linux/spi/vsc7385.h	2009-12-13 20:45:19.923921372 +0100
+diff -Nur linux-2.6.34.orig/include/linux/spi/vsc7385.h linux-2.6.34/include/linux/spi/vsc7385.h
+--- linux-2.6.34.orig/include/linux/spi/vsc7385.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/include/linux/spi/vsc7385.h	2010-05-25 18:46:13.540971583 +0200
 @@ -0,0 +1,19 @@
 +/*
 + * Platform data definition for the Vitesse VSC7385 ethernet switch driver
@@ -17578,9 +17495,9 @@ diff -Nur linux-2.6.33.3.orig/include/linux/spi/vsc7385.h linux-2.6.33.3/include
 +		u32	clk_sel:3;
 +	} mac_cfg;
 +};
-diff -Nur linux-2.6.33.3.orig/net/dsa/ar7240.c linux-2.6.33.3/net/dsa/ar7240.c
---- linux-2.6.33.3.orig/net/dsa/ar7240.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/net/dsa/ar7240.c	2010-03-12 19:31:45.562053091 +0100
+diff -Nur linux-2.6.34.orig/net/dsa/ar7240.c linux-2.6.34/net/dsa/ar7240.c
+--- linux-2.6.34.orig/net/dsa/ar7240.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/net/dsa/ar7240.c	2010-05-25 18:46:13.583464107 +0200
 @@ -0,0 +1,736 @@
 +/*
 + *  DSA driver for the built-in ethernet switch of the Atheros AR7240 SoC
@@ -18318,9 +18235,9 @@ diff -Nur linux-2.6.33.3.orig/net/dsa/ar7240.c linux-2.6.33.3/net/dsa/ar7240.c
 +	unregister_switch_driver(&ar7240_dsa_driver);
 +}
 +module_exit(dsa_ar7240_cleanup);
-diff -Nur linux-2.6.33.3.orig/net/dsa/mv88e6063.c linux-2.6.33.3/net/dsa/mv88e6063.c
---- linux-2.6.33.3.orig/net/dsa/mv88e6063.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/net/dsa/mv88e6063.c	2009-12-25 12:10:58.524031002 +0100
+diff -Nur linux-2.6.34.orig/net/dsa/mv88e6063.c linux-2.6.34/net/dsa/mv88e6063.c
+--- linux-2.6.34.orig/net/dsa/mv88e6063.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/net/dsa/mv88e6063.c	2010-05-25 18:46:13.623464081 +0200
 @@ -0,0 +1,294 @@
 +/*
 + * net/dsa/mv88e6063.c - Driver for Marvell 88e6063 switch chips
@@ -18616,9 +18533,9 @@ diff -Nur linux-2.6.33.3.orig/net/dsa/mv88e6063.c linux-2.6.33.3/net/dsa/mv88e60
 +	unregister_switch_driver(&mv88e6063_switch_driver);
 +}
 +module_exit(mv88e6063_cleanup);
-diff -Nur linux-2.6.33.3.orig/net/dsa/tag_qinq.c linux-2.6.33.3/net/dsa/tag_qinq.c
---- linux-2.6.33.3.orig/net/dsa/tag_qinq.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.33.3/net/dsa/tag_qinq.c	2010-03-06 12:19:54.255959609 +0100
+diff -Nur linux-2.6.34.orig/net/dsa/tag_qinq.c linux-2.6.34/net/dsa/tag_qinq.c
+--- linux-2.6.34.orig/net/dsa/tag_qinq.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.34/net/dsa/tag_qinq.c	2010-05-25 18:46:13.663473277 +0200
 @@ -0,0 +1,127 @@
 +/*
 + * net/dsa/tag_qinq.c - QinQ tag format handling

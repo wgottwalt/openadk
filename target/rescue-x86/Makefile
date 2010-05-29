@@ -11,18 +11,6 @@ kernel-install:
 	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.*
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
-		$(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
@@ -31,7 +19,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 endif
 
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

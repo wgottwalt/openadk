@@ -7,21 +7,10 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-kernel-install:
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
-		$(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+kernel-install:
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -44,7 +33,8 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 endif
 
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
+	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-x86_64 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'

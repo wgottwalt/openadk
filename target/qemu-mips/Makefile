@@ -10,18 +10,6 @@ include $(TOPDIR)/mk/image.mk
 kernel-install:
 	@cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
-		$(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/vmlinux $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
@@ -42,7 +30,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 endif
 
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
