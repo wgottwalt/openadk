@@ -70,6 +70,8 @@ ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	    cpio -R 0:0 -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
+	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
+		$(LINUX_DIR)/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
 	    cpio -R 0:0 -oC512 -Mdist -Hnewc >$@
 
@@ -80,6 +82,14 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	cat ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel \
 		${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
+
+createinitramfs:
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
+	echo N | \
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
+		ARCH=$(ARCH) CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
+		ARCH=$(ARCH) CC="$(TARGET_CC)" $(MAKE_TRACE)
 
 imageclean:
 	rm -f $(BIN_DIR)/$(ADK_TARGET)-* ${BUILD_DIR}/$(ADK_TARGET)-*

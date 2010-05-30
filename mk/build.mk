@@ -427,7 +427,7 @@ bulk:
 			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
-	done <${TOPDIR}/target/bulk.lst
+	done <${TOPDIR}/target/bulkdef.lst
 
 bulktoolchain:
 	@while read target libc; do \

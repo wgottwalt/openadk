@@ -16,6 +16,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BASH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		bash_cv_getenv_redef=no
 XAKE_FLAGS+=		LIBS_FOR_BUILD=''
 
 post-install:
