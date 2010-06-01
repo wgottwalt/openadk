@@ -4,16 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME=		lynx
-PKG_VERSION=		2.8.7dev.7
-PKG_RELEASE=		2
-PKG_MD5SUM=		83891107c873421e5ac917cc0ab53fe8
+PKG_VERSION=		2.8.7
+PKG_RELEASE=		1
+PKG_MD5SUM=		124253e635f7c76bdffc47b9d036c812
 PKG_DESCR:=		Standard text browser
 PKG_SECTION:=		text
 PKG_DEPENDS:=		libncurses libopenssl zlib
 PKG_BUILDDEP+=		ncurses openssl zlib
-PKG_URL:=		http://lynx.isc.org
-PKG_SITES=		http://lynx.isc.org/current/ \
-			${MASTER_SITE_MIRBSD}
+PKG_URL:=		http://lynx.isc.org/
+PKG_SITES=		http://lynx.isc.org/${PKG_NAME}${PKG_VERSION}/
 
 DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-7
@@ -22,7 +21,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LYNX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-DLYNX_VERSION=\"${PKG_VERSION}-${PKG_RELEASE}\"
 TCPPFLAGS+=		-I${STAGING_DIR}/include/openssl
 TCPPFLAGS+=		-DUSE_OPENSSL_INCL -DUSE_X509_SUPPORT
 TLDFLAGS+=		-lz
@@ -40,11 +38,11 @@ CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_RM=rm \
 			ac_cv_path_UUDECODE=uudecode \
 			ac_cv_path_ZCAT=zcat \
-			ac_cv_path_ZIP=zip
+			ac_cv_path_ZIP=zip \
+			ac_cv_path_NCURSES_CONFIG=${STAGING_DIR}/scripts/ncurses5-config
 
 CONFIGURE_ARGS+=	\
 			--disable-warnings \
-			--disable-nls \
 			--without-gnutls \
 			--without-socks \
 			--without-socks5 \
@@ -63,6 +61,7 @@ CONFIGURE_ARGS+=	\
 			--without-x \
 			--with-zlib=${STAGING_DIR}/usr \
 			--with-ssl=${STAGING_DIR}/usr \
+			--with-curses-dir=${STAGING_DIR}/usr \
 			--disable-full-paths \
 			--with-cfg-file=/etc/lynx.cfg \
 			--with-lss-file=/etc/lynx.lss \
@@ -77,7 +76,8 @@ CONFIGURE_ARGS+=	\
 			--disable-dired \
 			--with-screen=ncurses \
 			--disable-widec \
-			--disable-locale-charset
+			--disable-locale-charset \
+			--with-build-cppflags="-I/usr/include/ncurses"
 
 MAKE_FILE:=		makefile
 
