@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://asg.web.cmu.edu/sasl
 PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 
+PKG_NOPARALLEL:=	1
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
