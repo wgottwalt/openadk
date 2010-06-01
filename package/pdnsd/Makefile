@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pdnsd
 PKG_VERSION:=		1.2.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		114b3b21b09b43cbfcccdde726b84c12
 PKG_DESCR:=		Proxy DNS server with permanent caching
 PKG_SECTION:=		net
@@ -20,6 +20,8 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-par.tar.gz
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PDNSD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--with-target=Linux
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_PDNSD)/etc
