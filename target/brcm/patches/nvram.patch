@@ -1,0 +1,86 @@
+diff --git a/arch/mips/bcm47xx/Makefile b/arch/mips/bcm47xx/Makefile
+index 35294b1..7465e8a 100644
+--- a/arch/mips/bcm47xx/Makefile
++++ b/arch/mips/bcm47xx/Makefile
+@@ -3,4 +3,4 @@
+ # under Linux.
+ #
+ 
+-obj-y := gpio.o irq.o prom.o serial.o setup.o time.o wgt634u.o
++obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o wgt634u.o
+diff --git a/arch/mips/bcm47xx/setup.c b/arch/mips/bcm47xx/setup.c
+index d442e11..01e1661 100644
+--- a/arch/mips/bcm47xx/setup.c
++++ b/arch/mips/bcm47xx/setup.c
+@@ -33,6 +33,7 @@
+ #include <asm/time.h>
+ #include <bcm47xx.h>
+ #include <asm/fw/cfe/cfe_api.h>
++#include <asm/mach-bcm47xx/nvram.h>
+ 
+ struct ssb_bus ssb_bcm47xx;
+ EXPORT_SYMBOL(ssb_bcm47xx);
+@@ -77,6 +78,7 @@ static int bcm47xx_get_invariants(struct ssb_bus *bus,
+ 				   struct ssb_init_invariants *iv)
+ {
+ 	char buf[100];
++	char *s;
+ 
+ 	/* Fill boardinfo structure */
+ 	memset(&(iv->boardinfo), 0 , sizeof(struct ssb_boardinfo));
+@@ -92,18 +94,47 @@ static int bcm47xx_get_invariants(struct ssb_bus *bus,
+ 	memset(&(iv->sprom), 0, sizeof(struct ssb_sprom));
+ 	iv->sprom.revision = 3;
+ 
+-	if (cfe_getenv("et0macaddr", buf, sizeof(buf)) >= 0)
++	if (cfe_getenv("et0macaddr", buf, sizeof(buf)) >= 0) {
+ 		str2eaddr(buf, iv->sprom.et0mac);
+-	if (cfe_getenv("et1macaddr", buf, sizeof(buf)) >= 0)
++	} else {
++		if ((s = nvram_get("et0macaddr")))
++			str2eaddr(s, iv->sprom.et0mac);
++	}
++
++	if (cfe_getenv("et1macaddr", buf, sizeof(buf)) >= 0) {
+ 		str2eaddr(buf, iv->sprom.et1mac);
+-	if (cfe_getenv("et0phyaddr", buf, sizeof(buf)) >= 0)
+-		iv->sprom.et0phyaddr = simple_strtoul(buf, NULL, 10);
+-	if (cfe_getenv("et1phyaddr", buf, sizeof(buf)) >= 0)
+-		iv->sprom.et1phyaddr = simple_strtoul(buf, NULL, 10);
+-	if (cfe_getenv("et0mdcport", buf, sizeof(buf)) >= 0)
++	} else {
++		if ((s = nvram_get("et1macaddr")))
++			str2eaddr(s, iv->sprom.et1mac);
++	}
++
++	if (cfe_getenv("et0phyaddr", buf, sizeof(buf)) >= 0) {
++		iv->sprom.et0phyaddr = simple_strtoul(buf, NULL, 0);
++	} else {
++		if ((s = nvram_get("et0phyaddr")))
++			iv->sprom.et0phyaddr = simple_strtoul(s, NULL, 0);
++	}
++
++	if (cfe_getenv("et1phyaddr", buf, sizeof(buf)) >= 0) {
++		iv->sprom.et1phyaddr = simple_strtoul(buf, NULL, 0);
++	} else {
++		if ((s = nvram_get("et1phyaddr")))
++			iv->sprom.et1phyaddr = simple_strtoul(s, NULL, 0);
++	}
++
++	if (cfe_getenv("et0mdcport", buf, sizeof(buf)) >= 0) {
+ 		iv->sprom.et0mdcport = simple_strtoul(buf, NULL, 10);
+-	if (cfe_getenv("et1mdcport", buf, sizeof(buf)) >= 0)
++	} else {
++		if ((s = nvram_get("et0mdcport")))
++			iv->sprom.et0mdcport = simple_strtoul(s, NULL, 10);
++	}
++
++	if (cfe_getenv("et1mdcport", buf, sizeof(buf)) >= 0) {
+ 		iv->sprom.et1mdcport = simple_strtoul(buf, NULL, 10);
++	} else { 
++		if ((s = nvram_get("et1mdcport")))
++			iv->sprom.et1mdcport = simple_strtoul(s, NULL, 10);
++	}
+ 
+ 	return 0;
+ }
