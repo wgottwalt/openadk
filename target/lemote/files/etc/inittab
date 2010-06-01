@@ -7,3 +7,4 @@ tty4::respawn:/sbin/getty -i -L tty4 115200 vt100
 tty5::respawn:/sbin/getty -i -L tty5 115200 vt100
 tty6::respawn:/sbin/getty -i -L tty6 115200 vt100
 tty7::respawn:/sbin/getty -i -L tty7 115200 vt100
+tty11::respawn:/sbin/logread -f
