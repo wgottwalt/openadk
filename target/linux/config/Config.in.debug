@@ -42,6 +42,7 @@ config ADK_KERNEL_DEBUG_WITH_KGDB
 	prompt "Enable remote kernel debugging using KGDB"
 	depends on ADK_TARGET_ROOTFS_NFSROOT || \
 		ADK_TARGET_ROOTFS_EXT2_BLOCK || \
+		ADK_TARGET_ROOTFS_YAFFS || \
 		ADK_TARGET_ROOTFS_EXT2
 	default n
 	select ADK_KERNEL_DEBUG_KERNEL
