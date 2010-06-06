@@ -43,9 +43,9 @@ CONFIGURE_ARGS+=	\
 			--enable-xv \
 			--enable-xaa \
 			--enable-vgahw \
+			--enable-dpms \
 			--disable-aiglx \
 			--disable-config-hal \
-			--disable-dpms \
 			--disable-glx \
 			--disable-xace \
 			--disable-xephyr \
