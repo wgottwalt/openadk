@@ -21,7 +21,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,RXVT_UNICODE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-perl \
-			--disable-utmp
+			--disable-utmp \
+			--disable-afterimage
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_RXVT_UNICODE)/usr/bin
