@@ -70,6 +70,10 @@ else
 CONFIGURE_ARGS+=	--disable-dri --disable-dri2
 endif
 
+ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+CONFIGURE_ARGS+=	--with-int10=stub
+endif
+
 post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/etc/X11
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
