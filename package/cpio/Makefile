@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cpio
-PKG_VERSION:=		2.10
+PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		351ab3d38d8949913e478cc23b9d6ad4
+PKG_MD5SUM:=		1112bb6c45863468b5496ba128792f6c
 PKG_DESCR:=		copies files into or out of a cpio archive
 PKG_SECTION:=		net
 PKG_URL:=		http://www.gnu.org/software/cpio/
