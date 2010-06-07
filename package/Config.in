@@ -633,6 +633,7 @@ source "package/twm/Config.in"
 source "package/xauth/Config.in"
 source "package/xinit/Config.in"
 source "package/xlsfonts/Config.in"
+source "package/xterm/Config.in"
 endmenu
 
 menu "X fonts"
