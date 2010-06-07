@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG pcscd
+#INIT 80
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${pcscd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	pcscd
+  	;;
+stop)
+	pkill pcscd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

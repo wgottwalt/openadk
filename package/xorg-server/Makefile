@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.7.5
+PKG_VERSION:=		1.7.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		866917789c71e7616a016ad256fe9b8f
+PKG_MD5SUM:=		ba0360b4ec1f6e541b264e45906bf5f2
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile \
@@ -42,6 +42,7 @@ CONFIGURE_ARGS+=	\
 			--enable-xorg \
 			--enable-xv \
 			--enable-xaa \
+			--enable-vgahw \
 			--disable-aiglx \
 			--disable-config-hal \
 			--disable-dpms \

@@ -116,10 +116,7 @@ config ADK_x86_64_qemu
 config ADK_rb532
 	tristate
 
-config ADK_rb411
-	tristate
-
-config ADK_rb433
+config ADK_rb4xx
 	tristate
 
 config ADK_zaurus
@@ -149,6 +146,9 @@ config ADK_mips_rescue
 config ADK_mipsel_rescue
 	tristate
 
+config ADK_brcm
+	tristate
+
 config ADK_ag241
 	tristate
 
@@ -164,6 +164,7 @@ config ADK_TARGET
 	default "alix2d"  if ADK_alix2d
 	default "alix2d13"  if ADK_alix2d13
 	default "wrap"  if ADK_wrap
+	default "brcm"  if ADK_brcm
 	default "toolchain-arm"  if ADK_arm_toolchain
 	default "toolchain-armel"  if ADK_armel_toolchain
 	default "toolchain-mips"  if ADK_mips_toolchain
@@ -175,6 +176,7 @@ config ADK_TARGET
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
+	default "qemu-mips64"  if ADK_mips64_qemu
 	default "qemu-mipsel"  if ADK_mipsel_qemu
 	default "qemu-x86"  if ADK_x86_qemu
 	default "qemu-x86_64"  if ADK_x86_64_qemu
@@ -182,8 +184,7 @@ config ADK_TARGET
 	default "foxg20"  if ADK_foxg20
 	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
-	default "rb411"  if ADK_rb411
-	default "rb433"  if ADK_rb433
+	default "rb4xx"  if ADK_rb4xx
 	default "zaurus"  if ADK_arm
 	default "lemote"  if ADK_lemote
 	default "ibmx40"  if ADK_ibmx40
@@ -238,6 +239,7 @@ config ADK_LINUX_ARM_FOXG20
 	select ADK_EABI
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_USB
 	select ADK_KPACKAGE_KMOD_VFAT_FS
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_NETDEVICES
@@ -254,7 +256,9 @@ config ADK_LINUX_CRIS_FOXBOARD
 	bool "Foxboard (ETRAX LX100)"
 	select ADK_foxboard
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
+	select ADK_KERNEL_NETDEVICES
 	select ADK_TARGET_WITH_USB
 	help
 	  Support for Foxboard targets.
@@ -265,6 +269,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	bool "Lemote Subnotebook Yeeloong"
 	select ADK_lemote
 	select ADK_LINUX_64
+	select ADK_KERNEL_USB
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -322,6 +327,17 @@ config ADK_LINUX_MIPS_AG241
 	  (Texas Instruments AR7 platform)
 	  Status: stable
 
+config ADK_LINUX_MIPS_BRCM
+	bool "Linksys/Asus Broadcom 47xx Routers"
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_brcm
+	help
+	  Linksys/Asus Broadcom 47xx based router.
+	  Status: development
+
 config ADK_LINUX_XSCALE_ZAURUS
 	bool "Zaurus SL-C3200"
 	select ADK_zaurus
@@ -362,6 +378,7 @@ config ADK_LINUX_X86_IBMX40
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_CARDBUS
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_NETDEVICES
@@ -589,6 +606,7 @@ config ADK_LINUX_X86_QEMU
 config ADK_LINUX_X86_64_QEMU
 	bool "x86_64"
 	select ADK_x86_64_qemu
+	select ADK_LINUX_64
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_INPUT_KEYBOARD
@@ -610,6 +628,8 @@ depends on ADK_LINUX_ALIX
 config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
 	select ADK_alix1c
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -631,6 +651,8 @@ config ADK_LINUX_X86_ALIX1C
 config ADK_LINUX_X86_ALIX2D
 	bool "PC Engines Alix2D"
 	select ADK_alix2d
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -652,6 +674,8 @@ config ADK_LINUX_X86_ALIX2D
 config ADK_LINUX_X86_ALIX2D13
 	bool "PC Engines Alix2D13"
 	select ADK_alix2d13
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -696,35 +720,30 @@ prompt "Routerboard model"
 default ADK_LINUX_MIPS_RB532
 depends on ADK_LINUX_MIKROTIK
 
-config ADK_LINUX_MIPS_RB411
-	bool "Mikrotik Routerboard 411"
-	select ADK_rb411
+config ADK_LINUX_MIPS_RB4XX
+	bool "Mikrotik Routerboard 411/433"
+	select ADK_rb4xx
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_TARGET_WITH_MINIPCI
-	depends on ADK_BROKEN
+	select ADK_TARGET_WITH_WATCHDOG
 	help
-	 Support for Mikrotik RB411.
-	 Status: development
-
-config ADK_LINUX_MIPS_RB433
-	bool "Mikrotik Routerboard 433"
-	select ADK_rb433
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_TARGET_WITH_MINIPCI
-	depends on ADK_BROKEN
-	help
-	 Support for Mikrotik RB433.
-	 Status: development
+	 Support for Mikrotik RB411/RB433.
+	 Status: stable
 
 config ADK_LINUX_MIPS_RB532
 	bool "Mikrotik Routerboard 532"
 	select ADK_rb532
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
@@ -782,8 +801,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
-		ADK_LINUX_MIPS_RB411 || \
-		ADK_LINUX_MIPS_RB433 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_MIPS64_LEMOTE || \
@@ -802,6 +820,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_RESCUE || \
 		ADK_LINUX_MIPS64_LEMOTE || \
@@ -865,8 +884,7 @@ config ADK_TARGET_ROOTFS_YAFFS
 	select ADK_KERNEL_YAFFS_YAFFS2
 	depends on \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS_RB433 || \
-		ADK_LINUX_MIPS_RB411
+		ADK_LINUX_MIPS_RB4XX
 	help
 	  Root filesystem on NAND.
 
@@ -879,9 +897,9 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_X86_ALIX2D || \
 		ADK_LINUX_X86_ALIX2D13 || \
 		ADK_LINUX_X86_WRAP || \
+		ADK_LINUX_MIPS_BRCM || \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS_RB433 || \
-		ADK_LINUX_MIPS_RB411 || \
+		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_MIPS_WAG54G || \
 		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS64_LEMOTE
@@ -977,6 +995,14 @@ choice
 prompt "Compression method for initramfs and kernel"
 	depends on ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	
+config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression.
+
 config ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
 	boolean
 	prompt "gzip"
@@ -993,14 +1019,6 @@ config ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	help
 	  Select BZIP2 compression.
 
-config ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
-	boolean
-	prompt "lzma"
-	select ADK_KERNEL_RD_LZMA
-	select ADK_KERNEL_KERNEL_LZMA
-	help
-	  Select LZMA compression.
-
 config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
 	boolean
 	prompt "lzo"
@@ -1013,8 +1031,15 @@ endchoice
 
 choice
 prompt "Compression method for Kernel"
-	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY)
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY || ADK_LINUX_ARM_FOXG20 || ADK_LINUX_ARM_QEMU )
 	
+config ADK_TARGET_KERNEL_COMPRESSION_LZMA
+	boolean
+	prompt "lzma"
+	select ADK_KERNEL_KERNEL_LZMA
+	help
+	  Select LZMA compression for Kernel.
+
 config ADK_TARGET_KERNEL_COMPRESSION_GZIP
 	boolean
 	prompt "gzip"
@@ -1028,13 +1053,6 @@ config ADK_TARGET_KERNEL_COMPRESSION_BZIP2
 	select ADK_KERNEL_KERNEL_BZIP2
 	help
 	  Select BZIP2 compression for Kernel.
-
-config ADK_TARGET_KERNEL_COMPRESSION_LZMA
-	boolean
-	prompt "lzma"
-	select ADK_KERNEL_KERNEL_LZMA
-	help
-	  Select LZMA compression for Kernel.
 
 config ADK_TARGET_KERNEL_COMPRESSION_LZO
 	boolean

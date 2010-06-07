@@ -16,8 +16,6 @@ endif
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2
 PKG_SITES=		${MASTER_SITE_SOURCEFORGE:=dav/}
 
-include ${TOPDIR}/mk/package.mk
-
 ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)
 PKG_DEPENDS:=			fuse-utils kmod-fuse-fs libiconv neon
 else ifeq (${ADK_PACKAGE_DAVFS2_CODA},y)
@@ -25,6 +23,8 @@ PKG_DEPENDS:=			kmod-coda-fs libiconv neon
 else
 PKG_DEPENDS:=			kmod-coda-fs fuse-utils kmod-fuse-fs libiconv neon
 endif
+
+include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DAVFS2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

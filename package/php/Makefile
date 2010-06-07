@@ -44,6 +44,8 @@ PKG_SITES:=		http://de.php.net/distributions/
 
 PKG_DESCR_FCGI:=	PHP for FastCGI usage
 
+PKG_HOST_DEPENDS:=	!cygwin
+
 # FIX PKG_DEPENDS
 
 include $(TOPDIR)/mk/package.mk

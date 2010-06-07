@@ -11,6 +11,7 @@ PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib gtk+ libnotify libidl
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
+PKG_DEPENDS+=		libxdamage libxfixes
 PKG_BUILDDEP+=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11 libXt
 PKG_BUILDDEP+=		nspr nss jpeg
 PKG_URL:=		http://www.mozilla.org/
@@ -19,7 +20,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.6.3/
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
-PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40
 
 include $(TOPDIR)/mk/package.mk
 

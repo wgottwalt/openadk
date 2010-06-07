@@ -1,0 +1,17 @@
+--- pcmciautils-017.orig/Makefile	2010-01-06 16:47:45.000000000 +0100
++++ pcmciautils-017/Makefile	2010-05-29 17:15:03.515625000 +0200
+@@ -94,12 +94,13 @@ PWD = $(shell pwd)
+ # If you are running a cross compiler, you may want to set this
+ # to something more interesting, like "arm-linux-".  If you want
+ # to compile vs uClibc, that can be done here as well.
+-CROSS = #/usr/i386-linux-uclibc/usr/bin/i386-uclibc-
++CROSS ?= #/usr/i386-linux-uclibc/usr/bin/i386-uclibc-
+ CC = $(CROSS)gcc
+ LD = $(CROSS)gcc
+ AR = $(CROSS)ar
+ STRIP = $(CROSS)strip
+ RANLIB = $(CROSS)ranlib
++LEX = flex
+ HOSTCC = gcc
+ 
+ export CROSS CC AR STRIP RANLIB CFLAGS LDFLAGS LIB_OBJS ARCH_LIB_OBJS CRT0

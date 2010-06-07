@@ -1,5 +1,5 @@
 --- Mesa-7.8.1.orig/src/glsl/apps/Makefile	2010-04-05 01:46:26.000000000 +0200
-+++ Mesa-7.8.1/src/glsl/apps/Makefile	2010-04-19 21:20:55.000000000 +0200
++++ Mesa-7.8.1/src/glsl/apps/Makefile	2010-05-25 17:38:03.594714854 +0200
 @@ -26,10 +26,10 @@ INCLUDES = -I.
  .SUFFIXES: .c
  

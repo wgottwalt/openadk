@@ -7,21 +7,10 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-kernel-install:
-	@cp $(LINUX_DIR)/arch/x86/boot/bzImage $(TARGET_DIR)/boot/vmlinuz-adk
+KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.*
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
-	echo 'CONFIG_INITRAMFS_COMPRESSION_LZMA=y' >> $(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=0 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/x86/boot/compressed/vmlinux \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+kernel-install:
+	@cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
 
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
@@ -48,7 +37,8 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinit
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
+	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

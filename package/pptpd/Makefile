@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pptpd
-PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		9
-PKG_MD5SUM:=		75d494e881f7027f4e60b114163f6b67
+PKG_VERSION:=		1.3.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b38df9c431041922c997c1148bedf591
 PKG_DESCR:=		a Point-to-Point Tunneling Protocol (PPTP) server
 PKG_SECTION:=		net
 PKG_DEPENDS:=	 	ppp kmod-crypto kmod-mppe kmod-ppp

@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		ncurses e2fsprogs
 PKG_URL:=		http://web.mit.edu/kerberos
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.7/
 
+PKG_NOPARALLEL:=	1
+
 PKG_DESCR_LIB:=		MIT kerberos libraries
 PKG_SECTION_LIB:=	libs
 

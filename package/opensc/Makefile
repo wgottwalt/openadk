@@ -4,11 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
-PKG_VERSION:=		0.11.8
+PKG_VERSION:=		0.11.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a269b478b18dddb648b9bd930206b5a8
+PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		a set of libraries and utilities to access smart cards
 PKG_SECTION:=		crypto
+PKG_BUILDDEP+=		libtool
 PKG_URL:=		http://www.opensc-project.org/opensc
 PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 

@@ -9,14 +9,15 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		62e8e47cbd63741b4bbe634dcdc8a56a
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libxdamage libxfixes
-PKG_BUILDDEP+=		libXdamage libXfixes libXxf86vm
-PKG_URL:=		add project url
+PKG_DEPENDS:=		libxdamage libxfixes libdrm
+PKG_BUILDDEP+=		libXdamage libXfixes libXxf86vm libdrm 
+PKG_BUILDDEP+=		dri2proto glproto expat
+PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
-PKG_TARGET_DEPENDS:=  	x86 x86_64
+PKG_TARGET_DEPENDS:=  	ibmx40
 
 include $(TOPDIR)/mk/package.mk
 
@@ -24,9 +25,26 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium \
+			--disable-glw \
+			--with-driver=dri \
 			--without-demos
 
 XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
+
+pre-configure:
+	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+		./configure \
+		--disable-static \
+		--disable-glw \
+		--disable-gallium \
+		--with-driver=xlib \
+		--without-demos \
+	);
+	${MAKE} -C ${WRKBUILD}/src/glsl
+	${MAKE} -C ${WRKBUILD}/src/glsl/apps
+	cp ${WRKBUILD}/src/glsl/apps/compile \
+		${STAGING_TOOLS}/bin
+	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib

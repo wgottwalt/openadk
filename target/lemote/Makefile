@@ -7,18 +7,10 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-kernel-install:
-	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+KERNEL:=$(LINUX_DIR)/vmlinuz
 
-createinit:
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio.* $(MAKE_TRACE)
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
-		$(LINUX_DIR)/.config
-	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+kernel-install:
+	@cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
 
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
@@ -70,20 +62,19 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
+imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),initramfs-piggyback)
-imageinstall: $(BIN_DIR)/$(INITRAMFS) createinit
+imageinstall: $(BUILD_DIR)/$(INITRAMFS_PIGGYBACK) createinitramfs
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif

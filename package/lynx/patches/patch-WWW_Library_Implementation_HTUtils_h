@@ -1,0 +1,34 @@
+--- lynx2-8-7.orig/WWW/Library/Implementation/HTUtils.h	2009-05-25 23:05:31.000000000 +0200
++++ lynx2-8-7/WWW/Library/Implementation/HTUtils.h	2010-05-29 12:56:42.125000000 +0200
+@@ -677,6 +677,8 @@ extern int WWW_TraceMask;
+ 
+ #define SHORTENED_RBIND		/* FIXME: do this in configure-script */
+ 
++#ifdef DONT_USE_SSL
++#else
+ #ifdef USE_SSL
+ 
+ #define free_func free__func
+@@ -717,6 +719,7 @@ extern int WWW_TraceMask;
+ 
+ #undef free_func
+ #endif /* USE_SSL */
++#endif
+ 
+ #ifdef HAVE_LIBDMALLOC
+ #include <dmalloc.h>		/* Gray Watson's library */
+@@ -747,11 +750,14 @@ extern "C" {
+ 
+     extern FILE *TraceFP(void);
+ 
++#ifdef DONT_USE_SSL
++#else
+ #ifdef USE_SSL
+     extern SSL *HTGetSSLHandle(void);
+     extern void HTSSLInitPRNG(void);
+     extern int HTGetSSLCharacter(void *handle);
+ #endif				/* USE_SSL */
++#endif
+ 
+ #ifdef __cplusplus
+ }

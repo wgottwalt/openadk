@@ -13,9 +13,11 @@ CONFIG = config
 DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_DEBUG=n \
 			ADK_STATIC=n \
-			ADK_MAKE_PARALLEL=n \
+			ADK_MAKE_PARALLEL=y \
+			ADK_MAKE_JOBS=4 \
 			ADK_FORCE_PARALLEL=n \
 			ADK_PACKAGE_GRUB=n \
+			ADK_PACKAGE_XORG_SERVER_WITH_DRI=n \
 			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_GCC=n \
@@ -431,7 +433,7 @@ bulk:
 			$(GMAKE) VERBOSE=1 all; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
-	done <${TOPDIR}/target/bulk.lst
+	done <${TOPDIR}/target/bulkdef.lst
 
 bulktoolchain:
 	@while read target libc; do \
