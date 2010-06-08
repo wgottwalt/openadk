@@ -272,6 +272,9 @@ endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
 endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/.defconfig
+endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
@@ -280,10 +283,10 @@ endif
 			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(TOPDIR)/.defconfig; \
-		for symbol in ${DEFCONFIG}; do \
-			echo $$symbol >> $(TOPDIR)/.defconfig; \
-		done; \
 	fi
+	@for symbol in ${DEFCONFIG}; do \
+		echo $$symbol >> $(TOPDIR)/.defconfig; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \
@@ -340,6 +343,9 @@ endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
 endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/all.config
+endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
@@ -348,10 +354,10 @@ endif
 			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
-		for symbol in ${DEFCONFIG}; do \
-			echo $$symbol >> $(TOPDIR)/all.config; \
-		done; \
 	fi
+	@for symbol in ${DEFCONFIG}; do \
+		echo $$symbol >> $(TOPDIR)/all.config; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \

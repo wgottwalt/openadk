@@ -621,7 +621,9 @@ source "package/evilwm/Config.in"
 source "package/firefox/Config.in"
 source "package/font-util/Config.in"
 source "package/rxvt-unicode/Config.in"
+source "package/twm/Config.in"
 source "package/xauth/Config.in"
+source "package/xinit/Config.in"
 source "package/xlsfonts/Config.in"
 endmenu
 

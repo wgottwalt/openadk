@@ -15,11 +15,8 @@ $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
-		--build=$(GNU_HOST_NAME) \
-		--host=$(GNU_HOST_NAME) \
 		--disable-shared \
 		--enable-static \
-		--disable-nls \
 	);
 	touch $@
 

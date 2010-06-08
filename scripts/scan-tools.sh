@@ -56,6 +56,12 @@ OpenBSD)
 	# although some packages' autoconf scripts may
 	# not properly recognise OpenBSD
 	;;
+Darwin*)
+	echo "Building OpenADK on $os needs a case-sensitive disk partition."
+	echo "For Snow Leopard and above you can use diskutil to resize your existing disk."
+	echo "For older versions you might consider to use a disk image"
+	echo "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G"
+	;;
 *)
 	# unsupported
 	echo "Building OpenADK on $os is currently unsupported."
@@ -105,9 +111,11 @@ fi
 
 if ! (tar --version | grep GNU) >/dev/null 2>&1;then
 	if ! which gtar >/dev/null 2>&1; then
-		echo You must install GNU tar to continue.
-		echo
-		out=1
+		if ! which gnutar >/dev/null 2>&1; then
+			echo You must install GNU tar to continue.
+			echo
+			out=1
+		fi
 	fi
 fi
 

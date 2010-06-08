@@ -119,6 +119,10 @@ config ADK_HOST_NETBSD
 	prompt "NetBSD"
 	boolean
 
+config ADK_HOST_DARWIN
+	prompt "Darwin"
+	boolean
+
 config ADK_HOST_CYGWIN
 	prompt "Cygwin"
 	boolean
