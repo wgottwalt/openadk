@@ -284,9 +284,9 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(TOPDIR)/.defconfig; \
 	fi
-	for symbol in ${DEFCONFIG}; do \
+	@for symbol in ${DEFCONFIG}; do \
 		echo $$symbol >> $(TOPDIR)/.defconfig; \
-	done; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \
@@ -355,9 +355,9 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
-	for symbol in ${DEFCONFIG}; do \
+	@for symbol in ${DEFCONFIG}; do \
 		echo $$symbol >> $(TOPDIR)/all.config; \
-	done; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \
