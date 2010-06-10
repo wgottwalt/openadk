@@ -11,6 +11,9 @@ config ADK_TARGET_WITH_USB
 config ADK_TARGET_WITH_PCI
 	bool
 
+config ADK_TARGET_WITH_SSB
+	bool
+
 config ADK_TARGET_WITH_MINIPCI
 	bool
 
@@ -329,14 +332,15 @@ config ADK_LINUX_MIPS_AG241
 	  Status: stable
 
 config ADK_LINUX_MIPS_BRCM
-	bool "Linksys/Asus Broadcom 47xx Routers"
+	bool "Broadcom BCM47xx based routers"
+	select ADK_TARGET_WITH_SSB
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_brcm
 	help
-	  Linksys/Asus Broadcom 47xx based router.
+	  Broadcom bcm47xx based router.
 	  Status: development
 
 config ADK_LINUX_XSCALE_ZAURUS

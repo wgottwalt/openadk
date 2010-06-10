@@ -160,7 +160,7 @@ config ADK_MOD_KERNEL_MAC80211
 	default n
 
 menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
+depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB
 
 config ADK_KERNEL_MAC80211_DEBUG_MENU
 	boolean
@@ -226,6 +226,16 @@ config ADK_KERNEL_ATH5K_DEBUG
           To enable debug, pass the debug level to the debug module
 	  parameter. For example:
 	   insmod ath5k.ko debug=0x00000400
+
+config ADK_KPACKAGE_KMOD_B43
+	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_FW_LOADER
+	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
+	default n
+	help
+	  Driver for Broadcom B43xx wireless chips.
 
 config ADK_KPACKAGE_KMOD_P54_USB
 	prompt "kmod-p54-usb................. Prism54 USB support"
