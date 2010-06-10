@@ -11,6 +11,9 @@ config ADK_TARGET_WITH_USB
 config ADK_TARGET_WITH_PCI
 	bool
 
+config ADK_TARGET_WITH_SSB
+	bool
+
 config ADK_TARGET_WITH_MINIPCI
 	bool
 
@@ -329,6 +332,7 @@ config ADK_LINUX_MIPS_AG241
 
 config ADK_LINUX_MIPS_BRCM
 	bool "Broadcom BCM47xx based routers"
+	select ADK_TARGET_WITH_SSB
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET

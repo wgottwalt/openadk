@@ -70,6 +70,10 @@ $(eval $(call KMOD_template,P54_COMMON,p54-common,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54common \
 ,68))
 
+$(eval $(call KMOD_template,B43,b43,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/b43/b43 \
+,70))
+
 $(eval $(call KMOD_template,P54_USB,p54-usb,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54usb \
 ,70))

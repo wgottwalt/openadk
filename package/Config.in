@@ -593,6 +593,7 @@ endmenu
 
 menu "Wireless"
 source "package/aircrack-ng/Config.in"
+source "package/b43-firmware/Config.in"
 source "package/chillispot/Config.in"
 source "package/hostapd/Config.in"
 source "package/iw/Config.in"
