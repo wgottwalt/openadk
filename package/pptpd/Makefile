@@ -17,7 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-DSBINDIR=\\\"/usr/sbin\\\"
+TCFLAGS+=		-fPIC -DSBINDIR='\\\"/usr/sbin\\\"'
 FAKE_FLAGS+=		INSTALL="install"
 
 post-install:
