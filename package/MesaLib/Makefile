@@ -23,11 +23,22 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq (${ADK_LINUX_X86_IBMX40},y)
+DRI_DRIVERS:=i810
+endif
+
+# Lemote's SMI712 is not directly supported by Mesa,
+# and at least some SIS driver fails to build when
+# keeping the driver auto-selection intact.
+ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+DRI_DRIVERS:=swrast
+endif
+
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium \
 			--disable-glw \
 			--with-driver=dri \
-			--with-dri-drivers=i810 \
+			--with-dri-drivers=${DRI_DRIVERS} \
 			--without-demos
 
 XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
@@ -48,8 +59,12 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib
+	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
+ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+	$(INSTALL_BIN) $(WRKINST)/usr/lib/dri/swrast_dri.so \
+		${IDIR_MESALIB}/usr/lib/dri/
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
