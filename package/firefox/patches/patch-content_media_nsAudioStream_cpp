@@ -1,0 +1,11 @@
+--- mozilla-1.9.2.orig/content/media/nsAudioStream.cpp	2010-04-02 18:02:19.000000000 +0200
++++ mozilla-1.9.2/content/media/nsAudioStream.cpp	2010-06-11 21:28:33.522214080 +0200
+@@ -246,7 +246,7 @@ float nsAudioStream::GetPosition()
+ #if defined(XP_WIN)
+   positionType = SA_POSITION_WRITE_HARDWARE;
+ #endif
+-  PRInt64 position = 0;
++  int64_t position = 0;
+   if (sa_stream_get_position(static_cast<sa_stream_t*>(mAudioHandle),
+                              positionType, &position) == SA_SUCCESS) {
+     return (position / float(mRate) / mChannels / sizeof(short));
