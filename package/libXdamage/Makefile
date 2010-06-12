@@ -19,7 +19,7 @@ $(eval $(call PKG_template,LIBXDAMAGE,libxdamage,$(PKG_VERSION)-${PKG_RELEASE},$
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libXdamage*.so* \
+	$(CP) $(WRKINST)/usr/lib/libXdamage*.so* \
 		$(IDIR_LIBXDAMAGE)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
