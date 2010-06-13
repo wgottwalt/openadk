@@ -1,0 +1,4 @@
+/etc/qingy/settings
+/etc/qingy/welcomes
+/etc/qingy/pre_GUI.sh
+/etc/qingy/post_GUI.sh

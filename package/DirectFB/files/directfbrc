@@ -1,0 +1,4 @@
+#mode=1024x600
+#depth=16
+mouse-protocol=IMPS/2
+mouse-source=/dev/psaux
