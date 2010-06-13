@@ -634,6 +634,7 @@ source "package/xauth/Config.in"
 source "package/xinit/Config.in"
 source "package/xlsfonts/Config.in"
 source "package/xterm/Config.in"
+source "package/xvinfo/Config.in"
 endmenu
 
 menu "X fonts"
