@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.15.8
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		6680970274c389fd07e2b35721de1764
+PKG_VERSION:=		0.15.10
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		3ee746cb9193acfd0e1bd7a8c54af1a6
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		glib libstdcxx
@@ -147,9 +147,8 @@ endif
 ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
 CONFIGURE_ARGS+=	--enable-shout \
 			--enable-lame-encoder \
-			--enable-vorbis-encoder \
-			--with-lame-includes=${STAGING_DIR}/usr/include \
-			--with-lame-libraries=${STAGING_DIR}/usr/lib
+			--with-lame=${STAGING_DIR}/usr \
+			--enable-vorbis-encoder
 else
 CONFIGURE_ARGS+=	--disable-shout \
 			--disable-lame-encoder \

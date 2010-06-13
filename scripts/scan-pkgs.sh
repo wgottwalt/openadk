@@ -123,14 +123,14 @@ if [[ -n $NEED_CURLDEV ]];then
 	fi
 fi
 
-if [[ -n $NEED_SSLDEV ]]; then
-	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
-		if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
-			echo >&2 You need openssl headers to build $NEED_SQUID
-			out=1
-		fi
-	fi
-fi
+#if [[ -n $NEED_SSLDEV ]]; then
+#	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
+#		if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
+#			echo >&2 You need openssl headers to build $NEED_SSLDEV
+#			out=1
+#		fi
+#	fi
+#fi
 
 if [[ -n $NEED_MKFONTDIR ]]; then
 	if ! which mkfontdir >/dev/null 2>&1; then

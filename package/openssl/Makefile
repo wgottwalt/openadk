@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		0.9.8l
+PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		05a0ece1372392a2cf310ebb96333025
+PKG_MD5SUM:=		89eaa86e25b2845f920ec00ae4c864ed
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -37,17 +37,16 @@ FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
 OPENSSL_OPTIONS = shared no-ec no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
 
-post-extract:
-	@find ${WRKBUILD} -name *.rej -exec rm {} \;
+#post-extract:
+#	@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 do-configure:
 	(cd $(WRKBUILD); \
 		PATH=$(TARGET_PATH) \
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
-		./Configure linux-embedded \
+		bash -x ./Configure linux-embedded \
 		  --prefix=/usr \
 		  --openssldir=/etc/ssl \
-		  --with-cryptodev \
 		  -I$(STAGING_DIR)/usr/include \
 		  -L$(STAGING_DIR)/usr/lib -ldl \
 		  -DOPENSSL_SMALL_FOOTPRINT \

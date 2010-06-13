@@ -1,0 +1,19 @@
+--- postgresql-8.4.4.orig/src/include/Makefile	2009-07-20 22:48:58.000000000 +0200
++++ postgresql-8.4.4/src/include/Makefile	2010-05-29 18:30:38.481613604 +0200
+@@ -40,7 +40,6 @@ install: all installdirs
+ # These headers are needed for server-side development
+ 	$(INSTALL_DATA) pg_config.h    '$(DESTDIR)$(includedir_server)'
+ 	$(INSTALL_DATA) pg_config_os.h '$(DESTDIR)$(includedir_server)'
+-	$(INSTALL_DATA) utils/fmgroids.h '$(DESTDIR)$(includedir_server)/utils'
+ # We don't use INSTALL_DATA for performance reasons --- there are a lot of files
+ 	cp $(srcdir)/*.h '$(DESTDIR)$(includedir_server)'/ || exit; \
+ 	chmod $(INSTALL_DATA_MODE) '$(DESTDIR)$(includedir_server)'/*.h  || exit; \
+@@ -62,7 +61,7 @@ uninstall:
+ 
+ 
+ clean:
+-	rm -f utils/fmgroids.h parser/gram.h utils/probes.h
++	rm -f parser/gram.h utils/probes.h
+ 
+ distclean maintainer-clean: clean
+ 	rm -f pg_config.h dynloader.h pg_config_os.h stamp-h

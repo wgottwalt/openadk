@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=              apr-util
-PKG_VERSION:=           0.9.15
+PKG_VERSION:=           1.3.9
 PKG_RELEASE:=           1
-PKG_MD5SUM:=            dc772ae295f49ddb8ee8e69a9716c53b
+PKG_MD5SUM:=            cc2ec0ba4f01d88375f1170f762518fa
 PKG_DESCR:=		Apache Portable Runtime utility library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat apr
@@ -21,11 +21,11 @@ $(eval $(call PKG_template,APR_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 CONFIGURE_ARGS+=	--without-berkeley-db
 CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr
 CONFIGURE_ARGS+=	--with-expat=${STAGING_DIR}/usr
-XAKE_FLAGS+=		apr_builddir=${STAGING_DIR}/usr/share/build \
-			apr_builders=${STAGING_DIR}/usr/share/build
+XAKE_FLAGS+=		apr_builddir=${STAGING_DIR}/usr/share/build-1 \
+			apr_builders=${STAGING_DIR}/usr/share/build-1
 
 post-install:
 	${INSTALL_DIR} ${IDIR_APR_UTIL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libaprutil-0.so* ${IDIR_APR_UTIL}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libaprutil-1.so* ${IDIR_APR_UTIL}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

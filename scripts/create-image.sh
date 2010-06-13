@@ -79,7 +79,7 @@ printf "Creating filesystem $filesystem\n"
 
 printf "Create partition and filesystem\n"
 $parted -s $1 mklabel msdos
-$parted -s $1 mkpart primary ext2 0 100%
+$parted -s $1 mkpart primary ext2 0 98%
 $parted -s $1 set 1 boot on
 
 dd if=$1 of=mbr bs=16384 count=1 2>/dev/null

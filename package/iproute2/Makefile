@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		2.6.29-1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c1bc258a6c345905e79935ac7a3cc582
+PKG_VERSION:=		2.6.34
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5c5742bdac05a1688f266512e685b83c
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		net
 ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
 PKG_BUILDDEP+=		linux-atm
 endif
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
-PKG_SITES:=		http://developer.osdl.org/dev/iproute2/download/
+PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 
 PKG_DESCR_TC:=		iproute2 traffic control utility
 PKG_DEPENDS_TC:=	kmod-sched

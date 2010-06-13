@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.0.STABLE20
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		b69577cfc5cfb6808ec426e3a933220d
+PKG_VERSION:=		3.1.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c70ef1198e6a6c1ae80bc57cd3592e36
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl libpthread
 PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.squid-cache.org
-PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.0/
+PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.1/
 PKG_MULTI:=		1
 #PKG_CXX:=		SQUID
 
@@ -40,9 +40,6 @@ endif
 ifneq (${ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_FAKEAUTH},)
 NTLM_AUTH_HELPERS+=	fakeauth
 endif
-ifneq (${ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_SMB_AUTH},)
-NTLM_AUTH_HELPERS+=	SMB
-endif
 
 include ${TOPDIR}/mk/package.mk
 
@@ -64,7 +61,6 @@ $(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,${PKG_NAME}-mod-ntlm-auth-smb-auth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,getpwname_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,ldap))
@@ -75,10 +71,9 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,ip_user_check))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_group))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_SMB_AUTH,ntlm_auth))
 
 #ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
-#CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+#CONFIGURE_ENV+=	CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
 #			-I${STAGING_DIR}/usr/include/uClibc++" \
 #			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
 #endif
@@ -103,7 +98,8 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_func___va_copy=no \
 			ac_cv_epoll_works=yes \
 			ac_cv_lib_nsl_main=no \
-			ac_cv_func_strnstr=no
+			ac_cv_func_strnstr=no \
+			squid_cv_pf_inet6=yes
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \
 			--sysconfdir=/etc/squid \
@@ -111,6 +107,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-x-accelerator-vary \
 			--with-pthreads \
 			--with-dl \
+			--disable-debug-cbdata \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
 			--enable-ssl \
@@ -118,11 +115,11 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-default-err-language=English \
 			--enable-linux-netfilter \
 			--enable-icmp \
-			--enable-external-acl-helpers="" \
 			--enable-underscores \
 			--enable-cache-digests \
 			--enable-referer-log \
 			--enable-delay-pools \
+			--without-libcap \
 			--disable-snmp \
 			--disable-esi \
 			--disable-htcp \
@@ -130,6 +127,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--disable-wccpv2 \
 			--enable-useragent-log \
 			--with-openssl=${STAGING_DIR}/usr \
+			--enable-negotiate-auth-helpers=no \
 			--enable-auth="${AUTH_MODULES}" \
 			--enable-basic-auth-helpers="${BASIC_AUTH_HELPERS}" \
 			--enable-ntlm-auth-helpers="${NTLM_AUTH_HELPERS}" \

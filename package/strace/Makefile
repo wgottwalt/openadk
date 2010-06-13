@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.5.19
+PKG_VERSION:=		4.5.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2415e435d61e40315a298c80aced0cda
+PKG_MD5SUM:=		64dfe10d9db0c1e34030891695ffca4b
 PKG_DESCR:=		System call trace program
 PKG_SECTION:=		misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
