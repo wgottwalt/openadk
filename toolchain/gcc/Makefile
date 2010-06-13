@@ -22,6 +22,10 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--disable-sjlj-exceptions \
 			--disable-libssp \
 			--disable-libstdcxx-pch \
+			--disable-ppl-version-check \
+			--disable-cloog-version-check \
+			--without-ppl \
+			--without-cloog \
 			--disable-nls
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
@@ -51,7 +55,7 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	(cd $(GCC_BUILD_DIR_MINIMAL); rm -f config.cache; \
-		PATH=$(TARGET_PATH) \
+		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
@@ -62,12 +66,12 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	touch $@
 
 $(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
 	touch $@
 
 $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) install-gcc
 	touch $@
 
@@ -78,7 +82,7 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 	ln -sf ${STAGING_DIR}/lib $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/lib
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	(cd $(GCC_BUILD_DIR_INITIAL); rm -f config.cache; \
-		PATH=$(TARGET_PATH) \
+		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
@@ -91,19 +95,19 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 	touch $@
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
 	(cd $(GCC_BUILD_DIR_FINAL); rm -f config.cache; \
-		PATH=$(TARGET_PATH) \
+		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c,c++ \
@@ -114,12 +118,12 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	PATH=$(TARGET_PATH) \
+	PATH='$(TARGET_PATH)' \
 	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# workaround if you cross-compile binutils
 	@-rm $(STAGING_DIR)/lib/libiberty.a

@@ -43,9 +43,9 @@ CONFIGURE_ARGS+=	\
 			--enable-xv \
 			--enable-xaa \
 			--enable-vgahw \
+			--enable-dpms \
 			--disable-aiglx \
 			--disable-config-hal \
-			--disable-dpms \
 			--disable-glx \
 			--disable-xace \
 			--disable-xephyr \
@@ -68,6 +68,10 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 CONFIGURE_ARGS+=	--enable-dri --enable-dri2
 else
 CONFIGURE_ARGS+=	--disable-dri --disable-dri2
+endif
+
+ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+CONFIGURE_ARGS+=	--with-int10=stub
 endif
 
 post-install:

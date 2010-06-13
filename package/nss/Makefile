@@ -15,6 +15,7 @@ PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
 PKG_SITES:=		https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_12_6_RTM/src/
 
 PKG_TARGET_DEPENDS:=    !foxboard
+PKG_HOST_DEPENDS:=	!cygwin
 
 WRKSRC=			${WRKDIST}/mozilla/security/nss
 

@@ -4,18 +4,26 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wpa_supplicant
-PKG_VERSION:=		0.7.1
+PKG_VERSION:=		0.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		02c475f949e5c131856915bbb87fa55d
+PKG_MD5SUM:=		0e2cb7e4c35667351d8b7ec28c783e6a
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		net
-ifeq (${ADK_COMPILE_WPA_SUPPLICANT_WITH_OPENSSL},y)
-PKG_DEPENDS:=		libopenssl
+ifeq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_OPENSSL},y)
 PKG_BUILDDEP+=		openssl
+endif
+ifeq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_GNUTLS},y)
+PKG_BUILDDEP+=		gnutls
 endif
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
+
+PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
+PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCS_WITH_GNUTLS:=	libgnutls
 
 include ${TOPDIR}/mk/package.mk
 
@@ -31,6 +39,9 @@ MAKE_FLAGS+=		CPPFLAGS='${TCPPFLAGS}' \
 
 do-configure:
 	${CP} files/config ${WRKBUILD}/.config
+ifneq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_GNUTLS},)
+	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
+endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_WPA_SUPPLICANT}/usr/sbin

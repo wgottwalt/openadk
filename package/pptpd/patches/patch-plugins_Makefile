@@ -1,0 +1,20 @@
+--- pptpd-1.3.4.orig/plugins/Makefile	2006-08-03 04:02:01.000000000 +0200
++++ pptpd-1.3.4/plugins/Makefile	2010-06-03 14:39:12.120974815 +0200
+@@ -1,6 +1,6 @@
+-CC	= gcc
++CC	?= gcc
+ COPTS	= -O2 -g
+-CFLAGS	= $(COPTS) -I.. -I../../include -fPIC
++CFLAGS	?= $(COPTS) -I.. -I../../include -fPIC
+ LDFLAGS	= -shared
+ LDADD   = -lutil
+ INSTALL	= install -o root
+@@ -18,7 +18,7 @@ all:	$(PLUGINS)
+ %.so: %.c
+ 	$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $^ $(LDADD)
+ 
+-LIBDIR	?= $(DESTDIR)$(prefix)/lib/pptpd
++LIBDIR	= $(DESTDIR)$(prefix)/lib/pptpd
+ 
+ install: $(PLUGINS)
+ 	$(INSTALL) -d $(LIBDIR)

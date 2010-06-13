@@ -20,7 +20,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.6.3/
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
-PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40
+PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40 lemote
 
 include $(TOPDIR)/mk/package.mk
 
@@ -28,7 +28,8 @@ $(eval $(call PKG_template,FIREFOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${P
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}" \
 			HOST_CXX="${HOSTCXX}" HOST_CXXFLAGS="${HOSTCXXFLAGS}" \
-			HOST_LIBIDL_CONFIG="/usr/bin/libIDL-config-2"
+			HOST_LIBIDL_CONFIG="/usr/bin/libIDL-config-2" \
+			ac_cv_thread_keyword=no
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-zlib \
 			--with-system-jpeg \
@@ -41,6 +42,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-gnomevfs \
 			--disable-optimize \
 			--disable-necko-wifi \
+			--disable-svg \
+			--disable-mathml \
 			--disable-crashreporter
 
 post-install:

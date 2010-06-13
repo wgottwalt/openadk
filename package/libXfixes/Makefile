@@ -19,7 +19,7 @@ $(eval $(call PKG_template,LIBXFIXES,libxfixes,$(PKG_VERSION)-${PKG_RELEASE},${P
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBXFIXES)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libXfixes*.so* \
+	$(CP) $(WRKINST)/usr/lib/libXfixes*.so* \
 		$(IDIR_LIBXFIXES)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

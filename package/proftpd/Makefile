@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		proftpd
-PKG_VERSION:=		1.3.2b
+PKG_VERSION:=		1.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4918908fcae9e591ba84c66edff73410
+PKG_MD5SUM:=		97ad29f31f4fe633a9f8d021bab2df20
 PKG_DESCR:=		An advanced and very configurable FTP server
 PKG_SECTION:=		utils
 PKG_NOPARALLEL:=	1

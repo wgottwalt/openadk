@@ -19,6 +19,7 @@ PKG_DESCR_SWAP:=	Swap space management utilities
 PKG_DEPENDS_SWAP:=	libblkid
 PKG_DESCR_LOOP:=	Loop devices setup and control utility
 PKG_DEPENDS_LOOP:=	kmod-blk-dev-loop
+PKG_DESCR_MCOOKIE:=	Generate magic cookies for xauth
 
 include ${TOPDIR}/mk/package.mk
 
@@ -26,6 +27,7 @@ $(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SFDISK},${PKG_SECTION}))
 $(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SWAP},${PKG_DESCR_SWAP},${PKG_SECTION}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LOOP},${PKG_DESCR_LOOP},${PKG_SECTION}))
+$(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_MCOOKIE},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
@@ -46,5 +48,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_SWAP_UTILS}/usr/sbin
 	${CP} ${WRKINST}/sbin/mkswap ${IDIR_SWAP_UTILS}/usr/sbin/
 	${CP} ${WRKINST}/sbin/swap{on,off} ${IDIR_SWAP_UTILS}/usr/sbin/
+	${INSTALL_DIR} ${IDIR_MCOOKIE}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/mcookie ${IDIR_MCOOKIE}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

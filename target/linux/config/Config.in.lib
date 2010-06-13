@@ -6,7 +6,7 @@ config ADK_KERNEL_CRC16
 
 config ADK_KERNEL_CRC32
 	bool
-	default n
+	default y
 
 config ADK_KPACKAGE_KMOD_CRC_ITU_T
 	prompt "kmod-crc-itu-t...................... CRC ITU-T V.41 functions"
@@ -22,13 +22,6 @@ config ADK_KPACKAGE_KMOD_CRC16
 	prompt "kmod-crc16.......................... provide CRC16 library functions"
 	tristate
         depends on ! ADK_KERNEL_CRC16
-	default n
-	help
-
-config ADK_KPACKAGE_KMOD_CRC32
-	prompt "kmod-crc32.......................... provide CRC32 library functions"
-	tristate
-        depends on ! ADK_KERNEL_CRC32
 	default n
 	help
 

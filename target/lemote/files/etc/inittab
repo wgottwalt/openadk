@@ -1,3 +1,10 @@
 ::sysinit:/etc/init.d/rcS
 ::shutdown:/etc/init.d/rcK
 tty1::respawn:/sbin/getty -i -L tty1 115200 vt100
+tty2::respawn:/sbin/getty -i -L tty2 115200 vt100
+tty3::respawn:/sbin/getty -i -L tty3 115200 vt100
+tty4::respawn:/sbin/getty -i -L tty4 115200 vt100
+tty5::respawn:/sbin/getty -i -L tty5 115200 vt100
+tty6::respawn:/sbin/getty -i -L tty6 115200 vt100
+tty7::respawn:/sbin/getty -i -L tty7 115200 vt100
+tty11::respawn:/sbin/logread -f
