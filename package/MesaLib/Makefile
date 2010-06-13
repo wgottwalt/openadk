@@ -61,7 +61,7 @@ pre-configure:
 	);
 	${MAKE} -C ${WRKBUILD}/src/glsl
 	${MAKE} -C ${WRKBUILD}/src/glsl/apps
-	cp ${WRKBUILD}/src/glsl/apps/compile \
+	${CP} ${WRKBUILD}/src/glsl/apps/compile \
 		${STAGING_TOOLS}/bin
 	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
@@ -70,7 +70,7 @@ post-install:
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
 ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/dri/swrast_dri.so \
+	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
 	${INSTALL_DIR} ${IDIR_GLXINFO}/usr/bin
