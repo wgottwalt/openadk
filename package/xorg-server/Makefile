@@ -46,7 +46,6 @@ CONFIGURE_ARGS+=	\
 			--enable-dpms \
 			--disable-aiglx \
 			--disable-config-hal \
-			--disable-glx \
 			--disable-xace \
 			--disable-xephyr \
 			--disable-xf86bigfont \
@@ -65,9 +64,9 @@ CONFIGURE_ARGS+=	\
 			--with-vendor-web="http://openadk.org"
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
-CONFIGURE_ARGS+=	--enable-dri --enable-dri2
+CONFIGURE_ARGS+=	--enable-dri --enable-dri2 --enable-glx
 else
-CONFIGURE_ARGS+=	--disable-dri --disable-dri2
+CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-glx
 endif
 
 ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
