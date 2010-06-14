@@ -84,6 +84,7 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/
 	${CP} ${WRKINST}/usr/bin/* $(IDIR_XORG_SERVER)/usr/bin
+	chmod u+s $(IDIR_XORG_SERVER)/usr/bin/Xorg
 	${CP} ${WRKINST}/usr/lib/xorg/modules/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*.so \
