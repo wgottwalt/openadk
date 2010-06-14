@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
-PKG_TARGET_DEPENDS:=  	ibmx40
+PKG_TARGET_DEPENDS:=  	ibmx40 lemote
 
 include $(TOPDIR)/mk/package.mk
 
@@ -27,6 +27,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium \
 			--disable-glw \
 			--with-driver=dri \
+			--with-dri-drivers=i810 \
 			--without-demos
 
 XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
@@ -48,7 +49,7 @@ pre-configure:
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libGL*.so* \
+	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
