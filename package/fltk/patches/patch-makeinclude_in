@@ -1,0 +1,11 @@
+--- fltk-2.0.x-r7513.orig/makeinclude.in	2006-04-11 00:06:06.000000000 +0200
++++ fltk-2.0.x-r7513/makeinclude.in	2010-06-13 17:18:11.503473158 +0200
+@@ -45,7 +45,7 @@ NROFF		= @NROFF@
+ RM		= rm -f
+ RMDIR		= rm -rf
+ SHELL		= /bin/sh
+-STRIP		= strip
++STRIP		= echo
+ 
+ # compiler names:
+ CC		= @CC@
