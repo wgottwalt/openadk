@@ -15,6 +15,11 @@ PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
+PKG_DESCR_GLXINFO:=	Display various GLX information
+PKG_SECT_GLXINFO:=	x11
+PKG_DESCR_GLXGEARS:=	Nice little OpenGL demo application
+PKG_SECT_GLXGEARS:=	x11
+
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
 PKG_TARGET_DEPENDS:=  	ibmx40 lemote
@@ -22,6 +27,8 @@ PKG_TARGET_DEPENDS:=  	ibmx40 lemote
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_GLXINFO},${PKG_SECT_GLXINFO}))
+$(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_GLXGEARS},${PKG_SECT_GLXGEARS}))
 
 ifeq (${ADK_LINUX_X86_IBMX40},y)
 DRI_DRIVERS:=i810
@@ -39,7 +46,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-glw \
 			--with-driver=dri \
 			--with-dri-drivers=${DRI_DRIVERS} \
-			--without-demos
+			--with-demos=xdemos
 
 XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
 
@@ -50,7 +57,7 @@ pre-configure:
 		--disable-glw \
 		--disable-gallium \
 		--with-driver=xlib \
-		--without-demos \
+		--with-demos=xdemos \
 	);
 	${MAKE} -C ${WRKBUILD}/src/glsl
 	${MAKE} -C ${WRKBUILD}/src/glsl/apps
@@ -66,5 +73,11 @@ ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/dri/swrast_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
+	${INSTALL_DIR} ${IDIR_GLXINFO}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/progs/xdemos/glxinfo \
+		${IDIR_GLXINFO}/usr/bin/
+	${INSTALL_DIR} ${IDIR_GLXGEARS}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/progs/xdemos/glxgears \
+		${IDIR_GLXGEARS}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
