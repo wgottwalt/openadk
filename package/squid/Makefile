@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
 PKG_VERSION:=		3.1.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c70ef1198e6a6c1ae80bc57cd3592e36
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		net
@@ -146,8 +146,9 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf \
 		${IDIR_SQUID}/etc/squid/
 	${INSTALL_DATA} ./files/squid.conf ${IDIR_SQUID}/etc/squid/
-	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid
-	${CP} ${WRKINST}/usr/share/squid/* ${IDIR_SQUID}/usr/share/squid/
+	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid/errors
+	${CP} ${WRKINST}/usr/share/squid/errors/en ${IDIR_SQUID}/usr/share/squid/errors
+	${CP} ${WRKINST}/usr/share/squid/icons ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd \
