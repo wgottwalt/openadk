@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpg123
-PKG_VERSION:=		1.10.0
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		0005c9a89c381484e2d2ff450b3dfe5e
+PKG_VERSION:=		1.12.1
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		e7d810a75d22954169f1530a436aca4c
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		sound
 PKG_DEPENDS:=		libpthread alsa-lib libltdl
@@ -24,6 +24,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_MPG123)/usr/bin $(IDIR_MPG123)/usr/lib
 	$(INSTALL_DIR) $(IDIR_MPG123)/usr/lib/mpg123
 	$(CP) $(WRKINST)/usr/lib/libmpg123.so* $(IDIR_MPG123)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/mpg123/*.la $(IDIR_MPG123)/usr/lib/mpg123
 	$(CP) $(WRKINST)/usr/lib/mpg123/*.so $(IDIR_MPG123)/usr/lib/mpg123
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/mpg123 \
 		$(IDIR_MPG123)/usr/bin
