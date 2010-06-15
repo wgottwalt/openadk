@@ -291,6 +291,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_TARGET_WITH_RTC
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	help
 	  Lemote Subnotebook.
 	  http://www.lemote.com/english/index.html
