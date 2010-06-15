@@ -32,6 +32,7 @@ config BUSYBOX_FEATURE_SEAMLESS_Z
 config BUSYBOX_AR
 	bool "ar"
 	default n
+	depends on !ADK_PACKAGE_BINUTILS
 	help
 	  ar is an archival utility program used to create, modify, and
 	  extract contents from archives. An archive is a single file holding
