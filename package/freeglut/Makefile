@@ -18,5 +18,6 @@ $(eval $(call PKG_template,FREEGLUT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_FREEGLUT)/usr/lib
+	$(CP) ${WRKINST}/usr/lib/libglut.so* $(IDIR_FREEGLUT)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
