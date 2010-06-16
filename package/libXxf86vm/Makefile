@@ -14,7 +14,7 @@ PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXXF86VM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXXF86VM,libxxf86vm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
