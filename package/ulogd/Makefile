@@ -11,7 +11,7 @@ PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		net
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
-PKG_DEPENDS:=		iptables libnetfilter_conntrack libnetfilter_log
+PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log
 PKG_BUILDDEP+=		iptables libnetfilter_conntrack libnetfilter_log
 ifneq ($(ADK_PACKAGE_ULOGD_MOD_MYSQL),)
 PKG_BUILDDEP+=		mysql
