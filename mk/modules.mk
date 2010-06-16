@@ -1044,6 +1044,10 @@ $(eval $(call KMOD_template,VIDEODEV,videodev,\
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 ,65))
 
+$(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
+	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \
+,70))
+
 $(eval $(call KMOD_template,PWC,pwc,\
 	$(MODULES_DIR)/kernel/drivers/usb/pwc \
 ,70))

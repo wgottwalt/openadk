@@ -607,6 +607,7 @@ source "package/olsrd/Config.in"
 source "package/p54-firmware/Config.in"
 source "package/rt61-firmware/Config.in"
 source "package/wifidog/Config.in"
+source "package/wireless-tools/Config.in"
 source "package/wpa_supplicant/Config.in"
 endmenu
 

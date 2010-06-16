@@ -124,6 +124,13 @@ config ADK_KPACKAGE_KMOD_VIDEO_V4L1
 	  Enables a compatibility API used by most V4L2 devices to allow
 	  its usage with legacy applications that supports only V4L1 api.
 
+config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
+	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_USB
+	default n
+	help
+
 config ADK_KPACKAGE_KMOD_USB_PWC
 	prompt "kmod-usb-pwc.................... Kernel driver for USB Philips Cameras"
 	tristate
