@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-29987
+PKG_VERSION:=		1.0-31425
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		416fa6a247987305d74572d03dc6dde7
+PKG_MD5SUM:=		e65b88e7a5c1c2f98c98e565357b9663
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -26,6 +26,10 @@ $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 CONFIG_STYLE:=		manual
 
 FAKE_FLAGS+=		INSTALLSTRIP=''
+
+ifeq (${ADK_LINUX_MIPS64_LOONGSON},y)
+XAKE_FLAGS+=		-DHAVE_LOONGSON -DARCH_MIPS64
+endif
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
 CONFIGURE_CPU_OPTS:=	\
@@ -48,7 +52,7 @@ CONFIGURE_CPU_OPTS:=	\
 endif
 
 ifeq ($(ADK_DEBUG),y)
-	CONFIGURE_DEBUG=--enable-debug
+CONFIGURE_DEBUG=	--enable-debug
 endif
 
 pre-configure:
@@ -58,12 +62,13 @@ pre-configure:
 		--prefix=/usr \
 		--confdir=/etc \
 		--enable-cross-compile \
-		--target=$(REAL_GNU_TARGET_NAME) \
+		--target=${ARCH}-linux \
 		--cc=$(TARGET_CC) \
 		--host-cc=$(HOSTCC) \
 		--disable-mencoder \
 		--enable-fbdev \
 		--enable-alsa \
+		--enable-v4l2 \
 		--enable-png \
 		--enable-jpeg \
 		--enable-mad \
@@ -79,7 +84,6 @@ pre-configure:
 		--disable-live \
 		--disable-pvr \
 		--disable-ftp \
-		--disable-v4l2 \
 		--disable-ivtv \
 		--disable-dvdread-internal \
 		--disable-libdvdcss-internal \
