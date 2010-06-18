@@ -1040,7 +1040,9 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,sound-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
-$(eval $(call KMOD_template,VIDEODEV,videodev,\
+$(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
+	$(MODULES_DIR)/kernel/drivers/media/video/v4l1-compat \
+	$(MODULES_DIR)/kernel/drivers/media/video/v4l2-compat-ioctl32 \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 ,65))
 

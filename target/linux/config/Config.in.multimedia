@@ -1,6 +1,10 @@
 menu "Multimedia devices support"
 depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
 
+config ADK_KERNEL_MEDIA_SUPPORT
+	boolean
+	default n
+
 config ADK_KERNEL_SND_AC97_CODEC
 	boolean
 	default n
@@ -97,8 +101,9 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	 ALSA AMD CS5535 driver
 
 config ADK_KPACKAGE_KMOD_VIDEO_DEV
-	prompt "kmod-videodev................... Video (For Linux) kernel support"
+	prompt "kmod-video-dev.................. Video (For Linux) kernel support"
 	tristate
+	select ADK_KERNEL_MEDIA_SUPPORT
 	default n
 	help
 	  Support for audio/video capture and overlay devices and FM radio
@@ -115,19 +120,11 @@ config ADK_KPACKAGE_KMOD_VIDEO_DEV
 	  Documentation for V4L2 is also available on the web at
 	  <http://bytesex.org/v4l/>.
 
-config ADK_KPACKAGE_KMOD_VIDEO_V4L1
-	prompt "................................ Enable Video For Linux API 1 (DEPRECATED)"
-	boolean
-	default n
-	depends on ADK_KPACKAGE_KMOD_VIDEO_DEV
-	help
-	  Enables a compatibility API used by most V4L2 devices to allow
-	  its usage with legacy applications that supports only V4L1 api.
-
 config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB
+	depends on ADK_KPACKAGE_KMOD_USB || ADK_LINUX_MIPS64_LEMOTE
+	select ADK_KPACKAGE_KMOD_VIDEO_DEV
 	default n
 	help
 
