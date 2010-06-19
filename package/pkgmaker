@@ -216,6 +216,10 @@ for dn in */Makefile; do
 			(*)
 				# produce dependency on regular package
 				# where the symbol is cached (see above)
+				if [[ ! -f ../pkglist.d/"$dep" ]]; then
+					print -u2 "Warning: $PKG_NAME: unreachable dependency '$dep'"
+					continue
+				fi
 				print -u$h '\tselect' \
 				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
 				;;
