@@ -14,8 +14,15 @@ PKG_DEPENDS+=		libogg libpng libpthread libvorbis
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
 PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext
+ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
+PKG_DEPENDS+=		DirectFB
+PKG_BUILDDEP+=		DirectFB
+endif
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
+
+PKG_FLAVOURS:=		WITH_DIRECTFB
+PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
 
@@ -29,6 +36,14 @@ FAKE_FLAGS+=		INSTALLSTRIP=''
 
 ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
 EXTRA_CFLAGS:=		-DARCH_MIPS64
+endif
+
+# Somehow this include path is missing here, although other
+# applications build fine against DirectFB. There is also a
+# related patch to allow configure to find out the DirectFB
+# version number.
+ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
+TCFLAGS+=		-I${STAGING_DIR}/usr/include/directfb
 endif
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
@@ -53,6 +68,12 @@ endif
 
 ifeq ($(ADK_DEBUG),y)
 CONFIGURE_DEBUG=	--enable-debug
+endif
+
+ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
+CONFIGURE_DIRECTFB=--enable-directfb
+else
+CONFIGURE_DIRECTFB=--disable-directfb
 endif
 
 pre-configure:
@@ -108,8 +129,9 @@ pre-configure:
 		--extra-cflags="${EXTRA_CFLAGS}" \
 		${CONFIGURE_CPU_OPTS} \
 		${CONFIGURE_DEBUG} \
+		${CONFIGURE_DIRECTFB} \
 	);
-	
+
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
 	${CP} ${WRKINST}/usr/bin/mplayer ${IDIR_MPLAYER}/usr/bin

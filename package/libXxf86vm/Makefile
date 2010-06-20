@@ -20,7 +20,7 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBXXF86VM)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libXxf86vm*.so* \
+	${CP} $(WRKINST)/usr/lib/libXxf86vm*.so* \
 		$(IDIR_LIBXXF86VM)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

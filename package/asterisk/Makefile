@@ -174,6 +174,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -f gtalk.conf ; \
 		rm -f skinny.conf ; \
 		rm -f dundi.conf ; \
+		echo -e '/^astdatadir =/s/var/usr/\nwq\n' | ed asterisk.conf ; \
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
@@ -191,8 +192,11 @@ asterisk-sounds-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds
 	$(CP) $(WRKBUILD)/sounds/* \
 		$(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/*.mp3
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/vm-*
+	(cd $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds; \
+		rm -f *.mp3 vm-*; \
+		rm -f CHANGES* CREDITS* LICENSE* *.txt ; \
+		rm -f *.tar.gz Makefile ; \
+	)
 
 asterisk-voicemail-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk

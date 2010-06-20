@@ -1,0 +1,42 @@
+	Fix for lemote.
+--- libdrm-2.4.20.orig/xf86drm.h	2010-03-06 00:21:13.000000000 +0100
++++ libdrm-2.4.20/xf86drm.h	2010-06-12 20:43:01.324916826 +0200
+@@ -374,6 +374,29 @@ typedef struct _drmSetVersion {
+ 		: "memory");			\
+ 	} while (0)
+ 
++#elif defined(__mips__)
++
++#define DRM_CAS(lock, old, new, ret)            \
++	do {                                    \
++		__asm__ __volatile__(           \
++		"	.set mips3;.set noreorder;\n" \
++		"	sync; \n"               \
++		"	ll   %1, %0;\n"         \
++		"	bne  %1, %2, 1f;\n"     \
++		"	 li   %1, 1; \n"        \
++		"	move %1, %3; \n"        \
++		"	sc    %1, %0;\n"        \
++		"	xori   %1, %1, 1\n"     \
++		"1:	\n"                     \
++		"	.set mips0; .set reorder;\n" \
++		: "=m" (__drm_dummy_lock(lock)),\
++		  "=&r" (ret)                   \
++		: "r" (old),                    \
++		  "r" (new)                     \
++		: "memory","$8"                 \
++		);                              \
++	} while(0)
++
+ #elif defined(__sparc__)
+ 
+ #define DRM_CAS(lock,old,new,__ret)				\
+@@ -457,7 +480,7 @@ do {	register unsigned int __old __asm("
+ 
+ #if defined(__alpha__)
+ #define DRM_CAS_RESULT(_result)		long _result
+-#elif defined(__powerpc__)
++#elif defined(__powerpc__) || defined(__mips__)
+ #define DRM_CAS_RESULT(_result)		int _result
+ #else
+ #define DRM_CAS_RESULT(_result)		char _result

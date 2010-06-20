@@ -11,13 +11,13 @@ PKG_DESCR:=		X Window System client interface to the XINPUT extension to the X p
 PKG_SECTION:=		x11
 PKG_BUILDDEP+=		xproto xextproto libXext
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/lib/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXI,libxi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXI,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+= 	--disable-malloc0returnsnull
+CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBXI)/usr/lib
