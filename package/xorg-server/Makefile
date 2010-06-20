@@ -19,7 +19,7 @@ PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
 			libpciaccess openssl xf86dgaproto
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 PKG_BUILDDEP+=		xf86driproto glproto dri2proto MesaLib
-PKG_DEPENDS+=		xf86driproto glproto dri2proto mesalib
+PKG_DEPENDS+=		mesalib
 endif
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
