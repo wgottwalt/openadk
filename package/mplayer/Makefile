@@ -27,8 +27,8 @@ CONFIG_STYLE:=		manual
 
 FAKE_FLAGS+=		INSTALLSTRIP=''
 
-ifeq (${ADK_LINUX_MIPS64_LOONGSON},y)
-XAKE_FLAGS+=		-DHAVE_LOONGSON -DARCH_MIPS64
+ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+EXTRA_CFLAGS:=		-DARCH_MIPS64
 endif
 
 ifeq (${ADK_LINUX_X86_ALIX1C},y)
@@ -68,6 +68,7 @@ pre-configure:
 		--disable-mencoder \
 		--enable-fbdev \
 		--enable-alsa \
+		--enable-tv \
 		--enable-v4l2 \
 		--enable-png \
 		--enable-jpeg \
@@ -103,6 +104,8 @@ pre-configure:
 		--disable-liblzo \
 		--disable-xinerama \
 		--disable-vidix \
+		--disable-gl \
+		--extra-cflags="${EXTRA_CFLAGS}" \
 		${CONFIGURE_CPU_OPTS} \
 		${CONFIGURE_DEBUG} \
 	);
