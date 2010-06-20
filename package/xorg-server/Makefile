@@ -10,7 +10,7 @@ PKG_MD5SUM:=		ba0360b4ec1f6e541b264e45906bf5f2
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile \
-			libfontenc xkeyboard-config xkbcomp libxau libxaw \
+			libfontenc xkeyboard-config xkbcomp libxau libXaw \
 			libxmu libxpm libxrender libxt libxxf86dga libxext \
 			libxdmcp libxv libsm libice libx11
 PKG_BUILDDEP+=		libX11 randrproto renderproto fixesproto damageproto \
