@@ -12,7 +12,6 @@ PKG_SECTION:=		x11
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXpm
 ifeq (${ADK_PACKAGE_FLUXBOX_WITH_IMLIB2},y)
-PKG_DEPENDS+=		imlib2
 PKG_BUILDDEP+=		imlib2
 endif
 PKG_URL:=		http://www.fluxbox.org
@@ -20,6 +19,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fluxbox/}
 
 PKG_FLAVOURS:=		WITH_IMLIB2
 PKGFD_WITH_IMLIB2:=	enable imlib2 support
+PKGFS_WITH_IMLIB2:=	imlib2
 
 include $(TOPDIR)/mk/package.mk
 
@@ -28,8 +28,7 @@ $(eval $(call PKG_template,FLUXBOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${P
 ifeq (${ADK_PACKAGE_FLUXBOX_WITH_IMLIB2},y)
 CONFIGURE_ARGS+=	--enable-imlib2
 else
-#CONFIGURE_ARGS+=	--disable-imlib2
-CONFIGURE_ARGS+=	--enable-imlib2
+CONFIGURE_ARGS+=	--disable-imlib2
 endif
 
 post-install:

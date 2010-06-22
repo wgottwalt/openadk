@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		34f40172a71e9a6c2c77ddce11d2a63a
 PKG_DESCR:=		a DirectFB getty replacement
 PKG_SECTION:=		x11
-PKG_DEPENDS:=		DirectFB libXScrnSaver
+PKG_DEPENDS:=		directfb libxscrnsaver
 PKG_BUILDDEP+=		DirectFB libXScrnSaver
 PKG_URL:=		http://qingy.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=qingy/}
@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,QINGY,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-screen-savers \
+			--disable-optimizations \
 			--disable-pam \
 			--disable-crypto
 

@@ -12,7 +12,6 @@ PKG_SECTION:=		utils
 PKG_DEPENDS:=		alsa-lib libpthread
 PKG_BUILDDEP+=		alsa-lib
 ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
-PKG_DEPENDS+=		libncurses
 PKG_BUILDDEP+=		libncurses
 endif
 PKG_URL:=		http://www.alsa-project.org
@@ -20,6 +19,7 @@ PKG_SITES:=		ftp://ftp.task.gda.pl/pub/linux/misc/alsa/utils/ \
 			ftp://ftp.alsa-project.org/pub/utils/
 
 PKG_FLAVOURS:=		WITH_ALSAMIXER
+PKGFS_WITH_ALSAMIXER:=	libncurses
 PKGFD_WITH_ALSAMIXER:=	include alsamixer ncurses applet
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2

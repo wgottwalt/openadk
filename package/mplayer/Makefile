@@ -14,14 +14,14 @@ PKG_DEPENDS+=		libogg libpng libpthread libvorbis
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
 PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext
-ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
-PKG_DEPENDS+=		DirectFB
+ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
 PKG_BUILDDEP+=		DirectFB
 endif
 PKG_URL:=		http://www.mplayerhq.hu
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
+PKGFS_WITH_DIRECTFB:=	directfb
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
@@ -42,7 +42,7 @@ endif
 # applications build fine against DirectFB. There is also a
 # related patch to allow configure to find out the DirectFB
 # version number.
-ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
+ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/directfb
 endif
 
@@ -67,10 +67,10 @@ CONFIGURE_CPU_OPTS:=	\
 endif
 
 ifeq ($(ADK_DEBUG),y)
-CONFIGURE_DEBUG=	--enable-debug
+CONFIGURE_DEBUG=	--enable-debug --enable-crash-debug
 endif
 
-ifeq (${ADK_PACKAGE_MPD_WITH_DIRECTFB},y)
+ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
 CONFIGURE_DIRECTFB=--enable-directfb
 else
 CONFIGURE_DIRECTFB=--disable-directfb
@@ -126,7 +126,7 @@ pre-configure:
 		--disable-xinerama \
 		--disable-vidix \
 		--disable-gl \
-		--extra-cflags="${EXTRA_CFLAGS}" \
+		--extra-cflags="${TCFLAGS} ${EXTRA_CFLAGS}" \
 		${CONFIGURE_CPU_OPTS} \
 		${CONFIGURE_DEBUG} \
 		${CONFIGURE_DIRECTFB} \

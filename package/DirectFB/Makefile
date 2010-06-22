@@ -16,7 +16,7 @@ PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.4/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DIRECTFB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DIRECTFB,directfb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \

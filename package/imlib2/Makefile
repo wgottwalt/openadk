@@ -10,7 +10,7 @@ PKG_MD5SUM:=		20d59c7cda06742015baade6f5975415
 PKG_DESCR:=		Version 2 of an advanced replacement library for libraries like libXpm
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libfreetype
-PKG_BUILDDEP:=		libfreetype
+PKG_BUILDDEP:=		freetype
 PKG_URL:=		http://www.enlightenment.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=enlightenment/}
 

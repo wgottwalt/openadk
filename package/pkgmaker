@@ -66,6 +66,7 @@ for dn in */Makefile; do
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
+	    \$(foreach x,\${PKG_FLAVOURS},PKGFS_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCD_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCS_\${x}) \
 	    PKG_HOST_DEPENDS PKG_TARGET_DEPENDS")
@@ -280,11 +281,16 @@ EOF
 	# Handle flavours (per directory)
 	for pfcu in $PKG_FLAVOURS; do		# pfcu: pkg flavour conf opt.
 		eval pfd=\$PKGFD_$pfcu		# pfd: pkg flavour description
+		eval pfs=\$PKGFS_$pfcu		# pfs: pkg flavour dependencies
 		print
 		print config ADK_PACKAGE_${dnu}_$pfcu
 		print "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
 		print \\tdefault n
 		print \\tdepends on ADK_COMPILE_$dnu
+		for pfso in $pfs; do
+			typeset -u pfso=${pfso#!}
+			print \\tselect ADK_PACKAGE_${pfso}
+		done
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
 	done >&4

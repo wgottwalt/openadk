@@ -9,20 +9,13 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		c3ccd16c147befd49fe4541a506dd177
 PKG_DESCR:= 		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net
-PKG_DEPENDS:=		kmod-nfsd
-
+PKG_DEPENDS:=		kmod-nfsd portmap
 ifeq (${ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS},y)
-PKG_DEPENDS+=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKG_BUILDDEP+=		libnfsidmap krb5 libevent libgssglue librpcsecgss
 endif
-
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_TIRPC),y)
-PKG_DEPENDS+=		libtirpc rpcbind
 PKG_BUILDDEP+=		libtirpc rpcbind
-else
-PKG_DEPENDS:=		portmap
 endif
-
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
@@ -30,7 +23,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS:=		WITH_KERBEROS WITH_TIRPC
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
+PKGFS_WITH_KERBEROS:=	libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKGFD_WITH_TIRPC:=	enable Transport Independent RPC
+PKGFS_WITH_TIRPC:=	libtirpc rpcbind
 
 include ${TOPDIR}/mk/package.mk
 

@@ -174,7 +174,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -f gtalk.conf ; \
 		rm -f skinny.conf ; \
 		rm -f dundi.conf ; \
-		echo -e '/^astdatadir =/s/var/usr/\nwq\n' | ed asterisk.conf ; \
+		$(SED) '#^astdatadir = /var/#/usr/#' asterisk.conf ; \
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \

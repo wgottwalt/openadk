@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		22037e1b794d749072310cb142800f05
 PKG_DESCR:=		Terminal Emulator for X Windows
 PKG_SECTION:=		x11
-PKG_DEPENDS:=		xorg-server libXaw
+PKG_DEPENDS:=		xorg-server libxaw
 PKG_URL:=		http://invisible-island.net/xterm/xterm.html
 PKG_SITES:=		ftp://invisible-island.net/xterm/
 
