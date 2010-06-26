@@ -27,3 +27,15 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The nfs root tarball is here: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Login as user root with password linux123 via ssh or console'
 endif
+ifeq ($(FS),initramfs)
+imageinstall: $(BIN_DIR)/$(INITRAMFS)
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
+	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'Login as user root with password linux123 via ssh or console'
+endif

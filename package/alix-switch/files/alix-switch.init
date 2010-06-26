@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG alix-switch
+#INIT 10
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${alix_switch:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	alix-switchd -d
+	;;
+stop)
+	pkill alix-switchd
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 (start|stop|restart)"
+	exit 1
+esac
+exit $?

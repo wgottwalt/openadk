@@ -16,6 +16,7 @@ config ADK_ENABLE_IPV6
 	  exception proves the rule. ;)
 
 menu "Basesystem"
+source "package/alix-switch/Config.in"
 source "package/adkinstall/Config.in"
 source "package/base-files/Config.in"
 source "package/base-files/Config.in.manual"
