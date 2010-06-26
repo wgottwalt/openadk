@@ -9,7 +9,7 @@ PKG_NAME:=		grub-bin
 PKG_VERSION:=		1.97.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		24961a39e63d8ec16d765aad3a301cda
-PKG_DESCR:=		GRUB bootloader
+PKG_DESCR:=		GRUB2 bootloader (binary package)
 PKG_SECTION:=		base
 PKG_SITES:=		http://openadk.org/distfiles/
 
