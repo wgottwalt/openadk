@@ -1,0 +1,15 @@
+#!/bin/sh
+# launched by alix-switchd in case of button event
+
+case "$1" in
+  on)
+    echo "alix-switch: on"
+    ;;
+  off)
+    echo "alix-switch: off"
+    ;;
+  *)
+    echo "Usage: $0 {on|off}"
+    ;;
+esac
+exit 0

@@ -697,6 +697,7 @@ config ADK_LINUX_X86_ALIX2D13
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_WATCHDOG
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
@@ -853,6 +854,7 @@ prompt "Target Firmware type"
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
@@ -866,6 +868,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_64_SHUTTLE || \
