@@ -44,18 +44,15 @@ static sighandler_t handle_signal (int sig_nr, sighandler_t signalhandler) {
 static void start_daemon (void) {
 
 	int i;
-	pid_t pid;
-
-	if (setsid() > 0) 
-		exit(EXIT_FAILURE);
+	pid_t pid, sid;
 
 	handle_signal(SIGHUP, SIG_IGN);
-
 	if ((pid = fork ()) != 0)
 		exit(EXIT_FAILURE);
-
-	chdir("/");
 	umask(0);
+	if ((sid = setsid()) < 0)
+		exit(EXIT_FAILURE);
+	chdir("/");
 	for (i = sysconf(_SC_OPEN_MAX); i > 0; i--)
 		close(i);
 }

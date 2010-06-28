@@ -49,10 +49,11 @@ start=0
 rootp=1
 cfgfsp=2
 if [ $rescue -eq 1 ];then
-	rootp=2
-	cfgfsp=3
+	rootp=3
+	cfgfsp=4
 	start=2
-	parted -s /dev/sda unit cyl mkpartfs primary ext2 0 $start
+	parted -s /dev/sda unit cyl mkpartfs primary ext2 0 1
+	parted -s /dev/sda unit cyl mkpartfs primary ext2 1 2
 	check_exit
 fi
 parted -s /dev/sda unit cyl mkpartfs primary ext2 $start $rootsize
@@ -72,33 +73,64 @@ tar -C /mnt -xzpf $1
 check_exit
 chmod 1777 /mnt/tmp
 chmod 4755 /mnt/bin/busybox
+if [ $rescue -eq 1 ];then
+	mkdir /mnt/boot/grub
+fi
 
 speed=$(awk -F \, '/console=ttyS0/ { print $2 }' /proc/cmdline|sed -e "s/ .*$//")
 
 if [ $rescue -eq 1 ];then
 	umount /mnt
-	mount /dev/sda1 /mnt
+	mount /dev/sda2 /mnt
 	cp $2 /mnt/rescue
 fi
 printf "Installing bootloader ...\n"
 mkdir -p /mnt/boot/grub
 if [ $rescue -eq 1 ];then
+mount /dev/sda1 /mnt/boot/grub
 cat << EOF > /mnt/boot/grub/grub.cfg
-set default=0
 set timeout=1
 serial --unit=0 --speed=$speed
 terminal_output serial 
 terminal_input serial 
 
+if [ -s \$prefix/grubenv ]; then
+  load_env
+fi
+
+set default="\${saved_entry}"
+
+if [ \${prev_saved_entry} ]; then
+  set saved_entry=\${prev_saved_entry}
+  save_env saved_entry
+  set prev_saved_entry=
+  save_env prev_saved_entry
+  set boot_once=true
+fi
+
+function savedefault {
+  if [ -z \${boot_once} ]; then
+    saved_entry=\${chosen}
+    save_env saved_entry
+  fi
+}
+
+function recordfail {
+  set recordfail=1
+  if [ -n \${have_grubenv} ]; then if [ -z \${boot_once} ]; then save_env recordfail; fi; fi
+}
+
 menuentry "GNU/Linux (OpenADK)" {
+	recordfail
         insmod ext2
-        set root=(hd0,2)
+        set root=(hd0,3)
         linux /boot/vmlinuz-adk root=/dev/sda$rootp ro init=/init panic=10
 }
 
 menuentry "GNU/Linux (OpenADK) Rescue Mode" {
+	recordfail
         insmod ext2
-        set root=(hd0,1)
+        set root=(hd0,2)
         linux /rescue ro init=/init panic=10
 }
 EOF
@@ -119,6 +151,10 @@ EOF
 fi
 grub-install --root-directory=/mnt /dev/sda 
 check_exit
+if [ $rescue -eq 1 ];then
+	grub-set-default --root-directory=/mnt 0
+	umount /mnt/boot/grub
+fi
 umount /mnt
 printf "Successfully installed. You can reboot now.\n"
 exit 0

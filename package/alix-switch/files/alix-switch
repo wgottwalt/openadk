@@ -1,9 +1,13 @@
 #!/bin/sh
 # launched by alix-switchd in case of button event
-
+# f.e. boot rescue system once
 case "$1" in
   on)
     echo "alix-switch: on"
+    mount /dev/sda1 /boot/grub
+    grub-reboot 1
+    umount /boot/grub
+    reboot
     ;;
   off)
     echo "alix-switch: off"
@@ -12,4 +16,4 @@ case "$1" in
     echo "Usage: $0 {on|off}"
     ;;
 esac
-exit 0
+exit $?
