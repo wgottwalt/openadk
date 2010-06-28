@@ -3,7 +3,6 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
-#include ${TOPDIR}/mk/buildhlp.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg

@@ -16,18 +16,16 @@ kernel-install:
 		$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
 ifeq ($(FS),yaffs)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'Format your NAND with Routerboot, boot via NFS and'
-	@echo 'then install kernel and filesystem:'
+	@echo 'then install kernel and filesystem via:'
 	@echo 'adkinstall ${ROOTFSTARBALL}'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

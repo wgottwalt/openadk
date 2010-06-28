@@ -64,8 +64,9 @@ noconfig_targets:=	menuconfig \
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
-		if [ -f .busyboxcfg ];then \
-			rm .busyboxcfg; \
+		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
+			touch .bbrebuild; \
+			cp .config .config.old; \
 		fi; \
 	fi
 

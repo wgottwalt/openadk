@@ -51,11 +51,6 @@ umount /mnt/proc
 umount /mnt/sys
 umount /mnt/dev
 
-printf "Creating device nodes\n"
-mknod -m 666 /mnt/dev/null c 1 3
-mknod -m 622 /mnt/dev/console c 5 1
-mknod -m 666 /mnt/dev/tty c 5 0
-
 umount /mnt
 printf "Successfully installed.\n"
 exit 0

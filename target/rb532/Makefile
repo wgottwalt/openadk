@@ -8,6 +8,7 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+KERNEL:=$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
@@ -16,33 +17,23 @@ kernel-install:
 		$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),ext2-block)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-	@echo
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
 	@echo "Boot the board via network (tftp/nfsroot) and use adkinstall."
 	@echo "If you just want to update, use adkupdate."
-	@echo 'Login as user root with password linux123 via ssh or console.'
 endif
-
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel \
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-	@echo
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
-	@echo 'Login as user root with password linux123 via ssh or console.'
 endif
-
 ifeq ($(FS),yaffs)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo 
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is:"
 	@echo "$(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Boot the board via network (tftp/nfsroot) and use adkinstall."
 	@echo "If you just want to update, use adkupdate."
-	@echo 'Login as user root with password linux123 via ssh or console.'
 endif

@@ -7,13 +7,9 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-kernel-install:
-	@cp $(LINUX_DIR)/arch/arm/boot/zImage \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL),"
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

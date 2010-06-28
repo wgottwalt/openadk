@@ -9,18 +9,14 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
-kernel-install:
-	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${ROOTFSTARBALL}'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
-
 ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

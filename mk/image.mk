@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-imageprepare: kernel-install image-prepare-post extra-install
+imageprepare: image-prepare-post extra-install
 
 # if an extra directory exist in TOPDIR, copy all content over the 
 # root directory, do the same if make extra=/dir/to/extra is used
@@ -59,6 +59,7 @@ ROOTFSUSERTARBALL=	${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
 INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
+	cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
 
 ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
