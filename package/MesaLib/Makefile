@@ -48,7 +48,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-dri-drivers=${DRI_DRIVERS} \
 			--with-demos=xdemos
 
-XAKE_FLAGS+=		APP_CC=${HOSTCC} HOST_CC=${HOSTCC}
+XAKE_FLAGS+=		HOST_CC=${HOSTCC}
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
@@ -57,7 +57,6 @@ pre-configure:
 		--disable-glw \
 		--disable-gallium \
 		--with-driver=xlib \
-		--with-demos=xdemos \
 	);
 	${MAKE} -C ${WRKBUILD}/src/glsl
 	${MAKE} -C ${WRKBUILD}/src/glsl/apps
