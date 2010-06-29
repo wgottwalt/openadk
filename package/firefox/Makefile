@@ -4,18 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.3
+PKG_VERSION:=		3.6.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5e4541ab23084b7b14ba228291ce2688
+PKG_MD5SUM:=		c9a071b31bb90d05edfb93117d0a7537
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib gtk+ libnotify libidl
+PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk+ libnotify libidl
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
 PKG_DEPENDS+=		libxdamage libxfixes
 PKG_BUILDDEP+=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11 libXt
 PKG_BUILDDEP+=		nspr nss jpeg
 PKG_URL:=		http://www.mozilla.org/
-PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.6.3/source/
+PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
@@ -49,7 +49,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 post-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/firefox-3.6.3 \
+	$(CP) $(WRKINST)/usr/lib/firefox-${PKG_VERSION} \
 		$(IDIR_FIREFOX)/usr/lib/
 	$(CP) $(WRKINST)/usr/bin/firefox \
 		$(IDIR_FIREFOX)/usr/bin

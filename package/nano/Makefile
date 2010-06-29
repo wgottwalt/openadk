@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nano
-PKG_VERSION:=		2.0.9
+PKG_VERSION:=		2.2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2be94dc43fb60fff4626a2401a977220
+PKG_MD5SUM:=		6304308afb1f7ef4a5e93eb99206632a
 PKG_DESCR:=		An enhanced clone of the Pico text editor
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP+=		ncurses
 PKG_URL:=		http://www.nano-editor.org
-PKG_SITES:=		http://www.nano-editor.org/dist/v2.0/
+PKG_SITES:=		http://www.nano-editor.org/dist/v2.2/
 
 PKG_FLAVOURS:=		TINY
 
@@ -24,6 +24,7 @@ CONFIGURE_ENV+=		ac_cv_header_regex_h=no
 CONFIGURE_ARGS+=	--enable-nanorc \
 			--disable-glibtest \
 			--disable-utf8 \
+			--disable-color \
 			--without-slang
 ifeq (${ADK_PACKAGE_NANO_TINY},y)
 CONFIGURE_ARGS+=	--enable-tiny
