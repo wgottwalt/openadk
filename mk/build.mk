@@ -95,7 +95,7 @@ else
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk toolchain/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 

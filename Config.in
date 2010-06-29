@@ -17,6 +17,12 @@ config ADK_HAVE_DOT_CONFIG
 
 menu "ADK settings"
 
+config ADK_HOST
+	string "Webserver for packages and distfiles"
+	default "www.openadk.org"
+	help
+	  Configure host for IPKG package management
+
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n

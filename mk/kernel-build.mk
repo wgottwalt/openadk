@@ -5,8 +5,6 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
-KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
-
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/$(ADK_TARGET)-kernel-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
@@ -38,14 +36,6 @@ $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET)-create-packages
 	$(MAKE) $(KERNEL_PKG) $(TARGETS) 
 	touch -c $(LINUX_DIR)/vmlinux
-
-$(KERNEL_PKG):
-	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
-	rm -rf $(KERNEL_PKGDIR)
-	@mkdir -p $(KERNEL_PKGDIR)/etc
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
-	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
-	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 
 prepare:
 compile: $(LINUX_DIR)/vmlinux

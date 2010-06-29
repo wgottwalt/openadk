@@ -52,14 +52,26 @@ image-prepare-post:
 		done; \
 	fi
 
+KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
+KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(ADK_TARGET)-$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
+
+kernel-package: $(LINUX_DIR)/vmlinux
+	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
+	rm -rf $(KERNEL_PKGDIR)
+	@mkdir -p $(KERNEL_PKGDIR)/boot
+	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/vmlinuz-adk
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
+	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
+	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR)
+	$(PKG_INSTALL) $(KERNEL_PKG)
+
 INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
 ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
 ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
 INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 
-${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}
-	cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
+${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
 
 ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
