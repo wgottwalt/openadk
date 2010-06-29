@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtiff
-PKG_VERSION:=		3.8.2
+PKG_VERSION:=		3.9.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fbb6f446ea4ed18955e2714934e5b698
+PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
 PKG_DESCR:=		A library for reading/writing TIFF images
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.libtiff.org
