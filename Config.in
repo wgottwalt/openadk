@@ -23,6 +23,19 @@ config ADK_HOST
 	help
 	  Configure host for IPKG package management
 
+config ADK_SSH_PUBKEY
+	string "SSH public key (root user only)"
+	default ""
+	help
+	  Paste your generated SSH public key here and it will be embedded into
+	  the built image, so you can use it to login instantly.
+
+#config ADK_PASSWORD
+#	string "root password for the embedded system"
+#	default "linux123"
+#	help
+#	  Predefine the root password enabled in the the built image.
+
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
