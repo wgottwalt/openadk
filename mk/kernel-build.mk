@@ -34,7 +34,9 @@ $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET)-create-packages
-	$(MAKE) $(KERNEL_PKG) $(TARGETS) 
+ifneq ($(strip $(TARGETS)),)
+	$(MAKE) $(TARGETS)
+endif
 	touch -c $(LINUX_DIR)/vmlinux
 
 prepare:
