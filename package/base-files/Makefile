@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		12
+PKG_RELEASE:=		13
 PKG_DESCR:=		basic filesystem structure and scripts
 PKG_SECTION:=		base
 
@@ -61,7 +61,6 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/bin
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
-	ln -sf ../tmp/resolv.conf $(IDIR_BASE_FILES)/etc/resolv.conf
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
