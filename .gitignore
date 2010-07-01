@@ -17,6 +17,7 @@ toolchain_build_*/
 .prereq_done
 .config*
 .busyboxcfg
+.bbrebuild
 .defconfig
 all.config
 .cfg_*/
