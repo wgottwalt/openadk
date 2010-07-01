@@ -651,6 +651,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_INPUT
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX1C boards.
 	  http://www.pcengines.ch/
@@ -674,6 +675,7 @@ config ADK_LINUX_X86_ALIX2D
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
 	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
@@ -698,6 +700,7 @@ config ADK_LINUX_X86_ALIX2D13
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
 	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
