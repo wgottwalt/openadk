@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
 	
 	if (daemonize) {
 		/* Create a new session for child process */
-		if ((sid = setsid()) < 0);
+		if ((sid = setsid()) < 0)
 			die_log(lf, "Can't create a new session for child process");
 
 		/* Change the current working directory */

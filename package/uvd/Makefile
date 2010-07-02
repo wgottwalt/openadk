@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		uvd
 PKG_VERSION:=		0.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		small udp server for version information
 PKG_SECTION:=		base
 PKG_URL:=		http://www.openadk.org
@@ -28,5 +28,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_UVD}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/uvd ${IDIR_UVD}/sbin
 
-# please remove ALL above comments, before commiting
 include ${TOPDIR}/mk/pkg-bottom.mk
