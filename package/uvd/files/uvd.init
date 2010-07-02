@@ -1,6 +1,6 @@
 #!/bin/sh
 #PKG uvd
-#INIT 10
+#INIT 90
 
 . /etc/rc.conf
 
