@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		13
+PKG_RELEASE:=		14
 PKG_DESCR:=		basic filesystem structure and scripts
 PKG_SECTION:=		base
 
@@ -64,6 +64,8 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
+	git log -1|head -1|sed -e 's#commit ##' \
+		> $(IDIR_BASE_FILES)/etc/adkversion
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif

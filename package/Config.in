@@ -30,6 +30,7 @@ source "package/libc/Config.in.manual"
 source "package/grub/Config.in"
 source "package/grub-bin/Config.in"
 source "package/rpm/Config.in"
+source "package/uvd/Config.in"
 endmenu
 
 menu "Bluetooth"
