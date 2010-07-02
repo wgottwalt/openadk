@@ -14,7 +14,7 @@ start)
 	crond -c /etc/crontabs
 	;;
 stop)
-	kill $(pidof crond|cut -d ' ' -f 3)
+	pkill crond
 	;;
 restart)
 	sh $0 stop
