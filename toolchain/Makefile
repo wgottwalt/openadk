@@ -3,7 +3,7 @@
 #
 # Steps to build toolchains
 # 1) build and install binutils
-# 2) build and install mpfr and gmp
+# 2) build and install mpfr, mpc and gmp
 # 3) build and install gcc c compiler
 # 4) install kernel-headers
 # 5) install libc headers

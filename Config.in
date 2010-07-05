@@ -18,29 +18,16 @@ config ADK_HAVE_DOT_CONFIG
 menu "ADK settings"
 
 config ADK_VENDOR
-	string "Vendor name (f.e. OpenADK)"
-	default "OpenADK"
+	string "vendor name"
+	default "openadk"
 	help
-	  Vendor string is used for uvd and other stuff.
+	  Vendor string is used for toolchain.
 
 config ADK_HOST
-	string "Webserver for packages and distfiles"
+	string "webserver for packages and distfiles"
 	default "www.openadk.org"
 	help
 	  Configure host for IPKG package management.
-
-config ADK_SSH_PUBKEY
-	string "SSH public key (root user only)"
-	default ""
-	help
-	  Paste your generated SSH public key here and it will be embedded into
-	  the built image, so you can use it to login instantly.
-
-#config ADK_PASSWORD
-#	string "root password for the embedded system"
-#	default "linux123"
-#	help
-#	  Predefine the root password enabled in the the built image.
 
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
@@ -161,4 +148,21 @@ endchoice
 endmenu
 
 source "target/Config.in"
+
+menu "Runtime configuration"
+config ADK_SSH_PUBKEY
+	string "SSH public key (root user only)"
+	default ""
+	help
+	  Paste your generated SSH public key here and it will be embedded into
+	  the built image, so you can use it to login instantly.
+
+config ADK_PASSWORD
+	string "root password for the embedded system"
+	default "linux123"
+	help
+	  Predefine the root password enabled in the built image.
+
+endmenu
+
 source "package/Config.in"

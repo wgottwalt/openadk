@@ -6,9 +6,9 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		15
-PKG_DESCR:=		basic filesystem structure and scripts
+PKG_RELEASE:=		17
 PKG_SECTION:=		base
+PKG_DESCR:=		basic filesystem structure and scripts
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
@@ -34,6 +34,7 @@ endif
 	$(SED) 's,@TARGET@,$(ADK_TARGET),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@LIBC@,$(ADK_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
 	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
 ifneq (${ADK_PACKAGE_BASH},)
@@ -64,6 +65,9 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
+	test -z $(ADK_PASSWORD) || \
+	    $(SED) 's,\*NP\*,'"$$(${STAGING_TOOLS}/bin/mkcrypt \
+	    ${ADK_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
