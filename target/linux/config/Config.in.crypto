@@ -47,7 +47,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_GEODE
 	tristate
 	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KERNEL_CRYPTO
-	depends on ADK_LINUX_X86_ALIX1C
+	depends on ADK_LINUX_ALIX
 	help
 	  Say 'Y' here to use the AMD Geode LX processor on-board AES
 	  engine for the CryptoAPI AES algorithm.
