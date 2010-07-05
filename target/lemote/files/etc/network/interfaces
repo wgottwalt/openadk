@@ -1,0 +1,13 @@
+auto lo
+iface lo inet loopback
+
+# wlan example
+#auto wlan0
+#iface wlan0 inet dhcp
+#       wireless-extension 1
+#       wireless-mode sta
+#       wireless-channel 1
+#       wireless-ssid openadk
+#       wireless-security wpa2
+#       wireless-passphrase openadk123
+

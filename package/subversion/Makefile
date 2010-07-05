@@ -21,8 +21,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr/bin/apr-config
-CONFIGURE_ARGS+=	--with-apr-util=${STAGING_DIR}/usr/bin/apr-config
+CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr/bin/apr-1-config
+CONFIGURE_ARGS+=	--with-apr-util=${STAGING_DIR}/usr/bin/apr-1-config
 CONFIGURE_ARGS+=	--disable-mod-activation
 CONFIGURE_ARGS+=	--disable-keychain
 CONFIGURE_ARGS+=	--without-apxs
@@ -32,7 +32,7 @@ CONFIGURE_ARGS+=	--without-jikes
 CONFIGURE_ARGS+=	--without-jdk
 CONFIGURE_ARGS+=	--disable-javahl
 CONFIGURE_ARGS+=	--without-berkeley-db
-LIBS= 			-lsqlite3 -laprutil-0 -lapr-0 -lexpat -liconv 
+LIBS= 			-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv 
 
 ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
 CONFIGURE_ARGS+=	-disable-neon-version-check

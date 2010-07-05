@@ -1,0 +1,12 @@
+--- ruby-1.9.1-p378.orig/ext/openssl/ossl_pkcs7.c	2008-07-22 17:34:23.000000000 +0200
++++ ruby-1.9.1-p378/ext/openssl/ossl_pkcs7.c	2010-06-02 21:05:44.261613234 +0200
+@@ -572,7 +572,8 @@ ossl_pkcs7_add_certificate(VALUE self, V
+     return self;
+ }
+ 
+-static STACK *
++
++static STACK_OF(X509) *
+ pkcs7_get_certs_or_crls(VALUE self, int want_certs)
+ {
+     PKCS7 *pkcs7;

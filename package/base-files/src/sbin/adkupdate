@@ -29,9 +29,12 @@ check_exit() {
 prepare() {
 	cd /
 	if [ -x /sbin/cfgfs ];then
+		pkill crond
 		umount -f /etc
+		check_exit
 	fi
 	mount -o remount,rw /
+	check_exit
 	if [ "$system" == "RB532" ];then
 		mount -t yaffs2 /dev/mtdblock0 /boot
 	elif [ "$system" == "AR7130" ];then

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.4.5
+PKG_VERSION:=		3.5.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8e8a484782f2b7716b6c6bd9a7d2bf71
+PKG_MD5SUM:=		7c8d2a34b649380d5df838c3e030dbec
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net
 PKG_URL:=		http://www.samba.org
@@ -20,7 +20,7 @@ $(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba
+TLDFLAGS+=		-Wl,-rpath -Wl,/usr/lib/samba -lintl
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \

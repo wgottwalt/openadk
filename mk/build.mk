@@ -20,7 +20,6 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_PACKAGE_XORG_SERVER_WITH_DRI=n \
 			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_BASE_FILES=y \
-			ADK_PACKAGE_GCC=n \
 			ADK_PACKAGE_MGETTY=n \
 			ADK_COMPILE_HEIMDAL=n \
 			ADK_PACKAGE_HEIMDAL_PKINIT=n \
@@ -65,8 +64,9 @@ noconfig_targets:=	menuconfig \
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
-		if [ -f .busyboxcfg ];then \
-			rm .busyboxcfg; \
+		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
+			touch .bbrebuild; \
+			cp .config .config.old; \
 		fi; \
 	fi
 
@@ -90,12 +90,12 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk toolchain/install package/compile
+	$(MAKE) -f mk/build.mk toolchain/install tools/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk toolchain/install tools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 
@@ -135,6 +135,9 @@ target/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 
 toolchain/%: ${STAGING_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
+
+tools/%:
+	$(MAKE) -C tools $(patsubst tools/%,%,$@)
 
 image:
 	$(MAKE) -C target image
@@ -272,6 +275,9 @@ endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
 endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/.defconfig
+endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
@@ -280,10 +286,10 @@ endif
 			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(TOPDIR)/.defconfig; \
-		for symbol in ${DEFCONFIG}; do \
-			echo $$symbol >> $(TOPDIR)/.defconfig; \
-		done; \
 	fi
+	@for symbol in ${DEFCONFIG}; do \
+		echo $$symbol >> $(TOPDIR)/.defconfig; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \
@@ -340,6 +346,9 @@ endif
 ifeq (${OStype},NetBSD)
 	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
 endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/all.config
+endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
@@ -348,10 +357,10 @@ endif
 			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
-		for symbol in ${DEFCONFIG}; do \
-			echo $$symbol >> $(TOPDIR)/all.config; \
-		done; \
 	fi
+	@for symbol in ${DEFCONFIG}; do \
+		echo $$symbol >> $(TOPDIR)/all.config; \
+	done
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(FS)" \

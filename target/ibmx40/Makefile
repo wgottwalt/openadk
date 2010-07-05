@@ -9,9 +9,6 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
-kernel-install:
-	@cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
-
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
@@ -20,29 +17,24 @@ createinitcrypt:
 		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/arch/x86/boot/compressed/vmlinux \
-		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
-
 ifeq ($(FS),usb)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to USB use scripts/install.sh"
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
-
 ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
-
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
@@ -67,5 +59,4 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'Copy $(ROOTFSUSERTARBALL) via scp to /mnt/root and extract it'
 	@echo 'cd /mnt/root ; gunzip $(ROOTFSUSERTARBALL); tar xpvf $(ROOTFSUSERTARBALL)'
 	@echo 'cd /mnt/root ; mknod -m 644 console c 5 1'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

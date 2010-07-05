@@ -27,7 +27,7 @@ kernel-install: tools-compile
 		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel 2>/dev/null
 
 ifeq ($(FS),squashfs)
-imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	@if [ $$(stat --format=%s ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
 		echo 'Image is too big!'; \
 	else \
@@ -37,18 +37,14 @@ imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 		echo 'tftp 192.168.1.1'; \
 		echo 'tftp> binary'; \
 		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"; \
-		echo 'Login as user root with password linux123 via ssh or console'; \
 	fi
 endif
-
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@echo
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'You can flash the kernel via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
 	@echo 'tftp> put ${ADK_TARGET}-${FS}-kernel upgrade_code.bin'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

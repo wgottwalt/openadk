@@ -4,21 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		apr
-PKG_VERSION:=		0.9.17
+PKG_VERSION:=		1.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ca1e22d98081a03a33c2a0b8684eb192
+PKG_MD5SUM:=		fc80cb54f158c2674f9eeb47a1f672cd
 PKG_DESCR:=		Apache Portable Runtime library
 PKG_SECTION:=		libs
-ifeq ($(ADK_PACKAGE_APR_THREADING),y)
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP+=		libpthread
-endif
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
-
-PKG_FLAVOURS=		THREADING
-PKGFD_FULL=		Enable threading support
-
 
 include ${TOPDIR}/mk/package.mk
 
@@ -31,23 +24,19 @@ CONFIGURE_ENV+=		ac_cv_sizeof_ssize_t=4
 CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes
 CONFIGURE_ENV+=		apr_cv_process_shared_works=no
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
+CONFIGURE_ENV+=		apr_cv_tcp_nodelay_with_cork=no
 CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom
-
-ifeq (${ADK_PACKAGE_APR_THREADING},y)
 CONFIGURE_ARGS+=	--enable-threads
-else
-CONFIGURE_ARGS+=	--disable-threads
-endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_APR}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libapr-0.so* ${IDIR_APR}/usr/lib/
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build
-	${CP} ${WRKINST}/usr/share/build/* ${STAGING_DIR}/usr/share/build/
+	${CP} ${WRKINST}/usr/lib/libapr-1.so* ${IDIR_APR}/usr/lib/
+	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build-1
+	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_DIR}/usr/share/build-1/
 	# we need to patch paths to get apr-util compiling
 	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
-		${WRKINST}/usr/bin/apr-config
+		${WRKINST}/usr/bin/apr-1-config
 	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," \
-		${WRKINST}/usr/bin/apr-config
+		${WRKINST}/usr/bin/apr-1-config
 
 include ${TOPDIR}/mk/pkg-bottom.mk

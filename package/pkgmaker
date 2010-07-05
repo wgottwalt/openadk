@@ -50,6 +50,7 @@ for dn in */Makefile; do
 
 	# PKG_NAME: package name (directory, free-format)
 	# PKG_FLAVOURS: all package flavours (boolean options), uppercase
+	# PKG_CHOICES: all package choices (boolean options), uppercase
 	# PKG_DESCR: package description (directory)
 	# PKG_URL: package homepage
 	# PKG_CXX: uppercase varname part to use for CFrustFrust checks
@@ -61,10 +62,13 @@ for dn in */Makefile; do
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
 	# PKG_{HOST,TARGET}_DEPENDS: add host or target dependencies
-	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_DESCR PKG_URL PKG_MULTI PKG_CXX \
+	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_CHOICES PKG_DESCR PKG_URL PKG_MULTI PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
+	    \$(foreach x,\${PKG_FLAVOURS},PKGFS_\${x}) \
+	    \$(foreach x,\${PKG_CHOICES},PKGCD_\${x}) \
+	    \$(foreach x,\${PKG_CHOICES},PKGCS_\${x}) \
 	    PKG_HOST_DEPENDS PKG_TARGET_DEPENDS")
 
 	# dnu: directory name, uppercase, y/-+/_X/
@@ -213,6 +217,10 @@ for dn in */Makefile; do
 			(*)
 				# produce dependency on regular package
 				# where the symbol is cached (see above)
+				if [[ ! -f ../pkglist.d/"$dep" ]]; then
+					print -u2 "Warning: $PKG_NAME: unreachable dependency '$dep'"
+					continue
+				fi
 				print -u$h '\tselect' \
 				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
 				;;
@@ -249,14 +257,40 @@ config ADK_COMPILE_${PKG_CXX}_WITH_UCLIBCXX
 endchoice
 EOF
 
+	[[ -n $PKG_CHOICES ]] && cat >&4 <<EOF
+
+choice
+prompt "Package flavour choice"
+depends on ADK_COMPILE_$dnu
+EOF
+	# Handle choices
+	for pfco in $PKG_CHOICES; do
+		eval pfcd=\$PKGCD_$pfco
+		eval pfcs=\$PKGCS_$pfco
+		typeset -u pfcs=${pfcs#!}
+		print
+		print config ADK_PACKAGE_${dnu}_$pfco
+		print "\tbool \"${pfd:-$PKG_NAME -> $pfcd}\""
+		print "\\tselect ADK_PACKAGE_${pfcs}"
+	done >&4
+	[[ -n $PKG_CHOICES ]] && cat >&4 <<EOF
+
+endchoice
+EOF
+
 	# Handle flavours (per directory)
 	for pfcu in $PKG_FLAVOURS; do		# pfcu: pkg flavour conf opt.
 		eval pfd=\$PKGFD_$pfcu		# pfd: pkg flavour description
+		eval pfs=\$PKGFS_$pfcu		# pfs: pkg flavour dependencies
 		print
 		print config ADK_PACKAGE_${dnu}_$pfcu
 		print "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
 		print \\tdefault n
 		print \\tdepends on ADK_COMPILE_$dnu
+		for pfso in $pfs; do
+			typeset -u pfso=${pfso#!}
+			print \\tselect ADK_PACKAGE_${pfso}
+		done
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
 	done >&4

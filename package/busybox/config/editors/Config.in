@@ -76,7 +76,6 @@ config BUSYBOX_SED
 
 config BUSYBOX_VI
 	bool "vi"
-	depends on !ADK_PACKAGE_VIM
 	default y
 	help
 	  'vi' is a text editor. More specifically, it is the One True

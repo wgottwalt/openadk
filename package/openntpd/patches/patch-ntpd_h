@@ -28,8 +28,8 @@ $Id$
 	use settimeofday() instead of adjtime(), in order to provide
 	a faster time setting at start, since adjusting can take ages
 
---- openntpd-3.9p1.orig/ntpd.h	Sun May 14 05:28:58 2006
-+++ openntpd-3.9p1/ntpd.h	Mon Oct  8 12:17:58 2007
+--- openntpd-3.9p1.orig/ntpd.h	2006-05-14 07:29:21.000000000 +0200
++++ openntpd-3.9p1/ntpd.h	2010-07-02 14:13:10.357356688 +0200
 @@ -55,8 +55,12 @@
  #define	QSCALE_OFF_MAX			0.50
  
@@ -44,4 +44,12 @@ $Id$
 +#define	SETTIME_MIN_OFFSET	12	/* min offset for settime at start */
  #define	SETTIME_TIMEOUT		15	/* max seconds to wait with -s */
  #define	LOG_NEGLIGEE		128	/* negligible drift to not log (ms) */
+ 
+@@ -131,6 +135,7 @@ struct ntpd_conf {
+ 	u_int8_t				listen_all;
+ 	u_int8_t				settime;
+ 	u_int8_t				debug;
++	u_int8_t				ignore;
+ 	u_int32_t				scale;
+ };
  

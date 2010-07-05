@@ -19,6 +19,9 @@ if [ "$IF_PPP_MTU" -gt 0 ] ; then
 	NETWORKOPTIONS="mtu $IF_PPP_MTU\nmru $IF_PPP_MTU"
 fi
 
+[ "$IF_PPP_VPI" ] || IF_PPP_VPI=1
+[ "$IF_PPP_VCI" ] || IF_PPP_VCI=32
+
 REPLACE="
 	s,#IDLEOPTIONS#,$IDLEOPTIONS,
 	s,#ENCAPS#,$IF_PPP_ENCAPS,
@@ -33,39 +36,37 @@ REPLACE="
 
 sed "$REPLACE" < /etc/ppp/templates/$IF_USE_TEMPLATE > /etc/ppp/peers/$IF_PROVIDER
 
-[ "$IF_PPP_ENCAPS" ] || encap=0
-[ "$IF_PPP_PAYLOAD" ] || payload=1
-[ "$IF_PPP_VPI" ] || $IF_PPP_VPI=1
-[ "$IF_PPP_VCI" ] || $IF_PPP_VCI=32
-
-case "$IF_PPP_PAYLOAD" in
-bridged)
-	payload=1
-	;;
-routed)
-	payload=0
-	;;
-*)
-	echo "Wrong payload, use either bridged or routed"
-	exit 1
-	;;
-esac
-
-case "$IF_PPP_ENCAPS" in
-llc)
-	encap=0
-	;;
-vc)
-	encap=1
-	;;
-*)
-	echo "Wrong Encapsulation use either llc or vc"
-	exit 1
-	;;
-esac
-
 case "$IF_PPP_DEVICE" in
 nas*)
+	[ "$IF_PPP_ENCAPS" ] || encap=0
+	[ "$IF_PPP_PAYLOAD" ] || payload=1
+
+	case "$IF_PPP_PAYLOAD" in
+		bridged)
+			payload=1
+			;;
+		routed)
+			payload=0
+			;;
+		*)
+			echo "Wrong payload, use either bridged or routed"
+			exit 1
+			;;
+	esac
+
+	case "$IF_PPP_ENCAPS" in
+		llc)
+			encap=0
+			;;
+		vc)
+			encap=1
+			;;
+		*)
+			echo "Wrong Encapsulation use either llc or vc"
+			exit 1
+			;;
+	esac
+
 	count=$(echo $IF_PPP_DEVICE|sed -e "s/nas//")
 	br2684ctl -b -c $count -e $encap -p $payload -a $IF_PPP_VPI.$IF_PPP_VCI
 	ip link set up dev $IF_PPP_DEVICE
@@ -74,10 +75,6 @@ esac
 
 case "$IF_USE_TEMPLATE" in
 umts)
-	# set UMTS-LED to green (bit 3)
-	LED=$(cat /proc/sys/diag)
-	echo $((LED | 8)) > /proc/sys/diag
-
 	# wait for card to initialize
 	COUNT=0
 	while [ $((COUNT++)) -lt 20 ]; do
@@ -110,10 +107,5 @@ umts)
 				ERROR=1
 				;;
 	esac
-
-	if [ "$ERROR" == "1" ]; then
-		echo "$LED" > /proc/sys/diag
-		exit 1
-	fi
 	;;
 esac

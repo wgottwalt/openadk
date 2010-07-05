@@ -22,11 +22,9 @@ kernel-install: tools-compile
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@echo
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Type following on the CFE prompt to boot the kernel:'
 	@echo 'CFE> boot -z -elf -tftp 192.168.1.254:${ADK_TARGET}-${FS}-kernel'
-	@echo 'Login as user root with password linux123 via ssh or console.'
 endif

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		4.9.1
+PKG_VERSION:=		4.10.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		31a63d8e3a796dee247024f70426ed1c
+PKG_MD5SUM:=		c473cf8e9f22f5a9f7ef4c5be1b0c436
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		console
 PKG_DEPENDS:=		libpthread

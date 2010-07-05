@@ -1,55 +1,35 @@
-$Id$
-
-	cf. http://sourceforge.net/tracker/index.php?func=detail&aid=1594808&group_id=26275&atid=386747
-
---- davfs2-1.3.3.orig/src/webdav.c	2008-06-28 19:20:07.000000000 +0200
-+++ davfs2-1.3.3/src/webdav.c	2008-12-08 00:37:23.000000000 +0100
-@@ -23,7 +23,6 @@
+--- davfs2-1.4.6.orig/src/webdav.c	2010-02-16 20:29:59.000000000 +0100
++++ davfs2-1.4.6/src/webdav.c	2010-05-30 09:52:01.161613627 +0200
+@@ -52,6 +52,8 @@
+ #include <sys/stat.h>
+ #endif
  
- #include "config.h"
- 
--#include <argz.h>
- #include <errno.h>
- #include <error.h>
- #include <fcntl.h>
-@@ -34,6 +33,7 @@
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
 +#include <regex.h>
- #include <time.h>
- #include <unistd.h>
- 
-@@ -406,6 +406,11 @@ void dav_init_webdav(const char *scheme,
-     suri = (ne_uri *) ne_calloc(sizeof(ne_uri));
-     ne_fill_server_uri(session, suri);
- 
-+    /* begin of GMX hack */
-+    ne_server_capabilities caps;
-+    ne_options(session, "/", &caps);
-+    /* end of GMX hack */
 +
-     if (use_locks) {
-         locks = ne_lockstore_create();
-         if (lock_owner == NULL) {
-@@ -1859,13 +1864,18 @@ static int ssl_verify(void *userdata, in
-                      "or there might be a man-in-the-middle-attack.\n"));
-             printf(_("Accept certificate for this session? [y,N] "));
-             char *s = NULL;
-+            regex_t *re;
-             size_t n = 0;
-             ssize_t len = 0;
+ #include <ne_alloc.h>
+ #include <ne_auth.h>
+ #include <ne_basic.h>
+@@ -1918,6 +1920,7 @@ quota_result(void *userdata, const ne_ur
+ static int
+ ssl_verify(void *userdata, int failures, const ne_ssl_certificate *cert)
+ {
++    regex_t *re;
+     char *issuer = ne_ssl_readable_dname(ne_ssl_cert_issuer(cert));
+     char *subject = ne_ssl_readable_dname(ne_ssl_cert_subject(cert));
+     char *digest = ne_calloc(NE_SSL_DIGESTLEN);
+@@ -1964,8 +1967,13 @@ ssl_verify(void *userdata, int failures,
              len = getline(&s, &n, stdin);
              if (len < 0)
                  abort();
--            if (rpmatch(s) < 1)
--                ret = -1;
+-            if (rpmatch(s) > 0)
+-                ret = 0;
 +	    if (regcomp(&re, "^[yY]", REG_EXTENDED) != 0) {
 +		if (regexec(&re, s, (size_t)0, NULL, 0) < 1) {
 +		        regfree(&re);
 +			ret = -1;
 +		}
++		ret = 0;
 +	    }
              free(s);
-         }
      } 
+ 

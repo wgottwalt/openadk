@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
-PKG_VERSION:=		1.11.4
+PKG_VERSION:=		1.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		69e8a7296c0e12c53bd9ffd786462e87
+PKG_MD5SUM:=		141461b9c04e454dc8933c9d1f2abf83
 PKG_DESCR:=		retrieving files using HTTP, HTTPS and FTP
 PKG_SECTION:=		net
 PKG_URL:=		http://www.gnu.org/software/wget/

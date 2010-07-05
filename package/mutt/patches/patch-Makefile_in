@@ -1,8 +1,7 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- mutt-1.5.19.orig/Makefile.in	2009-01-05 20:24:13.000000000 +0100
-+++ mutt-1.5.19/Makefile.in	2009-05-10 19:02:17.000000000 +0200
-@@ -129,7 +129,7 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
-   distclean-recursive maintainer-clean-recursive
+--- mutt-1.5.20.orig/Makefile.in	2009-06-09 08:50:44.000000000 +0200
++++ mutt-1.5.20/Makefile.in	2010-05-30 13:43:47.001613117 +0200
+@@ -155,7 +155,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGE
+ 	distdir dist dist-all distcheck
  ETAGS = etags
  CTAGS = ctags
 -DIST_SUBDIRS = m4 po intl doc contrib imap
@@ -10,7 +9,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
  distdir = $(PACKAGE)-$(VERSION)
  top_distdir = $(distdir)
-@@ -291,7 +291,7 @@ top_srcdir = @top_srcdir@
+@@ -340,7 +340,7 @@ top_srcdir = @top_srcdir@
  AUTOMAKE_OPTIONS = 1.6 foreign
  @BUILD_IMAP_TRUE@IMAP_SUBDIR = imap
  @BUILD_IMAP_TRUE@IMAP_INCLUDES = -I$(top_srcdir)/imap

@@ -1,0 +1,21 @@
+--- grub-1.98.orig/lib/libgcrypt-grub/cipher/camellia.c	2010-03-06 21:52:26.000000000 +0100
++++ grub-1.98/lib/libgcrypt-grub/cipher/camellia.c	2010-06-26 20:41:39.651169327 +0200
+@@ -946,13 +946,13 @@ void camellia_setup192(const unsigned ch
+     unsigned char kk[32];
+     u32 krll, krlr, krrl,krrr;
+ 
+-    memcpy(kk, key, 24);
+-    memcpy((unsigned char *)&krll, key+16,4);
+-    memcpy((unsigned char *)&krlr, key+20,4);
++    grub_memcpy(kk, key, 24);
++    grub_memcpy((unsigned char *)&krll, key+16,4);
++    grub_memcpy((unsigned char *)&krlr, key+20,4);
+     krrl = ~krll;
+     krrr = ~krlr;
+-    memcpy(kk+24, (unsigned char *)&krrl, 4);
+-    memcpy(kk+28, (unsigned char *)&krrr, 4);
++    grub_memcpy(kk+24, (unsigned char *)&krrl, 4);
++    grub_memcpy(kk+28, (unsigned char *)&krrr, 4);
+     camellia_setup256(kk, subkey);
+     return;
+ }

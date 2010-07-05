@@ -14,6 +14,8 @@ PKG_SITES:=		http://cxx.uclibc.org/src/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+CFLINE_UCLIBCXX:= 	depends on ADK_TARGET_LIB_UCLIBC
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBCXX,uclibc++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

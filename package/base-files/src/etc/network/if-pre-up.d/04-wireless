@@ -74,13 +74,23 @@ case "$IF_WIRELESS_MODE" in
 		}
 		;;
 	sta)
-		[ -x /usr/sbin/iw ] || {
-			logger -t wireless "No iw utility found"
-			exit 1
-		}
 		ip link set up dev ${IFACE}
-		iw dev ${IFACE} set channel $IF_WIRELESS_CHANNEL
-		iw dev ${IFACE} connect $IF_WIRELESS_SSID
+		[ $IF_WIRELESS_EXTENSION -eq 1 ] && {
+			[ -x /usr/sbin/iwconfig ] || {
+				logger -t wireless "No wireless-tools found"	
+				exit 1
+			}
+			driver=wext
+			iwconfig ${IFACE} essid $IF_WIRELESS_SSID
+		} || {
+			[ -x /usr/sbin/iw ] || {
+				logger -t wireless "No iw utility found"
+				exit 1
+			}
+			driver=nl80211
+			iw dev ${IFACE} set channel $IF_WIRELESS_CHANNEL
+			iw dev ${IFACE} connect $IF_WIRELESS_SSID
+		}
 		[ $wpa2 -eq 1 ] && {
 			[ -x /usr/sbin/wpa_supplicant ] || {
 				logger -t wireless "No wpa_supplicant found"
@@ -93,7 +103,7 @@ case "$IF_WIRELESS_MODE" in
 		 	echo " psk=\"$IF_WIRELESS_PASSPHRASE\"" >> /tmp/wpa_supplicant.conf
 			echo " priority=5" >> /tmp/wpa_supplicant.conf
 			echo "}"  >> /tmp/wpa_supplicant.conf
-			wpa_supplicant -B -Dnl80211 -i${IFACE} -c/tmp/wpa_supplicant.conf
+			wpa_supplicant -B -D${driver} -i${IFACE} -c/tmp/wpa_supplicant.conf
 		}
 		;;
 	*)

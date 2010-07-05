@@ -17,13 +17,27 @@ config ADK_HAVE_DOT_CONFIG
 
 menu "ADK settings"
 
+config ADK_VENDOR
+	string "vendor name"
+	default "openadk"
+	help
+	  Vendor string is used for toolchain.
+
+config ADK_HOST
+	string "webserver for packages and distfiles"
+	default "www.openadk.org"
+	help
+	  Configure host for IPKG package management.
+
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
 	select BUSYBOX_CMP
 	select BUSYBOX_EXPR
+	select BUSYBOX_INSTALL
 	select BUSYBOX_MKTEMP
 	select BUSYBOX_UNZIP
+	select BUSYBOX_TAC
 	select BUSYBOX_TEE
 	select ADK_PACKAGE_AUTOCONF
 	select ADK_PACKAGE_AUTOMAKE
@@ -47,8 +61,10 @@ config ADK_DEVELSYSTEM
 	select ADK_PACKAGE_MAKE
 	select ADK_PACKAGE_MKSH
 	select ADK_PACKAGE_PATCH
+	select ADK_PACKAGE_PKG_CONFIG
 	select ADK_PACKAGE_MICROPERL
 	select ADK_PACKAGE_TAR
+	select ADK_PACKAGE_TSORT
 	select ADK_PACKAGE_WGET
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_ZLIB_DEV
@@ -119,6 +135,10 @@ config ADK_HOST_NETBSD
 	prompt "NetBSD"
 	boolean
 
+config ADK_HOST_DARWIN
+	prompt "Darwin"
+	boolean
+
 config ADK_HOST_CYGWIN
 	prompt "Cygwin"
 	boolean
@@ -128,4 +148,21 @@ endchoice
 endmenu
 
 source "target/Config.in"
+
+menu "Runtime configuration"
+config ADK_SSH_PUBKEY
+	string "SSH public key (root user only)"
+	default ""
+	help
+	  Paste your generated SSH public key here and it will be embedded into
+	  the built image, so you can use it to login instantly.
+
+config ADK_PASSWORD
+	string "root password for the embedded system"
+	default "linux123"
+	help
+	  Predefine the root password enabled in the built image.
+
+endmenu
+
 source "package/Config.in"

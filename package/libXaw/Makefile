@@ -20,6 +20,6 @@ CONFIGURE_ARGS+=	--disable-docs
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBXAW}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libXaw?.so* ${IDIR_LIBXAW}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libXaw*.so* ${IDIR_LIBXAW}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

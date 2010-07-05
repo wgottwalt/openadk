@@ -16,8 +16,6 @@ $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_TOOLS) \
-		--build=$(GNU_HOST_NAME) \
-		--host=$(GNU_HOST_NAME) \
 		--with-gmp-build=$(GMP_BUILD_DIR) \
 		--disable-shared \
 		--enable-static \

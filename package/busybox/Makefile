@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.16.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		319486ec65078d07fde26eb620fecde7
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
-PKG_URL:=		http://www.busybox.net
+PKG_URL:=		http://www.busybox.net/
 PKG_SITES:=		http://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -30,6 +30,12 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+bbrebuild:
+	@if [ -f ${TOPDIR}/.bbrebuild ];then \
+		rm ${WRKBUILD}/.build_done; \
+		rm ${TOPDIR}/.bbrebuild; \
+	fi
+
 ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${TOPDIR}/.busyboxcfg
@@ -38,7 +44,7 @@ ${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
 	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
 	
-do-configure: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+do-configure: ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
@@ -51,7 +57,7 @@ else
 	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 endif
 
-do-build: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+do-build: do-configure
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
@@ -60,7 +66,7 @@ else
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: ${WRKBUILD}/.config ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
@@ -78,6 +84,6 @@ udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
 
-fake:	$(TOPDIR)/.busyboxcfg do-configure do-install
+fake: bbrebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

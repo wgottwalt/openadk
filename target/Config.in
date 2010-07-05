@@ -11,6 +11,9 @@ config ADK_TARGET_WITH_USB
 config ADK_TARGET_WITH_PCI
 	bool
 
+config ADK_TARGET_WITH_SSB
+	bool
+
 config ADK_TARGET_WITH_MINIPCI
 	bool
 
@@ -270,6 +273,7 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_lemote
 	select ADK_LINUX_64
 	select ADK_KERNEL_USB
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -286,6 +290,9 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_RTC
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	help
 	  Lemote Subnotebook.
 	  http://www.lemote.com/english/index.html
@@ -328,14 +335,15 @@ config ADK_LINUX_MIPS_AG241
 	  Status: stable
 
 config ADK_LINUX_MIPS_BRCM
-	bool "Linksys/Asus Broadcom 47xx Routers"
+	bool "Broadcom BCM47xx based routers"
+	select ADK_TARGET_WITH_SSB
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
 	select ADK_brcm
 	help
-	  Linksys/Asus Broadcom 47xx based router.
+	  Broadcom bcm47xx based router.
 	  Status: development
 
 config ADK_LINUX_XSCALE_ZAURUS
@@ -643,6 +651,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_INPUT
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX1C boards.
 	  http://www.pcengines.ch/
@@ -666,6 +675,7 @@ config ADK_LINUX_X86_ALIX2D
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
 	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
@@ -689,6 +699,8 @@ config ADK_LINUX_X86_ALIX2D13
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
@@ -845,6 +857,7 @@ prompt "Target Firmware type"
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
@@ -858,6 +871,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_64_SHUTTLE || \

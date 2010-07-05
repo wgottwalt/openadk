@@ -195,6 +195,8 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP)/etc/
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/usr/bin
+	${INSTALL_DIR} $(IDIR_PHP_CLI)/etc
+	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_CLI)/etc/
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc/

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		0.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		be8503f15c3b81ba00eb8379ca8dcf33
+PKG_VERSION:=		0.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d6142a9a5821d6a6262a6edb903faa24
 PKG_DESCR:=		solution to record, convert and stream audio and video
 PKG_SECTION:=		sound
 PKG_DEPENDS:=		libfaad2
@@ -25,6 +25,7 @@ CONFIG_STYLE:=		minimal
 include ${TOPDIR}/mk/cpu.mk
 
 CONFIGURE_ARGS:=	--prefix=/usr \
+			--target-os=linux \
 			--arch=${CPU_ARCH} \
 			--enable-cross-compile \
 			--source-path=${WRKSRC} \
@@ -39,7 +40,6 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-ffmpeg \
 			--disable-ffplay \
 			--disable-ffserver \
-			--disable-vhook \
 			--enable-gpl \
 			--enable-swscale \
 			--enable-postproc \

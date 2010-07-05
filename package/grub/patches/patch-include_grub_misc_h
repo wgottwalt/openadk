@@ -1,6 +1,6 @@
---- grub-1.97.1.orig/include/grub/misc.h	2009-11-09 16:48:16.000000000 +0100
-+++ grub-1.97.1/include/grub/misc.h	2009-11-29 12:07:10.920475755 +0100
-@@ -74,14 +74,6 @@ grub_strncat (char *dest, const char *sr
+--- grub-1.98.orig/include/grub/misc.h	2010-03-06 21:51:37.000000000 +0100
++++ grub-1.98/include/grub/misc.h	2010-06-26 18:54:44.075171713 +0200
+@@ -91,14 +91,6 @@ grub_strncat (char *dest, const char *sr
    return dest;
  }
  

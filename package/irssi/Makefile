@@ -12,7 +12,6 @@ PKG_SECTION:=		text
 PKG_DEPENDS:=		glib libncurses
 PKG_BUILDDEP+=		glib ncurses
 ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
-PKG_DEPENDS+=		libopenssl
 PKG_BUILDDEP+=		openssl
 endif
 PKG_URL:=		http://www.irssi.org
@@ -22,6 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS:=		SSL
 PKGFD_SSL:=		SSL/TLS support
+PKGFS_SSL:=		libopenssl
 
 include ${TOPDIR}/mk/package.mk
 

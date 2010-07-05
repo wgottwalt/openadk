@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libgpg-error
-PKG_VERSION:=		1.7
+PKG_VERSION:=		1.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		62c0d09d1e76c5b6da8fff92314c4665
-PKG_DESCR:=		an helper library for common error codes and descriptions
+PKG_MD5SUM:=		1d2005268a2f096db28cf9cf77b3229a
+PKG_DESCR:=		a helper library for common error codes and descriptions
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnupg.org
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgpg-error/

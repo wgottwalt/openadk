@@ -3,16 +3,16 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		neon
-PKG_VERSION=		0.28.4
-PKG_RELEASE=		1
-PKG_MD5SUM=		6c3b94362af743d046e198e9fcbe4a85
+PKG_NAME:=		neon
+PKG_VERSION:=		0.29.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ba1015b59c112d44d7797b62fe7bee51
 PKG_DESCR:=		HTTP and WebDAV library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread libxml2 libopenssl zlib
 PKG_BUILDDEP+=		libpthread libxml2 openssl zlib
-PKG_UTL:=		http://webdav.org/neon
-PKG_SITES=		http://webdav.org/neon/
+PKG_URL:=		http://webdav.org/neon/
+PKG_SITES:=		http://webdav.org/neon/
 
 include ${TOPDIR}/mk/package.mk
 

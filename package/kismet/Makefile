@@ -7,6 +7,7 @@ PKG_NAME:=		kismet
 PKG_VERSION:=		2010-01-R1
 PKG_RELEASE:=		1
 PKG_DESCR:=		Kismet
+PKG_SECTION:=		net
 PKG_BUILDDEP+=		libpcap ncurses
 PKG_DEPENDS:=		libpcap libncurses
 PKG_MD5SUM:=		a6d6edcf65d5bb2cb5de6472bcc16f19

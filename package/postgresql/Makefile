@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		postgresql
-PKG_VERSION:=		8.3.7
+PKG_VERSION:=		8.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6e36f3b4dd27ae0c352376ea9f843de2
+PKG_MD5SUM:=		ae7f305eb9388b187e8f07dee0cec55c
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		libs
 PKG_BUILDDEP+=		zlib
@@ -25,17 +25,14 @@ INSTALL_STYLE:=         manual
 
 PKG_CONFIGURE_ARGS:=\
 			--disable-integer-datetimes \
-			--without-java \
-			--without-krb4 \
 			--without-krb5 \
 			--without-openssl \
 			--without-pam \
 			--without-perl \
 			--without-python \
 			--without-readline \
-			--without-rendezvous \
+			--without-bonjour \
 			--without-tcl \
-			--without-tk \
 			--with-zlib="yes"
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_ARGS}
 
@@ -60,6 +57,6 @@ do-build:
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBPQ}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpq.so.* ${IDIR_LIBPQ}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpq.so* ${IDIR_LIBPQ}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

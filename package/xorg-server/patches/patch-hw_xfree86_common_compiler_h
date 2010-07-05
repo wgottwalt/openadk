@@ -1,0 +1,55 @@
+	Caller side code changes regarding memory mapped IO. This patch applies
+	for mips architectures and is used by xf86-video-siliconmotion.
+--- xorg-server-1.7.6.orig/hw/xfree86/common/compiler.h	2010-03-12 05:38:22.000000000 +0100
++++ xorg-server-1.7.6/hw/xfree86/common/compiler.h	2010-06-05 09:43:12.531809482 +0200
+@@ -713,42 +713,43 @@ xf86WriteMmio32LeNB(__volatile__ void *b
+ #     define PORT_SIZE short
+ #    endif
+ 
+-_X_EXPORT unsigned int IOPortBase;  /* Memory mapped I/O port area */
++_X_EXPORT volatile unsigned char *ioBase;  /* Memory mapped I/O port area */
++
+ 
+ static __inline__ void
+ outb(unsigned PORT_SIZE port, unsigned char val)
+ {
+-	*(volatile unsigned char*)(((unsigned PORT_SIZE)(port))+IOPortBase) = val;
++	*(volatile unsigned char*)(((unsigned PORT_SIZE)(port))+ioBase) = val;
+ }
+ 
+ static __inline__ void
+ outw(unsigned PORT_SIZE port, unsigned short val)
+ {
+-	*(volatile unsigned short*)(((unsigned PORT_SIZE)(port))+IOPortBase) = val;
++	*(volatile unsigned short*)(((unsigned PORT_SIZE)(port))+ioBase) = val;
+ }
+ 
+ static __inline__ void
+ outl(unsigned PORT_SIZE port, unsigned int val)
+ {
+-	*(volatile unsigned int*)(((unsigned PORT_SIZE)(port))+IOPortBase) = val;
++	*(volatile unsigned int*)(((unsigned PORT_SIZE)(port))+ioBase) = val;
+ }
+ 
+ static __inline__ unsigned int
+ inb(unsigned PORT_SIZE port)
+ {
+-	return *(volatile unsigned char*)(((unsigned PORT_SIZE)(port))+IOPortBase);
++	return *(volatile unsigned char*)(((unsigned PORT_SIZE)(port))+ioBase);
+ }
+ 
+ static __inline__ unsigned int
+ inw(unsigned PORT_SIZE port)
+ {
+-	return *(volatile unsigned short*)(((unsigned PORT_SIZE)(port))+IOPortBase);
++	return *(volatile unsigned short*)(((unsigned PORT_SIZE)(port))+ioBase);
+ }
+ 
+ static __inline__ unsigned int
+ inl(unsigned PORT_SIZE port)
+ {
+-	return *(volatile unsigned int*)(((unsigned PORT_SIZE)(port))+IOPortBase);
++	return *(volatile unsigned int*)(((unsigned PORT_SIZE)(port))+ioBase);
+ }
+ 
+ 

@@ -1,7 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-
 LINUX_KMOD_SUFFIX=ko
 MODULES_SUBDIR := lib/modules/$(KERNEL_VERSION)
 LINUX_BUILD_DIR := $(BUILD_DIR)/linux-$(ARCH)-$(ADK_TARGET)
@@ -9,7 +8,6 @@ KMOD_BUILD_DIR := $(LINUX_BUILD_DIR)/linux-modules
 MODULES_DIR := $(LINUX_BUILD_DIR)/modules/$(MODULES_SUBDIR)
 TARGET_MODULES_DIR := $(LINUX_TARGET_DIR)/$(MODULES_SUBDIR)
 
-KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(ADK_TARGET)-$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
 INSTALL_TARGETS:= $(KERNEL_PKG)
 NOINSTALL_TARGETS:=
 TARGETS:=

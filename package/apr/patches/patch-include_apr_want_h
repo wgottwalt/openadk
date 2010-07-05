@@ -1,0 +1,16 @@
+--- apr-1.4.2.orig/include/apr_want.h	2010-01-06 12:36:50.000000000 +0100
++++ apr-1.4.2/include/apr_want.h	2010-05-29 17:56:14.201613974 +0200
+@@ -89,11 +89,13 @@
+ 
+ #else
+ 
++/*
+ struct iovec
+ {
+     void *iov_base;
+     size_t iov_len;
+ };
++*/
+ 
+ #endif
+ 

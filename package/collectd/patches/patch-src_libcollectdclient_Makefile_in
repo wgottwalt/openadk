@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- collectd-4.6.2.orig/src/libcollectdclient/Makefile.in	2009-03-18 11:56:40.000000000 +0100
-+++ collectd-4.6.2/src/libcollectdclient/Makefile.in	2009-05-09 16:29:33.000000000 +0200
-@@ -251,7 +251,7 @@ top_build_prefix = @top_build_prefix@
+--- collectd-4.10.0.orig/src/libcollectdclient/Makefile.in	2010-05-01 11:16:00.000000000 +0200
++++ collectd-4.10.0/src/libcollectdclient/Makefile.in	2010-06-14 15:49:28.563473998 +0200
+@@ -327,7 +327,7 @@ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  AUTOMAKE_OPTIONS = foreign no-dependencies

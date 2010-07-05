@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_DESCR:=		installer for cf, mmc, sd or mtd devices
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
@@ -31,13 +31,10 @@ do-install:
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
 	${INSTALL_BIN} ./src/adkinstall.rb532 \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
+else ifeq ($(ADK_LINUX_ARM_FOXG20),y)
 	${INSTALL_BIN} ./src/adkinstall.foxg20 \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_LINUX_MIPS_RB433),y)
-	${INSTALL_BIN} ./src/adkinstall.rb4xx \
-		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_LINUX_MIPS_RB411),y)
+else ifeq ($(ADK_LINUX_MIPS_RB4XX),y)
 	${INSTALL_BIN} ./src/adkinstall.rb4xx \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else
