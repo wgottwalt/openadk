@@ -24,7 +24,7 @@ INSTALL_STYLE:=		manual
 CONFIGURE_ARGS+=	--enable-gettext=no \
 			--with-gnu-ld
 CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" "
-ALL_TARGET=		
+ALL_TARGET=
 
 do-install:
 	${INSTALL_DIR} ${IDIR_XFSPROGS}/usr/sbin

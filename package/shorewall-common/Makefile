@@ -29,7 +29,7 @@ do-build:
 	${RM} -R ${WRKINST}/usr/share/shorewall/configfiles
 
 ifeq ($(ADK_PACKAGE_SHOREWALL_STRIPCONF),y)
-	${BASH} ./files/downstrip ${WRKINST}/etc/shorewall 
+	${BASH} ./files/downstrip ${WRKINST}/etc/shorewall
 endif
 
 ifeq ($(ADK_PACKAGE_SHOREWALL_STRIPSHARED),y)

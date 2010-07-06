@@ -13,7 +13,7 @@ PKG_BUILDDEP+=		libiconv neon
 ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
 PKG_BUILDDEP+=		fuse
 endif
-PKG_URL:=		http://savannah.nongnu.org/projects/davfs2		
+PKG_URL:=		http://savannah.nongnu.org/projects/davfs2
 PKG_SITES:=		http://www.very-clever.com/download/nongnu/davfs2/
 
 ifeq (${ADK_PACKAGE_DAVFS2_FUSE},y)

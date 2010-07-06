@@ -119,9 +119,9 @@ CONFIGURE_ARGS+=	--disable-aac
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
-CONFIGURE_ARGS+=	--enable-vorbis 
+CONFIGURE_ARGS+=	--enable-vorbis
 else
-CONFIGURE_ARGS+=	--disable-vorbis 
+CONFIGURE_ARGS+=	--disable-vorbis
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)

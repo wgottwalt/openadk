@@ -43,7 +43,7 @@ ALL_TARGET:=		programs
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
-	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d 
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
 	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d

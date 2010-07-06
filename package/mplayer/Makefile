@@ -11,7 +11,7 @@ PKG_DESCR:=		popular video player
 PKG_SECTION:=		video
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
 PKG_DEPENDS+=		libogg libpng libpthread libvorbis
-PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib 
+PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
 PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext
 ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)

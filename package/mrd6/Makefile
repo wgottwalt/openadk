@@ -26,7 +26,7 @@ TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs \
 			-I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
 endif
-XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}" 
+XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc

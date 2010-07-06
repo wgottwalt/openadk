@@ -24,7 +24,7 @@ CONFIGURE_ARGS+=	--disable-efiemu \
 			--disable-grub-fstest
 
 post-install:
-	${INSTALL_DIR} $(IDIR_GRUB)/usr/{sbin,lib,bin} 
+	${INSTALL_DIR} $(IDIR_GRUB)/usr/{sbin,lib,bin}
 	${INSTALL_DIR} $(IDIR_GRUB)/etc
 	${CP} ${WRKINST}/etc/grub.d $(IDIR_GRUB)/etc
 	${CP} ${WRKINST}/usr/lib/* $(IDIR_GRUB)/usr/lib

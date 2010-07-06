@@ -78,7 +78,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts	
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/
