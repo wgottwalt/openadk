@@ -28,5 +28,5 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/libao.so* ${IDIR_LIBAO}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/ao/plugins-2/*.so \
 		${IDIR_LIBAO}/usr/lib/ao/plugins-2
-	
+
 include ${TOPDIR}/mk/pkg-bottom.mk

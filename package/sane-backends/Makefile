@@ -159,7 +159,7 @@ CONFIGURE_ARGS+=	--disable-translations \
 			--enable-libusb
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} ${IDIR_SANE_BACKENDS}/etc/sane.d 
+	${INSTALL_DIR} ${IDIR_SANE_BACKENDS}/etc/sane.d
 	${INSTALL_DIR} ${IDIR_SANE_BACKENDS}/usr/lib
 	${INSTALL_DIR} ${IDIR_SANE_BACKENDS}/usr/sbin
 	${CP} ${WRKINST}/etc/sane.d/dll.conf ${IDIR_SANE_BACKENDS}/etc/sane.d

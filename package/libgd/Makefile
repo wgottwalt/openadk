@@ -23,7 +23,7 @@ CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \
 			--with-jpeg=${STAGING_DIR}/usr \
 			--with-png=${STAGING_DIR}/usr \
-			--without-xpm 
+			--without-xpm
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGD}/usr/lib

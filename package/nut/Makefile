@@ -91,7 +91,7 @@ CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
 endif
 
-ALL_TARGET:=		all 
+ALL_TARGET:=		all
 INSTALL_TARGET:=	install
 
 ifneq (${ADK_PACKAGE_NUT_USB},)
@@ -108,7 +108,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
 		${IDIR_NUT}/usr/sbin/
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib 
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \

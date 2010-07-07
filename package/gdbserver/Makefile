@@ -8,7 +8,7 @@ PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		comp
 PKG_DEPENDS:=		libthread-db
 
-PKG_TARGET_DEPENDS:=    !foxboard 
+PKG_TARGET_DEPENDS:=    !foxboard
 
 include ${TOPDIR}/mk/package.mk
 

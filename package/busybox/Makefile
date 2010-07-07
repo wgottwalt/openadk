@@ -37,7 +37,7 @@ ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 ${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
 	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-	
+
 do-configure: ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \

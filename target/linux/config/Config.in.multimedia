@@ -135,5 +135,4 @@ config ADK_KPACKAGE_KMOD_USB_PWC
 	default n
 	help
 
-#source package/em28xx/Config.in
 endmenu

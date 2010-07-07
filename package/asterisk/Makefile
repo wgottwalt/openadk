@@ -121,7 +121,7 @@ MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 ALL_TARGET:=		all install samples
 
 pre-configure:
-	cd "$(WRKBUILD)/menuselect"; ./configure 
+	cd "$(WRKBUILD)/menuselect"; ./configure
 
 pre-build:
 	$(MAKE) -C $(WRKBUILD)/menuselect

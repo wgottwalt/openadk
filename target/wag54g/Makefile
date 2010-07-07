@@ -25,7 +25,7 @@ kernel-install: tools-compile
 		$(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' \
 	addpattern -p WA21 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel	
+		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),squashfs)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
