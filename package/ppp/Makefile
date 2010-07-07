@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
@@ -29,7 +29,6 @@ $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_
 CONFIGURE_ENV+=		UNAME_S="Linux"
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
-			HAVE_INET6="1" \
 			STAGING_DIR=${STAGING_DIR} \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'
@@ -45,18 +44,17 @@ SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPSTATS}+=		mod-pppstats-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPUMTS}+=		mod-pppumts-install
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	echo -------------------------------
-	echo ${SUB_INSTALLS-m}
-	echo ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp
-	ln -sf /tmp/resolv.conf ${IDIR_PPP}/etc/ppp/resolv.conf
 	install -m0600 ./files/etc/ppp/chap-secrets ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DATA} ./files/etc/ppp/options ${IDIR_PPP}/etc/ppp/
-	${INSTALL_FILTER}
 	${INSTALL_BIN} ./files/etc/ppp/ip-up ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-up.d
+	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/0* \
+		${IDIR_PPP}/etc/ppp/ip-up.d
 	${INSTALL_BIN} ./files/etc/ppp/ip-down ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-down.d
+	${INSTALL_BIN} ./files/etc/ppp/ip-down.d/0* \
+		${IDIR_PPP}/etc/ppp/ip-down.d
 	${INSTALL_DIR} ${IDIR_PPP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppd ${IDIR_PPP}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_PPP}/usr/lib/pppd

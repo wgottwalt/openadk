@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ntpclient
 PKG_VERSION:=		2007_365
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cb98711f11769cdd22fc592844cef414
 PKG_DESCR:=		NTP client for setting system time from NTP servers
 PKG_SECTION:=		net
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://doolittle.icarus.com/ntpclient
 PKG_SITES:=		http://doolittle.icarus.com/ntpclient/
 

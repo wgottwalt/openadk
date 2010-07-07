@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /etc/rc.conf
+
+# get time via ntpclient if available
+[ -x /usr/sbin/ntpclient ] && ntpclient -s -h pool.ntp.org
+# get time via rdate if available
+[ -x /usr/sbin/rdate ] && rdate -nv pool.ntp.org
+# restart ntpd when enabled
+test x"${ntpd:-NO}" = x"NO" || /etc/init.d/ntpd restart
