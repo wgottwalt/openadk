@@ -1,0 +1,34 @@
+# wait till the sim is ready
+opengt
+ set com 115200n81
+ set senddelay 0.02
+ waitquiet 1 0.2
+ flash 0.1
+:start
+ print "Waiting for SIM..."
+ let c=0
+:waitready
+ send "AT+CPIN?^m"
+ waitfor 2 "SIM PUK","SIM PIN","READY","ERROR","ERR"
+ if % = -1 goto tryagain
+ if % = 0 goto simready
+ if % = 1 goto simready
+ if % = 2 goto simready
+ if % = 3 goto tryagain
+ if % = 4 goto tryagain
+
+:tryagain
+ if c > 120 goto waittimeout
+ let c=c+2
+ print "."
+ goto waitready
+
+:waittimeout
+ print " Timeout
+"
+ exit 1
+
+:simready
+ print " OK
+"
+ exit 0

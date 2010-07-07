@@ -1176,6 +1176,10 @@ $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
 ,75))
 
+$(eval $(call KMOD_template,USB_HSO,usb-hso,\
+	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
+,75))
+
 $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-lib \
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-audio \

@@ -169,6 +169,14 @@ config ADK_KPACKAGE_KMOD_USB_PEGASUS
 	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 
+config ADK_KPACKAGE_KMOD_USB_HSO
+	prompt "kmod-usb-hso...................... Support for USB HSO devices"
+	tristate
+	select ADK_KERNEL_RFKILL
+	select ADK_KPACKAGE_KMOD_USB_STORAGE
+	default n
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+
 config ADK_KPACKAGE_KMOD_USB_PRINTER
 	prompt "kmod-usb-printer.................. Support for USB printers"
 	tristate

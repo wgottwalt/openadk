@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.5
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
@@ -14,6 +14,7 @@ PKG_DEPENDS:=		kmod-ppp
 PKG_URL:=		http://ppp.samba.org
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
 PKG_DEPENDS_PPPOE:=	kmod-pppoe
+PKG_DEPENDS_UMTS:=	comgt
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,7 +25,7 @@ $(eval $(call PKG_template,PPP_MOD_RADIUS,ppp-mod-radius,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,PPP_MOD_CHAT,ppp-mod-chat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UMTS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		UNAME_S="Linux"
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
@@ -104,12 +105,13 @@ mod-pppstats-install:
 
 mod-pppumts-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates
-	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-{down,up}.d
 	${INSTALL_DATA} ./files/etc/ppp/templates/umts \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates/
-	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/umts \
-		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-up.d/
-	${INSTALL_BIN} ./files/etc/ppp/ip-down.d/umts \
-		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-down.d/
+	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d
+	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d
+	$(INSTALL_BIN) ./files/hso.if-up \
+		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d/06-hso
+	$(INSTALL_BIN) ./files/hso.if-down \
+		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d/06-hso
 
 include ${TOPDIR}/mk/pkg-bottom.mk

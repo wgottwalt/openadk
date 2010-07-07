@@ -12,7 +12,7 @@ GMAKE="$GMAKE --no-print-directory"
 typeset -L$x_cols pbar
 
 # check for trailing whitespace
-grep -H "[[:space:]]$" */Makefile && print "Found trailing whitespace, please fix"
+grep -H '[[:space:]]$' */Makefile && print "Found trailing whitespace, please fix"
 
 # build a cache of “ipkg package name” → “package conf option” for
 # use with dependency resolution

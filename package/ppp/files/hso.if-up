@@ -1,0 +1,66 @@
+#!/bin/sh
+
+[ "$IFACE" == "hso0" ] || exit 0
+
+TTY=${IF_HSO_DEVICE:-/dev/ttyHS0}
+# wait for card to initialize
+COUNT=0
+while [ $((COUNT++)) -lt 20 ]; do
+	[ -c "$TTY" ] && break
+	[ $COUNT -eq 20 ] && {
+		logger "$0: '$TTY' not found"
+		exit 1
+	}
+	sleep 1
+done
+
+if [ "$IF_PIN" ]; then
+	COMGTPIN="$IF_PIN" comgt -d "$TTY" PIN
+fi
+
+if [ "$IF_APN" ]; then
+	COMGTAPN="$IF_APN" comgt -d "$TTY" APN
+fi
+
+# only run once!
+[ -f /tmp/hso-connect ] && exit 0
+
+while :
+do
+        # get connection status
+        STATUS=$(comgt -s -d "$TTY" /etc/comgt/hsostatus.comgt |
+                 tr -d " " |
+                 grep -v ^$ |
+                 cut -d , -f 2)
+        # dial if connection status is disabled
+        if [ "$STATUS" -eq "0" ] ; then
+                comgt -s -d "$TTY" /etc/comgt/hsoconnect.comgt
+                DATA=$(comgt -s -d "$TTY" /etc/comgt/hsodata.comgt)
+		if [ "$?" -ne 0 ] ; then
+			continue
+		fi
+                DATA=$(echo $DATA |
+                       tr -d " " |
+                       grep -v ^$)
+                IP=$(echo $DATA | cut -d , -f 2)
+                NS1=$(echo $DATA | cut -d , -f 4)
+                NS2=$(echo $DATA | cut -d , -f 5)
+                ip address flush dev hso0 2> /dev/null
+                ip address add "$IP/32" dev hso0
+                ip link set hso0 up
+		def=$(ip route show |grep default | wc -l)
+		[ $def -eq 1 ] && ip route del default
+                ip route add default dev hso0
+                echo "nameserver $NS1" >  /etc/resolv.conf
+                echo "nameserver $NS2" >> /etc/resolv.conf
+		. /etc/rc.conf
+		# get time via ntpclient if available
+		[ -x /usr/sbin/ntpclient ] && ntpclient -s -h pool.ntp.org
+		# get time via rdate if available
+		[ -x /usr/sbin/rdate ] && rdate -nv pool.ntp.org
+		# restart ntpd when enabled
+		test x"${ntpd:-NO}" = x"NO" || /etc/init.d/ntpd restart
+        fi
+        sleep 10
+done &
+echo $! > /tmp/hso-connect

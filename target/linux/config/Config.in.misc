@@ -4,6 +4,10 @@ config ADK_LINUX_INITRAMFS_BUILTIN
 	boolean
 	default n
 
+config ADK_KERNEL_RFKILL
+	boolean
+	default n
+
 menu "Miscellaneous devices support"
 
 config ADK_KERNEL_WATCHDOG
