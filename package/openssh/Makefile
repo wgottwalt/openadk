@@ -86,9 +86,9 @@ post-install:
 		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
 	# ssh pubkey
-	test -z $(ADK_SSH_PUBKEY) || ( \
+	test -z $(ADK_RUNTIME_SSH_PUBKEY) || ( \
 		mkdir -p $(IDIR_OPENSSH_SERVER)/etc/ssh; \
-		echo $(ADK_SSH_PUBKEY) \
+		echo $(ADK_RUNTIME_SSH_PUBKEY) \
 		>$(IDIR_OPENSSH_SERVER)/etc/ssh/authorized_keys; \
         )
 

@@ -150,18 +150,30 @@ endmenu
 source "target/Config.in"
 
 menu "Runtime configuration"
-config ADK_SSH_PUBKEY
+
+config ADK_RUNTIME_HOSTNAME
+	string "hostname for the embedded system"
+	default "linux"
+	help
+	  Set your target hostname.
+
+config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	default ""
 	help
 	  Paste your generated SSH public key here and it will be embedded into
 	  the built image, so you can use it to login instantly.
 
-config ADK_PASSWORD
+config ADK_RUNTIME_PASSWORD
 	string "root password for the embedded system"
 	default "linux123"
 	help
 	  Predefine the root password enabled in the built image.
+
+config ADK_RUNTIME_TIMEZONE
+	string "timezone for the embedded system"
+	default "Europe/Berlin"
+	help
 
 endmenu
 

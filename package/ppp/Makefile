@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
-PKG_VERSION:=		2.4.4
-PKG_RELEASE:=		18
-PKG_MD5SUM:=		183800762e266132218b204dfb428d29
+PKG_VERSION:=		2.4.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		net
 PKG_MULTI:=		1
@@ -64,7 +64,7 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/peers
 	$(INSTALL_DIR) ${IDIR_PPP}/etc/network/if-pre-up.d
 	$(INSTALL_BIN) ./files/ppp.pre-up \
-		${IDIR_PPP}/etc/network/if-pre-up.d/ppp
+		${IDIR_PPP}/etc/network/if-pre-up.d/05-ppp
 
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient

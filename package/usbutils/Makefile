@@ -19,7 +19,8 @@ $(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/share
-	${INSTALL_DATA} ${WRKINST}/usr/share/usb.ids.gz ${IDIR_LSUSB}/usr/share/
+	${INSTALL_DATA} ${WRKINST}/usr/share/usb.ids \
+		${IDIR_LSUSB}/usr/share/
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/lsusb ${IDIR_LSUSB}/usr/sbin/
 

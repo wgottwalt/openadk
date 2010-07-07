@@ -6,8 +6,9 @@ include $(TOPDIR)/toolchain/uClibc/Makefile.inc
 
 PKG_DESCR:=		embedded C library
 PKG_SECTION:=		base
-NO_DISTFILES:=		1
 PKG_OPTS:=		noremove
+
+NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
@@ -26,21 +27,25 @@ SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
-	echo 'CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00' > $(IDIR_UCLIBC)/etc/TZ
+	test -z $(ADK_RUNTIME_TIMEZONE) || \
+	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
+	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/libuClibc-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/libuClibc-$(PKG_VERSION).so \
+		$(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
+		$(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib/
 	-for file in libcrypt libdl libm libnsl libresolv librt libutil; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
-		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_UCLIBC)/lib/; \
+		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so \
+			$(IDIR_UCLIBC)/lib/; \
 	done
 
 uclibc-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
-	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
 		headers_install

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.16.1
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		319486ec65078d07fde26eb620fecde7
+PKG_VERSION:=		1.16.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2ba980f720a5bdce4ec05423519acc35
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
 PKG_URL:=		http://www.busybox.net/
@@ -29,12 +29,6 @@ SUB_INSTALLS-${ADK_PACKAGE_UDHCPD}+=	udhcpd-install
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-bbrebuild:
-	@if [ -f ${TOPDIR}/.bbrebuild ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.bbrebuild; \
-	fi
 
 ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
@@ -84,6 +78,12 @@ udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
 
-fake: bbrebuild
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		rm ${WRKBUILD}/.build_done; \
+		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
+
+fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -64,8 +64,16 @@ noconfig_targets:=	menuconfig \
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
+		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
-			touch .bbrebuild; \
+			touch .rebuild.busybox;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_RUNTIME_PASSWORD .config|md5sum)" != "$$(grep ^ADK_RUNTIME_PASSWORD .config.old|md5sum)" ];then \
+			touch .rebuild.base-files;\
+			rebuild=1;\
+		fi; \
+		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old; \
 		fi; \
 	fi
