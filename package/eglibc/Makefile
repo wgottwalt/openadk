@@ -52,8 +52,9 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
 		$(IDIR_EGLIBC)/usr/lib
-	# install /etc/localtime from host system (FIXME)
-	${CP} /etc/localtime $(IDIR_EGLIBC)/etc
+	test -z $(ADK_RUNTIME_TIMEZONE) || \
+	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
+		$(IDIR_EGLIBC)/etc/localtime
 	$(CP) $(STAGING_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
