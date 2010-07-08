@@ -8,7 +8,7 @@ PKG_VERSION:=		1.4.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c9e8aeb15daeba4b6283b40bb640e908
 PKG_DESCR:=		WebDAV filesystem
-PKG_SECTION:=		admin
+PKG_SECTION:=		net/fs
 PKG_BUILDDEP+=		libiconv neon
 ifneq (${ADK_PACKAGE_DAVFS2_FUSE}${ADK_PACKAGE_DAVFS2_BOTH},)
 PKG_BUILDDEP+=		fuse

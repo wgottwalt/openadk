@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b7d0081b17ff6afae85e8dc14157fa57
 PKG_DESCR:=		A minimal and secure imap server
-PKG_SECTION:=		net
+PKG_SECTION:=		mail
 PKG_URL:=		http://www.dovecot.org
 PKG_SITES:=		http://www.dovecot.org/releases/1.2/
 

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c3f1bce1affc7dfbc222145e00e1310e
 PKG_DESCR:=		X11 display manager control protocol library
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 ifeq ($(ADK_STATIC),y)

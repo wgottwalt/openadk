@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libusb alsa-lib libpthread tslib
 PKG_BUILDDEP+=		libusb alsa-lib tslib
 PKG_URL:=		http://www.libsdl.org
 PKG_SITES:=		http://www.libsdl.org/release/
+PKG_DESCR_LIB_DEV:=	development files for libsdl
+PKG_SECTION_LIB_DEV:=	devel
 
 DISTFILES:=             SDL-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
@@ -20,7 +22,7 @@ WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSDL_DEV,libsdl-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSDL_DEV,libsdl-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl,${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		efafad1b256e3de410f4fce5335d9c9d
 PKG_DESCR:=		GNU tar
-PKG_SECTION:=		utils
+PKG_SECTION:=		archive
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar
 PKG_SITES:=		ftp://ftp.informatik.rwth-aachen.de/pub/gnu/tar/ \
                 	http://mirrors.kernel.org/gnu/tar/

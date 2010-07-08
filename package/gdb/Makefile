@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger
-PKG_SECTION:=		comp
+PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat
 PKG_BUILDDEP+=		ncurses readline libiconv expat
 PKG_TARGET_DEPENDS:=	!foxboard !ag241

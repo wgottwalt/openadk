@@ -8,7 +8,7 @@ PKG_VERSION:=		5.1.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d0870f2de55d59c1c8419f36e8fac150
 PKG_DESCR:=		LUA programming language
-PKG_SECTION:=		admin
+PKG_SECTION:=		lang
 PKG_URL:=		http://www.lua.org
 PKG_SITES:=		http://www.lua.org/ftp/ \
 			http://ftp.gwdg.de/pub/languages/lua/ \

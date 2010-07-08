@@ -8,7 +8,7 @@ PKG_VERSION:=		3.5.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2d81d6633e67ac5562e2fbee126b2897
 PKG_DESCR:=		common operation for the XPM pixmap format
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

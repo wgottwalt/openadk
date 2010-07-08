@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/binutils/Makefile.inc
 
 PKG_DESCR:=		binary utilities (nm, objdump, ar, as, ..)
-PKG_SECTION:=		comp
+PKG_SECTION:=		lang
 PKG_HOST_DEPENDS:=      !cygwin
 
 include ${TOPDIR}/mk/package.mk

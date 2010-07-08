@@ -8,7 +8,7 @@ PKG_VERSION:=		0.8.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bd9195d086566f56634c0bcbbbcbebea
 PKG_DESCR:=		a CGI wrapper to embed shell scripts in HTML documents
-PKG_SECTION:=		web
+PKG_SECTION:=		lang
 PKG_URL:=		http://haserl.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
 

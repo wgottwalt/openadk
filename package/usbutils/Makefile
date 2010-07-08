@@ -8,7 +8,7 @@ PKG_VERSION:=		0.86
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		34979f675d2bcb3e1b45012fa830a53f
 PKG_DESCR:=		A program to list USB devices
-PKG_SECTION:=		misc
+PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP+=		libusb libusb-compat
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-usb/}

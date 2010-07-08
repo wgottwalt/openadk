@@ -8,7 +8,7 @@ PKG_VERSION:=		2.8.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e3b2788b79bfc82acbe717e3c54d4e92
 PKG_DESCR:=		GNU TLS library
-PKG_SECTION:=		libs
+PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
 PKG_BUILDDEP+=		libgcrypt liblzo libtasn1 opencdk zlib ncurses
 PKG_URL:=		http://www.gnu.org/software/gnutls
@@ -18,13 +18,14 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_DESCR_GNUTLS_UTILS:=	GNU TLS utilities
 PKG_DEPENDS_GNUTLS_UTILS:=	libgnutls libgnutls-extra
+PKG_SECTION_LIB:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_LIB}))
 $(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_GNUTLS_UTILS},${PKG_DESCR_GNUTLS_UTILS},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_LIB}))
+$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_LIB}))
 
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--disable-camellia \

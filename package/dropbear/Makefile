@@ -8,7 +8,7 @@ PKG_VERSION:=		0.52
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		1c69ec674481d7745452f68f2ea5597e
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
-PKG_SECTION:=		net
+PKG_SECTION:=		net/security
 PKG_URL:=		http://matt.ucc.asn.au/dropbear
 PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 

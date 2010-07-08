@@ -8,7 +8,7 @@ PKG_VERSION:=		2.0.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d400573042d41559fc3e5260275300d8
 PKG_DESCR:=		Utility to trace the route of IP packets
-PKG_SECTION:=		utils
+PKG_SECTION:=		net
 PKG_URL:=		http://traceroute.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
 

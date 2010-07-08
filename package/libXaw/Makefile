@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_BUILDDEP+=		libXext libXmu libXpm
 PKG_MD5SUM:=		67662e6b2dceb2907159215c83364c5a
 PKG_DESCR:=		X11 Athena Widget library
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

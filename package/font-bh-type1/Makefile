@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		000da66f92370ac59e3df1b6719fdd9a
 PKG_DESCR:=		X fonts
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/fonts
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

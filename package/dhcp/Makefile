@@ -8,7 +8,7 @@ PKG_VERSION:=		4.1.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		38a74c89d8913b9b5f33737047623c18
 PKG_DESCR:=		ISC DHCP server
-PKG_SECTION:=		net
+PKG_SECTION:=		dhcp
 PKG_URL:=		https://www.isc.org/software/dhcp
 PKG_SITES:=		ftp://ftp.isc.org/isc/dhcp/
 

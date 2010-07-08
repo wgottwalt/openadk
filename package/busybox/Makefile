@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.16.2
+PKG_VERSION:=		1.17.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2ba980f720a5bdce4ec05423519acc35
+PKG_MD5SUM:=		2908d1d1ca83ff12bc0b05f0d2a3335c
 PKG_DESCR:=		Core utilities for embedded Linux systems
 PKG_SECTION:=		base
 PKG_URL:=		http://www.busybox.net/

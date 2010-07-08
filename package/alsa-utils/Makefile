@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.22
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
-PKG_SECTION:=		utils
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libpthread
 PKG_BUILDDEP+=		alsa-lib
 ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)

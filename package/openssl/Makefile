@@ -4,25 +4,27 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.0.0a
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		89eaa86e25b2845f920ec00ae4c864ed
+PKG_MD5SUM:=		e3873edfffc783624cfbdb65e2249cbd
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP+=		zlib
-PKG_URL:=		http://www.openssl.org
-PKG_SITES:=		http://www.openssl.org/source/ \
+PKG_URL:=		http://www.openssl.org/
+PKG_SITES:=		http://www.openssl.org/source/
 
 PKG_DESCR_UTIL:=	OpenSSL (Secure Socket Layer) command line tool
-PKG_SECTION_UTIL:=	admin
+PKG_SECTION_UTIL:=	crypto
 PKG_DEPENDS_UTIL:=	libopenssl
 PKG_DEPENDS_DEV:=	libopenssl
+PKG_DESCR_LIB_DEV:=	development files for openssl
+PKG_SECTION_LIB_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTIL},${PKG_DESCR_UTIL},${PKG_SECTION_UTIL}))
 
 SUB_INSTALLS-y:=
@@ -36,9 +38,6 @@ INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
 OPENSSL_OPTIONS = shared no-ec no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
-
-#post-extract:
-#	@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 do-configure:
 	(cd $(WRKBUILD); \

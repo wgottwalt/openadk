@@ -7,13 +7,15 @@ include $(TOPDIR)/toolchain/uClibc/Makefile.inc
 PKG_DESCR:=		embedded C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
+PKG_DESCR_LIB_DEV:=	development files for uclibc
+PKG_SECTION_LIB_DEV:=	devel
 
 NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual

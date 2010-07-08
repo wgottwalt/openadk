@@ -8,7 +8,7 @@ PKG_VERSION:=		0.15.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3ee746cb9193acfd0e1bd7a8c54af1a6
 PKG_DESCR:=		A music player daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
@@ -66,7 +66,7 @@ PKGFS_WITH_OGG:=	libvorbis libogg
 PKGFD_WITH_TREMOR:=	enable fixpoint Vorbis/OGG support
 PKGFS_WITH_TREMOR:=	libvorbisidec
 PKGFD_WITH_FLAC:=	enable FLAC support
-PKGFD_WITH_FLAC:=	libflac
+PKGFS_WITH_FLAC:=	libflac
 PKGFD_WITH_WAV:=	enable WAVE support
 PKGFS_WITH_WAV:=	libaudiofile
 PKGFD_WITH_MMS:=	enable MMS support

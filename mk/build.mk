@@ -175,7 +175,7 @@ newpackage:
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
-	@echo "Do not forget to add package to package/Config.in"
+	@echo "choose PKG_SECTION to add it to an existent submenu"  
 
 #############################################################
 #
@@ -483,10 +483,12 @@ bulkallmod:
 	done <${TOPDIR}/target/bulk.lst
 
 menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)
+	@echo "Generating menu structure ..."
 	mksh $(TOPDIR)/package/pkgmaker
 	@:>.menu
 
 dep:
+	@echo "Generating dependencies ..."
 	mksh $(TOPDIR)/package/depmaker
 
 .PHONY: menu dep
