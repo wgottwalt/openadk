@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.8.5
+PKG_VERSION:=		2.8.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e3b2788b79bfc82acbe717e3c54d4e92
+PKG_MD5SUM:=		eb0a6d7d3cb9ac684d971c14f9f6d3ba
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
 PKG_BUILDDEP+=		libgcrypt liblzo libtasn1 opencdk zlib ncurses
-PKG_URL:=		http://www.gnu.org/software/gnutls
+PKG_URL:=		http://www.gnu.org/software/gnutls/
 PKG_SITES:=		${MASTER_SITE_GNU:=gnutls/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
