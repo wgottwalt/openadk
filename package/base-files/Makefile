@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		20
+PKG_RELEASE:=		21
 PKG_SECTION:=		base
 PKG_DESCR:=		basic filesystem structure and scripts
 

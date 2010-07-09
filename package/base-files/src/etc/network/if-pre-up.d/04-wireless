@@ -46,7 +46,7 @@ case "$IF_WIRELESS_MODE" in
 		echo "channel=$IF_WIRELESS_CHANNEL" >> /tmp/hostapd.conf
 		echo "hw_mode=$IF_WIRELESS_HWMODE" >> /tmp/hostapd.conf
 		echo "auth_algs=$sec" >> /tmp/hostapd.conf
-		[ $wpa -eq 0 ] && {
+		[ $wpa -eq 0 ] && [ $wpa1 -eq 0 ] && [ $wpa2 -eq 0 ] && {
 			logger -t hostap "using no security mechanism"
 			echo "wpa=0" >> /tmp/hostapd.conf
 		}
