@@ -42,8 +42,6 @@ imageinstall: $(BUILD_DIR)/$(INITRAMFS_PIGGYBACK) createinitramfs
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(FS),encrypted)
