@@ -154,9 +154,4 @@ menu "Ethernet bridge firewalling"
 source target/linux/config/Config.in.netfilter.ebt
 endmenu
 
-menu "Netfilter Addons"
-source package/ipset/Config.in.kmod
-source package/rtsp/Config.in.kmod
-endmenu
-
 endmenu

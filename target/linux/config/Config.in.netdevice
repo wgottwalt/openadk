@@ -309,10 +309,7 @@ endmenu
 
 menu "ATM driver support"
 depends on ADK_TARGET_WITH_DSL
-
-source package/sangam-atm/Config.in
-source package/sangam-atm/Config.in.kmod
-source package/sangam-atm/Config.in.fw
-
+source package/sangam-atm/Config.in.manual
 endmenu
+
 endmenu
