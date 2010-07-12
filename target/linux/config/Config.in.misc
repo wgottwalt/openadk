@@ -87,7 +87,4 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	default n
 	help
 
-
-source package/exmap/Config.in.kmod
-
 endmenu
