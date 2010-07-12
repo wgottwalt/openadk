@@ -5,16 +5,29 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hostapd
 PKG_VERSION:=		0.7.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f47689c62ee8c1c59989b402d4f130c3
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		wifi
+PKG_MULTI:=		1
 PKG_DEPENDS:=		libnl libopenssl
 PKG_BUILDDEP+=		libnl openssl
 PKG_URL:=		http://hostap.epitest.fi
+ifeq (${ADK_PACKAGE_HOSTAPD_WITH_OPENSSL},y)
+PKG_BUILDDEP+=		openssl
+endif
+ifeq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},y)
+PKG_BUILDDEP+=		gnutls
+endif
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
+
+PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
+PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCS_WITH_GNUTLS:=	libgnutls
 
 include ${TOPDIR}/mk/package.mk
 
@@ -26,6 +39,9 @@ INSTALL_STYLE:=		manual
 
 do-configure:
 	${CP} ./files/hostapd.config ${WRKBUILD}/.config
+ifneq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},)
+	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
+endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_HOSTAPD_UTILS}/usr/sbin

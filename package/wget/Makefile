@@ -7,7 +7,7 @@ PKG_NAME:=		wget
 PKG_VERSION:=		1.12
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		141461b9c04e454dc8933c9d1f2abf83
-PKG_DESCR:=		retrieving files using HTTP, HTTPS and FTP
+PKG_DESCR:=		retrieving files using HTTP(S) and FTP
 PKG_SECTION:=		www
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}

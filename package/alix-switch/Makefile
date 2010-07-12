@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_DESCR:=		simple daemon listening on button events
+PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
 
 PKG_TARGET_DEPENDS:=	alix

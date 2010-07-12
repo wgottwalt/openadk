@@ -4,7 +4,7 @@ config ADK_COMPILE_BUSYBOX
 	default n
 
 config ADK_PACKAGE_BUSYBOX
-	prompt "busybox........................... Core utilities for embedded Linux systems"
+	prompt "busybox................ Core utilities for embedded systems"
 	boolean
 	select ADK_COMPILE_BUSYBOX
 	default y if !ADK_TOOLCHAIN_ONLY

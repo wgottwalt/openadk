@@ -8,7 +8,7 @@ PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		21
 PKG_SECTION:=		base
-PKG_DESCR:=		basic filesystem structure and scripts
+PKG_DESCR:=		basic files and scripts
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1

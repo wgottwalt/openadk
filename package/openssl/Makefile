@@ -14,17 +14,17 @@ PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.openssl.org/
 PKG_SITES:=		http://www.openssl.org/source/
 
-PKG_DESCR_UTIL:=	OpenSSL (Secure Socket Layer) command line tool
+PKG_DESCR_UTIL:=	OpenSSL command line tool
 PKG_SECTION_UTIL:=	crypto
 PKG_DEPENDS_UTIL:=	libopenssl
+PKG_DESCR_DEV:=		development files for openssl
+PKG_SECTION_DEV:=	devel
 PKG_DEPENDS_DEV:=	libopenssl
-PKG_DESCR_LIB_DEV:=	development files for openssl
-PKG_SECTION_LIB_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR_DEV},${PKG_SECTION_DEV}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTIL},${PKG_DESCR_UTIL},${PKG_SECTION_UTIL}))
 
 SUB_INSTALLS-y:=

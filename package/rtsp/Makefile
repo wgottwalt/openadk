@@ -7,7 +7,7 @@ PKG_NAME:=		rtsp
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
-PKG_DESCR:=		Netfilter connection tracking for RTSP
+PKG_DESCR:=		connection tracking for RTSP
 PKG_SECTION:=		kernel
 PKG_URL:=		http://github.com/maru-sama/rtsp-linux-v2.6
 

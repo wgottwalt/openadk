@@ -94,7 +94,7 @@ for dn in */Makefile; do
 		# pseudo package, does not produce an ipkg package
 		ppnf=$PKG_NAME			# ppnf: pseudopkg name, filled
 		if [[ -n $PKG_DESCR ]]; then
-			while (( ${#ppnf} < 34 )); do
+			while (( ${#ppnf} < 23 )); do
 				ppnf=$ppnf.
 			done
 			ppnf="$ppnf $PKG_DESCR"
@@ -192,7 +192,7 @@ for dn in */Makefile; do
 		print -u$h config ADK_PACKAGE_$spcu
 		spnf=$sppn			# spnf: subpackage name, filled
 		if [[ -n ${desc:-$PKG_NAME} ]]; then
-			while (( ${#spnf} < 34 )); do
+			while (( ${#spnf} < 23 )); do
 				spnf=$spnf.
 			done
 			spnf="$spnf ${desc:-$PKG_NAME}"

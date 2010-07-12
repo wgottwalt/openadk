@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		5
-PKG_DESCR:=		installer for cf, mmc, sd or mtd devices
+PKG_DESCR:=		openadk installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
 
