@@ -15,6 +15,7 @@ PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
 PKG_DESCR_DM:=		device-mapper utility
 PKG_DESCR_LIBDM:=	device-mapper library
+PKG_SECTION_LIBDM:=	libs
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 
@@ -22,7 +23,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_DM},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIBDM},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIBDM},${PKG_SECTION_LIBDM}))
 
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
