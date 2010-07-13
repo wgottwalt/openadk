@@ -1530,3 +1530,10 @@ $(eval $(call KMOD_template,PARPORT,parport,\
 $(eval $(call KMOD_template,PLIP,plip,\
 	$(MODULES_DIR)/kernel/drivers/net/plip \
 ,51))
+
+#
+# Profiling
+#
+$(eval $(call KMOD_template,OPROFILE,oprofile,\
+	$(MODULES_DIR)/kernel/arch/x86/oprofile/oprofile \
+,10))
