@@ -1537,3 +1537,16 @@ $(eval $(call KMOD_template,PLIP,plip,\
 $(eval $(call KMOD_template,OPROFILE,oprofile,\
 	$(MODULES_DIR)/kernel/arch/x86/oprofile/oprofile \
 ,10))
+
+#
+# I2C
+#
+$(eval $(call KMOD_template,I2C,i2c,\
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-core \
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-dev \
+,20))
+
+$(eval $(call KMOD_template,SCx200_ACB,scx200-acb,\
+	$(MODULES_DIR)/kernel/drivers/i2c/busses/scx200_acb \
+,25))
+

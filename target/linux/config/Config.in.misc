@@ -8,12 +8,32 @@ config ADK_KERNEL_RFKILL
 	boolean
 	default n
 
-menu "Miscellaneous devices support"
-
 config ADK_KERNEL_WATCHDOG
 	boolean
 	default y if ADK_TARGET_WITH_WATCHDOG
 	default n
+
+config ADK_KERNEL_I2C_CHARDEV
+	boolean
+	default n
+
+menu "Miscellaneous devices support"
+	
+config ADK_KPACKAGE_KMOD_I2C
+	prompt "kmod-i2c.......................... I2C support"
+	tristate
+	select ADK_KERNEL_I2C_CHARDEV
+	default n
+	help
+	  I2C support
+
+config ADK_KPACKAGE_KMOD_SCx200_ACB
+	prompt "kmod-i2c-geode.................... I2C driver for Geode"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_I2C
+	default n
+	help
+	  I2C driver for Geode boards.
 
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
 	prompt "kmod-softdog...................... Software watchdog"
@@ -24,15 +44,6 @@ config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
 	  A software monitoring watchdog. This will fail to reboot your system
 	  from some situations that the hardware watchdog will recover
 	  from. Equally it's a lot cheaper to install.
-
-#config ADK_KPACKAGE_KMOD_WD1100
-#	prompt "kmod-wd1100....................... Soekris net4801 watchdog"
-#	tristate
-#	select ADK_KERNEL_WATCHDOG
-#	default n
-#	help
-#	  Driver for the NatSemi SC1x00 series Watchdog
-#	  found on Soekris net4801 boards
 
 config ADK_KPACKAGE_KMOD_PARPORT
 	prompt "kmod-parport...................... generic parallel port support"
