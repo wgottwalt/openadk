@@ -279,6 +279,10 @@ $(eval $(call KMOD_template,NET_KEY,net-key,\
 	$(MODULES_DIR)/kernel/net/key/af_key \
 ,60))
 
+$(eval $(call KMOD_template,XFRM_USER,xfrm-user,\
+	$(MODULES_DIR)/kernel/net/xfrm/xfrm_user \
+,61))
+
 $(eval $(call KMOD_template,INET_AH,inet-ah,\
 	$(MODULES_DIR)/kernel/net/ipv4/ah4 \
 ,65))
