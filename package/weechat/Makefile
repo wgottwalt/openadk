@@ -18,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WEECHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TCFLAGS+=		-liconv
 CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-perl \
 			--disable-python \

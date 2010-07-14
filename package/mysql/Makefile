@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.1.41
+PKG_VERSION:=		5.1.48
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b5d39e8789174753f3c782959729e68c
+PKG_MD5SUM:=		d04c54d1cfbd8c6c8650c8d078f885b2
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		db
 PKG_DEPENDS:=		libncurses zlib
 PKG_BUILDDEP+=		ncurses zlib readline
-PKG_URL:=		http://www.mysql.com
+PKG_URL:=		http://www.mysql.com/
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
 
 PKG_HOST_DEPENDS:=	!cygwin
