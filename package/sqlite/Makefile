@@ -7,10 +7,10 @@ PKG_NAME:=		sqlite
 PKG_VERSION:=		3.6.20
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0faf8fc8ccff5297513c6532b2b4ce23
-PKG_DESCR:=		Self-contained, embeddable, zero-configuration SQL database
-PKG_SECTION:=		libs
+PKG_DESCR:=		embeddable SQL database
+PKG_SECTION:=		db
 PKG_BUILDDEP+=		ncurses readline
-PKG_URL:=		http://www.sqlite.org
+PKG_URL:=		http://www.sqlite.org/
 PKG_SITES:=		http://www.sqlite.org/
 
 include ${TOPDIR}/mk/package.mk

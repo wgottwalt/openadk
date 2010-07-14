@@ -5,10 +5,10 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger (small server)
-PKG_SECTION:=		comp
+PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
 
-PKG_TARGET_DEPENDS:=    !foxboard 
+PKG_TARGET_DEPENDS:=    !foxboard
 
 include ${TOPDIR}/mk/package.mk
 

@@ -11,7 +11,7 @@ OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build
 
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(TARGET_DIR)/boot/kernel 
+		$(TARGET_DIR)/boot/kernel
 	@cp $(TARGET_DIR)/boot/kernel \
 		$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 

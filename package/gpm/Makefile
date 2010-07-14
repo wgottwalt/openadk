@@ -8,7 +8,7 @@ PKG_VERSION:=		1.20.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3915bdd6bf947ef867752a30b4be2387
 PKG_DESCR:=		console mouse support
-PKG_SECTION:=		text
+PKG_SECTION:=		misc
 PKG_URL:=		http://unix.schottelius.org/gpm
 PKG_SITES:=		http://unix.schottelius.org/gpm/archives/
 

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.6.34
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5c5742bdac05a1688f266512e685b83c
 PKG_DESCR:=		iproute2 routing control utility
-PKG_SECTION:=		net
+PKG_SECTION:=		route
 ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
 PKG_BUILDDEP+=		linux-atm
 endif

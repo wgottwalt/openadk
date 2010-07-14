@@ -10,7 +10,7 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 LOADADDR:=	0x20008000
 
-kernel-install: 
+kernel-install:
 	@gzip -9 < $(LINUX_DIR)/arch/arm/boot/Image > ${BUILD_DIR}/Image.gz
 	@mkimage -A arm -O linux -T kernel -C gzip \
 		-a ${LOADADDR} -e ${LOADADDR} -d ${BUILD_DIR}/Image.gz \

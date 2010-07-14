@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_BUILDDEP+=		xorg-server
 PKG_MD5SUM:=		c63a29917c48d0c317445991fc36d09a
 PKG_DESCR:=		X11 driver for Cirrus VGA chips
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 

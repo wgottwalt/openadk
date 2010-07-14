@@ -10,7 +10,7 @@ all: install
 # The following target combines all kernel-related variables and
 # config files into a single one to be used as the final kernel
 # configuration when building. This is how it's done:
-# 1) fetch all ADK_KPACKAGE_KMOD_* vars into 
+# 1) fetch all ADK_KPACKAGE_KMOD_* vars into
 #    .kernelconfig.modules and set them to "m"
 # 2) fetch all enabled ADK_KERNEL_* vars into
 #    .kernelconfig.kernel (no conversion, as they are booleans)
@@ -89,4 +89,4 @@ clean: $(ADK_TARGET)-clean $(ADK_TARGET)-imageclean
 %-imageinstall: %-imageprepare
 	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
-	@echo 'Login as user root with password linux123 via ssh or console'
+	@echo 'Login as user root with password ${ADK_RUNTIME_PASSWORD} via ssh or console'

@@ -8,8 +8,9 @@ PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		c3ccd16c147befd49fe4541a506dd177
 PKG_DESCR:= 		Utilities for NFS kernel server implementation
-PKG_SECTION:=		net
+PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-nfsd portmap
+
 ifeq (${ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS},y)
 PKG_BUILDDEP+=		libnfsidmap krb5 libevent libgssglue librpcsecgss
 endif

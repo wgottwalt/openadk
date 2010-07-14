@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.16.1
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		319486ec65078d07fde26eb620fecde7
-PKG_DESCR:=		Core utilities for embedded Linux systems
+PKG_VERSION:=		1.17.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2908d1d1ca83ff12bc0b05f0d2a3335c
+PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
 PKG_URL:=		http://www.busybox.net/
 PKG_SITES:=		http://www.busybox.net/downloads/
@@ -30,12 +30,6 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-bbrebuild:
-	@if [ -f ${TOPDIR}/.bbrebuild ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.bbrebuild; \
-	fi
-
 ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${TOPDIR}/.busyboxcfg
@@ -43,7 +37,7 @@ ${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
 ${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
 	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-	
+
 do-configure: ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \
@@ -84,6 +78,12 @@ udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
 
-fake: bbrebuild
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		rm ${WRKBUILD}/.build_done; \
+		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
+
+fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

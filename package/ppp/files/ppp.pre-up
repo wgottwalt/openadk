@@ -37,6 +37,9 @@ REPLACE="
 sed "$REPLACE" < /etc/ppp/templates/$IF_USE_TEMPLATE > /etc/ppp/peers/$IF_PROVIDER
 
 case "$IF_PPP_DEVICE" in
+eth*)
+	ip link set up dev $IF_PPP_DEVICE
+	;;
 nas*)
 	[ "$IF_PPP_ENCAPS" ] || encap=0
 	[ "$IF_PPP_PAYLOAD" ] || payload=1
@@ -90,21 +93,21 @@ umts)
 	comgt -s /etc/comgt/waitready.comgt -d $IF_PPP_DEVICE || exit 1
 
 	# set pincode
-	if [ "$IF_UMTS_PINCODE" ]; then
-		COMGTPIN="$IF_UMTS_PINCODE" comgt PIN -d $IF_PPP_DEVICE || ERROR=1
+	if [ "$IF_PIN" ]; then
+		COMGTPIN="$IF_PIN" comgt PIN -d $IF_PPP_DEVICE || exit 1
 	fi
 
 	# set APN
-	COMGTAPN="$IF_UMTS_APN" comgt APN -d $IF_PPP_DEVICE || ERROR=1
+	COMGTAPN="$IF_APN" comgt APN -d $IF_PPP_DEVICE || exit 1
 
 	# set umts/gprs mode if available (Option cards only)
-	case "$IF_UMTS_MODE" in
+	case "$IF_MODE" in
 		gprs_only)	comgt 2G -d $IF_PPP_DEVICE ;;
 		umts_only)	comgt 3G -d $IF_PPP_DEVICE ;;
 		umts_first)	comgt 3G2G -d $IF_PPP_DEVICE ;;
 		"")		;;
-		*)		echo "unknown umts-mode, exiting"
-				ERROR=1
+		*)		echo "unknown mode, exiting"
+				exit 1
 				;;
 	esac
 	;;

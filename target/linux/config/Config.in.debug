@@ -1,5 +1,9 @@
 menu "Kernel debugging"
 
+config ADK_KERNEL_PROFILING
+	boolean
+	default n
+
 config ADK_KERNEL_DEBUG_KERNEL
 	boolean
 	default n
@@ -50,5 +54,13 @@ config ADK_KERNEL_DEBUG_WITH_KGDB
 	select ADK_KERNEL_KGDB
 	select ADK_KERNEL_KGDB_SERIAL_CONSOLE
 	select ADK_KERNEL_FRAME_POINTER
+
+config ADK_KPACKAGE_KMOD_OPROFILE
+	tristate
+	prompt "kernel support for oprofile"
+	select ADK_KERNEL_PROFILING
+	default n
+	help
+	 use oprofile package to make use of the kernel support.
 
 endmenu

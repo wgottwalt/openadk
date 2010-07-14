@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -n "$USEPEERDNS" -a -f /etc/ppp/resolv.conf ]; then
+        if [ -f /etc/ppp/resolv.prev ]; then
+                cp -f /etc/ppp/resolv.prev /etc/resolv.conf
+        else
+                rm -f /etc/resolv.conf
+        fi
+fi

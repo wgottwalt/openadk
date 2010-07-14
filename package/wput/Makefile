@@ -8,7 +8,7 @@ PKG_VERSION:=		0.6.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		92b41efed4db8eb4f3443c23bf7ceecf
 PKG_DESCR:=		a wget-like command-line FTP client
-PKG_SECTION:=		net
+PKG_SECTION:=		www
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=wput/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz

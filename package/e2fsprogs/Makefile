@@ -8,7 +8,7 @@ PKG_VERSION:=		1.41.12
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1b24a21fc0c2381ef420961cbfec733f
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
-PKG_SECTION:=		admin
+PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}

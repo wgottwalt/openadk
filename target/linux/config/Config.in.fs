@@ -128,9 +128,6 @@ config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	  data forks and creator codes, but it also has several UNIX
 	  style features such as file ownership and permissions.
 
-
-source "package/ntfs-3g/Config.in"
-
 config ADK_KPACKAGE_KMOD_NTFS_FS
 	prompt "kmod-fs-ntfs...................... NTFS file system support"
 	tristate

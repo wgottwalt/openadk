@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		10e6661a35aa994a9aa73ded0cf70259
 PKG_DESCR:=		x11 keyboard compiler
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://xorg.freedesktop.org/releases/X11R7.4/src/everything/
 
 include $(TOPDIR)/mk/package.mk

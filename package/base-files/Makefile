@@ -6,9 +6,9 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		17
+PKG_RELEASE:=		22
 PKG_SECTION:=		base
-PKG_DESCR:=		basic filesystem structure and scripts
+PKG_DESCR:=		basic files and scripts
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
@@ -65,13 +65,26 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
-	test -z $(ADK_PASSWORD) || \
+	test -z $(ADK_RUNTIME_HOSTNAME) || \
+	    echo $(ADK_RUNTIME_HOSTNAME) > \
+	    $(IDIR_BASE_FILES)/etc/hostname
+	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$(${STAGING_TOOLS}/bin/mkcrypt \
-	    ${ADK_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
+	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
+	test -z $(ADK_TARGET) || \
+	    echo $(ADK_TARGET) > $(IDIR_BASE_FILES)/etc/adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
+
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		rm ${WRKBUILD}/.build_done; \
+		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
+
+fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

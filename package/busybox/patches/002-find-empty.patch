@@ -1,25 +1,22 @@
-diff -Nur busybox-1.15.2.orig/findutils/Config.in busybox-1.15.2/findutils/Config.in
---- busybox-1.15.2.orig/findutils/Config.in	2009-09-26 15:14:57.000000000 +0200
-+++ busybox-1.15.2/findutils/Config.in	2009-11-28 12:41:31.000000000 +0100
-@@ -81,6 +81,14 @@
- 	help
- 	  Support the 'find -inum' option for searching by inode number.
- 
-+config FEATURE_FIND_EMPTY
-+	bool "Enable -empty option matching empty files and directories"
-+	default y
-+	depends on FIND
-+	help
-+	  Support the 'find -empty' option for searching empty files 
-+	  and directories.
-+
- config FEATURE_FIND_EXEC
- 	bool "Enable -exec: execute commands"
- 	default y
-diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
---- busybox-1.15.2.orig/findutils/find.c	2009-10-08 03:04:40.000000000 +0200
-+++ busybox-1.15.2/findutils/find.c	2009-11-28 12:48:36.000000000 +0100
-@@ -93,6 +93,7 @@
+diff -Nur busybox-1.17.0.orig/findutils/find.c busybox-1.17.0/findutils/find.c
+--- busybox-1.17.0.orig/findutils/find.c	2010-06-24 04:40:43.000000000 +0200
++++ busybox-1.17.0/findutils/find.c	2010-07-08 12:33:55.759015289 +0200
+@@ -133,6 +133,14 @@
+ //config:	help
+ //config:	  Support the 'find -inum' option for searching by inode number.
+ //config:
++//config:config FEATURE_FIND_EMPTY
++//config:       bool "Enable -empty option matching empty files and directories"
++//config:       default y
++//config:       depends on FIND
++//config:       help
++//config:         Support the 'find -empty' option for searching empty files 
++//config:         and directories.
++//config:
+ //config:config FEATURE_FIND_EXEC
+ //config:	bool "Enable -exec: execute commands"
+ //config:	default y
+@@ -270,6 +278,7 @@
  IF_FEATURE_FIND_CONTEXT(ACTS(context, security_context_t context;))
  IF_FEATURE_FIND_PAREN(  ACTS(paren, action ***subexpr;))
  IF_FEATURE_FIND_PRUNE(  ACTS(prune))
@@ -27,7 +24,7 @@ diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
  IF_FEATURE_FIND_DELETE( ACTS(delete))
  IF_FEATURE_FIND_EXEC(   ACTS(exec,  char **exec_argv; unsigned *subst_count; int exec_argc;))
  IF_FEATURE_FIND_GROUP(  ACTS(group, gid_t gid;))
-@@ -333,6 +334,34 @@
+@@ -519,6 +528,34 @@
  	return exec_actions(ap->subexpr, fileName, statbuf);
  }
  #endif
@@ -62,7 +59,7 @@ diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
  #if ENABLE_FEATURE_FIND_SIZE
  ACTF(size)
  {
-@@ -476,6 +505,7 @@
+@@ -686,6 +723,7 @@
  	IF_FEATURE_FIND_PRINT0( PARM_print0    ,)
  	IF_FEATURE_FIND_DEPTH(  PARM_depth     ,)
  	IF_FEATURE_FIND_PRUNE(  PARM_prune     ,)
@@ -70,7 +67,7 @@ diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
  	IF_FEATURE_FIND_DELETE( PARM_delete    ,)
  	IF_FEATURE_FIND_EXEC(   PARM_exec      ,)
  	IF_FEATURE_FIND_PAREN(  PARM_char_brace,)
-@@ -509,6 +539,7 @@
+@@ -720,6 +758,7 @@
  	IF_FEATURE_FIND_PRINT0( "-print0\0" )
  	IF_FEATURE_FIND_DEPTH(  "-depth\0"  )
  	IF_FEATURE_FIND_PRUNE(  "-prune\0"  )
@@ -78,7 +75,7 @@ diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
  	IF_FEATURE_FIND_DELETE( "-delete\0" )
  	IF_FEATURE_FIND_EXEC(   "-exec\0"   )
  	IF_FEATURE_FIND_PAREN(  "(\0"       )
-@@ -627,6 +658,12 @@
+@@ -839,6 +878,12 @@
  			(void) ALLOC_ACTION(prune);
  		}
  #endif
@@ -91,15 +88,3 @@ diff -Nur busybox-1.15.2.orig/findutils/find.c busybox-1.15.2/findutils/find.c
  #if ENABLE_FEATURE_FIND_DELETE
  		else if (parm == PARM_delete) {
  			G.need_print = 0;
-diff -Nur busybox-1.15.2.orig/include/usage.h busybox-1.15.2/include/usage.h
---- busybox-1.15.2.orig/include/usage.h	2009-10-08 02:59:09.000000000 +0200
-+++ busybox-1.15.2/include/usage.h	2009-11-28 12:42:43.000000000 +0100
-@@ -1239,6 +1239,8 @@
-      "\n	-group NAME	File belongs to group NAME (numeric group ID allowed)") \
- 	IF_FEATURE_FIND_DEPTH( \
-      "\n	-depth		Process directory name after traversing it") \
-+ 	IF_FEATURE_FIND_EMPTY( \
-+     "\n	-empty		File or directory is empty") \
- 	IF_FEATURE_FIND_SIZE( \
-      "\n	-size N[bck]	File size is N (c:bytes,k:kbytes,b:512 bytes(def.))." \
-      "\n			+/-N: file size is bigger/smaller than N") \

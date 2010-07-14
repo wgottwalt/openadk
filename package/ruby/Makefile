@@ -4,17 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		1.9
+PKG_VERSION:=		1.9.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9fc5941bda150ac0a33b299e1e53654c
+PKG_MD5SUM:=		0f6d7630f26042e00bc59875755cf879
 PKG_DESCR:=		interpreter for the ruby language
-PKG_SECTION:=		net
+PKG_SECTION:=		lang
 PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.ruby-lang.org
 PKG_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/
 
-DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-stable.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.1-p378
+DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p429.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.1-p429
 
 include ${TOPDIR}/mk/package.mk
 

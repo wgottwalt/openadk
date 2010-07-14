@@ -1,4 +1,6 @@
+- fix ARM OABI support
+- fix watchdog for alix1c (mfgpt timers problem)
+- convert global ipv6 to flavours
 - add support for brcm 2.6
 - macos x build
 - help text for config/ needs adoption
-- fix watchdog for alix1c (mfgpt timers problem)

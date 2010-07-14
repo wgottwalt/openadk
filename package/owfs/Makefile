@@ -4,37 +4,39 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		owfs
-PKG_VERSION:=		2.5p2
+PKG_VERSION:=		2.7p38
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		842170565e8893001a4e78e675322144
-PKG_DESCR:=		A tool to access 1-wire devices
-PKG_SECTION:=		admin
-PKG_URL:=		http://owfs.org
+PKG_MD5SUM:=		c287d96c629b5deb6c85e6a82eecdc8a
+PKG_DESCR:=		software to access 1-wire devices
+PKG_SECTION:=		misc
+PKG_BUILDDEP+=		fuse
+PKG_URL:=		http://owfs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-INSTALL_STYLE:=		manual
-
-CONFIGURE_ENV+=		BUILD_CC=${TARGET_CC} \
-			LD_EXTRALIBS="" \
-			ac_cv_linux_vers=2 \
-			td_cv_buggygetaddrinfo="no"
+TCFLAGS+=		-ldl -lrt
 CONFIGURE_ARGS+=	--enable-owfs \
 			--enable-usb \
+			--disable-swig \
 			--disable-owhttpd \
 			--disable-owftpd \
 			--disable-owcapi \
-			--disable-owserver
-ALL_TARGET:=
+			--disable-owserver \
+			--disable-owpython \
+			--disable-owtcl \
+			--disable-owperl \
+			--disable-owphp \
+			--with-fuseinclude=${STAGING_DIR}/usr/include \
+			--with-fuselib=${STAGING_DIR}/usr/lib
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_OWFS}/usr/{bin,lib}
-	${INSTALL_BIN} ${WRKBUILD}/module/owlib/src/c/.libs/libow.so.0.0.0 \
+	${CP} ${WRKINST}/usr/lib/libow*.so* \
 	               ${IDIR_OWFS}/usr/lib/
-	${INSTALL_BIN} ${WRKBUILD}/module/owfs/src/c/.libs/owfs \
-		${IDIR_OWFS}/usr/bin/owfs
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ow* \
+		${IDIR_OWFS}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

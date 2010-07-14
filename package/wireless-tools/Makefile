@@ -8,7 +8,7 @@ PKG_VERSION:=		29
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e06c222e186f7cc013fd272d023710cb
 PKG_DESCR:=		Linux wireless tools (for older wireless drivers)
-PKG_SECTION:=		base
+PKG_SECTION:=		wifi
 PKG_SITES:=		http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/
 
 DISTFILES:=		wireless_tools.${PKG_VERSION}.tar.gz

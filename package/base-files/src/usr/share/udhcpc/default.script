@@ -4,7 +4,7 @@ if [[ -z $1 ]]; then
 	exit 1
 fi
 
-RESOLV_CONF=/tmp/resolv.conf
+RESOLV_CONF=/etc/resolv.conf
 
 case $1 in
 (deconfig)

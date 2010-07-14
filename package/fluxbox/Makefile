@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e0be927617be4ffc1ddc79513f4eb0f9
 PKG_DESCR:=		Fluxbox is an X11 window manager featuring tabs and an iconbar
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXpm
 ifeq (${ADK_PACKAGE_FLUXBOX_WITH_IMLIB2},y)

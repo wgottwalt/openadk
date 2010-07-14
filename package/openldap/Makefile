@@ -16,10 +16,10 @@ PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 
 PKG_DESCR_1:=		OpenLDAP utilities
 PKG_DEPENDS_1:=		libopenldap
-PKG_SECTION_1:=		net
+PKG_SECTION_1:=		net/misc
 PKG_DESCR_2:=		OpenLDAP server daemon
 PKG_DEPENDS_2:=		libopenldap
-PKG_SECTION_2:=		net
+PKG_SECTION_2:=		net/misc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 

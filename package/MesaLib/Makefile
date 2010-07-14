@@ -10,15 +10,15 @@ PKG_MD5SUM:=		62e8e47cbd63741b4bbe634dcdc8a56a
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm
-PKG_BUILDDEP+=		libXdamage libXfixes libXxf86vm libdrm 
+PKG_BUILDDEP+=		libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
 
 PKG_DESCR_GLXINFO:=	Display various GLX information
-PKG_SECT_GLXINFO:=	x11
+PKG_SECT_GLXINFO:=	x11/apps
 PKG_DESCR_GLXGEARS:=	Nice little OpenGL demo application
-PKG_SECT_GLXGEARS:=	x11
+PKG_SECT_GLXGEARS:=	x11/apps
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 

@@ -8,7 +8,7 @@ PKG_VERSION:=		0.7
 PKG_RELEASE:=		10
 PKG_MD5SUM:=		7bf752532d26c9106f8039db95df3a6b
 PKG_DESCR:=		A small non-spooling printer server
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.etherboot.org/p910nd
 PKG_SITES:=		http://www.etherboot.org/p910nd/
 

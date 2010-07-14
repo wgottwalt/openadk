@@ -16,6 +16,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
 			ADK_FORCE_PARALLEL=n \
+			ADK_PACKAGE_BZR=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_XORG_SERVER_WITH_DRI=n \
 			ADK_PACKAGE_AUFS2_UTIL=n \
@@ -28,6 +29,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
 			BUSYBOX_BBCONFIG=n \
 			BUSYBOX_SELINUX=n \
+			BUSYBOX_INSTALL_NO_USR=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
 			BUSYBOX_BUILD_LIBBUSYBOX=n \
@@ -64,8 +66,16 @@ noconfig_targets:=	menuconfig \
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
+		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
-			touch .bbrebuild; \
+			touch .rebuild.busybox;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_RUNTIME_PASSWORD .config|md5sum)" != "$$(grep ^ADK_RUNTIME_PASSWORD .config.old|md5sum)" ];then \
+			touch .rebuild.base-files;\
+			rebuild=1;\
+		fi; \
+		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old; \
 		fi; \
 	fi
@@ -167,7 +177,7 @@ newpackage:
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
-	@echo "Do not forget to add package to package/Config.in"
+	@echo "choose PKG_SECTION to add it to an existent submenu"  
 
 #############################################################
 #
@@ -475,10 +485,12 @@ bulkallmod:
 	done <${TOPDIR}/target/bulk.lst
 
 menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)
+	@echo "Generating menu structure ..."
 	mksh $(TOPDIR)/package/pkgmaker
 	@:>.menu
 
 dep:
+	@echo "Generating dependencies ..."
 	mksh $(TOPDIR)/package/depmaker
 
 .PHONY: menu dep

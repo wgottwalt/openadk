@@ -7,15 +7,15 @@ PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.25
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a83155a6e29e3988f07e5eea3287b21e
-PKG_DESCR:=		mDNS/DNS-SD (aka RendezVous/Bonjour/ZeroConf) daemon
-PKG_SECTION:=		net
+PKG_DESCR:=		mDNS daemon
+PKG_SECTION:=		dhcp
 PKG_DEPENDS:=		libavahi libdaemon libexpat gettext
 PKG_BUILDDEP+=		libdaemon expat gdbm glib gettext
 PKG_URL:=		http://avahi.org
 PKG_SITES:=		http://avahi.org/download/
 
 PKG_DEPENDS_DNSCONFD:=	libavahi libdaemon avahi-daemon
-PKG_DESCR_DNSCONFD:=	Unicast DNS server from mDNS/DNS-SD configuration daemon
+PKG_DESCR_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKG_DESCR_LIB:=		DNS-SD over mDNS library
 
 include ${TOPDIR}/mk/package.mk

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c58aa1da418dc9704070872489e89bf5
 PKG_DESCR:=		GNU parser generator
-PKG_SECTION:=		utils
+PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/bison
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 

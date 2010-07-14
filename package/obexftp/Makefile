@@ -41,7 +41,7 @@ CONFIGURE_ARGS+=	--disable-perl \
 			--disable-python
 
 post-install:
-	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin 
+	${INSTALL_DIR} ${IDIR_OBEXFTP}/usr/bin
 	${CP} ${WRKINST}/usr/bin/obexftp{,d} ${IDIR_OBEXFTP}/usr/bin/
 ifneq ($(ADK_STATIC),y)
 	${INSTALL_DIR} ${IDIR_LIBOBEXFTP}/usr/lib

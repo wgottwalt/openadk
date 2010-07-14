@@ -8,7 +8,7 @@ PKG_VERSION:=		5.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		31766450ecfc9aff70fe966c0b9df06d
 PKG_DESCR:=		watchdog daemon
-PKG_SECTION:=		sys
+PKG_SECTION:=		utils
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=watchdog/}
 
 include ${TOPDIR}/mk/package.mk

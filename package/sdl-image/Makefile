@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libpng libtiff libjpeg libsdl
 PKG_BUILDDEP:=		libpng libtiff jpeg sdl
 PKG_URL:=		http://www.libsdl.org
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
+PKG_DESCR_LIB_DEV:=	development files for sdlimage
+PKG_SECTION_LIB_DEV:=	devel
 
 DISTFILES:=             SDL_image-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
@@ -20,7 +22,7 @@ WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

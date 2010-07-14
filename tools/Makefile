@@ -17,17 +17,17 @@ $(TOOLS_BUILD_DIR):
 	mkdir -p $(TOOLS_BUILD_DIR)
 
 %-download:
-	$(TRACE) "tools/$(patsubst %-download,%,$@)-download: "
+	$(TRACE) "tools/$(patsubst %-download,%,$@)/download "
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 
 %-compile: $(TOOLS_BUILD_DIR)
-	$(TRACE) "tools/$(patsubst %-compile,%,$@)-compile: "
+	$(TRACE) "tools/$(patsubst %-compile,%,$@)/compile "
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
 
 %-install:
-	$(TRACE) "tools/$(patsubst %-install,%,$@)-install: "
+	$(TRACE) "tools/$(patsubst %-install,%,$@)/install "
 	$(MAKE) -C $(patsubst %-install,%,$@) install
 
 %-clean:
-	$(TRACE) "tools/$(patsubst %-clean,%,$@)-clean: "
+	$(TRACE) "tools/$(patsubst %-clean,%,$@)/clean "
 	$(MAKE) -C $(patsubst %-clean,%,$@) clean

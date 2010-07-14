@@ -8,7 +8,7 @@ PKG_VERSION:=		1.6.2.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		861f57ba43bfe05dc645e0679a260e41
 PKG_DESCR:=		Open Source PBX
-PKG_SECTION:=		net
+PKG_SECTION:=		phone
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
@@ -121,7 +121,7 @@ MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 ALL_TARGET:=		all install samples
 
 pre-configure:
-	cd "$(WRKBUILD)/menuselect"; ./configure 
+	cd "$(WRKBUILD)/menuselect"; ./configure
 
 pre-build:
 	$(MAKE) -C $(WRKBUILD)/menuselect

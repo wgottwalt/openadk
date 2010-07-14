@@ -8,7 +8,7 @@ PKG_VERSION:=		5.5p1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		88633408f4cb1eb11ec7e2ec58b519eb
 PKG_DESCR:=		OpenSSH server
-PKG_SECTION:=		net
+PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP+=		zlib openssl
 ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
@@ -86,9 +86,9 @@ post-install:
 		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
 	# ssh pubkey
-	test -z $(ADK_SSH_PUBKEY) || ( \
+	test -z $(ADK_RUNTIME_SSH_PUBKEY) || ( \
 		mkdir -p $(IDIR_OPENSSH_SERVER)/etc/ssh; \
-		echo $(ADK_SSH_PUBKEY) \
+		echo $(ADK_RUNTIME_SSH_PUBKEY) \
 		>$(IDIR_OPENSSH_SERVER)/etc/ssh/authorized_keys; \
         )
 

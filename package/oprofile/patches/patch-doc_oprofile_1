@@ -1,0 +1,26 @@
+--- oprofile-0.9.6.orig/doc/oprofile.1	2009-11-24 16:26:33.000000000 +0100
++++ oprofile-0.9.6/doc/oprofile.1	2010-07-13 17:55:07.343074887 +0200
+@@ -1,4 +1,4 @@
+-.TH OPROFILE 1 "Tue 24 November 2009" "oprofile 0.9.6"
++.TH OPROFILE 1 "Tue 13 July 2010" "oprofile 0.9.6"
+ .UC 4
+ .SH NAME
+ oprofile \- a system-wide profiler
+@@ -153,7 +153,7 @@ Configuration files
+ .I /root/.oprofile/daemonrc
+ Configuration file for opcontrol
+ .TP
+-.I /usr/local/share/oprofile/
++.I /usr/share/oprofile/
+ Event description files used by OProfile.
+ .TP
+ .I /var/lib/oprofile/samples/oprofiled.log
+@@ -173,7 +173,7 @@ The location of the generated sample fil
+ This man page is current for oprofile-0.9.6.
+ 
+ .SH SEE ALSO
+-.BR /usr/local/share/doc/oprofile/,
++.BR /usr/share/doc/oprofile/,
+ .BR opcontrol(1),
+ .BR opreport(1),
+ .BR opannotate(1),

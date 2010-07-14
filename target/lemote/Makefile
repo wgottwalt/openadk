@@ -14,7 +14,7 @@ createinitcrypt:
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
 	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE)
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
 	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
@@ -42,8 +42,6 @@ imageinstall: $(BUILD_DIR)/$(INITRAMFS_PIGGYBACK) createinitramfs
 endif
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(FS),encrypted)
@@ -66,7 +64,6 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'mount /dev/sda1 /mnt/boot'
 	@echo 'mount /dev/mapper/crypt /mnt/root'
 	@echo 'mkdir /mnt/boot/boot'
-	@echo 
 	@echo 'Copy $(ROOTFSUSERTARBALL) via scp to /mnt/root and extract it'
 	@echo 'cd /mnt/root ; gunzip $(ROOTFSUSERTARBALL); tar xpvf $(ROOTFSUSERTARBALL)'
 	@echo 'Copy ${ADK_TARGET}-${FS}-kernel via scp to /mnt/boot/boot'

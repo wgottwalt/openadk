@@ -1,5 +1,5 @@
---- mysql-5.1.41.orig/include/my_global.h	Wed Nov  4 19:28:15 2009
-+++ mysql-5.1.41/include/my_global.h	Tue Dec 29 13:39:20 2009
+--- mysql-5.1.48.orig/include/my_global.h	2010-06-03 17:50:27.000000000 +0200
++++ mysql-5.1.48/include/my_global.h	2010-07-12 22:51:23.369609493 +0200
 @@ -18,6 +18,8 @@
  #ifndef _global_h
  #define _global_h
@@ -9,7 +9,7 @@
  /*
    InnoDB depends on some MySQL internals which other plugins should not
    need.  This is because of InnoDB's foreign key support, "safe" binlog
-@@ -424,7 +426,7 @@ C_MODE_END
+@@ -428,7 +430,7 @@ C_MODE_END
  #ifdef HAVE_FLOAT_H
  #include <float.h>
  #endif
@@ -18,7 +18,7 @@
  #include <fenv.h> /* For fesetround() */
  #endif
  
-@@ -454,15 +456,20 @@ C_MODE_END
+@@ -458,15 +460,20 @@ C_MODE_END
  #undef HAVE_ALLOCA
  #undef HAVE_ALLOCA_H
  #endif
@@ -40,7 +40,7 @@
  
  /*
    A lot of our programs uses asserts, so better to always include it
-@@ -879,9 +886,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
+@@ -883,9 +890,11 @@ typedef SOCKET_SIZE_TYPE size_socket;
  #endif /* HAVE_FINITE */
  #endif /* isfinite */
  

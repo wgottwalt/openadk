@@ -8,7 +8,7 @@ PKG_VERSION:=		0.11.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8f7ea197384e5ddd1c355f55e639f677
 PKG_DESCR:=		X.org libpciaccess library
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk

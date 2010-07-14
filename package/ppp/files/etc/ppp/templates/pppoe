@@ -4,6 +4,7 @@ usepeerdns
 lcp-echo-interval 10
 lcp-echo-failure 3
 #IDLEOPTIONS#
+#NETWORKOPTIONS#
 user #USERNAME#
 password #PASSWORD#
 #DEVICE#

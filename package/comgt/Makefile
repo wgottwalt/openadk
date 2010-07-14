@@ -5,10 +5,10 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		comgt
 PKG_VERSION:=		0.32
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		db2452680c3d953631299e331daf49ef
 PKG_DESCR:=		3G/GPRS datacard control tool
-PKG_SECTION:=		console
+PKG_SECTION:=		utils
 PKG_URL:=		http://sourceforge.net/projects/comgt
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=comgt/}
 
@@ -21,12 +21,11 @@ $(eval $(call PKG_template,COMGT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
 ALL_TARGET=		comgt
 
 do-install:
 	${INSTALL_DIR} ${IDIR_COMGT}/usr/bin ${IDIR_COMGT}/etc/comgt
 	${INSTALL_BIN} ${WRKBUILD}/comgt ${IDIR_COMGT}/usr/bin/comgt
-	${INSTALL_DATA} ./files/dial.comgt ${IDIR_COMGT}/etc/comgt/dial.comgt
+	${INSTALL_DATA} ./files/*.comgt ${IDIR_COMGT}/etc/comgt/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

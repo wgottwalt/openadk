@@ -8,7 +8,7 @@ PKG_VERSION:=		0.16.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		02bd3669f53c404c19980d5efb6f86fb
 PKG_DESCR:=		Pixel manipulation library
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://www.cairographics.org/releases/
 
 ifeq ($(ADK_STATIC),y)

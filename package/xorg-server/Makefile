@@ -8,7 +8,7 @@ PKG_VERSION:=		1.7.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ba0360b4ec1f6e541b264e45906bf5f2
 PKG_DESCR:=		Xorg server
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/server
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile \
 			libfontenc xkeyboard-config xkbcomp libxau libxaw \
 			libxmu libxpm libxrender libxt libxxf86dga libxext \
@@ -78,7 +78,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts	
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/

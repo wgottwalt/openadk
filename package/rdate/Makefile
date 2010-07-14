@@ -8,7 +8,7 @@ PKG_VERSION=		20070817
 PKG_RELEASE=		2
 PKG_MD5SUM=		9a6489d7de4311678a3fab001bb503df
 PKG_DESCR:=		A small rdate and NTP client
-PKG_SECTION:=		net
+PKG_SECTION:=		ntp
 PKG_SITES=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/rdate/}
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}

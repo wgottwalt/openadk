@@ -8,17 +8,17 @@ PKG_VERSION:=		9.7.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c245b5d1aa0a4f53d9538faa1efe2c3f
 PKG_DESCR:=		popular DNS server
-PKG_SECTION:=		net
+PKG_SECTION:=		dns
 PKG_DEPENDS:=		libopenssl libbind libxml2
 PKG_BUILDDEP+=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 
 PKG_DESCR_1:=		dynamic dns client (nsupdate utility)
-PKG_DESCR_2:=		Support library for the bind tools and dns server/client
+PKG_DESCR_2:=		library for the bind software suite
 PKG_DESCR_3:=		rndc & rndc-confgen utilities
-PKG_DESCR_4:=		named-checkconf & named-checkzone utilities
-PKG_DESCR_5:=		dnssec-keygen & dnssec-signzone utilities
+PKG_DESCR_4:=		check utilities
+PKG_DESCR_5:=		dnssec utilities
 PKG_DESCR_6:=		host utility
 PKG_DESCR_7:=		dig utility
 

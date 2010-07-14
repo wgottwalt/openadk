@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a3da5ad8965345eb734695c765010acf
 PKG_DESCR:=		an HTP (Hypertext Time Protocol) implementation
-PKG_SECTION:=		net
+PKG_SECTION:=		ntp
 PKG_URL:=		http://www.vervest.org/htp/
 PKG_SITES:=		http://www.clevervest.com/htp/archive/c/
 

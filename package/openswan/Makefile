@@ -8,7 +8,7 @@ PKG_VERSION:=		2.6.26
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ac514a8c09d871407b16848c67d0d806
 PKG_DESCR:=		IPSec software
-PKG_SECTION:=		net
+PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libgmp
 PKG_BUILDDEP+=		gmp
 PKG_URL:=		http://www.openswan.org
@@ -43,7 +43,7 @@ ALL_TARGET:=		programs
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
-	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d 
+	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/ipsec.conf ${IDIR_OPENSWAN}/etc/
 	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d

@@ -39,6 +39,7 @@ config ADK_DEVELSYSTEM
 	select BUSYBOX_UNZIP
 	select BUSYBOX_TAC
 	select BUSYBOX_TEE
+	select BUSYBOX_WHOAMI
 	select ADK_PACKAGE_AUTOCONF
 	select ADK_PACKAGE_AUTOMAKE
 	select ADK_PACKAGE_BASH
@@ -150,19 +151,50 @@ endmenu
 source "target/Config.in"
 
 menu "Runtime configuration"
-config ADK_SSH_PUBKEY
+
+config ADK_RUNTIME_HOSTNAME
+	string "hostname for the embedded system"
+	default "linux"
+	help
+	  Set your target hostname.
+
+config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	default ""
 	help
 	  Paste your generated SSH public key here and it will be embedded into
 	  the built image, so you can use it to login instantly.
 
-config ADK_PASSWORD
+config ADK_RUNTIME_PASSWORD
 	string "root password for the embedded system"
 	default "linux123"
 	help
 	  Predefine the root password enabled in the built image.
 
+config ADK_RUNTIME_TIMEZONE
+	string "timezone for the embedded system"
+	default "Europe/Berlin"
+	help
+
 endmenu
 
-source "package/Config.in"
+menu "Package selection"
+config ADK_ENABLE_IPV6
+	prompt "enable IPv6 globally"
+	boolean
+	default y
+	# FIXME: selecting stuff here is ugly, better fix package flavours to
+	#        support a symbol-value-based default (i.e., "default y if IPV6")
+	select ADK_PACKAGE_NFS_UTILS_WITH_TIRPC if ADK_PACKAGE_NFS_UTILS != n
+	help
+	  This enables IPv6 support in all related applications. Basically this
+	  just means passing --enable-ipv6 to the configure script, but the
+	  exception proves the rule. ;)
+
+source "package/Config.in.auto.global"
+source "package/Config.in.auto"
+endmenu
+
+menu "Kernel configuration"
+source "target/linux/Config.in"
+endmenu

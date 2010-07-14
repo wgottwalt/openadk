@@ -1062,7 +1062,6 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,sound-cs5535audio,\
 
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(MODULES_DIR)/kernel/drivers/media/video/v4l1-compat \
-	$(MODULES_DIR)/kernel/drivers/media/video/v4l2-compat-ioctl32 \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 ,65))
 
@@ -1175,6 +1174,10 @@ $(eval $(call KMOD_template,USB_STORAGE,usb-storage,\
 
 $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
+,75))
+
+$(eval $(call KMOD_template,USB_HSO,usb-hso,\
+	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
 ,75))
 
 $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
@@ -1527,3 +1530,23 @@ $(eval $(call KMOD_template,PARPORT,parport,\
 $(eval $(call KMOD_template,PLIP,plip,\
 	$(MODULES_DIR)/kernel/drivers/net/plip \
 ,51))
+
+#
+# Profiling
+#
+$(eval $(call KMOD_template,OPROFILE,oprofile,\
+	$(MODULES_DIR)/kernel/arch/x86/oprofile/oprofile \
+,10))
+
+#
+# I2C
+#
+$(eval $(call KMOD_template,I2C,i2c,\
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-core \
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-dev \
+,20))
+
+$(eval $(call KMOD_template,SCx200_ACB,scx200-acb,\
+	$(MODULES_DIR)/kernel/drivers/i2c/busses/scx200_acb \
+,25))
+

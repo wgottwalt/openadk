@@ -8,7 +8,7 @@ PKG_VERSION:=		1.6.5
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		2b2862ba33d2939e4572688d442ba415
 PKG_DESCR:=		Tinyproxy is a lightweight HTTP and HTTPS proxy.
-PKG_SECTION:=		net
+PKG_SECTION:=		proxy
 PKG_URL:=		https://www.banu.com/tinyproxy
 PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.6/
 

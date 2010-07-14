@@ -29,7 +29,7 @@ do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/lib
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
-else	
+else
 	$(CP) ${STAGING_DIR}/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
 endif
 
