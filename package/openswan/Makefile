@@ -4,16 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.26
+PKG_VERSION:=		2.6.27
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ac514a8c09d871407b16848c67d0d806
+PKG_MD5SUM:=		5177b7401bb89e84ca1c89029143441e
 PKG_DESCR:=		IPSec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libgmp
 PKG_BUILDDEP+=		gmp
-PKG_URL:=		http://www.openswan.org
-PKG_SITES:=		http://www.openswan.org/download/ \
-			ftp://ftp.openswan.org/openswan/
+PKG_URL:=		http://www.openswan.org/
+PKG_SITES:=		http://www.openswan.org/download/
 
 PKG_NOPARALLEL:=	1
 
@@ -21,16 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-#ifeq ($(ADK_COMPILE_OPENSWAN_WITH_NETKEY),y)
-#XAKE_FLAGS+=		USE_KLIPS=false USE_NETKEY=true
-#endif
-
-#ifeq ($(ADK_COMPILE_OPENSWAN_WITH_KLIPS),y)
-#XAKE_FLAGS+=		USE_KLIPS=true USE_NETKEY=false
-#endif
-
 CONFIG_STYLE:=		manual
-
 XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
 			IPSECDIR="/usr/lib/ipsec" \
 			INC_USRLOCAL="/usr" \
