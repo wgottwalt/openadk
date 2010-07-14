@@ -303,21 +303,21 @@ EOF
 done
 
 # return good if given file exists and is non-empty
-function non_empty_file() {
+non_empty_file() {
 	[[ -f "$1" ]] || return 1
 	[[ -n "$(cat "$1")" ]] || return 1
 	return 0
 }
 
 # print the verbose section name for a given section tag
-function lookup_section_string() {
+lookup_section_string() {
 	str="$(grep ^$1\  sections.lst | cut -d ' ' -f '2-')"
 	[[ -n $str ]] && { echo $str; return; }
 	echo $1
 }
 
 # print the first prompt's first word's value in a given Config.in file
-function get_first_prompt() {
+get_first_prompt() {
 	prompt="$(grep -m 1 "prompt " $1 | sed -n 's/.*"\([^ \.]*\)[ \.].*"/\1/p')"
 	[[ -n $prompt ]] && echo $prompt
 }
