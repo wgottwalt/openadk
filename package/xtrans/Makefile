@@ -7,13 +7,9 @@ PKG_NAME:=		xtrans
 PKG_VERSION:=		1.2.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b2f47d49faf1f24e8294b624b21b9b93
-PKG_DESCR:=		X transport library
-PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
-
-$(eval $(call PKG_template,XTRANS,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--datadir=/usr/lib
 

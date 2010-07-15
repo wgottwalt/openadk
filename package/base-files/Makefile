@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		21
+PKG_RELEASE:=		22
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -73,6 +73,8 @@ endif
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
+	test -z $(ADK_TARGET) || \
+	    echo $(ADK_TARGET) > $(IDIR_BASE_FILES)/etc/adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif

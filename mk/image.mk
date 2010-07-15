@@ -29,10 +29,11 @@ kernel-package: $(LINUX_DIR)/vmlinux
 	rm -rf $(KERNEL_PKGDIR)
 	@mkdir -p $(KERNEL_PKGDIR)/boot
 	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/vmlinuz-adk
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
-	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR)
-	$(PKG_INSTALL) $(KERNEL_PKG)
+	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
+	$(TRACE) target/$(ADK_TARGET)-install-kernel-package
+	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 
 INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
 ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
