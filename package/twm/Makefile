@@ -14,6 +14,8 @@ PKG_BUILDDEP+=		xorg-server
 PKG_URL:=		http://xorg.freedesktop.org
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TWM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
