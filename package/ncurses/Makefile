@@ -5,12 +5,13 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
-PKG_DESCR:=		a terminal handling library and common terminal definitions
+PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/ncurses/
 PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
+
 PKG_DESCR_LIB_DEV:=	development files for libncurses
 PKG_SECTION_LIB_DEV:=	devel
 
@@ -71,8 +72,8 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
-	for f in ansi dumb linux rxvt screen vt100 vt102 \
-	    vt220 wsvt25 xterm xterm-color xterm-xfree86; do \
+	for f in ansi dumb linux screen vt100 vt102 \
+	    rxvt-unicode vt220 xterm xterm-color xterm-xfree86; do \
 		${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}; \
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
