@@ -12,6 +12,9 @@ PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libgmp ip libpthread kmod-net-key kmod-xfrm-user
 PKG_DEPENDS+=		kmod-inet-ah kmod-inet-esp kmod-inet-ipcomp
 PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
+PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-aes kmod-crypto-md5
+PKG_DEPENDS+=		kmod-crypto-des kmod-crypto-hmac
+PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-cbc
 PKG_BUILDDEP+=		gmp
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
@@ -19,6 +22,9 @@ PKG_SITES:=		http://download.strongswan.org/
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,STRONGSWAN,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-tools \
+			--disable-sha2
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/etc
@@ -30,8 +36,6 @@ post-install:
 	$(CP) $(WRKINST)/etc/* $(IDIR_STRONGSWAN)/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/charon \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/openac \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_pluto_adns \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/starter \
@@ -42,11 +46,7 @@ post-install:
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_copyright \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/pki \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/pluto \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/scepclient \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/stroke \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
