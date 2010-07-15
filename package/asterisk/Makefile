@@ -22,6 +22,8 @@ endif
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 PKG_DESCR_CHAN_MGCP:=	Media Gateway Control Protocol implementation
 PKG_DESCR_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
 PKG_DESCR_CHAN_IAX2:=	Support for the Inter Asterisk Protocol
