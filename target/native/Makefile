@@ -8,7 +8,7 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
+KERNEL:=$(LINUX_DIR)/vmlinuz
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
@@ -20,4 +20,8 @@ ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+endif
+ifeq ($(FS),archive)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
