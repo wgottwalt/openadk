@@ -1,0 +1,23 @@
+diff -Nur busybox-1.17.0.orig/networking/wget.c busybox-1.17.0/networking/wget.c
+--- busybox-1.17.0.orig/networking/wget.c	2010-06-24 04:40:43.000000000 +0200
++++ busybox-1.17.0/networking/wget.c	2010-07-16 15:00:51.819609996 +0200
+@@ -542,8 +542,8 @@
+ 		"proxy\0"            Required_argument "Y"
+ 		"user-agent\0"       Required_argument "U"
+ 		/* Ignored: */
+-		// "tries\0"            Required_argument "t"
+-		// "timeout\0"          Required_argument "T"
++		"tries\0"            Required_argument "t"
++		"timeout\0"          Required_argument "T"
+ 		/* Ignored (we always use PASV): */
+ 		"passive-ftp\0"      No_argument       "\xff"
+ 		"header\0"           Required_argument "\xfe"
+@@ -560,7 +560,7 @@
+ #endif
+ 	/* server.allocated = target.allocated = NULL; */
+ 	opt_complementary = "-1" IF_FEATURE_WGET_LONG_OPTIONS(":\xfe::");
+-	opt = getopt32(argv, "csqO:P:Y:U:" /*ignored:*/ "t:T:",
++	opt = getopt32(argv, "csqO:P:Y:U:t:T:",
+ 				&fname_out, &dir_prefix,
+ 				&proxy_flag, &user_agent,
+ 				NULL, /* -t RETRIES */
