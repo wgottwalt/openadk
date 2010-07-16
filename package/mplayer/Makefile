@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-31648
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		eeb9219f9015e0e0dfbf4a70efefb751
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
@@ -110,6 +110,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-dvdread-internal \
 			--disable-libdvdcss-internal \
 			--disable-freetype \
+			--disable-mpg123 \
 			--disable-tremor-internal \
 			--disable-arts \
 			--disable-esd \
@@ -123,6 +124,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-pnm \
 			--disable-md5sum \
 			--disable-liblzo \
+			--disable-sdl \
 			--disable-xinerama \
 			--disable-vidix \
 			--disable-gl \

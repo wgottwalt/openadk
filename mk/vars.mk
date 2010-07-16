@@ -127,6 +127,6 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget -t1 --timeout=30 $(QUIET)
+FETCH_CMD?=		wget --tries=1 --timeout=30 $(QUIET)
 
 include $(TOPDIR)/mk/mirrors.mk

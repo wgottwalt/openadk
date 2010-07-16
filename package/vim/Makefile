@@ -5,13 +5,13 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME=		vim
 PKG_VERSION=		7.2
-PKG_RELEASE=		1
+PKG_RELEASE=		2
 PKG_BUILDDEP+=		ncurses
 PKG_MD5SUM=		f0901284b338e448bfd79ccca0041254
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses
-PKG_URL:=		http://www.vim.org
+PKG_URL:=		http://www.vim.org/
 PKG_SITES=		ftp://ftp.vim.org/pub/vim/unix/
 
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -47,8 +47,7 @@ CONFIGURE_ARGS+=	--disable-darwin \
 			--disable-gui \
 			--disable-acl \
 			--disable-gpm \
-			--disable-nls \
-			--with-features=tiny \
+			--with-features=small \
 			--with-compiledby=OpenADK \
 			--without-x \
 			--with-tlib=ncurses \

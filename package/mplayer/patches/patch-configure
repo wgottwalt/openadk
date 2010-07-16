@@ -1,6 +1,6 @@
---- mplayer-1.0-29987.orig/configure	2009-12-10 13:18:20.000000000 +0100
-+++ mplayer-1.0-29987/configure	2010-06-13 22:58:34.756925268 +0200
-@@ -4141,7 +4141,7 @@ dfb_version() {
+--- mplayer-1.0-31648.orig/configure	2010-07-09 11:54:31.000000000 +0200
++++ mplayer-1.0-31648/configure	2010-07-15 19:03:13.247109421 +0200
+@@ -4304,7 +4304,7 @@ dfb_version() {
  
  if test "$_directfb" = yes; then
    cat > $TMPC << EOF

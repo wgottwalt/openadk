@@ -63,6 +63,13 @@ config BUSYBOX_FEATURE_AR_LONG_FILENAMES
 	  It supports the GNU ar long filename method which moves multiple long
 	  filenames into a the data section of a new ar entry.
 
+config BUSYBOX_FEATURE_AR_CREATE
+	bool "Support archive creation"
+	default n
+	depends on BUSYBOX_AR
+	help
+	  This enables archive creation (-c and -r) with busybox ar.
+
 config BUSYBOX_BUNZIP2
 	bool "bunzip2"
 	depends on !ADK_PACKAGE_BZIP2
@@ -93,8 +100,8 @@ config BUSYBOX_BZIP2
 
 config BUSYBOX_CPIO
 	bool "cpio"
-	default n
 	depends on !ADK_PACKAGE_CPIO
+	default n
 	help
 	  cpio is an archival utility program used to create, modify, and
 	  extract contents from archives.
@@ -193,10 +200,8 @@ config BUSYBOX_LZOP_COMPR_HIGH
 
 config BUSYBOX_IPKG
 	bool "ipkg"
+	default y if ADK_TARGET_PACKAGE_IPKG
 	default n
-	select BUSYBOX_MD5SUM
-	depends on BUSYBOX_WGET || ADK_PACKAGE_WGET
-	depends on ADK_TARGET_PACKAGE_IPKG
 	help
 	  ipkg is the itsy package management system.
 
@@ -251,7 +256,7 @@ config BUSYBOX_FEATURE_TAR_FROM
 
 config BUSYBOX_FEATURE_TAR_OLDGNU_COMPATIBILITY
 	bool "Support for old tar header format"
-	default N
+	default n
 	depends on BUSYBOX_TAR
 	help
 	  This option is required to unpack archives created in
@@ -260,7 +265,7 @@ config BUSYBOX_FEATURE_TAR_OLDGNU_COMPATIBILITY
 
 config BUSYBOX_FEATURE_TAR_OLDSUN_COMPATIBILITY
 	bool "Enable untarring of tarballs with checksums produced by buggy Sun tar"
-	default N
+	default n
 	depends on BUSYBOX_TAR
 	help
 	  This option is required to unpack archives created by some old
@@ -311,6 +316,7 @@ config BUSYBOX_UNCOMPRESS
 
 config BUSYBOX_UNLZMA
 	bool "unlzma"
+	depends on !ADK_PACKAGE_XZ
 	default n
 	help
 	  unlzma is a compression utility using the Lempel-Ziv-Markov chain
@@ -331,6 +337,29 @@ config BUSYBOX_FEATURE_LZMA_FAST
 	help
 	  This option reduces decompression time by about 25% at the cost of
 	  a 1K bigger binary.
+
+config BUSYBOX_LZMA
+	bool "Provide lzma alias which supports only unpacking"
+	default n
+	depends on BUSYBOX_UNLZMA
+	help
+	  Enable this option if you want commands like "lzma -d" to work.
+	  IOW: you'll get lzma applet, but it will always require -d option.
+
+config BUSYBOX_UNXZ
+	bool "unxz"
+	depends on !ADK_PACKAGE_XZ
+	default n
+	help
+	  unxz is a unlzma successor.
+
+config BUSYBOX_XZ
+	bool "Provide xz alias which supports only unpacking"
+	default n
+	depends on BUSYBOX_UNXZ
+	help
+	  Enable this option if you want commands like "xz -d" to work.
+	  IOW: you'll get xz applet, but it will always require -d option.
 
 config BUSYBOX_UNZIP
 	bool "unzip"

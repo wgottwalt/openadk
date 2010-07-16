@@ -84,7 +84,7 @@ for dn in */Makefile; do
 	echo "$dn/Config.in.manual ${PKG_SECTION:=none}" >>../package_sections
 
 	# skip if we take care of this one manually
-	[[ $dn != "base-files" ]] && [[ -s Config.in.manual ]] && { cd ..; continue; }
+	[[ -s Config.in.manual ]] && { cd ..; continue; }
 
 	exec 4>../pkgconfigs.d/$dn/Config.in
 
@@ -336,9 +336,6 @@ done <package_sections >package_section_list
 # create the Config.in.auto from the sorted list from above
 cursec=""
 sort -k 3 -k 1 -f package_section_list | while read name file section; do
-	pbar="Pass 4: $name ..."
-	print -nu2 "$pbar\r"
-
 	if [[ $cursec != $section ]]; then
 		[[ -n $cursec ]] && print "endmenu\n"
 

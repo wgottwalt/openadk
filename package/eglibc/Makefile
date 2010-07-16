@@ -89,5 +89,7 @@ eglibc-dev-install:
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
+	# conflicts with libiconv
+	find $(IDIR_EGLIBC_DEV) -name iconv.h -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk

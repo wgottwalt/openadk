@@ -823,7 +823,7 @@ config BUSYBOX_WHO
 
 config BUSYBOX_WHOAMI
 	bool "whoami"
-	default n
+	default y
 	help
 	  whoami is used to print the username of the current
 	  user id (same as id -un).

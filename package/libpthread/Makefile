@@ -33,5 +33,6 @@ INSTALL_STYLE:=		manual
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
 	${CP} ${STAGING_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
+	cd $(IDIR_LIBPTHREAD)/lib && ln -sf libpthread.so.0 libpthread.so
 
 include ${TOPDIR}/mk/pkg-bottom.mk

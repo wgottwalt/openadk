@@ -952,8 +952,8 @@ config BUSYBOX_VCONFIG
 
 config BUSYBOX_WGET
 	bool "wget"
-	default y
 	depends on !ADK_PACKAGE_WGET
+	default y
 	help
 	  wget is a utility for non-interactive download of files from HTTP,
 	  HTTPS, and FTP servers.
@@ -961,21 +961,21 @@ config BUSYBOX_WGET
 config BUSYBOX_FEATURE_WGET_STATUSBAR
 	bool "Enable a nifty process meter (+2k)"
 	default y
-	depends on BUSYBOX_WGET && !ADK_PACKAGE_WGET
+	depends on BUSYBOX_WGET
 	help
 	  Enable the transfer progress bar for wget transfers.
 
 config BUSYBOX_FEATURE_WGET_AUTHENTICATION
 	bool "Enable HTTP authentication"
 	default y
-	depends on BUSYBOX_WGET && !ADK_PACKAGE_WGET
+	depends on BUSYBOX_WGET
 	help
 	  Support authenticated HTTP transfers.
 
 config BUSYBOX_FEATURE_WGET_LONG_OPTIONS
 	bool "Enable long options"
-	default n
-	depends on BUSYBOX_WGET && BUSYBOX_LONG_OPTS && !ADK_PACKAGE_WGET
+	default y
+	depends on BUSYBOX_WGET && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the wget applet.
 

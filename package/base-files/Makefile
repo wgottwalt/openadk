@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		22
+PKG_RELEASE:=		23
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -16,9 +16,6 @@ NO_DISTFILES:=		1
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-PKGDFLT_BASE_FILES=	y if !ADK_TOOLCHAIN_ONLY
-CFLINE_BASE_FILES:=	depends on !ADK_TOOLCHAIN_ONLY
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -77,6 +74,7 @@ endif
 	    echo $(ADK_TARGET) > $(IDIR_BASE_FILES)/etc/adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
+	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
 
 rebuild:
