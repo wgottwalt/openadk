@@ -962,6 +962,7 @@ config ADK_TARGET_ROOTFS_EXT2_BLOCK
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	depends on \
+		ADK_LINUX_NATIVE || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_X86_IBMX40 || \
