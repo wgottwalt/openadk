@@ -161,6 +161,9 @@ config ADK_wag54g
 config ADK_shuttle
 	tristate
 
+config ADK_x86
+	tristate
+
 config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
@@ -635,6 +638,7 @@ depends on ADK_LINUX_ALIX
 
 config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
+	select ADK_x86
 	select ADK_alix1c
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
@@ -658,6 +662,7 @@ config ADK_LINUX_X86_ALIX1C
 
 config ADK_LINUX_X86_ALIX2D
 	bool "PC Engines Alix2D"
+	select ADK_x86
 	select ADK_alix2d
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
@@ -681,6 +686,7 @@ config ADK_LINUX_X86_ALIX2D
 
 config ADK_LINUX_X86_ALIX2D13
 	bool "PC Engines Alix2D13"
+	select ADK_x86
 	select ADK_alix2d13
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI

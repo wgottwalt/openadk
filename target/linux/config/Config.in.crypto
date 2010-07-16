@@ -150,6 +150,22 @@ config ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 
+config ADK_KPACKAGE_KMOD_CRYPTO_AUTHENC
+	prompt "kmod-crypto-authenc.................. AuthENC (IPsec)"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	default n
+	help
+
+config ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
+	prompt "kmod-crypto-seqiv.................... Sequence Number IV Generator"
+	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	tristate
+	help
+	  This IV generator generates an IV based on a sequence number by
+	  xoring it with a salt.  This algorithm is mainly useful for CTR
+
 config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	prompt "kmod-crypto-cbc...................... CBC support"
 	tristate
@@ -159,6 +175,25 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	default n
 	help
 	  CBC: Cipher Block Chaining mode
+	  This block cipher algorithm is required for IPSec.
+
+config ADK_KPACKAGE_KMOD_CRYPTO_CCM
+	prompt "kmod-crypto-ccm...................... CCM support"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_CTR
+	default n
+	help
+	  Support for Counter with CBC MAC. Required for IPsec.
+
+config ADK_KPACKAGE_KMOD_CRYPTO_CTR
+	prompt "kmod-crypto-ctr...................... CTR support"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
+	default n
+	help
+	  CTR: Counter mode
 	  This block cipher algorithm is required for IPSec.
 
 config ADK_KPACKAGE_KMOD_CRYPTO_ECB
