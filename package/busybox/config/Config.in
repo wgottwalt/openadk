@@ -119,7 +119,7 @@ config BUSYBOX_LOCALE_SUPPORT
 	  Enable this if your system has locale support and you would like
 	  busybox to support locale settings.
 
-config BUSYBOX_FEATURE_ASSUME_UNICODE
+config BUSYBOX_UNICODE_SUPPORT
 	bool "Support Unicode"
 	default n
 	help
