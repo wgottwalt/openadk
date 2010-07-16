@@ -33,6 +33,7 @@ PKG_CONFIGURE_ARGS:=\
 			--without-readline \
 			--without-bonjour \
 			--without-tcl \
+			--with-system-tzdata=${STAGING_DIR} \
 			--with-zlib="yes"
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_ARGS}
 

@@ -31,6 +31,7 @@ SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_ZLIB_DEV}+=	zlib-dev-install
 
 CONFIG_STYLE:=		manual
+CONFIGURE_ENV+=		uname=Linux
 
 ifeq ($(ADK_NATIVE),)
 COPTS:=                 $(TARGET_CONFIGURE_OPTS)

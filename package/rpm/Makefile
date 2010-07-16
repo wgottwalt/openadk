@@ -13,9 +13,10 @@ PKG_BUILDDEP+=		nss libdb
 PKG_URL:=		http://www.rpm.org
 PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
 
-PKG_TARGET_DEPENDS:=    !foxboard
-
 DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
+
+PKG_TARGET_DEPENDS:=    !foxboard
+PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk
 
