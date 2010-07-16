@@ -23,6 +23,7 @@ PKG_SECT_GLXGEARS:=	x11/apps
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
 PKG_TARGET_DEPENDS:=  	ibmx40 lemote
+PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk
 

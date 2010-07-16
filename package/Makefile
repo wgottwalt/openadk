@@ -4,7 +4,6 @@
 # Main makefile for the packages
 
 include $(TOPDIR)/rules.mk
-include $(TOPDIR)/package/Depends.mk
 
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
@@ -25,6 +24,8 @@ package-$(ADK_PACKAGE_UCLIBC) += uclibc
 endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 endif
+
+include $(TOPDIR)/package/Depends.mk
 
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))

@@ -1081,9 +1081,13 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,sound-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
+V4L_COMPAT:=drivers/media/video/v4l1-compat
+ifeq ($(ADK_LINUX_64),y)
+V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
+endif
+
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
-	$(MODULES_DIR)/kernel/drivers/media/video/v4l1-compat \
-	$(MODULES_DIR)/kernel/drivers/media/video/v4l2-compat-ioctl32 \
+	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 ,65))
 
