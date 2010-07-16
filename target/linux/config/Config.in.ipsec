@@ -7,15 +7,22 @@ config ADK_KPACKAGE_KMOD_NET_KEY
 	help
 	  PF_KEYv2 socket family, compatible to KAME ones.
 
-config ADK_KPACKAGE_KMOD_INET_AH
-	prompt "kmod-net-ipsec-ah................. IPsec AH support"
+config ADK_KPACKAGE_KMOD_XFRM_USER
+	prompt "kmod-xfrm-user.................... IPsec usertools support"
 	tristate
+	default n
+	help
+
+config ADK_KPACKAGE_KMOD_INET_AH
+	prompt "kmod-inet-ah...................... IPsec AH support"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
 	default n
 	help
 	  Support for IPsec AH.
 
 config ADK_KPACKAGE_KMOD_INET_ESP
-	prompt "kmod-net-ipsec-esp................ IPsec ESP support"
+	prompt "kmod-inet-esp..................... IPsec ESP support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD
 	default n
@@ -23,7 +30,7 @@ config ADK_KPACKAGE_KMOD_INET_ESP
 	  Support for IPsec ESP.
 
 config ADK_KPACKAGE_KMOD_INET_IPCOMP
-	prompt "kmod-net-ipsec-comp................ IP Payload Compression"
+	prompt "kmod-inet-ipcomp.................. IP Payload Compression"
 	tristate
 	default n
 	help
@@ -31,21 +38,21 @@ config ADK_KPACKAGE_KMOD_INET_IPCOMP
 	  typically needed for IPsec.
 
 config ADK_KPACKAGE_KMOD_INET_XFRM_MODE_TRANSPORT
-	prompt "kmod-net-ipsec-transport........... IPsec transport mode"
+	prompt "kmod-inet-xfrm-mode-transport..... IPsec transport mode"
 	tristate
 	default n
 	help
 	  Support for IPsec transport mode.
 
 config ADK_KPACKAGE_KMOD_INET_XFRM_MODE_TUNNEL
-	prompt "kmod-net-ipsec-tunnel.............. IPsec tunnel mode"
+	prompt "kmod-inet-xfrm-mode-tunnel........ IPsec tunnel mode"
 	tristate
 	default n
 	help
 	  Support for IPsec tunnel mode.
 
 config ADK_KPACKAGE_KMOD_INET_XFRM_MODE_BEET
-	prompt "kmod-net-ipsec-beet................ IPsec BEET mode"
+	prompt "kmod-inet-xfrm-mode-beet.......... IPsec BEET mode"
 	tristate
 	default n
 	help

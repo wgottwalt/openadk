@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- pmacct-0.11.6.orig/src/nfprobe_plugin/netflow9.c	2007-02-12 23:00:40.000000000 +0100
-+++ pmacct-0.11.6/src/nfprobe_plugin/netflow9.c	2009-05-30 16:28:41.207303809 +0200
-@@ -298,8 +298,8 @@ nf9_init_template(void)
+--- pmacct-0.12.2.orig/src/nfprobe_plugin/netflow9.c	2010-04-21 16:53:36.000000000 +0200
++++ pmacct-0.12.2/src/nfprobe_plugin/netflow9.c	2010-07-15 15:11:23.575859230 +0200
+@@ -396,8 +396,8 @@ nf9_init_template(void)
  */
  	
  	rcount = 0;
@@ -12,7 +11,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  	v4_template.r[rcount].type = htons(NF9_LAST_SWITCHED);
  	v4_template.r[rcount].length = htons(4);
-@@ -443,8 +443,8 @@ nf9_init_template(void)
+@@ -588,8 +588,8 @@ nf9_init_template(void)
  	  v4_int_template.tot_rec_len += v4_int_template.r[idx].length;
  
  	rcount = 0;
@@ -23,7 +22,18 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  	v6_template.r[rcount].type = htons(NF9_LAST_SWITCHED);
  	v6_template.r[rcount].length = htons(4);
-@@ -598,8 +598,8 @@ nf_flow_to_flowset(const struct FLOW *fl
+@@ -786,8 +786,8 @@ nf9_init_options_template(void)
+ 	int rcount, idx;
+ 
+         rcount = 0;
+-        bzero(&options_template, sizeof(options_template));
+-        bzero(&options_int_template, sizeof(options_int_template));
++        memset(&options_template, 0, sizeof(options_template));
++        memset(&options_int_template, 0, sizeof(options_int_template));
+ 
+         options_template.r[rcount].type = htons(NF9_OPT_SCOPE_SYSTEM);
+         options_template.r[rcount].length = htons(0);
+@@ -826,8 +826,8 @@ nf_flow_to_flowset(const struct FLOW *fl
  	char *ftoft_ptr_0 = ftoft_buf_0;
  	char *ftoft_ptr_1 = ftoft_buf_1;
  
@@ -34,7 +44,16 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	*len_used = nflows = ret_len = 0;
  
  	rec32 = htonl(timeval_sub_ms(&flow->flow_last, system_boot_time));
-@@ -707,7 +707,7 @@ send_netflow_v9(struct FLOW **flows, int
+@@ -916,7 +916,7 @@ nf_options_to_flowset(u_char *packet, u_
+         u_int8_t rec8;
+         char *ftoft_ptr_0 = ftoft_buf_0;
+ 
+-        bzero(ftoft_buf_0, sizeof(ftoft_buf_0));
++        memset(ftoft_buf_0, 0, sizeof(ftoft_buf_0));
+         *len_used = nflows = ret_len = 0;
+ 
+         rec8 = 1; /* NF9_FLOW_SAMPLER_ID */ 
+@@ -975,7 +975,7 @@ send_netflow_v9(struct FLOW **flows, int
  
  	last_valid = num_packets = 0;
  	for (j = 0; j < num_flows;) {

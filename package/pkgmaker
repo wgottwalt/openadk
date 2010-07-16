@@ -318,7 +318,7 @@ lookup_section_string() {
 
 # print the first prompt's first word's value in a given Config.in file
 get_first_prompt() {
-	prompt="$(grep -m 1 "prompt " $1 | sed -n 's/.*"\([^ \.]*\)[ \.].*"/\1/p')"
+	prompt="$(grep "prompt " $1 |head -1| sed -n 's/.*"\([^ \.]*\)[ \.].*"/\1/p')"
 	[[ -n $prompt ]] && echo $prompt
 }
 

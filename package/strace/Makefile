@@ -13,6 +13,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_TARGET_DEPENDS:=	!foxboard
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,STRACE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
