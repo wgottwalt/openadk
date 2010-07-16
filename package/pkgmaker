@@ -84,7 +84,7 @@ for dn in */Makefile; do
 	echo "$dn/Config.in.manual ${PKG_SECTION:=none}" >>../package_sections
 
 	# skip if we take care of this one manually
-	[[ $dn != "base-files" ]] && [[ -s Config.in.manual ]] && { cd ..; continue; }
+	[[ -s Config.in.manual ]] && { cd ..; continue; }
 
 	exec 4>../pkgconfigs.d/$dn/Config.in
 
