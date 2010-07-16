@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xkeyboard-config
-PKG_VERSION:=		1.7
+PKG_VERSION:=		1.8
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		xkbcomp
-PKG_MD5SUM:=		c024a6e2a5b8c4ce3d9d1f1286466163
+PKG_MD5SUM:=		f049d15f1e9d95776a940f222df9404b
 PKG_DESCR:=		X keyboard config
 PKG_SECTION:=		x11/libs
+PKG_BUILDDEP+=		xkbcomp
 PKG_SITES:=		http://xlibs.freedesktop.org/xkbdesc/
 
 include $(TOPDIR)/mk/package.mk

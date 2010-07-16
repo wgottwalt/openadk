@@ -141,7 +141,7 @@ fi
 
 if [[ -n $NEED_INTL ]]; then
 	if ! which intltool-update >/dev/null 2>&1; then
-		echo >&2 You need intltool-update to build $NEED_INTL
+		echo >&2 You need intltool to build $NEED_INTL
 		out=1
 	fi
 fi
