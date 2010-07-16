@@ -777,6 +777,10 @@ $(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/chainiv \
 ,07))
 
+$(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
+    $(MODULES_DIR)/kernel/crypto/authenc \
+,11))
+
 $(eval $(call KMOD_template,CRYPTO_HMAC,crypto-hmac,\
     $(MODULES_DIR)/kernel/crypto/hmac \
 ,11))
@@ -812,6 +816,18 @@ $(eval $(call KMOD_template,CRYPTO_WP512,crypto-wp512,\
 $(eval $(call KMOD_template,CRYPTO_TGR192,crypto-tgr192,\
     $(MODULES_DIR)/kernel/crypto/tgr192 \
 ,11))
+
+$(eval $(call KMOD_template,CRYPTO_SEQIV,crypto-seqiv,\
+    $(MODULES_DIR)/kernel/crypto/seqiv \
+,5))
+
+$(eval $(call KMOD_template,CRYPTO_CTR,crypto-ctr,\
+    $(MODULES_DIR)/kernel/crypto/ctr \
+,10))
+
+$(eval $(call KMOD_template,CRYPTO_CCM,crypto-ccm,\
+    $(MODULES_DIR)/kernel/crypto/ccm \
+,10))
 
 $(eval $(call KMOD_template,CRYPTO_ECB,crypto-ecb,\
     $(MODULES_DIR)/kernel/crypto/ecb \
@@ -884,6 +900,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
     $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
+    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))
 

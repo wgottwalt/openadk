@@ -1,7 +1,7 @@
 menu "IPSec support"
 
 config ADK_KPACKAGE_KMOD_NET_KEY
-	prompt "kmod-net-ipsec-netkey............. PF_KEYv2 socket family"
+	prompt "kmod-net-key..................... PF_KEYv2 socket family"
 	tristate
 	default n
 	help
@@ -32,6 +32,7 @@ config ADK_KPACKAGE_KMOD_INET_ESP
 config ADK_KPACKAGE_KMOD_INET_IPCOMP
 	prompt "kmod-inet-ipcomp.................. IP Payload Compression"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_DEFLATE
 	default n
 	help
 	  Support for IP Payload Compression Protocol (IPComp) (RFC3173),
