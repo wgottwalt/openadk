@@ -29,21 +29,6 @@ diff -Nur eglibc-2.11.1.orig/libc/sunrpc/rpc_clntout.c eglibc-2.11.1/libc/sunrpc
  #include "rpc_parse.h"
  #include "rpc_util.h"
  #include "proto.h"
-diff -Nur eglibc-2.11.1.orig/libc/sunrpc/rpc_main.c eglibc-2.11.1/libc/sunrpc/rpc_main.c
---- eglibc-2.11.1.orig/libc/sunrpc/rpc_main.c	2010-02-24 08:10:00.000000000 +0100
-+++ eglibc-2.11.1/libc/sunrpc/rpc_main.c	2010-03-22 18:31:31.245661003 +0100
-@@ -37,7 +37,11 @@
- #include <stdio.h>
- #include <string.h>
- #include <unistd.h>
-+#ifdef _CROSS_RPCGEN_
-+#define gettext(X) (X)
-+#else
- #include <libintl.h>
-+#endif
- #include <ctype.h>
- #include <sys/types.h>
- #include <sys/param.h>
 diff -Nur eglibc-2.11.1.orig/libc/sunrpc/rpc_scan.c eglibc-2.11.1/libc/sunrpc/rpc_scan.c
 --- eglibc-2.11.1.orig/libc/sunrpc/rpc_scan.c	2010-02-24 08:10:00.000000000 +0100
 +++ eglibc-2.11.1/libc/sunrpc/rpc_scan.c	2010-03-22 18:31:16.146907097 +0100
@@ -90,3 +75,34 @@ diff -Nur eglibc-2.11.1.orig/libc/timezone/Makefile eglibc-2.11.1/libc/timezone/
  
  $(objpfx)cross-zic: $(addprefix $(objpfx)cross-,$(zic-objs))
  	gcc $(addprefix $(objpfx)cross-,$(zic-objs)) -o $@
+diff -Nur eglibc-2.11.1.orig/libc/sunrpc/rpc_main.c eglibc-2.11.1/libc/sunrpc/rpc_main.c
+--- eglibc-2.11.1.orig/libc/sunrpc/rpc_main.c	2010-02-24 08:10:00.000000000 +0100
++++ eglibc-2.11.1/libc/sunrpc/rpc_main.c	2010-06-20 13:32:42.000000000 +0200
+@@ -37,7 +37,11 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <unistd.h>
++#ifdef _CROSS_RPCGEN_
++#define gettext(X) (X)
++#else
+ #include <libintl.h>
++#endif
+ #include <ctype.h>
+ #include <sys/types.h>
+ #include <sys/param.h>
+@@ -996,10 +1000,12 @@
+ 	abort ();
+       temp = rindex (cmd->infile, '.');
+       cp = stpcpy (mkfilename, "Makefile.");
+-      if (temp != NULL)
+-	*((char *) stpncpy (cp, cmd->infile, temp - cmd->infile)) = '\0';
+-      else
++      if (temp != NULL) {
++	strncpy (cp, cmd->infile, temp - cmd->infile);
++	cp[temp - cmd->infile - 1] = '\0';
++      } else {
+ 	stpcpy (cp, cmd->infile);
++      }
+ 
+     }
+   else
