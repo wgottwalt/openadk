@@ -9,20 +9,52 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		22dae13782f493ec675d54b67d79a66d
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libgmp ip libpthread kmod-net-key kmod-xfrm-user
+PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user
 PKG_DEPENDS+=		kmod-inet-ah kmod-inet-esp kmod-inet-ipcomp
 PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
 PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-sha256 kmod-crypto-md5
 PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
 PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
 PKG_DEPENDS+=		kmod-crypto-deflate
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
+PKG_BUILDDEP+=		openssl
+endif
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GNUTLS},y)
+PKG_BUILDDEP+=		gnutls
+endif
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GMP},y)
 PKG_BUILDDEP+=		gmp
+endif
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
+
+PKG_CHOICES:=		WITH_GMP WITH_OPENSSL WITH_GNUTLS
+PKGCD_WITH_GMP:=	use GMP for crypto
+PKGCS_WITH_GMP:=	libgmp
+PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCS_WITH_GNUTLS:=	libgnutls
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,STRONGSWAN,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--enable-openssl \
+			--disable-gcrypt \
+			--disable-gmp
+endif
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GNUTLS},y)
+CONFIGURE_ARGS+=	--enable-gcrypt \
+			--disable-openssl \
+			--disable-gmp
+endif
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GMP},y)
+CONFIGURE_ARGS+=	--enable-gmp \
+			--disable-openssl \
+			--disable-gcrypt
+endif
 
 CONFIGURE_ARGS+=	--disable-tools \
 			--disable-fips-prf \
