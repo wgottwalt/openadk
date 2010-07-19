@@ -1,6 +1,6 @@
 $Id$
 --- aiccu.orig/unix-console/Makefile	2007-01-15 12:04:27.000000000 +0100
-+++ aiccu/unix-console/Makefile	2009-12-28 16:39:06.687500000 +0100
++++ aiccu/unix-console/Makefile	2010-06-17 10:59:40.000000000 +0200
 @@ -10,9 +10,9 @@
  #  $Date: 2007-01-15 11:04:27 $
  # **********************************************************/
@@ -21,8 +21,9 @@ $Id$
  CFLAGS  += -D_LINUX -D HAS_IFHEAD -D AICCU_TYPE="\"linux\""
  SRCS	+= ../common/aiccu_linux.c
  OBJS	+= ../common/aiccu_linux.o
- LDFLAGS	+= -lpthread -lresolv
+-LDFLAGS	+= -lpthread -lresolv
 -endif
++LDFLAGS	+= -pthread -lresolv
  
  # FreeBSD
 -ifeq ($(shell uname | grep -c "FreeBSD"),1)

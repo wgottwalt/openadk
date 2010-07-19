@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		aiccu
 PKG_VERSION:=		20070115
-PKG_RELEASE:=		8
+PKG_RELEASE:=		9
 PKG_MD5SUM:=		c9bcc83644ed788e22a7c3f3d4021350
 PKG_DESCR:=		SixXS Automatic IPv6 Connectivity Client Utility
 PKG_SECTION:=		net
@@ -25,7 +25,7 @@ INSTALL_STYLE:=	manual
 
 TCFLAGS+=	-D_REENTRANT -D_GNU_SOURCE -DAICCU_CONSOLE \
 		-D_LINUX -DHAS_IFHEAD -DAICCU_TYPE=\"linux\"
-TLDFLAGS+=	-lpthread -lresolv
+TLDFLAGS+=	-pthread -lresolv
 MAKE_FLAGS+=	CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' LDFLAGS='${TLDFLAGS}'
 
 do-install:
