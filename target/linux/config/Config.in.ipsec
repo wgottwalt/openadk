@@ -33,6 +33,7 @@ config ADK_KPACKAGE_KMOD_INET_IPCOMP
 	prompt "kmod-inet-ipcomp.................. IP Payload Compression"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_DEFLATE
+	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
 	help
 	  Support for IP Payload Compression Protocol (IPComp) (RFC3173),

@@ -292,6 +292,7 @@ $(eval $(call KMOD_template,INET_ESP,inet-esp,\
 ,65))
 
 $(eval $(call KMOD_template,INET_IPCOMP,inet-ipcomp,\
+	$(MODULES_DIR)/kernel/net/ipv4/xfrm4_tunnel \
 	$(MODULES_DIR)/kernel/net/xfrm/xfrm_ipcomp \
 	$(MODULES_DIR)/kernel/net/ipv4/ipcomp \
 ,70))
