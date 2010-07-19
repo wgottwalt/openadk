@@ -1,0 +1,29 @@
+#!/bin/sh
+#PKG strongswan
+#INIT 60
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${ipsec:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	ipsec start
+	;;
+stop)
+	ipsec stop
+	;;
+restart)
+	sh $0 stop
+	sleep 3
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
