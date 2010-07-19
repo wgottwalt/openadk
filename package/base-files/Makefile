@@ -6,9 +6,9 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		10
-PKG_DESCR:=		basic filesystem structure and scripts
+PKG_RELEASE:=		23
 PKG_SECTION:=		base
+PKG_DESCR:=		basic files and scripts
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
@@ -16,9 +16,6 @@ NO_DISTFILES:=		1
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-PKGDFLT_BASE_FILES=	y if !ADK_TOOLCHAIN_ONLY
-CFLINE_BASE_FILES:=	depends on !ADK_TOOLCHAIN_ONLY
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -31,12 +28,10 @@ do-install:
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@-rm $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
-ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
 	$(SED) 's,@TARGET@,$(ADK_TARGET),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
-	$(SED) 's,@VERSION@,$(ADK_VERSION),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
-else
-	@-rm $(IDIR_BASE_FILES)/etc/ipkg.conf
-endif
+	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@LIBC@,$(ADK_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
 	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
 ifneq (${ADK_PACKAGE_BASH},)
@@ -64,12 +59,30 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/bin
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
-	ln -sf ../tmp/resolv.conf $(IDIR_BASE_FILES)/etc/resolv.conf
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
+	test -z $(ADK_RUNTIME_HOSTNAME) || \
+	    echo $(ADK_RUNTIME_HOSTNAME) > \
+	    $(IDIR_BASE_FILES)/etc/hostname
+	test -z $(ADK_RUNTIME_PASSWORD) || \
+	    $(SED) 's,\*NP\*,'"$$(${STAGING_TOOLS}/bin/mkcrypt \
+	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
+	git log -1|head -1|sed -e 's#commit ##' \
+		> $(IDIR_BASE_FILES)/etc/adkversion
+	test -z $(ADK_TARGET) || \
+	    echo $(ADK_TARGET) > $(IDIR_BASE_FILES)/etc/adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
+	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
+
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		rm ${WRKBUILD}/.build_done; \
+		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
+
+fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -8,7 +8,7 @@ PKG_VERSION:=		8.4.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ae7f305eb9388b187e8f07dee0cec55c
 PKG_DESCR:=		PostgreSQL database library
-PKG_SECTION:=		libs
+PKG_SECTION:=		db
 PKG_BUILDDEP+=		zlib
 PKG_URL:=		http://www.postgresql.org
 PKG_SITES:=		ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/source/v${PKG_VERSION}/ \
@@ -33,6 +33,7 @@ PKG_CONFIGURE_ARGS:=\
 			--without-readline \
 			--without-bonjour \
 			--without-tcl \
+			--with-system-tzdata=${STAGING_DIR} \
 			--with-zlib="yes"
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_ARGS}
 

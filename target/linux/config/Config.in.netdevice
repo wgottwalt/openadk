@@ -307,12 +307,4 @@ config ADK_KERNEL_RT2X00_DEBUG
 
 endmenu
 
-menu "ATM driver support"
-depends on ADK_TARGET_WITH_DSL
-
-source package/sangam-atm/Config.in
-source package/sangam-atm/Config.in.kmod
-source package/sangam-atm/Config.in.fw
-
-endmenu
 endmenu

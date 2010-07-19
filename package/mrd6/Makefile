@@ -8,7 +8,7 @@ PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
 PKG_DESCR:=		IPv6 multicast routing daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		ipv6
 PKG_CXX:=		MRD6
 PKG_DEPENDS:=		kmod-ipv6
 PKG_SITES:=		http://www.openadk.org/distfiles/
@@ -26,7 +26,7 @@ TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs \
 			-I${STAGING_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
 endif
-XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}" 
+XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc

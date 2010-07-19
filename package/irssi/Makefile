@@ -8,11 +8,10 @@ PKG_VERSION:=		0.8.13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
 PKG_DESCR:=		IRC text client
-PKG_SECTION:=		text
+PKG_SECTION:=		chat
 PKG_DEPENDS:=		glib libncurses
 PKG_BUILDDEP+=		glib ncurses
 ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
-PKG_DEPENDS+=		libopenssl
 PKG_BUILDDEP+=		openssl
 endif
 PKG_URL:=		http://www.irssi.org
@@ -22,6 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS:=		SSL
 PKGFD_SSL:=		SSL/TLS support
+PKGFS_SSL:=		libopenssl
 
 include ${TOPDIR}/mk/package.mk
 

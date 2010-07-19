@@ -8,17 +8,14 @@ PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
 PKG_DESCR:=		Network UPS Tools
-PKG_SECTION:=		sys
+PKG_SECTION:=		net/misc
 ifneq (${ADK_PACKAGE_NUT_SSL},)
-PKG_DEPENDS+=		libopenssl
 PKG_BUILDDEP+=		openssl
 endif
 ifneq (${ADK_PACKAGE_NUT_USB},)
-PKG_DEPENDS+=		libusb
 PKG_BUILDDEP+=		libusb
 endif
 ifneq (${ADK_PACKAGE_NUT_SNMP},)
-PKG_DEPENDS+=		libnetsnmp
 PKG_BUILDDEP+=		net-snmp
 endif
 PKG_URL:=		http://www.networkupstools.org
@@ -26,8 +23,11 @@ PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
 PKG_FLAVOURS:=		SSL SNMP USB
 PKGFD_SSL:=		enable SSL support
+PKGFS_SSL:=		libopenssl
 PKGFD_SNMP:=		enable SNMP support
+PKGFS_SNMP:=		libnetsnmp
 PKGFD_USB:=		enable USB support
+PKGFS_USB:=		libusb
 
 include ${TOPDIR}/mk/package.mk
 
@@ -91,7 +91,7 @@ CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
 endif
 
-ALL_TARGET:=		all 
+ALL_TARGET:=		all
 INSTALL_TARGET:=	install
 
 ifneq (${ADK_PACKAGE_NUT_USB},)
@@ -108,7 +108,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
 		${IDIR_NUT}/usr/sbin/
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib 
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \

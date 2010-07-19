@@ -236,11 +236,6 @@ EOF
 	umount $tmp/dev
 fi
 
-printf "Creating device nodes\n"
-mknod -m 666 $tmp/dev/null c 1 3
-mknod -m 622 $tmp/dev/console c 5 1
-mknod -m 666 $tmp/dev/tty c 5 0
-
 umount $tmp
 
 printf "Successfully installed.\n"

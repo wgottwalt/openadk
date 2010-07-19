@@ -28,7 +28,7 @@ config ADK_KERNEL_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb-core..................... USB support"
 	tristate
-	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_ALIX
 	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
 	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 || ADK_KERNEL_USB)
@@ -81,7 +81,7 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
 	tristate
-	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_ALIX
 	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
 	depends on !ADK_LINUX_CRIS_FOXBOARD
@@ -128,7 +128,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
 	tristate
 	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_KERNEL_USB_EHCI_HCD)
-	default y if ADK_LINUX_X86_ALIX1C
+	default y if ADK_LINUX_ALIX
 	default y if ADK_LINUX_MIPS64_LEMOTE
 	default n
 	depends on ADK_KPACKAGE_KMOD_USB
@@ -166,6 +166,14 @@ config ADK_KPACKAGE_KMOD_USB_ACM
 config ADK_KPACKAGE_KMOD_USB_PEGASUS
 	prompt "kmod-usb-pegasus.................. Support for USB Pegasus"
 	tristate
+	default n
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+
+config ADK_KPACKAGE_KMOD_USB_HSO
+	prompt "kmod-usb-hso...................... Support for USB HSO devices"
+	tristate
+	select ADK_KERNEL_RFKILL
+	select ADK_KPACKAGE_KMOD_USB_STORAGE
 	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 

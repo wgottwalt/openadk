@@ -1,0 +1,19 @@
+--- strongswan-4.4.0.orig/src/starter/netkey.c	2010-03-15 21:52:51.000000000 +0100
++++ strongswan-4.4.0/src/starter/netkey.c	2010-07-14 19:05:06.911085736 +0200
+@@ -48,6 +48,8 @@ starter_netkey_init(void)
+ 	}
+ 
+ 	/* make sure that all required IPsec modules are loaded */
++	/* OpenADK loads all kernel modules already */
++#if 0
+ 	if (stat(PROC_MODULES, &stb) == 0)
+ 	{
+ 		ignore_result(system("modprobe -qv ah4"));
+@@ -60,6 +62,7 @@ starter_netkey_init(void)
+ 	DBG(DBG_CONTROL,
+ 		DBG_log("Found netkey IPsec stack")
+ 	)
++#endif
+ 	return TRUE;
+ }
+ 

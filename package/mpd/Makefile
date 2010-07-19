@@ -8,55 +8,43 @@ PKG_VERSION:=		0.15.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3ee746cb9193acfd0e1bd7a8c54af1a6
 PKG_DESCR:=		A music player daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP+=		glib
 ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
-PKG_DEPENDS+=		alsa-lib
 PKG_BUILDDEP+=		alsa-lib
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_AO),)
-PKG_DEPENDS+=		libao
 PKG_BUILDDEP+=		libao
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
-PKG_DEPENDS+=		libid3tag libmad
 PKG_BUILDDEP+=		libid3tag libmad
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MP4),)
-PKG_DEPENDS+=		libfaad2
 PKG_BUILDDEP+=		faad2
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_OGG),)
-PKG_DEPENDS+=		libvorbis libogg
 PKG_BUILDDEP+=		libvorbis libogg
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_TREMOR),)
-PKG_DEPENDS+=		libvorbisidec
 PKG_BUILDDEP+=		libvorbisidec
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_FLAC),)
-PKG_DEPENDS+=		libflac
 PKG_BUILDDEP+=		flac
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
-PKG_DEPENDS+=		libaudiofile
 PKG_BUILDDEP+=		libaudiofile
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
-PKG_DEPENDS+=		libshout liblame libvorbis
 PKG_BUILDDEP+=		lame libvorbis libshout
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
-PKG_DEPENDS+=		libcurl
 PKG_BUILDDEP+=		curl
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_MMS),)
-PKG_DEPENDS+=		libmms
 PKG_BUILDDEP+=		libmms
 endif
 ifneq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),)
-PKG_DEPENDS+=		ffmpeg
 PKG_BUILDDEP+=		ffmpeg
 endif
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
@@ -66,17 +54,29 @@ PKG_FLAVOURS:=		WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR \
 			WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG \
 			WITH_SHOUT WITH_CURL
 PKGFD_WITH_ALSA:=	enable ALSA output
+PKGFS_WITH_ALSA:=	alsa-lib
 PKGFD_WITH_AO:=		enable Libao/ESD output
+PKGFS_WITH_AO:=		libao
 PKGFD_WITH_MP3:=	enable MP3 support
+PKGFS_WITH_MP3:=	libid3tag libmad
 PKGFD_WITH_MP4:=	enable MP4 support
+PKGFS_WITH_MP4:=	libfaad2
 PKGFD_WITH_OGG:=	enable OGG support
+PKGFS_WITH_OGG:=	libvorbis libogg
 PKGFD_WITH_TREMOR:=	enable fixpoint Vorbis/OGG support
+PKGFS_WITH_TREMOR:=	libvorbisidec
 PKGFD_WITH_FLAC:=	enable FLAC support
+PKGFS_WITH_FLAC:=	libflac
 PKGFD_WITH_WAV:=	enable WAVE support
+PKGFS_WITH_WAV:=	libaudiofile
 PKGFD_WITH_MMS:=	enable MMS support
+PKGFS_WITH_MMS:=	libmms
 PKGFD_WITH_FFMPEG:=	enable FFMPEG support
+PKGFS_WITH_FFMPEG:=	ffmpeg
 PKGFD_WITH_SHOUT:=	enable Shoutcast output support
+PKGFS_WITH_SHOUT:=	libshout liblame libvorbis
 PKGFD_WITH_CURL:=	enable CURL support
+PKGFS_WITH_CURL:=	libcurl
 
 include ${TOPDIR}/mk/package.mk
 
@@ -119,9 +119,9 @@ CONFIGURE_ARGS+=	--disable-aac
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
-CONFIGURE_ARGS+=	--enable-vorbis 
+CONFIGURE_ARGS+=	--enable-vorbis
 else
-CONFIGURE_ARGS+=	--disable-vorbis 
+CONFIGURE_ARGS+=	--disable-vorbis
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)

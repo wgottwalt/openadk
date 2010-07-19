@@ -46,14 +46,15 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
-			libc_cv_slibdir="/lib" 
+			libc_cv_slibdir="/lib"
 
 # compile nothing, eglibc is already build in toolchain directory
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
 		$(IDIR_EGLIBC)/usr/lib
-	# install /etc/localtime from host system (FIXME)
-	${CP} /etc/localtime $(IDIR_EGLIBC)/etc
+	test -z $(ADK_RUNTIME_TIMEZONE) || \
+	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
+		$(IDIR_EGLIBC)/etc/localtime
 	$(CP) $(STAGING_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
@@ -88,5 +89,7 @@ eglibc-dev-install:
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
+	# conflicts with libiconv
+	find $(IDIR_EGLIBC_DEV) -name iconv.h -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk

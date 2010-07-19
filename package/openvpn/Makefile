@@ -5,70 +5,73 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b273ed2b5ec8616fb9834cde8634bce7
 PKG_DESCR:=		Open Source VPN solution using SSL
-PKG_SECTION:=		net
-PKG_DEPENDS:=		kmod-tun
-ifeq ($(ADK_COMPILE_OPENVPN_WITH_OPENSSL),y)
-PKG_DEPENDS+=		libopenssl
+PKG_SECTION:=		net/security
+PKG_DEPENDS:=		kmod-tun libopenssl
 PKG_BUILDDEP+=		openssl
-endif
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_LZO),y)
-PKG_DEPENDS+=		liblzo
+ifeq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),y)
 PKG_BUILDDEP+=		liblzo
 endif
 PKG_URL:=		http://openvpn.net
 PKG_SITES:=		http://openvpn.net/release/ \
 			${MASTER_SITE_SOURCEFORGE:=openvpn/}
 
+PKG_FLAVOURS:=		WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
+PKGFD_WITH_LZO:=	enable LZO compression support
+PKGFS_WITH_LZO:=	liblzo
+PKGFD_WITH_MANAGEMENT:=	enable management server support
+PKGFD_WITH_HTTPPROXY:=	enable http proxy support
+PKGFD_WITH_SOCKS:=	enable socks proxy support
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENVPN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENVPN_EASY_RSA,openvpn-easy-rsa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_OPENSSL),y)
-DISABLE_OPENSSL:=--disable-ssl --disable-crypto
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
+CONFIGURE_ARGS+=	--enable-lzo
+else
+CONFIGURE_ARGS+=	--disable-lzo
 endif
 
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_LZO),y)
-DISABLE_LZO:=--disable-lzo
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_MANAGEMENT),)
+CONFIGURE_ARGS+=	--enable-management
+else
+CONFIGURE_ARGS+=	--disable-management
 endif
 
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_SERVER),y)
-DISABLE_SERVER:=--disable-server
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_HTTPPROXY),)
+CONFIGURE_ARGS+=	--enable-http
+else
+CONFIGURE_ARGS+=	--disable-http
 endif
-ifneq ($(ADK_COMPILE_OPENVPN_WITH_HTTP),y)
-DISABLE_HTTP:=--disable-http
-endif
-ifeq ($(ADK_COMPILE_OPENVPN_WITH_PASSWORD_SAVE),y)
-ENABLE_PASSWORD_SAVE:=--enable-password-save
-endif
-ifeq ($(ADK_COMPILE_OPENVPN_WITH_SMALL),y)
-ENABLE_SMALL:=--enable-small
+
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_SOCKS),)
+CONFIGURE_ARGS+=	--enable-socks
+else
+CONFIGURE_ARGS+=	--disable-socks
 endif
 
 CONFIGURE_ARGS+=	--disable-pthread \
 			--disable-plugins \
-			--disable-management \
-			--disable-socks \
+			--enable-small \
 			--enable-iproute2 \
 			--with-iproute-path=ip \
 			--without-ifconfig-path \
-			--without-route-path \
-			$(DISABLE_LZO) \
-			$(DISABLE_OPENSSL) \
-			$(DISABLE_SERVER) \
-			$(DISABLE_HTTP) \
-			$(ENABLE_PASSWORD_SAVE) \
-			$(ENABLE_SMALL)
+			--without-route-path
 
-post-install:
-	# main package
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${OPENVPN_EASY_RSA}+=	openvpn-easy-rsa-install
+
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_OPENVPN)/usr/sbin $(IDIR_OPENVPN)/etc/openvpn
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
 	$(CP) ./files/openvpn.conf $(IDIR_OPENVPN)/etc/openvpn/
-	# subpackage easy-rsa
+
+openvpn-easy-rsa-install:
 	${INSTALL_DIR} $(IDIR_OPENVPN_EASY_RSA)/usr/sbin \
 		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys
 	touch $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys/index.txt

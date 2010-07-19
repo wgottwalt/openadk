@@ -4,14 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tar
-PKG_VERSION:=		1.22
+PKG_VERSION:=		1.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		efafad1b256e3de410f4fce5335d9c9d
+PKG_MD5SUM:=		fe81d950b61cb2f45619e1fcef97ce60
 PKG_DESCR:=		GNU tar
-PKG_SECTION:=		utils
-PKG_URL:=		http://mirrors.kernel.org/gnu/tar
-PKG_SITES:=		ftp://ftp.informatik.rwth-aachen.de/pub/gnu/tar/ \
-                	http://mirrors.kernel.org/gnu/tar/
+PKG_SECTION:=		archive
+PKG_URL:=		http://mirrors.kernel.org/gnu/tar/
+PKG_SITES:=		http://mirrors.kernel.org/gnu/tar/
 
 include ${TOPDIR}/mk/package.mk
 

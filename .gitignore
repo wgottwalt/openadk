@@ -17,6 +17,7 @@ toolchain_build_*/
 .prereq_done
 .config*
 .busyboxcfg
+.rebuild.*
 .defconfig
 all.config
 .cfg_*/
@@ -28,6 +29,8 @@ config/*.o
 config/lxdialog/*.o
 make.log
 dl/
+package/Config.in.auto*
+package/pkgconfigs.d/
 package/*/info.mk
 package/*/Config.in
 package/*/Config.in.lib

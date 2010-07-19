@@ -161,6 +161,9 @@ config ADK_wag54g
 config ADK_shuttle
 	tristate
 
+config ADK_x86
+	tristate
+
 config ADK_TARGET
 	string
 	default "alix1c"  if ADK_alix1c
@@ -287,12 +290,12 @@ config ADK_LINUX_MIPS64_LEMOTE
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
-	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_RTC
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
+	select ADK_KPACKAGE_KMOD_SND_OSSEMUL
 	help
 	  Lemote Subnotebook.
 	  http://www.lemote.com/english/index.html
@@ -635,8 +638,8 @@ depends on ADK_LINUX_ALIX
 
 config ADK_LINUX_X86_ALIX1C
 	bool "PC Engines Alix1C"
+	select ADK_x86
 	select ADK_alix1c
-	select ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -651,6 +654,7 @@ config ADK_LINUX_X86_ALIX1C
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_INPUT
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX1C boards.
 	  http://www.pcengines.ch/
@@ -658,8 +662,8 @@ config ADK_LINUX_X86_ALIX1C
 
 config ADK_LINUX_X86_ALIX2D
 	bool "PC Engines Alix2D"
+	select ADK_x86
 	select ADK_alix2d
-	select ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -674,6 +678,7 @@ config ADK_LINUX_X86_ALIX2D
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
 	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D boards.
 	  http://www.pcengines.ch/
@@ -681,8 +686,8 @@ config ADK_LINUX_X86_ALIX2D
 
 config ADK_LINUX_X86_ALIX2D13
 	bool "PC Engines Alix2D13"
+	select ADK_x86
 	select ADK_alix2d13
-	select ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
@@ -697,6 +702,8 @@ config ADK_LINUX_X86_ALIX2D13
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  Support for ALIX2D13 boards.
 	  http://www.pcengines.ch/
@@ -853,6 +860,7 @@ prompt "Target Firmware type"
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
@@ -866,6 +874,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
+		ADK_LINUX_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_64_SHUTTLE || \
@@ -953,6 +962,7 @@ config ADK_TARGET_ROOTFS_EXT2_BLOCK
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	depends on \
+		ADK_LINUX_NATIVE || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_X86_IBMX40 || \

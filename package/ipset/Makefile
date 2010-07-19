@@ -7,17 +7,20 @@ PKG_NAME:=		ipset
 PKG_VERSION:=		3.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
-PKG_DESCR:=		Netfilter ip sets administration utility
-PKG_SECTION:=		net
+PKG_DESCR:=		ip sets administration utility
+PKG_SECTION:=		firewall
 PKG_URL:=		http://ipset.netfilter.org
 PKG_SITES:=		http://ipset.netfilter.org/
+PKG_SECTION_KMOD_IPSET:=kernel
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+PKG_DESCR_KMOD:=	ipset kernel module
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR_KMOD},${PKG_SECTION_KMOD_IPSET}))
 
 CONFIG_STYLE:=		manual
 

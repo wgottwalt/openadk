@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		171ebfd3733aeae3af91ad57d126d29d
 PKG_DESCR:=		font util
-PKG_SECTION:=		libs
+PKG_SECTION:=		x11/apps
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
@@ -16,7 +16,17 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FONT_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+# XXX: Push the mapping files to a place where we can find them
+# again when compiling the actual fonts. This is ugly as hell,
+# especially as all font packages still need patching to avoid
+# calling pkg-config (which we don't provide) in order to
+# automatically find the mappings.
+fonts-hack:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/share/fonts/X11/util
+	${CP} ${WRKINST}/usr/share/fonts/X11/util/* \
+		${STAGING_DIR}/usr/share/fonts/X11/util
+
+post-install: fonts-hack
 	${INSTALL_DIR} ${IDIR_FONT_UTIL}/usr/share/fonts/X11/util
 	${CP} ${WRKINST}/usr/share/fonts/X11/util/* \
 		${IDIR_FONT_UTIL}/usr/share/fonts/X11/util

@@ -1,0 +1,11 @@
+--- mplayer-1.0-31648.orig/configure	2010-07-09 11:54:31.000000000 +0200
++++ mplayer-1.0-31648/configure	2010-07-15 19:03:13.247109421 +0200
+@@ -4304,7 +4304,7 @@ dfb_version() {
+ 
+ if test "$_directfb" = yes; then
+   cat > $TMPC << EOF
+-#include <directfb_version.h>
++#include <directfb/directfb_version.h>
+ int
+ dfb_ver = DIRECTFB_MAJOR_VERSION.DIRECTFB_MINOR_VERSION.DIRECTFB_MICRO_VERSION
+ ;

@@ -9,28 +9,40 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinuz
 
-kernel-install:
-	@cp $(KERNEL) $(TARGET_DIR)/boot/vmlinuz-adk
-
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> $(LINUX_DIR)/.config
 	echo N |$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
-		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE)
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(LINUX_DIR)/vmlinuz $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 	@echo 'Boot your lemote and type following commands in PMON:'
 	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
 	@echo 'PMON> load tftp://<ip-address-server>/${ADK_TARGET}-${FS}-kernel'
 	@echo 'PMON> g'
-	@echo 'Login as user root with password linux123 via ssh or console'
+endif
+ifeq ($(FS),initramfs)
+imageinstall: $(BIN_DIR)/$(INITRAMFS)
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+endif
+ifeq ($(FS),initramfs-piggyback)
+imageinstall: $(BUILD_DIR)/$(INITRAMFS_PIGGYBACK) createinitramfs
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+endif
+ifeq ($(FS),archive)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
@@ -52,29 +64,10 @@ imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
 	@echo 'mount /dev/sda1 /mnt/boot'
 	@echo 'mount /dev/mapper/crypt /mnt/root'
 	@echo 'mkdir /mnt/boot/boot'
-	@echo 
 	@echo 'Copy $(ROOTFSUSERTARBALL) via scp to /mnt/root and extract it'
 	@echo 'cd /mnt/root ; gunzip $(ROOTFSUSERTARBALL); tar xpvf $(ROOTFSUSERTARBALL)'
 	@echo 'Copy ${ADK_TARGET}-${FS}-kernel via scp to /mnt/boot/boot'
 	@echo 'Move boot.cfg to /mnt/boot/boot'
 	@echo 'mv /mnt/root/boot/boot.cfg /mnt/boot/boot'
 	@echo 'cd /mnt/root ; mknod -m 644 console c 5 1'
-	@echo 'Login as user root with password linux123 via ssh or console'
-endif
-ifeq ($(FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'Login as user root with password linux123 via ssh or console'
-endif
-ifeq ($(FS),initramfs-piggyback)
-imageinstall: $(BUILD_DIR)/$(INITRAMFS_PIGGYBACK) createinitramfs
-	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
-	@echo 'Login as user root with password linux123 via ssh or console'
-endif
-ifeq ($(FS),archive)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

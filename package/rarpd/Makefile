@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		rarpd
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		11
-PKG_BUILDDEP+=		libnet
 PKG_MD5SUM:=		04e2ca849e758d0b88c8281775ec3b58
 PKG_DESCR:=		Reverse ARP Daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnet
+PKG_BUILDDEP+=		libnet
 PKG_SITES:=		ftp://ftp.dementia.org/pub/net-tools/
 
 include ${TOPDIR}/mk/package.mk

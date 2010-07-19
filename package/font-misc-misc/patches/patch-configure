@@ -1,0 +1,11 @@
+--- font-misc-misc-1.1.0.orig/configure	2009-10-11 03:23:03.000000000 +0200
++++ font-misc-misc-1.1.0/configure	2010-06-15 00:35:59.189800221 +0200
+@@ -5544,7 +5544,7 @@ $as_echo "yes" >&6; }
+ fi
+ 	{ $as_echo "$as_me:$LINENO: checking for ucs2any encoding data files" >&5
+ $as_echo_n "checking for ucs2any encoding data files... " >&6; }
+-	MAPFILES_PATH=`pkg-config --variable=mapdir fontutil`
++#	MAPFILES_PATH=`pkg-config --variable=mapdir fontutil`
+ 
+ 	{ $as_echo "$as_me:$LINENO: result: ${MAPFILES_PATH}" >&5
+ $as_echo "${MAPFILES_PATH}" >&6; }

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1bc721cdfcbac24027e2afc93685d29f
 PKG_DESCR:=		Philips (and compatibles) WebCams (PWC) control utility
-PKG_SECTION:=		admin
+PKG_SECTION:=		multimedia
 PKG_URL:=		http://www.vanheusden.com/setpwc/
 PKG_SITES:=		http://www.vanheusden.com/setpwc/
 

@@ -7,7 +7,7 @@ include Makefile.inc
 
 include ${TOPDIR}/mk/buildhlp.mk
 
-$(WRKBUILD)/.headers: 
+$(WRKBUILD)/.headers:
 	touch $@
 
 $(WRKBUILD)/.configured:

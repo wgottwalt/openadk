@@ -16,6 +16,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
 			ADK_FORCE_PARALLEL=n \
+			ADK_PACKAGE_BZR=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_XORG_SERVER_WITH_DRI=n \
 			ADK_PACKAGE_AUFS2_UTIL=n \
@@ -28,6 +29,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
 			BUSYBOX_BBCONFIG=n \
 			BUSYBOX_SELINUX=n \
+			BUSYBOX_INSTALL_NO_USR=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
 			BUSYBOX_BUILD_LIBBUSYBOX=n \
@@ -64,8 +66,17 @@ noconfig_targets:=	menuconfig \
 
 POSTCONFIG=		-@ \
 	if [ -f .config.old ];then \
-		if [ -f .busyboxcfg ];then \
-			rm .busyboxcfg; \
+		rebuild=0; \
+		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
+			touch .rebuild.busybox;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_RUNTIME_PASSWORD .config|md5sum)" != "$$(grep ^ADK_RUNTIME_PASSWORD .config.old|md5sum)" ];then \
+			touch .rebuild.base-files;\
+			rebuild=1;\
+		fi; \
+		if [ $$rebuild -eq 1 ];then \
+			cp .config .config.old; \
 		fi; \
 	fi
 
@@ -89,12 +100,12 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk toolchain/install package/compile
+	$(MAKE) -f mk/build.mk toolchain/install tools/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk toolchain/install tools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 
@@ -135,6 +146,9 @@ target/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
 toolchain/%: ${STAGING_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
 
+tools/%:
+	$(MAKE) -C tools $(patsubst tools/%,%,$@)
+
 image:
 	$(MAKE) -C target image
 
@@ -163,7 +177,7 @@ newpackage:
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
-	@echo "Do not forget to add package to package/Config.in"
+	@echo "choose PKG_SECTION to add it to an existent submenu"  
 
 #############################################################
 #
@@ -471,10 +485,12 @@ bulkallmod:
 	done <${TOPDIR}/target/bulk.lst
 
 menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)
+	@echo "Generating menu structure ..."
 	mksh $(TOPDIR)/package/pkgmaker
 	@:>.menu
 
 dep:
+	@echo "Generating dependencies ..."
 	mksh $(TOPDIR)/package/depmaker
 
 .PHONY: menu dep

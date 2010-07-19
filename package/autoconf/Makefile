@@ -8,7 +8,7 @@ PKG_VERSION:=		2.65
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		46cfb40e0babf4c64f8325f03da81c9b
 PKG_DESCR:=		GNU autoconf
-PKG_SECTION:=		utils
+PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/autoconf/
 PKG_SITES:=		${MASTER_SITE_GNU:=autoconf/}
 PKG_OPTS:=		noscripts

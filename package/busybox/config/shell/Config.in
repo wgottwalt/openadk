@@ -130,7 +130,7 @@ config BUSYBOX_ASH_RANDOM_SUPPORT
 
 config BUSYBOX_ASH_EXPAND_PRMT
 	bool "Expand prompt string"
-	default n
+	default y
 	depends on BUSYBOX_ASH
 	help
 	  "PS#" may contain volatile content, such as backquote commands.

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.6.2.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		861f57ba43bfe05dc645e0679a260e41
 PKG_DESCR:=		Open Source PBX
-PKG_SECTION:=		net
+PKG_SECTION:=		phone
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
@@ -21,6 +21,8 @@ PKG_BUILDDEP+=		postgresql
 endif
 PKG_URL:=		http://www.asterisk.org
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
+
+PKG_TARGET_DEPENDS:=	!foxboard
 
 PKG_DESCR_CHAN_MGCP:=	Media Gateway Control Protocol implementation
 PKG_DESCR_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
@@ -121,7 +123,7 @@ MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
 ALL_TARGET:=		all install samples
 
 pre-configure:
-	cd "$(WRKBUILD)/menuselect"; ./configure 
+	cd "$(WRKBUILD)/menuselect"; ./configure
 
 pre-build:
 	$(MAKE) -C $(WRKBUILD)/menuselect
@@ -174,6 +176,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		rm -f gtalk.conf ; \
 		rm -f skinny.conf ; \
 		rm -f dundi.conf ; \
+		$(SED) '#^astdatadir = /var/#/usr/#' asterisk.conf ; \
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
@@ -191,8 +194,11 @@ asterisk-sounds-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds
 	$(CP) $(WRKBUILD)/sounds/* \
 		$(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/*.mp3
-	rm -f $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds/vm-*
+	(cd $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds; \
+		rm -f *.mp3 vm-*; \
+		rm -f CHANGES* CREDITS* LICENSE* *.txt ; \
+		rm -f *.tar.gz Makefile ; \
+	)
 
 asterisk-voicemail-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_VOICEMAIL)/etc/asterisk

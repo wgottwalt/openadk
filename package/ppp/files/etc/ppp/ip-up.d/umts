@@ -1,7 +1,0 @@
-#!/bin/sh
-
-[ "$IF_USE_TEMPLATE" == "umts" ] || exit 0
-
-# enable bit 4 i.e. UMTS-LED blue
-LED=$(cat /proc/sys/diag)
-echo $((LED | 16)) > /proc/sys/diag

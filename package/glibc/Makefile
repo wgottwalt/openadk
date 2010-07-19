@@ -41,8 +41,9 @@ SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install
 # compile nothing, glibc is already build in toolchain directory
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
-	# install /etc/localtime from host system (FIXME)
-	${CP} /etc/localtime $(IDIR_GLIBC)/etc
+	test -z $(ADK_RUNTIME_TIMEZONE) || \
+	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
+		$(IDIR_EGLIBC)/etc/localtime
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \

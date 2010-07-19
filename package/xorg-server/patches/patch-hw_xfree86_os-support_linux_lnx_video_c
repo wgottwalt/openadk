@@ -38,7 +38,7 @@
  		    return FALSE;
  		}
  #endif
-+		xf86Msg(X_INFO,"%s: ioBase 0x%lx\n", (unsigned long)ioBase);
++		xf86Msg(X_INFO,"ioBase 0x%lx\n", (unsigned long)ioBase);
  	}
  	close(fd);
 -#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__mips__) && !defined(__sh__) && !defined(__hppa__) && !defined(__s390__) && !defined(__arm__) && !defined(__m32r__)

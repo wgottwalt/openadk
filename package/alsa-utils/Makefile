@@ -5,15 +5,22 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
 PKG_VERSION:=		1.0.22
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
-PKG_SECTION:=		utils
+PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libpthread
 PKG_BUILDDEP+=		alsa-lib
+ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
+PKG_BUILDDEP+=		ncurses
+endif
 PKG_URL:=		http://www.alsa-project.org
 PKG_SITES:=		ftp://ftp.task.gda.pl/pub/linux/misc/alsa/utils/ \
 			ftp://ftp.alsa-project.org/pub/utils/
+
+PKG_FLAVOURS:=		WITH_ALSAMIXER
+PKGFS_WITH_ALSAMIXER:=	libncurses
+PKGFD_WITH_ALSAMIXER:=	include alsamixer ncurses applet
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -21,10 +28,18 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ALSA_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
+CONFIGURE_ARGS+=	--enable-alsamixer
+else
 CONFIGURE_ARGS+=	--disable-alsamixer
+endif
 
 post-install:
-	${INSTALL_DIR} ${IDIR_ALSA_UTILS}/usr/bin 
+	${INSTALL_DIR} ${IDIR_ALSA_UTILS}/usr/bin/
 	${CP} ${WRKINST}/usr/bin/amixer ${IDIR_ALSA_UTILS}/usr/bin/
+ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
+	${INSTALL_BIN} ${WRKINST}/usr/bin/alsamixer \
+		${IDIR_ALSA_UTILS}/usr/bin/
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

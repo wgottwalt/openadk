@@ -4,47 +4,28 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		weechat
-PKG_VERSION:=		0.1.8
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		73d6bc211ac32c597f0d278506480a20
+PKG_VERSION:=		0.3.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0c4f6e7196703c6eca12217f254612aa
 PKG_DESCR:=		Lightweight IRC client
-PKG_SECTION:=		net
+PKG_SECTION:=		chat
 PKG_DEPENDS:=		libncurses libiconv
 PKG_BUILDDEP+=		ncurses libiconv
-ifeq (${ADK_COMPILE_WEECHAT_WITH_TLS},y)
-PKG_DEPENDS+=		gnutls
-PKG_BUILDDEP+=		gnutls
-endif
-
-ifeq (${ADK_COMPILE_WEECHAT_WITH_LUA},y)
-PKG_DEPENDS+=		liblua
-PKG_BUILDDEP+=		lua
-endif
-PKG_URL:=		http://weechat.flashtux.org/download/
-PKG_SITES:=		http://weechat.flashtux.org/download/
+PKG_URL:=		http://www.weechat.org/
+PKG_SITES:=		http://www.weechat.org/files/src/
 
 include ${TOPDIR}/mk/package.mk
 
-
 $(eval $(call PKG_template,WEECHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq (${ADK_COMPILE_WEECHAT_WITH_TLS},y)
-ENABLE_TLS:=		--with-libgnutls-prefix=${STAGING_DIR}/usr
-else
-ENABLE_TLS:=		--disable-gnutls
-endif
-
-ifneq (${ADK_COMPILE_WEECHAT_WITH_LUA},y)
-DISABLE_LUA:=		--disable-lua
-endif
-
-CONFIGURE_ARGS+=	${ENABLE_TLS} \
-			--with-debug=0 \
+TCFLAGS+=		-liconv
+CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-perl \
 			--disable-python \
+			--disable-lua \
+			--disable-gnutls \
 			--disable-ruby \
-			--with-libiconv-prefix='${STAGING_DIR}/usr' \
-			${DISABLE_LUA}
+			--with-libiconv-prefix='${STAGING_DIR}/usr'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WEECHAT}/usr/bin

@@ -8,7 +8,7 @@ PKG_VERSION:=		0.6.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		76f794889d47ad277c25e9c5bbddefa4
 PKG_DESCR:=		miau is an IRC-bouncer/proxy
-PKG_SECTION:=		net
+PKG_SECTION:=		chat
 PKG_URL:=		http://miau.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=miau/}
 

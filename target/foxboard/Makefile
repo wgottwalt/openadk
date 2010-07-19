@@ -21,7 +21,7 @@ kernel-install: tools-compile
 		$(BIN_DIR)/${ADK_TARGET}-${FS}-kernel $(MAKE_TRACE)
 
 ifeq ($(FS),squashfs)
-imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
 		bs=4063232 conv=sync $(MAKE_TRACE)
 	@if [ $$(stat --format=%s ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \
@@ -29,14 +29,11 @@ imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	else \
 		echo 'Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash'; \
 		echo 'Do not forget to set the network boot jumper, before you start the foxboard'; \
-		echo 'Login as user root with password linux123 via ssh or console'; \
 	fi
 endif
 ifeq ($(FS),nfsroot)
-imageinstall: ${BIN_DIR}/${ROOTFSUSERTARBALL}
-	@echo 
+imageinstall: kernel-install ${BIN_DIR}/${ROOTFSUSERTARBALL}
 	@echo Use sudo ./boot_linux -F -i ${ADK_TARGET}-${FS}-kernel to flash the kernel
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSUSERTARBALL} is your nfs root and can be extracted on your nfs server
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

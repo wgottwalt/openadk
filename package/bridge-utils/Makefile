@@ -8,7 +8,7 @@ PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0182fcac3a2b307113bbec34e5f1c673
 PKG_DESCR:=		Ethernet bridging tools
-PKG_SECTION:=		net
+PKG_SECTION:=		bridge
 PKG_DEPENDS:=		kmod-bridge
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}

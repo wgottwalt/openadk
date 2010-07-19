@@ -8,7 +8,7 @@ PKG_VERSION:=		2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		63d503191eabed630324c104cc024475
 PKG_DESCR:=		Daemon to use hardware random number generators.
-PKG_SECTION:=		utils
+PKG_SECTION:=		crypto
 PKG_URL:=		http://gkernel.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 

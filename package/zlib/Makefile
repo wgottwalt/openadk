@@ -13,6 +13,8 @@ PKG_URL:=		http://www.zlib.net
 PKG_SITES:=		http://www.zlib.net/ \
 			${MASTER_SITE_SOURCEFORGE:=zlib/}
 
+PKG_DESCR_LIB_DEV:=	development files for zlib
+PKG_SECTION_LIB_DEV:=	devel
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)
@@ -22,13 +24,14 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ZLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_ZLIB_DEV}+=	zlib-dev-install
 
 CONFIG_STYLE:=		manual
+CONFIGURE_ENV+=		uname=Linux
 
 ifeq ($(ADK_NATIVE),)
 COPTS:=                 $(TARGET_CONFIGURE_OPTS)

@@ -13,7 +13,7 @@ $(TOOLS_BUILD_DIR):
 tools-compile: $(TOOLS_BUILD_DIR)
 	$(MAKE) -C tools/addpattern
 	$(MAKE) -C tools/srec2bin
-	$(MAKE) -C tools/squashfs prepare compile install
+	$(MAKE) -C ../tools/squashfs prepare compile install
 
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' \
@@ -25,28 +25,23 @@ kernel-install: tools-compile
 		$(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' \
 	addpattern -p WA21 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel	
+		-o $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),squashfs)
-imageinstall: $(BIN_DIR)/$(ROOTFSSQUASHFS)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
 	${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} $(BIN_DIR)/$(ROOTFSSQUASHFS)
-	@echo
 	@echo The image file is $(ROOTFSSQUASHFS)
 	@echo 'You can flash the image via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
 	@echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif
-
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 	@echo 'You can flash the kernel via tftp:'
 	@echo 'tftp 192.168.1.1'
 	@echo 'tftp> binary'
 	@echo 'tftp> put ${ADK_TARGET}-${FS}-kernel upgrade_code.bin'
-	@echo 'Login as user root with password linux123 via ssh or console'
 endif

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
-PKG_SECTION:=		net
+PKG_SECTION:=		ppp
 PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://www.freeradius.org
@@ -16,10 +16,12 @@ PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
 			http://freeradius.portal-to-web.de/ \
 			ftp://ftp.uk.freeradius.org/pub/radius/
 
+PKG_SECTION_LIB:=	libs
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FREERADIUS_CLIENT,freeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBFREERADIUS_CLIENT,libfreeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFREERADIUS_CLIENT,libfreeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_LIB}))
 
 CONFIGURE_ENV+=		ac_cv_func_uname=no
 

@@ -16,6 +16,9 @@ PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.x-r7513.tar.bz2
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.0.x-r7513
 
+PKG_TARGET_DEPENDS:=  	ibmx40 lemote
+PKG_HOST_DEPENDS:=	!cygwin
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

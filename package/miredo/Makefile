@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf49c1ddc068746760787d0cf76e40de
 PKG_DESCR:=		A Teredo client and relay daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		ipv6
 ifeq (${ADK_COMPILE_MIREDO_WITH_UCLIBCXX},y)
 PKG_BUILDDEP+=		uclibc++
 endif

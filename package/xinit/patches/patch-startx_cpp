@@ -1,0 +1,11 @@
+--- xinit-1.2.1.orig/startx.cpp	2010-03-15 23:35:56.000000000 +0100
++++ xinit-1.2.1/startx.cpp	2010-07-15 21:25:44.458413180 +0200
+@@ -347,5 +347,8 @@ screenrestore
+ kbd_mode -a
+ #endif
+ 
++xset dpms 0 0 60
++xset s 0
++
+ exit $retval
+ 

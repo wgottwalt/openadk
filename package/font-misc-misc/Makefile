@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		047eae4d061f17d96213c4e78f7abccb
 PKG_DESCR:=		X fonts
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP+=		font-util
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
@@ -18,6 +18,8 @@ PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FONT_MISC_MISC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ENV+=		MAPFILES_PATH=${STAGING_DIR}/usr/share/fonts/X11/util
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_FONT_MISC_MISC)/usr/share/fonts/X11/misc

@@ -9,7 +9,7 @@ fi
 
 find "$pkg_dir" -name '*.ipk' | sort | while IFS= read pkg; do
 	dpkg=${pkg##*/}
-	echo "Generating index for package $dpkg" >&2
+	#echo "Generating index for package $dpkg" >&2
 	file_size=$(ls -l $pkg | awk '{print $5}')
 	md5sum=$(md5sum $pkg)
 	tar -xzOf "$pkg" ./control.tar.gz | \

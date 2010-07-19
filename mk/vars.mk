@@ -37,8 +37,8 @@ PACKAGE_DIR:=		$(BIN_DIR)/packages
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET}_${ADK_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
 TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TOOLS}/bin:${STAGING_DIR}/scripts:${_PATH}
-REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-openadk-linux-$(ADK_TARGET_SUFFIX)
-GNU_TARGET_NAME=	$(CPU_ARCH)-openadk-linux
+REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
+GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
 TOOLCHAIN_SYSROOT:=	$(TOOLCHAIN_BUILD_DIR)/libc_dev
 ifeq ($(ADK_NATIVE),y) 
 TARGET_CROSS:=		
@@ -127,6 +127,6 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget -t1 --timeout=30 $(QUIET)
+FETCH_CMD?=		wget --tries=1 --timeout=30 $(QUIET)
 
 include $(TOPDIR)/mk/mirrors.mk

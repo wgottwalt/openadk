@@ -974,7 +974,7 @@ config BUSYBOX_FEATURE_WGET_AUTHENTICATION
 
 config BUSYBOX_FEATURE_WGET_LONG_OPTIONS
 	bool "Enable long options"
-	default n
+	default y
 	depends on BUSYBOX_WGET && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the wget applet.

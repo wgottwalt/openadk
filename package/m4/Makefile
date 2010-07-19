@@ -8,7 +8,7 @@ PKG_VERSION:=		1.4.13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e9e36108b5f9855a82ca4a07ebc0fd2e
 PKG_DESCR:=		macro processor
-PKG_SECTION:=		comp
+PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/m4/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 

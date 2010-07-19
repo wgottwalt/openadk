@@ -1,6 +1,6 @@
---- grub-1.97.1.orig/kern/misc.c	2009-11-09 16:48:16.000000000 +0100
-+++ grub-1.97.1/kern/misc.c	2009-11-29 11:48:55.492463135 +0100
-@@ -51,23 +51,6 @@ grub_memmove (void *dest, const void *sr
+--- grub-1.98.orig/kern/misc.c	2010-03-06 21:51:37.000000000 +0100
++++ grub-1.98/kern/misc.c	2010-06-26 20:12:26.711214130 +0200
+@@ -64,23 +64,6 @@ grub_memmove (void *dest, const void *sr
    return dest;
  }
  
@@ -24,29 +24,23 @@
  char *
  grub_strcpy (char *dest, const char *src)
  {
-@@ -182,10 +165,6 @@ grub_memcmp (const void *s1, const void 
- 
-   return 0;
- }
--#ifndef APPLE_CC
--int memcmp (const void *s1, const void *s2, grub_size_t n)
--  __attribute__ ((alias ("grub_memcmp")));
--#endif
- 
- int
- grub_strcmp (const char *s1, const char *s2)
-@@ -467,10 +446,6 @@ grub_memset (void *s, int c, grub_size_t
+@@ -516,15 +499,6 @@ grub_memset (void *s, int c, grub_size_t
  
    return s;
  }
 -#ifndef APPLE_CC
 -void *memset (void *s, int c, grub_size_t n)
 -  __attribute__ ((alias ("grub_memset")));
+-#else
+-void *memset (void *s, int c, grub_size_t n)
+-{
+-  return grub_memset (s, c, n);
+-}
 -#endif
  
  grub_size_t
  grub_strlen (const char *s)
-@@ -1002,11 +977,6 @@ grub_abort (void)
+@@ -1053,11 +1027,6 @@ grub_abort (void)
    grub_exit ();
  }
  

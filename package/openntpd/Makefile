@@ -8,7 +8,7 @@ PKG_VERSION:=		3.9p1
 PKG_RELEASE:=		18
 PKG_MD5SUM:=		afc34175f38d08867c1403d9008600b3
 PKG_DESCR:=		NTP server daemon
-PKG_SECTION:=		net
+PKG_SECTION:=		ntp
 PKG_URL:=		http://www.openntpd.org
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/ \
 			ftp://ftp.de.openbsd.org/pub/unix/OpenBSD/OpenNTPD/ \

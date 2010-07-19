@@ -4,6 +4,7 @@
 #
 # Virtualization
 #
+
 $(eval $(call KMOD_template,KVM,kvm,\
 	$(MODULES_DIR)/kernel/arch/${ARCH}/kvm/kvm \
 ,90))
@@ -16,10 +17,10 @@ $(eval $(call KMOD_template,KVM_INTEL,kvm-intel,\
 	$(MODULES_DIR)/kernel/arch/${ARCH}/kvm/kvm-intel \
 ,95))
 
-
 #
 # Serial ATA devices
 #
+
 $(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\
 	$(MODULES_DIR)/kernel/drivers/ata/ahci \
 ,10))
@@ -27,6 +28,7 @@ $(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\
 #
 # Ethernet network devices
 # 
+
 $(eval $(call KMOD_template,NE2K_PCI,ne2k-pci,\
 	$(MODULES_DIR)/kernel/drivers/net/8390 \
 	$(MODULES_DIR)/kernel/drivers/net/ne2k-pci \
@@ -52,10 +54,10 @@ $(eval $(call KMOD_template,SKY2,sky2,\
 	$(MODULES_DIR)/kernel/drivers/net/sky2 \
 ,20))
 
-
 # 
 # Wireless network devices
 #
+
 $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
@@ -102,6 +104,7 @@ $(eval $(call KMOD_template,RT61PCI,rt61pci,\
 #
 # Networking
 #
+
 $(eval $(call KMOD_template,ATM,atm,\
 	$(MODULES_DIR)/kernel/net/atm/atm \
 ,50))
@@ -170,6 +173,7 @@ $(eval $(call KMOD_template,BONDING,bonding,\
 #
 # Traffic scheduling
 #
+
 $(eval $(call KMOD_template,NET_SCH_CBQ,net-sch-cbq,\
 	$(MODULES_DIR)/kernel/net/sched/sch_cbq \
 ,40))
@@ -222,6 +226,7 @@ $(eval $(call KMOD_template,NET_SCH_INGRESS,net-sch-ingress,\
 #
 # classifications
 #
+
 $(eval $(call KMOD_template,NET_CLS_BASIC,net-cls-basic,\
 	$(MODULES_DIR)/kernel/net/sched/cls_basic \
 ,40))
@@ -245,6 +250,7 @@ $(eval $(call KMOD_template,NET_CLS_U32,net-cls-u32,\
 #
 # actions
 #
+
 $(eval $(call KMOD_template,NET_ACT_POLICE,net-act-police,\
 	$(MODULES_DIR)/kernel/net/sched/act_police \
 ,45))
@@ -268,9 +274,14 @@ $(eval $(call KMOD_template,NET_ACT_PEDIT,net-act-pedit,\
 #
 # IPsec 
 #
+
 $(eval $(call KMOD_template,NET_KEY,net-key,\
 	$(MODULES_DIR)/kernel/net/key/af_key \
 ,60))
+
+$(eval $(call KMOD_template,XFRM_USER,xfrm-user,\
+	$(MODULES_DIR)/kernel/net/xfrm/xfrm_user \
+,61))
 
 $(eval $(call KMOD_template,INET_AH,inet-ah,\
 	$(MODULES_DIR)/kernel/net/ipv4/ah4 \
@@ -300,9 +311,11 @@ $(eval $(call KMOD_template,INET_XFRM_MODE_BEET,inet-xfrm-mode-beet,\
 ##
 ## Filtering / Firewalling
 ##
+
 #
 # Ethernet Bridging firewall
 #
+
 $(eval $(call KMOD_template,BRIDGE_NF_EBTABLES,bridge-nf-ebtables,\
 	$(MODULES_DIR)/kernel/net/bridge/netfilter/ebtables \
 ,55))
@@ -342,6 +355,7 @@ $(eval $(call KMOD_template,BRIDGE_EBT_REDIRECT,bridge-ebt-redirect,\
 #
 # Netfilter Core
 #
+
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CLASSIFY,netfiler-xt-target-classify,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_CLASSIFY \
 ,50))
@@ -369,6 +383,7 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NOTRACK,netfilter-xt-target-notr
 #
 # IP: Netfilter
 #
+
 $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack \
 ,45))
@@ -480,6 +495,7 @@ $(eval $(call KMOD_template,IP_NF_MATCH_MULTIPORT,ip-nf-match-multiport,\
 #
 # Filtering
 #
+
 $(eval $(call KMOD_template,IP_NF_FILTER,ip-nf-filter,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_filter \
 ,55))
@@ -515,6 +531,7 @@ $(eval $(call KMOD_template,IP_NF_TARGET_NETMAP,ip-nf-target-netmap,\
 #
 # Mangle
 #
+
 $(eval $(call KMOD_template,IP_NF_MANGLE,ip-nf-mangle,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_mangle \
 ,60))
@@ -534,6 +551,7 @@ $(eval $(call KMOD_template,IP_NF_TARGET_TTL,ip-nf-target-ttl,\
 #
 # IPv6: Netfilter
 #
+
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV6,nf-conntrack-ipv6,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/nf_conntrack_ipv6 \
 ,50))
@@ -577,6 +595,7 @@ $(eval $(call KMOD_template,IP6_NF_TARGET_LOG,ip6-nf-target-log,\
 #
 # IPv6: Filtering
 #
+
 $(eval $(call KMOD_template,IP6_NF_FILTER,ip6-nf-filter,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6table_filter \
 ,55))
@@ -588,6 +607,7 @@ $(eval $(call KMOD_template,IP6_NF_TARGET_REJECT,ip6-nf-target-reject,\
 #
 # IPv6: Mangle
 #
+
 $(eval $(call KMOD_template,IP6_NF_MANGLE,ip6-nf-mangle,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6table_mangle \
 ,60))
@@ -649,6 +669,7 @@ $(eval $(call KMOD_template,IP_VS_FTP,ip-vs-ftp,\
 #
 # Block devices
 #
+
 $(eval $(call KMOD_template,BLK_DEV_LOOP,blk-dev-loop,\
     $(MODULES_DIR)/kernel/drivers/block/loop \
 ,20))
@@ -674,6 +695,7 @@ $(eval $(call KMOD_template,BLK_DEV_SR,blk-dev-sr,\
 #
 # RAID
 #
+
 $(eval $(call KMOD_template,BLK_DEV_MD,blk-dev-md,\
     $(MODULES_DIR)/kernel/drivers/md/md-mod \
 ,30))
@@ -699,6 +721,7 @@ $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
 #
 # Device Mapper
 #
+
 $(eval $(call KMOD_template,BLK_DEV_DM,blk-dev-dm,\
     $(MODULES_DIR)/kernel/drivers/md/dm-mod \
 ,35))
@@ -716,7 +739,6 @@ $(eval $(call KMOD_template,DM_MIRROR,dm-mirror,\
 $(eval $(call KMOD_template,DM_SNAPSHOT,dm-snapshot,\
     $(MODULES_DIR)/kernel/drivers/md/dm-snapshot \
 ,40))
-
 
 #
 # Crypto
@@ -755,6 +777,10 @@ $(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/chainiv \
 ,07))
 
+$(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
+    $(MODULES_DIR)/kernel/crypto/authenc \
+,11))
+
 $(eval $(call KMOD_template,CRYPTO_HMAC,crypto-hmac,\
     $(MODULES_DIR)/kernel/crypto/hmac \
 ,11))
@@ -790,6 +816,18 @@ $(eval $(call KMOD_template,CRYPTO_WP512,crypto-wp512,\
 $(eval $(call KMOD_template,CRYPTO_TGR192,crypto-tgr192,\
     $(MODULES_DIR)/kernel/crypto/tgr192 \
 ,11))
+
+$(eval $(call KMOD_template,CRYPTO_SEQIV,crypto-seqiv,\
+    $(MODULES_DIR)/kernel/crypto/seqiv \
+,5))
+
+$(eval $(call KMOD_template,CRYPTO_CTR,crypto-ctr,\
+    $(MODULES_DIR)/kernel/crypto/ctr \
+,10))
+
+$(eval $(call KMOD_template,CRYPTO_CCM,crypto-ccm,\
+    $(MODULES_DIR)/kernel/crypto/ccm \
+,10))
 
 $(eval $(call KMOD_template,CRYPTO_ECB,crypto-ecb,\
     $(MODULES_DIR)/kernel/crypto/ecb \
@@ -862,6 +900,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
     $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
+    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))
 
@@ -902,6 +941,7 @@ $(eval $(call KMOD_template,OCF_TALITOS,ocf-talitos,\
 #
 # Filesystems
 #
+
 $(eval $(call KMOD_template,AUFS_FS,aufs-fs,\
 	$(MODULES_DIR)/kernel/fs/aufs/aufs \
 ,30))
@@ -1001,6 +1041,7 @@ $(eval $(call KMOD_template,UDF_FS,udf-fs,\
 #
 # Multimedia
 #
+
 $(eval $(call KMOD_template,SOUND,sound,\
 	$(MODULES_DIR)/kernel/sound/soundcore \
 ,30))
@@ -1040,9 +1081,13 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,sound-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
+V4L_COMPAT:=drivers/media/video/v4l1-compat
+ifeq ($(ADK_LINUX_64),y)
+V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
+endif
+
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
-	$(MODULES_DIR)/kernel/drivers/media/video/v4l1-compat \
-	$(MODULES_DIR)/kernel/drivers/media/video/v4l2-compat-ioctl32 \
+	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 ,65))
 
@@ -1057,6 +1102,7 @@ $(eval $(call KMOD_template,PWC,pwc,\
 #
 # PCMCIA/CardBus
 #
+
 $(eval $(call KMOD_template,PCCARD,pccard,\
 	$(MODULES_DIR)/kernel/drivers/pcmcia/pcmcia_core \
 ,40))
@@ -1156,6 +1202,10 @@ $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
 ,75))
 
+$(eval $(call KMOD_template,USB_HSO,usb-hso,\
+	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
+,75))
+
 $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-lib \
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-audio \
@@ -1233,10 +1283,10 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_LED,netfilter-xt-target-led,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_LED \
 ,90))
 
-
 #
 # NLS
 #
+
 $(eval $(call KMOD_template,NLS,nls,\
 	$(MODULES_DIR)/kernel/fs/nls/nls_base \
 ,10))
@@ -1403,7 +1453,10 @@ $(eval $(call KMOD_template,NLS_UTF8,nls-utf8, \
 	$(MODULES_DIR)/kernel/fs/nls/nls_utf8 \
 ,20))
 
+#
 # ISDN
+#
+
 ISDN_MODULES=drivers/isdn/i4l/isdn
 
 $(eval $(call KMOD_template,ISDN,isdn, \
@@ -1460,7 +1513,10 @@ $(eval $(call KMOD_template,MISDN_SPEEDFAX,misdn-speedfax, \
 	$(MODULES_DIR)/kernel/drivers/isdn/hardware/mISDN/sedlfax \
 ,80))
 
+#
 # Library modules
+#
+
 $(eval $(call KMOD_template,CRC_CCITT,crc-ccitt, \
 	$(MODULES_DIR)/kernel/lib/crc-ccitt \
 ,01))
@@ -1483,6 +1539,7 @@ $(eval $(call KMOD_template,LIBCRC32C,libcrc32c, \
 
 #
 # parallel port support
+#
 
 $(eval $(call KMOD_template,LP,lp,\
 	$(MODULES_DIR)/kernel/drivers/char/lp \
@@ -1499,3 +1556,23 @@ $(eval $(call KMOD_template,PARPORT,parport,\
 $(eval $(call KMOD_template,PLIP,plip,\
 	$(MODULES_DIR)/kernel/drivers/net/plip \
 ,51))
+
+#
+# Profiling
+#
+$(eval $(call KMOD_template,OPROFILE,oprofile,\
+	$(MODULES_DIR)/kernel/arch/x86/oprofile/oprofile \
+,10))
+
+#
+# I2C
+#
+$(eval $(call KMOD_template,I2C,i2c,\
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-core \
+	$(MODULES_DIR)/kernel/drivers/i2c/i2c-dev \
+,20))
+
+$(eval $(call KMOD_template,SCx200_ACB,scx200-acb,\
+	$(MODULES_DIR)/kernel/drivers/i2c/busses/scx200_acb \
+,25))
+

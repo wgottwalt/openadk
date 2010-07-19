@@ -11,6 +11,9 @@ GMAKE="$GMAKE --no-print-directory"
 (( x_cols = (COLUMNS > 10) ? COLUMNS - 2 : 80 ))
 typeset -L$x_cols pbar
 
+# check for trailing whitespace
+#grep -H '[[:space:]]$' */Makefile && print "Found trailing whitespace, please fix"
+
 # build a cache of “ipkg package name” → “package conf option” for
 # use with dependency resolution
 rm -rf pkglist.d
@@ -40,12 +43,14 @@ for dn in */Makefile; do
 done
 
 # build Config.in files and resolve dependencies
+rm -f package_sections
+rm -rf pkgconfigs.d
+mkdir pkgconfigs.d
 for dn in */Makefile; do
 	dn=${dn%/*}
-	# skip if we take care of this one manually
-	[[ $dn != "base-files" ]] && [[ -s $dn/Config.in.manual ]] && continue
 	pbar="Pass 2: $dn ..."
 	print -nu2 "$pbar\r"
+	mkdir pkgconfigs.d/$dn
 	cd $dn
 
 	# PKG_NAME: package name (directory, free-format)
@@ -62,10 +67,11 @@ for dn in */Makefile; do
 	# CFLINE_*: one free-format Config.in line per subpackage option
 	# PKGFD_*: flavour description, per package flavour option
 	# PKG_{HOST,TARGET}_DEPENDS: add host or target dependencies
-	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_CHOICES PKG_DESCR PKG_URL PKG_MULTI PKG_CXX \
+	eval $($GMAKE dump="PKG_NAME PKG_FLAVOURS PKG_CHOICES PKG_DESCR PKG_SECTION PKG_URL PKG_MULTI PKG_CXX \
 	    ALL_PKGOPTS \$(foreach x,\${ALL_PKGOPTS},PKGNAME_\${x} \
-	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} CFLINE_\${x}) \
+	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} PKGSECT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
+	    \$(foreach x,\${PKG_FLAVOURS},PKGFS_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCD_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCS_\${x}) \
 	    PKG_HOST_DEPENDS PKG_TARGET_DEPENDS")
@@ -74,8 +80,13 @@ for dn in */Makefile; do
 	typeset -u dnu=${dn//-/_}
 	dnu=${dnu//+/X}
 
-	(	# fd 4 = Config.in; fd 5 = Config.in.lib
-	g5=0
+	echo "pkgconfigs.d/$dn/Config.in ${PKG_SECTION:=none}" >>../package_sections
+	echo "$dn/Config.in.manual ${PKG_SECTION:=none}" >>../package_sections
+
+	# skip if we take care of this one manually
+	[[ -s Config.in.manual ]] && { cd ..; continue; }
+
+	exec 4>../pkgconfigs.d/$dn/Config.in
 
 	# Handle master package (directory)
 	print -u4 "config ADK_COMPILE_$dnu"
@@ -83,7 +94,7 @@ for dn in */Makefile; do
 		# pseudo package, does not produce an ipkg package
 		ppnf=$PKG_NAME			# ppnf: pseudopkg name, filled
 		if [[ -n $PKG_DESCR ]]; then
-			while (( ${#ppnf} < 34 )); do
+			while (( ${#ppnf} < 23 )); do
 				ppnf=$ppnf.
 			done
 			ppnf="$ppnf $PKG_DESCR"
@@ -168,25 +179,20 @@ for dn in */Makefile; do
 		eval sppn=\$PKGNAME_$spcu	# sppn: subpackage (ipkg) name
 		eval desc=\$PKGDESC_$spcu	# desc: subpackage description
 		: ${desc:=$PKG_DESCR}		# take from main pkg if empty
+		eval sect=\$PKGSECT_$spcu	# sect: subpackage section
+		: ${sect:=$PKG_SECTION}		# take from main pkg if empty
 		eval deps=\$PKGDEPS_$spcu	# deps: subpackage dependencies
 		eval dflt=\$PKGDFLT_$spcu	# dflt: config 'default' opt.
 		eval xline=\$CFLINE_$spcu	# xline: one free-format line
 
-		if [[ $spcu = LIB* ]]; then
-			h=5			# divert to Config.in.lib
-			(( g5++ )) && print -u5	# been here before
-		elif [[ $spcu = KMOD* ]]; then
-			h=6
-			(( g6++ )) && print -u6
-		else
-			h=4			# divert to Config.in
-			print -u4
-		fi
+		echo "pkgconfigs.d/$dn/Config.in.$sppn $sect" >>../package_sections
+		exec 4>../pkgconfigs.d/$dn/Config.in.$sppn
+		h=4
 
 		print -u$h config ADK_PACKAGE_$spcu
 		spnf=$sppn			# spnf: subpackage name, filled
 		if [[ -n ${desc:-$PKG_NAME} ]]; then
-			while (( ${#spnf} < 34 )); do
+			while (( ${#spnf} < 23 )); do
 				spnf=$spnf.
 			done
 			spnf="$spnf ${desc:-$PKG_NAME}"
@@ -216,6 +222,10 @@ for dn in */Makefile; do
 			(*)
 				# produce dependency on regular package
 				# where the symbol is cached (see above)
+				if [[ ! -f ../pkglist.d/"$dep" ]]; then
+					print -u2 "Warning: $PKG_NAME: unreachable dependency '$dep'"
+					continue
+				fi
 				print -u$h '\tselect' \
 				    ADK_PACKAGE_$(<../pkglist.d/"$dep")
 				;;
@@ -265,7 +275,7 @@ EOF
 		typeset -u pfcs=${pfcs#!}
 		print
 		print config ADK_PACKAGE_${dnu}_$pfco
-		print "\tbool \"${pfd:-$PKG_NAME -> $pfcd}\""
+		print "\tbool \"$pfcd\""
 		print "\\tselect ADK_PACKAGE_${pfcs}"
 	done >&4
 	[[ -n $PKG_CHOICES ]] && cat >&4 <<EOF
@@ -276,15 +286,65 @@ EOF
 	# Handle flavours (per directory)
 	for pfcu in $PKG_FLAVOURS; do		# pfcu: pkg flavour conf opt.
 		eval pfd=\$PKGFD_$pfcu		# pfd: pkg flavour description
+		eval pfs=\$PKGFS_$pfcu		# pfs: pkg flavour dependencies
 		print
 		print config ADK_PACKAGE_${dnu}_$pfcu
 		print "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
 		print \\tdefault n
 		print \\tdepends on ADK_COMPILE_$dnu
+		for pfso in $pfs; do
+			typeset -u pfso=${pfso#!}
+			print \\tselect ADK_PACKAGE_${pfso}
+		done
 		print \\thelp
 		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
 	done >&4
-
-	) 4>Config.in 5>Config.in.lib 6>Config.in.kmod
 	cd ..
 done
+
+# return good if given file exists and is non-empty
+non_empty_file() {
+	[[ -f "$1" ]] || return 1
+	[[ -n "$(cat "$1")" ]] || return 1
+	return 0
+}
+
+# print the verbose section name for a given section tag
+lookup_section_string() {
+	str="$(grep ^$1\  sections.lst | cut -d ' ' -f '2-')"
+	[[ -n $str ]] && { echo $str; return; }
+	echo $1
+}
+
+# print the first prompt's first word's value in a given Config.in file
+get_first_prompt() {
+	prompt="$(grep "prompt " $1 |head -1| sed -n 's/.*"\([^ \.]*\)[ \.].*"/\1/p')"
+	[[ -n $prompt ]] && echo $prompt
+}
+
+# prepare Config.in list for sorting
+while read config_in section; do
+	pbar="Pass 3: $config_in ..."
+	print -nu2 "$pbar\r"
+
+	non_empty_file $config_in || continue
+	prompt="$(get_first_prompt $config_in)"
+	[[ -n $prompt ]] || continue
+	echo "$prompt $config_in $(lookup_section_string $section)"
+done <package_sections >package_section_list
+
+# create the Config.in.auto from the sorted list from above
+cursec=""
+sort -k 3 -k 1 -f package_section_list | while read name file section; do
+	if [[ $cursec != $section ]]; then
+		[[ -n $cursec ]] && print "endmenu\n"
+
+		print "menu \"$section\""
+		cursec="$section"
+	fi
+	print "source \"package/$file\""
+	print -u3 "source \"package/${file%.*}\""
+done >Config.in.auto 3>Config.in.auto.pre
+print "endmenu\n" >>Config.in.auto
+grep pkgconfigs.d Config.in.auto.pre | sort | uniq > Config.in.auto.global
+rm -f package_sections package_section_list Config.in.auto.pre

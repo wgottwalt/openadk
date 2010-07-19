@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xkeyboard-config
-PKG_VERSION:=		1.7
+PKG_VERSION:=		1.8
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		xkbcomp
-PKG_MD5SUM:=		c024a6e2a5b8c4ce3d9d1f1286466163
+PKG_MD5SUM:=		f049d15f1e9d95776a940f222df9404b
 PKG_DESCR:=		X keyboard config
-PKG_SECTION:=		x11
+PKG_SECTION:=		x11/libs
+PKG_BUILDDEP+=		xkbcomp
 PKG_SITES:=		http://xlibs.freedesktop.org/xkbdesc/
 
 include $(TOPDIR)/mk/package.mk
@@ -20,7 +20,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
 	${CP} ${WRKINST}/usr/share/X11/xkb/* \
 		${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
-	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.lst 
+	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.lst
 	rm ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/rules/*.xml
 	rm -rf ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb/symbols/sun_vndr
 

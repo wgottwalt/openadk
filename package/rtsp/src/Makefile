@@ -9,7 +9,7 @@ else
 
 # Normal Makefile
 
-all: 
+all:
 	$(MAKE) -C $(KERNELDIR) M=`pwd` modules
 
 debug:

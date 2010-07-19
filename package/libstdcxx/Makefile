@@ -2,7 +2,15 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include ${TOPDIR}/rules.mk
+ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
+else
+ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+include ${TOPDIR}/toolchain/eglibc/Makefile.inc
+else
+include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+endif
+endif
 
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		C++ support library
@@ -21,7 +29,7 @@ do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/lib
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
-else	
+else
 	$(CP) ${STAGING_DIR}/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
 endif
 

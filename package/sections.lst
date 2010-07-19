@@ -1,0 +1,53 @@
+admin System Administration
+archive Compression and Archivers
+base Base System
+bluetooth Bluetooth
+browser Browser / Editor / Pager
+editor Browser / Editor / Pager
+pager Browser / Editor / Pager
+chat IRC / ICQ / JABBER
+comp Computing
+console Console Utilities
+crypto Cryptography
+db Databases
+debug Debugging / Analyzing
+devel Development / Headers
+dns DNS / DHCP
+dhcp DNS / DHCP
+firewall Firewall / Routing / Bridging
+kernel External Kernel Modules
+route Firewall / Routing / Bridging
+bridge Firewall / Routing / Bridging
+fs Filesystem / Blockdevice utilities
+ipv6 IPv6
+lang Programming / Languages
+libs Libraries
+mail Mail
+misc Misc
+multimedia Multimedia
+net Networking
+net/fs Network Filesystems
+net/misc Networking Misc
+net/security Network Security
+none Unclassified
+ntp NTP
+p2p P2P
+phone Telephony
+ppp PPP / PPTP / RADIUS
+proxy Proxy
+scm SCM
+serial Serial communications & terminal emulation
+shells Shells
+sound Sound
+sys System
+text Text
+utils Utilities
+video Video
+web World Wide Web
+www HTTP / FTP
+wifi Wireless
+x11/apps X applications
+x11/drivers X server and drivers
+x11/server X server and drivers
+x11/libs X libraries
+x11/fonts X fonts

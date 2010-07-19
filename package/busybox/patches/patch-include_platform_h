@@ -1,15 +1,16 @@
---- busybox-1.15.2.orig/include/platform.h	Sat Sep 26 15:14:33 2009
-+++ busybox-1.15.2/include/platform.h	Sat Dec 19 12:53:00 2009
-@@ -7,6 +7,8 @@
- #ifndef	BB_PLATFORM_H
- #define BB_PLATFORM_H 1
+diff -Nur busybox-1.17.0.orig/include/platform.h busybox-1.17.0/include/platform.h
+--- busybox-1.17.0.orig/include/platform.h	2010-06-24 04:40:43.000000000 +0200
++++ busybox-1.17.0/include/platform.h	2010-07-08 12:15:16.099001527 +0200
+@@ -20,6 +20,8 @@
+ #define HAVE_STRSIGNAL 1
+ #define HAVE_VASPRINTF 1
  
 +#include <sys/param.h>
 +
  /* Convenience macros to test the version of gcc. */
  #undef __GNUC_PREREQ
  #if defined __GNUC__ && defined __GNUC_MINOR__
-@@ -133,7 +135,7 @@ char *strchrnul(const char *s, int c);
+@@ -161,7 +163,7 @@
  # define bswap_32 __bswap32
  # define bswap_16 __bswap16
  # define __BIG_ENDIAN__ (_BYTE_ORDER == _BIG_ENDIAN)
@@ -18,16 +19,7 @@
  # include <byteswap.h>
  # include <endian.h>
  #endif
-@@ -190,7 +192,7 @@ char *strchrnul(const char *s, int c);
- 
- /* ---- Networking ------------------------------------------ */
- 
--#ifndef __APPLE__
-+#if !(defined __APPLE__ || defined BSD)
- # include <arpa/inet.h>
- # if !defined(__socklen_t_defined) && !defined(_SOCKLEN_T_DECLARED)
- typedef int socklen_t;
-@@ -202,7 +204,7 @@ typedef int socklen_t;
+@@ -230,7 +232,7 @@
  /* ---- Compiler dependent settings ------------------------- */
  
  #if (defined __digital__ && defined __unix__) \
@@ -36,12 +28,3 @@
  # undef HAVE_MNTENT_H
  # undef HAVE_SYS_STATFS_H
  #else
-@@ -231,7 +233,7 @@ typedef int socklen_t;
- # define HAVE_FEATURES_H
- # include <stdint.h>
- # define HAVE_STDINT_H
--#elif !defined __APPLE__
-+#elif !(defined __APPLE__ || defined BSD)
- /* Largest integral types. */
- # if BB_BIG_ENDIAN
- /* Looks BROKEN! */

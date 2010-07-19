@@ -8,7 +8,7 @@ PKG_VERSION:=		1.10
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		452163c32d061c53a7acc0e8c1b689ba
 PKG_DESCR:=		GNU automake
-PKG_SECTION:=		utils
+PKG_SECTION:=		lang
 PKG_DEPENDS:=		microperl
 PKG_URL:=		http://www.gnu.org/software/automake/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}

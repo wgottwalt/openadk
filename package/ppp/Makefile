@@ -4,31 +4,32 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
-PKG_VERSION:=		2.4.4
-PKG_RELEASE:=		18
-PKG_MD5SUM:=		183800762e266132218b204dfb428d29
+PKG_VERSION:=		2.4.5
+PKG_RELEASE:=		4
+PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
-PKG_SECTION:=		net
+PKG_SECTION:=		ppp
 PKG_MULTI:=		1
 PKG_DEPENDS:=		kmod-ppp
 PKG_URL:=		http://ppp.samba.org
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
+PKG_DEPENDS_PPPOE:=	kmod-pppoe
+PKG_DEPENDS_UMTS:=	comgt
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPOA,ppp-mod-pppoa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPOE,ppp-mod-pppoe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPOE,ppp-mod-pppoe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_PPPOE},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_RADIUS,ppp-mod-radius,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_CHAT,ppp-mod-chat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UMTS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		UNAME_S="Linux"
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
-			HAVE_INET6="1" \
 			STAGING_DIR=${STAGING_DIR} \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'
@@ -44,18 +45,17 @@ SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPSTATS}+=		mod-pppstats-install
 SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPUMTS}+=		mod-pppumts-install
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	echo -------------------------------
-	echo ${SUB_INSTALLS-m}
-	echo ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp
-	ln -sf /tmp/resolv.conf ${IDIR_PPP}/etc/ppp/resolv.conf
 	install -m0600 ./files/etc/ppp/chap-secrets ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DATA} ./files/etc/ppp/options ${IDIR_PPP}/etc/ppp/
-	${INSTALL_FILTER}
 	${INSTALL_BIN} ./files/etc/ppp/ip-up ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-up.d
+	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/0* \
+		${IDIR_PPP}/etc/ppp/ip-up.d
 	${INSTALL_BIN} ./files/etc/ppp/ip-down ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/ip-down.d
+	${INSTALL_BIN} ./files/etc/ppp/ip-down.d/0* \
+		${IDIR_PPP}/etc/ppp/ip-down.d
 	${INSTALL_DIR} ${IDIR_PPP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppd ${IDIR_PPP}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_PPP}/usr/lib/pppd
@@ -64,7 +64,7 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/peers
 	$(INSTALL_DIR) ${IDIR_PPP}/etc/network/if-pre-up.d
 	$(INSTALL_BIN) ./files/ppp.pre-up \
-		${IDIR_PPP}/etc/network/if-pre-up.d/ppp
+		${IDIR_PPP}/etc/network/if-pre-up.d/05-ppp
 
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
@@ -105,12 +105,13 @@ mod-pppstats-install:
 
 mod-pppumts-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates
-	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-{down,up}.d
 	${INSTALL_DATA} ./files/etc/ppp/templates/umts \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates/
-	${INSTALL_BIN} ./files/etc/ppp/ip-up.d/umts \
-		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-up.d/
-	${INSTALL_BIN} ./files/etc/ppp/ip-down.d/umts \
-		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/ip-down.d/
+	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d
+	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d
+	$(INSTALL_BIN) ./files/hso.if-up \
+		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d/06-hso
+	$(INSTALL_BIN) ./files/hso.if-down \
+		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d/06-hso
 
 include ${TOPDIR}/mk/pkg-bottom.mk

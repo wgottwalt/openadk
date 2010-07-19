@@ -8,7 +8,7 @@ PKG_VERSION:=		1.70
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b400d03c0e39e3e78a7327ba78f789f0
 PKG_DESCR:=		A reverse (connecting) remote shell, with SSL support.
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_CXX:=		RRS
 PKG_BUILDDEP+=		zlib
 ifneq ($(ADK_PACKAGE_RRS),)

@@ -7,7 +7,7 @@ PKG_NAME:=		nand
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		3
 PKG_DESCR:=		NAND utility
-PKG_SECTION:=		base
+PKG_SECTION:=		fs
 
 PKG_TARGET_DEPENDS:=	routerboard
 

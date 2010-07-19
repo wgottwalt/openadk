@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		6d5066ea1a6ced817376ca0f54765447
 PKG_DESCR:=		An implementation of the Virtual Router Redundancy Protocol
-PKG_SECTION:=		net
+PKG_SECTION:=		route
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}
 
 include ${TOPDIR}/mk/package.mk
