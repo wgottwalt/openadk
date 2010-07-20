@@ -37,6 +37,10 @@ endif
 ifeq ($(ADK_DEBUG),)
 TCPPFLAGS+=		-DNDEBUG
 endif
+
+# does not change CONFIGURE_ARGS in minimal mode
+ifneq ($(filter minimal,${CONFIG_STYLE}),)
+
 ifneq ($(ADK_DEBUG),)
 CONFIGURE_ARGS+=	--enable-debug
 else
@@ -45,6 +49,8 @@ endif
 
 ifeq ($(ADK_ENABLE_IPV6),y)
 CONFIGURE_ARGS+=	--enable-ipv6
+endif
+
 endif
 
 CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
