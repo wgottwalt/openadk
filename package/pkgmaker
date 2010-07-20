@@ -72,9 +72,11 @@ for dn in */Makefile; do
 	    PKGDESC_\${x} PKGDEPS_\${x} PKGDFLT_\${x} PKGSECT_\${x} CFLINE_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFD_\${x}) \
 	    \$(foreach x,\${PKG_FLAVOURS},PKGFS_\${x}) \
+	    \$(foreach x,\${PKG_FLAVOURS},PKGSUB_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCD_\${x}) \
 	    \$(foreach x,\${PKG_CHOICES},PKGCS_\${x}) \
 	    PKG_HOST_DEPENDS PKG_TARGET_DEPENDS")
+
 
 	# dnu: directory name, uppercase, y/-+/_X/
 	typeset -u dnu=${dn//-/_}
@@ -282,23 +284,25 @@ EOF
 
 endchoice
 EOF
-
 	# Handle flavours (per directory)
 	for pfcu in $PKG_FLAVOURS; do		# pfcu: pkg flavour conf opt.
+		fh=4
 		eval pfd=\$PKGFD_$pfcu		# pfd: pkg flavour description
 		eval pfs=\$PKGFS_$pfcu		# pfs: pkg flavour dependencies
-		print
-		print config ADK_PACKAGE_${dnu}_$pfcu
-		print "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
-		print \\tdefault n
-		print \\tdepends on ADK_COMPILE_$dnu
+		eval sub=\$PKGSUB_$pfcu		# sub: add to subpackage
+		[[ -n ${sub} ]] && exec 5>>../pkgconfigs.d/$dn/Config.in.$sub && fh=5
+		print -u$fh
+		print -u$fh config ADK_PACKAGE_${dnu}_$pfcu
+		print -u$fh "\tbool \"${pfd:-$PKG_NAME -> flavour $pfcu}\""
+		print -u$fh \\tdefault n
+		print -u$fh \\tdepends on ADK_COMPILE_$dnu
 		for pfso in $pfs; do
 			typeset -u pfso=${pfso#!}
-			print \\tselect ADK_PACKAGE_${pfso}
+			print -u$fh \\tselect ADK_PACKAGE_${pfso}
 		done
-		print \\thelp
-		print "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
-	done >&4
+		print -u$fh \\thelp
+		print -u$fh "\t  flavour ADK_PACKAGE_${dnu}_$pfcu for $PKG_NAME"
+	done
 	cd ..
 done
 

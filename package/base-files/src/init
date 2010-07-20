@@ -4,8 +4,8 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -nt proc proc /proc
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 [ ! -f /etc/notmpfs ] && {
-	size=2048
 	size=$(cat /etc/tmpfs 2>/dev/null)
+	[ -z $size ] && size=2048
 	mount none /tmp -t tmpfs -o size=${size}k
 	mount none /tmp -t tmpfs -o remount,nosuid,nodev,mode=1777
 }

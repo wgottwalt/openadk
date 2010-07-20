@@ -21,6 +21,10 @@ PKG_DESCR_DEV:=		development files for openssl
 PKG_SECTION_DEV:=	devel
 PKG_DEPENDS_DEV:=	libopenssl
 
+PKG_FLAVOURS:=		WITH_EC
+PKGFD_WITH_EC:=		enable Elliptic Curve crypto
+PKGSUB_WITH_EC:=	libopenssl
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -37,13 +41,17 @@ BUILD_STYLE:=		manual
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
-OPENSSL_OPTIONS = shared no-ec no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
+OPENSSL_OPTIONS:= shared no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
+
+ifeq ($(ADK_PACKAGE_OPENSSL_WITH_EC),)
+OPENSSL_OPTIONS+= no-ec
+endif
 
 do-configure:
 	(cd $(WRKBUILD); \
 		PATH=$(TARGET_PATH) \
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
-		bash -x ./Configure linux-embedded \
+		./Configure linux-embedded \
 		  --prefix=/usr \
 		  --openssldir=/etc/ssl \
 		  -I$(STAGING_DIR)/usr/include \
