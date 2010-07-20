@@ -5,17 +5,16 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
 PKG_VERSION:=		4.4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		22dae13782f493ec675d54b67d79a66d
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user
-PKG_DEPENDS+=		kmod-inet-ah kmod-inet-esp kmod-inet-ipcomp
+PKG_DEPENDS+=		kmod-inet-ah kmod-inet-esp
 PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
-PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-sha256 kmod-crypto-md5
+PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-md5
 PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
 PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
-PKG_DEPENDS+=		kmod-crypto-deflate
 ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
 PKG_BUILDDEP+=		openssl
 endif
@@ -35,6 +34,10 @@ PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
+
+ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
+CFLINE_STRONGSWAN:=	select ADK_PACKAGE_OPENSSL_WITH_EC
+endif
 
 include $(TOPDIR)/mk/package.mk
 
@@ -58,8 +61,7 @@ endif
 
 CONFIGURE_ARGS+=	--disable-tools \
 			--disable-fips-prf \
-			--enable-kernel-pfkey \
-			--disable-xcbc
+			--enable-kernel-pfkey
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/etc
