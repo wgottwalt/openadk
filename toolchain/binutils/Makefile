@@ -40,6 +40,8 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
+	# needed on hosts without readelf
+	$(CP) $(WRKBUILD)/binutils/readelf $(STAGING_TOOLS)
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
