@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
+set -x
 
+opt=
+user="-R 0:0"
 os=$(uname)
 case $os in
 	NetBSD|MirBSD|OpenBSD)
+		quiet=""
+		;;
+	Darwin)
+		user="-R root:wheel"
 		quiet=""
 		;;
 	*)
 		quiet="--quiet"
 		;;
 esac
+if [ "$2" = "r" ];then
+	opt=$user
+fi
 if [ -x /usr/bin/cpio ];then
-	/usr/bin/cpio $quiet "$@"
+	/usr/bin/cpio $quiet $opt "$@"
 else
-	/bin/cpio $quiet "$@"
+	/bin/cpio $quiet $opt "$@"
 fi

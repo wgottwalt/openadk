@@ -50,13 +50,13 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 -oC512 -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
+	    cpio -oC512 r -Mdist -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
 		$(LINUX_DIR)/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -R 0:0 -oC512 -Mdist -Hnewc >$@
+	    cpio -oC512 r -Mdist -Hnewc >$@
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	PATH='${TARGET_PATH}' \
