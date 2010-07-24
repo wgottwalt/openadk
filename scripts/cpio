@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
-set -x
 
 opt=
 user="-R 0:0"
@@ -21,8 +20,9 @@ esac
 if [ "$2" = "r" ];then
 	opt=$user
 fi
+cmd=$(echo "$@"|sed -e "s# r ##")
 if [ -x /usr/bin/cpio ];then
-	/usr/bin/cpio $quiet $opt "$@"
+	/usr/bin/cpio $quiet $opt $cmd
 else
-	/bin/cpio $quiet $opt "$@"
+	/bin/cpio $quiet $opt $cmd
 fi
