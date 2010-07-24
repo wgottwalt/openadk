@@ -39,12 +39,17 @@ endif
 endif
 endif
 
+HOSTGTKLIBS = `pkg-config --libs gtk+-2.0 gmodule-2.0 libglade-2.0`
+HOSTGTKCFLAGS = `pkg-config --cflags gtk+-2.0 gmodule-2.0 libglade-2.0`
+
 CONF_SRC  =conf.c
 MCONF_SRC =mconf.c $(wildcard lxdialog/*.c)
+GCONF_SRC =gconf.c
 SHARED_SRC=zconf.tab.c
 SHARED_DEPS:=lkc.h lkc_proto.h lkc_defs.h expr.h zconf.tab.h
 CONF_OBJS =$(patsubst %.c,%.o, $(CONF_SRC))
 MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
+GCONF_OBJS=$(patsubst %.c,%.o, $(GCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
@@ -53,11 +58,17 @@ conf: $(CONF_OBJS) $(SHARED_OBJS)
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
 	$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
 
+gconf: $(GCONF_OBJS) $(SHARED_OBJS)
+	$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(HOSTGTKLIBS)
+
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
+
+$(GCONF_OBJS): %.o : %.c $(SHARED_DEPS)
+	$(HOSTCC) $(HOSTCFLAGS) $(HOSTGTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c glob.c -o $@
