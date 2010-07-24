@@ -217,6 +217,15 @@ config ADK_KPACKAGE_KMOD_CRYPTO_HMAC
 	  HMAC: Keyed-Hashing for Message Authentication (RFC2104).
 	  This is required for IPSec.
 
+config ADK_KPACKAGE_KMOD_CRYPTO_XCBC
+	prompt "kmod-crypto-xcbc..................... XCBC support"
+	tristate
+	default n
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	help
+          XCBC: Keyed-Hashing with encryption algorithm
+
 config ADK_KPACKAGE_KMOD_CRYPTO_RNG2
 	prompt "kmod-crypto-rng...................... RNG support"
 	tristate

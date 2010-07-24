@@ -786,6 +786,10 @@ $(eval $(call KMOD_template,CRYPTO_HMAC,crypto-hmac,\
     $(MODULES_DIR)/kernel/crypto/hmac \
 ,11))
 
+$(eval $(call KMOD_template,CRYPTO_XCBC,crypto-xcbc,\
+    $(MODULES_DIR)/kernel/crypto/xcbc \
+,11))
+
 $(eval $(call KMOD_template,CRYPTO_NULL,crypto-null,\
     $(MODULES_DIR)/kernel/crypto/crypto_null \
 ,11))
