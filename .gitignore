@@ -4,6 +4,8 @@ config/a.exe
 config/lex.backup
 config/lex.zconf.c
 config/lkc_defs.h
+config/gconf
+config/gconf.exe
 config/mconf
 config/mconf.exe
 config/zconf.hash.c

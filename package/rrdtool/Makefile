@@ -11,13 +11,17 @@ PKG_DESCR:=		Round Robin Database (RRD) management library and tools
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libart libfreetype libpng zlib
 PKG_BUILDDEP+=		libxml2 cgilib freetype libart libpng
+PKG_URL:=		http://oss.oetiker.ch/
 PKG_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
+
+PKG_SECTION_RRDCGI:=	misc
+PKG_SECTION_RRDTOOL:=	misc
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_RRDCGI}))
+$(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_RRDTOOL}))
 
 CONFIGURE_ENV+=		rd_cv_ieee_works=yes
 CONFIGURE_ARGS+=	--enable-rrdcgi \

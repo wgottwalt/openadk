@@ -58,6 +58,7 @@ DEFCONFIG=		ADK_DEVELSYSTEM=n \
 			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
+			guiconfig \
 			_config \
 			_mconfig \
 			distclean \
@@ -261,13 +262,16 @@ all: menuconfig
 # ---------------------------------------------------------------------------
 
 # force entering the subdir, as dependency checking is done there
-.PHONY: $(CONFIG)/conf $(CONFIG)/mconf
+.PHONY: $(CONFIG)/conf $(CONFIG)/mconf $(CONFIG)/gconf
 
 $(CONFIG)/conf:
 	@$(MAKE) -C $(CONFIG) conf
 
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
+
+$(CONFIG)/gconf:
+	@$(MAKE) -C $(CONFIG) gconf
 
 defconfig: .menu $(CONFIG)/conf
 ifeq (${OStype},Linux)
@@ -413,6 +417,13 @@ menuconfig: $(CONFIG)/mconf defconfig .menu
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
+	${POSTCONFIG}
+
+guiconfig: $(CONFIG)/gconf defconfig .menu
+	@if [ ! -f .config ];then \
+		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+	fi
+	@$(CONFIG)/gconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
 _config: $(CONFIG)/conf .menu

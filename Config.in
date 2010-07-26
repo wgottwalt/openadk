@@ -33,11 +33,13 @@ config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
 	select BUSYBOX_CMP
+	select BUSYBOX_COMM
 	select BUSYBOX_EXPR
 	select BUSYBOX_INSTALL
 	select BUSYBOX_MKTEMP
 	select BUSYBOX_UNZIP
 	select BUSYBOX_RMDIR
+	select BUSYBOX_SPLIT
 	select BUSYBOX_TAC
 	select BUSYBOX_TEE
 	select BUSYBOX_WGET
