@@ -1562,7 +1562,7 @@ $(eval $(call KMOD_template,PLIP,plip,\
 # Profiling
 #
 $(eval $(call KMOD_template,OPROFILE,oprofile,\
-	$(MODULES_DIR)/kernel/arch/x86/oprofile/oprofile \
+	$(MODULES_DIR)/kernel/arch/$(ARCH)/oprofile/oprofile \
 ,10))
 
 #
