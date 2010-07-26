@@ -1,15 +1,27 @@
-diff -Nur busybox-1.17.0.orig/archival/Config.src busybox-1.17.0/archival/Config.src
---- busybox-1.17.0.orig/archival/Config.src	2010-06-25 01:32:35.000000000 +0200
-+++ busybox-1.17.0/archival/Config.src	2010-07-16 02:06:58.336016174 +0200
-@@ -39,7 +39,7 @@
+diff -Nur busybox-1.17.1.orig/Config.in busybox-1.17.1/Config.in
+--- busybox-1.17.1.orig/Config.in	2010-07-25 00:12:56.000000000 +0200
++++ busybox-1.17.1/Config.in	2010-07-26 14:32:24.000000000 +0200
+@@ -15,7 +15,7 @@
  
- config AR
- 	bool "ar"
+ config DESKTOP
+ 	bool "Enable options for full-blown desktop systems"
 -	default y
 +	default n
  	help
- 	  ar is an archival utility program used to create, modify, and
- 	  extract contents from archives. An archive is a single file holding
+ 	  Enable options and features which are not essential.
+ 	  Select this only if you plan to use busybox on full-blown
+@@ -32,7 +32,7 @@
+ 
+ config INCLUDE_SUSv2
+ 	bool "Enable obsolete features removed before SUSv3"
+-	default y
++	default n
+ 	help
+ 	  This option will enable backwards compatibility with SuSv2,
+ 	  specifically, old-style numeric options ('command -1 <file>')
+diff -Nur busybox-1.17.1.orig/archival/Config.src busybox-1.17.1/archival/Config.src
+--- busybox-1.17.1.orig/archival/Config.src	2010-07-25 00:12:56.000000000 +0200
++++ busybox-1.17.1/archival/Config.src	2010-07-26 14:30:27.000000000 +0200
 @@ -79,7 +79,7 @@
  
  config BUNZIP2
@@ -78,9 +90,9 @@ diff -Nur busybox-1.17.0.orig/archival/Config.src busybox-1.17.0/archival/Config
  	help
  	  unxz is a unlzma successor.
  
-diff -Nur busybox-1.17.0.orig/editors/Config.src busybox-1.17.0/editors/Config.src
---- busybox-1.17.0.orig/editors/Config.src	2010-06-24 04:40:43.000000000 +0200
-+++ busybox-1.17.0/editors/Config.src	2010-07-16 02:05:47.485881936 +0200
+diff -Nur busybox-1.17.1.orig/editors/Config.src busybox-1.17.1/editors/Config.src
+--- busybox-1.17.1.orig/editors/Config.src	2010-07-06 04:25:53.000000000 +0200
++++ busybox-1.17.1/editors/Config.src	2010-07-26 14:30:27.000000000 +0200
 @@ -31,7 +31,7 @@
  
  config DIFF
@@ -106,9 +118,9 @@ diff -Nur busybox-1.17.0.orig/editors/Config.src busybox-1.17.0/editors/Config.s
  	help
  	  sed is used to perform text transformations on a file
  	  or input from a pipeline.
-diff -Nur busybox-1.17.0.orig/networking/Config.src busybox-1.17.0/networking/Config.src
---- busybox-1.17.0.orig/networking/Config.src	2010-06-27 04:21:56.000000000 +0200
-+++ busybox-1.17.0/networking/Config.src	2010-07-16 02:05:16.665861002 +0200
+diff -Nur busybox-1.17.1.orig/networking/Config.src busybox-1.17.1/networking/Config.src
+--- busybox-1.17.1.orig/networking/Config.src	2010-07-25 00:12:43.000000000 +0200
++++ busybox-1.17.1/networking/Config.src	2010-07-26 14:30:27.000000000 +0200
 @@ -961,7 +961,7 @@
  
  config WGET
