@@ -20,7 +20,7 @@ $(eval $(call PKG_template,AIRCRACK_NG,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE}
 
 CONFIG_STYLE:=		manual
 
-XAKE_FLAGS+=		CC="$(TARGET_CC)" \
+XAKE_FLAGS+=		CC="$(TARGET_CC)" TOOL_PREFIX="$(TARGET_CROSS)" \
 			CFLAGS="$(TARGET_CFLAGS) -Wall" \
 			OSNAME="Linux" prefix="/usr"
 
