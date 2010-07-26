@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -48,19 +48,20 @@ CONFIGURE_ARGS+=	--without-cxx \
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
-ifeq (${ADK_HOST_CYGWIN},y)
-CONFOPT:=		--with-shared
-endif
-
 pre-configure:
+	# create tic host binary
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
-		${CONFOPT} \
+		--with-shared \
 		--with-build-cc=${HOSTCC} \
 		--with-progs \
+		--without-debug \
+		--without-profile \
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/progs
+	find ${WRKBUILD} -name *.o -exec rm {} \;
+	find ${WRKBUILD} -name *.a -exec rm {} \;
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	# this is installed as libncurses - make libcurses a "link"
