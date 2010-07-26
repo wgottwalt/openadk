@@ -1,0 +1,56 @@
+diff -Nur busybox-1.17.1.orig/include/libbb.h busybox-1.17.1/include/libbb.h
+--- busybox-1.17.1.orig/include/libbb.h	2010-07-25 00:12:43.000000000 +0200
++++ busybox-1.17.1/include/libbb.h	2010-07-26 13:42:48.000000000 +0200
+@@ -40,6 +40,7 @@
+ /* Try to pull in PATH_MAX */
+ #include <limits.h>
+ #include <sys/param.h>
++#if !(defined __APPLE__ || defined BSD )
+ #ifdef HAVE_MNTENT_H
+ #include <mntent.h>
+ #endif
+@@ -52,6 +53,7 @@
+ #include <selinux/flask.h>
+ #include <selinux/av_permissions.h>
+ #endif
++#endif
+ #if ENABLE_LOCALE_SUPPORT
+ # include <locale.h>
+ #else
+diff -Nur busybox-1.17.1.orig/include/platform.h busybox-1.17.1/include/platform.h
+--- busybox-1.17.1.orig/include/platform.h	2010-07-06 04:25:54.000000000 +0200
++++ busybox-1.17.1/include/platform.h	2010-07-26 14:29:10.000000000 +0200
+@@ -150,18 +150,19 @@
+ 
+ /* ---- Endian Detection ------------------------------------ */
+ 
++# include <sys/param.h>
+ #if defined(__digital__) && defined(__unix__)
+ # include <sex.h>
+ # define __BIG_ENDIAN__ (BYTE_ORDER == BIG_ENDIAN)
+ # define __BYTE_ORDER BYTE_ORDER
+-#elif defined __FreeBSD__
++#elif defined __FreeBSD__ || defined __APPLE__
+ # include <sys/resource.h>	/* rlimit */
+ # include <machine/endian.h>
+ # define bswap_64 __bswap64
+ # define bswap_32 __bswap32
+ # define bswap_16 __bswap16
+ # define __BIG_ENDIAN__ (_BYTE_ORDER == _BIG_ENDIAN)
+-#elif !defined __APPLE__
++#elif !defined BSD
+ # include <byteswap.h>
+ # include <endian.h>
+ #endif
+diff -Nur busybox-1.17.1.orig/scripts/gen_build_files.sh busybox-1.17.1/scripts/gen_build_files.sh
+--- busybox-1.17.1.orig/scripts/gen_build_files.sh	2010-07-25 00:12:56.000000000 +0200
++++ busybox-1.17.1/scripts/gen_build_files.sh	2010-07-26 13:43:12.000000000 +0200
+@@ -48,7 +48,7 @@
+ fi
+ 
+ # (Re)generate */Kbuild and */Config.in
+-{ cd -- "$srctree" && find -type d; } | while read -r d; do
++{ cd -- "$srctree" && find . -type d; } | while read -r d; do
+ 	d="${d#./}"
+ 
+ 	src="$srctree/$d/Kbuild.src"
