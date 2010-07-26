@@ -4,18 +4,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cpufrequtils
-PKG_VERSION:=		007
+PKG_VERSION:=		008
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		40271a1e1eadce31457e9891cdb071f1
+PKG_MD5SUM:=		52d3e09e47ffef634833f7fab168eccf
 PKG_DESCR:=		utilities for the Linux kernel cpufreq subsystem
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/
+PKG_NO_PARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CPUFREQUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		NLS=no
 CONFIG_STYLE:=		manual
 
 post-install:
