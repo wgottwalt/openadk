@@ -1,0 +1,11 @@
+--- asterisk-1.6.2.10.orig/Makefile.moddir_rules	2009-07-21 15:56:35.000000000 +0200
++++ asterisk-1.6.2.10/Makefile.moddir_rules	2010-07-26 18:53:03.000000000 +0200
+@@ -117,7 +117,7 @@ clean::
+ 
+ install:: all
+ 	@echo "Installing modules from `basename $(CURDIR)`..."
+-	@for x in $(LOADABLE_MODS:%=%.so); do $(INSTALL) -m 755 $$x $(DESTDIR)$(MODULES_DIR) ; done
++	for x in $(LOADABLE_MODS:%=%.so); do $(INSTALL) -m 755 $$x $(DESTDIR)$(MODULES_DIR) ; done
+ 
+ uninstall::
+ 

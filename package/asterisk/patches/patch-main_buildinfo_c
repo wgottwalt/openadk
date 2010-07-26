@@ -1,0 +1,13 @@
+--- asterisk-1.6.2.10.orig/main/buildinfo.c	2008-10-30 17:49:02.000000000 +0100
++++ asterisk-1.6.2.10/main/buildinfo.c	2010-07-26 19:22:57.000000000 +0200
+@@ -23,8 +23,8 @@
+  * \author Kevin P. Fleming <kpfleming@digium.com>
+  */
+ 
+-#include "asterisk/buildinfo.h"
+-#include "asterisk/build.h"
++#include "../include/asterisk/buildinfo.h"
++#include "../include/asterisk/build.h"
+ 
+ const char *ast_build_hostname = BUILD_HOSTNAME;
+ const char *ast_build_kernel = BUILD_KERNEL;

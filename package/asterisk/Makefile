@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.6.2.7
+PKG_VERSION:=		1.6.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		861f57ba43bfe05dc645e0679a260e41
+PKG_MD5SUM:=		50412a90942ae7306fb8dcc31a05c2ce
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		phone
 PKG_MULTI:=		1
@@ -19,7 +19,7 @@ endif
 ifneq ($(ADK_PACKAGE_ASTERISK_PGSQL),)
 PKG_BUILDDEP+=		postgresql
 endif
-PKG_URL:=		http://www.asterisk.org
+PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
 PKG_TARGET_DEPENDS:=	!foxboard
@@ -130,8 +130,8 @@ pre-build:
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \
-	tar xzf asterisk-core-sounds-en-gsm-1.4.17.tar.gz ; \
-	rm asterisk-core-sounds-en-gsm-1.4.17.tar.gz
+	tar xzf asterisk-core-sounds-en-gsm-1.4.19.tar.gz ; \
+	rm asterisk-core-sounds-en-gsm-1.4.19.tar.gz
 	@echo
 	@echo "---> have to install ${SUB_INSTALLS-m} ${SUB_INSTALLS-y} <---"
 	@echo
