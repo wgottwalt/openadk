@@ -5,11 +5,16 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
 PKG_VERSION:=		2.6.27
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		5177b7401bb89e84ca1c89029143441e
-PKG_DESCR:=		IPSec software
+PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		ip libgmp
+PKG_DEPENDS:=		ip libgmp libpthread kmod-net-key kmod-xfrm-user
+PKG_DEPENDS+=		kmod-inet-ah kmod-inet-esp
+PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
+PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-md5
+PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
+PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
 PKG_BUILDDEP+=		gmp
 PKG_URL:=		http://www.openswan.org/
 PKG_SITES:=		http://www.openswan.org/download/
@@ -39,6 +44,9 @@ post-install:
 	${CP} ${WRKINST}/etc/ipsec.d/* ${IDIR_OPENSWAN}/etc/ipsec.d
 	${CP} ${WRKINST}/usr/lib/ipsec/* ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${CP} ${WRKINST}/usr/libexec/ipsec/* ${IDIR_OPENSWAN}/usr/libexec/ipsec
+	rm ${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
+	${INSTALL_BIN} ${WRKINST}/etc/rc.d/init.d/ipsec \
+		${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipsec ${IDIR_OPENSWAN}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

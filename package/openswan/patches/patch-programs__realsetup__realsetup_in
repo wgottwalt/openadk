@@ -1,0 +1,26 @@
+--- openswan-2.6.27.orig/programs/_realsetup/_realsetup.in	2010-06-21 17:43:35.000000000 +0200
++++ openswan-2.6.27/programs/_realsetup/_realsetup.in	2010-07-27 19:27:30.327023350 +0200
+@@ -374,14 +374,15 @@ case "$1" in
+ 	rm -f /var/run/pluto.pid
+ 
+ 	# When we exit we clean up (remove) the modules we are using, even the kame'ish ones
+-	if test -e ${kamepfkey}; then
+-		for mod in ipcomp ipcomp6 xfrm6_tunnel xfrm6_mode_tunnel xfrm6_mode_beet xfrm6_mode_ro \
+-			xfrm6_mode_transport xfrm4_mode_transport xfrm4_mode_tunnel  xfrm_user \
+-			xfrm4_tunnel xfrm4_mode_beet esp4 esp6 ah4 ah6 af_key
+-		    do
+-			lsmod 2>&1 | grep "^$mod" > /dev/null && rmmod  $mod
+-		    done
+-	fi 
++	# do not touch kernel modules, no reason to unload on embedded systems
++	#if test -e ${kamepfkey}; then
++	#	for mod in ipcomp ipcomp6 xfrm6_tunnel xfrm6_mode_tunnel xfrm6_mode_beet xfrm6_mode_ro \
++	#		xfrm6_mode_transport xfrm4_mode_transport xfrm4_mode_tunnel  xfrm_user \
++	#		xfrm4_tunnel xfrm4_mode_beet esp4 esp6 ah4 ah6 af_key
++	#	    do
++	#		lsmod 2>&1 | grep "^$mod" > /dev/null && rmmod  $mod
++	#	    done
++	#fi 
+ 
+ 	perform test -d $subsysdir "&&" rm -f $subsyslock
+ 

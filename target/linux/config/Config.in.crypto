@@ -47,7 +47,12 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_GEODE
 	tristate
 	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KERNEL_CRYPTO
+	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
+	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	depends on ADK_LINUX_ALIX
+	default y if (ADK_LINUX_ALIX && ADK_PACKAGE_OPENSWAN)
+	default y if (ADK_LINUX_ALIX && ADK_PACKAGE_STRONGSWAN)
+	default n
 	help
 	  Say 'Y' here to use the AMD Geode LX processor on-board AES
 	  engine for the CryptoAPI AES algorithm.
@@ -60,6 +65,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	select ADK_KPACKAGE_KMOD_CRYPTO_DES
+	default n
 	help
 	  This option allows you to have support for HIFN 795x crypto adapters.
 

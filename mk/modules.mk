@@ -747,7 +747,7 @@ $(eval $(call KMOD_template,DM_SNAPSHOT,dm-snapshot,\
 
 $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
-,10))
+,20))
 
 $(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
