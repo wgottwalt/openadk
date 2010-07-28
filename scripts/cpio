@@ -7,23 +7,23 @@ user="-R 0:0"
 os=$(uname)
 case $os in
 	NetBSD|MirBSD|OpenBSD)
-		cmd="$@ -Mdist"
+		cmd="$@"
 		;;
 	Darwin)
 		user="-R root:"
 		cmd=$(echo "$@"|sed -e "s#-Hnewc#--format newc#")
-		cmd="$cmd --quiet"
+		cmd="--quiet $cmd"
 		;;
 	*)
-		cmd="$@ -Mdist --quiet"
+		cmd="--quiet $@"
 		;;
 esac
 if [ "$2" = "r" ];then
-	opt=$user
+	opt="$user -Mdist"
 fi
 cmd=$(echo "$cmd"|sed -e "s# r # #")
 if [ -x /usr/bin/cpio ];then
-	/usr/bin/cpio $cmd $opt
+	/usr/bin/cpio $opt $cmd
 else
-	/bin/cpio $cmd $opt
+	/bin/cpio $opt $cmd
 fi
