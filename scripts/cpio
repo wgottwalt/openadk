@@ -9,7 +9,7 @@ case $os in
 	NetBSD|MirBSD|OpenBSD)
 		cmd="$@ -Mdist"
 		;;
-	Darwin)
+	FreeBSD|Darwin)
 		user="-R root:"
 		cmd=$(echo "$@"|sed -e "s#-Hnewc#--format newc#")
 		cmd="$cmd --quiet"
