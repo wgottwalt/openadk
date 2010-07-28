@@ -19,7 +19,7 @@ case $os in
 		;;
 esac
 if [ "$2" = "r" ];then
-	opt="$user -Mdist"
+	opt="$user"
 fi
 cmd=$(echo "$cmd"|sed -e "s# r # #")
 if [ -x /usr/bin/cpio ];then
