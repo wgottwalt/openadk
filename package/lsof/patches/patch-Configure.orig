@@ -1,0 +1,30 @@
+--- lsof_4.83_src.orig/Configure	2010-01-18 20:01:14.000000000 +0100
++++ lsof_4.83_src/Configure	2010-07-28 15:37:18.304500970 +0200
+@@ -2735,27 +2735,6 @@ return(0); }
+     then
+       LSOF_CFGF="$LSOF_CFGF -DHASIPv6"
+     fi	# }
+-
+-    # Test for SELinux support.
+-
+-    LSOF_TMP1=0
+-    if test "X$LINUX_HASSELINUX" = "X"	# {
+-    then
+-      if test -r ${LSOF_INCLUDE}/selinux/selinux.h	# {
+-      then
+-	LSOF_TMP1=1
+-      fi	# }
+-    else
+-      if test "X$LINUX_HASSELINUX" = "XY" -o "X$LINUX_HASSELINUX" = "Xy" # {
+-      then
+-	LSOF_TMP1=1
+-      fi	# }
+-    fi	# }
+-    if test $LSOF_TMP1 -eq 1	# {
+-    then
+-      LSOF_CFGF="$LSOF_CFGF -DHASSELINUX"
+-      LSOF_CFGL="$LSOF_CFGL -lselinux"
+-    fi	# }
+     LSOF_DIALECT_DIR="linux"
+     LSOF_CFGF="$LSOF_CFGF -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE"
+     ;;
