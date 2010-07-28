@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 
@@ -30,5 +30,8 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/fwcf.sh ${IDIR_CFGFS}/sbin/cfgfs
 	${INSTALL_BIN} ${WRKBUILD}/fwcf.helper.out \
 		${IDIR_CFGFS}/sbin/cfgfs.helper
+	cd ${IDIR_CFGFS}/sbin; for tgt in halt reboot poweroff; do \
+		ln cfgfs $$tgt; \
+	done
 
 include ${TOPDIR}/mk/pkg-bottom.mk
