@@ -1,8 +1,6 @@
 #!/bin/sh
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-busybox reboot -d 60 -f &		# just in case…
 {
-	[[ -f /proc/diag/led/power ]] && echo f >/proc/diag/led/power
 	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -rnk2 | \
@@ -17,5 +15,4 @@ busybox reboot -d 60 -f &		# just in case…
 		esac
 		${shebang:-/bin/sh} ${line%%:*} autostop 2>&1
 	done
-	[[ -f /proc/diag/led/power ]] && echo 0 >/proc/diag/led/power
 } | logger -s -p 6 -t ''

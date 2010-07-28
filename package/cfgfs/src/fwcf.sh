@@ -69,11 +69,11 @@ case $0 in
 esac
 
 if [[ $me != cfgfs ]]; then
-	integer dflag=0
 	dval=
-	integer fflag=0
-	integer nocfgfs=0
-	integer nflag=0
+	dflag=0
+	fflag=0
+	nocfgfs=0
+	nflag=0
 	while getopts ":d:Ffn" ch; do
 		case $ch in
 		(d)	dflag=1; dval=$OPTARG ;;
@@ -85,7 +85,7 @@ if [[ $me != cfgfs ]]; then
 	done
 	shift $((OPTIND - 1))
 
-	(( nocfgfs == 0 && fflag == 0 )) && if ! cfgfs status -q; then
+	[[ $nocfgfs -eq 0 ]] && [[ $fflag -eq 0 ]] && if ! cfgfs status -q; then
 		echo "error: will not $me: unsaved changes in /etc found!"
 		echo "Either run 'cfgfs commit' before trying to $me"
 		echo "or retry with '$me -F${*+ }$*' to force a ${me}."
@@ -93,9 +93,9 @@ if [[ $me != cfgfs ]]; then
 		exit 2
 	fi
 
-	(( fflag )) && me="$me -f"
-	(( nflag )) && me="$me -n"
-	(( dflag )) && me="$me -d '$dval'"
+	[[ $fflag -eq 1 ]] && me="$me -f"
+	[[ $nflag -eq 1 ]] && me="$me -n"
+	[[ $dflag -eq 1 ]] && me="$me -d '$dval'"
 	eval exec busybox $me
 fi
 

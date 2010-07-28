@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.17.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c7fe7533b7fc4018b0b49a05ee0ee601
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
@@ -72,6 +72,9 @@ endif
 ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox
+endif
+ifneq ($(strip ${ADK_PACKAGE_CFGFS}),)
+	cd ${IDIR_BUSYBOX}/sbin && rm -f halt poweroff reboot
 endif
 
 udhcpd-install:
