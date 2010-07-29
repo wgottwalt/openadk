@@ -137,12 +137,6 @@ if ! which bzip2 >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which cpio >/dev/null 2>&1; then
-	echo You must install cpio to continue.
-	echo
-	out=1
-fi
-
 if ! which unzip >/dev/null 2>&1; then
 	echo You must install unzip to continue.
 	echo

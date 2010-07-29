@@ -16,7 +16,6 @@ Before you can start you need to install some tools:
 - patch
 - gzip
 - bzip2
-- cpio 
 - wget
 - file
 - unzip
