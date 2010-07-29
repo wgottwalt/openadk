@@ -7,6 +7,9 @@ case $os in
 	NetBSD|MirBSD|OpenBSD)
 		/usr/bin/tsort -r
 		;;
+	FreeBSD)
+		/usr/bin/tsort | tail -r
+		;;
 	*)
 		/usr/bin/tsort | tac
 		;;
