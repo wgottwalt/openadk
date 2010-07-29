@@ -27,6 +27,9 @@ CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-linear-h2200 \
 			--disable-arctic2
 
+pre-build:
+	@chmod u+x ${WRKBUILD}/install-sh
+
 post-install:
 	$(INSTALL_DIR) $(IDIR_TSLIB)/etc
 	$(INSTALL_DIR) $(IDIR_TSLIB)/usr/lib/ts

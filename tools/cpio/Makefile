@@ -12,6 +12,7 @@ SRCS+=		\
 		src/ib_getlin.c \
 		src/sfile.c \
 		src/gmatch.c \
+		src/sigset.c \
 		src/memalign.c
 
 SRCS+=		\
