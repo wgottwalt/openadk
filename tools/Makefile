@@ -3,12 +3,11 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=mkcrypt
+TARGETS:=mkcrypt cpio
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
 all: install
-prepare:
 compile:
 install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)

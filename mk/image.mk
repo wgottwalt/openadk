@@ -49,18 +49,21 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 		| gzip -n9 >$@
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
-	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -o r -C512 -Hnewc | ${ADK_COMPRESSION_TOOL} >$@
+	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P | \
+		${ADK_COMPRESSION_TOOL} >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
 		$(LINUX_DIR)/.config
-	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-	    cpio -o r -C512 -Hnewc >$@
+	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
-	PATH='${TARGET_PATH}' \
-	mksquashfs ${TARGET_DIR} ${BUILD_DIR}/root.squashfs \
+	${STAGING_TOOLS}/bin/mksquashfs ${TARGET_DIR} \
+		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 	cat ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel \
 		${BUILD_DIR}/root.squashfs > \

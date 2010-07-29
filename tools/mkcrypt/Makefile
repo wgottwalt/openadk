@@ -3,20 +3,9 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		mkcrypt
-PKG_VERSION:=		0.1
-PKG_RELEASE:=		1
-NO_DISTFILES:=		1
+${STAGING_TOOLS}/bin/mkcrypt:
+	$(HOSTCC) -o $(STAGING_TOOLS)/bin/mkcrypt mkcrypt.c
 
-include ../rules.mk
-
-$(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	$(HOSTCC) -o $(WRKBUILD)/mkcrypt mkcrypt.c
-	touch $@
-
-$(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	$(INSTALL_BIN) $(WRKBUILD)/mkcrypt \
-		${STAGING_TOOLS}/bin
-	touch $@
+install: ${STAGING_TOOLS}/bin/mkcrypt
 
 include $(TOPDIR)/mk/tools.mk

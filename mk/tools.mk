@@ -1,6 +1,3 @@
-prepare: ${WRKDIST}/.prepared
-configure: ${WRKBUILD}/.configure_done
-compile: $(WRKBUILD)/.compiled
-install: $(WRKBUILD)/.installed
+compile:
 clean:
 	rm -rf $(WRKDIR)
