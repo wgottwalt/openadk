@@ -4,18 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.6.9
+PKG_VERSION:=		1.6.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		facaa0ee78c8f24b9af12c74662bbd24
+PKG_MD5SUM:=		ae008ac355581c90494fba86cbfc3413
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
-PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite
-PKG_BUILDDEP+=		apr-util expat apr zlib libiconv sqlite
-ifneq ($(ADK_PACKAGE_SUBVERSION_NEON),)
-PKG_DEPENDS+=		neon
-PKG_BUILDDEP+=		neon
-endif
+PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite neon
+PKG_BUILDDEP+=		apr-util expat apr zlib libiconv sqlite neon
 PKG_SITES:=		http://subversion.tigris.org/downloads/
+PKG_URL:=		http://subversion.apache.org/
 
 include ${TOPDIR}/mk/package.mk
 
@@ -32,20 +29,7 @@ CONFIGURE_ARGS+=	--without-jikes
 CONFIGURE_ARGS+=	--without-jdk
 CONFIGURE_ARGS+=	--disable-javahl
 CONFIGURE_ARGS+=	--without-berkeley-db
-LIBS= 			-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv
-
-ifeq ($(ADK_PACKAGE_SUBVERSION_NEON),y)
-CONFIGURE_ARGS+=	-disable-neon-version-check
-LIBS+=			-lneon
-else
-CONFIGURE_ARGS+=	--without-neon
-endif
-
-ifeq ($(ADK_PACKAGE_APR_THREADING),y)
-LIBS+=			-pthread
-endif
-
-CONFIGURE_ENV+=		LIBS='${LIBS}'
+CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv'
 INSTALL_TARGET:=	external-install local-install
 
 post-install:
