@@ -219,7 +219,7 @@ NO_ERROR=0
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
 	@echo "OStype:=$$(env uname)" >>prereq.mk
 	@echo "_PATH:=$$PATH" >>prereq.mk
-	@echo "PATH:=\$${TOPDIR}/scripts:$$PATH" >>prereq.mk
+	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \

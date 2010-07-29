@@ -11,7 +11,8 @@ SRCS+=		\
 		src/ib_free.c \
 		src/ib_getlin.c \
 		src/sfile.c \
-		src/gmatch.c
+		src/gmatch.c \
+		src/memalign.c
 
 SRCS+=		\
 		src/version.c \
