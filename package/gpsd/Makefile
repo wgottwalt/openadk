@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
-PKG_VERSION:=		2.92
+PKG_VERSION:=		2.95
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		50b60d9f6dd51e001f4dfbaeb825c988
+PKG_MD5SUM:=		12535a9ed9fecf9ea2c5bdc9840da5ae
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
@@ -15,12 +15,12 @@ PKG_CXX:=		GPSD
 PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
 
-PKG_DESCR_1:=		GPS client utilities
+PKG_DESCR_CLIENTS:=	GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENTS},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \
@@ -41,7 +41,7 @@ TLDFLAGS+=		-shared -pthread
 endif
 
 post-extract:
-	@find ${WRKBUILD} -name *.rej -exec rm {} \;
+	#@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++
@@ -52,7 +52,7 @@ endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin
-	${CP} ${WRKINST}/usr/lib/libgps.so.* ${IDIR_GPSD}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgps.so* ${IDIR_GPSD}/usr/lib
 	${CP} ${WRKINST}/usr/sbin/gpsd ${IDIR_GPSD}/usr/sbin
 	${INSTALL_DIR} ${IDIR_GPSD_CLIENTS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/{cgps,gpxlogger} \
