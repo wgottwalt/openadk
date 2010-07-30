@@ -1,0 +1,9 @@
+--- rarpd-1.1.orig/Makefile.in	1999-10-20 22:57:13.000000000 +0200
++++ rarpd-1.1/Makefile.in	2010-07-16 14:34:08.453125000 +0200
+@@ -13,5 +13,5 @@ rarpd: rarpd.o @LIBOBJS@
+ 	$(CC) @LDFLAGS@ -o $@ rarpd.o @LIBOBJS@ @LIBS@
+ 
+ install: rarpd
+-	$(ENSUREDIR)	$(DESTDIR)$(SBINDIR)	755
++	@mkdir -p $(DESTDIR)$(SBINDIR)
+ 	$(INSTALL) 	-c -m 0755 rarpd	$(DESTDIR)$(SBINDIR)
