@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.6
+PKG_VERSION:=		3.6.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c9a071b31bb90d05edfb93117d0a7537
+PKG_MD5SUM:=		0ee5f14fd8be07513d16131027ebcb61
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk+ libnotify
@@ -21,12 +21,15 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40 lemote
+PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+CONFIGURE_ARGS+=	--disable-ipc
+else ifeq (${ADK_TARGET_LIB_UCLIBC},y)
 CONFIGURE_ARGS+=	--disable-ipc
 else
 CONFIGURE_ARGS+=	--enable-ipc
@@ -42,6 +45,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-png \
 			--with-system-nss \
 			--with-system-nspr \
+			--with-libIDL-prefix=${STAGING_DIR}/usr \
+			--with-glib-prefix=${STAGING_DIR}/usr \
 			--enable-libxul \
 			--disable-tests \
 			--disable-static \
