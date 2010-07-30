@@ -1,55 +1,58 @@
---- LVM2.2.02.61.orig/tools/Makefile.in	2010-01-19 02:10:47.000000000 +0100
-+++ LVM2.2.02.61/tools/Makefile.in	2010-03-03 19:46:06.396138753 +0100
-@@ -165,21 +165,26 @@ cflow: lvm.cflow lvm.xref lvm.tree lvm.r
- endif
+--- LVM2.2.02.72.orig/tools/Makefile.in	Fri Jun 25 20:23:10 2010
++++ LVM2.2.02.72/tools/Makefile.in	Fri Jul 30 10:13:24 2010
+@@ -157,7 +157,7 @@ liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION): liblvm2cmd.$(
+ 
+ .commands: $(srcdir)/commands.h $(srcdir)/cmdnames.h Makefile
+ 	$(CC) -E -P $(srcdir)/cmdnames.h 2> /dev/null | \
+-		egrep -v '^ *(|#.*|dumpconfig|formats|help|pvdata|segtypes|version) *$$' > .commands
++		egrep -v '^ *(#.*|dumpconfig|formats|help|pvdata|segtypes|version) *$$' > .commands
+ 
+ ifneq ("$(CFLOW_CMD)", "")
+ CFLOW_SOURCES = $(addprefix $(srcdir)/, $(SOURCES))
+@@ -170,18 +170,22 @@ endif
+ 	install_dmsetup_dynamic install_dmsetup_static
+ 
+ install_cmdlib_include: $(srcdir)/lvm2cmd.h
+-	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
++	$(INSTALL_DIR) $(includedir)
++	$(INSTALL_DATA) $< $(includedir)/$(<F)
  
  install_cmdlib_dynamic: liblvm2cmd.$(LIB_SUFFIX)
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
-+	$(INSTALL) -d $(libdir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
- 		$(libdir)/liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION)
- 	$(LN_S) -f liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION) $(libdir)/liblvm2cmd.$(LIB_SUFFIX)
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 $(srcdir)/lvm2cmd.h \
-+	$(INSTALL) -d $(includedir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 444 $(srcdir)/lvm2cmd.h \
- 		$(includedir)/lvm2cmd.h
+-	$(INSTALL_PROGRAM) -D $< $(libdir)/$(<F).$(LIB_VERSION)
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_PROGRAM) $< $(libdir)/$(<F).$(LIB_VERSION)
+ 	$(INSTALL_DIR) $(usrlibdir)
+ 	$(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
  
  install_cmdlib_static: liblvm2cmd-static.a
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
-+	$(INSTALL) -d $(libdir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
- 		$(libdir)/liblvm2cmd.a.$(LIB_VERSION)
- 	$(LN_S) -f liblvm2cmd.a.$(LIB_VERSION) $(libdir)/liblvm2cmd.a
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 444 $(srcdir)/lvm2cmd.h \
-+	$(INSTALL) -d $(includedir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 444 $(srcdir)/lvm2cmd.h \
- 		$(includedir)/lvm2cmd.h
+-	$(INSTALL_DATA) -D $< $(usrlibdir)/liblvm2cmd.a
++	$(INSTALL_DIR) $(usrlibdir)
++	$(INSTALL_DATA) $< $(usrlibdir)/liblvm2cmd.a
  
  install_tools_dynamic: lvm .commands
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) lvm \
-+	$(INSTALL) -d $(sbindir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) lvm \
- 		$(sbindir)/lvm
+-	$(INSTALL_PROGRAM) -D lvm $(sbindir)/lvm
++	$(INSTALL_DIR) $(sbindir)
++	$(INSTALL_PROGRAM) lvm $(sbindir)/lvm
  	@echo Creating symbolic links for individual commands in $(sbindir)
- 	@( \
-@@ -190,14 +195,17 @@ install_tools_dynamic: lvm .commands
- 	)
+ 	@for v in `cat .commands`; do \
+ 		echo "$(LN_S) -f lvm $(sbindir)/$$v"; \
+@@ -189,13 +193,16 @@ install_tools_dynamic: lvm .commands
+ 	done;
  
  install_tools_static: lvm.static
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
-+	$(INSTALL) -d $(sbindir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< \
- 		$(staticdir)/lvm.static
+-	$(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
++	$(INSTALL_DIR) $(staticdir)
++	$(INSTALL_PROGRAM) $< $(staticdir)/$(<F)
  
  install_dmsetup_dynamic: dmsetup
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
-+	$(INSTALL) -d $(sbindir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
+-	$(INSTALL_PROGRAM) -D $< $(sbindir)/$(<F)
++	$(INSTALL_DIR) $(sbindir)
++	$(INSTALL_PROGRAM) $< $(sbindir)/$(<F)
  
  install_dmsetup_static: dmsetup.static
--	$(INSTALL) -D $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
-+	$(INSTALL) -d $(sbindir)
-+	$(INSTALL) $(OWNER) $(GROUP) -m 555 $(STRIP) $< $(sbindir)/$<
+-	$(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
++	$(INSTALL_DIR) $(staticdir)
++	$(INSTALL_PROGRAM) $< $(staticdir)/$(<F)
  
  install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
  
