@@ -1,0 +1,28 @@
+--- LVM2.2.02.72.orig/make.tmpl.in	Tue Jul 20 16:38:44 2010
++++ LVM2.2.02.72/make.tmpl.in	Fri Jul 30 10:22:54 2010
+@@ -312,7 +312,8 @@ $(LIB_SHARED): $(LIB_SHARED).$(LIB_VERSION)
+ 	$(LN_S) -f $(<F) $@
+ 
+ install_lib_shared: $(LIB_SHARED)
+-	$(INSTALL_PROGRAM) -D $< $(libdir)/$(<F).$(LIB_VERSION)
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_PROGRAM) $< $(libdir)/$(<F).$(LIB_VERSION)
+ 	$(INSTALL_DIR) $(usrlibdir)
+ 	$(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
+ 
+@@ -320,11 +321,13 @@ install_lib_shared: $(LIB_SHARED)
+ #        and for compatibility links in libdir are created
+ #        when the code is fixed links could be removed.
+ install_dm_plugin: $(LIB_SHARED)
+-	$(INSTALL_PROGRAM) -D $< $(libdir)/device-mapper/$(<F)
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_PROGRAM) $< $(libdir)/device-mapper/$(<F)
+ 	$(LN_S) -f device-mapper/$(<F) $(libdir)/$(<F)
+ 
+ install_lvm2_plugin: $(LIB_SHARED)
+-	$(INSTALL_PROGRAM) -D $< $(libdir)/lvm2/$(<F)
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_PROGRAM) $< $(libdir)/lvm2/$(<F)
+ 	$(LN_S) -f lvm2/$(<F) $(libdir)/$(<F)
+ 	$(LN_S) -f $(<F) $(libdir)/$(<F).$(LIB_VERSION)
+ endif
