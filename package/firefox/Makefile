@@ -44,6 +44,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-png \
 			--with-system-nss \
 			--with-system-nspr \
+			--with-libIDL-prefix=${STAGING_DIR}/usr \
+			--with-glib-prefix=${STAGING_DIR}/usr \
 			--enable-libxul \
 			--disable-tests \
 			--disable-static \

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.7.1
+PKG_VERSION:=		1.7.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d2fefae2b787a19601c09d89975ce5fb
+PKG_MD5SUM:=		13fc44363df744a401552e73e5476351
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
@@ -18,8 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 \
-			NO_CROSS_DIRECTORY_HARDLINKS=1 \
+MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 NO_PYTHON=1 \
 			CURLDIR=${STAGING_DIR} EXPATDIR=${STAGING_DIR}
 XAKE_FLAGS+=		uname_S=Linux uname_O=GNU/Linux
 CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
