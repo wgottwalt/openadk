@@ -9,6 +9,8 @@ configure missing
 aclocal.m4 configure.in
 aclocal.m4 configure.ac
 aclocal.m4 acinclude.m4
+config-h.in configure.in
+config-h.in configure.ac
 config.h.in configure.in
 config.h.in configure.ac
 config.h.in aclocal.m4
@@ -31,3 +33,4 @@ configure.in configure.files
 acinclude.m4 admin/libtool.m4.in
 acinclude.m4 admin/acinclude.m4.in
 acinclude.m4 libltdl/ltdl.m4
+libtoolize.in configure
