@@ -26,7 +26,6 @@ out=0
 if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_GIT ]];then
 		NEED_CURLDEV="$NEED_CURLDEV git"
-		NEED_SSLDEV="$NEED_SSLDEV git"
 	fi
 	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
 		NEED_RPM="$NEED_RPM rpm"
@@ -55,8 +54,15 @@ if [[ -n $ADK_COMPILE_AVAHI ]]; then
 	NEED_PKGCONFIG="$NEED_PKGCONFIG avahi"
 fi
 
+if [[ -n $ADK_COMPILE_AUTOCONF ]]; then
+	NEED_M4="$NEED_M4 autoconf"
+fi
+
+if [[ -n $ADK_COMPILE_AUTOMAKE ]]; then
+	NEED_AUTOCONF="$NEED_AUTOCONF automake"
+fi
+
 if [[ -n $ADK_PACKAGE_SQUID ]]; then
-	NEED_SSLDEV="$NEED_SSLDEV squid"
 	NEED_GXX="$NEED_GXX squid"
 fi
 
@@ -135,6 +141,20 @@ fi
 if [[ -n $NEED_MKFONTDIR ]]; then
 	if ! which mkfontdir >/dev/null 2>&1; then
 		echo >&2 You need mkfontdir to build $NEED_MKFONTDIR
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_M4 ]]; then
+	if ! which m4 >/dev/null 2>&1; then
+		echo >&2 You need GNU m4 to build $NEED_M4
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_AUTOCONF ]]; then
+	if ! which autoconf >/dev/null 2>&1; then
+		echo >&2 You need autoconf to build $NEED_AUTOCONF
 		out=1
 	fi
 fi
@@ -218,13 +238,6 @@ if [[ -n $NEED_GLIBZWO ]]; then
 		echo >&2 You need libglib2.0-dev to build $NEED_GLIBZWO
 		out=1
 	fi
-fi
-
-if [[ -n $ADK_USE_CCACHE ]]; then
-        if ! which ccache >/dev/null 2>&1; then
-                echo >&2 You have selected to build with ccache, but ccache could not be found.
-                out=1
-        fi
 fi
 
 if [[ -n $NEED_RPM ]]; then
