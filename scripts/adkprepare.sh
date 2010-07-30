@@ -55,6 +55,8 @@ netbsd() {
 
 netbsd_full() {
 	echo "Preparing NetBSD for full OpenADK package builds"
+	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/5.0/All/"
+	export PKG_PATH
 	pkg_add -vu intltool
 	pkg_add -vu lynx
 	pkg_add -vu pkg-config
@@ -62,6 +64,7 @@ netbsd_full() {
 	pkg_add -vu bison
 	pkg_add -vu libIDL
 	pkg_add -vu xkbcomp
+	pkg_add -vu python26
 }
 
 freebsd() {

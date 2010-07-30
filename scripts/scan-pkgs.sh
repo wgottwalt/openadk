@@ -36,6 +36,7 @@ fi
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_ZIP="$NEED_ZIP firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
+	NEED_PYTHON="$NEED_PYTHON firefox"
 fi
 
 if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
@@ -240,5 +241,16 @@ if [[ -n $NEED_FLEX ]]; then
 		out=1
 	fi
 fi
+
+if [[ -n $NEED_PYTHON ]]; then
+	if ! which python >/dev/null 2>&1; then
+		if ! test -x /usr/pkg/bin/python2.6 >/dev/null; then
+			echo >&2 You need python to to use $NEED_PYTHON package
+			out=1
+		fi
+	fi
+fi
+
+exit $out
 
 exit $out

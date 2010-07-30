@@ -1,6 +1,15 @@
---- mozilla-1.9.2.orig/configure	2010-04-02 18:07:41.000000000 +0200
-+++ mozilla-1.9.2/configure	2010-04-11 14:38:39.000000000 +0200
-@@ -21012,8 +21012,8 @@ if test -n "$CROSS_COMPILE"; then
+--- mozilla-1.9.2.orig/configure	2010-07-23 00:00:19.000000000 +0200
++++ mozilla-1.9.2/configure	2010-07-30 09:52:43.000000000 +0200
+@@ -3970,7 +3970,7 @@ else
+     echo "$ac_t""yes" 1>&6    
+ fi
+ 
+-  for ac_prog in $PYTHON python2.5 python2.4 python
++  for ac_prog in $PYTHON python2.6 python2.5 python2.4 python
+ do
+ # Extract the first word of "$ac_prog", so it can be a program name with args.
+ set dummy $ac_prog; ac_word=$2
+@@ -21285,8 +21285,8 @@ if test -n "$CROSS_COMPILE"; then
          HOST_LIBIDL_CONFIG="$LIBIDL_CONFIG"
      fi
      if test -n "$HOST_LIBIDL_CONFIG" && test "$HOST_LIBIDL_CONFIG" != "no"; then
