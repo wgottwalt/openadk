@@ -15,6 +15,7 @@ PKG_URL:=		http://oprofile.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 CFLINE_OPROFILE:=	select BUSYBOX_EXPR
+PKG_TARGET_DEPENDS:=	!foxboard
 
 include $(TOPDIR)/mk/package.mk
 

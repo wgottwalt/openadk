@@ -31,6 +31,7 @@ config ADK_KPACKAGE_KMOD_SCx200_ACB
 	prompt "kmod-i2c-geode.................... I2C driver for Geode"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_I2C
+	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_X86_ALIX2D || ADK_LINUX_X86_ALIX2D13
 	default n
 	help
 	  I2C driver for Geode boards.

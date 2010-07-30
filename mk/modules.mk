@@ -903,9 +903,13 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
     $(MODULES_DIR)/kernel/crypto/fcrypt \
 ,11))
 
+ZLIB:=lib/zlib_deflate/zlib_deflate
+ifeq ($(ADK_LINUX_CRIS_FOXBOARD),)
+ZLIB+=lib/zlib_inflate/zlib_inflate
+endif
+
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
-    $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
-    $(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
+    $(foreach mod, $(ZLIB),$(MODULES_DIR)/kernel/$(mod)) \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))
 

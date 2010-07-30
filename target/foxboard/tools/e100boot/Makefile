@@ -17,8 +17,9 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	$(MAKE) -C $(WRKBUILD)
 	touch $@
 
-$(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
+$(BIN_DIR)/etrax100boot: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/sbl/e100boot.stripped $(BIN_DIR)/etrax100boot
-	touch $@
+
+install: $(BIN_DIR)/etrax100boot
 
 include $(TOPDIR)/mk/tools.mk

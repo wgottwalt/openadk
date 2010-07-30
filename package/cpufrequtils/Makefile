@@ -11,6 +11,7 @@ PKG_DESCR:=		utilities for the Linux kernel cpufreq subsystem
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/
+PKG_TARGET_DEPENDS:=	!foxboard
 
 include $(TOPDIR)/mk/package.mk
 
