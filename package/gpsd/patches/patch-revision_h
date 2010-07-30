@@ -1,5 +1,0 @@
---- gpsd-2.92.orig/revision.h	2010-03-03 14:49:28.000000000 +0100
-+++ gpsd-2.92/revision.h	2010-04-03 10:22:22.843473239 +0200
-@@ -1 +1 @@
--#define REVISION "svn7020"
-+#define REVISION "svnexported"

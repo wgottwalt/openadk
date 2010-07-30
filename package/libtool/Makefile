@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtool
-PKG_VERSION:=		2.2.8
+PKG_VERSION:=		2.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cad2a7188242bc8dbab0645532ae3d6f
+PKG_MD5SUM:=		b745d220e88163fcd9eea0a90ccf21b0
 PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/libtool

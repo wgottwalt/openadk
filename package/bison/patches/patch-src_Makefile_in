@@ -1,0 +1,11 @@
+--- bison-2.4.2.orig/src/Makefile.in	2010-03-20 18:14:10.000000000 +0100
++++ bison-2.4.2/src/Makefile.in	2010-07-30 17:28:09.000000000 +0200
+@@ -1313,7 +1313,7 @@ uninstall-am: uninstall-binPROGRAMS unin
+ 
+ yacc:
+ 	echo '#! /bin/sh' >$@
+-	echo "exec '$(bindir)/bison' -y "'"$$@"' >>$@
++	echo "exec bison -y "'"$$@"' >>$@
+ 	chmod a+x $@
+ 
+ echo:

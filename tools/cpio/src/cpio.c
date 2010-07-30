@@ -81,7 +81,8 @@ int	sysv3;
 
 #if defined (__linux__) || defined (__sun) || defined (__FreeBSD__) || \
 	defined (__hpux) || defined (_AIX) || defined (__NetBSD__) || \
-	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__)
+	defined (__OpenBSD__) || defined (__DragonFly__) || \
+	defined (__APPLE__) || defined (__CYGWIN__)
 #include <sys/mtio.h>
 #else	/* SVR4.2MP */
 #include <sys/scsi.h>
@@ -4495,7 +4496,8 @@ tseek(off_t n)
 		int	i = (n - poffs) / tapeblock;
 #if defined (__linux__) || defined (__sun) || defined (__FreeBSD__) || \
 	defined (__hpux) || defined (_AIX) || defined (__NetBSD__) || \
-	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__)
+	defined (__OpenBSD__) || defined (__DragonFly__) || \
+	defined (__APPLE__) || defined (__CYGWIN__)
 		struct mtop	mo;
 		mo.mt_op = i > 0 ? MTFSR : MTBSR;
 		mo.mt_count = i > 0 ? i : -i;
@@ -4735,7 +4737,7 @@ mstat(void)
 		emsg(3, "Error during stat() of archive");
 		done(1);
 	}
-#if defined (__linux__)
+#if defined (__linux__) 
 	if ((mtst.st_mode&S_IFMT) == S_IFCHR) {
 		struct mtget	mg;
 		if (ioctl(mt, MTIOCGET, &mg) == 0)
@@ -4786,6 +4788,13 @@ mstat(void)
 		struct mtget	mg;
 		if (ioctl(mt, MTIOCGET, &mg) == 0)
 			tapeblock = mg.mt_blksiz;
+	}
+#elif defined (__CYGWIN__)
+	if ((mtst.st_mode&S_IFMT) == S_IFCHR) {
+		struct mtget	mg;
+		if (ioctl(mt, MTIOCGET, &mg) == 0)
+			tapeblock = (mg.mt_dsreg&MT_ST_BLKSIZE_MASK) >>
+					MT_ST_BLKSIZE_SHIFT;
 	}
 #elif defined (__hpux) || defined (_AIX)
 #else	/* SVR4.2MP */

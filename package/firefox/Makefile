@@ -21,6 +21,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40 lemote
+PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 include $(TOPDIR)/mk/package.mk
 
@@ -44,6 +45,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-png \
 			--with-system-nss \
 			--with-system-nspr \
+			--with-libIDL-prefix=${STAGING_DIR}/usr \
+			--with-glib-prefix=${STAGING_DIR}/usr \
 			--enable-libxul \
 			--disable-tests \
 			--disable-static \

@@ -4,10 +4,10 @@
 
 os=$(uname)
 case $os in
-	NetBSD|MirBSD|OpenBSD)
+	MirBSD|OpenBSD)
 		/usr/bin/tsort -r
 		;;
-	FreeBSD)
+	NetBSD|FreeBSD)
 		/usr/bin/tsort | tail -r
 		;;
 	*)

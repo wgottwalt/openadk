@@ -37,6 +37,18 @@ openbsd() {
 	pkg_add -v xz
 }
 
+openbsd_full() {
+	PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/${ver}/packages/${arch}/"
+	export PKG_PATH
+	pkg_add -v bison
+	pkg_add -v zip
+	pkg_add -v intltool
+	pkg_add -v libIDL
+	pkg_add -v m4
+	pkg_add -v autoconf-2.62p0
+	pkg_add -v gperf
+}
+
 netbsd() {
 	echo "Preparing NetBSD for OpenADK"
 	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/5.0/All/"
@@ -51,10 +63,13 @@ netbsd() {
 	pkg_add -vu gtar
 	pkg_add -vu gsed
 	pkg_add -vu gawk
+	pkg_add -vu gperf
 }
 
 netbsd_full() {
 	echo "Preparing NetBSD for full OpenADK package builds"
+	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/5.0/All/"
+	export PKG_PATH
 	pkg_add -vu intltool
 	pkg_add -vu lynx
 	pkg_add -vu pkg-config
@@ -62,11 +77,12 @@ netbsd_full() {
 	pkg_add -vu bison
 	pkg_add -vu libIDL
 	pkg_add -vu xkbcomp
+	pkg_add -vu python26
 }
 
 freebsd() {
 	echo "Preparing FreeBSD for OpenADK"
-	pkg_add -r git gmake mksh bash wget unzip gtar gsed gawk
+	pkg_add -r git gmake mksh bash wget unzip gtar gsed gawk gperf
 }
 
 freebsd_full() {

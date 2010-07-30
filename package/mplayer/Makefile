@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-31648
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		eeb9219f9015e0e0dfbf4a70efefb751
+PKG_VERSION:=		1.0-31868
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9d5c2c1c927947b31afa6f42c11e8f23
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -86,6 +86,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--target=${ARCH}-linux \
 			--cc=$(TARGET_CC) \
 			--host-cc=$(HOSTCC) \
+			--yasm='' \
 			--disable-mencoder \
 			--enable-fbdev \
 			--enable-alsa \

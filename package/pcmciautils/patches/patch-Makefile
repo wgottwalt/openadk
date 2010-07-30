@@ -1,5 +1,5 @@
 --- pcmciautils-017.orig/Makefile	2010-01-06 16:47:45.000000000 +0100
-+++ pcmciautils-017/Makefile	2010-05-29 17:15:03.515625000 +0200
++++ pcmciautils-017/Makefile	2010-07-30 17:34:46.000000000 +0200
 @@ -94,12 +94,13 @@ PWD = $(shell pwd)
  # If you are running a cross compiler, you may want to set this
  # to something more interesting, like "arm-linux-".  If you want
@@ -15,3 +15,71 @@
  HOSTCC = gcc
  
  export CROSS CC AR STRIP RANLIB CFLAGS LDFLAGS LIB_OBJS ARCH_LIB_OBJS CRT0
+@@ -264,30 +265,31 @@ clean:
+ 
+ install-hotplug:
+ 	$(INSTALL) -d $(DESTDIR)$(hotplugdir)
+-	$(INSTALL_PROGRAM) -D hotplug/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.agent
+-	$(INSTALL_PROGRAM) -D hotplug/pcmcia.rc $(DESTDIR)$(hotplugdir)/pcmcia.rc
++	$(INSTALL_PROGRAM) hotplug/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.agent
++	$(INSTALL_PROGRAM) hotplug/pcmcia.rc $(DESTDIR)$(hotplugdir)/pcmcia.rc
+ 
+ uninstall-hotplug:
+ 	- rm -f $(DESTDIR)$(hotplugdir)/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.rc
+ 
+ install-socket-hotplug:
+-	$(INSTALL_PROGRAM) -D hotplug/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent
+-	$(INSTALL_PROGRAM) -D hotplug/pcmcia_socket.rc $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
++	$(INSTALL_PROGRAM) hotplug/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent
++	$(INSTALL_PROGRAM) hotplug/pcmcia_socket.rc $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
+ 
+ uninstall-socket-hotplug:
+ 	- rm -f $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
+ 
+ install-socket-tools:
+-	$(INSTALL_PROGRAM) -D $(PCMCIA_SOCKET_STARTUP) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
++	$(INSTALL_PROGRAM) $(PCMCIA_SOCKET_STARTUP) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
+ 
+ uninstall-socket-tools:
+ 	- rm -f $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
+ 
+ install-tools:
+ 	$(INSTALL) -d $(DESTDIR)$(sbindir)
+-	$(INSTALL_PROGRAM) -D $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(PCCARDCTL)
++	$(INSTALL_PROGRAM) $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(PCCARDCTL)
+ 	$(SYMLINK) $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(LSPCMCIA)
+-	$(INSTALL_PROGRAM) -D $(PCMCIA_CHECK_BROKEN_CIS) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_CHECK_BROKEN_CIS)
++	$(INSTALL) -d $(DESTDIR)$(udevhelperdir)
++	$(INSTALL_PROGRAM) $(PCMCIA_CHECK_BROKEN_CIS) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_CHECK_BROKEN_CIS)
+ 
+ uninstall-tools:
+ 	- rm -f $(DESTDIR)$(sbindir)/$(PCCARDCTL)
+@@ -296,22 +298,24 @@ uninstall-tools:
+ 
+ install-config:
+ 	$(INSTALL) -d $(DESTDIR)$(pcmciaconfdir)
+-	$(INSTALL_DATA)  -D config/config.opts $(DESTDIR)$(pcmciaconfdir)/config.opts
++	$(INSTALL_DATA) config/config.opts $(DESTDIR)$(pcmciaconfdir)/config.opts
+ 	if [ -f config/config.opts.$(ARCH) ]; then \
+-		$(INSTALL_DATA) -D config/config.opts.$(ARCH) $(DESTDIR)$(pcmciaconfdir)/config.opts; \
++		$(INSTALL_DATA) config/config.opts.$(ARCH) $(DESTDIR)$(pcmciaconfdir)/config.opts; \
+ 	fi
+ 
+ uninstall-config:
+ #	- rm -f $(DESTDIR)$(pcmciaconfdir)/config.opts
+ 
+ install-udev:
+-	$(INSTALL_DATA) -D $(UDEV_RULES_FILE) $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
++	$(INSTALL) -d $(DESTDIR)$(udevrulesdir)
++	$(INSTALL_DATA) $(UDEV_RULES_FILE) $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
+ 
+ uninstall-udev:
+ 	- rm -f $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
+ 
+ install-man:
+-	$(INSTALL_DATA) -D man/man8/pccardctl.8 $(DESTDIR)$(mandir)/man8/pccardctl.8
++	$(INSTALL) -d $(DESTDIR)$(mandir)/man8
++	$(INSTALL_DATA) man/man8/pccardctl.8 $(DESTDIR)$(mandir)/man8/pccardctl.8
+ 	$(SYMLINK) pccardctl.8 $(DESTDIR)$(mandir)/man8/lspcmcia.8
+ 
+ uninstall-man:
