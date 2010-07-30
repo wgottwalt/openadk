@@ -19,9 +19,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LSOF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_PROG:=	Configure
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	-n linux
+CONFIGURE_PROG:=	Configure
+CONFIGURE_ARGS:=	-n linux
 XAKE_FLAGS+=		CC='${TARGET_CC}'
 INSTALL_STYLE:=		manual
 

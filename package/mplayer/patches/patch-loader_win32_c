@@ -1,0 +1,10 @@
+--- mplayer-1.0-31648.orig/loader/win32.c	2010-07-09 11:53:19.000000000 +0200
++++ mplayer-1.0-31648/loader/win32.c	2010-07-30 15:24:59.000000000 +0200
+@@ -65,7 +65,6 @@ for DLL to know too much about its envir
+ #include <dirent.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
+-#include <sys/timeb.h>
+ #ifdef	HAVE_KSTAT
+ #include <kstat.h>
+ #endif

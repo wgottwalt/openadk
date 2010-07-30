@@ -1,0 +1,11 @@
+--- gpsd-2.95.orig/driver_sirf.c	2010-06-11 10:38:24.000000000 +0200
++++ gpsd-2.95/driver_sirf.c	2010-07-30 12:53:40.000000000 +0200
+@@ -325,7 +325,7 @@ static gps_mask_t sirf_msg_debug(unsigne
+     char msgbuf[MAX_PACKET_LENGTH * 3 + 2];
+     int i;
+ 
+-    bzero(msgbuf, (int)sizeof(msgbuf));
++    memset(msgbuf, 0, (int)sizeof(msgbuf));
+ 
+     /*@ +charint @*/
+     if (0xe1 == buf[0]) {	/* Development statistics messages */
