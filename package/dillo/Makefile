@@ -17,6 +17,7 @@ PKG_SITES:=		http://www.dillo.org/download/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_TARGET_DEPENDS:=    ibmx40 lemote
 PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk
