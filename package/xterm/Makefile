@@ -14,7 +14,7 @@ PKG_URL:=		http://invisible-island.net/xterm/xterm.html
 PKG_SITES:=		ftp://invisible-island.net/xterm/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_TARGET_DEPENDS:=	!foxboard !foxg20
 
 include $(TOPDIR)/mk/package.mk
 
