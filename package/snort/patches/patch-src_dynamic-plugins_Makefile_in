@@ -1,0 +1,10 @@
+--- snort-2.8.5.2.orig/src/dynamic-plugins/Makefile.in	2009-10-19 23:17:59.000000000 +0200
++++ snort-2.8.5.2/src/dynamic-plugins/Makefile.in	2010-07-30 20:41:39.000000000 +0200
+@@ -167,7 +167,6 @@ datarootdir = @datarootdir@
+ docdir = @docdir@
+ dvidir = @dvidir@
+ exec_prefix = @exec_prefix@
+-extra_incl = @extra_incl@
+ host = @host@
+ host_alias = @host_alias@
+ host_cpu = @host_cpu@
