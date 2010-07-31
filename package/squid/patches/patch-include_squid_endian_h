@@ -1,0 +1,15 @@
+--- squid-3.1.4.orig/include/squid_endian.h	2010-05-30 15:21:11.000000000 +0200
++++ squid-3.1.4/include/squid_endian.h	2010-07-31 14:29:02.000000000 +0200
+@@ -65,9 +65,12 @@
+  *
+  * Some systems define htobe16()/be16toh() and friends in <sys/endian.h>.
+  */
++#include <sys/param.h>
++#if !defined(BSD)
+ #if HAVE_BYTESWAP_H
+ #  include <byteswap.h>
+ #endif /* HAVE_BYTESWAP_H */
++#endif
+ #ifdef HAVE_MACHINE_BYTE_SWAP_H
+ #  include <machine/byte_swap.h>
+ #endif	/* HAVE_MACHINE_BYTE_SWAP_H */
