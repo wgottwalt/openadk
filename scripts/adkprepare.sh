@@ -87,7 +87,7 @@ freebsd() {
 
 freebsd_full() {
 	echo "Preparing FreeBSD for full OpenADK package builds"
-	pkg_add -r intltool lynx bison zip xkbcomp glib20 libIDL
+	pkg_add -r intltool lynx bison zip xkbcomp glib20 libIDL autoconf262
 }
 
 case $os in 
