@@ -31,6 +31,5 @@ post-install:
 	${INSTALL_DIR} ${IDIR_TCL}/usr/lib ${IDIR_TCL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_TCL}/usr/bin
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_TCL}/usr/lib
-	chmod u+w ${IDIR_TCL}/usr/lib/libtcl8.5.so	# for strip
 
 include ${TOPDIR}/mk/pkg-bottom.mk
