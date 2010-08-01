@@ -1,5 +1,14 @@
 --- tcsh-6.17.00.orig/sh.h	2009-06-25 23:27:37.000000000 +0200
-+++ tcsh-6.17.00/sh.h	2010-02-15 18:45:11.000000000 +0100
++++ tcsh-6.17.00/sh.h	2010-07-31 19:48:01.000000000 +0200
+@@ -338,7 +338,7 @@ static inline void ignore(intptr_t a)
+ # include <sys/filio.h>
+ #endif /* (!FIOCLEX && SUNOS4) || (SYSVREL == 4 && !_SEQUENT_ && !SCO && !_SX ) */
+ 
+-#if !defined(_MINIX) && !defined(supermax) && !defined(WINNT_NATIVE) && !defined(IRIS4D)
++#if !defined(_MINIX) && !defined(supermax) && !defined(WINNT_NATIVE) && !defined(IRIS4D) && !defined(__FreeBSD__)
+ # include <sys/file.h>
+ #endif	/* !_MINIX && !supermax && !WINNT_NATIVE && !defined(IRIS4D) */
+ 
 @@ -375,9 +375,11 @@ static inline void ignore(intptr_t a)
  #include <pwd.h>
  #include <grp.h>

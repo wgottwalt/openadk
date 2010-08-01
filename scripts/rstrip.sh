@@ -54,6 +54,7 @@ find $TARGETS -type f -a -exec file {} \; | \
 	esac
 	echo "$SELF: $V:$S"
 	echo "-> $T $F"
+	eval "chmod u+w $F"
 	eval "$T $F"
 done
 exit 0

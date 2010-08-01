@@ -23,6 +23,5 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBREADLINE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libhistory.so* ${IDIR_LIBREADLINE}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/libreadline.so* ${IDIR_LIBREADLINE}/usr/lib/
-	chmod u+w ${IDIR_LIBREADLINE}/usr/lib/*
 
 include ${TOPDIR}/mk/pkg-bottom.mk
