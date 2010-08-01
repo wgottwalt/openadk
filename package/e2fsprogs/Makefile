@@ -31,8 +31,7 @@ $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESC
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs \
-			--disable-tls \
-			--enable-dynamic-e2fsck
+			--disable-tls
 INSTALL_TARGET+=	install-libs
 
 pre-build:
