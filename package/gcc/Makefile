@@ -23,8 +23,9 @@ PKG_DEPENDS+=		glibc-dev
 PKG_BUILDDEP+=		glibc
 endif
 
-PKG_HOST_DEPENDS:=	!freebsd
 PKG_TARGET_DEPENDS:=	!ag241
+
+WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include ${TOPDIR}/mk/package.mk
 
@@ -43,7 +44,6 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--disable-__cxa_atexit \
 			--without-headers \
 			--libexecdir=/usr/lib \
-			--with-gnu-ld \
 			--disable-libssp \
 			--disable-nls \
 			--disable-sjlj-exceptions \

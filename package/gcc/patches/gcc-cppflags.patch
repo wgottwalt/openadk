@@ -1,0 +1,12 @@
+diff -Nur gcc-4.4.4.orig/gcc/configure gcc-4.4.4/gcc/configure
+--- gcc-4.4.4.orig/gcc/configure	2009-10-19 14:15:27.000000000 +0200
++++ gcc-4.4.4/gcc/configure	2010-08-02 00:47:36.823620346 +0200
+@@ -13530,7 +13530,7 @@
+ 	esac
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+-	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
++	LDFLAGS="${LDFLAGS_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
+ 	${realsrcdir}/configure \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
