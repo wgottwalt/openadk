@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		4.4.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		22dae13782f493ec675d54b67d79a66d
+PKG_VERSION:=		4.4.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8a86019326ad8d9d703f55c8cd4625e1
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user

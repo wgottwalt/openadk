@@ -4,17 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		quagga
-PKG_VERSION:=		0.99.15
+PKG_VERSION:=		0.99.16
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		readline ncurses
-PKG_MD5SUM:=		8975414c76a295f4855a417af0b5ddce
+PKG_MD5SUM:=		350fb150be526cdfc4d2b093cb4d69a7
 PKG_DESCR:=		A routing software package
 PKG_SECTION:=		route
+PKG_BUILDDEP+=		readline ncurses
 PKG_MULTI:=		1
-PKG_URL:=		http://www.quagga.net
-PKG_SITES:=		http://www.quagga.net/download/ \
-			http://www.de.quagga.net/download/ \
-			http://www.uk.quagga.net/download/
+PKG_URL:=		http://www.quagga.net/
+PKG_SITES:=		http://www.quagga.net/download/
 
 PKG_DESCR_1:=		BGP daemon
 PKG_DESCR_2:=		OSPF daemon
