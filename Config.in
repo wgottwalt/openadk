@@ -115,6 +115,12 @@ config ADK_FORCE_PARALLEL
 	help
 	  Do not enable this! It's for testing purposes only.
 
+config ADK_TARGET_IP
+	prompt "Set target ip address for make check"
+	string
+	default "127.0.0.1"
+	help
+
 choice 
 prompt "Hostsystem (do not change!)"
 config ADK_HOST_LINUX

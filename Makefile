@@ -153,6 +153,9 @@ bulkall: .prereq_done
 bulkallmod: .prereq_done
 	@${GMAKE_INV} bulkallmod
 
+check: .prereq_done
+	@${GMAKE_INV} check
+
 menu: .prereq_done
 	@${GMAKE_INV} menu
 

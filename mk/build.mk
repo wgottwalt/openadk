@@ -443,6 +443,7 @@ distclean:
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
 
+
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all targets and combinations
@@ -504,3 +505,14 @@ dep:
 	mksh $(TOPDIR)/package/depmaker
 
 .PHONY: menu dep
+
+include $(TOPDIR)/toolchain/gcc/Makefile.inc
+
+check:
+	@-rm tests/adk.exp tests/master.exp
+	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" tests/adk.exp.in > \
+		tests/adk.exp
+	@sed -e "s#@TOPDIR@#$(TOPDIR)#" tests/master.exp.in > \
+		tests/master.exp
+	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc

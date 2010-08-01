@@ -12,6 +12,8 @@ config/zconf.hash.c
 config/zconf.output
 config/zconf.tab.c
 config/zconf.tab.h
+tests/master.exp
+tests/adk.exp
 prereq.mk
 toolchain_build_*/
 .ADK_HAVE_DOT_CONFIG
