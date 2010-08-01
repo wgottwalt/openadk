@@ -1,0 +1,5 @@
+load_generic_config "unix";
+set_board_info hostname @ADK_TARGET_IP@
+set_board_info username root
+set_board_info rsh_prog /usr/bin/ssh
+set_board_info rcp_prog /usr/bin/scp

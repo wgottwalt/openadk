@@ -1,0 +1,5 @@
+load_generic_config "unix";
+set_board_info hostname 192.168.1.24
+set_board_info username root
+set_board_info rsh_prog /usr/bin/ssh
+set_board_info rcp_prog /usr/bin/scp
