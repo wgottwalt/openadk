@@ -100,6 +100,7 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_lib_nsl_main=no \
 			ac_cv_func_strnstr=no \
 			squid_cv_pf_inet6=yes
+XAKE_FLAGS+=		MKDIR_P="mkdir -p"
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \
 			--sysconfdir=/etc/squid \
@@ -147,7 +148,8 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 		${IDIR_SQUID}/etc/squid/
 	${INSTALL_DATA} ./files/squid.conf ${IDIR_SQUID}/etc/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid/errors
-	${CP} ${WRKINST}/usr/share/squid/errors/en ${IDIR_SQUID}/usr/share/squid/errors
+	${CP} ${WRKINST}/usr/share/squid/errors/en \
+		${IDIR_SQUID}/usr/share/squid/errors
 	${CP} ${WRKINST}/usr/share/squid/icons ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
