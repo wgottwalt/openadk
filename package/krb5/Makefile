@@ -46,6 +46,10 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
 
+pre-build:
+	# fix nm call in script, we need the GNU version of nm
+	$(SED) "s#@@NM@@#${NM}#" ${WRKSRC}/util/export-check.pl
+
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
