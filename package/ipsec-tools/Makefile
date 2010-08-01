@@ -16,6 +16,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSEC_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -26,6 +29,12 @@ CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \
 			--with-openssl="${STAGING_DIR}/usr" \
 			--without-libradius \
 			--without-libpam
+
+ifneq (${ADK_PACKAGE_IPSEC_TOOLS_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/usr/sbin ${IDIR_IPSEC_TOOLS}/usr/lib

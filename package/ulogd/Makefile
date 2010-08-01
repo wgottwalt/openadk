@@ -4,7 +4,7 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
-PKG_VERSION:=		2.0.0beta3
+PKG_VERSION:=		2.0.0beta4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		be8137d3b7ae70ebbce7ca8852b9e901
 PKG_DESCR:=		Netfilter userspace logging daemon

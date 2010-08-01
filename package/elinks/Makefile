@@ -14,6 +14,9 @@ PKG_BUILDDEP+=		openssl
 PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
 
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ELINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -45,6 +48,12 @@ CONFIGURE_ARGS+=	--enable-small \
 			--without-x \
 			--without-zlib
 MAKE_FLAGS+=		CC='${TARGET_CC}'
+
+ifneq (${ADK_PACKAGE_ELINKS_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_ELINKS}/usr/bin

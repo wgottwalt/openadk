@@ -19,9 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BLUEZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
-XAKE_FLAGS+=		V=1 CCLD="$(TARGET_CC) -all-static -pthread"
-else
-XAKE_FLAGS+=            V=1
+XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
 endif
 CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \

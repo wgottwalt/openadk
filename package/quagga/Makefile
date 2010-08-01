@@ -14,6 +14,9 @@ PKG_MULTI:=		1
 PKG_URL:=		http://www.quagga.net/
 PKG_SITES:=		http://www.quagga.net/download/
 
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
+
 PKG_DESCR_1:=		BGP daemon
 PKG_DESCR_2:=		OSPF daemon
 PKG_DESCR_3:=		OSPF IPv6 daemon
@@ -41,6 +44,12 @@ CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--disable-pie \
 			--enable-multipath=8
 
+ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
+
 post-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}
 	${CP} ${WRKINST}/usr/lib/libzebra.so.* ${IDIR_QUAGGA}/usr/lib/
@@ -54,8 +63,10 @@ post-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPFD}/usr/{lib,sbin}
 	${CP} ${WRKINST}/usr/lib/libospf.so.* ${IDIR_QUAGGA_OSPFD}/usr/lib/
 	${CP} ${WRKINST}/usr/sbin/ospfd ${IDIR_QUAGGA_OSPFD}/usr/sbin/
+ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPF6D}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ospf6d ${IDIR_QUAGGA_OSPF6D}/usr/sbin/
+endif
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPNGD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ripngd ${IDIR_QUAGGA_RIPNGD}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPD}/usr/sbin

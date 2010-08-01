@@ -12,15 +12,17 @@ PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnetsnmp libelf
 PKG_BUILDDEP+=		libelf
 PKG_NOPARALLEL:=	1
-PKG_URL:=		http://www.net-snmp.org
+PKG_URL:=		http://www.net-snmp.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
 PKG_DESCR_UTILS:=	SNMP utilities
 PKG_DEPENDS_UTILS:=	libnetsnmp libelf
-
 PKG_DESCR_LIBS:=	SNMP library
 PKG_DEPENDS_LIBS:=	libelf
 PKG_SECTION_LIBS:=	libs
+
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
@@ -28,10 +30,15 @@ $(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTILS},${PKG_DESCR_UTILS},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LIBS},${PKG_DESCR_LIBS},${PKG_SECTION_LIBS}))
 
-SNMP_TRANSPORTS_INCLUDED=	UDP TCP Callback Unix
-SNMP_TRANSPORTS_EXCLUDED=	TCPIPv6 UDPIPv6 Alias
-TLDFLAGS+=		-pthread
+SNMP_TRANSPORTS_INCLUDED:=	UDP TCP Callback Unix
+SNMP_TRANSPORTS_EXCLUDED:=	Alias
+ifneq (${ADK_PACKAGE_NET_SNMP_WITH_IPV6},)
+SNMP_TRANSPORTS_INCLUDED+=	TCPIPv6 UDPIPv6
+else
+SNMP_TRANSPORTS_EXCLUDED:=	TCPIPv6 UDPIPv6
+endif
 
+TLDFLAGS+=		-pthread
 CONFIGURE_ARGS+=	--with-logfile=/var/log/snmpd.log \
 			--with-persistent-directory=/usr/lib/snmp/ \
 			--with-default-snmp-version=3 \
@@ -52,6 +59,12 @@ CONFIGURE_ARGS+=	--with-logfile=/var/log/snmpd.log \
 			--without-libwrap \
 			--without-rpm \
 			--without-zlib
+
+ifneq (${ADK_PACKAGE_NET_SNMP_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 

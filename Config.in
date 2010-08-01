@@ -180,18 +180,6 @@ config ADK_RUNTIME_TIMEZONE
 endmenu
 
 menu "Package selection"
-config ADK_ENABLE_IPV6
-	prompt "enable IPv6 globally"
-	boolean
-	default y
-	# FIXME: selecting stuff here is ugly, better fix package flavours to
-	#        support a symbol-value-based default (i.e., "default y if IPV6")
-	select ADK_PACKAGE_NFS_UTILS_WITH_TIRPC if ADK_PACKAGE_NFS_UTILS != n
-	help
-	  This enables IPv6 support in all related applications. Basically this
-	  just means passing --enable-ipv6 to the configure script, but the
-	  exception proves the rule. ;)
-
 source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu

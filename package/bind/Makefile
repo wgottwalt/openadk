@@ -22,6 +22,9 @@ PKG_DESCR_5:=		dnssec utilities
 PKG_DESCR_6:=		host utility
 PKG_DESCR_7:=		dig utility
 
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -39,6 +42,12 @@ CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--with-libxml2=${STAGING_DIR}/usr/ \
 			--enable-epoll \
 			--with-libtool
+
+ifneq (${ADK_PACKAGE_BIND_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/lib/dns \
