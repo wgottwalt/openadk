@@ -4,27 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.20.1
+PKG_VERSION:=		7.21.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d7df0507db48546661b155b612cac19c
+PKG_MD5SUM:=		6dfb911a254a1b5ca8b534b98f2196aa
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcurl
 PKG_BUILDDEP+=		openssl zlib
-PKG_URL:=		http://curl.haxx.se
-PKG_SITES:=		http://curl.haxx.se/download/ \
-			http://www.mirrorspace.org/curl/ \
-			http://curl.mirror.internet.tp/download/ \
-			ftp://ftp.sunet.se/pub/www/utilities/curl/ \
-			ftp://ftp.planetmirror.com/pub/curl/ \
-			http://www.mirrormonster.com/curl/download/ \
-			http://curl.mirrors.cyberservers.net/download/
+PKG_URL:=		http://curl.haxx.se/
+PKG_SITES:=		http://curl.haxx.se/download/
 
 PKG_DESCR_LIB:=		a client-side URL transfer library
 PKG_SECTION_LIB:=	libs
 PKG_DEPENDS_LIB:=	libopenssl zlib
 PKG_DESCR_LIB_DEV:=	development files for libcurl
 PKG_SECTION_LIB_DEV:=	devel
+
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
@@ -58,6 +55,12 @@ CONFIGURE_ARGS+=	--disable-thread \
 			--without-ca-bundle \
 			--without-gnutls \
 			--without-libidn
+
+ifneq (${ADK_PACKAGE_CURL_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib

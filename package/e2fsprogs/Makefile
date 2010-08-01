@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1b24a21fc0c2381ef420961cbfec733f
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
-PKG_URL:=		http://e2fsprogs.sourceforge.net
+PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
 PKG_DESCR_UUID:=	UUID library
@@ -30,7 +30,6 @@ $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_SS},${PKG_SECTION_SS}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
 
-XAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-tls \
 			--enable-dynamic-e2fsck

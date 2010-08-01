@@ -13,6 +13,9 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://apr.apache.org
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
 
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,APR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -25,8 +28,15 @@ CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes
 CONFIGURE_ENV+=		apr_cv_process_shared_works=no
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ENV+=		apr_cv_tcp_nodelay_with_cork=no
-CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom
-CONFIGURE_ARGS+=	--enable-threads
+
+CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom \
+			--enable-threads
+
+ifneq (${ADK_PACKAGE_LIBPCAP_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_APR}/usr/lib

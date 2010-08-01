@@ -37,7 +37,6 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBDEVMAPPER}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libdevmapper.so* \
 		${IDIR_LIBDEVMAPPER}/usr/lib
-	chmod u+w ${IDIR_LIBDEVMAPPER}/usr/lib/*.so*
 	# device-mapper
 	${INSTALL_DIR} ${IDIR_DEVICE_MAPPER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dmsetup \

@@ -42,11 +42,6 @@ endif
 ifeq ($(filter minimal,${CONFIG_STYLE}),)
 ifneq ($(ADK_DEBUG),)
 CONFIGURE_ARGS+=	--enable-debug
-else
-CONFIGURE_ARGS+=	--disable-debug
-endif
-ifeq ($(ADK_ENABLE_IPV6),y)
-CONFIGURE_ARGS+=	--enable-ipv6
 endif
 endif
 

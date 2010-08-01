@@ -4,24 +4,23 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		irssi
-PKG_VERSION:=		0.8.13
+PKG_VERSION:=		0.8.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0d6fc2203832b514eff014fffd574664
+PKG_MD5SUM:=		870db8e319f640c2bf446c30d0c24ef6
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		chat
 PKG_DEPENDS:=		glib libncurses
 PKG_BUILDDEP+=		glib ncurses
-ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
+ifeq (${ADK_PACKAGE_IRSSI_WITH_SSL},y)
 PKG_BUILDDEP+=		openssl
 endif
-PKG_URL:=		http://www.irssi.org
+PKG_URL:=		http://www.irssi.org/
 PKG_SITES:=		http://www.irssi.org/files/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
-PKG_FLAVOURS:=		SSL
+PKG_FLAVOURS:=		WITH_SSL WITH_IPV6
 PKGFD_SSL:=		SSL/TLS support
 PKGFS_SSL:=		libopenssl
+PKGFD_IPV6:=		IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
@@ -34,7 +33,13 @@ CONFIGURE_ARGS+=	--with-perl=no \
 			--without-bot \
 			--without-proxy
 
-ifeq (${ADK_PACKAGE_IRSSI_SSL},y)
+ifneq (${ADK_PACKAGE_IRSSI_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
+
+ifneq (${ADK_PACKAGE_IRSSI_WITH_SSL},)
 CONFIGURE_ARGS+=	--enable-ssl
 else
 CONFIGURE_ARGS+=	--disable-ssl

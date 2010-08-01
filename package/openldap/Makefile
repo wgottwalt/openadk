@@ -4,30 +4,33 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.22
+PKG_VERSION:=		2.4.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ef01b52255ce8e3fbf8aa34f6fe7598b
+PKG_MD5SUM:=		90150b8c0d0192e10b30157e68844ddf
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2
 PKG_BUILDDEP+=		cyrus-sasl openssl libdb
-PKG_URL:=		http://www.openldap.org
+PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 
-PKG_DESCR_1:=		OpenLDAP utilities
-PKG_DEPENDS_1:=		libopenldap
-PKG_SECTION_1:=		net/misc
-PKG_DESCR_2:=		OpenLDAP server daemon
-PKG_DEPENDS_2:=		libopenldap
-PKG_SECTION_2:=		net/misc
+PKG_DESCR_LDAP_UTILS:=	OpenLDAP utilities
+PKG_DEPENDS_LDAP_UTILS:=libopenldap
+PKG_SECTION_LDAP_UTILS:=net/misc
+PKG_DESCR_SLAPD:=	OpenLDAP server daemon
+PKG_DEPENDS_SLAPD:=	libopenldap
+PKG_SECTION_SLAPD:=	net/misc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
+
+PKG_FLAVOURS:=		WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION_1}))
-$(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_2},${PKG_DESCR_2},${PKG_SECTION_2}))
+$(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LDAP_UTILS},${PKG_DESCR_LDAP_UTILS},${PKG_SECTION_LDAP_UTILS}))
+$(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SLAPD},${PKG_DESCR_SLAPD},${PKG_SECTION_SLAPD}))
 
 PKG_CONFIGURE_OPTIONS+=	\
 			--enable-slapd \
@@ -45,6 +48,12 @@ PKG_CONFIGURE_OPTIONS+=	\
 			--with-threads \
 			--with-tls \
 			--with-yielding_select="yes" \
+
+ifneq (${ADK_PACKAGE_OPENLDAP_WITH_IPV6},)
+CONFIGURE_ARGS+=	--enable-ipv6
+else
+CONFIGURE_ARGS+=	--disable-ipv6
+endif
 
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS}

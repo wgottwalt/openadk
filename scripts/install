@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+cmd=$(echo "$@"|sed -e "s#\(-o\|-g\) [0-9]*##g")
+/usr/bin/install $cmd

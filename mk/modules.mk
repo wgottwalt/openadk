@@ -905,7 +905,9 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 
 ZLIB:=lib/zlib_deflate/zlib_deflate
 ifeq ($(ADK_LINUX_CRIS_FOXBOARD),)
+ifeq ($(ADK_LINUX_MIPS_AG241),)
 ZLIB+=lib/zlib_inflate/zlib_inflate
+endif
 endif
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\

@@ -129,8 +129,7 @@ post-install:
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PARENT}/pkg' ${WRKINST} '${STAGING_DIR}/scripts'
-	@mkdir -p ${WRKINST}/{sbin,bin,etc,lib}
-	@mkdir -p ${WRKINST}/usr/{sbin,bin,etc,lib}
+	@mkdir -p ${WRKINST}/{sbin,bin,etc,lib} ${WRKINST}/usr/{sbin,bin,lib}
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
 ifneq ($(filter manual,${INSTALL_STYLE}),)
