@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
 PKG_VERSION:=		1.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b68aebbfcac1174c4c95d260e9369766
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
@@ -19,6 +19,11 @@ endif
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBX11_DEV,libx11-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBX11_DEV}+=libx11-dev-install
 
 XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
 CONFIGURE_ARGS+=	--enable-xlocale \
@@ -27,9 +32,15 @@ CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-malloc0returnsnull \
 			--without-xcb
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/lib/libX11.so* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/share/X11/XKeysymDB ${IDIR_LIBX11}/usr/share/X11
+
+libx11-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBX11_DEV}/usr/include/X11
+	${CP} ${WRKINST}/usr/include/X11/*.h ${IDIR_LIBX11_DEV}/usr/include/X11
+	${CP} ${STAGING_DIR}/usr/include/xproto/X11/*.h \
+		${IDIR_LIBX11_DEV}/usr/include/X11
 
 include ${TOPDIR}/mk/pkg-bottom.mk
