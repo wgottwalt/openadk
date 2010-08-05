@@ -27,9 +27,7 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 			ac_cv_func_strlcpy=no \
 			ac_cv_func_strlcat=no \
 			ac_cv_lib_nsl_gethostbyname=no
-CONFIGURE_ARGS+=	--without-x \
-			--disable-dbus
-
+CONFIGURE_ARGS+=	--disable-dbus
 TCFLAGS+=		-fPIC
 
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
@@ -39,9 +37,6 @@ TLDFLAGS+=		-luClibc++ -lc -lm -pthread -nodefaultlibs
 else
 TLDFLAGS+=		-shared -pthread
 endif
-
-post-extract:
-	#@find ${WRKBUILD} -name *.rej -exec rm {} \;
 
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)
 # add workaround because libtool tries to link libstdc++
