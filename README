@@ -18,7 +18,6 @@ Before you can start you need to install some tools:
 - bzip2
 - wget
 - file
-- unzip
 - libc headers
 - ncurses5 headers
 - zlib headers

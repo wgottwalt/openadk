@@ -32,6 +32,10 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_PACKAGE_GPSD ]]; then
+	NEED_PYTHON="$NEED_PYTHON gpsd"
+fi
+
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_ZIP="$NEED_ZIP firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
@@ -263,7 +267,5 @@ if [[ -n $NEED_PYTHON ]]; then
 		fi
 	fi
 fi
-
-exit $out
 
 exit $out

@@ -201,7 +201,6 @@ config ADK_KPACKAGE_KMOD_NET_CLS_BASIC
 	prompt "kmod-cls-basic.................... Elementary classification (BASIC)"
 	tristate
 	select ADK_KERNEL_NET_CLS
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here if you want to be able to classify packets using
@@ -272,22 +271,10 @@ config ADK_KERNEL_NET_CLS_ACT
 	select ADK_KERNEL_NET_ESTIMATOR
 	default n
 
-config ADK_KPACKAGE_KMOD_NET_CLS_POLICE
-	prompt "kmod-act-police................... Traffic Policing"
-	tristate
-	select ADK_KERNEL_NET_CLS_ACT
-	depends on ADK_LINUX_2_4
-	default n
-	help
-	  Say Y here if you want to do traffic policing, i.e. strict
-	  bandwidth limiting. This action replaces the existing policing
-	  module.
-
 config ADK_KPACKAGE_KMOD_NET_ACT_POLICE
 	prompt "kmod-act-police................... Traffic Policing"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here if you want to do traffic policing, i.e. strict
@@ -298,7 +285,6 @@ config ADK_KPACKAGE_KMOD_NET_ACT_GACT
 	prompt "kmod-act-gact..................... Generic actions"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here to take generic actions such as dropping and
@@ -308,7 +294,6 @@ config ADK_KPACKAGE_KMOD_NET_ACT_MIRRED
 	prompt "kmod-act-mirred................... Redirecting and Mirroring"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here to allow packets to be mirrored or redirected to
@@ -319,7 +304,6 @@ config ADK_KPACKAGE_KMOD_NET_ACT_IPT
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	select ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here to be able to invoke iptables targets after successful
@@ -329,7 +313,6 @@ config ADK_KPACKAGE_KMOD_NET_ACT_PEDIT
 	prompt "kmod-act-pedit.................... Packet Editing"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
-	depends on ADK_LINUX_2_6
 	default n
 	help
 	  Say Y here if you want to mangle the content of packets.

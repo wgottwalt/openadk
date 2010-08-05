@@ -1,0 +1,11 @@
+--- krb5-1.8.1.orig/src/util/export-check.pl	Sun Aug  1 18:36:11 2010
++++ krb5-1.8.1/src/util/export-check.pl	Sun Aug  1 18:27:23 2010
+@@ -38,7 +38,7 @@ if ($#ARGV != 1) {
+ my($exfile, $libfile) = @ARGV;
+ 
+ @missing = ();
+-open NM, "nm -Dg --defined-only $libfile |" || die "can't run nm on $libfile: $!";
++open NM, "@@NM@@ -Dg --defined-only $libfile |" || die "can't run nm on $libfile: $!";
+ open EXPORT, "< $exfile" || die "can't read $exfile: $!";
+ 
+ @export = <EXPORT>;

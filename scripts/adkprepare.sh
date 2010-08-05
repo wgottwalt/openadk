@@ -47,6 +47,7 @@ openbsd_full() {
 	pkg_add -v m4
 	pkg_add -v autoconf-2.62p0
 	pkg_add -v gperf
+	pkg_add -v python-2.6.3p1
 }
 
 netbsd() {

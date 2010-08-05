@@ -101,9 +101,9 @@ CONFIGURE_ARGS+=	--with-ogg=${STAGING_DIR}/usr \
 TLDFLAGS+=		-logg
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_CURL},)
-CONFIGURE_ARGS+=	--with-curl=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-libcurl=${STAGING_DIR}/usr
 else
-CONFIGURE_ARGS+=	--without-curl
+CONFIGURE_ARGS+=	--without-libcurl
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_PGSQL},)
 CONFIGURE_ARGS+=	--with-postgres=${STAGING_DIR}/usr
