@@ -1,0 +1,73 @@
+diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.31.4/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-2.6.31.4.orig/arch/cris/include/arch-v10/arch/Kbuild	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/arch-v10/arch/Kbuild	2009-10-25 09:57:06.167232146 +0100
+@@ -1,4 +1,9 @@
++header-y += dma.h
++header-y += io_interface_mux.h
+ header-y += user.h
+ header-y += svinto.h
+ header-y += sv_addr_ag.h
+ header-y += sv_addr.agh
++header-y += elf.h
++header-y += page.h
++header-y += ptrace.h
+diff -Nur linux-2.6.31.4.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.31.4/arch/cris/include/arch-v32/arch/Kbuild
+--- linux-2.6.31.4.orig/arch/cris/include/arch-v32/arch/Kbuild	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/arch-v32/arch/Kbuild	2009-10-25 09:57:06.167232146 +0100
+@@ -1,2 +1,6 @@
+ header-y += user.h
+ header-y += cryptocop.h
++header-y += elf.h
++header-y += page.h
++header-y += ptrace.h
++
+diff -Nur linux-2.6.31.4.orig/arch/cris/include/asm/Kbuild linux-2.6.31.4/arch/cris/include/asm/Kbuild
+--- linux-2.6.31.4.orig/arch/cris/include/asm/Kbuild	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/arch/cris/include/asm/Kbuild	2009-10-25 09:57:06.167232146 +0100
+@@ -1,11 +1,14 @@
+ include include/asm-generic/Kbuild.asm
+ 
+-header-y += arch-v10/
+-header-y += arch-v32/
++header-y += ../arch-v10/arch/
++header-y += ../arch-v32/arch/
+ 
++header-y += elf.h
+ header-y += ethernet.h
+ header-y += rtc.h
+ header-y += sync_serial.h
++header-y += page.h
++header-y += user.h
+ 
+ unifdef-y += etraxgpio.h
+ unifdef-y += rs485.h
+diff -Nur linux-2.6.31.4.orig/include/asm-generic/Kbuild linux-2.6.31.4/include/asm-generic/Kbuild
+--- linux-2.6.31.4.orig/include/asm-generic/Kbuild	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/include/asm-generic/Kbuild	2009-10-25 10:00:20.743354404 +0100
+@@ -3,12 +3,15 @@
+ header-y += errno-base.h
+ header-y += errno.h
+ header-y += fcntl.h
++header-y += getorder.h
+ header-y += ioctl.h
+ header-y += ioctls.h
+ header-y += ipcbuf.h
++header-y += memory_model.h
+ header-y += mman-common.h
+ header-y += mman.h
+ header-y += msgbuf.h
++header-y += page.h
+ header-y += param.h
+ header-y += poll.h
+ header-y += posix_types.h
+diff -Nur linux-2.6.31.4.orig/include/linux/Kbuild linux-2.6.31.4/include/linux/Kbuild
+--- linux-2.6.31.4.orig/include/linux/Kbuild	2009-10-12 22:15:40.000000000 +0200
++++ linux-2.6.31.4/include/linux/Kbuild	2009-10-25 09:57:06.207234174 +0100
+@@ -160,6 +160,7 @@
+ header-y += udf_fs_i.h
+ header-y += ultrasound.h
+ header-y += un.h
++header-y += user.h
+ header-y += utime.h
+ header-y += veth.h
+ header-y += videotext.h

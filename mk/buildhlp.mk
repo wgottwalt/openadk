@@ -56,8 +56,10 @@ endif
 ifeq ($(strip ${__use_generic_patch_target}),42)
 post-patch:
 ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
+	[ ! -d ./patches/${PKG_VERSION} ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
+	    '{patch-!(*.orig),*.patch}'
 	[ ! -d ./patches ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
-	    '{patch-!(*.orig),*.patch}' $(MAKE_TRACE)
+	    '{patch-!(*.orig),*.patch}'
 	[ ! -d ./src ] || (cd src; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
 		$(MAKE_TRACE)
 	@${MAKE} post-patch $(MAKE_TRACE)
