@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ipset
-PKG_VERSION:=		3.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
+PKG_VERSION:=		4.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d104007fdf5ea64fef774c22b1c0a97b
 PKG_DESCR:=		ip sets administration utility
 PKG_SECTION:=		firewall
 PKG_URL:=		http://ipset.netfilter.org
