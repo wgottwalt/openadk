@@ -491,11 +491,11 @@ bulkallmod:
 	done <${TOPDIR}/target/bulk.lst
 
 ${TOPDIR}/bin/tools/pkgmaker:
+	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker
 	@echo "Generating menu structure ..."
-	@mkdir -p $(TOPDIR)/bin/tools
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
