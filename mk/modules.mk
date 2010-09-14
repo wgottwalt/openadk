@@ -361,12 +361,20 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CLASSIFY,netfiler-xt-target-clas
 	$(MODULES_DIR)/kernel/net/netfilter/xt_CLASSIFY \
 ,50))
 
+ifeq ($(KERNEL_VERSION),2.6.35)
+CONNMARK:=xt_connmark
+MARK:=xt_mark
+else
+CONNMARK:=xt_CONNMARK
+MARK:=xt_MARK
+endif
+
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CONNMARK,netfilter-xt-target-connmark,\
-	$(MODULES_DIR)/kernel/net/netfilter/xt_CONNMARK \
+	$(MODULES_DIR)/kernel/net/netfilter/$(CONNMARK) \
 ,50))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_MARK,netfilter-xt-target-mark,\
-	$(MODULES_DIR)/kernel/net/netfilter/xt_MARK \
+	$(MODULES_DIR)/kernel/net/netfilter/$(MARK) \
 ,50))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NFQUEUE,netfilter-xt-target-nfqueue,\
@@ -1217,8 +1225,14 @@ $(eval $(call KMOD_template,USB_HSO,usb-hso,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
 ,75))
 
+ifeq ($(KERNEL_VERSION),2.6.35)
+SNDUSB:=snd-usbmidi-lib
+else
+SNDUSB:=snd-usb-lib
+endif
+
 $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
-	$(MODULES_DIR)/kernel/sound/usb/snd-usb-lib \
+	$(MODULES_DIR)/kernel/sound/usb/$(SNDUSB) \
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-audio \
 ,75))
 

@@ -27,11 +27,12 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET)-kernel-compile
-	$(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} $(MAKE_TRACE)
+	$(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	$(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
+		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET)-create-packages
 ifneq ($(strip $(TARGETS)),)
