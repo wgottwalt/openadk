@@ -8,7 +8,7 @@ PKG_VERSION:=		0.1
 PKG_RELEASE:=		2
 PKG_DESCR:=		udp server for version information
 PKG_SECTION:=		base
-PKG_URL:=		http://www.openadk.org
+PKG_URL:=		http://www.openadk.org/
 
 NO_DISTFILES:=		1
 

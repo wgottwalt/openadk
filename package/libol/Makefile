@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cbadf4b7ea276dfa85acc38a1cc5ff17
 PKG_DESCR:=		Support library for syslog-ng
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.balabit.com
+PKG_URL:=		http://www.balabit.com/
 PKG_SITES:=		http://www.balabit.com/downloads/files/libol/0.3/
 
 include ${TOPDIR}/mk/package.mk

@@ -7,8 +7,8 @@ include ${TOPDIR}/toolchain/gcc/Makefile.inc
 PKG_DESCR:=		GNU compiler collection
 PKG_SECTION:=		lang
 PKG_OPTS:=		noremove
-PKG_DEPENDS:=		libgmp mpfr
-PKG_BUILDDEP+=		gmp mpfr
+PKG_DEPENDS:=		libmpc libgmp mpfr
+PKG_BUILDDEP:=		mpc gmp mpfr
 
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 PKG_DEPENDS+=		uclibc-dev

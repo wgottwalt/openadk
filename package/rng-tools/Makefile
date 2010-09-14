@@ -12,7 +12,7 @@ PKG_SECTION:=		crypto
 PKG_URL:=		http://gkernel.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
-CFLINE_RNG_TOOLS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_CFLINE_RNG_TOOLS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 
 include $(TOPDIR)/mk/package.mk
 

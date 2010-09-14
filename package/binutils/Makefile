@@ -8,17 +8,16 @@ PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libbfd
 
-# subpackage
-PKG_NAME_LIBBFD:=	libbfd
-PKG_DESCR_LIBBFD:=	bfd library
-PKG_SECTION_LIBBFD:=	libs
+PKG_SUBPKGS:=		BINUTILS LIBBFD
+PKGSD_LIBBFD:=		Binary File Descriptor library
+PKGSC_LIBBFD:=		libs
 
 PKG_HOST_DEPENDS:=      !cygwin
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBBFD,${PKG_NAME_LIBBFD},${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIBBFD},${PKG_SECTION_LIBBFD}))
+$(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBFD},${PKGSC_LIBBFD}))
 
 TCFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-werror \

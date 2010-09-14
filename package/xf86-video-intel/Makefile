@@ -10,7 +10,7 @@ PKG_MD5SUM:=		b1926dc68cc10209fc2200729fb6162b
 PKG_DESCR:=		X11 driver for Intel VGA chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm
-PKG_BUILDDEP+=		xorg-server libdrm
+PKG_BUILDDEP:=		xorg-server libdrm
 PKG_SITES:=		http://www.x.org/releases/X11R7.5/src/driver/
 
 PKG_TARGET_DEPENDS:=	ibmx40

@@ -8,16 +8,16 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
+PKG_URL:=		http://www.openadk.org/
 
 PKG_TARGET_DEPENDS:=	alix
+PKG_DFLT_ALIX_SWITCH:=	y
 
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ALIX_SWITCH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-PKGDFLT_ALIX_SWITCH=	y
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

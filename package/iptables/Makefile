@@ -22,6 +22,8 @@ PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
 			ftp://ftp.de.netfilter.org/pub/netfilter/iptables/ \
 			ftp://ftp.no.netfilter.org/pub/netfilter/iptables/
 
+PKG_SUBPKGS:=		IPTABLES IP6TABLES
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

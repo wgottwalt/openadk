@@ -10,7 +10,6 @@ PKG_MD5SUM:=		0b2f0bb23b7832138b7d841437b9e182
 PKG_DESCR:=		traffic analyzing tool
 PKG_SECTION:=		net
 PKG_SITES:=		http://www.sfr-fresh.com/linux/misc/
-
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz

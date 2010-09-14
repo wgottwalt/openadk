@@ -10,10 +10,11 @@ PKG_MD5SUM:=		19b24f7184a8dbf7b48c1bbb565ad9fb
 PKG_DESCR:=		Round Robin Database (RRD) management library and tools
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libart libfreetype libpng zlib
-PKG_BUILDDEP+=		libxml2 cgilib freetype libart libpng
+PKG_BUILDDEP:=		libxml2 cgilib freetype libart libpng
 PKG_URL:=		http://oss.oetiker.ch/
 PKG_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
 
+PKG_SUBPKGS:=		LIBRRD RRDCGI RRDTOOL
 PKG_SECTION_RRDCGI:=	misc
 PKG_SECTION_RRDTOOL:=	misc
 

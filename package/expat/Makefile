@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://expat.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
 
+PKG_SUBPKGS:=		LIBEXPAT
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif

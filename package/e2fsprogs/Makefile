@@ -13,25 +13,25 @@ PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
-PKG_DESCR_UUID:=	UUID library
-PKG_SECTION_UUID:=	libs
-PKG_DESCR_COM_ERR:=	Common error library
-PKG_SECTION_COM_ERR:=	libs
-PKG_DESCR_BLKID:=	Libblkid
-PKG_SECTION_BLKID:=	libs
-PKG_DESCR_SS:=		Subsystem command parsing library
-PKG_SECTION_SS:=	libs
+PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID
+PKGSD_LIBUUID:=		UUID library
+PKGSC_LIBUUID:=		libs
+PKGSD_LIBCOM_ERR:=	Common error library
+PKGSC_LIBCOM_ERR:=	libs
+PKGSD_LIBSS:=		Subsystem command parsing library
+PKGSC_LIBSS:=		libs
+PKGSD_LIBBLKID:=	Libblkid
+PKGSC_LIBBLKID:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_UUID},${PKG_SECTION_UUID}))
-$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_COM_ERR},${PKG_SECTION_COM_ERR}))
-$(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_SS},${PKG_SECTION_SS}))
-$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_BLKID},${PKG_SECTION_BLKID}))
+$(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
+$(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
+$(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
+$(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 
-CONFIGURE_ARGS+=	--enable-elf-shlibs \
-			--disable-tls
+CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-tls
 INSTALL_TARGET+=	install-libs
 
 pre-build:

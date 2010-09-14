@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://flac.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=flac/}
 
+PKG_SUBPKGS:=		LIBFLAC
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFLAC,libflac,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

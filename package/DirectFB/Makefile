@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		223e036da906ceb4bd44708026839ff1
 PKG_DESCR:=		Thin library on top of the Linux framebuffer devices
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libpng libX11 libXext
 PKG_DEPENDS:=		libpng
+PKG_BUILDDEP:=		libpng libX11 libXext
 PKG_URL:=		http://www.directfb.org/
 PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.4/
 

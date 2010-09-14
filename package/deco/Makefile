@@ -10,7 +10,7 @@ PKG_MD5SUM:=		f77f60e8be0cae1f814cba1ef61bf4d0
 PKG_DESCR:=		Text-based, full featured file manager
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
+PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=deco/}
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tgz

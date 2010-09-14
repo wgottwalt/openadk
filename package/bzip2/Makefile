@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3c15a0c8d1d3ee1c46a1634d00617b1a
 PKG_DESCR:=		bzip2 compression utility
 PKG_SECTION:=		archive
-PKG_URL:=		http://www.bzip.org
+PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/1.0.5/
 
 include ${TOPDIR}/mk/package.mk

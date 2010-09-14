@@ -6,24 +6,25 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		kismet
 PKG_VERSION:=		2010-01-R1
 PKG_RELEASE:=		1
+PKG_MD5SUM:=		a6d6edcf65d5bb2cb5de6472bcc16f19
 PKG_DESCR:=		Kismet
 PKG_SECTION:=		wifi
-PKG_BUILDDEP+=		libpcap ncurses
 PKG_DEPENDS:=		libpcap libncurses
-PKG_MD5SUM:=		a6d6edcf65d5bb2cb5de6472bcc16f19
+PKG_BUILDDEP:=		libpcap ncurses
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
 
-PKG_DESCR_CLIENT:=	Kismet client
-PKG_DESCR_SERVER:=	Kismet server
-PKG_DESCR_DRONE:=	Kismet drone
+PKG_SUBPKGS:=		KISMET KISMET_CLIENT KISMET_DRONE KISMET_SERVER
+PKGSD_KISMET_CLIENT:=	Kismet client
+PKGSD_KISMET_SERVER:=	Kismet server
+PKGSD_KISMET_DRONE:=	Kismet drone
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENT},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_DRONE},${PKG_SECTION}))
-$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_DRONE},${PKG_SECTION}))
+$(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_SERVER},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--sysconfdir=/etc/kismet \
 			--disable-linuxwext

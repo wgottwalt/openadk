@@ -10,7 +10,7 @@ PKG_MD5SUM:=		acdb188a1e7504e95636d0770ade393c
 PKG_DESCR:=		API to packets that have been logged
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink
-PKG_BUILDDEP+=		libnfnetlink
+PKG_BUILDDEP:=		libnfnetlink
 PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_log/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_log/files/
 

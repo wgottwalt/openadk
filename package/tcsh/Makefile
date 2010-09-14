@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c47de903e3d52f6824c8dd0c91eeb477
 PKG_DESCR:=		alternative csh
 PKG_SECTION:=		shells
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
+PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.tcsh.org/Welcome
 PKG_SITES:=		ftp://ftp.astron.com/pub/tcsh/
 

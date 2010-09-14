@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		iptables-snmp
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		net-snmp
 PKG_MD5SUM:=		8370d2f0c899461a053da491400119d1
 PKG_DESCR:=		iptables support for net-snmp
 PKG_SECTION:=		net/misc
+PKG_BUILDDEP:=		net-snmp
 PKG_URL:=		http://www.nobiscuit.com/iptables-snmp/
 PKG_SITES:=		http://www.nobiscuit.com/iptables-snmp/
 

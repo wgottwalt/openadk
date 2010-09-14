@@ -15,28 +15,22 @@ PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
 PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-md5
 PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
 PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
-ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
-PKG_BUILDDEP+=		openssl
-endif
-ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GNUTLS},y)
-PKG_BUILDDEP+=		gnutls
-endif
-ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_GMP},y)
-PKG_BUILDDEP+=		gmp
-endif
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
 
 PKG_CHOICES:=		WITH_GMP WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITH_GMP:=	use GMP for crypto
 PKGCS_WITH_GMP:=	libgmp
+PKGCB_WITH_GMP:=	gmp
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
+PKGCB_WITH_GNUTLS:=	gnutls
 
 ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
-CFLINE_STRONGSWAN:=	select ADK_PACKAGE_OPENSSL_WITH_EC
+PKG_CFLINE_STRONGSWAN:=	select ADK_PACKAGE_OPENSSL_WITH_EC
 endif
 
 include $(TOPDIR)/mk/package.mk

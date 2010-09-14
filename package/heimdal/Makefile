@@ -5,44 +5,38 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
-PKG_BUILDDEP+=		openssl ncurses e2fsprogs
-ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_BDB},y)
-PKG_BUILDDEP+=		libdb
-endif
-ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
-PKG_BUILDDEP+=		openldap
-endif
-PKG_URL:=		http://www.h5l.org
+PKG_BUILDDEP:=		openssl ncurses e2fsprogs
+PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
+PKG_NOPARALLEL:=	1
 
-PKG_DESCR_1:=		Kerberos 5 server libraries
-PKG_SECTION_1:=		libs
-
-PKG_DESCR_2:=		Kerberos 5 client libraries
-PKG_SECTION_2:=		libs
+PKG_SUBPKGS:=		HEIMDAL LIBHEIMDAL LIBHEIMDAL_CLIENT
+PKGSD_LIBHEIMDAL:=	Kerberos 5 server libraries
+PKGSC_LIBHEIMDAL:=	libs
+PKGSD_LIBHEIMDAL_CLIENT:=	Kerberos 5 client libraries
+PKGSC_LIBHEIMDAL_CLIENT:=	libs
 
 PKG_FLAVOURS:=		PKINIT
 PKGFD_PKINIT:=		Enable PK-INIT
 
+PKG_CHOICES:=		WITH_LDAP WITH_BDB
+PKGCD_WITH_LDAP:=	use OpenLDAP as database backend
+PKGCS_WITH_LDAP:=	libopenldap
+PKGCB_WITH_LDAP:=	openldap
+PKGCD_WITH_BDB:=	use Berkeley DB as database backend
+PKGCS_WITH_BDB:=	libdb
+PKGCB_WITH_BDB:=	libdb
+
 include $(TOPDIR)/mk/package.mk
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_BDB),y)
-PKG_DEPENDS+=		libdb
-endif
-
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_LDAP),y)
-PKG_DEPENDS+=		libopenldap
-endif
-
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
-$(eval $(call PKG_template,LIBHEIMDAL_CLIENT,libheimdal-client,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_2},${PKG_SECTION_2}))
+$(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL}))
+$(eval $(call PKG_template,LIBHEIMDAL_CLIENT,libheimdal-client,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL_CLIENT},${PKGSC_LIBHEIMDAL_CLIENT}))
 
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
@@ -52,13 +46,13 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--with-ipv6 \
 			--sysconfdir=/etc/heimdal
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_BDB),y)
+ifeq ($(ADK_COMPILE_HEIMDAL_WITH_BDB),y)
 CONFIGURE_ARGS+=	--enable-berkeley-db
 else
 CONFIGURE_ARGS+=        --disable-berkeley-db
 endif
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_DB_LDAP),y)
+ifeq ($(ADK_COMPILE_HEIMDAL_WITH_LDAP),y)
 CONFIGURE_ARGS+=	--with-openldap=yes
 CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_DIR}/usr
 CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_DIR}/usr

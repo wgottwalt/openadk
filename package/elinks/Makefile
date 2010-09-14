@@ -10,7 +10,7 @@ PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		browser
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP+=		openssl
+PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
 

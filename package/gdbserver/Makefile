@@ -7,12 +7,13 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
+PKG_SUBPKGS:=		GDBSERVER
 
-PKG_TARGET_DEPENDS:=    !foxboard
-
-include ${TOPDIR}/mk/package.mk
+PKG_TARGET_DEPENDS:=	!foxboard
 
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
+
+include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDBSERVER,gdbserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

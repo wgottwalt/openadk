@@ -6,7 +6,9 @@ include ${TOPDIR}/toolchain/gmp/Makefile.inc
 
 PKG_DESCR:=		GNU multiprecision arithmetic library
 PKG_SECTION:=		libs
-PKG_URL:=		http://gmplib.org
+PKG_URL:=		http://gmplib.org/
+
+PKG_SUBPKGS:=		LIBGMP
 
 include ${TOPDIR}/mk/package.mk
 

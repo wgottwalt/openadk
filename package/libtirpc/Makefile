@@ -10,8 +10,8 @@ PKG_MD5SUM:=		d77eb15f464bf9d6e66259eaf78b2a4e
 PKG_DESCR:=		a transport independent RPC library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgssglue
-PKG_BUILDDEP+=		libgssglue
-PKG_URL:=		http://sourceforge.net/projects/libtirpc
+PKG_BUILDDEP:=		libgssglue
+PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2

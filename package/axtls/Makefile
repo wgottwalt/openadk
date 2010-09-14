@@ -10,11 +10,12 @@ PKG_MD5SUM:=		03471b5a5874e2ce86025f24b3fa0958
 PKG_DESCR:=		small embedded webserver
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libaxtls
-PKG_URL:=		http://axtls.sourceforge.net
+PKG_URL:=		http://axtls.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
 
-PKG_DESCR_LIB:=		small tls library
-PKG_SECTION_LIB:=		libs
+PKG_SUBPKGS:=		AXHTTPD LIBAXTLS
+PKGSD_LIBAXTLS:=	small tls library
+PKGSC_LIBAXTLS:=	libs
 
 DISTFILES:=		axTLS-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/axTLS
@@ -22,7 +23,7 @@ WRKDIST=		${WRKDIR}/axTLS
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AXHTTPD,axhttpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
+$(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAXTLS},${PKGSC_LIBAXTLS}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		ba1015b59c112d44d7797b62fe7bee51
 PKG_DESCR:=		HTTP and WebDAV library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread libxml2 libopenssl zlib
-PKG_BUILDDEP+=		libpthread libxml2 openssl zlib
+PKG_BUILDDEP:=		libpthread libxml2 openssl zlib
 PKG_URL:=		http://webdav.org/neon/
 PKG_SITES:=		http://webdav.org/neon/
 

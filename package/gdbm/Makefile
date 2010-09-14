@@ -9,8 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1d1b1d5c0245b1c00aff92da751e9aa1
 PKG_DESCR:=		disk file format database
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnu.org/software/gdbm
+PKG_URL:=		http://www.gnu.org/software/gdbm/
 PKG_SITES:=		${MASTER_SITE_GNU:=gdbm/}
+
+PKG_SUBPKGS:=		LIBGDBM
 
 include ${TOPDIR}/mk/package.mk
 

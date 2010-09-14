@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		crypto
-PKG_BUILDDEP+=		libtool
-PKG_URL:=		http://www.opensc-project.org/opensc
+PKG_BUILDDEP:=		libtool
+PKG_URL:=		http://www.opensc-project.org/opensc/
 PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 
 include ${TOPDIR}/mk/package.mk

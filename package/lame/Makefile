@@ -10,16 +10,17 @@ PKG_MD5SUM:=		719dae0ee675d0c16e0e89952930ed35
 PKG_DESCR:=		LAME MP3 encoder
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libncurses
-PKG_URL:=		http://lame.sourceforge.net
+PKG_URL:=		http://lame.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=lame/}
 
-PKG_DESCR_1:=		LAME MP3 encoding library
-PKG_SECTION_1:=		libs
+PKG_SUBPKGS:=		LAME LIBLAME
+PKGSD_LIBLAME:=		LAME MP3 encoding library
+PKGSC_LIBLAME:=		libs
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LAME,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_1},${PKG_SECTION_1}))
+$(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBLAME},${PKGSC_LIBLAME}))
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin

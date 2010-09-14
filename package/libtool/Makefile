@@ -9,13 +9,16 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b745d220e88163fcd9eea0a90ccf21b0
 PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
-PKG_URL:=		http://www.gnu.org/software/libtool
+PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
+
+PKG_SUBPKGS:=		LIBTOOL LIBLTDL
+PKGSC_LIBLTDL:=		libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL}))
 
 ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62

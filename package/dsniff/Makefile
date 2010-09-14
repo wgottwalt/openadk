@@ -10,8 +10,8 @@ PKG_MD5SUM:=		2f761fa3475682a7512b0b43568ee7d6
 PKG_DESCR:=		tools for network auditing and penetration testing
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libnet libpcap libnids libopenssl libgdbm
-PKG_BUILDDEP+=		libnids openssl gdbm libpcap libnet
-PKG_URL:=		http://www.monkey.org/~dugsong/dsniff
+PKG_BUILDDEP:=		libnids openssl gdbm libpcap libnet
+PKG_URL:=		http://www.monkey.org/~dugsong/dsniff/
 PKG_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4

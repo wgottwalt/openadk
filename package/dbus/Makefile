@@ -10,8 +10,8 @@ PKG_MD5SUM:=		565346cecd9cfecf1463540c6086cc2c
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat
-PKG_BUILDDEP+=		expat
-PKG_URL:=		http://dbus.freedesktop.org
+PKG_BUILDDEP:=		expat
+PKG_URL:=		http://dbus.freedesktop.org/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 
 ifeq ($(ADK_STATIC),y)

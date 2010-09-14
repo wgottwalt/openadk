@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		ee5837214d297661c8b8189055a351fc
 PKG_DESCR:=		Utilities for PCMCIA subsystem
 PKG_SECTION:=		utils
-PKG_BUILDDEP+=		sysfsutils
+PKG_BUILDDEP:=		sysfsutils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/pcmcia.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/
 

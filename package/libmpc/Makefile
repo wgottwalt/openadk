@@ -6,8 +6,10 @@ include ${TOPDIR}/toolchain/mpc/Makefile.inc
 
 PKG_DESCR:=		GNU multiprecision arithmetic library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		gmp mpfr
 PKG_URL:=		http://www.multiprecision.org/
-PKG_BUILDDEP+=		gmp mpfr
+
+PKG_SUBPKGS:=		LIBMPC
 
 include ${TOPDIR}/mk/package.mk
 

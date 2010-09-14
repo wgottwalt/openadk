@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		774eabaf33440d534efe108ef9130a7d
 PKG_URL:=		http://xcb.freedesktop.org/
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
+PKG_SUBPKGS:=
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

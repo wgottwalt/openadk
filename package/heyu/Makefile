@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9c7624b61ea39bbfa70336dc703cd5f1
 PKG_DESCR:=		X10 home automation control using the CM11A
 PKG_SECTION:=		serial
 PKG_DEPENDS:=		setserial
-PKG_URL:=		http://heyu.tanj.com
+PKG_URL:=		http://heyu.tanj.com/
 PKG_SITES:=		http://heyu.tanj.com/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz

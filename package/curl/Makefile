@@ -10,15 +10,16 @@ PKG_MD5SUM:=		6dfb911a254a1b5ca8b534b98f2196aa
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcurl
-PKG_BUILDDEP+=		openssl zlib
+PKG_BUILDDEP:=		openssl zlib
 PKG_URL:=		http://curl.haxx.se/
 PKG_SITES:=		http://curl.haxx.se/download/
 
-PKG_DESCR_LIB:=		a client-side URL transfer library
-PKG_SECTION_LIB:=	libs
-PKG_DEPENDS_LIB:=	libopenssl zlib
-PKG_DESCR_LIB_DEV:=	development files for libcurl
-PKG_SECTION_LIB_DEV:=	devel
+PKG_SUBPKGS:=		CURL LIBCURL LIBCURL_DEV
+PKGSD_LIBCURL:=		a client-side URL transfer library
+PKGSC_LIBCURL:=		libs
+PKGSS_LIBCURL:=		libopenssl zlib
+PKGSD_LIBCURL_DEV:=	development files for libcurl
+PKGSC_LIBCURL_DEV:=	devel
 
 PKG_FLAVOURS:=		WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
@@ -26,8 +27,8 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LIB},${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
-$(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL}))
+$(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCURL_DEV},${PKGSC_LIBCURL_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

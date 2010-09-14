@@ -10,8 +10,10 @@ PKG_MD5SUM:=		4879f06570d2225667534c37fea04213
 PKG_DESCR:=		Filesystem in Userspace (utilities)
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		kmod-fuse-fs
-PKG_URL:=		http://fuse.sourceforge.net
+PKG_URL:=		http://fuse.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
+
+PKG_SUBPKGS:=		FUSE_UTILS
 
 include ${TOPDIR}/mk/package.mk
 

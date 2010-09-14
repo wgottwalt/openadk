@@ -10,10 +10,11 @@ PKG_MD5SUM:=		d04c54d1cfbd8c6c8650c8d078f885b2
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		db
 PKG_DEPENDS:=		libncurses zlib
-PKG_BUILDDEP+=		ncurses zlib readline
+PKG_BUILDDEP:=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com/
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
 
+PKG_SUBPKGS:=		LIBMYSQLCLIENT
 PKG_HOST_DEPENDS:=	!cygwin
 
 include ${TOPDIR}/mk/package.mk

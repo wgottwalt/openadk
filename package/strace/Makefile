@@ -11,9 +11,9 @@ PKG_DESCR:=		System call trace program
 PKG_SECTION:=		debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
 PKG_TARGET_DEPENDS:=	!foxboard
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 

@@ -6,11 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		madplay
 PKG_VERSION:=		0.15.2b
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libid3tag libmad
 PKG_MD5SUM:=		6814b47ceaa99880c754c5195aa1aac1
 PKG_DESCR:=		MPEG audio player in fixed point
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libid3tag libmad
+PKG_BUILDDEP:=		libid3tag libmad
 PKG_URL:=		http://www.underbit.com/products/mad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}  \
 			ftp://ftp.mars.org/pub/mpeg/

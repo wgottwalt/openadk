@@ -10,20 +10,22 @@ PKG_MD5SUM:=		d6142a9a5821d6a6262a6edb903faa24
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libfaad2
-PKG_BUILDDEP+=		faad2 sdl
+PKG_BUILDDEP:=		faad2
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SUBPKGS:=		FFMPEG FFPLAY
+PKGSD_FFPLAY:=		ffmpeg based video player
+PKGSC_FFPLAY:=		multimedia
+PKGSS_FFPLAY:=		libsdl libpthread ffmpeg
+PKGSB_FFPLAY:=		sdl
 
-PKG_SECTION_FFPLAY:=	multimedia
-PKG_DESCR_FFPLAY:=	ffmpeg based video player
-PKG_DEPENDS_FFPLAY:=	libsdl libpthread ffmpeg
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FFMPEG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_FFPLAY},${PKG_DESCR_FFPLAY},${PKG_SECTION_FFPLAY}))
+$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

@@ -10,12 +10,11 @@ PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://www.freeradius.org
-PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/ \
-			http://freeradius.portal-to-web.de/ \
-			ftp://ftp.uk.freeradius.org/pub/radius/
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://www.freeradius.org/
+PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 
+PKG_SUBPKGS:=		FREERADIUS_CLIENT LIBFREERADIUS_CLIENT
 PKG_SECTION_LIB:=	libs
 
 include ${TOPDIR}/mk/package.mk

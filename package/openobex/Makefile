@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0d83dc86445a46a1b9750107ba7ab65c
 PKG_DESCR:=		implementation of the Object Exchange (OBEX) protocol
 PKG_SECTION:=		bluetooth
-PKG_BUILDDEP+=		bluez
+PKG_BUILDDEP:=		bluez
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 

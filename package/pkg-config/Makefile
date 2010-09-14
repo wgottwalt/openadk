@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a3270bab3f4b69b7dc6dbdacbcae9745
 PKG_DESCR:=		a helper tool used when compiling applications and libraries.
 PKG_SECTION:=		lang
-PKG_BUILDDEP+=		glib popt
 PKG_DEPENDS:=		glib libpopt
+PKG_BUILDDEP:=		glib popt
 PKG_URL:=		http://pkg-config.freedesktop.org/wiki/
 PKG_SITES:=		http://pkgconfig.freedesktop.org/releases/
 

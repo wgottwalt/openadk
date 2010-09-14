@@ -10,8 +10,8 @@ PKG_MD5SUM:=		109979bd39d48bd761e7939b30006a48
 PKG_DESCR:=		X.Org twm application
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		xorg-server
-PKG_BUILDDEP+=		xorg-server
-PKG_URL:=		http://xorg.freedesktop.org
+PKG_BUILDDEP:=		xorg-server
+PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 
 PKG_TARGET_DEPENDS:=	!foxboard

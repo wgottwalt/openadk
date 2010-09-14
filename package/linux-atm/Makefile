@@ -8,23 +8,24 @@ PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		ATM library and tools for Linux
-PKG_SECTION:=		route
-PKG_URL:=		http://linux-atm.sourceforge.net
+PKG_SECTION:=		libs
+PKG_URL:=		http://linux-atm.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
+PKG_SUBPKGS:=		LIBATM BR2684CTL
+PKGSD_BR2684CTL:=	br2684ctl ATM utility
+PKGSS_BR2684CTL:=	libatm
+PKGSC_BR2684CTL:=	route
 
-PKG_DESCR_1:=		br2684ctl
-PKG_DEPENDS_1:=		libatm
-PKG_SECTION_1:=		net
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBATM,libatm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_1},${PKG_DESCR_1},${PKG_SECTION}))
+$(eval $(call PKG_template,BR2684CTL,br2684ctl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BR2684CTL},${PKGSD_BR2684CTL},${PKGSC_BR2684CTL}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBATM}/usr/lib

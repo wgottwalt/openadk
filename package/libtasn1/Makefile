@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		14cc361500d2e768a8a6ec538ce3fecb
 PKG_DESCR:=		an ASN.1 and DER structures manipulation library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnupg.org
+PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/
 
 include ${TOPDIR}/mk/package.mk

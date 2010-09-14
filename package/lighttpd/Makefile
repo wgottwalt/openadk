@@ -9,15 +9,17 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
 PKG_DESCR:=		a lightweight web server
 PKG_SECTION:=		www
-PKG_DEPENDS:=		libxml2 libsqlite libpcre
-PKG_BUILDDEP+=		pcre libxml2 sqlite
-ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
-PKG_DEPENDS+= 		libopenssl
-PKG_BUILDDEP+=		openssl
-endif
-PKG_URL:=		http://www.lighttpd.net
+PKG_DEPENDS:=		libxml2 libsqlite libpcre libopenssl
+PKG_BUILDDEP:=		pcre libxml2 sqlite openssl
+PKG_URL:=		http://www.lighttpd.net/
 PKG_SITES:=		http://download.lighttpd.net/lighttpd/releases-1.4.x/
 PKG_MULTI:=		1
+
+PKG_SUBPKGS:=		LIGHTTPD LIGHTTPD_MOD_ACCESSLOG LIGHTTPD_MOD_ALIAS LIGHTTPD_MOD_AUTH
+PKG_SUBPKGS+=		LIGHTTPD_MOD_CGI LIGHTTPD_MOD_EVASIVE LIGHTTPD_MOD_EXPIRE LIGHTTPD_MOD_FASTCGI
+PKG_SUBPKGS+=		LIGHTTPD_MOD_PROXY LIGHTTPD_MOD_REDIRECT LIGHTTPD_MOD_REWRITE LIGHTTPD_MOD_SETENV
+PKG_SUBPKGS+=		LIGHTTPD_MOD_SIMPLE_VHOST LIGHTTPD_MOD_SSI LIGHTTPD_MOD_STATUS LIGHTTPD_MOD_USERTRACK
+PKG_SUBPKGS+=		LIGHTTPD_MOD_WEBDAV
 
 include $(TOPDIR)/mk/package.mk
 
@@ -81,12 +83,8 @@ CONFIGURE_ARGS+=	\
 			--without-mysql \
 			--with-pcre \
 			--without-valgrind \
-			--with-webdav-props
-ifeq (${ADK_COMPILE_LIGHTTPD_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-openssl='${STAGING_DIR}/usr'
-else
-CONFIGURE_ARGS+=	--without-openssl
-endif
+			--with-webdav-props \
+			--with-openssl='${STAGING_DIR}/usr'
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	install -m0755 -d $(IDIR_LIGHTTPD)/etc

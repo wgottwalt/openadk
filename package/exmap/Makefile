@@ -10,23 +10,24 @@ PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
 PKG_DESCR:=		memory analysing client tool
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		exmap-kmod libreadline glib
-PKG_BUILDDEP+=		glib readline
+PKG_BUILDDEP:=		glib readline
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
+
+PKG_SUBPKGS:=		EXMAP EXMAPD EXMAPSERVER EXMAP_KMOD
+PKGSD_EXMAPD:=		memory analysing daemon
+PKGSD_EXMAPSERVER:=	memory analysing server
+PKGSD_EXMAP_KMOD:=	memory analysing kernel module
+PKGSC_EXMAP_KMOD:=	kernel
 
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
-PKG_DESCR_EXMAPD:=	memory analysing daemon
-PKG_DESCR_EXMAPSERVER:=	memory analysing server
-PKG_DESCR_EXMAP_KMOD:=	memory analysing kernel module
-PKG_SECTION_EXMAP_KMOD:=kernel
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_EXMAPD},${PKG_SECTION}))
-$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_EXMAPSERVER},${PKG_SECTION}))
-$(eval $(call PKG_template,EXMAP_KMOD,exmap-kmod,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR_EXMAP_KMOD},${PKG_SECTION_EXMAP_KMOD}))
+$(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_EXMAPD},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_EXMAPSERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,EXMAP_KMOD,exmap-kmod,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKGSD_EXMAP_KMOD},${PKGSC_EXMAP_KMOD}))
 
 CONFIGURE_ARGS+=	--disable-doc
 CONFIGURE_ENV+=		LIBS="-lncurses"

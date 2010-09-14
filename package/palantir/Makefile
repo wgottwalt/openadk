@@ -10,8 +10,8 @@ PKG_MD5SUM:=		3a5b1fb340857f6d8e357bf39b77583e
 PKG_DESCR:=		A multichannel interactive streaming solution
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libjpeg libpthread
-PKG_BUILDDEP+=		jpeg
-PKG_URL:=		http://www.fastpath.it/products/palantir
+PKG_BUILDDEP:=		jpeg
+PKG_URL:=		http://www.fastpath.it/products/palantir/
 PKG_SITES:=		http://www.fastpath.it/products/palantir/pub/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz

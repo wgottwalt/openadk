@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		531fbc1b40b80dd1d6f3b5e76b99067c
 PKG_DESCR:=		libraries for Interface Definition Language files
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnome.org
+PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/
 
 include $(TOPDIR)/mk/package.mk

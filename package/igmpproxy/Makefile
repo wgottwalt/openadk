@@ -12,7 +12,8 @@ PKG_SECTION:=		proxy
 PKG_URL:=		http://sourceforge.net/projects/igmpproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=igmpproxy/}
 
-CFLINE_IGMPPROXY=	select ADK_KERNEL_IP_MULTICAST\n\tselect ADK_KERNEL_IP_MROUTE
+PKG_CFLINE_IGMPPROXY:=	select ADK_KERNEL_IP_MULTICAST@
+PKG_CFLINE_IGMPPROXY+=	select ADK_KERNEL_IP_MROUTE
 
 include ${TOPDIR}/mk/package.mk
 

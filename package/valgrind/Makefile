@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f03522a4687cf76c676c9494fcc0a517
 PKG_DESCR:=		memory management debugging
 PKG_SECTION:=		debug
-PKG_URL:=		http://valgrind.org
+PKG_URL:=		http://valgrind.org/
 PKG_SITES:=		http://valgrind.org/downloads/
 
 PKG_TARGET_DEPENDS:=	x86 x86_64

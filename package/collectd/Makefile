@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c473cf8e9f22f5a9f7ef4c5be1b0c436
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
-PKG_URL:=		http://collectd.org
+PKG_URL:=		http://collectd.org/
 PKG_SITES:=		http://collectd.org/files/
 
 PKG_FLAVOURS:=		CPU LOAD MEMORY PING

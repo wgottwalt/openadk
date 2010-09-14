@@ -10,9 +10,11 @@ PKG_MD5SUM:=		813d62d7afe7b2c2d8f3df0a6c9d9331
 PKG_DESCR:=		Open Crypto Development Kit library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgcrypt libgpg-error zlib
-PKG_BUILDDEP+=		libgcrypt libgpg-error zlib
+PKG_BUILDDEP:=		libgcrypt libgpg-error zlib
 PKG_URL:=		http://www.gnu.org/software/gnutls/download.html
 PKG_SITES:=		ftp://ftp.gnutls.org/pub/gnutls/opencdk/
+
+PKG_SUBPKGS:=		LIBOPENCDK
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

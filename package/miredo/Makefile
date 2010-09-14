@@ -9,11 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf49c1ddc068746760787d0cf76e40de
 PKG_DESCR:=		A Teredo client and relay daemon
 PKG_SECTION:=		ipv6
-ifeq (${ADK_COMPILE_MIREDO_WITH_UCLIBCXX},y)
-PKG_BUILDDEP+=		uclibc++
-endif
-PKG_URL:=		http://www.remlab.net
+PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/miredo/
+
+PKG_SUBPKGS:=		MIREDO MIREDO_SERVER
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -32,12 +31,6 @@ CONFIGURE_ARGS+=	--disable-chroot \
 			--enable-miredo-user=root
 
 XAKE_FLAGS+=		 CXXLINK="\$${LINK}" \
-
-ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++
-TLDFLAGS+=		-nodefaultlibs
-CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm"
-endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MIREDO}/etc/miredo ${IDIR_MIREDO}/usr/sbin

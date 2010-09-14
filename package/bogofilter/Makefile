@@ -10,7 +10,7 @@ PKG_MD5SUM:=		a12a16d88d6d565dacf2a5e6259a3337
 PKG_DESCR:=		mail filter
 PKG_SECTION:=		mail
 PKG_DEPENDS:=		libiconv libdb
-PKG_BUILDDEP+=		libiconv libdb
+PKG_BUILDDEP:=		libiconv libdb
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 

@@ -10,8 +10,10 @@ PKG_MD5SUM:=		5e4305c612bc3cccbaf802c275c81a11
 PKG_DESCR:=		Round-Robin Database (RRD) collecting daemon
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		librrd
-PKG_BUILDDEP+=		rrdtool
+PKG_BUILDDEP:=		rrdtool
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rrdcollect/}
+
+PKG_SUBPKGS:=		RRDCOLLECT RRDCOLLECT_EXAMPLE
 
 ifneq (${ADK_PACKAGE_LIBRRD},)
 RRDTOOL_LIBS:=-lart_lgpl_2 -lfreetype -lpng

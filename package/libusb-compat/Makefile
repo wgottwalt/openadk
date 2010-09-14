@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		570ac2ea085b80d1f74ddc7c6a93c0eb
 PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		libusb
+PKG_BUILDDEP:=		libusb
 PKG_URL:=		http://libusb.wiki.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 

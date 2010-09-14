@@ -10,14 +10,13 @@ PKG_DESCR:=		MTD utility
 PKG_SECTION:=		fs
 
 PKG_TARGET_DEPENDS:=	ag241 foxboard
+PKG_DFLT_MTD:=		y
 
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-PKGDFLT_MTD=		y
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

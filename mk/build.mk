@@ -87,17 +87,17 @@ endif
 
 ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 include $(TOPDIR)/rules.mk
-include ${TOPDIR}/mk/split-cfg.mk
 
 all: world
 
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
-	mksh ${TOPDIR}/package/depmaker
+	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
+
 
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
-world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR) ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
+world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
@@ -137,10 +137,10 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
-target/%: ${TOPDIR}/.ADK_HAVE_DOT_CONFIG
+target/%:
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
 toolchain/%: ${STAGING_DIR}
@@ -179,11 +179,6 @@ newpackage:
 	@echo "Edit package/$(PKG)/Makefile to complete"
 	@echo "choose PKG_SECTION to add it to an existent submenu"  
 
-#############################################################
-#
-# Cleanup and misc junk
-#
-#############################################################
 root_clean:
 	@$(TRACE) root_clean
 	rm -rf $(TARGET_DIR)
@@ -411,7 +406,7 @@ ifneq (,$(filter wrap%,${TARGET}))
 	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/all.config
 endif
 
-menuconfig: $(CONFIG)/mconf defconfig .menu
+menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
@@ -495,14 +490,18 @@ bulkallmod:
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	done <${TOPDIR}/target/bulk.lst
 
-menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile)
+${TOPDIR}/bin/tools/pkgmaker:
+	@$(HOSTCC) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker
 	@echo "Generating menu structure ..."
-	mksh $(TOPDIR)/package/pkgmaker
+	@mkdir -p $(TOPDIR)/bin/tools
+	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
 dep:
 	@echo "Generating dependencies ..."
-	mksh $(TOPDIR)/package/depmaker
+	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 

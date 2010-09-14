@@ -10,7 +10,7 @@ PKG_MD5SUM:=		cd0ab148fb0c786fc88be49d19971f50
 PKG_DESCR:=		DBUS glib bindings
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		dbus
-PKG_BUILDDEP+=		dbus
+PKG_BUILDDEP:=		dbus
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/DBusBindings
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-glib/
 

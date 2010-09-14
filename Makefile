@@ -180,15 +180,6 @@ NO_ERROR=0
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
 	fi
-	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | grep -F 'MIRBSD' >/dev/null 2>&1; then \
-		echo "MirBSD ksh (mksh) needs to be installed."; \
-		exit 1; \
-	else \
-		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 34 ]; then \
-			echo "MirBSD ksh is too old. R35 or higher needed."; \
-			exit 1; \
-		fi \
-	fi
 	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
 		echo >&2 Error: you must build with umask 022, sorry.; \
 		exit 1; \

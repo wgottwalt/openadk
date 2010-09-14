@@ -10,17 +10,18 @@ PKG_MD5SUM:=		12535a9ed9fecf9ea2c5bdc9840da5ae
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP+=		ncurses
-PKG_CXX:=		GPSD
+PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
+PKG_CXX:=		GPSD
 
-PKG_DESCR_CLIENTS:=	GPS client utilities
+PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
+PKGSD_GPSD_CLIENTS:=	GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENTS},${PKG_SECTION}))
+$(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GPSD_CLIENTS},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		EGREP="grep -E" \
 			CPP="$(TARGET_CC) -E" \

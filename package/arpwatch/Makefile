@@ -10,8 +10,8 @@ PKG_MD5SUM:=		cebfeb99c4a7c2a6cee2564770415fe7
 PKG_DESCR:=		Ethernet monitor program
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP+=		libpcap
-PKG_URL:=		http://www-nrg.ee.lbl.gov
+PKG_BUILDDEP:=		libpcap
+PKG_URL:=		http://www-nrg.ee.lbl.gov/
 PKG_SITES:=		ftp://ftp.ee.lbl.gov/
 
 include $(TOPDIR)/mk/package.mk

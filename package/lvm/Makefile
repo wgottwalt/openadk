@@ -13,17 +13,19 @@ PKG_DEPENDS:=		libdevmapper libncurses
 PKG_URL:=		http://sourceware.org/lvm2/
 PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
-PKG_DESCR_DM:=		device-mapper utility
-PKG_DESCR_LIBDM:=	device-mapper library
-PKG_SECTION_LIBDM:=	libs
+PKG_SUBPKGS:=		LVM DEVICE_MAPPER LIBDEVMAPPER
+PKGSD_DEVICE_MAPPER:=	device-mapper utility
+PKGSD_LIBDEVMAPPER:=	device-mapper library
+PKGSC_LIBDEVMAPPER:=	libs
+
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_DM},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIBDM},${PKG_SECTION_LIBDM}))
+$(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_DEVICE_MAPPER},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBDEVMAPPER},${PKGSC_LIBDEVMAPPER}))
 
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \

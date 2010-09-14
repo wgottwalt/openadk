@@ -10,17 +10,15 @@ PKG_MD5SUM:=		870db8e319f640c2bf446c30d0c24ef6
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		chat
 PKG_DEPENDS:=		glib libncurses
-PKG_BUILDDEP+=		glib ncurses
-ifeq (${ADK_PACKAGE_IRSSI_WITH_SSL},y)
-PKG_BUILDDEP+=		openssl
-endif
+PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.irssi.org/
 PKG_SITES:=		http://www.irssi.org/files/
 
 PKG_FLAVOURS:=		WITH_SSL WITH_IPV6
-PKGFD_SSL:=		SSL/TLS support
-PKGFS_SSL:=		libopenssl
-PKGFD_IPV6:=		IPv6 support
+PKGFD_WITH_SSL:=	enable SSL/TLS support
+PKGFS_WITH_SSL:=	libopenssl
+PKGFB_WITH_SSL:=	openssl
+PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 

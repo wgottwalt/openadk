@@ -6,10 +6,10 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ctorrent
 PKG_VERSION:=		dnh3.3.2
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		openssl
 PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
 PKG_DESCR:=		console-based BitTorrent client
 PKG_SECTION:=		p2p
+PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
 

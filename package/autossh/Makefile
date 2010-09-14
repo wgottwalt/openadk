@@ -10,7 +10,7 @@ PKG_MD5SUM:=		8f9aa006f6f69e912d3c2f504622d6f7
 PKG_DESCR:=		Automatically restart SSH sessions and tunnels
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		openssh-client
-PKG_URL:=		http://www.harding.motd.ca/autossh
+PKG_URL:=		http://www.harding.motd.ca/autossh/
 PKG_SITES:=		http://www.harding.motd.ca/autossh/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tgz

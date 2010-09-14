@@ -10,8 +10,8 @@ PKG_MD5SUM:=		f490bca772b16472962c7b9f23b1e97d
 PKG_DESCR:=		The /proc file system utilities
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
-PKG_URL:=		http://procps.sourceforge.net
+PKG_BUILDDEP:=		ncurses
+PKG_URL:=		http://procps.sourceforge.net/
 PKG_SITES:=		http://procps.sourceforge.net/
 
 include ${TOPDIR}/mk/package.mk

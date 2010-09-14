@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c297e40b93b3636a72189cfac43d1a87
 PKG_DESCR:=		X11 driver for Linux Framebuffer devices
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
-PKG_BUILDDEP+=		xorg-server
+PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
 PKG_TARGET_DEPENDS:=	alix1c lemote ibmx40

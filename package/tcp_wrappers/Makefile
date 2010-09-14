@@ -9,8 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e6fa25f71226d090f34de3f6b122fb5a
 PKG_DESCR:=		IP based access control
 PKG_SECTION:=		libs
-PKG_NOPARALLEL:=	1
 PKG_SITES:=		ftp://ftp.porcupine.org/pub/security/
+PKG_NOPARALLEL:=	1
+
+PKG_SUBPKGS:=		LIBWRAP
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}

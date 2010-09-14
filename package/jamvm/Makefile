@@ -10,7 +10,7 @@ PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libffi zlib
-PKG_BUILDDEP+=		libffi zlib
+PKG_BUILDDEP:=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 

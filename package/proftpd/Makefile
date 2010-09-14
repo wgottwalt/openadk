@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		97ad29f31f4fe633a9f8d021bab2df20
 PKG_DESCR:=		A very configurable FTP server
 PKG_SECTION:=		www
-PKG_NOPARALLEL:=	1
 PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
+PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 

@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		fc836be5364d80604cb11f4daacceb23
 PKG_DESCR:=		X11 driver for keyboard
 PKG_SECTION:=		x11/drivers
-PKG_BUILDDEP+=		xorg-server
 PKG_DEPENDS:=		xorg-server
+PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_TARGET_DEPENDS:=	alix1c lemote ibmx40 shuttle

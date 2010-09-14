@@ -10,7 +10,7 @@ PKG_MD5SUM:=		e699a93d62c01e0ee07caef3e11eddd8
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		gettext libiconv libpthread
-PKG_BUILDDEP+=		gettext libiconv
+PKG_BUILDDEP:=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.22/
 

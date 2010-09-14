@@ -10,8 +10,8 @@ PKG_MD5SUM:=		13fc44363df744a401552e73e5476351
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
-PKG_BUILDDEP+=		openssl curl expat
-PKG_URL:=		http://git-scm.com
+PKG_BUILDDEP:=		openssl curl expat
+PKG_URL:=		http://git-scm.com/
 PKG_SITES:=		http://kernel.org/pub/software/scm/git/
 
 include $(TOPDIR)/mk/package.mk

@@ -12,16 +12,16 @@ PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk+ libnotify
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
 PKG_DEPENDS+=		libxdamage libxfixes libidl
-PKG_BUILDDEP+=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
+PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
 PKG_BUILDDEP+=		nspr nss jpeg libXt
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
-
-WRKDIST=		${WRKDIR}/mozilla-1.9.2
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40 lemote
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
+WRKDIST=		${WRKDIR}/mozilla-1.9.2
 
 include $(TOPDIR)/mk/package.mk
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		08fcc5f6bb9e7676a2569386d5ea9f70
 PKG_DESCR:=		minimal dumb-terminal emulation program
 PKG_SECTION:=		serial
-PKG_URL:=		http://efault.net/npat/hacks/picocom
+PKG_URL:=		http://efault.net/npat/hacks/picocom/
 PKG_SITES:=		http://efault.net/npat/hacks/picocom/dist/
 
 include ${TOPDIR}/mk/package.mk

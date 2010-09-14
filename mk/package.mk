@@ -108,7 +108,6 @@ _IPKGS_COOKIE=		${PACKAGE_DIR}/.stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
 
 _IN_PACKAGE:=		1
 include ${TOPDIR}/mk/buildhlp.mk
--include info.mk
 
 # defined in buildhlp.mk ('extract' can fail, use 'patch' then)
 extract: ${_EXTRACT_COOKIE}
