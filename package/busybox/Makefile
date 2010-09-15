@@ -82,12 +82,4 @@ udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
 
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
-
-fake: rebuild
-
 include ${TOPDIR}/mk/pkg-bottom.mk

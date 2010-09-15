@@ -51,7 +51,7 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P | \
+	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P | \
 		${ADK_COMPRESSION_TOOL} >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
@@ -59,7 +59,7 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 		$(LINUX_DIR)/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
+	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	${STAGING_TOOLS}/bin/mksquashfs ${TARGET_DIR} \

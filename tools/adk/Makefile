@@ -6,6 +6,9 @@ include $(TOPDIR)/rules.mk
 ${TOPDIR}/bin/tools/depmaker:
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/depmaker depmaker.c
 
-install: ${TOPDIR}/bin/tools/depmaker
+${TOPDIR}/bin/tools/pkgrebuild:
+	$(HOSTCC) -o $(TOPDIR)/bin/tools/pkgrebuild pkgrebuild.c strmap.c
+
+install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild
 
 include $(TOPDIR)/mk/tools.mk

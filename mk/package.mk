@@ -117,6 +117,11 @@ patch: ${_PATCH_COOKIE}
 configure: ${_CONFIGURE_COOKIE}
 build: ${_BUILD_COOKIE}
 fake: ${_FAKE_COOKIE}
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		$(MAKE) clean; \
+		rm -f ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
 
 # our recursive build entry point
 build-all-pkgs: ${_IPKGS_COOKIE}
@@ -220,7 +225,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    cpio -padlmu '$${STAGING_DIR}'
+	    $(TOPDIR)/bin/tools/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \

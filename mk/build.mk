@@ -64,8 +64,9 @@ noconfig_targets:=	menuconfig \
 			defconfig \
 			tags
 
-POSTCONFIG=		-@ \
+POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
+		$(TOPDIR)/bin/tools/pkgrebuild;\
 		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
@@ -76,7 +77,7 @@ POSTCONFIG=		-@ \
 			rebuild=1;\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
-			cp .config .config.old; \
+			cp .config .config.old;\
 		fi; \
 	fi
 

@@ -3,9 +3,9 @@
 
 include $(TOPDIR)/rules.mk
 
-${STAGING_TOOLS}/bin/mkcrypt:
-	$(HOSTCC) -o $(STAGING_TOOLS)/bin/mkcrypt mkcrypt.c
+${TOPDIR}/bin/tools/mkcrypt:
+	$(HOSTCC) -o $(TOPDIR)/bin/tools/mkcrypt mkcrypt.c
 
-install: ${STAGING_TOOLS}/bin/mkcrypt
+install: ${TOPDIR}/bin/tools/mkcrypt
 
 include $(TOPDIR)/mk/tools.mk
