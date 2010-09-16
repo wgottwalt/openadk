@@ -12,13 +12,6 @@ compile:
 install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 
-$(TOOLS_BUILD_DIR):
-	mkdir -p $(TOOLS_BUILD_DIR)
-
-%-download:
-	$(TRACE) "tools/$(patsubst %-download,%,$@)/download "
-	$(MAKE) -C $(patsubst %-download,%,$@) fetch
-
 %-compile: $(TOOLS_BUILD_DIR)
 	$(TRACE) "tools/$(patsubst %-compile,%,$@)/compile "
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile

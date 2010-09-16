@@ -39,7 +39,7 @@ ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 compile: $(REBUILD_PACKAGES) $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)
 else
-compile: base-files-compile $(REBUILD_PACKAGES) $(COMPILE_PACKAGES)
+compile: $(REBUILD_PACKAGES) base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
 

@@ -65,6 +65,8 @@ noconfig_targets:=	menuconfig \
 			tags
 
 POSTCONFIG=		-@\
+	if [ -f .adkinit ];then rm .adkinit;\
+	else \
 	if [ -f .config.old ];then \
 		$(TOPDIR)/bin/tools/pkgrebuild;\
 		rebuild=0; \
@@ -79,6 +81,7 @@ POSTCONFIG=		-@\
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
 		fi; \
+	fi; \
 	fi
 
 # Pull in the user's configuration file
@@ -184,7 +187,6 @@ newpackage:
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
-	@echo "choose PKG_SECTION to add it to an existent submenu"  
 
 root_clean:
 	@$(TRACE) root_clean
@@ -208,9 +210,8 @@ clean:
 		done \
 	done
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) \
-		${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC} \
 	    	${TOPDIR}/package/pkglist.d
-	rm -f ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk
+	rm -f ${TOPDIR}/package/Depends.mk
 
 cleankernel:
 	@$(TRACE) cleankernel
@@ -218,34 +219,28 @@ cleankernel:
 
 cleandir:
 	@$(TRACE) cleandir
-	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
-	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
-	    $(TOOLS_BUILD_DIR)
-	rm -f .menu .tmpconfig.h ${TOPDIR}/package/*/info.mk \
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
+	rm -f .menu .tmpconfig.h .rebuild* \
 	    ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk \
-	    .busyboxcfg
 
 cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) \
-		${TOPDIR}/.cfg_${ADK_TARGET}_${ADK_LIBC}
+	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR)
 	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_PARENT)
-	rm -f .tmpconfig.h ${TOPDIR}/package/*/info.mk \
-		.busyboxcfg all.config .defconfig
+	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d
-	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) \
-		$(TOOLS_BUILD_DIR)
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk \
-	    .busyboxcfg .ADK_HAVE_DOT_CONFIG
+	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -432,14 +427,14 @@ menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-guiconfig: $(CONFIG)/gconf defconfig .menu
+guiconfig: $(CONFIG)/gconf defconfig .menu package/Config.in.auto
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/gconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf .menu
+_config: $(CONFIG)/conf .menu package/Config.in.auto
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
@@ -452,10 +447,10 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/.cfg* ${TOPDIR}/package/pkglist.d 
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_PARENT_PFX) $(TOOLS_BUILD_DIR)
 	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/*/info.mk ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
+	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
 
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
@@ -513,7 +508,11 @@ ${TOPDIR}/bin/tools/pkgmaker:
 	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker
+${TOPDIR}/bin/tools/pkgrebuild:
+	@mkdir -p $(TOPDIR)/bin/tools
+	@$(HOSTCC) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
+
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
 	@echo "Generating menu structure ..."
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu

@@ -31,15 +31,10 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
+do-configure:
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
-		${TOPDIR}/.busyboxcfg
-
-${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
-	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+		${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-
-do-configure: ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
@@ -52,7 +47,7 @@ else
 	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 endif
 
-do-build: do-configure
+do-build:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
@@ -61,7 +56,7 @@ else
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: ${WRKBUILD}/.config ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)

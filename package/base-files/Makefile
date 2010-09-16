@@ -66,7 +66,7 @@ endif
 	    echo $(ADK_RUNTIME_HOSTNAME) > \
 	    $(IDIR_BASE_FILES)/etc/hostname
 	test -z $(ADK_RUNTIME_PASSWORD) || \
-	    $(SED) 's,\*NP\*,'"$$(${STAGING_TOOLS}/bin/mkcrypt \
+	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
