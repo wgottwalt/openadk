@@ -61,9 +61,6 @@ pkg-help:
 	@echo 'This does not automatically resolve package dependencies!'
 
 dev-help:
-	@echo 'Regenerate menu information via "make menu"'
-	@echo 'Regenerate dependency information via "make dep"'
-	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
@@ -221,6 +218,7 @@ NO_ERROR=0
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
 	@echo "OStype:=$$(env uname)" >>prereq.mk
+	@echo "ADKtype:=$$(cat /etc/adktarget)" >>prereq.mk
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk

@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP+=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
-PKG_TARGET_DEPENDS:=	lemote
+PKG_TARGET_DEPENDS:=	lemote native
 
 include $(TOPDIR)/mk/package.mk
 

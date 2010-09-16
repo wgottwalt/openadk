@@ -77,10 +77,11 @@ MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
+MAKE_ENV+=		PATH='${TARGET_PATH}'
 ifeq ($(ADK_NATIVE),)
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
-			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig' \
+			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' \
 			CXX='${TARGET_CXX}' \
 			AR='${TARGET_CROSS}ar' \
@@ -208,7 +209,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	@-cd $${IDIR_$(1)}; \
+	-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \

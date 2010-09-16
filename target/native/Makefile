@@ -8,7 +8,11 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+ifeq ($(CPU_ARCH),i686)
+KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
+else
 KERNEL:=$(LINUX_DIR)/vmlinuz
+endif
 
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)

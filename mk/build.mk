@@ -164,9 +164,15 @@ switch:
 	else echo "No old target config found";mv .config .config.bak; make TARGET=${TARGET};fi
 
 kernelconfig:
+ifeq ($(ADKtype),)
 	cp $(TOPDIR)/target/$(ADK_TARGET)/kernel.config $(BUILD_DIR)/linux/.config
 	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
+else
+	cp $(TOPDIR)/target/$(ADKtype)/kernel.config $(BUILD_DIR)/linux/.config
+	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADKtype)/kernel.config
+endif
 
 # create a new package from package/.template
 newpackage:
@@ -294,6 +300,12 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
+ifeq ($(ADKtype),ibmx40)
+	@echo ADK_HARDWARE_IBMX40=y >> $(TOPDIR)/.defconfig
+endif
+ifeq ($(ADKtype),lemote)
+	@echo ADK_HARDWARE_YEELONG=y >> $(TOPDIR)/.defconfig
+endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(TARGET)"\$$ \
@@ -364,6 +376,12 @@ ifeq (${OStype},Darwin)
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
+endif
+ifeq ($(ADKtype),ibmx40)
+	@echo ADK_HARDWARE_IBMX40=y >> $(TOPDIR)/all.config
+endif
+ifeq ($(ADKtype),lemote)
+	@echo ADK_HARDWARE_YEELONG=y >> $(TOPDIR)/all.config
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \

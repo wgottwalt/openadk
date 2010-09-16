@@ -22,7 +22,7 @@ image-prepare-post:
 	fi
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
-KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(ADK_TARGET)-$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
+KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
 
 kernel-package: $(LINUX_DIR)/vmlinux
 	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
@@ -30,7 +30,7 @@ kernel-package: $(LINUX_DIR)/vmlinux
 	@mkdir -p $(KERNEL_PKGDIR)/boot
 	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/vmlinuz-adk
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
-	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
+	    ../linux/kernel.control ${KERNEL_VERSION} ${CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
