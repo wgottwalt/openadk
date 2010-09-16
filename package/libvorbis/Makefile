@@ -9,9 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		478646358c49f34aedcce58948793619
 PKG_DESCR:=		The Vorbis General Audio Compression Codec library
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		libogg
+PKG_BUILDDEP:=		libogg
 PKG_URL:=		http://www.xiph.org/vorbis/
 PKG_SITES:=		http://downloads.xiph.org/releases/vorbis/
+
+PKG_SUBPKGS:=		LIBVORBIS LIBVORBISENC
 
 include ${TOPDIR}/mk/package.mk
 

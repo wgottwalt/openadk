@@ -10,7 +10,7 @@ PKG_MD5SUM:=		ae008ac355581c90494fba86cbfc3413
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite neon
-PKG_BUILDDEP+=		apr-util expat apr zlib libiconv sqlite neon
+PKG_BUILDDEP:=		apr-util expat apr zlib libiconv sqlite neon
 PKG_SITES:=		http://subversion.tigris.org/downloads/
 PKG_URL:=		http://subversion.apache.org/
 

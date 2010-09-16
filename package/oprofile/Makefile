@@ -10,12 +10,12 @@ PKG_MD5SUM:=		4e407093ac06200185d5a5e6437d7242
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx
-PKG_BUILDDEP+=		popt binutils
-PKG_URL:=		http://oprofile.sourceforge.net
+PKG_BUILDDEP:=		popt binutils
+PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
-CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 PKG_TARGET_DEPENDS:=	!foxboard
+PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
 include $(TOPDIR)/mk/package.mk
 

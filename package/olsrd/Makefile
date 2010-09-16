@@ -9,9 +9,12 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		acf15dbd0af521a6826541b567c6473a
 PKG_DESCR:=		Optimized Link State Routing protocol
 PKG_SECTION:=		wifi
-PKG_MULTI:=		1
-PKG_URL:=		http://www.olsr.org
+PKG_URL:=		http://www.olsr.org/
 PKG_SITES:=		http://www.olsr.org/releases/0.5/
+PKG_MULTI:=		1
+
+PKG_SUBPKGS:=		OLSRD OLSRD_MOD_DYN_GW OLSRD_MOD_HTTPINFO OLSRD_MOD_NAMESERVICE
+PKG_SUBPKGS+=		OLSRD_MOD_TAS
 
 include ${TOPDIR}/mk/package.mk
 
@@ -40,10 +43,9 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-TCFLAGS+=	-fPIC
+TCFLAGS+=		-fPIC
 
 do-build:
-	rm -rf ${WRKINST}
 	mkdir -p ${WRKINST}
 	${MAKE} -C "${WRKBUILD}" \
 		${TARGET_CONFIGURE_OPTS} \

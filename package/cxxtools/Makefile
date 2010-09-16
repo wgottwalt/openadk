@@ -10,8 +10,8 @@ PKG_MD5SUM:=		16ce92a83beb925fa5138fc9a52d55af
 PKG_DESCR:=		a collection of general-purpose C++ classes
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv
-PKG_BUILDDEP+=		libiconv
-PKG_URL:=		http://www.tntnet.org
+PKG_BUILDDEP:=		libiconv
+PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 
 include ${TOPDIR}/mk/package.mk

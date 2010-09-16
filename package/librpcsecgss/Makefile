@@ -10,7 +10,7 @@ PKG_MD5SUM:=		b45ed565bdc3099023aa35830ec92997
 PKG_DESCR:=		Secure RPC library for NFSv4
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgssglue
-PKG_BUILDDEP+=		libgssglue
+PKG_BUILDDEP:=		libgssglue
 PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/librpcsecgss/
 
 include $(TOPDIR)/mk/package.mk

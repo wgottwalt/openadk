@@ -1000,7 +1000,7 @@ main(int argc, char **argv)
 		prdot(1);
 	if (pax != PAX_TYPE_CPIO)
 		pax_onexit();
-	fprintf(stderr, "%llu blocks\n", blocks + ((bytes + 0777) >> 9));
+	//fprintf(stderr, "%llu blocks\n", blocks + ((bytes + 0777) >> 9));
 	mclose();
 	if (errcnt && sysv3 == 0)
 		fprintf(stderr, "%llu error(s)\n", errcnt);

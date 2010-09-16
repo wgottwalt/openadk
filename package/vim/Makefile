@@ -3,16 +3,16 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		vim
-PKG_VERSION=		7.2
-PKG_RELEASE=		2
-PKG_BUILDDEP+=		ncurses
-PKG_MD5SUM=		f0901284b338e448bfd79ccca0041254
+PKG_NAME:=		vim
+PKG_VERSION:=		7.2
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		f0901284b338e448bfd79ccca0041254
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.vim.org/
-PKG_SITES=		ftp://ftp.vim.org/pub/vim/unix/
+PKG_SITES:=		ftp://ftp.vim.org/pub/vim/unix/
 
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/vim72

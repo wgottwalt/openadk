@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4a8f09f15fc92196b91d61e2dc9afcea
 PKG_DESCR:=		Inter-Client Exchange library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP+=		xtrans xproto
+PKG_BUILDDEP:=		xtrans xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

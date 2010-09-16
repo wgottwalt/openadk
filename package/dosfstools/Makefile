@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		bd273cf8aa6341c0b52cbac72050bcf4
 PKG_DESCR:=		Utilities to create and check MS-DOS FAT filesystems
 PKG_SECTION:=		fs
-PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools
+PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
 
 include ${TOPDIR}/mk/package.mk

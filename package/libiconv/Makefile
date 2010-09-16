@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7ab33ebd26687c744a37264a330bbe9a
 PKG_DESCR:=		character set conversion library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnu.org/software/libiconv
+PKG_URL:=		http://www.gnu.org/software/libiconv/
 PKG_SITES:=		${MASTER_SITE_GNU:=libiconv/}
 
 ifeq ($(ADK_STATIC),y)

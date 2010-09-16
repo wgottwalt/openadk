@@ -10,8 +10,8 @@ PKG_MD5SUM:=		77e15a92006ddc2adbb06f840d591c0e
 PKG_DESCR:=		fontconfig
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP+=		freetype libxml2
-PKG_URL:=		http://fontconfig.org
+PKG_BUILDDEP:=		freetype libxml2
+PKG_URL:=		http://fontconfig.org/
 PKG_SITES:=		http://fontconfig.org/release/
 
 ifeq ($(ADK_STATIC),y)

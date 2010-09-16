@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		337dae91d4775e03b6681f61db56d2a7
 PKG_DESCR:=		a textbased MSN client
 PKG_SECTION:=		chat
-PKG_URL:=		http://tmsnc.sourceforge.net
+PKG_URL:=		http://tmsnc.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmsnc/}
 
 include ${TOPDIR}/mk/package.mk

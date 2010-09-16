@@ -10,7 +10,7 @@ PKG_MD5SUM:=		cc00d609136ecc0b6b571dc42740a675
 PKG_DESCR:=		Print out X-Video extension adaptor information
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		xorg-server
-KG_BUILDDEP+=		xorg-server
+PKG_BUILDDEP:=		xorg-server
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 

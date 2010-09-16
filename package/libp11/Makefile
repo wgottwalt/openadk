@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9e2c5cbececde245e2d2f535bd49ce35
 PKG_DESCR:=		library implementing a small layer on top of PKCS11 API
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libltdl
-PKG_BUILDDEP+=		openssl libtool
+PKG_BUILDDEP:=		openssl libtool
 PKG_URL:=		http://www.opensc-project.org/libp11
 PKG_SITES:=		http://www.opensc-project.org/files/libp11/
 

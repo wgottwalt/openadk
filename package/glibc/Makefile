@@ -6,8 +6,11 @@ include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_DESCR:=		GNU C library
 PKG_SECTION:=		base
-NO_DISTFILES:=		1
 PKG_OPTS:=		noremove
+
+PKG_SUBPKGS:=		GLIBC GLIBC_DEV
+
+NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 

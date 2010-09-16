@@ -6,13 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		cups
 PKG_VERSION:=		1.4.2
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		zlib
 PKG_MD5SUM:=		d95e2d588e3d36e563027a963b117b1b
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		zlib libpthread
-PKG_BUILDDEP+=		zlib
-PKG_URL:=		http://www.cups.org
+PKG_BUILDDEP:=		zlib
+PKG_URL:=		http://www.cups.org/
 PKG_SITES:=		ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2

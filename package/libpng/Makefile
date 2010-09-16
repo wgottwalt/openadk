@@ -10,7 +10,7 @@ PKG_MD5SUM:=		89b62f8daaeeab1342e307d6d1411ff1
 PKG_DESCR:=		A library for reading/writing PNG images
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		zlib
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 

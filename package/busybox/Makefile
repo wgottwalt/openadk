@@ -14,13 +14,14 @@ PKG_SITES:=		http://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DESCR_UDHCPD:=	uDHCPD meta package
-PKG_SECTION_UDHCPD:=	net
+PKG_SUBPKGS:=		BUSYBOX UDHCPD
+PKGSD_UDHCPD:=		uDHCPD meta package
+PKGSC_UDHCPD:=		net
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKG_DESCR_UDHCPD},${PKG_SECTION_UDHCPD}))
+$(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKGSD_UDHCPD},${PKGSC_UDHCPD}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
@@ -80,13 +81,5 @@ endif
 udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
-
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
-
-fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

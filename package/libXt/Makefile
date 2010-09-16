@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		28f627c7a5ca08c2413ce91d21c177d8
 PKG_DESCR:=		X Toolkit Intrinsics
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP+=		libSM
+PKG_BUILDDEP:=		libSM
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

@@ -9,12 +9,12 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		39f0f2de89f399529d2b981188082218
 PKG_DESCR:=		OpenGL Utility Toolkit
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		MesaLib
+PKG_BUILDDEP:=		MesaLib
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 
-PKG_TARGET_DEPENDS:=    ibmx40 lemote
 PKG_HOST_DEPENDS:=	!cygwin
+PKG_TARGET_DEPENDS:=	ibmx40 lemote
 
 include $(TOPDIR)/mk/package.mk
 

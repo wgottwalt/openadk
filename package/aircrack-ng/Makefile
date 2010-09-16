@@ -10,8 +10,8 @@ PKG_MD5SUM:=		f7a24ed8fad122c4187d06bfd6f998b4
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libpthread libopenssl libpcap
-PKG_BUILDDEP+=		openssl libpcap
-PKG_URL:=		http://www.aircrack-ng.org
+PKG_BUILDDEP:=		openssl libpcap
+PKG_URL:=		http://www.aircrack-ng.org/
 PKG_SITES:=		http://download.aircrack-ng.org/
 
 include $(TOPDIR)/mk/package.mk

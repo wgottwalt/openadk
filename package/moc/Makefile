@@ -11,9 +11,9 @@ PKG_DESCR:=		console music player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac ffmpeg libiconv
 PKG_DEPENDS+=		libncurses libid3tag
-PKG_BUILDDEP+=		ncurses libvorbis curl libmad flac ffmpeg libiconv
+PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac ffmpeg libiconv
 PKG_BUILDDEP+=		libid3tag
-PKG_URL:=		http://moc.daper.net
+PKG_URL:=		http://moc.daper.net/
 PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/unstable/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

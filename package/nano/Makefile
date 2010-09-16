@@ -10,11 +10,12 @@ PKG_MD5SUM:=		6304308afb1f7ef4a5e93eb99206632a
 PKG_DESCR:=		An enhanced clone of the Pico editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
-PKG_URL:=		http://www.nano-editor.org
+PKG_BUILDDEP:=		ncurses
+PKG_URL:=		http://www.nano-editor.org/
 PKG_SITES:=		http://www.nano-editor.org/dist/v2.2/
 
 PKG_FLAVOURS:=		TINY
+PKGFD_TINY:=		tiny nano
 
 include ${TOPDIR}/mk/package.mk
 

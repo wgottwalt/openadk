@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3c4b4048c914f2694c3ca6de2bb457dc
 PKG_DESCR:=		API to connection tracking state table
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink
-PKG_BUILDDEP+=		libnfnetlink
+PKG_BUILDDEP:=		libnfnetlink
 PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_conntrack/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_conntrack/files/
 

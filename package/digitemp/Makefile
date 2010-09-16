@@ -10,8 +10,8 @@ PKG_MD5SUM:=		9be2e48db37920f21925ae6e88f83b84
 PKG_DESCR:=		program for reading values from 1-wire devices
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libusb
-PKG_BUILDDEP+=		libusb libusb-compat
-PKG_URL:=		http://www.digitemp.com/software/linux
+PKG_BUILDDEP:=		libusb libusb-compat
+PKG_URL:=		http://www.digitemp.com/software/linux/
 PKG_SITES:=		http://www.digitemp.com/software/linux/
 
 include ${TOPDIR}/mk/package.mk

@@ -102,7 +102,7 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(STAGING_TOOLS)/bin/cpio -i -d ;; \
+				cat $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
@@ -114,7 +114,7 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(STAGING_TOOLS)/bin/cpio -ivd -H zip ;; \
+				cat $$file | $(TOPDIR)/bin/tools/cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

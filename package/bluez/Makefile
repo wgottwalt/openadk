@@ -10,8 +10,8 @@ PKG_MD5SUM:=		1c7cee215bc84656b1edee019cee78f5
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bt libusb glib dbus
-PKG_BUILDDEP+=		libusb dbus glib
-PKG_URL:=		http://www.bluez.org
+PKG_BUILDDEP:=		libusb dbus glib
+PKG_URL:=		http://www.bluez.org/
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
 include ${TOPDIR}/mk/package.mk

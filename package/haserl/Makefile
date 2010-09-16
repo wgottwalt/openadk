@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		8cd64e591209751a062ad4e08f1d10dd
 PKG_DESCR:=		a CGI wrapper to embed shell scripts in HTML documents
 PKG_SECTION:=		lang
-PKG_URL:=		http://haserl.sourceforge.net
+PKG_URL:=		http://haserl.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
 
 include ${TOPDIR}/mk/package.mk

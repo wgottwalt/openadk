@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3b88743f9c6ce8a7e2f5fd7d18fdea42
 PKG_DESCR:=		Tools for setting up WiFi cards via netlink (nl80211)
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
-PKG_BUILDDEP+=		libnl
+PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
 PKG_SITES:=		http://wireless.kernel.org/download/iw/
 

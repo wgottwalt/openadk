@@ -10,7 +10,7 @@ PKG_MD5SUM:=		af35e8ef403a0ca95df2da94db856428
 PKG_DESCR:=		Network Intrusion Detection System library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnet libpcap glib
-PKG_BUILDDEP+=		libnet libpcap glib
+PKG_BUILDDEP:=		libnet libpcap glib
 PKG_URL:=		http://libnids.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnids/}
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1d2005268a2f096db28cf9cf77b3229a
 PKG_DESCR:=		a helper library for common error codes and descriptions
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.gnupg.org
+PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

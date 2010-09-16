@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2c7053f58dfb06f7a80a112797ed7e86
 PKG_DESCR:=		Simple CGI Library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.infodrom.org/projects/cgilib
+PKG_URL:=		http://www.infodrom.org/projects/cgilib/
 PKG_SITES:=		http://www.infodrom.org/projects/cgilib/download/
 
 include ${TOPDIR}/mk/package.mk

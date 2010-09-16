@@ -3,17 +3,17 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME=		mc
-PKG_VERSION=		4.7.0.2
-PKG_RELEASE=		1
-PKG_MD5SUM=		f48b2c8dd140aeb36f59d16a662f0779
+PKG_NAME:=		mc
+PKG_VERSION:=		4.7.0.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f48b2c8dd140aeb36f59d16a662f0779
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
-PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		glib libncurses
-PKG_BUILDDEP+=		glib ncurses
+PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.midnight-commander.org/
-PKG_SITES=		http://openadk.org/distfiles/
+PKG_SITES:=		http://openadk.org/distfiles/
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 

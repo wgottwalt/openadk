@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/
 
-CFLINE_PERL:=		depends on ADK_NATIVE
+PKG_CFLINE_PERL:=	depends on ADK_NATIVE
 
 include ${TOPDIR}/mk/package.mk
 

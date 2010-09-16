@@ -10,13 +10,7 @@ PKG_MD5SUM:=		0e2cb7e4c35667351d8b7ec28c783e6a
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
-PKG_BUILDDEP+=		libnl
-ifeq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_OPENSSL},y)
-PKG_BUILDDEP+=		openssl
-endif
-ifeq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_GNUTLS},y)
-PKG_BUILDDEP+=		gnutls
-endif
+PKG_BUILDDEP:=		libnl
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
@@ -24,8 +18,10 @@ WRKSRC=			${WRKDIST}/${PKG_NAME}
 PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
+PKGCB_WITH_GNUTLS:=	gnutls
 
 include ${TOPDIR}/mk/package.mk
 

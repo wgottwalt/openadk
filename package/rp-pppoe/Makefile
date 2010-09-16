@@ -10,8 +10,10 @@ PKG_MD5SUM:=		d58a13cc4185bca6121a606ff456dec0
 PKG_DESCR:=		PPPoE (PPP over Ethernet) tools
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		ppp
-PKG_URL:=		http://www.roaringpenguin.com
+PKG_URL:=		http://www.roaringpenguin.com/
 PKG_SITES:=		http://www.roaringpenguin.com/files/download/
+
+PKG_SUBPKGS:=		PPPOE_CLIENT PPPOE_RELAY PPPOE_SERVER PPPOE_SNIFF
 
 WRKSRC=			${WRKDIST}/src
 

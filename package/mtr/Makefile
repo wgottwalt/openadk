@@ -10,8 +10,8 @@ PKG_MD5SUM:=		23baca52d0922c2ecba7eba05317868c
 PKG_DESCR:=		ncurses traceroute/ping tool
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
-PKG_URL:=		http://www.bitwizard.nl/mtr
+PKG_BUILDDEP:=		ncurses
+PKG_URL:=		http://www.bitwizard.nl/mtr/
 PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
 include ${TOPDIR}/mk/package.mk

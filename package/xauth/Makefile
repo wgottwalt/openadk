@@ -10,7 +10,7 @@ PKG_MD5SUM:=		2eb3cc3e4421e1b747c4ac16aac20cda
 PKG_DESCR:=		X authority file utility
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxext libxmu
-PKG_BUILDDEP+=		libX11 libXext libXmu
+PKG_BUILDDEP:=		libX11 libXext libXmu
 PKG_URL:=		http://www.x.org
 PKG_SITES:=		${MASTER_SITE_XORG}
 

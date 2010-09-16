@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1a77ddb1aaea8099ab19c351eeb26316
 PKG_DESCR:=		converts RPC program numbers into universal addresses
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libtirpc
-PKG_BUILDDEP+=		libtirpc
+PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://sourceforge.net/projects/rpcbind/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rpcbind/}
 

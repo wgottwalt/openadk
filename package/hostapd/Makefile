@@ -9,25 +9,22 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		f47689c62ee8c1c59989b402d4f130c3
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		wifi
-PKG_MULTI:=		1
-PKG_DEPENDS:=		libnl libopenssl
-PKG_BUILDDEP+=		libnl openssl
-PKG_URL:=		http://hostap.epitest.fi
-ifeq (${ADK_PACKAGE_HOSTAPD_WITH_OPENSSL},y)
-PKG_BUILDDEP+=		openssl
-endif
-ifeq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},y)
-PKG_BUILDDEP+=		gnutls
-endif
+PKG_DEPENDS:=		libnl
+PKG_BUILDDEP:=		libnl
+PKG_URL:=		http://hostap.epitest.fi/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
+PKG_MULTI:=		1
 
-WRKSRC=			${WRKDIST}/${PKG_NAME}
-
+PKG_SUBPKGS:=		HOSTAPD HOSTAPD_UTILS
 PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
+PKGCB_WITH_GNUTLS:=	gnutls
+
+WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 

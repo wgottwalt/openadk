@@ -10,11 +10,9 @@ PKG_MD5SUM:=		7b8187ea718ebe47f22805b921b909ab
 PKG_DESCR:=		Portscan logger
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap libnet libnids
-PKG_BUILDDEP+=		libpcap libnids libnet
-PKG_URL:=		http://www.openwall.com/scanlogd
-PKG_SITES:=		http://www.openwall.com/scanlogd/ \
-			ftp://ftp.wiretapped.net/pub/openwall/ \
-			http://distro.ibiblio.org/pub/linux/distributions/openwall/
+PKG_BUILDDEP:=		libpcap libnids libnet
+PKG_URL:=		http://www.openwall.com/scanlogd/
+PKG_SITES:=		http://www.openwall.com/scanlogd/
 
 include ${TOPDIR}/mk/package.mk
 

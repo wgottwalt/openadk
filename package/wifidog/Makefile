@@ -10,7 +10,7 @@ PKG_MD5SUM:=		abe5f7123179a0f08c493ce59fb3cb31
 PKG_DESCR:=		a complete and embeddable captive portal
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		iptables
-PKG_URL:=		http://dev.wifidog.org
+PKG_URL:=		http://dev.wifidog.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk

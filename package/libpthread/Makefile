@@ -16,6 +16,7 @@ endif
 PKG_NAME:=		libpthread
 PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
+
 NO_DISTFILES:=		1
 
 ifeq ($(ADK_STATIC),y)

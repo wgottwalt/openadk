@@ -10,19 +10,21 @@ PKG_MD5SUM:=		a83155a6e29e3988f07e5eea3287b21e
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
 PKG_DEPENDS:=		libavahi libdaemon libexpat gettext
-PKG_BUILDDEP+=		libdaemon expat gdbm glib gettext
-PKG_URL:=		http://avahi.org
+PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext
+PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 
-PKG_DEPENDS_DNSCONFD:=	libavahi libdaemon avahi-daemon
-PKG_DESCR_DNSCONFD:=	DNS server from mDNS configuration daemon
-PKG_DESCR_LIB:=		DNS-SD over mDNS library
+PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
+PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
+PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
+PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
+PKGSC_LIBAVAHI:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DNSCONFD},${PKG_DESCR_DNSCONFD},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_LIB},libs))
+$(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAVAHI},${PKGSC_LIBAVAHI}))
 
 TLDFLAGS+=		-lintl
 CONFIGURE_ARGS+=	--enable-glib \

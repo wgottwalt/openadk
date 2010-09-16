@@ -9,15 +9,16 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		557544badbacca4ee1ebb2448f6e1f8a
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		libX11 libXi MesaLib freeglut
+PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 
+PKG_SUBPKGS:=		LIBFLTK
+PKG_TARGET_DEPENDS:=	ibmx40 lemote
+PKG_HOST_DEPENDS:=	!cygwin
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.x-r7513.tar.bz2
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.0.x-r7513
-
-PKG_TARGET_DEPENDS:=  	ibmx40 lemote
-PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk
 

@@ -15,10 +15,9 @@ PKG_DEPENDS+=		kmod-inet-xfrm-mode-tunnel kmod-inet-xfrm-mode-transport
 PKG_DEPENDS+=		kmod-crypto-sha1 kmod-crypto-md5
 PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
 PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
-PKG_BUILDDEP+=		gmp
+PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.openswan.org/
 PKG_SITES:=		http://www.openswan.org/download/
-
 PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk

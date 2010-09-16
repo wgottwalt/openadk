@@ -12,13 +12,14 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/ncurses/
 PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 
-PKG_DESCR_LIB_DEV:=	development files for libncurses
-PKG_SECTION_LIB_DEV:=	devel
+PKG_SUBPKGS:=		LIBNCURSES LIBNCURSES_DEV
+PKGSD_LIBNCURSES_DEV:=	development files for libncurses
+PKGSC_LIBNCURSES_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RELEASE},libncurses,${PKGSD_LIBNCURSES_DEV},${PKGSC_LIBNCURSES_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

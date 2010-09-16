@@ -7,42 +7,27 @@ PKG_NAME:=		php
 PKG_VERSION:=		5.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4480d7c6d6b4a86de7b8ec8f0c2d1871
-PKG_DESCR:=		PHP CLI
+PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
-PKG_MULTI:=		1
 PKG_DEPENDS:=		libopenssl zlib
-PKG_BUILDDEP+=		openssl zlib
-ifneq ($(ADK_PACKAGE_PHP_MOD_CURL),)
-PKG_BUILDDEP+=		curl
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
-PKG_BUILDDEP+=		libgd libpng
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_GMP),)
-PKG_BUILDDEP+=		gmp
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
-PKG_BUILDDEP+=		openldap
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
-PKG_BUILDDEP+=		mysql
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_PCRE),)
-PKG_BUILDDEP+=		pcre
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
-PKG_BUILDDEP+=		postgresql
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_SQLITE),)
-PKG_BUILDDEP+=		sqlite
-endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
-PKG_BUILDDEP+=		expat
-endif
-PHP_URL:=		http://www.php.net
+PKG_BUILDDEP:=		openssl zlib
+PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
+PKG_MULTI:=		1
 
-PKG_DESCR_FCGI:=	PHP for FastCGI usage
+PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI
+PKGSD_PHP_FASTCGI:=	PHP for FastCGI usage
+PKGSD_PHP_CLI:=		PHP CLI
+
+PKGSB_MOD_CURL:=	curl
+PKGSB_MOD_GD:=		libgd libpng
+PKGSB_MOD_GMP:=		gmp
+PKGSB_MOD_LDAP:=	openldap
+PKGSB_MOD_MYSQL:=	mysql
+PKGSB_MOD_PGSQL:=	postgresql
+PKGSB_MOD_PCRE:=	pcre
+PKGSB_MOD_SQLITE:=	sqlite
+PKGSB_MOD_XML:=		expat
 
 PKG_HOST_DEPENDS:=	!cygwin
 
@@ -51,8 +36,8 @@ PKG_HOST_DEPENDS:=	!cygwin
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PHP,php,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_FCGI},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_CLI},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_FASTCGI},${PKG_SECTION}))
 
 define PKG_mod_template
 

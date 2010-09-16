@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		fc3fd0e83090ecc81e5b32700fa246c2
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		crypto
-PKG_BUILDDEP+=		libusb libusb-compat
 PKG_DEPENDS:=		libusb libusb-compat libpthread ccid
+PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://pcsclite.alioth.debian.org/
 PKG_SITES:=		https://alioth.debian.org/frs/download.php/3279/
 

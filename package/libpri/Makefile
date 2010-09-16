@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		dc1523d8ee027cd62f20fc6cc9727489
 PKG_DESCR:=		C implementation of the Primary Rate ISDN specification
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.asterisk.org
+PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/libpri/releases/
 
 include ${TOPDIR}/mk/package.mk

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		8fd9256c635cce2289b648a01d54202c
 PKG_DESCR:=		A minimalist window manager for the X Window System
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxext
-PKG_BUILDDEP+=		libX11 libXext
+PKG_BUILDDEP:=		libX11 libXext
 PKG_URL:=		http://www.6809.org.uk/evilwm/
 PKG_SITES:=		http://www.6809.org.uk/evilwm/
 

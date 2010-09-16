@@ -10,11 +10,12 @@ PKG_MD5SUM:=		be1e89810e66150f5b0327984d8625a0
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.zlib.net/
-PKG_SITES:=		http://www.zlib.net/ \
-			${MASTER_SITE_SOURCEFORGE:=zlib/}
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=zlib/}
 
-PKG_DESCR_LIB_DEV:=	development files for zlib
-PKG_SECTION_LIB_DEV:=	devel
+PKG_SUBPKGS:=		ZLIB ZLIB_DEV
+PKGSD_ZLIB_DEV:=	development files for zlib
+PKGSC_ZLIB_DEV:=	devel
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)

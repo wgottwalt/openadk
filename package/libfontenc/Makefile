@@ -10,7 +10,7 @@ PKG_MD5SUM:=		0fa1988d08021225d18ced519a30d2b1
 PKG_DESCR:=		helps to deal with different encodings of fonts
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		xproto zlib
+PKG_BUILDDEP:=		xproto zlib
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

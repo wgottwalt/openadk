@@ -12,9 +12,9 @@ PKG_SECTION:=		utils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/hotplug/}
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_CFLINE_UDEV:=	depends on ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC
 
-CFLINE_UDEV:= 		depends on ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC\n\t
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 

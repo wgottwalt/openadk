@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
+# always use tab spaces as separator, no spaces
 PKG_NAME:=		@PKG@
 PKG_VERSION:=		@VER@
 PKG_RELEASE:=		1
@@ -10,9 +11,44 @@ PKG_MD5SUM:=		add md5sum of package here
 PKG_DESCR:=		add short description
 PKG_SECTION:=		add section
 PKG_DEPENDS:=		add dependendant package names
-PKG_BUILDDEP+=		add packages which need to be compiled
+PKG_BUILDDEP:=		add packages which need to be compiled
 PKG_URL:=		add project url
 PKG_SITES:=		add download url without package name
+
+# if more than one binary package is created, add symbol names of all here
+# leave variable empty, when no binary package is created. You can set it
+# to override PKG_NAME for the main binary package 
+#PKG_SUBPKGS:=		PKG SUBPKG1 SUBPKG2
+# you can add separate, build depends, run depends, section and description
+# build time dependency for subpackage SUBPKG1, package dir
+#PKGSB_SUBPKG1:=
+# runtime dependency for subpackage SUBPKG1, package names
+#PKGSS_SUBPKG1:=
+# section for subpackage SUBPKG1
+#PKGSC_SUBPKG1:=
+# description for subpackage SUBPKG1
+#PKGSD_SUBPKG1:=
+
+# define your flavours for your package here, WITH_SSL f.e.
+#PKG_FLAVOURS:=		WITH_SSL
+# flavour description
+#PKGFD_WITH_SSL:=	enable SSL support
+# flavour runtime dependency, package name
+#PKGFS_WITH_SSL:=	libopenssl
+# flavour build time dependency, package dir
+#PKGFB_WITH_SSL:=	openssl
+
+# define your choices for your package here, f.e. different SSL implementations
+#PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
+# package description for each choice
+#PKGCD_WITH_OPENSSL:=	SSL support via OpenSSL library
+#PKGCD_WITH_GNUTLS:=	SSL support via GNUTLS library
+# package build time dependencies
+#PKGCB_WITH_OPENSSL:=	openssl
+#PKGCB_WITH_GNUTLS:=	gnutls
+# package runtime dependencies
+#PKGCS_WITH_OPENSSL:=	libopenssl
+#PKGCS_WITH_GNUTLS:=	libgnutls
 
 # if downloaded package is not ending with .tar.gz use following
 #DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2

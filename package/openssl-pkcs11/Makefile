@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		840af6e54dc21445c54f74e15005ba4d
 PKG_DESCR:=		pkcs11 engine for openssl
 PKG_SECTION:=		crypto
-PKG_BUILDDEP+=		libp11
+PKG_BUILDDEP:=		libp11
 PKG_URL:=		http://www.opensc-project.org/engine_pkcs11
 PKG_SITES:=		http://www.opensc-project.org/files/engine_pkcs11/
 

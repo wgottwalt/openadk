@@ -10,8 +10,8 @@ PKG_MD5SUM:=		1951c7dc0fe729af9ffaf58910340d12
 PKG_DESCR:=		Host Integrity Monitoring System (scanning agent)
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libopenssl libpthread
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://osiris.shmoo.com
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://osiris.shmoo.com/
 PKG_SITES:=		http://osiris.shmoo.com/data/
 
 include ${TOPDIR}/mk/package.mk

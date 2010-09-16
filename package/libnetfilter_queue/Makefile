@@ -10,7 +10,7 @@ PKG_MD5SUM:=		2cde35e678ead3a8f9eb896bf807a159
 PKG_DESCR:=		API to packets that have been queued by the kernel packet filter
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink
-PKG_BUILDDEP+=		libnfnetlink
+PKG_BUILDDEP:=		libnfnetlink
 PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_queue/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_queue/files/
 

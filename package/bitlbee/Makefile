@@ -10,8 +10,8 @@ PKG_MD5SUM:=		26b9bfc5446bdf0e932e8074d117be67
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		chat
 PKG_DEPENDS:=		glib libiconv libopenssl
-PKG_BUILDDEP+=		glib libiconv openssl
-PKG_URL:=		http://www.bitlbee.org
+PKG_BUILDDEP:=		glib libiconv openssl
+PKG_URL:=		http://www.bitlbee.org/
 PKG_SITES:=		http://get.bitlbee.org/src/
 
 include ${TOPDIR}/mk/package.mk

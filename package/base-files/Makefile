@@ -77,12 +77,4 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
 
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
-
-fake: rebuild
-
 include ${TOPDIR}/mk/pkg-bottom.mk

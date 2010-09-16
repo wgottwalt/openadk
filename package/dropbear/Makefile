@@ -9,21 +9,20 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		1c69ec674481d7745452f68f2ea5597e
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
-PKG_URL:=		http://matt.ucc.asn.au/dropbear
+PKG_URL:=		http://matt.ucc.asn.au/dropbear/
 PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 
-PKG_DESCR_UTIL:=	Utility for converting SSH private keys
+PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
+PKG_SUBPKGS:=		DROPBEAR DBCONVERT
+PKGSD_DBCONVERT:=	Utility for converting SSH private keys
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_UTIL},${PKG_SECTION}))
-
-PKGDFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
+$(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
 CONFIGURE_ARGS+=	--disable-pam \
 			--enable-openpty \
 			--enable-syslog \

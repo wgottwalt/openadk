@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b093d7c6bc7f97ae6fd35d048529232a
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		dns
-PKG_URL:=		http://thekelleys.org.uk/dnsmasq
+PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
 
 include ${TOPDIR}/mk/package.mk

@@ -10,8 +10,8 @@ PKG_MD5SUM:=		ee0b1a3366c6e379cae34be6fa5dcb15
 PKG_DESCR:=		VPN tunnel daemon
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib liblzo libopenssl kmod-tun
-PKG_BUILDDEP+=		zlib liblzo openssl
-PKG_URL:=		http://www.tinc-vpn.org
+PKG_BUILDDEP:=		zlib liblzo openssl
+PKG_URL:=		http://www.tinc-vpn.org/
 PKG_SITES:=		http://www.tinc-vpn.org/packages/
 
 include ${TOPDIR}/mk/package.mk

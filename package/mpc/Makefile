@@ -10,7 +10,7 @@ PKG_MD5SUM:=		08af459a18388c35dd81de8f9f1534c9
 PKG_DESCR:=		music player client
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmpdclient
-PKG_BUILDDEP+=		libmpdclient
+PKG_BUILDDEP:=		libmpdclient
 PKG_URL:=		http://mpd.wikia.com/wiki/Client:Mpc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
 

@@ -10,14 +10,14 @@ PKG_MD5SUM:=		e29a78b108c4687f7e7937110d1d0415
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err
-PKG_BUILDDEP+=		ncurses e2fsprogs
-PKG_URL:=		http://web.mit.edu/kerberos
+PKG_BUILDDEP:=		ncurses e2fsprogs
+PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.8/
-
 PKG_NOPARALLEL:=	1
 
-PKG_DESCR_LIB:=		MIT kerberos libraries
-PKG_SECTION_LIB:=	libs
+PKG_SUBPKGS:=		KRB5_SERVER LIBKRB5
+PKGSD_LIBKRB5:=		MIT kerberos libraries
+PKGSC_LIBKRB5:=		libs
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
@@ -25,7 +25,7 @@ WRKSRC=			${WRKDIST}/src
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKG_DESCR_LIB},${PKG_SECTION_LIB}))
+$(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

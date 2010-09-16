@@ -9,9 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0f6d7630f26042e00bc59875755cf879
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
-PKG_NOPARALLEL:=	1
-PKG_URL:=		http://www.ruby-lang.org
+PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/
+PKG_NOPARALLEL:=	1
+
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
 
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p429.tar.gz

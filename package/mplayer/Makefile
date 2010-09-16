@@ -12,17 +12,15 @@ PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
 PKG_DEPENDS+=		libogg libpng libpthread libvorbis
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
-PKG_BUILDDEP+=		alsa-lib libmad libvorbis faad2 ncurses zlib
+PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext
-ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
-PKG_BUILDDEP+=		DirectFB
-endif
-PKG_URL:=		http://www.mplayerhq.hu
+PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
-PKGFS_WITH_DIRECTFB:=	directfb
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
+PKGFS_WITH_DIRECTFB:=	directfb
+PKGFB_WITH_DIRECTFB:=	DirectFB
 
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
 

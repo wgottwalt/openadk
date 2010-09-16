@@ -10,10 +10,9 @@ PKG_MD5SUM:=		c4eb8e282902e75f4f040f09ea9d99d5
 PKG_DESCR:=		a SIP stress and diagnostics utility
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://sipsak.org
-PKG_SITES:=		http://download.berlios.de/sipsak/ \
-			http://ftp.iptel.org/pub/sipsak/
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://sipsak.org/
+PKG_SITES:=		http://download.berlios.de/sipsak/
 
 include ${TOPDIR}/mk/package.mk
 

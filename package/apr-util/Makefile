@@ -3,15 +3,15 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=              apr-util
-PKG_VERSION:=           1.3.9
-PKG_RELEASE:=           1
-PKG_MD5SUM:=            cc2ec0ba4f01d88375f1170f762518fa
+PKG_NAME:=		apr-util
+PKG_VERSION:=		1.3.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		cc2ec0ba4f01d88375f1170f762518fa
 PKG_DESCR:=		Apache Portable Runtime utility library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat apr
-PKG_BUILDDEP+=		expat apr
-PKG_URL:=		http://apr.apache.org
+PKG_BUILDDEP:=		expat apr
+PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://apache.mirror.clusters.cc/apr/
 
 include ${TOPDIR}/mk/package.mk

@@ -9,14 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
 PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
-PKG_BUILDDEP+=		nss libdb
-PKG_URL:=		http://www.rpm.org
+PKG_BUILDDEP:=		nss libdb
+PKG_URL:=		http://www.rpm.org/
 PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
 
-DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
-
-PKG_TARGET_DEPENDS:=    !foxboard
 PKG_HOST_DEPENDS:=	!cygwin
+PKG_TARGET_DEPENDS:=	!foxboard
+
+DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 

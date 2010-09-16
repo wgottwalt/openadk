@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6bbee9a86506419657d87123b7a6f2c1
 PKG_URL:=		http://www.fefe.de/libowfat
 PKG_SITES:=		http://dl.fefe.de/
+PKG_SUBPKGS:=
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

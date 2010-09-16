@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3dd55b952826d2b32f51308f2f91aa89
 PKG_DESCR:=		internationalisation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP+=		libiconv libpthread
+PKG_BUILDDEP:=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
 PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
 

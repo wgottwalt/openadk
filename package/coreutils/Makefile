@@ -12,13 +12,14 @@ PKG_SECTION:=		base
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 
-PKG_DESCR_TSORT:=	topological sort utility
-PKG_SECTION_TSORT:=	misc
+PKG_SUBPKGS:=		TSORT
+PKGSD_TSORT:=		topological sort utility
+PKGSC_TSORT:=		misc
 
 include $(TOPDIR)/mk/package.mk
 
 #$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_TSORT},${PKG_SECTION_TSORT}))
+$(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TSORT},${PKGSC_TSORT}))
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_TSORT)/usr/bin

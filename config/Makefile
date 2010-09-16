@@ -53,25 +53,25 @@ GCONF_OBJS=$(patsubst %.c,%.o, $(GCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
+	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
 
 gconf: $(GCONF_OBJS) $(SHARED_OBJS)
-	$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(HOSTGTKLIBS)
+	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(HOSTGTKLIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
 
 $(GCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) $(HOSTGTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) $(HOSTGTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c glob.c -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) -I. -c glob.c -o $@
 
 lkc_defs.h: lkc_proto.h
 	@sed < $< > $@ 's/P(\([^,]*\),.*/#define \1 (\*\1_p)/'
@@ -105,19 +105,19 @@ lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
 	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 lex.zconf.c: lex.zconf.c_shipped
-	$(CP) lex.zconf.c_shipped lex.zconf.c
+	@$(CP) lex.zconf.c_shipped lex.zconf.c
 
 zconf.hash.c: zconf.hash.c_shipped
-	$(CP) zconf.hash.c_shipped zconf.hash.c
+	@$(CP) zconf.hash.c_shipped zconf.hash.c
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	@$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
 
 zconf.tab.c: zconf.tab.c_shipped
-	$(CP) zconf.tab.c_shipped zconf.tab.c
+	@$(CP) zconf.tab.c_shipped zconf.tab.c
 
 zconf.tab.h: zconf.tab.h_shipped
-	$(CP) zconf.tab.h_shipped zconf.tab.h
+	@$(CP) zconf.tab.h_shipped zconf.tab.h
 endif
 
 .PHONY: ncurses

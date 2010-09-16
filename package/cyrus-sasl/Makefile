@@ -10,11 +10,12 @@ PKG_MD5SUM:=		45dde9d19193ae9dd388eb68b2027bc9
 PKG_DESCR:=		a general purpose authentication library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://asg.web.cmu.edu/sasl
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://asg.web.cmu.edu/sasl/
 PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
-
 PKG_NOPARALLEL:=	1
+
+PKG_SUBPKGS:=		LIBSASL2
 
 include ${TOPDIR}/mk/package.mk
 

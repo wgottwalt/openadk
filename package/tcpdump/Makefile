@@ -10,7 +10,7 @@ PKG_MD5SUM:=		d0dd58bbd6cd36795e05c6f1f74420b0
 PKG_DESCR:=		A tool for network monitoring and data acquisition
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP+=		libpcap
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 

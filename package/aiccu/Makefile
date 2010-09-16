@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c9bcc83644ed788e22a7c3f3d4021350
 PKG_DESCR:=		SixXS Automatic IPv6 Connectivity Client Utility
 PKG_SECTION:=		ipv6
 PKG_DEPENDS:=		kmod-ipv6 libpthread
-PKG_URL:=		http://www.sixxs.net
+PKG_URL:=		http://www.sixxs.net/
 PKG_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).tar.gz

@@ -10,9 +10,11 @@ PKG_MD5SUM:=		c61ef795fa450eb692602a661ec8d7f1
 PKG_DESCR:=		a command line option parsing library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv
-PKG_BUILDDEP+=		libiconv
-PKG_URL:=		http://rpm5.org
+PKG_BUILDDEP:=		libiconv
+PKG_URL:=		http://rpm5.org/
 PKG_SITES:=		http://rpm5.org/files/popt/
+
+PKG_SUBPKGS:=		LIBPOPT
 
 include ${TOPDIR}/mk/package.mk
 

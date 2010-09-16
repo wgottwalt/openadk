@@ -10,7 +10,7 @@ PKG_MD5SUM:=		a0fb49ccb6b910bdbd7e76a9960394e3
 PKG_DESCR:=		small non-forking webserver
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libiconv
-PKG_BUILDDEP+=		libowfat libiconv
+PKG_BUILDDEP:=		libowfat libiconv
 PKG_URL:=		http://www.fefe.de/gatling/
 PKG_SITES:=		http://dl.fefe.de/
 

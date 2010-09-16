@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libXv
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libX11 videoproto libXext
 PKG_MD5SUM:=		6ee98790de6b3cd470074e60057d5c5c
 PKG_DESCR:=		X11 Xvideo extensions
 PKG_SECTION:=		x11/libs
+PKG_BUILDDEP:=		libX11 videoproto libXext
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

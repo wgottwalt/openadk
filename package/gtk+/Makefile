@@ -10,9 +10,11 @@ PKG_MD5SUM:=		f98617af9f6be3065f64248f78dae2b7
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		glib
-PKG_BUILDDEP+=		cairo atk pango libXext renderproto libXrender
+PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/2.18/
+
+PKG_SUBPKGS:=		GTK
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

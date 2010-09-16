@@ -9,8 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c4438b22c08e5811ff10e2b06ee9b9ae
 PKG_DESCR:=		an open source patent-free speech compression codec
 PKG_SECTION:=		libs
-PKG_URL:=		http://speex.org
+PKG_URL:=		http://speex.org/
 PKG_SITES:=		http://downloads.us.xiph.org/releases/speex/
+
+PKG_SUBPKGS:=		LIBSPEEX
 
 include ${TOPDIR}/mk/package.mk
 

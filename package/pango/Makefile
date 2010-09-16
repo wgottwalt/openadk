@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		aa3dee16506275a36c6c9239c9e2dfdd
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.pango.org
+PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=/pango/1.28/}
 
 ifeq ($(ADK_STATIC),y)

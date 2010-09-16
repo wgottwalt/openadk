@@ -10,7 +10,7 @@ PKG_MD5SUM:=		b92cba3cbcf1ee9bc221118a85d23dcd
 PKG_DESCR:=		A cross platform audio library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		esound
-PKG_BUILDDEP+=		esound
+PKG_BUILDDEP:=		esound
 PKG_URL:=		http://www.xiph.org/ao
 PKG_SITES:=		http://downloads.xiph.org/releases/ao/
 

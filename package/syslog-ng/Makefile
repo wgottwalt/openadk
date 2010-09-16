@@ -10,8 +10,8 @@ PKG_MD5SUM:=		a3cbfdb6e1e5beea181a7349749719f3
 PKG_DESCR:=		A powerful syslog daemon
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libol libwrap
-PKG_BUILDDEP+=		libol tcp_wrappers
-PKG_URL:=		http://www.balabit.com
+PKG_BUILDDEP:=		libol tcp_wrappers
+PKG_URL:=		http://www.balabit.com/
 PKG_SITES:=		http://www.balabit.com/downloads/files/syslog-ng/sources/1.6/src/
 
 include ${TOPDIR}/mk/package.mk

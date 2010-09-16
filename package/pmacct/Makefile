@@ -4,24 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pmacct
-PKG_VERSION:=		0.12.2
+PKG_VERSION:=		0.12.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1c656ea9ca13455c54e8efb9f8299b3d
+PKG_MD5SUM:=		7e4196c0f87f1382a8eed4eb1bdecdc1
 PKG_DESCR:=		IP accounting daemons
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP+=		libpcap
-ifneq ($(ADK_COMPILE_PMACCT_MYSQL),)
-PKG_BUILDDEP+=		mysql
-endif
-ifneq ($(ADK_COMPILE_PMACCT_PGSQL),)
-PKG_BUILDDEP+=		postgresql
-endif
-ifneq ($(ADK_COMPILE_PMACCT_SQLITE),)
-PKG_BUILDDEP+=		sqlite
-endif
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.pmacct.net/
 PKG_SITES:=		http://www.pmacct.net/
+
+PKG_SUBPKGS:=		NFACCTD PMACCTD SFACCTD PMACCT_CLIENT
 
 include $(TOPDIR)/mk/package.mk
 

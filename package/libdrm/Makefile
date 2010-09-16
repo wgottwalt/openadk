@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		dcbf9aa0497c84c7e4af15adb0021955
 PKG_DESCR:=		DRM library
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		libpthread-stubs
+PKG_BUILDDEP:=		libpthread-stubs
 PKG_URL:=		http://dri.freedesktop.org/wiki/
 PKG_SITES:=		http://dri.freedesktop.org/libdrm/
 
