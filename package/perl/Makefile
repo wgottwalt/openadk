@@ -4,34 +4,28 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
-PKG_VERSION:=		5.10.0
+PKG_VERSION:=		5.12.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d2c39b002ebfd2c3c5dba589365c5a71
-PKG_DESCR:=		Perl without operating-specific functions
+PKG_MD5SUM:=		af2df531d46b77fdf0d97eecb03eddb2
+PKG_DESCR:=		full-blown Perl
 PKG_SECTION:=		lang
-PKG_URL:=		www.perl.org
-PKG_SITES:=		ftp://ftp.cpan.org/pub/CPAN/src/5.0/ \
-			ftp://ftp.mpi-sb.mpg.de/pub/perl/CPAN/src/5.0/ \
-			ftp://ftp.gmd.de/mirrors/CPAN/src/5.0/ \
-			ftp://ftp.funet.fi/pub/languages/perl/CPAN/src/5.0/
+PKG_URL:=		http://www.perl.org/
+PKG_SITES:=		http://www.cpan.org/src/
 
-CFLINE_PERL:=		depends on ADK_NATIVE
+PKG_CFLINE_PERL:=	depends on ADK_NATIVE
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
-INSTALL_STYLE:=         manual
 
 pre-configure:
-	(cd ${WRKBUILD}; ./Configure -des -Dcc=gcc);
+	(cd ${WRKBUILD}; ./Configure -des -Dcc=gcc -Dprefix=/usr);
 
-do-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
 	${INSTALL_DIR} ${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
-	${INSTALL_BIN} ${WRKBUILD}/perl ${IDIR_PERL}/usr/bin/perl
-	${INSTALL_DATA} ${WRKBUILD}/lib/strict.pm \
-		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
+	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/perl
 
 include ${TOPDIR}/mk/pkg-bottom.mk

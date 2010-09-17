@@ -10,7 +10,7 @@ PKG_MD5SUM:=		600f4daa395112ed19a3633deb0829ff
 PKG_DESCR:=		The GNU Krell Monitors Server
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		glib libpthread
-PKG_BUILDDEP+=		glib
+PKG_BUILDDEP:=		glib
 PKG_URL:=		http://members.dslextreme.com/users/billw/gkrellm/gkrellm.html
 PKG_SITES:=		http://members.dslextreme.com/users/billw/gkrellm/
 

@@ -10,9 +10,9 @@ PKG_MD5SUM:=		cb5629b2709ada82d34c22fef3ed77a9
 PKG_DESCR:=		An anonymous Internet communication system
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libevent libopenssl zlib libpthread
-PKG_BUILDDEP+=		libevent openssl zlib
-PKG_URL:=		http://tor.eff.org
-PKG_SITES:=		http://tor.eff.org/dist/ \
+PKG_BUILDDEP:=		libevent openssl zlib
+PKG_URL:=		http://tor.eff.org/
+PKG_SITES:=		http://tor.eff.org/dist/
 
 include ${TOPDIR}/mk/package.mk
 

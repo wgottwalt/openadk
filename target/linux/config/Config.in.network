@@ -265,6 +265,7 @@ config ADK_KPACKAGE_KMOD_BONDING
 
 source target/linux/config/Config.in.sched
 source target/linux/config/Config.in.ipsec
+source target/linux/config/Config.in.ipvs
 
 endmenu
 

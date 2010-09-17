@@ -61,9 +61,6 @@ pkg-help:
 	@echo 'This does not automatically resolve package dependencies!'
 
 dev-help:
-	@echo 'Regenerate menu information via "make menu"'
-	@echo 'Regenerate dependency information via "make dep"'
-	@echo
 	@echo 'Fast way of updating package patches:'
 	@echo '  run "make package=<pkgname> clean" to start with a good base'
 	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
@@ -180,15 +177,6 @@ NO_ERROR=0
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
 	fi
-	@if ! mksh -c 'echo $$KSH_VERSION' 2>&1 | grep -F 'MIRBSD' >/dev/null 2>&1; then \
-		echo "MirBSD ksh (mksh) needs to be installed."; \
-		exit 1; \
-	else \
-		if [ $$(mksh -c 'echo $$KSH_VERSION' |cut -d ' ' -f 3|sed "s#R##") -le 34 ]; then \
-			echo "MirBSD ksh is too old. R35 or higher needed."; \
-			exit 1; \
-		fi \
-	fi
 	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
 		echo >&2 Error: you must build with umask 022, sorry.; \
 		exit 1; \
@@ -221,6 +209,7 @@ NO_ERROR=0
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
 	@echo "OStype:=$$(env uname)" >>prereq.mk
+	@echo "ADKtype:=$$(cat /etc/adktarget 2>/dev/null)" >>prereq.mk
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
@@ -228,6 +217,7 @@ NO_ERROR=0
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh
 	@echo '===> Prerequisites checked successfully.'
+	@touch .adkinit
 	@touch $@
 
 .PHONY: prereq prereq-noerror

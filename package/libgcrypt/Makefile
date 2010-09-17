@@ -10,7 +10,7 @@ PKG_MD5SUM:=		325294c12e7b99d82dee3a8bf8c2c28e
 PKG_DESCR:=		GNU crypto library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgpg-error
-PKG_BUILDDEP+=		libgpg-error
+PKG_BUILDDEP:=		libgpg-error
 PKG_URL:=		http://directory.fsf.org/project/libgcrypt
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
 

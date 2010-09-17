@@ -10,7 +10,7 @@ PKG_MD5SUM:=		5c44983ee27809867041feff6bb4423a
 PKG_DESCR:=		OBEX push command
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		openobex
-PKG_BUILDDEP+=		openobex
+PKG_BUILDDEP:=		openobex
 PKG_SITES:=		http://xmailserver.org/
 
 include ${TOPDIR}/mk/package.mk

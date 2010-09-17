@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3d8973ed87053d7acc1f4d44af2c4688
 PKG_DESCR:=		Enlightened Sound Daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libaudiofile
-PKG_BUILDDEP+=		libaudiofile
+PKG_BUILDDEP:=		libaudiofile
 PKG_URL:=		http://www.tux.org/~ricdude/EsounD.html
 PKG_SITES:=		ftp://ftp.gnome.org/pub/gnome/sources/esound/0.2/
 

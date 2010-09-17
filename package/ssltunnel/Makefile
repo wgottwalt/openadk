@@ -10,7 +10,7 @@ PKG_MD5SUM:=		4039b50566a33a4077883ea974e476d5
 PKG_DESCR:=		A PPP over SSL vpn tool
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl ppp
-PKG_BUILDDEP+=		openssl ppp
+PKG_BUILDDEP:=		openssl ppp
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
 
 include ${TOPDIR}/mk/package.mk

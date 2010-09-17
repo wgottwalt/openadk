@@ -16,6 +16,7 @@ endif
 PKG_NAME:=		libpthread
 PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
+
 NO_DISTFILES:=		1
 
 ifeq ($(ADK_STATIC),y)
@@ -31,8 +32,10 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
+ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
 	${CP} ${STAGING_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
 	cd $(IDIR_LIBPTHREAD)/lib && ln -sf libpthread.so.0 libpthread.so
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

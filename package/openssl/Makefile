@@ -10,16 +10,17 @@ PKG_MD5SUM:=		e3873edfffc783624cfbdb65e2249cbd
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		zlib
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.openssl.org/
 PKG_SITES:=		http://www.openssl.org/source/
 
-PKG_DESCR_UTIL:=	OpenSSL command line tool
-PKG_SECTION_UTIL:=	crypto
-PKG_DEPENDS_UTIL:=	libopenssl
-PKG_DESCR_DEV:=		development files for openssl
-PKG_SECTION_DEV:=	devel
-PKG_DEPENDS_DEV:=	libopenssl
+PKG_SUBPKGS:=		LIBOPENSSL LIBOPENSSL_DEV OPENSSL_UTIL
+PKGSD_OPENSSL_UTIL:=	OpenSSL command line tool
+PKGSC_OPENSSL_UTIL:=	crypto
+PKGSS_OPENSSL_UTIL:=	libopenssl
+PKGSD_LIBOPENSSL_DEV:=	development files for openssl
+PKGSC_LIBOPENSSL_DEV:=	devel
+PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
 PKG_FLAVOURS:=		WITH_EC
 PKGFD_WITH_EC:=		enable Elliptic Curve crypto
@@ -28,8 +29,8 @@ PKGSUB_WITH_EC:=	libopenssl
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_DEV},${PKG_DESCR_DEV},${PKG_SECTION_DEV}))
-$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_UTIL},${PKG_DESCR_UTIL},${PKG_SECTION_UTIL}))
+$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENSSL_DEV},${PKGSD_LIBOPENSSL_DEV},${PKGSC_LIBOPENSSL_DEV}))
+$(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

@@ -22,7 +22,7 @@ image-prepare-post:
 	fi
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
-KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(ADK_TARGET)-$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
+KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
 
 kernel-package: $(LINUX_DIR)/vmlinux
 	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
@@ -30,7 +30,7 @@ kernel-package: $(LINUX_DIR)/vmlinux
 	@mkdir -p $(KERNEL_PKGDIR)/boot
 	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/vmlinuz-adk
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
-	    ../linux/kernel.control ${ADK_TARGET}-${KERNEL_VERSION} ${CPU_ARCH}
+	    ../linux/kernel.control ${KERNEL_VERSION} ${CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
@@ -51,7 +51,7 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P | \
+	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P | \
 		${ADK_COMPRESSION_TOOL} >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
@@ -59,7 +59,7 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 		$(LINUX_DIR)/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${STAGING_TOOLS}/bin/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
+	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	${STAGING_TOOLS}/bin/mksquashfs ${TARGET_DIR} \

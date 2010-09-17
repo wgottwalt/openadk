@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f49e3587cdc299707da0786a681f9c05
 PKG_DESCR:=		miscellaneous utility functions for X libraries
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP+=		libXt
+PKG_BUILDDEP:=		libXt
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f1317dbb2398374d6691edd5bff1b91d
 PKG_DESCR:=		Python scripting language
 PKG_SECTION:=		lang
-PKG_URL:=		http://www.python.org
+PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/3.1.1/
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin

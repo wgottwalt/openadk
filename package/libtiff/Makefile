@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
 PKG_DESCR:=		A library for reading/writing TIFF images
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.libtiff.org
+PKG_URL:=		http://www.libtiff.org/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
 
 DISTFILES:=		tiff-${PKG_VERSION}.tar.gz

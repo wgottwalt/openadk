@@ -369,7 +369,7 @@ config BUSYBOX_BUILD_LIBBUSYBOX
 
 config BUSYBOX_FEATURE_INDIVIDUAL
 	bool "Produce a binary for each applet, linked against libbusybox"
-	default y
+	default n
 	depends on BUSYBOX_BUILD_LIBBUSYBOX
 	help
 	  If your CPU architecture doesn't allow for sharing text/rodata
@@ -387,7 +387,7 @@ config BUSYBOX_FEATURE_INDIVIDUAL
 
 config BUSYBOX_FEATURE_SHARED_BUSYBOX
 	bool "Produce additional busybox binary linked against libbusybox"
-	default y
+	default n
 	depends on BUSYBOX_BUILD_LIBBUSYBOX
 	help
 	  Build busybox, dynamically linked against libbusybox.so.N.N.N.

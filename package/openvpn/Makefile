@@ -10,17 +10,15 @@ PKG_MD5SUM:=		b273ed2b5ec8616fb9834cde8634bce7
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		kmod-tun libopenssl
-PKG_BUILDDEP+=		openssl
-ifeq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),y)
-PKG_BUILDDEP+=		liblzo
-endif
-PKG_URL:=		http://openvpn.net
-PKG_SITES:=		http://openvpn.net/release/ \
-			${MASTER_SITE_SOURCEFORGE:=openvpn/}
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://openvpn.net/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openvpn/}
 
+PKG_SUBPKGS:=		OPENVPN OPENVPN_EASY_RSA
 PKG_FLAVOURS:=		WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
 PKGFD_WITH_LZO:=	enable LZO compression support
 PKGFS_WITH_LZO:=	liblzo
+PKGFB_WITH_LZO:=	liblzo
 PKGFD_WITH_MANAGEMENT:=	enable management server support
 PKGFD_WITH_HTTPPROXY:=	enable http proxy support
 PKGFD_WITH_SOCKS:=	enable socks proxy support

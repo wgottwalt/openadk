@@ -32,23 +32,9 @@ config ADK_HOST
 config ADK_DEVELSYSTEM
 	bool "Compile a ADK development system"
 	default n
-	select BUSYBOX_CMP
-	select BUSYBOX_COMM
-	select BUSYBOX_EXPR
-	select BUSYBOX_INSTALL
-	select BUSYBOX_MKTEMP
-	select BUSYBOX_UNZIP
-	select BUSYBOX_RMDIR
-	select BUSYBOX_SPLIT
-	select BUSYBOX_TAC
-	select BUSYBOX_TEE
-	select BUSYBOX_WGET
-	select BUSYBOX_YES
-	select BUSYBOX_TRUE
 	select ADK_PACKAGE_BASH
 	select ADK_PACKAGE_BINUTILS
 	select ADK_PACKAGE_BZIP2
-	select ADK_PACKAGE_CPIO
 	select ADK_PACKAGE_DIFFUTILS
 	select ADK_PACKAGE_FILE
 	select ADK_PACKAGE_GAWK
@@ -82,7 +68,7 @@ config ADK_DEBUG
 	default n
 	help
 	  All packages and libc will be compiled and packaged with debug information.
-	  Mostly useful for NFS root or big USB/CF disk setups.
+	  Mostly useful for NFS root or big USB/CF or hard disk setups.
 
 config ADK_STATIC
 	bool "Link applications statically by default"
@@ -150,6 +136,76 @@ config ADK_HOST_DARWIN
 config ADK_HOST_CYGWIN
 	prompt "Cygwin"
 	boolean
+
+endchoice
+
+choice
+prompt "Hardware profile (autodetection on OpenADK systems)"
+config ADK_HARDWARE_NOPROFILE
+	bool "no profile"
+
+config ADK_HARDWARE_IBMX40
+	bool "IBM X40 laptop"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_SWAP
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_ATH5K
+	select ADK_KERNEL_MAC80211_LEDS
+        select ADK_KERNEL_ATH_COMMON
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_OSSEMUL
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KPACKAGE_KMOD_USB
+	select ADK_KPACKAGE_KMOD_USB_EHCI_HCD
+	select ADK_KPACKAGE_KMOD_USB_OHCI_HCD
+	help
+         Hardware profile for IBM X40 laptop's.
+
+config ADK_HARDWARE_YEELONG
+	bool "Yeelong laptop"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_SWAP
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
+	select ADK_KPACKAGE_KMOD_RTL8187
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
+	select ADK_KPACKAGE_KMOD_SND_OSSEMUL
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KPACKAGE_KMOD_USB
+	select ADK_KPACKAGE_KMOD_USB_EHCI_HCD
+	select ADK_KPACKAGE_KMOD_USB_OHCI_HCD
+	help
+         Hardware profile for Lemotes Yeelong laptop.
+	 Selects drivers for wireless card, usb controller and sound card.
 
 endchoice
 

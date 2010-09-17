@@ -10,7 +10,7 @@ PKG_MD5SUM:=		e7d810a75d22954169f1530a436aca4c
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libpthread alsa-lib libltdl
-PKG_BUILDDEP+=		alsa-lib
+PKG_BUILDDEP:=		alsa-lib
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mpg123/}
 

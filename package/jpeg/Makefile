@@ -10,8 +10,9 @@ PKG_MD5SUM:=		382ef33b339c299b56baf1296cda9785
 PKG_DESCR:=		The Independent JPEG Groups JPEG runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.ijg.org/
-PKG_SITES:=		http://www.ijg.org/files/ \
-			ftp://ftp.uu.net/graphics/jpeg/
+PKG_SITES:=		http://www.ijg.org/files/
+
+PKG_SUBPKGS:=		LIBJPEG
 
 DISTFILES:=		${PKG_NAME}src.v${PKG_VERSION}.tar.gz
 

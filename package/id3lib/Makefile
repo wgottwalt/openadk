@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		19f27ddd2dda4b2d26a559a4f0f402a7
 PKG_DESCR:=		An ID3v1/ID3v2 tagging library
 PKG_SECTION:=		libs
-PKG_CXX:=		ID3LIB
 PKG_DEPENDS:=		zlib libiconv
-PKG_BUILDDEP+=		zlib libiconv
-PKG_URL:=		http://id3lib.sourceforge.net
+PKG_BUILDDEP:=		zlib libiconv
+PKG_URL:=		http://id3lib.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
+PKG_CXX:=		ID3LIB
 
 include ${TOPDIR}/mk/package.mk
 

@@ -9,17 +9,17 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		38a74c89d8913b9b5f33737047623c18
 PKG_DESCR:=		ISC DHCP server
 PKG_SECTION:=		dhcp
-PKG_URL:=		https://www.isc.org/software/dhcp
+PKG_URL:=		https://www.isc.org/software/dhcp/
 PKG_SITES:=		ftp://ftp.isc.org/isc/dhcp/
 
-PKG_DESCR_RELAY:=	ISC DHCP relay server
+PKG_SUBPKGS:=		DHCP_SERVER DHCP_RELAY
+PKGSD_DHCP_RELAY:=	ISC DHCP relay server
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DHCP_SERVER,dhcp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_RELAY},${PKG_SECTION}))
+$(eval $(call PKG_template,DHCP_RELAY,dhcp-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DHCP_RELAY},${PKG_SECTION}))
 
-#TCFLAGS+=		-D_GNU_SOURCE
 CONFIGURE_ENV+=		ac_cv_file__dev_random=yes
 
 post-install:

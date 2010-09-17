@@ -165,7 +165,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
-	    cpio -padlmu '${STAGING_DIR}'
+	    $(TOPDIR)/bin/tools/cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \

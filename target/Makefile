@@ -39,9 +39,13 @@ config-prepare: $(TOPDIR)/.config
 	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modkernel
 	@sed -n '/^# ADK_KERNEL/s//# CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.nokernel
-# if native build, first try /proc/config.gz
 ifeq ($(ADK_NATIVE),y)
-	@if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi
+	@if [ -f /etc/adktarget ];then \
+		target=$$(cat /etc/adktarget); \
+		cp $(TOPDIR)/target/$$target/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+	else \
+	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
+	fi
 else
 	@cp ${ADK_TARGET}/kernel.config ${BUILD_DIR}/.kernelconfig.board
 endif

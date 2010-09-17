@@ -9,12 +9,12 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1ceef3209cca88be8f1bd9de99735954
 PKG_DESCR:=		A standard c++ library for embedded systems
 PKG_SECTION:=		libs
-PKG_URL:=		http://cxx.uclibc.org
+PKG_URL:=		http://cxx.uclibc.org/
 PKG_SITES:=		http://cxx.uclibc.org/src/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-CFLINE_UCLIBCXX:= 	depends on ADK_TARGET_LIB_UCLIBC
+PKG_CFLINE_UCLIBCXX:= 	depends on ADK_TARGET_LIB_UCLIBC
 
 include ${TOPDIR}/mk/package.mk
 

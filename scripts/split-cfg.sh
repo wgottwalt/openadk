@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 # Note: this is slow, but it's not the "progress stuff" which cau-
 # ses the slow-down.
+set -x
 
 TOPDIR=$1
 TARGET=$2

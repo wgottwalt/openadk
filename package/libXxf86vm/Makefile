@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		52b49483eccbdd1566b8c560fe7f76e8
 PKG_DESCR:=		add short description
 PKG_SECTION:=		libs
-PKG_BUILDDEP+=		xf86vidmodeproto libXext
+PKG_BUILDDEP:=		xf86vidmodeproto libXext
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk

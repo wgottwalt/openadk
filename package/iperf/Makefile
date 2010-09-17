@@ -9,10 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		8c5bc14cc2ea55f18f22afe3c23e3dcb
 PKG_DESCR:=		Internet Protocol bandwidth measuring tool
 PKG_SECTION:=		net
-PKG_CXX:=		IPERF
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
+PKG_CXX:=		IPERF
 
 include ${TOPDIR}/mk/package.mk
 

@@ -10,8 +10,7 @@ PKG_MD5SUM:=		92b2eb55b1e4ef7e2c0347069389390e
 PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
 PKG_URL:=		http://tslib.berlios.de/
-PKG_SITES:=		http://download.berlios.de/tslib/ \
-			http://download2.berlios.de/tslib/
+PKG_SITES:=		http://download.berlios.de/tslib/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

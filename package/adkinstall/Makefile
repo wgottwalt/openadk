@@ -9,6 +9,7 @@ PKG_RELEASE:=		5
 PKG_DESCR:=		openadk installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
+PKG_URL:=		http://www.openadk.org/
 
 PKG_TARGET_DEPENDS:=	alix wrap routerboard foxg20
 

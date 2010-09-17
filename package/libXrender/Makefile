@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1791473c18a83a333a048b72d719fc55
 PKG_DESCR:=		X11 rendering library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP+=		renderproto
+PKG_BUILDDEP:=		renderproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 ifeq ($(ADK_STATIC),y)

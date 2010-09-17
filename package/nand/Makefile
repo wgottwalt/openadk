@@ -10,14 +10,13 @@ PKG_DESCR:=		NAND utility
 PKG_SECTION:=		fs
 
 PKG_TARGET_DEPENDS:=	routerboard
+PKG_DFLT_NAND:=		y
 
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NAND,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-PKGDFLT_NAND=		y
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

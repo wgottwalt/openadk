@@ -10,7 +10,7 @@ PKG_MD5SUM:=		f8c29c67141ea78bb6ae8b97d5149480
 PKG_DESCR:=		interprets captured RADIUS packets
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		libpcap libopenssl
-PKG_BUILDDEP+=		openssl libpcap
+PKG_BUILDDEP:=		openssl libpcap
 PKG_URL:=		http://sourceforge.net/projects/raddump
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 

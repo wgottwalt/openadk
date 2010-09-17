@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1678ea99b973eb77eda4ecf6acae53f1
 PKG_DESCR:=		Mail processing tools
 PKG_SECTION:=		mail
-PKG_URL:=		http://www.procmail.org
+PKG_URL:=		http://www.procmail.org/
 PKG_SITES:=		http://www.procmail.org/
 
 include ${TOPDIR}/mk/package.mk

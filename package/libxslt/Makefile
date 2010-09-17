@@ -10,10 +10,9 @@ PKG_MD5SUM:=		e83ec5d27fc4c10c6f612879bea9a153
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP+=		libxml2
+PKG_BUILDDEP:=		libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
-PKG_SITES:=		http://xmlsoft.org/sources/ \
-			ftp://fr.rpmfind.net/pub/libxml/
+PKG_SITES:=		http://xmlsoft.org/sources/
 
 include ${TOPDIR}/mk/package.mk
 

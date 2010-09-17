@@ -10,8 +10,8 @@ PKG_MD5SUM:=		b53525900817cf1ba7ad3a516ab5bfe9
 PKG_DESCR:=		utility that provides fast incremental file transfer
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpopt
-PKG_BUILDDEP+=		popt
-PKG_URL:=		http://rsync.samba.org
+PKG_BUILDDEP:=		popt
+PKG_URL:=		http://rsync.samba.org/
 PKG_SITES:=		http://rsync.samba.org/ftp/rsync/
 
 include ${TOPDIR}/mk/package.mk

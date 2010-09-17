@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libXext
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libX11
 PKG_MD5SUM:=		6b61b3f657befded8ae66e04085c413e
 PKG_DESCR:=		X client interface to extensions of the X protocol
 PKG_SECTION:=		x11/libs
+PKG_BUILDDEP:=		libX11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 ifeq ($(ADK_STATIC),y)

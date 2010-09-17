@@ -9,31 +9,32 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		350fb150be526cdfc4d2b093cb4d69a7
 PKG_DESCR:=		A routing software package
 PKG_SECTION:=		route
-PKG_BUILDDEP+=		readline ncurses
-PKG_MULTI:=		1
+PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://www.quagga.net/
 PKG_SITES:=		http://www.quagga.net/download/
+PKG_MULTI:=		1
+
+PKG_SUBPKGS:=		QUAGGA QUAGGA_BGPD QUAGGA_OSPFD QUAGGA_OSPF6D
+PKG_SUBPKGS+=		QUAGGA_RIPNGD QUAGGA_RIPD QUAGGA_VTYSH
+PKGSD_QUAGGA_BGPD:=	BGP daemon
+PKGSD_QUAGGA_OSPFD:=	OSPF daemon
+PKGSD_QUAGGA_OSPF6D:=	OSPF IPv6 daemon
+PKGSD_QUAGGA_RIPNGD:=	RIPng daemon
+PKGSD_QUAGGA_RIPD:=	RIP daemon
+PKGSD_QUAGGA_VTYSH:=	vtysh utility
 
 PKG_FLAVOURS:=		WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
-PKG_DESCR_1:=		BGP daemon
-PKG_DESCR_2:=		OSPF daemon
-PKG_DESCR_3:=		OSPF IPv6 daemon
-PKG_DESCR_4:=		RIPng daemon
-PKG_DESCR_5:=		RIP daemon
-PKG_DESCR_6:=		vtysh utility
-
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_2},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
-$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_BGPD,quagga-bgpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_BGPD},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_OSPFD,quagga-ospfd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_OSPFD},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_OSPF6D,quagga-ospf6d,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_OSPF6D},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_RIPNGD,quagga-ripngd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_RIPNGD},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_RIPD,quagga-ripd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_RIPD},${PKG_SECTION}))
+$(eval $(call PKG_template,QUAGGA_VTYSH,quagga-vtysh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_QUAGGA_VTYSH},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		quagga_cv_ipforward_method="proc"
 CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \

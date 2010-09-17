@@ -10,8 +10,10 @@ PKG_MD5SUM:=		fc2f7e714fe792db1ce6ddc4c9fb4ef3
 PKG_DESCR:=		Command line editing library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
+PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		${MASTER_SITE_GNU:=readline/}
+
+PKG_SUBPKGS:=		LIBREADLINE
 
 include ${TOPDIR}/mk/package.mk
 

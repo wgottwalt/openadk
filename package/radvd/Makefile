@@ -10,9 +10,8 @@ PKG_MD5SUM:=		78598b60ed9d64920739189c3dc0934d
 PKG_DESCR:=		Routing Advertisement Daemon for IPv6
 PKG_SECTION:=		ipv6
 PKG_DEPENDS:=		kmod-ipv6
-PKG_URL:=		http://www.litech.org/radvd
-PKG_SITES:=		http://v6web.litech.org/radvd/dist/ \
-			http://download.sourcemage.org/mirror/
+PKG_URL:=		http://www.litech.org/radvd/
+PKG_SITES:=		http://v6web.litech.org/radvd/dist/
 
 PKG_HOST_DEPENDS:=	!freebsd
 

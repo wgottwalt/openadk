@@ -9,6 +9,12 @@ $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNE
 	$(TRACE) target/$(ADK_TARGET)-kernel-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../$(ADK_TARGET)/patches *.patch $(MAKE_TRACE)
+ifeq ($(ADK_NATIVE),y)
+	if [ -f /etc/adktarget ];then \
+		target=$$(cat /etc/adktarget); \
+		$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) ../$$target/patches *.patch $(MAKE_TRACE); \
+	fi
+endif
 	touch $@
 
 $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
@@ -17,7 +23,7 @@ $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PK
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
-$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
+$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR)/mk/modules.mk
 	$(TRACE) target/$(ADK_TARGET)-kernel-configure
 	for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done $(MAKE_TRACE)
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config

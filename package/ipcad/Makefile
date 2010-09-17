@@ -10,7 +10,7 @@ PKG_MD5SUM:=		125605249958894148ec26d3c88189f5
 PKG_DESCR:=		IP Cisco Accounting Daemon
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP+=		libpcap
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://lionet.info/ipcad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipcad/}
 

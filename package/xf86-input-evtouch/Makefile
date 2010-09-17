@@ -10,12 +10,12 @@ PKG_MD5SUM:=		4d8e092356d8353002f60a4907046c13
 PKG_DESCR:=		X11 driver for touchscreen
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server kmod-input-evdev
-PKG_BUILDDEP+=		xorg-server
+PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://www.conan.de/touchscreen/
 
-DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
 PKG_TARGET_DEPENDS:=	alix1c
+
+DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 

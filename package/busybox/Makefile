@@ -14,13 +14,14 @@ PKG_SITES:=		http://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DESCR_UDHCPD:=	uDHCPD meta package
-PKG_SECTION_UDHCPD:=	net
+PKG_SUBPKGS:=		BUSYBOX UDHCPD
+PKGSD_UDHCPD:=		uDHCPD meta package
+PKGSC_UDHCPD:=		net
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKG_DESCR_UDHCPD},${PKG_SECTION_UDHCPD}))
+$(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKGSD_UDHCPD},${PKGSC_UDHCPD}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
@@ -30,15 +31,10 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-${TOPDIR}/.busyboxcfg: ${TOPDIR}/.config
+do-configure:
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
-		${TOPDIR}/.busyboxcfg
-
-${WRKBUILD}/.config: ${TOPDIR}/.busyboxcfg
-	cp $(TOPDIR)/.busyboxcfg ${WRKBUILD}/.config
+		${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-
-do-configure: ${WRKBUILD}/.config
 ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
@@ -51,7 +47,7 @@ else
 	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 endif
 
-do-build: do-configure
+do-build:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
@@ -60,7 +56,7 @@ else
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: ${WRKBUILD}/.config ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
@@ -80,13 +76,5 @@ endif
 udhcpd-install:
 	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
 	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
-
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
-
-fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

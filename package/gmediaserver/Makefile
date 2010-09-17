@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
 PKG_DESCR:=		An UPnP music media server
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		id3lib libupnp
-PKG_BUILDDEP+=		id3lib libupnp
+PKG_BUILDDEP:=		id3lib libupnp
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 

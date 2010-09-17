@@ -9,8 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		cb8d70564b8d40aae95e19592c6be183
 PKG_DESCR:=		ICMPv6 Neighbour Discovery tools
 PKG_SECTION:=		ipv6
-PKG_URL:=		http://www.remlab.net
+PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
+
+PKG_SUBPKGS:=		NDISC6 RDISC6 TCPTRACEROUTE6
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

@@ -10,10 +10,9 @@ PKG_MD5SUM:=		d07da501bb11e6af40acd036536c2e9a
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		zlib
-PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils
-PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/ \
-			ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/
+PKG_BUILDDEP:=		zlib
+PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils/
+PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/
 
 include ${TOPDIR}/mk/package.mk
 

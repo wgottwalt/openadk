@@ -10,16 +10,17 @@ PKG_MD5SUM:=		90150b8c0d0192e10b30157e68844ddf
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2
-PKG_BUILDDEP+=		cyrus-sasl openssl libdb
+PKG_BUILDDEP:=		cyrus-sasl openssl libdb
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 
-PKG_DESCR_LDAP_UTILS:=	OpenLDAP utilities
-PKG_DEPENDS_LDAP_UTILS:=libopenldap
-PKG_SECTION_LDAP_UTILS:=net/misc
-PKG_DESCR_SLAPD:=	OpenLDAP server daemon
-PKG_DEPENDS_SLAPD:=	libopenldap
-PKG_SECTION_SLAPD:=	net/misc
+PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
+PKGSD_OPENLDAP_UTILS:=	OpenLDAP utilities
+PKGSS_OPENLDAP_UTILS:=	libopenldap
+PKGSC_OPENLDAP_UTILS:=	net/misc
+PKGSD_OPENLDAP_SLAPD:=	OpenLDAP server daemon
+PKGSS_OPENLDAP_SLAPD:=	libopenldap
+PKGSC_OPENLDAP_SLAPD:=	net/misc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
@@ -29,8 +30,8 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LDAP_UTILS},${PKG_DESCR_LDAP_UTILS},${PKG_SECTION_LDAP_UTILS}))
-$(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SLAPD},${PKG_DESCR_SLAPD},${PKG_SECTION_SLAPD}))
+$(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
+$(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
 PKG_CONFIGURE_OPTIONS+=	\
 			--enable-slapd \

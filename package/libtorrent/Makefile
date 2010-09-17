@@ -6,12 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.12.5
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		openssl libsigc++
 PKG_MD5SUM:=		fe8155d364b220713074423100d4bf29
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
-PKG_URL:=		http://libtorrent.rakshasa.no
+PKG_BUILDDEP:=		openssl libsigc++
+PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
 include ${TOPDIR}/mk/package.mk

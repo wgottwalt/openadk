@@ -10,8 +10,8 @@ PKG_MD5SUM:=		7ad82221ebd6600a8d33712ec3b62efb
 PKG_DESCR:=		X Window System initializer
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		xorg-server mcookie xauth xset
-PKG_BUILDDEP+=		xorg-server
-PKG_URL:=		http://xorg.freedesktop.org
+PKG_BUILDDEP:=		xorg-server
+PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 
 PKG_TARGET_DEPENDS:=	!foxboard

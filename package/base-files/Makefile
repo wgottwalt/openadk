@@ -66,7 +66,7 @@ endif
 	    echo $(ADK_RUNTIME_HOSTNAME) > \
 	    $(IDIR_BASE_FILES)/etc/hostname
 	test -z $(ADK_RUNTIME_PASSWORD) || \
-	    $(SED) 's,\*NP\*,'"$$(${STAGING_TOOLS}/bin/mkcrypt \
+	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
@@ -76,13 +76,5 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
-
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		rm ${WRKBUILD}/.build_done; \
-		rm ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
-
-fake: rebuild
 
 include ${TOPDIR}/mk/pkg-bottom.mk

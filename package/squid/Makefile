@@ -10,12 +10,15 @@ PKG_MD5SUM:=		c70ef1198e6a6c1ae80bc57cd3592e36
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libopenssl libpthread
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://www.squid-cache.org
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.1/
 PKG_MULTI:=		1
-#PKG_CXX:=		SQUID
 
+PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
+PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_PASSWORD
+PKG_SUBPKGS+=		SQUID_MOD_EXTERNAL_ACL_IP_USER SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
+PKG_SUBPKGS+=		SQUID_MOD_NTLM_AUTH_FAKEAUTH
 PKG_HOST_DEPENDS:=	!netbsd !cygwin
 
 AUTH_MODULES:=		basic digest ntlm
@@ -71,12 +74,6 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,ip_user_check))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_group))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
-
-#ifeq ($(ADK_COMPILE_SQUID_WITH_UCLIBCXX),y)
-#CONFIGURE_ENV+=	CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
-#			-I${STAGING_DIR}/usr/include/uClibc++" \
-#			LIBS="-nodefaultlibs -luClibc++ -ldl -lm"
-#endif
 
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
@@ -134,13 +131,6 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-ntlm-auth-helpers="${NTLM_AUTH_HELPERS}" \
 			--enable-digest-auth-helpers="${DIGEST_AUTH_HELPERS}" \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
-
-#ifeq (${ADK_COMPILE_SQUID_WITH_UCLIBCXX},y)
-# add workaround because libtool tries to link libstdc++
-#post-configure:
-#	${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
-#	    ${WRKBUILD}/libtool
-#endif
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid

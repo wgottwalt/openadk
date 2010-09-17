@@ -10,8 +10,8 @@ PKG_MD5SUM:=		82967132b5a8ca4d07e54370fdcb2662
 PKG_DESCR:=		A multipurpose relay (SOcket CAT)
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpthread libopenssl
-PKG_BUILDDEP+=		openssl
-PKG_URL:=		http://www.dest-unreach.org/socat
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		http://www.dest-unreach.org/socat/
 PKG_SITES:=		http://www.dest-unreach.org/socat/download/
 
 include ${TOPDIR}/mk/package.mk

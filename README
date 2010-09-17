@@ -5,7 +5,6 @@ This is a menu based buildsystem for your home made embedded Linux system.
 
 Before you can start you need to install some tools: 
 - bash
-- mksh
 - gcc 
 - binutils 
 - GNU make

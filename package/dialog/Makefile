@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3caebd641a9f337b980becb4444336c5
 PKG_DESCR:=		A text gui interface
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP+=		ncurses
+PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		ftp://ftp.us.debian.org/debian/pool/main/d/dialog/
 
 DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.orig.tar.gz

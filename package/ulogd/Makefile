@@ -9,25 +9,21 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		21143aecf8e39008d143a0fb0f742b0c
 PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		firewall
-PKG_MULTI:=		1
-PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log
-PKG_BUILDDEP+=		iptables libnetfilter_conntrack libnetfilter_log
-ifneq ($(ADK_PACKAGE_ULOGD_MOD_MYSQL),)
-PKG_BUILDDEP+=		mysql
-endif
-ifneq ($(ADK_PACKAGE_ULOGD_MOD_PGSQL),)
-PKG_BUILDDEP+=		postgresql
-endif
-ifneq ($(ADK_PACKAGE_ULOGD_MOD_SQLITE),)
-PKG_BUILDDEP+=		sqlite
-endif
+PKG_BUILDDEP:=		iptables libnetfilter_conntrack libnetfilter_log
 PKG_URL:=		http://www.netfilter.org/projects/ulogd/
 PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
+PKG_MULTI:=		1
+PKG_NOPARALLEL:=	1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SUBPKGS:=		ULOGD ULOGD_MOD_MYSQL ULOGD_MOD_PCAP ULOGD_MOD_PGSQL ULOGD_MOD_SQLITE ULOGD_MOD_EXTRA
+PKGSB_MOD_MYSQL:=	mysql
+PKGSB_MOD_PGSQL:=	postgresql
+PKGSB_MOD_SQLITE:=	sqlite
 
 PKG_HOST_DEPENDS:=	!cygwin
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 

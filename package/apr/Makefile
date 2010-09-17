@@ -10,7 +10,7 @@ PKG_MD5SUM:=		fc80cb54f158c2674f9eeb47a1f672cd
 PKG_DESCR:=		Apache Portable Runtime library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
-PKG_URL:=		http://apr.apache.org
+PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
 
 PKG_FLAVOURS:=		WITH_IPV6

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		bde1ff3c01343d2371d8f34fbf8a1d9a
 PKG_DESCR:=		Httping is like 'ping' but for http-requests
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP+=		openssl
+PKG_BUILDDEP:=		openssl
 PKG_SITES:=		http://www.vanheusden.com/httping/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz

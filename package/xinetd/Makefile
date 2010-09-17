@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		567382d7972613090215c6c54f9b82d9
 PKG_DESCR:=		a powerful and secure superserver
 PKG_SECTION:=		net/misc
-PKG_URL:=		http://www.xinetd.org
+PKG_URL:=		http://www.xinetd.org/
 PKG_SITES:=		http://www.xinetd.org/
 
 include $(TOPDIR)/mk/package.mk

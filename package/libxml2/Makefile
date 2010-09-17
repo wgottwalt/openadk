@@ -10,7 +10,7 @@ PKG_MD5SUM:=		7740a8ec23878a2f50120e1faa2730f2
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		zlib
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 

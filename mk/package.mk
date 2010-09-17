@@ -77,10 +77,11 @@ MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
+MAKE_ENV+=		PATH='${TARGET_PATH}'
 ifeq ($(ADK_NATIVE),)
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
-			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig' \
+			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' \
 			CXX='${TARGET_CXX}' \
 			AR='${TARGET_CROSS}ar' \
@@ -108,7 +109,6 @@ _IPKGS_COOKIE=		${PACKAGE_DIR}/.stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
 
 _IN_PACKAGE:=		1
 include ${TOPDIR}/mk/buildhlp.mk
--include info.mk
 
 # defined in buildhlp.mk ('extract' can fail, use 'patch' then)
 extract: ${_EXTRACT_COOKIE}
@@ -118,6 +118,11 @@ patch: ${_PATCH_COOKIE}
 configure: ${_CONFIGURE_COOKIE}
 build: ${_BUILD_COOKIE}
 fake: ${_FAKE_COOKIE}
+rebuild:
+	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
+		$(MAKE) clean; \
+		rm -f ${TOPDIR}/.rebuild.${PKG_NAME}; \
+	fi
 
 # our recursive build entry point
 build-all-pkgs: ${_IPKGS_COOKIE}
@@ -208,7 +213,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	@-cd $${IDIR_$(1)}; \
+	-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
@@ -221,7 +226,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    cpio -padlmu '$${STAGING_DIR}'
+	    $(TOPDIR)/bin/tools/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \

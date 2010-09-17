@@ -10,17 +10,14 @@ PKG_MD5SUM:=		f7180316188552ee1e6759a03f1fe98d
 PKG_DESCR:=		ALSA mixer utility
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libpthread
-PKG_BUILDDEP+=		alsa-lib
-ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
-PKG_BUILDDEP+=		ncurses
-endif
-PKG_URL:=		http://www.alsa-project.org
-PKG_SITES:=		ftp://ftp.task.gda.pl/pub/linux/misc/alsa/utils/ \
-			ftp://ftp.alsa-project.org/pub/utils/
+PKG_BUILDDEP:=		alsa-lib
+PKG_URL:=		http://www.alsa-project.org/
+PKG_SITES:=		ftp://ftp.alsa-project.org/pub/utils/
 
 PKG_FLAVOURS:=		WITH_ALSAMIXER
 PKGFS_WITH_ALSAMIXER:=	libncurses
 PKGFD_WITH_ALSAMIXER:=	include alsamixer ncurses applet
+PKGFB_WITH_ALSAMIXER:=	ncurses
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

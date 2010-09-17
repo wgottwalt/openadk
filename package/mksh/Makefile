@@ -9,14 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0c3cd172b47eefcdf9a302baa42f5092
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
-PKG_URL:=		http://www.mirbsd.org
+PKG_URL:=		http://www.mirbsd.org/
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
-
-DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.cpio.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 PKG_FLAVOURS:=		FULL
 PKGFD_FULL:=		Include all features
+
+DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.cpio.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 

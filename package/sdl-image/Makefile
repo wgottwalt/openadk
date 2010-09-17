@@ -11,10 +11,12 @@ PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libtiff libjpeg libsdl
 PKG_BUILDDEP:=		libpng libtiff jpeg sdl
-PKG_URL:=		http://www.libsdl.org
+PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
-PKG_DESCR_LIB_DEV:=	development files for sdlimage
-PKG_SECTION_LIB_DEV:=	devel
+
+PKG_SUBPKGS:=		LIBSDL_IMAGE LIBSDL_IMAGE_DEV
+PKGSD_LIBSDL_IMAGE_DEV:=development files for sdlimage
+PKGSC_LIBSDL_IMAGE_DEV:=devel
 
 DISTFILES:=             SDL_image-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
@@ -22,7 +24,7 @@ WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKGSD_LIBSDL_IMAGE_DEV},${PKGSC_LIBSDL_IMAGE_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

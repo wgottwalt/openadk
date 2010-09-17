@@ -10,9 +10,10 @@ PKG_MD5SUM:=		35b0ab9cde069b4ec8a493daae82d67b
 PKG_DESCR:=		Connection tracking userspace tools
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		libnetfilter-conntrack
-PKG_BUILDDEP+=		libnetfilter_conntrack
-PKG_URL:=		http://conntrack-tools.netfilter.org
+PKG_BUILDDEP:=		libnetfilter_conntrack
+PKG_URL:=		http://conntrack-tools.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/conntrack-tools/files/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c287d96c629b5deb6c85e6a82eecdc8a
 PKG_DESCR:=		software to access 1-wire devices
 PKG_SECTION:=		misc
-PKG_BUILDDEP+=		fuse
+PKG_BUILDDEP:=		fuse
 PKG_URL:=		http://owfs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 

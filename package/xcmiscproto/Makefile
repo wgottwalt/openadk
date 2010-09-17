@@ -8,6 +8,7 @@ PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bacfb0f3cb4d6e1a71770307bfdba129
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

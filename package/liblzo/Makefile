@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo
 PKG_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
 
+PKG_SUBPKGS:=		LIBLZO
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

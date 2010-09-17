@@ -10,7 +10,7 @@ PKG_MD5SUM:=		b3589bea6d8d5afc8a84134fddaae973
 PKG_DESCR:=		logfile rotation utility
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpopt
-PKG_BUILDDEP+=		popt
+PKG_BUILDDEP:=		popt
 PKG_SITES:=		https://fedorahosted.org/releases/l/o/logrotate/
 
 include ${TOPDIR}/mk/package.mk

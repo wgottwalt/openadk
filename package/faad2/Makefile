@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://sourceforge.net/projects/faac/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
 
+PKG_SUBPKGS:=		LIBFAAD2
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

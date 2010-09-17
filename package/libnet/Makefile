@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c5e06418a89cc4209f677a776a798fd9
 PKG_DESCR:=		a low-level packet creation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP+=		libpcap
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://sourceforge.net/projects/libnet-dev/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnet-dev/libnet-${PKG_VERSION}/}
 

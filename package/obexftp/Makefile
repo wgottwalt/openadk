@@ -10,14 +10,15 @@ PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
 PKG_DESCR:=		bluetooth ftp application
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		openobex libiconv
-PKG_BUILDDEP+=		openobex libiconv
+PKG_BUILDDEP:=		openobex libiconv
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SUBPKGS:=		OBEXFTP LIBOBEXFTP
+PKGSD_LIBOBEXFTP:=	obexftp library
+PKGSC_LIBOBEXFTP:=	libs
 
-PKG_DESCR_LIB:=		obexftp library
-PKG_SECTION_LIB:=	libs
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libmix
@@ -26,7 +27,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OBEXFTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOBEXFTP,libobexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB},${PKG_SECTION_LIB},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBOBEXFTP,libobexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBOBEXFTP},${PKGSC_LIBOBEXFTP},${PKG_OPTS}))
 
 ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		STATIC_CFLAGS=-all-static

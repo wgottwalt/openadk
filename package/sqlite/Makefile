@@ -9,9 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0faf8fc8ccff5297513c6532b2b4ce23
 PKG_DESCR:=		embeddable SQL database
 PKG_SECTION:=		db
-PKG_BUILDDEP+=		ncurses readline
+PKG_BUILDDEP:=		ncurses readline
 PKG_URL:=		http://www.sqlite.org/
 PKG_SITES:=		http://www.sqlite.org/
+
+PKG_SUBPKGS:=		LIBSQLITE SQLITE_CLI
 
 include ${TOPDIR}/mk/package.mk
 

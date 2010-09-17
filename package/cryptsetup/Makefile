@@ -9,10 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		318a64470861ea5b92a52f2014f1e7c1
 PKG_DESCR:=		LUKS cryptsetup tools
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt \
-			kmod-dm-crypt kmod-crypto-aes kmod-crypto-cbc \
-			kmod-crypto-sha256 kmod-blk-dev-dm
-PKG_BUILDDEP+=		libgcrypt popt e2fsprogs lvm
+PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
+PKG_DEPENDS+=		kmod-dm-crypt kmod-crypto-aes kmod-crypto-cbc
+PKG_DEPENDS+=		kmod-crypto-sha256 kmod-blk-dev-dm
+PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm
 PKG_URL:=		http://cryptsetup.googlecode.com/
 PKG_SITES:=		http://cryptsetup.googlecode.com/files/
 

@@ -10,11 +10,13 @@ PKG_MD5SUM:=		e52086d1b508fa0b76c52ee30b55bec4
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libusb alsa-lib libpthread tslib
-PKG_BUILDDEP+=		libusb alsa-lib tslib
-PKG_URL:=		http://www.libsdl.org
+PKG_BUILDDEP:=		libusb alsa-lib tslib
+PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/release/
-PKG_DESCR_LIB_DEV:=	development files for libsdl
-PKG_SECTION_LIB_DEV:=	devel
+
+PKG_SUBPKGS:=		LIBSDL LIBSDL_DEV
+PKGSD_LIBSDL_DEV:=	development files for libsdl
+PKGSC_LIBSDL_DEV:=	devel
 
 DISTFILES:=             SDL-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
@@ -22,7 +24,7 @@ WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSDL_DEV,libsdl-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl,${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,LIBSDL_DEV,libsdl-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl,${PKGSD_LIBSDL_DEV},${PKGSC_LIBSDL_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

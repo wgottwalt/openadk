@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME=		gettext
-PKG_VERSION=		0.16.1
+PKG_VERSION=		0.18.1.1
 PKG_RELEASE=		1
-PKG_MD5SUM=		3d9ad24301c6d6b17ec30704a13fe127
+PKG_MD5SUM:=		3dd55b952826d2b32f51308f2f91aa89
 PKG_DESCR:=		internationalisation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP+=		libiconv libpthread
+PKG_BUILDDEP:=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
 PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
 
@@ -39,7 +39,9 @@ CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
 			gt_use_preinstalled_gnugettext=no
 
 post-install:
-	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib
+	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib ${IDIR_GETTEXT}/usr/bin
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_GETTEXT}/usr/lib
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/gettext \
+			$(IDIR_GETTEXT)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

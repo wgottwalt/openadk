@@ -11,14 +11,14 @@ PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libiconv libpng zlib libjpeg
 PKG_DEPENDS+=		libstdcxx
-PKG_BUILDDEP+=		fltk libXi libiconv jpeg libpng zlib
+PKG_BUILDDEP:=		fltk libXi libiconv jpeg libpng zlib
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
-PKG_TARGET_DEPENDS:=    ibmx40 lemote
 PKG_HOST_DEPENDS:=	!cygwin
+PKG_TARGET_DEPENDS:=	ibmx40 lemote
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 

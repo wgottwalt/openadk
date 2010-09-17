@@ -10,8 +10,8 @@ PKG_MD5SUM:=		027cdd9959203de0c3c64149a7ee351c
 PKG_DESCR:=		Mail text client
 PKG_SECTION:=		mail
 PKG_DEPENDS:=		libncurses libopenssl
-PKG_BUILDDEP+=		ncurses openssl
-PKG_URL:=		http://www.mutt.org
+PKG_BUILDDEP:=		ncurses openssl
+PKG_URL:=		http://www.mutt.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mutt/}
 
 include ${TOPDIR}/mk/package.mk

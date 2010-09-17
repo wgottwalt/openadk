@@ -11,8 +11,8 @@ PKG_MD5SUM:=		6571dc9524e945e79c2af62fefe7b107
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libpthread libpcre
-PKG_BUILDDEP+=		pcre
-PKG_URL:=		http://www.privoxy.org
+PKG_BUILDDEP:=		pcre
+PKG_URL:=		http://www.privoxy.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-${PKG_VARIANT}-src.tar.gz

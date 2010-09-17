@@ -16,6 +16,7 @@ endif
 PKG_NAME:=		libthread-db
 PKG_DESCR:=		POSIX threads library for gdb/gdbserver
 PKG_SECTION:=		libs
+
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk

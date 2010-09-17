@@ -7,7 +7,7 @@ menu "Debian Utilities"
 
 config BUSYBOX_MKTEMP
 	bool "mktemp"
-	default n
+	default y
 	help
 	  mktemp is used to create unique temporary files
 

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		b38df9c431041922c997c1148bedf591
 PKG_DESCR:=		a Point-to-Point Tunneling Protocol (PPTP) server
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=	 	ppp kmod-crypto kmod-mppe kmod-ppp
-PKG_URL:=		http://www.poptop.org
+PKG_URL:=		http://www.poptop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=poptop/}
 
 include ${TOPDIR}/mk/package.mk

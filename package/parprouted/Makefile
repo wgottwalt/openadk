@@ -10,7 +10,7 @@ PKG_MD5SUM:=		570f5deaf09600df8f80f589de79ecdb
 PKG_DESCR:=		a proxy ARP daemon
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libpthread
-PKG_URL:=		http://www.hazard.maks.net/parprouted
+PKG_URL:=		http://www.hazard.maks.net/parprouted/
 PKG_SITES:=		http://www.hazard.maks.net/parprouted/
 
 include ${TOPDIR}/mk/package.mk

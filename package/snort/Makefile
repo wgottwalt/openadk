@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e6a8bc5aa1ebe4d2100533d7709c4a9e
 PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net/security
-PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libnet libpcap libpcre
-PKG_BUILDDEP+=		libnet libpcap pcre
+PKG_BUILDDEP:=		libnet libpcap pcre
 PKG_URL:=		http://www.snort.org/
 PKG_SITES:=		http://dl.snort.org/snort-current/
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 

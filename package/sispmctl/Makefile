@@ -10,8 +10,8 @@ PKG_MD5SUM:=		2457f76cd129f880634f3381be0aeb76
 PKG_DESCR:=		control application for power sockets
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat
-PKG_BUILDDEP+=		libusb libusb-compat
-PKG_URL:=		http://sispmctl.sourceforge.net
+PKG_BUILDDEP:=		libusb libusb-compat
+PKG_URL:=		http://sispmctl.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sispmctl/}
 
 include ${TOPDIR}/mk/package.mk

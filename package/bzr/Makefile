@@ -10,7 +10,7 @@ PKG_MD5SUM:=		0b253f59601ebc9ee5975c612fc65f43
 PKG_DESCR:=		bazaar
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		python2
-PKG_BUILDDEP+=		python2
+PKG_BUILDDEP:=		python2
 PKG_URL:=		http://bazaar.canonical.com/en/
 PKG_SITES:=		http://launchpad.net/bzr/2.0/${PKG_VERSION}/+download/
 

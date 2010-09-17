@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=mkcrypt cpio
+TARGETS:=adk mkcrypt cpio
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
@@ -11,13 +11,6 @@ all: install
 compile:
 install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
-
-$(TOOLS_BUILD_DIR):
-	mkdir -p $(TOOLS_BUILD_DIR)
-
-%-download:
-	$(TRACE) "tools/$(patsubst %-download,%,$@)/download "
-	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 
 %-compile: $(TOOLS_BUILD_DIR)
 	$(TRACE) "tools/$(patsubst %-compile,%,$@)/compile "

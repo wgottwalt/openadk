@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1c038312e4f9b61fe72e52d0f59a01d5
 PKG_DESCR:=		X Window System client interface to the XINPUT extension to the X protocol.
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP+=		xproto xextproto libXext
+PKG_BUILDDEP:=		xproto xextproto libXext
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

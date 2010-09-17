@@ -5,41 +5,46 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
 PKG_VERSION:=		5.5p1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		88633408f4cb1eb11ec7e2ec58b519eb
 PKG_DESCR:=		OpenSSH server
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl libpthread
-PKG_BUILDDEP+=		zlib openssl
-ifeq (${ADK_COMPILE_OPENSSH_WITH_KRB5},y)
-PKG_DEPENDS+=		libkrb5 libcom-err
-PKG_BUILDDEP+=		krb5
-endif
-ifeq (${ADK_COMPILE_OPENSSH_WITH_HEIMDAL},y)
-PKG_DEPENDS+=		libheimdal libcom-err
-PKG_BUILDDEP+=		heimdal
-endif
-PKG_URL:=		http://www.openssh.com
+PKG_BUILDDEP:=		zlib openssl
+PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 
-PKG_DESCR_CLIENT:=	OpenSSH client
-PKG_DESCR_CLIENT_UTILS:=OpenSSH client utilities
-PKG_DESCR_SFTP_CLIENT:=	OpenSSH sftp client
-PKG_DESCR_SFTP_SERVER:=	OpenSSH sftp server
+PKG_SUBPKGS:=		OPENSSH_SERVER OPENSSH_CLIENT OPENSSH_CLIENT_UTILS
+PKG_SUBPKGS+=		OPENSSH_SFTP_CLIENT OPENSSH_SFTP_SERVER
+PKGSD_OPENSSH_CLIENT:=		OpenSSH client
+PKGSD_OPENSSH_CLIENT_UTILS:=	OpenSSH client utilities
+PKGSD_OPENSSH_SFTP_CLIENT:=	OpenSSH sftp client
+PKGSD_OPENSSH_SFTP_SERVER:=	OpenSSH sftp server
+
+PKG_CHOICES:=		NOKRB WITH_KRB5 WITH_HEIMDAL
+PKGCD_NOKRB:=		no Kerberos support
+PKGCD_WITH_KRB5:=	with MIT Kerberos
+PKGCS_WITH_KRB5:=	libkrb5 libcom-err
+PKGCB_WITH_KRB5:=	krb5
+PKGCD_WITH_HEIMDAL:=	with Heimdal Kerberos
+PKGCS_WITH_HEIMDAL:=	libheimdal libcom-err
+PKGCB_WITH_HEIMDAL:=	heimdal
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENT},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_CLIENT_UTILS},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SFTP_CLIENT},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_SFTP_SERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_CLIENT_UTILS},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_SFTP_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
 
-ifeq ($(ADK_COMPILE_OPENSSH_WITH_KERBEROS),y)
+ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
-else
-CONFIGURE_ARGS+=	--without-kerberos5
 endif
+ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
+CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
+endif
+
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
 			ac_cv_func_setlogin=no \
 			ac_cv_lib_nsl_yp_match=no

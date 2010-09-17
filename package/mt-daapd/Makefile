@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mt-daapd
-PKG_VERSION:=		0.2.4.1
+PKG_VERSION:=		0.2.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8117141e8a88bfab54fe98b6bbd5cb3a
+PKG_MD5SUM:=		67bef9fb14d487693b0dfb792c3f1b05
 PKG_DESCR:=		a multi-threaded DAAP daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libgdbm libid3tag libpthread
-PKG_BUILDDEP+=		gdbm libid3tag
-PKG_URL:=		http://www.fireflymediaserver.org
+PKG_BUILDDEP:=		gdbm libid3tag
+PKG_URL:=		http://www.fireflymediaserver.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
 
 include ${TOPDIR}/mk/package.mk

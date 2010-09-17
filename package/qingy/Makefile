@@ -10,7 +10,7 @@ PKG_MD5SUM:=		34f40172a71e9a6c2c77ddce11d2a63a
 PKG_DESCR:=		a DirectFB getty replacement
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		directfb libxscrnsaver
-PKG_BUILDDEP+=		DirectFB libXScrnSaver
+PKG_BUILDDEP:=		DirectFB libXScrnSaver
 PKG_URL:=		http://qingy.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=qingy/}
 

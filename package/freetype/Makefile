@@ -10,9 +10,11 @@ PKG_MD5SUM:=		a693c9a4b0121890ca71e39364ffea4a
 PKG_DESCR:=		A free, high-quality and portable font engine
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP+=		zlib
-PKG_URL:=		http://www.freetype.org
+PKG_BUILDDEP:=		zlib
+PKG_URL:=		http://www.freetype.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
+
+PKG_SUBPKGS:=		LIBFREETYPE
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

@@ -61,7 +61,7 @@ $(eval $(call KMOD_template,SKY2,sky2,\
 $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
-,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb kmod-crc32))
+,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb))
 
 $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
@@ -72,8 +72,8 @@ $(eval $(call KMOD_template,P54_COMMON,p54-common,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54common \
 ,68))
 
-$(eval $(call KMOD_template,RTL8187B,rtl8187b,\
-	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl8187b/rtl8187b \
+$(eval $(call KMOD_template,RTL8187,rtl8187,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl818x/rtl8187 \
 ,70))
 
 $(eval $(call KMOD_template,B43,b43,\

@@ -7,10 +7,10 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat
-PKG_BUILDDEP+=		ncurses readline libiconv expat
-PKG_TARGET_DEPENDS:=	!foxboard !ag241
-
+PKG_BUILDDEP:=		ncurses readline libiconv expat
 PKG_NOPARALLEL:=	1
+
+PKG_TARGET_DEPENDS:=	!foxboard !ag241
 
 include ${TOPDIR}/mk/package.mk
 

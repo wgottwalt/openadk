@@ -28,6 +28,7 @@ endif
 include $(TOPDIR)/package/Depends.mk
 
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
+REBUILD_PACKAGES:=$(patsubst %,%-rebuild,$(package-y) $(package-m))
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
@@ -35,10 +36,10 @@ all: compile
 download: $(DOWNLOAD)
 clean: $(patsubst %,%-clean,$(package-) $(package-y) $(package-m) base-files)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-compile: $(COMPILE_PACKAGES)
+compile: $(REBUILD_PACKAGES) $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)
 else
-compile: base-files-compile $(COMPILE_PACKAGES)
+compile: $(REBUILD_PACKAGES) base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
 
@@ -54,6 +55,12 @@ $(TARGET_DIR):
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
 	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-pkgs
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
+
+%-rebuild:
+	$(START_TRACE) "package/$(patsubst %-rebuild,%,$@)-rebuild: "
+	$(MAKE) -C $(patsubst %-rebuild,%,$@) rebuild
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 

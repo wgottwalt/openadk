@@ -6,11 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libSM
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_BUILDDEP+=		libICE
 PKG_MD5SUM:=		1ee90d479298e48df7bb86a7ccbe00c9
 PKG_DESCR:=		X11 Session Management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid
+PKG_BUILDDEP:=		libICE
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

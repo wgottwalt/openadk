@@ -237,14 +237,13 @@ config ADK_KPACKAGE_KMOD_B43
 	help
 	  Driver for Broadcom B43xx wireless chips.
 
-config ADK_KPACKAGE_KMOD_RTL8187B
-	prompt "kmod-rtl8187b................ Realtek RTL8187B wireless cards"
+config ADK_KPACKAGE_KMOD_RTL8187
+	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
-	depends on ADK_LINUX_MIPS64_LEMOTE
-	default y
+	default n
 	help
-	  Driver for Realtek RTL8187B wireless chips.
+	  Driver for Realtek RTL8187/RTL8187B wireless chips.
 
 config ADK_KPACKAGE_KMOD_P54_USB
 	prompt "kmod-p54-usb................. Prism54 USB support"

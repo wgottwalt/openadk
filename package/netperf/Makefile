@@ -10,8 +10,7 @@ PKG_MD5SUM:=		391a0d98954c72a6ad7f08b8a115e1ce
 PKG_DESCR:=		Program and service to do network performance measurement.
 PKG_SECTION:=		net
 PKG_URL:=		http://www.netperf.org/netperf/
-PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/ \
-			ftp://ftp.cup.hp.com/dist/networking/benchmarks/netperf/
+PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/
 
 include ${TOPDIR}/mk/package.mk
 

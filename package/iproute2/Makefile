@@ -9,34 +9,33 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		5c5742bdac05a1688f266512e685b83c
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
-ifneq ($(strip ${ADK_PACKAGE_TC_ATM}),)
-PKG_BUILDDEP+=		linux-atm
-endif
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 
-PKG_DESCR_TC:=		iproute2 traffic control utility
-PKG_DEPENDS_TC:=	kmod-sched
-PKG_DESCR_TC_ATM:=	iproute2 traffic control ATM support library
-PKG_DEPENDS_TC_ATM:=	tc libatm
-PKG_DESCR_IFSTAT:=	iproute2 interface statistics utility
-PKG_DESCR_LNSTAT:=	iproute2 network statistics utilities
-PKG_DESCR_ROUTEL:=	iproute2 route list and flush utilities
-PKG_DESCR_RTMON:=	iproute2 RTnetlink monitor
-PKG_DESCR_SS:=		iproute2 socket statistics utility
+PKG_SUBPKGS:=		IP TC TC_ATM IFSTAT LNSTAT ROUTEL RTMON SS
+PKGSD_TC:=		iproute2 traffic control utility
+PKGSS_TC:=		kmod-sched
+PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
+PKGSS_TC_ATM:=		tc libatm
+PKGSB_TC_ATM:=		linux-atm
+PKGSD_IFSTAT:=		iproute2 interface statistics utility
+PKGSD_LNSTAT:=		iproute2 network statistics utilities
+PKGSD_ROUTEL:=		iproute2 route list and flush utilities
+PKGSD_RTMON:=		iproute2 RTnetlink monitor
+PKGSD_SS:=		iproute2 socket statistics utility
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_TC},${PKG_DESCR_TC},${PKG_SECTION}))
-$(eval $(call PKG_template,TC_ATM,tc-atm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_TC_ATM},${PKG_DESCR_TC_ATM},${PKG_SECTION}))
-$(eval $(call PKG_template,IFSTAT,ifstat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_IFSTAT},${PKG_DESCR_IFSTAT},${PKG_SECTION}))
-$(eval $(call PKG_template,LNSTAT,lnstat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_LNSTAT},${PKG_DESCR_LNSTAT},${PKG_SECTION}))
-$(eval $(call PKG_template,ROUTEL,routel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_ROUTEL},${PKG_DESCR_ROUTEL},${PKG_SECTION}))
-$(eval $(call PKG_template,RTMON,rtmon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_RTMON},${PKG_DESCR_RTMON},${PKG_SECTION}))
-$(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS_SS},${PKG_DESCR_SS},${PKG_SECTION}))
+$(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC},${PKGSD_TC},${PKG_SECTION}))
+$(eval $(call PKG_template,TC_ATM,tc-atm,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC_ATM},${PKGSD_TC_ATM},${PKG_SECTION}))
+$(eval $(call PKG_template,IFSTAT,ifstat,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_IFSTAT},${PKG_SECTION}))
+$(eval $(call PKG_template,LNSTAT,lnstat,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LNSTAT},${PKG_SECTION}))
+$(eval $(call PKG_template,ROUTEL,routel,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_ROUTEL},${PKG_SECTION}))
+$(eval $(call PKG_template,RTMON,rtmon,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_RTMON},${PKG_SECTION}))
+$(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PKG_SECTION}))
 
 TCFLAGS+=		-D_GNU_SOURCE
 XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \

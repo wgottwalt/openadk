@@ -10,17 +10,19 @@ PKG_MD5SUM:=		c245b5d1aa0a4f53d9538faa1efe2c3f
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		dns
 PKG_DEPENDS:=		libopenssl libbind libxml2
-PKG_BUILDDEP+=		openssl libxml2
-PKG_URL:=		https://www.isc.org/software/bind
+PKG_BUILDDEP:=		openssl libxml2
+PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 
-PKG_DESCR_1:=		dynamic dns client (nsupdate utility)
-PKG_DESCR_2:=		library for the bind software suite
-PKG_DESCR_3:=		rndc & rndc-confgen utilities
-PKG_DESCR_4:=		check utilities
-PKG_DESCR_5:=		dnssec utilities
-PKG_DESCR_6:=		host utility
-PKG_DESCR_7:=		dig utility
+PKG_SUBPKGS:=		BIND_SERVER BIND_CLIENT LIBBIND BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG
+PKGSD_LIBBIND:=		library for the bind software suite
+PKGSC_LIBBIND:=		libs
+PKGSD_BIND_CLIENT:=	dynamic dns client (nsupdate utility)
+PKGSD_BIND_RNDC:=	rndc & rndc-confgen utilities
+PKGSD_BIND_CHECK:=	check utilities
+PKGSD_BIND_DNSSEC:=	dnssec utilities
+PKGSD_BIND_HOST:=	host utility
+PKGSD_BIND_DIG:=	dig utility
 
 PKG_FLAVOURS:=		WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
@@ -28,13 +30,13 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_CLIENT,bind-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_1},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR_2},libs))
-$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_3},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_4},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_5},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_6},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_7},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_CLIENT,bind-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND}))
+$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_RNDC},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_CHECK},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_DNSSEC},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_HOST},${PKG_SECTION}))
+$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_DIG},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--disable-threads \
