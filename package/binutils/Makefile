@@ -8,7 +8,6 @@ PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libbfd
 
-# subpackage
 PKG_NAME_LIBBFD:=	libbfd
 PKG_DESCR_LIBBFD:=	bfd library
 PKG_SECTION_LIBBFD:=	libs

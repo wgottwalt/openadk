@@ -361,7 +361,7 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CLASSIFY,netfiler-xt-target-clas
 	$(MODULES_DIR)/kernel/net/netfilter/xt_CLASSIFY \
 ,50))
 
-ifeq ($(KERNEL_VERSION),2.6.35)
+ifeq ($(KERNEL_VERSION),2.6.35.4)
 CONNMARK:=xt_connmark
 MARK:=xt_mark
 else
@@ -1225,7 +1225,7 @@ $(eval $(call KMOD_template,USB_HSO,usb-hso,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
 ,75))
 
-ifeq ($(KERNEL_VERSION),2.6.35)
+ifeq ($(KERNEL_VERSION),2.6.35.4)
 SNDUSB:=snd-usbmidi-lib
 else
 SNDUSB:=snd-usb-lib

@@ -127,6 +127,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# workaround if you cross-compile binutils
 	@-rm $(STAGING_DIR)/lib/libiberty.a
+	@-rm $(STAGING_DIR)/usr/lib/libiberty.a
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
 	(cd $(STAGING_TOOLS); \
