@@ -17,7 +17,7 @@ ifeq ($(ADK_LINUX_MIPS_RB433),y)
 MTDDEV:=	root=/dev/mtdblock2
 endif
 
-ifeq ($(ADK_LINUX_ARM_FOXBOARD),y)
+ifeq ($(ADK_LINUX_ARM_FOXG20),y)
 ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
