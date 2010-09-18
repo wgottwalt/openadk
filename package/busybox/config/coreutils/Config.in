@@ -279,7 +279,7 @@ config BUSYBOX_EXPR_MATH_SUPPORT_64
 
 config BUSYBOX_FALSE
 	bool "false"
-	default n
+	default y
 	help
 	  false returns an exit code of FALSE (1).
 
