@@ -9,6 +9,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	# start as another user via: su - mpd -c 'esd ..'
 	esd -public -tcp -nobeeps -noterminate &
 	;;
 stop)
