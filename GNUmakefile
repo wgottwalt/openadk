@@ -11,7 +11,7 @@ export ADKVERSION
 
 ifneq (${package},)
 subdir:=	package/${package}
-_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.config
 endif
 
 ifneq (${subdir},)
@@ -26,7 +26,6 @@ _subdir: ${_subdir_dep}
 	    make VERBOSE=1 ${MAKEFLAGS} ${MAKECMDGOALS}
 
 include prereq.mk
-include mk/split-cfg.mk
 else
 include Makefile
 endif

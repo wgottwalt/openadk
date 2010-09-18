@@ -12,7 +12,7 @@ GMAKE_ENV+=	ADKVERSION=${ADKVERSION:Q}
 .if defined(package) && !empty(package)
 subdir:=	package/${package}
 .  if !make(clean)
-_subdir_dep:=	${TOPDIR}/.ADK_HAVE_DOT_CONFIG
+_subdir_dep:=	${TOPDIR}/.config
 .  endif
 .endif
 
@@ -29,7 +29,6 @@ _subdir: ${_subdir_dep}
 	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
 
 .  include "${.CURDIR}/prereq.mk"
-.  include "${.CURDIR}/mk/split-cfg.mk"
 .else
 .  include "${.CURDIR}/Makefile"
 .endif
