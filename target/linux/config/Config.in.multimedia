@@ -21,6 +21,10 @@ config ADK_KERNEL_SND_HWDEP
 	boolean
 	default n
 
+config ADK_KERNEL_SND_OSSEMUL
+	boolean
+	default n
+
 config ADK_KERNEL_SND_MIXER_OSS
 	boolean
 	default n
@@ -43,6 +47,7 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-sound-alsa................. ALSA sound support"
 	select ADK_KPACKAGE_KMOD_SOUND
+	select ADK_KERNEL_SND_OSSEMUL
 	select ADK_KERNEL_SND_TIMER
 	select ADK_KERNEL_SND_PCM
 	select ADK_KERNEL_SND_HWDEP
