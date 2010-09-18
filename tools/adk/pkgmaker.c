@@ -160,6 +160,7 @@ static void iter(const char *key, const char *value, const void *obj) {
 				fprintf(config, "source \"package/%s/Config.in.manual\"\n", buf);
 			} else {
 				subpkg = strtok(buf, "|");
+				subpkg[strlen(subpkg)-1] = '\0';
 				pkg = strtok(NULL, "|");
 				fprintf(config, "source \"package/pkgconfigs.d/%s/Config.in.%s\"\n", pkg, subpkg);
 			}
@@ -525,7 +526,7 @@ int main() {
 						fatal_error("failed to create path variable.");
 					section = fopen(spath, "a");
 					if (section != NULL) {
-						fprintf(section, "%s|%s\n", token, pkgdirp->d_name);
+						fprintf(section, "%s |%s\n", token, pkgdirp->d_name);
 						fclose(section);
 					}
 				} else
