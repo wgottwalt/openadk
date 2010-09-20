@@ -160,10 +160,8 @@ switch:
 	echo "Saving configuration for target: ${ADK_TARGET}"
 	cp -p .config .config.${ADK_TARGET}
 	if [ -f .config.old ];then cp -p .config.old .config.old.${ADK_TARGET};fi
-	if [ -f .config.split ];then cp -p .config.split .config.split.${ADK_TARGET};fi
 	if [ -f .config.${TARGET} ];then cp -p .config.${TARGET} .config; \
 	cp -p .config.old.${TARGET} .config.old; \
-	cp -p .config.split.${TARGET} .config.split; \
 	echo "Setting configuration to target: ${TARGET}"; \
 	else echo "No old target config found";mv .config .config.bak; make TARGET=${TARGET};fi
 
