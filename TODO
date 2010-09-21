@@ -1,3 +1,5 @@
+- check alsa on foxg20 target
+- add mkimage to tools build
 - fix ARM OABI support
 - fix watchdog for alix1c (mfgpt timers problem)
 - add support for brcm 2.6 (flash support)

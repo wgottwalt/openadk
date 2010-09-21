@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.8
+PKG_VERSION:=		3.6.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0ee5f14fd8be07513d16131027ebcb61
 PKG_DESCR:=		graphical webbrowser

@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.1.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		b273ed2b5ec8616fb9834cde8634bce7
+PKG_VERSION:=		2.1.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7486d3e270ba4b033e311d3e022a0ad7
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		kmod-tun libopenssl
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openvpn/}
+PKG_SITES:=		http://openvpn.net/release/
 
 PKG_SUBPKGS:=		OPENVPN OPENVPN_EASY_RSA
 PKG_FLAVOURS:=		WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
