@@ -7,15 +7,13 @@ include $(TOPDIR)/toolchain/glibc/Makefile.inc
 PKG_DESCR:=		GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
-
 PKG_SUBPKGS:=		GLIBC GLIBC_DEV
 
 NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-GLIBC_CONFOPTS:=          \
-			--build=$(GNU_HOST_NAME) \
+GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
 			--disable-nls \
@@ -46,7 +44,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
-		$(IDIR_EGLIBC)/etc/localtime
+		$(IDIR_GLIBC)/etc/localtime
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
