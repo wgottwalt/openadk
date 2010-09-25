@@ -1,5 +1,5 @@
 --- Python-2.7.orig/Makefile.pre.in	2010-04-12 02:10:46.000000000 +0200
-+++ Python-2.7/Makefile.pre.in	2010-09-20 02:37:52.537806065 +0200
++++ Python-2.7/Makefile.pre.in	2010-09-25 21:11:15.584089025 +0200
 @@ -179,6 +179,7 @@ UNICODE_OBJS=   @UNICODE_OBJS@
  
  PYTHON=		python$(EXE)
@@ -104,16 +104,17 @@
  
  # Create the PLATDIR source directory, if one wasn't distributed..
  $(srcdir)/Lib/$(PLATDIR):
-@@ -1043,7 +1045,7 @@ libainstall:	all python-config
+@@ -1043,7 +1045,8 @@ libainstall:	all python-config
  # Install the dynamically loadable modules
  # This goes into $(exec_prefix)
  sharedinstall:
 -	$(RUNSHARED) ./$(BUILDPYTHON) -E $(srcdir)/setup.py install \
++	CROSS_COMPILE='$(CROSS_COMPILE)' \
 +	$(RUNSHARED) $(HOSTPYTHON) -E $(srcdir)/setup.py install \
  	   	--prefix=$(prefix) \
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
-@@ -1081,7 +1083,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
+@@ -1081,7 +1084,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
  		fi; \
  	done
  	$(LN) -fsn include/python$(VERSION) $(DESTDIR)$(prefix)/Headers
@@ -122,7 +123,7 @@
  	$(LN) -fsn $(VERSION) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Versions/Current
  	$(LN) -fsn Versions/Current/$(PYTHONFRAMEWORK) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/$(PYTHONFRAMEWORK)
  	$(LN) -fsn Versions/Current/Headers $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Headers
-@@ -1116,7 +1118,7 @@ frameworkinstallextras:
+@@ -1116,7 +1119,7 @@ frameworkinstallextras:
  # This installs a few of the useful scripts in Tools/scripts
  scriptsinstall:
  	SRCDIR=$(srcdir) $(RUNSHARED) \
@@ -131,7 +132,7 @@
  	--prefix=$(prefix) \
  	--install-scripts=$(BINDIR) \
  	--root=/$(DESTDIR)
-@@ -1138,7 +1140,7 @@ config.status:	$(srcdir)/configure
+@@ -1138,7 +1141,7 @@ config.status:	$(srcdir)/configure
  
  # Run reindent on the library
  reindent:
@@ -140,7 +141,7 @@
  
  # Rerun configure with the same options as it was run last time,
  # provided the config.status script exists
-@@ -1238,7 +1240,7 @@ funny:
+@@ -1238,7 +1241,7 @@ funny:
  
  # Perform some verification checks on any modified files.
  patchcheck:
