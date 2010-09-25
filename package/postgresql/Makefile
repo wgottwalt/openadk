@@ -10,7 +10,7 @@ PKG_MD5SUM:=		ae7f305eb9388b187e8f07dee0cec55c
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		db
 PKG_BUILDDEP:=		zlib
-PKG_URL:=		http://www.postgresql.org
+PKG_URL:=		http://www.postgresql.org/
 PKG_SITES:=		ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/source/v${PKG_VERSION}/
 
 PKG_SUBPKGS:=		LIBPQ
@@ -21,9 +21,7 @@ $(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
-
-PKG_CONFIGURE_ARGS:=\
-			--disable-integer-datetimes \
+PKG_CONFIGURE_ARGS:=	--disable-integer-datetimes \
 			--without-krb5 \
 			--without-openssl \
 			--without-pam \

@@ -63,7 +63,7 @@ do-install:
 		$(IDIR_DBCONVERT)/usr/bin/dropbearconvert
 	# ssh pubkey
 	test -z $(ADK_RUNTIME_SSH_PUBKEY) || ( \
-		mkdir -p $(IDIR_DROPBEAR)/etc/dropbear; \
+		$(INSTALL_DIR) $(IDIR_DROPBEAR)/etc/dropbear; \
 		echo $(ADK_RUNTIME_SSH_PUBKEY) \
 		>$(IDIR_DROPBEAR)/etc/dropbear/authorized_keys; \
         )

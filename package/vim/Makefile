@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vim
-PKG_VERSION:=		7.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f0901284b338e448bfd79ccca0041254
+PKG_VERSION:=		7.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5b9510a17074e2b37d8bb38ae09edbf2
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses
@@ -15,7 +15,7 @@ PKG_URL:=		http://www.vim.org/
 PKG_SITES:=		ftp://ftp.vim.org/pub/vim/unix/
 
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}/vim72
+WRKDIST=		${WRKDIR}/vim73
 WRKSRC=			${WRKDIST}/src
 
 include ${TOPDIR}/mk/package.mk

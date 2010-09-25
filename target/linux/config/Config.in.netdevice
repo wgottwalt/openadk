@@ -139,6 +139,10 @@ config ADK_MOD_KERNEL_LIB80211
 	tristate
 	default n
 
+config ADK_KERNEL_CFG80211_WEXT
+	boolean
+	default n
+
 config ADK_KERNEL_ATH_COMMON
 	tristate
 	default n
