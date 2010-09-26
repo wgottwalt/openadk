@@ -47,11 +47,11 @@ pre-configure:
 post-install:
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
-	#${INSTALL_DIR} ${IDIR_PYTHON2}/usr/include/python2.7
+	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/include/python2.7
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python ${IDIR_PYTHON2}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
-	#${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
+	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
 	-find ${IDIR_PYTHON2} -name \*.pyo -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
