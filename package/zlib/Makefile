@@ -25,7 +25,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ZLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR_LIB_DEV},${PKG_SECTION_LIB_DEV}))
+$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ZLIB_DEV},${PKGSC_ZLIB_DEV}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
