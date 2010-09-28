@@ -82,12 +82,9 @@ int	sysv3;
 #if defined (__linux__) || defined (__sun) || defined (__FreeBSD__) || \
 	defined (__hpux) || defined (_AIX) || defined (__NetBSD__) || \
 	defined (__OpenBSD__) || defined (__DragonFly__) || \
-	defined (__APPLE__) || defined (__CYGWIN__)
+	defined (__CYGWIN__)
 #include <sys/mtio.h>
-#else	/* SVR4.2MP */
-#include <sys/scsi.h>
-#include <sys/st01.h>
-#endif	/* SVR4.2MP */
+#endif
 
 #include <iblok.h>
 #include <sfile.h>
@@ -4497,17 +4494,12 @@ tseek(off_t n)
 #if defined (__linux__) || defined (__sun) || defined (__FreeBSD__) || \
 	defined (__hpux) || defined (_AIX) || defined (__NetBSD__) || \
 	defined (__OpenBSD__) || defined (__DragonFly__) || \
-	defined (__APPLE__) || defined (__CYGWIN__)
+	defined (__CYGWIN__)
 		struct mtop	mo;
 		mo.mt_op = i > 0 ? MTFSR : MTBSR;
 		mo.mt_count = i > 0 ? i : -i;
 		fault = ioctl(mt, MTIOCTOP, &mo);
-#else	/* SVR4.2MP */
-		int	t, a;
-		t = i > 0 ? T_SBF : T_SBB;
-		a = i > 0 ? i : -i;
-		fault = ioctl(mt, t, a);
-#endif	/* SVR4.2MP */
+#endif
 	} else
 		fault = lseek(mt, n - poffs, SEEK_CUR) == (off_t)-1 ? -1 : 0;
 	if (fault == 0)
@@ -4783,7 +4775,7 @@ mstat(void)
 			tapeblock = md.bsize;
 	}
 #elif defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__) \
-		|| defined (__DragonFly__) || defined (__APPLE__)
+		|| defined (__DragonFly__)
 	if ((mtst.st_mode&S_IFMT) == S_IFCHR) {
 		struct mtget	mg;
 		if (ioctl(mt, MTIOCGET, &mg) == 0)
@@ -4797,16 +4789,6 @@ mstat(void)
 					MT_ST_BLKSIZE_SHIFT;
 	}
 #elif defined (__hpux) || defined (_AIX)
-#else	/* SVR4.2MP */
-	if ((mtst.st_mode&S_IFMT) == S_IFCHR) {
-		struct blklen	bl;
-		if (ioctl(mt, T_RDBLKLEN, &bl) == 0)
-			/*
-			 * These are not the values we're interested in
-			 * (always 1 and 16M-1 for DAT/DDS tape drives).
-			 */
-			tapeblock = 0;
-	}
 #endif	/* SVR4.2MP */
 	if (blksiz == 0)
 		switch (mtst.st_mode&S_IFMT) {

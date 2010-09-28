@@ -133,14 +133,14 @@ int main() {
 	while ((pkgdirp = readdir(pkgdir)) != NULL) {
 		/* skip dotfiles */
 		if (strncmp(pkgdirp->d_name, ".", 1) > 0) {
-			if (snprintf(path, MAXLINE, "package/%s/Makefile", pkgdirp->d_name) < 0)
+			if (snprintf(path, MAXPATH, "package/%s/Makefile", pkgdirp->d_name) < 0)
 				perror("Can not create string variable.");
 			pkg = fopen(path, "r");
 			if (pkg == NULL)
 				continue;
 			
 			/* transform to uppercase variable name */
-			pkgvar = strndup(pkgdirp->d_name, strlen(pkgdirp->d_name));
+			pkgvar = strdup(pkgdirp->d_name);
 			for (i=0; i<(int)strlen(pkgvar); i++) {
 				if (pkgvar[i] == '+')
 					pkgvar[i] = 'X';
