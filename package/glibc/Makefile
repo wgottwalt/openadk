@@ -64,6 +64,7 @@ glibc-dev-install:
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
+		PATH='${TARGET_PATH}' \
 		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/configure \
 		--prefix=/usr \
 		--with-sysroot=$(IDIR_GLIBC_DEV) \
