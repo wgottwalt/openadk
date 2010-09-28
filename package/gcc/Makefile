@@ -10,19 +10,6 @@ PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr
 PKG_BUILDDEP:=		mpc gmp mpfr
 
-ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-PKG_DEPENDS+=		uclibc-dev
-PKG_BUILDDEP+=		uclibc
-endif
-ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
-PKG_DEPENDS+=		eglibc-dev
-PKG_BUILDDEP+=		eglibc
-endif
-ifeq ($(ADK_TARGET_LIB_GLIBC),y)
-PKG_DEPENDS+=		glibc-dev
-PKG_BUILDDEP+=		glibc
-endif
-
 PKG_TARGET_DEPENDS:=	!ag241
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj

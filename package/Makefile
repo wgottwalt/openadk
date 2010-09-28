@@ -7,9 +7,11 @@ include $(TOPDIR)/rules.mk
 
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
+gcc-compile: glibc-compile
 endif
 ifeq (${ADK_TARGET_LIB_EGLIBC},y)
 package-$(ADK_PACKAGE_EGLIBC) += eglibc
+gcc-compile: eglibc-compile
 endif
 ifeq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_LIBC) += libc
@@ -21,6 +23,7 @@ endif
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
 ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
+gcc-compile: uclibc-compile
 endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 endif
@@ -65,13 +68,13 @@ $(TARGET_DIR):
 	$(END_TRACE)
 
 %-install:
-	@$(START_TRACE) "package/$(patsubst %-install,%,$@)-install: "
-	@$(MAKE) -C $(patsubst %-install,%,$@) install
-	@$(CMD_TRACE) " done"
-	@$(END_TRACE)
+	$(START_TRACE) "package/$(patsubst %-install,%,$@)-install: "
+	$(MAKE) -C $(patsubst %-install,%,$@) install
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-clean:
-	@$(START_TRACE) "package/$(patsubst %-clean,%,$@)-clean: "
-	@$(MAKE) -C $(patsubst %-clean,%,$@) clean
-	@$(CMD_TRACE) " done"
-	@$(END_TRACE)
+	$(START_TRACE) "package/$(patsubst %-clean,%,$@)-clean: "
+	$(MAKE) -C $(patsubst %-clean,%,$@) clean
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
