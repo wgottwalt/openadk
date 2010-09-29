@@ -7,7 +7,6 @@ include $(TOPDIR)/toolchain/eglibc/Makefile.inc
 PKG_DESCR:=		embedded GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
-
 PKG_SUBPKGS:=		EGLIBC EGLIBC_DEV
 
 NO_DISTFILES:=		1

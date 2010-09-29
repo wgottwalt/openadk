@@ -21,11 +21,13 @@ package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 endif
 
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
+ifneq (${ADK_TARGET_LIB_EGLIBC},y)
 ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
 gcc-compile: uclibc-compile
 endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
+endif
 endif
 
 include $(TOPDIR)/package/Depends.mk
