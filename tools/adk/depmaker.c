@@ -64,7 +64,7 @@ static int check_symbol(char *symbol) {
 }
 
 /*@null@*/
-static char *parse_line(char *package, char *pkgvar, char *string, int checksym) {
+static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix) {
 
 	char *key, *value, *dep, *key_sym, *pkgdeps;
 	char temp[MAXLINE];
@@ -83,8 +83,13 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym)
 			perror("Can not allocate memory.");
 			exit(EXIT_FAILURE);
 		}
-		if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
-			perror("Can not create string variable.");
+		if (pprefix == 0) {
+			if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
+				perror("Can not create string variable.");
+		} else {
+			if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_") < 0)
+				perror("Can not create string variable.");
+		}
 			
 		strncat(key_sym, key+6, strlen(key)-6);
 		if (check_symbol(key_sym) != 0) {
@@ -182,7 +187,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP:=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}
@@ -190,30 +195,31 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP+=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
 					string = strstr(buf, "PKGFB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
 					string = strstr(buf, "PKGCB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
 					string = strstr(buf, "PKGSB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1);
-						if (tmp != NULL)
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 1);
+						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
+						}
 					}
 				}
 				free(tmp);
