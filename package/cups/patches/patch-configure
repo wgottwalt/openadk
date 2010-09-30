@@ -1,6 +1,15 @@
---- cups-1.4.2.orig/configure	2009-11-10 00:04:25.000000000 +0100
-+++ cups-1.4.2/configure	2010-01-07 23:11:46.635118361 +0100
-@@ -9850,8 +9850,8 @@ if test "$libdir" = "\${exec_prefix}/lib
+--- cups-1.4.4.orig/configure	2010-06-17 20:25:47.000000000 +0200
++++ cups-1.4.4/configure	2010-09-29 22:35:47.000000000 +0200
+@@ -1966,7 +1966,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+ 
+ 
+-uname=`uname`
++uname=Linux
+ uversion=`uname -r | sed -e '1,$s/^[^0-9]*\([0-9]*\)\.\([0-9]*\).*/\1\2/'`
+ uarch=`uname -m`
+ 
+@@ -10002,8 +10002,8 @@ if test "$libdir" = "\${exec_prefix}/lib
  			libdir="$exec_prefix/lib32"
  			;;
  		Linux*)
@@ -11,7 +20,7 @@
  			fi
  			;;
  		HP-UX*)
-@@ -10260,11 +10260,6 @@ _ACEOF
+@@ -10412,11 +10412,6 @@ _ACEOF
  
  # Server executables...
  case "$uname" in

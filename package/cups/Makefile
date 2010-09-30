@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cups
-PKG_VERSION:=		1.4.2
+PKG_VERSION:=		1.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d95e2d588e3d36e563027a963b117b1b
+PKG_MD5SUM:=		8776403ad60fea9e85eab9c04d88560d
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		zlib libpthread
@@ -22,8 +22,8 @@ $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
-CONFIGURE_ARGS+=	--with-cups-user=0 \
-			--with-cups-group=0 \
+CONFIGURE_ARGS+=	--with-cups-user=cups \
+			--with-cups-group=cups \
 			--disable-ldap \
 			--disable-gssapi \
 			--disable-pam \

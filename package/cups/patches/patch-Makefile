@@ -1,6 +1,6 @@
---- cups-1.4.2.orig/Makefile	2009-07-01 06:01:31.000000000 +0200
-+++ cups-1.4.2/Makefile	2009-11-19 22:04:36.000000000 +0100
-@@ -27,10 +27,10 @@ include Makedefs
+--- cups-1.4.4.orig/Makefile	2010-04-23 20:56:34.000000000 +0200
++++ cups-1.4.4/Makefile	2010-09-29 22:55:01.000000000 +0200
+@@ -20,10 +20,10 @@ include Makedefs
  # Directories to make...
  #
  

@@ -1,0 +1,10 @@
+--- cups-1.4.4.orig/Makedefs.in	2010-04-23 20:56:34.000000000 +0200
++++ cups-1.4.4/Makedefs.in	2010-09-30 21:33:20.000000000 +0200
+@@ -258,7 +258,6 @@ DBUSDIR		=	@DBUSDIR@
+ # Rules...
+ #
+ 
+-.SILENT:
+ .SUFFIXES:	.1 .1.gz .1m .1m.gz .3 .3.gz .5 .5.gz .7 .7.gz .8 .8.gz .a .c .cxx .h .man .o .32.o .64.o .gz
+ 
+ .c.o:
