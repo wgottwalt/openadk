@@ -1,0 +1,20 @@
+--- nss-3.12.8.orig/mozilla/security/coreconf/rules.mk	2010-04-26 01:37:40.000000000 +0200
++++ nss-3.12.8/mozilla/security/coreconf/rules.mk	2010-10-03 23:41:05.000000000 +0200
+@@ -281,7 +281,7 @@ ifdef MT
+ 	fi
+ endif	# MSVC with manifest tool
+ else
+-	$(MKPROG) -o $@ $(CFLAGS) $(OBJS) $(LDFLAGS) $(EXTRA_LIBS) $(EXTRA_SHARED_LIBS) $(OS_LIBS)
++	$(MKPROG) -o $@ $(CFLAGS) $(OBJS) $(EXTRA_LIBS) $(EXTRA_SHARED_LIBS) $(OS_LIBS)
+ endif
+ 
+ get_objs:
+@@ -338,7 +338,7 @@ ifdef MT
+ endif	# MSVC with manifest tool
+ endif
+ else
+-	$(MKSHLIB) -o $@ $(OBJS) $(SUB_SHLOBJS) $(LD_LIBS) $(EXTRA_LIBS) $(EXTRA_SHARED_LIBS) $(OS_LIBS)
++	$(MKSHLIB) -o $@ $(LDFLAGS) $(OBJS) $(SUB_SHLOBJS) $(LD_LIBS) $(EXTRA_LIBS) $(EXTRA_SHARED_LIBS) $(OS_LIBS)
+ 	chmod +x $@
+ ifeq ($(OS_TARGET),Darwin)
+ ifdef MAPFILE

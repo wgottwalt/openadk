@@ -1,0 +1,28 @@
+--- traceroute-2.0.16.orig/Make.rules	2010-09-09 16:20:46.000000000 +0200
++++ traceroute-2.0.16/Make.rules	2010-10-11 20:07:03.000000000 +0200
+@@ -46,14 +46,14 @@ $(call set, INSTALL, cp)
+ $(call set, INDENT, true)
+ 
+ gcc = $(findstring gcc,$(CC))
+-$(call set, CFLAGS, $(if $(gcc), -O2 -Wall, -O))
++$(call set, CFLAGS, )
+ $(call set, CPPFLAGS, )
+ $(call set, LDFLAGS, -s)
+ $(call set, LIBS, )
+ 
+ 
+ #  install stuff
+-prefix = /usr/local
++prefix = /usr
+ 
+ exec_prefix = $(prefix)
+ bindir = $(exec_prefix)/bin
+@@ -125,7 +125,7 @@ _libs = $(strip $(foreach lib,$(LIBDIRS)
+ 			$(wildcard $(srcdir)/$(lib)/$(lib).so \
+ 					$(srcdir)/$(lib)/$(lib).a))))
+ 
+-override LIBS := $(_libs) -lm $(LIBS)
++override LIBS := $(_libs) $(LIBS)
+ 
+ ifneq ($(gcc),)
+ CPATH = $(subst $(empty) ,:,$(includes))
