@@ -1,5 +1,5 @@
---- nss-3.12.6.orig/mozilla/security/coreconf/Linux.mk	2010-01-15 23:19:00.000000000 +0100
-+++ nss-3.12.6/mozilla/security/coreconf/Linux.mk	2010-04-12 20:18:32.000000000 +0200
+--- nss-3.12.8.orig/mozilla/security/coreconf/Linux.mk	2010-08-13 03:32:29.000000000 +0200
++++ nss-3.12.8/mozilla/security/coreconf/Linux.mk	2010-10-04 22:49:50.378508674 +0200
 @@ -46,9 +46,9 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif
@@ -13,7 +13,7 @@
  
  DEFAULT_COMPILER = gcc
  
-@@ -133,7 +133,7 @@ endif
+@@ -137,7 +137,7 @@ endif
  # not build with -ansi.
  STANDARDS_CFLAGS	= -ansi -D_POSIX_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE
  OS_CFLAGS		= $(STANDARDS_CFLAGS) $(DSO_CFLAGS) $(OS_REL_CFLAGS) $(ARCHFLAG) -Wall -Werror-implicit-function-declaration -Wno-switch -pipe -DLINUX -Dlinux -DHAVE_STRERROR
@@ -22,12 +22,12 @@
  
  ifdef USE_PTHREADS
  	DEFINES		+= -D_REENTRANT
-@@ -148,7 +148,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG)
+@@ -152,7 +152,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG)
  # we don't use -z defs there.
  ZDEFS_FLAG		= -Wl,-z,defs
  DSO_LDOPTS		+= $(if $(findstring 2.11.90.0.8,$(shell ld -v)),,$(ZDEFS_FLAG))
 -LDFLAGS			+= $(ARCHFLAG)
 +#LDFLAGS			+= $(ARCHFLAG)
  
- # INCLUDES += -I/usr/include -Y/usr/include/linux
- G++INCLUDES		= -I/usr/include/g++
+ # On Maemo, we need to use the -rpath-link flag for even the standard system
+ # library directories.
