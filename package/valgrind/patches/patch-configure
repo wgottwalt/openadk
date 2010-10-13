@@ -1,5 +1,5 @@
 --- valgrind-3.5.0.orig/configure	2009-08-19 15:44:07.000000000 +0200
-+++ valgrind-3.5.0/configure	2010-04-03 09:55:06.363473068 +0200
++++ valgrind-3.5.0/configure	2010-10-11 22:01:23.000000000 +0200
 @@ -4215,7 +4215,7 @@ echo "${ECHO_T}ok (${host_os})" >&6
          echo "$as_me:$LINENO: checking for the kernel version" >&5
  echo $ECHO_N "checking for the kernel version... $ECHO_C" >&6
@@ -22,15 +22,15 @@
 +
 +#include <features.h>
 +#ifdef __GNU_LIBRARY__
-+ #if (__GLIBC__ == 2 && __GLIBC_MINOR__ == 11)
-+  GLIBC_211
++ #if (__GLIBC__ == 2 && __GLIBC_MINOR__ == 12)
++  GLIBC_212
 + #endif
 +#endif
 +
 +_ACEOF
 +if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-+  $EGREP "GLIBC_211" >/dev/null 2>&1; then
-+  libc="2.11"
++  $EGREP "GLIBC_212" >/dev/null 2>&1; then
++  libc="2.12"
 +fi
 +rm -f conftest*
 +
@@ -43,8 +43,8 @@
  #ifdef __GNU_LIBRARY__
 - #if (__GLIBC__ == 2 && __GLIBC_MINOR__ == 10)
 -  GLIBC_210
-+ #if (__GLIBC__ == 2 && __GLIBC_MINOR__ == 11)
-+  GLIBC_211
++ #if (__GLIBC__ == 2 && __GLIBC_MINOR__ == 12)
++  GLIBC_212
   #endif
  #endif
  
@@ -52,8 +52,8 @@
  if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
 -  $EGREP "GLIBC_210" >/dev/null 2>&1; then
 -  GLIBC_VERSION="2.10"
-+  $EGREP "GLIBC_211" >/dev/null 2>&1; then
-+  GLIBC_VERSION="2.11"
++  $EGREP "GLIBC_212" >/dev/null 2>&1; then
++  GLIBC_VERSION="2.12"
  fi
  rm -f conftest*
  
@@ -61,12 +61,12 @@
  	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
  	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
  	;;
-+     2.11*)
-+	echo "$as_me:$LINENO: result: 2.11 family" >&5
-+echo "${ECHO_T}2.11 family" >&6
++     2.12*)
++	echo "$as_me:$LINENO: result: 2.12 family" >&5
++echo "${ECHO_T}2.12 family" >&6
 +
 +cat >>confdefs.h <<\_ACEOF
-+#define GLIBC_2_11 1
++#define GLIBC_2_12 1
 +_ACEOF
 +
 +	DEFAULT_SUPP="glibc-2.X.supp ${DEFAULT_SUPP}"

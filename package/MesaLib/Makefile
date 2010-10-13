@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
-PKG_VERSION:=		7.8.1
+PKG_VERSION:=		7.8.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		62e8e47cbd63741b4bbe634dcdc8a56a
+PKG_MD5SUM:=		c89b63d253605ed40e8ac370d25a833c
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm
 PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
-PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.1/
+PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.2/
 
 PKG_SUBPKGS:=		MESALIB GLXINFO GLXGEARS
 PKGSD_GLXINFO:=		Display various GLX information
@@ -21,7 +21,7 @@ PKGSC_GLXINFO:=		x11/apps
 PKGSD_GLXGEARS:=	Nice little OpenGL demo application
 PKGSC_GLXGEARS:=	x11/apps
 
-PKG_HOST_DEPENDS:=	!cygwin
+PKG_HOST_DEPENDS:=	!cygwin !darwin
 PKG_TARGET_DEPENDS:=	ibmx40 lemote
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}

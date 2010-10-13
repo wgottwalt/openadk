@@ -13,7 +13,7 @@ PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/
 PKG_NOPARALLEL:=	1
 
-PKG_HOST_DEPENDS:=	!freebsd !cygwin
+PKG_HOST_DEPENDS:=	!freebsd !cygwin !darwin
 
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p429.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.1-p429

@@ -4,15 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bogofilter
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a12a16d88d6d565dacf2a5e6259a3337
+PKG_MD5SUM:=		39d27c13eae8a5064d68e20d585e60de
 PKG_DESCR:=		mail filter
 PKG_SECTION:=		mail
 PKG_DEPENDS:=		libiconv libdb
 PKG_BUILDDEP:=		libiconv libdb
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
+
+PKG_HOST_DEPENDS:=	!darwin
 
 include ${TOPDIR}/mk/package.mk
 

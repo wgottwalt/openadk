@@ -15,6 +15,8 @@ PKG_URL:=		http://www.cycom.se/dl/rrs/
 PKG_SITES:=		http://www.cycom.se/uploads/36/19/
 PKG_CXX:=		RRS
 
+PKG_HOST_DEPENDS:=	!darwin
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RRS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

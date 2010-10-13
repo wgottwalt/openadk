@@ -97,7 +97,6 @@ all: world
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
 	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
-
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 

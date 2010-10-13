@@ -11,6 +11,8 @@ PKG_DESCR:=		TCL scripting language
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
 
+PKG_HOST_DEPENDS:=	!darwin
+
 DISTFILES:=		tcl${PKG_VERSION}-src.tar.gz
 WRKDIST=		${WRKDIR}/tcl${PKG_VERSION}
 WRKSRC=			${WRKDIST}/unix

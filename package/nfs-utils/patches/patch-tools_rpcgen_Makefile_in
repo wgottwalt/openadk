@@ -1,6 +1,6 @@
---- nfs-utils-1.2.1.orig/tools/rpcgen/Makefile.in	2009-11-04 12:15:52.000000000 +0100
-+++ nfs-utils-1.2.1/tools/rpcgen/Makefile.in	2010-01-16 11:01:44.015625000 +0100
-@@ -66,21 +66,21 @@ am_rpcgen_OBJECTS = rpcgen-rpc_clntout.$
+--- nfs-utils-1.2.3.orig/tools/rpcgen/Makefile.in	2010-09-28 14:32:33.000000000 +0200
++++ nfs-utils-1.2.3/tools/rpcgen/Makefile.in	2010-10-10 13:29:26.000000000 +0200
+@@ -72,21 +72,21 @@ am_rpcgen_OBJECTS = rpcgen-rpc_clntout.$
  rpcgen_OBJECTS = $(am_rpcgen_OBJECTS)
  rpcgen_LDADD = $(LDADD)
  rpcgen_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
@@ -29,7 +29,7 @@
  SOURCES = $(rpcgen_SOURCES)
  DIST_SOURCES = $(rpcgen_SOURCES)
  ETAGS = etags
-@@ -100,10 +100,10 @@ AWK = @AWK@
+@@ -106,10 +106,10 @@ AWK = @AWK@
  CC = $(CC_FOR_BUILD)
  CCDEPMODE = @CCDEPMODE@
  CC_FOR_BUILD = @CC_FOR_BUILD@
@@ -42,7 +42,7 @@
  CPPFLAGS_FOR_BUILD = @CPPFLAGS_FOR_BUILD@
  CXX = @CXX@
  CXXCPP = @CXXCPP@
-@@ -136,10 +136,10 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_P
+@@ -142,10 +142,10 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_P
  K5VERS = @K5VERS@
  KRBCFLAGS = @KRBCFLAGS@
  KRBDIR = @KRBDIR@
@@ -55,7 +55,7 @@
  LDFLAGS_FOR_BUILD = @LDFLAGS_FOR_BUILD@
  LIBBLKID = @LIBBLKID@
  LIBBSD = @LIBBSD@
-@@ -299,7 +299,7 @@ clean-noinstPROGRAMS:
+@@ -308,7 +308,7 @@ clean-noinstPROGRAMS:
  	rm -f $$list
  rpcgen$(EXEEXT): $(rpcgen_OBJECTS) $(rpcgen_DEPENDENCIES) 
  	@rm -f rpcgen$(EXEEXT)

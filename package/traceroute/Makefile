@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		traceroute
-PKG_VERSION:=		2.0.11
+PKG_VERSION:=		2.0.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d400573042d41559fc3e5260275300d8
+PKG_MD5SUM:=		3e84c525cdb4184d64aacaf9225e6503
 PKG_DESCR:=		Utility to trace the route of IP packets
 PKG_SECTION:=		net
 PKG_URL:=		http://traceroute.sourceforge.net/
@@ -21,11 +21,12 @@ CONFIG_STYLE:=          manual
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			AR="${TARGET_CROSS}ar" \
 			RANLIB="${TARGET_CROSS}ranlib" \
+			CFLAGS="${TCFLAGS}" \
 			LDFLAGS="-L${WRKSRC}/libsupp"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_TRACEROUTE)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/local/bin/traceroute \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/traceroute \
 		$(IDIR_TRACEROUTE)/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

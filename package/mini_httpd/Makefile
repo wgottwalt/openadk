@@ -37,15 +37,14 @@ do-build:
 		SSL_INC="-I${STAGING_DIR}/usr/include" \
 		SSL_LIBS="-L${STAGING_DIR}/usr/lib -lssl -lcrypto" \
 		all
-	(cd ${WRKBUILD}; mv mini_httpd mini_httpd-openssl; )
 
 do-install:
-	${INSTALL_DIR} ${IDIR_MINI_HTTPD_OPENSSL}/etc
+	${INSTALL_DIR} ${IDIR_MINI_HTTPD}/etc
 	${INSTALL_DATA} ./files/mini_httpd-ssl.conf \
-		${IDIR_MINI_HTTPD_OPENSSL}/etc/mini_httpd.conf
-	install -m0600 ./files/mini_httpd.pem ${IDIR_MINI_HTTPD_OPENSSL}/etc/
-	${INSTALL_DIR} ${IDIR_MINI_HTTPD_OPENSSL}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/mini_httpd-openssl \
-		${IDIR_MINI_HTTPD_OPENSSL}/usr/sbin/mini_httpd
+		${IDIR_MINI_HTTPD}/etc/mini_httpd.conf
+	install -m0600 ./files/mini_httpd.pem ${IDIR_MINI_HTTPD}/etc/
+	${INSTALL_DIR} ${IDIR_MINI_HTTPD}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/mini_httpd \
+		${IDIR_MINI_HTTPD}/usr/sbin/mini_httpd
 
 include ${TOPDIR}/mk/pkg-bottom.mk

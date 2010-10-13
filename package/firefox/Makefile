@@ -18,7 +18,7 @@ PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
 PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle ibmx40 lemote
-PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
+PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin !darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-1.9.2

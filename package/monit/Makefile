@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		monit
-PKG_VERSION:=		5.1.1
+PKG_VERSION:=		5.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4bbd3845ae1cbab13ec211824e0486dc
+PKG_MD5SUM:=		19ee6247b7528947d151720767bcf9d3
 PKG_DESCR:=		An utility for system services monitoring
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		libpthread libopenssl
