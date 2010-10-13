@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
-PKG_VERSION:=		3.12.6
+PKG_VERSION:=		3.12.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		da42596665f226de5eb3ecfc1ec57cd1
+PKG_MD5SUM:=		40bf1bb0c7567827d3768d1fc6081100
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		nspr zlib
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
-PKG_SITES:=		https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_12_6_RTM/src/
+PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_12_8_RTM/src/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
