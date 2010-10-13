@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
-PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6e5028077e2a6b101a4a72801ba71b9e
+PKG_VERSION:=		1.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		31d08bbf47a77827fe97ef3f52b4c9c4
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
