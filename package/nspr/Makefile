@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nspr
-PKG_VERSION:=		4.8.2
+PKG_VERSION:=		4.8.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2a6fbfa56c9760ed3651d527272249c7
+PKG_MD5SUM:=		592c275728c29d193fdba8009165990b
 PKG_DESCR:=		Netscape Portable Runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.mozilla.org/projects/nspr/
-PKG_SITES:=		https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
+PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
 
 PKG_TARGET_DEPENDS:=	!foxboard
 
