@@ -1,5 +1,5 @@
 --- cups-1.4.4.orig/configure	2010-06-17 20:25:47.000000000 +0200
-+++ cups-1.4.4/configure	2010-09-29 22:35:47.000000000 +0200
++++ cups-1.4.4/configure	2010-10-03 01:12:27.000000000 +0200
 @@ -1966,7 +1966,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  
@@ -20,15 +20,12 @@
  			fi
  			;;
  		HP-UX*)
-@@ -10412,11 +10412,6 @@ _ACEOF
+@@ -10978,7 +10978,7 @@ fi
+ if test x$enable_debug = xyes; then
+ 	OPTIM="-g"
+ else
+-	INSTALL_STRIP="-s"
++	INSTALL_STRIP=""
+ fi
  
- # Server executables...
- case "$uname" in
--	*BSD* | Darwin*)
--		# *BSD and Darwin (MacOS X)
--		INSTALL_SYSV=""
--		CUPS_SERVERBIN="$exec_prefix/libexec/cups"
--		;;
- 	*)
- 		# All others
- 		INSTALL_SYSV="install-sysv"
+ if test x$enable_debug_printfs = xyes; then

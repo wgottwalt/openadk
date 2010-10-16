@@ -4,15 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pciutils
-PKG_VERSION:=		3.0.3
+PKG_VERSION:=		3.1.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d07da501bb11e6af40acd036536c2e9a
+PKG_MD5SUM:=		f3e349d22a3714b4272b171649ad5235
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils/
 PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/
+
+PKG_HOST_DEPENDS:=	!darwin
 
 include ${TOPDIR}/mk/package.mk
 

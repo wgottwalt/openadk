@@ -97,7 +97,6 @@ all: world
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
 	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
-
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
@@ -461,9 +460,10 @@ bulk:
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs defconfig; \
-			$(GMAKE) VERBOSE=1 all; \
+			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done <${TOPDIR}/target/bulkdef.lst
 
 bulktoolchain:
@@ -473,9 +473,10 @@ bulktoolchain:
 		echo === building $$target $$libc on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc defconfig; \
-			$(GMAKE) VERBOSE=1 all; \
+			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc.log; \
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done <${TOPDIR}/target/bulktool.lst
 
 bulkall:
@@ -485,9 +486,10 @@ bulkall:
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allconfig; \
-			$(GMAKE) VERBOSE=1 all; \
+			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done <${TOPDIR}/target/bulk.lst
 
 bulkallmod:
@@ -497,9 +499,10 @@ bulkallmod:
 		echo === building $$target $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
 			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allmodconfig; \
-			$(GMAKE) VERBOSE=1 all; \
+			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done <${TOPDIR}/target/bulk.lst
 
 ${TOPDIR}/bin/tools/pkgmaker:

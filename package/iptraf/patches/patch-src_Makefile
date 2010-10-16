@@ -1,7 +1,14 @@
 $Id$
---- iptraf-3.0.0.orig/src/Makefile	Tue Sep 13 11:11:17 2005
-+++ iptraf-3.0.0/src/Makefile	Tue Jan 16 22:27:34 2007
-@@ -113,7 +113,7 @@ iptraf: $(OBJS) textlib
+--- iptraf-3.0.0.orig/src/Makefile	2005-09-13 11:11:17.000000000 +0200
++++ iptraf-3.0.0/src/Makefile	2010-10-05 10:07:10.000000000 +0200
+@@ -107,13 +107,13 @@ BINS = iptraf rvnamed rawtime
+ 
+ all: $(BINS)
+ 	@echo
+-	@size $(BINS)
++	#@size $(BINS)
+ 
+ iptraf: $(OBJS) textlib
  	$(CC) $(LDOPTS) $(PROF) -o iptraf $(OBJS) $(LIBS)
  
  textlib:

@@ -1,0 +1,88 @@
+--- monit-5.2.1.orig/configure	2010-09-24 21:46:55.000000000 +0200
++++ monit-5.2.1/configure	2010-10-08 23:36:24.000000000 +0200
+@@ -10961,82 +10961,14 @@ fi
+ # Architecture/OS detection
+ # ------------------------------------------------------------------------
+ 
+-# Backward compatibility until we get ride of arch settings
+-if test `uname` = "SunOS"
+-then
+-   ARCH="SOLARIS"
+-   CFLAGS="$CFLAGS -D _REENTRANT -D_POSIX_PTHREAD_SEMANTICS"
+-   test_kstat="true"
+-
+-cat >>confdefs.h <<\_ACEOF
+-#define HAVE_CPU_WAIT 1
+-_ACEOF
+-
+-elif test `uname` = "Linux"
+-then
+-   ARCH="LINUX"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   LDFLAGS="$LDFLAGS -rdynamic"
+-   if test `uname -r | awk -F '.' '{print$1$2}'` -ge "26"
+-   then
+-
+-cat >>confdefs.h <<\_ACEOF
+-#define HAVE_CPU_WAIT 1
+-_ACEOF
+-
+-   fi
+-elif test `uname` = "HP-UX"
+-then
+-   ARCH="HPUX"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-
+-cat >>confdefs.h <<\_ACEOF
+-#define HAVE_CPU_WAIT 1
+-_ACEOF
+-
+-elif test `uname` = "OpenBSD"
+-then
+-   ARCH="OPENBSD"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   test_kvm="true"
+-elif test `uname` = "FreeBSD"
+-then
+-   ARCH="FREEBSD"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   test_kvm="true"
+-elif test `uname` = "NetBSD"
+-then
+-   ARCH="NETBSD"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   test_kvm="true"
+-elif test `uname` = "Darwin"
+-then
+-   ARCH="DARWIN"
+-   CFLAGS="$CFLAGS -DREENTRANT -no-cpp-precomp -DNEED_SOCKLEN_T_DEFINED"
+-   test_kvm="true"
+-   LIBS="$LIBS -framework System -multiply_defined suppress"
+-elif test `uname` = "AIX"
+-then
+-   ARCH="AIX"
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   LIBS="$LIBS -lodm"
+-   # AIX v. 5.2
+-   LIBS="$LIBS -lcfg"
+-   # AIX v. 5.3
+-   LIBS="$LIBS -lperfstat"
++ARCH="LINUX"
++CFLAGS="$CFLAGS -D _REENTRANT"
++LDFLAGS="$LDFLAGS -rdynamic"
+ 
+ cat >>confdefs.h <<\_ACEOF
+ #define HAVE_CPU_WAIT 1
+ _ACEOF
+ 
+-else
+-   { $as_echo "$as_me:$LINENO: WARNING: Architecture not supported: \`uname\`." >&5
+-$as_echo "$as_me: WARNING: Architecture not supported: \`uname\`." >&2;}
+-   CFLAGS="$CFLAGS -D _REENTRANT"
+-   ARCH="UNKNOWN"
+-fi
+-
+-
+ # ------------------------------------------------------------------------
+ # Resource code
+ # ------------------------------------------------------------------------

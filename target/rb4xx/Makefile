@@ -8,6 +8,7 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+KERNEL:=$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \

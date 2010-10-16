@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		MesaLib
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 
-PKG_HOST_DEPENDS:=	!cygwin
+PKG_HOST_DEPENDS:=	!cygwin !darwin
 PKG_TARGET_DEPENDS:=	ibmx40 lemote
 
 include $(TOPDIR)/mk/package.mk

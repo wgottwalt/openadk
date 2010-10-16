@@ -15,7 +15,7 @@ PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 
 PKG_SUBPKGS:=		LIBFLTK
 PKG_TARGET_DEPENDS:=	ibmx40 lemote
-PKG_HOST_DEPENDS:=	!cygwin
+PKG_HOST_DEPENDS:=	!cygwin !darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.x-r7513.tar.bz2
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.0.x-r7513

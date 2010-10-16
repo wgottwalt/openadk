@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		font-util
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
+PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd !darwin
 
 include $(TOPDIR)/mk/package.mk
 

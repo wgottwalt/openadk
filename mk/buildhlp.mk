@@ -56,7 +56,7 @@ endif
 ifeq ($(strip ${__use_generic_patch_target}),42)
 post-patch:
 ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
-	[ ! -d ./patches/${PKG_VERSION} ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
+	[ ! -d ./patches/${PKG_VERSION} ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches/${PKG_VERSION} \
 	    '{patch-!(*.orig),*.patch}' $(MAKE_TRACE)
 	[ ! -d ./patches ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \
 	    '{patch-!(*.orig),*.patch}' $(MAKE_TRACE)

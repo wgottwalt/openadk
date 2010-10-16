@@ -1,0 +1,12 @@
+diff -Nur eglibc-2.12.orig/libc/sysdeps/generic/netinet/ip.h eglibc-2.12/libc/sysdeps/generic/netinet/ip.h
+--- eglibc-2.12.orig/libc/sysdeps/generic/netinet/ip.h	2010-09-28 19:13:14.000000000 +0200
++++ eglibc-2.12/libc/sysdeps/generic/netinet/ip.h	2010-10-10 14:41:32.000000000 +0200
+@@ -194,7 +194,7 @@
+  */
+ 
+ #define	IPTOS_CLASS_MASK		0xe0
+-#define	IPTOS_CLASS(class)		((tos) & IPTOS_CLASS_MASK)
++#define	IPTOS_CLASS(class)		((class) & IPTOS_CLASS_MASK)
+ #define	IPTOS_CLASS_CS0			0x00
+ #define	IPTOS_CLASS_CS1			0x20
+ #define	IPTOS_CLASS_CS2			0x40

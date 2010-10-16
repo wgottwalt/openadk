@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lsof
-PKG_VERSION:=		4.83
+PKG_VERSION:=		4.84
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		243089ccf3672c64b33ec8c9ef2a2a48
+PKG_MD5SUM:=		6dae655988c810a7042c06a4e2fa3c5f
 PKG_DESCR:=		list open files
 PKG_SECTION:=		misc
 PKG_URL:=		http://people.freebsd.org/~abe/
 PKG_SITES:=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
+
+PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}/${PKG_NAME}_${PKG_VERSION}_src

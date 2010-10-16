@@ -1,5 +1,5 @@
---- cups-1.4.2.orig/ppdc/Makefile	2009-05-27 01:27:06.000000000 +0200
-+++ cups-1.4.2/ppdc/Makefile	2009-11-19 21:58:49.000000000 +0100
+--- cups-1.4.4.orig/ppdc/Makefile	2010-04-23 20:56:34.000000000 +0200
++++ cups-1.4.4/ppdc/Makefile	2010-10-03 00:51:42.000000000 +0200
 @@ -244,7 +244,7 @@ genstrings:		genstrings.o libcupsppdc.a 
  		libcupsppdc.a ../cups/libcups.a $(LIBGSSAPI) $(SSLLIBS) \
  		$(DNSSDLIBS) $(COMMONLIBS) $(LIBZ)

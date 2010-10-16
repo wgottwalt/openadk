@@ -4,20 +4,28 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dovecot
-PKG_VERSION:=		1.2.10
+PKG_VERSION:=		2.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7d0081b17ff6afae85e8dc14157fa57
+PKG_MD5SUM:=		7168c5bf40fdd38cceb99114547699b8
 PKG_DESCR:=		A minimal and secure imap server
 PKG_SECTION:=		mail
 PKG_URL:=		http://www.dovecot.org/
-PKG_SITES:=		http://www.dovecot.org/releases/1.2/
+PKG_SITES:=		http://www.dovecot.org/releases/2.0/
+
+PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
+PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCS_WITH_GNUTLS:=	libgnutls
+PKGCB_WITH_GNUTLS:=	gnutls
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOVECOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		ignore_signed_size=1 \
-			have_rquota=no \
+CONFIGURE_ENV+=		RPCGEN='' \
+			ignore_signed_size=1 \
 			signed_size_t=no \
 			gmtime_max_time_t=32 \
 			fd_passing=yes \
@@ -37,24 +45,24 @@ CONFIGURE_ARGS+=	--with-notify=none \
 			--without-gssapi \
 			--without-pam \
 			--with-ioloop=epoll \
-			--with-ssl \
                 	--with-moduledir=/usr/lib/dovecot/modules
+
+ifeq (${ADK_PACKAGE_DOVECOT_WITH_GNUTLS},y)
+CONFIGURE_ARGS+=	--with-ssl=gnutls
+endif
+ifeq (${ADK_PACKAGE_DOVECOT_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--with-ssl=openssl
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DOVECOT}/etc
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/sbin
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/libexec/dovecot
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot/modules/{imap,lda,pop3}
+	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot/modules
 	${INSTALL_DATA} ./files/dovecot.conf ${IDIR_DOVECOT}/etc
 	$(CP) ${WRKINST}/usr/lib/dovecot/modules/*.so \
 		${IDIR_DOVECOT}/usr/lib/dovecot/modules/
-	$(CP) ${WRKINST}/usr/lib/dovecot/modules/imap/*.so \
-		${IDIR_DOVECOT}/usr/lib/dovecot/modules/imap/
-	$(CP) ${WRKINST}/usr/lib/dovecot/modules/lda/*.so \
-		${IDIR_DOVECOT}/usr/lib/dovecot/modules/lda/
-	$(CP) ${WRKINST}/usr/lib/dovecot/modules/pop3/*.so \
-		${IDIR_DOVECOT}/usr/lib/dovecot/modules/pop3/
-	$(INSTALL_BIN) ${WRKINST}/usr/libexec/dovecot/* \
+	$(CP) ${WRKINST}/usr/libexec/dovecot/* \
 		${IDIR_DOVECOT}/usr/libexec/dovecot/
 	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot* \
 		${IDIR_DOVECOT}/usr/sbin

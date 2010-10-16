@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/3.1.1/
 
-PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
+PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin !darwin
 
 DISTFILES=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}

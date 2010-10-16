@@ -11,8 +11,8 @@ CPU_ARCH:=		$(shell gcc -dumpmachine | sed -e s'/-.*//' \
 			 -e 's/cris.*/cris/' \
 			 -e 's/i[3-9]86/i686/' \
 	    		)
-KERNEL_VERSION:=	2.6.35
+KERNEL_VERSION:=	2.6.35.7
 KERNEL_RELEASE:=	1
-KERNEL_MD5SUM:=		091abeb4684ce03d1d936851618687b6
+KERNEL_MD5SUM:=		f741879bcd3a5366a1bbe0ad5cdb7935
 TARGET_OPTIMIZATION:=	-Os -pipe
 TARGET_CFLAGS_ARCH:=    -march=native

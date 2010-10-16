@@ -15,6 +15,8 @@ PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
 
+PKG_HOST_DEPENDS:=	!darwin
+
 PKG_SUBPKGS:=		HEIMDAL LIBHEIMDAL LIBHEIMDAL_CLIENT
 PKGSD_LIBHEIMDAL:=	Kerberos 5 server libraries
 PKGSC_LIBHEIMDAL:=	libs

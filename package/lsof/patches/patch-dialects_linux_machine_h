@@ -1,6 +1,6 @@
---- lsof_4.83_src.orig/dialects/linux/machine.h	2008-10-21 18:17:26.000000000 +0200
-+++ lsof_4.83_src/dialects/linux/machine.h	2010-07-28 18:39:34.252738199 +0200
-@@ -625,6 +625,6 @@
+--- lsof_4.84_src.orig/dialects/linux/machine.h	2010-07-29 18:02:52.000000000 +0200
++++ lsof_4.84_src/dialects/linux/machine.h	2010-10-07 20:03:14.000000000 +0200
+@@ -632,6 +632,6 @@
   * zeromem is a macro that uses bzero or memset.
   */
  

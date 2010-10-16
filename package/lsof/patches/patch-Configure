@@ -1,6 +1,6 @@
---- lsof_4.83_src.orig/Configure	2010-01-18 20:01:14.000000000 +0100
-+++ lsof_4.83_src/Configure	2010-07-28 18:36:48.364508572 +0200
-@@ -2735,27 +2735,6 @@ return(0); }
+--- lsof_4.84_src.orig/Configure	2010-07-29 17:59:32.000000000 +0200
++++ lsof_4.84_src/Configure	2010-10-07 20:03:14.000000000 +0200
+@@ -2739,27 +2739,6 @@ return(0); }
      then
        LSOF_CFGF="$LSOF_CFGF -DHASIPv6"
      fi	# }

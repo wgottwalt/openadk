@@ -1,0 +1,11 @@
+--- libtasn1-2.2.orig/Makefile.in	2009-05-20 12:03:47.000000000 +0200
++++ libtasn1-2.2/Makefile.in	2010-10-05 22:41:43.000000000 +0200
+@@ -446,7 +446,7 @@ EXTRA_DIST = windows/asn1-parser/asn1-pa
+ 	windows/libtasn1/libtasn1.vcproj \
+ 	windows/test-parser/test-parser.vcproj \
+ 	windows/test-tree/test-tree.vcproj cfg.mk maint.mk .clcopying
+-SUBDIRS = gl lib src examples tests doc
++SUBDIRS = gl lib src examples tests
+ ACLOCAL_AMFLAGS = -I m4 -I gl/m4 -I lib/glm4
+ all: config.h
+ 	$(MAKE) $(AM_MAKEFLAGS) all-recursive

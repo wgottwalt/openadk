@@ -27,6 +27,8 @@ CONFIGURE_ARGS+=	--without-epoll \
 CONFIGURE_ENV+= 	CXXFLAGS='${TCXXFLAGS}' \
 			ac_cv_path_cxxtools_config=${STAGING_DIR}/usr/bin
 
+TLDFLAGS+=		-ldl
+
 post-install:
 	${INSTALL_DIR} ${IDIR_TNTNET}/www
 	${INSTALL_DIR} ${IDIR_TNTNET}/etc/tntnet

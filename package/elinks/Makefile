@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
+PKG_NOPARALLEL:=	1
 
 PKG_FLAVOURS:=		WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
