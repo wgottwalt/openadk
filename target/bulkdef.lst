@@ -70,4 +70,3 @@ ibmx40		glibc		initramfs-piggyback
 shuttle		uclibc		archive
 shuttle		eglibc		archive
 shuttle		glibc		archive
-
