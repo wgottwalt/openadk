@@ -1014,13 +1014,13 @@ config ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
 	help
 	  Select BZIP2 compression.
 
-config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
-	boolean
-	prompt "lzo"
-	select ADK_KERNEL_RD_LZO
-	select ADK_KERNEL_KERNEL_LZO
-	help
-	  Select LZO compression.
+#config ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+#	boolean
+#	prompt "lzo"
+#	select ADK_KERNEL_RD_LZO
+#	select ADK_KERNEL_KERNEL_LZO
+#	help
+#	  Select LZO compression.
 
 endchoice
 
