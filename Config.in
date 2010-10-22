@@ -48,7 +48,6 @@ config ADK_DEVELSYSTEM
 	select ADK_PACKAGE_LIBNCURSES_DEV
 	select ADK_PACKAGE_M4
 	select ADK_PACKAGE_MAKE
-	select ADK_PACKAGE_MKSH
 	select ADK_PACKAGE_PATCH
 	select ADK_PACKAGE_PKG_CONFIG
 	select ADK_PACKAGE_MICROPERL
@@ -61,7 +60,7 @@ config ADK_DEVELSYSTEM
 	  After bootstrapping a Linux system you might want to
 	  switch to native builds with your target. 
 	  If you choose this option, all necessary software needed
-	  for native building will be selected.
+	  for native building will be selected by this option.
 
 config ADK_DEBUG
 	bool "Enable debug support"
