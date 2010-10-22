@@ -1,4 +1,6 @@
 #!/bin/sh
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
 
 os=$(uname)
 ver=$(uname -r)
@@ -57,7 +59,6 @@ netbsd() {
 	pkg_add -vu xz
 	pkg_add -vu scmgit
 	pkg_add -vu gmake
-	pkg_add -vu mksh
 	pkg_add -vu bash
 	pkg_add -vu wget
 	pkg_add -vu unzip
@@ -83,7 +84,7 @@ netbsd_full() {
 
 freebsd() {
 	echo "Preparing FreeBSD for OpenADK"
-	pkg_add -r git gmake mksh bash wget unzip gtar gsed gawk gperf
+	pkg_add -r git gmake bash wget unzip gtar gsed gawk gperf
 }
 
 freebsd_full() {
