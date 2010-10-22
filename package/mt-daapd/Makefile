@@ -26,6 +26,7 @@ CONFIGURE_ARGS+=	--enable-mdns \
 			--with-gdbm-includes="${STAGING_DIR}/usr/include" \
 			--with-gdbm-libs="${STAGING_DIR}/usr/lib" \
 			--without-static-libs
+TLDFLAGS+=		-pthread
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc ${IDIR_MT_DAAPD}/usr/{share,sbin}
