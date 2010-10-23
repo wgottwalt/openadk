@@ -22,7 +22,7 @@ ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
 $(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
-$(eval $(call rootfs_template,usb,USB,root=/dev/sdb1 rootdelay=5))
+$(eval $(call rootfs_template,usb,USB,root=/dev/sdb1 rootdelay=3))
 $(eval $(call rootfs_template,archive,ARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
