@@ -7,6 +7,12 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+$(TOOLS_BUILD_DIR):
+	mkdir -p $(TOOLS_BUILD_DIR)
+
+tools-compile: $(TOOLS_BUILD_DIR)
+	$(MAKE) -C ../tools/grub prepare compile install
+
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
 createinitcrypt:
@@ -26,7 +32,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(FS),usb)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: tools-compile $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to USB use scripts/install.sh"
 endif

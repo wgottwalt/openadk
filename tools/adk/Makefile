@@ -9,6 +9,10 @@ ${TOPDIR}/bin/tools/depmaker:
 ${TOPDIR}/bin/tools/pkgrebuild:
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/pkgrebuild pkgrebuild.c strmap.c
 
-install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild
+${TOPDIR}/bin/tools/pt:
+	$(HOSTCC) -o $(TOPDIR)/bin/tools/pt pt.c
+
+install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild \
+	$(TOPDIR)/bin/tools/pt
 
 include $(TOPDIR)/mk/tools.mk
