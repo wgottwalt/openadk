@@ -12,7 +12,7 @@ PKG_SITES:=		ftp://alpha.gnu.org/gnu/grub/
 include ../rules.mk
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	cd $(WRKBUILD) && ./configure --prefix=$(TOPDIR)/bin/tools
+	cd $(WRKBUILD) && ./configure --prefix=$(TOPDIR)/bin/tools --disable-nls --disable-efiemu --with-platform=pc
 	$(MAKE) -C $(WRKBUILD)
 	touch $@
 
