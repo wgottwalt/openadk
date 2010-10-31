@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xz
-PKG_VERSION:=		4.999.9beta
+PKG_VERSION:=		5.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f2073579b6da2fe35d453adee1aaf1b2
+PKG_MD5SUM:=		f3c0706d100ad2b6d63327584d026c50
 PKG_DESCR:=		lzma compression utility
 PKG_SECTION:=		archive
 PKG_URL:=		http://tukaani.org/xz/
