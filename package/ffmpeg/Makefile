@@ -61,6 +61,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--cross-prefix=${TARGET_CROSS} \
 			--cc=$(TARGET_CC) \
 			--host-cc=$(HOSTCC) \
+			--disable-doc \
 			--disable-debug \
 			--disable-optimizations \
 			--disable-stripping \
