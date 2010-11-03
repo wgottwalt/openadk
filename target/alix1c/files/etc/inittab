@@ -1,4 +1,4 @@
 ::sysinit:/etc/init.d/rcS
 ::shutdown:/etc/init.d/rcK
 ttyS0::respawn:/sbin/getty -i -L ttyS0 115200 vt100
-tty1::respawn:/sbin/getty -i -L tty1 115200 vt100
+tty0::askfirst:/sbin/getty -i -L tty0 115200 vt100
