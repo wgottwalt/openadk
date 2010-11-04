@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		35f56b092ecf39a6bd59d64f142aae0f
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -45,6 +45,9 @@ post-extract:
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} distclean
+
+pre-configure:
+	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
