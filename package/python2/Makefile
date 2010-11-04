@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		35f56b092ecf39a6bd59d64f142aae0f
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -40,6 +40,7 @@ post-extract:
 		--prefix=$(STAGING_TOOLS) \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
+	$(MAKE) -C ${WRKBUILD} install
 	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/pgen
 	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
