@@ -1,0 +1,17 @@
+--- Python-2.7.orig/configure	2010-05-28 17:28:47.000000000 +0200
++++ Python-2.7/configure	2010-11-04 14:13:05.000000000 +0100
+@@ -2972,12 +2972,12 @@ fi
+ $as_echo_n "checking MACHDEP... " >&6; }
+ if test -z "$MACHDEP"
+ then
+-	ac_sys_system=`uname -s`
++	ac_sys_system=Linux
+ 	if test "$ac_sys_system" = "AIX" \
+ 	-o "$ac_sys_system" = "UnixWare" -o "$ac_sys_system" = "OpenUNIX"; then
+ 		ac_sys_release=`uname -v`
+ 	else
+-		ac_sys_release=`uname -r`
++		ac_sys_release=2.6
+ 	fi
+ 	ac_md_system=`echo $ac_sys_system |
+ 			   tr -d '/ ' | tr '[A-Z]' '[a-z]'`

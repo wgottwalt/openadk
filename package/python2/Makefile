@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 
-PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin !darwin
+PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
 
 DISTFILES=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
@@ -23,15 +23,17 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PYTHON2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
+			RANLIB="${TARGET_CROSS}ranlib" \
 			HOSTPYTHON=./hostpython \
 			HOSTPGEN=./Parser/hostpgen
 CONFIGURE_ENV+=		OPT="$(TARGET_CFLAGS)" \
 			ac_cv_have_long_long_format=yes
 CONFIGURE_ARGS:=	--with-threads \
+			--disable-toolbox-glue \
 			--with-system-ffi \
 			--without-cxx-main
 
-pre-configure:
+post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(HOSTCFLAGS)" \
 		./configure --without-cxx-main --without-threads \
