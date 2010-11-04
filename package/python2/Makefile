@@ -5,11 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		35f56b092ecf39a6bd59d64f142aae0f
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_DEPENDS:=		libpthread
+PKG_DEPENDS:=		libpthread zlib
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 

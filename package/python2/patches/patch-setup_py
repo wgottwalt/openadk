@@ -1,5 +1,5 @@
 --- Python-2.7.orig/setup.py	2010-06-27 14:36:16.000000000 +0200
-+++ Python-2.7/setup.py	2010-09-25 22:04:01.234088816 +0200
++++ Python-2.7/setup.py	2010-11-04 22:25:30.000000000 +0100
 @@ -21,7 +21,7 @@ from distutils.spawn import find_executa
  COMPILED_WITH_PYDEBUG = hasattr(sys, 'gettotalrefcount')
  
@@ -46,3 +46,14 @@
  
      def get_platform(self):
          # Get value of sys.platform
+@@ -347,8 +317,8 @@ class PyBuildExt(build_ext):
+ 
+     def detect_modules(self):
+         # Ensure that /usr/local is always used
+-        add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
+-        add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
++        #add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
++        #add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+ 
+         # Add paths specified in the environment variables LDFLAGS and
+         # CPPFLAGS for header and library files.
