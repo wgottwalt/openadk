@@ -3,13 +3,16 @@
 
 include $(TOPDIR)/rules.mk
 
-${TOPDIR}/bin/tools/depmaker:
+$(TOPDIR)/bin/tools:
+	@mkdir -p $(TOPDIR)/bin/tools
+
+${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/depmaker depmaker.c
 
-${TOPDIR}/bin/tools/pkgrebuild:
+${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/bin/tools
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/pkgrebuild pkgrebuild.c strmap.c
 
-${TOPDIR}/bin/tools/pt:
+${TOPDIR}/bin/tools/pt: $(TOPDIR)/bin/tools
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/pt pt.c
 
 install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild \
