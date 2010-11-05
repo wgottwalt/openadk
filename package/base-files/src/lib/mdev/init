@@ -20,3 +20,13 @@ if [ "$SUBSYSTEM" == "pcmcia_socket" ];then
 		/usr/sbin/pcmcia-socket-startup
 	fi
 fi
+if [ "$SUBSYSTEM" == "usb" ];then
+	if [ "$ACTION" == "add" ];then
+		if [ "$DEVTYPE" == "usb_device" ];then
+			logger "USB device added with: $PRODUCT"
+			if [ "$PRODUCT" == "12d1/1003/0" ];then
+				test -x /sbin/huawei && /sbin/huawei
+			fi
+		fi
+	fi
+fi
