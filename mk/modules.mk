@@ -149,7 +149,7 @@ $(eval $(call KMOD_template,PPP,ppp,\
 	$(MODULES_DIR)/kernel/drivers/net/ppp_async \
 ,50))
 
-$(eval $(call KMOD_template,MPPE,mppe,\
+$(eval $(call KMOD_template,PPP_MPPE,ppp_mppe,\
 	$(MODULES_DIR)/kernel/drivers/net/ppp_mppe_mppc \
 ,55))
 
