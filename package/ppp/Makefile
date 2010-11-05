@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.5
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		ppp

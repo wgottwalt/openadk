@@ -11,11 +11,14 @@
 }
 
 IDLEOPTIONS="persist\nmaxfail 0"
-if [ "$IF_PPP_IDLETIME" -gt 0 ]; then
+[ "$IF_PPP_IDLETIME" ] && {
+  if [ "$IF_PPP_IDLETIME" -gt 0 ]; then
 	IDLEOTPIONS="idletime $IF_PPP_IDLETIME"
-fi
+  fi
+}
 
-if [ "$IF_PPP_MTU" -gt 0 ] ; then 
+[ "$IF_PPP_MTU" ] || IF_PPP_MTU=1412
+if [ "$IF_PPP_MTU" -gt 0 ] ; then
 	NETWORKOPTIONS="mtu $IF_PPP_MTU\nmru $IF_PPP_MTU"
 fi
 
