@@ -4,7 +4,7 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -nk2 | \
 	    while read line; do
-		exec sh ${line%%:*} autostart 2>&1
+		sh ${line%%:*} autostart 2>&1
 	    done
 	test -e /etc/init.d/boot.local && (/bin/sh /etc/init.d/boot.local) 2>&1
 } | logger -s -p 6 -t '' &
