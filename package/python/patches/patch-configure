@@ -1,5 +1,29 @@
 --- Python-3.1.1.orig/configure	2009-06-08 23:22:57.000000000 +0200
-+++ Python-3.1.1/configure	2009-09-16 20:36:05.000000000 +0200
++++ Python-3.1.1/configure	2010-11-07 20:52:09.000000000 +0100
+@@ -2051,12 +2051,12 @@ fi
+ echo $ECHO_N "checking MACHDEP... $ECHO_C" >&6; }
+ if test -z "$MACHDEP"
+ then
+-	ac_sys_system=`uname -s`
++	ac_sys_system=Linux
+ 	if test "$ac_sys_system" = "AIX" -o "$ac_sys_system" = "Monterey64" \
+ 	-o "$ac_sys_system" = "UnixWare" -o "$ac_sys_system" = "OpenUNIX"; then
+ 		ac_sys_release=`uname -v`
+ 	else
+-		ac_sys_release=`uname -r`
++		ac_sys_release=2.6
+ 	fi
+ 	ac_md_system=`echo $ac_sys_system |
+ 			   tr -d '/ ' | tr '[A-Z]' '[a-z]'`
+@@ -2224,7 +2224,7 @@ EXPORT_MACOSX_DEPLOYMENT_TARGET='#'
+ 
+ { echo "$as_me:$LINENO: checking machine type as reported by uname -m" >&5
+ echo $ECHO_N "checking machine type as reported by uname -m... $ECHO_C" >&6; }
+-ac_sys_machine=`uname -m`
++ac_sys_machine=@@CPU_ARCH@@
+ { echo "$as_me:$LINENO: result: $ac_sys_machine" >&5
+ echo "${ECHO_T}$ac_sys_machine" >&6; }
+ 
 @@ -17204,141 +17204,6 @@ fi
  fi
  
