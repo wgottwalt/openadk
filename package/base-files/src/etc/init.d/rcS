@@ -7,4 +7,4 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 		sh ${line%%:*} autostart 2>&1
 	    done
 	test -e /etc/init.d/boot.local && (/bin/sh /etc/init.d/boot.local) 2>&1
-} | logger -s -p 6 -t '' &
+} | logger -p 6 -t '' &
