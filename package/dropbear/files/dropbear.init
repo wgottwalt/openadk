@@ -3,10 +3,6 @@
 #INIT 50
 . /etc/rc.conf
 
-bothlog() {
-	echo "$*"
-}
-
 case $1 in
 autostop) ;;
 autostart)
@@ -17,22 +13,22 @@ start)
 	if test ! -f /etc/dropbear/dropbear_rsa_host_key; then
 		mkdir -p /etc/dropbear
 		if test ! -x /usr/bin/dropbearkey; then
-			bothlog dropbear not starting: SSH private key missing
+			echo "dropbear not starting: SSH private key missing"
 			exit 0
 		fi
-		bothlog "dropbear: generating SSH private key (RSA)"
+		echo "dropbear: generating SSH private key (RSA)"
 		/usr/bin/dropbearkey -f /etc/dropbear/dropbear_rsa_host_key \
-		    -t rsa; rv=$?
-		bothlog dropbear: key generation exited with code $rv
+		    -t rsa ; rv=$?
+		echo "dropbear: key generation exited with code $rv"
 		test $rv = 0 || exit 1
 		test -f /etc/dropbear/dropbear_rsa_host_key || exit 1
 	fi
 	if test ! -f /etc/dropbear/dropbear_dss_host_key; then
 		# take it easy here, since above already catched the worst cases
 		if test -x /usr/bin/dropbearkey; then
-			bothlog "dropbear: generating SSH private key (DSS)"
+			echo "dropbear: generating SSH private key (DSS)"
 			/usr/bin/dropbearkey -f /etc/dropbear/dropbear_dss_host_key -t dss
-			bothlog dropbear: key generation exited with code $?
+			echo "dropbear: key generation exited with code $?"
 		fi
 	fi
 	/usr/sbin/dropbear $dropbear_flags
