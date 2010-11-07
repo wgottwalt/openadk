@@ -13,8 +13,7 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=-O2
 endif
 
-GLIBC_CONFOPTS:=        \
-			--build=$(GNU_HOST_NAME) \
+GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
 			--disable-nls \
@@ -54,11 +53,11 @@ GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-	ln -sf ../../w-glibc-ports-2.12-1/glibc-ports-2.12/ ports);
+	ln -sf ../../w-glibc-ports-$(GLIBC_PORTS_VERSION)-1/glibc-ports-$(GLIBC_PORTS_VERSION)/ ports);
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
-			--prefix=/usr \
+			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
 			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 			${GLIBC_CONFOPTS} \
 	);
@@ -66,10 +65,12 @@ $(WRKBUILD)/.headers_configure:
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
-	-${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_INITIAL) \
+	(cd $(GLIBC_BUILD_DIR_INITIAL); \
+		${GLIBC_ENV} \
+		$(MAKE) ${GLIBC_MAKEOPTS} \
 		cross-compiling=yes \
-		install_root=$(TOOLCHAIN_SYSROOT) \
-		install-headers
+		install-headers \
+	);
 	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
 	touch $@
 

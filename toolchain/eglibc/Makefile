@@ -11,10 +11,8 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-O2
 endif
 
-EGLIBC_CONFOPTS:=	\
-			--build=$(GNU_HOST_NAME) \
+EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
 			--disable-nls \
 			--without-cvs \
 			--disable-profile \
@@ -49,7 +47,7 @@ $(WRKBUILD)/.headers_configure:
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
 		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
-		$(EGLIBC_BUILD_DIR_INITIAL)
+		$(EGLIBC_BUILD_DIR_INITIAL)/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
 		$(WRKBUILD)/libc/configure \
@@ -60,16 +58,16 @@ $(WRKBUILD)/.headers_configure:
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(EGLIBC_BUILD_DIR_INITIAL) \
-		install-headers install-bootstrap-headers=yes
+	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
+		PATH='${TARGET_PATH}' \
+		$(MAKE) install-headers install-bootstrap-headers=yes \
+	);
 	touch $@
 
 $(WRKBUILD)/.configured:
 	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
-		$(EGLIBC_BUILD_DIR_FINAL)
+		$(EGLIBC_BUILD_DIR_FINAL)/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_FINAL); \
 		${EGLIBC_ENV} \
 		$(WRKBUILD)/libc/configure \
