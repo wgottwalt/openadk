@@ -74,8 +74,18 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		if [ "$$(grep ^ADK_RUNTIME_PASSWORD .config|md5sum)" != "$$(grep ^ADK_RUNTIME_PASSWORD .config.old|md5sum)" ];then \
-			touch .rebuild.base-files;\
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS;do \
+			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
+				touch .rebuild.base-files;\
+				rebuild=1;\
+			fi; \
+		done; \
+		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
+			touch .rebuild.eglibc .rebuild.uclibc .rebuild.glibc;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
+			touch .rebuild.dropbear .rebuild.openssh;\
 			rebuild=1;\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
