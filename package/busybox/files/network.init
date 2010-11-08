@@ -12,6 +12,7 @@ start)
 	ifup -a
 	;;
 autostop|stop)
+	[ -f /etc/network/interfaces ] || exit 1
 	ifdown -a
 	;;
 restart)

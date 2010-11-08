@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		procps
-PKG_VERSION:=		3.2.7
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		f490bca772b16472962c7b9f23b1e97d
+PKG_VERSION:=		3.2.8
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9532714b6846013ca9898984ba4cd7e0
 PKG_DESCR:=		The /proc file system utilities
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libncurses
@@ -40,6 +40,5 @@ post-install:
 	    ln -sf ../../bin/kill skill; \
 	    ln -sf ../../bin/kill snice; \
 	    ln -sf pgrep pkill
-	${INSTALL_BIN} killall ${IDIR_PROCPS}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
