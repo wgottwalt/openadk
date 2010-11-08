@@ -1,11 +1,8 @@
---- ruby-1.9.1-p378.orig/Makefile.in	2009-11-12 17:01:28.000000000 +0100
-+++ ruby-1.9.1-p378/Makefile.in	2010-06-02 20:50:05.821613650 +0200
-@@ -274,7 +274,7 @@ INSNS	= opt_sc.inc optinsn.inc optunifs.
- 
- $(INSNS):
- 	@$(RM) $(PROGRAM)
+--- ruby-1.9.2-p0.orig/Makefile.in	2010-07-11 08:15:13.000000000 +0200
++++ ruby-1.9.2-p0/Makefile.in	2010-11-08 16:53:07.774995217 +0100
+@@ -315,4 +315,4 @@ INSNS	= opt_sc.inc optinsn.inc optunifs.
+ $(INSNS): $(srcdir)/insns.def vm_opts.h \
+ 	  $(srcdir)/defs/opt_operand.def $(srcdir)/defs/opt_insn_unif.def \
+ 	  $(srcdir)/tool/instruction.rb $(srcdir)/tool/insns2vm.rb
 -	$(BASERUBY) -Ks $(srcdir)/tool/insns2vm.rb $(INSNS2VMOPT) $@
 +	$(BASERUBY) $(srcdir)/tool/insns2vm.rb $(INSNS2VMOPT) $@
- 
- node_name.inc:
- 	$(BASERUBY) -n $(srcdir)/tool/node_name.rb $? > $@

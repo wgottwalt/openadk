@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		1.9.1
+PKG_VERSION:=		1.9.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0f6d7630f26042e00bc59875755cf879
+PKG_MD5SUM:=		755aba44607c580fddc25e7c89260460
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.ruby-lang.org/
@@ -15,8 +15,8 @@ PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd !cygwin !darwin
 
-DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p429.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.1-p429
+DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p0.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.2-p0
 
 include ${TOPDIR}/mk/package.mk
 
@@ -26,13 +26,15 @@ MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags='' BASERUBY="${WRKBUILD}/hostruby"
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes
+CONFIGURE_ARGS+=	--disable-install-doc
+ALL_TARGET:=		main
 INSTALL_TARGET:=	install-nodoc
 
 pre-configure:
 	cp ${WRKBUILD}/ext/Setup ${WRKBUILD}/ext/Setup.orig
 	echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure --prefix=$(STAGING_TOOLS) \
+		./configure --prefix=$(STAGING_TOOLS) --disable-install-doc \
 	);
 	$(MAKE) -C ${WRKBUILD} ruby
 	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby
@@ -41,8 +43,10 @@ pre-configure:
 	$(MAKE) -C ${WRKBUILD} clean
 
 post-install:
-	rm -rf ${WRKINST}/usr/lib/site_ruby
-	rm -rf ${WRKINST}/usr/include
-	${CP} ${WRKINST}/usr ${IDIR_RUBY}/
+	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
+	${INSTALL_DIR} ${IDIR_RUBY}/usr/bin
+	${CP} ${WRKINST}/usr/lib/libruby.so* ${IDIR_RUBY}/usr/lib
+	${CP} ${WRKINST}/usr/lib/ruby/* ${IDIR_RUBY}/usr/lib/ruby/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/* ${IDIR_RUBY}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
