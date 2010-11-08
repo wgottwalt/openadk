@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
 PKG_VERSION:=		1.9.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		755aba44607c580fddc25e7c89260460
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
@@ -13,7 +13,7 @@ PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		ftp://ftp.ruby-lang.org/pub/ruby/
 PKG_NOPARALLEL:=	1
 
-PKG_HOST_DEPENDS:=	!freebsd !cygwin !darwin
+PKG_HOST_DEPENDS:=	!freebsd !cygwin
 
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.2-p0
@@ -36,7 +36,7 @@ pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure --prefix=$(STAGING_TOOLS) --disable-install-doc \
 	);
-	$(MAKE) -C ${WRKBUILD} ruby
+	$(MAKE) -C ${WRKBUILD} main
 	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby
 	cp ${WRKBUILD}/ext/Setup.orig ${WRKBUILD}/ext/Setup
 	$(MAKE) -C ${WRKBUILD} install-nodoc
