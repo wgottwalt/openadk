@@ -204,7 +204,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
-	-cd $${IDIR_$(1)}; \
+	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
