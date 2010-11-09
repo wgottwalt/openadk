@@ -16,20 +16,17 @@ PKG_SITES:=		http://download.cherrypy.org/cherrypy/3.2.0rc1/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CHERRYPY,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CHERRYPY,cherrypy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-PYTHON_VERSION=2.7
-PYTHON_DIR:=$(STAGING_TOOLS)
-PYTHON_LIB_DIR:=$(PYTHON_DIR)/lib
-PYTHON:=${STAGING_TOOLS}/bin/hostpython
+include $(TOPDIR)/mk/python.mk
 
 do-build:
-	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIB_DIR) $(PYTHON) ./setup.py build
-	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIB_DIR) $(PYTHON) ./setup.py install --prefix="$(WRKINST)/usr"
+	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py build
+	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py install --prefix="$(WRKINST)/usr"
 
 do-install:
 	$(INSTALL_DIR) $(IDIR_CHERRYPY)/usr/bin
