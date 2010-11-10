@@ -1,13 +1,10 @@
-- adkinstall with NTP and hwclock support
 - relocatable gcc
-- quiet option for the kernel as menu option
+- adkinstall with NTP and hwclock support
+- newtarget simplify and make target like newpackage
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, no internet access
-- fix python build, use mk/python.mk for python modules...
 - vim tabbing for split command - terminal issue
 - fix install.sh for MacOS X host, use pbr+core.img from grub2-bin
-- rmmodall script
-- newtarget simplify and make target like newpackage
 - check alsa on foxg20 target
 - add mkimage to tools build
 - fix ARM OABI support
