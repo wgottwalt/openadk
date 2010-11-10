@@ -55,6 +55,10 @@ endif
 	done;)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
+ifeq ($(ADK_QUIET_KERNEL),y)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
 ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		${BUILD_DIR}/.kernelconfig.board

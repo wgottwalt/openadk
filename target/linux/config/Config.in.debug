@@ -24,6 +24,13 @@ config ADK_KERNEL_FRAME_POINTER
 	boolean
 	default n
 
+config ADK_QUIET_KERNEL
+	prompt "Make bootup quiet without messages from the kernel"
+	bool
+	default n
+	help
+	  Make bootup quiet without messages from the kernel.
+
 config ADK_KERNEL_MAGIC_SYSRQ
 	prompt "Magic BREAK sequence"
 	bool
