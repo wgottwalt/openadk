@@ -42,19 +42,6 @@
 #define BLKGETSIZE DKIOCGETBLOCKCOUNT
 #endif
 
-#define bswap16(x) ( \
-	 ((((x)    )&(unsigned int)0xff)<< 8) \
-	|((((x)>> 8)&(unsigned int)0xff)    ) \
-)
-
-#if __BYTE_ORDER == __BIG_ENDIAN
-#define cpu_to_le16(x) bswap16(x)
-#elif __BYTE_ORDER == __LITTLE_ENDIAN
-#define cpu_to_le16(x) (x)
-#else
-#error unknown endianness!
-#endif
-
 /* Partition table entry */
 struct pte { 
 	unsigned char active;
@@ -166,9 +153,9 @@ static int gen_ptable(int nr)
 		}
 		pte[i].active = ((i + 1) == active) ? 0x80 : 0;
 		pte[i].type = parts[i].type;
-		pte[i].start = cpu_to_le16(start = sect + sectors);
+		pte[i].start = start = sect + sectors;
 		sect = round_to_cyl(start + parts[i].size * 2);
-		pte[i].length = cpu_to_le16(len = sect - start);
+		pte[i].length = len = sect - start;
 		to_chs(start, pte[i].chs_start);
 		to_chs(start + len - 1, pte[i].chs_end);
 		if (verbose)
