@@ -15,10 +15,10 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "To install everything to CompactFlash use scripts/install.sh"
 endif
 ifeq ($(FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
 	@echo 'The linux kernel is here: $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
-	@echo 'The nfs root tarball is here: ${BIN_DIR}/${ROOTFSTARBALL}'
+	@echo 'The nfs root tarball is here: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
