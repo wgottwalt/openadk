@@ -717,7 +717,6 @@ $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
-    $(MODULES_DIR)/kernel/drivers/md/raid6_pq \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_raid6_recov \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
@@ -855,7 +854,7 @@ $(eval $(call KMOD_template,CRYPTO_BLOWFISH,crypto-blowfish,\
 
 $(eval $(call KMOD_template,CRYPTO_TWOFISH,crypto-twofish,\
     $(MODULES_DIR)/kernel/crypto/twofish_common \
-    $(MODULES_DIR)/kernel/crypto/twofish \
+    $(MODULES_DIR)/kernel/crypto/twofish_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_TWOFISH_586,crypto-twofish-586,\
@@ -956,7 +955,7 @@ $(eval $(call KMOD_template,OCF_TALITOS,ocf-talitos,\
 # Filesystems
 #
 
-$(eval $(call KMOD_template,AUFS_FS,aufs-fs,\
+#$(eval $(call KMOD_template,AUFS_FS,aufs-fs,\
 	$(MODULES_DIR)/kernel/fs/aufs/aufs \
 ,30))
 
