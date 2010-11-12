@@ -19,6 +19,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_INTEL,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--enable-dri
+
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_INTEL}/usr/lib/xorg/modules/drivers
 	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/intel_drv.so \

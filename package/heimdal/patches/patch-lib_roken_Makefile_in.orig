@@ -1,0 +1,27 @@
+--- heimdal-1.4.orig/lib/roken/Makefile.in	2010-09-13 09:24:23.000000000 +0200
++++ heimdal-1.4/lib/roken/Makefile.in	2010-11-10 18:57:00.174995995 +0100
+@@ -1977,18 +1977,13 @@ $(LTLIBOBJS) $(libroken_la_OBJECTS): rok
+ .hin.h:
+ 	cp $< $@
+ 
+-@CROSS_COMPILE_FALSE@roken.h: make-roken$(EXEEXT)
+-@CROSS_COMPILE_FALSE@	@./make-roken$(EXEEXT) > tmp.h ;\
+-@CROSS_COMPILE_FALSE@	if [ -f roken.h ] && cmp -s tmp.h roken.h ; then rm -f tmp.h ; \
+-@CROSS_COMPILE_FALSE@	else rm -f roken.h; mv tmp.h roken.h; fi
+-
+-@CROSS_COMPILE_FALSE@make-roken.c: roken.h.in roken.awk
+-@CROSS_COMPILE_FALSE@	$(AWK) -f $(srcdir)/roken.awk $(srcdir)/roken.h.in > make-roken.c
++roken.h: make-roken$(EXEEXT)
++	./make-roken$(EXEEXT) > tmp.h ;\
++	if [ -f roken.h ] && cmp -s tmp.h roken.h ; then rm -f tmp.h ; \
++	else rm -f roken.h; mv tmp.h roken.h; fi
+ 
+-@CROSS_COMPILE_TRUE@roken.h: $(top_srcdir)/cf/roken-h-process.pl roken.h.in
+-@CROSS_COMPILE_TRUE@	perl $(top_srcdir)/cf/roken-h-process.pl \
+-@CROSS_COMPILE_TRUE@	-c $(top_builddir)/include/config.h  \
+-@CROSS_COMPILE_TRUE@	-p $(srcdir)/roken.h.in -o roken.h
++make-roken.c: roken.h.in roken.awk
++	$(AWK) -f $(srcdir)/roken.awk $(srcdir)/roken.h.in > make-roken.c
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.

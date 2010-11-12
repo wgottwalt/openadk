@@ -1,5 +1,14 @@
 --- tcp_wrappers_7.6.orig/scaffold.c	1997-03-21 19:27:24.000000000 +0100
-+++ tcp_wrappers_7.6/scaffold.c	2009-06-05 18:45:03.000000000 +0200
++++ tcp_wrappers_7.6/scaffold.c	2010-11-11 20:08:39.264995798 +0100
+@@ -25,7 +25,7 @@ static char sccs_id[] = "@(#) scaffold.c
+ #define	INADDR_NONE	(-1)		/* XXX should be 0xffffffff */
+ #endif
+ 
+-extern char *malloc();
++//extern char *malloc();
+ 
+ /* Application-specific. */
+ 
 @@ -180,10 +180,12 @@ struct request_info *request;
  
  /* ARGSUSED */

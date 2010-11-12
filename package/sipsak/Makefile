@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://sipsak.org/
 PKG_SITES:=		http://download.berlios.de/sipsak/
 
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-1.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SIPSAK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

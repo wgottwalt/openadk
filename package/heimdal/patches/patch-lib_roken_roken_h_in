@@ -1,0 +1,11 @@
+--- heimdal-1.4.orig/lib/roken/roken.h.in	2010-09-13 09:23:34.000000000 +0200
++++ heimdal-1.4/lib/roken/roken.h.in	2010-11-10 19:46:45.916683899 +0100
+@@ -524,7 +524,7 @@ ROKEN_LIB_FUNCTION int ROKEN_LIB_CALL ge
+ ROKEN_LIB_FUNCTION char * ROKEN_LIB_CALL strerror(int);
+ #endif
+ 
+-#if (!defined(HAVE_STRERROR_R) && !defined(strerror_r)) || (!defined(STRERROR_R_PROTO_COMPATIBLE) && defined(HAVE_STRERROR_R))
++#if ( !defined(HAVE_STRERROR_R) && !defined(strerror_r)) || (!defined(STRERROR_R_PROTO_COMPATIBLE) && defined(HAVE_STRERROR_R))
+ int ROKEN_LIB_FUNCTION rk_strerror_r(int, char *, size_t);
+ #else
+ #define rk_strerror_r strerror_r

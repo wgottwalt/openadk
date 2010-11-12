@@ -29,7 +29,7 @@ do-build:
 	${MAKE} -C ${WRKBUILD} \
 		CC="${TARGET_CC}" \
 		CFLAGS="${TARGET_CFLAGS} -I${STAGING_DIR}/usr/include ${PKG_FLAGS}" \
-		LDFLAGS="-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib ${PKG_LDFLAGS} -lutil -lssl -lcrypto -lz" \
+		LDFLAGS="-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib ${PKG_LDFLAGS} -lutil -lssl -lcrypto -lz -lstdc++" \
 		generic
 
 do-install:

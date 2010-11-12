@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.10
+PKG_VERSION:=		3.6.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ee5f14fd8be07513d16131027ebcb61
+PKG_MD5SUM:=		80f4d83f23a7c45fc3f1904964ea2a5a
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk+ libnotify
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
 PKG_DEPENDS+=		libxdamage libxfixes libidl
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
-PKG_BUILDDEP+=		nspr nss jpeg libXt
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
@@ -38,7 +38,9 @@ endif
 CONFIGURE_ENV+=		CROSS_COMPILE=1 HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}" \
 			HOST_CXX="${HOSTCXX}" HOST_CXXFLAGS="${HOSTCXXFLAGS}" \
 			HOST_LIBIDL_CONFIG="/usr/bin/libIDL-config-2" \
-			ac_cv_thread_keyword=no
+			CPPFLAGS="-I${STAGING_DIR}/usr/include/freetype2" \
+			ac_cv_thread_keyword=no \
+			ac_cv_sizeof_int_p=4
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-zlib \
 			--with-system-jpeg \
@@ -49,6 +51,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-glib-prefix=${STAGING_DIR}/usr \
 			--enable-libxul \
 			--disable-tests \
+			--disable-libconic \
 			--disable-static \
 			--disable-gnomeui \
 			--disable-gnomevfs \

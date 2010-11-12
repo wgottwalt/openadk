@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.2
+PKG_VERSION:=		5.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4480d7c6d6b4a86de7b8ec8f0c2d1871
+PKG_MD5SUM:=		5adf1a537895c2ec933fddd48e78d8a2
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libopenssl zlib

@@ -1,4 +1,4 @@
 --- tcp_wrappers_7.6.orig/cflags	1970-01-01 00:00:00.000000000 +0100
-+++ tcp_wrappers_7.6/cflags	2009-06-05 18:45:36.000000000 +0200
++++ tcp_wrappers_7.6/cflags	2010-11-11 20:03:51.771239624 +0100
 @@ -0,0 +1 @@
-+-fwrapv -fno-ident -Os -pipe -march=geode -fomit-frame-pointer -fstack-protector-all -DFACILITY=LOG_DAEMON -DHOSTS_ACCESS -DDAEMON_UMASK=022 -DREAL_DAEMON_DIR="/usr/sbin" -DPROCESS_OPTIONS -DKILL_IP_OPTIONS -DSEVERITY=LOG_INFO -DRFC931_TIMEOUT=10 -DHOSTS_DENY="/etc/hosts.deny" -DHOSTS_ALLOW="/etc/hosts.allow" -DSYS_ERRLIST_DEFINED -DHAVE_STRERROR -DHAVE_WEAKSYMS -D_REENTRANT -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len
++-fno-ident -march=pentium-m -fomit-frame-pointer -O2 -pipe -fwrapv -DFACILITY=LOG_DAEMON -DHOSTS_ACCESS -DDAEMON_UMASK=022 -DREAL_DAEMON_DIR="/usr/sbin" -DPROCESS_OPTIONS -DKILL_IP_OPTIONS -DSEVERITY=LOG_INFO -DRFC931_TIMEOUT=10 -DHOSTS_DENY="/etc/hosts.deny" -DHOSTS_ALLOW="/etc/hosts.allow" -DSYS_ERRLIST_DEFINED -DHAVE_STRERROR -DHAVE_WEAKSYMS -D_REENTRANT -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len
