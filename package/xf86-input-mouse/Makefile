@@ -13,8 +13,6 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_TARGET_DEPENDS:=	alix1c lemote ibmx40 shuttle
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_INPUT_MOUSE,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -4,20 +4,67 @@ config ADK_LINUX_INITRAMFS_BUILTIN
 	boolean
 	default n
 
-config ADK_KERNEL_RFKILL
+config ADK_KERNEL_MISC_DEVICES
 	boolean
 	default n
 
+config ADK_KERNEL_CS5535_MFGPT
+	boolean
+	default n
+
+config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
+	boolean
+	default n
+
+config ADK_KERNEL_RFKILL
+ 	boolean
+ 	default n
+ 
 config ADK_KERNEL_WATCHDOG
 	boolean
-	default y if ADK_TARGET_WITH_WATCHDOG
+	default n
+ 
+config ADK_KERNEL_I2C_CHARDEV
+ 	boolean
 	default n
 
-config ADK_KERNEL_I2C_CHARDEV
-	boolean
+config ADK_KERNEL_RTC_CLASS
+ 	boolean
+	default n
+
+config ADK_KERNEL_RTC_HCTOSYS
+ 	boolean
+	default n
+
+config ADK_KERNEL_RTC_INTF_DEV
+ 	boolean
 	default n
 
 menu "Miscellaneous devices support"
+
+config ADK_KERNEL_GEODE_WDT
+	prompt "geode-wdt......................... Geode Hardware Watchdog"
+	tristate
+	select ADK_KERNEL_WATCHDOG
+	select ADK_KERNEL_MISC_DEVICES
+	select ADK_KERNEL_CS5535_MFGPT
+	select ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
+	default y if ADK_HARDWARE_ALIX2D2
+	default y if ADK_HARDWARE_ALIX2D13
+	default n
+	help
+	 Geode watchdog.
+
+config ADK_KERNEL_RTC_DRV_CMOS
+	prompt "rtc-cmos.......................... RTC support for PC CMOS"
+	tristate
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_WITH_RTC
+ 	default n
+ 	help
+	 RTC support for ALIX boards.
 	
 config ADK_KPACKAGE_KMOD_I2C
 	prompt "kmod-i2c.......................... I2C support"
@@ -31,7 +78,7 @@ config ADK_KPACKAGE_KMOD_SCx200_ACB
 	prompt "kmod-i2c-geode.................... I2C driver for Geode"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_I2C
-	depends on ADK_LINUX_X86_ALIX1C || ADK_LINUX_X86_ALIX2D || ADK_LINUX_X86_ALIX2D13
+	depends on ADK_LINUX_X86_ALIX
 	default n
 	help
 	  I2C driver for Geode boards.
@@ -96,7 +143,7 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on !ADK_LINUX_CRIS_FOXBOARD && !ADK_LINUX_MIPS64_LEMOTE
-	default n
-	help
-
+ 	default n
+ 	help
+ 
 endmenu

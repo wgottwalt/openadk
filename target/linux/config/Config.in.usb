@@ -28,7 +28,9 @@ config ADK_KERNEL_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb......................... USB support"
 	tristate
-	default y if ADK_LINUX_ALIX
+	default y if ADK_HARDWARE_ALIX1C
+	default y if ADK_HARDWARE_ALIX2D2
+	default y if ADK_HARDWARE_ALIX2D13
 	default n
 	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 || ADK_KERNEL_USB)
 	select ADK_KERNEL_NLS
@@ -80,7 +82,9 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
 	tristate
-	default y if ADK_LINUX_ALIX
+	default y if ADK_HARDWARE_ALIX1C
+	default y if ADK_HARDWARE_ALIX2D2
+	default y if ADK_HARDWARE_ALIX2D13
 	default n
 	depends on !ADK_LINUX_CRIS_FOXBOARD
 	depends on ADK_KPACKAGE_KMOD_USB
@@ -126,7 +130,9 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
 	tristate
 	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_KERNEL_USB_EHCI_HCD)
-	default y if ADK_LINUX_ALIX
+	default y if ADK_HARDWARE_ALIX1C
+	default y if ADK_HARDWARE_ALIX2D2
+	default y if ADK_HARDWARE_ALIX2D13
 	default n
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER

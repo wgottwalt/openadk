@@ -13,8 +13,6 @@ PKG_DEPENDS:=		xorg-server kmod-input-evdev
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://www.conan.de/touchscreen/
 
-PKG_TARGET_DEPENDS:=	alix1c
-
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

@@ -59,13 +59,7 @@ config ADK_LINUX_64
 config ADK_NATIVE
 	tristate
 
-config ADK_alix1c
-	tristate
-
-config ADK_alix2d
-	tristate
-
-config ADK_alix2d13
+config ADK_alix
 	tristate
 
 config ADK_wrap
@@ -169,9 +163,7 @@ config ADK_x86
 
 config ADK_TARGET
 	string
-	default "alix1c"  if ADK_alix1c
-	default "alix2d"  if ADK_alix2d
-	default "alix2d13"  if ADK_alix2d13
+	default "alix"  if ADK_alix
 	default "wrap"  if ADK_wrap
 	default "brcm"  if ADK_brcm
 	default "toolchain-arm"  if ADK_arm_toolchain
@@ -232,17 +224,19 @@ default ADK_LINUX_NATIVE
 config ADK_LINUX_NATIVE
 	bool "Native platform"
 	select ADK_NATIVE
-	depends on ADK_HOST_LINUX
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_USB
+	depends on ADK_HOST_LINUX
 	help
 	  Make a native build. Use host tools.
 	  No toolchain will be created.
 
-config ADK_LINUX_ALIX
-	bool "ALIX and WRAP boards"
+config ADK_LINUX_X86_ALIX
+	bool "ALIX boards"
+	select ADK_x86
+	select ADK_alix
 	help
-	  Support for Alix and Wrap boards.
+	  Support for Alix boards.
 	  http://www.pcengines.ch
 
 config ADK_LINUX_ARM_FOXG20
@@ -294,17 +288,6 @@ config ADK_LINUX_MIKROTIK
 	  Support for Mikrotik Routerboards
 	  http://www.mikrotik.com
 	  http://www.routerboards.com
-
-#config ADK_LINUX_MIPS_WAG54G
-#	bool "Linksys WAG54G"
-#	select ADK_KERNEL_NETDEVICES
-#	select ADK_KERNEL_NET_PCI
-#	select ADK_KERNEL_NET_ETHERNET
-#	select ADK_KERNEL_MII
-#	select ADK_wag54g
-#	help
-#	  Linksys WAG54G DSL router with Wireless.
-#	  (Texas Instruments AR7 platform)
 
 config ADK_LINUX_MIPS_AG241
 	bool "Linksys AG241v2"
@@ -401,6 +384,26 @@ config ADK_LINUX_X86_64_SHUTTLE
 	help
 	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
 	  Status: development
+
+config ADK_LINUX_X86_WRAP
+	bool "PC Engines WRAP"
+	select ADK_x86
+	select ADK_wrap
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_CRC32
+	select ADK_TARGET_WITH_WATCHDOG
+	select BUSYBOX_HWCLOCK
+	help
+	  End of life, but I still have one board.
+	  http://www.pcengines.ch/
+	  Status: stable
 
 endchoice
 
@@ -502,26 +505,6 @@ config ADK_LINUX_X86_64_TOOLCHAIN
 
 endchoice
 
-
-#choice 
-#prompt "Target Optimization"
-#depends on ADK_LINUX_ARMEL_TOOLCHAIN || ADK_LINUX_ARM_TOOLCHAIN
-#
-#config ADK_LINUX_ARM_V5TE
-#	bool "armv5te"
-#	help
-#
-#config ADK_LINUX_ARM_V4T
-#	bool "armv4t"
-#	help
-#
-#endchoice
-
-#config ADK_TARGET_ARCH_OPTIMIZATION
-#	string
-#	default "armv5te" if ADK_LINUX_ARM_V5TE
-#	default "armv4t" if ADK_LINUX_ARM_V4T
-
 choice
 prompt "Architecture"
 depends on ADK_LINUX_QEMU
@@ -608,104 +591,7 @@ config ADK_LINUX_X86_64_QEMU
 
 endchoice
 
-choice
-prompt "Alix/Wrap model"
-default ADK_LINUX_X86_ALIX1C
-depends on ADK_LINUX_ALIX
-
-config ADK_LINUX_X86_ALIX1C
-	bool "PC Engines Alix1C"
-	select ADK_x86
-	select ADK_alix1c
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_VGA
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_INPUT
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	help
-	  Support for ALIX1C boards.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-config ADK_LINUX_X86_ALIX2D
-	bool "PC Engines Alix2D"
-	select ADK_x86
-	select ADK_alix2d
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_LEDS
-	select ADK_TARGET_WITH_WATCHDOG
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	help
-	  Support for ALIX2D boards.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-config ADK_LINUX_X86_ALIX2D13
-	bool "PC Engines Alix2D13"
-	select ADK_x86
-	select ADK_alix2d13
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NEW_LEDS
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select BUSYBOX_HWCLOCK
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_LEDS
-	select ADK_TARGET_WITH_WATCHDOG
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	help
-	  Support for ALIX2D13 boards.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-config ADK_LINUX_X86_WRAP
-	bool "PC Engines WRAP"
-	select ADK_wrap
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select ADK_KERNEL_CRC32
-	select ADK_TARGET_WITH_WATCHDOG
-	select BUSYBOX_HWCLOCK
-	help
-	  End of life, but I still have one board.
-	  http://www.pcengines.ch/
-	  Status: stable
-
-endchoice
+source "target/Config.in.alix"
 
 choice
 prompt "Routerboard model"
@@ -789,9 +675,7 @@ config ADK_TARGET_LIB_EGLIBC
 	select ADK_eglibc
 	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
-		ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_X86_ALIX2D || \
-		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB4XX || \
 		ADK_LINUX_MIPS_RB532 || \
@@ -807,9 +691,7 @@ config ADK_TARGET_LIB_GLIBC
 	select ADK_glibc
 	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
-		ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_X86_ALIX2D || \
-		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB4XX || \
@@ -837,7 +719,7 @@ prompt "Target Firmware type"
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
-		ADK_LINUX_ALIX || \
+		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_64_SHUTTLE || \
 		ADK_LINUX_NATIVE || \
@@ -851,7 +733,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
-		ADK_LINUX_ALIX || \
+		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_64_SHUTTLE || \
@@ -866,8 +748,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	select ADK_KERNEL_SQUASHFS
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
-		ADK_LINUX_MIPS_AG241 || \
-		ADK_LINUX_MIPS_WAG54G
+		ADK_LINUX_MIPS_AG241
 	help
 	  highly compressed read-only filesystem for flash.
 
@@ -887,14 +768,11 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	depends on \
 		ADK_LINUX_CRIS_FOXBOARD || \
 		ADK_LINUX_ARM_FOXG20 || \
-		ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_X86_ALIX2D || \
-		ADK_LINUX_X86_ALIX2D13 || \
+		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_BRCM || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB4XX || \
-		ADK_LINUX_MIPS_WAG54G || \
 		ADK_LINUX_MIPS_AG241 || \
 		ADK_LINUX_MIPS64_LEMOTE
 	select ADK_KERNEL_SUNRPC
@@ -923,10 +801,7 @@ config ADK_TARGET_ROOTFS_USB
 
 config ADK_TARGET_ROOTFS_EXT2_BLOCK
 	bool "read-write filesystem for block devices with ext2"
-	depends on \
-		ADK_LINUX_X86_ALIX1C || \
-		ADK_LINUX_X86_ALIX2D || \
-		ADK_LINUX_X86_ALIX2D13 || \
+	depends on ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_MIPS_RB532
@@ -1113,7 +988,6 @@ config ADK_PACKAGE_SUFFIX
 	string
 	default "ipk" if ADK_TARGET_PACKAGE_IPKG
 	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
-#	default "rpm" if ADK_TARGET_PACKAGE_RPM
 	help
 
 choice
@@ -1136,13 +1010,5 @@ config ADK_TARGET_PACKAGE_TGZ
 	  Pre- and post install scripts will be executed in the target
 	  directory. There will be no package manager installed onto the target.
 	  
-
-#config ADK_TARGET_PACKAGE_RPM
-#	boolean
-#	prompt "rpm package format"
-#	help
-#	  Create rpm packages and use rpm package management on the
-#         target. WARNING: NOT YET IMPLEMENTED
-
 endchoice
 endmenu

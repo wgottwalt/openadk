@@ -5,13 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
-PKG_URL:=		http://www.openadk.org/
+PKG_URL:=		http://openadk.org/
 
-PKG_TARGET_DEPENDS:=	alix2d alix2d13
-PKG_DFLT_ALIX_SWITCH:=	y
+PKG_TARGET_DEPENDS:=	alix
 
 NO_DISTFILES:=		1
 

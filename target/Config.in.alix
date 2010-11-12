@@ -1,0 +1,64 @@
+choice
+depends on ADK_LINUX_X86_ALIX
+prompt "Hardware model"
+
+config ADK_HARDWARE_ALIX1C
+	bool "ALIX.1C"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	help
+         Hardware profile for ALIX.1C
+
+config ADK_HARDWARE_ALIX2D2
+	bool "ALIX.2D2"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_LEDS
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_NEW_LEDS
+	help
+         Hardware profile for ALIX.2D2
+
+config ADK_HARDWARE_ALIX2D13
+	bool "ALIX.2D13"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_LEDS
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_NEW_LEDS
+	help
+         Hardware profile for ALIX.2D13
+
+endchoice

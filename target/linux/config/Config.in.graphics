@@ -1,0 +1,26 @@
+config ADK_KERNEL_FB
+ 	boolean
+ 	default n
+ 
+config ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	boolean
+	default n
+
+config ADK_KERNEL_FB_GEODE
+	boolean
+	default n
+ 
+menu "Graphic devices support"
+
+config ADK_KERNEL_FB_GEODE_LX
+	prompt "geode-fblx...................... Framebuffer support for ALIX boards with VGA"
+	tristate
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FB_GEODE
+	default y if ADK_HARDWARE_ALIX1C
+ 	default n
+ 	help
+	 Framebuffer support for ALIX boards.
+	
+endmenu

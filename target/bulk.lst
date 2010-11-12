@@ -7,9 +7,9 @@ rb4xx		glibc		nfsroot
 rb532		uclibc		nfsroot
 rb532		eglibc		nfsroot
 rb532		glibc		nfsroot
-alix1c		uclibc		nfsroot
-alix1c		eglibc		nfsroot
-alix1c		glibc		nfsroot
+alix		uclibc		nfsroot
+alix		eglibc		nfsroot
+alix		glibc		nfsroot
 wrap		uclibc		nfsroot
 wrap		eglibc		nfsroot
 wrap		glibc		nfsroot

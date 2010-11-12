@@ -2,6 +2,7 @@ source target/linux/config/Config.in.block
 source target/linux/config/Config.in.fs
 source target/linux/config/Config.in.netdevice
 source target/linux/config/Config.in.usb
+source target/linux/config/Config.in.graphics
 source target/linux/config/Config.in.input
 source target/linux/config/Config.in.pcmcia
 source target/linux/config/Config.in.network

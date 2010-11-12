@@ -18,13 +18,13 @@ PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_HOST_DEPENDS:=	!darwin
+PKG_TARGET_DEPENDS:=	alix x86_qemu x86_64_qemu shuttle lemote
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 PKGFS_WITH_DIRECTFB:=	directfb
 PKGFB_WITH_DIRECTFB:=	DirectFB
 
-PKG_TARGET_DEPENDS:=	alix1c x86_qemu x86_64_qemu shuttle lemote
 
 include ${TOPDIR}/mk/package.mk
 

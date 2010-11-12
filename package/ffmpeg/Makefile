@@ -31,7 +31,7 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_FFPLAY}+=	ffplay-install
 
-ifeq ($(ADK_TARGET),alix1c)
+ifeq ($(ADK_TARGET),alix)
 CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse \
 			--enable-amd3dnow \

@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
-PKG_TARGET_DEPENDS:=	alix1c lemote ibmx40
+PKG_CFLINE_XF86_VIDEO_FBDEV:=	depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 
