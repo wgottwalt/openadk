@@ -22,6 +22,7 @@ $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
+
 CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-cups-group=cups \
 			--disable-ldap \

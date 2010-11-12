@@ -1,5 +1,5 @@
---- mozilla-1.9.2.orig/configure	2010-07-23 00:00:19.000000000 +0200
-+++ mozilla-1.9.2/configure	2010-07-30 09:52:43.000000000 +0200
+--- mozilla-1.9.2.orig/configure	2010-10-27 05:09:28.000000000 +0200
++++ mozilla-1.9.2/configure	2010-11-11 22:26:20.594995948 +0100
 @@ -3970,7 +3970,7 @@ else
      echo "$ac_t""yes" 1>&6    
  fi
@@ -9,7 +9,7 @@
  do
  # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
-@@ -21285,8 +21285,8 @@ if test -n "$CROSS_COMPILE"; then
+@@ -21465,8 +21465,8 @@ if test -n "$CROSS_COMPILE"; then
          HOST_LIBIDL_CONFIG="$LIBIDL_CONFIG"
      fi
      if test -n "$HOST_LIBIDL_CONFIG" && test "$HOST_LIBIDL_CONFIG" != "no"; then

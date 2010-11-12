@@ -70,8 +70,9 @@ endif
 
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/et -pthread
 
-CONFIGURE_ARGS+=	${CONFIGURE_OPTS}
-CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
+CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_TOOLS}/bin
+CONFIGURE_ENV+=		cross_compiling=yes \
+			ac_cv_func_getaddrinfo_numserv=yes
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
@@ -79,17 +80,23 @@ endif
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure ${CONFIGURE_OPTS} \
+		./configure --prefix=$(STAGING_TOOLS) \
+			--disable-pk-init \
+			--without-openldap \
+			--disable-otp \
 	);
+	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/editline
 	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
 	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
-	${INSTALL_BIN} ${WRKBUILD}/lib/asn1/asn1_compile$(EXEEXT) \
+	${INSTALL_BIN} ${WRKBUILD}/lib/roken/make-roken$(EXEEXT) \
 		${STAGING_TOOLS}/bin
 	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
 		${STAGING_TOOLS}/bin
+	${MAKE} -C ${WRKBUILD}/lib/roken install
+	${MAKE} -C ${WRKBUILD}/lib/asn1 install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 clean
 	${MAKE} -C ${WRKBUILD}/lib/roken clean
 	${MAKE} -C ${WRKBUILD} clean

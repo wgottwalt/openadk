@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
-PKG_VERSION:=		3.1.1
+PKG_VERSION:=		3.1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c2308b46ee707597ac50aae418d321b8
+PKG_MD5SUM:=		74081975f148bcabcab26c4c3496ede9
 PKG_DESCR:=		Utilities for XFS filesystems
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libuuid libpthread

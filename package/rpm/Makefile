@@ -4,33 +4,33 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpm
-PKG_VERSION:=		4.7.2
+PKG_VERSION:=		5.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		224715646325df4cd3904e3ac9e16186
+PKG_MD5SUM:=		08027af2368ecad8060f9f5bf46c2bd9
 PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
-PKG_BUILDDEP:=		nss libdb
 PKG_URL:=		http://www.rpm.org/
-PKG_SITES:=		http://rpm.org/releases/rpm-4.7.x/
+PKG_SITES:=		http://rpm5.org/files/rpm/rpm-5.3/
 
 PKG_HOST_DEPENDS:=	!cygwin !darwin
 PKG_TARGET_DEPENDS:=	!foxboard
-
-DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RPM,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr \
-			-I${STAGING_DIR}/usr/include/nss
-CONFIGURE_ARGS:=	--with-external-db \
+CONFIGURE_ENV+=		ac_cv_va_copy=no
+CONFIGURE_ARGS+=	--with-usecrypto=BeeCrypt \
+			--with-beecrypt=internal \
+			--with-dbapi=db \
+			--with-sqlite=none \
+			--without-python \
+			--without-perl \
+			--without-ruby \
 			--without-lua
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_RPM)/usr/bin $(IDIR_RPM)/usr/lib
-	$(INSTALL_DIR) $(IDIR_RPM)/usr/lib/rpm
-	$(INSTALL_BIN) $(WRKINST)/bin/rpm $(IDIR_RPM)/usr/bin
+	$(INSTALL_DIR) $(IDIR_RPM)/usr/bin $(IDIR_RPM)/usr/lib/rpm
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/rpm* $(IDIR_RPM)/usr/bin
 	$(CP) $(WRKINST)/usr/lib/*.so* $(IDIR_RPM)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/rpm/* $(IDIR_RPM)/usr/lib/rpm
