@@ -21,46 +21,44 @@ rm -rf $topdir/tmp
 mkdir -p $topdir/tmp
 cd $topdir/tmp
 
+os=$(uname)
+
 rm -f foo
 echo >FOO
 if [[ -e foo ]]; then
 	cat >&2 <<-EOF
 		ERROR: OpenADK cannot be built in a case-insensitive file system. 
 	EOF
+	case $os in
+		CYG*)
+			echo "Building OpenADK on $os needs a small registry change."
+			echo 'http://cygwin.com/cygwin-ug-net/using-specialnames.html'
+			;;
+		Darwin*)
+			echo "Building OpenADK on $os needs a case-sensitive disk partition."
+			echo "For Snow Leopard and above you can use diskutil to resize your existing disk."
+			echo "For older versions you might consider to use a disk image."
+			echo "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G"
+			;;
+	esac
 	exit 1
 fi
 rm -f FOO
 
-os=$(uname)
 case $os in
 Linux)
-	# supported with no extra quirks at the moment
 	;;
 FreeBSD)
-	# supported with no extra quirks at the moment
 	;;
 MirBSD)
-	# supported with no extra quirks at the moment
 	;;
 CYG*)
-	echo "Building OpenADK on $os needs a small registry change."
-	echo 'http://cygwin.com/cygwin-ug-net/using-specialnames.html'
-	echo "You can ignore this message, when you already done the change"
-	sleep 3
 	;;
 NetBSD)
-	# supported with no extra quirks at the moment
 	;;
 OpenBSD)
-	# supported with no extra quirks at the moment
-	# although some packages' autoconf scripts may
-	# not properly recognise OpenBSD
 	;;
 Darwin*)
-	echo "Building OpenADK on $os needs a case-sensitive disk partition."
-	echo "For Snow Leopard and above you can use diskutil to resize your existing disk."
-	echo "For older versions you might consider to use a disk image"
-	echo "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G"
 	;;
 *)
 	# unsupported
