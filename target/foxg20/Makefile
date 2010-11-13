@@ -7,12 +7,18 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+$(TOOLS_BUILD_DIR):
+	@mkdir -p $(TOOLS_BUILD_DIR)
+
+tools-compile: $(TOOLS_BUILD_DIR)
+	$(MAKE) -C ../tools/uboot-mkimage
+
 KERNEL:=$(BUILD_DIR)/${ADK_TARGET}-${FS}-kernel
 LOADADDR:=	0x20008000
 
-kernel-install:
+kernel-install: tools-compile
 	@gzip -9 < $(LINUX_DIR)/arch/arm/boot/Image > ${BUILD_DIR}/Image.gz
-	@mkimage -A arm -O linux -T kernel -C gzip \
+	PATH='${TARGET_PATH}' mkimage -A arm -O linux -T kernel -C gzip \
 		-a ${LOADADDR} -e ${LOADADDR} -d ${BUILD_DIR}/Image.gz \
 		-n foxg20 $(TARGET_DIR)/boot/vmlinuz-adk $(MAKE_TRACE)
 	@cp $(TARGET_DIR)/boot/vmlinuz-adk \
