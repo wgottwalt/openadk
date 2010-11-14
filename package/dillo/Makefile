@@ -16,7 +16,7 @@ PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_TARGET_DEPENDS:=	ibmx40 lemote
+PKG_TARGET_DEPENDS:=	x86 lemote
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

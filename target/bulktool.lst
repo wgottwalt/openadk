@@ -13,9 +13,3 @@ mipsel_toolchain	glibc
 ppc_toolchain	uclibc
 ppc_toolchain	eglibc
 ppc_toolchain	glibc
-x86_toolchain	uclibc
-x86_toolchain	eglibc
-x86_toolchain	glibc
-x86_64_toolchain	uclibc
-x86_64_toolchain	eglibc
-x86_64_toolchain	glibc

@@ -1,5 +1,5 @@
 menu "Virtualization"
-depends on ADK_LINUX_X86_64_SHUTTLE
+depends on ADK_LINUX_X86_64 || ADK_LINUX_X86
 
 config ADK_KERNEL_VIRTUALIZATION
 	bool

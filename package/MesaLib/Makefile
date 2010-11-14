@@ -22,7 +22,7 @@ PKGSD_GLXGEARS:=	Nice little OpenGL demo application
 PKGSC_GLXGEARS:=	x11/apps
 
 PKG_HOST_DEPENDS:=	!cygwin !darwin
-PKG_TARGET_DEPENDS:=	ibmx40 lemote
+PKG_TARGET_DEPENDS:=	x86 lemote
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
