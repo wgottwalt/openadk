@@ -674,6 +674,7 @@ config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
 	select ADK_eglibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
@@ -690,6 +691,7 @@ config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	select ADK_glibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_X86_IBMX40 || \
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
