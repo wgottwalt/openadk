@@ -1,0 +1,12 @@
+diff -Nur eglibc-2.12.1.orig/libc/sunrpc/Makefile eglibc-2.12.1/libc/sunrpc/Makefile
+--- eglibc-2.12.1.orig/libc/sunrpc/Makefile	2010-09-28 19:14:27.000000000 +0200
++++ eglibc-2.12.1/libc/sunrpc/Makefile	2010-11-14 21:30:49.000000000 +0100
+@@ -106,7 +106,7 @@
+ endif
+ 
+ ifneq (yes,$(install-bootstrap-headers))
+-headers += $(rpcsvc:%.x=rpcsvc/%.h)
++#headers += $(rpcsvc:%.x=rpcsvc/%.h)
+ extra-libs-$(OPTION_EGLIBC_SUNRPC) += librpcsvc
+ # Make it in `others' pass, not `lib' pass.
+ extra-libs-others-y += $(extra-libs-y)
