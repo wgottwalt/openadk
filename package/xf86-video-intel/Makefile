@@ -13,8 +13,6 @@ PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
 PKG_SITES:=		http://www.x.org/releases/X11R7.5/src/driver/
 
-PKG_TARGET_DEPENDS:=	ibmx40
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_INTEL,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

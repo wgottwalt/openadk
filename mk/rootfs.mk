@@ -8,6 +8,8 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
+ADK_TARGET_ROOTFS_USB_DEVICE:=$(strip $(subst ",, $(ADK_TARGET_ROOTFS_USB_DEVICE)))
+
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
 ROOTFS:=	root=/dev/sda2
 MTDDEV:=	root=/dev/mtdblock1
@@ -22,7 +24,7 @@ ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
 $(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
-$(eval $(call rootfs_template,usb,USB,root=/dev/sdb1 rootdelay=3))
+$(eval $(call rootfs_template,usb,USB,root=$(ADK_TARGET_ROOTFS_USB_DEVICE) rootdelay=3))
 $(eval $(call rootfs_template,archive,ARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))

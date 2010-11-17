@@ -1,0 +1,34 @@
+choice
+depends on ADK_LINUX_X86
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC
+	bool "Generic x86 system"
+	help
+	  Generic x86 system.
+
+config ADK_HARDWARE_IBMX40
+	bool "IBM X40 laptop"
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_SWAP
+	help
+         Hardware profile for IBM X40 laptop's.
+
+config ADK_HARDWARE_GENERIC_X86_TOOLCHAIN
+	bool "x86 toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  x86 toolchain.
+
+endchoice

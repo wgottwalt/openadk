@@ -15,6 +15,11 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${ROOTFSTARBALL}'
 endif
+ifeq ($(FS),usb)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "To install everything to USB use scripts/install.sh"
+endif
 ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel

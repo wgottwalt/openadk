@@ -59,7 +59,7 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_LINUX_X86_64_SHUTTLE
+	default y if ADK_HARDWARE_SHUTTLE
 	default n	
 
 config ADK_KPACKAGE_KMOD_SATA_AHCI
@@ -69,43 +69,9 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
-	depends on ADK_LINUX_X86_64_SHUTTLE
 	default n
 	help
 	  Enables support for AHCI Serial ATA.
-
-#config ADK_KERNEL_IDE
-#	boolean
-#	default n
-#
-#config ADK_KPACKAGE_KMOD_BLK_DEV_IDE
-#	prompt "kmod-ide.......................... IDE support"
-#	tristate
-#	select ADK_KERNEL_BLOCK
-#	select ADK_KERNEL_IDE
-#	default n
-#	help
-#	  If you say Y here, you will use the full-featured IDE driver to
-#	  control up to ten ATA/IDE interfaces, each being able to serve a
-#	  "master" and a "slave" device, for a total of up to twenty ATA/IDE
-#	  disk/cdrom/tape/floppy drives.
-#
-#	  Useful information about large (>540 MB) IDE disks, multiple
-#	  interfaces, what to do if ATA/IDE devices are not automatically
-#	  detected, sound card ATA/IDE ports, module support, and other
-#	  topics, is contained in <file:Documentation/ide.txt>. For detailed
-#	  information about hard drives, consult the Disk-HOWTO and the
-#	  Multi-Disk-HOWTO, available from
-#	  <http://www.tldp.org/docs.html#howto>.
-#
-#	  To fine-tune ATA/IDE drive/interface parameters for improved
-#	  performance, look for the hdparm package at
-#	  <ftp://ibiblio.org/pub/Linux/system/hardware/>.
-#
-#	  To compile this driver as a module, choose M here and read
-#	  <file:Documentation/ide.txt>. The module will be called ide-mod.
-#	  Do not compile this driver as a module if your root file system (the
-#	  one containing the directory /) is located on an IDE device.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	prompt "kmod-loop......................... Loop mount support"

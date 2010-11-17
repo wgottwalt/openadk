@@ -30,6 +30,6 @@ x86_64_qemu	eglibc		archive
 x86_64_qemu	glibc		archive
 lemote		eglibc		archive
 lemote		glibc		archive
-ibmx40		uclibc		archive
-ibmx40		eglibc		archive
-ibmx40		glibc		archive
+x86		uclibc		archive
+x86		eglibc		archive
+x86		glibc		archive
