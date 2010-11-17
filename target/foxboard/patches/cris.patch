@@ -1,6 +1,59 @@
-diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/axisflashmap.c linux-2.6.35.7/arch/cris/arch-v10/drivers/axisflashmap.c
---- linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/axisflashmap.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/arch-v10/drivers/axisflashmap.c	2010-10-14 18:50:17.226851039 +0200
+diff -Nur linux-2.6.36.orig/arch/cris/Kconfig linux-2.6.36/arch/cris/Kconfig
+--- linux-2.6.36.orig/arch/cris/Kconfig	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/Kconfig	2010-11-15 17:57:17.000000000 +0100
+@@ -177,6 +177,12 @@
+ 	help
+ 	  Size of DRAM (decimal in MB) typically 2, 8 or 16.
+ 
++config ETRAX_MTD_SIZE
++	hex "MTD size (hex)"
++	default "0x00800000"
++	help
++	  Size of MTD device typically 4 or 8 MB.
++
+ config ETRAX_VMEM_SIZE
+        int "Video memory size (dec, in MB)"
+        depends on ETRAX_ARCH_V32 && !ETRAXFS
+@@ -282,7 +288,7 @@
+ 	select MTD_CFI_AMDSTD
+ 	select MTD_JEDECPROBE if ETRAX_ARCH_V32
+ 	select MTD_CHAR
+-	select MTD_BLOCK
++	select MTD_BLOCK_RO
+ 	select MTD_PARTITIONS
+ 	select MTD_CONCAT
+ 	select MTD_COMPLEX_MAPPINGS
+@@ -671,6 +677,11 @@
+ 
+ source "drivers/ide/Kconfig"
+ 
++#mysteriously part of this standard linux driver was removed from cris build! - info@crisos.org  
++source "drivers/scsi/Kconfig"
++
++source "drivers/media/Kconfig"
++
+ source "drivers/net/Kconfig"
+ 
+ source "drivers/i2c/Kconfig"
+diff -Nur linux-2.6.36.orig/arch/cris/Makefile linux-2.6.36/arch/cris/Makefile
+--- linux-2.6.36.orig/arch/cris/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/Makefile	2010-11-15 17:57:17.000000000 +0100
+@@ -40,10 +40,10 @@
+ 
+ LD = $(CROSS_COMPILE)ld -mcrislinux
+ 
+-OBJCOPYFLAGS := -O binary -R .note -R .comment -S
++OBJCOPYFLAGS := -O binary -R .bss -R .note -R .note.gnu.build-id -R .comment -S
+ 
+ KBUILD_AFLAGS += -mlinux -march=$(arch-y) $(inc)
+-KBUILD_CFLAGS += -mlinux -march=$(arch-y) -pipe $(inc)
++KBUILD_CFLAGS += -mlinux -march=$(arch-y) -pipe -fno-peephole2 $(inc)
+ KBUILD_CPPFLAGS += $(inc)
+ 
+ ifdef CONFIG_FRAME_POINTER
+diff -Nur linux-2.6.36.orig/arch/cris/arch-v10/drivers/axisflashmap.c linux-2.6.36/arch/cris/arch-v10/drivers/axisflashmap.c
+--- linux-2.6.36.orig/arch/cris/arch-v10/drivers/axisflashmap.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/arch-v10/drivers/axisflashmap.c	2010-11-15 17:57:17.000000000 +0100
 @@ -113,7 +113,7 @@
  
  /* If no partition-table was found, we use this default-set. */
@@ -146,9 +199,9 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/axisflashmap.c linux-2.
  	return err;
  }
  
-diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/ds1302.c linux-2.6.35.7/arch/cris/arch-v10/drivers/ds1302.c
---- linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/ds1302.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/arch-v10/drivers/ds1302.c	2010-10-14 18:50:17.256851069 +0200
+diff -Nur linux-2.6.36.orig/arch/cris/arch-v10/drivers/ds1302.c linux-2.6.36/arch/cris/arch-v10/drivers/ds1302.c
+--- linux-2.6.36.orig/arch/cris/arch-v10/drivers/ds1302.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/arch-v10/drivers/ds1302.c	2010-11-15 17:57:17.000000000 +0100
 @@ -22,6 +22,7 @@
  #include <linux/smp_lock.h>
  #include <linux/bcd.h>
@@ -181,10 +234,10 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/ds1302.c linux-2.6.35.7
          return 0;
  
  }
-diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/gpio.c linux-2.6.35.7/arch/cris/arch-v10/drivers/gpio.c
---- linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/gpio.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/arch-v10/drivers/gpio.c	2010-10-14 18:50:17.298091976 +0200
-@@ -21,6 +21,7 @@
+diff -Nur linux-2.6.36.orig/arch/cris/arch-v10/drivers/gpio.c linux-2.6.36/arch/cris/arch-v10/drivers/gpio.c
+--- linux-2.6.36.orig/arch/cris/arch-v10/drivers/gpio.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/arch-v10/drivers/gpio.c	2010-11-15 17:57:17.000000000 +0100
+@@ -20,6 +20,7 @@
  #include <linux/poll.h>
  #include <linux/init.h>
  #include <linux/interrupt.h>
@@ -192,7 +245,7 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/gpio.c linux-2.6.35.7/a
  
  #include <asm/etraxgpio.h>
  #include <arch/svinto.h>
-@@ -771,6 +772,10 @@
+@@ -797,6 +798,10 @@
  
  /* main driver initialization routine, called from mem.c */
  
@@ -203,7 +256,7 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/gpio.c linux-2.6.35.7/a
  static int __init gpio_init(void)
  {
  	int res;
-@@ -784,6 +789,13 @@
+@@ -810,6 +815,13 @@
  		return res;
  	}
  
@@ -217,18 +270,18 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/drivers/gpio.c linux-2.6.35.7/a
  	/* Clear all leds */
  #if defined (CONFIG_ETRAX_CSP0_LEDS) ||  defined (CONFIG_ETRAX_PA_LEDS) || defined (CONFIG_ETRAX_PB_LEDS)
  	CRIS_LED_NETWORK_SET(0);
-diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/lib/hw_settings.S linux-2.6.35.7/arch/cris/arch-v10/lib/hw_settings.S
---- linux-2.6.35.7.orig/arch/cris/arch-v10/lib/hw_settings.S	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/arch-v10/lib/hw_settings.S	2010-10-14 18:50:17.338092197 +0200
+diff -Nur linux-2.6.36.orig/arch/cris/arch-v10/lib/hw_settings.S linux-2.6.36/arch/cris/arch-v10/lib/hw_settings.S
+--- linux-2.6.36.orig/arch/cris/arch-v10/lib/hw_settings.S	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/arch-v10/lib/hw_settings.S	2010-11-15 17:57:17.000000000 +0100
 @@ -58,3 +58,5 @@
  	.dword R_PORT_PB_SET
  	.dword PB_SET_VALUE
  	.dword 0 ; No more register values
 +	.ascii "ACME_PART_MAGIC" 
 +	.dword 0xdeadc0de
-diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/mm/init.c linux-2.6.35.7/arch/cris/arch-v10/mm/init.c
---- linux-2.6.35.7.orig/arch/cris/arch-v10/mm/init.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/arch-v10/mm/init.c	2010-10-14 18:50:17.378091957 +0200
+diff -Nur linux-2.6.36.orig/arch/cris/arch-v10/mm/init.c linux-2.6.36/arch/cris/arch-v10/mm/init.c
+--- linux-2.6.36.orig/arch/cris/arch-v10/mm/init.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/arch-v10/mm/init.c	2010-11-15 17:57:17.000000000 +0100
 @@ -184,6 +184,9 @@
  
  	free_area_init_node(0, zones_size, PAGE_OFFSET >> PAGE_SHIFT, 0);
@@ -239,77 +292,12 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/arch-v10/mm/init.c linux-2.6.35.7/arch/c
  
  /* Initialize remaps of some I/O-ports. It is important that this
   * is called before any driver is initialized.
-diff -Nur linux-2.6.35.7.orig/arch/cris/boot/compressed/Makefile linux-2.6.35.7/arch/cris/boot/compressed/Makefile
---- linux-2.6.35.7.orig/arch/cris/boot/compressed/Makefile	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/boot/compressed/Makefile	2010-10-14 18:50:17.418092209 +0200
-@@ -18,7 +18,7 @@
- OBJECTS-$(CONFIG_ETRAX_ARCH_V32) = $(obj)/head_v32.o
- OBJECTS-$(CONFIG_ETRAX_ARCH_V10) = $(obj)/head_v10.o
- OBJECTS= $(OBJECTS-y) $(obj)/misc.o
--OBJCOPYFLAGS = -O binary --remove-section=.bss
-+#OBJCOPYFLAGS = -O binary --remove-section=.bss
- 
- quiet_cmd_image = BUILD   $@
- cmd_image = cat $(obj)/decompress.bin $(obj)/piggy.gz > $@
-diff -Nur linux-2.6.35.7.orig/arch/cris/boot/compressed/misc.c linux-2.6.35.7/arch/cris/boot/compressed/misc.c
---- linux-2.6.35.7.orig/arch/cris/boot/compressed/misc.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/boot/compressed/misc.c	2010-10-14 18:50:17.448101099 +0200
-@@ -106,7 +106,7 @@
- 
- static void flush_window(void);
- static void error(char *m);
--static void puts(const char *);
-+static void putstr(const char *);
- 
- extern char *input_data;  /* lives in head.S */
- 
-@@ -139,7 +139,7 @@
- }
- #endif
- 
--static void puts(const char *s)
-+static void putstr(const char *s)
- {
- #ifndef CONFIG_ETRAX_DEBUG_PORT_NULL
- 	while (*s) {
-@@ -233,9 +233,9 @@
- 
- static void error(char *x)
- {
--	puts("\n\n");
--	puts(x);
--	puts("\n\n -- System halted\n");
-+	putstr("\n\n");
-+	putstr(x);
-+	putstr("\n\n -- System halted\n");
- 
- 	while(1);	/* Halt */
- }
-@@ -378,14 +378,14 @@
- 	__asm__ volatile ("move $vr,%0" : "=rm" (revision));
- 	if (revision < compile_rev) {
- #ifdef CONFIG_ETRAX_ARCH_V32
--		puts("You need an ETRAX FS to run Linux 2.6/crisv32\n");
-+		putstr("You need an ETRAX FS to run Linux 2.6/crisv32\n");
- #else
--		puts("You need an ETRAX 100LX to run linux 2.6\n");
-+		putstr("You need an ETRAX 100LX to run linux 2.6\n");
- #endif
- 		while(1);
- 	}
- 
--	puts("Uncompressing Linux...\n");
-+	putstr("Uncompressing Linux...\n");
- 	gunzip();
--	puts("Done. Now booting the kernel\n");
-+	putstr("Done. Now booting the kernel\n");
- }
-diff -Nur linux-2.6.35.7.orig/arch/cris/boot/Makefile linux-2.6.35.7/arch/cris/boot/Makefile
---- linux-2.6.35.7.orig/arch/cris/boot/Makefile	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/boot/Makefile	2010-10-14 18:50:17.494356449 +0200
+diff -Nur linux-2.6.36.orig/arch/cris/boot/Makefile linux-2.6.36/arch/cris/boot/Makefile
+--- linux-2.6.36.orig/arch/cris/boot/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/boot/Makefile	2010-11-15 17:57:17.000000000 +0100
 @@ -5,7 +5,7 @@
  objcopyflags-$(CONFIG_ETRAX_ARCH_V10) += -R .note -R .comment
- objcopyflags-$(CONFIG_ETRAX_ARCH_V32) += --remove-section=.bss
+ objcopyflags-$(CONFIG_ETRAX_ARCH_V32) += --remove-section=.bss --remove-section=.note.gnu.build-id
  
 -OBJCOPYFLAGS = -O binary $(objcopyflags-y)
 +#OBJCOPYFLAGS = -O binary $(objcopyflags-y)
@@ -324,63 +312,22 @@ diff -Nur linux-2.6.35.7.orig/arch/cris/boot/Makefile linux-2.6.35.7/arch/cris/b
  
  $(obj)/zImage:  $(obj)/compressed/vmlinux
  	@cp $< $@
-diff -Nur linux-2.6.35.7.orig/arch/cris/Kconfig linux-2.6.35.7/arch/cris/Kconfig
---- linux-2.6.35.7.orig/arch/cris/Kconfig	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/Kconfig	2010-10-14 18:50:17.535601072 +0200
-@@ -177,6 +177,12 @@
- 	help
- 	  Size of DRAM (decimal in MB) typically 2, 8 or 16.
+diff -Nur linux-2.6.36.orig/arch/cris/boot/compressed/Makefile linux-2.6.36/arch/cris/boot/compressed/Makefile
+--- linux-2.6.36.orig/arch/cris/boot/compressed/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/cris/boot/compressed/Makefile	2010-11-15 17:57:17.000000000 +0100
+@@ -18,7 +18,7 @@
+ OBJECTS-$(CONFIG_ETRAX_ARCH_V32) = $(obj)/head_v32.o
+ OBJECTS-$(CONFIG_ETRAX_ARCH_V10) = $(obj)/head_v10.o
+ OBJECTS= $(OBJECTS-y) $(obj)/misc.o
+-OBJCOPYFLAGS = -O binary --remove-section=.bss
++#OBJCOPYFLAGS = -O binary --remove-section=.bss
  
-+config ETRAX_MTD_SIZE
-+	hex "MTD size (hex)"
-+	default "0x00800000"
-+	help
-+	  Size of MTD device typically 4 or 8 MB.
-+
- config ETRAX_VMEM_SIZE
-        int "Video memory size (dec, in MB)"
-        depends on ETRAX_ARCH_V32 && !ETRAXFS
-@@ -282,7 +288,7 @@
- 	select MTD_CFI_AMDSTD
- 	select MTD_JEDECPROBE if ETRAX_ARCH_V32
- 	select MTD_CHAR
--	select MTD_BLOCK
-+	select MTD_BLOCK_RO
- 	select MTD_PARTITIONS
- 	select MTD_CONCAT
- 	select MTD_COMPLEX_MAPPINGS
-@@ -671,6 +677,11 @@
- 
- source "drivers/ide/Kconfig"
- 
-+#mysteriously part of this standard linux driver was removed from cris build! - info@crisos.org  
-+source "drivers/scsi/Kconfig"
-+
-+source "drivers/media/Kconfig"
-+
- source "drivers/net/Kconfig"
- 
- source "drivers/i2c/Kconfig"
-diff -Nur linux-2.6.35.7.orig/arch/cris/Makefile linux-2.6.35.7/arch/cris/Makefile
---- linux-2.6.35.7.orig/arch/cris/Makefile	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/arch/cris/Makefile	2010-10-14 18:50:17.588101050 +0200
-@@ -40,10 +40,10 @@
- 
- LD = $(CROSS_COMPILE)ld -mcrislinux
- 
--OBJCOPYFLAGS := -O binary -R .note -R .comment -S
-+OBJCOPYFLAGS := -O binary -R .bss -R .note -R .note.gnu.build-id -R .comment -S
- 
- KBUILD_AFLAGS += -mlinux -march=$(arch-y) $(inc)
--KBUILD_CFLAGS += -mlinux -march=$(arch-y) -pipe $(inc)
-+KBUILD_CFLAGS += -mlinux -march=$(arch-y) -pipe -fno-peephole2 $(inc)
- KBUILD_CPPFLAGS += $(inc)
- 
- ifdef CONFIG_FRAME_POINTER
-diff -Nur linux-2.6.35.7.orig/drivers/net/cris/eth_v10.c linux-2.6.35.7/drivers/net/cris/eth_v10.c
---- linux-2.6.35.7.orig/drivers/net/cris/eth_v10.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/drivers/net/cris/eth_v10.c	2010-10-14 18:50:17.634351377 +0200
-@@ -1722,7 +1722,7 @@
+ quiet_cmd_image = BUILD   $@
+ cmd_image = cat $(obj)/decompress.bin $(obj)/piggy.gz > $@
+diff -Nur linux-2.6.36.orig/drivers/net/cris/eth_v10.c linux-2.6.36/drivers/net/cris/eth_v10.c
+--- linux-2.6.36.orig/drivers/net/cris/eth_v10.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/net/cris/eth_v10.c	2010-11-15 17:57:17.000000000 +0100
+@@ -1718,7 +1718,7 @@
  static void
  e100_netpoll(struct net_device* netdev)
  {
@@ -389,9 +336,9 @@ diff -Nur linux-2.6.35.7.orig/drivers/net/cris/eth_v10.c linux-2.6.35.7/drivers/
  }
  #endif
  
-diff -Nur linux-2.6.35.7.orig/drivers/serial/crisv10.c linux-2.6.35.7/drivers/serial/crisv10.c
---- linux-2.6.35.7.orig/drivers/serial/crisv10.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/drivers/serial/crisv10.c	2010-10-14 18:50:17.678091999 +0200
+diff -Nur linux-2.6.36.orig/drivers/serial/crisv10.c linux-2.6.36/drivers/serial/crisv10.c
+--- linux-2.6.36.orig/drivers/serial/crisv10.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/serial/crisv10.c	2010-11-15 17:57:17.000000000 +0100
 @@ -13,6 +13,7 @@
  #include <linux/errno.h>
  #include <linux/signal.h>
@@ -408,7 +355,7 @@ diff -Nur linux-2.6.35.7.orig/drivers/serial/crisv10.c linux-2.6.35.7/drivers/se
  #include <linux/seq_file.h>
  #include <linux/delay.h>
  #include <linux/module.h>
-@@ -4415,6 +4417,7 @@
+@@ -4426,6 +4428,7 @@
  #endif
  };
  
@@ -416,7 +363,7 @@ diff -Nur linux-2.6.35.7.orig/drivers/serial/crisv10.c linux-2.6.35.7/drivers/se
  static int __init rs_init(void)
  {
  	int i;
-@@ -4548,6 +4551,24 @@
+@@ -4559,6 +4562,24 @@
  #endif
  #endif /* CONFIG_SVINTO_SIM */
  
@@ -441,9 +388,30 @@ diff -Nur linux-2.6.35.7.orig/drivers/serial/crisv10.c linux-2.6.35.7/drivers/se
  	return 0;
  }
  
-diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-cris-dbg.h linux-2.6.35.7/drivers/usb/host/hc-cris-dbg.h
---- linux-2.6.35.7.orig/drivers/usb/host/hc-cris-dbg.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35.7/drivers/usb/host/hc-cris-dbg.h	2010-10-14 18:50:17.714356435 +0200
+diff -Nur linux-2.6.36.orig/drivers/usb/Makefile linux-2.6.36/drivers/usb/Makefile
+--- linux-2.6.36.orig/drivers/usb/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/usb/Makefile	2010-11-15 17:57:18.000000000 +0100
+@@ -21,6 +21,7 @@
+ obj-$(CONFIG_USB_R8A66597_HCD)	+= host/
+ obj-$(CONFIG_USB_HWA_HCD)	+= host/
+ obj-$(CONFIG_USB_ISP1760_HCD)	+= host/
++obj-$(CONFIG_ETRAX_USB_HOST)	+= host/
+ obj-$(CONFIG_USB_IMX21_HCD)	+= host/
+ 
+ obj-$(CONFIG_USB_C67X00_HCD)	+= c67x00/
+diff -Nur linux-2.6.36.orig/drivers/usb/host/Makefile linux-2.6.36/drivers/usb/host/Makefile
+--- linux-2.6.36.orig/drivers/usb/host/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/usb/host/Makefile	2010-11-15 17:57:18.000000000 +0100
+@@ -32,5 +32,6 @@
+ obj-$(CONFIG_USB_R8A66597_HCD)	+= r8a66597-hcd.o
+ obj-$(CONFIG_USB_ISP1760_HCD)	+= isp1760.o
+ obj-$(CONFIG_USB_HWA_HCD)	+= hwa-hc.o
++obj-$(CONFIG_ETRAX_USB_HOST)	+= hc-crisv10.o
+ obj-$(CONFIG_USB_IMX21_HCD)	+= imx21-hcd.o
+ 
+diff -Nur linux-2.6.36.orig/drivers/usb/host/hc-cris-dbg.h linux-2.6.36/drivers/usb/host/hc-cris-dbg.h
+--- linux-2.6.36.orig/drivers/usb/host/hc-cris-dbg.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/usb/host/hc-cris-dbg.h	2010-11-15 17:57:17.000000000 +0100
 @@ -0,0 +1,146 @@
 +
 +/* macros for debug output */
@@ -591,9 +559,9 @@ diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-cris-dbg.h linux-2.6.35.7/driv
 +		};							\
 +		s;							\
 +	})
-diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.c linux-2.6.35.7/drivers/usb/host/hc-crisv10.c
---- linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35.7/drivers/usb/host/hc-crisv10.c	2010-10-14 19:04:20.676850954 +0200
+diff -Nur linux-2.6.36.orig/drivers/usb/host/hc-crisv10.c linux-2.6.36/drivers/usb/host/hc-crisv10.c
+--- linux-2.6.36.orig/drivers/usb/host/hc-crisv10.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/usb/host/hc-crisv10.c	2010-11-15 17:57:18.000000000 +0100
 @@ -0,0 +1,4801 @@
 +/*
 + *
@@ -5396,9 +5364,9 @@ diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.c linux-2.6.35.7/drive
 +/* Module hooks */
 +module_init(module_hcd_init);
 +module_exit(module_hcd_exit);
-diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.h linux-2.6.35.7/drivers/usb/host/hc-crisv10.h
---- linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35.7/drivers/usb/host/hc-crisv10.h	2010-10-14 18:50:17.858091974 +0200
+diff -Nur linux-2.6.36.orig/drivers/usb/host/hc-crisv10.h linux-2.6.36/drivers/usb/host/hc-crisv10.h
+--- linux-2.6.36.orig/drivers/usb/host/hc-crisv10.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/usb/host/hc-crisv10.h	2010-11-15 17:57:18.000000000 +0100
 @@ -0,0 +1,331 @@
 +#ifndef __LINUX_ETRAX_USB_H
 +#define __LINUX_ETRAX_USB_H
@@ -5731,30 +5699,9 @@ diff -Nur linux-2.6.35.7.orig/drivers/usb/host/hc-crisv10.h linux-2.6.35.7/drive
 +#define USB_SB_command__full__yes       1
 +
 +#endif
-diff -Nur linux-2.6.35.7.orig/drivers/usb/host/Makefile linux-2.6.35.7/drivers/usb/host/Makefile
---- linux-2.6.35.7.orig/drivers/usb/host/Makefile	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/drivers/usb/host/Makefile	2010-10-14 18:50:17.898091962 +0200
-@@ -32,5 +32,6 @@
- obj-$(CONFIG_USB_R8A66597_HCD)	+= r8a66597-hcd.o
- obj-$(CONFIG_USB_ISP1760_HCD)	+= isp1760.o
- obj-$(CONFIG_USB_HWA_HCD)	+= hwa-hc.o
-+obj-$(CONFIG_ETRAX_USB_HOST)	+= hc-crisv10.o
- obj-$(CONFIG_USB_IMX21_HCD)	+= imx21-hcd.o
- 
-diff -Nur linux-2.6.35.7.orig/drivers/usb/Makefile linux-2.6.35.7/drivers/usb/Makefile
---- linux-2.6.35.7.orig/drivers/usb/Makefile	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/drivers/usb/Makefile	2010-10-14 18:50:17.934371277 +0200
-@@ -21,6 +21,7 @@
- obj-$(CONFIG_USB_R8A66597_HCD)	+= host/
- obj-$(CONFIG_USB_HWA_HCD)	+= host/
- obj-$(CONFIG_USB_ISP1760_HCD)	+= host/
-+obj-$(CONFIG_ETRAX_USB_HOST)	+= host/
- obj-$(CONFIG_USB_IMX21_HCD)	+= host/
- 
- obj-$(CONFIG_USB_C67X00_HCD)	+= c67x00/
-diff -Nur linux-2.6.35.7.orig/lib/klist.c linux-2.6.35.7/lib/klist.c
---- linux-2.6.35.7.orig/lib/klist.c	2010-09-29 03:09:08.000000000 +0200
-+++ linux-2.6.35.7/lib/klist.c	2010-10-14 18:50:17.978091963 +0200
+diff -Nur linux-2.6.36.orig/lib/klist.c linux-2.6.36/lib/klist.c
+--- linux-2.6.36.orig/lib/klist.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/lib/klist.c	2010-11-15 17:57:18.000000000 +0100
 @@ -60,7 +60,7 @@
  {
  	knode->n_klist = klist;
