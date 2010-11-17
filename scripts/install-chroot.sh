@@ -45,15 +45,19 @@ else
 fi
 
 cfgfs=1
-rb532=0
-while getopts "nr" option
+console=0
+serial=0
+while getopts "nrcs" option
 do
 	case $option in
 		n)
 			cfgfs=0
 			;;
-		r)
-			rb532=1
+		s)
+			serial=1
+			;;
+		c)
+			console=1
 			;;
 		*)
 			printf "Option not recognized\n"
@@ -77,18 +81,6 @@ else
 	else
 		printf "$2 is not a file, Exiting\n"
 		exit 1
-	fi
-	if [ $rb532 -eq 1 ];then
-		if [ -z $3 ];then
-			printf "Please give the kernel as third parameter\n"
-			exit 2
-		fi
-		if [ -f $3 ];then
-			printf "Installing $3 on $1\n"
-		else
-			printf "$3 is not a file, Exiting\n"
-			exit 1
-		fi
 	fi
 	if [ -b $1 ];then
 		printf "Using $1 as CF/USB disk for installation\n"
@@ -141,29 +133,9 @@ case $2 in
 		;;
 esac
 
-if [ $rb532 -ne 0 ];then
-	printf "Create partition and filesystem for rb532\n"
-	rootpart=${1}2
-	$parted -s $1 mklabel msdos
-	sleep 2
-	maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-	rootsize=$(($maxsize-2))
-
-	$parted -s $1 unit cyl mkpart primary ext2 0 1
-	$parted -s $1 unit cyl mkpart primary ext2 1 $rootsize
-	$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
-	$parted -s $1 set 1 boot on
-	$sfdisk --change-id $1 1 27
-	$sfdisk --change-id $1 3 88
-	sleep 2
-	$mke2fs ${1}2
-	sync
-	dd if=$3 of=${1}1 bs=2048
-	sync
-else
-	rootpart=${1}1
-	if [ $cfgfs -eq 0 ];then
-		printf "Create partition and filesystem without cfgfs\n"
+rootpart=${1}1
+if [ $cfgfs -eq 0 ];then
+	printf "Create partition and filesystem without cfgfs\n"
 $sfdisk $1 << EOF
 ,,L
 ;
@@ -171,20 +143,19 @@ $sfdisk $1 << EOF
 ;
 y
 EOF
-		$mke2fs ${rootpart}
-	else
-		printf "Create partition and filesystem with cfgfs\n"
-		$parted -s $1 mklabel msdos
-		sleep 2
-		maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-		rootsize=$(($maxsize-2))
+	$mke2fs ${rootpart}
+else
+	printf "Create partition and filesystem with cfgfs\n"
+	$parted -s $1 mklabel msdos
+	sleep 2
+	maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+	rootsize=$(($maxsize-2))
 
-		$parted -s $1 unit cyl mkpart primary ext2 0 $rootsize
-		$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
-		$parted -s $1 set 1 boot on
-		$sfdisk --change-id $1 2 88
-		$mke2fs ${1}1
-	fi
+	$parted -s $1 unit cyl mkpart primary ext2 0 $rootsize
+	$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
+	$parted -s $1 set 1 boot on
+	$sfdisk --change-id $1 2 88
+	$mke2fs ${1}1
 fi
 
 if [ $? -eq 0 ];then
@@ -211,12 +182,13 @@ printf "Fixing permissions\n"
 chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
 
-if [ $rb532 -eq 0 ];then
-	printf "Installing GRUB bootloader\n"
-	mkdir -p $tmp/boot/grub
-	mount -o bind /dev $tmp/dev
-	chroot $tmp mount -t proc /proc /proc
-	chroot $tmp mount -t sysfs /sys /sys
+printf "Installing GRUB bootloader\n"
+mkdir -p $tmp/boot/grub
+mount -o bind /dev $tmp/dev
+chroot $tmp mount -t proc /proc /proc
+chroot $tmp mount -t sysfs /sys /sys
+
+if [ $serial -eq 1 ];then
 cat << EOF > $tmp/boot/grub/grub.cfg
 set default=0
 set timeout=1
@@ -230,12 +202,27 @@ menuentry "GNU/Linux (OpenADK)" {
 	linux /boot/vmlinuz-adk ro init=/init console=ttyS0,$speed console=tty0 panic=10
 }
 EOF
-	chroot $tmp grub-install $1
-	umount $tmp/proc
-	umount $tmp/sys
-	umount $tmp/dev
 fi
 
+if [ $console -eq 1 ];then
+cat << EOF > $tmp/boot/grub/grub.cfg
+set default=0
+set timeout=1
+terminal_output console 
+terminal_input console
+
+menuentry "GNU/Linux (OpenADK)" {
+	insmod ext2
+	set root=(hd0,1)
+	linux /boot/vmlinuz-adk ro init=/init console=tty0 panic=10
+}
+EOF
+fi
+
+chroot $tmp grub-install $1
+umount $tmp/proc
+umount $tmp/sys
+umount $tmp/dev
 umount $tmp
 
 printf "Successfully installed.\n"

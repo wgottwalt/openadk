@@ -170,6 +170,20 @@ config ADK_TARGET
 	default "wag54g"  if ADK_wag54g
 	default "ag241"  if ADK_ag241
 
+config ADK_CPU_I686
+	boolean
+
+config ADK_CPU_PENTIUM_M
+	boolean
+
+config ADK_CPU_AMDFAM10
+	boolean
+
+config ADK_TARGET_CFLAGS
+	string
+	default "-march=i686" if ADK_CPU_I686
+	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
+	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 
 # c library
 config ADK_uclibc
@@ -205,12 +219,32 @@ config ADK_LINUX_NATIVE
 	  No toolchain will be created.
 
 config ADK_LINUX_X86_ALIX
-	bool "ALIX boards"
+	bool "PC Engines ALIX boards"
 	select ADK_x86
 	select ADK_alix
 	help
 	  Support for Alix boards.
 	  http://www.pcengines.ch
+	  Status: stable
+
+config ADK_LINUX_X86_WRAP
+	bool "PC Engines WRAP boards"
+	select ADK_x86
+	select ADK_wrap
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_RTC
+	help
+	  End of life.
+	  http://www.pcengines.ch/
+	  Status: stable
 
 config ADK_LINUX_ARM_FOXG20
 	bool "Foxboard (FOXG20)"
@@ -327,25 +361,6 @@ config ADK_LINUX_X86_64
 	select ADK_x86_64
 	help
 	  Support for a x86_64/amd64 system.
-
-config ADK_LINUX_X86_WRAP
-	bool "PC Engines WRAP"
-	select ADK_x86
-	select ADK_wrap
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select ADK_TARGET_WITH_WATCHDOG
-	select ADK_TARGET_WITH_RTC
-	help
-	  End of life, but I still have one board.
-	  http://www.pcengines.ch/
-	  Status: stable
 
 endchoice
 

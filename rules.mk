@@ -32,6 +32,7 @@ ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))
 ADK_TARGET_IP:=		$(strip $(subst ",, $(ADK_TARGET_IP)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
 ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
+ADK_TARGET_CFLAGS:=	$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
 ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET)/target.mk)),)

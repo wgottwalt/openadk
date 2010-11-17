@@ -2,87 +2,82 @@ menu "Network devices support"
 
 config ADK_KERNEL_NETDEVICES
 	boolean
-	default n
 
 config ADK_KERNEL_NET_ETHERNET
 	boolean
-	default n
 
 config ADK_KERNEL_MII
 	boolean
-	default n
 
 config ADK_KERNEL_NET_PCI
 	boolean
-	default n
 
 config ADK_KERNEL_NETDEV_1000
 	boolean
-	default n
 
 menu "Ethernet card support"
 depends on ADK_TARGET_WITH_PCI
 
 config ADK_KPACKAGE_KMOD_NE2K_PCI
 	prompt "kmod-net-ne2k-pci............. NE2000 PCI driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	tristate
 	default n
 	help
 	  NE2000 pci driver
 
 config ADK_KPACKAGE_KMOD_PCNET32
 	prompt "kmod-net-pcnet32.............. AMD PCNet32 PCI driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	tristate
 	default n
 	help
 	  AMD PCnet32 driver
 
 config ADK_KPACKAGE_KMOD_8139CP
 	prompt "kmod-net-rtl8139cp............ RTL8139C+ PCI driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	tristate
 	default n
 	help
 	  RTL8139C+ pci driver
 
 config ADK_KPACKAGE_KMOD_8139TOO
 	prompt "kmod-net-rtl8139.............. RTL8139 PCI driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	tristate
 	default n
 	help
 	  RTL8139 pci driver
 
 config ADK_KPACKAGE_KMOD_E100
 	prompt "kmod-net-e100................. Intel(R) PRO/100+ driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	tristate
 	default n
 	help
 	  Intel(R) PRO/100+ cards kernel support
 
 config ADK_KPACKAGE_KMOD_E1000
 	prompt "kmod-net-e1000................ Intel(R) PRO/1000 Gigabit Ethernet driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	tristate
 	default y if ADK_HARDWARE_IBMX40
 	default n
 	help
@@ -94,10 +89,11 @@ config ADK_KPACKAGE_KMOD_E1000
 
 config ADK_KPACKAGE_KMOD_SKY2
 	prompt "kmod-net-sky2................. Marvell Yukon driver"
+	tristate
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	tristate
+	default y if ADK_HARDWARE_SHUTTLE
 	default n
 	help
 
@@ -105,52 +101,41 @@ endmenu
 
 config ADK_KERNEL_WIRELESS
 	boolean
-	default n
 
 config ADK_KERNEL_WIRELESS_EXT
 	boolean
-	default n
 
 config ADK_KERNEL_MAC80211_LEDS
-	bool
+	boolean
 	select ADK_KPACKAGE_KMOD_LEDS_CLASS
 	select ADK_KERNEL_NEW_LEDS
-	default n
 
 config ADK_KERNEL_WLAN_80211
 	boolean
-	default n
 
 config ADK_KPACKAGE_KMOD_RT2X00
 	tristate
-	default n
 
 config ADK_KERNEL_RT2X00
 	boolean
 	select ADK_KPACKAGE_KMOD_RT2X00
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
-	default n
 
 config ADK_MOD_KERNEL_CFG80211
 	tristate
-	default n
 
 config ADK_MOD_KERNEL_LIB80211
 	tristate
-	default n
 
 config ADK_KERNEL_CFG80211_WEXT
 	boolean
-	default n
 
 config ADK_KERNEL_ATH_COMMON
 	tristate
-	default n
 
 config ADK_KPACKAGE_KMOD_P54_COMMON
 	tristate
-	default n
 
 config ADK_MOD_KERNEL_MAC80211
 	tristate
@@ -164,21 +149,18 @@ config ADK_MOD_KERNEL_MAC80211
 	select ADK_KERNEL_WLAN_80211
 	default n
 
-menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB
-
 config ADK_KERNEL_MAC80211_DEBUG_MENU
 	boolean
-	default n
 
 config ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 	select ADK_KERNEL_MAC80211_DEBUG_MENU
 	boolean
-	default n
 
 config ADK_KERNEL_MAC80211_DEBUGFS
 	boolean
-	default n
+
+menu "Wireless card support"
+depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB
 
 config ADK_KPACKAGE_KMOD_MAC80211
 	prompt "kmod-mac80211.................. mac80211 softmac"
@@ -200,8 +182,8 @@ config ADK_DEBUG_MAC80211
 	select ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 	select ADK_KERNEL_MAC80211_DEBUGFS
 	select ADK_KERNEL_DEBUG_FS
-	default n
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	default n
 	help
 
 config ADK_KPACKAGE_KMOD_ATH5K
@@ -218,10 +200,10 @@ config ADK_KPACKAGE_KMOD_ATH5K
 
 config ADK_KERNEL_ATH5K_DEBUG
 	prompt "enable debugging info via debugfs"
+	boolean
+	select ADK_KERNEL_DEBUG_FS
 	depends on ADK_KPACKAGE_KMOD_ATH5K
 	default n
-	select ADK_KERNEL_DEBUG_FS
-	boolean
 	help
    	  Atheros 5xxx debugging messages.
 	  Say Y, if and you will get debug options for ath5k.
@@ -237,8 +219,8 @@ config ADK_KERNEL_ATH5K_DEBUG
 config ADK_KPACKAGE_KMOD_B43
 	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KPACKAGE_KMOD_FW_LOADER
+	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
@@ -255,11 +237,11 @@ config ADK_KPACKAGE_KMOD_RTL8187
 config ADK_KPACKAGE_KMOD_P54_USB
 	prompt "kmod-p54-usb................. Prism54 USB support"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_MAC80211
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KPACKAGE_KMOD_P54_COMMON
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_PACKAGE_P54_FIRMWARE
+	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 	help
 	  Driver for Prism54 USB adaptors.
@@ -267,11 +249,11 @@ config ADK_KPACKAGE_KMOD_P54_USB
 config ADK_KPACKAGE_KMOD_RT2400PCI
 	prompt "kmod-rt2400pci............... Ralink rt2400"
 	tristate
-	default n
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
+	default n
 	help
 	  This adds support for rt2400 wireless chipset family.
 	  Supported chips: RT2460.
@@ -279,11 +261,11 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 config ADK_KPACKAGE_KMOD_RT2500PCI
 	prompt "kmod-rt2500pci............... Ralink rt2500"
 	tristate
-	default n
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
+	default n
 	help
 	  This adds support for rt2500 wireless chipset family.
 	  Supported chips: RT2560.
@@ -291,24 +273,24 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 config ADK_KPACKAGE_KMOD_RT61PCI
 	prompt "kmod-rt61pci................. Ralink rt2501/rt61"
 	tristate
-	default n
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
 	select ADK_PACKAGE_RT61_FIRMWARE
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
+	default n
 	help
 	  This adds support for rt2501 wireless chipset family.
 	  Supported chips: RT2561, RT2561S & RT2661.
 
 config ADK_KERNEL_RT2X00_DEBUG
 	prompt "enable debugging info"
+	boolean
 	depends on ADK_KPACKAGE_KMOD_RT61PCI || \
 		ADK_KPACKAGE_KMOD_RT2500PCI || \
 		ADK_KPACKAGE_KMOD_RT2400PCI	
 	default n
-	boolean
 	help
 
 endmenu

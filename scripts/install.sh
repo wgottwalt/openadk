@@ -21,6 +21,8 @@ fi
 
 cfgfs=1
 quiet=0
+console=0
+serial=0
 while getopts "nq" option
 do
 	case $option in
