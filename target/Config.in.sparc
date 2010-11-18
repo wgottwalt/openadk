@@ -1,0 +1,18 @@
+choice
+depends on ADK_LINUX_SPARC
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_SPARC
+	bool "Generic sparc system"
+	select ADK_CPU_SPARC_V8
+	help
+	  Generic sparc system.
+
+config ADK_HARDWARE_GENERIC_SPARC_TOOLCHAIN
+	bool "sparc toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  sparc toolchain.
+
+endchoice
+

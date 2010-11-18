@@ -1,0 +1,16 @@
+choice
+depends on ADK_LINUX_PPC
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_PPC
+	bool "Generic ppc system"
+	help
+	  Generic ppc system.
+
+config ADK_HARDWARE_GENERIC_PPC_TOOLCHAIN
+	bool "ppc toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  ppc toolchain.
+
+endchoice

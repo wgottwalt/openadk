@@ -77,10 +77,10 @@ config ADK_mips_toolchain
 config ADK_mipsel_toolchain
 	tristate
 
-config ADK_ppc_toolchain
+config ADK_ppc
 	tristate
 
-config ADK_sparc_toolchain
+config ADK_sparc
 	tristate
 
 config ADK_arm_qemu
@@ -99,12 +99,6 @@ config ADK_mips64el_qemu
 	tristate
 
 config ADK_cris_qemu
-	tristate
-
-config ADK_x86_qemu
-	tristate
-
-config ADK_x86_64_qemu
 	tristate
 
 config ADK_rb532
@@ -151,15 +145,13 @@ config ADK_TARGET
 	default "toolchain-armel"  if ADK_armel_toolchain
 	default "toolchain-mips"  if ADK_mips_toolchain
 	default "toolchain-mipsel"  if ADK_mipsel_toolchain
-	default "toolchain-ppc"  if ADK_ppc_toolchain
-	default "toolchain-sparc"  if ADK_sparc_toolchain
+	default "ppc"  if ADK_ppc
+	default "sparc"  if ADK_sparc
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
 	default "qemu-mips64"  if ADK_mips64_qemu
 	default "qemu-mipsel"  if ADK_mipsel_qemu
-	default "qemu-x86"  if ADK_x86_qemu
-	default "qemu-x86_64"  if ADK_x86_64_qemu
 	default "foxboard"  if ADK_foxboard
 	default "foxg20"  if ADK_foxg20
 	default "native"  if ADK_NATIVE
@@ -172,6 +164,9 @@ config ADK_TARGET
 
 
 config ADK_HARDWARE_QEMU
+	boolean
+
+config ADK_CPU_SPARC_V8
 	boolean
 
 config ADK_CPU_I686
@@ -188,6 +183,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=i686" if ADK_CPU_I686
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
+	default "-mcpu=v8" if ADK_CPU_SPARC_V8
 
 # c library
 config ADK_uclibc
@@ -210,7 +206,10 @@ menu "Target system"
 
 choice
 prompt "Embedded Device or Emulator"
-default ADK_LINUX_NATIVE
+default ADK_CHOOSE_TARGET
+
+config ADK_CHOOSE_TARGET
+	bool "choose a target"
 
 config ADK_LINUX_NATIVE
 	bool "Native platform"
@@ -319,12 +318,12 @@ config ADK_LINUX_MIPS_AG241
 
 config ADK_LINUX_MIPS_BRCM
 	bool "Broadcom BCM47xx based routers"
+	select ADK_brcm
 	select ADK_TARGET_WITH_SSB
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_MII
-	select ADK_brcm
 	help
 	  Broadcom bcm47xx based router.
 	  Status: development
@@ -353,6 +352,18 @@ config ADK_LINUX_TOOLCHAIN
 	bool "Toolchain only support"
 	help
 	 Toolchain only support
+
+config ADK_LINUX_PPC
+	bool "ppc system"
+	select ADK_ppc
+	help
+	  Support for a ppc system.
+
+config ADK_LINUX_SPARC
+	bool "sparc system"
+	select ADK_sparc
+	help
+	  Support for a sparc system.
 
 config ADK_LINUX_X86
 	bool "x86 system"
@@ -400,27 +411,6 @@ config ADK_LINUX_MIPS_TOOLCHAIN
 config ADK_LINUX_MIPSEL_TOOLCHAIN
 	bool "MIPS EL Toolchain (32 Bit)"
 	select ADK_mipsel_toolchain
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_PPC_TOOLCHAIN
-	bool "PPC Toolchain (32 Bit)"
-	select ADK_ppc_toolchain
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_SPARC_TOOLCHAIN
-	bool "SPARC Toolchain (32 Bit)"
-	select ADK_sparc_toolchain
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_X86_64_TOOLCHAIN
-	bool "X86 Toolchain (64 Bit)"
-	select ADK_x86_64_toolchain
 	select ADK_TOOLCHAIN_ONLY
 	help
 	  Status: toolchain only
@@ -499,6 +489,8 @@ config ADK_LINUX_X86_64_QEMU
 endchoice
 
 source "target/Config.in.alix"
+source "target/Config.in.sparc"
+source "target/Config.in.ppc"
 source "target/Config.in.x86"
 source "target/Config.in.x86_64"
 
@@ -583,6 +575,8 @@ config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
 	select ADK_eglibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_ARM_FOXG20 || \
@@ -599,6 +593,8 @@ config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	select ADK_glibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_ARM_FOXG20 || \
@@ -630,6 +626,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	depends on \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_NATIVE || \
@@ -643,6 +641,8 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
 		ADK_LINUX_X86_ALIX || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
@@ -724,6 +724,8 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	depends on \
 		ADK_LINUX_NATIVE || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_X86 || \
