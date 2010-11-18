@@ -9,6 +9,12 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
+$(TOOLS_BUILD_DIR):
+	@mkdir -p $(TOOLS_BUILD_DIR)
+
+tools-compile: $(TOOLS_BUILD_DIR)
+	$(MAKE) -C ../tools/grub prepare compile install
+
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
@@ -22,7 +28,7 @@ ifeq ($(ADK_HARDWARE_QEMU_X86_64),y)
 endif
 endif
 ifeq ($(FS),usb)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: tools-compile $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to USB use scripts/install.sh"
 endif

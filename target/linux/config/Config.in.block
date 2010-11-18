@@ -50,6 +50,7 @@ config ADK_KERNEL_ATA_PIIX
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
 	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_HARDWARE_IBMX40
 	default y if ADK_HARDWARE_QEMU_X86
 	default y if ADK_HARDWARE_QEMU_X86_64
 	default n

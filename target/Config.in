@@ -695,8 +695,8 @@ config ADK_TARGET_ROOTFS_NFSROOT
 
 config ADK_TARGET_ROOTFS_USB
 	bool "Boot from USB stick"
+	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_USB
 	select ADK_KERNEL_USB_EHCI_HCD

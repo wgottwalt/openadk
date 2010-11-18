@@ -2,7 +2,7 @@ choice
 depends on ADK_LINUX_X86_64
 prompt "Hardware model"
 
-config ADK_HARDWARE_GENERIC
+config ADK_HARDWARE_GENERIC_X86_64
 	bool "Generic x86_64/amd64 system"
 	help
 	  Generic x86_64/amd64 system.

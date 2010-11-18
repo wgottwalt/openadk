@@ -2,19 +2,35 @@ menu "Input devices"
 depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT
 
 config ADK_KERNEL_INPUT
-	bool
+	boolean
+	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_SHUTTLE
 	default n
 
 config ADK_KERNEL_INPUT_KEYBOARD
-	bool
+	boolean
+	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_SHUTTLE
+	default n
+
+config ADK_KERNEL_KEYBOARD_ATKBD
+	boolean
+	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_SHUTTLE
+	default n
+
+config ADK_KERNEL_INPUT_MOUSEDEV
+	boolean
+	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_SHUTTLE
 	default n
 
 config ADK_KERNEL_HID_SUPPORT
-	bool
+	boolean
 	default n
 
 config ADK_KERNEL_HID
-	bool
+	boolean
 	select ADK_KERNEL_HID_SUPPORT
 	default n
 
@@ -37,14 +53,14 @@ config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
 
 config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
 	prompt "kmod-input-mouse................. Mouse support (PS/2)"
-	select ADK_KERNEL_INPUT
 	tristate
+	select ADK_KERNEL_INPUT
 	default n
 
 config ADK_KPACKAGE_KMOD_INPUT_EVDEV
 	prompt "kmod-input-evdev................. Event support"
-	select ADK_KERNEL_INPUT
 	tristate
+	select ADK_KERNEL_INPUT
 	default n
 
 endmenu

@@ -139,18 +139,6 @@ config ADK_KERNEL_ATH_COMMON
 config ADK_KPACKAGE_KMOD_P54_COMMON
 	tristate
 
-config ADK_MOD_KERNEL_MAC80211
-	tristate
-	select ADK_MOD_KERNEL_CFG80211
-	select ADK_MOD_KERNEL_LIB80211
-	select ADK_KPACKAGE_KMOD_CRYPTO_AES
-	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
-	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
-	select ADK_KERNEL_CRC32
-	select ADK_KERNEL_WIRELESS
-	select ADK_KERNEL_WLAN_80211
-	default n
-
 config ADK_KERNEL_MAC80211_DEBUG_MENU
 	boolean
 
@@ -161,39 +149,31 @@ config ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 config ADK_KERNEL_MAC80211_DEBUGFS
 	boolean
 
-menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB
-
 config ADK_KPACKAGE_KMOD_MAC80211
-	prompt "kmod-mac80211.................. mac80211 softmac"
 	tristate
+	select ADK_KERNEL_WIRELESS
+	select ADK_KERNEL_WLAN_80211
 	select ADK_MOD_KERNEL_CFG80211
 	select ADK_MOD_KERNEL_LIB80211
 	select ADK_KPACKAGE_KMOD_CRYPTO_AES
 	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
 	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
-	select ADK_KERNEL_WIRELESS
-	select ADK_KERNEL_WLAN_80211
-	select ADK_KERNEL_CRC32
-	default y if ADK_HARDWARE_IBMX40
-	default n
 
 config ADK_DEBUG_MAC80211
 	boolean
-	prompt "enable verbose debugging messages in mac80211"
 	select ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 	select ADK_KERNEL_MAC80211_DEBUGFS
 	select ADK_KERNEL_DEBUG_FS
-	depends on ADK_KPACKAGE_KMOD_MAC80211
-	default n
-	help
+
+menu "Wireless card support"
+depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB
 
 config ADK_KPACKAGE_KMOD_ATH5K
 	prompt "kmod-ath5k................... Atheros 5xxx wireless cards"
 	tristate
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KERNEL_ATH_COMMON
-	depends on ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default y if ADK_HARDWARE_IBMX40
 	default n
@@ -203,7 +183,7 @@ config ADK_KPACKAGE_KMOD_ATH5K
 config ADK_KERNEL_ATH5K_DEBUG
 	prompt "enable debugging info via debugfs"
 	boolean
-	select ADK_KERNEL_DEBUG_FS
+	select ADK_DEBUG_MAC80211
 	depends on ADK_KPACKAGE_KMOD_ATH5K
 	default n
 	help
@@ -222,7 +202,6 @@ config ADK_KPACKAGE_KMOD_B43
 	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
 	tristate
 	select ADK_KPACKAGE_KMOD_FW_LOADER
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
@@ -231,7 +210,6 @@ config ADK_KPACKAGE_KMOD_B43
 config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	default n
 	help
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.
@@ -242,7 +220,6 @@ config ADK_KPACKAGE_KMOD_P54_USB
 	select ADK_KPACKAGE_KMOD_P54_COMMON
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_PACKAGE_P54_FIRMWARE
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 	help
@@ -253,7 +230,6 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
 	help
@@ -265,7 +241,6 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_MAC80211_LEDS
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
 	help
@@ -279,7 +254,6 @@ config ADK_KPACKAGE_KMOD_RT61PCI
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
 	select ADK_PACKAGE_RT61_FIRMWARE
-	depends on ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
 	help
@@ -289,6 +263,7 @@ config ADK_KPACKAGE_KMOD_RT61PCI
 config ADK_KERNEL_RT2X00_DEBUG
 	prompt "enable debugging info"
 	boolean
+	select ADK_DEBUG_MAC80211
 	depends on ADK_KPACKAGE_KMOD_RT61PCI || \
 		ADK_KPACKAGE_KMOD_RT2500PCI || \
 		ADK_KPACKAGE_KMOD_RT2400PCI	

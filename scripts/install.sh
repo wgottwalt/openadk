@@ -125,7 +125,7 @@ EOF
 	--grub-setup=./bin/tools/sbin/grub-setup \
 	--grub-mkimage=./bin/tools/bin/grub-mkimage \
 	--grub-mkdevicemap=./bin/tools/sbin/grub-mkdevicemap \
-	--no-floppy --root-directory=$tmp $1
+	--no-floppy --modules=ext2 --root-directory=$tmp $1
 umount $tmp
 printf "Successfully installed.\n"
 rm -rf $tmp

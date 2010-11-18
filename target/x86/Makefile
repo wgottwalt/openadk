@@ -9,6 +9,12 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
+$(TOOLS_BUILD_DIR):
+	@mkdir -p $(TOOLS_BUILD_DIR)
+
+tools-compile: $(TOOLS_BUILD_DIR)
+	$(MAKE) -C ../tools/grub prepare compile install
+
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
@@ -32,7 +38,7 @@ ifeq ($(ADK_HARDWARE_QEMU_X86),y)
 endif
 endif
 ifeq ($(FS),usb)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: tools-compile $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to USB use scripts/install.sh"
 endif
