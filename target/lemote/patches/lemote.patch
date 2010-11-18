@@ -1,7 +1,47 @@
-diff -Nur linux-2.6.35.orig/arch/mips/include/asm/dma-mapping.h linux-2.6.35/arch/mips/include/asm/dma-mapping.h
---- linux-2.6.35.orig/arch/mips/include/asm/dma-mapping.h	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/include/asm/dma-mapping.h	2010-08-05 21:12:33.013620986 +0200
-@@ -74,4 +74,8 @@
+diff -Nur linux-2.6.36.orig/arch/mips/Kconfig linux-2.6.36/arch/mips/Kconfig
+--- linux-2.6.36.orig/arch/mips/Kconfig	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/Kconfig	2010-11-18 11:47:59.000000000 +0100
+@@ -205,7 +205,7 @@
+ 
+ config MACH_LOONGSON
+ 	bool "Loongson family of machines"
+-	select SYS_SUPPORTS_ZBOOT
++	select SYS_SUPPORTS_ZBOOT_UART16550
+ 	help
+ 	  This enables the support of Loongson family of machines.
+ 
+@@ -1093,6 +1093,8 @@
+ 	bool "Loongson 2E"
+ 	depends on SYS_HAS_CPU_LOONGSON2E
+ 	select CPU_LOONGSON2
++	select GENERIC_GPIO
++	select ARCH_REQUIRE_GPIOLIB
+ 	help
+ 	  The Loongson 2E processor implements the MIPS III instruction set
+ 	  with many extensions.
+@@ -2012,6 +2014,18 @@
+ source "kernel/time/Kconfig"
+ 
+ #
++# High Resolution sched_clock() Configuration
++#
++
++config CPU_HAS_FIXED_C0_COUNT
++	bool
++
++config CPU_SUPPORTS_HR_SCHED_CLOCK
++	bool
++	depends on CPU_HAS_FIXED_C0_COUNT || !CPU_FREQ
++	default y
++
++#
+ # Timer Interrupt Frequency Configuration
+ #
+ 
+diff -Nur linux-2.6.36.orig/arch/mips/include/asm/dma-mapping.h linux-2.6.36/arch/mips/include/asm/dma-mapping.h
+--- linux-2.6.36.orig/arch/mips/include/asm/dma-mapping.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/include/asm/dma-mapping.h	2010-11-18 11:47:59.000000000 +0100
+@@ -65,4 +65,8 @@
  extern void dma_cache_sync(struct device *dev, void *vaddr, size_t size,
  	       enum dma_data_direction direction);
  
@@ -10,9 +50,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/include/asm/dma-mapping.h linux-2.6.35/arc
 +		void *cpu_addr, dma_addr_t handle, size_t size);
 +
  #endif /* _ASM_DMA_MAPPING_H */
-diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h linux-2.6.35/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h
---- linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2010-08-05 21:12:33.034870166 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h linux-2.6.36/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h
+--- linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h	2010-11-18 11:47:59.000000000 +0100
 @@ -255,21 +255,12 @@
   * IDE STANDARD
   */
@@ -77,9 +117,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536.h 
 +#define	SMB_CTRL3		0x06
  
  #endif				/* _CS5536_H */
-diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h linux-2.6.35/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
---- linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2010-08-05 21:12:33.073620683 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h linux-2.6.36/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h
+--- linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mfgpt.h	2010-11-18 11:47:59.000000000 +0100
 @@ -32,4 +32,9 @@
  #define MFGPT0_CNT	(MFGPT_BASE + 4)
  #define MFGPT0_SETUP	(MFGPT_BASE + 6)
@@ -90,9 +130,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/cs5536/cs5536_mf
 +#define MFGPT2_SETUP	(MFGPT_BASE + 0x16)
 +
  #endif /*!_CS5536_MFGPT_H */
-diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/ec_kb3310b.h linux-2.6.35/arch/mips/include/asm/mach-loongson/ec_kb3310b.h
---- linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/ec_kb3310b.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/arch/mips/include/asm/mach-loongson/ec_kb3310b.h	2010-08-05 21:12:33.114869474 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/ec_kb3310b.h linux-2.6.36/arch/mips/include/asm/mach-loongson/ec_kb3310b.h
+--- linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/ec_kb3310b.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/arch/mips/include/asm/mach-loongson/ec_kb3310b.h	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,191 @@
 +/*
 + * KB3310B Embedded Controller
@@ -285,9 +325,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/ec_kb3310b.h lin
 +#define EVENT_END	EVENT_WLAN
 +
 +#endif /* !_EC_KB3310B_H */
-diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/loongson.h linux-2.6.35/arch/mips/include/asm/mach-loongson/loongson.h
---- linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/loongson.h	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/include/asm/mach-loongson/loongson.h	2010-08-05 21:12:33.153620689 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/loongson.h linux-2.6.36/arch/mips/include/asm/mach-loongson/loongson.h
+--- linux-2.6.36.orig/arch/mips/include/asm/mach-loongson/loongson.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/include/asm/mach-loongson/loongson.h	2010-11-18 11:47:59.000000000 +0100
 @@ -42,6 +42,12 @@
  #endif
  }
@@ -301,49 +341,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/include/asm/mach-loongson/loongson.h linux
  /* irq operation functions */
  extern void bonito_irqdispatch(void);
  extern void __init bonito_irq_init(void);
-diff -Nur linux-2.6.35.orig/arch/mips/Kconfig linux-2.6.35/arch/mips/Kconfig
---- linux-2.6.35.orig/arch/mips/Kconfig	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/Kconfig	2010-08-05 21:12:33.193620319 +0200
-@@ -180,7 +180,7 @@
- 
- config MACH_LOONGSON
- 	bool "Loongson family of machines"
--	select SYS_SUPPORTS_ZBOOT
-+	select SYS_SUPPORTS_ZBOOT_UART16550
- 	help
- 	  This enables the support of Loongson family of machines.
- 
-@@ -1064,6 +1064,8 @@
- 	bool "Loongson 2E"
- 	depends on SYS_HAS_CPU_LOONGSON2E
- 	select CPU_LOONGSON2
-+	select GENERIC_GPIO
-+	select ARCH_REQUIRE_GPIOLIB
- 	help
- 	  The Loongson 2E processor implements the MIPS III instruction set
- 	  with many extensions.
-@@ -1967,6 +1969,18 @@
- source "kernel/time/Kconfig"
- 
- #
-+# High Resolution sched_clock() Configuration
-+#
-+
-+config CPU_HAS_FIXED_C0_COUNT
-+	bool
-+
-+config CPU_SUPPORTS_HR_SCHED_CLOCK
-+	bool
-+	depends on CPU_HAS_FIXED_C0_COUNT || !CPU_FREQ
-+	default y
-+
-+#
- # Timer Interrupt Frequency Configuration
- #
- 
-diff -Nur linux-2.6.35.orig/arch/mips/kernel/csrc-r4k.c linux-2.6.35/arch/mips/kernel/csrc-r4k.c
---- linux-2.6.35.orig/arch/mips/kernel/csrc-r4k.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/kernel/csrc-r4k.c	2010-08-05 21:12:33.243617980 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/kernel/csrc-r4k.c linux-2.6.36/arch/mips/kernel/csrc-r4k.c
+--- linux-2.6.36.orig/arch/mips/kernel/csrc-r4k.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/kernel/csrc-r4k.c	2010-11-18 11:47:59.000000000 +0100
 @@ -6,10 +6,66 @@
   * Copyright (C) 2007 by Ralf Baechle
   */
@@ -420,9 +420,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/kernel/csrc-r4k.c linux-2.6.35/arch/mips/k
  	/* Calculate a somewhat reasonable rating value */
  	clocksource_mips.rating = 200 + mips_hpt_frequency / 10000000;
  
-diff -Nur linux-2.6.35.orig/arch/mips/kernel/time.c linux-2.6.35/arch/mips/kernel/time.c
---- linux-2.6.35.orig/arch/mips/kernel/time.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/kernel/time.c	2010-08-05 21:12:33.283618090 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/kernel/time.c linux-2.6.36/arch/mips/kernel/time.c
+--- linux-2.6.36.orig/arch/mips/kernel/time.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/kernel/time.c	2010-11-18 11:47:59.000000000 +0100
 @@ -119,6 +119,11 @@
  
  void __init time_init(void)
@@ -435,9 +435,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/kernel/time.c linux-2.6.35/arch/mips/kerne
  	plat_time_init();
  
  	if (!mips_clockevent_init() || !cpu_has_mfc0_count_bug())
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cmdline.c linux-2.6.35/arch/mips/loongson/common/cmdline.c
---- linux-2.6.35.orig/arch/mips/loongson/common/cmdline.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/common/cmdline.c	2010-08-05 21:12:33.323621053 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/cmdline.c linux-2.6.36/arch/mips/loongson/common/cmdline.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/cmdline.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/common/cmdline.c	2010-11-18 11:47:59.000000000 +0100
 @@ -17,10 +17,15 @@
   * Free Software Foundation;  either version 2 of the  License, or (at your
   * option) any later version.
@@ -481,9 +481,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cmdline.c linux-2.6.35/arc
 +	/* copy arcs_cmdline into loongson_cmdline */
 +	strncpy(loongson_cmdline, arcs_cmdline, COMMAND_LINE_SIZE);
  }
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_acc.c
---- linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_acc.c	2010-08-05 21:12:33.363620665 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_acc.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_acc.c	2010-11-18 11:47:59.000000000 +0100
 @@ -18,7 +18,7 @@
  
  void pci_acc_write_reg(int reg, u32 value)
@@ -594,9 +594,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_acc.c linux-
 -	return conf_data;
 +	return cfg;
  }
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ehci.c
---- linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2010-08-05 21:12:33.413620336 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ehci.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ehci.c	2010-11-18 11:47:59.000000000 +0100
 @@ -18,7 +18,7 @@
  
  void pci_ehci_write_reg(int reg, u32 value)
@@ -715,9 +715,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ehci.c linux
 -	return conf_data;
 +	return cfg;
  }
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ide.c
---- linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ide.c	2010-08-05 21:49:22.613620707 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ide.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ide.c	2010-11-18 11:47:59.000000000 +0100
 @@ -18,7 +18,7 @@
  
  void pci_ide_write_reg(int reg, u32 value)
@@ -891,9 +891,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ide.c linux-
 -	return conf_data;
 +	return cfg;
  }
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ohci.c
---- linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2010-08-05 21:12:33.513622309 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ohci.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/common/cs5536/cs5536_ohci.c	2010-11-18 11:47:59.000000000 +0100
 @@ -18,7 +18,7 @@
  
  void pci_ohci_write_reg(int reg, u32 value)
@@ -1005,9 +1005,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/cs5536/cs5536_ohci.c linux
 -	return conf_data;
 +	return cfg;
  }
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/mtd.c linux-2.6.35/arch/mips/loongson/common/mtd.c
---- linux-2.6.35.orig/arch/mips/loongson/common/mtd.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/arch/mips/loongson/common/mtd.c	2010-08-05 21:12:33.563620627 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/common/mtd.c linux-2.6.36/arch/mips/loongson/common/mtd.c
+--- linux-2.6.36.orig/arch/mips/loongson/common/mtd.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/arch/mips/loongson/common/mtd.c	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,91 @@
 +/*
 + *  Driver for flushing/dumping ROM of PMON on loongson family machines
@@ -1100,9 +1100,21 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/common/mtd.c linux-2.6.35/arch/mi
 +MODULE_LICENSE("GPL");
 +MODULE_AUTHOR("Yanhua <yanh@lemote.com>");
 +MODULE_DESCRIPTION("MTD driver for pmon flushing/dumping");
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.c linux-2.6.35/arch/mips/loongson/lemote-2f/ec_kb3310b.c
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/ec_kb3310b.c	2010-08-05 21:12:33.613622876 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/Makefile linux-2.6.36/arch/mips/loongson/lemote-2f/Makefile
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/Makefile	2010-11-18 11:47:59.000000000 +0100
+@@ -2,7 +2,7 @@
+ # Makefile for lemote loongson2f family machines
+ #
+ 
+-obj-y += machtype.o irq.o reset.o ec_kb3310b.o
++obj-y += machtype.o irq.o reset.o ec_kb3310b.o platform.o
+ 
+ #
+ # Suspend Support
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.c linux-2.6.36/arch/mips/loongson/lemote-2f/ec_kb3310b.c
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/ec_kb3310b.c	2010-11-18 11:47:59.000000000 +0100
 @@ -14,7 +14,7 @@
  #include <linux/spinlock.h>
  #include <linux/delay.h>
@@ -1137,9 +1149,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.c linux-2.6.
  		return -EINVAL;
  	}
  	value = inb(EC_DAT_PORT);
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.h linux-2.6.35/arch/mips/loongson/lemote-2f/ec_kb3310b.h
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.h	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/ec_kb3310b.h	1970-01-01 01:00:00.000000000 +0100
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.h linux-2.6.36/arch/mips/loongson/lemote-2f/ec_kb3310b.h
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/ec_kb3310b.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,188 +0,0 @@
 -/*
 - * KB3310B Embedded Controller
@@ -1329,21 +1341,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/ec_kb3310b.h linux-2.6.
 -};
 -
 -#endif /* !_EC_KB3310B_H */
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/Makefile linux-2.6.35/arch/mips/loongson/lemote-2f/Makefile
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/Makefile	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/Makefile	2010-08-05 21:12:33.653620488 +0200
-@@ -2,7 +2,7 @@
- # Makefile for lemote loongson2f family machines
- #
- 
--obj-y += machtype.o irq.o reset.o ec_kb3310b.o
-+obj-y += machtype.o irq.o reset.o ec_kb3310b.o platform.o
- 
- #
- # Suspend Support
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/platform.c linux-2.6.35/arch/mips/loongson/lemote-2f/platform.c
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/platform.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/platform.c	2010-08-05 21:12:33.683620719 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/platform.c linux-2.6.36/arch/mips/loongson/lemote-2f/platform.c
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/platform.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/platform.c	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,48 @@
 +/*
 + * Copyright (C) 2009 Lemote Inc.
@@ -1393,9 +1393,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/platform.c linux-2.6.35
 +}
 +
 +arch_initcall(lemote2f_platform_init);
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/pm.c linux-2.6.35/arch/mips/loongson/lemote-2f/pm.c
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/pm.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/pm.c	2010-08-05 21:12:33.723620505 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/pm.c linux-2.6.36/arch/mips/loongson/lemote-2f/pm.c
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/pm.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/pm.c	2010-11-18 11:47:59.000000000 +0100
 @@ -23,7 +23,7 @@
  #include <loongson.h>
  
@@ -1414,9 +1414,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/pm.c linux-2.6.35/arch/
  
  	if (irq == I8042_KBD_IRQ)
  		return 1;
-diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/reset.c linux-2.6.35/arch/mips/loongson/lemote-2f/reset.c
---- linux-2.6.35.orig/arch/mips/loongson/lemote-2f/reset.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/loongson/lemote-2f/reset.c	2010-08-05 21:12:33.763620406 +0200
+diff -Nur linux-2.6.36.orig/arch/mips/loongson/lemote-2f/reset.c linux-2.6.36/arch/mips/loongson/lemote-2f/reset.c
+--- linux-2.6.36.orig/arch/mips/loongson/lemote-2f/reset.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/loongson/lemote-2f/reset.c	2010-11-18 11:47:59.000000000 +0100
 @@ -20,7 +20,7 @@
  #include <loongson.h>
  
@@ -1426,10 +1426,10 @@ diff -Nur linux-2.6.35.orig/arch/mips/loongson/lemote-2f/reset.c linux-2.6.35/ar
  
  static void reset_cpu(void)
  {
-diff -Nur linux-2.6.35.orig/arch/mips/mm/dma-default.c linux-2.6.35/arch/mips/mm/dma-default.c
---- linux-2.6.35.orig/arch/mips/mm/dma-default.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/arch/mips/mm/dma-default.c	2010-08-05 21:12:33.803630014 +0200
-@@ -375,3 +375,16 @@
+diff -Nur linux-2.6.36.orig/arch/mips/mm/dma-default.c linux-2.6.36/arch/mips/mm/dma-default.c
+--- linux-2.6.36.orig/arch/mips/mm/dma-default.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/mm/dma-default.c	2010-11-18 11:47:59.000000000 +0100
+@@ -380,3 +380,16 @@
  }
  
  EXPORT_SYMBOL(dma_cache_sync);
@@ -1446,9 +1446,9 @@ diff -Nur linux-2.6.35.orig/arch/mips/mm/dma-default.c linux-2.6.35/arch/mips/mm
 +		       size, vma->vm_page_prot);
 +}
 +EXPORT_SYMBOL(dma_mmap_coherent);
-diff -Nur linux-2.6.35.orig/drivers/ide/ide-iops.c linux-2.6.35/drivers/ide/ide-iops.c
---- linux-2.6.35.orig/drivers/ide/ide-iops.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/ide/ide-iops.c	2010-08-05 21:12:33.853620821 +0200
+diff -Nur linux-2.6.36.orig/drivers/ide/ide-iops.c linux-2.6.36/drivers/ide/ide-iops.c
+--- linux-2.6.36.orig/drivers/ide/ide-iops.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/ide/ide-iops.c	2010-11-18 11:47:59.000000000 +0100
 @@ -27,6 +27,8 @@
  #include <asm/uaccess.h>
  #include <asm/io.h>
@@ -1468,9 +1468,9 @@ diff -Nur linux-2.6.35.orig/drivers/ide/ide-iops.c linux-2.6.35/drivers/ide/ide-
  	for (list = nien_quirk_list; *list != NULL; list++)
  		if (strstr(m, *list) != NULL) {
  			drive->dev_flags |= IDE_DFLAG_NIEN_QUIRK;
-diff -Nur linux-2.6.35.orig/drivers/platform/Kconfig linux-2.6.35/drivers/platform/Kconfig
---- linux-2.6.35.orig/drivers/platform/Kconfig	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/platform/Kconfig	2010-08-05 21:12:35.693620642 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/Kconfig linux-2.6.36/drivers/platform/Kconfig
+--- linux-2.6.36.orig/drivers/platform/Kconfig	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/platform/Kconfig	2010-11-18 11:47:59.000000000 +0100
 @@ -1,3 +1,7 @@
  if X86
  source "drivers/platform/x86/Kconfig"
@@ -1479,17 +1479,17 @@ diff -Nur linux-2.6.35.orig/drivers/platform/Kconfig linux-2.6.35/drivers/platfo
 +if MIPS
 +source "drivers/platform/mips/Kconfig"
 +endif
-diff -Nur linux-2.6.35.orig/drivers/platform/Makefile linux-2.6.35/drivers/platform/Makefile
---- linux-2.6.35.orig/drivers/platform/Makefile	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/platform/Makefile	2010-08-05 21:12:35.733620270 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/Makefile linux-2.6.36/drivers/platform/Makefile
+--- linux-2.6.36.orig/drivers/platform/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/platform/Makefile	2010-11-18 11:47:59.000000000 +0100
 @@ -3,3 +3,4 @@
  #
  
  obj-$(CONFIG_X86)		+= x86/
 +obj-$(CONFIG_MIPS)		+= mips/
-diff -Nur linux-2.6.35.orig/drivers/platform/mips/Kconfig linux-2.6.35/drivers/platform/mips/Kconfig
---- linux-2.6.35.orig/drivers/platform/mips/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/drivers/platform/mips/Kconfig	2010-08-05 21:12:35.763620661 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/mips/Kconfig linux-2.6.36/drivers/platform/mips/Kconfig
+--- linux-2.6.36.orig/drivers/platform/mips/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/platform/mips/Kconfig	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,43 @@
 +#
 +# MIPS Platform Specific Drivers
@@ -1534,9 +1534,20 @@ diff -Nur linux-2.6.35.orig/drivers/platform/mips/Kconfig linux-2.6.35/drivers/p
 +	  its own specific suspend support.
 +
 +endif # MIPS_PLATFORM_DEVICES
-diff -Nur linux-2.6.35.orig/drivers/platform/mips/lynloong_pc.c linux-2.6.35/drivers/platform/mips/lynloong_pc.c
---- linux-2.6.35.orig/drivers/platform/mips/lynloong_pc.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/drivers/platform/mips/lynloong_pc.c	2010-08-05 21:12:35.793620734 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/mips/Makefile linux-2.6.36/drivers/platform/mips/Makefile
+--- linux-2.6.36.orig/drivers/platform/mips/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/platform/mips/Makefile	2010-11-18 11:47:59.000000000 +0100
+@@ -0,0 +1,7 @@
++#
++# Makefile for MIPS Platform-Specific Drivers
++#
++
++obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= yeeloong_laptop.o
++
++obj-$(CONFIG_LEMOTE_LYNLOONG2F)	+= lynloong_pc.o
+diff -Nur linux-2.6.36.orig/drivers/platform/mips/lynloong_pc.c linux-2.6.36/drivers/platform/mips/lynloong_pc.c
+--- linux-2.6.36.orig/drivers/platform/mips/lynloong_pc.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/platform/mips/lynloong_pc.c	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,513 @@
 +/*
 + * Driver for LynLoong PC extras
@@ -2051,20 +2062,9 @@ diff -Nur linux-2.6.35.orig/drivers/platform/mips/lynloong_pc.c linux-2.6.35/dri
 +MODULE_AUTHOR("Wu Zhangjin <wuzhangjin@gmail.com>; Xiang Yu <xiangy@lemote.com>");
 +MODULE_DESCRIPTION("LynLoong PC driver");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.35.orig/drivers/platform/mips/Makefile linux-2.6.35/drivers/platform/mips/Makefile
---- linux-2.6.35.orig/drivers/platform/mips/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/drivers/platform/mips/Makefile	2010-08-05 21:12:35.833623345 +0200
-@@ -0,0 +1,7 @@
-+#
-+# Makefile for MIPS Platform-Specific Drivers
-+#
-+
-+obj-$(CONFIG_LEMOTE_YEELOONG2F)	+= yeeloong_laptop.o
-+
-+obj-$(CONFIG_LEMOTE_LYNLOONG2F)	+= lynloong_pc.o
-diff -Nur linux-2.6.35.orig/drivers/platform/mips/yeeloong_ecrom.c linux-2.6.35/drivers/platform/mips/yeeloong_ecrom.c
---- linux-2.6.35.orig/drivers/platform/mips/yeeloong_ecrom.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/drivers/platform/mips/yeeloong_ecrom.c	2010-08-05 21:12:35.863623591 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/mips/yeeloong_ecrom.c linux-2.6.36/drivers/platform/mips/yeeloong_ecrom.c
+--- linux-2.6.36.orig/drivers/platform/mips/yeeloong_ecrom.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/platform/mips/yeeloong_ecrom.c	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,943 @@
 +/*
 + * Driver for flushing/dumping ROM of EC on YeeLoong laptop
@@ -3009,9 +3009,9 @@ diff -Nur linux-2.6.35.orig/drivers/platform/mips/yeeloong_ecrom.c linux-2.6.35/
 +MODULE_AUTHOR("liujl <liujl@lemote.com>");
 +MODULE_DESCRIPTION("Driver for flushing/dumping ROM of EC on YeeLoong laptop");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.35.orig/drivers/platform/mips/yeeloong_laptop.c linux-2.6.35/drivers/platform/mips/yeeloong_laptop.c
---- linux-2.6.35.orig/drivers/platform/mips/yeeloong_laptop.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.35/drivers/platform/mips/yeeloong_laptop.c	2010-08-05 21:12:35.893623330 +0200
+diff -Nur linux-2.6.36.orig/drivers/platform/mips/yeeloong_laptop.c linux-2.6.36/drivers/platform/mips/yeeloong_laptop.c
+--- linux-2.6.36.orig/drivers/platform/mips/yeeloong_laptop.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/drivers/platform/mips/yeeloong_laptop.c	2010-11-18 11:47:59.000000000 +0100
 @@ -0,0 +1,1200 @@
 +/*
 + * Driver for YeeLoong laptop extras
@@ -4213,9 +4213,9 @@ diff -Nur linux-2.6.35.orig/drivers/platform/mips/yeeloong_laptop.c linux-2.6.35
 +MODULE_AUTHOR("Wu Zhangjin <wuzhangjin@gmail.com>; Liu Junliang <liujl@lemote.com>");
 +MODULE_DESCRIPTION("YeeLoong laptop driver");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-2.6.35.orig/drivers/staging/sm7xx/smtcfb.c linux-2.6.35/drivers/staging/sm7xx/smtcfb.c
---- linux-2.6.35.orig/drivers/staging/sm7xx/smtcfb.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/staging/sm7xx/smtcfb.c	2010-08-05 21:12:35.933620712 +0200
+diff -Nur linux-2.6.36.orig/drivers/staging/sm7xx/smtcfb.c linux-2.6.36/drivers/staging/sm7xx/smtcfb.c
+--- linux-2.6.36.orig/drivers/staging/sm7xx/smtcfb.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/staging/sm7xx/smtcfb.c	2010-11-18 11:47:59.000000000 +0100
 @@ -12,6 +12,8 @@
   *  License. See the file COPYING in the main directory of this archive for
   *  more details.
@@ -4233,9 +4233,9 @@ diff -Nur linux-2.6.35.orig/drivers/staging/sm7xx/smtcfb.c linux-2.6.35/drivers/
  	{"0x314", 800,  600,  16},
  	{"0x317", 1024, 768,	16},
  	{"0x31A", 1280, 1024, 16},
-diff -Nur linux-2.6.35.orig/drivers/usb/host/ohci-hcd.c linux-2.6.35/drivers/usb/host/ohci-hcd.c
---- linux-2.6.35.orig/drivers/usb/host/ohci-hcd.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/usb/host/ohci-hcd.c	2010-08-05 21:12:35.973617973 +0200
+diff -Nur linux-2.6.36.orig/drivers/usb/host/ohci-hcd.c linux-2.6.36/drivers/usb/host/ohci-hcd.c
+--- linux-2.6.36.orig/drivers/usb/host/ohci-hcd.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/usb/host/ohci-hcd.c	2010-11-18 11:47:59.000000000 +0100
 @@ -832,9 +832,13 @@
  	}
  
@@ -4253,23 +4253,9 @@ diff -Nur linux-2.6.35.orig/drivers/usb/host/ohci-hcd.c linux-2.6.35/drivers/usb
  	}
  
  	if (quirk_zfmicro(ohci) && (ints & OHCI_INTR_SF)) {
-diff -Nur linux-2.6.35.orig/drivers/video/tdfxfb.c linux-2.6.35/drivers/video/tdfxfb.c
---- linux-2.6.35.orig/drivers/video/tdfxfb.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/drivers/video/tdfxfb.c	2010-08-05 21:12:36.023617867 +0200
-@@ -1571,8 +1571,8 @@
- 	if (default_par->mtrr_handle >= 0)
- 		mtrr_del(default_par->mtrr_handle, info->fix.smem_start,
- 			 info->fix.smem_len);
--	release_mem_region(pci_resource_start(pdev, 2),
--			   pci_resource_len(pdev, 2));
-+	release_region(pci_resource_start(pdev, 2),
-+		       pci_resource_len(pdev, 2));
- out_err_screenbase:
- 	if (info->screen_base)
- 		iounmap(info->screen_base);
-diff -Nur linux-2.6.35.orig/net/rfkill/core.c linux-2.6.35/net/rfkill/core.c
---- linux-2.6.35.orig/net/rfkill/core.c	2010-08-02 00:11:14.000000000 +0200
-+++ linux-2.6.35/net/rfkill/core.c	2010-08-05 21:12:36.053623260 +0200
+diff -Nur linux-2.6.36.orig/net/rfkill/core.c linux-2.6.36/net/rfkill/core.c
+--- linux-2.6.36.orig/net/rfkill/core.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/net/rfkill/core.c	2010-11-18 11:48:02.000000000 +0100
 @@ -112,7 +112,7 @@
  static DEFINE_MUTEX(rfkill_global_mutex);
  static LIST_HEAD(rfkill_fds);	/* list of open fds of /dev/rfkill */
