@@ -331,6 +331,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(HW)" ];then \
+		grep -h "^config" target/Config.in.* \
+			|grep -i "$(HW)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
 ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
@@ -399,6 +405,12 @@ endif
 	@if [ ! -z "$(LIBC)" ];then \
 		grep "^config" target/Config.in \
 			|grep -i "$(LIBC)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/all.config; \
+	fi
+	@if [ ! -z "$(HW)" ];then \
+		grep -h "^config" target/Config.in.* \
+			|grep -i "$(HW)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
