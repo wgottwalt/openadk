@@ -27,16 +27,6 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include <byteswap.h>
-#include <endian.h>
-
-#if __BYTE_ORDER == __BIG_ENDIAN
-#define STORE32_LE(X)		bswap_32(X)
-#elif __BYTE_ORDER == __LITTLE_ENDIAN
-#define STORE32_LE(X)		(X)
-#else
-#error unkown endianness!
-#endif
 
 uint32_t crc32buf(char *buf, size_t len);
 
@@ -97,9 +87,9 @@ int main(int argc, char **argv)
 
 	p = (struct trx_header *) buf;
 
-	p->magic = STORE32_LE(TRX_MAGIC);
+	p->magic = TRX_MAGIC;
 	cur_len = sizeof(struct trx_header);
-	p->flag_version = STORE32_LE((TRX_VERSION << 16));
+	p->flag_version = (TRX_VERSION << 16);
 
 	in = NULL;
 	i = 0;
@@ -107,7 +97,7 @@ int main(int argc, char **argv)
 	while ((c = getopt(argc, argv, "-:o:p:v:m:a:b:")) != -1) {
 		switch (c) {
 			case 1:
-				p->offsets[i++] = STORE32_LE(cur_len);
+				p->offsets[i++] = cur_len;
 
 				if (!(in = fopen(optarg, "r"))) {
 					fprintf(stderr, "can not open \"%s\" for reading\n", optarg);
@@ -237,9 +227,9 @@ int main(int argc, char **argv)
 
 	p->crc32 = crc32buf((char *) &p->flag_version,
 						cur_len - offsetof(struct trx_header, flag_version));
-	p->crc32 = STORE32_LE(p->crc32);
+	p->crc32 = p->crc32;
 
-	p->len = STORE32_LE(cur_len);
+	p->len = cur_len;
 
 	if (!fwrite(buf, cur_len, 1, out) || fflush(out)) {
 		fprintf(stderr, "fwrite failed\n");
