@@ -170,6 +170,10 @@ config ADK_TARGET
 	default "wag54g"  if ADK_wag54g
 	default "ag241"  if ADK_ag241
 
+
+config ADK_HARDWARE_QEMU
+	boolean
+
 config ADK_CPU_I686
 	boolean
 
@@ -477,21 +481,6 @@ config ADK_LINUX_CRIS_QEMU
 	help
 	 Qemu support for CRISv32 architecture.
 
-config ADK_LINUX_X86_QEMU
-	bool "x86"
-	select ADK_x86_qemu
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KPACKAGE_KMOD_E1000
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_CRC32
-	select ADK_TARGET_WITH_VGA
-	help
-	 Qemu support for x86 architecture.
-	 Status: stable
-
 config ADK_LINUX_X86_64_QEMU
 	bool "x86_64"
 	select ADK_x86_64_qemu
@@ -511,6 +500,7 @@ endchoice
 
 source "target/Config.in.alix"
 source "target/Config.in.x86"
+source "target/Config.in.x86_64"
 
 choice
 prompt "Routerboard model"
@@ -714,6 +704,7 @@ config ADK_TARGET_ROOTFS_USB
 	select ADK_KERNEL_USB_STORAGE
 	select ADK_KERNEL_EXT2_FS
 	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
+	depends on !ADK_HARDWARE_QEMU
 	help
 	  Boot system from USB stick.
 
@@ -743,8 +734,6 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_ENCRYPTED
 	bool "Encrypted read-write root filesystem"
-	depends on ADK_LINUX_MIPS64_LEMOTE || \
-		ADK_LINUX_X86
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	select ADK_PACKAGE_CRYPTINIT
 	select ADK_KERNEL_BLK_DEV_DM
@@ -753,6 +742,9 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 	select ADK_KERNEL_CRYPTO_CBC
 	select ADK_KERNEL_CRYPTO_SHA256
 	select ADK_KERNEL_XFS_FS
+	depends on ADK_LINUX_MIPS64_LEMOTE || \
+		ADK_LINUX_X86 || ADK_LINUX_X86_64
+	depends on !ADK_HARDWARE_QEMU
 	help
 	  Use this option if you want an encrypted rootfs.
 	  Default is XFS filesystem. Use following commands to setup 

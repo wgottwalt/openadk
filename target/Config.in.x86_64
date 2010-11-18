@@ -31,6 +31,16 @@ config ADK_HARDWARE_SHUTTLE
 	  Support for a nice and fast shuttle xpc with AMD quad-core CPU.
 	  Status: development
 
+config ADK_HARDWARE_QEMU_X86_64
+	bool "Qemu x86_64"
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for x86_64 architecture.
+	 Status: stable
 
 config ADK_HARDWARE_GENERIC_X86_64_TOOLCHAIN
 	bool "x86_64 toolchain"
