@@ -2,56 +2,57 @@ menu "Block devices support"
 
 config ADK_KERNEL_MD
 	boolean
-	default n
 
 config ADK_KERNEL_SWAP
 	boolean
-	default n
 
 config ADK_KERNEL_LBD
 	boolean
-	default n
 
 config ADK_KERNEL_BLK_DEV_IO_TRACE
 	boolean
-	default n
 
 config ADK_KERNEL_LSF
 	boolean
-	default n
 
 config ADK_KERNEL_IOSCHED_AS
 	boolean
-	default n
 
 config ADK_KERNEL_IOSCHED_DEADLINE
 	boolean
-	default n
 
 config ADK_KERNEL_IOSCHED_CFQ
 	boolean
-	default n
 
 config ADK_KERNEL_SCSI
 	boolean
-	default n
 
 config ADK_KERNEL_BLK_DEV_SD
 	boolean
-	default n
 
 config ADK_KERNEL_DM_CRYPT
 	boolean
-	default n
 
 config ADK_KERNEL_BLK_DEV_DM
+	boolean
 	select ADK_KERNEL_MD
 	depends on !ADK_LINUX_CRIS_FOXBOARD
-	boolean
-	default n
 
 config ADK_KERNEL_ATA
 	boolean
+
+config ADK_KERNEL_ATA_SFF
+	boolean
+
+config ADK_KERNEL_ATA_PIIX
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_QEMU_X86
+	default y if ADK_HARDWARE_QEMU_X86_64
 	default n
 
 config ADK_KERNEL_SATA_AHCI
@@ -143,6 +144,7 @@ config ADK_KPACKAGE_KMOD_SCSI
 	select ADK_KERNEL_IOSCHED_AS
 	depends on !ADK_KERNEL_SCSI
 	depends on !ADK_KERNEL_SATA_AHCI
+	depends on !ADK_KERNEL_ATA_PIIX
 	tristate
 	help
 	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or

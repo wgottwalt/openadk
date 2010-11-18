@@ -2,7 +2,7 @@ choice
 depends on ADK_LINUX_X86
 prompt "Hardware model"
 
-config ADK_HARDWARE_GENERIC
+config ADK_HARDWARE_GENERIC_X86
 	bool "Generic x86 system (i686)"
 	select ADK_CPU_I686
 	help
@@ -17,15 +17,20 @@ config ADK_HARDWARE_IBMX40
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_HDD
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_SWAP
 	help
          Hardware profile for IBM X40 laptop's.
+
+config ADK_HARDWARE_QEMU_X86
+	bool "Qemu x86"
+	select ADK_CPU_I686
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for x86 architecture.
+	 Status: stable
 
 config ADK_HARDWARE_GENERIC_X86_TOOLCHAIN
 	bool "x86 toolchain"
