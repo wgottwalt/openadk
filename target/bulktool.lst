@@ -10,6 +10,3 @@ mips_toolchain	glibc
 mipsel_toolchain	uclibc
 mipsel_toolchain	eglibc
 mipsel_toolchain	glibc
-ppc_toolchain	uclibc
-ppc_toolchain	eglibc
-ppc_toolchain	glibc

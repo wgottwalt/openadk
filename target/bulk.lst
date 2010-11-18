@@ -1,6 +1,8 @@
 ag241		uclibc		nfsroot
 foxboard	uclibc		nfsroot
 foxg20		uclibc		nfsroot
+foxg20		eglibc		nfsroot
+foxg20		glibc		nfsroot
 rb4xx		uclibc		nfsroot
 rb4xx		eglibc		nfsroot
 rb4xx		glibc		nfsroot
@@ -22,14 +24,11 @@ mips_qemu	glibc		archive
 mipsel_qemu	uclibc		archive
 mipsel_qemu	eglibc		archive
 mipsel_qemu	glibc		archive
-x86_qemu	uclibc		archive
-x86_qemu	eglibc		archive
-x86_qemu	glibc		archive
-x86_64_qemu	uclibc		archive
-x86_64_qemu	eglibc		archive
-x86_64_qemu	glibc		archive
 lemote		eglibc		archive
 lemote		glibc		archive
 x86		uclibc		archive
 x86		eglibc		archive
 x86		glibc		archive
+x86_64		uclibc		archive
+x86_64		eglibc		archive
+x86_64		glibc		archive

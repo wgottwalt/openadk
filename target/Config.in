@@ -206,10 +206,7 @@ menu "Target system"
 
 choice
 prompt "Embedded Device or Emulator"
-default ADK_CHOOSE_TARGET
-
-config ADK_CHOOSE_TARGET
-	bool "choose a target"
+default ADK_LINUX_NATIVE
 
 config ADK_LINUX_NATIVE
 	bool "Native platform"
