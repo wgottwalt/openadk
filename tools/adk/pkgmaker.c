@@ -629,10 +629,12 @@ int main() {
 
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
 
-				if (pkg_dflt != NULL)
+				if (pkg_dflt != NULL) {
 					fprintf(cfg, "\tdefault %s\n", pkg_dflt);
-				else
+					pkg_dflt = NULL;
+				} else {
 					fprintf(cfg, "\tdefault n\n");
+				}
 
 				fprintf(cfg, "\thelp\n");
 				fprintf(cfg, "\t  %s\n\n", pkg_descr);

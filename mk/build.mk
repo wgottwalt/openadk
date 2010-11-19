@@ -331,22 +331,22 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(HW)" ];then \
+		grep -h "^config" target/Config.in.* \
+			|grep -i "$(HW)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
 ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
 endif
 ifneq (,$(filter %_toolchain,${TARGET}))
 	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/.defconfig
 endif
-ifneq (,$(filter rescue%,${TARGET}))
-	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/.defconfig
-endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
 endif
 ifneq (,$(filter alix%,${TARGET}))
-	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/.defconfig
-endif
-ifneq (,$(filter wrap%,${TARGET}))
 	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/.defconfig
 endif
 	@if [ ! -z "$(TARGET)" ];then \
@@ -408,22 +408,22 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
+	@if [ ! -z "$(HW)" ];then \
+		grep -h "^config" target/Config.in.* \
+			|grep -i "$(HW)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/all.config; \
+	fi
 ifneq (,$(filter %_qemu,${TARGET}))
 	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/all.config
 endif
 ifneq (,$(filter %_toolchain,${TARGET}))
 	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/all.config
 endif
-ifneq (,$(filter %_rescue,${TARGET}))
-	@echo ADK_LINUX_RESCUE=y >> $(TOPDIR)/all.config
-endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/all.config
 endif
 ifneq (,$(filter alix%,${TARGET}))
-	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/all.config
-endif
-ifneq (,$(filter wrap%,${TARGET}))
 	@echo ADK_LINUX_ALIX=y >> $(TOPDIR)/all.config
 endif
 
