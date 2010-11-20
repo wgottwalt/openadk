@@ -38,7 +38,7 @@ ifeq ($(ADK_HARDWARE_QEMU_X86),y)
 endif
 endif
 ifeq ($(FS),usb)
-imageinstall: tools-compile $(BIN_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to USB use scripts/install.sh"
 endif
