@@ -73,22 +73,28 @@ cfgfs=1
 quiet=0
 serial=0
 speed=115200
+panicreboot=10
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-c cfgfssize] [±qt] [-s serialspeed] /dev/sdb image
-Defaults: -c 1 -s 115200
+Syntax: $me [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+    [±t] /dev/sdb image
+Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hqs:t" ch; do
+while getopts "c:hp:qs:t" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
 			exit 1
 		fi ;;
 	(h)	usage 0 ;;
+	(p)	if (( (panicreboot = OPTARG) < 0 || panicreboot > 300 )); then
+			print -u2 "$me: -p $OPTARG out of bounds"
+			exit 1
+		fi ;;
 	(q)	quiet=1 ;;
 	(+q)	quiet=0 ;;
 	(s)	if [[ $OPTARG != @(96|192|384|576|1152)00 ]]; then
@@ -281,7 +287,8 @@ dd if="$T/firsttrack" of="$tgt"
 q=
 (( quiet )) && q=-q
 mke2fs $q "$part"
-#partuuid=$(tune2fs -l /dev/sd0i | sed -n '/^Filesystem UUID:[	 ]*/s///p')
+partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
+tune2fs -c 0 -i 0 "$part"
 
 (( quiet )) || print Extracting installation archive...
 mount_ext2fs "$part" "$T"
@@ -311,8 +318,9 @@ mkdir -p boot/grub
 	fi
 	print
 	print 'menuentry "GNU/Linux (OpenADK)" {'
-#	print "\tlinux /boot/vmlinuz-adk root=UUID=$partuuid $consargs panic=10"
-	print "\tlinux /boot/vmlinuz-adk $consargs panic=10"
+	linuxargs="root=UUID=$partuuid $consargs"
+	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
+	print "\tlinux /boot/vmlinuz-adk $linuxargs"
 	print '}'
 ) >boot/grub/grub.cfg
 set -A grubfiles

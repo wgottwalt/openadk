@@ -770,14 +770,6 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 
 endchoice
 
-config ADK_TARGET_ROOTFS_USB_DEVICE
-	prompt "Target device node for USB stick"
-	string
-	depends on ADK_TARGET_ROOTFS_USB
-	default "/dev/sdb1"
-	help
-	  Target device node for the USB stick.
-
 choice
 prompt "Compression method for initramfs and kernel"
 	depends on ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
