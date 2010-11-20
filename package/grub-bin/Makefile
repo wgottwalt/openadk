@@ -7,8 +7,8 @@ include ${TOPDIR}/rules.mk
 # cross-compiling is difficult, so provide a binary package
 PKG_NAME:=		grub-bin
 PKG_VERSION:=		1.98
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		958f9fd415a0bd52fe115176afbf19d9
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		50dbe739776f904c318be05faf1d7ce5
 PKG_DESCR:=		GRUB2 bootloader (binary package)
 PKG_SECTION:=		base
 PKG_SITES:=		http://openadk.org/distfiles/
