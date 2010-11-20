@@ -15,7 +15,10 @@ ${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/bin/tools
 ${TOPDIR}/bin/tools/pt: $(TOPDIR)/bin/tools
 	$(HOSTCC) -o $(TOPDIR)/bin/tools/pt pt.c
 
+${TOPDIR}/bin/tools/dkgetsz: ${TOPDIR}/bin/tools
+	${HOSTCC} -O2 -Wall -o $@ dkgetsz.c
+
 install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild \
-	$(TOPDIR)/bin/tools/pt
+	$(TOPDIR)/bin/tools/pt ${TOPDIR}/bin/tools/dkgetsz
 
 include $(TOPDIR)/mk/tools.mk
