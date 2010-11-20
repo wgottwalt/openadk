@@ -174,7 +174,7 @@ case $ostype {
 }
 
 mount | while read dev rest; do
-	[[ $dev = $match ]] || continue
+	eval [[ \$dev = $match ]] || continue
 	print -u2 "Block device $tgt is in use, please umount first."
 	exit 1
 done
