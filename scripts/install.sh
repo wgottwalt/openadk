@@ -173,7 +173,8 @@ case $ostype {
 	;;
 }
 
-mount | while read dev rest; do
+mount |&
+while read -p dev rest; do
 	eval [[ \$dev = $match ]] || continue
 	print -u2 "Block device $tgt is in use, please umount first."
 	exit 1
