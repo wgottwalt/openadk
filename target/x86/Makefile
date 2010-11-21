@@ -27,8 +27,6 @@ createinitcrypt:
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_HARDWARE_QEMU_X86),y)
 	@echo "Use following command to create a QEMU Image:"
