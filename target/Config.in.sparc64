@@ -1,0 +1,18 @@
+choice
+depends on ADK_LINUX_SPARC64
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_SPARC64
+	bool "Generic sparc64 system"
+	select ADK_CPU_SPARC_V9
+	help
+	  Generic sparc64 system.
+
+config ADK_HARDWARE_GENERIC_SPARC64_TOOLCHAIN
+	bool "sparc64 toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  sparc64 toolchain.
+
+endchoice
+
