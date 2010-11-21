@@ -294,15 +294,37 @@ print -n "$ostr" | \
 dd if="$T/firsttrack" of="$tgt"
 
 if [[ $basedev = /dev/svnd+([0-9]) ]]; then
-	print
-	fdisk -c $cyls -h $heads -s $secs ${basedev#/dev/}
-	print
-	print "This is a BSD vnd(4) device. You MUST now use"
-	print "\t\$ sudo disklabel -E svnd0"
-	print "to create a valid BSD disklabel on it. Make"
-	print "two slices i for the ext2fs partition and j"
-	print "for the cfgfs partition. Then press Enter."
-	read dummy
+	(( quiet )) || print "Creating BSD disklabel on target device..."
+	# c: whole device (must be so)
+	# i: ext2fs (matching first partition)
+	# j: cfgfs (matching second partition)
+	# p: MBR and GRUB2 area (by tradition)
+	cat >"$T/bsdlabel" <<-EOF
+		type: vnd
+		disk: vnd device
+		label: OpenADK
+		flags:
+		bytes/sector: 512
+		sectors/track: $secs
+		tracks/cylinder: $heads
+		sectors/cylinder: $((heads * secs))
+		cylinders: $cyls
+		total sectors: $((cyls * heads * secs))
+		rpm: 3600
+		interleave: 1
+		trackskew: 0
+		cylinderskew: 0
+		headswitch: 0
+		track-to-track seek: 0
+		drivedata: 0
+
+		16 partitions:
+		c: $((cyls * heads * secs)) 0 unused
+		i: $(((cyls - cfgfs) * heads * secs - partofs)) $partofs ext2fs
+		j: $((cfgfs * heads * secs)) $(((cyls - cfgfs) * heads * secs)) unknown
+		p: $partofs 0 unknown
+EOF
+	disklabel -R ${basedev#/dev/} "$T/bsdlabel"
 fi
 
 (( quiet )) || print "Creating ext2fs on ${part}..."
@@ -354,6 +376,8 @@ cp "${grubfiles[@]}" boot/grub/
 (( quiet )) || print Finishing up...
 cd "$TOPDIR"
 umount "$T"
+
+(( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"
 
 rm -rf "$T"
 exit 0
