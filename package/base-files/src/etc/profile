@@ -1,5 +1,5 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-export TERM=vt220
+export TERM=linux
 if [[ $(id -u) = 0 ]]; then
 	export PS1='`whoami`@`hostname`:`pwd` # '
 else
