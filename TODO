@@ -1,10 +1,10 @@
+- keyboard layout support
 - relocatable gcc
 - adkinstall with NTP and hwclock support
 - newtarget simplify and make target like newpackage
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, no internet access
 - vim tabbing for split command - terminal issue
-- fix install.sh for MacOS X host, use pbr+core.img from grub2-bin
 - check alsa on foxg20 target
 - fix ARM OABI support
 - fix watchdog for alix1c (mfgpt timers problem)
