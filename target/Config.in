@@ -83,6 +83,9 @@ config ADK_ppc
 config ADK_sparc
 	tristate
 
+config ADK_sparc64
+	tristate
+
 config ADK_arm_qemu
 	tristate
 
@@ -147,6 +150,7 @@ config ADK_TARGET
 	default "toolchain-mipsel"  if ADK_mipsel_toolchain
 	default "ppc"  if ADK_ppc
 	default "sparc"  if ADK_sparc
+	default "sparc64"  if ADK_sparc64
 	default "qemu-arm"  if ADK_arm_qemu
 	default "qemu-cris"  if ADK_cris_qemu
 	default "qemu-mips"  if ADK_mips_qemu
@@ -169,6 +173,9 @@ config ADK_HARDWARE_QEMU
 config ADK_CPU_SPARC_V8
 	boolean
 
+config ADK_CPU_SPARC_V9
+	boolean
+
 config ADK_CPU_I686
 	boolean
 
@@ -184,6 +191,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
+	default "-mcpu=v9" if ADK_CPU_SPARC_V9
 
 # c library
 config ADK_uclibc
@@ -354,25 +362,31 @@ config ADK_LINUX_PPC
 	bool "ppc system"
 	select ADK_ppc
 	help
-	  Support for a ppc system.
+	  Support for powerpc systems.
 
 config ADK_LINUX_SPARC
 	bool "sparc system"
 	select ADK_sparc
 	help
-	  Support for a sparc system.
+	  Support for sparc systems.
+
+config ADK_LINUX_SPARC64
+	bool "sparc64 system"
+	select ADK_sparc64
+	help
+	  Support for sparc64 systems.
 
 config ADK_LINUX_X86
 	bool "x86 system"
 	select ADK_x86
 	help
-	  Support for a x86 system.
+	  Support for x86 systems.
 
 config ADK_LINUX_X86_64
 	bool "x86_64 system"
 	select ADK_x86_64
 	help
-	  Support for a x86_64/amd64 system.
+	  Support for x86_64/amd64 systems.
 
 endchoice
 
@@ -486,8 +500,10 @@ config ADK_LINUX_X86_64_QEMU
 endchoice
 
 source "target/Config.in.alix"
-source "target/Config.in.sparc"
 source "target/Config.in.ppc"
+source "target/Config.in.ppc64"
+source "target/Config.in.sparc"
+source "target/Config.in.sparc64"
 source "target/Config.in.x86"
 source "target/Config.in.x86_64"
 
@@ -563,7 +579,8 @@ depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
 	# broken, because of 16kB pagesize
-	depends on !ADK_LINUX_MIPS64_LEMOTE
+	depends on !ADK_LINUX_MIPS64_LEMOTE && \
+		   !ADK_LINUX_SPARC64
 	select ADK_uclibc
 	help
  	 http://uclibc.org
@@ -574,6 +591,7 @@ config ADK_TARGET_LIB_EGLIBC
 	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
+		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_ARM_FOXG20 || \
@@ -592,6 +610,7 @@ config ADK_TARGET_LIB_GLIBC
 	depends on ADK_LINUX_QEMU || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
+		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_ARM_FOXG20 || \
