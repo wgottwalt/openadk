@@ -224,18 +224,28 @@ if (( coreimgsz > 65024 )); then
 	exit 1
 fi
 (( coreendsec = (coreimgsz + 511) / 512 ))
+if [[ $basedev = /dev/svnd+([0-9]) ]]; then
+	# BSD svnd0 mode: protect sector #1
+	corestartsec=2
+	(( ++coreendsec ))
+	corepatchofs=$((0x614))
+else
+	corestartsec=1
+	corepatchofs=$((0x414))
+fi
 # partition offset: at least coreendsec+1 but aligned on a multiple of secs
 (( partofs = ((coreendsec / secs) + 1) * secs ))
 
 (( quiet )) || print Preparing MBR and GRUB2...
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
-echo 1 $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
+echo $corestartsec $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
     -A -g $((cyls-cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
     dd of="$T/firsttrack" conv=notrunc 2>/dev/null
-dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=1 2>/dev/null
+dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=$corestartsec \
+    2>/dev/null
 # set partition where it can find /boot/grub
 print -n '\0\0\0\0' | \
-    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x414)) 2>/dev/null
+    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$corepatchofs 2>/dev/null
 
 # create cfgfs partition (mostly taken from bootgrub.mksh)
 set -A thecode
@@ -282,6 +292,18 @@ print -n "$ostr" | \
 
 (( quiet )) || print Writing MBR and GRUB2 to target device...
 dd if="$T/firsttrack" of="$tgt"
+
+if [[ $basedev = /dev/svnd+([0-9]) ]]; then
+	print
+	fdisk -c $cyls -h $heads -s $secs ${basedev#/dev/}
+	print
+	print "This is a BSD vnd(4) device. You MUST now use"
+	print "\t\$ sudo disklabel -E svnd0"
+	print "to create a valid BSD disklabel on it. Make"
+	print "two slices i for the ext2fs partition and j"
+	print "for the cfgfs partition. Then press Enter."
+	read dummy
+fi
 
 (( quiet )) || print "Creating ext2fs on ${part}..."
 q=
