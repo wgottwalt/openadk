@@ -127,6 +127,40 @@ int main() {
 						if (value != NULL)
 							pkg_name = strdup(value);
 					}
+					string = strstr(pbuf, "PKG_SUBPKGS:=");
+					if (string != NULL) {
+						string[strlen(string)-1] = '\0';
+						key = strtok(string, ":=");
+						value = strtok(NULL, "=\t");
+						token = strtok(value, " ");
+						while (token != NULL) {
+							keystr = malloc(256);
+							memset(keystr, 0, 256);
+							strncat(keystr, "ADK_PACKAGE_", 12);
+							strncat(keystr, token, strlen(token));
+							strmap_put(pkgmap, keystr, pkgdirp->d_name);
+							token = strtok(NULL, " ");
+							free(keystr);
+							keystr = NULL;
+						}
+					}
+					string = strstr(pbuf, "PKG_SUBPKGS+=");
+					if (string != NULL) {
+						string[strlen(string)-1] = '\0';
+						key = strtok(string, "+=");
+						value = strtok(NULL, "=\t");
+						token = strtok(value, " ");
+						while (token != NULL) {
+							keystr = malloc(256);
+							memset(keystr, 0, 256);
+							strncat(keystr, "ADK_PACKAGE_", 12);
+							strncat(keystr, token, strlen(token));
+							strmap_put(pkgmap, keystr, pkgdirp->d_name);
+							token = strtok(NULL, " ");
+							free(keystr);
+							keystr = NULL;
+						}
+					}
 					string = strstr(pbuf, "PKG_FLAVOURS:=");
 					if (string != NULL) {
 						string[strlen(string)-1] = '\0';
