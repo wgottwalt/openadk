@@ -26,6 +26,7 @@ endif
 
 # Strip off the annoying quoting
 ADK_TARGET:=		$(strip $(subst ",, $(ADK_TARGET)))
+ADK_HW:=		$(strip $(subst ",, $(ADK_HW)))
 ADK_LIBC:=		$(strip $(subst ",, $(ADK_LIBC)))
 ADK_HOST:=		$(strip $(subst ",, $(ADK_HOST)))
 ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))

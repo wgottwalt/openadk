@@ -137,6 +137,10 @@ config ADK_x86_64
 config ADK_x86
 	tristate
 
+config ADK_HW
+	string
+	default "ibmx40" if ADK_ibmx40
+
 config ADK_TARGET
 	string
 	default "alix"  if ADK_alix
