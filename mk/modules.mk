@@ -54,6 +54,10 @@ $(eval $(call KMOD_template,SKY2,sky2,\
 	$(MODULES_DIR)/kernel/drivers/net/sky2 \
 ,20))
 
+$(eval $(call KMOD_template,R8169,r8169,\
+	$(MODULES_DIR)/kernel/drivers/net/r8169 \
+,20))
+
 # 
 # Wireless network devices
 #

@@ -5,6 +5,8 @@ prompt "Hardware model"
 config ADK_HARDWARE_GENERIC_X86
 	bool "Generic x86 system (i686)"
 	select ADK_CPU_I686
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_VGA
 	help
 	  Generic x86 system.
 

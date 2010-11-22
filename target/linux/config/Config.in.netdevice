@@ -99,6 +99,15 @@ config ADK_KPACKAGE_KMOD_SKY2
 	default n
 	help
 
+config ADK_KPACKAGE_KMOD_R8169
+	prompt "kmod-net-r8169................. RTL8169 driver"
+	tristate
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NETDEV_1000
+	default n
+	help
+
 endmenu
 
 config ADK_KERNEL_WIRELESS

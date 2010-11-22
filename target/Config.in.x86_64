@@ -4,6 +4,8 @@ prompt "Hardware model"
 
 config ADK_HARDWARE_GENERIC_X86_64
 	bool "Generic x86_64/amd64 system"
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_PCI
 	help
 	  Generic x86_64/amd64 system.
 
