@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
-PKG_VERSION:=		1.0.7
-PKG_RELEASE:=		3
+PKG_VERSION:=		1.0.8
+PKG_RELEASE:=		1
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
-PKG_URL:=		http://www.openadk.org/
+PKG_URL:=		http://openadk.org/
 
-PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 foxg20 routerboard
+PKG_TARGET_DEPENDS:=	alix wrap foxboard ag241 foxg20 routerboard x86 x86_64
 
 PKG_CFLINE_CFGFS:=	select BUSYBOX_COMM@
 PKG_CFLINE_CFGFS+=	select BUSYBOX_MD5SUM@
