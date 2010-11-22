@@ -1,7 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-_UNLIMIT=	ulimit -dS $(shell ulimit -dH >/dev/null 2>/dev/null ) >/dev/null 2>/dev/null;
+_UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
+		test -n "$$__limit" && ulimit -dS $$__limit;
 
 all: .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all

@@ -73,22 +73,28 @@ cfgfs=1
 quiet=0
 serial=0
 speed=115200
+panicreboot=10
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-c cfgfssize] [±qt] [-s serialspeed] /dev/sdb image
-Defaults: -c 1 -s 115200
+Syntax: $me [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+    [±t] /dev/sdb image
+Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hqs:t" ch; do
+while getopts "c:hp:qs:t" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
 			exit 1
 		fi ;;
 	(h)	usage 0 ;;
+	(p)	if (( (panicreboot = OPTARG) < 0 || panicreboot > 300 )); then
+			print -u2 "$me: -p $OPTARG out of bounds"
+			exit 1
+		fi ;;
 	(q)	quiet=1 ;;
 	(+q)	quiet=0 ;;
 	(s)	if [[ $OPTARG != @(96|192|384|576|1152)00 ]]; then
@@ -218,18 +224,28 @@ if (( coreimgsz > 65024 )); then
 	exit 1
 fi
 (( coreendsec = (coreimgsz + 511) / 512 ))
+if [[ $basedev = /dev/svnd+([0-9]) ]]; then
+	# BSD svnd0 mode: protect sector #1
+	corestartsec=2
+	(( ++coreendsec ))
+	corepatchofs=$((0x614))
+else
+	corestartsec=1
+	corepatchofs=$((0x414))
+fi
 # partition offset: at least coreendsec+1 but aligned on a multiple of secs
 (( partofs = ((coreendsec / secs) + 1) * secs ))
 
 (( quiet )) || print Preparing MBR and GRUB2...
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
-echo 1 $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
+echo $corestartsec $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
     -A -g $((cyls-cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
     dd of="$T/firsttrack" conv=notrunc 2>/dev/null
-dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=1 2>/dev/null
+dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=$corestartsec \
+    2>/dev/null
 # set partition where it can find /boot/grub
 print -n '\0\0\0\0' | \
-    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x414)) 2>/dev/null
+    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$corepatchofs 2>/dev/null
 
 # create cfgfs partition (mostly taken from bootgrub.mksh)
 set -A thecode
@@ -277,11 +293,46 @@ print -n "$ostr" | \
 (( quiet )) || print Writing MBR and GRUB2 to target device...
 dd if="$T/firsttrack" of="$tgt"
 
+if [[ $basedev = /dev/svnd+([0-9]) ]]; then
+	(( quiet )) || print "Creating BSD disklabel on target device..."
+	# c: whole device (must be so)
+	# i: ext2fs (matching first partition)
+	# j: cfgfs (matching second partition)
+	# p: MBR and GRUB2 area (by tradition)
+	cat >"$T/bsdlabel" <<-EOF
+		type: vnd
+		disk: vnd device
+		label: OpenADK
+		flags:
+		bytes/sector: 512
+		sectors/track: $secs
+		tracks/cylinder: $heads
+		sectors/cylinder: $((heads * secs))
+		cylinders: $cyls
+		total sectors: $((cyls * heads * secs))
+		rpm: 3600
+		interleave: 1
+		trackskew: 0
+		cylinderskew: 0
+		headswitch: 0
+		track-to-track seek: 0
+		drivedata: 0
+
+		16 partitions:
+		c: $((cyls * heads * secs)) 0 unused
+		i: $(((cyls - cfgfs) * heads * secs - partofs)) $partofs ext2fs
+		j: $((cfgfs * heads * secs)) $(((cyls - cfgfs) * heads * secs)) unknown
+		p: $partofs 0 unknown
+EOF
+	disklabel -R ${basedev#/dev/} "$T/bsdlabel"
+fi
+
 (( quiet )) || print "Creating ext2fs on ${part}..."
 q=
 (( quiet )) && q=-q
 mke2fs $q "$part"
-#partuuid=$(tune2fs -l /dev/sd0i | sed -n '/^Filesystem UUID:[	 ]*/s///p')
+partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
+tune2fs -c 0 -i 0 "$part"
 
 (( quiet )) || print Extracting installation archive...
 mount_ext2fs "$part" "$T"
@@ -311,8 +362,9 @@ mkdir -p boot/grub
 	fi
 	print
 	print 'menuentry "GNU/Linux (OpenADK)" {'
-#	print "\tlinux /boot/vmlinuz-adk root=UUID=$partuuid $consargs panic=10"
-	print "\tlinux /boot/vmlinuz-adk $consargs panic=10"
+	linuxargs="root=UUID=$partuuid $consargs"
+	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
+	print "\tlinux /boot/vmlinuz-adk $linuxargs"
 	print '}'
 ) >boot/grub/grub.cfg
 set -A grubfiles
@@ -324,6 +376,8 @@ cp "${grubfiles[@]}" boot/grub/
 (( quiet )) || print Finishing up...
 cd "$TOPDIR"
 umount "$T"
+
+(( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"
 
 rm -rf "$T"
 exit 0
