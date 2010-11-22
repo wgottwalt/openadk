@@ -210,7 +210,7 @@ config ADK_RUNTIME_TIMEZONE
 
 config ADK_RUNTIME_KBD_LAYOUT
 	string "keyboard layout for the embedded system"
-	default "en"
+	default ""
 	depends on ADK_TARGET_WITH_INPUT
 	help
 	  Predefine the keyboard layout for the embedded system.

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bkeymaps
 PKG_VERSION:=		1.13
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a68058ab4a81cf9a8dcbaaa7a5df5b11
 PKG_DESCR:=		binary keymaps for busybox loadkmap
 PKG_SECTION:=		utils
@@ -26,8 +26,9 @@ KBD_LAYOUT:=$(strip $(subst ",, $(ADK_RUNTIME_KBD_LAYOUT)))
 KBD_DIR:=$(shell echo $(KBD_LAYOUT)|cut -c 1-2)
 
 do-install:
-	$(INSTALL_DIR) $(IDIR_BKEYMAPS)/usr/share/keymaps/
+	test -z $(ADK_RUNTIME_KBD_LAYOUT) || \
+	($(INSTALL_DIR) $(IDIR_BKEYMAPS)/usr/share/keymaps/ && \
 	$(INSTALL_DATA) $(WRKBUILD)/bkeymaps/$(KBD_DIR)/$(KBD_LAYOUT).bmap \
-		$(IDIR_BKEYMAPS)/usr/share/keymaps/keymap.bmap
+		$(IDIR_BKEYMAPS)/usr/share/keymaps/keymap.bmap );
 
 include ${TOPDIR}/mk/pkg-bottom.mk
