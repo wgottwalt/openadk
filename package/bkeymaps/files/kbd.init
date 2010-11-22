@@ -1,0 +1,26 @@
+#!/bin/sh
+#PKG bkeymaps
+#INIT 6
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	[[ $kbd = NO ]] && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /usr/share/keymaps/keymap.bmap ] || exit
+	loadkmap < /usr/share/keymaps/keymap.bmap
+	;;
+stop)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?
