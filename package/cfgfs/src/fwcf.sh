@@ -42,7 +42,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem Utility (cfgfs), Version 1.07'
+what='Configuration Filesystem Utility (cfgfs), Version 1.08'
 
 who=$(id -u)
 if [ $who -ne 0 ]; then
@@ -124,7 +124,8 @@ if [ -x /sbin/mtd ];then
 fi
 
 # find backend device, first try to find partition with ID 88
-part=$(fdisk -l|awk '$5 == 88 { print $1 }')
+rootdisk=$(readlink /dev/root)
+part=$(fdisk -l /dev/${rootdisk%1}|awk '$5 == 88 { print $1 }')
 if [ -z $part ]; then
 	# otherwise search for MTD device with name cfgfs
 	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro

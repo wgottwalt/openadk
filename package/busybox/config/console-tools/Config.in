@@ -39,6 +39,7 @@ config BUSYBOX_DUMPKMAP
 
 config BUSYBOX_KBD_MODE
 	bool "kbd_mode"
+	default y if ADK_TARGET_WITH_INPUT
 	default n
 	help
 	  This program reports and sets keyboard mode.
@@ -51,6 +52,7 @@ config BUSYBOX_LOADFONT
 
 config BUSYBOX_LOADKMAP
 	bool "loadkmap"
+	default y if ADK_TARGET_WITH_INPUT
 	default n
 	help
 	  This program loads a keyboard translation table from
