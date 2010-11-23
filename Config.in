@@ -215,6 +215,27 @@ config ADK_RUNTIME_KBD_LAYOUT
 	help
 	  Predefine the keyboard layout for the embedded system.
 
+choice
+prompt "Console output on embedded system"
+default ADK_RUNTIME_CONSOLE_VGA if ADK_HARDWARE_IBMX40
+default ADK_RUNTIME_CONSOLE_SERIAL
+
+config ADK_RUNTIME_CONSOLE_VGA
+	bool "console output on VGA"
+	help
+          Start getty on VGA console. (tty1-tty6)
+
+config ADK_RUNTIME_CONSOLE_SERIAL
+	bool "console output on serial"
+	help
+	  Start getty on serial console. (ttyS0)
+
+config ADK_RUNTIME_CONSOLE_BOTH
+	bool "console output on console and serial"
+	help
+	  Start getty on VGA console and serial device.
+
+endchoice
 endmenu
 
 menu "Package selection"

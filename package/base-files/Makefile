@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		32
+PKG_RELEASE:=		33
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -62,6 +62,14 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
+	test -z $(ADK_RUNTIME_CONSOLE_VGA) || \
+	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_CONSOLE_SERIAL) || \
+	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
+	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
+	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > \
 	    $(IDIR_BASE_FILES)/etc/hostname
