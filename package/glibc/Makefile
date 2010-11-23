@@ -28,6 +28,18 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--enable-kernel="2.6.0" \
 			--enable-add-ons
 
+GLIBC_ENV:=             PATH='${TARGET_PATH}' \
+                        BUILD_CC=${HOSTCC} \
+                        CFLAGS="$(TARGET_CFLAGS)" \
+                        CC=${REAL_GNU_TARGET_NAME}-gcc \
+                        CXX=${REAL_GNU_TARGET_NAME}-g++ \
+                        AR=${REAL_GNU_TARGET_NAME}-ar \
+                        RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+                        libc_cv_forced_unwind=yes \
+                        libc_cv_c_cleanup=yes \
+                        libc_cv_gnu99_inline=yes \
+                        libc_cv_slibdir="/lib"
+
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -64,18 +76,18 @@ glibc-dev-install:
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \
-		PATH='${TARGET_PATH}' \
+		$(GLIBC_ENV) \
 		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/configure \
-		--prefix=/usr \
-		--with-sysroot=$(IDIR_GLIBC_DEV) \
-		${GLIBC_CONFOPTS} \
+			--prefix=$(IDIR_GLIBC_DEV)/usr \
+			--with-sysroot=$(IDIR_GLIBC_DEV) \
+			${GLIBC_CONFOPTS} \
 	);
-	$(MAKE) -C $(WRKBUILD) \
-		cross-compiling=yes \
-		install_root=$(IDIR_GLIBC_DEV) \
-		install-headers
+	$(GLIBC_ENV) $(MAKE) -C $(WRKBUILD) cross-compiling=yes install-headers
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h
+	# WORKAROUND: bits/syscall.h is only installed via install-others target
+	$(CP) $(STAGING_DIR)/usr/include/bits/syscall.h \
+		$(IDIR_GLIBC_DEV)/usr/include/bits
 	@find $(IDIR_GLIBC_DEV) -name .install -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
