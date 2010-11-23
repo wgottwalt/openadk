@@ -4,7 +4,6 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-
 include ${TOPDIR}/mk/buildhlp.mk
 
 # glibc does not compile with Os
@@ -12,32 +11,6 @@ TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=-O2
 endif
-
-GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
-			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
-			--disable-nls \
-			--disable-sanity-checks \
-			--without-cvs \
-			--disable-profile \
-			--disable-debug \
-			--enable-kernel="2.6.0" \
-			--without-gd \
-			--with-__thread \
-			--with-tls \
-			--enable-add-ons
-
-GLIBC_ENV:=		PATH='${TARGET_PATH}' \
-			BUILD_CC=${HOSTCC} \
-			CFLAGS="$(TARGET_CFLAGS)" \
-			CC=${REAL_GNU_TARGET_NAME}-gcc \
-			CXX=${REAL_GNU_TARGET_NAME}-g++ \
-			AR=${REAL_GNU_TARGET_NAME}-ar \
-			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
-			libc_cv_forced_unwind=yes \
-			libc_cv_c_cleanup=yes \
-			libc_cv_gnu99_inline=yes \
-			libc_cv_slibdir="/lib"
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp

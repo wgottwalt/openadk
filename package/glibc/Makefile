@@ -13,33 +13,6 @@ NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
-			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
-			--disable-nls \
-			--disable-sanity-checks \
-			--disable-nls \
-			--without-cvs \
-			--disable-profile \
-			--disable-debug \
-			--without-gd \
-			--with-__thread \
-			--with-tls \
-			--enable-kernel="2.6.0" \
-			--enable-add-ons
-
-GLIBC_ENV:=             PATH='${TARGET_PATH}' \
-                        BUILD_CC=${HOSTCC} \
-                        CFLAGS="$(TARGET_CFLAGS)" \
-                        CC=${REAL_GNU_TARGET_NAME}-gcc \
-                        CXX=${REAL_GNU_TARGET_NAME}-g++ \
-                        AR=${REAL_GNU_TARGET_NAME}-ar \
-                        RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
-                        libc_cv_forced_unwind=yes \
-                        libc_cv_c_cleanup=yes \
-                        libc_cv_gnu99_inline=yes \
-                        libc_cv_slibdir="/lib"
-
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -59,7 +32,7 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 		$(IDIR_GLIBC)/etc/localtime
 	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
 	$(CP) $(STAGING_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
-	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
@@ -70,6 +43,9 @@ glibc-dev-install:
 	-cp ./files/libc.so.$(ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
+	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+		cd $(IDIR_GLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
