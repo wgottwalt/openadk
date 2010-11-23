@@ -1,0 +1,33 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		open-iscsi
+PKG_VERSION:=		2.0
+PKG_EXTRAVER:=		871
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0c403e8c9ad41607571ba0e6e8ff196e
+PKG_DESCR:=		iSCSI utilities
+PKG_SECTION:=		fs
+PKG_URL:=		http://www.open-iscsi.org/
+PKG_SITES:=		http://www.open-iscsi.org/bits/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-$(PKG_EXTRAVER).tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}
+
+include $(TOPDIR)/mk/package.mk
+
+ALL_TARGET:=		user
+INSTALL_TARGET:=	install_user
+
+$(eval $(call PKG_template,OPEN_ISCSI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=		manual
+
+do-install:
+	$(INSTALL_DIR) $(IDIR_OPEN_ISCSI)/sbin $(IDIR_OPEN_ISCSI)/etc/iscsi
+	$(INSTALL_BIN) $(WRKINST)/sbin/* $(IDIR_OPEN_ISCSI)/sbin
+	$(CP) $(WRKINST)/etc/iscsi/* $(IDIR_OPEN_ISCSI)/etc/iscsi
+
+include ${TOPDIR}/mk/pkg-bottom.mk

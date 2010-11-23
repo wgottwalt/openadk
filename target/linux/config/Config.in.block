@@ -30,6 +30,9 @@ config ADK_KERNEL_SCSI
 config ADK_KERNEL_BLK_DEV_SD
 	boolean
 
+config ADK_KERNEL_ISCSI_TCP
+	boolean
+
 config ADK_KERNEL_DM_CRYPT
 	boolean
 

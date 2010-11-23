@@ -9,6 +9,14 @@ config ADK_HARDWARE_GENERIC_X86_64
 	help
 	  Generic x86_64/amd64 system.
 
+config ADK_HARDWARE_OVH_RPS
+	bool "RPS iSCSI server from OVH"
+	select ADK_ovh_rps
+	select ADK_KERNEL_MATOM
+	select ADK_TARGET_WITH_PCI
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ISCSI_TCP
+
 config ADK_HARDWARE_SHUTTLE
 	bool "Shuttle PC"
 	select ADK_shuttle
@@ -21,9 +29,6 @@ config ADK_HARDWARE_SHUTTLE
 	select ADK_TARGET_WITH_PP
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_BLK_DEV_MD
