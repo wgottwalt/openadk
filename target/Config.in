@@ -875,15 +875,8 @@ config ADK_COMPRESSION_TOOL
 
 choice
 prompt "Root filesystem type"
-	depends on ADK_TARGET_ROOTFS_ARCHIVE
-	default ADK_TARGET_ROOT_EXT2_FS
-
-config ADK_TARGET_ROOT_XFS
-	boolean
-	prompt "XFS filesystem"
-	select ADK_KERNEL_XFS_FS
-	help
-	  Compile XFS filesystem into kernel and use it as root filesystem.
+depends on ADK_TARGET_ROOTFS_ARCHIVE
+default ADK_TARGET_ROOT_EXT2_FS
 
 config ADK_TARGET_ROOT_EXT2
 	boolean
@@ -905,6 +898,14 @@ config ADK_TARGET_ROOT_EXT4
 	select ADK_KERNEL_EXT4_FS
 	help
 	  Compile EXT4 filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_XFS
+	boolean
+	prompt "XFS filesystem"
+	select ADK_KERNEL_XFS_FS
+	help
+	  Compile XFS filesystem into kernel and use it as root filesystem.
+
 
 endchoice
 
