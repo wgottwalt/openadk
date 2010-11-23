@@ -163,7 +163,7 @@ if test $1 = setup; then
 	mount --bind /etc /tmp/.cfgfs/root
 	mkdir /tmp/.cfgfs/temp
 	mount -t tmpfs none /tmp/.cfgfs/temp
-	(cd /tmp/.cfgfs/root; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf -)
+	(cd /tmp/.cfgfs/root; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf - 2>/dev/null)
 	unclean=0
 	if [[ $1 = -N ]]; then
 		unclean=2
@@ -247,7 +247,7 @@ if test $1 = commit; then
 		[[ $1 = -f ]] || exit 7
 	fi
 	mount -t tmpfs none /tmp/.cfgfs/temp
-	(cd /etc; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf -)
+	(cd /etc; tar cf - .) | (cd /tmp/.cfgfs/temp; tar xpf - 2>/dev/null)
 	cd /tmp/.cfgfs/temp
 	find . -type f | grep -v -e '^./.cfgfs' -e '^./.rnd$' | sort | \
 	    xargs md5sum | sed 's!  ./! !' | \
