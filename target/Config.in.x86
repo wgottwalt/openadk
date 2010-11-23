@@ -14,6 +14,7 @@ config ADK_HARDWARE_IBMX40
 	bool "IBM X40 laptop"
 	select ADK_ibmx40
 	select ADK_CPU_PENTIUM_M
+	select ADK_KERNEL_MPENTIUMM
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_VGA

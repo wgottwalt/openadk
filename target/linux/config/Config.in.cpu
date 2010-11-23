@@ -1,0 +1,5 @@
+config ADK_KERNEL_MATOM
+	boolean
+
+config ADK_KERNEL_MPENTIUMM
+	boolean
