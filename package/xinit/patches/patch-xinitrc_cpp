@@ -1,0 +1,11 @@
+--- xinit-1.2.1.orig/xinitrc.cpp	2009-11-23 23:49:24.000000000 +0100
++++ xinit-1.2.1/xinitrc.cpp	2010-11-24 21:55:37.540685561 +0100
+@@ -95,8 +95,4 @@ fi
+ 
+ #endif
+ 
+-TWM &
+-XCLOCK -geometry 50x50-1+1 &
+-XTERM -geometry 80x50+494+51 &
+-XTERM -geometry 80x20+494-0 &
+ exec XTERM -geometry 80x66+0+0 -name login

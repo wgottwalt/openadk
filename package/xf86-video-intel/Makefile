@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-intel
-PKG_VERSION:=		2.9.1
+PKG_VERSION:=		2.13.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b1926dc68cc10209fc2200729fb6162b
+PKG_MD5SUM:=		df7e3644a34e97ead09f083ab48d4457
 PKG_DESCR:=		X11 driver for Intel VGA chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
-PKG_SITES:=		http://www.x.org/releases/X11R7.5/src/driver/
+PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/driver/
 
 include $(TOPDIR)/mk/package.mk
 
@@ -21,7 +21,7 @@ CONFIGURE_ARGS+=	--enable-dri
 
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_INTEL}/usr/lib/xorg/modules/drivers
-	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/intel_drv.so \
+	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/*.so \
 		${IDIR_XF86_VIDEO_INTEL}/usr/lib/xorg/modules/drivers/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

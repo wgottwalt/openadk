@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
 PKG_VERSION:=		7.8.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c89b63d253605ed40e8ac370d25a833c
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libxdamage libxfixes libdrm
+PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm
 PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
@@ -32,22 +32,15 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
 
-ifeq (${ADK_LINUX_X86_IBMX40},y)
-DRI_DRIVERS:=i810
-endif
-
-# Lemote's SMI712 is not directly supported by Mesa,
-# and at least some SIS driver fails to build when
-# keeping the driver auto-selection intact.
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
-DRI_DRIVERS:=swrast
+ifeq (${ADK_HARDWARE_IBMX40},y)
+DRI_DRIVERS:=i915
 endif
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium \
 			--disable-glw \
 			--with-driver=dri \
-			--with-dri-drivers=${DRI_DRIVERS} \
+			--with-dri-drivers=${DRI_DRIVERS},swrast \
 			--with-demos=xdemos
 
 XAKE_FLAGS+=		HOST_CC=${HOSTCC}
@@ -70,10 +63,12 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
-	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
+ifeq (${ADK_HARDWARE_IBMX40},y)
+	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
+	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
+		${IDIR_MESALIB}/usr/lib/dri/
 	${INSTALL_DIR} ${IDIR_GLXINFO}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/progs/xdemos/glxinfo \
 		${IDIR_GLXINFO}/usr/bin/

@@ -9,6 +9,26 @@ config ADK_KERNEL_FRAMEBUFFER_CONSOLE
 config ADK_KERNEL_FB_GEODE
 	boolean
 	default n
+
+config ADK_KERNEL_DRM
+	boolean
+	default n
+
+config ADK_KERNEL_DRM_I915
+	boolean
+	default n
+
+config ADK_KERNEL_DRM_I915_KMS
+	boolean
+	default n
+
+config ADK_KERNEL_AGP
+	boolean
+	default n
+
+config ADK_KERNEL_AGP_INTEL
+	boolean
+	default n
  
 menu "Graphic devices support"
 
@@ -22,5 +42,20 @@ config ADK_KERNEL_FB_GEODE_LX
  	default n
  	help
 	 Framebuffer support for ALIX boards.
+
+config ADK_HARDWARE_GRAPHICS_INTEL
+	prompt "graphics-intel.................. support for intel graphic cards (AGP/DRM/KMS)"
+	boolean
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_AGP
+	select ADK_KERNEL_AGP_INTEL
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_DRM_I915_KMS
+	select ADK_KERNEL_DRM_I915
+	default y if ADK_HARDWARE_IBMX40
+	default n
+	help
+          DRM support for intel chipsets.
 	
 endmenu

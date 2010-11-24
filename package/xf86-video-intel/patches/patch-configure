@@ -1,42 +1,32 @@
---- xf86-video-intel-2.9.1.orig/configure	2009-10-26 12:53:35.000000000 +0100
-+++ xf86-video-intel-2.9.1/configure	2010-04-21 19:57:36.000000000 +0200
-@@ -12283,9 +12283,6 @@ if test x$DRI != xno; then
+--- xf86-video-intel-2.13.0.orig/configure	2010-09-30 17:46:13.000000000 +0200
++++ xf86-video-intel-2.13.0/configure	2010-11-24 22:05:13.100685362 +0100
+@@ -11623,9 +11623,6 @@ if test x$DRI != xno; then
  $as_echo_n "checking for ${sdkdir}/dri.h... " >&6; }
- if { as_var=$as_ac_File; eval "test \"\${$as_var+set}\" = set"; }; then :
+ if eval "test \"\${$as_ac_File+set}\"" = set; then :
    $as_echo_n "(cached) " >&6
 -else
 -  test "$cross_compiling" = yes &&
--  as_fn_error "cannot check for file existence when cross compiling" "$LINENO" 5
+-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
  if test -r "${sdkdir}/dri.h"; then
    eval "$as_ac_File=yes"
  else
-@@ -12307,9 +12304,6 @@ fi
+@@ -11646,9 +11643,6 @@ fi
  $as_echo_n "checking for ${sdkdir}/sarea.h... " >&6; }
- if { as_var=$as_ac_File; eval "test \"\${$as_var+set}\" = set"; }; then :
+ if eval "test \"\${$as_ac_File+set}\"" = set; then :
    $as_echo_n "(cached) " >&6
 -else
 -  test "$cross_compiling" = yes &&
--  as_fn_error "cannot check for file existence when cross compiling" "$LINENO" 5
+-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
  if test -r "${sdkdir}/sarea.h"; then
    eval "$as_ac_File=yes"
  else
-@@ -12331,9 +12325,6 @@ fi
+@@ -11669,9 +11663,6 @@ fi
  $as_echo_n "checking for ${sdkdir}/dristruct.h... " >&6; }
- if { as_var=$as_ac_File; eval "test \"\${$as_var+set}\" = set"; }; then :
+ if eval "test \"\${$as_ac_File+set}\"" = set; then :
    $as_echo_n "(cached) " >&6
 -else
 -  test "$cross_compiling" = yes &&
--  as_fn_error "cannot check for file existence when cross compiling" "$LINENO" 5
+-  as_fn_error $? "cannot check for file existence when cross compiling" "$LINENO" 5
  if test -r "${sdkdir}/dristruct.h"; then
-   eval "$as_ac_File=yes"
- else
-@@ -12927,9 +12918,6 @@ else
- $as_echo_n "checking for $XORG_SGML_PATH/X11/defs.ent... " >&6; }
- if { as_var=$as_ac_File; eval "test \"\${$as_var+set}\" = set"; }; then :
-   $as_echo_n "(cached) " >&6
--else
--  test "$cross_compiling" = yes &&
--  as_fn_error "cannot check for file existence when cross compiling" "$LINENO" 5
- if test -r "$XORG_SGML_PATH/X11/defs.ent"; then
    eval "$as_ac_File=yes"
  else
