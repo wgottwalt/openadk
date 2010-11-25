@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.6.20
+PKG_VERSION:=		3.7.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0faf8fc8ccff5297513c6532b2b4ce23
+PKG_MD5SUM:=		5437978aae90350cf984993091e0d695
 PKG_DESCR:=		embeddable SQL database
 PKG_SECTION:=		db
 PKG_BUILDDEP:=		ncurses readline
@@ -27,6 +27,7 @@ CONFIGURE_ENV+=		config_BUILD_CC="${HOSTCC}" \
 			config_TARGET_READLINE_INC="-I${STAGING_DIR}/usr/include" \
 			config_TARGET_READLINE_LIBS="-L${STAGING_DIR}/usr/lib -lreadline -lncurses"
 MAKE_FLAGS+=		LIBPTHREAD=-lm
+TCFLAGS+=		-DSQLITE_SECURE_DELETE=1
 CONFIGURE_ARGS+=	--disable-tcl \
 			--without-tcl \
 			--disable-amalgamation

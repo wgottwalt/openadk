@@ -5,15 +5,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
 PKG_VERSION:=		3.6.12
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		80f4d83f23a7c45fc3f1904964ea2a5a
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
 PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
-PKG_DEPENDS+=		libxdamage libxfixes libidl
+PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
@@ -39,14 +39,17 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}"
 			HOST_CXX="${HOSTCXX}" HOST_CXXFLAGS="${HOSTCXXFLAGS}" \
 			HOST_LIBIDL_CONFIG="/usr/bin/libIDL-config-2" \
 			CPPFLAGS="-I${STAGING_DIR}/usr/include/freetype2" \
+			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_thread_keyword=no \
 			ac_cv_sizeof_int_p=4
 CONFIGURE_ARGS+=	--enable-application=browser \
+			--enable-official-branding \
 			--with-system-zlib \
 			--with-system-jpeg \
 			--with-system-png \
 			--with-system-nss \
 			--with-system-nspr \
+			--enable-system-sqlite \
 			--with-libIDL-prefix=${STAGING_DIR}/usr \
 			--with-glib-prefix=${STAGING_DIR}/usr \
 			--enable-libxul \

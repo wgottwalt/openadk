@@ -1,11 +1,11 @@
---- sqlite-3.6.20.orig/Makefile.in	2009-10-30 14:34:59.000000000 +0100
-+++ sqlite-3.6.20/Makefile.in	2009-11-20 21:44:49.000000000 +0100
-@@ -688,7 +688,7 @@ status.lo:	$(TOP)/src/status.c $(HDR)
- 	$(LTCOMPILE) $(TEMP_STORE) -c $(TOP)/src/status.c
+--- sqlite-3.7.3.orig/Makefile.in	2010-10-07 16:48:41.000000000 +0200
++++ sqlite-3.7.3/Makefile.in	2010-11-25 20:15:04.156939429 +0100
+@@ -181,7 +181,7 @@ LIBOBJS0 = alter.lo analyze.lo attach.lo
+          table.lo tokenize.lo trigger.lo \
+          update.lo util.lo vacuum.lo \
+          vdbe.lo vdbeapi.lo vdbeaux.lo vdbeblob.lo vdbemem.lo vdbetrace.lo \
+-         wal.lo walker.lo where.lo utf.o vtab.lo
++         wal.lo walker.lo where.lo utf.lo vtab.lo
  
- sqlite3.h:	$(TOP)/src/sqlite.h.in $(TOP)/manifest.uuid $(TOP)/VERSION
--	tclsh $(TOP)/tool/mksqlite3h.tcl $(TOP) >sqlite3.h
-+	#tclsh $(TOP)/tool/mksqlite3h.tcl $(TOP) >sqlite3.h
- 
- table.lo:	$(TOP)/src/table.c $(HDR)
- 	$(LTCOMPILE) $(TEMP_STORE) -c $(TOP)/src/table.c
+ # Object files for the amalgamation.
+ #
