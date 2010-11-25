@@ -49,18 +49,24 @@ ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/directfb
 endif
 
-ifeq (${ADK_LINUX_X86_ALIX1C},y)
-CONFIGURE_CPU_OPTS:=	\
-			--disable-ssse3 \
+ifeq (${ADK_LINUX_X86_ALIX},y)
+CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse2 \
 			--disable-sse \
 			--enable-mmxext \
 			--enable-mmx \
 			--enable-3dnowext \
 			--enable-3dnow
+else ifeq (${ADK_HARDWARE_IBMX40},y)
+CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
+			--enable-sse2 \
+			--enable-sse \
+			--enable-mmxext \
+			--enable-mmx \
+			--disable-3dnowext \
+			--disable-3dnow
 else
-CONFIGURE_CPU_OPTS:=	\
-			--disable-ssse3 \
+CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse2 \
 			--disable-sse \
 			--disable-mmxext \

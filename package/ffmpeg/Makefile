@@ -38,6 +38,13 @@ CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--enable-amd3dnowext \
 			--enable-mmx \
 			--enable-mmx2
+else ifeq ($(ADK_HARDWARE_IBMX40),y)
+CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
+			--enable-sse \
+			--disable-amd3dnow \
+			--disable-amd3dnowext \
+			--enable-mmx \
+			--enable-mmx2
 else
 CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--disable-sse \
