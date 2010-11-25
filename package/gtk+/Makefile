@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/2.18/
 
-PKG_SUBPKGS:=		GTK
+PKG_SUBPKGS:=		LIBGTK
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -22,7 +22,7 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GTK,libgtk+,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		gio_can_sniff=no \
 			ac_cv_path_GTK_UPDATE_ICON_CACHE=""
@@ -30,7 +30,7 @@ CONFIGURE_ARGS+=	--without-libtiff \
 			--without-libjpeg
 
 post-install:
-	${INSTALL_DIR} ${IDIR_GTK}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_GTK}/usr/lib
+	${INSTALL_DIR} ${IDIR_LIBGTK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBGTK}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
