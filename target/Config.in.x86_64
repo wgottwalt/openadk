@@ -1,5 +1,5 @@
 choice
-depends on ADK_LINUX_X86_64
+depends on ADK_LINUX_X86_64 || ADK_LINUX_NATIVE
 prompt "Hardware model"
 
 config ADK_HARDWARE_GENERIC_X86_64

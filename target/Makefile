@@ -41,8 +41,7 @@ config-prepare: $(TOPDIR)/.config
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 ifeq ($(ADK_NATIVE),y)
 	@if [ -f /etc/adktarget ];then \
-		target=$$(cat /etc/adktarget); \
-		cp $(TOPDIR)/target/$$target/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+		cp $(TOPDIR)/target/$(ARCH)/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi

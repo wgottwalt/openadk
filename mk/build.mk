@@ -184,9 +184,9 @@ ifeq ($(ADKtype),)
 	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET)/kernel.config
 else
-	cp $(TOPDIR)/target/$(ADKtype)/kernel.config $(BUILD_DIR)/linux/.config
+	cp $(TOPDIR)/target/$(ARCH)/kernel.config $(BUILD_DIR)/linux/.config
 	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
-	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADKtype)/kernel.config
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ARCH)/kernel.config
 endif
 
 # create a new package from package/.template
