@@ -155,12 +155,12 @@ int main() {
 			}
 			
 			/* exclude manual maintained packages from package/Makefile */
-			if (!(strncmp(pkgdirp->d_name, "eglibc", strlen(pkgdirp->d_name)) == 0) &&
-				!(strncmp(pkgdirp->d_name, "libc", strlen(pkgdirp->d_name)) == 0) &&
-				!(strncmp(pkgdirp->d_name, "libpthread", strlen(pkgdirp->d_name)) == 0) &&
-				!(strncmp(pkgdirp->d_name, "uclibc++", strlen(pkgdirp->d_name)) == 0) &&
-				!(strncmp(pkgdirp->d_name, "uclibc", strlen(pkgdirp->d_name)) == 0) &&
-				!(strncmp(pkgdirp->d_name, "glibc", strlen(pkgdirp->d_name)) == 0)) {
+			if (!(strncmp(pkgdirp->d_name, "eglibc", 6) == 0) &&
+				!(strncmp(pkgdirp->d_name, "libc", 4) == 0) &&
+				!(strncmp(pkgdirp->d_name, "libpthread", 10) == 0) &&
+				!(strncmp(pkgdirp->d_name, "uclibc++", 8) == 0) &&
+				!(strncmp(pkgdirp->d_name, "uclibc", 6) == 0) &&
+				!(strncmp(pkgdirp->d_name, "glibc", 5) == 0)) {
 				/* print result to stdout */
 				printf("package-$(ADK_COMPILE_%s) += %s\n", pkgvar, pkgdirp->d_name); 
 			}

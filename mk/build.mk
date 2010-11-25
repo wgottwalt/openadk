@@ -532,7 +532,13 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TO
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
-dep:
+$(TOPDIR)/bin/tools:
+	@mkdir -p $(TOPDIR)/bin/tools
+
+${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
+	$(HOSTCC) -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
+
+dep: $(TOPDIR)/bin/tools/depmaker
 	@echo "Generating dependencies ..."
 	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
