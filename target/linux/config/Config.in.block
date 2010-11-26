@@ -47,6 +47,9 @@ config ADK_KERNEL_ATA
 config ADK_KERNEL_ATA_SFF
 	boolean
 
+config ADK_KERNEL_CONNECTOR
+	boolean
+
 config ADK_KERNEL_ATA_PIIX
 	boolean
 	select ADK_KERNEL_BLOCK
@@ -78,7 +81,7 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	  Enables support for AHCI Serial ATA.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
-	prompt "kmod-loop......................... Loop mount support"
+	prompt "kmod-blk-dev-loop................. Loop mount support"
 	tristate
 	default n
 	help
@@ -118,7 +121,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	  device used for network connections from the machine to itself.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_NBD
-	prompt "kmod-nbd.......................... Network Block Device"
+	prompt "kmod-blk-dev-nbd.................. Network Block Device"
 	tristate
 	default n
 	help
@@ -241,7 +244,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	  Higher level volume managers such as LVM2 use this driver.
 
 config ADK_KPACKAGE_KMOD_DM_CRYPT
-	prompt "kmod-dm-crypt................... Crypt target support"
+	prompt "kmod-dm-crypt..................... Crypt target support"
 	depends on !(ADK_KERNEL_DM_CRYPT || ADK_LINUX_CRIS_FOXBOARD)
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	select ADK_KERNEL_MD
@@ -259,7 +262,7 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 	  <http://www.saout.de/misc/dm-crypt/>
 
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
-	prompt "kmod-dm-snapshot................ Snapshot target"
+	prompt "kmod-dm-snapshot.................. Snapshot target"
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
@@ -267,12 +270,19 @@ config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KPACKAGE_KMOD_DM_MIRROR
-	prompt "kmod-dm-mirror.................. Mirror target"
+	prompt "kmod-dm-mirror.................... Mirror target"
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
          Allow volume managers to mirror logical volumes, also
          needed for live data migration tools such as 'pvmove'.
+
+config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
+	prompt "kmod-blk-dev-drbd................. DRBD support (Network RAID 1)"
+	tristate
+	select ADK_KERNEL_CONNECTOR
+	help
+          DRBD - http://www.drbd.org
 
 endmenu

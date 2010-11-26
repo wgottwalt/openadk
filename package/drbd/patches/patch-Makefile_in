@@ -1,0 +1,11 @@
+--- drbd-8.3.8.1.orig/Makefile.in	2010-07-09 10:13:59.000000000 +0200
++++ drbd-8.3.8.1/Makefile.in	2010-11-26 19:00:49.000000000 +0100
+@@ -47,7 +47,7 @@ WITH_BASHCOMPLETION = @WITH_BASHCOMPLETI
+ # and not in e.g. dash. I'm too lazy to fix it to be compatible.
+ SHELL=/bin/bash
+ 
+-SUBDIRS     = user scripts documentation drbd
++SUBDIRS     = user scripts drbd
+ 
+ REL_VERSION := $(shell $(SED) -ne '/^\#define REL_VERSION/{s/^[^"]*"\([^ "]*\).*/\1/;p;q;}' drbd/linux/drbd_config.h)
+ ifdef FORCE

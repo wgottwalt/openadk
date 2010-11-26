@@ -1,0 +1,9 @@
+--- drbd-8.3.8.1.orig/drbd/drbd_buildtag.c	2010-07-09 10:19:05.000000000 +0200
++++ drbd-8.3.8.1/drbd/drbd_buildtag.c	2010-11-26 18:59:58.000000000 +0100
+@@ -3,5 +3,5 @@
+ const char *drbd_buildtag(void)
+ {
+ 	return "GIT-hash: 0d8589fcc32c874df57c930ca1691399b55ec893"
+-		" build by lars@soda, 2010-07-09 10:19:24";
++		" build by wbx@neon.lan, 2010-11-26 18:59:58";
+ }
