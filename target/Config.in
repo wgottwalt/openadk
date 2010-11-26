@@ -412,6 +412,7 @@ config ADK_LINUX_MIPS_BRCM
 endchoice
 
 source "target/Config.in.alix"
+source "target/Config.in.mikrotik"
 source "target/Config.in.arm"
 source "target/Config.in.armel"
 source "target/Config.in.mips"
