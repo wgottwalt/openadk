@@ -39,7 +39,5 @@ libxext-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
 	${CP} ${WRKINST}/usr/include/X11/extensions/*.h \
 		${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
-	${CP} ${STAGING_DIR}/usr/include/X11/extensions/*.h \
-                ${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
 
 include ${TOPDIR}/mk/pkg-bottom.mk

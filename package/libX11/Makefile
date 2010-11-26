@@ -5,11 +5,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
 PKG_VERSION:=		1.3.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b68aebbfcac1174c4c95d260e9369766
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau xcmiscproto bigreqsproto kbproto inputproto
+PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau 
+PKG_BUILDDEP+=		xcmiscproto bigreqsproto kbproto inputproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBX11 LIBX11_DEV
@@ -44,7 +45,5 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 libx11-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBX11_DEV}/usr/include/X11
 	${CP} ${WRKINST}/usr/include/X11/*.h ${IDIR_LIBX11_DEV}/usr/include/X11
-	${CP} ${STAGING_DIR}/usr/include/xproto/X11/*.h \
-		${IDIR_LIBX11_DEV}/usr/include/X11
 
 include ${TOPDIR}/mk/pkg-bottom.mk
