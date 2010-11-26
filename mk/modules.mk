@@ -678,6 +678,11 @@ $(eval $(call KMOD_template,IP_VS_FTP,ip-vs-ftp,\
 # Block devices
 #
 
+$(eval $(call KMOD_template,BLK_DEV_DRBD,blk-dev-drbd,\
+    $(MODULES_DIR)/kernel/lib/lru_cache \
+    $(MODULES_DIR)/kernel/drivers/block/drbd/drbd \
+,20))
+
 $(eval $(call KMOD_template,BLK_DEV_LOOP,blk-dev-loop,\
     $(MODULES_DIR)/kernel/drivers/block/loop \
 ,20))
