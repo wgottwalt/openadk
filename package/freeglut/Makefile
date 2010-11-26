@@ -14,7 +14,7 @@ PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 
 PKG_HOST_DEPENDS:=	!cygwin !darwin
-PKG_TARGET_DEPENDS:=	x86 lemote
+PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 include $(TOPDIR)/mk/package.mk
 

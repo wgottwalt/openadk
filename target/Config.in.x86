@@ -1,5 +1,5 @@
 choice
-depends on ADK_LINUX_X86 || ADK_LINUX_NATIVE
+depends on ADK_LINUX_X86
 prompt "Hardware model"
 
 config ADK_HARDWARE_GENERIC_X86
@@ -10,9 +10,9 @@ config ADK_HARDWARE_GENERIC_X86
 	help
 	  Generic x86 system.
 
-config ADK_HARDWARE_IBMX40
+config ADK_HARDWARE_IBM_X40
 	bool "IBM X40 laptop"
-	select ADK_ibmx40
+	select ADK_ibm_x40
 	select ADK_CPU_PENTIUM_M
 	select ADK_KERNEL_MPENTIUMM
 	select ADK_TARGET_WITH_USB
@@ -26,6 +26,7 @@ config ADK_HARDWARE_IBMX40
 
 config ADK_HARDWARE_QEMU_X86
 	bool "Qemu x86"
+	select ADK_qemu
 	select ADK_CPU_I686
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA

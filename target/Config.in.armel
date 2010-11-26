@@ -1,0 +1,17 @@
+choice
+depends on ADK_LINUX_ARMEL
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_ARMEL
+	bool "Generic armel system"
+	help
+	  Generic armel system.
+
+config ADK_HARDWARE_GENERIC_ARMEL_TOOLCHAIN
+	bool "armel toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  armel toolchain.
+
+endchoice
+

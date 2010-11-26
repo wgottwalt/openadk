@@ -1,0 +1,17 @@
+choice
+depends on ADK_LINUX_ARM
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_ARM
+	bool "Generic arm system"
+	help
+	  Generic arm system.
+
+config ADK_HARDWARE_GENERIC_ARM_TOOLCHAIN
+	bool "arm toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  arm toolchain.
+
+endchoice
+

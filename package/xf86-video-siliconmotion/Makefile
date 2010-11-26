@@ -13,8 +13,6 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
 
-PKG_TARGET_DEPENDS:=	lemote native
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_SILICONMOTION,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

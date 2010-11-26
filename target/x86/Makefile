@@ -9,12 +9,6 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
-$(TOOLS_BUILD_DIR):
-	@mkdir -p $(TOOLS_BUILD_DIR)
-
-tools-compile: $(TOOLS_BUILD_DIR)
-	$(MAKE) -C ../tools/grub prepare compile install
-
 createinitcrypt:
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="./initramfs_list"#' $(LINUX_DIR)/.config
 	echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> $(LINUX_DIR)/.config
@@ -23,16 +17,17 @@ createinitcrypt:
 		CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE)
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" ARCH=$(ARCH) \
 		CC="$(TARGET_CC)" $(MAKE_TRACE)
-	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel
 
 ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_HARDWARE_QEMU_X86),y)
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel qemu-${CPU_ARCH}.img'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel qemu-${CPU_ARCH}.img'
 endif
 endif
 ifeq ($(FS),usb)
@@ -42,26 +37,26 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
-	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_HW}-${ADK_TARGET}-${FS}-kernel'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_HARDWARE_QEMU_X86),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-	@cp $(KERNEL) ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel
-	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@cp $(KERNEL) ${BIN_DIR}/${ADK_HW}-${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_HW}-${ADK_TARGET}-${FS}-kernel'
 ifeq ($(ADK_HARDWARE_QEMU_X86),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel'
+	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/${ADK_HW}-${ADK_TARGET}-${FS}-kernel'
 endif
 endif
 ifeq ($(FS),encrypted)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL) createinitcrypt
-	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'The kernel+cryptinit file is: ${BIN_DIR}/${ADK_HW}-${ADK_TARGET}-${FS}-kernel'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
 	@echo 'Boot your IBM X40 via NFS or USB.'
 	@echo 'Then create at least three partitions with fdisk:'

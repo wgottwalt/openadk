@@ -78,7 +78,7 @@ config ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_IBM_X40
 	default y if ADK_HARDWARE_QEMU_X86
 	default y if ADK_HARDWARE_QEMU_X86_64
 	default n
@@ -95,7 +95,7 @@ config ADK_KPACKAGE_KMOD_SKY2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_HARDWARE_SHUTTLE
+	default y if ADK_HARDWARE_SHUTTLE_SA76G2
 	default n
 	help
 
@@ -185,7 +185,7 @@ config ADK_KPACKAGE_KMOD_ATH5K
 	select ADK_KERNEL_ATH_COMMON
 	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
-	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_IBM_X40
 	default n
 	help
 	  Driver for Atheros 5xxx/24xx cards.

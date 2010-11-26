@@ -1,0 +1,28 @@
+choice
+depends on ADK_LINUX_MIPS64EL
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_MIPS64EL
+	bool "Generic mips64el system"
+	help
+	  Generic mips64el system.
+
+config ADK_HARDWARE_LEMOTE_YEELONG
+	bool "Lemote Yeelong laptop"
+	select ADK_CPU_LOONGSON2F
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	help
+         Hardware profile for Lemotes Yeelong laptop.
+
+config ADK_HARDWARE_GENERIC_MIPS64EL_TOOLCHAIN
+	bool "mips64el toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  mips64el toolchain.
+
+endchoice
+

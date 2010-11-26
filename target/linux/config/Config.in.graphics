@@ -53,7 +53,7 @@ config ADK_HARDWARE_GRAPHICS_INTEL
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_DRM_I915_KMS
 	select ADK_KERNEL_DRM_I915
-	default y if ADK_HARDWARE_IBMX40
+	default y if ADK_HARDWARE_IBM_X40
 	default n
 	help
           DRM support for intel chipsets.

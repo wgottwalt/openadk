@@ -1,0 +1,45 @@
+choice
+prompt "Routerboard model"
+default ADK_LINUX_MIPS_RB532
+depends on ADK_LINUX_MIKROTIK
+
+config ADK_LINUX_MIPS_RB4XX
+	bool "Mikrotik Routerboard 411/433"
+	select ADK_rb4xx
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NETDEV_1000
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+	 Support for Mikrotik RB411/RB433.
+	 Status: stable
+
+config ADK_LINUX_MIPS_RB532
+	bool "Mikrotik Routerboard 532"
+	select ADK_rb532
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_EXT2_FS
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+	 Support for Mikrotik RB532.
+	 Status: stable
+
+endchoice
+

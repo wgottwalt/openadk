@@ -14,7 +14,7 @@ PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 
 PKG_SUBPKGS:=		LIBFLTK
-PKG_TARGET_DEPENDS:=	x86 lemote
+PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 PKG_HOST_DEPENDS:=	!cygwin !darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.x-r7513.tar.bz2

@@ -35,11 +35,19 @@ kernel-package: $(LINUX_DIR)/vmlinux
 	$(TRACE) target/$(ADK_TARGET)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 
+ifeq ($(ADK_HW),)
 INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
 ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
 ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
 INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
+else
+INITRAMFS=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}
+ROOTFSSQUASHFS=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.img
+ROOTFSTARBALL=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
+ROOTFSUSERTARBALL=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
+INITRAMFS_PIGGYBACK=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
+endif
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@

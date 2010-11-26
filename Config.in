@@ -137,105 +137,12 @@ config ADK_HOST_CYGWIN
 	boolean
 
 endchoice
-
-choice
-prompt "Hardware profile (autodetection on OpenADK systems)"
-config ADK_HARDWARE_NOPROFILE
-	bool "no profile"
-
-config ADK_HARDWARE_YEELONG
-	bool "Yeelong laptop"
-	select ADK_TARGET_WITH_USB
-	select ADK_TARGET_WITH_VGA
-	select ADK_TARGET_WITH_INPUT
-	select ADK_TARGET_WITH_RTC
-	select ADK_TARGET_WITH_HDD
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select ADK_KERNEL_SWAP
-	select ADK_KPACKAGE_KMOD_MAC80211
-	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
-	select ADK_KPACKAGE_KMOD_RTL8187
-	select ADK_KPACKAGE_KMOD_SND
-	select ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
-	select ADK_KPACKAGE_KMOD_SND_OSSEMUL
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	select ADK_KPACKAGE_KMOD_USB
-	select ADK_KPACKAGE_KMOD_USB_EHCI_HCD
-	select ADK_KPACKAGE_KMOD_USB_OHCI_HCD
-	help
-         Hardware profile for Lemotes Yeelong laptop.
-	 Selects drivers for wireless card, usb controller and sound card.
-
-endchoice
-
 endmenu
 
 source "target/Config.in"
 
 menu "Runtime configuration"
-
-config ADK_RUNTIME_HOSTNAME
-	string "hostname for the embedded system"
-	default "linux"
-	help
-	  Set your target hostname.
-
-config ADK_RUNTIME_SSH_PUBKEY
-	string "SSH public key (root user only)"
-	default ""
-	help
-	  Paste your generated SSH public key here and it will be embedded into
-	  the built image, so you can use it to login instantly.
-
-config ADK_RUNTIME_PASSWORD
-	string "root password for the embedded system"
-	default "linux123"
-	help
-	  Predefine the root password enabled in the built image.
-
-config ADK_RUNTIME_TIMEZONE
-	string "timezone for the embedded system"
-	default "Europe/Berlin"
-	help
-	  Predefine the timezone for the embedded system.
-
-config ADK_RUNTIME_KBD_LAYOUT
-	string "keyboard layout for the embedded system"
-	default ""
-	depends on ADK_TARGET_WITH_INPUT
-	help
-	  Predefine the keyboard layout for the embedded system.
-
-choice
-prompt "Console output on embedded system"
-default ADK_RUNTIME_CONSOLE_VGA if ADK_HARDWARE_IBMX40
-default ADK_RUNTIME_CONSOLE_SERIAL
-
-config ADK_RUNTIME_CONSOLE_VGA
-	bool "console output on VGA"
-	help
-          Start getty on VGA console. (tty1-tty6)
-
-config ADK_RUNTIME_CONSOLE_SERIAL
-	bool "console output on serial"
-	help
-	  Start getty on serial console. (ttyS0)
-
-config ADK_RUNTIME_CONSOLE_BOTH
-	bool "console output on console and serial"
-	help
-	  Start getty on VGA console and serial device.
-
-endchoice
+source "target/Config.in.runtime"
 endmenu
 
 menu "Package selection"

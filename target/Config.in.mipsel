@@ -1,0 +1,17 @@
+choice
+depends on ADK_LINUX_MIPSEL
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_MIPSEL
+	bool "Generic mipsel system"
+	help
+	  Generic mipsel system.
+
+config ADK_HARDWARE_GENERIC_MIPSEL_TOOLCHAIN
+	bool "mipsel toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  mipsel toolchain.
+
+endchoice
+

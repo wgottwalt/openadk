@@ -66,7 +66,7 @@ else
 CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-glx
 endif
 
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+ifeq (${ADK_HARDWARE_LEMOTE_YEELONG},y)
 CONFIGURE_ARGS+=	--with-int10=stub
 endif
 

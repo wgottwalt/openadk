@@ -65,16 +65,22 @@ config ADK_alix
 config ADK_wrap
 	tristate
 
-config ADK_arm_toolchain
+config ADK_arm
 	tristate
 
-config ADK_armel_toolchain
+config ADK_armel
 	tristate
 
-config ADK_mips_toolchain
+config ADK_mips
 	tristate
 
-config ADK_mipsel_toolchain
+config ADK_mipsel
+	tristate
+
+config ADK_mips64
+	tristate
+
+config ADK_mips64el
 	tristate
 
 config ADK_ppc
@@ -84,24 +90,6 @@ config ADK_sparc
 	tristate
 
 config ADK_sparc64
-	tristate
-
-config ADK_arm_qemu
-	tristate
-
-config ADK_mips_qemu
-	tristate
-
-config ADK_mipsel_qemu
-	tristate
-
-config ADK_mips64_qemu
-	tristate
-
-config ADK_mips64el_qemu
-	tristate
-
-config ADK_cris_qemu
 	tristate
 
 config ADK_rb532
@@ -119,16 +107,10 @@ config ADK_foxg20
 config ADK_foxboard
 	tristate
 
-config ADK_lemote
-	tristate
-
 config ADK_brcm
 	tristate
 
 config ADK_ag241
-	tristate
-
-config ADK_wag54g
 	tristate
 
 config ADK_x86_64
@@ -137,46 +119,47 @@ config ADK_x86_64
 config ADK_x86
 	tristate
 
-config ADK_ibmx40
+config ADK_qemu
 	boolean
 
-config ADK_shuttle
+config ADK_ibm_x40
+	boolean
+
+config ADK_lemote_yeelong
+	boolean
+
+config ADK_shuttle_sa76g2
 	boolean
 
 config ADK_HW
 	string
-	default "ibmx40" if ADK_ibmx40
-	default "shuttle" if ADK_shuttle
+	default "qemu" if ADK_qemu
+	default "ibm-x40" if ADK_ibm_x40
+	default "shuttle-sa76g2" if ADK_shuttle_sa76g2
+	default "lemote-yeelong" if ADK_lemote_yeelong
 
 config ADK_TARGET
 	string
-	default "alix"  if ADK_alix
-	default "wrap"  if ADK_wrap
-	default "brcm"  if ADK_brcm
-	default "x86"  if ADK_x86
-	default "x86_64"  if ADK_x86_64
-	default "toolchain-arm"  if ADK_arm_toolchain
-	default "toolchain-armel"  if ADK_armel_toolchain
-	default "toolchain-mips"  if ADK_mips_toolchain
-	default "toolchain-mipsel"  if ADK_mipsel_toolchain
+	default "arm"  if ADK_arm
+	default "armel"  if ADK_armel
+	default "mips"  if ADK_mips
+	default "mipsel"  if ADK_mipsel
+	default "mips64"  if ADK_mips64
+	default "mips64el"  if ADK_mips64el
 	default "ppc"  if ADK_ppc
 	default "sparc"  if ADK_sparc
 	default "sparc64"  if ADK_sparc64
-	default "qemu-arm"  if ADK_arm_qemu
-	default "qemu-cris"  if ADK_cris_qemu
-	default "qemu-mips"  if ADK_mips_qemu
-	default "qemu-mips64"  if ADK_mips64_qemu
-	default "qemu-mipsel"  if ADK_mipsel_qemu
+	default "x86"  if ADK_x86
+	default "x86_64"  if ADK_x86_64
+	default "alix"  if ADK_alix
+	default "wrap"  if ADK_wrap
+	default "brcm"  if ADK_brcm
 	default "foxboard"  if ADK_foxboard
 	default "foxg20"  if ADK_foxg20
-	default "native"  if ADK_NATIVE
 	default "rb532"  if ADK_rb532
 	default "rb4xx"  if ADK_rb4xx
-	default "zaurus"  if ADK_arm
-	default "lemote"  if ADK_lemote
-	default "wag54g"  if ADK_wag54g
 	default "ag241"  if ADK_ag241
-
+	default "native"  if ADK_NATIVE
 
 config ADK_HARDWARE_QEMU
 	boolean
@@ -196,6 +179,9 @@ config ADK_CPU_PENTIUM_M
 config ADK_CPU_AMDFAM10
 	boolean
 
+config ADK_CPU_LOONGSON2F
+	boolean
+
 config ADK_TARGET_CFLAGS
 	string
 	default "-march=i686" if ADK_CPU_I686
@@ -203,6 +189,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
 	default "-mcpu=v9" if ADK_CPU_SPARC_V9
+	default "-march=loongson2f" if ADK_CPU_LOONGSON2F
 
 # c library
 config ADK_uclibc
@@ -222,13 +209,28 @@ config ADK_LIBC
 	default "native"  if ADK_NATIVE
 
 menu "Target system"
+choice
+prompt "Embedded devices or architecture"
+
+config ADK_TARGET_CHOICE
+	bool "embedded devices"
+	help
+	  choose between specific embedded devices.
+
+config ADK_ARCH_CHOICE
+	bool "architectures"
+	help
+	  choose between architectures and hardware profiles.
+
+endchoice
 
 choice
-prompt "Embedded Device or Emulator"
-default ADK_LINUX_NATIVE
+prompt "Architectures and hardware profiles"
+depends on ADK_ARCH_CHOICE
+default ADK_LINUX_X86
 
 config ADK_LINUX_NATIVE
-	bool "Native platform"
+	bool "native build"
 	select ADK_NATIVE
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_USB
@@ -236,6 +238,80 @@ config ADK_LINUX_NATIVE
 	help
 	  Make a native build. Use host tools.
 	  No toolchain will be created.
+
+config ADK_LINUX_ARM
+	bool "arm system (big endian)"
+	select ADK_arm
+	help
+	  Support for arm big endian systems.
+
+
+config ADK_LINUX_ARMEL
+	bool "arm system (little endian)"
+	select ADK_armel
+	help
+	  Support for arm little endian systems.
+
+
+config ADK_LINUX_MIPS
+	bool "mips system (big endian)"
+	select ADK_mips
+	help
+	  Support for mips big endian systems.
+
+config ADK_LINUX_MIPSEL
+	bool "mips system (little endian)"
+	select ADK_mipsel
+	help
+	  Support for mips little endian systems.
+
+config ADK_LINUX_MIPS64
+	bool "mips64 system (big endian)"
+	select ADK_mips64
+	help
+	  Support for mips64 big endian systems.
+
+config ADK_LINUX_MIPS64EL
+	bool "mips64 system (little endian)"
+	select ADK_mips64el
+	help
+	  Support for mips64 little endian systems.
+
+config ADK_LINUX_PPC
+	bool "ppc system"
+	select ADK_ppc
+	help
+	  Support for powerpc systems.
+
+config ADK_LINUX_SPARC
+	bool "sparc system"
+	select ADK_sparc
+	help
+	  Support for sparc systems.
+
+config ADK_LINUX_SPARC64
+	bool "sparc64 system"
+	select ADK_sparc64
+	help
+	  Support for sparc64 systems.
+
+config ADK_LINUX_X86
+	bool "x86 system"
+	select ADK_x86
+	help
+	  Support for x86 systems.
+
+config ADK_LINUX_X86_64
+	bool "x86_64 system"
+	select ADK_x86_64
+	help
+	  Support for x86_64/amd64 systems.
+
+endchoice
+
+choice
+prompt "Embedded Devices"
+depends on ADK_TARGET_CHOICE
 
 config ADK_LINUX_X86_ALIX
 	bool "PC Engines ALIX boards"
@@ -297,17 +373,6 @@ config ADK_LINUX_CRIS_FOXBOARD
 	  http://foxlx.acmesystems.it/
 	  Status: stable
 
-config ADK_LINUX_MIPS64_LEMOTE
-	bool "Lemote Subnotebook Yeeloong"
-	select ADK_lemote
-	select ADK_HARDWARE_YEELONG
-	select ADK_LINUX_64
-	help
-	  Lemote Subnotebook.
-	  http://www.lemote.com/english/index.html
-	  http://www.tekmote.nl/
-	  Status: testing
-
 config ADK_LINUX_MIKROTIK
 	bool "Mikrotik Routerboards"
 	help
@@ -344,224 +409,21 @@ config ADK_LINUX_MIPS_BRCM
 	  Broadcom bcm47xx based router.
 	  Status: development
 
-config ADK_LINUX_XSCALE_ZAURUS
-	bool "Zaurus SL-C3200"
-	select ADK_zaurus
-	select ADK_TARGET_NO_FPU
-	select ADK_TARGET_WITH_INPUT
-	depends on ADK_BROKEN
-	help
-	 Support for Sharp Zaurus SL-C3200 (aka Terrier)
-	 Status: development
-
-config ADK_LINUX_QEMU
-	bool "Qemu Emulator"
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_MII
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_TARGET_WITH_INPUT
-	help
-	 Support for Qemu Emulator
-
-config ADK_LINUX_TOOLCHAIN
-	bool "Toolchain only support"
-	help
-	 Toolchain only support
-
-config ADK_LINUX_PPC
-	bool "ppc system"
-	select ADK_ppc
-	help
-	  Support for powerpc systems.
-
-config ADK_LINUX_SPARC
-	bool "sparc system"
-	select ADK_sparc
-	help
-	  Support for sparc systems.
-
-config ADK_LINUX_SPARC64
-	bool "sparc64 system"
-	select ADK_sparc64
-	help
-	  Support for sparc64 systems.
-
-config ADK_LINUX_X86
-	bool "x86 system"
-	select ADK_x86
-	help
-	  Support for x86 systems.
-
-config ADK_LINUX_X86_64
-	bool "x86_64 system"
-	select ADK_x86_64
-	help
-	  Support for x86_64/amd64 systems.
-
-endchoice
-
-choice
-prompt "Architecture"
-depends on ADK_LINUX_TOOLCHAIN
-
-config ADK_LINUX_ARM_TOOLCHAIN
-	bool "ARM BE Toolchain"
-	select ADK_arm_toolchain
-	select ADK_TARGET_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_ARMEL_TOOLCHAIN
-	bool "ARM LE Toolchain"
-	select ADK_armel_toolchain
-	select ADK_TARGET_NO_FPU
-	select ADK_EABI
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_MIPS_TOOLCHAIN
-	bool "MIPS BE Toolchain (32 Bit)"
-	select ADK_mips_toolchain
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-config ADK_LINUX_MIPSEL_TOOLCHAIN
-	bool "MIPS EL Toolchain (32 Bit)"
-	select ADK_mipsel_toolchain
-	select ADK_TOOLCHAIN_ONLY
-	help
-	  Status: toolchain only
-
-endchoice
-
-choice
-prompt "Architecture"
-depends on ADK_LINUX_QEMU
-
-config ADK_LINUX_ARM_QEMU
-	bool "arm"
-	select ADK_arm_qemu
-	select ADK_EABI
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_CRC32
-	help
-	 Qemu support for ARM architecture.
-	 Right now this is optimized for Zaurus PDA spitz. 
-	 Status: development
-
-config ADK_LINUX_MIPS_QEMU
-	bool "mips (big endian)"
-	select ADK_mips_qemu
-	help
-	 Qemu support for MIPS BE architecture.
-	 Status: stable
-
-config ADK_LINUX_MIPSEL_QEMU
-	bool "mipsel (little endian)"
-	select ADK_mipsel_qemu
-	help
-	 Qemu support for MIPS LE architecture.
-	 Status: stable
-
-config ADK_LINUX_MIPS64_QEMU
-	bool "mips64 (big endian)"
-	select ADK_mips64_qemu
-	select ADK_LINUX_64
-	depends on ADK_BROKEN
-	help
-	 Qemu support for MIPS64 BE architecture.
-	 Status: development
-
-config ADK_LINUX_MIPS64EL_QEMU
-	bool "mips64 (little endian)"
-	select ADK_mips64el_qemu
-	select ADK_LINUX_64
-	depends on ADK_BROKEN
-	help
-	 Qemu support for MIPS64 LE architecture.
-	 Status: development
-
-config ADK_LINUX_CRIS_QEMU
-	bool "cris"
-	select ADK_cris_qemu
-	depends on ADK_BROKEN
-	help
-	 Qemu support for CRISv32 architecture.
-
-config ADK_LINUX_X86_64_QEMU
-	bool "x86_64"
-	select ADK_x86_64_qemu
-	select ADK_LINUX_64
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KPACKAGE_KMOD_E1000
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_TARGET_WITH_VGA
-	help
-	 Qemu support for x86_64 architecture.
-	 Status: stable
-
 endchoice
 
 source "target/Config.in.alix"
+source "target/Config.in.arm"
+source "target/Config.in.armel"
+source "target/Config.in.mips"
+source "target/Config.in.mipsel"
+source "target/Config.in.mips64"
+source "target/Config.in.mips64el"
 source "target/Config.in.ppc"
 source "target/Config.in.ppc64"
 source "target/Config.in.sparc"
 source "target/Config.in.sparc64"
 source "target/Config.in.x86"
 source "target/Config.in.x86_64"
-
-choice
-prompt "Routerboard model"
-default ADK_LINUX_MIPS_RB532
-depends on ADK_LINUX_MIKROTIK
-
-config ADK_LINUX_MIPS_RB4XX
-	bool "Mikrotik Routerboard 411/433"
-	select ADK_rb4xx
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_YAFFS_FS
-	select ADK_KERNEL_YAFFS_YAFFS2
-	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NETDEV_1000
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_WATCHDOG
-	help
-	 Support for Mikrotik RB411/RB433.
-	 Status: stable
-
-config ADK_LINUX_MIPS_RB532
-	bool "Mikrotik Routerboard 532"
-	select ADK_rb532
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_YAFFS_FS
-	select ADK_KERNEL_YAFFS_YAFFS2
-	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_MII
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_BLK_DEV_SD
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_EXT2_FS
-	select ADK_TARGET_WITH_MINIPCI
-	select ADK_TARGET_WITH_WATCHDOG
-	help
-	 Support for Mikrotik RB532.
-	 Status: stable
-
-endchoice
 
 choice
 prompt "Device model"
@@ -589,8 +451,8 @@ prompt "Target C library"
 depends on ! ADK_NATIVE
 config ADK_TARGET_LIB_UCLIBC
 	bool "uClibc embedded C library"
-	# broken, because of 16kB pagesize
-	depends on !ADK_LINUX_MIPS64_LEMOTE && \
+	depends on \
+		   !ADK_HARDWARE_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64
 	select ADK_uclibc
 	help
@@ -600,6 +462,12 @@ config ADK_TARGET_LIB_EGLIBC
 	bool "Embedded GNU C library"
 	select ADK_eglibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_ARMEL || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_MIPSEL || \
+		ADK_LINUX_MIPS64 || \
+		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_SPARC64 || \
@@ -609,9 +477,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB4XX || \
-		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS64_LEMOTE || \
-		ADK_LINUX_TOOLCHAIN 
+		ADK_LINUX_MIPS_RB532
 	help
 	 http://www.eglibc.org
 
@@ -619,18 +485,21 @@ config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
 	select ADK_glibc
 	depends on ADK_LINUX_QEMU || \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_ARMEL || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_MIPSEL || \
+		ADK_LINUX_MIPS64 || \
+		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
-		ADK_LINUX_ARM_FOXG20 || \
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_X86_WRAP || \
 		ADK_LINUX_MIPS_RB532 || \
-		ADK_LINUX_MIPS_RB4XX || \
-		ADK_LINUX_MIPS64_LEMOTE || \
-		ADK_LINUX_TOOLCHAIN 
+		ADK_LINUX_MIPS_RB4XX
 	help
 	 http://www.gnu.org/libc
 
@@ -657,8 +526,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86_ALIX || \
 		ADK_LINUX_QEMU || \
-		ADK_LINUX_NATIVE || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_NATIVE
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
@@ -673,8 +541,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_QEMU || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
-		ADK_LINUX_NATIVE || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_NATIVE
 	help
 	  create an read-only initramfs system.
 
@@ -708,8 +575,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 		ADK_LINUX_MIPS_BRCM || \
 		ADK_LINUX_MIPS_RB532 || \
 		ADK_LINUX_MIPS_RB4XX || \
-		ADK_LINUX_MIPS_AG241 || \
-		ADK_LINUX_MIPS64_LEMOTE
+		ADK_LINUX_MIPS_AG241
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_NFS_V3
@@ -751,12 +617,18 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	depends on \
 		ADK_LINUX_NATIVE || \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_AMREL || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_MIPSEL || \
+		ADK_LINUX_MIPS64 || \
+		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
+		ADK_LINUX_PPC64 || \
 		ADK_LINUX_SPARC || \
+		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_QEMU || \
-		ADK_LINUX_XSCALE_ZAURUS || \
 		ADK_LINUX_X86 || \
-		ADK_LINUX_MIPS64_LEMOTE || \
 		ADK_LINUX_X86_64
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
@@ -771,8 +643,7 @@ config ADK_TARGET_ROOTFS_ENCRYPTED
 	select ADK_KERNEL_CRYPTO_CBC
 	select ADK_KERNEL_CRYPTO_SHA256
 	select ADK_KERNEL_XFS_FS
-	depends on ADK_LINUX_MIPS64_LEMOTE || \
-		ADK_LINUX_X86 || ADK_LINUX_X86_64
+	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
 	depends on !ADK_HARDWARE_QEMU
 	help
 	  Use this option if you want an encrypted rootfs.
@@ -840,7 +711,7 @@ endchoice
 
 choice
 prompt "Compression method for Kernel"
-	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY || ADK_LINUX_ARM_FOXG20 || ADK_LINUX_ARM_QEMU )
+	depends on !(ADK_TARGET_ROOTFS_INITRAMFS || ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK || ADK_TOOLCHAIN_ONLY || ADK_LINUX_ARM_FOXG20 )
 	
 config ADK_TARGET_KERNEL_COMPRESSION_LZMA
 	boolean

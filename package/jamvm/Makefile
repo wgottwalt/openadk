@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
-PKG_TARGET_DEPENDS:=	!foxboard !lemote
+PKG_TARGET_DEPENDS:=	!foxboard
 
 include ${TOPDIR}/mk/package.mk
 

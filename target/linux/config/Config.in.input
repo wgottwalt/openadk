@@ -3,26 +3,26 @@ depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT
 
 config ADK_KERNEL_INPUT
 	boolean
-	default y if ADK_HARDWARE_IBMX40
-	default y if ADK_HARDWARE_SHUTTLE
+	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_HARDWARE_SHUTTLE_SA76G2
 	default n
 
 config ADK_KERNEL_INPUT_KEYBOARD
 	boolean
-	default y if ADK_HARDWARE_IBMX40
-	default y if ADK_HARDWARE_SHUTTLE
+	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_HARDWARE_SHUTTLE_SA76G2
 	default n
 
 config ADK_KERNEL_KEYBOARD_ATKBD
 	boolean
-	default y if ADK_HARDWARE_IBMX40
-	default y if ADK_HARDWARE_SHUTTLE
+	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_HARDWARE_SHUTTLE_SA76G2
 	default n
 
 config ADK_KERNEL_INPUT_MOUSEDEV
 	boolean
-	default y if ADK_HARDWARE_IBMX40
-	default y if ADK_HARDWARE_SHUTTLE
+	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_HARDWARE_SHUTTLE_SA76G2
 	default n
 
 config ADK_KERNEL_HID_SUPPORT

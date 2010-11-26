@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
-PKG_TARGET_DEPENDS:=	alix x86 x86_64 lemote
+PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin !darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
@@ -27,7 +27,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+ifeq (${ADK_LINUX_MIPS64EL},y)
 CONFIGURE_ARGS+=	--disable-ipc
 else ifeq (${ADK_TARGET_LIB_UCLIBC},y)
 CONFIGURE_ARGS+=	--disable-ipc

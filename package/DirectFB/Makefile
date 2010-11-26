@@ -27,7 +27,7 @@ CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 # which then chooses the wrong default emulation (which is
 # probably the real problem here). LDEMULATION overrides ld's
 # wrong choice.
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+ifeq (${ADK_HARDWARE_LEMOTE_YEELONG},y)
 XAKE_FLAGS+=		LDEMULATION=elf64ltsmip
 endif
 

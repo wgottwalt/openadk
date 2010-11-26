@@ -99,8 +99,9 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver"
 	depends on ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
-	depends on ADK_LINUX_X86_ALIX || ADK_LINUX_MIPS64_LEMOTE || ADK_NATIVE
 	tristate
+	default y if ADK_HARDWARE_LEMOTE_YEELONG
+	default y if ADK_HARDWARE_ALIX1C
 	default n
 	help
 	 ALSA AMD CS5535 driver
@@ -128,7 +129,7 @@ config ADK_KPACKAGE_KMOD_VIDEO_DEV
 config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB || ADK_LINUX_MIPS64_LEMOTE
+	depends on ADK_KPACKAGE_KMOD_USB || ADK_HARDWARE_LEMOTE_YEELONG
 	select ADK_KPACKAGE_KMOD_VIDEO_DEV
 	default n
 	help

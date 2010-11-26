@@ -22,7 +22,7 @@ PKGSD_GLXGEARS:=	Nice little OpenGL demo application
 PKGSC_GLXGEARS:=	x11/apps
 
 PKG_HOST_DEPENDS:=	!cygwin !darwin
-PKG_TARGET_DEPENDS:=	x86 lemote
+PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
@@ -32,7 +32,7 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
 
-ifeq (${ADK_HARDWARE_IBMX40},y)
+ifeq (${ADK_HARDWARE_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif
 
@@ -63,7 +63,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
-ifeq (${ADK_HARDWARE_IBMX40},y)
+ifeq (${ADK_HARDWARE_IBM_X40},y)
 	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif

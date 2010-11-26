@@ -8,6 +8,10 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
+ifeq ($(ADK_HARDWARE_QEMU_X86),y)
+ROOTFS:=	root=/dev/sda1
+endif
+
 ifeq ($(ADK_LINUX_MIPS_RB532),y)
 ROOTFS:=	root=/dev/sda2
 MTDDEV:=	root=/dev/mtdblock1
@@ -23,7 +27,7 @@ endif
 
 $(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
 $(eval $(call rootfs_template,usb,USB,rootdelay=3))
-$(eval $(call rootfs_template,archive,ARCHIVE))
+$(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
 $(eval $(call rootfs_template,squashfs,SQUASHFS))

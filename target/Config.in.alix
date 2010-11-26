@@ -1,5 +1,5 @@
 choice
-depends on ADK_LINUX_X86_ALIX || ADK_LINUX_NATIVE
+depends on ADK_LINUX_X86_ALIX
 prompt "Hardware model"
 
 config ADK_HARDWARE_ALIX1C

@@ -74,7 +74,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS;do \
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
@@ -302,11 +302,11 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
-ifeq ($(ADKtype),ibmx40)
-	@echo ADK_HARDWARE_IBMX40=y >> $(TOPDIR)/.defconfig
+ifeq ($(ADKtype),ibm-x40)
+	@echo ADK_HARDWARE_IBM_X40=y >> $(TOPDIR)/.defconfig
 endif
-ifeq ($(ADKtype),lemote)
-	@echo ADK_HARDWARE_YEELONG=y >> $(TOPDIR)/.defconfig
+ifeq ($(ADKtype),lemote-yeelong)
+	@echo ADK_HARDWARE_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
@@ -336,17 +336,13 @@ endif
 			>> $(TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(HW)" ];then \
+		hw=$$(echo "$(HW)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/Config.in.* \
-			|grep -i "$(HW)" \
+			|grep -i "$$hw" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
+		echo "ADK_ARCH_CHOICE=y" >> $(TOPDIR)/.defconfig; \
 	fi
-ifneq (,$(filter %_qemu,${TARGET}))
-	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/.defconfig
-endif
-ifneq (,$(filter %_toolchain,${TARGET}))
-	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/.defconfig
-endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/.defconfig
 endif
@@ -379,11 +375,11 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
-ifeq ($(ADKtype),ibmx40)
-	@echo ADK_HARDWARE_IBMX40=y >> $(TOPDIR)/all.config
+ifeq ($(ADKtype),ibmx-40)
+	@echo ADK_HARDWARE_IBM_X40=y >> $(TOPDIR)/all.config
 endif
-ifeq ($(ADKtype),lemote)
-	@echo ADK_HARDWARE_YEELONG=y >> $(TOPDIR)/all.config
+ifeq ($(ADKtype),lemote-yeelong)
+	@echo ADK_HARDWARE_LEMOTE_YEELONG=y >> $(TOPDIR)/all.config
 endif
 	@if [ ! -z "$(TARGET)" ];then \
 		grep "^config" target/Config.in \
@@ -413,17 +409,13 @@ endif
 			>> $(TOPDIR)/all.config; \
 	fi
 	@if [ ! -z "$(HW)" ];then \
+		hw=$$(echo "$(HW)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/Config.in.* \
-			|grep -i "$(HW)" \
+			|grep -i "$$hw" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
+		echo "ADK_ARCH_CHOICE=y" >> $(TOPDIR)/all.config; \
 	fi
-ifneq (,$(filter %_qemu,${TARGET}))
-	@echo ADK_LINUX_QEMU=y >> $(TOPDIR)/all.config
-endif
-ifneq (,$(filter %_toolchain,${TARGET}))
-	@echo ADK_LINUX_TOOLCHAIN=y >> $(TOPDIR)/all.config
-endif
 ifneq (,$(filter rb%,${TARGET}))
 	@echo ADK_LINUX_MIKROTIK=y >> $(TOPDIR)/all.config
 endif
@@ -479,19 +471,6 @@ bulk:
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
 	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done <${TOPDIR}/target/bulkdef.lst
-
-bulktoolchain:
-	@while read target libc; do \
-		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
-	    ( \
-		echo === building $$target $$libc on $$(date); \
-		$(GMAKE) prereq && \
-			$(GMAKE) TARGET=$$target LIBC=$$libc defconfig; \
-			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
-		rm .config; \
-	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc.log; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
-	done <${TOPDIR}/target/bulktool.lst
 
 bulkall:
 	@while read target libc fs; do \

@@ -18,7 +18,7 @@ PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_HOST_DEPENDS:=	!darwin
-PKG_TARGET_DEPENDS:=	alix x86 x86_64 lemote
+PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -37,7 +37,10 @@ CONFIG_STYLE:=		minimal
 
 FAKE_FLAGS+=		INSTALLSTRIP=''
 
-ifeq (${ADK_LINUX_MIPS64_LEMOTE},y)
+ifeq (${ADK_LINUX_MIPS64EL},y)
+EXTRA_CFLAGS:=		-DARCH_MIPS64
+endif
+ifeq (${ADK_LINUX_MIPS64},y)
 EXTRA_CFLAGS:=		-DARCH_MIPS64
 endif
 
@@ -57,7 +60,7 @@ CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--enable-mmx \
 			--enable-3dnowext \
 			--enable-3dnow
-else ifeq (${ADK_HARDWARE_IBMX40},y)
+else ifeq (${ADK_HARDWARE_IBM_X40},y)
 CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
 			--enable-sse2 \
 			--enable-sse \

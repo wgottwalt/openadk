@@ -142,7 +142,7 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
-	depends on !ADK_LINUX_CRIS_FOXBOARD && !ADK_LINUX_MIPS64_LEMOTE
+	depends on !ADK_LINUX_CRIS_FOXBOARD && !ADK_HARDWARE_LEMOTE_YEELONG
  	default n
  	help
  

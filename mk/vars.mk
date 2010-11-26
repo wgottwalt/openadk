@@ -21,7 +21,11 @@ endif
 
 BASE_DIR:=		$(TOPDIR)
 DISTDIR?=		${BASE_DIR}/dl
+ifeq ($(ADK_HW),)
 BUILD_DIR:=		${BASE_DIR}/build_${ADK_TARGET}_${ADK_LIBC}
+else
+BUILD_DIR:=		${BASE_DIR}/build_${ADK_HW}_${ADK_TARGET}_${ADK_LIBC}
+endif
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
 STAGING_PARENT:=	${BASE_DIR}/cross_${ADK_TARGET}_${ADK_LIBC}
 STAGING_PARENT_PFX:=	${BASE_DIR}/cross_*
@@ -31,10 +35,18 @@ TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${ADK_TARGET}_${ADK_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
+ifeq ($(ADK_HW),)
 BIN_DIR:=		$(BASE_DIR)/bin/${ADK_TARGET}_${ADK_LIBC}
+else
+BIN_DIR:=		$(BASE_DIR)/bin/${ADK_HW}_${ADK_TARGET}_${ADK_LIBC}
+endif
 BIN_DIR_PFX:=		$(BASE_DIR)/bin
 PACKAGE_DIR:=		$(BIN_DIR)/packages
+ifeq ($(ADK_HW),)
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET}_${ADK_LIBC}
+else
+TARGET_DIR:=		$(BASE_DIR)/root_${ADK_HW}_${ADK_TARGET}_${ADK_LIBC}
+endif
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
 TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TOOLS}/bin:${STAGING_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)

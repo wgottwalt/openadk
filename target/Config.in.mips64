@@ -1,0 +1,17 @@
+choice
+depends on ADK_LINUX_MIPS64
+prompt "Hardware model"
+
+config ADK_HARDWARE_GENERIC_MIPS64
+	bool "Generic mips64 system"
+	help
+	  Generic mips64 system.
+
+config ADK_HARDWARE_GENERIC_MIPS64_TOOLCHAIN
+	bool "mips64 toolchain"
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  mips64 toolchain.
+
+endchoice
+
