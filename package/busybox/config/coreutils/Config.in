@@ -727,7 +727,7 @@ config BUSYBOX_TR
 
 config BUSYBOX_FEATURE_TR_CLASSES
 	bool "Enable character classes (such as [:upper:])"
-	default n
+	default y
 	depends on BUSYBOX_TR
 	help
 	  Enable character classes, enabling commands such as:
@@ -735,7 +735,7 @@ config BUSYBOX_FEATURE_TR_CLASSES
 
 config BUSYBOX_FEATURE_TR_EQUIV
 	bool "Enable equivalence classes"
-	default n
+	default y
 	depends on BUSYBOX_TR
 	help
 	  Enable equivalence classes, which essentially add the enclosed
