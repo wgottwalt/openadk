@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau xcmiscproto bigreqsproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBX11 LIBX11_DEV
+PKGSD_LIBX11_DEV:=	X11 headers
+PKGSC_LIBX11_DEV:=	devel
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -21,7 +23,7 @@ endif
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBX11_DEV,libx11-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBX11_DEV,libx11-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBX11_DEV},${PKGSC_LIBX11_DEV},${PKG_OPTS}))
 
 SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=

@@ -12,6 +12,10 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBXEXT LIBXEXT_DEV
+PKGSD_LIBXEXT_DEV:=	X11 extension headers
+PKGSC_LIBXEXT_DEV:=	devel
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -19,11 +23,23 @@ endif
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBXEXT_DEV,libxext-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXEXT_DEV},${PKGSC_LIBXEXT_DEV},${PKG_OPTS}))
+
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBXEXT_DEV}+=libxext-dev-install
 
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
-post-install:
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBXEXT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXext.so* ${IDIR_LIBXEXT}/usr/lib/
+
+libxext-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
+	${CP} ${WRKINST}/usr/include/X11/extensions/*.h \
+		${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
+	${CP} ${STAGING_DIR}/usr/include/X11/extensions/*.h \
+                ${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
 
 include ${TOPDIR}/mk/pkg-bottom.mk

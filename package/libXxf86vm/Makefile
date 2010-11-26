@@ -7,8 +7,8 @@ PKG_NAME:=		libXxf86vm
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		52b49483eccbdd1566b8c560fe7f76e8
-PKG_DESCR:=		add short description
-PKG_SECTION:=		libs
+PKG_DESCR:=		an interface to the XFree86-VidModeExtension extension
+PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86vidmodeproto libXext
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 

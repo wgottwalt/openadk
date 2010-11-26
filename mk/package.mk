@@ -68,10 +68,9 @@ MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
-MAKE_ENV+=		PATH='${TARGET_PATH}'
+MAKE_ENV+=		PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
-			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig' \
 			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' \
 			CXX='${TARGET_CXX}' \
