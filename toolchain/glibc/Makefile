@@ -3,14 +3,15 @@
 
 include $(TOPDIR)/rules.mk
 include ../rules.mk
-include Makefile.inc
-include ${TOPDIR}/mk/buildhlp.mk
 
 # glibc does not compile with Os
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=-O2
 endif
+
+include Makefile.inc
+include ${TOPDIR}/mk/buildhlp.mk
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp

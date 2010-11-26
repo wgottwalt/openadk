@@ -5,8 +5,8 @@ foxboard	uclibc		squashfs
 foxg20		uclibc		nfsroot
 foxg20		uclibc		ext2-block
 foxg20		eglibc		nfsroot
-foxg20		eglibc		ext2-block
 foxg20		glibc		nfsroot
+foxg20		eglibc		ext2-block
 foxg20		glibc		ext2-block
 rb4xx		uclibc		nfsroot
 rb4xx		eglibc		nfsroot
