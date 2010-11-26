@@ -315,7 +315,6 @@ depends on ADK_TARGET_CHOICE
 
 config ADK_LINUX_X86_ALIX
 	bool "PC Engines ALIX boards"
-	select ADK_x86
 	select ADK_alix
 	help
 	  Support for Alix boards.
@@ -324,7 +323,6 @@ config ADK_LINUX_X86_ALIX
 
 config ADK_LINUX_X86_WRAP
 	bool "PC Engines WRAP boards"
-	select ADK_x86
 	select ADK_wrap
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
