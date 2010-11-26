@@ -115,11 +115,11 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | cpio -i -d ;; \
+				gzip -dc $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				bzip2 -dc $$file | cpio -i -d ;; \
+				bzip2 -dc $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \

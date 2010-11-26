@@ -201,12 +201,15 @@ config ADK_eglibc
 config ADK_glibc
 	tristate
 
+config ADK_libc
+	tristate
+
 config ADK_LIBC
 	string
 	default "uclibc"  if ADK_uclibc
 	default "eglibc"  if ADK_eglibc
 	default "glibc"  if ADK_glibc
-	default "native"  if ADK_NATIVE
+	default "libc"  if ADK_libc
 
 menu "Target system"
 choice
@@ -231,6 +234,7 @@ default ADK_LINUX_X86
 
 config ADK_LINUX_NATIVE
 	bool "native build"
+	select ADK_libc
 	select ADK_NATIVE
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_USB

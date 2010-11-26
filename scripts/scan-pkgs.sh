@@ -24,6 +24,14 @@ out=0
 . $topdir/.config
 
 if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_LIBIMAGEMAGICK ]];then
+		NEED_JPEGDEV="$NEED_JPEGDEV libimagemagick"
+		NEED_TIFFDEV="$NEED_TIFFDEV libimagemagick"
+	fi
+	if [[ -n $ADK_PACKAGE_DISPLAY ]];then
+		NEED_X11DEV="$NEED_X11DEV display"
+		NEED_XEXTDEV="$NEED_XEXTDEV display"
+	fi
 	if [[ -n $ADK_PACKAGE_GIT ]];then
 		NEED_CURLDEV="$NEED_CURLDEV git"
 	fi
@@ -131,6 +139,34 @@ if [[ -n $NEED_CURLDEV ]];then
 			echo >&2 You need curl headers to build $NEED_CURLDEV
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_TIFFDEV ]];then
+	if ! test -f /usr/include/tiff.h >/dev/null; then
+		echo >&2 You need tiff headers to build $NEED_TIFFDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_JPEGDEV ]];then
+	if ! test -f /usr/include/jpeglib.h >/dev/null; then
+		echo >&2 You need jpeg headers to build $NEED_JPEGDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_X11DEV ]];then
+	if ! test -f /usr/include/X11/Xlib.h >/dev/null; then
+		echo >&2 You need X11 headers to build $NEED_X11DEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_XEXTDEV ]];then
+	if ! test -f /usr/include/X11/extensions/XShm.h >/dev/null; then
+		echo >&2 You need X11 extensions headers to build $NEED_XEXTDEV
+		out=1
 	fi
 fi
 

@@ -2,3 +2,4 @@
 . $IPKG_INSTROOT/etc/functions.sh
 gid=$(get_next_gid)
 add_group video $gid
+chmod u+s /usr/bin/X

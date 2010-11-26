@@ -144,10 +144,12 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+ifeq ($(ADK_NATIVE),)
 	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
 		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
 	done
+endif
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \

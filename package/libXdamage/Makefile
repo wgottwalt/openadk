@@ -8,9 +8,8 @@ PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f8f19f747c8445213d5409ae8b8b2f0a
 PKG_DESCR:=		X Window System client interface to the DAMAGE extension to the X protocol
-PKG_SECTION:=		libs
+PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXfixes damageproto
-PKG_URL:=		add project url
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
 
 include $(TOPDIR)/mk/package.mk

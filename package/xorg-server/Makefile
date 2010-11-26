@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.7.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ba0360b4ec1f6e541b264e45906bf5f2
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
@@ -80,7 +80,6 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/xorg/protocol.txt \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/
 	${CP} ${WRKINST}/usr/bin/* $(IDIR_XORG_SERVER)/usr/bin
-	chmod u+s $(IDIR_XORG_SERVER)/usr/bin/Xorg
 	${CP} ${WRKINST}/usr/lib/xorg/modules/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*.so \
