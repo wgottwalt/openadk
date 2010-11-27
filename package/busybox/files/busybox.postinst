@@ -6,3 +6,4 @@ add_rcconf watchdog watchdog NO
 add_rcconf watchdog_flags watchdog_flags '-t 10 -T 20'
 add_rcconf 'use "-C32" normally, "NO" to disable' syslogd_flags '-C32'
 add_rcconf inetd inetd NO
+chmod u+s /bin/busybox
