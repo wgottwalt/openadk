@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vim
 PKG_VERSION:=		7.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		5b9510a17074e2b37d8bb38ae09edbf2
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		editor
@@ -58,6 +58,9 @@ XAKE_FLAGS+=		prefix=/usr \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_VIM}/usr/bin
+	${INSTALL_DIR} ${IDIR_VIM}/usr/share/vim
 	${CP} ${WRKINST}/usr/bin/{ex,vim,view} ${IDIR_VIM}/usr/bin
+	${CP} ${WRKINST}/usr/share/vim/vim73/vimrc_example.vim \
+		${IDIR_VIM}/usr/share/vim/vimrc
 
 include ${TOPDIR}/mk/pkg-bottom.mk
