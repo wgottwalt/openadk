@@ -1,0 +1,11 @@
+--- keychain-2.7.1.orig/Makefile	2010-05-07 19:24:14.000000000 +0200
++++ keychain-2.7.1/Makefile	2010-11-27 23:36:29.000000000 +0100
+@@ -44,7 +44,7 @@ GENKEYCHAINPL = open P, "keychain.txt" o
+ 			s/\#\#VERSION\#\#/$V/g || die; \
+ 		print
+ 
+-keychain: keychain.sh keychain.txt
++keychain: keychain.sh
+ 	perl -e '$(GENKEYCHAINPL)' >keychain || rm -f keychain
+ 	chmod +x keychain
+ 

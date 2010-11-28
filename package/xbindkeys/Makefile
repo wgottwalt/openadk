@@ -1,0 +1,31 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		xbindkeys
+PKG_VERSION:=		1.8.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		393dd74f85850a4ba0803b5a78bc598b
+PKG_DESCR:=		keybindings for X11
+PKG_SECTION:=		x11/apps
+PKG_SITES:=		http://openadk.org/distfiles/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,XBINDKEYS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-guile \
+			--disable-tk
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
+#BUILD_STYLE:=		manual
+#INSTALL_STYLE:=	manual
+
+# please install all files and directories to the package dir
+post-install:
+	$(INSTALL_DIR) $(IDIR_XBINDKEYS)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbindkeys \
+		$(IDIR_XBINDKEYS)/usr/bin
+
+# please remove ALL above comments, before commiting
+include ${TOPDIR}/mk/pkg-bottom.mk
