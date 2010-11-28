@@ -1,23 +1,23 @@
-diff -Nur linux-2.6.32.orig/scripts/Makefile.lib linux-2.6.32/scripts/Makefile.lib
---- linux-2.6.32.orig/scripts/Makefile.lib	Thu Dec  3 04:50:57 2009
-+++ linux-2.6.32/scripts/Makefile.lib	Sat Dec 19 12:21:44 2009
-@@ -211,7 +211,12 @@
- size_append = /bin/echo -ne $(shell					\
+diff -Nur linux-2.6.36.orig/scripts/Makefile.lib linux-2.6.36/scripts/Makefile.lib
+--- linux-2.6.36.orig/scripts/Makefile.lib	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/scripts/Makefile.lib	2010-11-28 18:34:22.000000000 +0100
+@@ -216,7 +216,12 @@
+ size_append = printf $(shell						\
  dec_size=0;								\
  for F in $1; do								\
 -	fsize=$$(stat -c "%s" $$F);					\
-+	if stat --help >/dev/null 2>&1; then				\
-+		statcmd='stat -c %s';					\
-+	else								\
++	if stat -qs .>/dev/null 2>&1; then				\
 +		statcmd='stat -f %z';					\
++	else								\
++		statcmd='stat -c %s';					\
 +	fi;								\
 +	fsize=$$($$statcmd $$F);					\
  	dec_size=$$(expr $$dec_size + $$fsize);				\
  done;									\
- printf "%08x" $$dec_size |						\
-diff -Nur linux-2.6.32.orig/scripts/mod/mk_elfconfig.c linux-2.6.32/scripts/mod/mk_elfconfig.c
---- linux-2.6.32.orig/scripts/mod/mk_elfconfig.c	Thu Dec  3 04:50:57 2009
-+++ linux-2.6.32/scripts/mod/mk_elfconfig.c	Sat Dec 19 11:09:24 2009
+ printf "%08x\n" $$dec_size |						\
+diff -Nur linux-2.6.36.orig/scripts/mod/mk_elfconfig.c linux-2.6.36/scripts/mod/mk_elfconfig.c
+--- linux-2.6.36.orig/scripts/mod/mk_elfconfig.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/scripts/mod/mk_elfconfig.c	2010-11-28 18:33:24.000000000 +0100
 @@ -1,7 +1,18 @@
  #include <stdio.h>
  #include <stdlib.h>
@@ -38,15 +38,15 @@ diff -Nur linux-2.6.32.orig/scripts/mod/mk_elfconfig.c linux-2.6.32/scripts/mod/
  
  int
  main(int argc, char **argv)
-diff -Nur linux-2.6.32.orig/scripts/mod/modpost.h linux-2.6.32/scripts/mod/modpost.h
---- linux-2.6.32.orig/scripts/mod/modpost.h	Thu Dec  3 04:50:57 2009
-+++ linux-2.6.32/scripts/mod/modpost.h	Sat Dec 19 11:55:02 2009
-@@ -7,8 +7,2454 @@
+diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpost.h
+--- linux-2.6.36.orig/scripts/mod/modpost.h	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/scripts/mod/modpost.h	2010-11-28 18:33:24.000000000 +0100
+@@ -7,7 +7,2453 @@
  #include <sys/mman.h>
  #include <fcntl.h>
  #include <unistd.h>
 -#include <elf.h>
- 
++
 +
 +/* This file defines standard ELF types, structures, and macros.
 +   Copyright (C) 1995-1999,2000,2001,2002,2003 Free Software Foundation, Inc.
@@ -2493,18 +2493,17 @@ diff -Nur linux-2.6.32.orig/scripts/mod/modpost.h linux-2.6.32/scripts/mod/modpo
 +__END_DECLS
 +
 +#endif	/* elf.h */
-+
+ 
  #include "elfconfig.h"
  
- #if KERNEL_ELFCLASS == ELFCLASS32
-@@ -155,3 +2601,4 @@
+@@ -195,3 +2641,4 @@
  void fatal(const char *fmt, ...);
  void warn(const char *fmt, ...);
  void merror(const char *fmt, ...);
 +
-diff -Nur linux-2.6.32.orig/scripts/mod/sumversion.c linux-2.6.32/scripts/mod/sumversion.c
---- linux-2.6.32.orig/scripts/mod/sumversion.c	Thu Dec  3 04:50:57 2009
-+++ linux-2.6.32/scripts/mod/sumversion.c	Sat Dec 19 12:01:07 2009
+diff -Nur linux-2.6.36.orig/scripts/mod/sumversion.c linux-2.6.36/scripts/mod/sumversion.c
+--- linux-2.6.36.orig/scripts/mod/sumversion.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/scripts/mod/sumversion.c	2010-11-28 18:33:24.000000000 +0100
 @@ -1,4 +1,4 @@
 -#include <netinet/in.h>
 +/* #include <netinet/in.h> */
