@@ -8,6 +8,19 @@ config ADK_HARDWARE_GENERIC_SPARC
 	help
 	  Generic sparc system.
 
+config ADK_HARDWARE_QEMU_SPARC
+	bool "Qemu sparc"
+	select ADK_qemu
+	select ADK_CPU_SPARC_V8
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for sparc architecture.
+	 Status: stable
+
 config ADK_HARDWARE_GENERIC_SPARC_TOOLCHAIN
 	bool "sparc toolchain"
 	select ADK_TOOLCHAIN_ONLY

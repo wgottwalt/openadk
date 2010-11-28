@@ -7,6 +7,18 @@ config ADK_HARDWARE_GENERIC_MIPSEL
 	help
 	  Generic mipsel system.
 
+config ADK_HARDWARE_QEMU_MIPSEL
+	bool "Qemu mipsel"
+	select ADK_qemu
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for mips little endian architecture.
+	 Status: stable
+
 config ADK_HARDWARE_GENERIC_MIPSEL_TOOLCHAIN
 	bool "mipsel toolchain"
 	select ADK_TOOLCHAIN_ONLY

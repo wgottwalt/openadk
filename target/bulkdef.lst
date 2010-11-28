@@ -35,21 +35,42 @@ wrap		glibc		nfsroot
 wrap		uclibc		ext2-block
 wrap		eglibc		ext2-block
 wrap		glibc		ext2-block
-x86		uclibc		archive
-x86		eglibc		archive
-x86		glibc		archive
-x86		uclibc		initramfs
-x86		eglibc		initramfs
-x86		glibc		initramfs
-x86		uclibc		initramfs-piggyback
-x86		eglibc		initramfs-piggyback
-x86		glibc		initramfs-piggyback
-x86_64		uclibc		archive
-x86_64		eglibc		archive
-x86_64		glibc		archive
-x86_64		uclibc		initramfs
-x86_64		eglibc		initramfs
-x86_64		glibc		initramfs
-x86_64		uclibc		initramfs-piggyback
-x86_64		eglibc		initramfs-piggyback
-x86_64		glibc		initramfs-piggyback
+x86		uclibc		archive		qemu
+x86		eglibc		archive		qemu
+x86		glibc		archive		qemu
+x86		uclibc		initramfs	qemu
+x86		eglibc		initramfs	qemu
+x86		glibc		initramfs	qemu
+x86		uclibc		initramfs-piggyback	qemu
+x86		eglibc		initramfs-piggyback	qemu
+x86		glibc		initramfs-piggyback	qemu
+x86_64		uclibc		archive		qemu
+x86_64		eglibc		archive		qemu
+x86_64		uclibc		initramfs	qemu
+x86_64		eglibc		initramfs	qemu
+x86_64		uclibc		initramfs-piggyback	qemu
+x86_64		eglibc		initramfs-piggyback	qemu
+arm		uclibc		archive		qemu
+arm		eglibc		archive		qemu
+arm		glibc		archive		qemu
+armel		uclibc		archive		qemu
+armel		eglibc		archive		qemu
+armel		glibc		archive		qemu
+mips		uclibc		archive		qemu
+mips		eglibc		archive		qemu
+mips		glibc		archive		qemu
+mips64		uclibc		archive		qemu
+mips64		eglibc		archive		qemu
+mips64		glibc		archive		qemu
+mipsel		uclibc		archive		qemu
+mipsel		eglibc		archive		qemu
+mipsel		glibc		archive		qemu
+mips64el		uclibc		archive		qemu
+mips64el		eglibc		archive		qemu
+mips64el		glibc		archive		qemu
+ppc		uclibc		archive		qemu
+ppc		eglibc		archive		qemu
+ppc		glibc		archive		qemu
+sparc		uclibc		archive		qemu
+sparc		eglibc		archive		qemu
+sparc		glibc		archive		qemu

@@ -7,6 +7,19 @@ config ADK_HARDWARE_GENERIC_PPC
 	help
 	  Generic ppc system.
 
+config ADK_HARDWARE_QEMU_PPC
+	bool "Qemu ppc"
+	select ADK_qemu
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for ppc architecture.
+	 Status: stable
+
+
 config ADK_HARDWARE_GENERIC_PPC_TOOLCHAIN
 	bool "ppc toolchain"
 	select ADK_TOOLCHAIN_ONLY

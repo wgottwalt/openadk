@@ -14,33 +14,32 @@ alix		glibc		nfsroot
 wrap		uclibc		nfsroot
 wrap		eglibc		nfsroot
 wrap		glibc		nfsroot
-arm		uclibc		archive
-arm		eglibc		archive
-arm		glibc		archive
-armel		uclibc		archive
-armel		eglibc		archive
-armel		glibc		archive
-mips		uclibc		archive
-mips		eglibc		archive
-mips		glibc		archive
-mips64		uclibc		archive
-mips64		eglibc		archive
-mips64		glibc		archive
-mipsel		uclibc		archive
-mipsel		eglibc		archive
-mipsel		glibc		archive
-mips64el		uclibc		archive
-mips64el		eglibc		archive
-mips64el		glibc		archive
-ppc		uclibc		archive
-ppc		eglibc		archive
-ppc		glibc		archive
-sparc		uclibc		archive
-sparc		eglibc		archive
-sparc		glibc		archive
-x86		uclibc		archive
-x86		eglibc		archive
-x86		glibc		archive
-x86_64		uclibc		archive
-x86_64		eglibc		archive
-x86_64		glibc		archive
+arm		uclibc		archive		qemu
+arm		eglibc		archive		qemu
+arm		glibc		archive		qemu
+armel		uclibc		archive		qemu
+armel		eglibc		archive		qemu
+armel		glibc		archive		qemu
+mips		uclibc		archive		qemu
+mips		eglibc		archive		qemu
+mips		glibc		archive		qemu
+mips64		uclibc		archive		qemu
+mips64		eglibc		archive		qemu
+mips64		glibc		archive		qemu
+mipsel		uclibc		archive		qemu
+mipsel		eglibc		archive		qemu
+mipsel		glibc		archive		qemu
+mips64el		uclibc		archive		qemu
+mips64el		eglibc		archive		qemu
+mips64el		glibc		archive		qemu
+ppc		uclibc		archive		qemu
+ppc		eglibc		archive		qemu
+ppc		glibc		archive		qemu
+sparc		uclibc		archive		qemu
+sparc		eglibc		archive		qemu
+sparc		glibc		archive		qemu
+x86		uclibc		archive		qemu
+x86		eglibc		archive		qemu
+x86		glibc		archive		qemu
+x86_64		uclibc		archive		qemu
+x86_64		eglibc		archive		qemu

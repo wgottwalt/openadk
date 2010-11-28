@@ -7,6 +7,18 @@ config ADK_HARDWARE_GENERIC_MIPS64EL
 	help
 	  Generic mips64el system.
 
+config ADK_HARDWARE_QEMU_MIPS64EL
+	bool "Qemu mips64el"
+	select ADK_qemu
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for mips64 little endian architecture.
+	 Status: stable
+
 config ADK_HARDWARE_LEMOTE_YEELONG
 	bool "Lemote Yeelong laptop"
 	select ADK_CPU_LOONGSON2F

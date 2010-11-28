@@ -460,12 +460,12 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all targets and combinations
 bulk:
-	@while read target libc fs; do \
+	@while read target libc fs hw; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
-		echo === building $$target $$libc $$fs on $$(date); \
+		echo === building $$target $$hw $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs defconfig; \
+			$(GMAKE) TARGET=$$target HW=$$hw LIBC=$$libc FS=$$fs defconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
@@ -473,12 +473,12 @@ bulk:
 	done <${TOPDIR}/target/bulkdef.lst
 
 bulkall:
-	@while read target libc fs; do \
+	@while read target libc fs hw; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
-		echo === building $$target $$libc $$fs on $$(date); \
+		echo === building $$target $$hw $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allconfig; \
+			$(GMAKE) TARGET=$$target HW=$$hw LIBC=$$libc FS=$$fs allconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \
@@ -486,12 +486,12 @@ bulkall:
 	done <${TOPDIR}/target/bulk.lst
 
 bulkallmod:
-	@while read target libc fs; do \
+	@while read target libc fs hw; do \
 		mkdir -p $(TOPDIR)/bin/$${target}_$$libc; \
 	    ( \
-		echo === building $$target $$libc $$fs on $$(date); \
+		echo === building $$target $$hw $$libc $$fs on $$(date); \
 		$(GMAKE) prereq && \
-			$(GMAKE) TARGET=$$target LIBC=$$libc FS=$$fs allmodconfig; \
+			$(GMAKE) TARGET=$$target HW=$$hw LIBC=$$libc FS=$$fs allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
 	    ) 2>&1 | tee $(TOPDIR)/bin/$${target}_$$libc/$$target-$$libc-$$fs.log; \

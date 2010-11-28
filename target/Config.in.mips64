@@ -7,6 +7,18 @@ config ADK_HARDWARE_GENERIC_MIPS64
 	help
 	  Generic mips64 system.
 
+config ADK_HARDWARE_QEMU_MIPS64
+	bool "Qemu mips64"
+	select ADK_qemu
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Qemu support for mips64 architecture.
+	 Status: stable
+
 config ADK_HARDWARE_GENERIC_MIPS64_TOOLCHAIN
 	bool "mips64 toolchain"
 	select ADK_TOOLCHAIN_ONLY

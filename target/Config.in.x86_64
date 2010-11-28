@@ -40,6 +40,7 @@ config ADK_HARDWARE_SHUTTLE_SA76G2
 
 config ADK_HARDWARE_QEMU_X86_64
 	bool "Qemu x86_64"
+	select ADK_qemu
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
