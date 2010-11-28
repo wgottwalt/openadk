@@ -590,7 +590,7 @@ config BUSYBOX_FEATURE_FANCY_SLEEP
 
 config BUSYBOX_FEATURE_FLOAT_SLEEP
 	bool "Enable fractional arguments"
-	default n
+	default y
 	depends on BUSYBOX_FEATURE_FANCY_SLEEP
 	help
 	  Allow for fractional numeric parameters.

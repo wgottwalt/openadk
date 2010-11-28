@@ -1,4 +1,5 @@
 #!/bin/sh
+if [ -z $IPKG_INSTROOT ];then chmod u+s /bin/busybox;fi
 . $IPKG_INSTROOT/etc/functions.sh
 add_rcconf network network YES
 add_rcconf crond crond NO
@@ -6,4 +7,3 @@ add_rcconf watchdog watchdog NO
 add_rcconf watchdog_flags watchdog_flags '-t 10 -T 20'
 add_rcconf 'use "-C32" normally, "NO" to disable' syslogd_flags '-C32'
 add_rcconf inetd inetd NO
-chmod u+s /bin/busybox

@@ -1,3 +1,2 @@
 #!/bin/sh
-. $IPKG_INSTROOT/etc/functions.sh
-chmod u+s /usr/bin/sudo
+if [ -z $IPKG_INSTROOT ];then chmod u+s /usr/bin/sudo;fi
