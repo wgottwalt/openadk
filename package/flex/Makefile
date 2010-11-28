@@ -16,6 +16,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FLEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
+
 post-install:
 	${INSTALL_DIR} ${IDIR_FLEX}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/flex ${IDIR_FLEX}/usr/bin
