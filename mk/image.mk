@@ -50,11 +50,14 @@ INITRAMFS_PIGGYBACK=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 endif
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
-	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
+	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+		${TOPDIR}/bin/tools/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
-	cd ${TARGET_DIR}; tar --exclude ./boot -cf - --owner=0 --group=0 . \
-		| gzip -n9 >$@
+	cd ${TARGET_DIR}; find . | grep -v ./boot | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+		${TOPDIR}/bin/tools/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \

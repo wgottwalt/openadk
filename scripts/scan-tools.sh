@@ -102,19 +102,9 @@ fi
 rm test 2>/dev/null
 
 if ! which tar >/dev/null 2>&1; then
-	echo You must install GNU tar to continue.
+	echo You must install tar to continue.
 	echo
 	out=1
-fi
-
-if ! (tar --version | grep GNU) >/dev/null 2>&1;then
-	if ! which gtar >/dev/null 2>&1; then
-		if ! which gnutar >/dev/null 2>&1; then
-			echo You must install GNU tar to continue.
-			echo
-			out=1
-		fi
-	fi
 fi
 
 if ! which gzip >/dev/null 2>&1; then

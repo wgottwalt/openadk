@@ -29,3 +29,9 @@ ifeq ($(FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
+ifeq ($(FS),nfsroot)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/${ADK_TARGET}-${FS}-kernel
+	@echo 'The kernel file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
+endif

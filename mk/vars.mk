@@ -85,8 +85,7 @@ HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${HOSTCC}' \
 PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))
 
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/ipkg-build -c -o 0 -g 0
-
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/ipkg-build -c
 PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
 			IPKG_CONF_DIR=$(STAGING_DIR)/etc \
