@@ -303,6 +303,8 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
 ifeq ($(ADKtype),ibm-x40)
+	@echo ADK_ARCH_CHOICE=y >> $(TOPDIR)/.defconfig
+	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_HARDWARE_IBM_X40=y >> $(TOPDIR)/.defconfig
 endif
 ifeq ($(ADKtype),lemote-yeelong)
@@ -313,6 +315,9 @@ endif
 			|grep -i "$(TARGET)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(TOPDIR)/.defconfig; \
+		if [ "$(TARGET)" = "native" ];then \
+			echo "ADK_ARCH_CHOICE=y" >> $(TOPDIR)/.defconfig; \
+		fi; \
 	fi
 	@for symbol in ${DEFCONFIG}; do \
 		echo $$symbol >> $(TOPDIR)/.defconfig; \

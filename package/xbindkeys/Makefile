@@ -18,14 +18,10 @@ $(eval $(call PKG_template,XBINDKEYS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},$
 CONFIGURE_ARGS+=	--disable-guile \
 			--disable-tk
 CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
-#BUILD_STYLE:=		manual
-#INSTALL_STYLE:=	manual
 
-# please install all files and directories to the package dir
 post-install:
 	$(INSTALL_DIR) $(IDIR_XBINDKEYS)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbindkeys \
 		$(IDIR_XBINDKEYS)/usr/bin
 
-# please remove ALL above comments, before commiting
 include ${TOPDIR}/mk/pkg-bottom.mk
