@@ -70,7 +70,7 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \
-,20, kmod-led-class))
+,20, kmod-leds-class))
 
 $(eval $(call KMOD_template,P54_COMMON,p54-common,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54common \
@@ -95,15 +95,15 @@ $(eval $(call KMOD_template,RT2X00,rt2x00,\
 
 $(eval $(call KMOD_template,RT2400PCI,rt2400pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2400pci \
-,20, kmod-led-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00))
 
 $(eval $(call KMOD_template,RT2500PCI,rt2500pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2500pci \
-,20, kmod-led-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00))
 
 $(eval $(call KMOD_template,RT61PCI,rt61pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt61pci \
-,20, kmod-led-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00))
 
 #
 # Networking
