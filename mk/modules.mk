@@ -1095,11 +1095,15 @@ $(eval $(call KMOD_template,SND_VIA82XX,snd-via82xx,\
 	$(MODULES_DIR)/kernel/sound/pci/snd-via82xx \
 ,55))
 
+$(eval $(call KMOD_template,SND_INTEL8X0,snd-intel8x0,\
+	$(MODULES_DIR)/kernel/sound/pci/snd-intel8x0 \
+,55))
+
 $(eval $(call KMOD_template,SND_ENS1370,snd-ens1370,\
 	$(MODULES_DIR)/kernel/sound/pci/snd-ens1370 \
 ,55))
 
-$(eval $(call KMOD_template,SND_CS5535AUDIO,sound-cs5535audio,\
+$(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
