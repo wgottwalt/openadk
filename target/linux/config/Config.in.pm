@@ -40,4 +40,13 @@ config ADK_HARDWARE_ACPI
 	help
 	 Enable ACPI support.
 
+config ADK_KERNEL_SUSPEND
+	prompt "Enable Suspend support"
+	boolean
+	select ADK_KERNEL_PM
+	default y if ADK_HARDWARE_IBM_X40
+	default n
+	help
+	  Enable Suspend-to-RAM and Suspend-to-Disk support.
+
 endmenu

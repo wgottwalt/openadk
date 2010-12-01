@@ -5,10 +5,6 @@ config ADK_KERNEL_MEDIA_SUPPORT
 	boolean
 	default n
 
-config ADK_KERNEL_SND_AC97_CODEC
-	boolean
-	default n
-
 config ADK_KERNEL_SND_TIMER
 	boolean
 	default n
@@ -44,7 +40,14 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	default n
 	help
 
+config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	tristate
+	default n
+	help
+	 ALSA AC97 codec support.
+
 menu "Audio devices support"
+
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-snd...................... ALSA sound support"
 	tristate
@@ -67,14 +70,6 @@ config ADK_KPACKAGE_KMOD_SND_OSSEMUL
 	default n
 	help
 	 ALSA OSS Emulation
-
-config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
-	prompt "kmod-snd-ac97-codec........... ALSA AC97 codec"
-	tristate
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
-	default n
-	help
-	 ALSA AC97 codec support.
 
 config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	prompt "kmod-snd-intel8x0............. Intel AC97 driver"
