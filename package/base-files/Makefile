@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		35
+PKG_RELEASE:=		36
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -26,7 +26,7 @@ do-install:
 	# allow this to fail, as there might be no target-specific files to copy
 	-$(CP) $(TOPDIR)/target/$(ADK_TARGET)/files/* $(IDIR_BASE_FILES)
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
-	@-rm $(IDIR_BASE_FILES)/etc/network/interfaces
+	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
 	$(SED) 's,@TARGET@,$(ADK_TARGET),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
