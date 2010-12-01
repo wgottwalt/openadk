@@ -4,12 +4,16 @@ prompt "Hardware model"
 
 config ADK_HARDWARE_GENERIC_ARM
 	bool "Generic arm system"
+	select ADK_EABI
+	select ADK_TARGET_NO_FPU
 	help
 	  Generic arm system.
 
 config ADK_HARDWARE_QEMU_ARM
 	bool "Qemu arm"
 	select ADK_qemu
+	select ADK_EABI
+	select ADK_TARGET_NO_FPU
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
@@ -21,9 +25,10 @@ config ADK_HARDWARE_QEMU_ARM
 
 config ADK_HARDWARE_GENERIC_ARM_TOOLCHAIN
 	bool "arm toolchain"
+	select ADK_EABI
+	select ADK_TARGET_NO_FPU
 	select ADK_TOOLCHAIN_ONLY
 	help
 	  arm toolchain.
 
 endchoice
-
