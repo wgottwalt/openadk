@@ -12,6 +12,10 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://libusb.wiki.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 
+PKG_SUBPKGS:=		LIBUSB LIBUSB_DEV
+PKGSD_LIBUSB_DEV:=	header files for libusb library
+PKGSC_LIBUSB_DEV:=	devel
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
@@ -21,9 +25,18 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBUSB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_DEV},${PKGSC_LIBUSB_DEV},${PKG_OPTS}))
 
-post-install:
+SUB_INSTALLS-y:=
+SUB_INSTALLS-m:=
+SUB_INSTALLS-${ADK_PACKAGE_LIBUSB_DEV}+=	libusb-dev-install
+
+post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBUSB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libusb*.so* ${IDIR_LIBUSB}/usr/lib/
+
+libusb-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBUSB_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBUSB_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
