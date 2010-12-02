@@ -24,6 +24,8 @@ ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
 endif
 
+CONFIGURE_ARGS+=	--enable-ltdl-install
+
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBLTDL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libltdl.so* ${IDIR_LIBLTDL}/usr/lib/

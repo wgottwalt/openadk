@@ -38,6 +38,12 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
 		NEED_RPM="$NEED_RPM rpm"
 	fi
+	if [[ -n $ADK_PACKAGE_WPA_SUPPLICANT_WITH_OPENSSL ]]; then
+		NEED_LIBSSLDEV="$NEED_LIBSSLDEV wpa_supplicant"
+	fi
+	if [[ -n $ADK_PACKAGE_IW ]]; then
+		NEED_LIBNLDEV="$NEED_LIBNLDEV iw"
+	fi
 fi
 
 if [[ -n $ADK_PACKAGE_GPSD ]]; then
@@ -156,6 +162,13 @@ if [[ -n $NEED_JPEGDEV ]];then
 	fi
 fi
 
+if [[ -n $NEED_LIBNLDEV ]];then
+	if ! test -f /usr/include/netlink/netlink.h >/dev/null; then
+		echo >&2 You need libnl headers to build $NEED_LIBNLDEV
+		out=1
+	fi
+fi
+
 if [[ -n $NEED_X11DEV ]];then
 	if ! test -f /usr/include/X11/Xlib.h >/dev/null; then
 		echo >&2 You need X11 headers to build $NEED_X11DEV
@@ -170,14 +183,12 @@ if [[ -n $NEED_XEXTDEV ]];then
 	fi
 fi
 
-#if [[ -n $NEED_SSLDEV ]]; then
-#	if ! test -f /usr/lib/pkgconfig/openssl.pc >/dev/null; then
-#		if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
-#			echo >&2 You need openssl headers to build $NEED_SSLDEV
-#			out=1
-#		fi
-#	fi
-#fi
+if [[ -n $NEED_LIBSSLDEV ]]; then
+	if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
+		echo >&2 You need openssl headers to build $NEED_LIBSSLDEV
+		out=1
+	fi
+fi
 
 if [[ -n $NEED_MKFONTDIR ]]; then
 	if ! which mkfontdir >/dev/null 2>&1; then

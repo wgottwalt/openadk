@@ -5,10 +5,6 @@ config ADK_KERNEL_MEDIA_SUPPORT
 	boolean
 	default n
 
-config ADK_KERNEL_SND_AC97_CODEC
-	boolean
-	default n
-
 config ADK_KERNEL_SND_TIMER
 	boolean
 	default n
@@ -44,68 +40,79 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	default n
 	help
 
+config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	tristate
+	default n
+	help
+	 ALSA AC97 codec support.
+
+menu "Audio devices support"
+
 config ADK_KPACKAGE_KMOD_SND
-	prompt "kmod-sound-alsa................. ALSA sound support"
+	prompt "kmod-snd...................... ALSA sound support"
+	tristate
 	select ADK_KPACKAGE_KMOD_SOUND
 	select ADK_KERNEL_SND_OSSEMUL
 	select ADK_KERNEL_SND_TIMER
 	select ADK_KERNEL_SND_PCM
 	select ADK_KERNEL_SND_HWDEP
-	tristate
 	default n
 	help
 	 Basic ALSA sound support.
 
 config ADK_KPACKAGE_KMOD_SND_OSSEMUL
-	prompt "kmod-sound-alsa-oss-emul....... ALSA OSS Emulation"
-	depends on ADK_KPACKAGE_KMOD_SND
+	prompt "kmod-snd-ossemul.............. ALSA OSS Emulation"
+	tristate
 	select ADK_KERNEL_SND_MIXER_OSS
 	select ADK_KERNEL_SND_PCM_OSS
-	tristate
+	select ADK_KPACKAGE_KMOD_SND
+	default y if ADK_HARDWARE_IBM_X40
 	default n
 	help
 	 ALSA OSS Emulation
 
-config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
-	prompt "kmod-sound-alsa-ac97-codec..... ALSA AC97 codec"
-	depends on ADK_KPACKAGE_KMOD_SND
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
-	select ADK_KERNEL_SND_AC97_CODEC
+config ADK_KPACKAGE_KMOD_SND_INTEL8X0
+	prompt "kmod-snd-intel8x0............. Intel AC97 driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	select ADK_KPACKAGE_KMOD_SND
+	default y if ADK_HARDWARE_IBM_X40
 	default n
 	help
-	 ALSA AC97 driver
+	  Driver for intel chipsets.	
 
 config ADK_KPACKAGE_KMOD_SND_VIA82XX
-	prompt "kmod-sound-alsa-via82xx........ ALSA VIA82XX driver"
-	depends on ADK_KPACKAGE_KMOD_SND
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
-	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	prompt "kmod-snd-via82xx.............. ALSA VIA82XX driver"
 	tristate
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
+	select ADK_KPACKAGE_KMOD_SND
 	default n
 	help
 	 ALSA VIA82XX driver
 
 config ADK_KPACKAGE_KMOD_SND_ENS1370
-	prompt "kmod-sound-alsa-ens1370........ ALSA Ensoniq 1370 driver"
-	depends on ADK_KPACKAGE_KMOD_SND
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
+	prompt "kmod-snd-ens1370.............. ALSA Ensoniq 1370 driver"
 	tristate
+	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
+	select ADK_KPACKAGE_KMOD_SND
 	default n
 	help
 	 ALSA Ensonique 1370 driver
 
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
-	prompt "kmod-sound-alsa-cs5535......... ALSA AMD CS5535 driver"
-	depends on ADK_KPACKAGE_KMOD_SND
-	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	prompt "kmod-snd-cs5535audio.......... ALSA AMD CS5535 driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_HARDWARE_LEMOTE_YEELONG
 	default y if ADK_HARDWARE_ALIX1C
 	default n
 	help
 	 ALSA AMD CS5535 driver
 
+endmenu
+
+menu "Video devices support"
 config ADK_KPACKAGE_KMOD_VIDEO_DEV
 	prompt "kmod-video-dev.................. Video (For Linux) kernel support"
 	tristate
@@ -141,4 +148,5 @@ config ADK_KPACKAGE_KMOD_USB_PWC
 	default n
 	help
 
+endmenu
 endmenu

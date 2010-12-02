@@ -1,6 +1,9 @@
+/etc/mdev.conf
+/etc/inittab
 /etc/banner
 /etc/group
 /etc/hosts
+/etc/hostname
 /etc/ipkg.conf
 /etc/modules
 /etc/passwd
@@ -10,3 +13,5 @@
 /etc/rc.conf
 /etc/sysctl.conf
 /etc/shadow
+/etc/shells
+/etc/network/interfaces

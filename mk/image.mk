@@ -50,16 +50,19 @@ INITRAMFS_PIGGYBACK=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
 endif
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
-	cd ${TARGET_DIR}; tar -cf - --owner=0 --group=0 . | gzip -n9 >$@
+	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
-	cd ${TARGET_DIR}; tar --exclude ./boot -cf - --owner=0 --group=0 . \
-		| gzip -n9 >$@
+	cd ${TARGET_DIR}; find . | grep -v ./boot | sed -n '/^\.\//s///p' | \
+		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
+		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P | \
+	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P | \
 		${ADK_COMPRESSION_TOOL} >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
@@ -67,7 +70,7 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 		$(LINUX_DIR)/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${TOPDIR}/bin/tools/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
+	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	${STAGING_TOOLS}/bin/mksquashfs ${TARGET_DIR} \

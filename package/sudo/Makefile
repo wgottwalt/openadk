@@ -16,7 +16,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUDO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--without-pam
+CONFIGURE_ARGS+=	--without-pam \
+			--with-timedir=/var/run
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_SUDO)/usr/bin
