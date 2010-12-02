@@ -16,9 +16,13 @@ PKG_SITES:=		http://rpm5.org/files/popt/
 
 PKG_SUBPKGS:=		LIBPOPT
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPOPT}/usr/lib
