@@ -1,0 +1,11 @@
+--- font-util-1.1.1.orig/fontutil.pc.in	2009-10-11 06:32:56.000000000 +0200
++++ font-util-1.1.1/fontutil.pc.in	2010-12-02 22:28:16.000000000 +0100
+@@ -4,7 +4,7 @@ libdir=@libdir@
+ datarootdir=@datarootdir@
+ datadir=@datadir@
+ fontrootdir=@fontrootdir@
+-mapdir=@MAPDIR@
++mapdir=${prefix}/../@MAPDIR@
+  
+ Name: FontUtil
+ Description: Font utilities dirs
