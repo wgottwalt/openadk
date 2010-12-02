@@ -17,7 +17,6 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_HOST_DEPENDS:=	!darwin
 PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
@@ -142,6 +141,8 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_CPU_OPTS} \
 			${CONFIGURE_DEBUG} \
 			${CONFIGURE_DIRECTFB}
+
+XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
