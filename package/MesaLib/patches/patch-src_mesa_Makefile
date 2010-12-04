@@ -1,0 +1,21 @@
+--- Mesa-7.8.2.orig/src/mesa/Makefile	2010-06-15 19:43:42.000000000 +0200
++++ Mesa-7.8.2/src/mesa/Makefile	2010-12-04 22:11:40.000000000 +0100
+@@ -30,15 +30,15 @@ default: depend asm_subdirs glsl_builtin
+ 
+ # Make archive of core mesa object files
+ libmesa.a: $(MESA_OBJECTS) $(GLSL_LIBS)
+-	@ $(MKLIB) -o mesa -static $(MESA_OBJECTS) $(GLSL_LIBS)
++	$(MKLIB) -o mesa -static $(MESA_OBJECTS) $(GLSL_LIBS)
+ 
+ # Make archive of subset of core mesa object files for gallium
+ libmesagallium.a: $(MESA_GALLIUM_OBJECTS) $(GLSL_LIBS)
+-	@ $(MKLIB) -o mesagallium -static $(MESA_GALLIUM_OBJECTS) $(GLSL_LIBS)
++	$(MKLIB) -o mesagallium -static $(MESA_GALLIUM_OBJECTS) $(GLSL_LIBS)
+ 
+ # Make archive of gl* API dispatcher functions only
+ libglapi.a: $(GLAPI_OBJECTS)
+-	@ $(MKLIB) -o glapi -static $(GLAPI_OBJECTS)
++	$(MKLIB) -o glapi -static $(GLAPI_OBJECTS)
+ 
+ ######################################################################
+ # Device drivers
