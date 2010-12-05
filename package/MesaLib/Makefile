@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
 PKG_VERSION:=		7.8.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		c89b63d253605ed40e8ac370d25a833c
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
@@ -21,7 +21,6 @@ PKGSC_GLXINFO:=		x11/apps
 PKGSD_GLXGEARS:=	Nice little OpenGL demo application
 PKGSC_GLXGEARS:=	x11/apps
 
-PKG_HOST_DEPENDS:=	!cygwin !darwin
 PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
@@ -43,9 +42,9 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-dri-drivers=${DRI_DRIVERS},swrast \
 			--with-demos=xdemos
 
-XAKE_FLAGS+=		HOST_CC=${HOSTCC}
+XAKE_FLAGS+=		HOST_CC=${HOSTCC} GLSL_CL=${STAGING_TOOLS}/bin/glslcompile
 
-pre-configure:
+post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure \
 		--disable-static \
@@ -56,8 +55,12 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/src/glsl
 	${MAKE} -C ${WRKBUILD}/src/glsl/apps
 	${CP} ${WRKBUILD}/src/glsl/apps/compile \
-		${STAGING_TOOLS}/bin
+		${STAGING_TOOLS}/bin/glslcompile
 	${MAKE} -C ${WRKBUILD}/src/glsl clean
+
+pre-configure:
+	$(SED) "s#@@RANLIB@@#${TARGET_CROSS}ranlib#" ${WRKBUILD}/configs/default
+	$(SED) "s#@@AR@@#${TARGET_CROSS}ar#" ${WRKBUILD}/configs/default
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri

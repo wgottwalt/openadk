@@ -1,0 +1,11 @@
+--- Mesa-7.8.2.orig/src/mesa/shader/slang/library/Makefile	2010-04-27 23:41:21.000000000 +0200
++++ Mesa-7.8.2/src/mesa/shader/slang/library/Makefile	2010-12-04 21:18:11.000000000 +0100
+@@ -4,7 +4,7 @@ TOP = ../../../../..
+ 
+ include $(TOP)/configs/current
+ 
+-GLSL_CL = $(TOP)/src/glsl/apps/compile
++GLSL_CL ?= $(TOP)/src/glsl/apps/compile
+ 
+ #
+ # targets
