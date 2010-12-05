@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fltk
 PKG_VERSION:=		2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		557544badbacca4ee1ebb2448f6e1f8a
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
@@ -15,7 +15,6 @@ PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 
 PKG_SUBPKGS:=		LIBFLTK
 PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
-PKG_HOST_DEPENDS:=	!cygwin !darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.x-r7513.tar.bz2
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.0.x-r7513
