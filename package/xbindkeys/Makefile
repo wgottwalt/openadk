@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		393dd74f85850a4ba0803b5a78bc598b
 PKG_DESCR:=		keybindings for X11
 PKG_SECTION:=		x11/apps
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://www.nongnu.org/xbindkeys/
 
 include $(TOPDIR)/mk/package.mk
 
