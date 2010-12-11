@@ -34,7 +34,6 @@ ppc		uclibc		archive		qemu
 ppc		eglibc		archive		qemu
 ppc		glibc		archive		qemu
 sparc		uclibc		archive		qemu
-sparc		eglibc		archive		qemu
 sparc		glibc		archive		qemu
 x86		uclibc		archive		qemu
 x86		eglibc		archive		qemu
