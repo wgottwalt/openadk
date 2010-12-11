@@ -61,13 +61,11 @@ mips		eglibc		archive		qemu
 mips		glibc		archive		qemu
 mips64		uclibc		archive		qemu
 mips64		eglibc		archive		qemu
-mips64		glibc		archive		qemu
 mipsel		uclibc		archive		qemu
 mipsel		eglibc		archive		qemu
 mipsel		glibc		archive		qemu
 mips64el		uclibc		archive		qemu
 mips64el		eglibc		archive		qemu
-mips64el		glibc		archive		qemu
 ppc		uclibc		archive		qemu
 ppc		eglibc		archive		qemu
 ppc		glibc		archive		qemu
