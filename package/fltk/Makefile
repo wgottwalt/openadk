@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fltk
 PKG_VERSION:=		2.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		557544badbacca4ee1ebb2448f6e1f8a
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs

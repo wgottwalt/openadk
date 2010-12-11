@@ -1,0 +1,11 @@
+--- fltk-2.0.x-r7513.orig/configure	2010-04-16 10:02:53.000000000 +0200
++++ fltk-2.0.x-r7513/configure	2010-12-05 21:10:58.000000000 +0100
+@@ -1770,7 +1770,7 @@ FL_API_VERSION=${FL_MAJOR_VERSION}.${FL_
+ 
+ 
+ 
+-uname=`uname`
++uname=Linux
+ uversion=`uname -r | sed -e '1,$s/[^0-9]//g'`
+ case $uname in
+   IRIX*)
