@@ -1,3 +1,5 @@
+- rework architecture / embedded systems concept
+- wget/curl/ftp download support
 - relocatable gcc
 - adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
