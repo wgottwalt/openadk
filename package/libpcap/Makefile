@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1bca27d206970badae248cfa471bbb47
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
@@ -25,6 +25,7 @@ CONFIGURE_ARGS+=	--disable-yydebug \
 			--with-pcap=linux
 TCFLAGS+=		${TCPPFLAGS}
 INSTALL_TARGET=		install install-shared
+MAKE_FLAGS+=		STAGING_DIR=$(STAGING_DIR)
 
 ifneq (${ADK_PACKAGE_LIBPCAP_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6

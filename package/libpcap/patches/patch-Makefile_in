@@ -1,0 +1,13 @@
+--- libpcap-1.1.1.orig/Makefile.in	2010-04-05 19:54:05.000000000 +0200
++++ libpcap-1.1.1/Makefile.in	2010-12-08 23:30:21.000000000 +0100
+@@ -474,8 +474,8 @@ bpf_filter.o: bpf_filter.c
+ #
+ pcap-config: $(srcdir)/pcap-config.in
+ 	@rm -f $@ $@.tmp
+-	sed -e 's|@includedir[@]|$(includedir)|g' \
+-	    -e 's|@libdir[@]|$(libdir)|g' \
++	sed -e 's|@includedir[@]|$(STAGING_DIR)$(includedir)|g' \
++	    -e 's|@libdir[@]|$(STAGING_DIR)$(libdir)|g' \
+ 	    -e 's|@LIBS[@]|$(LIBS)|g' \
+ 	    -e 's|@V_RPATH_OPT[@]|$(V_RPATH_OPT)|g' \
+ 	    $(srcdir)/pcap-config.in >$@.tmp
