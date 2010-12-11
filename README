@@ -9,9 +9,9 @@ Before you can start you need to install some tools:
 - binutils 
 - GNU make
 - GNU m4
-- GNU tar
 - GNU awk
 - GNU sed
+- tar
 - patch
 - gzip
 - bzip2
