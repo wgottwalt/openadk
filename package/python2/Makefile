@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		35f56b092ecf39a6bd59d64f142aae0f
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_DEPENDS:=		libpthread zlib
-PKG_BUILDDEP:=		zlib
+PKG_DEPENDS:=		libpthread zlib libffi
+PKG_BUILDDEP:=		zlib libffi
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 
@@ -46,7 +46,7 @@ post-extract:
 	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
-	$(MAKE) -C ${WRKBUILD} distclean
+	$(MAKE) -C ${WRKBUILD} clean
 
 pre-configure:
 	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
