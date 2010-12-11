@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
-PKG_VERSION:=		0.7.4
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		1645975662a326969d2f42d5c04574aa
+PKG_VERSION:=		0.8.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9ed61a02983dc42d0ea0224711ace025
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libxml2 libgnutls python
-PKG_BUILDDEP:=		libxml2 gnutls python
+PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap
+PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
