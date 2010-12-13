@@ -40,8 +40,8 @@ SNMP_TRANSPORTS_EXCLUDED:=	TCPIPv6 UDPIPv6
 endif
 
 TLDFLAGS+=		-pthread
-CONFIGURE_ARGS+=	--with-logfile=/var/log/snmpd.log \
-			--with-persistent-directory=/usr/lib/snmp/ \
+CONFIGURE_ARGS+=	--with-defaults \
+			--with-persistent-directory=/etc/snmp \
 			--with-default-snmp-version=3 \
 			--with-sys-contact=root@localhost \
 			--with-sys-location=Unknown \
