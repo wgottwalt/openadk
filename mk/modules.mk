@@ -22,6 +22,7 @@ $(eval $(call KMOD_template,KVM_INTEL,kvm-intel,\
 #
 
 $(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\
+	$(MODULES_DIR)/kernel/drivers/ata/libahci \
 	$(MODULES_DIR)/kernel/drivers/ata/ahci \
 ,10))
 
@@ -439,6 +440,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_TFTP,nf-conntrack-tftp,\
 $(eval $(call KMOD_template,NF_CONNTRACK_PPTP,nf-conntrack-pptp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_proto_gre \
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_pptp \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_proto_gre \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_pptp \
 ,55))
 
@@ -722,11 +724,13 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
+    $(MODULES_DIR)/kernel/lib/raid6/raid6_pq \
     $(MODULES_DIR)/kernel/crypto/xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_raid6_recov \
+    $(MODULES_DIR)/kernel/crypto/async_tx/async_pq \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
 ,35))
 
@@ -1134,7 +1138,7 @@ $(eval $(call KMOD_template,PCCARD,pccard,\
 ,40))
 
 $(eval $(call KMOD_template,YENTA,yenta,\
-	$(MODULES_DIR)/kernel/drivers/pcmcia/rsrc_nonstatic \
+	$(MODULES_DIR)/kernel/drivers/pcmcia/pcmcia_rsrc \
 	$(MODULES_DIR)/kernel/drivers/pcmcia/yenta_socket \
 ,50))
 
@@ -1587,6 +1591,7 @@ $(eval $(call KMOD_template,PLIP,plip,\
 #
 # Profiling
 #
+
 $(eval $(call KMOD_template,OPROFILE,oprofile,\
 	$(MODULES_DIR)/kernel/arch/$(ARCH)/oprofile/oprofile \
 ,10))
