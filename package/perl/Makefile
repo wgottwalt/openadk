@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
 PKG_VERSION:=		5.12.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		af2df531d46b77fdf0d97eecb03eddb2
 PKG_DESCR:=		full-blown Perl
 PKG_SECTION:=		lang
@@ -26,6 +26,8 @@ pre-configure:
 post-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
 	${INSTALL_DIR} ${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
+	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \
+		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/perl
 
 include ${TOPDIR}/mk/pkg-bottom.mk
