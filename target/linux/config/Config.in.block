@@ -36,6 +36,9 @@ config ADK_KERNEL_ISCSI_TCP
 config ADK_KERNEL_DM_CRYPT
 	boolean
 
+config ADK_KERNEL_BLK_DEV
+	boolean
+
 config ADK_KERNEL_BLK_DEV_DM
 	boolean
 	select ADK_KERNEL_MD
@@ -67,6 +70,7 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
+	depends on ADK_TARGET_WITH_SATA
 	default y if ADK_HARDWARE_SHUTTLE
 	default n	
 
@@ -282,6 +286,7 @@ config ADK_KPACKAGE_KMOD_DM_MIRROR
 config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
 	prompt "kmod-blk-dev-drbd................. DRBD support (Network RAID 1)"
 	tristate
+	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
 	help
           DRBD - http://www.drbd.org

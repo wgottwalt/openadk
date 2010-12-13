@@ -23,6 +23,9 @@ config ADK_TARGET_WITH_VGA
 config ADK_TARGET_WITH_HDD
 	bool
 
+config ADK_TARGET_WITH_SATA
+	bool
+
 config ADK_TARGET_WITH_INPUT
 	bool
 
@@ -42,6 +45,9 @@ config ADK_TARGET_WITH_WATCHDOG
 	bool
 
 config ADK_TARGET_WITH_DSL
+	bool
+
+config ADK_TARGET_CPU_WITH_VT
 	bool
 
 config ADK_TOOLCHAIN_ONLY
@@ -177,6 +183,7 @@ config ADK_CPU_PENTIUM_M
 	boolean
 
 config ADK_CPU_AMDFAM10
+	select ADK_TARGET_CPU_WITH_VT
 	boolean
 
 config ADK_CPU_LOONGSON2F

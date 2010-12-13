@@ -21,6 +21,7 @@ config ADK_HARDWARE_SHUTTLE_SA76G2
 	bool "Shuttle PC"
 	select ADK_shuttle_sa76g2
 	select ADK_CPU_AMDFAM10
+	select ADK_TARGET_WITH_SATA
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_PCI

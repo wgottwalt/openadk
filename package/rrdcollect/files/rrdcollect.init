@@ -4,11 +4,6 @@
 
 . /etc/rc.conf
 
-LIB_D=/var/lib/rrdcollect
-CGI_S=$LIB_D/rrd.cgi
-RRD_D=$LIB_D/rrd
-RRD_F=$(find $RRD_D -name "*.rrd" 2>/dev/null)
-
 case $1 in
 autostop) ;;
 autostart)
@@ -16,9 +11,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	[ -d $LIB_D/img ] || mkdir -p $LIB_D/img
-	[ -n "$RRD_F" ] || /usr/bin/rrd.sh init
-	[ -x $CGI_S ] || /usr/bin/rrd.sh cgi
+	[ -d /var/lib/rrdcollect ] || mkdir -p /var/lib/rrdcollect
 	rrdcollect
 	;;
 stop)
