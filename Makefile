@@ -206,6 +206,7 @@ NO_ERROR=0
 	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
 	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
 	@echo 'HOSTCXXFLAGS:=-O2' >>prereq.mk
+	@echo "HOST_LIBIDL_CONFIG:=$$(which libIDL-config-2)" >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk

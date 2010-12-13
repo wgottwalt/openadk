@@ -1,5 +1,5 @@
 --- mozilla-1.9.2.orig/configure	2010-10-27 05:09:28.000000000 +0200
-+++ mozilla-1.9.2/configure	2010-11-25 20:36:24.969435934 +0100
++++ mozilla-1.9.2/configure	2010-12-12 12:03:54.000000000 +0100
 @@ -3970,7 +3970,7 @@ else
      echo "$ac_t""yes" 1>&6    
  fi
@@ -9,7 +9,15 @@
  do
  # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
-@@ -17895,7 +17895,7 @@ echo "configure:17889: checking for SQLI
+@@ -5625,7 +5625,6 @@ DIRENT_INO=d_ino
+ CYGWIN_WRAPPER=
+ WIN_TOP_SRC=
+ MOZ_USER_DIR=".mozilla"
+-HOST_AR='$(AR)'
+ HOST_AR_FLAGS='$(AR_FLAGS)'
+ 
+ MOZ_JPEG_CFLAGS=
+@@ -17895,7 +17894,7 @@ echo "configure:17889: checking for SQLI
  else
    
          if test "$cross_compiling" = yes; then
@@ -18,14 +26,3 @@
          
  else
    cat > conftest.$ac_ext <<EOF
-@@ -21465,8 +21465,8 @@ if test -n "$CROSS_COMPILE"; then
-         HOST_LIBIDL_CONFIG="$LIBIDL_CONFIG"
-     fi
-     if test -n "$HOST_LIBIDL_CONFIG" && test "$HOST_LIBIDL_CONFIG" != "no"; then
--        HOST_LIBIDL_CFLAGS=`${HOST_LIBIDL_CONFIG} --cflags`
--        HOST_LIBIDL_LIBS=`${HOST_LIBIDL_CONFIG} --libs`
-+        HOST_LIBIDL_CFLAGS=`PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig ${HOST_LIBIDL_CONFIG} --cflags`
-+        HOST_LIBIDL_LIBS=`PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig ${HOST_LIBIDL_CONFIG} --libs`
-     else
-         HOST_LIBIDL_CFLAGS="$LIBIDL_CFLAGS"
-         HOST_LIBIDL_LIBS="$LIBIDL_LIBS"

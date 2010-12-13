@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.12
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		80f4d83f23a7c45fc3f1904964ea2a5a
+PKG_VERSION:=		3.6.13
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d7c90aed8209beefa74badf02e8eeae1
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
@@ -18,7 +18,7 @@ PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
 PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
-PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin !darwin
+PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-1.9.2
@@ -37,7 +37,8 @@ endif
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}" \
 			HOST_CXX="${HOSTCXX}" HOST_CXXFLAGS="${HOSTCXXFLAGS}" \
-			HOST_LIBIDL_CONFIG="/usr/bin/libIDL-config-2" \
+			HOST_LIBIDL_CONFIG="${HOST_LIBIDL_CONFIG}" \
+			HOST_RANLIB="ranlib" HOST_AR="ar" \
 			CPPFLAGS="-I${STAGING_DIR}/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_thread_keyword=no \
@@ -63,6 +64,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-svg \
 			--disable-mathml \
 			--disable-crashreporter
+
+XAKE_FLAGS+=		OS_RELEASE="2.6"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
