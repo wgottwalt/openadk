@@ -211,7 +211,7 @@ if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
 	print -u2 Error creating temporary directory.
 	exit 1
 fi
-tar -xOzf "$src" ./usr/share/grub-bin/core.img >"$T/core.img"
+tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
 integer coreimgsz=$($statcmd "$T/core.img")
 if (( coreimgsz < 1024 )); then
 	print -u2 core.img is probably too small: $coreimgsz
