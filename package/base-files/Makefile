@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		36
+PKG_RELEASE:=		37
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -43,14 +43,10 @@ endif
 ifneq (${ADK_PACKAGE_ZSH},)
 	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
 endif
-	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt}
 	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
-	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-pre-up.d
-	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-up.d
-	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-down.d
-	mkdir -p $(IDIR_BASE_FILES)/etc/network/if-post-down.d
-	mkdir -p $(IDIR_BASE_FILES)/usr/lib
-	mkdir -p $(IDIR_BASE_FILES)/usr/bin
+	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt}
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
+	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin}
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
@@ -65,8 +61,8 @@ endif
 	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
-	    echo $(ADK_RUNTIME_HOSTNAME) > \
-	    $(IDIR_BASE_FILES)/etc/hostname
+	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
+	    echo "127.0.0.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
