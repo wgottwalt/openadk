@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG pcscd
+#PKG pcsc-lite
 #INIT 80
 
 . /etc/rc.conf

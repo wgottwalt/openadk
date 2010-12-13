@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcsc-lite
-PKG_VERSION:=		1.6.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fc3fd0e83090ecc81e5b32700fa246c2
+PKG_VERSION:=		1.6.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f80d3ecd9569b71d557f283f16295c74
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://pcsclite.alioth.debian.org/
-PKG_SITES:=		https://alioth.debian.org/frs/download.php/3279/
+PKG_SITES:=		http://alioth.debian.org/frs/download.php
 
 PKG_SUBPKGS:=		PCSC_LITE PCSC_LITE_DEV
 PKGSD_PCSC_LITE_DEV:=	header files for pcsc-lite
@@ -32,11 +32,9 @@ SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_PCSC_LITE_DEV}+=	pcsc-lite-dev-install
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/etc
+	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/etc/reader.conf.d
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/lib
-	$(INSTALL_DATA) ./files/reader.conf \
-		$(IDIR_PCSC_LITE)/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/pcscd \
 		$(IDIR_PCSC_LITE)/usr/sbin
 	$(CP) $(WRKINST)/usr/lib/libpcsclite.so* \
