@@ -38,6 +38,7 @@ config ADK_KERNEL_FB_GEODE_LX
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
+	depends on ADK_LINUX_X86_ALIX
 	default y if ADK_HARDWARE_ALIX1C
  	default n
  	help
