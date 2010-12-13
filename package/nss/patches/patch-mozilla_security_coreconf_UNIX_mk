@@ -1,0 +1,12 @@
+--- nss-3.12.8.orig/mozilla/security/coreconf/UNIX.mk	2008-10-03 21:12:41.000000000 +0200
++++ nss-3.12.8/mozilla/security/coreconf/UNIX.mk	2010-12-12 01:54:56.000000000 +0100
+@@ -38,7 +38,8 @@
+ XP_DEFINE  += -DXP_UNIX
+ LIB_SUFFIX  = a
+ DLL_SUFFIX  = so
+-AR          = ar cr $@
++ARTOOL      = ar
++AR          = $(ARTOOL) cr $@
+ LDOPTS     += -L$(SOURCE_LIB_DIR)
+ 
+ ifdef BUILD_OPT

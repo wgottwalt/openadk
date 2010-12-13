@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
 PKG_VERSION:=		3.12.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		40bf1bb0c7567827d3768d1fc6081100
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
@@ -14,7 +14,7 @@ PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
 PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_12_8_RTM/src/
 PKG_NOPARALLEL:=	1
 
-PKG_HOST_DEPENDS:=	!cygwin !darwin
+PKG_HOST_DEPENDS:=	!cygwin
 PKG_TARGET_DEPENDS:=	!foxboard
 
 WRKSRC=			${WRKDIST}/mozilla/security/nss
@@ -33,13 +33,13 @@ endif
 MAKE_FLAGS+=		NATIVE_CC="${HOSTCC}" NATIVE_FLAGS="${HOSTCFLAGS}"
 TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr
 TCFLAGS+=		-I${STAGING_DIR}/usr/include/nspr
-#TLDFLAGS:=		''
 TLDFLAGS+=		-ldl
 
-XAKE_FLAGS+=		SOURCE_MD_DIR=${WRKDIST}/dist DIST=${WRKDIST}/dist \
-			ARCHFLAG="${TCFLAGS} ${TCPPFLAGS} -ldl"
-ALL_TARGET:=		build_coreconf all
+XAKE_FLAGS+=		SOURCE_MD_DIR=${WRKDIST}/dist DIST=${WRKDIST}/dist
+XAKE_FLAGS+=		ARCHFLAG="${TCFLAGS} ${TCPPFLAGS} -ldl"
 XAKE_FLAGS+=		OS_TEST=${CPU_ARCH} NSS_DISABLE_DBM=1 OS_TARGET=Linux OS_RELEASE=2.6 OS_ARCH=Linux
+XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
+ALL_TARGET:=		build_coreconf all
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
