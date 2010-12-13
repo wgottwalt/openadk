@@ -11,6 +11,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
+#set -x
 
 set -e
 
@@ -752,26 +753,26 @@ ipkg_install_file_dest() {
 	fi
 
 	# Check dependencies
-	local depends="`ipkg_depends $pkg | sed -e "s/\<$pkg\>//"`"
+	#local depends="`ipkg_depends $pkg | sed -e "s/\<$pkg\>//"`"
 
 	# Don't worry about deps that are scheduled for installation
-	local missing_deps=
-	for dep in $depends; do
-		if ! ipkg_status_all $dep | grep -q 'Status:[[:space:]]install'; then
-			missing_deps="$missing_deps $dep"
-		fi
-	done
+	#local missing_deps=
+	#for dep in $depends; do
+	#	if ! ipkg_status_all $dep | grep -q 'Status:[[:space:]]install'; then
+	#		missing_deps="$missing_deps $dep"
+	#	fi
+	#done
 
-	if [ ! -z "$missing_deps" ]; then
-		if [ -n "$FORCE_DEPENDS" ]; then
-			echo "ipkg_install_file: Warning: $pkg depends on the following uninstalled programs: $missing_deps"
-		else
-			echo "ipkg_install_file: ERROR: $pkg depends on the following uninstalled programs:
-	$missing_deps"
-			echo "ipkg_install_file: You may want to use \`ipkg install' to install these."
-			return 1
-		fi
-	fi
+	#if [ ! -z "$missing_deps" ]; then
+	#	if [ -n "$FORCE_DEPENDS" ]; then
+	#		echo "ipkg_install_file: Warning: $pkg depends on the following uninstalled programs: $missing_deps"
+	#	else
+	#		echo "ipkg_install_file: ERROR: $pkg depends on the following uninstalled programs:
+	#$missing_deps"
+	#		echo "ipkg_install_file: You may want to use \`ipkg install' to install these."
+	#		return 1
+	#	fi
+	#fi
 
 	mkdir -p $IPKG_TMP/$pkg/control
 	mkdir -p $IPKG_TMP/$pkg/data
