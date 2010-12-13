@@ -4,6 +4,7 @@
 . /etc/rc.conf
 
 case $1 in
+autostop) ;;
 autostart)
 	test x"${esd:-NO}" = x"NO" && exit 0
 	exec sh $0 start
