@@ -27,6 +27,7 @@ config ADK_KPACKAGE_KMOD_PCMCIA
 	prompt "kmod-pcmcia....................... 16-bit PCMCIA support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PCCARD
+	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KERNEL_CRC32
 	select ADK_KERNEL_PCMCIA_PROBE
 	default n
