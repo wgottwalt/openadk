@@ -165,7 +165,7 @@ case $ostype {
 	part=${basedev}s1
 	match=\'${basedev}\''?(s+([0-9]))'
 	function mount_ext2fs {
-		fuse-ext2 "$1" "$2" -o force
+		fuse-ext2 "$1" "$2" -o rw+
 		sleep 3
 	}
 	;;
@@ -336,7 +336,7 @@ tune2fs -c 0 -i 0 "$part"
 
 (( quiet )) || print Extracting installation archive...
 mount_ext2fs "$part" "$T"
-gzip -dc "$src" | (cd "$T"; tar -xpf -)
+gzip -dc "$src" | (cd "$T"; tar -xvpf -)
 cd "$T"
 rnddev=/dev/urandom
 [[ -c /dev/arandom ]] && rnddev=/dev/arandom
@@ -345,6 +345,8 @@ dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 chown 0:0 tmp
 chmod 1777 tmp
 chmod 4755 bin/busybox
+[[ -f usr/bin/Xorg ]] && chmod 4755 usr/bin/Xorg
+[[ -f usr/bin/sudo ]] && chmod 4755 usr/bin/sudo
 (( quiet )) || print Configuring GRUB2 bootloader...
 mkdir -p boot/grub
 (
