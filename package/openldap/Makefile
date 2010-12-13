@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
 PKG_VERSION:=		2.4.23
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		90150b8c0d0192e10b30157e68844ddf
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
@@ -33,8 +33,8 @@ $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE}
 $(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
 $(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
-PKG_CONFIGURE_OPTIONS+=	\
-			--enable-slapd \
+PKG_CONFIGURE_OPTIONS+= --enable-slapd \
+			--libexecdir=/usr/sbin \
 			--enable-bdb \
 			--disable-hdb \
 			--disable-relay \
