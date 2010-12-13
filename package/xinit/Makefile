@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xinit
 PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		7ad82221ebd6600a8d33712ec3b62efb
 PKG_DESCR:=		X Window System initializer
 PKG_SECTION:=		x11/apps
@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,XINIT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS:=	--without-launchd
+XAKE_FLAGS+=		RAWCPP="$(TARGET_CROSS)cpp"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_XINIT)/usr/bin

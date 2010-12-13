@@ -1,6 +1,26 @@
 --- xinit-1.2.1.orig/startx.cpp	2010-03-15 23:35:56.000000000 +0100
-+++ xinit-1.2.1/startx.cpp	2010-07-15 21:25:44.458413180 +0200
-@@ -347,5 +347,8 @@ screenrestore
++++ xinit-1.2.1/startx.cpp	2010-12-13 17:44:35.000000000 +0100
+@@ -242,18 +242,7 @@ if [ x"$enable_xauth" = x1 ] ; then
+     removelist=
+ 
+     XCOMM set up default Xauth info for this machine
+-    case `uname` in
+-    Linux*)
+-        if [ -z "`hostname --version 2>&1 | grep GNU`" ]; then
+-            hostname=`hostname -f`
+-        else
+-            hostname=`hostname`
+-        fi
+-        ;;
+-    *)
+-        hostname=`hostname`
+-        ;;
+-    esac
++    hostname=`hostname`
+ 
+     authdisplay=${display:-:0}
+ #if defined(HAS_COOKIE_MAKER) && defined(MK_COOKIE)
+@@ -347,5 +336,8 @@ screenrestore
  kbd_mode -a
  #endif
  
