@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		motion
-PKG_VERSION:=		3.2.11
+PKG_VERSION:=		3.2.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3a26c00f3250eacf6fa93c7a7e0249d9
+PKG_MD5SUM:=		1ba0065ed50509aaffb171594c689f46
 PKG_DESCR:=		Webcam motion sensing and logging
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libjpeg libpthread
