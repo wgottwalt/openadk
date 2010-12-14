@@ -131,9 +131,6 @@ post-build:
 	cd ${WRKBUILD}/sounds ; \
 	tar xzf asterisk-core-sounds-en-gsm-1.4.19.tar.gz ; \
 	rm asterisk-core-sounds-en-gsm-1.4.19.tar.gz
-	@echo
-	@echo "---> have to install ${SUB_INSTALLS-m} ${SUB_INSTALLS-y} <---"
-	@echo
 
 do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	$(CP) $(WRKINST)/* $(IDIR_ASTERISK)
