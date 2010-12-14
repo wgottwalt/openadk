@@ -31,7 +31,7 @@ ${WRKDIST}/.extract_done:
 	rm -rf ${WRKDIST} ${WRKSRC} ${WRKBUILD}
 	@mkdir -p ${WRKDIR} ${WRKDIST}
 	${MAKE} do-extract
-	@${MAKE} post-extract
+	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
 
 fetch refetch checksum do-extract:
@@ -45,7 +45,7 @@ ifeq (${_CHECKSUM_COOKIE},)
 	rm -rf ${WRKDIST} ${WRKSRC} ${WRKBUILD}
 endif
 	${EXTRACT_CMD}
-	@${MAKE} post-extract
+	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
 
 __use_generic_patch_target:=42
