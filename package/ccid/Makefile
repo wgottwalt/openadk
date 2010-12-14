@@ -11,7 +11,7 @@ PKG_DESCR:=		a generic USB CCID and ICCD driver
 PKG_SECTION:=		crypto
 PKG_BUILDDEP:=		pcsc-lite
 PKG_URL:=		http://pcsclite.alioth.debian.org/ccid.html
-PKG_SITES:=		http://alioth.debian.org/frs/download.php/3281/
+PKG_SITES:=		http://alioth.debian.org/frs/download.php/3475/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

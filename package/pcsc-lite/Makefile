@@ -12,7 +12,7 @@ PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://pcsclite.alioth.debian.org/
-PKG_SITES:=		http://alioth.debian.org/frs/download.php
+PKG_SITES:=		http://alioth.debian.org/frs/download.php/3479/
 
 PKG_SUBPKGS:=		PCSC_LITE PCSC_LITE_DEV
 PKGSD_PCSC_LITE_DEV:=	header files for pcsc-lite
