@@ -1,6 +1,7 @@
---- Python-2.7.orig/Makefile.pre.in	2010-04-12 02:10:46.000000000 +0200
-+++ Python-2.7/Makefile.pre.in	2010-09-25 21:11:15.584089025 +0200
-@@ -179,6 +179,7 @@ UNICODE_OBJS=   @UNICODE_OBJS@
+diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
+--- Python-2.7.1.orig/Makefile.pre.in	2010-10-14 13:37:30.000000000 +0200
++++ Python-2.7.1/Makefile.pre.in	2010-12-14 16:02:44.000000000 +0100
+@@ -179,6 +179,7 @@
  
  PYTHON=		python$(EXE)
  BUILDPYTHON=	python$(BUILDEXE)
@@ -8,7 +9,7 @@
  
  # The task to run while instrument when building the profile-opt target
  PROFILE_TASK=	$(srcdir)/Tools/pybench/pybench.py -n 2 --with-gc --with-syscheck
-@@ -211,6 +212,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
+@@ -211,6 +212,7 @@
  ##########################################################################
  # Parser
  PGEN=		Parser/pgen$(EXE)
@@ -16,7 +17,7 @@
  
  POBJS=		\
  		Parser/acceler.o \
-@@ -380,7 +382,7 @@ build_all_generate_profile:
+@@ -380,7 +382,7 @@
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
  
  run_profile_task:
@@ -25,7 +26,7 @@
  
  build_all_use_profile:
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-@@ -398,14 +400,14 @@ $(BUILDPYTHON):	Modules/python.o $(LIBRA
+@@ -398,14 +400,14 @@
  			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
  platform: $(BUILDPYTHON)
@@ -36,14 +37,14 @@
  # Build the shared modules
  sharedmods: $(BUILDPYTHON)
  	@case $$MAKEFLAGS in \
--	*s*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' LDFLAGS='$(LDFLAGS)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py -q build;; \
--	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' LDFLAGS='$(LDFLAGS)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py build;; \
-+	*s*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' LDFLAGS='$(LDFLAGS)' OPT='$(OPT)' $(HOSTPYTHON) -E $(srcdir)/setup.py -q build;; \
-+	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' LDFLAGS='$(LDFLAGS)' OPT='$(OPT)' $(HOSTPYTHON) -E $(srcdir)/setup.py build;; \
+-	*s*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py -q build;; \
+-	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py build;; \
++	*s*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' $(HOSTPYTHON) -E $(srcdir)/setup.py -q build;; \
++	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' $(HOSTPYTHON) -E $(srcdir)/setup.py build;; \
  	esac
  
  # Build static library
-@@ -538,7 +540,7 @@ Modules/python.o: $(srcdir)/Modules/pyth
+@@ -538,7 +540,7 @@
  
  $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
  		-@$(INSTALL) -d Include
@@ -52,16 +53,16 @@
  
  $(PGEN):	$(PGENOBJS)
  		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
-@@ -702,7 +704,7 @@ $(LIBRARY_OBJS) $(MODOBJS) Modules/pytho
+@@ -702,7 +704,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py
--TESTPYTHON=	$(RUNSHARED) ./$(BUILDPYTHON) -Wd -3 -E -tt
-+TESTPYTHON=	$(RUNSHARED) $(HOSTPYTHON) -Wd -3 -E -tt
+-TESTPYTHON=	$(RUNSHARED) ./$(BUILDPYTHON) -Wd -3 -E -tt $(TESTPYTHONOPTS)
++TESTPYTHON=	$(RUNSHARED) $(HOSTPYTHON) -Wd -3 -E -tt $(TESTPYTHONOPTS)
  test:		all platform
  		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
  		-$(TESTPYTHON) $(TESTPROG) $(TESTOPTS)
-@@ -725,7 +727,7 @@ testuniversal:	all platform
+@@ -725,7 +727,7 @@
  		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
  		-$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
  		$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
@@ -70,7 +71,7 @@
  
  
  # Like testall, but with a single pass only
-@@ -919,26 +921,26 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
+@@ -920,26 +922,26 @@
  		done; \
  	done
  	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
@@ -104,17 +105,17 @@
  
  # Create the PLATDIR source directory, if one wasn't distributed..
  $(srcdir)/Lib/$(PLATDIR):
-@@ -1043,7 +1045,8 @@ libainstall:	all python-config
+@@ -1044,7 +1046,8 @@
  # Install the dynamically loadable modules
  # This goes into $(exec_prefix)
- sharedinstall:
+ sharedinstall: sharedmods
 -	$(RUNSHARED) ./$(BUILDPYTHON) -E $(srcdir)/setup.py install \
 +	CROSS_COMPILE='$(CROSS_COMPILE)' \
 +	$(RUNSHARED) $(HOSTPYTHON) -E $(srcdir)/setup.py install \
  	   	--prefix=$(prefix) \
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
-@@ -1081,7 +1084,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
+@@ -1082,7 +1085,7 @@
  		fi; \
  	done
  	$(LN) -fsn include/python$(VERSION) $(DESTDIR)$(prefix)/Headers
@@ -123,7 +124,7 @@
  	$(LN) -fsn $(VERSION) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Versions/Current
  	$(LN) -fsn Versions/Current/$(PYTHONFRAMEWORK) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/$(PYTHONFRAMEWORK)
  	$(LN) -fsn Versions/Current/Headers $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Headers
-@@ -1116,7 +1119,7 @@ frameworkinstallextras:
+@@ -1117,7 +1120,7 @@
  # This installs a few of the useful scripts in Tools/scripts
  scriptsinstall:
  	SRCDIR=$(srcdir) $(RUNSHARED) \
@@ -132,7 +133,7 @@
  	--prefix=$(prefix) \
  	--install-scripts=$(BINDIR) \
  	--root=/$(DESTDIR)
-@@ -1138,7 +1141,7 @@ config.status:	$(srcdir)/configure
+@@ -1139,7 +1142,7 @@
  
  # Run reindent on the library
  reindent:
@@ -141,7 +142,7 @@
  
  # Rerun configure with the same options as it was run last time,
  # provided the config.status script exists
-@@ -1238,7 +1241,7 @@ funny:
+@@ -1242,7 +1245,7 @@
  
  # Perform some verification checks on any modified files.
  patchcheck:

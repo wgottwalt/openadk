@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7
-PKG_RELEASE:=		5
-PKG_MD5SUM:=		35f56b092ecf39a6bd59d64f142aae0f
+PKG_VERSION:=		2.7.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		15ed56733655e3fab785e49a7278d2fb
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread zlib libffi
@@ -35,6 +35,7 @@ CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 
 post-extract:
+	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(HOSTCFLAGS)" \
 		./configure --without-cxx-main --without-threads \
@@ -59,6 +60,6 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
 	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
-	-find ${IDIR_PYTHON2} -name \*.pyo -exec rm {} \;
+	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 
 include ${TOPDIR}/mk/pkg-bottom.mk
