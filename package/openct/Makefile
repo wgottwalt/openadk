@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openct
 PKG_VERSION:=		0.6.20
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a1da3358ab798f1cb9232f1dbababc21
 PKG_DESCR:=		drivers for smart card readers
 PKG_SECTION:=		crypto
