@@ -12,7 +12,9 @@ autostart)
 	;;
 start)
 	[ -d /var/log/tor ] || mkdir -p /var/log/tor
-	tor
+	[ -d /tmp/.tor ] || mkdir -p /tmp/.tor
+	chown tor:tor /tmp/.tor
+	su - tor -c tor
 	;;
 stop)
 	pkill tor

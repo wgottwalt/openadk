@@ -131,6 +131,4 @@ RunAsDaemon 1
 #ExitPolicy accept *:119 # accept nntp as well as default exit policy
 #ExitPolicy reject *:* # middleman only -- no exits allowed
 
-User tor
-Group tor
 PidFile /var/run/tor.pid
