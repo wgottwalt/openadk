@@ -11,9 +11,9 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	[ -d /var/log/tor ] || mkdir -p /var/log/tor
+	[ -d /var/run/tor ] || mkdir -p /var/run/tor
 	[ -d /tmp/.tor ] || mkdir -p /tmp/.tor
-	chown tor:tor /tmp/.tor
+	chown tor:tor /tmp/.tor /var/run/tor
 	su - tor -c tor
 	;;
 stop)

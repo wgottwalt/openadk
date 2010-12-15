@@ -1,15 +1,7 @@
 ## Configuration file for a typical tor user
-## Built for Tor version 0.1.0.8-rc
-## (May or may not work for older or newer versions of Tor.)
 #
 # On Unix, Tor will look for this file in someplace like "~/.tor/torrc" or
 # "/etc/torrc"
-#
-# On Windows, Tor will look for the configuration file in someplace like
-# "Application Data\tor\torrc" or "Application Data\<username>\tor\torrc"
-#
-# With the default Mac OS X installer, Tor will look in ~/.tor/torrc or
-# /Library/Tor/torrc
 
 
 ## Replace this with "SocksPort 0" if you plan to run Tor only as a
@@ -40,7 +32,7 @@ AllowUnverifiedNodes middle,rendezvous
 ## Send ONLY debug messages to /var/log/tor/debug.log
 #Log debug-debug file /var/log/tor/debug.log
 ## To use the system log instead of Tor's logfiles, uncomment these lines:
-#Log notice syslog
+Log notice syslog
 ## To send all messages to stderr:
 #Log debug stderr
 
@@ -131,4 +123,4 @@ RunAsDaemon 1
 #ExitPolicy accept *:119 # accept nntp as well as default exit policy
 #ExitPolicy reject *:* # middleman only -- no exits allowed
 
-PidFile /var/run/tor.pid
+PidFile /var/run/tor/tor.pid
