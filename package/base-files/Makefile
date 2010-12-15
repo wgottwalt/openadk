@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		37
+PKG_RELEASE:=		38
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -43,6 +43,7 @@ endif
 ifneq (${ADK_PACKAGE_ZSH},)
 	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
 endif
+	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
 	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
 	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt}
 	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
