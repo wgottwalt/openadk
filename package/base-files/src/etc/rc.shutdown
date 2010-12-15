@@ -1,0 +1,4 @@
+#!/bin/sh
+for i in $(grep -v ^# /etc/fstab |awk '{ print $2 }');do
+	umount $i
+done

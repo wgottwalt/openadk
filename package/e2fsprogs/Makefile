@@ -4,14 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.41.12
+PKG_VERSION:=		1.41.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b24a21fc0c2381ef420961cbfec733f
+PKG_MD5SUM:=		7508a192c7a9471e2128424f4eafac1c
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
+
+PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_EXT2_BLOCK
 
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID
 PKGSD_LIBUUID:=		UUID library
@@ -45,6 +47,7 @@ pre-build:
 post-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin/
+	cd $(IDIR_E2FSPROGS)/usr/sbin && ln -sf e2fsck fsck.ext2
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \

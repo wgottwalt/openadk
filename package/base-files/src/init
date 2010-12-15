@@ -19,5 +19,5 @@ mdev -s
 mount -o remount,rw /
 cat /etc/.rnd >/dev/urandom 2>&1
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
-[ -f /etc/fstab ] && mount -a
+[ -f /etc/fstab ] && fsck -p >/dev/null ; mount -a
 exec /sbin/init
