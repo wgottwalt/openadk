@@ -2,9 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		binutils
-PKG_VERSION:=		2.20.51
+PKG_VERSION:=		2.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7a68af4b5240a04f6947ef40defa4708
-PKG_SITES:=		http://openadk.org/distfiles/
-#PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
+PKG_MD5SUM:=		c84c5acc9d266f1a7044b51c85a823f5
+PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
