@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
 PKG_VERSION:=		0.11.13
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		crypto
@@ -38,6 +38,9 @@ SUB_INSTALLS-${ADK_PACKAGE_LIBOPENSC_DEV}+=	libopensc-dev-install
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/bin
+	${INSTALL_DIR} ${IDIR_OPENSC}/usr/share/opensc
+	${INSTALL_DATA} ${WRKINST}/usr/share/opensc/* \
+		${IDIR_OPENSC}/usr/share/opensc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/opensc-explorer \
 		 ${IDIR_OPENSC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/opensc-tool \
