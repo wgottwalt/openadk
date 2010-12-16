@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qingy
-PKG_VERSION:=		0.9.9
+PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		34f40172a71e9a6c2c77ddce11d2a63a
+PKG_MD5SUM:=		1e0912655e240adfd0ce5ced30bbc685
 PKG_DESCR:=		a DirectFB getty replacement
-PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		directfb libxscrnsaver
-PKG_BUILDDEP:=		DirectFB libXScrnSaver
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		directfb
+PKG_BUILDDEP:=		DirectFB
 PKG_URL:=		http://qingy.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=qingy/}
 
@@ -35,6 +35,6 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_QINGY)/usr/sbin
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/qingy* ${IDIR_QINGY}/usr/sbin/
 	$(INSTALL_DIR) $(IDIR_QINGY)/usr/share/qingy
-	${CP} $(WRKINST)/usr/share/qingy/themes ${IDIR_QINGY}/usr/share/
+	${CP} $(WRKINST)/usr/share/qingy/themes ${IDIR_QINGY}/usr/share/qingy
 
 include ${TOPDIR}/mk/pkg-bottom.mk
