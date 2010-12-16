@@ -19,8 +19,8 @@ TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
 			-static
 endif
 ifeq ($(ADK_NATIVE),y)
-TCFLAGS:=
-TCXXFLAGS:=
+TCFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
+TCXXFLAGS:=		
 TCPPFLAGS:=
 TLDFLAGS:=
 endif
