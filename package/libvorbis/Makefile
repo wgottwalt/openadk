@@ -34,10 +34,10 @@ CONFIGURE_ARGS+=	--with-ogg="${STAGING_DIR}/usr" \
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBVORBIS}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libvorbis.so.* ${IDIR_LIBVORBIS}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libvorbisfile.so.* ${IDIR_LIBVORBIS}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libvorbis.so* ${IDIR_LIBVORBIS}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libvorbisfile.so* ${IDIR_LIBVORBIS}/usr/lib/
 	${INSTALL_DIR} ${IDIR_LIBVORBISENC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libvorbisenc.so.* ${IDIR_LIBVORBISENC}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libvorbisenc.so* ${IDIR_LIBVORBISENC}/usr/lib/
 
 libvorbis-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBVORBIS_DEV}/usr/include/vorbis

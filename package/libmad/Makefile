@@ -44,7 +44,7 @@ pre-install:
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBMAD}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libmad.so.* ${IDIR_LIBMAD}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libmad.so* ${IDIR_LIBMAD}/usr/lib/
 
 libmad-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBMAD_DEV}/usr/include
