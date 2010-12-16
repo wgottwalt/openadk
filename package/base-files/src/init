@@ -16,8 +16,7 @@ exec 0<>/dev/console >&0 2>&0
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
-mount -o remount,rw /
 cat /etc/.rnd >/dev/urandom 2>&1
-[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;}
+[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
 [ -f /etc/fstab ] && fsck -p >/dev/null ; mount -a
 exec /sbin/init
