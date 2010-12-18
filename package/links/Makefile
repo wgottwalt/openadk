@@ -14,6 +14,11 @@ PKG_BUILDDEP:=		openssl libpng jpeg gpm
 PKG_URL:=		http://links.twibright.com/
 PKG_SITES:=		http://links.twibright.com/download/
 
+PKG_FLAVOURS:=		WITH_DIRECTFB
+PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
+PKGFS_WITH_DIRECTFB:=	directfb
+PKGFB_WITH_DIRECTFB:=	DirectFB
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -21,10 +26,16 @@ $(eval $(call PKG_template,LINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_ARGS+=	--enable-graphics \
 			--with-ssl \
 			--without-svgalib \
+			--without-libtiff \
 			--without-x \
-			--without-directfb \
 			--without-pmshell \
 			--without-atheos
+
+ifeq (${ADK_PACKAGE_LINKS_WITH_DIRECTFB},y)
+CONFIGURE_ARGS+=	--with-directfb
+else
+CONFIGURE_ARGS+=	--without-directfb
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LINKS}/usr/bin
