@@ -79,6 +79,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --program-prefix= \
 	    --program-suffix= \
 	    --prefix=/usr \
+	    --bindir=/usr/bin \
 	    --datadir=/usr/share \
 	    --mandir=/usr/share/man \
 	    --libexecdir=/usr/libexec \
