@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
+PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
+
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
@@ -45,6 +47,7 @@ pre-build:
 post-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin/
+	cd $(IDIR_E2FSPROGS)/usr/sbin && ln -sf e2fsck fsck.ext2
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \

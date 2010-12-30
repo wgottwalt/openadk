@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bison
-PKG_VERSION:=		2.4.2
+PKG_VERSION:=		2.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6fc502f135738e98fecf1e5c8de38d62
+PKG_MD5SUM:=		ea45c778b36bdc7a720096819e292a73
 PKG_DESCR:=		GNU parser generator
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/bison/

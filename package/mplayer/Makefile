@@ -29,9 +29,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-# gcc 4.5 produces internal compiler error with -Os
-#TCFLAGS:=$(subst Os,O2,$(TCFLAGS))
-
 CONFIG_STYLE:=		minimal
 FAKE_FLAGS+=		INSTALLSTRIP=''
 

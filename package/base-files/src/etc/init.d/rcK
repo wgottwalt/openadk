@@ -1,7 +1,6 @@
 #!/bin/sh
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 {
-	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -rnk2 | \
 	    while read line; do
@@ -15,4 +14,5 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 		esac
 		${shebang:-/bin/sh} ${line%%:*} autostop 2>&1
 	done
+	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
 } | logger -s -p 6 -t ''
