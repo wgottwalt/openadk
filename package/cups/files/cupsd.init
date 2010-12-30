@@ -16,7 +16,7 @@ start)
 	/usr/sbin/cupsd -c /etc/cups/cupsd.conf
 	;;
 stop)
-	pkill cupsd
+	kill $(pgrep -f /usr/sbin/cupsd)
 	;;
 restart)
 	sh $0 stop

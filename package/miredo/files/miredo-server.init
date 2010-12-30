@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	miredo-server
+	/usr/sbin/miredo-server
 	;;
 stop)
-	pkill miredo-server
+	kill $(pgrep -f /usr/sbin/miredo-server)
 	;;
 restart)
 	sh $0 stop

@@ -16,7 +16,7 @@ start)
 	/usr/sbin/upsd || exit 2
 	;;
 stop)
-	/usr/sbin/upsd -c stop || pkill upsd
+	/usr/sbin/upsd -c stop || kill $(pgrep -f /usr/sbin/upsd)
 	/usr/bin/upsdrvctl stop
 	;;
 restart)

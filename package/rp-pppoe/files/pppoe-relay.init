@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	pppoe-relay $pppoe_relay_flags
+	/usr/sbin/pppoe-relay $pppoe_relay_flags
 	;;
 stop)
-	pkill pppoe-relay
+	kill $(pgrep -f /usr/sbin/pppoe-relay)
 	;;
 restart)
 	sh $0 stop

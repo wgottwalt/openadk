@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/rrdcollect ] || mkdir -p /var/lib/rrdcollect
-	rrdcollect
+	/usr/sbin/rrdcollect
 	;;
 stop)
-	pkill rrdcollect
+	kill $(pgrep -f /usr/sbin/rrdcollect)
 	;;
 restart)
 	sh $0 stop

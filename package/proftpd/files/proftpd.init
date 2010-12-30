@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -f /etc/proftpd.conf ] || exit
-	proftpd
+	/usr/sbin/proftpd
 	;;
 stop)
-	pkill proftpd
+	kill $(pgrep -f /usr/sbin/proftpd)
 	;;
 restart)
 	sh $0 stop

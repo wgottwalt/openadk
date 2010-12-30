@@ -22,10 +22,10 @@ start)
 		echo "no hardware RNG found, falling back to /dev/urandom"
 		devnode=/dev/urandom
 	fi
-	rngd -b -r $devnode
+	/usr/sbin/rngd -b -r $devnode
 	;;
 stop)
-	pkill rngd
+	kill $(pgrep -f /usr/sbin/rngd)
 	;;
 restart)
 	sh $0 stop

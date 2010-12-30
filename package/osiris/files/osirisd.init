@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/osiris ] || mkdir -p /var/lib/osiris
-	osirisd
+	/usr/sbin/osirisd
 	;;
 stop)
-	pkill osirisd
+	kill $(pgrep -f /usr/sbin/osirisd)
 	;;
 restart)
 	sh $0 stop

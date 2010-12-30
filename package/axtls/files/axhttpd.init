@@ -17,7 +17,7 @@ start)
 	/usr/sbin/axhttpd >>/var/log/axhttpd.access
 	;;
 stop)
-	pkill axhttpd
+	kill $(pgrep -f /usr/sbin/axhttpd)
 	;;
 restart)
 	sh $0 stop

@@ -34,7 +34,7 @@ start)
 	/usr/sbin/dropbear $dropbear_flags
 	;;
 stop)
-	pkill dropbear
+	kill $(pgrep -f /usr/sbin/dropbear)
 	;;
 restart)
 	sh $0 stop

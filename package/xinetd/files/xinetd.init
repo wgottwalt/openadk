@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	xinetd
+	/usr/sbin/xinetd
 	;;
 stop)
-	pkill xinetd
+	kill $(pgrep -f /usr/sbin/xinetd)
 	;;
 restart)
 	sh $0 stop

@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	mt-daapd
+	/usr/sbin/mt-daapd
 	;;
 stop)
-	pkill mt-daapd
+	kill $(pgrep -f /usr/sbin/mt-daapd)
 	;;
 restart)
 	sh $0 stop

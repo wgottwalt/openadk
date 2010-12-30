@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	p910nd $p910nd_flags
+	/usr/sbin/p910nd $p910nd_flags
 	;;
 stop)
-	pkill p9100d
+	kill $(pgrep -f /usr/sbin/p910d)
 	;;
 restart)
 	sh $0 stop

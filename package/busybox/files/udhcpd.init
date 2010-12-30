@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	touch /var/udhcp.leases
-	udhcpd -S
+	/usr/sbin/udhcpd -S
 	;;
 stop)
-	pkill udhcpd
+	kill $(pgrep -f /usr/sbin/udhcpd)
 	;;
 restart)
 	sh $0 stop

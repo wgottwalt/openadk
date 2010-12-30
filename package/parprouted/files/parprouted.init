@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	parprouted ${parprouted_flags}
+	/usr/sbin/parprouted ${parprouted_flags}
 	;;
 stop)
-	pkill parprouted
+	kill $(pgrep -f /usr/sbin/parprouted)
 	;;
 restart)
 	sh $0 stop

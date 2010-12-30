@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	# start as another user via: su - mpd -c 'esd ..'
-	esd -public -tcp -nobeeps -noterminate &
+	/usr/bin/esd -public -tcp -nobeeps -noterminate &
 	;;
 stop)
-	pkill esd
+	kill $(pgrep -f /usr/bin/esd)
 	;;
 restart)
 	sh $0 stop

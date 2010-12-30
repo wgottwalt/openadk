@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	mkdir -p /var/lib/bitlbee
-	bitlbee -D
+	/usr/sbin/bitlbee -D
 	;;
 stop)
-	pkill bitlbee
+	kill $(pgrep -f /usr/sbin/bitlbee)
 	;;
 restart)
 	sh $0 stop

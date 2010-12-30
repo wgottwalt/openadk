@@ -10,10 +10,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	dhcp-fwd
+	/usr/sbin/dhcp-fwd
 	;;
 stop)
-	pkill dhcp-fwd
+	kill $(pgrep -f /usr/sbin/dhcp-fwd)
 	;;
 restart)
 	sh $0 stop

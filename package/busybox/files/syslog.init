@@ -10,12 +10,12 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	syslogd $syslogd_flags
-	klogd
+	/sbin/syslogd $syslogd_flags
+	/sbin/klogd
 	;;
 stop)
-	pkill klogd
-	pkill syslogd
+	kill $(pgrep -f /sbin/klogd)
+	kill $(pgrep -f /sbin/syslogd)
 	;;
 restart)
 	sh $0 stop

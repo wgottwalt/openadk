@@ -16,10 +16,10 @@ start)
 	touch /var/cache/pdnsd/pdnsd.cache
 	# this allows for strict_setuid
 	chown -R nobody:nogroup /var/cache/pdnsd
-	pdnsd -d
+	/usr/sbin/pdnsd -d
 	;;
 stop)
-	pkill pdnsd
+	kill $(pgrep -f /usr/sbin/pdnsd)
 	;;
 restart)
 	sh $0 stop

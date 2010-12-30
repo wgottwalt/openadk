@@ -29,11 +29,11 @@ start)
 	fi
 	;;
 stop)
-	pkill nfsd
-	pkill mountd
+	kill $(pgrep -f /usr/sbin/nfsd)
+	kill $(pgrep -f /usr/sbin/mountd)
 	if [ ${nfs_server_version} -eq 4 ];then
-		pkill idmapd
-		pkill svcgssd
+		kill $(pgrep -f /usr/sbin/idmapd)
+		kill $(pgrep -f /usr/sbin/svcgssd)
 	fi
 	;;
 restart)

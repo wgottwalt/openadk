@@ -6,22 +6,22 @@
 
 case $1 in
 autostop) ;;
-	autostart)
-		test x"${nfacctd:-NO}" = x"NO" && exit 0
-		exec sh $0 start
-		;;
-	start)
-		nfacctd $nfaccd_flags
-		;;
-	stop)
-		pkill nfacctd
-		;;
-	restart)
-		sh $0 stop
-		sh $0 start
-		;;
-	*)
-		echo "usage: $0 {start | stop | restart}"
-		exit 1
+autostart)
+	test x"${nfacctd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/nfacctd $nfaccd_flags
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/nfacctd)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
 esac
 exit $?

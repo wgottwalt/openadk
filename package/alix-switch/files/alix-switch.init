@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	alix-switchd -d
+	/usr/sbin/alix-switchd -d
 	;;
 stop)
-	pkill alix-switchd
+	kill $(pgrep -f /usr/sbin/alix-switchd)
 	;;
 restart)
 	sh $0 stop

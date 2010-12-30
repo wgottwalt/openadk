@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	uvd
+	/usr/sbin/uvd
 	;;
 stop)
-	pkill uvd	
+	kill $(pgrep -f /usr/sbin/uvd)
 	;;
 restart)
 	sh $0 stop

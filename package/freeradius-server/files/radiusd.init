@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	[ -d /var/log/radius ] || mkdir -p /var/log/radius
-	radiusd
+	/usr/sbin/radiusd
 	;;
 stop)
-	pkill radiusd
+	kill $(pgrep -f /usr/sbin/radiusd)
 	;;
 restart)
 	sh $0 stop

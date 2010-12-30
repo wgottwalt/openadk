@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/snmp ] || mkdir -p /var/lib/snmp
-	snmpd $snmpd_flags
+	/usr/sbin/snmpd $snmpd_flags
 	;;
 stop)
-	pkill snmpd
+	kill $(pgrep -f /usr/sbin/snmpd)
 	;;
 restart)
 	sh $0 stop

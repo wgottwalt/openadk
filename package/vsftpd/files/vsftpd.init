@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -d /var/run/vsftpd ] || mkdir -p /var/run/vsftpd
-	vsftpd
+	/usr/sbin/vsftpd
   	;;
 stop)
-	pkill vsftpd
+	kill $(pgrep -f /usr/sbin/vsftpd)
 	;;
 restart)
 	sh $0 stop

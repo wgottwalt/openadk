@@ -11,10 +11,10 @@ autostart)
 start)
 	mkdir -p /var/state/dhcp
 	touch /var/state/dhcp/dhcpd.leases
-	dhcpd $dhcpd_flags
+	/usr/sbin/dhcpd $dhcpd_flags
 	;;
 autostop|stop)
-	pkill dhcpd
+	kill $(pgrep -f /usr/sbin/dhcpd)
 	;;
 restart)
 	sh $0 stop

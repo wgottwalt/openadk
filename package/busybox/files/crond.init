@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	mkdir -p /var/spool/cron
-	crond -c /etc/crontabs
+	/usr/sbin/crond -c /etc/crontabs
 	;;
 stop)
-	pkill crond
+	kill $(pgrep -f /usr/sbin/crond)
 	;;
 restart)
 	sh $0 stop

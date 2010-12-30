@@ -13,10 +13,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	php ${php_flags} &
+	/usr/bin/php ${php_flags} &
 	;;
 stop)
-	pkill php
+	kill $(pgrep -f /usr/bin/php)
 	;;
 restart)
 	sh $0 stop

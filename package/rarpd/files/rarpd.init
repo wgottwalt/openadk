@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	rarpd $rarpd_flags
+	/usr/sbin/rarpd $rarpd_flags
 	;;
 stop)
-	pkill rarpd
+	kill $(pgrep -f /usr/sbin/rarpd)
 	;;
 restart)
 	sh $0 stop

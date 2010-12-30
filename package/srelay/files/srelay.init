@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	[ -f /etc/srelay.conf ] || exit 1
-	srelay ${srelay_flags}
+	/usr/bin/srelay ${srelay_flags}
 	;;
 stop)
-	pkill srelay
+	kill $(pgrep -f /usr/bin/srelay)
 	;;
 restart)
 	sh $0 stop

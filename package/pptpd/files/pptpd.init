@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	pptpd
+	/usr/sbin/pptpd
 	;;
 stop)
-	pkill pptpd
+	kill $(pgrep -f /usr/sbin/pptpd)
 	;;
 restart)
 	sh $0 stop

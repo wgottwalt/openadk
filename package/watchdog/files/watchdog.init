@@ -14,7 +14,7 @@ start)
 	/usr/sbin/watchdog
 	;;
 stop)
-	pkill watchdog
+	kill $(pgrep -f /usr/sbin/watchdog)
   	;;
 restart)
 	sh $0 stop

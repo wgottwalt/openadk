@@ -11,11 +11,11 @@ autostop) ;;
 		;;
 	start)
 		if [ -f /etc/bind/named.conf ]; then
-			named -c /etc/bind/named.conf
+			/usr/sbin/named -c /etc/bind/named.conf
 		fi
 		;;
 	stop)
-		pkill named
+		kill $(pgrep -f /usr/sbin/named)
 		;;
 	restart)
 		sh $0 stop

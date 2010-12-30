@@ -13,12 +13,12 @@ autostart)
 start)
 	[ -d /var/run/samba ] || mkdir -p /var/run/samba
 	[ -d /var/log/samba ] || mkdir -p /var/log/samba
-	nmbd -D 
-	smbd -D
+	/usr/sbin/nmbd -D 
+	/usr/sbin/smbd -D
 	;;
 stop)
-	pkill nmbd
-	pkill smbd
+	kill $(pgrep -f /usr/sbin/nmbd)
+	kill $(pgrep -f /usr/sbin/smbd)
 	;;
 restart)
 	sh $0 stop

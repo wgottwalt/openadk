@@ -15,10 +15,10 @@ start)
 		touch /var/log/dansguardian-access.log
 		chown proxy:proxy /var/log/dansguardian-access.log
 	fi
-	dansguardian
+	/usr/sbin/dansguardian
 	;;
 stop)
-	pkill dansguardian
+	kill $(pgrep -f /usr/sbin/dansguardian)
 	;;
 restart)
 	sh $0 stop

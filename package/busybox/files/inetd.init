@@ -14,7 +14,7 @@ start)
 autostop)
 	;;
 stop)
-	pkill inetd
+	kill $(pgrep -f /usr/sbin/inetd)
 	;;
 restart)
 	sh $0 stop

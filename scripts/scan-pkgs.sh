@@ -130,12 +130,12 @@ if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
 fi
 
 if [[ -n $NEED_GETTEXT ]]; then
-	if ! which xgettext >/dev/null 2>&1; then
+	if ! which gettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
 		out=1
-	elif ! which msgfmt >/dev/null 2>&1; then
-		echo >&2 You need gettext to build $NEED_GETTEXT
-		out=1
+#	elif ! which msgfmt >/dev/null 2>&1; then
+#		echo >&2 You need msgfmt to build $NEED_GETTEXT
+#		out=1
 	fi
 fi
 

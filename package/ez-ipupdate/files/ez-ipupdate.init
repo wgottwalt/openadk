@@ -13,7 +13,7 @@ start)
 	/usr/sbin/ez-ipupdate -c /etc/ez-ipupdate.conf -d
 	;;
 stop)
-	pkill ez-ipupdate
+	kill $(pgrep -f /usr/sbin/ez-ipupdate)
 	;;
 restart)
 	sh $0 stop

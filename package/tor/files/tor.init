@@ -14,10 +14,10 @@ start)
 	[ -d /var/run/tor ] || mkdir -p /var/run/tor
 	[ -d /tmp/.tor ] || mkdir -p /tmp/.tor
 	chown tor:tor /tmp/.tor /var/run/tor
-	su - tor -c tor
+	su - tor -c /usr/bin/tor
 	;;
 stop)
-	pkill tor
+	kill $(pgrep -f /usr/bin/tor)
 	;;
 restart)
 	sh $0 stop

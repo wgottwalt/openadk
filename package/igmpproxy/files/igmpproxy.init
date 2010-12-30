@@ -13,7 +13,7 @@ start)
 	/usr/sbin/igmpproxy /etc/igmpproxy.conf &
 	;;
 stop)
-	pkill igmpproxy
+	kill $(pgrep -f /usr/sbin/igmpproxy)
 	;;
 restart)
 	sh $0 stop

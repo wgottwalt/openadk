@@ -12,11 +12,11 @@ autostart)
 	;;
 start)
 	for c in $(ls /etc/openvpn/*.conf 2>&-); do
-		openvpn --cd /etc/openvpn --config "$c" --daemon
+		/usr/sbin/openvpn --cd /etc/openvpn --config "$c" --daemon
 	done
 	;;
 stop)
-	pkill openvpn
+	kill $(pgrep -f /usr/sbin/openvpn)
 	;;
 restart)
 	sh $0 stop

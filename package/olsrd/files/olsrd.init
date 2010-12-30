@@ -11,7 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	olsrd
+	/usr/sbin/olsrd
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/olsrd)
 	;;
 restart)
 	sh $0 stop

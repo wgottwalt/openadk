@@ -14,7 +14,7 @@ start)
 	/usr/sbin/mrd6 -f /etc/mrd6.conf -D
 	;;
 stop)
-	pkill mrd6
+	kill $(pgrep -f /usr/sbin/mrd6)
 	;;
 restart)
 	sh $0 stop

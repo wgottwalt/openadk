@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	htpdate -l -s -t $htpdate_flags && htpdate -D $htpdate_flags
+	/usr/sbin/htpdate -l -s -t $htpdate_flags && htpdate -D $htpdate_flags
 	;;
 stop)
-	pkill htpdate
+	kill $(pgrep -f /usr/sbin/htpdate)
 	;;
 restart)
 	sh $0 stop

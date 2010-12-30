@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	netserver
+	/usr/sbin/netserver
 	;;
 stop)
-	pkill netserver
+	kill $(pgrep -f /usr/sbin/netserver)
 	;;
 restart)
 	sh $0 stop

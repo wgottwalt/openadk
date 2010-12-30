@@ -6,22 +6,22 @@
 
 case $1 in
 autostop) ;;
-	autostart)
-		test x"${vrrpd:-NO}" = x"NO" && exit 0
-		exec sh $0 start
-		;;
-	start)
-		vrrpd $vrrpd_flags
-		;;
-	stop)
-		pkill vrrpd
-		;;
-	restart)
-		sh $0 stop
-		sh $0 start
-		;;
-	 *)
-		echo "usage: $0 {start | stop | restart}"
-		exit 1
+autostart)
+	test x"${vrrpd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/vrrpd $vrrpd_flags
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/vrrpd)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+ *)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
 esac
 exit $?

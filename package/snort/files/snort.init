@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	snort $snort_flags
+	/usr/sbin/snort $snort_flags
 	;;
 stop)
-	pkill snort
+	kill $(pgrep -f /usr/sbin/snort)
 	;;
 *)
 	echo "usage: $0 {start | stop | restart}"

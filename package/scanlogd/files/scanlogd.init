@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	mkdir -p `grep "^scanlogd:" /etc/passwd | cut -d: -f6`
-	scanlogd $scanlogd_flags
+	/usr/sbin/scanlogd $scanlogd_flags
 	;;
 stop)
-	pkill scanlogd
+	kill $(pgrep -f /usr/sbin/scanlogd)
 	;;
 restart)
 	sh $0 stop

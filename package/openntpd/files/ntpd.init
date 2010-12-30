@@ -15,7 +15,7 @@ start)
 	/usr/sbin/ntpd $ntpd_flags
 	;;
 stop)
-	pkill ntpd
+	kill $(pgrep -f /usr/sbin/ntpd)
 	;;
 restart)
 	sh $0 stop

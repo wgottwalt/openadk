@@ -11,7 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	ulogd -d
+	/usr/sbin/ulogd -d
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/ulogd)
 	;;
 restart)
 	sh $0 stop

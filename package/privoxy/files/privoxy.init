@@ -14,7 +14,7 @@ start)
 	/usr/sbin/privoxy /etc/privoxy
 	;;
 stop)
-	pkill privoxy
+	kill $(pgrep -f /usr/sbin/privoxy)
 	;;
 restart)
 	sh $0 stop

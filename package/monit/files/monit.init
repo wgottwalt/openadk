@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	monit $monit_flags
+	/usr/sbin/monit $monit_flags
 	;;
 stop)
-	pkill monit	
+	kill $(pgrep -f /usr/sbin/monit	)
 	;;
 restart)
 	sh $0 stop

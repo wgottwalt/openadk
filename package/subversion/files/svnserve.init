@@ -25,7 +25,7 @@ start)
 	/usr/bin/svnserve -d -r $svnserve_path
 	;;
 stop)
-	pkill svnserve
+	kill $(pgrep -f /usr/bin/svnserve)
 	;;
 restart)
 	sh $0 stop

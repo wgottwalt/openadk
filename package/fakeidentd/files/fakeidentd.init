@@ -10,10 +10,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	fakeidentd ${fakeidentd_flags}
+	/usr/sbin/fakeidentd ${fakeidentd_flags}
 	;;
 stop)
-	pkill fakeidentd
+	kill $(pgrep -f /usr/sbin/fakeidentd)
 	;;
 restart)
 	sh $0 stop

@@ -5,22 +5,22 @@
 
 case $1 in
 autostop) ;;
-	autostart)
-		test x"${gmediaserver:-NO}" = x"NO" && exit 0
-		exec sh $0 start
-		;;
-	start)
-		gmediaserver $gmediaserver_flags
-		;;
-	stop)
-		pkill gmediaserver
-		;;
-	restart)
-		sh $0 stop
-		sh $0 start
-		;;
-	*)
-		echo "usage: $0 (start | stop | restart)"
-		exit 1
+autostart)
+	test x"${gmediaserver:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/gmediaserver $gmediaserver_flags
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/gmediaserver)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 (start | stop | restart)"
+	exit 1
 esac
 exit $?

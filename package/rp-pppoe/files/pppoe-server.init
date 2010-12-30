@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	pppoe-server
+	/usr/sbin/pppoe-server
 	;;
 stop)
-	pkill pppoe-server
+	kill $(pgrep -f /usr/sbin/pppoe-server)
 	;;
 restart)
 	sh $0 stop

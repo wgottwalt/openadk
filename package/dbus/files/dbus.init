@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	mkdir -p /var/run/dbus
-	dbus-daemon --config-file=/etc/dbus-1/system.conf
+	/usr/sbin/dbus-daemon --config-file=/etc/dbus-1/system.conf
 	;;
 stop)
-	pkill dbus-daemon
+	kill $(pgrep -f /usr/sbin/dbus-daemon)
 	;;
 restart)
 	sh $0 stop

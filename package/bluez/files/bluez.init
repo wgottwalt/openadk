@@ -10,10 +10,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	bluetoothd
+	/usr/sbin/bluetoothd
 	;;
 stop)
-	pkill bluetoothd
+	kill $(pgrep -f /usr/sbin/bluetoothd)
 	;;
 restart)
 	sh $0 stop

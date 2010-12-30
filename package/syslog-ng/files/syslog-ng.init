@@ -15,10 +15,10 @@ start)
 	  echo "/etc/syslog-ng/syslog-ng.conf does not exist !";
 	  exit 0;
 	};
-	[ -x /usr/sbin/syslog-ng ] && /usr/sbin/syslog-ng
+	/usr/sbin/syslog-ng
 	;;
 stop)
-	pkill syslog-ng
+	kill $(pgrep -f /usr/sbin/syslog-ng)
 	;;
 restart)
 	sh $0 stop

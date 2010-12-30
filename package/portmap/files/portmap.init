@@ -12,10 +12,10 @@ autostart)
 	;;
 start)
 	mkdir -p /tmp/.portmap
-	portmap -t /tmp/.portmap
+	/usr/sbin/portmap -t /tmp/.portmap
 	;;
 stop)
-	pkill portmap
+	kill $(pgrep -f /usr/sbin/portmap)
 	;;
 restart)
 	sh $0 stop

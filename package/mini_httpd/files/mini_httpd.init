@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	mini_httpd $mini_httpd_flags
+	/usr/sbin/mini_httpd $mini_httpd_flags
 	;;
 stop)
-	pkill mini_httpd
+	kill $(pgrep -f /usr/sbin/mini_httpd)
 	;;
 restart)
 	sh $0 stop

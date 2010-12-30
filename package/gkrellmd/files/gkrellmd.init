@@ -10,10 +10,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	gkrellmd -d
+	/usr/bin/gkrellmd -d
 	;;
 stop)
-	pkill gkrellmd
+	kill $(pgrep -f /usr/bin/gkrellmd)
 	;;
 restart)
 	sh $0 stop

@@ -18,10 +18,10 @@ start)
         $IPT -A input_rule -i $WAN -p tcp --dport 4443 -j ACCEPT
         $IPT -A input_rule -i $WAN -p tcp --dport 5566 -j ACCEPT
         $IPT -A input_rule -i $WAN -p tcp --dport 40000:40099 -j ACCEPT
-	reaim
+	/usr/sbin/reaim
 	;;
 stop)
-	pkill reaim
+	kill $(pgrep -f /usr/sbin/reaim)
 	;;
 restart)
 	sh $0 stop

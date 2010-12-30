@@ -14,7 +14,7 @@ start)
 	/usr/sbin/gpm $gpm_flags
 	;;
 stop)
-	pkill gpm
+	kill $(pgrep -f /usr/sbin/gpm)
 	;;
 restart)
 	sh $0 stop

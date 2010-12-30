@@ -11,10 +11,10 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/collectd ] || mkdir -p /var/lib/collectd
-	collectd
+	/usr/sbin/collectd
 	;;
 stop)
-	pkill collectd
+	kill $(pgrep -f /usr/sbin/collectd)
 	;;
 restart)
 	sh $0 stop

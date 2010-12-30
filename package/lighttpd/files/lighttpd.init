@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	lighttpd $lighttpd_flags
+	/usr/sbin/lighttpd $lighttpd_flags
 	;;
 stop)
-	pkill lighttpd
+	kill $(pgrep -f /usr/sbin/lighttpd)
 	;;
 restart)
 	sh $0 stop
