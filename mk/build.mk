@@ -539,15 +539,15 @@ bulkallmod:
 
 ${TOPDIR}/bin/tools/pkgmaker:
 	@mkdir -p $(TOPDIR)/bin/tools
-	@$(HOSTCC) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 ${TOPDIR}/bin/tools/pkgrebuild:
 	@mkdir -p $(TOPDIR)/bin/tools
-	@$(HOSTCC) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
+	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(TOPDIR)/bin/tools/pkgmaker
+	$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
 $(TOPDIR)/bin/tools:

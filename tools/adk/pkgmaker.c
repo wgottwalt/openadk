@@ -171,29 +171,6 @@ static void iter(const char *key, const char *value, const void *obj) {
 	fclose(config);
 }
 
-static char *print_target_depline(char *value, int neg, char *sp, FILE *cfg) {
-	
-	char *val;
-	char *np;
-	char *sptr;
-
-	sptr = NULL;
-	np = "";
-	val = strdup(value);
-	/* strtok_r is required here */
-	val = strtok_r(val, " ", &sptr);
-	while (val != NULL) {
-		if (neg == 1) np = "!";
-		fprintf(cfg, "%s%s%s", sp, np, val);
-		val = strtok_r(NULL, " ", &sptr);
-		if (neg == 1)
-			sp = " && ";
-		else
-			sp = " || ";
-	}
-	return(val);
-}
-
 static char *tolowerstr(char *string) {
 
 	int i;
@@ -234,7 +211,7 @@ int main() {
 
 	DIR *pkgdir, *pkglistdir;
 	struct dirent *pkgdirp;
-	FILE *pkg, *cfg, *target, *menuglobal, *section;
+	FILE *pkg, *cfg, *menuglobal, *section;
 	char hvalue[MAXVALUE];
 	char buf[MAXPATH];
 	char tbuf[MAXPATH];
@@ -248,8 +225,8 @@ int main() {
 	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
-	int result, neg;
-	StrMap *pkgmap, *targetmap, *sectionmap;
+	int result;
+	StrMap *pkgmap, *sectionmap;
 
 	pkg_name = NULL;
 	pkg_descr = NULL;
@@ -288,19 +265,6 @@ int main() {
 	}
 	fclose(section);
 	
-	/* read target list and create a hash table */
-	//target = fopen("target/target.lst", "r");
-	//if (target == NULL)
-	//	fatal_error("target listfile is missing.");
-	
-	//targetmap = strmap_new(HASHSZ);
-	//while (fgets(tbuf, MAXPATH, target) != NULL) {
-	//	key = strtok(tbuf, "\t");
-	//	value = strtok(NULL, "\t");
-	//	strmap_put(targetmap, key, value);
-	//}
-	//fclose(target);
-
 	if (mkdir("package/pkgconfigs.d", S_IRWXU) > 0)
 		fatal_error("creation of package/pkgconfigs.d failed.");
 	if (mkdir("package/pkglist.d", S_IRWXU) > 0)
@@ -774,7 +738,6 @@ int main() {
 	/* create Config.in.auto */
 	strmap_enum(sectionmap, iter, NULL);
 
-	strmap_delete(targetmap);
 	strmap_delete(sectionmap);
 	fclose(menuglobal);
 	closedir(pkgdir);

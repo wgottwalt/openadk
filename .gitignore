@@ -49,3 +49,4 @@ target/*/sys-enabled
 target/packages/pkg-enabled
 target/packages/Config.in
 target/config/Config.in.system.default
+target/config/Config.in.system

@@ -222,6 +222,7 @@ NO_ERROR=0
 	    	bash scripts/scan-tools.sh
 	@echo '===> Prerequisites checked successfully.'
 	@bash scripts/create-sys
+	@bash scripts/create-pkg
 	@touch .adkinit
 	@touch $@
 

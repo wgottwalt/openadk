@@ -31,9 +31,11 @@
 
 StrMap *configmap, *configoldmap, *pkgmap;
 
+/*
 static void iter(const char *key, const char *value, const void *obj) {
 	fprintf(stderr, "key: %s value: %s\n", key, value);
 }
+*/
 
 static void iter_disabled(const char *key, const char *value, const void *obj) {
 
