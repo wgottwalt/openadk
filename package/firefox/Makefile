@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 
-PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
@@ -38,8 +38,9 @@ endif
 CONFIGURE_ENV+=		CROSS_COMPILE=1 HOST_CC="${HOSTCC}" HOST_CFLAGS="${HOSTCFLAGS}" \
 			HOST_CXX="${HOSTCXX}" HOST_CXXFLAGS="${HOSTCXXFLAGS}" \
 			HOST_LIBIDL_CONFIG="${HOST_LIBIDL_CONFIG}" \
+			PKG_HOSTLIB_DIR="${PKG_HOSTLIB_DIR}" \
 			HOST_RANLIB="ranlib" HOST_AR="ar" \
-			CPPFLAGS="-I${STAGING_DIR}/usr/include/freetype2" \
+			CPPFLAGS="-I${STAGING_TARGET_DIR}/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_thread_keyword=no \
 			ac_cv_sizeof_int_p=4
@@ -51,8 +52,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-nss \
 			--with-system-nspr \
 			--enable-system-sqlite \
-			--with-libIDL-prefix=${STAGING_DIR}/usr \
-			--with-glib-prefix=${STAGING_DIR}/usr \
+			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
+			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
 			--enable-libxul \
 			--disable-tests \
 			--disable-libconic \

@@ -30,7 +30,7 @@ PKG_CONFIGURE_ARGS:=	--disable-integer-datetimes \
 			--without-readline \
 			--without-bonjour \
 			--without-tcl \
-			--with-system-tzdata=${STAGING_DIR} \
+			--with-system-tzdata=${STAGING_TARGET_DIR} \
 			--with-zlib="yes"
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_ARGS}
 

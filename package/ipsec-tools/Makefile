@@ -26,7 +26,7 @@ $(eval $(call PKG_template,IPSEC_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}
 CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \
 			--without-readline \
 			--disable-security-context \
-			--with-openssl="${STAGING_DIR}/usr" \
+			--with-openssl="${STAGING_TARGET_DIR}/usr" \
 			--without-libradius \
 			--without-libpam
 

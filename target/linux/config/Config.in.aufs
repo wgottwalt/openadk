@@ -1,6 +1,5 @@
 config ADK_KPACKAGE_KMOD_AUFS_FS
 	prompt "Aufs (Advanced multi layered unification filesystem) support"
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
 	  Aufs is a stackable unification filesystem such as Unionfs,

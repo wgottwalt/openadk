@@ -31,7 +31,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
-			INCLS="-I. -I${STAGING_DIR}/usr/include"
+			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin

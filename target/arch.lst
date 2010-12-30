@@ -1,0 +1,13 @@
+arm
+armeb
+cris
+mips
+mipsel
+mips64
+mips64el
+ppc
+ppc64
+sparc
+sparc64
+x86
+x86_64

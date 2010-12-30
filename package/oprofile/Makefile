@@ -14,7 +14,8 @@ PKG_BUILDDEP:=		popt binutils
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
+
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
 include $(TOPDIR)/mk/package.mk

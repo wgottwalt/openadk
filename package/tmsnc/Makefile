@@ -16,9 +16,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TMSNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-libiconv-prefix=${STAGING_DIR}/usr \
-			--with-openssl=${STAGING_DIR}/usr \
-			--with-ncurses=${STAGING_DIR}
+CONFIGURE_ARGS+=	--with-libiconv-prefix=${STAGING_TARGET_DIR}/usr \
+			--with-openssl=${STAGING_TARGET_DIR}/usr \
+			--with-ncurses=${STAGING_TARGET_DIR}
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TMSNC}/usr/bin

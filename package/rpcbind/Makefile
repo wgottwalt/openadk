@@ -20,7 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RPCBIND,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/tirpc
+TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/tirpc
 CONFIGURE_ARGS+=	--disable-libwrap
 
 post-install:

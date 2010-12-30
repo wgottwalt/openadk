@@ -1,5 +1,5 @@
---- LVM2.2.02.72.orig/libdm/Makefile.in	Fri Jun 25 20:17:39 2010
-+++ LVM2.2.02.72/libdm/Makefile.in	Fri Jul 30 10:34:15 2010
+--- LVM2.2.02.79.orig/libdm/Makefile.in	2010-08-03 15:00:46.000000000 +0200
++++ LVM2.2.02.79/libdm/Makefile.in	2010-12-26 22:15:11.000000000 +0100
 @@ -34,10 +34,7 @@ SOURCES =\
  
  INCLUDES = -I$(srcdir)/$(interface) -I$(srcdir)
@@ -11,19 +11,18 @@
  LIB_SHARED = $(interface)/libdevmapper.$(LIB_SUFFIX)
  LIB_VERSION = $(LIB_VERSION_DM)
  TARGETS += libdevmapper.$(LIB_SUFFIX) libdevmapper.$(LIB_SUFFIX).$(LIB_VERSION)
-@@ -65,11 +62,8 @@ libdevmapper.$(LIB_SUFFIX) libdevmapper.$(LIB_SUFFIX).
+@@ -65,10 +62,7 @@ libdevmapper.$(LIB_SUFFIX) libdevmapper.
  	install_pkgconfig
  
  INSTALL_TYPE = install_dynamic
-+INSTALL_TYPE += install_static
- 
+-
 -ifeq ("@STATIC_LINK@", "yes")
 -  INSTALL_TYPE += install_static
 -endif
--
++INSTALL_TYPE += install_static
+ 
  ifeq ("@PKGCONFIG@", "yes")
    INSTALL_TYPE += install_pkgconfig
- endif
 @@ -79,7 +73,8 @@ install: $(INSTALL_TYPE) install_include
  install_device-mapper: install
  
@@ -34,7 +33,7 @@
  
  install_dynamic: install_@interface@
  
-@@ -88,10 +83,12 @@ install_static: install_@interface@_static
+@@ -88,10 +83,12 @@ install_static: install_@interface@_stat
  install_ioctl: install_lib_shared
  
  install_pkgconfig: libdevmapper.pc
@@ -48,4 +47,4 @@
 +	$(INSTALL_DATA) $< $(usrlibdir)/$(<F)
  
  CLEAN_TARGETS += ioctl/libdevmapper.a
- DISTCLEAN_TARGETS += libdevmapper.pc
+ DISTCLEAN_TARGETS += libdevmapper.pc .exported_symbols_generated

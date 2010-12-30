@@ -1,0 +1,10 @@
+--- miredo-1.2.3.orig/libteredo/stub.c	2009-07-06 17:56:14.000000000 +0200
++++ miredo-1.2.3/libteredo/stub.c	2010-12-30 10:50:06.000000000 +0100
+@@ -26,6 +26,7 @@
+ # include <config.h>
+ #endif
+ 
++#include <stddef.h>
+ #include <stdbool.h>
+ #include <assert.h>
+ 

@@ -20,12 +20,12 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-libdnet=${STAGING_DIR}/usr \
-			--with-libevent=${STAGING_DIR}/usr \
-			--with-libpcap=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-libdnet=${STAGING_TARGET_DIR}/usr \
+			--with-libevent=${STAGING_TARGET_DIR}/usr \
+			--with-libpcap=${STAGING_TARGET_DIR}/usr
 MAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
-			INCLS="-I. -I${STAGING_DIR}/usr/include" \
-			LIBS="-L${STAGING_DIR}/usr/lib -lpcap -ldnet -levent"
+			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include" \
+			LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lpcap -ldnet -levent"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ARPD}/usr/sbin

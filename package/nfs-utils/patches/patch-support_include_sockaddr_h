@@ -1,0 +1,10 @@
+--- nfs-utils-1.2.3.orig/support/include/sockaddr.h	2010-09-28 14:24:16.000000000 +0200
++++ nfs-utils-1.2.3/support/include/sockaddr.h	2010-12-25 00:47:43.000000000 +0100
+@@ -20,7 +20,6 @@
+ #ifndef NFS_UTILS_SOCKADDR_H
+ #define NFS_UTILS_SOCKADDR_H
+ 
+-#include <libio.h>
+ #include <stdbool.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>

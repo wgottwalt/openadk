@@ -39,12 +39,12 @@ post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(HOSTCFLAGS)" \
 		./configure --without-cxx-main --without-threads \
-		--prefix=$(STAGING_TOOLS) \
+		--prefix=$(STAGING_HOST_DIR) \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
 	$(MAKE) -C ${WRKBUILD} install
-	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_TOOLS}/bin/pgen
-	${CP} ${WRKBUILD}/python ${STAGING_TOOLS}/bin/hostpython
+	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_HOST_DIR}/bin/pgen
+	${CP} ${WRKBUILD}/python ${STAGING_HOST_DIR}/bin/hostpython
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} clean

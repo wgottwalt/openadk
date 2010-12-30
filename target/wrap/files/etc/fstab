@@ -1,2 +1,0 @@
-# <fs>			<mountpoint>	<type>		<opts>		<dump/pass>
-/dev/root		/		ext2		noatime		0 0

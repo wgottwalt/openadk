@@ -2,19 +2,15 @@ menu "Filesystems support"
 
 config ADK_KERNEL_YAFFS_FS
 	tristate
-	default n
 
 config ADK_KERNEL_YAFFS_YAFFS1
 	boolean
-	default n
 
 config ADK_KERNEL_YAFFS_YAFFS2
 	boolean
-	default n
 
 config ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	boolean
-	default n
 
 config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
 	int
@@ -22,15 +18,12 @@ config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
 
 config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
 	boolean
-	default n
 
 config ADK_KERNEL_MISC_FILESYSTEMS
 	boolean
-	default n
 
 config ADK_KERNEL_EXT3_FS_XATTR
 	boolean
-	default n
 
 config ADK_KERNEL_FAT_DEFAULT_CODEPAGE
 	int
@@ -53,6 +46,8 @@ config ADK_KERNEL_SQUASHFS
 
 config ADK_KERNEL_EXT2_FS
 	boolean
+	default y if ADK_TARGET_WITH_CF
+	default y if ADK_TARGET_WITH_MMC
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT2_FS
@@ -100,14 +95,12 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 config ADK_KERNEL_EXT4_FS
 	boolean
 	select ADK_KERNEL_CRC16
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
 	tristate
 	depends on !ADK_KERNEL_EXT4_FS 
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KPACKAGE_KMOD_CRC16
 	default n
 	help
@@ -156,17 +149,13 @@ config ADK_KPACKAGE_KMOD_NTFS_FS
 	  Linux on your computer it is safe to say N.
 	  Kernel modules for NTFS support
 
-config ADK_KERNEL_FAT_FS
-	tristate
-	default n
-
 config ADK_KPACKAGE_KMOD_VFAT_FS
-	prompt "kmod-fs-vfat...................... VFAT filesystem support"
-	select ADK_KERNEL_FAT_FS
+	prompt "kmod-vfat-fs....................... VFAT filesystem support"
+	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
-	tristate
+	default y if ADK_TARGET_WITH_MMC
 	default n
 	help
 	  This option provides support for normal Windows file systems with
@@ -240,7 +229,6 @@ config ADK_KPACKAGE_KMOD_UDF_FS
 	prompt "kmod-fs-udf....................... UDF file system support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 	help
 	  This is the new file system used on some CD-ROMs and DVDs. Say Y if

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.0a
+PKG_VERSION:=		1.0.0c
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e3873edfffc783624cfbdb65e2249cbd
+PKG_MD5SUM:=		ff8fb85610aef328315a9decbb2712e4
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -55,8 +55,9 @@ do-configure:
 		./Configure linux-embedded \
 		  --prefix=/usr \
 		  --openssldir=/etc/ssl \
-		  -I$(STAGING_DIR)/usr/include \
-		  -L$(STAGING_DIR)/usr/lib -ldl \
+		  -I$(STAGING_TARGET_DIR)/usr/include \
+		  -L$(STAGING_TARGET_DIR)/usr/lib -ldl \
+		  -DHAVE_CRYPTODEV \
 		  -DOPENSSL_SMALL_FOOTPRINT \
 		  $(OPENSSL_OPTIONS) \
 	);

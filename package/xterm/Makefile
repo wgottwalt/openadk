@@ -13,8 +13,6 @@ PKG_DEPENDS:=		xorg-server libxaw
 PKG_URL:=		http://invisible-island.net/xterm/xterm.html
 PKG_SITES:=		ftp://invisible-island.net/xterm/
 
-PKG_TARGET_DEPENDS:=	!foxboard !foxg20 !ag241
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
 
 include $(TOPDIR)/mk/package.mk

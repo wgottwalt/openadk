@@ -20,8 +20,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FPROBE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-piddir=/var \
-			--with-pcap=${STAGING_DIR}/usr/include \
-			--with-libpcap=${STAGING_DIR}/usr/lib \
+			--with-pcap=${STAGING_TARGET_DIR}/usr/include \
+			--with-libpcap=${STAGING_TARGET_DIR}/usr/lib \
 			--with-membulk=index8 \
 			--with-hash=xor8 \
 

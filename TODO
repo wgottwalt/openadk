@@ -1,9 +1,14 @@
-- rework architecture / embedded systems concept
+- openssl ocf support check
+- new package minidlna
 - wget/curl/ftp download support
-- relocatable gcc
+- fix heimdal package
+- check all patches for CFLAGS compliance
+- busybox update and SuSv3 removal
+- check rtc support on foxg20
+- relocatable gcc (adk)
 - adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
-- mirror only option, no internet access
-- fix watchdog for alix1c (mfgpt timers problem)
-- add support for brcm 2.6 (flash support)
+- mirror only option, for no internet access
+- fix watchdog for alix1c (mfgpt timer problem)
+- add support for brcm 2.6 (lzma/flash/wireless support)
 - help text for config/ needs adoption

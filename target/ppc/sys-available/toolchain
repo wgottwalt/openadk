@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC
+	bool "Toolchain only"
+	select ADK_ppc
+	select ADK_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Build a ppc toolchain.
+

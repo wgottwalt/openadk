@@ -33,8 +33,8 @@ ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		STATIC_CFLAGS=-all-static
 endif
 
-CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_DIR}/usr/include" \
-			OPENOBEX_LIBS="-L${STAGING_DIR}/usr/lib \
+CONFIGURE_ENV+=		OPENOBEX_CFLAGS="-I${STAGING_TARGET_DIR}/usr/include" \
+			OPENOBEX_LIBS="-L${STAGING_TARGET_DIR}/usr/lib \
 			    -lopenobex -lbluetooth -liconv"
 CONFIGURE_ARGS+=	--disable-perl \
 			--disable-ruby \

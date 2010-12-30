@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
 PKG_SITES:=		http://wireless.kernel.org/download/iw/
 
-PKG_DFLT_IW:=		y if ADK_HARDWARE_IBM_X40
+PKG_DFLT_IW:=		y if ADK_TARGET_SYSTEM_IBM_X40
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

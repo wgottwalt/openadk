@@ -17,10 +17,10 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	$(MAKE) -C $(WRKBUILD)/squashfs-tools
 	touch $@
 
-${STAGING_TOOLS}/bin/mksquashfs: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/squashfs-tools/mksquashfs \
-		${STAGING_TOOLS}/bin
+		${STAGING_HOST_DIR}/bin
 
-install: ${STAGING_TOOLS}/bin/mksquashfs
+install: ${STAGING_HOST_DIR}/bin/mksquashfs
 
 include $(TOPDIR)/mk/tools.mk

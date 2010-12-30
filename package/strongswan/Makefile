@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		4.4.1
+PKG_VERSION:=		4.5.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8a86019326ad8d9d703f55c8cd4625e1
+PKG_MD5SUM:=		92b6419edb09935860b56fe0455ec037
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user
@@ -55,6 +55,7 @@ endif
 
 CONFIGURE_ARGS+=	--disable-tools \
 			--disable-fips-prf \
+			--with-group=wheel \
 			--enable-kernel-pfkey
 
 post-install:

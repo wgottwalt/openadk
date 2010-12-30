@@ -31,7 +31,7 @@ do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
 else
-	$(CP) ${STAGING_DIR}/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
+	$(CP) ${STAGING_TARGET_DIR}/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/lib
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

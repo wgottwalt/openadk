@@ -1,95 +1,61 @@
-config ADK_LINUX_INITRAMFS_BUILTIN
-	select ADK_KERNEL_BLK_DEV_INITRD
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
-	boolean
-	default n
-
-config ADK_KERNEL_MISC_DEVICES
-	boolean
-	default n
-
-config ADK_KERNEL_CS5535_MFGPT
-	boolean
-	default n
-
-config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
-	boolean
-	default n
+#config ADK_LINUX_INITRAMFS_BUILTIN
+#	select ADK_KERNEL_BLK_DEV_INITRD
+#	select ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
+#	boolean
+#	default n
 
 config ADK_KERNEL_RFKILL
  	boolean
- 	default n
- 
-config ADK_KERNEL_WATCHDOG
-	boolean
-	default n
 
 config ADK_KERNEL_I2C
  	boolean
-	default n
  
 config ADK_KERNEL_I2C_CHARDEV
  	tristate
-	default n
 
 config ADK_KERNEL_RTC_CLASS
  	boolean
-	default n
 
 config ADK_KERNEL_RTC_HCTOSYS
  	boolean
-	default n
 
 config ADK_KERNEL_RTC_INTF_DEV
  	boolean
-	default n
 
 menu "Miscellaneous devices support"
 
-config ADK_KERNEL_GEODE_WDT
-	prompt "geode-wdt......................... Geode Hardware Watchdog"
-	tristate
-	select ADK_KERNEL_WATCHDOG
-	select ADK_KERNEL_MISC_DEVICES
-	select ADK_KERNEL_CS5535_MFGPT
-	select ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
-	depends on ADK_LINUX_X86_ALIX
-	default y if ADK_HARDWARE_ALIX2D2
-	default y if ADK_HARDWARE_ALIX2D13
-	default n
-	help
-	 Geode watchdog.
-
-config ADK_KERNEL_RTC_DRV_CMOS
-	prompt "rtc-cmos.......................... RTC support for PC CMOS"
-	tristate
+config ADK_KERNEL_RTC_DRV_AT91SAM9
+	prompt ".................................. RTC support for AT91SAM9 (Fox G20)"
+	boolean
 	select ADK_KERNEL_RTC_CLASS
 	select ADK_KERNEL_RTC_HCTOSYS
 	select ADK_KERNEL_RTC_INTF_DEV
-	default y if ADK_TARGET_WITH_RTC
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default n
+	help
+ 	  Fox G20 RTC support.
+
+config ADK_KERNEL_RTC_DRV_CMOS
+	prompt ".................................. RTC support for PC CMOS"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_IBM_X40
  	default n
  	help
-	 RTC support for ALIX boards.
+	 PC CMOS RTC support.
 	
 config ADK_KPACKAGE_KMOD_SCx200_ACB
 	prompt "kmod-i2c-geode.................... I2C driver for Geode"
 	tristate
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
-	depends on ADK_LINUX_X86_ALIX
 	default n
 	help
 	  I2C driver for Geode boards.
-
-config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
-	prompt "kmod-softdog...................... Software watchdog"
-	tristate
-	default n
-	select ADK_KERNEL_WATCHDOG
-	help
-	  A software monitoring watchdog. This will fail to reboot your system
-	  from some situations that the hardware watchdog will recover
-	  from. Equally it's a lot cheaper to install.
 
 config ADK_KPACKAGE_KMOD_PARPORT
 	prompt "kmod-parport...................... generic parallel port support"
@@ -131,7 +97,6 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 	prompt "kmod-fw-loader.................... userspace firmware loading support"
 	tristate
 	default n
-	depends on !ADK_LINUX_QEMU
 	help
 	  This may be necessary when using drivers which require
 	  loading of external firmware files.
@@ -140,7 +105,6 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
-	depends on !ADK_LINUX_CRIS_FOXBOARD && !ADK_HARDWARE_LEMOTE_YEELONG
  	default n
  	help
  

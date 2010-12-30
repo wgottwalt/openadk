@@ -17,7 +17,7 @@ parted -s /dev/mmcblk0 mklabel msdos
 sleep 2
 maxsize=$(env LC_ALL=C parted /dev/mmcblk0 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 rootsize=$(($maxsize-2))
-parted -s /dev/mmcblk0 unit cyl mkpartfs primary fat32 0 5
+parted -s /dev/mmcblk0 unit cyl mkpart primary fat32 0 5
 parted -s /dev/mmcblk0 unit cyl mkpart primary ext2 5 $rootsize
 parted -s /dev/mmcblk0 unit cyl mkpart primary fat32 $rootsize $maxsize
 parted -s /dev/mmcblk0 set 1 boot on
@@ -25,6 +25,7 @@ sfdisk --change-id /dev/mmcblk0 3 88 >/dev/null 2>&1
 sleep 2
 sync
 printf "Creating ext2 filesystem\n"
+mkfs.vfat /dev/mmcblk0p1 >/dev/null 2>&1
 mke2fs /dev/mmcblk0p2 >/dev/null 2>&1
 tune2fs -c0 -i0 /dev/mmcblk0p2 >/dev/null 2>&1
 mount -t ext2 /dev/mmcblk0p2 /mnt

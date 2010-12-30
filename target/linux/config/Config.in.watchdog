@@ -1,0 +1,70 @@
+config ADK_KERNEL_WATCHDOG
+	boolean
+
+config ADK_KERNEL_MISC_DEVICES
+	boolean
+
+config ADK_KERNEL_SCx200
+	boolean
+
+config ADK_KERNEL_CS5535_MFGPT
+	boolean
+
+config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
+	boolean
+
+menu "Watchdog support"
+
+config ADK_KERNEL_SCx200_WDT
+	prompt ".................................. Natsemi Hardware Watchdog" 
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	select ADK_KERNEL_SCx200
+	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default n
+	help
+	  Natsemi Watchdog (scx200)
+
+config ADK_KERNEL_AT91SAM9X_WATCHDOG
+	prompt ".................................. AT91SAM9X Hardware Watchdog" 
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default n
+	help
+	  AT91SAM9X Watchdog.
+
+config ADK_KERNEL_AR7_WDT
+	prompt ".................................. AR7 Hardware Watchdog" 
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
+	default n
+	help
+	  AR7 Watchdog.
+
+config ADK_KERNEL_GEODE_WDT
+	prompt ".................................. Geode Hardware Watchdog"
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	select ADK_KERNEL_MISC_DEVICES
+	select ADK_KERNEL_CS5535_MFGPT
+	select ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default n
+	help
+	 Geode watchdog.
+
+config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
+	prompt "kmod-softdog...................... Software watchdog"
+	tristate
+	default n
+	select ADK_KERNEL_WATCHDOG
+	help
+	  A software monitoring watchdog. This will fail to reboot your system
+	  from some situations that the hardware watchdog will recover
+	  from. Equally it's a lot cheaper to install.
+
+endmenu

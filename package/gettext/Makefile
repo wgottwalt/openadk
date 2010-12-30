@@ -31,7 +31,7 @@ CONFIGURE_ARGS+=	--disable-java \
 			--disable-libasprintf \
 			--enable-threads=posix \
 			--disable-openmp \
-			--with-libiconv-prefix='${STAGING_DIR}/usr' \
+			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr' \
 			--with-included-gettext \
 			--without-emacs
 CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
@@ -42,6 +42,6 @@ post-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib ${IDIR_GETTEXT}/usr/bin
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_GETTEXT}/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/gettext \
-			$(IDIR_GETTEXT)/usr/bin
+		$(IDIR_GETTEXT)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

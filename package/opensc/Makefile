@@ -36,6 +36,9 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_LIBOPENSC_DEV}+=	libopensc-dev-install
 
+post-extract:
+	cd ${WRKBUILD} && autoreconf -vif
+
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/opensc-explorer \

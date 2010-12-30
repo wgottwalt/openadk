@@ -52,11 +52,18 @@ if [ $rescue -eq 1 ];then
 	rootp=3
 	cfgfsp=4
 	start=2
-	parted -s /dev/sda unit cyl mkpartfs primary ext2 0 1
-	parted -s /dev/sda unit cyl mkpartfs primary ext2 1 2
+	parted -s /dev/sda unit cyl mkpart primary ext2 0 1
+	check_exit
+	mke2fs /dev/sda1
+	check_exit
+	parted -s /dev/sda unit cyl mkpart primary ext2 1 2
+	check_exit
+	mke2fs /dev/sda2
 	check_exit
 fi
-parted -s /dev/sda unit cyl mkpartfs primary ext2 $start $rootsize
+parted -s /dev/sda unit cyl mkpart primary ext2 $start $rootsize
+check_exit
+mke2fs /dev/sda1
 check_exit
 parted -s /dev/sda unit cyl mkpart primary fat32 $rootsize $maxsize
 check_exit
@@ -124,7 +131,7 @@ menuentry "GNU/Linux (OpenADK)" {
 	recordfail
         insmod ext2
         set root=(hd0,3)
-        linux /boot/vmlinuz-adk root=/dev/sda$rootp ro init=/init panic=10
+        linux /boot/kernel root=/dev/sda$rootp ro init=/init panic=10
 }
 
 menuentry "GNU/Linux (OpenADK) Rescue Mode" {
@@ -145,7 +152,7 @@ terminal_input serial
 menuentry "GNU/Linux (OpenADK)" {
         insmod ext2
         set root=(hd0,1)
-        linux /boot/vmlinuz-adk root=/dev/sda$rootp ro init=/init panic=10
+        linux /boot/kernel root=/dev/sda$rootp ro init=/init panic=10
 }
 EOF
 fi

@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--without-epoll \
 			--without-ssl
 
 CONFIGURE_ENV+= 	CXXFLAGS='${TCXXFLAGS}' \
-			ac_cv_path_cxxtools_config=${STAGING_DIR}/usr/bin
+			ac_cv_path_cxxtools_config=${STAGING_TARGET_DIR}/usr/bin
 
 TLDFLAGS+=		-ldl
 

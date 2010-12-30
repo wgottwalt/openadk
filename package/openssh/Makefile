@@ -39,10 +39,10 @@ $(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION
 $(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
 
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
-CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
+CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
-CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_DIR}/usr"
+CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
 
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
@@ -62,7 +62,7 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--sysconfdir=/etc/ssh \
 			--with-privsep-user=sshd \
 			--with-privsep-path=/var/run/sshd \
-			--with-ssl-dir="${STAGING_DIR}/usr"
+			--with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh

@@ -5,7 +5,7 @@
  # Misc tools and flags
  SHELL = /bin/sh
 -MKLIB = $(SHELL) $(TOP)/bin/mklib
-+MKLIB = env RANLIB=/Volumes/adk/openadk/cross_x86_glibc/host/bin/i686-openadk-linux-gnu-ranlib AR=/Volumes/adk/openadk/cross_x86_glibc/host/bin/i686-openadk-linux-gnu-ar $(SHELL) $(TOP)/bin/mklib
++MKLIB = env RANLIB=$(RANLIB) AR=$(AR) $(SHELL) $(TOP)/bin/mklib
  MKLIB_OPTIONS = 
  MKDEP = makedepend
  MKDEP_OPTIONS = -fdepend

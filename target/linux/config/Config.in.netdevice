@@ -15,6 +15,84 @@ config ADK_KERNEL_NET_PCI
 config ADK_KERNEL_NETDEV_1000
 	boolean
 
+config ADK_KERNEL_VIA_RHINE_MMIO
+	boolean
+
+config ADK_KERNEL_CPMAC
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
+	default n
+	help
+
+config ADK_KERNEL_MACB
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default n
+	help
+
+config ADK_KERNEL_NATSEMI
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default n
+	help
+
+config ADK_KERNEL_VIA_RHINE
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default n
+	help
+
+config ADK_KERNEL_KORINA
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default n
+	help
+
+config ADK_KERNEL_AG71XX
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_NETDEV_1000
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB411
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB433
+	default n
+	help
+
+config ADK_KERNEL_B44
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
+	default n
+	help
+
 menu "Ethernet card support"
 depends on ADK_TARGET_WITH_PCI
 
@@ -78,9 +156,9 @@ config ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_HARDWARE_IBM_X40
-	default y if ADK_HARDWARE_QEMU_X86
-	default y if ADK_HARDWARE_QEMU_X86_64
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_QEMU_X86
+	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default n
 	help
 	  This driver supports Intel(R) PRO/1000 gigabit ethernet family of
@@ -95,7 +173,7 @@ config ADK_KPACKAGE_KMOD_SKY2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_HARDWARE_SHUTTLE_SA76G2
+	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
 	default n
 	help
 
@@ -105,7 +183,7 @@ config ADK_KPACKAGE_KMOD_R8169
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_HARDWARE_OVH_RPS
+	default y if ADK_TARGET_SYSTEM_OVH_RPS
 	default n
 	help
 
@@ -185,7 +263,7 @@ config ADK_KPACKAGE_KMOD_ATH5K
 	select ADK_KERNEL_ATH_COMMON
 	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
-	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
 	  Driver for Atheros 5xxx/24xx cards.
@@ -220,6 +298,7 @@ config ADK_KPACKAGE_KMOD_B43
 config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
+	depends on ADK_TARGET_WITH_USB
 	default n
 	help
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.

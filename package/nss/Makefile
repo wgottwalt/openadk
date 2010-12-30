@@ -15,7 +15,7 @@ PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_1
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
 
 WRKSRC=			${WRKDIST}/mozilla/security/nss
 
@@ -31,8 +31,8 @@ XAKE_FLAGS+=		USE_64=1
 endif
 
 MAKE_FLAGS+=		NATIVE_CC="${HOSTCC}" NATIVE_FLAGS="${HOSTCFLAGS}"
-TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/nspr
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/nspr
+TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/nspr
+TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/nspr
 TLDFLAGS+=		-ldl
 
 XAKE_FLAGS+=		SOURCE_MD_DIR=${WRKDIST}/dist DIST=${WRKDIST}/dist
@@ -45,8 +45,8 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
 	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3}.so \
 		$(IDIR_NSS)/usr/lib
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/nss
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
 	${INSTALL_DATA} ${WRKDIST}/mozilla/dist/public/nss/* \
-		${STAGING_DIR}/usr/include/nss
+		${STAGING_TARGET_DIR}/usr/include/nss
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,14 @@
+config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	bool "Lemote Yeelong laptop"
+	select ADK_mips64el
+	select ADK_lemote_yeelong
+	select ADK_TARGET_WITH_USB_BOOT
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_HDD
+	help
+         System profile for Lemote Yeelong laptop.
+

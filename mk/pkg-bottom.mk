@@ -128,7 +128,7 @@ do-install:
 post-install:
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
-	@mkdir -p '${STAGING_PARENT}/pkg' ${WRKINST} '${STAGING_DIR}/scripts'
+	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
 	@mkdir -p ${WRKINST}/{sbin,bin,etc,lib} ${WRKINST}/usr/{sbin,bin,lib}
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
@@ -147,41 +147,41 @@ endif
 ifeq ($(ADK_NATIVE),)
 	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
-		$(SED) "s,^prefix=.*,prefix=${STAGING_DIR}/usr," $$a; \
+		$(SED) "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a; \
 	done
 endif
 ifeq (,$(filter noremove,${PKG_OPTS}))
-	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
-		cd '${STAGING_DIR}'; \
+	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
+		cd '${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
-		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \
 	fi
 endif
-	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
+	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
 	@-cd ${WRKINST}; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
-	    tee '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
-	    $(TOPDIR)/bin/tools/cpio -padlmu '${STAGING_DIR}'
-	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
-	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | while read fn; do \
+	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
+	    $(TOPDIR)/bin/tools/cpio -padlmu '${STAGING_TARGET_DIR}'
+	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
+	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
-		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$fn; \
+		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$fn; \
 	done
 ifeq (,$(filter noscripts,${PKG_OPTS}))
-	@cd '${STAGING_DIR}'; grep 'usr/s*bin/' \
-	    '${STAGING_PARENT}/pkg/${PKG_NAME}' | \
+	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
+	    '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    while read fn; do \
 		b="$$(dd if="$$fn" bs=2 count=1 2>/dev/null)"; \
 		[[ $$b = '#!' ]] || continue; \
 		cp "$$fn" scripts/; \
 		echo "scripts/$$(basename "$$fn")" \
-		    >>'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+		    >>'${STAGING_PKG_DIR}/${PKG_NAME}'; \
 	done
 endif
 	touch $@
@@ -236,11 +236,11 @@ clean-targets: clean-dev-generic
 
 clean-dev-generic:
 ifeq (,$(filter noremove,${PKG_OPTS}))
-	@if test -s '${STAGING_PARENT}/pkg/${PKG_NAME}'; then \
-		cd '${STAGING_DIR}'; \
+	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
+		cd '${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
-		done <'${STAGING_PARENT}/pkg/${PKG_NAME}'; \
+		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \
 	fi
 endif
-	@rm -f '${STAGING_PARENT}/pkg/${PKG_NAME}'
+	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'

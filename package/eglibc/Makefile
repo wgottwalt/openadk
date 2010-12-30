@@ -57,19 +57,18 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
 		$(IDIR_EGLIBC)/etc/localtime
-	$(CP) $(STAGING_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_EGLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
-		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
-		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
 
 eglibc-dev-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
-	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
-	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libm.so.6 libm.so
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libutil.so.1 libutil.so
 	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf librt.so.1 librt.so

@@ -20,8 +20,8 @@ $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEAS
 
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz" \
 			am_cv_func_iconv=no
-CONFIGURE_ARGS+=	--with-id3lib="${STAGING_DIR}/usr" \
-			--with-libupnp="${STAGING_DIR}/usr"
+CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
+			--with-libupnp="${STAGING_TARGET_DIR}/usr"
 
 ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz"

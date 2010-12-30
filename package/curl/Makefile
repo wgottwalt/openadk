@@ -52,7 +52,7 @@ CONFIGURE_ARGS+=	--disable-thread \
 			--disable-telnet \
 			--disable-verbose \
 			--with-random="/dev/urandom" \
-			--with-ssl="${STAGING_DIR}/usr" \
+			--with-ssl="${STAGING_TARGET_DIR}/usr" \
 			--without-ca-bundle \
 			--without-gnutls \
 			--without-libidn

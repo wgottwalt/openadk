@@ -107,8 +107,8 @@ do-build:
 		OS="linux" \
 		ARCH="$(ARCH)"  \
 		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
-		LOCALBASE="$(STAGING_DIR)/usr" \
-		SYSBASE="$(STAGING_DIR)/usr" \
+		LOCALBASE="$(STAGING_TARGET_DIR)/usr" \
+		SYSBASE="$(STAGING_TARGET_DIR)/usr" \
 		all modules
 
 do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}

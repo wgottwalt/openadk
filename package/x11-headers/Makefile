@@ -23,6 +23,6 @@ INSTALL_STYLE:=		manual
 
 do-install: 
 	${INSTALL_DIR} ${IDIR_X11_HEADERS}/usr/include
-	${CP} ${STAGING_DIR}/usr/include/X11 ${IDIR_X11_HEADERS}/usr/include
+	${CP} ${STAGING_TARGET_DIR}/usr/include/X11 ${IDIR_X11_HEADERS}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

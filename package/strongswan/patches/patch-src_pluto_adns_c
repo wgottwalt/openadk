@@ -1,0 +1,20 @@
+--- strongswan-4.5.0.orig/src/pluto/adns.c	2010-01-24 02:49:37.000000000 +0100
++++ strongswan-4.5.0/src/pluto/adns.c	2010-12-30 20:25:54.000000000 +0100
+@@ -179,7 +179,8 @@ write_pipe(int fd, const unsigned char *
+ 	res_query(dname, class, type, answer, anslen)
+ # define res_nclose(statp) res_close()
+ 
+-static struct __res_state *statp = &_res;
++static struct __res_state *statp;
++//static struct __res_state *statp = &_res;
+ 
+ #else /* !OLD_RESOLVER */
+ 
+@@ -590,6 +591,7 @@ int
+ main(int argc UNUSED, char **argv)
+ {
+ 	int i = 1;
++	statp = &_res;
+ 
+ 	name = argv[0];
+ 

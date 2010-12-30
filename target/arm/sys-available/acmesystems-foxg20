@@ -1,0 +1,17 @@
+config ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	bool "Foxboard FOXG20"
+	select ADK_arm
+	select ADK_acmesystems_foxg20
+	select ADK_KERNEL_ARCH_AT91
+	select ADK_KERNEL_ARCH_AT91SAM9G20
+	select ADK_KERNEL_MACH_FOXG20
+	select ADK_KERNEL_AEABI
+	select ADK_EABI
+	select ADK_TARGET_NO_FPU
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_MMC
+	select ADK_TARGET_WITH_RTC
+	select ADK_TARGET_WITH_USB
+	help
+	  Acme Systems Foxboard FOX G20
+

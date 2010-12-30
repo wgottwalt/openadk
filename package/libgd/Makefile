@@ -20,11 +20,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_DIR}/usr/bin/libpng12-config"
+CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_TARGET_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \
-			--with-jpeg=${STAGING_DIR}/usr \
-			--with-png=${STAGING_DIR}/usr \
+			--with-jpeg=${STAGING_TARGET_DIR}/usr \
+			--with-png=${STAGING_TARGET_DIR}/usr \
 			--without-xpm
 
 post-install:

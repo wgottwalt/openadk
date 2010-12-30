@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC64
+	bool "Toolchain only"
+	select ADK_ppc64
+	select ADK_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Build a ppc64 toolchain.
+

@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_TARGET_DEPENDS:=	alix x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 PKG_FLAVOURS:=		WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -33,7 +33,6 @@ $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 #TCFLAGS:=$(subst Os,O2,$(TCFLAGS))
 
 CONFIG_STYLE:=		minimal
-
 FAKE_FLAGS+=		INSTALLSTRIP=''
 
 ifeq (${ADK_LINUX_MIPS64EL},y)
@@ -48,33 +47,23 @@ endif
 # related patch to allow configure to find out the DirectFB
 # version number.
 ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/directfb
+TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/directfb
 endif
 
-ifeq (${ADK_LINUX_X86_ALIX},y)
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--disable-sse2 \
-			--disable-sse \
-			--enable-mmxext \
-			--enable-mmx \
-			--enable-3dnowext \
-			--enable-3dnow
-else ifeq (${ADK_HARDWARE_IBM_X40},y)
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--enable-sse2 \
-			--enable-sse \
-			--enable-mmxext \
-			--enable-mmx \
-			--disable-3dnowext \
-			--disable-3dnow
+ifeq (${ADK_TARGET_CPU_WITH_MMX},y)
+CONFIGURE_CPU_OPTS:=	--enable-mmx
 else
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--disable-sse2 \
-			--disable-sse \
-			--disable-mmxext \
-			--disable-3dnowext \
-			--disable-mmx \
-			--disable-3dnow
+CONFIGURE_CPU_OPTS:=	--disable-mmx
+endif
+ifeq (${ADK_TARGET_CPU_WITH_MMXEXT},y)
+CONFIGURE_CPU_OPTS:=	--enable-mmxext
+else
+CONFIGURE_CPU_OPTS:=	--disable-mmxext
+endif
+ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
+CONFIGURE_CPU_OPTS:=	--enable-sse
+else
+CONFIGURE_CPU_OPTS:=	--disable-sse
 endif
 
 ifeq ($(ADK_DEBUG),y)

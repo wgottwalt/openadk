@@ -1,4 +1,5 @@
-menu "Block devices support"
+config ADK_KERNEL_BLOCK
+	boolean
 
 config ADK_KERNEL_MD
 	boolean
@@ -42,7 +43,6 @@ config ADK_KERNEL_BLK_DEV
 config ADK_KERNEL_BLK_DEV_DM
 	boolean
 	select ADK_KERNEL_MD
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 
 config ADK_KERNEL_ATA
 	boolean
@@ -50,8 +50,66 @@ config ADK_KERNEL_ATA
 config ADK_KERNEL_ATA_SFF
 	boolean
 
+config ADK_KERNEL_ATA_BMDMA
+	boolean
+
 config ADK_KERNEL_CONNECTOR
 	boolean
+
+config ADK_KERNEL_MMC
+	boolean
+
+config ADK_KERNEL_MMC_BLOCK
+	boolean
+
+config ADK_KERNEL_MMC_AT91
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_MMC
+	select ADK_KERNEL_MMC_BLOCK
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default n
+
+config ADK_KERNEL_PATA_RB532
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_ATA_BMDMA
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default n
+
+config ADK_KERNEL_PATA_AMD
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_ATA_BMDMA
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default n
+
+config ADK_KERNEL_PATA_SC1200
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_ATA_BMDMA
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default n
 
 config ADK_KERNEL_ATA_PIIX
 	boolean
@@ -59,20 +117,23 @@ config ADK_KERNEL_ATA_PIIX
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	default y if ADK_HARDWARE_IBM_X40
-	default y if ADK_HARDWARE_QEMU_X86
-	default y if ADK_HARDWARE_QEMU_X86_64
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_QEMU_X86
+	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default n
 
 config ADK_KERNEL_SATA_AHCI
 	tristate
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
+	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_WITH_SATA
-	default y if ADK_HARDWARE_SHUTTLE
 	default n	
+
+menu "Block devices support"
 
 config ADK_KPACKAGE_KMOD_SATA_AHCI
 	prompt "kmod-sata-ahci.................... AHCI SATA driver"
@@ -197,14 +258,12 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 config ADK_KERNEL_BLK_DEV_MD
 	tristate
 	select ADK_KERNEL_MD
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	prompt "kmod-md........................... RAID support"
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KERNEL_MD
 	help
 
@@ -239,7 +298,7 @@ config ADK_KPACKAGE_KMOD_MD_RAID456
 config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	prompt "kmod-dm........................... Device Mapper support"
 	select ADK_KERNEL_MD
-	depends on !(ADK_KERNEL_BLK_DEV_DM || ADK_LINUX_CRIS_FOXBOARD)
+	depends on !ADK_KERNEL_BLK_DEV_DM
 	tristate
 	help
 	  Device-mapper is a low level volume manager.  It works by allowing
@@ -251,7 +310,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 
 config ADK_KPACKAGE_KMOD_DM_CRYPT
 	prompt "kmod-dm-crypt..................... Crypt target support"
-	depends on !(ADK_KERNEL_DM_CRYPT || ADK_LINUX_CRIS_FOXBOARD)
+	depends on !ADK_KERNEL_DM_CRYPT
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	select ADK_KERNEL_MD
 	select ADK_KERNEL_CRYPTO
@@ -270,7 +329,6 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
 	prompt "kmod-dm-snapshot.................. Snapshot target"
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
          Allow volume managers to take writable snapshots of a device.
@@ -278,7 +336,6 @@ config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
 config ADK_KPACKAGE_KMOD_DM_MIRROR
 	prompt "kmod-dm-mirror.................... Mirror target"
 	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	tristate
 	help
          Allow volume managers to mirror logical volumes, also

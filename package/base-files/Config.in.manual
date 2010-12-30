@@ -6,9 +6,9 @@ config ADK_COMPILE_BASE_FILES
 config ADK_PACKAGE_BASE_FILES
 	prompt "base-files............. basic filesystem structure and scripts"
 	tristate
-	default y if !ADK_TOOLCHAIN_ONLY
 	select ADK_COMPILE_BASE_FILES
 	depends on !ADK_TOOLCHAIN_ONLY
+	default y if !ADK_TOOLCHAIN_ONLY
 	help
 	  basic filesystem structure and scripts
 

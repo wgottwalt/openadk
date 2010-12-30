@@ -1,0 +1,10 @@
+--- strace-4.5.20.orig/Makefile.in	2010-04-14 21:41:05.000000000 +0200
++++ strace-4.5.20/Makefile.in	2010-12-28 22:43:17.000000000 +0100
+@@ -242,6 +242,7 @@ EXTRA_DIST = $(man_MANS) errnoent.sh sig
+ 	     linux/ioctlent.h linux/errnoent.h linux/signalent.h \
+ 	     linux/syscall.h linux/dummy.h \
+ 	     linux/i386/syscallent.h \
++	     linux/cris/syscallent.h \
+ 	     linux/alpha/errnoent.h linux/alpha/ioctlent.h \
+ 	     linux/alpha/signalent.h linux/alpha/syscallent.h \
+ 	     linux/arm/syscallent.h linux/arm/syscallent1.h \

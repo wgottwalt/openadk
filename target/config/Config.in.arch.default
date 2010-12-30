@@ -1,0 +1,60 @@
+# target architectures
+config ADK_native
+	bool
+
+config ADK_arm
+	bool
+
+config ADK_armeb
+	bool
+
+config ADK_cris
+	bool
+
+config ADK_mips
+	bool
+
+config ADK_mipsel
+	bool
+
+config ADK_mips64
+	bool
+
+config ADK_mips64el
+	bool
+
+config ADK_ppc
+	bool
+
+config ADK_ppc64
+	bool
+
+config ADK_sparc
+	bool
+
+config ADK_sparc64
+	bool
+
+config ADK_x86_64
+	bool
+
+config ADK_x86
+	bool
+
+config ADK_TARGET_ARCH
+	string
+	default "arm"  if ADK_arm
+	default "armeb"  if ADK_armeb
+	default "cris"  if ADK_cris
+	default "mips"  if ADK_mips
+	default "mipsel"  if ADK_mipsel
+	default "mips64"  if ADK_mips64
+	default "mips64el"  if ADK_mips64el
+	default "ppc"  if ADK_ppc
+	default "ppc64"  if ADK_ppc64
+	default "sparc"  if ADK_sparc
+	default "sparc64"  if ADK_sparc64
+	default "x86"  if ADK_x86
+	default "x86_64"  if ADK_x86_64
+	default "native"  if ADK_native
+

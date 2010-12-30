@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBGCRYPT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-asm \
-			--with-gpg-error-prefix="${STAGING_DIR}/usr"
+			--with-gpg-error-prefix="${STAGING_TARGET_DIR}/usr"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGCRYPT}/usr/lib

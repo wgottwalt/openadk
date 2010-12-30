@@ -764,20 +764,27 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
 ,20))
 
-$(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
+$(eval $(call KMOD_template,CRYPTO_DEV_HIFN_795X,crypto-dev-hifn-795x,\
+    $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
+,20, crypto-manager2))
+
+$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
-    $(MODULES_DIR)/kernel/crypto/pcompress \
 ,02))
 
-$(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
+$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
+    $(MODULES_DIR)/kernel/crypto/pcompress \
+,03))
+
+$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
     $(MODULES_DIR)/kernel/crypto/aead \
 ,03))
 
-$(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
+$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
     $(MODULES_DIR)/kernel/crypto/crypto_hash \
 ,04))
 
-$(eval $(call KMOD_template,CRYPTO_BLKCIPHER,crypto-blkcipher,\
+$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
     $(MODULES_DIR)/kernel/crypto/crypto_wq \
     $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
 ,05))
@@ -787,7 +794,7 @@ $(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
     $(MODULES_DIR)/kernel/crypto/krng \
 ,06))
 
-$(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
+$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
     $(MODULES_DIR)/kernel/crypto/eseqiv \
     $(MODULES_DIR)/kernel/crypto/chainiv \
@@ -1298,17 +1305,21 @@ $(eval $(call KMOD_template,LEDS_CLASS,leds-class,\
 	$(MODULES_DIR)/kernel/drivers/leds/led-class \
 ,05))
 
+$(eval $(call KMOD_template,LEDS_ALIX2,leds-alix2,\
+	$(MODULES_DIR)/kernel/drivers/leds/leds-alix2 \
+,10))
+
 $(eval $(call KMOD_template,LEDS_TRIGGER_TIMER,leds-trigger-timer,\
 	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-timer \
-,10))
+,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_HEARTBEAT,leds-trigger-heartbeat,\
 	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-heartbeat \
-,10))
+,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_DEFAULT_ON,leds-trigger-default-on,\
 	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-default-on \
-,10))
+,20))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_LED,netfilter-xt-target-led,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_LED \

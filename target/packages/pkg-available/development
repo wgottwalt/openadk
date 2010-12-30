@@ -1,0 +1,36 @@
+config ADK_PKG_DEVELOPMENT
+	bool "Compile a ADK development system"
+	default n
+	select ADK_PACKAGE_BASH
+	select ADK_PACKAGE_BINUTILS
+	select ADK_PACKAGE_BZIP2
+	select ADK_PACKAGE_DIFFUTILS
+	select ADK_PACKAGE_FILE
+	select ADK_PACKAGE_GAWK
+	select ADK_PACKAGE_GCC
+	select ADK_PACKAGE_GIT
+	select ADK_PACKAGE_GREP
+	select ADK_PACKAGE_UCLIBC_DEV if ADK_TARGET_LIB_UCLIBC
+	select ADK_PACKAGE_EGLIBC_DEV if ADK_TARGET_LIB_EGLIBC
+	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
+	select ADK_PACKAGE_LIBNCURSES
+	select ADK_PACKAGE_LIBNCURSES_DEV
+	select ADK_PACKAGE_M4
+	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_PATCH
+	select ADK_PACKAGE_PKG_CONFIG
+	select ADK_PACKAGE_MICROPERL
+	select ADK_PACKAGE_TSORT
+	select BUSYBOX_STAT
+	select BUSYBOX_FEATURE_STAT_FORMAT
+	select BUSYBOX_TR
+	select BUSYBOX_FEATURE_TR_CLASSES
+	select ADK_PACKAGE_ZLIB
+	select ADK_PACKAGE_ZLIB_DEV
+	select ADK_PACKAGE_XZ
+	help
+	  After bootstrapping a Linux system you might want to
+	  switch to native builds with your target. 
+	  If you choose this option, all necessary software needed
+	  for native building will be selected by this option.
+

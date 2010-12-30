@@ -3,48 +3,33 @@ depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
 
 config ADK_KERNEL_MEDIA_SUPPORT
 	boolean
-	default n
 
 config ADK_KERNEL_SND_TIMER
 	boolean
-	default n
 
 config ADK_KERNEL_SND_PCM
 	boolean
-	default n
 
 config ADK_KERNEL_SND_HWDEP
 	boolean
-	default n
 
 config ADK_KERNEL_SND_OSSEMUL
 	boolean
-	default n
 
 config ADK_KERNEL_SND_MIXER_OSS
 	boolean
-	default n
 
 config ADK_KERNEL_SND_PCM_OSS
 	boolean
-	default n
 
 config ADK_KPACKAGE_KMOD_SOUND
 	tristate
-	default n
-	help
-	  Basic support for sound.
 
 config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	tristate
-	default n
-	help
 
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
-	default n
-	help
-	 ALSA AC97 codec support.
 
 menu "Audio devices support"
 
@@ -66,7 +51,7 @@ config ADK_KPACKAGE_KMOD_SND_OSSEMUL
 	select ADK_KERNEL_SND_MIXER_OSS
 	select ADK_KERNEL_SND_PCM_OSS
 	select ADK_KPACKAGE_KMOD_SND
-	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
 	 ALSA OSS Emulation
@@ -76,7 +61,7 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	tristate
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
-	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
 	  Driver for intel chipsets.	
@@ -84,7 +69,6 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	prompt "kmod-snd-via82xx.............. ALSA VIA82XX driver"
 	tristate
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
 	select ADK_KPACKAGE_KMOD_SND
 	default n
 	help
@@ -93,7 +77,6 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 config ADK_KPACKAGE_KMOD_SND_ENS1370
 	prompt "kmod-snd-ens1370.............. ALSA Ensoniq 1370 driver"
 	tristate
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 )
 	select ADK_KPACKAGE_KMOD_SND
 	default n
 	help
@@ -104,8 +87,8 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	tristate
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
-	default y if ADK_HARDWARE_LEMOTE_YEELONG
-	default y if ADK_HARDWARE_ALIX1C
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default n
 	help
 	 ALSA AMD CS5535 driver
@@ -136,7 +119,7 @@ config ADK_KPACKAGE_KMOD_VIDEO_DEV
 config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB || ADK_HARDWARE_LEMOTE_YEELONG
+	depends on ADK_KPACKAGE_KMOD_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_KPACKAGE_KMOD_VIDEO_DEV
 	default n
 	help

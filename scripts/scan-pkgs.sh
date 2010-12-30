@@ -69,10 +69,6 @@ if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
 
-if [[ -n $ADK_COMPILE_AVAHI ]]; then
-	NEED_PKGCONFIG="$NEED_PKGCONFIG avahi"
-fi
-
 if [[ -n $ADK_COMPILE_AUTOCONF ]]; then
 	NEED_M4="$NEED_M4 autoconf"
 fi
@@ -85,10 +81,6 @@ if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_GXX="$NEED_GXX squid"
 fi
 
-if [[ -n $ADK_PACKAGE_DANSGUARDIAN ]]; then
-	NEED_PKGCONFIG="$NEED_PKGCONFIG dansguardian"
-fi
-
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_INTL="$NEED_INTL xkeyboard-config"
 fi
@@ -96,7 +88,6 @@ fi
 if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GLIBZWO="$NEED_GLIBZWO glib"
 	NEED_GETTEXT="$NEED_GETTEXT glib"
-	NEED_PKGCONFIG="$NEED_PKGCONFIG glib"
 fi
 
 if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
@@ -274,13 +265,6 @@ fi
 if [[ -n $NEED_XKBCOMP ]]; then
 	if ! which xkbcomp >/dev/null 2>&1; then
 		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_PKGCONFIG ]]; then
-	if ! which pkg-config >/dev/null 2>&1; then
-		echo >&2 You need pkg-config to build $NEED_PKGCONFIG
 		out=1
 	fi
 fi

@@ -47,7 +47,7 @@ CONFIGURE_ARGS+=	--disable-sample \
 			--without-authdaemond \
 			--without-pwcheck \
 			--with-ipctype=unix \
-			--with-openssl="${STAGING_DIR}/usr" \
+			--with-openssl="${STAGING_TARGET_DIR}/usr" \
 			--without-des \
 			--without-opie \
 			--without-ldap \

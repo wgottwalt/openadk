@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS
+	bool "Toolchain only"
+	select ADK_mips
+	select ADK_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  mips toolchain.
+

@@ -24,7 +24,7 @@ CONFIGURE_ARGS+=	--enable-cxx-warnings=no
 
 ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
 CONFIGURE_ENV+=		LIBS="-nodefaultlibs -luClibc++ -lz -lm -lc"
 else
 TLDFLAGS+=		-shared

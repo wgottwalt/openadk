@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.41.12
+PKG_VERSION:=		1.41.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b24a21fc0c2381ef420961cbfec733f
+PKG_MD5SUM:=		05f70470aea2ef7efbb0845b2b116720
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
@@ -66,9 +66,9 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/libuuid.so* \
 		${IDIR_LIBUUID}/usr/lib/
 	# install some headers/apps explicitely
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
-		${STAGING_DIR}/usr/include/uuid
-	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_TOOLS}/bin
+		${STAGING_TARGET_DIR}/usr/include/uuid
+	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -220,6 +220,12 @@ if ! which m4 >/dev/null 2>&1; then
 	out=1
 fi
 
+if ! which pkg-config >/dev/null 2>&1; then
+	echo  "You need pkg-config to continue."
+	echo
+	out=1
+fi
+
 cd $topdir
 rm -rf tmp
 

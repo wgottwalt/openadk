@@ -12,9 +12,26 @@ v: .prereq_done
 	    set -x; ${_UNLIMIT} ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
+	@echo 'Configuration targets:'
+	@echo '  config       - Update current config utilising a line-oriented program'
+	@echo '  menuconfig   - Update current config utilising a menu based program'
+	@echo '                 (default when .config does not exist)'
+	@echo '  guiconfig    - Update current config utilising a gui based program'
+	@echo '  oldconfig    - Update current config utilising a provided .configs base'
+	@echo '  allmodconfig - New config selecting all packages as modules when possible'
+	@echo '  allconfig    - New config selecting all packages when possible'
+	@echo '  allnoconfig  - New config where all options are answered with no'
+	@echo ''
+	@echo 'Help targets:'
+	@echo '  help         - Print this help text'
+	@echo '  pkg-help     - Print help about selectively compiling single packages'
+	@echo '  dev-help     - Print help for developers / package maintainers'
+	@echo ''
 	@echo 'Common targets:'
-	@echo '  switch TARGET=targetname  - Backup current config and copy old saved target config'
+	@echo '  switch ARCH=arch SYSTEM=system - Backup current config and copy old saved target config'
 	@echo '  download     - fetches all needed distfiles'
+	@echo '  kernelconfig - Modify the target kernel configuration'
+	@echo ''
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove bin and build_dir directories'
 	@echo '  cleantarget  - Same as "clean", but also remove toolchain for target'
@@ -22,22 +39,6 @@ help:
 	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
 	@echo '                 distfiles and .config'
-	@echo ''
-	@echo 'Configuration targets:'
-	@echo '  config       - Update current config utilising a line-oriented program'
-	@echo '  menuconfig   - Update current config utilising a menu based program'
-	@echo '  guiconfig    - Update current config utilising a gui based program'
-	@echo '                 (default when .config does not exist)'
-	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  allmodconfig - New config selecting all packages as modules when possible'
-	@echo '  allconfig    - New config selecting all packages when possible'
-	@echo '  allnoconfig  - New config where all options are answered with no'
-	@echo '  kernelconfig - Modify the target kernel configuration'
-	@echo ''
-	@echo 'Help targets:'
-	@echo '  help         - Print this help text'
-	@echo '  pkg-help     - Print help about selectively compiling single packages'
-	@echo '  dev-help     - Print help for developers / package maintainers'
 	@echo ''
 	@echo 'Other generic targets:'
 	@echo '  all          - Build everything as specified in .config'
@@ -207,6 +208,7 @@ NO_ERROR=0
 	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
 	@echo 'HOSTCXXFLAGS:=-O2' >>prereq.mk
 	@echo "HOST_LIBIDL_CONFIG:=$$(which libIDL-config-2)" >>prereq.mk
+	@echo "PKG_HOSTLIB_DIR:=$$(pkg-config --variable pc_path pkg-config)" >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
@@ -219,6 +221,7 @@ NO_ERROR=0
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh
 	@echo '===> Prerequisites checked successfully.'
+	@bash scripts/create-sys
 	@touch .adkinit
 	@touch $@
 

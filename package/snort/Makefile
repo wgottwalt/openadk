@@ -20,12 +20,12 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-flexresp \
-			--with-libnet-includes="${STAGING_DIR}/usr/include" \
-			--with-libnet-libraries="${STAGING_DIR}/usr/lib" \
-			--with-libpcap-includes="${STAGING_DIR}/usr/include" \
-			--with-libpcap-libraries="${STAGING_DIR}/usr/lib" \
-			--with-libpcre-includes="${STAGING_DIR}/usr/include" \
-			--with-libpcre-libraries="${STAGING_DIR}/usr/lib" \
+			--with-libnet-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-libnet-libraries="${STAGING_TARGET_DIR}/usr/lib" \
+			--with-libpcap-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-libpcap-libraries="${STAGING_TARGET_DIR}/usr/lib" \
+			--with-libpcre-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-libpcre-libraries="${STAGING_TARGET_DIR}/usr/lib" \
 			--without-mysql \
 			--without-postgresql \
 			--disable-inline

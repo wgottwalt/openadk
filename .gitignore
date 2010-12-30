@@ -25,7 +25,9 @@ toolchain_build_*/
 .defconfig
 all.config
 .cfg_*/
-cross_*/
+target_*/
+host_*/
+pkg_*/
 root_*/
 bin/
 build_*/
@@ -42,3 +44,8 @@ package/*/Config.in.kmod
 tools_build/
 extra/
 .menu
+target/*/Config.in.systems
+target/*/sys-enabled
+target/packages/pkg-enabled
+target/packages/Config.in
+target/config/Config.in.system.default

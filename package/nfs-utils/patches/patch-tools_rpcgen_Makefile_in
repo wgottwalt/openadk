@@ -1,5 +1,5 @@
 --- nfs-utils-1.2.3.orig/tools/rpcgen/Makefile.in	2010-09-28 14:32:33.000000000 +0200
-+++ nfs-utils-1.2.3/tools/rpcgen/Makefile.in	2010-10-10 13:29:26.000000000 +0200
++++ nfs-utils-1.2.3/tools/rpcgen/Makefile.in	2010-12-25 00:45:58.000000000 +0100
 @@ -72,21 +72,21 @@ am_rpcgen_OBJECTS = rpcgen-rpc_clntout.$
  rpcgen_OBJECTS = $(am_rpcgen_OBJECTS)
  rpcgen_LDADD = $(LDADD)
@@ -29,6 +29,15 @@
  SOURCES = $(rpcgen_SOURCES)
  DIST_SOURCES = $(rpcgen_SOURCES)
  ETAGS = etags
+@@ -97,7 +97,7 @@ ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
+ ALLOCA = @ALLOCA@
+ AMTAR = @AMTAR@
+ AM_CFLAGS = @AM_CFLAGS@
+-AM_CPPFLAGS = @AM_CPPFLAGS@
++AM_CPPFLAGS = 
+ AR = @AR@
+ AUTOCONF = @AUTOCONF@
+ AUTOHEADER = @AUTOHEADER@
 @@ -106,10 +106,10 @@ AWK = @AWK@
  CC = $(CC_FOR_BUILD)
  CCDEPMODE = @CCDEPMODE@

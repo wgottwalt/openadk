@@ -22,11 +22,11 @@ $(eval $(call PKG_template,DSNIFF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 
 CONFIGURE_ARGS+=	--without-db \
 			--without-x \
-			--with-gdbm="${STAGING_DIR}/usr" \
-			--with-libnids="${STAGING_DIR}/usr" \
-			--with-libpcap="${STAGING_DIR}/usr" \
-			--with-libnet="${STAGING_DIR}/usr" \
-			--with-openssl="${STAGING_DIR}/usr"
+			--with-gdbm="${STAGING_TARGET_DIR}/usr" \
+			--with-libnids="${STAGING_TARGET_DIR}/usr" \
+			--with-libpcap="${STAGING_TARGET_DIR}/usr" \
+			--with-libnet="${STAGING_TARGET_DIR}/usr" \
+			--with-openssl="${STAGING_TARGET_DIR}/usr"
 FAKE_FLAGS+=		install_prefix="${WRKINST}"
 
 post-install:

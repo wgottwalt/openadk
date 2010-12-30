@@ -25,7 +25,7 @@ CONFIGURE_ENV+=		LIBS="-liconv" \
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \
 			--with-included-gsl \
-			--with-libdb-prefix=${STAGING_DIR}/usr \
+			--with-libdb-prefix=${STAGING_TARGET_DIR}/usr \
 			--disable-transactions
 
 post-install:

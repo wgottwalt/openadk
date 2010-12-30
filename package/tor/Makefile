@@ -20,8 +20,8 @@ $(eval $(call PKG_template,TOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			ac_cv_libevent_linker_option="" \
-			ac_cv_libevent_dir="${STAGING_DIR}/usr" \
-			ac_cv_openssldir="${STAGING_DIR}/usr" \
+			ac_cv_libevent_dir="${STAGING_TARGET_DIR}/usr" \
+			ac_cv_openssldir="${STAGING_TARGET_DIR}/usr" \
 			ac_cv_openssl_linker_option="" \
 			tor_cv_time_t_signed=yes \
 			tor_cv_null_is_zero=yes \

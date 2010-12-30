@@ -5,14 +5,13 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
-GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
+GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
-			--with-gmp=$(STAGING_TOOLS) \
-			--with-mpfr=$(STAGING_TOOLS) \
+			--with-gmp=$(STAGING_HOST_DIR) \
+			--with-mpfr=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
-			--enable-target-optspace \
 			--with-gnu-ld \
 			--disable-libmudflap \
 			--disable-libgomp \
@@ -28,6 +27,18 @@ GCC_CONFOPTS=		--prefix=$(STAGING_TOOLS) \
 			--without-cloog \
 			--disable-nls
 
+ifeq ($(ARCH),cris)
+GCC_CONFOPTS+=		--disable-tls
+else
+GCC_CONFOPTS+=		--enable-tls
+endif
+
+ifeq ($(ARCH),powerpc)
+GCC_CONFOPTS+=		--disable-target-optspace
+else
+GCC_CONFOPTS+=		--enable-target-optspace
+endif
+
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
@@ -38,12 +49,6 @@ endif
 
 ifeq ($(ADK_LINUX_MIPS64EL),y)
 GCC_CONFOPTS+=		--with-abi=64
-endif
-
-ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-GCC_CONFOPTS+=		--disable-tls
-else
-GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq (${ADK_MAKE_PARALLEL},y)
@@ -80,10 +85,10 @@ $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
 	touch $@
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
-	rm -rf $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_DIR}/include $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/sys-include
-	rm -rf ${STAGING_TOOLS}/$(REAL_GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_DIR}/lib $(STAGING_TOOLS)/$(REAL_GNU_TARGET_NAME)/lib
+	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
+	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	(cd $(GCC_BUILD_DIR_INITIAL); rm -f config.cache; \
 		PATH='$(TARGET_PATH)' \
@@ -115,8 +120,8 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c,c++ \
-			--with-sysroot=$(STAGING_DIR) \
-			--with-slibdir=$(STAGING_DIR)/lib \
+			--with-sysroot=$(STAGING_TARGET_DIR) \
+			--with-slibdir=$(STAGING_TARGET_DIR)/lib \
 			--enable-shared \
 	);
 	touch $@
@@ -127,14 +132,13 @@ $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
+	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# workaround if you cross-compile binutils
-	@-rm $(STAGING_DIR)/lib/libiberty.a
-	@-rm $(STAGING_DIR)/usr/lib/libiberty.a
+	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a
+	@-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
-	(cd $(STAGING_TOOLS); \
+	(cd $(STAGING_HOST_DIR); \
 		ln -sf $(REAL_GNU_TARGET_NAME) $(GNU_TARGET_NAME); \
 		cd bin; \
 		for app in $(REAL_GNU_TARGET_NAME)-* ; do \

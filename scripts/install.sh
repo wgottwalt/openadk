@@ -366,7 +366,7 @@ mkdir -p boot/grub
 	print 'menuentry "GNU/Linux (OpenADK)" {'
 	linuxargs="root=UUID=$partuuid $consargs"
 	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
-	print "\tlinux /boot/vmlinuz-adk $linuxargs"
+	print "\tlinux /boot/kernel $linuxargs"
 	print '}'
 ) >boot/grub/grub.cfg
 set -A grubfiles

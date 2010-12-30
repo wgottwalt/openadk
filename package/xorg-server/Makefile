@@ -20,7 +20,6 @@ PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
 
-PKG_TARGET_DEPENDS:=	!foxboard
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
 
 PKG_FLAVOURS:=		WITH_DRI
@@ -66,7 +65,7 @@ else
 CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-glx
 endif
 
-ifeq (${ADK_HARDWARE_LEMOTE_YEELONG},y)
+ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 CONFIGURE_ARGS+=	--with-int10=stub
 endif
 

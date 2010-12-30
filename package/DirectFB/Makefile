@@ -27,7 +27,7 @@ CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 # which then chooses the wrong default emulation (which is
 # probably the real problem here). LDEMULATION overrides ld's
 # wrong choice.
-ifeq (${ADK_HARDWARE_LEMOTE_YEELONG},y)
+ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 XAKE_FLAGS+=		LDEMULATION=elf64ltsmip
 endif
 
@@ -50,6 +50,5 @@ post-install:
 		${IDIR_DIRECTFB}/usr/lib/directfb-1.4-0/interfaces/IDirectFBImageProvider/
 	${CP} ${WRKINST}/usr/lib/directfb-1.4-0/interfaces/IDirectFBVideoProvider/*.so \
 		${IDIR_DIRECTFB}/usr/lib/directfb-1.4-0/interfaces/IDirectFBVideoProvider/
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

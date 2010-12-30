@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--enable-rrdcgi \
 			--disable-python \
 			--without-x \
 			--with-rrd-default-font=/usr/share/rrdtool/fonts/DejaVuSansMono-Roman.ttf
-TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/freetype2
+TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/freetype2
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RRDTOOL}/usr/bin

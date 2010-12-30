@@ -29,8 +29,8 @@ CONFIGURE_ARGS+=	--enable-owfs \
 			--disable-owtcl \
 			--disable-owperl \
 			--disable-owphp \
-			--with-fuseinclude=${STAGING_DIR}/usr/include \
-			--with-fuselib=${STAGING_DIR}/usr/lib
+			--with-fuseinclude=${STAGING_TARGET_DIR}/usr/include \
+			--with-fuselib=${STAGING_TARGET_DIR}/usr/lib
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OWFS}/usr/{bin,lib}

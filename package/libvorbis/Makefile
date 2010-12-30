@@ -21,9 +21,9 @@ $(eval $(call PKG_template,LIBVORBIS,libvorbis,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		LIBS="-lm -logg"
-CONFIGURE_ARGS+=	--with-ogg="${STAGING_DIR}/usr" \
-			--with-ogg-includes="${STAGING_DIR}/usr/include" \
-			--with-ogg-libraries="${STAGING_DIR}/usr/lib"
+CONFIGURE_ARGS+=	--with-ogg="${STAGING_TARGET_DIR}/usr" \
+			--with-ogg-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-ogg-libraries="${STAGING_TARGET_DIR}/usr/lib"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBVORBIS}/usr/lib

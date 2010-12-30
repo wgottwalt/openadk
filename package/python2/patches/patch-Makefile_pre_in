@@ -1,7 +1,7 @@
 diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
 --- Python-2.7.1.orig/Makefile.pre.in	2010-10-14 13:37:30.000000000 +0200
-+++ Python-2.7.1/Makefile.pre.in	2010-12-14 16:02:44.000000000 +0100
-@@ -179,6 +179,7 @@
++++ Python-2.7.1/Makefile.pre.in	2010-12-27 21:06:29.000000000 +0100
+@@ -179,6 +179,7 @@ UNICODE_OBJS=   @UNICODE_OBJS@
  
  PYTHON=		python$(EXE)
  BUILDPYTHON=	python$(BUILDEXE)
@@ -9,7 +9,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  # The task to run while instrument when building the profile-opt target
  PROFILE_TASK=	$(srcdir)/Tools/pybench/pybench.py -n 2 --with-gc --with-syscheck
-@@ -211,6 +212,7 @@
+@@ -211,6 +212,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
  ##########################################################################
  # Parser
  PGEN=		Parser/pgen$(EXE)
@@ -17,7 +17,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  POBJS=		\
  		Parser/acceler.o \
-@@ -380,7 +382,7 @@
+@@ -380,7 +382,7 @@ build_all_generate_profile:
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
  
  run_profile_task:
@@ -26,7 +26,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  build_all_use_profile:
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-@@ -398,14 +400,14 @@
+@@ -398,14 +400,14 @@ $(BUILDPYTHON):	Modules/python.o $(LIBRA
  			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
  platform: $(BUILDPYTHON)
@@ -44,7 +44,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  	esac
  
  # Build static library
-@@ -538,7 +540,7 @@
+@@ -538,7 +540,7 @@ Modules/python.o: $(srcdir)/Modules/pyth
  
  $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
  		-@$(INSTALL) -d Include
@@ -53,7 +53,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  $(PGEN):	$(PGENOBJS)
  		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
-@@ -702,7 +704,7 @@
+@@ -702,7 +704,7 @@ $(LIBRARY_OBJS) $(MODOBJS) Modules/pytho
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py
@@ -62,7 +62,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  test:		all platform
  		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
  		-$(TESTPYTHON) $(TESTPROG) $(TESTOPTS)
-@@ -725,7 +727,7 @@
+@@ -725,7 +727,7 @@ testuniversal:	all platform
  		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
  		-$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
  		$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
@@ -71,7 +71,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  
  # Like testall, but with a single pass only
-@@ -920,26 +922,26 @@
+@@ -920,26 +922,26 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
  		done; \
  	done
  	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
@@ -105,7 +105,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  # Create the PLATDIR source directory, if one wasn't distributed..
  $(srcdir)/Lib/$(PLATDIR):
-@@ -1044,7 +1046,8 @@
+@@ -1044,7 +1046,8 @@ libainstall:	all python-config
  # Install the dynamically loadable modules
  # This goes into $(exec_prefix)
  sharedinstall: sharedmods
@@ -115,7 +115,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  	   	--prefix=$(prefix) \
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
-@@ -1082,7 +1085,7 @@
+@@ -1082,7 +1085,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
  		fi; \
  	done
  	$(LN) -fsn include/python$(VERSION) $(DESTDIR)$(prefix)/Headers
@@ -124,7 +124,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  	$(LN) -fsn $(VERSION) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Versions/Current
  	$(LN) -fsn Versions/Current/$(PYTHONFRAMEWORK) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/$(PYTHONFRAMEWORK)
  	$(LN) -fsn Versions/Current/Headers $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Headers
-@@ -1117,7 +1120,7 @@
+@@ -1117,7 +1120,7 @@ frameworkinstallextras:
  # This installs a few of the useful scripts in Tools/scripts
  scriptsinstall:
  	SRCDIR=$(srcdir) $(RUNSHARED) \
@@ -133,7 +133,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  	--prefix=$(prefix) \
  	--install-scripts=$(BINDIR) \
  	--root=/$(DESTDIR)
-@@ -1139,7 +1142,7 @@
+@@ -1139,7 +1142,7 @@ config.status:	$(srcdir)/configure
  
  # Run reindent on the library
  reindent:
@@ -142,7 +142,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  # Rerun configure with the same options as it was run last time,
  # provided the config.status script exists
-@@ -1242,7 +1245,7 @@
+@@ -1242,7 +1245,7 @@ funny:
  
  # Perform some verification checks on any modified files.
  patchcheck:

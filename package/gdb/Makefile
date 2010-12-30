@@ -10,7 +10,7 @@ PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat
 PKG_BUILDDEP:=		ncurses readline libiconv expat
 PKG_NOPARALLEL:=	1
 
-PKG_TARGET_DEPENDS:=	!foxboard !ag241
+PKG_ARCH_DEPENDS:=	!cris
 
 include ${TOPDIR}/mk/package.mk
 

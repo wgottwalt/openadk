@@ -30,7 +30,7 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_LIBX11_DEV}+=libx11-dev-install
 
-XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
+XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_TARGET_DIR}/usr/include/xproto
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
 			--disable-xf86bigfont \

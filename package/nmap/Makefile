@@ -24,16 +24,16 @@ $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++" \
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
 			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
 			--without-liblua \
-			--with-libdnet="${STAGING_DIR}/usr" \
-			--with-libpcap="${STAGING_DIR}/usr" \
-			--with-libpcre="${STAGING_DIR}/usr"
+			--with-libdnet="${STAGING_TARGET_DIR}/usr" \
+			--with-libpcap="${STAGING_TARGET_DIR}/usr" \
+			--with-libpcre="${STAGING_TARGET_DIR}/usr"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap

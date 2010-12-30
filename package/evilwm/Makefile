@@ -20,7 +20,7 @@ $(eval $(call PKG_template,EVILWM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PK
 
 CONFIG_STYLE:=		manual
 
-MAKE_FLAGS+=		XROOT="$(STAGING_DIR)/usr"
+MAKE_FLAGS+=		XROOT="$(STAGING_TARGET_DIR)/usr"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_EVILWM)/usr/bin

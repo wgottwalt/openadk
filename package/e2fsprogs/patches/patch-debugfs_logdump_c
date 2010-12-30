@@ -1,0 +1,10 @@
+--- e2fsprogs-1.41.14.orig/debugfs/logdump.c	2010-12-22 16:49:20.000000000 +0100
++++ e2fsprogs-1.41.14/debugfs/logdump.c	2010-12-25 22:31:30.000000000 +0100
+@@ -21,7 +21,6 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+-#include <utime.h>
+ #ifdef HAVE_GETOPT_H
+ #include <getopt.h>
+ #else

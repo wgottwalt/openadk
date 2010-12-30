@@ -7,15 +7,15 @@ TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
 TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
-			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib
+			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
+			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib
 ifeq ($(ADK_STATIC),y)
 TCFLAGS:=		${TARGET_CFLAGS} -static
 TCXXFLAGS:=		${TARGET_CFLAGS} -static
 TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
 TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_DIR}/usr/lib \
-			-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib \
+			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
+			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib \
 			-static
 endif
 ifeq ($(ADK_NATIVE),y)
@@ -41,7 +41,7 @@ CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})' \
-			PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig'
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
 			${HOST_CONFIGURE_OPTS} \
@@ -68,7 +68,7 @@ MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
 			LDFLAGS='$(strip ${TLDFLAGS})'
-MAKE_ENV+=		PKG_CONFIG_LIBDIR='${STAGING_DIR}/usr/lib/pkgconfig'
+MAKE_ENV+=		PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
@@ -126,9 +126,9 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 # 5.) description for the package, $(PKG_DESCR)
 # 6.) section of the package, $(PKG_SECTION)  
 # 7.) special package options
-#     noscripts -> do not install scripts to $(STAGING_DIR)/target/scripts
+#     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/target/scripts
 #		  (needed for example for autoconf/automake)
-#     noremove -> do not remove files from $(STAGING_DIR)/target while
+#     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
 # should be package format independent and modular in the future
 define PKG_template
@@ -192,45 +192,45 @@ endif
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \
 	done
-	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PARENT}/pkg' \
-	    '$${STAGING_DIR}/scripts'
+	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}' \
+	    '$${STAGING_TARGET_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
-	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
-		done <'$${STAGING_PARENT}/pkg/$(1)'; \
+		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
+	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
 		echo "$$$$x" | sed 's/^/- /' >&2; \
 	    fi; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
-	    tee '$${STAGING_PARENT}/pkg/$(1)' | \
-	    $(TOPDIR)/bin/tools/cpio -padlmu '$${STAGING_DIR}'
-	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
-	    '$${STAGING_PARENT}/pkg/$(1)' | while read fn; do \
+	    tee '$${STAGING_PKG_DIR}/$(1)' | \
+	    $(TOPDIR)/bin/tools/cpio -padlmu '$${STAGING_TARGET_DIR}'
+	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
-		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_DIR)/usr/lib,g" $$$$fn; \
+		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$$$fn; \
 	done
 ifeq (,$(filter noscripts,$(7)))
-	@cd '$${STAGING_DIR}'; grep 'usr/s*bin/' \
-	    '$${STAGING_PARENT}/pkg/$(1)' | \
+	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
+	    '$${STAGING_PKG_DIR}/$(1)' | \
 	    while read fn; do \
 		b="$$$$(dd if="$$$$fn" bs=2 count=1 2>/dev/null)"; \
 		[[ $$$$b = '#!' ]] || continue; \
 		cp "$$$$fn" scripts/; \
 		echo "scripts/$$$$(basename "$$$$fn")" \
-		    >>'$${STAGING_PARENT}/pkg/$(1)'; \
+		    >>'$${STAGING_PKG_DIR}/$(1)'; \
 	done
 endif
 ifeq (,$(filter libmix,$(7)))
@@ -243,14 +243,14 @@ clean-targets: clean-dev-$(1)
 
 clean-dev-$(1):
 ifeq (,$(filter noremove,$(7)))
-	@if test -s '$${STAGING_PARENT}/pkg/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
-		done <'$${STAGING_PARENT}/pkg/$(1)'; \
+		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	@rm -f '$${STAGING_PARENT}/pkg/$(1)'
+	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))

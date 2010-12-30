@@ -28,12 +28,12 @@ do-build:
 		${WRKBUILD}/cryptinit.c
 	( cd ${WRKBUILD}; \
 	${TARGET_CC} -static -o cryptinit cryptinit.o \
-		 ${STAGING_DIR}/usr/lib/libcryptsetup.a \
-		-L${STAGING_DIR}/lib -L${STAGING_DIR}/usr/lib \
+		 ${STAGING_TARGET_DIR}/usr/lib/libcryptsetup.a \
+		-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib \
 		-ldevmapper -lpthread \
-		${STAGING_DIR}/usr/lib/libgcrypt.a \
-		${STAGING_DIR}/usr/lib/libgpg-error.a \
-		-luuid -Wl,--rpath -Wl,${STAGING_DIR}/usr/lib \
+		${STAGING_TARGET_DIR}/usr/lib/libgcrypt.a \
+		${STAGING_TARGET_DIR}/usr/lib/libgpg-error.a \
+		-luuid -Wl,--rpath -Wl,${STAGING_TARGET_DIR}/usr/lib \
 	);
 
 do-install:

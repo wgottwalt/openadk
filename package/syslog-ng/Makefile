@@ -20,7 +20,7 @@ $(eval $(call PKG_template,SYSLOG_NG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 
 CONFIGURE_ARGS+=	--enable-full-dynamic \
 			--enable-tcp-wrapper
-CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_DIR}/usr/bin
+CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_TARGET_DIR}/usr/bin
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
 post-install:

@@ -16,7 +16,7 @@ $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		gdb_cv_func_sigsetjmp=yes \
 		./configure \
-		--prefix=$(STAGING_TOOLS) \
+		--prefix=$(STAGING_HOST_DIR) \
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_HOST_NAME) \
 		--target=$(REAL_GNU_TARGET_NAME) \
@@ -42,7 +42,7 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	install -c $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
-	cd $(STAGING_TOOLS)/bin && \
+	cd $(STAGING_HOST_DIR)/bin && \
 	ln -fs $(TARGET_CROSS)gdb $(GNU_TARGET_NAME)-gdb
 	touch $@
 

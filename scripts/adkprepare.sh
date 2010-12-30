@@ -61,6 +61,7 @@ netbsd() {
 	pkg_add -vu gmake
 	pkg_add -vu bash
 	pkg_add -vu wget
+	pkg_add -vu pkg-config
 	pkg_add -vu unzip
 	pkg_add -vu gtar
 	pkg_add -vu gsed
@@ -74,7 +75,6 @@ netbsd_full() {
 	export PKG_PATH
 	pkg_add -vu intltool
 	pkg_add -vu lynx
-	pkg_add -vu pkg-config
 	pkg_add -vu zip
 	pkg_add -vu bison
 	pkg_add -vu libIDL

@@ -2,6 +2,8 @@ menu "Native Language support"
 
 config ADK_KERNEL_NLS
 	boolean
+	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	default n
 
 config ADK_KERNEL_NLS_DEFAULT
@@ -557,4 +559,3 @@ config ADK_KPACKAGE_KMOD_NLS_UTF8
 	  the Unicode/ISO9646 universal character set.
 
 endmenu
-

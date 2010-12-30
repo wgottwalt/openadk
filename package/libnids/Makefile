@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNIDS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-libpcap=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-libpcap=${STAGING_TARGET_DIR}/usr
 XAKE_FLAGS+=		install_prefix="${WRKINST}"
 
 post-install:

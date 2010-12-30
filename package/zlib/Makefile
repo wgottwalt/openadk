@@ -46,8 +46,8 @@ do-configure:
 	(cd $(WRKBUILD); $(COPTS) \
 		uname="Linux" \
 		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
-		CPPFLAGS="-I$(STAGING_DIR)/usr/include" \
-		LDFLAGS="-L$(STAGING_DIR)/usr/lib" \
+		CPPFLAGS="-I$(STAGING_TARGET_DIR)/usr/include" \
+		LDFLAGS="-L$(STAGING_TARGET_DIR)/usr/lib" \
 		./configure \
 		--prefix=/usr \
 		$(CONFIGURE_OPTS) \

@@ -1,6 +1,32 @@
---- nfs-utils-1.2.1.orig/tools/rpcgen/rpc_main.c	2009-11-04 12:13:56.000000000 +0100
-+++ nfs-utils-1.2.1/tools/rpcgen/rpc_main.c	2010-01-16 11:22:02.359375000 +0100
-@@ -562,9 +562,6 @@ s_output(int argc, char **argv, char *in
+--- nfs-utils-1.2.3.orig/tools/rpcgen/rpc_main.c	2010-09-28 14:24:16.000000000 +0200
++++ nfs-utils-1.2.3/tools/rpcgen/rpc_main.c	2010-12-24 23:45:11.000000000 +0100
+@@ -155,11 +155,7 @@ int timerflag;		/* TRUE if !indefinite &
+ int newstyle;           /* newstyle of passing arguments (by value) */
+ int Cflag = 0 ;         /* ANSI C syntax */
+ static int allfiles;    /* generate all files */
+-#ifdef linux
+ int tirpcflag = 0;	/* no tirpc by default */
+-#else
+-int tirpcflag = 1;      /* generating code for tirpc, by default */
+-#endif
+ 
+ int
+ main(int argc, char **argv)
+@@ -543,13 +539,8 @@ s_output(int argc, char **argv, char *in
+ 	  timerflag = 1;
+ 	}
+ 
+-#ifndef linux
+-	if( !tirpcflag && inetdflag )
+-	  f_print(fout, "#include <sys/ttycom.h>/* TIOCNOTTY */\n");
+-#else
+ 	if( !tirpcflag )
+ 	  f_print(fout, "#include <sys/ioctl.h>/* TIOCNOTTY */\n");
+-#endif
+ 	if( Cflag && (inetdflag || pmflag ) ) {
+ 	  f_print(fout, "#ifdef __cplusplus\n");
+ 	  f_print(fout, "#include <sysent.h> /* getdtablesize, open */\n"); 
+@@ -562,9 +553,6 @@ s_output(int argc, char **argv, char *in
  	  f_print(fout, "#include <sys/types.h>\n");
  
  	f_print(fout, "#include <memory.h>\n");
