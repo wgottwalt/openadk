@@ -19,7 +19,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_ENV+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 NO_PYTHON=1 \
-			CURLDIR=${STAGING_DIR} EXPATDIR=${STAGING_DIR}
+			CURLDIR=${STAGING_TARGET_DIR} EXPATDIR=${STAGING_TARGET_DIR}
 XAKE_FLAGS+=		uname_S=Linux uname_O=GNU/Linux
 CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_fread_reads_directories=no \

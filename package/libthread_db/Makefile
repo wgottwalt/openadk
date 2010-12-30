@@ -29,6 +29,6 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib
-	${CP} ${STAGING_DIR}/lib/libthread_db*.so* ${IDIR_LIBTHREAD_DB}/lib
+	${CP} ${STAGING_TARGET_DIR}/lib/libthread_db*.so* ${IDIR_LIBTHREAD_DB}/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

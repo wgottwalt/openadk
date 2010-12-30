@@ -1,0 +1,106 @@
+diff -Nur linux-2.6.36.orig/arch/mips/bcm47xx/Makefile linux-2.6.36/arch/mips/bcm47xx/Makefile
+--- linux-2.6.36.orig/arch/mips/bcm47xx/Makefile	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/arch/mips/bcm47xx/Makefile	2010-12-22 16:39:15.000000000 +0100
+@@ -3,4 +3,4 @@
+ # under Linux.
+ #
+ 
+-obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o wgt634u.o
++obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o platform.o
+diff -Nur linux-2.6.36.orig/arch/mips/bcm47xx/platform.c linux-2.6.36/arch/mips/bcm47xx/platform.c
+--- linux-2.6.36.orig/arch/mips/bcm47xx/platform.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.36/arch/mips/bcm47xx/platform.c	2010-12-22 16:57:43.000000000 +0100
+@@ -0,0 +1,81 @@
++/*
++ * This file is subject to the terms and conditions of the GNU General Public
++ * License.  See the file "COPYING" in the main directory of this archive
++ * for more details.
++ *
++ * Copyright (C) 2010 Waldemar Brodkorb <wbx@openadk.org>
++ */
++
++#include <linux/platform_device.h>
++#include <linux/module.h>
++#include <linux/mtd/physmap.h>
++#include <linux/ssb/ssb.h>
++
++#include <asm/mach-bcm47xx/bcm47xx.h>
++#include <asm/mach-bcm47xx/nvram.h>
++
++#define NVRAM_FLASH_SIZE 0x10000
++
++static struct mtd_partition bcm47xx_partitions[] = {
++	{
++		.name       = "cfe",
++		.offset     = 0,
++		.size       = 0x40000,		/* 256k */
++		.mask_flags = MTD_WRITEABLE	/* force read-only */
++	},
++	{
++		.name   = "linux",
++		.offset = 0,
++		.size   = 0,
++	},
++	{
++		.name   = "nvram",
++		.offset = 0,
++		.size   = 0,
++	},
++};
++
++static struct physmap_flash_data bcm47xx_flash_data = {
++	.parts    = bcm47xx_partitions,
++	.nr_parts = ARRAY_SIZE(bcm47xx_partitions)
++};
++
++static struct resource bcm47xx_flash_resource = {
++	.flags = IORESOURCE_MEM,
++};
++
++static struct platform_device bcm47xx_flash = {
++	.name          = "physmap-flash",
++	.id            = 0,
++	.dev           = { .platform_data = &bcm47xx_flash_data, },
++	.resource      = &bcm47xx_flash_resource,
++	.num_resources = 1,
++};
++
++static struct platform_device *bcm47xx_devices[] __initdata = {
++	&bcm47xx_flash,
++};
++
++static int __init bcm47xx_register_devices(void)
++{
++	u32 flash_size;
++	struct ssb_mipscore *mcore = &ssb_bcm47xx.mipscore;
++
++	/* devices might have 2, 4 or 8 MB flash size */
++	flash_size = mcore->flash_window_size;
++	printk(KERN_INFO "FLASH SIZE: %x\n", flash_size);
++	bcm47xx_partitions[1].offset = 0x40000;
++	bcm47xx_partitions[1].size = flash_size - NVRAM_FLASH_SIZE - 0x40000;
++	bcm47xx_partitions[2].offset = flash_size - NVRAM_FLASH_SIZE;
++	bcm47xx_partitions[2].size = NVRAM_FLASH_SIZE;
++
++	bcm47xx_flash_data.width = mcore->flash_buswidth;
++	bcm47xx_flash_resource.start = mcore->flash_window;
++	bcm47xx_flash_resource.end = mcore->flash_window
++				   + mcore->flash_window_size
++				   - 1;
++	return platform_add_devices(bcm47xx_devices,
++			    ARRAY_SIZE(bcm47xx_devices));
++}
++
++device_initcall(bcm47xx_register_devices);
+diff -Nur linux-2.6.36.orig/drivers/ssb/driver_mipscore.c linux-2.6.36/drivers/ssb/driver_mipscore.c
+--- linux-2.6.36.orig/drivers/ssb/driver_mipscore.c	2010-10-20 22:30:22.000000000 +0200
++++ linux-2.6.36/drivers/ssb/driver_mipscore.c	2010-12-22 16:38:53.000000000 +0100
+@@ -193,7 +193,7 @@
+ 	mcore->flash_buswidth = 2;
+ 	if (bus->chipco.dev) {
+ 		mcore->flash_window = 0x1c000000;
+-		mcore->flash_window_size = 0x02000000;
++		mcore->flash_window_size = 0x00800000;
+ 		if ((ssb_read32(bus->chipco.dev, SSB_CHIPCO_FLASH_CFG)
+ 		               & SSB_CHIPCO_CFG_DS16) == 0)
+ 			mcore->flash_buswidth = 1;

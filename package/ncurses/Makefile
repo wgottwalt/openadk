@@ -68,7 +68,7 @@ post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	# this is installed as libncurses - make libcurses a "link"
 	rm -f ${WRKINST}/usr/lib/libcurses.so*
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so
-	# libcurses will not show up in the IPKG, only in STAGING_DIR
+	# libcurses will not show up in the IPKG, only in STAGING_TARGET_DIR
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \

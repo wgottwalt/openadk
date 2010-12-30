@@ -21,7 +21,7 @@ $(eval $(call PKG_template,VTUN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 INSTALL_STYLE:=		manual
 
-CONFIGURE_ARGS+=	--with-ssl-headers=$(STAGING_DIR)/usr/include/openssl \
+CONFIGURE_ARGS+=	--with-ssl-headers=$(STAGING_TARGET_DIR)/usr/include/openssl \
 			--disable-lzo
 ALL_TARGET:=		vtund
 

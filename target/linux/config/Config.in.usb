@@ -3,37 +3,32 @@ depends on ADK_TARGET_WITH_USB
 
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
-	default n
 
 config ADK_KERNEL_USB_SERIAL
 	boolean
-	default n
 
 config ADK_KERNEL_USB
 	boolean
-	default n
 
 config ADK_KERNEL_USB_STORAGE
 	boolean
-	default n
 
 config ADK_KERNEL_USB_EHCI_HCD
 	boolean
-	default n
 
 config ADK_KERNEL_USB_UHCI_HCD
 	boolean
-	default n
 
 config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb......................... USB support"
 	tristate
-	default y if ADK_HARDWARE_ALIX1C
-	default y if ADK_HARDWARE_ALIX2D2
-	default y if ADK_HARDWARE_ALIX2D13
-	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20 || ADK_KERNEL_USB)
+	depends on !ADK_KERNEL_USB
 	select ADK_KERNEL_NLS
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -68,7 +63,7 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 	prompt   "kmod-usb-uhci................... Support for UHCI controllers"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_KERNEL_USB_UHCI_HCD)
+	depends on !ADK_KERNEL_USB_UHCI_HCD
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  The Universal Host Controller Interface is a standard by Intel for
@@ -83,12 +78,12 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
 	tristate
-	default y if ADK_HARDWARE_ALIX1C
-	default y if ADK_HARDWARE_ALIX2D2
-	default y if ADK_HARDWARE_ALIX2D13
-	default y if ADK_HARDWARE_IBM_X40
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
@@ -105,7 +100,6 @@ config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
 	prompt   "kmod-usb-isp116x................ ISP116X HCD support"
 	tristate
 	default n
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20)
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
@@ -118,7 +112,6 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 	prompt   "kmod-usb-sl811.................. SL811HS HCD support"
 	tristate
 	default n
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20)
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
@@ -131,11 +124,11 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
 	tristate
-	depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_KERNEL_USB_EHCI_HCD)
-	default y if ADK_HARDWARE_ALIX1C
-	default y if ADK_HARDWARE_ALIX2D2
-	default y if ADK_HARDWARE_ALIX2D13
-	default y if ADK_HARDWARE_IBM_X40
+	depends on !ADK_KERNEL_USB_EHCI_HCD
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	depends on ADK_KPACKAGE_KMOD_USB
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
@@ -160,7 +153,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 
 config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_UHCI_HCD || ADK_KPACKAGE_KMOD_USB_OHCI_HCD || ADK_KPACKAGE_KMOD_EHCI_HCD || ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_ARM_FOXG20
+	depends on ADK_KPACKAGE_KMOD_USB_UHCI_HCD || ADK_KPACKAGE_KMOD_USB_OHCI_HCD || ADK_KPACKAGE_KMOD_EHCI_HCD
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_ACM

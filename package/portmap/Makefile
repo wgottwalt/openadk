@@ -23,7 +23,7 @@ CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
 ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
-MAKE_FLAGS+=		WRAP_LIB='-L${STAGING_DIR}/usr/lib -lwrap'
+MAKE_FLAGS+=		WRAP_LIB='-L${STAGING_TARGET_DIR}/usr/lib -lwrap'
 else
 MAKE_FLAGS+=		NO_TCP_WRAPPER=1
 endif

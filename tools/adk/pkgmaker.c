@@ -245,7 +245,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
-	char *pkg_host_depends, *pkg_target_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
+	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
 	int result, neg;
@@ -259,7 +259,7 @@ int main() {
 	pkg_flavours = NULL;
 	pkg_choices = NULL;
 	pkg_subpkgs = NULL;
-	pkg_target_depends = NULL;
+	pkg_arch_depends = NULL;
 	pkg_host_depends = NULL;
 	pkg_cxx = NULL;
 	pkg_dflt = NULL;
@@ -289,17 +289,17 @@ int main() {
 	fclose(section);
 	
 	/* read target list and create a hash table */
-	target = fopen("target/target.lst", "r");
-	if (target == NULL)
-		fatal_error("target listfile is missing.");
+	//target = fopen("target/target.lst", "r");
+	//if (target == NULL)
+	//	fatal_error("target listfile is missing.");
 	
-	targetmap = strmap_new(HASHSZ);
-	while (fgets(tbuf, MAXPATH, target) != NULL) {
-		key = strtok(tbuf, "\t");
-		value = strtok(NULL, "\t");
-		strmap_put(targetmap, key, value);
-	}
-	fclose(target);
+	//targetmap = strmap_new(HASHSZ);
+	//while (fgets(tbuf, MAXPATH, target) != NULL) {
+	//	key = strtok(tbuf, "\t");
+	//	value = strtok(NULL, "\t");
+	//	strmap_put(targetmap, key, value);
+	//}
+	//fclose(target);
 
 	if (mkdir("package/pkgconfigs.d", S_IRWXU) > 0)
 		fatal_error("creation of package/pkgconfigs.d failed.");
@@ -377,7 +377,7 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_HOST_DEPENDS", NULL, &pkg_host_depends)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_TARGET_DEPENDS", NULL, &pkg_target_depends)) == 0)
+					if ((parse_var(buf, "PKG_ARCH_DEPENDS", NULL, &pkg_arch_depends)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_DESCR", NULL, &pkg_descr)) == 0)
 						continue;
@@ -580,7 +580,7 @@ int main() {
 							fprintf(cfg, "%s!ADK_HOST%s", sp, toupperstr(token));
 							sp = " && ";
 						} else {
-							fprintf(cfg, "%sADK_HOST%s", sp, toupperstr(token));
+							fprintf(cfg, "%sADK_HOST_%s", sp, toupperstr(token));
 							sp = " || ";
 						}
 						token = strtok(NULL, " ");
@@ -588,26 +588,19 @@ int main() {
 					fprintf(cfg, "\n");
 				}
 
-				/* create package target dependency information */
-				if (pkg_target_depends != NULL) {
-					token = strtok(pkg_target_depends, " ");
-					neg = 0;
-					sp = "";
+				/* create package target architecture dependency information */
+				if (pkg_arch_depends != NULL) {
+					token = strtok(pkg_arch_depends, " ");
 					fprintf(cfg, "\tdepends on ");
-					memset(hvalue, 0, MAXVALUE);
+					sp = "";
 					while (token != NULL) {
-						if (strncmp(token, "!", 1) == 0) {
-							result = strmap_get(targetmap, token+1, hvalue, sizeof(hvalue));
-							neg = 1;
-						} else {
-							result = strmap_get(targetmap, token, hvalue, sizeof(hvalue));
-						}
-						hvalue[strlen(hvalue)-1] = '\0';
-						print_target_depline(hvalue, neg, sp, cfg);
-						if (neg == 1)
+						if(strncmp(token, "!", 1) == 0) {
+							fprintf(cfg, "%s!ADK_LINUX%s", sp, toupperstr(token));
 							sp = " && ";
-						else
+						} else {
+							fprintf(cfg, "%sADK_LINUX_%s", sp, toupperstr(token));
 							sp = " || ";
+						}
 						token = strtok(NULL, " ");
 					}
 					fprintf(cfg, "\n");
@@ -750,7 +743,7 @@ int main() {
 			free(pkg_flavours);
 			free(pkg_choices);
 			free(pkg_subpkgs);
-			free(pkg_target_depends);
+			free(pkg_arch_depends);
 			free(pkg_host_depends);
 			free(pkg_cxx);
 			free(pkg_dflt);
@@ -764,7 +757,7 @@ int main() {
 			pkg_flavours = NULL;
 			pkg_choices = NULL;
 			pkg_subpkgs = NULL;
-			pkg_target_depends = NULL;
+			pkg_arch_depends = NULL;
 			pkg_host_depends = NULL;
 			pkg_cxx = NULL;
 			pkg_dflt = NULL;

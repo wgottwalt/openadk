@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_SPARC64
+	bool "Toolchain only"
+	select ADK_sparc64
+	select ADK_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Build a sparc64 toolchain.
+

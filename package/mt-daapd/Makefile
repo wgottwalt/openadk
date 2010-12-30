@@ -22,9 +22,9 @@ $(eval $(call PKG_template,MT_DAAPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--enable-mdns \
 			--disable-howl \
-			--with-id3tag="${STAGING_DIR}/usr" \
-			--with-gdbm-includes="${STAGING_DIR}/usr/include" \
-			--with-gdbm-libs="${STAGING_DIR}/usr/lib" \
+			--with-id3tag="${STAGING_TARGET_DIR}/usr" \
+			--with-gdbm-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-gdbm-libs="${STAGING_TARGET_DIR}/usr/lib" \
 			--without-static-libs
 TLDFLAGS+=		-pthread
 

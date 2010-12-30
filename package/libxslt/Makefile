@@ -18,9 +18,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBXSLT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_DIR}/usr" \
-			--with-libxml-include-prefix="${STAGING_DIR}/usr/include/libxml2" \
-			--with-libxml-libs-prefix="${STAGING_DIR}/usr/lib" \
+CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
+			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
+			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \
 			--without-python \
 			--without-crypto \
 			--without-debug \

@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.mozilla.org/projects/nspr/
 PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
 
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
 
 WRKSRC=			${WRKDIST}/mozilla/nsprpub
 

@@ -2,38 +2,32 @@ menu "Kernel debugging"
 
 config ADK_KERNEL_PROFILING
 	boolean
-	default n
 
 config ADK_KERNEL_DEBUG_KERNEL
 	boolean
-	default n
 
 config ADK_KERNEL_DEBUG_INFO
 	boolean
-	default n
 
 config ADK_KERNEL_KGDB
 	boolean
-	default n
 
 config ADK_KERNEL_KGDB_SERIAL_CONSOLE
 	boolean
-	default n
 
 config ADK_KERNEL_FRAME_POINTER
 	boolean
-	default n
 
 config ADK_QUIET_KERNEL
 	prompt "Make bootup quiet without messages from the kernel"
-	bool
+	boolean
 	default n
 	help
 	  Make bootup quiet without messages from the kernel.
 
 config ADK_KERNEL_MAGIC_SYSRQ
 	prompt "Magic BREAK sequence"
-	bool
+	boolean
 	default y
 	help
 	  Enable this to be able to use the Magic SysRq functions,
@@ -41,7 +35,7 @@ config ADK_KERNEL_MAGIC_SYSRQ
 
 config ADK_KERNEL_DEBUG_FS
 	prompt "Debug Filesystem"
-	bool
+	boolean
 	default n
 	help
 	  debugfs is a virtual file system that kernel developers use to put
@@ -49,24 +43,23 @@ config ADK_KERNEL_DEBUG_FS
 	  write to these files.
 
 config ADK_KERNEL_DEBUG_WITH_KGDB
-	boolean
 	prompt "Enable remote kernel debugging using KGDB"
-	depends on ADK_TARGET_ROOTFS_NFSROOT || \
-		ADK_TARGET_ROOTFS_EXT2_BLOCK || \
-		ADK_TARGET_ROOTFS_YAFFS || \
-		ADK_TARGET_ROOTFS_EXT2
-	default n
+	boolean
 	select ADK_KERNEL_DEBUG_KERNEL
 	select ADK_KERNEL_DEBUG_INFO
 	select ADK_KERNEL_KGDB
 	select ADK_KERNEL_KGDB_SERIAL_CONSOLE
 	select ADK_KERNEL_FRAME_POINTER
+	depends on ADK_TARGET_ROOTFS_NFSROOT || \
+		ADK_TARGET_ROOTFS_EXT2_BLOCK || \
+		ADK_TARGET_ROOTFS_YAFFS || \
+		ADK_TARGET_ROOTFS_EXT2
+	default n
 
 config ADK_KPACKAGE_KMOD_OPROFILE
-	tristate
 	prompt "kernel support for oprofile"
+	tristate
 	select ADK_KERNEL_PROFILING
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	default n
 	help
 	 use oprofile package to make use of the kernel support.

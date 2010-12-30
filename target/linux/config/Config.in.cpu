@@ -3,3 +3,6 @@ config ADK_KERNEL_MATOM
 
 config ADK_KERNEL_MPENTIUMM
 	boolean
+
+config ADK_KERNEL_MGEODE_LX
+	boolean

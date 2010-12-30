@@ -25,19 +25,20 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
-ADK_TARGET:=		$(strip $(subst ",, $(ADK_TARGET)))
-ADK_HW:=		$(strip $(subst ",, $(ADK_HW)))
-ADK_LIBC:=		$(strip $(subst ",, $(ADK_LIBC)))
-ADK_HOST:=		$(strip $(subst ",, $(ADK_HOST)))
-ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))
+ADK_TARGET_ARCH:=	$(strip $(subst ",, $(ADK_TARGET_ARCH)))
+ADK_TARGET_SYSTEM:=	$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
+ADK_TARGET_LIBC:=	$(strip $(subst ",, $(ADK_TARGET_LIBC)))
+ADK_TARGET_CFLAGS:=	$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))
 ADK_TARGET_IP:=		$(strip $(subst ",, $(ADK_TARGET_IP)))
 ADK_TARGET_SUFFIX:=	$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
-ADK_COMPRESSION_TOOL:=	$(strip $(subst ",, $(ADK_COMPRESSION_TOOL)))
-ADK_TARGET_CFLAGS:=	$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))
+ADK_TARGET_CMDLINE:=	$(strip $(subst ",, $(ADK_TARGET_CMDLINE)))
+ADK_RUNTIME_CONSOLE_SERIAL_SPEED:=	$(strip $(subst ",, $(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)))
+ADK_HOST:=		$(strip $(subst ",, $(ADK_HOST)))
+ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
-ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET)/target.mk)),)
-include $(TOPDIR)/target/$(ADK_TARGET)/target.mk
+ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk)),)
+include $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk
 endif
 endif
 

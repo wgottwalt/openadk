@@ -3,29 +3,30 @@
 
 define rootfs_template
 ifeq ($(ADK_TARGET_ROOTFS_$(2)),y)
-FS:=$(1)
+ADK_TARGET_FS:=$(1)
 FS_CMDLINE:=$(3)
 endif
 endef
 
-ifeq ($(ADK_HARDWARE_QEMU_X86),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86),y)
 ROOTFS:=	root=/dev/sda1
 endif
 
-ifeq ($(ADK_LINUX_MIPS_RB532),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 ROOTFS:=	root=/dev/sda2
 MTDDEV:=	root=/dev/mtdblock1
 endif
 
-ifeq ($(ADK_LINUX_MIPS_RB433),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
 MTDDEV:=	root=/dev/mtdblock2
 endif
 
-ifeq ($(ADK_LINUX_ARM_FOXG20),y)
+ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
-$(eval $(call rootfs_template,ext2-block,EXT2_BLOCK,$(ROOTFS)))
+$(eval $(call rootfs_template,cf,CF,$(ROOTFS)))
+$(eval $(call rootfs_template,mmc,MMC,$(ROOTFS)))
 $(eval $(call rootfs_template,usb,USB,rootdelay=3))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
@@ -35,4 +36,4 @@ $(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV) panic=3))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp init=/init))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
 
-export FS
+export ADK_TARGET_FS

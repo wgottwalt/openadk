@@ -15,7 +15,7 @@ PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
 PKG_HOST_DEPENDS:=	!freebsd !netbsd !openbsd
-PKG_TARGET_DEPENDS:=	x86 x86_64
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include ${TOPDIR}/mk/package.mk
 

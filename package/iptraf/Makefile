@@ -27,8 +27,8 @@ do-build:
 		${TARGET_CONFIGURE_OPTS} \
 		CFLAGS="${TARGET_CFLAGS}" \
 		DEBUG="" \
-		INCLUDEDIR="-I../support -I${STAGING_DIR}/usr/include" \
-		LDOPTS="-L${STAGING_DIR}/usr/lib -L${STAGING_DIR}/lib" \
+		INCLUDEDIR="-I../support -I${STAGING_TARGET_DIR}/usr/include" \
+		LDOPTS="-L${STAGING_TARGET_DIR}/usr/lib -L${STAGING_TARGET_DIR}/lib" \
 		PLATFORM="-DPLATFORM=\\\"Linux/${ARCH}\\\"" \
 		TARGET="/usr/bin" \
 		WORKDIR="/var/lib/iptraf" \

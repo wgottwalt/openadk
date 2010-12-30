@@ -15,7 +15,7 @@ endif
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
-	    $(TOPDIR)/target/$(ADK_TARGET)/uclibc.config >${WRKBUILD}/.config
+	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
@@ -41,7 +41,7 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) \
-		PREFIX=$(STAGING_DIR) \
+		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
@@ -51,14 +51,14 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	$(MAKE) -C $(WRKBUILD) \
-		PREFIX=$(STAGING_DIR) \
+		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
-	rm -rf $(STAGING_DIR)/lib/libc.so
-	ln -s libc.so.0 $(STAGING_DIR)/lib/libc.so
+	rm -rf $(STAGING_TARGET_DIR)/lib/libc.so
+	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

@@ -1,0 +1,26 @@
+config ADK_KERNEL_MIKROTIK_RB532
+	boolean
+
+config ADK_KERNEL_AR7
+	boolean
+
+config ADK_KERNEL_BCM47XX
+	boolean
+
+config ADK_KERNEL_ATHEROS_AR71XX
+	boolean
+
+config ADK_KERNEL_AR71XX_MACH_RB4XX
+	boolean
+
+config ADK_KERNEL_ARCH_AT91
+	boolean
+
+config ADK_KERNEL_ARCH_AT91SAM9G20
+	boolean
+
+config ADK_KERNEL_MACH_FOXG20
+	boolean
+
+config ADK_KERNEL_AEABI
+	boolean

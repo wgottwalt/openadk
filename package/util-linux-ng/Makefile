@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux-ng
-PKG_VERSION:=		2.17.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4c810430e86d53b6ea5e7ae279b39186
+PKG_VERSION:=		2.18
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		aff22adfff1bf39cd3f13371b95a3d3a
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
 PKG_BUILDDEP:=		e2fsprogs ncurses
 PKG_URL:=		http://userweb.kernel.org/~kzak/util-linux-ng
-PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v2.17/}
+PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/util-linux-ng/v$(PKG_VERSION)/}
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE
 PKGSD_FDISK:=		Partition table manipulation utility
@@ -34,8 +34,10 @@ $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
-			--disable-libblkid \
-			--disable-libuuid
+			--enable-libblkid \
+			--enable-libmount \
+			--enable-mount \
+			--enable-libuuid
 MAKE_FLAGS+=		OPT="${TCFLAGS}" ARCH="${ARCH}"
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TCFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK

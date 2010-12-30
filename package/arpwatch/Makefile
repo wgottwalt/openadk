@@ -22,8 +22,8 @@ INSTALL_STYLE:=		manual
 
 MAKE_FLAGS+=		ARPDIR=/etc/arpwatch \
 			CCOPT="$(TARGET_CFLAGS)" \
-			INCLS="-I. -I$(STAGING_DIR)/usr/include" \
-			LIBS="-L$(STAGING_DIR)/usr/lib -lpcap"
+			INCLS="-I. -I$(STAGING_TARGET_DIR)/usr/include" \
+			LIBS="-L$(STAGING_TARGET_DIR)/usr/lib -lpcap"
 
 do-install:
 	$(INSTALL_DIR) $(IDIR_ARPWATCH)/usr/sbin $(IDIR_ARPWATCH)/etc/arpwatch

@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LYNX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-I${STAGING_DIR}/include/openssl
+TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/include/openssl
 TCPPFLAGS+=		-DUSE_OPENSSL_INCL -DUSE_X509_SUPPORT
 TLDFLAGS+=		-lz
 
@@ -39,7 +39,7 @@ CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_UUDECODE=uudecode \
 			ac_cv_path_ZCAT=zcat \
 			ac_cv_path_ZIP=zip \
-			ac_cv_path_NCURSES_CONFIG=${STAGING_DIR}/scripts/ncurses5-config
+			ac_cv_path_NCURSES_CONFIG=${STAGING_TARGET_DIR}/scripts/ncurses5-config
 
 CONFIGURE_ARGS+=	\
 			--disable-warnings \
@@ -59,9 +59,9 @@ CONFIGURE_ARGS+=	\
 			--enable-underlines \
 			--without-bzlib \
 			--without-x \
-			--with-zlib=${STAGING_DIR}/usr \
-			--with-ssl=${STAGING_DIR}/usr \
-			--with-curses-dir=${STAGING_DIR}/usr \
+			--with-zlib=${STAGING_TARGET_DIR}/usr \
+			--with-ssl=${STAGING_TARGET_DIR}/usr \
+			--with-curses-dir=${STAGING_TARGET_DIR}/usr \
 			--disable-full-paths \
 			--with-cfg-file=/etc/lynx.cfg \
 			--with-lss-file=/etc/lynx.lss \

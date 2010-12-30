@@ -29,7 +29,7 @@ CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=ye
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_${WRKBUILD}/features.conf | tr [:blank:]-/. _)=yes
 CONFIGURE_ARGS+=	--enable-small \
 			--enable-256-colors \
-			--with-openssl='${STAGING_DIR}/usr' \
+			--with-openssl='${STAGING_TARGET_DIR}/usr' \
 			--disable-backtrace \
 			--disable-data \
 			--disable-formhist \

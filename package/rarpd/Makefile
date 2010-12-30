@@ -17,8 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-libnet="${STAGING_DIR}/usr" \
-			--with-pcap="${STAGING_DIR}/usr"
+CONFIGURE_ARGS+=	--with-libnet="${STAGING_TARGET_DIR}/usr" \
+			--with-pcap="${STAGING_TARGET_DIR}/usr"
 TCFLAGS+=		-DNEW_LIBNET_INTERFACE
 
 post-install:

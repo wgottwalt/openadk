@@ -34,9 +34,9 @@ CONFIGURE_ARGS+=	--disable-tests \
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 
 pre-install:
-	${INSTALL_DIR} $(STAGING_DIR)/usr/include/dbus-1.0/dbus
+	${INSTALL_DIR} $(STAGING_TARGET_DIR)/usr/include/dbus-1.0/dbus
 	$(CP) $(WRKBUILD)/dbus/dbus-arch-deps.h \
-		$(STAGING_DIR)/usr/include/dbus-1.0/dbus/
+		$(STAGING_TARGET_DIR)/usr/include/dbus-1.0/dbus/
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib \

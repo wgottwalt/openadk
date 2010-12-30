@@ -26,7 +26,7 @@ $(eval $(call PKG_template,FETCHMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 CONFIGURE_ARGS+=	--without-hesiod
 
 ifeq (${ADK_PACKAGE_FETCHMAIL_SSL},y)
-CONFIGURE_ARGS+=	--with-ssl='${STAGING_DIR}/usr'
+CONFIGURE_ARGS+=	--with-ssl='${STAGING_TARGET_DIR}/usr'
 else
 CONFIGURE_ARGS+=	--without-ssl
 endif

@@ -16,7 +16,7 @@ PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

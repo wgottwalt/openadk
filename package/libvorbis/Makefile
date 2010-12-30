@@ -28,9 +28,9 @@ SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_LIBVORBIS_DEV}+=	libvorbis-dev-install
 
 CONFIGURE_ENV+=		LIBS="-lm -logg"
-CONFIGURE_ARGS+=	--with-ogg="${STAGING_DIR}/usr" \
-			--with-ogg-includes="${STAGING_DIR}/usr/include" \
-			--with-ogg-libraries="${STAGING_DIR}/usr/lib"
+CONFIGURE_ARGS+=	--with-ogg="${STAGING_TARGET_DIR}/usr" \
+			--with-ogg-includes="${STAGING_TARGET_DIR}/usr/include" \
+			--with-ogg-libraries="${STAGING_TARGET_DIR}/usr/lib"
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} ${IDIR_LIBVORBIS}/usr/lib

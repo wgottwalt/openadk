@@ -5,15 +5,13 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1131dc5f27c4f3905a6e7ee0d594fd4d
-PKG_DESCR:= 		Utilities for NFS kernel server implementation
+PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-nfsd portmap
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
-
-PKG_HOST_DEPENDS:=	!darwin
 
 PKG_FLAVOURS:=		WITH_KERBEROS WITH_TIRPC
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
@@ -31,7 +29,7 @@ $(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
-			--with-krb5=${STAGING_DIR}/usr/ \
+			--with-krb5=${STAGING_TARGET_DIR}/usr/ \
 			--enable-gss
 CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
@@ -41,7 +39,7 @@ endif
 
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_TIRPC),y)
 CONFIGURE_ARGS+=	--enable-tirpc \
-			--with-tirpcinclude=${STAGING_DIR}/usr/include/tirpc
+			--with-tirpcinclude=${STAGING_TARGET_DIR}/usr/include/tirpc
 else
 CONFIGURE_ARGS+=	--disable-tirpc
 endif
@@ -49,6 +47,7 @@ endif
 CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
+			--with-rpcgen=internal \
 			--disable-uuid
 
 post-install:

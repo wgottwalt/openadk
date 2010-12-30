@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.22.3
+PKG_VERSION:=		2.27.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e699a93d62c01e0ee07caef3e11eddd8
+PKG_MD5SUM:=		ad9c80adb624a1ffe3d9753bab8a578a
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		gettext libiconv libpthread
 PKG_BUILDDEP:=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		ftp://ftp.gtk.org/pub/glib/2.22/
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/2.27/
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

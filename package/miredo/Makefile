@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		miredo
-PKG_VERSION:=		1.1.6
+PKG_VERSION:=		1.2.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bf49c1ddc068746760787d0cf76e40de
+PKG_MD5SUM:=		6ba484ad5e331514a8a3452da2b144e7
 PKG_DESCR:=		A Teredo client and relay daemon
 PKG_SECTION:=		ipv6
 PKG_URL:=		http://www.remlab.net/
@@ -23,11 +23,8 @@ $(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELE
 
 TCFLAGS+=		-std=gnu99
 CONFIGURE_ENV+=		ac_cv_file__proc_self_maps=yes
-CONFIGURE_ARGS+=	--disable-chroot \
-			--without-Judy \
+CONFIGURE_ARGS+=	--without-Judy \
 			--enable-teredo-client \
-			--enable-teredo-relay \
-			--enable-teredo-server \
 			--enable-miredo-user=root
 
 XAKE_FLAGS+=		 CXXLINK="\$${LINK}" \

@@ -1,0 +1,9 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_X86
+	bool "Toolchain only"
+	select ADK_x86
+	select ADK_toolchain
+	select ADK_CPU_I686
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Build a x86 toolchain (i686 optimized).
+

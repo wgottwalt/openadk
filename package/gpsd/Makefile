@@ -33,7 +33,7 @@ TCFLAGS+=		-fPIC
 
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-luClibc++ -lc -lm -pthread -nodefaultlibs
 else
 TLDFLAGS+=		-shared -pthread

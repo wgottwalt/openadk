@@ -22,9 +22,9 @@ $(eval $(call PKG_template,FONT_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 # calling pkg-config (which we don't provide) in order to
 # automatically find the mappings.
 fonts-hack:
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/fonts/X11/util
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/fonts/X11/util
 	${CP} ${WRKINST}/usr/share/fonts/X11/util/* \
-		${STAGING_DIR}/usr/share/fonts/X11/util
+		${STAGING_TARGET_DIR}/usr/share/fonts/X11/util
 
 post-install: fonts-hack
 	${INSTALL_DIR} ${IDIR_FONT_UTIL}/usr/share/fonts/X11/util

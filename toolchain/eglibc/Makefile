@@ -62,6 +62,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		PATH='${TARGET_PATH}' \
 		$(MAKE) install-headers install-bootstrap-headers=yes \
 	);
+	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
 	touch $@
 
 $(WRKBUILD)/.configured:
@@ -83,7 +84,7 @@ $(WRKBUILD)/.compiled:
 	touch $@
 
 $(WRKBUILD)/.installed:
-	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_DIR) install
+	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

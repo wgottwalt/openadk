@@ -16,7 +16,7 @@ PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
 
 PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS ASTERISK_CHAN_MGCP
 PKG_SUBPKGS+=		ASTERISK_CHAN_SKINNY ASTERISK_CHAN_IAX2 ASTERISK_CODEC_SPEEX ASTERISK_CODEC_GSM
@@ -57,9 +57,9 @@ SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_GSM}+=	asterisk-codec-gsm-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_PBX_DUNDI}+=	asterisk-pbx-dundi-install
 SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_RES_AGI}+=		asterisk-res-agi-install
 
-CONFIGURE_ARGS=		--with-z=${STAGING_DIR}/usr \
-			--with-ncurses=${STAGING_DIR}/usr \
-			--with-ssl=${STAGING_DIR}/usr \
+CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
+			--with-ncurses=${STAGING_TARGET_DIR}/usr \
+			--with-ssl=${STAGING_TARGET_DIR}/usr \
 			--disable-xmldoc \
 			--without-tonezone \
 			--without-asound \
@@ -91,21 +91,21 @@ else
 CONFIGURE_ARGS+=	--without-gsm
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_CODEC_SPEEX},)
-CONFIGURE_ARGS+=	--with-speex=${STAGING_DIR}/usr
-EXTRA_CFLAGS+=		-I$(STAGING_DIR)/usr/include/speex
+CONFIGURE_ARGS+=	--with-speex=${STAGING_TARGET_DIR}/usr
+EXTRA_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/speex
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_FORMAT_VORBIS},)
-CONFIGURE_ARGS+=	--with-ogg=${STAGING_DIR}/usr \
-			--with-vorbis=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-ogg=${STAGING_TARGET_DIR}/usr \
+			--with-vorbis=${STAGING_TARGET_DIR}/usr
 TLDFLAGS+=		-logg
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_CURL},)
-CONFIGURE_ARGS+=	--with-libcurl=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-libcurl=${STAGING_TARGET_DIR}/usr
 else
 CONFIGURE_ARGS+=	--without-libcurl
 endif
 ifneq (${ADK_PACKAGE_ASTERISK_PGSQL},)
-CONFIGURE_ARGS+=	--with-postgres=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-postgres=${STAGING_TARGET_DIR}/usr
 else
 CONFIGURE_ARGS+=	--without-postgres
 endif

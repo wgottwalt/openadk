@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.41.13
+PKG_VERSION:=		1.41.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7508a192c7a9471e2128424f4eafac1c
+PKG_MD5SUM:=		05f70470aea2ef7efbb0845b2b116720
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
-PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_EXT2_BLOCK
+PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID
 PKGSD_LIBUUID:=		UUID library
@@ -69,9 +69,9 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/libuuid.so* \
 		${IDIR_LIBUUID}/usr/lib/
 	# install some headers/apps explicitely
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
-		${STAGING_DIR}/usr/include/uuid
-	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_TOOLS}/bin
+		${STAGING_TARGET_DIR}/usr/include/uuid
+	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

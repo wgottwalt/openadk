@@ -30,19 +30,18 @@ do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
 		$(IDIR_GLIBC)/etc/localtime
-	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_GLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
-		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
-		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
 
 glibc-dev-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/lib $(IDIR_GLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
-	${CP} ${STAGING_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
-	${CP} ${STAGING_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
 		cd $(IDIR_GLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
@@ -62,7 +61,7 @@ glibc-dev-install:
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h
 	# WORKAROUND: bits/syscall.h is only installed via install-others target
-	$(CP) $(STAGING_DIR)/usr/include/bits/syscall.h \
+	$(CP) $(STAGING_TARGET_DIR)/usr/include/bits/syscall.h \
 		$(IDIR_GLIBC_DEV)/usr/include/bits
 	@find $(IDIR_GLIBC_DEV) -name .install -exec rm {} \;
 

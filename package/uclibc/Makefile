@@ -28,28 +28,27 @@ SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
 
 # do nothing, uClibc is already build in toolchain directory
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: $(STAGING_TARGET_DIR)/lib/libc.so ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
-	$(CP) $(STAGING_DIR)/lib/libgcc_s.so* $(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/libuClibc-$(PKG_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib/
 	-for file in libcrypt libdl libm libnsl libresolv librt libutil; do \
-		$(CP) $(STAGING_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
-		$(CP) $(STAGING_DIR)/lib/$$file-$(PKG_VERSION).so \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
 			$(IDIR_UCLIBC)/lib/; \
 	done
 
 uclibc-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib
-	${CP} ${STAGING_DIR}/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
 		headers_install

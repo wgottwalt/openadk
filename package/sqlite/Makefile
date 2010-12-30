@@ -24,8 +24,8 @@ CONFIGURE_ENV+=		config_BUILD_CC="${HOSTCC}" \
 			config_BUILD_CFLAGS="${HOSTCFLAGS}" \
 			config_TARGET_CC="${TARGET_CC}" \
 			config_TARGET_CFLAGS="${TARGET_CFLAGS}" \
-			config_TARGET_READLINE_INC="-I${STAGING_DIR}/usr/include" \
-			config_TARGET_READLINE_LIBS="-L${STAGING_DIR}/usr/lib -lreadline -lncurses"
+			config_TARGET_READLINE_INC="-I${STAGING_TARGET_DIR}/usr/include" \
+			config_TARGET_READLINE_LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lreadline -lncurses"
 MAKE_FLAGS+=		LIBPTHREAD=-lm
 TCFLAGS+=		-DSQLITE_SECURE_DELETE=1
 CONFIGURE_ARGS+=	--disable-tcl \

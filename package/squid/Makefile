@@ -125,7 +125,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--disable-wccp \
 			--disable-wccpv2 \
 			--enable-useragent-log \
-			--with-openssl=${STAGING_DIR}/usr \
+			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--enable-negotiate-auth-helpers=no \
 			--enable-auth="${AUTH_MODULES}" \
 			--enable-basic-auth-helpers="${BASIC_AUTH_HELPERS}" \

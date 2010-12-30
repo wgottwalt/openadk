@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.3
+PKG_VERSION:=		5.3.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5adf1a537895c2ec933fddd48e78d8a2
+PKG_MD5SUM:=		b69b36132899c5ca3bf155efa0218676
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libopenssl zlib
@@ -65,9 +65,9 @@ PKG_CONFIGURE_OPTS:=	\
 	--disable-mbstring \
 	--disable-mbregex \
 	--disable-phar \
-	--with-openssl=shared,"$(STAGING_DIR)/usr" \
+	--with-openssl=shared,"$(STAGING_TARGET_DIR)/usr" \
 	--with-kerberos=no \
-	--with-openssl-dir="$(STAGING_DIR)/usr" \
+	--with-openssl-dir="$(STAGING_TARGET_DIR)/usr" \
 	--enable-session=shared \
 	--disable-simplexml \
 	--disable-soap \
@@ -77,8 +77,8 @@ PKG_CONFIGURE_OPTS:=	\
 	--disable-filter \
 	--disable-xmlreader \
 	--disable-xmlwriter \
-	--with-zlib="$(STAGING_DIR)/usr" \
-	--with-zlib-dir="$(STAGING_DIR)/usr" \
+	--with-zlib="$(STAGING_TARGET_DIR)/usr" \
+	--with-zlib-dir="$(STAGING_TARGET_DIR)/usr" \
 	--enable-cli \
 	--enable-cgi \
 	--enable-fastcgi \
@@ -86,15 +86,15 @@ PKG_CONFIGURE_OPTS:=	\
 	--enable-discard-path \
 
 ifneq ($(ADK_PACKAGE_PHP_MOD_CURL),)
-PKG_CONFIGURE_OPTS+=	--with-curl=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-curl=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-curl
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
-PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_DIR)/usr" \
+PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
 	--without-freetype-dir \
-	--with-jpeg-dir="$(STAGING_DIR)/usr" \
-	--with-png-dir="$(STAGING_DIR)/usr" \
+	--with-jpeg-dir="$(STAGING_TARGET_DIR)/usr" \
+	--with-png-dir="$(STAGING_TARGET_DIR)/usr" \
 	--without-xpm-dir \
 	--without-ttf \
 	--without-t1lib	\
@@ -104,41 +104,41 @@ else
 PKG_CONFIGURE_OPTS+=	--without-gd
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_GMP),)
-PKG_CONFIGURE_OPTS+=	--with-gmp=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-gmp=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-gmp
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
-PKG_CONFIGURE_OPTS+=	--with-ldap=shared,"$(STAGING_DIR)/usr" \
-	--with-ldap-sasl="$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-ldap=shared,"$(STAGING_TARGET_DIR)/usr" \
+	--with-ldap-sasl="$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-ldap
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
-PKG_CONFIGURE_OPTS+=	--with-mysql=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-mysql=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-mysql
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_PCRE),)
-PKG_CONFIGURE_OPTS+=	--with-pcre-dir=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-pcre-dir=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-pcre-dir
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
-PKG_CONFIGURE_OPTS+=	--with-pgsql=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-pgsql=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-pgsql
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SQLITE),)
 PKG_CONFIGURE_OPTS+=	--without-sqlite
-PKG_CONFIGURE_OPTS+=	--with-pdo-sqlite=shared,"$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-pdo-sqlite=shared,"$(STAGING_TARGET_DIR)/usr"
 PKG_CONFIGURE_OPTS+=	--enable-pdo=shared
 else
 PKG_CONFIGURE_OPTS+=	--without-sqlite
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
-PKG_CONFIGURE_OPTS+=	--enable-xml=shared,"$(STAGING_DIR)/usr" \
-	--with-libexpat-dir="$(STAGING_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--enable-xml=shared,"$(STAGING_TARGET_DIR)/usr" \
+	--with-libexpat-dir="$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--disable-xml
 endif
@@ -172,7 +172,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 
 INSTALL_STYLE:=		manual
 
-TLDFLAGS+=		-L$(STAGING_DIR)/usr/lib/mysql
+TLDFLAGS+=		-L$(STAGING_TARGET_DIR)/usr/lib/mysql
 CONFIGURE_ENV+=		LIBS="-ldl"
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
 

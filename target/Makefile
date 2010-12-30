@@ -11,6 +11,8 @@ all: install
 # config files into a single one to be used as the final kernel
 # configuration when building. This is how it's done:
 # 1) fetch all ADK_KPACKAGE_KMOD_* vars into
+#    .kernelconfig.modules and set them to "m",
+#    fetch all ADK_KERNELMOD_* vars into 
 #    .kernelconfig.modules and set them to "m"
 # 2) fetch all enabled ADK_KERNEL_* vars into
 #    .kernelconfig.kernel (no conversion, as they are booleans)
@@ -33,6 +35,8 @@ all: install
 config-prepare: $(TOPDIR)/.config
 	@sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
 	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modules
+	@sed -n '/^ADK_KERNEL_MOD/s//CONFIG/p' ${TOPDIR}/.config | \
+	    sed 's/=y/=m/' >>${BUILD_DIR}/.kernelconfig.modules
 	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
 	@sed -n '/^ADK_MOD_KERNEL/s//CONFIG/p' ${TOPDIR}/.config | \
@@ -46,7 +50,7 @@ ifeq ($(ADK_NATIVE),y)
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi
 else
-	@cp ${ADK_TARGET}/kernel.config ${BUILD_DIR}/.kernelconfig.board
+	@cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \
@@ -54,6 +58,10 @@ endif
 	done;)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
+ifneq ($(ADK_TARGET_CMDLINE),)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
 ifeq ($(ADK_QUIET_KERNEL),y)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet"#' \
 		${BUILD_DIR}/.kernelconfig.board
@@ -69,11 +77,11 @@ endif
 	    cp .kernelconfig.tmp .kernelconfig
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 
-prepare: $(ADK_TARGET)-prepare
-compile: $(ADK_TARGET)-compile
-image: $(ADK_TARGET)-imageclean $(ADK_TARGET)-imageinstall
-install: $(ADK_TARGET)-imageclean $(ADK_TARGET)-install $(ADK_TARGET)-imageinstall
-clean: $(ADK_TARGET)-clean $(ADK_TARGET)-imageclean
+prepare: $(ADK_TARGET_ARCH)-prepare
+compile: $(ADK_TARGET_ARCH)-compile
+image: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-imageinstall
+install: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-install $(ADK_TARGET_ARCH)-imageinstall
+clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
 %-clean:
 	$(TRACE) target/$(patsubst %-clean,%,$@)-clean

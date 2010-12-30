@@ -13,6 +13,7 @@ Before you can start you need to install some tools:
 - GNU sed
 - tar
 - patch
+- pkg-config
 - gzip
 - bzip2
 - wget
@@ -33,4 +34,3 @@ buildsystem will download all sources, build the toolchain, the kernel and all
 applications.
 
 Sunshine!
-

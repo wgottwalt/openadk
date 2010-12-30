@@ -5,7 +5,7 @@
  # if your systems doesn't have one, use the shell script that I provide
  # in "inst.sh" (taken from X11R5). Needed on IRIX5.2
 -INSTALL=install -c -o bin -g bin
-+STRIP=$(STAGING_DIR)sstrip
++STRIP=
 +INSTALL=install -c -o root -g root
 +#INSTALL=install -c -o bin -g bin
  #INSTALL=install -c -o root -g wheel		# NeXT/BSD

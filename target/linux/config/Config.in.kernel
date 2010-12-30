@@ -1,97 +1,78 @@
+config ADK_KERNEL_ETRAX_MTD_SIZE
+        hex
+        depends on ADK_TARGET_SYSTEM_FOXBOARD_LX416 || ADK_TARGET_SYSTEM_FOXBOARD_LX832
+        default "0x00400000" if ADK_TARGET_SYSTEM_FOXBOARD_LX416
+        default "0x00800000" if ADK_TARGET_SYSTEM_FOXBOARD_LX832
+
+config ADK_KERNEL_ETRAX_DRAM_SIZE
+        int
+        depends on ADK_TARGET_SYSTEM_FOXBOARD_LX416 || ADK_TARGET_SYSTEM_FOXBOARD_LX832
+        default "16" if ADK_TARGET_SYSTEM_FOXBOARD_LX416
+        default "32" if ADK_TARGET_SYSTEM_FOXBOARD_LX832
+
+config ADK_KERNEL_ETRAX_DEF_R_SDRAM_TIMING
+        hex
+        depends on ADK_TARGET_SYSTEM_FOXBOARD_LX416 || ADK_TARGET_SYSTEM_FOXBOARD_LX832
+        default "0x80608002" if ADK_TARGET_SYSTEM_FOXBOARD_LX416
+        default "0x80008002" if ADK_TARGET_SYSTEM_FOXBOARD_LX832
+
 config ADK_KERNEL_BLK_DEV_INITRD
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_RD_GZIP
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_KERNEL_GZIP
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_RD_BZIP2
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_KERNEL_BZIP2
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_RD_LZMA
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_KERNEL_LZMA
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_RD_LZO
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_KERNEL_LZO
-	bool
-	default n
+	boolean
 
 config ADK_KERNEL_INITRAMFS_SOURCE
 	string
 	default ""
 
-config ADK_KERNEL_ETRAX_MTD_SIZE
-	hex
-        depends on ADK_LINUX_CRIS_FOXBOARD_CLASSIC || ADK_LINUX_CRIS_FOXBOARD_LX
-	default "0x00400000" if ADK_LINUX_CRIS_FOXBOARD_CLASSIC
-	default "0x00800000" if ADK_LINUX_CRIS_FOXBOARD_LX
-
-config ADK_KERNEL_ETRAX_DRAM_SIZE
-	int
-	depends on ADK_LINUX_CRIS_FOXBOARD_CLASSIC || ADK_LINUX_CRIS_FOXBOARD_LX
-	default "16" if ADK_LINUX_CRIS_FOXBOARD_CLASSIC
-	default "32" if ADK_LINUX_CRIS_FOXBOARD_LX
-
-config ADK_KERNEL_ETRAX_DEF_R_SDRAM_TIMING
-	hex
-        depends on ADK_LINUX_CRIS_FOXBOARD_CLASSIC || ADK_LINUX_CRIS_FOXBOARD_LX
-	default "0x80608002" if ADK_LINUX_CRIS_FOXBOARD_CLASSIC
-	default "0x80008002" if ADK_LINUX_CRIS_FOXBOARD_LX
-
 config ADK_KERNEL_NETWORK_FILESYSTEMS
 	boolean
-	default y
 
 config ADK_KERNEL_IP_PNP
 	boolean
-	default n
 
 config ADK_KERNEL_IP_PNP_DHCP
 	boolean
-	default n
 
 config ADK_KERNEL_NFS_FS
 	boolean
-	default n
 
 config ADK_KERNEL_NFS_V3
 	boolean
-	default n
 
 config ADK_KERNEL_ROOT_NFS
 	boolean
-	default n
 
 config ADK_KERNEL_LOCKD
 	boolean
-	default n
 
 config ADK_KERNEL_NFS_COMMON
 	boolean
-	default n
 
 config ADK_KERNEL_SUNRPC
 	boolean
-	default n

@@ -34,7 +34,7 @@ INSTALL_STYLE:=		manual
 do-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
-	${CP} ${STAGING_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
+	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
 	cd $(IDIR_LIBPTHREAD)/lib && ln -sf libpthread.so.0 libpthread.so
 endif
 

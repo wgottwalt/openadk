@@ -25,7 +25,7 @@ INSTALL_STYLE:=		manual
 
 MAKE_FILE:=		GNUmakefile
 ALL_TARGET:=		gatling
-TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/owfat
+TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/owfat
 XAKE_FLAGS+=		CC='${TARGET_CC}' \
 			CFLAGS='${TCPPFLAGS} ${TCFLAGS}' \
 			ZLIB=0 DIET= prefix='${WRKINST}/usr'

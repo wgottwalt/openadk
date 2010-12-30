@@ -120,16 +120,7 @@ else
 	cp $2-initramfs $tmp/boot/initramfs
 fi
 
-#printf "Creating device nodes\n"
-mknod -m 666 $tmp/dev/zero c 1 5
-mknod -m 666 $tmp/dev/null c 1 3
-mknod -m 622 $tmp/dev/console c 5 1
-mknod -m 666 $tmp/dev/tty c 5 0
-mknod -m 666 $tmp/dev/tty0 c 4 0
-mknod -m 666 $tmp/dev/ttyS0 c 4 64
-
 umount $tmp
-
 printf "Successfully installed.\n"
 printf "Be sure $1 is writable for the user which use qemu\n"
 exit 0

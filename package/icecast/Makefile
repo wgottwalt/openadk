@@ -18,15 +18,15 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-I${STAGING_DIR}/usr/include/libxml2
+TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/libxml2
 CONFIGURE_ARGS+=	--disable-yp \
 			--with-curl="yes" \
-			--with-curl-config="${STAGING_DIR}/usr/bin/curl-config" \
-			--with-ogg="${STAGING_DIR}/usr" \
-			--with-vorbis="${STAGING_DIR}/usr" \
+			--with-curl-config="${STAGING_TARGET_DIR}/usr/bin/curl-config" \
+			--with-ogg="${STAGING_TARGET_DIR}/usr" \
+			--with-vorbis="${STAGING_TARGET_DIR}/usr" \
 			--with-speex="no" \
 			--with-theora="no" \
-			--with-xslt-config="${STAGING_DIR}/usr/bin/xslt-config"
+			--with-xslt-config="${STAGING_TARGET_DIR}/usr/bin/xslt-config"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ICECAST}/etc

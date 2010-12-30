@@ -31,27 +31,20 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_FFPLAY}+=	ffplay-install
 
-ifeq ($(ADK_TARGET),alix)
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--disable-sse \
-			--enable-amd3dnow \
-			--enable-amd3dnowext \
-			--enable-mmx \
-			--enable-mmx2
-else ifeq ($(ADK_HARDWARE_IBM_X40),y)
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--enable-sse \
-			--disable-amd3dnow \
-			--disable-amd3dnowext \
-			--enable-mmx \
-			--enable-mmx2
+ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)
+CONFIGURE_CPU_OPTS:=	--enable-mmx
 else
-CONFIGURE_CPU_OPTS:=	--disable-ssse3 \
-			--disable-sse \
-			--disable-amd3dnow \
-			--disable-amd3dnowext \
-			--disable-mmx \
-			--disable-mmx2
+CONFIGURE_CPU_OPTS:=    --disable-mmx 
+endif
+ifeq ($(ADK_TARGET_CPU_WITH_MMXEXT),y)
+CONFIGURE_CPU_OPTS:=	--enable-mmx2
+else
+CONFIGURE_CPU_OPTS:=    --disable-mmx2 
+endif
+ifeq ($(ADK_TARGET_CPU_WITH_SSE),y)
+CONFIGURE_CPU_OPTS:=	--enable-sse
+else
+CONFIGURE_CPU_OPTS:=    --disable-sse 
 endif
 
 # gcc 4.5 produces internal compiler error with -Os
@@ -63,7 +56,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--target-os=linux \
 			--arch=${CPU_ARCH} \
 			--enable-cross-compile \
-			--sysroot=${STAGING_DIR} \
+			--sysroot=${STAGING_TARGET_DIR} \
 			--source-path=${WRKSRC} \
 			--cross-prefix=${TARGET_CROSS} \
 			--cc=$(TARGET_CC) \

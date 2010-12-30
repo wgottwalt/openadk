@@ -49,24 +49,24 @@ PKG_CONFIGURE_OPTS:=
 
 ifneq (${ADK_PACKAGE_FREERADIUS_MOD_LDAP},)
 PKG_CONFIGURE_LIBS+=	-lcrypto -lssl
-PKG_CONFIGURE_OPTS+=	--with-rlm_ldap-include-dir="${STAGING_DIR}/usr/include" \
-			--with-rlm_ldap-lib-dir="${STAGING_DIR}/usr/lib"
+PKG_CONFIGURE_OPTS+=	--with-rlm_ldap-include-dir="${STAGING_TARGET_DIR}/usr/include" \
+			--with-rlm_ldap-lib-dir="${STAGING_TARGET_DIR}/usr/lib"
 else
 PKG_CONFIGURE_OPTS+=	--without-rlm_ldap
 endif
 
 ifneq (${ADK_PACKAGE_FREERADIUS_MOD_SQL_MYSQL},)
 PKG_CONFIGURE_LIBS+=	-lz
-PKG_CONFIGURE_OPTS+=	--with-mysql-include-dir="${STAGING_DIR}/usr/include" \
-			--with-mysql-lib-dir="${STAGING_DIR}/usr/lib/mysql" \
+PKG_CONFIGURE_OPTS+=	--with-mysql-include-dir="${STAGING_TARGET_DIR}/usr/include" \
+			--with-mysql-lib-dir="${STAGING_TARGET_DIR}/usr/lib/mysql" \
 			--without-threads \
 			--with-rlm_sql
 else
 PKG_CONFIGURE_OPTS+=	--without-rlm_sql_mysql
 endif
 ifneq (${ADK_PACKAGE_FREERADIUS_MOD_SQL_PGSQL},)
-PKG_CONFIGURE_OPTS+=	--with-rlm_sql_postgresql-include-dir="${STAGING_DIR}/usr/include" \
-			--with-rlm_sql_postgresql-lib-dir="${STAGING_DIR}/usr/lib" \
+PKG_CONFIGURE_OPTS+=	--with-rlm_sql_postgresql-include-dir="${STAGING_TARGET_DIR}/usr/include" \
+			--with-rlm_sql_postgresql-lib-dir="${STAGING_TARGET_DIR}/usr/lib" \
 			--with-rlm_sql
 else
 PKG_CONFIGURE_OPTS+=	--without-rlm_sql_postgresql
@@ -121,8 +121,8 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
-			--with-openssl-includes=${STAGING_DIR}/usr/include \
-			--with-openssl-libraries=${STAGING_DIR}/usr/lib \
+			--with-openssl-includes=${STAGING_TARGET_DIR}/usr/include \
+			--with-openssl-libraries=${STAGING_TARGET_DIR}/usr/lib \
 			--with-system-libltld \
 			--enable-strict-dependencies \
 			--with-raddbdir=/etc/freeradius \

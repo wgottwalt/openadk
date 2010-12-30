@@ -20,8 +20,8 @@ $(eval $(call PKG_template,IPCAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIGURE_ARGS+=	--with-ifst=linux \
 			--with-psrc=pcap \
-			--with-pcap-include="${STAGING_DIR}/usr/include" \
-			--with-pcap-libraries="${STAGING_DIR}/usr/lib"
+			--with-pcap-include="${STAGING_TARGET_DIR}/usr/include" \
+			--with-pcap-libraries="${STAGING_TARGET_DIR}/usr/lib"
 
 pre-build:
 	touch $(WRKBUILD)/cfglex.c $(WRKBUILD)/cslex.c

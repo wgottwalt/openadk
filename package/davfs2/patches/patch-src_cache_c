@@ -1,0 +1,10 @@
+--- davfs2-1.4.6.orig/src/cache.c	2009-11-15 11:15:17.000000000 +0100
++++ davfs2-1.4.6/src/cache.c	2010-12-27 22:02:47.000000000 +0100
+@@ -55,7 +55,6 @@
+ #ifdef HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+ #endif
+-#include <sys/xattr.h>
+ 
+ #include <ne_alloc.h>
+ #include <ne_string.h>

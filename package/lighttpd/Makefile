@@ -68,7 +68,7 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_STATUS,status))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_USERTRACK,usertrack))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
-TCPPFLAGS+=		-I$(STAGING_DIR)/usr/include/libxml2
+TCPPFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libxml2
 CONFIGURE_ENV+=		PCRE_LIB="-lpcre"
 CONFIGURE_ARGS+=	\
 			--libdir=/usr/lib/lighttpd \
@@ -84,7 +84,7 @@ CONFIGURE_ARGS+=	\
 			--with-pcre \
 			--without-valgrind \
 			--with-webdav-props \
-			--with-openssl='${STAGING_DIR}/usr'
+			--with-openssl='${STAGING_TARGET_DIR}/usr'
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	install -m0755 -d $(IDIR_LIGHTTPD)/etc

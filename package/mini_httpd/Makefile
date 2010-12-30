@@ -34,8 +34,8 @@ do-build:
 	${MAKE} -C ${WRKBUILD} \
 		CC="${TARGET_CC}" \
 		SSL_DEFS="-DUSE_SSL -DHAVE_OPENSSL" \
-		SSL_INC="-I${STAGING_DIR}/usr/include" \
-		SSL_LIBS="-L${STAGING_DIR}/usr/lib -lssl -lcrypto" \
+		SSL_INC="-I${STAGING_TARGET_DIR}/usr/include" \
+		SSL_LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lssl -lcrypto" \
 		all
 
 do-install:

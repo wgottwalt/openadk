@@ -13,7 +13,7 @@ PKG_URL:=		http://www.rpm.org/
 PKG_SITES:=		http://rpm5.org/files/rpm/rpm-5.3/
 
 PKG_HOST_DEPENDS:=	!cygwin !darwin
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
 
 include $(TOPDIR)/mk/package.mk
 

@@ -1,70 +1,58 @@
 menu "Crypto kernel modules"
 config ADK_KERNEL_CRYPTO
-	boolean
-	default n
+	tristate
 
 config ADK_KERNEL_CRYPTO_HW
-	boolean
-	default n
+	tristate
 
 config ADK_KERNEL_OCF_FIPS
 	boolean
-	default n
 
 config ADK_KERNEL_OCF_CRYPTODEV
 	boolean
-	default n
-
-config ADK_KERNEL_CRYPTO_MANAGER
-	tristate
-	default n
 
 config ADK_KERNEL_OCF_OCF
 	boolean
-	default n
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_OCF_FIPS
 	select ADK_KERNEL_OCF_CRYPTODEV
+	default n
 
 config ADK_KERNEL_CRYPTO_AES
 	boolean
-	default n
 
 config ADK_KERNEL_CRYPTO_SHA256
 	boolean
-	default n
 
 config ADK_KERNEL_CRYPTO_CBC
 	boolean
-	default n
 	
 comment "Hardware cryptography"
 
 menu "Hardware crypto devices"
 
 config ADK_KPACKAGE_KMOD_CRYPTO_DEV_GEODE
-	prompt "Support for the Geode LX/GX AES engine"
+	prompt "kmod-crypto-dev-geode.................. Support for the Geode LX/GX AES engine"
 	tristate
-	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KERNEL_CRYPTO
+	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
 	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
-	depends on ADK_LINUX_ALIX
-	default y if (ADK_LINUX_ALIX && ADK_PACKAGE_OPENSWAN)
-	default y if (ADK_LINUX_ALIX && ADK_PACKAGE_STRONGSWAN)
+	depends on ADK_TARGET_WITH_GEODE_CRYPTO
+	default y if ADK_TARGET_WITH_GEODE_CRYPTO
 	default n
 	help
 	  Say 'Y' here to use the AMD Geode LX processor on-board AES
 	  engine for the CryptoAPI AES algorithm.
 
 config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
-	prompt "Driver HIFN 795x crypto accelerator chips"
+	prompt "kmod-crypto-dev-hifn-795x.............. Driver for HIFN 795x crypto accelerator chips"
 	tristate
-	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KERNEL_CRYPTO
-	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KERNEL_CRYPTO_HW
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_DES
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
 	  This option allows you to have support for HIFN 795x crypto adapters.
@@ -72,28 +60,30 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 endmenu
 
 menu "OpenBSD Cryptographic framework"
-depends on !(ADK_LINUX_CRIS_FOXBOARD || ADK_LINUX_MIPS_AG241 || ADK_LINUX_QEMU || ADK_LINUX_ARM_FOXG20)
-
 config ADK_KPACKAGE_KMOD_OCF_HIFN
-	prompt "kmod-cryptodev-hifn................ hifn engine"
+	prompt "kmod-ocf-hifn..................... hifn engine"
 	tristate
 	default n
 	select ADK_KERNEL_OCF_OCF
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
+	select ADK_KPACKAGE_KMOD_CRYPTO_AES
 	help
 	  Engine for cryptodev that uses Hifn based accelerators
 	  such as the 7951, 7955, 7956, 7751, 7811.
 
 config ADK_KPACKAGE_KMOD_OCF_SAFE
-	prompt "kmod-cryptodev-safe................ safenet engine"
+	prompt "kmod-ocf-safe..................... safenet engine"
 	tristate
 	default n
 	select ADK_KERNEL_OCF_OCF
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
+	select ADK_KPACKAGE_KMOD_CRYPTO_AES
 	help
 	  Engine for cryptodev that uses a number of the safenet Excel
 	  crypto accelerators. Currently for the 1141 and 1741.
 
 config ADK_KPACKAGE_KMOD_OCF_IXP4XX
-	prompt "kmod-cryptodev-ixp4xx.............. IXP4xx engine"
+	prompt "kmod-ocf-ixp4xx................... IXP4xx engine"
 	tristate
 	default n
 	select ADK_KERNEL_OCF_OCF
@@ -103,11 +93,11 @@ config ADK_KPACKAGE_KMOD_OCF_IXP4XX
 	  Requires the Intel Access library.
 
 config ADK_KPACKAGE_KMOD_OCF_TALITOS
-	prompt "kmod-cryptodev-talitos............. talitos engine"
+	prompt "kmod-ocf-talitos.................. talitos engine"
 	tristate
 	default n
 	select ADK_KERNEL_OCF_OCF
-	depends on ADK_powerpc || ADK_m68k || ADK_ppc
+	depends on ADK_ppc
 	help
 	  Engine for cryptodev that uses Freescale's security engine (SEC/talitos).
 
@@ -116,58 +106,90 @@ endmenu
 comment "Software cryptography"
 
 menu "Crypto core / Block and Hash modes"
-config ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	prompt "kmod-crypto-algapi.................. Crypto algorithm API"
+
+config ADK_KERNEL_MOD_CRYPTO_PCOMP
 	tristate
-	default n
+
+config ADK_KPACKAGE_KMOD_CRYPTO_PCOMP2
+	tristate
 	select ADK_KERNEL_CRYPTO
+	select ADK_KERNEL_MOD_CRYPTO_PCOMP
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	default n
 	help
 
-config ADK_KPACKAGE_KMOD_CRYPTO_AEAD
-	prompt "kmod-crypto-aead.................... Crypto algorithm AEAD"
+config ADK_KERNEL_MOD_CRYPTO_ALGAPI
 	tristate
-	default n
+	
+config ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	tristate
 	select ADK_KERNEL_CRYPTO
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KERNEL_MOD_CRYPTO_ALGAPI
+	default n
 	help
 
-config ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
-	prompt "kmod-crypto-manager.................. Crypto algorithm manager"
+config ADK_KERNEL_MOD_CRYPTO_AEAD
 	tristate
+
+config ADK_KPACKAGE_KMOD_CRYPTO_AEAD2
+	tristate
+	select ADK_KERNEL_CRYPTO
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KERNEL_MOD_CRYPTO_AEAD
 	default n
-	depends on !ADK_KERNEL_CRYPTO_MANAGER
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD
 	help
 
-config ADK_KPACKAGE_KMOD_CRYPTO_HASH
-	prompt "kmod-crypto-hash..................... Crypto hash support"
+config ADK_KERNEL_MOD_CRYPTO_HASH
 	tristate
+
+config ADK_KPACKAGE_KMOD_CRYPTO_HASH2
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KERNEL_MOD_CRYPTO_HASH
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 
-config ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
-	prompt "kmod-crypto-blkcipher................ Crypto block cipher support"
+config ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
 	tristate
-	default n
+
+config ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
+	default n
+	help
+
+config ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
+	tristate
+
+config ADK_KERNEL_MOD_CRYPTO_MANAGER
+	tristate
+
+config ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+	prompt "kmod-crypto-manager2................. Crypto algorithm manager"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD2
+	select ADK_KPACKAGE_KMOD_CRYPTO_PCOMP2
+	select ADK_KERNEL_MOD_CRYPTO_MANAGER
+	select ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
+	default n
 	help
 
 config ADK_KPACKAGE_KMOD_CRYPTO_AUTHENC
 	prompt "kmod-crypto-authenc.................. AuthENC (IPsec)"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 
 config ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
 	prompt "kmod-crypto-seqiv.................... Sequence Number IV Generator"
-	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	help
 	  This IV generator generates an IV based on a sequence number by
 	  xoring it with a salt.  This algorithm is mainly useful for CTR
@@ -176,8 +198,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	prompt "kmod-crypto-cbc...................... CBC support"
 	tristate
 	depends on !ADK_KERNEL_CRYPTO_CBC
-	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 	  CBC: Cipher Block Chaining mode
@@ -186,7 +208,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 config ADK_KPACKAGE_KMOD_CRYPTO_CCM
 	prompt "kmod-crypto-ccm...................... CCM support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	default n
 	help
@@ -195,7 +217,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CCM
 config ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	prompt "kmod-crypto-ctr...................... CTR support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
 	default n
 	help
@@ -205,9 +227,9 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CTR
 config ADK_KPACKAGE_KMOD_CRYPTO_ECB
 	prompt "kmod-crypto-ecb...................... ECB support"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
 	help
 	  ECB: Electronic CodeBook mode
 	  This is the simplest block cipher algorithm.  It simply encrypts
@@ -216,9 +238,9 @@ config ADK_KPACKAGE_KMOD_CRYPTO_ECB
 config ADK_KPACKAGE_KMOD_CRYPTO_HMAC
 	prompt "kmod-crypto-hmac..................... HMAC support"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
 	help
 	  HMAC: Keyed-Hashing for Message Authentication (RFC2104).
 	  This is required for IPSec.
@@ -227,14 +249,18 @@ config ADK_KPACKAGE_KMOD_CRYPTO_XCBC
 	prompt "kmod-crypto-xcbc..................... XCBC support"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	help
           XCBC: Keyed-Hashing with encryption algorithm
 
-config ADK_KPACKAGE_KMOD_CRYPTO_RNG2
-	prompt "kmod-crypto-rng...................... RNG support"
+config ADK_KERNEL_MOD_CRYPTO_RNG
 	tristate
+
+config ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+	prompt "kmod-crypto-rng2..................... RNG support"
+	tristate
+	select ADK_KERNEL_MOD_CRYPTO_RNG
 	default n
 	help
 	  Random number generator
@@ -246,8 +272,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_MD4
 	prompt "kmod-crypto-md4...................... MD4 digest algorithm"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  MD4 message digest algorithm (RFC1320).
 
@@ -255,8 +281,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_MD5
 	prompt "kmod-crypto-md5...................... MD5 digest algorithm"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  MD5 message digest algorithm (RFC1321).
 
@@ -264,8 +290,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SHA1
 	prompt "kmod-crypto-sha1..................... SHA1 digest algorithm"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2).
 
@@ -274,8 +300,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SHA256
 	tristate
 	default n
 	depends on !ADK_KERNEL_CRYPTO_SHA256
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  SHA256 secure hash standard (DFIPS 180-2).
 	  
@@ -286,8 +312,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SHA512
 	prompt "kmod-crypto-sha512................... SHA512 digest algorithm"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  SHA512 secure hash standard (DFIPS 180-2).
 	  
@@ -301,8 +327,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_WP512
 	prompt "kmod-crypto-whirlpool................ Whirlpool digest algorithms"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  Whirlpool hash algorithm 512, 384 and 256-bit hashes
 
@@ -316,8 +342,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_TGR192
 	prompt "kmod-crypto-tiger.................... Tiger digest algorithms"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	help
 	  Tiger hash algorithm 192, 160 and 128-bit hashes
 
@@ -327,7 +353,6 @@ config ADK_KPACKAGE_KMOD_CRYPTO_TGR192
 
 	  See also:
 	  <http://www.cs.technion.ac.il/~biham/Reports/Tiger/>.
-
 endmenu
 
 menu "Cipher algoritms"
@@ -335,9 +360,9 @@ menu "Cipher algoritms"
 config ADK_KPACKAGE_KMOD_CRYPTO_AES
 	prompt "kmod-crypto-aes...................... AES cipher algorithms"
 	tristate
-	default n
 	depends on !ADK_KERNEL_CRYPTO_AES
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	default n
 	help
 	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 
 	  algorithm.
@@ -358,9 +383,9 @@ config ADK_KPACKAGE_KMOD_CRYPTO_AES
 config ADK_KPACKAGE_KMOD_CRYPTO_AES_586
 	prompt "kmod-crypto-aes-i586................. AES cipher algorithms (i586)"
 	tristate
-	default n
 	depends on ADK_x86
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	default n
 	help
 	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 
 	  algorithm.
@@ -381,8 +406,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_AES_586
 config ADK_KPACKAGE_KMOD_CRYPTO_ANUBIS
 	prompt "kmod-crypto-anubis................... Anubis cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Anubis cipher algorithm.
 
@@ -397,8 +422,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_ANUBIS
 config ADK_KPACKAGE_KMOD_CRYPTO_ARC4
 	prompt "kmod-crypto-arc4..................... ARC4 cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  ARC4 cipher algorithm.
 
@@ -411,8 +436,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_ARC4
 config ADK_KPACKAGE_KMOD_CRYPTO_BLOWFISH
 	prompt "kmod-crypto-blowfish................. Blowfish cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Blowfish cipher algorithm, by Bruce Schneier.
 	  
@@ -426,8 +451,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_BLOWFISH
 config ADK_KPACKAGE_KMOD_CRYPTO_CAMELLIA
 	prompt "kmod-crypto-camellia................. Camellia cipher algorithms"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Camellia cipher algorithms module.
 
@@ -442,8 +467,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CAMELLIA
 config ADK_KPACKAGE_KMOD_CRYPTO_CAST5
 	prompt "kmod-crypto-cast5.................... CAST5 (CAST-128) cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  The CAST5 encryption algorithm (synonymous with CAST-128) is
 	  described in RFC2144.
@@ -451,8 +476,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CAST5
 config ADK_KPACKAGE_KMOD_CRYPTO_CAST6
 	prompt "kmod-crypto-cast6.................... CAST6 (CATS-256) cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  The CAST6 encryption algorithm (synonymous with CAST-256) is
 	  described in RFC2612.
@@ -460,24 +485,24 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CAST6
 config ADK_KPACKAGE_KMOD_CRYPTO_DES
 	prompt "kmod-crypto-des...................... DES and Triple DES EDE cipher algorithms"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  DES cipher algorithm (FIPS 46-2), and Triple DES EDE (FIPS 46-3).
 
 config ADK_KPACKAGE_KMOD_CRYPTO_FCRYPT
 	prompt "kmod-crypto-fcrypt................... FCrypt cipher algorithms"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  FCrypt algorithm used by RxRPC.
 
 config ADK_KPACKAGE_KMOD_CRYPTO_KHAZAD
 	prompt "kmod-crypto-khazad................... Khazad cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Khazad cipher algorithm.
 
@@ -491,8 +516,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_KHAZAD
 config ADK_KPACKAGE_KMOD_CRYPTO_SERPENT
 	prompt "kmod-crypto-serpent.................. Serpent cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Serpent cipher algorithm, by Anderson, Biham & Knudsen.
 
@@ -506,8 +531,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SERPENT
 config ADK_KPACKAGE_KMOD_CRYPTO_TEA
 	prompt "kmod-crypto-tea...................... TEA, XTEA and XETA cipher algorithms"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  TEA cipher algorithm.
 
@@ -525,8 +550,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_TEA
 config ADK_KPACKAGE_KMOD_CRYPTO_TWOFISH
 	prompt "kmod-crypto-twofish.................. Twofish cipher algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Twofish cipher algorithm.
 	  
@@ -541,9 +566,9 @@ config ADK_KPACKAGE_KMOD_CRYPTO_TWOFISH
 config ADK_KPACKAGE_KMOD_CRYPTO_TWOFISH_586
 	prompt "kmod-crypto-twofish-586.............. Twofish cipher algorithm (i586)"
 	tristate
-	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	depends on ADK_x86
+	default n
 	help
 	  Twofish cipher algorithm.
 	  
@@ -558,8 +583,8 @@ config ADK_KPACKAGE_KMOD_CRYPTO_TWOFISH_586
 config ADK_KPACKAGE_KMOD_CRYPTO_NULL
 	prompt "kmod-crypto-null..................... Null algorithms"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
 	help
 	  These are 'Null' algorithms, used by IPsec, which do nothing.
@@ -571,8 +596,8 @@ menu "Compression"
 config ADK_KPACKAGE_KMOD_CRYPTO_DEFLATE
 	prompt "kmod-crypto-deflate.................. Deflate compression algorithm"
 	tristate
-	default n
 	select ADK_KERNEL_CRYPTO
+	default n
 	help
 	  This is the Deflate algorithm (RFC1951), specified for use in
 	  IPSec with the IPCOMP protocol (RFC3173, RFC2394).
@@ -582,15 +607,15 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEFLATE
 config ADK_KPACKAGE_KMOD_CRYPTO_LZO
 	prompt "kmod-crypto-lzo...................... LZO compression algorithm"
 	tristate
-	default n
 	select ADK_KERNEL_CRYPTO
+	default n
 	help
 
 config ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
 	prompt "kmod-crypto-michael-mic.............. Michael MIC keyed digest algorithm"
 	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI
 	help
 	  Michael MIC is used for message integrity protection in TKIP
 	  (IEEE 802.11i). This algorithm is required for TKIP, but it
@@ -600,9 +625,9 @@ config ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
 config ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
 	prompt "kmod-crypto-crc32c................... CRC32c CRC algorithm"
 	tristate
-	default n
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	select ADK_KPACKAGE_KMOD_LIBCRC32C
+	default n
 	help
 	  Castagnoli, et al Cyclic Redundancy-Check Algorithm.  Used
 	  by iSCSI for header and data digests and by others.
@@ -610,5 +635,4 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
           Module will be crc32c.
 
 endmenu
-
 endmenu

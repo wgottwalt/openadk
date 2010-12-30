@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--disable-yydebug \
 			--with-pcap=linux
 TCFLAGS+=		${TCPPFLAGS}
 INSTALL_TARGET=		install install-shared
-MAKE_FLAGS+=		STAGING_DIR=$(STAGING_DIR)
+MAKE_FLAGS+=		STAGING_TARGET_DIR=$(STAGING_TARGET_DIR)
 
 ifneq (${ADK_PACKAGE_LIBPCAP_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6

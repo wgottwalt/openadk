@@ -10,8 +10,6 @@ PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/
 
-PKG_TARGET_DEPENDS:=	alix
-
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk

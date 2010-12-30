@@ -44,15 +44,15 @@ SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_EXTRA}+=		ulogd-mod-extra-install
 TCFLAGS+=		-fPIC
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
-CONFIGURE_ARGS+=	--with-mysql=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-mysql=${STAGING_TARGET_DIR}/usr
 endif
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_PGSQL},)
-CONFIGURE_ARGS+=	--with-pgsql=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-pgsql=${STAGING_TARGET_DIR}/usr
 endif
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_SQLITE},)
-CONFIGURE_ARGS+=	--with-sqlite3=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-sqlite3=${STAGING_TARGET_DIR}/usr
 endif
 
 post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}

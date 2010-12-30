@@ -21,7 +21,7 @@ $(eval $(call PKG_template,DANSGUARDIAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE
 
 ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
-			-I${STAGING_DIR}/usr/include/uClibc++" \
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
 			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
 endif
 

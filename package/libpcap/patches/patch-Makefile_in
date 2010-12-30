@@ -6,8 +6,8 @@
  	@rm -f $@ $@.tmp
 -	sed -e 's|@includedir[@]|$(includedir)|g' \
 -	    -e 's|@libdir[@]|$(libdir)|g' \
-+	sed -e 's|@includedir[@]|$(STAGING_DIR)$(includedir)|g' \
-+	    -e 's|@libdir[@]|$(STAGING_DIR)$(libdir)|g' \
++	sed -e 's|@includedir[@]|$(STAGING_TARGET_DIR)$(includedir)|g' \
++	    -e 's|@libdir[@]|$(STAGING_TARGET_DIR)$(libdir)|g' \
  	    -e 's|@LIBS[@]|$(LIBS)|g' \
  	    -e 's|@V_RPATH_OPT[@]|$(V_RPATH_OPT)|g' \
  	    $(srcdir)/pcap-config.in >$@.tmp

@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gtk+
-PKG_VERSION:=		2.18.6
+PKG_VERSION:=		2.22.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f98617af9f6be3065f64248f78dae2b7
+PKG_MD5SUM:=		dd1830395a6b9265a1e1989af7a3c5bf
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		glib
 PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
+PKG_BUILDDEP+=		gdk-pixbuf libXcomposite
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/2.18/
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/2.22/
 
 PKG_SUBPKGS:=		LIBGTK
 
@@ -26,8 +27,6 @@ $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 CONFIGURE_ENV+=		gio_can_sniff=no \
 			ac_cv_path_GTK_UPDATE_ICON_CACHE=""
-CONFIGURE_ARGS+=	--without-libtiff \
-			--without-libjpeg
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGTK}/usr/lib

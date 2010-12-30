@@ -5,13 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		5
+PKG_RELEASE:=		7
 PKG_DESCR:=		openadk installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
-PKG_URL:=		http://www.openadk.org/
-
-PKG_TARGET_DEPENDS:=	alix wrap routerboard foxg20
+PKG_URL:=		http://openadk.org/
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
@@ -29,13 +27,16 @@ pre-configure:
 
 do-install:
 	${INSTALL_DIR} $(IDIR_ADKINSTALL)/sbin
-ifeq ($(ADK_LINUX_MIPS_RB532),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 	${INSTALL_BIN} ./src/adkinstall.rb532 \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_LINUX_ARM_FOXG20),y)
+else ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 	${INSTALL_BIN} ./src/adkinstall.foxg20 \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_LINUX_MIPS_RB4XX),y)
+else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
+	${INSTALL_BIN} ./src/adkinstall.rb4xx \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
+else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
 	${INSTALL_BIN} ./src/adkinstall.rb4xx \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else

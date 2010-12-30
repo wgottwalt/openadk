@@ -37,9 +37,9 @@ CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
 INSTALL_TARGET=		install-etc install-bin
 
 post-configure:
-	@echo 'CFLAGS+="-I${STAGING_DIR}/usr/include/iconv"' >> \
+	@echo 'CFLAGS+="-I${STAGING_TARGET_DIR}/usr/include/iconv"' >> \
 		${WRKBUILD}/Makefile.settings
-	@echo 'LFLAGS+="-L${STAGING_DIR}/usr/lib"' >> \
+	@echo 'LFLAGS+="-L${STAGING_TARGET_DIR}/usr/lib"' >> \
 		${WRKBUILD}/Makefile.settings
 
 post-install:

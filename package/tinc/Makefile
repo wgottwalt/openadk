@@ -19,8 +19,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,TINC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-kernel=${LINUX_DIR} \
-			--with-zlib=${STAGING_DIR}/usr/ \
-			--with-lzo-include=${STAGING_DIR}/usr/include/lzo
+			--with-zlib=${STAGING_TARGET_DIR}/usr/ \
+			--with-lzo-include=${STAGING_TARGET_DIR}/usr/include/lzo
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TINC}/usr/sbin

@@ -5,8 +5,6 @@ config ADKVERSION
 	string
 	option env="ADKVERSION"
 
-mainmenu "OpenADK Configuration"
-
 config MODULES
 	bool
 	default y
@@ -15,144 +13,46 @@ config ADK_HAVE_DOT_CONFIG
 	bool
 	default y
 
-menu "ADK settings"
+mainmenu "OpenADK Configuration"
 
-config ADK_VENDOR
-	string "vendor name"
-	default "openadk"
-	help
-	  Vendor string is used for toolchain.
-
-config ADK_HOST
-	string "webserver for packages and distfiles"
-	default "www.openadk.org"
-	help
-	  Configure host for IPKG package management.
-
-config ADK_DEVELSYSTEM
-	bool "Compile a ADK development system"
-	default n
-	select ADK_PACKAGE_BASH
-	select ADK_PACKAGE_BINUTILS
-	select ADK_PACKAGE_BZIP2
-	select ADK_PACKAGE_DIFFUTILS
-	select ADK_PACKAGE_FILE
-	select ADK_PACKAGE_GAWK
-	select ADK_PACKAGE_GCC
-	select ADK_PACKAGE_GIT
-	select ADK_PACKAGE_GREP
-	select ADK_PACKAGE_UCLIBC_DEV if ADK_TARGET_LIB_UCLIBC
-	select ADK_PACKAGE_EGLIBC_DEV if ADK_TARGET_LIB_EGLIBC
-	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
-	select ADK_PACKAGE_LIBNCURSES
-	select ADK_PACKAGE_LIBNCURSES_DEV
-	select ADK_PACKAGE_M4
-	select ADK_PACKAGE_MAKE
-	select ADK_PACKAGE_PATCH
-	select ADK_PACKAGE_PKG_CONFIG
-	select ADK_PACKAGE_MICROPERL
-	select ADK_PACKAGE_TSORT
-	select BUSYBOX_STAT
-	select BUSYBOX_FEATURE_STAT_FORMAT
-	select BUSYBOX_TR
-	select BUSYBOX_FEATURE_TR_CLASSES
-	select ADK_PACKAGE_ZLIB
-	select ADK_PACKAGE_ZLIB_DEV
-	select ADK_PACKAGE_XZ
-	help
-	  After bootstrapping a Linux system you might want to
-	  switch to native builds with your target. 
-	  If you choose this option, all necessary software needed
-	  for native building will be selected by this option.
-
-config ADK_DEBUG
-	bool "Enable debug support"
-	default n
-	help
-	  All packages and libc will be compiled and packaged with debug information.
-	  Mostly useful for NFS root or big USB/CF or hard disk setups.
-
-config ADK_STATIC
-	bool "Link applications statically by default"
-	default n
-	help
-	  Useful for toolchain only target devices.
-
-config ADK_MAKE_JOBS
-	int
-	default 1 if ! ADK_MAKE_PARALLEL
-
-config ADK_MAKE_PARALLEL
-	prompt "Enable parallel building of packages that claim to support it"
+config ADK_CHOOSE_TARGET_SYSTEM
 	boolean
+	default y if ADK_CHOOSE_TARGET_SYSTEM_ARM
+	default y if ADK_CHOOSE_TARGET_SYSTEM_ARMEB
+	default y if ADK_CHOOSE_TARGET_SYSTEM_CRIS
+	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS
+	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPSEL
+	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS64
+	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS64EL
+	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC
+	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC64
+	default y if ADK_CHOOSE_TARGET_SYSTEM_SPARC
+	default y if ADK_CHOOSE_TARGET_SYSTEM_SPARC64
+	default y if ADK_CHOOSE_TARGET_SYSTEM_X86
+	default y if ADK_CHOOSE_TARGET_SYSTEM_X86_64
 	default n
 
-config ADK_MAKE_JOBS
-	prompt "How many jobs to use"
-	int
-	default 2
-	depends on ADK_MAKE_PARALLEL
-	help
-	  The number specified here will be passed to make as N in '-jN'
-
-config ADK_FORCE_PARALLEL
-	prompt "Force parallel building of all packages (DANGEROUS)"
-	bool
-	default n
-	depends on ADK_MAKE_PARALLEL
-	help
-	  Do not enable this! It's for testing purposes only.
-
-config ADK_TARGET_IP
-	prompt "Set target ip address for make check"
-	string
-	default "127.0.0.1"
-	help
-
-choice 
-prompt "Hostsystem (do not change!)"
-config ADK_HOST_LINUX
-	prompt "Linux"
-	boolean
-
-config ADK_HOST_FREEBSD
-	prompt "FreeBSD"
-	boolean
-
-config ADK_HOST_MIRBSD
-	prompt "MirBSD"
-	boolean
-
-config ADK_HOST_OPENBSD
-	prompt "OpenBSD"
-	boolean
-
-config ADK_HOST_NETBSD
-	prompt "NetBSD"
-	boolean
-
-config ADK_HOST_DARWIN
-	prompt "Darwin"
-	boolean
-
-config ADK_HOST_CYGWIN
-	prompt "Cygwin"
-	boolean
-
-endchoice
-endmenu
-
-source "target/Config.in"
+source "target/config/Config.in"
 
 menu "Runtime configuration"
-source "target/Config.in.runtime"
+depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+source "target/config/Config.in.runtime"
+endmenu
+
+menu "Package collection"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+source "target/packages/Config.in"
 endmenu
 
 menu "Package selection"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
 
 menu "Kernel configuration"
+depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/linux/Config.in"
 endmenu
+
+source "target/config/Config.in.adk"

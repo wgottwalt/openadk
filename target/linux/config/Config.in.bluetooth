@@ -1,5 +1,5 @@
 menu "Bluetooth"
-depends on ADK_TARGET_WITH_USB
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI
 
 config ADK_KPACKAGE_KMOD_BT
 	prompt "kmod-bluetooth.................... Bluetooth drivers and network stack"
@@ -68,7 +68,6 @@ config ADK_KPACKAGE_KMOD_BT_HIDP
 	prompt "kmod-bluetooth-hidp............... HIDP protocol support"
 	tristate
 	default n
-	depends on !ADK_LINUX_CRIS_FOXBOARD
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	depends on ADK_KPACKAGE_KMOD_BT

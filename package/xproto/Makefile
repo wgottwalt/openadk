@@ -14,7 +14,7 @@ include $(TOPDIR)/mk/package.mk
 
 # workaround for makekeys compile on non-Linux systems
 post-install:
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/xproto
-	${CP} ${WRKINST}/usr/include/X11 ${STAGING_DIR}/usr/include/xproto
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/xproto
+	${CP} ${WRKINST}/usr/include/X11 ${STAGING_TARGET_DIR}/usr/include/xproto
 
 include ${TOPDIR}/mk/pkg-bottom.mk

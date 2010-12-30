@@ -1,5 +1,7 @@
+source target/linux/config/Config.in.systems
 source target/linux/config/Config.in.cpu
 source target/linux/config/Config.in.block
+source target/linux/config/Config.in.flash
 source target/linux/config/Config.in.fs
 source target/linux/config/Config.in.netdevice
 source target/linux/config/Config.in.usb
@@ -12,6 +14,7 @@ source target/linux/config/Config.in.multimedia
 source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.bluetooth
 #source target/linux/config/Config.in.isdn
+source target/linux/config/Config.in.watchdog
 source target/linux/config/Config.in.leds
 source target/linux/config/Config.in.misc
 source target/linux/config/Config.in.lib

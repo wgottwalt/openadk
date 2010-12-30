@@ -1,0 +1,80 @@
+config ADK_KERNEL_MTD
+ 	boolean
+ 
+config ADK_KERNEL_MTD_NAND
+	boolean
+
+config ADK_KERNEL_MTD_NAND_PLATFORM
+	boolean
+
+config ADK_KERNEL_MTD_CHAR
+	boolean
+
+config ADK_KERNEL_MTD_BLKDEVS
+	boolean
+
+config ADK_KERNEL_MTD_BLOCK
+	boolean
+
+config ADK_KERNEL_MTD_PARTITIONS
+	boolean
+
+config ADK_KERNEL_MTD_ROOTFS_ROOT_DEV
+	boolean
+
+config ADK_KERNEL_MTD_CFI
+	boolean
+
+config ADK_KERNEL_MTD_GEN_PROBE
+	boolean
+
+config ADK_KERNEL_MTD_PHYSMAP
+	boolean
+
+config ADK_KERNEL_MTD_NAND_RB4XX
+	boolean
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB411
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB433
+	default n
+
+config ADK_KERNEL_MTD_AR7_PARTS
+	boolean
+	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
+	default n
+
+config ADK_KERNEL_MTD_CFI_INTELEXT
+	boolean
+	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
+	default n
+
+config ADK_TARGET_NAND
+	boolean
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_PARTITIONS
+	select ADK_KERNEL_MTD_NAND
+	select ADK_KERNEL_MTD_NAND_PLATFORM
+	select ADK_KERNEL_MTD_CHAR
+	select ADK_KERNEL_MTD_BLKDEVS
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_MTD_BLOCK
+	default y if ADK_TARGET_WITH_NAND
+	default n
+
+config ADK_TARGET_MTD
+	boolean
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_PARTITIONS
+	select ADK_KERNEL_MTD_CHAR
+	select ADK_KERNEL_MTD_BLKDEVS
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_MTD_BLOCK
+	select ADK_KERNEL_MTD_ROOTFS_ROOT_DEV
+	select ADK_KERNEL_MTD_CFI
+	select ADK_KERNEL_MTD_GEN_PROBE
+	select ADK_KERNEL_MTD_PHYSMAP
+	default y if ADK_TARGET_WITH_MTD
+	default n

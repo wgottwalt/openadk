@@ -24,30 +24,23 @@ image-prepare-post:
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
 
-kernel-package: $(LINUX_DIR)/vmlinux
-	$(TRACE) target/$(ADK_TARGET)-create-kernel-package
+kernel-package: $(KERNEL)
+	$(TRACE) target/$(ADK_TARGET_ARCH)-create-kernel-package
 	rm -rf $(KERNEL_PKGDIR)
 	@mkdir -p $(KERNEL_PKGDIR)/boot
-	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/vmlinuz-adk
+	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/kernel
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${KERNEL_VERSION} ${CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
-	$(TRACE) target/$(ADK_TARGET)-install-kernel-package
+	$(TRACE) target/$(ADK_TARGET_ARCH)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 
-ifeq ($(ADK_HW),)
-INITRAMFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}
-ROOTFSSQUASHFS=		${ADK_TARGET}-${ADK_LIBC}-${FS}.img
-ROOTFSTARBALL=		${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
-ROOTFSUSERTARBALL=	${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
-INITRAMFS_PIGGYBACK=	${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
-else
-INITRAMFS=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}
-ROOTFSSQUASHFS=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.img
-ROOTFSTARBALL=		${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}+kernel.tar.gz
-ROOTFSUSERTARBALL=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.tar.gz
-INITRAMFS_PIGGYBACK=	${ADK_HW}-${ADK_TARGET}-${ADK_LIBC}-${FS}.cpio
-endif
+TARGET_KERNEL:=		$(BIN_DIR)/${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_FS}-kernel
+INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
+ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
+ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
+ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
+INITRAMFS_PIGGYBACK=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.cpio
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
@@ -55,7 +48,7 @@ ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
-	cd ${TARGET_DIR}; find . | grep -v ./boot | sed -n '/^\.\//s///p' | \
+	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
@@ -63,7 +56,7 @@ ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P | \
-		${ADK_COMPRESSION_TOOL} >$@ 2>/dev/null
+		lzma -9 >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
@@ -73,11 +66,10 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
 ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
-	${STAGING_TOOLS}/bin/mksquashfs ${TARGET_DIR} \
+	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-	cat ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel \
-		${BUILD_DIR}/root.squashfs > \
+	cat ${ADK_TARGET_KERNEL} ${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
 
 createinitramfs:
@@ -89,4 +81,4 @@ createinitramfs:
 		ARCH=$(ARCH) CC="$(TARGET_CC)" $(MAKE_TRACE)
 
 imageclean:
-	rm -f $(BIN_DIR)/$(ADK_TARGET)-* ${BUILD_DIR}/$(ADK_TARGET)-*
+	rm -f $(BIN_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*

@@ -14,8 +14,8 @@ $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
-		--prefix=$(STAGING_TOOLS) \
-		--with-gmp=$(STAGING_TOOLS) \
+		--prefix=$(STAGING_HOST_DIR) \
+		--with-gmp=$(STAGING_HOST_DIR) \
 		--disable-shared \
 		--enable-static \
 	);

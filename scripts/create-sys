@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
+systems=$(grep -h config target/*/sys-available/*|cut -d " " -f 2)
+
+while read arch; do
+	count=1
+	cd $topdir/target/$arch/sys-enabled/ &&
+	ln -sf ../sys-available/toolchain 0-toolchain
+	for i in $(ls $topdir/target/$arch/sys-available/|grep -v toolchain);do
+		cd $topdir/target/$arch/sys-enabled/ &&
+		ln -sf ../sys-available/$i $count-$i
+		count=$((count+1))
+	done
+done <${topdir}/target/arch.lst
+
+cat > $topdir/target/config/Config.in.system.default << EOD
+config ADK_qemu
+	boolean
+
+config ADK_toolchain
+	boolean
+
+EOD
+
+for j in $systems;do
+	system=${j#ADK_TARGET_SYSTEM_}
+	systemu=$(echo $system|tr '[:upper:]' '[:lower:]')
+	printf "config ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
+	printf "\tboolean\n\n" >> $topdir/target/config/Config.in.system.default
+done
+
+cat >> $topdir/target/config/Config.in.system.default << EOD
+
+config ADK_TARGET_SYSTEM
+	string
+	default "toolchain" if ADK_toolchain
+	default "qemu" if ADK_qemu
+EOD
+for i in $systems;do
+	system=${i#ADK_TARGET_SYSTEM_}
+	systemu=$(echo $system|tr '[:upper:]' '[:lower:]')
+	system=$(echo $system|tr '[:upper:]_' '[:lower:]-')
+	system=$(echo $system|sed 's#x86-64#x86_64#')
+	printf "\tdefault \"$system\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
+done
+exit 0

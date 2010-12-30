@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-lua \
 			--disable-gnutls \
 			--disable-ruby \
-			--with-libiconv-prefix='${STAGING_DIR}/usr'
+			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WEECHAT}/usr/bin

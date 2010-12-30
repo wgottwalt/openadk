@@ -23,7 +23,7 @@ CONFIG_STYLE:=		manual
 
 ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
 TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs \
-			-I${STAGING_DIR}/usr/include/uClibc++
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
 TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
 endif
 XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}"

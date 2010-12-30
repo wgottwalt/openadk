@@ -1,0 +1,10 @@
+--- e2fsprogs-1.41.14.orig/misc/e2initrd_helper.c	2009-08-13 03:39:57.000000000 +0200
++++ e2fsprogs-1.41.14/misc/e2initrd_helper.c	2010-12-25 22:33:06.000000000 +0100
+@@ -23,7 +23,6 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+-#include <utime.h>
+ #ifdef HAVE_GETOPT_H
+ #include <getopt.h>
+ #else

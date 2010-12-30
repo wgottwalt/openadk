@@ -12,8 +12,6 @@ PKG_SECTION:=		kernel
 PKG_DEPENDS:=		kmod-fw-loader kmod-atm
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_TARGET_DEPENDS:=	ag241
-
 include ${TOPDIR}/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 

@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OSIRISD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		ac_cv_openssldir="${STAGING_DIR}/usr" \
+CONFIGURE_ENV+=		ac_cv_openssldir="${STAGING_TARGET_DIR}/usr" \
 			ac_cv_have_accrights_in_msghdr=no \
 			ac_cv_have_control_in_msghdr=yes
 CONFIGURE_ARGS+=	--with-osiris-user=root \

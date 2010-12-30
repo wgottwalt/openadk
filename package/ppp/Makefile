@@ -33,7 +33,7 @@ $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_
 CONFIGURE_ENV+=		UNAME_S="Linux"
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			COPTS="${TCFLAGS}" \
-			STAGING_DIR=${STAGING_DIR} \
+			STAGING_TARGET_DIR=${STAGING_TARGET_DIR} \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'
 

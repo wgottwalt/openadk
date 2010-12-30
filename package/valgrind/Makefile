@@ -12,7 +12,7 @@ PKG_SECTION:=		debug
 PKG_URL:=		http://valgrind.org/
 PKG_SITES:=		http://valgrind.org/downloads/
 
-PKG_TARGET_DEPENDS:=	x86 x86_64
+PKG_ARCH_DEPENDS:=	x86 x86_64
 PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

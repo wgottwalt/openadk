@@ -41,12 +41,12 @@ config ADK_KERNEL_LLC
 	default n
 
 config ADK_KERNEL_IP_MULTICAST
-	prompt "Enable IP Multicasting"
+	prompt ".................................. Enable IP Multicasting"
 	boolean
 	default n
 
 config ADK_KERNEL_IP_MROUTE
-	prompt "Enable IP Multicasting Routing"
+	prompt ".................................. Enable IP Multicasting Routing"
 	boolean
 	default n
 

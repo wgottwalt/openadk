@@ -1,13 +1,9 @@
 config ADK_KERNEL_NEW_LEDS
-	bool
-	default n
-	help
+	boolean
 
 config ADK_KERNEL_LEDS_TRIGGERS
-	bool
-	default n
+	boolean
 	select ADK_KERNEL_NEW_LEDS
-	help
 
 menu "LEDS driver support"
 depends on ADK_TARGET_WITH_LEDS
@@ -18,6 +14,14 @@ config ADK_KPACKAGE_KMOD_LEDS_CLASS
 	select ADK_KERNEL_NEW_LEDS
 	default n
 	help
+
+config ADK_KPACKAGE_KMOD_LEDS_ALIX2
+	prompt "LED suppport for ALIX2/ALIX3"
+	tristate
+	select ADK_KPACKAGE_KMOD_LEDS_CLASS
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default n
 
 config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_TIMER
 	prompt "LED Timer trigger"

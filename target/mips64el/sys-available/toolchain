@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64EL
+	bool "Toolchain only"
+	select ADK_mips64el
+	select ADK_toolchain
+	select ADK_TOOLCHAIN_ONLY
+	help
+	  Build a mips64 little endian toolchain.
+

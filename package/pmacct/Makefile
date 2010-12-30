@@ -23,8 +23,8 @@ $(eval $(call PKG_template,PMACCTD,pmacctd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,SFACCTD,sfacctd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PMACCT_CLIENT,pmacct-client,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-pcap-includes="$(STAGING_DIR)/usr/include" \
-			--with-pcap-libs="$(STAGING_DIR)/usr/lib"
+CONFIGURE_ARGS+=	--with-pcap-includes="$(STAGING_TARGET_DIR)/usr/include" \
+			--with-pcap-libs="$(STAGING_TARGET_DIR)/usr/lib"
 
 post-install:
 	${INSTALL_DIR} $(IDIR_SFACCTD)/usr/sbin

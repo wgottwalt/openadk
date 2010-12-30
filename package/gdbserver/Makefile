@@ -9,7 +9,7 @@ PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
 PKG_SUBPKGS:=		GDBSERVER
 
-PKG_TARGET_DEPENDS:=	!foxboard
+PKG_ARCH_DEPENDS:=	!cris
 
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 

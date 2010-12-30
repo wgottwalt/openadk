@@ -56,8 +56,8 @@ endif
 
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_LDAP),y)
 CONFIGURE_ARGS+=	--with-openldap=yes
-CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_DIR}/usr
-CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_DIR}/usr
+CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_TARGET_DIR}/usr
+CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_TARGET_DIR}/usr
 else
 CONFIGURE_ARGS+=        --without-openldap
 endif
@@ -68,9 +68,9 @@ else
 CONFIGURE_OPTS+=	--disable-pk-init
 endif
 
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/et -pthread
+TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
 
-CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_TOOLS}/bin
+CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
 CONFIGURE_ENV+=		cross_compiling=yes \
 			ac_cv_func_getaddrinfo_numserv=yes
 
@@ -80,7 +80,7 @@ endif
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure --prefix=$(STAGING_TOOLS) \
+		./configure --prefix=$(STAGING_HOST_DIR) \
 			--disable-pk-init \
 			--without-openldap \
 			--disable-otp \
@@ -92,9 +92,9 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
 	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
 	${INSTALL_BIN} ${WRKBUILD}/lib/roken/make-roken$(EXEEXT) \
-		${STAGING_TOOLS}/bin
+		${STAGING_HOST_DIR}/bin
 	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
-		${STAGING_TOOLS}/bin
+		${STAGING_HOST_DIR}/bin
 	${MAKE} -C ${WRKBUILD}/lib/roken install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 clean

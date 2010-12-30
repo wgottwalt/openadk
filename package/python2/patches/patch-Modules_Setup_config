@@ -1,0 +1,11 @@
+--- Python-2.7.1.orig/Modules/Setup.config	2010-12-27 21:24:34.000000000 +0100
++++ Python-2.7.1/Modules/Setup.config	2010-12-27 21:07:05.000000000 +0100
+@@ -4,7 +4,7 @@
+ # based on configure-time options.
+ 
+ # Threading
+-#thread threadmodule.c
++thread threadmodule.c
+ 
+ # The signal module
+ signal signalmodule.c

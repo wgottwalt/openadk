@@ -1,0 +1,9 @@
+choice
+depends on ADK_LINUX_ARMEB || ADK_LINUX_NATIVE && !ADK_CHOOSE_TARGET_ARCH
+prompt "Target system"
+
+config ADK_CHOOSE_TARGET_SYSTEM_ARMEB
+	boolean "Choose target system"
+
+source "target/armeb/Config.in.systems"
+endchoice

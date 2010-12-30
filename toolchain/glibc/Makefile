@@ -66,8 +66,8 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
-		install_root=$(STAGING_DIR) install
-	touch $(STAGING_DIR)/usr/include/gnu/stubs.h
-	touch $@
+		install_root=$(STAGING_TARGET_DIR) install
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
+	touch $(WRKBUILD)/.installed
 
 include ${TOPDIR}/mk/toolchain.mk

@@ -18,8 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-apr=${STAGING_DIR}/usr/bin/apr-1-config
-CONFIGURE_ARGS+=	--with-apr-util=${STAGING_DIR}/usr/bin/apr-1-config
+CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config
+CONFIGURE_ARGS+=	--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config
 CONFIGURE_ARGS+=	--disable-mod-activation
 CONFIGURE_ARGS+=	--disable-keychain
 CONFIGURE_ARGS+=	--without-apxs

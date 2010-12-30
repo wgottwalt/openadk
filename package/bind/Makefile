@@ -40,8 +40,8 @@ $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--disable-threads \
-			--with-openssl=${STAGING_DIR}/usr/ \
-			--with-libxml2=${STAGING_DIR}/usr/ \
+			--with-openssl=${STAGING_TARGET_DIR}/usr/ \
+			--with-libxml2=${STAGING_TARGET_DIR}/usr/ \
 			--enable-epoll \
 			--with-libtool
 

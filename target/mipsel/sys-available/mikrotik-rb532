@@ -1,0 +1,12 @@
+config ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	bool "Mikrotik Routerboard 532"
+	select ADK_mipsel
+	select ADK_mikrotik_rb532
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_CF
+	select ADK_TARGET_WITH_NAND
+	select ADK_KERNEL_MIKROTIK_RB532
+	help
+	  Support for Mikrotik RB532.
+

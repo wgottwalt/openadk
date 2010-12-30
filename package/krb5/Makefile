@@ -31,7 +31,7 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_LIBKRB5}+=	libkrb5-install
 
-TCFLAGS+=		-I${STAGING_DIR}/usr/include/et
+TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
 			--with-system-ss \

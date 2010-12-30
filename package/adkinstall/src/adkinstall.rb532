@@ -14,12 +14,6 @@ if [ -z $2 ];then
         printf "Please give your root tar archive as second parameter\n"
         exit 1
 fi
-if [ $cfinstall -eq 1 ];then
-	if [ -z $3 ];then
-       	 printf "Please give your kernel as third parameter\n"
-       	 exit 1
-	fi
-fi
 case $1 in
 	nand)
 		nandinstall=1
@@ -34,6 +28,13 @@ case $1 in
 esac
 
 if [ $cfinstall -eq 1 ];then
+	if [ -z $3 ];then
+       	 printf "Please give your kernel as third parameter\n"
+       	 exit 1
+	fi
+fi
+
+if [ $cfinstall -eq 1 ];then
 	# create empty partition table
 	printf "Creating partition scheme\n"
 	parted -s /dev/sda mklabel msdos
@@ -41,12 +42,13 @@ if [ $cfinstall -eq 1 ];then
 	maxsize=$(env LC_ALL=C parted /dev/sda -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 	rootsize=$(($maxsize-2))
 	parted -s /dev/sda unit cyl mkpart primary ext2 0 1
-	parted -s /dev/sda unit cyl mkpartfs primary ext2 1 $rootsize
+	parted -s /dev/sda unit cyl mkpart primary ext2 1 $rootsize
 	parted -s /dev/sda unit cyl mkpart primary fat32 $rootsize $maxsize
 	parted -s /dev/sda set 1 boot on
 	sfdisk --change-id /dev/sda 1 27 >/dev/null 2>&1
 	sfdisk --change-id /dev/sda 3 88 >/dev/null 2>&1
 	sleep 2
+	mke2fs /dev/sda2
 	sync
 	printf "Installing kernel\n"
 	dd if=$3 of=/dev/sda1 bs=2048 >/dev/null 2>&1
@@ -71,7 +73,6 @@ fi
 
 chmod 1777 /mnt/tmp
 chmod 4755 /mnt/bin/busybox
-
 sync
 
 if [ $nandinstall -eq 1 ];then

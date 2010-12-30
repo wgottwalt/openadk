@@ -34,7 +34,7 @@ pre-configure:
 	cp ${WRKBUILD}/ext/Setup ${WRKBUILD}/ext/Setup.orig
 	echo "option nodynamic" >> ${WRKBUILD}/ext/Setup
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure --prefix=$(STAGING_TOOLS) --disable-install-doc \
+		./configure --prefix=$(STAGING_HOST_DIR) --disable-install-doc \
 	);
 	$(MAKE) -C ${WRKBUILD} main
 	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby

@@ -1,9 +1,0 @@
-auto lo
-iface lo inet loopback
-
-auto nas0
-iface nas0 inet manual
-
-auto br0
-iface br0 inet manual
-	bridge-ports eth0 nas0

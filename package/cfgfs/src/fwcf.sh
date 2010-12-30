@@ -125,7 +125,10 @@ fi
 
 # find backend device, first try to find partition with ID 88
 rootdisk=$(readlink /dev/root)
-part=$(fdisk -l /dev/${rootdisk%1}|awk '$5 == 88 { print $1 }')
+# strip partitions (f.e. mmcblk0p2, sda2, ..)
+rootdisk=${rootdisk%p*}
+rootdisk=${rootdisk%[1-9]}
+part=$(fdisk -l /dev/$rootdisk 2>/dev/null|awk '$5 == 88 { print $1 }')
 if [ -z $part ]; then
 	# otherwise search for MTD device with name cfgfs
 	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro

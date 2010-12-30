@@ -1,6 +1,6 @@
---- LVM2.2.02.72.orig/tools/Makefile.in	Fri Jun 25 20:23:10 2010
-+++ LVM2.2.02.72/tools/Makefile.in	Fri Jul 30 10:13:24 2010
-@@ -157,7 +157,7 @@ liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION): liblvm2cmd.$(
+--- LVM2.2.02.79.orig/tools/Makefile.in	2010-10-15 11:41:21.000000000 +0200
++++ LVM2.2.02.79/tools/Makefile.in	2010-12-26 22:15:11.000000000 +0100
+@@ -158,7 +158,7 @@ liblvm2cmd.$(LIB_SUFFIX).$(LIB_VERSION):
  
  .commands: $(srcdir)/commands.h $(srcdir)/cmdnames.h Makefile
  	$(CC) -E -P $(srcdir)/cmdnames.h 2> /dev/null | \
@@ -9,7 +9,7 @@
  
  ifneq ("$(CFLOW_CMD)", "")
  CFLOW_SOURCES = $(addprefix $(srcdir)/, $(SOURCES))
-@@ -170,18 +170,22 @@ endif
+@@ -171,18 +171,22 @@ endif
  	install_dmsetup_dynamic install_dmsetup_static
  
  install_cmdlib_include: $(srcdir)/lvm2cmd.h
@@ -36,7 +36,7 @@
  	@echo Creating symbolic links for individual commands in $(sbindir)
  	@for v in `cat .commands`; do \
  		echo "$(LN_S) -f lvm $(sbindir)/$$v"; \
-@@ -189,13 +193,16 @@ install_tools_dynamic: lvm .commands
+@@ -190,13 +194,16 @@ install_tools_dynamic: lvm .commands
  	done;
  
  install_tools_static: lvm.static

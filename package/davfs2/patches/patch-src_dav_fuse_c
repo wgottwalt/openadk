@@ -1,0 +1,10 @@
+--- davfs2-1.4.6.orig/src/dav_fuse.c	2010-02-16 20:29:49.000000000 +0100
++++ davfs2-1.4.6/src/dav_fuse.c	2010-12-27 22:02:24.000000000 +0100
+@@ -33,6 +33,7 @@
+ #ifdef HAVE_STDINT_H
+ #include <stdint.h>
+ #endif
++#include <stdlib.h>
+ #include <string.h>
+ #ifdef HAVE_SYSLOG_H
+ #include <syslog.h>

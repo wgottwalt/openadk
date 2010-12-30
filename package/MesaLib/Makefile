@@ -21,7 +21,7 @@ PKGSC_GLXINFO:=		x11/apps
 PKGSD_GLXGEARS:=	Nice little OpenGL demo application
 PKGSC_GLXGEARS:=	x11/apps
 
-PKG_TARGET_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
@@ -31,7 +31,7 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
 
-ifeq (${ADK_HARDWARE_IBM_X40},y)
+ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif
 
@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-dri-drivers=${DRI_DRIVERS},swrast \
 			--with-demos=xdemos
 
-XAKE_FLAGS+=		HOST_CC=${HOSTCC} GLSL_CL=${STAGING_TOOLS}/bin/glslcompile
+XAKE_FLAGS+=		HOST_CC=${HOSTCC} GLSL_CL=${STAGING_HOST_DIR}/bin/glslcompile
 
 post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
@@ -55,7 +55,7 @@ post-extract:
 	${MAKE} -C ${WRKBUILD}/src/glsl
 	${MAKE} -C ${WRKBUILD}/src/glsl/apps
 	${CP} ${WRKBUILD}/src/glsl/apps/compile \
-		${STAGING_TOOLS}/bin/glslcompile
+		${STAGING_HOST_DIR}/bin/glslcompile
 	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
 pre-configure:
@@ -66,7 +66,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
-ifeq (${ADK_HARDWARE_IBM_X40},y)
+ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif

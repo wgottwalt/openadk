@@ -12,8 +12,6 @@ PKG_SECTION:=		utils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/
 
-PKG_TARGET_DEPENDS:=	!ag241 !foxboard !foxg20
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CPUFREQUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

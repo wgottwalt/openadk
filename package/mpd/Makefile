@@ -105,8 +105,8 @@ ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)
 CONFIGURE_ARGS+=	\
 			--disable-vorbis \
 			--with-tremor \
-			--with-tremor-includes=${STAGING_DIR}/usr/include \
-			--with-tremor-libraries=${STAGING_DIR}/usr/lib
+			--with-tremor-includes=${STAGING_TARGET_DIR}/usr/include \
+			--with-tremor-libraries=${STAGING_TARGET_DIR}/usr/lib
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
@@ -124,7 +124,7 @@ endif
 ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
 CONFIGURE_ARGS+=	--enable-shout \
 			--enable-lame-encoder \
-			--with-lame=${STAGING_DIR}/usr \
+			--with-lame=${STAGING_TARGET_DIR}/usr \
 			--enable-vorbis-encoder
 else
 CONFIGURE_ARGS+=	--disable-shout \

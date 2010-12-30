@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MONIT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-ssl --with-ssl-dir="${STAGING_DIR}/usr"
+CONFIGURE_ARGS+=	--with-ssl --with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MONIT}/etc

@@ -1,7 +1,8 @@
 config ADK_KPACKAGE_KMOD_CIFS
 	prompt "kmod-fs-cifs...................... CIFS support"
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	tristate
+	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	default n
 	help
 	  This is the client VFS module for the Common Internet File System
@@ -29,6 +30,7 @@ config ADK_KPACKAGE_KMOD_CIFS
 config ADK_KPACKAGE_KMOD_CODA_FS
 	prompt "kmod-fs-coda...................... support for coda client"
 	tristate
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	default n
 	help
 	  This is the kernel part of the client for the CODA filesystem.
@@ -36,11 +38,11 @@ config ADK_KPACKAGE_KMOD_CODA_FS
 config ADK_KERNEL_NFS_V4
 	boolean
 	depends on !ADK_TARGET_ROOTFS_NFSROOT
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	default n
 
 config ADK_KERNEL_RPCSEC_GSS_KRB5
 	boolean
-	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	default n
 
 config ADK_KPACKAGE_KMOD_NFS_FS
@@ -50,6 +52,7 @@ config ADK_KPACKAGE_KMOD_NFS_FS
 	select ADK_KERNEL_NFS_V3
 	select ADK_KPACKAGE_KMOD_SUNRPC
 	select ADK_KPACKAGE_KMOD_LOCKD
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  If you are connected to some other (usually local) Unix computer
@@ -97,6 +100,7 @@ config ADK_KPACKAGE_KMOD_NFSD
 	select ADK_KERNEL_NFSD_V3
 	select ADK_KPACKAGE_KMOD_SUNRPC
 	select ADK_KPACKAGE_KMOD_LOCKD
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	help
 	  If you want your Linux box to act as an NFS *server*, so that other

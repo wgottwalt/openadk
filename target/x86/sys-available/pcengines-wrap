@@ -1,0 +1,12 @@
+config ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	bool "PCEngines WRAP"
+	select ADK_x86
+	select ADK_pcengines_wrap
+	select ADK_CPU_I486
+	select ADK_KERNEL_I486
+	select ADK_TARGET_WITH_CF
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+         System profile for PCEngines WRAP board.
+

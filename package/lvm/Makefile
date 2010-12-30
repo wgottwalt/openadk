@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.76
+PKG_VERSION:=		2.02.79
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1a43a943c218cb00ce1a6ce39889a6ae
+PKG_MD5SUM:=		e6929251a90b0b626c024942a242f337
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libdevmapper libncurses

@@ -24,9 +24,9 @@ INSTALL_STYLE:=         manual
 MAKE_FLAGS+=		CC="${TARGET_CC}" LD="${TARGET_CC}" \
 			CFLAGS="-c ${TARGET_CFLAGS}" \
 			LDFLAGS= \
-			PCAP_H="-I${STAGING_DIR}/usr/include" \
-			NIDS_H="-I${STAGING_DIR}/usr/include" \
-			NIDS_L="-L${STAGING_DIR}/usr/lib -lnids -lnet -lpcap"
+			PCAP_H="-I${STAGING_TARGET_DIR}/usr/include" \
+			NIDS_H="-I${STAGING_TARGET_DIR}/usr/include" \
+			NIDS_L="-L${STAGING_TARGET_DIR}/usr/lib -lnids -lnet -lpcap"
 ALL_TARGET:=		libnids
 
 do-configure:

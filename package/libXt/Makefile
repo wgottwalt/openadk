@@ -16,7 +16,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_DIR}/usr/include/xproto
+XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_TARGET_DIR}/usr/include/xproto
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull \
 			--disable-install-makestrs
 
