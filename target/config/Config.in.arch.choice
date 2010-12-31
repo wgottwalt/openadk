@@ -8,6 +8,7 @@ config ADK_LINUX_NATIVE
 	bool "native build"
 	select ADK_libc
 	select ADK_native
+	select ADK_NATIVE
 	depends on ADK_HOST_LINUX
 	help
 	  Make a native build. Use host tools.
@@ -92,4 +93,3 @@ config ADK_LINUX_X86_64
 	  Support for x86_64/amd64 systems.
 
 endchoice
-

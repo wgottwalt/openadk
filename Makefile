@@ -203,6 +203,17 @@ NO_ERROR=0
 	    -e 's/cris.*/cris/' \
 	    -e 's/i[3-9]86/i386/' \
 	    )" >>prereq.mk
+	@echo "HOSTARCH:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
+	    -e 's/sparc.*/sparc/' \
+	    -e 's/arm.*/arm/g' \
+	    -e 's/m68k.*/m68k/' \
+	    -e 's/v850.*/v850/g' \
+	    -e 's/sh[234]/sh/' \
+	    -e 's/mips-.*/mips/' \
+	    -e 's/mipsel-.*/mipsel/' \
+	    -e 's/cris.*/cris/' \
+	    -e 's/i[3-9]86/x86/' \
+	    )" >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
 	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
 	@echo 'HOSTCXX:=${CXX}' >>prereq.mk

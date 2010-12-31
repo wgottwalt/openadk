@@ -1,8 +1,13 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
+
+if ADK_LINUX_NATIVE
+source "target/config/Config.in.native"
+endif
 
 # hardware features
 config ADK_TARGET_WITH_USB
@@ -65,7 +70,7 @@ config ADK_TARGET_WITH_DSL
 config ADK_TARGET_WITH_USB_BOOT
 	boolean
 
-# global features
+# global symbols
 config ADK_TOOLCHAIN_ONLY
 	boolean
 
@@ -79,6 +84,9 @@ config ADK_LINUX_64
 	boolean
 
 config ADK_HARDWARE_QEMU
+	boolean
+
+config ADK_NATIVE
 	boolean
 
 # cpu features
@@ -165,16 +173,16 @@ config ADK_TARGET_CMDLINE
 
 # c library
 config ADK_uclibc
-	tristate
+	boolean
 
 config ADK_eglibc
-	tristate
+	boolean
 
 config ADK_glibc
-	tristate
+	boolean
 
 config ADK_libc
-	tristate
+	boolean
 
 config ADK_TARGET_LIBC
 	string
@@ -189,20 +197,23 @@ choice
 prompt "Target C library"
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 config ADK_TARGET_LIB_UCLIBC
-	bool "uClibc embedded C library"
+	prompt "uClibc embedded C library"
+	boolean
+	select ADK_uclibc
 	depends on \
 		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_SPARC && \
 		   !ADK_LINUX_PPC64
-	select ADK_uclibc
 	help
  	 http://uclibc.org
 
 config ADK_TARGET_LIB_EGLIBC
-	bool "Embedded GNU C library"
+	prompt "Embedded GNU C library"
+	boolean
 	select ADK_eglibc
 	depends on \
+		ADK_LINUX_NATIVE || \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_MIPS || \
@@ -219,9 +230,11 @@ config ADK_TARGET_LIB_EGLIBC
 	 http://www.eglibc.org
 
 config ADK_TARGET_LIB_GLIBC
-	bool "GNU C library"
+	prompt "GNU C library"
+	boolean
 	select ADK_glibc
 	depends on \
+		ADK_LINUX_NATIVE || \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_MIPS || \

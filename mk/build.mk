@@ -312,10 +312,22 @@ endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
+	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
+	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
@@ -383,9 +395,21 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 endif
 ifeq ($(ADKtype),ibmx-40)
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
+	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/all.config
+	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
