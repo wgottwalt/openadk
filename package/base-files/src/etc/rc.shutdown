@@ -1,5 +1,5 @@
 #!/bin/sh
-for i in $(grep -v ^# /etc/fstab |awk '{ print $2 }');do
+for i in $(grep -v ^# /etc/fstab 2>/dev/null|awk '{ print $2 }');do
 	printf Unmounting $i
 	umount $i
 done
