@@ -1,3 +1,0 @@
-source "target/config/Config.in.arch.default"
-config ADK_LINUX_ARM
-	bool
