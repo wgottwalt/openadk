@@ -51,3 +51,4 @@ target/packages/Config.in
 target/config/Config.in.system.default
 target/config/Config.in.system
 target/config/Config.in.native
+target/config/Config.in.arch
