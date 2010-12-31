@@ -50,3 +50,4 @@ target/packages/pkg-enabled
 target/packages/Config.in
 target/config/Config.in.system.default
 target/config/Config.in.system
+target/config/Config.in.arch
