@@ -19,6 +19,8 @@ check_native() {
 	fi
 }
 
+touch $topdir/target/config/Config.in.native
+
 for i in $(ls $topdir/target/);do
 	if [ -d "$topdir/target/$i/sys-enabled" ];then
 		cat $topdir/target/$i/sys-enabled/* > $topdir/target/$i/Config.in.systems 2>/dev/null

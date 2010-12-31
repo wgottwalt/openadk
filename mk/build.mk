@@ -288,6 +288,8 @@ $(CONFIG)/gconf:
 	@$(MAKE) -C $(CONFIG) gconf
 
 defconfig: .menu $(CONFIG)/conf
+	@${BASH} ${TOPDIR}/scripts/update-sys
+	@${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
 endif
