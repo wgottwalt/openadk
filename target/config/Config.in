@@ -204,7 +204,8 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_SPARC && \
-		   !ADK_LINUX_PPC64
+		   !ADK_LINUX_PPC64 && \
+		   !ADK_LINUX_NATIVE
 	help
  	 http://uclibc.org
 
@@ -213,7 +214,6 @@ config ADK_TARGET_LIB_EGLIBC
 	boolean
 	select ADK_eglibc
 	depends on \
-		ADK_LINUX_NATIVE || \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_MIPS || \
@@ -234,7 +234,6 @@ config ADK_TARGET_LIB_GLIBC
 	boolean
 	select ADK_glibc
 	depends on \
-		ADK_LINUX_NATIVE || \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_MIPS || \
@@ -249,6 +248,12 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_X86_64
 	help
 	 http://www.gnu.org/libc
+
+config ADK_TARGET_LIB_LIBC
+	prompt "Native C library"
+	boolean
+	select ADK_libc
+	depends on ADK_LINUX_NATIVE
 
 endchoice
 
