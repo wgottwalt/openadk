@@ -69,7 +69,7 @@ ${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-	cat ${ADK_TARGET_KERNEL} ${BUILD_DIR}/root.squashfs > \
+	cat ${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs > \
 		${BUILD_DIR}/${ROOTFSSQUASHFS}
 
 createinitramfs:
