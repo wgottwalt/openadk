@@ -65,6 +65,7 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(TARGET_DIR)/boot/kernel $(TARGET_KERNEL)
 	@echo 'The kernel file is: ${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
