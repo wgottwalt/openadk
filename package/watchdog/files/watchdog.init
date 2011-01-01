@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/watchdog
+	/sbin/watchdog
 	;;
 stop)
-	kill $(pgrep -f /usr/sbin/watchdog)
+	kill $(pgrep -f /sbin/watchdog)
   	;;
 restart)
 	sh $0 stop
