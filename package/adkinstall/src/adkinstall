@@ -54,16 +54,16 @@ if [ $rescue -eq 1 ];then
 	start=2
 	parted -s /dev/sda unit cyl mkpart primary ext2 0 1
 	check_exit
-	mke2fs /dev/sda1
+	mke2fs -q /dev/sda1
 	check_exit
 	parted -s /dev/sda unit cyl mkpart primary ext2 1 2
 	check_exit
-	mke2fs /dev/sda2
+	mke2fs -q /dev/sda2
 	check_exit
 fi
 parted -s /dev/sda unit cyl mkpart primary ext2 $start $rootsize
 check_exit
-mke2fs /dev/sda1
+mke2fs -q /dev/sda1
 check_exit
 parted -s /dev/sda unit cyl mkpart primary fat32 $rootsize $maxsize
 check_exit
