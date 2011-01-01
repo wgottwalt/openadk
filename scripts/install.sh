@@ -201,10 +201,10 @@ if (( cyls < (cfgfs + 2) )); then
 	exit 1
 fi
 
-if stat --help >/dev/null 2>&1; then
-	statcmd='stat -c %s'	# GNU stat
-else
+if stat -qs .>/dev/null 2>&1; then
 	statcmd='stat -f %z'	# BSD stat (or so we assume)
+else
+	statcmd='stat -c %s'	# GNU stat
 fi
 
 if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
