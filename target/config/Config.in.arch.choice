@@ -6,9 +6,9 @@ config ADK_CHOOSE_TARGET_ARCH
 
 config ADK_LINUX_NATIVE
 	bool "native build"
-	select ADK_libc
 	select ADK_native
 	select ADK_NATIVE
+	select ADK_TARGET_LIB_LIBC
 	depends on ADK_HOST_LINUX
 	help
 	  Make a native build. Use host tools.
