@@ -19,6 +19,7 @@ config ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_CF
 	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_USB_BOOT
 	help
          System profile for PCEngines ALIX1C. 
 
