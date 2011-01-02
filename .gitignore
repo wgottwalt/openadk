@@ -24,7 +24,6 @@
 /.rebuild.*
 /.defconfig
 /all.config
-/.cfg_*/
 /target_*/
 /host_*/
 /pkg_*/
@@ -37,7 +36,6 @@
 /dl/
 /package/Config.in.auto*
 /package/pkgconfigs.d/
-/package/*/info.mk
 /package/*/Config.in
 /package/*/Config.in.lib
 /package/*/Config.in.kmod
