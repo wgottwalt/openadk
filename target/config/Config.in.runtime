@@ -20,18 +20,18 @@ config ADK_RUNTIME_PASSWORD
 	help
 	  Predefine the root password enabled in the built image.
 
+config ADK_RUNTIME_TMPFS_SIZE
+	string "size of /tmp in memory (kB)"
+	default "16384" if ADK_TARGET_SYSTEM_IBM_X40
+	default "2048"
+	help
+	  Size of /tmp in memory in Kilobyte.
+
 config ADK_RUNTIME_TIMEZONE
 	string "timezone for the embedded system"
 	default "Europe/Berlin"
 	help
 	  Predefine the timezone for the embedded system.
-
-config ADK_RUNTIME_KBD_LAYOUT
-	string "keyboard layout for the embedded system"
-	default ""
-	depends on ADK_TARGET_WITH_INPUT
-	help
-	  Predefine the keyboard layout for the embedded system.
 
 choice
 prompt "Console output on embedded system"
@@ -59,3 +59,10 @@ config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
 	string
 	default "38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP	
 	default "115200"
+
+config ADK_RUNTIME_KBD_LAYOUT
+	string "keyboard layout for the embedded system"
+	default ""
+	depends on ADK_TARGET_WITH_INPUT
+	help
+	  Predefine the keyboard layout for the embedded system.

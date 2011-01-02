@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		42
+PKG_RELEASE:=		43
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -74,6 +74,7 @@ endif
 		> $(IDIR_BASE_FILES)/etc/adkversion
 	test -z $(ADK_TARGET_SYSTEM) || \
 	    echo $(ADK_TARGET_SYSTEM) > $(IDIR_BASE_FILES)/etc/adktarget
+	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz

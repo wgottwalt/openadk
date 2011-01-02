@@ -1,2 +1,59 @@
 auto lo
 iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+## static network configuration
+#auto eth0
+#iface eth0 inet static
+#  address 192.168.1.1
+#  netmask 255.255.255.0
+#  broadcast +
+#  gateway 192.168.1.254
+##
+
+## bridge configuration
+#auto br0 
+#iface br0 inet static
+#  address 192.168.99.1
+#  netmask 255.255.255.0
+#  broadcast +
+#  bridge-ports eth0 eth1
+##
+
+## pppoe configuration
+#auto ppp0
+#iface ppp0 inet ppp
+#  use-template pppoe
+#  provider isp
+#  ppp-mtu 1412
+#  ppp-username foo
+#  ppp-password bar
+#  ppp-device eth1
+##
+
+## wireless client configuration
+#auto wlan0
+#iface wlan0 inet dhcp
+#  wireless-ssid myap
+#  wireless-channel 11
+#  wireless-mode sta
+#  wireless-security wpa2
+#  wireless-passphrase xxxxxx
+##
+
+## wireless accesspoint configuration
+#auto wlan0
+#iface wlan0 inet static
+#  address 192.168.40.10
+#  netmask 255.255.255.0
+#  broadcast +
+#  wireless-ssid myap
+#  wireless-channel 8
+#  wireless-mode ap
+#  wireless-security wpa2
+#  wireless-passphrase xxxxxx
+##
+
+# for more special cases see: http://www.openadk.org/doku.php?id=network
