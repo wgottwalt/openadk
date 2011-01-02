@@ -16,8 +16,8 @@ kernel-install:
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(TARGET_DIR)/boot/kernel $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
@@ -29,25 +29,25 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(TARGET_DIR)/boot/kernel $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img -append "root=/dev/hda1"'
+	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img -append "root=/dev/hda1"'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel+initramfs file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(TARGET_KERNEL)'
+	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif

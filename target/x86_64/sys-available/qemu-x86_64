@@ -1,12 +1,12 @@
-config ADK_TARGET_SYSTEM_QEMU_MIPSEL
+config ADK_TARGET_SYSTEM_QEMU_X86_64
 	bool "Qemu Emulator"
-	select ADK_mipsel
-	select ADK_qemu
+	select ADK_x86_64
+	select ADK_qemu_x86_64
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_HDD
 	help
-	 Qemu support for mips little endian architecture.
+	 Support for Qemu Emulator.
 

@@ -16,14 +16,14 @@ endif
 
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-	@cp $(KERNEL) ${TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${ADK_TARGET}-${FS}-kernel'
+	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${TARGET_KERNEL}'
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -31,7 +31,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 endif

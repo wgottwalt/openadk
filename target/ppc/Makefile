@@ -11,18 +11,18 @@ KERNEL:=$(LINUX_DIR)/arch/powerpc/boot/zImage
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) ${TARGET_KERNEL}
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-	@cp $(KERNEL) ${TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 endif

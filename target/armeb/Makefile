@@ -11,8 +11,8 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
@@ -21,15 +21,15 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(TARGET_KERNEL)
-	@echo 'The kernel file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-arm -nographic -kernel $(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-arm -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-	@cp $(KERNEL) $(TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: ${TARGET_KERNEL}'
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL}
+	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-arm -nographic -kernel $(TARGET_KERNEL)'
+	@echo 'qemu-system-arm -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif

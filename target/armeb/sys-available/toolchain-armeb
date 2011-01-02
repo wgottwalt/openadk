@@ -1,7 +1,7 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_ARMEB
 	bool "Toolchain only"
 	select ADK_armeb
-	select ADK_toolchain
+	select ADK_toolchain_armeb
 	select ADK_TOOLCHAIN_ONLY
 	select ADK_EABI
 	select ADK_TARGET_NO_FPU
