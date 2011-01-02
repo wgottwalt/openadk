@@ -498,9 +498,9 @@ bulktoolchain:
 		while read arch; do \
 		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 		    ( \
-			echo === building $$arch $$libc toolchain on $$(date); \
+			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$arch SYSTEM=toolchain LIBC=$$libc defconfig; \
+				$(GMAKE) ARCH=$$arch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/bin/toolchain_$${arch}_$${libc}/build.log; \
