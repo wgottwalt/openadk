@@ -365,7 +365,7 @@ endif
 	@if [ ! -z "$(SYSTEM)" ];then \
 		system=$$(echo "$(SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
-			|grep -i "$$system" \
+			|grep -i "$$system$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
@@ -496,8 +496,8 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 bulktoolchain:
 	for libc in uclibc eglibc glibc;do \
 		while read arch; do \
+		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 		    ( \
-			mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 			echo === building $$arch $$libc toolchain on $$(date); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$arch SYSTEM=toolchain LIBC=$$libc defconfig; \
@@ -514,8 +514,8 @@ bulk:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch); \
 	      for system in $$systems;do \
-	    ( \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc defconfig; \
@@ -532,8 +532,8 @@ bulkall:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch); \
 	      for system in $$systems;do \
-	    ( \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc allconfig; \
@@ -550,8 +550,8 @@ bulkallmod:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch); \
 	      for system in $$systems;do \
-	    ( \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc allmodconfig; \
@@ -573,7 +573,7 @@ ${TOPDIR}/bin/tools/pkgrebuild:
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
 	@echo "Generating menu structure ..."
-	$(TOPDIR)/bin/tools/pkgmaker
+	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
 $(TOPDIR)/bin/tools:
@@ -584,7 +584,7 @@ ${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
 
 dep: $(TOPDIR)/bin/tools/depmaker
 	@echo "Generating dependencies ..."
-	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 

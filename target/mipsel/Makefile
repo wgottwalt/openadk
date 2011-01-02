@@ -22,18 +22,17 @@ tools-compile: $(TOOLS_BUILD_DIR)
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_WRT54G),y)
 kernel-install: tools-compile
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(LINUX_DIR)/vmlinuz
-	@gzip -c9 $(LINUX_DIR)/vmlinuz > $(BIN_DIR)/$(TARGET_KERNEL)
+		$(LINUX_DIR)/vmlinux.stripped
+	@gzip -c9 $(LINUX_DIR)/vmlinux.stripped > $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
 kernel-install: tools-compile
-	${TARGET_CROSS}objcopy -S -O srec $(KERNEL) \
-		$(LINUX_DIR)/vmlinux.srec
+	${TARGET_CROSS}objcopy -S -O srec $(KERNEL) $(LINUX_DIR)/vmlinux.srec
 	PATH='${TARGET_PATH}' srec2bin $(LINUX_DIR)/vmlinux.srec $(LINUX_DIR)/vmlinux.bin
 	(dd if=/dev/zero bs=16 count=1; cat $(LINUX_DIR)/vmlinux.bin) > $(LINUX_DIR)/vmlinux.tmp
 	PATH='${TARGET_PATH}' addpattern -p AG3B -b -r 2.0 -i $(LINUX_DIR)/vmlinux.tmp \
-		-o $(BIN_DIR)/$(TARGET_KERNEL) 2>/dev/null
+		-o $(BUILD_DIR)/$(TARGET_KERNEL) 2>/dev/null
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)

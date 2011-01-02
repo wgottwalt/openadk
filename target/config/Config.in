@@ -160,7 +160,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
-	default "-mcpu=v9" if ADK_CPU_SPARC_V9
+	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
 	default "-march=loongson2f" if ADK_CPU_LOONGSON2F
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
 
@@ -203,7 +203,6 @@ config ADK_TARGET_LIB_UCLIBC
 	depends on \
 		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
-		   !ADK_LINUX_SPARC && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
 	help

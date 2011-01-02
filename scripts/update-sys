@@ -43,8 +43,14 @@ fi
 cat > $topdir/target/config/Config.in.arch << EOF 	
 source "target/config/Config.in.arch.default"
 config $archsym
-	bool
+	boolean
 EOF
+
+if [ "${system}" = "toolchain" ];then
+	sys=${system}-$arch
+else
+	sys=$system
+fi
 
 cat > $topdir/target/config/Config.in.system << EOF 	
 source "target/config/Config.in.system.default"
@@ -54,7 +60,7 @@ comment "System: $system"
 config $systemsym
 	boolean
 	select $archsym
-$(grep select $topdir/target/$arch/sys-available/$system)
+$(grep select $topdir/target/$arch/sys-available/$sys)
 	default y
 EOF
 else

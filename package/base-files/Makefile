@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		42
+PKG_RELEASE:=		43
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -23,8 +23,6 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
-	# allow this to fail, as there might be no target-specific files to copy
-	-$(CP) $(TOPDIR)/target/$(ADK_TARGET_ARCH)/files/* $(IDIR_BASE_FILES)
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif

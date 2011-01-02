@@ -7,8 +7,7 @@ include ${TOPDIR}/toolchain/gcc/Makefile.inc
 PKG_NAME:=		libgcc
 PKG_DESCR:=		GCC library
 PKG_SECTION:=		libs
-
-PKG_DFLT_LIBGCC:=	y
+PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
