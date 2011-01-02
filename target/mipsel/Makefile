@@ -37,13 +37,12 @@ endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) \
-		$(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 
 ifeq ($(ADK_TARGET_FS),cf)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(BIN_DIR)/$(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
 	@echo "Boot the board via network (tftp+nfsroot) and use adkinstall."
@@ -64,7 +63,7 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
@@ -80,7 +79,7 @@ endif
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to create a QEMU Image:"
