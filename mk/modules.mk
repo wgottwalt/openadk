@@ -1595,9 +1595,13 @@ $(eval $(call KMOD_template,PARPORT,parport,\
 	$(MODULES_DIR)/kernel/drivers/parport/parport \
 ,50))
 
+$(eval $(call KMOD_template,PARPORT_PC,parport-pc,\
+	$(MODULES_DIR)/kernel/drivers/parport/parport_pc \
+,55))
+
 $(eval $(call KMOD_template,PLIP,plip,\
 	$(MODULES_DIR)/kernel/drivers/net/plip \
-,51))
+,60))
 
 #
 # Profiling

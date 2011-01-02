@@ -63,13 +63,22 @@ config ADK_KPACKAGE_KMOD_PARPORT
 	default n
 	depends on ADK_TARGET_WITH_PP
 	help
-	  Kernel module for generic parallel port support
+	  Kernel module for generic parallel port support.
+
+config ADK_KPACKAGE_KMOD_PARPORT_PC
+	prompt "kmod-parport-pc................... PC style parallel port support"
+	tristate
+	default n
+	depends on ADK_KPACKAGE_KMOD_PARPORT
+	help
+	  Kernel module for PC style parallel port support.
 
 config ADK_KPACKAGE_KMOD_PLIP
 	prompt "kmod-plip....................... PLIP (internet over parallel port)"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
+	select ADK_KPACKAGE_KMOD_PARPORT_PC
 	help
 	  PLIP: IPv4 over parallel port, using a Turbo Laplink
 	  (crossed null-printer) cable. Drivers exist for DOS
@@ -82,6 +91,7 @@ config ADK_KPACKAGE_KMOD_PRINTER
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
+	select ADK_KPACKAGE_KMOD_PARPORT_PC
 	help
 	  Kernel module for line printer support
 
@@ -90,6 +100,7 @@ config ADK_KPACKAGE_KMOD_PPDEV
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
+	select ADK_KPACKAGE_KMOD_PARPORT_PC
 	help
 	  Kernel module for userland parallel port access
 
