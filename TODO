@@ -9,6 +9,5 @@
 - adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, for no internet access
-- fix watchdog for alix1c (mfgpt timer problem)
 - add support for brcm 2.6 (lzma/flash/wireless support)
 - help text for config/ needs adoption

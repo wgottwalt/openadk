@@ -1183,16 +1183,16 @@ $(eval $(call KMOD_template,USB,usb,\
 ,50))
 endif
 
+$(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
+	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \
+,55))
+
 $(eval $(call KMOD_template,USB_OHCI_HCD,usb-ohci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ohci-hcd \
 ,60))
 
 $(eval $(call KMOD_template,USB_UHCI_HCD,usb-uhci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/uhci-hcd \
-,60))
-
-$(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
-	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \
 ,60))
 
 $(eval $(call KMOD_template,USB_ACM,usb-acm,\
