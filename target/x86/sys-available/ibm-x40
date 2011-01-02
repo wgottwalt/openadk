@@ -16,6 +16,8 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_CF
 	select ADK_TARGET_WITH_HDD
+	# with docking station 
+	select ADK_TARGET_WITH_PP
 	help
          System profile for IBM X40 laptop.
 

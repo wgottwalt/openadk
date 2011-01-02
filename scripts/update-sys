@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # 1. create Config.in.systems with all available target systems for each architecture
 # 2. if ADK configuration exist, create Config.in.arch/Config.in.system with fixed values
+# 3. exit when native system build is detected
 
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 

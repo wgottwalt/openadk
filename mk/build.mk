@@ -314,7 +314,7 @@ endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
 		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
@@ -324,7 +324,7 @@ endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
 		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
