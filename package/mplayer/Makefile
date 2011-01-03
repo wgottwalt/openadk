@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-31868
+PKG_VERSION:=		1.0-32749
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9d5c2c1c927947b31afa6f42c11e8f23
+PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -53,14 +53,19 @@ else
 CONFIGURE_CPU_OPTS:=	--disable-mmx
 endif
 ifeq (${ADK_TARGET_CPU_WITH_MMXEXT},y)
-CONFIGURE_CPU_OPTS:=	--enable-mmxext
+CONFIGURE_CPU_OPTS+=	--enable-mmxext
 else
-CONFIGURE_CPU_OPTS:=	--disable-mmxext
+CONFIGURE_CPU_OPTS+=	--disable-mmxext
 endif
 ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
-CONFIGURE_CPU_OPTS:=	--enable-sse
+CONFIGURE_CPU_OPTS+=	--enable-sse
 else
-CONFIGURE_CPU_OPTS:=	--disable-sse
+CONFIGURE_CPU_OPTS+=	--disable-sse
+endif
+ifeq (${ADK_TARGET_CPU_WITH_SSE2},y)
+CONFIGURE_CPU_OPTS+=	--enable-sse2
+else
+CONFIGURE_CPU_OPTS+=	--disable-sse2
 endif
 
 ifeq ($(ADK_DEBUG),y)
@@ -89,7 +94,6 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-png \
 			--enable-jpeg \
 			--enable-mad \
-			--disable-faad-internal \
 			--enable-libvorbis \
 			--disable-ossaudio \
 			--disable-vm \
