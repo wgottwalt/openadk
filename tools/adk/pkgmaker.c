@@ -632,7 +632,7 @@ int main() {
 
 						fprintf(cfg, "\"%s\"\n", pkg_fd);
 						fprintf(cfg, "\tdefault n\n");
-						fprintf(cfg, "\tdepends on ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkgdirp->d_name));
 						strncat(hkey, "PKGFS_", 6);
 						strncat(hkey, token, strlen(token));
 

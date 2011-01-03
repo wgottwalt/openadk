@@ -22,6 +22,7 @@ config ADK_KERNEL_SCx200_WDT
 	select ADK_KERNEL_SCx200
 	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default n
+	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	help
 	  Natsemi Watchdog (scx200)
 
@@ -31,6 +32,7 @@ config ADK_KERNEL_AT91SAM9X_WATCHDOG
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
+	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	help
 	  AT91SAM9X Watchdog.
 
@@ -40,6 +42,7 @@ config ADK_KERNEL_AR7_WDT
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
 	default n
+	depends on ADK_TARGET_SYSTEM_LINKSYS_AG241
 	help
 	  AR7 Watchdog.
 
@@ -54,6 +57,7 @@ config ADK_KERNEL_GEODE_WDT
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default n
+	depends on ADK_CPU_GEODE
 	help
 	 Geode watchdog.
 

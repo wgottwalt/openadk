@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		397a0d665da8ba9d3b9583629f3d6421
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
@@ -17,10 +18,16 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
+CONFIGURE_ARGS+=	--host-cc=$(HOSTCC) \
+			--cross-prefix=$(TARGET_CROSS) \
+			--disable-user \
+			--prefix=/usr \
+			--sysconfdir=/etc \
+			--bindir=/usr/bin
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/local/bin/qemu* \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/qemu* \
 		$(IDIR_QEMU)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

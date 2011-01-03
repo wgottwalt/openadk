@@ -93,6 +93,9 @@ config ADK_NATIVE
 config ADK_TARGET_CPU_WITH_VT
 	boolean
 
+config ADK_TARGET_CPU_WITH_MTRR
+	boolean
+
 config ADK_TARGET_CPU_WITH_MMX
 	boolean
 
