@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#set -x
 # 1. create Config.in.systems with all available target systems for each architecture
 # 2. if ADK configuration exist, create Config.in.arch/Config.in.system with fixed values
 # 3. exit when native system build is detected
@@ -47,7 +48,7 @@ config $archsym
 	boolean
 EOF
 
-if [ "${system}" = "toolchain" ];then
+if [ "${system}" = "toolchain" -o "${system}" = "qemu" ];then
 	sys=${system}-$arch
 else
 	sys=$system

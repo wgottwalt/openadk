@@ -1,3 +1,15 @@
+config ADK_KERNEL_VT
+	boolean
+	default y if ADK_HARDWARE_QEMU
+	default y if ADK_TARGET_WITH_VGA
+	default n
+
+config ADK_KERNEL_VT_CONSOLE
+	boolean
+	default y if ADK_HARDWARE_QEMU
+	default y if ADK_TARGET_WITH_VGA
+	default n
+
 config ADK_KERNEL_FB
  	boolean
  
