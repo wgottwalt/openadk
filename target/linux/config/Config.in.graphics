@@ -32,6 +32,7 @@ config ADK_KERNEL_FB_GEODE_LX
 	select ADK_KERNEL_FB_GEODE
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
  	default n
+	depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
  	help
 	 Framebuffer support for ALIX boards with VGA.
 
@@ -47,6 +48,7 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	select ADK_KERNEL_DRM_I915
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
+	depends on ADK_TARGET_SYSTEM_IBM_X40
 	help
           AGP/DRM/KMS support for Intel chipset i915.
 	

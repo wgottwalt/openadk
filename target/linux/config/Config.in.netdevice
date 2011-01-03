@@ -1,4 +1,5 @@
 menu "Network devices support"
+comment "Ethernet network driver for target system is included into kernel"
 
 config ADK_KERNEL_NETDEVICES
 	boolean
@@ -93,6 +94,35 @@ config ADK_KERNEL_B44
 	default n
 	help
 
+config ADK_KERNEL_E1000
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NETDEV_1000
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_QEMU_X86
+	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
+	default n
+	help
+
+config ADK_KERNEL_SKY2
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NETDEV_1000
+	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	default n
+	help
+
+config ADK_KERNEL_R8169
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NETDEV_1000
+	default y if ADK_TARGET_SYSTEM_OVH_RPS
+	default n
+	help
+
 menu "Ethernet card support"
 depends on ADK_TARGET_WITH_PCI
 
@@ -156,9 +186,7 @@ config ADK_KPACKAGE_KMOD_E1000
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_QEMU_X86
-	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
+	depends on !ADK_KERNEL_E1000
 	default n
 	help
 	  This driver supports Intel(R) PRO/1000 gigabit ethernet family of
@@ -173,7 +201,7 @@ config ADK_KPACKAGE_KMOD_SKY2
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	depends on !ADK_KERNEL_SKY2
 	default n
 	help
 
@@ -183,7 +211,7 @@ config ADK_KPACKAGE_KMOD_R8169
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_OVH_RPS
+	depends on !ADK_KERNEL_R8169
 	default n
 	help
 

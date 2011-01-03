@@ -32,6 +32,7 @@ config ADK_KERNEL_RTC_DRV_AT91SAM9
 	select ADK_KERNEL_RTC_INTF_DEV
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
+	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	help
  	  Fox G20 RTC support.
 
@@ -54,6 +55,7 @@ config ADK_KPACKAGE_KMOD_SCx200_ACB
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	default n
+	depends on ADK_CPU_GEODE
 	help
 	  I2C driver for Geode boards.
 
@@ -66,7 +68,7 @@ config ADK_KPACKAGE_KMOD_PARPORT
 	  Kernel module for generic parallel port support.
 
 config ADK_KPACKAGE_KMOD_PARPORT_PC
-	prompt "kmod-parport-pc................... PC style parallel port support"
+	prompt "kmod-parport-pc................. PC style parallel port support"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
