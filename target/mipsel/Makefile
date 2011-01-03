@@ -79,7 +79,7 @@ endif
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to create a QEMU Image:"
