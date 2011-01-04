@@ -39,8 +39,6 @@ config-prepare: $(TOPDIR)/.config
 	    sed 's/=y/=m/' >>${BUILD_DIR}/.kernelconfig.modules
 	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
-	@sed -n '/^ADK_MOD_KERNEL/s//CONFIG/p' ${TOPDIR}/.config | \
-	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modkernel
 	@sed -n '/^# ADK_KERNEL/s//# CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 ifeq ($(ADK_NATIVE),y)
