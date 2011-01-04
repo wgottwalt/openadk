@@ -12,8 +12,11 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
+ifneq (,$(filter CYGWIN%,${OStype}))
+	(cd $(WRKBUILD); cp configfsf.guess config.guess);
+endif
 	(cd $(WRKBUILD); \
-		$(WRKBUILD)/configure \
+		./configure \
 		--prefix=$(STAGING_HOST_DIR) \
 		--disable-shared \
 		--enable-static \
