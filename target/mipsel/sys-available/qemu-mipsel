@@ -2,6 +2,7 @@ config ADK_TARGET_SYSTEM_QEMU_MIPSEL
 	bool "Qemu Emulator"
 	select ADK_mipsel
 	select ADK_qemu_mipsel
+	select ADK_KERNEL_MIPS_MALTA
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT

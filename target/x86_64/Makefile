@@ -13,6 +13,7 @@ ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo 'The RootFS tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86_64),y)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"

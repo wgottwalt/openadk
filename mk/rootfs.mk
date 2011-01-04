@@ -8,7 +8,7 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86),y)
+ifeq ($(ADK_HARDWARE_QEMU),y)
 ROOTFS:=	root=/dev/sda1
 endif
 

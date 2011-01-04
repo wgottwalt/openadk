@@ -35,7 +35,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img -append "root=/dev/hda1"'
+	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
