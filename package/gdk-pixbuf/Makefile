@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gdk-pixbuf
 PKG_VERSION:=		2.23.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a7d6c5f2fe2d481149ed3ba807b5c043
 PKG_DESCR:=		GDK pixbuf library
 PKG_SECTION:=		libs
@@ -23,5 +23,7 @@ post-install:
 		$(IDIR_GDK_PIXBUF)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-*.so \
 		$(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/
+	$(CP) ./files/loaders.cache \
+		 $(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 include ${TOPDIR}/mk/pkg-bottom.mk
