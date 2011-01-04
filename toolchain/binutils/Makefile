@@ -40,8 +40,10 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
-	# needed on hosts without readelf
+	# needed on hosts without readelf, but strange things happen on Cygwin.
+ifeq (${OStype},Darwin)
 	$(CP) $(WRKBUILD)/binutils/readelf $(STAGING_HOST_DIR)/bin
+endif
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

@@ -90,6 +90,6 @@ numsecs(int fd)
 		err(1, "ioctl DIOCGDINFO");
 	return ((unsigned long long)dl.d_secperunit);
 #else
-#error PLEASE DO IMPLEMENT numsecs FOR THIS PLATFORM.
+#warning PLEASE DO IMPLEMENT numsecs FOR THIS PLATFORM.
 #endif
 }

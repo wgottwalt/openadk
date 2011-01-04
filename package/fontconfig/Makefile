@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fontconfig
 PKG_VERSION:=		2.8.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		77e15a92006ddc2adbb06f840d591c0e
 PKG_DESCR:=		fontconfig
 PKG_SECTION:=		libs
@@ -26,7 +26,8 @@ CONFIGURE_ARGS+=	--with-arch=${ARCH} \
 			--disable-docs
 
 post-install:
-	${INSTALL_DIR} ${IDIR_FONTCONFIG}/usr/lib
+	${INSTALL_DIR} ${IDIR_FONTCONFIG}/usr/lib ${IDIR_FONTCONFIG}/etc/fonts
 	${CP} ${WRKINST}/usr/lib/libfontconfig.so* ${IDIR_FONTCONFIG}/usr/lib
+	$(CP) ${WRKINST}/etc/fonts/* ${IDIR_FONTCONFIG}/etc/fonts
 
 include ${TOPDIR}/mk/pkg-bottom.mk

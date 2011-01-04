@@ -36,7 +36,7 @@ arch=$(grep ^ADK_TARGET_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
 systemsym=$(grep ^ADK_TARGET_SYSTEM_ $topdir/.config|cut -f 1 -d =) 
 system=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
 systems=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g'|sed -e 's#-#_#g')
-archsym=$(echo ADK_LINUX_$arch|tr '[:lower:]-' '[:upper:]')
+archsym=$(echo ADK_LINUX_$arch|tr '[:lower:]' '[:upper:]')
 
 if [ -z "$arch" -o -z "$system" ];then
 	defaults
