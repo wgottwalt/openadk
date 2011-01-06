@@ -142,6 +142,8 @@ IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
+ALL_POSTINST+=	$(2)-install
+$(2)-install:
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
 

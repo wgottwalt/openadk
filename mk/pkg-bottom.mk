@@ -127,6 +127,7 @@ endif
 pre-install:
 do-install:
 post-install:
+spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
@@ -145,6 +146,7 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 ifeq ($(ADK_NATIVE),)
 	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
