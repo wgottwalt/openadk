@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		1bca27d206970badae248cfa471bbb47
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
