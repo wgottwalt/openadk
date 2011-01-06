@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.41.14
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		05f70470aea2ef7efbb0845b2b116720
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
@@ -35,7 +35,7 @@ $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PK
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
-TCFLAGS+=		-pthread
+TLDFLAGS+=		-pthread
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/util \
