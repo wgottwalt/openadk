@@ -27,11 +27,7 @@ $(eval $(call PKG_template,PCSC_LITE_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RE
 
 CONFIGURE_ARGS+=	--disable-libhal
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_PCSC_LITE_DEV}+=	pcsc-lite-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/etc/reader.conf.d
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/lib

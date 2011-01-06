@@ -33,8 +33,9 @@ $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 
-CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-tls
+CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
+TCFLAGS+=		-pthread
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/util \

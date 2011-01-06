@@ -27,11 +27,7 @@ $(eval $(call PKG_template,OPENCT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 $(eval $(call PKG_template,LIBOPENCT,libopenct,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENCT},${PKGSD_LIBOPENCT},${PKGSC_LIBOPENCT}))
 $(eval $(call PKG_template,LIBOPENCT_DEV,libopenct-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBOPENCT_DEV},${PKGSC_LIBOPENCT_DEV}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBOPENCT_DEV}+=	libopenct-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_OPENCT}/etc ${IDIR_OPENCT}/usr/{sbin,bin}
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/openct-control \
 		${IDIR_OPENCT}/usr/sbin

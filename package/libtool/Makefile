@@ -29,12 +29,7 @@ endif
 
 CONFIGURE_ARGS+=	--enable-ltdl-install
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBLTDL}+=		libltdl-install
-SUB_INSTALLS-${ADK_PACKAGE_LIBLTDL_DEV}+=	libltdl-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/libtool ${IDIR_LIBTOOL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/libtoolize ${IDIR_LIBTOOL}/usr/bin

@@ -20,10 +20,6 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_EGLIBC_DEV}+=	eglibc-dev-install
-
 EGLIBC_CONFOPTS:=	\
 			--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
@@ -51,7 +47,7 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_slibdir="/lib"
 
 # compile nothing, eglibc is already build in toolchain directory
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
 		$(IDIR_EGLIBC)/usr/lib
 	test -z $(ADK_RUNTIME_TIMEZONE) || \

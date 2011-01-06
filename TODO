@@ -1,8 +1,12 @@
+- rework subinstall logic
+- fix autoreconf usage in opensc
+- fix timezone stuff in eglibc/glibc
+- add back aufs2 patches for kernel
 - openssl ocf support check
 - new package minidlna
 - wget/curl/ftp download support
 - fix heimdal package
-- check all patches for CFLAGS compliance
+- check all patches for CFLAGS compliance, fhonour patch from FreeWRT
 - busybox update and SuSv3 removal
 - check rtc support on foxg20
 - relocatable gcc (adk)

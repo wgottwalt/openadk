@@ -20,12 +20,8 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install
-
 # compile nothing, glibc is already build in toolchain directory
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \

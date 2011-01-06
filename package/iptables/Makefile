@@ -37,9 +37,7 @@ $(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIGURE_ARGS+=	--enable-devel
 
-SUB_INSTALL-${ADK_PACKAGE_IP6TABLES}+=			ip6tables-install
-
-post-install: ${SUB_INSTALL-m} ${SUB_INSTALL-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_IPTABLES}/{usr/lib,etc,usr/sbin}
 	${INSTALL_DATA} ./files/firewall.conf ${IDIR_IPTABLES}/etc
 	${CP} ${WRKINST}/usr/sbin/iptables* ${IDIR_IPTABLES}/usr/sbin/

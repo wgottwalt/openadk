@@ -30,11 +30,6 @@ $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL}))
 $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCURL_DEV},${PKGSC_LIBCURL_DEV}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_CURL}+=		curl-install
-SUB_INSTALLS-${ADK_PACKAGE_LIBCURL_DEV}+=	libcurl-dev-install
-
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
 			--enable-cookies \
@@ -63,7 +58,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
 

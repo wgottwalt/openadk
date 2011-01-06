@@ -23,12 +23,8 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
-
 # do nothing, uClibc is already build in toolchain directory
-do-install: $(STAGING_TARGET_DIR)/lib/libc.so ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: $(STAGING_TARGET_DIR)/lib/libc.so
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	test -z $(ADK_RUNTIME_TIMEZONE) || \

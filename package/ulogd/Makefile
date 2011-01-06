@@ -34,13 +34,6 @@ $(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_MYSQL}+=		ulogd-mod-mysql-install
-SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_PGSQL}+=		ulogd-mod-pgsql-install
-SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_SQLITE}+=		ulogd-mod-sqlite-install
-SUB_INSTALLS-${ADK_PACKAGE_ULOGD_MOD_EXTRA}+=		ulogd-mod-extra-install
-
 TCFLAGS+=		-fPIC
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
@@ -55,7 +48,7 @@ ifneq (${ADK_PACKAGE_ULOGD_MOD_SQLITE},)
 CONFIGURE_ARGS+=	--with-sqlite3=${STAGING_TARGET_DIR}/usr
 endif
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin ${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_raw2packet_BASE.so \
 		${IDIR_ULOGD}/usr/lib/ulogd/

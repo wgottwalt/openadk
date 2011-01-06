@@ -24,11 +24,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBXDMCP,libxdmcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBXDMCP_DEV,libxdmcp-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXDMCP_DEV},${PKGSC_LIBXDMCP_DEV},${PKG_OPTS}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBXDMCP_DEV}+=libxdmcp-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBXDMCP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXdmcp.so* ${IDIR_LIBXDMCP}/usr/lib/
 
@@ -37,5 +33,4 @@ libxdmcp-dev-install:
 	${CP} ${WRKINST}/usr/include/X11/* \
 		${IDIR_LIBXDMCP_DEV}/usr/include/X11/
 	
-
 include ${TOPDIR}/mk/pkg-bottom.mk

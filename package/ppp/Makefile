@@ -37,17 +37,7 @@ XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			DESTDIR="${WRKINST}/usr" \
 			TARGET_AR='${TARGET_CROSS}ar'
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOE}+=		mod-pppoe-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPOA}+=		mod-pppoa-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_RADIUS}+=		mod-radius-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_CHAT}+=		mod-chat-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPDUMP}+=		mod-pppdump-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPSTATS}+=		mod-pppstats-install
-SUB_INSTALLS-${ADK_PACKAGE_PPP_MOD_PPPUMTS}+=		mod-pppumts-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp
 	install -m0600 ./files/etc/ppp/chap-secrets ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DATA} ./files/etc/ppp/options ${IDIR_PPP}/etc/ppp/

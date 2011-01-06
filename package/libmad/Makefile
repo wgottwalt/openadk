@@ -30,10 +30,6 @@ endif
 #FPM:=mips
 #endif
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBMAD_DEV}+=	libmad-dev-install
-
 CONFIGURE_ARGS+=	--enable-fpm=${FPM} \
 			--disable-debugging \
 			--enable-speed
@@ -42,7 +38,7 @@ pre-install:
 	${INSTALL_DIR} ${WRKINST}/usr/lib/pkgconfig
 	${CP} ./files/mad.pc ${WRKINST}/usr/lib/pkgconfig
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBMAD}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmad.so* ${IDIR_LIBMAD}/usr/lib/
 

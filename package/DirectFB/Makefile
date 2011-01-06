@@ -43,11 +43,7 @@ ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 XAKE_FLAGS+=		LDEMULATION=elf64ltsmip
 endif
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_DIRECTFB_DEV}+=	directfb-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_DIRECTFB}/etc
 	${INSTALL_DATA} ./files/directfbrc ${IDIR_DIRECTFB}/etc/
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/{inputdrivers,systems,wm}

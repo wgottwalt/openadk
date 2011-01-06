@@ -60,11 +60,7 @@ CONFIGURE_ARGS+=	--disable-pthread \
 			--without-ifconfig-path \
 			--without-route-path
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${OPENVPN_EASY_RSA}+=	openvpn-easy-rsa-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} $(IDIR_OPENVPN)/usr/sbin $(IDIR_OPENVPN)/etc/openvpn
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
 	$(CP) ./files/openvpn.conf $(IDIR_OPENVPN)/etc/openvpn/

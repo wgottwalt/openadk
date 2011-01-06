@@ -32,10 +32,6 @@ $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},$
 $(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENSSL_DEV},${PKGSD_LIBOPENSSL_DEV},${PKGSC_LIBOPENSSL_DEV}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBOPENSSL_DEV}+=	libopenssl-dev-install
-
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 
@@ -74,10 +70,12 @@ do-build:
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		all build-shared
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
 	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so*
+
+openssl-util-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/openssl ${IDIR_OPENSSL_UTIL}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}

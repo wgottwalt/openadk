@@ -32,14 +32,10 @@ CONFIGURE_ARGS+=	--disable-man \
 			--enable-pcsc \
 			--enable-openct
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBOPENSC_DEV}+=	libopensc-dev-install
-
 post-extract:
 	cd ${WRKBUILD} && autoreconf -vif
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/share/opensc
 	${INSTALL_DATA} ${WRKINST}/usr/share/opensc/* \

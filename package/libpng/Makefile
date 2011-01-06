@@ -27,11 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBPNG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPNG_DEV,libpng-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPNG_DEV},${PKGSC_LIBPNG_DEV},${PKG_OPTS}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBPNG_DEV}+=	libpng-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpng{,12}.so* ${IDIR_LIBPNG}/usr/lib/
 

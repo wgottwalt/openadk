@@ -26,10 +26,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBSDL_DEV,libsdl-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl,${PKGSD_LIBSDL_DEV},${PKGSC_LIBSDL_DEV}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBSDL_DEV}+=	libsdl-dev-install
-
 CONFIGURE_ARGS+=	--disable-esd \
 			--disable-oss \
 			--enable-alsa \
@@ -39,7 +35,7 @@ CONFIGURE_ARGS+=	--disable-esd \
 			--enable-input-tslib \
 			--with-x
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL)/usr/lib
 
