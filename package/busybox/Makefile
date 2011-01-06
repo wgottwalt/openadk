@@ -27,6 +27,10 @@ SUB_INSTALLS-y:=
 SUB_INSTALLS-m:=
 SUB_INSTALLS-${ADK_PACKAGE_UDHCPD}+=	udhcpd-install
 
+ifeq (${DEVELOPER},1)
+SUB_INSTALLS-y+=	udhcpd-install
+endif
+
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
