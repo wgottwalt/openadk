@@ -89,6 +89,7 @@ eglibc-dev-install:
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
+	@touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs.h
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_EGLIBC_DEV) -name ..install.cmd -exec rm {} \;
 	# conflicts with libiconv
