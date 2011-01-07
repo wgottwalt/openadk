@@ -26,6 +26,7 @@ $(eval $(call PKG_template,DIRECTFB_DEV,directfb-dev,$(PKG_VERSION)-${PKG_RELEAS
 
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \
+			--without-tools \
 			--enable-fbdev \
 			--disable-sdl \
 			--disable-osx \
