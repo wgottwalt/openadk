@@ -68,9 +68,9 @@ install-tc:
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
 install-tc-atm:
-	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
-	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
-		${IDIR_TC_ATM}/usr/lib/tc/
+	${INSTALL_DIR} ${IDIR_TC_ATM}/lib/tc
+	${INSTALL_DATA} ${WRKINST}/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/lib/tc/
 
 install-ifstat:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin
