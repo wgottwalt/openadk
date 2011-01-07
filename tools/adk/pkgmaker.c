@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -222,6 +222,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
+	char *pkg_need_cxx, *pkg_need_java;
 	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
@@ -242,6 +243,8 @@ int main() {
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
 	pkg_multi = NULL;
+	pkg_need_cxx = NULL;
+	pkg_need_java = NULL;
 
 	p_ptr = NULL;
 	s_ptr = NULL;
@@ -350,6 +353,10 @@ int main() {
 					if ((parse_var(buf, "PKG_URL", NULL, &pkg_url)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_CXX", NULL, &pkg_cxx)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_NEED_CXX", NULL, &pkg_need_cxx)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_NEED_JAVA", NULL, &pkg_need_java)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_MULTI", NULL, &pkg_multi)) == 0)
 						continue;
@@ -584,6 +591,13 @@ int main() {
 					pkg_depends = NULL;
 				}
 
+				if (pkg_need_cxx != NULL) {
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_CXX");
+				}
+				if (pkg_need_java != NULL) {
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_JAVA");
+				}
+
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
 
 				if (pkg_dflt != NULL) {
@@ -710,6 +724,8 @@ int main() {
 			free(pkg_arch_depends);
 			free(pkg_host_depends);
 			free(pkg_cxx);
+			free(pkg_need_cxx);
+			free(pkg_need_java);
 			free(pkg_dflt);
 			free(pkg_cfline);
 			free(pkg_multi);

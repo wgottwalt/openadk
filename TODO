@@ -1,4 +1,8 @@
-- rework subinstall logic
+- man pages in ipkg/tgz packages (automatic)
+- ccache support for speedup
+- distcc eval
+- GCC SSP evaluation
+- LTO GCC evaluation
 - fix autoreconf usage in opensc
 - fix timezone stuff in eglibc/glibc
 - add back aufs2 patches for kernel
