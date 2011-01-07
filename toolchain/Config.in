@@ -1,0 +1,29 @@
+menu "Toolchain settings"
+
+config ADK_TOOLCHAIN_GDB
+	prompt "Enable building of the GNU debugger"
+	boolean
+	default n
+
+config ADK_TOOLCHAIN_GCC_CXX
+	prompt "Enable building of G++ (C++ language support in GCC)"
+	boolean
+	default n
+
+config ADK_TOOLCHAIN_GCC_JAVA
+	prompt "Enable building of GCJ (Java language support in GCC)"
+	boolean
+	default n
+
+config ADK_TOOLCHAIN_GCC_SSP
+	prompt "Enable Stack Smashing Protection in GCC"
+	boolean
+	default n
+
+config ADK_TOOLCHAIN_GCC_USE_SSP
+	prompt "Use SSP for all packages"
+ 	boolean	
+	depends on ADK_TOOLCHAIN_GCC_SSP
+	default n
+	
+endmenu
