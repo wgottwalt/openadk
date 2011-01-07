@@ -58,6 +58,17 @@ config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
 	  Note that without further customisation, turning this option
 	  off will almost certainly render the resulting system unusable.
 
+config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
+	boolean "ship custom network-scripts along with packages"
+	default y
+	help
+	  Turning this option to false will prevent the ADK from
+	  installing network-scripts (i.e. files in /etc/network/) for
+	  packages providing any.
+
+	  Note that without further customisation, turning this option
+	  off will almost certainly render the resulting system unusable.
+
 source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
