@@ -1,0 +1,29 @@
+	try to avoid errors regarding already #defined st_atime in bits/stat.h or so
+--- valgrind-3.5.0.orig/coregrind/launcher-linux.c	2009-08-19 15:37:47.000000000 +0200
++++ valgrind-3.5.0/coregrind/launcher-linux.c	2010-12-30 17:08:00.035938916 +0100
+@@ -32,6 +32,12 @@
+    and so it doesn't have to conform to Valgrind's arcane rules on
+    no-glibc-usage etc. */
+ 
++#include "pub_core_debuglog.h"
++#include "pub_core_vki.h"       // Avoids warnings from
++                                // pub_core_libcfile.h
++#include "pub_core_libcproc.h"  // For VALGRIND_LIB, VALGRIND_LAUNCHER
++#include "pub_core_ume.h"
++
+ #include <assert.h>
+ #include <ctype.h>
+ #include <elf.h>
+@@ -45,12 +51,6 @@
+ #include <sys/user.h>
+ #include <unistd.h>
+ 
+-#include "pub_core_debuglog.h"
+-#include "pub_core_vki.h"       // Avoids warnings from
+-                                // pub_core_libcfile.h
+-#include "pub_core_libcproc.h"  // For VALGRIND_LIB, VALGRIND_LAUNCHER
+-#include "pub_core_ume.h"
+-
+ 
+ 
+ #define PATH_MAX 4096 /* POSIX refers to this a lot but I dunno
