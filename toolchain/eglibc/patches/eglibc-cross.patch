@@ -1,3 +1,5 @@
+* NOTE: This will still use a hardcoded “gcc” instead of HOSTCC
+
 diff -Nur eglibc-2.12.orig/libc/sunrpc/proto.h eglibc-2.12/libc/sunrpc/proto.h
 --- eglibc-2.12.orig/libc/sunrpc/proto.h	2010-09-28 19:14:26.000000000 +0200
 +++ eglibc-2.12/libc/sunrpc/proto.h	2010-09-29 14:05:15.000000000 +0200
