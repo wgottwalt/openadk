@@ -67,6 +67,10 @@ $(WRKBUILD)/.compiled:
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
 		install_root=$(STAGING_TARGET_DIR) install
+	mkdir -p ${STAGING_TARGET_DIR}/etc
+	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $(WRKBUILD)/.installed
 
