@@ -1,26 +1,14 @@
-diff -Nur squashfs4.0.orig/squashfs-tools/mksquashfs.c squashfs4.0/squashfs-tools/mksquashfs.c
---- squashfs4.0.orig/squashfs-tools/mksquashfs.c	Sun Apr  5 23:22:48 2009
-+++ squashfs4.0/squashfs-tools/mksquashfs.c	Tue Dec 29 18:23:15 2009
-@@ -48,16 +48,9 @@
- #include <regex.h>
- #include <fnmatch.h>
+--- squashfs4.0~/squashfs-tools/mksquashfs.c	Sun Apr  5 21:22:24 2009
++++ squashfs4.0/squashfs-tools/mksquashfs.c	Fri Jan  7 20:36:08 2011
+@@ -24,6 +24,7 @@
+ #define FALSE 0
+ #define TRUE 1
  
--#ifndef linux
--#define __BYTE_ORDER BYTE_ORDER
--#define __BIG_ENDIAN BIG_ENDIAN
--#define __LITTLE_ENDIAN LITTLE_ENDIAN
--#include <sys/sysctl.h>
--#else
--#include <endian.h>
--#include <sys/sysinfo.h>
--#endif
 +#include <sys/param.h>
- 
-+
- #include "squashfs_fs.h"
- #include "squashfs_swap.h"
- #include "mksquashfs.h"
-@@ -3688,23 +3681,9 @@
+ #include <pwd.h>
+ #include <grp.h>
+ #include <time.h>
+@@ -3688,23 +3689,9 @@ void initialise_threads()
  	signal(SIGUSR1, sigusr1_handler);
  
  	if(processors == -1) {
@@ -46,7 +34,7 @@ diff -Nur squashfs4.0.orig/squashfs-tools/mksquashfs.c squashfs4.0/squashfs-tool
  		processors = get_nprocs();
  #endif
  	}
-@@ -3974,9 +3953,15 @@
+@@ -3974,9 +3961,15 @@ int excluded(struct pathnames *paths, ch
  			int match = use_regex ?
  				regexec(path->name[i].preg, name, (size_t) 0,
  					NULL, 0) == 0 :
@@ -62,9 +50,36 @@ diff -Nur squashfs4.0.orig/squashfs-tools/mksquashfs.c squashfs4.0/squashfs-tool
  
  			if(match && path->name[i].paths == NULL) {
  				/* match on a leaf component, any subdirectories
-diff -Nur squashfs4.0.orig/squashfs-tools/pseudo.c squashfs4.0/squashfs-tools/pseudo.c
---- squashfs4.0.orig/squashfs-tools/pseudo.c	Sun Apr  5 04:01:58 2009
-+++ squashfs4.0/squashfs-tools/pseudo.c	Tue Dec 29 18:07:33 2009
+--- squashfs4.0~/squashfs-tools/mksquashfs.h	Thu Feb 19 18:30:44 2009
++++ squashfs4.0/squashfs-tools/mksquashfs.h	Fri Jan  7 20:40:01 2011
+@@ -24,7 +24,9 @@
+  *
+  */
+ 
+-#if __BYTE_ORDER == __BIG_ENDIAN
++#ifndef __BYTE_ORDER
++#error Which endianness? __BYTE_ORDER is not defined.
++#elif __BYTE_ORDER == __BIG_ENDIAN
+ #define SQUASHFS_SWAP_SHORTS(s, d, n) swap_le16_num(s, d, n)
+ #define SQUASHFS_SWAP_INTS(s, d, n) swap_le32_num(s, d, n)
+ #define SQUASHFS_SWAP_LONG_LONGS(s, d, n) swap_le64_num(s, d, n)
+@@ -34,11 +36,13 @@
+ #define SWAP_LE64(s, d, field)	swap_le64(&((s)->field), &((d)->field))
+ #define SWAP_LES16(s, d, field)	swap_le16((unsigned short *) &((s)->field), \
+ 				(unsigned short *) &((d)->field))
+-#else
++#elif __BYTE_ORDER == __LITTLE_ENDIAN
+ #define SQUASHFS_MEMCPY(s, d, n)	memcpy(d, s, n)
+ #define SQUASHFS_SWAP_SHORTS(s, d, n)	memcpy(d, s, n * sizeof(short))
+ #define SQUASHFS_SWAP_INTS(s, d, n)	memcpy(d, s, n * sizeof(int))
+ #define SQUASHFS_SWAP_LONG_LONGS(s, d, n) \
+ 					memcpy(d, s, n * sizeof(long long))
++#else
++#error Which endianness (PDP endian? Worse?)
+ #endif
+ #endif
+--- squashfs4.0~/squashfs-tools/pseudo.c	Sun Apr  5 02:01:34 2009
++++ squashfs4.0/squashfs-tools/pseudo.c	Fri Jan  7 20:35:31 2011
 @@ -30,6 +30,11 @@
  #include <string.h>
  #include <stdlib.h>
@@ -77,9 +92,107 @@ diff -Nur squashfs4.0.orig/squashfs-tools/pseudo.c squashfs4.0/squashfs-tools/ps
  
  #include "pseudo.h"
  
-diff -Nur squashfs4.0.orig/squashfs-tools/unsquashfs.c squashfs4.0/squashfs-tools/unsquashfs.c
---- squashfs4.0.orig/squashfs-tools/unsquashfs.c	Sun Apr  5 23:23:06 2009
-+++ squashfs4.0/squashfs-tools/unsquashfs.c	Tue Dec 29 18:25:56 2009
+--- squashfs4.0~/squashfs-tools/read_fs.h	Thu Feb 19 18:28:56 2009
++++ squashfs4.0/squashfs-tools/read_fs.h	Fri Jan  7 20:40:00 2011
+@@ -24,7 +24,9 @@
+  *
+  */
+ 
+-#if __BYTE_ORDER == __BIG_ENDIAN
++#ifndef __BYTE_ORDER
++#error Which endianness? __BYTE_ORDER is not defined.
++#elif __BYTE_ORDER == __BIG_ENDIAN
+ #define SQUASHFS_SWAP_SHORTS(d, s, n) swap_le16_num(s, d, n)
+ #define SQUASHFS_SWAP_INTS(d, s, n) swap_le32_num(s, d, n)
+ #define SQUASHFS_SWAP_LONG_LONGS(d, s, n) swap_le64_num(s, d, n)
+@@ -34,11 +36,13 @@
+ #define SWAP_LE64(d, s, field)	swap_le64(&((s)->field), &((d)->field))
+ #define SWAP_LES16(d, s, field)	swap_le16((unsigned short *) &((s)->field), \
+ 				(unsigned short *) &((d)->field))
+-#else
++#elif __BYTE_ORDER == __LITTLE_ENDIAN
+ #define SQUASHFS_MEMCPY(d, s, n)	memcpy(d, s, n)
+ #define SQUASHFS_SWAP_SHORTS(d, s, n)	memcpy(d, s, n * sizeof(short))
+ #define SQUASHFS_SWAP_INTS(d, s, n)	memcpy(d, s, n * sizeof(int))
+ #define SQUASHFS_SWAP_LONG_LONGS(d, s, n) \
+ 					memcpy(d, s, n * sizeof(long long))
++#else
++#error Which endianness (PDP endian? Worse?)
+ #endif
+ #endif
+--- squashfs4.0~/squashfs-tools/squashfs_compat.h	Mon Mar 16 04:27:03 2009
++++ squashfs4.0/squashfs-tools/squashfs_compat.h	Fri Jan  7 20:39:59 2011
+@@ -768,12 +768,16 @@ typedef union squashfs_inode_header_2 sq
+  * macros used to swap each structure entry, taking into account
+  * bitfields and different bitfield placing conventions on differing architectures
+  */
+-#if __BYTE_ORDER == __BIG_ENDIAN
++#ifndef __BYTE_ORDER
++#error Which endianness? __BYTE_ORDER is not defined.
++#elif __BYTE_ORDER == __BIG_ENDIAN
+ 	/* convert from big endian to little endian */
+ #define SQUASHFS_SWAP(value, p, pos, tbits) _SQUASHFS_SWAP(value, p, pos, tbits, b_pos)
+-#else
++#elif __BYTE_ORDER == __LITTLE_ENDIAN
+ 	/* convert from little endian to big endian */ 
+ #define SQUASHFS_SWAP(value, p, pos, tbits) _SQUASHFS_SWAP(value, p, pos, tbits, 64 - tbits - b_pos)
++#else
++#error Which endianness (PDP endian? Worse?)
+ #endif
+ 
+ #define _SQUASHFS_SWAP(value, p, pos, tbits, SHIFT) {\
+--- squashfs4.0~/squashfs-tools/squashfs_swap.h	Fri Feb 20 19:41:56 2009
++++ squashfs4.0/squashfs-tools/squashfs_swap.h	Fri Jan  7 20:39:59 2011
+@@ -27,7 +27,9 @@
+  * macros to convert each stucture from big endian to little endian
+  */
+ 
+-#if __BYTE_ORDER == __BIG_ENDIAN
++#ifndef __BYTE_ORDER
++#error Which endianness? __BYTE_ORDER is not defined.
++#elif __BYTE_ORDER == __BIG_ENDIAN
+ extern void swap_le16(unsigned short *, unsigned short *);
+ extern void swap_le32(unsigned int *, unsigned int *);
+ extern void swap_le64(long long *, long long *);
+@@ -256,7 +258,7 @@ extern void inswap_le64_num(long long *,
+ #define SQUASHFS_INSWAP_SHORTS(s, n) inswap_le16_num(s, n)
+ #define SQUASHFS_INSWAP_INTS(s, n) inswap_le32_num(s, n)
+ #define SQUASHFS_INSWAP_LONG_LONGS(s, n) inswap_le64_num(s, n)
+-#else
++#elif __BYTE_ORDER == __LITTLE_ENDIAN
+ #define SQUASHFS_SWAP_SUPER_BLOCK(s, d)	\
+ 		SQUASHFS_MEMCPY(s, d, sizeof(*(s)))
+ #define SQUASHFS_SWAP_DIR_INDEX(s, d) \
+@@ -308,5 +310,7 @@ extern void inswap_le64_num(long long *,
+ #define SQUASHFS_INSWAP_SHORTS(s, n)
+ #define SQUASHFS_INSWAP_INTS(s, n)
+ #define SQUASHFS_INSWAP_LONG_LONGS(s, n)
++#else
++#error Which endianness (PDP endian? Worse?)
+ #endif
+ #endif
+--- squashfs4.0~/squashfs-tools/swap.c	Thu Mar 26 04:39:52 2009
++++ squashfs4.0/squashfs-tools/swap.c	Fri Jan  7 20:40:00 2011
+@@ -27,7 +27,9 @@
+ #include <endian.h>
+ #endif
+ 
+-#if __BYTE_ORDER == __BIG_ENDIAN
++#ifndef __BYTE_ORDER
++#error Which endianness? __BYTE_ORDER is not defined.
++#elif __BYTE_ORDER == __BIG_ENDIAN
+ void swap_le16(unsigned short *src, unsigned short *dest)
+ {
+ 	unsigned char *s = (unsigned char *) src;
+@@ -120,4 +122,6 @@ void inswap_le##BITS##_num(TYPE *s, int 
+ INSWAP_LE_NUM(16, unsigned short)
+ INSWAP_LE_NUM(32, unsigned int)
+ INSWAP_LE_NUM(64, long long)
++#elif __BYTE_ORDER != __LITTLE_ENDIAN
++#error Which endianness (PDP endian? Worse?)
+ #endif
+--- squashfs4.0~/squashfs-tools/unsquashfs.c	Sun Apr  5 21:22:42 2009
++++ squashfs4.0/squashfs-tools/unsquashfs.c	Fri Jan  7 20:35:31 2011
 @@ -21,6 +21,8 @@
   * unsquashfs.c
   */
@@ -89,7 +202,7 @@ diff -Nur squashfs4.0.orig/squashfs-tools/unsquashfs.c squashfs4.0/squashfs-tool
  #include "unsquashfs.h"
  #include "squashfs_swap.h"
  #include "squashfs_compat.h"
-@@ -1193,10 +1195,17 @@
+@@ -1193,10 +1195,17 @@ int matches(struct pathnames *paths, cha
  		struct pathname *path = paths->path[n];
  		for(i = 0; i < path->names; i++) {
  			int match = use_regex ?
@@ -107,7 +220,7 @@ diff -Nur squashfs4.0.orig/squashfs-tools/unsquashfs.c squashfs4.0/squashfs-tool
  			if(match && path->name[i].paths == NULL)
  				/*
  				 * match on a leaf component, any subdirectories
-@@ -1795,21 +1804,7 @@
+@@ -1795,21 +1804,7 @@ void initialise_threads(int fragment_buf
  
  	if(processors == -1) {
  #ifndef linux

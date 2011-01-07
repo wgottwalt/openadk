@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		squashfs
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a3c23391da4ebab0ac4a75021ddabf96
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=squashfs/}
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz
