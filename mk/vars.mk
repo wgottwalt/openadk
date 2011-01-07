@@ -29,6 +29,9 @@ STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
+# relation from STAGING_HOST_DIR to STAGING_TARGET_DIR (for gcc to find
+# its sysroot while staying relocatable)
+STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build

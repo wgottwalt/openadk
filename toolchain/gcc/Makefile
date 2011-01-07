@@ -133,7 +133,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
-			--with-sysroot=$(STAGING_TARGET_DIR) \
+			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-slibdir=$(STAGING_TARGET_DIR)/lib \
 			--enable-shared \
 	);
