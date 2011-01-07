@@ -96,12 +96,16 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
-${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
+${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs > \
-		${BUILD_DIR}/${ROOTFSSQUASHFS}
+
+ifeq (,${CUSTOM_ROOTFSSQUASHFS_BUILD})
+${BIN_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
+	    >${BUILD_DIR}/${ROOTFSSQUASHFS}
+endif
 
 createinitramfs:
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)

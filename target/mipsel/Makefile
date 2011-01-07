@@ -5,6 +5,11 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/kernel.mk
 include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
+
+ifeq (${ADK_TARGET_SYSTEM_LINKSYS_WRT54G},y)
+CUSTOM_ROOTFSSQUASHFS_BUILD=1
+endif
+
 include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
@@ -21,9 +26,18 @@ tools-compile: $(TOOLS_BUILD_DIR)
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_WRT54G),y)
 kernel-install: tools-compile
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux \
-		$(LINUX_DIR)/vmlinux.stripped
-	@gzip -c9 $(LINUX_DIR)/vmlinux.stripped > $(BUILD_DIR)/$(TARGET_KERNEL)
+	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinub.elf \
+	    ${BUILD_DIR}/${TARGET_KERNEL}
+
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+	${TARGET_CROSS}objcopy -O binary ${BUILD_DIR}/${TARGET_KERNEL} \
+	    ${BUILD_DIR}/${TARGET_KERNEL}.bin
+	gzip -n9 <${BUILD_DIR}/${TARGET_KERNEL}.bin \
+	    >${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	printf '\0' >>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	PATH='${TARGET_PATH}' trx -o $@~ ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz \
+	    -a 1024 ${BUILD_DIR}/root.squashfs
+	PATH='${TARGET_PATH}' addpattern -4 -p W54G -v v4.20.6 -g -i $@~ -o $@
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
@@ -49,7 +63,7 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 	@echo "If you just want to update, use adkupdate."
 endif
 ifeq ($(ADK_TARGET_FS),squashfs)
-imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
+imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 	@if [ $$(stat -f %z ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
 		echo 'Image is too big!'; \
 	else \
