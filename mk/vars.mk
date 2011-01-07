@@ -15,6 +15,9 @@ else
 TARGET_DEBUGGING:=	-fomit-frame-pointer $(TARGET_OPTIMIZATION) 
 endif
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
+ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
+TARGET_CFLAGS+=		-fstack-protector
+endif
 
 BASE_DIR:=		$(TOPDIR)
 DISTDIR?=		${BASE_DIR}/dl

@@ -56,3 +56,4 @@ source "target/linux/Config.in"
 endmenu
 
 source "target/config/Config.in.adk"
+source "toolchain/Config.in"

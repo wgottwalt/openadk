@@ -6,6 +6,12 @@ include Makefile.inc
 include ../rules.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
+ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
+CONFOPTS+=		--enable-libssp
+else
+CONFOPTS+=		--disable-libssp
+endif
+
 ifeq ($(ADK_LINUX_64),y)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
@@ -22,14 +28,13 @@ $(WRKBUILD)/.configured:
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_HOST_NAME) \
 		--target=$(REAL_GNU_TARGET_NAME) \
-		--disable-nls \
 		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 		--with-sysroot=$(STAGING_TARGET_DIR) \
 		--disable-multilib \
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
+		--disable-nls \
 		--disable-werror \
-		--disable-libssp \
 		${CONFOPTS} \
 	);
 	touch $@

@@ -19,6 +19,9 @@ $(WRKBUILD)/.headers:
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
+ifneq ($(ADK_TOOLCHAIN_GCC_SSP),)
+	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
+endif
 	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(TOOLCHAIN_SYSROOT) \
 		DEVEL_PREFIX=/usr/ \

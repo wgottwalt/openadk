@@ -26,7 +26,9 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uClibc
 LIBC:=uClibc
 endif
+ifeq ($(ADK_TOOLCHAIN_GDB),y)
 TARGETS+=gdb
+endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
