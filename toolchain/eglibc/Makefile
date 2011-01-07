@@ -85,9 +85,9 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(EGLIBC_BUILD_DIR_FINAL)/libc.so
 	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
-	${INSTALL_DATA} ${EGLIBC_BUILD_DIR_FINAL}/libc/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
-	${INSTALL_DATA} ${EGLIBC_BUILD_DIR_FINAL}/libc/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
-	${INSTALL_DATA} ${EGLIBC_BUILD_DIR_FINAL}/libc/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/libc/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/libc/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/libc/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
