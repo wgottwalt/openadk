@@ -153,6 +153,8 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	prompt "kmod-blk-dev-loop................. Loop mount support"
 	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_BLK_DEV
 	default n
 	help
 	  Saying Y here will allow you to use a regular file as a block
