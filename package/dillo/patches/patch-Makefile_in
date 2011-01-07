@@ -1,0 +1,11 @@
+--- dillo-2.2.orig/Makefile.in	2010-02-11 11:20:01.000000000 +0100
++++ dillo-2.2/Makefile.in	2011-01-07 21:37:49.000000000 +0100
+@@ -242,7 +242,7 @@ target_vendor = @target_vendor@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = lout dw dlib dpip src doc dpid dpi test
++SUBDIRS = lout dw dlib dpip src doc dpid dpi
+ EXTRA_DIST = Doxyfile dillorc install-dpi-local
+ sysconf_DATA = dillorc
+ all: config.h

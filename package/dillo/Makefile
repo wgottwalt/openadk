@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dillo
 PKG_VERSION:=		2.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f8bcd62093f178bed81e46cc54e73f42
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
