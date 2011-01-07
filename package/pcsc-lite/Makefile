@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcsc-lite
 PKG_VERSION:=		1.6.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f80d3ecd9569b71d557f283f16295c74
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		crypto
