@@ -36,7 +36,8 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
-CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
+CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
