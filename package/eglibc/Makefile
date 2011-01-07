@@ -49,10 +49,23 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 # compile nothing, eglibc is already build in toolchain directory
 do-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
-		$(IDIR_EGLIBC)/usr/lib
-	test -z $(ADK_RUNTIME_TIMEZONE) || \
-	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
-		$(IDIR_EGLIBC)/etc/localtime
+	    $(IDIR_EGLIBC)/usr/lib
+	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s usr/share/zoneinfo/"$$f" || continue; \
+		echo usr/share/zoneinfo/"$$f" | \
+		    ${TOOLS_DIR}/cpio -pdu ${IDIR_EGLIBC}/; \
+	done
+	tz=; cd ${IDIR_EGLIBC}/usr/share/zoneinfo || exit 1; \
+	    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s "$$f" || continue; \
+		tz=$$f; \
+	done; if test x"$$tz" = x""; then \
+		echo >&2 Error during timezone installation; \
+		exit 1; \
+	else \
+		ln -sf "../usr/share/zoneinfo/$$tz" \
+		    ${IDIR_EGLIBC}/etc/localtime; \
+	fi
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
