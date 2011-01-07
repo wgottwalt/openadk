@@ -64,7 +64,8 @@ install-ip:
 
 install-tc:
 	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin}
-	${INSTALL_DATA} ${WRKINST}/lib/tc/* ${IDIR_TC}/lib/tc/
+	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
+	${CP} ${WRKINST}/lib/tc/{m_*.so,*.dist} ${IDIR_TC}/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
 install-tc-atm:
