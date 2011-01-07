@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
-PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID
+PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
 PKGSD_LIBCOM_ERR:=	Common error library
@@ -24,6 +24,8 @@ PKGSD_LIBSS:=		Subsystem command parsing library
 PKGSC_LIBSS:=		libs
 PKGSD_LIBBLKID:=	Libblkid
 PKGSC_LIBBLKID:=	libs
+PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
+PKGSC_E2FSCK_STATIC:=	fs
 
 include ${TOPDIR}/mk/package.mk
 
@@ -32,6 +34,7 @@ $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKGS
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
+$(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-tls
 INSTALL_TARGET+=	install-libs
@@ -43,6 +46,11 @@ pre-build:
 		LDFLAGS="" \
 		CPPFLAGS="" \
 		subst
+
+post-build:
+	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
+	${INSTALL_DIR} ${WRKINST}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin/
 
 post-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
@@ -75,5 +83,8 @@ post-install:
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
 		${STAGING_TARGET_DIR}/usr/include/uuid
 	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
+	${INSTALL_DIR} ${IDIR_E2FSCK_STATIC}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck.static \
+		${IDIR_E2FSCK_STATIC}/usr/sbin/e2fsck
 
 include ${TOPDIR}/mk/pkg-bottom.mk
