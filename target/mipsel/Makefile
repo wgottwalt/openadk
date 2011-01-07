@@ -88,7 +88,7 @@ ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_WRT54G),y)
 	@echo 'Type following on the CFE prompt to boot the kernel:'
-	@echo 'CFE> boot -z -elf -tftp 192.168.1.254:$(BIN_DIR)/${TARGET_KERNEL}'
+	@echo 'CFE> boot -elf -tftp 192.168.1.254:$(BIN_DIR)/${TARGET_KERNEL}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),archive)
