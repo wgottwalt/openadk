@@ -66,3 +66,77 @@ config ADK_RUNTIME_KBD_LAYOUT
 	depends on ADK_TARGET_WITH_INPUT
 	help
 	  Predefine the keyboard layout for the embedded system.
+
+choice
+prompt "Initial login shell for the root user"
+default ADK_ROOTSH_ASH
+
+config ADK_ROOTSH_ASH
+	select BUSYBOX_ASH
+	bool "ash (busybox)"
+	help
+	  Use the minimalistic ash variant that is part of busybox
+	  as standard login shell for the superuser. This is the
+	  default, but discouraged due to its frugality.
+
+config ADK_ROOTSH_BASH
+	select ADK_PACKAGE_BASH
+	bool "bash (GNU Bourne-Again Shell)"
+	help
+	  Use GNU bash as standard login shell for the superuser.
+
+config ADK_ROOTSH_MKSH
+	select ADK_PACKAGE_MKSH
+	bool "mksh (MirBSD Korn Shell)"
+	help
+	  Use mksh (a Korn Shell variant) as standard login shell
+	  for the superuser.
+
+config ADK_ROOTSH_TCSH
+	select ADK_PACKAGE_TCSH
+	bool "tcsh (Tenex C Shell)"
+	help
+	  Use tcsh (a C Shell variant) as standard login shell
+	  for the superuser.
+
+config ADK_ROOTSH_ZSH
+	select ADK_PACKAGE_ZSH
+	bool "zsh (The Z Shell)"
+	help
+	  Use zsh as standard login shell for the superuser.
+
+endchoice
+
+choice
+prompt "System /bin/sh (POSIX script shell)"
+default ADK_BINSH_ASH
+
+config ADK_BINSH_ASH
+	select BUSYBOX_ASH
+	bool "ash (busybox)"
+	help
+	  Use the minimalistic ash variant that is part of busybox
+	  as system shell. This is the default and rather small and
+	  fast, but lacks scripting features.
+
+config ADK_BINSH_BASH
+	select ADK_PACKAGE_BASH
+	bool "bash (GNU Bourne-Again Shell)"
+	help
+	  Use GNU bash as system shell. This is discouraged due to
+	  its size and slowness.
+
+config ADK_BINSH_MKSH
+	select ADK_PACKAGE_MKSH
+	bool "mksh (MirBSD Korn Shell)"
+	help
+	  Use mksh (a Korn Shell variant) as system shell, which is
+	  both small and powerful, so quite suited for this task.
+
+config ADK_BINSH_ZSH
+	select ADK_PACKAGE_ZSH
+	bool "zsh (The Z Shell)"
+	help
+	  Use zsh as system shell. This is probably a bad idea.
+
+endchoice
