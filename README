@@ -26,11 +26,14 @@ Before you can start you need to install some tools:
 There is a check for the required versions of these tools in advance, though.
 (to re-issue the checks, use "make prereq").
 
-Please use "make menuconfig" to choose your embedded system and configure 
-like you want to.
+Please use "make menuconfig" to choose your target architecture and
+embedded system and configure like you want to.
 
 Simply running 'make' will build the firmware for your embedded system.  The
 buildsystem will download all sources, build the toolchain, the kernel and all
 applications.
+
+To switch to another target configuration, simply run "make switch". This will
+backup your existing configuration and will start with an empty one.
 
 Sunshine!
