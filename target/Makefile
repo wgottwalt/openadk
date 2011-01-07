@@ -32,6 +32,7 @@ all: install
 #    only if it does (so the timestamp stays intact)
 # 8) remove the temporary .kernelconfig.tmp
 ###
+ifeq (${ADK_TARGET_KERNEL_CUSTOMISING},y)
 config-prepare: $(TOPDIR)/.config
 	@sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
 	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modules
@@ -74,6 +75,10 @@ endif
 	@cd ${BUILD_DIR} && cmp -s .kernelconfig.tmp .kernelconfig || \
 	    cp .kernelconfig.tmp .kernelconfig
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
+else
+config-prepare: $(TOPDIR)/.config
+	@cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig
+endif
 
 prepare: $(ADK_TARGET_ARCH)-prepare
 compile: $(ADK_TARGET_ARCH)-compile

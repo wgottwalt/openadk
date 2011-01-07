@@ -74,7 +74,7 @@ source "package/Config.in.auto"
 endmenu
 
 menu "Kernel configuration"
-depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
 source "target/linux/Config.in"
 endmenu
 
