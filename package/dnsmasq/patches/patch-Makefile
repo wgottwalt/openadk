@@ -1,0 +1,20 @@
+--- dnsmasq-2.55.orig/Makefile	2010-06-06 21:22:30.000000000 +0200
++++ dnsmasq-2.55/Makefile	2011-01-07 21:43:23.000000000 +0100
+@@ -13,7 +13,7 @@
+ #  You should have received a copy of the GNU General Public License
+ #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+-PREFIX = /usr/local
++PREFIX = /usr
+ BINDIR = ${PREFIX}/sbin
+ MANDIR = ${PREFIX}/share/man
+ LOCALEDIR = ${PREFIX}/share/locale
+@@ -24,7 +24,7 @@ MSGMERGE = msgmerge
+ MSGFMT = msgfmt
+ XGETTEXT = xgettext
+ 
+-CFLAGS = -Wall -W -O2
++CFLAGS ?= -Wall
+ 
+ #################################################################
+ 
