@@ -14,7 +14,7 @@ WRKDIST=		${WRKDIR}/$(PKG_NAME)${PKG_VERSION}
 include ../rules.mk
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	$(MAKE) -C $(WRKBUILD)/squashfs-tools
+	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${HOSTCC}'
 	touch $@
 
 ${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled
