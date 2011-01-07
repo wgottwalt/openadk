@@ -15,6 +15,7 @@ PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 PKG_SUBPKGS:=		IP TC TC_ATM IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
 PKGSS_TC:=		kmod-sched
+PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
