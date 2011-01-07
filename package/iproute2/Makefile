@@ -46,14 +46,14 @@ CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
 
 INSTALL_y:=
 INSTALL_m:=
-INSTALL_${ADK_PACKAGE_IP}:=	install-ip
-INSTALL_${ADK_PACKAGE_TC}:=	install-tc
-INSTALL_${ADK_PACKAGE_TC_ATM}:=	install-tc-atm
-INSTALL_${ADK_PACKAGE_IFSTAT}:=	install-ifstat
-INSTALL_${ADK_PACKAGE_LNSTAT}:=	install-lnstat
-INSTALL_${ADK_PACKAGE_ROUTEL}:=	install-routel
-INSTALL_${ADK_PACKAGE_RTMON}:=	install-rtmon
-INSTALL_${ADK_PACKAGE_SS}:=	install-ss
+INSTALL_${ADK_PACKAGE_IP}+=	install-ip
+INSTALL_${ADK_PACKAGE_TC}+=	install-tc
+INSTALL_${ADK_PACKAGE_TC_ATM}+=	install-tc-atm
+INSTALL_${ADK_PACKAGE_IFSTAT}+=	install-ifstat
+INSTALL_${ADK_PACKAGE_LNSTAT}+=	install-lnstat
+INSTALL_${ADK_PACKAGE_ROUTEL}+=	install-routel
+INSTALL_${ADK_PACKAGE_RTMON}+=	install-rtmon
+INSTALL_${ADK_PACKAGE_SS}+=	install-ss
 
 post-install: ${INSTALL_y} ${INSTALL_m}
 
