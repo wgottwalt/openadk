@@ -18,7 +18,7 @@ $(eval $(call PKG_template,WATCHDOG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 post-install:
 	${INSTALL_DIR} ${IDIR_WATCHDOG}/sbin ${IDIR_WATCHDOG}/etc/
 	${INSTALL_DATA} ./files/watchdog.conf ${IDIR_WATCHDOG}/etc/
-	${INSTALL_BIN} ${WRKINST}/sbin/watchdog \
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/watchdog \
 		       ${IDIR_WATCHDOG}/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
