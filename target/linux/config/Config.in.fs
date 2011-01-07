@@ -40,6 +40,7 @@ config ADK_KPACKAGE_KMOD_EXPORTFS
 	help
 
 config ADK_KERNEL_SQUASHFS
+	prompt ".................................. SquashFS filesystem"
 	boolean
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
