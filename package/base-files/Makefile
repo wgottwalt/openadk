@@ -50,6 +50,7 @@ endif
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
+	chmod 1777 ${IDIR_BASE_FILES}/tmp
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
