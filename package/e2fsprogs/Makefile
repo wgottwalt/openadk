@@ -45,6 +45,8 @@ pre-build:
 		subst
 
 post-install:
+	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
+	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_E2FSPROGS}/etc/
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin/
 	cd $(IDIR_E2FSPROGS)/usr/sbin && ln -sf e2fsck fsck.ext2
