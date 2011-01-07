@@ -191,9 +191,9 @@ switch:
 	fi
 
 kernelconfig:
-	cp $(TOPDIR)/target/$(ARCH)/kernel.config $(BUILD_DIR)/linux/.config
-	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
-	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ARCH)/kernel.config
+	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config $(BUILD_DIR)/linux/.config
+	${KERNEL_MAKE_ENV} ${MAKE} ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config
 
 # create a new package from package/.template
 newpackage:
