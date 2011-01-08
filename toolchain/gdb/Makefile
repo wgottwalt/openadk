@@ -4,7 +4,6 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-
 include ${TOPDIR}/mk/buildhlp.mk
 
 ifeq (${ADK_MAKE_PARALLEL},y)

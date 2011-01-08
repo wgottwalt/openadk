@@ -4,7 +4,6 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-
 include ${TOPDIR}/mk/buildhlp.mk
 
 ifneq ($(ADK_DEBUG),)
@@ -79,6 +78,7 @@ $(WRKBUILD)/.configured:
 	);
 	touch $@
 
+$(EGLIBC_BUILD_DIR_FINAL)/libc.so:
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
 	touch $@

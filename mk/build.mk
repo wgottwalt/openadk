@@ -114,7 +114,8 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
 world:
-	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps $(TOOLS_DIR) $(TOOLS_BUILD_DIR)
+	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps \
+		$(TOOLS_DIR) $(TOOLS_BUILD_DIR) $(TOOLCHAIN_BUILD_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
@@ -200,7 +201,7 @@ root_clean:
 	mkdir -p $(TARGET_DIR)
 
 # Do a per-package clean here, too. This way stale headers and
-# libraries from cross_*/target/ get wiped away, which keeps
+# libraries from target_*/ get wiped away, which keeps
 # future package build's configure scripts from returning false
 # dependencies information.
 
@@ -210,7 +211,7 @@ clean:
 	for d in ${STAGING_PKG_DIR}; do \
 		for f in $$(ls $$d/[a-z]* 2>/dev/null); do  \
 			while read file ; do \
-				rm $$d/target/$$file 2>/dev/null; \
+				rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
 			rm $$f ; \
 		done \

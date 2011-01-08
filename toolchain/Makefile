@@ -54,14 +54,11 @@ $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)
 	@ln -sf ../lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 
-$(TOOLCHAIN_BUILD_DIR):
-	@mkdir -p $(TOOLCHAIN_BUILD_DIR)
-
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 
-%-prepare: $(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR)
+%-prepare: $(STAGING_HOST_DIR)
 	$(TRACE) toolchain/$(patsubst %-prepare,%,$@)/prepare
 	@if test x"$(patsubst %-prepare,%,$@)" = x"$(LIBC)"; then \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
