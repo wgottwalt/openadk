@@ -170,7 +170,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(TOPDIR)/bin/tools/cpio -padlmu '${STAGING_TARGET_DIR}'
+	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_TARGET_DIR}'
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \

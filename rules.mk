@@ -45,11 +45,13 @@ endif
 
 include $(TOPDIR)/mk/vars.mk
 
-export BASH HOSTCC HOSTCFLAGS MAKE LANGUAGE LC_ALL OStype PATH
+export BASH HOSTCC HOSTCXX MAKE LANGUAGE LC_ALL OStype PATH
 
+HOSTCFLAGS?=		-O2
+HOSTCXXFLAGS?=		-O2
 HOSTCPPFLAGS?=
 HOSTLDFLAGS?=
-TARGET_CFLAGS:=		$(strip -fno-ident -fhonour-copts ${TARGET_CFLAGS})
+TARGET_CFLAGS:=		$(strip ${TARGET_CFLAGS} -fno-ident -fhonour-copts)
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
 

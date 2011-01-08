@@ -27,9 +27,9 @@ SRCS+=		\
 		src/nonpax.c \
 		src/cpio.c
 
-${TOPDIR}/bin/tools/cpio: ${SRCS}
+${TOOLS_DIR}/cpio: ${SRCS}
 	${HOSTCC} ${HOSTCFLAGS} -D_GNU_SOURCE -Isrc -o $@ $^
 
-install: ${TOPDIR}/bin/tools/cpio
+install: ${TOOLS_DIR}/cpio
 
 include $(TOPDIR)/mk/tools.mk
