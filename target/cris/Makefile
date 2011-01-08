@@ -9,10 +9,7 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
 
-$(TOOLS_BUILD_DIR):
-	@mkdir -p $(TOOLS_BUILD_DIR)
-
-tools-compile: $(TOOLS_BUILD_DIR)
+tools-compile:
 	$(MAKE) -C ../tools/mkfimage
 ifneq ($(ADK_HOST_DARWIN),y)
 	$(MAKE) -C ../tools/e100boot prepare compile install

@@ -28,7 +28,7 @@ SRCS+=		\
 		src/cpio.c
 
 ${TOPDIR}/bin/tools/cpio: ${SRCS}
-	@${HOSTCC} ${HOSTCFLAGS} -D_GNU_SOURCE -Isrc -o $@ $^
+	${HOSTCC} ${HOSTCFLAGS} -D_GNU_SOURCE -Isrc -o $@ $^
 
 install: ${TOPDIR}/bin/tools/cpio
 

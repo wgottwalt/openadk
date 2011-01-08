@@ -10,10 +10,7 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/kernel-adk
 LOADADDR:=0x20008000
 
-$(TOOLS_BUILD_DIR):
-	@mkdir -p $(TOOLS_BUILD_DIR)
-
-tools-compile: $(TOOLS_BUILD_DIR)
+tools-compile:
 	$(MAKE) -C ../tools/uboot-mkimage
 
 kernel-install: tools-compile

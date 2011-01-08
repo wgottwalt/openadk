@@ -13,7 +13,6 @@
 - check all patches for CFLAGS compliance, fhonour patch from FreeWRT
 - busybox update and SuSv3 removal
 - check rtc support on foxg20
-- relocatable gcc (adk)
 - adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, for no internet access

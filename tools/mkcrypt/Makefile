@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 ${TOPDIR}/bin/tools/mkcrypt:
-	$(HOSTCC) -o $(TOPDIR)/bin/tools/mkcrypt mkcrypt.c
+	$(HOSTCC) ${HOSTCFLAGS} -o $(TOPDIR)/bin/tools/mkcrypt mkcrypt.c
 
 install: ${TOPDIR}/bin/tools/mkcrypt
 

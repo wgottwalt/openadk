@@ -113,7 +113,8 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
-world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)
+world:
+	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps $(TOOLS_DIR) $(TOOLS_BUILD_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
@@ -132,18 +133,6 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	-cd ${PACKAGE_DIR} && \
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
-
-$(DISTDIR):
-	mkdir -p $(DISTDIR)
-
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-$(TARGET_DIR):
-	mkdir -p $(TARGET_DIR)
-
-$(PACKAGE_DIR):
-	mkdir -p ${PACKAGE_DIR}/.stamps
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/include} \
@@ -564,11 +553,9 @@ bulkallmod:
 	done
 
 ${TOPDIR}/bin/tools/pkgmaker:
-	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 ${TOPDIR}/bin/tools/pkgrebuild:
-	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
@@ -576,10 +563,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TO
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
-$(TOPDIR)/bin/tools:
-	@mkdir -p $(TOPDIR)/bin/tools
-
-${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
+${TOPDIR}/bin/tools/depmaker:
 	$(HOSTCC) -g -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/bin/tools/depmaker

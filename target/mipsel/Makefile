@@ -15,10 +15,7 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
-$(TOOLS_BUILD_DIR):
-	@mkdir -p $(TOOLS_BUILD_DIR)
-
-tools-compile: $(TOOLS_BUILD_DIR)
+tools-compile:
 	$(MAKE) -C ../tools/trx
 	$(MAKE) -C ../tools/addpattern
 	$(MAKE) -C ../tools/srec2bin
