@@ -5,13 +5,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		DirectFB
 PKG_VERSION:=		1.4.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		1.4-5
 PKG_MD5SUM:=		94735ccec21120794adcce93a61445d2
 PKG_DESCR:=		Thin graphic library for the Linux framebuffer devices
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libjpeg
-PKG_BUILDDEP:=		libpng jpeg
+PKG_BUILDDEP:=		libpng jpeg freetype
 PKG_URL:=		http://www.directfb.org/
 PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.4/
 
