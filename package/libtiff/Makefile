@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtiff
 PKG_VERSION:=		3.9.4
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
 PKG_DESCR:=		A library for reading/writing TIFF images
 PKG_SECTION:=		libs
@@ -28,7 +28,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBTIFF_DEV,libtiff-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBTIFF_DEV},${PKGSC_LIBTIFF_DEV},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--disable-cxx
+CONFIGURE_ARGS+=	--disable-cxx --disable-rpath
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTIFF}/usr/lib
