@@ -70,7 +70,7 @@ ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
 		${BUILD_DIR}/.kernelconfig.board
 endif
 	@cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.nokernel \
-	    .kernelconfig.kernel .kernelconfig.modkernel .kernelconfig.modules \
+	    .kernelconfig.kernel .kernelconfig.modules \
 	    >.kernelconfig.tmp
 	@cd ${BUILD_DIR} && cmp -s .kernelconfig.tmp .kernelconfig || \
 	    cp .kernelconfig.tmp .kernelconfig
