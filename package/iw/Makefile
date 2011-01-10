@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
-PKG_VERSION:=		0.9.19
+PKG_VERSION:=		0.9.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3b88743f9c6ce8a7e2f5fd7d18fdea42
+PKG_MD5SUM:=		726db5f1fd6bc316434414770513ef81
 PKG_DESCR:=		Tools for setting up WiFi cards via netlink (nl80211)
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
