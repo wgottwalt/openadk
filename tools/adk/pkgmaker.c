@@ -37,10 +37,11 @@
 
 static int nobinpkgs;
 
-static void fatal_error(const char *message) {
-
-	fprintf(stderr, "Fatal error. %s\n", message);
-	exit(1);
+#define fatal_error(...) { \
+	fprintf(stderr, "Fatal error. "); \
+	fprintf(stderr, __VA_ARGS__); \
+	fprintf(stderr, "\n"); \
+	exit(1); \
 }
 
 static int parse_var_hash(char *buf, const char *varname, StrMap *strmap) {
@@ -304,7 +305,8 @@ int main() {
 						fclose(section);
 					}
 				} else
-					fatal_error("Can not find section description for package.");
+					fatal_error("Can not find section description for package %s.",
+							pkgdirp->d_name);
 				
 				fclose(pkg);
 				continue;
@@ -501,7 +503,7 @@ int main() {
 						fclose(section);
 					}
 				} else
-					fatal_error("Can not find section description for package");
+					fatal_error("Can not find section description for package %s.", pkgdirp->d_name);
 
 				unlink(path);
 				cfg = fopen(path, "w");
