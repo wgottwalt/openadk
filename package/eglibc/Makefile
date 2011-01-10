@@ -20,10 +20,9 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-EGLIBC_CONFOPTS:=	\
-			--build=$(GNU_HOST_NAME) \
+EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-nls \
 			--without-cvs \
 			--disable-profile \

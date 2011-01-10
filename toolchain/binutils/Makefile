@@ -28,7 +28,6 @@ $(WRKBUILD)/.configured:
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_HOST_NAME) \
 		--target=$(REAL_GNU_TARGET_NAME) \
-		--with-sysroot=$(TOOLCHAIN_SYSROOT) \
 		--with-sysroot=$(STAGING_TARGET_DIR) \
 		--disable-multilib \
 		--disable-dependency-tracking \

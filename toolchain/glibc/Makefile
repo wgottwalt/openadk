@@ -31,21 +31,21 @@ $(WRKBUILD)/.headers_configure:
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
-			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
-			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+			--prefix=$(STAGING_TARGET_DIR)/usr \
+			--with-sysroot=$(STAGING_TARGET_DIR) \
 			${GLIBC_CONFOPTS} \
 	);
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
+	mkdir -p $(STAGING_TARGET_DIR)/usr/lib
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(MAKE) ${GLIBC_MAKEOPTS} \
 		cross-compiling=yes \
 		install-headers \
 	);
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $@
 
 $(WRKBUILD)/.configured:
@@ -67,7 +67,6 @@ $(WRKBUILD)/.compiled:
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
 		install_root=$(STAGING_TARGET_DIR) install
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(WRKBUILD)/.installed
+	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

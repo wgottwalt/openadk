@@ -554,6 +554,7 @@ bulkallmod:
 	done
 
 ${TOPDIR}/bin/tools/pkgmaker:
+	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 ${TOPDIR}/bin/tools/pkgrebuild:

@@ -9,7 +9,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 GLIBC_PORTS_VERSION:=	2.12
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-nls \
 			--disable-sanity-checks \
 			--disable-nls \

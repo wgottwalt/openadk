@@ -3,7 +3,7 @@
 #
 # Steps to build toolchains
 # 1) build and install binutils
-# 2) build and install mpfr, mpc and gmp
+# 2) build and install mpfr, mpc, libelf and gmp
 # 3) build and install gcc c compiler
 # 4) install kernel-headers
 # 5) install libc headers
@@ -13,7 +13,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc gcc
+TARGETS:=binutils gmp mpfr mpc libelf gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc-ports glibc
 LIBC:=glibc
@@ -38,7 +38,7 @@ install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 
-gcc-prepare: binutils-install gmp-install mpfr-install mpc-install
+gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare glibc-ports-prepare
 else

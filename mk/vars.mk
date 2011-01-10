@@ -9,14 +9,23 @@ INSTALL_SCRIPT=		install -m0755
 MAKEFLAGS=		$(EXTRA_MAKEFLAGS)
 BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
+
+# target compiler settings
+TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include
+TARGET_LDFLAGS+=	-Wl,-O2
 ifneq ($(ADK_DEBUG),)
 TARGET_DEBUGGING:=	-g3 -fno-omit-frame-pointer
 else
-TARGET_DEBUGGING:=	-fomit-frame-pointer $(TARGET_OPTIMIZATION) 
+TARGET_DEBUGGING:=	$(TARGET_OPTIMIZATION) -fomit-frame-pointer
 endif
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
+TARGET_LDFLAGS+=	-fstack-protector
+endif
+ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
+TARGET_CFLAGS+=		-flto
+TARGET_LDFLAGS+=	-flto
 endif
 
 BASE_DIR:=		$(TOPDIR)
@@ -56,8 +65,6 @@ endif
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
-TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include
-TARGET_LDFLAGS+=	-Wl,-O2
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux

@@ -50,8 +50,8 @@ $(WRKBUILD)/.headers_configure:
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
 		$(WRKBUILD)/libc/configure \
-			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--prefix=$(STAGING_TARGET_DIR)/usr \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			${EGLIBC_CONFOPTS} \
 	);
 	touch $@
@@ -61,8 +61,14 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		PATH='${TARGET_PATH}' \
 		$(MAKE) install-headers install-bootstrap-headers=yes \
 	);
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $@
+
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+EGLIBC_ENV+=		libc_cv_ssp=yes
+else
+EGLIBC_ENV+=		libc_cv_ssp=no
+endif
 
 $(WRKBUILD)/.configured:
 	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)

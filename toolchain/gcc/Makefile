@@ -11,6 +11,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--target=$(REAL_GNU_TARGET_NAME) \
 			--with-gmp=$(STAGING_HOST_DIR) \
 			--with-mpfr=$(STAGING_HOST_DIR) \
+			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--disable-libmudflap \
@@ -30,6 +31,12 @@ ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
 GCC_CONFOPTS+=		--enable-libssp
 else
 GCC_CONFOPTS+=		--disable-libssp
+endif
+
+ifeq ($(ADK_TOOLCHAIN_GCC_LTO),y)
+GCC_CONFOPTS+=		--enable-lto
+else
+GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ARCH),cris)
@@ -67,6 +74,9 @@ endif
 ifeq ($(ADK_TOOLCHAIN_GCC_JAVA),y)
 LANGUAGES:=${LANGUAGES},java
 endif
+ifeq ($(ADK_TOOLCHAIN_GCC_ADA),y)
+LANGUAGES:=${LANGUAGES},ada
+endif
 
 include ${TOPDIR}/mk/buildhlp.mk
 
@@ -76,7 +86,7 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
-	(cd $(GCC_BUILD_DIR_MINIMAL); rm -f config.cache; \
+	(cd $(GCC_BUILD_DIR_MINIMAL); \
 		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
@@ -98,12 +108,8 @@ $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
 	touch $@
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
-	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
-	(cd $(GCC_BUILD_DIR_INITIAL); rm -f config.cache; \
+	(cd $(GCC_BUILD_DIR_INITIAL); \
 		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
@@ -111,7 +117,7 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 			--disable-shared \
 			--disable-threads \
 			--with-newlib \
-			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+			--with-sysroot=$(STAGING_TARGET_DIR) \
 	);
 	touch $@
 
@@ -128,7 +134,7 @@ $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
-	(cd $(GCC_BUILD_DIR_FINAL); rm -f config.cache; \
+	(cd $(GCC_BUILD_DIR_FINAL); \
 		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
@@ -146,9 +152,6 @@ $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
-	# workaround if you cross-compile binutils
-	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a
-	@-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
 	(cd $(STAGING_HOST_DIR); \

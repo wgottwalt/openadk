@@ -11,9 +11,6 @@ $(WRKBUILD)/.headers:
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
-		INSTALL_HDR_PATH=$(TOOLCHAIN_SYSROOT)/usr \
-		headers_install
-	$(MAKE) -C $(WRKBUILD) HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(LINUX_HEADER_DIR) \
 		headers_install
 	# cryptodev.h from ocf-linux-20080917
@@ -22,10 +19,8 @@ $(WRKBUILD)/.headers:
 ifeq ($(ARCH),cris)
 ifeq ($(CPU_ARCH),crisv32)
 	cd $(STAGING_TARGET_DIR)/usr/include && ln -sf arch-v32/arch arch
-	cd $(TOOLCHAIN_SYSROOT)/usr/include && ln -sf arch-v32/arch arch
 else
 	cd $(STAGING_TARGET_DIR)/usr/include && ln -sf arch-v10/arch arch
-	cd $(TOOLCHAIN_SYSROOT)/usr/include && ln -sf arch-v10/arch arch
 endif
 endif
 	touch $@

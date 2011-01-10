@@ -29,6 +29,7 @@ CONFIGURE_ARGS+=	--disable-asm \
 			--disable-finger \
 			--disable-ftp \
 			--disable-dns-srv \
+			--disable-rpath \
 			--enable-fake-curl \
 			--disable-regex
 
