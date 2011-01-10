@@ -49,7 +49,7 @@ config ADK_RUNTIME_CONSOLE_SERIAL
 	  Start getty on serial console. (ttyS0)
 
 config ADK_RUNTIME_CONSOLE_BOTH
-	bool "console output on console and serial"
+	bool "console output on VGA and serial"
 	help
 	  Start getty on VGA console and serial device.
 
