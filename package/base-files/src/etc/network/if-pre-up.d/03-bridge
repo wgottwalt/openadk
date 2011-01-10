@@ -15,6 +15,7 @@ case "$IF_BRIDGE_PORTS" in
 esac
 
 brctl addbr $IFACE || exit 1
+[[ -n $IF_BRIDGE_FD ]] && brctl setfd $IFACE $IF_BRIDGE_FD
 
 for IF in $INTERFACES; do
   if ! grep -q $IF /proc/net/dev; then
