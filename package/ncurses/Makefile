@@ -16,6 +16,9 @@ PKG_SUBPKGS:=		LIBNCURSES LIBNCURSES_DEV
 PKGSD_LIBNCURSES_DEV:=	development files for libncurses
 PKGSC_LIBNCURSES_DEV:=	devel
 
+PKG_FLAVOURS:=		FULL_TERMINFO
+PKGFD_FULL_TERMINFO:=	install the complete set of terminfo files as provided upstream
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -65,10 +68,13 @@ post-install:
 	rm -f ${WRKINST}/usr/lib/libcurses.so*
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so
 	# libcurses will not show up in the IPKG, only in STAGING_TARGET_DIR
-	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
+ifeq (${ADK_PACKAGE_NCURSES_FULL_TERMINFO},y)
+	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share
+	${CP} ${WRKINST}/usr/share/terminfo ${IDIR_LIBNCURSES}/usr/share/
+else
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
 	for f in ansi dumb linux screen vt100 vt102 \
 	    rxvt-unicode vt220 xterm xterm-color xterm-xfree86; do \
@@ -76,6 +82,7 @@ post-install:
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
 	done
+endif
 
 libncurses-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include

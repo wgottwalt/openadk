@@ -15,6 +15,7 @@ PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 PKG_SUBPKGS:=		IP TC TC_ATM IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
 PKGSS_TC:=		kmod-sched
+PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
@@ -45,14 +46,14 @@ CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
 
 INSTALL_y:=
 INSTALL_m:=
-INSTALL_${ADK_PACKAGE_IP}:=	install-ip
-INSTALL_${ADK_PACKAGE_TC}:=	install-tc
-INSTALL_${ADK_PACKAGE_TC_ATM}:=	install-tc-atm
-INSTALL_${ADK_PACKAGE_IFSTAT}:=	install-ifstat
-INSTALL_${ADK_PACKAGE_LNSTAT}:=	install-lnstat
-INSTALL_${ADK_PACKAGE_ROUTEL}:=	install-routel
-INSTALL_${ADK_PACKAGE_RTMON}:=	install-rtmon
-INSTALL_${ADK_PACKAGE_SS}:=	install-ss
+INSTALL_${ADK_PACKAGE_IP}+=	install-ip
+INSTALL_${ADK_PACKAGE_TC}+=	install-tc
+INSTALL_${ADK_PACKAGE_TC_ATM}+=	install-tc-atm
+INSTALL_${ADK_PACKAGE_IFSTAT}+=	install-ifstat
+INSTALL_${ADK_PACKAGE_LNSTAT}+=	install-lnstat
+INSTALL_${ADK_PACKAGE_ROUTEL}+=	install-routel
+INSTALL_${ADK_PACKAGE_RTMON}+=	install-rtmon
+INSTALL_${ADK_PACKAGE_SS}+=	install-ss
 
 post-install: ${INSTALL_y} ${INSTALL_m}
 
@@ -63,13 +64,14 @@ install-ip:
 
 install-tc:
 	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin}
-	${INSTALL_DATA} ${WRKINST}/lib/tc/* ${IDIR_TC}/lib/tc/
+	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
+	${CP} ${WRKINST}/lib/tc/{m_*.so,*.dist} ${IDIR_TC}/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
 install-tc-atm:
-	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
-	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
-		${IDIR_TC_ATM}/usr/lib/tc/
+	${INSTALL_DIR} ${IDIR_TC_ATM}/lib/tc
+	${INSTALL_DATA} ${WRKINST}/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/lib/tc/
 
 install-ifstat:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin

@@ -184,6 +184,7 @@ $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
 	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
+ifeq (${ADK_INSTALL_PACKAGE_INIT_SCRIPTS},y)
 	@for file in $$$$(ls ./files/*.init 2>/dev/null); do \
 		fname=$$$$(echo $$$$file| sed -e "s#.*/##" -e "s#.init##"); \
 		check=$$$$(grep PKG $$$$file|cut -d ' '  -f 2); \
@@ -195,6 +196,7 @@ endif
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \
 	done
+endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}' \
 	    '$${STAGING_TARGET_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))

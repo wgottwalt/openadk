@@ -1,0 +1,29 @@
+	try to avoid problems with a pre #defined st_atime here, too
+--- valgrind-3.5.0.orig/auxprogs/valgrind-listener.c	2009-08-19 15:37:30.000000000 +0200
++++ valgrind-3.5.0/auxprogs/valgrind-listener.c	2010-12-30 17:23:49.807262269 +0100
+@@ -32,6 +32,12 @@
+ 
+ /*---------------------------------------------------------------*/
+ 
++#include "pub_core_basics.h"
++#include "pub_core_libcassert.h"    // For VG_BUGS_TO
++#include "pub_core_vki.h"           // Avoids warnings from 
++                                    // pub_core_libcfile.h
++#include "pub_core_libcfile.h"      // For VG_CLO_DEFAULT_LOGPORT
++
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <string.h>
+@@ -44,12 +50,6 @@
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+ 
+-#include "pub_core_basics.h"
+-#include "pub_core_libcassert.h"    // For VG_BUGS_TO
+-#include "pub_core_vki.h"           // Avoids warnings from 
+-                                    // pub_core_libcfile.h
+-#include "pub_core_libcfile.h"      // For VG_CLO_DEFAULT_LOGPORT
+-
+ 
+ /*---------------------------------------------------------------*/
+ 

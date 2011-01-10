@@ -26,6 +26,9 @@ do-install:
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
 		$(IDIR_GLIBC)/etc/localtime
+	${CP} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc/
+	${CP} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_GLIBC}/etc/
+	${CP} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_GLIBC}/etc/
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \

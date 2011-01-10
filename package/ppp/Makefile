@@ -55,9 +55,11 @@ post-install:
 	${INSTALL_BIN} ./files/pon ${IDIR_PPP}/usr/sbin/
 	${INSTALL_BIN} ./files/poff ${IDIR_PPP}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp/peers
+ifeq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 	$(INSTALL_DIR) ${IDIR_PPP}/etc/network/if-pre-up.d
 	$(INSTALL_BIN) ./files/ppp.pre-up \
 		${IDIR_PPP}/etc/network/if-pre-up.d/05-ppp
+endif
 
 mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
@@ -100,11 +102,13 @@ mod-pppumts-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates
 	${INSTALL_DATA} ./files/etc/ppp/templates/umts \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates/
+ifeq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d
 	$(INSTALL_DIR) ${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d
 	$(INSTALL_BIN) ./files/hso.if-up \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-pre-up.d/06-hso
 	$(INSTALL_BIN) ./files/hso.if-down \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d/06-hso
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

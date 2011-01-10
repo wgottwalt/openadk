@@ -45,11 +45,14 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
 	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
 	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt}
+ifeq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
+endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin}
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
+	chmod 1777 ${IDIR_BASE_FILES}/tmp
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var

@@ -42,7 +42,6 @@ image-prepare-post:
 	    dd if=$$rng bs=512 count=1 >>${TARGET_DIR}/etc/.rnd 2>/dev/null; \
 	    chmod 600 ${TARGET_DIR}/etc/.rnd
 	chmod 4511 ${TARGET_DIR}/bin/busybox
-	chmod 1777 ${TARGET_DIR}/tmp
 	@if [ -d ${TARGET_DIR}/usr/share/fonts/X11 ];then \
 		for i in $$(ls ${TARGET_DIR}/usr/share/fonts/X11/);do \
 			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \

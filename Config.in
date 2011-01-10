@@ -46,12 +46,35 @@ endmenu
 
 menu "Package selection"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+
+config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
+	boolean "ship custom init-scripts along with packages"
+	default y
+	help
+	  Turning this option to false will prevent the ADK from
+	  installing init-scripts (i.e. files in /etc/init.d) for
+	  certain daemons and daemon-like applications.
+
+	  Note that without further customisation, turning this option
+	  off will almost certainly render the resulting system unusable.
+
+config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
+	boolean "ship custom network-scripts along with packages"
+	default y
+	help
+	  Turning this option to false will prevent the ADK from
+	  installing network-scripts (i.e. files in /etc/network/) for
+	  packages providing any.
+
+	  Note that without further customisation, turning this option
+	  off will almost certainly render the resulting system unusable.
+
 source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
 
 menu "Kernel configuration"
-depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
 source "target/linux/Config.in"
 endmenu
 

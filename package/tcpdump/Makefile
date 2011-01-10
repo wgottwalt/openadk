@@ -14,8 +14,9 @@ PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS:=		WITH_IPV6 WITH_CHROOT
 PKGFD_WITH_IPV6:=	enable IPv6 support
+PKGFD_WITH_CHROOT:=	enable chrooting to /var/lib/tcpdump
 
 include ${TOPDIR}/mk/package.mk
 
@@ -30,11 +31,17 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
+ifneq (${ADK_PACKAGE_TCPDUMP_WITH_CHROOT},)
+CONFIGURE_ARGS+=	--with-chroot="/var/lib/tcpdump"
+endif
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
 			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tcpdump ${IDIR_TCPDUMP}/usr/sbin/
+ifneq (${ADK_PACKAGE_TCPDUMP_WITH_CHROOT},)
+	${INSTALL_DIR} ${IDIR_TCPDUMP}/var/lib/tcpdump
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

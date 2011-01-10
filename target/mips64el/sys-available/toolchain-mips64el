@@ -3,6 +3,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64EL
 	select ADK_mips64el
 	select ADK_toolchain_mips64el
 	select ADK_TOOLCHAIN_ONLY
+	select ADK_LINUX_64
 	help
 	  Build a mips64 little endian toolchain.
 
