@@ -6,8 +6,8 @@ PM_OBJ=cstdio.o common.o exopen.o goodies.o locking.o \
 FM_OBJ=common.o fields.o formisc.o sublib.o ecommon.o \
  acommon.o
 
-LDFLAGS = -lm -ldl -lc
-CFLAGS = -Os -DPROCMAIL
+LDFLAGS ?= -lm -ldl -lc
+CFLAGS ?= -DPROCMAIL
 
 all: procmail formail
 

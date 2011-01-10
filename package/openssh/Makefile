@@ -56,6 +56,7 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--disable-wtmp \
 			--disable-wtmpx \
 			--without-bsd-auth \
+			--without-rpath \
 			--without-pam \
 			--without-x \
 			--without-zlib-version-check \

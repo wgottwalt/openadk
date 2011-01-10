@@ -1,5 +1,5 @@
---- rtorrent-0.8.4.orig/src/command_download.cc	2008-11-19 18:01:20.000000000 +0100
-+++ rtorrent-0.8.4/src/command_download.cc	2009-08-28 18:01:37.606461520 +0200
+--- rtorrent-0.8.5.orig/src/command_download.cc	2009-05-14 14:34:42.000000000 +0200
++++ rtorrent-0.8.5/src/command_download.cc	2011-01-09 01:42:55.000000000 +0100
 @@ -36,6 +36,7 @@
  
  #include "config.h"
@@ -7,4 +7,4 @@
 +#include <cstdio>
  #include <functional>
  #include <unistd.h>
- #include <rak/file_stat.h>
+ #include <cstdio>

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-32749
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
@@ -127,7 +127,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-xinerama \
 			--disable-vidix \
 			--disable-gl \
-			--extra-cflags="${TCFLAGS} ${EXTRA_CFLAGS}" \
+			--extra-cflags="${EXTRA_CFLAGS}" \
 			${CONFIGURE_CPU_OPTS} \
 			${CONFIGURE_DEBUG} \
 			${CONFIGURE_DIRECTFB}
