@@ -38,7 +38,6 @@ $(WRKBUILD)/.headers_configure:
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	mkdir -p $(STAGING_TARGET_DIR)/usr/lib
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(MAKE) ${GLIBC_MAKEOPTS} \
