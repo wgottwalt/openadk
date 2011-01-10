@@ -17,6 +17,7 @@ ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp
 endif
 
+GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
 GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j${ADK_MAKE_JOBS}"
 endif
@@ -41,7 +42,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(MAKE) ${GLIBC_MAKEOPTS} \
-		cross-compiling=yes \
 		install-headers \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
