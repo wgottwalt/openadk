@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		aufs2-util
-PKG_VERSION:=		2-301210
+PKG_VERSION:=		2-100111
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		83b07d6a6d43362dfc234ecff11367f3
+PKG_MD5SUM:=		1854f5ab560dd375b22f6e2b747cb412
 PKG_DESCR:=		aufs2 utilities
 PKG_SECTION:=		fs
 PKG_URL:=		http://aufs.sf.net/
 
 # created from git via:
-# $ git archive --format tar origin/aufs2 | \
-#          gzip -9 -c >aufs2-util-2-$(date +%d%m%g).tar.gz
+# $ git archive --format tar aufs2.1 | \
+#          gzip -9 -c >../aufs2-util-2-$(date +%d%m%g).tar.gz
 
 PKG_SITES:=		http://nwl.cc/~n0-1/
 WRKDIST=		${WRKDIR}
@@ -29,8 +29,7 @@ $(eval $(call PKG_template,AUFS2_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},
 $(eval $(call PKG_template,LIBAU,libau,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBAU},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-TCFLAGS+=		-I${LINUX_DIR}/include
-XAKE_FLAGS+=		Install=install
+XAKE_FLAGS+=		Install=install HOSTCPPFLAGS="-I${LINUX_HEADER_DIR}/include"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_AUFS2_UTIL)/sbin
@@ -40,7 +39,7 @@ post-install:
 	$(INSTALL_BIN) ${WRKINST}/usr/bin/au{brsync,chk} \
 		$(IDIR_AUFS2_UTIL)/usr/bin
 	$(INSTALL_DIR) $(IDIR_AUFS2_UTIL)/etc/default
-	$(INSTALL_BIN) ${WRKINST}/etc/default/aufs \
+	$(INSTALL_DATA) ${WRKINST}/etc/default/aufs \
 		$(IDIR_AUFS2_UTIL)/etc/default
 	$(INSTALL_DIR) $(IDIR_LIBAU)/usr/lib
 	${CP} ${WRKINST}/usr/lib/libau* ${IDIR_LIBAU}/usr/lib
