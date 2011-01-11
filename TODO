@@ -1,5 +1,4 @@
 - man pages in ipkg/tgz packages (automatic)
-- automatic healing after move of adk directory (pc,la)
 - ccache support for speedup
 - distcc evaluation
 - GCC SSP evaluation
