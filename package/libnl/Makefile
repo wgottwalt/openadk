@@ -11,6 +11,7 @@ PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.infradead.org/~tgr/libnl/
 PKG_SITES:=		http://www.infradead.org/~tgr/libnl/files/
+PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		LIBNL LIBNL_DEV
 PKGSD_LIBNL_DEV:=	header files for netlink library

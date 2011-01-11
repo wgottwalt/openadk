@@ -4,7 +4,7 @@
 _UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
 		test -n "$$__limit" && ulimit -dS $$__limit;
 
-all: .prereq_done
+all: checkreloc .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all
 
 v: .prereq_done
@@ -224,4 +224,7 @@ NO_ERROR=0
 	@touch .adkinit
 	@touch $@
 
-.PHONY: prereq prereq-noerror
+checkreloc:
+	@bash scripts/reloc.sh
+
+.PHONY: prereq prereq-noerror checkreloc
