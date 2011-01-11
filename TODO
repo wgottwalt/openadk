@@ -7,7 +7,6 @@
 - finish qemu package
 - fix autoreconf usage in opensc
 - fix timezone stuff in glibc
-- add back aufs2 patches for kernel
 - openssl ocf support check
 - locales support
 - new package minidlna

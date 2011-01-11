@@ -16,7 +16,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_MAKE_JOBS=4 \
 			ADK_PACKAGE_BZR=n \
 			ADK_PACKAGE_GRUB=n \
-			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_MGETTY=n \
 			ADK_COMPILE_HEIMDAL=n \
@@ -553,7 +552,7 @@ bulkallmod:
 	  done <${TOPDIR}/target/arch.lst ;\
 	done
 
-${TOPDIR}/bin/tools/pkgmaker:
+${TOPDIR}/bin/tools/pkgmaker: tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
