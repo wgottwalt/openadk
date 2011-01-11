@@ -1,0 +1,17 @@
+--- ipcad-3.7.3.orig/Makefile.in	2007-04-22 10:08:45.000000000 +0200
++++ ipcad-3.7.3/Makefile.in	2011-01-11 17:16:15.000000000 +0100
+@@ -6,10 +6,10 @@ sysconfdir= @sysconfdir@
+ datadir= @datadir@
+ 
+ CC= @CC@
+-LDFLAGS+= @LDFLAGS@
+-LIBS+= @LIBS@
+-CFLAGS+= @CFLAGS@ @DEFS@ -W -Wall
+-CPPFLAGS+=-DIPCAD_VERSION=\"@IPCAD_VERSION@\"
++LDFLAGS= @LDFLAGS@
++LIBS= @LIBS@
++CFLAGS= @CFLAGS@ @DEFS@ -W -Wall
++CPPFLAGS=-DIPCAD_VERSION=\"@IPCAD_VERSION@\"
+ CPPFLAGS+=-DCONFIG_FILE=\"${sysconfdir}/ipcad.conf\"
+ CPPFLAGS+=@DEFS@ -D_REENTRANT -D_THREAD_SAFE
+ CPPFLAGS+=-DPSRC_@PSRC@ -DIFST_@IFST@

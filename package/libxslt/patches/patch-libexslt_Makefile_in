@@ -1,0 +1,11 @@
+--- libxslt-1.1.24.orig/libexslt/Makefile.in	2008-05-13 17:52:13.000000000 +0200
++++ libxslt-1.1.24/libexslt/Makefile.in	2011-01-11 17:04:29.000000000 +0100
+@@ -247,7 +247,7 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/libxslt -I$(top_srcdir)/libexslt \
+ 	   -I$(top_builddir) -I$(top_builddir)/libxslt \
+-	   -I$(top_builddir)/libexslt $(LIBXML_CFLAGS) $(CFLAGS)
++	   -I$(top_builddir)/libexslt $(LIBXML_CFLAGS)
+ 
+ AM_CFLAGS = $(LIBGCRYPT_CFLAGS)
+ lib_LTLIBRARIES = libexslt.la
