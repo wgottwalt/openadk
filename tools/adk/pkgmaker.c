@@ -508,8 +508,12 @@ int main() {
 				if (cfg == NULL)
 					perror("Can not open Config.in file");
 
+				if (pkg_need_cxx != NULL) {
+					fprintf(cfg, "comment \"%s... %s (disabled, c++ missing)\"\n", token, pkg_descr);
+					fprintf(cfg, "depends on !ADK_TOOLCHAIN_GCC_CXX\n\n");
+				}
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
-				fprintf(cfg, "\tprompt \"%s... %s\"\n", pseudo_name, pkg_descr);
+				fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
 				fprintf(cfg, "\ttristate\n");
 				if (pkg_multi != NULL)
 					if (strncmp(pkg_multi, "1", 1) == 0)
@@ -592,10 +596,11 @@ int main() {
 				}
 
 				if (pkg_need_cxx != NULL) {
-					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_CXX");
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_CXX\n");
 				}
 				if (pkg_need_java != NULL) {
-					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_JAVA");
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_JAVA\n");
+					pkg_need_java = NULL;
 				}
 
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
@@ -712,6 +717,8 @@ int main() {
 			free(packages);
 			packages = NULL;
 
+			pkg_need_cxx = NULL;
+			pkg_need_java = NULL;
 			/* reset flags, free memory */
 			free(pkg_name);
 			free(pkg_descr);
@@ -724,8 +731,6 @@ int main() {
 			free(pkg_arch_depends);
 			free(pkg_host_depends);
 			free(pkg_cxx);
-			free(pkg_need_cxx);
-			free(pkg_need_java);
 			free(pkg_dflt);
 			free(pkg_cfline);
 			free(pkg_multi);

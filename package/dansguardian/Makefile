@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		pcre zlib
 PKG_URL:=		http://dansguardian.org/
 PKG_SITES:=		http://dansguardian.org/downloads/2/Stable/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		DANSGUARDIAN
 
 include ${TOPDIR}/mk/package.mk

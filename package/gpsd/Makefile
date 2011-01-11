@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		GPSD
 
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
