@@ -40,12 +40,12 @@ post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(HOSTCFLAGS)" \
 		./configure --without-cxx-main --without-threads \
-		--prefix=$(STAGING_HOST_DIR) \
+		--prefix=$(STAGING_HOST_DIR)/usr \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
 	$(MAKE) -C ${WRKBUILD} install
-	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_HOST_DIR}/bin/pgen
-	${CP} ${WRKBUILD}/python ${STAGING_HOST_DIR}/bin/hostpython
+	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_HOST_DIR}/usr/bin/pgen
+	${CP} ${WRKBUILD}/python ${STAGING_HOST_DIR}/usr/bin/hostpython
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} clean
@@ -63,7 +63,7 @@ post-install:
 	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
 	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 	# workaround, copy host python-config to target scripts directory
-	${CP} ${STAGING_HOST_DIR}/bin/python*-config ${STAGING_TARGET_DIR}/scripts
-	${CP} ${STAGING_HOST_DIR}/bin/python*-config ${STAGING_TARGET_DIR}/usr/bin
+	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_TARGET_DIR}/scripts
+	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_TARGET_DIR}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
