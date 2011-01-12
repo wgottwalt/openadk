@@ -101,7 +101,7 @@ ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
 ifeq (,${CUSTOM_ROOTFSSQUASHFS_BUILD})
-${BIN_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
 	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
 	    >${BUILD_DIR}/${ROOTFSSQUASHFS}
 endif
