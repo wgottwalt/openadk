@@ -5,17 +5,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		31d08bbf47a77827fe97ef3f52b4c9c4
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
-PKG_BUILDDEP:=		openssl ncurses e2fsprogs
+PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err libreadline
+PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
-
-PKG_HOST_DEPENDS:=	!darwin
 
 PKG_SUBPKGS:=		HEIMDAL LIBHEIMDAL LIBHEIMDAL_CLIENT
 PKGSD_LIBHEIMDAL:=	Kerberos 5 server libraries
@@ -45,13 +43,15 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
+			--with-openssl=${STAGING_TARGET_DIR}/usr \
+			--with-readline=${STAGING_TARGET_DIR}/usr \
 			--with-ipv6 \
 			--sysconfdir=/etc/heimdal
 
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_BDB),y)
-CONFIGURE_ARGS+=	--enable-berkeley-db
+CONFIGURE_ARGS+=	--with-berkeley-db
 else
-CONFIGURE_ARGS+=        --disable-berkeley-db
+CONFIGURE_ARGS+=	--without-berkeley-db
 endif
 
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_LDAP),y)
@@ -65,7 +65,8 @@ endif
 ifeq ($(ADK_PACKAGE_HEIMDAL_PKINIT),y)
 CONFIGURE_OPTS+=	--enable-pk-init
 else
-CONFIGURE_OPTS+=	--disable-pk-init
+CONFIGURE_OPTS+=	--disable-pk-init \
+			--disable-kx509
 endif
 
 TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
@@ -80,10 +81,14 @@ endif
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
+		env CFLAGS="-static" LDFLAGS="-static" \
 		./configure --prefix=$(STAGING_HOST_DIR) \
 			--disable-pk-init \
 			--without-openldap \
+			--disable-sqlite-cache \
 			--disable-otp \
+			--enable-static \
+			--disable-shared \
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/lib/roken
@@ -91,12 +96,12 @@ pre-configure:
 	${MAKE} -C ${WRKBUILD}/lib/editline
 	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
 	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
-	${INSTALL_BIN} ${WRKBUILD}/lib/roken/make-roken$(EXEEXT) \
-		${STAGING_HOST_DIR}/bin
-	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
-		${STAGING_HOST_DIR}/bin
 	${MAKE} -C ${WRKBUILD}/lib/roken install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 install
+	${MAKE} -C ${WRKBUILD}/lib/sl install
+	$(CP) $(STAGING_HOST_DIR)/libexec/heimdal/{slc,asn1_compile} \
+		$(STAGING_HOST_DIR)/bin
+	${MAKE} -C ${WRKBUILD}/lib/sl clean
 	${MAKE} -C ${WRKBUILD}/lib/asn1 clean
 	${MAKE} -C ${WRKBUILD}/lib/roken clean
 	${MAKE} -C ${WRKBUILD} clean
