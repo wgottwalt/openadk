@@ -38,7 +38,7 @@ $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELE
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
-TLDFLAGS+=		-pthread
+TLDFLAGS+=		-lpthread
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/util \
