@@ -85,11 +85,6 @@ if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_INTL="$NEED_INTL xkeyboard-config"
 fi
 
-if [[ -n $ADK_PACKAGE_GLIB ]]; then
-	NEED_GLIBZWO="$NEED_GLIBZWO glib"
-	NEED_GETTEXT="$NEED_GETTEXT glib"
-fi
-
 if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
 	NEED_FLEX="$NEED_FLEX libpcap"
 	NEED_BISON="$NEED_BISON libpcap"
@@ -265,13 +260,6 @@ fi
 if [[ -n $NEED_XKBCOMP ]]; then
 	if ! which xkbcomp >/dev/null 2>&1; then
 		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_GLIBZWO ]]; then
-	if ! which glib-genmarshal >/dev/null 2>&1; then
-		echo >&2 You need libglib2.0-dev to build $NEED_GLIBZWO
 		out=1
 	fi
 fi
