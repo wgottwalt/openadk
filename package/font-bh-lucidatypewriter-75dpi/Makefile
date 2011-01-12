@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f36b68aabef2d57258131ce6136c6f50
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
+PKG_BUILDDEP:=		font-util
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
