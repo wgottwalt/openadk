@@ -5,7 +5,6 @@
 - LTO GCC evaluation
 - finish qemu package
 - fix autoreconf usage in opensc
-- add back aufs2 patches for kernel
 - openssl ocf support check
 - locales support
 - new package minidlna

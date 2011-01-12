@@ -11,6 +11,7 @@ PKG_DESCR:=		A standard c++ library for embedded systems
 PKG_SECTION:=		libs
 PKG_URL:=		http://cxx.uclibc.org/
 PKG_SITES:=		http://cxx.uclibc.org/src/
+PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

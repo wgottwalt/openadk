@@ -1,5 +1,14 @@
---- LVM2.2.02.79.orig/make.tmpl.in	2010-11-05 17:18:38.000000000 +0100
-+++ LVM2.2.02.79/make.tmpl.in	2010-12-26 22:15:11.000000000 +0100
+--- LVM2.2.02.80.orig/make.tmpl.in	2011-01-10 14:00:53.000000000 +0100
++++ LVM2.2.02.80/make.tmpl.in	2011-01-11 11:39:53.000000000 +0100
+@@ -33,7 +33,7 @@ LIBS = @LIBS@
+ # Extra libraries always linked with static binaries
+ STATIC_LIBS = $(SELINUX_LIBS) $(UDEV_LIBS)
+ DEFS += @DEFS@
+-CFLAGS += @CFLAGS@
++CFLAGS = @CFLAGS@
+ CLDFLAGS += @CLDFLAGS@
+ LDDEPS += @LDDEPS@
+ LDFLAGS += @LDFLAGS@
 @@ -322,7 +322,8 @@ $(LIB_SHARED): $(LIB_SHARED).$(LIB_VERSI
  	$(LN_S) -f $(<F) $@
  

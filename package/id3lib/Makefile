@@ -13,6 +13,7 @@ PKG_DEPENDS:=		zlib libiconv
 PKG_BUILDDEP:=		zlib libiconv
 PKG_URL:=		http://id3lib.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
+PKG_NEED_CXX:=		1
 PKG_CXX:=		ID3LIB
 
 include ${TOPDIR}/mk/package.mk

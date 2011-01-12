@@ -14,6 +14,8 @@ PKG_DEPENDS:=		add dependendant package names
 PKG_BUILDDEP:=		add packages which need to be compiled
 PKG_URL:=		add project url
 PKG_SITES:=		add download url without package name
+# alternatively use a pre-defined set of mirrors, see mk/mirrors.mk:
+#PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sub/path/}
 
 # if more than one binary package is created, add symbol names of all here
 # leave variable empty, when no binary package is created. You can set it

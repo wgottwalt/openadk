@@ -1,0 +1,47 @@
+--- w-aufs2-util-2-100111-1.orig/Makefile	2011-01-07 05:00:54.000000000 +0100
++++ w-aufs2-util-2-100111-1/Makefile	2011-01-10 23:43:23.000000000 +0100
+@@ -15,6 +15,11 @@
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301	 USA
+ 
++c2sh c2tmac: CC = ${HOSTCC}
++c2sh c2tmac: CFLAGS= ${HOSTCFLAGS}
++c2sh c2tmac: LDFLAGS= ${HOSTLDFLAGS}
++c2sh c2tmac: CPPFLAGS= ${HOSTCPPFLAGS} -I./libau -I${LINUX_HEADER_DIR}/include
++
+ CFLAGS += -I./libau
+ CFLAGS += -O -Wall
+ 
+@@ -28,13 +33,10 @@ LibUtilObj = proc_mnt.o br.o plink.o mta
+ LibUtilHdr = au_util.h
+ export
+ 
+-all: ver_test ${Man} ${Bin} ${Etc}
++all: ${Man} ${Bin} ${Etc}
+ 	${MAKE} -C libau $@
+ 	ln -sf ./libau/libau*.so .
+ 
+-ver_test: ver
+-	./ver
+-
+ ${Bin}: LDFLAGS += -static -s
+ ${Bin}: LDLIBS = -L. -lautil
+ ${BinObj}: %.o: %.c ${LibUtilHdr} ${LibUtil}
+@@ -63,7 +65,7 @@ aufs.5: aufs.in.5 c2tmac
+ 	}' aufs.in.5 >> $@
+ 	chmod a-w $@
+ 
+-.INTERMEDIATE: c2sh c2tmac ver
++.INTERMEDIATE: c2sh c2tmac
+ 
+ Install = install -o root -g root -p
+ install_sbin: File = mount.aufs umount.aufs auplink
+@@ -77,7 +79,7 @@ install_etc: File = etc_default_aufs
+ install_etc: Tgt = ${DESTDIR}/etc/default/aufs
+ install_etc: ${File}
+ 	install -d $(dir ${Tgt})
+-	${Install} -m 644 -T ${File} ${Tgt}
++	${Install} -m 644 ${File} ${Tgt}
+ install_man: File = aufs.5
+ install_man: Tgt = ${DESTDIR}/usr/share/man/man5
+ install_man: ${File}

@@ -151,7 +151,7 @@ config ADK_KPACKAGE_KMOD_NTFS_FS
 	  Kernel modules for NTFS support
 
 config ADK_KPACKAGE_KMOD_VFAT_FS
-	prompt "kmod-vfat-fs....................... VFAT filesystem support"
+	prompt "kmod-vfat-fs...................... VFAT filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850

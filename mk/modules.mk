@@ -926,9 +926,11 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 ZLIB:=lib/zlib_deflate/zlib_deflate
-ifeq ($(ADK_LINUX_CRIS_FOXBOARD),)
-ifeq ($(ADK_LINUX_MIPS_AG241),)
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX832),y)
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX416),y)
+ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
 ZLIB+=lib/zlib_inflate/zlib_inflate
+endif
 endif
 endif
 
@@ -1177,10 +1179,12 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 # USB
 #
 
-ifeq ($(ADK_LINUX_CRIS_FOXBOARD),)
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX832),)
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX416),)
 $(eval $(call KMOD_template,USB,usb,\
 	$(MODULES_DIR)/kernel/drivers/usb/core/usbcore \
 ,50))
+endif
 endif
 
 $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
