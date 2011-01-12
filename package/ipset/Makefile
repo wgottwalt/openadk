@@ -12,16 +12,16 @@ PKG_SECTION:=		firewall
 PKG_URL:=		http://ipset.netfilter.org/
 PKG_SITES:=		http://ipset.netfilter.org/
 
-PKG_SUBPKGS:=		IPSET KMOD_IPSET
-PKGSD_KMOD_IPSET:=	ipset kernel module
-PKGSC_KMOD_IPSET:=	kernel
+PKG_SUBPKGS:=		IPSET IPSET_KMOD
+PKGSD_IPSET_KMOD:=	ipset kernel module
+PKGSC_IPSET_KMOD:=	kernel
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,KMOD_IPSET,kmod-ipset,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKGSD_KMOD_IPSET},${PKGSC_KMOD_IPSET}))
+$(eval $(call PKG_template,IPSET_KMOD,ipset-kmod,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKGSD_IPSET_KMOD},${PKGSC_IPSET_KMOD}))
 
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		PREFIX=/usr
@@ -39,8 +39,8 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipset ${IDIR_IPSET}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/ipset/*.so ${IDIR_IPSET}/usr/lib/ipset/
 	# kernel modules (no autoload at the moment)
-	${INSTALL_DIR} ${IDIR_KMOD_IPSET}/lib/modules/${KERNEL_VERSION}/
+	${INSTALL_DIR} ${IDIR_IPSET_KMOD}/lib/modules/${KERNEL_VERSION}/
 	${INSTALL_DATA} ${WRKBUILD}/kernel/*.ko \
-		${IDIR_KMOD_IPSET}/lib/modules/${KERNEL_VERSION}
+		${IDIR_IPSET_KMOD}/lib/modules/${KERNEL_VERSION}
 
 include ${TOPDIR}/mk/pkg-bottom.mk
