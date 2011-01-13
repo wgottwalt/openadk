@@ -1,6 +1,10 @@
 config ADK_KERNEL_NEW_LEDS
 	boolean
 
+config ADK_KERNEL_LEDS_CLASS
+	boolean
+	select ADK_KERNEL_NEW_LEDS
+
 config ADK_KERNEL_LEDS_TRIGGERS
 	boolean
 	select ADK_KERNEL_NEW_LEDS
@@ -8,17 +12,27 @@ config ADK_KERNEL_LEDS_TRIGGERS
 menu "LEDS driver support"
 depends on ADK_TARGET_WITH_LEDS
 
-config ADK_KPACKAGE_KMOD_LEDS_CLASS
-	prompt "LED Class support"
+config ADK_KPACKAGE_KMOD_LEDS_MIKROTIK_RB532
+	prompt "LED suppport for RB532"
 	tristate
-	select ADK_KERNEL_NEW_LEDS
+	select ADK_KERNEL_LEDS_CLASS
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default n
-	help
+
+config ADK_KPACKAGE_KMOD_LEDS_WRAP
+	prompt "LED suppport for WRAP"
+	tristate
+	select ADK_KERNEL_LEDS_CLASS
+	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default n
 
 config ADK_KPACKAGE_KMOD_LEDS_ALIX2
 	prompt "LED suppport for ALIX2/ALIX3"
 	tristate
-	select ADK_KPACKAGE_KMOD_LEDS_CLASS
+	select ADK_KERNEL_LEDS_CLASS
+	depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2 || ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default n
@@ -27,24 +41,28 @@ config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_TIMER
 	prompt "LED Timer trigger"
 	tristate
 	select ADK_KERNEL_LEDS_TRIGGERS
+	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_HEARTBEAT
 	prompt "LED Heartbeat trigger"
 	tristate
 	select ADK_KERNEL_LEDS_TRIGGERS
+	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KPACKAGE_KMOD_LEDS_TRIGGER_DEFAULT_ON
 	prompt "LED Default On trigger"
 	tristate
 	select ADK_KERNEL_LEDS_TRIGGERS
+	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_LED
 	prompt "LED IPTables trigger"
 	tristate
 	select ADK_KERNEL_LEDS_TRIGGERS
+	select ADK_KERNEL_LEDS_CLASS
 	select ADK_PACKAGE_IPTABLES
 	default n
 
