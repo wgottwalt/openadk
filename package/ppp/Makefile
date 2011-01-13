@@ -61,7 +61,7 @@ ifeq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 		${IDIR_PPP}/etc/network/if-pre-up.d/05-ppp
 endif
 
-mod-radius-install:
+ppp-mod-radius-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
 	${CP} ${WRKBUILD}/pppd/plugins/radius/etc/* \
 		${IDIR_PPP_MOD_RADIUS}/etc/radiusclient
@@ -70,7 +70,7 @@ mod-radius-install:
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/radius.so \
 		${IDIR_PPP_MOD_RADIUS}/usr/lib/pppd/$(PKG_VERSION)
 
-mod-pppoe-install:
+ppp-mod-pppoe-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/rp-pppoe.so \
 		${IDIR_PPP_MOD_PPPOE}/usr/lib/pppd/$(PKG_VERSION)
@@ -78,7 +78,7 @@ mod-pppoe-install:
 	${INSTALL_DATA} ./files/etc/ppp/templates/pppoe \
 		${IDIR_PPP_MOD_PPPOE}/etc/ppp/templates/
 
-mod-pppoa-install:
+ppp-mod-pppoa-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
 	${INSTALL_BIN} $(WRKINST)/usr/lib/pppd/$(PKG_VERSION)/pppoatm.so \
 		${IDIR_PPP_MOD_PPPOA}/usr/lib/pppd/$(PKG_VERSION)
@@ -86,19 +86,19 @@ mod-pppoa-install:
 	${INSTALL_DATA} ./files/etc/ppp/templates/pppoa \
 		${IDIR_PPP_MOD_PPPOA}/etc/ppp/templates/
 
-mod-chat-install:
+ppp-mod-chat-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_CHAT}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/chat ${IDIR_PPP_MOD_CHAT}/usr/sbin/
 
-mod-pppdump-install:
+ppp-mod-pppdump-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPDUMP}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/pppdump ${IDIR_PPP_MOD_PPPDUMP}/usr/sbin/
 
-mod-pppstats-install:
+ppp-mod-pppstats-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPSTATS}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/pppstats ${IDIR_PPP_MOD_PPPSTATS}/usr/sbin/
 
-mod-pppumts-install:
+ppp-mod-pppumts-install:
 	${INSTALL_DIR} ${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates
 	${INSTALL_DATA} ./files/etc/ppp/templates/umts \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/ppp/templates/

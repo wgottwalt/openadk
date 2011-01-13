@@ -33,6 +33,7 @@ $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--disable-camellia \
 			--with-libgcrypt-prefix=${STAGING_TARGET_DIR}/usr \
+			--disable-rpath \
 			--without-libz-prefix
 
 post-install:

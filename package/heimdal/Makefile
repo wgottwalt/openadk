@@ -79,23 +79,21 @@ ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
 endif
 
-pre-configure:
+post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		env CFLAGS="-static" LDFLAGS="-static" \
 		./configure --prefix=$(STAGING_HOST_DIR) \
 			--disable-pk-init \
 			--without-openldap \
 			--disable-sqlite-cache \
 			--disable-otp \
-			--enable-static \
-			--disable-shared \
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/editline
-	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
-	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT)
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
 	${MAKE} -C ${WRKBUILD}/lib/roken install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 install
 	${MAKE} -C ${WRKBUILD}/lib/sl install
