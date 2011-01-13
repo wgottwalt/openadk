@@ -19,7 +19,7 @@ $(WRKBUILD)/.headers:
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
-ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
 	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
 	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
