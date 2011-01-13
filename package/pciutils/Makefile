@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pciutils
 PKG_VERSION:=		3.1.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f3e349d22a3714b4272b171649ad5235
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		utils
@@ -13,8 +13,6 @@ PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils/
 PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/
-
-PKG_HOST_DEPENDS:=	!darwin
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,7 +22,8 @@ CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
-			CFLAGS="${TCFLAGS}" \
+			CFLAGS="${TARGET_CFLAGS}" \
+			CROSS_COMPILE="${TARGET_CROSS}" \
 			IDSDIR="/usr/share" \
 			HOST=${GNU_TARGET_NAME}
 ALL_TARGET:=

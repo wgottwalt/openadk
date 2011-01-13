@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
-PKG_VERSION:=		1.4.8
+PKG_VERSION:=		1.4.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		697ed89f37af4473a5f6349ba2700f2d
+PKG_MD5SUM:=		f382fe693f0b59d87bd47bea65eca198
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack
@@ -17,10 +17,7 @@ PKG_DEPENDS+=		kmod-netfilter-xt-target-tcpmss
 PKG_DEPENDS6:=		kmod-ip6-nf-iptables kmod-nf-conntrack-ipv6
 PKG_DEPENDS6+=		kmod-ip6-nf-filter kmod-ip6-nf-target-reject
 PKG_URL:=		http://www.netfilter.org
-PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/ \
-			ftp://ftp.be.netfilter.org/pub/netfilter/iptables/ \
-			ftp://ftp.de.netfilter.org/pub/netfilter/iptables/ \
-			ftp://ftp.no.netfilter.org/pub/netfilter/iptables/
+PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/
 
 PKG_SUBPKGS:=		IPTABLES IP6TABLES
 

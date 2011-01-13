@@ -75,9 +75,12 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' \
 			CXX='${TARGET_CXX}' \
+			LD='${TARGET_LD}' \
 			AR='${TARGET_CROSS}ar' \
 			RANLIB='${TARGET_CROSS}ranlib' \
 			NM='${TARGET_CROSS}nm' \
+			OBJCOPY='${TARGET_CROSS}objcopy' \
+			RANLIB='${TARGET_CROSS}ranlib' \
 			STRIP='${TARGET_CROSS}strip' \
 			CROSS="$(TARGET_CROSS)"
 endif

@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		net-snmp
-PKG_VERSION:=		5.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		5b2551e7bd024fbbee84dca22a5f13a1
+PKG_VERSION:=		5.6.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b4e30ead5783b0bb1d280172c6095ea4
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		libnetsnmp libelf
-PKG_BUILDDEP:=		libelf
+PKG_DEPENDS:=		libnetsnmp libelf libnl
+PKG_BUILDDEP:=		libelf libnl
 PKG_URL:=		http://www.net-snmp.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 PKG_NOPARALLEL:=	1

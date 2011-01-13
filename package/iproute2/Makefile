@@ -41,8 +41,10 @@ $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PK
 TCFLAGS+=		-D_GNU_SOURCE
 XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \
 			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
-
 CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
+
+post-configure:
+	$(CP) ./files/Config $(WRKBUILD)/
 
 ip-install:
 	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,usr/sbin}
@@ -50,9 +52,10 @@ ip-install:
 	${INSTALL_BIN} ${WRKINST}/sbin/ip ${IDIR_IP}/usr/sbin/ip
 
 tc-install:
-	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin}
+	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin,usr/lib/tc}
 	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
-	${CP} ${WRKINST}/lib/tc/{m_*.so,*.dist} ${IDIR_TC}/lib/tc/
+	${CP} ${WRKINST}/lib/tc/m_*.so ${IDIR_TC}/lib/tc/
+	${CP} ${WRKINST}/usr/lib/tc/*.dist ${IDIR_TC}/usr/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
 tc-atm-install:
