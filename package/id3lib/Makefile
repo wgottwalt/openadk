@@ -23,10 +23,15 @@ $(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 TCFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--enable-cxx-warnings=no
 
+LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp -fstack-protector
+endif
+
 ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
-CONFIGURE_ENV+=		LIBS="-nodefaultlibs -luClibc++ -lz -lm -lc"
+CONFIGURE_ENV+=		LIBS="${LIBRARIES}"
 else
 TLDFLAGS+=		-shared
 endif

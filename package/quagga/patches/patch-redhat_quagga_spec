@@ -1,0 +1,11 @@
+--- quagga-0.99.17.orig/redhat/quagga.spec	2010-08-19 11:44:45.000000000 +0200
++++ quagga-0.99.17/redhat/quagga.spec	2011-01-16 22:05:02.000000000 +0100
+@@ -90,7 +90,7 @@
+ Summary: Routing daemon
+ Name:		quagga
+ Version:	0.99.17
+-Release:	20100819%{release_rev}
++Release:	20110116%{release_rev}
+ License:	GPL
+ Group: System Environment/Daemons
+ Source0:	http://www.quagga.net/snapshots/cvs/%{name}-%{version}.tar.gz

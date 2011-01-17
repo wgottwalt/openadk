@@ -1,6 +1,6 @@
---- bluez-4.59.orig/Makefile.in	Thu Dec 24 17:42:48 2009
-+++ bluez-4.59/Makefile.in	Tue Dec 29 01:31:12 2009
-@@ -48,7 +48,6 @@ noinst_PROGRAMS = $(am__EXEEXT_7) $(am__EXEEXT_8) $(am
+--- bluez-4.59.orig/Makefile.in	2009-12-24 17:42:48.000000000 +0100
++++ bluez-4.59/Makefile.in	2011-01-14 19:24:13.000000000 +0100
+@@ -48,7 +48,6 @@ noinst_PROGRAMS = $(am__EXEEXT_7) $(am__
  	$(am__EXEEXT_10) $(am__EXEEXT_11)
  @SBC_TRUE@am__append_1 = sbc/libsbc.la
  @SBC_TRUE@am__append_2 = sbc/sbcinfo sbc/sbcdec sbc/sbcenc
@@ -8,7 +8,7 @@
  @NETLINK_TRUE@am__append_4 = plugins/netlink.la
  @ECHOPLUGIN_TRUE@am__append_5 = echo
  @ECHOPLUGIN_TRUE@am__append_6 = plugins/echo.c
-@@ -318,7 +317,6 @@ sbc_libsbc_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(
+@@ -318,7 +317,6 @@ sbc_libsbc_la_LINK = $(LIBTOOL) $(AM_V_l
  @DUND_TRUE@am__EXEEXT_6 = compat/dund$(EXEEXT)
  @SBC_TRUE@am__EXEEXT_7 = sbc/sbcinfo$(EXEEXT) sbc/sbcdec$(EXEEXT) \
  @SBC_TRUE@	sbc/sbcenc$(EXEEXT)
@@ -16,7 +16,7 @@
  @TOOLS_TRUE@am__EXEEXT_9 = tools/avinfo$(EXEEXT) tools/ppporc$(EXEEXT) \
  @TOOLS_TRUE@	tools/hcieventmask$(EXEEXT) \
  @TOOLS_TRUE@	tools/hcisecfilter$(EXEEXT)
-@@ -918,8 +916,6 @@ lib_libbluetooth_la_DEPENDENCIES = $(local_headers)
+@@ -918,8 +916,6 @@ lib_libbluetooth_la_DEPENDENCIES = $(loc
  @SBC_TRUE@sbc_sbcdec_LDADD = sbc/libsbc.la
  @SBC_TRUE@sbc_sbcenc_SOURCES = sbc/sbcenc.c sbc/formats.h
  @SBC_TRUE@sbc_sbcenc_LDADD = sbc/libsbc.la

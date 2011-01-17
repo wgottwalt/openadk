@@ -1,0 +1,11 @@
+--- xf86-video-siliconmotion-1.7.3.orig/ltmain.sh	2008-08-30 00:27:25.000000000 +0200
++++ xf86-video-siliconmotion-1.7.3/ltmain.sh	2011-01-17 17:49:45.000000000 +0100
+@@ -1676,7 +1676,7 @@ EOF
+       # -F/path gives path to uninstalled frameworks, gcc on darwin
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.

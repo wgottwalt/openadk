@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
 PKG_VERSION:=		2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6aaf1e9802a17a7d702bb0638044ffa7
 PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs
@@ -25,6 +25,9 @@ $(eval $(call PKG_template,LIBNL_DEV,libnl-dev,${PKG_VERSION}-${PKG_RELEASE},${P
 libnl-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnl.so* ${IDIR_LIBNL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libnl-genl.so* ${IDIR_LIBNL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libnl-cli.so* ${IDIR_LIBNL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libnl-route.so* ${IDIR_LIBNL}/usr/lib
 
 libnl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNL_DEV}/usr/include

@@ -1,0 +1,11 @@
+--- librpcsecgss-0.19.orig/ltmain.sh	2009-05-13 23:33:08.000000000 +0200
++++ librpcsecgss-0.19/ltmain.sh	2011-01-15 23:01:58.000000000 +0100
+@@ -1382,7 +1382,7 @@ EOF
+       # but this is not reliable with gcc because gcc may use -mfoo to
+       # select a different linker, different libraries, etc, while
+       # -Wl,-mfoo simply passes -mfoo to the linker.
+-      -m*)
++      -m*|-fstack-protector*|-flto)
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
+ 	arg=`$echo "X$arg" | $Xsed -e "$sed_quote_subst"`

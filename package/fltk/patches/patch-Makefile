@@ -1,0 +1,11 @@
+--- fltk-2.0.x-r7513.orig/Makefile	2010-04-15 18:29:49.000000000 +0200
++++ fltk-2.0.x-r7513/Makefile	2011-01-14 22:01:49.000000000 +0100
+@@ -25,7 +25,7 @@
+ 
+ include makeinclude
+ 
+-DIRS = src $(LOCALIMAGES) images OpenGL fluid glut test
++DIRS = src $(LOCALIMAGES) images OpenGL fluid
+ 
+ all: makeinclude
+ 	for dir in $(DIRS); do\

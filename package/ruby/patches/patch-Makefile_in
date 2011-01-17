@@ -1,0 +1,11 @@
+--- ruby-1.9.2-p0.orig/Makefile.in	2010-07-11 08:15:13.000000000 +0200
++++ ruby-1.9.2-p0/Makefile.in	2011-01-16 22:34:17.000000000 +0100
+@@ -157,7 +157,7 @@ $(LIBRUBY_A):
+ 
+ $(LIBRUBY_SO):
+ 		@-$(PRE_LIBRUBY_UPDATE)
+-		$(LDSHARED) $(DLDFLAGS) $(OBJS) $(DLDOBJS) $(SOLIBS) $(OUTFLAG)$@
++		$(LDSHARED) $(LDFLAGS) $(DLDFLAGS) $(OBJS) $(DLDOBJS) $(SOLIBS) $(OUTFLAG)$@
+ 		-$(OBJCOPY) -w -L '@EXPORT_PREFIX@Init_*' -L '@EXPORT_PREFIX@*_threadptr_*' $@
+ 		@-$(MINIRUBY) -e 'ARGV.each{|link| File.delete link if File.exist? link; \
+ 						  File.symlink "$(LIBRUBY_SO)", link}' \

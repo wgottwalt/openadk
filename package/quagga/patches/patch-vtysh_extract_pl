@@ -1,0 +1,8 @@
+--- quagga-0.99.17.orig/vtysh/extract.pl	2010-08-19 11:44:45.000000000 +0200
++++ quagga-0.99.17/vtysh/extract.pl	2011-01-16 22:05:03.000000000 +0100
+@@ -1,4 +1,4 @@
+-#! 
++#! /opt/local/bin/perl
+ ##
+ ## vtysh/extract.pl.  Generated from extract.pl.in by configure.
+ ##

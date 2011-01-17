@@ -1,6 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- perl-5.10.0.orig/Makefile.micro	2007-12-18 11:47:07.000000000 +0100
-+++ perl-5.10.0/Makefile.micro	2009-09-14 18:52:23.000000000 +0200
++++ perl-5.10.0/Makefile.micro	2011-01-16 00:16:05.000000000 +0100
+@@ -3,7 +3,7 @@ CCFLAGS = -c
+ DEFINES = -DPERL_CORE -DPERL_MICRO -DSTANDARD_C -DPERL_USE_SAFE_PUTENV
+ OPTIMIZE = 
+ CFLAGS = $(DEFINES) $(OPTIMIZE)
+-LDFLAGS = 
++LDFLAGS ?= 
+ LIBS = -lm
+ _O = .o
+ ENV = env
 @@ -46,7 +46,7 @@ Config = '$$Config{$$1}'
  patch_uconfig:
  	$(PERL) -MConfig -pi -e "s/^((?:short|int|long(?:dbl|long)?|ptr|double|[iun]v|u?quad|[iu]\d+|fpos|lseek)(?:size|type)|byteorder|d_quad|quadkind|use64.+)=.*/\\1='"$(Config)"'/g" uconfig.shx

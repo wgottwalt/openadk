@@ -1,5 +1,14 @@
 --- autossh-1.4b.orig/Makefile.in	2008-04-11 22:47:46.000000000 +0200
-+++ autossh-1.4b/Makefile.in	2010-02-05 17:49:30.511836749 +0100
++++ autossh-1.4b/Makefile.in	2011-01-14 18:20:25.000000000 +0100
+@@ -31,7 +31,7 @@ all:		$(TARGET)
+ 
+ 
+ $(TARGET):	$(OFILES)
+-		$(CC) $(CPPFLAGS) -o $(TARGET) $(OFILES) $(LIBS)
++		$(CC) $(LDFLAGS) -o $(TARGET) $(OFILES) $(LIBS)
+ 
+ clean:
+ 		- /bin/rm -f *.o *.a *.core *~
 @@ -45,18 +45,18 @@ distclean:	allclean
  		- /bin/rm -f Makefile
  

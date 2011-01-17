@@ -3,14 +3,14 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libaudiofile
-PKG_VERSION:=		0.2.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		460f848ce5f4a33ae66b15a4fb7720ec
+PKG_NAME:=		audiofile
+PKG_VERSION:=		0.2.7
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a39be317a7b1971b408805dc5e371862
 PKG_DESCR:=		audiofile library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.68k.org/~michael/audiofile
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_URL:=		http://www.68k.org/~michael/audiofile/
+PKG_SITES:=		http://www.68k.org/~michael/audiofile/
 
 include ${TOPDIR}/mk/package.mk
 

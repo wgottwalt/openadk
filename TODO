@@ -1,4 +1,5 @@
 - man pages in ipkg/tgz packages (automatic)
+- automate /etc handling via conffiles
 - ccache support for speedup
 - distcc evaluation
 - GCC SSP evaluation
