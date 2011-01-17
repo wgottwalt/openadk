@@ -29,9 +29,9 @@ INSTALL_STYLE:=		manual
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/lib
 ifeq ($(ADK_NATIVE),y)
-	$(CP) /usr/lib/libstdc++.so.* ${IDIR_LIBSTDCXX}/usr/lib
+	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
-	$(CP) ${STAGING_TARGET_DIR}/usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
+	$(CP) ${STAGING_TARGET_DIR}/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
