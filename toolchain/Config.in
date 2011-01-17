@@ -3,12 +3,12 @@ menu "Toolchain settings"
 config ADK_TOOLCHAIN_GDB
 	prompt "Enable building of the GNU debugger"
 	boolean
-	default n
+	default y
 
 config ADK_TOOLCHAIN_GCC_CXX
 	prompt "Enable building of G++ (C++ language support in GCC)"
 	boolean
-	default n
+	default y
 
 config ADK_TOOLCHAIN_GCC_JAVA
 	prompt "Enable building of GCJ (Java language support in GCC)"
