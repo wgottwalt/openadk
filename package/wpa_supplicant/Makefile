@@ -4,26 +4,27 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wpa_supplicant
-PKG_VERSION:=		0.7.2
+PKG_VERSION:=		0.7.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0e2cb7e4c35667351d8b7ec28c783e6a
+PKG_MD5SUM:=		f516f191384a9a546e3f5145c08addda
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
+PKG_URL:=		http://hostap.epitest.fi/wpa_supplicant/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 PKG_DFLT_WPA_SUPPLICANT:=	y if ADK_TARGET_SYSTEM_IBM_X40
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
-PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
-PKGCS_WITH_GNUTLS:=	libgnutls
-PKGCB_WITH_GNUTLS:=	gnutls
+PKG_CHOICES_WPA_SUPPLICANT:=	WITH_OPENSSL WITH_GNUTLS
+PKGCD_WITH_OPENSSL:=		use OpenSSL for crypto
+PKGCS_WITH_OPENSSL:=		libopenssl
+PKGCB_WITH_OPENSSL:=		openssl
+PKGCD_WITH_GNUTLS:=		use GnuTLS for crypto
+PKGCS_WITH_GNUTLS:=		libgnutls
+PKGCB_WITH_GNUTLS:=		gnutls
 
 include ${TOPDIR}/mk/package.mk
 
@@ -38,7 +39,7 @@ MAKE_FLAGS+=		CPPFLAGS='${TCPPFLAGS}' \
 			KERNEL=${LINUX_DIR}
 
 do-configure:
-	${CP} files/config ${WRKBUILD}/.config
+	${CP} ./files/config ${WRKBUILD}/.config
 ifneq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_GNUTLS},)
 	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
 endif

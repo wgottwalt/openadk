@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpcbind
 PKG_VERSION:=		0.2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1a77ddb1aaea8099ab19c351eeb26316
 PKG_DESCR:=		converts RPC program numbers into universal addresses
 PKG_SECTION:=		net/misc

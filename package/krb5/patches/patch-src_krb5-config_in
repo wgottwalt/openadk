@@ -1,0 +1,22 @@
+--- krb5-1.8.1.orig/src/krb5-config.in	2010-01-21 23:49:01.000000000 +0100
++++ krb5-1.8.1/src/krb5-config.in	2011-01-09 01:33:14.000000000 +0100
+@@ -34,8 +34,6 @@ libdir=@libdir@
+ CC_LINK='@CC_LINK@'
+ KDB5_DB_LIB=@KDB5_DB_LIB@
+ LDFLAGS='@LDFLAGS@'
+-RPATH_FLAG='@RPATH_FLAG@'
+-PROG_RPATH_FLAGS='@PROG_RPATH_FLAGS@'
+ PTHREAD_CFLAGS='@PTHREAD_CFLAGS@'
+ DL_LIB='@DL_LIB@'
+ 
+@@ -180,10 +178,7 @@ if test -n "$do_libs"; then
+     # Ugly gross hack for our build tree
+     lib_flags=`echo $CC_LINK | sed -e 's/\$(CC)//' \
+ 	    -e 's/\$(PURE)//' \
+-	    -e 's#\$(PROG_RPATH_FLAGS)#'"$PROG_RPATH_FLAGS"'#' \
+-	    -e 's#\$(PROG_RPATH)#'$libdir'#' \
+ 	    -e 's#\$(PROG_LIBPATH)#'$libdirarg'#' \
+-	    -e 's#\$(RPATH_FLAG)#'"$RPATH_FLAG"'#' \
+ 	    -e 's#\$(LDFLAGS)#'"$LDFLAGS"'#' \
+ 	    -e 's#\$(PTHREAD_CFLAGS)#'"$PTHREAD_CFLAGS"'#' \
+ 	    -e 's#\$(CFLAGS)#'"$CFLAGS"'#'`

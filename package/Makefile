@@ -48,9 +48,6 @@ compile: $(REBUILD_PACKAGES) base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
 
-$(TARGET_DIR):
-	mkdir -p $(TARGET_DIR)
-
 %-download:
 	$(START_TRACE) "package/$(patsubst %-download,%,$@)-download: "
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch

@@ -10,7 +10,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a07a97cfb28b588cbcf83ffa9ec92e3f
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		jpeg libtiff
+PKG_BUILDDEP:=		jpeg libtiff fontconfig libiconv
 PKG_DEPENDS:=		libjpeg libtiff
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
@@ -35,14 +35,10 @@ $(eval $(call PKG_template,LIBIMAGEMAGICK,libimagemagick,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_CONVERT},${PKGSD_CONVERT},${PKGSC_CONVERT}))
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_CONVERT}+=	convert-install
-SUB_INSTALLS-${ADK_PACKAGE_DISPLAY}+=	display-install
+CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
+			--enable-fast-install
 
-CONFIGURE_ARGS+=	--with-magick-plus-plus=no
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib
 	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
 	$(INSTALL_DATA) $(WRKINST)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config/* \

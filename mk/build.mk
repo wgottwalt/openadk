@@ -14,17 +14,11 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
-			ADK_PACKAGE_BZR=n \
 			ADK_PACKAGE_GRUB=n \
-			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_BASE_FILES=y \
-			ADK_PACKAGE_MGETTY=n \
-			ADK_COMPILE_HEIMDAL=n \
-			ADK_PACKAGE_HEIMDAL_PKINIT=n \
-			ADK_PACKAGE_HEIMDAL_SERVER=n \
-			ADK_PACKAGE_LIBHEIMDAL=n \
-			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
 			ADK_PACKAGE_PYTHON=n \
+			ADK_TOOLCHAIN_GCC_USE_SSP=n \
+			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_BBCONFIG=n \
 			BUSYBOX_SELINUX=n \
 			BUSYBOX_INSTALL_NO_USR=n \
@@ -113,7 +107,9 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
-world: $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)
+world:
+	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps \
+		$(TOOLS_DIR) $(TOOLS_BUILD_DIR) $(TOOLCHAIN_BUILD_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
@@ -133,21 +129,9 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
-$(DISTDIR):
-	mkdir -p $(DISTDIR)
-
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-$(TARGET_DIR):
-	mkdir -p $(TARGET_DIR)
-
-$(PACKAGE_DIR):
-	mkdir -p ${PACKAGE_DIR}/.stamps
-
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/include} \
-		${STAGING_HOST_DIR}/{bin,lib}
+	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/include,usr/lib} \
+		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib}
 
 ${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
@@ -191,9 +175,9 @@ switch:
 	fi
 
 kernelconfig:
-	cp $(TOPDIR)/target/$(ARCH)/kernel.config $(BUILD_DIR)/linux/.config
-	$(MAKE) -C $(BUILD_DIR)/linux/ ARCH=$(ARCH) menuconfig
-	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ARCH)/kernel.config
+	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config $(BUILD_DIR)/linux/.config
+	${KERNEL_MAKE_ENV} ${MAKE} ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config
 
 # create a new package from package/.template
 newpackage:
@@ -211,7 +195,7 @@ root_clean:
 	mkdir -p $(TARGET_DIR)
 
 # Do a per-package clean here, too. This way stale headers and
-# libraries from cross_*/target/ get wiped away, which keeps
+# libraries from target_*/ get wiped away, which keeps
 # future package build's configure scripts from returning false
 # dependencies information.
 
@@ -221,7 +205,7 @@ clean:
 	for d in ${STAGING_PKG_DIR}; do \
 		for f in $$(ls $$d/[a-z]* 2>/dev/null); do  \
 			while read file ; do \
-				rm $$d/target/$$file 2>/dev/null; \
+				rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
 			rm $$f ; \
 		done \
@@ -563,12 +547,11 @@ bulkallmod:
 	  done <${TOPDIR}/target/arch.lst ;\
 	done
 
-${TOPDIR}/bin/tools/pkgmaker:
+${TOPDIR}/bin/tools/pkgmaker: tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 ${TOPDIR}/bin/tools/pkgrebuild:
-	@mkdir -p $(TOPDIR)/bin/tools
 	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
@@ -576,10 +559,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TO
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
-$(TOPDIR)/bin/tools:
-	@mkdir -p $(TOPDIR)/bin/tools
-
-${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
+${TOPDIR}/bin/tools/depmaker:
 	$(HOSTCC) -g -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/bin/tools/depmaker

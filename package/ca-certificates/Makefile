@@ -15,7 +15,7 @@ PKG_SITES:=		http://ftp.debian.org/debian/pool/main/c/ca-certificates/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
-PKG_FLAVOURS:=		SMALL
+PKG_FLAVOURS_CA_CERTS:=	SMALL
 PKGFD_SMALL:=		Minimal set of CA certificates
 
 include $(TOPDIR)/mk/package.mk

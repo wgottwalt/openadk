@@ -1,6 +1,26 @@
---- ppp-2.4.4.orig/chat/Makefile.linux	2006-06-04 07:07:46.000000000 +0200
-+++ ppp-2.4.4/chat/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
-@@ -25,7 +25,7 @@ chat.o:	chat.c
+--- ppp-2.4.5.orig/chat/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/chat/Makefile.linux	2011-01-16 15:56:59.000000000 +0100
+@@ -10,22 +10,23 @@ CDEF3=	-UNO_SLEEP			# Use the usleep fun
+ CDEF4=	-DFNDELAY=O_NDELAY		# Old name value
+ CDEFS=	$(CDEF1) $(CDEF2) $(CDEF3) $(CDEF4)
+ 
+-COPTS=	-O2 -g -pipe
+-CFLAGS=	$(COPTS) $(CDEFS)
++CPPFLAGS?=
++CFLAGS?=-O2 -g -pipe
++LDFLAGS?=
+ 
+ INSTALL= install
+ 
+ all:	chat
+ 
+ chat:	chat.o
+-	$(CC) -o chat chat.o
++	$(CC) $(LDFLAGS) -o chat chat.o
+ 
+ chat.o:	chat.c
+-	$(CC) -c $(CFLAGS) -o chat.o chat.c
++	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o chat.o chat.c
  
  install: chat
  	mkdir -p $(BINDIR) $(MANDIR)

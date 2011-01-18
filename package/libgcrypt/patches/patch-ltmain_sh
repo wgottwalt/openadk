@@ -1,0 +1,11 @@
+--- libgcrypt-1.4.5.orig/ltmain.sh	2009-04-02 11:25:35.000000000 +0200
++++ libgcrypt-1.4.5/ltmain.sh	2011-01-14 20:42:36.000000000 +0100
+@@ -1623,7 +1623,7 @@ EOF
+       # -pg pass through profiling flag for GCC
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*|-pg| \
+-      -t[45]*|-txscale*|@*)
++      -t[45]*|-txscale*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.

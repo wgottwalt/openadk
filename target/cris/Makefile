@@ -9,10 +9,7 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
 
-$(TOOLS_BUILD_DIR):
-	@mkdir -p $(TOOLS_BUILD_DIR)
-
-tools-compile: $(TOOLS_BUILD_DIR)
+tools-compile:
 	$(MAKE) -C ../tools/mkfimage
 ifneq ($(ADK_HOST_DARWIN),y)
 	$(MAKE) -C ../tools/e100boot prepare compile install
@@ -24,7 +21,7 @@ kernel-install: tools-compile
 	PATH='${TARGET_PATH}' mkfimage $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 ifeq ($(ADK_TARGET_FS),squashfs)
-imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSSQUASHFS)
+imageinstall: kernel-install $(BUILD_DIR)/$(ROOTFSSQUASHFS)
 	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
 		bs=4063232 conv=sync $(MAKE_TRACE)
 	@if [ $$(stat --format=%s ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \

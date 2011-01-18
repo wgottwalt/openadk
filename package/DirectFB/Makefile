@@ -5,13 +5,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		DirectFB
 PKG_VERSION:=		1.4.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		1.4-5
 PKG_MD5SUM:=		94735ccec21120794adcce93a61445d2
 PKG_DESCR:=		Thin graphic library for the Linux framebuffer devices
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libjpeg
-PKG_BUILDDEP:=		libpng jpeg
+PKG_BUILDDEP:=		libpng jpeg freetype
 PKG_URL:=		http://www.directfb.org/
 PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.4/
 
@@ -26,6 +26,7 @@ $(eval $(call PKG_template,DIRECTFB_DEV,directfb-dev,$(PKG_VERSION)-${PKG_RELEAS
 
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \
+			--without-tools \
 			--enable-fbdev \
 			--disable-sdl \
 			--disable-osx \
@@ -43,11 +44,7 @@ ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 XAKE_FLAGS+=		LDEMULATION=elf64ltsmip
 endif
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_DIRECTFB_DEV}+=	directfb-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_DIRECTFB}/etc
 	${INSTALL_DATA} ./files/directfbrc ${IDIR_DIRECTFB}/etc/
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/{inputdrivers,systems,wm}

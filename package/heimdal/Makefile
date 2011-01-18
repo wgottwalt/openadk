@@ -5,17 +5,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		31d08bbf47a77827fe97ef3f52b4c9c4
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err
-PKG_BUILDDEP:=		openssl ncurses e2fsprogs
+PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err libreadline
+PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
-
-PKG_HOST_DEPENDS:=	!darwin
 
 PKG_SUBPKGS:=		HEIMDAL LIBHEIMDAL LIBHEIMDAL_CLIENT
 PKGSD_LIBHEIMDAL:=	Kerberos 5 server libraries
@@ -23,16 +21,16 @@ PKGSC_LIBHEIMDAL:=	libs
 PKGSD_LIBHEIMDAL_CLIENT:=	Kerberos 5 client libraries
 PKGSC_LIBHEIMDAL_CLIENT:=	libs
 
-PKG_FLAVOURS:=		PKINIT
-PKGFD_PKINIT:=		Enable PK-INIT
+PKG_FLAVOURS_HEIMDAL_SERVER:=	WITH_PKINIT
+PKGFD_WITH_PKINIT:		Enable PK-INIT
 
-PKG_CHOICES:=		WITH_LDAP WITH_BDB
-PKGCD_WITH_LDAP:=	use OpenLDAP as database backend
-PKGCS_WITH_LDAP:=	libopenldap
-PKGCB_WITH_LDAP:=	openldap
-PKGCD_WITH_BDB:=	use Berkeley DB as database backend
-PKGCS_WITH_BDB:=	libdb
-PKGCB_WITH_BDB:=	libdb
+PKG_CHOICES_HEIMDAL_SERVER:=	WITH_LDAP WITH_BDB
+PKGCD_WITH_LDAP:=		use OpenLDAP as database backend
+PKGCS_WITH_LDAP:=		libopenldap
+PKGCB_WITH_LDAP:=		openldap
+PKGCD_WITH_BDB:=		use Berkeley DB as database backend
+PKGCS_WITH_BDB:=		libdb
+PKGCB_WITH_BDB:=		libdb
 
 include $(TOPDIR)/mk/package.mk
 
@@ -45,16 +43,18 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
+			--with-openssl=${STAGING_TARGET_DIR}/usr \
+			--with-readline=${STAGING_TARGET_DIR}/usr \
 			--with-ipv6 \
 			--sysconfdir=/etc/heimdal
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_BDB),y)
-CONFIGURE_ARGS+=	--enable-berkeley-db
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_BDB),y)
+CONFIGURE_ARGS+=	--with-berkeley-db
 else
-CONFIGURE_ARGS+=        --disable-berkeley-db
+CONFIGURE_ARGS+=	--without-berkeley-db
 endif
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_LDAP),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_LDAP),y)
 CONFIGURE_ARGS+=	--with-openldap=yes
 CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_TARGET_DIR}/usr
 CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_TARGET_DIR}/usr
@@ -62,10 +62,11 @@ else
 CONFIGURE_ARGS+=        --without-openldap
 endif
 
-ifeq ($(ADK_PACKAGE_HEIMDAL_PKINIT),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_PKINIT),y)
 CONFIGURE_OPTS+=	--enable-pk-init
 else
-CONFIGURE_OPTS+=	--disable-pk-init
+CONFIGURE_OPTS+=	--disable-pk-init \
+			--disable-kx509
 endif
 
 TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
@@ -74,29 +75,27 @@ CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
 CONFIGURE_ENV+=		cross_compiling=yes \
 			ac_cv_func_getaddrinfo_numserv=yes
 
-ifeq ($(ADK_HOST_CYGWIN),y)
-EXEEXT:=		.exe
-endif
-
-pre-configure:
+post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
 			--disable-pk-init \
 			--without-openldap \
+			--disable-sqlite-cache \
 			--disable-otp \
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/editline
-	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
-	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
-	${INSTALL_BIN} ${WRKBUILD}/lib/roken/make-roken$(EXEEXT) \
-		${STAGING_HOST_DIR}/bin
-	${INSTALL_BIN} ${WRKBUILD}/lib/sl/slc$(EXEEXT) \
-		${STAGING_HOST_DIR}/bin
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT)
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
 	${MAKE} -C ${WRKBUILD}/lib/roken install
 	${MAKE} -C ${WRKBUILD}/lib/asn1 install
+	${MAKE} -C ${WRKBUILD}/lib/sl install
+	$(CP) $(STAGING_HOST_DIR)/libexec/heimdal/{slc,asn1_compile} \
+		$(STAGING_HOST_DIR)/bin
+	${MAKE} -C ${WRKBUILD}/lib/sl clean
 	${MAKE} -C ${WRKBUILD}/lib/asn1 clean
 	${MAKE} -C ${WRKBUILD}/lib/roken clean
 	${MAKE} -C ${WRKBUILD} clean

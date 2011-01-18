@@ -1,0 +1,48 @@
+--- net-snmp-5.6.1.orig/agent/mibgroup/mibII/tcpTable.c	2010-10-20 15:12:08.000000000 +0200
++++ net-snmp-5.6.1/agent/mibgroup/mibII/tcpTable.c	2011-01-12 14:48:14.000000000 +0100
+@@ -33,6 +33,12 @@
+ #include <netlink/netlink.h>
+ #include <netlink/msg.h>
+ #include <linux/inet_diag.h>
++
++/* libnl 2.0 compatibility code */
++#define nl_handle nl_sock
++#define nl_handle_alloc nl_socket_alloc
++#define nl_handle_alloc_cb nl_socket_alloc_cb
++#define nl_handle_destroy nl_socket_free
+ #endif
+ 
+ #include <net-snmp/net-snmp-includes.h>
+@@ -565,8 +571,8 @@ tcpTable_load_netlink(void)
+ 	}
+ 
+ 	if (nl_connect(nl, NETLINK_INET_DIAG) < 0) {
+-		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror()));
+-		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror());
++		DEBUGMSGTL(("mibII/tcpTable", "Failed to connect to netlink: %s\n", nl_geterror(1)));
++		snmp_log(LOG_ERR, "snmpd: Couldn't connect to netlink: %s\n", nl_geterror(1));
+ 		nl_handle_destroy(nl);
+ 		return -1;
+ 	}
+@@ -580,8 +586,8 @@ tcpTable_load_netlink(void)
+ 	nlmsg_append(nm, &req, sizeof(struct inet_diag_req), 0);
+ 
+ 	if (nl_send_auto_complete(nl, nm) < 0) {
+-		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror()));
+-		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror());
++		DEBUGMSGTL(("mibII/tcpTable", "nl_send_autocomplete(): %s\n", nl_geterror(1)));
++		snmp_log(LOG_ERR, "snmpd: nl_send_autocomplete(): %s\n", nl_geterror(1));
+ 		nl_handle_destroy(nl);
+ 		return -1;
+ 	}
+@@ -593,8 +599,8 @@ tcpTable_load_netlink(void)
+ 
+ 	while (running) {
+ 		if ((len = nl_recv(nl, &peer, &buf, NULL)) <= 0) {
+-			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror()));
+-			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror());
++			DEBUGMSGTL(("mibII/tcpTable", "nl_recv(): %s\n", nl_geterror(1)));
++			snmp_log(LOG_ERR, "snmpd: nl_recv(): %s\n", nl_geterror(1));
+ 			nl_handle_destroy(nl);
+ 			return -1;
+ 		}

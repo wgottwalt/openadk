@@ -21,16 +21,16 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
 	for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done $(MAKE_TRACE)
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config
-	echo N | $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
-	$(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
+	echo N | ${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	$(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
-	$(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)

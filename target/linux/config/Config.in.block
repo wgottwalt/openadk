@@ -120,6 +120,8 @@ config ADK_KERNEL_ATA_PIIX
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64EL
 	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default y if ADK_TARGET_SYSTEM_QEMU_MIPSEL
 	default y if ADK_TARGET_SYSTEM_QEMU_X86
@@ -153,6 +155,8 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	prompt "kmod-blk-dev-loop................. Loop mount support"
 	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_BLK_DEV
 	default n
 	help
 	  Saying Y here will allow you to use a regular file as a block

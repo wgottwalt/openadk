@@ -20,16 +20,28 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_GLIBC_DEV}+=		glibc-dev-install
-
 # compile nothing, glibc is already build in toolchain directory
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
-	test -z $(ADK_RUNTIME_TIMEZONE) || \
-	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
-		$(IDIR_GLIBC)/etc/localtime
+	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s usr/share/zoneinfo/"$$f" || continue; \
+		echo usr/share/zoneinfo/"$$f" | \
+		    ${TOOLS_DIR}/cpio -pdu ${IDIR_GLIBC}/; \
+	done
+	tz=; cd ${IDIR_GLIBC}/usr/share/zoneinfo || exit 1; \
+	    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s "$$f" || continue; \
+		tz=$$f; \
+	done; if test x"$$tz" = x""; then \
+		echo >&2 Error during timezone installation; \
+		exit 1; \
+	else \
+		ln -sf "../usr/share/zoneinfo/$$tz" \
+		    ${IDIR_GLIBC}/etc/localtime; \
+	fi
+	${CP} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc/
+	${CP} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_GLIBC}/etc/
+	${CP} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_GLIBC}/etc/
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
 	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \

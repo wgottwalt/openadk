@@ -22,7 +22,7 @@ BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
 do-build:
-	$(MAKE) ${KERNEL_MAKE_OPTS} LDFLAGS="" SUBDIRS="${WRKBUILD}" modules
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} LDFLAGS="" SUBDIRS="${WRKBUILD}" modules
 
 do-install:
 	${INSTALL_DIR} ${IDIR_KMOD_SANGAM_ATM}/etc/modules.d/

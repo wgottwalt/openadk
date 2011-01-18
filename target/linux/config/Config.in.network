@@ -24,6 +24,10 @@ config ADK_KERNEL_NET_IPGRE_BROADCAST
 	boolean
 	default n
 
+config ADK_KERNEL_NET_IPGRE_DEMUX
+	boolean
+	default n
+
 config ADK_KERNEL_PPP_ASYNC
 	boolean
 	default n
@@ -134,11 +138,11 @@ config ADK_KPACKAGE_KMOD_NET_IPIP
 	  mobile-IP facilities (allowing laptops to seamlessly move between
 	  networks without changing their IP addresses).
 
-
 config ADK_KPACKAGE_KMOD_NET_IPGRE
 	prompt "kmod-net-ipgre.................... GRE tunnels over IP"
 	tristate
-	#depends on ADK_KPACKAGE_KMOD_NET_IPGRE_BROADCAST
+	select ADK_KERNEL_NET_IPGRE_BROADCAST
+	select ADK_KERNEL_NET_IPGRE_DEMUX
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within

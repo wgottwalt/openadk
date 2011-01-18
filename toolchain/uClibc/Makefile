@@ -14,15 +14,28 @@ endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
-	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${TOOLCHAIN_SYSROOT}/usr/include\"' \
+	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
 	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif
-	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
-		PREFIX=$(TOOLCHAIN_SYSROOT) \
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
+	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
+	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
+	echo "UCLIBC_BUILD_SSP=y" >> ${WRKBUILD}/.config
+endif
+	echo N|$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=$(TOOLCHAIN_SYSROOT) \
+		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
+		HOSTCC="$(HOSTCC)" \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		oldconfig
+	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+		PREFIX=$(STAGING_TARGET_DIR) \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOSTCC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers

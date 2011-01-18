@@ -16232,7 +16232,7 @@ diff -Nur libupnp-1.6.6.orig/build-aux/ltmain.sh libupnp-1.6.6/build-aux/ltmain.
 +      # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
 +      # @file GCC response files
 +      -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
-+      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
 +        func_quote_for_eval "$arg"
 +	arg="$func_quote_for_eval_result"
 +        func_append compile_command " $arg"

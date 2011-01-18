@@ -1,0 +1,29 @@
+--- ppp-2.4.5.orig/pppd/plugins/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/pppd/plugins/Makefile.linux	2011-01-16 17:14:34.000000000 +0100
+@@ -1,13 +1,8 @@
+-#CC	= gcc
+-COPTS	= -O2 -g
+-CFLAGS	= $(COPTS) -I.. -I../../include -fPIC
+-LDFLAGS	= -shared
+-INSTALL	= install
++include ../../makedefs.linux
+ 
+-DESTDIR = $(INSTROOT)@DESTDIR@
+-BINDIR = $(DESTDIR)/sbin
+-MANDIR = $(DESTDIR)/share/man/man8
+-LIBDIR = $(DESTDIR)/lib/pppd/$(VERSION)
++CPPFLAGS += -I.. -I../../include
++CFLAGS += -fPIC
++LDFLAGS	+= -shared
+ 
+ SUBDIRS := rp-pppoe pppoatm pppol2tp
+ # Uncomment the next line to include the radius authentication plugin
+@@ -23,7 +18,7 @@ all:	$(PLUGINS)
+ 	for d in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$d all; done
+ 
+ %.so: %.c
+-	$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $^
++	$(CC) -o $@ $(LDFLAGS) $(CPPFLAGS) $(CFLAGS) $^
+ 
+ VERSION = $(shell awk -F '"' '/VERSION/ { print $$2; }' ../patchlevel.h)
+ 

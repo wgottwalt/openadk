@@ -8,6 +8,7 @@ PKG_VERSION:=		2.23.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		a7d6c5f2fe2d481149ed3ba807b5c043
 PKG_DESCR:=		GDK pixbuf library
+PKG_BUILDDEP:=		jpeg libtiff
 PKG_SECTION:=		libs
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.23/
 

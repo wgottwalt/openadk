@@ -4,7 +4,7 @@
 _UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
 		test -n "$$__limit" && ulimit -dS $$__limit;
 
-all: .prereq_done
+all: checkreloc .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all
 
 v: .prereq_done
@@ -191,20 +191,9 @@ NO_ERROR=0
 		echo "GMAKE:=$$(which gmake)" >>prereq.mk ;\
 	fi
 	@echo "GNU_HOST_NAME:=$$(${CC} -dumpmachine)" >>prereq.mk
-	@echo "HOST_ARCH:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
-	    -e 's/sparc.*/sparc/' \
-	    -e 's/arm.*/arm/g' \
-	    -e 's/m68k.*/m68k/' \
-	    -e 's/ppc/powerpc/g' \
-	    -e 's/v850.*/v850/g' \
-	    -e 's/sh[234]/sh/' \
-	    -e 's/mips-.*/mips/' \
-	    -e 's/mipsel-.*/mipsel/' \
-	    -e 's/cris.*/cris/' \
-	    -e 's/i[3-9]86/i386/' \
-	    )" >>prereq.mk
 	@echo "HOSTARCH:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
 	    -e 's/sparc.*/sparc/' \
+	    -e 's/armeb.*/armeb/g' \
 	    -e 's/arm.*/arm/g' \
 	    -e 's/m68k.*/m68k/' \
 	    -e 's/v850.*/v850/g' \
@@ -215,11 +204,7 @@ NO_ERROR=0
 	    -e 's/i[3-9]86/x86/' \
 	    )" >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
-	@echo 'HOSTCFLAGS:=-O2' >>prereq.mk
 	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
-	@echo 'HOSTCXXFLAGS:=-O2' >>prereq.mk
-	@echo "HOST_LIBIDL_CONFIG:=$$(which libIDL-config-2 2>/dev/null)" >>prereq.mk
-	@echo "PKG_HOSTLIB_DIR:=$$(pkg-config --variable pc_path pkg-config 2>/dev/null)" >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
@@ -228,6 +213,9 @@ NO_ERROR=0
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
+	@echo "HOST_LIBIDL_CONFIG:=$$(which libIDL-config-2 2>/dev/null)" >>prereq.mk
+	@echo "PKG_HOSTLIB_DIR=$$(eval pkg-config --variable pc_path pkg-config 2>/dev/null)" >/dev/null
+	@echo "PKG_HOSTLIB_DIR:=$${PKG_HOSTLIB_DIR:-/usr/lib/pkgconfig}" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh
@@ -237,4 +225,7 @@ NO_ERROR=0
 	@touch .adkinit
 	@touch $@
 
-.PHONY: prereq prereq-noerror
+checkreloc:
+	@bash scripts/reloc.sh
+
+.PHONY: prereq prereq-noerror checkreloc

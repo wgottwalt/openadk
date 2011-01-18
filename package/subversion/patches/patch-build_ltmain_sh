@@ -1,0 +1,39 @@
+--- subversion-1.6.12.orig/build/ltmain.sh	2010-03-31 20:37:12.000000000 +0200
++++ subversion-1.6.12/build/ltmain.sh	2011-01-17 15:25:25.000000000 +0100
+@@ -1676,7 +1676,7 @@ EOF
+       # -F/path gives path to uninstalled frameworks, gcc on darwin
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
+@@ -2561,27 +2561,6 @@ EOF
+ 	      esac
+ 	    fi
+ 
+-	    # Hardcode the library path.
+-	    # Skip directories that are in the system default run-time
+-	    # search path.
+-	    case " $sys_lib_dlsearch_path " in
+-	    *" $absdir "*) ;;
+-	    *)
+-	      case "$compile_rpath " in
+-	      *" $absdir "*) ;;
+-	      *) compile_rpath="$compile_rpath $absdir"
+-	      esac
+-	      ;;
+-	    esac
+-	    case " $sys_lib_dlsearch_path " in
+-	    *" $libdir "*) ;;
+-	    *)
+-	      case "$finalize_rpath " in
+-	      *" $libdir "*) ;;
+-	      *) finalize_rpath="$finalize_rpath $libdir"
+-	      esac
+-	      ;;
+-	    esac
+ 	  fi # $linkmode,$pass = prog,link...
+ 
+ 	  if test "$alldeplibs" = yes &&

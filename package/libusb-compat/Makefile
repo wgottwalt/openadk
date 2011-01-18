@@ -28,11 +28,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBUSB_COMPAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBUSB_COMPAT_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_COMPAT_DEV},${PKGSC_LIBUSB_COMPAT_DEV},${PKG_OPTS}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBUSB_COMPAT_DEV}+=	libusb-compat-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB_COMPAT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libusb*.so* ${IDIR_LIBUSB_COMPAT}/usr/lib/
 

@@ -15,7 +15,7 @@ NO_DISTFILES:=          1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,KMOD_RTSP,kmod-rtsp,${KERNEL_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RTSP_KMOD,rtsp-kmod,${KERNEL_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -28,11 +28,11 @@ pre-build:
 	$(MAKE) -C ${WRKBUILD} debug V=1
 
 do-install:
-	${INSTALL_DIR} ${IDIR_KMOD_RTSP}/etc/modules.d/
-	echo "nf_conntrack_rtsp" > ${IDIR_KMOD_RTSP}/etc/modules.d/60-nf-nat-rtsp
-	echo "nf_nat_rtsp" >> ${IDIR_KMOD_RTSP}/etc/modules.d/60-nf-nat-rtsp
-	${INSTALL_DIR} ${IDIR_KMOD_RTSP}/lib/modules/${KERNEL_VERSION}/
+	${INSTALL_DIR} ${IDIR_RTSP_KMOD}/etc/modules.d/
+	echo "nf_conntrack_rtsp" > ${IDIR_RTSP_KMOD}/etc/modules.d/60-nf-nat-rtsp
+	echo "nf_nat_rtsp" >> ${IDIR_RTSP_KMOD}/etc/modules.d/60-nf-nat-rtsp
+	${INSTALL_DIR} ${IDIR_RTSP_KMOD}/lib/modules/${KERNEL_VERSION}/
 	${INSTALL_DATA} ${WRKBUILD}/*.ko \
-		${IDIR_KMOD_RTSP}/lib/modules/${KERNEL_VERSION}
+		${IDIR_RTSP_KMOD}/lib/modules/${KERNEL_VERSION}
 
 include ${TOPDIR}/mk/pkg-bottom.mk

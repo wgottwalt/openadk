@@ -1,0 +1,11 @@
+--- glib-2.27.5.orig/ltmain.sh	2010-12-06 15:06:25.000000000 +0100
++++ glib-2.27.5/ltmain.sh	2011-01-14 17:22:21.000000000 +0100
+@@ -5840,7 +5840,7 @@ func_mode_link ()
+       # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
++      -O*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

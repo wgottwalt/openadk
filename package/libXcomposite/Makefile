@@ -25,13 +25,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBXCOMPOSITE,libxcomposite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBXCOMPOSITE_DEV,libxcomposite-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXCOMPOSITE_DEV},${PKGSC_LIBXCOMPOSITE_DEV},${PKG_OPTS}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBXCOMPOSITE_DEV}+=	libxcomposite-dev-install
-
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBXCOMPOSITE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXcomposite.so* ${IDIR_LIBXCOMPOSITE}/usr/lib/
 

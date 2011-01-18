@@ -3,6 +3,10 @@
 
 all: build-all-pkgs
 
+ifeq ($(ADK_HOST_CYGWIN),y)
+EXEEXT:=		.exe
+endif
+
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}
@@ -36,7 +40,8 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
-CONFIGURE_ENV+=		CONFIG_SHELL='$(strip ${SHELL})' \
+CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TCFLAGS})' \
 			CXXFLAGS='$(strip ${TCXXFLAGS})' \
 			CPPFLAGS='$(strip ${TCPPFLAGS})' \
@@ -74,9 +79,12 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${HOST_CONFIGURE_OPTS} \
 			CC='${TARGET_CC}' \
 			CXX='${TARGET_CXX}' \
+			LD='${TARGET_LD}' \
 			AR='${TARGET_CROSS}ar' \
 			RANLIB='${TARGET_CROSS}ranlib' \
 			NM='${TARGET_CROSS}nm' \
+			OBJCOPY='${TARGET_CROSS}objcopy' \
+			RANLIB='${TARGET_CROSS}ranlib' \
 			STRIP='${TARGET_CROSS}strip' \
 			CROSS="$(TARGET_CROSS)"
 endif
@@ -142,6 +150,8 @@ IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
+ALL_POSTINST+=	$(2)-install
+$(2)-install:
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
 
@@ -181,6 +191,7 @@ $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
 	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
+ifeq (${ADK_INSTALL_PACKAGE_INIT_SCRIPTS},y)
 	@for file in $$$$(ls ./files/*.init 2>/dev/null); do \
 		fname=$$$$(echo $$$$file| sed -e "s#.*/##" -e "s#.init##"); \
 		check=$$$$(grep PKG $$$$file|cut -d ' '  -f 2); \
@@ -192,6 +203,7 @@ endif
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \
 	done
+endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}' \
 	    '$${STAGING_TARGET_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
@@ -216,7 +228,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
-	    $(TOPDIR)/bin/tools/cpio -padlmu '$${STAGING_TARGET_DIR}'
+	    $(TOOLS_DIR)/cpio -padlmu '$${STAGING_TARGET_DIR}'
 	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \

@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		net-snmp
-PKG_VERSION:=		5.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		5b2551e7bd024fbbee84dca22a5f13a1
+PKG_VERSION:=		5.6.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b4e30ead5783b0bb1d280172c6095ea4
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		libnetsnmp libelf
-PKG_BUILDDEP:=		libelf
+PKG_DEPENDS:=		libnetsnmp libelf libnl
+PKG_BUILDDEP:=		libelf libnl
 PKG_URL:=		http://www.net-snmp.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 PKG_NOPARALLEL:=	1
@@ -22,7 +22,7 @@ PKGSD_LIBNETSNMP:=	SNMP library
 PKGSS_LIBNETSNMP:=	libelf
 PKGSC_LIBNETSNMP:=	libs
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_SNMPD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
@@ -33,7 +33,7 @@ $(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE},$
 
 SNMP_TRANSPORTS_INCLUDED:=	UDP TCP Callback Unix
 SNMP_TRANSPORTS_EXCLUDED:=	Alias
-ifneq (${ADK_PACKAGE_NET_SNMP_WITH_IPV6},)
+ifneq (${ADK_PACKAGE_SNMPD_WITH_IPV6},)
 SNMP_TRANSPORTS_INCLUDED+=	TCPIPv6 UDPIPv6
 else
 SNMP_TRANSPORTS_EXCLUDED:=	TCPIPv6 UDPIPv6
@@ -61,7 +61,7 @@ CONFIGURE_ARGS+=	--with-defaults \
 			--without-rpm \
 			--without-zlib
 
-ifneq (${ADK_PACKAGE_NET_SNMP_WITH_IPV6},)
+ifneq (${ADK_PACKAGE_SNMPD_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
@@ -69,13 +69,17 @@ endif
 
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 
-post-install:
+libnetsnmp-install:
 	${INSTALL_DIR} ${IDIR_LIBNETSNMP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnetsnmp*.so* ${IDIR_LIBNETSNMP}/usr/lib/
+
+snmpd-install:
 	${INSTALL_DIR} ${IDIR_SNMPD}/etc/snmp
 	${INSTALL_DIR} ${IDIR_SNMPD}/usr/sbin
 	${INSTALL_DATA} ./files/snmpd.conf ${IDIR_SNMPD}/etc/snmp/snmpd.conf
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/snmpd ${IDIR_SNMPD}/usr/sbin/snmpd
+
+snmp-utils-install:
 	${INSTALL_DIR} ${IDIR_SNMP_UTILS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/snmp{get,set,status,test,trap,walk} \
 		${IDIR_SNMP_UTILS}/usr/bin/

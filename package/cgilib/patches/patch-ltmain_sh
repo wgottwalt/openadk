@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- cgilib-0.7.orig/ltmain.sh	2008-04-29 23:33:55.000000000 +0200
-+++ cgilib-0.7/ltmain.sh	2009-05-09 03:58:09.000000000 +0200
++++ cgilib-0.7/ltmain.sh	2011-01-14 20:26:24.000000000 +0100
 @@ -43,8 +43,8 @@ EXIT_FAILURE=1
  
  PROGRAM=ltmain.sh
@@ -65,6 +65,15 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	continue
  	;;
  
+@@ -1676,7 +1706,7 @@ EOF
+       # -F/path gives path to uninstalled frameworks, gcc on darwin
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
 @@ -2135,10 +2165,7 @@ EOF
  	case $pass in
  	dlopen) libs="$dlfiles" ;;

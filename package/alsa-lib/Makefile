@@ -25,11 +25,7 @@ $(eval $(call PKG_template,ALSA_LIB_DEV,alsa-lib-dev,${PKG_VERSION}-${PKG_RELEAS
 
 CONFIGURE_ARGS+=	--disable-python
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_ALSA_LIB_DEV}+=	alsa-lib-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa
 	${CP} ${WRKINST}/usr/lib/libasound.so* ${IDIR_ALSA_LIB}/usr/lib/
 	${CP} ${WRKINST}/usr/share/alsa/* ${IDIR_ALSA_LIB}/usr/share/alsa/

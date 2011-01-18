@@ -13,17 +13,24 @@ PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		pcre zlib
 PKG_URL:=		http://dansguardian.org/
 PKG_SITES:=		http://dansguardian.org/downloads/2/Stable/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		DANSGUARDIAN
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp
+endif
+
 ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
+			LIBS="$(LIBRARIES)"
 endif
+
 
 CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
-PKG_VERSION:=		0.8.6
+PKG_VERSION:=		0.8.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9ed61a02983dc42d0ea0224711ace025
+PKG_MD5SUM:=		596bafb53bb6c079a0703f1726cb2305
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap
@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--without-xen \
 			--without-openvz \
 			--without-lxc \
 			--without-vbox \
+			--without-macvtap \
 			--disable-silent-rules \
 			--without-sasl
 

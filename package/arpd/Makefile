@@ -23,7 +23,7 @@ $(eval $(call PKG_template,ARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIGURE_ARGS+=	--with-libdnet=${STAGING_TARGET_DIR}/usr \
 			--with-libevent=${STAGING_TARGET_DIR}/usr \
 			--with-libpcap=${STAGING_TARGET_DIR}/usr
-MAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
+MAKE_FLAGS+=		CFLAGS="${TCFLAGS}" \
 			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include" \
 			LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lpcap -ldnet -levent"
 

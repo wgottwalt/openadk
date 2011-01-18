@@ -36,7 +36,8 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-multilib \
-			--disable-libstdcxx-pch
+			--disable-libstdcxx-pch \
+			--enable-cxx-flags="${TARGET_LDFLAGS}"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin

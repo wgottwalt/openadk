@@ -1,0 +1,11 @@
+--- dillo-2.2.orig/src/IO/Makefile.in	2010-02-11 11:20:01.000000000 +0100
++++ dillo-2.2/src/IO/Makefile.in	2011-01-07 21:38:15.000000000 +0100
+@@ -188,7 +188,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AM_CPPFLAGS = -DDILLO_BINDIR='"$(bindir)/"'
+-AM_CFLAGS = @LIBFLTK_CFLAGS@
++AM_CFLAGS = 
+ AM_CXXFLAGS = @LIBFLTK_CXXFLAGS@
+ noinst_LIBRARIES = libDiof.a
+ libDiof_a_SOURCES = \

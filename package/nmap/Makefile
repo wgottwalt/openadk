@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libdnet libpcap libpcre
 PKG_BUILDDEP:=		libdnet libpcap pcre
 PKG_URL:=		http://nmap.org/
 PKG_SITES:=		http://download.insecure.org/nmap/dist/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		NMAP
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -21,11 +22,16 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp -lssp_nonshared
+endif
+
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
+			LIBS="${LIBRARIES}"
 endif
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \

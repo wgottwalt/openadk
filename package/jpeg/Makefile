@@ -27,11 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBJPEG,libjpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,JPEG_DEV,libjpeg-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_JPEG_DEV},${PKGSC_JPEG_DEV}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_JPEG_DEV}+=	jpeg-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBJPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libjpeg.so* ${IDIR_LIBJPEG}/usr/lib/
 

@@ -1,0 +1,27 @@
+--- audiofile-0.2.7.orig/ltmain.sh	2010-03-22 04:48:34.000000000 +0100
++++ audiofile-0.2.7/ltmain.sh	2011-01-14 23:13:46.000000000 +0100
+@@ -1422,7 +1422,6 @@ EOF
+ 	esac
+ 	continue
+ 	;;
+-
+       -L*)
+ 	dir=`$echo "X$arg" | $Xsed -e 's/^-L//'`
+ 	# We need an absolute path.
+@@ -1503,15 +1502,9 @@ EOF
+       # but this is not reliable with gcc because gcc may use -mfoo to
+       # select a different linker, different libraries, etc, while
+       # -Wl,-mfoo simply passes -mfoo to the linker.
+-      -m*)
++      -m*|-fstack-protector*|-flto)
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
+-	arg=`$echo "X$arg" | $Xsed -e "$sed_quote_subst"`
+-	case $arg in
+-	*[\[\~\#\^\&\*\(\)\{\}\|\;\<\>\?\'\ \	]*|*]*|"")
+-	  arg="\"$arg\""
+-	  ;;
+-	esac
+         compile_command="$compile_command $arg"
+         finalize_command="$finalize_command $arg"
+         if test "$with_gcc" = "yes" ; then

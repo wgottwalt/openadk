@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.18.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		f15fe752d8b7012aa5e59f83b88ccb1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
@@ -22,10 +22,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKGSD_UDHCPD},${PKGSC_UDHCPD}))
-
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_UDHCPD}+=	udhcpd-install
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -56,7 +52,7 @@ else
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
 endif
 
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)

@@ -1,6 +1,6 @@
---- ppp-2.4.4.orig/pppd/chap_ms.c	2006-05-21 13:56:40.000000000 +0200
-+++ ppp-2.4.4/pppd/chap_ms.c	2009-06-05 19:12:00.000000000 +0200
-@@ -897,13 +897,17 @@ set_mppe_enc_types(int policy, int types
+--- ppp-2.4.5.orig/pppd/chap_ms.c	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/pppd/chap_ms.c	2011-01-16 15:51:05.000000000 +0100
+@@ -898,13 +898,17 @@ set_mppe_enc_types(int policy, int types
      /*
       * Disable undesirable encryption types.  Note that we don't ENABLE
       * any encryption types, to avoid overriding manual configuration.

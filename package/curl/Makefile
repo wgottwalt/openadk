@@ -21,7 +21,7 @@ PKGSS_LIBCURL:=		libopenssl zlib
 PKGSD_LIBCURL_DEV:=	development files for libcurl
 PKGSC_LIBCURL_DEV:=	devel
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
@@ -29,11 +29,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL}))
 $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCURL_DEV},${PKGSC_LIBCURL_DEV}))
-
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_CURL}+=		curl-install
-SUB_INSTALLS-${ADK_PACKAGE_LIBCURL_DEV}+=	libcurl-dev-install
 
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
@@ -63,13 +58,13 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
-	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
-
 curl-install:
 	${INSTALL_DIR} ${IDIR_CURL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
+
+libcurl-install:
+	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
 
 libcurl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl

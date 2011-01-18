@@ -1,11 +1,48 @@
---- ppp-2.4.4.orig/pppstats/Makefile.linux	2006-06-04 07:07:46.000000000 +0200
-+++ ppp-2.4.4/pppstats/Makefile.linux	2009-06-05 19:12:00.000000000 +0200
-@@ -22,7 +22,7 @@ all: pppstats
+--- ppp-2.4.5.orig/pppstats/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/pppstats/Makefile.linux	2011-01-16 17:11:22.000000000 +0100
+@@ -1,36 +1,27 @@
+ #
+ # pppstats makefile
+ # $Id: Makefile.linux,v 1.9 2006/06/04 05:07:46 paulus Exp $
+-#
+-DESTDIR = $(INSTROOT)@DESTDIR@
+-BINDIR = $(DESTDIR)/sbin
+-MANDIR = $(DESTDIR)/share/man/man8
  
++include ../makedefs.linux
++
++CPPFLAGS += -I../include
+ PPPSTATSRCS = pppstats.c
+ PPPSTATOBJS = pppstats.o
+ 
+-#CC = gcc
+-COPTS = -O
+-COMPILE_FLAGS = -I../include
+-LIBS =
+-
+-INSTALL= install
+-
+-CFLAGS = $(COPTS) $(COMPILE_FLAGS)
+-
+ all: pppstats
+ 
++pppstats: $(PPPSTATSRCS)
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDLAGS) -o pppstats pppstats.c $(LIBS)
++
  install: pppstats
  	-mkdir -p $(MANDIR)
 -	$(INSTALL) -s -c pppstats $(BINDIR)
 +	$(INSTALL) -c pppstats $(BINDIR)
  	$(INSTALL) -c -m 444 pppstats.8 $(MANDIR)
  
- pppstats: $(PPPSTATSRCS)
+-pppstats: $(PPPSTATSRCS)
+-	$(CC) $(CFLAGS) -o pppstats pppstats.c $(LIBS)
+-
+ clean:
+ 	rm -f pppstats *~ #* core
+ 
+ depend:
+ 	cpp -M $(CFLAGS) $(PPPSTATSRCS) >.depend
+-#	makedepend $(CFLAGS) $(PPPSTATSRCS)
++
++.PHONY: clean

@@ -11,6 +11,7 @@ PKG_DESCR:=		IPv6 multicast routing daemon
 PKG_SECTION:=		ipv6
 PKG_DEPENDS:=		kmod-ipv6
 PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		MRD6
 
 WRKBUILD=		${WRKSRC}/src
@@ -21,10 +22,15 @@ $(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 CONFIG_STYLE:=		manual
 
+LIBRARIES:=-nodefaultlibs -luClibc++
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp -lssp_nonshared
+endif
+
 ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ -nodefaultlibs \
+TCXXFLAGS+=		-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-nodefaultlibs -luClibc++ -shared
+TLDFLAGS+=		-shared ${LIBRARIES}
 endif
 XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}"
 

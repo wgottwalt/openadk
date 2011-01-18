@@ -27,10 +27,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FFMPEG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_FFPLAY}+=	ffplay-install
-
 ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)
 CONFIGURE_CPU_OPTS:=	--enable-mmx
 else
@@ -76,7 +72,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-libfaad \
 			${CONFIGURE_CPU_OPTS}
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_FFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavdevice.so* ${IDIR_FFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavformat.so* ${IDIR_FFMPEG}/usr/lib

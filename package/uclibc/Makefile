@@ -23,17 +23,16 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_UCLIBC_DEV}+=	uclibc-dev-install
-
 # do nothing, uClibc is already build in toolchain directory
-do-install: $(STAGING_TARGET_DIR)/lib/libc.so ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install: $(STAGING_TARGET_DIR)/lib/libc.so
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/lib/
+endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/lib/

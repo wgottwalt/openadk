@@ -33,7 +33,7 @@
 /config/*.o
 /config/lxdialog/*.o
 /make.log
-/dl/
+/dl
 /package/Config.in.auto*
 /package/pkgconfigs.d/
 /package/*/Config.in

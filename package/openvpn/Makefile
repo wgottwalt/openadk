@@ -15,7 +15,7 @@ PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://openvpn.net/release/
 
 PKG_SUBPKGS:=		OPENVPN OPENVPN_EASY_RSA
-PKG_FLAVOURS:=		WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
+PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
 PKGFD_WITH_LZO:=	enable LZO compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
@@ -60,11 +60,7 @@ CONFIGURE_ARGS+=	--disable-pthread \
 			--without-ifconfig-path \
 			--without-route-path
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${OPENVPN_EASY_RSA}+=	openvpn-easy-rsa-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} $(IDIR_OPENVPN)/usr/sbin $(IDIR_OPENVPN)/etc/openvpn
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
 	$(CP) ./files/openvpn.conf $(IDIR_OPENVPN)/etc/openvpn/

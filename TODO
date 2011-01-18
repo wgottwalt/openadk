@@ -1,13 +1,25 @@
+- man pages in ipkg/tgz packages (automatic)
+- automate /etc handling via conffiles
+- ccache support for speedup
+- distcc evaluation
+- GCC SSP evaluation
+- LTO GCC evaluation
+- finish qemu package
+- fix autoreconf usage in opensc
 - openssl ocf support check
+- locales support
 - new package minidlna
 - wget/curl/ftp download support
 - fix heimdal package
-- check all patches for CFLAGS compliance
+- fix or remove bazaar package
+- check all patches for CFLAGS compliance, fhonour patch from FreeWRT
+- rpath cleanup
 - busybox update and SuSv3 removal
 - check rtc support on foxg20
-- relocatable gcc (adk)
 - adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, for no internet access
-- add support for brcm 2.6 (lzma/flash/wireless support)
+- add and test brcm 2.6 wireless support
 - help text for config/ needs adoption
+- diet libc / klibc / newlib support
+- pcc support? clang+llvm

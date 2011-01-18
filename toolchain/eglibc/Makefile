@@ -4,7 +4,6 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-
 include ${TOPDIR}/mk/buildhlp.mk
 
 ifneq ($(ADK_DEBUG),)
@@ -51,8 +50,8 @@ $(WRKBUILD)/.headers_configure:
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
 		$(WRKBUILD)/libc/configure \
-			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--prefix=$(STAGING_TARGET_DIR)/usr \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			${EGLIBC_CONFOPTS} \
 	);
 	touch $@
@@ -62,8 +61,14 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		PATH='${TARGET_PATH}' \
 		$(MAKE) install-headers install-bootstrap-headers=yes \
 	);
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $@
+
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+EGLIBC_ENV+=		libc_cv_ssp=yes
+else
+EGLIBC_ENV+=		libc_cv_ssp=no
+endif
 
 $(WRKBUILD)/.configured:
 	mkdir -p $(EGLIBC_BUILD_DIR_FINAL)
@@ -79,12 +84,16 @@ $(WRKBUILD)/.configured:
 	);
 	touch $@
 
-$(WRKBUILD)/.compiled:
+$(EGLIBC_BUILD_DIR_FINAL)/libc.so:
+$(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
-$(WRKBUILD)/.installed:
+$(WRKBUILD)/.installed: $(EGLIBC_BUILD_DIR_FINAL)/libc.so
 	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
+	${INSTALL_DATA} ${WRKBUILD}/libc/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/libc/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/libc/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

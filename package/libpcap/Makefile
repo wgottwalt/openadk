@@ -5,14 +5,14 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		1bca27d206970badae248cfa471bbb47
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_LIBPCAP:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include $(TOPDIR)/mk/package.mk

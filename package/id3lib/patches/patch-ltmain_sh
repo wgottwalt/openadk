@@ -1,0 +1,22 @@
+--- id3lib-3.8.3.orig/ltmain.sh	2003-03-02 01:23:00.000000000 +0100
++++ id3lib-3.8.3/ltmain.sh	2011-01-15 19:06:56.000000000 +0100
+@@ -1065,6 +1065,19 @@ compiler."
+ 	continue
+ 	;;
+ 
++      -fstack-protector*|-flto)
++	arg=`$echo "X$arg" | $Xsed -e "$sed_quote_subst"`
++	case $arg in
++        *$quote_scanset* | *]* | *\|* | *\&* | *\(* | *\)* | "")
++          arg="\"$arg\""
++          ;;
++        esac
++        compile_command="$compile_command $arg"
++        finalize_command="$finalize_command $arg"
++        compiler_flags="$compiler_flags $arg"
++        continue
++        ;;
++
+       -no-fast-install)
+ 	fast_install=no
+ 	continue

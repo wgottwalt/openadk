@@ -1,0 +1,31 @@
+--- libtool-2.4.orig/libltdl/config/ltmain.sh	2010-09-22 16:45:43.000000000 +0200
++++ libtool-2.4/libltdl/config/ltmain.sh	2011-01-15 12:03:36.000000000 +0100
+@@ -136,15 +136,15 @@ progpath="$0"
+ 
+ : ${CP="cp -f"}
+ test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\n'}
+-: ${EGREP="grep -E"}
+-: ${FGREP="grep -F"}
+-: ${GREP="grep"}
++: ${EGREP="/usr/bin/grep -E"}
++: ${FGREP="/usr/bin/grep -F"}
++: ${GREP="/usr/bin/grep"}
+ : ${LN_S="ln -s"}
+ : ${MAKE="make"}
+ : ${MKDIR="mkdir"}
+ : ${MV="mv -f"}
+ : ${RM="rm -f"}
+-: ${SED="sed"}
++: ${SED="/Volumes/adk/openadk/scripts/sed"}
+ : ${SHELL="${CONFIG_SHELL-/bin/sh}"}
+ : ${Xsed="$SED -e 1s/^X//"}
+ 
+@@ -5840,7 +5840,7 @@ func_mode_link ()
+       # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
++      -O*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

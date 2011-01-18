@@ -9,12 +9,25 @@ INSTALL_SCRIPT=		install -m0755
 MAKEFLAGS=		$(EXTRA_MAKEFLAGS)
 BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
+
+# target compiler settings
+TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include
+TARGET_LDFLAGS+=	-Wl,-O2
 ifneq ($(ADK_DEBUG),)
 TARGET_DEBUGGING:=	-g3 -fno-omit-frame-pointer
 else
-TARGET_DEBUGGING:=	-fomit-frame-pointer $(TARGET_OPTIMIZATION) 
+TARGET_DEBUGGING:=	$(TARGET_OPTIMIZATION) -fomit-frame-pointer
 endif
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
+ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
+TARGET_CFLAGS+=		-fstack-protector
+TARGET_CXXFLAGS+=	-fstack-protector
+TARGET_LDFLAGS+=	-fstack-protector
+endif
+ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
+TARGET_CFLAGS+=		-flto
+TARGET_LDFLAGS+=	-flto
+endif
 
 BASE_DIR:=		$(TOPDIR)
 DISTDIR?=		${BASE_DIR}/dl
@@ -26,6 +39,9 @@ STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
+# relation from STAGING_HOST_DIR to STAGING_TARGET_DIR (for gcc to find
+# its sysroot while staying relocatable)
+STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
@@ -36,10 +52,9 @@ BIN_DIR_PFX:=		$(BASE_DIR)/bin
 PACKAGE_DIR:=		$(BIN_DIR)/packages
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
-TARGET_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
+TARGET_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
-TOOLCHAIN_SYSROOT:=	$(TOOLCHAIN_BUILD_DIR)/libc_dev
 ifeq ($(ADK_NATIVE),y) 
 TARGET_CROSS:=		
 TARGET_COMPILER_PREFIX?=
@@ -50,8 +65,6 @@ endif
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
-TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include
-TARGET_LDFLAGS+=	-Wl,-O2
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
@@ -102,19 +115,19 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
+				cat $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
+				gzip -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				bzip2 -dc $$file | $(TOPDIR)/bin/tools/cpio -i -d ;; \
+				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(TOPDIR)/bin/tools/cpio -ivd -H zip ;; \
+				cat $$file | $(TOOLS_DIR)/cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \
@@ -127,6 +140,6 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget --tries=1 --timeout=30 $(QUIET)
+FETCH_CMD?=		wget --timeout=30 $(QUIET)
 
 include $(TOPDIR)/mk/mirrors.mk

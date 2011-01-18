@@ -13,26 +13,26 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://collectd.org/
 PKG_SITES:=		http://collectd.org/files/
 
-PKG_FLAVOURS:=		CPU LOAD MEMORY PING
-PKGFD_CPU:=		collect CPU statistics
-PKGFD_LOAD:=		collect system load statistics
-PKGFD_MEMORY:=		collect memory usage statistics
-PKGFD_PING:=		enable ping statistic plugin
+PKG_FLAVOURS_COLLECD:=	WITH_CPU WITH_LOAD WITH_MEMORY WITH_PING
+PKGFD_WITH_CPU:=	collect CPU statistics
+PKGFD_WITH_LOAD:=	collect system load statistics
+PKGFD_WITH_MEMORY:=	collect memory usage statistics
+PKGFD_WITH_PING:=	enable ping statistic plugin
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,COLLECTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifneq (${ADK_PACKAGE_COLLECTD_CPU},y)
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_CPU},y)
 DISABLE_CPU:=--disable-cpu
 endif
-ifneq (${ADK_PACKAGE_COLLECTD_LOAD},y)
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_LOAD},y)
 DISABLE_LOAD:=--disable-load
 endif
-ifneq (${ADK_PACKAGE_COLLECTD_MEMORY},y)
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_MEMORY},y)
 DISABLE_MEMORY:=--disable-memory
 endif
-ifneq (${ADK_PACKAGE_COLLECTD_PING},y)
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_PING},y)
 DISABLE_PING:=--disable-ping
 endif
 

@@ -1,0 +1,11 @@
+--- sane-backends-1.0.20.orig/ltmain.sh	2009-02-10 22:41:47.000000000 +0100
++++ sane-backends-1.0.20/ltmain.sh	2011-01-17 11:25:40.000000000 +0100
+@@ -1680,7 +1680,7 @@ EOF
+       # -F/path gives path to uninstalled frameworks, gcc on darwin
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.

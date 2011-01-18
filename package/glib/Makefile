@@ -25,8 +25,8 @@ $(eval $(call PKG_template,GLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIGURE_ARGS+=	--enable-debug=no \
 			--disable-mem-pools \
 			--disable-rebuilds \
-			--with-libiconv=gnu \
 			--disable-fam \
+			--with-libiconv=gnu \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_stack_grows=no \
@@ -34,6 +34,22 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_uscore=no \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
+
+pre-configure:
+ifneq ($(OStype),Darwin)
+	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+		./configure --prefix=$(STAGING_HOST_DIR) \
+			--enable-debug=no \
+			--with-threads=posix \
+	);
+	${MAKE} -C ${WRKBUILD}/glib
+	${MAKE} -C ${WRKBUILD}/gthread
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gio glib-compile-schemas
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gobject glib-genmarshal
+	$(CP) ${WRKBUILD}/gio/glib-compile-schemas ${STAGING_HOST_DIR}/bin
+	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
+	${MAKE} -C ${WRKBUILD} clean
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib

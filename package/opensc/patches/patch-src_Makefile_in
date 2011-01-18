@@ -1,6 +1,6 @@
---- opensc-0.11.13.orig/src/Makefile.in	2010-02-16 10:32:17.000000000 +0100
-+++ opensc-0.11.13/src/Makefile.in	2010-12-15 21:48:57.000000000 +0100
-@@ -260,8 +260,8 @@ MAINTAINERCLEANFILES = $(srcdir)/Makefil
+--- opensc-0.11.13.orig/src/Makefile.in	2011-01-09 00:58:50.000000000 +0100
++++ opensc-0.11.13/src/Makefile.in	2011-01-09 00:56:00.000000000 +0100
+@@ -263,8 +263,8 @@ MAINTAINERCLEANFILES = $(srcdir)/Makefil
  EXTRA_DIST = Makefile.mak
  
  # Order IS important

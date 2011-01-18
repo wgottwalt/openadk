@@ -24,7 +24,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CRYPTSETUP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-selinux
+CONFIGURE_ARGS+=	--disable-selinux \
+			--disable-static
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CRYPTSETUP}/usr/sbin ${IDIR_CRYPTSETUP}/usr/lib

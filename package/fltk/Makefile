@@ -13,6 +13,9 @@ PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 
+PKG_NEED_CXX:=		1
+PKG_CXX:=		LIBFLTK
+
 PKG_SUBPKGS:=		LIBFLTK
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
@@ -22,6 +25,17 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-2.0.x-r7513
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp
+endif
+
+ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
+CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
+			LIBS="$(LIBRARIES)"
+endif
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBFLTK)/usr/lib

@@ -3,7 +3,7 @@
 #
 # Steps to build toolchains
 # 1) build and install binutils
-# 2) build and install mpfr, mpc and gmp
+# 2) build and install mpfr, mpc, libelf and gmp
 # 3) build and install gcc c compiler
 # 4) install kernel-headers
 # 5) install libc headers
@@ -13,7 +13,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc gcc
+TARGETS:=binutils gmp mpfr mpc libelf gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc-ports glibc
 LIBC:=glibc
@@ -26,7 +26,9 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uClibc
 LIBC:=uClibc
 endif
+ifeq ($(ADK_TOOLCHAIN_GDB),y)
 TARGETS+=gdb
+endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
@@ -36,7 +38,7 @@ install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 
-gcc-prepare: binutils-install gmp-install mpfr-install mpc-install
+gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare glibc-ports-prepare
 else
@@ -52,14 +54,11 @@ $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)
 	@ln -sf ../lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 
-$(TOOLCHAIN_BUILD_DIR):
-	@mkdir -p $(TOOLCHAIN_BUILD_DIR)
-
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 
-%-prepare: $(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR)
+%-prepare: $(STAGING_HOST_DIR)
 	$(TRACE) toolchain/$(patsubst %-prepare,%,$@)/prepare
 	@if test x"$(patsubst %-prepare,%,$@)" = x"$(LIBC)"; then \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \

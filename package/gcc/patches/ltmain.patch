@@ -1,0 +1,12 @@
+diff -Nur gcc-4.5.2.orig/ltmain.sh gcc-4.5.2/ltmain.sh
+--- gcc-4.5.2.orig/ltmain.sh	2009-12-05 18:18:53.000000000 +0100
++++ gcc-4.5.2/ltmain.sh	2011-01-15 14:45:07.000000000 +0100
+@@ -4980,7 +4980,7 @@
+       # @file GCC response files
+       # -tp=* Portland pgcc target processor selection
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|-fstack-protector*|-flto)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

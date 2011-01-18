@@ -127,6 +127,7 @@ endif
 pre-install:
 do-install:
 post-install:
+spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
@@ -145,6 +146,7 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 ifeq ($(ADK_NATIVE),)
 	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
 		[[ -e $$a ]] || continue; \
@@ -168,7 +170,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(TOPDIR)/bin/tools/cpio -padlmu '${STAGING_TARGET_DIR}'
+	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_TARGET_DIR}'
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \

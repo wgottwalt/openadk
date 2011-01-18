@@ -12,16 +12,16 @@ PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.networkupstools.org/
 PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
-PKG_FLAVOURS:=		SSL SNMP USB
-PKGFD_SNMP:=		enable SNMP support
-PKGFS_SNMP:=		libnetsnmp
-PKGFB_SNMP:=		net-snmp
-PKGFD_USB:=		enable USB support
-PKGFS_USB:=		libusb
-PKGFB_USB:=		libusb
-PKGFD_SSL:=		enable SSL support
-PKGFS_SSL:=		libopenssl
-PKGFB_SSL:=		openssl
+PKG_FLAVOURS_NUT:=	WITH_SSL WITH_SNMP WITH_USB
+PKGFD_WITH_SNMP:=	enable SNMP support
+PKGFS_WITH_SNMP:=	libnetsnmp
+PKGFB_WITH_SNMP:=	net-snmp
+PKGFD_WITH_USB:=	enable USB support
+PKGFS_WITH_USB:=	libusb
+PKGFB_WITH_USB:=	libusb
+PKGFD_WITH_SSL:=	enable SSL support
+PKGFS_WITH_SSL:=	libopenssl
+PKGFB_WITH_SSL:=	openssl
 
 include ${TOPDIR}/mk/package.mk
 
@@ -65,10 +65,10 @@ $(eval $(call DRIVER_template,RHINO,rhino))
 CONFIG_DRIVERS=$(shell echo ${DRIVERS_y} | tr ' ' ',')
 
 INSTALL_DRIVERS_tmp=${DRIVERS_y}
-ifneq (${ADK_PACKAGE_NUT_USB},)
+ifneq (${ADK_PACKAGE_NUT_WITH_USB},)
 INSTALL_DRIVERS_tmp+=	usbhid-ups tripplite_usb
 endif
-ifneq (${ADK_PACKAGE_NUT_SNMP},)
+ifneq (${ADK_PACKAGE_NUT_WITH_SNMP},)
 INSTALL_DRIVERS_tmp+=	snmp-ups
 endif
 INSTALL_DRIVERS=$(shell echo ${INSTALL_DRIVERS_tmp} | tr ' ' ',')
@@ -79,7 +79,7 @@ CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--with-group=0 \
 			--with-user=0
 
-ifneq (${ADK_PACKAGE_NUT_SSL},)
+ifneq (${ADK_PACKAGE_NUT_WITH_SSL},)
 CONFIGURE_ARGS+=	--with-ssl
 CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
@@ -88,11 +88,11 @@ endif
 ALL_TARGET:=		all
 INSTALL_TARGET:=	install
 
-ifneq (${ADK_PACKAGE_NUT_USB},)
+ifneq (${ADK_PACKAGE_NUT_WITH_USB},)
 ALL_TARGET+=		usb
 INSTALL_TARGET+=	install-usb
 endif
-ifneq (${ADK_PACKAGE_NUT_SNMP},)
+ifneq (${ADK_PACKAGE_NUT_WITH_SNMP},)
 ALL_TARGET+=		snmp
 INSTALL_TARGET+=	install-snmp
 endif
@@ -108,10 +108,5 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_DATA} ./files/ups{d,}.conf ${IDIR_NUT}/etc/
-ifneq (${ADK_PACKAGE_NUT_VARDESC},)
-	${INSTALL_DIR} ${IDIR_NUT}/usr/share
-	${INSTALL_DATA} ${WRKINST}/usr/share/cmdvartab \
-		${IDIR_NUT}/usr/share/
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

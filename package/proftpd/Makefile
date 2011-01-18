@@ -13,6 +13,9 @@ PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 PKG_NOPARALLEL:=	1
 
+PKG_FLAVOURS_PROFTPD:=	WITH_FTPUSERS
+PKGFD_WITH_FTPUSERS:=	install /etc/ftpusers along with proftpd
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PROFTPD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -29,5 +32,8 @@ post-install:
 		$(IDIR_PROFTPD)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/{ftpshut,proftpd} \
 		$(IDIR_PROFTPD)/usr/sbin/
+ifeq (${ADK_PACKAGE_PROFTPD_WITH_FTPUSERS},y)
+	${INSTALL_DATA} ./files/ftpusers ${IDIR_PROFTPD}/etc/
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -20,14 +20,9 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_EGLIBC_DEV}+=	eglibc-dev-install
-
-EGLIBC_CONFOPTS:=	\
-			--build=$(GNU_HOST_NAME) \
+EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(TOOLCHAIN_SYSROOT)/usr/include \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-nls \
 			--without-cvs \
 			--disable-profile \
@@ -51,17 +46,33 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_slibdir="/lib"
 
 # compile nothing, eglibc is already build in toolchain directory
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
-		$(IDIR_EGLIBC)/usr/lib
-	test -z $(ADK_RUNTIME_TIMEZONE) || \
-	   $(CP) /usr/share/zoneinfo/$(ADK_RUNTIME_TIMEZONE) \
-		$(IDIR_EGLIBC)/etc/localtime
+	    $(IDIR_EGLIBC)/usr/lib
+	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s usr/share/zoneinfo/"$$f" || continue; \
+		echo usr/share/zoneinfo/"$$f" | \
+		    ${TOOLS_DIR}/cpio -pdu ${IDIR_EGLIBC}/; \
+	done
+	tz=; cd ${IDIR_EGLIBC}/usr/share/zoneinfo || exit 1; \
+	    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s "$$f" || continue; \
+		tz=$$f; \
+	done; if test x"$$tz" = x""; then \
+		echo >&2 Error during timezone installation; \
+		exit 1; \
+	else \
+		ln -sf "../usr/share/zoneinfo/$$tz" \
+		    ${IDIR_EGLIBC}/etc/localtime; \
+	fi
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
-	-for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc/
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc/
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_EGLIBC}/etc/
 
 eglibc-dev-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
@@ -89,6 +100,7 @@ eglibc-dev-install:
 	PATH='${TARGET_PATH}' \
 	$(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
+	@touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs.h
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_EGLIBC_DEV) -name ..install.cmd -exec rm {} \;
 	# conflicts with libiconv

@@ -26,16 +26,12 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKGSD_LIBSDL_IMAGE_DEV},${PKGSC_LIBSDL_IMAGE_DEV}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBSDL_IMAGE_DEV}+=	libsdl-image-dev-install
-
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
 			--enable-bmp \
 			--enable-tif
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL_IMAGE)/usr/lib
 

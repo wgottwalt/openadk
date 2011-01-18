@@ -1,0 +1,51 @@
+--- gpm-1.20.6.orig/src/Makefile.in	2009-02-09 10:58:53.000000000 +0100
++++ gpm-1.20.6/src/Makefile.in	2011-01-11 16:48:43.000000000 +0100
+@@ -59,19 +59,19 @@ STRIP = -s
+ 
+ # the prog rules are not very clean...
+ prog/%.o: prog/%.c
+-	$(CC) -Iheaders @CPPFLAGS@ $(CPPFLAGS) @CFLAGS@ $(CFLAGS) -c -o $@ $<
++	$(CC) -Iheaders @CPPFLAGS@ @CFLAGS@ -c -o $@ $<
+ 
+ prog/%:	prog/%.o
+-	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $^ @LIBS@ $(LIBS)
++	$(CC) @LDFLAGS@ -o $@ $^ @LIBS@
+ 
+ %.o: %.c
+-	$(CC) @CPPFLAGS@ $(CPPFLAGS) @CFLAGS@ $(CFLAGS) -c -o $@ $<
++	$(CC) @CPPFLAGS@ @CFLAGS@ -c -o $@ $<
+ 
+ %.lo:	%.c
+-	$(CC) @CPPFLAGS@ $(CPPFLAGS) @PICFLAGS@ @CFLAGS@ $(CFLAGS) -c -o $@ $<
++	$(CC) @CPPFLAGS@ @PICFLAGS@ @CFLAGS@ -c -o $@ $<
+ 
+ %:	%.o
+-	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $^ @LIBS@ $(LIBS)
++	$(CC) @LDFLAGS@ -o $@ $^ @LIBS@
+ 
+ # old, unused, but good rule [dependings]
+ #%.d: $(srcdir)/%.c
+@@ -82,7 +82,7 @@ prog/%:	prog/%.o
+ all:	gpm lib/libgpm.so.@abi_lev@ lib/libgpm.a $(PROG)
+ 
+ gpm:	$(GOBJ)
+-	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $(GOBJ) @LIBS@ $(LIBS) -lm
++	$(CC) @LDFLAGS@ -o $@ $(GOBJ) @LIBS@ -lm
+ 
+ # construct dependings of sourcefiles and link sourcefiles
+ $(DEPFILE) dep: prog/gpm-root.c
+@@ -148,11 +148,11 @@ prog/gpm-root.c:	$(srcdir)/prog/gpm-root
+ 
+ # gpm-root needs an own rule, because gpm-root.c is not in $(srcdir)
+ prog/gpm-root: prog/gpm-root.c lib/libgpm.so.@abi_lev@
+-	$(CC) -I. @CPPFLAGS@ $(CPPFLAGS) @CFLAGS@ $(CFLAGS) -c -o $@.o $<
+-	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $@.o @LIBS@ $(LIBS) lib/libgpm.so.@abi_lev@
++	$(CC) -I. @CPPFLAGS@ @CFLAGS@ -c -o $@.o $<
++	$(CC) @LDFLAGS@ -o $@ $@.o @LIBS@ lib/libgpm.so.@abi_lev@
+ 
+ prog/mouse-test:	prog/mouse-test.o mice.o twiddler.o synaptics.o prog/open_console.o
+-	$(CC) @LDFLAGS@ $(LDFLAGS) -o $@ $^ @LIBS@ $(LIBS) -lm
++	$(CC) @LDFLAGS@ -o $@ $^ @LIBS@ -lm
+ 
+ $(PROG):	lib/libgpm.so.@abi_lev@
+ 

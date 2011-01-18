@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.nano-editor.org/
 PKG_SITES:=		http://www.nano-editor.org/dist/v2.2/
 
-PKG_FLAVOURS:=		TINY
+PKG_FLAVOURS_NANO:=	TINY
 PKGFD_TINY:=		tiny nano
 
 include ${TOPDIR}/mk/package.mk

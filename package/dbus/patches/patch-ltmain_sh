@@ -1,0 +1,39 @@
+--- dbus-1.2.24.orig/ltmain.sh	2010-03-12 23:22:29.000000000 +0100
++++ dbus-1.2.24/ltmain.sh	2011-01-14 19:22:39.000000000 +0100
+@@ -4765,7 +4765,7 @@ func_mode_link ()
+       # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"
+@@ -5516,27 +5516,6 @@ func_mode_link ()
+ 	      esac
+ 	    fi
+ 
+-	    # Hardcode the library path.
+-	    # Skip directories that are in the system default run-time
+-	    # search path.
+-	    case " $sys_lib_dlsearch_path " in
+-	    *" $absdir "*) ;;
+-	    *)
+-	      case "$compile_rpath " in
+-	      *" $absdir "*) ;;
+-	      *) compile_rpath="$compile_rpath $absdir"
+-	      esac
+-	      ;;
+-	    esac
+-	    case " $sys_lib_dlsearch_path " in
+-	    *" $libdir "*) ;;
+-	    *)
+-	      case "$finalize_rpath " in
+-	      *" $libdir "*) ;;
+-	      *) finalize_rpath="$finalize_rpath $libdir"
+-	      esac
+-	      ;;
+-	    esac
+ 	  fi # $linkmode,$pass = prog,link...
+ 
+ 	  if test "$alldeplibs" = yes &&

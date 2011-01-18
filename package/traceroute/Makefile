@@ -22,7 +22,7 @@ MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			AR="${TARGET_CROSS}ar" \
 			RANLIB="${TARGET_CROSS}ranlib" \
 			CFLAGS="${TCFLAGS}" \
-			LDFLAGS="-L${WRKSRC}/libsupp"
+			LDFLAGS="${TARGET_LDFLAGS} -L${WRKSRC}/libsupp"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_TRACEROUTE)/usr/bin

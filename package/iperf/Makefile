@@ -12,11 +12,16 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
+PKG_NEED_CXX:=		1
 PKG_CXX:=		IPERF
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+TLDFLAGS+=		-lssp
+endif
 
 ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
 TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++

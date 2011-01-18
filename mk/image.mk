@@ -1,6 +1,34 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+# relative paths, like 'mksh' or '../usr/bin/foosh'
+ifeq (${ADK_BINSH_ASH},y)
+BINSH:=ash
+else ifeq (${ADK_BINSH_BASH},y)
+BINSH:=bash
+else ifeq (${ADK_BINSH_MKSH},y)
+BINSH:=mksh
+else ifeq (${ADK_BINSH_ZSH},y)
+BINSH:=zsh
+else
+$(error No /bin/sh configured!)
+endif
+
+# absolute paths
+ifeq (${ADK_ROOTSH_ASH},y)
+ROOTSH:=/bin/ash
+else ifeq (${ADK_ROOTSH_BASH},y)
+ROOTSH:=/bin/bash
+else ifeq (${ADK_ROOTSH_MKSH},y)
+ROOTSH:=/bin/mksh
+else ifeq (${ADK_ROOTSH_TCSH},y)
+ROOTSH:=/usr/bin/tcsh
+else ifeq (${ADK_ROOTSH_ZSH},y)
+ROOTSH:=/bin/zsh
+else
+$(error No login shell configured!)
+endif
+
 imageprepare: image-prepare-post extra-install
 
 # if an extra directory exist in TOPDIR, copy all content over the 
@@ -14,12 +42,14 @@ image-prepare-post:
 	    dd if=$$rng bs=512 count=1 >>${TARGET_DIR}/etc/.rnd 2>/dev/null; \
 	    chmod 600 ${TARGET_DIR}/etc/.rnd
 	chmod 4511 ${TARGET_DIR}/bin/busybox
-	chmod 1777 ${TARGET_DIR}/tmp
 	@if [ -d ${TARGET_DIR}/usr/share/fonts/X11 ];then \
 		for i in $$(ls ${TARGET_DIR}/usr/share/fonts/X11/);do \
 			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
 		done; \
 	fi
+	sed -i '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
+	-rm -f ${TARGET_DIR}/bin/sh
+	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
@@ -65,12 +95,16 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
 
-${BIN_DIR}/${ROOTFSSQUASHFS}: ${TARGET_DIR}
+${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs > \
-		${BUILD_DIR}/${ROOTFSSQUASHFS}
+
+ifeq (,${CUSTOM_ROOTFSSQUASHFS_BUILD})
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
+	    >${BUILD_DIR}/${ROOTFSSQUASHFS}
+endif
 
 createinitramfs:
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)

@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		nasm
 PKG_URL:=		http://syslinux.zytor.com/wiki/index.php/The_Syslinux_Project
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 
+PKG_HOST_DEPENDS:=	!darwin !netbsd !openbsd !cygwin !freebsd
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SYSLINUX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

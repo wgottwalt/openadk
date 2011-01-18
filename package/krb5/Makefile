@@ -27,10 +27,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBKRB5}+=	libkrb5-install
-
 TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
@@ -50,7 +46,7 @@ pre-build:
 	# fix nm call in script, we need the GNU version of nm
 	$(SED) "s#@@NM@@#${NM}#" ${WRKSRC}/util/export-check.pl
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin

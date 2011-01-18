@@ -1,0 +1,11 @@
+--- libnet-1.1.5.orig/ltmain.sh	2007-08-14 20:05:31.000000000 +0200
++++ libnet-1.1.5/ltmain.sh	2011-01-14 22:19:20.000000000 +0100
+@@ -1663,7 +1663,7 @@ EOF
+       # -F/path gives path to uninstalled frameworks, gcc on darwin
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.

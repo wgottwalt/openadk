@@ -11,8 +11,6 @@ PKG_DESCR:=		TCL scripting language
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
 
-PKG_HOST_DEPENDS:=	!darwin
-
 DISTFILES:=		tcl${PKG_VERSION}-src.tar.gz
 WRKDIST=		${WRKDIR}/tcl${PKG_VERSION}
 WRKSRC=			${WRKDIST}/unix
@@ -25,8 +23,10 @@ TCFLAGS+=		-ldl
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
 			tcl_cv_strtod_buggy=ok \
 			tcl_cv_strtod_unbroken=ok \
-			tcl_cv_strtoul_unbroken=ok
-CONFIGURE_ARGS+=	--enable-man-symlinks
+			tcl_cv_strtoul_unbroken=ok \
+			tcl_cv_sys_version="Linux-2.6"
+CONFIGURE_ARGS+=	--enable-man-symlinks \
+			--disable-rpath
 INSTALL_TARGET=		install-binaries install-libraries
 
 post-install:

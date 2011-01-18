@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,10 +37,11 @@
 
 static int nobinpkgs;
 
-static void fatal_error(const char *message) {
-
-	fprintf(stderr, "Fatal error. %s\n", message);
-	exit(1);
+#define fatal_error(...) { \
+	fprintf(stderr, "Fatal error. "); \
+	fprintf(stderr, __VA_ARGS__); \
+	fprintf(stderr, "\n"); \
+	exit(1); \
 }
 
 static int parse_var_hash(char *buf, const char *varname, StrMap *strmap) {
@@ -92,6 +93,53 @@ static int parse_var(char *buf, const char *varname, char *pvalue, char **result
 		if (snprintf(pkg_str, MAXVAR, "%s+=", varname) < 0)
 			perror("can not create path variable.");
 		string = strstr(buf, pkg_str);
+		if (string != NULL) {
+			string[strlen(string)-1] = '\0';
+			key = strtok(string, "+=");
+			value = strtok(NULL, "=\t");
+			if (pvalue != NULL)
+				strncat(pkg_var, pvalue, strlen(pvalue));
+			strncat(pkg_var, " ", 1);
+			if (value != NULL)
+				strncat(pkg_var, value, strlen(value));
+			*result = strdup(pkg_var);
+			free(pkg_var);
+			return(0);
+		}
+	}
+	free(pkg_var);
+	return(1);
+}
+
+static int parse_var_with_pkg(char *buf, const char *varname, char *pvalue, char **result, char **pkgname, int varlen) {
+
+	char *pkg_var, *check;
+	char *key, *value, *string;
+
+	if ((pkg_var = malloc(MAXLINE)) != NULL)
+		memset(pkg_var, 0, MAXLINE);
+	else {
+		perror("Can not allocate memory");
+		exit(EXIT_FAILURE);
+	}
+
+	check = strstr(buf, ":=");
+	if (check != NULL) {
+		string = strstr(buf, varname);
+		if (string != NULL) {
+			string[strlen(string)-1] = '\0';
+			key = strtok(string, ":=");
+			*pkgname = strdup(key+varlen);
+			value = strtok(NULL, "=\t");
+			if (value != NULL) {
+				strncat(pkg_var, value, strlen(value));
+				*result = strdup(pkg_var);
+			}
+			free(pkg_var);
+			return(0);
+		}
+	} else {
+		string = strstr(buf, varname);
 		if (string != NULL) {
 			string[strlen(string)-1] = '\0';
 			key = strtok(string, "+=");
@@ -222,6 +270,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
+	char *pkg_need_cxx, *pkg_need_java, *pkgname;
 	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
@@ -242,6 +291,9 @@ int main() {
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
 	pkg_multi = NULL;
+	pkg_need_cxx = NULL;
+	pkg_need_java = NULL;
+	pkgname = NULL;
 
 	p_ptr = NULL;
 	s_ptr = NULL;
@@ -301,7 +353,8 @@ int main() {
 						fclose(section);
 					}
 				} else
-					fatal_error("Can not find section description for package.");
+					fatal_error("Can not find section description for package %s.",
+							pkgdirp->d_name);
 				
 				fclose(pkg);
 				continue;
@@ -351,17 +404,21 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_CXX", NULL, &pkg_cxx)) == 0)
 						continue;
+					if ((parse_var(buf, "PKG_NEED_CXX", NULL, &pkg_need_cxx)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_NEED_JAVA", NULL, &pkg_need_java)) == 0)
+						continue;
 					if ((parse_var(buf, "PKG_MULTI", NULL, &pkg_multi)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_FLAVOURS", pkg_flavours, &pkg_flavours)) == 0)
+					if ((parse_var_with_pkg(buf, "PKG_FLAVOURS_", pkg_flavours, &pkg_flavours, &pkgname, 13)) == 0)
 						continue;
 					if ((parse_var_hash(buf, "PKGFD_", pkgmap)) == 0)
 						continue;
 					if ((parse_var_hash(buf, "PKGFS_", pkgmap)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_CHOICES", pkg_choices, &pkg_choices)) == 0)
+					if ((parse_var_with_pkg(buf, "PKG_CHOICES_", pkg_choices, &pkg_choices, &pkgname, 12)) == 0)
 						continue;
 					if ((parse_var_hash(buf, "PKGCD_", pkgmap)) == 0)
 						continue;
@@ -393,10 +450,10 @@ int main() {
 				fprintf(stderr, "Package dependencies are %s\n", pkg_depends);
 			if (pkg_subpkgs != NULL)
 				fprintf(stderr, "Package subpackages are %s\n", pkg_subpkgs);
-			if (pkg_flavours != NULL)
-				fprintf(stderr, "Package flavours are %s\n", pkg_flavours);
-			if (pkg_choices != NULL)
-				fprintf(stderr, "Package choices are %s\n", pkg_choices);
+			if (pkg_flavours != NULL && pkgname != NULL)
+				fprintf(stderr, "Package flavours for %s are %s\n", pkgname, pkg_flavours);
+			if (pkg_choices != NULL && pkgname != NULL)
+				fprintf(stderr, "Package choices for %s are %s\n", pkgname, pkg_choices);
 			if (pkg_url != NULL)
 				fprintf(stderr, "Package homepage is %s\n", pkg_url);
 			if (pkg_cfline != NULL)
@@ -494,15 +551,19 @@ int main() {
 						fclose(section);
 					}
 				} else
-					fatal_error("Can not find section description for package");
+					fatal_error("Can not find section description for package %s.", pkgdirp->d_name);
 
 				unlink(path);
 				cfg = fopen(path, "w");
 				if (cfg == NULL)
 					perror("Can not open Config.in file");
 
+				if (pkg_need_cxx != NULL) {
+					fprintf(cfg, "comment \"%s... %s (disabled, c++ missing)\"\n", token, pkg_descr);
+					fprintf(cfg, "depends on !ADK_TOOLCHAIN_GCC_CXX\n\n");
+				}
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
-				fprintf(cfg, "\tprompt \"%s... %s\"\n", pseudo_name, pkg_descr);
+				fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
 				fprintf(cfg, "\ttristate\n");
 				if (pkg_multi != NULL)
 					if (strncmp(pkg_multi, "1", 1) == 0)
@@ -584,6 +645,14 @@ int main() {
 					pkg_depends = NULL;
 				}
 
+				if (pkg_need_cxx != NULL) {
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_CXX\n");
+				}
+				if (pkg_need_java != NULL) {
+					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_JAVA\n");
+					pkg_need_java = NULL;
+				}
+
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
 
 				if (pkg_dflt != NULL) {
@@ -620,9 +689,8 @@ int main() {
 				if (pkg_flavours != NULL) {
 					token = strtok(pkg_flavours, " ");
 					while (token != NULL) {
-						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", toupperstr(pkgdirp->d_name), 
-												toupperstr(token));
-						fprintf(cfg, "\tbool ");
+						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
+						fprintf(cfg, "\tboolean ");
 						strncat(hkey, "PKGFD_", 6);
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
@@ -632,7 +700,7 @@ int main() {
 
 						fprintf(cfg, "\"%s\"\n", pkg_fd);
 						fprintf(cfg, "\tdefault n\n");
-						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkgdirp->d_name));
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", pkgname);
 						strncat(hkey, "PKGFS_", 6);
 						strncat(hkey, token, strlen(token));
 
@@ -657,11 +725,10 @@ int main() {
 				if (pkg_choices != NULL) {
 					fprintf(cfg, "\nchoice\n");
 					fprintf(cfg, "prompt \"Package flavour choice\"\n");
-					fprintf(cfg, "depends on ADK_COMPILE_%s\n\n", toupperstr(pkgdirp->d_name));
+					fprintf(cfg, "depends on ADK_PACKAGE_%s\n\n", pkgname);
 					token = strtok(pkg_choices, " ");
 					while (token != NULL) {
-						fprintf(cfg, "config ADK_PACKAGE_%s_%s\n", toupperstr(pkgdirp->d_name), 
-												toupperstr(token));
+						fprintf(cfg, "config ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
 
 						fprintf(cfg, "\tbool ");
 						strncat(hkey, "PKGCD_", 6);
@@ -698,6 +765,8 @@ int main() {
 			free(packages);
 			packages = NULL;
 
+			pkg_need_cxx = NULL;
+			pkg_need_java = NULL;
 			/* reset flags, free memory */
 			free(pkg_name);
 			free(pkg_descr);

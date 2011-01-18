@@ -3,19 +3,17 @@
 
 include $(TOPDIR)/rules.mk
 
-$(TOPDIR)/bin/tools:
-	@mkdir -p $(TOPDIR)/bin/tools
+CCANDLD.c=	${HOSTCC} ${HOSTCFLAGS} ${HOSTCPPFLAGS} ${HOSTLDFLAGS}
 
-${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/bin/tools
-	$(HOSTCC) -o $(TOPDIR)/bin/tools/depmaker depmaker.c
+${TOOLS_DIR}/depmaker:
+	${CCANDLD.c} -Wall -o $@ depmaker.c
 
-${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/bin/tools
-	$(HOSTCC) -o $(TOPDIR)/bin/tools/pkgrebuild pkgrebuild.c strmap.c
+${TOOLS_DIR}/pkgrebuild:
+	${CCANDLD.c} -Wall -o $@ pkgrebuild.c strmap.c
 
-${TOPDIR}/bin/tools/dkgetsz: ${TOPDIR}/bin/tools
-	${HOSTCC} -O2 -Wall -o $@ dkgetsz.c
+${TOOLS_DIR}/dkgetsz:
+	${CCANDLD.c} -Wall -o $@ dkgetsz.c
 
-install: ${TOPDIR}/bin/tools/depmaker ${TOPDIR}/bin/tools/pkgrebuild \
-	${TOPDIR}/bin/tools/dkgetsz
+install: ${TOOLS_DIR}/depmaker ${TOOLS_DIR}/pkgrebuild ${TOOLS_DIR}/dkgetsz
 
 include $(TOPDIR)/mk/tools.mk

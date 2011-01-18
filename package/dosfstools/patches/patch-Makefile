@@ -1,0 +1,11 @@
+--- dosfstools-3.0.9.orig/Makefile	2009-10-04 11:03:23.000000000 +0200
++++ dosfstools-3.0.9/Makefile	2011-01-07 21:50:15.000000000 +0100
+@@ -29,7 +29,7 @@ OPTFLAGS = -O2 -fomit-frame-pointer $(sh
+ #WARNFLAGS = -Wall -pedantic -std=c99
+ WARNFLAGS = -Wall
+ DEBUGFLAGS = -g
+-CFLAGS += $(OPTFLAGS) $(WARNFLAGS) $(DEBUGFLAGS)
++CFLAGS += $(WARNFLAGS)
+ 
+ VPATH = src
+ 

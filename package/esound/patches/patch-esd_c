@@ -2,9 +2,9 @@ $Id$
 
  cast to double, to avoid sinf, patch from Sven Gugges
 
---- esound-0.2.38.orig/esd.c	2007-05-03 22:28:35.000000000 +0200
-+++ esound-0.2.38/esd.c	2007-05-19 17:21:23.000000000 +0200
-@@ -131,14 +131,14 @@ void set_audio_buffer( void *buf, esd_fo
+--- esound-0.2.41.orig/esd.c	2008-11-18 21:35:19.000000000 +0100
++++ esound-0.2.41/esd.c	2011-01-14 23:15:33.000000000 +0100
+@@ -134,14 +134,14 @@ void set_audio_buffer( void *buf, esd_fo
      {
      case ESD_BITS8:
  	for ( i = 0 ; i < length ; i+=2 ) {

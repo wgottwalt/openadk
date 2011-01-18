@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gtk+
 PKG_VERSION:=		2.22.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dd1830395a6b9265a1e1989af7a3c5bf
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs
@@ -25,6 +25,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIGURE_ARGS+=	--disable-gtk-doc-html \
+			--disable-modules \
+			--disable-xinerama \
+			--without-xinput \
+			--disable-gtk-doc \
+			--disable-papi \
+			--disable-introspection
 CONFIGURE_ENV+=		gio_can_sniff=no \
 			ac_cv_path_GTK_UPDATE_ICON_CACHE=""
 

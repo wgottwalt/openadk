@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		2.6.34
+PKG_VERSION:=		2.6.37
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5c5742bdac05a1688f266512e685b83c
+PKG_MD5SUM:=		9774ff9d74ebd301bf56bd8d74473786
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
@@ -15,6 +15,7 @@ PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 PKG_SUBPKGS:=		IP TC TC_ATM IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
 PKGSS_TC:=		kmod-sched
+PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
@@ -40,57 +41,48 @@ $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PK
 TCFLAGS+=		-D_GNU_SOURCE
 XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \
 			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
-
 CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
 
-INSTALL_y:=
-INSTALL_m:=
-INSTALL_${ADK_PACKAGE_IP}:=	install-ip
-INSTALL_${ADK_PACKAGE_TC}:=	install-tc
-INSTALL_${ADK_PACKAGE_TC_ATM}:=	install-tc-atm
-INSTALL_${ADK_PACKAGE_IFSTAT}:=	install-ifstat
-INSTALL_${ADK_PACKAGE_LNSTAT}:=	install-lnstat
-INSTALL_${ADK_PACKAGE_ROUTEL}:=	install-routel
-INSTALL_${ADK_PACKAGE_RTMON}:=	install-rtmon
-INSTALL_${ADK_PACKAGE_SS}:=	install-ss
+post-configure:
+	$(CP) ./files/Config $(WRKBUILD)/
 
-post-install: ${INSTALL_y} ${INSTALL_m}
-
-install-ip:
+ip-install:
 	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,usr/sbin}
 	${INSTALL_DATA} ${WRKINST}/etc/iproute2/* ${IDIR_IP}/etc/iproute2/
 	${INSTALL_BIN} ${WRKINST}/sbin/ip ${IDIR_IP}/usr/sbin/ip
 
-install-tc:
-	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin}
-	${INSTALL_DATA} ${WRKINST}/lib/tc/* ${IDIR_TC}/lib/tc/
+tc-install:
+	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin,usr/lib/tc}
+	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
+	${CP} ${WRKINST}/lib/tc/m_*.so ${IDIR_TC}/lib/tc/
+	${CP} ${WRKINST}/usr/lib/tc/*.dist ${IDIR_TC}/usr/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
-install-tc-atm:
-	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
-	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
-		${IDIR_TC_ATM}/usr/lib/tc/
+tc-atm-install:
+	${INSTALL_DIR} ${IDIR_TC_ATM}/lib/tc
+	${INSTALL_DATA} ${WRKINST}/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/lib/tc/
 
-install-ifstat:
+ifstat-install:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/ifstat ${IDIR_IFSTAT}/usr/sbin
 
-install-lnstat:
+lnstat-install:
 	${INSTALL_DIR} ${IDIR_LNSTAT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/{ln,n}stat ${IDIR_LNSTAT}/usr/sbin
 	ln -sf lnstat ${IDIR_LNSTAT}/usr/sbin/rtstat
 	ln -sf lnstat ${IDIR_LNSTAT}/usr/sbin/ctstat
 	${INSTALL_BIN} ${WRKINST}/sbin/rtacct ${IDIR_LNSTAT}/usr/sbin
 
-install-routel:
+routel-install:
 	${INSTALL_DIR} ${IDIR_ROUTEL}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/route{l,f} ${IDIR_ROUTEL}/usr/sbin
 
-install-rtmon:
+rtmon-install:
 	${INSTALL_DIR} ${IDIR_RTMON}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/rtmon ${IDIR_RTMON}/usr/sbin
 
-install-ss:
+ss-install:
 	${INSTALL_DIR} ${IDIR_SS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/ss ${IDIR_SS}/usr/sbin
 

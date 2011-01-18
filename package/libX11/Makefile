@@ -26,10 +26,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBX11_DEV,libx11-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBX11_DEV},${PKGSC_LIBX11_DEV},${PKG_OPTS}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBX11_DEV}+=libx11-dev-install
-
 XAKE_FLAGS+=		HOSTCPPFLAGS=-I${STAGING_TARGET_DIR}/usr/include/xproto
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
@@ -37,7 +33,7 @@ CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-malloc0returnsnull \
 			--without-xcb
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/lib/libX11.so* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/share/X11/XKeysymDB ${IDIR_LIBX11}/usr/share/X11

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dosfstools
 PKG_VERSION:=		3.0.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		bd273cf8aa6341c0b52cbac72050bcf4
 PKG_DESCR:=		Utilities to create and check MS-DOS FAT filesystems
 PKG_SECTION:=		fs
@@ -17,9 +17,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DOSFSTOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
-XAKE_FLAGS+=		PREFIX="" \
-			OPTFLAGS="${TARGET_CFLAGS} -D_FILE_OFFSET_BITS=64"
+XAKE_FLAGS+=		PREFIX="" OPTFLAGS="-D_FILE_OFFSET_BITS=64"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DOSFSTOOLS}/sbin

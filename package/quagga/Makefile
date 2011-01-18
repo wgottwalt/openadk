@@ -23,7 +23,7 @@ PKGSD_QUAGGA_RIPNGD:=	RIPng daemon
 PKGSD_QUAGGA_RIPD:=	RIP daemon
 PKGSD_QUAGGA_VTYSH:=	vtysh utility
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_QUAGGA:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk

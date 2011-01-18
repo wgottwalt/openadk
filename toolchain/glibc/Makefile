@@ -17,6 +17,7 @@ ifeq ($(ADK_TARGET_NO_FPU),y)
 GLIBC_CONFOPTS+=	--without-fp
 endif
 
+GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
 GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j${ADK_MAKE_JOBS}"
 endif
@@ -31,21 +32,19 @@ $(WRKBUILD)/.headers_configure:
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
-			--prefix=$(TOOLCHAIN_SYSROOT)/usr \
-			--with-sysroot=$(TOOLCHAIN_SYSROOT) \
+			--prefix=$(STAGING_TARGET_DIR)/usr \
+			--with-sysroot=$(STAGING_TARGET_DIR) \
 			${GLIBC_CONFOPTS} \
 	);
 	touch $@
 
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	mkdir -p $(TOOLCHAIN_SYSROOT)/usr/lib
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(MAKE) ${GLIBC_MAKEOPTS} \
-		cross-compiling=yes \
 		install-headers \
 	);
-	touch $(TOOLCHAIN_SYSROOT)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $@
 
 $(WRKBUILD)/.configured:
@@ -67,6 +66,10 @@ $(WRKBUILD)/.compiled:
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
 		install_root=$(STAGING_TARGET_DIR) install
+	mkdir -p ${STAGING_TARGET_DIR}/etc
+	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $(WRKBUILD)/.installed
 

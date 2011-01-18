@@ -44,19 +44,6 @@ $(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-
 $(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_PGSQL}+=		asterisk-pgsql-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_VOICEMAIL}+=	asterisk-voicemail-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_SOUNDS}+=		asterisk-sounds-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CHAN_MGCP}+=	asterisk-chan-mgcp-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CHAN_SKINNY}+=	asterisk-chan-skinny-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CHAN_IAX2}+=	asterisk-chan-iax2-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_SPEEX}+=	asterisk-codec-speex-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_CODEC_GSM}+=	asterisk-codec-gsm-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_PBX_DUNDI}+=	asterisk-pbx-dundi-install
-SUB_INSTALLS-${ADK_PACKAGE_ASTERISK_RES_AGI}+=		asterisk-res-agi-install
-
 CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}/usr \
 			--with-ssl=${STAGING_TARGET_DIR}/usr \
@@ -132,7 +119,7 @@ post-build:
 	tar xzf asterisk-core-sounds-en-gsm-1.4.19.tar.gz ; \
 	rm asterisk-core-sounds-en-gsm-1.4.19.tar.gz
 
-do-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+do-install:
 	$(CP) $(WRKINST)/* $(IDIR_ASTERISK)
 	rm -rf $(IDIR_ASTERISK)/usr/sbin/astgenkey
 	rm -rf $(IDIR_ASTERISK)/usr/bin

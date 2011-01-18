@@ -22,19 +22,14 @@ PKGSD_LIBOPENSSL_DEV:=	development files for openssl
 PKGSC_LIBOPENSSL_DEV:=	devel
 PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
-PKG_FLAVOURS:=		WITH_EC
-PKGFD_WITH_EC:=		enable Elliptic Curve crypto
-PKGSUB_WITH_EC:=	libopenssl
+PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC
+PKGFD_WITH_EC:=			enable Elliptic Curve crypto
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENSSL_DEV},${PKGSD_LIBOPENSSL_DEV},${PKGSC_LIBOPENSSL_DEV}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
-
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_LIBOPENSSL_DEV}+=	libopenssl-dev-install
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -44,7 +39,7 @@ FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
 OPENSSL_OPTIONS:= shared no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
 
-ifeq ($(ADK_PACKAGE_OPENSSL_WITH_EC),)
+ifeq ($(ADK_PACKAGE_LIBOPENSSL_WITH_EC),)
 OPENSSL_OPTIONS+= no-ec
 endif
 
@@ -74,10 +69,12 @@ do-build:
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		all build-shared
 
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
 	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so*
+
+openssl-util-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/openssl ${IDIR_OPENSSL_UTIL}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}

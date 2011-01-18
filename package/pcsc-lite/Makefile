@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcsc-lite
 PKG_VERSION:=		1.6.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f80d3ecd9569b71d557f283f16295c74
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		crypto
@@ -27,11 +27,7 @@ $(eval $(call PKG_template,PCSC_LITE_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RE
 
 CONFIGURE_ARGS+=	--disable-libhal
 
-SUB_INSTALLS-y:=
-SUB_INSTALLS-m:=
-SUB_INSTALLS-${ADK_PACKAGE_PCSC_LITE_DEV}+=	pcsc-lite-dev-install
-
-post-install: ${SUB_INSTALLS-m} ${SUB_INSTALLS-y}
+post-install:
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/etc/reader.conf.d
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/usr/lib

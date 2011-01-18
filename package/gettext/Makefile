@@ -18,7 +18,7 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
 
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
+WRKSRC=			${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
 
 include ${TOPDIR}/mk/package.mk
 
@@ -29,6 +29,7 @@ CONFIGURE_ARGS+=	--disable-java \
 			--disable-csharp \
 			--enable-nls \
 			--disable-libasprintf \
+			--disable-rpath \
 			--enable-threads=posix \
 			--disable-openmp \
 			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr' \

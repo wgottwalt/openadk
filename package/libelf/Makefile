@@ -2,18 +2,17 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include ${TOPDIR}/rules.mk
+include ${TOPDIR}/toolchain/libelf/Makefile.inc
 
-PKG_NAME:=		libelf
-PKG_VERSION:=		0.8.11
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		e931910b6d100f6caa32239849947fbf
 PKG_DESCR:=		elf library
 PKG_SECTION:=		libs
 PKG_SITES:=		http://www.mr511.de/software/
 
+PKG_SUBPKGS:=		LIBELF
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBELF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		mr_cv_target_elf=yes \
 			ac_cv_sizeof_long_long=8
@@ -21,7 +20,7 @@ CONFIGURE_ARGS+=	--enable-elf64=yes \
 			--disable-sanity-checks
 FAKE_FLAGS+=		instroot="${WRKINST}"
 
-post-install:
+libelf-install:
 	${INSTALL_DIR} ${IDIR_LIBELF}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libelf.so* ${IDIR_LIBELF}/usr/lib/
 

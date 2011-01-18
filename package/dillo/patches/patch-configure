@@ -1,0 +1,14 @@
+--- dillo-2.2.orig/configure	2010-02-11 11:19:59.000000000 +0100
++++ dillo-2.2/configure	2011-01-07 21:35:04.000000000 +0100
+@@ -5830,11 +5830,6 @@ typedef unsigned char   bool_t;
+ _______EOF
+ 
+ 
+-if test "`$CPP -v < /dev/null 2>&1 | grep '/usr/local/include' 2>&1`" = ""; then
+-  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+-  LDFLAGS="$LDFLAGS -L/usr/local/lib"
+-fi
+-
+ for ac_func in gethostbyname
+ do :
+   ac_fn_c_check_func "$LINENO" "gethostbyname" "ac_cv_func_gethostbyname"

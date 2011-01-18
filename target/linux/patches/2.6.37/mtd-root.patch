@@ -1,0 +1,64 @@
+diff -Nur linux-2.6.37.orig/drivers/mtd/Kconfig linux-2.6.37/drivers/mtd/Kconfig
+--- linux-2.6.37.orig/drivers/mtd/Kconfig	2011-01-05 01:50:19.000000000 +0100
++++ linux-2.6.37/drivers/mtd/Kconfig	2011-01-11 20:32:21.000000000 +0100
+@@ -53,6 +53,11 @@
+ 	  devices. Partitioning on NFTL 'devices' is a different - that's the
+ 	  'normal' form of partitioning used on a block device.
+ 
++config MTD_ROOTFS_ROOT_DEV
++	bool "Automatically set 'rootfs' partition to be root filesystem"
++	depends on MTD_PARTITIONS
++	default y
++
+ config MTD_REDBOOT_PARTS
+ 	tristate "RedBoot partition table parsing"
+ 	depends on MTD_PARTITIONS
+diff -Nur linux-2.6.37.orig/drivers/mtd/mtdpart.c linux-2.6.37/drivers/mtd/mtdpart.c
+--- linux-2.6.37.orig/drivers/mtd/mtdpart.c	2011-01-05 01:50:19.000000000 +0100
++++ linux-2.6.37/drivers/mtd/mtdpart.c	2011-01-11 20:40:29.000000000 +0100
+@@ -30,6 +30,7 @@
+ #include <linux/mtd/mtd.h>
+ #include <linux/mtd/partitions.h>
+ #include <linux/err.h>
++#include <linux/root_dev.h>
+ 
+ /* Our partition linked list */
+ static LIST_HEAD(mtd_partitions);
+@@ -48,7 +49,7 @@
+  * the pointer to that structure with this macro.
+  */
+ #define PART(x)  ((struct mtd_part *)(x))
+-
++#define IS_PART(mtd) (mtd->read == part_read)
+ 
+ /*
+  * MTD methods which simply translate the effective address and pass through
+@@ -633,15 +634,24 @@
+ {
+ 	struct mtd_part *slave;
+ 	uint64_t cur_offset = 0;
+-	int i;
++	int i, j;
+ 
+ 	printk(KERN_NOTICE "Creating %d MTD partitions on \"%s\":\n", nbparts, master->name);
+ 
+-	for (i = 0; i < nbparts; i++) {
+-		slave = allocate_partition(master, parts + i, i, cur_offset);
+-		if (IS_ERR(slave))
++	for (i = 0, j = 0; i < nbparts; i++) {
++		slave = add_one_partition(master, parts + i, j++, cur_offset);
++		if (!(slave))
+ 			return PTR_ERR(slave);
+ 
++		
++		if (!strcmp(parts[i].name, "rootfs")) {
++#ifdef CONFIG_MTD_ROOTFS_ROOT_DEV
++			if (ROOT_DEV == 0) {
++				printk(KERN_NOTICE "mtd: partition \"rootfs\" "
++					"set to be root filesystem\n");
++					ROOT_DEV = MKDEV(MTD_BLOCK_MAJOR, slave->mtd.index);
++			}
++#endif
+ 		mutex_lock(&mtd_partitions_mutex);
+ 		list_add(&slave->list, &mtd_partitions);
+ 		mutex_unlock(&mtd_partitions_mutex);

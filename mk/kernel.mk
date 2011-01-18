@@ -33,12 +33,14 @@ IDEPENDK_$(1):=kernel ($(KERNEL_VERSION)) $(foreach pkg,$(5),", $(pkg)")
 PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(CPU_ARCH).$(PKG_SUFFIX)
 I_$(1) := $(KMOD_BUILD_DIR)/ipkg/$(2)
 
+ifeq ($${ADK_TARGET_KERNEL_CUSTOMISING},y)
 ifeq ($$(ADK_KPACKAGE_KMOD_$(1)),m)
 TARGETS+=$$(PKG_$(1))
 endif
 ifeq ($$(ADK_KPACKAGE_KMOD_$(1)),y)
 TARGETS+=$$(PKG_$(1))
 INSTALL_TARGETS+=$$(PKG_$(1))
+endif
 endif
 
 $$(PKG_$(1)):

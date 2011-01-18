@@ -1,6 +1,6 @@
---- ppp-2.4.4.orig/pppd/pppd.8	2006-06-16 02:01:23.000000000 +0200
-+++ ppp-2.4.4/pppd/pppd.8	2009-06-05 19:12:00.000000000 +0200
-@@ -627,9 +627,29 @@ control, as for the \fIcrtscts\fR option
+--- ppp-2.4.5.orig/pppd/pppd.8	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/pppd/pppd.8	2011-01-16 15:51:05.000000000 +0100
+@@ -638,9 +638,29 @@ control, as for the \fIcrtscts\fR option
  Enables the use of PPP multilink; this is an alias for the `multilink'
  option.  This option is currently only available under Linux.
  .TP
@@ -33,7 +33,7 @@
  .TP
  .B mpshortseq
  Enables the use of short (12-bit) sequence numbers in multilink
-@@ -767,17 +787,11 @@ peer is buggy.
+@@ -778,17 +798,11 @@ peer is buggy.
  Disables the use of PPP multilink.  This option is currently only
  available under Linux.
  .TP
@@ -55,7 +55,7 @@
  .TP
  .B nompshortseq
  Disables the use of short (12-bit) sequence numbers in the PPP
-@@ -958,19 +972,6 @@ peer using PAP.
+@@ -980,19 +994,6 @@ peer using PAP.
  Require the peer to authenticate itself using CHAP [Challenge
  Handshake Authentication Protocol] authentication.
  .TP

@@ -1,6 +1,22 @@
 --- mysql-5.1.48.orig/configure	2010-06-03 17:54:47.000000000 +0200
-+++ mysql-5.1.48/configure	2010-07-30 11:04:50.000000000 +0200
-@@ -19825,45 +19825,7 @@ fi
++++ mysql-5.1.48/configure	2011-01-15 12:58:47.000000000 +0100
+@@ -19764,15 +19764,6 @@ fi
+ 
+ 
+ 
+-# Enable the abi_check rule only if gcc is available
+-
+-if test "$GCC" != "yes" || expr "$CC" : ".*icc.*"
+-then
+-  ABI_CHECK=""
+-else
+-  ABI_CHECK="abi_check"
+-fi
+-
+ 
+ 
+ # Look for PS usage.  We use double dollar-signs in FIND_PROC because this
+@@ -19825,45 +19816,7 @@ fi
  $as_echo_n "checking \"how to check if pid exists\"... " >&6; }
  PS=$ac_cv_path_PS
  # Linux style
@@ -47,7 +63,7 @@
  
  { $as_echo "$as_me:$LINENO: result: \"$FIND_PROC\"" >&5
  $as_echo "\"$FIND_PROC\"" >&6; }
-@@ -48273,197 +48235,14 @@ $as_echo "$as_me: error: unknown endiann
+@@ -48273,197 +48226,14 @@ $as_echo "$as_me: error: unknown endiann
    esac
  
  
@@ -245,7 +261,7 @@
  
    { $as_echo "$as_me:$LINENO: checking whether Solaris libc atomic functions are available" >&5
  $as_echo_n "checking whether Solaris libc atomic functions are available... " >&6; }
-@@ -48581,101 +48360,6 @@ fi
+@@ -48581,101 +48351,6 @@ fi
  done
  
  

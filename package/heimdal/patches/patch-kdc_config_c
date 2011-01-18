@@ -1,0 +1,18 @@
+--- heimdal-1.4.orig/kdc/config.c	2010-09-13 09:23:34.000000000 +0200
++++ heimdal-1.4/kdc/config.c	2011-01-12 13:55:17.454913780 +0100
+@@ -347,6 +347,7 @@ configure(krb5_context context, int argc
+ 
+ #endif
+ 
++#ifdef PKINIT
+     if (config->enable_pkinit) {
+ 	if (config->pkinit_kdc_identity == NULL)
+ 	    krb5_errx(context, 1, "pkinit enabled but no identity");
+@@ -361,6 +362,7 @@ configure(krb5_context context, int argc
+ 			       config->pkinit_kdc_revoke);
+ 
+     }
++#endif
+     
+     return config;
+ }

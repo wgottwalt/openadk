@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.79
+PKG_VERSION:=		2.02.80
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e6929251a90b0b626c024942a242f337
+PKG_MD5SUM:=		816f4cee75674e3a21fd40f1961279f2
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libdevmapper libncurses
@@ -31,15 +31,16 @@ CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--with-lvm1=none
 
-post-install:
-	# lvm
+lvm-install:
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/lvm ${IDIR_LVM}/usr/sbin/lvm
-	# libdevmapper
+
+libdevmapper-install:
 	${INSTALL_DIR} ${IDIR_LIBDEVMAPPER}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libdevmapper.so* \
 		${IDIR_LIBDEVMAPPER}/usr/lib
-	# device-mapper
+
+device-mapper-install:
 	${INSTALL_DIR} ${IDIR_DEVICE_MAPPER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dmsetup \
 		${IDIR_DEVICE_MAPPER}/usr/sbin
