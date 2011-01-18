@@ -19,9 +19,6 @@ $(eval $(call PKG_template,PPTP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
-MAKE_FLAGS+=		CC="${TARGET_CC}" \
-			CFLAGS="${TARGET_CFLAGS}"
-
 do-install:
 	${INSTALL_DIR} ${IDIR_PPTP}/sbin
 	${INSTALL_DIR} ${IDIR_PPTP}/usr/sbin

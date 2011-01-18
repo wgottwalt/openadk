@@ -35,27 +35,21 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
 
-ifeq ($(ADK_HOST_CYGWIN),y)
-EXEEXT:=		.exe
-endif
-
 pre-configure:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		env CFLAGS="-static" LDFLAGS="-static" \
+ifneq ($(OStype),Darwin)
+	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
-			$(CONFIGURE_ARGS) \
-			--with-libiconv=no \
+			--enable-debug=no \
 			--with-threads=posix \
-			--enable-static \
-			--disable-shared \
 	);
 	${MAKE} -C ${WRKBUILD}/glib
 	${MAKE} -C ${WRKBUILD}/gthread
-	${MAKE} -C ${WRKBUILD}/gio glib-compile-schemas
-	${MAKE} -C ${WRKBUILD}/gobject glib-genmarshal
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gio glib-compile-schemas
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gobject glib-genmarshal
 	$(CP) ${WRKBUILD}/gio/glib-compile-schemas ${STAGING_HOST_DIR}/bin
-	$(CP) ${WRKBUILD}/gobject/glib-genmarshal ${STAGING_HOST_DIR}/bin
+	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
 	${MAKE} -C ${WRKBUILD} clean
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib

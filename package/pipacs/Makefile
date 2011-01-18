@@ -4,6 +4,7 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pipacs
+PKG_VERSION:=		0.1
 PKG_RELEASE:=		2
 PKG_DESCR:=		an UNIX socket accounting/wiewer program
 PKG_SECTION:=		net/misc
@@ -16,9 +17,6 @@ $(eval $(call PKG_template,PIPACS,${PKG_NAME},${PKG_RELEASE},${PKG_DEPENDS},${PK
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
-
-MAKE_FLAGS+=		CFLAGS="${TCFLAGS} ${TCPPFLAGS}" \
-			${TARGET_CONFIGURE_OPTS}
 
 do-install:
 	${INSTALL_DIR} ${IDIR_PIPACS}/usr/bin

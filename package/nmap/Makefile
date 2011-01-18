@@ -22,11 +22,16 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp -lssp_nonshared
+endif
+
 TCPPFLAGS+=		-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
-			LIBS="-nodefaultlibs -luClibc++ -lgcc -lm"
+			LIBS="${LIBRARIES}"
 endif
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \

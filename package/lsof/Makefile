@@ -13,7 +13,8 @@ PKG_URL:=		http://people.freebsd.org/~abe/
 PKG_SITES:=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
 
 DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}/${PKG_NAME}_${PKG_VERSION}_src
+WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
+WRKSRC=			${WRKDIR}/${PKG_NAME}_${PKG_VERSION}/${PKG_NAME}_${PKG_VERSION}_src
 
 include $(TOPDIR)/mk/package.mk
 
@@ -22,7 +23,7 @@ $(eval $(call PKG_template,LSOF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_
 CONFIG_STYLE:=		minimal
 CONFIGURE_PROG:=	Configure
 CONFIGURE_ARGS:=	-n linux
-XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}'
+XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' CFGL='${TARGET_LDFLAGS} -L./lib -llsof'
 INSTALL_STYLE:=		manual
 
 post-extract:

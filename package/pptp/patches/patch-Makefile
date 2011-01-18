@@ -1,0 +1,22 @@
+--- pptp-1.6.0.orig/Makefile	2005-02-18 02:42:45.000000000 +0100
++++ pptp-1.6.0/Makefile	2011-01-16 21:44:38.000000000 +0100
+@@ -11,14 +11,15 @@ BINDIR=$(DESTDIR)/usr/sbin
+ MANDIR=$(DESTDIR)/usr/share/man/man8
+ PPPDIR=$(DESTDIR)/etc/ppp
+ 
+-CC	= gcc
++CC	?= gcc
+ RM	= rm -f
+ OPTIMIZE= -O0
+ DEBUG	= -g
+ INCLUDE =
+-CFLAGS  = -Wall $(OPTIMIZE) $(DEBUG) $(INCLUDE)
+-LIBS	= -lutil
+-LDFLAGS	=
++CPPFLAGS ?= 
++CFLAGS  ?= -Wall $(OPTIMIZE) $(DEBUG) $(INCLUDE)
++LIBS	?= -lutil
++LDFLAGS	?=
+ 
+ PPTP_BIN = pptp
+ 

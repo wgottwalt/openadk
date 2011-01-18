@@ -1,0 +1,8 @@
+--- pango-1.28.3.orig/tests/runtests.sh	2010-09-29 13:02:41.000000000 +0200
++++ pango-1.28.3/tests/runtests.sh	2011-01-14 23:40:32.000000000 +0100
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /bin/bash
+ 
+ LOGFILE=runtests.log
+ POTENTIAL_TESTS='testboundaries testcolor testboundaries_ucd'

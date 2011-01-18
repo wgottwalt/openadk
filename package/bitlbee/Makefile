@@ -19,7 +19,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
-
 TCFLAGS+=		-fPIC
 CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
 			--prefix=/usr/ \
@@ -33,13 +32,12 @@ CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
 			--strip=0 \
 			--ipv6=1 \
 			--ssl=openssl
-
 INSTALL_TARGET=		install-etc install-bin
 
 post-configure:
 	@echo 'CFLAGS+="-I${STAGING_TARGET_DIR}/usr/include/iconv"' >> \
 		${WRKBUILD}/Makefile.settings
-	@echo 'LFLAGS+="-L${STAGING_TARGET_DIR}/usr/lib"' >> \
+	@echo 'LFLAGS+=${TARGET_LDFLAGS}' >> \
 		${WRKBUILD}/Makefile.settings
 
 post-install:

@@ -21,10 +21,7 @@ $(eval $(call PKG_template,SCANLOGD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
-MAKE_FLAGS+=		CC="${TARGET_CC}" LD="${TARGET_CC}" \
-			CFLAGS="-c ${TARGET_CFLAGS}" \
-			LDFLAGS= \
-			PCAP_H="-I${STAGING_TARGET_DIR}/usr/include" \
+MAKE_FLAGS+=		PCAP_H="-I${STAGING_TARGET_DIR}/usr/include" \
 			NIDS_H="-I${STAGING_TARGET_DIR}/usr/include" \
 			NIDS_L="-L${STAGING_TARGET_DIR}/usr/lib -lnids -lnet -lpcap"
 ALL_TARGET:=		libnids

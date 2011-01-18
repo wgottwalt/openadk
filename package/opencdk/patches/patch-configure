@@ -1,7 +1,7 @@
 $Id$
---- opencdk-0.6.4.orig/configure	Mon Jun 11 10:25:19 2007
-+++ opencdk-0.6.4/configure	Thu Sep  6 15:42:04 2007
-@@ -20379,8 +20379,8 @@ echo "$as_me: error:
+--- opencdk-0.6.6.orig/configure	2007-11-13 13:32:19.000000000 +0100
++++ opencdk-0.6.6/configure	2011-01-15 19:30:41.000000000 +0100
+@@ -20389,8 +20389,8 @@ echo "$as_me: error:
  
  
  

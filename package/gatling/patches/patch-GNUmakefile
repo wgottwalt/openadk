@@ -1,7 +1,16 @@
 $Id$
---- gatling-0.8.orig/GNUmakefile	Thu May 19 05:30:26 2005
-+++ gatling-0.8/GNUmakefile	Mon Jul  9 11:52:58 2007
-@@ -96,9 +96,10 @@ libiconv: tryiconv.c
+--- gatling-0.11.orig/GNUmakefile	2008-12-05 13:31:01.000000000 +0100
++++ gatling-0.11/GNUmakefile	2011-01-15 14:10:40.000000000 +0100
+@@ -17,7 +17,7 @@ CROSS=
+ #CROSS=i686-mingw32-
+ CC=$(CROSS)gcc
+ CFLAGS=-pipe -Wall
+-LDFLAGS=
++LDFLAGS?=
+ 
+ path = $(subst :, ,$(PATH))
+ diet_path = $(foreach dir,$(path),$(wildcard $(dir)/diet))
+@@ -147,9 +147,10 @@ havesetresuid.h: trysetresuid.c
  dummy.c:
  	touch $@
  
@@ -11,5 +20,5 @@ $Id$
 -	-ranlib $@
 +	-${RANLIB} $@
  
- LDLIBS+=`cat libsocket libiconv`
+ LDLIBS+=`cat libsocket libiconv libcrypt`
  

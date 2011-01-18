@@ -23,7 +23,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,RUBY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		GNUmakefile
-XAKE_FLAGS+=		optflags='' debugflags='' BASERUBY="${WRKBUILD}/hostruby"
+XAKE_FLAGS+=		optflags='' debugflags='' BASERUBY="${WRKBUILD}/hostruby" \
+			dldflags="$(TARGET_LDFLAGS)"
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--disable-install-doc

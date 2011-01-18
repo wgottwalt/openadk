@@ -3,6 +3,10 @@
 
 all: build-all-pkgs
 
+ifeq ($(ADK_HOST_CYGWIN),y)
+EXEEXT:=		.exe
+endif
+
 TCFLAGS:=		${TARGET_CFLAGS}
 TCXXFLAGS:=		${TARGET_CFLAGS}
 TCPPFLAGS:=		${TARGET_CPPFLAGS}

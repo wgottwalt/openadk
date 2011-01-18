@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LOGROTATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
 TCFLAGS+=              -D_GNU_SOURCE -DVERSION=\"$(PKG_VERSION)\"
 
 post-install:

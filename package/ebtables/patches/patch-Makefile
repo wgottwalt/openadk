@@ -1,6 +1,6 @@
 --- ebtables-v2.0.9-1.orig/Makefile	2009-06-21 15:13:25.000000000 +0200
-+++ ebtables-v2.0.9-1/Makefile	2009-11-29 15:39:30.000000000 +0100
-@@ -8,17 +8,16 @@ PROGDATE:=June\ 2009
++++ ebtables-v2.0.9-1/Makefile	2011-01-14 22:24:16.000000000 +0100
+@@ -8,17 +8,17 @@ PROGDATE:=June\ 2009
  
  # default paths
  LIBDIR:=/usr/lib
@@ -16,6 +16,7 @@
  
 -CFLAGS:=-Wall -Wunused
 +CFLAGS?=-Wall -Wunused
++LDFLAGS?=
  CFLAGS_SH_LIB:=-fPIC
 -CC:=gcc
 -LD:=ld
@@ -23,16 +24,25 @@
  
  ifeq ($(shell uname -m),sparc64)
  CFLAGS+=-DEBT_MIN_ALIGN=8 -DKERNEL_64_USERSPACE_32
-@@ -85,7 +84,7 @@ ebtables-standalone.o: ebtables-standalo
+@@ -85,14 +85,14 @@ ebtables-standalone.o: ebtables-standalo
  
  .PHONY: libebtc
  libebtc: $(OBJECTS2)
 -	$(LD) -shared -soname libebtc.so -o libebtc.so -lc $(OBJECTS2)
-+	$(CC) -shared -o libebtc.so -lc $(OBJECTS2)
++	$(CC) -shared $(LDFLAGS) -o libebtc.so -lc $(OBJECTS2)
  
  ebtables: $(OBJECTS) ebtables-standalone.o libebtc
- 	$(CC) $(CFLAGS) $(CFLAGS_SH_LIB) -o $@ ebtables-standalone.o -I$(KERNEL_INCLUDES) -L. -Lextensions -lebtc $(EXT_LIBSI) \
-@@ -154,28 +153,29 @@ tmp3:=$(shell printf $(PIPE) | sed 's/\/
+-	$(CC) $(CFLAGS) $(CFLAGS_SH_LIB) -o $@ ebtables-standalone.o -I$(KERNEL_INCLUDES) -L. -Lextensions -lebtc $(EXT_LIBSI) \
++	$(CC) $(LDFLAGS) $(CFLAGS) $(CFLAGS_SH_LIB) -o $@ ebtables-standalone.o -I$(KERNEL_INCLUDES) -L. -Lextensions -lebtc $(EXT_LIBSI) \
+ 	-Wl,-rpath,$(LIBDIR)
+ 
+ ebtablesu: ebtablesu.c
+-	$(CC) $(CFLAGS) $(PROGSPECSD) $< -o $@
++	$(CC) $(LDFLAGS) $(CFLAGS) $(PROGSPECSD) $< -o $@
+ 
+ ebtablesd.o: ebtablesd.c include/ebtables_u.h
+ 	$(CC) $(CFLAGS) $(PROGSPECSD) -c $< -o $@  -I$(KERNEL_INCLUDES)
+@@ -154,28 +154,29 @@ tmp3:=$(shell printf $(PIPE) | sed 's/\/
  .PHONY: scripts
  scripts: ebtables-save ebtables.sysv ebtables-config
  	cat ebtables-save | sed 's/__EXEC_PATH__/$(tmp1)/g' > ebtables-save_
@@ -69,7 +79,7 @@
  
  .PHONY: install
  install: $(MANDIR)/man8/ebtables.8 $(ETHERTYPESFILE) exec scripts
-@@ -199,18 +199,18 @@ release:
+@@ -199,18 +200,18 @@ release:
  	rm -f extensions/ebt_inat.c
  	rm -rf $(CVSDIRS)
  	mkdir -p include/linux/netfilter_bridge

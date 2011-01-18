@@ -1,5 +1,14 @@
---- opensc-0.11.13.orig/ltmain.sh	2011-01-09 00:58:43.000000000 +0100
-+++ opensc-0.11.13/ltmain.sh	2011-01-09 00:57:54.000000000 +0100
+--- opensc-0.11.13.orig/ltmain.sh	2011-01-16 13:51:11.000000000 +0100
++++ opensc-0.11.13/ltmain.sh	2011-01-16 13:46:22.000000000 +0100
+@@ -5840,7 +5840,7 @@ func_mode_link ()
+       # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
++      -O*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"
 @@ -6635,27 +6635,6 @@ func_mode_link ()
  	      esac
  	    fi

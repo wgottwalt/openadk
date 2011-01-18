@@ -1,0 +1,11 @@
+--- libvorbis-1.2.0.orig/ltmain.sh	2006-06-19 21:29:20.000000000 +0200
++++ libvorbis-1.2.0/ltmain.sh	2011-01-15 21:27:10.000000000 +0100
+@@ -1623,7 +1623,7 @@ EOF
+       # -pg pass through profiling flag for GCC
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*|-pg| \
+-      -t[45]*|-txscale*|@*)
++      -t[45]*|-txscale*|@*|-fstack-protector*|-flto)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.

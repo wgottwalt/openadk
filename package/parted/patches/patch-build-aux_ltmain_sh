@@ -1,0 +1,11 @@
+--- parted-2.3.orig/build-aux/ltmain.sh	2010-05-28 20:29:02.000000000 +0200
++++ parted-2.3/build-aux/ltmain.sh	2011-01-16 15:30:44.000000000 +0100
+@@ -4971,7 +4971,7 @@ func_mode_link ()
+       # @file GCC response files
+       # -tp=* Portland pgcc target processor selection
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|-fstack-protector*|-flto)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

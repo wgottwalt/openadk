@@ -13,8 +13,8 @@ PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
-PKG_NEED_CXX:=		1
 PKG_CXX:=		GPSD
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
 PKGSD_GPSD_CLIENTS:=	GPS client utilities
@@ -32,10 +32,15 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 CONFIGURE_ARGS+=	--disable-dbus
 TCFLAGS+=		-fPIC
 
+LIBRARIES:=-nodefaultlibs -luClibc++
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+LIBRARIES+=-lssp -lssp_nonshared
+endif
+
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
+TCXXFLAGS+=		-fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-luClibc++ -lc -lm -pthread -nodefaultlibs
+TLDFLAGS+=		$(LIBRARIES)
 else
 TLDFLAGS+=		-shared -pthread
 endif

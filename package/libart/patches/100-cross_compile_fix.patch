@@ -1,7 +1,7 @@
 diff -urN libart.old/Makefile.in libart.dev/Makefile.in
---- libart.old/Makefile.in	2005-01-21 10:52:11.000000000 +0100
-+++ libart.dev/Makefile.in	2005-07-17 19:31:05.000000000 +0200
-@@ -440,9 +440,9 @@
+--- libart_lgpl-2.3.17.orig/Makefile.in	2005-01-21 10:52:11.000000000 +0100
++++ libart_lgpl-2.3.17/Makefile.in	2011-01-15 22:35:19.000000000 +0100
+@@ -440,9 +440,9 @@ testuta$(EXEEXT): $(testuta_OBJECTS) $(t
  	@rm -f testuta$(EXEEXT)
  	$(LINK) $(testuta_LDFLAGS) $(testuta_OBJECTS) $(testuta_LDADD) $(LIBS)
  

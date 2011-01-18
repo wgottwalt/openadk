@@ -86,6 +86,11 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
+	# these symlinks are very important, do not remove
+	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
+	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 	(cd $(GCC_BUILD_DIR_MINIMAL); \
 		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \

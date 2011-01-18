@@ -23,6 +23,7 @@ CONFIGURE_ENV+=		LIBS="-liconv" \
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \
 			--with-included-gsl \
+			--disable-static \
 			--with-libdb-prefix=${STAGING_TARGET_DIR}/usr \
 			--disable-transactions
 

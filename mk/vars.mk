@@ -21,6 +21,7 @@ endif
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
+TARGET_CXXFLAGS+=	-fstack-protector
 TARGET_LDFLAGS+=	-fstack-protector
 endif
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
