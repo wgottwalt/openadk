@@ -50,7 +50,7 @@ static void iter_disabled(const char *key, const char *value, const void *obj) {
 			//fprintf(stderr, "Symbol is a flavour/choice: %s\n", hvalue);
 			if (snprintf(tfile, 256, ".rebuild.%s", hvalue) < 0)
 				perror("can not create file variable.");
-			fd = open(tfile, O_RDWR | O_CREAT);
+			fd = open(tfile, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 			close(fd);
 		}
 	}
@@ -70,7 +70,7 @@ static void iter_enabled(const char *key, const char *value, const void *obj) {
 			//fprintf(stderr, "Symbol is a flavour/choice\n");
 			if (snprintf(tfile, 256, ".rebuild.%s", hvalue) < 0)
 				perror("can not create file variable.");
-			fd = open(tfile, O_RDWR | O_CREAT);
+			fd = open(tfile, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 			close(fd);
 		}
 	}
