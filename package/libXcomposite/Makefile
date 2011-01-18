@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b93dac50c86db6eba3f72e949f5bed2a
 PKG_DESCR:=		X composite library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		libX11 compositeproto
+PKG_BUILDDEP:=		libX11 compositeproto libXfixes
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXCOMPOSITE LIBXCOMPOSITE_DEV
