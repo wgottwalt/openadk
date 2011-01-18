@@ -16,8 +16,8 @@ PKG_SUBPKGS:=		LIBNCURSES LIBNCURSES_DEV
 PKGSD_LIBNCURSES_DEV:=	development files for libncurses
 PKGSC_LIBNCURSES_DEV:=	devel
 
-PKG_FLAVOURS:=		FULL_TERMINFO
-PKGFD_FULL_TERMINFO:=	install the complete set of terminfo files as provided upstream
+PKG_FLAVOURS_LIBNCURSES:=	FULL_TERMINFO
+PKGFD_FULL_TERMINFO:=		install the complete set of terminfo files as provided upstream
 
 include ${TOPDIR}/mk/package.mk
 
@@ -71,7 +71,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
-ifeq (${ADK_PACKAGE_NCURSES_FULL_TERMINFO},y)
+ifeq (${ADK_PACKAGE_LIBNCURSES_FULL_TERMINFO},y)
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share
 	${CP} ${WRKINST}/usr/share/terminfo ${IDIR_LIBNCURSES}/usr/share/
 else

@@ -11,6 +11,7 @@ PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
 PKG_URL:=		http://tslib.berlios.de/
 PKG_SITES:=		http://download.berlios.de/tslib/
+PKG_NEED_CXX:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

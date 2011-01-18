@@ -14,10 +14,10 @@ PKG_SITES:=		http://download.berlios.de/fetchmail/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_FLAVOURS:=		SSL
-PKGFD_SSL:=		enable SSL support
-PKGFS_SSL:=		libopenssl
-PKGFB_SSL:=		openssl
+PKG_FLAVOURS_FETCHMAIL:=WITH_SSL
+PKGFD_WITH_SSL:=	enable SSL support
+PKGFS_WITH_SSL:=	libopenssl
+PKGFB_WITH_SSL:=	openssl
 
 include ${TOPDIR}/mk/package.mk
 
@@ -25,7 +25,7 @@ $(eval $(call PKG_template,FETCHMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},$
 
 CONFIGURE_ARGS+=	--without-hesiod
 
-ifeq (${ADK_PACKAGE_FETCHMAIL_SSL},y)
+ifeq (${ADK_PACKAGE_FETCHMAIL_WITH_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl='${STAGING_TARGET_DIR}/usr'
 else
 CONFIGURE_ARGS+=	--without-ssl

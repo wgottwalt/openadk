@@ -13,7 +13,7 @@ PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 PKG_NOPARALLEL:=	1
 
-PKG_FLAVOURS:=		WITH_FTPUSERS
+PKG_FLAVOURS_PROFTPD:=	WITH_FTPUSERS
 PKGFD_WITH_FTPUSERS:=	install /etc/ftpusers along with proftpd
 
 include $(TOPDIR)/mk/package.mk

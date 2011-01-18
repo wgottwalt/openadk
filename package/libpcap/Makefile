@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_LIBPCAP:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include $(TOPDIR)/mk/package.mk

@@ -22,10 +22,10 @@ PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
 
-PKG_FLAVOURS:=		WITH_DRI
-PKGFS_WITH_DRI:=	mesalib
-PKGFD_WITH_DRI:=	enable DRI/DRI2 support
-PKGFB_WITH_DRI:=	xf86driproto glproto dri2proto MesaLib
+PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI
+PKGFS_WITH_DRI:=		mesalib
+PKGFD_WITH_DRI:=		enable DRI/DRI2 support
+PKGFB_WITH_DRI:=		xf86driproto glproto dri2proto MesaLib
 
 include $(TOPDIR)/mk/package.mk
 

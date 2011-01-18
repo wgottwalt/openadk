@@ -21,14 +21,14 @@ PKGSD_OPENSSH_CLIENT_UTILS:=	OpenSSH client utilities
 PKGSD_OPENSSH_SFTP_CLIENT:=	OpenSSH sftp client
 PKGSD_OPENSSH_SFTP_SERVER:=	OpenSSH sftp server
 
-PKG_CHOICES:=		NOKRB WITH_KRB5 WITH_HEIMDAL
-PKGCD_NOKRB:=		no Kerberos support
-PKGCD_WITH_KRB5:=	with MIT Kerberos
-PKGCS_WITH_KRB5:=	libkrb5 libcom-err
-PKGCB_WITH_KRB5:=	krb5
-PKGCD_WITH_HEIMDAL:=	with Heimdal Kerberos
-PKGCS_WITH_HEIMDAL:=	libheimdal libcom-err
-PKGCB_WITH_HEIMDAL:=	heimdal
+PKG_CHOICES_OPENSSH_SERVER:=	NOKRB WITH_KRB5 WITH_HEIMDAL
+PKGCD_NOKRB:=			no Kerberos support
+PKGCD_WITH_KRB5:=		with MIT Kerberos
+PKGCS_WITH_KRB5:=		libkrb5 libcom-err
+PKGCB_WITH_KRB5:=		krb5
+PKGCD_WITH_HEIMDAL:=		with Heimdal Kerberos
+PKGCS_WITH_HEIMDAL:=		libheimdal libcom-err
+PKGCB_WITH_HEIMDAL:=		heimdal
 
 include ${TOPDIR}/mk/package.mk
 

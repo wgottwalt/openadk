@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.irssi.org/
 PKG_SITES:=		http://www.irssi.org/files/
 
-PKG_FLAVOURS:=		WITH_SSL WITH_IPV6
+PKG_FLAVOURS_IRSSI:=	WITH_SSL WITH_IPV6
 PKGFD_WITH_SSL:=	enable SSL/TLS support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl

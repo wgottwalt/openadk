@@ -24,8 +24,8 @@ PKGSC_OPENLDAP_SLAPD:=	net/misc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
-PKG_FLAVOURS:=		WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKG_FLAVOURS_OPENLDAP_SLAPD:=	WITH_IPV6
+PKGFD_WITH_IPV6:=		enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
@@ -50,7 +50,7 @@ PKG_CONFIGURE_OPTIONS+= --enable-slapd \
 			--with-tls \
 			--with-yielding_select="yes" \
 
-ifneq (${ADK_PACKAGE_OPENLDAP_WITH_IPV6},)
+ifneq (${ADK_PACKAGE_OPENLDAP_SLAPD_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6

@@ -21,16 +21,16 @@ PKGSC_LIBHEIMDAL:=	libs
 PKGSD_LIBHEIMDAL_CLIENT:=	Kerberos 5 client libraries
 PKGSC_LIBHEIMDAL_CLIENT:=	libs
 
-PKG_FLAVOURS:=		PKINIT
-PKGFD_PKINIT:=		Enable PK-INIT
+PKG_FLAVOURS_HEIMDAL_SERVER:=	WITH_PKINIT
+PKGFD_WITH_PKINIT:		Enable PK-INIT
 
-PKG_CHOICES:=		WITH_LDAP WITH_BDB
-PKGCD_WITH_LDAP:=	use OpenLDAP as database backend
-PKGCS_WITH_LDAP:=	libopenldap
-PKGCB_WITH_LDAP:=	openldap
-PKGCD_WITH_BDB:=	use Berkeley DB as database backend
-PKGCS_WITH_BDB:=	libdb
-PKGCB_WITH_BDB:=	libdb
+PKG_CHOICES_HEIMDAL_SERVER:=	WITH_LDAP WITH_BDB
+PKGCD_WITH_LDAP:=		use OpenLDAP as database backend
+PKGCS_WITH_LDAP:=		libopenldap
+PKGCB_WITH_LDAP:=		openldap
+PKGCD_WITH_BDB:=		use Berkeley DB as database backend
+PKGCS_WITH_BDB:=		libdb
+PKGCB_WITH_BDB:=		libdb
 
 include $(TOPDIR)/mk/package.mk
 
@@ -48,13 +48,13 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--with-ipv6 \
 			--sysconfdir=/etc/heimdal
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_BDB),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_BDB),y)
 CONFIGURE_ARGS+=	--with-berkeley-db
 else
 CONFIGURE_ARGS+=	--without-berkeley-db
 endif
 
-ifeq ($(ADK_COMPILE_HEIMDAL_WITH_LDAP),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_LDAP),y)
 CONFIGURE_ARGS+=	--with-openldap=yes
 CONFIGURE_ARGS+=	--with-openldap-include=${STAGING_TARGET_DIR}/usr
 CONFIGURE_ARGS+=	--with-openldap-lib=${STAGING_TARGET_DIR}/usr
@@ -62,7 +62,7 @@ else
 CONFIGURE_ARGS+=        --without-openldap
 endif
 
-ifeq ($(ADK_PACKAGE_HEIMDAL_PKINIT),y)
+ifeq ($(ADK_PACKAGE_HEIMDAL_SERVER_WITH_PKINIT),y)
 CONFIGURE_OPTS+=	--enable-pk-init
 else
 CONFIGURE_OPTS+=	--disable-pk-init \
@@ -74,10 +74,6 @@ TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
 CONFIGURE_ENV+=		cross_compiling=yes \
 			ac_cv_func_getaddrinfo_numserv=yes
-
-ifeq ($(ADK_HOST_CYGWIN),y)
-EXEEXT:=		.exe
-endif
 
 post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \

@@ -16,8 +16,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_FLAVOURS:=		WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKG_FLAVOURS_IPSEC_TOOLS:=	WITH_IPV6
+PKGFD_WITH_IPV6:=		enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 

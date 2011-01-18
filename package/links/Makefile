@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		openssl libpng jpeg gpm
 PKG_URL:=		http://links.twibright.com/
 PKG_SITES:=		http://links.twibright.com/download/
 
-PKG_FLAVOURS:=		WITH_DIRECTFB
+PKG_FLAVOURS_LINKS:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 PKGFS_WITH_DIRECTFB:=	directfb
 PKGFB_WITH_DIRECTFB:=	DirectFB

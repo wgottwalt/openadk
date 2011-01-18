@@ -22,9 +22,8 @@ PKGSD_LIBOPENSSL_DEV:=	development files for openssl
 PKGSC_LIBOPENSSL_DEV:=	devel
 PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
-PKG_FLAVOURS:=		WITH_EC
-PKGFD_WITH_EC:=		enable Elliptic Curve crypto
-PKGSUB_WITH_EC:=	libopenssl
+PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC
+PKGFD_WITH_EC:=			enable Elliptic Curve crypto
 
 include ${TOPDIR}/mk/package.mk
 
@@ -40,7 +39,7 @@ FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
 OPENSSL_OPTIONS:= shared no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
 
-ifeq ($(ADK_PACKAGE_OPENSSL_WITH_EC),)
+ifeq ($(ADK_PACKAGE_LIBOPENSSL_WITH_EC),)
 OPENSSL_OPTIONS+= no-ec
 endif
 

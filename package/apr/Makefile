@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_APR:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
@@ -28,7 +28,6 @@ CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes
 CONFIGURE_ENV+=		apr_cv_process_shared_works=no
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ENV+=		apr_cv_tcp_nodelay_with_cork=no
-
 CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom \
 			--enable-threads
 

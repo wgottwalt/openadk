@@ -21,7 +21,7 @@ PKGSS_LIBCURL:=		libopenssl zlib
 PKGSD_LIBCURL_DEV:=	development files for libcurl
 PKGSC_LIBCURL_DEV:=	devel
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
@@ -58,13 +58,13 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
-	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
-
 curl-install:
 	${INSTALL_DIR} ${IDIR_CURL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
+
+libcurl-install:
+	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
 
 libcurl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl

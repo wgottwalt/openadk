@@ -19,7 +19,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
-PKG_FLAVOURS:=		WITH_DIRECTFB
+PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 PKGFS_WITH_DIRECTFB:=	directfb
 PKGFB_WITH_DIRECTFB:=	DirectFB

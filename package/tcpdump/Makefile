@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 
-PKG_FLAVOURS:=		WITH_IPV6 WITH_CHROOT
+PKG_FLAVOURS_TCPDUMP:=	WITH_IPV6 WITH_CHROOT
 PKGFD_WITH_IPV6:=	enable IPv6 support
 PKGFD_WITH_CHROOT:=	enable chrooting to /var/lib/tcpdump
 

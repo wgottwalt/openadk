@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.phys.uu.nl/~rombouts/pdnsd.html
 PKG_SITES:=		http://www.phys.uu.nl/~rombouts/pdnsd/releases/
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_PDNSD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 PKG_HOST_DEPENDS:=	!netbsd

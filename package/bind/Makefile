@@ -24,8 +24,8 @@ PKGSD_BIND_DNSSEC:=	dnssec utilities
 PKGSD_BIND_HOST:=	host utility
 PKGSD_BIND_DIG:=	dig utility
 
-PKG_FLAVOURS:=		WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKG_FLAVOURS_BIND_SERVER:=	WITH_IPV6
+PKGFD_WITH_IPV6:=		enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 

@@ -15,7 +15,7 @@ PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
 PKG_NOPARALLEL:=	1
 
-PKG_FLAVOURS:=		WITH_IPV6
+PKG_FLAVOURS_ELINKS:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
@@ -23,7 +23,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,ELINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
-
 TCFLAGS+=		-fPIC
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_./features.conf | tr [:blank:]-/. _)=yes
 CONFIGURE_ENV+=		$(shell echo ac_cv_file_${WRKBUILD}/features.conf | tr [:blank:]-/. _)=yes

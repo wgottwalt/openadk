@@ -13,7 +13,7 @@ PKG_DEPENDS:=		kmod-nfsd portmap
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
-PKG_FLAVOURS:=		WITH_KERBEROS WITH_TIRPC
+PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS WITH_TIRPC
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
 PKGFS_WITH_KERBEROS:=	libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKGFB_WITH_KERBEROS:=	libnfsidmap krb5 libevent libgssglue librpcsecgss

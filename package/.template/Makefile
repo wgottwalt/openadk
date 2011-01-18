@@ -32,7 +32,7 @@ PKG_SITES:=		add download url without package name
 #PKGSD_SUBPKG1:=
 
 # define your flavours for your package here, WITH_SSL f.e.
-#PKG_FLAVOURS:=		WITH_SSL
+#PKG_FLAVOURS_PKGNAME:=		WITH_SSL
 # flavour description
 #PKGFD_WITH_SSL:=	enable SSL support
 # flavour runtime dependency, package name
