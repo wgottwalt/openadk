@@ -5,7 +5,6 @@
 - GCC SSP evaluation
 - LTO GCC evaluation
 - finish qemu package
-- fix autoreconf usage in opensc
 - openssl ocf support check
 - locales support
 - new package minidlna

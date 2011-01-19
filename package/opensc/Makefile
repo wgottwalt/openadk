@@ -5,11 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
 PKG_VERSION:=		0.11.13
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libopensc
+PKG_BUILDDEP:=		openct pcsc-lite openssl
+PKG_DEPENDS:=		libopensc libopenct pcsc-lite libopenssl
 PKG_URL:=		http://www.opensc-project.org/opensc/
 PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 
@@ -31,9 +32,6 @@ CONFIGURE_ARGS+=	--disable-man \
 			--disable-iconv \
 			--enable-pcsc \
 			--enable-openct
-
-post-extract:
-	cd ${WRKBUILD} && autoreconf -vif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_OPENSC}/usr/bin
