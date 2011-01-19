@@ -319,7 +319,6 @@ config ADK_KPACKAGE_KMOD_B43
 	tristate
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
-	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
 	default n
 	help
 	  Driver for Broadcom B43xx wireless chips.
