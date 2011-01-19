@@ -65,6 +65,9 @@ do-install:
 		ln -sf "../usr/share/zoneinfo/$$tz" \
 		    ${IDIR_EGLIBC}/etc/localtime; \
 	fi
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
+endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
 	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
