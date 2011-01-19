@@ -36,6 +36,7 @@ ADK_RUNTIME_TMPFS_SIZE:=	$(strip $(subst ",, $(ADK_RUNTIME_TMPFS_SIZE)))
 ADK_RUNTIME_CONSOLE_SERIAL_SPEED:=	$(strip $(subst ",, $(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)))
 ADK_HOST:=		$(strip $(subst ",, $(ADK_HOST)))
 ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))
+ADK_TOOLS_ADDPATTERN_ARGS:=	$(strip $(subst ",, $(ADK_TOOLS_ADDPATTERN_ARGS)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
 ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk)),)
@@ -47,13 +48,20 @@ include $(TOPDIR)/mk/vars.mk
 
 export BASH HOSTCC HOSTCXX MAKE LANGUAGE LC_ALL OStype PATH
 
-HOSTCFLAGS?=		-O2
-HOSTCXXFLAGS?=		-O2
+CPPFLAGS_FOR_BUILD?=
+CFLAGS_FOR_BUILD?=	-O2 -Wall
+CXXFLAGS_FOR_BUILD?=	-O2 -Wall
+LDFLAGS_FOR_BUILD?=
+FLAGS_FOR_BUILD:=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
+
+HOSTCFLAGS?=		-O2 -Wall
+HOSTCXXFLAGS?=		-O2 -Wall
 HOSTCPPFLAGS?=
 HOSTLDFLAGS?=
-TARGET_CFLAGS:=		$(strip ${TARGET_CFLAGS} -fno-ident -fhonour-copts)
+
 TARGET_CC:=		$(strip ${TARGET_CC})
 TARGET_CXX:=		$(strip ${TARGET_CXX})
+TARGET_CFLAGS:=		$(strip ${TARGET_CFLAGS} -fno-ident -fhonour-copts)
 
 ifneq (${show},)
 .DEFAULT_GOAL:=		show

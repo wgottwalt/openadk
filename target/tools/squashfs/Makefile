@@ -8,10 +8,13 @@ PKG_VERSION:=		4.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		a3c23391da4ebab0ac4a75021ddabf96
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=squashfs/}
+
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)${PKG_VERSION}
 
 include ../rules.mk
+
+all: ${STAGING_HOST_DIR}/bin/mksquashfs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${HOSTCC}'
@@ -20,7 +23,5 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 ${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/squashfs-tools/mksquashfs \
 		${STAGING_HOST_DIR}/bin
-
-install: ${STAGING_HOST_DIR}/bin/mksquashfs
 
 include $(TOPDIR)/mk/tools.mk

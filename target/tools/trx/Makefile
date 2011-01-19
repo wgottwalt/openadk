@@ -1,4 +1,4 @@
 include $(TOPDIR)/rules.mk
 
-all:
-	$(HOSTCC) ${HOSTCFLAGS} -o ${STAGING_HOST_DIR}/bin/trx trx.c
+all: trx.c
+	$(CC_FOR_BUILD) $(FLAGS_FOR_BUILD) -o ${STAGING_HOST_DIR}/bin/trx trx.c

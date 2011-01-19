@@ -203,6 +203,8 @@ NO_ERROR=0
 	    -e 's/cris.*/cris/' \
 	    -e 's/i[3-9]86/x86/' \
 	    )" >>prereq.mk
+	@echo 'CC_FOR_BUILD:=${CC}' >>prereq.mk
+	@echo 'CXX_FOR_BUILD:=${CXX}' >>prereq.mk
 	@echo 'HOSTCC:=${CC}' >>prereq.mk
 	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
