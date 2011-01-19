@@ -11,19 +11,19 @@ PKG_MD5SUM:=		a07a97cfb28b588cbcf83ffa9ec92e3f
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		jpeg libtiff fontconfig libiconv
-PKG_DEPENDS:=		libjpeg libtiff
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
 
 PKG_SUBPKGS:=		CONVERT DISPLAY LIBIMAGEMAGICK
 PKGSD_LIBIMAGEMAGICK:=	imagemagick library
 PKGSC_LIBIMAGEMAGICK:=	libs
+PKGSS_LIBIMAGEMAGICK:=	libjpeg libtiff
 PKGSD_CONVERT:=		image processing and converting utility
 PKGSC_CONVERT:=		multimedia
 PKGSS_CONVERT:=		libimagemagick
 PKGSD_DISPLAY:=		image display application
 PKGSC_DISPLAY:=		multimedia
-PKGSS_DISPLAY:=		libimagemagick
+PKGSS_DISPLAY:=		libimagemagick libX11 libXau libXdmcp libICE libSM fontconfig libXt zlib libpng
 PKGSB_DISPLAY:=		libX11
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}.tar.gz

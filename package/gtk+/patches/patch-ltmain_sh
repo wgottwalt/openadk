@@ -1,11 +1,11 @@
---- gtk+-2.22.1.orig/ltmain.sh	2010-08-13 04:09:38.000000000 +0200
-+++ gtk+-2.22.1/ltmain.sh	2011-01-14 23:50:15.000000000 +0100
-@@ -5091,7 +5091,7 @@ func_mode_link ()
-       # @file                GCC response files
-       # -tp=*                Portland pgcc target processor selection
+--- gtk+-2.18.6.orig/ltmain.sh	2009-12-02 12:35:38.000000000 +0100
++++ gtk+-2.18.6/ltmain.sh	2011-01-19 15:27:06.368658496 +0100
+@@ -4765,7 +4765,7 @@ func_mode_link ()
+       # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
+       # @file GCC response files
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
--      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*)
-+      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|-fstack-protector*|-flto)
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
          func_quote_for_eval "$arg"
  	arg="$func_quote_for_eval_result"
          func_append compile_command " $arg"
