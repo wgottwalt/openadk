@@ -5,10 +5,13 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 
 # glibc does not compile with Os
-TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+TARGET_CFLAGS:= $(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=-O2
+TARGET_CFLAGS+=	-O2
 endif
+
+# ssp partially supported
+TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
