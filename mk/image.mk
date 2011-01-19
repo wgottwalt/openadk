@@ -89,8 +89,11 @@ ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 		lzma -9 >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
-	$(SED) 's#^CONFIG_INITRAMFS_SOURCE.*#CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"#' \
-		$(LINUX_DIR)/.config
+	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE).*//' \
+		${LINUX_DIR}/.config
+	echo "CONFIG_BLK_DEV_INITRD=y" >> ${LINUX_DIR}/.config
+	echo 'CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"' >> \
+		${LINUX_DIR}/.config
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
