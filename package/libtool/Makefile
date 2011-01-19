@@ -11,6 +11,7 @@ PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBTOOL LIBLTDL LIBLTDL_DEV
 PKGSC_LIBLTDL:=		libs

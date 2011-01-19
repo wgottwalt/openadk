@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/kernel.mk
 include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 
-ifeq (${ADK_TARGET_SYSTEM_LINKSYS_WRT54G},y)
+ifeq (${ADK_KERNEL_BCM47XX},y)
 CUSTOM_ROOTFSSQUASHFS_BUILD=1
 endif
 
@@ -19,9 +19,9 @@ tools-compile:
 	$(MAKE) -C ../tools/trx
 	$(MAKE) -C ../tools/addpattern
 	$(MAKE) -C ../tools/srec2bin
-	$(MAKE) -C ../tools/squashfs prepare compile install
+	$(MAKE) -C ../tools/squashfs
 
-ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_WRT54G),y)
+ifeq ($(ADK_KERNEL_BCM47XX),y)
 kernel-install: tools-compile
 	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinub.elf \
 	    ${BUILD_DIR}/${TARGET_KERNEL}
@@ -32,9 +32,8 @@ ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
 	gzip -n9 <${BUILD_DIR}/${TARGET_KERNEL}.bin \
 	    >${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
 	printf '\0' >>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
-	PATH='${TARGET_PATH}' trx -o $@~ ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz \
-	    -a 1024 ${BUILD_DIR}/root.squashfs
-	PATH='${TARGET_PATH}' addpattern -4 -p W54G -v v4.20.6 -g -i $@~ -o $@
+	PATH='${TARGET_PATH}' trx -o $@~ -f ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz -a 1024 -f ${BUILD_DIR}/root.squashfs
+	PATH='${TARGET_PATH}' addpattern -4 ${ADK_TOOLS_ADDPATTERN_ARGS} -g -i $@~ -o $@
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
@@ -83,7 +82,7 @@ ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
 	@echo 'tftp> binary'
 	@echo 'tftp> put $(BIN_DIR)/${TARGET_KERNEL} upgrade_code.bin'
 endif
-ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_WRT54G),y)
+ifeq ($(ADK_KERNEL_BCM47XX),y)
 	@echo 'Type following on the CFE prompt to boot the kernel:'
 	@echo 'CFE> boot -elf -tftp 192.168.1.254:$(BIN_DIR)/${TARGET_KERNEL}'
 endif

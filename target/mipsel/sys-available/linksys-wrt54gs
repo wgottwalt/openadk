@@ -1,0 +1,13 @@
+config ADK_TARGET_SYSTEM_LINKSYS_WRT54GS
+	bool "Linksys WRT54GS"
+	select ADK_mipsel
+	select ADK_linksys_wrt54gs
+	select ADK_KERNEL_BCM47XX
+	select ADK_KERNEL_KERNEL_LZMA
+	select ADK_TARGET_WITH_MTD
+	select ADK_TARGET_WITH_SSB
+	select ADK_TARGET_WITH_WATCHDOG
+	help
+	  Linksys WRT54GS WLAN router.
+	  (Broadcom BCM47xx platform)
+
