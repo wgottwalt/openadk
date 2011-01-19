@@ -13,6 +13,8 @@ PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/driver/
 
+PKG_CFLINE:=		y if (ADK_PKG_LAPTOP && ADK_TARGET_SYSTEM_IBM_X40)
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_INTEL,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
