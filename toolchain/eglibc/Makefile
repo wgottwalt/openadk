@@ -9,6 +9,8 @@ include ${TOPDIR}/mk/buildhlp.mk
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-O2
 endif
+# ssp partially supported
+TARGET_CFLAGS:= $(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \

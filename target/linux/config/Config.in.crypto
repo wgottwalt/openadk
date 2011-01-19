@@ -57,11 +57,10 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 	help
 	  This option allows you to have support for HIFN 795x crypto adapters.
 
-endmenu
+comment "OpenBSD Cryptographic framework"
 
-menu "OpenBSD Cryptographic framework"
 config ADK_KPACKAGE_KMOD_OCF_HIFN
-	prompt "kmod-ocf-hifn..................... hifn engine"
+	prompt "kmod-ocf-hifn.......................... HIFN crypto engine"
 	tristate
 	default n
 	select ADK_KERNEL_OCF_OCF
@@ -70,36 +69,6 @@ config ADK_KPACKAGE_KMOD_OCF_HIFN
 	help
 	  Engine for cryptodev that uses Hifn based accelerators
 	  such as the 7951, 7955, 7956, 7751, 7811.
-
-config ADK_KPACKAGE_KMOD_OCF_SAFE
-	prompt "kmod-ocf-safe..................... safenet engine"
-	tristate
-	default n
-	select ADK_KERNEL_OCF_OCF
-	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
-	select ADK_KPACKAGE_KMOD_CRYPTO_AES
-	help
-	  Engine for cryptodev that uses a number of the safenet Excel
-	  crypto accelerators. Currently for the 1141 and 1741.
-
-config ADK_KPACKAGE_KMOD_OCF_IXP4XX
-	prompt "kmod-ocf-ixp4xx................... IXP4xx engine"
-	tristate
-	default n
-	select ADK_KERNEL_OCF_OCF
-	depends on ADK_arm
-	help
-	  Engine for cryptodev that uses XScale IXP4xx.
-	  Requires the Intel Access library.
-
-config ADK_KPACKAGE_KMOD_OCF_TALITOS
-	prompt "kmod-ocf-talitos.................. talitos engine"
-	tristate
-	default n
-	select ADK_KERNEL_OCF_OCF
-	depends on ADK_ppc
-	help
-	  Engine for cryptodev that uses Freescale's security engine (SEC/talitos).
 
 endmenu
 

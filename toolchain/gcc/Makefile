@@ -3,6 +3,9 @@
 
 include $(TOPDIR)/rules.mk
 include ../rules.mk
+
+TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+
 include Makefile.inc
 
 GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
