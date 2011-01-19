@@ -1,5 +1,5 @@
---- iproute2-2.6.29-1.orig/netem/Makefile	2009-03-24 23:40:54.000000000 +0100
-+++ iproute2-2.6.29-1/netem/Makefile	2009-12-11 16:39:15.000000000 +0100
+--- iproute2-2.6.37.orig/netem/Makefile	2011-01-07 18:54:30.000000000 +0100
++++ iproute2-2.6.37/netem/Makefile	2011-01-18 02:19:41.386925447 +0100
 @@ -2,13 +2,13 @@ DISTGEN = maketable normal pareto pareto
  DISTDATA = normal.dist pareto.dist paretonormal.dist experimental.dist
  
@@ -24,4 +24,4 @@
 +	$(HOSTCC) $(HOSTCFLAGS) -I../include -o $@ $@.c -lm
  
  install: all
- 	mkdir -p $(DESTDIR)/lib/tc
+ 	mkdir -p $(DESTDIR)$(LIBDIR)/tc
