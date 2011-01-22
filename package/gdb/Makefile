@@ -16,13 +16,15 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		${TCPPFLAGS} -fPIC
+TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--disable-tui --disable-gdbtk --without-x \
 			--without-included-gettext --disable-sim \
 			--enable-threads --with-curses --disable-werror \
 			--enable-static --without-python
-XAKE_FLAGS+=		LDFLAGS='${TLDFLAGS}'
+XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
+# disable honour cflags stuff
+XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin

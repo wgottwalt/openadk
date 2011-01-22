@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pmacct
-PKG_VERSION:=		0.12.3
+PKG_VERSION:=		0.12.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7e4196c0f87f1382a8eed4eb1bdecdc1
+PKG_MD5SUM:=		3d10f9301a17f034a0f221490a99a5d0
 PKG_DESCR:=		IP accounting daemons
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpcap

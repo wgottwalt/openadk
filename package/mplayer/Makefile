@@ -44,7 +44,7 @@ endif
 # related patch to allow configure to find out the DirectFB
 # version number.
 ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
-TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/directfb
+TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/directfb
 endif
 
 ifeq (${ADK_TARGET_CPU_WITH_MMX},y)
@@ -84,7 +84,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-cross-compile \
 			--target=${ARCH}-linux \
 			--cc=$(TARGET_CC) \
-			--host-cc=$(HOSTCC) \
+			--host-cc=$(CC_FOR_BUILD) \
 			--yasm='' \
 			--disable-mencoder \
 			--enable-fbdev \

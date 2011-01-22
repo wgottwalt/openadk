@@ -1,109 +1,215 @@
 --- ppp-2.4.5.orig/pppd/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/Makefile.linux	2011-01-16 17:09:40.000000000 +0100
-@@ -2,12 +2,7 @@
- # pppd makefile for Linux
++++ ppp-2.4.5/pppd/Makefile.linux	2011-01-21 21:40:47.384898388 +0100
+@@ -3,11 +3,7 @@
  # $Id: Makefile.linux,v 1.70 2007/06/19 02:08:34 carlsonj Exp $
  #
--
+ 
 -# Default installation locations
 -DESTDIR = $(INSTROOT)@DESTDIR@
 -BINDIR = $(DESTDIR)/sbin
 -MANDIR = $(DESTDIR)/share/man/man8
 -INCDIR = $(DESTDIR)/include
-+include ../makedefs.linux
++include ../Makedefs.com
  
  TARGETS = pppd
  
-@@ -30,10 +25,6 @@ ifeq (.depend,$(wildcard .depend))
- include .depend
- endif
+@@ -24,17 +20,6 @@ PPPDOBJS = main.o magic.o fsm.o lcp.o ip
+ 	   ecp.o auth.o options.o demand.o utils.o sys-linux.o ipxcp.o tty.o \
+ 	   eap.o chap-md5.o session.o
  
+-#
+-# include dependencies if present
+-ifeq (.depend,$(wildcard .depend))
+-include .depend
+-endif
+-
 -# CC = gcc
 -#
 -COPTS = -O2 -pipe -Wall -g
 -LIBS =
- 
+-
  # Uncomment the next 2 lines to include support for Microsoft's
  # MS-CHAP authentication protocol.  Also, edit plugins/radius/Makefile.linux.
-@@ -48,7 +39,7 @@ MPPE=y
- # Uncomment the next line to include support for PPP packet filtering.
- # This requires that the libpcap library and headers be installed
- # and that the kernel driver support PPP packet filtering.
--FILTER=y
-+#FILTER=y
- 
- # Uncomment the next line to enable multilink PPP (enabled by default)
- # Linux distributions: Please leave multilink ENABLED in your builds
-@@ -58,9 +49,9 @@ HAVE_MULTILINK=y
- # Uncomment the next line to enable the TDB database (enabled by default.)
- # If you enable multilink, then TDB is automatically enabled also.
- # Linux distributions: Please leave TDB ENABLED in your builds.
--USE_TDB=y
-+#USE_TDB=y
- 
--HAS_SHADOW=y
-+#HAS_SHADOW=y
- #USE_PAM=y
- #HAVE_INET6=y
- 
-@@ -75,11 +66,10 @@ PLUGIN=y
+ CHAPMS=y
+@@ -75,28 +60,25 @@ PLUGIN=y
  
  MAXOCTETS=y
  
 -INCLUDE_DIRS= -I../include
 -
 -COMPILE_FLAGS= -DHAVE_PATHS_H -DIPX_CHANGE -DHAVE_MMAP
-+CPPFLAGS += -I../include
-+CPPFLAGS += -DHAVE_PATHS_H -DHAVE_MMAP
- 
+-
 -CFLAGS= $(COPTS) $(COMPILE_FLAGS) $(INCLUDE_DIRS) '-DDESTDIR="@DESTDIR@"'
-+CFLAGS+= $(COPTS) $(COMPILE_FLAGS) $(INCLUDE_DIRS) '-DDESTDIR="@DESTDIR@"'
++CPPFLAGS += -I../include
++CPPFLAGS += -DHAVE_PATHS_H -DIPX_CHANGE -DHAVE_MMAP '-DDESTDIR="@DESTDIR@"'
  
  ifdef CHAPMS
- CFLAGS   += -DCHAPMS=1
-@@ -99,7 +89,7 @@ ifdef USE_SRP
- CFLAGS	+= -DUSE_SRP -DOPENSSL -I/usr/local/ssl/include
+-CFLAGS   += -DCHAPMS=1
++CPPFLAGS += -DCHAPMS=1
+ NEEDDES=y
+ PPPDOBJS += md4.o chap_ms.o
+ HEADERS	+= md4.h chap_ms.h
+ ifdef MSLANMAN
+-CFLAGS   += -DMSLANMAN=1
++CPPFLAGS += -DMSLANMAN=1
+ endif
+ ifdef MPPE
+-CFLAGS   += -DMPPE=1
++CPPFLAGS += -DMPPE=1
+ endif
+ endif
+ 
+ # EAP SRP-SHA1
+ ifdef USE_SRP
+-CFLAGS	+= -DUSE_SRP -DOPENSSL -I/usr/local/ssl/include
++CPPFLAGS += -DUSE_SRP -DOPENSSL -I/usr/local/ssl/include
  LIBS	+= -lsrp -L/usr/local/ssl/lib -lcrypto
  TARGETS	+= srp-entry
--EXTRAINSTALL = $(INSTALL) -s -c -m 555 srp-entry $(BINDIR)/srp-entry
-+EXTRAINSTALL = $(INSTALL) -c -m 555 srp-entry $(BINDIR)/srp-entry
- MANPAGES += srp-entry.8
- EXTRACLEAN += srp-entry.o
- NEEDDES=y
-@@ -117,10 +107,8 @@ CFLAGS   += -DHAS_SHADOW
+ EXTRAINSTALL = $(INSTALL) -s -c -m 555 srp-entry $(BINDIR)/srp-entry
+@@ -113,12 +95,12 @@ PPPDOBJS += sha1.o
+ endif
+ 
+ ifdef HAS_SHADOW
+-CFLAGS   += -DHAS_SHADOW
++CPPFLAGS += -DHAS_SHADOW
  #LIBS     += -lshadow $(LIBS)
  endif
  
--ifneq ($(wildcard /usr/include/crypt.h),)
- CFLAGS  += -DHAVE_CRYPT_H=1
+ ifneq ($(wildcard /usr/include/crypt.h),)
+-CFLAGS  += -DHAVE_CRYPT_H=1
++CPPFLAGS += -DHAVE_CRYPT_H=1
  LIBS	+= -lcrypt
--endif
+ endif
  
- ifdef NEEDDES
+@@ -126,7 +108,7 @@ ifdef NEEDDES
  ifndef USE_CRYPT
-@@ -200,16 +188,16 @@ all: $(TARGETS)
+ LIBS     += -ldes $(LIBS)
+ else
+-CFLAGS   += -DUSE_CRYPT=1
++CPPFLAGS += -DUSE_CRYPT=1
+ endif
+ PPPDOBJS += pppcrypt.o
+ HEADERS += pppcrypt.h
+@@ -134,36 +116,36 @@ endif
+ 
+ # For "Pluggable Authentication Modules", see ftp.redhat.com:/pub/pam/.
+ ifdef USE_PAM
+-CFLAGS   += -DUSE_PAM
++CPPFLAGS += -DUSE_PAM
+ LIBS     += -lpam -ldl
+ endif
+ 
+ # Multi-linnk
+ ifdef HAVE_MULTILINK
+-	# Multilink implies the use of TDB
+-	USE_TDB=y
++# Multilink implies the use of TDB
++USE_TDB=y
+ 
+-	CFLAGS += -DHAVE_MULTILINK
+-	PPPDSRCS += multilink.c
+-	PPPDOBJS += multilink.o
++CPPFLAGS += -DHAVE_MULTILINK
++PPPDSRCS += multilink.c
++PPPDOBJS += multilink.o
+ endif
+ 
+ # TDB
+ ifdef USE_TDB
+-	CFLAGS += -DUSE_TDB=1
+-	PPPDSRCS += tdb.c spinlock.c
+-	PPPDOBJS += tdb.o spinlock.o
+-	HEADERS += tdb.h spinlock.h
++CPPFLAGS += -DUSE_TDB=1
++PPPDSRCS += tdb.c spinlock.c
++PPPDOBJS += tdb.o spinlock.o
++HEADERS += tdb.h spinlock.h
+ endif
+ 
+ # Lock library binary for Linux is included in 'linux' subdirectory.
+ ifdef LOCKLIB
+ LIBS     += -llock
+-CFLAGS   += -DLOCKLIB=1
++CPPFLAGS += -DLOCKLIB=1
+ endif
+ 
+ ifdef PLUGIN
+-CFLAGS	+= -DPLUGIN
++CPPFLAGS += -DPLUGIN
+ LDFLAGS	+= -Wl,-E
+ LIBS	+= -ldl
+ endif
+@@ -171,52 +153,51 @@ endif
+ ifdef FILTER
+ ifneq ($(wildcard /usr/include/pcap-bpf.h),)
+ LIBS    += -lpcap
+-CFLAGS  += -DPPP_FILTER
++CPPFLAGS += -DPPP_FILTER
+ endif
+ endif
+ 
+ ifdef HAVE_INET6
+-     PPPDSRCS += ipv6cp.c eui64.c
+-     HEADERS  += ipv6cp.h eui64.h
+-     PPPDOBJS += ipv6cp.o eui64.o
+-     CFLAGS   += -DINET6=1
++PPPDSRCS += ipv6cp.c eui64.c
++HEADERS  += ipv6cp.h eui64.h
++PPPDOBJS += ipv6cp.o eui64.o
++CPPFLAGS += -DINET6=1
+ endif
+ 
+ ifdef CBCP
+-     PPPDSRCS += cbcp.c
+-     PPPDOBJS += cbcp.o
+-     CFLAGS += -DCBCP_SUPPORT
+-     HEADERS += cbcp.h
++PPPDSRCS += cbcp.c
++PPPDOBJS += cbcp.o
++CPPFLAGS += -DCBCP_SUPPORT
++HEADERS += cbcp.h
+ endif
+ 
+ ifdef MAXOCTETS
+-     CFLAGS += -DMAXOCTETS
++CPPFLAGS += -DMAXOCTETS
+ endif
+ 
+-INSTALL= install
+-
+ all: $(TARGETS)
+ 
++# generate dependencies
++#include $(PPPDSRCS:.c=.d)
++
  install: pppd
- 	mkdir -p $(BINDIR) $(MANDIR)
+-	mkdir -p $(BINDIR) $(MANDIR)
++	$(INSTALL) -d -m 755 $(BINDIR)
++	$(INSTALL) -d -m 755 $(MANDIR)
  	$(EXTRAINSTALL)
 -	$(INSTALL) -s -c -m 555 pppd $(BINDIR)/pppd
-+	$(INSTALL) -c -m 555 pppd $(BINDIR)/pppd
++	$(INSTALL) $(STRIP) -c -m 555 pppd $(BINDIR)/pppd
  	if chgrp pppusers $(BINDIR)/pppd 2>/dev/null; then \
  	  chmod o-rx,u+s $(BINDIR)/pppd; fi
  	$(INSTALL) -c -m 444 pppd.8 $(MANDIR)
  
  pppd: $(PPPDOBJS)
 -	$(CC) $(CFLAGS) $(LDFLAGS) -o pppd $(PPPDOBJS) $(LIBS)
-+	$(CC) $(LDFLAGS) -o pppd $(PPPDOBJS) $(LIBS)
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
  
- srp-entry:	srp-entry.c
+-srp-entry:	srp-entry.c
 -	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ srp-entry.c $(LIBS)
-+	$(CC) $(LDFLAGS) -o $@ srp-entry.c $(LIBS)
++srp-entry: srp-entry.o
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
  
  install-devel:
- 	mkdir -p $(INCDIR)/pppd
-@@ -219,4 +207,4 @@ clean:
- 	rm -f $(PPPDOBJS) $(EXTRACLEAN) $(TARGETS) *~ #* core
+-	mkdir -p $(INCDIR)/pppd
++	$(INSTALL) -d -m 755 $(INCDIR)/pppd
+ 	$(INSTALL) -c -m 644 $(HEADERS) $(INCDIR)/pppd
  
- depend:
+ clean:
+-	rm -f $(PPPDOBJS) $(EXTRACLEAN) $(TARGETS) *~ #* core
+-
+-depend:
 -	$(CPP) -M $(CFLAGS) $(PPPDSRCS) >.depend
-+	$(CPP) -M $(CPPFLAGS) $(CFLAGS) $(PPPDSRCS) >.depend
++	rm -f $(PPPDOBJS) $(EXTRACLEAN) $(TARGETS) *.d *~ #* core

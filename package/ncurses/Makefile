@@ -53,7 +53,7 @@ pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure \
 		--with-shared \
-		--with-build-cc=${HOSTCC} \
+		--with-build-cc=${CC_FOR_BUILD} \
 		--with-progs \
 		--without-debug \
 		--without-profile \

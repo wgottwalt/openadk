@@ -1,0 +1,26 @@
+--- palantir-2.7.orig/server/Makefile	2007-05-19 01:31:36.000000000 +0200
++++ palantir-2.7/server/Makefile	2011-01-20 15:24:19.478658283 +0100
+@@ -47,10 +47,11 @@ ENABLE_X11MON=	0
+ .PHONY : tools man
+ 
+ 
+-CFLAGS= -Wall -D_REENTRANT -O2 -g
++CFLAGS?= -Wall -D_REENTRANT -O2 -g
+ # -O3
+-CC= gcc
+-libjpeg= -ljpeg
++CC?= gcc
++LIBS?=
++LIBS+= -ljpeg -lpthread
+ 
+ ifeq ($(TARGET),mips)
+ 	BROADCOM_SRC= /usr/local/broadcom/src
+@@ -86,7 +87,7 @@ SRCS= *.c
+ libgsm= libgsm/lib/libgsm.a
+ 
+ palantir: $(libgsm) $(OBJ) tools man
+-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) $(libgsm) $(libjpeg) -lpthread -o palantir
++	$(CC) $(LDFLAGS) $(OBJ) $(libgsm) $(LIBS) -o palantir
+ 
+ mips:
+ 	make TARGET=mips palantir

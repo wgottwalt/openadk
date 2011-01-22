@@ -22,9 +22,11 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-Wall
+
 do-build:
-	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} ${WRKBUILD}/cutter.c \
-		-o ${WRKBUILD}/cutter
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
+		${WRKBUILD}/cutter.c -o ${WRKBUILD}/cutter
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CUTTER}/usr/sbin

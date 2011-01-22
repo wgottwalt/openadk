@@ -1,8 +1,8 @@
 	- do not call uname -m, use passed ${ADK_ARCH} variable
 	- use ${CC} instead of hard-coded gcc
---- libhugetlbfs-2.6.orig/Makefile	2009-08-24 14:56:07.000000000 +0200
-+++ libhugetlbfs-2.6/Makefile	2011-01-17 15:17:03.942093253 +0100
-@@ -30,51 +30,51 @@ CFLAGS ?= -O2 -g
+--- libhugetlbfs-2.11.orig/Makefile	2010-12-16 18:38:22.000000000 +0100
++++ libhugetlbfs-2.11/Makefile	2011-01-22 21:09:48.008659615 +0100
+@@ -31,51 +31,51 @@ CFLAGS ?= -O2 -g
  CFLAGS += -Wall -fPIC
  CPPFLAGS += -D__LIBHUGETLBFS__
  

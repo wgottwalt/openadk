@@ -29,9 +29,7 @@ CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 XAKE_FLAGS+=		STRIP='' \
-			CC='${TARGET_CC}' \
-			OPT_CFLAGS='${TARGET_CFLAGS} -fPIC' \
-			OPT_LDFLAGS=""
+			CC='${TARGET_CC}'
 
 do-configure:
 	${CP} ./files/config ${WRKBUILD}/config/.config

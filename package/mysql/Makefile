@@ -25,7 +25,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
-			OPTIMIZE_CXXFLAGS="${TARGET_CFLAGS}" \
+			OPTIMIZE_CXXFLAGS="${TARGET_CXXFLAGS}" \
 			ac_cv_lib_nsl_gethostbyname_r=no \
 			ac_cv_lib_nsl_yp_get_default_domain=no \
 			ac_cv_sys_restartable_syscalls=yes \
@@ -50,16 +50,16 @@ CONFIGURE_ARGS+=	--disable-assembler \
 			--without-docs \
 			--without-readline \
 			--with-machine-type=${CPU_ARCH}
-HOSTTOOLFLAGS=		CC="${HOSTCC}" \
-			CXX='c++' \
-			CFLAGS='${HOSTCFLAGS} -DHOSTCOMPILE=1' \
-			CXXFLAGS='${HOSTCFLAGS}' \
-			LDFLAGS='${HOSTLDFLAGS}' \
-			CPPFLAGS='${HOSTCPPFLAGS}' \
-			CXXLINK='c++ ${HOSTCFLAGS} ${HOSTLDFLAGS} -o $$@' \
-			LINK='${HOSTCC} ${HOSTCFLAGS} ${HOSTLDFLAGS} -o $$@'
+BUILD_LFLAGS=		CC="${CC_FOR_BUILD}" \
+			CXX='${CXX_FOR_BUILD}' \
+			CFLAGS='${CFLAGS_FOR_BUILD} -DHOSTCOMPILE=1' \
+			CXXFLAGS='${CXXFLAGS_FOR_BUILD}' \
+			LDFLAGS='${LDFLAGS_FOR_BUILD}' \
+			CPPFLAGS='${CPPFLAGS_FOR_BUILD}' \
+			CXXLINK='${CXX_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD} -o $$@' \
+			LINK='${CC_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD} -o $$@'
 ifneq (${OStype},Linux)
-HOSTTOOLFLAGS+=		LIBS='-lm -lz'
+BUILD_FLAGS+=		LIBS='-lm -lz'
 endif
 
 do-build:
@@ -68,8 +68,8 @@ do-build:
 		DESTDIR="${WRKINST}" \
 		all install
 	${MAKE} -C "${WRKBUILD}/libmysql" \
-		LINK="${HOSTCC} -o conf_to_src -lc" \
-		${HOSTTOOLFLAGS} \
+		LINK="${CC_FOR_BUILD} -o conf_to_src -lc" \
+		${BUILD_FLAGS} \
 		conf_to_src
 	${MAKE} -C "${WRKBUILD}" \
 		CFLAGS="${TARGET_CFLAGS}" \
@@ -87,5 +87,7 @@ do-install:
 	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/mysql/libmysqlclient.so* \
 	    ${IDIR_LIBMYSQLCLIENT}/usr/lib
+	$(SED) "s,\(^pkgincludedir='\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
+		${WRKINST}/usr/bin/mysql_config
 
 include ${TOPDIR}/mk/pkg-bottom.mk

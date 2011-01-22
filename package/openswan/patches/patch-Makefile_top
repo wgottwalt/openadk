@@ -1,0 +1,11 @@
+--- openswan-2.6.28.orig/Makefile.top	2010-07-29 20:45:59.000000000 +0200
++++ openswan-2.6.28/Makefile.top	2011-01-21 19:00:28.518658360 +0100
+@@ -29,7 +29,7 @@ ERRCHECK=${MAKEUTILS}/errcheck
+ KVUTIL=${MAKEUTILS}/kernelversion
+ KVSHORTUTIL=${MAKEUTILS}/kernelversion-short
+ 
+-SUBDIRS?=doc lib programs testing
++SUBDIRS?=lib programs
+ 
+ clean::
+ 	-(cd ${OPENSWANSRCDIR} && $(MAKE) modclean && $(MAKE) mod26clean)

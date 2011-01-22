@@ -23,7 +23,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MKSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
-TCPPFLAGS+=		-DMKSH_SMALL=1
+TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
 endif
 
 CONFIG_STYLE:=		manual
@@ -31,8 +31,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TCFLAGS}' \
-	    CPPFLAGS='${TCPPFLAGS}' LDFLAGS='${TLDFLAGS}' \
+	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
+	    CPPFLAGS='${TARGET_CPPFLAGS}' LDFLAGS='${TARGET_LDFLAGS}' \
 	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -combine
 
 do-install:

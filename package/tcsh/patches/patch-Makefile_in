@@ -6,7 +6,7 @@ use host compiler and flags
  gethost:  gethost.c sh.err.h tc.const.h sh.h
  	rm -f gethost
 -	${CC} -o gethost ${LDFLAGS} ${CFLAGS} ${CPPFLAGS} ${DFLAGS} $(srcdir)/gethost.c ${LIBES} ${EXTRALIBS}
-+	${HOSTCC} -o gethost ${HOSTLDFLAGS} ${HOSTCFLAGS} ${HOSTCPPFLAGS} $(srcdir)/gethost.c
++	${CC_FOR_BUILD} -o gethost ${LDFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${CPPFLAGS_FOR_BUILD} $(srcdir)/gethost.c
  
  tc.defs.c:	gethost host.defs
  	@rm -f $@.tmp

@@ -19,7 +19,7 @@ $(eval $(call PKG_template,RARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_TARGET_DIR}/usr" \
 			--with-pcap="${STAGING_TARGET_DIR}/usr"
-TCFLAGS+=		-DNEW_LIBNET_INTERFACE
+TARGET_CPPFLAGS+=	-DNEW_LIBNET_INTERFACE
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RARPD}/usr/sbin

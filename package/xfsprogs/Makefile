@@ -22,7 +22,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
-
+TARGET_LDFLAGS+=	-lrt
 CONFIGURE_ARGS+=	--enable-gettext=no \
 			--with-gnu-ld
 CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" "

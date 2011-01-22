@@ -1,0 +1,21 @@
+CPPFLAGS ?=
+CFLAGS ?= -O2 -pipe
+LDFLAGS ?=
+LIBS ?=
+ARFLAGS ?= rv
+
+INSTALL ?= install
+STRIP ?= -s
+
+DESTDIR ?= $(INSTROOT)@DESTDIR@
+BINDIR = $(DESTDIR)/sbin
+MANDIR = $(DESTDIR)/share/man/man8
+LIBDIR = $(DESTDIR)/lib/pppd/$(VERSION)
+INCDIR = $(DESTDIR)/include
+ETCDIR = $(DESTDIR)@SYSCONF@/ppp
+
+%.d: %.c
+	@set -e; rm -f $@; \
+	$(CC) -M $(CPPFLAGS) $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+	rm -f $@.$$$$

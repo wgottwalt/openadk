@@ -33,12 +33,7 @@ CONFIGURE_ARGS+=	--disable-doc
 CONFIGURE_ENV+=		LIBS="-lncurses"
 
 pre-build:
-	GCC_HONOUR_COPTS=s \
-	KERNEL_PATH=${LINUX_DIR} \
-	CROSS_COMPILE="${TARGET_CROSS}" \
-	V=1 ARCH="${ARCH}" KERNELVERSION="2.6" \
-	LDFLAGS="" \
-	$(MAKE) -C ${WRKBUILD}/kernel
+	$(MAKE) -C ${WRKBUILD}/kernel $(KERNEL_MODULE_FLAGS)
 
 post-install:
 	${INSTALL_DIR} ${IDIR_EXMAP_KMOD}/etc/modules.d/

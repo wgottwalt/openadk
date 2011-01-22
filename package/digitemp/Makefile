@@ -21,7 +21,7 @@ $(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-TCFLAGS+=		-I./src -I./userial
+TARGET_CPPFLAGS+=	-I./src -I./userial
 ALL_TARGET=		ds2490
 
 do-install:

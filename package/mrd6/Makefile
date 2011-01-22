@@ -28,11 +28,11 @@ LIBRARIES+=-lssp -lssp_nonshared
 endif
 
 ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ \
+TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
-TLDFLAGS+=		-shared ${LIBRARIES}
+TARGET_LDFLAGS+=	-shared ${LIBRARIES}
 endif
-XAKE_FLAGS+=		EXTRA_FLAGS="${TCFLAGS}"
+XAKE_FLAGS+=		EXTRA_FLAGS="${TARGET_CFLAGS}"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc

@@ -215,7 +215,7 @@ NO_ERROR=0
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
-	@echo "HOST_LIBIDL_CONFIG:=$$(which libIDL-config-2 2>/dev/null)" >>prereq.mk
+	@echo "BUILD_LIBIDL_CONFIG:=$$(which libIDL-config-2 2>/dev/null)" >>prereq.mk
 	@echo "PKG_HOSTLIB_DIR=$$(eval pkg-config --variable pc_path pkg-config 2>/dev/null)" >/dev/null
 	@echo "PKG_HOSTLIB_DIR:=$${PKG_HOSTLIB_DIR:-/usr/lib/pkgconfig}" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \

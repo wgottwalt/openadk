@@ -21,9 +21,9 @@ $(eval $(call PKG_template,LIBPCAP,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${P
 
 CONFIGURE_ENV+=		ac_cv_linux_vers=26
 CONFIGURE_ARGS+=	--disable-yydebug \
-			--with-build-cc=$(HOSTCC) \
+			--with-build-cc=$(CC_FOR_BUILD) \
 			--with-pcap=linux
-TCFLAGS+=		${TCPPFLAGS}
+TARGET_CFLAGS+=		${TARGET_CPPFLAGS}
 INSTALL_TARGET=		install install-shared
 MAKE_FLAGS+=		STAGING_TARGET_DIR=$(STAGING_TARGET_DIR)
 

@@ -81,20 +81,14 @@ CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 
 ifneq (${ADK_PACKAGE_NUT_WITH_SSL},)
 CONFIGURE_ARGS+=	--with-ssl
-CONFIGURE_ENV+=		CPPFLAGS="${TCPPFLAGS} ${TLDFLAGS}"
-MAKE_FLAGS+=		SSL_CFLAGS="${TCPPFLAGS}" SSL_LDFLAGS="${TLDFLAGS} -lssl -lcrypto"
+CONFIGURE_ENV+=		CPPFLAGS="${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
+MAKE_FLAGS+=		SSL_CFLAGS="${TARGET_CPPFLAGS}" SSL_LDFLAGS="${TARGET_LDFLAGS} -lssl -lcrypto"
 endif
-
-ALL_TARGET:=		all
-INSTALL_TARGET:=	install
-
 ifneq (${ADK_PACKAGE_NUT_WITH_USB},)
-ALL_TARGET+=		usb
-INSTALL_TARGET+=	install-usb
+CONFIGURE_ARGS+=	--with-usb
 endif
 ifneq (${ADK_PACKAGE_NUT_WITH_SNMP},)
-ALL_TARGET+=		snmp
-INSTALL_TARGET+=	install-snmp
+CONFIGURE_ARGS+=	--with-snmp
 endif
 
 post-install:

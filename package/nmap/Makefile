@@ -27,7 +27,7 @@ ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
 
-TCPPFLAGS+=		-DNOLUA
+TARGET_CPPFLAGS+=	-DNOLUA
 ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \

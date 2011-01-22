@@ -43,11 +43,7 @@ else
 CONFIGURE_CPU_OPTS:=    --disable-sse 
 endif
 
-# gcc 4.5 produces internal compiler error with -Os
-#TCFLAGS:=$(subst Os,O2,$(TCFLAGS))
-
 CONFIG_STYLE:=		minimal
-
 CONFIGURE_ARGS:=	--prefix=/usr \
 			--target-os=linux \
 			--arch=${CPU_ARCH} \
@@ -56,7 +52,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--source-path=${WRKSRC} \
 			--cross-prefix=${TARGET_CROSS} \
 			--cc=$(TARGET_CC) \
-			--host-cc=$(HOSTCC) \
+			--host-cc=$(CC_FOR_BUILD) \
 			--disable-doc \
 			--disable-debug \
 			--disable-optimizations \

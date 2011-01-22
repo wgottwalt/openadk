@@ -17,8 +17,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BZIP2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 XAKE_FLAGS+=		PREFIX=${WRKINST}/usr
 
 post-install:

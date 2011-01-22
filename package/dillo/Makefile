@@ -24,11 +24,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DILLO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TLDFLAGS+=		-liconv
+TARGET_LDLFAGS+=	-liconv
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_DILLO)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/dillo \
-		$(IDIR_DILLO)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/dillo $(IDIR_DILLO)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

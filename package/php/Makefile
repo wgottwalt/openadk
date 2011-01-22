@@ -172,7 +172,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 
 INSTALL_STYLE:=		manual
 
-TLDFLAGS+=		-L$(STAGING_TARGET_DIR)/usr/lib/mysql
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/mysql
 CONFIGURE_ENV+=		LIBS="-ldl"
 CONFIGURE_ARGS+=	$(PKG_CONFIGURE_OPTS)
 

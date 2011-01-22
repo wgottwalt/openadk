@@ -1,0 +1,11 @@
+--- rpm-5.3.5.orig/configure	2010-10-25 18:35:18.000000000 +0200
++++ rpm-5.3.5/configure	2011-01-21 22:37:21.147399617 +0100
+@@ -17673,7 +17673,7 @@ if test "${enable_build_debug+set}" = se
+ fi
+ 
+ if test ".`$CC --version 2>&1 | grep 'GCC'`" != .; then
+- for c in -fno-delete-null-pointer-checks -D_FORTIFY_SOURCE=2 -fstack-protector -fexceptions -fnested-functions
++ for c in -fno-delete-null-pointer-checks -D_FORTIFY_SOURCE=2 -fexceptions -fnested-functions
+  do
+  my_save_cflags="$CFLAGS"
+  CFLAGS=$c

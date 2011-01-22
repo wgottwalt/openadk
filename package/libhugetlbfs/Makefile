@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libhugetlbfs
-PKG_VERSION:=		2.6
+PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cda489010e5bb89eb59994f689f8693e
+PKG_MD5SUM:=		35e68f16b704f2e339622a8ca07fdee0
 PKG_DESCR:=		easy hugepage access
 PKG_SECTION:=		libs
 PKG_URL:=		http://libhugetlbfs.ozlabs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libhugetlbfs/}
+
+PKG_CFLINE_LIBHUGETLBFS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 
 include $(TOPDIR)/mk/package.mk
 

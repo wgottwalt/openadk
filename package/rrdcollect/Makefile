@@ -26,9 +26,8 @@ CONFIGURE_ENV+=		LIBS="${RRDTOOL_LIBS} -lz" \
 CONFIGURE_ARGS+=	--enable-exec \
 			--without-rrdtool \
 			--with-librrd \
-			--without-libpcre \
-			--without-libpcap
-TCFLAGS+=		-DSOCKET_COMM
+			--without-libpcre
+TARGET_CPPFLAGS+=	-DSOCKET_COMM
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RRDCOLLECT}/usr/sbin

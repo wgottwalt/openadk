@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/
@@ -20,8 +20,10 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-Wall
+
 do-build:
-	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} \
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
 		-o ${WRKBUILD}/alix-switchd ${WRKBUILD}/alix-switchd.c
 
 do-install:

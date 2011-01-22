@@ -34,7 +34,8 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--enable-add-ons
 
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
-			BUILD_CC=${HOSTCC} \
+			GCC_HONOUR_COPTS=s \
+			BUILD_CC=${CC_FOR_BUILD} \
 			CFLAGS="$(TARGET_CFLAGS)" \
 			CC=${REAL_GNU_TARGET_NAME}-gcc \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \
@@ -100,8 +101,7 @@ eglibc-dev-install:
 			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
 			${EGLIBC_CONFOPTS} \
 	);
-	PATH='${TARGET_PATH}' \
-	$(MAKE) -C $(WRKBUILD) \
+	PATH='${TARGET_PATH}' $(MAKE) -C $(WRKBUILD) \
 		install-headers install-bootstrap-headers=yes
 	@touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs.h
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;

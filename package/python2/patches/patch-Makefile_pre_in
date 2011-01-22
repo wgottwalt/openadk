@@ -1,6 +1,15 @@
 diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
 --- Python-2.7.1.orig/Makefile.pre.in	2010-10-14 13:37:30.000000000 +0200
-+++ Python-2.7.1/Makefile.pre.in	2010-12-27 21:06:29.000000000 +0100
++++ Python-2.7.1/Makefile.pre.in	2011-01-20 22:13:22.464906869 +0100
+@@ -59,7 +59,7 @@ MAKESETUP=      $(srcdir)/Modules/makese
+ # Compiler options
+ OPT=		@OPT@
+ BASECFLAGS=	@BASECFLAGS@
+-CFLAGS=		$(BASECFLAGS) @CFLAGS@ $(OPT) $(EXTRA_CFLAGS)
++CFLAGS=		$(BASECFLAGS) @CFLAGS@ $(EXTRA_CFLAGS)
+ # Both CPPFLAGS and LDFLAGS need to contain the shell's value for setup.py to
+ # be able to build extension modules using the directories specified in the
+ # environment variables
 @@ -179,6 +179,7 @@ UNICODE_OBJS=   @UNICODE_OBJS@
  
  PYTHON=		python$(EXE)

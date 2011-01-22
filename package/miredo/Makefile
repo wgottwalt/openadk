@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MIREDO,miredo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-std=gnu99
+TARGET_CFLAGS+=		-std=gnu99
 CONFIGURE_ENV+=		ac_cv_file__proc_self_maps=yes
 CONFIGURE_ARGS+=	--without-Judy \
 			--enable-teredo-client \

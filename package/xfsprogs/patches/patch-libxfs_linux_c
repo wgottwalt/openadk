@@ -1,0 +1,35 @@
+--- xfsprogs-3.1.4.orig/libxfs/linux.c	2010-01-29 20:46:13.000000000 +0100
++++ xfsprogs-3.1.4/libxfs/linux.c	2011-01-22 20:27:29.458658270 +0100
+@@ -16,12 +16,10 @@
+  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  */
+ 
+-#define ustat __kernel_ustat
+ #include <xfs/libxfs.h>
+ #include <mntent.h>
+ #include <sys/stat.h>
+-#undef ustat
+-#include <sys/ustat.h>
++#include <sys/statvfs.h>
+ #include <sys/mount.h>
+ #include <sys/ioctl.h>
+ #include <sys/sysinfo.h>
+@@ -49,8 +47,7 @@ static int max_block_alignment;
+ int
+ platform_check_ismounted(char *name, char *block, struct stat64 *s, int verbose)
+ {
+-	/* Pad ust; pre-2.6.28 linux copies out too much in 32bit compat mode */
+-	struct ustat	ust[2];
++	struct statvfs info;
+ 	struct stat64	st;
+ 
+ 	if (!s) {
+@@ -61,7 +58,7 @@ platform_check_ismounted(char *name, cha
+ 		s = &st;
+ 	}
+ 
+-	if (ustat(s->st_rdev, ust) >= 0) {
++	if (statvfs(name, &info) >= 0) {
+ 		if (verbose)
+ 			fprintf(stderr,
+ 				_("%s: %s contains a mounted filesystem\n"),

@@ -1,5 +1,5 @@
---- maradns-1.4.03.orig/tcp/Makefile	2005-12-20 11:10:40.000000000 +0100
-+++ maradns-1.4.03/tcp/Makefile	2010-02-06 00:19:48.481829524 +0100
+--- maradns-1.4.05.orig/tcp/Makefile	2005-12-20 11:10:40.000000000 +0100
++++ maradns-1.4.05/tcp/Makefile	2011-01-21 16:41:10.254914344 +0100
 @@ -2,10 +2,11 @@ JOBJS=../libs/JsStr.o ../libs/JsStrOS.o 
  MJOBJS=../qual/qual_timestamp.o
  MHOBJS=../libs/MaraHash.o
@@ -22,3 +22,18 @@
  #FLAGS = -g $(DEBUG)
  
  all: $(EXECS)
+@@ -25,11 +26,11 @@ clean:
+ 	rm -f core $(EXECS) $(TCPOBJS) *.exe
+ 
+ getzone: getzone.c $(OBJECTS) 
+-	$(CC) $(FLAGS) -o getzone getzone.c $(OBJECTS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o getzone getzone.c $(OBJECTS)
+ 
+ fetchzone: fetchzone.c $(OBJECTS) 
+-	$(CC) $(FLAGS) -o fetchzone fetchzone.c $(OBJECTS) 
++	$(CC) $(CFLAGS) $(LDFLAGS) -o fetchzone fetchzone.c $(OBJECTS) 
+ 
+ zoneserver: zoneserver.c zoneserver_en.h $(OBJECTS)
+-	$(CC) $(FLAGS) -DVERSION=\"$(VERSION)\" -o zoneserver zoneserver.c $(OBJECTS) $(RNGOBJS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -DVERSION=\"$(VERSION)\" -o zoneserver zoneserver.c $(OBJECTS) $(RNGOBJS)
+ 

@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--enable-cxx-warnings=no
 
 LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc
@@ -29,11 +29,11 @@ LIBRARIES+=-lssp -fstack-protector
 endif
 
 ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-builtin -fno-rtti -nostdinc++ \
+TARGET_CXXFLAGS+=	-fno-builtin -fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
 CONFIGURE_ENV+=		LIBS="${LIBRARIES}"
 else
-TLDFLAGS+=		-shared
+TARGET_LDFLAGS+=	-shared
 endif
 
 post-install:

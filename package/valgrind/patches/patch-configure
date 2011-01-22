@@ -1,6 +1,46 @@
 --- valgrind-3.5.0.orig/configure	2009-08-19 15:44:07.000000000 +0200
-+++ valgrind-3.5.0/configure	2010-10-11 22:01:23.000000000 +0200
-@@ -4215,7 +4215,7 @@ echo "${ECHO_T}ok (${host_os})" >&6
++++ valgrind-3.5.0/configure	2011-01-21 23:59:05.014913852 +0100
+@@ -1819,7 +1819,6 @@ fi
+ #----------------------------------------------------------------------------
+ # Checks for various programs.
+ #----------------------------------------------------------------------------
+-CFLAGS="-Wno-long-long"
+ 
+ echo "$as_me:$LINENO: checking whether ln -s works" >&5
+ echo $ECHO_N "checking whether ln -s works... $ECHO_C" >&6
+@@ -2429,7 +2428,6 @@ echo "${ECHO_T}$ac_cv_c_compiler_gnu" >&
+ GCC=`test $ac_compiler_gnu = yes && echo yes`
+ ac_test_CFLAGS=${CFLAGS+set}
+ ac_save_CFLAGS=$CFLAGS
+-CFLAGS="-g"
+ echo "$as_me:$LINENO: checking whether $CC accepts -g" >&5
+ echo $ECHO_N "checking whether $CC accepts -g... $ECHO_C" >&6
+ if test "${ac_cv_prog_cc_g+set}" = set; then
+@@ -2481,23 +2479,6 @@ ac_cv_prog_cc_g=no
+ fi
+ rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+ fi
+-echo "$as_me:$LINENO: result: $ac_cv_prog_cc_g" >&5
+-echo "${ECHO_T}$ac_cv_prog_cc_g" >&6
+-if test "$ac_test_CFLAGS" = set; then
+-  CFLAGS=$ac_save_CFLAGS
+-elif test $ac_cv_prog_cc_g = yes; then
+-  if test "$GCC" = yes; then
+-    CFLAGS="-g -O2"
+-  else
+-    CFLAGS="-g"
+-  fi
+-else
+-  if test "$GCC" = yes; then
+-    CFLAGS="-O2"
+-  else
+-    CFLAGS=
+-  fi
+-fi
+ echo "$as_me:$LINENO: checking for $CC option to accept ANSI C" >&5
+ echo $ECHO_N "checking for $CC option to accept ANSI C... $ECHO_C" >&6
+ if test "${ac_cv_prog_cc_stdc+set}" = set; then
+@@ -4215,7 +4196,7 @@ echo "${ECHO_T}ok (${host_os})" >&6
          echo "$as_me:$LINENO: checking for the kernel version" >&5
  echo $ECHO_N "checking for the kernel version... $ECHO_C" >&6
  
@@ -9,7 +49,7 @@
  
          case "${kernel}" in
               2.6.*)
-@@ -4841,6 +4841,27 @@ if (eval "$ac_cpp conftest.$ac_ext") 2>&
+@@ -4841,6 +4822,27 @@ if (eval "$ac_cpp conftest.$ac_ext") 2>&
  fi
  rm -f conftest*
  
@@ -37,7 +77,7 @@
  
  cat >conftest.$ac_ext <<_ACEOF
  /* confdefs.h.  */
-@@ -5005,15 +5026,15 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -5005,15 +5007,15 @@ cat >>conftest.$ac_ext <<_ACEOF
  
  #include <features.h>
  #ifdef __GNU_LIBRARY__
@@ -57,7 +97,7 @@
  fi
  rm -f conftest*
  
-@@ -5174,6 +5195,17 @@ _ACEOF
+@@ -5174,6 +5176,17 @@ _ACEOF
  	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
  	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
  	;;
@@ -75,7 +115,7 @@
       aix5)
  	echo "$as_me:$LINENO: result: AIX 5.1 or 5.2 or 5.3" >&5
  echo "${ECHO_T}AIX 5.1 or 5.2 or 5.3" >&6
-@@ -5198,7 +5230,7 @@ _ACEOF
+@@ -5198,7 +5211,7 @@ _ACEOF
       *)
  	echo "$as_me:$LINENO: result: unsupported version" >&5
  echo "${ECHO_T}unsupported version" >&6
