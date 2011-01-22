@@ -18,7 +18,6 @@ $(eval $(call PKG_template,PICOCOM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
-
 ALL_TARGET:=		picocom
 
 do-install:

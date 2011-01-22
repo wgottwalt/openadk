@@ -33,9 +33,9 @@ $(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RE
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
-MAKE_FLAGS+=		CPPFLAGS='${TCPPFLAGS}' \
-			LDFLAGS='${TLDFLAGS}' \
-			OPT_FLAGS='${TCFLAGS}' \
+MAKE_FLAGS+=		CPPFLAGS='${TARGET_CPPFLAGS}' \
+			LDFLAGS='${TARGET_LDFLAGS}' \
+			OPT_FLAGS='${TARGET_CFLAGS}' \
 			KERNEL=${LINUX_DIR}
 
 do-configure:

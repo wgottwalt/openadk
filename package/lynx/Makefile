@@ -21,10 +21,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LYNX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/include/openssl
-TCPPFLAGS+=		-DUSE_OPENSSL_INCL -DUSE_X509_SUPPORT
-TLDFLAGS+=		-lz
-
+TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/include/openssl
+TARGET_CPPFLAGS+=	-DUSE_OPENSSL_INCL -DUSE_X509_SUPPORT
 CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_TN3270=tn3270 \
 			ac_cv_path_RLOGIN=rlogin \
@@ -78,7 +76,6 @@ CONFIGURE_ARGS+=	\
 			--disable-widec \
 			--disable-locale-charset \
 			--with-build-cppflags="-I/usr/include/ncurses"
-
 MAKE_FILE:=		makefile
 
 post-install:

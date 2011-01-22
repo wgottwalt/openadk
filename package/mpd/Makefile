@@ -59,7 +59,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-std=gnu99
+TARGET_CFLAGS+=		-std=gnu99
 XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-jack \

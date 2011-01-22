@@ -41,7 +41,7 @@ $(eval $(call PKG_mod_template,OLSRD_MOD_TAS,tas))
 
 CONFIG_STYLE:=          manual
 
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 ALL_TARGET+=		libs
 INSTALL_TARGET+=	install_libs
 MAKE_ENV+=		OS="linux" NODEBUG=1 STRIP="true" OFLAGS="${TARGET_CFLAGS}"

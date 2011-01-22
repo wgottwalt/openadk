@@ -30,7 +30,7 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 			ac_cv_func_strlcat=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--disable-dbus
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 
 LIBRARIES:=-nodefaultlibs -luClibc++
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
@@ -38,11 +38,11 @@ LIBRARIES+=-lssp -lssp_nonshared
 endif
 
 ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
-TCXXFLAGS+=		-fno-rtti -nostdinc++ \
+TARGET_CXXFLAGS+=	-fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
-TLDFLAGS+=		$(LIBRARIES)
+TARGET_LDFLAGS+=	$(LIBRARIES)
 else
-TLDFLAGS+=		-shared -pthread
+TARGET_LDFLAGS+=	-shared -pthread
 endif
 
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)

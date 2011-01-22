@@ -18,7 +18,7 @@ $(eval $(call PKG_template,LIBPRI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 
 CONFIG_STYLE:=		manual
 
-MAKE_FLAGS+=		CC='${TARGET_CC}' LDCONFIG=''
+MAKE_FLAGS+=		CC='${TARGET_CC}' LDCONFIG='' ARCH=$(ARCH)
 FAKE_FLAGS+=		INSTALL_BASE=/usr
 
 post-install:

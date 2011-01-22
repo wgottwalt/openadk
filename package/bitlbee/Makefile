@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
 			--prefix=/usr/ \
 			--bindir=/usr/sbin/ \

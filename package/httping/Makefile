@@ -19,9 +19,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HTTPING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-D_GNU_SOURCE
-
 CONFIG_STYLE:=		manual
+TARGET_CFLAGS+=		-D_GNU_SOURCE
 
 post-install:
 	${INSTALL_DIR} ${IDIR_HTTPING}/usr/bin

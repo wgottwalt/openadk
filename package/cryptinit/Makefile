@@ -24,8 +24,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	${TARGET_CC} ${TCPPFLAGS} ${TCFLAGS} -c -o ${WRKBUILD}/cryptinit.o \
-		${WRKBUILD}/cryptinit.c
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} -c \
+		-o ${WRKBUILD}/cryptinit.o ${WRKBUILD}/cryptinit.c
 	( cd ${WRKBUILD}; \
 	${TARGET_CC} -static -o cryptinit cryptinit.o \
 		 ${STAGING_TARGET_DIR}/usr/lib/libcryptsetup.a \

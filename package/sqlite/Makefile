@@ -20,14 +20,14 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		config_BUILD_CC="${HOSTCC}" \
-			config_BUILD_CFLAGS="${HOSTCFLAGS}" \
+CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
+			config_BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
 			config_TARGET_CC="${TARGET_CC}" \
 			config_TARGET_CFLAGS="${TARGET_CFLAGS}" \
 			config_TARGET_READLINE_INC="-I${STAGING_TARGET_DIR}/usr/include" \
 			config_TARGET_READLINE_LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lreadline -lncurses"
 MAKE_FLAGS+=		LIBPTHREAD=-lm
-TCFLAGS+=		-DSQLITE_SECURE_DELETE=1
+TARGET_CPPFLAGS+=	-DSQLITE_SECURE_DELETE=1
 CONFIGURE_ARGS+=	--disable-tcl \
 			--without-tcl \
 			--disable-amalgamation

@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-samples
 
 post-build:

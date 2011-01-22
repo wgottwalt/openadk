@@ -1,0 +1,25 @@
+--- nfs-utils-1.2.3.orig/utils/gssd/Makefile.in	2010-09-28 14:32:33.000000000 +0200
++++ nfs-utils-1.2.3/utils/gssd/Makefile.in	2011-01-21 17:35:20.288658843 +0100
+@@ -351,7 +351,7 @@ gssd_LDADD = ../../support/nfs/libnfs.a 
+ 		$(RPCSECGSS_LIBS) $(GSSGLUE_LIBS) $(KRBLIBS)
+ 
+ gssd_LDFLAGS = $(KRBLDFLAGS)
+-gssd_CFLAGS = $(AM_CFLAGS) $(CFLAGS) \
++gssd_CFLAGS = $(AM_CFLAGS) \
+ 	      $(RPCSECGSS_CFLAGS) $(GSSGLUE_CFLAGS) $(KRBCFLAGS)
+ 
+ svcgssd_SOURCES = \
+@@ -369,11 +369,11 @@ svcgssd_LDADD = \
+ 	$(KRBLIBS)
+ 
+ svcgssd_LDFLAGS = $(KRBLDFLAGS)
+-svcgssd_CFLAGS = $(AM_CFLAGS) $(CFLAGS) \
++svcgssd_CFLAGS = $(AM_CFLAGS) \
+ 		 $(RPCSECGSS_CFLAGS) $(GSSGLUE_CFLAGS) $(KRBCFLAGS)
+ 
+ gss_clnt_send_err_SOURCES = gss_clnt_send_err.c
+-gss_clnt_send_err_CFLAGS = $(AM_CFLAGS) $(CFLAGS) \
++gss_clnt_send_err_CFLAGS = $(AM_CFLAGS) \
+ 		 $(RPCSECGSS_CFLAGS) $(GSSGLUE_CFLAGS) $(KRBCFLAGS)
+ 
+ MAINTAINERCLEANFILES = Makefile.in

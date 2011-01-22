@@ -11,6 +11,8 @@ PKG_DESCR:=		Timezone data (/usr/share/zoneinfo)
 PKG_SECTION:=		utils
 PKG_URL:=		ftp://elsie.nci.nih.gov/pub/
 PKG_SITES:=		ftp://elsie.nci.nih.gov/pub/
+PKG_NOPARALLEL:=	1
+
 # Note that tzcode does NOT have the same version as tzdata does :[
 DISTFILES:=             ${PKG_NAME}${PKG_VERSION}.tar.gz tzcode2010n.tar.gz
 # both archives do not extract into subdirectories

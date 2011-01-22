@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCPPFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/libxml2
+TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/libxml2
 CONFIGURE_ARGS+=	--disable-yp \
 			--with-curl="yes" \
 			--with-curl-config="${STAGING_TARGET_DIR}/usr/bin/curl-config" \

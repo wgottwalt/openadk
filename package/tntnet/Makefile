@@ -23,11 +23,9 @@ CONFIGURE_ARGS+=	--without-epoll \
 			--without-cgi \
 			--without-sendfile \
 			--without-ssl
-
-CONFIGURE_ENV+= 	CXXFLAGS='${TCXXFLAGS}' \
+CONFIGURE_ENV+= 	CXXFLAGS='${TARGET_CXXFLAGS}' \
 			ac_cv_path_cxxtools_config=${STAGING_TARGET_DIR}/usr/bin
-
-TLDFLAGS+=		-ldl
+TARGET_LDFLAGS+=	-ldl
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TNTNET}/www

@@ -19,15 +19,15 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CXXTOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
-TCXXFLAGS+=		-fno-builtin -nostdinc++ \
+TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++ -Wl,-E
-TLDFLAGS+=		-luClibc++ -liconv -lm -nodefaultlibs -shared
+TARGET_LDFLAGS+=	-luClibc++ -liconv -lm -nodefaultlibs -shared
 else
-TLDFLAGS+=		-liconv -shared
+TARGET_LDFLAGS+=	-liconv -shared
 endif
 
-TCFLAGS+=		-fPIC
-TCXXFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
+TARGET_CXXFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
 
 post-install:

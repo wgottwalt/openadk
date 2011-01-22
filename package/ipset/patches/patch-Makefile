@@ -1,0 +1,36 @@
+--- ipset-4.1.orig/Makefile	2009-11-11 20:22:42.000000000 +0100
++++ ipset-4.1/Makefile	2011-01-21 13:30:47.148658311 +0100
+@@ -64,9 +64,13 @@ ifndef NO_EXTRA_WARN_FLAGS
+ endif
+ 
+ ABI_FLAGS:=
+-CFLAGS:=$(ABI_FLAGS) $(COPT_FLAGS) $(WARN_FLAGS) -Ikernel/include -I. # -g -DIPSET_DEBUG
++CPPFLAGS?=
++CPPFLAGS+=-Ikernel/include -I.
++CFLAGS?=$(ABI_FLAGS) $(COPT_FLAGS) $(WARN_FLAGS)
+ SH_CFLAGS:=$(CFLAGS) -fPIC
+-LDFLAGS:=$(ABI_FLAGS)
++LDFLAGS?=$(ABI_FLAGS)
++LIBS?=
++LIBS+=-ldl
+ SETTYPES:=ipmap portmap macipmap
+ SETTYPES+=iptree iptreemap
+ SETTYPES+=iphash nethash ipporthash ipportiphash ipportnethash
+@@ -114,14 +118,14 @@ release: clean
+ 
+ #The ipset(8) self
+ ipset.o: ipset.c ipset.h
+-	$(CC) $(CFLAGS) -DIPSET_VERSION=\"$(IPSET_VERSION)\" -DIPSET_LIB_DIR=\"$(IPSET_LIB_DIR)\" -c -o $@ $<
++	$(CC) $(CPPFLAGS) $(CFLAGS) -DIPSET_VERSION=\"$(IPSET_VERSION)\" -DIPSET_LIB_DIR=\"$(IPSET_LIB_DIR)\" -c -o $@ $<
+ 
+ ipset: ipset.o
+-	$(CC) $(CFLAGS) $(LDFLAGS) -rdynamic -o $@ $^ -ldl
++	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+ 
+ #Pooltypes
+ ipset_%.o: ipset_%.c ipset.h
+-	$(CC) $(SH_CFLAGS) -o $@ -c $<
++	$(CC) $(CPPFLAGS) $(SH_CFLAGS) -o $@ -c $<
+ 
+ libipset_%.so: ipset_%.o
+ 	$(CC) -shared $(LDFLAGS) -o $@ $<

@@ -22,8 +22,11 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
+TARGET_CPPFLAGS+=	-DVERSION=\"${PKG_VERSION}\"
+TARGET_CFLAGS+=		-Wall
+
 do-build:
-	${TARGET_CC} -Wall ${TCFLAGS} -DVERSION=\"${PKG_VERSION}\" \
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
 		-o ${WRKBUILD}/setpwc ${WRKBUILD}/setpwc.c
 
 do-install:

@@ -22,14 +22,14 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TLDFLAGS+=		-pthread
+TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-editor \
 			--disable-jar-files \
 			--sysconfdir=/etc/privoxy
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes \
 			ac_cv_lib_nsl_gethostbyname=no
-MAKE_FLAGS+=		SPECIAL_CFLAGS='${TLDFLAGS}'
+MAKE_FLAGS+=		SPECIAL_CFLAGS='${TARGET_LDFLAGS}'
 MAKE_FILE:=		GNUmakefile
 
 post-install:

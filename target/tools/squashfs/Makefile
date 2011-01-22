@@ -17,7 +17,7 @@ include ../rules.mk
 all: ${STAGING_HOST_DIR}/bin/mksquashfs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${HOSTCC}'
+	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${CC_FOR_BUILD}'
 	touch $@
 
 ${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled

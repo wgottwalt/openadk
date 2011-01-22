@@ -1,6 +1,20 @@
 --- rarpd-1.1.orig/Makefile.in	1999-10-20 22:57:13.000000000 +0200
-+++ rarpd-1.1/Makefile.in	2010-07-16 14:34:08.453125000 +0200
-@@ -13,5 +13,5 @@ rarpd: rarpd.o @LIBOBJS@
++++ rarpd-1.1/Makefile.in	2011-01-20 15:06:00.144913893 +0100
+@@ -1,17 +1,18 @@
+ INSTALL		=	@srcdir@/install.sh
+ CC		=	@CC@
+ CFLAGS		=	@CFLAGS@ @DEFS@
++CPPFLAGS	=	@CPPFLAGS@
+ ENSUREDIR	=	@srcdir@/ensure-dir.sh
+ SBINDIR		=	@sbindir@
+ 
+ all: rarpd
+ 
+ .c.o:
+-	$(CC) $(CFLAGS) -c $< -o $@
++	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+ 
+ rarpd: rarpd.o @LIBOBJS@
  	$(CC) @LDFLAGS@ -o $@ rarpd.o @LIBOBJS@ @LIBS@
  
  install: rarpd

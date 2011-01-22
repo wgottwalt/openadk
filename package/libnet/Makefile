@@ -31,7 +31,6 @@ $(eval $(call PKG_template,LIBNET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 
 CONFIGURE_ENV+=		ac_cv_libnet_endianess=${ENDIAN} \
 			ac_cv_lbl_unaligned_fail=no
-#CONFIGURE_ARGS+=	--with-pf_packet=yes
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBNET}/usr/lib

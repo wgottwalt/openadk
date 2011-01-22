@@ -31,7 +31,7 @@ CONFIGURE_ARGS:=	--with-threads \
 
 post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		OPT="$(HOSTCFLAGS)" \
+		OPT="$(CFLAGS_FOR_BUILD)" \
 		./configure --without-cxx-main --without-threads \
 		--prefix=$(STAGING_HOST_DIR) \
 	);

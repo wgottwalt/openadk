@@ -26,7 +26,7 @@ CONFIGURE_ARGS+=	--with-osiris-user=root \
 			--with-readline=no
 XAKE_FLAGS+=		ar=${TARGET_CROSS}ar \
 			INTERACTIVE=0
-TCFLAGS+=		-DOPENSSL_NO_RIPEMD
+TARGET_CFLAGS+=		-DOPENSSL_NO_RIPEMD
 
 post-configure:
 	(cd ${WRKDIST}/src/osirisd/modules && ./genmods.sh);

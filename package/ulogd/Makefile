@@ -34,7 +34,7 @@ $(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
 CONFIGURE_ARGS+=	--with-mysql=${STAGING_TARGET_DIR}/usr

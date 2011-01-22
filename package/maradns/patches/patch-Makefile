@@ -1,12 +1,12 @@
---- maradns-1.4.03.orig/Makefile	2006-01-02 17:59:33.000000000 +0100
-+++ maradns-1.4.03/Makefile	2010-02-06 00:19:48.471836901 +0100
+--- maradns-1.4.05.orig/Makefile	2006-01-02 17:59:33.000000000 +0100
++++ maradns-1.4.05/Makefile	2011-01-21 16:48:06.124913980 +0100
 @@ -1,15 +1,82 @@
 -# This is a wrapper that runs "./configure ; make"
 -all:
 -	./compile.sh
-+VERSION=1.4.03
-+COMPILED="Linux system at Sat Feb 6 00:19:48 CET 2010"
-+COMPILED_DEBUG="Linux system at Sat Feb 6 00:19:48 CET 2010 (Debug)"
++VERSION=1.4.05
++COMPILED="Linux system at Fri Jan 21 16:48:06 CET 2011"
++COMPILED_DEBUG="Linux system at Fri Jan 21 16:48:06 CET 2011 (Debug)"
 +# Server objects
 +SOBJECTS=server/MaraBigHash.o
 +# js_string library (buffer overflow resistant string library) objects
@@ -34,23 +34,23 @@
 +# LDFLAGS=-L/usr/ucblib -lucb -lxnet
 +# end the Solaris section
 +# Non-Solaris version of "M"
-+V="VERSION=$(VERSION)"
++VER="VERSION=$(VERSION)"
 +Q="DEFINES=-DSELECT_PROBLEM"
 +
 +# Debug
 +
-+FLAGS = -O2 -Wall -DSELECT_PROBLEM
-+M="CC=$(CC) $(FLAGS)"
-+D="CC=$(CC) $(FLAGS) -DDEBUG -DTHREADS"
++CFLAGS ?= -O2 -Wall -DSELECT_PROBLEM
++M="CC=$(CC)"
++D="CC=$(CC) -DDEBUG -DTHREADS"
 +#FLAGS = -g
 +
 +all: 
 +	cd libs ; make $(M) ; cd ../dns ; make $(M) ; \
 +	cd ../rng ; make $(M) ; cd ../parse ; make $(M) ; \
 +	cd ../qual ; make $(M) ; cd ../server ; \
-+	make $(M) $(V) COMPILED=\"$(COMPILED)\" ; \
++	make $(M) $(VER) COMPILED=\"$(COMPILED)\" ; \
 +	cd ../tools ; make $(M) ; \
-+	cd ../tcp ; make $(M) $(V) ; cat ../00README.FIRST
++	cd ../tcp ; make $(M) $(VER)
 +
 +debug: 
 +	cd libs ; make $(D) DEBUG="-DDEBUG -DTHREADS" ; \

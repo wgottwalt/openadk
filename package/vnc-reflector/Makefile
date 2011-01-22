@@ -23,10 +23,7 @@ $(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEAS
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-TCPPFLAGS+=		-I.
-TLDFLAGS+=		-lz -ljpeg
-MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TCFLAGS} ${TCPPFLAGS} ${TLDFLAGS}"
-ALL_TARGET:=		default
+TARGET_LDFLAGS+=	-lz -ljpeg
 
 do-install:
 	${INSTALL_DIR} ${IDIR_VNC_REFLECTOR}/usr/sbin

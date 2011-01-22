@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2aa91c43d01d2dfc9fbc1116e3063ae1
 PKG_DESCR:=		display drivers (serial, parallel, USB)
 PKG_SECTION:=		serial
-PKG_BUILDDEP:=		libgd libusb
+PKG_DEPENDS:=		libusb-compat
+PKG_BUILDDEP:=		libgd libusb-compat
 PKG_URL:=		http://serdisplib.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=serdisplib/}
 
@@ -21,10 +22,10 @@ INSTALL_STYLE:=		manual
 
 CONFIGURE_ENV+=		PACKAGE_VERSION_MAJOR=1 PACKAGE_VERSION_MINOR=97
 CONFIGURE_ARGS+=	--enable-libusb
-TCFLAGS+=		${TCPPFLAGS}
+TARGET_CFLAGS+=		${TARGET_CPPFLAGS}
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SERDISPLIB}/usr/lib
-	${CP} ${WRKBUILD}/lib/libserdisp.so.* ${IDIR_SERDISPLIB}/usr/lib
+	${CP} ${WRKBUILD}/lib/libserdisp.so* ${IDIR_SERDISPLIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

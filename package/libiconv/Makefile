@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBICONV,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TCFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC
 FAKE_FLAGS+=		libdir="${WRKINST}/usr/lib" \
 			includedir="${WRKINST}/usr/include" \
 INSTALL_TARGET=		install-lib

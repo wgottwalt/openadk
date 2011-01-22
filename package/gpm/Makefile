@@ -16,7 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GPM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-I${WRKSRC}/src/headers
+TARGET_CPPFLAGS+=	-I${WRKSRC}/src/headers
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GPM}/usr/sbin ${IDIR_GPM}/usr/lib

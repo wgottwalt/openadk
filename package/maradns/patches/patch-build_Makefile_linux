@@ -1,5 +1,5 @@
---- maradns-1.4.03.orig/build/Makefile.linux	2006-11-24 12:44:29.000000000 +0100
-+++ maradns-1.4.03/build/Makefile.linux	2010-02-06 00:23:58.393084387 +0100
+--- maradns-1.4.05.orig/build/Makefile.linux	2006-11-24 12:44:29.000000000 +0100
++++ maradns-1.4.05/build/Makefile.linux	2011-01-21 16:36:23.968658279 +0100
 @@ -23,23 +23,23 @@ EXECS=server/maradns
  # LDFLAGS=-L/usr/ucblib -lucb -lxnet
  # end the Solaris section
@@ -14,8 +14,8 @@
 -M="CC=$(CC) $(FLAGS)"
 -D="CC=$(CC) $(FLAGS) -DDEBUG -DTHREADS"
 +CFLAGS ?= -O2 -Wall -DSELECT_PROBLEM
-+M="CC=$(CC) $(CFLAGS)"
-+D="CC=$(CC) $(CFLAGS) -DDEBUG -DTHREADS"
++M="CC=$(CC)"
++D="CC=$(CC) -DDEBUG -DTHREADS"
  #FLAGS = -g
  
  all: 

@@ -1,10 +1,20 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- openswan-2.6.18.orig/lib/libdns/Makefile	2008-10-06 18:52:49.000000000 +0200
-+++ openswan-2.6.18/lib/libdns/Makefile	2008-10-14 13:08:03.000000000 +0200
-@@ -102,5 +102,5 @@ code.h:	gen
+--- openswan-2.6.28.orig/lib/libdns/Makefile	2010-07-29 20:45:59.000000000 +0200
++++ openswan-2.6.28/lib/libdns/Makefile	2011-01-21 19:15:22.484901748 +0100
+@@ -53,7 +53,7 @@ SRCS +=         time.c key.c lib.c
+ programs all: ${LIB}.a
+ 
+ version.o: version.c
+-	${LIBTOOL} --mode=compile ${CC} ${ALL_CFLAGS} \
++	${CC} ${CFLAGS} ${ALL_CFLAGS} \
+ 		-DVERSION=\"${VERSION}\" \
+ 		-DLIBINTERFACE=${LIBINTERFACE} \
+ 		-DLIBREVISION=${LIBREVISION} \
+@@ -100,7 +100,6 @@ code.h:	gen
+ 
+ # this program is to be built on the host, and should not be
  # cross-compiled!
- HOSTCC?=cc
+-HOSTCC?=cc
  gen: gen.c
 -	${HOSTCC} ${HOSTCINCLUDES} ${LDFLAGS} -o $@ ${srcdir}gen.c ${LIBS}
-+	${HOSTCC} ${HOSTCINCLUDES} -o $@ ${srcdir}gen.c ${LIBS}
++	${CC_FOR_BUILD} ${HOSTCINCLUDES} -o $@ ${srcdir}gen.c ${LIBS}
  

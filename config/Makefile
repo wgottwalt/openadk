@@ -6,31 +6,31 @@ include ${TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-HOSTCFLAGS+=-DKBUILD_NO_NLS
+CFLAGS_FOR_BUILD+=-DKBUILD_NO_NLS
 
 all: ncurses conf mconf
 
 LIBS=		-lncurses
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
-HOSTNCURSES+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
+CFLAGS_FOR_BUILD+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/include/ncurses/curses.h, $(wildcard /usr/include/ncurses/curses.h))
-HOSTNCURSES+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+CFLAGS_FOR_BUILD+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/local/include/ncurses/ncurses.h, $(wildcard /usr/local/include/ncurses/ncurses.h))
-HOSTCFLAGS+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses.h>"
+CFLAGS_FOR_BUILD+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/local/include/ncurses/curses.h, $(wildcard /usr/local/include/ncurses/curses.h))
-HOSTCFLAGS+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+CFLAGS_FOR_BUILD+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/pkg/include/ncurses.h, $(wildcard /usr/pkg/include/ncurses.h))
-HOSTCFLAGS+=	-I/usr/pkg/include -DCURSES_LOC="<ncurses.h>"
+CFLAGS_FOR_BUILD+=	-I/usr/pkg/include -DCURSES_LOC="<ncurses.h>"
 LIBS+=		-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib
 else
 ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
-HOSTNCURSES+=	-DCURSES_LOC="<ncurses.h>"
+CFLAGS_FOR_BUILD+=	-DCURSES_LOC="<ncurses.h>"
 else
-HOSTNCURSES+=	-DCURSES_LOC="<curses.h>"
+CFLAGS_FOR_BUILD+=	-DCURSES_LOC="<curses.h>"
 LIBS=		-lcurses
 endif
 endif
@@ -39,8 +39,8 @@ endif
 endif
 endif
 
-HOSTGTKLIBS = `pkg-config --libs gtk+-2.0 gmodule-2.0 libglade-2.0`
-HOSTGTKCFLAGS = `pkg-config --cflags gtk+-2.0 gmodule-2.0 libglade-2.0`
+GTKLIBS = `pkg-config --libs gtk+-2.0 gmodule-2.0 libglade-2.0`
+GTKCFLAGS = `pkg-config --cflags gtk+-2.0 gmodule-2.0 libglade-2.0`
 
 CONF_SRC  =conf.c
 MCONF_SRC =mconf.c $(wildcard lxdialog/*.c)
@@ -53,25 +53,25 @@ GCONF_OBJS=$(patsubst %.c,%.o, $(GCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
 
 gconf: $(GCONF_OBJS) $(SHARED_OBJS)
-	@$(HOSTCC) $(HOSTCFLAGS) $(NATIVE_LDFLAGS) $^ -o $@ $(HOSTGTKLIBS)
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@ $(GTKLIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(HOSTCC) $(HOSTCFLAGS) $(HOSTNCURSES) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(HOSTNCURSES) -I. -c $< -o $@
 
 $(GCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(HOSTCC) $(HOSTCFLAGS) $(HOSTGTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(GTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
-	@$(HOSTCC) $(HOSTCFLAGS) -I. -c glob.c -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c glob.c -o $@
 
 lkc_defs.h: lkc_proto.h
 	@sed < $< > $@ 's/P(\([^,]*\),.*/#define \1 (\*\1_p)/'
@@ -94,15 +94,15 @@ lex.%.c: %.l
 	flex -P$(notdir $*) -o$@ $<
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 else
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 lex.zconf.c: lex.zconf.c_shipped
 	@$(CP) lex.zconf.c_shipped lex.zconf.c
@@ -111,7 +111,7 @@ zconf.hash.c: zconf.hash.c_shipped
 	@$(CP) zconf.hash.c_shipped zconf.hash.c
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	@$(HOSTCC) $(HOSTCFLAGS) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 zconf.tab.c: zconf.tab.c_shipped
 	@$(CP) zconf.tab.c_shipped zconf.tab.c
@@ -124,7 +124,7 @@ endif
 
 ncurses:
 	@echo "int main(void) { return -1; }" > lxtemp.c
-	@if $(HOSTCC) $(HOSTCFLAGS) lxtemp.c $(LIBS) ; then \
+	@if $(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) lxtemp.c $(LIBS) ; then \
 		rm -f lxtemp.c a.out; \
 	else \
 		rm -f lxtemp.c; \

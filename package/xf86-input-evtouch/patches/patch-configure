@@ -1,0 +1,11 @@
+--- xf86-input-evtouch-0.8.8.orig/configure	2008-11-09 22:01:05.000000000 +0100
++++ xf86-input-evtouch-0.8.8/configure	2011-01-22 21:03:10.818658680 +0100
+@@ -12255,7 +12255,7 @@ fi
+ 
+ sdkdir=$(pkg-config --variable=sdkdir xorg-server)
+ 
+-EVTOUCH_CFLAGS="$CFLAGS $XORG_CFLAGS "
++EVTOUCH_CFLAGS="$XORG_CFLAGS "
+ 
+ 
+ # Checks for header files.

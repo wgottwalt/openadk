@@ -21,9 +21,11 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-Wall
+
 do-build:
-	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/nand \
-		${WRKBUILD}/nand.c
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
+		-o ${WRKBUILD}/nand ${WRKBUILD}/nand.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_NAND}/sbin

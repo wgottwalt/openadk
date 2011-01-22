@@ -16,8 +16,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GCC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TCFLAGS:=		''
-TCPPFLAGS:=		''
+TARGET_CFLAGS:=		''
+TARGET_CPPFLAGS:=	''
 
 ifeq ($(ADK_LINUX_64),y)
 CONFIGURE_ARGS+=       --with-abi=64
@@ -38,6 +38,9 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--disable-multilib \
 			--disable-libstdcxx-pch \
 			--enable-cxx-flags="${TARGET_LDFLAGS}"
+
+# disable honour cflags stuff
+XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin

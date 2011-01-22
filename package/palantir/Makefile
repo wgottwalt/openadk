@@ -24,15 +24,17 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
+TARGET_CFLAGS+=		-Wall
+TARGET_CPPFLAGS+=	-D_REENTRANT
+
 do-build:
 	mkdir -p ${WRKINST}/usr
 	${MAKE} -C ${WRKBUILD}/server/libgsm \
 		${TARGET_CONFIGURE_OPTS} \
-		CCINC="${TCPPFLAGS}" \
+		CCINC="${TARGET_CPPFLAGS}" \
 		lib/libgsm.a
 	${MAKE} -C ${WRKBUILD}/server \
 		${TARGET_CONFIGURE_OPTS} \
-		CFLAGS="-Wall -D_REENTRANT ${TCFLAGS} ${TCPPFLAGS} ${TLDFLAGS}" \
 		palantir
 
 do-install:

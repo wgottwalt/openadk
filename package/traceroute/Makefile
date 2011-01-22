@@ -21,7 +21,7 @@ CONFIG_STYLE:=          manual
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			AR="${TARGET_CROSS}ar" \
 			RANLIB="${TARGET_CROSS}ranlib" \
-			CFLAGS="${TCFLAGS}" \
+			CFLAGS="${TARGET_CFLAGS}" \
 			LDFLAGS="${TARGET_LDFLAGS} -L${WRKSRC}/libsupp"
 
 post-install:

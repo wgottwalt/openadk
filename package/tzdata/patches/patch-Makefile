@@ -1,0 +1,64 @@
+--- w-tzdata-2010o-1.orig/Makefile	2010-10-12 18:36:50.000000000 +0200
++++ w-tzdata-2010o-1/Makefile	2011-01-22 22:10:00.358658180 +0100
+@@ -212,13 +212,13 @@ GCC_DEBUG_FLAGS = -Dlint -g -O -fno-comm
+ # before the first Monday in January when a "%V" format is used and January 1
+ # falls on a Friday, Saturday, or Sunday.
+ 
+-CFLAGS=
++CFLAGS?=
+ 
+ # If you want zic's -s option used when installing, uncomment the next line
+ # ZFLAGS=	-s
+ 
+ zic=		./zic
+-ZIC=		$(zic) $(ZFLAGS)
++ZIC=		./zic_for_build $(ZFLAGS)
+ 
+ # The name of a Posix-compliant `awk' on your system.
+ AWK=		nawk
+@@ -279,7 +279,7 @@ ENCHILADA=	$(DOCS) $(SOURCES) $(DATA) $(
+ 
+ SHELL=		/bin/sh
+ 
+-all:		tzselect zic zdump $(LIBOBJS)
++all:		zic_for_build tzselect zic zdump $(LIBOBJS)
+ 
+ ALL:		all date
+ 
+@@ -309,6 +309,14 @@ INSTALL:	ALL install date.1
+ 		-rm -f $(MANDIR)/man1/date.1
+ 		cp date.1 $(MANDIR)/man1/.
+ 
++zic_for_build:
++		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) zic.c -o zic_build.o
++		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) localtime.c -o localtime_build.o
++		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) asctime.c -o asctime_build.o
++		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) scheck.c -o scheck_build.o
++		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) ialloc.c -o ialloc_build.o
++		$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@ zic_build.o localtime_build.o asctime_build.o scheck_build.o ialloc_build.o 
++
+ zdump:		$(TZDOBJS)
+ 		$(CC) $(CFLAGS) $(LFLAGS) $(TZDOBJS) $(LDLIBS) -o $@
+ 
+@@ -319,10 +327,10 @@ yearistype:	yearistype.sh
+ 		cp yearistype.sh yearistype
+ 		chmod +x yearistype
+ 
+-posix_only:	zic $(TDATA)
++posix_only:	zic_for_build $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR) -L /dev/null $(TDATA)
+ 
+-right_only:	zic leapseconds $(TDATA)
++right_only:	zic_for_build leapseconds $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR) -L leapseconds $(TDATA)
+ 
+ # In earlier versions of this makefile, the other two directories were
+@@ -334,7 +342,7 @@ right_only:	zic leapseconds $(TDATA)
+ # Therefore, the other two directories are now siblings of $(TZDIR).
+ # You must replace all of $(TZDIR) to switch from not using leap seconds
+ # to using them, or vice versa.
+-other_two:	zic leapseconds $(TDATA)
++other_two:	zic_for_build leapseconds $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR)-posix -L /dev/null $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) \
+ 			-d $(TZDIR)-leaps -L leapseconds $(TDATA)

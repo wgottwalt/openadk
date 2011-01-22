@@ -65,7 +65,7 @@ $(STAGING_HOST_DIR):
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
-		    CC='$(HOSTCC)' CFLAGS='$(HOSTCFLAGS)' \
+		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
 		    $(MAKE_TRACE); \
 	fi
 
@@ -76,7 +76,7 @@ $(STAGING_HOST_DIR):
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-configure,%,$@) configure \
-		    CC='$(HOSTCC)' CFLAGS='$(HOSTCFLAGS)' \
+		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
 		    $(MAKE_TRACE); \
 	fi
 
@@ -87,7 +87,7 @@ $(STAGING_HOST_DIR):
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
-		    CC='$(HOSTCC)' CFLAGS='$(HOSTCFLAGS)' \
+		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
 		    $(MAKE_TRACE); \
 	fi
 
@@ -98,7 +98,7 @@ $(STAGING_HOST_DIR):
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
-		    CC='$(HOSTCC)' CFLAGS='$(HOSTCFLAGS)' \
+		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
 		    $(MAKE_TRACE); \
 	fi
 

@@ -22,7 +22,7 @@ $(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${PKG
 CONFIGURE_ENV+=		ac_cv_c99_lrintf=yes
 CONFIGURE_ARGS+=	--without-mpeg4ip \
 			--without-xmms
-TLDFLAGS+=		-lm
+TARGET_LDFLAGS+=	-lm
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBFAAD2}/usr/lib
