@@ -29,7 +29,7 @@ $(eval $(call PKG_template,AUFS2_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},
 $(eval $(call PKG_template,LIBAU,libau,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBAU},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		Install=install HOSTCPPFLAGS="-I${LINUX_HEADER_DIR}/include"
+XAKE_FLAGS+=		Install=install CPPFLAGS_FOR_BUILD="-I${LINUX_HEADER_DIR}/include"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_AUFS2_UTIL)/sbin

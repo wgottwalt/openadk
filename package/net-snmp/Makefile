@@ -39,7 +39,7 @@ else
 SNMP_TRANSPORTS_EXCLUDED:=	TCPIPv6 UDPIPv6
 endif
 
-TLDFLAGS+=		-pthread
+TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--with-defaults \
 			--with-persistent-directory=/etc/snmp \
 			--with-default-snmp-version=3 \

@@ -7,32 +7,6 @@ ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
 endif
 
-TCFLAGS:=		${TARGET_CFLAGS}
-TCXXFLAGS:=		${TARGET_CFLAGS}
-TCPPFLAGS:=		${TARGET_CPPFLAGS}
-TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib
-ifeq ($(ADK_STATIC),y)
-TCFLAGS:=		${TARGET_CFLAGS} -static
-TCXXFLAGS:=		${TARGET_CFLAGS} -static
-TCPPFLAGS:=		${TARGET_CPPFLAGS} -static
-TLDFLAGS:=		${TARGET_LDFLAGS} -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib \
-			-static
-endif
-ifeq ($(ADK_NATIVE),y)
-TCFLAGS:=		$(TARGET_CFLAGS_ARCH) $(TARGET_DEBUGGING) -fwrapv
-TCXXFLAGS:=		
-TCPPFLAGS:=
-TLDFLAGS:=
-endif
-
-ifeq ($(ADK_DEBUG),)
-TCPPFLAGS+=		-DNDEBUG
-endif
-
 # does not change CONFIGURE_ARGS in minimal mode
 ifeq ($(filter minimal,${CONFIG_STYLE}),)
 ifneq ($(ADK_DEBUG),)
@@ -42,10 +16,10 @@ endif
 
 CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			CONFIG_SHELL='$(strip ${SHELL})' \
-			CFLAGS='$(strip ${TCFLAGS})' \
-			CXXFLAGS='$(strip ${TCXXFLAGS})' \
-			CPPFLAGS='$(strip ${TCPPFLAGS})' \
-			LDFLAGS='$(strip ${TLDFLAGS})' \
+			CFLAGS='$(strip ${TARGET_CFLAGS})' \
+			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
+			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
+			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
@@ -67,26 +41,16 @@ FAKE_FLAGS?=
 ALL_TARGET?=		all
 INSTALL_TARGET?=	install
 
-MAKE_ENV+=		WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
+MAKE_ENV+=		GCC_HONOUR_COPTS=2 \
+			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
-			CFLAGS='$(strip ${TCFLAGS})' \
-			CXXFLAGS='$(strip ${TCXXFLAGS})' \
-			CPPFLAGS='$(strip ${TCPPFLAGS})' \
-			LDFLAGS='$(strip ${TLDFLAGS})'
-MAKE_ENV+=		PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
+			CFLAGS='$(strip ${TARGET_CFLAGS})' \
+			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
+			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
+			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
-MAKE_ENV+=		PATH='${TARGET_PATH}' \
-			${HOST_CONFIGURE_OPTS} \
-			CC='${TARGET_CC}' \
-			CXX='${TARGET_CXX}' \
-			LD='${TARGET_LD}' \
-			AR='${TARGET_CROSS}ar' \
-			RANLIB='${TARGET_CROSS}ranlib' \
-			NM='${TARGET_CROSS}nm' \
-			OBJCOPY='${TARGET_CROSS}objcopy' \
-			RANLIB='${TARGET_CROSS}ranlib' \
-			STRIP='${TARGET_CROSS}strip' \
-			CROSS="$(TARGET_CROSS)"
+MAKE_ENV+=		${TARGET_CONFIGURE_OPTS} ${HOST_CONFIGURE_OPTS}
 endif
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1

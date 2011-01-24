@@ -26,6 +26,6 @@ pre-install:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBID3TAG}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libid3tag.so.* ${IDIR_LIBID3TAG}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libid3tag.so* ${IDIR_LIBID3TAG}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

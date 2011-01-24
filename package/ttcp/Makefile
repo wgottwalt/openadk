@@ -19,9 +19,11 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
+TARGET_CFLAGS+=		-Wall
+
 do-build:
-	${TARGET_CC} -Wall ${TCPPFLAGS} ${TCFLAGS} -o ${WRKBUILD}/ttcp \
-		${WRKBUILD}/ttcp.c
+	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
+		-o ${WRKBUILD}/ttcp ${WRKBUILD}/ttcp.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_TTCP}/usr/bin

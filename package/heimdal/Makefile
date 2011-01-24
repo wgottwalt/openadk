@@ -69,7 +69,7 @@ CONFIGURE_OPTS+=	--disable-pk-init \
 			--disable-kx509
 endif
 
-TCFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
+TARGET_CFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
 
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
 CONFIGURE_ENV+=		cross_compiling=yes \
@@ -87,12 +87,12 @@ post-extract:
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/editline
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT)
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT)
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT)
-	${MAKE} -C ${WRKBUILD}/lib/roken install
-	${MAKE} -C ${WRKBUILD}/lib/asn1 install
-	${MAKE} -C ${WRKBUILD}/lib/sl install
+	${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT) LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/roken install LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/asn1 install LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/sl install LDFLAGS="-all-static"
 	$(CP) $(STAGING_HOST_DIR)/libexec/heimdal/{slc,asn1_compile} \
 		$(STAGING_HOST_DIR)/bin
 	${MAKE} -C ${WRKBUILD}/lib/sl clean

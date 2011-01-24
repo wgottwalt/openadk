@@ -1,0 +1,82 @@
+--- xfsprogs-3.1.4.orig/copy/xfs_copy.c	2010-01-29 20:46:13.000000000 +0100
++++ xfsprogs-3.1.4/copy/xfs_copy.c	2011-01-22 20:44:49.478658642 +0100
+@@ -240,6 +240,10 @@ handler(int sig)
+ {
+ 	pid_t	pid = getpid();
+ 	int	status, i;
++	struct sigaction action;
++
++	action.sa_handler = handler;
++	action.sa_flags = 0;
+ 
+ 	pid = wait(&status);
+ 
+@@ -272,7 +276,7 @@ handler(int sig)
+ 					pthread_exit(NULL);
+ 				}
+ 
+-				signal(SIGCHLD, handler);
++				sigaction(SIGCHLD, &action, NULL);
+ 				return;
+ 			} else  {
+ 				/* it just croaked it bigtime, log it */
+@@ -294,7 +298,7 @@ handler(int sig)
+ 	do_warn(_("%s: Unknown child died (should never happen!)\n"), progname);
+ 	die_perror();
+ 	pthread_exit(NULL);
+-	signal(SIGCHLD, handler);
++	sigaction(SIGCHLD, &action, NULL);
+ }
+ 
+ void
+@@ -467,6 +471,11 @@ void
+ write_wbuf(void)
+ {
+ 	int		i;
++	sigset_t        unblock, initial;
++
++	sigemptyset(&unblock);
++	sigaddset(&unblock, SIGCHLD);
++
+ 
+ 	/* verify target threads */
+ 	for (i = 0; i < num_targets; i++)
+@@ -478,9 +487,9 @@ write_wbuf(void)
+ 		if (target[i].state != INACTIVE)
+ 			pthread_mutex_unlock(&targ[i].wait);	/* wake up */
+ 
+-	sigrelse(SIGCHLD);
++	sigprocmask(SIG_UNBLOCK, &unblock, &initial);
+ 	pthread_mutex_lock(&mainwait);
+-	sighold(SIGCHLD);
++	sigprocmask(SIG_SETMASK, &initial, NULL);
+ }
+ 
+ 
+@@ -521,6 +530,12 @@ main(int argc, char **argv)
+ 	libxfs_init_t	xargs;
+ 	thread_args	*tcarg;
+ 	struct stat64	statbuf;
++	struct sigaction saction;
++	sigset_t        sigblock, initial;
++
++	saction.sa_handler = handler;
++	saction.sa_flags = 0;
++
+ 
+ 	progname = basename(argv[0]);
+ 
+@@ -846,8 +861,11 @@ main(int argc, char **argv)
+ 
+ 	/* set up sigchild signal handler */
+ 
+-	signal(SIGCHLD, handler);
+-	sighold(SIGCHLD);
++	sigaction(SIGCHLD, &saction, NULL);
++	sigemptyset(&sigblock);
++	sigaddset(&sigblock, SIGCHLD);
++	sigprocmask(SIG_BLOCK, &sigblock, &initial);
++
+ 
+ 	/* make children */
+ 

@@ -23,8 +23,7 @@ $(eval $(call PKG_template,LIBEVENT_DEV,libevent-dev,$(PKG_VERSION)-${PKG_RELEAS
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_LIBEVENT)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libevent*.so* \
-		$(IDIR_LIBEVENT)/usr/lib/
+	$(CP) $(WRKINST)/usr/lib/libevent*.so* $(IDIR_LIBEVENT)/usr/lib
 
 libevent-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBEVENT_DEV}/usr/include

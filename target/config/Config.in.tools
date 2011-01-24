@@ -1,0 +1,5 @@
+config ADK_TOOLS_ADDPATTERN_ARGS
+	string
+	default "-p W54G -v v4.20.6" if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
+	default "-p W54S -v v4.70.6" if ADK_TARGET_SYSTEM_LINKSYS_WRT54GS
+	default ""

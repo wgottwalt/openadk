@@ -33,18 +33,21 @@ ifeq ($(strip ${NO_CHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
 	@OK=n; \
+	allsums="$(strip ${PKG_MD5SUM})"; \
 	(md5sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \
 			[[ $$OK = n ]] && echo >&2 "==> No distfile found!" || :; \
 			[[ $$OK = 1 ]] || exit 1; \
 			break; \
 		fi; \
-		if [[ $$sum = "$(strip ${PKG_MD5SUM})" ]]; then \
+		cursum="$${allsums%% *}"; \
+		allsums="$${allsums#* }"; \
+		if [[ $$sum = "$$cursum" ]]; then \
 			[[ $$OK = 0 ]] || OK=1; \
 			continue; \
 		fi; \
 		echo >&2 "==> Checksum mismatch for $${name##*/} (MD5)"; \
-		echo >&2 ":---> should be '$(strip ${PKG_MD5SUM})'"; \
+		echo >&2 ":---> should be '$$cursum'"; \
 		echo >&2 ":---> really is '$$sum'"; \
 		OK=0; \
 	done

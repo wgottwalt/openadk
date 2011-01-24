@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-std=c99
+TARGET_CFLAGS+=		-std=c99
 CONFIGURE_ARGS+=	--without-xen \
 			--without-uml \
 			--without-esx \

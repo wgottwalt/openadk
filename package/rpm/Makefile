@@ -4,14 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpm
-PKG_VERSION:=		5.3.3
+PKG_VERSION:=		5.3.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		08027af2368ecad8060f9f5bf46c2bd9
+PKG_MD5SUM:=		7a5112fd208bfda7a1cab20b9ce17a02
 PKG_DESCR:=		Package Manager
 PKG_SECTION:=		base
 PKG_URL:=		http://www.rpm.org/
 PKG_SITES:=		http://rpm5.org/files/rpm/rpm-5.3/
 
+PKG_CFLINE_RPM:=	depends on ADK_BROKEN
 PKG_HOST_DEPENDS:=	!cygwin !darwin
 PKG_ARCH_DEPENDS:=	!cris
 
@@ -22,7 +23,7 @@ $(eval $(call PKG_template,RPM,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 CONFIGURE_ENV+=		ac_cv_va_copy=no
 CONFIGURE_ARGS+=	--with-usecrypto=BeeCrypt \
 			--with-beecrypt=internal \
-			--with-dbapi=db \
+			--with-db=external \
 			--with-sqlite=none \
 			--without-python \
 			--without-perl \

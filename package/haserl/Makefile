@@ -16,7 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HASERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TCFLAGS+=		-DMAX_UPLOAD_KB=8192
+TARGET_CPPFLAGS+=	-DMAX_UPLOAD_KB=8192
 
 post-install:
 	${INSTALL_DIR} ${IDIR_HASERL}/usr/bin

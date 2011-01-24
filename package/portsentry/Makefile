@@ -22,7 +22,7 @@ CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
 ALL_TARGET:=		linux
-MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TCFLAGS}"
+MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS}"
 
 do-install:
 	${INSTALL_DIR} ${IDIR_PORTSENTRY}/usr/bin ${IDIR_PORTSENTRY}/etc

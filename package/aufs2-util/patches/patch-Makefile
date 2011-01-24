@@ -4,10 +4,10 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301	 USA
  
-+c2sh c2tmac: CC = ${HOSTCC}
-+c2sh c2tmac: CFLAGS= ${HOSTCFLAGS}
-+c2sh c2tmac: LDFLAGS= ${HOSTLDFLAGS}
-+c2sh c2tmac: CPPFLAGS= ${HOSTCPPFLAGS} -I./libau -I${LINUX_HEADER_DIR}/include
++c2sh c2tmac: CC = ${CC_FOR_BUILD}
++c2sh c2tmac: CFLAGS= ${CFLAGS_FOR_BUILD}
++c2sh c2tmac: LDFLAGS= ${LDFLAGS_FOR_BUILD}
++c2sh c2tmac: CPPFLAGS= ${CPPFLAGS_FOR_BUILD} -I./libau -I${LINUX_HEADER_DIR}/include
 +
  CFLAGS += -I./libau
  CFLAGS += -O -Wall

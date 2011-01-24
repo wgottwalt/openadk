@@ -36,7 +36,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${HOSTCFLAGS}"
+	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${CFLAGS_FOR_BUILD}"
 	touch $@
 
 $(WRKBUILD)/.installed:

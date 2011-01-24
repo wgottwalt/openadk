@@ -16,19 +16,20 @@ PKG_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
 
 PKG_SUBPKGS:=		ATFTP ATFTPD
 PKGSD_ATFTPD:=		TFTP server
+PKGSS_ATFTPD:=		libreadline libncurses
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ATFTP,atftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ATFTPD,atftpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ATFTPD},${PKG_SECTION}))
 
-MAKE_FLAGS+=		CFLAGS="${TCFLAGS} -Wall -D_REENTRANT -fno-inline"
+MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS} -Wall -D_REENTRANT -fno-inline"
 
-post-install:
-	# atftp client
+atftp-install:
 	$(INSTALL_DIR) $(IDIR_ATFTP)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/atftp $(IDIR_ATFTP)/usr/bin
-	# atftp server
+
+atftpd-install:
 	$(INSTALL_DIR) $(IDIR_ATFTPD)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/atftpd $(IDIR_ATFTPD)/usr/sbin
 

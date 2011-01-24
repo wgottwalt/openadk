@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
-			OPTIM='-fPIC $(TARGET_CFLAGS)'
+			OPTIM='-fPIC'
 
 CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-cups-group=cups \
@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--disable-ssl
 
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
-XAKE_FLAGS+=		OPTIM='-fPIC $(TARGET_CFLAGS)'
+XAKE_FLAGS+=		OPTIM='-fPIC'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin

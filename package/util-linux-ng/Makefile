@@ -34,13 +34,13 @@ $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
+			--disable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \
-			--enable-mount \
-			--enable-libuuid
-MAKE_FLAGS+=		OPT="${TCFLAGS}" ARCH="${ARCH}"
+			--enable-mount
+MAKE_FLAGS+=		OPT="${TARGET_CFLAGS}" ARCH="${ARCH}"
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
-TCFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
+TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 
 post-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin

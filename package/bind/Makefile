@@ -51,45 +51,46 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-pre-build:
-	${MAKE} -C ${WRKBUILD}/lib/dns \
-		BUILD_CC="${HOSTCC}" \
-		CC="${HOSTCC}" \
-		CFLAGS='${HOSTCFLAGS}' \
-		gen
+CONFIGURE_ENV+=		BUILD_CC="${CC_FOR_BUILD}" BUILD_CFLAGS='${CFLAGS_FOR_BUILD}'
 
-post-install:
-	# bind server
+bind-server-install:
 	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin ${IDIR_BIND_SERVER}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/named ${IDIR_BIND_SERVER}/usr/sbin/
 	${CP} ./files/bind ${IDIR_BIND_SERVER}/etc
-	# nsupdate
+
+bind-client-install:
 	${INSTALL_DIR} ${IDIR_BIND_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/nsupdate ${IDIR_BIND_CLIENT}/usr/bin/
-	# rndc
+
+bind-rndc-install:
 	${INSTALL_DIR} ${IDIR_BIND_RNDC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc ${IDIR_BIND_RNDC}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc-confgen \
 		${IDIR_BIND_RNDC}/usr/sbin/
-	# bind check
+
+bind-check-install:
 	${INSTALL_DIR} ${IDIR_BIND_CHECK}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/named-checkconf \
 		${IDIR_BIND_CHECK}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/named-checkzone \
 		${IDIR_BIND_CHECK}/usr/sbin/
-	# dnsec tools
+
+bind-dnssec-install:
 	${INSTALL_DIR} ${IDIR_BIND_DNSSEC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-keygen \
 		${IDIR_BIND_DNSSEC}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-signzone \
 		${IDIR_BIND_DNSSEC}/usr/sbin/
-	# host
+
+bind-host-install:
 	${INSTALL_DIR} ${IDIR_BIND_HOST}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/host ${IDIR_BIND_HOST}/usr/bin/
-	# dig
+
+bind-dig-install:
 	${INSTALL_DIR} ${IDIR_BIND_DIG}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_DIG}/usr/bin/
-	# bind lib
+
+libbind-install:
 	${INSTALL_DIR} ${IDIR_LIBBIND}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib/

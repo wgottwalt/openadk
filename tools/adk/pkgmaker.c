@@ -439,7 +439,7 @@ int main() {
 			if (fclose(pkg) != 0)
 				perror("Failed to close file stream for Makefile");
 
-			/*
+#if 0
 			if (pkg_name != NULL)
 				fprintf(stderr, "Package name is %s\n", pkg_name);
 			if (pkg_section != NULL)
@@ -461,8 +461,8 @@ int main() {
 			if (pkg_multi != NULL)
 				fprintf(stderr, "Package multi is %s\n", pkg_multi);
 
-			strmap_enum(pkgmap, iter_debug, NULL);	
-			*/
+			strmap_enum(pkgmap, iter_debug, NULL);
+#endif
 
 			/* generate master source Config.in file */
 			if (snprintf(path, MAXPATH, "package/pkgconfigs.d/%s/Config.in", pkgdirp->d_name) < 0)

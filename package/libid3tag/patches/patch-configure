@@ -1,0 +1,14 @@
+--- libid3tag-0.15.1b.orig/configure	2004-02-05 10:35:25.000000000 +0100
++++ libid3tag-0.15.1b/configure	2011-01-21 14:17:04.434906188 +0100
+@@ -19038,10 +19038,7 @@ do
+ 	    arch="$arch $1"
+ 	    shift
+ 	    ;;
+-	-fomit-frame-pointer)
+-	    shift
+-	    ;;
+-	-O*|-f*)
++	-O*)
+ 	    optimize="$1"
+ 	    shift
+ 	    ;;

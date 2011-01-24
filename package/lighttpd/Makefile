@@ -68,7 +68,7 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_STATUS,status))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_USERTRACK,usertrack))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
-TCPPFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libxml2
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/libxml2
 CONFIGURE_ENV+=		PCRE_LIB="-lpcre"
 CONFIGURE_ARGS+=	\
 			--libdir=/usr/lib/lighttpd \

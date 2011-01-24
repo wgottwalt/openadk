@@ -1,0 +1,13 @@
+--- xbindkeys-1.8.3.orig/Makefile.in	2009-01-24 14:15:39.000000000 +0100
++++ xbindkeys-1.8.3/Makefile.in	2011-01-20 21:58:00.558658336 +0100
+@@ -182,8 +182,8 @@ sbindir = @sbindir@
+ sharedstatedir = @sharedstatedir@
+ sysconfdir = @sysconfdir@
+ target_alias = @target_alias@
+-@GUILE_FALSE@AM_CFLAGS = @CFLAGS@ @X_CFLAGS@ @FORK_FLAG@ @GUILE_FLAG@ -I. -Wall
+-@GUILE_TRUE@AM_CFLAGS = @CFLAGS@ @X_CFLAGS@ @FORK_FLAG@ @GUILE_FLAG@ @GUILE_CFLAGS@ -I. -Wall
++@GUILE_FALSE@AM_CFLAGS = @X_CFLAGS@ @FORK_FLAG@ @GUILE_FLAG@ -I. -Wall
++@GUILE_TRUE@AM_CFLAGS = @X_CFLAGS@ @FORK_FLAG@ @GUILE_FLAG@ @GUILE_CFLAGS@ -I. -Wall
+ @GUILE_FALSE@xbindkeys_LDADD = @X_LIBS@
+ @GUILE_TRUE@xbindkeys_LDADD = @X_LIBS@ @GUILE_LDFLAGS@
+ xbindkeys_SOURCES = xbindkeys.c xbindkeys.h \

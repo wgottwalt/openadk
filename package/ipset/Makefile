@@ -29,10 +29,7 @@ ALL_TARGET:=		binaries
 INSTALL_TARGET:=	binaries_install
 
 pre-build:
-	V=1 ARCH=${ARCH} KERNEL_DIR=${LINUX_DIR} \
-	PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-	LD=$(TARGET_CROSS)gcc LDFLAGS="" \
-	$(MAKE) -C ${WRKBUILD} modules
+	$(MAKE) -C ${WRKBUILD} $(KERNEL_MODULE_FLAGS) modules
 
 post-install:
 	${INSTALL_DIR} ${IDIR_IPSET}/usr/sbin ${IDIR_IPSET}/usr/lib/ipset

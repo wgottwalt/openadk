@@ -29,7 +29,7 @@
 +	$(AWK) -f $(srcdir)/roken.awk $(srcdir)/roken.h.in > make-roken.c
 +
 +make-roken$(EXEEXT): make-roken.c
-+	$(HOSTCC) $(HOSTCFLAGS) -I$(top_builddir)/include -DHAVE_CONFIG_H \
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I$(top_builddir)/include -DHAVE_CONFIG_H \
 +		-o $@ $<
  
 -@CROSS_COMPILE_TRUE@roken.h: $(top_srcdir)/cf/roken-h-process.pl roken.h.in

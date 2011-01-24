@@ -16,8 +16,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,SETSERIAL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=         manual
-
-TCFLAGS+=		-DFIOQSIZE=1
+TARGET_CPPFLAGS+=	-DFIOQSIZE=1
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SETSERIAL}/usr/sbin

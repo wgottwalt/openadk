@@ -1,5 +1,23 @@
 --- mgetty-1.1.36.orig/Makefile	2007-06-15 13:15:56.000000000 +0200
-+++ mgetty-1.1.36/Makefile	2009-08-28 15:17:14.235450692 +0200
++++ mgetty-1.1.36/Makefile	2011-01-21 17:07:06.158658312 +0100
+@@ -4,7 +4,7 @@
+ #
+ # this is the C compiler to use (on SunOS, the standard "cc" does not
+ # grok my code, so please use gcc there. On ISC 4.0, use "icc".).
+-CC=gcc
++CC?=gcc
+ #CC=cc
+ #
+ #### C Compiler Flags ####
+@@ -102,7 +102,7 @@ CC=gcc
+ #	    USTAT	  - ustat(), no statfs etc.
+ #
+ #CFLAGS=-Wall -O2 -pipe -DSECUREWARE -DUSE_POLL
+-CFLAGS=-O2 -Wall -pipe
++CFLAGS?=-O2 -Wall -pipe
+ #CFLAGS=-O -DSVR4
+ #CFLAGS=-O -DSVR4 -DSVR42
+ #CFLAGS=-O -DUSE_POLL
 @@ -164,7 +164,9 @@ LIBS=
  #
  # if your systems doesn't have one, use the shell script that I provide
@@ -27,7 +45,7 @@
 -mksed: mksed.c policy.h Makefile 
 +REALGCC:=/usr/bin/gcc
 +mksed: mksed.c policy.h Makefile
-+	( echo $(REALGCC); $(MAKE) "CC=$(REALGCC)" "CFLAGS=$(CFLAGS)" mksed-wrong;\
++	( echo $(CC_FOR_BUILD); $(MAKE) "CC=$(CC_FOR_BUILD)" "CFLAGS=$(CFLAGS_FOR_BUILD)" mksed-wrong;\
 +	);
 +
 +mksed-wrong: mksed.c policy.h Makefile 

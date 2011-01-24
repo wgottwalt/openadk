@@ -21,8 +21,8 @@ CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
 MAKE_FLAGS+=		CC="${TARGET_CC}" \
-			CFLAGS="${TCFLAGS}" \
-			LDFLAGS=""
+			CFLAGS="${TARGET_CFLAGS}" \
+			LDFLAGS="${TARGET_LDFLAGS}"
 
 do-install:
 	${INSTALL_DIR} ${IDIR_PARPROUTED}/usr/sbin

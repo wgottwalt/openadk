@@ -22,10 +22,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 pre-build:
-	ARCH=${ARCH} KERNELDIR=${LINUX_DIR} \
-	PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-	LD=$(TARGET_CROSS)gcc LDFLAGS="" CFLAGS="-Wall" \
-	$(MAKE) -C ${WRKBUILD} debug V=1
+	$(MAKE) -C ${WRKBUILD} $(KERNEL_MODULE_FLAGS) all
 
 do-install:
 	${INSTALL_DIR} ${IDIR_RTSP_KMOD}/etc/modules.d/

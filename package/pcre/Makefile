@@ -19,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-cpp
-XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} CFLAGS='${TCFLAGS}'
+XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib

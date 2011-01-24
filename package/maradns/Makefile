@@ -4,22 +4,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		maradns
-PKG_VERSION:=		1.4.03
+PKG_VERSION:=		1.4.05
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9e715104234cc9bf01e2afaad27eb787
+PKG_MD5SUM:=		aff277f6ba0e1ff46d32a60ab84f16cb
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		dns
-PKG_NOPARALLEL:=	1
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.maradns.org
 PKG_SITES:=		http://www.maradns.org/download/1.4/${PKG_VERSION}/
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MARADNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
 FAKE_FLAGS+=		PREFIX="${WRKINST}/usr" \
 			RPM_BUILD_ROOT="${WRKINST}"
 

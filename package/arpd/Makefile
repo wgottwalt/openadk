@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		arpd
 PKG_VERSION:=		0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e2911fa9de1b92ef50deda1489ae944d
 PKG_DESCR:=		Generates ARP responses for IP address ranges
 PKG_SECTION:=		route
@@ -23,9 +23,9 @@ $(eval $(call PKG_template,ARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIGURE_ARGS+=	--with-libdnet=${STAGING_TARGET_DIR}/usr \
 			--with-libevent=${STAGING_TARGET_DIR}/usr \
 			--with-libpcap=${STAGING_TARGET_DIR}/usr
-MAKE_FLAGS+=		CFLAGS="${TCFLAGS}" \
-			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include" \
-			LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lpcap -ldnet -levent"
+MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS}" \
+			INCLS="-I. ${TARGET_CPPFLAGS}" \
+			LIBS="-lpcap -ldnet -levent"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_ARPD}/usr/sbin

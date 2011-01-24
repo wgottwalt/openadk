@@ -5,20 +5,23 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
 PKG_VERSION:=		2.6.37
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9774ff9d74ebd301bf56bd8d74473786
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
 
-PKG_SUBPKGS:=		IP TC TC_ATM IFSTAT LNSTAT ROUTEL RTMON SS
+PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
 PKGSS_TC:=		kmod-sched
 PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
+PKGSD_TC_IPT:=		iproute 2 traffic control IPTables support library
+PKGSS_TC_IPT:=		tc iptables
+PKGSB_TC_IPT:=		iptables
 PKGSD_IFSTAT:=		iproute2 interface statistics utility
 PKGSD_LNSTAT:=		iproute2 network statistics utilities
 PKGSD_ROUTEL:=		iproute2 route list and flush utilities
@@ -32,19 +35,17 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC},${PKGSD_TC},${PKG_SECTION}))
 $(eval $(call PKG_template,TC_ATM,tc-atm,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC_ATM},${PKGSD_TC_ATM},${PKG_SECTION}))
+$(eval $(call PKG_template,TC_IPT,tc-iptables,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC_IPT},${PKGSD_TC_IPT},${PKG_SECTION}))
 $(eval $(call PKG_template,IFSTAT,ifstat,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_IFSTAT},${PKG_SECTION}))
 $(eval $(call PKG_template,LNSTAT,lnstat,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LNSTAT},${PKG_SECTION}))
 $(eval $(call PKG_template,ROUTEL,routel,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_ROUTEL},${PKG_SECTION}))
 $(eval $(call PKG_template,RTMON,rtmon,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_RTMON},${PKG_SECTION}))
 $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PKG_SECTION}))
 
-TCFLAGS+=		-D_GNU_SOURCE
-XAKE_FLAGS+=		CCOPTS="${TCFLAGS}" MFLAGS="CC=${TARGET_CC}" \
+TARGET_CFLAGS+=		-D_GNU_SOURCE
+XAKE_FLAGS+=		CCOPTS="${TARGET_CFLAGS}" MFLAGS="CC=${TARGET_CC}" \
 			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
-CONFIGURE_FLAGS+=	KERNEL_INCLUDE="${LINUX_DIR}/include"
-
-post-configure:
-	$(CP) ./files/Config $(WRKBUILD)/
+CONFIGURE_ENV+=		IPTC="${TARGET_CFLAGS}" IPTL="${TARGET_LDFLAGS}"
 
 ip-install:
 	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,usr/sbin}
@@ -53,8 +54,6 @@ ip-install:
 
 tc-install:
 	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin,usr/lib/tc}
-	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
-	${CP} ${WRKINST}/lib/tc/m_*.so ${IDIR_TC}/lib/tc/
 	${CP} ${WRKINST}/usr/lib/tc/*.dist ${IDIR_TC}/usr/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
@@ -62,6 +61,11 @@ tc-atm-install:
 	${INSTALL_DIR} ${IDIR_TC_ATM}/lib/tc
 	${INSTALL_DATA} ${WRKINST}/lib/tc/q_atm.so \
 		${IDIR_TC_ATM}/lib/tc/
+
+tc-iptables-install:
+	${INSTALL_DIR} ${IDIR_TC_IPT}/lib/tc
+	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
+	${CP} ${WRKINST}/lib/tc/m_*.so ${IDIR_TC}/lib/tc/
 
 ifstat-install:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin

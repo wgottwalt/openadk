@@ -1,0 +1,11 @@
+--- libhugetlbfs-2.11.orig/morecore.c	2010-12-16 18:38:22.000000000 +0100
++++ libhugetlbfs-2.11/morecore.c	2011-01-22 21:18:44.018658436 +0100
+@@ -268,7 +268,7 @@ void hugetlbfs_setup_morecore(void)
+ 	INFO("setup_morecore(): heapaddr = 0x%lx\n", heapaddr);
+ 
+ 	heaptop = heapbase = (void *)heapaddr;
+-	__morecore = &hugetlbfs_morecore;
++	morecore = &hugetlbfs_morecore;
+ 
+ 	/* Set some allocator options more appropriate for hugepages */
+ 

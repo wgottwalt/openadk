@@ -15,6 +15,7 @@ PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
 PKG_SUBPKGS:=		LVM DEVICE_MAPPER LIBDEVMAPPER
 PKGSD_DEVICE_MAPPER:=	device-mapper utility
+PKGSS_DEVICE_MAPPER:=	libdevmapper
 PKGSD_LIBDEVMAPPER:=	device-mapper library
 PKGSC_LIBDEVMAPPER:=	libs
 

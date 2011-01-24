@@ -38,14 +38,14 @@ $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELE
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
-TLDFLAGS+=		-lpthread
+TARGET_LDFLAGS+=	-lpthread
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/util \
-		BUILDCC="${HOSTCC}" \
-		CFLAGS="" \
-		LDFLAGS="" \
-		CPPFLAGS="" \
+		BUILDCC="${CC_FOR_BUILD}" \
+		CFLAGS="${CFLAGS_FOR_BUILD}" \
+		LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+		CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
 		subst
 
 post-build:

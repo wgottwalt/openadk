@@ -19,13 +19,13 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--host-cc=$(HOSTCC) \
+CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--cross-prefix=$(TARGET_CROSS) \
 			--disable-user \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--bindir=/usr/bin
-TLDFLAGS+=		-pthread -lrt
+TARGET_LDFLAGS+=	-pthread -lrt
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/share/qemu

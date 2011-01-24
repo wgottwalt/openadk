@@ -17,8 +17,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,USSP_PUSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-MAKE_FLAGS+=		OBEXINC="${TCPPFLAGS}" \
-			OBEXLIB="${TLDFLAGS} -lopenobex -lbluetooth"
+MAKE_FLAGS+=		OBEXINC="${TARGET_CPPFLAGS}" \
+			OBEXLIB="${TARGET_LDFLAGS} -lopenobex -lbluetooth"
 
 post-install:
 	${INSTALL_DIR} ${IDIR_USSP_PUSH}/usr/bin

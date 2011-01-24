@@ -2,7 +2,7 @@
  * Copyright (C) 2004  Manuel Novoa III  <mjn3@codepoet.org>
  * Copyright (C) 2005  Konstantin A. Klubnichkin and Oleg I. Vdovikin
  * Copyright (C) 2006  OpenWrt developers <openwrt-developers@openwrt.org>
- * Copyright (C) 2006  Waldemar Brodkorb <wbx@freewrt.org>
+ * Copyright (C) 2011  Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ void usage(void) __attribute__ (( __noreturn__ ));
 
 void usage(void)
 {
-	fprintf(stderr, "Usage: trx [-p product_id] [-v version] [-o outfile] [-m maxlen] [-a align] [-b offset] file [file [file]]\n");
+	fprintf(stderr, "Usage: trx [-p product_id] [-v version] [-o outfile] [-m maxlen] [-a align] [-b offset] -f file [-f file [-f file]]\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -94,9 +94,9 @@ int main(int argc, char **argv)
 	in = NULL;
 	i = 0;
 
-	while ((c = getopt(argc, argv, "-:o:p:v:m:a:b:")) != -1) {
+	while ((c = getopt(argc, argv, "-:o:p:v:m:a:b:f:")) != -1) {
 		switch (c) {
-			case 1:
+			case 'f':
 				p->offsets[i++] = cur_len;
 
 				if (!(in = fopen(optarg, "r"))) {
@@ -209,7 +209,7 @@ int main(int argc, char **argv)
 	}
 
 	if (!in) {
-		fprintf(stderr, "we require atleast one filename\n");
+		fprintf(stderr, "we require at least one filename\n");
 		usage();
 	}
 

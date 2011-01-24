@@ -26,7 +26,7 @@ $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAVAHI},${PKGSC_LIBAVAHI}))
 
-TLDFLAGS+=		-lintl
+TARGET_LDFLAGS+=	-lintl
 CONFIGURE_ARGS+=	--enable-glib \
 			--disable-qt3 \
 			--disable-qt4 \

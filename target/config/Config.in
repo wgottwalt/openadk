@@ -446,3 +446,5 @@ config ADK_TARGET_PACKAGE_TGZ
 	  directory. There will be no package manager installed onto the target.
 	  
 endchoice
+
+source "target/config/Config.in.tools"

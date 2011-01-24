@@ -433,9 +433,8 @@ int srecLine(char *pSrecLine)
 
 int srec2bin(int argc,char *argv[],int verbose)
 {
-    int i,rlen,sts;
+    int rlen,sts;
     FILE *fp;
-    char ac;
     char buff[256];
     bit32u TAG_BIG     = 0xDEADBE42;
     bit32u TAG_LITTLE  = 0xFEEDFA42;
@@ -513,12 +512,10 @@ int srec2bin(int argc,char *argv[],int verbose)
     return(1);
 }
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    debug = TRUE;
     debug = FALSE;
     verbose = FALSE;
     srec2bin(argc,argv,verbose);
     return 0;
 }
-

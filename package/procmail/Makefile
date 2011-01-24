@@ -20,7 +20,7 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-TCFLAGS+=		-DPROCMAIL
+TARGET_CPPFLAGS+=	-DPROCMAIL
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src -f ../Makefile.new

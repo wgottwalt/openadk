@@ -1,6 +1,36 @@
 --- libpri-1.4.10.2.orig/Makefile	2008-08-06 20:20:51.000000000 +0200
-+++ libpri-1.4.10.2/Makefile	2010-05-29 09:55:08.750000000 +0200
-@@ -146,7 +146,6 @@ $(STATIC_LIBRARY): $(STATIC_OBJS)
++++ libpri-1.4.10.2/Makefile	2011-01-21 14:32:08.278658337 +0100
+@@ -31,8 +31,8 @@ CC=gcc
+ GREP=grep
+ AWK=awk
+ 
+-OSARCH=$(shell uname -s)
+-PROC?=$(shell uname -m)
++OSARCH=Linux
++PROC?=$(ARCH)
+ 
+ # SONAME version; should be changed on every ABI change
+ # please don't change it needlessly; it's perfectly fine to have a SONAME
+@@ -43,7 +43,8 @@ STATIC_LIBRARY=libpri.a
+ DYNAMIC_LIBRARY:=libpri.so.$(SONAME)
+ STATIC_OBJS=copy_string.o pri.o q921.o prisched.o q931.o pri_facility.o version.o
+ DYNAMIC_OBJS=copy_string.lo pri.lo q921.lo prisched.lo q931.lo pri_facility.lo version.lo
+-CFLAGS=-Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -g -fPIC $(ALERTING) $(LIBPRI_COUNTERS)
++CFLAGS?=
++CFLAGS+=-Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -fPIC $(ALERTING) $(LIBPRI_COUNTERS)
+ INSTALL_PREFIX=$(DESTDIR)
+ INSTALL_BASE=/usr
+ libdir?=$(INSTALL_BASE)/lib
+@@ -135,7 +136,7 @@ pridump: pridump.o
+ MAKE_DEPS= -MD -MT $@ -MF .$(subst /,_,$@).d -MP
+ 
+ %.o: %.c
+-	$(CC) $(CFLAGS) $(MAKE_DEPS) -c -o $@ $<
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(MAKE_DEPS) -c -o $@ $<
+ 
+ %.lo: %.c
+ 	$(CC) $(CFLAGS) $(MAKE_DEPS) -c -o $@ $<
+@@ -146,7 +147,6 @@ $(STATIC_LIBRARY): $(STATIC_OBJS)
  
  $(DYNAMIC_LIBRARY): $(DYNAMIC_OBJS)
  	$(CC) -shared $(SOFLAGS) -o $@ $(DYNAMIC_OBJS)

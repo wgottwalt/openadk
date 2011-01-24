@@ -252,7 +252,7 @@ ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
 include ${TOPDIR}/mk/vars.mk
 else
 include $(TOPDIR)/prereq.mk
-export BASH HOSTCC HOSTCFLAGS HOSTCXX HOSTCXXFLAGS MAKE LANGUAGE LC_ALL OStype PATH
+export BASH MAKE LANGUAGE LC_ALL OStype PATH CC_FOR_BUILD
 endif
 
 all: menuconfig
