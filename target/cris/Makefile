@@ -10,11 +10,11 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
 
 tools-compile:
-	$(MAKE) -C ../tools/mkfimage
+	$(MAKE) -C ../tools/mkfimage all
 ifneq ($(ADK_HOST_DARWIN),y)
-	$(MAKE) -C ../tools/e100boot
+	$(MAKE) -C ../tools/e100boot all
 endif
-	$(MAKE) -C ../tools/squashfs
+	$(MAKE) -C ../tools/squashfs all
 	$(INSTALL_BIN) ../tools/boot_linux $(BIN_DIR)/
 
 kernel-install: tools-compile

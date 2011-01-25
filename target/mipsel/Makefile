@@ -16,14 +16,14 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 tools-compile:
-	$(MAKE) -C ../tools/trx
-	$(MAKE) -C ../tools/addpattern
-	$(MAKE) -C ../tools/srec2bin
-	$(MAKE) -C ../tools/squashfs
+	$(MAKE) -C ../tools/trx all
+	$(MAKE) -C ../tools/addpattern all
+	$(MAKE) -C ../tools/srec2bin all
+	$(MAKE) -C ../tools/squashfs all
 
 ifeq ($(ADK_KERNEL_BCM47XX),y)
 kernel-install: tools-compile
-	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinub.elf \
+	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
 	    ${BUILD_DIR}/${TARGET_KERNEL}
 
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
