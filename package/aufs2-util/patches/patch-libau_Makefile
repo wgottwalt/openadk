@@ -1,0 +1,11 @@
+--- w-aufs2-util-2-100111-1.orig/libau/Makefile	2011-01-07 05:00:54.000000000 +0100
++++ w-aufs2-util-2-100111-1/libau/Makefile	2011-01-25 17:02:09.835243119 +0100
+@@ -45,7 +45,7 @@ install_ulib: File = ${LibSo}.${LibSoMaj
+ install_ulib: Tgt = ${DESTDIR}/usr/lib
+ install_ulib: ${File}
+ 	install -d ${Tgt}
+-	${Install} -m 644 -s ${File} ${Tgt}
++	${Install} -m 644 ${File} ${Tgt}
+ 	# -m 6755
+ 	ln -sf ${File} ${Tgt}/${LibSo}.${LibSoMajor}
+ 	ln -sf ${LibSo}.${LibSoMajor} ${Tgt}/${LibSo}
