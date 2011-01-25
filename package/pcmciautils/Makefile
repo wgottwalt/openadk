@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		sysfsutils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/pcmcia.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/
 
+PKG_CFLINE_PCMCIAUTILS:=depends on ADK_TARGET_WITH_CARDBUS
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PCMCIAUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

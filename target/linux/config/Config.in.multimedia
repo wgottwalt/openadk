@@ -30,6 +30,7 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
+	depends on ADK_TARGET_WITH_PCI
 
 menu "Audio devices support"
 
@@ -63,6 +64,7 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
+	depends on ADK_TARGET_WITH_PCI
 	help
 	  Driver for intel chipsets.	
 
@@ -71,6 +73,7 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	default n
+	depends on ADK_TARGET_WITH_PCI
 	help
 	 ALSA VIA82XX driver
 
@@ -79,6 +82,7 @@ config ADK_KPACKAGE_KMOD_SND_ENS1370
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	default n
+	depends on ADK_TARGET_WITH_PCI
 	help
 	 ALSA Ensonique 1370 driver
 
@@ -90,6 +94,7 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default n
+	depends on ADK_TARGET_WITH_PCI
 	help
 	 ALSA AMD CS5535 driver
 

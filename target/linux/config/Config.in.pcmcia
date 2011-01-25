@@ -3,20 +3,16 @@ depends on ADK_TARGET_WITH_CARDBUS
 
 config ADK_KERNEL_CARDBUS
 	boolean 
-	default n
 
 config ADK_KERNEL_PCMCIA_PROBE
 	boolean
-	default n
 
 config ADK_KERNEL_SERIAL_8250_EXTENDED
 	boolean
-	default n
 
 config ADK_KERNEL_SERIAL_8250_SHARE_IRQ
 	boolean
 	select ADK_KERNEL_SERIAL_8250_EXTENDED
-	default n
 
 config ADK_KPACKAGE_KMOD_PCCARD
 	prompt "kmod-pccard....................... PCCARD support"
@@ -40,7 +36,7 @@ config ADK_KPACKAGE_KMOD_YENTA
 	default n
 
 config ADK_KPACKAGE_KMOD_SERIAL_8250_CS
-	prompt   "kmod-pcmcia-serial................ PCMCIA/CardBus serial device support"
+	prompt   "kmod-pcmcia-serial.............. PCMCIA/CardBus serial device support"
 	tristate
 	default n
 	select ADK_KERNEL_SERIAL_8250_SHARE_IRQ
