@@ -7,8 +7,16 @@ PKG_NAME:=		dri2proto
 PKG_VERSION:=		2.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2087269416782cff56f9b22d1449c192
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/proto/
-PKG_SUBPKGS:=
+PKG_DESCR:=		DRI protocol headers
+PKG_SECTION:=		x11/devel
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,DRI2PROTO,dri2proto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_DRI2PROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_DRI2PROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

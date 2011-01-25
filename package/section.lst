@@ -40,7 +40,8 @@ utils	Utilities
 www	HTTP / FTP
 wifi	Wireless
 x11/apps	X applications
-x11/drivers	X server and drivers
-x11/server	X server and drivers
+x11/drivers	X drivers
+x11/server	X server 
 x11/libs	X libraries
 x11/fonts	X fonts
+x11/devel	X headers

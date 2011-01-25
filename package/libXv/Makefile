@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXv
-PKG_VERSION:=		1.0.5
+PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6ee98790de6b3cd470074e60057d5c5c
+PKG_MD5SUM:=		a7184aa3e3f405792a09ccd6447caf67
 PKG_DESCR:=		X11 Xvideo extensions
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 videoproto libXext

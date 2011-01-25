@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		renderproto
-PKG_VERSION:=		0.11
+PKG_VERSION:=		0.11.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		57216f25b9a5edc561b83a7484cb17e8
+PKG_DESCR:=		X Rendering Extension headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		9b103359123e375bb7760f7dbae3dece
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,RENDERPROTO,renderproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_RENDERPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_RENDERPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

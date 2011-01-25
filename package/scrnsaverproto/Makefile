@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		scrnsaverproto
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ed88bdd6945ba207c4f734af48e7e25
+PKG_DESCR:=		X11 screensaver headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		c09bd61d39ad0e472b0dfd8bfadd5f2d
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,SCRNSAVERPROTO,scrnsaverproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_SCRNSAVERPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_SCRNSAVERPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		55558a41d0bcf9210636858844fa4d2f
 PKG_DESCR:=		xcursor library
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

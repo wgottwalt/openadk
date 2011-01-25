@@ -4,21 +4,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.7.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		ba0360b4ec1f6e541b264e45906bf5f2
+PKG_VERSION:=		1.9.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b8e364bffd87291b593726696d39b4b5
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
 PKG_DEPENDS+=		libfontenc xkeyboard-config xkbcomp libxau libxaw
 PKG_DEPENDS+=		libxmu libxpm libxrender libxt libxxf86dga libxext
-PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11
+PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11 libxcb
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
-PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto
+PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
 PKG_URL:=		http://www.x.org/
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/xserver/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
 
@@ -32,8 +32,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		V=1
-CONFIGURE_ARGS+=	\
-			--with-fontdir=/usr/share/fonts/X11 \
+CONFIGURE_ARGS+=	--with-fontdir=/usr/share/fonts/X11 \
 			--enable-dga \
 			--enable-xorg \
 			--enable-xv \
@@ -72,7 +71,6 @@ endif
 post-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/etc/X11
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/fonts
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
@@ -83,8 +81,6 @@ post-install:
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
-	${CP} ${WRKINST}/usr/lib/xorg/modules/linux/*.so \
-		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/linux
 	${CP} ${WRKINST}/usr/lib/xorg/modules/multimedia/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 	-$(CP) $(TOPDIR)/target/$(ADK_TARGET)/xorg.conf \

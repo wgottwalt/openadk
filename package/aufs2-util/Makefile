@@ -22,11 +22,12 @@ PKG_HOST_DEPENDS:=	!cygwin !freebsd !openbsd !netbsd
 
 PKG_SUBPKGS:=		AUFS2_UTIL LIBAU
 PKGSD_LIBAU:=		aufs2 userspace library
+PKGSC_LIBAU:=		libs
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AUFS2_UTIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBAU,libau,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBAU},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBAU,libau,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBAU},${PKGSC_LIBAU}))
 
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		Install=install CPPFLAGS_FOR_BUILD="-I${LINUX_HEADER_DIR}/include"

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXScrnSaver
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		72ca7f37e4a1794acbdd9ab047821e8b
+PKG_MD5SUM:=		8e459e544298caa27fc7c7e5a56e2a6d
 PKG_DESCR:=		X.Org XScrnSaver library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		scrnsaverproto

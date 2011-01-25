@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		videoproto
-PKG_VERSION:=		2.3.0
+PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		888543493cd69c6c78002ac59c3f077f
+PKG_DESCR:=		X11 video protocol headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		f1903057310c6b308edf0e982d33714d
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,VIDEOPROTO,videoproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_VIDEOPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_VIDEOPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

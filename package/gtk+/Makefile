@@ -31,6 +31,7 @@ CONFIGURE_ARGS+=	--disable-gtk-doc-html \
 			--disable-xinerama \
 			--without-xinput \
 			--disable-gtk-doc \
+			--disable-cups \
 			--disable-papi \
 			--disable-introspection
 CONFIGURE_ENV+=		gio_can_sniff=no \

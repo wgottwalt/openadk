@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fixesproto
-PKG_VERSION:=		4.1.1
+PKG_VERSION:=		4.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		95806b9b648639d4c3e5b226d10927c0
+PKG_DESCR:=		XFIXES Extension headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		352e7ea8278bc31a8d75b31232a61cd4
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,FIXESPROTO,fixesproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_FIXESPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_FIXESPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

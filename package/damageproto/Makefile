@@ -7,8 +7,16 @@ PKG_NAME:=		damageproto
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		423516fd64e43e8671120056b0d9f597
+PKG_DESCR:=		X DAMAGE Extension headers
+PKG_SECTION:=		x11/devel
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,DAMAGEPROTO,damageproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_DAMAGEPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_DAMAGEPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

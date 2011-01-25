@@ -1,11 +1,11 @@
---- libXt-1.0.7.orig/ltmain.sh	2009-09-11 16:54:52.000000000 +0200
-+++ libXt-1.0.7/ltmain.sh	2011-01-15 00:13:20.000000000 +0100
-@@ -1676,7 +1676,7 @@ EOF
-       # -F/path gives path to uninstalled frameworks, gcc on darwin
-       # @file GCC response files
+--- libXt-1.0.9.orig/ltmain.sh	2010-10-28 21:04:10.000000000 +0200
++++ libXt-1.0.9/ltmain.sh	2011-01-24 17:49:30.000000000 +0100
+@@ -5091,7 +5091,7 @@ func_mode_link ()
+       # @file                GCC response files
+       # -tp=*                Portland pgcc target processor selection
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
--      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
-+      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
- 
- 	# Unknown arguments in both finalize_command and compile_command need
- 	# to be aesthetically quoted because they are evaled later.
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|-fstack-protector*|-flto*)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

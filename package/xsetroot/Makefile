@@ -11,7 +11,7 @@ PKG_DESCR:=		set root window
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxmu libxcursor
 PKG_BUILDDEP:=		xbitmaps libXcursor
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

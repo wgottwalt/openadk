@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXmu
-PKG_VERSION:=		1.0.5
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f49e3587cdc299707da0786a681f9c05
+PKG_MD5SUM:=		15e1cb9aaf97eae169bfe6944e0a541e
 PKG_DESCR:=		miscellaneous utility functions for X libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXt

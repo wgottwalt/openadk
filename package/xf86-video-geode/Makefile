@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.11.6
+PKG_VERSION:=		2.11.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a673c0f88037d12fbb96d9fefc82785b
+PKG_MD5SUM:=		df78ec2c76598b9b3a3f00c7b9215414
 PKG_DESCR:=		X11 driver for AMD Geode VGA chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_CFLINE_XF86_VIDEO_GEODE:=	depends on ADK_TARGET_WITH_VGA
 

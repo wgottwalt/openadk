@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xcmiscproto
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bacfb0f3cb4d6e1a71770307bfdba129
+PKG_DESCR:=		XC-MISC Extension headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		9a8da85301db41e8435099ffefb4ac74
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,XCMISCPROTO,xcmiscproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_XCMISCPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XCMISCPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

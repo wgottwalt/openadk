@@ -11,7 +11,7 @@ PKG_DESCR:=		X11 driver for Intel VGA chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/driver/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_CFLINE:=		y if (ADK_PKG_LAPTOP && ADK_TARGET_SYSTEM_IBM_X40)
 

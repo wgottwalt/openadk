@@ -4,11 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bigreqsproto
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		882d49cc3bb591dbdccdf9e680bd2e4b
+PKG_DESCR:=		Big Requests Extension headers
+PKG_SECTION:=		x11/devel
+PKG_MD5SUM:=		3392142c19cb5a22058cae88be3c554a
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,BIGREQSPROTO,bigreqsproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_BIGREQSPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_BIGREQSPROTO}/usr/include
+
 include ${TOPDIR}/mk/pkg-bottom.mk

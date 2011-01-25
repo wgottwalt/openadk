@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xset
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		65774f3d4e7f65a7fe07294a86b8e104
+PKG_MD5SUM:=		9d8da492fc8f050c5de711d592d3c797
 PKG_DESCR:=		X set utility
 PKG_SECTION:=		x11/apps
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		http://www.x.org/releases/X11R7.5/src/app/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
