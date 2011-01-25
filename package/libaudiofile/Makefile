@@ -17,7 +17,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBAUDIOFILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
-CONFIGURE_ARGS+=	--with-build-cc=${HOSTCC}
+CONFIGURE_ARGS+=	--with-build-cc=${CC_FOR_BUILD}
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBAUDIOFILE}/usr/lib

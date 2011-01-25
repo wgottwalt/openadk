@@ -87,12 +87,19 @@ TARGET_CFLAGS:=		$(TARGET_OPTIMIZATION) $(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=
 endif
 
+# A nifty macro to make testing gcc features easier (from uClibc project)
+check_gcc=$(shell \
+        if $(CC) $(1) -S -o /dev/null -xc /dev/null > /dev/null 2>&1; \
+        then echo "$(1)"; else echo "$(2)"; fi)
+
+CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
+
 # host compiler flags
 CPPFLAGS_FOR_BUILD?=
-CFLAGS_FOR_BUILD?=      -O2 -Wall
+CFLAGS_FOR_BUILD=      -O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall
 LDFLAGS_FOR_BUILD?=
-FLAGS_FOR_BUILD:=       ${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
+FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			sed -i -e

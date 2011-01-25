@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RE
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
-			--with-build-cc=${HOSTCC} \
+			--with-build-cc=${CC_FOR_BUILD} \
 			--without-progs \
 			--with-fallbacks \
 			--disable-termcap \
