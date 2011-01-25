@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-fbdev
-PKG_VERSION:=		0.4.1
+PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c297e40b93b3636a72189cfac43d1a87
+PKG_MD5SUM:=		a94011aac77eb9cd6d46bf0af0dbc631
 PKG_DESCR:=		X11 driver for Linux Framebuffer devices
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_CFLINE_XF86_VIDEO_FBDEV:=	depends on ADK_TARGET_WITH_VGA
 

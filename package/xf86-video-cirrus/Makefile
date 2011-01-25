@@ -11,7 +11,7 @@ PKG_DESCR:=		X11 driver for Cirrus VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/driver/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

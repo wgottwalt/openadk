@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXdamage
-PKG_VERSION:=		1.1.2
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f8f19f747c8445213d5409ae8b8b2f0a
+PKG_MD5SUM:=		5e54789fd1c56392d38d29c6b8dad142
 PKG_DESCR:=		X Window System client interface to the DAMAGE extension to the X protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXfixes damageproto
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

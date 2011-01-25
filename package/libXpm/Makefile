@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXpm
-PKG_VERSION:=		3.5.8
+PKG_VERSION:=		3.5.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d81d6633e67ac5562e2fbee126b2897
+PKG_MD5SUM:=		d6d4b0f76248a6b346eb42dfcdaa72a6
 PKG_DESCR:=		common operation for the XPM pixmap format
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}

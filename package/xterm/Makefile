@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xterm
-PKG_VERSION:=		259
+PKG_VERSION:=		267
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		22037e1b794d749072310cb142800f05
+PKG_MD5SUM:=		3945ab70cfa2a9e95804157ee1b0f8e8
 PKG_DESCR:=		Terminal Emulator for X Windows
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		xorg-server libxaw

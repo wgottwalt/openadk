@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXxf86vm
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		52b49483eccbdd1566b8c560fe7f76e8
+PKG_MD5SUM:=		822a847fc4ea1b38f6c4d6f86d1e4fd9
 PKG_DESCR:=		an interface to the XFree86-VidModeExtension extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86vidmodeproto libXext
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/lib/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

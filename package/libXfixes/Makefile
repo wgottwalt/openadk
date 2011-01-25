@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXfixes
-PKG_VERSION:=		4.0.4
+PKG_VERSION:=		4.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		86eb4b916cd5948c0e20d279107b3331
+PKG_MD5SUM:=		556ffa2e75f2a3b5d92d004a6b124a6d
 PKG_DESCR:=		X Fixes Library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		fixesproto xextproto xproto libX11

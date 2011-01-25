@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXi
-PKG_VERSION:=		1.3
+PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1c038312e4f9b61fe72e52d0f59a01d5
+PKG_MD5SUM:=		b9dfc98b27e3770567e4c6a3365a21b7
 PKG_DESCR:=		X Window System client interface to the XINPUT extension to the X protocol.
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto libXext
