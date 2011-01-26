@@ -3,6 +3,8 @@
 
 include $(TOPDIR)/rules.mk
 
+install: ${TOOLS_DIR}/cpio
+
 SRCS+=		\
 		src/ib_open.c \
 		src/ib_close.c \
@@ -28,8 +30,6 @@ SRCS+=		\
 		src/cpio.c
 
 ${TOOLS_DIR}/cpio: ${SRCS}
-	${HOSTCC} ${HOSTCFLAGS} -D_GNU_SOURCE -Isrc -o $@ $^
-
-install: ${TOOLS_DIR}/cpio
+	${CC_FOR_BUILD} ${FLAGS_FOR_BUILD} -D_GNU_SOURCE -Isrc -o $@ $^
 
 include $(TOPDIR)/mk/tools.mk
