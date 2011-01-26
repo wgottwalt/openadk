@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pciutils
 PKG_VERSION:=		3.1.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		f3e349d22a3714b4272b171649ad5235
 PKG_DESCR:=		PCI Utilities
 PKG_SECTION:=		utils
@@ -29,8 +29,8 @@ MAKE_FLAGS+=		CC="${TARGET_CC}" \
 ALL_TARGET:=
 
 do-install:
-	${INSTALL_DIR} ${IDIR_PCIUTILS}/usr/{share,sbin}
-	${INSTALL_BIN} ${WRKBUILD}/{lspci,setpci} ${IDIR_PCIUTILS}/usr/sbin/
-	${INSTALL_DATA} ${WRKBUILD}/pci.ids ${IDIR_PCIUTILS}/usr/share/
+	${INSTALL_DIR} ${IDIR_PCIUTILS}/usr/{share,bin}
+	${INSTALL_BIN} ${WRKBUILD}/{lspci,setpci} ${IDIR_PCIUTILS}/usr/bin
+	${INSTALL_DATA} ${WRKBUILD}/pci.ids ${IDIR_PCIUTILS}/usr/share
 
 include ${TOPDIR}/mk/pkg-bottom.mk

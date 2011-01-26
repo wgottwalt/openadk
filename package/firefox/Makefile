@@ -16,6 +16,7 @@ PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
 PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
+PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin

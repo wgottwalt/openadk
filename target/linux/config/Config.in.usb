@@ -1,13 +1,13 @@
 menu "USB support"
 depends on ADK_TARGET_WITH_USB
 
+config ADK_KERNEL_USB
+	boolean
+
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
 
 config ADK_KERNEL_USB_SERIAL
-	boolean
-
-config ADK_KERNEL_USB
 	boolean
 
 config ADK_KERNEL_USB_STORAGE
@@ -15,21 +15,23 @@ config ADK_KERNEL_USB_STORAGE
 
 config ADK_KERNEL_USB_EHCI_HCD
 	boolean
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 
 config ADK_KERNEL_USB_UHCI_HCD
 	boolean
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 
 config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb......................... USB support"
 	tristate
+	select ADK_KERNEL_NLS
+	depends on !ADK_KERNEL_USB
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
-	depends on !ADK_KERNEL_USB
-	select ADK_KERNEL_NLS
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
 	  subsystem which offers higher speeds and more features than the
@@ -62,10 +64,12 @@ config ADK_KPACKAGE_KMOD_USB
 config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 	prompt   "kmod-usb-uhci................... Support for UHCI controllers"
 	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_KPACKAGE_KMOD_USB
 	depends on !ADK_KERNEL_USB_UHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default n
 	help
 	  The Universal Host Controller Interface is a standard by Intel for
 	  accessing the USB hardware in the PC (which is also called the USB
@@ -79,15 +83,13 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
 	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_KPACKAGE_KMOD_USB
+	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  The Open Host Controller Interface (OHCI) is a standard for accessing
 	  USB 1.1 host controller hardware.  It does more in hardware than Intel's
@@ -101,10 +103,10 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
 	prompt   "kmod-usb-isp116x................ ISP116X HCD support"
 	tristate
-	default n
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_KPACKAGE_KMOD_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 	help
 	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
 	  option if your board has this chip. If unsure, say N.
@@ -114,10 +116,10 @@ config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
 config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 	prompt   "kmod-usb-sl811.................. SL811HS HCD support"
 	tristate
-	default n
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_KPACKAGE_KMOD_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 	help
 	  The SL811HS is a single-port USB controller that supports either
 	  host side or peripheral side roles.  Enable this option if your
@@ -128,15 +130,15 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
 	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on !ADK_KERNEL_USB_EHCI_HCD
+	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	depends on ADK_KPACKAGE_KMOD_USB
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
-	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on ADK_KPACKAGE_KMOD_USB
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	help
 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
 	  "high speed" (480 Mbit/sec, 60 Mbyte/sec) host controller hardware.
@@ -158,7 +160,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 
 config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_UHCI_HCD || ADK_KPACKAGE_KMOD_USB_OHCI_HCD || ADK_KPACKAGE_KMOD_EHCI_HCD
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_ACM

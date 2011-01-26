@@ -358,7 +358,7 @@ config BUSYBOX_LOSETUP
 
 config BUSYBOX_LSPCI
 	bool "lspci"
-	default y
+	default n
 	depends on !ADK_PACKAGE_PCIUTILS
 	help
 	  lspci is a utility for displaying information about PCI buses in the
@@ -368,7 +368,7 @@ config BUSYBOX_LSPCI
 
 config BUSYBOX_LSUSB
 	bool "lsusb"
-	default y
+	default n
 	depends on !ADK_PACKAGE_LSUSB
 	help
 	  lsusb is a utility for displaying information about USB buses in the
