@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f715e53c9c1b25f856d14d6123663d96
 PKG_DESCR:=		X11 keyboard library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		python2 libpthread-stubs
+PKG_BUILDDEP:=		python2 libpthread-stubs libxslt libXau
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXCB LIBXCB_DEVEL
@@ -24,6 +24,8 @@ $(eval $(call PKG_template,LIBXCB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 $(eval $(call PKG_template,LIBXCB_DEVEL,${PKG_NAME}-devel,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBXCB_DEVEL},${PKGSD_LIBXCB_DEVEL},${PKGSC_LIBXCB_DEVEL}))
 
 include $(TOPDIR)/mk/python.mk
+
+CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
 libxcb-install:
 	${INSTALL_DIR} ${IDIR_LIBXCB}/usr/lib

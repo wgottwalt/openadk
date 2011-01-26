@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau xcb-proto
 PKG_BUILDDEP+=		xcmiscproto bigreqsproto kbproto inputproto libxcb
+PKG_DEPENDS:=		libxdmcp libxcb libxau
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBX11 LIBX11_DEV
