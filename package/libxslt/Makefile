@@ -14,9 +14,14 @@ PKG_BUILDDEP:=		libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
 
+PKG_SUBPKGS:=		LIBXSLT XSLTPROC
+PKGSD_XSLTPROC:=	xslt processor utility
+PKGSC_XSLTPROC:=	misc
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXSLT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XSLTPROC},${PKGSC_XSLTPROC}))
 
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
@@ -27,7 +32,11 @@ CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--without-mem-debug \
 			--without-debugger
 
-post-install:
+xsltproc-install:
+	${INSTALL_DIR} ${IDIR_XSLTPROC}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/xsltproc ${IDIR_XSLTPROC}/usr/bin
+
+libxslt-install:
 	${INSTALL_DIR} ${IDIR_LIBXSLT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libxslt.so* ${IDIR_LIBXSLT}/usr/lib/
 

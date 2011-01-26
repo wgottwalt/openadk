@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		146c009e7abc52b611db4cac4883488e
 PKG_DESCR:=		X resource database management tools
 PKG_SECTION:=		x11/apps
+PKG_DEPENDS:=		libx11 libxmu
+PKG_BUILDDEP:=		libX11 libXmu
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
