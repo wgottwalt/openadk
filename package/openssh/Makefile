@@ -7,36 +7,40 @@ PKG_NAME:=		openssh
 PKG_VERSION:=		5.6p1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e6ee52e47c768bf0ec42a232b5d18fb0
-PKG_DESCR:=		OpenSSH server
+PKG_DESCR:=		OpenSSH
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP:=		zlib openssl
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
+PKG_MULTI:=		1
 
-PKG_SUBPKGS:=		OPENSSH_SERVER OPENSSH_CLIENT OPENSSH_CLIENT_UTILS
+PKG_SUBPKGS:=		OPENSSH OPENSSH_SERVER OPENSSH_CLIENT OPENSSH_CLIENT_UTILS
 PKG_SUBPKGS+=		OPENSSH_SFTP_CLIENT OPENSSH_SFTP_SERVER
+
+PKGSD_OPENSSH_SERVER:=		OpenSSH server
 PKGSD_OPENSSH_CLIENT:=		OpenSSH client
 PKGSD_OPENSSH_CLIENT_UTILS:=	OpenSSH client utilities
 PKGSD_OPENSSH_SFTP_CLIENT:=	OpenSSH sftp client
 PKGSD_OPENSSH_SFTP_SERVER:=	OpenSSH sftp server
 
-PKG_CHOICES_OPENSSH_SERVER:=	NOKRB WITH_KRB5 WITH_HEIMDAL
-PKGCD_NOKRB:=			no Kerberos support
-PKGCD_WITH_KRB5:=		with MIT Kerberos
-PKGCS_WITH_KRB5:=		libkrb5 libcom-err
-PKGCB_WITH_KRB5:=		krb5
-PKGCD_WITH_HEIMDAL:=		with Heimdal Kerberos
-PKGCS_WITH_HEIMDAL:=		libheimdal libcom-err
-PKGCB_WITH_HEIMDAL:=		heimdal
+PKG_CHOICES_OPENSSH:=	NOKRB WITH_KRB5 WITH_HEIMDAL
+PKGCD_NOKRB:=		no Kerberos support
+PKGCD_WITH_KRB5:=	with MIT Kerberos
+PKGCS_WITH_KRB5:=	libkrb5 libcom-err
+PKGCB_WITH_KRB5:=	krb5
+PKGCD_WITH_HEIMDAL:=	with Heimdal Kerberos
+PKGCS_WITH_HEIMDAL:=	libheimdal libcom-err
+PKGCB_WITH_HEIMDAL:=	heimdal
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_CLIENT},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_CLIENT_UTILS},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_SFTP_CLIENT},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH,openssh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SERVER},${PKGSD_OPENSSH_SERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_CLIENT},${PKGSD_OPENSSH_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_CLIENT_UTILS},${PKGSD_OPENSSH_CLIENT_UTILS},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_CLIENT},${PKGSD_OPENSSH_SFTP_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_SERVER},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
 
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
@@ -65,7 +69,11 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
-post-install:
+openssh-install:
+	${INSTALL_DIR} ${IDIR_OPENSSH}/etc/ssh
+	chmod 0700 ${IDIR_OPENSSH}/etc/ssh
+
+openssh-server-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/etc/ssh
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/bin
 	${INSTALL_DIR} ${IDIR_OPENSSH_SERVER}/usr/sbin
@@ -74,28 +82,34 @@ post-install:
 		${IDIR_OPENSSH_SERVER}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/sshd \
 	 	${IDIR_OPENSSH_SERVER}/usr/sbin
-	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT}/etc/ssh
-	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT}/usr/bin
-	${INSTALL_DATA} ${WRKINST}/etc/ssh/ssh_config \
-	    ${IDIR_OPENSSH_CLIENT}/etc/ssh
-	${INSTALL_BIN} ${WRKINST}/usr/bin/{ssh,scp} \
-	    ${IDIR_OPENSSH_CLIENT}/usr/bin
-	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT_UTILS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/ssh-{add,agent,keyscan} \
-	    ${IDIR_OPENSSH_CLIENT_UTILS}/usr/bin
-	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
-	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/sftp \
-		${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
-	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
-	${INSTALL_BIN} ${WRKINST}/usr/libexec/sftp-server \
-		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
-	chmod 0700 {${IDIR_OPENSSH_CLIENT},${IDIR_OPENSSH_SERVER}}/etc/ssh
 	# ssh pubkey
 	test -z $(ADK_RUNTIME_SSH_PUBKEY) || ( \
 		mkdir -p $(IDIR_OPENSSH_SERVER)/etc/ssh; \
 		echo $(ADK_RUNTIME_SSH_PUBKEY) \
 		>$(IDIR_OPENSSH_SERVER)/etc/ssh/authorized_keys; \
         )
+
+openssh-client-install:
+	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT}/etc/ssh
+	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT}/usr/bin
+	${INSTALL_DATA} ${WRKINST}/etc/ssh/ssh_config \
+	    ${IDIR_OPENSSH_CLIENT}/etc/ssh
+	${INSTALL_BIN} ${WRKINST}/usr/bin/{ssh,scp} \
+	    ${IDIR_OPENSSH_CLIENT}/usr/bin
+
+openssh-client-utils-install:
+	${INSTALL_DIR} ${IDIR_OPENSSH_CLIENT_UTILS}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ssh-{add,agent,keyscan} \
+	    ${IDIR_OPENSSH_CLIENT_UTILS}/usr/bin
+
+openssh-sftp-client-install:
+	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/sftp \
+		${IDIR_OPENSSH_SFTP_CLIENT}/usr/bin
+
+openssh-sftp-server-install:
+	${INSTALL_DIR} ${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
+	${INSTALL_BIN} ${WRKINST}/usr/libexec/sftp-server \
+		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 
 include ${TOPDIR}/mk/pkg-bottom.mk
