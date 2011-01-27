@@ -7,7 +7,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"${portmap:-NO}" = x"NO" && exit 0
+	test x"${portmap:-NO}" = x"NO" || test x"${rpcbind:-NO}" = x"NO" && exit 0
 	test x"${nfs_server:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
@@ -18,9 +18,8 @@ start)
 	/bin/touch /var/lib/nfs/xtab
 	/bin/touch /var/lib/nfs/sm
 	chown nfs:nfs /var/lib/nfs/sm
-	/usr/sbin/exportfs -r
-	/usr/sbin/mountd
 	/usr/sbin/nfsd
+	/usr/sbin/mountd
 	if [ ${nfs_server_version} -eq 4 ];then
 		mkdir -p /var/lib/nfs/rpc_pipefs
 		mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs
@@ -29,7 +28,6 @@ start)
 	fi
 	;;
 stop)
-	kill $(pgrep -f /usr/sbin/nfsd)
 	kill $(pgrep -f /usr/sbin/mountd)
 	if [ ${nfs_server_version} -eq 4 ];then
 		kill $(pgrep -f /usr/sbin/idmapd)

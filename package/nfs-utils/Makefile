@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.3
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		1131dc5f27c4f3905a6e7ee0d594fd4d
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
