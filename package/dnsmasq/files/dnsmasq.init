@@ -6,7 +6,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	[[ $dns_dhcp = NO ]] && exit 0
+	[[ $dnsmasq = NO ]] && exit 0
 	exec sh $0 start
 	;;
 start)
