@@ -5,10 +5,10 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
 PKG_VERSION:=		1.7.4p4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		55d9906535d70a1de347cd3d3550ee87
 PKG_DESCR:=		su do
-PKG_SECTION:=		misc
+PKG_SECTION:=		admin
 PKG_URL:=		http://www.courtesan.com/sudo/
 PKG_SITES:=		http://www.courtesan.com/sudo/dist/
 
@@ -17,6 +17,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,SUDO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-pam \
+			--with-env-editor \
 			--with-timedir=/var/run
 
 post-install:
