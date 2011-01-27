@@ -57,6 +57,12 @@ TARGET_LDFLAGS:=	-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
 			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib
 
+ifneq ($(ADK_NATIVE),)
+TARGET_CPPFLAGS:=
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
+TARGET_LDFLAGS:=
+endif
+
 ifneq ($(ADK_STATIC),)
 TARGET_CFLAGS+=		-static
 TARGET_CXXFLAGS+=	-static
@@ -81,11 +87,6 @@ else
 TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
 endif
 
-ifneq ($(ADK_NATIVE),)
-TARGET_CPPFLAGS:=
-TARGET_CFLAGS:=		$(TARGET_OPTIMIZATION) $(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
-TARGET_LDFLAGS:=
-endif
 
 # A nifty macro to make testing gcc features easier (from uClibc project)
 check_gcc=$(shell \
