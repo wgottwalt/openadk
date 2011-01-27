@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.7
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -60,6 +60,7 @@ pre-configure:
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/progs
+	${CP} ${WRKBUILD}/progs/tic ${STAGING_HOST_DIR}/bin
 	find ${WRKBUILD} -name *.o -exec rm {} \;
 	find ${WRKBUILD} -name *.a -exec rm {} \;
 

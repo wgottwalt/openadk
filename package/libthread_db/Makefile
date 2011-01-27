@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
-else
+endif
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
 include ${TOPDIR}/toolchain/eglibc/Makefile.inc
-else
-include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 
 PKG_NAME:=		libthread-db
@@ -28,7 +28,9 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
+ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib
 	${CP} ${STAGING_TARGET_DIR}/lib/libthread_db*.so* ${IDIR_LIBTHREAD_DB}/lib
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
