@@ -1,4 +1,3 @@
-- Xorg update
 - add and test brcm 2.6 wireless support
 - man pages in ipkg/tgz packages (automatic)
 - automate /etc handling via conffiles
