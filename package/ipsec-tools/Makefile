@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://ipsec-tools.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
+PKG_CFLINE_IPSEC_TOOLS:=depends on !ADK_TOOLCHAIN_ONLY
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS_IPSEC_TOOLS:=	WITH_IPV6

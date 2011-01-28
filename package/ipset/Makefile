@@ -12,6 +12,9 @@ PKG_SECTION:=		firewall
 PKG_URL:=		http://ipset.netfilter.org/
 PKG_SITES:=		http://ipset.netfilter.org/
 
+PKG_ARCH_DEPENDS:=	!arm
+PKG_CFLINE_IPSET:=	depends on !ADK_TOOLCHAIN_ONLY
+
 PKG_SUBPKGS:=		IPSET IPSET_KMOD
 PKGSD_IPSET_KMOD:=	ipset kernel module
 PKGSC_IPSET_KMOD:=	kernel

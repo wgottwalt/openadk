@@ -35,7 +35,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
 			--disable-libuuid \
-			--enable-libblkid \
+			--disable-libblkid \
 			--enable-libmount \
 			--enable-mount
 MAKE_FLAGS+=		OPT="${TARGET_CFLAGS}" ARCH="${ARCH}"

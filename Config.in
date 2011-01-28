@@ -35,7 +35,7 @@ config ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in"
 
 menu "Runtime configuration"
-depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in.runtime"
 endmenu
 

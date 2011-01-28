@@ -11,6 +11,8 @@ PKG_DESCR:=		connection tracking for RTSP
 PKG_SECTION:=		kernel
 PKG_URL:=		http://github.com/maru-sama/rtsp-linux-v2.6
 
+PKG_CFLINE_RTSP:=	depends on !ADK_TOOLCHAIN_ONLY
+
 NO_DISTFILES:=          1
 
 include ${TOPDIR}/mk/package.mk

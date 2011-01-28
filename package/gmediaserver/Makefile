@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
 PKG_DESCR:=		An UPnP music media server
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		id3lib libupnp
-PKG_BUILDDEP:=		id3lib libupnp
+PKG_DEPENDS:=		id3lib libupnp libiconv
+PKG_BUILDDEP:=		id3lib libupnp libiconv
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 
@@ -18,8 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz" \
-			am_cv_func_iconv=no
+CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz"
 CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
 			--with-libupnp="${STAGING_TARGET_DIR}/usr"
 

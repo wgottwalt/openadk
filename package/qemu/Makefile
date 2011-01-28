@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		zlib sdl
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
+PKG_ARCH_DEPENDS:=	x86 x86_64
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
