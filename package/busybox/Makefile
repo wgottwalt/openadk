@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.18.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		f15fe752d8b7012aa5e59f83b88ccb1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
@@ -35,30 +35,34 @@ ifeq ($(ADK_NATIVE),y)
 	yes '' | \
 	$(MAKE) V=1 \
 	    IPKG_ARCH="$(CPU_ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
+	    ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 else
 	yes '' | \
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 	    EXTRA_CFLAGS="$(TARGET_CFLAGS)" IPKG_ARCH="$(CPU_ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
+	    ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
 endif
 
 do-build:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
+	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+		-C $(WRKBUILD) busybox
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) busybox
+	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+		-C $(WRKBUILD) busybox
 endif
 
 do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) V=1 \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
+	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+		-C $(WRKBUILD) install $(MAKE_TRACE)
 else
 	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(HOSTCC)" -C $(WRKBUILD) install $(MAKE_TRACE)
+	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+		-C $(WRKBUILD) install $(MAKE_TRACE)
 endif
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 ifeq ($(ADK_DEBUG),y)

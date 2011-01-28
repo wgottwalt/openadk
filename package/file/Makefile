@@ -9,13 +9,19 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		accade81ff1cc774904b47c72c8aeea0
 PKG_DESCR:=		a file type guesser
 PKG_SECTION:=		utils
+PKG_DEPENDS:=		libmagic
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 			ftp://ftp.astron.com/pub/file/
 
+PKG_SUBPKGS:=		FILE LIBMAGIC
+PKGSD_LIBMAGIC:=	file type guesser library
+PKGSC_LIBMAGIC:=	libs
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC}))
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
@@ -26,12 +32,15 @@ pre-configure:
 	${INSTALL_BIN} ${WRKBUILD}/src/file ${WRKBUILD}/magic
 	${MAKE} -C ${WRKBUILD} clean
 
-post-install:
-	${INSTALL_DIR} ${IDIR_FILE}/usr/bin ${IDIR_FILE}/usr/lib \
-		${IDIR_FILE}/usr/share/misc
+file-install:
+	${INSTALL_DIR} ${IDIR_FILE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/file ${IDIR_FILE}/usr/bin
+
+libmagic-install:
+	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/share/misc
 	${INSTALL_DATA} ${WRKINST}/usr/share/misc/magic.mgc \
-		${IDIR_FILE}/usr/share/misc
-	${CP} ${WRKINST}/usr/lib/libmagic.so.* ${IDIR_FILE}/usr/lib/
+		${IDIR_LIBMAGIC}/usr/share/misc
+	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libmagic.so* ${IDIR_LIBMAGIC}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

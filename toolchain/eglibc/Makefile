@@ -25,7 +25,7 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--enable-add-ons
 
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
-			BUILD_CC=${HOSTCC} \
+			BUILD_CC=${CC_FOR_BUILD} \
 			CFLAGS="$(TARGET_CFLAGS)" \
 			CC=${REAL_GNU_TARGET_NAME}-gcc \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \

@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-dri-drivers=${DRI_DRIVERS},swrast \
 			--with-demos=xdemos
 
-XAKE_FLAGS+=		HOST_CC=${HOSTCC} GLSL_CL=${STAGING_HOST_DIR}/bin/glslcompile
+XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD} GLSL_CL=${STAGING_HOST_DIR}/bin/glslcompile
 
 post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \

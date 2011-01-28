@@ -72,11 +72,10 @@ set +e
 
 cat >Makefile <<'EOF'
 include ${TOPDIR}/prereq.mk
-HOSTCFLAGS+=	-O2
 all: run-test
 
 test: test.c
-	${HOSTCC} ${HOSTCFLAGS} -o $@ $^ ${LDADD}
+	${CC_FOR_BUILD} ${CFLAGS_FOR_BUILD} -o $@ $^ ${LDADD}
 
 run-test: test
 	./test

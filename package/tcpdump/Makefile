@@ -22,7 +22,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TCPDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${HOSTCC} \
+CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${CC_FOR_BUILD} \
 			ac_cv_linux_vers=2 \
 			td_cv_buggygetaddrinfo="no"
 CONFIGURE_ARGS+=	--without-crypto

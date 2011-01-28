@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.7
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LIBNCURSES_DEV,libncurses-dev,${PKG_VERSION}-${PKG_RE
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
-			--with-build-cc=${HOSTCC} \
+			--with-build-cc=${CC_FOR_BUILD} \
 			--without-progs \
 			--with-fallbacks \
 			--disable-termcap \
@@ -60,6 +60,7 @@ pre-configure:
 	);
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/progs
+	${CP} ${WRKBUILD}/progs/tic ${STAGING_HOST_DIR}/bin
 	find ${WRKBUILD} -name *.o -exec rm {} \;
 	find ${WRKBUILD} -name *.a -exec rm {} \;
 

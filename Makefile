@@ -191,7 +191,7 @@ NO_ERROR=0
 		echo "GMAKE:=$$(which gmake)" >>prereq.mk ;\
 	fi
 	@echo "GNU_HOST_NAME:=$$(${CC} -dumpmachine)" >>prereq.mk
-	@echo "HOSTARCH:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
+	@echo "ARCH_FOR_BUILD:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
 	    -e 's/sparc.*/sparc/' \
 	    -e 's/armeb.*/armeb/g' \
 	    -e 's/arm.*/arm/g' \
@@ -205,8 +205,6 @@ NO_ERROR=0
 	    )" >>prereq.mk
 	@echo 'CC_FOR_BUILD:=${CC}' >>prereq.mk
 	@echo 'CXX_FOR_BUILD:=${CXX}' >>prereq.mk
-	@echo 'HOSTCC:=${CC}' >>prereq.mk
-	@echo 'HOSTCXX:=${CXX}' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk

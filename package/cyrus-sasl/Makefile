@@ -61,8 +61,8 @@ CONFIGURE_ARGS+=	--disable-sample \
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/include \
-		CC="${HOSTCC}" \
-		LINK="${HOSTCC} -o makemd5 -lc" \
+		CC="${CC_FOR_BUILD}" \
+		LINK="${CC_FOR_BUILD} -o makemd5 -lc" \
 		LIBS="" \
 		CFLAGS="" \
 		LDFLAGS="" \

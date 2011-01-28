@@ -7,10 +7,10 @@ include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers:
-	$(MAKE) -C $(WRKBUILD) HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
-	$(MAKE) -C $(WRKBUILD) HOSTCC=$(HOSTCC) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(LINUX_HEADER_DIR) \
 		headers_install
 	# cryptodev.h from ocf-linux-20080917

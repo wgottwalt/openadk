@@ -302,21 +302,21 @@ endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
-		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
 	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
-		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
 	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
@@ -385,20 +385,20 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 endif
 ifeq ($(ADKtype),ibmx-40)
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
-		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
 	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(HOSTARCH)/sys-available/$(ADKtype) > \
-		target/$(HOSTARCH)/sys-enabled/.$(ADKtype)
+	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(HOSTARCH)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
 	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
@@ -551,20 +551,20 @@ bulkallmod:
 	  done <${TOPDIR}/target/arch.lst ;\
 	done
 
-${TOPDIR}/bin/tools/pkgmaker: tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
 	@mkdir -p $(TOPDIR)/bin/tools
-	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+	@$(CC_FOR_BUILD) -Wall -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
-${TOPDIR}/bin/tools/pkgrebuild:
-	@$(HOSTCC) -Wall -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
+${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
+	@$(CC_FOR_BUILD) -Wall -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
 package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
 	@echo "Generating menu structure ..."
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
-${TOPDIR}/bin/tools/depmaker:
-	$(HOSTCC) -g -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
+${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	$(CC_FOR_BUILD) -g -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/bin/tools/depmaker
 	@echo "Generating dependencies ..."

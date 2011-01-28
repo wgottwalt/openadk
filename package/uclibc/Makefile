@@ -55,7 +55,7 @@ uclibc-dev-install:
 		PREFIX=$(IDIR_UCLIBC_DEV)/ \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(IDIR_UCLIBC_DEV)/ \
-		HOSTCC="$(HOSTCC)" \
+		HOSTCC="$(CC_FOR_BUILD)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
 	@find $(IDIR_UCLIBC_DEV) -name .install -exec rm {} \;

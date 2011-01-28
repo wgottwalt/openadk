@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		usbutils
 PKG_VERSION:=		0.86
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		34979f675d2bcb3e1b45012fa830a53f
 PKG_DESCR:=		A program to list USB devices
 PKG_SECTION:=		utils
@@ -23,7 +23,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/share
 	${INSTALL_DATA} ${WRKINST}/usr/share/usb.ids \
 		${IDIR_LSUSB}/usr/share/
-	${INSTALL_DIR} ${IDIR_LSUSB}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/lsusb ${IDIR_LSUSB}/usr/sbin/
+	${INSTALL_DIR} ${IDIR_LSUSB}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/lsusb ${IDIR_LSUSB}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

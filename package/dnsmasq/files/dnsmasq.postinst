@@ -4,4 +4,4 @@
 gid=$(get_next_gid)
 add_user dnsmasq $(get_next_uid) $gid /tmp
 add_group dnsmasq $gid
-add_rcconf dnsmasq dns_dhcp NO
+add_rcconf dnsmasq dnsmasq NO

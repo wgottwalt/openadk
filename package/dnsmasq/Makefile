@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
 PKG_VERSION:=		2.55
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b093d7c6bc7f97ae6fd35d048529232a
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		dns

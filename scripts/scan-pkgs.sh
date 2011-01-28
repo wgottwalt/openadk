@@ -60,6 +60,10 @@ if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
 	NEED_BISON="$NEED_BISON heimdal-server"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
+	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
+fi
+
 if [[ -n $ADK_COMPILE_PCMCIAUTILS ]]; then
 	NEED_BISON="$NEED_BISON pcmciautils"
 	NEED_FLEX="$NEED_FLEX pcmciautils"
@@ -274,6 +278,13 @@ fi
 if [[ -n $NEED_FLEX ]]; then
 	if ! which flex >/dev/null 2>&1; then
 		echo >&2 You need flex to to use $NEED_FLEX package
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_XSLTPROC ]]; then
+	if ! which xsltproc >/dev/null 2>&1; then
+		echo >&2 You need xsltproc to to use $NEED_XSLTPROC package
 		out=1
 	fi
 fi

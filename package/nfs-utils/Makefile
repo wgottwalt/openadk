@@ -5,21 +5,26 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.3
-PKG_RELEASE:=		3
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		1131dc5f27c4f3905a6e7ee0d594fd4d
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-nfsd portmap
+PKG_DEPENDS:=		kmod-nfsd
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
-PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS WITH_TIRPC
+PKG_CHOICES_NFS_UTILS:= WITH_TIRPC WITHOUT_TIRPC
+PKGCD_WITH_TIRPC:=	enable Transport Independent RPC
+PKGCS_WITH_TIRPC:=	libtirpc rpcbind
+PKGCB_WITH_TIRPC:=	libtirpc rpcbind
+PKGCD_WITHOUT_TIRPC:=	disable Transport Independent RPC
+PKGCS_WITHOUT_TIRPC:=	portmap
+PKGCB_WITHOUT_TIRPC:=	portmap
+
+PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
 PKGFS_WITH_KERBEROS:=	libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 PKGFB_WITH_KERBEROS:=	libnfsidmap krb5 libevent libgssglue librpcsecgss
-PKGFD_WITH_TIRPC:=	enable Transport Independent RPC
-PKGFS_WITH_TIRPC:=	libtirpc rpcbind
-PKGFB_WITH_TIRPC:=	libtirpc rpcbind
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

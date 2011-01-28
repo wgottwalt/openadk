@@ -57,6 +57,12 @@ TARGET_LDFLAGS:=	-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
 			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib
 
+ifneq ($(ADK_NATIVE),)
+TARGET_CPPFLAGS:=
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
+TARGET_LDFLAGS:=
+endif
+
 ifneq ($(ADK_STATIC),)
 TARGET_CFLAGS+=		-static
 TARGET_CXXFLAGS+=	-static
@@ -81,18 +87,20 @@ else
 TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
 endif
 
-ifneq ($(ADK_NATIVE),)
-TARGET_CPPFLAGS:=
-TARGET_CFLAGS:=		$(TARGET_OPTIMIZATION) $(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
-TARGET_LDFLAGS:=
-endif
+
+# A nifty macro to make testing gcc features easier (from uClibc project)
+check_gcc=$(shell \
+        if $(CC_FOR_BUILD) $(1) -S -o /dev/null -xc /dev/null > /dev/null 2>&1; \
+        then echo "$(1)"; else echo "$(2)"; fi)
+
+CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
 
 # host compiler flags
 CPPFLAGS_FOR_BUILD?=
-CFLAGS_FOR_BUILD?=      -O2 -Wall
+CFLAGS_FOR_BUILD=      -O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall
 LDFLAGS_FOR_BUILD?=
-FLAGS_FOR_BUILD:=       ${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
+FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			sed -i -e

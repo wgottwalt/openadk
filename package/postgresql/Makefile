@@ -41,7 +41,7 @@ pre-configure:
 		${PKG_CONFIGURE_ARGS} \
 	);
 	${MAKE} -C "${WRKBUILD}/src/bin/pg_config" \
-		CC="${HOSTCC}" \
+		CC="${CC_FOR_BUILD}" \
 		DESTDIR="${WRKINST}" \
 		all install
 
