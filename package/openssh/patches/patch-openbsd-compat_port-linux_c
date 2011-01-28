@@ -1,0 +1,14 @@
+avoid following warning in syslog:
+sshd (1111): /proc/1111/oom_adj is deprecated, please use /proc/1111/oom_score_adj instead.
+
+--- openssh-5.6p1.orig/openbsd-compat/port-linux.c	2010-03-01 05:52:50.000000000 +0100
++++ openssh-5.6p1/openbsd-compat/port-linux.c	2011-01-27 19:16:12.000000000 +0100
+@@ -208,7 +208,7 @@ ssh_selinux_change_context(const char *n
+ #endif /* WITH_SELINUX */
+ 
+ #ifdef LINUX_OOM_ADJUST
+-#define OOM_ADJ_PATH	"/proc/self/oom_adj"
++#define OOM_ADJ_PATH	"/proc/self/oom_score_adj"
+ /*
+  * The magic "don't kill me", as documented in eg:
+  * http://lxr.linux.no/#linux+v2.6.32/Documentation/filesystems/proc.txt
