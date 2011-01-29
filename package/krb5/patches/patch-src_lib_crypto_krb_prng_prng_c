@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/lib/crypto/krb/prng/prng.c
++++ krb5-1.9/src/lib/crypto/krb/prng/prng.c
+@@ -168,7 +168,7 @@
+        we have both /dev/random and /dev/urandom.  We want the strong
+        data included in the reseed so we get it first.*/
+     if (strong) {
+-        if (read_entropy_from_device(context, "/dev/random"))
++        if (read_entropy_from_device(context, "/dev/urandom"))
+             *oursuccess = 1;
+     }
+     if (read_entropy_from_device(context, "/dev/urandom"))
