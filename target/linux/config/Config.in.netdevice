@@ -91,6 +91,7 @@ config ADK_KERNEL_B44
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
 	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
+	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54GS
 	default n
 	help
 
