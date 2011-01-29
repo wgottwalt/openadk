@@ -60,7 +60,7 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),squashfs)
 imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
-	@if [ $$(stat -f %z ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
+	@if [ $$($(STATCMD) ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
 		echo 'Image is too big!'; \
 	else \
 		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${BIN_DIR}/${ROOTFSSQUASHFS}; \

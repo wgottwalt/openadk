@@ -24,7 +24,7 @@ ifeq ($(ADK_TARGET_FS),squashfs)
 imageinstall: kernel-install $(BUILD_DIR)/$(ROOTFSSQUASHFS)
 	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \
 		bs=4063232 conv=sync $(MAKE_TRACE)
-	@if [ $$(stat --format=%s ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \
+	@if [ $$($(STATCMD) ${BIN_DIR}/${ROOTFSSQUASHFS}) -gt 4063232 ];then \
 		echo 'Image is too big!'; \
 	else \
 		echo 'Use sudo ./boot_linux -F -i $(ROOTFSSQUASHFS) to flash'; \
