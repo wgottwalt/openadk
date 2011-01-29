@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		220c3dbb05a1bae1e6ad0bec4a6ac331
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
