@@ -39,21 +39,17 @@ $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELE
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
 TARGET_LDFLAGS+=	-lpthread
-
-pre-build:
-	${MAKE} -C ${WRKBUILD}/util \
-		BUILDCC="${CC_FOR_BUILD}" \
-		CFLAGS="${CFLAGS_FOR_BUILD}" \
-		LDFLAGS="${LDFLAGS_FOR_BUILD}" \
-		CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
-		subst
+MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
+			BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
+			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+			BUILD_CPPFLAGS="${CPPFLAGS_FOR_BUILD}"
 
 post-build:
 	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
 	${INSTALL_DIR} ${WRKINST}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin/
 
-post-install:
+e2fsprogs-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_E2FSPROGS}/etc/
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
@@ -63,27 +59,32 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin/
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \
 		${IDIR_E2FSPROGS}/usr/lib/
-	# subpackage libblkid
+
+libblkid-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libblkid.so* \
 		${IDIR_LIBBLKID}/usr/lib/
-	# subpackage libcom_err
+
+libcom-err-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcom_err.so* \
 		${IDIR_LIBCOM_ERR}/usr/lib/
-	# subpackage libss
+	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
+
+libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libss.so* \
 		${IDIR_LIBSS}/usr/lib/
-	# subpackage libuuid
+
+libuuid-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libuuid.so* \
 		${IDIR_LIBUUID}/usr/lib/
-	# install some headers/apps explicitely
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
 		${STAGING_TARGET_DIR}/usr/include/uuid
-	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
+
+e2fsck-static-install:
 	${INSTALL_DIR} ${IDIR_E2FSCK_STATIC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck.static \
 		${IDIR_E2FSCK_STATIC}/usr/sbin/e2fsck
