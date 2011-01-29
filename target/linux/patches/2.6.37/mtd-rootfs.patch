@@ -1,6 +1,5 @@
-diff -Nur linux-2.6.37.orig/drivers/mtd/mtdpart.c linux-2.6.37/drivers/mtd/mtdpart.c
---- linux-2.6.37.orig/drivers/mtd/mtdpart.c	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/mtd/mtdpart.c	2011-01-18 00:23:32.000000000 +0100
+--- linux-2.6.37.orig/drivers/mtd/mtdpart.c
++++ linux-2.6.37/drivers/mtd/mtdpart.c
 @@ -30,6 +30,7 @@
  #include <linux/mtd/mtd.h>
  #include <linux/mtd/partitions.h>
@@ -9,18 +8,18 @@ diff -Nur linux-2.6.37.orig/drivers/mtd/mtdpart.c linux-2.6.37/drivers/mtd/mtdpa
  
  /* Our partition linked list */
  static LIST_HEAD(mtd_partitions);
-@@ -642,6 +643,14 @@
+@@ -641,6 +642,14 @@
+ 		slave = allocate_partition(master, parts + i, i, cur_offset);
  		if (IS_ERR(slave))
  			return PTR_ERR(slave);
- 
-+		if (!strcmp(parts[i].name, "rootfs")) {
++
++		if (strcmp(parts[i].name, "rootfs") == 0) {
 +			if (ROOT_DEV == 0) {
 +				printk(KERN_NOTICE "mtd: partition \"rootfs\" "
 +					"set to be root filesystem\n");
-+					ROOT_DEV = MKDEV(MTD_BLOCK_MAJOR, slave->mtd.index);
++					ROOT_DEV = MKDEV(MTD_BLOCK_MAJOR, i);
 +			}
 +		}
-+
+ 
  		mutex_lock(&mtd_partitions_mutex);
  		list_add(&slave->list, &mtd_partitions);
- 		mutex_unlock(&mtd_partitions_mutex);
