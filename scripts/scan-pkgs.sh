@@ -60,6 +60,10 @@ if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
 	NEED_BISON="$NEED_BISON heimdal-server"
 fi
 
+if [[ -n $ADK_COMPILE_KRB5 ]]; then
+	NEED_BISON="$NEED_BISON krb5"
+fi
+
 if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
 	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
 fi
