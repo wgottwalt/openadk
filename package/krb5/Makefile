@@ -59,7 +59,7 @@ post-install:
 		${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/usr/lib/krb5/plugins/kdb/db2.so \
 		${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
-	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt,kadm5srv,kdb5}.so* \
+	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
 		${IDIR_KRB5_SERVER}/usr/lib
 
 libkrb5-install:
