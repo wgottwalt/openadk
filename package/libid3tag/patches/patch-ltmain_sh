@@ -1,0 +1,11 @@
+--- libid3tag-0.15.1b.orig/ltmain.sh	2004-02-17 02:52:36.000000000 +0100
++++ libid3tag-0.15.1b/ltmain.sh	2011-01-30 18:49:04.000000000 +0100
+@@ -1372,7 +1372,7 @@ EOF
+       # but this is not reliable with gcc because gcc may use -mfoo to
+       # select a different linker, different libraries, etc, while
+       # -Wl,-mfoo simply passes -mfoo to the linker.
+-      -m*)
++      -m*|-fstack-protector*|-flto)
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
+ 	arg=`$echo "X$arg" | $Xsed -e "$sed_quote_subst"`
