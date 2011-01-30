@@ -15,9 +15,12 @@ PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		KRB5_SERVER LIBKRB5
+PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5
 PKGSD_LIBKRB5:=		MIT kerberos libraries
 PKGSC_LIBKRB5:=		libs
+PKGSD_KRB5_CLIENT:=	MIT kerberos client tools
+PKGSC_KRB5_CLIENT:=	crypto
+PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
@@ -25,6 +28,7 @@ WRKSRC=			${WRKDIST}/src
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/et
@@ -46,11 +50,9 @@ pre-build:
 	# fix nm call in script, we need the GNU version of nm
 	$(SED) "s#@@NM@@#${NM}#" ${WRKSRC}/util/export-check.pl
 
-post-install:
-	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc
+krb5-server-install:
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin
-	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/lib
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
 	${INSTALL_DATA} ./files/kdc.conf ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{ktutil,kadmin} \
@@ -59,13 +61,18 @@ post-install:
 		${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/usr/lib/krb5/plugins/kdb/db2.so \
 		${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
-	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
-		${IDIR_KRB5_SERVER}/usr/lib
+
+krb5-client-install:
+	${INSTALL_DIR} ${IDIR_KRB5_CLIENT}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/{kinit,kpasswd,klist,kdestroy} \
+		${IDIR_KRB5_CLIENT}/usr/bin
 
 libkrb5-install:
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/etc
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/usr/lib
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_LIBKRB5}/etc
+	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
+		${IDIR_LIBKRB5}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
 		${IDIR_LIBKRB5}/usr/lib
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
