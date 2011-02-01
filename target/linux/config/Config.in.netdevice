@@ -351,6 +351,7 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 	prompt "kmod-rt2400pci............... Ralink rt2400"
 	tristate
 	select ADK_KERNEL_RT2X00
+	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
@@ -362,6 +363,7 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 	prompt "kmod-rt2500pci............... Ralink rt2500"
 	tristate
 	select ADK_KERNEL_RT2X00
+	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
@@ -373,6 +375,7 @@ config ADK_KPACKAGE_KMOD_RT61PCI
 	prompt "kmod-rt61pci................. Ralink rt2501/rt61"
 	tristate
 	select ADK_KERNEL_RT2X00
+	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
 	select ADK_PACKAGE_RT61_FIRMWARE
