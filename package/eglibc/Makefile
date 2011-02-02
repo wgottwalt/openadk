@@ -84,11 +84,9 @@ eglibc-dev-install:
 	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
-	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libm.so.6 libm.so
-	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libutil.so.1 libutil.so
-	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf librt.so.1 librt.so
-	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libcrypt.so.1 libcrypt.so
-	cd $(IDIR_EGLIBC_DEV)/lib && ln -sf libdl.so.2 libdl.so
+	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+		cd $(IDIR_GLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
 		HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
