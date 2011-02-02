@@ -257,7 +257,6 @@ if test $1 = commit; then
 	    cfgfs.helper -Z - /tmp/.cfgfs/status.asz
 	cd /tmp/.cfgfs/root
 	rm -f /tmp/.cfgfs/temp/.cfgfs_* /tmp/.cfgfs/temp/.rnd
-	find /tmp/.cfgfs/temp -type d -empty -delete
 	find . -type f | while read f; do
 		f=${f#./}
 		if [[ ! -e /tmp/.cfgfs/temp/$f ]]; then
@@ -269,6 +268,7 @@ if test $1 = commit; then
 		y=$(cd ../temp; md5sum "$f" 2>/dev/null)
 		[[ "$x" = "$y" ]] && rm "../temp/$f"
 	done
+	find /tmp/.cfgfs/temp -type d -empty -delete
 	rv=0
 	if [ $mtd -eq 1 ]; then
 		if ! ( cfgfs.helper -M /tmp/.cfgfs/temp | eval $mtdtool -F write - cfgfs ); then
