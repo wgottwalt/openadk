@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/lib/krb5/krb/sendauth.c	2009-10-31 01:48:38.000000000 +0100
++++ krb5-1.9/src/lib/krb5/krb/sendauth.c	2011-01-30 23:06:08.000000000 +0100
+@@ -30,7 +30,7 @@
+ 
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
++#include <et/com_err.h>
+ #include "auth_con.h"
+ #include <errno.h>
+ #include <stdio.h>

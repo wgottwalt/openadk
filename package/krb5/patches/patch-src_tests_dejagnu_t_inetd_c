@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/tests/dejagnu/t_inetd.c	2010-04-22 01:14:49.000000000 +0200
++++ krb5-1.9/src/tests/dejagnu/t_inetd.c	2011-01-31 18:34:11.000000000 +0100
+@@ -55,7 +55,7 @@
+ #include <unistd.h>
+ #endif
+ 
+-#include "com_err.h"
++#include <et/com_err.h>
+ 
+ 
+ char *progname;

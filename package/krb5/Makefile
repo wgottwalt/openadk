@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.9
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		220c3dbb05a1bae1e6ad0bec4a6ac331
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
@@ -25,13 +25,16 @@ PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
 
+ifeq ($(ADK_NATIVE),y)
+NM:=nm
+endif
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
 
-TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/et
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
 			--with-system-ss \
@@ -55,6 +58,7 @@ krb5-server-install:
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
 	${INSTALL_DATA} ./files/kdc.conf ${IDIR_KRB5_SERVER}/etc/krb5kdc
+	${INSTALL_DATA} ./files/kadm5.acl ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{ktutil,kadmin} \
 		${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{kdb5_util,krb5kdc,kadmind,kadmin.local} \

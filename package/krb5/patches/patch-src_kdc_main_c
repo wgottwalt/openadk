@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/kdc/main.c	2010-12-01 22:37:25.000000000 +0100
++++ krb5-1.9/src/kdc/main.c	2011-01-31 13:12:23.000000000 +0100
+@@ -64,7 +64,6 @@
+ #include <sys/wait.h>
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
+ #include "adm.h"
+ #include "adm_proto.h"
+ #include "kdc_util.h"

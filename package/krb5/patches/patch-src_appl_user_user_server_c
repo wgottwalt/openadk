@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/appl/user_user/server.c	2009-11-24 18:46:45.000000000 +0100
++++ krb5-1.9/src/appl/user_user/server.c	2011-01-31 15:04:26.000000000 +0100
+@@ -41,7 +41,6 @@
+ 
+ #include "port-sockets.h"
+ #include "k5-int.h"
+-#include "com_err.h"
+ 
+ /* fd 0 is a tcp socket used to talk to the client */
+ 

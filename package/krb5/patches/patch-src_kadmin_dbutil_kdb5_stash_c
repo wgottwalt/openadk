@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/kadmin/dbutil/kdb5_stash.c	2010-06-22 15:09:58.000000000 +0200
++++ krb5-1.9/src/kadmin/dbutil/kdb5_stash.c	2011-01-31 13:26:20.000000000 +0100
+@@ -55,7 +55,6 @@
+  */
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
+ #include <kadm5/admin.h>
+ #include <stdio.h>
+ #include "kdb5_util.h"

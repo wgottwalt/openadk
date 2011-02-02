@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/lib/kadm5/admin.h	2010-12-01 22:37:25.000000000 +0100
++++ krb5-1.9/src/lib/kadm5/admin.h	2011-01-30 23:29:11.000000000 +0100
+@@ -47,7 +47,7 @@
+ #include        <gssrpc/rpc.h>
+ #include        <krb5.h>
+ #include        <kdb.h>
+-#include        <com_err.h>
++#include        <et/com_err.h>
+ #include        <kadm5/kadm_err.h>
+ #include        <kadm5/chpass_util_strings.h>
+ 

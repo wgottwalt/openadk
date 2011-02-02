@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/appl/user_user/client.c	2009-11-24 18:46:45.000000000 +0100
++++ krb5-1.9/src/appl/user_user/client.c	2011-01-31 15:04:15.000000000 +0100
+@@ -38,7 +38,6 @@
+ #include <errno.h>
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
+ 
+ int main (int argc, char *argv[])
+ {

@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/lib/kadm5/logger.c	2010-03-10 21:45:12.000000000 +0100
++++ krb5-1.9/src/lib/kadm5/logger.c	2011-01-31 12:34:25.000000000 +0100
+@@ -34,7 +34,6 @@
+  */
+ #include "k5-int.h"
+ #include "adm_proto.h"
+-#include "com_err.h"
+ #include <stdio.h>
+ #include <ctype.h>
+ #ifdef  HAVE_SYSLOG_H
