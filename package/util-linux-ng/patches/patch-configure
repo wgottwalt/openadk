@@ -1,0 +1,16 @@
+--- util-linux-ng-2.18.orig/configure	2010-06-30 14:53:01.000000000 +0200
++++ util-linux-ng-2.18/configure	2011-02-01 16:31:25.000000000 +0100
+@@ -15816,13 +15816,6 @@ else
+ fi
+ 
+ 
+-case "$enable_libblkid:$enable_libmount" in
+-no:yes)
+-  { { $as_echo "$as_me:$LINENO: error: cannot enable libmount when libblkid is disabled" >&5
+-$as_echo "$as_me: error: cannot enable libmount when libblkid is disabled" >&2;}
+-   { (exit 1); exit 1; }; } ;;
+-esac
+-
+ 
+ 
+ 

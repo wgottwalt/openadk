@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux-ng
 PKG_VERSION:=		2.18
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		aff22adfff1bf39cd3f13371b95a3d3a
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
