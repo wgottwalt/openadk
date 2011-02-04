@@ -1,0 +1,11 @@
+--- gdb-7.1.orig/gdb/gdbserver/linux-cris-low.c
++++ gdb-7.1/gdb/gdbserver/linux-cris-low.c
+@@ -62,7 +62,7 @@
+ extern int debug_threads;
+ 
+ static CORE_ADDR
+-cris_get_pc (struct regcache *regcache, void)
++cris_get_pc (struct regcache *regcache)
+ {
+   unsigned long pc;
+   collect_register_by_name (regcache, "pc", &pc);

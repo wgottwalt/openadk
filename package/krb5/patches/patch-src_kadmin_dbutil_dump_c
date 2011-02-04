@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/kadmin/dbutil/dump.c	2010-07-06 23:53:23.000000000 +0200
++++ krb5-1.9/src/kadmin/dbutil/dump.c	2011-01-31 13:32:19.000000000 +0100
+@@ -37,7 +37,6 @@
+ #include <kadm5/admin.h>
+ #include <kadm5/server_internal.h>
+ #include <kdb.h>
+-#include <com_err.h>
+ #include "kdb5_util.h"
+ #if defined(HAVE_REGEX_H) && defined(HAVE_REGCOMP)
+ #include <regex.h>

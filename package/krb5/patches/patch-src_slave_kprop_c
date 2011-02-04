@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/slave/kprop.c	2010-12-01 03:15:55.000000000 +0100
++++ krb5-1.9/src/slave/kprop.c	2011-01-31 13:46:16.000000000 +0100
+@@ -44,7 +44,6 @@
+ #include <fcntl.h>
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
+ #include "kprop.h"
+ 
+ #ifndef GETSOCKNAME_ARG3_TYPE

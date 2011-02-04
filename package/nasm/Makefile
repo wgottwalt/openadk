@@ -8,7 +8,7 @@ PKG_VERSION:=		2.07
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		84d8e009b3d2565a810ab3ddad1f4f63
 PKG_DESCR:=		the netwide assembler
-PKG_SECTION:=		devel
+PKG_SECTION:=		lang
 PKG_URL:=		http://sourceforge.net/projects/nasm/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nasm/nasm%20sources/2.07/}
 

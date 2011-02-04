@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/appl/simple/server/sim_server.c	2010-04-24 21:24:36.000000000 +0200
++++ krb5-1.9/src/appl/simple/server/sim_server.c	2011-01-31 14:56:28.000000000 +0100
+@@ -42,7 +42,7 @@
+ #include <netinet/in.h>
+ #include <netdb.h>
+ 
+-#include "com_err.h"
++#include <et/com_err.h>
+ 
+ #include "simple.h"
+ 

@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/appl/sample/sclient/sclient.c	2009-11-24 18:46:45.000000000 +0100
++++ krb5-1.9/src/appl/sample/sclient/sclient.c	2011-01-31 14:42:12.000000000 +0100
+@@ -31,7 +31,7 @@
+  */
+ 
+ #include "krb5.h"
+-#include "com_err.h"
++#include <et/com_err.h>
+ 
+ #include <stdio.h>
+ #include <string.h>

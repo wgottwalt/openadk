@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/tests/asn.1/krb5_decode_test.c	2010-04-30 23:22:48.000000000 +0200
++++ krb5-1.9/src/tests/asn.1/krb5_decode_test.c	2011-01-31 15:18:13.000000000 +0100
+@@ -1,7 +1,6 @@
+ /* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
+ #include "k5-int.h"
+ #include "ktest.h"
+-#include "com_err.h"
+ #include "utility.h"
+ #include "ktest_equal.h"
+ 

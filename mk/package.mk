@@ -15,6 +15,7 @@ endif
 endif
 
 CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+			PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
@@ -42,6 +43,7 @@ ALL_TARGET?=		all
 INSTALL_TARGET?=	install
 
 MAKE_ENV+=		GCC_HONOUR_COPTS=2 \
+			PATH='${TARGET_PATH}' \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \

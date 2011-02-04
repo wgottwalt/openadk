@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/lib/crypto/krb/prng/prng.c	2010-10-05 05:18:22.000000000 +0200
++++ krb5-1.9/src/lib/crypto/krb/prng/prng.c	2011-01-30 22:37:36.000000000 +0100
+@@ -168,7 +168,7 @@ krb5_c_random_os_entropy(krb5_context co
+        we have both /dev/random and /dev/urandom.  We want the strong
+        data included in the reseed so we get it first.*/
+     if (strong) {
+-        if (read_entropy_from_device(context, "/dev/random"))
++        if (read_entropy_from_device(context, "/dev/urandom"))
+             *oursuccess = 1;
+     }
+     if (read_entropy_from_device(context, "/dev/urandom"))

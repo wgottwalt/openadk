@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/clients/kinit/kinit.c	2010-12-03 01:05:44.000000000 +0100
++++ krb5-1.9/src/clients/kinit/kinit.c	2011-01-31 14:03:02.000000000 +0100
+@@ -36,7 +36,7 @@
+ #include <stdio.h>
+ #include <time.h>
+ #include <errno.h>
+-#include <com_err.h>
++#include <et/com_err.h>
+ 
+ #ifdef GETOPT_LONG
+ #include <getopt.h>

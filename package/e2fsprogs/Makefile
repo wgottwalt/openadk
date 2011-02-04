@@ -16,12 +16,17 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
+PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
 PKGSD_LIBCOM_ERR:=	Common error library
 PKGSC_LIBCOM_ERR:=	libs
+PKGSD_LIBCOM_ERR_DEV:=	Common error headers
+PKGSC_LIBCOM_ERR_DEV:=	devel
 PKGSD_LIBSS:=		Subsystem command parsing library
 PKGSC_LIBSS:=		libs
+PKGSD_LIBSS_DEV:=	Subsystem command parsing headers
+PKGSC_LIBSS_DEV:=	devel
 PKGSD_LIBBLKID:=	Libblkid
 PKGSC_LIBBLKID:=	libs
 PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
@@ -32,7 +37,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
+$(eval $(call PKG_template,LIBCOM_ERR_DEV,libcom-err-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR_DEV},${PKGSC_LIBCOM_ERR_DEV}))
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
+$(eval $(call PKG_template,LIBSS_DEV,libss-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS_DEV},${PKGSC_LIBSS_DEV}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 
@@ -71,10 +78,20 @@ libcom-err-install:
 		${IDIR_LIBCOM_ERR}/usr/lib/
 	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
 
+libcom-err-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBCOM_ERR_DEV}/usr/include/et
+	${CP} ${WRKINST}/usr/include/et/com_err.h \
+		${IDIR_LIBCOM_ERR_DEV}/usr/include/et
+
 libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libss.so* \
 		${IDIR_LIBSS}/usr/lib/
+
+libss-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBSS_DEV}/usr/include/ss
+	${CP} ${WRKINST}/usr/include/ss/ss*.h \
+		${IDIR_LIBSS_DEV}/usr/include/ss
 
 libuuid-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib

@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/tests/hammer/kdc5_hammer.c	2010-04-22 01:37:04.000000000 +0200
++++ krb5-1.9/src/tests/hammer/kdc5_hammer.c	2011-01-31 18:20:05.000000000 +0100
+@@ -31,7 +31,6 @@
+ #include <sys/time.h>
+ 
+ #include "k5-int.h"
+-#include "com_err.h"
+ 
+ #define KRB5_DEFAULT_OPTIONS 0
+ #define KRB5_DEFAULT_LIFE 60*60*8 /* 8 hours */

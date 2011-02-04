@@ -1,0 +1,11 @@
+--- krb5-1.9.orig/src/include/k5-int.h	2010-12-03 01:05:44.000000000 +0100
++++ krb5-1.9/src/include/k5-int.h	2011-01-30 22:39:25.000000000 +0100
+@@ -1345,7 +1345,7 @@ void KRB5_CALLCONV krb5_free_iakerb_fini
+                                              krb5_iakerb_finished *);
+ 
+ /* #include "krb5/wordsize.h" -- comes in through base-defs.h. */
+-#include "com_err.h"
++#include <et/com_err.h>
+ #include "k5-plugin.h"
+ 
+ #include <krb5/authdata_plugin.h>

@@ -1,0 +1,10 @@
+--- krb5-1.9.orig/src/kadmin/ktutil/ktutil.c	2010-06-08 19:53:19.000000000 +0200
++++ krb5-1.9/src/kadmin/ktutil/ktutil.c	2011-01-31 13:38:18.000000000 +0100
+@@ -29,7 +29,6 @@
+ 
+ #include "k5-int.h"
+ #include "ktutil.h"
+-#include <com_err.h>
+ #include "adm_proto.h"
+ #include <ss/ss.h>
+ #include <stdio.h>
