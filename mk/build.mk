@@ -167,10 +167,11 @@ switch:
 	if [ -f .config.${ARCH}_${SYSTEM} ];then \
 		cp -p .config.${ARCH}_${SYSTEM} .config; \
 		cp -p .config.old.${ARCH}_${SYSTEM} .config.old; \
+		$(MAKE) dep; rm .rebuild.* 2>/dev/null ; \
 		echo "Setting configuration to target system: ${SYSTEM} with arch: ${ARCH}"; \
 	else \
 		echo "No old target config found" ;\
-		mv .config .config.bak ;\
+		mv .config .config.bak ; mv .config.old .config.old.bak; rm .rebuild.* 2>/dev/null ; \
 		if [ ! -z "$(SYSTEM)" ];then \
 			make ARCH=${ARCH} SYSTEM=${SYSTEM} menuconfig; \
 		else \
