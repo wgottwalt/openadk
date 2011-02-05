@@ -107,6 +107,10 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
+if [[ -n $ADK_PACKAGE_GLIB ]]; then
+	NEED_GETTEXT="$NEED_GETTEXT glib"
+fi
+
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
@@ -127,9 +131,9 @@ if [[ -n $NEED_GETTEXT ]]; then
 	if ! which gettext >/dev/null 2>&1; then
 		echo >&2 You need gettext to build $NEED_GETTEXT
 		out=1
-#	elif ! which msgfmt >/dev/null 2>&1; then
-#		echo >&2 You need msgfmt to build $NEED_GETTEXT
-#		out=1
+	elif ! which msgfmt >/dev/null 2>&1; then
+		echo >&2 You need msgfmt to build $NEED_GETTEXT
+		out=1
 	fi
 fi
 

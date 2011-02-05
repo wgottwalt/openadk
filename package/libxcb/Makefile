@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f715e53c9c1b25f856d14d6123663d96
 PKG_DESCR:=		X11 keyboard library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		python2 libpthread-stubs libxslt libXau
+PKG_BUILDDEP:=		python2 libpthread-stubs libxslt libXau xcb-proto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXCB LIBXCB_DEVEL
