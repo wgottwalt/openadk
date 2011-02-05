@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		ad9c80adb624a1ffe3d9753bab8a578a
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		gettext libiconv libpthread
+PKG_DEPENDS:=		libintl libiconv libpthread
 PKG_BUILDDEP:=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/2.27/
@@ -39,11 +39,12 @@ pre-configure:
 ifneq ($(OStype),Darwin)
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
+			--with-libiconv=gnu \
 			--enable-debug=no \
 			--with-threads=posix \
 	);
-	${MAKE} -C ${WRKBUILD}/glib
-	${MAKE} -C ${WRKBUILD}/gthread
+	env CFLAGS="-static" LDFLAGS="-static -liconv" ${MAKE} -C ${WRKBUILD}/glib
+	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gthread
 	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gio glib-compile-schemas
 	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gobject glib-genmarshal
 	$(CP) ${WRKBUILD}/gio/glib-compile-schemas ${STAGING_HOST_DIR}/bin

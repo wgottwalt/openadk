@@ -1,3 +1,5 @@
+- rpath cleanup
+- mark c++ packages
 - add and test brcm 2.6 wireless support
 - man pages in ipkg/tgz packages (automatic)
 - automate /etc handling via conffiles
@@ -8,7 +10,6 @@
 - openssl ocf support check
 - new package minidlna
 - wget/curl/ftp download support
-- rpath cleanup
 - busybox update and SuSv3 removal
 - check rtc support on foxg20
 - adkinstall with NTP and hwclock support

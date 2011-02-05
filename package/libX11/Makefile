@@ -27,6 +27,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBX11_DEV,libx11-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBX11_DEV},${PKGSC_LIBX11_DEV},${PKG_OPTS}))
 
+CONFIGURE_ENV+=		CPPFLAGS_FOR_BUILD="-I$(STAGING_TARGET_DIR)/usr/include"
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
 			--disable-xf86bigfont \

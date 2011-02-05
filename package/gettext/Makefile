@@ -5,32 +5,40 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME=		gettext
 PKG_VERSION=		0.18.1.1
-PKG_RELEASE=		1
+PKG_RELEASE=		2
 PKG_MD5SUM:=		3dd55b952826d2b32f51308f2f91aa89
 PKG_DESCR:=		internationalisation library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		libiconv
 PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP:=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
 PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
+
+PKG_SUBPKGS:=		LIBINTL GETTEXT MSGFMT
+PKGSD_GETTEXT:=		gettext utility
+PKSSC_GETTEXT:=		misc
+PKGSS_GETTEXT:=		libintl
+PKGSD_MSGFMT:=		msgfmt utility
+PKGSC_MSGFMT:=		misc
+PKGSS_MSGFMT:=		libintl
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
 
-WRKSRC=			${WRKDIR}/${PKG_NAME}-${PKG_VERSION}/gettext-runtime
-
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GETTEXT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBINTL,libintl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GETTEXT},${PKGSD_GETTEXT},${PKSSC_GETTEXT}))
+$(eval $(call PKG_template,MSGFMT,msgfmt,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MSGFMT},${PKGSD_MSGFMT},${PKGSC_MSGFMT}))
 
 CONFIGURE_ARGS+=	--disable-java \
 			--disable-native-java \
 			--disable-csharp \
-			--enable-nls \
 			--disable-libasprintf \
 			--disable-rpath \
 			--enable-threads=posix \
+			--enable-nls \
 			--disable-openmp \
 			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr' \
 			--with-included-gettext \
@@ -39,10 +47,22 @@ CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
 			ac_cv_gnu_library_2=no \
 			gt_use_preinstalled_gnugettext=no
 
-post-install:
-	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/lib ${IDIR_GETTEXT}/usr/bin
-	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_GETTEXT}/usr/lib
+libintl-install:
+	${INSTALL_DIR} ${IDIR_LIBINTL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libintl.so* \
+		${IDIR_LIBINTL}/usr/lib
+
+gettext-install:
+	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/gettext \
 		$(IDIR_GETTEXT)/usr/bin
+
+msgfmt-install:
+	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/bin
+	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgettext*so* \
+		${IDIR_MSGFMT}/usr/lib
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/msgfmt \
+		$(IDIR_MSGFMT)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
