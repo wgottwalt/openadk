@@ -589,7 +589,10 @@ int main() {
 				if (result == 1) {
 					val = strtok_r(hvalue, " ", &saveptr);
 					while (val != NULL) { 
-						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+						if (strncmp(val, "kmod", 4) == 0)
+							fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
+						else
+							fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
 				}
@@ -708,7 +711,10 @@ int main() {
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
 							while (val != NULL) { 
-								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								if (strncmp(val, "kmod", 4) == 0)
+									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
+								else
+									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
 						}
@@ -745,7 +751,10 @@ int main() {
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
 							while (val != NULL) { 
-								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								if (strncmp(val, "kmod", 4) == 0)
+									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
+								else
+									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
 						}
