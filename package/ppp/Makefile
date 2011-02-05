@@ -33,6 +33,7 @@ $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--system=Linux
 CONFIGURE_ENV+=		UNAME_S="Linux"
+TARGET_LDFLAGS+=	-lcrypt
 XAKE_FLAGS+=		STAGING_TARGET_DIR=${STAGING_TARGET_DIR} \
 			DESTDIR="${WRKINST}/usr" STRIP='' \
 			TARGET_AR='${TARGET_CROSS}ar'

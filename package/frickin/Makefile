@@ -10,6 +10,7 @@ PKG_MD5SUM:=		5b2e98da2310c71c703d4617b88a173f
 PKG_DESCR:=		PPTP proxy
 PKG_SECTION:=		proxy
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=frickin/}
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 

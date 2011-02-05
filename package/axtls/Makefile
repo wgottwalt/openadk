@@ -28,6 +28,7 @@ $(eval $(call PKG_template,LIBAXTLS,libaxtls,${PKG_VERSION}-${PKG_RELEASE},,${PK
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-fPIC
 XAKE_FLAGS+=		STRIP='' \
 			CC='${TARGET_CC}'
 

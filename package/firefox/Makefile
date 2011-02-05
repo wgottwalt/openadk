@@ -68,6 +68,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-necko-wifi \
 			--disable-svg \
 			--disable-mathml \
+			--disable-jemalloc \
 			--disable-crashreporter
 
 XAKE_FLAGS+=		OS_RELEASE="2.6"

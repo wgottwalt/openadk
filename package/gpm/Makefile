@@ -11,6 +11,7 @@ PKG_DESCR:=		console mouse support
 PKG_SECTION:=		misc
 PKG_URL:=		http://launchpad.net/gpm
 PKG_SITES:=		http://launchpad.net/gpm/main/${PKG_VERSION}/+download/
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 

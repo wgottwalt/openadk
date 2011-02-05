@@ -52,7 +52,7 @@ TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 
 TARGET_CPPFLAGS:=	-I${STAGING_TARGET_DIR}/usr/include
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
-TARGET_CXXFLAGS:=
+TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
 			-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib

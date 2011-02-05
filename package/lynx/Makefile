@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		ncurses openssl zlib
 PKG_URL:=		http://lynx.isc.org/
 PKG_SITES:=		http://lynx.isc.org/${PKG_NAME}${PKG_VERSION}/
 
+PKG_NOPARALLEL:=	1
+
 DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-7
 

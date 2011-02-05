@@ -23,6 +23,7 @@ CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-perl \
 			--disable-python \
 			--disable-lua \
+			--disable-tcl \
 			--disable-gnutls \
 			--disable-ruby \
 			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'

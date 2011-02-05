@@ -32,6 +32,7 @@ $(eval $(call PKG_template,ZIC,zic,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 $(eval $(call PKG_template,DATE,date,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DATE},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+CFLAGS_FOR_BUILD+=	-DSTD_INSPIRED=1
 XAKE_FLAGS+=		TOPDIR="${WRKINST}" TZDIR="${WRKINST}/usr/share/zoneinfo" cc="${TARGET_CC}"
 # the uppercase targets enable building and installation of the date utility
 ALL_TARGET:=		ALL
