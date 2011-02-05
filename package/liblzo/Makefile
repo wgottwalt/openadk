@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lzo
-PKG_VERSION:=		2.03
+PKG_VERSION:=		2.04
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0c3d078c2e8ea5a88971089a2f02a726
+PKG_MD5SUM:=		a383c7055a310e2a71b9ecd19cfea238
 PKG_DESCR:=		a real-time data compression library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo
