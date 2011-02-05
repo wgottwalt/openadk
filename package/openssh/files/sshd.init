@@ -19,7 +19,7 @@ start)
 	if [[ ! -s /etc/ssh/ssh_host_rsa_key ]]; then
 		mkdir -p /etc/ssh
 		if [[ ! -x /usr/bin/ssh-keygen ]]; then
-			bothlog openssh not starting: SSH private key missing
+			echo "openssh not starting: SSH private key missing"
 			exit 0
 		fi
 		echo "openssh: generating SSH private key (RSA)"
@@ -30,6 +30,7 @@ start)
 	fi
 	mkdir -p /var/run/sshd
 	mkdir -p /var/empty
+	touch /var/log/btmp && chmod 600 /var/log/btmp
 	/usr/sbin/sshd
 	;;
 stop)
