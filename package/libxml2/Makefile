@@ -14,9 +14,14 @@ PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 
+PKG_SUBPKGS:=		LIBXML2 LIBXML2_DEV
+PKGSD_LIBXML2_DEV:=	XML parser headers
+PKGSC_LIBXML2_DEV:=	devel
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXML2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXML2,libxml,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXML2_DEV,libxml2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXML2_DEV},${PKGSC_LIBXML2_DEV}))
 
 CONFIGURE_ARGS+=	--without-c14n \
 			--without-catalog \
@@ -46,8 +51,12 @@ CONFIGURE_ARGS+=	--without-c14n \
 			--with-xptr \
 			--with-zlib
 
-post-install:
+libxml2-install:
 	${INSTALL_DIR} ${IDIR_LIBXML2}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libxml2.so* ${IDIR_LIBXML2}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libxml2.so* ${IDIR_LIBXML2}/usr/lib
+
+libxml2-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXML2_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXML2_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

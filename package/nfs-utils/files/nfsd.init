@@ -7,7 +7,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"${portmap:-NO}" = x"NO" || test x"${rpcbind:-NO}" = x"NO" && exit 0
+	test x"${portmap:-NO}" = x"NO" && test x"${rpcbind:-NO}" = x"NO" && exit 0
 	test x"${nfs_server:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
@@ -32,6 +32,7 @@ stop)
 	if [ ${nfs_server_version} -eq 4 ];then
 		kill $(pgrep -f /usr/sbin/idmapd)
 		kill $(pgrep -f /usr/sbin/svcgssd)
+		umount /var/lib/nfs/rpc_pipefs
 	fi
 	;;
 restart)

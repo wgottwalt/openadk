@@ -1,6 +1,17 @@
---- ffmpeg-0.6.orig/configure	2010-06-15 21:44:30.000000000 +0200
-+++ ffmpeg-0.6/configure	2010-07-12 21:34:52.258102064 +0200
-@@ -2640,7 +2640,7 @@ if enabled libdc1394; then
+--- ffmpeg-0.6.1.orig/configure	2010-06-15 21:44:30.000000000 +0200
++++ ffmpeg-0.6.1/configure	2011-02-05 19:31:24.000000000 +0100
+@@ -1689,8 +1690,8 @@ if ! check_cmd type mktemp; then
+ fi
+ 
+ tmpfile(){
+-    tmp=$(mktemp -u "${TMPDIR}/ffconf.XXXXXXXX")$2 &&
+-        (set -C; exec > $tmp) 2>/dev/null ||
++    tmp=$(mktemp "${TMPDIR}/ffconf.XXXXXXXX")$2 &&
++        (set -C; rm $tmp; exec > $tmp) ||
+         die "Unable to create temporary file in $TMPDIR."
+     append TMPFILES $tmp
+     eval $1=$tmp
+@@ -2640,7 +2641,7 @@ if enabled libdc1394; then
      die "ERROR: No version of libdc1394 found "
  fi
  

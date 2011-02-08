@@ -16,9 +16,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
-PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV
+PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV LIBUUID_DEV LIBBLKID_DEV
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
+PKGSD_LIBUUID_DEV:=	UUID headers
+PKGSC_LIBUUID_DEV:=	devel
 PKGSD_LIBCOM_ERR:=	Common error library
 PKGSC_LIBCOM_ERR:=	libs
 PKGSD_LIBCOM_ERR_DEV:=	Common error headers
@@ -27,8 +29,10 @@ PKGSD_LIBSS:=		Subsystem command parsing library
 PKGSC_LIBSS:=		libs
 PKGSD_LIBSS_DEV:=	Subsystem command parsing headers
 PKGSC_LIBSS_DEV:=	devel
-PKGSD_LIBBLKID:=	Libblkid
+PKGSD_LIBBLKID:=	blkid library
 PKGSC_LIBBLKID:=	libs
+PKGSD_LIBBLKID_DEV:=	blkid headers
+PKGSC_LIBBLKID_DEV:=	devel
 PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	fs
 
@@ -36,11 +40,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
+$(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
 $(eval $(call PKG_template,LIBCOM_ERR_DEV,libcom-err-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR_DEV},${PKGSC_LIBCOM_ERR_DEV}))
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
 $(eval $(call PKG_template,LIBSS_DEV,libss-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS_DEV},${PKGSC_LIBSS_DEV}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
+$(eval $(call PKG_template,LIBBLKID_DEV,libblkid-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID_DEV},${PKGSC_LIBBLKID_DEV}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
@@ -72,6 +78,11 @@ libblkid-install:
 	${CP} ${WRKINST}/usr/lib/libblkid.so* \
 		${IDIR_LIBBLKID}/usr/lib/
 
+libblkid-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBBLKID_DEV}/usr/include/blkid
+	${CP} ${WRKINST}/usr/include/blkid/*.h \
+		${IDIR_LIBBLKID_DEV}/usr/include/blkid
+
 libcom-err-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcom_err.so* \
@@ -100,6 +111,11 @@ libuuid-install:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
 		${STAGING_TARGET_DIR}/usr/include/uuid
+
+libuuid-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include
+	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
+		${IDIR_LIBUUID_DEV}/usr/include
 
 e2fsck-static-install:
 	${INSTALL_DIR} ${IDIR_E2FSCK_STATIC}/usr/sbin

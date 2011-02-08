@@ -1,5 +1,5 @@
 --- nfs-utils-1.2.3.orig/tools/rpcgen/Makefile.in	2010-09-28 14:32:33.000000000 +0200
-+++ nfs-utils-1.2.3/tools/rpcgen/Makefile.in	2010-12-25 00:45:58.000000000 +0100
++++ nfs-utils-1.2.3/tools/rpcgen/Makefile.in	2011-02-06 16:48:47.000000000 +0100
 @@ -72,21 +72,21 @@ am_rpcgen_OBJECTS = rpcgen-rpc_clntout.$
  rpcgen_OBJECTS = $(am_rpcgen_OBJECTS)
  rpcgen_LDADD = $(LDADD)
@@ -15,7 +15,7 @@
 -COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 -	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 +COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-+	$(AM_CFLAGS) $(HOSTCFLAGS)
++	$(AM_CFLAGS) $(CFLAGS_FOR_BUILD)
  LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
  	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 -	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -24,7 +24,7 @@
  LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 -	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 -	$(LDFLAGS) -o $@
-+	--mode=link $(CCLD) $(AM_CFLAGS) $(HOSTCFLAGS) \
++	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS_FOR_BUILD) \
 +	-o $@
  SOURCES = $(rpcgen_SOURCES)
  DIST_SOURCES = $(rpcgen_SOURCES)

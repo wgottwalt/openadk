@@ -15,9 +15,11 @@ PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5
+PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5 LIBKRB5_DEV
 PKGSD_LIBKRB5:=		MIT kerberos libraries
 PKGSC_LIBKRB5:=		libs
+PKGSD_LIBKRB5_DEV:=	MIT kerberos headers
+PKGSC_LIBKRB5_DEV:=	devel
 PKGSD_KRB5_CLIENT:=	MIT kerberos client tools
 PKGSC_KRB5_CLIENT:=	crypto
 PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
@@ -34,6 +36,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
+$(eval $(call PKG_template,LIBKRB5_DEV,libkrb5-dev,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5_DEV},${PKGSC_LIBKRB5_DEV}))
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
@@ -81,5 +84,13 @@ libkrb5-install:
 		${IDIR_LIBKRB5}/usr/lib
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
 		> ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
+
+libkrb5-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBKRB5_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/krb5-config \
+		${IDIR_LIBKRB5_DEV}/usr/bin
+	${INSTALL_DIR} ${IDIR_LIBKRB5_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_LIBKRB5_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

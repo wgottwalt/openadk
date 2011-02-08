@@ -1,0 +1,11 @@
+--- mplayer-1.0-32749.orig/Makefile	2011-01-03 11:27:11.000000000 +0100
++++ mplayer-1.0-32749/Makefile	2011-02-05 18:20:49.000000000 +0100
+@@ -816,7 +816,7 @@ mencoder$(EXESUF) mplayer$(EXESUF):
+ 	$(CC) -o $@ $^ $(EXTRALIBS)
+ 
+ codec-cfg$(EXESUF): codec-cfg.c codec-cfg.h help_mp.h
+-	$(HOST_CC) -O -DCODECS2HTML -I. -Iffmpeg -o $@ $<
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -O -DCODECS2HTML -I. -Iffmpeg -o $@ $<
+ 
+ codecs.conf.h: codec-cfg$(EXESUF) etc/codecs.conf
+ 	./$^ > $@

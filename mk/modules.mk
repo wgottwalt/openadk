@@ -995,13 +995,16 @@ $(eval $(call KMOD_template,EXT2_FS,ext2-fs,\
 ,30))
 endif
 
+$(eval $(call KMOD_template,FS_MBCACHE,fs-mbcache,\
+	$(MODULES_DIR)/kernel/fs/mbcache \
+,20))
+
 $(eval $(call KMOD_template,EXT3_FS,ext3-fs,\
 	$(MODULES_DIR)/kernel/fs/jbd/jbd \
 	$(MODULES_DIR)/kernel/fs/ext3/ext3 \
 ,30))
 
 $(eval $(call KMOD_template,EXT4_FS,ext4-fs,\
-	$(MODULES_DIR)/kernel/fs/mbcache \
 	$(MODULES_DIR)/kernel/fs/jbd2/jbd2 \
 	$(MODULES_DIR)/kernel/fs/ext4/ext4 \
 ,30))

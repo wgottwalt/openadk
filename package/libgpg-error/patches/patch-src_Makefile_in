@@ -1,0 +1,25 @@
+--- libgpg-error-1.9.orig/src/Makefile.in	2010-07-21 10:00:00.000000000 +0200
++++ libgpg-error-1.9/src/Makefile.in	2011-02-05 15:44:54.000000000 +0100
+@@ -149,6 +149,7 @@ BUILD_TIMESTAMP = @BUILD_TIMESTAMP@
+ CC = @CC@
+ CCDEPMODE = @CCDEPMODE@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
++CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
+ CFLAGS = @CFLAGS@
+ CPP = @CPP@
+ CPPFLAGS = @CPPFLAGS@
+@@ -868,12 +869,12 @@ gpg-error.def: Makefile gpg-error.def.in
+ # It is correct to use $(CC_FOR_BUILD) here.  We want to run the
+ # program at build time.
+ mkerrcodes: mkerrcodes.c mkerrcodes.h Makefile
+-	$(CC_FOR_BUILD) -I. -I$(srcdir) -o $@ $(srcdir)/mkerrcodes.c
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -I$(srcdir) -o $@ $(srcdir)/mkerrcodes.c
+ 
+ # It is correct to use $(CC_FOR_BUILD) here.  We want to run the
+ # program at build time.
+ @HAVE_W32CE_SYSTEM_TRUE@mkw32errmap: mkw32errmap.c mkw32errmap.tab.h Makefile
+-@HAVE_W32CE_SYSTEM_TRUE@	$(CC_FOR_BUILD) -I. -I$(srcdir) -o $@ $(srcdir)/mkw32errmap.c
++@HAVE_W32CE_SYSTEM_TRUE@	$(CC_FOR_BUILD) $(CC_FOR_BUILD) -I. -I$(srcdir) -o $@ $(srcdir)/mkw32errmap.c
+ 
+ code-from-errno.h: mkerrcodes Makefile
+ 	./mkerrcodes | $(AWK) -f $(srcdir)/mkerrcodes2.awk >$@

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libgpg-error
-PKG_VERSION:=		1.8
+PKG_VERSION:=		1.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1d2005268a2f096db28cf9cf77b3229a
+PKG_MD5SUM:=		521b98aa9395e7eaf0ef2236233a0796
 PKG_DESCR:=		a helper library for common error codes and descriptions
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnupg.org/

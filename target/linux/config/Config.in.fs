@@ -22,6 +22,9 @@ config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
 config ADK_KERNEL_MISC_FILESYSTEMS
 	boolean
 
+config ADK_KERNEL_DNOTIFY
+	boolean
+
 config ADK_KERNEL_EXT3_FS_XATTR
 	boolean
 
@@ -60,6 +63,10 @@ config ADK_KPACKAGE_KMOD_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
+config ADK_KPACKAGE_KMOD_FS_MBCACHE
+	tristate
+	default n
+
 config ADK_KERNEL_EXT3_FS
 	boolean
 	default n
@@ -67,6 +74,7 @@ config ADK_KERNEL_EXT3_FS
 config ADK_KPACKAGE_KMOD_EXT3_FS
 	prompt "kmod-fs-ext3...................... EXT3 filesystem support"
 	tristate
+	select ADK_KPACKAGE_KMOD_FS_MBCACHE
 	depends on !ADK_KERNEL_EXT3_FS
 	default n
 	help
@@ -101,10 +109,12 @@ config ADK_KERNEL_EXT4_FS
 config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
 	tristate
-	depends on !ADK_KERNEL_EXT4_FS 
+	select ADK_KPACKAGE_KMOD_FS_MBCACHE
 	select ADK_KPACKAGE_KMOD_CRC16
+	depends on !ADK_KERNEL_EXT4_FS 
 	default n
 	help
+	  Ext4 filesystem.
 
 config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	prompt "kmod-fs-hfsplus................... HFS+ filesystem support"

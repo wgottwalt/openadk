@@ -21,10 +21,10 @@ CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
+			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
-			${HOST_CONFIGURE_OPTS} \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
 endif
@@ -50,9 +50,10 @@ MAKE_ENV+=		GCC_HONOUR_COPTS=2 \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
+			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
-MAKE_ENV+=		${TARGET_CONFIGURE_OPTS} ${HOST_CONFIGURE_OPTS}
+MAKE_ENV+=		${TARGET_CONFIGURE_OPTS}
 endif
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1

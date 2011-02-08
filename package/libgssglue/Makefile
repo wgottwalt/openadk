@@ -13,10 +13,15 @@ PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBGSSGLUE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGSSGLUE,libgssglue,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGSSGLUE_DEV,libgssglue-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libgssglue-install:
 	$(INSTALL_DIR) $(IDIR_LIBGSSGLUE)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libgssglue.so* $(IDIR_LIBGSSGLUE)/usr/lib/
+
+libgssglue-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBGSSGLUE_DEV)/usr/include
+	${CP} $(WRKINST)/usr/include/* $(IDIR_LIBGSSGLUE_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -130,6 +130,7 @@ config ADK_KERNEL_NFSD_V4
 	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
 	select ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
 	select ADK_KERNEL_NFS_V4
+	select ADK_KERNEL_DNOTIFY
 	default n
 	help
 	 NFSv4 with Kerberos authentication.

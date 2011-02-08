@@ -1,0 +1,11 @@
+--- freetype-2.4.4.orig/builds/unix/unix-cc.in	2010-08-31 13:04:28.000000000 +0200
++++ freetype-2.4.4/builds/unix/unix-cc.in	2011-02-05 18:05:59.000000000 +0100
+@@ -101,7 +101,7 @@ LDFLAGS := @LDFLAGS@
+ CCraw_build  := @CC_BUILD@	# native CC of building system
+ E_BUILD      := @EXEEXT_BUILD@	# extension for exexutable on building system
+ EXPORTS_LIST := $(OBJ_DIR)/ftexport.sym
+-CCexe        := $(CCraw_build)	# used to compile `apinames' only
++CCexe        := $(CCraw_build) $(CFLAGS_FOR_BUILD)	# used to compile `apinames' only
+ 
+ 
+ # Library linking

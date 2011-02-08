@@ -44,6 +44,12 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_IW ]]; then
 		NEED_LIBNLDEV="$NEED_LIBNLDEV iw"
 	fi
+	if [[ -n $ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS ]]; then
+		NEED_LIBKRB5DEV="$NEED_LIBKRB5DEV nfs-utils"
+	fi
+	if [[ -n $ADK_PACKAGE_NFS_UTILS_WITH_TIRPC ]]; then
+		NEED_LIBTIRPCDEV="$NEED_LIBTIRPCDEV nfs-utils"
+	fi
 fi
 
 if [[ -n $ADK_PACKAGE_GPSD ]]; then
@@ -133,6 +139,20 @@ if [[ -n $NEED_GETTEXT ]]; then
 		out=1
 	elif ! which msgfmt >/dev/null 2>&1; then
 		echo >&2 You need msgfmt to build $NEED_GETTEXT
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_LIBTIRPCDEV ]];then
+	if ! test -f /usr/include/tirpc/netconfig.h >/dev/null; then
+		echo >&2 You need tirpc headers to build $NEED_LIBTIRPCDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_LIBKRB5DEV ]];then
+	if ! test -f /usr/include/krb5.h >/dev/null; then
+		echo >&2 You need krb5 headers to build $NEED_LIBKRB5DEV
 		out=1
 	fi
 fi
