@@ -61,6 +61,17 @@ config ADK_KERNEL_GEODE_WDT
 	help
 	 Geode watchdog.
 
+config ADK_KERNEL_RC32434_WDT
+	prompt ".................................. IDT RC32434 Hardware Watchdog"
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default n
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	help
+	 Support for the hardware watchdog inside
+	 Routerboard 532's SoC, the IDT RC32434.
+
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
 	prompt "kmod-softdog...................... Software watchdog"
 	tristate
