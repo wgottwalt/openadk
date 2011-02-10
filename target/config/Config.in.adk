@@ -32,6 +32,12 @@ config ADK_STATIC
 	help
 	  Useful for toolchain only target devices.
 
+config ADK_USE_CCACHE
+	bool "Use ccache to speedup recompilation"
+	default n
+	help
+	  Useful if you have enough space for the cache and need speedup compilation.
+
 config ADK_MAKE_JOBS
 	int
 	default 1 if ! ADK_MAKE_PARALLEL

@@ -59,7 +59,6 @@ do-configure:
 
 do-build:
 	$(MAKE) -C $(WRKBUILD) \
-		MAKEDEPPROG="$(TARGET_CC)" \
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		depend
 	$(MAKE) -C $(WRKBUILD) \
