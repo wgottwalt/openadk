@@ -18,7 +18,7 @@ endif
 	$(INSTALL_BIN) ../tools/boot_linux $(BIN_DIR)/
 
 kernel-install: tools-compile
-	PATH='${TARGET_PATH}' mkfimage $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	PATH='${TARGET_PATH}' mkfimage $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
 
 ifeq ($(ADK_TARGET_FS),squashfs)
 imageinstall: kernel-install $(BUILD_DIR)/$(ROOTFSSQUASHFS)
