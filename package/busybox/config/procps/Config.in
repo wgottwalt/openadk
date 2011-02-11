@@ -43,6 +43,24 @@ config BUSYBOX_KILLALL5
 	default n
 	depends on BUSYBOX_KILL
 
+config BUSYBOX_MPSTAT
+        bool "mpstat"
+        default n
+        help
+          Per-processor statistics
+
+config BUSYBOX_PMAP
+       bool "pmap"
+       default n
+       help
+         Display processes' memory mappings.
+
+config BUSYBOX_POWERTOP
+        bool "powertop"
+        default n
+        help
+          Analyze power consumption on Intel-based laptops
+
 config BUSYBOX_NMETER
 	bool "nmeter"
 	default n

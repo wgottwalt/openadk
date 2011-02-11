@@ -624,6 +624,12 @@ config BUSYBOX_FEATURE_NAMEIF_EXTENDED
 	    new_interface_name  mac=00:80:C8:38:91:B5
 	    new_interface_name  00:80:C8:38:91:B5
 
+config NBDCLIENT
+        bool "nbd-client"
+        default n
+        help
+          Network block device client
+
 config BUSYBOX_NC
 	bool "nc"
 	default y
