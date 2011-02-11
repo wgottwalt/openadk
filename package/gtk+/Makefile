@@ -39,6 +39,8 @@ CONFIGURE_ENV+=		gio_can_sniff=no \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGTK}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBGTK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgdk-x11*so* ${IDIR_LIBGTK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgtk-x11*so* ${IDIR_LIBGTK}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgailutil*so* ${IDIR_LIBGTK}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
