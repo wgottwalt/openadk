@@ -20,7 +20,7 @@ PKGSC_LIBXML2_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXML2,libxml,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBXML2_DEV,libxml2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXML2_DEV},${PKGSC_LIBXML2_DEV}))
 
 CONFIGURE_ARGS+=	--without-c14n \
