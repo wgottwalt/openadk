@@ -83,7 +83,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--confdir=/etc \
 			--enable-cross-compile \
 			--target=${ARCH}-linux \
-			--cc=$(TARGET_CC) \
+			--cc='$(TARGET_CC)' \
 			--host-cc=$(CC_FOR_BUILD) \
 			--yasm='' \
 			--disable-mencoder \

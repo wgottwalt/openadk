@@ -51,7 +51,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--sysroot=${STAGING_TARGET_DIR} \
 			--source-path=${WRKSRC} \
 			--cross-prefix=${TARGET_CROSS} \
-			--cc=$(TARGET_CC) \
+			--cc='$(TARGET_CC)' \
 			--host-cc=$(CC_FOR_BUILD) \
 			--disable-doc \
 			--disable-debug \
