@@ -13,9 +13,8 @@ PKG_DEPENDS:=		zlib libopenssl
 PKG_BUILDDEP:=		zlib openssl
 PKG_URL:=		http://www.cycom.se/dl/rrs/
 PKG_SITES:=		http://www.cycom.se/uploads/36/19/
+PKG_NEED_CXX:=		1
 PKG_CXX:=		RRS
-
-PKG_HOST_DEPENDS:=	!darwin
 
 include ${TOPDIR}/mk/package.mk
 
