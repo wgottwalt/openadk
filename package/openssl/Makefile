@@ -59,9 +59,6 @@ do-configure:
 
 do-build:
 	$(MAKE) -C $(WRKBUILD) \
-		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
-		depend
-	$(MAKE) -C $(WRKBUILD) \
 		CC="$(TARGET_CC)" \
 		AR="$(TARGET_CROSS)ar r" \
 		RANLIB="$(TARGET_CROSS)ranlib" \
