@@ -1,0 +1,35 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		p5-XML-Parser
+PKG_VERSION:=		2.40
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c66e9adba003d0667cc40115ccd837a5
+PKG_DESCR:=		XML::Parser
+PKG_SECTION:=		lang
+PKG_DEPENDS:=		libexpat
+PKG_BUILDDEP:=		expat
+PKG_SITES:=		http://search.cpan.org/CPAN/authors/id/C/CH/CHORNY/
+
+DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/XML-Parser-${PKG_VERSION}
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,P5_XML_PARSER,p5-xml-parser,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=		manual
+
+include $(TOPDIR)/mk/perl.mk
+
+pre-build:
+	(cd ${WRKSRC} && perl Makefile.PL)
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_P5_XML_PARSER)$(PERL_SITEDIR)
+	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
+		$(IDIR_P5_XML_PARSER)$(PERL_SITEDIR)
+
+include ${TOPDIR}/mk/pkg-bottom.mk
