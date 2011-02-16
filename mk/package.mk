@@ -3,10 +3,6 @@
 
 all: build-all-pkgs
 
-ifeq ($(ADK_HOST_CYGWIN),y)
-EXEEXT:=		.exe
-endif
-
 # does not change CONFIGURE_ARGS in minimal mode
 ifeq ($(filter minimal,${CONFIG_STYLE}),)
 ifneq ($(ADK_DEBUG),)
@@ -25,6 +21,7 @@ CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
 ifeq ($(ADK_NATIVE),)
 CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} \
+			cross_compiling=yes \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes
 endif

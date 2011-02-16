@@ -18,7 +18,14 @@ STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
+# use headers and foo-config from system
+ifneq ($(ADK_NATIVE),)
+STAGING_TARGET_DIR:=
+SCRIPT_TARGET_DIR:=	/usr/bin
+else
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
+SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
+endif
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
 # relation from STAGING_HOST_DIR to STAGING_TARGET_DIR (for gcc to find
 # its sysroot while staying relocatable)
@@ -190,5 +197,9 @@ else
 QUIET:=			--quiet
 endif
 FETCH_CMD?=		wget --timeout=30 $(QUIET)
+
+ifeq ($(ADK_HOST_CYGWIN),y)
+EXEEXT:=		.exe
+endif
 
 include $(TOPDIR)/mk/mirrors.mk
