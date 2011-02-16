@@ -214,12 +214,12 @@ config ADK_KPACKAGE_KMOD_PPP
 config ADK_KPACKAGE_KMOD_PPP_MPPE
 	prompt   "kmod-ppp-mppe................... PPP MPPE/MPPC module"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_PPP
 	select ADK_KERNEL_CRYPTO
 	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
 	select ADK_KPACKAGE_KMOD_CRYPTO_SHA1
 	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
+	default n
 	help
          Support for the MPPE Encryption protocol, as employed by the
 	 Microsoft Point-to-Point Tunneling Protocol.
@@ -230,23 +230,24 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 config ADK_KPACKAGE_KMOD_PPPOATM
 	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_PPP
 	select ADK_KPACKAGE_KMOD_ATM
+	default n
 	help
 	  Support for PPP over ATM
 
 config ADK_KPACKAGE_KMOD_PPPOE
 	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_PPP
+	default n
 	help
 	  Support for PPP over Ethernet
 
 config ADK_KPACKAGE_KMOD_TUN
 	prompt "kmod-tun.......................... Universal TUN/TAP driver"
 	tristate
+	select ADK_KERNEL_NETDEVICES
 	default n
 	help
 	  Kernel support for the TUN/TAP tunneling device
