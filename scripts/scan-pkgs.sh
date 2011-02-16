@@ -41,6 +41,9 @@ if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_WPA_SUPPLICANT_WITH_OPENSSL ]]; then
 		NEED_LIBSSLDEV="$NEED_LIBSSLDEV wpa_supplicant"
 	fi
+	if [[ -n $ADK_COMPILE_BIND ]]; then
+		NEED_LIBSSLDEV="$NEED_LIBSSLDEV bind"
+	fi
 	if [[ -n $ADK_PACKAGE_IW ]]; then
 		NEED_LIBNLDEV="$NEED_LIBNLDEV iw"
 	fi
@@ -305,14 +308,14 @@ fi
 
 if [[ -n $NEED_FLEX ]]; then
 	if ! which flex >/dev/null 2>&1; then
-		echo >&2 You need flex to to use $NEED_FLEX package
+		echo >&2 You need flex to build $NEED_FLEX
 		out=1
 	fi
 fi
 
 if [[ -n $NEED_XSLTPROC ]]; then
 	if ! which xsltproc >/dev/null 2>&1; then
-		echo >&2 You need xsltproc to to use $NEED_XSLTPROC package
+		echo >&2 You need xsltproc to build $NEED_XSLTPROC
 		out=1
 	fi
 fi
@@ -320,7 +323,7 @@ fi
 if [[ -n $NEED_PYTHON ]]; then
 	if ! which python >/dev/null 2>&1; then
 		if ! test -x /usr/pkg/bin/python2.6 >/dev/null; then
-			echo >&2 You need python to to use $NEED_PYTHON package
+			echo >&2 You need python to build $NEED_PYTHON
 			out=1
 		fi
 	fi
