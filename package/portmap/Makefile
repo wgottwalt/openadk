@@ -22,11 +22,7 @@ $(eval $(call PKG_template,PORTMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
-ifneq ($(strip ${ADK_PACKAGE_PORTMAP_LIBWRAP}),)
-MAKE_FLAGS+=		WRAP_LIB='-L${STAGING_TARGET_DIR}/usr/lib -lwrap'
-else
 MAKE_FLAGS+=		NO_TCP_WRAPPER=1
-endif
 TARGET_CPPFLAGS+=	-DDAEMON_UID=20 -DDAEMON_GID=20
 TARGET_CFLAGS+=		-fPIC
 MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} \
@@ -34,6 +30,6 @@ MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS} \
 
 do-install:
 	${INSTALL_DIR} ${IDIR_PORTMAP}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/portmap ${IDIR_PORTMAP}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/portmap ${IDIR_PORTMAP}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
