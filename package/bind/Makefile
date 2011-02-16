@@ -14,19 +14,25 @@ PKG_BUILDDEP:=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 
-PKG_SUBPKGS:=		BIND_SERVER BIND_NSUPDATE LIBBIND BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG
+PKG_SUBPKGS:=		BIND_SERVER BIND_NSUPDATE BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG LIBBIND
 PKGSD_BIND_NSUPDATE:=	nsupdate utility
 PKGSC_BIND_NSUPDATE:=	dns
+PKGSS_BIND_NSUPDATE:=	libbind
 PKGSD_BIND_RNDC:=	rndc & rndc-confgen utilities
 PKGSC_BIND_RNDC:=	dns
+PKGSS_BIND_RNDC:=	libbind
 PKGSD_BIND_CHECK:=	check utilities
 PKGSC_BIND_CHECK:=	dns
+PKGSS_BIND_CHECK:=	libbind
 PKGSD_BIND_DNSSEC:=	dnssec utilities
 PKGSC_BIND_DNSSEC:=	dns
+PKGSS_BIND_DNSSEC:=	libbind
 PKGSD_BIND_HOST:=	host utility
 PKGSC_BIND_HOST:=	dns
+PKGSS_BIND_HOST:=	libbind
 PKGSD_BIND_DIG:=	dig utility
 PKGSC_BIND_DIG:=	dns
+PKGSS_BIND_DIG:=	libbind
 PKGSD_LIBBIND:=		library for the bind software suite
 PKGSC_LIBBIND:=		libs
 
@@ -36,18 +42,18 @@ PKGFD_WITH_IPV6:=		enable IPv6 support
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,BIND_CLIENT,bind-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_NSUPDATE},${PKGSC_BIND_NSUPDATE}))
-$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_RNDC},${PKGSC_BIND_RNDC}))
-$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_CHECK},${PKGSC_BIND_CHECK}))
-$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_DNSSEC},${PKGSC_BIND_DNSSEC}))
-$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_HOST},${PKGSC_BIND_HOST}))
-$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BIND_DIG},${PKGSC_BIND_DIG}))
+$(eval $(call PKG_template,BIND_NSUPDATE,bind-nsupdate,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_NSUPDATE},${PKGSD_BIND_NSUPDATE},${PKGSC_BIND_NSUPDATE}))
+$(eval $(call PKG_template,BIND_RNDC,bind-rndc,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_RNDC},${PKGSD_BIND_RNDC},${PKGSC_BIND_RNDC}))
+$(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_CHECK},${PKGSD_BIND_CHECK},${PKGSC_BIND_CHECK}))
+$(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DNSSEC},${PKGSD_BIND_DNSSEC},${PKGSC_BIND_DNSSEC}))
+$(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_HOST},${PKGSD_BIND_HOST},${PKGSC_BIND_HOST}))
+$(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DIG},${PKGSD_BIND_DIG},${PKGSC_BIND_DIG}))
 $(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND}))
 
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--disable-threads \
-			--with-openssl=${STAGING_TARGET_DIR}/usr/ \
-			--with-libxml2=${STAGING_TARGET_DIR}/usr/ \
+			--with-openssl=${STAGING_TARGET_DIR}/usr \
+			--with-libxml2=${STAGING_TARGET_DIR}/usr \
 			--enable-epoll \
 			--with-libtool
 
