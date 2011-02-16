@@ -77,6 +77,8 @@ CONFIGURE_ARGS+=	\
 			--with-screen=ncurses \
 			--disable-widec \
 			--disable-locale-charset \
+			--with-build-cc=$(CC_FOR_BUILD) \
+			--with-build-cflags="$(CFLAGS_FOR_BUILD)" \
 			--with-build-cppflags="-I/usr/include/ncurses"
 MAKE_FILE:=		makefile
 
