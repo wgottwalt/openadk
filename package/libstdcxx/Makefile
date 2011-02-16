@@ -32,6 +32,7 @@ ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
 	$(CP) ${STAGING_TARGET_DIR}/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
+	-@rm ${IDIR_LIBSTDCXX}/usr/lib/libstdc++.so.*-gdb.py
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,5 +1,19 @@
 --- xfsprogs-3.1.4.orig/configure	2010-11-11 18:38:31.000000000 +0100
-+++ xfsprogs-3.1.4/configure	2011-01-22 19:33:52.458658054 +0100
++++ xfsprogs-3.1.4/configure	2011-02-14 20:26:03.000000000 +0100
+@@ -11214,11 +11214,11 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+     test -z "$INSTALL_GROUP" || pkg_group="$INSTALL_GROUP"
+ 
+ 
+-    pkg_distribution=`uname -s`
++    pkg_distribution=Linux
+     test -z "$DISTRIBUTION" || pkg_distribution="$DISTRIBUTION"
+ 
+ 
+-    pkg_platform=`uname -s | tr 'A-Z' 'a-z' | tr -d / | sed -e 's/irix64/irix/'`
++    pkg_platform=linux
+     test -z "$PLATFORM" || pkg_platform="$PLATFORM"
+ 
+ 
 @@ -12604,349 +12604,6 @@ fi
  
  

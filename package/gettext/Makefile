@@ -47,22 +47,28 @@ CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
 			ac_cv_gnu_library_2=no \
 			gt_use_preinstalled_gnugettext=no
 
+INSTALL_STYLE:=		manual
+
 libintl-install:
 	${INSTALL_DIR} ${IDIR_LIBINTL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libintl.so* \
+	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
 		${IDIR_LIBINTL}/usr/lib
 
 gettext-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/gettext \
+	$(INSTALL_BIN) $(WRKBUILD)/gettext-runtime/src/.libs/gettext \
 		$(IDIR_GETTEXT)/usr/bin
 
 msgfmt-install:
 	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/bin
 	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgettext*so* \
+	${CP} ${WRKBUILD}/gettext-tools/libgettextpo/.libs/libgettextpo.so* \
 		${IDIR_MSGFMT}/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/msgfmt \
+	${CP} ${WRKBUILD}/gettext-tools/gnulib-lib/.libs/libgettextlib*so* \
+		${IDIR_MSGFMT}/usr/lib
+	${CP} ${WRKBUILD}/gettext-tools/src/.libs/libgettextsrc*so* \
+		${IDIR_MSGFMT}/usr/lib
+	$(INSTALL_BIN) $(WRKBUILD)/gettext-tools/src/.libs/msgfmt \
 		$(IDIR_MSGFMT)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
