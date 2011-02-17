@@ -1,0 +1,24 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		totd
+PKG_VERSION:=		1.5.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7edaedae9f6aca5912dd6c123582cf08
+PKG_DESCR:=		Trick or Treat Daemon (a simple DNS-ALG for NAT-PT)
+PKG_SECTION:=		dns
+PKG_URL:=		http://www.dillema.net/software/totd.html
+PKG_SITES:=		http://www.dillema.net/software/totd/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,TOTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_TOTD)/{usr/sbin,etc}
+	${INSTALL_DATA} ./files/totd.conf ${IDIR_TOTD}/etc/
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/totd $(IDIR_TOTD)/usr/sbin/
+
+include ${TOPDIR}/mk/pkg-bottom.mk
