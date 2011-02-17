@@ -926,13 +926,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 ZLIB:=lib/zlib_deflate/zlib_deflate
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX832),y)
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX416),y)
-ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
 ZLIB+=lib/zlib_inflate/zlib_inflate
-endif
-endif
-endif
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
     $(foreach mod, $(ZLIB),$(MODULES_DIR)/kernel/$(mod)) \
