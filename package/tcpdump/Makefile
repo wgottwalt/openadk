@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tcpdump
 PKG_VERSION:=		4.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d0dd58bbd6cd36795e05c6f1f74420b0
 PKG_DESCR:=		A tool for network monitoring and data acquisition
 PKG_SECTION:=		net
@@ -32,7 +32,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 ifneq (${ADK_PACKAGE_TCPDUMP_WITH_CHROOT},)
-CONFIGURE_ARGS+=	--with-chroot="/var/lib/tcpdump"
+CONFIGURE_ARGS+=	--with-chroot="/var/lib/tcpdump" --with-user="nobody"
 endif
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
 			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include"
