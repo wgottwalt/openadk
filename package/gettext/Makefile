@@ -14,7 +14,9 @@ PKG_DEPENDS:=		libiconv libpthread
 PKG_URL:=		http://www.gnu.org/software/gettext/
 PKG_SITES:=		${MASTER_SITE_GNU:=gettext/}
 
-PKG_SUBPKGS:=		LIBINTL GETTEXT MSGFMT
+PKG_SUBPKGS:=		LIBINTL LIBINTL_DEV GETTEXT MSGFMT
+PKGSD_LIBINTL_DEV:=	libintl headers
+PKGSC_LIBINTL_DEV:=	devel
 PKGSD_GETTEXT:=		gettext utility
 PKGSC_GETTEXT:=		misc
 PKGSS_GETTEXT:=		libintl
@@ -29,6 +31,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBINTL,libintl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBINTL_DEV,libintl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBINTL_DEV:},${PKGSC_LIBINTL_DEV},${PKG_OPTS}))
 $(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GETTEXT},${PKGSD_GETTEXT},${PKGSC_GETTEXT}))
 $(eval $(call PKG_template,MSGFMT,msgfmt,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MSGFMT},${PKGSD_MSGFMT},${PKGSC_MSGFMT}))
 
@@ -53,6 +56,11 @@ libintl-install:
 	${INSTALL_DIR} ${IDIR_LIBINTL}/usr/lib
 	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
 		${IDIR_LIBINTL}/usr/lib
+
+libintl-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBINTL_DEV}/usr/include
+	${INSTALL_DATA} ${WRKBUILD}/gettext-runtime/intl/libintl.h \
+		${IDIR_LIBINTL_DEV}/usr/include
 
 gettext-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/bin
