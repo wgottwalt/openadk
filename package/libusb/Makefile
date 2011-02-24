@@ -27,12 +27,15 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBUSB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_DEV},${PKGSC_LIBUSB_DEV},${PKG_OPTS}))
 
-post-install:
+libusb-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libusb*.so* ${IDIR_LIBUSB}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libusb*.so* ${IDIR_LIBUSB}/usr/lib
 
 libusb-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBUSB_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBUSB_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBUSB_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

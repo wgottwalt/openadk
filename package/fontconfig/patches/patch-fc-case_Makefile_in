@@ -1,7 +1,11 @@
 --- fontconfig-2.8.0.orig/fc-case/Makefile.in	2009-11-19 00:49:38.000000000 +0100
-+++ fontconfig-2.8.0/fc-case/Makefile.in	2009-12-04 20:03:05.536919385 +0100
-@@ -87,17 +87,17 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUD
- 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
++++ fontconfig-2.8.0/fc-case/Makefile.in	2011-02-24 14:30:29.000000000 +0100
+@@ -84,20 +84,20 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
+ am__mv = mv -f
+ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
++	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS_FOR_BUILD)
  AM_V_CC = $(am__v_CC_$(V))
  am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 -am__v_CC_0 = @echo "  CC    " $@;
@@ -26,7 +30,7 @@
  CCDEPMODE = @CCDEPMODE@
  CC_FOR_BUILD = @CC_FOR_BUILD@
 -CFLAGS = @CFLAGS@
-+CFLAGS = 
++CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
  CONFDIR = @CONFDIR@
  CPP = @CPP@
 -CPPFLAGS = @CPPFLAGS@

@@ -26,6 +26,7 @@ else
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
 endif
+STAGING_DIR:=		${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
 # relation from STAGING_HOST_DIR to STAGING_TARGET_DIR (for gcc to find
 # its sysroot while staying relocatable)

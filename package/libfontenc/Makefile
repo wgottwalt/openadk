@@ -16,9 +16,17 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBFONTENC,libfontenc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFONTENC_DEV,libfontenc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libfontenc-install:
 	${INSTALL_DIR} ${IDIR_LIBFONTENC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libfontenc.so* ${IDIR_LIBFONTENC}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libfontenc.so* ${IDIR_LIBFONTENC}/usr/lib
+
+libfontenc-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBFONTENC_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBFONTENC_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBFONTENC_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/fontenc.pc \
+		${IDIR_LIBFONTENC_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

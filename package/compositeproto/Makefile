@@ -18,5 +18,8 @@ $(eval $(call PKG_template,COMPOSITEPROTO,compositeproto,$(PKG_VERSION)-${PKG_RE
 post-install:
 	${INSTALL_DIR} ${IDIR_COMPOSITEPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_COMPOSITEPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_COMPOSITEPROTO}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/compositeproto.pc \
+		${IDIR_COMPOSITEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -18,5 +18,8 @@ $(eval $(call PKG_template,DRI2PROTO,dri2proto,$(PKG_VERSION)-${PKG_RELEASE},${P
 post-install:
 	${INSTALL_DIR} ${IDIR_DRI2PROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_DRI2PROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_DRI2PROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/dri2proto.pc \
+		${IDIR_DRI2PROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

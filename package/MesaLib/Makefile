@@ -15,7 +15,9 @@ PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.2/
 
-PKG_SUBPKGS:=		MESALIB GLXINFO GLXGEARS
+PKG_SUBPKGS:=		MESALIB MESALIB_DEV GLXINFO GLXGEARS
+PKGSD_MESALIB_DEV:=	MESA headers
+PKGSC_MESALIB_DEV:=	devel
 PKGSD_GLXINFO:=		Display various GLX information
 PKGSC_GLXINFO:=		x11/apps
 PKGSD_GLXGEARS:=	Nice little OpenGL demo application
@@ -28,6 +30,7 @@ WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MESALIB_DEV,mesalib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MESALIB_DEV},${PKGSC_MESALIB_DEV}))
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
 
@@ -43,6 +46,9 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-demos=xdemos
 
 XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD} GLSL_CL=${STAGING_HOST_DIR}/bin/glslcompile
+ifeq ($(ADK_NATIVE),y)
+XAKE_FLAGS+=		RANLIB=ranlib AR=ar
+endif
 
 post-extract:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
@@ -58,25 +64,33 @@ post-extract:
 		${STAGING_HOST_DIR}/bin/glslcompile
 	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
-pre-configure:
-	$(SED) "s#@@RANLIB@@#${TARGET_CROSS}ranlib#" ${WRKBUILD}/configs/default
-	$(SED) "s#@@AR@@#${TARGET_CROSS}ar#" ${WRKBUILD}/configs/default
-
-post-install:
+mesalib-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESALIB)/usr/lib
+	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
+		${IDIR_MESALIB}/usr/lib/dri/
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
-	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
-		${IDIR_MESALIB}/usr/lib/dri/
+
+glxinfo-install:
 	${INSTALL_DIR} ${IDIR_GLXINFO}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/progs/xdemos/glxinfo \
 		${IDIR_GLXINFO}/usr/bin/
+
+glxgears-install:
 	${INSTALL_DIR} ${IDIR_GLXGEARS}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/progs/xdemos/glxgears \
 		${IDIR_GLXGEARS}/usr/bin/
+
+mesalib-dev-install:
+	$(INSTALL_DIR) $(IDIR_MESALIB_DEV)/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		$(IDIR_MESALIB_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_MESALIB_DEV)/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		$(IDIR_MESALIB_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

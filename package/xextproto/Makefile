@@ -18,5 +18,8 @@ $(eval $(call PKG_template,XEXTPROTO,xextproto,$(PKG_VERSION)-${PKG_RELEASE},${P
 post-install:
 	${INSTALL_DIR} ${IDIR_XEXTPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XEXTPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_XEXTPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xextproto.pc \
+		${IDIR_XEXTPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

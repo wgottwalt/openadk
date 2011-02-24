@@ -18,5 +18,8 @@ $(eval $(call PKG_template,BIGREQSPROTO,bigreqsproto,$(PKG_VERSION)-${PKG_RELEAS
 post-install:
 	${INSTALL_DIR} ${IDIR_BIGREQSPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_BIGREQSPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_BIGREQSPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/bigreqsproto.pc \
+		${IDIR_BIGREQSPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

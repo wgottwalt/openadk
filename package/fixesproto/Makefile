@@ -18,5 +18,8 @@ $(eval $(call PKG_template,FIXESPROTO,fixesproto,$(PKG_VERSION)-${PKG_RELEASE},$
 post-install:
 	${INSTALL_DIR} ${IDIR_FIXESPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_FIXESPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_FIXESPROTO}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/fixesproto.pc \
+		${IDIR_FIXESPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

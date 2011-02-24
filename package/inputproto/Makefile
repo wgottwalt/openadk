@@ -18,5 +18,8 @@ $(eval $(call PKG_template,INPUTPROTO,inputproto,$(PKG_VERSION)-${PKG_RELEASE},$
 post-install:
 	${INSTALL_DIR} ${IDIR_INPUTPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_INPUTPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_INPUTPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/inputproto.pc \
+		${IDIR_INPUTPROTO}/usr/lib/pkgconfig	
 
 include ${TOPDIR}/mk/pkg-bottom.mk

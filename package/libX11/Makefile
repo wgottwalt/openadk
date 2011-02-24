@@ -32,13 +32,17 @@ CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-xf86bigfont \
 			--disable-malloc0returnsnull
 
-post-install:
+libx11-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/lib/libX11.so* ${IDIR_LIBX11}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libX11-xcb* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/share/X11/XErrorDB ${IDIR_LIBX11}/usr/share/X11
 
 libx11-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBX11_DEV}/usr/include/X11
 	${CP} ${WRKINST}/usr/include/X11/*.h ${IDIR_LIBX11_DEV}/usr/include/X11
+	${INSTALL_DIR} ${IDIR_LIBX11_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBX11_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

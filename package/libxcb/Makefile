@@ -14,14 +14,14 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXCB LIBXCB_DEVEL
 
-PKGSD_LIBXCB_DEVEL:=	XML-XCB protocol headers
-PKGSS_LIBXCB_DEVEL:=	libxcb
-PKGSC_LIBXCB_DEVEL:=	x11/devel
+PKGSD_LIBXCB_DEV:=	XML-XCB protocol headers
+PKGSS_LIBXCB_DEV:=	libxcb
+PKGSC_LIBXCB_DEV:=	x11/devel
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXCB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXCB_DEVEL,${PKG_NAME}-devel,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBXCB_DEVEL},${PKGSD_LIBXCB_DEVEL},${PKGSC_LIBXCB_DEVEL}))
+$(eval $(call PKG_template,LIBXCB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBXCB_DEV},${PKGSD_LIBXCB_DEV},${PKGSC_LIBXCB_DEV}))
 
 include $(TOPDIR)/mk/python.mk
 
@@ -31,8 +31,11 @@ libxcb-install:
 	${INSTALL_DIR} ${IDIR_LIBXCB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libxcb*.so* ${IDIR_LIBXCB}/usr/lib/
 
-libxcb-devel-install:
-	${INSTALL_DIR} ${IDIR_LIBXCB_DEVEL}/usr/include
-	${CP} ${WRKINST}/usr/include/xcb ${IDIR_LIBXCB_DEVEL}/usr/include
+libxcb-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXCB_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/xcb ${IDIR_LIBXCB_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBXCB_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBXCB_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

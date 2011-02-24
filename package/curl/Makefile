@@ -70,5 +70,8 @@ libcurl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
 	${CP} ${WRKINST}/usr/include/curl/*.h \
 		${IDIR_LIBCURL_DEV}/usr/include/curl/
+	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/curl-config \
+		${IDIR_LIBCURL_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

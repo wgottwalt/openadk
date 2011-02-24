@@ -275,6 +275,7 @@ config ADK_TARGET_SUFFIX
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
+	default "gnu"
 
 choice
 prompt "Target firmware type"

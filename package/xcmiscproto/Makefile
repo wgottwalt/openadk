@@ -18,5 +18,8 @@ $(eval $(call PKG_template,XCMISCPROTO,xcmiscproto,$(PKG_VERSION)-${PKG_RELEASE}
 post-install:
 	${INSTALL_DIR} ${IDIR_XCMISCPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XCMISCPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_XCMISCPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xcmiscproto.pc \
+		${IDIR_XCMISCPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

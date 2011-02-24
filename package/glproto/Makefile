@@ -18,5 +18,8 @@ $(eval $(call PKG_template,GLPROTO,glproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 post-install:
 	${INSTALL_DIR} ${IDIR_GLPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/GL ${IDIR_GLPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_GLPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/glproto.pc \
+		${IDIR_GLPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

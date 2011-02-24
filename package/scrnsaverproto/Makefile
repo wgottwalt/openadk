@@ -18,5 +18,8 @@ $(eval $(call PKG_template,SCRNSAVERPROTO,scrnsaverproto,$(PKG_VERSION)-${PKG_RE
 post-install:
 	${INSTALL_DIR} ${IDIR_SCRNSAVERPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_SCRNSAVERPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_SCRNSAVERPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/scrnsaverproto.pc \
+		${IDIR_SCRNSAVERPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

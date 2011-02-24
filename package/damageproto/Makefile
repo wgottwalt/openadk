@@ -18,5 +18,8 @@ $(eval $(call PKG_template,DAMAGEPROTO,damageproto,$(PKG_VERSION)-${PKG_RELEASE}
 post-install:
 	${INSTALL_DIR} ${IDIR_DAMAGEPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_DAMAGEPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_DAMAGEPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/damageproto.pc \
+		${IDIR_DAMAGEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -20,5 +20,8 @@ CONFIGURE_ARGS+=	--datadir=/usr/lib
 post-install:
 	${INSTALL_DIR} ${IDIR_XTRANS}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XTRANS}/usr/include
+	${INSTALL_DIR} ${IDIR_XTRANS}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xtrans.pc \
+		${IDIR_XTRANS}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

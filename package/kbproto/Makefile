@@ -18,5 +18,8 @@ $(eval $(call PKG_template,KBPROTO,kbproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 post-install:
 	${INSTALL_DIR} ${IDIR_KBPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_KBPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_KBPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/kbproto.pc \
+		${IDIR_KBPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

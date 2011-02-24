@@ -12,13 +12,24 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXfixes damageproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBXDAMAGE LIBXDAMAGE_DEV
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXDAMAGE,libxdamage,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXDAMAGE_DEV,libxdamage-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libxdamage-install:
 	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libXdamage*.so* \
 		$(IDIR_LIBXDAMAGE)/usr/lib
+
+libxdamage-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_LIBXDAMAGE_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE_DEV)/usr/lib/pkgconfig
+	$(INSTALL_DATA) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_LIBXDAMAGE_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

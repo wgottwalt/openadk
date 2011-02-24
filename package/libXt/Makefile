@@ -7,20 +7,31 @@ PKG_NAME:=		libXt
 PKG_VERSION:=		1.0.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		091ed356b8ab9ca4fcbb471f738ca544
-PKG_DESCR:=		X Toolkit Intrinsics
+PKG_DESCR:=		X Toolkit Intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libSM
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBXT LIBXT_DEV
+PKGSD_LIBXT_DEV:=	X Toolkit Intrinsics headers
+PKGSC_LIBXT_DEV:=	x11/devel
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXT_DEV,libxt-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXT_DEV},${PKGSC_LIBXT_DEV}))
 
-CONFIGURE_ARGS+=	--disable-malloc0returnsnull \
-			--disable-install-makestrs
+CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
-post-install:
+libxt-install:
 	${INSTALL_DIR} ${IDIR_LIBXT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libXt.so* ${IDIR_LIBXT}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libXt.so* ${IDIR_LIBXT}/usr/lib
+
+libxt-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXT_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXT_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBXT_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBXT_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

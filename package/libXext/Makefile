@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LIBXEXT_DEV,libxext-dev,$(PKG_VERSION)-${PKG_RELEASE}
 
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
-post-install:
+libxext-install:
 	${INSTALL_DIR} ${IDIR_LIBXEXT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXext.so* ${IDIR_LIBXEXT}/usr/lib/
 
@@ -35,5 +35,8 @@ libxext-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
 	${CP} ${WRKINST}/usr/include/X11/extensions/*.h \
 		${IDIR_LIBXEXT_DEV}/usr/include/X11/extensions
+	${INSTALL_DIR} ${IDIR_LIBXEXT_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xext.pc \
+		${IDIR_LIBXEXT_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

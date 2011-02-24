@@ -14,16 +14,26 @@ PKG_BUILDDEP:=		libgpg-error
 PKG_URL:=		http://directory.fsf.org/project/libgcrypt
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
 
+PKG_SUBPKGS:=		LIBGCRYPT LIBGCRYPT_DEV
+PKGSD_LIBGCRYPT_DEV:=	GNU crypto headers
+PKGSC_LIBGCRYPT_DEV:=	devel
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBGCRYPT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGCRYPT,libgcrypt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGCRYPT_DEV,libgcrypt-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGCRYPT_DEV},${PKGSC_LIBGCRYPT_DEV}))
 
 CONFIGURE_ARGS+=	--disable-asm \
 			--with-gpg-error-prefix="${STAGING_TARGET_DIR}/usr"
 
-post-install:
+libgcrypt-install:
 	${INSTALL_DIR} ${IDIR_LIBGCRYPT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgcrypt.so* \
-		${IDIR_LIBGCRYPT}/usr/lib/
+		${IDIR_LIBGCRYPT}/usr/lib
+
+libgcrypt-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBGCRYPT}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_LIBGCRYPT}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -23,7 +23,7 @@ $(eval $(call PKG_template,LIBOGG_DEV,libogg-dev,${PKG_VERSION}-${PKG_RELEASE},$
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOGG}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libogg.so* ${IDIR_LIBOGG}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libogg.so* ${IDIR_LIBOGG}/usr/lib
 
 libogg-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBOGG_DEV}/usr/include/ogg

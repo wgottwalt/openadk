@@ -13,12 +13,24 @@ PKG_DEPENDS:=		libuuid
 PKG_BUILDDEP:=		libICE
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBSM LIBSM_DEV
+PKGSD_LIBSM_DEV:=	X11 Session Management headers
+PKGSC_LIBSM_DEV:=	x11/devel
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSM,libsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSM_DEV,libsm-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSM_DEV},${PKGSC_LIBSM_DEV}))
 
-post-install:
+libsm-install:
 	${INSTALL_DIR} ${IDIR_LIBSM}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libSM.so* ${IDIR_LIBSM}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libSM.so* ${IDIR_LIBSM}/usr/lib
+
+libsm-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBSM_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBSM_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBSM_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBSM_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

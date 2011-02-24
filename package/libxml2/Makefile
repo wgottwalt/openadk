@@ -58,5 +58,11 @@ libxml2-install:
 libxml2-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXML2_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXML2_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBXML2_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/libxml-2.0.pc \
+		${IDIR_LIBXML2_DEV}/usr/lib/pkgconfig
+	${INSTALL_DIR} ${IDIR_LIBXML2_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/xml2-config \
+		${IDIR_LIBXML2_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -14,20 +14,33 @@ PKG_BUILDDEP:=		freetype libxml2
 PKG_URL:=		http://fontconfig.org/
 PKG_SITES:=		http://fontconfig.org/release/
 
+PKG_SUBPKGS:=		FONTCONFIG FONTCONFIG_DEV
+PKGSD_FONTCONFIG_DEV:=	configuring and customizing font access headers
+PKGSC_FONTCONFIG_DEV:=	devel
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FONTCONFIG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,FONTCONFIG,fontconfig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,FONTCONFIG_DEV,fontconfig-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FONTCONFIG_DEV},${PKGSC_FONTCONFIG_DEV},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--with-arch=${ARCH} \
 			--disable-docs
 
-post-install:
+fontconfig-install:
 	${INSTALL_DIR} ${IDIR_FONTCONFIG}/usr/lib ${IDIR_FONTCONFIG}/etc/fonts
 	${CP} ${WRKINST}/usr/lib/libfontconfig.so* ${IDIR_FONTCONFIG}/usr/lib
 	$(CP) ${WRKINST}/etc/fonts/* ${IDIR_FONTCONFIG}/etc/fonts
+
+fontconfig-dev-install:
+	${INSTALL_DIR} ${IDIR_FONTCONFIG_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/fontconfig.pc \
+		${IDIR_FONTCONFIG_DEV}/usr/lib/pkgconfig
+	${INSTALL_DIR} ${IDIR_FONTCONFIG_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_FONTCONFIG_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

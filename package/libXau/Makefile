@@ -33,5 +33,8 @@ libxau-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXAU_DEV}/usr/include/X11/
 	${CP} ${WRKINST}/usr/include/X11/* \
 		${IDIR_LIBXAU_DEV}/usr/include/X11/
+	${INSTALL_DIR} ${IDIR_LIBXAU_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xau.pc \
+		${IDIR_LIBXAU_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -18,5 +18,8 @@ $(eval $(call PKG_template,VIDEOPROTO,videoproto,$(PKG_VERSION)-${PKG_RELEASE},$
 post-install:
 	${INSTALL_DIR} ${IDIR_VIDEOPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_VIDEOPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_VIDEOPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/videoproto.pc \
+		${IDIR_VIDEOPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
