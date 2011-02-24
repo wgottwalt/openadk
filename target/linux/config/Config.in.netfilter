@@ -146,7 +146,6 @@ source target/linux/config/Config.in.netfilter.ip4
 endmenu
 
 menu "IPv6: Netfilter Configuration"
-	depends on ADK_ENABLE_IPV6
 source target/linux/config/Config.in.netfilter.ip6
 endmenu
 

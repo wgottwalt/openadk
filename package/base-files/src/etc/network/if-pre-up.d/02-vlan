@@ -1,12 +1,18 @@
 #!/bin/sh
 
-[ -x /sbin/vconfig ] || exit 0
-[ -d /proc/net/vlan ] || exit 0
+which vconfig || {
+	echo "vconfig executable not found, aborting"
+	exit 0
+}
+[ -d /proc/net/vlan ] || {
+	echo "no kernel support for 802.1q found, aborting"
+	exit 0
+}
 
 case "$IFACE" in
         vlan*)
-               	vconfig set_name_type VLAN_PLUS_VID_NO_PAD
-               	VLANID=`echo $IFACE|sed "s/vlan*//"`
+		vconfig set_name_type VLAN_PLUS_VID_NO_PAD
+		VLANID=`echo $IFACE|sed "s/vlan*//"`
 		;;
 	eth*.*)
 		vconfig set_name_type DEV_PLUS_VID_NO_PAD
