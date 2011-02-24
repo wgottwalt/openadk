@@ -26,6 +26,9 @@ XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
+pre-build:
+	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
+
 post-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/

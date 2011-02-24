@@ -24,6 +24,9 @@ CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME)
 
+pre-build:
+	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
+
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib
 	$(CP) ${WRKINST}/usr/lib/*.so ${IDIR_LIBBFD}/usr/lib

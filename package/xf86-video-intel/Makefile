@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_CFLINE:=		y if (ADK_PKG_LAPTOP && ADK_TARGET_SYSTEM_IBM_X40)
+PKG_CFLINE_XF86_VIDEO_INTEL:=depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 

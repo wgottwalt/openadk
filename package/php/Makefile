@@ -29,6 +29,7 @@ PKGSB_MOD_PCRE:=	pcre
 PKGSB_MOD_SQLITE:=	sqlite
 PKGSB_MOD_XML:=		expat
 
+PKG_ARCH_DEPENDS:=	!cris
 PKG_HOST_DEPENDS:=	!cygwin
 
 # FIX PKG_DEPENDS
