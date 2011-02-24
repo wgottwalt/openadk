@@ -31,7 +31,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBINTL,libintl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBINTL_DEV,libintl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBINTL_DEV:},${PKGSC_LIBINTL_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBINTL_DEV,libintl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBINTL_DEV},${PKGSC_LIBINTL_DEV},${PKG_OPTS}))
 $(eval $(call PKG_template,GETTEXT,gettext,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GETTEXT},${PKGSD_GETTEXT},${PKGSC_GETTEXT}))
 $(eval $(call PKG_template,MSGFMT,msgfmt,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MSGFMT},${PKGSD_MSGFMT},${PKGSC_MSGFMT}))
 
