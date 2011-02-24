@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.27.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		ad9c80adb624a1ffe3d9753bab8a578a
+PKG_VERSION:=		2.28.1
+PKG_EXTRAVER:=		2.28
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libintl libiconv libpthread
 PKG_BUILDDEP:=		gettext libiconv
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/2.27/
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 
 PKG_SUBPKGS:=		GLIB GLIB_DEV
 PKGSC_GLIB_DEV:=	devel
@@ -44,15 +45,9 @@ pre-configure:
 ifneq ($(OStype),Darwin)
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
-			--with-libiconv=gnu \
-			--enable-debug=no \
-			--with-threads=posix \
 	);
-	env CFLAGS="-static" LDFLAGS="-static -liconv" ${MAKE} -C ${WRKBUILD}/glib
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gthread
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gio glib-compile-schemas
-	env CFLAGS="-static" LDFLAGS="-static" ${MAKE} -C ${WRKBUILD}/gobject glib-genmarshal
-	$(CP) ${WRKBUILD}/gio/glib-compile-schemas ${STAGING_HOST_DIR}/bin
+	env CFLAGS="-static" LDFLAGS="-static -liconv" ${MAKE} -C ${WRKBUILD}
+	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin
 	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
 	${MAKE} -C ${WRKBUILD} clean
 endif
