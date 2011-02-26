@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libavahi libdaemon libexpat libintl
 PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
 PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon

@@ -64,7 +64,7 @@ pre-build:
 		CC="${CC_FOR_BUILD}" \
 		LINK="${CC_FOR_BUILD} -o makemd5 -lc" \
 		LIBS="" \
-		CFLAGS="" \
+		CFLAGS="${CFLAGS_FOR_BUILD}" \
 		LDFLAGS="" \
 		CPPFLAGS="" \
 		makemd5

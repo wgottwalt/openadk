@@ -24,6 +24,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-graphics \
+			--with-fb \
 			--with-ssl \
 			--without-svgalib \
 			--without-libtiff \

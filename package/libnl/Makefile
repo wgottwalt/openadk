@@ -32,5 +32,8 @@ libnl-install:
 libnl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNL_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBNL_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBNL_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBNL_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

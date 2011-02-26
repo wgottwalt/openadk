@@ -7,8 +7,14 @@
 	- additionally output the full compiler command before running
 	  it
 --- iproute2-2.6.37.orig/configure	2011-01-07 18:54:30.000000000 +0100
-+++ iproute2-2.6.37/configure	2011-01-18 02:37:39.800716449 +0100
-@@ -15,7 +15,8 @@ int main(int argc, char **argv) {
++++ iproute2-2.6.37/configure	2011-02-25 21:01:53.000000000 +0100
+@@ -1,4 +1,5 @@
+ #! /bin/bash
++set -x
+ # This is not an autconf generated configure
+ #
+ INCLUDE=${1:-"$PWD/include"}
+@@ -15,7 +16,8 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
@@ -18,7 +24,7 @@
  if [ $? -eq 0 ]
  then
      echo "TC_CONFIG_ATM:=y" >>Config
-@@ -49,7 +50,8 @@ int main(int argc, char **argv)
+@@ -49,7 +51,8 @@ int main(int argc, char **argv)
  
  EOF
  
@@ -28,7 +34,7 @@
  then
  	echo "TC_CONFIG_XT:=y" >>Config
  	echo "using xtables"
-@@ -86,7 +88,8 @@ int main(int argc, char **argv) {
+@@ -86,7 +89,8 @@ int main(int argc, char **argv) {
  }
  
  EOF
@@ -38,7 +44,7 @@
  
  if [ $? -eq 0 ]
  then
-@@ -126,7 +129,8 @@ int main(int argc, char **argv) {
+@@ -126,7 +130,8 @@ int main(int argc, char **argv) {
  }
  
  EOF
@@ -48,7 +54,7 @@
  
  if [ $? -eq 0 ]
  then
-@@ -149,18 +153,8 @@ check_ipt()
+@@ -149,18 +154,8 @@ check_ipt()
  
  check_ipt_lib_dir()
  {

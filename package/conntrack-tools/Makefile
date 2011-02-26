@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		conntrack-tools
-PKG_VERSION:=		0.9.9
+PKG_VERSION:=		0.9.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		35b0ab9cde069b4ec8a493daae82d67b
+PKG_MD5SUM:=		caecb479ceb5ff7f646d47e85484d655
 PKG_DESCR:=		Connection tracking userspace tools
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		libnetfilter-conntrack

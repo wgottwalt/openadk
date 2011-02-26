@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libx11 fontconfig libxft libxml2
 PKG_BUILDDEP:=		libX11 fontconfig libXft libxml2
 PKG_URL:=		http://software.schmorp.de/pkg/rxvt-unicode.html
 PKG_SITES:=		http://dist.schmorp.de/rxvt-unicode/
+PKG_NEED_CXX:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

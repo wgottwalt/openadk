@@ -46,26 +46,29 @@ endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DIRECTFB}/etc
-	${INSTALL_DATA} ./files/directfbrc ${IDIR_DIRECTFB}/etc/
+	${INSTALL_DATA} ./files/directfbrc ${IDIR_DIRECTFB}/etc
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/{inputdrivers,systems,wm}
 	${CP} $(WRKINST)/usr/lib/lib{direct,fusion}*.so* \
-		$(IDIR_DIRECTFB)/usr/lib/
+		$(IDIR_DIRECTFB)/usr/lib
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers/libdirectfb_linux_input.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/systems/*.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/systems/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/systems
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/wm/*.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/wm/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/wm
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFB{Font,ImageProvider,VideoProvider}
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBFont/*.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBFont/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBFont
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBImageProvider/*.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBImageProvider/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBImageProvider
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBVideoProvider/*.so \
-		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBVideoProvider/
+		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBVideoProvider
 
 directfb-dev-install:
-	${INSTALL_DIR} ${IDIR_DIRECTFB_DEV}/usr/include/
+	${INSTALL_DIR} ${IDIR_DIRECTFB_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/directfb ${IDIR_DIRECTFB_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_DIRECTFB_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/directfb-config \
+		${IDIR_DIRECTFB_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -14,6 +14,7 @@ PKG_DEPENDS+=		libstdcxx
 PKG_BUILDDEP:=		fltk libXi libiconv jpeg libpng zlib
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
+PKG_NEED_CXX:=		1
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnfsidmap
-PKG_VERSION:=		0.21b1
+PKG_VERSION:=		0.24
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a8a44bd4aa22441fb54735dd65496b72
+PKG_MD5SUM:=		d71a1ee9881d5b5814ff3ec41256937d
 PKG_DESCR:=		idmap library for NFSv4
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.citi.umich.edu/projects/nfsv4/linux/
@@ -24,8 +24,6 @@ $(eval $(call PKG_template,LIBNFSIDMAP_DEV,libnfsidmap-dev,$(PKG_VERSION)-${PKG_
 libnfsidmap-install:
 	$(INSTALL_DIR) $(IDIR_LIBNFSIDMAP)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libnfsidmap.so* \
-		$(IDIR_LIBNFSIDMAP)/usr/lib/
-	$(CP) $(WRKINST)/usr/lib/libnfsidmap_static.so* \
 		$(IDIR_LIBNFSIDMAP)/usr/lib/
 
 libnfsidmap-dev-install:

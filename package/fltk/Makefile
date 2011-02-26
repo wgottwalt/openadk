@@ -12,7 +12,6 @@ PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
-
 PKG_NEED_CXX:=		1
 PKG_CXX:=		LIBFLTK
 

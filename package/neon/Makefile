@@ -38,5 +38,8 @@ neon-dev-install:
 	${INSTALL_DIR} ${IDIR_NEON_DEV}/usr/lib/pkgconfig
 	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/neon.pc \
 		${IDIR_NEON_DEV}/usr/lib/pkgconfig
+	${INSTALL_DIR} ${IDIR_NEON_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/neon-config \
+		${IDIR_NEON_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

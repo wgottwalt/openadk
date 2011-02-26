@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libpng libtiff libjpeg libsdl
 PKG_BUILDDEP:=		libpng libtiff jpeg sdl
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBSDL_IMAGE LIBSDL_IMAGE_DEV
 PKGSD_LIBSDL_IMAGE_DEV:=development files for sdlimage

@@ -46,7 +46,7 @@ ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_GLIBC)/lib/
 endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib/
-	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libnsl libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib/; \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib/; \
 	done
@@ -57,7 +57,7 @@ glibc-dev-install:
 	-cp ./files/libc.so.$(ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
-	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+	-for file in libc libcrypt libdl libm libresolv librt libnsl libutil; do \
 		cd $(IDIR_GLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package

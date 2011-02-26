@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm
 PKG_BUILDDEP:=		xorg-server libdrm
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_NEED_CXX:=		1
 
 PKG_CFLINE_XF86_VIDEO_INTEL:=depends on ADK_TARGET_WITH_VGA
 

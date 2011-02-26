@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libiconv libdb
 PKG_BUILDDEP:=		libiconv libdb
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
+PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 

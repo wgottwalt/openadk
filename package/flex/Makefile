@@ -12,15 +12,21 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
+PKG_SUBPKGS:=		FLEX FLEX_DEV
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FLEX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FLEX,flex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FLEX_DEV,flex-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
-			ac_cv_func_realloc_0_nonnull=yes
-
-post-install:
+flex-install:
 	${INSTALL_DIR} ${IDIR_FLEX}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/flex ${IDIR_FLEX}/usr/bin
+
+flex-dev-install:
+	${INSTALL_DIR} ${IDIR_FLEX_DEV}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libfl.a \
+		${IDIR_FLEX_DEV}/usr/lib
+
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libopenssl libbind libxml2
 PKG_BUILDDEP:=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		BIND_SERVER BIND_NSUPDATE BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG LIBBIND
 PKGSD_BIND_NSUPDATE:=	nsupdate utility

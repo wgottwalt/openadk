@@ -13,6 +13,7 @@ PKG_DEPENDS:=		zlib libpthread
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.cups.org/
 PKG_SITES:=		ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
+PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
