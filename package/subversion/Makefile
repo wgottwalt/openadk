@@ -18,17 +18,18 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config
-CONFIGURE_ARGS+=	--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config
-CONFIGURE_ARGS+=	--disable-mod-activation
-CONFIGURE_ARGS+=	--disable-keychain
-CONFIGURE_ARGS+=	--without-apxs
-CONFIGURE_ARGS+=	--without-swig
-CONFIGURE_ARGS+=	--disable-experimental-libtool
-CONFIGURE_ARGS+=	--without-jikes
-CONFIGURE_ARGS+=	--without-jdk
-CONFIGURE_ARGS+=	--disable-javahl
-CONFIGURE_ARGS+=	--without-berkeley-db
+CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
+			--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
+			--with-neon=${STAGING_TARGET_DIR}/usr \
+			--disable-mod-activation \
+			--disable-keychain \
+			--without-apxs \
+			--without-swig \
+			--disable-experimental-libtool \
+			--without-jikes \
+			--without-jdk \
+			--disable-javahl \
+			--without-berkeley-db
 CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv'
 INSTALL_TARGET:=	external-install local-install
 

@@ -32,10 +32,10 @@ neon-install:
 	$(CP) ${WRKINST}/usr/lib/libneon.so* ${IDIR_NEON}/usr/lib
 
 neon-dev-install:
-	${INSTALL_DIR} ${IDIR_NEON_DEV}/usr/lib/pkgconfig
 	${INSTALL_DIR} ${IDIR_NEON_DEV}/usr/include/neon
 	${INSTALL_DATA} ${WRKINST}/usr/include/neon/*.h \
 		${IDIR_NEON_DEV}/usr/include/neon
+	${INSTALL_DIR} ${IDIR_NEON_DEV}/usr/lib/pkgconfig
 	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/neon.pc \
 		${IDIR_NEON_DEV}/usr/lib/pkgconfig
 

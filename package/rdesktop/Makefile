@@ -9,12 +9,15 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c6fcbed7f0ad7e60ac5fcb2d324d8b16
 PKG_DESCR:=		client for Windows Terminal Services
 PKG_SECTION:=		net
+PKG_BUILDDEP:=		libiconv openssl
 PKG_URL:=		http://www.rdesktop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rdesktop/}
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RDESKTOP,rdesktop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--with-openssl="${STAGING_TARGET_DIR}/usr"
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_RDESKTOP)/usr/bin

@@ -17,7 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS+=		-ldl -lrt
+TARGET_CFLAGS+=		-ldl -lrt -liconv
 CONFIGURE_ARGS+=	--enable-owfs \
 			--enable-usb \
 			--disable-swig \

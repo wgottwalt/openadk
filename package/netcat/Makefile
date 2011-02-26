@@ -21,5 +21,4 @@ post-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/netcat \
 		$(IDIR_NETCAT)/usr/bin
 
-# please remove ALL above comments, before commiting
 include ${TOPDIR}/mk/pkg-bottom.mk
