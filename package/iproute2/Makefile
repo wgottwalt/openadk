@@ -19,7 +19,7 @@ PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
-PKGSD_TC_IPT:=		iproute 2 traffic control IPTables support library
+PKGSD_TC_IPT:=		iproute2 traffic control IPTables support library
 PKGSS_TC_IPT:=		tc iptables
 PKGSB_TC_IPT:=		iptables
 PKGSD_IFSTAT:=		iproute2 interface statistics utility
@@ -42,10 +42,11 @@ $(eval $(call PKG_template,ROUTEL,routel,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_
 $(eval $(call PKG_template,RTMON,rtmon,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_RTMON},${PKG_SECTION}))
 $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PKG_SECTION}))
 
+CONFIG_STYLE:=		minimal
 TARGET_CFLAGS+=		-D_GNU_SOURCE
 XAKE_FLAGS+=		CCOPTS="${TARGET_CFLAGS}" MFLAGS="CC=\"${TARGET_CC}\"" \
-			HOSTCFLAGS="-I${LINUX_HEADER_DIR}/include"
-CONFIGURE_ENV+=		IPTC="${TARGET_CFLAGS}" IPTL="${TARGET_LDFLAGS}"
+			CFLAGS_FOR_BUILD+="-I${LINUX_HEADER_DIR}/include"
+CONFIGURE_ENV+=		CC="${TARGET_CC}" IPTC="${TARGET_CFLAGS}" IPTL="${TARGET_LDFLAGS}"
 
 ip-install:
 	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,usr/sbin}

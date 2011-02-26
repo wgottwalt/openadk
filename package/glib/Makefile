@@ -45,10 +45,12 @@ pre-configure:
 ifneq ($(OStype),Darwin)
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
+			--with-libiconv=gnu \
 	);
-	env CFLAGS="-static" LDFLAGS="-static -liconv" ${MAKE} -C ${WRKBUILD}
+	${MAKE} -C ${WRKBUILD} V=1
 	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin
 	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
+	$(CP) ${WRKBUILD}/gobject/glib-mkenums ${STAGING_HOST_DIR}/bin
 	${MAKE} -C ${WRKBUILD} clean
 endif
 

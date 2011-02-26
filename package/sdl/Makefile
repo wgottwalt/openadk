@@ -42,11 +42,14 @@ CONFIGURE_ARGS+=	--disable-esd \
 			--disable-video-opengl \
 			--with-x
 
-post-install:
+libsdl-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL)/usr/lib
 
 libsdl-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBSDL_DEV)/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/sdl-config \
+		$(IDIR_LIBSDL_DEV)/usr/bin
 	$(INSTALL_DIR) $(IDIR_LIBSDL_DEV)/usr/include/SDL
 	$(CP) ${WRKINST}/usr/include/SDL/* $(IDIR_LIBSDL_DEV)/usr/include/SDL
 

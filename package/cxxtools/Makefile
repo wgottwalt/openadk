@@ -14,9 +14,12 @@ PKG_BUILDDEP:=		libiconv
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 
+PKG_SUBPKGS:=		CXXTOOLS CXXTOOLS_DEV
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CXXTOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CXXTOOLS_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
@@ -30,8 +33,15 @@ TARGET_CFLAGS+=		-fPIC
 TARGET_CXXFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
 
-post-install:
+cxxtools-install:
 	${INSTALL_DIR} ${IDIR_CXXTOOLS}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcxxtools.so* ${IDIR_CXXTOOLS}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libcxxtools.so* ${IDIR_CXXTOOLS}/usr/lib
+
+cxxtools-dev-install:
+	${INSTALL_DIR} ${IDIR_CXXTOOLS_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_CXXTOOLS_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_CXXTOOLS_DEV}/usr/bin
+	${CP} ${WRKINST}/usr/bin/cxxtools-config ${IDIR_CXXTOOLS_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

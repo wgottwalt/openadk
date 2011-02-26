@@ -20,7 +20,7 @@ PKGSC_LIBP11_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBP11,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBP11,libp11,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBP11_DEV,libp11-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBP11_DEV},${PKGSC_LIBP11_DEV}))
 
 post-install:
@@ -30,5 +30,8 @@ post-install:
 libp11-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBP11_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBP11_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBP11_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/libp11.pc \
+		${IDIR_LIBP11_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

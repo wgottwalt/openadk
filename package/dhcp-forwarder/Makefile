@@ -4,15 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp-forwarder
-PKG_VERSION:=		0.8
+PKG_VERSION:=		0.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fb3670dee9f71af1e55ac5dcd64e213e
+PKG_MD5SUM:=		63630db269ac17523ad085b67277b1c3
 PKG_DESCR:=		DHCP relay agent
 PKG_SECTION:=		dhcp
 PKG_URL:=		http://www.nongnu.org/dhcp-fwd/
 PKG_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
@@ -25,8 +23,8 @@ post-install:
 	${INSTALL_DIR} ${IDIR_DHCP_FORWARDER}/usr/sbin \
 		${IDIR_DHCP_FORWARDER}/etc
 	${INSTALL_DATA} ${WRKBUILD}/contrib/dhcp-fwd.conf \
-		${IDIR_DHCP_FORWARDER}/etc/
+		${IDIR_DHCP_FORWARDER}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcp-fwd \
-		${IDIR_DHCP_FORWARDER}/usr/sbin/
+		${IDIR_DHCP_FORWARDER}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

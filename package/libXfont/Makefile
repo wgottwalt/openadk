@@ -29,6 +29,9 @@ libxfont-install:
 	${CP} ${WRKINST}/usr/lib/libXfont.so* ${IDIR_LIBXFONT}/usr/lib
 
 libxfont-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXFONT_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_LIBXFONT_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_LIBXFONT_DEV}/usr/lib/pkgconfig
 	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xfont.pc \
 		${IDIR_LIBXFONT_DEV}/usr/lib/pkgconfig
