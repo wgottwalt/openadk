@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libpcap
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://sourceforge.net/projects/libnet-dev/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnet-dev/}
+PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 

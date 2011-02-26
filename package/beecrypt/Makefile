@@ -11,6 +11,7 @@ PKG_DESCR:=		cryptography toolkit
 PKG_SECTION:=		crypto
 PKG_URL:=		http://beecrypt.sourceforge.net/
 PKG_SITES:=		http://sourceforge.net/projects/beecrypt/files/beecrypt/$(PKG_VERSION)/
+PKG_NEED_CXX:=		1
 
 include $(TOPDIR)/mk/package.mk
 

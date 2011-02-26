@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libdnet
-PKG_VERSION:=		1.10
+PKG_VERSION:=		1.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		416b765e9d9961501ac85e9a366fd219
+PKG_MD5SUM:=		04c394ed8e1e7fc455456e79e908916d
 PKG_DESCR:=		a low-level networking library
 PKG_SECTION:=		libs
 PKG_URL:=		http://libdnet.sourceforge.net/

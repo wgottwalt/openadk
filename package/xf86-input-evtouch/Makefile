@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server kmod-input-evdev
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://www.conan.de/touchscreen/
+PKG_NEED_CXX:=		1
 
 PKG_CFLINE_XF86_INPUT_EVTOUCH:=	depends on ADK_TARGET_WITH_INPUT
 

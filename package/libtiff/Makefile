@@ -11,6 +11,7 @@ PKG_DESCR:=		A library for reading/writing TIFF images
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.libtiff.org/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBTIFF LIBTIFF_DEV
 PKGSD_LIBTIFF_DEV:=	development files for libtiff

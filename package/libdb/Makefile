@@ -11,6 +11,7 @@ PKG_DESCR:=		disk file format database which stores key/data-pairs in single fil
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
 PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_NEED_CXX:=		1
 
 DISTFILES:=		db-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/db-${PKG_VERSION}

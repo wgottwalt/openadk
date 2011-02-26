@@ -11,6 +11,7 @@ PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
+PKG_NEED_CXX:=		1
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

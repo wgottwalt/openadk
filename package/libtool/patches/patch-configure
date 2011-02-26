@@ -1,0 +1,149 @@
+--- libtool-2.4.orig/configure	2010-09-22 16:44:17.000000000 +0200
++++ libtool-2.4/configure	2011-02-18 13:44:57.000000000 +0100
+@@ -13473,135 +13473,6 @@ func_stripname_cnf ()
+   esac
+ } # func_stripname_cnf
+ 
+-      if test -n "$CXX" && ( test "X$CXX" != "Xno" &&
+-    ( (test "X$CXX" = "Xg++" && `g++ -v >/dev/null 2>&1` ) ||
+-    (test "X$CXX" != "Xg++"))) ; then
+-  ac_ext=cpp
+-ac_cpp='$CXXCPP $CPPFLAGS'
+-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking how to run the C++ preprocessor" >&5
+-$as_echo_n "checking how to run the C++ preprocessor... " >&6; }
+-if test -z "$CXXCPP"; then
+-  if test "${ac_cv_prog_CXXCPP+set}" = set; then :
+-  $as_echo_n "(cached) " >&6
+-else
+-      # Double quotes because CXXCPP needs to be expanded
+-    for CXXCPP in "$CXX -E" "/lib/cpp"
+-    do
+-      ac_preproc_ok=false
+-for ac_cxx_preproc_warn_flag in '' yes
+-do
+-  # Use a header file that comes with gcc, so configuring glibc
+-  # with a fresh cross-compiler works.
+-  # Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+-  # <limits.h> exists even on freestanding compilers.
+-  # On the NeXT, cc -E runs the code through the compiler's parser,
+-  # not just through cpp. "Syntax error" is here to catch this case.
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-#ifdef __STDC__
+-# include <limits.h>
+-#else
+-# include <assert.h>
+-#endif
+-		     Syntax error
+-_ACEOF
+-if ac_fn_cxx_try_cpp "$LINENO"; then :
+-
+-else
+-  # Broken: fails on valid input.
+-continue
+-fi
+-rm -f conftest.err conftest.i conftest.$ac_ext
+-
+-  # OK, works on sane cases.  Now check whether nonexistent headers
+-  # can be detected and how.
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+-_ACEOF
+-if ac_fn_cxx_try_cpp "$LINENO"; then :
+-  # Broken: success on invalid input.
+-continue
+-else
+-  # Passes both tests.
+-ac_preproc_ok=:
+-break
+-fi
+-rm -f conftest.err conftest.i conftest.$ac_ext
+-
+-done
+-# Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+-rm -f conftest.i conftest.err conftest.$ac_ext
+-if $ac_preproc_ok; then :
+-  break
+-fi
+-
+-    done
+-    ac_cv_prog_CXXCPP=$CXXCPP
+-
+-fi
+-  CXXCPP=$ac_cv_prog_CXXCPP
+-else
+-  ac_cv_prog_CXXCPP=$CXXCPP
+-fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $CXXCPP" >&5
+-$as_echo "$CXXCPP" >&6; }
+-ac_preproc_ok=false
+-for ac_cxx_preproc_warn_flag in '' yes
+-do
+-  # Use a header file that comes with gcc, so configuring glibc
+-  # with a fresh cross-compiler works.
+-  # Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+-  # <limits.h> exists even on freestanding compilers.
+-  # On the NeXT, cc -E runs the code through the compiler's parser,
+-  # not just through cpp. "Syntax error" is here to catch this case.
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-#ifdef __STDC__
+-# include <limits.h>
+-#else
+-# include <assert.h>
+-#endif
+-		     Syntax error
+-_ACEOF
+-if ac_fn_cxx_try_cpp "$LINENO"; then :
+-
+-else
+-  # Broken: fails on valid input.
+-continue
+-fi
+-rm -f conftest.err conftest.i conftest.$ac_ext
+-
+-  # OK, works on sane cases.  Now check whether nonexistent headers
+-  # can be detected and how.
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-#include <ac_nonexistent.h>
+-_ACEOF
+-if ac_fn_cxx_try_cpp "$LINENO"; then :
+-  # Broken: success on invalid input.
+-continue
+-else
+-  # Passes both tests.
+-ac_preproc_ok=:
+-break
+-fi
+-rm -f conftest.err conftest.i conftest.$ac_ext
+-
+-done
+-# Because of `break', _AC_PREPROC_IFELSE's cleaning code was skipped.
+-rm -f conftest.i conftest.err conftest.$ac_ext
+-if $ac_preproc_ok; then :
+-
+-else
+-  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+-as_fn_error $? "C++ preprocessor \"$CXXCPP\" fails sanity check
+-See \`config.log' for more details" "$LINENO" 5; }
+-fi
+ 
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+@@ -13609,10 +13480,6 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS con
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+ 
+-else
+-  _lt_caught_CXX_error=yes
+-fi
+-
+ ac_ext=cpp
+ ac_cpp='$CXXCPP $CPPFLAGS'
+ ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
