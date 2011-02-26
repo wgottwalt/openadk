@@ -1,0 +1,20 @@
+--- quagga-0.99.17.orig/configure	2010-08-19 11:43:02.000000000 +0200
++++ quagga-0.99.17/configure	2011-02-16 22:51:51.000000000 +0100
+@@ -14188,7 +14188,7 @@ if test "${ac_cv_func_malloc_0_nonnull+s
+   $as_echo_n "(cached) " >&6
+ else
+   if test "$cross_compiling" = yes; then :
+-  ac_cv_func_malloc_0_nonnull=no
++  ac_cv_func_malloc_0_nonnull=yes
+ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+@@ -14640,7 +14640,7 @@ if test "${ac_cv_func_realloc_0_nonnull+
+   $as_echo_n "(cached) " >&6
+ else
+   if test "$cross_compiling" = yes; then :
+-  ac_cv_func_realloc_0_nonnull=no
++  ac_cv_func_realloc_0_nonnull=yes
+ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */

@@ -130,7 +130,7 @@ post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
-	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
+	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_DIR}/scripts'
 	@mkdir -p ${WRKINST}/{sbin,bin,etc,lib} ${WRKINST}/usr/{sbin,bin,lib}
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
@@ -155,7 +155,7 @@ ifeq ($(ADK_NATIVE),)
 endif
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
-		cd '${STAGING_TARGET_DIR}'; \
+		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \
@@ -170,14 +170,14 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_TARGET_DIR}'
-	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
+	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_DIR}'
+	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$fn; \
 	done
 ifeq (,$(filter noscripts,${PKG_OPTS}))
-	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
+	@cd '${STAGING_DIR}'; grep 'usr/s*bin/' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    while read fn; do \
 		b="$$(dd if="$$fn" bs=2 count=1 2>/dev/null)"; \
@@ -240,7 +240,7 @@ clean-targets: clean-dev-generic
 clean-dev-generic:
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
-		cd '${STAGING_TARGET_DIR}'; \
+		cd '${STAGING_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \

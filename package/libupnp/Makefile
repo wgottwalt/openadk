@@ -13,11 +13,14 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://pupnp.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pupnp/}
 
+PKG_SUBPKGS:=		LIBUPNP LIBUPNP_DEV
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUPNP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBUPNP,libupnp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBUPNP_DEV,libupnp-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-samples
@@ -26,8 +29,12 @@ post-build:
 	sed -i -e 's#^libdir=.*#libdir=#' \
 		${WRKBUILD}/threadutil/libthreadutil.la
 
-post-install:
+libupnp-install:
 	${INSTALL_DIR} ${IDIR_LIBUPNP}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBUPNP}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBUPNP}/usr/lib
+
+libupnp-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBUPNP_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBUPNP_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

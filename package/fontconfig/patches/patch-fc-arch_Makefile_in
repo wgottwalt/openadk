@@ -1,10 +1,20 @@
 --- fontconfig-2.8.0.orig/fc-arch/Makefile.in	2009-11-19 00:49:37.000000000 +0100
-+++ fontconfig-2.8.0/fc-arch/Makefile.in	2009-12-04 20:07:55.995064329 +0100
-@@ -114,10 +114,10 @@ AWK = @AWK@
++++ fontconfig-2.8.0/fc-arch/Makefile.in	2011-02-24 14:37:06.000000000 +0100
+@@ -82,7 +82,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
+ am__mv = mv -f
+ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
++	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS_FOR_BUILD)
+ AM_V_CC = $(am__v_CC_$(V))
+ am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+ am__v_CC_0 = @echo "  CC    " $@;
+@@ -114,10 +114,11 @@ AWK = @AWK@
  CC = @CC_FOR_BUILD@
  CCDEPMODE = @CCDEPMODE@
  CC_FOR_BUILD = @CC_FOR_BUILD@
 -CFLAGS = @CFLAGS@
++CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
 +CFLAGS = 
  CONFDIR = @CONFDIR@
  CPP = @CPP@
@@ -13,7 +23,7 @@
  CYGPATH_W = @CYGPATH_W@
  DEFS = @DEFS@
  DEPDIR = @DEPDIR@
-@@ -154,7 +154,7 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
+@@ -154,7 +155,7 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
  INSTALL_SCRIPT = @INSTALL_SCRIPT@
  INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
  LD = @LD@
@@ -22,3 +32,12 @@
  LIBOBJS = @LIBOBJS@
  LIBS = @LIBS@
  LIBTOOL = @LIBTOOL@
+@@ -249,7 +250,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
++LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS_FOR_BUILD) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+ INCLUDES = -I${top_srcdir}/src -I${top_srcdir} $(WARN_CFLAGS)
+ TMPL = fcarch.tmpl.h
+ STMPL = ${top_srcdir}/fc-arch/fcarch.tmpl.h

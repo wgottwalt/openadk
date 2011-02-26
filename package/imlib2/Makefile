@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		20d59c7cda06742015baade6f5975415
 PKG_DESCR:=		Version 2 of an advanced replacement library for libraries like libXpm
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libfreetype
-PKG_BUILDDEP:=		freetype
+PKG_DEPENDS:=		libfreetype zlib libpng libtiff
+PKG_BUILDDEP:=		freetype zlib libpng libtiff
 PKG_URL:=		http://www.enlightenment.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=enlightenment/}
 
@@ -22,8 +22,8 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_IMLIB2)/usr/lib/imlib2/{filters,loaders}
 	${CP} $(WRKINST)/usr/lib/libImlib2.so* $(IDIR_IMLIB2)/usr/lib
 	${CP} $(WRKINST)/usr/lib/imlib2/filters/*.so \
-		$(IDIR_IMLIB2)/usr/lib/imlib2/filters/
+		$(IDIR_IMLIB2)/usr/lib/imlib2/filters
 	${CP} $(WRKINST)/usr/lib/imlib2/loaders/*.so \
-		$(IDIR_IMLIB2)/usr/lib/imlib2/loaders/
+		$(IDIR_IMLIB2)/usr/lib/imlib2/loaders
 
 include ${TOPDIR}/mk/pkg-bottom.mk

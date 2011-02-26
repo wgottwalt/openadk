@@ -21,16 +21,36 @@ PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
+PKG_SUBPKGS:=		XORG_SERVER XORG_SERVER_DEV
+
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
+PKG_ARCH_DEPENDS:=	!cris
 
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI
 PKGFS_WITH_DRI:=		mesalib
 PKGFD_WITH_DRI:=		enable DRI/DRI2 support
 PKGFB_WITH_DRI:=		xf86driproto glproto dri2proto MesaLib
 
+PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_CRYPTO
+PKGCD_WITH_GCRYPT:=		use libgcrypt for SHA1
+PKGCS_WITH_GCRYPT:=		libgcrypt
+PKGCB_WITH_GCRYPT:=		libgcrypt
+PKGCD_WITH_CRYPTO:=		use openssl libcrypto for SHA1
+PKGCS_WITH_CRYPTO:=		libopenssl
+PKGCB_WITH_CRYPTO:=		openssl
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XORG_SERVER_DEV,${PKG_NAME}-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
+CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
+endif
+
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_CRYPTO},y)
+CONFIGURE_ARGS+=	 --with-sha1=libcrypto
+endif
 
 CONFIGURE_ENV+=		V=1
 CONFIGURE_ARGS+=	--with-fontdir=/usr/share/fonts/X11 \
@@ -69,7 +89,7 @@ ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 CONFIGURE_ARGS+=	--with-int10=stub
 endif
 
-post-install:
+xorg-server-install:
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/etc/X11
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/bin
 	$(INSTALL_DIR) $(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
@@ -90,5 +110,13 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 endif
+
+xorg-server-dev-install:
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER_DEV)/usr/include/xorg
+	${CP} ${WRKINST}/usr/include/xorg/* \
+		$(IDIR_XORG_SERVER_DEV)/usr/include/xorg
+	$(INSTALL_DIR) $(IDIR_XORG_SERVER_DEV)/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/xorg-server.pc \
+		$(IDIR_XORG_SERVER_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

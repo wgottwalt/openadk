@@ -134,23 +134,23 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
-${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/include,usr/lib} \
+${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
+	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/include,usr/lib} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib}
 
-${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
+${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-	echo "dest root /" >${STAGING_TARGET_DIR}/etc/ipkg.conf
-	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
+	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
+	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%:
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
-toolchain/%: ${STAGING_TARGET_DIR}
+toolchain/%: ${STAGING_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
 
 tools/%:
@@ -211,7 +211,7 @@ clean:
 	for d in ${STAGING_PKG_DIR}; do \
 		for f in $$(ls $$d/[a-z]* 2>/dev/null); do  \
 			while read file ; do \
-				rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
+				rm ${STAGING_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
 			rm $$f ; \
 		done \
@@ -237,7 +237,7 @@ cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_DIR) $(STAGING_PKG_DIR)
 	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:

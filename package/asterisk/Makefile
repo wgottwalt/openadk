@@ -167,10 +167,10 @@ do-install:
 
 asterisk-pgsql-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/etc/asterisk
-	${INSTALL_DATA} $(WRKBUILD)/configs/cdr_pgsql.conf.sample \
-		$(IDIR_ASTERISK_PGSQL)/etc/asterisk/cdr_pgsql.conf
+	${INSTALL_DATA} $(WRKINST)/etc/asterisk/cdr_pgsql.conf \
+		$(IDIR_ASTERISK_PGSQL)/etc/asterisk/
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKBUILD)/cdr/cdr_pgsql.so \
+	${INSTALL_BIN} $(WRKINST)/usr/lib/asterisk/modules/cdr_pgsql.so \
 		$(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules/
 
 asterisk-sounds-install:

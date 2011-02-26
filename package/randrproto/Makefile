@@ -18,5 +18,8 @@ $(eval $(call PKG_template,RANDRPROTO,randrproto,$(PKG_VERSION)-${PKG_RELEASE},$
 post-install:
 	${INSTALL_DIR} ${IDIR_RANDRPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_RANDRPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_RANDRPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/randrproto.pc \
+		${IDIR_RANDRPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

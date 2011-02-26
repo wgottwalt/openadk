@@ -3,7 +3,7 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libtiff
+PKG_NAME:=		tiff
 PKG_VERSION:=		3.9.4
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
@@ -16,9 +16,6 @@ PKG_NEED_CXX:=		1
 PKG_SUBPKGS:=		LIBTIFF LIBTIFF_DEV
 PKGSD_LIBTIFF_DEV:=	development files for libtiff
 PKGSC_LIBTIFF_DEV:=	devel
-
-DISTFILES:=		tiff-${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/tiff-${PKG_VERSION}
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly

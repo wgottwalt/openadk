@@ -18,5 +18,8 @@ $(eval $(call PKG_template,XF86DGAPROTO,xf86dgaproto,$(PKG_VERSION)-${PKG_RELEAS
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86DGAPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XF86DGAPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_XF86DGAPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xf86dgaproto.pc \
+		${IDIR_XF86DGAPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

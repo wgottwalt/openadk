@@ -17,6 +17,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBPTHREAD_STUBS,libpthread-stubs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 post-install:
-	${INSTALL_DIR} ${IDIR_LIBPTHREAD_STUBS}/usr
+	${INSTALL_DIR} ${IDIR_LIBPTHREAD_STUBS}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/pthread-stubs.pc \
+		${IDIR_LIBPTHREAD_STUBS}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

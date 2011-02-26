@@ -12,12 +12,17 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 
+PKG_SUBPKGS:=		LIBPCAP LIBPCAP_DEV
+PKGSD_LIBPCAP_DEV:=	headers for a low-level packet capture library
+PKGSC_LIBPCAP_DEV:=	devel
+
 PKG_FLAVOURS_LIBPCAP:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCAP,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCAP_DEV,libpcap-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCAP_DEV},${PKGSC_LIBPCAP_DEV}))
 
 CONFIGURE_ENV+=		ac_cv_linux_vers=26
 CONFIGURE_ARGS+=	--disable-yydebug \
@@ -33,8 +38,12 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
-	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libpcap.so* ${IDIR_LIBPCAP}/usr/lib/
+libpcap-install:
+	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpcap.so* ${IDIR_LIBPCAP}/usr/lib
+
+libpcap-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBPCAP_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBPCAP_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

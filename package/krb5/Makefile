@@ -15,7 +15,7 @@ PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5 LIBKRB5_DEV
+PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT KRB5_UTIL LIBKRB5 LIBKRB5_DEV
 PKGSD_LIBKRB5:=		MIT kerberos libraries
 PKGSC_LIBKRB5:=		libs
 PKGSD_LIBKRB5_DEV:=	MIT kerberos headers
@@ -23,6 +23,9 @@ PKGSC_LIBKRB5_DEV:=	devel
 PKGSD_KRB5_CLIENT:=	MIT kerberos client tools
 PKGSC_KRB5_CLIENT:=	crypto
 PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
+PKGSD_KRB5_UTIL:=	MIT kerberos utility (ktutil)
+PKGSC_KRB5_UTIL:=	crypto
+PKGSS_KRB5_UTIL:=	libkrb5 libncurses libss libcom-err
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
@@ -35,6 +38,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
+$(eval $(call PKG_template,KRB5_UTIL,krb5-util,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_UTIL},${PKGSD_KRB5_UTIL},${PKGSC_KRB5_UTIL}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
 $(eval $(call PKG_template,LIBKRB5_DEV,libkrb5-dev,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5_DEV},${PKGSC_LIBKRB5_DEV}))
 
@@ -56,13 +60,18 @@ pre-build:
 	# fix nm call in script, we need the GNU version of nm
 	$(SED) "s#@@NM@@#${NM}#" ${WRKSRC}/util/export-check.pl
 
+krb5-util-install:
+	${INSTALL_DIR} ${IDIR_KRB5_UTIL}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ktutil \
+		${IDIR_KRB5_UTIL}/usr/bin
+
 krb5-server-install:
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/lib/krb5/plugins/kdb
 	${INSTALL_DATA} ./files/kdc.conf ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DATA} ./files/kadm5.acl ${IDIR_KRB5_SERVER}/etc/krb5kdc
-	${INSTALL_BIN} ${WRKINST}/usr/bin/{ktutil,kadmin} \
+	${INSTALL_BIN} ${WRKINST}/usr/bin/kadmin \
 		${IDIR_KRB5_SERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{kdb5_util,krb5kdc,kadmind,kadmin.local} \
 		${IDIR_KRB5_SERVER}/usr/sbin

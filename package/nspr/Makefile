@@ -20,8 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NSPR,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		OS_TARGET="Linux" HOST_CC="${CC_FOR_BUILD}" HOST_CFLAGS="${CFLAGS_FOR_BUILD}" \
-			cross_compiling=yes
+CONFIGURE_ENV+=		OS_TARGET="Linux" HOST_CC="${CC_FOR_BUILD}" HOST_CFLAGS="${CFLAGS_FOR_BUILD}"
 
 ifeq (${ADK_LINUX_64},y)
 CONFIGURE_ARGS+=	--enable-64bit

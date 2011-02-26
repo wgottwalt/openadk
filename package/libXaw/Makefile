@@ -12,12 +12,19 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext libXmu libXpm
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBXAW LIBXAW_DEV
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXAW,libxaw,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXAW_DEV,libxaw-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libxaw-install:
 	${INSTALL_DIR} ${IDIR_LIBXAW}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libXaw*.so* ${IDIR_LIBXAW}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libXaw*.so* ${IDIR_LIBXAW}/usr/lib
+
+libxaw-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXAW_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXAW_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

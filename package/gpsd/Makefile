@@ -15,6 +15,7 @@ PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
 PKG_CXX:=		GPSD
 PKG_NEED_CXX:=		1
+PKG_CFLINE_GPSD:=	depends on !ADK_NATIVE
 
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
 PKGSD_GPSD_CLIENTS:=	GPS client utilities

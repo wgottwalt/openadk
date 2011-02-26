@@ -20,7 +20,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSSL_PKCS11,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		cross_compiling=yes
 CONFIGURE_ARGS+=	--with-openssl="${STAGING_TARGET_DIR}/usr"
 
 post-install:

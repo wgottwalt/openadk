@@ -12,9 +12,9 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.ijg.org/
 PKG_SITES:=		http://www.ijg.org/files/
 
-PKG_SUBPKGS:=		LIBJPEG JPEG_DEV
-PKGSD_JPEG_DEV:=	development files for jpeg
-PKGSC_JPEG_DEV:=	devel
+PKG_SUBPKGS:=		LIBJPEG LIBJPEG_DEV
+PKGSD_LIBJPEG_DEV:=	development files for libjpeg
+PKGSC_LIBJPEG_DEV:=	devel
 
 DISTFILES:=		${PKG_NAME}src.v${PKG_VERSION}.tar.gz
 
@@ -25,14 +25,14 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBJPEG,libjpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,JPEG_DEV,libjpeg-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_JPEG_DEV},${PKGSC_JPEG_DEV}))
+$(eval $(call PKG_template,LIBJPEG_DEV,libjpeg-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBJPEG_DEV},${PKGSC_LIBJPEG_DEV}))
 
-post-install:
+libjpeg-install:
 	${INSTALL_DIR} ${IDIR_LIBJPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libjpeg.so* ${IDIR_LIBJPEG}/usr/lib/
 
-jpeg-dev-install:
-	${INSTALL_DIR} ${IDIR_JPEG_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/*.h ${IDIR_JPEG_DEV}/usr/include
+libjpeg-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBJPEG_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBJPEG_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

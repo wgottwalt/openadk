@@ -24,11 +24,16 @@ CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME)
 
-post-install:
+pre-build:
+	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
+
+libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib
 	$(CP) ${WRKINST}/usr/lib/*.so ${IDIR_LIBBFD}/usr/lib
+
+binutils-install:
 	${INSTALL_DIR} ${IDIR_BINUTILS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/{ar,as,ld,strip,size,nm} \
+	${INSTALL_BIN} ${WRKINST}/usr/bin/{ar,as,ld,strip,strings,size,nm} \
 		${IDIR_BINUTILS}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{objcopy,ranlib,readelf,objdump} \
 		 ${IDIR_BINUTILS}/usr/bin/

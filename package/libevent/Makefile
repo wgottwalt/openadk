@@ -18,10 +18,10 @@ PKGSC_LIBEVENT_DEV:=	devel
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBEVENT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBEVENT,libevent,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBEVENT_DEV,libevent-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBEVENT_DEV},${PKGSC_LIBEVENT_DEV}))
 
-post-install:
+libevent-install:
 	$(INSTALL_DIR) $(IDIR_LIBEVENT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libevent*.so* $(IDIR_LIBEVENT)/usr/lib
 

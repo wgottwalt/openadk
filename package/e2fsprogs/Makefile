@@ -60,23 +60,23 @@ MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 post-build:
 	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
 	${INSTALL_DIR} ${WRKINST}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin/
+	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin
 
 e2fsprogs-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
-	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_E2FSPROGS}/etc/
+	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_E2FSPROGS}/etc
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin
 	cd $(IDIR_E2FSPROGS)/usr/sbin && ln -sf e2fsck fsck.ext2
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \
-		${IDIR_E2FSPROGS}/usr/lib/
+		${IDIR_E2FSPROGS}/usr/lib
 
 libblkid-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libblkid.so* \
-		${IDIR_LIBBLKID}/usr/lib/
+		${IDIR_LIBBLKID}/usr/lib
 
 libblkid-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID_DEV}/usr/include/blkid
@@ -86,7 +86,7 @@ libblkid-dev-install:
 libcom-err-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcom_err.so* \
-		${IDIR_LIBCOM_ERR}/usr/lib/
+		${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
 
 libcom-err-dev-install:
@@ -97,7 +97,8 @@ libcom-err-dev-install:
 libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libss.so* \
-		${IDIR_LIBSS}/usr/lib/
+		${IDIR_LIBSS}/usr/lib
+	${CP} ${WRKINST}/usr/bin/mk_cmds ${STAGING_HOST_DIR}/bin
 
 libss-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBSS_DEV}/usr/include/ss
@@ -107,10 +108,10 @@ libss-dev-install:
 libuuid-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libuuid.so* \
-		${IDIR_LIBUUID}/usr/lib/
-	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/uuid
+		${IDIR_LIBUUID}/usr/lib
+	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
-		${STAGING_TARGET_DIR}/usr/include/uuid
+		${STAGING_DIR}/usr/include/uuid
 
 libuuid-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include

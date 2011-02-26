@@ -24,6 +24,12 @@ out=0
 . $topdir/.config
 
 if [[ -n $ADK_NATIVE ]];then
+	if [[ -n $ADK_PACKAGE_NEON ]];then
+		NEED_LIBXML2_DEV="$NEED_LIBXML2_DEV neon"
+	fi
+	if [[ -n $ADK_PACKAGE_LZOP ]];then
+		NEED_LZODEV="$NEED_LZODEV lzop"
+	fi
 	if [[ -n $ADK_PACKAGE_LIBIMAGEMAGICK ]];then
 		NEED_JPEGDEV="$NEED_JPEGDEV libimagemagick"
 		NEED_TIFFDEV="$NEED_TIFFDEV libimagemagick"
@@ -153,6 +159,13 @@ if [[ -n $NEED_LIBTIRPCDEV ]];then
 	fi
 fi
 
+if [[ -n $NEED_LIBXML2_DEV ]];then
+	if ! test -f /usr/include/libxml2/libxml/xmlversion.h >/dev/null; then
+		echo >&2 You need libxml2 headers to build $NEED_LIBXML2_DEV
+		out=1
+	fi
+fi
+
 if [[ -n $NEED_LIBKRB5DEV ]];then
 	if ! test -f /usr/include/krb5.h >/dev/null; then
 		echo >&2 You need krb5 headers to build $NEED_LIBKRB5DEV
@@ -171,14 +184,21 @@ fi
 
 if [[ -n $NEED_TIFFDEV ]];then
 	if ! test -f /usr/include/tiff.h >/dev/null; then
-		echo >&2 You need tiff headers to build $NEED_TIFFDEV
+		echo >&2 You need libtiff headers to build $NEED_TIFFDEV
 		out=1
 	fi
 fi
 
 if [[ -n $NEED_JPEGDEV ]];then
 	if ! test -f /usr/include/jpeglib.h >/dev/null; then
-		echo >&2 You need jpeg headers to build $NEED_JPEGDEV
+		echo >&2 You need libjpeg headers to build $NEED_JPEGDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_LZODEV ]];then
+	if ! test -f /usr/include/lzo/lzo1.h >/dev/null; then
+		echo >&2 You need liblzo headers to build $NEED_LZODEV
 		out=1
 	fi
 fi

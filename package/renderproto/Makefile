@@ -18,5 +18,8 @@ $(eval $(call PKG_template,RENDERPROTO,renderproto,$(PKG_VERSION)-${PKG_RELEASE}
 post-install:
 	${INSTALL_DIR} ${IDIR_RENDERPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_RENDERPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_RENDERPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/renderproto.pc \
+		${IDIR_RENDERPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

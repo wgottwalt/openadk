@@ -7,8 +7,19 @@ PKG_NAME:=		fontsproto
 PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6819fc82585daac68cec17938b659bf0
+PKG_DESCR:=		Fonts extension headers
+PKG_SECTION:=		x11/devel
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,FONTSPROTO,fontsproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_FONTSPROTO}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_FONTSPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_FONTSPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/fontsproto.pc \
+		${IDIR_FONTSPROTO}/usr/lib/pkgconfig
+
 include ${TOPDIR}/mk/pkg-bottom.mk

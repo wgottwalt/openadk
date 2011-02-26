@@ -18,5 +18,8 @@ $(eval $(call PKG_template,XF86VIDMODEPROTO,xf86vidmodeproto,$(PKG_VERSION)-${PK
 post-install:
 	${INSTALL_DIR} ${IDIR_XF86VIDMODEPROTO}/usr/include
 	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XF86VIDMODEPROTO}/usr/include
+	${INSTALL_DIR} ${IDIR_XF86VIDMODEPROTO}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xf86vidmodeproto.pc \
+		${IDIR_XF86VIDMODEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

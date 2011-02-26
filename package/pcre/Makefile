@@ -12,17 +12,27 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
 
-PKG_SUBPKGS:=		LIBPCRE
+PKG_SUBPKGS:=		LIBPCRE LIBPCRE_DEV
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRE_DEV,libpcre-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-cpp
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
-post-install:
+libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib/
+
+libpcre-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/*.h \
+		${IDIR_LIBPCRE_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
+
 
 include ${TOPDIR}/mk/pkg-bottom.mk
