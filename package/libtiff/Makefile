@@ -11,6 +11,7 @@ PKG_DESCR:=		A library for reading/writing TIFF images
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.libtiff.org/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBTIFF LIBTIFF_DEV
 PKGSD_LIBTIFF_DEV:=	development files for libtiff
@@ -28,7 +29,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBTIFF_DEV,libtiff-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBTIFF_DEV},${PKGSC_LIBTIFF_DEV},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--disable-cxx --disable-rpath
+CONFIGURE_ARGS+=	--disable-cxx \
+			--disable-rpath
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBTIFF}/usr/lib

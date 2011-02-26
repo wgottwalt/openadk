@@ -13,6 +13,7 @@ PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		jpeg libtiff fontconfig libiconv
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		CONVERT DISPLAY LIBIMAGEMAGICK
 PKGSD_LIBIMAGEMAGICK:=	imagemagick library

@@ -12,6 +12,7 @@ PKG_SECTION:=		p2p
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
+PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 

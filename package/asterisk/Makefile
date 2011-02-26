@@ -15,6 +15,7 @@ PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
+PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	!cris
 

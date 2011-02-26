@@ -15,6 +15,7 @@ endif
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		C++ support library
 PKG_SECTION:=		libs
+PKG_NEED_CXX:=		1
 
 NO_DISTFILES:=		1
 

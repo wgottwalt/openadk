@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_NEED_CXX:=		1
 
 include $(TOPDIR)/mk/package.mk
 

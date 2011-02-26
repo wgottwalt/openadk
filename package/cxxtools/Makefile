@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libiconv
 PKG_BUILDDEP:=		libiconv
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
+PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 

@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libopenssl libsasl2
 PKG_BUILDDEP:=		cyrus-sasl openssl libdb
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
 PKGSD_OPENLDAP_UTILS:=	OpenLDAP utilities

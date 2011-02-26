@@ -12,6 +12,7 @@ PKG_SECTION:=		libs
 PKG_BUILDDEP:=		MesaLib
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
+PKG_NEED_CXX:=		1
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el

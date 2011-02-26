@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libxml2
 PKG_BUILDDEP:=		libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	xslt processor utility

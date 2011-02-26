@@ -11,6 +11,7 @@ PKG_DESCR:=		GDK pixbuf library
 PKG_BUILDDEP:=		jpeg libtiff
 PKG_SECTION:=		libs
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.23/
+PKG_NEED_CXX:=		1
 
 include $(TOPDIR)/mk/package.mk
 

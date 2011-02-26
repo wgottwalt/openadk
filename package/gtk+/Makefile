@@ -15,6 +15,7 @@ PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
 PKG_BUILDDEP+=		gdk-pixbuf libXcomposite
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		LIBGTK
 

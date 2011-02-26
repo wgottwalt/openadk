@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.2/
+PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		MESALIB GLXINFO GLXGEARS
 PKGSD_GLXINFO:=		Display various GLX information

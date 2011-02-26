@@ -19,6 +19,7 @@ PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
 PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_NEED_CXX:=		1
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
 
