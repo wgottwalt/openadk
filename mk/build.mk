@@ -119,7 +119,7 @@ world:
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
+	$(MAKE) -f mk/build.mk tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk toolchain/install tools/install package/compile
