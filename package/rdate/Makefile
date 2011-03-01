@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,RDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
-
 MAKE_FILE=		GNUmakefile
 
 post-install:
