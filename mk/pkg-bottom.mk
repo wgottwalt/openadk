@@ -131,7 +131,6 @@ spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_DIR}/scripts'
-	@mkdir -p ${WRKINST}/{sbin,bin,etc,lib} ${WRKINST}/usr/{sbin,bin,lib}
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
 ifneq ($(filter manual,${INSTALL_STYLE}),)
@@ -146,13 +145,21 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
-	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
-ifeq ($(ADK_NATIVE),)
-	@for a in ${WRKINST}/usr/{bin/*-config,lib/pkgconfig/*.pc}; do \
+	@for a in ${WRKINST}/usr/bin/*-config; do \
 		[[ -e $$a ]] || continue; \
-		$(SED) "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a; \
+		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
+		${STAGING_DIR}/usr/bin/$$(basename $$a); \
+		chmod u+x ${STAGING_DIR}/usr/bin/$$(basename $$a); \
+		[[ "$$(basename $$a)" != "pkg-config" ]] && cp ${STAGING_DIR}/usr/bin/$$(basename $$a) ${STAGING_DIR}/scripts; \
+		echo "scripts/$$(basename $$a)" \
+		    >>'${STAGING_PKG_DIR}/${PKG_NAME}.scripts'; \
 	done
-endif
+	@for a in ${WRKINST}/usr/lib/pkgconfig/*.pc; do \
+		[[ -e $$a ]] || continue; \
+		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
+		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
+	done
+	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
@@ -168,7 +175,7 @@ endif
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
 	    find usr ! -type d 2>/dev/null | \
-	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
+	    grep -E -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/lib/pkgconfig' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
@@ -187,6 +194,8 @@ ifeq (,$(filter noscripts,${PKG_OPTS}))
 		    >>'${STAGING_PKG_DIR}/${PKG_NAME}'; \
 	done
 endif
+	-@test -e '${STAGING_PKG_DIR}/${PKG_NAME}.scripts' && \
+	cat '${STAGING_PKG_DIR}/${PKG_NAME}.scripts' >> '${STAGING_PKG_DIR}/${PKG_NAME}' || echo
 	touch $@
 
 ${_IPKGS_COOKIE}:

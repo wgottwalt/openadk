@@ -37,9 +37,17 @@ $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
 CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
+			--without-bzip2 \
+			--without-gslib \
+			--without-dps \
+			--without-perl \
+			--without-djvu \
+			--without-lcms \
+			--without-lcms2 \
+			--without-wmf \
 			--enable-fast-install
 
-post-install:
+libimagemagick-install:
 	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib
 	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
 	$(INSTALL_DATA) $(WRKINST)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config/* \
@@ -54,12 +62,10 @@ post-install:
 
 convert-install:
 	$(INSTALL_DIR) $(IDIR_CONVERT)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/convert \
-		$(IDIR_CONVERT)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/convert $(IDIR_CONVERT)/usr/bin
 
 display-install:
 	$(INSTALL_DIR) $(IDIR_DISPLAY)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/display \
-		$(IDIR_DISPLAY)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/display $(IDIR_DISPLAY)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

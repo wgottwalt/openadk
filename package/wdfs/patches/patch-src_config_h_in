@@ -1,0 +1,12 @@
+--- wdfs-1.4.2.orig/src/config.h.in	2007-04-17 22:43:37.000000000 +0200
++++ wdfs-1.4.2/src/config.h.in	2011-03-01 18:57:10.000000000 +0100
+@@ -48,6 +48,9 @@
+ /* Define to the one symbol short name of this package. */
+ #undef PACKAGE_TARNAME
+ 
++/* Define to the home page for this package. */
++#undef PACKAGE_URL
++
+ /* Define to the version of this package. */
+ #undef PACKAGE_VERSION
+ 

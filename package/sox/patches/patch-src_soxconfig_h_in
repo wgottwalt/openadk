@@ -1,0 +1,12 @@
+--- sox-14.3.1.orig/src/soxconfig.h.in	2010-04-05 02:11:39.000000000 +0200
++++ sox-14.3.1/src/soxconfig.h.in	2011-02-28 23:27:38.000000000 +0100
+@@ -283,6 +283,9 @@
+ /* Define to the one symbol short name of this package. */
+ #undef PACKAGE_TARNAME
+ 
++/* Define to the home page for this package. */
++#undef PACKAGE_URL
++
+ /* Define to the version of this package. */
+ #undef PACKAGE_VERSION
+ 

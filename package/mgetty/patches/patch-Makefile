@@ -1,5 +1,5 @@
 --- mgetty-1.1.36.orig/Makefile	2007-06-15 13:15:56.000000000 +0200
-+++ mgetty-1.1.36/Makefile	2011-01-21 17:07:06.158658312 +0100
++++ mgetty-1.1.36/Makefile	2011-02-28 21:22:07.000000000 +0100
 @@ -4,7 +4,7 @@
  #
  # this is the C compiler to use (on SunOS, the standard "cc" does not
@@ -18,6 +18,15 @@
  #CFLAGS=-O -DSVR4
  #CFLAGS=-O -DSVR4 -DSVR42
  #CFLAGS=-O -DUSE_POLL
+@@ -143,7 +143,7 @@ CFLAGS=-O2 -Wall -pipe
+ # 	"utmp.o: unresolved symbol _login"
+ # For Linux, add "-lutil" if the linker complains about "updwtmp".
+ #
+-LDFLAGS=
++LDFLAGS?=
+ LIBS=
+ #LIBS=-lprot -lsocket				# SCO Unix
+ #LIBS=-lsocket
 @@ -164,7 +164,9 @@ LIBS=
  #
  # if your systems doesn't have one, use the shell script that I provide

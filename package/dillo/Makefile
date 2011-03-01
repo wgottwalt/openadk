@@ -25,7 +25,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DILLO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDLFAGS+=	-liconv
+TARGET_LDFLAGS+=	-liconv
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_DILLO)/usr/bin

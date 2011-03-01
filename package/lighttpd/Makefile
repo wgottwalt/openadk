@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.25
+PKG_VERSION:=		1.4.28
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		87e936ec272ddaba8a2fdfecd8c6b704
+PKG_MD5SUM:=		202d36efc6324adb95a3600d2826ec6a
 PKG_DESCR:=		a lightweight web server
 PKG_SECTION:=		www
-PKG_DEPENDS:=		libxml2 libsqlite libpcre libopenssl
+PKG_DEPENDS:=		libpcre libxml2 libsqlite libopenssl
 PKG_BUILDDEP:=		pcre libxml2 sqlite openssl
 PKG_URL:=		http://www.lighttpd.net/
 PKG_SITES:=		http://download.lighttpd.net/lighttpd/releases-1.4.x/
@@ -70,8 +70,7 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/libxml2
 CONFIGURE_ENV+=		PCRE_LIB="-lpcre"
-CONFIGURE_ARGS+=	\
-			--libdir=/usr/lib/lighttpd \
+CONFIGURE_ARGS+=	--libdir=/usr/lib/lighttpd \
 			--sysconfdir=/etc/lighttpd \
 			--without-attr \
 			--without-bzip2 \
@@ -81,19 +80,21 @@ CONFIGURE_ARGS+=	\
 			--without-lua \
 			--without-memcache \
 			--without-mysql \
-			--with-pcre \
 			--without-valgrind \
+			--with-pcre \
 			--with-webdav-props \
 			--with-openssl='${STAGING_TARGET_DIR}/usr'
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	install -m0755 -d $(IDIR_LIGHTTPD)/etc
-	install -m0644 ./files/lighttpd.conf $(IDIR_LIGHTTPD)/etc/
-	install -m0755 -d $(IDIR_LIGHTTPD)/usr/lib/lighttpd
+	${INSTALL_DIR} $(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
+	${INSTALL_DATA} ./files/lighttpd.conf $(IDIR_LIGHTTPD)/etc/lighttpd
+	${CP} ${WRKBUILD}/doc/config/conf.d/*.conf \
+		$(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
+	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/lib/lighttpd
 	for m in dirlisting indexfile staticfile; do \
 		$(CP) $(WRKINST)/usr/lib/lighttpd/mod_$$m.so $(IDIR_LIGHTTPD)/usr/lib/lighttpd/ ; \
 	done
-	install -m0755 -d $(IDIR_LIGHTTPD)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/lighttpd $(IDIR_LIGHTTPD)/usr/sbin/
+	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/lighttpd $(IDIR_LIGHTTPD)/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

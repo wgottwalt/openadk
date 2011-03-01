@@ -23,6 +23,6 @@ MAKE_FILE=		GNUmakefile
 
 post-install:
 	${INSTALL_DIR} ${IDIR_RDATE}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/rdate ${IDIR_RDATE}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/rdate ${IDIR_RDATE}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

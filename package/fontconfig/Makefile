@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		77e15a92006ddc2adbb06f840d591c0e
 PKG_DESCR:=		library for configuring and customizing font access
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		freetype libxml2
+PKG_DEPENDS:=		libxml2 libiconv
+PKG_BUILDDEP:=		freetype libxml2 libiconv
 PKG_URL:=		http://fontconfig.org/
 PKG_SITES:=		http://fontconfig.org/release/
 
@@ -27,6 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FONTCONFIG,fontconfig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,FONTCONFIG_DEV,fontconfig-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FONTCONFIG_DEV},${PKGSC_FONTCONFIG_DEV},${PKG_OPTS}))
 
+TARGET_LDFLAGS+=	-liconv
 CONFIGURE_ARGS+=	--with-arch=${ARCH} \
 			--disable-docs
 

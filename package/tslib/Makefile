@@ -30,6 +30,9 @@ CONFIGURE_ARGS+=	--disable-ucb1x00 \
 pre-build:
 	@chmod u+x ${WRKBUILD}/install-sh
 
+pre-install:
+	$(INSTALL_DIR) $(WRKINST)/etc
+
 post-install:
 	$(INSTALL_DIR) $(IDIR_TSLIB)/etc
 	$(INSTALL_DIR) $(IDIR_TSLIB)/usr/lib/ts

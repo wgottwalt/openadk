@@ -1,7 +1,7 @@
 	- do not call uname -m, use passed ${ADK_ARCH} variable
 	- use ${CC} instead of hard-coded gcc
 --- libhugetlbfs-2.11.orig/Makefile	2010-12-16 18:38:22.000000000 +0100
-+++ libhugetlbfs-2.11/Makefile	2011-01-22 21:09:48.008659615 +0100
++++ libhugetlbfs-2.11/Makefile	2011-02-27 18:58:07.000000000 +0100
 @@ -31,51 +31,51 @@ CFLAGS ?= -O2 -g
  CFLAGS += -Wall -fPIC
  CPPFLAGS += -D__LIBHUGETLBFS__
@@ -65,3 +65,12 @@
  TMPLIB64 = lib64
  TMPLIB32 = lib
  CFLAGS += -DNO_ELFLINK
+@@ -370,7 +370,7 @@ install-libs: libs $(OBJDIRS:%=%/install
+ 	$(INSTALL) -d $(DESTDIR)$(HEADERDIR)
+ 	$(INSTALL) -d $(DESTDIR)$(LDSCRIPTDIR)
+ 	$(INSTALL) -d $(DESTDIR)$(BINDIR)
+-	$(INSTALL) -m 644 -t $(DESTDIR)$(HEADERDIR) $(INSTALL_HEADERS)
++	$(INSTALL) -m 644 $(INSTALL_HEADERS) $(DESTDIR)$(HEADERDIR)
+ 	$(INSTALL) -m 644 $(INSTALL_LDSCRIPTS:%=ldscripts/%) $(DESTDIR)$(LDSCRIPTDIR)
+ 	for x in $(INSTALL_OBJSCRIPT); do \
+ 		$(INSTALL) -m 755 objscript.$$x $(DESTDIR)$(BINDIR)/$$x; done

@@ -49,7 +49,7 @@ do-configure:
 		$(CONFIGURE_OPTS) \
 	);
 
-post-install:
+zlib-install:
 	${INSTALL_DIR} ${IDIR_ZLIB}/usr/lib
 	${CP} ${WRKBUILD}/libz.so* ${IDIR_ZLIB}/usr/lib
 

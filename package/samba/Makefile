@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7c8d2a34b649380d5df838c3e030dbec
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
+PKG_BUILDDEP:=		gettext
+PKG_DEPENDS:=		libintl
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
@@ -49,16 +51,16 @@ post-install:
 	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/samba/{charset,vfs}
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/charset/CP850.so \
 			${IDIR_SAMBA}/usr/lib/samba/charset
-	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba/
+	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/samba/*.so* ${IDIR_SAMBA}/usr/lib/samba
 	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
 	${INSTALL_DIR} ${IDIR_SAMBA_PASSWD}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/smbpasswd \
-		${IDIR_SAMBA_PASSWD}/usr/bin/
+		${IDIR_SAMBA_PASSWD}/usr/bin
 	${INSTALL_DIR} ${IDIR_SAMBA_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/smbclient \
-		${IDIR_SAMBA_CLIENT}/usr/bin/
+		${IDIR_SAMBA_CLIENT}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

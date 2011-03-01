@@ -64,6 +64,5 @@ post-install:
 	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 	# workaround, copy host python-config to target scripts directory
 	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_TARGET_DIR}/scripts
-	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_TARGET_DIR}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

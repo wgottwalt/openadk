@@ -43,7 +43,7 @@ TARGET_CXXFLAGS+=	-fno-rtti -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++
 TARGET_LDFLAGS+=	$(LIBRARIES)
 else
-TARGET_LDFLAGS+=	-shared -pthread
+TARGET_LDFLAGS+=	-shared -pthread -lstdc++
 endif
 
 ifeq (${ADK_COMPILE_GPSD_WITH_UCLIBCXX},y)

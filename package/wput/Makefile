@@ -22,6 +22,6 @@ CONFIGURE_ARGS+=	--disable-g-switch \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_WPUT}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/wput ${IDIR_WPUT}/usr/bin/
+	${INSTALL_BIN} ${WRKBUILD}/wput ${IDIR_WPUT}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

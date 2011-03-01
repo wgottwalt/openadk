@@ -192,7 +192,7 @@ endif
 	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' | \
+	    grep -E -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/lib/pkgconfig' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
 	    $(TOOLS_DIR)/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \

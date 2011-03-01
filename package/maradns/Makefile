@@ -23,7 +23,7 @@ FAKE_FLAGS+=		PREFIX="${WRKINST}/usr" \
 			RPM_BUILD_ROOT="${WRKINST}"
 
 pre-install:
-	@mkdir -p ${WRKINST}/usr/man/man{1,5,8}
+	@mkdir -p ${WRKINST}/usr/{sbin,bin,man/man{1,5,8}}
 
 do-configure:
 	(cd ${WRKBUILD} && ./configure);

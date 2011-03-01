@@ -1,5 +1,5 @@
---- freetype-2.3.11.orig/builds/unix/ltmain.sh	2009-10-10 20:37:53.000000000 +0200
-+++ freetype-2.3.11/builds/unix/ltmain.sh	2011-01-14 00:21:25.000000000 +0100
+--- sox-14.3.1.orig/ltmain.sh	2009-04-04 05:44:19.000000000 +0200
++++ sox-14.3.1/ltmain.sh	2011-03-01 14:00:10.000000000 +0100
 @@ -4765,7 +4765,7 @@ func_mode_link ()
        # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
        # @file GCC response files
