@@ -10,8 +10,8 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	if [ ! -d /www -a ! -h /www ]; then
-		echo "axhttpd not started. create /www first"
+	if [ ! -d /srv/www -a ! -h /srv/www ]; then
+		echo "axhttpd not started. create /srv/www first"
 		exit 0
 	fi
 	/usr/sbin/axhttpd >>/var/log/axhttpd.access

@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG rrdcollect
 #INIT 90
-
 . /etc/rc.conf
 
 case $1 in

@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG ulogd
 #INIT 49
-
 . /etc/rc.conf
 
 case $1 in

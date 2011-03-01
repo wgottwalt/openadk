@@ -5,7 +5,7 @@
 
 case $1 in
 autostart)
-	[[ $dhcpd_flags = NO ]] && exit 0
+	test x"${dhcpd:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

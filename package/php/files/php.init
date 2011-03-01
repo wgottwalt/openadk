@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG php-fastcgi
 #INIT 80
-
 . /etc/rc.conf
 
 export PHP_FCGI_CHILDREN=''

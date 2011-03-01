@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG tor
 #INIT 80
-
 . /etc/rc.conf
 
 case $1 in

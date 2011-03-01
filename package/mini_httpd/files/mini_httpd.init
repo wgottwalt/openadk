@@ -7,7 +7,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	[[ $mini_httpd_flags = NO ]] && exit 0
+	test x"${mini_httpd:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG strongswan
 #INIT 60
-
 . /etc/rc.conf
 
 case $1 in

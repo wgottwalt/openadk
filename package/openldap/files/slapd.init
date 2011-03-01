@@ -1,13 +1,12 @@
 #!/bin/sh
 #PKG openldap-slapd
 #INIT 70
-
 . /etc/rc.conf
 
 case $1 in
 autostop) ;;
 autostart)
-	[[ $slapd = NO ]] && exit 0
+	test x"${slapd:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

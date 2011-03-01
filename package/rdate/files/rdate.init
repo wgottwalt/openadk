@@ -1,12 +1,11 @@
 #!/bin/sh
 #PKG rdate
 #INIT 54
-
 . /etc/rc.conf
 
 case $1 in
 autostart|start|restart)
-	[[ $rdate_flags = NO ]] && exit 0
+	test x"${rdate:-NO}" = x"NO" && exit 0
 	rdate $rdate_flags
 	;;
 autostop|stop)

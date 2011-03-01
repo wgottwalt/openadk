@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG shorewall-common
 #INIT 45
-
 . /etc/rc.conf
 
 case $1 in

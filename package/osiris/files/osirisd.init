@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG osirisd
 #INIT 75
-
 . /etc/rc.conf
 
 case $1 in

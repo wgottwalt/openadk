@@ -1,13 +1,12 @@
 #!/bin/sh
 #PKG subversion
 #INIT 80
-
 . /etc/rc.conf
 
 case $1 in
 autostop) ;;
 autostart)
-	[[ $svnserve = YES ]] || exit 0
+	test x"${svnserve:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

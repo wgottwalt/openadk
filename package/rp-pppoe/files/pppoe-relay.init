@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG pppoe-relay
 #INIT 50
-
 . /etc/rc.conf
 
 case $1 in

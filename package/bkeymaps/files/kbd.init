@@ -6,7 +6,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	[[ $kbd = NO ]] && exit 0
+	test x"${kbd:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

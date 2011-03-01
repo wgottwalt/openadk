@@ -5,22 +5,22 @@
 
 case $1 in
 autostop) ;;
-	autostart)
-		test x"${avahi:-NO}" = x"NO" && exit 0
-		exec sh $0 start
-		;;
-	start)
-		avahi-daemon -D
-  		;;
-	stop)
-  		avahi-daemon -k
-		;;
-	restart)
-  		sh $0 stop
-		sh $0 start
-		;;
-	*)
-		echo "usage: $0 { start | stop | reload }"
-		exit 1
+autostart)
+	test x"${avahi:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	avahi-daemon -D
+  	;;
+stop)
+	avahi-daemon -k
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 { start | stop | reload }"
+	exit 1
 esac
 exit $?

@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG reaim
 #INIT 75
-
 . /etc/rc.conf
 
 IPT=/usr/sbin/iptables

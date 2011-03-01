@@ -6,7 +6,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	[[ $privoxy = NO ]] && exit 0
+	test x"${privoxy:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

@@ -6,7 +6,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	[[ $syslogd_flags = NO ]] && exit 0
+	test x"${syslogd_flags:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)

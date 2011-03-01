@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG openvpn
 #INIT 60
-
 . /etc/rc.conf
 
 case $1 in

@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG syslog-ng
 #INIT 05
-
 . /etc/rc.conf
 
 case $1 in

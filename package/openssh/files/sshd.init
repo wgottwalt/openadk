@@ -1,13 +1,12 @@
 #!/bin/sh
 #PKG openssh-server
 #INIT 50
-
 . /etc/rc.conf
 
 case $1 in
 autostop) ;;
 autostart)
-	[[ $openssh = NO ]] && exit 0
+	test x"${openssh:-NO}" = x"NO" && exit 0
 	grep "^dropbear" /etc/rc.conf >/dev/null 2>&1 || dropbear=NO
 	if [[ $openssh = AUTO && $dropbear != NO ]]; then
 		echo openssh not starting: set to AUTO and dropbear is enabled
