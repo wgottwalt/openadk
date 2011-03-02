@@ -194,8 +194,8 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc
-	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/sbin
+	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
-		$(IDIR_PHP_FASTCGI)/usr/sbin/php
+		$(IDIR_PHP_FASTCGI)/usr/bin/php
 
 include ${TOPDIR}/mk/pkg-bottom.mk
