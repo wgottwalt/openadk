@@ -66,7 +66,6 @@ if [[ -n $ADK_PACKAGE_GPSD ]]; then
 fi
 
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
-	NEED_ZIP="$NEED_ZIP firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
 	NEED_PYTHON="$NEED_PYTHON firefox"
 fi

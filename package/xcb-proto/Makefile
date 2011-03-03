@@ -12,6 +12,8 @@ PKG_BUILDDEP:=		python2
 PKG_MD5SUM:=		8d29695e8faf5fcdce568c66eaeaa5ee
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		XCB_PROTO XCB_PYTHON
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XCB_PROTO,xcb-proto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

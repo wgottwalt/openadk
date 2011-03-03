@@ -63,6 +63,6 @@ post-install:
 	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
 	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 	# workaround, copy host python-config to target scripts directory
-	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_TARGET_DIR}/scripts
+	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_DIR}/scripts
 
 include ${TOPDIR}/mk/pkg-bottom.mk

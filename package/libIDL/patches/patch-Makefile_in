@@ -1,0 +1,20 @@
+--- libIDL-0.8.14.orig/Makefile.in	2010-03-30 12:37:04.000000000 +0200
++++ libIDL-0.8.14/Makefile.in	2011-03-01 22:26:10.000000000 +0100
+@@ -37,7 +37,7 @@ PRE_UNINSTALL = :
+ POST_UNINSTALL = :
+ build_triplet = @build@
+ host_triplet = @host@
+-noinst_PROGRAMS = tstidl$(EXEEXT)
++noinst_PROGRAMS = 
+ subdir = .
+ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
+ 	$(srcdir)/Makefile.in $(srcdir)/Makefile.msc.in \
+@@ -1276,7 +1276,7 @@ lexer.c: $(srcdir)/lexer.l parser.h
+ 	$(AM_V_GEN) $(LEX) $(LFLAGS) -t $(srcdir)/lexer.l | sed -e 's/yy/__IDL_/g' >$@
+ 
+ stamp-parser: $(srcdir)/parser.y
+-	$(AM_V_GEN) $(YACC) $(YFLAGS) $(srcdir)/parser.y
++	-$(AM_V_GEN) $(YACC) $(YFLAGS) $(srcdir)/parser.y
+ 	@touch $@
+ 
+ parser.c: stamp-parser

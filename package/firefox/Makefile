@@ -19,7 +19,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2

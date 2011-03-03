@@ -13,10 +13,14 @@ PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		xproto zlib
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBFONTENC LIBFONTENC_DEV
+PKGSC_LIBFONTENC_DEV:=	devel
+PKGSD_LIBFONTENC_DEV:=	libfontenc headers
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBFONTENC,libfontenc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBFONTENC_DEV,libfontenc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFONTENC_DEV,libfontenc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBFONTENC_DEV},${PKGSC_LIBFONTENC_DEV}))
 
 libfontenc-install:
 	${INSTALL_DIR} ${IDIR_LIBFONTENC}/usr/lib
