@@ -1,7 +1,6 @@
 #!/bin/sh
 #PKG lighttpd
 #INIT 60
-
 . /etc/rc.conf
 
 case $1 in
@@ -11,6 +10,8 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	[ ! -d /srv/www ] && echo "You need to create /srv/www/htdocs"
+	mkdir -p /var/log/lighttpd && chown lighttpd.lighttpd /var/log/lighttpd
 	/usr/sbin/lighttpd $lighttpd_flags
 	;;
 stop)
