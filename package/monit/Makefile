@@ -16,14 +16,14 @@ PKG_SITES:=		http://www.tildeslash.com/monit/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MONIT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MONIT,monit,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-ssl --with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
-post-install:
+monit-install:
 	${INSTALL_DIR} ${IDIR_MONIT}/etc
-	install -m0600 ${WRKBUILD}/monitrc ${IDIR_MONIT}/etc/
+	install -m0600 ${WRKBUILD}/monitrc ${IDIR_MONIT}/etc
 	${INSTALL_DIR} ${IDIR_MONIT}/usr/sbin
-	${INSTALL_BIN} ${WRKBUILD}/monit ${IDIR_MONIT}/usr/sbin/monit
+	${INSTALL_BIN} ${WRKBUILD}/monit ${IDIR_MONIT}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

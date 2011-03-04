@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.1.4
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c70ef1198e6a6c1ae80bc57cd3592e36
+PKG_VERSION:=		3.1.11
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		08de963a4d0ba86c59d33af89fa46384
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libopenssl libpthread
@@ -98,7 +98,8 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_epoll_works=yes \
 			ac_cv_lib_nsl_main=no \
 			ac_cv_func_strnstr=no \
-			squid_cv_pf_inet6=yes
+			squid_cv_pf_inet6=yes \
+			ac_cv_have_squid=yes
 XAKE_FLAGS+=		MKDIR_P="mkdir -p"
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \

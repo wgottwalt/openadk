@@ -37,6 +37,7 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
+XAKE_FLAGS+=		M4=m4
 
 libpcap-install:
 	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib

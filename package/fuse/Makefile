@@ -28,6 +28,7 @@ $(eval $(call PKG_template,LIBFUSE_DEV,libfuse-dev,${PKG_VERSION}-${PKG_RELEASE}
 CONFIGURE_ARGS+=	--enable-lib \
 			--enable-util \
 			--enable-example \
+			--with-libiconv-prefix="${STAGING_TARGET_DIR}/usr" \
 			--disable-auto-modprobe \
 			--disable-mtab \
 			--disable-kernel-module

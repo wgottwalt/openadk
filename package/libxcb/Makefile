@@ -12,8 +12,7 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		python2 libpthread-stubs libxslt libXau xcb-proto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_SUBPKGS:=		LIBXCB LIBXCB_DEVEL
-
+PKG_SUBPKGS:=		LIBXCB LIBXCB_DEV
 PKGSD_LIBXCB_DEV:=	XML-XCB protocol headers
 PKGSS_LIBXCB_DEV:=	libxcb
 PKGSC_LIBXCB_DEV:=	x11/devel

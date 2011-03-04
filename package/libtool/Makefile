@@ -27,10 +27,9 @@ ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
 endif
 
-CONFIGURE_ARGS+=	--enable-ltdl-install \
-			--disable-cxx
+CONFIGURE_ARGS+=	--enable-ltdl-install
 
-post-install:
+libtool-install:
 	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/libtool ${IDIR_LIBTOOL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/libtoolize ${IDIR_LIBTOOL}/usr/bin
