@@ -17,7 +17,7 @@ WRKSRC=			${WRKDIST}/unix
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-ldl
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
@@ -29,9 +29,12 @@ CONFIGURE_ARGS+=	--enable-man-symlinks \
 			--disable-rpath
 INSTALL_TARGET=		install-binaries install-libraries
 
-post-install:
+tcl-install:
 	${INSTALL_DIR} ${IDIR_TCL}/usr/lib ${IDIR_TCL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_TCL}/usr/bin
+	cd ${IDIR_TCL}/usr/bin && ln -sf tclsh8.5 tclsh
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_TCL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/tcl8 ${IDIR_TCL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/tcl8.5 ${IDIR_TCL}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
