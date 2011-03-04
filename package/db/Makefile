@@ -3,7 +3,7 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libdb
+PKG_NAME:=		db
 PKG_VERSION:=		4.7.25
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ec2b87e833779681a0c3a814aa71359e
@@ -13,13 +13,16 @@ PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
 PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 
-DISTFILES:=		db-${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/db-${PKG_VERSION}
+PKG_SUBPKGS:=		LIBDB LIBDB_DEV
+PKGSC_LIBDB_DEV:=	devel
+PKGSD_LIBDB_DEV:=	libdb headers
+
 WRKBUILD=		${WRKSRC}/build_unix
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBDB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBDB,libdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBDB_DEV,libdb-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBDB_DEV},${PKGSC_LIBDB_DEV}))
 
 CONFIGURE_PROG:=	dist/configure
 CONFIGURE_ARGS+=	--enable-smallbuild \
@@ -39,8 +42,12 @@ CONFIGURE_ARGS+=	--enable-smallbuild \
 			--disable-queue \
 			--with-mutex=UNIX/fcntl
 
-post-install:
+libdb-install:
 	${INSTALL_DIR} ${IDIR_LIBDB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libdb*.so ${IDIR_LIBDB}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libdb*.so ${IDIR_LIBDB}/usr/lib
+
+libdb-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBDB_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBDB_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

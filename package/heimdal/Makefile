@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		31d08bbf47a77827fe97ef3f52b4c9c4
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err libreadline
 PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
+PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err libreadline
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
@@ -30,7 +30,7 @@ PKGCS_WITH_LDAP:=		libopenldap
 PKGCB_WITH_LDAP:=		openldap
 PKGCD_WITH_BDB:=		use Berkeley DB as database backend
 PKGCS_WITH_BDB:=		libdb
-PKGCB_WITH_BDB:=		libdb
+PKGCB_WITH_BDB:=		db
 
 include $(TOPDIR)/mk/package.mk
 
