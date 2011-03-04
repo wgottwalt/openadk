@@ -26,6 +26,7 @@ CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
 			config_TARGET_CFLAGS="${TARGET_CFLAGS}" \
 			config_TARGET_READLINE_INC="-I${STAGING_TARGET_DIR}/usr/include" \
 			config_TARGET_READLINE_LIBS="-L${STAGING_TARGET_DIR}/usr/lib -lreadline -lncurses"
+
 MAKE_FLAGS+=		LIBPTHREAD=-lm
 TARGET_CPPFLAGS+=	-DSQLITE_SECURE_DELETE=1
 CONFIGURE_ARGS+=	--disable-tcl \
@@ -34,8 +35,8 @@ CONFIGURE_ARGS+=	--disable-tcl \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBSQLITE}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libsqlite3.so* ${IDIR_LIBSQLITE}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libsqlite3.so* ${IDIR_LIBSQLITE}/usr/lib
 	${INSTALL_DIR} ${IDIR_SQLITE_CLI}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/sqlite3 ${IDIR_SQLITE_CLI}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/sqlite3 ${IDIR_SQLITE_CLI}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
