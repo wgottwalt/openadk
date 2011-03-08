@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
-PKG_VERSION:=		0.6.25
+PKG_VERSION:=		0.6.28
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a83155a6e29e3988f07e5eea3287b21e
+PKG_MD5SUM:=		d0143a5aa3265019072e53ab497818d0
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
-PKG_DEPENDS:=		libavahi libdaemon libexpat libintl
-PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext
+PKG_DEPENDS:=		libavahi libdaemon libexpat libintl libgtk
+PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext gtk+
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 PKG_NEED_CXX:=		1
@@ -29,11 +29,12 @@ $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PK
 
 TARGET_LDFLAGS+=	-lintl
 CONFIGURE_ARGS+=	--enable-glib \
+			--enable-gtk2 \
+			--enable-libdaemon \
 			--disable-qt3 \
 			--disable-qt4 \
-			--disable-gtk \
+			--disable-gtk3 \
 			--disable-dbus \
-			--enable-libdaemon \
 			--disable-python \
 			--disable-pygtk \
 			--disable-python-dbus \
@@ -54,11 +55,10 @@ CONFIGURE_ARGS+=	--enable-glib \
 			--with-avahi-user=avahi \
 			--with-avahi-group=avahi
 
-post-install:
-	# avahi daemon
+avahi-daemon-install:
 	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/avahi
 	${INSTALL_DATA} ./files/avahi-daemon.conf \
-		${IDIR_AVAHI_DAEMON}/etc/avahi/
+		${IDIR_AVAHI_DAEMON}/etc/avahi
 	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/avahi/services
 	${INSTALL_DATA} ./files/service-http \
 		${IDIR_AVAHI_DAEMON}/etc/avahi/services/http.service
@@ -66,19 +66,21 @@ post-install:
 		${IDIR_AVAHI_DAEMON}/etc/avahi/services/ssh.service
 	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/avahi-daemon \
-		${IDIR_AVAHI_DAEMON}/usr/sbin/
-	# avahi dnsconfd
+		${IDIR_AVAHI_DAEMON}/usr/sbin
+
+avahi-dnsconfd-install:
 	${INSTALL_DIR} ${IDIR_AVAHI_DNSCONFD}/etc/avahi
 	${CP} ${WRKINST}/etc/avahi/avahi-dnsconfd.action \
-		${IDIR_AVAHI_DNSCONFD}/etc/avahi/
+		${IDIR_AVAHI_DNSCONFD}/etc/avahi
 	${INSTALL_DIR} ${IDIR_AVAHI_DNSCONFD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/avahi-dnsconfd \
-		${IDIR_AVAHI_DNSCONFD}/usr/sbin/
-	# libavahi
+		${IDIR_AVAHI_DNSCONFD}/usr/sbin
+
+libavahi-install:
 	${INSTALL_DIR} ${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-common.so* \
-		${IDIR_LIBAVAHI}/usr/lib/
+		${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-core.so* \
-		${IDIR_LIBAVAHI}/usr/lib/
+		${IDIR_LIBAVAHI}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
