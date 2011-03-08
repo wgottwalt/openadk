@@ -1,0 +1,22 @@
+--- sqlite-3.7.3.orig/configure	2010-10-07 16:48:41.000000000 +0200
++++ sqlite-3.7.3/configure	2011-03-04 21:58:45.000000000 +0100
+@@ -12389,8 +12389,8 @@ fi
+ # generate command-line programs that run on the build machine.
+ #
+ if test x"$cross_compiling" = xno; then
+-	BUILD_CC=$CC
+-	BUILD_CFLAGS=$CFLAGS
++	BUILD_CC=$CC_FOR_BUILD
++	BUILD_CFLAGS=$CFLAGS_FOR_BUILD
+ else
+ 	if test "${BUILD_CC+set}" != set; then
+ 		for ac_prog in gcc cc cl
+@@ -12437,7 +12437,7 @@ done
+ 
+ 	fi
+ 	if test "${BUILD_CFLAGS+set}" != set; then
+-		BUILD_CFLAGS="-g"
++		BUILD_CFLAGS=$CFLAGS_FOR_BUILD
+ 	fi
+ fi
+ 

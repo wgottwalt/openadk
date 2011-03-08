@@ -15,11 +15,12 @@ PKG_URL:=		http://asg.web.cmu.edu/sasl/
 PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		LIBSASL2
+PKG_SUBPKGS:=		LIBSASL2 LIBSASL2_DEV
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSASL2_DEV,libsasl2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-sample \
 			--enable-staticdlopen \
@@ -69,10 +70,14 @@ pre-build:
 		CPPFLAGS="" \
 		makemd5
 
-post-install:
+libsasl2-install:
 	${INSTALL_DIR} ${IDIR_LIBSASL2}/usr/lib/sasl2
-	${CP} ${WRKINST}/usr/lib/libsasl2.so* ${IDIR_LIBSASL2}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libsasl2.so* ${IDIR_LIBSASL2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/sasl2/lib*.so* \
-		${IDIR_LIBSASL2}/usr/lib/sasl2/
+		${IDIR_LIBSASL2}/usr/lib/sasl2
+
+libsasl2-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBSASL2_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBSASL2_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
