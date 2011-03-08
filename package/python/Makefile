@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python
-PKG_VERSION:=		3.1.1
+PKG_VERSION:=		3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f1317dbb2398374d6691edd5bff1b91d
 PKG_DESCR:=		Python scripting language (Version 3)
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.python.org/
-PKG_SITES:=		http://www.python.org/ftp/python/3.1.1/
+PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
 
@@ -48,10 +48,10 @@ pre-configure:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PYTHON}/usr/bin ${IDIR_PYTHON}/usr/lib
-	${INSTALL_DIR} ${IDIR_PYTHON}/usr/lib/python3.1
+	${INSTALL_DIR} ${IDIR_PYTHON}/usr/lib/python3.2
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python3 ${IDIR_PYTHON}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON}/usr/lib
 	cd ${IDIR_PYTHON}/usr/bin && ln -s python3 python
-	${CP} ${WRKINST}/usr/lib/python3.1/* ${IDIR_PYTHON}/usr/lib/python3.1
+	${CP} ${WRKINST}/usr/lib/python3.2/* ${IDIR_PYTHON}/usr/lib/python3.2
 
 include ${TOPDIR}/mk/pkg-bottom.mk
