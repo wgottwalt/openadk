@@ -14,11 +14,12 @@ PKG_BUILDDEP:=		libpng jpeg
 PKG_URL:=		http://www.libgd.org/
 PKG_SITES:=		http://www.libgd.org/releases/
 
-PKG_SUBPKGS:=		LIBGD
+PKG_SUBPKGS:=		LIBGD LIBGD_DEV
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGD_DEV,libgd-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_TARGET_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \
@@ -27,8 +28,12 @@ CONFIGURE_ARGS+=	--without-x \
 			--with-png=${STAGING_TARGET_DIR}/usr \
 			--without-xpm
 
-post-install:
+libgd-install:
 	${INSTALL_DIR} ${IDIR_LIBGD}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgd.so* ${IDIR_LIBGD}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libgd.so* ${IDIR_LIBGD}/usr/lib
+
+libgd-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBGD_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBGD_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

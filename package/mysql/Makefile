@@ -14,12 +14,13 @@ PKG_BUILDDEP:=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com/
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
 
-PKG_SUBPKGS:=		LIBMYSQLCLIENT
+PKG_SUBPKGS:=		LIBMYSQLCLIENT LIBMYSQLCLIENT_DEV
 PKG_HOST_DEPENDS:=	!cygwin
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMYSQLCLIENT_DEV,libmysqlclient-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
@@ -83,11 +84,15 @@ do-build:
 		bin_SCRIPTS="mysql_config" \
 		all install
 
-do-install:
+libmysqlclient-install:
 	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/mysql/libmysqlclient.so* \
 	    ${IDIR_LIBMYSQLCLIENT}/usr/lib
 	$(SED) "s,\(^pkgincludedir='\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
 		${WRKINST}/usr/bin/mysql_config
+
+libmysqlclient-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
