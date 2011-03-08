@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.14
+PKG_VERSION:=		3.6.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ab0d00cd33e6b2388429dda1c01abd01
+PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
