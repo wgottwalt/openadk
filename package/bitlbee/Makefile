@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bitlbee
-PKG_VERSION:=		1.2.4
+PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		26b9bfc5446bdf0e932e8074d117be67
+PKG_MD5SUM:=		4d00c6e09859b653f955b16b988db0ac
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		chat
 PKG_DEPENDS:=		glib libiconv libopenssl
@@ -21,11 +21,11 @@ $(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 CONFIG_STYLE:=		minimal
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
-			--prefix=/usr/ \
-			--bindir=/usr/sbin/ \
-			--etcdir=/etc/bitlbee/ \
-			--datadir=/usr/share/bitlbee/ \
-			--config=/var/lib/bitlbee/ \
+			--prefix=/usr \
+			--bindir=/usr/sbin \
+			--etcdir=/etc/bitlbee \
+			--datadir=/usr/share/bitlbee \
+			--config=/var/lib/bitlbee \
 			--arch=Linux \
 			--cpu="${ARCH}" \
 			--debug=0 \
