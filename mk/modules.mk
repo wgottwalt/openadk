@@ -926,11 +926,6 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 ZLIB:=lib/zlib_deflate/zlib_deflate
-ifneq (${ADK_LINUX_NATIVE},y)
-ifneq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
-ZLIB+=lib/zlib_inflate/zlib_inflate
-endif
-endif
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
     $(foreach mod, $(ZLIB),$(MODULES_DIR)/kernel/$(mod)) \
