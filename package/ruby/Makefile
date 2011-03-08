@@ -5,8 +5,9 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
 PKG_VERSION:=		1.9.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		755aba44607c580fddc25e7c89260460
+PKG_EXTRAVER:=		180
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0d6953820c9918820dd916e79f4bfde8
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.ruby-lang.org/
@@ -15,8 +16,8 @@ PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
 
-DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p0.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-1.9.2-p0
+DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}
 
 include ${TOPDIR}/mk/package.mk
 
@@ -47,7 +48,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libruby.so* ${IDIR_RUBY}/usr/lib
-	${CP} ${WRKINST}/usr/lib/ruby/* ${IDIR_RUBY}/usr/lib/ruby/
+	${CP} ${WRKINST}/usr/lib/ruby/* ${IDIR_RUBY}/usr/lib/ruby
 	${INSTALL_BIN} ${WRKINST}/usr/bin/* ${IDIR_RUBY}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
