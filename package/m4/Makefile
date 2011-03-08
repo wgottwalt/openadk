@@ -4,22 +4,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		m4
-PKG_VERSION:=		1.4.13
+PKG_VERSION:=		1.4.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e9e36108b5f9855a82ca4a07ebc0fd2e
+PKG_MD5SUM:=		a5dfb4f2b7370e9d34293d23fd09b280
 PKG_DESCR:=		macro processor
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/m4/
-PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
+PKG_SITES:=		${MASTER_SITE_GNU:=m4/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,M4,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,M4,m4,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		ac_cv_func_mbrtowc=no \
-			gl_cv_func_wcrtomb_retval=no
-
-post-install:
+m4-install:
 	${INSTALL_DIR} ${IDIR_M4}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/m4 ${IDIR_M4}/usr/bin
 
