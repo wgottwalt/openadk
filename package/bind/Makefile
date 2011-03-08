@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
-PKG_VERSION:=		9.7.0
+PKG_VERSION:=		9.7.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c245b5d1aa0a4f53d9538faa1efe2c3f
+PKG_MD5SUM:=		207477c4cf95f2db5be0ded8a22669e0
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		dns
 PKG_DEPENDS:=		libopenssl libbind libxml2
@@ -68,18 +68,18 @@ CONFIGURE_ENV+=		BUILD_CC="${CC_FOR_BUILD}" BUILD_CFLAGS='${CFLAGS_FOR_BUILD}'
 
 bind-server-install:
 	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin ${IDIR_BIND_SERVER}/etc
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/named ${IDIR_BIND_SERVER}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/named ${IDIR_BIND_SERVER}/usr/sbin
 	${CP} ./files/bind ${IDIR_BIND_SERVER}/etc
 
 bind-nsupdate-install:
 	${INSTALL_DIR} ${IDIR_BIND_NSUPDATE}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/nsupdate ${IDIR_BIND_NSUPDATE}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/nsupdate ${IDIR_BIND_NSUPDATE}/usr/bin
 
 bind-rndc-install:
 	${INSTALL_DIR} ${IDIR_BIND_RNDC}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc ${IDIR_BIND_RNDC}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc ${IDIR_BIND_RNDC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rndc-confgen \
-		${IDIR_BIND_RNDC}/usr/sbin/
+		${IDIR_BIND_RNDC}/usr/sbin
 
 bind-check-install:
 	${INSTALL_DIR} ${IDIR_BIND_CHECK}/usr/sbin
@@ -91,25 +91,25 @@ bind-check-install:
 bind-dnssec-install:
 	${INSTALL_DIR} ${IDIR_BIND_DNSSEC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-keygen \
-		${IDIR_BIND_DNSSEC}/usr/sbin/
+		${IDIR_BIND_DNSSEC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnssec-signzone \
-		${IDIR_BIND_DNSSEC}/usr/sbin/
+		${IDIR_BIND_DNSSEC}/usr/sbin
 
 bind-host-install:
 	${INSTALL_DIR} ${IDIR_BIND_HOST}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/host ${IDIR_BIND_HOST}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/host ${IDIR_BIND_HOST}/usr/bin
 
 bind-dig-install:
 	${INSTALL_DIR} ${IDIR_BIND_DIG}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_DIG}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/dig ${IDIR_BIND_DIG}/usr/bin
 
 libbind-install:
 	${INSTALL_DIR} ${IDIR_LIBBIND}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libisccc.so.* ${IDIR_LIBBIND}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libisccfg.so.* ${IDIR_LIBBIND}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libbind9.so.* ${IDIR_LIBBIND}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libdns.so.* ${IDIR_LIBBIND}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libisccc.so.* ${IDIR_LIBBIND}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libisccfg.so.* ${IDIR_LIBBIND}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib
+	${CP} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
