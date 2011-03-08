@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+if [ -z "$(which gm4 2>/dev/null)" ];then
+	/usr/bin/m4 "$@"
+else
+	gm4 "$@"
+fi
