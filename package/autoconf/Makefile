@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		autoconf
-PKG_VERSION:=		2.65
+PKG_VERSION:=		2.68
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		46cfb40e0babf4c64f8325f03da81c9b
+PKG_MD5SUM:=		c3b5247592ce694f7097873aa07d66fe
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/autoconf/
@@ -15,9 +15,11 @@ PKG_OPTS:=		noscripts
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,AUTOCONF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+XAKE_FLAGS+=		PERL="/usr/bin/perl"
+
+autoconf-install:
 	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/bin
 	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/share/autoconf
 	${CP} ${WRKINST}/usr/bin/auto* ${IDIR_AUTOCONF}/usr/bin
