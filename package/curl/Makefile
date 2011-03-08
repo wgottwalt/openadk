@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.21.0
+PKG_VERSION:=		7.21.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6dfb911a254a1b5ca8b534b98f2196aa
+PKG_MD5SUM:=		571a39f70c4c18521cbba5a60f2416c5
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcurl
@@ -60,16 +60,16 @@ endif
 
 curl-install:
 	${INSTALL_DIR} ${IDIR_CURL}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/curl ${IDIR_CURL}/usr/bin
 
 libcurl-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib
 
 libcurl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
 	${CP} ${WRKINST}/usr/include/curl/*.h \
-		${IDIR_LIBCURL_DEV}/usr/include/curl/
+		${IDIR_LIBCURL_DEV}/usr/include/curl
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/curl-config \
 		${IDIR_LIBCURL_DEV}/usr/bin

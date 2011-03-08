@@ -1,6 +1,6 @@
---- curl-7.21.0.orig/configure	2010-06-05 00:32:04.000000000 +0200
-+++ curl-7.21.0/configure	2011-01-14 12:05:38.000000000 +0100
-@@ -19714,15 +19714,6 @@ fi
+--- curl-7.21.4.orig/configure	2011-01-30 19:07:52.000000000 +0100
++++ curl-7.21.4/configure	2011-03-04 18:42:33.000000000 +0100
+@@ -19799,15 +19799,6 @@ fi
  rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
    fi
  
