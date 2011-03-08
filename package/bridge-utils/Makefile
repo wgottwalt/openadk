@@ -15,13 +15,13 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BRIDGE_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BRIDGE_UTILS,bridge-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-linux-headers=${LINUX_DIR}
 
-post-install:
+bridge-utils-install:
 	${INSTALL_DIR} ${IDIR_BRIDGE_UTILS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/brctl \
-		${IDIR_BRIDGE_UTILS}/usr/sbin/
+		${IDIR_BRIDGE_UTILS}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

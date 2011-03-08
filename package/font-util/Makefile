@@ -13,11 +13,13 @@ PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		FONT_UTIL FONT_UTIL_DEV
+PKGSC_FONT_UTIL_DEV:=	devel
+PKGSD_FONT_UTIL_DEV:=	font util headers
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FONT_UTIL,font-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,FONT_UTIL_DEV,font-util-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,FONT_UTIL_DEV,font-util-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FONT_UTIL_DEV},${PKGSC_FONT_UTIL_DEV},${PKG_OPTS}))
 
 # XXX: Push the mapping files to a place where we can find them
 # again when compiling the actual fonts. This is ugly as hell,

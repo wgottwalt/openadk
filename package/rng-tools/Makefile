@@ -16,9 +16,9 @@ PKG_CFLINE_RNG_TOOLS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,RNG_TOOLS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RNG_TOOLS,rng-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+rng-tools-install:
 	$(INSTALL_DIR) $(IDIR_RNG_TOOLS)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/rngd $(IDIR_RNG_TOOLS)/usr/sbin
 
