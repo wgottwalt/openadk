@@ -13,11 +13,13 @@ PKG_BUILDDEP:=		libXfixes damageproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXDAMAGE LIBXDAMAGE_DEV
+PKGSC_LIBXDAMAGE_DEV:=	x11/devel
+PKGSD_LIBXDAMAGE_DEV:=	DAMAGE extension headers
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXDAMAGE,libxdamage,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXDAMAGE_DEV,libxdamage-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXDAMAGE_DEV,libxdamage-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXDAMAGE_DEV},${PKGSC_LIBXDAMAGE_DEV}))
 
 libxdamage-install:
 	$(INSTALL_DIR) $(IDIR_LIBXDAMAGE)/usr/lib

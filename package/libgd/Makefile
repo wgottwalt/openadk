@@ -15,11 +15,13 @@ PKG_URL:=		http://www.libgd.org/
 PKG_SITES:=		http://www.libgd.org/releases/
 
 PKG_SUBPKGS:=		LIBGD LIBGD_DEV
+PKGSC_LIBGD_DEV:=	devel
+PKGSD_LIBGD_DEV:=	libgd headers
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGD_DEV,libgd-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGD_DEV,libgd-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGD_DEV},${PKGSC_LIBGD_DEV}))
 
 CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_TARGET_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \

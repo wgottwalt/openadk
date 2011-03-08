@@ -13,13 +13,15 @@ PKG_URL:=		http://www.netfilter.org/projects/libnfnetlink/
 PKG_SITES:=		http://www.netfilter.org/projects/libnfnetlink/files/
 
 PKG_SUBPKGS:=		LIBNFNETLINK LIBNFNETLINK_DEV
+PKGSD_LIBNFNETLINK_DEV:=libnfnetlink headers
+PKGSC_LIBNFNETLINK_DEV:=devel
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNFNETLINK,libnfnetlink,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBNFNETLINK_DEV,libnfnetlink-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBNFNETLINK_DEV,libnfnetlink-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBNFNETLINK_DEV},${PKGSC_LIBNFNETLINK_DEV}))
 
 libnfnetlink-install:
 	$(INSTALL_DIR) $(IDIR_LIBNFNETLINK)/usr/lib

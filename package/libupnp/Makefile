@@ -14,13 +14,15 @@ PKG_URL:=		http://pupnp.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pupnp/}
 
 PKG_SUBPKGS:=		LIBUPNP LIBUPNP_DEV
+PKGSD_LIBUPNP_DEV:=	libupnp headers
+PKGSC_LIBUPNP_DEV:=	devel
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUPNP,libupnp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBUPNP_DEV,libupnp-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBUPNP_DEV,libupnp-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUPNP_DEV},${PKGSC_LIBUPNP_DEV}))
 
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-samples

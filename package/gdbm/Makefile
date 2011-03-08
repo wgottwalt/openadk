@@ -13,11 +13,13 @@ PKG_URL:=		http://www.gnu.org/software/gdbm/
 PKG_SITES:=		${MASTER_SITE_GNU:=gdbm/}
 
 PKG_SUBPKGS:=		LIBGDBM LIBGDBM_DEV
+PKGSC_LIBGDBM_DEV:=	devel
+PKGSD_LIBGDBM_DEV:=	libgdbm headers
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGDBM,libgdbm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGDBM_DEV,libgdbm-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGDBM_DEV,libgdbm-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGDBM_DEV},${PKGSC_LIBGDBM_DEV}))
 
 XAKE_FLAGS+=		BINOWN=`id -u` \
 			BINGRP=`id -g` \

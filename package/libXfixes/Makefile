@@ -14,11 +14,13 @@ PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXFIXES LIBXFIXES_DEV
+PKGSC_LIBXFIXES_DEV:=	x11/devel
+PKGSD_LIBXFIXES_DEV:=	X Fixes headers
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXFIXES,libxfixes,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXFIXES_DEV,libxfixes-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXFIXES_DEV,libxfixes-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXFIXES_DEV},${PKGSC_LIBXFIXES_DEV}))
 
 libxfixes-install:
 	$(INSTALL_DIR) $(IDIR_LIBXFIXES)/usr/lib

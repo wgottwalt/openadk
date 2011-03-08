@@ -16,11 +16,13 @@ PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		LIBSASL2 LIBSASL2_DEV
+PKGSD_LIBSASL2_DEV:=	sasl2 headers
+PKGSC_LIBSASL2_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSASL2_DEV,libsasl2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSASL2_DEV,libsasl2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSASL2_DEV},${PKGSC_LIBSASL2_DEV}))
 
 CONFIGURE_ARGS+=	--disable-sample \
 			--enable-staticdlopen \

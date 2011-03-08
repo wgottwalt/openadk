@@ -9,11 +9,13 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://gmplib.org/
 
 PKG_SUBPKGS:=		LIBGMP LIBGMP_DEV
+PKGSC_LIBGMP_DEV:=	devel
+PKGSD_LIBGMP_DEV:=	libgmp headers
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBGMP_DEV,libgmp-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBGMP_DEV,libgmp-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGMP_DEV},${PKGSC_LIBGMP_DEV}))
 
 libgmp-install:
 	${INSTALL_DIR} ${IDIR_LIBGMP}/usr/lib

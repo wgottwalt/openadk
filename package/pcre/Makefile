@@ -13,6 +13,8 @@ PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
 
 PKG_SUBPKGS:=		LIBPCRE LIBPCRE_DEV
+PKGSD_LIBPCRE_DEV:=	PCRE headers
+PKGSC_LIBPCRE_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,7 +26,7 @@ XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
 libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib
 
 libpcre-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/include
@@ -33,6 +35,5 @@ libpcre-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
 	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
 		${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

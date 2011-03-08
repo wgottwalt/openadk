@@ -7,7 +7,7 @@ PKG_NAME:=		cxxtools
 PKG_VERSION:=		1.4.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		16ce92a83beb925fa5138fc9a52d55af
-PKG_DESCR:=		a collection of general-purpose C++ classes
+PKG_DESCR:=		a collection of general-purpose C++ classes (libraries)
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv
 PKG_BUILDDEP:=		libiconv
@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		CXXTOOLS CXXTOOLS_DEV
+PKGSC_CXXTOOLS_DEV:=	devel
+PKGSD_CXXTOOLS_DEV:=	a collection of general-purpose C++ classes (headers)
 
 include ${TOPDIR}/mk/package.mk
 
