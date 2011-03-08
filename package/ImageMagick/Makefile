@@ -37,7 +37,6 @@ $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
 CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
-			--without-bzip2 \
 			--without-gslib \
 			--without-dps \
 			--without-perl \

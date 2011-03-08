@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.13
+PKG_VERSION:=		3.6.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d7c90aed8209beefa74badf02e8eeae1
+PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
-PKG_DEPENDS+=		nspr nss libjpeg atk pango cairo libxt libx11 libstdcxx
+PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -27,7 +27,7 @@ WRKDIST=		${WRKDIR}/mozilla-1.9.2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FIREFOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_LINUX_MIPS64EL},y)
 CONFIGURE_ARGS+=	--disable-ipc
@@ -75,11 +75,11 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 XAKE_FLAGS+=		OS_RELEASE="2.6"
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
 
-post-install:
+firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/firefox-${PKG_VERSION} \
-		$(IDIR_FIREFOX)/usr/lib/
+		$(IDIR_FIREFOX)/usr/lib
 	$(CP) $(WRKINST)/usr/bin/firefox \
 		$(IDIR_FIREFOX)/usr/bin
 

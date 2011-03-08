@@ -17,10 +17,10 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tgz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AUTOSSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,AUTOSSH,autossh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+autossh-install:
 	$(INSTALL_DIR) $(IDIR_AUTOSSH)/usr/bin
-	$(INSTALL_BIN) $(WRKBUILD)/autossh $(IDIR_AUTOSSH)/usr/bin/
+	$(INSTALL_BIN) $(WRKBUILD)/autossh $(IDIR_AUTOSSH)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

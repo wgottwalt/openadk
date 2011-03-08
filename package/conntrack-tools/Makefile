@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		conntrack-tools
-PKG_VERSION:=		0.9.15
+PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		caecb479ceb5ff7f646d47e85484d655
+PKG_MD5SUM:=		5add24d4761baf17af630d5627a71752
 PKG_DESCR:=		Connection tracking userspace tools
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		libnetfilter-conntrack
@@ -22,6 +22,6 @@ $(eval $(call PKG_template,CONNTRACK_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELE
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_CONNTRACK_TOOLS)/usr/sbin
-	$(INSTALL_BIN) $(WRKINST)/usr/sbin/conntrack{,d} $(IDIR_CONNTRACK_TOOLS)/usr/sbin/
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/conntrack{,d} $(IDIR_CONNTRACK_TOOLS)/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

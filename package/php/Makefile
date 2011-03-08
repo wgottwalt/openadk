@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.4
+PKG_VERSION:=		5.3.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b69b36132899c5ca3bf155efa0218676
+PKG_MD5SUM:=		fb727a3ac72bf0ce37e1a20468a7bb81
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libopenssl zlib
@@ -194,8 +194,8 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc
-	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/sbin
+	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
-		$(IDIR_PHP_FASTCGI)/usr/sbin/php
+		$(IDIR_PHP_FASTCGI)/usr/bin/php
 
 include ${TOPDIR}/mk/pkg-bottom.mk

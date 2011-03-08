@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
-PKG_VERSION:=		1.0.22
+PKG_VERSION:=		1.0.24.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b28a12348905fb6915bc41f0edb2ecce
+PKG_MD5SUM:=		7cc05f25e1d5b65da8fb3fdcd540f226
 PKG_DESCR:=		ALSA sound library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.alsa-project.org/
@@ -20,15 +20,15 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ALSA_LIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ALSA_LIB_DEV,alsa-lib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ALSA_LIB_DEV},${PKGSC_ALSA_LIB_DEV}))
 
 CONFIGURE_ARGS+=	--disable-python
 
-post-install:
+alsa-lib-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa
-	${CP} ${WRKINST}/usr/lib/libasound.so* ${IDIR_ALSA_LIB}/usr/lib/
-	${CP} ${WRKINST}/usr/share/alsa/* ${IDIR_ALSA_LIB}/usr/share/alsa/
+	${CP} ${WRKINST}/usr/lib/libasound.so* ${IDIR_ALSA_LIB}/usr/lib
+	${CP} ${WRKINST}/usr/share/alsa/* ${IDIR_ALSA_LIB}/usr/share/alsa
 
 alsa-lib-dev-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB_DEV}/usr/include/{sys,alsa}

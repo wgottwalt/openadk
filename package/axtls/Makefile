@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		axtls
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4a06dd5b34489f11fbf2b4249a9dd303
+PKG_MD5SUM:=		b2cdafaa93c033cd4f3ebfca2c7e66b4
 PKG_DESCR:=		small embedded webserver
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libaxtls

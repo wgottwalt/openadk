@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.0c
+PKG_VERSION:=		1.0.0d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ff8fb85610aef328315a9decbb2712e4
+PKG_MD5SUM:=		40b6ea380cc8a5bf9734c2f8bf7e701e
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib

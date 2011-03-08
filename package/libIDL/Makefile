@@ -12,12 +12,16 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/
 
+PKG_SUBPKGS:=		LIBIDL LIBIDL_DEV
+PKGSD_LIBIDL_DEV:=	libidl headers
+PKGSC_LIBIDL_DEV:=	devel
+
 include $(TOPDIR)/mk/package.mk
 
 CONFIGURE_ENV+=		libIDL_cv_long_long_format=ll
 
 $(eval $(call PKG_template,LIBIDL,libidl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBIDL_DEV,libidl-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBIDL_DEV,libidl-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBIDL_DEV},${PKGSC_LIBIDL_DEV}))
 
 libidl-install:
 	$(INSTALL_DIR) $(IDIR_LIBIDL)/usr/lib

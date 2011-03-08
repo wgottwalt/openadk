@@ -2,3 +2,6 @@
 . $IPKG_INSTROOT/etc/functions.sh
 add_rcconf lighttpd lighttpd NO
 add_rcconf lighttpd_flags lighttpd_flags "-f /etc/lighttpd/lighttpd.conf"
+gid=$(get_next_gid)
+add_user lighttpd $(get_next_uid) $gid /srv/www
+add_group lighttpd $gid

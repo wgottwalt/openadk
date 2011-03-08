@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bzr
-PKG_VERSION:=		2.3b4
+PKG_VERSION:=		2.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		62ba2dbd8b13745bc89e24dd4191cdc5
+PKG_MD5SUM:=		2d8bc55d43209189a209361178d9d372
 PKG_DESCR:=		bazaar
 PKG_SECTION:=		scm
-PKG_DEPENDS:=		python2
 PKG_BUILDDEP:=		python2
+PKG_DEPENDS:=		python2
 PKG_URL:=		http://bazaar.canonical.com/en/
 PKG_SITES:=		http://launchpad.net/bzr/2.3/${PKG_VERSION}/+download/
 
@@ -32,6 +32,6 @@ do-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/* \
 		$(IDIR_BZR)/usr/lib/python$(PYTHON_VERSION)/site-packages
 	$(INSTALL_DIR) $(IDIR_BZR)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/bzr $(IDIR_BZR)/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/bzr $(IDIR_BZR)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

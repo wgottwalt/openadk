@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sox
-PKG_VERSION:=		14.3.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		b99871c7bbae84feac9d0d1f010331ba
+PKG_VERSION:=		14.3.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		e9d35cf3b0f8878596e0b7c49f9e8302
 PKG_DESCR:=		Swiss Army knife of sound processing programs
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		zlib libmad lame alsa-lib libid3tag
@@ -18,7 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+sox-install:
 	$(INSTALL_DIR) $(IDIR_SOX)/usr/lib
 	${CP} ${WRKINST}/usr/lib/libsox.so* $(IDIR_SOX)/usr/lib
 	$(INSTALL_DIR) $(IDIR_SOX)/usr/bin

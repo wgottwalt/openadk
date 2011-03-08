@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
-PKG_VERSION:=		0.12.5
+PKG_VERSION:=		0.12.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fe8155d364b220713074423100d4bf29
+PKG_MD5SUM:=		037499ed708aaf72988cee60e5a8d96b
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
@@ -20,8 +20,8 @@ $(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},
 
 CONFIGURE_ARGS+=	--enable-aligned
 
-post-install:
+libtorrent-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libtorrent.so* ${IDIR_LIBTORRENT}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libtorrent.so* ${IDIR_LIBTORRENT}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.59
+PKG_VERSION:=		4.89
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1c7cee215bc84656b1edee019cee78f5
+PKG_MD5SUM:=		67fd9ad2852ce01f01b16ddd2336d1ea
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bt libusb glib dbus
@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
@@ -33,19 +33,19 @@ CONFIGURE_ARGS+=	--enable-tools \
 			--disable-pie \
 			--disable-cups
 
-post-install:
+bluez-install:
 ifneq ($(ADK_STATIC),y)
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libbluetooth.so.* ${IDIR_BLUEZ}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libbluetooth.so* ${IDIR_BLUEZ}/usr/lib
 endif
 	${INSTALL_DIR} $(IDIR_BLUEZ)/etc/dbus-1/system.d
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/bin
-	${CP} ${WRKINST}/usr/bin/* ${IDIR_BLUEZ}/usr/bin/
+	${CP} ${WRKINST}/usr/bin/* ${IDIR_BLUEZ}/usr/bin
 	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/sbin
-	${CP} ${WRKINST}/usr/sbin/* ${IDIR_BLUEZ}/usr/sbin/
+	${CP} ${WRKINST}/usr/sbin/* ${IDIR_BLUEZ}/usr/sbin
 	${INSTALL_DIR} ${IDIR_BLUEZ}/etc/bluetooth
 	$(INSTALL_DATA) ./files/main.conf \
-		${IDIR_BLUEZ}/etc/bluetooth/
+		${IDIR_BLUEZ}/etc/bluetooth
 	$(INSTALL_DATA) ./files/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
 

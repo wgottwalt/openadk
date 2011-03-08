@@ -20,6 +20,6 @@ FAKE_FLAGS+=		prefix=${WRKINST}
 
 gzip-install:
 	$(INSTALL_DIR) $(IDIR_GZIP)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/bin/{gunzip,zcat,zgrep,gzip} $(IDIR_GZIP)/usr/bin
+	$(CP) $(WRKINST)/bin/gzip $(IDIR_GZIP)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

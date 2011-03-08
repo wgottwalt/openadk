@@ -3,7 +3,7 @@
 #INIT 80
 . /etc/rc.conf
 
-export PHP_FCGI_CHILDREN=''
+export PHP_FCGI_CHILDREN='2'
 
 case $1 in
 autostop) ;;

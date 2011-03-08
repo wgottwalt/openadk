@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.6.12
+PKG_VERSION:=		1.6.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ae008ac355581c90494fba86cbfc3413
+PKG_MD5SUM:=		ead9183361819deab9127a224e5ebca0
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite neon
@@ -16,7 +16,7 @@ PKG_URL:=		http://subversion.apache.org/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SUBVERSION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SUBVERSION,subversion,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv'
 INSTALL_TARGET:=	external-install local-install
 
-post-install:
+subversion-install:
 	${INSTALL_DIR} ${IDIR_SUBVERSION}/usr/{bin,lib}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/svn ${IDIR_SUBVERSION}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libsvn*.so* ${IDIR_SUBVERSION}/usr/lib

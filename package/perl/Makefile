@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
-PKG_VERSION:=		5.12.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		20781ca125fb6346bb343a15e082d127
+PKG_VERSION:=		5.12.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		29975a69dce54e47fcd6331c085c6c99
 PKG_DESCR:=		full-blown Perl
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.perl.org/
