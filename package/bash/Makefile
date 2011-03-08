@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bash
-PKG_VERSION:=		4.1
+PKG_VERSION:=		4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9800d8724815fd84994d9be65ab5e7b8
+PKG_MD5SUM:=		3fb927c7c33022f1c327f14a81c0d4b0
 PKG_DESCR:=		Bourne-Again SHell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.gnu.org/software/bash/
@@ -14,14 +14,17 @@ PKG_SITES:=		http://ftp.gnu.org/gnu/bash/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BASH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BASH,bash,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		bash_cv_getenv_redef=no
+CONFIGURE_ENV+=		bash_cv_getenv_redef=no \
+			bash_cv_job_control_missing=yes
 CONFIGURE_ARGS+=	--disable-rpath \
-			--cache-file=/dev/null
+			--cache-file=/dev/null \
+			--enable-job-control \
+			--enable-history
 XAKE_FLAGS+=		LIBS_FOR_BUILD=''
 
-post-install:
+bash-install:
 	$(INSTALL_DIR) $(IDIR_BASH)/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/bash $(IDIR_BASH)/bin/
 
