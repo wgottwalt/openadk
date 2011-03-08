@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
-PKG_VERSION:=		0.8.5
+PKG_VERSION:=		0.8.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e701095e1824b7e512a17000f4c0a783
+PKG_MD5SUM:=		b804c45c01c40312926bcea6b55bb084
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl
@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+rtorrent-install:
 	${INSTALL_DIR} ${IDIR_RTORRENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/rtorrent ${IDIR_RTORRENT}/usr/bin
 
