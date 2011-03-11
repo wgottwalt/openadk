@@ -15,6 +15,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,INTLTOOL,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		PERL="/usr/bin/perl"
+
 post-install:
 	$(INSTALL_DIR) $(IDIR_INTLTOOL)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/intltool* \
