@@ -13,7 +13,9 @@ PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/1.33/}
 
-PKG_SUBPKGS:=		LIBATK
+PKG_SUBPKGS:=		LIBATK LIBATK_DEV
+PKGSC_LIBATK_DEV:=	devel
+PKGSD_LIBATK_DEV:=	libatk headers
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -22,9 +24,16 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBATK,libatk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBATK_DEV,libatk-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBATK_DEV},${PKGSC_LIBATK_DEV},${PKG_OPTS}))
 
 libatk-install:
 	${INSTALL_DIR} ${IDIR_LIBATK}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libatk-*.so* ${IDIR_LIBATK}/usr/lib
+
+libatk-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBATK_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc ${IDIR_LIBATK_DEV}/usr/lib/pkgconfig
+	${INSTALL_DIR} ${IDIR_LIBATK_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBATK_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

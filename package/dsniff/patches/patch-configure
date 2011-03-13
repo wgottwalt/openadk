@@ -1,6 +1,6 @@
 $Id$
 --- dsniff-2.4.orig/configure	2001-03-19 07:52:37.000000000 +0100
-+++ dsniff-2.4/configure	2007-01-23 00:24:04.000000000 +0100
++++ dsniff-2.4/configure	2011-03-11 21:41:08.000000000 +0100
 @@ -16,6 +16,8 @@ ac_help="$ac_help
  ac_help="$ac_help
    --with-db=DIR           use Berkeley DB (with --enable-compat185) in DIR"
@@ -10,9 +10,18 @@ $Id$
    --with-libpcap=DIR      use libpcap in DIR"
  ac_help="$ac_help
    --with-libnet=DIR       use libnet in DIR"
-@@ -3031,7 +3033,7 @@ if test "${with_libpcap+set}" = set; the
- 	PCAPINC="-I$withval -I$withval/bpf"
- 	PCAPLIB="-L$withval -lpcap"
+@@ -3025,13 +3027,13 @@ if test "${with_libpcap+set}" = set; the
+      ;;
+   *)
+      echo "$ac_t""$withval" 1>&6
+-     if test -f $withval/pcap.h -a -f $withval/libpcap.a; then
++     if test -f $withval/include/pcap.h -a -f $withval/lib/libpcap.so; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+-	PCAPINC="-I$withval -I$withval/bpf"
+-	PCAPLIB="-L$withval -lpcap"
++	PCAPINC="-I$withval/include -I$withval/include/bpf"
++	PCAPLIB="-L$withval/lib -lpcap"
       elif test -f $withval/include/pcap.h -a \
 -	       -f $withval/include/net/bpf.h -a \
 +	       -f $withval/include/pcap-bpf.h -a \
@@ -102,3 +111,27 @@ $Id$
       fi
       ;;
    esac 
+@@ -3183,19 +3218,19 @@ if test "${with_openssl+set}" = set; the
+      ;;
+   *)
+      echo "$ac_t""$withval" 1>&6
+-     if test -f $withval/include/openssl/ssl.h -a -f $withval/libssl.a; then
++     if test -f $withval/include/openssl/ssl.h -a -f $withval/lib/libssl.so; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+ 	SSLINC="-I$withval/include"
+-	SSLLIB="-L$withval -lssl -lcrypto"
++	SSLLIB="-L$withval/lib -lssl -lcrypto"
+      elif test -f $withval/include/openssl/ssl.h -a \
+-	       -f $withval/lib/libssl.a; then
++	       -f $withval/lib/libssl.so; then
+ 	owd=`pwd`
+ 	if cd $withval; then withval=`pwd`; cd $owd; fi
+ 	SSLINC="-I$withval/include"
+ 	SSLLIB="-L$withval/lib -lssl -lcrypto"
+      else
+-        { echo "configure: error: ssl.h or libssl.a not found in $withval" 1>&2; exit 1; }
++        { echo "configure: error: ssl.h or libssl.so not found in $withval" 1>&2; exit 1; }
+      fi
+      WEBMITM="webmitm"
+      ;;

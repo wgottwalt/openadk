@@ -33,9 +33,6 @@ CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
 
 MAKE_FLAGS+=		LIBPTHREAD=-lm
 TARGET_CPPFLAGS+=	-DSQLITE_SECURE_DELETE=1
-CONFIGURE_ARGS+=	--disable-tcl \
-			--without-tcl \
-			--disable-amalgamation
 
 libsqlite-install:
 	${INSTALL_DIR} ${IDIR_LIBSQLITE}/usr/lib

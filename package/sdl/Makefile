@@ -15,7 +15,7 @@ PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/release/
 
 PKG_FLAVOURS_LIBSDL:=	WITH_TSLIB
-PKGFD_WITH_TSLIB:=	SDL with touchscreen support
+PKGFD_WITH_TSLIB:=	enable touchscreen support
 PKGFS_WITH_TSLIB:=	tslib
 PKGFB_WITH_TSLIB:=	tslib
 

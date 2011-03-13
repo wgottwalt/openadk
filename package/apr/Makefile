@@ -13,12 +13,17 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
 
+PKG_SUBPKGS:=		APR APR_DEV
+PKGSC_APR_DEV:=		devel
+PKGSD_APR_DEV:=		apr headers
+
 PKG_FLAVOURS_APR:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,APR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,APR,apr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,APR_DEV,apr-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_APR_DEV},${PKGSC_APR_DEV}))
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
@@ -31,21 +36,25 @@ CONFIGURE_ENV+=		apr_cv_tcp_nodelay_with_cork=no
 CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom \
 			--enable-threads
 
-ifneq (${ADK_PACKAGE_LIBPCAP_WITH_IPV6},)
+ifneq (${ADK_PACKAGE_APR_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
+apr-install:
 	${INSTALL_DIR} ${IDIR_APR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libapr-1.so* ${IDIR_APR}/usr/lib/
-	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/build-1
-	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_TARGET_DIR}/usr/share/build-1/
+	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build-1
+	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_DIR}/usr/share/build-1/
 	# we need to patch paths to get apr-util compiling
-	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
+	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
 		${WRKINST}/usr/bin/apr-1-config
-	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
+	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," \
 		${WRKINST}/usr/bin/apr-1-config
+
+apr-dev-install:
+	${INSTALL_DIR} ${IDIR_APR_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_APR_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

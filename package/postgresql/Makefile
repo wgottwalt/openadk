@@ -13,11 +13,12 @@ PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.postgresql.org/
 PKG_SITES:=		ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/source/v${PKG_VERSION}/
 
-PKG_SUBPKGS:=		LIBPQ
+PKG_SUBPKGS:=		LIBPQ LIBPQ_DEV
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPQ_DEV,libpq-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
@@ -53,8 +54,15 @@ do-build:
 		DESTDIR="${WRKINST}" \
 		all install
 
-do-install:
+libpq-install:
 	${INSTALL_DIR} ${IDIR_LIBPQ}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpq.so* ${IDIR_LIBPQ}/usr/lib
+
+libpq-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBPQ_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBPQ_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBPQ_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/pg_config \
+		${IDIR_LIBPQ_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

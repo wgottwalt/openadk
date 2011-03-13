@@ -64,6 +64,8 @@ libintl-dev-install:
 
 gettext-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/gettext-tools/src/.libs/xgettext \
+		$(IDIR_GETTEXT)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/gettext-runtime/src/.libs/gettext \
 		$(IDIR_GETTEXT)/usr/bin
 
@@ -77,6 +79,8 @@ msgfmt-install:
 	${CP} ${WRKBUILD}/gettext-tools/src/.libs/libgettextsrc*so* \
 		${IDIR_MSGFMT}/usr/lib
 	$(INSTALL_BIN) $(WRKBUILD)/gettext-tools/src/.libs/msgfmt \
+		$(IDIR_MSGFMT)/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/gettext-tools/src/.libs/msgmerge \
 		$(IDIR_MSGFMT)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -46,8 +46,6 @@ PKG_CONFIGURE_OPTIONS+= --enable-slapd \
 			--enable-syslog \
 			--enable-local \
 			--disable-syncprov \
-			--disable-slurpd \
-			--without-gssapi \
 			--without-fetch \
 			--with-cyrus-sasl \
 			--with-threads \

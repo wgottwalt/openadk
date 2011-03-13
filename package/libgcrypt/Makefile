@@ -32,8 +32,11 @@ libgcrypt-install:
 		${IDIR_LIBGCRYPT}/usr/lib
 
 libgcrypt-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBGCRYPT}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBGCRYPT_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_LIBGCRYPT}/usr/include
+		${IDIR_LIBGCRYPT_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBGCRYPT_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/libgcrypt-config \
+		${IDIR_LIBGCRYPT_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
