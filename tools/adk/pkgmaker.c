@@ -579,6 +579,8 @@ int main() {
 						fprintf(cfg, "\t%s\n", cftoken);
 						cftoken = strtok_r(NULL, "@", &saveptr);
 					}
+					free(pkg_cfline);
+					pkg_cfline = NULL;
 				}
 
 				/* add sub package dependencies */
