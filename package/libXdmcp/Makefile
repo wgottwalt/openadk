@@ -34,5 +34,8 @@ libxdmcp-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXDMCP_DEV}/usr/include/X11
 	${CP} ${WRKINST}/usr/include/X11/* \
 		${IDIR_LIBXDMCP_DEV}/usr/include/X11
-	
+	${INSTALL_DIR} ${IDIR_LIBXDMCP_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBXDMCP_DEV}/usr/lib/pkgconfig
+
 include ${TOPDIR}/mk/pkg-bottom.mk

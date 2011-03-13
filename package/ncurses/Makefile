@@ -88,5 +88,8 @@ endif
 libncurses-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBNCURSES_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBNCURSES_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ncurses5-config \
+		${IDIR_LIBNCURSES_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

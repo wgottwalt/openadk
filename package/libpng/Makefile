@@ -24,16 +24,19 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPNG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPNG_DEV,libpng-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPNG_DEV},${PKGSC_LIBPNG_DEV},${PKG_OPTS}))
 
-post-install:
+libpng-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpng{,12}.so* ${IDIR_LIBPNG}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpng{,12}.so* ${IDIR_LIBPNG}/usr/lib
 
 libpng-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG_DEV}/usr/include/libpng12
 	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBPNG_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/libpng12/*.h ${IDIR_LIBPNG_DEV}/usr/include/libpng12
+	${INSTALL_DIR} ${IDIR_LIBPNG_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBPNG_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

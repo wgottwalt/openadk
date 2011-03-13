@@ -25,8 +25,11 @@ automake-install:
 	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/automake ${IDIR_AUTOMAKE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/aclocal ${IDIR_AUTOMAKE}/usr/bin
-	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}/
+	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/share/aclocal-${PKG_EXTRAVER}
+	${CP} ${WRKINST}/usr/share/aclocal-${PKG_EXTRAVER} \
+		${IDIR_AUTOMAKE}/usr/share/aclocal-${PKG_EXTRAVER}
+	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}
 	${CP} ${WRKINST}/usr/share/automake-${PKG_EXTRAVER}/Automake \
-		${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}/
+		${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}
 
 include ${TOPDIR}/mk/pkg-bottom.mk

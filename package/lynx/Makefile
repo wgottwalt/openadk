@@ -39,7 +39,7 @@ CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_UUDECODE=uudecode \
 			ac_cv_path_ZCAT=zcat \
 			ac_cv_path_ZIP=zip \
-			ac_cv_path_NCURSES_CONFIG=${STAGING_TARGET_DIR}/scripts/ncurses5-config
+			ac_cv_path_NCURSES_CONFIG=${STAGING_TARGET_DIR}/usr/bin/ncurses5-config
 
 CONFIGURE_ARGS+=	\
 			--disable-warnings \

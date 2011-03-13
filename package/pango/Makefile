@@ -13,20 +13,33 @@ PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
 PKG_NEED_CXX:=		1
 
+PKG_SUBPKGS:=		PANGO PANGO_DEV
+PKGSC_PANGO_DEV:=	devel
+PKGSD_PANGO_DEV:=	pango headers
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PANGO,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PANGO_DEV,pango-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PANGO_DEV},${PKGSC_PANGO_DEV},${PKG_OPTS}))
 
-post-install:
+pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
 	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
 	$(INSTALL_DATA) ./files/pango.modules $(IDIR_PANGO)/etc/pango
 	$(CP) $(WRKINST)/usr/lib/libpango*.so* $(IDIR_PANGO)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/pango/1.6.0/modules/*.so \
 		$(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
+
+pango-dev-install:
+	$(INSTALL_DIR) $(IDIR_PANGO_DEV)/usr/include
+	${CP} $(WRKINST)/usr/include/* \
+		$(IDIR_PANGO_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_PANGO_DEV)/usr/lib/pkgconfig
+	${CP} $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_PANGO_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

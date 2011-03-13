@@ -17,7 +17,9 @@ PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_NEED_CXX:=		1
 
-PKG_SUBPKGS:=		LIBGTK
+PKG_SUBPKGS:=		LIBGTK LIBGTK_DEV
+PKGSC_LIBGTK_DEV:=	devel
+PKGSD_LIBGTK_DEV:=	GTK+ headers
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -26,6 +28,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBGTK_DEV,libgtk-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGTK_DEV},${PKGSC_LIBGTK_DEV},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-gtk-doc-html \
 			--disable-modules \
@@ -38,10 +41,19 @@ CONFIGURE_ARGS+=	--disable-gtk-doc-html \
 CONFIGURE_ENV+=		gio_can_sniff=no \
 			ac_cv_path_GTK_UPDATE_ICON_CACHE=""
 
-post-install:
+libgtk-install:
 	${INSTALL_DIR} ${IDIR_LIBGTK}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgdk-x11*so* ${IDIR_LIBGTK}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgtk-x11*so* ${IDIR_LIBGTK}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgailutil*so* ${IDIR_LIBGTK}/usr/lib
+
+libgtk-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBGTK_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBGTK_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBGTK_DEV}/usr/lib/gtk-2.0/include
+	${CP} ${WRKINST}/usr/lib/gtk-2.0/include/* \
+		${IDIR_LIBGTK_DEV}/usr/lib/gtk-2.0/include
+	${INSTALL_DIR} ${IDIR_LIBGTK_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc ${IDIR_LIBGTK_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

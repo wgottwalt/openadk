@@ -14,16 +14,29 @@ PKG_BUILDDEP:=		dbus glib
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/DBusBindings
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-glib/
 
+PKG_SUBPKGS:=		DBUS_GLIB DBUS_GLIB_DEV
+PKGSC_DBUS_GLIB_DEV:=	devel
+PKGSD_DBUS_GLIB_DEV:=	dbus-glib headers
+
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DBUS_GLIB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DBUS_GLIB,dbus-glib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DBUS_GLIB_DEV,dbus-glib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBUS_GLIB_DEV},${PKGSC_DBUS_GLIB_DEV}))
 
 CONFIGURE_ARGS+=	--disable-checks
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 
-post-install:
+dbus-glib-install:
 	$(INSTALL_DIR) $(IDIR_DBUS_GLIB)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libdbus-glib-1.so* \
 		$(IDIR_DBUS_GLIB)/usr/lib
+
+dbus-glib-dev-install:
+	$(INSTALL_DIR) $(IDIR_DBUS_GLIB_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_DBUS_GLIB_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_DBUS_GLIB_DEV)/usr/lib/pkgconfig
+	${CP} $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_DBUS_GLIB_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

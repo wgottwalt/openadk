@@ -94,5 +94,8 @@ libmysqlclient-install:
 libmysqlclient-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT_DEV}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/mysql_config \
+		${IDIR_LIBMYSQLCLIENT_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
