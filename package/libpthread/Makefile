@@ -12,12 +12,18 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
+ifeq ($(ADK_NATIVE),y)
+PKG_VERSION:=		1.0
+PKG_RELEASE:=		1
+endif
 
 PKG_NAME:=		libpthread
 PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
 
 NO_DISTFILES:=		1
+
+PKG_SUBPKGS:=		LIBPTHREAD LIBPTHREAD_DEV
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -26,16 +32,23 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPTHREAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBPTHREAD_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-do-install:
+libpthread-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
-	cd $(IDIR_LIBPTHREAD)/lib && ln -sf libpthread.so.0 libpthread.so
+endif
+
+libpthread-dev-install:
+ifeq ($(ADK_NATIVE),)
+	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/usr/lib
+	${CP} ./files/libpthread.so.$(ARCH) ${IDIR_LIBPTHREAD}/usr/lib/libpthread.so
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_LIBPTHREAD}/usr/lib
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
