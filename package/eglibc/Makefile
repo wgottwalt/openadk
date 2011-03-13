@@ -70,7 +70,7 @@ ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib/
 endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib/
-	-for file in libc libcrypt libdl libm libresolv librt libnsl libutil libnss_dns libnss_files; do \
+	-for file in libc libcrypt libdl libm libresolv librt libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib/; \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib/; \
 	done
