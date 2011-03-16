@@ -28,6 +28,7 @@
 #include	<string.h>
 #include	<errno.h>
 #include	<stdlib.h>
+#include	<malloc.h>
 
 #include	"memalign.h"
 #include	"iblok.h"

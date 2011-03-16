@@ -49,6 +49,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>

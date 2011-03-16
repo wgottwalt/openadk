@@ -22,7 +22,8 @@
 /*	Sccsid @(#)sigrelse.c	1.8 (gritter) 1/22/06	*/
 
 #if defined (__FreeBSD__) || defined (__dietlibc__) || defined (__NetBSD__) || \
-	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__)
+	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__) || \
+	defined (__UCLIBC__)
 #include <signal.h>
 #include "sigset.h"
 
@@ -38,4 +39,4 @@ sigrelse(int sig)
 	return sigprocmask(SIG_UNBLOCK, &set, &oset);
 }
 #endif	/* __FreeBSD__ || __dietlibc__ || __NetBSD__ || __OpenBSD__ ||
-	__DragonFly__ || __APPLE__ */
+	__DragonFly__ || __APPLE__ || __UCLIBC__ */
