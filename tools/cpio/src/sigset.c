@@ -21,8 +21,10 @@
  */
 /*	Sccsid @(#)sigset.c	1.7 (gritter) 1/22/06	*/
 
+#include <features.h>
 #if defined (__FreeBSD__) || defined (__dietlibc__) || defined (__NetBSD__) || \
-	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__)
+	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__) || \
+	defined (__UCLIBC__)
 #include <signal.h>
 #include "sigset.h"
 
@@ -52,4 +54,4 @@ void (*sigset(int sig, void (*func)(int)))(int)
 		return (oact.sa_handler);
 }
 #endif	/* __FreeBSD__ || __dietlibc__ || __NetBSD__ || __OpenBSD__ ||
-	__DragonFly__ || __APPLE__ */
+	__DragonFly__ || __APPLE__ || __UCLIBC__ */

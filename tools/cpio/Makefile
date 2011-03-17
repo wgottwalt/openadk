@@ -5,8 +5,7 @@ include $(TOPDIR)/rules.mk
 
 install: ${TOOLS_DIR}/cpio
 
-SRCS+=		\
-		src/ib_open.c \
+SRCS:=		src/ib_open.c \
 		src/ib_close.c \
 		src/ib_read.c \
 		src/ib_alloc.c \
@@ -15,9 +14,7 @@ SRCS+=		\
 		src/sfile.c \
 		src/gmatch.c \
 		src/sigset.c \
-		src/memalign.c
-
-SRCS+=		\
+		src/memalign.c \
 		src/version.c \
 		src/blast.c \
 		src/crc32.c \
