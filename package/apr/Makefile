@@ -42,16 +42,18 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
+post-build:
+	# we need to patch paths to get apr-util compiling
+	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
+		${WRKBUILD}/apr-1-config
+	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," \
+		${WRKBUILD}/apr-1-config
+
 apr-install:
 	${INSTALL_DIR} ${IDIR_APR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libapr-1.so* ${IDIR_APR}/usr/lib/
 	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build-1
 	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_DIR}/usr/share/build-1/
-	# we need to patch paths to get apr-util compiling
-	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
-		${WRKINST}/usr/bin/apr-1-config
-	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," \
-		${WRKINST}/usr/bin/apr-1-config
 
 apr-dev-install:
 	${INSTALL_DIR} ${IDIR_APR_DEV}/usr/include
