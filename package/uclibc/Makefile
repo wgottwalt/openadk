@@ -24,30 +24,35 @@ BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
 # do nothing, uClibc is already build in toolchain directory
-do-install: $(STAGING_TARGET_DIR)/lib/libc.so
+do-install:
 	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
 	# create timezone file
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/lib
 endif
-	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so* $(IDIR_UCLIBC)/lib/
+	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/lib
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
-		$(IDIR_UCLIBC)/lib/
+		$(IDIR_UCLIBC)/lib
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
-		$(IDIR_UCLIBC)/lib/
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib/
-	-for file in libcrypt libdl libm libnsl libresolv librt libutil; do \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib/; \
+		$(IDIR_UCLIBC)/lib
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib
+	-for file in libcrypt libdl libm libresolv librt libutil; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib; \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
-			$(IDIR_UCLIBC)/lib/; \
+			$(IDIR_UCLIBC)/lib; \
 	done
 
 uclibc-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
+	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+		cd $(IDIR_UCLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+	done
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
 		headers_install
