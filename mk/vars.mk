@@ -150,6 +150,7 @@ PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
 			IPKG_CONF_DIR=$(STAGING_TARGET_DIR)/etc \
 			IPKG_OFFLINE_ROOT=$(TARGET_DIR) \
+			TOOLS_DIR=$(TOOLS_DIR) \
 			${BASH} ${SCRIPT_DIR}/ipkg \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg

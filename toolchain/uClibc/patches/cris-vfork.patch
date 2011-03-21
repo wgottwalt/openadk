@@ -1,0 +1,49 @@
+diff -Nur uClibc-0.9.32-rc2.orig/libc/sysdeps/linux/cris/Makefile.arch uClibc-0.9.32-rc2/libc/sysdeps/linux/cris/Makefile.arch
+--- uClibc-0.9.32-rc2.orig/libc/sysdeps/linux/cris/Makefile.arch	2011-01-20 15:49:47.000000000 +0100
++++ uClibc-0.9.32-rc2/libc/sysdeps/linux/cris/Makefile.arch	2011-02-07 23:01:26.000000000 +0100
+@@ -7,7 +7,7 @@
+ 
+ CSRC := __init_brk.c brk.c sbrk.c
+ 
+-SSRC := setjmp.S __longjmp.S clone.S sysdep.S syscall.S
++SSRC := setjmp.S __longjmp.S clone.S sysdep.S syscall.S vfork.S
+ ifeq ($(UNIFIED_SYSCALL),y)
+ SSRC += __uClibc_syscall.S
+ endif
+diff -Nur uClibc-0.9.32-rc2.orig/libc/sysdeps/linux/cris/vfork.S uClibc-0.9.32-rc2/libc/sysdeps/linux/cris/vfork.S
+--- uClibc-0.9.32-rc2.orig/libc/sysdeps/linux/cris/vfork.S	1970-01-01 01:00:00.000000000 +0100
++++ uClibc-0.9.32-rc2/libc/sysdeps/linux/cris/vfork.S	2011-02-08 00:39:10.000000000 +0100
+@@ -0,0 +1,33 @@
++/*
++ * vfork.S
++ *
++ * On cris, r9 contains the syscall number (set by generated stub);
++ * r10..r13 contain arguments 0-3 per the standard calling convention.
++ * The return address is in $srp; so we just need to avoid the stack
++ * usage of the normal syscall stubs.
++ */
++
++#include <asm/unistd.h>
++#include <sys/syscall.h>
++
++	.section ".text","ax"
++	.balign	4
++	.globl	__vfork
++	.type	__vfork,@function
++__vfork:
++	move.d	__NR_vfork, $r9
++	break	13
++
++	cmps.w	-4096,$r10
++	blo	1f
++	neg.d	$r10,$r11
++	move.d	$r11,[errno]
++	moveq	-1,$r10
++1:
++	ret
++	nop
++
++	.size	__vfork,.-__vfork
++
++weak_alias(__vfork,vfork)
++libc_hidden_weak(vfork)

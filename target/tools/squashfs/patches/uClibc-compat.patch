@@ -1,0 +1,24 @@
+diff -Nur squashfs4.0.orig/squashfs-tools/mksquashfs.c squashfs4.0/squashfs-tools/mksquashfs.c
+--- squashfs4.0.orig/squashfs-tools/mksquashfs.c	2009-04-05 23:22:48.000000000 +0200
++++ squashfs4.0/squashfs-tools/mksquashfs.c	2011-03-18 22:04:00.000000000 +0100
+@@ -3705,7 +3705,7 @@
+ 			processors = 1;
+ 		}
+ #else
+-		processors = get_nprocs();
++		processors = sysconf(_SC_NPROCESSORS_CONF);
+ #endif
+ 	}
+ 
+diff -Nur squashfs4.0.orig/squashfs-tools/unsquashfs.c squashfs4.0/squashfs-tools/unsquashfs.c
+--- squashfs4.0.orig/squashfs-tools/unsquashfs.c	2009-04-05 23:23:06.000000000 +0200
++++ squashfs4.0/squashfs-tools/unsquashfs.c	2011-03-18 22:03:31.000000000 +0100
+@@ -1811,7 +1811,7 @@
+ 			processors = 1;
+ 		}
+ #else
+-		processors = get_nprocs();
++		processors = sysconf(_SC_NPROCESSORS_CONF);
+ #endif
+ 	}
+ 
