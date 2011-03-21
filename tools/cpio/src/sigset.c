@@ -21,7 +21,7 @@
  */
 /*	Sccsid @(#)sigset.c	1.7 (gritter) 1/22/06	*/
 
-#include <features.h>
+#include <sys/param.h>
 #if defined (__FreeBSD__) || defined (__dietlibc__) || defined (__NetBSD__) || \
 	defined (__OpenBSD__) || defined (__DragonFly__) || defined (__APPLE__) || \
 	defined (__UCLIBC__)
