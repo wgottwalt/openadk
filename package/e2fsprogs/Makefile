@@ -58,9 +58,11 @@ MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 			BUILD_CPPFLAGS="${CPPFLAGS_FOR_BUILD}"
 
 post-build:
+ifeq ($(ADK_PACKAGE_E2FSCK_STATIC),y)
 	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
 	${INSTALL_DIR} ${WRKINST}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin
+endif
 
 e2fsprogs-install:
 	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
