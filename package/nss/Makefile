@@ -6,6 +6,9 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		nss
 PKG_VERSION:=		3.12.9
 PKG_RELEASE:=		1
+PKG_MAJ_VERSION:=	3
+PKG_MIN_VERSION:=	12
+PKG_PATCH_VERSION:=	9
 PKG_MD5SUM:=		bd32f183ca28440c1744650be31a9ccc
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
@@ -37,11 +40,18 @@ TARGET_LDFLAGS+=	-ldl -pthread
 
 XAKE_FLAGS+=		SOURCE_MD_DIR=${WRKDIST}/dist DIST=${WRKDIST}/dist
 XAKE_FLAGS+=		ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
-XAKE_FLAGS+=		OS_TEST=${CPU_ARCH} NSS_DISABLE_DBM=1 OS_TARGET=Linux OS_RELEASE=2.6 OS_ARCH=Linux
+XAKE_FLAGS+=		NSS_DISABLE_DBM=1 OS_TEST=${CPU_ARCH} OS_TARGET=Linux OS_RELEASE=2.6 OS_ARCH=Linux
 XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
 ALL_TARGET:=		build_coreconf all
 
 post-install:
+	$(INSTALL_DIR) $(WRKINST)/usr/lib/pkgconfig
+	sed 's/@VERSION@/$(PKG_VERSION)/' ./files/nss.pc.in > $(WRKINST)/usr/lib/pkgconfig/nss.pc
+	$(INSTALL_DIR) $(WRKINST)/usr/bin
+	sed -e 's/@MOD_MAJOR_VERSION@/$(PKG_MAJ_VERSION)/' \
+		-e 's/@MOD_MINOR_VERSION@/$(PKG_MIN_VERSION)/' \
+		-e 's/@MOD_PATCH_VERSION@/$(PKG_PATCH_VERSION)/' \
+		./files/nss-config.in > $(WRKINST)/usr/bin/nss-config
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
 	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3}.so \
 		$(IDIR_NSS)/usr/lib
