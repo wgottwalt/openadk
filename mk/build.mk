@@ -248,7 +248,7 @@ distclean:
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
@@ -477,7 +477,7 @@ distclean:
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(TOOLS_BUILD_DIR)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
 
 
