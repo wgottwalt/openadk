@@ -76,6 +76,7 @@ LANGUAGES:=${LANGUAGES},c++
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_JAVA),y)
 LANGUAGES:=${LANGUAGES},java
+GCC_CONFOPTS+=		--enable-java-home
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_ADA),y)
 LANGUAGES:=${LANGUAGES},ada
