@@ -14,11 +14,11 @@ clean: $(TARGETS_CLEAN)
 
 %-compile: $(TOOLS_BUILD_DIR)
 	$(TRACE) "tools/$(patsubst %-compile,%,$@)/compile "
-	$(MAKE) -C $(patsubst %-compile,%,$@) compile
+	$(MAKE) -C $(patsubst %-compile,%,$@) compile $(MAKE_TRACE)
 
 %-install:
 	$(TRACE) "tools/$(patsubst %-install,%,$@)/install "
-	$(MAKE) -C $(patsubst %-install,%,$@) install
+	$(MAKE) -C $(patsubst %-install,%,$@) install $(MAKE_TRACE)
 
 %-clean:
 	$(TRACE) "tools/$(patsubst %-clean,%,$@)/clean "
