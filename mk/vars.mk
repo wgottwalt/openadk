@@ -89,6 +89,7 @@ endif
 
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
 TARGET_CFLAGS+=		-flto
+TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
