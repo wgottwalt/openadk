@@ -1,17 +1,14 @@
-- rpath cleanup
-- mark c++ packages
+- enable and test gcj
+- port cacao 
+- port LXDE
+- port openjdk
 - add and test brcm 2.6 wireless support
 - man pages in ipkg/tgz packages (automatic)
 - automate /etc handling via conffiles
 - distcc evaluation
-- LTO GCC evaluation
 - fix qemu package
 - openssl ocf support check
 - new package minidlna
-- wget/curl/ftp download support
-- busybox update and SuSv3 removal
-- check rtc support on foxg20
-- adkinstall with NTP and hwclock support
 - PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, for no internet access
 - help text for config/ needs adoption

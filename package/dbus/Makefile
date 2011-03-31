@@ -27,6 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,DBUS_DEV,dbus-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBUS_DEV},${PKGSC_DBUS_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--without-x \

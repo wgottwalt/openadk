@@ -1,0 +1,14 @@
+--- cacao-0.99.4.orig/src/threads/posix/thread-posix.h	2008-08-04 18:51:28.000000000 +0200
++++ cacao-0.99.4/src/threads/posix/thread-posix.h	2011-03-26 20:12:13.000000000 +0100
+@@ -34,7 +34,11 @@ typedef struct threadobject threadobject
+ #include "config.h"
+ 
+ #include <pthread.h>
++#if defined(__DARWIN__)
++#include <sys/ucontext.h>
++#else
+ #include <ucontext.h>
++#endif
+ 
+ #include "vm/types.h"
+ 

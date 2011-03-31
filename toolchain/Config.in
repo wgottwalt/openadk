@@ -13,6 +13,7 @@ config ADK_TOOLCHAIN_GCC_CXX
 config ADK_TOOLCHAIN_GCC_JAVA
 	prompt "Enable building of GCJ (Java language support in GCC)"
 	boolean
+	select ADK_PACKAGE_LIBGCJ
 	default n
 
 #config ADK_TOOLCHAIN_GCC_OBJC

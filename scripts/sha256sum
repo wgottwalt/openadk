@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+if [ -x /usr/bin/sha256sum ]; then
+	/usr/bin/sha256sum "$@"
+else
+	tmp=$(mktemp -t yyy)
+	cat - > $tmp
+	shasum -a 256 "$@" $tmp
+fi

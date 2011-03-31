@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- ipsec-tools-0.7.2.orig/src/racoon/isakmp_xauth.c	2009-04-20 15:35:36.000000000 +0200
-+++ ipsec-tools-0.7.2/src/racoon/isakmp_xauth.c	2009-05-29 15:56:30.460377529 +0200
-@@ -585,7 +585,7 @@ PAM_conv(msg_count, msg, rsp, dontcare)
+--- ipsec-tools-0.8.0.orig/src/racoon/isakmp_xauth.c	2011-03-14 16:50:36.000000000 +0100
++++ ipsec-tools-0.8.0/src/racoon/isakmp_xauth.c	2011-03-31 13:23:58.351808486 +0200
+@@ -655,7 +655,7 @@ PAM_conv(msg_count, msg, rsp, dontcare)
  
  	if ((reply = racoon_malloc(sizeof(*reply) * msg_count)) == NULL) 
  		return PAM_CONV_ERR;

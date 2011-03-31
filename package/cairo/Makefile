@@ -27,6 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,CAIRO_DEV,cairo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CAIRO_DEV},${PKGSC_CAIRO_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-xlib=yes
 

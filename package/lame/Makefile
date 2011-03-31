@@ -19,12 +19,16 @@ PKGSC_LIBLAME:=		libs
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LAME,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBLAME},${PKGSC_LIBLAME}))
 
-post-install:
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+
+lame-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/lame $(IDIR_LAME)/usr/bin/
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/lame $(IDIR_LAME)/usr/bin
+
+liblame-install:
 	$(INSTALL_DIR) $(IDIR_LIBLAME)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libmp3lame.so* $(IDIR_LIBLAME)/usr/lib
 

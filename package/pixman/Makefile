@@ -24,9 +24,11 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PIXMAN_DEV,pixman-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PIXMAN_DEV},${PKGSC_PIXMAN_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+
 pixman-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpixman-1.so* ${IDIR_PIXMAN}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpixman-1.so* ${IDIR_PIXMAN}/usr/lib
 
 pixman-dev-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN_DEV}/usr/include

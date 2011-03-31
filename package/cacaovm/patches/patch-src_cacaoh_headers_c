@@ -1,0 +1,14 @@
+--- cacao-0.99.4.orig/src/cacaoh/headers.c	2008-08-04 18:51:28.000000000 +0200
++++ cacao-0.99.4/src/cacaoh/headers.c	2011-03-26 20:11:11.000000000 +0100
+@@ -35,8 +35,10 @@
+ #if defined(ENABLE_THREADS)
+ # if defined(__DARWIN__)
+ #  include <signal.h>
++#  include <sys/ucontext.h>
++# else
++#  include <ucontext.h>
+ # endif
+-# include <ucontext.h>
+ #endif
+ 
+ #include "mm/gc-common.h"

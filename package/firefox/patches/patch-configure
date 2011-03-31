@@ -1,52 +1,36 @@
---- mozilla-1.9.2.orig/configure	2010-12-03 16:57:11.000000000 +0100
-+++ mozilla-1.9.2/configure	2010-12-29 21:52:34.000000000 +0100
-@@ -3970,7 +3970,7 @@ else
-     echo "$ac_t""yes" 1>&6    
+--- mozilla-2.0.orig/configure	2011-03-19 00:48:56.000000000 +0100
++++ mozilla-2.0/configure	2011-03-28 12:25:19.041814743 +0200
+@@ -22573,15 +22573,6 @@ if test "${with_libIDL+set}" = set; then
  fi
  
--  for ac_prog in $PYTHON python2.5 python2.4 python
-+  for ac_prog in $PYTHON python2.6 python2.5 python2.4 python
- do
- # Extract the first word of "$ac_prog", so it can be a program name with args.
- set dummy $ac_prog; ac_word=$2
-@@ -5625,7 +5625,6 @@ DIRENT_INO=d_ino
- CYGWIN_WRAPPER=
- WIN_TOP_SRC=
- MOZ_USER_DIR=".mozilla"
--HOST_AR='$(AR)'
- HOST_AR_FLAGS='$(AR_FLAGS)'
  
- MOZ_JPEG_CFLAGS=
-@@ -17895,7 +17894,7 @@ echo "configure:17889: checking for SQLI
- else
-   
-         if test "$cross_compiling" = yes; then
--  ac_cv_sqlite_secure_delete=no
-+  ac_cv_sqlite_secure_delete=yes
-         
- else
-   cat > conftest.$ac_ext <<EOF
-@@ -21460,18 +21459,11 @@ fi
-     fi
- fi
- 
--if test -n "$CROSS_COMPILE"; then
--     if test -z "$HOST_LIBIDL_CONFIG"; then
+-if test -z "$CROSS_COMPILE"; then
+-    if test -z "$HOST_LIBIDL_CONFIG"; then
 -        HOST_LIBIDL_CONFIG="$LIBIDL_CONFIG"
 -    fi
--    if test -n "$HOST_LIBIDL_CONFIG" && test "$HOST_LIBIDL_CONFIG" != "no"; then
--        HOST_LIBIDL_CFLAGS=`${HOST_LIBIDL_CONFIG} --cflags`
--        HOST_LIBIDL_LIBS=`${HOST_LIBIDL_CONFIG} --libs`
--    else
--        HOST_LIBIDL_CFLAGS="$LIBIDL_CFLAGS"
--        HOST_LIBIDL_LIBS="$LIBIDL_LIBS"
+-    if test -z "$HOST_LIBIDL_PREFIX"; then
+-        HOST_LIBIDL_PREFIX="$LIBIDL_PREFIX"
 -    fi
 -fi
+-
+ if test "$SKIP_IDL_CHECK" = "no"
+ then
+     _LIBIDL_FOUND=
+@@ -22788,6 +22779,7 @@ fi
+      fi
+   fi
+ 
++
+   # Check whether --with-glib-prefix or --without-glib-prefix was given.
+ if test "${with_glib_prefix+set}" = set; then
+   withval="$with_glib_prefix"
+@@ -23542,6 +23534,9 @@ else
+     LIBIDL_LIBS="$HOST_LIBIDL_LIBS"
+ fi
+ 
 +HOST_LIBIDL_CFLAGS=`env PKG_CONFIG_LIBDIR=${PKG_HOSTLIB_DIR} ${BUILD_LIBIDL_CONFIG} --cflags`
 +HOST_LIBIDL_LIBS=`env PKG_CONFIG_LIBDIR=${PKG_HOSTLIB_DIR} ${BUILD_LIBIDL_CONFIG} --libs`
 +
-+echo "host libidl cflags: ${HOST_LIBIDL_CFLAGS}"
-+echo "host libidl libs: ${HOST_LIBIDL_LIBS}"
- 
  if test -z "$SKIP_PATH_CHECKS"; then
- if test -z "${GLIB_CFLAGS}" || test -z "${GLIB_LIBS}" ; then
+ if test -z "${GLIB_CFLAGS}" -o -z "${GLIB_LIBS}" ; then
+     if test "$MOZ_ENABLE_GTK2" -o "$USE_ELF_DYNSTR_GC" ; then
