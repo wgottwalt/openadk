@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		PERL="/usr/bin/perl" \
-			M4="/usr/bin/m4"
+			M4="m4"
 
 autoconf-install:
 	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/bin

@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.15
+PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
+PKG_MD5SUM:=		3468a2c463b4fc2788ba621e4b511c30
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
+PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify libpng
 PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -23,7 +23,7 @@ PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
-WRKDIST=		${WRKDIR}/mozilla-1.9.2
+WRKDIST=		${WRKDIR}/mozilla-2.0
 
 include $(TOPDIR)/mk/package.mk
 
@@ -47,11 +47,16 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_RANLIB="ranlib" HOST_AR="ar" \
 			CPPFLAGS="-I${STAGING_TARGET_DIR}/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
+			ac_cv_sqlite_threadsafe=yes \
+			ac_cv_sqlite_enable_fts3=yes \
+			ac_cv_sqlite_enable_unlock_notify=yes \
 			ac_cv_thread_keyword=no \
 			ac_cv_sizeof_int_p=4
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-official-branding \
 			--with-system-zlib \
+			--with-system-cairo \
+			--with-system-pixman \
 			--with-system-jpeg \
 			--with-system-png \
 			--with-system-nss \

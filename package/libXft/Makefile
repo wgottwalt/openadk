@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBXFT,libxft,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBXFT_DEV,libxft-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXFT_DEV},${PKGSC_LIBXFT_DEV}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull \
 			--disable-install-makestrs
 

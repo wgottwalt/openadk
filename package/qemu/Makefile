@@ -20,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--cross-prefix=$(TARGET_CROSS) \

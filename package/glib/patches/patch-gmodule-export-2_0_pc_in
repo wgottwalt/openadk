@@ -1,0 +1,10 @@
+--- glib-2.28.1.orig/gmodule-export-2.0.pc.in	2010-04-13 15:33:16.000000000 +0200
++++ glib-2.28.1/gmodule-export-2.0.pc.in	2011-03-25 19:49:59.000000000 +0100
+@@ -9,6 +9,6 @@ Name: GModule
+ Description: Dynamic module loader for GLib
+ Requires: glib-2.0
+ Version: @VERSION@
+-Libs: -L${libdir} @G_MODULE_LDFLAGS@ -lgmodule-2.0 @G_THREAD_LIBS@
++Libs: -L${libdir} -lgmodule-2.0 @G_THREAD_LIBS@
+ Libs.private: @G_MODULE_LIBS@
+ Cflags: @G_THREAD_CFLAGS@

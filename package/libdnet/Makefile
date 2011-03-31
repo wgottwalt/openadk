@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBDNET,libdnet,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDNET_DEV,libdnet-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBDNET_DEV},${PKGSC_LIBDNET_DEV}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_dnet_bsd_bpf=no
 CONFIGURE_ARGS+=	--without-check
 

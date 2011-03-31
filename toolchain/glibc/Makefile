@@ -31,7 +31,7 @@ GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
 	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-	ln -sf ../../w-glibc-ports-$(GLIBC_PORTS_VERSION)-1/glibc-ports-$(GLIBC_PORTS_VERSION)/ ports);
+	ln -sf ../../w-glibc-ports-$(PKG_VERSION)-1/glibc-ports-$(PKG_VERSION)/ ports);
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
@@ -70,10 +70,10 @@ $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) \
 		install_root=$(STAGING_TARGET_DIR) install
 	mkdir -p ${STAGING_TARGET_DIR}/etc
-	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
-	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
-	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
+	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc
+	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(WRKBUILD)/.installed
+	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

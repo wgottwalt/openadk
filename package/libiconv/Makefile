@@ -25,6 +25,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBICONV,libiconv,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBICONV_DEV,libiconv-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBICONV_DEV},${PKGSC_LIBICONV_DEV}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
 FAKE_FLAGS+=		libdir="${WRKINST}/usr/lib" \
 			includedir="${WRKINST}/usr/include" \
