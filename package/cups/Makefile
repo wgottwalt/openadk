@@ -43,7 +43,11 @@ CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--disable-ssl
 
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+XAKE_FLAGS+=		OPTIM='-fPIC -fstack-protector'
+else
 XAKE_FLAGS+=		OPTIM='-fPIC'
+endif
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin
