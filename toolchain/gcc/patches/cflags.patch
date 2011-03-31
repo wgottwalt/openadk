@@ -1,36 +1,18 @@
-
-	This patch brings over a few features from MirBSD:
-	* -fhonour-copts
-	  If this option is not given, it's warned (depending
-	  on environment variables). This is to catch errors
-	  of misbuilt packages which override CFLAGS themselves.
-	* -Werror-maybe-reset
-	  Has the effect of -Wno-error if GCC_NO_WERROR is
-	  set and not '0', a no-operation otherwise. This is
-	  to be able to use -Werror in "make" but prevent
-	  GNU autoconf generated configure scripts from
-	  freaking out.
-	* Make -fno-strict-aliasing and -fno-delete-null-pointer-checks
-	  the default for -O2/-Os, because they trigger gcc bugs
-	  and can delete code with security implications.
-
-	This patch was authored by Thorsten Glaser <tg at mirbsd.de>
-	with copyright assignment to the FSF in effect.
-
---- a/gcc/c-opts.c
-+++ b/gcc/c-opts.c
-@@ -105,6 +105,9 @@
+diff -Nur gcc-4.6.0.orig/gcc/c-family/c-opts.c gcc-4.6.0/gcc/c-family/c-opts.c
+--- gcc-4.6.0.orig/gcc/c-family/c-opts.c	2011-01-26 07:48:04.000000000 +0100
++++ gcc-4.6.0/gcc/c-family/c-opts.c	2011-03-31 15:46:52.000000000 +0200
+@@ -103,6 +103,9 @@
  /* Number of deferred options scanned for -include.  */
  static size_t include_cursor;
  
 +/* Check if a port honours COPTS.  */
 +static int honour_copts = 0;
 +
- static void set_Wimplicit (int);
  static void handle_OPT_d (const char *);
  static void set_std_cxx98 (int);
-@@ -454,6 +457,9 @@
-       enable_warning_as_error ("implicit-function-declaration", value, CL_C | CL_ObjC); 
+ static void set_std_cxx0x (int);
+@@ -441,6 +444,9 @@
+       global_dc->warning_as_error_requested = value;
        break;
  
 +    case OPT_Werror_maybe_reset:
@@ -39,20 +21,19 @@
      case OPT_Wformat:
        set_Wformat (value);
        break;
-@@ -690,6 +701,12 @@
-       flag_exceptions = value;
+@@ -653,6 +659,11 @@
+       visibility_options.inlines_hidden = value;
        break;
  
 +    case OPT_fhonour_copts:
-+      if (c_language == clk_c) {
-+	honour_copts++;
-+      }
++      if (c_language == clk_c)
++		honour_copts++;
 +      break;
 +
-     case OPT_fimplement_inlines:
-       flag_implement_inlines = value;
+     case OPT_femit_struct_debug_baseonly:
+       set_struct_debug_option (&global_options, loc, "base");
        break;
-@@ -1209,6 +1226,47 @@
+@@ -1058,6 +1069,47 @@
        return false;
      }
  
@@ -100,10 +81,11 @@
    return true;
  }
  
---- a/gcc/c.opt
-+++ b/gcc/c.opt
-@@ -215,6 +215,10 @@
- C ObjC RejectNegative Warning
+diff -Nur gcc-4.6.0.orig/gcc/c-family/c.opt gcc-4.6.0/gcc/c-family/c.opt
+--- gcc-4.6.0.orig/gcc/c-family/c.opt	2011-02-17 22:34:10.000000000 +0100
++++ gcc-4.6.0/gcc/c-family/c.opt	2011-03-31 15:40:46.000000000 +0200
+@@ -363,6 +363,10 @@
+ C ObjC RejectNegative Warning Alias(Werror=, implicit-function-declaration)
  This switch is deprecated; use -Werror=implicit-function-declaration instead
  
 +Werror-maybe-reset
@@ -113,9 +95,9 @@
  Wfloat-equal
  C ObjC C++ ObjC++ Var(warn_float_equal) Warning
  Warn if testing floating point numbers for equality
-@@ -609,6 +613,9 @@
+@@ -790,6 +794,9 @@
  fhonor-std
- C++ ObjC++
+ C++ ObjC++ Ignore Warn(switch %qs is no longer supported)
  
 +fhonour-copts
 +C ObjC C++ ObjC++ RejectNegative
@@ -123,9 +105,10 @@
  fhosted
  C ObjC
  Assume normal C execution environment
---- a/gcc/common.opt
-+++ b/gcc/common.opt
-@@ -102,6 +102,10 @@
+diff -Nur gcc-4.6.0.orig/gcc/common.opt gcc-4.6.0/gcc/common.opt
+--- gcc-4.6.0.orig/gcc/common.opt	2011-03-06 01:38:13.000000000 +0100
++++ gcc-4.6.0/gcc/common.opt	2011-03-31 15:40:46.000000000 +0200
+@@ -511,6 +511,10 @@
  Common Joined
  Treat specified warning as error
  
@@ -134,9 +117,9 @@
 +If environment variable GCC_NO_WERROR is set, act as -Wno-error
 +
  Wextra
- Common Warning
+ Common Var(extra_warnings) Warning
  Print extra (possibly unwanted) warnings
-@@ -573,6 +577,9 @@
+@@ -1147,6 +1151,9 @@
  Common Report Var(flag_guess_branch_prob) Optimization
  Enable guessing of branch probabilities
  
@@ -146,46 +129,9 @@
  ; Nonzero means ignore `#ident' directives.  0 means handle them.
  ; Generate position-independent code for executables if possible
  ; On SVR4 targets, it also controls whether or not to emit a
---- a/gcc/opts.c
-+++ b/gcc/opts.c
-@@ -896,8 +896,6 @@
-   flag_schedule_insns_after_reload = opt2;
- #endif
-   flag_regmove = opt2;
--  flag_strict_aliasing = opt2;
--  flag_strict_overflow = opt2;
-   flag_reorder_blocks = opt2;
-   flag_reorder_functions = opt2;
-   flag_tree_vrp = opt2;
-@@ -922,6 +919,8 @@
- 
-   /* -O3 optimizations.  */
-   opt3 = (optimize >= 3);
-+  flag_strict_aliasing = opt3;
-+  flag_strict_overflow = opt3;
-   flag_predictive_commoning = opt3;
-   flag_inline_functions = opt3;
-   flag_unswitch_loops = opt3;
-@@ -1601,6 +1601,17 @@
-       enable_warning_as_error (arg, value, lang_mask);
-       break;
- 
-+    case OPT_Werror_maybe_reset:
-+      {
-+	char *ev = getenv ("GCC_NO_WERROR");
-+	if ((ev != NULL) && (*ev != '0'))
-+	  warnings_are_errors = 0;
-+      }
-+      break;
-+
-+    case OPT_fhonour_copts:
-+      break;
-+
-     case OPT_Wlarger_than_:
-       /* This form corresponds to -Wlarger-than-. 
-          Kept for backward compatibility.
---- a/gcc/doc/cppopts.texi
-+++ b/gcc/doc/cppopts.texi
+diff -Nur gcc-4.6.0.orig/gcc/doc/cppopts.texi gcc-4.6.0/gcc/doc/cppopts.texi
+--- gcc-4.6.0.orig/gcc/doc/cppopts.texi	2010-12-20 08:26:12.000000000 +0100
++++ gcc-4.6.0/gcc/doc/cppopts.texi	2011-03-31 15:40:46.000000000 +0200
 @@ -164,6 +164,11 @@
  Make all warnings into hard errors.  Source code which triggers warnings
  will be rejected.
@@ -198,18 +144,19 @@
  @item -Wsystem-headers
  @opindex Wsystem-headers
  Issue warnings for code in system headers.  These are normally unhelpful
---- a/gcc/doc/invoke.texi
-+++ b/gcc/doc/invoke.texi
-@@ -234,7 +234,7 @@
- -Wconversion  -Wcoverage-mismatch  -Wno-deprecated  @gol
+diff -Nur gcc-4.6.0.orig/gcc/doc/invoke.texi gcc-4.6.0/gcc/doc/invoke.texi
+--- gcc-4.6.0.orig/gcc/doc/invoke.texi	2011-03-18 15:34:52.000000000 +0100
++++ gcc-4.6.0/gcc/doc/invoke.texi	2011-03-31 15:41:41.000000000 +0200
+@@ -240,7 +240,7 @@
+ -Wconversion  -Wcoverage-mismatch  -Wcpp  -Wno-deprecated  @gol
  -Wno-deprecated-declarations -Wdisabled-optimization  @gol
- -Wno-div-by-zero -Wempty-body  -Wenum-compare -Wno-endif-labels @gol
---Werror  -Werror=* @gol
-+-Werror  -Werror=* -Werror-maybe-reset @gol
+ -Wno-div-by-zero -Wdouble-promotion -Wempty-body  -Wenum-compare @gol
+--Wno-endif-labels -Werror  -Werror=* @gol
++-Wno-endif-labels -Werror  -Werror=* -Werror-maybe-reset @gol
  -Wfatal-errors  -Wfloat-equal  -Wformat  -Wformat=2 @gol
  -Wno-format-contains-nul -Wno-format-extra-args -Wformat-nonliteral @gol
  -Wformat-security  -Wformat-y2k @gol
-@@ -4161,6 +4161,22 @@
+@@ -4488,6 +4488,22 @@
  @option{-Wall} and by @option{-pedantic}, which can be disabled with
  @option{-Wno-pointer-sign}.
  
@@ -232,7 +179,7 @@
  @item -Wstack-protector
  @opindex Wstack-protector
  @opindex Wno-stack-protector
-@@ -5699,7 +5715,7 @@
+@@ -6310,7 +6326,7 @@
  second branch or a point immediately following it, depending on whether
  the condition is known to be true or false.
  
@@ -241,9 +188,10 @@
  
  @item -fsplit-wide-types
  @opindex fsplit-wide-types
---- a/gcc/java/jvspec.c
-+++ b/gcc/java/jvspec.c
-@@ -670,6 +670,7 @@
+diff -Nur gcc-4.6.0.orig/gcc/java/jvspec.c gcc-4.6.0/gcc/java/jvspec.c
+--- gcc-4.6.0.orig/gcc/java/jvspec.c	2011-02-13 20:20:01.000000000 +0100
++++ gcc-4.6.0/gcc/java/jvspec.c	2011-03-31 15:40:46.000000000 +0200
+@@ -627,6 +627,7 @@
       class name.  Append dummy `.c' that can be stripped by set_input so %b
       is correct.  */ 
    set_input (concat (main_class_name, "main.c", NULL));
@@ -251,3 +199,42 @@
    err = do_spec (jvgenmain_spec);
    if (err == 0)
      {
+diff -Nur gcc-4.6.0.orig/gcc/opts.c gcc-4.6.0/gcc/opts.c
+--- gcc-4.6.0.orig/gcc/opts.c	2011-02-17 23:51:57.000000000 +0100
++++ gcc-4.6.0/gcc/opts.c	2011-03-31 15:43:52.000000000 +0200
+@@ -477,8 +477,6 @@
+     { OPT_LEVELS_2_PLUS, OPT_fschedule_insns2, NULL, 1 },
+ #endif
+     { OPT_LEVELS_2_PLUS, OPT_fregmove, NULL, 1 },
+-    { OPT_LEVELS_2_PLUS, OPT_fstrict_aliasing, NULL, 1 },
+-    { OPT_LEVELS_2_PLUS, OPT_fstrict_overflow, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_freorder_blocks, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_freorder_functions, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_ftree_vrp, NULL, 1 },
+@@ -501,6 +499,8 @@
+     { OPT_LEVELS_3_PLUS_AND_SIZE, OPT_finline_functions, NULL, 1 },
+     { OPT_LEVELS_3_PLUS, OPT_funswitch_loops, NULL, 1 },
+     { OPT_LEVELS_3_PLUS, OPT_fgcse_after_reload, NULL, 1 },
++    { OPT_LEVELS_3_PLUS, OPT_fstrict_aliasing, NULL, 1 },
++    { OPT_LEVELS_3_PLUS, OPT_fstrict_overflow, NULL, 1 },
+     { OPT_LEVELS_3_PLUS, OPT_ftree_vectorize, NULL, 1 },
+     { OPT_LEVELS_3_PLUS, OPT_fipa_cp_clone, NULL, 1 },
+ 
+@@ -1399,6 +1399,17 @@
+ 			       opts, opts_set, loc, dc);
+       break;
+ 
++    case OPT_Werror_maybe_reset:
++      {
++	char *ev = getenv ("GCC_NO_WERROR");
++	if ((ev != NULL) && (*ev != '0'))
++	  warnings_are_errors = 0;
++      }
++      break;
++
++    case OPT_fhonour_copts:
++      break;
++
+     case OPT_Wlarger_than_:
+       opts->x_larger_than_size = value;
+       opts->x_warn_larger_than = value != -1;
