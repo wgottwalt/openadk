@@ -10,11 +10,11 @@ config ADK_TOOLCHAIN_GCC_CXX
 	boolean
 	default y
 
-#config ADK_TOOLCHAIN_GCC_JAVA
-#	prompt "Enable building of GCJ (Java language support in GCC)"
-#	boolean
-#	default n
-#
+config ADK_TOOLCHAIN_GCC_JAVA
+	prompt "Enable building of GCJ (Java language support in GCC)"
+	boolean
+	default n
+
 #config ADK_TOOLCHAIN_GCC_OBJC
 #	prompt "Enable building of Objective C compiler"
 #	boolean
