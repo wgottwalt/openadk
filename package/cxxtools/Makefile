@@ -24,7 +24,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CXXTOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,CXXTOOLS_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++ -Wl,-E

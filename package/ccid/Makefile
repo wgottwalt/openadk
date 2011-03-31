@@ -19,7 +19,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CCID,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-twinserial
 
 post-install:

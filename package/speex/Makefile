@@ -18,7 +18,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--without-ogg --disable-oggtest --enable-fixed-point
 XAKE_FLAGS+=		bin_PROGRAMS=""
 

@@ -19,9 +19,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-TARGET_CXXFLAGS:=	$(filter-out -flto,$(TARGET_CXXFLAGS))
-
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 TARGET_LDFLAGS+=	-lssp
 endif

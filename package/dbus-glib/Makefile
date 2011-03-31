@@ -23,7 +23,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DBUS_GLIB,dbus-glib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBUS_GLIB_DEV,dbus-glib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBUS_GLIB_DEV},${PKGSC_DBUS_GLIB_DEV}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-checks
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 

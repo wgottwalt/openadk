@@ -25,8 +25,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,APR,apr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,APR_DEV,apr-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_APR_DEV},${PKGSC_APR_DEV}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ENV+=		ac_cv_sizeof_size_t=4

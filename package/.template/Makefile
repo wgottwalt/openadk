@@ -41,7 +41,7 @@ PKG_SITES:=		add download url without package name
 #PKGFB_WITH_SSL:=	openssl
 
 # define your choices for your package here, f.e. different SSL implementations
-#PKG_CHOICES_PKGNAME:=	WITH_OPENSSL WITH_GNUTLS
+#PKG_CHOICES:=		WITH_OPENSSL WITH_GNUTLS
 # package description for each choice
 #PKGCD_WITH_OPENSSL:=	SSL support via OpenSSL library
 #PKGCD_WITH_GNUTLS:=	SSL support via GNUTLS library
@@ -57,7 +57,7 @@ PKG_SITES:=		add download url without package name
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,@UPKG@,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 #CONFIG_STYLE:=		manual
 # use following to add ./configure options
@@ -68,7 +68,7 @@ $(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPE
 #INSTALL_STYLE:=	manual
 
 # please install all files and directories to the package dir
-@PKG@-install:
+post-install:
 	$(INSTALL_DIR) $(IDIR_@UPKG@)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/@PKG@ \
 		$(IDIR_@UPKG@)/usr/bin

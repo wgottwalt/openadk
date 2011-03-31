@@ -22,8 +22,6 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \
 		${TARGET_CONFIGURE_OPTS} \

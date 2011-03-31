@@ -12,8 +12,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPFR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 post-install:
 	${INSTALL_DIR} ${IDIR_MPFR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmpfr.so* ${IDIR_MPFR}/usr/lib/

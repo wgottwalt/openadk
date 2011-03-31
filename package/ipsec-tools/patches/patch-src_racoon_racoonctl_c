@@ -1,6 +1,7 @@
---- ipsec-tools-0.8.0.orig/src/racoon/racoonctl.c	2010-11-12 10:08:26.000000000 +0100
-+++ ipsec-tools-0.8.0/src/racoon/racoonctl.c	2011-03-31 13:24:13.201808233 +0200
-@@ -693,7 +693,7 @@ f_vpnc(ac, av)
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ipsec-tools-0.7.2.orig/src/racoon/racoonctl.c	2009-04-20 15:32:57.000000000 +0200
++++ ipsec-tools-0.7.2/src/racoon/racoonctl.c	2009-05-29 15:57:45.600377208 +0200
+@@ -785,7 +785,7 @@ f_vpnc(ac, av)
  		errx(1, "cannot read source address");
  
  	/* We get "ip[port]" strip the port */

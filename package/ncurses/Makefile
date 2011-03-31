@@ -64,7 +64,7 @@ pre-configure:
 	find ${WRKBUILD} -name *.o -exec rm {} \;
 	find ${WRKBUILD} -name *.a -exec rm {} \;
 
-libncurses-install:
+post-install:
 	# this is installed as libncurses - make libcurses a "link"
 	rm -f ${WRKINST}/usr/lib/libcurses.so*
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so

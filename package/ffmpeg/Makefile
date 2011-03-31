@@ -27,8 +27,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FFMPEG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)
 CONFIGURE_CPU_OPTS:=	--enable-mmx
 else

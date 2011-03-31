@@ -24,7 +24,7 @@ include $(TOPDIR)/mk/python.mk
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
 xcb-proto-install:
-	${INSTALL_DIR} ${IDIR_XCB_PROTO}/usr/share
+	${INSTALL_DIR} ${IDIR_XCB_PROTO}/usr/share/
 	${CP} ${WRKINST}/usr/share/xcb ${IDIR_XCB_PROTO}/usr/share
 	${INSTALL_DIR} ${STAGING_DIR}/usr/share/xcb
 	${CP} ${WRKINST}/usr/share/xcb/* ${STAGING_DIR}/usr/share/xcb

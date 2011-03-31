@@ -35,8 +35,6 @@ $(eval $(call PKG_template,MESALIB_DEV,mesalib-dev,$(PKG_VERSION)-${PKG_RELEASE}
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif

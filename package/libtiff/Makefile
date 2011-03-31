@@ -26,7 +26,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBTIFF_DEV,libtiff-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBTIFF_DEV},${PKGSC_LIBTIFF_DEV},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-cxx \
 			--disable-rpath
 

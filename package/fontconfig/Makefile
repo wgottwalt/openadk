@@ -27,7 +27,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,FONTCONFIG,fontconfig,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,FONTCONFIG_DEV,fontconfig-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FONTCONFIG_DEV},${PKGSC_FONTCONFIG_DEV},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-liconv
 CONFIGURE_ARGS+=	--with-arch=${ARCH} \
 			--disable-docs

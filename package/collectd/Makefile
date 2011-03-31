@@ -100,7 +100,6 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--without-libiptc \
 			--with-nan-emulation
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 XAKE_FLAGS+=		LIBS='-lm'
 
 post-install:

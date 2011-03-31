@@ -58,9 +58,5 @@ post-install:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
 	${INSTALL_DATA} ${WRKDIST}/mozilla/dist/public/nss/* \
 		${STAGING_TARGET_DIR}/usr/include/nss
-	# needed for firefox 4
-	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/lib
-	$(INSTALL_DATA) ${WRKDIST}/dist/lib/libcrmf.a \
-		${STAGING_TARGET_DIR}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -112,8 +112,8 @@ if ! which gzip >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which lzma >/dev/null 2>&1 && ! which xz >/dev/null 2>&1; then
-	echo You must install lzma or xz-utils to continue.
+if ! which lzma >/dev/null 2>&1; then
+	echo You must install lzma to continue.
 	echo
 	out=1
 fi

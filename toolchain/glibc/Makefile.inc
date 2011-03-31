@@ -2,13 +2,15 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		glibc
-PKG_VERSION:=		2.13
+PKG_VERSION:=		2.12.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fafabe01cb9748acb0a11a6879ebaa7e
+PKG_MD5SUM:=		a8e77cd873125d9b46ca2e46ee1a13d0
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
+GLIBC_PORTS_VERSION:=	2.12
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
+			--disable-nls \
 			--disable-sanity-checks \
 			--disable-nls \
 			--without-cvs \

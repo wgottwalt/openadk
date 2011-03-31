@@ -38,7 +38,6 @@ $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL}))
 $(eval $(call PKG_template,LIBHEIMDAL_CLIENT,libheimdal-client,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL_CLIENT},${PKGSC_LIBHEIMDAL_CLIENT}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
 			--disable-ndbm-db \

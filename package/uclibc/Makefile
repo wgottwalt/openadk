@@ -46,10 +46,10 @@ endif
 	done
 
 uclibc-dev-install:
-	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib ${IDIR_UCLIBC_DEV}/lib
+	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_DEV}/usr/lib
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
 	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
 		cd $(IDIR_UCLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done

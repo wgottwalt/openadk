@@ -26,8 +26,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PANGO_DEV,pango-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PANGO_DEV},${PKGSC_PANGO_DEV},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-
 pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
 	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.6.0/modules

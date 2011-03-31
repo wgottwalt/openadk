@@ -1,6 +1,7 @@
---- ipsec-tools-0.8.0.orig/configure	2011-03-18 14:27:41.000000000 +0100
-+++ ipsec-tools-0.8.0/configure	2011-03-31 13:16:18.091819156 +0200
-@@ -11535,7 +11535,7 @@ $as_echo "$ac_cv_path_EGREP" >&6; }
+$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
+--- ipsec-tools-0.7.2.orig/configure	2009-04-21 16:41:45.000000000 +0200
++++ ipsec-tools-0.7.2/configure	2009-05-29 15:28:06.991791782 +0200
+@@ -11963,7 +11963,7 @@ echo "${ECHO_T}$ac_cv_path_EGREP" >&6; }
  
  
  
@@ -9,30 +10,3 @@
  
  case $host in
  *netbsd*)
-@@ -12286,7 +12286,7 @@ $as_echo "$as_me: WARNING: Using a gener
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking if printf accepts %z" >&5
- $as_echo_n "checking if printf accepts %z... " >&6; }
- saved_CFLAGS=$CFLAGS
--CFLAGS="$CFLAGS -Wall -Werror"
-+CFLAGS="$CFLAGS -Wall"
- cat confdefs.h - <<_ACEOF >conftest.$ac_ext
- /* end confdefs.h.  */
- 
-@@ -13739,7 +13739,7 @@ $as_echo "#define HAVE_LIBLDAP /**/" >>c
- 	LIBS="$LIBS -L$libldap_dir/lib -R$libldap_dir/lib -lldap"
- 
- 	saved_CFLAGS=$CFLAGS
--	CFLAGS="$CFLAGS -Wall -Werror"
-+	CFLAGS="$CFLAGS -Wall"
- 	saved_CPPFLAGS=$CPPFLAGS
-         CPPFLAGS="$CPPFLAGS $CPPFLAGS_ADD"
- 	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-@@ -13852,7 +13852,7 @@ $as_echo "#define HAVE_GSSAPI /**/" >>co
- 
- 	# Check if iconv 2nd argument needs const
- 	saved_CFLAGS=$CFLAGS
--	CFLAGS="$CFLAGS -Wall -Werror"
-+	CFLAGS="$CFLAGS -Wall"
- 	saved_CPPFLAGS=$CPPFLAGS
-         CPPFLAGS="$CPPFLAGS $CPPFLAGS_ADD"
- 	ac_fn_c_check_header_mongrel "$LINENO" "iconv.h" "ac_cv_header_iconv_h" "$ac_includes_default"
