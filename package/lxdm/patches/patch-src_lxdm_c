@@ -1,0 +1,43 @@
+--- lxdm-0.3.0.orig/src/lxdm.c	2010-09-24 17:43:49.000000000 +0200
++++ lxdm-0.3.0/src/lxdm.c	2011-03-17 23:15:35.093370316 +0100
+@@ -51,8 +51,6 @@
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
+ 
+-#include <execinfo.h>
+-
+ #include <utmp.h>
+ 
+ #if HAVE_LIBPAM
+@@ -150,6 +148,7 @@ void stop_pid(int pid)
+     while( waitpid(-1, 0, WNOHANG) > 0 ) ;
+ }
+ 
++#if HAVE_LIBPAM
+ static void close_pam_session(pam_handle_t *pamh)
+ {
+     int err;
+@@ -159,6 +158,7 @@ static void close_pam_session(pam_handle
+     pam_end(pamh, err);
+     pamh = NULL;
+ }
++#endif
+ 
+ static LXSession *lxsession_find_greeter(void)
+ {
+@@ -1480,6 +1480,7 @@ int lxdm_do_auto_login(void)
+ 
+ static void log_sigsegv(void)
+ {
++/*
+ 	void *array[40];
+ 	size_t size;
+ 	char **bt_strs;
+@@ -1492,6 +1493,7 @@ static void log_sigsegv(void)
+ 	    fprintf(stderr, "%s\n", bt_strs[i]);
+ 
+ 	free(bt_strs);
++*/
+ }
+ 
+ static void sigsegv_handler(int sig)

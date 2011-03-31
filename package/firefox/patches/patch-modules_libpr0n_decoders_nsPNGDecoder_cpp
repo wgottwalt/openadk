@@ -1,0 +1,12 @@
+--- mozilla-2.0.orig/modules/libpr0n/decoders/nsPNGDecoder.cpp	2011-03-19 00:34:02.000000000 +0100
++++ mozilla-2.0/modules/libpr0n/decoders/nsPNGDecoder.cpp	2011-03-27 22:30:41.783370593 +0200
+@@ -386,7 +386,8 @@ PNGGetColorProfile(png_structp png_ptr, 
+   // First try to see if iCCP chunk is present
+   if (png_get_valid(png_ptr, info_ptr, PNG_INFO_iCCP)) {
+     png_uint_32 profileLen;
+-    char *profileData, *profileName;
++    png_byte *profileData;
++    char *profileName;
+     int compression;
+ 
+     png_get_iCCP(png_ptr, info_ptr, &profileName, &compression,
