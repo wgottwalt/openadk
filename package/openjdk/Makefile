@@ -62,8 +62,7 @@ do-extract:
 
 pre-configure:
 	(cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
-		export PATH="${PATH}:${STAGING_JAVA_HOST_DIR}/usr/bin"; \
-		export CLASSPATH="${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar:${STAGING_JAVA_HOST_DIR}/usr/share/java/ecj.jar";\
+		env JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
 		./configure \
 			--enable-bootstrap \
 			--enable-zero \

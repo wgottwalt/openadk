@@ -1,6 +1,7 @@
 --- w-openjdk-6-1.orig/icedtea6-1.10/configure	2011-03-02 20:48:44.321157333 +0100
-+++ w-openjdk-6-1/icedtea6-1.10/configure	2011-04-01 16:12:33.091819347 +0200
-@@ -10803,25 +10803,9 @@ else
++++ w-openjdk-6-1/icedtea6-1.10/configure	2011-03-28 15:30:08.791808629 +0200
+@@ -10805,22 +10805,6 @@ fi
+ 
  
  
 -for ac_header in cups/cups.h cups/ppd.h
@@ -19,10 +20,9 @@
 -fi
 -
 -done
--
+ 
  for ac_header in X11/X.h
  do :
-   ac_fn_c_check_header_mongrel "$LINENO" "X11/X.h" "ac_cv_header_X11_X_h" "$ac_includes_default"
 @@ -10879,46 +10863,6 @@ else
    as_fn_error $? "\"libjpeg not found - try installing libjpeg-devel\"" "$LINENO" 5
  fi
@@ -70,7 +70,164 @@
  
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for main in -lz" >&5
  $as_echo_n "checking for main in -lz... " >&6; }
-@@ -11271,83 +11215,6 @@ fi
+@@ -11040,156 +10984,9 @@ fi
+ 
+ 
+ 
+-pkg_failed=no
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for XT" >&5
+-$as_echo_n "checking for XT... " >&6; }
+-
+-if test -n "$XT_CFLAGS"; then
+-    pkg_cv_XT_CFLAGS="$XT_CFLAGS"
+- elif test -n "$PKG_CONFIG"; then
+-    if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"xt\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "xt") 2>&5
+-  ac_status=$?
+-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+-  test $ac_status = 0; }; then
+-  pkg_cv_XT_CFLAGS=`$PKG_CONFIG --cflags "xt" 2>/dev/null`
+-else
+-  pkg_failed=yes
+-fi
+- else
+-    pkg_failed=untried
+-fi
+-if test -n "$XT_LIBS"; then
+-    pkg_cv_XT_LIBS="$XT_LIBS"
+- elif test -n "$PKG_CONFIG"; then
+-    if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"xt\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "xt") 2>&5
+-  ac_status=$?
+-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+-  test $ac_status = 0; }; then
+-  pkg_cv_XT_LIBS=`$PKG_CONFIG --libs "xt" 2>/dev/null`
+-else
+-  pkg_failed=yes
+-fi
+- else
+-    pkg_failed=untried
+-fi
+-
+-
+-
+-if test $pkg_failed = yes; then
+-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; }
+-
+-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+-        _pkg_short_errors_supported=yes
+-else
+-        _pkg_short_errors_supported=no
+-fi
+-        if test $_pkg_short_errors_supported = yes; then
+-	        XT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "xt" 2>&1`
+-        else
+-	        XT_PKG_ERRORS=`$PKG_CONFIG --print-errors "xt" 2>&1`
+-        fi
+-	# Put the nasty error message in config.log where it belongs
+-	echo "$XT_PKG_ERRORS" >&5
+-
+-	XT_FOUND=no
+-elif test $pkg_failed = untried; then
+-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; }
+-	XT_FOUND=no
+-else
+-	XT_CFLAGS=$pkg_cv_XT_CFLAGS
+-	XT_LIBS=$pkg_cv_XT_LIBS
+-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+-$as_echo "yes" >&6; }
+-	XT_FOUND=yes
+-fi
+-if test "x${XT_FOUND}" = xno
+-then
+-  as_fn_error $? "Could not find Xt - \
+-  Try installing libXt-devel." "$LINENO" 5
+-fi
+-
+-
+-
+-
+-pkg_failed=no
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for XP" >&5
+-$as_echo_n "checking for XP... " >&6; }
+-
+-if test -n "$XP_CFLAGS"; then
+-    pkg_cv_XP_CFLAGS="$XP_CFLAGS"
+- elif test -n "$PKG_CONFIG"; then
+-    if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"xp\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "xp") 2>&5
+-  ac_status=$?
+-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+-  test $ac_status = 0; }; then
+-  pkg_cv_XP_CFLAGS=`$PKG_CONFIG --cflags "xp" 2>/dev/null`
+-else
+-  pkg_failed=yes
+-fi
+- else
+-    pkg_failed=untried
+-fi
+-if test -n "$XP_LIBS"; then
+-    pkg_cv_XP_LIBS="$XP_LIBS"
+- elif test -n "$PKG_CONFIG"; then
+-    if test -n "$PKG_CONFIG" && \
+-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"xp\""; } >&5
+-  ($PKG_CONFIG --exists --print-errors "xp") 2>&5
+-  ac_status=$?
+-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+-  test $ac_status = 0; }; then
+-  pkg_cv_XP_LIBS=`$PKG_CONFIG --libs "xp" 2>/dev/null`
+-else
+-  pkg_failed=yes
+-fi
+- else
+-    pkg_failed=untried
+-fi
+-
+-
+ 
+-if test $pkg_failed = yes; then
+-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; }
+ 
+-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+-        _pkg_short_errors_supported=yes
+-else
+-        _pkg_short_errors_supported=no
+-fi
+-        if test $_pkg_short_errors_supported = yes; then
+-	        XP_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "xp" 2>&1`
+-        else
+-	        XP_PKG_ERRORS=`$PKG_CONFIG --print-errors "xp" 2>&1`
+-        fi
+-	# Put the nasty error message in config.log where it belongs
+-	echo "$XP_PKG_ERRORS" >&5
+ 
+-	XP_FOUND=no
+-elif test $pkg_failed = untried; then
+-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; }
+-	XP_FOUND=no
+-else
+-	XP_CFLAGS=$pkg_cv_XP_CFLAGS
+-	XP_LIBS=$pkg_cv_XP_LIBS
+-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+-$as_echo "yes" >&6; }
+-	XP_FOUND=yes
+-fi
+-if test "x${XP_FOUND}" = xno
+-then
+-  as_fn_error $? "Could not find Xp - \
+-  Try installing libXp-devel." "$LINENO" 5
+-fi
+ 
+ 
+ 
+@@ -11271,83 +11068,6 @@ fi
  
  
  
@@ -154,7 +311,7 @@
  if test "x${ENABLE_XRENDER}" = "xyes"
  then
  
-@@ -11610,79 +11477,6 @@ fi
+@@ -11610,79 +11330,6 @@ fi
  
  
  
@@ -234,7 +391,7 @@
  
  
  
-@@ -11764,85 +11558,6 @@ fi
+@@ -11764,85 +11411,6 @@ fi
  
  
  
