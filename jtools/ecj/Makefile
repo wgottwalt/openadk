@@ -13,7 +13,9 @@ include ../rules.mk
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
-	$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj -g -static -O2 -m64 -Wl,-Bsymbolic -findirect-dispatch \
+	env LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
+	PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$$PATH \
+	$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj -g -O2 -Wl,-Bsymbolic -findirect-dispatch \
 		-o ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj --main=org.eclipse.jdt.internal.compiler.batch.Main \
 		$(TOPDIR)/jtools_build/gcc-4.5.2/ecj.jar
 	$(CP) $(TOPDIR)/jtools_build/gcc-4.5.2/ecj.jar ${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar

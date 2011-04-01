@@ -14,7 +14,7 @@ include ../rules.mk
 install: ${STAGING_JAVA_HOST_DIR}/usr/share/classpath/glibj.zip
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
-	(cd $(WRKBUILD); ./configure --prefix=/usr \
+	(cd $(WRKBUILD); ./configure --prefix=${STAGING_JAVA_HOST_DIR}/usr \
 		--disable-local-sockets \
 		--disable-alsa \
 		--disable-gconf-peer \
@@ -31,6 +31,6 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
 	touch $@
 
 ${STAGING_JAVA_HOST_DIR}/usr/share/classpath/glibj.zip: $(WRKBUILD)/.compiled
-	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install
+	${MAKE} -C ${WRKBUILD} install
 
 include $(TOPDIR)/mk/tools.mk
