@@ -3,7 +3,10 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio
+TARGETS:=
+ifneq ($(ADK_PACKAGE_OPENJDK),)
+TARGETS+=fastjar gcj classpath jamvm ecj
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
@@ -14,13 +17,13 @@ install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 
 %-compile: $(TOOLS_BUILD_DIR)
-	$(TRACE) "tools/$(patsubst %-compile,%,$@)/compile "
+	$(TRACE) "jtools/$(patsubst %-compile,%,$@)/compile "
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
 
 %-install:
-	$(TRACE) "tools/$(patsubst %-install,%,$@)/install "
+	$(TRACE) "jtools/$(patsubst %-install,%,$@)/install "
 	$(MAKE) -C $(patsubst %-install,%,$@) install
 
 %-clean:
-	$(TRACE) "tools/$(patsubst %-clean,%,$@)/clean "
+	$(TRACE) "jtools/$(patsubst %-clean,%,$@)/clean "
 	$(MAKE) -C $(patsubst %-clean,%,$@) clean

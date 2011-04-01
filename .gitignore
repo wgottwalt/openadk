@@ -26,6 +26,7 @@
 /all.config
 /target_*/
 /host_*/
+/jhost/
 /pkg_*/
 /root_*/
 /bin/
@@ -40,6 +41,7 @@
 /package/*/Config.in.lib
 /package/*/Config.in.kmod
 /tools_build/
+/jtools_build/
 /extra/
 /.menu
 /target/*/Config.in.systems
