@@ -30,6 +30,8 @@ ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp
 endif
 
+CONFIGURE_ARGS+=	--disable-xinerama
+
 ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
 CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
