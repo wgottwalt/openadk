@@ -34,7 +34,7 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
 			$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz \
 			jaxp144_01.zip \
 			jdk6-jaf-b20.zip \
-			jdk6-jaxws-b20.zip
+			jdk6-jaxws-b20.zip \
 			${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 NO_DISTFILES:=		1
 WRKDIST=		${WRKDIR}
@@ -81,27 +81,29 @@ do-extract:
 
 pre-configure:
 	cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
-		env JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
-		DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
-		LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
-		./configure \
-			--enable-bootstrap \
-			--enable-zero \
-			--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
-			--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
-			--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
-			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
-			--with-openjdk-src-dir=$(WRKBUILD)/$(PKG_NAME)-$(PKG_VERSION) \
-			--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
-			--disable-docs \
-			--disable-openjdk-cross-compilation \
-			--with-xalan2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
-			--with-xalan2-serializer-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
-			--with-xerces2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
-			--without-rhino \
-			--disable-xrender \
-			--disable-nss \
-		&& ${MAKE}
+	export \
+	    JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
+	    DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
+	    LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
+	    ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
+	; ./configure \
+		--enable-bootstrap \
+		--enable-zero \
+		--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
+		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
+		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
+		--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+		--with-openjdk-src-dir=$(WRKBUILD)/$(PKG_NAME)-$(PKG_VERSION) \
+		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
+		--disable-docs \
+		--disable-openjdk-cross-compilation \
+		--with-xalan2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+		--with-xalan2-serializer-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+		--with-xerces2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
+		--without-rhino \
+		--disable-xrender \
+		--disable-nss \
+	&& ${MAKE}
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin
