@@ -13,13 +13,20 @@ PKG_SECTION:=		lang
 PKG_BUILDDEP:=		xproto jpeg zlib libX11 libpng freetype
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
+			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
 			http://icedtea.classpath.org/download/source/
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
 ICEDTEA_VERSION:=	1.10
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz $(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
+# bootstrap JARs
+XALAN_NAME=		xalan-j
+XALAN_VERSION=		2_7_0
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
+			$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz \
+			${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 NO_DISTFILES:=		1
 WRKDIST=		${WRKDIR}
 
@@ -48,9 +55,9 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--enable-bootstrap \
 			--disable-openjdk-cross-compilation \
 			--with-jdk-home=$(STAGING_HOST_DIR)/lib/jvm \
-			--with-xalan2-jar=/usr/share/java/xalan.jar \
-			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
-			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
+			--with-xalan2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+			--with-xalan2-serializer-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+			--with-xerces2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
 			--with-ecj-jar=$(TOPDIR)/dl/ecj.jar \
 			--without-rhino \
 			--disable-xrender \
@@ -59,6 +66,7 @@ CONFIGURE_ARGS+=	--disable-docs \
 do-extract:
 	(cd ${WRKBUILD}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION))
 	(cd $(WRKBUILD); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
+	cd ${WRKBUILD}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 
 pre-configure:
 	cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
@@ -76,9 +84,9 @@ pre-configure:
 			--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
 			--disable-docs \
 			--disable-openjdk-cross-compilation \
-			--with-xalan2-jar=/usr/share/java/xalan.jar \
-			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
-			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
+			--with-xalan2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+			--with-xalan2-serializer-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+			--with-xerces2-jar=${WRKBUILD}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
 			--without-rhino \
 			--disable-xrender \
 			--disable-nss \
