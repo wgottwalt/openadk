@@ -14,14 +14,15 @@ WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include ../rules.mk
 
+GCJ_ENV+=		ac_cv_prog_JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar
+GCJ_ENV+=		JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar
+
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	(cd $(WRKBUILD); \
 		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-latest.jar; \
-		export ac_cv_prog_JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar; \
-		export JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar; \
-		./configure \
+		env ${GCJ_ENV} ./configure \
 			--prefix=/usr \
 			--enable-java-home \
 			--enable-languages=java \
@@ -40,11 +41,12 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	touch $@
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
-	${MAKE} -C ${WRKBUILD} $(MAKE_TRACE)
+	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} $(MAKE_TRACE)
 	touch $@
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj: $(WRKBUILD)/.compiled
 	$(INSTALL_DIR) ${STAGING_JAVA_HOST_DIR}
-	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
+	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} \
+	    DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
 
 include $(TOPDIR)/mk/tools.mk
