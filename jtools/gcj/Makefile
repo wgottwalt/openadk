@@ -14,8 +14,7 @@ WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include ../rules.mk
 
-GCJ_ENV+=		ac_cv_prog_JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar
-GCJ_ENV+=		JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar
+GCJ_ENV+=		JAR=no
 
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 
@@ -30,7 +29,6 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 			--with-mpc=$(STAGING_HOST_DIR) \
 			--with-mpfr=$(STAGING_HOST_DIR) \
 			--with-gmp=$(STAGING_HOST_DIR) \
-			--with-jar=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-biarch \
