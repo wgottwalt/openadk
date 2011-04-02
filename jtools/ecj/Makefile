@@ -14,6 +14,7 @@ install: ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
 	env \
+		DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
 		LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
 		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$$PATH \
 	$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj -g -O2 -findirect-dispatch \

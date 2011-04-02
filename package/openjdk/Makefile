@@ -61,8 +61,10 @@ do-extract:
 	(cd $(WRKBUILD); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
 
 pre-configure:
-	(cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
+	cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
 		env JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
+		DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
+		LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
 		./configure \
 			--enable-bootstrap \
 			--enable-zero \
@@ -80,8 +82,7 @@ pre-configure:
 			--without-rhino \
 			--disable-xrender \
 			--disable-nss \
-	);
-	(cd $(WRKBUILD)/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION) ; ${MAKE})
+		&& ${MAKE}
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin
