@@ -7,13 +7,19 @@ PKG_NAME:=		openjdk
 PKG_VERSION:=		6
 PKG_EXTRAVER:=		b22-28_feb_2011
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 fd3f35e8a8a2ef9a64c035ed66cea06d
+PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 \
+			fd3f35e8a8a2ef9a64c035ed66cea06d \
+			ef7a8b3624ea904bf584bc46d79b5e75 \
+			bc95c133620bd68c161cac9891592901 \
+			91adfd41e6f001add4f92ae31216b1e3 \
+			d526d0848c88607ce4e3a0a4edb75d50
 PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		xproto jpeg zlib libX11 libpng freetype
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
+			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
 # autotools infrastructure for OpenJDK
@@ -26,6 +32,9 @@ XALAN_VERSION=		2_7_0
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
 			$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz \
+			jaxp144_01.zip \
+			jdk6-jaf-b20.zip \
+			jdk6-jaxws-b20.zip
 			${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 NO_DISTFILES:=		1
 WRKDIST=		${WRKDIR}
@@ -67,6 +76,8 @@ do-extract:
 	(cd ${WRKBUILD}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION))
 	(cd $(WRKBUILD); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
 	cd ${WRKBUILD}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
+	cd ${TOPDIR}/dl; cp jaxp144_01.zip jdk6-jaf-b20.zip jdk6-jaxws-b20.zip \
+	    ${WRKBUILD}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}/drops/
 
 pre-configure:
 	cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
