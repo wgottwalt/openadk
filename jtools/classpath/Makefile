@@ -23,6 +23,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 		--disable-dssi \
 		--disable-plugin \
 		--disable-examples \
+		--disable-gjdoc \
 		--disable-Werror)
 	touch $@
 
