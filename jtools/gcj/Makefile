@@ -19,14 +19,22 @@ install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	(cd $(WRKBUILD); \
 		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-latest.jar; \
-		./configure --prefix=/usr --enable-java-home --enable-languages=java --with-ffi \
-			--with-mpc=$(STAGING_HOST_DIR) --with-mpfr=$(STAGING_HOST_DIR) \
+		export ac_cv_prog_JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar; \
+		export JAR=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar; \
+		./configure \
+			--prefix=/usr \
+			--enable-java-home \
+			--enable-languages=java \
+			--with-ffi \
+			--with-mpc=$(STAGING_HOST_DIR) \
+			--with-mpfr=$(STAGING_HOST_DIR) \
 			--with-gmp=$(STAGING_HOST_DIR) \
+			--with-jar=$(STAGING_JAVA_HOST_DIR)/usr/bin/fastjar \
 			--disable-libmudflap \
-                        --disable-libgomp \
-                        --disable-biarch \
-                        --disable-decimal-float \
-                        --disable-multilib \
+			--disable-libgomp \
+			--disable-biarch \
+			--disable-decimal-float \
+			--disable-multilib \
 			--disable-bootstrap \
 	);
 	touch $@
