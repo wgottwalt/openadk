@@ -27,6 +27,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
                         --disable-biarch \
                         --disable-decimal-float \
                         --disable-multilib \
+			--disable-bootstrap \
 	);
 	touch $@
 
