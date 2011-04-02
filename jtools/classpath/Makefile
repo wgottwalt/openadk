@@ -24,6 +24,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 		--disable-plugin \
 		--disable-examples \
 		--disable-gjdoc \
+		--with-jar=no \
 		--disable-Werror)
 	touch $@
 
