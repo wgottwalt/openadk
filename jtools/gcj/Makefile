@@ -14,28 +14,37 @@ WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include ../rules.mk
 
+GCJ_ENV+=		JAR=no
+
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	(cd $(WRKBUILD); \
 		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-latest.jar; \
-		./configure --prefix=/usr --enable-java-home --enable-languages=java --with-ffi \
-			--with-mpc=$(STAGING_HOST_DIR) --with-mpfr=$(STAGING_HOST_DIR) \
+		env ${GCJ_ENV} ./configure \
+			--prefix=/usr \
+			--enable-java-home \
+			--enable-languages=java \
+			--with-ffi \
+			--with-mpc=$(STAGING_HOST_DIR) \
+			--with-mpfr=$(STAGING_HOST_DIR) \
 			--with-gmp=$(STAGING_HOST_DIR) \
 			--disable-libmudflap \
-                        --disable-libgomp \
-                        --disable-biarch \
-                        --disable-decimal-float \
-                        --disable-multilib \
+			--disable-libgomp \
+			--disable-biarch \
+			--disable-decimal-float \
+			--disable-multilib \
+			--disable-bootstrap \
 	);
 	touch $@
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
-	${MAKE} -C ${WRKBUILD} $(MAKE_TRACE)
+	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} $(MAKE_TRACE)
 	touch $@
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj: $(WRKBUILD)/.compiled
 	$(INSTALL_DIR) ${STAGING_JAVA_HOST_DIR}
-	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
+	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} \
+	    DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
 
 include $(TOPDIR)/mk/tools.mk

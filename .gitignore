@@ -44,6 +44,7 @@
 /jtools_build/
 /extra/
 /.menu
+/.adkinit
 /target/*/Config.in.systems
 /target/*/sys-enabled
 /target/packages/pkg-enabled

@@ -7,21 +7,38 @@ PKG_NAME:=		openjdk
 PKG_VERSION:=		6
 PKG_EXTRAVER:=		b22-28_feb_2011
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 fd3f35e8a8a2ef9a64c035ed66cea06d
+PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 \
+			fd3f35e8a8a2ef9a64c035ed66cea06d \
+			ef7a8b3624ea904bf584bc46d79b5e75 \
+			bc95c133620bd68c161cac9891592901 \
+			91adfd41e6f001add4f92ae31216b1e3 \
+			d526d0848c88607ce4e3a0a4edb75d50
 PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		xproto jpeg zlib libX11 libpng freetype
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
+			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
+			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
 ICEDTEA_VERSION:=	1.10
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz $(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
+# bootstrap JARs
+XALAN_NAME=		xalan-j
+XALAN_VERSION=		2_7_0
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
+			$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz \
+			jaxp144_01.zip \
+			jdk6-jaf-b20.zip \
+			jdk6-jaxws-b20.zip \
+			${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 NO_DISTFILES:=		1
 WRKDIST=		${WRKDIR}
+WRKSRC=			${WRKDIST}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}
 
 PKG_SUBPKGS:=		OPENJDK
 PKG_CFLINE_OPENJDK:=	select ADK_TOOLCHAIN_GCC_JAVA
@@ -41,47 +58,62 @@ ifeq ($(ADK_PACKAGE_OPENJDK_ZERO),y)
 CONFIGURE_ARGS+=	--enable-zero
 endif
 ifeq ($(ADK_PACKAGE_OPENJDK_SHARK),y)
-CONFIGURE_ARGS+=	--enable-shark 
+CONFIGURE_ARGS+=	--enable-shark
 endif
 
 CONFIGURE_ARGS+=	--disable-docs \
 			--enable-bootstrap \
-			--disable-openjdk-cross-compilation \
-			--with-jdk-home=$(STAGING_HOST_DIR)/lib/jvm \
-			--with-xalan2-jar=/usr/share/java/xalan.jar \
-			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
-			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
-			--with-ecj-jar=$(TOPDIR)/dl/ecj.jar \
+			--enable-openjdk-cross-compilation \
+			--with-jdk-home=${STAGING_JAVA_HOST_DIR}/usr/lib/jvm \
+		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
+		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
+		--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
+			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+			--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
+			--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
 			--without-rhino \
 			--disable-xrender \
 			--disable-nss
 
+OPENJDK_BUILD_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar"
+OPENJDK_BUILD_ENV+=	DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
+OPENJDK_BUILD_ENV+=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
+OPENJDK_BUILD_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj
+CONFIGURE_ENV+=		${OPENJDK_BUILD_ENV}
+MAKE_ENV+=		${OPENJDK_BUILD_ENV}
+
 do-extract:
-	(cd ${WRKBUILD}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION))
-	(cd $(WRKBUILD); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
+	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; \
+		tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
+		-C $(PKG_NAME)-$(PKG_VERSION)
+	cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
+	cd ${WRKDIST}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
+	mkdir -p ${WRKBUILD}/drops
+	cd ${TOPDIR}/dl; cp jaxp144_01.zip jdk6-jaf-b20.zip jdk6-jaxws-b20.zip \
+	    ${WRKBUILD}/drops
 
 pre-configure:
-	(cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
-		env JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
-		./configure \
-			--enable-bootstrap \
-			--enable-zero \
-			--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
-			--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
-			--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
-			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
-			--with-openjdk-src-dir=$(WRKBUILD)/$(PKG_NAME)-$(PKG_VERSION) \
-			--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
-			--disable-docs \
-			--disable-openjdk-cross-compilation \
-			--with-xalan2-jar=/usr/share/java/xalan.jar \
-			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
-			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
-			--without-rhino \
-			--disable-xrender \
-			--disable-nss \
-	);
-	(cd $(WRKBUILD)/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION) ; ${MAKE})
+	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+	export ${OPENJDK_BUILD_ENV}; ./configure \
+		--enable-bootstrap \
+		--enable-zero \
+		--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
+		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
+		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
+		--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+		--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
+		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
+		--disable-docs \
+		--disable-openjdk-cross-compilation \
+		--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+		--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+		--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
+		--without-rhino \
+		--disable-xrender \
+		--disable-nss \
+	&& ${MAKE}
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin
