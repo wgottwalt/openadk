@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		zlib sdl
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
-PKG_ARCH_DEPENDS:=	x86 x86_64
+PKG_ARCH_DEPENDS:=	native x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 
