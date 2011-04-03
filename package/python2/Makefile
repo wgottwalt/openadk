@@ -36,6 +36,7 @@ CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 
 post-extract:
+	$(CP) ./files/posixmodule.c ${WRKBUILD}/Modules/posixmodule.c
 	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(CFLAGS_FOR_BUILD)" \
