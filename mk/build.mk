@@ -123,9 +123,9 @@ ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk toolchain/install tools/install package/compile
+	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/install tools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 
@@ -156,6 +156,9 @@ toolchain/%: ${STAGING_DIR}
 
 tools/%:
 	$(MAKE) -C tools $(patsubst tools/%,%,$@)
+
+jtools/%:
+	$(MAKE) -C jtools $(patsubst jtools/%,%,$@)
 
 image:
 	$(MAKE) -C target image

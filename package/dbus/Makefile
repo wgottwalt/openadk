@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.2.24
+PKG_VERSION:=		1.4.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		565346cecd9cfecf1463540c6086cc2c
+PKG_MD5SUM:=		99b165f727dd8a5c4b7e2c20a8bf5db6
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat

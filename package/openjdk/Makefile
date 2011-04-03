@@ -36,6 +36,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+
 ifeq ($(ADK_PACKAGE_OPENJDK_ZERO),y)
 CONFIGURE_ARGS+=	--enable-zero
 endif
@@ -51,7 +52,6 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
 			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
 			--with-ecj-jar=$(TOPDIR)/dl/ecj.jar \
-			--with-gcj \
 			--without-rhino \
 			--disable-xrender \
 			--disable-nss
@@ -61,24 +61,27 @@ do-extract:
 	(cd $(WRKBUILD); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
 
 pre-configure:
-	(cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status} ; \
+	(cd ${WRKBUILD}/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION); rm -rf config.{cache,status};\
+		env JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar" \
 		./configure \
 			--enable-bootstrap \
 			--enable-zero \
+			--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
+			--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/jamvm \
+			--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
+			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+			--with-openjdk-src-dir=$(WRKBUILD)/$(PKG_NAME)-$(PKG_VERSION) \
+			--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
 			--disable-docs \
 			--disable-openjdk-cross-compilation \
-			--with-openjdk-src-dir=$(WRKBUILD)/$(PKG_NAME)-$(PKG_VERSION) \
-			--with-jdk-home=$(STAGING_HOST_DIR)/lib/jvm \
 			--with-xalan2-jar=/usr/share/java/xalan.jar \
 			--with-xalan2-serializer-jar=/usr/share/java/serializer.jar \
 			--with-xerces2-jar=/usr/share/java/xercesImpl.jar \
-			--with-ecj-jar=$(TOPDIR)/dl/ecj.jar \
-			--with-gcj \
 			--without-rhino \
 			--disable-xrender \
 			--disable-nss \
 	);
-	(cd $(WRKBUILD)/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION) ; ${MAKE} )
+	(cd $(WRKBUILD)/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION) ; ${MAKE})
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin
