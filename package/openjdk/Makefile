@@ -85,15 +85,17 @@ CONFIGURE_ENV+=		${OPENJDK_BUILD_ENV}
 MAKE_ENV+=		${OPENJDK_BUILD_ENV}
 
 do-extract:
-	(cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION))
-	(cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz)
+	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; \
+		tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
+		-C $(PKG_NAME)-$(PKG_VERSION)
+	cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
 	cd ${WRKDIST}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 	mkdir -p ${WRKBUILD}/drops
 	cd ${TOPDIR}/dl; cp jaxp144_01.zip jdk6-jaf-b20.zip jdk6-jaxws-b20.zip \
-	    ${WRKBUILD}/drops/
+	    ${WRKBUILD}/drops
 
-x-pre-configure:
-	cd ${WRKBUILD}; rm -rf config.{cache,status};\
+pre-configure:
+	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 	export ${OPENJDK_BUILD_ENV}; ./configure \
 		--enable-bootstrap \
 		--enable-zero \
