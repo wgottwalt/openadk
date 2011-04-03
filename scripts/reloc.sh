@@ -4,7 +4,7 @@
 olddir=$(grep "^TOPDIR" prereq.mk 2>/dev/null |cut -d '=' -f 2)
 newdir=$(pwd)
 
-if [ ! -z $olddir ];then
+if [ ! -z "$olddir" ];then
   if [ "$olddir" != "$newdir" ];then
 	echo "adk directory relocated!"
 	echo "old directory: $olddir"

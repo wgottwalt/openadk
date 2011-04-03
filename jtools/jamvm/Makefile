@@ -9,12 +9,22 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		63220327925ace13756ae334c55a3baa
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
+ifeq (Darwin,${OStype})
+CC_FOR_BUILD:=${CC_FOR_BUILD} -m32
+CXX_FOR_BUILD:=${CXX_FOR_BUILD} -m32
+endif
+
 include ../rules.mk
 
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
-	(cd $(WRKBUILD); ./configure --prefix=/usr --with-classpath-install-dir=$(STAGING_JAVA_HOST_DIR) );
+	cd $(WRKBUILD); env \
+		CC='${CC_FOR_BUILD}' \
+		CXX='${CXX_FOR_BUILD}' \
+	    ./configure \
+		--prefix=/usr \
+		--with-classpath-install-dir=$(STAGING_JAVA_HOST_DIR)
 	touch $@
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
