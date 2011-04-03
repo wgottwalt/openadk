@@ -30,13 +30,15 @@ ICEDTEA_VERSION:=	1.10
 XALAN_NAME=		xalan-j
 XALAN_VERSION=		2_7_0
 
+# override generic extraction
+EXTRACT_OVERRIDE:=	1
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
 			$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz \
 			jaxp144_01.zip \
 			jdk6-jaf-b20.zip \
 			jdk6-jaxws-b20.zip \
 			${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
-NO_DISTFILES:=		1
+
 WRKDIST=		${WRKDIR}
 WRKSRC=			${WRKDIST}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}
 
@@ -86,8 +88,7 @@ MAKE_ENV+=		${OPENJDK_BUILD_ENV}
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; \
-		tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz \
-		-C $(PKG_NAME)-$(PKG_VERSION)
+		tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION)
 	cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
 	cd ${WRKDIST}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 	mkdir -p ${WRKBUILD}/drops
