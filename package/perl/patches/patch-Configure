@@ -1,0 +1,65 @@
+--- perl-5.12.3.orig/Configure	2011-01-09 21:20:52.000000000 +0100
++++ perl-5.12.3/Configure	2011-03-19 20:44:59.000000000 +0100
+@@ -5164,11 +5164,11 @@ default|recommended)
+ 	# is to add the flag to the flags passed to the compiler at link time,
+ 	# as that way the compiler can do the right implementation dependant
+ 	# thing. (NWC)
+-	case "$gccversion" in
+-	?*)	set stack-protector -fstack-protector
+-		eval $checkccflag
+-		;;
+-	esac
++	#case "$gccversion" in
++	#?*)	set stack-protector -fstack-protector
++	#	eval $checkccflag
++	#	;;
++	#esac
+ 	;;
+ esac
+ 
+@@ -5308,14 +5308,14 @@ case "$ldflags" in
+ *) dflt="$ldflags";;
+ esac
+ # See note above about -fstack-protector
+-case "$ccflags" in
+-*-fstack-protector*) 
+-	case "$dflt" in
+-	*-fstack-protector*) ;; # Don't add it again
+-	*) dflt="$dflt -fstack-protector" ;; 
+-	esac
+-	;;
+-esac
++#case "$ccflags" in
++#*-fstack-protector*) 
++#	case "$dflt" in
++#	*-fstack-protector*) ;; # Don't add it again
++#	*) dflt="$dflt -fstack-protector" ;; 
++#	esac
++#	;;
++#esac
+ 
+ : Try to guess additional flags to pick up local libraries.
+ for thislibdir in $libpth; do
+@@ -8107,14 +8107,14 @@ EOM
+ 	''|' ') dflt='none' ;;
+ 	esac
+ 
+-	case "$ldflags" in
+-	*-fstack-protector*)
+-	    case "$dflt" in
+-			*-fstack-protector*) ;; # Don't add it again
+-			*) dflt="$dflt -fstack-protector" ;; 
+-		esac
+-		;;
+-	esac
++#	case "$ldflags" in
++#	*-fstack-protector*)
++#	    case "$dflt" in
++#			*-fstack-protector*) ;; # Don't add it again
++#			*) dflt="$dflt -fstack-protector" ;; 
++#		esac
++#		;;
++#	esac
+ 
+ 
+     rp="Any special flags to pass to $ld to create a dynamically loaded library?"
