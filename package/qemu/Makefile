@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		qemu
 PKG_VERSION:=		0.14.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		397a0d665da8ba9d3b9583629f3d6421
+PKG_MD5SUM:=		f9d145d5c09de9f0984ffe9bd1229970
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		zlib libSDL
+PKG_DEPENDS:=		zlib libsdl
 PKG_BUILDDEP:=		zlib sdl
 PKG_URL:=		http://wwww.qemu.org/
-PKG_SITES:=		http://wiki.qemu.org/download/
+PKG_SITES:=		http://download.savannah.gnu.org/releases/qemu/
 
 PKG_ARCH_DEPENDS:=	native x86 x86_64
 
@@ -23,7 +23,6 @@ $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
-			--cross-prefix=$(TARGET_CROSS) \
 			--disable-user \
 			--prefix=/usr \
 			--sysconfdir=/etc \
