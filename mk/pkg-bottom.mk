@@ -72,10 +72,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    done;
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
-	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    --build=${GNU_HOST_NAME} \
-	    --host=${GNU_TARGET_NAME} \
-	    --target=${GNU_TARGET_NAME} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
 	    --program-prefix= \
 	    --program-suffix= \
 	    --prefix=/usr \

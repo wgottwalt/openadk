@@ -27,10 +27,10 @@
 -	  $(GCJ) $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
 -	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \
 -	fi ; \
++	mkdir -p stamps ; \
 +	if test -n "${ADK_ECJ}" && test -x "${ADK_ECJ}"; then \
 +		ln -s "${ADK_ECJ}" native-ecj; \
 +	else \
-+		mkdir -p stamps ; \
 +		if test "x$(GCJ)" != "xno"; then \
 +		  $(GCJ) $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
 +		    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \

@@ -47,7 +47,11 @@ ${WRKDIST}/.extract_done: ${_CHECKSUM_COOKIE}
 ifeq (${_CHECKSUM_COOKIE},)
 	rm -rf ${WRKDIST} ${WRKSRC} ${WRKBUILD}
 endif
+ifeq ($(EXTRACT_OVERRIDE),1)
+	${MAKE} do-extract
+else	
 	${EXTRACT_CMD}
+endif
 	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
 
