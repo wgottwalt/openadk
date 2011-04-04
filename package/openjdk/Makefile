@@ -15,7 +15,8 @@ PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 \
 			d526d0848c88607ce4e3a0a4edb75d50
 PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		xproto jpeg zlib libX11 libpng freetype cups
+PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib libX11 libpng freetype cups
+PKG_BUILDDEP+=		libXt libXp libXinerama libXrender libXtst
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \

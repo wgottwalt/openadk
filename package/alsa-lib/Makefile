@@ -34,5 +34,7 @@ alsa-lib-dev-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB_DEV}/usr/include/{sys,alsa}
 	${CP} ${WRKINST}/usr/include/sys/*.h ${IDIR_ALSA_LIB_DEV}/usr/include/sys
 	${CP} ${WRKINST}/usr/include/alsa/*.h ${IDIR_ALSA_LIB_DEV}/usr/include/alsa
+	${INSTALL_DIR} ${IDIR_ALSA_LIB_DEV}/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc ${IDIR_ALSA_LIB_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
