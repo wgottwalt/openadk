@@ -9,14 +9,19 @@ PKG_SECTION:=		libs
 PKG_BUILDDEP:=		gmp mpfr
 PKG_URL:=		http://www.multiprecision.org/
 
-PKG_SUBPKGS:=		LIBMPC
+PKG_SUBPKGS:=		LIBMPC LIBMPC_DEV
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMPC,libmpc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMPC_DEV,libmpc-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libmpc-install:
 	${INSTALL_DIR} ${IDIR_LIBMPC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libmpc.so* ${IDIR_LIBMPC}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libmpc.so* ${IDIR_LIBMPC}/usr/lib
+
+libmpc-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBMPC_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMPC_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
