@@ -213,7 +213,7 @@ clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PKG_DIR}; do \
-		for f in $$(ls $$d/[a-z]* 2>/dev/null); do  \
+		for f in $$(ls $$d/[a-z]*|grep -v [A-Z] 2>/dev/null); do  \
 			while read file ; do \
 				rm ${STAGING_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
