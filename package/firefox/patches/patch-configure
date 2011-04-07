@@ -1,5 +1,14 @@
 --- mozilla-2.0.orig/configure	2011-03-19 00:48:56.000000000 +0100
-+++ mozilla-2.0/configure	2011-03-28 12:25:19.041814743 +0200
++++ mozilla-2.0/configure	2011-04-07 18:48:49.000000000 +0200
+@@ -1588,7 +1588,7 @@ test -n "$HOST_CXX" || HOST_CXX=""""
+         HOST_CXXFLAGS="$CXXFLAGS"
+     fi
+     if test -z "$HOST_LDFLAGS"; then
+-        HOST_LDFLAGS="$LDFLAGS"
++        HOST_LDFLAGS="$LDFLAGS_FOR_BUILD"
+     fi
+     if test -z "$HOST_AR_FLAGS"; then
+         HOST_AR_FLAGS="$AR_FLAGS"
 @@ -22573,15 +22573,6 @@ if test "${with_libIDL+set}" = set; then
  fi
  
