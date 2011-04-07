@@ -1,0 +1,11 @@
+--- xfsprogs-3.1.4.orig/ltmain.sh	2010-11-11 18:38:26.000000000 +0100
++++ xfsprogs-3.1.4/ltmain.sh	2011-04-01 20:20:00.951819025 +0200
+@@ -4765,7 +4765,7 @@ func_mode_link ()
+       # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto*)
+         func_quote_for_eval "$arg"
+ 	arg="$func_quote_for_eval_result"
+         func_append compile_command " $arg"

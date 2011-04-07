@@ -39,10 +39,11 @@ admin	System Administration
 utils	Utilities
 www	HTTP / FTP
 wifi	Wireless
-x11/apps	X applications
 x11/lxde	Lightweight X Desktop Environment
+x11/apps	X applications
 x11/drivers	X drivers
 x11/server	X server 
 x11/libs	X libraries
+x11/misc	X Misc
 x11/fonts	X fonts
 x11/devel	X headers

@@ -25,6 +25,7 @@ PKG_OPTS:=		noremove
 NO_DISTFILES:=		1
 
 PKG_SUBPKGS:=		LIBPTHREAD LIBPTHREAD_DEV
+PKGSC_LIBPTHREAD_DEV:=	devel
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
@@ -33,7 +34,7 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBPTHREAD_DEV,libpthread-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBPTHREAD_DEV,libpthread-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBPTHREAD_DEV},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

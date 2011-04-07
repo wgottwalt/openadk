@@ -48,9 +48,9 @@ endif
 uclibc-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib ${IDIR_UCLIBC_DEV}/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_DEV}/usr/lib
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_UCLIBC_DEV}/usr/lib
-	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_DEV}/usr/lib
+	for file in libcrypt libdl libm libresolv librt libutil; do \
 		cd $(IDIR_UCLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \

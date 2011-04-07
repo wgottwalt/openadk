@@ -1,7 +1,6 @@
-- enable and test gcj
-- port cacao 
-- port LXDE
 - port openjdk
+- port LXDE
+- toolchain rebuild when changes to config require it
 - add and test brcm 2.6 wireless support
 - man pages in ipkg/tgz packages (automatic)
 - automate /etc handling via conffiles
