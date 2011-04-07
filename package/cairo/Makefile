@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
-PKG_VERSION:=		1.8.10
+PKG_VERSION:=		1.10.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b60a82f405f9400bbfdcf850b1728d25
+PKG_MD5SUM:=		f101a9e88b783337b20b2e26dfd26d5f
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		fontconfig libfreetype libpng libx11 pixman
