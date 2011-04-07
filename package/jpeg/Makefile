@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jpeg
-PKG_VERSION:=		8b
+PKG_VERSION:=		8c
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e022acbc5b36cd2cb70785f5b575661e
+PKG_MD5SUM:=		a2c10c04f396a9ce72894beb18b4e1f9
 PKG_DESCR:=		The Independent JPEG Groups JPEG runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.ijg.org/
