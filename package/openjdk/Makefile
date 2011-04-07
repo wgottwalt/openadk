@@ -54,6 +54,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
+TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 
 ifeq ($(ADK_PACKAGE_OPENJDK_ZERO),y)
 CONFIGURE_ARGS+=	--enable-zero
@@ -62,29 +65,33 @@ ifeq ($(ADK_PACKAGE_OPENJDK_SHARK),y)
 CONFIGURE_ARGS+=	--enable-shark
 endif
 
+BOOTSTRAPJDK:=		${WRKDIST}/bootstrap-jdk
 CONFIGURE_ARGS+=	--disable-docs \
 			--enable-bootstrap \
 			--enable-openjdk-cross-compilation \
+			--with-cc-for-build=$(CC_FOR_BUILD) \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
 			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
 			--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
-			--with-jdk-home=$(WRKSRC)/openjdk.build/j2sdk-image \
-			--with-java=$(WRKSRC)/openjdk.build/j2sdk-image/bin/java \
-			--with-javac=$(WRKSRC)/openjdk.build/j2sdk-image/bin/javac \
-			--with-javah=$(WRKSRC)/openjdk.build/j2sdk-image/bin/javah \
-			--with-jar=$(WRKSRC)/openjdk.build/j2sdk-image/bin/jar \
-			--with-rmic=$(WRKSRC)/openjdk.build/j2sdk-image/bin/rmic \
-			--with-native2ascii=$(WRKSRC)/openjdk.build/j2sdk-image/bin/native2ascii \
+			--with-jdk-home=$(BOOTSTRAPJDK) \
+			--with-java=$(BOOTSTRAPJDK)/bin/java \
+			--with-javac=$(BOOTSTRAPJDK)/bin/javac \
+			--with-javah=$(BOOTSTRAPJDK)/bin/javah \
+			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
+			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
+			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--without-rhino
 
-OPENJDK_BUILD_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar"
-OPENJDK_BUILD_ENV+=	DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
-OPENJDK_BUILD_ENV+=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
-OPENJDK_BUILD_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj
+OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar"
+OPENJDK_NATIVE_ENV+=	DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
+OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
+OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj
+
+OPENJDK_BUILD_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin
 
 do-extract:
-	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION) ; \
+	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \
 		tar xzf $(TOPDIR)/dl/$(PKG_NAME)-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C $(PKG_NAME)-$(PKG_VERSION)
 	cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz
 	cd ${WRKDIST}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
@@ -94,13 +101,13 @@ do-extract:
 
 pre-configure:
 	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-	export ${OPENJDK_BUILD_ENV}; ./configure \
+	export ${OPENJDK_NATIVE_ENV}; ./configure \
 		--enable-bootstrap \
 		--enable-zero \
 		--disable-openjdk-cross-compilation \
 		--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 		--with-jdk-home=$(STAGING_JAVA_HOST_DIR)/usr/lib/jvm \
-		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/gij \
+		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/java \
 		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 		--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
@@ -109,7 +116,13 @@ pre-configure:
 		--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
 		--without-rhino \
 		--disable-docs \
-	;${MAKE}
+	&& $(MAKE) && $(CP) $(WRKSRC)/openjdk.build/j2sdk-image ${WRKDIST}/bootstrap-jdk && $(MAKE) clean && rm -rf ${WRKBUILD}/openjdk-old
+
+do-build:
+	cd ${WRKBUILD}; export $(OPENJDK_BUILD_ENV); make
+
+do-install:
+	cd ${WRKBUILD}; make install
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin

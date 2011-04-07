@@ -16,8 +16,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GCC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=		''
 TARGET_CPPFLAGS:=	''
+TARGET_CFLAGS:=		''
+TARGET_CXXFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CXXFLAGS))
 
 ifeq ($(ADK_LINUX_64),y)
 CONFIGURE_ARGS+=       --with-abi=64

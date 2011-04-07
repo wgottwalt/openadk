@@ -20,7 +20,7 @@ STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 STAGING_JAVA_HOST_DIR:=	${BASE_DIR}/jhost
 # use headers and foo-config from system
-ifneq ($(ADK_NATIVE),)
+ifeq ($(ADK_NATIVE),y)
 STAGING_TARGET_DIR:=
 SCRIPT_TARGET_DIR:=	/usr/bin
 else
@@ -93,6 +93,7 @@ endif
 
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
 TARGET_CFLAGS+=		-flto
+TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 

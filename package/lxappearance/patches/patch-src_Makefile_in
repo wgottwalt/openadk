@@ -1,0 +1,36 @@
+--- lxappearance-0.5.0.orig/src/Makefile.in	2010-10-12 17:20:51.000000000 +0200
++++ lxappearance-0.5.0/src/Makefile.in	2011-03-18 00:11:21.983370811 +0100
+@@ -68,8 +68,8 @@ lxappearance_LINK = $(CCLD) $(lxappearan
+ am_xml_purge_OBJECTS = xml_purge-xml-purge.$(OBJEXT)
+ xml_purge_OBJECTS = $(am_xml_purge_OBJECTS)
+ xml_purge_DEPENDENCIES = $(am__DEPENDENCIES_1)
+-xml_purge_LINK = $(CCLD) $(xml_purge_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++xml_purge_LINK = $(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) \
++	-o $@
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
+@@ -347,7 +347,7 @@ lxappearance$(EXEEXT): $(lxappearance_OB
+ 	$(lxappearance_LINK) $(lxappearance_OBJECTS) $(lxappearance_LDADD) $(LIBS)
+ xml-purge$(EXEEXT): $(xml_purge_OBJECTS) $(xml_purge_DEPENDENCIES) 
+ 	@rm -f xml-purge$(EXEEXT)
+-	$(xml_purge_LINK) $(xml_purge_OBJECTS) $(xml_purge_LDADD) $(LIBS)
++	$(xml_purge_LINK) $(xml_purge_OBJECTS) $(LIBS) -lgmodule-2.0 -lglib-2.0
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+@@ -492,11 +492,11 @@ lxappearance-plugin.obj: plugin.c
+ @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lxappearance_CFLAGS) $(CFLAGS) -c -o lxappearance-plugin.obj `if test -f 'plugin.c'; then $(CYGPATH_W) 'plugin.c'; else $(CYGPATH_W) '$(srcdir)/plugin.c'; fi`
+ 
+ xml_purge-xml-purge.o: $(top_srcdir)/src/xml-purge.c
+-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xml_purge_CFLAGS) $(CFLAGS) -MT xml_purge-xml-purge.o -MD -MP -MF $(DEPDIR)/xml_purge-xml-purge.Tpo -c -o xml_purge-xml-purge.o `test -f '$(top_srcdir)/src/xml-purge.c' || echo '$(srcdir)/'`$(top_srcdir)/src/xml-purge.c
++@am__fastdepCC_TRUE@	$(CC_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) -MT xml_purge-xml-purge.o -MD -MP -MF $(DEPDIR)/xml_purge-xml-purge.Tpo -c -o xml_purge-xml-purge.o `test -f '$(top_srcdir)/src/xml-purge.c' || echo '$(srcdir)/'`$(top_srcdir)/src/xml-purge.c
+ @am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/xml_purge-xml-purge.Tpo $(DEPDIR)/xml_purge-xml-purge.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(top_srcdir)/src/xml-purge.c' object='xml_purge-xml-purge.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xml_purge_CFLAGS) $(CFLAGS) -c -o xml_purge-xml-purge.o `test -f '$(top_srcdir)/src/xml-purge.c' || echo '$(srcdir)/'`$(top_srcdir)/src/xml-purge.c
++@am__fastdepCC_FALSE@	$(CC_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) -c -o xml_purge-xml-purge.o `test -f '$(top_srcdir)/src/xml-purge.c' || echo '$(srcdir)/'`$(top_srcdir)/src/xml-purge.c
+ 
+ xml_purge-xml-purge.obj: $(top_srcdir)/src/xml-purge.c
+ @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xml_purge_CFLAGS) $(CFLAGS) -MT xml_purge-xml-purge.obj -MD -MP -MF $(DEPDIR)/xml_purge-xml-purge.Tpo -c -o xml_purge-xml-purge.obj `if test -f '$(top_srcdir)/src/xml-purge.c'; then $(CYGPATH_W) '$(top_srcdir)/src/xml-purge.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/src/xml-purge.c'; fi`

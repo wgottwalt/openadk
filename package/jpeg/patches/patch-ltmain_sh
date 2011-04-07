@@ -1,5 +1,9 @@
 --- jpeg-8c.orig/ltmain.sh	2010-11-17 22:41:29.000000000 +0100
+<<<<<<< HEAD
 +++ jpeg-8c/ltmain.sh	2011-04-07 11:28:48.000000000 +0200
+=======
++++ jpeg-8c/ltmain.sh	2011-04-01 17:20:27.503069018 +0200
+>>>>>>> 62cd6b2635b1e0d233c8537a008bc823c4cd4b2c
 @@ -5840,7 +5840,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \

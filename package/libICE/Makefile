@@ -21,6 +21,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBICE,libice,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBICE_DEV,libice-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBICE_DEV},${PKGSC_LIBICE_DEV}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+
 libice-install:
 	${INSTALL_DIR} ${IDIR_LIBICE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libICE.so* ${IDIR_LIBICE}/usr/lib

@@ -1,0 +1,11 @@
+--- fltk-2.0.x-r7513.orig/images/Makefile	2008-08-05 01:03:58.000000000 +0200
++++ fltk-2.0.x-r7513/images/Makefile	2011-03-25 13:53:36.614620804 +0100
+@@ -109,7 +109,7 @@ include makedepend
+ 
+ ../lib/$(DSONAME): $(OBJECTS)
+ 	echo $(DSOCOMMAND) $@ ...
+-	$(DSOCOMMAND) $@ $(OBJECTS)
++	$(DSOCOMMAND) $@ $(OBJECTS) $(LDLIBS)
+ 	$(RM) ../lib/$(DSOLINK)
+ 	$(LN) $(DSONAME) ../lib/$(DSOLINK)
+ 

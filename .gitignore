@@ -23,6 +23,7 @@
 /.busyboxcfg
 /.rebuild.*
 /.defconfig
+/.adkinit
 /all.config
 /target_*/
 /host_*/

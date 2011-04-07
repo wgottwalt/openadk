@@ -1,5 +1,5 @@
---- mozilla-1.9.2.orig/security/coreconf/Linux.mk	2010-12-03 16:48:49.000000000 +0100
-+++ mozilla-1.9.2/security/coreconf/Linux.mk	2011-01-20 20:18:26.904905227 +0100
+--- mozilla-2.0.orig/security/coreconf/Linux.mk	2011-03-19 00:34:04.000000000 +0100
++++ mozilla-2.0/security/coreconf/Linux.mk	2011-03-28 13:44:58.221818344 +0200
 @@ -46,9 +46,9 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif

@@ -136,7 +136,7 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 endif
 
 ${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/include,usr/lib/pkgconfig} \
+	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib}
 
 ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
@@ -213,7 +213,7 @@ clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PKG_DIR}; do \
-		for f in $$(ls $$d/[a-z]* 2>/dev/null); do  \
+		for f in $$(ls $$d/[a-z]*|grep -v [A-Z] 2>/dev/null); do  \
 			while read file ; do \
 				rm ${STAGING_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
