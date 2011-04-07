@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify
-PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx
+PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify libtiff
+PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx dbus
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf
-PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk
+PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11 dbus
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libtiff
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -60,6 +60,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
 			--enable-libxul \
+			--enable-dbus \
 			--disable-tests \
 			--disable-libconic \
 			--disable-static \

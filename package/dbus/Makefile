@@ -32,6 +32,7 @@ CONFIGURE_ARGS+=	--disable-tests \
 			--without-x \
 			--enable-checks \
 			--with-xml=expat \
+			--with-session-socket-dir=/var/tmp \
 			--disable-dnotify \
 			--disable-kqueue \
 			--disable-xml-docs \
