@@ -20,19 +20,21 @@ endif
 PKG_NAME:=		libpthread
 PKG_DESCR:=		POSIX threading library
 PKG_SECTION:=		libs
+PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1
 
 PKG_SUBPKGS:=		LIBPTHREAD LIBPTHREAD_DEV
+PKGSC_LIBPTHREAD_DEV:=	devel
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPTHREAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBPTHREAD_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBPTHREAD,libpthread,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBPTHREAD_DEV,libpthread-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBPTHREAD_DEV},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -46,9 +48,9 @@ endif
 
 libpthread-dev-install:
 ifeq ($(ADK_NATIVE),)
-	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/usr/lib
-	${CP} ./files/libpthread.so.$(ARCH) ${IDIR_LIBPTHREAD}/usr/lib/libpthread.so
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_LIBPTHREAD}/usr/lib
+	${INSTALL_DIR} ${IDIR_LIBPTHREAD_DEV}/usr/lib
+	${CP} ./files/libpthread.so.$(ARCH) ${IDIR_LIBPTHREAD_DEV}/usr/lib/libpthread.so
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_LIBPTHREAD_DEV}/usr/lib
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

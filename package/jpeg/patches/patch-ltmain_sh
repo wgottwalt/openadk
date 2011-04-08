@@ -1,11 +1,11 @@
---- jpeg-8b.orig/ltmain.sh	2010-05-02 18:49:25.000000000 +0200
-+++ jpeg-8b/ltmain.sh	2011-01-14 00:16:39.000000000 +0100
-@@ -4765,7 +4765,7 @@ func_mode_link ()
-       # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
-       # @file GCC response files
+--- jpeg-8c.orig/ltmain.sh	2010-11-17 22:41:29.000000000 +0100
++++ jpeg-8c/ltmain.sh	2011-04-07 11:28:48.000000000 +0200
+@@ -5840,7 +5840,7 @@ func_mode_link ()
+       # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
--      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
-+      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
+-      -O*|-flto*|-fwhopr*|-fuse-linker-plugin)
++      -O*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*)
          func_quote_for_eval "$arg"
  	arg="$func_quote_for_eval_result"
          func_append compile_command " $arg"

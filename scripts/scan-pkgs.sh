@@ -66,6 +66,7 @@ if [[ -n $ADK_PACKAGE_GPSD ]]; then
 fi
 
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
+	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
 	NEED_PYTHON="$NEED_PYTHON firefox"
 fi
@@ -328,6 +329,13 @@ fi
 if [[ -n $NEED_FLEX ]]; then
 	if ! which flex >/dev/null 2>&1; then
 		echo >&2 You need flex to build $NEED_FLEX
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_YASM ]]; then
+	if ! which yasm >/dev/null 2>&1; then
+		echo >&2 You need yasm to build $NEED_YASM
 		out=1
 	fi
 fi

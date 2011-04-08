@@ -33,19 +33,19 @@ CONFIGURE_ARGS+=	--disable-flexresp \
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin
 	${INSTALL_DIR} ${IDIR_SNORT}/etc/snort
-	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT}/etc/snort/
+	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/classification.config \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/gen-msg.map \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/reference.config \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/sid-msg.map \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/threshold.conf \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/unicode.map \
-		${IDIR_SNORT}/etc/snort/
+		${IDIR_SNORT}/etc/snort
 	${INSTALL_BIN} ${WRKINST}/usr/bin/snort ${IDIR_SNORT}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

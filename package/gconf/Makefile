@@ -10,8 +10,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		de83e70453910ac62f9ee2a86444bdab
 PKG_DESCR:=		a system for storing application preferences
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		dbus dbus-glib
-PKG_DEPENDS:=		dbus dbus-glib
+PKG_BUILDDEP:=		dbus dbus-glib orbit2
+PKG_DEPENDS:=		dbus dbus-glib orbit2
 PKG_URL:=		http://projects.gnome.org/gconf/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/GNOME/sources/GConf/${PKG_EXTRAVER}/
 
@@ -25,5 +25,14 @@ gconf-install:
 	$(INSTALL_DIR) $(IDIR_GCONF)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libgconf*.so* \
 		$(IDIR_GCONF)/usr/lib
+	$(INSTALL_DIR) $(IDIR_GCONF)/usr/lib/GConf/2
+	$(CP) $(WRKINST)/usr/lib/GConf/2/*.so \
+		$(IDIR_GCONF)/usr/lib/GConf/2
+	$(INSTALL_DIR) $(IDIR_GCONF)/usr/libexec
+	$(INSTALL_BIN) $(WRKINST)/usr/libexec/gconfd-2 \
+		$(IDIR_GCONF)/usr/libexec
+	$(INSTALL_DIR) $(IDIR_GCONF)/usr/share/dbus-1/services
+	$(CP) $(WRKINST)/usr/share/dbus-1/services/* \
+		$(IDIR_GCONF)/usr/share/dbus-1/services
 
 include ${TOPDIR}/mk/pkg-bottom.mk

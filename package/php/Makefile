@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.3.5
+PKG_VERSION:=		5.3.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fb727a3ac72bf0ce37e1a20468a7bb81
+PKG_MD5SUM:=		88a2b00047bc53afbbbdf10ebe28a57e
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libopenssl zlib
@@ -19,15 +19,16 @@ PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI
 PKGSD_PHP_FASTCGI:=	PHP for FastCGI usage
 PKGSD_PHP_CLI:=		PHP CLI
 
-PKG_FLAVOURS_PHP:=	MOD_CURL MOD_GD MOD_GMP MOD_LDAP MOD_MYSQL
+#PKG_FLAVOURS_PHP:=	MOD_CURL MOD_GD MOD_GMP MOD_LDAP MOD_MYSQL
+PKG_FLAVOURS_PHP:=	MOD_CURL MOD_GMP MOD_LDAP MOD_MYSQL
 PKG_FLAVOURS_PHP+=	MOD_PGSQL MOD_SQLITE MOD_XML
 
 PKGFD_MOD_CURL:=	Curl support
 PKGFB_MOD_CURL:=	curl
 PKGFS_MOD_CURL:=	libcurl
-PKGFD_MOD_GD:=		Gd support
-PKGFB_MOD_GD:=		libgd libpng
-PKGFS_MOD_GD:=		libgd libpng
+#PKGFD_MOD_GD:=		Gd support
+#PKGFB_MOD_GD:=		libgd libpng
+#PKGFS_MOD_GD:=		libgd libpng
 PKGFD_MOD_GMP:=		GMP support
 PKGFB_MOD_GMP:=		gmp
 PKGFS_MOD_GMP:=		libgmp
@@ -106,9 +107,9 @@ PKG_CONFIGURE_OPTS+=	--with-curl=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-curl
 endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
-PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
-			--with-jpeg-dir="$(STAGING_TARGET_DIR)/usr" \
+#ifneq ($(ADK_PACKAGE_PHP_MOD_GD),)
+#PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
+			--without-jpeg-dir \
 			--with-png-dir="$(STAGING_TARGET_DIR)/usr" \
 			--without-freetype-dir \
 			--without-xpm-dir \
@@ -116,9 +117,9 @@ PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
 			--without-t1lib	\
 			--enable-gd-native-ttf \
 			--disable-gd-jis-conv
-else
+#else
 PKG_CONFIGURE_OPTS+=	--without-gd
-endif
+#endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_GMP),)
 PKG_CONFIGURE_OPTS+=	--with-gmp=shared,"$(STAGING_TARGET_DIR)/usr"
 else

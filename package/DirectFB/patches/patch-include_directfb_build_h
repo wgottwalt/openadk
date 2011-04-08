@@ -1,0 +1,11 @@
+--- DirectFB-1.4.11.orig/include/directfb_build.h	2010-11-15 22:35:45.000000000 +0100
++++ DirectFB-1.4.11/include/directfb_build.h	2011-03-28 22:30:51.451811000 +0200
+@@ -29,7 +29,7 @@
+ #ifndef __DIRECTFB_BUILD_H__
+ #define __DIRECTFB_BUILD_H__
+ 
+-#define DIRECTFB_BUILD_VOODOO       (1)
++#define DIRECTFB_BUILD_VOODOO       (0)
+ #define DIRECTFB_BUILD_PURE_VOODOO  (0)
+ 
+ #endif /* __DIRECTFB_BUILD_H__ */

@@ -18,8 +18,9 @@ STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
+STAGING_JAVA_HOST_DIR:=	${BASE_DIR}/jhost
 # use headers and foo-config from system
-ifneq ($(ADK_NATIVE),)
+ifeq ($(ADK_NATIVE),y)
 STAGING_TARGET_DIR:=
 SCRIPT_TARGET_DIR:=	/usr/bin
 else
@@ -34,6 +35,7 @@ STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
+JTOOLS_BUILD_DIR=	$(BASE_DIR)/jtools_build
 TOOLS_DIR:=		$(BASE_DIR)/bin/tools
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 BIN_DIR:=		$(BASE_DIR)/bin/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
@@ -48,9 +50,11 @@ GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
 ifeq ($(ADK_NATIVE),y) 
 TARGET_CROSS:=
 TARGET_COMPILER_PREFIX?=
+CONFIGURE_TRIPLE:=	
 else
 TARGET_CROSS:=		$(STAGING_HOST_DIR)/bin/$(REAL_GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
+CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} --host=${GNU_TARGET_NAME} --target=${GNU_TARGET_NAME}
 endif
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
@@ -89,6 +93,7 @@ endif
 
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
 TARGET_CFLAGS+=		-flto
+TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
@@ -198,7 +203,7 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget --timeout=30 $(QUIET)
+FETCH_CMD?=		wget --timeout=30 -t 3 $(QUIET)
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe

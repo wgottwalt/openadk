@@ -29,6 +29,9 @@ libidl-install:
 		$(IDIR_LIBIDL)/usr/lib
 
 libidl-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBIDL_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_LIBIDL_DEV)/usr/include
 	$(INSTALL_DIR) $(IDIR_LIBIDL_DEV)/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/libIDL-config-2 \
 		$(IDIR_LIBIDL_DEV)/usr/bin

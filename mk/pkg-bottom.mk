@@ -72,10 +72,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    done;
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
-	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    --build=${GNU_HOST_NAME} \
-	    --host=${GNU_TARGET_NAME} \
-	    --target=${GNU_TARGET_NAME} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
 	    --program-prefix= \
 	    --program-suffix= \
 	    --prefix=/usr \
@@ -175,7 +172,7 @@ endif
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
 	    find usr ! -type d 2>/dev/null | \
-	    grep -E -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/lib/pkgconfig' -e '^usr/bin/[a-z0-9-]+-config' | \
+	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' -e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \

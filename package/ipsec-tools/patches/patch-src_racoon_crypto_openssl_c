@@ -1,6 +1,5 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- ipsec-tools-0.7.2.orig/src/racoon/crypto_openssl.c	2009-04-20 15:33:30.000000000 +0200
-+++ ipsec-tools-0.7.2/src/racoon/crypto_openssl.c	2009-05-29 15:31:04.728378359 +0200
+--- ipsec-tools-0.8.0.orig/src/racoon/crypto_openssl.c	2010-10-20 15:40:02.000000000 +0200
++++ ipsec-tools-0.8.0/src/racoon/crypto_openssl.c	2011-03-31 13:22:18.821818767 +0200
 @@ -63,8 +63,12 @@
  #ifdef HAVE_OPENSSL_ENGINE_H
  #include <openssl/engine.h>
@@ -14,7 +13,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  #include <openssl/err.h>
  #ifdef HAVE_OPENSSL_RC5_H
  #include <openssl/rc5.h>
-@@ -1347,6 +1351,7 @@ eay_idea_keylen(len)
+@@ -1405,6 +1409,7 @@ eay_idea_keylen(len)
  }
  #endif
  
@@ -22,7 +21,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  /*
   * BLOWFISH-CBC
   */
-@@ -1381,6 +1386,7 @@ eay_bf_keylen(len)
+@@ -1439,6 +1444,7 @@ eay_bf_keylen(len)
  		return -1;
  	return len;
  }
@@ -30,7 +29,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  #ifdef HAVE_OPENSSL_RC5_H
  /*
-@@ -1492,6 +1498,7 @@ eay_3des_keylen(len)
+@@ -1550,6 +1556,7 @@ eay_3des_keylen(len)
  	return 192;
  }
  
@@ -38,7 +37,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  /*
   * CAST-CBC
   */
-@@ -1526,6 +1533,7 @@ eay_cast_keylen(len)
+@@ -1584,6 +1591,7 @@ eay_cast_keylen(len)
  		return -1;
  	return len;
  }

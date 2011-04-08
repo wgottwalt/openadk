@@ -1,4 +1,7 @@
 # mips systems
+config ADK_KERNEL_ATHEROS_AR231X
+	boolean
+
 config ADK_KERNEL_MIPS_MALTA
 	boolean
 

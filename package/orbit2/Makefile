@@ -14,9 +14,14 @@ PKG_BUILDDEP:=		libIDL
 PKG_URL:=		http://projects.gnome.org/ORBit2/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 
+PKG_SUBPKGS:=		ORBIT2 ORBIT2_DEV
+PKGSD_ORBIT2_DEV:=	orbit2 headers
+PKGSC_ORBIT2_DEV:=	devel
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ORBIT2_DEV,orbit2-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ORBIT2_DEV},${PKGSC_ORBIT2_DEV}))
 
 CFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --cflags)
 LDFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --libs)
@@ -38,8 +43,19 @@ orbit2-install:
 	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libORBit*.so* \
 		$(IDIR_ORBIT2)/usr/lib
+	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/bin
+	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
+		$(IDIR_ORBIT2)/usr/bin
 	$(INSTALL_DIR) $(STAGING_DIR)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
 		$(STAGING_DIR)/usr/bin
+
+orbit2-dev-install:
+	$(INSTALL_DIR) $(IDIR_ORBIT2_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_ORBIT2_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_ORBIT2_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_ORBIT2_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

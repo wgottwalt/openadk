@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cyrus-sasl
-PKG_VERSION:=		2.1.22
+PKG_VERSION:=		2.1.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		45dde9d19193ae9dd388eb68b2027bc9
+PKG_MD5SUM:=		2eb0e48106f0e9cd8001e654f267ecbc
 PKG_DESCR:=		a general purpose authentication library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP:=		openssl
+PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://asg.web.cmu.edu/sasl/
 PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 PKG_NOPARALLEL:=	1
@@ -24,33 +24,34 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBSASL2_DEV,libsasl2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSASL2_DEV},${PKGSC_LIBSASL2_DEV}))
 
-CONFIGURE_ARGS+=	--disable-sample \
-			--enable-staticdlopen \
+CONFIGURE_ARGS+=	--enable-staticdlopen \
+			--enable-cram \
+			--enable-plain \
+			--enable-anon \
+			--enable-digest \
+			--with-ipctype=unix \
+			--with-devrandom="/dev/urandom" \
+			--with-openssl="${STAGING_TARGET_DIR}/usr" \
+			--disable-sample \
 			--disable-java \
 			--disable-alwaystrue \
 			--disable-checkapop \
-			--enable-cram \
-			--enable-digest \
 			--disable-otp \
 			--disable-srp \
 			--disable-srp-setpass \
 			--disable-krb4 \
 			--disable-gssapi \
 			--disable-gss_mutexes \
-			--enable-plain \
-			--enable-anon \
 			--disable-login \
 			--disable-ntlm \
 			--disable-sql \
+			--disable-static \
 			--without-dblib \
 			--without-gdbm \
-			--with-devrandom="/dev/urandom" \
 			--without-pam \
 			--without-saslauthd \
 			--without-authdaemond \
 			--without-pwcheck \
-			--with-ipctype=unix \
-			--with-openssl="${STAGING_TARGET_DIR}/usr" \
 			--without-des \
 			--without-opie \
 			--without-ldap \
@@ -59,8 +60,7 @@ CONFIGURE_ARGS+=	--disable-sample \
 			--without-sqlite \
 			--without-rc4 \
 			--without-dmalloc \
-			--without-sfio \
-			--disable-static
+			--without-sfio
 
 pre-build:
 	${MAKE} -C ${WRKBUILD}/include \

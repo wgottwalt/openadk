@@ -4,6 +4,11 @@
 
 if [ -x /usr/bin/sha256sum ]; then
 	/usr/bin/sha256sum "$@"
+elif [ -x /bin/cksum ] && [ $(echo | cksum -a sha256) = 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b ]; then
+	# we assume the arguments are exactly "-c" or "-c -"
+	x=$(sed 's/^\([0-9a-fA-F]*\) *\([^ ].*\)$/SHA256 (\2) = \1/' | cksum -c -a sha256)
+	[[ $x = *FAILED* ]] && exit 1
+	exit 0
 else
 	tmp=$(mktemp -t yyy)
 	cat - > $tmp

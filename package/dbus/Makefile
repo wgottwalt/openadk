@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.2.24
+PKG_VERSION:=		1.4.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		565346cecd9cfecf1463540c6086cc2c
+PKG_MD5SUM:=		99b165f727dd8a5c4b7e2c20a8bf5db6
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat
@@ -27,11 +27,13 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,DBUS_DEV,dbus-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBUS_DEV},${PKGSC_DBUS_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--without-x \
 			--enable-checks \
 			--with-xml=expat \
+			--with-session-socket-dir=/var/tmp \
 			--disable-dnotify \
 			--disable-kqueue \
 			--disable-xml-docs \

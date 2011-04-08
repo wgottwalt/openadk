@@ -21,6 +21,7 @@ $(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
 endif
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \
 			--enable-alsa \

@@ -1,0 +1,11 @@
+--- mozilla-2.0.orig/content/canvas/src/nsCanvasRenderingContext2D.cpp	2011-03-19 00:33:34.000000000 +0100
++++ mozilla-2.0/content/canvas/src/nsCanvasRenderingContext2D.cpp	2011-03-27 22:36:34.953370738 +0200
+@@ -159,7 +159,7 @@ DoubleIsFinite(double d)
+     // NOTE: '!!' casts an int to bool without spamming MSVC warning C4800.
+     return !!_finite(d);
+ #else
+-    return finite(d);
++    return isfinite(d);
+ #endif
+ }
+ 

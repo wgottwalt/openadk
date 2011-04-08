@@ -23,11 +23,16 @@ include $(TOPDIR)/mk/python.mk
 
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
+post-install:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/share/xcb
+	$(INSTALL_DIR) ${STAGING_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
+	${CP} ${WRKBUILD}/src/*.xml ${STAGING_DIR}/usr/share/xcb
+	${CP} ${WRKINST}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen/*.py \
+		${STAGING_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
+
 xcb-proto-install:
 	${INSTALL_DIR} ${IDIR_XCB_PROTO}/usr/share
 	${CP} ${WRKINST}/usr/share/xcb ${IDIR_XCB_PROTO}/usr/share
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/xcb
-	${CP} ${WRKINST}/usr/share/xcb/* ${STAGING_DIR}/usr/share/xcb
 	${INSTALL_DIR} ${IDIR_XCB_PROTO}/usr/lib/pkgconfig
 	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xcb-proto.pc \
 		${IDIR_XCB_PROTO}/usr/lib/pkgconfig

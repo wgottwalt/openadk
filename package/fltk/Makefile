@@ -9,7 +9,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		557544badbacca4ee1ebb2448f6e1f8a
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut
+PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut freetype
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/fltk/snapshots/
 PKG_NEED_CXX:=		1
@@ -27,16 +27,18 @@ $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-LIBRARIES+=-lssp
+LIBRARIES+=-lssp -lssp_nonshared
 endif
 
+CONFIGURE_ARGS+=	--disable-xinerama
+
 ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
+CONFIGURE_ENV+=		CXXFLAGS="${TARGET_CXXFLAGS} -fno-threadsafe-statics -fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
 			LIBS="$(LIBRARIES)"
 endif
 
-post-install:
+libfltk-install:
 	$(INSTALL_DIR) $(IDIR_LIBFLTK)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libfltk*.so* $(IDIR_LIBFLTK)/usr/lib
 

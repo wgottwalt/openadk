@@ -1,5 +1,5 @@
---- w-openjdk-6-1.orig/icedtea6-1.10/Makefile.in	2011-03-02 20:48:45.161291458 +0100
-+++ w-openjdk-6-1/icedtea6-1.10/Makefile.in	2011-03-28 17:00:03.591807998 +0200
+--- w-openjdk-6-1.orig/icedtea6-1.10/Makefile.in	2011-03-02 20:48:45.000000000 +0100
++++ w-openjdk-6-1/icedtea6-1.10/Makefile.in	2011-04-02 23:33:17.000000000 +0200
 @@ -1329,7 +1329,7 @@ stamps/extract-openjdk.stamp: stamps/dow
  @OPENJDK_SRC_DIR_FOUND_TRUE@	  cp -pPR $(OPENJDK_SRC_DIR_LINK) $(OPENJDK_SRC_DIR) openjdk ; \
  @OPENJDK_SRC_DIR_FOUND_TRUE@	fi
@@ -18,12 +18,24 @@
  	fi
  	mkdir -p stamps
  	touch stamps/extract-ecj.stamp
-@@ -1644,7 +1644,7 @@ clean-patch-ecj:
+@@ -1642,11 +1642,15 @@ clean-patch-ecj:
+ # ===========================
+ 
  stamps/native-ecj.stamp: 
- 	mkdir -p stamps ; \
- 	if test "x$(GCJ)" != "xno"; then \
+-	mkdir -p stamps ; \
+-	if test "x$(GCJ)" != "xno"; then \
 -	  $(GCJ) $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
-+	  $(GCJ) -static $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
- 	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \
- 	fi ; \
+-	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \
+-	fi ; \
++	mkdir -p stamps ; \
++	if test -n "${ADK_ECJ}" && test -x "${ADK_ECJ}"; then \
++		ln -s "${ADK_ECJ}" native-ecj; \
++	else \
++		if test "x$(GCJ)" != "xno"; then \
++		  $(GCJ) $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
++		    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \
++		fi ; \
++	fi; \
  	touch stamps/native-ecj.stamp
+ 
+ clean-native-ecj:

@@ -28,6 +28,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIB_DEV,glib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLIB_DEV},${PKGSC_GLIB_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-debug=no \
 			--disable-mem-pools \
 			--disable-rebuilds \
@@ -45,7 +46,6 @@ pre-configure:
 ifneq ($(OStype),Darwin)
 	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
-			--with-libiconv=gnu \
 	);
 	${MAKE} -C ${WRKBUILD} V=1
 	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin

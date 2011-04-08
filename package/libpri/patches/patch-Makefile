@@ -1,5 +1,5 @@
 --- libpri-1.4.10.2.orig/Makefile	2008-08-06 20:20:51.000000000 +0200
-+++ libpri-1.4.10.2/Makefile	2011-01-21 14:32:08.278658337 +0100
++++ libpri-1.4.10.2/Makefile	2011-04-01 14:39:42.851818751 +0200
 @@ -31,8 +31,8 @@ CC=gcc
  GREP=grep
  AWK=awk
@@ -30,11 +30,13 @@
  
  %.lo: %.c
  	$(CC) $(CFLAGS) $(MAKE_DEPS) -c -o $@ $<
-@@ -146,7 +147,6 @@ $(STATIC_LIBRARY): $(STATIC_OBJS)
+@@ -145,8 +146,7 @@ $(STATIC_LIBRARY): $(STATIC_OBJS)
+ 	ranlib $(STATIC_LIBRARY)
  
  $(DYNAMIC_LIBRARY): $(DYNAMIC_OBJS)
- 	$(CC) -shared $(SOFLAGS) -o $@ $(DYNAMIC_OBJS)
+-	$(CC) -shared $(SOFLAGS) -o $@ $(DYNAMIC_OBJS)
 -	$(LDCONFIG) $(LDCONFIG_FLAGS) .
++	$(CC) -shared $(SOFLAGS) $(LDFLAGS) -o $@ $(DYNAMIC_OBJS)
  	ln -sf libpri.so.$(SONAME) libpri.so
  
  version.c: FORCE
