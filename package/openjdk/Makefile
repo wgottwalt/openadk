@@ -17,6 +17,7 @@ PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
+PKG_DEPENDS:=		zlib libstdcxx libffi
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
@@ -65,9 +66,8 @@ CONFIGURE_ARGS+=	--enable-shark
 endif
 
 CONFIGURE_ARGS+=	--disable-docs \
-			--enable-bootstrap \
+			--disable-bootstrap \
 			--enable-openjdk-cross-compilation \
-			--with-cc-for-build=$(CC_FOR_BUILD) \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
 			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
@@ -81,8 +81,12 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--without-rhino
 
-MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+MAKE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+		GCC_HONOUR_COPTS=s
+
+OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			GCC_HONOUR_COPTS=s
+ALL_TARGET:=		icedtea
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \
@@ -92,7 +96,41 @@ do-extract:
 	mkdir -p ${WRKBUILD}/drops
 	cd ${TOPDIR}/dl; cp jaxp144_01.zip jdk6-jaf-b20.zip jdk6-jaxws-b20.zip ${WRKBUILD}/drops
 
+pre-configure:
+	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+	export ${OPENJDK_NATIVE_ENV}; ./configure \
+			${CONFIGURE_TRIPLE} \
+	   		--prefix=/usr \
+			--bindir=/usr/bin \
+	    		--datadir=/usr/share \
+	                --mandir=/usr/share/man \
+	  		--libexecdir=/usr/libexec \
+			--localstatedir=/var \
+			--sysconfdir=/etc \
+			--enable-bootstrap \
+			--enable-zero \
+			--enable-openjdk-cross-compilation \
+			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
+			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
+			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
+			--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
+			--with-jdk-home=$(BOOTSTRAPJDK) \
+			--with-java=$(BOOTSTRAPJDK)/bin/java \
+			--with-javac=$(BOOTSTRAPJDK)/bin/javac \
+			--with-javah=$(BOOTSTRAPJDK)/bin/javah \
+			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
+			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
+			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
+			--without-rhino ;\
+	$(MAKE) icedtea-ecj
+	# fixup symlinks to bootstrapjdk
+	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
+	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
+	ln -sf $(BOOTSTRAPJDK)/bin/javah $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javah
+	ln -sf $(BOOTSTRAPJDK)/bin/jar $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/jar
+
 openjdk-install:
-	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr/bin
+	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
+	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/* $(IDIR_OPENJDK)/usr 
 
 include ${TOPDIR}/mk/pkg-bottom.mk
