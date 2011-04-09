@@ -81,7 +81,8 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--without-rhino
 
-MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/usr/$(REAL_GNU_TARGET_NAME)/bin
+MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+			GCC_HONOUR_COPTS=s
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \

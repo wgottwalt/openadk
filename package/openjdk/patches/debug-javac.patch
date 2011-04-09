@@ -1,0 +1,18 @@
+--- w-openjdk-6-1.orig/icedtea6-1.10.orig/javac.in	2011-02-23 23:32:18.635149341 +0100
++++ w-openjdk-6-1/icedtea6-1.10/javac.in	2011-04-05 16:27:04.291962749 +0200
+@@ -37,6 +37,7 @@
+ if ( -e "@abs_top_builddir@/native-ecj" )
+ {
+     my @ecj_args = gen_ecj_opts( \@ARGV );
++    print 'Using native ecj';
+     exec '@abs_top_builddir@/native-ecj', @ecj_parms, @ecj_args ;
+ }
+ elsif ( -e "@ECJ_JAR@" )
+@@ -45,6 +46,7 @@
+     my @CLASSPATH = ('@ECJ_JAR@');
+     push @CLASSPATH, split /:/, $ENV{"CLASSPATH"} if exists $ENV{"CLASSPATH"};
+     $ENV{"CLASSPATH"} = join ':', @CLASSPATH;
++    print 'Using ecj with java';
+     exec '@JAVA@', 'org.eclipse.jdt.internal.compiler.batch.Main', @ecj_parms, @ecj_args;
+ }
+ else
