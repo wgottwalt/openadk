@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3468a2c463b4fc2788ba621e4b511c30
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libnotify libpng libtiff
+PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libnotify
 PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf
-PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libnotify libIDL libX11 MesaLib libtiff
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme
+PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme libnotify
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -39,7 +39,9 @@ endif
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_CC="${CC_FOR_BUILD}" \
+			HOST_CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
 			HOST_CFLAGS="${CFLAGS_FOR_BUILD}" \
+			HOST_LDFLAGS="${LDLAGS_FOR_BUILD}" \
 			HOST_CXX="${CXX_FOR_BUILD}" \
 			HOST_CXXFLAGS="${CXXFLAGS_FOR_BUILD}" \
 			BUILD_LIBIDL_CONFIG="${BUILD_LIBIDL_CONFIG}" \
@@ -65,6 +67,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
 			--enable-libxul \
+			--enable-libnotify \
 			--enable-dbus \
 			--disable-tests \
 			--disable-libconic \
@@ -78,7 +81,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-jemalloc \
 			--disable-crashreporter
 
-XAKE_FLAGS+=		OS_RELEASE="2.6"
+XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
 
 firefox-install:
