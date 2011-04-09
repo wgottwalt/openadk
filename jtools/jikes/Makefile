@@ -8,7 +8,6 @@ PKG_VERSION:=		1.22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		14d4bdfac236e347d806c6743dba48c6
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jikes/Jikes/2.22/}
-#http://sourceforge.net/projects/jikes/files/Jikes/1.22/jikes-1.22.tar.bz2/download
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
@@ -26,5 +25,7 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/jikes: $(WRKBUILD)/.compiled
 	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
+	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jikes ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/javac
+	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jikes ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/javac
 
 include $(TOPDIR)/mk/tools.mk

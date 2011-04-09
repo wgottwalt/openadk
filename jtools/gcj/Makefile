@@ -26,9 +26,9 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 			--enable-java-home \
 			--enable-languages=java \
 			--with-ffi \
-			--with-mpc=$(STAGING_HOST_DIR)/usr \
-			--with-mpfr=$(STAGING_HOST_DIR)/usr \
-			--with-gmp=$(STAGING_HOST_DIR)/usr \
+			--with-mpc=$(STAGING_HOST_DIR) \
+			--with-mpfr=$(STAGING_HOST_DIR) \
+			--with-gmp=$(STAGING_HOST_DIR) \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-biarch \
