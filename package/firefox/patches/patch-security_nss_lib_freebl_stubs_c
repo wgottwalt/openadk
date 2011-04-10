@@ -1,0 +1,11 @@
+--- mozilla-1.9.2.orig/security/nss/lib/freebl/stubs.c	2010-04-02 18:03:06.000000000 +0200
++++ mozilla-1.9.2/security/nss/lib/freebl/stubs.c	2010-04-11 15:37:04.000000000 +0200
+@@ -530,7 +530,7 @@ freebl_InitNSSUtil(void *lib)
+  * fetch the library if it's loaded. For NSS it should already be loaded
+  */
+ #define freebl_getLibrary(libName)  \
+-    dlopen (libName, RTLD_LAZY|RTLD_NOLOAD)
++    dlopen (libName, RTLD_LAZY)
+ 
+ #define freebl_releaseLibrary(lib) \
+     if (lib) dlclose(lib)

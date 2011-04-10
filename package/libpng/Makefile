@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libpng
-PKG_VERSION:=		1.5.1
+PKG_VERSION:=		1.2.44
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		220035f111ea045a51e290906025e8b5
+PKG_MD5SUM:=		89b62f8daaeeab1342e307d6d1411ff1
 PKG_DESCR:=		A library for reading/writing PNG images
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -27,7 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPNG_DEV,libpng-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPNG_DEV},${PKGSC_LIBPNG_DEV},${PKG_OPTS}))
 
-#TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 libpng-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib

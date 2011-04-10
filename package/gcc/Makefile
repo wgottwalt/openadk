@@ -41,7 +41,7 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--enable-cxx-flags="${TARGET_LDFLAGS}"
 
 # disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin

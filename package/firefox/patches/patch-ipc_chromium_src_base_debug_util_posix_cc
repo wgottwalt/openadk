@@ -1,24 +1,29 @@
---- mozilla-2.0.orig/ipc/chromium/src/base/debug_util_posix.cc	2011-03-19 00:33:46.000000000 +0100
-+++ mozilla-2.0/ipc/chromium/src/base/debug_util_posix.cc	2011-04-07 20:17:31.000000000 +0200
-@@ -119,11 +119,7 @@ StackTrace::StackTrace() {
+--- mozilla-1.9.2.orig/ipc/chromium/src/base/debug_util_posix.cc	2010-10-27 05:01:17.000000000 +0200
++++ mozilla-1.9.2/ipc/chromium/src/base/debug_util_posix.cc	2010-11-12 11:53:10.614327269 +0100
+@@ -114,6 +114,9 @@ void DebugUtil::BreakDebugger() {
+ }
+ 
+ StackTrace::StackTrace() {
++#ifdef CHROMIUM_MOZILLA_BUILD
++  return;
++#else
    const int kMaxCallers = 256;
  
    void* callers[kMaxCallers];
--#ifndef ANDROID
--  int count = backtrace(callers, kMaxCallers);
--#else
-   int count = 0;
--#endif
- 
-   // Though the backtrace API man page does not list any possible negative
-   // return values, we still still exclude them because they would break the
-@@ -138,9 +134,6 @@ StackTrace::StackTrace() {
+@@ -128,11 +131,16 @@ StackTrace::StackTrace() {
+   } else {
+     trace_.resize(0);
+   }
++#endif
+ }
  
  void StackTrace::PrintBacktrace() {
++#ifdef CHROMIUM_MOZILLA_BUILD
++  return;
++#else
    fflush(stderr);
--#ifndef ANDROID
--  backtrace_symbols_fd(&trace_[0], trace_.size(), STDERR_FILENO);
--#endif
+   backtrace_symbols_fd(&trace_[0], trace_.size(), STDERR_FILENO);
++#endif
  }
  
  void StackTrace::OutputToStream(std::ostream* os) {
