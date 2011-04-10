@@ -46,11 +46,11 @@ include ../rules.mk
 OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar"
 OPENJDK_NATIVE_ENV+=	DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
 OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
-OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj
+OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj PATH=$$PATH:$(STAGING_JAVA_HOST_DIR)/usr/bin
 
 install: ${STAGING_JAVA_HOST_DIR}/bootstrap-jdk/bin/java
 
-$(WRKDIST)/.extract:
+$(WRKDIST)/.extract: $(WRKDIST)/.extract_done
 	cd ${WRKDIST}; mkdir openjdk-$(PKG_VERSION); \
 		tar xzf $(TOPDIR)/dl/openjdk-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C openjdk-$(PKG_VERSION)
 	cd $(WRKDIST); tar xzf $(TOPDIR)/dl/$(ICEDTEA_NAME)-$(ICEDTEA_VERSION).tar.gz

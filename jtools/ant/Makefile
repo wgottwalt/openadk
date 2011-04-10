@@ -17,7 +17,7 @@ include ../rules.mk
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/ant
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	cp junit* $(WRKBUILD)/lib/optional
+	cd $(WRKBUILD)/lib/optional; wget http://openadk.org/distfiles/junit-4.9b2.jar
 	cp $(STAGING_JAVA_HOST_DIR)/usr/share/ecj.jar $(WRKBUILD)/lib/optional
 	cd ${WRKBUILD}; export BOOTJAVAC_OPTS="-bootclasspath $(STAGING_JAVA_HOST_DIR)/usr/share/classpath/glibj.zip" \
 		BOOTCLASSPATH="$(STAGING_JAVA_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_JAVA_HOST_DIR)/usr/share/classpath/glibj.zip" \
