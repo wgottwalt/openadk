@@ -59,12 +59,19 @@ TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
 
 ifeq ($(ADK_PACKAGE_OPENJDK_ZERO),y)
-CONFIGURE_ARGS+=	--enable-zero
+CONFIGURE_BACKEND:=	--enable-zero
 endif
 ifeq ($(ADK_PACKAGE_OPENJDK_SHARK),y)
-CONFIGURE_ARGS+=	--enable-shark
+CONFIGURE_BACKEND:=	--enable-shark
+endif
+ifeq ($(ADK_PACKAGE_OPENJDK_CACAO),y)
+CONFIGURE_BACKEND:=	--enable-cacao
+endif
+ifeq ($(ADK_PACKAGE_OPENJDK_JAMVM),y)
+CONFIGURE_BACKEND:=	--enable-jamvm
 endif
 
+CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
 CONFIGURE_ARGS+=	--disable-docs \
 			--disable-bootstrap \
 			--enable-openjdk-cross-compilation \
@@ -85,7 +92,8 @@ MAKE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 		GCC_HONOUR_COPTS=s
 
 OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
-			GCC_HONOUR_COPTS=s
+			GCC_HONOUR_COPTS=s \
+			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 ALL_TARGET:=		icedtea
 
 do-extract:
@@ -98,8 +106,9 @@ do-extract:
 
 pre-configure:
 	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-	export ${OPENJDK_NATIVE_ENV}; ./configure \
+	export ${OPENJDK_NATIVE_ENV} $(MAKE_ENV) ; ./configure \
 			${CONFIGURE_TRIPLE} \
+			$(CONFIGURE_BACKEND) \
 	   		--prefix=/usr \
 			--bindir=/usr/bin \
 	    		--datadir=/usr/share \
@@ -108,7 +117,6 @@ pre-configure:
 			--localstatedir=/var \
 			--sysconfdir=/etc \
 			--enable-bootstrap \
-			--enable-zero \
 			--enable-openjdk-cross-compilation \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
