@@ -162,7 +162,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done;
 	# workaround for openjdk
-	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) ; cp * ..
+	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin ; cp * ..
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
