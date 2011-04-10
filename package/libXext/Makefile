@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9beee7f603907840de9d9e73172e74d0
 PKG_DESCR:=		X client interface to extensions of the X protocol
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		libX11
+PKG_BUILDDEP:=		libX11 xextproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXEXT LIBXEXT_DEV
