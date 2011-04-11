@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9d8da492fc8f050c5de711d592d3c797
 PKG_DESCR:=		X set utility
 PKG_SECTION:=		x11/apps
+PKG_BUILDDEP:=		libXmu
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

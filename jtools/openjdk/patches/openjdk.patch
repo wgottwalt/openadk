@@ -1,33 +1,21 @@
---- w-openjdk-6-1.orig/icedtea6-1.10/Makefile.in	2011-03-02 20:48:45.000000000 +0100
-+++ w-openjdk-6-1/icedtea6-1.10/Makefile.in	2011-04-02 23:33:17.000000000 +0200
-@@ -328,7 +328,7 @@
- am__untar = @am__untar@
- bindir = @bindir@
- build = @build@
--build_alias = @build_alias@
-+build_alias = ${BUILD_ALIAS}
- build_cpu = @build_cpu@
- build_os = @build_os@
- build_vendor = @build_vendor@
-@@ -339,7 +339,7 @@
- dvidir = @dvidir@
- exec_prefix = @exec_prefix@
- host = @host@
--host_alias = @host_alias@
-+host_alias = ${HOST_ALIAS}
- host_cpu = @host_cpu@
- host_os = @host_os@
- host_vendor = @host_vendor@
-@@ -362,7 +362,7 @@
- sharedstatedir = @sharedstatedir@
- srcdir = @srcdir@
- sysconfdir = @sysconfdir@
--target_alias = @target_alias@
-+target_alias = ${TARGET_ALIAS}
- top_build_prefix = @top_build_prefix@
- top_builddir = @top_builddir@
- top_srcdir = @top_srcdir@
-@@ -1329,7 +1329,7 @@ stamps/extract-openjdk.stamp: stamps/dow
+diff -Nur openjdk-6.orig/Makefile openjdk-6/Makefile
+--- openjdk-6.orig/Makefile	2011-02-28 17:02:07.000000000 +0100
++++ openjdk-6/Makefile	2011-04-06 19:47:19.261818496 +0200
+@@ -25,9 +25,7 @@
+ 
+ BUILD_PARENT_DIRECTORY=.
+ 
+-ifndef TOPDIR
+-  TOPDIR:=.
+-endif
++TOPDIR:=.
+ 
+ ifndef JDK_TOPDIR
+   JDK_TOPDIR=$(TOPDIR)/jdk
+diff -Nur icedtea6-1.10.orig/Makefile.in icedtea6-1.10/Makefile.in
+--- icedtea6-1.10.orig/Makefile.in	2011-03-02 20:48:45.161291458 +0100
++++ icedtea6-1.10/Makefile.in	2011-04-06 20:10:40.581819545 +0200
+@@ -1329,7 +1329,7 @@
  @OPENJDK_SRC_DIR_FOUND_TRUE@	  cp -pPR $(OPENJDK_SRC_DIR_LINK) $(OPENJDK_SRC_DIR) openjdk ; \
  @OPENJDK_SRC_DIR_FOUND_TRUE@	fi
  @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	if ! test -d openjdk ; then \
@@ -36,7 +24,7 @@
  @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	fi
  @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_FALSE@	set -e ; \
  @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_FALSE@	if ! test -d openjdk ; \
-@@ -1576,7 +1576,7 @@ clean-overlay:
+@@ -1576,7 +1576,7 @@
  # FIXME (missing): Rename to clone-ecj.
  stamps/extract-ecj.stamp: $(OPENJDK_TREE)
  	if ! test -d openjdk-ecj ; then \
@@ -45,16 +33,14 @@
  	fi
  	mkdir -p stamps
  	touch stamps/extract-ecj.stamp
-@@ -1642,11 +1642,15 @@ clean-patch-ecj:
- # ===========================
+@@ -1643,10 +1643,14 @@
  
  stamps/native-ecj.stamp: 
--	mkdir -p stamps ; \
+ 	mkdir -p stamps ; \
 -	if test "x$(GCJ)" != "xno"; then \
 -	  $(GCJ) $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
 -	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR} ; \
 -	fi ; \
-+	mkdir -p stamps ; \
 +	if test -n "${ADK_ECJ}" && test -x "${ADK_ECJ}"; then \
 +		ln -s "${ADK_ECJ}" native-ecj; \
 +	else \

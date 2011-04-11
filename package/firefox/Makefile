@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		4.0
+PKG_VERSION:=		3.6.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3468a2c463b4fc2788ba621e4b511c30
+PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libnotify
@@ -23,7 +23,7 @@ PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
-WRKDIST=		${WRKDIR}/mozilla-2.0
+WRKDIST=		${WRKDIR}/mozilla-1.9.2
 
 include $(TOPDIR)/mk/package.mk
 

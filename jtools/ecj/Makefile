@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		ecj
 PKG_VERSION:=		1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		63220327925ace13756ae334c55a3baa
 
 include ../rules.mk
@@ -26,8 +26,12 @@ ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
 		${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
 	chmod u+x ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
 	# put a wrapper for java here
-	echo "env LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 ${STAGING_JAVA_HOST_DIR}/usr/bin/gij \$$@" > \
+	echo "env LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 ${STAGING_JAVA_HOST_DIR}/usr/bin/gij \"\$$@\"" > \
 		${STAGING_JAVA_HOST_DIR}/usr/bin/java
 	chmod u+x ${STAGING_JAVA_HOST_DIR}/usr/bin/java
+	rm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
+	rm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
+	cp ${STAGING_JAVA_HOST_DIR}/usr/bin/java ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
+	cp ${STAGING_JAVA_HOST_DIR}/usr/bin/java ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 include $(TOPDIR)/mk/tools.mk

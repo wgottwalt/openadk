@@ -95,68 +95,57 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
 	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
 	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
-	(cd $(GCC_BUILD_DIR_MINIMAL); \
-		PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_MINIMAL); PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
 			--with-newlib \
-			--without-headers \
-	);
+			--without-headers
 	touch $@
 
 $(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
+	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
 	touch $@
 
 $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) install-gcc
+	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) install-gcc
 	touch $@
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
-	(cd $(GCC_BUILD_DIR_INITIAL); \
-		PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_INITIAL); PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
 			--disable-threads \
 			--with-newlib \
-			--with-sysroot=$(STAGING_TARGET_DIR) \
-	);
+			--with-sysroot=$(STAGING_TARGET_DIR)
 	touch $@
 
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
+	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
+	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 	touch $@
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
-	(cd $(GCC_BUILD_DIR_FINAL); \
-		PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_FINAL); PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-slibdir=$(STAGING_TARGET_DIR)/lib \
-			--enable-shared \
-	);
+			--enable-shared
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
-	PATH='$(TARGET_PATH)' \
-	$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
+	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -165,14 +154,15 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# Set up the symlinks to enable lying about target name.
 	set -e; \
-	(cd $(STAGING_HOST_DIR); \
+	cd $(STAGING_HOST_DIR); \
 		ln -sf $(REAL_GNU_TARGET_NAME) $(GNU_TARGET_NAME); \
 		cd bin; \
 		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
 			ln -sf $${app} \
 				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
-		done; \
-	)
+		done;
+	# workaround for openjdk
+	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin ; cp * ..
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
