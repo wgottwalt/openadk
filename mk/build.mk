@@ -186,7 +186,7 @@ switch:
 
 kernelconfig:
 	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config $(BUILD_DIR)/linux/.config
-	${KERNEL_MAKE_ENV} ${MAKE} ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
+	${KERNEL_MAKE_ENV} ${MAKE} ARCH=$(ARCH) ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
 	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config
 
 # create a new package from package/.template
