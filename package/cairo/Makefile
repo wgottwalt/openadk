@@ -29,6 +29,7 @@ $(eval $(call PKG_template,CAIRO_DEV,cairo-dev,${PKG_VERSION}-${PKG_RELEASE},${P
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-ft=yes \
+			--enable-tee=yes \
 			--enable-xlib=yes
 
 cairo-install:

@@ -17,7 +17,7 @@ PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
-PKG_DEPENDS:=		zlib libstdcxx libffi
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
@@ -93,7 +93,7 @@ MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 
 OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
-			GCC_HONOUR_COPTS=s \
+			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 ALL_TARGET:=		icedtea
 
@@ -131,12 +131,26 @@ pre-configure:
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--without-rhino ;\
+	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizes.32 \
+		$(WRKBUILD)/generated/sun/awt/X11/generator/sizes.32 ; \
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
+		$(WRKBUILD)/generated/sun/awt/X11/generator/sizer.32 ; \
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
+		$(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/sizer.32 ; \
 	$(MAKE) icedtea-ecj
-	# fixup symlinks to bootstrapjdk
+	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
 	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
 	ln -sf $(BOOTSTRAPJDK)/bin/javah $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javah
 	ln -sf $(BOOTSTRAPJDK)/bin/jar $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/jar
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizes.32 \
+		$(WRKBUILD)/generated/sun/awt/X11/generator/sizes.32
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
+		$(WRKBUILD)/generated/sun/awt/X11/generator/sizer.32
+	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator
+	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
+		$(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/sizer.32
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
