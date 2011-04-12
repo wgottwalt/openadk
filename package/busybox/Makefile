@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.18.1
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		f15fe752d8b7012aa5e59f83b88ccb1c
+PKG_VERSION:=		1.18.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b03c5b46ced732679e525a920a1a62f5
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
 PKG_URL:=		http://www.busybox.net/
@@ -23,47 +23,43 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BUSYBOX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKGSD_UDHCPD},${PKGSC_UDHCPD}))
 
+# This is how to extract the Config.in files from a _built_ busybox source tree:
+#|for c in $(find build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/ -name Config.in); do
+#|	c=$(sed s,build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/,, <<< $c)
+#|	mkdir -p package/busybox/config_new/$(dirname $c)
+#|	cp build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/$c package/busybox/config_new/$c
+#|done
+
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" \
+			HOSTCC="${CC_FOR_BUILD}" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+			-C ${WRKBUILD}
+ifneq (${ADK_NATIVE},y)
+BB_MAKE_FLAGS+=		EXTRA_CFLAGS="${TARGET_CFLAGS}" CROSS_COMPILE="$(TARGET_CROSS)"
+endif
+
+# XXX: Although this looks like all new symbols are enabled when 'make oldconfig' runs, they're not.
+#      In fact, you can pipe "yes ''" as well as "yes n", each time leading to the default value being
+#      chosen for each unknown symbol.
+#      A real solution for that task (disabling everything that's unknown, as we know better) is to
+#      upgrade ${TOPDIR}/config so it understands the oldnoconfig target, and using that to update
+#      the busybox config before compiling.
+#      The workaround for now is to patch all busybox symbols to default n inside the busybox source
+#      which do depend on non-existance of other packages outside the busybox source.
 do-configure:
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-ifeq ($(ADK_NATIVE),y)
-	yes '' | \
-	$(MAKE) V=1 \
-	    IPKG_ARCH="$(CPU_ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
-else
-	yes '' | \
-	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    EXTRA_CFLAGS="$(TARGET_CFLAGS)" IPKG_ARCH="$(CPU_ARCH)" \
-	    ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" -C $(WRKBUILD) oldconfig $(MAKE_TRACE)
-endif
+	yes '' | $(MAKE) ${BB_MAKE_FLAGS} oldconfig $(MAKE_TRACE)
 
 do-build:
-ifeq ($(ADK_NATIVE),y)
-	$(MAKE) V=1 \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-		-C $(WRKBUILD) busybox
-else
-	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-		-C $(WRKBUILD) busybox
-endif
+	$(MAKE) ${BB_MAKE_FLAGS} busybox
 
 do-install:
-ifeq ($(ADK_NATIVE),y)
-	$(MAKE) V=1 \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-		-C $(WRKBUILD) install $(MAKE_TRACE)
-else
-	$(MAKE) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-	    IPKG_ARCH="$(CPU_ARCH)" ARCH="$(ARCH)" HOSTCC="$(CC_FOR_BUILD)" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-		-C $(WRKBUILD) install $(MAKE_TRACE)
-endif
+	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \

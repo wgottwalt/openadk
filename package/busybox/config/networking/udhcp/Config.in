@@ -6,6 +6,7 @@
 config BUSYBOX_UDHCPD
 	bool "udhcp server (udhcpd)"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  udhcpd is a DHCP server geared primarily toward embedded systems,
 	  while striving to be fully functional and RFC compliant.
@@ -49,6 +50,7 @@ config BUSYBOX_DHCPD_LEASES_FILE
 config BUSYBOX_UDHCPC
 	bool "udhcp client (udhcpc)"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  udhcpc is a DHCP client geared primarily toward embedded systems,
 	  while striving to be fully functional and RFC compliant.
@@ -92,7 +94,8 @@ config BUSYBOX_FEATURE_UDHCP_RFC3397
 	depends on BUSYBOX_UDHCPD || BUSYBOX_UDHCPC
 	help
 	  If selected, both client and server will support passing of domain
-	  search lists via option 119, specified in RFC3397.
+	  search lists via option 119, specified in RFC 3397,
+	  and SIP servers option 120, specified in RFC 3361.
 
 config BUSYBOX_UDHCPC_DEFAULT_SCRIPT
 	string "Absolute path to config script"
