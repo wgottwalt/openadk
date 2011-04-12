@@ -7,6 +7,9 @@ config ADK_KERNEL_NETDEVICES
 config ADK_KERNEL_NET_ETHERNET
 	boolean
 
+config ADK_KERNEL_PHYLIB
+	boolean
+
 config ADK_KERNEL_MII
 	boolean
 
@@ -59,6 +62,17 @@ config ADK_KERNEL_VIA_RHINE
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default n
+	help
+
+config ADK_KERNEL_AR231X_ETHERNET
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	select ADK_KERNEL_PHYLIB
+	default y if ADK_TARGET_SYSTEM_FON_FON2100
 	default n
 	help
 
