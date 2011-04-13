@@ -1,0 +1,21 @@
+--- dbus-1.4.6.orig/configure	2011-02-17 21:06:57.000000000 +0100
++++ dbus-1.4.6/configure	2011-04-13 04:47:38.000000000 +0200
+@@ -19608,18 +19608,6 @@ if test "x$GCC" = "xyes"; then
+      ;;
+   esac
+ 
+-  case " $CFLAGS " in
+-  *[\ \	]-fPIE[\ \	]*) ;;
+-  *) if test x$dbus_win = xno && cc_supports_flag -fPIE; then
+-        PIE_CFLAGS="-fPIE"
+-        if ld_supports_flag -z,relro; then
+-           PIE_LDFLAGS="-pie -Wl,-z,relro"
+-        else
+-           PIE_LDFLAGS="-pie"
+-        fi
+-     fi
+-     ;;
+-  esac
+ 
+   ### Disabled warnings, and compiler flag overrides
+ 

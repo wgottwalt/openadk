@@ -3,6 +3,7 @@ config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_mips64el
 	select ADK_lemote_yeelong
 	select ADK_LINUX_64
+	select ADK_CPU_LOONGSON2F
 	select ADK_KERNEL_MACH_LOONGSON
 	select ADK_KERNEL_LEMOTE_MACH2F
 	select ADK_TARGET_WITH_USB_BOOT
