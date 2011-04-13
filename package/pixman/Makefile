@@ -26,6 +26,7 @@ $(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,PIXMAN_DEV,pixman-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PIXMAN_DEV},${PKGSC_PIXMAN_DEV},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+CONFIGURE_ARGS+=	--disable-gtk
 
 pixman-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN}/usr/lib

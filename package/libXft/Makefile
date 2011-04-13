@@ -22,8 +22,6 @@ $(eval $(call PKG_template,LIBXFT,libxft,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,LIBXFT_DEV,libxft-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXFT_DEV},${PKGSC_LIBXFT_DEV}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--disable-malloc0returnsnull \
-			--disable-install-makestrs
 
 libxft-install:
 	${INSTALL_DIR} ${IDIR_LIBXFT}/usr/lib
@@ -32,5 +30,8 @@ libxft-install:
 libxft-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXFT_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXFT_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBXFT_DEV}/usr/lib/pkgconfig
+	$(CP) ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBXFT_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
