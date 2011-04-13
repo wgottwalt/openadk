@@ -1,6 +1,6 @@
---- MPlayer-1.0rc4.orig/configure	2010-07-29 02:31:57.000000000 +0200
-+++ MPlayer-1.0rc4/configure	2011-04-01 16:12:17.224319163 +0200
-@@ -2556,7 +2556,7 @@ else
+--- mplayer-1.0-32749.orig/configure	2011-01-03 11:27:11.000000000 +0100
++++ mplayer-1.0-32749/configure	2011-01-09 00:35:20.000000000 +0100
+@@ -2554,7 +2554,7 @@ else
  fi
  
  cflag_check -mno-omit-leaf-frame-pointer && cflags_no_omit_leaf_frame_pointer="-mno-omit-leaf-frame-pointer"

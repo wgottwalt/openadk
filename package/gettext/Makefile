@@ -58,7 +58,7 @@ post-build:
 	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
 			${STAGING_DIR}/usr/lib
 
-post-install:
+do-install:
 	${INSTALL_DIR} ${IDIR_LIBINTL}/usr/lib
 	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
 		${IDIR_LIBINTL}/usr/lib
