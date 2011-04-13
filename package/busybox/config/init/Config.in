@@ -152,6 +152,18 @@ config BUSYBOX_TELINIT_PATH
 	  to facilitate proper shutdown, this path is to be used when
 	  locating telinit executable.
 
+config BUSYBOX_INIT_TERMINAL_TYPE
+	string "Initial terminal type"
+	default "linux"
+	depends on BUSYBOX_INIT
+	help
+	  This is the initial value set by init for the TERM environment
+	  variable. This variable is used by programs which make use of
+	  extended terminal capabilities.
+
+	  Note that on Linux, init attempts to detect serial terminal and
+	  sets TERM to "vt102" if one is found.
+
 config BUSYBOX_MESG
 	bool "mesg"
 	default n

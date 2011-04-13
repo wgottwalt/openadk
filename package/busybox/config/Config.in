@@ -47,6 +47,17 @@ config BUSYBOX_USE_PORTABLE_CODE
 	  compiler other than gcc.
 	  If you do use gcc, this option may needlessly increase code size.
 
+config BUSYBOX_PLATFORM_LINUX
+	bool "Enable Linux-specific applets and features"
+	default y
+	help
+	  For the most part, busybox requires only POSIX compatibility
+	  from the target system, but some applets and features use
+	  Linux-specific interfaces.
+
+	  Answering 'N' here will disable such applets and hide the
+	  corresponding configuration options.
+
 choice
 	prompt "Buffer allocation policy"
 	default FEATURE_BUFFERS_USE_MALLOC
@@ -131,6 +142,15 @@ config BUSYBOX_UNICODE_SUPPORT
 	  Probably by the time when busybox will be fully Unicode-clean,
 	  other encodings will be mainly of historic interest.
 
+config BUSYBOX_UNICODE_USING_LOCALE
+	bool "Use libc routines for Unicode (else uses internal ones)"
+	default n
+	depends on BUSYBOX_UNICODE_SUPPORT && BUSYBOX_LOCALE_SUPPORT
+	help
+	  With this option on, Unicode support is implemented using libc
+	  routines. Otherwise, internal implementation is used.
+	  Internal implementation is smaller.
+
 config BUSYBOX_FEATURE_CHECK_UNICODE_IN_ENV
 	bool "Check $LANG environment variable"
 	default y
@@ -140,6 +160,91 @@ config BUSYBOX_FEATURE_CHECK_UNICODE_IN_ENV
 	  only if LANG variable has the value of the form "xxxx.utf8"
 
 	  Otherwise, Unicode support will be always enabled and active.
+
+config BUSYBOX_SUBST_WCHAR
+	int "Character code to substitute unprintable characters with"
+	depends on BUSYBOX_UNICODE_SUPPORT
+	default 63
+	help
+	  Typical values are 63 for '?' (works with any output device),
+	  30 for ASCII substitute control code,
+	  65533 (0xfffd) for Unicode replacement character.
+
+config BUSYBOX_LAST_SUPPORTED_WCHAR
+	int "Range of supported Unicode characters"
+	depends on BUSYBOX_UNICODE_SUPPORT
+	default 767
+	help
+	  Any character with Unicode value bigger than this is assumed
+	  to be non-printable on output device. Many applets replace
+	  such chars with substitution character.
+
+	  The idea is that many valid printable Unicode chars are
+	  nevertheless are not displayed correctly. Think about
+	  combining charachers, double-wide hieroglyphs, obscure
+	  characters in dozens of ancient scripts...
+	  Many terminals, terminal emulators, xterms etc will fail
+	  to handle them correctly. Choose the smallest value
+	  which suits your needs.
+
+	  Typical values are:
+	  126 - ASCII only
+	  767 (0x2ff) - there are no combining chars in [0..767] range
+			(the range includes Latin 1, Latin Ext. A and B),
+			code is ~700 bytes smaller for this case.
+	  4351 (0x10ff) - there are no double-wide chars in [0..4351] range,
+			code is ~300 bytes smaller for this case.
+	  12799 (0x31ff) - nearly all non-ideographic characters are
+			available in [0..12799] range, including
+			East Asian scripts like katakana, hiragana, hangul,
+			bopomofo...
+	  0 - off, any valid printable Unicode character will be printed.
+
+config BUSYBOX_UNICODE_COMBINING_WCHARS
+	bool "Allow zero-width Unicode characters on output"
+	default n
+	depends on BUSYBOX_UNICODE_SUPPORT
+	help
+	  With this option off, any Unicode char with width of 0
+	  is substituted on output.
+
+config BUSYBOX_UNICODE_WIDE_WCHARS
+	bool "Allow wide Unicode characters on output"
+	default n
+	depends on BUSYBOX_UNICODE_SUPPORT
+	help
+	  With this option off, any Unicode char with width > 1
+	  is substituted on output.
+
+config BUSYBOX_UNICODE_BIDI_SUPPORT
+	bool "Bidirectional character-aware line input"
+	default n
+	depends on BUSYBOX_UNICODE_SUPPORT && !BUSYBOX_UNICODE_USING_LOCALE
+	help
+	  With this option on, right-to-left Unicode characters
+	  are treated differently on input (e.g. cursor movement).
+
+config BUSYBOX_UNICODE_NEUTRAL_TABLE
+	bool "In bidi input, support non-ASCII neutral chars too"
+	default n
+	depends on BUSYBOX_UNICODE_BIDI_SUPPORT
+	help
+	  In most cases it's enough to treat only ASCII non-letters
+	  (i.e. punctuation, numbers and space) as characters
+	  with neutral directionality.
+	  With this option on, more extensive (and bigger) table
+	  of neutral chars will be used.
+
+config BUSYBOX_UNICODE_PRESERVE_BROKEN
+	bool "Make it possible to enter sequences of chars which are not Unicode"
+	default n
+	depends on BUSYBOX_UNICODE_SUPPORT
+	help
+	  With this option on, invalid UTF-8 bytes are not substituted
+	  with the selected substitution character.
+	  For example, this means that entering 'l', 's', ' ', 0xff, [Enter]
+	  at shell prompt will list file named 0xff (single char name
+	  with char value 255), not file named '?'.
 
 config BUSYBOX_LONG_OPTS
 	bool "Support for --long-options"
@@ -182,21 +287,26 @@ config BUSYBOX_FEATURE_SUID
 	default n
 	help
 	  With this option you can install the busybox binary belonging
-	  to root with the suid bit set, and it will automatically drop
-	  priviledges for applets that don't need root access.
+	  to root with the suid bit set, enabling some applets to perform
+	  root-level operations even when run by ordinary users
+	  (for example, mounting of user mounts in fstab needs this).
+
+	  Busybox will automatically drop priviledges for applets
+	  that don't need root access.
 
 	  If you are really paranoid and don't want to do this, build two
 	  busybox binaries with different applets in them (and the appropriate
 	  symlinks pointing to each binary), and only set the suid bit on the
-	  one that needs it. The applets currently marked to need the suid bit
-	  are:
+	  one that needs it.
+
+	  The applets currently marked to need the suid bit are:
 
 	  crontab, dnsd, findfs, ipcrm, ipcs, login, passwd, ping, su,
 	  traceroute, vlock.
 
 config BUSYBOX_FEATURE_SUID_CONFIG
 	bool "Runtime SUID/SGID configuration via /etc/busybox.conf"
-	default n if FEATURE_SUID
+	default n if BUSYBOX_FEATURE_SUID
 	depends on BUSYBOX_FEATURE_SUID
 	help
 	  Allow the SUID / SGID state of an applet to be determined at runtime
@@ -239,6 +349,7 @@ config BUSYBOX_FEATURE_SUID_CONFIG_QUIET
 config BUSYBOX_SELINUX
 	bool "Support NSA Security Enhanced Linux"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Enable support for SELinux in applets ls, ps, and id. Also provide
 	  the option of compiling in SELinux applets.
@@ -525,20 +636,22 @@ endchoice
 
 endmenu
 
-menu 'Installation Options'
+menu 'Installation Options ("make install" behavior)'
 
 config BUSYBOX_INSTALL_NO_USR
 	bool "Don't use /usr"
 	default n
+	depends on BUSYBOX_FEATURE_INSTALLER
 	help
-	  Disable use of /usr. Don't activate this option if you don't know
-	  that you really want this behaviour.
+	  Disable use of /usr. busybox --install and "make install"
+	  will install applets only to /bin and /sbin,
+	  never to /usr/bin or /usr/sbin.
 
 choice
-	prompt "Applets links"
-	default INSTALL_APPLET_SYMLINKS
+	prompt "What kind of applet links to install"
+	default BUSYBOX_INSTALL_APPLET_SYMLINKS
 	help
-	  Choose how you install applets links.
+	  Choose what kind of links to applets are created by "make install".
 
 config BUSYBOX_INSTALL_APPLET_SYMLINKS
 	bool "as soft-links"
@@ -562,8 +675,9 @@ config BUSYBOX_INSTALL_APPLET_DONT
 	bool "not installed"
 	depends on BUSYBOX_FEATURE_INSTALLER || BUSYBOX_FEATURE_SH_STANDALONE || BUSYBOX_FEATURE_PREFER_APPLETS
 	help
-	  Do not install applet links. Useful when using the -install feature
-	  or a standalone shell for rescue purposes.
+	  Do not install applet links. Useful when you plan to use
+	  busybox --install for installing links, or plan to use
+	  a standalone shell and thus don't need applet links.
 
 endchoice
 

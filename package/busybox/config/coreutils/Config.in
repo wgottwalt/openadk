@@ -5,6 +5,12 @@
 
 menu "Coreutils"
 
+config BUSYBOX_BASE64
+	bool "base64"
+	default y
+	help
+	  Base64 encode and decode
+
 config BUSYBOX_BASENAME
 	bool "basename"
 	default y
@@ -115,6 +121,14 @@ config BUSYBOX_FEATURE_DATE_ISOFMT
 	  Enable option (-I) to output an ISO-8601 compliant
 	  date/time string.
 
+# defaults to "no": stat's nanosecond field is a bit non-portable
+config BUSYBOX_FEATURE_DATE_NANO
+	bool "Support %[num]N nanosecond format specifier"
+	default n
+	depends on BUSYBOX_DATE && BUSYBOX_PLATFORM_LINUX # syscall(__NR_clock_gettime)
+	help
+	  Support %[num]N format specifier. Adds ~250 bytes of code.
+
 config BUSYBOX_FEATURE_DATE_COMPAT
 	bool "Support weird 'date MMDDhhmm[[YY]YY][.ss]' format"
 	default y
@@ -182,6 +196,10 @@ config BUSYBOX_FEATURE_DF_FANCY
 	depends on BUSYBOX_DF
 	help
 	  This option enables -a, -i and -B.
+
+	    -a Show all filesystems
+	    -i Inodes
+	    -B <SIZE> Blocksize
 
 config BUSYBOX_DIRNAME
 	bool "dirname"
@@ -631,6 +649,7 @@ config BUSYBOX_FEATURE_SPLIT_FANCY
 config BUSYBOX_STAT
 	bool "stat"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX # statfs()
 	help
 	  display file or filesystem status.
 
@@ -681,6 +700,11 @@ config BUSYBOX_FEATURE_FANCY_TAIL
 	help
 	  The options (-q, -s, and -v) are provided by GNU tail, but
 	  are not specific in the SUSv3 standard.
+
+	    -q      Never output headers giving file names
+	    -s SEC  Wait SEC seconds between reads with -f
+	    -v      Always output headers giving file names
+
 
 config BUSYBOX_TEE
 	bool "tee"

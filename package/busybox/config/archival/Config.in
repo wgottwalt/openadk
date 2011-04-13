@@ -5,6 +5,12 @@
 
 menu "Archival Utilities"
 
+config BUSYBOX_FEATURE_SEAMLESS_XZ
+	bool "Make tar, rpm, modprobe etc understand .xz data"
+	default y
+	help
+	  Make tar, rpm, modprobe etc understand .xz data.
+
 config BUSYBOX_FEATURE_SEAMLESS_LZMA
 	bool "Make tar, rpm, modprobe etc understand .lzma data"
 	default y
@@ -31,7 +37,7 @@ config BUSYBOX_FEATURE_SEAMLESS_Z
 
 config BUSYBOX_AR
 	bool "ar"
-	default n
+	default y
 	depends on !ADK_PACKAGE_BINUTILS
 	help
 	  ar is an archival utility program used to create, modify, and
@@ -73,7 +79,7 @@ config BUSYBOX_FEATURE_AR_CREATE
 config BUSYBOX_BUNZIP2
 	bool "bunzip2"
 	depends on !ADK_PACKAGE_BZIP2
-	default n
+	default y
 	help
 	  bunzip2 is a compression utility using the Burrows-Wheeler block
 	  sorting text compression algorithm, and Huffman coding. Compression
@@ -87,7 +93,7 @@ config BUSYBOX_BUNZIP2
 config BUSYBOX_BZIP2
 	bool "bzip2"
 	depends on !ADK_PACKAGE_BZIP2
-	default n
+	default y
 	help
 	  bzip2 is a compression utility using the Burrows-Wheeler block
 	  sorting text compression algorithm, and Huffman coding. Compression
@@ -101,7 +107,7 @@ config BUSYBOX_BZIP2
 config BUSYBOX_CPIO
 	bool "cpio"
 	depends on !ADK_PACKAGE_CPIO
-	default n
+	default y
 	help
 	  cpio is an archival utility program used to create, modify, and
 	  extract contents from archives.
@@ -228,7 +234,7 @@ config BUSYBOX_TAR
 	  create compressed archives. It's probably the most widely used
 	  UNIX archive program.
 
-if TAR
+if BUSYBOX_TAR
 
 config BUSYBOX_FEATURE_TAR_CREATE
 	bool "Enable archive creation"
@@ -288,6 +294,15 @@ config BUSYBOX_FEATURE_TAR_LONG_OPTIONS
 	help
 	  Enable use of long options, increases size by about 400 Bytes
 
+config BUSYBOX_FEATURE_TAR_TO_COMMAND
+	bool "Support for writing to an external program"
+	default y
+	depends on BUSYBOX_TAR && BUSYBOX_FEATURE_TAR_LONG_OPTIONS
+	help
+	  If you enable this option you'll be able to instruct tar to send
+	  the contents of each extracted file to the standard input of an
+	  external program.
+
 config BUSYBOX_FEATURE_TAR_UNAME_GNAME
 	bool "Enable use of user and group names"
 	default y
@@ -305,6 +320,14 @@ config BUSYBOX_FEATURE_TAR_NOPRESERVE_TIME
 	  With this option busybox supports GNU tar -m
 	  (do not preserve time) option.
 
+config BUSYBOX_FEATURE_TAR_SELINUX
+	bool "Support for extracting SELinux labels"
+	default n
+	depends on BUSYBOX_TAR && BUSYBOX_SELINUX
+	help
+	  With this option busybox supports restoring SELinux labels
+	  when extracting files from tar archives.
+
 endif #tar
 
 config BUSYBOX_UNCOMPRESS
@@ -317,7 +340,7 @@ config BUSYBOX_UNCOMPRESS
 config BUSYBOX_UNLZMA
 	bool "unlzma"
 	depends on !ADK_PACKAGE_XZ
-	default n
+	default y
 	help
 	  unlzma is a compression utility using the Lempel-Ziv-Markov chain
 	  compression algorithm, and range coding. Compression
@@ -349,7 +372,7 @@ config BUSYBOX_LZMA
 config BUSYBOX_UNXZ
 	bool "unxz"
 	depends on !ADK_PACKAGE_XZ
-	default n
+	default y
 	help
 	  unxz is a unlzma successor.
 
