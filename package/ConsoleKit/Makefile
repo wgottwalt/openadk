@@ -21,5 +21,7 @@ $(eval $(call PKG_template,CONSOLEKIT,consolekit,$(PKG_VERSION)-${PKG_RELEASE},$
 
 consolekit-install:
 	$(INSTALL_DIR) $(IDIR_CONSOLEKIT)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libck-connector.so* \
+		$(IDIR_CONSOLEKIT)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
