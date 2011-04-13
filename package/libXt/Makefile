@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		091ed356b8ab9ca4fcbb471f738ca544
 PKG_DESCR:=		X Toolkit Intrinsics libraries
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		libSM
+PKG_BUILDDEP:=		libSM libX11 kbproto
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBXT LIBXT_DEV
