@@ -16,10 +16,11 @@ PKG_NEED_CXX:=		1
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GDK_PIXBUF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GDK_PIXBUF_DEV,gdk-pixbuf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		gio_can_sniff=no
 
-post-install:
+gdk-pixbuf-install:
 	$(INSTALL_DIR) $(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/
 	$(CP) $(WRKINST)/usr/lib/libgdk_pixbuf*so* \
 		$(IDIR_GDK_PIXBUF)/usr/lib
@@ -27,5 +28,14 @@ post-install:
 		$(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/
 	$(CP) ./files/loaders.cache \
 		 $(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+
+gdk-pixbuf-dev-install:
+	$(INSTALL_DIR) $(IDIR_GDK_PIXBUF_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_GDK_PIXBUF_DEV)/usr/lib/pkgconfig
+	$(INSTALL_DIR) $(IDIR_GDK_PIXBUF_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_GDK_PIXBUF_DEV)/usr/include
+	
 
 include ${TOPDIR}/mk/pkg-bottom.mk

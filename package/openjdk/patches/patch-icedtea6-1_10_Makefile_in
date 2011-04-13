@@ -66,3 +66,13 @@
  	touch stamps/native-ecj.stamp
  
  clean-native-ecj:
+@@ -2167,6 +2167,9 @@
+ stamps/jamvm.stamp: $(OPENJDK_TREE) stamps/rt.stamp
+ @BUILD_JAMVM_TRUE@	cd jamvm/jamvm && \
+ @BUILD_JAMVM_TRUE@	./autogen.sh --with-java-runtime-library=openjdk \
++@BUILD_JAMVM_TRUE@	  --host=$(host_alias) \
++@BUILD_JAMVM_TRUE@	  --build=$(build_alias) \
++@BUILD_JAMVM_TRUE@	  --target=$(target_alias) \
+ @BUILD_JAMVM_TRUE@	  --prefix=$(abs_top_builddir)/jamvm/install ; \
+ @BUILD_JAMVM_TRUE@	$(MAKE) ; \
+ @BUILD_JAMVM_TRUE@	$(MAKE) install

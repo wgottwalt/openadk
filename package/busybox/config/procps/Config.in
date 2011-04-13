@@ -8,6 +8,7 @@ menu "Process Utilities"
 config BUSYBOX_FREE
 	bool "free"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  free displays the total amount of free and used physical and swap
 	  memory in the system, as well as the buffers used by the kernel.
@@ -20,6 +21,13 @@ config BUSYBOX_FUSER
 	  fuser lists all PIDs (Process IDs) that currently have a given
 	  file open. fuser can also list all PIDs that have a given network
 	  (TCP or UDP) port open.
+
+config BUSYBOX_IOSTAT
+	bool "iostat"
+	default n
+	depends on !ADK_PACKAGE_SYSSTAT
+	help
+	  Report CPU and I/O statistics
 
 config BUSYBOX_KILL
 	bool "kill"
@@ -44,22 +52,11 @@ config BUSYBOX_KILLALL5
 	depends on BUSYBOX_KILL
 
 config BUSYBOX_MPSTAT
-        bool "mpstat"
-        default n
-        help
-          Per-processor statistics
-
-config BUSYBOX_PMAP
-       bool "pmap"
-       default n
-       help
-         Display processes' memory mappings.
-
-config BUSYBOX_POWERTOP
-        bool "powertop"
-        default n
-        help
-          Analyze power consumption on Intel-based laptops
+	bool "mpstat"
+	default n
+	depends on !ADK_PACKAGE_SYSSTAT
+	help
+	  Per-processor statistics
 
 config BUSYBOX_NMETER
 	bool "nmeter"
@@ -102,6 +99,18 @@ config BUSYBOX_PKILL
 	help
 	  Send signals to processes by name.
 
+config BUSYBOX_PMAP
+       bool "pmap"
+       default n
+       help
+         Display processes' memory mappings.
+
+config BUSYBOX_POWERTOP
+	bool "powertop"
+	default n
+	help
+	  Analyze power consumption on Intel-based laptops
+
 config BUSYBOX_PS
 	bool "ps"
 	default y
@@ -120,7 +129,7 @@ config BUSYBOX_FEATURE_PS_WIDE
 config BUSYBOX_FEATURE_PS_TIME
 	bool "Enable time and elapsed time output"
 	default n
-	depends on BUSYBOX_PS && BUSYBOX_DESKTOP
+	depends on BUSYBOX_PS && BUSYBOX_DESKTOP && BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  Support -o time and -o etime output specifiers.
 
@@ -145,6 +154,13 @@ config BUSYBOX_RENICE
 	help
 	  Renice alters the scheduling priority of one or more running
 	  processes.
+
+config BUSYBOX_SMEMCAP
+	bool "smemcap"
+	default n
+	help
+	  smemcap is a tool for capturing process data for smem,
+	  a memory usage statistic tool.
 
 config BUSYBOX_BB_SYSCTL
 	bool "sysctl"
@@ -216,6 +232,7 @@ config BUSYBOX_FEATURE_SHOW_THREADS
 config BUSYBOX_UPTIME
 	bool "uptime"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  uptime gives a one line display of the current time, how long
 	  the system has been running, how many users are currently logged

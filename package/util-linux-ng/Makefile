@@ -37,8 +37,8 @@ $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
-			--disable-libuuid \
-			--disable-libblkid \
+			--enable-libuuid \
+			--enable-libblkid \
 			--enable-libmount \
 			--enable-mount
 MAKE_FLAGS+=		OPT="${TARGET_CFLAGS}" ARCH="${ARCH}"

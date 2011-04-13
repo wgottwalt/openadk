@@ -5,6 +5,18 @@
 
 menu "Login/Password Management Utilities"
 
+config BUSYBOX_ADD_SHELL
+       bool "add-shell"
+       default y if BUSYBOX_DESKTOP
+       help
+         Add shells to /etc/shells.
+
+config BUSYBOX_REMOVE_SHELL
+       bool "remove-shell"
+       default y if BUSYBOX_DESKTOP
+       help
+         Remove shells from /etc/shells.
+
 config BUSYBOX_FEATURE_SHADOWPASSWDS
 	bool "Support for shadow passwords"
 	default y
