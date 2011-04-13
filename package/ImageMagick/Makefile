@@ -37,6 +37,7 @@ $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+CONFIGURE_ENV+=		ac_cv_sys_file_offset_bits=yes
 CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
 			--without-gslib \
 			--without-dps \
