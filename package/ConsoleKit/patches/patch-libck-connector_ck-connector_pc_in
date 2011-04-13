@@ -1,0 +1,11 @@
+--- ConsoleKit-0.4.4.orig/libck-connector/ck-connector.pc.in	2011-01-20 19:21:19.000000000 +0100
++++ ConsoleKit-0.4.4/libck-connector/ck-connector.pc.in	2011-03-17 23:08:52.363370559 +0100
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+ exec_prefix=@prefix@
+ libdir=@libdir@
+-includedir=@prefix@/include
++includedir=${prefix}/include
+ libexecdir=@libexecdir@
+ 
+ Name: ck-connector

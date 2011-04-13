@@ -24,6 +24,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNET_DEV,libnet-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBNET_DEV},${PKGSC_LIBNET_DEV}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ENDIAN:=lil
 ifeq (${CPU_ARCH},mips)
 ENDIAN:=big

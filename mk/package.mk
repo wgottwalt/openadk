@@ -183,7 +183,7 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PKG_DIR}/$(1)'
-	@-cd $${IDIR_$(1)}; \
+	-@cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
@@ -194,7 +194,7 @@ endif
 	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -E -v -e '^usr/share' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/lib/pkgconfig' -e '^usr/bin/[a-z0-9-]+-config' | \
+	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
 	    $(TOOLS_DIR)/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
@@ -230,7 +230,8 @@ ifeq (,$(filter noremove,$(7)))
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	@rm -f '$${STAGING_PKG_DIR}/$(1)'
+	echo "Removing:"
+	rm -f '$${STAGING_PKG_DIR}/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))

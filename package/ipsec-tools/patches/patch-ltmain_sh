@@ -1,6 +1,6 @@
---- ipsec-tools-0.7.2.orig/ltmain.sh	2009-04-21 16:41:43.000000000 +0200
-+++ ipsec-tools-0.7.2/ltmain.sh	2011-01-15 21:50:23.000000000 +0100
-@@ -4238,7 +4238,7 @@ func_mode_link ()
+--- ipsec-tools-0.8.0.orig/ltmain.sh	2011-03-18 14:27:39.000000000 +0100
++++ ipsec-tools-0.8.0/ltmain.sh	2011-03-31 13:16:42.511821748 +0200
+@@ -4765,7 +4765,7 @@ func_mode_link ()
        # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
        # @file GCC response files
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \

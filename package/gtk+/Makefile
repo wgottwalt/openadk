@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gtk+
-PKG_VERSION:=		2.18.6
-PKG_EXTRAVER:=		2.18
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f98617af9f6be3065f64248f78dae2b7
+PKG_VERSION:=		2.24.3
+PKG_EXTRAVER:=		2.24
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2c9f2dc5768480bedf26c6dfc3f7c254
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		glib
 PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
-PKG_BUILDDEP+=		gdk-pixbuf libXcomposite
+PKG_BUILDDEP+=		gdk-pixbuf libXcomposite libXdamage
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_NEED_CXX:=		1

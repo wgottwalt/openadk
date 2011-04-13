@@ -4,11 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pixman
-PKG_VERSION:=		0.16.2
+PKG_VERSION:=		0.20.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		02bd3669f53c404c19980d5efb6f86fb
+PKG_MD5SUM:=		a923c20af88e469ac29ba42cfedb88c2
 PKG_DESCR:=		Pixel manipulation library
 PKG_SECTION:=		x11/libs
+PKG_BUILDDEP:=		libpng
 PKG_SITES:=		http://www.cairographics.org/releases/
 
 PKG_SUBPKGS:=		PIXMAN PIXMAN_DEV
@@ -24,9 +25,11 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PIXMAN_DEV,pixman-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PIXMAN_DEV},${PKGSC_PIXMAN_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+
 pixman-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpixman-1.so* ${IDIR_PIXMAN}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libpixman-1.so* ${IDIR_PIXMAN}/usr/lib
 
 pixman-dev-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN_DEV}/usr/include

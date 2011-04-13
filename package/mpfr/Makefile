@@ -16,7 +16,13 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MPFR,mpfr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,MPFR_DEV,mpfr-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MPFR_DEV},${PKGSC_MPFR_DEV}))
 
+<<<<<<< HEAD
 mpfr-install:
+=======
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+
+post-install:
+>>>>>>> ed73ed80fe75787a18a3ecf2335ff62d799eba01
 	${INSTALL_DIR} ${IDIR_MPFR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmpfr.so* ${IDIR_MPFR}/usr/lib
 

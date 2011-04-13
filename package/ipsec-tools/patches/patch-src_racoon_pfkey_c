@@ -1,7 +1,6 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- ipsec-tools-0.7.2.orig/src/racoon/pfkey.c	2008-12-08 07:06:24.000000000 +0100
-+++ ipsec-tools-0.7.2/src/racoon/pfkey.c	2009-05-29 15:48:49.201433105 +0200
-@@ -3008,12 +3008,12 @@ addnewsp(mhp)
+--- ipsec-tools-0.8.0.orig/src/racoon/pfkey.c	2011-03-15 14:20:14.000000000 +0100
++++ ipsec-tools-0.8.0/src/racoon/pfkey.c	2011-03-31 13:24:03.781819000 +0200
+@@ -3855,12 +3855,12 @@ addnewsp(mhp, local, remote)
  				struct sockaddr *paddr;
  
  				paddr = (struct sockaddr *)(xisr + 1);

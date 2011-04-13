@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libpng
 PKG_VERSION:=		1.2.44
-PKG_RELEASE:=		3
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		89b62f8daaeeab1342e307d6d1411ff1
 PKG_DESCR:=		A library for reading/writing PNG images
 PKG_SECTION:=		libs
@@ -27,14 +27,15 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPNG_DEV,libpng-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPNG_DEV},${PKGSC_LIBPNG_DEV},${PKG_OPTS}))
 
+TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+
 libpng-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpng{,12}.so* ${IDIR_LIBPNG}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpng*.so* ${IDIR_LIBPNG}/usr/lib
 
 libpng-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBPNG_DEV}/usr/include/libpng12
-	${CP} ${WRKINST}/usr/include/*.h ${IDIR_LIBPNG_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/libpng12/*.h ${IDIR_LIBPNG_DEV}/usr/include/libpng12
+	${INSTALL_DIR} ${IDIR_LIBPNG_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBPNG_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_LIBPNG_DEV}/usr/lib/pkgconfig
 	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
 		${IDIR_LIBPNG_DEV}/usr/lib/pkgconfig

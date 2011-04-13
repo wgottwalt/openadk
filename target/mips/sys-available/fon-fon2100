@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_FON_FON2100
+	bool "FON's FON2100"
+	select ADK_mips
+	select ADK_fon_fon2100
+	select ADK_KERNEL_ATHEROS_AR231X
+	help
+	  Support for FON's FON2100.
+

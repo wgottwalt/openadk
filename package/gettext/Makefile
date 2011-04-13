@@ -52,24 +52,24 @@ CONFIGURE_ENV+=		nls_cv_use_gnu_gettext=yes \
 
 INSTALL_STYLE:=		manual
 
-libintl-install:
+post-build:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/include ${STAGING_DIR}/usr/lib
+	$(CP) $(WRKBUILD)/gettext-runtime/intl/libintl.h ${STAGING_DIR}/usr/include
+	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
+			${STAGING_DIR}/usr/lib
+
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBINTL}/usr/lib
 	${CP} ${WRKBUILD}/gettext-runtime/intl/.libs/libintl.so* \
 		${IDIR_LIBINTL}/usr/lib
-
-libintl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBINTL_DEV}/usr/include
 	${INSTALL_DATA} ${WRKBUILD}/gettext-runtime/intl/libintl.h \
 		${IDIR_LIBINTL_DEV}/usr/include
-
-gettext-install:
 	${INSTALL_DIR} ${IDIR_GETTEXT}/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/gettext-tools/src/.libs/xgettext \
 		$(IDIR_GETTEXT)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/gettext-runtime/src/.libs/gettext \
 		$(IDIR_GETTEXT)/usr/bin
-
-msgfmt-install:
 	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/bin
 	${INSTALL_DIR} ${IDIR_MSGFMT}/usr/lib
 	${CP} ${WRKBUILD}/gettext-tools/libgettextpo/.libs/libgettextpo.so* \

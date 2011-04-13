@@ -20,11 +20,11 @@ install: ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	cd $(WRKBUILD); env \
-		CC='${CC_FOR_BUILD}' \
-		CXX='${CXX_FOR_BUILD}' \
-	    ./configure \
-		--prefix=/usr \
-		--with-classpath-install-dir=$(STAGING_JAVA_HOST_DIR)
+               CC='${CC_FOR_BUILD}' \
+               CXX='${CXX_FOR_BUILD}' \
+           ./configure \
+               --prefix=/usr \
+               --with-classpath-install-dir=$(STAGING_JAVA_HOST_DIR)/usr
 	touch $@
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
@@ -33,5 +33,7 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm: $(WRKBUILD)/.compiled
 	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
+	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
+	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 include $(TOPDIR)/mk/tools.mk

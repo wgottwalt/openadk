@@ -11,7 +11,7 @@ PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm
 PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
-PKG_BUILDDEP+=		dri2proto glproto expat
+PKG_BUILDDEP+=		dri2proto glproto expat libXext
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/7.8.2/
 PKG_NEED_CXX:=		1
@@ -34,6 +34,8 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,MESALIB_DEV,mesalib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MESALIB_DEV},${PKGSC_MESALIB_DEV}))
 $(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXINFO},${PKGSC_GLXINFO}))
 $(eval $(call PKG_template,GLXGEARS,glxgears,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLXGEARS},${PKGSC_GLXGEARS}))
+
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915

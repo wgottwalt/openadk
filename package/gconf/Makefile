@@ -11,7 +11,7 @@ PKG_MD5SUM:=		de83e70453910ac62f9ee2a86444bdab
 PKG_DESCR:=		a system for storing application preferences
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		dbus dbus-glib orbit2
-PKG_DEPENDS:=		dbus dbus-glib
+PKG_DEPENDS:=		dbus dbus-glib orbit2
 PKG_URL:=		http://projects.gnome.org/gconf/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/GNOME/sources/GConf/${PKG_EXTRAVER}/
 

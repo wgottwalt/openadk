@@ -1,4 +1,7 @@
 # mips systems
+config ADK_KERNEL_ATHEROS_AR231X
+	boolean
+
 config ADK_KERNEL_MIPS_MALTA
 	boolean
 
@@ -15,6 +18,13 @@ config ADK_KERNEL_ATHEROS_AR71XX
 	boolean
 
 config ADK_KERNEL_AR71XX_MACH_RB4XX
+	boolean
+
+# mips64 systems
+config ADK_KERNEL_MACH_LOONGSON
+	boolean
+
+config ADK_KERNEL_LEMOTE_MACH2F
 	boolean
 
 # arm systems

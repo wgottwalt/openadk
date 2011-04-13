@@ -24,11 +24,12 @@ $(eval $(call PKG_template,LIBXCB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEA
 
 include $(TOPDIR)/mk/python.mk
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
 libxcb-install:
 	${INSTALL_DIR} ${IDIR_LIBXCB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libxcb*.so* ${IDIR_LIBXCB}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libxcb*.so* ${IDIR_LIBXCB}/usr/lib
 
 libxcb-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXCB_DEV}/usr/include

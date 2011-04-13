@@ -15,13 +15,14 @@ PKG_NEED_CXX:=		1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BEECRYPT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BEECRYPT,beecrypt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--without-cplusplus \
 			--without-python \
 			--without-java
 
-post-install:
+beecrypt-install:
 	$(INSTALL_DIR) $(IDIR_BEECRYPT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libbeecrypt*.so* \
 		$(IDIR_BEECRYPT)/usr/lib
