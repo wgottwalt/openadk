@@ -4,6 +4,13 @@
 #
 
 menu "Linux Module Utilities"
+depends on BUSYBOX_PLATFORM_LINUX
+
+config BUSYBOX_MODINFO
+	bool "modinfo"
+	default y
+	help
+	  Show information about a Linux Kernel module
 
 config BUSYBOX_MODPROBE_SMALL
 	bool "Simplified modutils"

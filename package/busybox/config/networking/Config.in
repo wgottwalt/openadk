@@ -49,19 +49,22 @@ config BUSYBOX_VERBOSE_RESOLUTION_ERRORS
 config BUSYBOX_ARP
 	bool "arp"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Manipulate the system ARP cache.
 
 config BUSYBOX_ARPING
 	bool "arping"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Ping hosts by ARP packets.
 
 config BUSYBOX_BRCTL
 	bool "brctl"
 	depends on !ADK_PACKAGE_BRIDGE_UTILS
-	default n
+	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Manage ethernet bridges.
 	  Supports addbr/delbr and addif/delif.
@@ -95,6 +98,7 @@ config BUSYBOX_ETHER_WAKE
 	bool "ether-wake"
 	depends on !ADK_PACKAGE_ETHER_WAKE
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Send a magic packet to wake up sleeping machines.
 
@@ -124,8 +128,8 @@ config BUSYBOX_FEATURE_FTPD_ACCEPT_BROKEN_LIST
 	default y
 	depends on BUSYBOX_FTPD
 	help
-	  Some ftp-clients (among them KDE's Konqueror) issue illegal
-	  "LIST -la" requests. This option works around those problems.
+	  Some ftp clients (among them KDE's Konqueror) issue illegal
+	  "LIST -l" requests. This option works around such problems.
 	  It might prevent you from listing files starting with "-" and
 	  it increases the code size by ~40 bytes.
 	  Most other ftp servers seem to behave similar to this.
@@ -266,9 +270,18 @@ config BUSYBOX_FEATURE_HTTPD_PROXY
 	  Then a request to /url/myfile will be forwarded to
 	  http://hostname[:port]/new/path/myfile.
 
+config BUSYBOX_FEATURE_HTTPD_GZIP
+	bool "Support for GZIP content encoding"
+	default y
+	depends on BUSYBOX_HTTPD
+	help
+	  Makes httpd send files using GZIP content encoding if the
+	  client supports it and a pre-compressed <file>.gz exists.
+
 config BUSYBOX_IFCONFIG
 	bool "ifconfig"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Ifconfig is used to configure the kernel-resident network interfaces.
 
@@ -316,6 +329,7 @@ config BUSYBOX_FEATURE_IFCONFIG_BROADCAST_PLUS
 config BUSYBOX_IFENSLAVE
 	bool "ifenslave"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Userspace application to bind several interfaces
 	  to a logical interface (use with kernel bonding driver).
@@ -323,6 +337,7 @@ config BUSYBOX_IFENSLAVE
 config BUSYBOX_IFPLUGD
 	bool "ifplugd"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Network interface plug detection daemon.
 
@@ -364,7 +379,7 @@ config BUSYBOX_FEATURE_IFUPDOWN_IP
 config BUSYBOX_FEATURE_IFUPDOWN_IP_BUILTIN
 	bool "Use busybox ip applet"
 	default y
-	depends on BUSYBOX_FEATURE_IFUPDOWN_IP
+	depends on BUSYBOX_FEATURE_IFUPDOWN_IP && BUSYBOX_PLATFORM_LINUX
 	select BUSYBOX_IP
 	select BUSYBOX_FEATURE_IP_ADDRESS
 	select BUSYBOX_FEATURE_IP_LINK
@@ -484,6 +499,7 @@ config BUSYBOX_IP
 	bool "ip"
 	depends on !ADK_PACKAGE_IP
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  The "ip" applet is a TCP/IP interface configuration and routing
 	  utility. You generally don't need "ip" to use busybox with
@@ -599,6 +615,7 @@ config BUSYBOX_FEATURE_IPCALC_LONG_OPTIONS
 config BUSYBOX_NAMEIF
 	bool "nameif"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  nameif is used to rename network interface by its MAC address.
@@ -624,11 +641,11 @@ config BUSYBOX_FEATURE_NAMEIF_EXTENDED
 	    new_interface_name  mac=00:80:C8:38:91:B5
 	    new_interface_name  00:80:C8:38:91:B5
 
-config NBDCLIENT
-        bool "nbd-client"
-        default n
-        help
-          Network block device client
+config BUSYBOX_NBDCLIENT
+	bool "nbd-client"
+	default n
+	help
+	  Network block device client
 
 config BUSYBOX_NC
 	bool "nc"
@@ -653,9 +670,20 @@ config BUSYBOX_NC_EXTRA
 	  making or receiving a successful connection), -i (delay interval for
 	  lines sent), -w (timeout for initial connection).
 
+config BUSYBOX_NC_110_COMPAT
+	bool "Netcat 1.10 compatibility (+2.5k)"
+	default n  # off specially for Rob
+	depends on BUSYBOX_NC
+	help
+	  This option makes nc closely follow original nc-1.10.
+	  The code is about 2.5k bigger. It enables
+	  -s ADDR, -n, -u, -v, -o FILE, -z options, but loses
+	  busybox-specific extensions: -f FILE and -ll.
+
 config BUSYBOX_NETSTAT
 	bool "netstat"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  netstat prints information about the Linux networking subsystem.
 
@@ -684,6 +712,7 @@ config BUSYBOX_NSLOOKUP
 config BUSYBOX_NTPD
 	bool "ntpd"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  The NTP client/server daemon.
 
@@ -698,6 +727,7 @@ config BUSYBOX_FEATURE_NTPD_SERVER
 config BUSYBOX_PING
 	bool "ping"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  ping uses the ICMP protocol's mandatory ECHO_REQUEST datagram to
 	  elicit an ICMP ECHO_RESPONSE from a host or gateway.
@@ -726,12 +756,14 @@ config BUSYBOX_PSCAN
 config BUSYBOX_ROUTE
 	bool "route"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Route displays or manipulates the kernel's IP routing tables.
 
 config BUSYBOX_SLATTACH
 	bool "slattach"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  slattach is a small utility to attach network interfaces to serial
 	  lines.
@@ -861,8 +893,11 @@ config BUSYBOX_TFTPD
 	  In other words: it should be run from inetd in nowait mode,
 	  or from udpsvd. Example: "udpsvd -E 0 69 tftpd DIR"
 
+comment "Common options for tftp/tftpd"
+	depends on BUSYBOX_TFTP || BUSYBOX_TFTPD
+
 config BUSYBOX_FEATURE_TFTP_GET
-	bool "Enable \"get\" command"
+	bool "Enable 'tftp get' and/or tftpd upload code"
 	default y
 	depends on BUSYBOX_TFTP || BUSYBOX_TFTPD
 	help
@@ -870,8 +905,11 @@ config BUSYBOX_FEATURE_TFTP_GET
 	  a client to retrieve a file from a TFTP server.
 	  Also enable upload support in tftpd, if tftpd is selected.
 
+	  Note: this option does _not_ make tftpd capable of download
+	  (the usual operation people need from it)!
+
 config BUSYBOX_FEATURE_TFTP_PUT
-	bool "Enable \"put\" command"
+	bool "Enable 'tftp put' and/or tftpd download code"
 	default y
 	depends on BUSYBOX_TFTP || BUSYBOX_TFTPD
 	help
@@ -905,6 +943,7 @@ config BUSYBOX_TFTP_DEBUG
 config BUSYBOX_TRACEROUTE
 	bool "traceroute"
 	default y
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Utility to trace the route of IP packets.
 
@@ -985,9 +1024,22 @@ config BUSYBOX_FEATURE_WGET_LONG_OPTIONS
 	help
 	  Support long options for the wget applet.
 
+config BUSYBOX_FEATURE_WGET_TIMEOUT
+	bool "Enable read timeout option -T SEC"
+	default y
+	depends on BUSYBOX_WGET
+	help
+	  Supports network read timeout for wget, so that wget will give
+	  up and timeout when reading network data, through the -T command
+	  line option.  Currently only network data read timeout is
+	  supported (i.e., timeout is not applied to the DNS nor TCP
+	  connection initialization).  When FEATURE_WGET_LONG_OPTIONS is
+	  also enabled, the --timeout option will work in addition to -T.
+
 config BUSYBOX_ZCIP
 	bool "zcip"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  ZCIP provides ZeroConf IPv4 address selection, according to RFC 3927.
@@ -1007,6 +1059,7 @@ config BUSYBOX_TCPSVD
 config BUSYBOX_TUNCTL
 	bool "tunctl"
 	default n
+	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  tunctl creates or deletes tun devices.
 

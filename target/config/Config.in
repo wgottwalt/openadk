@@ -176,10 +176,13 @@ config ADK_TARGET_CFLAGS
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
 	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
 	default "-march=loongson2f" if ADK_CPU_LOONGSON2F
+	default "-march=mips32" if ADK_CPU_MIPS32
+	default "-march=mips64" if ADK_CPU_MIPS64
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
 
 config ADK_TARGET_CMDLINE
 	string
+	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
@@ -286,6 +289,7 @@ default ADK_TARGET_ROOTFS_ARCHIVE
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
+		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
@@ -299,6 +303,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
+		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \

@@ -1,7 +1,7 @@
-diff -Nur busybox-1.18.1.orig/Config.in busybox-1.18.1/Config.in
---- busybox-1.18.1.orig/Config.in	2010-12-21 05:31:04.000000000 +0100
-+++ busybox-1.18.1/Config.in	2010-12-25 23:20:18.000000000 +0100
-@@ -15,7 +15,7 @@
+diff -Naurp busybox-1.18.4/Config.in busybox-1.18.4.patched/Config.in
+--- busybox-1.18.4/Config.in	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/Config.in	2011-04-12 17:11:37.904996819 +0200
+@@ -15,7 +15,7 @@ menu "General Configuration"
  
  config DESKTOP
  	bool "Enable options for full-blown desktop systems"
@@ -10,7 +10,7 @@ diff -Nur busybox-1.18.1.orig/Config.in busybox-1.18.1/Config.in
  	help
  	  Enable options and features which are not essential.
  	  Select this only if you plan to use busybox on full-blown
-@@ -32,7 +32,7 @@
+@@ -32,7 +32,7 @@ config EXTRA_COMPAT
  
  config INCLUDE_SUSv2
  	bool "Enable obsolete features removed before SUSv3"
@@ -19,10 +19,10 @@ diff -Nur busybox-1.18.1.orig/Config.in busybox-1.18.1/Config.in
  	help
  	  This option will enable backwards compatibility with SuSv2,
  	  specifically, old-style numeric options ('command -1 <file>')
-diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config.src
---- busybox-1.18.1.orig/archival/Config.src	2010-12-20 01:41:26.000000000 +0100
-+++ busybox-1.18.1/archival/Config.src	2010-12-25 23:21:02.000000000 +0100
-@@ -79,7 +79,7 @@
+diff -Naurp busybox-1.18.4/archival/Config.src busybox-1.18.4.patched/archival/Config.src
+--- busybox-1.18.4/archival/Config.src	2011-04-12 17:11:13.204993284 +0200
++++ busybox-1.18.4.patched/archival/Config.src	2011-04-12 17:11:37.905996921 +0200
+@@ -79,7 +79,7 @@ config FEATURE_AR_CREATE
  
  config BUNZIP2
  	bool "bunzip2"
@@ -31,7 +31,7 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  bunzip2 is a compression utility using the Burrows-Wheeler block
  	  sorting text compression algorithm, and Huffman coding. Compression
-@@ -92,7 +92,7 @@
+@@ -92,7 +92,7 @@ config BUNZIP2
  
  config BZIP2
  	bool "bzip2"
@@ -40,7 +40,7 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  bzip2 is a compression utility using the Burrows-Wheeler block
  	  sorting text compression algorithm, and Huffman coding. Compression
-@@ -105,7 +105,7 @@
+@@ -105,7 +105,7 @@ config BZIP2
  
  config CPIO
  	bool "cpio"
@@ -49,7 +49,7 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  cpio is an archival utility program used to create, modify, and
  	  extract contents from archives.
-@@ -204,19 +204,19 @@
+@@ -210,19 +210,19 @@ config IPKG
  
  config RPM2CPIO
  	bool "rpm2cpio"
@@ -72,7 +72,7 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  tar is an archiving program. It's commonly used with gzip to
  	  create compressed archives. It's probably the most widely used
-@@ -323,7 +323,7 @@
+@@ -329,7 +329,7 @@ config UNCOMPRESS
  
  config UNLZMA
  	bool "unlzma"
@@ -81,7 +81,7 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  unlzma is a compression utility using the Lempel-Ziv-Markov chain
  	  compression algorithm, and range coding. Compression
-@@ -354,7 +354,7 @@
+@@ -360,7 +360,7 @@ config LZMA
  
  config UNXZ
  	bool "unxz"
@@ -90,10 +90,10 @@ diff -Nur busybox-1.18.1.orig/archival/Config.src busybox-1.18.1/archival/Config
  	help
  	  unxz is a unlzma successor.
  
-diff -Nur busybox-1.18.1.orig/editors/Config.src busybox-1.18.1/editors/Config.src
---- busybox-1.18.1.orig/editors/Config.src	2010-12-20 01:41:27.000000000 +0100
-+++ busybox-1.18.1/editors/Config.src	2010-12-25 23:21:57.000000000 +0100
-@@ -31,7 +31,7 @@
+diff -Naurp busybox-1.18.4/editors/Config.src busybox-1.18.4.patched/editors/Config.src
+--- busybox-1.18.4/editors/Config.src	2011-03-13 02:45:06.000000000 +0100
++++ busybox-1.18.4.patched/editors/Config.src	2011-04-12 17:11:37.905996921 +0200
+@@ -31,7 +31,7 @@ config CMP
  
  config DIFF
  	bool "diff"
@@ -102,7 +102,7 @@ diff -Nur busybox-1.18.1.orig/editors/Config.src busybox-1.18.1/editors/Config.s
  	help
  	  diff compares two files or directories and outputs the
  	  differences between them in a form that can be given to
-@@ -62,7 +62,7 @@
+@@ -62,7 +62,7 @@ config ED
  
  config SED
  	bool "sed"
@@ -111,9 +111,9 @@ diff -Nur busybox-1.18.1.orig/editors/Config.src busybox-1.18.1/editors/Config.s
  	help
  	  sed is used to perform text transformations on a file
  	  or input from a pipeline.
-diff -Nur busybox-1.18.1.orig/editors/patch.c busybox-1.18.1/editors/patch.c
---- busybox-1.18.1.orig/editors/patch.c	2010-12-21 05:29:45.000000000 +0100
-+++ busybox-1.18.1/editors/patch.c	2010-12-25 23:22:38.000000000 +0100
+diff -Naurp busybox-1.18.4/editors/patch.c busybox-1.18.4.patched/editors/patch.c
+--- busybox-1.18.4/editors/patch.c	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/editors/patch.c	2011-04-12 17:11:37.905996921 +0200
 @@ -27,7 +27,7 @@
  
  //config:config PATCH
@@ -123,10 +123,91 @@ diff -Nur busybox-1.18.1.orig/editors/patch.c busybox-1.18.1/editors/patch.c
  //config:	help
  //config:	  Apply a unified diff formatted patch.
  
-diff -Nur busybox-1.18.1.orig/networking/Config.src busybox-1.18.1/networking/Config.src
---- busybox-1.18.1.orig/networking/Config.src	2010-12-21 05:29:45.000000000 +0100
-+++ busybox-1.18.1/networking/Config.src	2010-12-25 23:20:19.000000000 +0100
-@@ -986,7 +986,7 @@
+diff -Naurp busybox-1.18.4/findutils/find.c busybox-1.18.4.patched/findutils/find.c
+--- busybox-1.18.4/findutils/find.c	2011-04-12 17:11:22.887000207 +0200
++++ busybox-1.18.4.patched/findutils/find.c	2011-04-12 17:21:04.441000928 +0200
+@@ -59,7 +59,7 @@
+ 
+ //config:config FIND
+ //config:	bool "find"
+-//config:	default y
++//config:	default n
+ //config:	help
+ //config:	  find is used to search your system to find specified files.
+ //config:
+diff -Naurp busybox-1.18.4/findutils/grep.c busybox-1.18.4.patched/findutils/grep.c
+--- busybox-1.18.4/findutils/grep.c	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/findutils/grep.c	2011-04-12 17:21:09.828998153 +0200
+@@ -26,7 +26,7 @@
+ 
+ //config:config GREP
+ //config:	bool "grep"
+-//config:	default y
++//config:	default n
+ //config:	help
+ //config:	  grep is used to search files for a specified pattern.
+ //config:
+diff -Naurp busybox-1.18.4/miscutils/Config.src busybox-1.18.4.patched/miscutils/Config.src
+--- busybox-1.18.4/miscutils/Config.src	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/miscutils/Config.src	2011-04-12 17:19:11.872999667 +0200
+@@ -362,7 +362,7 @@ endchoice
+ 
+ config LESS
+ 	bool "less"
+-	default y
++	default n
+ 	help
+ 	  'less' is a pager, meaning that it displays text files. It possesses
+ 	  a wide array of features, and is an improvement over 'more'.
+@@ -428,7 +428,7 @@ config FEATURE_LESS_LINENUMS
+ 
+ config HDPARM
+ 	bool "hdparm"
+-	default y
++	default n
+ 	depends on PLATFORM_LINUX
+ 	help
+ 	  Get/Set hard drive parameters. Primarily intended for ATA
+@@ -663,7 +663,7 @@ config WALL
+ 
+ config WATCHDOG
+ 	bool "watchdog"
+-	default y
++	default n
+ 	depends on PLATFORM_LINUX
+ 	help
+ 	  The watchdog utility is used with hardware or software watchdog
+diff -Naurp busybox-1.18.4/networking/Config.src busybox-1.18.4.patched/networking/Config.src
+--- busybox-1.18.4/networking/Config.src	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/networking/Config.src	2011-04-12 17:16:48.182999877 +0200
+@@ -64,7 +64,7 @@ config ARPING
+ 
+ config BRCTL
+ 	bool "brctl"
+-	default y
++	default n
+ 	depends on PLATFORM_LINUX
+ 	help
+ 	  Manage ethernet bridges.
+@@ -97,7 +97,7 @@ config DNSD
+ 
+ config ETHER_WAKE
+ 	bool "ether-wake"
+-	default y
++	default n
+ 	depends on PLATFORM_LINUX
+ 	help
+ 	  Send a magic packet to wake up sleeping machines.
+@@ -497,7 +497,7 @@ config FEATURE_INETD_RPC
+ 
+ config IP
+ 	bool "ip"
+-	default y
++	default n
+ 	depends on PLATFORM_LINUX
+ 	help
+ 	  The "ip" applet is a TCP/IP interface configuration and routing
+@@ -986,7 +986,7 @@ config VCONFIG
  
  config WGET
  	bool "wget"
@@ -135,3 +216,24 @@ diff -Nur busybox-1.18.1.orig/networking/Config.src busybox-1.18.1/networking/Co
  	help
  	  wget is a utility for non-interactive download of files from HTTP,
  	  HTTPS, and FTP servers.
+diff -Naurp busybox-1.18.4/util-linux/Config.src busybox-1.18.4.patched/util-linux/Config.src
+--- busybox-1.18.4/util-linux/Config.src	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4.patched/util-linux/Config.src	2011-04-12 17:18:25.998990985 +0200
+@@ -378,7 +378,7 @@ config LOSETUP
+ 
+ config LSPCI
+ 	bool "lspci"
+-	default y
++	default n
+ 	#depends on PLATFORM_LINUX
+ 	help
+ 	  lspci is a utility for displaying information about PCI buses in the
+@@ -388,7 +388,7 @@ config LSPCI
+ 
+ config LSUSB
+ 	bool "lsusb"
+-	default y
++	default n
+ 	#depends on PLATFORM_LINUX
+ 	help
+ 	  lsusb is a utility for displaying information about USB buses in the

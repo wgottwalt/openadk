@@ -27,7 +27,7 @@ endif
 
 $(eval $(call rootfs_template,cf,CF,$(ROOTFS)))
 $(eval $(call rootfs_template,mmc,MMC,$(ROOTFS)))
-$(eval $(call rootfs_template,usb,USB,rootdelay=3))
+$(eval $(call rootfs_template,usb,USB,rootwait))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
