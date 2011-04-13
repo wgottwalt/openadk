@@ -72,5 +72,8 @@ glib-dev-install:
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/pkgconfig
 	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
 		${IDIR_GLIB_DEV}/usr/lib/pkgconfig
+	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/glib-genmarshal \
+		${IDIR_GLIB_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
