@@ -230,7 +230,6 @@ ifeq (,$(filter noremove,$(7)))
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	echo "Removing:"
 	rm -f '$${STAGING_PKG_DIR}/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
