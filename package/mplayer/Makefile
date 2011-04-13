@@ -4,22 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0rc4
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		1699c94de39da9c4c5d34e8f58e418f0
+PKG_VERSION:=		1.0-32749
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
 PKG_DEPENDS+=		libogg libpng libpthread libvorbis
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
-PKG_BUILDDEP+=		libX11 libXv libpng libXext
+PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
 PKG_URL:=		http://www.mplayerhq.hu/
-#PKG_SITES:=		http://openadk.org/distfiles/
-PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
-
-DISTFILES:=		MPlayer-$(PKG_VERSION).tar.bz2
-WRKDIST=		${WRKDIR}/MPlayer-$(PKG_VERSION)
+PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
@@ -32,6 +28,9 @@ PKGFB_WITH_DIRECTFB:=	DirectFB
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+# gcc 4.5 produces internal compiler error with -Os
+TCFLAGS:=$(subst Os,O2,$(TCFLAGS))
 
 CONFIG_STYLE:=		minimal
 FAKE_FLAGS+=		INSTALLSTRIP=''
