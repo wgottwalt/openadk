@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7eabab6f4a358dbc6a84e260a0e7f6c2
 PKG_DESCR:=		LXDE ...
 PKG_SECTION:=		x11/lxde
+PKG_BUILDDEP:=		gtk+
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://netcologne.dl.sourceforge.net/project/lxde/LXAppearance/
 
