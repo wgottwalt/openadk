@@ -62,6 +62,7 @@ CONFIGURE_ARGS+=	--with-fontdir=/usr/share/fonts/X11 \
 			--enable-dpms \
 			--disable-aiglx \
 			--disable-config-hal \
+			--disable-config-udev \
 			--disable-xace \
 			--disable-xephyr \
 			--disable-xf86bigfont \
