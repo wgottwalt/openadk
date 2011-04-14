@@ -1,0 +1,10 @@
+--- mksh.orig/Build.sh	2011-04-14 19:46:02.037662289 +0200
++++ mksh/Build.sh	2011-04-14 19:45:49.357672498 +0200
+@@ -816,7 +816,6 @@ if test $ct = gcc; then
+ 	# The following tests run with -Werror (gcc only) if possible
+ 	NOWARN=$DOWARN; phase=u
+ 	ac_flags 1 fnostrictaliasing -fno-strict-aliasing
+-	ac_flags 1 fstackprotectorall -fstack-protector-all
+ 	ac_flags 1 fwrapv -fwrapv
+ 	test $cm = combine && ac_flags 0 combine \
+ 	    '-fwhole-program --combine' \

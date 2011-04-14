@@ -49,6 +49,12 @@ ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
 
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+CONFIGURE_ARGS+=	--with-stackprotect
+else
+CONFIGURE_ARGS+=	--without-stackprotect
+endif
+
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
 			ac_cv_func_setlogin=no \
 			ac_cv_lib_nsl_yp_match=no
