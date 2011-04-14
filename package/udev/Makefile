@@ -26,6 +26,8 @@ CONFIGURE_ARGS+=	--disable-extras \
 
 post-install:
 	${INSTALL_DIR} ${IDIR_UDEV}/usr/sbin ${IDIR_UDEV}/etc/udev
+	${INSTALL_DIR} ${IDIR_UDEV}/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libudev.so* $(IDIR_UDEV)/usr/lib
 	${CP} ${WRKINST}/etc/udev/* ${IDIR_UDEV}/etc/udev
 	${CP} ${WRKINST}/usr/sbin/udevd ${IDIR_UDEV}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/udevadm ${IDIR_UDEV}/usr/sbin
