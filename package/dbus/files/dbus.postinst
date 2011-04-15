@@ -4,3 +4,6 @@ gid=$(get_next_gid)
 add_group messagebus $gid
 add_user messagebus $(get_next_uid) $gid /var/run/dbus
 add_rcconf dbus dbus NO
+echo Generating UUID
+mkdir /lib/dbus /var/lib && ln -sf /lib/dbus /var/lib/dbus
+dbus-uuidgen --ensure

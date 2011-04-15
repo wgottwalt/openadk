@@ -30,13 +30,13 @@ $(eval $(call PKG_template,DBUS_DEV,dbus-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
-			--without-x \
 			--enable-checks \
 			--with-xml=expat \
 			--with-session-socket-dir=/var/tmp \
 			--disable-dnotify \
 			--disable-kqueue \
 			--disable-xml-docs \
+			--with-x \
 			--disable-doxygen-docs
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 
@@ -52,6 +52,7 @@ dbus-install:
 	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_DBUS}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-uuidgen ${IDIR_DBUS}/usr/bin
 
 dbus-dev-install:
 	${INSTALL_DIR} ${IDIR_DBUS_DEV}/usr/include
