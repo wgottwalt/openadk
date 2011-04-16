@@ -18,6 +18,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,OPENBOX,openbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 openbox-install:
+	$(INSTALL_DIR) $(IDIR_OPENBOX)/etc/xdg/openbox
+	$(CP) $(WRKINST)/etc/xdg/openbox/* \
+		$(IDIR_OPENBOX)/etc/xdg/openbox
 	$(INSTALL_DIR) $(IDIR_OPENBOX)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/openbox \
 		$(IDIR_OPENBOX)/usr/bin

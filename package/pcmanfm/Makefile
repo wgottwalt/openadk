@@ -1,0 +1,35 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		pcmanfm
+PKG_VERSION:=		2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		20c07a1a39596d2322be0e88a310b314
+PKG_DESCR:=		graphical file manager
+PKG_SECTION:=		x11/apps
+PKG_DEPENDS:=		libfm
+PKG_BUILDDEP:=		libfm
+PKG_URL:=		http://lxde.org/
+PKG_SITES:=		http://openadk.org/distfiles/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,PCMANFM,pcmanfm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+pcmanfm-install:
+	$(INSTALL_DIR) $(IDIR_PCMANFM)/etc/xdg/pcmanfm
+	$(CP) $(WRKINST)/etc/xdg/pcmanfm/* \
+		$(IDIR_PCMANFM)/etc/xdg/pcmanfm
+	$(INSTALL_DIR) $(IDIR_PCMANFM)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/pcmanfm \
+		$(IDIR_PCMANFM)/usr/bin
+	$(INSTALL_DIR) $(IDIR_PCMANFM)/usr/share/pcmanfm/ui
+	$(CP) $(WRKINST)/usr/share/pcmanfm/ui/* \
+		$(IDIR_PCMANFM)/usr/share/pcmanfm/ui
+	$(INSTALL_DIR) $(IDIR_PCMANFM)/usr/share/applications
+	$(CP) $(WRKINST)/usr/share/applications/* \
+		$(IDIR_PCMANFM)/usr/share/applications
+
+include ${TOPDIR}/mk/pkg-bottom.mk
