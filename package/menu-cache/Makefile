@@ -7,8 +7,8 @@ PKG_NAME:=		menu-cache
 PKG_VERSION:=		0.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf5efbbb520bee2a35dc4f3005816cf0
-PKG_DESCR:=		menu-cache
-PKG_SECTION:=		libs
+PKG_DESCR:=		menu-cache library
+PKG_SECTION:=		x11/lxde
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 

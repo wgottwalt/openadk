@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4c51dfdc0d15851d331905cfa00cc025
 PKG_DESCR:=		graphical panel
 PKG_SECTION:=		x11/lxde
+PKG_DEPENDS:=		gdk-pixbuf menu-cache glib libintl libgtk
+PKG_DEPENDS+=		libx11
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 

@@ -1,0 +1,81 @@
+--- libfm-2.0.orig/ltmain.sh	2011-04-14 20:39:58.000000000 +0200
++++ libfm-2.0/ltmain.sh	2011-04-16 11:26:42.000000000 +0200
+@@ -4216,19 +4216,6 @@ func_mode_link ()
+ 	  prev=
+ 	  continue
+ 	  ;;
+-	framework)
+-	  case $host in
+-	    *-*-darwin*)
+-	      case "$deplibs " in
+-		*" $qarg.ltframework "*) ;;
+-		*) deplibs="$deplibs $qarg.ltframework" # this is fixed later
+-		   ;;
+-	      esac
+-	      ;;
+-	  esac
+-	  prev=
+-	  continue
+-	  ;;
+ 	inst_prefix)
+ 	  inst_prefix_dir="$arg"
+ 	  prev=
+@@ -4452,11 +4439,6 @@ func_mode_link ()
+ 	continue
+ 	;;
+ 
+-      -framework)
+-	prev=framework
+-	continue
+-	;;
+-
+       -inst-prefix-dir)
+ 	prev=inst_prefix
+ 	continue
+@@ -5155,21 +5137,6 @@ func_mode_link ()
+ 	    fi
+ 	  fi
+ 	  ;; # -l
+-	*.ltframework)
+-	  if test "$linkmode,$pass" = "prog,link"; then
+-	    compile_deplibs="$deplib $compile_deplibs"
+-	    finalize_deplibs="$deplib $finalize_deplibs"
+-	  else
+-	    deplibs="$deplib $deplibs"
+-	    if test "$linkmode" = lib ; then
+-		case "$new_inherited_linker_flags " in
+-		    *" $deplib "*) ;;
+-		    * ) new_inherited_linker_flags="$new_inherited_linker_flags $deplib" ;;
+-		esac
+-	    fi
+-	  fi
+-	  continue
+-	  ;;
+ 	-L*)
+ 	  case $linkmode in
+ 	  lib)
+@@ -5319,24 +5286,6 @@ func_mode_link ()
+ 	# Read the .la file
+ 	func_source "$lib"
+ 
+-	# Convert "-framework foo" to "foo.ltframework"
+-	if test -n "$inherited_linker_flags"; then
+-	  tmp_inherited_linker_flags=`$ECHO "X$inherited_linker_flags" | $Xsed -e 's/-framework \([^ $]*\)/\1.ltframework/g'`
+-	  for tmp_inherited_linker_flag in $tmp_inherited_linker_flags; do
+-	    case " $new_inherited_linker_flags " in
+-	      *" $tmp_inherited_linker_flag "*) ;;
+-	      *) new_inherited_linker_flags="$new_inherited_linker_flags $tmp_inherited_linker_flag";;
+-	    esac
+-	  done
+-	fi
+-	dependency_libs=`$ECHO "X $dependency_libs" | $Xsed -e 's% \([^ $]*\).ltframework% -framework \1%g'`
+-	if test "$linkmode,$pass" = "lib,link" ||
+-	   test "$linkmode,$pass" = "prog,scan" ||
+-	   { test "$linkmode" != prog && test "$linkmode" != lib; }; then
+-	  test -n "$dlopen" && dlfiles="$dlfiles $dlopen"
+-	  test -n "$dlpreopen" && dlprefiles="$dlprefiles $dlpreopen"
+-	fi
+-
+ 	if test "$pass" = conv; then
+ 	  # Only check for convenience libraries
+ 	  deplibs="$lib $deplibs"

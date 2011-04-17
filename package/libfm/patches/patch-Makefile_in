@@ -1,0 +1,11 @@
+--- libfm-2.0.orig/Makefile.in	2011-04-14 20:39:59.000000000 +0200
++++ libfm-2.0/Makefile.in	2011-04-16 11:39:06.000000000 +0200
+@@ -292,7 +292,7 @@ GTESTER_REPORT = gtester-report	# for th
+ EXTRA_DIST = libfm.pc.in libfm-gtk.pc.in $(NULL)
+ TEST_PROGS = 
+ NULL = 
+-SUBDIRS = src po data docs
++SUBDIRS = src po data
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = \
+ 	libfm.pc \

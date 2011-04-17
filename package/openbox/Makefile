@@ -5,11 +5,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openbox
 PKG_VERSION:=		3.4.11.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		30e669134fa81df810fe7d1dc59cd931
 PKG_DESCR:=		fast x11 window managaer
-PKG_SECTION:=		x11/apps
+PKG_SECTION:=		x11/lxde
 PKG_BUILDDEP:=		glib libxml2 libX11 libXext pango
+PKG_DEPENDS:=		libglib libxml2 libx11 libxext pango libstdcxx
+PKG_DEPENDS+=		fontconfig
 PKG_URL:=		http://openbox.org/
 PKG_SITES:=		http://openbox.org/dist/openbox/
 
@@ -19,7 +21,7 @@ $(eval $(call PKG_template,OPENBOX,openbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 openbox-install:
 	$(INSTALL_DIR) $(IDIR_OPENBOX)/etc/xdg/openbox
-	$(CP) $(WRKINST)/etc/xdg/openbox/* \
+	$(CP) $(WRKINST)/etc/xdg/openbox/{rc.xml,autostart.sh} \
 		$(IDIR_OPENBOX)/etc/xdg/openbox
 	$(INSTALL_DIR) $(IDIR_OPENBOX)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/openbox \

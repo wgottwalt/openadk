@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1d0688e088edab7c3c563263eb2f9654
 PKG_DESCR:=		LXDE display manager
 PKG_SECTION:=		x11/lxde
 PKG_BUILDDEP:=		libX11 glib gtk+ ConsoleKit
-PKG_DEPENDS:=		libx11 glib libgtk consolekit
+PKG_DEPENDS:=		libx11 glib libgtk consolekit dbus
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
