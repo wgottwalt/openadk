@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3945ab70cfa2a9e95804157ee1b0f8e8
 PKG_DESCR:=		Terminal Emulator for X Windows
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libxaw libxt libncurses
-PKG_BUILDDEP:=		ncurses libXt libXmu libXaw
+PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig
+PKG_BUILDDEP:=		ncurses libXt libXmu libXaw libXft
 PKG_URL:=		http://invisible-island.net/xterm/xterm.html
 PKG_SITES:=		ftp://invisible-island.net/xterm/
 
