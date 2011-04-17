@@ -14,7 +14,6 @@ TARGET_CFLAGS:= $(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
-			--disable-nls \
 			--without-cvs \
 			--disable-profile \
 			--disable-debug \
@@ -22,7 +21,8 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--without-gd \
 			--with-__thread \
 			--with-tls \
-			--enable-add-ons
+			--enable-add-ons \
+			$(NLS)
 
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${CC_FOR_BUILD} \
