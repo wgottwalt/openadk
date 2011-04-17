@@ -25,9 +25,15 @@ ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+USB:=		rootwait
+else
+USB:=		rootdelay=2
+endif
+
 $(eval $(call rootfs_template,cf,CF,$(ROOTFS)))
 $(eval $(call rootfs_template,mmc,MMC,$(ROOTFS)))
-$(eval $(call rootfs_template,usb,USB,rootwait))
+$(eval $(call rootfs_template,usb,USB,$(USB)))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
