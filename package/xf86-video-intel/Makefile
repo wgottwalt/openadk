@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		df7e3644a34e97ead09f083ab48d4457
 PKG_DESCR:=		X11 driver for Intel VGA chip
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libdrm
-PKG_BUILDDEP:=		xorg-server libdrm
+PKG_DEPENDS:=		xorg-server libdrm mesalib
+PKG_BUILDDEP:=		xorg-server libdrm xf86driproto MesaLib
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
