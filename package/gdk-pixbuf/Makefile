@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		jpeg libtiff
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.23/
 PKG_NEED_CXX:=		1
 
+PKG_SUBPKGS:=		GDK_PIXBUF GDK_PIXBUF_DEV
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GDK_PIXBUF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -36,6 +38,5 @@ gdk-pixbuf-dev-install:
 	$(INSTALL_DIR) $(IDIR_GDK_PIXBUF_DEV)/usr/include
 	$(CP) $(WRKINST)/usr/include/* \
 		$(IDIR_GDK_PIXBUF_DEV)/usr/include
-	
 
 include ${TOPDIR}/mk/pkg-bottom.mk
