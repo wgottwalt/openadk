@@ -3,7 +3,7 @@
 
 PKG_NAME:=		glibc
 PKG_VERSION:=		2.13
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fafabe01cb9748acb0a11a6879ebaa7e
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
