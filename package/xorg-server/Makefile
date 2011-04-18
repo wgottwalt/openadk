@@ -53,8 +53,7 @@ CONFIGURE_ARGS+=	 --with-sha1=libcrypto
 endif
 
 CONFIGURE_ENV+=		V=1
-CONFIGURE_ARGS+=	--with-fontdir=/usr/share/fonts/X11 \
-			--enable-dga \
+CONFIGURE_ARGS+=	--enable-dga \
 			--enable-xorg \
 			--enable-xv \
 			--enable-xaa \
@@ -71,7 +70,6 @@ CONFIGURE_ARGS+=	--with-fontdir=/usr/share/fonts/X11 \
 			--disable-xfbdev \
 			--disable-xinerama \
 			--disable-xnest \
-			--disable-xsdl \
 			--disable-xselinux \
 			--disable-xcsecurity \
 			--disable-xvfb \
