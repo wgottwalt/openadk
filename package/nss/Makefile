@@ -45,13 +45,6 @@ XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
 ALL_TARGET:=		build_coreconf all
 
 post-install:
-	$(INSTALL_DIR) $(WRKINST)/usr/lib/pkgconfig
-	sed 's/@VERSION@/$(PKG_VERSION)/' ./files/nss.pc.in > $(WRKINST)/usr/lib/pkgconfig/nss.pc
-	$(INSTALL_DIR) $(WRKINST)/usr/bin
-	sed -e 's/@MOD_MAJOR_VERSION@/$(PKG_MAJ_VERSION)/' \
-		-e 's/@MOD_MINOR_VERSION@/$(PKG_MIN_VERSION)/' \
-		-e 's/@MOD_PATCH_VERSION@/$(PKG_PATCH_VERSION)/' \
-		./files/nss-config.in > $(WRKINST)/usr/bin/nss-config
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
 	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3}.so \
 		$(IDIR_NSS)/usr/lib
