@@ -209,4 +209,10 @@ ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
 endif
 
+ifeq ($(ADK_LOCALES),y)
+NLS:=			--enable-nls
+else
+NLS:=			--disable-nls
+endif
+
 include $(TOPDIR)/mk/mirrors.mk

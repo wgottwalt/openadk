@@ -17,7 +17,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LXAPPEARANCE,lxappearance,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		CPPFLAGS_FOR_BUILD="-I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include"
+CPPFLAGS_FOR_BUILD+=	$(shell pkg-config --cflags glib-2.0)
+LDFLAGS_FOR_BUILD+=	$(shell pkg-config --libs glib-2.0)
 
 lxappearance-install:
 	$(INSTALL_DIR) $(IDIR_LXAPPEARANCE)/usr/bin

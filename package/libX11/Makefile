@@ -37,6 +37,9 @@ libx11-install:
 	${CP} ${WRKINST}/usr/lib/libX11.so* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/lib/libX11-xcb* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/share/X11/XErrorDB ${IDIR_LIBX11}/usr/share/X11
+ifeq ($(ADK_LOCALES),y)
+	${CP} ${WRKINST}/usr/share/X11/locale ${IDIR_LIBX11}/usr/share/X11
+endif
 
 libx11-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBX11_DEV}/usr/include/X11

@@ -9,14 +9,21 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		20c07a1a39596d2322be0e88a310b314
 PKG_DESCR:=		graphical file manager
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libfm
-PKG_BUILDDEP:=		libfm
+PKG_BUILDDEP:=		libfm atk glib gtk+
+PKG_DEPENDS:=		libfm libatk libxcomposite cairo libx11
+PKG_DEPENDS+=		libxrender libgtk glib libxfixes fontconfig
+PKG_DEPENDS+=		libintl pango menu-cache freetype libxext
+PKG_DEPENDS+=		libxdamage gdk-pixbuf libpthread
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PCMANFM,pcmanfm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CPPFLAGS_FOR_BUILD+=	$(shell pkg-config --cflags glib-2.0)
+LDFLAGS_FOR_BUILD+=	$(shell pkg-config --libs glib-2.0)
+CONFIGURE_ARGS+=	--disable-gtk-doc
 
 pcmanfm-install:
 	$(INSTALL_DIR) $(IDIR_PCMANFM)/etc/xdg/pcmanfm

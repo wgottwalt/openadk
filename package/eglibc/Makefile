@@ -48,6 +48,10 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 
 # compile nothing, eglibc is already build in toolchain directory
 do-install:
+ifeq ($(ADK_LOCALES),y)
+	${INSTALL_DIR} $(IDIR_EGLIBC)/usr/bin
+	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
+endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
 	    $(IDIR_EGLIBC)/usr/lib
 	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \

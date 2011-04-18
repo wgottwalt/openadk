@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		99b165f727dd8a5c4b7e2c20a8bf5db6
 PKG_DESCR:=		DBUS library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libexpat
-PKG_BUILDDEP:=		expat
+PKG_DEPENDS:=		libexpat libx11
+PKG_BUILDDEP:=		expat libX11
 PKG_URL:=		http://dbus.freedesktop.org/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 

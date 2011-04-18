@@ -82,11 +82,11 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --libexecdir=/usr/libexec \
 	    --localstatedir=/var \
 	    --sysconfdir=/etc \
-	    --disable-nls \
 	    --enable-shared \
 	    --enable-static \
 	    --disable-dependency-tracking \
 	    --disable-libtool-lock \
+	    $(NLS) \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else
 	@echo "Invalid CONFIG_STYLE '${CONFIG_STYLE}'" >&2
