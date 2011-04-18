@@ -10,7 +10,7 @@ PKG_MD5SUM:=		596bafb53bb6c079a0703f1726cb2305
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap
-PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap
+PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted udev
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
