@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		3.6.15
+PKG_VERSION:=		3.6.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fcf8042948d91f1f3d9c33599b79cf35
+PKG_MD5SUM:=		232a3c0160cd1cbe3dcaaaf7e4ae51c2
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libnotify
@@ -68,6 +68,10 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-libxul \
 			--enable-libnotify \
 			--enable-dbus \
+			--disable-debug \
+			--disable-logging \
+			--disable-strip \
+			--disable-install-strip \
 			--disable-tests \
 			--disable-libconic \
 			--disable-static \
