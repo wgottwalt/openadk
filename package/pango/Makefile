@@ -28,6 +28,7 @@ $(eval $(call PKG_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,PANGO_DEV,pango-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PANGO_DEV},${PKGSC_PANGO_DEV},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+CONFIGURE_ENV+=		ac_cv_path_EGREP="grep -E"
 
 pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
