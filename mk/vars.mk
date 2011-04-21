@@ -183,6 +183,8 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
 				gzip -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+			*.tar.xz | *.txz) \
+				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
