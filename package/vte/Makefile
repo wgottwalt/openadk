@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		vte
-PKG_VERSION:=		0.27.5
-PKG_EXTRAVER:=		0.27
+PKG_VERSION:=		0.25.1
+PKG_EXTRAVER:=		0.25
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7155e90b78fb80f4ede9adf959931ef9
+PKG_MD5SUM:=		415ba972ea60b8016b7a98019fa412b1
 PKG_DESCR:=		an experimental terminal emulator widget 
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		ncurses
