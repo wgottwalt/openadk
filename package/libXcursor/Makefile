@@ -11,13 +11,24 @@ PKG_DESCR:=		xcursor library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_SUBPKGS:=		LIBXCURSOR LIBXCURSOR_DEV
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXCURSOR,libxcursor,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXCURSOR_DEV,libxcursor-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+libxcursor-install:
 	$(INSTALL_DIR) $(IDIR_LIBXCURSOR)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libXcursor*.so* \
 		$(IDIR_LIBXCURSOR)/usr/lib
+
+libxcursor-dev-install:
+	$(INSTALL_DIR) $(IDIR_LIBXCURSOR_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_LIBXCURSOR_DEV)/usr/lib/pkgconfig
+	$(INSTALL_DIR) $(IDIR_LIBXCURSOR_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_LIBXCURSOR_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

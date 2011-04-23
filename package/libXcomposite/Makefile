@@ -30,6 +30,9 @@ libxcomposite-install:
 	${CP} ${WRKINST}/usr/lib/libXcomposite.so* ${IDIR_LIBXCOMPOSITE}/usr/lib/
 
 libxcomposite-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBXCOMPOSITE_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBXCOMPOSITE_DEV}/usr/lib/pkgconfig
 	${INSTALL_DIR} ${IDIR_LIBXCOMPOSITE_DEV}/usr/include/X11/extensions
 	${CP} ${WRKINST}/usr/include/X11/extensions/*.h \
 		${IDIR_LIBXCOMPOSITE_DEV}/usr/include/X11/extensions

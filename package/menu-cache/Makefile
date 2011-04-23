@@ -12,9 +12,12 @@ PKG_SECTION:=		x11/lxde
 PKG_URL:=		http://lxde.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_SUBPKGS:=		MENU_CACHE MENU_CACHE_DEV
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MENU_CACHE,menu-cache,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MENU_CACHE_DEV,menu-cache-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 menu-cache-install:
 	$(INSTALL_DIR) $(IDIR_MENU_CACHE)/usr/lib
@@ -23,5 +26,13 @@ menu-cache-install:
 	$(INSTALL_DIR) $(IDIR_MENU_CACHE)/usr/libexec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/menu-cache* \
 		$(IDIR_MENU_CACHE)/usr/libexec
+
+menu-cache-dev-install:
+	$(INSTALL_DIR) $(IDIR_MENU_CACHE_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_MENU_CACHE_DEV)/usr/lib/pkgconfig
+	$(INSTALL_DIR) $(IDIR_MENU_CACHE_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* \
+		$(IDIR_MENU_CACHE_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
