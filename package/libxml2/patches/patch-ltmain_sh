@@ -1,11 +1,11 @@
---- libxml2-2.7.6.orig/ltmain.sh	2009-10-06 18:39:54.000000000 +0200
-+++ libxml2-2.7.6/ltmain.sh	2011-01-14 00:34:35.000000000 +0100
-@@ -4765,7 +4765,7 @@ func_mode_link ()
-       # -p, -pg, --coverage, -fprofile-* pass through profiling flag for GCC
-       # @file GCC response files
+--- libxml2-2.7.8.orig/ltmain.sh	2010-11-04 18:28:10.000000000 +0100
++++ libxml2-2.7.8/ltmain.sh	2011-04-25 06:55:46.857662605 +0200
+@@ -5091,7 +5091,7 @@ func_mode_link ()
+       # @file                GCC response files
+       # -tp=*                Portland pgcc target processor selection
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
--      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*)
-+      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-fstack-protector*|-flto)
+-      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*)
++      -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|-fstack-protector*|-flto*)
          func_quote_for_eval "$arg"
  	arg="$func_quote_for_eval_result"
          func_append compile_command " $arg"

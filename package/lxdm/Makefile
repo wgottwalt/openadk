@@ -30,5 +30,8 @@ lxdm-install:
 	$(INSTALL_DIR) $(IDIR_LXDM)/usr/share/lxdm/themes
 	$(CP) $(WRKINST)/usr/share/lxdm/themes/* \
 		$(IDIR_LXDM)/usr/share/lxdm/themes
+	$(INSTALL_DIR) $(IDIR_LXDM)/usr/share/backgrounds
+	$(CP) ./files/openadk.png \
+		$(IDIR_LXDM)/usr/share/backgrounds/default.png
 
 include ${TOPDIR}/mk/pkg-bottom.mk

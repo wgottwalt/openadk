@@ -22,7 +22,7 @@ $(eval $(call PKG_template,LIBFM,libfm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,LIBFM_DEV,libfm-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CPPFLAGS_FOR_BUILD+=	$(shell pkg-config --cflags glib-2.0)
-LDFLAGS_FOR_BUILD+=	$(shell pkg-config --libs glib-2.0)
+LDFLAGS_FOR_BUILD+=	$(shell pkg-config --libs glib-2.0) -L/usr/lib
 CONFIGURE_ARGS+=	--disable-gtk-doc
 
 libfm-install:
