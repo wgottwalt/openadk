@@ -58,6 +58,9 @@ MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 			BUILD_CPPFLAGS="${CPPFLAGS_FOR_BUILD}"
 
 post-build:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
+	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
+		${STAGING_DIR}/usr/include/uuid
 ifeq ($(ADK_PACKAGE_E2FSCK_STATIC),y)
 	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
 	${INSTALL_DIR} ${WRKINST}/usr/sbin
@@ -111,9 +114,6 @@ libuuid-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libuuid.so* \
 		${IDIR_LIBUUID}/usr/lib
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
-	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
-		${STAGING_DIR}/usr/include/uuid
 
 libuuid-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include

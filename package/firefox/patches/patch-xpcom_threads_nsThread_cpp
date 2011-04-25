@@ -1,0 +1,10 @@
+--- mozilla-2.0.orig/xpcom/threads/nsThread.cpp	2011-03-19 00:34:14.000000000 +0100
++++ mozilla-2.0/xpcom/threads/nsThread.cpp	2011-04-24 08:56:39.000000000 +0200
+@@ -52,7 +52,6 @@
+ 
+ #if defined(XP_UNIX) && !defined(ANDROID) && !defined(DEBUG) && HAVE_UALARM \
+   && defined(_GNU_SOURCE)
+-# define MOZ_CANARY
+ # include <unistd.h>
+ # include <execinfo.h>
+ # include <signal.h>
