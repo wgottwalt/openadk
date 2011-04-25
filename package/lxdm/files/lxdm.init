@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG lxdm
+#INIT 95
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${lxdm:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/lxdm
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/lxdm)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
