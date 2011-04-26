@@ -17,7 +17,7 @@ source "target/config/Config.in.system"
 
 choice
 prompt "Target Endianess"
-depends on ADK_LINUX_ARM || ADK_LINUX_MIPS && ADK_TOOLCHAIN_ONLY
+depends on (ADK_LINUX_ARM || ADK_LINUX_MIPS) && ADK_TOOLCHAIN_ONLY
 config ADK_ENDIAN
         boolean "Choose target endianess"
 

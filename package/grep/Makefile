@@ -24,6 +24,6 @@ CONFIGURE_ARGS+=	--without-included-regex
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/?grep $(IDIR_GREP)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
