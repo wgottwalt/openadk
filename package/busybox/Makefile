@@ -38,7 +38,7 @@ BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" GCC_HONOUR_COPTS=s \
 			HOSTCC="${CC_FOR_BUILD}" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
 			-C ${WRKBUILD}
 ifneq (${ADK_NATIVE},y)
-BB_MAKE_FLAGS+=		EXTRA_CFLAGS="${TARGET_CFLAGS}" CROSS_COMPILE="$(TARGET_CROSS)"
+BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)"
 endif
 
 # XXX: Although this looks like all new symbols are enabled when 'make oldconfig' runs, they're not.

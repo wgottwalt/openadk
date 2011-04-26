@@ -113,9 +113,9 @@ createinitramfs:
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
 	echo N | \
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-		ARCH=$(ARCH) CC="$(TARGET_CC)" oldconfig $(MAKE_TRACE) 
+		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} oldconfig $(MAKE_TRACE) 
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-		ARCH=$(ARCH) CC="$(TARGET_CC)" $(MAKE_TRACE)
+		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(MAKE_TRACE)
 
 imageclean:
 	rm -f $(BIN_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*

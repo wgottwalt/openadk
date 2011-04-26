@@ -10,6 +10,7 @@ PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		kmod-ppp
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://ppp.samba.org/
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
 PKG_MULTI:=		1

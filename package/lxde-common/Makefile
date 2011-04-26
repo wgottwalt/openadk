@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lxde-common
 PKG_VERSION:=		0.5.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		aac2f6f2efa53a6ac92e47e7f2a0c602
 PKG_DESCR:=		LXDE de-common manager
 PKG_SECTION:=		x11/lxde
@@ -22,6 +22,9 @@ lxde-common-install:
 	$(INSTALL_DIR) $(IDIR_LXDE_COMMON)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/* \
 		$(IDIR_LXDE_COMMON)/usr/bin
+	$(INSTALL_DIR) $(IDIR_LXDE_COMMON)/usr/share/lxpanel/profile/LXDE
+	$(CP) $(WRKINST)/usr/share/lxpanel/profile/LXDE/* \
+		$(IDIR_LXDE_COMMON)/usr/share/lxpanel/profile/LXDE
 	$(INSTALL_DIR) $(IDIR_LXDE_COMMON)/usr/share/lxde
 	$(CP) $(WRKINST)/usr/share/lxde/* \
 		$(IDIR_LXDE_COMMON)/usr/share/lxde
