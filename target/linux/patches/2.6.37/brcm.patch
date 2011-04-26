@@ -9,8 +9,8 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/Makefile linux-2.6.37/arch/mips/bc
 +obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o platform.o
 diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/bcm47xx/platform.c
 --- linux-2.6.37.orig/arch/mips/bcm47xx/platform.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/bcm47xx/platform.c	2011-04-26 20:26:19.917673199 +0200
-@@ -0,0 +1,139 @@
++++ linux-2.6.37/arch/mips/bcm47xx/platform.c	2011-04-26 21:54:17.727672777 +0200
+@@ -0,0 +1,147 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -29,7 +29,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +#include <asm/mach-bcm47xx/nvram.h>
 +
 +#define NVRAM_FLASH_SIZE 0x10000
-+#define CFGFS_FLASH_SIZE (64 * 1024)
++#define CFGFS_FLASH_SIZE (128 * 1024)
 +
 +static struct mtd_partition bcm47xx_partitions[] = {
 +#define SLOT_CFE 0
@@ -111,8 +111,16 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +	trx_hdr = (void *)KSEG1ADDR(mcore->flash_window + 0x40000);
 +
 +	/* devices might have 2, 4 or 8 MB flash size */
++#ifdef BCM47XX_OVERRIDE_FLASHSIZE
++	flash_size = BCM47XX_OVERRIDE_FLASHSIZE;
++	mcore->flash_window_size = flash_size;
++#define BCM47XX_OVERRODE_FLASHSIZE " (overridden)"
++#else
 +	flash_size = mcore->flash_window_size;
-+	printk(KERN_INFO "FLASH SIZE: 0x%x\n", flash_size);
++#define BCM47XX_OVERRODE_FLASHSIZE ""
++#endif
++	printk(KERN_INFO "FLASH SIZE%s: %x\n", BCM47XX_OVERRODE_FLASHSIZE,
++		flash_size);
 +
 +	left = flash_size - 0x40000;
 +	posn = flash_size;

@@ -21,7 +21,7 @@ tools-compile:
 	$(MAKE) -C ../tools/srec2bin all
 	$(MAKE) -C ../tools/squashfs all
 
-ifeq ($(ADK_KERNEL_BCM47XX),y)
+ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
 kernel-install: tools-compile
 	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
 	    ${BUILD_DIR}/${TARGET_KERNEL}

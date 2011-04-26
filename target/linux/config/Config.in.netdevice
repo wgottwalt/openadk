@@ -115,8 +115,7 @@ config ADK_KERNEL_B44
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
-	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54G
-	default y if ADK_TARGET_SYSTEM_LINKSYS_WRT54GS
+	default y if ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
 	default n
 	help
 
@@ -345,6 +344,7 @@ config ADK_KPACKAGE_KMOD_B43
 	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
 	tristate
 	select ADK_KPACKAGE_KMOD_FW_LOADER
+	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
