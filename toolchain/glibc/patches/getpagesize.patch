@@ -1,0 +1,14 @@
+	This patch is needed at least on kirkwood. Otherwise DNS-lookups will fail, since
+	GLRO(dl_pagesize) is zero. Solution taken from this resource:
+	http://www.mail-archive.com/pld-cvs-commit@lists.pld-linux.org/msg228455.html
+--- glibc-2.12.1/sysdeps/unix/sysv/linux/getpagesize.c.orig	2011-02-28 03:41:47.870001678 +0100
++++ glibc-2.12.1/sysdeps/unix/sysv/linux/getpagesize.c	2011-02-28 03:42:16.712993932 +0100
+@@ -28,7 +28,7 @@
+ int
+ __getpagesize ()
+ {
+-#ifdef __ASSUME_AT_PAGESIZE
++#if 0
+   assert (GLRO(dl_pagesize) != 0);
+   return GLRO(dl_pagesize);
+ #else
