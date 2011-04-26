@@ -1,6 +1,7 @@
 config ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	bool "Foxboard FOXG20"
 	select ADK_arm
+	select ADK_little
 	select ADK_acmesystems_foxg20
 	select ADK_KERNEL_ARCH_AT91
 	select ADK_KERNEL_ARCH_AT91SAM9G20
