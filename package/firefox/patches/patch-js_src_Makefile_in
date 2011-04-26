@@ -1,0 +1,11 @@
+--- mozilla-2.0.orig/js/src/Makefile.in	2011-03-19 00:33:47.000000000 +0100
++++ mozilla-2.0/js/src/Makefile.in	2011-04-24 19:54:11.707672834 +0200
+@@ -375,7 +375,7 @@ CPPSRCS += 	checks.cc \
+ # END enclude sources for V8 dtoa
+ #############################################
+ 
+-ifeq (,$(filter-out powerpc sparc,$(TARGET_CPU)))
++ifeq (,$(filter arm %86 x86_64,$(TARGET_CPU)))
+ 
+ VPATH +=	$(srcdir)/assembler \
+ 		$(srcdir)/assembler/wtf \

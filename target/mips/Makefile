@@ -7,7 +7,12 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+KERNEL:=$(LINUX_DIR)/vmlinuz
+else
 KERNEL:=$(LINUX_DIR)/vmlinux
+endif
+
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 kernel-install:
@@ -50,4 +55,13 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+endif
+ifeq ($(ADK_TARGET_FS),usb)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo "Startup the netbook and type del to enter PMON:"
+	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
+	@echo "PMON> g console=tty no_auto_cmd"
+endif
 endif

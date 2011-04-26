@@ -1,9 +1,84 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+config ADK_big
+	boolean
+
+config ADK_little
+	boolean
+
+config ADK_TARGET_ENDIAN
+	string
+	default "little" if ADK_little
+	default "big" if ADK_big
 
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
+
+choice
+prompt "Target Endianess"
+depends on ADK_LINUX_ARM || ADK_LINUX_MIPS && ADK_TOOLCHAIN_ONLY
+config ADK_ENDIAN
+        boolean "Choose target endianess"
+
+config ADK_TARGET_LITTLE_ENDIAN
+	boolean "Little endian"
+	select ADK_little
+
+config ADK_TARGET_BIG_ENDIAN
+	boolean "Big endian"
+	select ADK_big
+
+endchoice
+
+choice
+prompt "Target Kernel"
+depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+config ADK_TARGET_KERNEL
+        boolean "Choose target kernel"
+
+config ADK_TARGET_KERNEL32
+	boolean "32 Bit Kernel"
+
+config ADK_TARGET_KERNEL64
+	boolean "64 Bit Kernel"
+
+endchoice
+
+config ADK_o32
+	boolean
+
+config ADK_n32
+	boolean
+
+config ADK_n64
+	boolean
+
+config ADK_TARGET_ABI
+	string
+	default "32" if ADK_o32
+	default "n32" if ADK_n32
+	default "64" if ADK_n64
+
+choice
+prompt "Target ABI"
+depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
+config ADK_ABI
+        boolean "Choose target ABI"
+
+config ADK_TARGET_ABI_O32
+	boolean "O32 ABI (old)"
+	select ADK_o32
+
+config ADK_TARGET_ABI_N32
+	boolean "N32 ABI (new)"
+	select ADK_n32
+
+config ADK_TARGET_ABI_N64
+	boolean "N64 ABI"
+	select ADK_n64
+
+endchoice
 
 if ADK_LINUX_NATIVE
 source "target/config/Config.in.native"
@@ -164,6 +239,18 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_I686
 	default "i586" if ADK_CPU_GEODE
 	default "i686" if ADK_CPU_PENTIUM_M
+	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
+	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
+	default "mips" if ADK_LINUX_MIPS && ADK_big
+	default "mipsel" if ADK_LINUX_MIPS && ADK_little
+	default "arm" if ADK_LINUX_ARM && ADK_little
+	default "armeb" if ADK_LINUX_ARM && ADK_big
+
+config ADK_TARGET_ABI_CFLAGS
+	string
+	default "-mabi=32" if ADK_TARGET_ABI_O32
+	default "-mabi=n32 -Wl,-m -Wl,elf32ltsmipn32" if ADK_TARGET_ABI_N32
+	default "-mabi=64 -Wl,-m -Wl,elf64ltsmip" if ADK_TARGET_ABI_N64
 
 config ADK_TARGET_CFLAGS
 	string

@@ -1,6 +1,6 @@
-diff -Nur gcc-4.4.1.orig/gcc/config/i386/linux64.h gcc-4.4.1/gcc/config/i386/linux64.h
---- gcc-4.4.1.orig/gcc/config/i386/linux64.h	2009-04-10 01:23:07.000000000 +0200
-+++ gcc-4.4.1/gcc/config/i386/linux64.h	2009-08-21 18:34:13.000000000 +0200
+diff -Nur gcc-4.5.2.orig/gcc/config/i386/linux64.h gcc-4.5.2/gcc/config/i386/linux64.h
+--- gcc-4.5.2.orig/gcc/config/i386/linux64.h	2010-03-24 21:44:48.000000000 +0100
++++ gcc-4.5.2/gcc/config/i386/linux64.h	2011-04-23 22:49:31.087660410 +0200
 @@ -59,7 +59,7 @@
     done.  */
  
@@ -8,12 +8,12 @@ diff -Nur gcc-4.4.1.orig/gcc/config/i386/linux64.h gcc-4.4.1/gcc/config/i386/lin
 -#define GLIBC_DYNAMIC_LINKER64 "/lib64/ld-linux-x86-64.so.2"
 +#define GLIBC_DYNAMIC_LINKER64 "/lib/ld-linux-x86-64.so.2"
  
- #undef ASM_SPEC
- #define ASM_SPEC "%{v:-V} %{Qy:} %{!Qn:-Qy} %{n} %{T} %{Ym,*} %{Yd,*} \
-diff -Nur gcc-4.4.1.orig/gcc/config/i386/t-linux64 gcc-4.4.1/gcc/config/i386/t-linux64
---- gcc-4.4.1.orig/gcc/config/i386/t-linux64	2008-07-02 17:59:19.000000000 +0200
-+++ gcc-4.4.1/gcc/config/i386/t-linux64	2009-08-21 18:34:13.000000000 +0200
-@@ -7,7 +7,7 @@
+ #if TARGET_64BIT_DEFAULT
+ #define SPEC_32 "m32"
+diff -Nur gcc-4.5.2.orig/gcc/config/i386/t-linux64 gcc-4.5.2/gcc/config/i386/t-linux64
+--- gcc-4.5.2.orig/gcc/config/i386/t-linux64	2009-04-21 21:03:23.000000000 +0200
++++ gcc-4.5.2/gcc/config/i386/t-linux64	2011-04-23 22:49:31.107660436 +0200
+@@ -25,7 +25,7 @@
  
  MULTILIB_OPTIONS = m64/m32
  MULTILIB_DIRNAMES = 64 32 
@@ -22,22 +22,27 @@ diff -Nur gcc-4.4.1.orig/gcc/config/i386/t-linux64 gcc-4.4.1/gcc/config/i386/t-l
  
  LIBGCC = stmp-multilib
  INSTALL_LIBGCC = install-multilib
-diff -Nur gcc-4.4.1.orig/gcc/config/mips/linux64.h gcc-4.4.1/gcc/config/mips/linux64.h
---- gcc-4.4.1.orig/gcc/config/mips/linux64.h	2009-02-20 16:20:38.000000000 +0100
-+++ gcc-4.4.1/gcc/config/mips/linux64.h	2009-08-21 18:37:19.000000000 +0200
-@@ -36,7 +36,7 @@
+diff -Nur gcc-4.5.2.orig/gcc/config/mips/linux64.h gcc-4.5.2/gcc/config/mips/linux64.h
+--- gcc-4.5.2.orig/gcc/config/mips/linux64.h	2009-02-20 16:20:38.000000000 +0100
++++ gcc-4.5.2/gcc/config/mips/linux64.h	2011-04-23 22:50:17.267672629 +0200
+@@ -36,9 +36,9 @@
    %{profile:-lc_p} %{!profile:-lc}}"
  
  #define GLIBC_DYNAMIC_LINKER32 "/lib/ld.so.1"
 -#define GLIBC_DYNAMIC_LINKER64 "/lib64/ld.so.1"
+-#define GLIBC_DYNAMIC_LINKERN32 "/lib32/ld.so.1"
+-#define UCLIBC_DYNAMIC_LINKERN32 "/lib32/ld-uClibc.so.0"
 +#define GLIBC_DYNAMIC_LINKER64 "/lib/ld.so.1"
- #define GLIBC_DYNAMIC_LINKERN32 "/lib32/ld.so.1"
- #define UCLIBC_DYNAMIC_LINKERN32 "/lib32/ld-uClibc.so.0"
++#define GLIBC_DYNAMIC_LINKERN32 "/lib/ld.so.1"
++#define UCLIBC_DYNAMIC_LINKERN32 "/lib/ld-uClibc.so.0"
  #define LINUX_DYNAMIC_LINKERN32 \
-diff -Nur gcc-4.4.1.orig/gcc/config/mips/t-linux64 gcc-4.4.1/gcc/config/mips/t-linux64
---- gcc-4.4.1.orig/gcc/config/mips/t-linux64	2006-06-06 14:51:24.000000000 +0200
-+++ gcc-4.4.1/gcc/config/mips/t-linux64	2009-08-21 18:34:13.000000000 +0200
-@@ -1,6 +1,6 @@
+   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32)
+ 
+diff -Nur gcc-4.5.2.orig/gcc/config/mips/t-linux64 gcc-4.5.2/gcc/config/mips/t-linux64
+--- gcc-4.5.2.orig/gcc/config/mips/t-linux64	2009-04-21 21:03:23.000000000 +0200
++++ gcc-4.5.2/gcc/config/mips/t-linux64	2011-04-23 22:49:31.207663770 +0200
+@@ -18,7 +18,7 @@
+ 
  MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
  MULTILIB_DIRNAMES = n32 32 64
 -MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64

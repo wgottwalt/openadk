@@ -15,46 +15,22 @@ config ADK_LINUX_NATIVE
 	  No toolchain will be created.
 
 config ADK_LINUX_ARM
-	bool "arm system (little endian)"
+	bool "arm system"
 	select ADK_arm
 	help
-	  Support for arm little endian systems.
-
-config ADK_LINUX_ARMEB
-	bool "armeb system (big endian)"
-	select ADK_armeb
-	help
-	  Support for arm big endian systems.
+	  Support for ARM systems.
 
 config ADK_LINUX_CRIS
 	bool "cris system"
 	select ADK_cris
 	help
-	  Support for cris systems.
+	  Support for CRIS systems.
 
 config ADK_LINUX_MIPS
-	bool "mips system (big endian)"
+	bool "mips system"
 	select ADK_mips
 	help
-	  Support for mips big endian systems.
-
-config ADK_LINUX_MIPSEL
-	bool "mipsel system (little endian)"
-	select ADK_mipsel
-	help
-	  Support for mips little endian systems.
-
-config ADK_LINUX_MIPS64
-	bool "mips64 system (big endian)"
-	select ADK_mips64
-	help
-	  Support for mips64 big endian systems.
-
-config ADK_LINUX_MIPS64EL
-	bool "mips64el system (little endian)"
-	select ADK_mips64el
-	help
-	  Support for mips64 little endian systems.
+	  Support for MIPS systems.
 
 config ADK_LINUX_PPC
 	bool "ppc system"

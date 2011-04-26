@@ -4,5 +4,5 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS
 	select ADK_toolchain_mips
 	select ADK_TOOLCHAIN_ONLY
 	help
-	  mips toolchain.
+	  MIPS toolchain.
 

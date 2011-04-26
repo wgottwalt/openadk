@@ -14,10 +14,18 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
 
+UCLIBCCFG=uclibc.config
+ifeq ($(ADK_TARGET_ENDIAN),little)
+UCLIBCCFG=uclibc.config.little
+endif
+ifeq ($(ADK_TARGET_ENDIAN),big)
+UCLIBCCFG=uclibc.config.big
+endif
+
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
-	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
+	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/$(UCLIBCCFG) >${WRKBUILD}/.config
 ifneq ($(ADK_DEBUG),)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
 endif

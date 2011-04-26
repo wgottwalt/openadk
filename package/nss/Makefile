@@ -28,8 +28,8 @@ $(eval $(call PKG_template,NSS,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 CONFIG_STYLE:=		manual
 
-ifeq ($(ADK_LINUX_64),y)
-TARGET_CFLAGS+=		-DUSE_64
+ifneq ($(ADK_LINUX_64),)
+TARGET_CFLAGS+=		-DUSE_64 -DNS_PTR_LE_32
 XAKE_FLAGS+=		USE_64=1
 endif
 

@@ -1,9 +1,0 @@
-choice
-depends on ADK_LINUX_MIPSEL && !ADK_CHOOSE_TARGET_ARCH
-prompt "Target system"
-
-config ADK_CHOOSE_TARGET_SYSTEM_MIPSEL
-        boolean "Choose target system"
-
-source "target/mipsel/Config.in.systems"
-endchoice
