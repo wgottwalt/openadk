@@ -15,9 +15,40 @@ endif
 
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
+tools-compile:
+	$(MAKE) -C ../tools/trx all
+	$(MAKE) -C ../tools/addpattern all
+	$(MAKE) -C ../tools/srec2bin all
+	$(MAKE) -C ../tools/squashfs all
+
+ifeq ($(ADK_KERNEL_BCM47XX),y)
+kernel-install: tools-compile
+	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
+	    ${BUILD_DIR}/${TARGET_KERNEL}
+
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+	${TARGET_CROSS}objcopy -O binary ${BUILD_DIR}/${TARGET_KERNEL} \
+	    ${BUILD_DIR}/${TARGET_KERNEL}.bin
+	gzip -n9 <${BUILD_DIR}/${TARGET_KERNEL}.bin \
+	    >${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	printf '\0' >>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	PATH='${TARGET_PATH}' trx -o $@~ -f ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz -a 1024 -f ${BUILD_DIR}/root.squashfs
+	PATH='${TARGET_PATH}' addpattern -4 ${ADK_TOOLS_ADDPATTERN_ARGS} -g -i $@~ -o $@
+endif
+
+ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
+kernel-install: tools-compile
+	${TARGET_CROSS}objcopy -S -O srec $(KERNEL) $(LINUX_DIR)/vmlinux.srec
+	PATH='${TARGET_PATH}' srec2bin $(LINUX_DIR)/vmlinux.srec $(LINUX_DIR)/vmlinux.bin
+	(dd if=/dev/zero bs=16 count=1; cat $(LINUX_DIR)/vmlinux.bin) > $(LINUX_DIR)/vmlinux.tmp
+	PATH='${TARGET_PATH}' addpattern -p AG3B -b -r 2.0 -i $(LINUX_DIR)/vmlinux.tmp \
+		-o $(BUILD_DIR)/$(TARGET_KERNEL) 2>/dev/null
+endif
+
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) \
-		$(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
@@ -65,3 +96,25 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "PMON> g console=tty no_auto_cmd"
 endif
 endif
+ifeq ($(ADK_TARGET_FS),cf)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
+	@echo "Boot the board via network (tftp+nfsroot) and use adkinstall."
+	@echo "If you just want to update, use adkupdate."
+endif
+ifeq ($(ADK_TARGET_FS),squashfs)
+imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
+	@if [ $$($(STATCMD) ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
+		echo 'Image is too big!'; \
+	else \
+		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${BIN_DIR}/${ROOTFSSQUASHFS}; \
+		echo The image file is $(ROOTFSSQUASHFS); \
+		echo 'You can flash the image via tftp:'; \
+		echo 'tftp 192.168.1.1'; \
+		echo 'tftp> binary'; \
+		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"; \
+	fi
+endif
+
