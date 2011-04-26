@@ -1,6 +1,7 @@
 config ADK_TARGET_SYSTEM_MIKROTIK_RB433
 	bool "Mikrotik Routerboard 433"
 	select ADK_mips
+	select ADK_big
 	select ADK_mikrotik_rb433
 	select ADK_KERNEL_ATHEROS_AR71XX
 	select ADK_KERNEL_AR71XX_MACH_RB4XX

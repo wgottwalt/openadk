@@ -1,5 +1,5 @@
 include $(TOPDIR)/mk/kernel-ver.mk
 ARCH:=			mips
-CPU_ARCH:=		mips
+CPU_ARCH:=		$(ADK_TARGET_CPU_ARCH)
 TARGET_OPTIMIZATION:=	-Os -pipe
-TARGET_CFLAGS_ARCH:=    -march=mips32 -mabi=32
+TARGET_CFLAGS_ARCH:=    $(ADK_TARGET_CFLAGS) $(ADK_TARGET_ABI_CFLAGS)

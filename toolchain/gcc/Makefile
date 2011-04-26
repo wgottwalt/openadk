@@ -17,11 +17,11 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
+			--disable-multilib \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-decimal-float \
-			--disable-multilib \
 			--disable-sjlj-exceptions \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
@@ -58,12 +58,8 @@ ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 
-ifeq ($(ADK_LINUX_MIPS64),y)
-GCC_CONFOPTS+=		--with-abi=64
-endif
-
-ifeq ($(ADK_LINUX_MIPS64EL),y)
-GCC_CONFOPTS+=		--with-abi=64
+ifneq ($(ADK_TARGET_ABI),)
+GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI}
 endif
 
 ifeq (${ADK_MAKE_PARALLEL},y)
@@ -131,6 +127,8 @@ $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
+	# -lgcc_eh workaround
+	(cd $(STAGING_HOST_DIR)/lib/gcc/$(REAL_GNU_TARGET_NAME)/$(PKG_VERSION) && ln -sf libgcc.a libgcc_eh.a)
 	touch $@
 
 $(GCC_BUILD_DIR_FINAL)/.configured:

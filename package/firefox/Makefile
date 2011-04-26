@@ -29,7 +29,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq (${ADK_LINUX_MIPS64EL},y)
+ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 CONFIGURE_ARGS+=	--disable-ipc
 else ifeq (${ADK_TARGET_LIB_UCLIBC},y)
 CONFIGURE_ARGS+=	--disable-ipc
