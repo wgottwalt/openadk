@@ -343,6 +343,18 @@ config ADK_KERNEL_ATH5K_DEBUG
 config ADK_KPACKAGE_KMOD_B43
 	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
 	tristate
+	select ADK_PACKAGE_B43_FIRMWARE
+	select ADK_KPACKAGE_KMOD_FW_LOADER
+	select ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
+	default n
+	help
+	  Driver for Broadcom B43xx wireless chips.
+
+config ADK_KPACKAGE_KMOD_B43LEGACY
+	prompt "kmod-b43legacy............... Broadcom B43xx (legacy) wireless cards"
+	tristate
+	select ADK_PACKAGE_B43_FIRMWARE
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
