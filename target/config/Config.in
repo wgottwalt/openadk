@@ -80,6 +80,18 @@ config ADK_TARGET_ABI_N64
 
 endchoice
 
+choice 
+prompt "Broadcom BCM47xx Model"
+depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
+
+config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G
+	boolean "Linksys WRT54g"
+	
+config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54GS
+	boolean "Linksys WRT54gs"
+
+endchoice
+
 if ADK_LINUX_NATIVE
 source "target/config/Config.in.native"
 endif
