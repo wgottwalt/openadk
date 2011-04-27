@@ -28,6 +28,9 @@ $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,CAIRO_DEV,cairo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CAIRO_DEV},${PKGSC_CAIRO_DEV},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+ifeq ($(TARGET_ARCH),arm)
+TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
+endif
 CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-tee=yes \
 			--enable-xlib=yes
