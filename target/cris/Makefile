@@ -38,3 +38,9 @@ imageinstall: kernel-install ${BIN_DIR}/${ROOTFSUSERTARBALL}
 	@echo Do not forget to set network boot jumper, before you start the foxboard
 	@echo ${ROOTFSUSERTARBALL} is your nfs root and can be extracted on your nfs server
 endif
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+endif

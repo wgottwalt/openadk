@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.89
+PKG_VERSION:=		4.92
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		67fd9ad2852ce01f01b16ddd2336d1ea
+PKG_MD5SUM:=		abe5b76df95939f4eb6fa493f4764a95
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bt libusb glib dbus

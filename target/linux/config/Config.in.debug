@@ -60,6 +60,8 @@ config ADK_KPACKAGE_KMOD_OPROFILE
 	prompt "kernel support for oprofile"
 	tristate
 	select ADK_KERNEL_PROFILING
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	default n
 	help
 	 use oprofile package to make use of the kernel support.

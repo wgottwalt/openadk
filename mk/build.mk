@@ -507,7 +507,7 @@ bulktoolchain:
 bulk:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -525,7 +525,7 @@ bulk:
 bulkall:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -543,7 +543,7 @@ bulkall:
 bulkallmod:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \

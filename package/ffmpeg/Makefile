@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		faad2
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 
+PKG_ARCH_DEPENDS:=	!cris
+
 PKG_SUBPKGS:=		FFMPEG FFPLAY
 PKGSD_FFPLAY:=		ffmpeg based video player
 PKGSC_FFPLAY:=		multimedia
