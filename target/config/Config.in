@@ -476,7 +476,6 @@ config ADK_TARGET_ROOTFS_MMC
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
-	depends on ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
