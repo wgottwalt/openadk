@@ -15,7 +15,7 @@ PKG_URL:=		http://pcc.ludd.ltu.se/
 PKG_SITES:=		http://pcc.ludd.ltu.se/ftp/pub/pcc-releases/
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!arm
+PKG_ARCH_DEPENDS:=	!arm !cris
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include $(TOPDIR)/mk/package.mk
