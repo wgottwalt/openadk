@@ -9,8 +9,8 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/Makefile linux-2.6.37/arch/mips/bc
 +obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o platform.o
 diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/bcm47xx/platform.c
 --- linux-2.6.37.orig/arch/mips/bcm47xx/platform.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/bcm47xx/platform.c	2011-04-26 21:54:17.727672777 +0200
-@@ -0,0 +1,147 @@
++++ linux-2.6.37/arch/mips/bcm47xx/platform.c	2011-04-27 09:51:38.177664121 +0200
+@@ -0,0 +1,146 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -28,7 +28,6 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +#include <asm/mach-bcm47xx/bcm47xx.h>
 +#include <asm/mach-bcm47xx/nvram.h>
 +
-+#define NVRAM_FLASH_SIZE 0x10000
 +#define CFGFS_FLASH_SIZE (128 * 1024)
 +
 +static struct mtd_partition bcm47xx_partitions[] = {
@@ -36,8 +35,8 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +	{
 +		.name       = "cfe",
 +		.offset     = 0,
-+		.size       = 0x40000,		/* 256k */
-+		.mask_flags = MTD_WRITEABLE	/* force read-only */
++		.size       = BCM47XX_OVERRIDE_CFESIZE,
++		.mask_flags = MTD_WRITEABLE		/* force read-only */
 +	},
 +#define SLOT_LINUX 1
 +	{
@@ -108,7 +107,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +	struct ssb_mipscore *mcore = &ssb_bcm47xx.mipscore;
 +	struct bcm47xx_trx_header *trx_hdr;
 +
-+	trx_hdr = (void *)KSEG1ADDR(mcore->flash_window + 0x40000);
++	trx_hdr = (void *)KSEG1ADDR(mcore->flash_window + BCM47XX_OVERRIDE_CFESIZE);
 +
 +	/* devices might have 2, 4 or 8 MB flash size */
 +#ifdef BCM47XX_OVERRIDE_FLASHSIZE
@@ -122,11 +121,11 @@ diff -Nur linux-2.6.37.orig/arch/mips/bcm47xx/platform.c linux-2.6.37/arch/mips/
 +	printk(KERN_INFO "FLASH SIZE%s: %x\n", BCM47XX_OVERRODE_FLASHSIZE,
 +		flash_size);
 +
-+	left = flash_size - 0x40000;
++	left = flash_size - BCM47XX_OVERRIDE_CFESIZE;
 +	posn = flash_size;
-+	UPTODOWN(SLOT_NVRAM, NVRAM_FLASH_SIZE);
++	UPTODOWN(SLOT_NVRAM, BCM47XX_OVERRIDE_NVRAMSIZE);
 +	UPTODOWN(SLOT_CFGFS, CFGFS_FLASH_SIZE);
-+	bcm47xx_partitions[SLOT_LINUX].offset = 0x40000;
++	bcm47xx_partitions[SLOT_LINUX].offset = BCM47XX_OVERRIDE_CFESIZE;
 +	bcm47xx_partitions[SLOT_LINUX].size = left;
 +
 +	if (trx_hdr->magic == BCM47XX_TRX_MAGIC) {
