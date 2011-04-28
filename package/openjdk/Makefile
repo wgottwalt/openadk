@@ -24,6 +24,8 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
+PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
 ICEDTEA_VERSION:=	1.10

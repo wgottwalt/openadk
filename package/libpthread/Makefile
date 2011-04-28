@@ -49,8 +49,8 @@ endif
 libpthread-dev-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD_DEV}/usr/lib
-	${CP} ./files/libpthread.so.$(ARCH) ${IDIR_LIBPTHREAD_DEV}/usr/lib/libpthread.so
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_LIBPTHREAD_DEV}/usr/lib
+	-${CP} ./files/libpthread.so.$(ARCH) ${IDIR_LIBPTHREAD_DEV}/usr/lib/libpthread.so
+	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_LIBPTHREAD_DEV}/usr/lib
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

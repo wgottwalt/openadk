@@ -80,6 +80,18 @@ config ADK_TARGET_ABI_N64
 
 endchoice
 
+choice 
+prompt "Broadcom BCM47xx Model"
+depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
+
+config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G
+	boolean "Linksys WRT54g"
+	
+config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54GS
+	boolean "Linksys WRT54gs"
+
+endchoice
+
 if ADK_LINUX_NATIVE
 source "target/config/Config.in.native"
 endif
@@ -464,7 +476,6 @@ config ADK_TARGET_ROOTFS_MMC
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
-	depends on ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 

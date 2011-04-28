@@ -7,7 +7,7 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/kernel-adk
+KERNEL:=$(LINUX_DIR)/vmlinux
 LOADADDR:=0x20008000
 
 tools-compile:

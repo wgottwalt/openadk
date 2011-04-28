@@ -507,13 +507,13 @@ bulktoolchain:
 bulk:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc defconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
@@ -525,13 +525,13 @@ bulk:
 bulkall:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc allconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
@@ -543,13 +543,13 @@ bulkall:
 bulkallmod:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc allmodconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \

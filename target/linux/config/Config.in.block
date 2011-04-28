@@ -273,6 +273,8 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	help
 
 config ADK_KERNEL_MD_RAID0
@@ -307,6 +309,8 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	prompt "kmod-dm........................... Device Mapper support"
 	select ADK_KERNEL_MD
 	depends on !ADK_KERNEL_BLK_DEV_DM
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	tristate
 	help
 	  Device-mapper is a low level volume manager.  It works by allowing
@@ -319,7 +323,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 config ADK_KPACKAGE_KMOD_DM_CRYPT
 	prompt "kmod-dm-crypt..................... Crypt target support"
 	depends on !ADK_KERNEL_DM_CRYPT
-	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	select ADK_KERNEL_MD
 	select ADK_KERNEL_CRYPTO
 	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
@@ -336,14 +340,14 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
 	prompt "kmod-dm-snapshot.................. Snapshot target"
-	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KPACKAGE_KMOD_DM_MIRROR
 	prompt "kmod-dm-mirror.................... Mirror target"
-	select ADK_KPACKAGE_KMOD_BLK_DEV_DM
+	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
          Allow volume managers to mirror logical volumes, also
@@ -354,6 +358,8 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	help
           DRBD - http://www.drbd.org
 
