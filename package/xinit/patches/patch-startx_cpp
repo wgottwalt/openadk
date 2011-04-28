@@ -20,12 +20,3 @@
  
      authdisplay=${display:-:0}
  #if defined(HAS_COOKIE_MAKER) && defined(MK_COOKIE)
-@@ -347,5 +336,8 @@ screenrestore
- kbd_mode -a
- #endif
- 
-+xset dpms 0 0 60
-+xset s 0
-+
- exit $retval
- 
