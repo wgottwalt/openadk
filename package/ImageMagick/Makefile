@@ -46,6 +46,7 @@ CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
 			--without-lcms \
 			--without-lcms2 \
 			--without-wmf \
+			--without-xml \
 			--with-jpeg \
 			--with-png \
 			--with-tiff \
