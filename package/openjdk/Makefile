@@ -134,6 +134,7 @@ pre-configure:
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--without-rhino ;\
 	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
+	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
 	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizes.32 \
 		$(WRKBUILD)/generated/sun/awt/X11/generator/sizes.32 ; \
 	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
