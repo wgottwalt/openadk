@@ -10,7 +10,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a07a97cfb28b588cbcf83ffa9ec92e3f
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		jpeg libtiff fontconfig libiconv
+PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
 PKG_NEED_CXX:=		1
@@ -46,6 +46,9 @@ CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
 			--without-lcms \
 			--without-lcms2 \
 			--without-wmf \
+			--with-jpeg \
+			--with-png \
+			--with-tiff \
 			--enable-fast-install
 
 libimagemagick-install:
