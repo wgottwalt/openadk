@@ -75,6 +75,11 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
+ifeq ($(ADK_STATIC),y)
+TARGET_CFLAGS+=		-static
+TARGET_LDFLAGS+=	-static
+endif
+
 openssh-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH}/etc/ssh
 	chmod 0700 ${IDIR_OPENSSH}/etc/ssh

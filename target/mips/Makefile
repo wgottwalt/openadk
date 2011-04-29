@@ -49,6 +49,14 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)

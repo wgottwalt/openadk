@@ -38,6 +38,8 @@ ifeq ($(ADK_STATIC),)
 CONFIGURE_OPTS:=	--shared
 endif
 
+ALL_TARGET:=		libz.a libz.so.1.2.5
+
 do-configure:
 	(cd $(WRKBUILD); $(COPTS) \
 		uname="Linux" \
@@ -49,7 +51,7 @@ do-configure:
 		$(CONFIGURE_OPTS) \
 	);
 
-zlib-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_ZLIB}/usr/lib
 	${CP} ${WRKBUILD}/libz.so* ${IDIR_ZLIB}/usr/lib
 
