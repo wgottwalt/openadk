@@ -12,12 +12,26 @@ config ADK_TARGET_ENDIAN
 	default "little" if ADK_little
 	default "big" if ADK_big
 
+config ADK_TOOLCHAIN
+	boolean
+
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
 
 choice
+prompt "Toolchain options"
+depends on ADK_TOOLCHAIN
+config ADK_TOOLCHAIN_ONLY
+	boolean "Only build toolchain and selected packages"
+
+config ADK_TOOLCHAIN_ARCHIVE
+	boolean "Build a complete system usable f.e. via chroot"
+
+endchoice
+
+choice
 prompt "Target Endianess"
-depends on (ADK_LINUX_ARM || ADK_LINUX_MIPS) && ADK_TOOLCHAIN_ONLY
+depends on (ADK_LINUX_ARM || ADK_LINUX_MIPS) && ADK_TOOLCHAIN
 config ADK_ENDIAN
         boolean "Choose target endianess"
 
@@ -382,7 +396,7 @@ config ADK_TARGET_SUFFIX
 
 choice
 prompt "Target firmware type"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH && !ADK_TOOLCHAIN_ONLY
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH && !ADK_TOOLCHAIN
 default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
