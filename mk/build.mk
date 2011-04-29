@@ -123,8 +123,12 @@ world:
 ifeq ($(ADK_NATIVE),y)
 	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
 else
+ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install package/compile
+else
+	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install package/compile root_clean package/install
+endif
 else
 	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
@@ -214,7 +218,7 @@ clean:
 	@$(TRACE) clean
 	$(MAKE) -C $(CONFIG) clean
 	for d in ${STAGING_PKG_DIR}; do \
-		for f in $$(ls $$d/[a-z]*|grep -v [A-Z] 2>/dev/null); do  \
+		for f in $$(ls $$d/[a-z]* 2>/dev/null |grep -v [A-Z] 2>/dev/null); do  \
 			while read file ; do \
 				rm ${STAGING_DIR}/$$file 2>/dev/null;\
 			done < $$f ; \
@@ -513,7 +517,7 @@ bulk:
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=nfsroot defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \

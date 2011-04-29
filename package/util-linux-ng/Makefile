@@ -41,7 +41,6 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-libblkid \
 			--enable-libmount \
 			--enable-mount
-MAKE_FLAGS+=		OPT="${TARGET_CFLAGS}" ARCH="${ARCH}"
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -lintl
 

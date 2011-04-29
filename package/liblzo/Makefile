@@ -16,15 +16,19 @@ PKG_SUBPKGS:=		LIBLZO LIBLZO_DEV
 PKGSD_LIBLZO_DEV:=	lzo library headers
 PKGSC_LIBLZO_DEV:=	devel
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS:=		libonly
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLZO_DEV,liblzo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBLZO_DEV},${PKGSC_LIBLZO_DEV}))
+$(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
+$(eval $(call PKG_template,LIBLZO_DEV,liblzo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBLZO_DEV},${PKGSC_LIBLZO_DEV},$(PKG_OPTS)))
 
 CONFIGURE_ARGS+=	--enable-static
 MAKE_FLAGS+=		CFLAGS_O="${TARGET_CFLAGS}"
 
-liblzo-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBLZO}/usr/lib
 	${CP} ${WRKINST}/usr/lib/liblzo2.so* ${IDIR_LIBLZO}/usr/lib
 
