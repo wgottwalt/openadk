@@ -1,5 +1,5 @@
 --- libX11-1.4.0.orig/src/util/Makefile.in	2010-11-21 23:15:55.000000000 +0100
-+++ libX11-1.4.0/src/util/Makefile.in	2011-01-24 16:37:00.000000000 +0100
++++ libX11-1.4.0/src/util/Makefile.in	2011-04-28 22:56:41.000000000 +0200
 @@ -262,7 +262,6 @@ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
@@ -8,3 +8,18 @@
  	$(CWARNFLAGS)
  
  EXTRA_DIST = mkks.sh
+@@ -351,12 +350,12 @@ distclean-compile:
+ @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+ 
+ makekeys-makekeys.o: makekeys.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(makekeys_CFLAGS) $(CFLAGS) -MT makekeys-makekeys.o -MD -MP -MF $(DEPDIR)/makekeys-makekeys.Tpo -c -o makekeys-makekeys.o `test -f 'makekeys.c' || echo '$(srcdir)/'`makekeys.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(makekeys_CFLAGS) $(CFLAGS_FOR_BUILD) -MT makekeys-makekeys.o -MD -MP -MF $(DEPDIR)/makekeys-makekeys.Tpo -c -o makekeys-makekeys.o `test -f 'makekeys.c' || echo '$(srcdir)/'`makekeys.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/makekeys-makekeys.Tpo $(DEPDIR)/makekeys-makekeys.Po
+ @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='makekeys.c' object='makekeys-makekeys.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(makekeys_CFLAGS) $(CFLAGS) -c -o makekeys-makekeys.o `test -f 'makekeys.c' || echo '$(srcdir)/'`makekeys.c
++@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(makekeys_CFLAGS) $(CFLAGS_FOR_BUILD) -c -o makekeys-makekeys.o `test -f 'makekeys.c' || echo '$(srcdir)/'`makekeys.c
+ 
+ makekeys-makekeys.obj: makekeys.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(makekeys_CFLAGS) $(CFLAGS) -MT makekeys-makekeys.obj -MD -MP -MF $(DEPDIR)/makekeys-makekeys.Tpo -c -o makekeys-makekeys.obj `if test -f 'makekeys.c'; then $(CYGPATH_W) 'makekeys.c'; else $(CYGPATH_W) '$(srcdir)/makekeys.c'; fi`

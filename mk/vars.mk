@@ -79,12 +79,6 @@ TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
 TARGET_LDFLAGS:=
 endif
 
-ifneq ($(ADK_STATIC),)
-TARGET_CFLAGS+=		-static
-TARGET_CXXFLAGS+=	-static
-TARGET_LDFLAGS+=	-static
-endif
-
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
 TARGET_CXXFLAGS+=	-fstack-protector
