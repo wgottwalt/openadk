@@ -78,6 +78,7 @@ CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
 CONFIGURE_ARGS+=	--disable-docs \
 			--disable-bootstrap \
 			--enable-openjdk-cross-compilation \
+			--with-llvm-config=$(STAGING_TARGET_DIR)/usr/bin/llvm-config \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
 			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \

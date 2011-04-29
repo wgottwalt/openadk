@@ -1,6 +1,5 @@
-diff -Nur openjdk-6.orig/hotspot/src/share/vm/shark/llvmHeaders.hpp openjdk-6/hotspot/src/share/vm/shark/llvmHeaders.hpp
---- openjdk-6.orig/hotspot/src/share/vm/shark/llvmHeaders.hpp	2011-02-28 17:03:21.000000000 +0100
-+++ openjdk-6/hotspot/src/share/vm/shark/llvmHeaders.hpp	2011-04-29 18:07:20.171550601 +0200
+--- w-openjdk-6.orig/openjdk-6/hotspot/src/share/vm/shark/llvmHeaders.hpp	2011-02-28 17:03:21.000000000 +0100
++++ w-openjdk-6/openjdk-6/hotspot/src/share/vm/shark/llvmHeaders.hpp	2011-04-29 18:07:20.171550601 +0200
 @@ -43,7 +43,7 @@
  #include <llvm/ModuleProvider.h>
  #endif
