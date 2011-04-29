@@ -138,25 +138,14 @@ pre-configure:
 			--without-rhino ;\
 	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
 	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizes.32 \
-		$(WRKBUILD)/generated/sun/awt/X11/generator/sizes.32 ; \
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
-		$(WRKBUILD)/generated/sun/awt/X11/generator/sizer.32 ; \
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
-		$(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/sizer.32 ; \
+	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/generated/sun/awt/X11/generator/; \
+	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/; \
 	$(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
 	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
 	ln -sf $(BOOTSTRAPJDK)/bin/javah $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javah
 	ln -sf $(BOOTSTRAPJDK)/bin/jar $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/jar
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizes.32 \
-		$(WRKBUILD)/generated/sun/awt/X11/generator/sizes.32
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
-		$(WRKBUILD)/generated/sun/awt/X11/generator/sizer.32
-	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator
-	cp $(JTOOLS_BUILD_DIR)/icedtea6-1.10/generated/sun/awt/X11/generator/sizer.32 \
-		$(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/sizer.32
 
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
