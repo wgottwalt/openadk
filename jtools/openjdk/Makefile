@@ -50,6 +50,7 @@ OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj PATH=$$PATH:$(
 
 install: ${STAGING_JAVA_HOST_DIR}/bootstrap-jdk/bin/java
 
+do-extract:
 $(WRKDIST)/.extract: $(WRKDIST)/.extract_done
 	cd ${WRKDIST}; mkdir openjdk-$(PKG_VERSION); \
 		tar xzf $(TOPDIR)/dl/openjdk-$(PKG_VERSION)-src-$(PKG_EXTRAVER).tar.gz -C openjdk-$(PKG_VERSION)
