@@ -100,6 +100,10 @@ if [[ -n $ADK_COMPILE_AUTOMAKE ]]; then
 	NEED_AUTOCONF="$NEED_AUTOCONF automake"
 fi
 
+if [[ -n $ADK_COMPILE_LIBTOOL ]]; then
+	NEED_AUTOMAKE="$NEED_AUTOMAKE libtool"
+fi
+
 if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_GXX="$NEED_GXX squid"
 fi
@@ -248,6 +252,13 @@ fi
 if [[ -n $NEED_AUTOCONF ]]; then
 	if ! which autoconf >/dev/null 2>&1; then
 		echo >&2 You need autoconf to build $NEED_AUTOCONF
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_AUTOMAKE ]]; then
+	if ! which automake >/dev/null 2>&1; then
+		echo >&2 You need automake to build $NEED_AUTOMAKE
 		out=1
 	fi
 fi
