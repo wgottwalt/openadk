@@ -79,6 +79,10 @@ if [[ -n $ADK_COMPILE_KRB5 ]]; then
 	NEED_BISON="$NEED_BISON krb5"
 fi
 
+if [[ -n $ADK_COMPILE_OPENJDK ]]; then
+	NEED_ANT="$NEED_ANT openjdk"
+fi
+
 if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
 	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
 fi
@@ -329,6 +333,13 @@ fi
 if [[ -n $NEED_FLEX ]]; then
 	if ! which flex >/dev/null 2>&1; then
 		echo >&2 You need flex to build $NEED_FLEX
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_ANT ]]; then
+	if ! which ant >/dev/null 2>&1; then
+		echo >&2 You need ant to build $NEED_OPENJDK
 		out=1
 	fi
 fi
