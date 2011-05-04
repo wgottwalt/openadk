@@ -12,15 +12,19 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
+# for cygwin and ubunto on amd64
 ifneq (,$(filter CYGWIN%,${OStype}))
-	(cd $(WRKBUILD); cp configfsf.guess config.guess);
+	(cd $(WRKBUILD); cp configfsf.guess config.guess)
+endif
+ifeq (${OStype},Linux)
+	(cd $(WRKBUILD); cp configfsf.guess config.guess)
 endif
 	(cd $(WRKBUILD); \
 		./configure \
 		--prefix=$(STAGING_HOST_DIR) \
 		--disable-shared \
 		--enable-static \
-	);
+	)
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
