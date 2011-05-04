@@ -1,0 +1,11 @@
+--- cmake-2.8.4.orig/bootstrap	2011-02-15 18:47:26.000000000 +0100
++++ cmake-2.8.4/bootstrap	2011-05-04 12:52:48.781551109 +0200
+@@ -144,7 +144,7 @@ if ${cmake_system_mingw}; then
+ elif ${cmake_system_haiku}; then
+   cmake_default_prefix=`/bin/finddir B_COMMON_DIRECTORY`
+ else
+-  cmake_default_prefix="/usr/local"
++  cmake_default_prefix="/usr"
+ fi
+ 
+ CMAKE_KNOWN_C_COMPILERS="cc gcc xlc icc tcc"
