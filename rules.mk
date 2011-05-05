@@ -48,10 +48,14 @@ include $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk
 endif
 endif
 
-include $(TOPDIR)/mk/vars.mk
+ifneq (${DEBUG},)
+ADK_DEBUG:=y
+endif
+ifneq (${STATIC},)
+ADK_STATIC:=y
+endif
 
-# needed? 
-#export BASH MAKE LANGUAGE LC_ALL OStype PATH
+include $(TOPDIR)/mk/vars.mk
 
 CPPFLAGS_FOR_BUILD?=
 CFLAGS_FOR_BUILD?=	-O2 -Wall
