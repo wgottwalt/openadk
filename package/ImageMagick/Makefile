@@ -10,7 +10,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a07a97cfb28b588cbcf83ffa9ec92e3f
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv
+PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv libtool
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
 PKG_NEED_CXX:=		1
@@ -36,6 +36,7 @@ $(eval $(call PKG_template,LIBIMAGEMAGICK,libimagemagick,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_CONVERT},${PKGSD_CONVERT},${PKGSC_CONVERT}))
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_sys_file_offset_bits=yes
 CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
