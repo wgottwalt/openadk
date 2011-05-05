@@ -163,6 +163,20 @@ config ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
 	  This IV generator generates an IV based on a sequence number by
 	  xoring it with a salt.  This algorithm is mainly useful for CTR
 
+config ADK_KPACKAGE_KMOD_CRYPTO_CTS
+	prompt "kmod-crypto-cts...................... CTS support"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+	default n
+	help
+          CTS: Cipher Text Stealing
+          This is the Cipher Text Stealing mode as described by
+          Section 8 of rfc2040 and referenced by rfc3962.
+          (rfc3962 includes errata information in its Appendix A)
+          This mode is required for Kerberos gss mechanism support
+          for AES encryption.
+
 config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	prompt "kmod-crypto-cbc...................... CBC support"
 	tristate

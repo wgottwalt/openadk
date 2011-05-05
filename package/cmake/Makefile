@@ -12,11 +12,14 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 
+PKG_CFLINE_CMAKE:=	depends on ADK_NATIVE
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 pre-configure:
 	(cd $(WRKBUILD); ./configure -prefix=/usr)

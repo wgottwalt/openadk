@@ -50,6 +50,8 @@ config ADK_KPACKAGE_KMOD_NFS_FS
 	tristate
 	default n
 	select ADK_KERNEL_NFS_V3
+	select ADK_KERNEL_NFS_V4
+	select ADK_KERNEL_DNOTIFY
 	select ADK_KPACKAGE_KMOD_SUNRPC
 	select ADK_KPACKAGE_KMOD_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
@@ -92,12 +94,18 @@ config ADK_KERNEL_NFSD_V3
 	boolean
 	default n
 
+config ADK_KERNEL_NFSD_V4
+	boolean
+	default n
+
 config ADK_KPACKAGE_KMOD_NFSD
 	prompt "kmod-fs-nfsd...................... NFS server support (includes V3 support)"
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_EXPORTFS if !ADK_KERNEL_EXPORTFS
 	select ADK_KERNEL_NFSD_V3
+	select ADK_KERNEL_NFSD_V4
+	select ADK_KERNEL_DNOTIFY
 	select ADK_KPACKAGE_KMOD_SUNRPC
 	select ADK_KPACKAGE_KMOD_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
@@ -122,19 +130,6 @@ config ADK_KPACKAGE_KMOD_NFSD
 	  Please read the NFS-HOWTO, available from
 	  <http://www.tldp.org/docs.html#howto>.
 
-config ADK_KERNEL_NFSD_V4
-	prompt "Enable NFSv4 and RPC Kerberos"
-	boolean
-	depends on !ADK_TARGET_ROOTFS_NFSROOT
-	depends on ADK_KPACKAGE_KMOD_NFSD || ADK_KPACKAGE_KMOD_NFS_FS
-	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
-	select ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
-	select ADK_KERNEL_NFS_V4
-	select ADK_KERNEL_DNOTIFY
-	default n
-	help
-	 NFSv4 with Kerberos authentication.
-
 config ADK_KPACKAGE_KMOD_LOCKD
 	tristate
 	default n
@@ -151,5 +146,17 @@ config ADK_KPACKAGE_KMOD_SUNRPC_GSS
 
 config ADK_KPACKAGE_KMOD_RPCSEC_GSS_KRB5
 	tristate
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
+	select ADK_KPACKAGE_KMOD_SUNRPC
+	select ADK_KPACKAGE_KMOD_CRYPTO
+	select ADK_KPACKAGE_KMOD_CRYPTO_MD5
+	select ADK_KPACKAGE_KMOD_CRYPTO_DES
+	select ADK_KPACKAGE_KMOD_CRYPTO_CBC
+	select ADK_KPACKAGE_KMOD_CRYPTO_CTS
+	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
+	select ADK_KPACKAGE_KMOD_CRYPTO_HMAC
+	select ADK_KPACKAGE_KMOD_CRYPTO_SHA1
+	select ADK_KPACKAGE_KMOD_CRYPTO_AES
+	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
 	default n
