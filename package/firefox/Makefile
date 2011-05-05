@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3468a2c463b4fc2788ba621e4b511c30
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libnotify
+PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff
 PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf libintl
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme libnotify
+PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -36,6 +36,8 @@ CONFIGURE_ARGS+=	--disable-ipc
 else
 CONFIGURE_ARGS+=	--enable-ipc
 endif
+
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_CC="${CC_FOR_BUILD}" \
@@ -64,8 +66,10 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
 			--enable-libxul \
-			--enable-libnotify \
-			--enable-dbus \
+			--disable-libnotify \
+			--disable-accessibility \
+			--disable-smil \
+			--disable-dbus \
 			--disable-debug \
 			--disable-logging \
 			--disable-strip \
