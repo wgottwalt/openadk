@@ -57,6 +57,10 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
 endif
+ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
