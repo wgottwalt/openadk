@@ -60,7 +60,6 @@ endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
 endif
