@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010
+# Copyright © 2010, 2011
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -70,6 +70,7 @@ TOPDIR=$(realpath .)
 ostype=$(uname -s)
 
 cfgfs=1
+noformat=0
 quiet=0
 serial=0
 speed=115200
@@ -78,13 +79,13 @@ panicreboot=10
 function usage {
 cat >&2 <<EOF
 Syntax: $me [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
-    [±t] /dev/sdb image
+    [±t] -n /dev/sdb image
 Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hp:qs:t" ch; do
+while getopts "c:hp:qs:nt" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -102,6 +103,7 @@ while getopts "c:hp:qs:t" ch; do
 			exit 1
 		fi
 		speed=$OPTARG ;;
+	(n)	noformat=1 ;;
 	(t)	serial=1 ;;
 	(+t)	serial=0 ;;
 	(*)	usage 1 ;;
@@ -330,9 +332,9 @@ fi
 (( quiet )) || print "Creating ext2fs on ${part}..."
 q=
 (( quiet )) && q=-q
-mke2fs $q "$part"
+(( noformat )) || mke2fs $q "$part"
 partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
-tune2fs -c 0 -i 0 "$part"
+(( noformat )) || tune2fs -c 0 -i 0 "$part"
 
 (( quiet )) || print Extracting installation archive...
 mount_ext2fs "$part" "$T"
