@@ -7,6 +7,10 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+ifeq (${ADK_TARGET_SYSTEM_BROADCOM_BCM47XX},y)
+CUSTOM_ROOTFSSQUASHFS_BUILD=1
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 KERNEL:=$(LINUX_DIR)/vmlinuz
 else
@@ -58,6 +62,18 @@ kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
 endif
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPSEL),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
 endif

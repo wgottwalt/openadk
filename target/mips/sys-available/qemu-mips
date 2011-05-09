@@ -1,5 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_MIPS
-	bool "Qemu Emulator"
+	bool "Qemu Emulator (big endian)"
 	select ADK_mips
 	select ADK_big
 	select ADK_qemu_mips
