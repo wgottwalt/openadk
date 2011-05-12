@@ -4,18 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
-PKG_VERSION:=		0.6.28
+PKG_VERSION:=		0.6.30
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d0143a5aa3265019072e53ab497818d0
+PKG_MD5SUM:=		e4db89a2a403ff4c47d66ac66fad1f43
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
-PKG_DEPENDS:=		libavahi libdaemon libexpat libintl libgtk
-PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext gtk+
+PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext gtk+ dbus
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
+PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl libgtk dbus
 PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
 PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
@@ -23,7 +23,7 @@ PKGSC_LIBAVAHI:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DAEMON},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAVAHI},${PKGSC_LIBAVAHI}))
 
@@ -31,10 +31,10 @@ TARGET_LDFLAGS+=	-lintl
 CONFIGURE_ARGS+=	--enable-glib \
 			--enable-gtk2 \
 			--enable-libdaemon \
+			--enable-dbus \
 			--disable-qt3 \
 			--disable-qt4 \
 			--disable-gtk3 \
-			--disable-dbus \
 			--disable-python \
 			--disable-pygtk \
 			--disable-python-dbus \
@@ -55,7 +55,16 @@ CONFIGURE_ARGS+=	--enable-glib \
 			--with-avahi-user=avahi \
 			--with-avahi-group=avahi
 
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-stack-protector
+else
+CONFIGURE_ARGS+=	--disable-stack-protector
+endif
+
 avahi-daemon-install:
+	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/dbus-1/system.d
+	$(INSTALL_DATA) $(WRKINST)/etc/dbus-1/system.d/avahi-dbus.conf \
+		${IDIR_AVAHI_DAEMON}/etc/dbus-1/system.d
 	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/avahi
 	${INSTALL_DATA} ./files/avahi-daemon.conf \
 		${IDIR_AVAHI_DAEMON}/etc/avahi
@@ -79,6 +88,8 @@ avahi-dnsconfd-install:
 libavahi-install:
 	${INSTALL_DIR} ${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-common.so* \
+		${IDIR_LIBAVAHI}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libavahi-client.so* \
 		${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-core.so* \
 		${IDIR_LIBAVAHI}/usr/lib
