@@ -24,8 +24,9 @@ parted -s /dev/mmcblk0 set 1 boot on
 sfdisk --change-id /dev/mmcblk0 3 88 >/dev/null 2>&1
 sleep 2
 sync
-printf "Creating ext2 filesystem\n"
+printf "Creating vfat filesystem\n"
 mkfs.vfat /dev/mmcblk0p1 >/dev/null 2>&1
+printf "Creating ext2 filesystem\n"
 mke2fs /dev/mmcblk0p2 >/dev/null 2>&1
 tune2fs -c0 -i0 /dev/mmcblk0p2 >/dev/null 2>&1
 mount -t ext2 /dev/mmcblk0p2 /mnt

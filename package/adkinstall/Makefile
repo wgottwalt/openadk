@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		8
+PKG_RELEASE:=		9
 PKG_DESCR:=		openadk installer
 PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk e2fsprogs
@@ -32,6 +32,9 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 	${INSTALL_BIN} ./src/adkinstall.foxg20 \
+		$(IDIR_ADKINSTALL)/sbin/adkinstall
+else ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	${INSTALL_BIN} ./src/adkinstall.yeelong \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
 	${INSTALL_BIN} ./src/adkinstall.rb4xx \
