@@ -18,8 +18,6 @@ PKG_SUBPKGS:=		DBUS DBUS_DEV
 PKGSC_DBUS_DEV:=	devel
 PKGSD_DBUS_DEV:=	DBUS headers
 
-PKG_ARCH_DEPENDS:=	!arm
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif
