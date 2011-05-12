@@ -20,7 +20,7 @@ $(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE},${P
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--disable-lynx
 
-libdaemon-install:
+post-install:
 	${INSTALL_DIR} ${IDIR_LIBDAEMON}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libdaemon.so* ${IDIR_LIBDAEMON}/usr/lib
 
