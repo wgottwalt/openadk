@@ -4,13 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libevent
-PKG_VERSION:=		1.3
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		d87b05143c6c2bc9464758e68e9c6e25
+PKG_VERSION:=		1.4.14b
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a00e037e4d3f9e4fe9893e8a2d27918c
 PKG_DESCR:=		Event notification library for event-driven network servers
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.monkey.org/~provos/
 PKG_SITES:=		http://www.monkey.org/~provos/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-stable.tar.gz
+WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-stable
 
 PKG_SUBPKGS:=		LIBEVENT LIBEVENT_DEV
 PKGSD_LIBEVENT_DEV:=	development files for libevent
