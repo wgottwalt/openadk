@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG forked-daapd
+#INIT 85
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${forked_daapd:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/forked-daapd
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/forked-daapd)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

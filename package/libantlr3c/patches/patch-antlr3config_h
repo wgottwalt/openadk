@@ -1,0 +1,11 @@
+--- libantlr3c-3.2.orig/antlr3config.h	2009-09-23 22:50:45.000000000 +0200
++++ libantlr3c-3.2/antlr3config.h	2011-05-10 14:06:43.000000000 +0200
+@@ -5,7 +5,7 @@
+ /* #undef ANTLR3_NODEBUGGER */
+ 
+ /* Define if 64 bit mode required */
+-#define ANTLR3_USE_64BIT 1
++/* #undef ANTLR3_USE_64BIT */
+ 
+ /* Define to 1 if you have the `accept' function. */
+ #define HAVE_ACCEPT 1

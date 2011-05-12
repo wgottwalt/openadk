@@ -1,0 +1,10 @@
+--- forked-daapd-0.16.orig/config.h.in	2011-04-30 11:43:23.000000000 +0200
++++ forked-daapd-0.16/config.h.in	2011-05-10 14:39:41.000000000 +0200
+@@ -1,5 +1,7 @@
+ /* config.h.in.  Generated from configure.in by autoheader.  */
+ 
++#define pipe2(a,b) pipe(a)
++
+ /* Define to 1 if you have the <dirent.h> header file. */
+ #undef HAVE_DIRENT_H
+ 
