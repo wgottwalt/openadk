@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.2
+PKG_VERSION:=		2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a157c1eb70502f1da8097477104e719e
+PKG_MD5SUM:=		efa6964c44fa7f01481a1f8365c1f6cb
 PKG_DESCR:=		library for interfacing MPD
 PKG_SECTION:=		libs
 PKG_URL:=		http://mpd.wikia.com/wiki/ClientLib:libmpdclient
@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBMPDCLIENT,libmpdclient,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMPDCLIENT_DEV,libmpdclient-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBMPDCLIENT_DEV},${PKGSC_LIBMPDCLIENT_DEV}))
+
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
 libmpdclient-install:
 	$(INSTALL_DIR) $(IDIR_LIBMPDCLIENT)/usr/lib

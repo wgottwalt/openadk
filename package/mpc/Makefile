@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpc
-PKG_VERSION:=		0.19
+PKG_VERSION:=		0.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		08af459a18388c35dd81de8f9f1534c9
+PKG_MD5SUM:=		e94d71fc3869914e12ae14f8ee02864c
 PKG_DESCR:=		music player client
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmpdclient
@@ -19,6 +19,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,MPC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-iconv
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_MPC)/usr/bin

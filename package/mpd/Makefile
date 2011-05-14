@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.15.10
+PKG_VERSION:=		0.16.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3ee746cb9193acfd0e1bd7a8c54af1a6
+PKG_MD5SUM:=		a75ad715cc381dc5efeff6dbf313a954
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
+PKG_FDEPENDS:=		glib libstdcxx
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
@@ -21,46 +22,83 @@ PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
 PKGFB_WITH_ALSA:=	alsa-lib
+ifeq ($(ADK_PACKAGE_MPD_WITH_ALSA),y)
+PKG_FDEPENDS+=		alsa-lib
+endif
 PKGFD_WITH_AO:=		enable Libao/ESD output
 PKGFS_WITH_AO:=		libao
 PKGFB_WITH_AO:=		libao
+ifeq ($(ADK_PACKAGE_MPD_WITH_AO),y)
+PKG_FDEPENDS+=		libao
+endif
 PKGFD_WITH_MP3:=	enable MP3 support
 PKGFS_WITH_MP3:=	libid3tag libmad
 PKGFB_WITH_MP3:=	libid3tag libmad
+ifeq ($(ADK_PACKAGE_MPD_WITH_MP3),y)
+PKG_FDEPENDS+=		libid3tag libmad
+endif
 PKGFD_WITH_MP4:=	enable MP4 support
 PKGFS_WITH_MP4:=	libfaad2
 PKGFB_WITH_MP4:=	faad2
+ifeq ($(ADK_PACKAGE_MPD_WITH_MP4),y)
+PKG_FDEPENDS+=		libfaad2
+endif
 PKGFD_WITH_OGG:=	enable OGG support
 PKGFS_WITH_OGG:=	libvorbis libogg
 PKGFB_WITH_OGG:=	libvorbis libogg
+ifeq ($(ADK_PACKAGE_MPD_WITH_OGG),y)
+PKG_FDEPENDS+=		libvorbis libogg
+endif
 PKGFD_WITH_TREMOR:=	enable fixpoint Vorbis/OGG support
 PKGFS_WITH_TREMOR:=	libvorbisidec
 PKGFB_WITH_TREMOR:=	libvorbisidec
+ifeq ($(ADK_PACKAGE_MPD_WITH_TREMOR),y)
+PKG_FDEPENDS+=		libvorbisidec
+endif
 PKGFD_WITH_FLAC:=	enable FLAC support
 PKGFS_WITH_FLAC:=	libflac
 PKGFB_WITH_FLAC:=	flac
+ifeq ($(ADK_PACKAGE_MPD_WITH_FLAC),y)
+PKG_FDEPENDS+=		libflac
+endif
 PKGFD_WITH_WAV:=	enable WAVE support
 PKGFS_WITH_WAV:=	libaudiofile
 PKGFB_WITH_WAV:=	libaudiofile
+ifeq ($(ADK_PACKAGE_MPD_WITH_WAV),y)
+PKG_FDEPENDS+=		libaudiofile
+endif
 PKGFD_WITH_MMS:=	enable MMS support
 PKGFS_WITH_MMS:=	libmms
 PKGFB_WITH_MMS:=	libmms
+ifeq ($(ADK_PACKAGE_MPD_WITH_MMS),y)
+PKG_FDEPENDS+=		libmms
+endif
 PKGFD_WITH_FFMPEG:=	enable FFMPEG support
 PKGFS_WITH_FFMPEG:=	ffmpeg
 PKGFB_WITH_FFMPEG:=	ffmpeg
+ifeq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),y)
+PKG_FDEPENDS+=		ffmpeg
+endif
 PKGFD_WITH_SHOUT:=	enable Shoutcast output support
 PKGFS_WITH_SHOUT:=	libshout liblame libvorbisenc
 PKGFB_WITH_SHOUT:=	lame libvorbis libshout
+ifeq ($(ADK_PACKAGE_MPD_WITH_SHOUT),y)
+PKG_FDEPENDS+=		libshout liblame libvorbisenc
+endif
 PKGFD_WITH_CURL:=	enable CURL support
 PKGFS_WITH_CURL:=	libcurl
 PKGFB_WITH_CURL:=	curl
+ifeq ($(ADK_PACKAGE_MPD_WITH_CURL),y)
+PKG_FDEPENDS+=		libcurl
+endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-std=gnu99
 XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
+CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-jack \
 			--disable-fifo \
