@@ -1,0 +1,25 @@
+--- joe-3.7.orig/umath.c	2011-05-06 11:28:53.000000000 +0200
++++ joe-3.7/umath.c		2011-05-16 09:10:08.000000000 +0200
+@@ -396,10 +396,18 @@
+ double m_fabs(double n) { return fabs(n); }
+ double m_erf(double n) { return erf(n); }
+ double m_erfc(double n) { return erfc(n); }
+-double m_j0(double n) { return j0(n); }
+-double m_j1(double n) { return j1(n); }
+-double m_y0(double n) { return y0(n); }
+-double m_y1(double n) { return y1(n); }
++#if defined(__UCLIBC__)
++double m_j0(double n) { return 0; }
++double m_j1(double n) { return 0; }
++double m_y0(double n) { return 0; }
++double m_y1(double n) { return 0; }
++#else
++double m_j0(double n) { return j0(n); }
++double m_j1(double n) { return j1(n); }
++double m_y0(double n) { return y0(n); }
++double m_y1(double n) { return y1(n); }
++#endif
++
+ 
+ double calc(BW *bw, unsigned char *s)
+ {
