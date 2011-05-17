@@ -16,6 +16,14 @@ PKG_SITES:=		http://doolittle.icarus.com/ntpclient/
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2007
 
+PKG_FLAVOURS_NTPCLIENT:=	STARTUP
+PKGFD_STARTUP:=	Fetch time on startup
+
+PKG_FLAVOURS_STRING_NTPCLIENT:=	HOST
+PKGFD_HOST:=	Fetch time from this NTP host
+PKGFX_HOST:=	0.de.pool.ntp.org
+PKGFC_HOST:=	depends on ADK_PACKAGE_NTPCLIENT_STARTUP
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NTPCLIENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -29,5 +37,11 @@ ALL_TARGET:=
 do-install:
 	${INSTALL_DIR} ${IDIR_NTPCLIENT}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/ntpclient ${IDIR_NTPCLIENT}/usr/sbin/
+
+ifeq (${ADK_PACKAGE_NTPCLIENT_STARTUP},y)
+	${INSTALL_DIR} ${IDIR_NTPCLIENT}/etc/init.d
+	touch ${IDIR_NTPCLIENT}/etc/init.d/ntpclient
+	echo -e "#!/bin/sh\n#INIT 91\nntpclient -h ${ADK_PACKAGE_NTPCLIENT_HOST} -s\nexit 0" > ${IDIR_NTPCLIENT}/etc/init.d/ntpclient
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
