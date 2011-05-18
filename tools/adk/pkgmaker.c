@@ -271,7 +271,7 @@ int main() {
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
 	char *pkg_need_cxx, *pkg_need_java, *pkgname;
-	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_choices, *pseudo_name;
+	char *pkg_host_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
 	int result;
@@ -283,6 +283,7 @@ int main() {
 	pkg_url = NULL;
 	pkg_depends = NULL;
 	pkg_flavours = NULL;
+	pkg_flavours_string = NULL;
 	pkg_choices = NULL;
 	pkg_subpkgs = NULL;
 	pkg_arch_depends = NULL;
@@ -412,11 +413,17 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
+					if ((parse_var_with_pkg(buf, "PKG_FLAVOURS_STRING_", pkg_flavours_string, &pkg_flavours_string, &pkgname, 20)) == 0)
+						continue;
 					if ((parse_var_with_pkg(buf, "PKG_FLAVOURS_", pkg_flavours, &pkg_flavours, &pkgname, 13)) == 0)
 						continue;
 					if ((parse_var_hash(buf, "PKGFD_", pkgmap)) == 0)
 						continue;
+					if ((parse_var_hash(buf, "PKGFX_", pkgmap)) == 0)
+						continue;
 					if ((parse_var_hash(buf, "PKGFS_", pkgmap)) == 0)
+						continue;
+					if ((parse_var_hash(buf, "PKGFC_", pkgmap)) == 0)
 						continue;
 					if ((parse_var_with_pkg(buf, "PKG_CHOICES_", pkg_choices, &pkg_choices, &pkgname, 12)) == 0)
 						continue;
@@ -452,6 +459,8 @@ int main() {
 				fprintf(stderr, "Package subpackages are %s\n", pkg_subpkgs);
 			if (pkg_flavours != NULL && pkgname != NULL)
 				fprintf(stderr, "Package flavours for %s are %s\n", pkgname, pkg_flavours);
+			if (pkg_flavours_string != NULL && pkgname != NULL)
+				fprintf(stderr, "Package string flavours for %s are %s\n", pkgname, pkg_flavours_string);
 			if (pkg_choices != NULL && pkgname != NULL)
 				fprintf(stderr, "Package choices for %s are %s\n", pkgname, pkg_choices);
 			if (pkg_url != NULL)
@@ -695,6 +704,30 @@ int main() {
 					token = strtok(pkg_flavours, " ");
 					while (token != NULL) {
 						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
+
+						// process default value
+						strncat(hkey, "PKGFX_", 6);
+						strncat(hkey, token, strlen(token));
+						memset(hvalue, 0 , MAXVALUE);
+						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						memset(hkey, 0 , MAXVAR);
+						pkg_fd = strdup(hvalue);
+						if (strlen(pkg_fd) > 0)
+							fprintf(cfg, "\tdefault %s\n", pkg_fd);
+						else
+							fprintf(cfg, "\tdefault n\n");
+
+
+						// process flavour cfline
+						strncat(hkey, "PKGFC_", 6);
+						strncat(hkey, token, strlen(token));
+						memset(hvalue, 0 , MAXVALUE);
+						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						memset(hkey, 0 , MAXVAR);
+						pkg_fd = strdup(hvalue);
+						if (strlen(pkg_fd) > 0)
+							fprintf(cfg, "\t%s\n", pkg_fd);
+
 						fprintf(cfg, "\tboolean ");
 						strncat(hkey, "PKGFD_", 6);
 						strncat(hkey, token, strlen(token));
@@ -704,7 +737,6 @@ int main() {
 						pkg_fd = strdup(hvalue);
 
 						fprintf(cfg, "\"%s\"\n", pkg_fd);
-						fprintf(cfg, "\tdefault n\n");
 						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", pkgname);
 						strncat(hkey, "PKGFS_", 6);
 						strncat(hkey, token, strlen(token));
@@ -727,6 +759,65 @@ int main() {
 					}
 					free(pkg_flavours);
 					pkg_flavours = NULL;
+				}
+
+				/* package flavours string */
+				if (pkg_flavours_string != NULL) {
+					token = strtok(pkg_flavours_string, " ");
+					while (token != NULL) {
+						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
+
+						// process default value
+						strncat(hkey, "PKGFX_", 6);
+						strncat(hkey, token, strlen(token));
+						memset(hvalue, 0 , MAXVALUE);
+						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						memset(hkey, 0 , MAXVAR);
+						pkg_fd = strdup(hvalue);
+						if (strlen(pkg_fd) > 0)
+							fprintf(cfg, "\tdefault \"%s\"\n", pkg_fd);
+
+						// process flavour cfline
+						strncat(hkey, "PKGFC_", 6);
+						strncat(hkey, token, strlen(token));
+						memset(hvalue, 0 , MAXVALUE);
+						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						memset(hkey, 0 , MAXVAR);
+						pkg_fd = strdup(hvalue);
+						if (strlen(pkg_fd) > 0)
+							fprintf(cfg, "\t%s\n", pkg_fd);
+
+						fprintf(cfg, "\tstring ");
+						strncat(hkey, "PKGFD_", 6);
+						strncat(hkey, token, strlen(token));
+						memset(hvalue, 0 , MAXVALUE);
+						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						memset(hkey, 0 , MAXVAR);
+						pkg_fd = strdup(hvalue);
+						fprintf(cfg, "\"%s\"\n", pkg_fd);
+
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", pkgname);
+						strncat(hkey, "PKGFS_", 6);
+						strncat(hkey, token, strlen(token));
+
+						result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+						if (result == 1) {
+							val = strtok_r(hvalue, " ", &saveptr);
+							while (val != NULL) { 
+								if (strncmp(val, "kmod", 4) == 0)
+									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
+								else
+									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								val = strtok_r(NULL, " ", &saveptr);
+							}
+						}
+						memset(hkey, 0, MAXVAR);
+						fprintf(cfg, "\thelp\n");
+						fprintf(cfg, "\t  %s\n", pkg_fd);
+						token = strtok(NULL, " ");
+					}
+					free(pkg_flavours_string);
+					pkg_flavours_string = NULL;
 				}
 
 				/* package choices */
@@ -785,6 +876,7 @@ int main() {
 			free(pkg_url);
 			free(pkg_depends);
 			free(pkg_flavours);
+			free(pkg_flavours_string);
 			free(pkg_choices);
 			free(pkg_subpkgs);
 			free(pkg_arch_depends);
@@ -799,6 +891,7 @@ int main() {
 			pkg_url = NULL;
 			pkg_depends = NULL;
 			pkg_flavours = NULL;
+			pkg_flavours_string = NULL;
 			pkg_choices = NULL;
 			pkg_subpkgs = NULL;
 			pkg_arch_depends = NULL;
