@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ntpclient
-PKG_VERSION:=		2007_365
+PKG_VERSION:=		2010_365
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		cb98711f11769cdd22fc592844cef414
+PKG_MD5SUM:=		a64689398f2df8933ee0d8da246e9eaa
 PKG_DESCR:=		NTP client for setting system time from NTP servers
 PKG_SECTION:=		ntp
 PKG_DEPENDS:=		libpthread
@@ -14,14 +14,14 @@ PKG_URL:=		http://doolittle.icarus.com/ntpclient/
 PKG_SITES:=		http://doolittle.icarus.com/ntpclient/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-2007
+WRKDIST=		${WRKDIR}/${PKG_NAME}-2010
 
 PKG_FLAVOURS_NTPCLIENT:=	STARTUP
 PKGFD_STARTUP:=	Fetch time on startup
 
 PKG_FLAVOURS_STRING_NTPCLIENT:=	HOST
 PKGFD_HOST:=	Fetch time from this NTP host
-PKGFX_HOST:=	0.de.pool.ntp.org
+PKGFX_HOST:=	pool.ntp.org
 PKGFC_HOST:=	depends on ADK_PACKAGE_NTPCLIENT_STARTUP
 
 include ${TOPDIR}/mk/package.mk
