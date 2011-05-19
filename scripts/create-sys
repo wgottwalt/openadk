@@ -3,11 +3,11 @@ topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd 
 systems=$(grep -h config target/*/sys-available/*|cut -d " " -f 2)
 
 while read arch; do
-	count=1
+	count=0
+	rm -rf $topdir/target/$arch/sys-enabled &&
 	mkdir -p $topdir/target/$arch/sys-enabled &&
 	cd $topdir/target/$arch/sys-enabled &&
-	ln -sf ../sys-available/toolchain-$arch 0-toolchain-$arch
-	for i in $(ls $topdir/target/$arch/sys-available/|grep -v toolchain);do
+	for i in $(ls $topdir/target/$arch/sys-available/);do
 		cd $topdir/target/$arch/sys-enabled/ &&
 		ln -sf ../sys-available/$i $count-$i
 		count=$((count+1))

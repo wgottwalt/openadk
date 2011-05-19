@@ -498,13 +498,14 @@ bulktoolchain:
 		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
+			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##"); \
 			$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$arch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/bin/toolchain_$${arch}_$${libc}/build.log; \
 		    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
-		done <${TOPDIR}/target/arch.lst ;\
+		done <${TOPDIR}/target/tarch.lst ;\
 	done
 
 # build all target architecture, target systems and libc combinations

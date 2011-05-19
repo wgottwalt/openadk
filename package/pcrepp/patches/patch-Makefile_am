@@ -1,0 +1,10 @@
+--- pcrepp-0.9.5.orig/Makefile.am	2011-05-13 10:25:39.116697222 +0200
++++ pcrepp-0.9.5/Makefile.am	2011-05-13 10:18:08.609616331 +0200
+@@ -1,6 +1,6 @@
+ 
+ 
+-SUBDIRS = libpcre++ doc examples test
++SUBDIRS = libpcre++
+ 
+ bin_SCRIPTS = pcre++-config
+ 

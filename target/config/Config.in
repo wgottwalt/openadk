@@ -30,22 +30,6 @@ config ADK_TOOLCHAIN_ARCHIVE
 endchoice
 
 choice
-prompt "Target Endianess"
-depends on (ADK_LINUX_ARM || ADK_LINUX_MIPS) && ADK_TOOLCHAIN
-config ADK_ENDIAN
-        boolean "Choose target endianess"
-
-config ADK_TARGET_LITTLE_ENDIAN
-	boolean "Little endian"
-	select ADK_little
-
-config ADK_TARGET_BIG_ENDIAN
-	boolean "Big endian"
-	select ADK_big
-
-endchoice
-
-choice
 prompt "Target Kernel"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 config ADK_TARGET_KERNEL
