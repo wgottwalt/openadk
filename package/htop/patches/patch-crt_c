@@ -1,0 +1,30 @@
+--- htop-0.9.orig/CRT.c	2010-11-23 16:56:32.000000000 +0100
++++ htop-0.9/CRT.c	2011-05-31 14:30:06.000000000 +0200
+@@ -11,7 +11,9 @@
+ #include <signal.h>
+ #include <stdlib.h>
+ #include <stdbool.h>
++#ifdef HAVE_EXECINFO_H
+ #include <execinfo.h>
++#endif
+ 
+ #include "String.h"
+ 
+@@ -125,12 +127,14 @@
+    CRT_done();
+    #if __linux
+    fprintf(stderr, "\n\nhtop " VERSION " aborting. Please report bug at http://htop.sf.net\n");
+-   #else
+-   fprintf(stderr, "\n\nhtop " VERSION " aborting. Unsupported platform.\n");
+-   #endif
++   #ifdef HAVE_EXECINFO_H
+    size_t size = backtrace(backtraceArray, sizeof(backtraceArray));
+    fprintf(stderr, "Backtrace: \n");
+    backtrace_symbols_fd(backtraceArray, size, 2);
++   #endif 
++   #else 
++   fprintf(stderr, "\n\nhtop " VERSION " aborting. Unsupported platform.\n"); 
++   #endif 
+    abort();
+ }
+ 
