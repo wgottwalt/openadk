@@ -14,6 +14,7 @@ config ADK_PACKAGE_BUSYBOX
 	  WWW: http://www.busybox.net
 
 menu "Busybox Configuration"
+depends on ADK_PACKAGE_BUSYBOX
 source "package/busybox/config/Config.in"
 endmenu
 

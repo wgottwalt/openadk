@@ -1,0 +1,43 @@
+#!/bin/sh
+# temperature.sh
+# this tool reads the lm86 from pcengines alix mainboards.
+# http://pcengines.ch/alix.htm
+# tested only on alix2d13 but should work on the other
+# alix2dxx and alix3dxx boards too.
+#
+# Copyright (C) 2011 Tobias Breckle <tobias.breckle@stz-bt.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+CMD="i2cget -y 0 0x4c"
+
+TEMP_LOCAL=`$CMD 0x00`
+TEMP_REMOTE_HIGH=`$CMD 0x01`
+TEMP_REMOTE_LOW=`$CMD 0x10`
+
+let "TEMP_REMOTE_LOW >>= 5"
+let "TEMP_REMOTE_LOW = TEMP_REMOTE_LOW * 125"
+
+if [ "$1" = "local" ]
+then
+        printf "Local:\t%d\n" $TEMP_LOCAL
+elif [ "$1" = "remote" ]
+then
+        printf "Remote:\t%d,%d\n" $TEMP_REMOTE_HIGH $TEMP_REMOTE_LOW
+elif [ -z "$1" ]
+then
+        printf "Local:\t%d\n" $TEMP_LOCAL
+        printf "Remote:\t%d,%d\n" $TEMP_REMOTE_HIGH $TEMP_REMOTE_LOW
+fi
+
