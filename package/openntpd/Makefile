@@ -9,6 +9,7 @@ PKG_RELEASE:=		18
 PKG_MD5SUM:=		afc34175f38d08867c1403d9008600b3
 PKG_DESCR:=		NTP server daemon
 PKG_SECTION:=		ntp
+PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://www.openntpd.org/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/
 
