@@ -1036,9 +1036,9 @@ $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
 ,30))
 endif
 
-$(eval $(call KMOD_template,EXPORTFS,exportfs,\
-	$(MODULES_DIR)/kernel/fs/exportfs/exportfs \
-,20))
+#$(eval $(call KMOD_template,EXPORTFS,exportfs,\
+#	$(MODULES_DIR)/kernel/fs/exportfs/exportfs \
+#,20))
 
 $(eval $(call KMOD_template,NFSD,nfsd,\
         $(MODULES_DIR)/kernel/fs/nfsd/nfsd \
@@ -1156,7 +1156,7 @@ $(eval $(call KMOD_template,PCMCIA,pcmcia,\
 ,60))
 
 $(eval $(call KMOD_template,SERIAL_8250_CS,serial-8250-cs,\
-	$(MODULES_DIR)/kernel/drivers/serial/serial_cs \
+	$(MODULES_DIR)/kernel/drivers/tty/serial/serial_cs \
 ,70))
 
 #

@@ -57,6 +57,7 @@ endchoice
 
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
 	string
+	default "9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP	
 	default "115200"
 

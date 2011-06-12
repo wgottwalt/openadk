@@ -26,6 +26,7 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
+	-rm $(LINUX_DIR)/vmlinux
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install

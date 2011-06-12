@@ -1,7 +1,7 @@
-diff -Nur linux-2.6.37.orig/arch/mips/Kbuild.platforms linux-2.6.37/arch/mips/Kbuild.platforms
---- linux-2.6.37.orig/arch/mips/Kbuild.platforms	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/arch/mips/Kbuild.platforms	2011-05-15 19:24:57.000000000 +0200
-@@ -5,6 +5,7 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/Kbuild.platforms linux-2.6.39-rc7/arch/mips/Kbuild.platforms
+--- linux-2.6.39-rc7.orig/arch/mips/Kbuild.platforms	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/arch/mips/Kbuild.platforms	2011-05-15 21:34:57.000000000 +0200
+@@ -6,6 +6,7 @@
  platforms += bcm47xx
  platforms += bcm63xx
  platforms += cavium-octeon
@@ -9,10 +9,10 @@ diff -Nur linux-2.6.37.orig/arch/mips/Kbuild.platforms linux-2.6.37/arch/mips/Kb
  platforms += cobalt
  platforms += dec
  platforms += emma
-diff -Nur linux-2.6.37.orig/arch/mips/Kconfig linux-2.6.37/arch/mips/Kconfig
---- linux-2.6.37.orig/arch/mips/Kconfig	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/arch/mips/Kconfig	2011-05-15 19:24:57.000000000 +0200
-@@ -102,6 +102,20 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/Kconfig linux-2.6.39-rc7/arch/mips/Kconfig
+--- linux-2.6.39-rc7.orig/arch/mips/Kconfig	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/arch/mips/Kconfig	2011-05-16 12:11:11.000000000 +0200
+@@ -121,6 +121,21 @@
  	help
  	 Support for BCM63XX based boards
  
@@ -27,23 +27,24 @@ diff -Nur linux-2.6.37.orig/arch/mips/Kconfig linux-2.6.37/arch/mips/Kconfig
 +	select SYS_SUPPORTS_32BIT_KERNEL
 +	select GENERIC_GPIO
 +	select SYS_HAS_EARLY_PRINTK
++	select SYS_SUPPORTS_ZBOOT
 +	help
 +	  Support for AR231x and AR531x based boards
 +
  config MIPS_COBALT
  	bool "Cobalt Server"
  	select CEVT_R4K
-@@ -716,6 +730,7 @@
+@@ -738,6 +753,7 @@
  
  endchoice
  
 +source "arch/mips/ar231x/Kconfig"
  source "arch/mips/alchemy/Kconfig"
+ source "arch/mips/ath79/Kconfig"
  source "arch/mips/bcm63xx/Kconfig"
- source "arch/mips/jazz/Kconfig"
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Kconfig linux-2.6.37/arch/mips/ar231x/Kconfig
---- linux-2.6.37.orig/arch/mips/ar231x/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/Kconfig	2011-05-15 19:25:40.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/Kconfig linux-2.6.39-rc7/arch/mips/ar231x/Kconfig
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/Kconfig	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,27 @@
 +config ATHEROS_AR5312
 +	bool "Atheros 5312/2312+ support"
@@ -72,9 +73,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Kconfig linux-2.6.37/arch/mips/ar23
 +	select USB_ARCH_HAS_OHCI
 +	select USB_ARCH_HAS_EHCI
 +	default n
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Makefile linux-2.6.37/arch/mips/ar231x/Makefile
---- linux-2.6.37.orig/arch/mips/ar231x/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/Makefile	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/Makefile linux-2.6.39-rc7/arch/mips/ar231x/Makefile
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/Makefile	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,17 @@
 +#
 +# This file is subject to the terms and conditions of the GNU General Public
@@ -93,9 +94,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Makefile linux-2.6.37/arch/mips/ar2
 +obj-$(CONFIG_ATHEROS_AR5312) += ar5312.o
 +obj-$(CONFIG_ATHEROS_AR2315) += ar2315.o
 +obj-$(CONFIG_ATHEROS_AR2315_PCI) += pci.o
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Platform linux-2.6.37/arch/mips/ar231x/Platform
---- linux-2.6.37.orig/arch/mips/ar231x/Platform	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/Platform	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/Platform linux-2.6.39-rc7/arch/mips/ar231x/Platform
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/Platform	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/Platform	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,6 @@
 +#
 +# Atheros AR5312/AR2312 WiSoC
@@ -103,10 +104,10 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/Platform linux-2.6.37/arch/mips/ar2
 +platform-$(CONFIG_ATHEROS_AR231X)          += ar231x/
 +cflags-$(CONFIG_ATHEROS_AR231X)        += -I$(srctree)/arch/mips/include/asm/mach-ar231x
 +load-$(CONFIG_ATHEROS_AR231X)          += 0xffffffff80041000
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar231x/ar2315.c
---- linux-2.6.37.orig/arch/mips/ar231x/ar2315.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/ar2315.c	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,683 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/ar2315.c linux-2.6.39-rc7/arch/mips/ar231x/ar2315.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/ar2315.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/ar2315.c	2011-05-15 21:47:07.000000000 +0200
+@@ -0,0 +1,654 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -246,9 +247,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	ar231x_write_reg(AR2315_GPIO_INT, reg);
 +}
 +
-+static void ar2315_gpio_intr_enable(unsigned int irq)
++static void ar2315_gpio_intr_enable(struct irq_data *d)
 +{
-+	unsigned int gpio = irq - AR531X_GPIO_IRQ_BASE;
++	unsigned int gpio = d->irq - AR531X_GPIO_IRQ_BASE;
 +
 +	/* Enable interrupt with edge detection */
 +	if ((ar231x_read_reg(AR2315_GPIO_CR) & AR2315_GPIO_CR_M(gpio)) != AR2315_GPIO_CR_I(gpio))
@@ -258,49 +259,30 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	ar2315_set_gpiointmask(gpio, 3);
 +}
 +
-+static unsigned int ar2315_gpio_intr_startup(unsigned int irq)
++static void ar2315_gpio_intr_disable(struct irq_data *d)
 +{
-+	unsigned int gpio = irq - AR531X_GPIO_IRQ_BASE;
-+
-+	/* reconfigure GPIO line as input */
-+	ar231x_mask_reg(AR2315_GPIO_CR, AR2315_GPIO_CR_M(gpio), AR2315_GPIO_CR_I(gpio));
-+	ar2315_gpio_intr_enable(irq);
-+	return 0;
-+}
-+
-+static void ar2315_gpio_intr_disable(unsigned int irq)
-+{
-+	unsigned int gpio = irq - AR531X_GPIO_IRQ_BASE;
++	unsigned int gpio = d->irq - AR531X_GPIO_IRQ_BASE;
 +
 +	/* Disable interrupt */
 +	gpiointmask &= ~(1 << gpio);
 +	ar2315_set_gpiointmask(gpio, 0);
 +}
 +
-+static void
-+ar2315_gpio_intr_end(unsigned int irq)
-+{
-+	if (!(irq_desc[irq].status & (IRQ_DISABLED | IRQ_INPROGRESS)))
-+		ar2315_gpio_intr_enable(irq);
-+}
-+
 +static struct irq_chip ar2315_gpio_intr_controller = {
 +	.name	= "AR2315-GPIO",
-+	.startup  = ar2315_gpio_intr_startup,
-+	.ack      = ar2315_gpio_intr_disable,
-+	.mask_ack = ar2315_gpio_intr_disable,
-+	.mask     = ar2315_gpio_intr_disable,
-+	.unmask   = ar2315_gpio_intr_enable,
-+	.end      = ar2315_gpio_intr_end,
++	.irq_ack      = ar2315_gpio_intr_disable,
++	.irq_mask_ack = ar2315_gpio_intr_disable,
++	.irq_mask     = ar2315_gpio_intr_disable,
++	.irq_unmask   = ar2315_gpio_intr_enable,
 +};
 +
 +static void
-+ar2315_misc_intr_enable(unsigned int irq)
++ar2315_misc_intr_enable(struct irq_data *d)
 +{
 +	unsigned int imr;
 +
 +	imr = ar231x_read_reg(AR2315_IMR);
-+	switch(irq) {
++	switch(d->irq) {
 +	case AR531X_MISC_IRQ_SPI:
 +		 imr |= AR2315_ISR_SPI;
 +		 break;
@@ -326,12 +308,12 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +}
 +
 +static void
-+ar2315_misc_intr_disable(unsigned int irq)
++ar2315_misc_intr_disable(struct irq_data *d)
 +{
 +	unsigned int imr;
 +
 +	imr = ar231x_read_reg(AR2315_IMR);
-+	switch(irq) {
++	switch(d->irq) {
 +	case AR531X_MISC_IRQ_SPI:
 +		 imr &= ~AR2315_ISR_SPI;
 +		 break;
@@ -356,21 +338,11 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	ar231x_write_reg(AR2315_IMR, imr);
 +}
 +
-+static void
-+ar2315_misc_intr_end(unsigned int irq)
-+{
-+	if (!(irq_desc[irq].status & (IRQ_DISABLED | IRQ_INPROGRESS)))
-+		ar2315_misc_intr_enable(irq);
-+}
-+
 +
 +static struct irq_chip ar2315_misc_intr_controller = {
 +	.name	= "AR2315-MISC",
-+	.ack      = ar2315_misc_intr_disable,
-+	.mask_ack = ar2315_misc_intr_disable,
-+	.mask     = ar2315_misc_intr_disable,
-+	.unmask   = ar2315_misc_intr_enable,
-+	.end      = ar2315_misc_intr_end,
++	.irq_mask     = ar2315_misc_intr_disable,
++	.irq_unmask   = ar2315_misc_intr_enable,
 +};
 +
 +static irqreturn_t ar2315_ahb_proc_handler(int cpl, void *dev_id)
@@ -408,12 +380,12 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	gpiointval = ar231x_read_reg(AR2315_GPIO_DI);
 +	for (i = 0; i < AR531X_MISC_IRQ_COUNT; i++) {
 +		int irq = AR531X_MISC_IRQ_BASE + i;
-+		set_irq_chip_and_handler(irq, &ar2315_misc_intr_controller,
++		irq_set_chip_and_handler(irq, &ar2315_misc_intr_controller,
 +			handle_level_irq);
 +	}
 +	for (i = 0; i < AR531X_GPIO_IRQ_COUNT; i++) {
 +		int irq = AR531X_GPIO_IRQ_BASE + i;
-+		set_irq_chip_and_handler(irq, &ar2315_gpio_intr_controller,
++		irq_set_chip_and_handler(irq, &ar2315_gpio_intr_controller,
 +			handle_level_irq);
 +	}
 +	setup_irq(AR531X_MISC_IRQ_GPIO, &cascade);
@@ -476,7 +448,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	.reset_base = AR2315_RESET,
 +	.reset_mac = AR2315_RESET_ENET0,
 +	.reset_phy = AR2315_RESET_EPHY0,
-+	.phy_base = AR2315_ENET0,
++	.phy_base = KSEG1ADDR(AR2315_ENET0),
 +	.config = &ar231x_board,
 +};
 +
@@ -514,13 +486,13 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +static inline u32
 +spiflash_read_reg(int reg)
 +{
-+	return ar231x_read_reg(KSEG1ADDR(AR2315_SPI) + reg);
++	return ar231x_read_reg(AR2315_SPI + reg);
 +}
 +
 +static inline void
 +spiflash_write_reg(int reg, u32 data)
 +{
-+	ar231x_write_reg(KSEG1ADDR(AR2315_SPI) + reg, data);
++	ar231x_write_reg(AR2315_SPI + reg, data);
 +}
 +
 +static u32
@@ -649,7 +621,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	ar2315_init_gpio();
 +	platform_device_register(&ar2315_wdt);
 +	platform_device_register(&ar2315_spiflash);
-+	ar231x_add_ethernet(0, AR2315_ENET0, AR2315_IRQ_ENET0_INTRS,
++	ar231x_add_ethernet(0, KSEG1ADDR(AR2315_ENET0), AR2315_IRQ_ENET0_INTRS,
 +		&ar2315_eth_data);
 +	ar231x_add_wmac(0, AR2315_WLAN0, AR2315_IRQ_WLAN0_INTRS);
 +
@@ -790,9 +762,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.c linux-2.6.37/arch/mips/ar2
 +	_machine_restart = ar2315_restart;
 +	ar231x_serial_setup(KSEG1ADDR(AR2315_UART0), ar2315_apb_frequency());
 +}
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.h linux-2.6.37/arch/mips/ar231x/ar2315.h
---- linux-2.6.37.orig/arch/mips/ar231x/ar2315.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/ar2315.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/ar2315.h linux-2.6.39-rc7/arch/mips/ar231x/ar2315.h
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/ar2315.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/ar2315.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,37 @@
 +#ifndef __AR2315_H
 +#define __AR2315_H
@@ -831,10 +803,10 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar2315.h linux-2.6.37/arch/mips/ar2
 +#endif
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.c linux-2.6.37/arch/mips/ar231x/ar5312.c
---- linux-2.6.37.orig/arch/mips/ar231x/ar5312.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/ar5312.c	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,549 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/ar5312.c linux-2.6.39-rc7/arch/mips/ar231x/ar5312.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/ar5312.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/ar5312.c	2011-05-15 21:34:57.000000000 +0200
+@@ -0,0 +1,538 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -913,42 +885,31 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.c linux-2.6.37/arch/mips/ar2
 +
 +/* Enable the specified AR531X_MISC_IRQ interrupt */
 +static void
-+ar5312_misc_intr_enable(unsigned int irq)
++ar5312_misc_intr_enable(struct irq_data *d)
 +{
 +	unsigned int imr;
 +
 +	imr = ar231x_read_reg(AR531X_IMR);
-+	imr |= (1 << (irq - AR531X_MISC_IRQ_BASE - 1));
++	imr |= (1 << (d->irq - AR531X_MISC_IRQ_BASE - 1));
 +	ar231x_write_reg(AR531X_IMR, imr);
 +}
 +
 +/* Disable the specified AR531X_MISC_IRQ interrupt */
 +static void
-+ar5312_misc_intr_disable(unsigned int irq)
++ar5312_misc_intr_disable(struct irq_data *d)
 +{
 +	unsigned int imr;
 +
 +	imr = ar231x_read_reg(AR531X_IMR);
-+	imr &= ~(1 << (irq - AR531X_MISC_IRQ_BASE - 1));
++	imr &= ~(1 << (d->irq - AR531X_MISC_IRQ_BASE - 1));
 +	ar231x_write_reg(AR531X_IMR, imr);
 +	ar231x_read_reg(AR531X_IMR); /* flush write buffer */
 +}
 +
-+static void
-+ar5312_misc_intr_end(unsigned int irq)
-+{
-+	if (!(irq_desc[irq].status & (IRQ_DISABLED | IRQ_INPROGRESS)))
-+		ar5312_misc_intr_enable(irq);
-+}
-+
 +static struct irq_chip ar5312_misc_intr_controller = {
 +	.name     = "AR5312-MISC",
-+	.disable  = ar5312_misc_intr_disable,
-+	.ack      = ar5312_misc_intr_disable,
-+	.mask_ack = ar5312_misc_intr_disable,
-+	.mask     = ar5312_misc_intr_disable,
-+	.unmask   = ar5312_misc_intr_enable,
-+	.end      = ar5312_misc_intr_end,
++	.irq_mask     = ar5312_misc_intr_disable,
++	.irq_unmask   = ar5312_misc_intr_enable,
 +};
 +
 +
@@ -990,7 +951,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.c linux-2.6.37/arch/mips/ar2
 +	ar231x_irq_dispatch = ar5312_irq_dispatch;
 +	for (i = 0; i < AR531X_MISC_IRQ_COUNT; i++) {
 +		int irq = AR531X_MISC_IRQ_BASE + i;
-+		set_irq_chip_and_handler(irq, &ar5312_misc_intr_controller,
++		irq_set_chip_and_handler(irq, &ar5312_misc_intr_controller,
 +			handle_level_irq);
 +	}
 +	setup_irq(AR531X_MISC_IRQ_AHB_PROC, &ar5312_ahb_proc_interrupt);
@@ -1384,9 +1345,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.c linux-2.6.37/arch/mips/ar2
 +	ar231x_serial_setup(KSEG1ADDR(AR531X_UART0), ar5312_sys_frequency());
 +}
 +
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.h linux-2.6.37/arch/mips/ar231x/ar5312.h
---- linux-2.6.37.orig/arch/mips/ar231x/ar5312.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/ar5312.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/ar5312.h linux-2.6.39-rc7/arch/mips/ar231x/ar5312.h
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/ar5312.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/ar5312.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,38 @@
 +#ifndef __AR5312_H
 +#define __AR5312_H
@@ -1426,10 +1387,10 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/ar5312.h linux-2.6.37/arch/mips/ar2
 +#endif
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/board.c linux-2.6.37/arch/mips/ar231x/board.c
---- linux-2.6.37.orig/arch/mips/ar231x/board.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/board.c	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,251 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/board.c linux-2.6.39-rc7/arch/mips/ar231x/board.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/board.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/board.c	2011-05-15 22:16:11.000000000 +0200
+@@ -0,0 +1,261 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -1565,7 +1526,7 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/board.c linux-2.6.37/arch/mips/ar23
 +{
 +	struct ar231x_boarddata *config;
 +	unsigned int rcfg_size;
-+	int broken_boarddata = 0;
++	int broken_boarddata = 0, i, tmp;
 +	u8 *bcfg, *rcfg;
 +	u8 *board_data;
 +	u8 *radio_data;
@@ -1626,6 +1587,16 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/board.c linux-2.6.37/arch/mips/ar23
 +	rcfg_size = BOARD_CONFIG_BUFSZ - offset;
 +	memcpy(radio_data, rcfg, rcfg_size);
 +
++        for (tmp = 0xff, i = 0; i < ETH_ALEN; i++) 
++                tmp &= radio_data[i + 0x1d * 2]; 
++        if (tmp == 0xff) { 
++                 u16 *eep = (u16 *)radio_data, *bcfgs = (u16 *)bcfg; 
++                 printk(KERN_INFO "Radio MAC is blank; using board-data\n"); 
++                 eep[0x1f] = bcfgs[0x30]; 
++                 eep[0x1e] = bcfgs[0x34]; 
++                 eep[0x1d] = bcfgs[0x32]; 
++        } 
++
 +	return 0;
 +}
 +
@@ -1681,9 +1652,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/board.c linux-2.6.37/arch/mips/ar23
 +}
 +
 +
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/devices.c linux-2.6.37/arch/mips/ar231x/devices.c
---- linux-2.6.37.orig/arch/mips/ar231x/devices.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/devices.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/devices.c linux-2.6.39-rc7/arch/mips/ar231x/devices.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/devices.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/devices.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,175 @@
 +#include <linux/kernel.h>
 +#include <linux/init.h>
@@ -1860,9 +1831,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/devices.c linux-2.6.37/arch/mips/ar
 +}
 +
 +device_initcall(ar231x_register_devices);
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/devices.h linux-2.6.37/arch/mips/ar231x/devices.h
---- linux-2.6.37.orig/arch/mips/ar231x/devices.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/devices.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/devices.h linux-2.6.39-rc7/arch/mips/ar231x/devices.h
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/devices.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/devices.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,37 @@
 +#ifndef __AR231X_DEVICES_H
 +#define __AR231X_DEVICES_H
@@ -1901,9 +1872,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/devices.h linux-2.6.37/arch/mips/ar
 +}
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/early_printk.c linux-2.6.37/arch/mips/ar231x/early_printk.c
---- linux-2.6.37.orig/arch/mips/ar231x/early_printk.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/early_printk.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/early_printk.c linux-2.6.39-rc7/arch/mips/ar231x/early_printk.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/early_printk.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/early_printk.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,44 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -1949,9 +1920,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/early_printk.c linux-2.6.37/arch/mi
 +	while ((prom_uart_rr(base, UART_LSR) & UART_LSR_THRE) == 0);
 +}
 +
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/pci.c linux-2.6.37/arch/mips/ar231x/pci.c
---- linux-2.6.37.orig/arch/mips/ar231x/pci.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/pci.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/pci.c linux-2.6.39-rc7/arch/mips/ar231x/pci.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/pci.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/pci.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,230 @@
 +/*
 + * This program is free software; you can redistribute it and/or
@@ -2183,9 +2154,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/pci.c linux-2.6.37/arch/mips/ar231x
 +}
 +
 +arch_initcall(ar2315_pci_init);
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/prom.c linux-2.6.37/arch/mips/ar231x/prom.c
---- linux-2.6.37.orig/arch/mips/ar231x/prom.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/prom.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/prom.c linux-2.6.39-rc7/arch/mips/ar231x/prom.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/prom.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/prom.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,37 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -2224,9 +2195,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/prom.c linux-2.6.37/arch/mips/ar231
 +void __init prom_free_prom_memory(void)
 +{
 +}
-diff -Nur linux-2.6.37.orig/arch/mips/ar231x/reset.c linux-2.6.37/arch/mips/ar231x/reset.c
---- linux-2.6.37.orig/arch/mips/ar231x/reset.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/ar231x/reset.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/ar231x/reset.c linux-2.6.39-rc7/arch/mips/ar231x/reset.c
+--- linux-2.6.39-rc7.orig/arch/mips/ar231x/reset.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/ar231x/reset.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,161 @@
 +#include <linux/init.h>
 +#include <linux/module.h>
@@ -2389,9 +2360,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/ar231x/reset.c linux-2.6.37/arch/mips/ar23
 +}
 +
 +module_init(ar231x_init_reset);
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar2315_regs.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar2315_regs.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar2315_regs.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar2315_regs.h	2011-05-15 21:44:12.000000000 +0200
 @@ -0,0 +1,580 @@
 +/*
 + * Register definitions for AR2315+
@@ -2422,14 +2393,14 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h linu
 + * Address map
 + */
 +#define AR2315_SPI_READ         0x08000000      /* SPI FLASH */
-+#define AR2315_WLAN0            0xB0000000      /* Wireless MMR */
-+#define AR2315_PCI              0xB0100000      /* PCI MMR */
-+#define AR2315_SDRAMCTL         0xB0300000      /* SDRAM MMR */
-+#define AR2315_LOCAL            0xB0400000      /* LOCAL BUS MMR */
-+#define AR2315_ENET0            0xB0500000      /* ETHERNET MMR */
-+#define AR2315_DSLBASE          0xB1000000      /* RESET CONTROL MMR */
-+#define AR2315_UART0            0xB1100003      /* UART MMR */
-+#define AR2315_SPI              0xB1300000      /* SPI FLASH MMR */
++#define AR2315_WLAN0            0x10000000      /* Wireless MMR */
++#define AR2315_PCI              0x10100000      /* PCI MMR */
++#define AR2315_SDRAMCTL         0x10300000      /* SDRAM MMR */
++#define AR2315_LOCAL            0x10400000      /* LOCAL BUS MMR */
++#define AR2315_ENET0            0x10500000      /* ETHERNET MMR */
++#define AR2315_DSLBASE          0x11000000      /* RESET CONTROL MMR */
++#define AR2315_UART0            0x11100003      /* UART MMR */
++#define AR2315_SPI              0x11300000      /* SPI FLASH MMR */
 +#define AR2315_PCIEXT           0x80000000      /* pci external */
 +
 +/*
@@ -2973,9 +2944,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_regs.h linu
 +#define PCI_DEVICE_MEM_SPACE    0x800000
 +
 +#endif /* __AR2315_REG_H */
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,116 @@
 +/*
 + * SPI Flash Memory support header file.
@@ -3093,9 +3064,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar2315_spiflash.h 
 +#define SPI_STATUS_WIP		STM_STATUS_WIP
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar231x.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar231x.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar231x.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar231x.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar231x.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar231x.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,54 @@
 +#ifndef __AR531X_H
 +#define __AR531X_H
@@ -3151,9 +3122,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x.h linux-2.6
 +}
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x_platform.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar231x_platform.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x_platform.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar231x_platform.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar231x_platform.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar231x_platform.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar231x_platform.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar231x_platform.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,83 @@
 +#ifndef __AR531X_PLATFORM_H
 +#define __AR531X_PLATFORM_H
@@ -3238,9 +3209,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar231x_platform.h 
 +};
 +
 +#endif /* __AR531X_PLATFORM_H */
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar5312_regs.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar5312_regs.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar5312_regs.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/ar5312_regs.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar5312_regs.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar5312_regs.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/ar5312_regs.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/ar5312_regs.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,236 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -3478,9 +3449,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/ar5312_regs.h linu
 +
 +#endif
 +
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/cpu-feature-overrides.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,84 @@
 +/*
 + *  Atheros SoC specific CPU feature overrides
@@ -3566,10 +3537,10 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/cpu-feature-overri
 +/* #define cpu_icache_line_size()	? */
 +
 +#endif /* __ASM_MACH_ATHEROS_CPU_FEATURE_OVERRIDES_H */
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/dma-coherence.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/dma-coherence.h	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,64 @@
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/dma-coherence.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/dma-coherence.h	2011-05-15 21:41:19.000000000 +0200
+@@ -0,0 +1,76 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
 + * License.  See the file "COPYING" in the main directory of this archive
@@ -3584,22 +3555,34 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h li
 +
 +#define PCI_DMA_OFFSET	0x20000000
 +
-+struct device;
++#include <linux/device.h> 
++
++static inline dma_addr_t ar231x_dev_offset(struct device *dev) 
++{ 
++#ifdef CONFIG_PCI 
++       extern struct bus_type pci_bus_type; 
++ 
++       if (dev && dev->bus == &pci_bus_type) 
++               return PCI_DMA_OFFSET; 
++       else 
++#endif 
++	       return 0; 
++} 
 +
 +static inline dma_addr_t plat_map_dma_mem(struct device *dev, void *addr, size_t size)
 +{
-+	return virt_to_phys(addr) + (dev != NULL ? PCI_DMA_OFFSET : 0);
++	return virt_to_phys(addr) + ar231x_dev_offset(dev);
 +}
 +
 +static inline dma_addr_t plat_map_dma_mem_page(struct device *dev, struct page *page)
 +{
-+	return page_to_phys(page) + (dev != NULL ? PCI_DMA_OFFSET : 0);
++	return page_to_phys(page) + ar231x_dev_offset(dev);
 +}
 +
 +static inline unsigned long plat_dma_addr_to_phys(struct device *dev,
 +	dma_addr_t dma_addr)
 +{
-+	return (dma_addr > PCI_DMA_OFFSET ? dma_addr - PCI_DMA_OFFSET : dma_addr);
++	return dma_addr - ar231x_dev_offset(dev);
 +}
 +
 +static inline void plat_unmap_dma_mem(struct device *dev, dma_addr_t dma_addr,
@@ -3634,9 +3617,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/dma-coherence.h li
 +}
 +
 +#endif /* __ASM_MACH_GENERIC_DMA_COHERENCE_H */
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/gpio.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/gpio.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/gpio.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/gpio.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/gpio.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/gpio.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/gpio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/gpio.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,84 @@
 +#ifndef _ATHEROS_GPIO_H_
 +#define _ATHEROS_GPIO_H_
@@ -3722,9 +3705,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/gpio.h linux-2.6.3
 +#include <asm-generic/gpio.h> /* cansleep wrappers */
 +
 +#endif
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/reset.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/reset.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/reset.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/reset.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/reset.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/reset.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/reset.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/reset.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,6 @@
 +#ifndef __AR531X_RESET_H
 +#define __AR531X_RESET_H
@@ -3732,9 +3715,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/reset.h linux-2.6.
 +void ar531x_disable_reset_button(void);
 +
 +#endif /* __AR531X_RESET_H */
-diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/war.h linux-2.6.37/arch/mips/include/asm/mach-ar231x/war.h
---- linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/war.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/arch/mips/include/asm/mach-ar231x/war.h	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/war.h linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/war.h
+--- linux-2.6.39-rc7.orig/arch/mips/include/asm/mach-ar231x/war.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/arch/mips/include/asm/mach-ar231x/war.h	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,25 @@
 +/*
 + * This file is subject to the terms and conditions of the GNU General Public
@@ -3761,9 +3744,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/include/asm/mach-ar231x/war.h linux-2.6.37
 +#define MIPS34K_MISSED_ITLB_WAR		0
 +
 +#endif /* __ASM_MIPS_MACH_ATHEROS_WAR_H */
-diff -Nur linux-2.6.37.orig/arch/mips/kernel/cevt-r4k.c linux-2.6.37/arch/mips/kernel/cevt-r4k.c
---- linux-2.6.37.orig/arch/mips/kernel/cevt-r4k.c	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/arch/mips/kernel/cevt-r4k.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/arch/mips/kernel/cevt-r4k.c linux-2.6.39-rc7/arch/mips/kernel/cevt-r4k.c
+--- linux-2.6.39-rc7.orig/arch/mips/kernel/cevt-r4k.c	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/arch/mips/kernel/cevt-r4k.c	2011-05-15 21:34:57.000000000 +0200
 @@ -168,20 +168,23 @@
  	struct clock_event_device *cd;
  	unsigned int irq;
@@ -3795,9 +3778,9 @@ diff -Nur linux-2.6.37.orig/arch/mips/kernel/cevt-r4k.c linux-2.6.37/arch/mips/k
  
  	cd = &per_cpu(mips_clockevent_device, cpu);
  
-diff -Nur linux-2.6.37.orig/drivers/mtd/devices/Kconfig linux-2.6.37/drivers/mtd/devices/Kconfig
---- linux-2.6.37.orig/drivers/mtd/devices/Kconfig	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/mtd/devices/Kconfig	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/mtd/devices/Kconfig linux-2.6.39-rc7/drivers/mtd/devices/Kconfig
+--- linux-2.6.39-rc7.orig/drivers/mtd/devices/Kconfig	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/mtd/devices/Kconfig	2011-05-15 21:34:57.000000000 +0200
 @@ -112,6 +112,10 @@
  	  Set up your spi devices with the right board-specific platform data,
  	  if you want to specify device partitioning.
@@ -3809,17 +3792,17 @@ diff -Nur linux-2.6.37.orig/drivers/mtd/devices/Kconfig linux-2.6.37/drivers/mtd
  config MTD_SLRAM
  	tristate "Uncached system RAM"
  	help
-diff -Nur linux-2.6.37.orig/drivers/mtd/devices/Makefile linux-2.6.37/drivers/mtd/devices/Makefile
---- linux-2.6.37.orig/drivers/mtd/devices/Makefile	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/mtd/devices/Makefile	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/mtd/devices/Makefile linux-2.6.39-rc7/drivers/mtd/devices/Makefile
+--- linux-2.6.39-rc7.orig/drivers/mtd/devices/Makefile	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/mtd/devices/Makefile	2011-05-15 21:34:57.000000000 +0200
 @@ -17,3 +17,4 @@
  obj-$(CONFIG_MTD_DATAFLASH)	+= mtd_dataflash.o
  obj-$(CONFIG_MTD_M25P80)	+= m25p80.o
  obj-$(CONFIG_MTD_SST25L)	+= sst25l.o
 +obj-$(CONFIG_MTD_AR2315)	+= ar2315.o
-diff -Nur linux-2.6.37.orig/drivers/mtd/devices/ar2315.c linux-2.6.37/drivers/mtd/devices/ar2315.c
---- linux-2.6.37.orig/drivers/mtd/devices/ar2315.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/drivers/mtd/devices/ar2315.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/mtd/devices/ar2315.c linux-2.6.39-rc7/drivers/mtd/devices/ar2315.c
+--- linux-2.6.39-rc7.orig/drivers/mtd/devices/ar2315.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/drivers/mtd/devices/ar2315.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,517 @@
 +
 +/*
@@ -4338,9 +4321,9 @@ diff -Nur linux-2.6.37.orig/drivers/mtd/devices/ar2315.c linux-2.6.37/drivers/mt
 +MODULE_AUTHOR("OpenWrt.org, Atheros Communications Inc");
 +MODULE_DESCRIPTION("MTD driver for SPI Flash on Atheros SOC");
 +
-diff -Nur linux-2.6.37.orig/drivers/mtd/redboot.c linux-2.6.37/drivers/mtd/redboot.c
---- linux-2.6.37.orig/drivers/mtd/redboot.c	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/mtd/redboot.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/mtd/redboot.c linux-2.6.39-rc7/drivers/mtd/redboot.c
+--- linux-2.6.39-rc7.orig/drivers/mtd/redboot.c	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/mtd/redboot.c	2011-05-15 21:34:57.000000000 +0200
 @@ -55,6 +55,22 @@
  	return 1;
  }
@@ -4433,9 +4416,9 @@ diff -Nur linux-2.6.37.orig/drivers/mtd/redboot.c linux-2.6.37/drivers/mtd/redbo
  		struct fis_list *new_fl, **prev;
  
  		if (buf[i].name[0] == 0xff) {
-diff -Nur linux-2.6.37.orig/drivers/net/Kconfig linux-2.6.37/drivers/net/Kconfig
---- linux-2.6.37.orig/drivers/net/Kconfig	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/net/Kconfig	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/net/Kconfig linux-2.6.39-rc7/drivers/net/Kconfig
+--- linux-2.6.39-rc7.orig/drivers/net/Kconfig	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/net/Kconfig	2011-05-15 21:34:57.000000000 +0200
 @@ -251,6 +251,12 @@
  	help
  	  Select this if your platform comes with an external 93CX6 eeprom.
@@ -4449,10 +4432,10 @@ diff -Nur linux-2.6.37.orig/drivers/net/Kconfig linux-2.6.37/drivers/net/Kconfig
  config MACE
  	tristate "MACE (Power Mac ethernet) support"
  	depends on PPC_PMAC && PPC32
-diff -Nur linux-2.6.37.orig/drivers/net/Makefile linux-2.6.37/drivers/net/Makefile
---- linux-2.6.37.orig/drivers/net/Makefile	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/net/Makefile	2011-05-15 19:24:57.000000000 +0200
-@@ -224,6 +224,7 @@
+diff -Nur linux-2.6.39-rc7.orig/drivers/net/Makefile linux-2.6.39-rc7/drivers/net/Makefile
+--- linux-2.6.39-rc7.orig/drivers/net/Makefile	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/net/Makefile	2011-05-15 21:34:57.000000000 +0200
+@@ -226,6 +226,7 @@
  obj-$(CONFIG_KORINA) += korina.o
  obj-$(CONFIG_MIPS_JAZZ_SONIC) += jazzsonic.o
  obj-$(CONFIG_MIPS_AU1X00_ENET) += au1000_eth.o
@@ -4460,10 +4443,10 @@ diff -Nur linux-2.6.37.orig/drivers/net/Makefile linux-2.6.37/drivers/net/Makefi
  obj-$(CONFIG_MIPS_SIM_NET) += mipsnet.o
  obj-$(CONFIG_SGI_IOC3_ETH) += ioc3-eth.o
  obj-$(CONFIG_DECLANCE) += declance.o
-diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x.c
---- linux-2.6.37.orig/drivers/net/ar231x.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/drivers/net/ar231x.c	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,1327 @@
+diff -Nur linux-2.6.39-rc7.orig/drivers/net/ar231x.c linux-2.6.39-rc7/drivers/net/ar231x.c
+--- linux-2.6.39-rc7.orig/drivers/net/ar231x.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/drivers/net/ar231x.c	2011-05-15 21:34:57.000000000 +0200
+@@ -0,0 +1,1293 @@
 +/*
 + * ar231x.c: Linux driver for the Atheros AR231x Ethernet device.
 + *
@@ -4615,7 +4598,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +static int ar231x_mdiobus_reset(struct mii_bus *bus);
 +static int ar231x_mdiobus_probe (struct net_device *dev);
 +static void ar231x_adjust_link(struct net_device *dev);
-+static bool no_phy = false;
 +
 +#ifndef ERR
 +#define ERR(fmt, args...) printk("%s: " fmt, __func__, ##args)
@@ -4765,21 +4747,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +
 +	mdiobus_register(sp->mii_bus);
 +
-+	/* Workaround for Micrel switch, which is only available on
-+	 * one PHY and cannot be configured through MDIO */
-+	if (!no_phy) {
-+		u32 phy_id = 0;
-+		get_phy_id(sp->mii_bus, 1, &phy_id);
-+		if (phy_id == 0x00221450)
-+			no_phy = true;
-+	}
-+	if (no_phy) {
-+		sp->link = 1;
-+		netif_carrier_on(dev);
-+		return 0;
-+	}
-+	no_phy = true;
-+
 +	if (ar231x_mdiobus_probe(dev) != 0) {
 +		printk(KERN_ERR "%s: mdiobus_probe failed\n", dev->name);
 +		rx_tasklet_cleanup(dev);
@@ -4836,10 +4803,8 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +	rx_tasklet_cleanup(dev);
 +	ar231x_init_cleanup(dev);
 +	unregister_netdev(dev);
-+	if (sp->mii_bus) {
-+		mdiobus_unregister(sp->mii_bus);
-+		mdiobus_free(sp->mii_bus);
-+	}
++	mdiobus_unregister(sp->mii_bus);
++	mdiobus_free(sp->mii_bus);
 +	kfree(dev);
 +	return 0;
 +}
@@ -5239,7 +5204,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +	for (i = 0; i < nr_bufs; i++) {
 +		struct sk_buff *skb;
 +		ar231x_descr_t *rd;
-+		int offset = RX_OFFSET;
 +
 +		if (sp->rx_skb[idx])
 +			break;
@@ -5255,9 +5219,7 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +		 * Make sure IP header starts on a fresh cache line.
 +		 */
 +		skb->dev = dev;
-+		if (sp->phy_dev)
-+			offset += sp->phy_dev->pkt_align;
-+		skb_reserve(skb, offset);
++		skb_reserve(skb, RX_OFFSET);
 +		sp->rx_skb[idx] = skb;
 +
 +		rd = (ar231x_descr_t *) & sp->rx_ring[idx];
@@ -5331,28 +5293,20 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +			/* alloc new buffer. */
 +			skb_new = netdev_alloc_skb(dev, AR2313_BUFSIZE + RX_OFFSET);
 +			if (skb_new != NULL) {
-+				int offset;
 +
 +				skb = sp->rx_skb[idx];
 +				/* set skb */
 +				skb_put(skb,
 +						((status >> DMA_RX_LEN_SHIFT) & 0x3fff) - CRC_LEN);
++
 +				dev->stats.rx_bytes += skb->len;
-+
++				skb->protocol = eth_type_trans(skb, dev);
 +				/* pass the packet to upper layers */
-+				if (sp->rx) {
-+					sp->rx(skb);
-+				} else {
-+					skb->protocol = eth_type_trans(skb, skb->dev);
-+					netif_rx(skb);
-+				}
-+				skb_new->dev = dev;
++				netif_rx(skb);
 +
++				skb_new->dev = dev;
 +				/* 16 bit align */
-+				offset = RX_OFFSET;
-+				if (sp->phy_dev)
-+					offset += sp->phy_dev->pkt_align;
-+				skb_reserve(skb_new, offset);
++				skb_reserve(skb_new, RX_OFFSET);
 +				/* reset descriptor's curr_addr */
 +				rxdesc->addr = virt_to_phys(skb_new->data);
 +
@@ -5642,9 +5596,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +	struct ar231x_private *sp = netdev_priv(dev);
 +	int ret;
 +
-+	if (!sp->phy_dev)
-+		return -ENODEV;
-+
 +	switch (cmd) {
 +
 +	case SIOCETHTOOL:
@@ -5767,8 +5718,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +		return PTR_ERR(phydev);
 +	}
 +
-+	sp->rx = phydev->netif_rx;
-+
 +	/* mask with MAC supported features */
 +	phydev->supported &= (SUPPORTED_10baseT_Half
 +		| SUPPORTED_10baseT_Full
@@ -5791,10 +5740,10 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.c linux-2.6.37/drivers/net/ar231x
 +	return 0;
 +}
 +
-diff -Nur linux-2.6.37.orig/drivers/net/ar231x.h linux-2.6.37/drivers/net/ar231x.h
---- linux-2.6.37.orig/drivers/net/ar231x.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/drivers/net/ar231x.h	2011-05-15 19:24:57.000000000 +0200
-@@ -0,0 +1,304 @@
+diff -Nur linux-2.6.39-rc7.orig/drivers/net/ar231x.h linux-2.6.39-rc7/drivers/net/ar231x.h
+--- linux-2.6.39-rc7.orig/drivers/net/ar231x.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/drivers/net/ar231x.h	2011-05-15 21:34:57.000000000 +0200
+@@ -0,0 +1,302 @@
 +/*
 + * ar231x.h: Linux driver for the Atheros AR231x Ethernet device.
 + *
@@ -6018,8 +5967,6 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.h linux-2.6.37/drivers/net/ar231x
 + */
 +struct ar231x_private {
 +	struct net_device *dev;
-+	int (*rx)(struct sk_buff *skb);
-+
 +	int version;
 +	u32 mb[2];
 +
@@ -6099,10 +6046,10 @@ diff -Nur linux-2.6.37.orig/drivers/net/ar231x.h linux-2.6.37/drivers/net/ar231x
 +static void ar231x_link_timer_fn(unsigned long data);
 +static void ar231x_check_link(struct net_device *dev);
 +#endif							/* _AR2313_H_ */
-diff -Nur linux-2.6.37.orig/drivers/watchdog/Kconfig linux-2.6.37/drivers/watchdog/Kconfig
---- linux-2.6.37.orig/drivers/watchdog/Kconfig	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/watchdog/Kconfig	2011-05-15 19:24:57.000000000 +0200
-@@ -930,6 +930,12 @@
+diff -Nur linux-2.6.39-rc7.orig/drivers/watchdog/Kconfig linux-2.6.39-rc7/drivers/watchdog/Kconfig
+--- linux-2.6.39-rc7.orig/drivers/watchdog/Kconfig	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/watchdog/Kconfig	2011-05-15 21:34:57.000000000 +0200
+@@ -990,6 +990,12 @@
  	  To compile this driver as a loadable module, choose M here.
  	  The module will be called bcm63xx_wdt.
  
@@ -6115,10 +6062,10 @@ diff -Nur linux-2.6.37.orig/drivers/watchdog/Kconfig linux-2.6.37/drivers/watchd
  # PARISC Architecture
  
  # POWERPC Architecture
-diff -Nur linux-2.6.37.orig/drivers/watchdog/Makefile linux-2.6.37/drivers/watchdog/Makefile
---- linux-2.6.37.orig/drivers/watchdog/Makefile	2011-01-05 01:50:19.000000000 +0100
-+++ linux-2.6.37/drivers/watchdog/Makefile	2011-05-15 19:24:57.000000000 +0200
-@@ -116,6 +116,7 @@
+diff -Nur linux-2.6.39-rc7.orig/drivers/watchdog/Makefile linux-2.6.39-rc7/drivers/watchdog/Makefile
+--- linux-2.6.39-rc7.orig/drivers/watchdog/Makefile	2011-05-10 04:33:54.000000000 +0200
++++ linux-2.6.39-rc7/drivers/watchdog/Makefile	2011-05-15 21:34:57.000000000 +0200
+@@ -120,6 +120,7 @@
  obj-$(CONFIG_PNX833X_WDT) += pnx833x_wdt.o
  obj-$(CONFIG_SIBYTE_WDOG) += sb_wdog.o
  obj-$(CONFIG_AR7_WDT) += ar7_wdt.o
@@ -6126,9 +6073,9 @@ diff -Nur linux-2.6.37.orig/drivers/watchdog/Makefile linux-2.6.37/drivers/watch
  obj-$(CONFIG_TXX9_WDT) += txx9wdt.o
  obj-$(CONFIG_OCTEON_WDT) += octeon-wdt.o
  octeon-wdt-y := octeon-wdt-main.o octeon-wdt-nmi.o
-diff -Nur linux-2.6.37.orig/drivers/watchdog/ar2315-wtd.c linux-2.6.37/drivers/watchdog/ar2315-wtd.c
---- linux-2.6.37.orig/drivers/watchdog/ar2315-wtd.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-2.6.37/drivers/watchdog/ar2315-wtd.c	2011-05-15 19:24:57.000000000 +0200
+diff -Nur linux-2.6.39-rc7.orig/drivers/watchdog/ar2315-wtd.c linux-2.6.39-rc7/drivers/watchdog/ar2315-wtd.c
+--- linux-2.6.39-rc7.orig/drivers/watchdog/ar2315-wtd.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39-rc7/drivers/watchdog/ar2315-wtd.c	2011-05-15 21:34:57.000000000 +0200
 @@ -0,0 +1,200 @@
 +/*
 + * This program is free software; you can redistribute it and/or modify

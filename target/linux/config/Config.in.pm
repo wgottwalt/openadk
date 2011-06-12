@@ -23,6 +23,7 @@ config ADK_KERNEL_ACPI_DOCK
 	boolean
 
 menu "Power Management support"
+depends on ADK_TARGET_WITH_ACPI
 
 config ADK_HARDWARE_ACPI
 	prompt "Enable ACPI support"

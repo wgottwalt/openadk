@@ -1,5 +1,8 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_EXPORTFS
+	boolean
+
 config ADK_KERNEL_YAFFS_FS
 	tristate
 
@@ -35,12 +38,6 @@ config ADK_KERNEL_FAT_DEFAULT_CODEPAGE
 config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 	string
 	default "iso8859-1"
-
-config ADK_KPACKAGE_KMOD_EXPORTFS
-	tristate
-	depends on !ADK_KERNEL_EXPORTFS
-	default n
-	help
 
 config ADK_KERNEL_SQUASHFS
 	prompt ".................................. SquashFS filesystem"
@@ -177,9 +174,6 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	  The VFAT support enlarges your kernel by about 10 KB Please read the
 	  file <file:Documentation/filesystems/vfat.txt> for details.
 
-config ADK_KERNEL_EXPORTFS
-	boolean
-	default n
 
 config ADK_KERNEL_XFS_FS
 	boolean
@@ -189,7 +183,7 @@ config ADK_KERNEL_XFS_FS
 config ADK_KPACKAGE_KMOD_XFS_FS
 	prompt "kmod-fs-xfs....................... XFS filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_EXPORTFS
+	select ADK_KERNEL_EXPORTFS
 	depends on !ADK_KERNEL_XFS_FS
 	default n
 	help

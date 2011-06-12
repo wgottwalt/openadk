@@ -1,12 +1,18 @@
 diff -Nur uClibc-0.9.32-rc3.orig/Makefile.in uClibc-0.9.32-rc3/Makefile.in
 --- uClibc-0.9.32-rc3.orig/Makefile.in	2011-03-16 20:11:13.000000000 +0100
-+++ uClibc-0.9.32-rc3/Makefile.in	2011-03-18 18:00:13.000000000 +0100
-@@ -383,6 +383,8 @@
- # Installs run-time libraries
- install_runtime: all | $(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
++++ uClibc-0.9.32-rc3/Makefile.in	2011-05-20 11:16:00.000000000 +0200
+@@ -385,13 +385,13 @@
  ifeq ($(HAVE_SHARED),y)
-+	$(INSTALL) -m 755 $(top_builddir)lib/ld-uClibc-$(VERSION).so \
-+		$(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
  	$(INSTALL) -m 755 $(top_builddir)lib/lib*-$(VERSION).so \
  		$(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
- 	(cd $(top_builddir)lib && $(TAR) -cf - *.so.*) | $(TAR) -xf - -C $(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
+-	(cd $(top_builddir)lib && $(TAR) -cf - *.so.*) | $(TAR) -xf - -C $(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
+ 	@if [ -x $(top_builddir)lib/$(UCLIBC_LDSO_NAME)-$(VERSION).so ] ; then \
+ 		set -e; \
+ 		$(SHELL_SET_X); \
+ 		$(INSTALL) -m 755 $(top_builddir)lib/$(UCLIBC_LDSO_NAME)-$(VERSION).so \
+ 			$(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR); \
+ 	fi
++	(cd $(top_builddir)lib && $(TAR) -cf - *.so.*) | $(TAR) -xf - -C $(PREFIX)$(RUNTIME_PREFIX)$(MULTILIB_DIR)
+ endif
+ 
+ utils: | pregen

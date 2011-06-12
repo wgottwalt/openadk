@@ -7,11 +7,9 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-ifeq (${ADK_TARGET_SYSTEM_BROADCOM_BCM47XX},y)
-CUSTOM_ROOTFSSQUASHFS_BUILD=1
-endif
-
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+KERNEL:=$(LINUX_DIR)/vmlinuz
+else ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
 KERNEL:=$(LINUX_DIR)/vmlinuz
 else
 KERNEL:=$(LINUX_DIR)/vmlinux
@@ -55,33 +53,45 @@ kernel-install:
 endif
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+kernel-install: tools-compile
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux $(BUILD_DIR)/vmlinux.strip
+	dd if=$(BUILD_DIR)/vmlinux.strip of=${BUILD_DIR}/vmlinux bs=65536 conv=sync
+	lzma -9efzc ${BUILD_DIR}/vmlinux > $(BIN_DIR)/${TARGET_KERNEL}
+	cp ${BUILD_DIR}/root.squashfs ${BUILD_DIR}/${ROOTFSSQUASHFS}
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPSEL),y)
 kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(TARGET_DIR)/boot/kernel
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
+ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
+	@echo 'Type the following in Redboot:'
+	@echo 'RedBoot> load $(TARGET_KERNEL)'
+	@echo 'RedBoot> go'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -92,27 +102,32 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(TARGET_DIR)/boot/kernel $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+ifneq ($(ADK_HARDWARE_QEMU),)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
+ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-mips -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -138,10 +153,14 @@ imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 	else \
 		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${BIN_DIR}/${ROOTFSSQUASHFS}; \
 		echo The image file is $(ROOTFSSQUASHFS); \
-		echo 'You can flash the image via tftp:'; \
-		echo 'tftp 192.168.1.1'; \
-		echo 'tftp> binary'; \
-		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"; \
 	fi
+ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
+		echo The kernel file is $(TARGET_KERNEL)
 endif
-
+ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
+		echo 'You can flash the image via tftp:'
+		echo 'tftp 192.168.1.1'
+		echo 'tftp> binary'
+		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
+endif
+endif

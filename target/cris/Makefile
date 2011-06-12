@@ -20,6 +20,10 @@ endif
 kernel-install: tools-compile
 	PATH='${TARGET_PATH}' mkfimage $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
 
+${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
+        cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
+            >${BUILD_DIR}/${ROOTFSSQUASHFS}
+
 ifeq ($(ADK_TARGET_FS),squashfs)
 imageinstall: kernel-install $(BUILD_DIR)/$(ROOTFSSQUASHFS)
 	dd if=${BUILD_DIR}/${ROOTFSSQUASHFS} of=${BIN_DIR}/${ROOTFSSQUASHFS} \

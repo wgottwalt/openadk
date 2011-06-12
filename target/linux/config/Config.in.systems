@@ -34,8 +34,14 @@ config ADK_KERNEL_ARCH_AT91
 config ADK_KERNEL_ARCH_AT91SAM9G20
 	boolean
 
-config ADK_KERNEL_MACH_FOXG20
+config ADK_KERNEL_MACH_ACMENETUSFOXG20
 	boolean
 
 config ADK_KERNEL_AEABI
+	boolean
+
+config ADK_KERNEL_CPU_BIG_ENDIAN
+	boolean
+
+config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	boolean

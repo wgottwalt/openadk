@@ -104,7 +104,13 @@ config ADK_TARGET_WITH_PCI
 config ADK_TARGET_WITH_SSB
 	boolean
 
+config ADK_TARGET_WITH_AHB
+	boolean
+
 config ADK_TARGET_WITH_MINIPCI
+	boolean
+
+config ADK_TARGET_WITH_ACPI
 	boolean
 
 config ADK_TARGET_WITH_VGA
@@ -255,6 +261,7 @@ config ADK_TARGET_CPU_ARCH
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
+	default "sparc" if ADK_LINUX_SPARC
 
 config ADK_TARGET_ABI_CFLAGS
 	string
@@ -386,6 +393,7 @@ default ADK_TARGET_ROOTFS_ARCHIVE
 config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
+		ADK_HARDWARE_QEMU || \
 		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
@@ -400,6 +408,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	bool "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
+		ADK_HARDWARE_QEMU || \
 		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \

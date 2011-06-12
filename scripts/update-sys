@@ -33,6 +33,7 @@ if [ -f $topdir/.config ];then
 check_native
 
 arch=$(grep ^ADK_TARGET_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
+cpuarch=$(grep ^ADK_TARGET_CPU_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
 systemsym=$(grep ^ADK_TARGET_SYSTEM_ $topdir/.config|cut -f 1 -d =) 
 system=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
 systems=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g'|sed -e 's#-#_#g')
@@ -49,7 +50,7 @@ config $archsym
 EOF
 
 if [ "${system}" = "toolchain" -o "${system}" = "qemu" ];then
-	sys=${system}-$arch
+	sys=${system}-$cpuarch
 else
 	sys=$system
 fi
@@ -57,7 +58,8 @@ fi
 cat > $topdir/target/config/Config.in.system << EOF 	
 source "target/config/Config.in.system.default"
 comment "Architecture: $arch"
-comment "System: $system"
+comment "CPU Architecture: $cpuarch"
+comment "System: $sys"
 
 config $systemsym
 	boolean

@@ -44,12 +44,12 @@ config ADK_x86
 config ADK_TARGET_ARCH
 	string
 	default "arm"  if ADK_arm
-	default "armeb"  if ADK_armeb
+	default "arm"  if ADK_armeb
 	default "cris"  if ADK_cris
 	default "mips"  if ADK_mips
-	default "mipsel"  if ADK_mipsel
-	default "mips64"  if ADK_mips64
-	default "mips64el"  if ADK_mips64el
+	default "mips"  if ADK_mipsel
+	default "mips"  if ADK_mips64
+	default "mips"  if ADK_mips64el
 	default "ppc"  if ADK_ppc
 	default "ppc64"  if ADK_ppc64
 	default "sparc"  if ADK_sparc

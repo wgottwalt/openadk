@@ -65,7 +65,7 @@ kernel-package: $(KERNEL)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 
-TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_FS}-kernel
+TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${CPU_ARCH}-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_ARCH}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
@@ -102,12 +102,6 @@ ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
-
-ifeq (,${CUSTOM_ROOTFSSQUASHFS_BUILD})
-${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
-	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
-	    >${BUILD_DIR}/${ROOTFSSQUASHFS}
-endif
 
 createinitramfs:
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
