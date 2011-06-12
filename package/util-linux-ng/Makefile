@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--enable-libmount \
 			--enable-mount
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
-TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -lintl
+TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin
