@@ -1,0 +1,13 @@
+diff -Nur busybox-1.18.4.orig/util-linux/mount.c busybox-1.18.4/util-linux/mount.c
+--- busybox-1.18.4.orig/util-linux/mount.c	2011-03-13 02:45:40.000000000 +0100
++++ busybox-1.18.4/util-linux/mount.c	2011-05-15 03:12:40.000000000 +0200
+@@ -1129,6 +1129,9 @@
+ 				continue;
+ 			case 20: // "addr" - ignore
+ 				continue;
++                        case -1: // unknown
++                                if (vfsflags & MS_REMOUNT)
++                                 continue;
+ 			}
+ 
+ 			val = xatoi_positive(opteq);
