@@ -1,6 +1,6 @@
---- drbd-8.3.8.1.orig/user/Makefile.in	2010-05-10 16:09:13.000000000 +0200
-+++ drbd-8.3.8.1/user/Makefile.in	2011-01-14 22:16:28.000000000 +0100
-@@ -74,7 +74,7 @@ drbd_strings.c: ../drbd/drbd_strings.c
+--- drbd-8.3.10.orig/user/Makefile.in	2011-01-26 14:57:59.000000000 +0100
++++ drbd-8.3.10/user/Makefile.in	2011-05-23 17:11:50.000000000 +0200
+@@ -73,7 +73,7 @@ drbd_strings.c: ../drbd/drbd_strings.c
  	cp $^ $@
  
  drbdadm: $(drbdadm-obj)
@@ -9,7 +9,7 @@
  
  drbdadm_scanner.c: drbdadm_scanner.fl drbdadm_parser.h
  	flex -s -odrbdadm_scanner.c drbdadm_scanner.fl
-@@ -83,10 +83,10 @@ drbdmeta_scanner.c: drbdmeta_scanner.fl 
+@@ -82,10 +82,10 @@ drbdmeta_scanner.c: drbdmeta_scanner.fl 
  	flex -s -odrbdmeta_scanner.c drbdmeta_scanner.fl
  
  drbdsetup: $(drbdsetup-obj)

@@ -1,0 +1,54 @@
+--- pacemaker-1.0.11.orig/configure	2011-05-24 17:00:37.000000000 +0200
++++ pacemaker-1.0.11/configure	2011-05-24 17:39:43.000000000 +0200
+@@ -12484,7 +12484,7 @@ $as_echo_n "checking for $2 in $1... " >
+ 	  printf "#include <stdio.h>\n" > ${Cfile}.c
+ 	  printf "#include <%s>\n" $1 >> ${Cfile}.c
+ 	  printf "int main(int argc, char **argv) { printf(\"%%s\", %s); return 0; }\n" $2 >> ${Cfile}.c
+-	  $CC $CFLAGS ${Cfile}.c -o ${Cfile}
++	  $CC_FOR_BUILD $CFLAGS_FOR_BUILD ${Cfile}.c -o ${Cfile}
+ 	  value=`${Cfile}`
+ 	  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $value" >&5
+ $as_echo "$value" >&6; }
+@@ -12713,33 +12713,11 @@ $as_echo "$as_me: WARNING: $j directory 
+ done
+ 
+ 
+-case "$host_os" in
+-*bsd*)		LIBS="-L/usr/local/lib"
+-		CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+-		INIT_EXT=".sh"
+-		;;
+-*solaris*)
+-		;;
+-*linux*)
+-
+ cat >>confdefs.h <<_ACEOF
+ #define ON_LINUX 1
+ _ACEOF
+ 
+-  		CFLAGS="$CFLAGS -I${prefix}/include"
+- 		;;
+-darwin*)
+-
+-cat >>confdefs.h <<_ACEOF
+-#define ON_DARWIN 1
+-_ACEOF
+-
+-  		LIBS="$LIBS -L${prefix}/lib"
+-  		CFLAGS="$CFLAGS -I${prefix}/include"
+-		;;
+-esac
+-
+-CFLAGS="$CFLAGS -I${prefix}/include/heartbeat"
++CFLAGS="$CFLAGS -I${includedir}/heartbeat"
+ 
+ 
+ 
+@@ -17159,7 +17137,6 @@ else
+ 
+ 	# We had to eliminate -Wnested-externs because of libtool changes
+         EXTRA_FLAGS="-fgnu89-inline
+-		-fstack-protector-all
+ 		-Wall
+ 		-Waggregate-return
+ 		-Wbad-function-cast

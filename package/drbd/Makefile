@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		drbd
-PKG_VERSION:=		8.3.8.1
+PKG_VERSION:=		8.3.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		551dae488006af86a33eab1eba407f48
+PKG_MD5SUM:=		7d80edc2da10de5bfffe0ca9e9996fed
 PKG_DESCR:=		DRBD admin tools
 PKG_SECTION:=		fs
 PKG_URL:=		http://www.drbd.org/
@@ -17,11 +17,14 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DRBD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-distro=generic \
+			--with-pacemaker \
 			--without-km \
 			--without-xen \
 			--without-udev
 
 post-install:
+	$(INSTALL_DIR) $(IDIR_DRBD)/etc
+	$(CP) ./files/drbd.conf $(IDIR_DRBD)/etc
 	$(INSTALL_DIR) $(IDIR_DRBD)/usr/lib/drbd
 	$(INSTALL_DIR) $(IDIR_DRBD)/usr/sbin
 	$(CP) $(WRKINST)/usr/lib/drbd/* \
