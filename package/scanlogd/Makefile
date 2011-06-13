@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libpcap libnids libnet
 PKG_URL:=		http://www.openwall.com/scanlogd/
 PKG_SITES:=		http://www.openwall.com/scanlogd/
 
+PKG_ARCH_DEPENDS:=	!arm
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SCANLOGD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

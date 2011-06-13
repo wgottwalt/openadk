@@ -44,6 +44,7 @@ libpthread-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/lib
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/lib
+	(cd ${STAGING_TARGET_DIR}/lib && ln -sf libpthread.so.0 libpthread.so)
 endif
 
 libpthread-dev-install:

@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://collectd.org/
 PKG_SITES:=		http://collectd.org/files/
 
-PKG_FLAVOURS_COLLECD:=	WITH_CPU WITH_LOAD WITH_MEMORY WITH_PING
+PKG_FLAVOURS_COLLECTD:=	WITH_CPU WITH_LOAD WITH_MEMORY WITH_PING
 PKGFD_WITH_CPU:=	collect CPU statistics
 PKGFD_WITH_LOAD:=	collect system load statistics
 PKGFD_WITH_MEMORY:=	collect memory usage statistics

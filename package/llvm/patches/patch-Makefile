@@ -1,0 +1,10 @@
+--- llvm-2.9.orig/Makefile	2010-11-29 19:16:10.000000000 +0100
++++ llvm-2.9/Makefile	2011-05-16 20:54:17.476608532 +0200
+@@ -115,6 +115,7 @@ cross-compile-build-tools:
+ 	$(Verb) if [ ! -f BuildTools/Makefile ]; then \
+           $(MKDIR) BuildTools; \
+ 	  cd BuildTools ; \
++	  unset CC ; \
+ 	  unset CFLAGS ; \
+ 	  unset CXXFLAGS ; \
+ 	  $(PROJ_SRC_DIR)/configure --build=$(BUILD_TRIPLE) \
