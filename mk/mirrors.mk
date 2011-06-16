@@ -42,7 +42,6 @@ MASTER_SITE_GNU?=	\
   	ftp://ftp.sunet.se/pub/gnu/ \
 
 MASTER_SITE_SOURCEFORGE?=	\
-	http://easynews.dl.sourceforge.net/sourceforge/ \
 	http://puzzle.dl.sourceforge.net/sourceforge/ \
 	http://optusnet.dl.sourceforge.net/sourceforge/ \
 	http://heanet.dl.sourceforge.net/sourceforge/ \
@@ -55,6 +54,7 @@ MASTER_SITE_SOURCEFORGE?=	\
 	http://ovh.dl.sourceforge.net/sourceforge/ \
 	http://surfnet.dl.sourceforge.net/sourceforge/ \
 	http://ufpr.dl.sourceforge.net/sourceforge/ \
+	http://easynews.dl.sourceforge.net/sourceforge/ \
 
 MASTER_SITE_MYSQL?=		\
 	ftp://ftp.fu-berlin.de/unix/databases/mysql/ \

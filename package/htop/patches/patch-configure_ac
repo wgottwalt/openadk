@@ -1,0 +1,10 @@
+--- htop-0.9.orig/configure.ac	2011-05-31 14:26:38.000000000 +0200
++++ htop-0.9/configure.ac	2011-05-31 14:27:56.000000000 +0200
+@@ -25,6 +25,7 @@
+ AC_CHECK_HEADERS([stdlib.h string.h strings.h sys/param.h sys/time.h unistd.h curses.h],[:],[
+   missing_headers="$missing_headers $ac_header"
+ ])
++AC_CHECK_HEADERS([execinfo.h],[:],[:])
+ 
+ # Checks for typedefs, structures, and compiler characteristics.
+ AC_HEADER_STDBOOL
