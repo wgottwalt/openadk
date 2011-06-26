@@ -1,0 +1,11 @@
+--- openais-1.1.4.orig/Makefile.in	2010-08-23 21:59:26.000000000 +0200
++++ openais-1.1.4/Makefile.in	2011-06-25 22:04:16.722682552 +0200
+@@ -285,7 +285,7 @@ MAINTAINERCLEANFILES = Makefile.in acloc
+ dist_doc_DATA = LICENSE README.amf AUTHORS
+ corosysconfdir = ${COROSYSCONFDIR}
+ corosysconf_DATA = conf/amf.conf.example
+-SUBDIRS = include lib services test pkgconfig man init
++SUBDIRS = include lib services test pkgconfig init
+ RPMBUILDOPTS = --define "_sourcedir $(abs_builddir)" \
+ 		  --define "_specdir $(abs_builddir)" \
+ 		  --define "_builddir $(abs_builddir)" \

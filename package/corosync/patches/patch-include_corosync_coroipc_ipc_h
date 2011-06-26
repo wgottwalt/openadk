@@ -1,0 +1,11 @@
+--- corosync-1.3.1.orig/include/corosync/coroipc_ipc.h	2011-04-25 04:37:30.000000000 +0200
++++ corosync-1.3.1/include/corosync/coroipc_ipc.h	2011-06-26 18:49:29.245183024 +0200
+@@ -44,7 +44,7 @@
+  * Darwin claims to support process shared synchronization
+  * but it really does not.  The unistd.h header file is wrong.
+  */
+-#if defined(COROSYNC_DARWIN) || defined(__UCLIBC__)
++#if defined(COROSYNC_DARWIN)
+ #undef _POSIX_THREAD_PROCESS_SHARED
+ #define _POSIX_THREAD_PROCESS_SHARED -1
+ #endif
