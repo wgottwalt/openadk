@@ -179,7 +179,7 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.tar.xz | *.txz) \
 				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
-				gzip -dc $$file | tar -xf - ;; \
+				gzip -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.cpio.bz2 | *.cbz) \
 				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
