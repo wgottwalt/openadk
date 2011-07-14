@@ -71,7 +71,7 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \
-,20, kmod-leds-class))
+,20))
 
 $(eval $(call KMOD_template,P54_COMMON,p54-common,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54common \
