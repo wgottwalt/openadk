@@ -184,7 +184,7 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.cpio.bz2 | *.cbz) \
 				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.zip) \
 				cat $$file | $(TOOLS_DIR)/cpio -ivd -H zip ;; \
 			*.arm) \
