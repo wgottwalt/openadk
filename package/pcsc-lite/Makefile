@@ -39,5 +39,8 @@ post-install:
 pcsc-lite-dev-install:
 	${INSTALL_DIR} ${IDIR_PCSC_LITE_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_PCSC_LITE_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_PCSC_LITE_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_PCSC_LITE_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
