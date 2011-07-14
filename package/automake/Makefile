@@ -10,7 +10,6 @@ PKG_EXTRAVER:=		1.11
 PKG_MD5SUM:=		4ee7f0ff5f0e467d58b6bd5da96b1c74
 PKG_DESCR:=		GNU automake
 PKG_SECTION:=		lang
-PKG_DEPENDS:=		microperl
 PKG_URL:=		http://www.gnu.org/software/automake/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 PKG_OPTS:=		noscripts
