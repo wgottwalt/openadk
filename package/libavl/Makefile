@@ -20,6 +20,7 @@ $(eval $(call PKG_template,LIBAVL,libavl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 MAKE_FILE:=		GNUmakefile
 CONFIG_STYLE:=		manual
+TARGET_CFLAGS+=		-fPIC
 
 libavl-install:
 	${INSTALL_DIR} ${IDIR_LIBAVL}/usr/lib

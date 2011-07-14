@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libIDL
 PKG_URL:=		http://projects.gnome.org/ORBit2/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 
+PKG_ARCH_DEPENDS:=	!arm !cris
+
 PKG_SUBPKGS:=		ORBIT2 ORBIT2_DEV
 PKGSD_ORBIT2_DEV:=	orbit2 headers
 PKGSC_ORBIT2_DEV:=	devel

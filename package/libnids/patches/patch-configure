@@ -1,0 +1,17 @@
+--- libnids-1.24.orig/configure	2006-05-01 19:14:51.000000000 +0200
++++ libnids-1.24/configure	2011-05-16 16:03:49.766610900 +0200
+@@ -3919,11 +3919,11 @@ echo "${ECHO_T}no" >&6
+   *)
+      echo "$as_me:$LINENO: result: $withval" >&5
+ echo "${ECHO_T}$withval" >&6
+-     if test -f $withval/pcap.h -a -f $withval/libpcap.a; then
++     if test -f $withval/include/pcap.h; then
+         owd=`pwd`
+         if cd $withval; then withval=`pwd`; cd $owd; fi
+-	PCAP_CFLAGS="-I$withval -I$withval/bpf"
+-	PCAPLIB="-L$withval -lpcap"
++	PCAP_CFLAGS="-I$withval/include -I$withval/include/bpf"
++	PCAPLIB="-L$withval/lib -lpcap"
+      else
+         { { echo "$as_me:$LINENO: error: pcap.h or libpcap.a not found in $withval" >&5
+ echo "$as_me: error: pcap.h or libpcap.a not found in $withval" >&2;}

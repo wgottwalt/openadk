@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libnids openssl gdbm libpcap libnet
 PKG_URL:=		http://www.monkey.org/~dugsong/dsniff/
 PKG_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
 
+PKG_ARCH_DEPENDS:=	!arm
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 
 include ${TOPDIR}/mk/package.mk

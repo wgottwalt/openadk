@@ -1,0 +1,11 @@
+--- mozilla-2.0.orig/js/src/ctypes/CTypes.cpp	2011-03-19 00:33:47.000000000 +0100
++++ mozilla-2.0/js/src/ctypes/CTypes.cpp	2011-06-15 05:56:10.076952202 +0200
+@@ -464,7 +464,7 @@ static inline bool FloatIsFinite(jsdoubl
+ #ifdef WIN32
+   return _finite(f) != 0;
+ #else
+-  return finite(f);
++  return isfinite(f);
+ #endif
+ }
+ 

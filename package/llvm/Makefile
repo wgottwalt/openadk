@@ -12,8 +12,9 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://llvm.org/
 PKG_SITES:=		http://llvm.org/releases/2.9/
 
+PKG_CFLINE_LLVM:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
-#WRKBUILD=               ${WRKSRC}/BuildTools
 
 include $(TOPDIR)/mk/package.mk
 

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnids
-PKG_VERSION:=		1.23
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		af35e8ef403a0ca95df2da94db856428
+PKG_VERSION:=		1.24
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		72d37c79c85615ffe158aa524d649610
 PKG_DESCR:=		Network Intrusion Detection System library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnet libpcap glib
@@ -23,6 +23,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBNIDS_DEV,libnids-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBNIDS_DEV},${PKGSC_LIBNIDS_DEV}))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--with-libpcap=${STAGING_TARGET_DIR}/usr
 XAKE_FLAGS+=		install_prefix="${WRKINST}"

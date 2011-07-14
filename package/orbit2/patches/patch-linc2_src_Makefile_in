@@ -1,0 +1,20 @@
+--- ORBit2-2.14.19.orig/linc2/src/Makefile.in	2010-09-28 11:39:39.000000000 +0200
++++ ORBit2-2.14.19/linc2/src/Makefile.in	2011-05-17 11:54:33.596610948 +0200
+@@ -54,7 +54,7 @@ am_liblinc_la_OBJECTS = linc.lo linc-con
+ liblinc_la_OBJECTS = $(am_liblinc_la_OBJECTS)
+ liblinc_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+-	$(liblinc_la_LDFLAGS) $(LDFLAGS) -o $@
++	$(LDFLAGS) $(liblinc_la_LDFLAGS) -o $@
+ am__installdirs = "$(DESTDIR)$(bindir)"
+ PROGRAMS = $(bin_PROGRAMS)
+ am_linc_cleanup_sockets_OBJECTS = cleanup.$(OBJEXT)
+@@ -62,7 +62,7 @@ linc_cleanup_sockets_OBJECTS = $(am_linc
+ linc_cleanup_sockets_LDADD = $(LDADD)
+ linc_cleanup_sockets_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+-	$(linc_cleanup_sockets_LDFLAGS) $(LDFLAGS) -o $@
++	$(LDFLAGS) $(linc_cleanup_sockets_LDFLAGS) -o $@
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles

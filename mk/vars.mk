@@ -69,7 +69,8 @@ TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 TARGET_CPPFLAGS:=	
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
 TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
-TARGET_LDFLAGS:=	-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
+TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
+			-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
 ifneq ($(ADK_NATIVE),)
@@ -198,7 +199,7 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget --timeout=30 -t 3 $(QUIET)
+FETCH_CMD?=		wget --timeout=5 -t 3 $(QUIET)
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
