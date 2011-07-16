@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcmciautils
-PKG_VERSION:=		017
+PKG_VERSION:=		018
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ee5837214d297661c8b8189055a351fc
+PKG_MD5SUM:=		3c388cb559975b37a75cb5965e9800a9
 PKG_DESCR:=		Utilities for PCMCIA subsystem
 PKG_SECTION:=		utils
 PKG_BUILDDEP:=		sysfsutils
