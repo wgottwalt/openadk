@@ -180,11 +180,11 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			*.tar.xz | *.txz) \
 				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
-				gzip -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
 				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
 				cat $$file | $(TOOLS_DIR)/cpio -ivd -H zip ;; \
 			*.arm) \
