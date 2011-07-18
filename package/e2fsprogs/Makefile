@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.41.14
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		05f70470aea2ef7efbb0845b2b116720
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
@@ -116,9 +116,9 @@ libuuid-install:
 		${IDIR_LIBUUID}/usr/lib
 
 libuuid-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include
+	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include/uuid
 	${CP} ${WRKBUILD}/lib/uuid/uuid.h \
-		${IDIR_LIBUUID_DEV}/usr/include
+		${IDIR_LIBUUID_DEV}/usr/include/uuid
 
 e2fsck-static-install:
 ifneq ($(ADK_PACKAGE_E2FSCK_STATIC),)
