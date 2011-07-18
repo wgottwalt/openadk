@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.80
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		816f4cee75674e3a21fd40f1961279f2
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		fs
@@ -13,11 +13,13 @@ PKG_DEPENDS:=		libdevmapper libncurses
 PKG_URL:=		http://sourceware.org/lvm2/
 PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
 
-PKG_SUBPKGS:=		LVM DEVICE_MAPPER LIBDEVMAPPER
+PKG_SUBPKGS:=		LVM DEVICE_MAPPER LIBDEVMAPPER LIBDEVMAPPER_DEV
 PKGSD_DEVICE_MAPPER:=	device-mapper utility
 PKGSS_DEVICE_MAPPER:=	libdevmapper
 PKGSD_LIBDEVMAPPER:=	device-mapper library
 PKGSC_LIBDEVMAPPER:=	libs
+PKGSD_LIBDEVMAPPER_DEV:=device-mapper headers
+PKGSC_LIBDEVMAPPER_DEV:=devel
 
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
@@ -27,6 +29,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_DEVICE_MAPPER},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBDEVMAPPER},${PKGSC_LIBDEVMAPPER}))
+$(eval $(call PKG_template,LIBDEVMAPPER_DEV,libdevmapper-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBDEVMAPPER_DEV},${PKGSC_LIBDEVMAPPER_DEV}))
 
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
@@ -40,6 +43,11 @@ libdevmapper-install:
 	${INSTALL_DIR} ${IDIR_LIBDEVMAPPER}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libdevmapper.so* \
 		${IDIR_LIBDEVMAPPER}/usr/lib
+
+libdevmapper-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBDEVMAPPER_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_LIBDEVMAPPER_DEV}/usr/include
 
 device-mapper-install:
 	${INSTALL_DIR} ${IDIR_DEVICE_MAPPER}/usr/sbin
