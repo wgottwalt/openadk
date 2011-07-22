@@ -1,3 +1,5 @@
+* will be better solved in mpd 1.16.4
+
 --- mpd-0.16.2.orig/src/output/alsa_plugin.c	2011-03-19 01:41:53.000000000 +0100
 +++ mpd-0.16.2/src/output/alsa_plugin.c	2011-05-14 13:44:14.000000000 +0200
 @@ -646,8 +646,9 @@ alsa_play(void *data, const void *chunk,
