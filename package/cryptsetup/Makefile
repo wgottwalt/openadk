@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptsetup
-PKG_VERSION:=		1.1.3
+PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		318a64470861ea5b92a52f2014f1e7c1
+PKG_MD5SUM:=		1f5b5a9d538e8a3c191fb7dd85b9b013
 PKG_DESCR:=		LUKS cryptsetup tools
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt

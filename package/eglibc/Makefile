@@ -7,7 +7,7 @@ include $(TOPDIR)/toolchain/eglibc/Makefile.inc
 PKG_DESCR:=		embedded GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
-PKG_SUBPKGS:=		EGLIBC EGLIBC_DEV
+PKG_SUBPKGS:=		EGLIBC EGLIBC_DEV EGLIBC_STATIC
 
 NO_DISTFILES:=		1
 
@@ -15,6 +15,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,EGLIBC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,EGLIBC_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,EGLIBC_STATIC,$(PKG_NAME)-static,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -81,6 +82,10 @@ endif
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_EGLIBC}/etc
+
+eglibc-static-install:
+	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib
+	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.a $(IDIR_EGLIBC_STATIC)/usr/lib
 
 eglibc-dev-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib

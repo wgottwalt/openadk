@@ -38,12 +38,15 @@ post-install:
 	${INSTALL_DATA} ${WRKBUILD}/etc/openct.conf \
 		${IDIR_OPENCT}/etc
 	${INSTALL_DIR} ${IDIR_LIBOPENCT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libopenct.so.* \
+	${CP} ${WRKINST}/usr/lib/libopenct.so* \
 		${IDIR_LIBOPENCT}/usr/lib
 
 libopenct-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENCT_DEV}/usr/include/openct
 	${CP} ${WRKINST}/usr/include/openct/*.h \
 		${IDIR_LIBOPENCT_DEV}/usr/include/openct
+	${INSTALL_DIR} ${IDIR_LIBOPENCT_DEV}/usr/lib/pkgconfig
+	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+		${IDIR_LIBOPENCT_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

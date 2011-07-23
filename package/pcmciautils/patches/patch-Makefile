@@ -1,6 +1,6 @@
 --- pcmciautils-017.orig/Makefile	2010-01-06 16:47:45.000000000 +0100
-+++ pcmciautils-017/Makefile	2010-07-30 17:34:46.000000000 +0200
-@@ -94,12 +94,13 @@ PWD = $(shell pwd)
++++ pcmciautils-017/Makefile	2011-07-15 12:41:55.000000000 +0200
+@@ -94,16 +94,19 @@ PWD = $(shell pwd)
  # If you are running a cross compiler, you may want to set this
  # to something more interesting, like "arm-linux-".  If you want
  # to compile vs uClibc, that can be done here as well.
@@ -15,7 +15,22 @@
  HOSTCC = gcc
  
  export CROSS CC AR STRIP RANLIB CFLAGS LDFLAGS LIB_OBJS ARCH_LIB_OBJS CRT0
-@@ -264,30 +265,31 @@ clean:
+ 
++CFLAGS ?=
++
+ # code taken from uClibc to determine the current arch
+ ARCH := ${shell $(CC) -dumpmachine | sed -e s'/-.*//' -e 's/i.86/i386/' -e 's/sparc.*/sparc/' \
+ 	-e 's/arm.*/arm/g' -e 's/m68k.*/m68k/' -e 's/powerpc/ppc/g'}
+@@ -215,7 +218,7 @@ all: ccdv $(PCCARDCTL) $(PCMCIA_CHECK_BR
+ ccdv: build/ccdv
+ build/ccdv: build/ccdv.c
+ 	@echo "Building ccdv"
+-	@$(HOSTCC) -O1 $< -o $@
++	$(HOSTCC) $(CFLAGS_FOR_BUILD) -O1 $< -o $@
+ 
+ %.o : %.c ccdv
+ 	$(QUIET) $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+@@ -264,30 +267,31 @@ clean:
  
  install-hotplug:
  	$(INSTALL) -d $(DESTDIR)$(hotplugdir)
@@ -54,7 +69,7 @@
  
  uninstall-tools:
  	- rm -f $(DESTDIR)$(sbindir)/$(PCCARDCTL)
-@@ -296,22 +298,24 @@ uninstall-tools:
+@@ -296,22 +300,24 @@ uninstall-tools:
  
  install-config:
  	$(INSTALL) -d $(DESTDIR)$(pcmciaconfdir)
