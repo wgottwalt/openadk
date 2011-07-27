@@ -10,7 +10,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/pcscd
+	/usr/sbin/pcscd -f &
   	;;
 stop)
 	kill $(pgrep -f /usr/sbin/pcscd)

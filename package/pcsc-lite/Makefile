@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcsc-lite
-PKG_VERSION:=		1.6.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f80d3ecd9569b71d557f283f16295c74
+PKG_VERSION:=		1.7.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		1caf0b8ca2ecbf82fe3b035b3fff22dd
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://pcsclite.alioth.debian.org/
-PKG_SITES:=		http://alioth.debian.org/frs/download.php/3479/
+PKG_SITES:=		http://alioth.debian.org/frs/download.php/3598/
 
 PKG_SUBPKGS:=		PCSC_LITE PCSC_LITE_DEV
 PKGSD_PCSC_LITE_DEV:=	header files for pcsc-lite
@@ -25,7 +25,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PCSC_LITE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PCSC_LITE_DEV,$(PKG_NAME)-dev,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_PCSC_LITE_DEV},${PKGSC_PCSC_LITE_DEV}))
 
-CONFIGURE_ARGS+=	--disable-libhal
+CONFIGURE_ARGS+=	--disable-libudev
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_PCSC_LITE)/etc/reader.conf.d

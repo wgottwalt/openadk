@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		ccid
-PKG_VERSION:=		1.4.1
+PKG_VERSION:=		1.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fef5f950dc35202df2fed832498986b9
+PKG_MD5SUM:=		79ef91103bcdd99a3b31cb5c5721a829
 PKG_DESCR:=		a generic USB CCID and ICCD driver
 PKG_SECTION:=		crypto
 PKG_BUILDDEP:=		pcsc-lite
 PKG_URL:=		http://pcsclite.alioth.debian.org/ccid.html
-PKG_SITES:=		http://alioth.debian.org/frs/download.php/3475/
+PKG_SITES:=		http://alioth.debian.org/frs/download.php/3579/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -24,10 +24,10 @@ CONFIGURE_ARGS+=	--enable-twinserial
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_CCID)/etc/reader.conf.d
-	$(INSTALL_DIR) $(IDIR_CCID)/usr/lib/pcsc/drivers/
+	$(INSTALL_DIR) $(IDIR_CCID)/usr/lib/pcsc/drivers
 	$(INSTALL_DATA) ./files/gemalto.conf \
 		$(IDIR_CCID)/etc/reader.conf.d
 	$(CP) $(WRKINST)/usr/lib/pcsc/drivers/* \
-		$(IDIR_CCID)/usr/lib/pcsc/drivers/
+		$(IDIR_CCID)/usr/lib/pcsc/drivers
 
 include ${TOPDIR}/mk/pkg-bottom.mk
