@@ -12,7 +12,7 @@ all: install
 # configuration when building. This is how it's done:
 # 1) fetch all ADK_KPACKAGE_KMOD_* vars into
 #    .kernelconfig.modules and set them to "m",
-#    fetch all ADK_KERNELMOD_* vars into 
+#    fetch all ADK_KERNEL_MOD_* vars into 
 #    .kernelconfig.modules and set them to "m"
 # 2) fetch all enabled ADK_KERNEL_* vars into
 #    .kernelconfig.kernel (no conversion, as they are booleans)
@@ -32,6 +32,10 @@ all: install
 #    only if it does (so the timestamp stays intact)
 # 8) remove the temporary .kernelconfig.tmp
 ###
+ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
+ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
+ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
+
 ifeq (${ADK_TARGET_KERNEL_CUSTOMISING},y)
 config-prepare: $(TOPDIR)/.config
 	@sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
@@ -59,6 +63,10 @@ endif
 		${BUILD_DIR}/.kernelconfig.board
 ifneq ($(ADK_TARGET_CMDLINE),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
+ifneq ($(ADK_PACKAGE_CMDLINE),)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_PACKAGE_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_QUIET_KERNEL),y)

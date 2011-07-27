@@ -4,13 +4,25 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptinit
-PKG_VERSION:=		1.0.2
+PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		init for encrypted rootfilesystem
 PKG_SECTION:=		base
-PKG_BUILDDEP:=		cryptsetup lvm
+PKG_DEPENDS:=		cryptsetup opensc pcsc-lite
 
-PKG_CFLINE_CRYPTINIT:=	depends on ADK_TARGET_ROOTFS_ENCRYPTED
+PKG_CFLINE_CRYPTINIT:=	select BUSYBOX_STTY@
+PKG_CFLINE_CRYPTINIT+=	select BUSYBOX_SWITCH_ROOT@
+
+PKG_FLAVOURS_CRYPTINIT:=NO_GRUB
+PKGFD_NO_GRUB:=		predefine root/swap partition (without grub)
+
+PKG_FLAVOURS_STRING_CRYPTINIT:=	ROOT SWAP
+PKGFD_ROOT:=		root partition
+PKGFX_ROOT:=		/dev/sda2
+PKGFC_ROOT:=		depends on ADK_PACKAGE_CRYPTINIT_NO_GRUB
+PKGFD_SWAP:=		swap partition
+PKGFX_SWAP:=		/dev/sda3
+PKGFC_SWAP:=		depends on ADK_PACKAGE_CRYPTINIT_NO_GRUB
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
@@ -23,22 +35,10 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-do-build:
-	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} -c \
-		-o ${WRKBUILD}/cryptinit.o ${WRKBUILD}/cryptinit.c
-	( cd ${WRKBUILD}; \
-	${TARGET_CC} -static -o cryptinit cryptinit.o \
-		 ${STAGING_TARGET_DIR}/usr/lib/libcryptsetup.a \
-		-L${STAGING_TARGET_DIR}/lib -L${STAGING_TARGET_DIR}/usr/lib \
-		-ldevmapper -lpthread \
-		${STAGING_TARGET_DIR}/usr/lib/libgcrypt.a \
-		${STAGING_TARGET_DIR}/usr/lib/libgpg-error.a \
-		-luuid -Wl,--rpath -Wl,${STAGING_TARGET_DIR}/usr/lib \
-	);
-
 do-install:
-	$(CP) ./files/initramfs_list $(LINUX_DIR)
-	$(CP) ${WRKBUILD}/cryptinit $(LINUX_DIR)
-	@touch ${IDIR_CRYPTINIT}/.empty
+	$(INSTALL_DIR) $(IDIR_CRYPTINIT)/sbin
+	$(TARGET_CC) $(TARGET_CFLAGS) -Wall -o $(IDIR_CRYPTINIT)/sbin/p \
+		./src/p.c
+	$(INSTALL_BIN) ./src/cryptinit $(IDIR_CRYPTINIT)/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

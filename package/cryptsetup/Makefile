@@ -16,6 +16,9 @@ PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm
 PKG_URL:=		http://cryptsetup.googlecode.com/
 PKG_SITES:=		http://cryptsetup.googlecode.com/files/
 
+PKG_SUBPKGS:=		CRYPTSETUP CRYPTSETUP_DEV
+PKGSC_CRYPTSETUP_DEV:=	devel
+
 PKG_ARCH_DEPENDS:=	!cris
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -23,10 +26,10 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CRYPTSETUP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CRYPTSETUP_DEV,cryptsetup-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_CRYPTSETUP_DEV}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--disable-selinux \
-			--disable-static
+CONFIGURE_ARGS+=	--disable-selinux
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CRYPTSETUP}/usr/sbin ${IDIR_CRYPTSETUP}/usr/lib
@@ -34,5 +37,10 @@ post-install:
 		${IDIR_CRYPTSETUP}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/cryptsetup \
 		${IDIR_CRYPTSETUP}/usr/sbin
+
+cryptsetup-dev-install:
+	${INSTALL_DIR} ${IDIR_CRYPTSETUP_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* \
+		${IDIR_CRYPTSETUP_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

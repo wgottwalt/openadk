@@ -10,13 +10,15 @@ mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
   mount tmpfs /tmp -t tmpfs -o nosuid,nodev,mode=1777,size=${size}k
 }
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
-mkdir /dev/pts /dev/shm
+[ -d /dev/pts ] || mkdir /dev/pts 
+[ -d /dev/shm ] || mkdir /dev/shm
 mount -o nosuid,noexec -t devpts devpts /dev/pts
 exec 0<>/dev/console >&0 2>&0
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
 cat /etc/.rnd >/dev/urandom 2>&1
+[ -x /cryptinit ] && { /cryptinit; exec switch_root /mnt "/init";}
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
-[ -f /etc/fstab ] && { fsck -p >/dev/null ; mount -a; }
+[ -f /etc/fstab ] && { fsck -p >/dev/null; mount -a;}
 exec /sbin/init
