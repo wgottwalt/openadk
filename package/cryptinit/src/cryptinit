@@ -1,0 +1,61 @@
+#!/bin/sh
+
+load_modules() {
+	(sed "s,^[^#][^[:space:]]*,insmod /lib/modules/$(uname -r)/&.ko," $* | sh 2>&- || :)
+}
+
+echo -n "Kernel currently running: "
+uname -rsmo
+echo -n "Kernel parameters: "; cat /proc/cmdline
+for word in $(cat /proc/cmdline) ; do
+    case $word in
+         [a-z]*=*)
+             eval "export $word"
+             ;;
+    esac
+done
+
+echo 0 > /proc/sys/kernel/printk
+
+load_modules /etc/modules
+for f in /etc/modules.d/*; do
+	[[ -e $f ]] && load_modules /etc/modules.d/*
+	break
+done
+
+fail=0
+count=0
+while true; do
+	echo -n "Password: "
+	stty -echo
+	read passphrase
+	stty echo
+	echo ""
+	echo $passphrase |cryptsetup --batch-mode luksOpen $swap swapcrypt
+	if [ $? = 0 ];then
+		break
+	fi
+	if [ $count = 2 ];then
+		echo "You are not allowed"
+		sleep 3
+		fail=1
+		break
+	fi
+	count=$(($count+1))
+done
+
+if [ $fail -eq 1 ];then
+	echo "Poweroff."
+	p
+fi
+
+echo "Try to resume from hibernation"
+echo "254:0" > /sys/power/resume
+
+echo $passphrase |cryptsetup --batch-mode luksOpen $root rootcrypt
+swapon /dev/mapper/swapcrypt
+mount /dev/mapper/rootcrypt /mnt
+umount /proc
+umount /sys
+umount /dev/pts
+umount /tmp
