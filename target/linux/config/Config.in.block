@@ -270,7 +270,7 @@ config ADK_KERNEL_BLK_DEV_MD
 	default n
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
-	prompt "kmod-md........................... RAID support"
+	prompt "kmod-blk-dev-md................... RAID support"
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
@@ -307,7 +307,7 @@ config ADK_KPACKAGE_KMOD_MD_RAID456
 	help
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_DM
-	prompt "kmod-dm........................... Device Mapper support"
+	prompt "kmod-blk-dev-dm................... Device Mapper support"
 	select ADK_KERNEL_MD
 	depends on !ADK_KERNEL_BLK_DEV_DM
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
