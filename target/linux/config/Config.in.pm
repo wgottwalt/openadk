@@ -43,13 +43,25 @@ config ADK_HARDWARE_ACPI
 	 Enable ACPI support.
 
 config ADK_KERNEL_SUSPEND
-	prompt "Enable Suspend support"
+	prompt "Enable Suspend-to-RAM support"
 	boolean
 	select ADK_KERNEL_PM
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
 	help
-	  Enable Suspend-to-RAM and Suspend-to-Disk support.
+	  Enable Suspend-to-RAM support.
+
+config ADK_KERNEL_HIBERNATION
+	prompt "Enable Suspend-to-Disk support"
+	boolean
+	select ADK_KERNEL_PM
+	select ADK_KERNEL_SWAP
+	select BUSYBOX_SWAPONOFF
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default n
+	help
+	  Enable Suspend-to-Disk support.
 
 endmenu
