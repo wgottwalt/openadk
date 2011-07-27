@@ -1,4 +1,4 @@
-config ADK_COMPILE_LIBC
+config ADK_PACKAGE_LIBC
 	boolean
 	depends on ADK_NATIVE
 	default y if ADK_NATIVE
