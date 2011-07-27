@@ -1,5 +1,5 @@
 --- pacemaker-1.0.11.orig/configure	2011-05-24 17:00:37.000000000 +0200
-+++ pacemaker-1.0.11/configure	2011-05-24 17:39:43.000000000 +0200
++++ pacemaker-1.0.11/configure	2011-06-25 22:21:57.912681957 +0200
 @@ -12484,7 +12484,7 @@ $as_echo_n "checking for $2 in $1... " >
  	  printf "#include <stdio.h>\n" > ${Cfile}.c
  	  printf "#include <%s>\n" $1 >> ${Cfile}.c
@@ -9,6 +9,15 @@
  	  value=`${Cfile}`
  	  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $value" >&5
  $as_echo "$value" >&6; }
+@@ -12660,7 +12660,7 @@ case $libdir in
+     *prefix*|NONE)
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking which lib directory to use" >&5
+ $as_echo_n "checking which lib directory to use... " >&6; }
+-    for aDir in lib64 lib
++    for aDir in lib
+     do
+       trydir="${exec_prefix}/${aDir}"
+       if
 @@ -12713,33 +12713,11 @@ $as_echo "$as_me: WARNING: $j directory 
  done
  

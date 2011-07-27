@@ -1,5 +1,5 @@
 --- pacemaker-1.0.11.orig/configure	2011-05-24 17:00:37.000000000 +0200
-+++ pacemaker-1.0.11/configure	2011-05-24 17:31:21.000000000 +0200
++++ pacemaker-1.0.11/configure	2011-05-24 17:39:43.000000000 +0200
 @@ -12484,7 +12484,7 @@ $as_echo_n "checking for $2 in $1... " >
  	  printf "#include <stdio.h>\n" > ${Cfile}.c
  	  printf "#include <%s>\n" $1 >> ${Cfile}.c
@@ -44,3 +44,11 @@
  
  
  
+@@ -17159,7 +17137,6 @@ else
+ 
+ 	# We had to eliminate -Wnested-externs because of libtool changes
+         EXTRA_FLAGS="-fgnu89-inline
+-		-fstack-protector-all
+ 		-Wall
+ 		-Waggregate-return
+ 		-Wbad-function-cast

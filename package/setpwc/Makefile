@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		setpwc
-PKG_VERSION:=		1.2
+PKG_VERSION:=		1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1bc721cdfcbac24027e2afc93685d29f
+PKG_MD5SUM:=		79d5ee468c0076feb3cac473bef661d2
 PKG_DESCR:=		Philips (and compatibles) WebCams (PWC) control utility
 PKG_SECTION:=		multimedia
 PKG_URL:=		http://www.vanheusden.com/setpwc/

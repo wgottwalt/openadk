@@ -13,6 +13,8 @@ PKG_DEPENDS:=		python2
 PKG_URL:=		http://www.clusterlabs.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_CFLINE_PACEMAKER:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PACEMAKER,pacemaker,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -20,7 +22,8 @@ $(eval $(call PKG_template,PACEMAKER,pacemaker,$(PKG_VERSION)-${PKG_RELEASE},${P
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-CONFIGURE_ARGS+=	--includedir=$(STAGING_TARGET_DIR)/usr/include
+CONFIGURE_ARGS+=	--includedir=$(STAGING_TARGET_DIR)/usr/include \
+			--disable-fatal-warnings
 CONFIGURE_ENV+=		ac_cv_path_HELP2MAN=''
 CFLAGS_FOR_BUILD+=	-I$(STAGING_TARGET_DIR)/usr/include/heartbeat
 

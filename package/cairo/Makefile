@@ -27,8 +27,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,CAIRO_DEV,cairo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CAIRO_DEV},${PKGSC_CAIRO_DEV},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ifeq (,$(filter arm,$(TARGET_ARCH)))
+TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
+endif
+ifeq (,$(filter cris,$(TARGET_ARCH)))
 TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
 endif
 CONFIGURE_ARGS+=	--enable-ft=yes \

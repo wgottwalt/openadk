@@ -78,7 +78,7 @@ $(eval $(call KMOD_template,P54_COMMON,p54-common,\
 ,68))
 
 $(eval $(call KMOD_template,RTL8187,rtl8187,\
-	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl818x/rtl8187 \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl818x/rtl8187/rtl8187 \
 ,70))
 
 $(eval $(call KMOD_template,B43,b43,\
@@ -1120,10 +1120,10 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
-V4L_COMPAT:=drivers/media/video/v4l1-compat
-ifeq ($(ADK_LINUX_64),y)
-V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
-endif
+#V4L_COMPAT:=drivers/media/video/v4l1-compat
+#ifeq ($(ADK_LINUX_64),y)
+#V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
+#endif
 
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
@@ -1273,11 +1273,11 @@ $(eval $(call KMOD_template,BT_HCIUART,bt-hciuart,\
 	$(MODULES_DIR)/kernel/drivers/bluetooth/hci_uart \
 ,75))
 
-$(eval $(call KMOD_template,BT_L2CAP,bt-l2cap,\
+#$(eval $(call KMOD_template,BT_L2CAP,bt-l2cap,\
 	$(MODULES_DIR)/kernel/net/bluetooth/l2cap \
 ,80))
 
-$(eval $(call KMOD_template,BT_SCO,bt-sco,\
+#$(eval $(call KMOD_template,BT_SCO,bt-sco,\
 	$(MODULES_DIR)/kernel/net/bluetooth/sco \
 ,85))
 

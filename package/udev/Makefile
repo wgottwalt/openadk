@@ -4,11 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		udev
-PKG_VERSION:=		151
+PKG_VERSION:=		171
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aeae0e6273dcbec246c3c1b9868ebed1
+PKG_MD5SUM:=		bdf4617284be2ecac11767437417e209
 PKG_DESCR:=		Dynamic device management subsystem
 PKG_SECTION:=		utils
+PKG_BUILDDEP:=		usbutils
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/hotplug/}
 
@@ -22,6 +23,8 @@ $(eval $(call PKG_template,UDEV,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 
 CONFIGURE_ARGS+=	--disable-extras \
 			--disable-logging \
+			--disable-udev_acl \
+			--with-pci-ids-path=/usr/share/pci.ids \
 			--disable-introspection
 
 post-install:

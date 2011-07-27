@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		usbutils
-PKG_VERSION:=		0.86
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		34979f675d2bcb3e1b45012fa830a53f
+PKG_VERSION:=		003
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		94a1738fe92062cdd6a9642eeaccefc1
 PKG_DESCR:=		A program to list USB devices
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP:=		libusb libusb-compat
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-usb/}
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 
 PKG_SUBPKGS:=		LSUSB
 
@@ -21,9 +21,9 @@ $(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/share
-	${INSTALL_DATA} ${WRKINST}/usr/share/usb.ids \
+	${INSTALL_DATA} ${WRKINST}/usr/share/usb.ids.gz \
 		${IDIR_LSUSB}/usr/share/
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/lsusb ${IDIR_LSUSB}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/lsusb ${IDIR_LSUSB}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

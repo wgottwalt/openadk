@@ -2,7 +2,7 @@ menu "Bluetooth"
 depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI
 
 config ADK_KPACKAGE_KMOD_BT
-	prompt "kmod-bluetooth.................... Bluetooth drivers and network stack"
+	prompt "kmod-bt.................... Bluetooth drivers and network stack"
 	tristate
 	default n
 	help
@@ -22,9 +22,9 @@ config ADK_KPACKAGE_KMOD_BT
 	     CMTP Module (CAPI Message Transport Protocol)
 	     HIDP Module (Human Interface Device Protocol)
 
-config ADK_KPACKAGE_KMOD_BT_L2CAP
-	prompt "kmod-bluetooth-l2cap.............. L2CAP protocol support"
-	tristate
+config ADK_KERNEL_BT_L2CAP
+	prompt "........................... L2CAP protocol support"
+	boolean
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
 	help
@@ -33,9 +33,9 @@ config ADK_KPACKAGE_KMOD_BT_L2CAP
 	  support is required for most Bluetooth applications.
 
 
-config ADK_KPACKAGE_KMOD_BT_SCO
-	prompt "kmod-bluetooth-sco................ SCO links support"
-	tristate
+config ADK_KERNEL_BT_SCO
+	prompt "........................... SCO links support"
+	boolean
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
 	help
@@ -43,7 +43,7 @@ config ADK_KPACKAGE_KMOD_BT_SCO
 	  required for voice applications like Headset and Audio.
 
 config ADK_KPACKAGE_KMOD_BT_RFCOMM
-	prompt "kmod-bluetooth-rfcomm............. RFCOMM protocol support"
+	prompt "kmod-bt-rfcomm............. RFCOMM protocol support"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -54,7 +54,7 @@ config ADK_KPACKAGE_KMOD_BT_RFCOMM
 	  applications.
 
 config ADK_KPACKAGE_KMOD_BT_BNEP
-	prompt "kmod-bluetooth-bnep............... BNEP protocol support"
+	prompt "kmod-bt-bnep............... BNEP protocol support"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -65,7 +65,7 @@ config ADK_KPACKAGE_KMOD_BT_BNEP
 	  Bluetooth PAN (Personal Area Network).
 
 config ADK_KPACKAGE_KMOD_BT_HIDP
-	prompt "kmod-bluetooth-hidp............... HIDP protocol support"
+	prompt "kmod-bt-hidp............... HIDP protocol support"
 	tristate
 	default n
 	select ADK_KERNEL_INPUT
@@ -78,7 +78,7 @@ config ADK_KPACKAGE_KMOD_BT_HIDP
 	  Interface Device Profile.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
-	prompt "kmod-bluetooth-hci-usb............ HCI USB driver"
+	prompt "kmod-bt-hci-usb............ HCI USB driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -88,7 +88,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	  USB interface.
 
 config ADK_KPACKAGE_KMOD_BT_HCIUART
-	prompt "kmod-bluetooth-hci-uart........... HCI UART driver"
+	prompt "kmod-bt-hci-uart........... HCI UART driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -100,7 +100,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIUART
 	  adapter and BrainBoxes Bluetooth PC Card.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
-	prompt "kmod-bluetooth-hci-bcm203x........ HCI BCM203x USB driver"
+	prompt "kmod-bt-hci-bcm203x........ HCI BCM203x USB driver"
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_FW_LOADER
@@ -112,7 +112,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
 	  Blutonium based devices.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBPA10X
-	prompt "kmod-bluetooth-hci-bpa10x......... HCI BPA10x USB driver"
+	prompt "kmod-bt-hci-bpa10x......... HCI BPA10x USB driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT

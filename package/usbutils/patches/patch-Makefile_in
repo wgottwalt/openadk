@@ -1,0 +1,11 @@
+--- usbutils-003.orig/Makefile.in	2011-06-16 02:37:51.000000000 +0200
++++ usbutils-003/Makefile.in	2011-06-16 17:45:11.596951462 +0200
+@@ -298,7 +298,7 @@ EXTRA_DIST = \
+ 	lsusb.py \
+ 	usbutils.pc.in
+ 
+-pkgconfigdir = $(datarootdir)/pkgconfig
++pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = usbutils.pc
+ DISTCLEANFILES = \
+ 	usb.ids.gz \

@@ -22,7 +22,8 @@ CONFIGURE_ARGS+=	--without-ffmpeg \
 			--without-jpeg-mmx \
 			--without-optimizecpu \
 			--without-mysql \
-			--without-pgsql
+			--without-pgsql \
+			--without-v4l
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MOTION}/usr/bin
