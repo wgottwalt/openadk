@@ -37,6 +37,8 @@ post-install:
 		${IDIR_OPENCT}/usr/bin
 	${INSTALL_DATA} ${WRKBUILD}/etc/openct.conf \
 		${IDIR_OPENCT}/etc
+
+libopenct-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENCT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libopenct.so* \
 		${IDIR_LIBOPENCT}/usr/lib

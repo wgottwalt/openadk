@@ -26,7 +26,7 @@ done
 mount /dev/sda1 /boot
 mkdir -p /var/run/openct
 openct-control init
-pcscd -f &
+pcscd -f >/dev/null &
 sleep 2
 
 fail=0
@@ -57,9 +57,9 @@ echo "254:0" > /sys/power/resume
 cryptsetup -d /tmp/skey --batch-mode luksOpen $root rootcrypt
 swapon /dev/mapper/swapcrypt
 mount /dev/mapper/rootcrypt /mnt
+pkill pcscd
+rm /tmp/skey
 umount /proc
 umount /sys
 umount /dev/pts
-rm /tmp/skey
-pkill pcscd
 umount /tmp
