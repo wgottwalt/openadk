@@ -21,9 +21,13 @@ $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
+ifeq ($(ADK_NATIVE),)
 CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME)
+else
+CONFIGURE_ARGS+=	--disable-werror
+endif
 
 pre-build:
 	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
