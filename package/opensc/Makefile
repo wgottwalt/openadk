@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
 PKG_VERSION:=		0.11.13
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		crypto
@@ -46,6 +46,10 @@ post-install:
 		 ${IDIR_OPENSC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/pkcs15-tool \
 		 ${IDIR_OPENSC}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/pkcs15-crypt \
+		 ${IDIR_OPENSC}/usr/bin
+
+libopensc-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libopensc.so* \
 		${IDIR_LIBOPENSC}/usr/lib
