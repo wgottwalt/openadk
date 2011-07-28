@@ -130,9 +130,13 @@ rootdisk=${rootdisk%p*}
 rootdisk=${rootdisk%[1-9]}
 part=$(fdisk -l /dev/$rootdisk 2>/dev/null|awk '$5 == 88 { print $1 }')
 if [ -z $part ]; then
-	# otherwise search for MTD device with name cfgfs
-	part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
-	mtd=1
+	# fallback to /dev/sda in case of encrypted root
+	part=$(fdisk -l /dev/sda 2>/dev/null|awk '$5 == 88 { print $1 }')
+	if [ -z $part ]; then
+		# otherwise search for MTD device with name cfgfs
+		part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
+		mtd=1
+	fi
 fi
 
 if [[ ! -e $part ]]; then
