@@ -19,7 +19,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips64 mips64el native
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
@@ -31,16 +31,6 @@ $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
-ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
-CONFIGURE_ARGS+=	--disable-ipc
-else ifeq (${ADK_TARGET_LIB_UCLIBC},y)
-CONFIGURE_ARGS+=	--disable-ipc
-else
-CONFIGURE_ARGS+=	--enable-ipc
-endif
-
-TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_CC="${CC_FOR_BUILD}" \

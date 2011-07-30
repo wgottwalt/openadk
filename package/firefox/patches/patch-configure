@@ -1,6 +1,6 @@
---- mozilla-2.0.orig/configure	2011-03-19 00:48:56.000000000 +0100
-+++ mozilla-2.0/configure	2011-04-24 06:37:26.000000000 +0200
-@@ -23503,6 +23503,9 @@ fi
+--- mozilla-release.orig/configure	2011-07-08 03:30:27.000000000 +0200
++++ mozilla-release/configure	2011-07-29 15:50:35.000000000 +0200
+@@ -23504,6 +23504,9 @@ fi
      fi
  fi
  
@@ -9,4 +9,4 @@
 +
  if test -n "$CROSS_COMPILE"; then
      case "$target" in
-     *-mingw*|*-cygwin*|*-msvc*|*-mks*)
+     *-mingw*)
