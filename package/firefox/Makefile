@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		4.0
+PKG_VERSION:=		5.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3468a2c463b4fc2788ba621e4b511c30
+PKG_MD5SUM:=		6d1f43e402cec84459a3d7f950bd5192
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff
@@ -23,11 +23,14 @@ PKG_ARCH_DEPENDS:=	x86 x86_64 mips64 mips64el native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
-WRKDIST=		${WRKDIR}/mozilla-2.0
+WRKDIST=		${WRKDIR}/mozilla-release
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+# disable honour cflags stuff
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 CONFIGURE_ARGS+=	--disable-ipc
@@ -84,7 +87,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-svg \
 			--disable-mathml \
 			--disable-jemalloc \
-			--disable-crashreporter
+			--disable-crashreporter \
+			--disable-elf-hack
 
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"

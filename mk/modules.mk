@@ -62,6 +62,9 @@ $(eval $(call KMOD_template,R8169,r8169,\
 # 
 # Wireless network devices
 #
+$(eval $(call KMOD_template,RFKILL,rfkill,\
+	$(MODULES_DIR)/kernel/net/rfkill/rfkill \
+,10))
 
 $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \

@@ -227,7 +227,6 @@ config BUSYBOX_RPM
 
 config BUSYBOX_TAR
 	bool "tar"
-	depends on !ADK_PACKAGE_TAR
 	default y
 	help
 	  tar is an archiving program. It's commonly used with gzip to
