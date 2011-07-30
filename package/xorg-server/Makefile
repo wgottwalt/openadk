@@ -105,7 +105,7 @@ xorg-server-install:
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 	${CP} ./files/xorg.conf.lemote-yeelong \
-		$(IDIR_XORG_SERVER)/etc/X11
+		$(IDIR_XORG_SERVER)/etc/X11/xorg.conf
 endif
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
