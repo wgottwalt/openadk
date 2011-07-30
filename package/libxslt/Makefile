@@ -42,7 +42,7 @@ xsltproc-install:
 
 libxslt-install:
 	${INSTALL_DIR} ${IDIR_LIBXSLT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libxslt.so* ${IDIR_LIBXSLT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/lib?xslt.so* ${IDIR_LIBXSLT}/usr/lib
 
 libxslt-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXSLT_DEV}/usr/include
