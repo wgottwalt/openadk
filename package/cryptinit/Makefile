@@ -8,13 +8,16 @@ PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		init for encrypted rootfilesystem
 PKG_SECTION:=		base
-PKG_DEPENDS:=		cryptsetup opensc pcsc-lite
+PKG_DEPENDS:=		cryptsetup
 
 PKG_CFLINE_CRYPTINIT:=	select BUSYBOX_STTY@
 PKG_CFLINE_CRYPTINIT+=	select BUSYBOX_SWITCH_ROOT@
 
-PKG_FLAVOURS_CRYPTINIT:=NO_GRUB
+PKG_FLAVOURS_CRYPTINIT:=SC NO_GRUB
 PKGFD_NO_GRUB:=		predefine root/swap partition (without grub)
+PKGFD_SC:=		with smartcard support
+PKGFS_SC:=		ccid openct opensc pcsc-lite
+PKGFB_SC:=		ccid openct opensc pcsc-lite
 
 PKG_FLAVOURS_STRING_CRYPTINIT:=	ROOT SWAP
 PKGFD_ROOT:=		root partition
@@ -39,6 +42,10 @@ do-install:
 	$(INSTALL_DIR) $(IDIR_CRYPTINIT)/sbin
 	$(TARGET_CC) $(TARGET_CFLAGS) -Wall -o $(IDIR_CRYPTINIT)/sbin/p \
 		./src/p.c
+ifeq ($(ADK_PACKAGE_CRYPTINIT_SC),y)
+	$(INSTALL_BIN) ./src/cryptinitsc $(IDIR_CRYPTINIT)/cryptinit
+else
 	$(INSTALL_BIN) ./src/cryptinit $(IDIR_CRYPTINIT)/
+endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

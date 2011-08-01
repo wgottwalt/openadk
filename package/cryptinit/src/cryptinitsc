@@ -1,0 +1,65 @@
+#!/bin/sh
+
+load_modules() {
+	(sed "s,^[^#][^[:space:]]*,insmod /lib/modules/$(uname -r)/&.ko," $* | sh 2>&- || :)
+}
+
+echo -n "Kernel currently running: "
+uname -rsmo
+echo -n "Kernel parameters: "; cat /proc/cmdline
+for word in $(cat /proc/cmdline) ; do
+    case $word in
+         [a-z]*=*)
+             eval "export $word"
+             ;;
+    esac
+done
+
+echo 0 > /proc/sys/kernel/printk
+
+load_modules /etc/modules
+for f in /etc/modules.d/*; do
+	[[ -e $f ]] && load_modules /etc/modules.d/*
+	break
+done
+
+mount /dev/sda1 /boot
+mkdir -p /var/run/openct
+openct-control init
+pcscd -f >/dev/null &
+sleep 2
+
+fail=0
+count=0
+while true; do
+	pkcs15-crypt --decipher --input /boot/key  --pkcs1 --raw >/tmp/skey
+	cryptsetup -d /tmp/skey --batch-mode luksOpen $swap swapcrypt
+	if [ $? = 0 ];then
+		break
+	fi
+	if [ $count = 2 ];then
+		echo "You are not allowed"
+		sleep 3
+		fail=1
+		break
+	fi
+	count=$(($count+1))
+done
+
+if [ $fail -eq 1 ];then
+	echo "Poweroff."
+	p
+fi
+
+echo "Try to resume from hibernation"
+echo "254:0" > /sys/power/resume
+
+cryptsetup -d /tmp/skey --batch-mode luksOpen $root rootcrypt
+swapon /dev/mapper/swapcrypt
+mount /dev/mapper/rootcrypt /mnt
+pkill pcscd
+rm /tmp/skey
+umount /proc
+umount /sys
+umount /dev/pts
+umount /tmp

@@ -1,6 +1,3 @@
-config ADK_KERNEL_RFKILL
- 	boolean
-
 config ADK_KERNEL_I2C
  	boolean
  

@@ -1,5 +1,5 @@
 --- cups-1.4.4.orig/configure	2010-06-17 20:25:47.000000000 +0200
-+++ cups-1.4.4/configure	2010-10-03 01:12:27.000000000 +0200
++++ cups-1.4.4/configure	2011-07-29 16:46:45.000000000 +0200
 @@ -1966,7 +1966,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  
@@ -29,3 +29,12 @@
  fi
  
  if test x$enable_debug_printfs = xyes; then
+@@ -11199,7 +11199,7 @@ eval "echo \"\$as_me:$LINENO: $ac_try_ec
+ 	 test -z "$ac_c_werror_flag" ||
+ 	 test ! -s conftest.err
+        } && test -s conftest.$ac_objext; then
+-  PIEFLAGS="-pie -fPIE"
++  PIEFLAGS=""
+ 		{ echo "$as_me:$LINENO: result: yes" >&5
+ echo "${ECHO_T}yes" >&6; }
+ else

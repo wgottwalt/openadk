@@ -1,6 +1,6 @@
---- mozilla-2.0.orig/content/media/nsAudioStream.cpp	2011-03-19 00:33:34.000000000 +0100
-+++ mozilla-2.0/content/media/nsAudioStream.cpp	2011-04-23 23:18:01.000000000 +0200
-@@ -570,7 +570,7 @@ PRInt64 nsAudioStreamLocal::GetSampleOff
+--- mozilla-release.orig/content/media/nsAudioStream.cpp	2011-07-08 03:15:16.000000000 +0200
++++ mozilla-release/content/media/nsAudioStream.cpp	2011-07-29 15:50:34.000000000 +0200
+@@ -566,7 +566,7 @@ PRInt64 nsAudioStreamLocal::GetSampleOff
  #if defined(XP_WIN)
    positionType = SA_POSITION_WRITE_HARDWARE;
  #endif

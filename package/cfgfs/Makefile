@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.8
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/

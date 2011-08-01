@@ -200,7 +200,7 @@ config ADK_KPACKAGE_KMOD_USB_PEGASUS
 config ADK_KPACKAGE_KMOD_USB_HSO
 	prompt "kmod-usb-hso...................... Support for USB HSO devices"
 	tristate
-	select ADK_KERNEL_RFKILL
+	select ADK_KPACKAGE_KMOD_RFKILL
 	select ADK_KPACKAGE_KMOD_USB_STORAGE
 	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER

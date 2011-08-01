@@ -65,7 +65,7 @@ ifneq ($(ADK_TARGET_CMDLINE),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
-ifneq ($(ADK_PACKAGE_CMDLINE),)
+ifneq ($(ADK_PACKAGE_CRYPTINIT_ROOT),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_PACKAGE_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif

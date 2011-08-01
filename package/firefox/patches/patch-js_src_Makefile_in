@@ -1,6 +1,6 @@
---- mozilla-2.0.orig/js/src/Makefile.in	2011-03-19 00:33:47.000000000 +0100
-+++ mozilla-2.0/js/src/Makefile.in	2011-04-24 19:54:11.707672834 +0200
-@@ -375,7 +375,7 @@ CPPSRCS += 	checks.cc \
+--- mozilla-release.orig/js/src/Makefile.in	2011-07-08 03:15:23.000000000 +0200
++++ mozilla-release/js/src/Makefile.in	2011-07-29 15:50:36.000000000 +0200
+@@ -391,7 +391,7 @@ CPPSRCS += 	checks.cc \
  # END enclude sources for V8 dtoa
  #############################################
  
