@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		glib bzip2 e2fsprogs
 PKG_URL:=		http://www.linux-ha.org/wiki/Cluster_Glue
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_CFLINE_CLUSTER_GLUE:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CLUSTER_GLUE,cluster-glue,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

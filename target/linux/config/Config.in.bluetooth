@@ -82,6 +82,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
+	depends on ADK_TARGET_WITH_USB
 	help
 	  Bluetooth HCI USB driver.
 	  This driver is required if you want to use Bluetooth devices with
@@ -106,6 +107,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	depends on ADK_KPACKAGE_KMOD_BT
+	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
 	help
 	  Bluetooth HCI BCM203x USB driver.
 	  This driver provides the firmware loading mechanism for the Broadcom

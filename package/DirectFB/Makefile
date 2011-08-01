@@ -38,10 +38,9 @@ CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 # This is to overcome libtool fuckup - when building without,
 # libtool calls (the correct) ld directly without parameters,
 # which then chooses the wrong default emulation (which is
-# probably the real problem here). LDEMULATION overrides ld's
-# wrong choice.
+# probably the real problem here).
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
-XAKE_FLAGS+=		LDEMULATION=elf64ltsmip
+XAKE_FLAGS+=		LDFLAGS=$(ADK_TARGET_ABI_CFLAGS)
 endif
 
 post-install:

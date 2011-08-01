@@ -12,6 +12,8 @@ PKG_SECTION:=		ha
 PKG_URL:=		https://github.com/ClusterLabs/resource-agents
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_CFLINE_RESOURCE_AGENTS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RESOURCE_AGENTS,resource-agents,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

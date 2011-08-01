@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-32749
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips
 
 PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -30,15 +30,12 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # gcc 4.5 produces internal compiler error with -Os
-TCFLAGS:=$(subst Os,O2,$(TCFLAGS))
+TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 
 CONFIG_STYLE:=		minimal
 FAKE_FLAGS+=		INSTALLSTRIP=''
 
-ifeq (${ADK_LINUX_MIPS64EL},y)
-EXTRA_CFLAGS:=		-DARCH_MIPS64
-endif
-ifeq (${ADK_LINUX_MIPS64},y)
+ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 EXTRA_CFLAGS:=		-DARCH_MIPS64
 endif
 

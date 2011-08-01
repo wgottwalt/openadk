@@ -32,14 +32,11 @@ endchoice
 choice
 prompt "Target Kernel"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-config ADK_TARGET_KERNEL
-        boolean "Choose target kernel"
+config ADK_TARGET_KERNEL64
+	boolean "64 Bit Kernel"
 
 config ADK_TARGET_KERNEL32
 	boolean "32 Bit Kernel"
-
-config ADK_TARGET_KERNEL64
-	boolean "64 Bit Kernel"
 
 endchoice
 
@@ -61,16 +58,14 @@ config ADK_TARGET_ABI
 choice
 prompt "Target ABI"
 depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
-config ADK_ABI
-        boolean "Choose target ABI"
-
-config ADK_TARGET_ABI_O32
-	boolean "O32 ABI (old)"
-	select ADK_o32
 
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI (new)"
 	select ADK_n32
+
+config ADK_TARGET_ABI_O32
+	boolean "O32 ABI (old)"
+	select ADK_o32
 
 config ADK_TARGET_ABI_N64
 	boolean "N64 ABI"
@@ -268,6 +263,12 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-mabi=32" if ADK_TARGET_ABI_O32
 	default "-mabi=n32 -Wl,-m -Wl,elf32ltsmipn32" if ADK_TARGET_ABI_N32
 	default "-mabi=64 -Wl,-m -Wl,elf64ltsmip" if ADK_TARGET_ABI_N64
+
+config ADK_TARGET_KERNEL_LDFLAGS
+	string
+	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_N32
+	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_O32
+	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_N64
 
 config ADK_TARGET_CFLAGS
 	string

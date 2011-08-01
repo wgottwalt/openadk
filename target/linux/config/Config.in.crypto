@@ -65,6 +65,8 @@ config ADK_KPACKAGE_KMOD_OCF_HIFN
 	default n
 	select ADK_KERNEL_OCF_OCF
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
+	depends on !ADK_HARDWARE_QEMU
+	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
 	select ADK_KPACKAGE_KMOD_CRYPTO_AES
 	help
 	  Engine for cryptodev that uses Hifn based accelerators

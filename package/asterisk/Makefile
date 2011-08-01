@@ -60,6 +60,7 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-nbs \
 			--without-netsnmp \
 			--without-newt \
+			--without-openais \
 			--without-osptk \
 			--without-oss \
 			--without-popt \
