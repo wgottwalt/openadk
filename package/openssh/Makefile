@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		5.6p1
+PKG_VERSION:=		5.8p2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e6ee52e47c768bf0ec42a232b5d18fb0
+PKG_MD5SUM:=		0541579adf9d55abb15ef927048d372e
 PKG_DESCR:=		OpenSSH
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl libpthread
