@@ -25,6 +25,7 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://icedtea.classpath.org/download/source/
 
 PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6

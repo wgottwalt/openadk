@@ -940,8 +940,6 @@ $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
-    $(MODULES_DIR)/kernel/lib/lzo/lzo_compress \
-    $(MODULES_DIR)/kernel/lib/lzo/lzo_decompress \
     $(MODULES_DIR)/kernel/crypto/lzo \
 ,10))
 
