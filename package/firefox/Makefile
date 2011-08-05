@@ -21,6 +21,7 @@ PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
+PKG_SYSTEM_DEPENDS:=	ibm-x40
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release

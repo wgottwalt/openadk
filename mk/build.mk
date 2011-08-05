@@ -14,7 +14,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_LOCALES=n \
 			ADK_MAKE_PARALLEL=y \
-			ADK_MAKE_JOBS=1 \
+			ADK_MAKE_JOBS=4 \
 			ADK_USE_CCACHE=n \
 			ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER=n \
 			ADK_PACKAGE_GRUB=n \
@@ -555,11 +555,11 @@ bulkallmod:
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system >.exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+	    if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
 	done
 
