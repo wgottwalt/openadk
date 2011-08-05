@@ -78,7 +78,7 @@ config ADK_KPACKAGE_KMOD_BT_HIDP
 	  Interface Device Profile.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
-	prompt "kmod-bt-hci-usb............ HCI USB driver"
+	prompt "kmod-bt-hcibtusb.......... HCI USB driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -89,7 +89,7 @@ config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	  USB interface.
 
 config ADK_KPACKAGE_KMOD_BT_HCIUART
-	prompt "kmod-bt-hci-uart........... HCI UART driver"
+	prompt "kmod-bt-hciuart........... HCI UART driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_BT
@@ -101,13 +101,13 @@ config ADK_KPACKAGE_KMOD_BT_HCIUART
 	  adapter and BrainBoxes Bluetooth PC Card.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
-	prompt "kmod-bt-hci-bcm203x........ HCI BCM203x USB driver"
+	prompt "kmod-bt-hcibcm203x........ HCI BCM203x USB driver"
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	depends on ADK_KPACKAGE_KMOD_BT
-	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
+	depends on ADK_TARGET_WITH_USB
 	help
 	  Bluetooth HCI BCM203x USB driver.
 	  This driver provides the firmware loading mechanism for the Broadcom
