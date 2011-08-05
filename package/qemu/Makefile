@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		0.14.0
+PKG_VERSION:=		0.14.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f9d145d5c09de9f0984ffe9bd1229970
+PKG_MD5SUM:=		b6c713a8db638e173af53a62d5178640
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl
@@ -23,7 +23,6 @@ $(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
-			--disable-user \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--bindir=/usr/bin

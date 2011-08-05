@@ -19,15 +19,15 @@ PKG_CXX:=		pcrepp
 PKG_CFLINE_PCREPP:=	depends on ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC
 
 DISTFILES:=		pcre++-${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/pcre++-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PCREPP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-extract:
-	mv ${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}/pcre++-${PKG_VERSION} ${WRKBUILD}
-
 post-install:
-	${CP} ${WRKINST}/* ${WRKINST}/../pkg-${PKG_NAME}
+	$(INSTALL_DIR) $(IDIR_PCREPP)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libpcre++.so* \
+		$(IDIR_PCREPP)/usr/lib
 	
 include ${TOPDIR}/mk/pkg-bottom.mk
