@@ -49,6 +49,12 @@ config ADK_KERNEL_RD_LZO
 config ADK_KERNEL_KERNEL_LZO
 	boolean
 
+config ADK_KERNEL_RD_XZ
+	boolean
+
+config ADK_KERNEL_KERNEL_XZ
+	boolean
+
 config ADK_KERNEL_INITRAMFS_SOURCE
 	string
 	default ""
