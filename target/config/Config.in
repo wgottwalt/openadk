@@ -230,6 +230,9 @@ config ADK_CPU_I686
 config ADK_CPU_GEODE
 	boolean
 
+config ADK_CPU_PPC
+	boolean
+
 config ADK_CPU_PENTIUM_M
 	boolean
 
@@ -257,6 +260,7 @@ config ADK_TARGET_CPU_ARCH
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
+	default "powerpc" if ADK_CPU_PPC
 
 config ADK_TARGET_ABI_CFLAGS
 	string
