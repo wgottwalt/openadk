@@ -19,8 +19,9 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips native
+PKG_ARCH_DEPENDS:=	x86 x86_64 native
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
+PKG_SYSTEM_DEPENDS:=	ibm-x40
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
@@ -78,6 +79,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-mathml \
 			--disable-jemalloc \
 			--disable-crashreporter \
+			--disable-libjpeg-turbo \
 			--disable-elf-hack
 
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)

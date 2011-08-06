@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.55
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		b093d7c6bc7f97ae6fd35d048529232a
+PKG_VERSION:=		2.57
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d10faeb409717eae94718d7716ca63a4
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
@@ -20,7 +20,7 @@ CONFIG_STYLE:=		manual
 
 post-install:
 	${INSTALL_DIR} ${IDIR_DNSMASQ}/usr/sbin ${IDIR_DNSMASQ}/etc
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnsmasq ${IDIR_DNSMASQ}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/dnsmasq ${IDIR_DNSMASQ}/usr/sbin
 	${INSTALL_DATA} ./files/dnsmasq.conf ${IDIR_DNSMASQ}/etc/dnsmasq.conf
 
 include ${TOPDIR}/mk/pkg-bottom.mk

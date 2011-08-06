@@ -44,7 +44,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-build:
+pre-build:
 	# we need to patch paths to get apr-util compiling
 	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
 		${WRKBUILD}/apr-1-config

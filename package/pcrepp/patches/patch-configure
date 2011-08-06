@@ -1,0 +1,20 @@
+--- pcre++-0.9.5.orig/configure	2004-08-25 01:38:03.000000000 +0200
++++ pcre++-0.9.5/configure	2011-08-05 07:30:53.000000000 +0200
+@@ -8612,7 +8612,7 @@ if test "x$with_pcre_include" = "x"; the
+ 			CPPFLAGS="$CPPFLAGS -I/include"
+ 			;;
+ 	*-*-linux*)
+-			CPPFLAGS="$CPPFLAGS `pcre-config --cflags` -I/usr/include -I/usr/local/include"
++			CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
+ 			;;
+ 	*-*-freebsd*)
+ 			CPPFLAGS="$CPPFLAGS `pcre-config --cflags` -I/usr/local/include"
+@@ -8621,7 +8621,7 @@ if test "x$with_pcre_include" = "x"; the
+ 			CPPFLAGS="$CPPFLAGS `pcre-config --cflags` -I$prefix/include -I/usr/local/include"
+ 			;;
+ 	*)
+-			CPPFLAGS="-I/usr/include -I/usr/local/include"
++			CPPFLAGS="$CPPFLAGS `pcre-config --cflags`"
+ 			;;
+    esac
+ fi

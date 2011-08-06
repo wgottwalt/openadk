@@ -111,6 +111,7 @@ config ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_MISC_DEVICES
  	default n
  	help
  

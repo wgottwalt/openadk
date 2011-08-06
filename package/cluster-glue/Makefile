@@ -14,6 +14,7 @@ PKG_URL:=		http://www.linux-ha.org/wiki/Cluster_Glue
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_CFLINE_CLUSTER_GLUE:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_HOST_DEPENDS:=	!darwin
 
 include $(TOPDIR)/mk/package.mk
 

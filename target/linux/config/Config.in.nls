@@ -2,30 +2,16 @@ menu "Native Language support"
 
 config ADK_KERNEL_NLS
 	boolean
-	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX416
-	default n
+	default y
 
 config ADK_KERNEL_NLS_DEFAULT
 	string
 	default "iso8859-1"
 
-config ADK_KPACKAGE_KMOD_NLS
-	prompt "kmod-nls.......................... Base native language support"
-	tristate
-	depends on !ADK_KERNEL_NLS
-	default n
-	help
-	  The base Native Language Support. A number of filesystems
-	  depend on it (e.g. FAT, JOLIET, NT, BEOS filesystems), as well
-	  as the ability of some filesystems to use native languages
-	  (NCP, SMB).
-
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_437
 	prompt   "kmod-nls-codepage-437........... Codepage 437 (United States, Canada)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored
@@ -40,7 +26,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_737
 	prompt   "kmod-nls-codepage-737........... Codepage 737 (Greek)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored
@@ -55,7 +40,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_775
 	prompt   "kmod-nls-codepage-775........... Codepage 775 (Baltic Rim)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored
@@ -71,7 +55,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	prompt   "kmod-nls-codepage-850........... Codepage 850 (Western European Languages)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -88,7 +71,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_852
         prompt   "kmod-nls-codepage-852........... Codepage 852 (Eastern European Languages)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -106,7 +88,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_855
         prompt   "kmod-nls-codepage-855........... Codepage 855 (Cyrillic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -120,7 +101,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_857
         prompt   "kmod-nls-codepage-857........... Codepage 857 (Turkish)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -134,7 +114,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_860
         prompt   "kmod-nls-codepage-860........... Codepage 860 (Portuguese)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -148,7 +127,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_861
         prompt   "kmod-nls-codepage-861........... Codepage 861 (Icelandic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -162,7 +140,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_862
         prompt   "kmod-nls-codepage-862........... Codepage 862 (Hebrew)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -176,7 +153,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_863
         prompt   "kmod-nls-codepage-863........... Codepage 863 (French Canadian)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -191,7 +167,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_864
         prompt   "kmod-nls-codepage-864........... Codepage 864 (Arabic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -205,7 +180,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_865
         prompt   "kmod-nls-codepage-865........... Codepage 865 (Norwegian, Danish)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -220,7 +194,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_866
         prompt   "kmod-nls-codepage-866........... Codepage 866 (Cyrillic/Russian)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -235,7 +208,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_869
         prompt   "kmod-nls-codepage-869........... Codepage 869 (Greek)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -249,7 +221,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_874
         prompt   "kmod-nls-codepage-874........... Codepage 874 (Thai)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -263,7 +234,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_932
         prompt   "kmod-nls-codepage-932........... Codepage 932 (Japanese)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -279,7 +249,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_936
         prompt   "kmod-nls-codepage-936........... Codepage 936 (Simplified Chinese)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -294,7 +263,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_949
         prompt   "kmod-nls-codepage-949........... Codepage 949 (Korean)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -308,7 +276,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_950
         prompt   "kmod-nls-codepage-950........... Codepage 950 (Traditional Chinese)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -323,7 +290,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1250
         prompt   "kmod-nls-codepage-1250.......... Codepage 1250 (Slavic/Central European)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CDROMs
@@ -337,7 +303,6 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1251
         prompt   "kmod-nls-codepage-1251.......... Codepage 1251 (Bulgarian, Belarusian)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  The Microsoft FAT file system family can deal with filenames in
 	  native language character sets. These character sets are stored in
@@ -352,7 +317,6 @@ config ADK_KPACKAGE_KMOD_NLS_ASCII
 	prompt   "kmod-nls-ascii.................. ASCII (United States)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  An ASCII NLS module is needed if you want to override the
 	  DEFAULT NLS with this very basic charset and don't want any
@@ -362,7 +326,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	prompt   "kmod-nls-iso8859-1.............. NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -377,7 +340,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_2
         prompt   "kmod-nls-iso8859-2.............. NLS ISO 8859-2 (Latin-2; Central European Languages)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -391,7 +353,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_3
         prompt   "kmod-nls-iso8859-3.............. NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -404,7 +365,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_4
         prompt   "kmod-nls-iso8859-4.............. NLS ISO 8859-4 (Latin-4; old Baltic charset)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -417,7 +377,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_5
         prompt   "kmod-nls-iso8859-5.............. NLS ISO 8859-5 (Cyrillic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -431,7 +390,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_6
         prompt   "kmod-nls-iso8859-6.............. NLS ISO 8859-6 (Arabic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -443,7 +401,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_7
         prompt   "kmod-nls-iso8859-7.............. NLS ISO 8859-7 (Greek)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -455,7 +412,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_8
         prompt   "kmod-nls-iso8859-8.............. NLS ISO 8859-8 (Hebrew)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -467,7 +423,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_9
         prompt   "kmod-nls-iso8859-9.............. NLS ISO 8859-9 (Latin-5; Turkish)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -480,7 +435,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_13
         prompt   "kmod-nls-iso8859-13............. NLS ISO 8859-13 (Latin-7; Baltic Rim)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -493,7 +447,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_14
         prompt   "kmod-nls-iso8859-14............. NLS ISO 8859-14 (Latin-8; Celtic)"
         tristate
         default n
-        select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
         help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -507,7 +460,6 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_15
 	prompt   "kmod-nls-iso8859-15............. NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -526,7 +478,6 @@ config ADK_KPACKAGE_KMOD_NLS_KOI8_R
 	prompt   "kmod-nls-koi8-r................. NLS KOI8-R (Cryllic for Russian and Bulgarian"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -538,7 +489,6 @@ config ADK_KPACKAGE_KMOD_NLS_KOI8_U
 	prompt   "kmod-nls-koi8-u................. NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -550,7 +500,6 @@ config ADK_KPACKAGE_KMOD_NLS_UTF8
 	prompt   "kmod-nls-utf8................... NLS UTF8"
 	tristate
 	default n
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs

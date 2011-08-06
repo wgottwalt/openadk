@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
-# Version: 0.9.32-rc1
-# Fri Dec 31 11:58:18 2010
+# Version: 0.9.32
+# Mon Aug  1 15:09:09 2011
 #
 # TARGET_alpha is not set
 # TARGET_arm is not set
@@ -28,6 +28,7 @@ TARGET_mips=y
 # TARGET_vax is not set
 # TARGET_x86_64 is not set
 # TARGET_xtensa is not set
+# TARGET_c6x is not set
 
 #
 # Target Architecture Features and Options
@@ -100,6 +101,7 @@ COMPAT_ATEXIT=y
 UCLIBC_SUSV3_LEGACY=y
 # UCLIBC_SUSV3_LEGACY_MACROS is not set
 UCLIBC_SUSV4_LEGACY=y
+# UCLIBC_STRICT_HEADERS is not set
 # UCLIBC_HAS_STUBS is not set
 UCLIBC_HAS_SHADOW=y
 UCLIBC_HAS_PROGRAM_INVOCATION_NAME=y
@@ -208,6 +210,7 @@ UCLIBC_HAS_FNMATCH=y
 UCLIBC_HAS_WORDEXP=y
 UCLIBC_HAS_NFTW=y
 UCLIBC_HAS_FTW=y
+UCLIBC_HAS_FTS=y
 UCLIBC_HAS_GLOB=y
 UCLIBC_HAS_GNU_GLOB=y
 # UCLIBC_HAS_UTMPX is not set
@@ -242,6 +245,7 @@ DOSTRIP=y
 # SUPPORT_LD_DEBUG is not set
 # SUPPORT_LD_DEBUG_EARLY is not set
 # UCLIBC_MALLOC_DEBUGGING is not set
+# UCLIBC_HAS_BACKTRACE is not set
 WARNINGS="-Wall"
 EXTRA_WARNINGS=y
 # DOMULTI is not set

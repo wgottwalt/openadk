@@ -1,6 +1,6 @@
---- pcrepp-0.9.5.orig/Makefile.in	2011-05-13 10:25:39.126696935 +0200
-+++ pcrepp-0.9.5/Makefile.in	2011-05-13 10:18:08.619616044 +0200
-@@ -77,7 +77,7 @@
+--- pcre++-0.9.5.orig/Makefile.in	2004-08-25 01:38:03.000000000 +0200
++++ pcre++-0.9.5/Makefile.in	2011-08-05 07:28:46.000000000 +0200
+@@ -77,7 +77,7 @@ RANLIB = @RANLIB@
  STRIP = @STRIP@
  VERSION = @VERSION@
  

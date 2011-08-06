@@ -1,20 +1,8 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dropbear-0.52.orig/options.h	2008-11-11 15:13:50.000000000 +0100
-+++ dropbear-0.52/options.h	2010-03-14 23:30:26.277667006 +0100
-@@ -10,6 +10,11 @@
-  * parts are to allow for commandline -DDROPBEAR_XXX options etc.
-  ******************************************************************/
- 
-+#if !defined(DROPBEAR_CLIENT) && !defined(DROPBEAR_SERVER)
-+#define DROPBEAR_SERVER
-+#define DROPBEAR_CLIENT
-+#endif
-+
- #ifndef DROPBEAR_DEFPORT
- #define DROPBEAR_DEFPORT "22"
+--- dropbear-0.53.1.orig/options.h	2011-03-02 14:23:36.000000000 +0100
++++ dropbear-0.53.1/options.h	2011-08-02 20:03:13.000000000 +0200
+@@ -144,7 +144,7 @@ much traffic. */
  #endif
-@@ -129,7 +134,7 @@ etc) slower (perhaps by 50%). Recommende
- /* #define DSS_PROTOK */
  
  /* Whether to do reverse DNS lookups. */
 -#define DO_HOST_LOOKUP
@@ -22,11 +10,11 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  /* Whether to print the message of the day (MOTD). This doesn't add much code
   * size */
-@@ -220,7 +225,7 @@ etc) slower (perhaps by 50%). Recommende
+@@ -236,7 +236,7 @@ much traffic. */
  /* The command to invoke for xauth when using X11 forwarding.
   * "-q" for quiet */
  #ifndef XAUTH_COMMAND
--#define XAUTH_COMMAND "/usr/X11R6/bin/xauth -q"
+-#define XAUTH_COMMAND "/usr/bin/X11/xauth -q"
 +#define XAUTH_COMMAND "/usr/bin/xauth -q"
  #endif
  

@@ -13,6 +13,7 @@ PKG_URL:=		http://llvm.org/
 PKG_SITES:=		http://llvm.org/releases/2.9/
 
 PKG_CFLINE_LLVM:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
 
