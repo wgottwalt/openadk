@@ -13,8 +13,12 @@ include ../rules.mk
 
 install: ${STAGING_JAVA_HOST_DIR}/usr/share/classpath/glibj.zip
 
+CPENV:=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
+	PATH=${STAGING_JAVA_HOST_DIR}/usr/bin:$$PATH \
+	CLASSPATH=${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar
+
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
-	(cd $(WRKBUILD); ./configure --prefix=${STAGING_JAVA_HOST_DIR}/usr \
+	(cd $(WRKBUILD); env $(CPENV) ./configure --prefix=${STAGING_JAVA_HOST_DIR}/usr \
 		--disable-local-sockets \
 		--disable-alsa \
 		--disable-gconf-peer \
@@ -29,7 +33,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	touch $@
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
-	${MAKE} -C ${WRKBUILD}
+	env $(CPENV) ${MAKE} -C ${WRKBUILD}
 	touch $@
 
 ${STAGING_JAVA_HOST_DIR}/usr/share/classpath/glibj.zip: $(WRKBUILD)/.compiled

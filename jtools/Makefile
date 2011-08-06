@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 TARGETS:=
 ifneq ($(ADK_PACKAGE_OPENJDK),)
-TARGETS+=fastjar gcj ecj jikes jamvm classpath ant openjdk
+TARGETS+=fastjar gcj ecj jikes classpath jamvm ant openjdk
 endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))

@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		openjdk
 PKG_VERSION:=		6
 PKG_EXTRAVER:=		b22-28_feb_2011
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 \
 			fd3f35e8a8a2ef9a64c035ed66cea06d \
 			ef7a8b3624ea904bf584bc46d79b5e75 \
@@ -24,7 +24,7 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
-PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+#PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
@@ -90,14 +90,17 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
+			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--without-rhino
 
+CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 
 OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
-			PATH=$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
+			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 ALL_TARGET:=		icedtea
@@ -135,12 +138,14 @@ pre-configure:
 			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
+			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
 			--without-rhino ;\
 	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
 	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
 	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/generated/sun/awt/X11/generator/; \
 	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/; \
-	$(MAKE) icedtea-ecj
+	env ${OPENJDK_NATIVE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
 	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
