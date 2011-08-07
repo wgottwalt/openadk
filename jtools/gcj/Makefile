@@ -4,8 +4,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
-PKG_VERSION:=		4.5.2
 PKG_RELEASE:=		1
+PKG_VERSION:=		4.5.3
 PKG_MD5SUM:=		d6559145853fbaaa0fd7556ed93bce9a
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
@@ -13,7 +13,6 @@ DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include ../rules.mk
-
 GCJ_ENV+=		JAR=no
 
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
@@ -25,6 +24,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 			--prefix=/usr \
 			--enable-java-home \
 			--enable-languages=java \
+			--enable-shared \
 			--with-ffi \
 			--with-mpc=$(STAGING_HOST_DIR) \
 			--with-mpfr=$(STAGING_HOST_DIR) \
