@@ -1,0 +1,10 @@
+diff -Nur linux-2.6.39.orig/fs/notify/Kconfig linux-2.6.39/fs/notify/Kconfig
+--- linux-2.6.39.orig/fs/notify/Kconfig	2011-05-19 06:06:34.000000000 +0200
++++ linux-2.6.39/fs/notify/Kconfig	2011-08-07 17:23:16.658016716 +0200
+@@ -1,5 +1,5 @@
+ config FSNOTIFY
+-	def_bool n
++	def_bool y
+ 
+ source "fs/notify/dnotify/Kconfig"
+ source "fs/notify/inotify/Kconfig"
