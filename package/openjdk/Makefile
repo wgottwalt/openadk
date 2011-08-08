@@ -24,7 +24,7 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
-PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+#PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 
 # autotools infrastructure for OpenJDK
@@ -105,6 +105,10 @@ OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAM
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 ALL_TARGET:=		icedtea
+
+# add include path for Xrender.h from staging directory
+post-patch:
+	$(SED) "s#@ADK_TARGETDIR@#$(STAGING_TARGET_DIR)#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/sun/xawt/Makefile
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \
