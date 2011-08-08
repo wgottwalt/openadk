@@ -36,7 +36,7 @@ config ADK_KERNEL_MAGIC_SYSRQ
 config ADK_KERNEL_DEBUG_FS
 	prompt "Debug Filesystem"
 	boolean
-	default n
+	default y
 	help
 	  debugfs is a virtual file system that kernel developers use to put
 	  debugging files into.  Enable this option to be able to read and

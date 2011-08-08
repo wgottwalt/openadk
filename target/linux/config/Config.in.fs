@@ -1,5 +1,9 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_FSNOTIFY
+	boolean
+	default y
+
 config ADK_KERNEL_EXPORTFS
 	boolean
 
