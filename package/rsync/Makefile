@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rsync
-PKG_VERSION:=		3.0.7
+PKG_VERSION:=		3.0.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b53525900817cf1ba7ad3a516ab5bfe9
+PKG_MD5SUM:=		0ee8346ce16bdfe4c88a236e94c752b4
 PKG_DESCR:=		utility that provides fast incremental file transfer
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpopt
