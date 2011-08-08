@@ -10,8 +10,9 @@ PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
-PKG_DEPENDS+=		libogg libpng libpthread libvorbis
+PKG_DEPENDS+=		libogg libpng libpthread libvorbis giflib
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
+PKG_DEPENDS+=		libxscrnsaver
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
 PKG_URL:=		http://www.mplayerhq.hu/
@@ -100,6 +101,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-iconv \
 			--disable-lirc \
 			--disable-radio-v4l2 \
+			--disable-speex \
 			--disable-faac \
 			--disable-libdv \
 			--disable-live \
