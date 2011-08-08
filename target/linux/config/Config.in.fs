@@ -6,6 +6,7 @@ config ADK_KERNEL_FSNOTIFY
 
 config ADK_KERNEL_EXPORTFS
 	boolean
+	default y
 
 config ADK_KERNEL_YAFFS_FS
 	tristate
