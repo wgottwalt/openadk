@@ -21,6 +21,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBMAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMAD_DEV,libmad-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBMAD_DEV},${PKGSC_LIBMAD_DEV}))
 
+#FIXME
+XAKE_FLAGS+=             GCC_HONOUR_COPTS=s
+
 FPM:=default
 ifeq (${ARCH},i386)
 FPM:=intel

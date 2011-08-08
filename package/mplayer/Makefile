@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips
+PKG_ARCH_DEPENDS:=	x86 mips
 
 PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support

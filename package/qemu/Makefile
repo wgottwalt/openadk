@@ -15,6 +15,7 @@ PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/qemu/
 
 PKG_ARCH_DEPENDS:=	native x86 x86_64
+PKG_SYSTEM_DEPENDS:=	ibm-x40
 
 include $(TOPDIR)/mk/package.mk
 

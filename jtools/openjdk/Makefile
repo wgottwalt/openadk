@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		openjdk
 PKG_VERSION:=		6
 PKG_EXTRAVER:=		b22-28_feb_2011
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2d2bbbb0f9b81f1fec41ec730da8a933 \
 			fd3f35e8a8a2ef9a64c035ed66cea06d \
 			ef7a8b3624ea904bf584bc46d79b5e75 \
@@ -43,10 +43,11 @@ WRKSRC=			${WRKDIST}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}
 
 include ../rules.mk
 
-OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-4.5.2.jar"
+OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_JAVA_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar"
 OPENJDK_NATIVE_ENV+=	DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
 OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64
 OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj PATH=$$PATH:$(STAGING_JAVA_HOST_DIR)/usr/bin
+OPENJDK_NATIVE_ENV+=	BOOTCLASSPATH="$(STAGING_JAVA_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_JAVA_HOST_DIR)/usr/share/classpath/glibj.zip"
 
 install: ${STAGING_JAVA_HOST_DIR}/bootstrap-jdk/bin/java
 
@@ -72,7 +73,7 @@ $(WRKDIST)/.configured: ${WRKDIST}/.extract
 		--with-java=$(STAGING_JAVA_HOST_DIR)/usr/bin/java \
 		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 		--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
-		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar \
+		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/java/ecj.jar \
 		--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
 		--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
 		--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
