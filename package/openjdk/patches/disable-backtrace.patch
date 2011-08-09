@@ -1,6 +1,16 @@
 --- w-openjdk-6-1.orig/openjdk-6/jdk/src/solaris/native/sun/xawt/XToolkit.c	2011-02-28 17:06:50.000000000 +0100
-+++ w-openjdk-6-1/openjdk-6/jdk/src/solaris/native/sun/xawt/XToolkit.c	2011-04-10 22:33:28.481412674 +0200
-@@ -689,7 +689,7 @@
++++ w-openjdk-6-1/openjdk-6/jdk/src/solaris/native/sun/xawt/XToolkit.c	2011-08-08 10:45:01.445330729 +0200
+@@ -27,9 +27,6 @@
+ #include <X11/Xutil.h>
+ #include <X11/Xos.h>
+ #include <X11/Xatom.h>
+-#ifdef __linux__
+-#include <execinfo.h>
+-#endif
+ 
+ #include <jvm.h>
+ #include <jni.h>
+@@ -689,7 +686,7 @@
      return ret;
  }
  
