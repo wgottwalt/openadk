@@ -264,7 +264,7 @@ config ADK_TARGET_CPU_ARCH
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
-	default "powerpc" if ADK_CPU_PPC
+	default "ppc" if ADK_CPU_PPC
 
 config ADK_TARGET_ABI_CFLAGS
 	string
