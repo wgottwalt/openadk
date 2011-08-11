@@ -20,9 +20,17 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-ppc -M mac99 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-ppc -M mac99 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+endif
 endif
