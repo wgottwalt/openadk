@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		63220327925ace13756ae334c55a3baa
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
@@ -23,7 +23,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
                CC='${CC_FOR_BUILD}' \
                CXX='${CXX_FOR_BUILD}' \
            ./configure \
-               --prefix=/usr \
+               --prefix=$(STAGING_JAVA_HOST_DIR)/usr \
                --with-classpath-install-dir=$(STAGING_JAVA_HOST_DIR)/usr
 	touch $@
 
@@ -32,8 +32,8 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.configured
 	touch $@
 
 ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm: $(WRKBUILD)/.compiled
-	${MAKE} -C ${WRKBUILD} DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
-	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
-	$(CP) ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
+	${MAKE} -C ${WRKBUILD} install $(MAKE_TRACE)
+	ln -sf ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
+	ln -sf ${STAGING_JAVA_HOST_DIR}/usr/bin/jamvm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 include $(TOPDIR)/mk/tools.mk
