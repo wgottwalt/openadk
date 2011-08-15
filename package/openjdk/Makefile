@@ -26,6 +26,8 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 
 #PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
+PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
+PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6

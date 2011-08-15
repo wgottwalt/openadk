@@ -1,0 +1,13 @@
+the option RTLOD_NOLOAD is not portable. (not available in uClibc)
+https://evolvis.org/scm/viewvc.php/jalimo/trunk/oe-overlay/packages/openjdk/openjdk-6-6b18-1.8/icedtea-jdk-RTLD_NOLOAD.patch?revision=840&view=markup&pathrev=867
+--- w-openjdk-6.orig/openjdk-6/jdk/src/solaris/native/sun/security/pkcs11/j2secmod_md.c	2011-02-28 17:06:50.000000000 +0100
++++ w-openjdk-6/openjdk-6/jdk/src/solaris/native/sun/security/pkcs11/j2secmod_md.c	2011-08-10 14:41:26.700571862 +0200
+@@ -51,7 +51,7 @@
+ {
+     const char *libName = (*env)->GetStringUTFChars(env, jLibName, NULL);
+     // look up existing handle only, do not load
+-    void *hModule = dlopen(libName, RTLD_NOLOAD);
++    void *hModule = dlopen(libName, RTLD_LAZY);
+     dprintf2("-handle for %s: %u\n", libName, hModule);
+     (*env)->ReleaseStringUTFChars(env, jLibName, libName);
+     return (jlong)hModule;
