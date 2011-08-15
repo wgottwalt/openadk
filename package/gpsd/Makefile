@@ -34,7 +34,7 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 CONFIGURE_ARGS+=	--disable-dbus
 TARGET_CFLAGS+=		-fPIC
 
-LIBRARIES:=-nodefaultlibs -luClibc++
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif

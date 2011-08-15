@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		forked-daapd
-PKG_VERSION:=		0.16
+PKG_VERSION:=		0.18
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cc35619babefea35db9ee22e6f1d036b
+PKG_MD5SUM:=		b45aab5b60382ec3ada7e71cb1356b1d
 PKG_DESCR:=		DAAPD server
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libunistring zlib libconfuse sqlite ffmpeg libgcrypt
@@ -17,10 +17,13 @@ PKG_BUILDDEP+=		mxml libevent libavl libantlr3c alsa-lib libgcrypt
 PKG_SITES:=		http://alioth.debian.org/~jblache/forked-daapd/
 
 PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER
+PKG_ARCH_DEPENDS:=	!ppc
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FORKED_DAAPD,forked-daapd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+#TARGET_LDFLAGS+=		-lgcc
 
 forked-daapd-install:
 	$(INSTALL_DIR) $(IDIR_FORKED_DAAPD)/etc
