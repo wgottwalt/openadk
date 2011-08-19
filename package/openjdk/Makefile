@@ -52,7 +52,7 @@ WRKSRC=			${WRKDIST}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}
 PKG_SUBPKGS:=		OPENJDK
 PKG_CHOICES_OPENJDK:=	ZERO SHARK CACAO
 PKGCD_ZERO:=		zero-assembly backend
-PKGCD_SHARK:=		Shark JIT backend
+PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
 PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
 PKGCD_JAMVM:=		JamVM backend
@@ -60,6 +60,7 @@ PKGCD_JAMVM:=		JamVM backend
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
 
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
@@ -110,6 +111,9 @@ ALL_TARGET:=		icedtea
 
 # add include path for Xrender.h from staging directory
 post-patch:
+ifeq ($(QEMU),)
+	$(error Fatal error: $$QEMU not set!)
+endif
 	$(SED) "s#@ADK_TARGETDIR@#$(STAGING_TARGET_DIR)#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/sun/xawt/Makefile
 
 do-extract:

@@ -1,0 +1,20 @@
+--- w-openjdk-6.orig/openjdk-6/hotspot/make/linux/makefiles/adlc.make	2011-02-28 17:03:13.000000000 +0100
++++ w-openjdk-6/openjdk-6/hotspot/make/linux/makefiles/adlc.make	2011-08-17 13:05:55.317470977 +0200
+@@ -103,7 +103,7 @@
+ 
+ $(EXEC) : $(OBJECTS)
+ 	@echo Making adlc
+-	$(QUIETLY) $(LINK_NOPROF.CC) -o $(EXEC) $(OBJECTS)
++	$(QUIETLY) $(LINK_NOPROF.CC) -static -o $(EXEC) $(OBJECTS)
+ 
+ # Random dependencies:
+ $(OBJECTS): opcodes.hpp classes.hpp adlc.hpp adlcVMDeps.hpp adlparse.hpp archDesc.hpp arena.hpp dict2.hpp filebuff.hpp forms.hpp formsopt.hpp formssel.hpp
+@@ -170,7 +170,7 @@
+ #
+ refresh_adfiles: $(EXEC) $(SOURCE.AD) $(ADLC_UPDATER)
+ 	@rm -rf $(TEMPDIR); mkdir $(TEMPDIR)
+-	$(QUIETLY) $(EXEC) $(ADLCFLAGS) $(SOURCE.AD) \
++	$(QEMU) $(EXEC) $(ADLCFLAGS) $(SOURCE.AD) \
+  -c$(TEMPDIR)/ad_$(Platform_arch_model).cpp -h$(TEMPDIR)/ad_$(Platform_arch_model).hpp -a$(TEMPDIR)/dfa_$(Platform_arch_model).cpp -v$(TEMPDIR)/adGlobals_$(Platform_arch_model).hpp \
+ 	    || { rm -rf $(TEMPDIR); exit 1; }
+ 	$(QUIETLY) ./$(ADLC_UPDATER) ad_$(Platform_arch_model).cpp $(TEMPDIR) $(OUTDIR)
