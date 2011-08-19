@@ -18,7 +18,7 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 				--host-cc=$(CC_FOR_BUILD) \
 				--disable-system \
 				--disable-sdl \
-				--target-list=arm-linux-user \
+				--target-list=arm-linux-user,i386-linux-user,mipsel-linux-user \
 	)
 	touch $@
 
