@@ -1,3 +1,6 @@
+
+ uClibc does not have backtrace support right now. Disable it for now.
+
 --- w-openjdk-6-1.orig/openjdk-6/jdk/src/solaris/native/sun/xawt/XToolkit.c	2011-02-28 17:06:50.000000000 +0100
 +++ w-openjdk-6-1/openjdk-6/jdk/src/solaris/native/sun/xawt/XToolkit.c	2011-08-08 10:45:01.445330729 +0200
 @@ -27,9 +27,6 @@

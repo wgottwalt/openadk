@@ -1,3 +1,6 @@
+
+ execute mkoffsets via Qemu and build mkbc with the host compiler.
+
 --- w-openjdk-6-1.orig/icedtea6-1.10/patches/arm.patch	2011-02-23 23:32:32.909601440 +0100
 +++ w-openjdk-6-1/icedtea6-1.10/patches/arm.patch	2011-08-09 20:05:56.721765260 +0200
 @@ -25,7 +25,7 @@

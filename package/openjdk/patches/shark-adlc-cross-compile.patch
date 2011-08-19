@@ -1,3 +1,6 @@
+
+ Execute adlc via Qemu.
+
 --- w-openjdk-6.orig/openjdk-6/hotspot/make/linux/makefiles/adlc.make	2011-02-28 17:03:13.000000000 +0100
 +++ w-openjdk-6/openjdk-6/hotspot/make/linux/makefiles/adlc.make	2011-08-17 13:05:55.317470977 +0200
 @@ -103,7 +103,7 @@

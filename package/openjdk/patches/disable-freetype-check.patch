@@ -1,4 +1,7 @@
---- w-openjdk-6-1.orig/openjdk-6.orig/jdk/make/common/shared/Sanity.gmk	2011-02-28 17:06:10.000000000 +0100
+
+ disable freetype sanity check, not cross-compile safe.
+
+--- w-openjdk-6-1.orig/openjdk-6/jdk/make/common/shared/Sanity.gmk	2011-02-28 17:06:10.000000000 +0100
 +++ w-openjdk-6-1/openjdk-6/jdk/make/common/shared/Sanity.gmk	2011-04-05 14:05:29.691807661 +0200
 @@ -793,7 +793,7 @@
  # Check for availability of FreeType (OpenJDK specific)

@@ -1,3 +1,7 @@
+
+ some uClibc compatibility hacks.
+ Partly from https://evolvis.org/scm/viewvc.php/jalimo/trunk/oe-overlay/packages/openjdk/openjdk-6-6b18-1.8/
+
 --- w-openjdk-6-1.orig/openjdk-6/hotspot/src/os/linux/vm/os_linux.cpp	2011-02-28 17:03:14.000000000 +0100
 +++ w-openjdk-6-1/openjdk-6/hotspot/src/os/linux/vm/os_linux.cpp	2011-08-07 14:30:00.195403776 +0200
 @@ -53,7 +53,6 @@
