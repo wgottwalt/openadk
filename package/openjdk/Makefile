@@ -24,7 +24,6 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
-#PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
 PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100
@@ -55,7 +54,6 @@ PKGCD_ZERO:=		zero-assembly backend
 PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
 PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
-PKGCD_JAMVM:=		JamVM backend
 
 include $(TOPDIR)/mk/package.mk
 
@@ -74,9 +72,6 @@ CONFIGURE_BACKEND:=	--enable-shark \
 endif
 ifeq ($(ADK_PACKAGE_OPENJDK_CACAO),y)
 CONFIGURE_BACKEND:=	--enable-cacao
-endif
-ifeq ($(ADK_PACKAGE_OPENJDK_JAMVM),y)
-CONFIGURE_BACKEND:=	--enable-jamvm
 endif
 
 CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
@@ -101,10 +96,10 @@ CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
-			GCC_HONOUR_COPTS=s \
+			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 
-OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+#OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
@@ -128,7 +123,7 @@ do-extract:
 
 pre-configure:
 	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-	export $(MAKE_ENV) ${OPENJDK_NATIVE_ENV} ; ./configure \
+	export $(MAKE_ENV); ./configure \
 			${CONFIGURE_TRIPLE} \
 			$(CONFIGURE_BACKEND) \
 	   		--prefix=/usr \
@@ -154,7 +149,7 @@ pre-configure:
 			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
 			--without-rhino ;\
-	env ${OPENJDK_NATIVE_ENV} $(MAKE) icedtea-ecj
+	env ${MAKE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
 	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
