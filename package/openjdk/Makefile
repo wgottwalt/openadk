@@ -154,10 +154,6 @@ pre-configure:
 			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
 			--without-rhino ;\
-	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
-	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/generated/sun/awt/X11/generator/; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/; \
 	env ${OPENJDK_NATIVE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
