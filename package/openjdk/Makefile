@@ -74,9 +74,7 @@ ifeq ($(ADK_PACKAGE_OPENJDK_CACAO),y)
 CONFIGURE_BACKEND:=	--enable-cacao
 endif
 
-CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
-CONFIGURE_ARGS+=	--disable-docs \
-			--disable-bootstrap \
+CONFIGURE_COMMON:=	--disable-docs \
 			--enable-openjdk-cross-compilation \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
@@ -92,14 +90,12 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--without-rhino
 
+CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
+CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
+CONFIGURE_ARGS+=	--disable-bootstrap
+
 CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
-			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
-			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
-			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
-			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
-
-#OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
@@ -134,21 +130,7 @@ pre-configure:
 			--localstatedir=/var \
 			--sysconfdir=/etc \
 			--enable-bootstrap \
-			--enable-openjdk-cross-compilation \
-			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
-			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
-			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
-			--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
-			--with-jdk-home=$(BOOTSTRAPJDK) \
-			--with-java=$(BOOTSTRAPJDK)/bin/java \
-			--with-javac=$(BOOTSTRAPJDK)/bin/javac \
-			--with-javah=$(BOOTSTRAPJDK)/bin/javah \
-			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
-			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
-			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
-			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
-			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
-			--without-rhino ;\
+			$(CONFIGURE_COMMON) ;\
 	env ${MAKE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
