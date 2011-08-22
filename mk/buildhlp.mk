@@ -49,15 +49,27 @@ ifeq (${_CHECKSUM_COOKIE},)
 endif
 ifeq ($(EXTRACT_OVERRIDE),1)
 	${MAKE} do-extract
-else	
+else
 	${EXTRACT_CMD}
 endif
 	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
 
 __use_generic_patch_target:=42
-else ifeq ($(strip ${_IN_PACKAGE}),1)
-$(warning This package does not use the generic extraction and patch target; it's most likely to fail.)
+else
+include ${TOPDIR}/mk/fetch.mk
+${WRKDIST}/.extract_done: ${_CHECKSUM_COOKIE}
+	$(MAKE) fetch
+ifeq (${_CHECKSUM_COOKIE},)
+	rm -rf ${WRKDIST} ${WRKSRC} ${WRKBUILD}
+endif
+ifeq ($(EXTRACT_OVERRIDE),1)
+	${MAKE} do-extract
+else
+	${EXTRACT_CMD}
+endif
+	@${MAKE} post-extract $(MAKE_TRACE)
+	touch $@
 endif
 
 ifeq ($(strip ${__use_generic_patch_target}),42)
