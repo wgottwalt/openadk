@@ -59,6 +59,9 @@ endif
 ifeq ($(CPU_ARCH),i686)
 QEMU:=			qemu-i386
 endif
+ifeq ($(CPU_ARCH),x86_64)
+QEMU:=			qemu-x86_64
+endif
 
 ifeq ($(ADK_NATIVE),y) 
 TARGET_CROSS:=
