@@ -1,14 +1,6 @@
---- w-openjdk-6-1.orig/openjdk-6/jdk/make/common/Defs.gmk	2011-02-28 17:06:10.000000000 +0100
-+++ w-openjdk-6-1/openjdk-6/jdk/make/common/Defs.gmk	2011-08-07 21:21:49.335286149 +0200
-@@ -173,7 +173,7 @@
-     ifeq ($(DEVTOOLS_FT_DIR_EXISTS), true)
-       FREETYPE_HEADERS_PATH = $(DEVTOOLS_FT_DIR)/include
-     else
--      FREETYPE_HEADERS_PATH = /usr/include
-+      FREETYPE_HEADERS_PATH = /usr/include/disabled
-     endif
-   endif
- endif
+
+ disable wrong pathes for cross-compilation
+
 --- w-openjdk-6-1.orig/openjdk-6/jdk/make/common/shared/Defs-linux.gmk	2011-02-28 17:06:10.000000000 +0100
 +++ w-openjdk-6-1/openjdk-6/jdk/make/common/shared/Defs-linux.gmk	2011-08-08 10:07:58.975256728 +0200
 @@ -170,7 +170,7 @@
@@ -20,3 +12,23 @@
  
  # Import JDK images allow for partial builds, components not built are
  #    imported (or copied from) these import areas when needed.
+--- w-openjdk-6-1.orig/openjdk-6/jdk/make/common/Defs.gmk	2011-02-28 17:06:10.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/jdk/make/common/Defs.gmk	2011-08-10 18:50:53.248017538 +0200
+@@ -156,7 +156,7 @@
+     ifeq ($(DEVTOOLS_FT_DIR_EXISTS), true)
+       FREETYPE_LIB_PATH = $(DEVTOOLS_FT_DIR)/lib
+     else
+-      FREETYPE_LIB_PATH = /usr/lib
++      FREETYPE_LIB_PATH = /usr/lib/disabled
+       USING_SYSTEM_FT_LIB=true
+     endif
+   endif 
+@@ -173,7 +173,7 @@
+     ifeq ($(DEVTOOLS_FT_DIR_EXISTS), true)
+       FREETYPE_HEADERS_PATH = $(DEVTOOLS_FT_DIR)/include
+     else
+-      FREETYPE_HEADERS_PATH = /usr/include
++      FREETYPE_HEADERS_PATH = /usr/include/disabled
+     endif
+   endif
+ endif

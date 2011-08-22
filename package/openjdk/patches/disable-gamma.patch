@@ -1,3 +1,6 @@
+
+ Fails when cross-compilation is done, disable it.
+
 --- w-openjdk-6-1.orig/openjdk-6/hotspot/make/linux/makefiles/buildtree.make	2011-02-28 17:03:13.000000000 +0100
 +++ w-openjdk-6-1/openjdk-6/hotspot/make/linux/makefiles/buildtree.make	2011-04-11 12:47:31.000000000 +0200
 @@ -352,12 +352,8 @@

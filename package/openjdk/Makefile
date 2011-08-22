@@ -26,6 +26,8 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 
 #PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
+PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
+PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
@@ -50,7 +52,7 @@ WRKSRC=			${WRKDIST}/${ICEDTEA_NAME}-${ICEDTEA_VERSION}
 PKG_SUBPKGS:=		OPENJDK
 PKG_CHOICES_OPENJDK:=	ZERO SHARK CACAO
 PKGCD_ZERO:=		zero-assembly backend
-PKGCD_SHARK:=		JIT backend
+PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
 PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
 PKGCD_JAMVM:=		JamVM backend
@@ -58,6 +60,7 @@ PKGCD_JAMVM:=		JamVM backend
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
 
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
@@ -96,11 +99,13 @@ CONFIGURE_ARGS+=	--disable-docs \
 
 CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 
 OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
 			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
@@ -108,6 +113,9 @@ ALL_TARGET:=		icedtea
 
 # add include path for Xrender.h from staging directory
 post-patch:
+ifeq ($(QEMU),)
+	$(error Fatal error: $$QEMU not set!)
+endif
 	$(SED) "s#@ADK_TARGETDIR@#$(STAGING_TARGET_DIR)#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/sun/xawt/Makefile
 
 do-extract:
@@ -146,10 +154,6 @@ pre-configure:
 			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
 			--without-rhino ;\
-	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
-	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/generated/sun/awt/X11/generator/; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/; \
 	env ${OPENJDK_NATIVE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
