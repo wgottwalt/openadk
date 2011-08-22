@@ -334,7 +334,6 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
-		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
