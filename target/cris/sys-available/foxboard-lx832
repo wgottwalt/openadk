@@ -1,9 +1,0 @@
-config ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	bool "FOX Board LX832"
-	select ADK_cris
-	select ADK_foxboard_lx832
-	select ADK_TARGET_WITH_MTD
-	select ADK_TARGET_WITH_USB
-	help
-	  Build a system for FOX Board LX832.
-

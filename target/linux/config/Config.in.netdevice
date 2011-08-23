@@ -254,6 +254,7 @@ config ADK_KPACKAGE_KMOD_R8169
 endmenu
 
 config ADK_KERNEL_WIRELESS
+	select ADK_KERNEL_NETDEVICES
 	boolean
 
 config ADK_KERNEL_WIRELESS_EXT
@@ -383,8 +384,7 @@ config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
 	depends on ADK_TARGET_WITH_USB
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default n
 	help
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.
@@ -399,8 +399,6 @@ config ADK_KPACKAGE_KMOD_P54_USB
 	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KPACKAGE_KMOD_CRC_CCITT
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
 	default n
 	help
 	  Driver for Prism54 USB adaptors.

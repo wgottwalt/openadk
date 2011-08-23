@@ -274,8 +274,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	help
 
 config ADK_KERNEL_MD_RAID0
@@ -310,8 +309,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	prompt "kmod-blk-dev-dm................... Device Mapper support"
 	select ADK_KERNEL_MD
 	depends on !ADK_KERNEL_BLK_DEV_DM
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	tristate
 	help
 	  Device-mapper is a low level volume manager.  It works by allowing
@@ -359,8 +357,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	help
           DRBD - http://www.drbd.org
 

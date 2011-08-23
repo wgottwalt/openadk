@@ -190,8 +190,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	tristate
 	select ADK_KERNEL_EXPORTFS
 	depends on !ADK_KERNEL_XFS_FS
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX832
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX416
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated
