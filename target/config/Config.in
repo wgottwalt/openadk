@@ -249,6 +249,9 @@ config ADK_CPU_GEODE
 config ADK_CPU_PPC
 	boolean
 
+config ADK_CPU_PPC64
+	boolean
+
 config ADK_CPU_PENTIUM_M
 	boolean
 
@@ -278,6 +281,7 @@ config ADK_TARGET_CPU_ARCH
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
 	default "ppc" if ADK_CPU_PPC
+	default "ppc64" if ADK_CPU_PPC64
 
 config ADK_TARGET_ABI_CFLAGS
 	string
