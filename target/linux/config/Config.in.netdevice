@@ -87,6 +87,16 @@ config ADK_KERNEL_AR231X_ETHERNET
 	default n
 	help
 
+config ADK_KERNEL_NE2K_PCI
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_QEMU_PPC
+	default n
+	help
+
 config ADK_KERNEL_KORINA
 	boolean
 	select ADK_KERNEL_NETDEVICES

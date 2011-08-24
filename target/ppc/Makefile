@@ -7,7 +7,7 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/arch/powerpc/boot/zImage
+KERNEL:=$(LINUX_DIR)/vmlinux
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
@@ -22,7 +22,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-ppc -M mac99 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-ppc -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -31,6 +31,6 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-ppc -M mac99 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-ppc -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
