@@ -98,7 +98,10 @@ CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
+			OTHER_CFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
+			OTHER_CXXFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH)
+
 ALL_TARGET:=		icedtea
 
 # add include path for Xrender.h from staging directory
@@ -107,6 +110,7 @@ ifeq ($(QEMU),)
 	$(error Fatal error: $$QEMU not set!)
 endif
 	$(SED) "s#@ADK_TARGETDIR@#$(STAGING_TARGET_DIR)#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/sun/xawt/Makefile
+	$(SED) "s#OTHER_CXXFLAGS#CXXFLAGS_COMMON#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/com/sun/java/pack/Makefile
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \
