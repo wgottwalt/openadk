@@ -36,10 +36,7 @@ else ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 else ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	${INSTALL_BIN} ./src/adkinstall.yeelong \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
-	${INSTALL_BIN} ./src/adkinstall.rb4xx \
-		$(IDIR_ADKINSTALL)/sbin/adkinstall
-else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
+else ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
 	${INSTALL_BIN} ./src/adkinstall.rb4xx \
 		$(IDIR_ADKINSTALL)/sbin/adkinstall
 else
