@@ -1,0 +1,13 @@
+config ADK_TARGET_SYSTEM_QEMU_SPARC64
+	bool "Qemu Emulator"
+	select ADK_sparc64
+	select ADK_qemu_sparc64
+	select ADK_CPU_SPARC_V9
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	help
+	 Support for Qemu Emulator (SPARC64).
+
