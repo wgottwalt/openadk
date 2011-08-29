@@ -59,7 +59,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-
+# segfaults with march=pentium-m/atom
+TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
 
