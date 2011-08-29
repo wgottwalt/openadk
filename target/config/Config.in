@@ -73,6 +73,19 @@ config ADK_TARGET_ABI_N64
 
 endchoice
 
+# submodel support
+choice
+prompt "Foxboard LX Model"
+depends on ADK_TARGET_SYSTEM_FOXBOARD_LX
+
+config ADK_TARGET_FOXBOARD_MODEL_LX416
+	boolean "Foxboard LX 4x16"
+
+config ADK_TARGET_FOXBOARD_MODEL_LX832
+	boolean "Foxboard LX 8x32"
+
+endchoice
+
 choice 
 prompt "Broadcom BCM47xx Model"
 depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
@@ -236,6 +249,9 @@ config ADK_CPU_GEODE
 config ADK_CPU_PPC
 	boolean
 
+config ADK_CPU_PPC64
+	boolean
+
 config ADK_CPU_PENTIUM_M
 	boolean
 
@@ -264,7 +280,8 @@ config ADK_TARGET_CPU_ARCH
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
-	default "powerpc" if ADK_CPU_PPC
+	default "ppc" if ADK_CPU_PPC
+	default "ppc64" if ADK_CPU_PPC64
 
 config ADK_TARGET_ABI_CFLAGS
 	string
@@ -302,6 +319,7 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default ""
 
 # c library
@@ -334,7 +352,6 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
-		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
@@ -354,6 +371,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_PPC64 || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64

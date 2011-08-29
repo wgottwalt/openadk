@@ -1,0 +1,56 @@
+
+ disable wrong pathes to /usr, fix cross-compile
+
+--- w-openjdk-6-1.orig/openjdk-6/jdk/make/sun/awt/Makefile	2011-02-28 17:06:11.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/jdk/make/sun/awt/Makefile	2011-08-07 17:00:37.676468717 +0200
+@@ -509,10 +509,7 @@
+ #
+ 
+ ifeq ($(PLATFORM), linux)
+-CPPFLAGS += -I$(MOTIF_DIR)/include \
+-            -I$(OPENWIN_HOME)/include \
+-            -I$(OPENWIN_HOME)/include/X11/extensions \
+-            -I$(PLATFORM_SRC)/native/$(PKGDIR)/font 
++CPPFLAGS += -I$(PLATFORM_SRC)/native/$(PKGDIR)/font 
+ endif
+ CPPFLAGS += -I$(SHARE_SRC)/native/$(PKGDIR)/debug \
+             -I$(SHARE_SRC)/native/$(PKGDIR)/../font \
+@@ -535,10 +532,6 @@
+             -I$(PLATFORM_SRC)/native/$(PKGDIR) \
+ 	    $(EVENT_MODEL)
+ 
+-ifeq ($(PLATFORM), linux)
+-LDFLAGS += -L$(MOTIF_LIB) -L$(OPENWIN_LIB)
+-endif
+-
+ LDFLAGS += -L$(LIBDIR)/$(LIBARCH)/$(TSOBJDIR) \
+ 	   $(AWT_RUNPATH)
+ 
+--- w-openjdk-6-1.orig/openjdk-6/jdk/make/sun/xawt/Makefile	2011-02-28 17:06:12.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/jdk/make/sun/xawt/Makefile	2011-08-07 18:31:08.635355054 +0200
+@@ -96,6 +96,10 @@
+ 
+ CPPFLAGS += -I$(CUPS_HEADERS_PATH)
+ 
++ifeq ($(PLATFORM), linux)
++CPPFLAGS += -I@ADK_TARGETDIR@/usr/include/X11/extensions
++endif
++
+ CPPFLAGS += -DXAWT -DXAWT_HACK \
+         -I$(TEMPDIR)/../../sun.awt/awt/CClassHeaders \
+         -I$(PLATFORM_SRC)/native/sun/awt \
+@@ -122,14 +126,6 @@
+         -I$(SHARE_SRC)/native/sun/awt \
+         -I$(PLATFORM_SRC)/native/sun/awt 
+ 
+-ifeq ($(PLATFORM), linux)
+-# Allows for builds on Debian GNU Linux, X11 is in a different place 
+-  CPPFLAGS += -I/usr/X11R6/include/X11/extensions \
+-              -I/usr/include/X11/extensions \
+-              -I$(MOTIF_DIR)/include \
+-              -I$(OPENWIN_HOME)/include 
+-endif
+-
+ ifeq ($(PLATFORM), solaris)
+   CPPFLAGS += -I$(OPENWIN_HOME)/include/X11/extensions -I$(MOTIF_DIR)/include 
+ endif

@@ -59,14 +59,7 @@ endif
 define FETCH_template
 $(1):
 	@fullname='$(1)'; \
-	subname=$$$${fullname##$${DISTDIR}/}; \
 	filename=$$$${fullname##*/}; \
-	i='$${LOCAL_DISTDIR}'; \
-	if [[ -n $$$$i && -e $$$$i/$$$$subname ]]; then \
-		cd "$$$$i"; \
-		echo pax -rw "$$$$subname" '$${DISTDIR}/'; \
-		exec pax -rw "$$$$subname" '$${DISTDIR}/'; \
-	fi; \
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
 	for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \

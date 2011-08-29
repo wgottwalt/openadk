@@ -1,0 +1,22 @@
+--- w-openjdk-6.orig/openjdk-6/jdk/make/sun/xawt/Makefile	2011-02-28 17:06:12.000000000 +0100
++++ w-openjdk-6/openjdk-6/jdk/make/sun/xawt/Makefile	2011-08-20 18:45:28.499240773 +0200
+@@ -225,7 +225,7 @@
+ 
+ $(SIZERS): $(SIZERS_C) 
+ 	$(prep-target)
+-	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
++	$(CC) -static $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
+ 
+ $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
+ 	$(prep-target)
+@@ -243,8 +243,8 @@
+ 	    $(CP) $(PREDEFINED_SIZES_TMPL) $@; \
+ 	    $(CHMOD) +w $@;\
+ 	else	\
+-	    $(ECHO) GENERATING $@; \
+-	    $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
++	    $(ECHO) GENERATING $@ via $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer..; \
++	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
+ 	fi
+ 	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
+ 	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \

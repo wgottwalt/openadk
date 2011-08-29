@@ -40,6 +40,8 @@ CONFIGURE_ARGS+=	--disable-esd \
 			--enable-video-fbcon \
 			--disable-video-directfb \
 			--disable-video-opengl \
+			--disable-video-ps2gs \
+			--disable-video-ps3 \
 			--with-x
 
 libsdl-install:

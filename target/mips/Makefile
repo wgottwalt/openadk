@@ -51,11 +51,7 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
-kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
@@ -135,7 +131,8 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
 	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
-	@echo "PMON> g console=tty no_auto_cmd"
+	@echo "PMON> g root=/dev/sdc1"
+	@echo "The root parameter have to be changed."
 endif
 endif
 ifeq ($(ADK_TARGET_FS),cf)

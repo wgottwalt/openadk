@@ -21,7 +21,6 @@ ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
 		-o ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj.native \
 		--main=org.eclipse.jdt.internal.compiler.batch.Main \
 		$(TOPDIR)/jtools_build/gcc-$(GCJ_VER)/ecj.jar
-	#$(CP) $(TOPDIR)/jtools_build/gcc-$(GCJ_VER)/ecj.jar ${STAGING_JAVA_HOST_DIR}/usr/share/ecj.jar
 	echo "env LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj.native \$$@" > \
 		${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
 	chmod u+x ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj
@@ -33,9 +32,5 @@ ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
 	echo "env LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 ${STAGING_JAVA_HOST_DIR}/usr/bin/gij.native \"\$$@\"" > \
 		${STAGING_JAVA_HOST_DIR}/usr/bin/gij
 	chmod u+x ${STAGING_JAVA_HOST_DIR}/usr/bin/gij
-	rm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
-	rm ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
-	cp ${STAGING_JAVA_HOST_DIR}/usr/bin/java ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/bin/java
-	cp ${STAGING_JAVA_HOST_DIR}/usr/bin/java ${STAGING_JAVA_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 include $(TOPDIR)/mk/tools.mk

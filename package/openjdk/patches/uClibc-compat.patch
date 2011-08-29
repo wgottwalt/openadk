@@ -1,0 +1,96 @@
+
+ some uClibc compatibility hacks.
+ Partly from https://evolvis.org/scm/viewvc.php/jalimo/trunk/oe-overlay/packages/openjdk/openjdk-6-6b18-1.8/
+
+--- w-openjdk-6-1.orig/openjdk-6/hotspot/src/os/linux/vm/os_linux.cpp	2011-02-28 17:03:14.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/hotspot/src/os/linux/vm/os_linux.cpp	2011-08-07 14:30:00.195403776 +0200
+@@ -53,7 +53,6 @@
+ # include <string.h>
+ # include <syscall.h>
+ # include <sys/sysinfo.h>
+-# include <gnu/libc-version.h>
+ # include <sys/ipc.h>
+ # include <sys/shm.h>
+ # include <link.h>
+@@ -553,9 +552,10 @@
+      os::Linux::set_glibc_version(str);
+   } else {
+      // _CS_GNU_LIBC_VERSION is not supported, try gnu_get_libc_version()
+-     static char _gnu_libc_version[32];
+-     jio_snprintf(_gnu_libc_version, sizeof(_gnu_libc_version),
+-              "glibc %s %s", gnu_get_libc_version(), gnu_get_libc_release());
++     // static char _gnu_libc_version[32];
++     // jio_snprintf(_gnu_libc_version, sizeof(_gnu_libc_version),
++     //       "glibc %s %s", gnu_get_libc_version(), gnu_get_libc_release());
++     static char _gnu_libc_version[32] = "2.12";
+      os::Linux::set_glibc_version(_gnu_libc_version);
+   }
+
+@@ -2434,10 +2434,8 @@
+ // If we are running with earlier version, which did not have symbol versions,
+ // we should use the base version.
+ void* os::Linux::libnuma_dlsym(void* handle, const char *name) {
+-  void *f = dlvsym(handle, name, "libnuma_1.1");
+-  if (f == NULL) {
+-    f = dlsym(handle, name);
+-  }
++  void *f;
++  f = dlsym(handle, name);
+   return f;
+ }
+ 
+@@ -4446,7 +4444,21 @@
+ // Linux doesn't yet have a (official) notion of processor sets,
+ // so just return the system wide load average.
+ int os::loadavg(double loadavg[], int nelem) {
+-  return ::getloadavg(loadavg, nelem);
++ FILE *LOADAVG;
++ double avg[3] = { 0.0, 0.0, 0.0 };
++ int i, res = -1;;
++
++ if ((LOADAVG = fopen("/proc/loadavg", "r"))) {
++ fscanf(LOADAVG, "%lf %lf %lf", &avg[0], &avg[1], &avg[2]);
++ res = 0;
++ fclose(LOADAVG);
++ }
++
++ for (i = 0; (i < nelem) && (i < 3); i++) {
++ loadavg[i] = avg[i];
++ }
++
++ return res;
+ }
+ 
+ void os::pause() {
+
+--- w-openjdk-6-1.orig/openjdk-6/hotspot/make/linux/platform_zero.in	2011-02-28 17:03:13.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/hotspot/make/linux/platform_zero.in	2011-08-07 13:56:56.875281880 +0200
+@@ -14,4 +14,4 @@
+ 
+ gnu_dis_arch = zero
+ 
+-sysdefs = -DLINUX -D_GNU_SOURCE -DCC_INTERP -DZERO -D@ZERO_ARCHDEF@ -DZERO_LIBARCH=\"@ZERO_LIBARCH@\"
++sysdefs = -DLINUX -D_GNU_SOURCE -DCC_INTERP -DZERO -D@ZERO_ARCHDEF@ -DZERO_LIBARCH=\"@ZERO_LIBARCH@\" -D__STDC_LIMIT_MACROS
+
+--- w-openjdk-6-1.orig/openjdk-6/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2011-02-28 17:03:22.000000000 +0100
++++ w-openjdk-6-1/openjdk-6/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2011-08-07 12:32:09.325489647 +0200
+@@ -238,7 +238,7 @@
+ #endif
+ inline int g_isnan(double f) { return isnand(f); }
+ #elif LINUX
+-inline int g_isnan(float  f) { return isnanf(f); }
++inline int g_isnan(float  f) { return __isnanf(f); }
+ inline int g_isnan(double f) { return isnan(f); }
+ #else
+ #error "missing platform-specific definition here"
+@@ -252,8 +252,8 @@
+ 
+ // Checking for finiteness
+ 
+-inline int g_isfinite(jfloat  f)                 { return finite(f); }
+-inline int g_isfinite(jdouble f)                 { return finite(f); }
++inline int g_isfinite(jfloat  f)                 { return isfinite(f); }
++inline int g_isfinite(jdouble f)                 { return isfinite(f); }
+ 
+ 
+ // Wide characters

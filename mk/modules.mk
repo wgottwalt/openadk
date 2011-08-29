@@ -1180,12 +1180,10 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 # USB
 #
 
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX832),)
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX416),)
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),)
 $(eval $(call KMOD_template,USB,usb,\
 	$(MODULES_DIR)/kernel/drivers/usb/core/usbcore \
 ,50))
-endif
 endif
 
 $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
