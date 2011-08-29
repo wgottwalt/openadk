@@ -1,3 +1,10 @@
+# page size
+config ADK_KERNEL_PAGE_SIZE_4KB
+	boolean
+
+config ADK_KERNEL_PAGE_SIZE_16KB
+	boolean
+
 # mips systems
 config ADK_KERNEL_ATHEROS_AR231X
 	boolean
@@ -37,6 +44,7 @@ config ADK_KERNEL_ARCH_AT91SAM9G20
 config ADK_KERNEL_MACH_ACMENETUSFOXG20
 	boolean
 
+# endianesss and ABI
 config ADK_KERNEL_AEABI
 	boolean
 
