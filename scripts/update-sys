@@ -50,7 +50,7 @@ config $archsym
 EOF
 
 if [ "${system}" = "toolchain" -o "${system}" = "qemu" ];then
-	sys=${system}-$arch
+	sys=${system}-$cpuarch
 else
 	sys=$system
 fi
