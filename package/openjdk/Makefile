@@ -17,7 +17,7 @@ PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
