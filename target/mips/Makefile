@@ -98,6 +98,8 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Use following command to create a QEMU Image:"
@@ -152,12 +154,12 @@ imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 		echo The image file is $(ROOTFSSQUASHFS); \
 	fi
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-		echo The kernel file is $(TARGET_KERNEL)
+	echo The kernel file is $(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
-		echo 'You can flash the image via tftp:'
-		echo 'tftp 192.168.1.1'
-		echo 'tftp> binary'
-		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
+	echo 'You can flash the image via tftp:'
+	echo 'tftp 192.168.1.1'
+	echo 'tftp> binary'
+	echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
 endif
 endif

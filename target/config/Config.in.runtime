@@ -141,3 +141,128 @@ config ADK_BINSH_ZSH
 	  Use zsh as system shell. This is probably a bad idea.
 
 endchoice
+
+
+
+
+
+config ADK_SIMPLE_NETWORK_CONFIG
+	prompt "simple network configuration"
+	boolean
+	help
+	  Manually change network config
+	  
+	  WWW: http://www.openadk.org
+
+menu "eth0 Configuration"
+depends on ADK_SIMPLE_NETWORK_CONFIG
+
+choice
+	prompt "Type"
+	default SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC
+	bool "NIC / DHCP"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL
+	bool "NIC / manual IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
+	bool "Bridge with IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE
+	bool "Bridge w/o IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NONE
+	bool "None"
+endchoice
+
+config SIMPLE_NETWORK_CONFIG_ETH0_IP
+	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
+	string "eth0 IP Address"
+	default "192.168.1.2"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_NM
+	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
+	string "eth0 Netmask"
+	default "255.255.255.0"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_GW
+	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL
+	string "eth0 Gateway"
+	default "192.168.1.1"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE
+	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
+	string "Bridge ports"
+	default "eth0 eth1"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_BC
+	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
+	string "eth0 Broadcast"
+	default "+"
+
+endmenu
+
+
+
+menu "eth1 Configuration"
+depends on ADK_SIMPLE_NETWORK_CONFIG
+
+choice
+	prompt "Type"
+	default SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NONE
+
+config SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC
+	bool "NIC / DHCP"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL
+	bool "NIC / manual IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
+	bool "Bridge with IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE
+	bool "Bridge w/o IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NONE
+	bool "None"
+endchoice
+
+config SIMPLE_NETWORK_CONFIG_ETH1_IP
+	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
+	string "eth1 IP Address"
+	default "192.168.1.2"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_NM
+	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
+	string "eth1 Netmask"
+	default "255.255.255.0"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_GW
+	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL
+	string "eth1 Gateway"
+	default "192.168.1.1"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE
+	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE || SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
+	string "Bridge ports"
+	default "eth1 eth2"
+
+config SIMPLE_NETWORK_CONFIG_ETH1_BC
+	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
+	string "eth1 Broadcast"
+	default "+"
+
+endmenu
+
+
+menu "Resolver Configuration"
+depends on ADK_SIMPLE_NETWORK_CONFIG
+
+config SIMPLE_NETWORK_CONFIG_RESOLV
+	string "Nameserver"
+	default "192.168.1.1"
+
+endmenu
+
