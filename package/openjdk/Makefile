@@ -146,5 +146,6 @@ pre-configure:
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
 	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/* $(IDIR_OPENJDK)/usr 
+	rm -rf $(IDIR_OPENJDK)/usr/man
 
 include ${TOPDIR}/mk/pkg-bottom.mk
