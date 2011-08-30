@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		45
+PKG_RELEASE:=		46
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -67,7 +67,9 @@ endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
-	    echo "127.0.0.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
+	    echo "::1		localhost" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
@@ -80,5 +82,76 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
+
+
+
+# simple network configuration
+ifneq (${ADK_SIMPLE_NETWORK_CONFIG},)
+	${INSTALL_DIR} ${IDIR_BASE_FILES}/etc/network
+
+	# network config local
+	echo -e "auto lo\niface lo inet loopback" > ${IDIR_BASE_FILES}/etc/network/interfaces
+
+	# network config eth0
+	# configure nic with manual ip
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC},y)
+	echo -e "\nauto eth0\niface eth0 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	# configure nic with dhcp
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL},y)
+	echo -e "\nauto eth0\niface eth0 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH0_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  netmask ${SIMPLE_NETWORK_CONFIG_ETH0_NM}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH0_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  gateway ${SIMPLE_NETWORK_CONFIG_ETH0_GW}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	# configure bridge
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE},y)
+	echo -e "\nauto br0\niface br0 inet manual" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	#configure bridge with ip
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP},y)
+	echo -e "\nauto br0\niface br0 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH0_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  netmask ${SIMPLE_NETWORK_CONFIG_ETH0_NM}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH0_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+
+	# network config eth1
+	# configure nic with manual ip
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC},y)
+	echo -e "\nauto eth1\niface eth1 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	# configure nic with dhcp
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL},y)
+	echo -e "\nauto eth1\niface eth1 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH1_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  netmask ${SIMPLE_NETWORK_CONFIG_ETH1_NM}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH1_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  gateway ${SIMPLE_NETWORK_CONFIG_ETH1_GW}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	# configure bridge
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE},y)
+	echo -e "\nauto br0\niface br1 inet manual" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+	#configure bridge with ip
+ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP},y)
+	echo -e "\nauto br0\niface br1 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH1_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  netmask ${SIMPLE_NETWORK_CONFIG_ETH1_NM}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH1_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+
+	# newline at the end of interfaces file
+	echo -en "\n" >>  ${IDIR_BASE_FILES}/etc/network/interfaces
+
+	# resolver config
+	echo -e "nameserver ${SIMPLE_NETWORK_CONFIG_RESOLV}" > ${IDIR_BASE_FILES}/etc/resolv.conf
+endif
+
 
 include ${TOPDIR}/mk/pkg-bottom.mk

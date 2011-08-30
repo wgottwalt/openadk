@@ -2,6 +2,7 @@ config ADK_TARGET_SYSTEM_FOXBOARD_LX
 	bool "FOX Board LX"
 	select ADK_cris
 	select ADK_foxboard_lx
+	select ADK_CPU_CRIS_V10
 	select ADK_TARGET_WITH_MTD
 	select ADK_TARGET_WITH_USB
 	help
