@@ -218,6 +218,16 @@ config ADK_TARGET_CPU_WITH_SSE
 config ADK_TARGET_CPU_WITH_SSE2
 	boolean
 
+config ADK_TARGET_CPU_WITH_SSE3
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSSE3
+	boolean
+
+# hyper threading
+config ADK_TARGET_CPU_WITH_HT
+	boolean
+
 config ADK_TARGET_CPU_WITH_3DNOW
 	boolean
 
@@ -255,6 +265,9 @@ config ADK_CPU_PPC64
 config ADK_CPU_PENTIUM_M
 	boolean
 
+config ADK_CPU_ATOM
+	boolean
+
 config ADK_CPU_AMDFAM10
 	select ADK_TARGET_CPU_WITH_VT
 	boolean
@@ -273,6 +286,7 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_I686
 	default "i586" if ADK_CPU_GEODE
 	default "i686" if ADK_CPU_PENTIUM_M
+	default "i686" if ADK_CPU_ATOM
 	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
 	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
 	default "mips" if ADK_LINUX_MIPS && ADK_big
@@ -302,6 +316,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=i586" if ADK_CPU_I586
 	default "-march=i686" if ADK_CPU_I686
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
+	default "-march=atom" if ADK_CPU_ATOM
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
 	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
@@ -317,6 +332,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_X86
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_FOXBOARD_LX
