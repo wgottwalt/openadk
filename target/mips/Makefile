@@ -105,7 +105,7 @@ ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -115,7 +115,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -124,7 +124,7 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
