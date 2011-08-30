@@ -235,6 +235,12 @@ config ADK_TARGET_CPU_WITH_3DNOWEXT
 	boolean
 
 # cpu configuration
+config ADK_CPU_CRIS_V10
+	boolean
+
+config ADK_CPU_CRIS_V32
+	boolean
+
 config ADK_CPU_SPARC_V8
 	boolean
 
@@ -294,6 +300,8 @@ config ADK_TARGET_CPU_ARCH
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
+	default "cris" if ADK_CPU_CRIS_V10
+	default "crisv32" if ADK_CPU_CRIS_V32
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
 
@@ -324,6 +332,8 @@ config ADK_TARGET_CFLAGS
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
+	default "-march=v32" if ADK_CPU_CRIS_V32
+	default "-march=v10" if ADK_CPU_CRIS_V10
 
 config ADK_TARGET_CMDLINE
 	string

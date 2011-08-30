@@ -21,6 +21,9 @@ endif
 ifeq ($(ADK_TARGET_ENDIAN),big)
 UCLIBCCFG=uclibc.config.big
 endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
+UCLIBCCFG=uclibc.config.v32
+endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
