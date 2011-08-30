@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		45
+PKG_RELEASE:=		46
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -67,7 +67,9 @@ endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
-	    echo "127.0.0.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
+	    echo "::1		localhost" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
