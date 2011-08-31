@@ -42,6 +42,17 @@ config ADK_KERNEL_MACB
 	default n
 	help
 
+config ADK_KERNEL_PCNET32
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPSEL
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
+	default n
+	help
+
 config ADK_KERNEL_NATSEMI
 	boolean
 	select ADK_KERNEL_NETDEVICES
