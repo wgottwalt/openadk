@@ -14,6 +14,7 @@
 /config/zconf.tab.h
 /tests/master.exp
 /tests/adk.exp
+/tests/adk.exp.in.tmp
 /prereq.mk
 /toolchain_build_*/
 /.ADK_HAVE_DOT_CONFIG

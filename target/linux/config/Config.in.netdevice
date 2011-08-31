@@ -135,7 +135,7 @@ config ADK_KERNEL_E1000
 	select ADK_KERNEL_NETDEV_1000
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_QEMU_X86
+	default y if ADK_TARGET_SYSTEM_QEMU_I686
 	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default n
 	help
