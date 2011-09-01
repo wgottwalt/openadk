@@ -3,7 +3,6 @@
 
 include $(TOPDIR)/rules.mk
 
-# always use tab spaces as separator, no spaces
 PKG_NAME:=		jack
 PKG_VERSION:=		1.9.7
 PKG_RELEASE:=		1
@@ -14,6 +13,8 @@ PKG_DEPENDS:=		alsa-lib
 PKG_BUILDDEP:=		python2 alsa-lib
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		http://www.grame.fr/~letz/
+
+PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
