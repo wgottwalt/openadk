@@ -1,0 +1,8 @@
+config ADK_KERNEL_SERIAL_PXA
+	boolean
+	default y if ADK_TARGET_SYSTEM_QEMU_ARM
+
+config ADK_KERNEL_SERIAL_PXA_CONSOLE
+	boolean
+	default y if ADK_TARGET_SYSTEM_QEMU_ARM
+
