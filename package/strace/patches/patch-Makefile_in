@@ -1,10 +1,11 @@
---- strace-4.5.20.orig/Makefile.in	2010-04-14 21:41:05.000000000 +0200
-+++ strace-4.5.20/Makefile.in	2010-12-28 22:43:17.000000000 +0100
-@@ -242,6 +242,7 @@ EXTRA_DIST = $(man_MANS) errnoent.sh sig
- 	     linux/ioctlent.h linux/errnoent.h linux/signalent.h \
- 	     linux/syscall.h linux/dummy.h \
- 	     linux/i386/syscallent.h \
-+	     linux/cris/syscallent.h \
- 	     linux/alpha/errnoent.h linux/alpha/ioctlent.h \
- 	     linux/alpha/signalent.h linux/alpha/syscallent.h \
- 	     linux/arm/syscallent.h linux/arm/syscallent1.h \
+--- strace-4.6.orig/Makefile.in	2011-03-15 19:23:18.000000000 +0100
++++ strace-4.6/Makefile.in	2011-09-02 09:14:19.198484990 +0200
+@@ -270,7 +270,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = tests
++SUBDIRS =
+ man_MANS = strace.1
+ bin_SCRIPTS = strace-graph
+ 
