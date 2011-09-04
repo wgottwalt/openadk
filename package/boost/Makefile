@@ -115,16 +115,12 @@ pre-build:
 do-build:
 	@echo "build boost library..."
 # remove exisiting using gcc line from user.jam
-ifeq (`grep "^using gcc" ${USER_JAM} | wc -l`, 0)
 	${SED} "/^using gcc/d" ${USER_JAM}
-endif
 # add using gcc line with determined options to user.jam
 	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} ;" >> ${USER_JAM};
 
 # remove exisiting using python line from user.jam
-ifeq (`grep "^using python" ${USER_JAM} | wc -l`, 0)
 	${SED} "/^using python/d" ${USER_JAM}
-endif
 ifneq (${ADK_PACKAGE_BOOST_PYTHON},)
 # add using python line with determined options to user.jam
 	echo "using python : ${PYTHON_VERSION} : ${PYTHON_PATH} : ${PYTHON_INCLUDE} : ${PYTHON_LIB} ;" >> ${USER_JAM};
