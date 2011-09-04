@@ -62,6 +62,9 @@ config ADK_KERNEL_MMC
 config ADK_KERNEL_MMC_BLOCK
 	boolean
 
+config ADK_KERNEL_SCSI_SYM53C8XX_2
+	boolean
+
 config ADK_KERNEL_MMC_AT91
 	boolean
 	select ADK_KERNEL_BLOCK
