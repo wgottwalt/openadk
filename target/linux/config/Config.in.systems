@@ -35,6 +35,9 @@ config ADK_KERNEL_LEMOTE_MACH2F
 	boolean
 
 # arm systems
+config ADK_KERNEL_ARCH_VERSATILE
+	boolean
+
 config ADK_KERNEL_ARCH_PXA
 	boolean
 
