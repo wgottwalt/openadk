@@ -15,12 +15,13 @@ DISTFILES:=		boost_1_47_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
 
 PKG_SUBPKGS:=		BOOST BOOST_DEV
+PKGSD_BOOST_DEV:=	boost header files
+PKGSC_BOOST_DEV:=	devel
+
 PKG_CHOICES_BOOST:=	STATIC SHARED BOTH
 PKGCD_STATIC:=		install static libs
 PKGCD_SHARED:=		install shared libs
 PKGCD_BOTH:=		install static and shared libs
-PKGSD_BOOST_DEV:=		boost header files
-PKGSC_BOOST_DEV:=		devel
 
 PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options python regex serialization signals system test thread wave
 
@@ -44,6 +45,7 @@ PKGFD_wave:=	with wave
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BOOST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BOOST_DEV,boost-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BOOST_DEV},${PKGSC_BOOST_DEV}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -141,23 +143,24 @@ endif
 			install \
 	)
 
-do-install:
-ifneq (${ADK_PACKAGE_BOOST_SHARED},)
-	${INSTALL_DIR} ${IDIR_BOOST}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_BOOST}/usr/include
-endif
-ifneq (${ADK_PACKAGE_BOOST_SHARED},)
+
+boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
+ifneq (${ADK_PACKAGE_BOOST_SHARED},)
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
 endif
 ifneq (${ADK_PACKAGE_BOOST_STATIC},)
-	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.a ${IDIR_BOOST}/usr/lib
 endif
 ifneq (${ADK_PACKAGE_BOOST_BOTH},)
-	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.a ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
 endif
+
+
+boost-dev-install:
+	${INSTALL_DIR} ${IDIR_BOOST_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_BOOST_DEV}/usr/include
+
 
 include ${TOPDIR}/mk/pkg-bottom.mk
