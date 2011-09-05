@@ -15,6 +15,12 @@ config ADK_KERNEL_RTC_INTF_DEV
 
 menu "Miscellaneous devices support"
 
+config ADK_KERNEL_KEXEC
+	prompt ".................................. Add KEXEC syscall"
+	boolean
+	help
+	  You need also kexec-tools to benefit from it.	
+
 config ADK_KERNEL_RTC_DRV_AT91SAM9
 	prompt ".................................. RTC support for AT91SAM9 (Fox G20)"
 	boolean
