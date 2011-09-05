@@ -11,6 +11,14 @@ ZKERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
 KERNEL:=$(LINUX_DIR)/vmlinux
 LOADADDR:=0x20008000
 
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
+MACH:=spitz
+endif
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
+MACH:=versatilepb
+NET:=-net user,hostfwd=tcp::2222-:22 -net nic,model=smc91c111
+endif
+
 tools-compile:
 	$(MAKE) -C ../tools/uboot-mkimage
 
@@ -50,7 +58,8 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-arm -M spitz -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img -append "root=/dev/hda1"'
+	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(BIN_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img'
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -64,7 +73,7 @@ endif
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-arm -M spitz -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -77,6 +86,7 @@ endif
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-arm -M spitz -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+endif
 endif
 endif
