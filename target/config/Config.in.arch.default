@@ -35,6 +35,9 @@ config ADK_sparc
 config ADK_sparc64
 	bool
 
+config ADK_sh
+	bool
+
 config ADK_x86_64
 	bool
 
@@ -54,6 +57,7 @@ config ADK_TARGET_ARCH
 	default "ppc64"  if ADK_ppc64
 	default "sparc"  if ADK_sparc
 	default "sparc64"  if ADK_sparc64
+	default "sh"  if ADK_sh
 	default "x86"  if ADK_x86
 	default "x86_64"  if ADK_x86_64
 	default "native"  if ADK_native

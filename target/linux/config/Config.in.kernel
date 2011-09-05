@@ -85,3 +85,6 @@ config ADK_KERNEL_NFS_COMMON
 
 config ADK_KERNEL_SUNRPC
 	boolean
+
+config ADK_KERNEL_PCI
+	boolean

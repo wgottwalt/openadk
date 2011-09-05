@@ -95,7 +95,7 @@ ${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P | \
-		lzma -9 >$@ 2>/dev/null
+		xz -C crc32 >$@ 2>/dev/null
 
 ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE).*//' \

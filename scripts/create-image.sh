@@ -79,11 +79,13 @@ printf "Creating filesystem $filesystem\n"
 
 printf "Create partition and filesystem\n"
 $parted -s $1 mklabel msdos
-$parted -s $1 mkpart primary ext2 0 98%
+$parted -s $1 -- mkpart primary ext2 0 -0
 $parted -s $1 set 1 boot on
 
-dd if=$1 of=mbr bs=16384 count=1 2>/dev/null
-dd if=$1 skip=16384 of=$1.new 2>/dev/null
+offset=$(parted $1 unit b print | tail -2 | head -1 | cut -f 1 --delimit="B" | cut -c 9-)
+
+dd if=$1 of=mbr bs=$offset count=1 2>/dev/null
+dd if=$1 skip=$offset of=$1.new 2>/dev/null
 
 if [ "$filesystem" = "ext2" -o "$filesystem" = "ext3" -o "$filesystem" = "ext4" ];then
 	mkfsopts=-F
@@ -105,7 +107,7 @@ rm mbr
 
 tmp=$(mktemp -d)
 
-mount -o loop,offset=16384 -t $filesystem $1 $tmp
+mount -o loop,offset=$offset -t $filesystem $1 $tmp
 
 if [ -z $initramfs ];then
 	printf "Extracting install archive\n"
