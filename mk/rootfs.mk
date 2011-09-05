@@ -9,7 +9,9 @@ endif
 endef
 
 ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ROOTFS:=	root=/dev/sda1
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
