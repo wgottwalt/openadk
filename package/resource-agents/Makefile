@@ -14,6 +14,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_CFLINE_RESOURCE_AGENTS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_HOST_DEPENDS:=	!darwin
+PKG_ARCH_DEPENDS:=	x86
 
 include $(TOPDIR)/mk/package.mk
 

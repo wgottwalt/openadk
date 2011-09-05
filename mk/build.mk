@@ -513,7 +513,7 @@ bulktoolchain:
 bulk:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -531,7 +531,7 @@ bulk:
 bulkall:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -549,14 +549,14 @@ bulkall:
 bulkallmod:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system >.exit; exit 1;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
 	      done; \
