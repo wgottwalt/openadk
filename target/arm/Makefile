@@ -61,6 +61,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(BIN_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img'
 endif
 endif
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
@@ -86,5 +87,6 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+endif
 endif
 endif

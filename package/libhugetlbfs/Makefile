@@ -13,7 +13,7 @@ PKG_URL:=		http://libhugetlbfs.ozlabs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libhugetlbfs/}
 
 PKG_CFLINE_LIBHUGETLBFS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-PKG_ARCH_DEPENDS:=	x86 x86_64 arm
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 
