@@ -12,3 +12,7 @@ config ADK_KERNEL_SPI_RB4XX
 config ADK_KERNEL_SPI_RB4XX_CPLD
 	select ADK_KERNEL_SPI
 	boolean
+
+config ADK_KERNEL_SPI_PXA2XX
+	select ADK_KERNEL_SPI
+	boolean

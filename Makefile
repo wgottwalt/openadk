@@ -155,6 +155,12 @@ bulkallmod: .prereq_done
 check: .prereq_done
 	@${GMAKE_INV} check
 
+check-gcc: .prereq_done
+	@${GMAKE_INV} check-gcc
+
+check-g++: .prereq_done
+	@${GMAKE_INV} check-g++
+
 menu: .prereq_done
 	@${GMAKE_INV} menu
 

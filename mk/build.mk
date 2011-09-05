@@ -587,11 +587,21 @@ dep: $(TOPDIR)/bin/tools/depmaker
 
 include $(TOPDIR)/toolchain/gcc/Makefile.inc
 
-check:
-	@-rm tests/adk.exp tests/master.exp
+check-dejagnu:
+	@-rm tests/adk.exp tests/master.exp >/dev/null 2>&1
 	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" tests/adk.exp.in > \
+		tests/adk.exp.in.tmp
+	@sed -e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" tests/adk.exp.in.tmp > \
 		tests/adk.exp
 	@sed -e "s#@TOPDIR@#$(TOPDIR)#" tests/master.exp.in > \
 		tests/master.exp
+
+check-gcc: check-dejagnu
 	env DEJAGNU=$(TOPDIR)/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc
+
+check-g++: check-dejagnu
+	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-g++
+
+check: check-gcc check-g++
