@@ -409,6 +409,8 @@ config ADK_KPACKAGE_KMOD_RTL8187
 	tristate
 	depends on ADK_TARGET_WITH_USB
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	default n
 	help
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.
