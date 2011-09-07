@@ -14,6 +14,8 @@ PKG_BUILDEP:=		zlib
 PKG_URL:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 PKG_SITES:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 
+PKG_CFLINE_KEXEC_TOOLS:=	select ADK_KERNEL_KEXEC
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KEXEC_TOOLS,kexec-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
