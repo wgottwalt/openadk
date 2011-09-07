@@ -17,6 +17,7 @@ PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
 PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV LIBUUID_DEV LIBBLKID_DEV
+PKG_SUBPKGS+=		RESIZE2FS
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
 PKGSD_LIBUUID_DEV:=	UUID headers
@@ -35,6 +36,8 @@ PKGSD_LIBBLKID_DEV:=	blkid headers
 PKGSC_LIBBLKID_DEV:=	devel
 PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	fs
+PKGSD_RESIZE2FS:=	Resize FS utility
+PKGSC_RESIZE2FS:=	fs
 
 include ${TOPDIR}/mk/package.mk
 
@@ -48,6 +51,7 @@ $(eval $(call PKG_template,LIBSS_DEV,libss-dev,${PKG_VERSION}-${PKG_RELEASE},,${
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 $(eval $(call PKG_template,LIBBLKID_DEV,libblkid-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID_DEV},${PKGSC_LIBBLKID_DEV}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
+$(eval $(call PKG_template,RESIZE2FS,resize2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_RESIZE2FS},${PKGSC_RESIZE2FS}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
@@ -77,6 +81,10 @@ e2fsprogs-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \
 		${IDIR_E2FSPROGS}/usr/lib
+
+resize2fs-install:
+	${INSTALL_DIR} ${IDIR_RESIZE2FS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/resize2fs ${IDIR_RESIZE2FS}/usr/sbin
 
 libblkid-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
