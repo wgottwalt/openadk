@@ -1,0 +1,10 @@
+--- apache-log4cxx-0.10.0.orig/src/main/cpp/inputstreamreader.cpp	2008-04-01 00:34:09.000000000 +0200
++++ apache-log4cxx-0.10.0/src/main/cpp/inputstreamreader.cpp	2011-09-08 09:33:04.799508250 +0200
+@@ -20,6 +20,7 @@
+ #include <log4cxx/helpers/exception.h>
+ #include <log4cxx/helpers/pool.h>
+ #include <log4cxx/helpers/bytebuffer.h>
++#include <string.h>
+ 
+ using namespace log4cxx;
+ using namespace log4cxx::helpers;
