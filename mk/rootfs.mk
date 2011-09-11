@@ -9,7 +9,9 @@ endif
 endef
 
 ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ROOTFS:=	root=/dev/sda1
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
@@ -17,7 +19,7 @@ ROOTFS:=	root=/dev/sda2
 MTDDEV:=	root=/dev/mtdblock1
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
 MTDDEV:=	root=/dev/mtdblock2
 endif
 

@@ -17,17 +17,16 @@ PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
 			http://icedtea.classpath.org/download/drops/ \
 			http://icedtea.classpath.org/download/source/
 
-#PKG_CFLINE_OPENJDK:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
-PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100
+PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100 !broadcom-bcm47xx
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
@@ -55,13 +54,14 @@ PKGCD_ZERO:=		zero-assembly backend
 PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
 PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
-PKGCD_JAMVM:=		JamVM backend
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-
+# segfaults with march=pentium-m/atom
+TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
 
@@ -75,13 +75,8 @@ endif
 ifeq ($(ADK_PACKAGE_OPENJDK_CACAO),y)
 CONFIGURE_BACKEND:=	--enable-cacao
 endif
-ifeq ($(ADK_PACKAGE_OPENJDK_JAMVM),y)
-CONFIGURE_BACKEND:=	--enable-jamvm
-endif
 
-CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
-CONFIGURE_ARGS+=	--disable-docs \
-			--disable-bootstrap \
+CONFIGURE_COMMON:=	--disable-docs \
 			--enable-openjdk-cross-compilation \
 			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
 			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
@@ -97,18 +92,18 @@ CONFIGURE_ARGS+=	--disable-docs \
 			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
 			--without-rhino
 
+CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
+CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
+CONFIGURE_ARGS+=	--disable-bootstrap
+
 CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
-			GCC_HONOUR_COPTS=s \
-			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
+			OTHER_CFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
+			OTHER_CXXFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
+			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH)
 
-OPENJDK_NATIVE_ENV+=	ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
-			ADK_ECJ=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
-			PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin \
-			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(ARCH) \
-			TARGET_ALIAS=$(GNU_TARGET_NAME) BUILD_ALIAS=$(GNU_HOST_NAME) HOST_ALIAS=$(GNU_TARGET_NAME)
 ALL_TARGET:=		icedtea
 
 # add include path for Xrender.h from staging directory
@@ -117,6 +112,7 @@ ifeq ($(QEMU),)
 	$(error Fatal error: $$QEMU not set!)
 endif
 	$(SED) "s#@ADK_TARGETDIR@#$(STAGING_TARGET_DIR)#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/sun/xawt/Makefile
+	$(SED) "s#OTHER_CXXFLAGS#CXXFLAGS_COMMON#" ${WRKDIST}/$(PKG_NAME)-$(PKG_VERSION)/jdk/make/com/sun/java/pack/Makefile
 
 do-extract:
 	cd ${WRKDIST}; mkdir $(PKG_NAME)-$(PKG_VERSION); \
@@ -128,7 +124,7 @@ do-extract:
 
 pre-configure:
 	cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-	export $(MAKE_ENV) ${OPENJDK_NATIVE_ENV} ; ./configure \
+	export $(MAKE_ENV); ./configure \
 			${CONFIGURE_TRIPLE} \
 			$(CONFIGURE_BACKEND) \
 	   		--prefix=/usr \
@@ -139,26 +135,8 @@ pre-configure:
 			--localstatedir=/var \
 			--sysconfdir=/etc \
 			--enable-bootstrap \
-			--enable-openjdk-cross-compilation \
-			--with-openjdk-src-dir=$(WRKDIST)/$(PKG_NAME)-$(PKG_VERSION) \
-			--with-xalan2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xalan.jar \
-			--with-xalan2-serializer-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/serializer.jar \
-			--with-xerces2-jar=${WRKDIST}/${XALAN_NAME}_${XALAN_VERSION}/xercesImpl.jar \
-			--with-jdk-home=$(BOOTSTRAPJDK) \
-			--with-java=$(BOOTSTRAPJDK)/bin/java \
-			--with-javac=$(BOOTSTRAPJDK)/bin/javac \
-			--with-javah=$(BOOTSTRAPJDK)/bin/javah \
-			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
-			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
-			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
-			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
-			--with-ecj-jar=$(STAGING_JAVA_HOST_DIR)/usr/share/java/ecj.jar \
-			--without-rhino ;\
-	mkdir -p $(WRKBUILD)/generated/sun/awt/X11/generator/ ; \
-	mkdir -p $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/ ; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/generated/sun/awt/X11/generator/; \
-	cp $(TOPDIR)/jtools/openjdk/files/sizes.* $(WRKBUILD)/openjdk.build/gensrc/sun/awt/X11/generator/; \
-	env ${OPENJDK_NATIVE_ENV} $(MAKE) icedtea-ecj
+			$(CONFIGURE_COMMON) ;\
+	env ${MAKE_ENV} $(MAKE) icedtea-ecj
 	# fixup symlinks to bootstrap jdk
 	ln -sf $(BOOTSTRAPJDK)/bin/java $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/java
 	ln -sf $(BOOTSTRAPJDK)/bin/javac $(WRKBUILD)/openjdk.build-ecj/j2sdk-image/bin/javac
@@ -168,5 +146,6 @@ pre-configure:
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
 	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/* $(IDIR_OPENJDK)/usr 
+	rm -rf $(IDIR_OPENJDK)/usr/man
 
 include ${TOPDIR}/mk/pkg-bottom.mk

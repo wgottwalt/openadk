@@ -1,5 +1,8 @@
 config ADK_KERNEL_MTD
  	boolean
+
+config ADK_KERNEL_MTD_MTDRAM
+	boolean
  
 config ADK_KERNEL_MTD_NAND
 	boolean
@@ -43,8 +46,7 @@ config ADK_KERNEL_MTD_CFI_ADV_OPTIONS
 
 config ADK_KERNEL_MTD_NAND_RB4XX
 	boolean
-	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB411
-	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB433
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	default n
 
 config ADK_KERNEL_MTD_AR7_PARTS

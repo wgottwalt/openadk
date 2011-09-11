@@ -51,11 +51,7 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB411),y)
-kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB433),y)
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
 kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
@@ -102,12 +98,14 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "sudo ./scripts/create-image.sh -f $(ADK_TARGET_ROOTFS) qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -117,7 +115,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -126,7 +124,7 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
@@ -135,7 +133,8 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
 	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
-	@echo "PMON> g console=tty no_auto_cmd"
+	@echo "PMON> g root=/dev/sdc1"
+	@echo "The root parameter have to be changed."
 endif
 endif
 ifeq ($(ADK_TARGET_FS),cf)
@@ -155,12 +154,12 @@ imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 		echo The image file is $(ROOTFSSQUASHFS); \
 	fi
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-		echo The kernel file is $(TARGET_KERNEL)
+	echo The kernel file is $(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
-		echo 'You can flash the image via tftp:'
-		echo 'tftp 192.168.1.1'
-		echo 'tftp> binary'
-		echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
+	echo 'You can flash the image via tftp:'
+	echo 'tftp 192.168.1.1'
+	echo 'tftp> binary'
+	echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
 endif
 endif

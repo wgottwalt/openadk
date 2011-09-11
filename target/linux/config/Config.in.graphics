@@ -3,6 +3,7 @@ config ADK_KERNEL_VT
 	default y if ADK_HARDWARE_QEMU
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
@@ -10,6 +11,7 @@ config ADK_KERNEL_VT_CONSOLE
 	default y if ADK_HARDWARE_QEMU
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default n
 
 config ADK_KERNEL_FONTS
@@ -46,6 +48,17 @@ config ADK_KERNEL_AGP_INTEL
 menu "Graphic devices support"
 depends on ADK_TARGET_WITH_VGA
 
+config ADK_KERNEL_FB_CIRRUS
+	prompt "................................ Framebuffer support for QEMU Emulator"
+	tristate
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	default y if ADK_TARGET_SYSTEM_QEMU_I686
+ 	default n
+	depends on ADK_TARGET_SYSTEM_QEMU_I686
+ 	help
+	 Framebuffer support for Qemu Emulator.
+
 config ADK_KERNEL_FB_GEODE_LX
 	prompt "................................ Framebuffer support for ALIX boards with VGA"
 	tristate
@@ -71,7 +84,7 @@ config ADK_KERNEL_FB_SM7XX
 	 Framebuffer support for Lemote Yeelong.
 
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
-	prompt "................................ Support for Intel graphic cards (AGP/DRM/KMS)"
+	prompt "............................ Support for Intel graphic cards (AGP/DRM/KMS/NM10)"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DRM
@@ -83,7 +96,7 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
-	depends on ADK_TARGET_SYSTEM_IBM_X40 || ADK_NATIVE_SYSTEM_IBM_X40
+	depends on ADK_TARGET_SYSTEM_IBM_X40 || ADK_NATIVE_SYSTEM_IBM_X40 || ADK_TARGET_SYSTEM_INTEL_ATOM || ADK_NATIVE_SYSTEM_INTEL_ATOM
 	help
           AGP/DRM/KMS support for Intel chipset i915.
 	

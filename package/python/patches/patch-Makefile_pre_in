@@ -1,6 +1,7 @@
---- Python-3.1.1.orig/Makefile.pre.in	2009-06-12 00:54:11.000000000 +0200
-+++ Python-3.1.1/Makefile.pre.in	2009-09-28 19:01:13.167748736 +0200
-@@ -52,7 +52,7 @@ INSTALL_DATA=	@INSTALL_DATA@
+diff -Nur Python-3.2.2.orig/Makefile.pre.in Python-3.2.2/Makefile.pre.in
+--- Python-3.2.2.orig/Makefile.pre.in	2011-09-03 18:16:45.000000000 +0200
++++ Python-3.2.2/Makefile.pre.in	2011-09-05 11:58:25.000000000 +0200
+@@ -57,7 +57,7 @@
  # Shared libraries must be installed with executable mode on some systems;
  # rather than figuring out exactly which, we always give them executable mode.
  # Also, making them read-only seems to be a good idea...
@@ -9,7 +10,7 @@
  
  MAKESETUP=      $(srcdir)/Modules/makesetup
  
-@@ -177,6 +177,7 @@ LIBOBJS=	@LIBOBJS@
+@@ -191,6 +191,7 @@
  
  PYTHON=		python$(EXE)
  BUILDPYTHON=	python$(BUILDEXE)
@@ -17,7 +18,7 @@
  
  # The task to run while instrument when building the profile-opt target
  PROFILE_TASK=	$(srcdir)/Tools/pybench/pybench.py -n 2 --with-gc --with-syscheck
-@@ -217,6 +218,7 @@ GRAMMAR_INPUT=	$(srcdir)/Grammar/Grammar
+@@ -233,6 +234,7 @@
  ##########################################################################
  # Parser
  PGEN=		Parser/pgen$(EXE)
@@ -25,7 +26,7 @@
  
  POBJS=		\
  		Parser/acceler.o \
-@@ -393,7 +395,7 @@ build_all_generate_profile:
+@@ -413,7 +415,7 @@
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
  
  run_profile_task:
@@ -34,12 +35,12 @@
  
  build_all_use_profile:
  	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-@@ -411,14 +413,14 @@ $(BUILDPYTHON):	Modules/python.o $(LIBRA
- 			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
+@@ -429,14 +431,14 @@
+ 	$(LINKCC) $(PY_LDFLAGS) $(LINKFORSHARED) -o $@ Modules/python.o $(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
  platform: $(BUILDPYTHON)
--	$(RUNSHARED) ./$(BUILDPYTHON) -E -c 'import sys ; from distutils.util import get_platform ; print(get_platform()+"-"+sys.version[0:3])' >platform
-+	$(RUNSHARED) $(HOSTPYTHON) -E -c 'import sys ; from distutils.util import get_platform ; print(get_platform()+"-"+sys.version[0:3])' >platform
+-	$(RUNSHARED) ./$(BUILDPYTHON) -E -c 'import sys ; from sysconfig import get_platform ; print(get_platform()+"-"+sys.version[0:3])' >platform
++	$(RUNSHARED) $(HOSTPYTHON) -E -c 'import sys ; from sysconfig import get_platform ; print(get_platform()+"-"+sys.version[0:3])' >platform
  
  
  # Build the shared modules
@@ -52,43 +53,43 @@
  	esac
  
  # Build static library
-@@ -542,7 +544,7 @@ $(IO_OBJS): $(IO_H)
- 
- $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
+@@ -587,7 +589,7 @@
+ $(GRAMMAR_H) $(GRAMMAR_C): Parser/pgen.stamp
+ Parser/pgen.stamp: $(PGEN) $(GRAMMAR_INPUT)
  		-@$(INSTALL) -d Include
--		-$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+-		$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
 +		-$(HOSTPGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+ 		-touch Parser/pgen.stamp
  
  $(PGEN):	$(PGENOBJS)
- 		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
-@@ -705,7 +707,7 @@ $(LIBRARY_OBJS) $(MODOBJS) Modules/pytho
+@@ -758,7 +760,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py
--TESTPYTHON=	$(RUNSHARED) ./$(BUILDPYTHON) -E -bb
-+TESTPYTHON=	$(RUNSHARED) $(HOSTPYTHON) -E -bb
+-TESTPYTHON=	$(RUNSHARED) ./$(BUILDPYTHON) -Wd -E -bb $(TESTPYTHONOPTS)
++TESTPYTHON=	$(RUNSHARED) $(HOSTPYTHON) -Wd -E -bb $(TESTPYTHONOPTS)
  test:		all platform
  		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
  		-$(TESTPYTHON) $(TESTPROG) $(TESTOPTS)
-@@ -1018,7 +1020,7 @@ libainstall:	all
+@@ -1102,7 +1104,7 @@
  # Install the dynamically loadable modules
  # This goes into $(exec_prefix)
- sharedinstall:
+ sharedinstall: sharedmods
 -	$(RUNSHARED) ./$(BUILDPYTHON) -E $(srcdir)/setup.py install \
 +	$(RUNSHARED) $(HOSTPYTHON) -E $(srcdir)/setup.py install \
  	   	--prefix=$(prefix) \
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
-@@ -1056,7 +1058,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
+@@ -1140,7 +1142,7 @@
  		fi; \
  	done
- 	$(LN) -fsn include/python$(VERSION) $(DESTDIR)$(prefix)/Headers
+ 	$(LN) -fsn include/python$(LDVERSION) $(DESTDIR)$(prefix)/Headers
 -	sed 's/%VERSION%/'"`$(RUNSHARED) ./$(BUILDPYTHON) -c 'import platform; print(platform.python_version())'`"'/g' < $(RESSRCDIR)/Info.plist > $(DESTDIR)$(prefix)/Resources/Info.plist
 +	sed 's/%VERSION%/'"`$(RUNSHARED) $(HOSTPYTHON) -c 'import platform; print(platform.python_version())'`"'/g' < $(RESSRCDIR)/Info.plist > $(DESTDIR)$(prefix)/Resources/Info.plist
  	$(LN) -fsn $(VERSION) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Versions/Current
  	$(LN) -fsn Versions/Current/$(PYTHONFRAMEWORK) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/$(PYTHONFRAMEWORK)
  	$(LN) -fsn Versions/Current/Headers $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Headers
-@@ -1098,7 +1100,7 @@ frameworkinstallextras:
+@@ -1174,7 +1176,7 @@
  # This installs a few of the useful scripts in Tools/scripts
  scriptsinstall:
  	SRCDIR=$(srcdir) $(RUNSHARED) \
@@ -96,8 +97,8 @@
 +	$(HOSTPYTHON) $(srcdir)/Tools/scripts/setup.py install \
  	--prefix=$(prefix) \
  	--install-scripts=$(BINDIR) \
- 	--root=/$(DESTDIR)
-@@ -1120,7 +1122,7 @@ config.status:	$(srcdir)/configure
+ 	--root=$(DESTDIR)/
+@@ -1196,7 +1198,7 @@
  
  # Run reindent on the library
  reindent:
@@ -106,7 +107,7 @@
  
  # Rerun configure with the same options as it was run last time,
  # provided the config.status script exists
-@@ -1234,7 +1236,7 @@ funny:
+@@ -1317,7 +1319,7 @@
  
  # Perform some verification checks on any modified files.
  patchcheck:

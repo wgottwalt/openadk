@@ -1,4 +1,6 @@
-diff -Nur openjdk-6.orig/Makefile openjdk-6/Makefile
+
+use precompiled ecj.
+
 --- openjdk-6.orig/Makefile	2011-02-28 17:02:07.000000000 +0100
 +++ openjdk-6/Makefile	2011-04-06 19:47:19.261818496 +0200
 @@ -25,9 +25,7 @@
@@ -12,27 +14,8 @@ diff -Nur openjdk-6.orig/Makefile openjdk-6/Makefile
  
  ifndef JDK_TOPDIR
    JDK_TOPDIR=$(TOPDIR)/jdk
-diff -Nur icedtea6-1.10.orig/Makefile.in icedtea6-1.10/Makefile.in
 --- icedtea6-1.10.orig/Makefile.in	2011-03-02 20:48:45.161291458 +0100
 +++ icedtea6-1.10/Makefile.in	2011-04-06 20:10:40.581819545 +0200
-@@ -1329,7 +1329,7 @@
- @OPENJDK_SRC_DIR_FOUND_TRUE@	  cp -pPR $(OPENJDK_SRC_DIR_LINK) $(OPENJDK_SRC_DIR) openjdk ; \
- @OPENJDK_SRC_DIR_FOUND_TRUE@	fi
- @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	if ! test -d openjdk ; then \
--@OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	  cp -pPRl openjdk.hg openjdk ; \
-+@OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	  cp -pPR openjdk.hg openjdk ; \
- @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_TRUE@	fi
- @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_FALSE@	set -e ; \
- @OPENJDK_SRC_DIR_FOUND_FALSE@@USE_HG_FALSE@	if ! test -d openjdk ; \
-@@ -1576,7 +1576,7 @@
- # FIXME (missing): Rename to clone-ecj.
- stamps/extract-ecj.stamp: $(OPENJDK_TREE)
- 	if ! test -d openjdk-ecj ; then \
--	    cp -pPRl openjdk openjdk-ecj ; \
-+	    cp -pPR openjdk openjdk-ecj ; \
- 	fi
- 	mkdir -p stamps
- 	touch stamps/extract-ecj.stamp
 @@ -1643,10 +1643,14 @@
  
  stamps/native-ecj.stamp: 

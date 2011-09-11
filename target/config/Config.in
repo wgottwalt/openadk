@@ -73,6 +73,42 @@ config ADK_TARGET_ABI_N64
 
 endchoice
 
+# submodel support
+#
+choice
+prompt "Qemu ARM Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_ARM
+
+config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	boolean "Xscale PXA270 Spitz PDA"
+	select ADK_KERNEL_ARCH_PXA
+	select ADK_KERNEL_PXA_SHARPSL
+	select ADK_KERNEL_MACH_SPITZ
+	select ADK_KERNEL_SPI_PXA2XX
+
+config ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
+	boolean "ARM Ltd. Versatile"
+	select ADK_KERNEL_ARCH_VERSATILE
+	select ADK_KERNEL_PCI
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_SCSI_SYM53C8XX_2
+
+endchoice
+
+choice
+prompt "Foxboard LX Model"
+depends on ADK_TARGET_SYSTEM_FOXBOARD_LX
+
+config ADK_TARGET_FOXBOARD_MODEL_LX416
+	boolean "Foxboard LX 4x16"
+
+config ADK_TARGET_FOXBOARD_MODEL_LX832
+	boolean "Foxboard LX 8x32"
+
+endchoice
+
 choice 
 prompt "Broadcom BCM47xx Model"
 depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
@@ -205,6 +241,16 @@ config ADK_TARGET_CPU_WITH_SSE
 config ADK_TARGET_CPU_WITH_SSE2
 	boolean
 
+config ADK_TARGET_CPU_WITH_SSE3
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSSE3
+	boolean
+
+# hyper threading
+config ADK_TARGET_CPU_WITH_HT
+	boolean
+
 config ADK_TARGET_CPU_WITH_3DNOW
 	boolean
 
@@ -212,6 +258,15 @@ config ADK_TARGET_CPU_WITH_3DNOWEXT
 	boolean
 
 # cpu configuration
+config ADK_CPU_CRIS_V10
+	boolean
+
+config ADK_CPU_CRIS_V32
+	boolean
+
+config ADK_CPU_SH4
+	boolean
+
 config ADK_CPU_SPARC_V8
 	boolean
 
@@ -236,7 +291,13 @@ config ADK_CPU_GEODE
 config ADK_CPU_PPC
 	boolean
 
+config ADK_CPU_PPC64
+	boolean
+
 config ADK_CPU_PENTIUM_M
+	boolean
+
+config ADK_CPU_ATOM
 	boolean
 
 config ADK_CPU_AMDFAM10
@@ -257,6 +318,7 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_I686
 	default "i586" if ADK_CPU_GEODE
 	default "i686" if ADK_CPU_PENTIUM_M
+	default "i686" if ADK_CPU_ATOM
 	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
 	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
 	default "mips" if ADK_LINUX_MIPS && ADK_big
@@ -264,7 +326,12 @@ config ADK_TARGET_CPU_ARCH
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
+	default "sparc64" if ADK_LINUX_SPARC64
+	default "sh" if ADK_LINUX_SH
+	default "cris" if ADK_CPU_CRIS_V10
+	default "crisv32" if ADK_CPU_CRIS_V32
 	default "ppc" if ADK_CPU_PPC
+	default "ppc64" if ADK_CPU_PPC64
 
 config ADK_TARGET_ABI_CFLAGS
 	string
@@ -285,6 +352,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=i586" if ADK_CPU_I586
 	default "-march=i686" if ADK_CPU_I686
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
+	default "-march=atom" if ADK_CPU_ATOM
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
 	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
@@ -292,6 +360,8 @@ config ADK_TARGET_CFLAGS
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
+	default "-march=v32" if ADK_CPU_CRIS_V32
+	default "-march=v10" if ADK_CPU_CRIS_V10
 
 config ADK_TARGET_CMDLINE
 	string
@@ -300,8 +370,15 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
+	default "console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_FOXBOARD_LX
+	default "console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH
 	default ""
 
 # c library
@@ -334,7 +411,6 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
-		   !ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
@@ -354,6 +430,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_PPC64 || \
+		ADK_LINUX_SPARC || \
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
@@ -412,6 +489,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	select ADK_KERNEL_BLK_DEV_INITRD
+	select ADK_KERNEL_RD_XZ
 	help
 	  create an read-only initramfs system.
 
@@ -456,6 +534,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	select ADK_KERNEL_NFS_COMMON
 	select ADK_KERNEL_IP_PNP
 	select ADK_KERNEL_IP_PNP_DHCP
+	depends on !ADK_HARDWARE_QEMU
 	help
 	  Root filesystem mounted via NFS. (DHCP)
 

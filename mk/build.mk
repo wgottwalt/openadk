@@ -513,7 +513,7 @@ bulktoolchain:
 bulk:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -531,7 +531,7 @@ bulk:
 bulkall:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -549,14 +549,14 @@ bulkall:
 bulkallmod:
 	for libc in uclibc eglibc glibc;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system >.exit; exit 1;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
 	      done; \
@@ -587,11 +587,21 @@ dep: $(TOPDIR)/bin/tools/depmaker
 
 include $(TOPDIR)/toolchain/gcc/Makefile.inc
 
-check:
-	@-rm tests/adk.exp tests/master.exp
+check-dejagnu:
+	@-rm tests/adk.exp tests/master.exp >/dev/null 2>&1
 	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" tests/adk.exp.in > \
+		tests/adk.exp.in.tmp
+	@sed -e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" tests/adk.exp.in.tmp > \
 		tests/adk.exp
 	@sed -e "s#@TOPDIR@#$(TOPDIR)#" tests/master.exp.in > \
 		tests/master.exp
+
+check-gcc: check-dejagnu
 	env DEJAGNU=$(TOPDIR)/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc
+
+check-g++: check-dejagnu
+	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-g++
+
+check: check-gcc check-g++

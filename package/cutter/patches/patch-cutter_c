@@ -1,7 +1,18 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- cutter-1.03.orig/cutter.c	2005-04-30 09:01:03.000000000 +0200
-+++ cutter-1.03/cutter.c	2008-10-09 11:32:40.000000000 +0200
-@@ -297,7 +297,7 @@ int send_rst(
++++ cutter-1.03/cutter.c	2011-08-24 18:49:58.830478484 +0200
+@@ -35,6 +35,10 @@
+  * 		improvment.
+  */
+ 
++#ifndef __packed
++#define __packed __attribute__((packed))
++#endif
++
+ #include <string.h>
+ #include <stdio.h>
+ #include <unistd.h>
+@@ -297,7 +301,7 @@ int send_rst(
  	pheader.placeholder=0;
  	pheader.protocol=IPPROTO_TCP;
  	pheader.tcp_length=htons(TCPHDR);
@@ -10,7 +21,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	tpack.tcp.check=in_cksum((unsigned short *)&pheader,TCPHDR+12);
  
  	/*
-@@ -419,7 +419,7 @@ int send_rst(
+@@ -419,7 +423,7 @@ int send_rst(
  			pheader.placeholder=0;
  			pheader.protocol=IPPROTO_TCP;
  			pheader.tcp_length=htons(TCPHDR);
