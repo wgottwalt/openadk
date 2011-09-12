@@ -27,6 +27,10 @@ ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
+ROOTFS:=	root=/dev/sda1 rootwait
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 USB:=		rootwait
 else
