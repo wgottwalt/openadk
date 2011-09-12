@@ -1,0 +1,65 @@
+#!/bin/sh
+
+load_system() {
+	echo "Loading OpenADK from microdrive (${micro}1)"
+	mount ${micro}1 /mnt
+	if [ $? -ne 0 ];then echo "Mounting ${micro}1 failed"; exit 1;fi
+	kexec -l /mnt/boot/kernel
+	umount /mnt
+	kexec -e -x
+}
+
+cf_install() {
+	mkdir /mnt/root
+	mkdir /mnt/cf
+	mount -t ext2 ${micro}1 /mnt/root
+	if [ $? -ne 0 ];then echo "Mounting ${micro}1 failed"; exit 1;fi
+	mount ${cfd}1 /mnt/cf
+	if [ $? -ne 0 ];then echo "Mounting ${cfd}1 failed"; exit 1;fi
+	if [ -f /mnt/cf/sharp.tgz ];then
+		echo "Installing OpenADK from CF (${cfd}1) to microdrive (${micro}1)"
+		umount /mnt/root
+		mke2fs -q ${micro}1
+		mount -t ext2 ${micro}1 /mnt/root
+		if [ $? -ne 0 ];then echo "Mounting ${micro}1 failed"; exit 1;fi
+		tar -xzpf /mnt/cf/sharp.tgz -C /mnt/root
+	fi
+	umount /mnt/root
+	umount /mnt/cf
+}
+
+check_cf() {
+	cf=0
+	if [ $(lsscsi|wc -l) -eq 1 ];then
+		cf=0
+	else
+		cf=1
+	fi
+	micro=$(lsscsi |awk '$4 ~ "HMS360" { print $6 }')
+	if [ "$micro" = "/dev/sda" ];then
+		cfd=/dev/sdb
+	else
+		cfd=/dev/sda
+	fi
+}
+
+echo "  ___                      _    ____  _  __ "
+echo " / _ \ _ __   ___ _ __    / \  |  _ \| |/ / "
+echo "| | | | '_ \ / _ \ '_ \  / _ \ | | | | ' /  "
+echo "| |_| | |_) |  __/ | | |/ ___ \| |_| | . \  "
+echo " \___/| .__/ \___|_| |_/_/   \_\____/|_|\_\ "
+echo "      |_|                                   "
+echo ""
+
+sleep 2
+check_cf
+if [ $cf -eq 0 ];then
+	load_system
+else
+	echo "Should I install OpenADK to microdrive (y/n)"
+	read answer
+	if [ "$answer" = "y" ];then
+		cf_install
+	fi
+	load_system
+fi
