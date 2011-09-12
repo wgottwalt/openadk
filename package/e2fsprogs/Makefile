@@ -94,9 +94,9 @@ libe2fs-install:
 		${IDIR_LIBE2FS}/usr/lib
 
 e2fsck-install:
-	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_MKE2FS}/usr/sbin
-	cd $(IDIR_MKE2FS)/usr/sbin && ln -sf e2fsck fsck.ext2
+	${INSTALL_DIR} ${IDIR_E2FSCK}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSCK}/usr/sbin
+	cd $(IDIR_E2FSCK)/usr/sbin && ln -sf e2fsck fsck.ext2
 
 mke2fs-install:
 	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
