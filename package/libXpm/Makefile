@@ -8,6 +8,7 @@ PKG_VERSION:=		3.5.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d6d4b0f76248a6b346eb42dfcdaa72a6
 PKG_DESCR:=		common operation for the XPM pixmap format
+PKG_BUILDDEP:=		libX11
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 
