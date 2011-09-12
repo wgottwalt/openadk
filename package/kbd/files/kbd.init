@@ -1,6 +1,6 @@
 #!/bin/sh
-#PKG dropbear
-#INIT 50
+#PKG kbd
+#INIT 10
 . /etc/rc.conf
 
 case $1 in
@@ -10,7 +10,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	loadkeys /etc/$kbd_map
+	loadkeys /etc/${kbd_map}.map
 	;;
 stop)
 	;;
