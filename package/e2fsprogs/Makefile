@@ -15,9 +15,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
-PKG_SUBPKGS:=		E2FSPROGS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
+PKG_SUBPKGS:=		LIBE2FS LIBUUID LIBCOM_ERR LIBSS LIBBLKID E2FSCK_STATIC
 PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV LIBUUID_DEV LIBBLKID_DEV
-PKG_SUBPKGS+=		RESIZE2FS
+PKG_SUBPKGS+=		RESIZE2FS TUNE2FS E2FSCK MKE2FS
+PKGSD_LIBE2FS:=		e2fsprogs library
+PKGSC_LIBE2FS:=		libs
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
 PKGSD_LIBUUID_DEV:=	UUID headers
@@ -38,10 +40,20 @@ PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	fs
 PKGSD_RESIZE2FS:=	Resize FS utility
 PKGSC_RESIZE2FS:=	fs
+PKGSS_RESIZE2FS:=	libe2fs
+PKGSD_TUNE2FS:=		Tune2FS utility
+PKGSC_TUNE2FS:=		fs
+PKGSS_TUNE2FS:=		libe2fs
+PKGSD_E2FSCK:=		E2fsck utility
+PKGSC_E2FSCK:=		fs
+PKGSS_E2FSCK:=		libe2fs
+PKGSD_MKE2FS:=		Mke2fs utility
+PKGSC_MKE2FS:=		fs
+PKGSS_MKE2FS:=		libe2fs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,E2FSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBE2FS,libe2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBE2FS},${PKGSC_LIBE2FS}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
 $(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
@@ -51,7 +63,10 @@ $(eval $(call PKG_template,LIBSS_DEV,libss-dev,${PKG_VERSION}-${PKG_RELEASE},,${
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 $(eval $(call PKG_template,LIBBLKID_DEV,libblkid-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBLKID_DEV},${PKGSC_LIBBLKID_DEV}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
-$(eval $(call PKG_template,RESIZE2FS,resize2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_RESIZE2FS},${PKGSC_RESIZE2FS}))
+$(eval $(call PKG_template,TUNE2FS,tune2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_TUNE2FS),${PKGSD_TUNE2FS},${PKGSC_TUNE2FS}))
+$(eval $(call PKG_template,RESIZE2FS,resize2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_RESIZE2FS),${PKGSD_RESIZE2FS},${PKGSC_RESIZE2FS}))
+$(eval $(call PKG_template,MKE2FS,mke2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_MKE2FS),${PKGSD_MKE2FS},${PKGSC_MKE2FS}))
+$(eval $(call PKG_template,E2FSCK,e2fsck,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_E2FSCK),${PKGSD_E2FSCK},${PKGSC_E2FSCK}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath
 INSTALL_TARGET+=	install-libs
@@ -71,16 +86,25 @@ ifneq ($(ADK_PACKAGE_E2FSCK_STATIC),)
 	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin
 endif
 
-e2fsprogs-install:
-	${INSTALL_DIR} ${IDIR_E2FSPROGS}/etc
-	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_E2FSPROGS}/etc
-	${INSTALL_DIR} ${IDIR_E2FSPROGS}/usr/lib ${IDIR_E2FSPROGS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSPROGS}/usr/sbin
-	cd $(IDIR_E2FSPROGS)/usr/sbin && ln -sf e2fsck fsck.ext2
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_E2FSPROGS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_E2FSPROGS}/usr/sbin
+libe2fs-install:
+	${INSTALL_DIR} ${IDIR_LIBE2FS}/etc
+	${INSTALL_DATA} ${WRKINST}/etc/mke2fs.conf ${IDIR_LIBE2FS}/etc
+	${INSTALL_DIR} ${IDIR_LIBE2FS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{e2p,ext2fs}.so.* \
-		${IDIR_E2FSPROGS}/usr/lib
+		${IDIR_LIBE2FS}/usr/lib
+
+e2fsck-install:
+	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_MKE2FS}/usr/sbin
+	cd $(IDIR_MKE2FS)/usr/sbin && ln -sf e2fsck fsck.ext2
+
+mke2fs-install:
+	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_MKE2FS}/usr/sbin
+
+tune2fs-install:
+	${INSTALL_DIR} ${IDIR_TUNE2FS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/tune2fs ${IDIR_TUNE2FS}/usr/sbin
 
 resize2fs-install:
 	${INSTALL_DIR} ${IDIR_RESIZE2FS}/usr/sbin
