@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dillo
-PKG_VERSION:=		2.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f8bcd62093f178bed81e46cc54e73f42
+PKG_VERSION:=		3.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		448f44a923222270cb0c84e55adc1be1
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libiconv libpng zlib libjpeg
@@ -17,7 +17,7 @@ PKG_SITES:=		http://www.dillo.org/download/
 PKG_NEED_CXX:=		1
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
