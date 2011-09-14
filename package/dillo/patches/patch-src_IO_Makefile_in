@@ -1,9 +1,9 @@
---- dillo-2.2.orig/src/IO/Makefile.in	2010-02-11 11:20:01.000000000 +0100
-+++ dillo-2.2/src/IO/Makefile.in	2011-01-07 21:38:15.000000000 +0100
-@@ -188,7 +188,7 @@ top_build_prefix = @top_build_prefix@
- top_builddir = @top_builddir@
- top_srcdir = @top_srcdir@
- AM_CPPFLAGS = -DDILLO_BINDIR='"$(bindir)/"'
+--- dillo-3.0.orig/src/IO/Makefile.in	2011-09-06 22:55:42.000000000 +0200
++++ dillo-3.0/src/IO/Makefile.in	2011-09-12 20:24:41.527983361 +0200
+@@ -191,7 +191,7 @@ AM_CPPFLAGS = \
+ 	-I$(top_srcdir) \
+ 	-DDILLO_BINDIR='"$(bindir)/"'
+ 
 -AM_CFLAGS = @LIBFLTK_CFLAGS@
 +AM_CFLAGS = 
  AM_CXXFLAGS = @LIBFLTK_CXXFLAGS@

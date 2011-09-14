@@ -103,9 +103,10 @@ ${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
 	echo "CONFIG_BLK_DEV_INITRD=y" >> ${LINUX_DIR}/.config
 	echo 'CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"' >> \
 		${LINUX_DIR}/.config
+	cp $(TOPDIR)/scripts/dev.cpio $@
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P >$@ 2>/dev/null
+	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -A -P -O $@ 2>/dev/null
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \

@@ -1,11 +1,11 @@
---- fltk-2.0.x-r7513.orig/Makefile	2010-04-15 18:29:49.000000000 +0200
-+++ fltk-2.0.x-r7513/Makefile	2011-01-14 22:01:49.000000000 +0100
-@@ -25,7 +25,7 @@
+--- fltk-1.3.0.orig/Makefile	2011-02-15 16:29:03.000000000 +0100
++++ fltk-1.3.0/Makefile	2011-09-12 20:20:27.137980830 +0200
+@@ -27,7 +27,7 @@
  
  include makeinclude
  
--DIRS = src $(LOCALIMAGES) images OpenGL fluid glut test
-+DIRS = src $(LOCALIMAGES) images OpenGL fluid
+-DIRS = $(IMAGEDIRS) src $(CAIRODIR) fluid test documentation
++DIRS = $(IMAGEDIRS) src $(CAIRODIR) fluid documentation
  
- all: makeinclude
+ all: makeinclude fltk-config
  	for dir in $(DIRS); do\
