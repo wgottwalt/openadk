@@ -1,0 +1,19 @@
+--- vlc-1.1.11.orig/src/misc/linux_specific.c	2011-07-14 13:27:03.000000000 +0200
++++ vlc-1.1.11/src/misc/linux_specific.c	2011-09-15 06:35:43.887989501 +0200
+@@ -83,14 +83,14 @@ static struct
+     unsigned refs;
+ } once = { VLC_STATIC_MUTEX, 0 };
+ 
+-#ifdef __GLIBC__
++#ifndef __UCLIBC__
+ # include <gnu/libc-version.h>
+ # include <stdlib.h>
+ #endif
+ 
+ void system_Init (libvlc_int_t *libvlc, int *argc, const char *argv[])
+ {
+-#ifdef __GLIBC__
++#ifndef __UCLIBC__
+     const char *glcv = gnu_get_libc_version ();
+ 
+     /* gettext in glibc 2.5-2.7 is not thread-safe. LibVLC keeps crashing,

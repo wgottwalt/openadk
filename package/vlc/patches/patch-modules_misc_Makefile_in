@@ -1,0 +1,155 @@
+--- vlc-1.1.11.orig/modules/misc/Makefile.in	2011-07-14 13:28:46.000000000 +0200
++++ vlc-1.1.11/modules/misc/Makefile.in	2011-09-15 13:17:03.867989779 +0200
+@@ -205,26 +205,6 @@ libwin32text_plugin_la_LINK = $(LIBTOOL)
+ 	$(libwin32text_plugin_la_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+ 	$(LDFLAGS) -o $@
+ @HAVE_WINCE_TRUE@am_libwin32text_plugin_la_rpath = -rpath $(libvlcdir)
+-am__objects_12 = libxdg_screensaver_plugin_la-xdg.lo
+-am_libxdg_screensaver_plugin_la_OBJECTS = $(am__objects_12)
+-nodist_libxdg_screensaver_plugin_la_OBJECTS =
+-libxdg_screensaver_plugin_la_OBJECTS =  \
+-	$(am_libxdg_screensaver_plugin_la_OBJECTS) \
+-	$(nodist_libxdg_screensaver_plugin_la_OBJECTS)
+-libxdg_screensaver_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+-	$(libxdg_screensaver_plugin_la_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
+-am__objects_13 = libxscreensaver_plugin_la-xscreensaver.lo
+-am_libxscreensaver_plugin_la_OBJECTS = $(am__objects_13)
+-nodist_libxscreensaver_plugin_la_OBJECTS =
+-libxscreensaver_plugin_la_OBJECTS =  \
+-	$(am_libxscreensaver_plugin_la_OBJECTS) \
+-	$(nodist_libxscreensaver_plugin_la_OBJECTS)
+-libxscreensaver_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+-	$(libxscreensaver_plugin_la_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+ depcomp = $(SHELL) $(top_srcdir)/autotools/depcomp
+ am__depfiles_maybe = depfiles
+@@ -272,10 +252,6 @@ SOURCES = $(libaudioscrobbler_plugin_la_
+ 	$(nodist_libvod_rtsp_plugin_la_SOURCES) \
+ 	$(libwin32text_plugin_la_SOURCES) \
+ 	$(nodist_libwin32text_plugin_la_SOURCES) \
+-	$(libxdg_screensaver_plugin_la_SOURCES) \
+-	$(nodist_libxdg_screensaver_plugin_la_SOURCES) \
+-	$(libxscreensaver_plugin_la_SOURCES) \
+-	$(nodist_libxscreensaver_plugin_la_SOURCES)
+ DIST_SOURCES = $(libaudioscrobbler_plugin_la_SOURCES) \
+ 	$(libfreetype_plugin_la_SOURCES) \
+ 	$(libgnutls_plugin_la_SOURCES) $(libinhibit_plugin_la_SOURCES) \
+@@ -284,9 +260,7 @@ DIST_SOURCES = $(libaudioscrobbler_plugi
+ 	$(libquartztext_plugin_la_SOURCES) \
+ 	$(libsqlite_plugin_la_SOURCES) $(libsvg_plugin_la_SOURCES) \
+ 	$(libvod_rtsp_plugin_la_SOURCES) \
+-	$(libwin32text_plugin_la_SOURCES) \
+-	$(libxdg_screensaver_plugin_la_SOURCES) \
+-	$(libxscreensaver_plugin_la_SOURCES)
++	$(libwin32text_plugin_la_SOURCES)
+ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
+ 	html-recursive info-recursive install-data-recursive \
+ 	install-dvi-recursive install-exec-recursive \
+@@ -620,7 +594,6 @@ LTLIBxcb_xv = @LTLIBxcb_xv@
+ LTLIBxdg_screensaver = @LTLIBxdg_screensaver@
+ LTLIBxml = @LTLIBxml@
+ LTLIBxosd = @LTLIBxosd@
+-LTLIBxscreensaver = @LTLIBxscreensaver@
+ LTLIBzip = @LTLIBzip@
+ LTLIBzvbi = @LTLIBzvbi@
+ LUAC = @LUAC@
+@@ -834,13 +807,12 @@ vlcdatadir = @vlcdatadir@
+ vlclibdir = @vlclibdir@
+ basedir = misc
+ dir = misc
+-mods = audioscrobbler freetype gnutls inhibit logger osso_screensaver quartztext sqlite svg vod_rtsp win32text xdg_screensaver xscreensaver
++mods = audioscrobbler freetype gnutls inhibit logger osso_screensaver quartztext sqlite svg vod_rtsp win32text
+ libvlc_LTLIBRARIES = $(LTLIBfreetype) $(LTLIBgnutls) $(LTLIBinhibit) \
+ 	$(LTLIBosso_screensaver) $(LTLIBsqlite) $(LTLIBsvg) \
+-	$(LTLIBxdg_screensaver) $(LTLIBxscreensaver) \
+ 	libaudioscrobbler_plugin.la liblogger_plugin.la \
+ 	$(am__append_2) $(am__append_3) $(am__append_4)
+-EXTRA_LTLIBRARIES = libfreetype_plugin.la libgnutls_plugin.la libinhibit_plugin.la libosso_screensaver_plugin.la libsqlite_plugin.la libsvg_plugin.la libxdg_screensaver_plugin.la libxscreensaver_plugin.la
++EXTRA_LTLIBRARIES = libfreetype_plugin.la libgnutls_plugin.la libinhibit_plugin.la libosso_screensaver_plugin.la libsqlite_plugin.la libsvg_plugin.la
+ NULL = 
+ SUFFIXES = 
+ libvlcdir = $(vlclibdir)/plugins/$(basedir)
+@@ -876,8 +848,6 @@ SOURCES_svg = svg.c
+ SOURCES_audioscrobbler = audioscrobbler.c
+ SOURCES_inhibit = inhibit.c
+ SOURCES_sqlite = sqlite.c
+-SOURCES_xscreensaver = inhibit/xscreensaver.c
+-SOURCES_xdg_screensaver = inhibit/xdg.c
+ SOURCES_osso_screensaver = inhibit/osso.c
+ 
+ # The audioscrobbler plugin
+@@ -1001,27 +971,6 @@ libwin32text_plugin_la_OBJCFLAGS = $(AM_
+ libwin32text_plugin_la_LIBADD = $(AM_LIBADD)
+ libwin32text_plugin_la_DEPENDENCIES = $(top_srcdir)/src/libvlccore.sym
+ 
+-# The xdg_screensaver plugin
+-libxdg_screensaver_plugin_la_SOURCES = $(SOURCES_xdg_screensaver)
+-nodist_libxdg_screensaver_plugin_la_SOURCES = $(nodist_SOURCES_xdg_screensaver)
+-# Force per-target objects:
+-libxdg_screensaver_plugin_la_CFLAGS = $(AM_CFLAGS)
+-libxdg_screensaver_plugin_la_CXXFLAGS = $(AM_CXXFLAGS)
+-libxdg_screensaver_plugin_la_OBJCFLAGS = $(AM_OBJCFLAGS)
+-# Set LIBADD and DEPENDENCIES manually:
+-libxdg_screensaver_plugin_la_LIBADD = $(AM_LIBADD)
+-libxdg_screensaver_plugin_la_DEPENDENCIES = $(top_srcdir)/src/libvlccore.sym
+-
+-# The xscreensaver plugin
+-libxscreensaver_plugin_la_SOURCES = $(SOURCES_xscreensaver)
+-nodist_libxscreensaver_plugin_la_SOURCES = $(nodist_SOURCES_xscreensaver)
+-# Force per-target objects:
+-libxscreensaver_plugin_la_CFLAGS = $(AM_CFLAGS)
+-libxscreensaver_plugin_la_CXXFLAGS = $(AM_CXXFLAGS)
+-libxscreensaver_plugin_la_OBJCFLAGS = $(AM_OBJCFLAGS)
+-# Set LIBADD and DEPENDENCIES manually:
+-libxscreensaver_plugin_la_LIBADD = $(AM_LIBADD)
+-libxscreensaver_plugin_la_DEPENDENCIES = $(top_srcdir)/src/libvlccore.sym
+ all: $(BUILT_SOURCES)
+ 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+ 
+@@ -1110,10 +1059,6 @@ libvod_rtsp_plugin.la: $(libvod_rtsp_plu
+ 	$(AM_V_CCLD)$(libvod_rtsp_plugin_la_LINK) $(am_libvod_rtsp_plugin_la_rpath) $(libvod_rtsp_plugin_la_OBJECTS) $(libvod_rtsp_plugin_la_LIBADD) $(LIBS)
+ libwin32text_plugin.la: $(libwin32text_plugin_la_OBJECTS) $(libwin32text_plugin_la_DEPENDENCIES) 
+ 	$(AM_V_CCLD)$(libwin32text_plugin_la_LINK) $(am_libwin32text_plugin_la_rpath) $(libwin32text_plugin_la_OBJECTS) $(libwin32text_plugin_la_LIBADD) $(LIBS)
+-libxdg_screensaver_plugin.la: $(libxdg_screensaver_plugin_la_OBJECTS) $(libxdg_screensaver_plugin_la_DEPENDENCIES) 
+-	$(AM_V_CCLD)$(libxdg_screensaver_plugin_la_LINK)  $(libxdg_screensaver_plugin_la_OBJECTS) $(libxdg_screensaver_plugin_la_LIBADD) $(LIBS)
+-libxscreensaver_plugin.la: $(libxscreensaver_plugin_la_OBJECTS) $(libxscreensaver_plugin_la_DEPENDENCIES) 
+-	$(AM_V_CCLD)$(libxscreensaver_plugin_la_LINK)  $(libxscreensaver_plugin_la_OBJECTS) $(libxscreensaver_plugin_la_LIBADD) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+@@ -1132,8 +1077,6 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libsvg_plugin_la-svg.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libvod_rtsp_plugin_la-rtsp.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libwin32text_plugin_la-win32text.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdg_screensaver_plugin_la-xdg.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxscreensaver_plugin_la-xscreensaver.Plo@am__quote@
+ 
+ .c.o:
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@@ -1247,22 +1190,6 @@ libwin32text_plugin_la-win32text.lo: win
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libwin32text_plugin_la_CFLAGS) $(CFLAGS) -c -o libwin32text_plugin_la-win32text.lo `test -f 'win32text.c' || echo '$(srcdir)/'`win32text.c
+ 
+-libxdg_screensaver_plugin_la-xdg.lo: inhibit/xdg.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdg_screensaver_plugin_la_CFLAGS) $(CFLAGS) -MT libxdg_screensaver_plugin_la-xdg.lo -MD -MP -MF $(DEPDIR)/libxdg_screensaver_plugin_la-xdg.Tpo -c -o libxdg_screensaver_plugin_la-xdg.lo `test -f 'inhibit/xdg.c' || echo '$(srcdir)/'`inhibit/xdg.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdg_screensaver_plugin_la-xdg.Tpo $(DEPDIR)/libxdg_screensaver_plugin_la-xdg.Plo
+-@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='inhibit/xdg.c' object='libxdg_screensaver_plugin_la-xdg.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdg_screensaver_plugin_la_CFLAGS) $(CFLAGS) -c -o libxdg_screensaver_plugin_la-xdg.lo `test -f 'inhibit/xdg.c' || echo '$(srcdir)/'`inhibit/xdg.c
+-
+-libxscreensaver_plugin_la-xscreensaver.lo: inhibit/xscreensaver.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxscreensaver_plugin_la_CFLAGS) $(CFLAGS) -MT libxscreensaver_plugin_la-xscreensaver.lo -MD -MP -MF $(DEPDIR)/libxscreensaver_plugin_la-xscreensaver.Tpo -c -o libxscreensaver_plugin_la-xscreensaver.lo `test -f 'inhibit/xscreensaver.c' || echo '$(srcdir)/'`inhibit/xscreensaver.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxscreensaver_plugin_la-xscreensaver.Tpo $(DEPDIR)/libxscreensaver_plugin_la-xscreensaver.Plo
+-@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='inhibit/xscreensaver.c' object='libxscreensaver_plugin_la-xscreensaver.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxscreensaver_plugin_la_CFLAGS) $(CFLAGS) -c -o libxscreensaver_plugin_la-xscreensaver.lo `test -f 'inhibit/xscreensaver.c' || echo '$(srcdir)/'`inhibit/xscreensaver.c
+-
+ mostlyclean-libtool:
+ 	-rm -f *.lo
+ 
