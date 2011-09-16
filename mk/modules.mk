@@ -68,8 +68,6 @@ $(eval $(call KMOD_template,RFKILL,rfkill,\
 
 $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/lib80211 \
-	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_ccmp \
-	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_tkip \
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
 ,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb))
@@ -92,6 +90,8 @@ $(eval $(call KMOD_template,B43,b43,\
 ,70))
 
 $(eval $(call KMOD_template,HOSTAP,hostap,\
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_ccmp \
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_tkip \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/hostap/hostap \
 ,70))
 
