@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b45aab5b60382ec3ada7e71cb1356b1d
 PKG_DESCR:=		DAAPD server
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libunistring zlib libconfuse sqlite ffmpeg libgcrypt
+PKG_DEPENDS:=		libunistring zlib libconfuse sqlite libffmpeg libgcrypt
 PKG_DEPENDS+=		libavahi libmxml libevent libavl libantlr3c alsa-lib
 PKG_DEPENDS+=		libsqlite libintl dbus
 PKG_BUILDDEP:=		libunistring zlib confuse avahi sqlite ffmpeg dbus
@@ -22,8 +22,6 @@ PKG_ARCH_DEPENDS:=	!ppc
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FORKED_DAAPD,forked-daapd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-#TARGET_LDFLAGS+=		-lgcc
 
 forked-daapd-install:
 	$(INSTALL_DIR) $(IDIR_FORKED_DAAPD)/etc

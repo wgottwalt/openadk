@@ -10,7 +10,7 @@ PKG_MD5SUM:=		a64846d6f21ea179ae8e8bfb6f9447fe
 PKG_DESCR:=		Media Player
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		ffmpeg xcb-util
-PKG_DEPENDS:=		ffmpeg xcb-util
+PKG_DEPENDS:=		libffmpeg xcb-util
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vlc/1.1.11/}
 
