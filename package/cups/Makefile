@@ -17,9 +17,13 @@ PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
+PKG_SUBPKGS:=		CUPS CUPS_DEV
+PKGSC_CUPS_DEV:=	devel
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CUPS_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_CUPS_DEV}))
 
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
@@ -80,4 +84,8 @@ post-install:
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_CUPS}/usr/sbin/
 	${CP} ./files/etc/cups/* ${IDIR_CUPS}/etc/cups/
 
+cups-dev-install:
+	${INSTALL_DIR} ${IDIR_CUPS_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/* ${IDIR_CUPS_DEV}/usr/include
+	
 include ${TOPDIR}/mk/pkg-bottom.mk

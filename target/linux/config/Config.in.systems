@@ -38,6 +38,9 @@ config ADK_KERNEL_LEMOTE_MACH2F
 config ADK_KERNEL_ARCH_VERSATILE
 	boolean
 
+config ADK_KERNEL_PXA_SHARP_Cxx00
+	boolean
+
 config ADK_KERNEL_ARCH_PXA
 	boolean
 

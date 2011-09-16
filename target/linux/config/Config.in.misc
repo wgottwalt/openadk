@@ -15,6 +15,24 @@ config ADK_KERNEL_RTC_INTF_DEV
 
 menu "Miscellaneous devices support"
 
+config ADK_KERNEL_KEXEC
+	prompt ".................................. Add KEXEC syscall"
+	boolean
+	help
+	  You need also kexec-tools to benefit from it.	
+
+config ADK_KERNEL_RTC_DRV_PXA
+	prompt ".................................. RTC support for Sharp Zaurus"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	help
+	  Sharp Zaurus RTC.
+
 config ADK_KERNEL_RTC_DRV_AT91SAM9
 	prompt ".................................. RTC support for AT91SAM9 (Fox G20)"
 	boolean

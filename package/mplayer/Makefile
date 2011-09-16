@@ -18,7 +18,7 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_ARCH_DEPENDS:=	x86 mips
+PKG_ARCH_DEPENDS:=	x86 mips arm
 
 PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -30,6 +30,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 # gcc 4.5 produces internal compiler error with -Os
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 
@@ -68,6 +69,11 @@ CONFIGURE_CPU_OPTS+=	--enable-sse2
 else
 CONFIGURE_CPU_OPTS+=	--disable-sse2
 endif
+#ifeq (${ADK_TARGET_CPU_WITH_IWMMXT},y)
+#CONFIGURE_CPU_OPTS+=	--enable-iwmmxt
+#else
+#CONFIGURE_CPU_OPTS+=	--disable-iwmmxt
+#endif
 
 ifeq ($(ADK_DEBUG),y)
 CONFIGURE_DEBUG=	--enable-debug

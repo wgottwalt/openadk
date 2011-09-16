@@ -1,0 +1,11 @@
+--- apache-log4cxx-0.10.0.orig/src/Makefile.in	2008-04-01 00:44:12.000000000 +0200
++++ apache-log4cxx-0.10.0/src/Makefile.in	2011-09-08 10:16:06.139506556 +0200
+@@ -209,7 +209,7 @@ target_vendor = @target_vendor@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+-SUBDIRS = main examples site test
++SUBDIRS = main
+ all: all-recursive
+ 
+ .SUFFIXES:

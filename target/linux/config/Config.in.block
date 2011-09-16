@@ -65,6 +65,22 @@ config ADK_KERNEL_MMC_BLOCK
 config ADK_KERNEL_SCSI_SYM53C8XX_2
 	boolean
 
+config ADK_KERNEL_PATA_PCMCIA
+	boolean
+
+config ADK_KERNEL_PATA_PXA
+	boolean
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_ATA_BMDMA
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_PATA_PCMCIA
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
 config ADK_KERNEL_MMC_AT91
 	boolean
 	select ADK_KERNEL_BLOCK

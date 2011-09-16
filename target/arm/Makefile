@@ -7,8 +7,14 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-ZKERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
+else ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
+else
 KERNEL:=$(LINUX_DIR)/vmlinux
+endif
+
 LOADADDR:=0x20008000
 
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
@@ -47,11 +53,7 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
-	@cp $(ZKERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-else
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-endif
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
@@ -63,11 +65,7 @@ endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
-	@cp $(ZKERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-else
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-endif
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
@@ -77,11 +75,7 @@ endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
-	@cp $(ZKERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-else
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-endif
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Start qemu with following command line:"
