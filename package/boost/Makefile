@@ -11,8 +11,11 @@ PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
+
 DISTFILES:=		boost_1_47_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
+
+PKG_ARCH_DEPENDS:=	!mips
 
 PKG_SUBPKGS:=		BOOST BOOST_DEV
 PKGSD_BOOST_DEV:=	boost header files
@@ -27,8 +30,8 @@ PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_optio
 
 PKGFD_date_time:=	with date-time
 PKGFD_python:=	with Python
-PKGFB_python:=	python
-PKGFS_python:=	python
+PKGFB_python:=	python2
+PKGFS_python:=	python2
 PKGFD_iostreams:=	with iostreams
 PKGFD_graph:=	with graph
 PKGFD_graph_parallel:=	with graph_parallel
@@ -104,7 +107,7 @@ GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
 BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam"`"
 PYTHON_PATH:=	${STAGING_TARGET_DIR}/usr/bin/python
-PYTHON_INCLUDE:=	"`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
+PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
 USER_JAM:=	${WRKBUILD}/tools/build/v2/user-config.jam
 
@@ -139,7 +142,6 @@ endif
 			install \
 	)
 
-
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 ifneq (${ADK_PACKAGE_BOOST_SHARED},)
@@ -153,10 +155,8 @@ ifneq (${ADK_PACKAGE_BOOST_BOTH},)
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
 endif
 
-
 boost-dev-install:
 	${INSTALL_DIR} ${IDIR_BOOST_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_BOOST_DEV}/usr/include
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk
