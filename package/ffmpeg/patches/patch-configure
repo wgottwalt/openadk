@@ -1,22 +1,11 @@
---- ffmpeg-0.6.1.orig/configure	2010-06-15 21:44:30.000000000 +0200
-+++ ffmpeg-0.6.1/configure	2011-02-05 19:31:24.000000000 +0100
-@@ -1689,8 +1690,8 @@ if ! check_cmd type mktemp; then
- fi
- 
- tmpfile(){
--    tmp=$(mktemp -u "${TMPDIR}/ffconf.XXXXXXXX")$2 &&
--        (set -C; exec > $tmp) 2>/dev/null ||
-+    tmp=$(mktemp "${TMPDIR}/ffconf.XXXXXXXX")$2 &&
-+        (set -C; rm $tmp; exec > $tmp) ||
-         die "Unable to create temporary file in $TMPDIR."
-     append TMPFILES $tmp
-     eval $1=$tmp
-@@ -2640,7 +2641,7 @@ if enabled libdc1394; then
-     die "ERROR: No version of libdc1394 found "
- fi
+--- ffmpeg-0.8.3.orig/configure	2011-09-07 15:34:40.000000000 +0200
++++ ffmpeg-0.8.3/configure	2011-09-16 05:19:35.928726043 +0200
+@@ -2947,7 +2947,7 @@ enabled libxavs    && require  libxavs x
+ enabled libxvid    && require  libxvid xvid.h xvid_global -lxvidcore
+ enabled mlib       && require  mediaLib mlib_types.h mlib_VectorSub_S16_U8_Mod -lmlib
  
 -SDL_CONFIG="${cross_prefix}sdl-config"
 +SDL_CONFIG="${sysroot}/usr/bin/sdl-config"
- if "${SDL_CONFIG}" --version > /dev/null 2>&1; then
-     sdl_cflags=$("${SDL_CONFIG}" --cflags)
-     sdl_libs=$("${SDL_CONFIG}" --libs)
+ if check_pkg_config sdl SDL_version.h SDL_Linked_Version; then
+     check_cpp_condition SDL.h "(SDL_MAJOR_VERSION<<16 | SDL_MINOR_VERSION<<8 | SDL_PATCHLEVEL) >= 0x010201" $sdl_cflags &&
+     enable sdl &&
