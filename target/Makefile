@@ -53,7 +53,11 @@ ifeq ($(ADK_NATIVE),y)
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi
 else
-	@cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board
+	if [ -f ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ];then \
+		cp ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
+	else \
+		cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+	fi
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \
@@ -85,7 +89,11 @@ endif
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 else
 config-prepare: $(TOPDIR)/.config
-	@cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig
+	if [ -f ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ];then \
+		cp ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
+	else \
+		cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+	fi
 endif
 
 prepare: $(ADK_TARGET_ARCH)-prepare

@@ -1,5 +1,5 @@
 menu "Input devices"
-depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT || ADK_TARGET_WITH_TOUCHSCREEN
 
 config ADK_KERNEL_INPUT
 	boolean
@@ -11,6 +11,32 @@ config ADK_KERNEL_INPUT
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_KEYBOARD_GPIO
+	boolean
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_KEYBOARD_MATRIX
+	boolean
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_INPUT_TOUCHSCREEN
+	boolean
+	default n
+
+config ADK_KERNEL_TOUCHSCREEN_ADS7846
+	boolean
+	select ADK_KERNEL_INPUT_TOUCHSCREEN
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_INPUT_EVDEV
+	boolean
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
 config ADK_KERNEL_INPUT_KEYBOARD
@@ -23,6 +49,7 @@ config ADK_KERNEL_INPUT_KEYBOARD
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
 config ADK_KERNEL_KEYBOARD_ATKBD
@@ -47,6 +74,7 @@ config ADK_KERNEL_INPUT_MOUSE
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
 config ADK_KERNEL_INPUT_MOUSEDEV
@@ -59,6 +87,7 @@ config ADK_KERNEL_INPUT_MOUSEDEV
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76G2
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
 config ADK_KERNEL_HID_SUPPORT
@@ -97,6 +126,7 @@ config ADK_KPACKAGE_KMOD_INPUT_EVDEV
 	prompt "kmod-input-evdev................. Event support"
 	tristate
 	select ADK_KERNEL_INPUT
+	depends on !ADK_KERNEL_INPUT_EVDEV
 	default n
 
 endmenu

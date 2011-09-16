@@ -1,5 +1,14 @@
 menu "Multimedia devices support"
-depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB
+depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
+
+config ADK_KERNEL_SND_ARM
+	boolean
+
+config ADK_KERNEL_SND_SOC
+	boolean
+
+config ADK_KERNEL_SND_PXA2XX_AC97
+	boolean
 
 config ADK_KERNEL_MEDIA_SUPPORT
 	boolean
@@ -30,7 +39,7 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
-	depends on ADK_TARGET_WITH_PCI
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_SOUND
 
 menu "Audio devices support"
 
@@ -99,6 +108,23 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	depends on ADK_TARGET_WITH_PCI
 	help
 	 ALSA AMD CS5535 driver
+
+config ADK_KERNEL_SND_PXA2XX_SOC
+	tristate
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
+	prompt "kmod-snd-pxa2xx-soc-spitz..... ALSA SOC Sharp Zaurus"
+	tristate
+	select ADK_KERNEL_SND_ARM
+	select ADK_KERNEL_SND_SOC
+	select ADK_KERNEL_SND_PXA2XX_AC97
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KERNEL_SND_PXA2XX_SOC
+	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
 
 endmenu
 

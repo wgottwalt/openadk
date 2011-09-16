@@ -309,6 +309,7 @@ config ADK_KERNEL_MOD_CFG80211
 	tristate
 
 config ADK_KERNEL_MOD_LIB80211
+	select ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
 	tristate
 
 config ADK_KERNEL_CFG80211_WEXT
@@ -348,7 +349,7 @@ config ADK_DEBUG_MAC80211
 	select ADK_KERNEL_DEBUG_FS
 
 menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_AHB
+depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_AHB
 
 config ADK_KPACKAGE_KMOD_ATH5K
 	prompt "kmod-ath5k................... Atheros 5xxx wireless cards"
@@ -403,6 +404,23 @@ config ADK_KPACKAGE_KMOD_B43LEGACY
 	default n
 	help
 	  Driver for Broadcom B43xx wireless chips.
+
+config ADK_KPACKAGE_KMOD_HOSTAP
+	prompt "kmod-hostap................... HostAP driver"
+	tristate
+	select ADK_KPACKAGE_KMOD_MAC80211
+	default n
+	help
+	  HostAP Driver for wireless chips.
+
+config ADK_KPACKAGE_KMOD_HOSTAP_CS
+	prompt "kmod-hostap-cs................ HostAP driver for PC Cards"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_HOSTAP
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+	help
+	  HostAP CS Driver for wireless chips.
 
 config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"

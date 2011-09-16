@@ -68,6 +68,8 @@ $(eval $(call KMOD_template,RFKILL,rfkill,\
 
 $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/lib80211 \
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_ccmp \
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_tkip \
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
 ,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb))
@@ -1091,6 +1093,7 @@ $(eval $(call KMOD_template,SOUND,sound,\
 	$(MODULES_DIR)/kernel/sound/soundcore \
 ,30))
 
+
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
 	$(MODULES_DIR)/kernel/sound/core/snd \
@@ -1128,6 +1131,17 @@ $(eval $(call KMOD_template,SND_ENS1370,snd-ens1370,\
 
 $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
+,55))
+
+$(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
+	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-lib \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-pcm \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-ac97 \
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8750 \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx-i2s \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55))
 
 #V4L_COMPAT:=drivers/media/video/v4l1-compat
