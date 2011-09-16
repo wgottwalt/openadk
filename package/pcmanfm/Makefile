@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pcmanfm
-PKG_VERSION:=		2.0
+PKG_VERSION:=		0.9.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		20c07a1a39596d2322be0e88a310b314
+PKG_MD5SUM:=		f31ed6defb600f7046a456220d8efa3a
 PKG_DESCR:=		graphical file manager
 PKG_SECTION:=		x11/lxde
 PKG_BUILDDEP:=		libfm atk glib gtk+
@@ -15,7 +15,7 @@ PKG_DEPENDS+=		libxrender libgtk glib libxfixes fontconfig
 PKG_DEPENDS+=		libintl pango menu-cache libfreetype libxext
 PKG_DEPENDS+=		libxdamage gdk-pixbuf libpthread
 PKG_URL:=		http://lxde.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://sourceforge.net/projects/pcmanfm/files/PCManFM%20%2B%20Libfm%20%28tarball%20release%29/PCManFM/
 
 include $(TOPDIR)/mk/package.mk
 
