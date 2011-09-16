@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		556870ccfd6c9c0426c7dd86dd5beb62
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
+PKG_FDEPENDS:=		libpthread
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 
@@ -17,7 +18,7 @@ PKG_ARCH_DEPENDS:=	!cris
 PKG_SUBPKGS:=		LIBFFMPEG FFPLAY FFSERVER FFPROBE FFMPEG
 PKGSD_FFPLAY:=		ffmpeg based video player
 PKGSC_FFPLAY:=		multimedia
-PKGSS_FFPLAY:=		libsdl libpthread ffmpeg
+PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
 PKGSB_FFPLAY:=		sdl
 PKGSD_FFMPEG:=		ffmpeg video converter
 PKGSD_FFMPEG:=		multimedia
@@ -26,11 +27,25 @@ PKGSD_FFSERVER:=	multimedia
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSD_FFPROBE:=		multimedia
 
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3
+PKGFD_WITH_AAC:=	with AAC encoding support
+PKGFS_WITH_AAC:=	libfaac
+PKGFB_WITH_AAC:=	faac
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
+PKG_FDEPENDS+=		libfaac
+endif
+PKGFD_WITH_MP3:=	with MP3 encoding support
+PKGFS_WITH_MP3:=	libmp3lame
+PKGFB_WITH_MP3:=	lame
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
+PKG_FDEPENDS+=		libmp3lame
+endif
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSD_FFMPEG}))
 $(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSD_FFSERVER}))
 $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSD_FFPROBE}))
@@ -74,6 +89,13 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-swscale \
 			--enable-postproc \
 			${CONFIGURE_CPU_OPTS}
+
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
+CONFIGURE_ARGS+=	--enable-nonfree --enable-libfaac
+endif
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
+CONFIGURE_ARGS+=	--enable-libmp3lame
+endif
 
 libffmpeg-install:
 	${INSTALL_DIR} ${IDIR_LIBFFMPEG}/usr/lib
