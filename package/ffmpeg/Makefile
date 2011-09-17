@@ -21,19 +21,21 @@ PKGSC_FFPLAY:=		multimedia
 PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
 PKGSB_FFPLAY:=		sdl
 PKGSD_FFMPEG:=		ffmpeg video converter
-PKGSD_FFMPEG:=		multimedia
+PKGSC_FFMPEG:=		multimedia
 PKGSD_FFSERVER:=	streaming server
-PKGSD_FFSERVER:=	multimedia
+PKGSC_FFSERVER:=	multimedia
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
-PKGSD_FFPROBE:=		multimedia
+PKGSC_FFPROBE:=		multimedia
 
-PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8
+
 PKGFD_WITH_AAC:=	with AAC encoding support
 PKGFS_WITH_AAC:=	libfaac
 PKGFB_WITH_AAC:=	faac
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
 PKG_FDEPENDS+=		libfaac
 endif
+
 PKGFD_WITH_MP3:=	with MP3 encoding support
 PKGFS_WITH_MP3:=	libmp3lame
 PKGFB_WITH_MP3:=	lame
@@ -41,14 +43,21 @@ ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
 PKG_FDEPENDS+=		libmp3lame
 endif
 
+PKGFD_WITH_VP8:=	with VP8 encoding support
+PKGFS_WITH_VP8:=	libvpx
+PKGFB_WITH_VP8:=	libvpx
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_VP8),y)
+PKG_FDEPENDS+=		libvpx
+endif
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSD_FFMPEG}))
-$(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSD_FFSERVER}))
-$(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSD_FFPROBE}))
+$(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSC_FFMPEG}))
+$(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSC_FFSERVER}))
+$(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSC_FFPROBE}))
 $(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
@@ -95,6 +104,9 @@ CONFIGURE_ARGS+=	--enable-nonfree --enable-libfaac
 endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
 CONFIGURE_ARGS+=	--enable-libmp3lame
+endif
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
+CONFIGURE_ARGS+=	--enable-libvpx
 endif
 
 libffmpeg-install:

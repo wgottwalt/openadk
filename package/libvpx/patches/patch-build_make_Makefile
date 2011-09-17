@@ -1,0 +1,24 @@
+--- libvpx-v0.9.7-p1.orig/build/make/Makefile	2011-08-15 23:02:45.000000000 +0200
++++ libvpx-v0.9.7-p1/build/make/Makefile	2011-09-17 18:03:25.467990966 +0200
+@@ -193,8 +193,8 @@ endif
+ define linker_template
+ $(1): $(filter-out -%,$(2))
+ $(1):
+-	$(if $(quiet),@echo    "    [LD] $$@")
+-	$(qexec)$$(LD) $$(strip $$(INTERNAL_LDFLAGS) $$(LDFLAGS) -o $$@ $(2) $(3) $$(extralibs))
++	$(if $(quiet),@echo    "    [CC] $$@")
++	$(qexec)$$(CC) $$(strip $$(INTERNAL_LDFLAGS) $$(LDFLAGS) -o $$@ $(2) $(3) $$(extralibs))
+ endef
+ # make-3.80 has a bug with expanding large input strings to the eval function,
+ # which was triggered in some cases by the following component of
+@@ -227,8 +227,8 @@ define so_template
+ #
+ # This needs further abstraction for dealing with non-GNU linkers.
+ $(1):
+-	$(if $(quiet),@echo "    [LD] $$@")
+-	$(qexec)$$(LD) -shared $$(LDFLAGS) \
++	$(if $(quiet),@echo "    [CC] $$@")
++	$(qexec)$$(CC) -shared $$(LDFLAGS) \
+             -Wl,--no-undefined -Wl,-soname,$$(SONAME) \
+             -Wl,--version-script,$$(SO_VERSION_SCRIPT) -o $$@ \
+             $$(filter %.o,$$?) $$(extralibs)
