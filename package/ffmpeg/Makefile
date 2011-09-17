@@ -27,7 +27,7 @@ PKGSC_FFSERVER:=	multimedia
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSC_FFPROBE:=		multimedia
 
-PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
 
 PKGFD_WITH_AAC:=	with AAC encoding support
 PKGFS_WITH_AAC:=	libfaac
@@ -48,6 +48,13 @@ PKGFS_WITH_VP8:=	libvpx
 PKGFB_WITH_VP8:=	libvpx
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_VP8),y)
 PKG_FDEPENDS+=		libvpx
+endif
+
+PKGFD_WITH_THEORA:=	with Theora encoding support
+PKGFS_WITH_THEORA:=	libtheora
+PKGFB_WITH_THEORA:=	libtheora
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_THEORA),y)
+PKG_FDEPENDS+=		libtheora
 endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -105,8 +112,11 @@ endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
 CONFIGURE_ARGS+=	--enable-libmp3lame
 endif
-ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_VP8),y)
 CONFIGURE_ARGS+=	--enable-libvpx
+endif
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_THEORA),y)
+CONFIGURE_ARGS+=	--enable-libtheora
 endif
 
 libffmpeg-install:
