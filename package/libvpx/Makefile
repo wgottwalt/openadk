@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
-PKG_SYSTEM_DEPENDS:=	sharp-zaurus
+PKG_SYSTEM_DEPENDS:=	sharp-zaurus ibm-x40
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}-p1.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}-p1
@@ -24,6 +24,9 @@ $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		minimal
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
+endif
+ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
+CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
 CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-install-docs \
