@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		0.8.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		556870ccfd6c9c0426c7dd86dd5beb62
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
@@ -27,7 +27,7 @@ PKGSC_FFSERVER:=	multimedia
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSC_FFPROBE:=		multimedia
 
-PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA WITH_XVID
 
 PKGFD_WITH_AAC:=	with AAC encoding support
 PKGFS_WITH_AAC:=	libfaac
@@ -55,6 +55,13 @@ PKGFS_WITH_THEORA:=	libtheora
 PKGFB_WITH_THEORA:=	libtheora
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_THEORA),y)
 PKG_FDEPENDS+=		libtheora
+endif
+
+PKGFD_WITH_XVID:=	with Xvid encoding support
+PKGFS_WITH_XVID:=	libxvid
+PKGFB_WITH_XVID:=	xvidcore
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_XVID),y)
+PKG_FDEPENDS+=		libxvid
 endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -118,6 +125,9 @@ endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_THEORA),y)
 CONFIGURE_ARGS+=	--enable-libtheora
 endif
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_XVID),y)
+CONFIGURE_ARGS+=	--enable-libxvid
+endif
 
 libffmpeg-install:
 	${INSTALL_DIR} ${IDIR_LIBFFMPEG}/usr/lib
@@ -138,6 +148,8 @@ ffmpeg-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ffmpeg ${IDIR_FFMPEG}/usr/bin
 
 ffserver-install:
+	${INSTALL_DIR} ${IDIR_FFSERVER}/etc
+	$(INSTALL_DATA) $(WRKBUILD)/doc/ffserver.conf ${IDIR_FFSERVER}/etc
 	${INSTALL_DIR} ${IDIR_FFSERVER}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ffserver ${IDIR_FFSERVER}/usr/bin
 
