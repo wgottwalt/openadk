@@ -1158,6 +1158,18 @@ $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \
 ,70))
 
+$(eval $(call KMOD_template,USB_GSPCA,usb-gspca,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_main \
+,75))
+
+$(eval $(call KMOD_template,USB_GSPCA_PAC207,usb-gspca-pac207,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac207 \
+,80))
+
+$(eval $(call KMOD_template,USB_GSPCA_SPCA561,usb-gspca-spca561,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_spca561 \
+,80))
+
 $(eval $(call KMOD_template,USB_PWC,usb-pwc,\
 	$(MODULES_DIR)/kernel/drivers/media/video/pwc/pwc \
 ,80))
