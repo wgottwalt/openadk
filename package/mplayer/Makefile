@@ -5,16 +5,17 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-32749
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
 PKG_DEPENDS+=		libogg libpng libpthread libvorbis giflib
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
-PKG_DEPENDS+=		libxscrnsaver
+PKG_DEPENDS+=		libxscrnsaver libtheora libxvid libvpx
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
-PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
+PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg libtheora
+PKG_BUILDDEP+=		xvidcore libvpx
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -102,13 +103,15 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-jpeg \
 			--enable-mad \
 			--enable-libvorbis \
+			--enable-faac \
+			--enable-theora \
+			--enable-xvid \
 			--disable-ossaudio \
 			--disable-vm \
 			--disable-iconv \
 			--disable-lirc \
 			--disable-radio-v4l2 \
 			--disable-speex \
-			--disable-faac \
 			--disable-libdv \
 			--disable-live \
 			--disable-pvr \
@@ -141,6 +144,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_DIRECTFB}
 
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
+TARGET_LDFLAGS+=	-lxvidcore
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin

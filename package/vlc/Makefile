@@ -5,12 +5,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
 PKG_VERSION:=		1.1.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a64846d6f21ea179ae8e8bfb6f9447fe
 PKG_DESCR:=		Media Player
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		ffmpeg xcb-util
-PKG_DEPENDS:=		libffmpeg xcb-util
+PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt
+PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vlc/1.1.11/}
 
@@ -26,10 +26,11 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--disable-fribidi \
 			--disable-qt4 \
 			--disable-skins2 \
-			--disable-libgcrypt \
 			--disable-remoteosd \
 			--disable-dvdnav \
-			--disable-libxml2
+			--disable-libxml2 \
+			--enable-libgcrypt \
+			--enable-theora
 
 vlc-install:
 	$(INSTALL_DIR) $(IDIR_VLC)/usr/bin

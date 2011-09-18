@@ -27,7 +27,8 @@ PKGSC_FFSERVER:=	multimedia
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSC_FFPROBE:=		multimedia
 
-PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA WITH_XVID
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
+PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS
 
 PKGFD_WITH_AAC:=	with AAC encoding support
 PKGFS_WITH_AAC:=	libfaac
@@ -62,6 +63,13 @@ PKGFS_WITH_XVID:=	libxvid
 PKGFB_WITH_XVID:=	xvidcore
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_XVID),y)
 PKG_FDEPENDS+=		libxvid
+endif
+
+PKGFD_WITH_VORBIS:=	with Vorbis encoding support
+PKGFS_WITH_VORBIS:=	libvorbisenc
+PKGFB_WITH_VORBIS:=	libvorbis
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_VORBIS),y)
+PKG_FDEPENDS+=		libvorbisenc
 endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -127,6 +135,9 @@ CONFIGURE_ARGS+=	--enable-libtheora
 endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_XVID),y)
 CONFIGURE_ARGS+=	--enable-libxvid
+endif
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_VORBIS),y)
+CONFIGURE_ARGS+=	--enable-libvorbis
 endif
 
 libffmpeg-install:
