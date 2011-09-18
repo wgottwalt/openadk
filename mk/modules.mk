@@ -1158,9 +1158,9 @@ $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \
 ,70))
 
-$(eval $(call KMOD_template,PWC,pwc,\
-	$(MODULES_DIR)/kernel/drivers/usb/pwc \
-,70))
+$(eval $(call KMOD_template,USB_PWC,usb-pwc,\
+	$(MODULES_DIR)/kernel/drivers/media/video/pwc/pwc \
+,80))
 
 #
 # PCMCIA/CardBus
