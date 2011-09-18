@@ -1,0 +1,17 @@
+--- v4l-utils-0.8.5.orig/Make.rules	2011-07-17 18:06:39.000000000 +0200
++++ v4l-utils-0.8.5/Make.rules	2011-09-18 20:20:32.000000000 +0200
+@@ -2,12 +2,12 @@ V4L_UTILS_VERSION=0.8.5
+ 
+ # These ones can be overriden from the cmdline
+ 
+-CFLAGS := -g -O1
++CFLAGS ?= -g -O1
+ CFLAGS += -Wall -Wpointer-arith
+ CXXFLAGS := $(CFLAGS)
+ CFLAGS += -Wstrict-prototypes -Wmissing-prototypes
+ 
+-PREFIX = /usr/local
++PREFIX = /usr
+ LIBDIR = $(PREFIX)/lib
+ # subdir below LIBDIR in which to install the libv4lx libc wrappers
+ LIBSUBDIR = libv4l
