@@ -4,9 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		motion
-PKG_VERSION:=		3.2.12
+# actually a svn version from 18.09.2011 checkout
+PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1ba0065ed50509aaffb171594c689f46
+PKG_MD5SUM:=		6b8730c875e0f550c1abdb647027d8e1
 PKG_DESCR:=		Webcam motion sensing and logging
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libjpeg libpthread
@@ -22,11 +23,13 @@ CONFIGURE_ARGS+=	--without-ffmpeg \
 			--without-jpeg-mmx \
 			--without-optimizecpu \
 			--without-mysql \
+			--without-sqlite \
 			--without-pgsql \
-			--without-v4l
+			--with-v4l
 
 post-install:
-	${INSTALL_DIR} ${IDIR_MOTION}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/motion ${IDIR_MOTION}/usr/bin/
+	${INSTALL_DIR} ${IDIR_MOTION}/etc ${IDIR_MOTION}/usr/bin
+	$(INSTALL_DATA) ./files/motion.conf ${IDIR_MOTION}/etc
+	${INSTALL_BIN} ${WRKINST}/usr/bin/motion ${IDIR_MOTION}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
