@@ -169,6 +169,12 @@ config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC207
 	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
 	help
 
+config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC7311
+	prompt "kmod-usb-gpsca-pac7311........... Pixart PAC7311 USB Camera Driver"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
+	help
+
 config ADK_KPACKAGE_KMOD_USB_GSPCA_SPCA561
 	prompt "kmod-usb-gpsca-spca561........... SPCA561 USB Camera Driver"
 	tristate
