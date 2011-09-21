@@ -14,13 +14,14 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.24/
 PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		GDK_PIXBUF GDK_PIXBUF_DEV
+PKGSC_GDK_PIXBUF_DEV:=	devel
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GDK_PIXBUF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,GDK_PIXBUF_DEV,gdk-pixbuf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GDK_PIXBUF_DEV,gdk-pixbuf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_GDK_PIXBUF_DEV}))
 
 CONFIGURE_ENV+=		gio_can_sniff=no
 
