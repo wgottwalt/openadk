@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		automake
 PKG_VERSION:=		1.11.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		1.11
 PKG_MD5SUM:=		4ee7f0ff5f0e467d58b6bd5da96b1c74
 PKG_DESCR:=		GNU automake
@@ -26,9 +26,9 @@ automake-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/aclocal ${IDIR_AUTOMAKE}/usr/bin
 	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/share/aclocal-${PKG_EXTRAVER}
 	${CP} ${WRKINST}/usr/share/aclocal-${PKG_EXTRAVER} \
-		${IDIR_AUTOMAKE}/usr/share/aclocal-${PKG_EXTRAVER}
+		${IDIR_AUTOMAKE}/usr/share
 	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}
-	${CP} ${WRKINST}/usr/share/automake-${PKG_EXTRAVER}/Automake \
-		${IDIR_AUTOMAKE}/usr/share/automake-${PKG_EXTRAVER}
+	${CP} ${WRKINST}/usr/share/automake-${PKG_EXTRAVER} \
+		${IDIR_AUTOMAKE}/usr/share
 
 include ${TOPDIR}/mk/pkg-bottom.mk
