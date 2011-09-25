@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grep
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e848f07e3e79aa7899345d17c7e4115e
 PKG_DESCR:=		global search for a regular expression and print out matched lines
 PKG_SECTION:=		utils
@@ -24,6 +24,6 @@ CONFIGURE_ARGS+=	--without-included-regex
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
