@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.2.3
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		1131dc5f27c4f3905a6e7ee0d594fd4d
+PKG_VERSION:=		1.2.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		938dc0574f3eb9891a8ed4746f806277
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-nfsd
+PKG_DEPENDS:=		kmod-nfsd keyutils
+PKG_BUILDDEP:=		keyutils
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 

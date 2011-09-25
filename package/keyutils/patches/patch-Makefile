@@ -1,0 +1,67 @@
+--- keyutils-1.5.3.orig/Makefile	2011-08-11 15:24:09.000000000 +0200
++++ keyutils-1.5.3/Makefile	2011-09-19 21:52:31.000000000 +0200
+@@ -1,5 +1,5 @@
+ CPPFLAGS	:= -I.
+-CFLAGS		:= $(CPPFLAGS) -g -Wall -Werror
++CFLAGS		?= $(CPPFLAGS) -g -Wall -Werror
+ INSTALL		:= install
+ DESTDIR		:=
+ SPECFILE	:= keyutils.spec
+@@ -49,7 +49,7 @@ LIBNAME		:= libkeyutils.so.$(APIVERSION)
+ # Guess at the appropriate lib directory and word size
+ #
+ ###############################################################################
+-LIBDIR		:= $(shell ldd /usr/bin/make | grep '\(/libc\)' | sed -e 's!.*\(/.*\)/libc[.].*!\1!')
++LIBDIR		:= /usr/lib
+ USRLIBDIR	:= $(patsubst /lib/%,/usr/lib/%,$(LIBDIR))
+ BUILDFOR	:= $(shell file /usr/bin/make | sed -e 's!.*ELF \(32\|64\)-bit.*!\1!')-bit
+ 
+@@ -84,7 +84,7 @@ endif
+ # Normal build rule
+ #
+ ###############################################################################
+-all: $(DEVELLIB) keyctl request-key key.dns_resolver
++all: $(DEVELLIB)
+ 
+ ###############################################################################
+ #
+@@ -125,13 +125,13 @@ keyutils.os: keyutils.c keyutils.h Makef
+ %.o: %.c keyutils.h Makefile
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
+ 
+-keyctl: keyctl.o -lkeyutils
++keyctl: keyctl.o
+ 	$(CC) -L. $(CFLAGS) $(LDFLAGS) $(RPATH) -o $@ $< -lkeyutils
+ 
+-request-key: request-key.o -lkeyutils
++request-key: request-key.o
+ 	$(CC) -L. $(CFLAGS) $(LDFLAGS) $(RPATH) -o $@ $< -lkeyutils
+ 
+-key.dns_resolver: key.dns_resolver.o -lkeyutils
++key.dns_resolver: key.dns_resolver.o
+ 	$(CC) -L. $(CFLAGS) $(LDFLAGS) $(RPATH) -o $@ $< -lkeyutils -lresolv
+ 
+ ###############################################################################
+@@ -139,6 +139,13 @@ key.dns_resolver: key.dns_resolver.o -lk
+ # Install everything
+ #
+ ###############################################################################
++libinstall:
++	$(INSTALL) -d $(DESTDIR)$(LIBDIR)
++	$(INSTALL) $(LIBNAME) $(DESTDIR)$(LIBDIR)/$(LIBNAME)
++	$(LNS) $(LIBNAME) $(DESTDIR)$(LIBDIR)/$(SONAME)
++	$(INSTALL) -d $(DESTDIR)$(INCLUDEDIR)
++	$(INSTALL) -m 0644 keyutils.h $(DESTDIR)$(INCLUDEDIR)/keyutils.h
++
+ install: all
+ ifeq ($(NO_ARLIB),0)
+ 	$(INSTALL) -D -m 0644 $(ARLIB) $(DESTDIR)$(USRLIBDIR)/$(ARLIB)
+@@ -205,7 +212,7 @@ distclean: clean
+ TARBALL	:= keyutils-$(VERSION).tar.bz2
+ SRCBALL	:= rpmbuild/SOURCES/$(TARBALL)
+ 
+-dist	:= $(word 2,$(shell grep "%dist" /etc/rpm/macros.dist))
++dist	:= OpenADK
+ release	:= $(word 2,$(shell grep ^Release: $(SPECFILE)))
+ release	:= $(subst %{?dist},$(dist),$(release))
+ rpmver	:= $(VERSION)-$(release)
