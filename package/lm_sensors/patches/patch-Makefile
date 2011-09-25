@@ -1,0 +1,15 @@
+--- lm_sensors-3.3.1.orig/Makefile	2010-10-26 15:24:12.000000000 +0200
++++ lm_sensors-3.3.1/Makefile	2011-09-18 19:09:30.217984317 +0200
+@@ -42,10 +42,10 @@ DEBUG := 0
+ DESTDIR :=
+ 
+ # This is the prefix that will be used for almost all directories below.
+-PREFIX := /usr/local
++PREFIX := /usr
+ 
+ # Your C compiler
+-CC := gcc
++CC ?= gcc
+ 
+ # This is the directory where sensors3.conf will be installed, if no other
+ # configuration file is found

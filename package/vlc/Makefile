@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vlc/1.1.11/}
 
+PKG_ARCH_DEPENDS:=	!cris
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
@@ -28,7 +30,9 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--disable-skins2 \
 			--disable-remoteosd \
 			--disable-dvdnav \
+			--disable-glx \
 			--disable-libxml2 \
+			--disable-smb \
 			--enable-libgcrypt \
 			--enable-theora
 

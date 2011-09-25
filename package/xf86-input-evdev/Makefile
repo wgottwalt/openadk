@@ -13,6 +13,8 @@ PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_INPUT_EVDEV,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
