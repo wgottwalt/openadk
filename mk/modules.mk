@@ -1166,6 +1166,10 @@ $(eval $(call KMOD_template,USB_GSPCA_PAC207,usb-gspca-pac207,\
 	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac207 \
 ,80))
 
+$(eval $(call KMOD_template,USB_GSPCA_PAC7311,usb-gspca-pac7311,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac7311 \
+,80))
+
 $(eval $(call KMOD_template,USB_GSPCA_SPCA561,usb-gspca-spca561,\
 	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_spca561 \
 ,80))
