@@ -472,7 +472,7 @@ config BUSYBOX_FEATURE_LESS_LINENUMS
 config BUSYBOX_HDPARM
 	bool "hdparm"
 	depends on !ADK_PACKAGE_HDPARM
-	default y
+	default n
 	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Get/Set hard drive parameters. Primarily intended for ATA
