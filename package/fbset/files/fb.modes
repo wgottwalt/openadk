@@ -1001,3 +1001,11 @@ mode "1600x1200-76"
     timings 5051 304 40 42 3 136 5
 endmode
 
+# settings for nanonote
+mode "320x240-103"
+    # D: 19.884 MHz, H: 27.090 kHz, V: 103.005 Hz
+    geometry 320 240 320 240 32
+    timings 50291 140 273 20 2 1 1
+    rgba 8/16,8/8,8/0,8/24
+endmode
+
