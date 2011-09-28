@@ -410,13 +410,15 @@ config ADK_KPACKAGE_KMOD_HOSTAP
 	tristate
 	select ADK_KPACKAGE_KMOD_MAC80211
 	default n
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	help
 	  HostAP Driver for wireless chips.
 
 config ADK_KPACKAGE_KMOD_HOSTAP_CS
 	prompt "kmod-hostap-cs................ HostAP driver for PC Cards"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_HOSTAP
+	select ADK_KPACKAGE_KMOD_HOSTAP
+	depends on ADK_TARGET_WITH_PCMCIA
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 	help

@@ -13,8 +13,11 @@ PKG_DEPENDS:=		apr apr-util
 PKG_BUILDDEP:=		apr apr-util
 PKG_URL:=		http://logging.apache.org/log4cxx/
 PKG_SITES:=		http://www.apache.org/dist/logging/log4cxx/0.10.0/
+
 DISTFILES:=		apache-${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/apache-${PKG_NAME}-${PKG_VERSION}
+
+PKG_ARCH_DEPENDS:=	!cris
 
 PKG_SUBPKGS:=		LOG4CXX LOG4CXX_DEV
 PKGSD_LOG4CXX_DEV:=	log4cxx development headers
