@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		95d35eea1dad1c4828d0027f3be5325c
 PKG_DESCR:=		X11 driver for Event driver
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server kmod-input-evdev
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
