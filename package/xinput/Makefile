@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		87ad4db2fad4ff9a68e57759a63abc4b
 PKG_DESCR:=		X input utility
 PKG_SECTION:=		x11/apps
+PKG_BUILDDEP:=		libXi
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
