@@ -54,5 +54,7 @@ libsdl-dev-install:
 		$(IDIR_LIBSDL_DEV)/usr/bin
 	$(INSTALL_DIR) $(IDIR_LIBSDL_DEV)/usr/include/SDL
 	$(CP) ${WRKINST}/usr/include/SDL/* $(IDIR_LIBSDL_DEV)/usr/include/SDL
+	$(INSTALL_DIR) $(IDIR_LIBSDL_DEV)/usr/lib/pkgconfig
+	$(CP) ${WRKINST}/usr/lib/pkgconfig/*.pc $(IDIR_LIBSDL_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

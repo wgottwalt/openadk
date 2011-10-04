@@ -30,5 +30,8 @@ libsdl-ttf-install:
 libsdl-ttf-dev-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_TTF_DEV)/usr/include
 	$(CP) $(WRKINST)/usr/include/* $(IDIR_LIBSDL_TTF_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_LIBSDL_TTF_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_LIBSDL_TTF_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
