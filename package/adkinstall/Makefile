@@ -5,10 +5,10 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		9
+PKG_RELEASE:=		10
 PKG_DESCR:=		openadk installer
 PKG_SECTION:=		base
-PKG_DEPENDS:=		parted sfdisk e2fsprogs
+PKG_DEPENDS:=		parted sfdisk mke2fs
 PKG_URL:=		http://openadk.org/
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
