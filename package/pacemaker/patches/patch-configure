@@ -1,5 +1,5 @@
 --- pacemaker-1.0.11.orig/configure	2011-05-24 17:00:37.000000000 +0200
-+++ pacemaker-1.0.11/configure	2011-06-25 22:21:57.912681957 +0200
++++ pacemaker-1.0.11/configure	2011-10-07 12:41:11.000000000 +0200
 @@ -12484,7 +12484,7 @@ $as_echo_n "checking for $2 in $1... " >
  	  printf "#include <stdio.h>\n" > ${Cfile}.c
  	  printf "#include <%s>\n" $1 >> ${Cfile}.c
@@ -49,7 +49,7 @@
 -esac
 -
 -CFLAGS="$CFLAGS -I${prefix}/include/heartbeat"
-+CFLAGS="$CFLAGS -I${includedir}/heartbeat"
++CFLAGS="$CFLAGS -I@@STAGING_DIR@@/usr/include/heartbeat"
  
  
  

@@ -10,13 +10,16 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	mount -t tmpfs -o size=4M tmpfs /dev/shm
 	[ -d /var/lib/corosync ] || mkdir -p /var/lib/corosync
+	mkdir -p /var/lib/heartbeat/crm 
+	chown hacluster:haclient /var/lib/heartbeat/crm
+	chmod 775 /var/lib/heartbeat/crm
+	mkdir -p /var/lib/pengine
+	chown hacluster /var/lib/pengine
 	/usr/sbin/aisexec
   	;;
 stop)
 	kill $(pgrep -f corosync)
-	umount /dev/shm
 	;;
 restart)
 	sh $0 stop

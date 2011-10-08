@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxslt
 PKG_VERSION:=		1.1.24
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e83ec5d27fc4c10c6f612879bea9a153
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
@@ -42,7 +42,8 @@ xsltproc-install:
 
 libxslt-install:
 	${INSTALL_DIR} ${IDIR_LIBXSLT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib?xslt.so* ${IDIR_LIBXSLT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libxslt.so* ${IDIR_LIBXSLT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libexslt.so* ${IDIR_LIBXSLT}/usr/lib
 
 libxslt-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBXSLT_DEV}/usr/include
