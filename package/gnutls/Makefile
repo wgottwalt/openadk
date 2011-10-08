@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.8.6
+PKG_VERSION:=		2.12.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		eb0a6d7d3cb9ac684d971c14f9f6d3ba
+PKG_MD5SUM:=		f08234b64a8025d6d5aa1307868b02ed
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib
@@ -34,9 +34,12 @@ $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--disable-camellia \
+			--with-libgcrypt \
 			--with-libgcrypt-prefix=${STAGING_TARGET_DIR}/usr \
 			--disable-rpath \
-			--without-libz-prefix
+			--without-libz-prefix \
+			--without-p11-kit \
+			--without-nettle-prefix
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib
