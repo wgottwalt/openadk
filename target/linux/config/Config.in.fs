@@ -45,7 +45,7 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 	default "iso8859-1"
 
 config ADK_KERNEL_SQUASHFS
-	prompt ".................................. SquashFS filesystem"
+	prompt "squashfs.......................... SquashFS filesystem"
 	boolean
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
@@ -181,12 +181,13 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 
 
 config ADK_KERNEL_XFS_FS
+	prompt "xfs............................... XFS filesystem support (kernel)"
 	boolean
 	select ADK_KERNEL_EXPORTFS
 	default n
 
 config ADK_KPACKAGE_KMOD_XFS_FS
-	prompt "kmod-fs-xfs....................... XFS filesystem support"
+	prompt "kmod-fs-xfs....................... XFS filesystem support (module)"
 	tristate
 	select ADK_KERNEL_EXPORTFS
 	depends on !ADK_KERNEL_XFS_FS
