@@ -1,5 +1,2 @@
 #!/bin/sh
 if [ -z $IPKG_INSTROOT ];then chmod u+s /usr/bin/Xorg;fi
-. $IPKG_INSTROOT/etc/functions.sh
-gid=$(get_next_gid)
-add_group video $gid
