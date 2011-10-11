@@ -88,6 +88,12 @@ ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
 	@echo 'RedBoot> load $(TARGET_KERNEL)'
 	@echo 'RedBoot> go'
 endif
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo 'Boot your lemote and type following commands in PMON:'
+	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
+	@echo 'PMON> load tftp://<ip-address-server>/${TARGET_KERNEL}'
+	@echo 'PMON> g'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
 imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
