@@ -42,6 +42,8 @@ CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 
 post-extract:
+	$(CP) ${WRKBUILD}/setup.py ${WRKBUILD}/setup.py.sav
+	$(CP) ./files/setup.py ${WRKBUILD}/setup.py
 	$(CP) ./files/posixmodule.c ${WRKBUILD}/Modules/posixmodule.c
 	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
@@ -56,6 +58,7 @@ post-extract:
 	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
 	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
 	$(MAKE) -C ${WRKBUILD} distclean
+	$(CP) ${WRKBUILD}/setup.py.sav ${WRKBUILD}/setup.py
 
 pre-configure:
 	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure

@@ -776,7 +776,7 @@ config BUSYBOX_TRUE
 
 config BUSYBOX_TTY
 	bool "tty"
-	default n
+	default y
 	help
 	  tty is used to print the name of the current terminal to
 	  standard output.

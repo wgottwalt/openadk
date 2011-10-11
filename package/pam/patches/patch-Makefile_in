@@ -1,0 +1,24 @@
+--- Linux-PAM-1.1.4.orig/Makefile.in	2011-06-24 12:48:16.000000000 +0200
++++ Linux-PAM-1.1.4/Makefile.in	2011-10-07 11:42:21.000000000 +0200
+@@ -75,8 +75,8 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-re
+   distclean-recursive maintainer-clean-recursive
+ ETAGS = etags
+ CTAGS = ctags
+-DIST_SUBDIRS = libpam tests libpamc libpam_misc modules po conf doc \
+-	examples xtests
++DIST_SUBDIRS = libpam tests libpamc libpam_misc modules po conf \
++	examples
+ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+ distdir = $(PACKAGE)-$(VERSION)
+ top_distdir = $(distdir)
+@@ -258,8 +258,8 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AUTOMAKE_OPTIONS = 1.9 gnu dist-bzip2 check-news
+-@STATIC_MODULES_FALSE@SUBDIRS = libpam tests libpamc libpam_misc modules po conf doc examples xtests
+-@STATIC_MODULES_TRUE@SUBDIRS = modules libpam libpamc libpam_misc tests po conf doc examples xtests
++@STATIC_MODULES_FALSE@SUBDIRS = libpam tests libpamc libpam_misc modules po conf examples
++@STATIC_MODULES_TRUE@SUBDIRS = modules libpam libpamc libpam_misc tests po conf examples
+ CLEANFILES = *~
+ M4_FILES = m4/gettext.m4 m4/iconv.m4 m4/intlmacosx.m4 \
+ 	m4/japhar_grep_cflags.m4 m4/jh_path_xml_catalog.m4 \

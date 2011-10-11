@@ -40,6 +40,7 @@ CONFIGURE_ARGS+=	--without-libopencdk-prefix \
 			--without-libz-prefix \
 			--without-p11-kit \
 			--without-nettle-prefix
+CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib
