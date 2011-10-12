@@ -91,6 +91,15 @@ eglibc-dev-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+ifeq ($(ADK_TARGET_ABI_O32),y)
+	$(SED) "s#@@ELFFORMAT@@#elf32-tradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+endif
+ifeq ($(ADK_TARGET_ABI_N32),y)
+	$(SED) "s#@@ELFFORMAT@@#elf32-ntradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+endif
+ifeq ($(ADK_TARGET_ABI_N64),y)
+	$(SED) "s#@@ELFFORMAT@@#elf64-tradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
 	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
