@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sane-backends
-PKG_VERSION:=		1.0.20
+PKG_VERSION:=		1.0.22
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a0cfdfdebca2feb4f2ba5d3418b15a42
+PKG_MD5SUM:=		fadf56a60f4776bfb24491f66b617cf5
 PKG_DESCR:=		Scanner access now easy
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
@@ -82,7 +82,6 @@ $(eval $(call PKG_template,SANE_BACKEND_MATSUSHITA,sane-backend-matsushita,${PKG
 $(eval $(call PKG_template,SANE_BACKEND_MICROTEK2,sane-backend-microtek2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SANE_BACKEND_MICROTEK,sane-backend-microtek,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SANE_BACKEND_MUSTEK,sane-backend-mustek,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SANE_BACKEND_MUSTEK_USB2,sane-backend-mustek-usb2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SANE_BACKEND_MUSTEK_USB,sane-backend-mustek-usb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SANE_BACKEND_NEC,sane-backend-nec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SANE_BACKEND_NIASH,sane-backend-niash,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -141,7 +140,6 @@ $(eval $(call PKG_mod_template,SANE_BACKEND_MATSUSHITA,matsushita))
 $(eval $(call PKG_mod_template,SANE_BACKEND_MICROTEK2,microtek2))
 $(eval $(call PKG_mod_template,SANE_BACKEND_MICROTEK,microtek))
 $(eval $(call PKG_mod_template,SANE_BACKEND_MUSTEK,mustek))
-$(eval $(call PKG_mod_template,SANE_BACKEND_MUSTEK_USB2,mustek_usb2,n))
 $(eval $(call PKG_mod_template,SANE_BACKEND_MUSTEK_USB,mustek_usb))
 $(eval $(call PKG_mod_template,SANE_BACKEND_NEC,nec))
 $(eval $(call PKG_mod_template,SANE_BACKEND_NIASH,niash,n))
@@ -169,7 +167,7 @@ $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX1220U,umax1220u))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX_PP,umax_pp))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX,umax))
 
-CONFIGURE_ENV+=		ac_cv_func_ioperm=no
+CONFIGURE_ENV+=		ac_cv_func_ioperm=no have_libv4l1=no
 CONFIGURE_ARGS+=	--disable-translations \
 			--without-gphoto2 \
 			--enable-libusb

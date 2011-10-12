@@ -89,6 +89,14 @@ case $1 in
                 ;;
 esac
 
+# fix permissions
+if [ -f /usr/bin/sudo ];then
+	chmod 4755 /usr/bin/sudo
+fi
+if [ -f /usr/bin/Xorg ];then
+	chmod 4755 /usr/bin/Xorg
+fi
+
 sync
 if [ -x /sbin/cfgfs ];then
 	umount /etc

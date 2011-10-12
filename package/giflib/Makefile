@@ -12,13 +12,21 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://sourceforge.net/projects/giflib/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=giflib/giflib%204.x/$(PKG_NAME)-$(PKG_VERSION)/}
 
+PKG_SUBPKGS:=		GIFLIB GIFLIB_DEV
+PKGSC_GIFLIB_DEV:=	devel
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GIFLIB,giflib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GIFLIB_DEV,giflib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_GIFLIB_DEV}))
 
 giflib-install:
 	$(INSTALL_DIR) $(IDIR_GIFLIB)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libgif.so* \
 		$(IDIR_GIFLIB)/usr/lib
+
+giflib-dev-install:
+	${INSTALL_DIR} ${IDIR_GIFLIB_DEV}/usr/include
+	${CP} ${WRKINST}/usr/include/*.h ${IDIR_GIFLIB_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -74,10 +74,10 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_MMS),y)
 PKG_FDEPENDS+=		libmms
 endif
 PKGFD_WITH_FFMPEG:=	enable FFMPEG support
-PKGFS_WITH_FFMPEG:=	ffmpeg
+PKGFS_WITH_FFMPEG:=	libffmpeg
 PKGFB_WITH_FFMPEG:=	ffmpeg
 ifeq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),y)
-PKG_FDEPENDS+=		ffmpeg
+PKG_FDEPENDS+=		libffmpeg
 endif
 PKGFD_WITH_SHOUT:=	enable Shoutcast output support
 PKGFS_WITH_SHOUT:=	libshout liblame libvorbisenc

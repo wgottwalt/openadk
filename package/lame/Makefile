@@ -4,23 +4,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lame
-PKG_VERSION:=		398-2
+PKG_VERSION:=		3.98.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		719dae0ee675d0c16e0e89952930ed35
+PKG_MD5SUM:=		8e9866ad6b570c6c95c8cba48060473f
 PKG_DESCR:=		LAME MP3 encoder
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libncurses
 PKG_URL:=		http://lame.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=lame/}
 
-PKG_SUBPKGS:=		LAME LIBLAME
-PKGSD_LIBLAME:=		LAME MP3 encoding library
-PKGSC_LIBLAME:=		libs
+PKG_SUBPKGS:=		LAME LIBMP3LAME
+PKGSD_LIBMP3LAME:=	LAME MP3 encoding library
+PKGSC_LIBMP3LAME:=	libs
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLAME,liblame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBLAME},${PKGSC_LIBLAME}))
+$(eval $(call PKG_template,LIBMP3LAME,libmp3lame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBMP3LAME},${PKGSC_LIBMP3LAME}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 
@@ -28,8 +28,8 @@ lame-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/lame $(IDIR_LAME)/usr/bin
 
-liblame-install:
-	$(INSTALL_DIR) $(IDIR_LIBLAME)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libmp3lame.so* $(IDIR_LIBLAME)/usr/lib
+libmp3lame-install:
+	$(INSTALL_DIR) $(IDIR_LIBMP3LAME)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libmp3lame.so* $(IDIR_LIBMP3LAME)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-mount -t devtmpfs devtmpfs /dev > /dev/null 2>&1
+mount -t devtmpfs devtmpfs /dev >/dev/null 2>&1
 mount -nt proc proc /proc
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 [ ! -f /etc/notmpfs ] && {
@@ -12,12 +12,14 @@ mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 [ -d /dev/pts ] || mkdir /dev/pts 
 [ -d /dev/shm ] || mkdir /dev/shm
+mount -o nosuid,noexec -t tmpfs tmpfs /dev/shm
 mount -o nosuid,noexec -t devpts devpts /dev/pts
 exec 0<>/dev/console >&0 2>&0
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
 cat /etc/.rnd >/dev/urandom 2>&1
+[ -x /kexecinit ] && { /kexecinit; }
 [ -x /cryptinit ] && { /cryptinit; exec switch_root /mnt "/init";}
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
 [ -f /etc/fstab ] && { fsck -p >/dev/null; mount -a;}

@@ -4,21 +4,24 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gdk-pixbuf
-PKG_VERSION:=		2.23.1
+PKG_VERSION:=		2.24.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		74818d3ac4d7ebaf6bf24883c171a885
+PKG_MD5SUM:=		bd7c2a9d23b573db467e39833f12103d
 PKG_DESCR:=		GDK pixbuf library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		jpeg libtiff
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.23/
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.24/
 PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		GDK_PIXBUF GDK_PIXBUF_DEV
+PKGSC_GDK_PIXBUF_DEV:=	devel
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GDK_PIXBUF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,GDK_PIXBUF_DEV,gdk-pixbuf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GDK_PIXBUF_DEV,gdk-pixbuf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_GDK_PIXBUF_DEV}))
 
 CONFIGURE_ENV+=		gio_can_sniff=no
 

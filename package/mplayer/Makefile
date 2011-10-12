@@ -5,20 +5,21 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.0-32749
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
 PKG_DEPENDS+=		libogg libpng libpthread libvorbis giflib
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
-PKG_DEPENDS+=		libxscrnsaver
+PKG_DEPENDS+=		libxscrnsaver libtheora libxvid libvpx
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
-PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg
+PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg libtheora
+PKG_BUILDDEP+=		xvidcore libvpx
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_ARCH_DEPENDS:=	x86 mips
+PKG_ARCH_DEPENDS:=	x86 mips arm
 
 PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -30,6 +31,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 # gcc 4.5 produces internal compiler error with -Os
 TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 
@@ -68,6 +70,11 @@ CONFIGURE_CPU_OPTS+=	--enable-sse2
 else
 CONFIGURE_CPU_OPTS+=	--disable-sse2
 endif
+#ifeq (${ADK_TARGET_CPU_WITH_IWMMXT},y)
+#CONFIGURE_CPU_OPTS+=	--enable-iwmmxt
+#else
+#CONFIGURE_CPU_OPTS+=	--disable-iwmmxt
+#endif
 
 ifeq ($(ADK_DEBUG),y)
 CONFIGURE_DEBUG=	--enable-debug
@@ -96,13 +103,15 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-jpeg \
 			--enable-mad \
 			--enable-libvorbis \
+			--enable-faac \
+			--enable-theora \
+			--enable-xvid \
 			--disable-ossaudio \
 			--disable-vm \
 			--disable-iconv \
 			--disable-lirc \
 			--disable-radio-v4l2 \
 			--disable-speex \
-			--disable-faac \
 			--disable-libdv \
 			--disable-live \
 			--disable-pvr \
@@ -135,6 +144,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_DIRECTFB}
 
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
+TARGET_LDFLAGS+=	-lxvidcore
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin

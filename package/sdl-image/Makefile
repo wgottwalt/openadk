@@ -32,7 +32,7 @@ CONFIGURE_ARGS+=	--enable-png \
 			--enable-bmp \
 			--enable-tif
 
-post-install:
+libsdl-image-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL_IMAGE)/usr/lib
 
@@ -40,5 +40,8 @@ libsdl-image-dev-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
 	$(CP) ${WRKINST}/usr/include/SDL/*.h \
 		$(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
+	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE_DEV)/usr/lib/pkgconfig
+	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
+		$(IDIR_LIBSDL_IMAGE_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

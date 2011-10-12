@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		46
+PKG_RELEASE:=		48
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -64,6 +64,9 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
+	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
+endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \

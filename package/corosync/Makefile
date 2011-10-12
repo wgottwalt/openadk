@@ -4,13 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		corosync
-PKG_VERSION:=		1.3.1
+PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c58459a009a3a9d0b9c00e276a190d90
+PKG_MD5SUM:=		66231146af210637393748add091021d
 PKG_DESCR:=		Cluster Engine	
 PKG_SECTION:=		ha
+PKG_DEPENDS:=		cluster-glue
 PKG_URL:=		http://www.corosync.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		ftp://ftp:downloads@ftp.corosync.org/downloads/corosync-1.4.1/
 
 PKG_CFLINE_COROSYNC:=	select ADK_KERNEL_IP_MULTICAST
 

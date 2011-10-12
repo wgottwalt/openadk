@@ -23,7 +23,7 @@ config ADK_KERNEL_ACPI_DOCK
 	boolean
 
 menu "Power Management support"
-depends on ADK_TARGET_WITH_ACPI
+depends on ADK_TARGET_WITH_ACPI || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 config ADK_HARDWARE_ACPI
 	prompt "Enable ACPI support"
@@ -52,6 +52,8 @@ config ADK_KERNEL_SUSPEND
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_NATIVE_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  Enable Suspend-to-RAM support.
@@ -66,6 +68,8 @@ config ADK_KERNEL_HIBERNATION
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_NATIVE_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  Enable Suspend-to-Disk support.

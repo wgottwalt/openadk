@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		parted
-PKG_VERSION:=		2.3
+PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		30ceb6df7e8681891e865e2fe5a7903d
+PKG_MD5SUM:=		a94e84a9b9944715c4453f82ccc639bf
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libuuid libreadline libpthread
@@ -18,8 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PARTED,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-device-mapper \
-			--enable-Werror=no
+CONFIGURE_ARGS+=	--disable-device-mapper
 
 post-install:
 	${INSTALL_DIR} $(IDIR_PARTED)/usr/sbin $(IDIR_PARTED)/usr/lib

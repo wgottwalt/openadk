@@ -10,6 +10,7 @@ config ADK_PKG_DEVELOPMENT
 	select ADK_PACKAGE_GCC
 	select ADK_PACKAGE_GIT
 	select ADK_PACKAGE_GREP
+	select ADK_PACKAGE_TAR
 	select ADK_PACKAGE_UCLIBC_DEV if ADK_TARGET_LIB_UCLIBC
 	select ADK_PACKAGE_EGLIBC_DEV if ADK_TARGET_LIB_EGLIBC
 	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
@@ -30,9 +31,17 @@ config ADK_PKG_DEVELOPMENT
 	select ADK_PACKAGE_ZLIB
 	select ADK_PACKAGE_ZLIB_DEV
 	select ADK_PACKAGE_XZ
+	# optional
+	select ADK_PACKAGE_STRACE
+	select ADK_PACKAGE_GDB
+	select ADK_PACKAGE_FLEX
+	select ADK_PACKAGE_BISON
+	select ADK_PACKAGE_AUTOCONF
+	select ADK_PACKAGE_AUTOMAKE
+	select ADK_PACKAGE_LIBTOOL
 	help
 	  After bootstrapping a Linux system you might want to
 	  switch to native builds with your target. 
-	  If you choose this option, all necessary software needed
+	  If you choose this option, all software required
 	  for native building will be selected by this option.
 

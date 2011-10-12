@@ -20,8 +20,11 @@ TARGET_CPPFLAGS:=	''
 TARGET_CFLAGS:=		''
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CXXFLAGS))
 
-ifeq ($(ADK_LINUX_64),y)
-CONFIGURE_ARGS+=       --with-abi=64
+#ifeq ($(ADK_LINUX_64),y)
+#CONFIGURE_ARGS+=       --with-abi=64
+#endif
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif
 
 CONFIGURE_ARGS+=	--enable-languages=c,c++ \
@@ -51,7 +54,6 @@ post-install:
 	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
 	cd ${IDIR_GCC}/usr/bin/ && ln -sf gcc cc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
-	${CP} ${WRKINST}/usr/lib/libstdc++*so* ${IDIR_GCC}/usr/lib/
 	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
 	cd ${IDIR_GCC}/lib && ln -sf ../usr/bin/cpp .
 	${CP} ${WRKINST}/usr/lib/gcc/* ${IDIR_GCC}/usr/lib/gcc/

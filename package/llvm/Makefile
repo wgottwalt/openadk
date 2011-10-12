@@ -14,6 +14,7 @@ PKG_SITES:=		http://llvm.org/releases/2.9/
 
 PKG_CFLINE_LLVM:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_HOST_DEPENDS:=	!darwin
+PKG_ARCH_DEPENDS:=	mips x86 x86_64
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
 

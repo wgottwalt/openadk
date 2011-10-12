@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libfm
-PKG_VERSION:=		2.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		188d0820aa4e8f25f3fb0519813baa68
+PKG_VERSION:=		0.1.16
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c09bce415ff6dc2dd835e28aeddeabe3
 PKG_DESCR:=		libfm library
 PKG_SECTION:=		x11/lxde
 PKG_BUILDDEP:=		menu-cache libXcursor
 PKG_DEPENDS:=		menu-cache libxcursor
 PKG_URL:=		http://lxde.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://sourceforge.net/projects/pcmanfm/files/PCManFM%20%2B%20Libfm%20%28tarball%20release%29/libfm%20%28required%20by%20PCManFM%29/
 
 PKG_SUBPKGS:=		LIBFM LIBFM_DEV
 

@@ -11,6 +11,8 @@ PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
+PKG_ARCH_DEPENDS:=	!sh
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGCC,libgcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

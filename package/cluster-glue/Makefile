@@ -14,7 +14,7 @@ PKG_URL:=		http://www.linux-ha.org/wiki/Cluster_Glue
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_CFLINE_CLUSTER_GLUE:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-PKG_HOST_DEPENDS:=	!darwin
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 
@@ -27,8 +27,10 @@ CONFIGURE_ARGS+=	--disable-bundled-ltdl \
 			--enable-fatal-warnings=no
 
 cluster-glue-install:
-	$(INSTALL_DIR) $(IDIR_CLUSTER_GLUE)/usr/lib
+	$(INSTALL_DIR) $(IDIR_CLUSTER_GLUE)/usr/lib/heartbeat
 	$(CP) $(WRKINST)/usr/lib/*.so* \
 		$(IDIR_CLUSTER_GLUE)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/heartbeat/* \
+		$(IDIR_CLUSTER_GLUE)/usr/lib/heartbeat
 
 include ${TOPDIR}/mk/pkg-bottom.mk

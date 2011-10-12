@@ -18,6 +18,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--without-ffmpeg
+
 sox-install:
 	$(INSTALL_DIR) $(IDIR_SOX)/usr/lib
 	${CP} ${WRKINST}/usr/lib/libsox.so* $(IDIR_SOX)/usr/lib

@@ -1,0 +1,28 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		xvidcore
+PKG_VERSION:=		1.3.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		87c8cf7b69ebed93c2d82ea5709d098a
+PKG_DESCR:=		Xvid Codec library
+PKG_SECTION:=		libs
+PKG_URL:=		http://www.xvid.org/
+PKG_SITES:=		http://downloads.xvid.org/downloads/
+
+PKG_SUBPKGS:=		LIBXVID
+
+WRKDIST=		$(WRKDIR)/$(PKG_NAME)/build/generic
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,LIBXVID,libxvid,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+libxvid-install:
+	$(INSTALL_DIR) $(IDIR_LIBXVID)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libxvidcore.so* \
+		$(IDIR_LIBXVID)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

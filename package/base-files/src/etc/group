@@ -1,2 +1,4 @@
 root:x:0:
+video:x:1:
+audio:x:2:
 nogroup:x:65534:
