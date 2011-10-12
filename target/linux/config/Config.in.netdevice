@@ -39,6 +39,7 @@ config ADK_KERNEL_MACB
 	select ADK_KERNEL_NET_PCI
 	select ADK_KERNEL_MII
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default y if ADK_TARGET_SYSTEM_ATMEL_NGW100
 	default n
 	help
 

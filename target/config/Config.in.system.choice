@@ -1,4 +1,5 @@
 source "target/arm/Config.in"
+source "target/avr32/Config.in"
 source "target/cris/Config.in"
 source "target/mips/Config.in"
 source "target/ppc/Config.in"

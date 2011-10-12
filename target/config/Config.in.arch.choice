@@ -20,6 +20,12 @@ config ADK_LINUX_ARM
 	help
 	  Support for ARM systems.
 
+config ADK_LINUX_AVR32
+	bool "avr32 system"
+	select ADK_avr32
+	help
+	  Support for AVR32 systems.
+
 config ADK_LINUX_CRIS
 	bool "cris system"
 	select ADK_cris
