@@ -1,5 +1,5 @@
 --- xfsprogs-3.1.5.orig/configure	2011-03-31 05:11:43.000000000 +0200
-+++ xfsprogs-3.1.5/configure	2011-10-09 18:15:57.858626068 +0200
++++ xfsprogs-3.1.5/configure	2011-10-12 14:40:56.000000000 +0200
 @@ -245,7 +245,7 @@ $0: the script under such a shell if you
  fi
  fi
@@ -15,6 +15,111 @@
  # Always use our own libtool.
 -LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 +LIBTOOL='$(CONFIG_SHELL) $(top_builddir)/libtool'
+ 
+ 
+ 
+@@ -10790,11 +10790,11 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+     test -z "$INSTALL_GROUP" || pkg_group="$INSTALL_GROUP"
+ 
+ 
+-    pkg_distribution=`uname -s`
++    pkg_distribution=Linux
+     test -z "$DISTRIBUTION" || pkg_distribution="$DISTRIBUTION"
+ 
+ 
+-    pkg_platform=`uname -s | tr 'A-Z' 'a-z' | tr -d / | sed -e 's/irix64/irix/'`
++    pkg_platform=linux
+     test -z "$PLATFORM" || pkg_platform="$PLATFORM"
+ 
+ 
+@@ -12036,90 +12036,6 @@ fi
+ 
+ 
+ 
+- for ac_header in aio.h
+-do :
+-  ac_fn_c_check_header_mongrel "$LINENO" "aio.h" "ac_cv_header_aio_h" "$ac_includes_default"
+-if test "x$ac_cv_header_aio_h" = x""yes; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define HAVE_AIO_H 1
+-_ACEOF
+-
+-fi
+-
+-done
+-
+-    if test $ac_cv_header_aio_h = no; then
+-	echo
+-	echo 'FATAL ERROR: could not find a valid <aio.h> header.'
+-	exit 1
+-    fi
+-
+- for ac_func in lio_listio
+-do :
+-  ac_fn_c_check_func "$LINENO" "lio_listio" "ac_cv_func_lio_listio"
+-if test "x$ac_cv_func_lio_listio" = x""yes; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define HAVE_LIO_LISTIO 1
+-_ACEOF
+-
+-fi
+-done
+-
+-    if test $ac_cv_func_lio_listio = yes; then
+-	librt=""
+-    else
+-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for lio_listio in -lrt" >&5
+-$as_echo_n "checking for lio_listio in -lrt... " >&6; }
+-if test "${ac_cv_lib_rt_lio_listio+set}" = set; then :
+-  $as_echo_n "(cached) " >&6
+-else
+-  ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lrt -lpthread $LIBS"
+-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-#ifdef __cplusplus
+-extern "C"
+-#endif
+-char lio_listio ();
+-int
+-main ()
+-{
+-return lio_listio ();
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-if ac_fn_c_try_link "$LINENO"; then :
+-  ac_cv_lib_rt_lio_listio=yes
+-else
+-  ac_cv_lib_rt_lio_listio=no
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext conftest.$ac_ext
+-LIBS=$ac_check_lib_save_LIBS
+-fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_rt_lio_listio" >&5
+-$as_echo "$ac_cv_lib_rt_lio_listio" >&6; }
+-if test "x$ac_cv_lib_rt_lio_listio" = x""yes; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define HAVE_LIBRT 1
+-_ACEOF
+-
+-  LIBS="-lrt $LIBS"
+-
+-else
+-
+-	    echo
+-	    echo 'FATAL ERROR: could not find a library with lio_listio.'
+-	    exit 1
+-fi
+-
+-	librt="-lrt"
+-    fi
  
  
  
