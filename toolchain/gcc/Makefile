@@ -22,13 +22,18 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-libgomp \
 			--disable-biarch \
 			--disable-decimal-float \
-			--disable-sjlj-exceptions \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
 			--without-ppl \
 			--without-cloog \
 			--disable-nls
+
+ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
+GCC_CONFOPTS+=		--enable-sjlj-exceptions
+else
+GCC_CONFOPTS+=		--disable-sjlj-exceptions
+endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
 GCC_CONFOPTS+=		--enable-libssp

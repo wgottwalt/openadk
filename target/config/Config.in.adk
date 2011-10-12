@@ -38,6 +38,12 @@ config ADK_STATIC
 	help
 	  Useful for toolchain only target devices.
 
+config ADK_DISABLE_HONOUR_CFLAGS
+	bool "Disable honour CFLAGS checks globally"
+	default n
+	help
+	  Disable honour CFLAGS checks.
+
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
 	default n

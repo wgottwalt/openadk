@@ -159,6 +159,7 @@ config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 
 config ADK_KPACKAGE_KMOD_USB_GSPCA
 	prompt "kmod-usb-gspca................... GSPCA webcam framework"
+	depends on ADK_TARGET_WITH_USB
 	tristate
 	help
 	 GSPCA webcam framework

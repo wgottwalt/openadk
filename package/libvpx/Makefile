@@ -31,6 +31,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
+ifeq ($(ADK_TARGET_SYSTEM_INTEL_ATOM),y)
+CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
+endif
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_WRAP),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif

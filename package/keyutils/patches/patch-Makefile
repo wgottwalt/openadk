@@ -1,5 +1,5 @@
 --- keyutils-1.5.3.orig/Makefile	2011-08-11 15:24:09.000000000 +0200
-+++ keyutils-1.5.3/Makefile	2011-09-19 21:52:31.000000000 +0200
++++ keyutils-1.5.3/Makefile	2011-09-26 03:06:03.669381901 +0200
 @@ -1,5 +1,5 @@
  CPPFLAGS	:= -I.
 -CFLAGS		:= $(CPPFLAGS) -g -Wall -Werror
@@ -7,16 +7,33 @@
  INSTALL		:= install
  DESTDIR		:=
  SPECFILE	:= keyutils.spec
-@@ -49,7 +49,7 @@ LIBNAME		:= libkeyutils.so.$(APIVERSION)
+@@ -49,24 +49,11 @@ LIBNAME		:= libkeyutils.so.$(APIVERSION)
  # Guess at the appropriate lib directory and word size
  #
  ###############################################################################
 -LIBDIR		:= $(shell ldd /usr/bin/make | grep '\(/libc\)' | sed -e 's!.*\(/.*\)/libc[.].*!\1!')
 +LIBDIR		:= /usr/lib
  USRLIBDIR	:= $(patsubst /lib/%,/usr/lib/%,$(LIBDIR))
- BUILDFOR	:= $(shell file /usr/bin/make | sed -e 's!.*ELF \(32\|64\)-bit.*!\1!')-bit
+-BUILDFOR	:= $(shell file /usr/bin/make | sed -e 's!.*ELF \(32\|64\)-bit.*!\1!')-bit
  
-@@ -84,7 +84,7 @@ endif
+ LNS		:= ln -sf
+ 
+-ifeq ($(BUILDFOR),32-bit)
+-CFLAGS		+= -m32
+-LIBDIR		:= /lib
+-USRLIBDIR	:= /usr/lib
+-else
+-ifeq ($(BUILDFOR),64-bit)
+-CFLAGS		+= -m64
+-LIBDIR		:= /lib64
+-USRLIBDIR	:= /usr/lib64
+-endif
+-endif
+-
+ ###############################################################################
+ #
+ # This is necessary if glibc doesn't know about the key management error codes
+@@ -84,7 +71,7 @@ endif
  # Normal build rule
  #
  ###############################################################################
@@ -25,7 +42,7 @@
  
  ###############################################################################
  #
-@@ -125,13 +125,13 @@ keyutils.os: keyutils.c keyutils.h Makef
+@@ -125,13 +112,13 @@ keyutils.os: keyutils.c keyutils.h Makef
  %.o: %.c keyutils.h Makefile
  	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
  
@@ -42,7 +59,7 @@
  	$(CC) -L. $(CFLAGS) $(LDFLAGS) $(RPATH) -o $@ $< -lkeyutils -lresolv
  
  ###############################################################################
-@@ -139,6 +139,13 @@ key.dns_resolver: key.dns_resolver.o -lk
+@@ -139,6 +126,13 @@ key.dns_resolver: key.dns_resolver.o -lk
  # Install everything
  #
  ###############################################################################
@@ -56,7 +73,7 @@
  install: all
  ifeq ($(NO_ARLIB),0)
  	$(INSTALL) -D -m 0644 $(ARLIB) $(DESTDIR)$(USRLIBDIR)/$(ARLIB)
-@@ -205,7 +212,7 @@ distclean: clean
+@@ -205,7 +199,7 @@ distclean: clean
  TARBALL	:= keyutils-$(VERSION).tar.bz2
  SRCBALL	:= rpmbuild/SOURCES/$(TARBALL)
  

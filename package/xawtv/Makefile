@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libxinerama libv4l
 PKG_SECTION:=		x11/apps
 PKG_SITES:=		http://linuxtv.org/downloads/xawtv/
 
+PKG_ARCH_DEPENDS:=	x86
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
@@ -20,6 +22,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,XAWTV,xawtv,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+
+pre-configure:
+	$(SED) "s#@@GNU_TARGET_NAME@@#${GNU_TARGET_NAME}#" $(WRKBUILD)/Makefile
 
 xawtv-install:
 	$(INSTALL_DIR) $(IDIR_XAWTV)/etc/X11/app-defaults

@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2dd0cb6481d77fda09c58ec3154a21c0
 PKG_DESCR:=		console music player
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libmad libvorbis libcurl libflac libffmpeg libiconv
+PKG_DEPENDS:=		libmad libvorbis libcurl libflac libiconv
 PKG_DEPENDS+=		libncurses libid3tag
-PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac ffmpeg libiconv
+PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac libiconv
 PKG_BUILDDEP+=		libid3tag
 PKG_URL:=		http://moc.daper.net/
 PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/unstable/
@@ -26,6 +26,7 @@ CONFIGURE_ARGS+=	--without-jack \
 			--without-oss \
 			--without-musepack \
 			--without-speex \
+			--without-ffmpeg \
 			--without-sndfile
 
 post-install:

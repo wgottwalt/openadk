@@ -8,10 +8,11 @@ PKG_VERSION:=		3.3.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8c0eebda8524fc87da1393b4564d279b
 PKG_DESCR:=		linux hw sensor toolset
-PKG_DEPENDS:=		sysfsutils
 PKG_SECTION:=		misc
+PKG_DEPENDS:=		sysfsutils
 PKG_URL:=		http://www.lm-sensors.org
 PKG_SITES:=		http://dl.lm-sensors.org/lm-sensors/releases/
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_ARCH_DEPENDS:=	x86 x86_64
@@ -32,16 +33,9 @@ $(eval $(call PKG_template,LM_SENSORS_DEV,lm-sensors-dev,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,LM_SENSORS_DETECT,lm-sensors-detect,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LM_SENSORS_DETECT},${PKGSC_LM_SENSORS_DETECT}))
 
 CONFIG_STYLE:=		manual
+ALL_TARGET:=		user
+TARGET_LDFLAGS+=	-liconv
 
-do-build:
-	${MAKE} -C ${WRKBUILD} \
-		${TARGET_CONFIGURE_OPTS} \
-		MACHINE="${CPU_ARCH}" \
-		LINUX="${LINUX_DIR}" \
-		STAGING_DIR="${STAGING_DIR}" \
-		PREFIX="/usr" \
-		user
-		
 lm-sensors-install:
 	${INSTALL_DIR} ${IDIR_LM_SENSORS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sensors ${IDIR_LM_SENSORS}/usr/bin/sensors

@@ -8,6 +8,9 @@ config ADK_arm
 config ADK_armeb
 	bool
 
+config ADK_avr32
+	bool
+
 config ADK_cris
 	bool
 
@@ -48,6 +51,7 @@ config ADK_TARGET_ARCH
 	string
 	default "arm"  if ADK_arm
 	default "arm"  if ADK_armeb
+	default "avr32"  if ADK_avr32
 	default "cris"  if ADK_cris
 	default "mips"  if ADK_mips
 	default "mips"  if ADK_mipsel
