@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=	gdb
-PKG_VERSION:=	7.3
-PKG_MD5SUM:=	485022b8df7ba2221f217e128f479fe7
+PKG_VERSION:=	7.3.1
+PKG_MD5SUM:=	b89a5fac359c618dda97b88645ceab47
 PKG_RELEASE:=	1
 PKG_SITES:=	${MASTER_SITE_GNU:=gdb/}
 DISTFILES:=	$(PKG_NAME)-$(PKG_VERSION).tar.bz2

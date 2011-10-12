@@ -159,6 +159,7 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_WITH_SATA
+	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76
 	default n	
 
 menu "Block devices support"

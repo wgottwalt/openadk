@@ -44,3 +44,9 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86_64),y)
 	@echo 'qemu-system-x86_64 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The linux kernel is here: $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
+endif
