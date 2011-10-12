@@ -120,6 +120,7 @@ config ADK_KPACKAGE_KMOD_PPDEV
 config ADK_KPACKAGE_KMOD_FW_LOADER
 	prompt "kmod-fw-loader.................... userspace firmware loading support"
 	tristate
+	depends on !ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 	help
 	  This may be necessary when using drivers which require

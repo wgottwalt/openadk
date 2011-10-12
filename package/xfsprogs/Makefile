@@ -15,6 +15,8 @@ PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
+PKG_CFLINE_XFSPROGS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

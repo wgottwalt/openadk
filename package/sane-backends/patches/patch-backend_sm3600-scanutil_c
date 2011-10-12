@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- sane-backends-1.0.20.orig/backend/sm3600-scanutil.c	2005-08-16 21:50:34.000000000 +0200
-+++ sane-backends-1.0.20/backend/sm3600-scanutil.c	2009-05-11 21:08:46.000000000 +0200
-@@ -47,6 +47,7 @@ $Id: sm3600-scanutil.c,v 1.12 2005-08-16
+--- sane-backends-1.0.22.orig/backend/sm3600-scanutil.c	2010-12-02 00:49:58.000000000 +0100
++++ sane-backends-1.0.22/backend/sm3600-scanutil.c	2011-10-01 19:26:01.819066938 +0200
+@@ -47,6 +47,7 @@ $Id$
  
  ====================================================================== */
  

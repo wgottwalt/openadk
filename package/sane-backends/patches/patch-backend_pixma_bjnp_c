@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- sane-backends-1.0.20.orig/backend/pixma_bjnp.c	2009-04-01 18:26:58.000000000 +0200
-+++ sane-backends-1.0.20/backend/pixma_bjnp.c	2009-05-11 00:23:33.000000000 +0200
+--- sane-backends-1.0.22.orig/backend/pixma_bjnp.c	2010-12-02 00:49:58.000000000 +0100
++++ sane-backends-1.0.22/backend/pixma_bjnp.c	2011-10-01 19:26:01.699066938 +0200
 @@ -59,9 +59,6 @@
  #ifdef HAVE_SYS_TYPES_H
  #include <sys/types.h>
@@ -11,7 +11,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  /* 
   * networking stuff
-@@ -196,7 +193,7 @@ truncate_hostname (char *hostname, char 
+@@ -196,7 +193,7 @@ truncate_hostname (char *hostname, char
      {
        /* this is a hostname, not an ip-address, so remove domain part of the name */
  
