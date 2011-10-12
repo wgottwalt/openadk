@@ -1,7 +1,7 @@
 /*
  * pkgrebuild - recognize required package rebuilds in OpenADK
  *
- * Copyright (C) 2010 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -98,8 +98,8 @@ static char *toupperstr(char *string) {
 int main() {
 
 	FILE *config, *configold, *pkg;
-	char *key, *value, *string, *token;
-	char *pkg_name, *keystr;
+	char *key, *value, *string, *token, *check;
+	char *pkg_name, *keystr, *realpkgname;
 	char buf[128];
 	char path[320];
 	char pbuf[320];
@@ -163,48 +163,51 @@ int main() {
 							keystr = NULL;
 						}
 					}
-					string = strstr(pbuf, "PKG_FLAVOURS:=");
+					string = strstr(pbuf, "PKG_FLAVOURS_");
+					if (string != NULL) {
+						check = strstr(pbuf, ":=");
+						if (check != NULL) {
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, ":=");
+							realpkgname = strdup(key+13);
+							value = strtok(NULL, "=\t");
+							token = strtok(value, " ");
+							while (token != NULL) {
+								keystr = malloc(256);
+								memset(keystr, 0, 256);
+								strncat(keystr, "ADK_PACKAGE_", 12);
+								strncat(keystr, realpkgname, strlen(realpkgname));
+								strncat(keystr, "_", 1);
+								strncat(keystr, token, strlen(token));
+								strmap_put(pkgmap, keystr, pkgdirp->d_name);
+								token = strtok(NULL, " ");
+								free(keystr);
+								keystr = NULL;
+							}
+						} else {
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, "+=");
+							realpkgname = strdup(key+13);
+							value = strtok(NULL, "=\t");
+							token = strtok(value, " ");
+							while (token != NULL) {
+								keystr = malloc(256);
+								memset(keystr, 0, 256);
+								strncat(keystr, "ADK_PACKAGE_", 12);
+								strncat(keystr, realpkgname, strlen(realpkgname));
+								strncat(keystr, "_", 1);
+								strncat(keystr, token, strlen(token));
+								strmap_put(pkgmap, keystr, pkgdirp->d_name);
+								token = strtok(NULL, " ");
+								free(keystr);
+								keystr = NULL;
+							}
+						}
+					}
+					string = strstr(pbuf, "PKG_CHOICES_");
 					if (string != NULL) {
 						string[strlen(string)-1] = '\0';
 						key = strtok(string, ":=");
-						value = strtok(NULL, "=\t");
-						token = strtok(value, " ");
-						while (token != NULL) {
-							keystr = malloc(256);
-							memset(keystr, 0, 256);
-							strncat(keystr, "ADK_PACKAGE_", 12);
-							strncat(keystr, toupperstr(pkg_name), strlen(pkg_name));
-							strncat(keystr, "_", 1);
-							strncat(keystr, token, strlen(token));
-							strmap_put(pkgmap, keystr, pkgdirp->d_name);
-							token = strtok(NULL, " ");
-							free(keystr);
-							keystr = NULL;
-						}
-					}
-					string = strstr(pbuf, "PKG_CHOICES:=");
-					if (string != NULL) {
-						string[strlen(string)-1] = '\0';
-						key = strtok(string, ":=");
-						value = strtok(NULL, "=\t");
-						token = strtok(value, " ");
-						while (token != NULL) {
-							keystr = malloc(256);
-							memset(keystr, 0, 256);
-							strncat(keystr, "ADK_PACKAGE_", 12);
-							strncat(keystr, toupperstr(pkg_name), strlen(pkg_name));
-							strncat(keystr, "_", 1);
-							strncat(keystr, token, strlen(token));
-							strmap_put(pkgmap, keystr, pkgdirp->d_name);
-							token = strtok(NULL, " ");
-							free(keystr);
-							keystr = NULL;
-						}
-					}
-					string = strstr(pbuf, "PKG_FLAVOURS+=");
-					if (string != NULL) {
-						string[strlen(string)-1] = '\0';
-						key = strtok(string, "+=");
 						value = strtok(NULL, "=\t");
 						token = strtok(value, " ");
 						while (token != NULL) {

@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- sane-backends-1.0.20.orig/backend/pixma_imageclass.c	2009-03-12 18:36:09.000000000 +0100
-+++ sane-backends-1.0.20/backend/pixma_imageclass.c	2009-05-11 00:30:36.000000000 +0200
-@@ -159,8 +159,6 @@ query_status (pixma_t * s)
+--- sane-backends-1.0.22.orig/backend/pixma_imageclass.c	2010-12-02 00:49:58.000000000 +0100
++++ sane-backends-1.0.22/backend/pixma_imageclass.c	2011-10-01 19:26:01.779066938 +0200
+@@ -161,8 +161,6 @@ query_status (pixma_t * s)
    if (error >= 0)
      {
        memcpy (mf->current_status, data, 12);

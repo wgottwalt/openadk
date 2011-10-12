@@ -1,5 +1,22 @@
 menu "PCMCIA/CardBus support"
-depends on ADK_TARGET_WITH_CARDBUS
+depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA
+
+config ADK_KERNEL_PCCARD
+	boolean
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_PCMCIA
+	boolean
+	select ADK_KERNEL_CRC32
+	select ADK_KERNEL_PCMCIA_PROBE
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+
+config ADK_KERNEL_PCMCIA_PXA2XX
+	boolean
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
 
 config ADK_KERNEL_CARDBUS
 	boolean 
@@ -17,12 +34,14 @@ config ADK_KERNEL_SERIAL_8250_SHARE_IRQ
 config ADK_KPACKAGE_KMOD_PCCARD
 	prompt "kmod-pccard....................... PCCARD support"
 	tristate
+	depends on !ADK_KERNEL_PCCARD
 	default n
 
 config ADK_KPACKAGE_KMOD_PCMCIA
 	prompt "kmod-pcmcia....................... 16-bit PCMCIA support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PCCARD
+	depends on !ADK_KERNEL_PCMCIA
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KERNEL_CRC32
 	select ADK_KERNEL_PCMCIA_PROBE
@@ -32,6 +51,7 @@ config ADK_KPACKAGE_KMOD_YENTA
 	prompt "kmod-cardbus...................... 32-bit CardBus support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PCCARD
+	depends on ADK_TARGET_WITH_CARDBUS
 	select ADK_KERNEL_CARDBUS
 	default n
 

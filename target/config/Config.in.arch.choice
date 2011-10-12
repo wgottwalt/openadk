@@ -62,6 +62,12 @@ config ADK_LINUX_SPARC64
 	help
 	  Support for sparc64 systems.
 
+config ADK_LINUX_SH
+	bool "superh system"
+	select ADK_sh
+	help
+	  Support for superh systems.
+
 config ADK_LINUX_X86
 	bool "x86 system"
 	select ADK_x86

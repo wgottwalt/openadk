@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
 PKG_VERSION:=		5.12.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		29975a69dce54e47fcd6331c085c6c99
 PKG_DESCR:=		full-blown Perl
 PKG_SECTION:=		lang
@@ -21,7 +21,7 @@ $(eval $(call PKG_template,PERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_
 CONFIG_STYLE:=          manual
 
 pre-configure:
-	(cd ${WRKBUILD}; ./Configure -des -Dcc=gcc -Dprefix=/usr -A ccflags="${TARGET_CFLAGS}");
+	(cd ${WRKBUILD}; ./Configure -des -Dusethreads -Dcc=gcc -Dprefix=/usr -A ccflags="${TARGET_CFLAGS}");
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin

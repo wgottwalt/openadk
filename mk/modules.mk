@@ -67,6 +67,7 @@ $(eval $(call KMOD_template,RFKILL,rfkill,\
 ,10))
 
 $(eval $(call KMOD_template,MAC80211,mac80211,\
+	$(MODULES_DIR)/kernel/net/wireless/lib80211 \
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
 ,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb))
@@ -87,6 +88,16 @@ $(eval $(call KMOD_template,RTL8187,rtl8187,\
 $(eval $(call KMOD_template,B43,b43,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/b43/b43 \
 ,70))
+
+$(eval $(call KMOD_template,HOSTAP,hostap,\
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_ccmp \
+	$(MODULES_DIR)/kernel/net/wireless/lib80211_crypt_tkip \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/hostap/hostap \
+,70))
+
+$(eval $(call KMOD_template,HOSTAP_CS,hostap-cs,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/hostap/hostap_cs \
+,75))
 
 $(eval $(call KMOD_template,P54_USB,p54-usb,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/p54/p54usb \
@@ -1082,6 +1093,7 @@ $(eval $(call KMOD_template,SOUND,sound,\
 	$(MODULES_DIR)/kernel/sound/soundcore \
 ,30))
 
+
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
 	$(MODULES_DIR)/kernel/sound/core/snd \
@@ -1121,6 +1133,17 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
+$(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
+	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-lib \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-pcm \
+	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-ac97 \
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8750 \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx-i2s \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx \
+	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
+,55))
+
 #V4L_COMPAT:=drivers/media/video/v4l1-compat
 #ifeq ($(ADK_LINUX_64),y)
 #V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
@@ -1135,9 +1158,25 @@ $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \
 ,70))
 
-$(eval $(call KMOD_template,PWC,pwc,\
-	$(MODULES_DIR)/kernel/drivers/usb/pwc \
-,70))
+$(eval $(call KMOD_template,USB_GSPCA,usb-gspca,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_main \
+,75))
+
+$(eval $(call KMOD_template,USB_GSPCA_PAC207,usb-gspca-pac207,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac207 \
+,80))
+
+$(eval $(call KMOD_template,USB_GSPCA_PAC7311,usb-gspca-pac7311,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac7311 \
+,80))
+
+$(eval $(call KMOD_template,USB_GSPCA_SPCA561,usb-gspca-spca561,\
+	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_spca561 \
+,80))
+
+$(eval $(call KMOD_template,USB_PWC,usb-pwc,\
+	$(MODULES_DIR)/kernel/drivers/media/video/pwc/pwc \
+,80))
 
 #
 # PCMCIA/CardBus

@@ -59,6 +59,12 @@ endif
 ifeq ($(CPU_ARCH),mipsel)
 QEMU:=			qemu-mipsel
 endif
+ifeq ($(CPU_ARCH),mips)
+QEMU:=			qemu-mips
+endif
+ifeq ($(CPU_ARCH),i486)
+QEMU:=			qemu-i386
+endif
 ifeq ($(CPU_ARCH),i586)
 QEMU:=			qemu-i386
 endif

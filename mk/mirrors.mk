@@ -21,6 +21,7 @@ MASTER_SITE_XORG?=	\
 	http://ftp.gwdg.de/pub/x11/x.org/pub/X11R7.6/src/everything/ \
 	http://xorg.freedesktop.org/releases/X11R7.6/src/everything/ \
 	http://xorg.freedesktop.org/releases/individual/lib/ \
+	http://xorg.freedesktop.org/releases/individual/driver/ \
 	
 MASTER_SITE_GNU?=	\
 	http://ftp.gnu.org/gnu/ \

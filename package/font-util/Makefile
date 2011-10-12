@@ -26,12 +26,12 @@ $(eval $(call PKG_template,FONT_UTIL_DEV,font-util-dev,${PKG_VERSION}-${PKG_RELE
 # especially as all font packages still need patching to avoid
 # calling pkg-config (which we don't provide) in order to
 # automatically find the mappings.
-fonts-hack:
+post-build:
 	${INSTALL_DIR} ${STAGING_DIR}/usr/share/fonts/X11/util
-	${CP} ${WRKINST}/usr/share/fonts/X11/util/* \
+	${CP} ${WRKBUILD}/map-* \
 		${STAGING_DIR}/usr/share/fonts/X11/util
 
-font-util-install: fonts-hack
+font-util-install:
 	${INSTALL_DIR} ${IDIR_FONT_UTIL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ucs2any \
 		${IDIR_FONT_UTIL}/usr/bin

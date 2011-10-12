@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG motion
+#INIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${motion:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/motion.conf ] || exit
+	/usr/bin/motion
+	;;
+stop)
+	kill $(pgrep -f /usr/bin/motion)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

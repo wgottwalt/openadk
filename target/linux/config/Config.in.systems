@@ -1,3 +1,10 @@
+# page size
+config ADK_KERNEL_PAGE_SIZE_4KB
+	boolean
+
+config ADK_KERNEL_PAGE_SIZE_16KB
+	boolean
+
 # mips systems
 config ADK_KERNEL_ATHEROS_AR231X
 	boolean
@@ -28,6 +35,21 @@ config ADK_KERNEL_LEMOTE_MACH2F
 	boolean
 
 # arm systems
+config ADK_KERNEL_ARCH_VERSATILE
+	boolean
+
+config ADK_KERNEL_PXA_SHARP_Cxx00
+	boolean
+
+config ADK_KERNEL_ARCH_PXA
+	boolean
+
+config ADK_KERNEL_PXA_SHARPSL
+	boolean
+
+config ADK_KERNEL_MACH_SPITZ
+	boolean
+
 config ADK_KERNEL_ARCH_AT91
 	boolean
 
@@ -37,6 +59,7 @@ config ADK_KERNEL_ARCH_AT91SAM9G20
 config ADK_KERNEL_MACH_ACMENETUSFOXG20
 	boolean
 
+# endianesss and ABI
 config ADK_KERNEL_AEABI
 	boolean
 
@@ -44,4 +67,8 @@ config ADK_KERNEL_CPU_BIG_ENDIAN
 	boolean
 
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
+	boolean
+
+# cris systems
+config ADK_KERNEL_ETRAXFS
 	boolean

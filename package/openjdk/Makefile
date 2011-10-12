@@ -17,7 +17,7 @@ PKG_DESCR:=		OpenJDK Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 			http://mirror.netcologne.de/apache.org/xml/xalan-j/binaries/ \
@@ -26,7 +26,7 @@ PKG_SITES:=		http://download.java.net/openjdk/jdk6/promoted/b22/ \
 
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
-PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100
+PKG_SYSTEM_DEPENDS:=	!lemote-yeelong !linksys-ag241 !fon-fon2100 !broadcom-bcm47xx
 
 # autotools infrastructure for OpenJDK
 ICEDTEA_NAME:=		icedtea6
@@ -59,7 +59,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENJDK,openjdk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-
+# segfaults with march=pentium-m/atom
+TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
 
@@ -144,5 +146,6 @@ pre-configure:
 openjdk-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK)/usr
 	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/* $(IDIR_OPENJDK)/usr 
+	rm -rf $(IDIR_OPENJDK)/usr/man
 
 include ${TOPDIR}/mk/pkg-bottom.mk

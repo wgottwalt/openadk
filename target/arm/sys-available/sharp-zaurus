@@ -1,0 +1,21 @@
+config ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	bool "Sharp Zaurus CL3200 (Terrier)"
+	select ADK_arm
+	select ADK_sharp_zaurus
+	select ADK_little
+	select ADK_EABI
+	select ADK_CPU_XSCALE
+	select ADK_TARGET_CPU_WITH_IWMMXT
+	select ADK_TARGET_NO_FPU
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_PCMCIA
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_SOUND
+	select ADK_TARGET_WITH_TOUCHSCREEN
+	select ADK_KERNEL_ARCH_PXA
+	select ADK_KERNEL_PXA_SHARPSL
+	select ADK_KERNEL_MACH_SPITZ
+	select ADK_KERNEL_PXA_SHARP_Cxx00
+	select ADK_KERNEL_SPI_PXA2XX
+	help
+	 Support for Sharp Zaurus CL3200 (Terrier)

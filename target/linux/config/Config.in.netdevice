@@ -22,6 +22,16 @@ config ADK_KERNEL_NETDEV_1000
 config ADK_KERNEL_VIA_RHINE_MMIO
 	boolean
 
+config ADK_KERNEL_SMC91X
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
+	default n
+	help
+
 config ADK_KERNEL_CPMAC
 	boolean
 	select ADK_KERNEL_NETDEVICES
@@ -40,6 +50,17 @@ config ADK_KERNEL_MACB
 	select ADK_KERNEL_MII
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_ATMEL_NGW100
+	default n
+	help
+
+config ADK_KERNEL_PCNET32
+	boolean
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_PCI
+	select ADK_KERNEL_MII
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPSEL
+	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default n
 	help
 
@@ -136,7 +157,7 @@ config ADK_KERNEL_E1000
 	select ADK_KERNEL_NETDEV_1000
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_QEMU_X86
+	default y if ADK_TARGET_SYSTEM_QEMU_I686
 	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default n
 	help
@@ -155,6 +176,8 @@ config ADK_KERNEL_R8169
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
+	select ADK_KERNEL_MII
+	select ADK_KPACKAGE_KMOD_FW_LOADER
 	default y if ADK_TARGET_SYSTEM_OVH_RPS
 	default n
 	help
@@ -247,6 +270,8 @@ config ADK_KPACKAGE_KMOD_R8169
 	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_NET_ETHERNET
 	select ADK_KERNEL_NETDEV_1000
+	select ADK_KERNEL_MII
+	select ADK_KPACKAGE_KMOD_FW_LOADER
 	depends on !ADK_KERNEL_R8169
 	default n
 	help
@@ -285,6 +310,7 @@ config ADK_KERNEL_MOD_CFG80211
 	tristate
 
 config ADK_KERNEL_MOD_LIB80211
+	select ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
 	tristate
 
 config ADK_KERNEL_CFG80211_WEXT
@@ -324,7 +350,7 @@ config ADK_DEBUG_MAC80211
 	select ADK_KERNEL_DEBUG_FS
 
 menu "Wireless card support"
-depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_AHB
+depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_AHB
 
 config ADK_KPACKAGE_KMOD_ATH5K
 	prompt "kmod-ath5k................... Atheros 5xxx wireless cards"
@@ -380,11 +406,32 @@ config ADK_KPACKAGE_KMOD_B43LEGACY
 	help
 	  Driver for Broadcom B43xx wireless chips.
 
+config ADK_KPACKAGE_KMOD_HOSTAP
+	prompt "kmod-hostap................... HostAP driver"
+	tristate
+	select ADK_KPACKAGE_KMOD_MAC80211
+	default n
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	help
+	  HostAP Driver for wireless chips.
+
+config ADK_KPACKAGE_KMOD_HOSTAP_CS
+	prompt "kmod-hostap-cs................ HostAP driver for PC Cards"
+	tristate
+	select ADK_KPACKAGE_KMOD_HOSTAP
+	depends on ADK_TARGET_WITH_PCMCIA
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+	help
+	  HostAP CS Driver for wireless chips.
+
 config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
 	depends on ADK_TARGET_WITH_USB
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	default n
 	help
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.

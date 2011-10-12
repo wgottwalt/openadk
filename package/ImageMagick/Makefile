@@ -24,7 +24,7 @@ PKGSC_CONVERT:=		multimedia
 PKGSS_CONVERT:=		libimagemagick
 PKGSD_DISPLAY:=		image display application
 PKGSC_DISPLAY:=		multimedia
-PKGSS_DISPLAY:=		libimagemagick libX11 libXau libXdmcp libICE libSM fontconfig libXt zlib libpng
+PKGSS_DISPLAY:=		libimagemagick libX11 libXau libXdmcp libICE libSM fontconfig libXt zlib libpng libltdl
 PKGSB_DISPLAY:=		libX11
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}.tar.gz
@@ -36,7 +36,6 @@ $(eval $(call PKG_template,LIBIMAGEMAGICK,libimagemagick,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_CONVERT},${PKGSD_CONVERT},${PKGSC_CONVERT}))
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 
-TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_sys_file_offset_bits=yes
 CONFIGURE_ARGS+=	--with-magick-plus-plus=no \

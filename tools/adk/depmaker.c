@@ -1,7 +1,7 @@
 /*
  * depmaker - create package/Depends.mk for OpenADK buildsystem
  *
- * Copyright (C) 2010 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -130,7 +130,7 @@ int main() {
 	FILE *pkg;
 	char buf[MAXLINE];
 	char path[MAXPATH];
-	char *string, *pkgvar, *pkgdeps, *tmp;
+	char *string, *pkgvar, *pkgdeps, *tmp, *fpkg, *cpkg, *spkg, *key, *check;
 	int i;
 	
 	/* read Makefile's for all packages */
@@ -200,23 +200,55 @@ int main() {
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
+					// WE need to find the subpackage name here
+					string = strstr(buf, "PKG_FLAVOURS_");
+					if (string != NULL) {
+						check = strstr(buf, ":=");
+						if (check != NULL) {
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, ":=");
+							fpkg = strdup(key+13);
+						}
+					}
+
 					string = strstr(buf, "PKGFB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 0);
+						tmp = parse_line(pkgdirp->d_name, fpkg, string, 1, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
+					// WE need to find the subpackage name here
+					string = strstr(buf, "PKG_CHOICES_");
+					if (string != NULL) {
+						check = strstr(buf, ":=");
+						if (check != NULL) {
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, ":=");
+							cpkg = strdup(key+12);
+						}
+					}
 					string = strstr(buf, "PKGCB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 0);
+						tmp = parse_line(pkgdirp->d_name, cpkg, string, 1, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
+					}
+
+					// WE need to find the subpackage name here
+					string = strstr(buf, "PKG_SUBPKGS_");
+					if (string != NULL) {
+						check = strstr(buf, ":=");
+						if (check != NULL) {
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, ":=");
+							spkg = strdup(key+12);
+						}
 					}
 
 					string = strstr(buf, "PKGSB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 1, 1);
+						tmp = parse_line(pkgdirp->d_name, spkg, string, 1, 1);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}

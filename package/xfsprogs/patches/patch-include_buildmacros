@@ -1,0 +1,11 @@
+--- xfsprogs-3.1.5.orig/include/buildmacros	2011-03-31 00:25:47.000000000 +0200
++++ xfsprogs-3.1.5/include/buildmacros	2011-10-09 18:12:27.668626203 +0200
+@@ -32,7 +32,7 @@ OBJECTS = $(ASFILES:.s=.o) \
+ 
+ INSTALL	= $(TOPDIR)/install-sh -o $(PKG_USER) -g $(PKG_GROUP)
+ 
+-SHELL = /bin/sh
++SHELL ?= /bin/bash
+ IMAGES_DIR = $(TOPDIR)/all-images
+ DIST_DIR = $(TOPDIR)/dist
+ 

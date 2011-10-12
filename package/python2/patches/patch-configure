@@ -1,5 +1,5 @@
---- Python-2.7.orig/configure	2010-05-28 17:28:47.000000000 +0200
-+++ Python-2.7/configure	2010-11-04 22:17:32.000000000 +0100
+--- Python-2.7.1.orig/configure	2010-11-01 02:47:19.000000000 +0100
++++ Python-2.7.1/configure	2011-10-06 18:21:02.848792210 +0200
 @@ -2972,12 +2972,12 @@ fi
  $as_echo_n "checking MACHDEP... " >&6; }
  if test -z "$MACHDEP"
@@ -20,7 +20,7 @@
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking machine type as reported by uname -m" >&5
  $as_echo_n "checking machine type as reported by uname -m... " >&6; }
 -ac_sys_machine=`uname -m`
-+ac_sys_machine=i586
++ac_sys_machine=@@CPU_ARCH@@
  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_sys_machine" >&5
  $as_echo "$ac_sys_machine" >&6; }
  

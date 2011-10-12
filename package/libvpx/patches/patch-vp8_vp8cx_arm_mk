@@ -1,0 +1,11 @@
+--- libvpx-v0.9.7-p1.orig/vp8/vp8cx_arm.mk	2011-08-15 23:02:45.000000000 +0200
++++ libvpx-v0.9.7-p1/vp8/vp8cx_arm.mk	2011-09-17 18:09:12.317990227 +0200
+@@ -18,7 +18,7 @@ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/dct_arm.c
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/dct_arm.h
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/encodemb_arm.h
+-VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/picklpf_arm.c
++VP8_CX_SRCS-$(HAVE_ARMV7)  += encoder/arm/picklpf_arm.c
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/quantize_arm.c
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/quantize_arm.h
+ VP8_CX_SRCS-$(ARCH_ARM)  += encoder/arm/variance_arm.c

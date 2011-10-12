@@ -1,4 +1,0 @@
-lappend boards_dir /home/wbx/openadk/tests
-lappend boards_dir /usr/share/dejagnu
-set myboard adk
-set target_list adk
