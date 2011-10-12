@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
-PKG_SYSTEM_DEPENDS:=	sharp-zaurus ibm-x40
+PKG_SYSTEM_DEPENDS:=	sharp-zaurus ibm-x40 lemote-yeelong
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}-p1.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}-p1
