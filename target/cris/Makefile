@@ -7,7 +7,8 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
+ZKERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
+KERNEL:=$(LINUX_DIR)/vmlinux
 
 tools-compile:
 	$(MAKE) -C ../tools/mkfimage all
@@ -18,7 +19,7 @@ endif
 	$(INSTALL_BIN) ../tools/boot_linux $(BIN_DIR)/
 
 kernel-install: tools-compile
-	PATH='${TARGET_PATH}' mkfimage $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
+	PATH='${TARGET_PATH}' mkfimage $(ZKERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
 
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
 	cat ${BUILD_DIR}/${TARGET_KERNEL} ${BUILD_DIR}/root.squashfs \
@@ -47,6 +48,12 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
+	@echo "Use following command to create a QEMU Image:"
+	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-cris -M axis-dev88 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
@@ -55,7 +62,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-cris -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-cris -M axis-dev88 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -64,6 +71,6 @@ imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-cris -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-cris -M axis-dev88 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
