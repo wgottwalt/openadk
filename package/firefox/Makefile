@@ -19,9 +19,9 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 native
+PKG_ARCH_DEPENDS:=	x86 x86_64 native mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	ibm-x40
+PKG_SYSTEM_DEPENDS:=	ibm-x40 lemote-yeelong
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
@@ -29,9 +29,6 @@ WRKDIST=		${WRKDIR}/mozilla-release
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-# disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_CC="${CC_FOR_BUILD}" \
