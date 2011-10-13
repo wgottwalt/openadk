@@ -1,0 +1,52 @@
+--- Linux-PAM-1.1.4.orig/modules/pam_succeed_if/pam_succeed_if.c	2011-06-21 11:04:56.000000000 +0200
++++ Linux-PAM-1.1.4/modules/pam_succeed_if/pam_succeed_if.c	2011-10-12 14:36:33.843559001 +0200
+@@ -230,6 +230,7 @@ evaluate_notingroup(pam_handle_t *pamh,
+ 	return PAM_AUTH_ERR;
+ }
+ /* Return PAM_SUCCESS if the (host,user) is in the netgroup. */
++/*
+ static int
+ evaluate_innetgr(const char *host, const char *user, const char *group)
+ {
+@@ -237,7 +238,9 @@ evaluate_innetgr(const char *host, const
+ 		return PAM_SUCCESS;
+ 	return PAM_AUTH_ERR;
+ }
++*/
+ /* Return PAM_SUCCESS if the (host,user) is NOT in the netgroup. */
++/*
+ static int
+ evaluate_notinnetgr(const char *host, const char *user, const char *group)
+ {
+@@ -245,6 +248,7 @@ evaluate_notinnetgr(const char *host, co
+ 		return PAM_SUCCESS;
+ 	return PAM_AUTH_ERR;
+ }
++*/
+ 
+ /* Match a triple. */
+ static int
+@@ -357,19 +361,23 @@ evaluate(pam_handle_t *pamh, int debug,
+ 		return evaluate_notingroup(pamh, user, right);
+ 	}
+ 	/* (Rhost, user) is in this netgroup. */
++	/*
+ 	if (strcasecmp(qual, "innetgr") == 0) {
+ 		const void *rhost;
+ 		if (pam_get_item(pamh, PAM_RHOST, &rhost) != PAM_SUCCESS)
+ 			rhost = NULL;
+ 		return evaluate_innetgr(rhost, user, right);
+ 	}
++	*/
+ 	/* (Rhost, user) is not in this group. */
++	/*
+ 	if (strcasecmp(qual, "notinnetgr") == 0) {
+ 		const void *rhost;
+ 		if (pam_get_item(pamh, PAM_RHOST, &rhost) != PAM_SUCCESS)
+ 			rhost = NULL;
+ 		return evaluate_notinnetgr(rhost, user, right);
+ 	}
++	*/
+ 	/* Fail closed. */
+ 	return PAM_SERVICE_ERR;
+ }

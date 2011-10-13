@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- vsftpd-2.2.0.orig/Makefile	2009-05-22 21:44:52.000000000 +0200
-+++ vsftpd-2.2.0/Makefile	2009-08-21 00:46:32.980346849 +0200
+--- vsftpd-2.3.4.orig/Makefile	2009-05-22 21:44:52.000000000 +0200
++++ vsftpd-2.3.4/Makefile	2011-10-13 21:01:57.600352003 +0200
 @@ -1,12 +1,12 @@
  # Makefile for systems with GNU tools
 -CC 	=	gcc
@@ -27,7 +27,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  .c.o:
  	$(CC) -c $*.c $(CFLAGS) $(IFLAGS)
  
-@@ -24,21 +26,20 @@ vsftpd: $(OBJS) 
+@@ -24,21 +26,20 @@ vsftpd: $(OBJS)
  	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS) $(LDFLAGS)
  
  install:

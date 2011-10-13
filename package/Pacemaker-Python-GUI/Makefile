@@ -13,6 +13,9 @@ PKG_BUILDDEP:=		pacemaker gnutls pam
 PKG_URL:=		http://hg.clusterlabs.org/pacemaker/pygui/
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_CFLINE_PACEMAKER_PYTHON_GUI:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_CFLINE_PACEMAKER_MGMTD:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+
 PKG_SUBPKGS:=		PACEMAKER_PYTHON_GUI PACEMAKER_MGMTD
 PKGSD_PACEMAKER_MGMTD:=	Management daemon for Pacemaker GUI
 
@@ -31,9 +34,12 @@ TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/python2.7 \
 pacemaker-python-gui-install:
 	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/bin
 	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/lib/heartbeat-gui
+	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/share/heartbeat-gui
 	$(CP) $(WRKINST)/usr/lib/heartbeat-gui/* \
 		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/lib/heartbeat-gui
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/hb_gui \
+	$(CP) $(WRKINST)/usr/share/heartbeat-gui/* \
+		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/share/heartbeat-gui
+	$(CP) $(WRKINST)/usr/bin/*_gui \
 		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/bin
 
 pacemaker-mgmtd-install:
