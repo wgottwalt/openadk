@@ -1,0 +1,20 @@
+--- tntnet-2.0.orig/framework/common/gnutls.cpp	2010-03-14 12:26:36.000000000 +0100
++++ tntnet-2.0/framework/common/gnutls.cpp	2011-10-13 17:40:02.000000000 +0200
+@@ -364,7 +364,7 @@ namespace tnt
+           break;
+ 
+         if (ret == GNUTLS_E_AGAIN)
+-          throw cxxtools::net::Timeout();
++          throw cxxtools::IOTimeout();
+ 
+         if (ret < 0 && ret != GNUTLS_E_INTERRUPTED)
+           throw GnuTlsException("gnutls_record_recv", ret);
+@@ -403,7 +403,7 @@ namespace tnt
+           break;
+ 
+         if (ret == GNUTLS_E_AGAIN)
+-          throw cxxtools::net::Timeout();
++          throw cxxtools::IOTimeout();
+ 
+         if (ret != GNUTLS_E_INTERRUPTED)
+           throw GnuTlsException("gnutls_record_send", ret);

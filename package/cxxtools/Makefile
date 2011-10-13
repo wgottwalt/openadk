@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cxxtools
-PKG_VERSION:=		1.4.8
+PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		16ce92a83beb925fa5138fc9a52d55af
+PKG_MD5SUM:=		763ef672a577fa8b93c37239ee0f3d59
 PKG_DESCR:=		a collection of general-purpose C++ classes (libraries)
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv
@@ -35,7 +35,8 @@ endif
 
 TARGET_CFLAGS+=		-fPIC
 TARGET_CXXFLAGS+=	-fPIC
-CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
+CONFIGURE_ARGS+=	--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr' \
+			--disable-demos --disable-unittest
 
 cxxtools-install:
 	${INSTALL_DIR} ${IDIR_CXXTOOLS}/usr/lib
