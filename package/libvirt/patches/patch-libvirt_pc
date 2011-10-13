@@ -1,9 +1,0 @@
---- libvirt-0.8.7.orig/libvirt.pc	2011-01-04 03:23:23.000000000 +0100
-+++ libvirt-0.8.7/libvirt.pc	2011-01-12 18:31:53.000000000 +0100
-@@ -7,5 +7,5 @@ Name: libvirt
- Version: 0.8.7
- Description: libvirt library
- Requires:
--Libs: -L${libdir} -lvirt -ldl 
-+Libs: -L${libdir} -lvirt -lintl 
- Cflags: -I${includedir}
