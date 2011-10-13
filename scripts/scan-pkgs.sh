@@ -133,6 +133,10 @@ if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
 	NEED_XMLTO="$NEED_XMLTO libXfont"
 fi
 
+if [[ -n $ADK_PACKAGE_PACEMAKER_MGMTD ]]; then
+	NEED_SWIG="$NEED_SWIG pacemaker-mgmtd"
+fi
+
 if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
@@ -309,6 +313,13 @@ fi
 if [[ -n $NEED_LIBIDL ]]; then
 	if ! which libIDL-config-2 >/dev/null 2>&1; then
 		echo >&2 You need libIDL-config-2 to build $NEED_LIBIDL
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_SWIG ]]; then
+	if ! which swig >/dev/null 2>&1; then
+		echo >&2 You need swig to build $NEED_SWIG
 		out=1
 	fi
 fi

@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1bb080c7b0021db50884a52161251990
 PKG_DESCR:=		image viewer
 PKG_SECTION:=		multimedia
+PKG_BUILDDEP:=		imlib2 giblib libXt
 PKG_DEPENDS:=		imlib2 giblib
-PKG_BUILDDEP:=		imlib2 giblib
 PKG_SITES:=		http://feh.finalrewind.org/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -25,7 +25,6 @@ MAKE_FLAGS+=		curl=0 xinerama=0
 
 feh-install:
 	$(INSTALL_DIR) $(IDIR_FEH)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/feh \
-		$(IDIR_FEH)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/feh $(IDIR_FEH)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
