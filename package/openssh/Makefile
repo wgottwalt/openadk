@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		5.8p2
+PKG_VERSION:=		5.9p1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0541579adf9d55abb15ef927048d372e
+PKG_MD5SUM:=		afe17eee7e98d3b8550cc349834a85d0
 PKG_DESCR:=		OpenSSH
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_BUILDDEP:=		zlib openssl
+PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 PKG_MULTI:=		1
