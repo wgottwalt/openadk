@@ -6,3 +6,4 @@ config ADK_TARGET_SYSTEM_ATMEL_NGW100
 	select ADK_TOOLCHAIN_GCC_SJLJ
 	help
 	  Support for ATMEL NGW100.
+
