@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.7.4.1
+PKG_VERSION:=		1.7.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1276aa1366bd3c670e9c51f1bff12f36
+PKG_MD5SUM:=		5d645884e688921e773186783b65ce33
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		scm
 PKG_BUILDDEP:=		openssl curl expat
 PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
 PKG_URL:=		http://git-scm.com/
-PKG_SITES:=		http://kernel.org/pub/software/scm/git/
+PKG_SITES:=		http://git-core.googlecode.com/files/
 
 include $(TOPDIR)/mk/package.mk
 
