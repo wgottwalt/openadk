@@ -1,6 +1,6 @@
---- curl-7.21.4.orig/configure	2011-01-30 19:07:52.000000000 +0100
-+++ curl-7.21.4/configure	2011-03-04 18:42:33.000000000 +0100
-@@ -19799,15 +19799,6 @@ fi
+--- curl-7.22.0.orig/configure	2011-09-12 22:22:04.000000000 +0200
++++ curl-7.22.0/configure	2011-10-15 03:05:05.000000000 +0200
+@@ -20641,14 +20641,6 @@ fi
  rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
    fi
  
@@ -12,7 +12,14 @@
 -       { $as_echo "$as_me:${as_lineno-$LINENO}: Added $LIB_OPENSSL to LD_LIBRARY_PATH" >&5
 -$as_echo "$as_me: Added $LIB_OPENSSL to LD_LIBRARY_PATH" >&6;}
 -    fi
--  fi
  
- fi
+   #
+ 
+@@ -21230,7 +21222,6 @@ $as_echo "$as_me: WARNING: $tst_warns" >
+ 
+   fi
+ 
+-fi
+ 
+ 
  
