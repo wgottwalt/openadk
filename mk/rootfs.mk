@@ -31,6 +31,10 @@ ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 ROOTFS:=	root=/dev/sda1 rootwait
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),y)
+ROOTFS:=	root=/dev/mtdblock1
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 USB:=		rootwait
 else
@@ -43,7 +47,7 @@ $(eval $(call rootfs_template,usb,USB,$(USB)))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
-$(eval $(call rootfs_template,squashfs,SQUASHFS))
+$(eval $(call rootfs_template,squashfs,SQUASHFS,$(ROOTFS)))
 $(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV) panic=3))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp init=/init))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
