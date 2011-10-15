@@ -46,9 +46,10 @@ post-extract:
 	$(CP) ./files/setup.py ${WRKBUILD}/setup.py
 	$(CP) ./files/posixmodule.c ${WRKBUILD}/Modules/posixmodule.c
 	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
+	$(CP) ./files/build_scripts.py ${WRKBUILD}/Lib/distutils/command/build_scripts.py
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(CFLAGS_FOR_BUILD)" \
-		./configure --without-cxx-main --without-threads \
+		./configure --without-cxx-main --with-threads \
 		--prefix=$(STAGING_HOST_DIR)/usr \
 	);
 	$(MAKE) -C ${WRKBUILD} python Parser/pgen
@@ -62,6 +63,7 @@ post-extract:
 
 pre-configure:
 	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
+	$(SED) "s#@@STAGING_DIR@@#$(STAGING_DIR)#" ${WRKBUILD}/setup.py
 
 post-install:
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib

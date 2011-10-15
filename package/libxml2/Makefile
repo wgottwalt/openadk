@@ -14,20 +14,30 @@ PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 
-PKG_SUBPKGS:=		LIBXML2 LIBXML2_DEV
+PKG_SUBPKGS:=		LIBXML2 LIBXML2_DEV LIBXML2_PYTHON
 PKGSD_LIBXML2_DEV:=	XML parser headers
 PKGSC_LIBXML2_DEV:=	devel
+PKGSD_LIBXML2_PYTHON:=	XML python bindings
+PKGSC_LIBXML2_PYTHON:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBXML2_DEV,libxml2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXML2_DEV},${PKGSC_LIBXML2_DEV}))
+$(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXML2_PYTHON},${PKGSC_LIBXML2_PYTHON}))
+
+include $(TOPDIR)/mk/python.mk
 
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+ifeq ($(ADK_PACKAGE_LIBXML2_PYTHON),y)
+CONFIGURE_ARGS+=	--with-python=${STAGING_DIR}/usr
+else
+CONFIGURE_ARGS+=	--without-python
+endif
 CONFIGURE_ARGS+=	--without-c14n \
-			--without-catalog \
 			--without-debug \
 			--without-docbook \
+			--with-catalog \
 			--with-html \
 			--without-ftp \
 			--without-http \
@@ -37,7 +47,6 @@ CONFIGURE_ARGS+=	--without-c14n \
 			--with-output \
 			--without-pattern \
 			--without-push \
-			--without-python \
 			--with-reader \
 			--without-readline \
 			--without-regexps \
@@ -66,4 +75,9 @@ libxml2-dev-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/xml2-config \
 		${IDIR_LIBXML2_DEV}/usr/bin
 
+libxml2-python-install:
+	$(INSTALL_DIR) $(IDIR_LIBXML2_PYTHON)/usr/lib/python$(PYTHON_VERSION)/site-packages
+	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/* \
+		$(IDIR_LIBXML2_PYTHON)/usr/lib/python$(PYTHON_VERSION)/site-packages
+	
 include ${TOPDIR}/mk/pkg-bottom.mk
