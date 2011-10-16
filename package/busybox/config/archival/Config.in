@@ -107,7 +107,7 @@ config BUSYBOX_BZIP2
 config BUSYBOX_CPIO
 	bool "cpio"
 	depends on !ADK_PACKAGE_CPIO
-	default y
+	default n
 	help
 	  cpio is an archival utility program used to create, modify, and
 	  extract contents from archives.
