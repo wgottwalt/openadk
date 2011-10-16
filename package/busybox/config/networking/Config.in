@@ -63,7 +63,7 @@ config BUSYBOX_ARPING
 config BUSYBOX_BRCTL
 	bool "brctl"
 	depends on !ADK_PACKAGE_BRIDGE_UTILS
-	default y
+	default n
 	depends on BUSYBOX_PLATFORM_LINUX
 	help
 	  Manage ethernet bridges.

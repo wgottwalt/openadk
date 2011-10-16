@@ -289,12 +289,13 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 	  Y or M to "ISO 9660 CD-ROM file system support" later.
 
 config ADK_KERNEL_BLK_DEV_MD
+	prompt "md support........................ RAID support (kernel)"
 	tristate
 	select ADK_KERNEL_MD
 	default n
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
-	prompt "kmod-blk-dev-md................... RAID support"
+	prompt "kmod-blk-dev-md................... RAID support (module)"
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
@@ -302,23 +303,25 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KERNEL_MD_RAID0
+	prompt "raid0 support....................  RAID0 support (kernel)"
 	tristate
 	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID0
-	prompt "kmod-md-raid0..................... RAID0 support"
+	prompt "kmod-md-raid0..................... RAID0 support (module)"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KERNEL_MD_RAID1
+	prompt "raid1 support....................  RAID1 support (kernel)"
 	tristate
 	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID1
-	prompt "kmod-md-raid1..................... RAID1 support"
+	prompt "kmod-md-raid1..................... RAID1 support (module)"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
