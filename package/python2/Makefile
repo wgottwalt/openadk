@@ -30,6 +30,7 @@ $(eval $(call PKG_template,PYTHON2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,PYTHON2_BZIP2,${PKG_NAME}-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PYTHON2_READLINE,${PKG_NAME}-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_CFLAGS+=		-fPIC
 MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
 			RANLIB="${TARGET_CROSS}ranlib" \
 			HOSTPYTHON=./hostpython \
@@ -74,10 +75,11 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
 	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
 	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
-	rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/readline.so
-	rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/bz2.so
+	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/readline.so
+	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/bz2.so
 	# workaround, copy host python-config to target scripts directory
 	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_DIR}/scripts
+	(cd ${STAGING_DIR}/usr/bin/ && ln -sf $(STAGING_HOST_DIR)/usr/bin/hostpython hostpython)
 
 python2-readline-install:
 	${INSTALL_DIR} ${IDIR_PYTHON2_READLINE}/usr/lib/python2.7/lib-dynload
