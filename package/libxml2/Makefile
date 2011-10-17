@@ -19,6 +19,7 @@ PKGSD_LIBXML2_DEV:=	XML parser headers
 PKGSC_LIBXML2_DEV:=	devel
 PKGSD_LIBXML2_PYTHON:=	XML python bindings
 PKGSC_LIBXML2_PYTHON:=	libs
+PKGSB_LIBXML2_PYTHON:=	python2
 
 include ${TOPDIR}/mk/package.mk
 
