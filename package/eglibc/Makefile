@@ -90,7 +90,7 @@ eglibc-static-install:
 eglibc-dev-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
 	# install linker script
-	-cp ./files/libc.so.$(ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 ifeq ($(ADK_TARGET_ABI_O32),y)
 	$(SED) "s#@@ELFFORMAT@@#elf32-tradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 endif
