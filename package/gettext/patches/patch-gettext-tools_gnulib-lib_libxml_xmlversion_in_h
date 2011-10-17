@@ -1,0 +1,11 @@
+--- gettext-0.18.1.1.orig/gettext-tools/gnulib-lib/libxml/xmlversion.in.h	2010-06-06 14:49:58.000000000 +0200
++++ gettext-0.18.1.1/gettext-tools/gnulib-lib/libxml/xmlversion.in.h	2011-10-17 03:58:30.336558512 +0200
+@@ -263,7 +263,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(i
+  *
+  * Whether iconv support is available
+  */
+-#if 1
++#if 0
+ #define LIBXML_ICONV_ENABLED
+ #endif
+ 
