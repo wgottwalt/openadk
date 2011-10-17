@@ -316,6 +316,16 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
+ifeq ($(ADKtype),shuttle-sa76)
+	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
+	@echo ADK_TARGET_SYSTEM_SHUTTLE_SA76=y >> $(TOPDIR)/.defconfig
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
+endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
@@ -400,7 +410,16 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
-ifeq ($(ADKtype),ibmx-40)
+ifeq ($(ADKtype),shuttle-sa76)
+	@echo ADK_TARGET_SYSTEM_SHUTTLE_SA76=y >> $(TOPDIR)/all.config
+	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
+		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
+	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
+	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
+endif
+ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
 	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
 		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)

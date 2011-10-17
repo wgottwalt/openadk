@@ -26,7 +26,7 @@ MAKE_FLAGS+=		CC="${TARGET_CC}" OPTIMIZE="${TARGET_CFLAGS}"
 MAKE_FILE:=		Makefile.micro
 
 pre-configure:
-	$(CP) ./files/uconfig.h.$(ARCH) $(WRKBUILD)/uconfig.h
+	$(CP) ./files/uconfig.h.$(CPU_ARCH) $(WRKBUILD)/uconfig.h
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MICROPERL}/usr/bin

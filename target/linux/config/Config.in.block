@@ -4,8 +4,6 @@ config ADK_KERNEL_BLOCK
 config ADK_KERNEL_MD
 	boolean
 
-config ADK_KERNEL_SWAP
-	boolean
 
 config ADK_KERNEL_LBD
 	boolean
@@ -312,6 +310,7 @@ config ADK_KPACKAGE_KMOD_MD_RAID0
 	prompt "kmod-md-raid0..................... RAID0 support (module)"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
+	depends on !ADK_KERNEL_MD_RAID0
 	help
 
 config ADK_KERNEL_MD_RAID1
@@ -387,5 +386,11 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	help
           DRBD - http://www.drbd.org
+          
+config ADK_KERNEL_SWAP
+	prompt "swap.............................. SWAP support"
+	boolean
+	help
+	  Kernel swap support.
 
 endmenu
