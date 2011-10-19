@@ -29,7 +29,9 @@ CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \
 			ac_cv_search_yp_get_default_domain=no \
-			ac_cv_lib_ext_nsl_gethostbyname=no
+			ac_cv_lib_ext_nsl_gethostbyname=no \
+			ac_cv_file__proc_sys_kernel_core_pattern=yes \
+			libreplace_cv_HAVE_GETADDRINFO=no
 CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 			--localstatedir=/var/log/samba \
 			--with-configdir=/etc/samba \

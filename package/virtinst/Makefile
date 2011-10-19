@@ -10,7 +10,7 @@ PKG_MD5SUM:=		d8f6a61d7edbc78129a8b5df2807ad46
 PKG_DESCR:=		virtual machine installer
 PKG_SECTION:=		misc
 PKG_BUILDDEP:=		python2 urlgrabber libxml2 libxslt
-PKG_DEPENDS:=		python2 urlgrabber libxml2-python libxslt
+PKG_DEPENDS:=		python2 urlgrabber libxml2-python libxslt libvirt
 PKG_URL:=		http://virt-manager.org/
 PKG_SITES:=		http://virt-manager.org/download/sources/virtinst/
 

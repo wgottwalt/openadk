@@ -1,7 +1,7 @@
 #!/bin/sh
 # Copyright (c) 2006, 2007
 #	Thorsten Glaser <tg@mirbsd.de>
-# Copyright (c) 2009, 2010
+# Copyright (c) 2009, 2010, 2011
 #	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
@@ -42,7 +42,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem Utility (cfgfs), Version 1.08'
+what='Configuration Filesystem Utility (cfgfs), Version 1.09'
 
 who=$(id -u)
 if [ $who -ne 0 ]; then
@@ -114,7 +114,6 @@ EOF
 esac
 
 mtd=0
-
 if [ -x /sbin/nand ];then
 	mtdtool=/sbin/nand
 fi
@@ -129,6 +128,9 @@ rootdisk=$(readlink /dev/root)
 rootdisk=${rootdisk%p*}
 rootdisk=${rootdisk%[1-9]}
 part=$(fdisk -l /dev/$rootdisk 2>/dev/null|awk '$5 == 88 { print $1 }')
+if [ -f .cfgfs ];then
+  . /.cfgfs
+fi
 if [ -z $part ]; then
 	# fallback to /dev/sda in case of encrypted root
 	part=$(fdisk -l /dev/sda 2>/dev/null|awk '$5 == 88 { print $1 }')

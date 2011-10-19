@@ -4,18 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		0.14.1
+PKG_VERSION:=		0.15.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b6c713a8db638e173af53a62d5178640
+PKG_MD5SUM:=		34f17737baaf1b3495c89cd6d4a607ed
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		zlib libsdl
-PKG_BUILDDEP:=		zlib sdl
+PKG_DEPENDS:=		zlib libsdl libpng
+PKG_BUILDDEP:=		zlib sdl libpng
 PKG_URL:=		http://wwww.qemu.org/
-PKG_SITES:=		http://download.savannah.gnu.org/releases/qemu/
+PKG_SITES:=		http://wiki.qemu.org/download/
 
 PKG_ARCH_DEPENDS:=	native x86 x86_64
-PKG_SYSTEM_DEPENDS:=	ibm-x40
+PKG_SYSTEM_DEPENDS:=	ibm-x40 shuttle-sa76
 
 include $(TOPDIR)/mk/package.mk
 
@@ -26,6 +26,7 @@ CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--prefix=/usr \
 			--sysconfdir=/etc \
+			--enable-kvm \
 			--bindir=/usr/bin
 TARGET_LDFLAGS+=	-pthread -lm -lrt
 
