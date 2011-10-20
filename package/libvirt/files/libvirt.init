@@ -10,13 +10,14 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/libvirtd -dv
+	/usr/sbin/libvirtd -d
 	;;
 stop)
 	kill $(pgrep -f /usr/sbin/libvirtd)
 	;;
 restart)
 	sh $0 stop
+	sleep 2
 	sh $0 start
 	;;
 *)
