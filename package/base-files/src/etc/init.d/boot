@@ -26,4 +26,8 @@ for f in /etc/modules.d/*; do
 done
 # settle down, after module load
 sleep 2
+# any lvm volumes to activate?
+[ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay;}
+# check and mount all filesystems not /
+[ -f /etc/fstab ] && { fsck -p >/dev/null; mount -a; swapon -a;}
 exit 0
