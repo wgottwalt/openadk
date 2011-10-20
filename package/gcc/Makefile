@@ -20,9 +20,6 @@ TARGET_CPPFLAGS:=	''
 TARGET_CFLAGS:=		''
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CXXFLAGS))
 
-#ifeq ($(ADK_LINUX_64),y)
-#CONFIGURE_ARGS+=       --with-abi=64
-#endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif

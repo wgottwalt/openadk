@@ -120,4 +120,3 @@ config ADK_KPACKAGE_KMOD_IP_NF_TARGET_ECN
 	  an IP packet.  This is particularly useful, if you need to work around
 	  existing ECN blackholes on the internet, but don't want to disable
 	  ECN support in general.
-

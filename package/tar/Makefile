@@ -20,7 +20,7 @@ CONFIGURE_ENV+=		gl_cv_func_mbrtowc_incomplete_state=no \
 			gl_cv_func_wcrtomb_retval=no
 
 post-install:
-	${INSTALL_DIR} ${IDIR_TAR}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/tar ${IDIR_TAR}/usr/bin
+	${INSTALL_DIR} ${IDIR_TAR}/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/tar ${IDIR_TAR}/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
