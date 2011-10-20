@@ -54,7 +54,7 @@ ifeq ($(ADK_LOCALES),y)
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
 endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
-	    $(IDIR_EGLIBC)/usr/lib
+	    $(IDIR_EGLIBC)/usr/lib $(IDIR_EGLIBC)/usr/bin
 	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
 		test -s usr/share/zoneinfo/"$$f" || continue; \
 		echo usr/share/zoneinfo/"$$f" | \
@@ -82,6 +82,7 @@ endif
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_EGLIBC}/etc
+	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_EGLIBC)/usr/bin
 
 eglibc-static-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib
