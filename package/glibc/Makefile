@@ -57,7 +57,7 @@ glibc-dev-install:
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
-	-for file in libc libcrypt libdl libm libresolv librt libutil; do \
+	-for file in libcrypt libdl libm libresolv librt libutil; do \
 		cd $(IDIR_GLIBC_DEV)/lib; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package

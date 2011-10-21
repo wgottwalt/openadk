@@ -7,10 +7,11 @@ ver=$(uname -r)
 arch=$(uname -m)
 
 ext=0
-while getopts "e" option
+while getopts "el" option
 do
 	case $option in
 		e) ext=1 ;;
+		l) lux=1 ;;
 		*) printf "Option not recognized\n";exit 1 ;;
 	esac
 done
@@ -49,12 +50,19 @@ openbsd_full() {
 	pkg_add -v m4
 	pkg_add -v autoconf-2.62p0
 	pkg_add -v gperf
-	pkg_add -v python-2.6.3p1
+	pkg_add -v python-2.6.6p0
+}
+
+openbsd_lux() {
+	PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/${ver}/packages/${arch}/"
+	export PKG_PATH
+	pkg_add -v screen--
+	pkg_add -v vim--no_x11
 }
 
 netbsd() {
 	echo "Preparing NetBSD for OpenADK"
-	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/5.0/All/"
+	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/${ver}/All/"
 	export PKG_PATH
 	pkg_add -vu xz
 	pkg_add -vu scmgit
@@ -71,7 +79,7 @@ netbsd() {
 
 netbsd_full() {
 	echo "Preparing NetBSD for full OpenADK package builds"
-	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/5.0/All/"
+	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/${ver}/All/"
 	export PKG_PATH
 	pkg_add -vu intltool
 	pkg_add -vu lynx
@@ -82,6 +90,15 @@ netbsd_full() {
 	pkg_add -vu python26
 }
 
+netbsd_lux() {
+	echo "Preparing NetBSD for deluxe OpenADK package builds"
+	PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/${arch}/${ver}/All/"
+	export PKG_PATH
+	pkg_add -vu vim
+	pkg_add -vu screen
+	pkg_add -vu mksh
+}
+
 freebsd() {
 	echo "Preparing FreeBSD for OpenADK"
 	pkg_add -r git gmake bash wget unzip gtar gsed gawk gperf
@@ -89,7 +106,12 @@ freebsd() {
 
 freebsd_full() {
 	echo "Preparing FreeBSD for full OpenADK package builds"
-	pkg_add -r intltool lynx bison zip xkbcomp glib20 libIDL autoconf262
+	pkg_add -r intltool lynx bison zip xkbcomp glib20 libIDL autoconf268 libxslt automake14 swig
+}
+
+freebsd_lux() {
+	echo "Preparing FreeBSD for deluxe OpenADK package builds"
+	pkg_add -r screen mksh vim
 }
 
 case $os in 
@@ -100,14 +122,17 @@ case $os in
 	FreeBSD)
 		freebsd
 		[ $ext -eq 1 ] && freebsd_full
+		[ $lux -eq 1 ] && freebsd_lux
 		;;
 	OpenBSD)
 		openbsd
 		[ $ext -eq 1 ] && openbsd_full
+		[ $lux -eq 1 ] && openbsd_lux
 		;;
 	NetBSD)
 		netbsd
 		[ $ext -eq 1 ] && netbsd_full
+		[ $lux -eq 1 ] && netbsd_lux
 		;;
 	Darwin)
 		darwin
