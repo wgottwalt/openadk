@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		15ed56733655e3fab785e49a7278d2fb
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -31,6 +31,7 @@ $(eval $(call PKG_template,PYTHON2_BZIP2,${PKG_NAME}-bzip2,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,PYTHON2_READLINE,${PKG_NAME}-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS+=		-fPIC
+TARGET_LDFLAGS+=	-L.
 MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
 			RANLIB="${TARGET_CROSS}ranlib" \
 			HOSTPYTHON=./hostpython \
