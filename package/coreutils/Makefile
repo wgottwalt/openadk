@@ -12,20 +12,28 @@ PKG_SECTION:=		base
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 
-PKG_SUBPKGS:=		TSORT
+PKG_SUBPKGS:=		TSORT SHA256SUM
 PKGSD_TSORT:=		topological sort utility
 PKGSC_TSORT:=		misc
+PKGSD_SHA256SUM:=	SHA1 256 bit checksum utility
+PKGSC_SHA256SUM:=	misc
 
 include $(TOPDIR)/mk/package.mk
 
 #$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TSORT},${PKGSC_TSORT}))
+$(eval $(call PKG_template,SHA256SUM,sha256sum,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SHA256SUM},${PKGSC_SHA256SUM}))
 
 CONFIGURE_ARGS+=	--disable-rpath
 
-post-install:
+tsort-install:
 	$(INSTALL_DIR) $(IDIR_TSORT)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/tsort \
 		$(IDIR_TSORT)/usr/bin
+
+sha256sum-install:
+	$(INSTALL_DIR) $(IDIR_SHA256SUM)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/sha256sum \
+		$(IDIR_SHA256SUM)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

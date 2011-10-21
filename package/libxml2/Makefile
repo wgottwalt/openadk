@@ -30,7 +30,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RE
 include $(TOPDIR)/mk/python.mk
 
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
-ifeq ($(ADK_PACKAGE_LIBXML2_PYTHON),y)
+ifneq ($(ADK_PACKAGE_LIBXML2_PYTHON),)
 CONFIGURE_ARGS+=	--with-python=${STAGING_DIR}/usr
 else
 CONFIGURE_ARGS+=	--without-python
