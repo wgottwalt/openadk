@@ -15,21 +15,20 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_SUBPKGS:=		LIBXP LIBXP_DEV
 PKGSD_LIBXP_DEV:=	X Print headers
 PKGSC_LIBXP_DEV:=	x11/devel
+PKGSS_LIBXP_DEV:=	printproto
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXP,libpt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXP_DEV,libpt-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXP_DEV},${PKGSC_LIBXP_DEV}))
+$(eval $(call PKG_template,LIBXP,libxp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXP_DEV,libxp-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXP_DEV},${PKGSC_LIBXP_DEV}))
 
 libxp-install:
 	${INSTALL_DIR} ${IDIR_LIBXP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXp.so* ${IDIR_LIBXP}/usr/lib
 
 libxp-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBXP_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXP_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_LIBXP_DEV}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
+	${INSTALL_DATA} ${WRKBUILD}/*.pc \
 		${IDIR_LIBXP_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

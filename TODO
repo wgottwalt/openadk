@@ -1,16 +1,10 @@
-- port openjdk
-- port LXDE
+- automatic subpackage of development files
 - toolchain rebuild when changes to config require it
-- add and test brcm 2.6 wireless support
 - man pages in ipkg/tgz packages (automatic)
 - automate /etc handling via conffiles
 - distcc evaluation
-- fix qemu package
 - openssl ocf support check
 - new package minidlna
-- PKG_CONFLICTS for python/python2, is this possible with Kconfig?
 - mirror only option, for no internet access
 - help text for config/ needs adoption
 - diet libc / klibc / newlib support
-- locales support
-- pcc support? clang+llvm

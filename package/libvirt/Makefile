@@ -11,7 +11,8 @@ PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted udev
 PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap libreadline
-PKG_DEPENDS+=		libintl
+PKG_DEPENDS+=		libintl dmidecode kmod-netfilter-xt-target-checksum
+PKG_DEPENDS+=		dnsmasq qemu
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		ftp://libvirt.org/libvirt/
 
@@ -24,7 +25,10 @@ $(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 include ${TOPDIR}/mk/python.mk
 
-CONFIGURE_ENV+=		gl_cv_warn__fstack_protector_all=no
+CONFIGURE_ENV+=		gl_cv_warn__fstack_protector_all=no \
+			ac_cv_path_IPTABLES_PATH=/usr/sbin/iptables \
+			ac_cv_path_IP6TABLES_PATH=/usr/sbin/ip6tables \
+			ac_cv_path_IP_PATH=/bin/ip
 CONFIGURE_ARGS+=	--without-xen \
 			--without-uml \
 			--without-esx \
@@ -38,6 +42,9 @@ CONFIGURE_ARGS+=	--without-xen \
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib ${IDIR_LIBVIRT}/usr/bin
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/etc/libvirt ${IDIR_LIBVIRT}/usr/sbin
+	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/share/libvirt
+	$(CP) $(WRKINST)/usr/share/libvirt/* \
+		${IDIR_LIBVIRT}/usr/share/libvirt
 	${INSTALL_BIN} ${WRKINST}/usr/bin/virsh ${IDIR_LIBVIRT}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libvirt*.so* ${IDIR_LIBVIRT}/usr/lib
 	${CP} ${WRKINST}/etc/libvirt/* ${IDIR_LIBVIRT}/etc/libvirt

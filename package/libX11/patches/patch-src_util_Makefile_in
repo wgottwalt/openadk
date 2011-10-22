@@ -1,13 +1,24 @@
 --- libX11-1.4.0.orig/src/util/Makefile.in	2010-11-21 23:15:55.000000000 +0100
-+++ libX11-1.4.0/src/util/Makefile.in	2011-04-28 22:56:41.000000000 +0200
-@@ -262,7 +262,6 @@ top_build_prefix = @top_build_prefix@
++++ libX11-1.4.0/src/util/Makefile.in	2011-10-21 09:41:05.000000000 +0200
+@@ -143,7 +143,7 @@ LD = @LD@
+ LDFLAGS = @LDFLAGS_FOR_BUILD@
+ LDFLAGS_FOR_BUILD = @LDFLAGS_FOR_BUILD@
+ LIBOBJS = @LIBOBJS@
+-LIBS = @LIBS@
++LIBS = 
+ LIBTOOL = @LIBTOOL@
+ LIB_MAN_DIR = @LIB_MAN_DIR@
+ LIB_MAN_SUFFIX = @LIB_MAN_SUFFIX@
+@@ -262,8 +262,7 @@ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  makekeys_CFLAGS = \
 -	$(X11_CFLAGS) \
- 	$(CWARNFLAGS)
+-	$(CWARNFLAGS)
++	$(CWARNFLAGS) -I/usr/local/include
  
  EXTRA_DIST = mkks.sh
+ 
 @@ -351,12 +350,12 @@ distclean-compile:
  @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
  

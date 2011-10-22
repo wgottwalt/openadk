@@ -22,5 +22,4 @@ cat /etc/.rnd >/dev/urandom 2>&1
 [ -x /kexecinit ] && { /kexecinit; }
 [ -x /cryptinit ] && { /cryptinit; exec switch_root /mnt "/init";}
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
-[ -f /etc/fstab ] && { fsck -p >/dev/null; mount -a;}
 exec /sbin/init

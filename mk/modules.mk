@@ -156,7 +156,7 @@ $(eval $(call KMOD_template,NET_IPIP,net-ipip,\
 
 $(eval $(call KMOD_template,IPV6,ipv6,\
 	$(MODULES_DIR)/kernel/net/ipv6/ipv6 \
-,19))
+,09))
 
 $(eval $(call KMOD_template,IPV6_SIT,ipv6-sit,\
 	$(MODULES_DIR)/kernel/net/ipv6/sit \
@@ -389,6 +389,10 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CONNMARK,netfilter-xt-target-con
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_MARK,netfilter-xt-target-mark,\
 	$(MODULES_DIR)/kernel/net/netfilter/$(MARK) \
+,50))
+
+$(eval $(call KMOD_template,NETFILTER_XT_TARGET_CHECKSUM,netfilter-xt-target-checksum,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_CHECKSUM \
 ,50))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NFQUEUE,netfilter-xt-target-nfqueue,\

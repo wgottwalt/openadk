@@ -9,6 +9,13 @@ config ADK_KPACKAGE_KMOD_NF_CONNTRACK
 	  Layer 3 independent connection tracking is experimental scheme
 	  which generalize ip_conntrack to support other layer 3 protocols.
 
+config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_CHECKSUM
+	tristate '"CHECKSUM" target support'
+	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_KPACKAGE_KMOD_IP_NF_MANGLE
+	select ADK_KERNEL_NETFILTER_ADVANCED
+	help
+
 config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_CLASSIFY
 	tristate '"CLASSIFY" target support'
 	select ADK_KERNEL_NETFILTER_XTABLES
