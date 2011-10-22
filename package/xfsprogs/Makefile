@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
 PKG_VERSION:=		3.1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b1db37749e2b4149a0dd178abff956be
 PKG_DESCR:=		Utilities for XFS filesystems
 PKG_SECTION:=		fs
@@ -32,5 +32,6 @@ do-install:
 	${INSTALL_DIR} ${IDIR_XFSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/mkfs/mkfs.xfs ${IDIR_XFSPROGS}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/repair/xfs_repair ${IDIR_XFSPROGS}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/growfs/xfs_growfs ${IDIR_XFSPROGS}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

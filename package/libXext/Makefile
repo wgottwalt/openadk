@@ -15,6 +15,7 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_SUBPKGS:=		LIBXEXT LIBXEXT_DEV
 PKGSD_LIBXEXT_DEV:=	X11 extension headers
 PKGSC_LIBXEXT_DEV:=	x11/devel
+PKGSS_LIBXEXT_DEV:=	xextproto
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -23,7 +24,7 @@ endif
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXEXT,libxext,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBXEXT_DEV,libxext-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXEXT_DEV},${PKGSC_LIBXEXT_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBXEXT_DEV,libxext-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBXEXT_DEV},${PKGSD_LIBXEXT_DEV},${PKGSC_LIBXEXT_DEV},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
