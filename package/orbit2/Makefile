@@ -26,6 +26,7 @@ $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,ORBIT2_DEV,orbit2-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ORBIT2_DEV},${PKGSC_ORBIT2_DEV}))
 
 CFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --cflags)
+CFLAGS_FOR_BUILD+=	-I/usr/local/include
 LDFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --libs)
 LDFLAGS_FOR_BUILD+=	-lgmodule-2.0
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
