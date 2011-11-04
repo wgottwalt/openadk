@@ -11,7 +11,7 @@ PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
-PKG_ARCH_DEPENDS:=	!sh
+PKG_ARCH_DEPENDS:=	!sh !avr32
 
 include ${TOPDIR}/mk/package.mk
 
