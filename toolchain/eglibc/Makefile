@@ -64,6 +64,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		$(MAKE) install-headers install-bootstrap-headers=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-64.h
 	touch $@
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
