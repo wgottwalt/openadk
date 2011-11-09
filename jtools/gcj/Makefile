@@ -13,7 +13,7 @@ DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include ../rules.mk
-GCJ_ENV+=		JAR=no
+GCJ_ENV+=		"JAR=no LDFLAGS=-liconv"
 
 install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 
@@ -29,6 +29,8 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 			--with-mpc=$(STAGING_HOST_DIR) \
 			--with-mpfr=$(STAGING_HOST_DIR) \
 			--with-gmp=$(STAGING_HOST_DIR) \
+			--disable-nls \
+			--without-libiconv-prefix \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-biarch \

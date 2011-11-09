@@ -9,4 +9,3 @@ XTest.h;libXtst
 freetype.h;freetype
 asoundlib.h;libasound
 ffi.h;libffi
-Xproto.h;libXp
