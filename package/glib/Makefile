@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		glib
 PKG_VERSION:=		2.28.1
 PKG_EXTRAVER:=		2.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
@@ -41,19 +41,6 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_uscore=no \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
-
-pre-configure:
-ifneq ($(OStype),FreeBSD)
-	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-		CFLAGS="-L/usr/local/lib" ./configure --prefix=$(STAGING_HOST_DIR) \
-			--with-libiconv=gnu \
-	)
-	${MAKE} -C ${WRKBUILD} V=1
-	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin
-	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
-	$(CP) ${WRKBUILD}/gobject/glib-mkenums ${STAGING_HOST_DIR}/bin
-	${MAKE} -C ${WRKBUILD} clean
-endif
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib

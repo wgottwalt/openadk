@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio
+TARGETS:=adk mkcrypt cpio mkimage
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
