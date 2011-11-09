@@ -1,6 +1,14 @@
 --- drbd-8.3.10.orig/drbd/Makefile	2011-01-26 14:57:59.000000000 +0100
-+++ drbd-8.3.10/drbd/Makefile	2011-05-23 17:11:50.000000000 +0200
-@@ -133,7 +133,7 @@ else
++++ drbd-8.3.10/drbd/Makefile	2011-10-23 10:22:50.000000000 +0200
+@@ -65,7 +65,6 @@ else
+ 
+   # for some reason some of the commands below only work correctly in bash,
+   # and not in e.g. dash. I'm too lazy to fix it to be compatible.
+-  SHELL=/bin/bash
+ 
+   DRBDSRC := $(shell pwd)
+ 
+@@ -133,7 +132,7 @@ else
  		grep return $@ ;						\
  	fi ;									\
  	echo -e "\t\t\" build by $$USER@$$HOSTNAME, `date "+%F %T"`\";\n}";	\

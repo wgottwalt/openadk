@@ -274,7 +274,7 @@ ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
 include ${TOPDIR}/mk/vars.mk
 else
 include $(TOPDIR)/prereq.mk
-export BASH MAKE LANGUAGE LC_ALL OStype PATH CC_FOR_BUILD QEMU
+export BASH MAKE LANGUAGE LC_ALL OStype PATH CC_FOR_BUILD QEMU SHELL
 endif
 
 all: menuconfig

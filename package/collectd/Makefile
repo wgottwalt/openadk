@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		4.10.0
+PKG_VERSION:=		5.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c473cf8e9f22f5a9f7ef4c5be1b0c436
+PKG_MD5SUM:=		a405d6cca021748fea43b60348b72b0c
 PKG_DESCR:=		System statistics collection daemon
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
@@ -101,14 +101,14 @@ CONFIGURE_ARGS+=	--disable-apache \
 			--with-nan-emulation
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-XAKE_FLAGS+=		LIBS='-lm'
+XAKE_FLAGS+=		LIBS='-lm -lltdl'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/lib/collectd \
-		${IDIR_COLLECTD}/usr/sbin/ ${IDIR_COLLECTD}/etc
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/collectd ${IDIR_COLLECTD}/usr/sbin/
+		${IDIR_COLLECTD}/usr/sbin ${IDIR_COLLECTD}/etc
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/collectd ${IDIR_COLLECTD}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/collectd/*.so \
-		${IDIR_COLLECTD}/usr/lib/collectd/
+		${IDIR_COLLECTD}/usr/lib/collectd
 	${INSTALL_DATA} ./files/collectd.conf \
 		${IDIR_COLLECTD}/etc
 
