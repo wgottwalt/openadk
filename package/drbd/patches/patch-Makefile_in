@@ -1,9 +1,11 @@
 --- drbd-8.3.10.orig/Makefile.in	2011-01-26 14:57:59.000000000 +0100
-+++ drbd-8.3.10/Makefile.in	2011-05-23 17:11:50.000000000 +0200
-@@ -56,7 +56,7 @@ KDIR ?= /lib/modules/$(KVER)/build
- # and not in e.g. dash. I'm too lazy to fix it to be compatible.
- SHELL=/bin/bash
++++ drbd-8.3.10/Makefile.in	2011-10-23 10:20:12.000000000 +0200
+@@ -54,9 +54,7 @@ KDIR ?= /lib/modules/$(KVER)/build
  
+ # for some reason some of the commands below only work correctly in bash,
+ # and not in e.g. dash. I'm too lazy to fix it to be compatible.
+-SHELL=/bin/bash
+-
 -SUBDIRS     = user scripts documentation drbd
 +SUBDIRS     = user scripts drbd
  
