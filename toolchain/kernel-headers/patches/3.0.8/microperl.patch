@@ -1,0 +1,24 @@
+diff -Nur linux-2.6.30.5.orig/scripts/headers_check.pl linux-2.6.30.5/scripts/headers_check.pl
+--- linux-2.6.30.5.orig/scripts/headers_check.pl	2009-08-16 23:19:38.000000000 +0200
++++ linux-2.6.30.5/scripts/headers_check.pl	2009-09-14 21:16:21.000000000 +0200
+@@ -18,7 +18,7 @@
+ #
+ # 3) Check for leaked CONFIG_ symbols
+ 
+-use strict;
++#use strict;
+ 
+ my ($dir, $arch, @files) = @ARGV;
+ 
+diff -Nur linux-2.6.30.5.orig/scripts/headers_install.pl linux-2.6.30.5/scripts/headers_install.pl
+--- linux-2.6.30.5.orig/scripts/headers_install.pl	2009-08-16 23:19:38.000000000 +0200
++++ linux-2.6.30.5/scripts/headers_install.pl	2009-09-14 21:16:11.000000000 +0200
+@@ -16,7 +16,7 @@
+ # 2) Drop include of compiler.h
+ # 3) Drop all sections defined out by __KERNEL__ (using unifdef)
+ 
+-use strict;
++#use strict;
+ 
+ my ($readdir, $installdir, $arch, @files) = @ARGV;
+ 
