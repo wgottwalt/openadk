@@ -28,7 +28,7 @@ pre-configure:
 
 xawtv-install:
 	$(INSTALL_DIR) $(IDIR_XAWTV)/etc/X11/app-defaults
-	$(INSTALL_DATA) $(WRKINST)/etc/X11/app-defaults/Xawtv \
+	$(INSTALL_DATA) $(WRKINST)/usr/lib/X11/app-defaults/Xawtv \
 		$(IDIR_XAWTV)/etc/X11/app-defaults
 	$(INSTALL_DIR) $(IDIR_XAWTV)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xawtv \

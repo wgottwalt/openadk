@@ -1,0 +1,11 @@
+--- xfsprogs-3.1.5.orig/doc/Makefile	2011-03-31 00:25:47.000000000 +0200
++++ xfsprogs-3.1.5/doc/Makefile	2011-10-22 18:18:08.096581303 +0200
+@@ -14,7 +14,7 @@ include $(BUILDRULES)
+ 
+ CHANGES.gz:
+ 	@echo "    [ZIP]    $@"
+-	$(Q)$(ZIP) --best -c < CHANGES > $@
++	$(Q)$(ZIP) -c < CHANGES > $@
+ 
+ install: default
+ 	$(INSTALL) -m 755 -d $(PKG_DOC_DIR)

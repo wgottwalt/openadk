@@ -22,19 +22,21 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_CFLAGS+=		-fPIC
+ifeq ($(ADK_NATIVE),)
 MAKE_ENV+=		LDSHARED="$(TARGET_CC) -shared"
+CURL_CONFIG:=		$(STAGING_DIR)/usr/bin/curl-config
+else
+MAKE_ENV+=		CC="$(CC)" LDSHARED="$(CC) -shared"
+CURL_CONFIG:=		/usr/bin/curl-config
+endif
 
 include $(TOPDIR)/mk/python.mk
 
-#do-configure:
-	# native build for urlgrabber package
-#	(cd $(WRKBUILD); env CC=$(CC_FOR_BUILD) CFLAGS="$(CFLAGS_FOR_BUILD)" python ./setup.py build)
-#	(cd $(WRKBUILD); enc CC=$(CC_FOR_BUILD) CFLAGS="$(CFLAGS_FOR_BUILD)" python ./setup.py install --prefix="$(STAGING_DIR)/usr")
-
 do-build:
-	(cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config="$(STAGING_DIR)/usr/bin/curl-config" build)
-	(cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py install --prefix="$(WRKINST)/usr")
+	(cd $(WRKBUILD); env GCC_HONOUR_COPTS=s PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) build)
+	(cd $(WRKBUILD); env GCC_HONOUR_COPTS=s PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) install --prefix="$(WRKINST)/usr")
 
 do-install:
 	$(INSTALL_DIR) $(IDIR_PYCURL)/usr/lib/python$(PYTHON_VERSION)/site-packages

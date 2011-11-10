@@ -1,0 +1,72 @@
+
+ remove libnsl from linking.
+
+--- openjdk-6.orig/jdk/make/java/hpi/hpi_common.gmk	2011-02-28 17:06:10.000000000 +0100
++++ openjdk-6/jdk/make/java/hpi/hpi_common.gmk	2011-04-10 20:05:01.417672476 +0200
+@@ -86,5 +86,5 @@
+ # Things that must be linked in.
+ #
+ ifneq ($(PLATFORM), windows)
+-OTHER_LDLIBS += $(LIBSOCKET) -lnsl $(LIBM) -ldl
++OTHER_LDLIBS += $(LIBSOCKET) $(LIBM) -ldl
+ endif
+--- openjdk-6.orig/jdk/make/java/java/Makefile	2011-02-28 17:06:10.000000000 +0100
++++ openjdk-6/jdk/make/java/java/Makefile	2011-04-10 20:05:20.637673621 +0200
+@@ -205,7 +205,7 @@
+ OTHER_LDLIBS += $(JVMLIB) -libpath:$(OBJDIR)/../../../fdlibm/$(OBJDIRNAME) fdlibm.lib \
+ 		       -libpath:$(OBJDIR)/../../../verify/$(OBJDIRNAME) verify.lib
+ else
+-OTHER_LDLIBS += $(JVMLIB) -lverify $(LIBSOCKET) -lnsl -ldl \
++OTHER_LDLIBS += $(JVMLIB) -lverify $(LIBSOCKET) -ldl \
+ 		-L$(OBJDIR)/../../../fdlibm/$(OBJDIRNAME) -lfdlibm.$(ARCH)
+ endif
+ 
+--- openjdk-6.orig/jdk/make/java/net/Makefile	2011-02-28 17:06:10.000000000 +0100
++++ openjdk-6/jdk/make/java/net/Makefile	2011-04-10 20:05:39.537672169 +0200
+@@ -97,7 +97,7 @@
+   # Will not compile at warning level 3 if warnings are fatal
+   COMPILER_WARNINGS_FATAL=false
+ else
+-  OTHER_LDLIBS = $(LIBSOCKET) -lnsl -ldl $(JVMLIB)
++  OTHER_LDLIBS = $(LIBSOCKET) -ldl $(JVMLIB)
+ endif
+ ifeq ($(PLATFORM), linux)
+   OTHER_LDLIBS += -lpthread
+--- openjdk-6.orig/jdk/make/jpda/transport/socket/Makefile	2011-02-28 17:06:11.000000000 +0100
++++ openjdk-6/jdk/make/jpda/transport/socket/Makefile	2011-04-10 20:06:06.037672449 +0200
+@@ -42,11 +42,11 @@
+ endif
+ 
+ ifeq ($(PLATFORM), linux)
+-  OTHER_LDLIBS += -lnsl $(LIBSOCKET) -lpthread
++  OTHER_LDLIBS += $(LIBSOCKET) -lpthread
+ endif
+ 
+ ifeq ($(PLATFORM), solaris)
+-  OTHER_LDLIBS += -lnsl $(LIBSOCKET)
++  OTHER_LDLIBS += $(LIBSOCKET)
+ endif
+ 
+ ifeq ($(PLATFORM), windows)
+--- openjdk-6.orig/jdk/make/java/java_hprof_demo/Makefile	2011-02-28 17:06:10.000000000 +0100
++++ openjdk-6/jdk/make/java/java_hprof_demo/Makefile	2011-04-10 20:28:43.287672398 +0200
+@@ -83,7 +83,7 @@
+ ifeq ($(PLATFORM), windows)
+   OTHER_LDLIBS += wsock32.lib winmm.lib
+ else
+-  OTHER_LDLIBS += $(LIBSOCKET) -lnsl -ldl
++  OTHER_LDLIBS += $(LIBSOCKET) -ldl
+ endif
+ 
+ #
+--- openjdk-6.orig/jdk/make/mkdemo/jvmti/hprof/Makefile	2011-02-28 17:06:11.000000000 +0100
++++ openjdk-6/jdk/make/mkdemo/jvmti/hprof/Makefile	2011-04-11 10:23:11.538911604 +0200
+@@ -42,7 +42,7 @@
+   OTHER_LDLIBS += $(LIBSOCKET) -lnsl -ldl
+ endif
+ ifeq ($(PLATFORM), linux)
+-  OTHER_LDLIBS += $(LIBSOCKET) -lnsl -ldl -lpthread
++  OTHER_LDLIBS += $(LIBSOCKET) -ldl -lpthread
+ endif
+ 
+ #

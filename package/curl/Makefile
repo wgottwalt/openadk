@@ -68,6 +68,8 @@ libcurl-install:
 	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib
 
 libcurl-dev-install:
+	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libcurl.a ${IDIR_LIBCURL_DEV}/usr/lib
 	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
 	${CP} ${WRKINST}/usr/include/curl/*.h \
 		${IDIR_LIBCURL_DEV}/usr/include/curl

@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		2.6.37
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		9774ff9d74ebd301bf56bd8d74473786
+PKG_VERSION:=		2.6.38
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a243bfea837e71824b7ca26c3bb45fa8
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
-PKG_SITES:=		http://devresources.linuxfoundation.org/dev/iproute2/download/
+PKG_SITES:=		http://distfiles.gentoo.org/distfiles/
 
 PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility

@@ -1,5 +1,5 @@
 --- mdadm-3.1.1.orig/Makefile	2009-11-16 23:55:41.000000000 +0100
-+++ mdadm-3.1.1/Makefile	2010-02-06 01:09:39.963074463 +0100
++++ mdadm-3.1.1/Makefile	2011-11-09 16:50:02.083123679 +0100
 @@ -42,7 +42,7 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
  
  CC = $(CROSS_COMPILE)gcc
@@ -19,6 +19,15 @@
  
  # If you want a static binary, you might uncomment these
  # LDFLAGS = -static
+@@ -105,7 +106,7 @@ ASSEMBLE_SRCS += $(ASSEMBLE_AUTO_SRCS)
+ ASSEMBLE_FLAGS += -DMDASSEMBLE_AUTO
+ endif
+ 
+-all : mdadm mdmon mdadm.man md.man mdadm.conf.man mdmon.man
++all : mdadm mdmon
+ 
+ everything: all mdadm.static swap_super test_stripe \
+ 	mdassemble mdassemble.auto mdassemble.static mdassemble.man \
 @@ -186,29 +187,36 @@ sha1.o : sha1.c sha1.h md5.h
  	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
  
