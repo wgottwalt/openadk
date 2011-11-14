@@ -43,6 +43,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			BUSYBOX_INSTALL_NO_USR=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
+			BUSYBOX_UBIDETACH=n \
+			BUSYBOX_UBIATTACH=n \
 			BUSYBOX_BUILD_LIBBUSYBOX=n \
 			BUSYBOX_FEATURE_2_4_MODULES=n \
 			BUSYBOX_LOCALE_SUPPORT=n \
@@ -105,7 +107,7 @@ POSTCONFIG=		-@\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
-			make cleankernel ;\
+			make kernelclean;\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
