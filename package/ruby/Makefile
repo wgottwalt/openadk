@@ -27,7 +27,7 @@ MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags='' dldflags="$(TARGET_LDFLAGS)" 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes rb_cv_binary_elf=yes
-CONFIGURE_ARGS+=	--disable-install-doc --with-baseruby=${WRKBUILD}/hostruby
+CONFIGURE_ARGS+=	--disable-install-doc --with-baseruby=${STAGING_DIR}/bin/ruby
 ALL_TARGET:=		main
 INSTALL_TARGET:=	install-nodoc
 
@@ -36,7 +36,7 @@ pre-configure:
 		rb_cv_binary_elf=yes ./configure --prefix=$(STAGING_HOST_DIR) --disable-install-doc \
 	);
 	-$(MAKE) -C ${WRKBUILD} main Q=""
-	cp ${WRKBUILD}/ruby ${WRKBUILD}/hostruby
+	cp ${WRKBUILD}/ruby ${STAGING_DIR}/bin/ruby
 	$(MAKE) -C ${WRKBUILD} install-nodoc
 	$(MAKE) -C ${WRKBUILD} clean
 
