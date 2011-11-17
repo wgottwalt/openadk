@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		jikes
 PKG_VERSION:=		1.22
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		14d4bdfac236e347d806c6743dba48c6
+PKG_MD5SUM:=		cda958c7fef6b43b803e1d1ef9afcb85
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jikes/Jikes/1.22/}
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2

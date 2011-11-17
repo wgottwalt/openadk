@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ant
 PKG_VERSION:=		1.8.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		63220327925ace13756ae334c55a3baa
+PKG_MD5SUM:=		0d9e108afcd15b820150b8085c96d2b1
 PKG_SITES:=		http://www.apache.org/dist/ant/source/
 
 DISTFILES:=		apache-$(PKG_NAME)-$(PKG_VERSION)-src.tar.bz2

@@ -49,6 +49,7 @@ post-extract:
 	$(CP) ./files/posixmodule.c ${WRKBUILD}/Modules/posixmodule.c
 	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
 	$(CP) ./files/build_scripts.py ${WRKBUILD}/Lib/distutils/command/build_scripts.py
+	$(CP) ./files/sysconfig.py ${WRKBUILD}/Lib/distutils/sysconfig.py
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		OPT="$(CFLAGS_FOR_BUILD)" \
 		./configure --without-cxx-main --with-threads \

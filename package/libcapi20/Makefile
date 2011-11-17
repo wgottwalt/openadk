@@ -25,6 +25,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBCAPI20,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBCAPI20_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCAPI20_DEV},${PKGSC_LIBCAPI20_DEV},${PKG_OPTS}))
 
+pre-install:
+	${INSTALL_DIR} ${WRKINST}/usr/lib
+
 libcapi20-install:
 	${INSTALL_DIR} ${IDIR_LIBCAPI20}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcapi*.so* ${IDIR_LIBCAPI20}/usr/lib

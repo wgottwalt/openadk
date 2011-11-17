@@ -18,10 +18,18 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_USE_CCACHE=n \
 			ADK_PACKAGE_LIBFFMPEG_WITH_VP8=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
+			ADK_PACKAGE_PACEMAKER_MGMTD=n \
+			ADK_PACKAGE_OPENJDK=n \
+			ADK_PACKAGE_CLASSPATH=n \
+			ADK_PACKAGE_PCMANFM=n \
+			ADK_PACKAGE_GPSD=n \
+			ADK_PACKAGE_GPSD_CLIENTS=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_CRYPTINIT=n \
 			ADK_PACKAGE_PYTHON=n \
+			ADK_PACKAGE_VIRTINST=n \
+			ADK_PACKAGE_URLGRABBER=n \
 			ADK_PACKAGE_PERL=n \
 			ADK_PKG_LAPTOP=n \
 			ADK_PKG_DEVELOPMENT=n \
@@ -34,6 +42,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			BUSYBOX_INSTALL_NO_USR=n \
 			BUSYBOX_MODPROBE_SMALL=n \
 			BUSYBOX_EJECT=n \
+			BUSYBOX_UBIDETACH=n \
+			BUSYBOX_UBIATTACH=n \
 			BUSYBOX_BUILD_LIBBUSYBOX=n \
 			BUSYBOX_FEATURE_2_4_MODULES=n \
 			BUSYBOX_LOCALE_SUPPORT=n \
@@ -96,7 +106,7 @@ POSTCONFIG=		-@\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
-			make cleankernel ;\
+			make kernelclean;\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
@@ -271,7 +281,7 @@ ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
 include ${TOPDIR}/mk/vars.mk
 else
 include $(TOPDIR)/prereq.mk
-export BASH MAKE LANGUAGE LC_ALL OStype PATH CC_FOR_BUILD QEMU
+export BASH MAKE LANGUAGE LC_ALL OStype PATH CC_FOR_BUILD QEMU SHELL
 endif
 
 all: menuconfig

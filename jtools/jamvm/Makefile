@@ -6,13 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		63220327925ace13756ae334c55a3baa
+PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
-
-ifeq (Darwin,${OStype})
-CC_FOR_BUILD:=${CC_FOR_BUILD} -m32
-CXX_FOR_BUILD:=${CXX_FOR_BUILD} -m32
-endif
 
 include ../rules.mk
 

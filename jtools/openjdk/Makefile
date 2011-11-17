@@ -59,7 +59,9 @@ $(WRKDIST)/.extract: $(WRKDIST)/.extract_done
 	cd ${WRKDIST}; tar xzf ${TOPDIR}/dl/${XALAN_NAME}_${XALAN_VERSION}-bin.tar.gz
 	mkdir -p ${WRKBUILD}/drops
 	cd ${TOPDIR}/dl; cp jaxp144_01.zip jdk6-jaf-b20.zip jdk6-jaxws-b20.zip ${WRKBUILD}/drops
-	cd $(WRKDIST); patch -p0 < ${TOPDIR}/jtools/openjdk/patches/*.patch
+	cd $(WRKDIST); patch -p0 < ${TOPDIR}/jtools/openjdk/patches/openjdk.patch
+	cd $(WRKDIST); patch -p0 < ${TOPDIR}/jtools/openjdk/patches/iconv.patch
+	cd $(WRKDIST); patch -p0 < ${TOPDIR}/jtools/openjdk/patches/remove-libnsl.patch
 	touch $@
 
 $(WRKDIST)/.configured: ${WRKDIST}/.extract

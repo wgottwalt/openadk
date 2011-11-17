@@ -18,6 +18,8 @@ PKG_SITES:=		http://alioth.debian.org/~jblache/forked-daapd/
 
 PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER
 PKG_ARCH_DEPENDS:=	!ppc
+# gperf problem
+PKG_HOST_DEPENDS:=	!freebsd
 
 include $(TOPDIR)/mk/package.mk
 

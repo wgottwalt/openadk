@@ -149,6 +149,10 @@ if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GETTEXT="$NEED_GETTEXT glib"
 fi
 
+if [[ -n $ADK_PACKAGE_CONSOLEKIT ]]; then
+	NEED_DBUSGLIB="$NEED_DBUSGLIB consolekit"
+fi
+
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
@@ -389,6 +393,13 @@ fi
 if [[ -n $NEED_XSLTPROC ]]; then
 	if ! which xsltproc >/dev/null 2>&1; then
 		echo >&2 You need xsltproc to build $NEED_XSLTPROC
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_DBUSGLIB ]]; then
+	if ! which dbus-binding-tool >/dev/null 2>&1; then
+		echo >&2 You need dbus-binding-tool to build $NEED_DBUSGLIB
 		out=1
 	fi
 fi

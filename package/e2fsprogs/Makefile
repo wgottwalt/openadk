@@ -130,6 +130,9 @@ libcom-err-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR_DEV}/usr/include/et
 	${CP} ${WRKINST}/usr/include/et/com_err.h \
 		${IDIR_LIBCOM_ERR_DEV}/usr/include/et
+	${INSTALL_DIR} ${IDIR_LIBCOM_ERR_DEV}/usr/bin
+	${CP} ${WRKINST}/usr/bin/compile_et \
+		${IDIR_LIBCOM_ERR_DEV}/usr/bin
 
 libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib

@@ -1,0 +1,38 @@
+--- yasm-1.1.0.orig/Makefile.in	2010-08-07 18:38:18.000000000 +0200
++++ yasm-1.1.0/Makefile.in	2011-11-09 17:09:40.963153539 +0100
+@@ -1843,7 +1843,7 @@ vsyasm_LDADD = libyasm.a $(INTLLIBS)
+ # genstring build
+ genstring_SOURCES = 
+ genstring_LDADD = genstring.$(OBJEXT)
+-genstring_LINK = $(CCLD_FOR_BUILD) -o $@
++genstring_LINK = $(CCLD_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@
+ all: $(BUILT_SOURCES) config.h
+ 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
+ 
+@@ -4159,7 +4159,7 @@ version.mac: genversion$(EXEEXT)
+ 	$(top_builddir)/genversion$(EXEEXT) $@
+ 
+ genversion.$(OBJEXT): modules/preprocs/nasm/genversion.c
+-	$(CC_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f modules/preprocs/nasm/genversion.c || echo '$(srcdir)/'`modules/preprocs/nasm/genversion.c
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f modules/preprocs/nasm/genversion.c || echo '$(srcdir)/'`modules/preprocs/nasm/genversion.c
+ 
+ #EXTRA_DIST += modules/preprocs/gas/tests/rawpp_test.sh
+ #EXTRA_DIST += modules/preprocs/gas/tests/longline.asm
+@@ -4186,7 +4186,7 @@ module.c: $(top_srcdir)/libyasm/module.i
+ 	$(top_builddir)/genmodule$(EXEEXT) $(top_srcdir)/libyasm/module.in Makefile
+ 
+ genmodule.$(OBJEXT): libyasm/genmodule.c
+-	$(CC_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f libyasm/genmodule.c || echo '$(srcdir)/'`libyasm/genmodule.c
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f libyasm/genmodule.c || echo '$(srcdir)/'`libyasm/genmodule.c
+ 
+ @BUILD_MAN_TRUE@yasm.1: frontends/yasm/yasm.xml
+ @BUILD_MAN_TRUE@	$(XMLTO) -o $(top_builddir) man $(srcdir)/frontends/yasm/yasm.xml
+@@ -4209,7 +4209,7 @@ install-exec-hook: python-install
+ uninstall-hook: python-uninstall
+ 
+ genstring.$(OBJEXT): genstring.c
+-	$(CC_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f genstring.c || echo '$(srcdir)/'`genstring.c
++	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFAULT_INCLUDES) $(INCLUDES) -c -o $@ `test -f genstring.c || echo '$(srcdir)/'`genstring.c
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.

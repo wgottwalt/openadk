@@ -112,6 +112,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--host-cc=$(CC_FOR_BUILD) \
 			--disable-doc \
 			--disable-debug \
+			--disable-yasm \
 			--disable-optimizations \
 			--disable-stripping \
 			--enable-shared \
