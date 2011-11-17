@@ -4,12 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.25
+PKG_VERSION:=		2.4.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec63f9c2add59f323a0459128846905b
+PKG_MD5SUM:=		f36f3086031dd56ae94f722ffae8df5e
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libopenssl libsasl2
+PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread
 PKG_BUILDDEP:=		cyrus-sasl openssl db
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
@@ -93,6 +93,7 @@ libopenldap-dev-install:
 		${IDIR_LIBOPENLDAP_DEV}/usr/include
 
 openldap-utils-install:
+	${INSTALL_DIR} ${IDIR_OPENLDAP_UTILS}/etc/openldap-data
 	${INSTALL_DIR} ${IDIR_OPENLDAP_UTILS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/ldap* ${IDIR_OPENLDAP_UTILS}/usr/bin/
 
@@ -100,7 +101,7 @@ openldap-slapd-install:
 	${INSTALL_DIR} ${IDIR_OPENLDAP_SLAPD}/etc/openldap/schema
 	${INSTALL_DIR} ${IDIR_OPENLDAP_SLAPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/slap* ${IDIR_OPENLDAP_SLAPD}/usr/sbin
-	${INSTALL_DATA} ${WRKINST}/etc/openldap/schema/core.schema \
+	${INSTALL_DATA} ${WRKINST}/etc/openldap/schema/*.schema \
 		${IDIR_OPENLDAP_SLAPD}/etc/openldap/schema
 	${INSTALL_DATA} ./files/slapd.conf ${IDIR_OPENLDAP_SLAPD}/etc/openldap
 
