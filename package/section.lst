@@ -40,7 +40,6 @@ admin	System Administration
 utils	Utilities
 www	HTTP / FTP
 wifi	Wireless
-x11/lxde	Lightweight X Desktop Environment
 x11/apps	X applications
 x11/drivers	X drivers
 x11/server	X server 

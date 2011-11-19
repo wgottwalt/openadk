@@ -1,10 +1,1 @@
-- automatic subpackage of development files
-- toolchain rebuild when changes to config require it
-- man pages in ipkg/tgz packages (automatic)
-- automate /etc handling via conffiles
-- distcc evaluation
-- openssl ocf support check
-- new package minidlna
-- mirror only option, for no internet access
-- help text for config/ needs adoption
-- diet libc / klibc / newlib support
+nothing right now.
