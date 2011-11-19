@@ -9,12 +9,3 @@
  CWARNFLAGS = @CWARNFLAGS@
  CYGPATH_W = @CYGPATH_W@
  DEFS = @DEFS@
-@@ -231,7 +231,7 @@ top_build_prefix = @top_build_prefix@
- top_builddir = @top_builddir@
- top_srcdir = @top_srcdir@
- EXTRA_DIST = Shell.ht StrDefs.ct StrDefs.ht string.list $(appman_PRE)
--makestrs_CFLAGS = $(XT_CFLAGS)
-+makestrs_CFLAGS = $(CFLAGS_FOR_BUILD)
- makestrs_SOURCES = makestrs.c
- 
- # Man page

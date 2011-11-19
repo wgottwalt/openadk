@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBXT_DEV,libxt-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXT_DEV},${PKGSC_LIBXT_DEV}))
 
-CFLAGS_FOR_BUILD+=      -I/usr/local/include
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
