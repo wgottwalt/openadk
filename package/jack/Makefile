@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		python2 alsa-lib
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		http://www.grame.fr/~letz/
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	x86
 PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2

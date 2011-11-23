@@ -26,6 +26,10 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_CRYPTINIT=n \
+			ADK_PACKAGE_HEIMDAL=n \
+			ADK_PACKAGE_LIBHEIMDAL=n \
+			ADK_PACKAGE_LIBHEIMDAL_CLIENT=n \
+			ADK_PACKAGE_PAM=n \
 			ADK_PACKAGE_PYTHON=n \
 			ADK_PACKAGE_VIRTINST=n \
 			ADK_PACKAGE_URLGRABBER=n \
@@ -590,6 +594,7 @@ bulkallmod:
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
+		$(GMAKE) cleantarget; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
 	      done; \

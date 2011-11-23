@@ -15,6 +15,8 @@ PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
 
+PKG_ARCH_DEPENDS:=	!arm
+
 PKG_CHOICES_TNTNET:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITHOUT_SSL:=	use no SSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
