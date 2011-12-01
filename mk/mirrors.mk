@@ -11,10 +11,10 @@ MASTER_SITE_MIRBSD?=	\
 	http://pub.allbsd.org/MirOS/distfiles/ \
 
 MASTER_SITE_KERNEL?=	\
+	http://www.kernel.org/pub/linux/ \
 	http://www.de.kernel.org/pub/linux/ \
 	http://www.fi.kernel.org/pub/linux/ \
 	http://www.fr.kernel.org/pub/linux/ \
-	http://www.kernel.org/pub/linux/ \
 
 MASTER_SITE_XORG?=	\
 	http://www.x.org/releases/X11R7.6/src/everything/ \

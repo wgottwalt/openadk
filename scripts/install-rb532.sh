@@ -120,8 +120,8 @@ sleep 2
 maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
 rootsize=$(($maxsize-2))
 
-$parted -s $1 unit cyl mkpart primary ext2 0 1
-$parted -s $1 unit cyl mkpart primary ext2 1 $rootsize
+$parted -s $1 unit cyl mkpart primary ext2 0 2
+$parted -s $1 unit cyl mkpart primary ext2 2 $rootsize
 $parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 $parted -s $1 set 1 boot on
 $sfdisk --change-id $1 1 27
