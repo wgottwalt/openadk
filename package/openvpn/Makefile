@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.1.3
+PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7486d3e270ba4b033e311d3e022a0ad7
+PKG_MD5SUM:=		500bee5449b29906150569aaf2eb2730
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		kmod-tun libopenssl
+PKG_DEPENDS:=		kmod-tun libopenssl ip
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://openvpn.net/release/
@@ -56,7 +56,7 @@ CONFIGURE_ARGS+=	--disable-pthread \
 			--disable-plugins \
 			--enable-small \
 			--enable-iproute2 \
-			--with-iproute-path=ip \
+			--with-iproute-path=/usr/sbin/ip \
 			--without-ifconfig-path \
 			--without-route-path
 
@@ -72,7 +72,7 @@ openvpn-easy-rsa-install:
 	$(CP) ./files/serial $(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/keys
 	$(CP) $(WRKBUILD)/easy-rsa/2.0/{build-*,clean-all,inherit-inter,list-crl,pkitool,revoke-full,sign-req,whichopensslcnf} \
 		$(IDIR_OPENVPN_EASY_RSA)/usr/sbin
-	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/openssl.cnf \
+	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/openssl-1.0.0.cnf \
 		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/openssl.cnf
 	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/vars \
 		$(IDIR_OPENVPN_EASY_RSA)/etc/easy-rsa/vars
