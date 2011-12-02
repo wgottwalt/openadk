@@ -1,0 +1,10 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/revoke-full	2011-04-27 11:52:59.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/revoke-full	2011-12-01 19:43:00.000000000 +0100
+@@ -2,6 +2,7 @@
+ 
+ # revoke a certificate, regenerate CRL,
+ # and verify revocation
++. /etc/easy-rsa/vars
+ 
+ CRL="crl.pem"
+ RT="revoke-test.pem"

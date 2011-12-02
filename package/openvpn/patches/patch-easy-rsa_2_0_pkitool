@@ -1,0 +1,8 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/pkitool	2011-04-27 11:52:59.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/pkitool	2011-12-01 19:43:15.000000000 +0100
+@@ -1,4 +1,5 @@
+ #!/bin/sh
++. /etc/easy-rsa/vars
+ 
+ #  OpenVPN -- An application to securely tunnel IP networks
+ #             over a single TCP/UDP port, with support for SSL/TLS-based

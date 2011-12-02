@@ -1,0 +1,61 @@
+--- openvpn-2.2.1.orig/t_client.sh	2011-07-01 11:27:01.000000000 +0200
++++ openvpn-2.2.1/t_client.sh	2011-12-02 19:33:52.000000000 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ #
+ # run OpenVPN client against ``test reference'' server
+ # - check that ping, http, ... via tunnel works
+@@ -80,12 +80,12 @@ fail()
+ get_ifconfig_route()
+ {
+     # linux / iproute2? (-> if configure got a path)
+-    if [ "/sbin/ip" != "ip" ]
++    if [ "/usr/sbin/ip" != "ip" ]
+     then
+ 	echo "-- linux iproute2 --"
+-	/sbin/ip addr show     | grep -v valid_lft
+-	/sbin/ip route show
+-	/sbin/ip -6 route show | sed -e 's/expires [0-9]*sec //'
++	/usr/sbin/ip addr show     | grep -v valid_lft
++	/usr/sbin/ip route show
++	/usr/sbin/ip -6 route show | sed -e 's/expires [0-9]*sec //'
+ 	return
+     fi
+ 
+@@ -93,27 +93,27 @@ get_ifconfig_route()
+     case `uname -s` in
+ 	Linux)
+ 	   echo "-- linux / ifconfig --"
+-	   LANG=C /sbin/ifconfig -a |egrep  "( addr:|encap:)"
+-	   LANG=C /bin/netstat -rn -4 -6
++	   LANG=C no -a |egrep  "( addr:|encap:)"
++	   LANG=C /usr/sbin/netstat -rn -4 -6
+ 	   return
+ 	   ;;
+ 	FreeBSD|NetBSD|Darwin)
+ 	   echo "-- FreeBSD/NetBSD/Darwin [MacOS X] --"
+-	   /sbin/ifconfig -a | egrep "(flags=|inet)"
+-	   /bin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$NF }'
++	   no -a | egrep "(flags=|inet)"
++	   /usr/sbin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$NF }'
+ 	   return
+ 	   ;;
+ 	OpenBSD)
+ 	   echo "-- OpenBSD --"
+-	   /sbin/ifconfig -a | egrep "(flags=|inet)" | \
++	   no -a | egrep "(flags=|inet)" | \
+ 		sed -e 's/pltime [0-9]*//' -e 's/vltime [0-9]*//'
+-	   /bin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$NF }'
++	   /usr/sbin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$NF }'
+ 	   return
+ 	   ;;
+ 	SunOS)
+ 	   echo "-- Solaris --"
+-	   /sbin/ifconfig -a | egrep "(flags=|inet)"
+-	   /bin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$6 }'
++	   no -a | egrep "(flags=|inet)"
++	   /usr/sbin/netstat -rn | awk '$3 !~ /^UHL/ { print $1,$2,$3,$6 }'
+ 	   return
+ 	   ;;
+     esac

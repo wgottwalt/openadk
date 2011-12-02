@@ -1,0 +1,9 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/list-crl	2011-04-27 11:52:59.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/list-crl	2011-12-01 19:43:24.000000000 +0100
+@@ -1,5 +1,6 @@
+ #!/bin/sh
+ 
++. /etc/easy-rsa/vars
+ # list revoked certificates
+ 
+ CRL="${1:-crl.pem}"

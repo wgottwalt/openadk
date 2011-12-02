@@ -1,0 +1,9 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/clean-all	2011-04-27 11:52:59.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/clean-all	2011-12-01 19:43:07.000000000 +0100
+@@ -1,5 +1,6 @@
+ #!/bin/sh
+ 
++. /etc/easy-rsa/vars
+ # Initialize the $KEY_DIR directory.
+ # Note that this script does a
+ # rm -rf on $KEY_DIR so be careful!

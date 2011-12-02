@@ -1,0 +1,10 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/build-dh	2011-04-27 11:52:59.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/build-dh	2011-12-02 18:10:44.000000000 +0100
+@@ -1,5 +1,7 @@
+ #!/bin/sh
+ 
++. /etc/easy-rsa/vars
++
+ # Build Diffie-Hellman parameters for the server side
+ # of an SSL/TLS connection.
+ 
