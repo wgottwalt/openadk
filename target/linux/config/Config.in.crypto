@@ -5,19 +5,6 @@ config ADK_KERNEL_CRYPTO
 config ADK_KERNEL_CRYPTO_HW
 	tristate
 
-config ADK_KERNEL_OCF_FIPS
-	boolean
-
-config ADK_KERNEL_OCF_CRYPTODEV
-	boolean
-
-config ADK_KERNEL_OCF_OCF
-	boolean
-	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_OCF_FIPS
-	select ADK_KERNEL_OCF_CRYPTODEV
-	default n
-
 config ADK_KERNEL_CRYPTO_AES
 	boolean
 
@@ -56,21 +43,6 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 	default n
 	help
 	  This option allows you to have support for HIFN 795x crypto adapters.
-
-comment "OpenBSD Cryptographic framework"
-
-config ADK_KPACKAGE_KMOD_OCF_HIFN
-	prompt "kmod-ocf-hifn.......................... HIFN crypto engine"
-	tristate
-	default n
-	select ADK_KERNEL_OCF_OCF
-	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
-	depends on !ADK_HARDWARE_QEMU
-	depends on ADK_LINUX_X86 || ADK_LINUX_X86_64
-	select ADK_KPACKAGE_KMOD_CRYPTO_AES
-	help
-	  Engine for cryptodev that uses Hifn based accelerators
-	  such as the 7951, 7955, 7956, 7751, 7811.
 
 endmenu
 

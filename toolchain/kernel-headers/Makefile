@@ -13,9 +13,6 @@ $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(LINUX_HEADER_DIR) \
 		headers_install
-	# cryptodev.h from ocf-linux-20080917
-	mkdir -p ${STAGING_DIR}/usr/include/crypto
-	cp files/cryptodev.h ${STAGING_DIR}/usr/include/crypto
 ifeq ($(ARCH),cris)
 ifeq ($(CPU_ARCH),crisv32)
 	cd $(STAGING_DIR)/usr/include && ln -sf arch-v32/arch arch
