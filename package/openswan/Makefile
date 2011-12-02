@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.28
+PKG_VERSION:=		2.6.37
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		37f2ad2664dd89e6ad96ae82f6378166
+PKG_MD5SUM:=		e5c948555088df06cfadcfbe6c13adfe
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libgmp libpthread kmod-net-key kmod-xfrm-user
