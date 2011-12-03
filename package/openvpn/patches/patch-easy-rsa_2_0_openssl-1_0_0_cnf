@@ -1,0 +1,11 @@
+--- openvpn-2.2.1.orig/easy-rsa/2.0/openssl-1.0.0.cnf	2011-07-01 10:31:26.000000000 +0200
++++ openvpn-2.2.1/easy-rsa/2.0/openssl-1.0.0.cnf	2011-12-03 11:36:46.000000000 +0100
+@@ -3,7 +3,7 @@
+ # This definition stops the following lines choking if HOME isn't
+ # defined.
+ HOME			= .
+-RANDFILE		= $ENV::HOME/.rnd
++RANDFILE		= /etc/easy-rsa/.rnd
+ openssl_conf		= openssl_init
+ 
+ [ openssl_init ]
