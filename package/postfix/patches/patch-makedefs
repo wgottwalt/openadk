@@ -1,0 +1,13 @@
+--- postfix-2.8.7.orig/makedefs	2011-11-03 00:46:22.000000000 +0100
++++ postfix-2.8.7/makedefs	2011-12-03 13:06:00.000000000 +0100
+@@ -97,8 +97,8 @@ error() {
+ 
+ case $# in
+  # Officially supported usage.
+- 0) SYSTEM=`(uname -s) 2>/dev/null`
+-    RELEASE=`(uname -r) 2>/dev/null`
++ 0) SYSTEM=Linux
++    RELEASE=3.1.4
+     VERSION=`(uname -v) 2>/dev/null`
+     case "$VERSION" in
+      dcosx*) SYSTEM=$VERSION;;
