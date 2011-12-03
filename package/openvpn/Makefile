@@ -71,7 +71,7 @@ ifeq ($(ADK_PACKAGE_OPENVPN_SERVER),y)
 	echo "/etc/openvpn/server.conf" > ./files/openvpn.conffiles
 endif
 ifeq ($(ADK_PACKAGE_OPENVPN_CLIENT),y)
-	$(CP) ./files/server.conf $(IDIR_OPENVPN)/etc/openvpn/
+	$(CP) ./files/client.conf $(IDIR_OPENVPN)/etc/openvpn/
 	echo "/etc/openvpn/client.conf" > ./files/openvpn.conffiles
 endif
 
