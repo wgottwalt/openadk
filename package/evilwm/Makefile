@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		evilwm
-PKG_VERSION:=		1.0.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		8fd9256c635cce2289b648a01d54202c
+PKG_VERSION:=		1.1.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5f14cc3019320860c85bb07c60a76bd7
 PKG_DESCR:=		A minimalist window manager for the X Window System
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxext
