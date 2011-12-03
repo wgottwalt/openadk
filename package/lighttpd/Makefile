@@ -34,7 +34,6 @@ ${2}-install:
 endef
 
 $(eval $(call PKG_template,LIGHTTPD,lighttpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIGHTTPD_MOD_ACCESSLOG,lighttpd-mod-accesslog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_ALIAS,lighttpd-mod-alias,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_AUTH,lighttpd-mod-auth,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_CGI,lighttpd-mod-cgi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -51,7 +50,6 @@ $(eval $(call PKG_template,LIGHTTPD_MOD_STATUS,lighttpd-mod-status,$(PKG_VERSION
 $(eval $(call PKG_template,LIGHTTPD_MOD_USERTRACK,lighttpd-mod-usertrack,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_WEBDAV,lighttpd-mod-webdav,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-$(eval $(call PKG_mod_template,LIGHTTPD_MOD_ACCESSLOG,accesslog))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_ALIAS,alias))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_AUTH,auth))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_CGI,cgi))
@@ -92,7 +90,7 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKBUILD}/doc/config/conf.d/*.conf \
 		$(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/lib/lighttpd
-	for m in dirlisting indexfile staticfile; do \
+	for m in dirlisting indexfile staticfile accesslog; do \
 		$(CP) $(WRKINST)/usr/lib/lighttpd/mod_$$m.so $(IDIR_LIGHTTPD)/usr/lib/lighttpd/ ; \
 	done
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/sbin
