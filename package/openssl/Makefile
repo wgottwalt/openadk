@@ -56,7 +56,6 @@ do-configure:
 		  --openssldir=/etc/ssl \
 		  -I$(STAGING_TARGET_DIR)/usr/include \
 		  -L$(STAGING_TARGET_DIR)/usr/lib -ldl \
-		  -DHAVE_CRYPTODEV \
 		  -DOPENSSL_SMALL_FOOTPRINT \
 		  $(OPENSSL_OPTIONS) \
 	);
@@ -84,7 +83,5 @@ openssl-util-install:
 libopenssl-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL_DEV}/usr/include
 	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBOPENSSL_DEV}/usr/include
-	$(CP) $(STAGING_TARGET_DIR)/usr/include/crypto/cryptodev.h \
-		$(IDIR_LIBOPENSSL_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
