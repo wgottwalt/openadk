@@ -1,0 +1,35 @@
+#!/bin/sh
+#PKG postfix
+#INIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${postfix:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/spool/postfix ] || mkdir -p /var/spool/postfix
+	[ -d /var/lib/postfix ] || mkdir -p /var/lib/postfix
+	chown postfix /var/lib/postfix
+	mount -o remount,rw /
+	chgrp postdrop /usr/sbin/postqueue
+	chgrp postdrop /usr/sbin/postdrop
+	chmod 2755 /usr/sbin/postqueue /usr/sbin/postdrop
+	mount -o remount,ro /
+	postfix start
+	;;
+stop)
+	postfix stop
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
