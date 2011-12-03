@@ -1,0 +1,11 @@
+--- util-linux-2.20.1.orig/libmount/src/tab_parse.c	2011-10-18 14:22:27.000000000 +0200
++++ util-linux-2.20.1/libmount/src/tab_parse.c	2011-12-03 09:43:31.713340136 +0100
+@@ -10,6 +10,8 @@
+ #include <dirent.h>
+ #include <fcntl.h>
+ 
++#define UL_SCNsA        "%ms"
++
+ #include "at.h"
+ #include "mangle.h"
+ #include "mountP.h"
