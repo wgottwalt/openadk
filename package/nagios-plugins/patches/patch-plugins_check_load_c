@@ -1,0 +1,18 @@
+--- nagios-plugins-1.4.15.orig/plugins/check_load.c	2010-07-27 22:47:16.000000000 +0200
++++ nagios-plugins-1.4.15/plugins/check_load.c	2011-12-03 12:12:09.000000000 +0100
+@@ -163,6 +163,7 @@ main (int argc, char **argv)
+ # endif
+ #endif
+ 
++#if 0
+ 	if (take_into_account_cpus == 1) {
+ 		if ((numcpus = GET_NUMBER_OF_CPUS()) > 0) {
+ 			la[0] = la[0] / numcpus;
+@@ -170,6 +171,7 @@ main (int argc, char **argv)
+ 			la[2] = la[2] / numcpus;
+ 		}
+ 	}
++#endif
+ 	if ((la[0] < 0.0) || (la[1] < 0.0) || (la[2] < 0.0)) {
+ #ifdef HAVE_GETLOADAVG
+ 		printf (_("Error in getloadavg()\n"));
