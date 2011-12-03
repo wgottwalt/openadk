@@ -12,7 +12,7 @@ PKG_SECTION:=		net/security
 PKG_DEPENDS:=		kmod-tun libopenssl ip
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
-PKG_SITES:=		http://openvpn.net/release/
+PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
 PKG_SUBPKGS:=		OPENVPN OPENVPN_EASY_RSA
 PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS SERVER CLIENT
