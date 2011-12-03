@@ -1,14 +1,16 @@
 --- nagios-plugins-1.4.15.orig/plugins/Makefile.in	2010-07-27 22:48:10.000000000 +0200
-+++ nagios-plugins-1.4.15/plugins/Makefile.in	2011-12-03 12:15:23.000000000 +0100
-@@ -31,7 +31,7 @@ PRE_UNINSTALL = :
++++ nagios-plugins-1.4.15/plugins/Makefile.in	2011-12-03 13:26:49.709669796 +0100
+@@ -31,8 +31,8 @@ PRE_UNINSTALL = :
  POST_UNINSTALL = :
  build_triplet = @build@
  host_triplet = @host@
 -libexec_PROGRAMS = check_apt$(EXEEXT) check_cluster$(EXEEXT) \
+-	check_disk$(EXEEXT) check_dummy$(EXEEXT) check_http$(EXEEXT) \
 +libexec_PROGRAMS = check_cluster$(EXEEXT) \
- 	check_disk$(EXEEXT) check_dummy$(EXEEXT) check_http$(EXEEXT) \
++	check_dummy$(EXEEXT) check_http$(EXEEXT) \
  	check_load$(EXEEXT) check_mrtg$(EXEEXT) \
  	check_mrtgtraf$(EXEEXT) check_ntp$(EXEEXT) \
+ 	check_ntp_peer$(EXEEXT) check_nwstat$(EXEEXT) \
 @@ -46,7 +46,7 @@ EXTRA_PROGRAMS = check_mysql$(EXEEXT) ch
  	check_game$(EXEEXT) check_dig$(EXEEXT) check_nagios$(EXEEXT) \
  	check_by_ssh$(EXEEXT) check_dns$(EXEEXT) check_nt$(EXEEXT) \
