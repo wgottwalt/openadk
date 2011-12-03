@@ -20,8 +20,8 @@ $(eval $(call PKG_template,ICINGA,icinga,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIGURE_ARGS+=	--sysconfdir=/etc/icinga
 
 icinga-install:
-	$(INSTALL_DIR) $(IDIR_ICINGA)/etc
-	$(CP) ./src/etc/icinga $(IDIR_ICINGA)/etc
+	$(INSTALL_DIR) $(IDIR_ICINGA)/etc/icinga/modules
+	$(CP) ./src/etc/icinga/* $(IDIR_ICINGA)/etc/icinga
 	$(INSTALL_DIR) $(IDIR_ICINGA)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/icinga \
 		$(IDIR_ICINGA)/usr/bin

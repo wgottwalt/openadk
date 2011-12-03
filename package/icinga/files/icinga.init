@@ -21,7 +21,7 @@ start)
 	icinga -d /etc/icinga/icinga.cfg
 	;;
 stop)
-	kill $(pgrep -f /usr/bin/icinga)
+	kill $(pgrep -f icinga)
 	;;
 restart)
 	sh $0 stop
