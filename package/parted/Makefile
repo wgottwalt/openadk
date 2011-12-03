@@ -10,7 +10,7 @@ PKG_MD5SUM:=		a94e84a9b9944715c4453f82ccc639bf
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libuuid libreadline libpthread
-PKG_BUILDDEP:=		e2fsprogs readline
+PKG_BUILDDEP:=		util-linux readline
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		${MASTER_SITE_GNU:=parted/}
 
