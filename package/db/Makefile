@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		db
-PKG_VERSION:=		4.7.25
+PKG_VERSION:=		5.2.36
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec2b87e833779681a0c3a814aa71359e
+PKG_MD5SUM:=		30d95daa5f947664131c000b12e50064
 PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
 PKG_SECTION:=		db
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
@@ -32,16 +32,14 @@ CONFIGURE_ARGS+=	--enable-smallbuild \
 			--disable-diagnostic \
 			--disable-java \
 			--disable-cxx \
-			--disable-posixmutexes \
+			--enable-posixmutexes \
 			--disable-uimutexes \
 			--disable-tcl \
-			--disable-rpc \
 			--disable-compat185 \
 			--disable-statistics \
 			--disable-replication \
 			--disable-cryptography \
-			--disable-queue \
-			--with-mutex=UNIX/fcntl
+			--disable-queue
 
 libdb-install:
 	${INSTALL_DIR} ${IDIR_LIBDB}/usr/lib
