@@ -1,5 +1,5 @@
 --- postfix-2.8.7.orig/makedefs	2011-11-03 00:46:22.000000000 +0100
-+++ postfix-2.8.7/makedefs	2011-12-03 13:36:33.561684585 +0100
++++ postfix-2.8.7/makedefs	2011-12-04 11:53:35.807716569 +0100
 @@ -97,8 +97,8 @@ error() {
  
  case $# in
@@ -11,7 +11,7 @@
      VERSION=`(uname -v) 2>/dev/null`
      case "$VERSION" in
       dcosx*) SYSTEM=$VERSION;;
-@@ -343,20 +343,6 @@ EOF
+@@ -343,31 +343,7 @@ EOF
  		esac
  		;;
      Linux.3*)	SYSTYPE=LINUX3
@@ -29,6 +29,18 @@
 -		    echo "See the RELEASE_NOTES file for more information." 1>&2
 -		    exit 1
 -		fi
- 		SYSLIBS="-ldb"
- 		for name in nsl resolv
- 		do
+-		SYSLIBS="-ldb"
+-		for name in nsl resolv
+-		do
+-		    for lib in /usr/lib64 /lib64 /usr/lib /lib
+-		    do
+-			test -e $lib/lib$name.a -o -e $lib/lib$name.so && {
+-			    SYSLIBS="$SYSLIBS -l$name"
+-			    break
+-			}
+-		    done
+-		done
++		SYSLIBS="-lresolv"
+ 		;;
+      GNU.0*|GNU/kFreeBSD.[567]*)
+      		SYSTYPE=GNU0

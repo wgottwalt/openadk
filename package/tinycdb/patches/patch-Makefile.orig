@@ -1,0 +1,13 @@
+--- tinycdb-0.77.orig/Makefile	2009-01-31 18:12:21.000000000 +0100
++++ tinycdb-0.77/Makefile	2011-12-04 11:34:00.495686810 +0100
+@@ -18,8 +18,8 @@ mandir=$(prefix)/man
+ NSSCDB_DIR = $(sysconfdir)
+ DESTDIR=
+ 
+-CC = cc
+-CFLAGS = -O
++CC ?= cc
++CFLAGS ?= -O
+ 
+ AR = ar
+ ARFLAGS = rv
