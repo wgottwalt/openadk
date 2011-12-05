@@ -52,9 +52,15 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--enable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \
-			--enable-mount
+			--enable-mount \
+			--libdir=/usr/lib
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
+
+post-build:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
+	${CP} ${WRKBUILD}/libuuid/src/uuid.h \
+		${STAGING_DIR}/usr/include/uuid
 
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin

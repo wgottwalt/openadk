@@ -1,0 +1,17 @@
+--- ed-1.5.orig/configure	2010-08-30 16:34:49.000000000 +0200
++++ ed-1.5/configure	2011-12-05 13:26:17.990045908 +0100
+@@ -26,10 +26,10 @@ infodir='$(datadir)/info'
+ mandir='$(datadir)/man'
+ sysconfdir='$(prefix)/etc'
+ program_prefix=
+-CC=
+-CPPFLAGS=
+-CFLAGS='-Wall -W -O2'
+-LDFLAGS=
++CC?=
++CPPFLAGS?=
++CFLAGS?='-Wall -W -O2'
++LDFLAGS?=
+ 
+ # Loop over all args
+ while [ -n "$1" ] ; do
