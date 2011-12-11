@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		40b
+PKG_VERSION:=		40d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		afb08b65272ace550ec59b26a876a7de
+PKG_MD5SUM:=		c6428401103367730a95b99284bf47dc
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org/
@@ -34,7 +34,7 @@ do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
 	    CPPFLAGS='${TARGET_CPPFLAGS}' LDFLAGS='${TARGET_LDFLAGS}' \
 	    HAVE_CAN_FSTACKPROTECTORALL=0 \
-	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -combine
+	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 
 do-install:
 	${INSTALL_DIR} ${IDIR_MKSH}/bin ${IDIR_MKSH}/root
