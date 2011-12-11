@@ -33,6 +33,7 @@ INSTALL_STYLE:=		manual
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
 	    CPPFLAGS='${TARGET_CPPFLAGS}' LDFLAGS='${TARGET_LDFLAGS}' \
+	    HAVE_CAN_FSTACKPROTECTORALL=0 \
 	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -combine
 
 do-install:
