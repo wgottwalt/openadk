@@ -13,6 +13,8 @@ PKG_DEPENDS:=		xorg-server kmod-input-evdev
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
 
 include $(TOPDIR)/mk/package.mk

@@ -15,6 +15,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
 PKG_NEED_CXX:=		1
 PKG_CXX:=		IPERF
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

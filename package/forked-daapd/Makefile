@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		mxml libevent libavl libantlr3c alsa-lib libgcrypt
 PKG_SITES:=		http://alioth.debian.org/~jblache/forked-daapd/
 
 PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER
-PKG_ARCH_DEPENDS:=	!ppc
+PKG_ARCH_DEPENDS:=	!ppc !avr32
 # gperf problem
 PKG_HOST_DEPENDS:=	!freebsd
 

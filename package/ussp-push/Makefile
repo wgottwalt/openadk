@@ -13,6 +13,8 @@ PKG_DEPENDS:=		openobex
 PKG_BUILDDEP:=		openobex
 PKG_SITES:=		http://xmailserver.org/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,USSP_PUSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

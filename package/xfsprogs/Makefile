@@ -16,6 +16,7 @@ PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
 PKG_CFLINE_XFSPROGS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_TARGET_DEPENDS:=	!atmel-ngw100
 
 include ${TOPDIR}/mk/package.mk
 

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

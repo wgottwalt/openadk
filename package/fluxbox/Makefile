@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libXpm libXft
 PKG_URL:=		http://www.fluxbox.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fluxbox/}
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_FLAVOURS_FLUXBOX:=	WITH_IMLIB2
 PKGFD_WITH_IMLIB2:=	enable imlib2 support
 PKGFS_WITH_IMLIB2:=	imlib2

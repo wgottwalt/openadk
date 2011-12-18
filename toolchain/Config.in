@@ -8,6 +8,7 @@ config ADK_TOOLCHAIN_GDB
 	prompt "Enable building of the GNU debugger"
 	boolean
 	default y if !ADK_TARGET_SYSTEM_ATMEL_NGW100
+	depends on !ADK_TARGET_SYSTEM_ATMEL_NGW100
 
 config ADK_TOOLCHAIN_GCC_CXX
 	prompt "Enable building of G++ (C++ language support in GCC)"

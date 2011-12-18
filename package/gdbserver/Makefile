@@ -9,6 +9,8 @@ PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
 PKG_SUBPKGS:=		GDBSERVER
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 
 include ${TOPDIR}/mk/package.mk

@@ -10,6 +10,8 @@ PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr
 PKG_BUILDDEP:=		libmpc gmp mpfr
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include ${TOPDIR}/mk/package.mk

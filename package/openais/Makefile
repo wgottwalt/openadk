@@ -14,6 +14,8 @@ PKG_DEPENDS:=		corosync
 PKG_URL:=		http://www.openais.org/
 PKG_SITES:=		ftp://ftp:download@ftp.openais.org/downloads/openais-1.1.4/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENAIS,openais,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		popt binutils
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	!cris !avr32
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 

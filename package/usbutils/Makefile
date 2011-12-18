@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libusb libusb-compat libpthread zlib
 PKG_BUILDDEP:=		libusb libusb-compat zlib
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_SUBPKGS:=		LSUSB
 
 include ${TOPDIR}/mk/package.mk

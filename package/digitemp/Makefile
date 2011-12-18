@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://www.digitemp.com/software/linux/
 PKG_SITES:=		http://www.digitemp.com/software/linux/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIGITEMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -10,6 +10,7 @@ PKG_MD5SUM:=		a1da3358ab798f1cb9232f1dbababc21
 PKG_DESCR:=		drivers for smart card readers
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libopenct
+PKG_BUILDDEP:=		libtool
 PKG_URL:=		http://www.opensc-project.org/openct/
 PKG_SITES:=		http://www.opensc-project.org/files/openct/
 

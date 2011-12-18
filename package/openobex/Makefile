@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		bluez
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
 endif

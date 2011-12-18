@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ebtables
-PKG_VERSION:=		2.0.9
+PKG_VERSION:=		2.0.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0e0c20adf2bba6d91dbd0b74a1a38c33
+PKG_MD5SUM:=		6df055d6476d3ce6bd7eed302a39c40c
 PKG_DESCR:=		ethernet bridging firewall tool
 PKG_SECTION:=		firewall
 PKG_URL:=		http://ebtables.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ebtables/}
 
-DISTFILES:=		${PKG_NAME}-v${PKG_VERSION}-1.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-v${PKG_VERSION}-1
+PKG_ARCH_DEPENDS:=	!avr32
+
+DISTFILES:=		${PKG_NAME}-v${PKG_VERSION}-3.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-v${PKG_VERSION}-3
 
 include ${TOPDIR}/mk/package.mk
 

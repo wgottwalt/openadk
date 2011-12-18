@@ -4,15 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		4.92
+PKG_VERSION:=		4.96
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		abe5b76df95939f4eb6fa493f4764a95
+PKG_MD5SUM:=		296111afac49e3f9035085ac14daf518
 PKG_DESCR:=		bluetooth libraries and applications
 PKG_SECTION:=		bluetooth
 PKG_DEPENDS:=		kmod-bt libusb glib dbus
 PKG_BUILDDEP:=		libusb dbus glib libusb-compat
 PKG_URL:=		http://www.bluez.org/
-PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
+PKG_SITES:=		http://mirror.anl.gov/pub/linux/bluetooth/
+
+PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 

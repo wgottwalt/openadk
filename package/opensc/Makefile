@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libopensc libopenct pcsc-lite libopenssl libreadline
 PKG_URL:=		http://www.opensc-project.org/opensc/
 PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_SUBPKGS:=		OPENSC LIBOPENSC LIBOPENSC_DEV
 PKGSD_LIBOPENSC:=	opensc library
 PKGSC_LIBOPENSC:=	libs

@@ -15,7 +15,7 @@ PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!arm
+PKG_ARCH_DEPENDS:=	!arm !avr32
 
 PKG_SUBPKGS:=		CXXTOOLS CXXTOOLS_DEV
 PKGSC_CXXTOOLS_DEV:=	devel

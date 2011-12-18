@@ -48,7 +48,7 @@ PKGFD_MOD_XML:=		XML support
 PKGFB_MOD_XML:=		expat
 PKGFS_MOD_XML:=		libexpat
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	!cris !avr32
 PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk

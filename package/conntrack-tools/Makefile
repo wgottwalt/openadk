@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libnetfilter_conntrack
 PKG_URL:=		http://conntrack-tools.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/conntrack-tools/files/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

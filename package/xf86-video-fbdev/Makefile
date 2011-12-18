@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
+PKG_ARCH_DEPENDS:=      !avr32
 PKG_CFLINE_XF86_VIDEO_FBDEV:=	depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk

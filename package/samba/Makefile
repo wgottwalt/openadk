@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libintl
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_SUBPKGS:=		SAMBA SAMBA_CLIENT SAMBA_PASSWD
 
 WRKSRC=			${WRKDIST}/source3

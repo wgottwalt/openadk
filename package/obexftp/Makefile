@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openobex libiconv
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_SUBPKGS:=		OBEXFTP LIBOBEXFTP
 PKGSD_LIBOBEXFTP:=	obexftp library
 PKGSC_LIBOBEXFTP:=	libs

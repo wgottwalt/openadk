@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		ftp://ftp.cpan.org/pub/CPAN/src/5.0/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 DISTFILES:=		perl-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/perl-${PKG_VERSION}
 

@@ -12,6 +12,8 @@ PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.networkupstools.org/
 PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 PKG_FLAVOURS_NUT:=	WITH_SSL WITH_SNMP WITH_USB
 PKGFD_WITH_SNMP:=	enable SNMP support
 PKGFS_WITH_SNMP:=	libnetsnmp

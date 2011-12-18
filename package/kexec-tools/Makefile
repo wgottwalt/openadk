@@ -14,7 +14,7 @@ PKG_BUILDEP:=		zlib
 PKG_URL:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 PKG_SITES:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	!cris !avr32
 PKG_CFLINE_KEXEC_TOOLS:=	select ADK_KERNEL_KEXEC
 
 include $(TOPDIR)/mk/package.mk

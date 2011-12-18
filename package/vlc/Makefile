@@ -14,7 +14,7 @@ PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vlc/1.1.11/}
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	!cris !avr32
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
