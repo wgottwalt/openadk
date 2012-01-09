@@ -22,20 +22,26 @@ tools-compile:
 	$(MAKE) -C ../tools/addpattern all
 	$(MAKE) -C ../tools/srec2bin all
 	$(MAKE) -C ../tools/squashfs all
+	$(MAKE) -C ../tools/lzma all
+	$(MAKE) -C ../tools/lzma-loader all
 
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
 kernel-install: tools-compile
-	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
+	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinux \
 	    ${BUILD_DIR}/${TARGET_KERNEL}
+	cat $(LINUX_DIR)/vmlinux | $(STAGING_DIR)/bin/lzma e -si -so -eos -lc1 -lp2 -pb2 > $(LINUX_DIR)/vmlinux.lzma
 
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
-	${TARGET_CROSS}objcopy -O binary ${BUILD_DIR}/${TARGET_KERNEL} \
-	    ${BUILD_DIR}/${TARGET_KERNEL}.bin
-	gzip -n9 <${BUILD_DIR}/${TARGET_KERNEL}.bin \
-	    >${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
-	printf '\0' >>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
-	PATH='${TARGET_PATH}' trx -o $@~ -f ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz -a 1024 -f ${BUILD_DIR}/root.squashfs
+	cp $(TOPDIR)/target/tools/lzma-loader/src/loader.gz \
+		$(LINUX_DIR)/loader.gz
+	printf '\0' >>$(LINUX_DIR)/loader.gz
+	PATH='${TARGET_PATH}' trx -o $@~ -f $(LINUX_DIR)/loader.gz \
+		-f $(LINUX_DIR)/vmlinux.lzma -a 1024 -f ${BUILD_DIR}/root.squashfs
+ifneq ($(ADK_TARGET_BROADCOM_MODEL_ASUS_WL500GP),y)
 	PATH='${TARGET_PATH}' addpattern -4 ${ADK_TOOLS_ADDPATTERN_ARGS} -g -i $@~ -o $@
+else
+	cp $@~ $@
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
@@ -160,12 +166,12 @@ imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 		echo The image file is $(ROOTFSSQUASHFS); \
 	fi
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-	echo The kernel file is $(TARGET_KERNEL)
+	@echo The kernel file is $(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
-	echo 'You can flash the image via tftp:'
-	echo 'tftp 192.168.1.1'
-	echo 'tftp> binary'
-	echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
+	@echo 'You can flash the image via tftp:'
+	@echo 'tftp 192.168.1.1'
+	@echo 'tftp> binary'
+	@echo "tftp> put $(ROOTFSSQUASHFS) upgrade_code.bin"
 endif
 endif

@@ -84,8 +84,8 @@ config ADK_KERNEL_VERSION_3_0_9
 	prompt "3.0.9"
 	boolean
 
-config ADK_KERNEL_VERSION_3_1_5
-	prompt "3.1.5"
+config ADK_KERNEL_VERSION_3_1_8
+	prompt "3.1.8"
 	boolean
 
 endchoice
