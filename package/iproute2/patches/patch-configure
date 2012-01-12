@@ -4,67 +4,56 @@
 	  (for now) doesn't compile iptables with shared objects
 	- do not discard compiler output from tests, they're useful
 	  for debugging
-	- additionally output the full compiler command before running
-	  it
---- iproute2-2.6.37.orig/configure	2011-01-07 18:54:30.000000000 +0100
-+++ iproute2-2.6.37/configure	2011-02-25 21:01:53.000000000 +0100
-@@ -1,4 +1,5 @@
- #! /bin/bash
-+set -x
- # This is not an autconf generated configure
- #
- INCLUDE=${1:-"$PWD/include"}
-@@ -15,7 +16,8 @@ int main(int argc, char **argv) {
+
+--- iproute2-3.2.0.orig/configure	2012-01-05 17:34:31.000000000 +0100
++++ iproute2-3.2.0/configure	2012-01-12 10:30:11.000000000 +0100
+@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
 -gcc -I$INCLUDE -o /tmp/atmtest /tmp/atmtest.c -latm >/dev/null 2>&1 
-+echo "$CC -I$INCLUDE -o /tmp/atmtest /tmp/atmtest.c -latm"
 +$CC -I$INCLUDE -o /tmp/atmtest /tmp/atmtest.c -latm
  if [ $? -eq 0 ]
  then
      echo "TC_CONFIG_ATM:=y" >>Config
-@@ -49,7 +51,8 @@ int main(int argc, char **argv)
+@@ -47,7 +47,7 @@ int main(int argc, char **argv)
  
  EOF
  
--if gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl -lxtables >/dev/null 2>&1
-+echo "$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl -lxtables"
-+if $CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl -lxtables
+-if gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl >/dev/null 2>&1
++if $CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl
  then
  	echo "TC_CONFIG_XT:=y" >>Config
  	echo "using xtables"
-@@ -86,7 +89,8 @@ int main(int argc, char **argv) {
+@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
 -gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+echo "$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl"
 +$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl
  
  if [ $? -eq 0 ]
  then
-@@ -126,7 +130,8 @@ int main(int argc, char **argv) {
+@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
 -gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+echo "$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl"
 +$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl
  
  if [ $? -eq 0 ]
  then
-@@ -149,18 +154,8 @@ check_ipt()
+@@ -144,18 +144,8 @@ check_ipt()
  
  check_ipt_lib_dir()
  {
 -	IPT_LIB_DIR=""
 -	for dir in /lib /usr/lib /usr/local/lib
 -	do
--		for file in $dir/$TABLES/lib*t_*so ; do
+-		for file in $dir/{xtables,iptables}/lib*t_*so ; do
 -			if [ -f $file ]; then
--				echo $dir/$TABLES
--				echo "IPT_LIB_DIR:=$dir/$TABLES" >> Config
+-				echo ${file%/*}
+-				echo "IPT_LIB_DIR:=${file%/*}" >> Config
 -				return
 -			fi
 -		done
@@ -74,4 +63,4 @@
 +	echo "IPT_LIB_DIR:=/usr/lib/$TABLES" >> Config
  }
  
- echo "# Generated config based on" $INCLUDE >Config
+ check_setns()

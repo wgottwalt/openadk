@@ -4,13 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		2.6.38
+PKG_VERSION:=		3.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a243bfea837e71824b7ca26c3bb45fa8
+PKG_MD5SUM:=		6f814291cc3d7f4312cf8c2c052da5f1
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
+PKG_BUILDDEP:=		iptables libnl linux-atm
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
-PKG_SITES:=		http://distfiles.gentoo.org/distfiles/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/iproute2/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
@@ -27,8 +30,6 @@ PKGSD_LNSTAT:=		iproute2 network statistics utilities
 PKGSD_ROUTEL:=		iproute2 route list and flush utilities
 PKGSD_RTMON:=		iproute2 RTnetlink monitor
 PKGSD_SS:=		iproute2 socket statistics utility
-
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 

@@ -1,10 +1,5 @@
-	- allow variables to be overridden
-	- allow passing TARGET_CFLAGS
-	  overriding CCOPTS instead wont work, as this variable is being
-	  used to compile host-utils in netem/
-	- define LIBUTIL for misc/ss to compile correctly
---- iproute2-2.6.37.orig/Makefile	2011-01-07 18:54:30.000000000 +0100
-+++ iproute2-2.6.37/Makefile	2011-01-18 02:19:41.379921947 +0100
+--- iproute2-3.2.0.orig/Makefile	2012-01-05 17:34:31.000000000 +0100
++++ iproute2-3.2.0/Makefile	2012-01-12 10:13:14.000000000 +0100
 @@ -27,10 +27,10 @@ ADDLIB+=dnet_ntop.o dnet_pton.o
  #options for ipx
  ADDLIB+=ipx_ntop.o ipx_pton.o
@@ -19,12 +14,4 @@
 +CFLAGS = $(CCOPTS) -I../include $(DEFINES) ${TARGET_CFLAGS}
  YACCFLAGS = -d -t -v
  
- LDLIBS += -L../lib -lnetlink -lutil
-@@ -38,6 +38,7 @@ LDLIBS += -L../lib -lnetlink -lutil
  SUBDIRS=lib ip tc misc netem genl
- 
- LIBNETLINK=../lib/libnetlink.a ../lib/libutil.a
-+LIBUTIL=../lib/libutil.a
- 
- all: Config
- 	@set -e; \
