@@ -21,7 +21,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,FINDUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LOCATE,locate,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LOCATE},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		gl_cv_func_wcwidth_works=yes
+CONFIGURE_ENV+=		gl_cv_func_wcwidth_works=yes \
+			ac_cv_func_working_mktime=yes
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_FINDUTILS)/usr/bin
