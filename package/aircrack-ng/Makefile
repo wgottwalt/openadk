@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libpthread libopenssl libpcap
 PKG_BUILDDEP:=		openssl libpcap
 PKG_URL:=		http://www.aircrack-ng.org/
 PKG_SITES:=		http://download.aircrack-ng.org/
+# do not build parallel, otherwise libosdep.a may not be ready when compiling airtun-ng
+PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 
