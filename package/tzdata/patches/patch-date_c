@@ -1,0 +1,11 @@
+strchr() is false defined here
+--- w-tzdata-2010o-1.orig/date.c	2010-10-12 18:36:51.000000000 +0200
++++ w-tzdata-2010o-1/date.c	2011-02-28 00:57:57.274000374 +0100
+@@ -69,7 +69,6 @@ extern char *		getlogin();
+ extern time_t		mktime();
+ extern char *		optarg;
+ extern int		optind;
+-extern char *		strchr();
+ extern time_t		time();
+ extern char *		tzname[2];
+ 
