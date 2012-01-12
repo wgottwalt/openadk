@@ -12,7 +12,7 @@ else
 CONFOPTS+=		--disable-libssp
 endif
 
-ifeq ($(ADK_LINUX_64),y)
+ifneq ($(strip $(ADK_LINUX_64)$(ADK_64BIT_KERNEL)),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 

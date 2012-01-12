@@ -6,6 +6,12 @@ include $(TOPDIR)/mk/rootfs.mk
 
 all: install
 
+ifeq (${ADK_64BIT_KERNEL},y)
+KERNEL_CFG:=kernel64.config
+else
+KERNEL_CFG:=kernel.config
+endif
+
 ### Kernel .config Creation
 # The following target combines all kernel-related variables and
 # config files into a single one to be used as the final kernel
@@ -48,15 +54,15 @@ config-prepare: $(TOPDIR)/.config
 	    >${BUILD_DIR}/.kernelconfig.nokernel
 ifeq ($(ADK_NATIVE),y)
 	@if [ -f /etc/adktarget ];then \
-		cp $(TOPDIR)/target/$(ARCH)/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+		cp $(TOPDIR)/target/$(ARCH)/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi
 else
-	if [ -f ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ];then \
-		cp ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
+	if [ -f ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ];then \
+		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
 	else \
-		cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
 	fi
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
@@ -89,10 +95,10 @@ endif
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 else
 config-prepare: $(TOPDIR)/.config
-	if [ -f ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ];then \
-		cp ${ADK_TARGET_ARCH}/kernel.config.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
+	if [ -f ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ];then \
+		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
 	else \
-		cp ${ADK_TARGET_ARCH}/kernel.config ${BUILD_DIR}/.kernelconfig.board; \
+		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
 	fi
 endif
 

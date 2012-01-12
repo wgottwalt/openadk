@@ -110,4 +110,11 @@ config ADK_HOST_CYGWIN
 	boolean
 
 endchoice
+
+config ADK_64BIT_KERNEL
+	prompt "Build a 64bit Kernel"
+	boolean
+	default n
+	depends on ADK_TARGET_KERNEL_MAY_64BIT
+
 endmenu

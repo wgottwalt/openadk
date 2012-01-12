@@ -20,7 +20,6 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-multilib \
 			--disable-libmudflap \
 			--disable-libgomp \
-			--disable-biarch \
 			--disable-decimal-float \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
@@ -33,6 +32,12 @@ ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
 GCC_CONFOPTS+=		--enable-sjlj-exceptions
 else
 GCC_CONFOPTS+=		--disable-sjlj-exceptions
+endif
+
+ifeq ($(ADK_64BIT_KERNEL),y)
+GCC_CONFOPTS+=		--enable-targets=all
+else
+GCC_CONFOPTS+=		--disable-biarch
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)

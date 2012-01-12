@@ -204,6 +204,9 @@ config ADK_TARGET_WITH_DSL
 config ADK_TARGET_WITH_USB_BOOT
 	boolean
 
+config ADK_TARGET_KERNEL_MAY_64BIT
+	boolean
+
 # global symbols
 config ADK_TOOLCHAIN_ONLY
 	boolean
