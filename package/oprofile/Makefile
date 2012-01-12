@@ -25,10 +25,11 @@ $(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${
 CONFIGURE_ARGS+=	--with-kernel-support
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/bin
+	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/opcontrol $(IDIR_OPROFILE)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/ophelp $(IDIR_OPROFILE)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/opreport $(IDIR_OPROFILE)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/oprofiled $(IDIR_OPROFILE)/usr/bin/
+	${CP} ${WRKINST}/usr/share/oprofile ${IDIR_OPROFILE}/usr/share/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
