@@ -24,6 +24,9 @@ PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
 
+PKG_FLAVOURS_HOSTAPD:=	WITH_DEBUG
+PKGFD_WITH_DEBUG:=	enable support for hostapd debugging
+
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
@@ -35,10 +38,15 @@ CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-configure:
-	${CP} ./files/hostapd.config ${WRKBUILD}/.config
-ifneq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},)
-	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
-endif
+	#${CP} ./files/hostapd.config ${WRKBUILD}/.config
+	${CP} ./files/hostapd.config.full ${WRKBUILD}/.config
+#ifneq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},)
+#	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
+#endif
+#ifneq (${ADK_PACKAGE_HOSTAPD_WITH_DEBUG},)
+#	${SED} "s#CONFIG_NO_STDOUT_DEBUG=y#CONFIG_NO_STDOUT_DEBUG=n#" \
+#		${WRKBUILD}/.config
+#endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_HOSTAPD_UTILS}/usr/sbin
