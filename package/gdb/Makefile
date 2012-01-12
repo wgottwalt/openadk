@@ -33,5 +33,7 @@ pre-build:
 post-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
+	# shipped libbfd conflicts with system wide one
+	rm -f ${WRKINST}/usr/lib/libbfd*
 
 include ${TOPDIR}/mk/pkg-bottom.mk
