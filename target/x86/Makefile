@@ -47,7 +47,7 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
-imageinstall: ${BUILD_DIR}/${INITRAMFS_PIGGYBACK} createinitramfs
+imageinstall: createinitramfs
 	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_HARDWARE_QEMU),y)

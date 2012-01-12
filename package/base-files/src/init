@@ -14,7 +14,6 @@ mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 [ -d /dev/shm ] || mkdir /dev/shm
 mount -o nosuid,noexec -t tmpfs tmpfs /dev/shm
 mount -o nosuid,noexec -t devpts devpts /dev/pts
-exec 0<>/dev/console >&0 2>&0
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
