@@ -32,7 +32,7 @@ $(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PK
 $(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PPP_MOD_PPPUMTS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--system=Linux
+CONFIGURE_ARGS+=	--system=Linux --prefix="/usr"
 CONFIGURE_ENV+=		UNAME_S="Linux"
 TARGET_LDFLAGS+=	-lcrypt
 XAKE_FLAGS+=		STAGING_TARGET_DIR=${STAGING_TARGET_DIR} \
