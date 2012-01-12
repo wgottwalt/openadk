@@ -35,13 +35,12 @@ CONFIGURE_ARGS+=	--disable-pam \
 			--disable-wtmp \
 			--disable-wtmpx \
 			--disable-loginfunc \
-			--disable-pututline \
 			--disable-pututxline \
 			--disable-zlib
 ifeq (${ADK_PACKAGE_DROPBEAR_WITH_UTMP},)
-CONFIGURE_ARGS+=	--disable-utmp
+CONFIGURE_ARGS+=	--disable-utmp --disable-pututline
 else
-CONFIGURE_ARGS+=	--enable-utmp
+CONFIGURE_ENV+=		conf_utmp_location=/var/run/utmp
 endif
 
 pre-configure:
