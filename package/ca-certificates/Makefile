@@ -20,7 +20,7 @@ PKGFD_SMALL:=		Minimal set of CA certificates
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CA_CERTIFICATES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CA_CERTIFICATES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},force_etc))
 
 CONFIG_STYLE:=		manual
 

@@ -159,6 +159,9 @@ endif
 ifeq ($(ADK_DEBUG_STRIP),y)
 	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
+ifeq (${ADK_LEAVE_ETC_ALONE}$(filter force_etc,$(7)),y)
+	-rm -rf $${IDIR_$(1)}/etc
+else
 ifeq (${ADK_INSTALL_PACKAGE_INIT_SCRIPTS},y)
 	@for file in $$$$(ls ./files/*.init 2>/dev/null); do \
 		fname=$$$$(echo $$$$file| sed -e "s#.*/##" -e "s#.init##"); \
@@ -171,6 +174,10 @@ ifeq (${ADK_INSTALL_PACKAGE_INIT_SCRIPTS},y)
 		[[ -e $$$$script ]] || continue; \
 		chmod 0755 "$$$$script"; \
 	done
+endif
+ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
+	-rm -rf $${IDIR_$(1)}/etc/network
+endif
 endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}' \
 	    '$${STAGING_DIR}/scripts'
