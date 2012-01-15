@@ -5,12 +5,18 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bash
 PKG_VERSION:=		4.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3fb927c7c33022f1c327f14a81c0d4b0
 PKG_DESCR:=		Bourne-Again SHell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.gnu.org/software/bash/
 PKG_SITES:=		http://ftp.gnu.org/gnu/bash/
+
+PKG_CHOICES_BASH:=	WITH_CURSES WITH_TERMCAP
+PKGCD_WITH_CURSES:=	use curses library instead of termcap
+PKGCS_WITH_CURSES:=	libncurses
+PKGCB_WITH_CURSES:=	ncurses
+PKGCD_WITH_TERMCAP:=	use termcap library instead of curses
 
 include $(TOPDIR)/mk/package.mk
 
@@ -22,6 +28,9 @@ CONFIGURE_ARGS+=	--disable-rpath \
 			--cache-file=/dev/null \
 			--enable-job-control \
 			--enable-history
+ifneq (${ADK_PACKAGE_BASH_WITH_CURSES},)
+CONFIGURE_ARGS+=	--with-curses
+endif
 XAKE_FLAGS+=		LIBS_FOR_BUILD=''
 
 bash-install:

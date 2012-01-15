@@ -71,14 +71,12 @@ INITRAMFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
-INITRAMFS_PIGGYBACK=	${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.cpio
 else
 TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
-INITRAMFS_PIGGYBACK=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.cpio
 endif
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
@@ -91,29 +89,38 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
-${BIN_DIR}/${INITRAMFS}: ${TARGET_DIR}
-	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
-		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -P | \
-		xz -C crc32 >$@ 2>/dev/null
+${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
+	sh ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
+		${TARGET_DIR}/ >$@
+	( \
+		echo "nod /dev/console 0644 0 0 c 5 1"; \
+		echo "nod /dev/tty 0644 0 0 c 5 0"; \
+		for i in 0 1 2 3 4; do \
+			echo "nod /dev/tty$$i 0644 0 0 c 4 $i"; \
+		done \
+		echo "nod /dev/systty 0644 0 0 c 4 0"; \
+		echo "nod /dev/null 0644 0 0 c 1 3"; \
+		echo "nod /dev/ram 0655 0 0 b 1 1"; \
+	) >>$@
 
-${BUILD_DIR}/${INITRAMFS_PIGGYBACK}: ${TARGET_DIR}
-	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE).*//' \
-		${LINUX_DIR}/.config
-	echo "CONFIG_BLK_DEV_INITRD=y" >> ${LINUX_DIR}/.config
-	echo 'CONFIG_INITRAMFS_SOURCE="${BUILD_DIR}/${INITRAMFS_PIGGYBACK}"' >> \
-		${LINUX_DIR}/.config
-	cp $(TOPDIR)/scripts/dev.cpio $@
-	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
-		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-	    ${TOOLS_DIR}/cpio -o -C512 -Hnewc -A -P -O $@ 2>/dev/null
+${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
+	sh ${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
+		gzip -9 -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
-createinitramfs:
+createinitramfs: ${BIN_DIR}/${INITRAMFS}_list
+	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE).*//' \
+		${LINUX_DIR}/.config
+	( \
+		echo "CONFIG_BLK_DEV_INITRD=y"; \
+		echo 'CONFIG_INITRAMFS_SOURCE="${BIN_DIR}/${INITRAMFS}_list"'; \
+		echo "CONFIG_INITRAMFS_COMPRESSION_GZIP=y"; \
+	) >> ${LINUX_DIR}/.config
+
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
 	echo N | \
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \

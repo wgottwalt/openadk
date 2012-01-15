@@ -45,9 +45,26 @@ endmenu
 menu "Package selection"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_KERNEL && !ADK_CHOOSE_TARGET_SYSTEM
 
+config ADK_LEAVE_ETC_ALONE
+	boolean "do not install anything into /etc"
+	default n
+	help
+	  Enabling this option will prevent the ADK from installing anything
+	  into /etc. This is useful for highly customised setups with custom
+	  base-files packages.
+
+	  Package Makefiles can override this setting by passing "force_etc" to
+	  the package-template.  to a non-empty value. This is useful for
+	  packages traditionally installing non-config stuff into /etc, like
+	  e.g. ca-certificates.
+
+	  Note that without further customisation, turning this option
+	  on will almost certainly render the resulting system unusable.
+
 config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
 	boolean "ship custom init-scripts along with packages"
 	default y
+	depends on !ADK_LEAVE_ETC_ALONE
 	help
 	  Turning this option to false will prevent the ADK from
 	  installing init-scripts (i.e. files in /etc/init.d) for
@@ -59,6 +76,7 @@ config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
 config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
 	boolean "ship custom network-scripts along with packages"
 	default y
+	depends on !ADK_LEAVE_ETC_ALONE
 	help
 	  Turning this option to false will prevent the ADK from
 	  installing network-scripts (i.e. files in /etc/network/) for

@@ -20,22 +20,22 @@ PKGFD_SMALL:=		Minimal set of CA certificates
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CA_CERTS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CA_CERTIFICATES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},force_etc))
 
 CONFIG_STYLE:=		manual
 
 post-install:
-ifeq (${ADK_PACKAGE_CA_CERTS_SMALL},n)
-	$(INSTALL_DIR) $(IDIR_CA_CERTS)/{etc/ssl/certs,usr/share,usr/sbin}
-	$(CP) $(WRKINST)/usr/share/ca-certificates $(IDIR_CA_CERTS)/usr/share/
-	( cd ${IDIR_CA_CERTS}/usr/share/ca-certificates && \
-		ls */*.crt >${IDIR_CA_CERTS}/etc/ca-certificates.conf \
-	)
-	${INSTALL_BIN} ./extra/update-ca-certificates ${IDIR_CA_CERTS}/usr/sbin/
-	-DESTDIR=${IDIR_CA_CERTS} ${BASH} ./extra/update-ca-certificates
+ifeq (${ADK_PACKAGE_CA_CERTIFICATES_SMALL},y)
+	${INSTALL_DIR} ${IDIR_CA_CERTIFICATES}/etc/ssl
+	${INSTALL_DATA} ./extra/cert.pem ${IDIR_CA_CERTIFICATES}/etc/ssl/
 else
-	${INSTALL_DIR} ${IDIR_CA_CERTS}/etc/ssl
-	${INSTALL_DATA} ./cert.pem ${IDIR_CA_CERTS}/etc/ssl/
+	$(INSTALL_DIR) $(IDIR_CA_CERTIFICATES)/{etc/ssl/certs,usr/share,usr/sbin}
+	$(CP) $(WRKINST)/usr/share/ca-certificates $(IDIR_CA_CERTIFICATES)/usr/share/
+	( cd ${IDIR_CA_CERTIFICATES}/usr/share/ca-certificates && \
+		ls */*.crt >${IDIR_CA_CERTIFICATES}/etc/ca-certificates.conf \
+	)
+	${INSTALL_BIN} ./extra/update-ca-certificates ${IDIR_CA_CERTIFICATES}/usr/sbin/
+	-DESTDIR=${IDIR_CA_CERTIFICATES} ${BASH} ./extra/update-ca-certificates
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

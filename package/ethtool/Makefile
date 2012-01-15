@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ethtool
-PKG_VERSION:=		6
+PKG_VERSION:=		2.6.36
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3b721ec27f17ebf320ba8c505cf66d9c
+PKG_MD5SUM:=		3b2322695e9ee7bf447ebcdb85f93e83
 PKG_DESCR:=		Display or change ethernet card settings
 PKG_SECTION:=		net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		0.53.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6b8d901859d9b8a18e2f6bfe0a892a03
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
@@ -15,6 +15,9 @@ PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
 PKG_SUBPKGS:=		DROPBEAR DBCONVERT
 PKGSD_DBCONVERT:=	Utility for converting SSH private keys
+
+PKG_FLAVOURS_DROPBEAR:=	WITH_UTMP
+PKGFD_WITH_UTMP:=	support writing /var/run/utmp
 
 include $(TOPDIR)/mk/package.mk
 
@@ -28,14 +31,17 @@ CONFIGURE_ARGS+=	--disable-pam \
 			--enable-syslog \
 			--enable-shadow \
 			--disable-lastlog \
-			--disable-utmp \
 			--disable-utmpx \
 			--disable-wtmp \
 			--disable-wtmpx \
 			--disable-loginfunc \
-			--disable-pututline \
 			--disable-pututxline \
 			--disable-zlib
+ifeq (${ADK_PACKAGE_DROPBEAR_WITH_UTMP},)
+CONFIGURE_ARGS+=	--disable-utmp --disable-pututline
+else
+CONFIGURE_ENV+=		conf_utmp_location=/var/run/utmp
+endif
 
 pre-configure:
 	$(SED) 's,^/\* #define PKG_MULTI.*,#define PKG_MULTI,g' $(WRKBUILD)/options.h
