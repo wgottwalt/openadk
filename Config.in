@@ -88,6 +88,10 @@ config ADK_KERNEL_VERSION_3_1_8
 	prompt "3.1.8"
 	boolean
 
+config ADK_KERNEL_VERSION_3_2_0
+	prompt "3.2.0"
+	boolean
+
 endchoice
 
 source "target/linux/Config.in"
