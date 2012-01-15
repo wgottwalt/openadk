@@ -98,19 +98,67 @@ config ADK_KERNEL_VERSION_2_6_39_4
 	prompt "2.6.39.4"
 	boolean
 
-config ADK_KERNEL_VERSION_3_0_9
-	prompt "3.0.9"
+config ADK_KERNEL_VERSION_3_0_17
+	prompt "3.0.17"
 	boolean
 
-config ADK_KERNEL_VERSION_3_1_8
-	prompt "3.1.8"
+config ADK_KERNEL_VERSION_3_1_9
+	prompt "3.1.9"
 	boolean
 
-config ADK_KERNEL_VERSION_3_2_0
-	prompt "3.2.0"
+config ADK_KERNEL_VERSION_3_2_1
+	prompt "3.2.1"
 	boolean
 
 endchoice
+
+choice
+prompt "Kernel Compression"
+config ADK_KERNEL_COMP_XZ
+	prompt "use XZ compression"
+	boolean
+	select ADK_KERNEL_RD_XZ
+	select ADK_KERNEL_KERNEL_XZ
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+
+config ADK_KERNEL_COMP_LZMA
+	prompt "use LZMA compression"
+	boolean
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+
+config ADK_KERNEL_COMP_LZO
+	prompt "use LZO compression"
+	boolean
+	select ADK_KERNEL_RD_LZO
+	select ADK_KERNEL_KERNEL_LZO
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
+
+config ADK_KERNEL_COMP_GZIP
+	prompt "use GZIP compression"
+	boolean
+	select ADK_KERNEL_RD_GZIP
+	select ADK_KERNEL_KERNEL_GZIP
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+
+config ADK_KERNEL_COMP_BZIP2
+	prompt "use BZIP2 compression"
+	boolean
+	select ADK_KERNEL_RD_BZIP2
+	select ADK_KERNEL_KERNEL_BZIP2
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
+
+endchoice
+
+config ADK_COMPRESSION_TOOL
+	string
+	default "gzip -n9" if ADK_TARGET_INITRAMFS_COMPRESSION_GZIP
+	default "bzip2" if ADK_TARGET_INITRAMFS_COMPRESSION_BZIP2
+	default "xz" if ADK_TARGET_INITRAMFS_COMPRESSION_XZ
+	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
+	default "lzop" if ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+	help
 
 source "target/linux/Config.in"
 endmenu

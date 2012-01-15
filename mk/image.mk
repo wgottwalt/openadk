@@ -105,7 +105,7 @@ ${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 
 ${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
 	sh ${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
-		gzip -9 -c >$@
+		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
@@ -113,14 +113,33 @@ ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
 createinitramfs: ${BIN_DIR}/${INITRAMFS}_list
-	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE).*//' \
+	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE|INITRAMFS_COMPRESSION).*//' \
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
 		echo 'CONFIG_INITRAMFS_SOURCE="${BIN_DIR}/${INITRAMFS}_list"'; \
-		echo "CONFIG_INITRAMFS_COMPRESSION_GZIP=y"; \
+		echo 'CONFIG_INITRAMFS_COMPRESSION_NONE is not set' >> ${LINUX_DIR}/.config; \
 	) >> ${LINUX_DIR}/.config
-
+ifeq ($(ADK_KERNEL_COMP_XZ),y)
+		echo "CONFIG_RD_XZ=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_INITRAMFS_COMPRESSION_XZ=y" >> ${LINUX_DIR}/.config
+endif
+ifeq ($(ADK_KERNEL_COMP_LZMA),y)
+		echo "CONFIG_RD_LZMA=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_INITRAMFS_COMPRESSION_LZMA=y" >> ${LINUX_DIR}/.config
+endif
+ifeq ($(ADK_KERNEL_COMP_LZO),y)
+		echo "CONFIG_RD_LZO=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_INITRAMFS_COMPRESSION_LZO=y" >> ${LINUX_DIR}/.config
+endif
+ifeq ($(ADK_KERNEL_COMP_GZIP),y)
+		echo "CONFIG_RD_GZIP=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_INITRAMFS_COMPRESSION_GZIP=y" >> ${LINUX_DIR}/.config
+endif
+ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
+		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
+endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
 	echo N | \
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
