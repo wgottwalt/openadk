@@ -27,16 +27,16 @@ tools-compile:
 
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
 kernel-install: tools-compile
-	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinux \
+	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
 	    ${BUILD_DIR}/${TARGET_KERNEL}
-	cat $(LINUX_DIR)/vmlinux | $(STAGING_DIR)/bin/lzma e -si -so -eos -lc1 -lp2 -pb2 > $(LINUX_DIR)/vmlinux.lzma
 
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
-	cp $(TOPDIR)/target/tools/lzma-loader/src/loader.gz \
-		$(LINUX_DIR)/loader.gz
-	printf '\0' >>$(LINUX_DIR)/loader.gz
-	PATH='${TARGET_PATH}' trx -o $@~ -f $(LINUX_DIR)/loader.gz \
-		-f $(LINUX_DIR)/vmlinux.lzma -a 1024 -f ${BUILD_DIR}/root.squashfs
+	${TARGET_CROSS}objcopy -O binary ${BUILD_DIR}/${TARGET_KERNEL} \
+		${BUILD_DIR}/${TARGET_KERNEL}.bin
+	gzip -n9 <${BUILD_DIR}/${TARGET_KERNEL}.bin \
+		>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	printf '\0' >>${BUILD_DIR}/${TARGET_KERNEL}.bin.gz
+	PATH='${TARGET_PATH}' trx -o $@~ -f ${BUILD_DIR}/${TARGET_KERNEL}.bin.gz -a 1024 -f ${BUILD_DIR}/root.squashfs
 ifneq ($(ADK_TARGET_BROADCOM_MODEL_ASUS_WL500GP),y)
 	PATH='${TARGET_PATH}' addpattern -4 ${ADK_TOOLS_ADDPATTERN_ARGS} -g -i $@~ -o $@
 else

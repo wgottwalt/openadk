@@ -1,0 +1,396 @@
+diff -Nur linux-2.6.39.4.orig/arch/mips/Kconfig linux-2.6.39.4/arch/mips/Kconfig
+--- linux-2.6.39.4.orig/arch/mips/Kconfig	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/arch/mips/Kconfig	2012-01-17 13:14:33.000000000 +0100
+@@ -103,6 +103,7 @@
+ 	select GENERIC_GPIO
+ 	select SYS_HAS_EARLY_PRINTK
+ 	select CFE
++	select SYS_SUPPORTS_ZBOOT_UART16550
+ 	help
+ 	 Support for BCM47XX based boards
+ 
+diff -Nur linux-2.6.39.4.orig/arch/mips/Makefile linux-2.6.39.4/arch/mips/Makefile
+--- linux-2.6.39.4.orig/arch/mips/Makefile	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/arch/mips/Makefile	2012-01-17 13:14:33.000000000 +0100
+@@ -76,6 +76,7 @@
+ all-$(CONFIG_BOOT_ELF32)	:= $(vmlinux-32)
+ all-$(CONFIG_BOOT_ELF64)	:= $(vmlinux-64)
+ all-$(CONFIG_SYS_SUPPORTS_ZBOOT)+= vmlinuz
++all-$(CONFIG_BCM47XX)		+= vmlinuz.elf
+ 
+ #
+ # GCC uses -G 0 -mabicalls -fpic as default.  We don't want PIC in the kernel
+@@ -276,7 +277,7 @@
+ 	$(Q)$(MAKE) $(build)=arch/mips/boot VMLINUX=$(vmlinux-32) arch/mips/boot/$@
+ 
+ # boot/compressed
+-vmlinuz vmlinuz.bin vmlinuz.ecoff vmlinuz.srec: $(vmlinux-32) FORCE
++vmlinuz vmlinuz.bin vmlinuz.ecoff vmlinuz.srec vmlinuz.elf: $(vmlinux-32) FORCE
+ 	$(Q)$(MAKE) $(build)=arch/mips/boot/compressed \
+ 	   VMLINUX_LOAD_ADDRESS=$(load-y) 32bit-bfd=$(32bit-bfd) $@
+ 
+@@ -313,6 +314,7 @@
+ 	echo '  vmlinuz.ecoff        - ECOFF zboot image'
+ 	echo '  vmlinuz.bin          - Raw binary zboot image'
+ 	echo '  vmlinuz.srec         - SREC zboot image'
++	echo '  vmlinuz.elf          - ELF self-relocating zboot image'
+ 	echo
+ 	echo '  These will be default as appropriate for a configured platform.'
+ endef
+diff -Nur linux-2.6.39.4.orig/arch/mips/bcm47xx/Makefile linux-2.6.39.4/arch/mips/bcm47xx/Makefile
+--- linux-2.6.39.4.orig/arch/mips/bcm47xx/Makefile	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/arch/mips/bcm47xx/Makefile	2012-01-17 13:14:33.000000000 +0100
+@@ -3,4 +3,4 @@
+ # under Linux.
+ #
+ 
+-obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o wgt634u.o
++obj-y := gpio.o irq.o nvram.o prom.o serial.o setup.o time.o platform.o
+diff -Nur linux-2.6.39.4.orig/arch/mips/bcm47xx/platform.c linux-2.6.39.4/arch/mips/bcm47xx/platform.c
+--- linux-2.6.39.4.orig/arch/mips/bcm47xx/platform.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39.4/arch/mips/bcm47xx/platform.c	2012-01-17 13:14:33.000000000 +0100
+@@ -0,0 +1,146 @@
++/*
++ * This file is subject to the terms and conditions of the GNU General Public
++ * License.  See the file "COPYING" in the main directory of this archive
++ * for more details.
++ *
++ * Copyright (C) 2010, 2011 Waldemar Brodkorb <wbx@openadk.org>
++ * Copyright © 2007, 2011 Thorsten Glaser <tg@freewrt.org>
++ */
++
++#include <linux/platform_device.h>
++#include <linux/module.h>
++#include <linux/mtd/physmap.h>
++#include <linux/ssb/ssb.h>
++
++#include <asm/mach-bcm47xx/bcm47xx.h>
++#include <asm/mach-bcm47xx/nvram.h>
++
++#define CFGFS_FLASH_SIZE (128 * 1024)
++
++static struct mtd_partition bcm47xx_partitions[] = {
++#define SLOT_CFE 0
++	{
++		.name       = "cfe",
++		.offset     = 0,
++		.size       = BCM47XX_OVERRIDE_CFESIZE,
++		.mask_flags = MTD_WRITEABLE		/* force read-only */
++	},
++#define SLOT_LINUX 1
++	{
++		.name   = "linux",
++		.offset = 0,
++		.size   = 0,
++	},
++#define SLOT_ROOTFS 2
++	{
++		.name   = "rootfs",
++		.offset = 0,
++		.size   = 0,
++	},
++#define SLOT_CFGFS 3
++	{
++		.name   = "cfgfs",
++		.offset = 0,
++		.size   = 0,
++	},
++#define SLOT_NVRAM 4
++	{
++		.name   = "nvram",
++		.offset = 0,
++		.size   = 0,
++	},
++};
++
++static struct physmap_flash_data bcm47xx_flash_data = {
++	.parts    = bcm47xx_partitions,
++	.nr_parts = ARRAY_SIZE(bcm47xx_partitions)
++};
++
++static struct resource bcm47xx_flash_resource = {
++	.flags = IORESOURCE_MEM,
++};
++
++static struct platform_device bcm47xx_flash = {
++	.name          = "physmap-flash",
++	.id            = 0,
++	.dev           = { .platform_data = &bcm47xx_flash_data, },
++	.resource      = &bcm47xx_flash_resource,
++	.num_resources = 1,
++};
++
++static struct platform_device *bcm47xx_devices[] __initdata = {
++	&bcm47xx_flash,
++};
++
++struct bcm47xx_trx_header {
++#define BCM47XX_TRX_MAGIC 0x30524448
++	u32 magic;
++	u32 len;
++	u32 crc32;
++	u32 flag_version;
++	u32 offsets[3];
++};
++
++#define UPTODOWN(slot, psize) do {			\
++	posn -= psize; left -= psize;			\
++	bcm47xx_partitions[slot].offset = posn;		\
++	bcm47xx_partitions[slot].size = psize;		\
++} while (/* CONSTCOND */ 0)
++
++static int __init bcm47xx_register_devices(void)
++{
++	u32 flash_size;
++	size_t left, posn;
++	struct ssb_mipscore *mcore = &ssb_bcm47xx.mipscore;
++	struct bcm47xx_trx_header *trx_hdr;
++
++	trx_hdr = (void *)KSEG1ADDR(mcore->flash_window + BCM47XX_OVERRIDE_CFESIZE);
++
++	/* devices might have 2, 4 or 8 MB flash size */
++#ifdef BCM47XX_OVERRIDE_FLASHSIZE
++	flash_size = BCM47XX_OVERRIDE_FLASHSIZE;
++	mcore->flash_window_size = flash_size;
++#define BCM47XX_OVERRODE_FLASHSIZE " (overridden)"
++#else
++	flash_size = mcore->flash_window_size;
++#define BCM47XX_OVERRODE_FLASHSIZE ""
++#endif
++	printk(KERN_INFO "FLASH SIZE%s: %x\n", BCM47XX_OVERRODE_FLASHSIZE,
++		flash_size);
++
++	left = flash_size - BCM47XX_OVERRIDE_CFESIZE;
++	posn = flash_size;
++	UPTODOWN(SLOT_NVRAM, BCM47XX_OVERRIDE_NVRAMSIZE);
++	UPTODOWN(SLOT_CFGFS, CFGFS_FLASH_SIZE);
++	bcm47xx_partitions[SLOT_LINUX].offset = BCM47XX_OVERRIDE_CFESIZE;
++	bcm47xx_partitions[SLOT_LINUX].size = left;
++
++	if (trx_hdr->magic == BCM47XX_TRX_MAGIC) {
++		bcm47xx_partitions[SLOT_ROOTFS].offset =
++		    bcm47xx_partitions[SLOT_LINUX].offset +
++		    trx_hdr->offsets[1];
++		bcm47xx_partitions[SLOT_ROOTFS].size =
++		    bcm47xx_partitions[SLOT_LINUX].size -
++		    trx_hdr->offsets[1];
++	} else
++		printk("bcm47xx/platform: no TRX header found\n");
++
++	printk(KERN_INFO "=== Flash map dump ===\n");
++	for (posn = 0; posn < bcm47xx_flash_data.nr_parts; ++posn)
++		printk(KERN_INFO " #%u %08X @%08X '%s'\n",
++		    (unsigned int)posn,
++		    (unsigned int)bcm47xx_partitions[posn].size,
++		    (unsigned int)bcm47xx_partitions[posn].offset,
++		    bcm47xx_partitions[posn].name);
++	printk(KERN_INFO "=== Hope this works, have a nice day\n");
++
++	bcm47xx_flash_data.width = mcore->flash_buswidth;
++	bcm47xx_flash_resource.start = mcore->flash_window;
++	bcm47xx_flash_resource.end = mcore->flash_window
++				   + mcore->flash_window_size
++				   - 1;
++	return platform_add_devices(bcm47xx_devices,
++			    ARRAY_SIZE(bcm47xx_devices));
++}
++
++device_initcall(bcm47xx_register_devices);
+diff -Nur linux-2.6.39.4.orig/arch/mips/boot/compressed/Makefile linux-2.6.39.4/arch/mips/boot/compressed/Makefile
+--- linux-2.6.39.4.orig/arch/mips/boot/compressed/Makefile	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/arch/mips/boot/compressed/Makefile	2012-01-17 13:14:33.000000000 +0100
+@@ -58,8 +58,13 @@
+ # Calculate the load address of the compressed kernel image
+ hostprogs-y := calc_vmlinuz_load_addr
+ 
++ifdef CONFIG_BCM47XX
++# XXX just after CFE, just pray the address is static
++VMLINUZ_LOAD_ADDRESS = 0xffffffff80900000
++else
+ VMLINUZ_LOAD_ADDRESS = $(shell $(obj)/calc_vmlinuz_load_addr \
+ 		$(obj)/vmlinux.bin $(VMLINUX_LOAD_ADDRESS))
++endif
+ 
+ vmlinuzobjs-y += $(obj)/piggy.o
+ 
+@@ -105,4 +110,12 @@
+ vmlinuz.srec: vmlinuz
+ 	$(call cmd,objcopy)
+ 
+-clean-files := $(objtree)/vmlinuz $(objtree)/vmlinuz.{32,ecoff,bin,srec}
++AFLAGS_selfreloc.o := -DVMLINUZ_LOAD_ADDRESS=$(VMLINUZ_LOAD_ADDRESS)
++CPPFLAGS_selfreloc.lds := $(KBUILD_CFLAGS)
++
++arch/mips/boot/compressed/selfreloc.o: arch/mips/boot/compressed/selfreloc.S vmlinuz.bin FORCE
++
++vmlinuz.elf: arch/mips/boot/compressed/selfreloc.o arch/mips/boot/compressed/selfreloc.lds FORCE
++	$(LD) $(LDFLAGS) -T arch/mips/boot/compressed/selfreloc.lds arch/mips/boot/compressed/selfreloc.o -o $@
++
++clean-files := $(objtree)/vmlinuz $(objtree)/vmlinuz.{32,ecoff,bin,srec,elf} $(objtree)/arch/mips/boot/compressed/selfreloc.{o,lds}
+diff -Nur linux-2.6.39.4.orig/arch/mips/boot/compressed/selfreloc.S linux-2.6.39.4/arch/mips/boot/compressed/selfreloc.S
+--- linux-2.6.39.4.orig/arch/mips/boot/compressed/selfreloc.S	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39.4/arch/mips/boot/compressed/selfreloc.S	2012-01-17 13:14:33.000000000 +0100
+@@ -0,0 +1,54 @@
++/*-
++ * written 2011 by Thorsten Glaser <tg@freewrt.org> based on
++ * arch/mips/boot/compressed/head.S
++ */
++
++#include <asm/asm.h>
++#include <asm/regdef.h>
++
++	.set noreorder
++	.cprestore
++
++	.text
++	LEAF(selfreloc_start)
++selfreloc_start:
++	/* Save boot rom start args */
++	move	s0, a0
++	move	s1, a1
++	move	s2, a2
++	move	s3, a3
++
++	/* Copy code to the correct place */
++	PTR_LI	a0, VMLINUZ_LOAD_ADDRESS
++	PTR_LA	a1, imgbeg
++	PTR_LA	a2, imgend
++1:	lw	t0, 0(a1)
++	sw	t0, 0(a0)
++	add	a1, 4
++	add	a0, 4
++	blt	a1, a2, 1b
++	 nop
++
++	/* Restore boot rom start args */
++	move	a0, s0
++	move	a1, s1
++	move	a2, s2
++	move	a3, s3
++
++	/* Jump to the code at its new location */
++	PTR_LI	k0, VMLINUZ_LOAD_ADDRESS
++	jr	k0
++	 nop
++
++	/* Just in case we come back… */
++3:
++	b	3b
++	 nop
++	END(selfreloc_start)
++
++	.globl	imgbeg
++	.p2align 2
++imgbeg:	.incbin	"vmlinuz.bin"
++	.globl	imgend
++	.p2align 2
++imgend:
+diff -Nur linux-2.6.39.4.orig/arch/mips/boot/compressed/selfreloc.lds.S linux-2.6.39.4/arch/mips/boot/compressed/selfreloc.lds.S
+--- linux-2.6.39.4.orig/arch/mips/boot/compressed/selfreloc.lds.S	1970-01-01 01:00:00.000000000 +0100
++++ linux-2.6.39.4/arch/mips/boot/compressed/selfreloc.lds.S	2012-01-17 13:14:33.000000000 +0100
+@@ -0,0 +1,39 @@
++/*-
++ * written 2010 by Thorsten Glaser <tg@debian.org> based on
++ * arch/mips/kernel/vmlinux.lds and arch/mips/boot/compressed/ld.script
++ */
++
++#include <asm/asm-offsets.h>
++#include <asm/page.h>
++#include <asm-generic/vmlinux.lds.h>
++
++#undef mips
++#define mips mips
++OUTPUT_ARCH(mips)
++ENTRY(selfreloc_start)
++PHDRS {
++	text PT_LOAD FLAGS(7);	/* RWX */
++}
++SECTIONS
++{
++	. = VMLINUX_LOAD_ADDRESS;
++	.text : {
++		*(.text)
++		*(.text.*)
++		*(.rodata)
++		*(.rodata.*)
++		*(.data)
++		*(.data.*)
++		*(.bss)
++		*(.bss.*)
++	} :text
++	/DISCARD/ : {
++		*(.MIPS.options)
++		*(.options)
++		*(.pdr)
++		*(.reginfo)
++		*(.comment)
++		*(.note)
++		*(.gnu.attributes)
++	}
++}
+diff -Nur linux-2.6.39.4.orig/arch/mips/boot/compressed/uart-16550.c linux-2.6.39.4/arch/mips/boot/compressed/uart-16550.c
+--- linux-2.6.39.4.orig/arch/mips/boot/compressed/uart-16550.c	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/arch/mips/boot/compressed/uart-16550.c	2012-01-17 13:14:33.000000000 +0100
+@@ -18,6 +18,11 @@
+ #define PORT(offset) (CKSEG1ADDR(AR7_REGS_UART0) + (4 * offset))
+ #endif
+ 
++#ifdef CONFIG_BCM47XX
++#define UART_BASE 0x18000300
++#define PORT(offset) (CKSEG1ADDR(UART_BASE) + (offset))
++#endif
++
+ #ifndef PORT
+ #error please define the serial port address for your own machine
+ #endif
+diff -Nur linux-2.6.39.4.orig/drivers/ssb/driver_mipscore.c linux-2.6.39.4/drivers/ssb/driver_mipscore.c
+--- linux-2.6.39.4.orig/drivers/ssb/driver_mipscore.c	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/drivers/ssb/driver_mipscore.c	2012-01-17 13:14:33.000000000 +0100
+@@ -190,10 +190,11 @@
+ {
+ 	struct ssb_bus *bus = mcore->dev->bus;
+ 
++	printk("Check for vendor with value: %d", bus->chipco.dev->id.vendor);
+ 	mcore->flash_buswidth = 2;
+ 	if (bus->chipco.dev) {
+ 		mcore->flash_window = 0x1c000000;
+-		mcore->flash_window_size = 0x02000000;
++		mcore->flash_window_size = 0x00800000;
+ 		if ((ssb_read32(bus->chipco.dev, SSB_CHIPCO_FLASH_CFG)
+ 		               & SSB_CHIPCO_CFG_DS16) == 0)
+ 			mcore->flash_buswidth = 1;
+diff -Nur linux-2.6.39.4.orig/init/Kconfig linux-2.6.39.4/init/Kconfig
+--- linux-2.6.39.4.orig/init/Kconfig	2011-08-03 21:43:28.000000000 +0200
++++ linux-2.6.39.4/init/Kconfig	2012-01-17 13:14:33.000000000 +0100
+@@ -156,6 +156,7 @@
+ config KERNEL_GZIP
+ 	bool "Gzip"
+ 	depends on HAVE_KERNEL_GZIP
++	select DECOMPRESS_GZIP
+ 	help
+ 	  The old and tried gzip compression. It provides a good balance
+ 	  between compression ratio and decompression speed.
+@@ -163,6 +164,7 @@
+ config KERNEL_BZIP2
+ 	bool "Bzip2"
+ 	depends on HAVE_KERNEL_BZIP2
++	select DECOMPRESS_BZIP2
+ 	help
+ 	  Its compression ratio and speed is intermediate.
+ 	  Decompression speed is slowest among the three.  The kernel
+@@ -173,6 +175,7 @@
+ config KERNEL_LZMA
+ 	bool "LZMA"
+ 	depends on HAVE_KERNEL_LZMA
++	select DECOMPRESS_LZMA
+ 	help
+ 	  The most recent compression algorithm.
+ 	  Its ratio is best, decompression speed is between the other
+@@ -197,6 +200,7 @@
+ config KERNEL_LZO
+ 	bool "LZO"
+ 	depends on HAVE_KERNEL_LZO
++	select DECOMPRESS_LZO
+ 	help
+ 	  Its compression ratio is the poorest among the 4. The kernel
+ 	  size is about 10% bigger than gzip; however its speed
