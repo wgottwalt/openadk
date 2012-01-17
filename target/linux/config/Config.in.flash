@@ -59,6 +59,16 @@ config ADK_KERNEL_MTD_CFI_INTELEXT
 	default y if ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
 	default n
 
+config ADK_KERNEL_MTD_CFI_AMDSTD
+	boolean
+	default y if ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
+	default n
+
+config ADK_KERNEL_MTD_CFI_STAA
+	boolean
+	default y if ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
+	default n
+
 config ADK_KERNEL_MTD_AR2315
 	boolean
 	select ADK_KERNEL_MTD_REDBOOT_PARTS
