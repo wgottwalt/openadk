@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gawk
-PKG_VERSION:=		3.1.7
+PKG_VERSION:=		4.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a38d5dec19320ace01f1d16c8beb1363
+PKG_MD5SUM:=		51e417b71287629940051e6f652c6492
 PKG_DESCR:=		GNU awk
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/gawk/

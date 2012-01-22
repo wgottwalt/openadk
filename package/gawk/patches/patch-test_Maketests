@@ -1,6 +1,6 @@
---- gawk-3.1.7.orig/test/Maketests	2009-07-03 11:31:17.000000000 +0200
-+++ gawk-3.1.7/test/Maketests	2010-02-23 21:33:39.639777383 +0100
-@@ -1,1028 +0,0 @@
+--- gawk-4.0.0.orig/test/Maketests	2011-06-24 10:26:54.000000000 +0200
++++ gawk-4.0.0/test/Maketests	2012-01-22 13:29:30.000000000 +0100
+@@ -1,1168 +0,0 @@
 -Gt-dummy:
 -# file Maketests, generated from Makefile.am by the Gentests program
 -addcomma:
@@ -173,6 +173,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-delargv:
+-	@echo delargv
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -delarpm2:
 -	@echo delarpm2
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -185,6 +190,11 @@
 -
 -delfunc:
 -	@echo delfunc
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-dfastress:
+-	@echo dfastress
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
@@ -201,6 +211,16 @@
 -exitval2:
 -	@echo exitval2
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-fcall_exit:
+-	@echo fcall_exit
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-fcall_exit2:
+-	@echo fcall_exit2
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
 -fldchg:
@@ -245,6 +265,11 @@
 -
 -fordel:
 -	@echo fordel
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-forref:
+-	@echo forref
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
@@ -408,6 +433,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-negrange:
+-	@echo negrange
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -nested:
 -	@echo nested
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -493,6 +523,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-ofmta:
+-	@echo ofmta
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -ofmtbig:
 -	@echo ofmtbig
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -558,6 +593,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-posix2008sub:
+-	@echo posix2008sub
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -prdupval:
 -	@echo prdupval
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -593,14 +633,14 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
--psx96sub:
--	@echo psx96sub
--	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
--	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
--
 -rand:
 -	@echo rand
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-range1:
+-	@echo range1
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
 -rebt8b1:
@@ -611,6 +651,11 @@
 -regeq:
 -	@echo regeq
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-regrange:
+-	@echo regrange
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
 -reindops:
@@ -773,6 +818,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-uninit5:
+-	@echo uninit5
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -uninitialized:
 -	@echo uninitialized
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -813,6 +863,36 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-aadelete1:
+-	@echo aadelete1
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-aadelete2:
+-	@echo aadelete2
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-aarray1:
+-	@echo aarray1
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-aasort:
+-	@echo aasort
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-aasorti:
+-	@echo aasorti
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-arraysort:
+-	@echo arraysort
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -backw:
 -	@echo backw
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -823,8 +903,28 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-delsub:
+-	@echo delsub
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -fieldwdth:
 -	@echo fieldwdth
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-fpat1:
+-	@echo fpat1
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-fpat2:
+-	@echo fpat2
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-fpatnull:
+-	@echo fpatnull
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
@@ -903,6 +1003,11 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-indirectcall:
+-	@echo indirectcall
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -lint:
 -	@echo lint
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
@@ -911,6 +1016,11 @@
 -lintold:
 -	@echo lintold
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint-old < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-lintwarn:
+-	@echo lintwarn
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
 -match1:
@@ -928,8 +1038,18 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-nastyparm:
+-	@echo nastyparm
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -nondec:
 -	@echo nondec
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-patsplit:
+-	@echo patsplit
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
@@ -968,8 +1088,28 @@
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  --lint >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
+-sortfor:
+-	@echo sortfor
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-sortu:
+-	@echo sortu
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-splitarg4:
+-	@echo splitarg4
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  < $(srcdir)/$@.in >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
 -strtonum:
 -	@echo strtonum
+-	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
+-	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
+-
+-switch2:
+-	@echo switch2
 -	@AWKPATH=$(srcdir) $(AWK) -f $@.awk  >_$@ 2>&1 || echo EXIT CODE: $$? >>_$@
 -	@-$(CMP) $(srcdir)/$@.ok _$@ && rm -f _$@
 -
