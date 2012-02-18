@@ -1,0 +1,155 @@
+diff -Nur uClibc-0.9.32.1/libc/signal/sigaction.c uClibc.new/libc/signal/sigaction.c
+--- uClibc-0.9.32.1/libc/signal/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/signal/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -82,6 +82,11 @@
+ 
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/arm/sigaction.c uClibc.new/libc/sysdeps/linux/arm/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/arm/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/arm/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -96,6 +96,11 @@
+ 
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/avr32/sigaction.c uClibc.new/libc/sysdeps/linux/avr32/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/avr32/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/avr32/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -38,6 +38,11 @@
+ }
+ 
+ #ifndef LIBC_SIGACTION
+-weak_alias(__libc_sigaction, sigaction)
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
++weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/c6x/sigaction.c uClibc.new/libc/sysdeps/linux/c6x/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/c6x/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/c6x/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -75,10 +75,16 @@
+ }
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+ 
++
+ /* NOTE: Please think twice before making any changes to the bits of
+    code below.  GDB needs some intimate knowledge about it to
+    recognize them as signal trampolines, and make backtraces through
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/i386/sigaction.c uClibc.new/libc/sysdeps/linux/i386/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/i386/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/i386/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -95,8 +95,13 @@
+ 
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+ 
+ 
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/mips/sigaction.c uClibc.new/libc/sysdeps/linux/mips/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/mips/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/mips/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -100,8 +100,13 @@
+ 
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+ 
+ 
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/sparc/sigaction.c uClibc.new/libc/sysdeps/linux/sparc/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/sparc/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/sparc/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -65,11 +65,18 @@
+ 	return ret;
+ }
+ 
++
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+ 
++
+ static void
+ __rt_sigreturn_stub(void)
+ {
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/x86_64/sigaction.c uClibc.new/libc/sysdeps/linux/x86_64/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/x86_64/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/x86_64/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -99,8 +99,13 @@
+ 
+ 
+ #ifndef LIBC_SIGACTION
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
+ weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif
+ 
+ 
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/xtensa/sigaction.c uClibc.new/libc/sysdeps/linux/xtensa/sigaction.c
+--- uClibc-0.9.32.1/libc/sysdeps/linux/xtensa/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/xtensa/sigaction.c	2012-02-17 14:49:51.000000000 +0100
+@@ -34,6 +34,11 @@
+ }
+ 
+ #ifndef LIBC_SIGACTION
+-weak_alias(__libc_sigaction, sigaction)
++# ifndef __UCLIBC_HAS_THREADS__
++strong_alias(__libc_sigaction,sigaction)
++libc_hidden_def(sigaction)
++# else
++weak_alias(__libc_sigaction,sigaction)
+ libc_hidden_weak(sigaction)
++# endif
+ #endif

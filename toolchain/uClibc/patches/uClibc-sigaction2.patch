@@ -1,0 +1,247 @@
+diff -Nur uClibc-0.9.32.1/libc/signal/Makefile.in uClibc.new/libc/signal/Makefile.in
+--- uClibc-0.9.32.1/libc/signal/Makefile.in	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/signal/Makefile.in	2012-02-17 15:13:33.000000000 +0100
+@@ -17,7 +17,7 @@
+ CSRC-$(UCLIBC_SUSV4_LEGACY) += sigintr.c
+ 
+ ifeq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC-y:=$(filter-out raise.c sigaction.c,$(CSRC-y))
++CSRC-y:=$(filter-out raise.c,$(CSRC-y))
+ endif
+ 
+ ifneq ($(strip $(ARCH_OBJS)),)
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/arm/Makefile.arch uClibc.new/libc/sysdeps/linux/arm/Makefile.arch
+--- uClibc-0.9.32.1/libc/sysdeps/linux/arm/Makefile.arch	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/arm/Makefile.arch	2012-02-17 15:13:33.000000000 +0100
+@@ -5,11 +5,7 @@
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ #
+ 
+-CSRC := brk.c ioperm.c iopl.c mmap.c __syscall_error.c
+-
+-ifneq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC += sigaction.c
+-endif
++CSRC := brk.c ioperm.c iopl.c mmap.c __syscall_error.c sigaction.c
+ 
+ SSRC := \
+ 	__longjmp.S setjmp.S bsd-setjmp.S \
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/i386/Makefile.arch uClibc.new/libc/sysdeps/linux/i386/Makefile.arch
+--- uClibc-0.9.32.1/libc/sysdeps/linux/i386/Makefile.arch	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/i386/Makefile.arch	2012-02-17 15:13:33.000000000 +0100
+@@ -5,11 +5,7 @@
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ #
+ 
+-CSRC := brk.c __syscall_error.c
+-
+-ifneq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC += sigaction.c
+-endif
++CSRC := brk.c __syscall_error.c sigaction.c
+ 
+ SSRC := \
+ 	__longjmp.S setjmp.S bsd-setjmp.S bsd-_setjmp.S \
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/mips/Makefile.arch uClibc.new/libc/sysdeps/linux/mips/Makefile.arch
+--- uClibc-0.9.32.1/libc/sysdeps/linux/mips/Makefile.arch	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/mips/Makefile.arch	2012-02-17 15:13:33.000000000 +0100
+@@ -7,7 +7,7 @@
+ 
+ CSRC := \
+ 	__longjmp.c  brk.c setjmp_aux.c mmap.c \
+-	cacheflush.c pread_write.c sysmips.c _test_and_set.c \
++	cacheflush.c pread_write.c sigaction.c sysmips.c _test_and_set.c \
+ 	readahead.c
+ 
+ SSRC := bsd-_setjmp.S bsd-setjmp.S setjmp.S syscall.S pipe.S syscall_error.S
+@@ -17,7 +17,6 @@
+ endif
+ 
+ ifneq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC += sigaction.c
+ SSRC += vfork.S clone.S
+ endif
+ 
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/sparc/Makefile.arch uClibc.new/libc/sysdeps/linux/sparc/Makefile.arch
+--- uClibc-0.9.32.1/libc/sysdeps/linux/sparc/Makefile.arch	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/sparc/Makefile.arch	2012-02-17 15:14:20.000000000 +0100
+@@ -5,15 +5,14 @@
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ #
+ 
+-CSRC := brk.c __syscall_error.c
++CSRC := brk.c __syscall_error.c sigaction.c
+ 
+ SSRC := \
+ 	__longjmp.S setjmp.S bsd-setjmp.S bsd-_setjmp.S \
+ 	syscall.S urem.S udiv.S umul.S sdiv.S rem.S pipe.S
+ 
+ ifneq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC += sigaction.c
+-SSRC += fork.S vfork.S
++SSRC += fork.S vfork.S clone.S
+ endif
+ 
+ # check weather __LONG_DOUBLE_128__ is defined (long double support)
+diff -Nur uClibc-0.9.32.1/libc/sysdeps/linux/x86_64/Makefile.arch uClibc.new/libc/sysdeps/linux/x86_64/Makefile.arch
+--- uClibc-0.9.32.1/libc/sysdeps/linux/x86_64/Makefile.arch	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libc/sysdeps/linux/x86_64/Makefile.arch	2012-02-17 15:13:33.000000000 +0100
+@@ -5,11 +5,7 @@
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ #
+ 
+-CSRC := brk.c __syscall_error.c mmap.c
+-
+-ifneq ($(UCLIBC_HAS_THREADS_NATIVE),y)
+-CSRC += sigaction.c
+-endif
++CSRC := brk.c __syscall_error.c sigaction.c mmap.c
+ 
+ SSRC := \
+ 	__longjmp.S setjmp.S syscall.S bsd-setjmp.S bsd-_setjmp.S
+diff -Nur uClibc-0.9.32.1/libpthread/nptl/.gitignore uClibc.new/libpthread/nptl/.gitignore
+--- uClibc-0.9.32.1/libpthread/nptl/.gitignore	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libpthread/nptl/.gitignore	2012-02-17 15:13:33.000000000 +0100
+@@ -24,6 +24,5 @@
+ #
+ # symlinks
+ #
+-sysdeps/pthread/pt-sigaction.c
+ sysdeps/pthread/pt-sigfillset.c
+ sysdeps/pthread/pt-sigprocmask.c
+diff -Nur uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/Makefile.in uClibc.new/libpthread/nptl/sysdeps/pthread/Makefile.in
+--- uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/Makefile.in	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libpthread/nptl/sysdeps/pthread/Makefile.in	2012-02-17 15:13:33.000000000 +0100
+@@ -42,8 +42,6 @@
+ CFLAGS-pthread_spin_destroy.c = -D_GNU_SOURCE
+ CFLAGS-pthread_spin_init.c = -D_GNU_SOURCE
+ CFLAGS-pthread_spin_unlock.c = -D_GNU_SOURCE
+-CFLAGS-pt-sigaction.c = -I$(top_srcdir)libc/sysdeps/linux/$(TARGET_ARCH) \
+-			-I$(top_srcdir)libc/signal
+ CFLAGS-pt-sigfillset.c = -I$(top_srcdir)libc/signal
+ CFLAGS-pt-sigprocmask.c = -I$(top_srcdir)libc/sysdeps/linux/common
+ CFLAGS-unwind-forcedunwind.c = -fexceptions -fasynchronous-unwind-tables
+@@ -58,10 +56,6 @@
+ libpthread-so-y += $(patsubst %,$(libpthread_pthread_OUT)/%.oS, \
+ 	pt-sigaction pt-sigprocmask unwind-forcedunwind)
+ 
+-CFLAGS-OMIT-sigaction.c = $(CFLAGS-pthread)
+-CFLAGS-sigaction.c = -I$(top_srcdir)libc/signal
+-libc-y += $(libpthread_pthread_OUT)/sigaction.o
+-
+ librt-pt-routines-y = librt-cancellation.c
+ librt-pt-shared-only-routines-y = rt-unwind-resume.c
+ 
+@@ -114,7 +108,7 @@
+ # impl, but ok.
+ # Special rules needed since we do objdir->objdir compilation for these 3.
+ # First symlink them, then build them. Rob would freak out on these. Sheesh! ;)
+-pthread-lc-fwd = sigaction sigfillset sigprocmask
++pthread-lc-fwd = sigfillset sigprocmask
+ $(patsubst %,$(libpthread_pthread_OUT)/pt-%.c,$(pthread-lc-fwd)): | $(libpthread_pthread_OUT)
+ 	$(do_ln) $(call rel_srcdir)$(patsubst pt-%,$(libpthread_pthread_DIR)/%,$(@F)) $@
+ $(patsubst %,$(libpthread_pthread_OUT)/pt-%.oS,$(pthread-lc-fwd)): $(libpthread_pthread_OUT)/pt-%.oS: $(libpthread_pthread_OUT)/pt-%.c
+@@ -131,5 +125,5 @@
+ CLEAN_libpthread/nptl/sysdeps/pthread:
+ 	$(do_rm) $(addprefix $(libpthread_pthread_OUT)/*., o os oS s S) \
+ 		$(libpthread_pthread_OUT)/defs.h \
+-		$(addprefix $(libpthread_pthread_DIR)/,pt-sigaction.c \
++		$(addprefix $(libpthread_pthread_DIR)/, \
+ 			pt-sigfillset.c pt-sigprocmask.c)
+diff -Nur uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/pt-sigaction.c uClibc.new/libpthread/nptl/sysdeps/pthread/pt-sigaction.c
+--- uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/pt-sigaction.c	1970-01-01 01:00:00.000000000 +0100
++++ uClibc.new/libpthread/nptl/sysdeps/pthread/pt-sigaction.c	2012-02-17 15:13:33.000000000 +0100
+@@ -0,0 +1,40 @@
++/* Copyright (C) 2002, 2003, 2005 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++   Contributed by Ulrich Drepper <drepper@redhat.com>, 2002.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, write to the Free
++   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
++   02111-1307 USA.  */
++
++#include <pthreadP.h>
++#include <signal.h>
++
++/* We use the libc implementation but we tell it to not allow
++   SIGCANCEL or SIGTIMER to be handled.  */
++
++extern __typeof(sigaction) __libc_sigaction;
++int
++__sigaction (int sig, const struct sigaction *act, struct sigaction *oact)
++{
++  if (unlikely (sig == SIGCANCEL || sig == SIGSETXID))
++    {
++      __set_errno (EINVAL);
++      return -1;
++    }
++
++  return __libc_sigaction (sig, act, oact);
++}
++libc_hidden_proto(sigaction)
++weak_alias (__sigaction, sigaction)
++libc_hidden_weak(sigaction)
+diff -Nur uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/sigaction.c uClibc.new/libpthread/nptl/sysdeps/pthread/sigaction.c
+--- uClibc-0.9.32.1/libpthread/nptl/sysdeps/pthread/sigaction.c	2011-12-30 12:11:07.000000000 +0100
++++ uClibc.new/libpthread/nptl/sysdeps/pthread/sigaction.c	1970-01-01 01:00:00.000000000 +0100
+@@ -1,49 +0,0 @@
+-/* Copyright (C) 2002, 2003, 2005 Free Software Foundation, Inc.
+-   This file is part of the GNU C Library.
+-   Contributed by Ulrich Drepper <drepper@redhat.com>, 2002.
+-
+-   The GNU C Library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2.1 of the License, or (at your option) any later version.
+-
+-   The GNU C Library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with the GNU C Library; if not, write to the Free
+-   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+-   02111-1307 USA.  */
+-
+-#ifndef LIBC_SIGACTION
+-
+-#include <pthreadP.h>
+-
+-/* We use the libc implementation but we tell it to not allow
+-   SIGCANCEL or SIGTIMER to be handled.  */
+-#define LIBC_SIGACTION	1
+-#include <sigaction.c>
+-
+-extern __typeof(sigaction) __sigaction;
+-int
+-__sigaction (int sig, const struct sigaction *act, struct sigaction *oact)
+-{
+-  if (__builtin_expect (sig == SIGCANCEL || sig == SIGSETXID, 0))
+-    {
+-      __set_errno (EINVAL);
+-      return -1;
+-    }
+-
+-  return __libc_sigaction (sig, act, oact);
+-}
+-libc_hidden_proto(sigaction)
+-weak_alias (__sigaction, sigaction)
+-libc_hidden_weak(sigaction)
+-
+-#else
+-
+-# include_next <sigaction.c>
+-
+-#endif /* LIBC_SIGACTION */
