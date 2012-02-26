@@ -109,16 +109,16 @@ config ADK_KERNEL_VERSION_2_6_39_4
 	prompt "2.6.39.4"
 	boolean
 
-config ADK_KERNEL_VERSION_3_0_18
-	prompt "3.0.18"
+config ADK_KERNEL_VERSION_3_0_22
+	prompt "3.0.22"
 	boolean
 
 config ADK_KERNEL_VERSION_3_1_10
 	prompt "3.1.10"
 	boolean
 
-config ADK_KERNEL_VERSION_3_2_2
-	prompt "3.2.2"
+config ADK_KERNEL_VERSION_3_2_7
+	prompt "3.2.7"
 	boolean
 
 endchoice
