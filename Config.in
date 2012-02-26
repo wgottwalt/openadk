@@ -91,6 +91,8 @@ endmenu
 
 choice
 prompt "Kernel Version"
+depends on ADK_TOOLCHAIN_ONLY
+
 config ADK_KERNEL_VERSION_TOOLCHAIN
 	prompt "2.6.39.4"
 	boolean

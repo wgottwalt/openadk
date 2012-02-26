@@ -90,7 +90,7 @@ ${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
-	sh ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
+	bash ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
 		echo "nod /dev/console 0644 0 0 c 5 1"; \
@@ -104,7 +104,7 @@ ${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 	) >>$@
 
 ${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
-	sh ${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
+	bash ${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
 		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
