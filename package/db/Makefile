@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		db
-PKG_VERSION:=		5.2.36
+PKG_VERSION:=		5.3.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		30d95daa5f947664131c000b12e50064
+PKG_MD5SUM:=		d40e3e4b9a76a23d1db225465aa8bae0
 PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
 PKG_SECTION:=		db
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
