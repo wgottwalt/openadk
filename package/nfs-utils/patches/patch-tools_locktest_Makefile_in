@@ -1,6 +1,6 @@
---- nfs-utils-1.2.3.orig/tools/locktest/Makefile.in	2010-09-28 14:32:32.000000000 +0200
-+++ nfs-utils-1.2.3/tools/locktest/Makefile.in	2010-12-24 15:40:35.000000000 +0100
-@@ -67,20 +67,20 @@ am_testlk_OBJECTS = testlk-testlk.$(OBJE
+--- nfs-utils-1.2.5.orig/tools/locktest/Makefile.in	2011-09-24 14:13:16.000000000 +0200
++++ nfs-utils-1.2.5/tools/locktest/Makefile.in	2012-02-27 17:39:34.000000000 +0100
+@@ -68,20 +68,20 @@ am_testlk_OBJECTS = testlk-testlk.$(OBJE
  testlk_OBJECTS = $(am_testlk_OBJECTS)
  testlk_LDADD = $(LDADD)
  testlk_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
@@ -26,7 +26,7 @@
  	$(LDFLAGS) -o $@
  SOURCES = $(testlk_SOURCES)
  DIST_SOURCES = $(testlk_SOURCES)
-@@ -101,15 +101,15 @@ AWK = @AWK@
+@@ -102,15 +102,15 @@ AWK = @AWK@
  CC = $(CC_FOR_BUILD)
  CCDEPMODE = @CCDEPMODE@
  CC_FOR_BUILD = @CC_FOR_BUILD@

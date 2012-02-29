@@ -8,3 +8,6 @@ add_service nfs 2049/udp
 gid=$(get_next_gid)
 add_group nfs $gid
 add_user nfs $(get_next_uid) $gid /var/lib/nfs
+gid=$(get_next_gid)
+add_group nfsnobody $gid
+add_user nfsnobody $(get_next_uid) $gid /var/lib/nfs

@@ -1,6 +1,6 @@
---- nfs-utils-1.2.3.orig/utils/gssd/Makefile.in	2010-09-28 14:32:33.000000000 +0200
-+++ nfs-utils-1.2.3/utils/gssd/Makefile.in	2011-01-21 17:35:20.288658843 +0100
-@@ -351,7 +351,7 @@ gssd_LDADD = ../../support/nfs/libnfs.a 
+--- nfs-utils-1.2.5.orig/utils/gssd/Makefile.in	2011-09-24 14:13:16.000000000 +0200
++++ nfs-utils-1.2.5/utils/gssd/Makefile.in	2012-02-27 17:39:34.000000000 +0100
+@@ -355,7 +355,7 @@ gssd_LDADD = ../../support/nfs/libnfs.a 
  		$(RPCSECGSS_LIBS) $(GSSGLUE_LIBS) $(KRBLIBS)
  
  gssd_LDFLAGS = $(KRBLDFLAGS)
@@ -9,7 +9,7 @@
  	      $(RPCSECGSS_CFLAGS) $(GSSGLUE_CFLAGS) $(KRBCFLAGS)
  
  svcgssd_SOURCES = \
-@@ -369,11 +369,11 @@ svcgssd_LDADD = \
+@@ -375,11 +375,11 @@ svcgssd_LDADD = \
  	$(KRBLIBS)
  
  svcgssd_LDFLAGS = $(KRBLDFLAGS)
