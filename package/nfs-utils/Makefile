@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.2.4
+PKG_VERSION:=		1.2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		938dc0574f3eb9891a8ed4746f806277
+PKG_MD5SUM:=		8395ac770720b83c5c469f88306d7765
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-nfsd keyutils
