@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		file
-PKG_VERSION:=		5.04
+PKG_VERSION:=		5.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		accade81ff1cc774904b47c72c8aeea0
+PKG_MD5SUM:=		16a407bd66d6c7a832f3a5c0d609c27b
 PKG_DESCR:=		a file type guesser
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libmagic

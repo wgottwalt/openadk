@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.4
+PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		efa6964c44fa7f01481a1f8365c1f6cb
+PKG_MD5SUM:=		f1a8cbbb4d52ace87df0f6a1097e7c8a
 PKG_DESCR:=		library for interfacing MPD
 PKG_SECTION:=		libs
 PKG_URL:=		http://mpd.wikia.com/wiki/ClientLib:libmpdclient

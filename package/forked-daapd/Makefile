@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		forked-daapd
-PKG_VERSION:=		0.18
+PKG_VERSION:=		0.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b45aab5b60382ec3ada7e71cb1356b1d
+PKG_MD5SUM:=		53e6f1d6683e3275e7c7698ec923a97e
 PKG_DESCR:=		DAAPD server
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libunistring zlib libconfuse sqlite libffmpeg libgcrypt

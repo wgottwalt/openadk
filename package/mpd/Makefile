@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.16.3
+PKG_VERSION:=		0.16.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ec5063ebaf8589a4cdfea8f66ffbeea
+PKG_MD5SUM:=		cbe09571fe1d0b3e83ac38d5b7629b16
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
@@ -80,7 +80,7 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),y)
 PKG_FDEPENDS+=		libffmpeg
 endif
 PKGFD_WITH_SHOUT:=	enable Shoutcast output support
-PKGFS_WITH_SHOUT:=	libshout liblame libvorbisenc
+PKGFS_WITH_SHOUT:=	libshout libmp3lame libvorbisenc
 PKGFB_WITH_SHOUT:=	lame libvorbis libshout
 ifeq ($(ADK_PACKAGE_MPD_WITH_SHOUT),y)
 PKG_FDEPENDS+=		libshout liblame libvorbisenc
