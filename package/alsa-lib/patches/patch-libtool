@@ -1,0 +1,337 @@
+--- alsa-lib-1.0.25.orig/libtool	2012-01-25 10:29:43.000000000 +0100
++++ alsa-lib-1.0.25/libtool	2012-03-02 17:35:55.000000000 +0100
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /bin/bash
+ 
+ # libtoolT - Provide generalized library-building support services.
+ # Generated automatically by  (GNU alsa-lib 1.0.25)
+@@ -30,10 +30,10 @@
+ # the same distribution terms that you use for the rest of that program.
+ 
+ # A sed program that does not truncate output.
+-SED="/usr/bin/sed"
++SED="/Volumes/adk/openadk/scripts/sed"
+ 
+ # Sed that helps us avoid accidentally triggering echo(1) options like -n.
+-Xsed="/usr/bin/sed -e 1s/^X//"
++Xsed="/Volumes/adk/openadk/scripts/sed -e 1s/^X//"
+ 
+ # The HP-UX ksh and POSIX shell print the target directory to stdout
+ # if CDPATH is set.
+@@ -44,16 +44,16 @@ available_tags=" CXX"
+ 
+ # ### BEGIN LIBTOOL CONFIG
+ 
+-# Libtool was configured on host alsa0:
++# Libtool was configured on host neon.foo.bar:
+ 
+ # Shell to use when invoking shell scripts.
+-SHELL="/bin/sh"
++SHELL="/bin/bash"
+ 
+ # Whether or not to build shared libraries.
+ build_libtool_libs=yes
+ 
+ # Whether or not to build static libraries.
+-build_old_libs=no
++build_old_libs=yes
+ 
+ # Whether or not to add -lc for building shared libraries.
+ build_libtool_need_lc=no
+@@ -65,30 +65,30 @@ allow_libtool_libs_with_static_runtimes=
+ fast_install=yes
+ 
+ # The host system.
+-host_alias=
+-host=x86_64-suse-linux-gnu
++host_alias=i586-openadk-linux
++host=i586-openadk-linux-gnu
+ host_os=linux-gnu
+ 
+ # The build system.
+-build_alias=
+-build=x86_64-suse-linux-gnu
+-build_os=linux-gnu
++build_alias=i686-apple-darwin10
++build=i686-apple-darwin10
++build_os=darwin10
+ 
+ # An echo program that does not interpret backslashes.
+ echo="echo"
+ 
+ # The archiver.
+-AR="ar"
++AR="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ar"
+ AR_FLAGS="cru"
+ 
+ # A C compiler.
+-LTCC="gcc"
++LTCC="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-gcc"
+ 
+ # LTCC compiler flags.
+-LTCFLAGS="-O2 -fomit-frame-pointer -Wall -pipe -D_GNU_SOURCE"
++LTCFLAGS="-march=geode -fwrapv -fno-ident -fhonour-copts -fomit-frame-pointer -Os -pipe -D_GNU_SOURCE"
+ 
+ # A language-specific compiler.
+-CC="gcc"
++CC="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-gcc"
+ 
+ # Is the compiler the GNU C compiler?
+ with_gcc=yes
+@@ -97,16 +97,16 @@ with_gcc=yes
+ EGREP="/usr/bin/grep -E"
+ 
+ # The linker used to build libraries.
+-LD="/usr/x86_64-suse-linux/bin/ld -m elf_x86_64"
++LD="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ld"
+ 
+ # Whether we need hard or soft links.
+ LN_S="ln -s"
+ 
+ # A BSD-compatible nm program.
+-NM="/usr/bin/nm -B"
++NM="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-nm"
+ 
+ # A symbol stripping program
+-STRIP="strip"
++STRIP="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip"
+ 
+ # Used to examine libraries when file_magic_cmd begins "file"
+ MAGIC_CMD=file
+@@ -118,7 +118,7 @@ DLLTOOL="dlltool"
+ OBJDUMP="objdump"
+ 
+ # Used on cygwin: assembler.
+-AS="as"
++AS="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-as"
+ 
+ # The name of the directory that contains temporary libtool files.
+ objdir=.libs
+@@ -147,7 +147,7 @@ pic_flag=" -fPIC -DPIC"
+ pic_mode=default
+ 
+ # What is the maximum length of a command?
+-max_cmd_len=32768
++max_cmd_len=196608
+ 
+ # Does compiler simultaneously support -c and -o options?
+ compiler_c_o="yes"
+@@ -165,10 +165,10 @@ need_version=no
+ dlopen_support=yes
+ 
+ # Whether dlopen of programs is supported.
+-dlopen_self=yes
++dlopen_self=unknown
+ 
+ # Whether dlopen of statically linked programs is supported.
+-dlopen_self_static=no
++dlopen_self_static=unknown
+ 
+ # Compiler flag to prevent dynamic linking.
+ link_static_flag="-static"
+@@ -199,7 +199,7 @@ library_names_spec="\${libname}\${releas
+ soname_spec="\${libname}\${release}\${shared_ext}\$major"
+ 
+ # Commands used to build and install an old-style archive.
+-RANLIB="ranlib"
++RANLIB="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ranlib"
+ old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$RANLIB \$oldlib"
+ old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
+ old_postuninstall_cmds=""
+@@ -224,8 +224,8 @@ module_cmds=""
+ module_expsym_cmds=""
+ 
+ # Commands to strip libraries.
+-old_striplib="strip --strip-debug"
+-striplib="strip --strip-unneeded"
++old_striplib="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip --strip-debug"
++striplib="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip --strip-unneeded"
+ 
+ # Dependencies to place before the objects being linked to create a
+ # shared library.
+@@ -325,10 +325,10 @@ variables_saved_for_relink="PATH LD_LIBR
+ link_all_deplibs=unknown
+ 
+ # Compile-time system search path for libraries
+-sys_lib_search_path_spec=" /usr/lib64/gcc/x86_64-suse-linux/4.1.2/ /usr/lib/gcc/x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/../lib64/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../lib64/ /lib/x86_64-suse-linux/4.1.2/ /lib/../lib64/ /usr/lib/x86_64-suse-linux/4.1.2/ /usr/lib/../lib64/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../ /lib/ /usr/lib/"
++sys_lib_search_path_spec=" /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/../../../../i586-openadk-linux-gnu/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/../../../../i586-openadk-linux-gnu/lib/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/lib/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/"
+ 
+ # Run-time system search path for libraries
+-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/X11R6/lib64/Xaw3d /usr/X11R6/lib64 /usr/lib64/Xaw3d /usr/X11R6/lib/Xaw3d /usr/X11R6/lib /usr/lib/Xaw3d /usr/x86_64-suse-linux/lib /usr/local/lib /opt/kde3/lib /opt/gnome/lib /lib64 /lib /usr/lib64 /usr/lib /usr/local/lib64 /opt/kde3/lib64 /opt/gnome/lib64 "
++sys_lib_dlsearch_path_spec="/lib /usr/lib"
+ 
+ # Fix the shell variable $srcfile for the compiler.
+ fix_srcfile_path=""
+@@ -1975,7 +1975,7 @@ EOF
+       # -pg pass through profiling flag for GCC
+       # @file GCC response files
+       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*|-pg| \
+-      -t[45]*|-txscale*|@*)
++      -t[45]*|-txscale*|@*|-fstack-protector*|-flto*)
+ 
+ 	# Unknown arguments in both finalize_command and compile_command need
+ 	# to be aesthetically quoted because they are evaled later.
+@@ -7215,16 +7215,16 @@ disable_libs=static
+ # End:
+ # ### BEGIN LIBTOOL TAG CONFIG: CXX
+ 
+-# Libtool was configured on host alsa0:
++# Libtool was configured on host neon.foo.bar:
+ 
+ # Shell to use when invoking shell scripts.
+-SHELL="/bin/sh"
++SHELL="/bin/bash"
+ 
+ # Whether or not to build shared libraries.
+ build_libtool_libs=yes
+ 
+ # Whether or not to build static libraries.
+-build_old_libs=no
++build_old_libs=yes
+ 
+ # Whether or not to add -lc for building shared libraries.
+ build_libtool_need_lc=no
+@@ -7236,30 +7236,30 @@ allow_libtool_libs_with_static_runtimes=
+ fast_install=yes
+ 
+ # The host system.
+-host_alias=
+-host=x86_64-suse-linux-gnu
++host_alias=i586-openadk-linux
++host=i586-openadk-linux-gnu
+ host_os=linux-gnu
+ 
+ # The build system.
+-build_alias=
+-build=x86_64-suse-linux-gnu
+-build_os=linux-gnu
++build_alias=i686-apple-darwin10
++build=i686-apple-darwin10
++build_os=darwin10
+ 
+ # An echo program that does not interpret backslashes.
+ echo="echo"
+ 
+ # The archiver.
+-AR="ar"
++AR="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ar"
+ AR_FLAGS="cru"
+ 
+ # A C compiler.
+-LTCC="gcc"
++LTCC="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-gcc"
+ 
+ # LTCC compiler flags.
+-LTCFLAGS="-O2 -fomit-frame-pointer -Wall -pipe -D_GNU_SOURCE"
++LTCFLAGS="-march=geode -fwrapv -fno-ident -fhonour-copts -fomit-frame-pointer -Os -pipe -D_GNU_SOURCE"
+ 
+ # A language-specific compiler.
+-CC="g++"
++CC="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-g++"
+ 
+ # Is the compiler the GNU C compiler?
+ with_gcc=yes
+@@ -7268,16 +7268,16 @@ with_gcc=yes
+ EGREP="/usr/bin/grep -E"
+ 
+ # The linker used to build libraries.
+-LD="/usr/x86_64-suse-linux/bin/ld -m elf_x86_64"
++LD="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ld"
+ 
+ # Whether we need hard or soft links.
+ LN_S="ln -s"
+ 
+ # A BSD-compatible nm program.
+-NM="/usr/bin/nm -B"
++NM="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-nm"
+ 
+ # A symbol stripping program
+-STRIP="strip"
++STRIP="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip"
+ 
+ # Used to examine libraries when file_magic_cmd begins "file"
+ MAGIC_CMD=file
+@@ -7289,7 +7289,7 @@ DLLTOOL="dlltool"
+ OBJDUMP="objdump"
+ 
+ # Used on cygwin: assembler.
+-AS="as"
++AS="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-as"
+ 
+ # The name of the directory that contains temporary libtool files.
+ objdir=.libs
+@@ -7318,7 +7318,7 @@ pic_flag=" -fPIC -DPIC"
+ pic_mode=default
+ 
+ # What is the maximum length of a command?
+-max_cmd_len=32768
++max_cmd_len=196608
+ 
+ # Does compiler simultaneously support -c and -o options?
+ compiler_c_o="yes"
+@@ -7336,10 +7336,10 @@ need_version=no
+ dlopen_support=yes
+ 
+ # Whether dlopen of programs is supported.
+-dlopen_self=yes
++dlopen_self=unknown
+ 
+ # Whether dlopen of statically linked programs is supported.
+-dlopen_self_static=no
++dlopen_self_static=unknown
+ 
+ # Compiler flag to prevent dynamic linking.
+ link_static_flag="-static"
+@@ -7370,7 +7370,7 @@ library_names_spec="\${libname}\${releas
+ soname_spec="\${libname}\${release}\${shared_ext}\$major"
+ 
+ # Commands used to build and install an old-style archive.
+-RANLIB="ranlib"
++RANLIB="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-ranlib"
+ old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs\$old_deplibs~\$RANLIB \$oldlib"
+ old_postinstall_cmds="chmod 644 \$oldlib~\$RANLIB \$oldlib"
+ old_postuninstall_cmds=""
+@@ -7392,16 +7392,16 @@ module_cmds=""
+ module_expsym_cmds=""
+ 
+ # Commands to strip libraries.
+-old_striplib="strip --strip-debug"
+-striplib="strip --strip-unneeded"
++old_striplib="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip --strip-debug"
++striplib="/Volumes/adk/openadk/host_i586_eglibc/bin/i586-openadk-linux-gnu-strip --strip-unneeded"
+ 
+ # Dependencies to place before the objects being linked to create a
+ # shared library.
+-predep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/4.1.2/crtbeginS.o"
++predep_objects="/Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/crti.o /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/crtbeginS.o"
+ 
+ # Dependencies to place after the objects being linked to create a
+ # shared library.
+-postdep_objects="/usr/lib64/gcc/x86_64-suse-linux/4.1.2/crtendS.o /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../lib64/crtn.o"
++postdep_objects="/Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/crtendS.o /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/crtn.o"
+ 
+ # Dependencies to place before the objects being linked to create a
+ # shared library.
+@@ -7413,7 +7413,7 @@ postdeps="-lstdc++ -lm -lgcc_s -lc -lgcc
+ 
+ # The library search path used internally by the compiler when linking
+ # a shared library.
+-compiler_lib_search_path="-L/usr/lib64/gcc/x86_64-suse-linux/4.1.2 -L/usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../.."
++compiler_lib_search_path="-L/Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3 -L/Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/../../../../i586-openadk-linux-gnu/lib -L/Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/lib -L/Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib"
+ 
+ # Method to check whether dependent libraries are shared objects.
+ deplibs_check_method="pass_all"
+@@ -7493,10 +7493,10 @@ variables_saved_for_relink="PATH LD_LIBR
+ link_all_deplibs=unknown
+ 
+ # Compile-time system search path for libraries
+-sys_lib_search_path_spec=" /usr/lib64/gcc/x86_64-suse-linux/4.1.2/ /usr/lib/gcc/x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/../lib64/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../x86_64-suse-linux/4.1.2/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../lib64/ /lib/x86_64-suse-linux/4.1.2/ /lib/../lib64/ /usr/lib/x86_64-suse-linux/4.1.2/ /usr/lib/../lib64/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../../x86_64-suse-linux/lib/ /usr/lib64/gcc/x86_64-suse-linux/4.1.2/../../../ /lib/ /usr/lib/"
++sys_lib_search_path_spec=" /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/../../../../i586-openadk-linux-gnu/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/lib/gcc/i586-openadk-linux-gnu/4.5.3/../../../../i586-openadk-linux-gnu/lib/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/lib/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/i586-openadk-linux-gnu/4.5.3/ /Volumes/adk/openadk/host_i586_eglibc/../target_i586_eglibc/usr/lib/"
+ 
+ # Run-time system search path for libraries
+-sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/X11R6/lib64/Xaw3d /usr/X11R6/lib64 /usr/lib64/Xaw3d /usr/X11R6/lib/Xaw3d /usr/X11R6/lib /usr/lib/Xaw3d /usr/x86_64-suse-linux/lib /usr/local/lib /opt/kde3/lib /opt/gnome/lib /lib64 /lib /usr/lib64 /usr/lib /usr/local/lib64 /opt/kde3/lib64 /opt/gnome/lib64 "
++sys_lib_dlsearch_path_spec="/lib /usr/lib"
+ 
+ # Fix the shell variable $srcfile for the compiler.
+ fix_srcfile_path=""

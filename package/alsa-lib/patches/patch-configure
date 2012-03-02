@@ -1,0 +1,17 @@
+--- alsa-lib-1.0.25.orig/configure	2012-01-25 10:29:38.000000000 +0100
++++ alsa-lib-1.0.25/configure	2012-03-02 17:37:04.000000000 +0100
+@@ -19111,14 +19111,6 @@ $as_echo "major $SND_LIB_MAJOR minor $SN
+ 
+ test "x$prefix" = xNONE && prefix=$ac_default_prefix
+ 
+-if test "$enable_static" = "$enable_shared" -a "$enable_static" = "yes"; then
+-cat <<EOF
+-  Please, do not try to compile static and shared libraries together.
+-  See INSTALL file for more details (do not use --enable-shared=yes with
+-  --enable-static=yes).
+-EOF
+-  exit 1
+-fi
+ 
+ 
+ # Check whether --with-configdir was given.
