@@ -19,7 +19,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,CDRTOOLS,cdrtools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-MAKE_ENV+=		ARCH=$(CPU_ARCH) OSNAME=linux CCOM=gcc "CC_COM=$(TARGET_CC)"
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 cdrtools-install:
 	$(INSTALL_DIR) $(IDIR_CDRTOOLS)/usr/bin
@@ -30,8 +30,6 @@ cdrtools-install:
 	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/mkisofs \
 		$(IDIR_CDRTOOLS)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/cdda2wav \
-		$(IDIR_CDRTOOLS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/rscsi \
 		$(IDIR_CDRTOOLS)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
