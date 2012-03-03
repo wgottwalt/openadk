@@ -1,0 +1,47 @@
+--- cdrtools-3.01.orig/autoconf/configure	2011-11-22 22:45:22.000000000 +0100
++++ cdrtools-3.01/autoconf/configure	2012-03-03 16:50:19.000000000 +0100
+@@ -1140,7 +1140,7 @@ else
+ fi
+ 
+   if test -z "$CC"; then
+-    case "`uname -s`" in
++    case "Linux" in
+     *win32* | *WIN32*)
+       # Extract the first word of "cl", so it can be a program name with args.
+ set dummy cl; ac_word=$2
+@@ -1657,7 +1657,7 @@ hp_cc=cc
+ hp_cc_ansi_opt=''
+ ac_cv_hp_cc_ansi_opt=no
+ if test "$GCC" != yes; then
+-	os_name=`(uname -s) 2> /dev/null`
++	os_name=Linux
+ 	if test ."$os_name" = .HP-UX ; then
+ 		ac_err=`< /dev/null eval $hp_cc -Ae -c 2>&1 | grep 'Bundled.*option is available only'`
+ 		if test -n "$ac_err"; then
+@@ -1684,7 +1684,7 @@ hp_cc=cc
+ hp_cc_opt_opt=''
+ ac_cv_hp_cc_opt_opt=no
+ if test "$GCC" != yes; then
+-	os_name=`(uname -s) 2> /dev/null`
++	os_name=Linux
+ 	if test ."$os_name" = .HP-UX ; then
+ 		ac_err=`< /dev/null eval $hp_cc -O -c 2>&1 | grep 'Bundled.*option is available only'`
+ 		if test -n "$ac_err"; then
+@@ -1711,7 +1711,7 @@ hp_cc=cc
+ hp_cc_gprof_opt=''
+ ac_cv_hp_cc_gprof_opt=no
+ if test "$GCC" != yes; then
+-	os_name=`(uname -s) 2> /dev/null`
++	os_name=Linux
+ 	if test ."$os_name" = .HP-UX ; then
+ 		ac_err=`< /dev/null eval $hp_cc -O -c 2>&1 | grep 'Bundled.*option is available only'`
+ 		if test -n "$ac_err"; then
+@@ -21121,7 +21121,7 @@ fi
+ done
+ 
+ 
+-UNAME=`uname || true`
++UNAME=Linux
+ 
+ if test ."$UNAME" = .Linux; then
+ 

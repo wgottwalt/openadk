@@ -1,0 +1,11 @@
+--- cdrtools-3.01.orig/conf/oarch.sh	2009-10-31 21:03:00.000000000 +0100
++++ cdrtools-3.01/conf/oarch.sh	2012-03-03 16:41:00.000000000 +0100
+@@ -92,7 +92,7 @@ if [ ."${XM_ARCH}" = . ]; then
+ 	M_ARCH="${K_ARCH}"
+ fi
+ 
+-OSNAME=`uname -s | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ, /\\()"' 'abcdefghijklmnopqrstuvwxyz,//////' | tr ',/' ',\-'`
++OSNAME=linux
+ OSHOST=`uname -n | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ, /\\()"' 'abcdefghijklmnopqrstuvwxyz,//////' | tr ',/' ',\-'`
+ OSREL=`uname -r | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ, /\\()"' 'abcdefghijklmnopqrstuvwxyz,//////' | tr ',/' ',\-'`
+ OSVERS=`uname -v | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ, /\\()"' 'abcdefghijklmnopqrstuvwxyz,//////' | tr ',/' ',\-'`
