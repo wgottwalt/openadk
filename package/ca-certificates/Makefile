@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		ca-certificates
 PKG_VERSION:=		20090814
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		307052c985bec7f9a00eb84293eef779
 PKG_DESCR:=		Collection of common CA certificates
 PKG_SECTION:=		net/security

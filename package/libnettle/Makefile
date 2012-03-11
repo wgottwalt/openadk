@@ -21,7 +21,9 @@ $(eval $(call PKG_template,LIBNETTLE,libnettle,$(PKG_VERSION)-${PKG_RELEASE},${P
 
 libnettle-install:
 	$(INSTALL_DIR) $(IDIR_LIBNETTLE)/usr/lib
-	$(INSTALL_BIN) $(WRKINST)/usr/lib/libnettle*.so* \
+	$(CP) $(WRKINST)/usr/lib/libnettle*.so* \
+		$(IDIR_LIBNETTLE)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libhogweed.so* \
 		$(IDIR_LIBNETTLE)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

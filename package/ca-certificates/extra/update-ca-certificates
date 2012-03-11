@@ -77,4 +77,6 @@ cat ${DESTDIR}$CRTCONF | while read crt; do
 	ln -s ${CRTDIR}/$crt ${DESTDIR}${LNKDIR}/${hsh}.${pfx}${idx}
 done
 
+cat /etc/ssl/certs/*.0 > /etc/ssl/cert.pem
+
 exit 0
