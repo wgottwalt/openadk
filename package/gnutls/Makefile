@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		2.12.11
+PKG_VERSION:=		3.0.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f08234b64a8025d6d5aa1307868b02ed
+PKG_MD5SUM:=		37bdac12b5c039c7a8738b5d85eda968
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libgcrypt libtasn1 zlib
-PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 opencdk zlib ncurses
+PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle
+PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 zlib ncurses libnettle
 PKG_URL:=		http://www.gnu.org/software/gnutls/
 PKG_SITES:=		${MASTER_SITE_GNU:=gnutls/}
 
@@ -22,7 +22,7 @@ PKGSC_LIBGNUTLS:=	libs
 PKGSC_LIBGNUTLS_EXTRA:=	libs
 PKGSC_LIBGNUTLS_OPENSSL:=	libs
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 
@@ -32,21 +32,19 @@ $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_OPENSSL}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--without-libopencdk-prefix \
-			--disable-camellia \
+CONFIGURE_ARGS+=	--disable-camellia \
 			--with-libgcrypt \
 			--with-libgcrypt-prefix=${STAGING_TARGET_DIR}/usr \
 			--disable-rpath \
 			--without-libz-prefix \
-			--without-p11-kit \
-			--without-nettle-prefix
+			--without-p11-kit
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgnutls.so* ${IDIR_LIBGNUTLS}/usr/lib
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS_EXTRA}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgnutls-extra.so* \
+	${CP} ${WRKINST}/usr/lib/libgnutlsxx.so* \
 		${IDIR_LIBGNUTLS_EXTRA}/usr/lib
 	${INSTALL_DIR} ${IDIR_LIBGNUTLS_OPENSSL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgnutls-openssl.so* \
