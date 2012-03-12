@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		450be8c4886d46c09f49f568ad6fa013
 PKG_DESCR:=		Nettle Library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.lysator.liu.se/~nisse/
 PKG_SITES:=		http://www.lysator.liu.se/~nisse/archive/
 
