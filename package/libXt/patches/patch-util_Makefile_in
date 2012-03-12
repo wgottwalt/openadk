@@ -1,5 +1,5 @@
 --- libXt-1.0.9.orig/util/Makefile.in	2010-10-28 21:04:12.000000000 +0200
-+++ libXt-1.0.9/util/Makefile.in	2011-11-05 16:05:13.000000000 +0100
++++ libXt-1.0.9/util/Makefile.in	2012-03-12 15:28:44.703027309 +0100
 @@ -108,7 +108,7 @@ CFLAGS = @CFLAGS_FOR_BUILD@
  CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
  CHANGELOG_CMD = @CHANGELOG_CMD@
@@ -9,3 +9,12 @@
  CWARNFLAGS = @CWARNFLAGS@
  CYGPATH_W = @CYGPATH_W@
  DEFS = @DEFS@
+@@ -231,7 +231,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ EXTRA_DIST = Shell.ht StrDefs.ct StrDefs.ht string.list $(appman_PRE)
+-makestrs_CFLAGS = $(XT_CFLAGS)
++makestrs_CFLAGS = 
+ makestrs_SOURCES = makestrs.c
+ 
+ # Man page
