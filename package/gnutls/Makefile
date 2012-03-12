@@ -32,12 +32,10 @@ $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_OPENSSL}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--disable-camellia \
-			--with-libgcrypt \
-			--with-libgcrypt-prefix=${STAGING_TARGET_DIR}/usr \
-			--disable-rpath \
+CONFIGURE_ARGS+=	--disable-rpath \
 			--without-libz-prefix \
-			--without-p11-kit
+			--without-p11-kit \
+			--with-libnettle-prefix="$(STAGING_DIR)/usr"
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
 
 post-install:
