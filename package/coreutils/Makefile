@@ -4,27 +4,38 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
-PKG_VERSION:=		8.5
+PKG_VERSION:=		8.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c1ffe586d001e87d66cd80c4536ee823
+PKG_MD5SUM:=		094909fafa86110140b32e4948941545
 PKG_DESCR:=		basic file, shell and text manipulation utilities
 PKG_SECTION:=		base
+PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 
-PKG_SUBPKGS:=		TSORT SHA256SUM
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
+
+PKG_SUBPKGS:=		TSORT SHA256SUM TOUCH
 PKGSD_TSORT:=		topological sort utility
 PKGSC_TSORT:=		misc
 PKGSD_SHA256SUM:=	SHA1 256 bit checksum utility
 PKGSC_SHA256SUM:=	misc
+PKGSD_TOUCH:=		touch utility
+PKGSC_TOUCH:=		misc
 
 include $(TOPDIR)/mk/package.mk
 
 #$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TSORT},${PKGSC_TSORT}))
+$(eval $(call PKG_template,TOUCH,touch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TOUCH},${PKGSC_TOUCH}))
 $(eval $(call PKG_template,SHA256SUM,sha256sum,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SHA256SUM},${PKGSC_SHA256SUM}))
 
 CONFIGURE_ARGS+=	--disable-rpath
+
+touch-install:
+	$(INSTALL_DIR) $(IDIR_TOUCH)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/touch \
+		$(IDIR_TOUCH)/usr/bin
 
 tsort-install:
 	$(INSTALL_DIR) $(IDIR_TSORT)/usr/bin
