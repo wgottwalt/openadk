@@ -23,6 +23,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,ATFTP,atftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ATFTPD,atftpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ATFTPD},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--disable-libpcre
 MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS} -Wall -D_REENTRANT -fno-inline"
 
 atftp-install:
