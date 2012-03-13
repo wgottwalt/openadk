@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-32749
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		aadc5d8cca503c8b18b3ed00b3a52cf5
+PKG_VERSION:=		1.0-34809
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d128a711c453b828faf623b981c39afe
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -144,7 +144,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_DIRECTFB}
 
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
-TARGET_LDFLAGS+=	-lxvidcore
+TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
