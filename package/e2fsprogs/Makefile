@@ -98,16 +98,6 @@ resize2fs-install:
 	${INSTALL_DIR} ${IDIR_RESIZE2FS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/resize2fs ${IDIR_RESIZE2FS}/usr/sbin
 
-libblkid-install:
-	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libblkid.so* \
-		${IDIR_LIBBLKID}/usr/lib
-
-libblkid-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBBLKID_DEV}/usr/include/blkid
-	${CP} ${WRKINST}/usr/include/blkid/*.h \
-		${IDIR_LIBBLKID_DEV}/usr/include/blkid
-
 libcom-err-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcom_err.so* \

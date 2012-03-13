@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
 PKG_VERSION:=		3.1.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b1db37749e2b4149a0dd178abff956be
 PKG_DESCR:=		Utilities for XFS filesystems
 PKG_SECTION:=		fs
-PKG_BUILDDEP:=		e2fsprogs
-PKG_DEPENDS:=		libuuid libpthread
+PKG_BUILDDEP:=		e2fsprogs util-linux
+PKG_DEPENDS:=		libuuid libpthread libblkid
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
