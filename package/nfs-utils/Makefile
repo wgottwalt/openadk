@@ -48,6 +48,7 @@ CONFIGURE_ARGS+=	--enable-nfsv4 \
 CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
 CONFIGURE_ARGS+=	--disable-nfsv4 \
+			--disable-nfsv41 \
 			--disable-gss
 endif
 
