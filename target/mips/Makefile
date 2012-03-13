@@ -119,6 +119,12 @@ ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -net user,hostfwd=tcp::2222-:22 -net nic,model=pcnet -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo "Startup the netbook and type del to enter PMON:"
+	@echo "PMON> load /dev/fs/ext2@wd0a/boot/kernel"
+	@echo "PMON> g root=/dev/sda1"
+	@echo "The root parameter have to be changed."
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
