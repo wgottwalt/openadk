@@ -18,6 +18,8 @@ PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
+TARGET_LDFLAGS+=	-lpthread
+
 $(eval $(call PKG_template,RTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 rtorrent-install:
