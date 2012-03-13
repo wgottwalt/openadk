@@ -27,10 +27,10 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 PKG_CHOICES_CURL:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITHOUT_SSL:=	use no SSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
 PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
-PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates
+PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 
 include ${TOPDIR}/mk/package.mk
