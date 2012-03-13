@@ -61,7 +61,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-accessibility \
 			--disable-smil \
 			--disable-dbus \
-			--enable-debug \
+			--disable-debug \
 			--disable-logging \
 			--disable-strip \
 			--disable-install-strip \
