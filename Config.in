@@ -117,8 +117,8 @@ config ADK_KERNEL_VERSION_3_1_10
 	prompt "3.1.10"
 	boolean
 
-config ADK_KERNEL_VERSION_3_2_7
-	prompt "3.2.7"
+config ADK_KERNEL_VERSION_3_2_10
+	prompt "3.2.10"
 	boolean
 
 endchoice
