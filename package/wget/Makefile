@@ -32,7 +32,8 @@ ifeq (${ADK_PACKAGE_WGET_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl=openssl
 endif
 ifeq (${ADK_PACKAGE_WGET_WITH_GNUTLS},y)
-CONFIGURE_ARGS+=	--with-ssl=gnutls
+CONFIGURE_ARGS+=	--with-ssl=gnutls \
+			--with-libgnutls-prefix="$(STAGING_DIR)/usr"
 endif
 
 post-install:
