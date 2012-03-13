@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		popt
 PKG_VERSION:=		1.16
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		3743beefa3dd6247a73f8f7a32c14c33
 PKG_DESCR:=		a command line option parsing library
 PKG_SECTION:=		libs
@@ -26,7 +26,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPOPT_DEV,libpopt-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBPOPT_DEV},${PKG_OPTS}))
 
-TARGET_LDFAGS+=		-liconv
+TARGET_LDFLAGS+=	-liconv
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBPOPT}/usr/lib
