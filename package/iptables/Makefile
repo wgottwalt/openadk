@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.12.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		212112389c7f10c72efb31a4ed193a4c
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		firewall
@@ -33,6 +33,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,IPTABLES_DEV,iptables-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKGSC_IPTABLES_DEV}))
 
+TARGET_LDFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--enable-devel
 
 iptables-install:
