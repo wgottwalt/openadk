@@ -406,7 +406,7 @@ config ADK_KPACKAGE_KMOD_B43LEGACY
 	  Driver for Broadcom B43xx wireless chips.
 
 config ADK_KPACKAGE_KMOD_HOSTAP
-	prompt "kmod-hostap................... HostAP driver"
+	prompt "kmod-hostap.................. HostAP driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_MAC80211
 	default n

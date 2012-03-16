@@ -1223,9 +1223,15 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 # USB
 #
 
+USBMODULES:=
+ifeq ($(ADK_KERNEL_VERSION_3_2_10),y)
+USBMODULES+=drivers/usb/usb-common
+endif
+USBMODULES+=drivers/usb/core/usbcore
+
 ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),)
 $(eval $(call KMOD_template,USB,usb,\
-	$(MODULES_DIR)/kernel/drivers/usb/core/usbcore \
+	$(foreach mod, $(USBMODULES),$(MODULES_DIR)/kernel/$(mod)) \
 ,50))
 endif
 
