@@ -1,0 +1,61 @@
+#!/bin/sh
+
+create_bootcfg() {
+	cat << FOO > /mnt/boot/boot.cfg
+default 0
+timeout 2
+showmenu 1
+title OpenADK
+	kernel (wd0,0)/boot/kernel
+	args root=/dev/sda1
+
+title USB
+	kernel (usb0,0)/boot/kernel
+	args root=/dev/sdc1
+FOO
+
+}
+
+disk_install() {
+	mke2fs -q -j /dev/sda1
+	sync
+	sleep 2
+	mount -t ext4 /dev/sda1 /mnt
+	tar xzvf /lemote-yeelong-eglibc-archive+kernel.tar.gz -C /mnt
+	test -x /mnt/usr/bin/sudo && chmod u+s /mnt/usr/bin/sudo
+	test -x /mnt/usr/bin/Xorg && chmod u+s /mnt/usr/bin/Xorg
+	create_bootcfg
+	umount /mnt
+	
+}
+
+. /etc/functions.sh
+echo 0 > /proc/sys/kernel/printk
+
+load_modules /etc/modules
+for f in /etc/modules.d/*; do
+	[[ -e $f ]] && load_modules /etc/modules.d/*
+	break
+done
+
+echo "  ___                      _    ____  _  __ "
+echo " / _ \ _ __   ___ _ __    / \  |  _ \| |/ / "
+echo "| | | | '_ \ / _ \ '_ \  / _ \ | | | | ' /  "
+echo "| |_| | |_) |  __/ | | |/ ___ \| |_| | . \  "
+echo " \___/| .__/ \___|_| |_/_/   \_\____/|_|\_\ "
+echo "      |_|                                   "
+echo ""
+# settle down, after module load
+sleep 2
+echo "Should I install OpenADK to disk (y/n)"
+read answer
+if [ "$answer" = "y" ];then
+	disk_install
+fi
+echo "Should I reboot now (y/n)"
+read answer
+if [ "$answer" = "y" ];then
+	reboot
+else
+	exit
+fi

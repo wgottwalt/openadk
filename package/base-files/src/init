@@ -18,6 +18,7 @@ echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 mdev -s
 cat /etc/.rnd >/dev/urandom 2>&1
+[ -x /installer ] && { /installer; }
 [ -x /kexecinit ] && { /kexecinit; }
 [ -x /cryptinit ] && { /cryptinit; exec switch_root /mnt "/init";}
 [ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
