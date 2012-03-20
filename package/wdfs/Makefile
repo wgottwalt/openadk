@@ -15,6 +15,8 @@ PKG_SITES:=		http://noedler.de/projekte/wdfs/
 
 include ${TOPDIR}/mk/package.mk
 
+TARGET_LDFLAGS+=	-lpthread
+
 $(eval $(call PKG_template,WDFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:

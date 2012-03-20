@@ -1,6 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+KERNEL_BASE:=$(word 1,$(subst ., ,$(ADK_KERNEL_VERSION)))
+KERNEL_MAJ:=$(word 2,$(subst ., ,$(ADK_KERNEL_VERSION)))
+KERNEL_MIN:=$(word 3,$(subst ., ,$(ADK_KERNEL_VERSION)))
+
 #
 # Virtualization
 #
@@ -162,14 +166,30 @@ $(eval $(call KMOD_template,IPV6_SIT,ipv6-sit,\
 	$(MODULES_DIR)/kernel/net/ipv6/sit \
 ,25))
 
+ifeq ($(KERNEL_BASE),3)
+SLHC:=drivers/net/slip/slhc
+PPP:=drivers/net/ppp/ppp_generic
+PPP_ASYNC:=drivers/net/ppp/ppp_async
+MPPE:=drivers/net/ppp/ppp_mppe
+PPPOE:=drivers/net/ppp/pppox
+PPPOX:=drivers/net/ppp/pppoe
+else
+SLHC:=drivers/net/slhc
+PPP:=drivers/net/ppp_generic
+PPP_ASYNC:=drivers/net/ppp_async
+MPPE:=drivers/net/ppp_mppe
+PPPOE:=drivers/net/pppox
+PPPOX:=drivers/net/pppoe
+endif
+
 $(eval $(call KMOD_template,PPP,ppp,\
-	$(MODULES_DIR)/kernel/drivers/net/slhc \
-	$(MODULES_DIR)/kernel/drivers/net/ppp_generic \
-	$(MODULES_DIR)/kernel/drivers/net/ppp_async \
+	$(MODULES_DIR)/kernel/$(SLHC) \
+	$(MODULES_DIR)/kernel/$(PPP) \
+	$(MODULES_DIR)/kernel/$(PPP_ASYNC) \
 ,50))
 
 $(eval $(call KMOD_template,PPP_MPPE,ppp-mppe,\
-	$(MODULES_DIR)/kernel/drivers/net/ppp_mppe \
+	$(MODULES_DIR)/kernel/$(MPPE) \
 ,55))
 
 $(eval $(call KMOD_template,PPPOATM,pppoatm,\
@@ -177,8 +197,8 @@ $(eval $(call KMOD_template,PPPOATM,pppoatm,\
 ,60))
 
 $(eval $(call KMOD_template,PPPOE,pppoe,\
-	$(MODULES_DIR)/kernel/drivers/net/pppox \
-	$(MODULES_DIR)/kernel/drivers/net/pppoe \
+	$(MODULES_DIR)/kernel/$(PPPOX) \
+	$(MODULES_DIR)/kernel/$(PPPOE) \
 ,60))
 
 $(eval $(call KMOD_template,TUN,tun,\
@@ -891,7 +911,8 @@ $(eval $(call KMOD_template,CRYPTO_DES,crypto-des,\
 ,10))
 
 $(eval $(call KMOD_template,CRYPTO_BLOWFISH,crypto-blowfish,\
-    $(MODULES_DIR)/kernel/crypto/blowfish \
+    $(MODULES_DIR)/kernel/crypto/blowfish_common \
+    $(MODULES_DIR)/kernel/crypto/blowfish_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_TWOFISH,crypto-twofish,\
@@ -904,7 +925,7 @@ $(eval $(call KMOD_template,CRYPTO_TWOFISH_586,crypto-twofish-586,\
 ,12))
 
 $(eval $(call KMOD_template,CRYPTO_SERPENT,crypto-serpent,\
-    $(MODULES_DIR)/kernel/crypto/serpent \
+    $(MODULES_DIR)/kernel/crypto/serpent_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
@@ -1148,14 +1169,14 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55))
 
-#V4L_COMPAT:=drivers/media/video/v4l1-compat
-#ifeq ($(ADK_LINUX_64),y)
-#V4L_COMPAT+=drivers/media/video/v4l2-compat-ioctl32
-#endif
+ifeq ($(ADK_LINUX_64),y)
+V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
+endif
 
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
+	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-core \
 ,65))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
@@ -1224,7 +1245,7 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 #
 
 USBMODULES:=
-ifeq ($(ADK_KERNEL_VERSION_3_2_10),y)
+ifeq ($(KERNEL_BASE),3)
 USBMODULES+=drivers/usb/usb-common
 endif
 USBMODULES+=drivers/usb/core/usbcore
@@ -1562,8 +1583,9 @@ $(eval $(call KMOD_template,ISDN_CAPI,isdn-capi, \
 	$(MODULES_DIR)/kernel/drivers/isdn/capi/capi \
 ,60))
 
+
 $(eval $(call KMOD_template,SLHC,slhc, \
-	$(MODULES_DIR)/kernel/drivers/net/slhc \
+	$(MODULES_DIR)/kernel/$(SLHC) \
 ,65))
 
 $(eval $(call KMOD_template,HISAX,hisax, \

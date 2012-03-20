@@ -42,6 +42,7 @@ ADK_RUNTIME_CONSOLE_SERIAL_SPEED:=	$(strip $(subst ",, $(ADK_RUNTIME_CONSOLE_SER
 ADK_HOST:=		$(strip $(subst ",, $(ADK_HOST)))
 ADK_VENDOR:=		$(strip $(subst ",, $(ADK_VENDOR)))
 ADK_TOOLS_ADDPATTERN_ARGS:=	$(strip $(subst ",, $(ADK_TOOLS_ADDPATTERN_ARGS)))
+ADK_KERNEL_VERSION:=		$(strip $(subst ",, $(ADK_KERNEL_VERSION)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
 ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk)),)

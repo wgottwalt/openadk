@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		traceroute
-PKG_VERSION:=		2.0.16
+PKG_VERSION:=		2.0.18
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3e84c525cdb4184d64aacaf9225e6503
+PKG_MD5SUM:=		b7254149b7f081cce07f4b9e065ba5ef
 PKG_DESCR:=		Utility to trace the route of IP packets
 PKG_SECTION:=		net
 PKG_URL:=		http://traceroute.sourceforge.net/

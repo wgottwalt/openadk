@@ -411,6 +411,7 @@ config ADK_KPACKAGE_KMOD_HOSTAP
 	select ADK_KPACKAGE_KMOD_MAC80211
 	default n
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on ADK_TARGET_WITH_PCMCIA
 	help
 	  HostAP Driver for wireless chips.
 

@@ -80,7 +80,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-elf-hack
 
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
-XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
+XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3"
 
 firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin

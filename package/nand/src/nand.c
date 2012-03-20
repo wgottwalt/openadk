@@ -95,7 +95,7 @@ int nand_info(const char *nand) {
 
 	int fd, ret;
 	mtd_info_t nandinfo;
-	struct nand_oobinfo oobinfo;
+	//struct nand_oobinfo oobinfo;
 	loff_t offset;
 
 	if ((fd = nand_open(nand, O_RDONLY)) < 0) {
@@ -133,6 +133,7 @@ int nand_info(const char *nand) {
 		}
 	}
 	
+	/*
 	if (ioctl(fd, MEMGETOOBSEL, &oobinfo) != 0) {
 		fprintf(stderr, "Unable to get NAND oobinfo\n");
 		return 1;
@@ -141,6 +142,7 @@ int nand_info(const char *nand) {
 	if (oobinfo.useecc == MTD_NANDECC_AUTOPLACE) {
 		fprintf(stdout, "NAND device/driver supports autoplacement of OOB\n");
 	}
+	*/
 
 	return 0;
 }
@@ -263,6 +265,7 @@ int nand_write(const char *img, const char *nand, int quiet) {
 		}
 
 		// autoplace ECC ?
+		/*
 		if (autoplace && (old_oobinfo.useecc != MTD_NANDECC_AUTOPLACE)) {
 
 			if (ioctl (fd, MEMSETOOBSEL, &autoplace_oobinfo) != 0) {
@@ -272,6 +275,7 @@ int nand_write(const char *img, const char *nand, int quiet) {
 			}
 			oobinfochanged = 1;
 		}
+		*/
 	}
 
 	oob.length = meminfo.oobsize;
@@ -462,6 +466,7 @@ closeall:
 	close(ifd);
 
 restoreoob:
+	/*
 	if (oobinfochanged == 1) {
 		if (ioctl (fd, MEMSETOOBSEL, &old_oobinfo) != 0) {
 			perror ("MEMSETOOBSEL");
@@ -471,6 +476,7 @@ restoreoob:
 	}
 
 	close(fd);
+	/*
 
 	if ((ifd != STDIN_FILENO) && (imglen > 0)) {
 		perror ("Data was only partially written due to error\n");

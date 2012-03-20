@@ -15,13 +15,20 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_LOCALES=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
+			ADK_LEAVE_ETC_ALONE=n \
+			ADK_SIMPLE_NETWORK_CONFIG=n \
 			ADK_USE_CCACHE=n \
 			ADK_TOOLCHAIN_GDB=n \
+			ADK_PACKAGE_LIBAU=n \
+			ADK_PACKAGE_AUFS2_UTIL=n \
+			ADK_PACKAGE_KEXECINIT=n \
 			ADK_PACKAGE_CXXTOOLS_DEV=n \
 			ADK_PACKAGE_XORG_SERVER_DEV=n \
 			ADK_PACKAGE_LIBFFMPEG_WITH_VP8=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
+			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
+			ADK_PACKAGE_PACEMAKER_PYTHON_GUI=n \
 			ADK_PACKAGE_OPENJDK=n \
 			ADK_PACKAGE_CLASSPATH=n \
 			ADK_PACKAGE_GPSD=n \
@@ -113,7 +120,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.bkeymaps;\
 			rebuild=1;\
 		fi; \
-		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
+		if [ "$$(grep ^ADK_KERNEL_VERSION_ .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION_ .config.old|md5sum)" ];then \
 			make kernelclean;\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
@@ -139,6 +146,9 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
 world:
+	echo $(KERNEL_BASE)
+	echo $(KERNEL_MAJ)
+	echo $(KERNEL_MIN)
 	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps \
 		$(TOOLS_DIR) $(TOOLS_BUILD_DIR) $(TOOLCHAIN_BUILD_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh

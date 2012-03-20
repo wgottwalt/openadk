@@ -60,13 +60,13 @@ config ADK_KPACKAGE_KMOD_EXT2_FS
 	prompt "kmod-fs-ext2...................... EXT2 filesystem support"
 	tristate
 	default n
-	depends on !ADK_TARGET_ROOTFS_EXT2_BLOCK
 	depends on !ADK_KERNEL_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
 config ADK_KPACKAGE_KMOD_FS_MBCACHE
 	tristate
+	depends on !ADK_KERNEL_EXT4_FS
 	default n
 
 config ADK_KERNEL_EXT3_FS
@@ -76,7 +76,7 @@ config ADK_KERNEL_EXT3_FS
 config ADK_KPACKAGE_KMOD_EXT3_FS
 	prompt "kmod-fs-ext3...................... EXT3 filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_FS_MBCACHE
+	select ADK_KPACKAGE_KMOD_FS_MBCACHE if !ADK_KERNEL_EXT4_FS
 	depends on !ADK_KERNEL_EXT3_FS
 	default n
 	help

@@ -32,7 +32,7 @@ INSTALL_STYLE:=		manual
 
 do-configure:
 	mkdir -p $(WRKBUILD)/BuildTools
-	(cd $(WRKBUILD)/BuildTools; env ac_cv_build_exeext="" ../configure ${CONFIGURE_TRIPLE} --prefix=/usr)
+	(cd $(WRKBUILD)/BuildTools; env ac_cv_build_exeext="" ../configure ${CONFIGURE_TRIPLE} --prefix=/usr --disable-docs)
 
 do-build:
 	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools
