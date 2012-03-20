@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 LINUX_KMOD_SUFFIX=ko
-MODULES_SUBDIR := lib/modules/$(KERNEL_VERSION)
+MODULES_SUBDIR := lib/modules/$(KERNEL_MOD_VERSION)
 LINUX_BUILD_DIR := $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)
 KMOD_BUILD_DIR := $(LINUX_BUILD_DIR)/linux-modules
 MODULES_DIR := $(LINUX_BUILD_DIR)/modules/$(MODULES_SUBDIR)
@@ -55,8 +55,8 @@ $$(PKG_$(1)):
 	    $(KERNEL_VERSION)-$(KERNEL_RELEASE) $(CPU_ARCH)
 	echo "Depends: $$(IDEPENDK_$(1))" >> $$(I_$(1))/CONTROL/control
 ifneq ($(strip $(3)),)
-	mkdir -p $$(I_$(1))/lib/modules/$(KERNEL_VERSION)
-	$(CP) $(foreach mod,$(3),$(mod).$(LINUX_KMOD_SUFFIX)) $$(I_$(1))/lib/modules/$(KERNEL_VERSION)
+	mkdir -p $$(I_$(1))/lib/modules/$(KERNEL_MOD_VERSION)
+	$(CP) $(foreach mod,$(3),$(mod).$(LINUX_KMOD_SUFFIX)) $$(I_$(1))/lib/modules/$(KERNEL_MOD_VERSION)
 ifneq ($(4),)
 	mkdir -p $$(I_$(1))/etc/modules.d
 	for module in $(notdir $(3)); do \
