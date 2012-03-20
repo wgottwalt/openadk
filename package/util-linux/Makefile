@@ -11,6 +11,7 @@ PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		ftp://ftp.infradead.org/pub/util-linux/v2.20/
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
