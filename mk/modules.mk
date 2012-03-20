@@ -171,15 +171,15 @@ SLHC:=drivers/net/slip/slhc
 PPP:=drivers/net/ppp/ppp_generic
 PPP_ASYNC:=drivers/net/ppp/ppp_async
 MPPE:=drivers/net/ppp/ppp_mppe
-PPPOE:=drivers/net/ppp/pppox
-PPPOX:=drivers/net/ppp/pppoe
+PPPOE:=drivers/net/ppp/pppoe
+PPPOX:=drivers/net/ppp/pppox
 else
 SLHC:=drivers/net/slhc
 PPP:=drivers/net/ppp_generic
 PPP_ASYNC:=drivers/net/ppp_async
 MPPE:=drivers/net/ppp_mppe
-PPPOE:=drivers/net/pppox
-PPPOX:=drivers/net/pppoe
+PPPOE:=drivers/net/pppoe
+PPPOX:=drivers/net/pppox
 endif
 
 $(eval $(call KMOD_template,PPP,ppp,\
@@ -456,6 +456,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IRC,nf-conntrack-irc,\
 ,55))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_NETBIOS_NS,nf-conntrack-netbios-ns,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_broadcast \
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_netbios_ns \
 ,55))
 
@@ -601,6 +602,7 @@ $(eval $(call KMOD_template,IP_NF_TARGET_TTL,ip-nf-target-ttl,\
 #
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV6,nf-conntrack-ipv6,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/nf_defrag_ipv6 \
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/nf_conntrack_ipv6 \
 ,50))
 
@@ -1177,6 +1179,7 @@ $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-core \
+	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-vmalloc \
 ,65))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\

@@ -22,10 +22,13 @@ PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
 PKGSB_FFPLAY:=		sdl
 PKGSD_FFMPEG:=		ffmpeg video converter
 PKGSC_FFMPEG:=		multimedia
+PKGSS_FFMPEG:=		libffmpeg
 PKGSD_FFSERVER:=	streaming server
 PKGSC_FFSERVER:=	multimedia
+PKGSS_FFSERVER:=	libffmpeg
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSC_FFPROBE:=		multimedia
+PKGSS_FFPROBE:=		libffmpeg
 
 PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
 PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS
