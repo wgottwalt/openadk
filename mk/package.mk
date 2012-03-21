@@ -112,7 +112,7 @@ PKGDESC_$(1)=	$(5)
 PKGSECT_$(1)=	$(6)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
-ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
+ifneq (${ADK_PACKAGE_$(1)},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
 ALL_POSTINST+=	$(2)-install

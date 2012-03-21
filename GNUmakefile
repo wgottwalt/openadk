@@ -22,7 +22,7 @@ _subdir: ${_subdir_dep}
 		echo >&2 Error: you must build with “umask 022”, sorry.; \
 		exit 1; \
 	fi
-	cd ${subdir} && TOPDIR=${TOPDIR} DEVELOPER=1 \
+	cd ${subdir} && TOPDIR=${TOPDIR} \
 	    make VERBOSE=1 ${MAKEFLAGS} ${MAKECMDGOALS}
 
 include prereq.mk

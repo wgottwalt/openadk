@@ -25,7 +25,7 @@ _subdir: ${_subdir_dep}
 		echo >&2 Error: you must build with “umask 022”, sorry.; \
 		exit 1; \
 	fi
-	cd ${.CURDIR}/${subdir} && TOPDIR=${.CURDIR} DEVELOPER=1 \
+	cd ${.CURDIR}/${subdir} && TOPDIR=${.CURDIR} \
 	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
 
 .  include "${.CURDIR}/prereq.mk"

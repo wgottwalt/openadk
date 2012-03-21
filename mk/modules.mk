@@ -1179,6 +1179,7 @@ $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
 	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-core \
+	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-memops \
 	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-vmalloc \
 ,65))
 
