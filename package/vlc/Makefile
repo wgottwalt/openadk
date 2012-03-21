@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		a64846d6f21ea179ae8e8bfb6f9447fe
 PKG_DESCR:=		Media Player
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt
+PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad
 PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vlc/1.1.11/}
@@ -34,6 +34,7 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--disable-libxml2 \
 			--disable-smb \
 			--enable-libgcrypt \
+			--enable-mad \
 			--enable-theora
 
 vlc-install:
