@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		0.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dc665cc599a739e3c5262ccdac13d129
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
@@ -153,6 +153,7 @@ libffmpeg-install:
 	${CP} ${WRKINST}/usr/lib/libavutil.so* ${IDIR_LIBFFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpostproc.so* ${IDIR_LIBFFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libswscale.so* ${IDIR_LIBFFMPEG}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libswresample.so* ${IDIR_LIBFFMPEG}/usr/lib
 
 ffplay-install:
 	${INSTALL_DIR} ${IDIR_FFPLAY}/usr/bin
