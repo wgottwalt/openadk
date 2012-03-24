@@ -8,6 +8,7 @@ config ADK_PACKAGE_BUSYBOX
 	boolean
 	select ADK_COMPILE_BUSYBOX
 	default y if !ADK_TOOLCHAIN_ONLY
+	select ADK_PACKAGE_LIBTIRPC
 	help
 	  Core utilities for embedded Linux systems
 	  
