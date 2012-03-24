@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		0.2.1
+PKG_VERSION:=		0.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d77eb15f464bf9d6e66259eaf78b2a4e
+PKG_MD5SUM:=		74c41c15c2909f7d11d9c7bfa7db6273
 PKG_DESCR:=		a transport independent RPC library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgssglue

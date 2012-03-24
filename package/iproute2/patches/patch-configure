@@ -5,45 +5,45 @@
 	- do not discard compiler output from tests, they're useful
 	  for debugging
 
---- iproute2-3.2.0.orig/configure	2012-01-05 17:34:31.000000000 +0100
-+++ iproute2-3.2.0/configure	2012-01-12 10:30:11.000000000 +0100
-@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
+--- iproute2-3.3.0.orig/configure	2012-03-20 01:27:12.000000000 +0100
++++ iproute2-3.3.0/configure	2012-03-22 20:48:53.022784090 +0100
+@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
  	return 0;
  }
  EOF
--gcc -I$INCLUDE -o /tmp/atmtest /tmp/atmtest.c -latm >/dev/null 2>&1 
-+$CC -I$INCLUDE -o /tmp/atmtest /tmp/atmtest.c -latm
+-gcc -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1 
++$CC -I$INCLUDE -o $TMPDIR/atmtest $TMPDIR/atmtest.c -latm >/dev/null 2>&1 
  if [ $? -eq 0 ]
  then
      echo "TC_CONFIG_ATM:=y" >>Config
-@@ -47,7 +47,7 @@ int main(int argc, char **argv)
+@@ -51,7 +51,7 @@ int main(int argc, char **argv)
  
  EOF
  
--if gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl >/dev/null 2>&1
-+if $CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl
+-if gcc -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl >/dev/null 2>&1
++if $CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL $(pkg-config xtables --cflags --libs) -ldl >/dev/null 2>&1
  then
  	echo "TC_CONFIG_XT:=y" >>Config
  	echo "using xtables"
-@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
+@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
--gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl
+-gcc -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
++$CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
  
  if [ $? -eq 0 ]
  then
-@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
+@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
  }
  
  EOF
--gcc -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl >/dev/null 2>&1
-+$CC -I$INCLUDE $IPTC -o /tmp/ipttest /tmp/ipttest.c $IPTL -ldl
+-gcc -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
++$CC -I$INCLUDE $IPTC -o $TMPDIR/ipttest $TMPDIR/ipttest.c $IPTL -ldl >/dev/null 2>&1
  
  if [ $? -eq 0 ]
  then
-@@ -144,18 +144,8 @@ check_ipt()
+@@ -148,18 +148,8 @@ check_ipt()
  
  check_ipt_lib_dir()
  {
@@ -64,3 +64,12 @@
  }
  
  check_setns()
+@@ -172,7 +162,7 @@ int main(int argc, char **argv) 
+ 	return 0;
+ }
+ EOF
+-gcc -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
++$CC -I$INCLUDE -o $TMPDIR/setnstest $TMPDIR/setnstest.c >/dev/null 2>&1
+ if [ $? -eq 0 ]
+ then
+ 	echo "IP_CONFIG_SETNS:=y" >>Config

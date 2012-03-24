@@ -1,14 +1,14 @@
---- libtirpc-0.2.1.orig/src/Makefile.in	2009-11-30 15:10:21.000000000 +0100
-+++ libtirpc-0.2.1/src/Makefile.in	2010-11-11 10:41:48.394995633 +0100
+--- libtirpc-0.2.2.orig/src/Makefile.in	2011-05-02 14:31:55.000000000 +0200
++++ libtirpc-0.2.2/src/Makefile.in	2012-03-22 19:02:24.598855474 +0100
 @@ -81,8 +81,8 @@ am__libtirpc_la_SOURCES_DIST = auth_none
  	rpc_commondata.c rpc_callmsg.c rpc_generic.c rpc_soc.c \
  	rpcb_clnt.c rpcb_prot.c rpcb_st_xdr.c svc.c svc_auth.c \
  	svc_dg.c svc_auth_unix.c svc_generic.c svc_raw.c svc_run.c \
 -	svc_simple.c svc_vc.c getpeereid.c auth_time.c auth_des.c \
--	authdes_prot.c xdr.c xdr_rec.c xdr_array.c xdr_float.c \
+-	authdes_prot.c des_crypt.c xdr.c xdr_rec.c xdr_array.c \
 +	svc_simple.c svc_vc.c getpeereid.c \
-+	xdr.c xdr_rec.c xdr_array.c xdr_float.c \
- 	xdr_mem.c xdr_reference.c xdr_stdio.c auth_gss.c \
++	des_crypt.c xdr.c xdr_rec.c xdr_array.c \
+ 	xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c auth_gss.c \
  	authgss_prot.c svc_auth_gss.c svc_auth_none.c
  @GSS_TRUE@am__objects_1 = libtirpc_la-auth_gss.lo \
 @@ -110,8 +110,7 @@ am_libtirpc_la_OBJECTS = libtirpc_la-aut
@@ -16,32 +16,23 @@
  	libtirpc_la-svc_run.lo libtirpc_la-svc_simple.lo \
  	libtirpc_la-svc_vc.lo libtirpc_la-getpeereid.lo \
 -	libtirpc_la-auth_time.lo libtirpc_la-auth_des.lo \
--	libtirpc_la-authdes_prot.lo libtirpc_la-xdr.lo \
-+	libtirpc_la-xdr.lo \
- 	libtirpc_la-xdr_rec.lo libtirpc_la-xdr_array.lo \
- 	libtirpc_la-xdr_float.lo libtirpc_la-xdr_mem.lo \
- 	libtirpc_la-xdr_reference.lo libtirpc_la-xdr_stdio.lo \
-@@ -286,7 +285,7 @@ lib_LTLIBRARIES = libtirpc.la
- # release number of your package. This is an abuse that only fosters
- # misunderstanding of the purpose of library versions."
- #
--libtirpc_la_LDFLAGS = -lnsl -lpthread -version-info 1:10:0 \
-+libtirpc_la_LDFLAGS = -lpthread -version-info 1:10:0 \
- 	$(am__append_2)
- libtirpc_la_SOURCES = auth_none.c auth_unix.c authunix_prot.c \
- 	bindresvport.c clnt_bcast.c clnt_dg.c clnt_generic.c \
-@@ -297,8 +296,8 @@ libtirpc_la_SOURCES = auth_none.c auth_u
+-	libtirpc_la-authdes_prot.lo libtirpc_la-des_crypt.lo \
++	libtirpc_la-des_crypt.lo \
+ 	libtirpc_la-xdr.lo libtirpc_la-xdr_rec.lo \
+ 	libtirpc_la-xdr_array.lo libtirpc_la-xdr_float.lo \
+ 	libtirpc_la-xdr_mem.lo libtirpc_la-xdr_reference.lo \
+@@ -302,8 +301,8 @@ libtirpc_la_SOURCES = auth_none.c auth_u
  	rpc_commondata.c rpc_callmsg.c rpc_generic.c rpc_soc.c \
  	rpcb_clnt.c rpcb_prot.c rpcb_st_xdr.c svc.c svc_auth.c \
  	svc_dg.c svc_auth_unix.c svc_generic.c svc_raw.c svc_run.c \
 -	svc_simple.c svc_vc.c getpeereid.c auth_time.c auth_des.c \
--	authdes_prot.c xdr.c xdr_rec.c xdr_array.c xdr_float.c \
+-	authdes_prot.c des_crypt.c xdr.c xdr_rec.c xdr_array.c \
 +	svc_simple.c svc_vc.c getpeereid.c \
-+	xdr.c xdr_rec.c xdr_array.c xdr_float.c \
- 	xdr_mem.c xdr_reference.c xdr_stdio.c $(am__append_1)
++	des_crypt.c xdr.c xdr_rec.c xdr_array.c \
+ 	xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c \
+ 	$(am__append_1)
  @GSS_TRUE@libtirpc_la_CFLAGS = -DHAVE_RPCSEC_GSS $(GSSGLUE_CFLAGS)
- all: all-am
-@@ -375,12 +374,9 @@ mostlyclean-compile:
+@@ -381,12 +380,9 @@ mostlyclean-compile:
  distclean-compile:
  	-rm -f *.tab.c
  
@@ -54,21 +45,3 @@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-authgss_prot.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-authunix_prot.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-bindresvport.Plo@am__quote@
-@@ -1055,7 +1051,7 @@ uninstall-am: uninstall-libLTLIBRARIES
- @GSS_TRUE@        svc_raw.c svc_run.c svc_simple.c svc_vc.c \
- @GSS_TRUE@	xdr.c xdr_rec.c xdr_array.c xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c \
- @GSS_TRUE@	auth_gss.c authgss_prot.c svc_auth_gss.c getpeereid.c \
--@GSS_TRUE@	auth_time.c auth_des.c authdes_prot.c svc_auth_none.c
-+@GSS_TRUE@	svc_auth_none.c
- 
- @GSS_FALSE@$(libtirpc_la_OBJECTS) :auth_none.c auth_unix.c authunix_prot.c bindresvport.c clnt_bcast.c \
- @GSS_FALSE@        clnt_dg.c clnt_generic.c clnt_perror.c clnt_raw.c clnt_simple.c \
-@@ -1066,7 +1062,7 @@ uninstall-am: uninstall-libLTLIBRARIES
- @GSS_FALSE@        rpcb_st_xdr.c svc.c svc_auth.c svc_dg.c svc_auth_unix.c svc_generic.c \
- @GSS_FALSE@        svc_raw.c svc_run.c svc_simple.c svc_vc.c \
- @GSS_FALSE@	xdr.c xdr_rec.c xdr_array.c xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c \
--@GSS_FALSE@	getpeereid.c auth_time.c auth_des.c authdes_prot.c
-+@GSS_FALSE@	getpeereid.c
- 
- # Tell versions [3.59,3.63) of GNU make to not export all variables.
- # Otherwise a system limit (for SysV at least) may be exceeded.

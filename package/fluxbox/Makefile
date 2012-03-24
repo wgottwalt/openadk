@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fluxbox
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e0be927617be4ffc1ddc79513f4eb0f9
+PKG_MD5SUM:=		52e76de0ae96d8c5e87374661d0c7112
 PKG_DESCR:=		Fluxbox is an X11 window manager featuring tabs and an iconbar
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libstdcxx

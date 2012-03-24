@@ -12,6 +12,7 @@ endif
 
 # ssp partially supported
 TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+#TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
 
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk

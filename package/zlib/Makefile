@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		zlib
-PKG_VERSION:=		1.2.5
+PKG_VERSION:=		1.2.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		be1e89810e66150f5b0327984d8625a0
+PKG_MD5SUM:=		dc2cfa0d2313ca77224b4d932b2911e9
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.zlib.net/
@@ -38,7 +38,7 @@ ifeq ($(ADK_STATIC),)
 CONFIGURE_OPTS:=	--shared
 endif
 
-ALL_TARGET:=		libz.a libz.so.1.2.5
+ALL_TARGET:=		libz.a libz.so.$(PKG_VERSION)
 
 do-configure:
 	(cd $(WRKBUILD); $(COPTS) \

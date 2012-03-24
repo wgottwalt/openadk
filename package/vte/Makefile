@@ -28,10 +28,10 @@ vte-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/vte $(IDIR_VTE)/usr/bin
 
 vte-dev-install:
-	$(INSTALL_DIR) $(IDIR_VTE)/usr/include
-	$(CP) $(WRKINST)/usr/include/* $(IDIR_VTE)/usr/include
-	$(INSTALL_DIR) $(IDIR_VTE)/usr/lib/pkgconfig
+	$(INSTALL_DIR) $(IDIR_VTE_DEV)/usr/include
+	$(CP) $(WRKINST)/usr/include/* $(IDIR_VTE_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_VTE_DEV)/usr/lib/pkgconfig
 	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
-		$(IDIR_VTE)/usr/lib/pkgconfig
+		$(IDIR_VTE_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

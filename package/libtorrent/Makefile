@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
-PKG_VERSION:=		0.12.6
+PKG_VERSION:=		0.13.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		037499ed708aaf72988cee60e5a8d96b
+PKG_MD5SUM:=		d499178f72010d5067a77f41fa1a1505
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++

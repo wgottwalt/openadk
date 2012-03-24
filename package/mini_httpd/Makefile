@@ -24,7 +24,7 @@ WRKDIST=		${WRKDIR}/mini_httpd-${PKG_VERSION}
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MINI_HTTPD,mini-httpd,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,MINI_HTTPD_HTPASSWD,mini-httpd-htpasswd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_HTPASSWD},${PKG_SECTION}))
+#$(eval $(call PKG_template,MINI_HTTPD_HTPASSWD,mini-httpd-htpasswd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_HTPASSWD},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

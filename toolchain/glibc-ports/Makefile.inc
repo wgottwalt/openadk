@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		glibc-ports
-PKG_VERSION:=		2.13
+PKG_VERSION:=		2.14.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		094e3c9b57da605917a780ab24575187
+PKG_MD5SUM:=		2aa77ef5dd15df1d1d6dadd4e158ae33
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}

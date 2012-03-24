@@ -2,6 +2,10 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+
+TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
+
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_DESCR:=		GNU C library
@@ -15,6 +19,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -52,6 +59,7 @@ endif
 	done
 
 glibc-dev-install:
+	echo $(TARGET_CFLAGS)
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/lib $(IDIR_GLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so

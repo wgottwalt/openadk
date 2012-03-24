@@ -1,0 +1,17 @@
+diff -Nur busybox-1.19.4.orig/Makefile busybox-1.19.4/Makefile
+--- busybox-1.19.4.orig/Makefile	2012-02-04 20:34:24.000000000 +0100
++++ busybox-1.19.4/Makefile	2012-03-22 19:17:49.099007985 +0100
+@@ -318,10 +318,10 @@
+ CFLAGS		:= $(CFLAGS)
+ # Added only to final link stage of busybox binary
+ CFLAGS_busybox	:= $(CFLAGS_busybox)
+-CPPFLAGS	:= $(CPPFLAGS)
++CPPFLAGS	:= $(CPPFLAGS) $(EXTRA_CPPFLAGS)
+ AFLAGS		:= $(AFLAGS)
+-LDFLAGS		:= $(LDFLAGS)
+-LDLIBS		:=
++LDFLAGS		:= $(LDFLAGS) $(EXTRA_LDFLAGS)
++LDLIBS		:= tirpc
+ 
+ # Read KERNELRELEASE from .kernelrelease (if it exists)
+ KERNELRELEASE = $(shell cat .kernelrelease 2> /dev/null)

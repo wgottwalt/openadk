@@ -1,27 +1,27 @@
---- libpcap-1.1.1.orig/pcap-config.in	2010-03-12 02:56:54.000000000 +0100
-+++ libpcap-1.1.1/pcap-config.in	2011-01-06 21:29:12.000000000 +0100
-@@ -29,16 +29,6 @@ do
+--- libpcap-1.2.1.orig/pcap-config.in	2011-03-28 22:37:56.000000000 +0200
++++ libpcap-1.2.1/pcap-config.in	2012-03-24 11:15:47.343023269 +0100
+@@ -36,16 +36,6 @@ do
  	esac
  	shift
  done
--if [ "@V_RPATH_OPT@" != "" ]
+-if [ "$V_RPATH_OPT" != "" ]
 -then
 -	#
 -	# If libdir isn't /usr/lib, add it to the run-time linker path.
 -	#
--	if [ "@libdir@" != "/usr/lib" ]
+-	if [ "$libdir" != "/usr/lib" ]
 -	then
--		RPATH=@V_RPATH_OPT@@libdir@
+-		RPATH=$V_RPATH_OPT$libdir
 -	fi
 -fi
  if [ "$static" = 1 ]
  then
  	#
-@@ -77,6 +67,6 @@ else
- 		echo "-I@includedir@"
+@@ -84,6 +74,6 @@ else
+ 		echo "-I$includedir"
  	elif [ "$show_libs" = 1 ]
  	then
--		echo "-L@libdir@ $RPATH -lpcap"
-+		echo "-L@libdir@ -lpcap"
+-		echo "-L$libdir $RPATH -lpcap"
++		echo "-L$libdir -lpcap"
  	fi
  fi

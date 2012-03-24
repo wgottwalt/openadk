@@ -4,13 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libsigc++
-PKG_VERSION:=		2.2.4.2
+PKG_VERSION:=		2.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a79b2fe9de69b40e020617c7a652d704
+PKG_MD5SUM:=		6d350ae0bc17b8915a06ce6b7e4240e8
 PKG_DESCR:=		Callback framework for C++
 PKG_SECTION:=		libs
 PKG_URL:=		http://libsigc.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_GNOME:=libsigc++/2.2/}
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 

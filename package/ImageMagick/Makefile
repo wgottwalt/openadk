@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		ImageMagick
-PKG_VERSION:=		6.6.5
-PKG_EXTRAVER:=		10
+PKG_VERSION:=		6.7.6
+PKG_EXTRAVER:=		1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a07a97cfb28b588cbcf83ffa9ec92e3f
+PKG_MD5SUM:=		8134257e3fbb43cc06fb32a6d725d3d0
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv libtool e2fsprogs
@@ -57,9 +57,9 @@ libimagemagick-install:
 	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
 	$(INSTALL_DATA) $(WRKINST)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config/* \
 		$(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
-	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}/config
-	$(INSTALL_DATA) $(WRKINST)/usr/share/${PKG_NAME}-${PKG_VERSION}/config/* \
-		$(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}/config
+	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}
+	$(INSTALL_DATA) $(WRKINST)/usr/share/${PKG_NAME}-${PKG_VERSION}/* \
+		$(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}/
 	$(CP) $(WRKINST)/usr/lib/libMagickCore.so* \
 		$(IDIR_LIBIMAGEMAGICK)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libMagickWand.so* \

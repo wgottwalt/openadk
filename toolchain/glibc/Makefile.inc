@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		glibc
-PKG_VERSION:=		2.13
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fafabe01cb9748acb0a11a6879ebaa7e
+PKG_VERSION:=		2.14.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f3841fd7812db4713115ff4447b29207
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
@@ -31,3 +31,4 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         libc_cv_gnu99_inline=yes \
 			libc_cv_sparc64_tls=yes \
 			libc_cv_slibdir="/lib" \
+			libc_cv_initfini_array=yes \

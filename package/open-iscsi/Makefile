@@ -25,7 +25,7 @@ $(eval $(call PKG_template,OPEN_ISCSI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},
 
 CONFIG_STYLE:=		manual
 
-do-install:
+post-install:
 	$(INSTALL_DIR) $(IDIR_OPEN_ISCSI)/sbin $(IDIR_OPEN_ISCSI)/etc/iscsi
 	$(INSTALL_BIN) $(WRKINST)/sbin/* $(IDIR_OPEN_ISCSI)/sbin
 	$(CP) $(WRKINST)/etc/iscsi/* $(IDIR_OPEN_ISCSI)/etc/iscsi
