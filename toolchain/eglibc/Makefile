@@ -34,6 +34,7 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
+			libc_cv_initfini_array=yes \
 			libc_cv_slibdir="/lib"
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
