@@ -23,6 +23,7 @@ $(eval $(call PKG_template,QINGY,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG
 CONFIGURE_ARGS+=	--disable-screen-savers \
 			--disable-optimizations \
 			--disable-pam \
+			--disable-x-support \
 			--disable-crypto
 
 post-install:
