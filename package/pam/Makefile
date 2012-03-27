@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+CONFIGURE_ARGS+=	--disable-nis \
+			--enable-db=no
 
 pam-install:
 	$(INSTALL_DIR) $(IDIR_PAM)/etc/security
