@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		aaf8c3d05d4a1e689d2d789c99a6023c
 PKG_DESCR:=		X display manager
 PKG_SECTION:=		x11/apps
+PKG_BUILDDEP:=		pam
+PKG_DEPENDS:=		xconsole pam xsm
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

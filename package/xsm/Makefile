@@ -1,0 +1,30 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		xsm
+PKG_VERSION:=		1.0.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6dfc70ae1c13f775f1c646a6d8780076
+PKG_DESCR:=		X session manager
+PKG_SECTION:=		x11/apps
+PKG_URL:=		http://xorg.freedesktop.org/
+PKG_SITES:=		${MASTER_SITE_XORG}
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,XSM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_XSM)/usr/lib/X11
+	$(CP) $(WRKINST)/usr/lib/X11/* \
+		$(IDIR_XSM)/usr/lib/X11
+	$(INSTALL_DIR) $(IDIR_XSM)/usr/share/X11
+	$(CP) $(WRKINST)/usr/share/X11/* \
+		$(IDIR_XSM)/usr/lib/X11
+	$(INSTALL_DIR) $(IDIR_XSM)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/xsm \
+		$(IDIR_XSM)/usr/bin
+
+include ${TOPDIR}/mk/pkg-bottom.mk

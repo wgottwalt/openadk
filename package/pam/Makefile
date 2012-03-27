@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pam
 PKG_VERSION:=		1.1.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ff8f3c4382b78ac211e11bcd56ab17bf
 PKG_DESCR:=		Pluggable Authentication Modules
 PKG_BUILDDEP:=		flex
@@ -29,7 +29,7 @@ pam-install:
 	$(INSTALL_DIR) $(IDIR_PAM)/lib/security
 	$(CP) $(WRKINST)/lib/libpam*.so* $(IDIR_PAM)/lib
 	$(CP) $(WRKINST)/lib/security/*.so* $(IDIR_PAM)/lib/security
-	$(CP) $(WRKBUILD)/conf/pam.conf $(IDIR_PAM)/etc
+	$(CP) ./files/pam.conf $(IDIR_PAM)/etc
 	# /lib is not automatically installed to staging area
 	$(CP) $(WRKINST)/lib/libpam*.so* $(STAGING_DIR)/usr/lib
 
