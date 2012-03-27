@@ -7,7 +7,7 @@ menu "Process Utilities"
 
 config BUSYBOX_FREE
 	bool "free"
-	default n
+	default y
 	depends on BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  free displays the total amount of free and used physical and swap
@@ -16,7 +16,7 @@ config BUSYBOX_FREE
 
 config BUSYBOX_FUSER
 	bool "fuser"
-	default n
+	default y
 	help
 	  fuser lists all PIDs (Process IDs) that currently have a given
 	  file open. fuser can also list all PIDs that have a given network

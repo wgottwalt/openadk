@@ -33,19 +33,54 @@ config BUSYBOX_NANDDUMP
 	help
 	  Dump the content of raw NAND chip
 
+config BUSYBOX_SETSERIAL
+	bool "setserial"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Retrieve or set Linux serial port.
+
 config BUSYBOX_UBIATTACH
 	bool "ubiattach"
 	default n
-	depends on BUSYBOX_PLATFORM_LINUX
+	select PLATFORM_LINUX
 	help
 	  Attach MTD device to an UBI device.
 
 config BUSYBOX_UBIDETACH
 	bool "ubidetach"
 	default n
-	depends on BUSYBOX_PLATFORM_LINUX
+	select PLATFORM_LINUX
 	help
 	  Detach MTD device from an UBI device.
+
+config BUSYBOX_UBIMKVOL
+	bool "ubimkvol"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Create a UBI volume.
+
+config BUSYBOX_UBIRMVOL
+	bool "ubirmvol"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Delete a UBI volume.
+
+config BUSYBOX_UBIRSVOL
+	bool "ubirsvol"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Resize a UBI volume.
+
+config BUSYBOX_UBIUPDATEVOL
+	bool "ubiupdatevol"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Update a UBI volume.
 
 config BUSYBOX_ADJTIMEX
 	bool "adjtimex"
