@@ -1,14 +1,16 @@
 --- dmidecode-2.11.orig/Makefile	2010-10-11 16:08:16.000000000 +0200
-+++ dmidecode-2.11/Makefile	2011-10-17 19:21:58.000000000 +0200
-@@ -12,7 +12,7 @@
++++ dmidecode-2.11/Makefile	2011-10-17 19:22:27.000000000 +0200
+@@ -12,8 +12,8 @@
  #   (at your option) any later version.
  #
  
 -CC      = gcc
+-CFLAGS  = -W -Wall -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual \
 +CC      ?= gcc
- CFLAGS  = -W -Wall -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual \
++CFLAGS  ?= -W -Wall -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual \
            -Wcast-align -Wwrite-strings -Wmissing-prototypes -Winline -Wundef
  #CFLAGS += -DBIGENDIAN
+ #CFLAGS += -DALIGNMENT_WORKAROUND
 @@ -26,7 +26,7 @@ CFLAGS += -O2
  LDFLAGS =
  
