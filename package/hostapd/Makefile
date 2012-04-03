@@ -4,9 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hostapd
-PKG_VERSION:=		0.7.3
+# git version from 03.04.2012
+PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		91a7c8d0f090b7104152d3455a84c112
+PKG_MD5SUM:=		2a93bb1ecfcdf23a9d7db1f272e5e764
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
@@ -24,9 +25,6 @@ PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
 
-PKG_FLAVOURS_HOSTAPD:=	WITH_DEBUG
-PKGFD_WITH_DEBUG:=	enable support for hostapd debugging
-
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
@@ -37,16 +35,13 @@ $(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELE
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/libnl3
+
 do-configure:
-	#${CP} ./files/hostapd.config ${WRKBUILD}/.config
-	${CP} ./files/hostapd.config.full ${WRKBUILD}/.config
-#ifneq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},)
-#	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
-#endif
-#ifneq (${ADK_PACKAGE_HOSTAPD_WITH_DEBUG},)
-#	${SED} "s#CONFIG_NO_STDOUT_DEBUG=y#CONFIG_NO_STDOUT_DEBUG=n#" \
-#		${WRKBUILD}/.config
-#endif
+	${CP} ./files/hostapd.config ${WRKBUILD}/.config
+ifneq (${ADK_PACKAGE_HOSTAPD_WITH_GNUTLS},)
+	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
+endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_HOSTAPD_UTILS}/usr/sbin

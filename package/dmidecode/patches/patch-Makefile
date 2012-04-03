@@ -1,5 +1,5 @@
 --- dmidecode-2.11.orig/Makefile	2010-10-11 16:08:16.000000000 +0200
-+++ dmidecode-2.11/Makefile	2011-10-17 19:22:27.000000000 +0200
++++ dmidecode-2.11/Makefile	2012-03-28 11:31:33.000000000 +0200
 @@ -12,8 +12,8 @@
  #   (at your option) any later version.
  #
@@ -11,8 +11,12 @@
            -Wcast-align -Wwrite-strings -Wmissing-prototypes -Winline -Wundef
  #CFLAGS += -DBIGENDIAN
  #CFLAGS += -DALIGNMENT_WORKAROUND
-@@ -26,7 +26,7 @@ CFLAGS += -O2
- LDFLAGS =
+@@ -23,10 +23,10 @@ CFLAGS += -O2
+ #CFLAGS += -g
+ 
+ # Pass linker flags here
+-LDFLAGS =
++LDFLAGS ?=
  
  DESTDIR =
 -prefix  = /usr/local
