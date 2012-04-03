@@ -1,20 +1,23 @@
 #!/bin/sh
-#PKG portmap
-#INIT 60
+#PKG xdm
+#INIT 99
+
 . /etc/rc.conf
 
 case $1 in
 autostop) ;;
 autostart)
-	test x"${portmap:-NO}" = x"NO" && exit 0
+	test x"${xdm:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;
 start)
-	mkdir -p /tmp/.portmap
-	/usr/sbin/portmap -t /tmp/.portmap
+	if [ ! -d /var/lib/xdm ];then
+		mkdir -p /var/lib/xdm
+	fi
+	xdm
 	;;
 stop)
-	kill $(pgrep -f /usr/sbin/portmap)
+	kill $(pgrep -f /usr/bin/xdm)
 	;;
 restart)
 	sh $0 stop

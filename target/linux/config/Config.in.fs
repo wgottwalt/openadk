@@ -104,6 +104,7 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
 
 config ADK_KERNEL_EXT4_FS
+	prompt "ext4.............................. EXT4 filesystem support (kernel)"
 	boolean
 	select ADK_KERNEL_CRC16
 	default n
