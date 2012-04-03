@@ -1252,6 +1252,7 @@ USBMODULES:=
 ifeq ($(KERNEL_BASE),3)
 ifeq ($(KERNEL_MAJ),3)
 USBMODULES+=drivers/usb/usb-common
+USBMODULES+=drivers/usb/core/usbcore
 else
 USBMODULES+=drivers/usb/core/usbcore
 endif
