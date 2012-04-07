@@ -53,7 +53,7 @@ iface eth0 inet dhcp
 #  wireless-channel 8
 #  wireless-mode ap
 #  wireless-security wpa2
-#  wireless-passphrase xxxxxx
+#  wireless-passphrase xxxxxxxx
 ##
 
 # for more special cases see: http://www.openadk.org/doku.php?id=network
