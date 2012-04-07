@@ -5,22 +5,14 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		8395ac770720b83c5c469f88306d7765
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-nfsd keyutils
-PKG_BUILDDEP:=		keyutils
+PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind
+PKG_BUILDDEP:=		keyutils libtirpc
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
-
-PKG_CHOICES_NFS_UTILS:= WITH_TIRPC WITHOUT_TIRPC
-PKGCD_WITH_TIRPC:=	enable Transport Independent RPC
-PKGCS_WITH_TIRPC:=	libtirpc rpcbind
-PKGCB_WITH_TIRPC:=	libtirpc rpcbind
-PKGCD_WITHOUT_TIRPC:=	disable Transport Independent RPC
-PKGCS_WITHOUT_TIRPC:=	portmap
-PKGCB_WITHOUT_TIRPC:=	portmap
 
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
@@ -52,17 +44,12 @@ CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-gss
 endif
 
-ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_TIRPC),y)
-CONFIGURE_ARGS+=	--enable-tirpc \
-			--with-tirpcinclude=${TIRPCINC}
-else
-CONFIGURE_ARGS+=	--disable-tirpc
-endif
-
 CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--with-rpcgen=internal \
+			--enable-tirpc \
+			--with-tirpcinclude=${TIRPCINC} \
 			--disable-uuid
 
 post-install:
