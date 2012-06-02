@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
-PKG_VERSION:=		0.53.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6b8d901859d9b8a18e2f6bfe0a892a03
+PKG_VERSION:=		2012.55
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		44836e5a0419ba12557f9ea46880077e
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
 PKG_URL:=		http://matt.ucc.asn.au/dropbear/

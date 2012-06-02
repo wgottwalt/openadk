@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dropbear-0.53.1.orig/options.h	2011-03-02 14:23:36.000000000 +0100
-+++ dropbear-0.53.1/options.h	2011-08-02 20:03:13.000000000 +0200
+--- dropbear-2012.55.orig/options.h	2012-02-23 14:47:06.000000000 +0100
++++ dropbear-2012.55/options.h	2012-06-02 20:53:47.000000000 +0200
 @@ -144,7 +144,7 @@ much traffic. */
  #endif
  
@@ -10,7 +10,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
  /* Whether to print the message of the day (MOTD). This doesn't add much code
   * size */
-@@ -236,7 +236,7 @@ much traffic. */
+@@ -243,7 +243,7 @@ much traffic. */
  /* The command to invoke for xauth when using X11 forwarding.
   * "-q" for quiet */
  #ifndef XAUTH_COMMAND
