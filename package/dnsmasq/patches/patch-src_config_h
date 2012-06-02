@@ -1,22 +1,11 @@
---- dnsmasq-2.55.orig/src/config.h	2010-06-07 23:01:19.000000000 +0200
-+++ dnsmasq-2.55/src/config.h	2011-01-07 21:40:34.000000000 +0100
-@@ -47,7 +47,7 @@
- #   elif defined(__sun__) || defined (__sun)
- #      define LEASEFILE "/var/cache/dnsmasq.leases"
+--- dnsmasq-2.61.orig/src/config.h	2012-04-29 17:01:28.000000000 +0200
++++ dnsmasq-2.61/src/config.h	2012-06-02 20:51:50.000000000 +0200
+@@ -138,7 +138,7 @@ RESOLVFILE
+ #   elif defined(__ANDROID__)
+ #      define LEASEFILE "/data/misc/dhcp/dnsmasq.leases"
  #   else
 -#      define LEASEFILE "/var/lib/misc/dnsmasq.leases"
 +#      define LEASEFILE "/tmp/dnsmasq.leases"
  #   endif
  #endif
  
-@@ -269,8 +269,9 @@ NOTES:
- /* We assume that systems which don't have IPv6
-    headers don't have ntop and pton either */
- 
--#if defined(INET6_ADDRSTRLEN) && defined(IPV6_V6ONLY) && !defined(NO_IPV6)
-+#if defined(INET6_ADDRSTRLEN) && !defined(NO_IPV6)
- #  define HAVE_IPV6
-+#  define IPV6_V6ONLY  26
- #  define ADDRSTRLEN INET6_ADDRSTRLEN
- #  if defined(SOL_IPV6)
- #    define IPV6_LEVEL SOL_IPV6
