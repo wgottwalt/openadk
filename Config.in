@@ -106,20 +106,24 @@ depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_
 choice
 prompt "Kernel Version"
 
-config ADK_KERNEL_VERSION_3_3_7
-	prompt "3.3.7"
+config ADK_KERNEL_VERSION_3_4_2
+	prompt "3.4.2"
 	boolean
 
-config ADK_KERNEL_VERSION_3_2_18
-	prompt "3.2.18"
+config ADK_KERNEL_VERSION_3_3_8
+	prompt "3.3.8"
+	boolean
+
+config ADK_KERNEL_VERSION_3_2_20
+	prompt "3.2.20"
 	boolean
 
 config ADK_KERNEL_VERSION_3_1_10
 	prompt "3.1.10"
 	boolean
 
-config ADK_KERNEL_VERSION_3_0_30
-	prompt "3.0.30"
+config ADK_KERNEL_VERSION_3_0_34
+	prompt "3.0.34"
 	boolean
 
 config ADK_KERNEL_VERSION_2_6_39_4
@@ -130,10 +134,11 @@ endchoice
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.3.7" if ADK_KERNEL_VERSION_3_3_7
-	default "3.2.18" if ADK_KERNEL_VERSION_3_2_18
+	default "3.4.2" if ADK_KERNEL_VERSION_3_4_2
+	default "3.3.8" if ADK_KERNEL_VERSION_3_3_8
+	default "3.2.20" if ADK_KERNEL_VERSION_3_2_20
 	default "3.1.10" if ADK_KERNEL_VERSION_3_1_10
-	default "3.0.30" if ADK_KERNEL_VERSION_3_0_30
+	default "3.0.34" if ADK_KERNEL_VERSION_3_0_34
 	default "2.6.39.4" if ADK_KERNEL_VERSION_2_6_39_4
 	help
 
