@@ -1,16 +1,16 @@
-diff -Nur linux-2.6.38.4.orig/block/genhd.c linux-2.6.38.4/block/genhd.c
---- linux-2.6.38.4.orig/block/genhd.c	2011-04-21 23:34:46.000000000 +0200
-+++ linux-2.6.38.4/block/genhd.c	2011-04-27 19:21:18.668912036 +0200
-@@ -34,7 +34,7 @@
+diff -Nur linux-3.4.2.orig/block/genhd.c linux-3.4.2/block/genhd.c
+--- linux-3.4.2.orig/block/genhd.c	2012-06-09 17:36:33.000000000 +0200
++++ linux-3.4.2/block/genhd.c	2012-06-15 18:19:16.000000000 +0200
+@@ -33,7 +33,7 @@
  static DEFINE_MUTEX(ext_devt_mutex);
  static DEFINE_IDR(ext_devt_idr);
  
 -static struct device_type disk_type;
 +struct device_type disk_type;
  
+ static void disk_alloc_events(struct gendisk *disk);
  static void disk_add_events(struct gendisk *disk);
- static void disk_del_events(struct gendisk *disk);
-@@ -1118,7 +1118,7 @@
+@@ -1122,7 +1122,7 @@
  	return NULL;
  }
  
@@ -19,10 +19,18 @@ diff -Nur linux-2.6.38.4.orig/block/genhd.c linux-2.6.38.4/block/genhd.c
  	.name		= "disk",
  	.groups		= disk_attr_groups,
  	.release	= disk_release,
-diff -Nur linux-2.6.38.4.orig/init/do_mounts.c linux-2.6.38.4/init/do_mounts.c
---- linux-2.6.38.4.orig/init/do_mounts.c	2011-04-21 23:34:46.000000000 +0200
-+++ linux-2.6.38.4/init/do_mounts.c	2011-04-27 19:26:52.721413000 +0200
-@@ -32,6 +32,132 @@
+diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
+--- linux-3.4.2.orig/init/do_mounts.c	2012-06-09 17:36:33.000000000 +0200
++++ linux-3.4.2/init/do_mounts.c	2012-06-15 18:20:11.000000000 +0200
+@@ -21,6 +21,7 @@
+ #include <linux/nfs_fs_sb.h>
+ #include <linux/nfs_mount.h>
+ 
++#include "../fs/ext2/ext2.h"
+ #include "do_mounts.h"
+ 
+ int __initdata rd_doload;	/* 1 = load RAM disk, 0 = don't load */
+@@ -32,6 +33,132 @@
  
  dev_t ROOT_DEV;
  
@@ -155,7 +163,7 @@ diff -Nur linux-2.6.38.4.orig/init/do_mounts.c linux-2.6.38.4/init/do_mounts.c
  static int __init load_ramdisk(char *str)
  {
  	rd_doload = simple_strtol(str,NULL,0) & 3;
-@@ -218,6 +344,13 @@
+@@ -256,6 +383,13 @@
  static int __init root_dev_setup(char *line)
  {
  	strlcpy(saved_root_name, line, sizeof(saved_root_name));
@@ -169,7 +177,7 @@ diff -Nur linux-2.6.38.4.orig/init/do_mounts.c linux-2.6.38.4/init/do_mounts.c
  	return 1;
  }
  
-@@ -403,6 +536,83 @@
+@@ -471,6 +605,83 @@
  
  void __init mount_root(void)
  {
@@ -251,5 +259,5 @@ diff -Nur linux-2.6.38.4.orig/init/do_mounts.c linux-2.6.38.4/init/do_mounts.c
 +#endif /* CONFIG_EXT2_FS for UUID support */
 +
  #ifdef CONFIG_ROOT_NFS
- 	if (MAJOR(ROOT_DEV) == UNNAMED_MAJOR) {
+ 	if (ROOT_DEV == Root_NFS) {
  		if (mount_nfs_root())
