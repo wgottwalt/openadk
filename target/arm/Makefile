@@ -25,10 +25,7 @@ MACH:=versatilepb
 NET:=-net user,hostfwd=tcp::2222-:22 -net nic,model=smc91c111
 endif
 
-tools-compile:
-	$(MAKE) -C ../tools/uboot-mkimage
-
-kernel-install: tools-compile
+kernel-install:
 	gzip -9 < $(LINUX_DIR)/arch/arm/boot/Image > ${BUILD_DIR}/Image.gz
 	PATH='${TARGET_PATH}' mkimage -A arm -O linux -T kernel -C gzip \
 		-a ${LOADADDR} -e ${LOADADDR} -d ${BUILD_DIR}/Image.gz \
