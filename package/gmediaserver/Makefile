@@ -13,6 +13,7 @@ PKG_DEPENDS:=		id3lib libupnp libmagic libiconv
 PKG_BUILDDEP:=		id3lib libupnp file libiconv
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
+PKG_CXX:=		GMEDIASERVER
 
 include ${TOPDIR}/mk/package.mk
 
@@ -23,7 +24,7 @@ CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
 			--with-libupnp="${STAGING_TARGET_DIR}/usr"
 
 ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
-CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz"
+CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz -lc"
 endif
 
 post-install:

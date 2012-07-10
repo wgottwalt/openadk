@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp
 endif

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
 PKG_VERSION:=		2.95
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		12535a9ed9fecf9ea2c5bdc9840da5ae
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		misc
@@ -34,7 +34,7 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 CONFIGURE_ARGS+=	--disable-dbus
 TARGET_CFLAGS+=		-fPIC
 
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lc
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
@@ -57,6 +57,7 @@ endif
 post-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libgps.so* ${IDIR_GPSD}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgpsd.so* ${IDIR_GPSD}/usr/lib
 	${CP} ${WRKINST}/usr/sbin/gpsd ${IDIR_GPSD}/usr/sbin
 	${INSTALL_DIR} ${IDIR_GPSD_CLIENTS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/{cgps,gpxlogger} \
