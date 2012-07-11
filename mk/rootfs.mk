@@ -41,6 +41,7 @@ else
 USB:=		rootdelay=2
 endif
 
+$(eval $(call rootfs_template,genext2fs,GENEXT2FS,$(ROOTFS)))
 $(eval $(call rootfs_template,cf,CF,$(ROOTFS)))
 $(eval $(call rootfs_template,mmc,MMC,$(ROOTFS)))
 $(eval $(call rootfs_template,usb,USB,$(USB)))

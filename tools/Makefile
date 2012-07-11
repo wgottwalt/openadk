@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio mkimage
+TARGETS:=adk mkcrypt cpio mkimage genext2fs
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))

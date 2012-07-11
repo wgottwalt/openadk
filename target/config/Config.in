@@ -589,6 +589,15 @@ config ADK_TARGET_ROOTFS_CF
 	  Use this option if you have a compact flash based system.
 	  (ext2 filesystem is used.)
 
+config ADK_TARGET_ROOTFS_GENEXT2FS
+	bool "read-write filesystem for compact flash (genext2fs version)"
+	depends on ADK_TARGET_WITH_CF
+	select ADK_KERNEL_EXT2_FS
+	select ADK_KERNEL_SCSI
+	help
+	  Use this option if you have a compact flash based system.
+	  (ext2 filesystem is used.)
+
 config ADK_TARGET_ROOTFS_MMC
 	bool "read-write filesystem for mmc/sdcard"
 	depends on ADK_TARGET_WITH_MMC

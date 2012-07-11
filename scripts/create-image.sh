@@ -1,4 +1,26 @@
 #!/usr/bin/env bash
+#-
+# Copyright © 2010-2012
+#	Waldemar Brodkorb <wbx@openadk.org>
+#
+# Provided that these terms and disclaimer and all copyright notices
+# are retained or reproduced in an accompanying document, permission
+# is granted to deal in this work without restriction, including un‐
+# limited rights to use, publicly perform, distribute, sell, modify,
+# merge, give away, or sublicence.
+#
+# This work is provided “AS IS” and WITHOUT WARRANTY of any kind, to
+# the utmost extent permitted by applicable law, neither express nor
+# implied; without malicious intent or gross negligence. In no event
+# may a licensor, author or contributor be held liable for indirect,
+# direct, other damage, loss, or other issues arising in any way out
+# of dealing in the work, even if advised of the possibility of such
+# damage or existence of a defect, except proven that it results out
+# of said person’s immediate fault when using the work as intended.
+#
+# Alternatively, this work may be distributed under the terms of the
+# General Public License, any version, as published by the Free Soft-
+# ware Foundation.
 
 filesystem=ext2
 
@@ -24,35 +46,32 @@ if [ $(id -u) -ne 0 ];then
 	exit 1
 fi
 
-printf "Checking if mkfs is installed"
-mkfs=$(which mkfs.$filesystem)
+tools='qemu-img'
+ostype=$(uname -s)
 
-if [ ! -z $mkfs -a -x $mkfs ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
+case $ostype in
+(Darwin)
+	tools="$tools genext2fs"
+	;;
+(Linux)
+	tools="$tools mke2fs parted"
+	;;
+(*)
+	printf Sorry, not ported to the OS "'$ostype'" yet.\n
 	exit 1
-fi
+	;;
+esac
 
-printf "Checking if parted is installed"
-parted=$(which parted)
-
-if [ ! -z $parted -a -x $parted ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if qemu-img is installed"
-qimg=$(which qemu-img)
-
-if [ ! -z $qimg -a -x $qimg ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
+for tool in $tools; do
+	printf "Checking if $tool is installed..."
+	if which $tool >/dev/null; then
+		printf " okay\n"
+	else
+		printf " failed\n"
+		f=1
+	fi
+done
+(( f )) && exit 1
 
 if [ -z $1 ];then
 	printf "Please give the name of the image file\n"
@@ -71,44 +90,53 @@ else
 	fi
 fi
 
-
 printf "Generate qemu image (512 MB)\n"
-$qimg create -f raw $1 512M >/dev/null
-
-printf "Creating filesystem $filesystem\n"
+qemu-img create -f raw $1 512M >/dev/null
 
 printf "Create partition and filesystem\n"
-$parted -s $1 mklabel msdos
-$parted -s $1 -- mkpart primary ext2 0 -0
-$parted -s $1 set 1 boot on
+case $ostype in
+(Darwin)
+	offset=16384
+	;;
+(Linux)
+	parted -s $1 mklabel msdos
+	parted -s $1 -- mkpart primary ext2 0 -0
+	parted -s $1 set 1 boot on
+	offset=$(parted $1 unit b print | tail -2 | head -1 | cut -f 1 --delimit="B" | cut -c 9-)
+	;;
+(*)
+	printf Sorry, not ported to the OS "'$ostype'" yet.\n
+	exit 1
+	;;
+esac
 
-offset=$(parted $1 unit b print | tail -2 | head -1 | cut -f 1 --delimit="B" | cut -c 9-)
 
-dd if=$1 of=mbr bs=$offset count=1 2>/dev/null
-dd if=$1 skip=$offset of=$1.new 2>/dev/null
+printf "Creating filesystem $filesystem\n"
 
 if [ "$filesystem" = "ext2" -o "$filesystem" = "ext3" -o "$filesystem" = "ext4" ];then
 	mkfsopts=-F
 fi
 
-mkfs.$filesystem $mkfsopts ${1}.new >/dev/null
-
-if [ $? -eq 0 ];then
-	printf "Successfully created partition\n"
-	#$parted $1 print
-else
-	printf "Partition creation failed, Exiting.\n"
-	exit 1
-fi
-
-cat mbr ${1}.new > $1
-rm ${1}.new 
-rm mbr
-
-tmp=$(mktemp -d)
-
-mount -o loop,offset=$offset -t $filesystem $1 $tmp
-
+case $ostype in
+(Darwin)
+	tmp=$(mktemp -d -t xxx)
+	tar -C $tmp -xzpf $2 
+	printf "Fixing permissions\n"
+	chmod 1777 $tmp/tmp
+	chmod 4755 $tmp/bin/busybox
+	genext2fs -b 409600 -d $tmp ${1}.new
+	cat scripts/mbr ${1}.new > $1
+	rm ${1}.new 
+	;;
+(Linux)
+	dd if=$1 of=mbr bs=$offset count=1 2>/dev/null
+	dd if=$1 skip=$offset of=$1.new 2>/dev/null
+	mkfs.$filesystem $mkfsopts ${1}.new >/dev/null
+	cat mbr ${1}.new > $1
+	rm ${1}.new 
+	rm mbr
+	tmp=$(mktemp -d)
+	mount -o loop,offset=$offset -t $filesystem $1 $tmp
 if [ -z $initramfs ];then
 	printf "Extracting install archive\n"
 	tar -C $tmp -xzpf $2 
@@ -121,8 +149,14 @@ else
 	cp $2-kernel $tmp/boot/kernel
 	cp $2-initramfs $tmp/boot/initramfs
 fi
+	umount $tmp
+	;;
+(*)
+	printf Sorry, not ported to the OS "'$ostype'" yet.\n
+	exit 1
+	;;
+esac
 
-umount $tmp
 printf "Successfully installed.\n"
 printf "Be sure $1 is writable for the user which use qemu\n"
 exit 0

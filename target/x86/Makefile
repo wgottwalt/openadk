@@ -9,6 +9,12 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
+ifeq ($(ADK_TARGET_FS),genext2fs)
+imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "To install everything to CompactFlash use scripts/genext2.sh"
+endif
+
 ifeq ($(ADK_TARGET_FS),cf)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
