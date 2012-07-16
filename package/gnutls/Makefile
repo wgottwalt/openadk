@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.0.15
+PKG_VERSION:=		3.0.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		37bdac12b5c039c7a8738b5d85eda968
+PKG_MD5SUM:=		7480dff7115e5af85215893c06b3ac5c
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle
@@ -32,6 +32,7 @@ $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_OPENSSL}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-rpath \
 			--without-libz-prefix \
 			--without-p11-kit \
