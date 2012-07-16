@@ -14,6 +14,9 @@ config ADK_avr32
 config ADK_cris
 	bool
 
+config ADK_m68k
+	bool
+
 config ADK_mips
 	bool
 
@@ -53,6 +56,7 @@ config ADK_TARGET_ARCH
 	default "arm"  if ADK_armeb
 	default "avr32"  if ADK_avr32
 	default "cris"  if ADK_cris
+	default "m68k"  if ADK_m68k
 	default "mips"  if ADK_mips
 	default "mips"  if ADK_mipsel
 	default "mips"  if ADK_mips64

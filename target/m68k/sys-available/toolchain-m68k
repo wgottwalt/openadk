@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_M68K
+	bool "Toolchain only"
+	select ADK_m68k
+	select ADK_toolchain_m68k
+	select ADK_TOOLCHAIN
+	help
+	  Build a cris toolchain (m68k).
+

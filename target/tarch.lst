@@ -1,6 +1,7 @@
 arm
 armeb
 cris
+m68k
 mips
 mipsel
 ppc

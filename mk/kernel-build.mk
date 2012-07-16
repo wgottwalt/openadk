@@ -28,7 +28,7 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR
 $(LINUX_DIR)/vmlinux: $(LINUX_DIR)/.config
 	-rm $(LINUX_DIR)/vmlinux
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) V=1 ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \

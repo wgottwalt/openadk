@@ -331,6 +331,9 @@ config ADK_CPU_ARMV5
 config ADK_CPU_XSCALE
 	boolean
 
+config ADK_CPU_M68K
+	boolean
+
 config ADK_TARGET_CPU_ARCH
 	string
 	default "x86_64" if ADK_CPU_X86_64
@@ -341,6 +344,7 @@ config ADK_TARGET_CPU_ARCH
 	default "i586" if ADK_CPU_GEODE
 	default "i686" if ADK_CPU_PENTIUM_M
 	default "i686" if ADK_CPU_ATOM
+	default "m68k" if ADK_LINUX_M68K
 	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
 	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
 	default "mips" if ADK_LINUX_MIPS && ADK_big

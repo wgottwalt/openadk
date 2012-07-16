@@ -1,0 +1,11 @@
+config ADK_TARGET_SYSTEM_QEMU_M68K
+	bool "Qemu Emulator"
+	select ADK_m68k
+	select ADK_qemu_m68k
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_HDD
+	select ADK_HARDWARE_QEMU
+	help
+	 Support for Qemu Emulator (M68K).
+

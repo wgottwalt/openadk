@@ -32,6 +32,12 @@ config ADK_LINUX_CRIS
 	help
 	  Support for CRIS systems.
 
+config ADK_LINUX_M68K
+	bool "m68k system"
+	select ADK_m68k
+	help
+	  Support for m68k systems.
+
 config ADK_LINUX_MIPS
 	bool "mips system"
 	select ADK_mips
