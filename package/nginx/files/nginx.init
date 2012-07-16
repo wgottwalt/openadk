@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG nginx
+#INIT 70
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${nginx:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/lib/nginx ] || mkdir -p /var/lib/nginx
+	[ -d /var/log/nginx ] || mkdir -p /var/log/nginx
+	/usr/sbin/nginx
+  	;;
+stop)
+	kill $(pgrep -f /usr/sbin/nginx)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

@@ -1,0 +1,11 @@
+--- nginx-1.2.2.orig/auto/cc/name	2012-02-27 17:23:44.000000000 +0100
++++ nginx-1.2.2/auto/cc/name	2012-07-16 09:27:16.000000000 +0200
+@@ -7,7 +7,7 @@ if [ "$NGX_PLATFORM" != win32 ]; then
+ 
+     ngx_feature="C compiler"
+     ngx_feature_name=
+-    ngx_feature_run=yes
++    ngx_feature_run=
+     ngx_feature_incs=
+     ngx_feature_path=
+     ngx_feature_libs=
