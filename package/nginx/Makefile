@@ -20,7 +20,8 @@ $(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIG_STYLE:=          minimal
 TARGET_CFLAGS+=         -fPIC
-CONFIGURE_ARGS:=        --prefix=/usr \
+CONFIGURE_ARGS:=        --prefix=/srv/nginx \
+			--sbin-path=/usr/sbin \
 			--user=nginx \
 			--group=nginx \
 			--crossbuild=Linux::$(ARCH) \
@@ -34,7 +35,8 @@ CONFIGURE_ARGS:=        --prefix=/usr \
                         --http-log-path=/var/log/nginx/access.log \
                         --http-client-body-temp-path=/var/lib/nginx/body \
                         --http-proxy-temp-path=/var/lib/nginx/proxy \
-                        --http-fastcgi-temp-path=/var/lib/nginx/fastcgi
+                        --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
+			--with-http_ssl_module
 ALL_TARGET:=		
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
@@ -46,5 +48,7 @@ nginx-install:
 		cp $(WRKINST)/etc/nginx/$${f} \
 		$(IDIR_NGINX)/etc/nginx ; \
 	done
+	$(INSTALL_DIR) $(IDIR_NGINX)/srv/nginx/html
+	$(CP) $(WRKINST)/srv/nginx/html/* $(IDIR_NGINX)/srv/nginx/html
 
 include ${TOPDIR}/mk/pkg-bottom.mk
