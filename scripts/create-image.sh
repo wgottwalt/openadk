@@ -41,10 +41,6 @@ do
 done
 shift $(($OPTIND - 1))
 
-if [ $(id -u) -ne 0 ];then
-	printf "Installation is only possible as root\n"
-	exit 1
-fi
 
 tools='qemu-img'
 ostype=$(uname -s)
@@ -55,6 +51,10 @@ case $ostype in
 	;;
 (Linux)
 	tools="$tools mke2fs parted"
+	if [ $(id -u) -ne 0 ];then
+		printf "Installation is only possible as root\n"
+		exit 1
+	fi
 	;;
 (*)
 	printf Sorry, not ported to the OS "'$ostype'" yet.\n
@@ -111,7 +111,6 @@ case $ostype in
 esac
 
 
-printf "Creating filesystem $filesystem\n"
 
 if [ "$filesystem" = "ext2" -o "$filesystem" = "ext3" -o "$filesystem" = "ext4" ];then
 	mkfsopts=-F
@@ -124,13 +123,15 @@ case $ostype in
 	printf "Fixing permissions\n"
 	chmod 1777 $tmp/tmp
 	chmod 4755 $tmp/bin/busybox
-	genext2fs -b 409600 -d $tmp ${1}.new
+	printf "Creating filesystem $filesystem\n"
+	genext2fs -q -b 409600 -d $tmp ${1}.new
 	cat scripts/mbr ${1}.new > $1
 	rm ${1}.new 
 	;;
 (Linux)
 	dd if=$1 of=mbr bs=$offset count=1 2>/dev/null
 	dd if=$1 skip=$offset of=$1.new 2>/dev/null
+	printf "Creating filesystem $filesystem\n"
 	mkfs.$filesystem $mkfsopts ${1}.new >/dev/null
 	cat mbr ${1}.new > $1
 	rm ${1}.new 
