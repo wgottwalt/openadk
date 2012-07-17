@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
-PKG_VERSION:=		1.4.12.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		212112389c7f10c72efb31a4ed193a4c
+PKG_VERSION:=		1.4.14
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5ab24ad683f76689cfe7e0c73f44855d
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack
