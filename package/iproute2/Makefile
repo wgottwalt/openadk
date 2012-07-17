@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		3.3.0
+PKG_VERSION:=		3.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		39a7ff2c5149475c710365954e2ce49b
+PKG_MD5SUM:=		879d3fac4e90809598b2864ec4a0cbf8
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
 PKG_BUILDDEP:=		iptables libnl linux-atm
@@ -55,19 +55,19 @@ ip-install:
 	${INSTALL_BIN} ${WRKINST}/sbin/ip ${IDIR_IP}/usr/sbin/ip
 
 tc-install:
-	${INSTALL_DIR} ${IDIR_TC}/{lib/tc,usr/sbin,usr/lib/tc}
+	${INSTALL_DIR} ${IDIR_TC}/{usr/sbin,usr/lib/tc}
 	${CP} ${WRKINST}/usr/lib/tc/*.dist ${IDIR_TC}/usr/lib/tc/
 	${INSTALL_BIN} ${WRKINST}/sbin/tc ${IDIR_TC}/usr/sbin/
 
 tc-atm-install:
-	${INSTALL_DIR} ${IDIR_TC_ATM}/lib/tc
-	${INSTALL_DATA} ${WRKINST}/lib/tc/q_atm.so \
-		${IDIR_TC_ATM}/lib/tc/
+	${INSTALL_DIR} ${IDIR_TC_ATM}/usr/lib/tc
+	${INSTALL_DATA} ${WRKINST}/usr/lib/tc/q_atm.so \
+		${IDIR_TC_ATM}/usr/lib/tc/
 
 tc-iptables-install:
-	${INSTALL_DIR} ${IDIR_TC_IPT}/lib/tc
+	${INSTALL_DIR} ${IDIR_TC_IPT}/usr/lib/tc
 	# use ${CP} here, since m_ipt.so is a symlink to m_xt.so
-	${CP} ${WRKINST}/lib/tc/m_*.so ${IDIR_TC}/lib/tc/
+	${CP} ${WRKINST}/usr/lib/tc/m_*.so ${IDIR_TC}/usr/lib/tc/
 
 ifstat-install:
 	${INSTALL_DIR} ${IDIR_IFSTAT}/usr/sbin
