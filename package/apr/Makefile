@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		apr
-PKG_VERSION:=		1.4.2
+PKG_VERSION:=		1.4.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fc80cb54f158c2674f9eeb47a1f672cd
+PKG_MD5SUM:=		76cc4457fbb71eefdafa27dba8f511fb
 PKG_DESCR:=		Apache Portable Runtime library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread

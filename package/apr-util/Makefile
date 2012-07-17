@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		apr-util
-PKG_VERSION:=		1.3.10
+PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		82acd25cf3df8c72eba44eaee8b80c19
+PKG_MD5SUM:=		666a5d56098a9debf998510e304c8095
 PKG_DESCR:=		Apache Portable Runtime utility library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat apr

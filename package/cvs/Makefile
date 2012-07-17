@@ -16,7 +16,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CVS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+CONFIGURE_ENV+=		ac_cv_lib_nsl_main=no
+
+cvs-install:
 	$(INSTALL_DIR) $(IDIR_CVS)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/cvs \
 		$(IDIR_CVS)/usr/bin
