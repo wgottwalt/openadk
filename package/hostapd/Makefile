@@ -4,10 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hostapd
-# git version from 03.04.2012
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2a93bb1ecfcdf23a9d7db1f272e5e764
+PKG_MD5SUM:=		236247a7bbd4f60d5fa3e99849d1ffc9
 PKG_DESCR:=		an IEEE 802.11 AP, IEEE 802.1x/WPA/WPA2/EAP/RADIUS Authenticator
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wpa_supplicant
-PKG_VERSION:=		0.7.3
+PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f516f191384a9a546e3f5145c08addda
+PKG_MD5SUM:=		8650f6aa23646ef634402552d0669640
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
