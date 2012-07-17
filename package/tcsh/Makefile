@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tcsh
-PKG_VERSION:=		6.17.00
+PKG_VERSION:=		6.18.01
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c47de903e3d52f6824c8dd0c91eeb477
+PKG_MD5SUM:=		6eed09dbd4223ab5b6955378450d228a
 PKG_DESCR:=		alternative csh
 PKG_SECTION:=		shells
 PKG_DEPENDS:=		libncurses
