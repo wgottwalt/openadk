@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
-PKG_VERSION:=		3.2.7
+PKG_VERSION:=		3.2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6a233a9dffa0ee3a7f6110c95c5410ab
+PKG_MD5SUM:=		7a35f3a17b52f41ee120dceb99b2ef72
 PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.infradead.org/~tgr/libnl/
