@@ -1,7 +1,7 @@
-diff -Nur linux-2.6.36.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.36/arch/cris/include/arch-v10/arch/Kbuild
---- linux-2.6.36.orig/arch/cris/include/arch-v10/arch/Kbuild	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/arch/cris/include/arch-v10/arch/Kbuild	2010-11-15 17:35:24.000000000 +0100
-@@ -1,4 +1,9 @@
+diff -Nur linux-3.4.4.orig/arch/cris/include/arch-v10/arch/Kbuild linux-3.4.4/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-3.4.4.orig/arch/cris/include/arch-v10/arch/Kbuild	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/arch/cris/include/arch-v10/arch/Kbuild	2012-07-18 07:38:39.000000000 +0200
+@@ -1,4 +1,10 @@
 +header-y += dma.h
 +header-y += io_interface_mux.h
  header-y += user.h
@@ -11,19 +11,21 @@ diff -Nur linux-2.6.36.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.36/
 +header-y += elf.h
 +header-y += page.h
 +header-y += ptrace.h
-diff -Nur linux-2.6.36.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.36/arch/cris/include/arch-v32/arch/Kbuild
---- linux-2.6.36.orig/arch/cris/include/arch-v32/arch/Kbuild	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/arch/cris/include/arch-v32/arch/Kbuild	2010-11-15 17:35:24.000000000 +0100
-@@ -1,2 +1,6 @@
++header-y += system.h
+diff -Nur linux-3.4.4.orig/arch/cris/include/arch-v32/arch/Kbuild linux-3.4.4/arch/cris/include/arch-v32/arch/Kbuild
+--- linux-3.4.4.orig/arch/cris/include/arch-v32/arch/Kbuild	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/arch/cris/include/arch-v32/arch/Kbuild	2012-07-18 07:38:26.000000000 +0200
+@@ -1,2 +1,7 @@
  header-y += user.h
  header-y += cryptocop.h
 +header-y += elf.h
 +header-y += page.h
 +header-y += ptrace.h
++header-y += system.h
 +
-diff -Nur linux-2.6.36.orig/arch/cris/include/asm/Kbuild linux-2.6.36/arch/cris/include/asm/Kbuild
---- linux-2.6.36.orig/arch/cris/include/asm/Kbuild	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/arch/cris/include/asm/Kbuild	2010-11-15 17:37:57.000000000 +0100
+diff -Nur linux-3.4.4.orig/arch/cris/include/asm/Kbuild linux-3.4.4/arch/cris/include/asm/Kbuild
+--- linux-3.4.4.orig/arch/cris/include/asm/Kbuild	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/arch/cris/include/asm/Kbuild	2012-07-18 07:38:03.000000000 +0200
 @@ -1,10 +1,13 @@
  include include/asm-generic/Kbuild.asm
  
@@ -41,9 +43,27 @@ diff -Nur linux-2.6.36.orig/arch/cris/include/asm/Kbuild linux-2.6.36/arch/cris/
  header-y += sync_serial.h
 +header-y += page.h
 +header-y += user.h
-diff -Nur linux-2.6.36.orig/include/asm-generic/Kbuild linux-2.6.36/include/asm-generic/Kbuild
---- linux-2.6.36.orig/include/asm-generic/Kbuild	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/include/asm-generic/Kbuild	2010-11-15 17:37:02.000000000 +0100
+diff -Nur linux-3.4.4.orig/arch/cris/include/asm/posix_types.h linux-3.4.4/arch/cris/include/asm/posix_types.h
+--- linux-3.4.4.orig/arch/cris/include/asm/posix_types.h	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/arch/cris/include/asm/posix_types.h	2012-07-18 17:10:45.000000000 +0200
+@@ -6,6 +6,7 @@
+ #ifndef __ARCH_CRIS_POSIX_TYPES_H
+ #define __ARCH_CRIS_POSIX_TYPES_H
+ 
++
+ /*
+  * This file is generally used by user-level software, so you need to
+  * be a little careful about namespace pollution etc.  Also, we cannot
+@@ -33,4 +34,6 @@
+ typedef unsigned short	__kernel_old_dev_t;
+ #define __kernel_old_dev_t __kernel_old_dev_t
+ 
++#include <asm-generic/posix_types.h>
++
+ #endif /* __ARCH_CRIS_POSIX_TYPES_H */
+diff -Nur linux-3.4.4.orig/include/asm-generic/Kbuild linux-3.4.4/include/asm-generic/Kbuild
+--- linux-3.4.4.orig/include/asm-generic/Kbuild	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/include/asm-generic/Kbuild	2012-07-18 07:38:03.000000000 +0200
 @@ -3,14 +3,17 @@
  header-y += errno-base.h
  header-y += errno.h
@@ -62,14 +82,14 @@ diff -Nur linux-2.6.36.orig/include/asm-generic/Kbuild linux-2.6.36/include/asm-
  header-y += param.h
  header-y += poll.h
  header-y += posix_types.h
-diff -Nur linux-2.6.36.orig/include/linux/Kbuild linux-2.6.36/include/linux/Kbuild
---- linux-2.6.36.orig/include/linux/Kbuild	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/include/linux/Kbuild	2010-11-15 17:36:11.000000000 +0100
-@@ -365,6 +365,7 @@
+diff -Nur linux-3.4.4.orig/include/linux/Kbuild linux-3.4.4/include/linux/Kbuild
+--- linux-3.4.4.orig/include/linux/Kbuild	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/include/linux/Kbuild	2012-07-18 07:38:03.000000000 +0200
+@@ -380,6 +380,7 @@
  header-y += un.h
  header-y += unistd.h
  header-y += usbdevice_fs.h
 +header-y += user.h
  header-y += utime.h
  header-y += utsname.h
- header-y += veth.h
+ header-y += uvcvideo.h
