@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7b0ac1c0a88d8fbe7316db02f21666e6
 PKG_DESCR:=		cryptodev-linux kernel module
 PKG_SECTION:=		crypto
+PKG_DEPENDS:=		kmod-crypto-manager2
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 
@@ -33,8 +34,10 @@ do-install:
 	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/include/crypto
 	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
 		${IDIR_CRYPTODEV_LINUX}/usr/include/crypto/
-	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} ${KERNEL_MAKE_OPTS} DEPMOD=false \
-		M="${WRKBUILD}" INSTALL_MOD_PATH=${IDIR_CRYPTODEV_LINUX} \
-		modules_install
+	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/etc/modules.d/
+	echo "cryptodev" > ${IDIR_CRYPTODEV_LINUX}/etc/modules.d/90-cryptodev
+	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/lib/modules/${KERNEL_VERSION}/
+	$(INSTALL_DATA)	$(WRKBUILD)/cryptodev.ko \
+		$(IDIR_CRYPTODEV_LINUX)/lib/modules/${KERNEL_VERSION}/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
