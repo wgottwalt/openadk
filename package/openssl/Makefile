@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1c
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ae412727c8c15b67880aef7bd2999b2e
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
@@ -22,8 +22,10 @@ PKGSD_LIBOPENSSL_DEV:=	development files for openssl
 PKGSC_LIBOPENSSL_DEV:=	devel
 PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
-PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC
+PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC WITH_CRYPTODEV
 PKGFD_WITH_EC:=			enable Elliptic Curve crypto
+PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
+PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -45,6 +47,10 @@ OPENSSL_OPTIONS:= shared no-err no-krb5 no-threads zlib-dynamic no-engines no-ca
 
 ifeq ($(ADK_PACKAGE_LIBOPENSSL_WITH_EC),)
 OPENSSL_OPTIONS+= no-ec
+endif
+
+ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
+OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
 endif
 
 do-configure:
