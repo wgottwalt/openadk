@@ -1,0 +1,20 @@
+--- ipvsadm-1.26.orig/libipvs/Makefile	2008-09-21 12:02:03.000000000 +0200
++++ ipvsadm-1.26/libipvs/Makefile	2012-07-20 13:53:25.000000000 +0200
+@@ -1,7 +1,7 @@
+ # Makefile for libipvs
+ 
+-CC		= gcc
+-CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
++CC		?= gcc
++CFLAGS		?= -Wall -Wunused -Wstrict-prototypes -g -fPIC
+ ifneq (0,$(HAVE_NL))
+ CFLAGS		+= -DLIBIPVS_USE_NL
+ endif
+@@ -19,6 +19,7 @@ all:		$(STATIC_LIB) $(SHARED_LIB)
+ 
+ $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
+ 		ar rv $@ $^
++		ranlib $@
+ 
+ $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
+ 		$(CC) -shared -Wl,-soname,$@ -o $@ $^

@@ -1,0 +1,49 @@
+--- ipvsadm-1.26.orig/Makefile	2011-02-08 01:24:23.000000000 +0100
++++ ipvsadm-1.26/Makefile	2012-07-20 14:46:15.000000000 +0200
+@@ -35,20 +35,20 @@ ARCH		= $(shell uname -m)
+ RPMSOURCEDIR	= $(shell rpm --eval '%_sourcedir')
+ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
+ 
+-CC		= gcc
++CC		?= gcc
+ INCLUDE		=
+-SBIN		= $(BUILD_ROOT)/sbin
++SBIN		= $(DESTDIR)/sbin
+ MANDIR		= usr/man
+-MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
+-INIT		= $(BUILD_ROOT)/etc/rc.d/init.d
++MAN		= $(DESTDIR)/$(MANDIR)/man8
++INIT		= $(DESTDIR)/etc/rc.d/init.d
+ MKDIR		= mkdir
+ INSTALL		= install
+ STATIC_LIBS	= libipvs/libipvs.a
+ 
+ ifeq "${ARCH}" "sparc64"
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
++    CFLAGS ?= -Wall -Wunused -Wstrict-prototypes -g -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
+ else
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g
++    CFLAGS ?= -Wall -Wunused -Wstrict-prototypes -g
+ endif
+ 
+ 
+@@ -81,7 +81,7 @@ endif
+ OBJS		= ipvsadm.o config_stream.o dynamic_array.o
+ LIBS		= $(POPT_LIB)
+ ifneq (0,$(HAVE_NL))
+-LIBS		+= -lnl
++LIBS		+= -lnl-3
+ endif
+ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
+ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
+@@ -96,8 +96,8 @@ all:            libs ipvsadm
+ libs:
+ 		make -C libipvs
+ 
+-ipvsadm:	$(OBJS) $(STATIC_LIBS)
+-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
++ipvsadm:	$(OBJS)
++		$(CC) $(CFLAGS) -o $@ $^ $(LIBS) -lpopt -lipvs -L./libipvs
+ 
+ install:        all
+ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
