@@ -60,13 +60,6 @@ config ADK_KPACKAGE_KMOD_IP_NF_TARGET_REJECT
 	  error should be issued in response to an incoming packet, rather
 	  than silently being dropped.
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_LOG
-	tristate 'LOG target support'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_FILTER
-	help
-	  This option adds a `LOG' target, which allows you to create rules in
-	  any iptables table which records the packet header to the syslog.
-
 config ADK_KPACKAGE_KMOD_IP_NF_TARGET_ULOG
 	tristate 'ULOG target support (ipv4 only)'
 	depends on ADK_KPACKAGE_KMOD_IP_NF_FILTER

@@ -35,32 +35,32 @@ $(eval $(call KMOD_template,SATA_AHCI,sata-ahci,\
 # 
 
 $(eval $(call KMOD_template,NE2K_PCI,ne2k-pci,\
-	$(MODULES_DIR)/kernel/drivers/net/8390 \
-	$(MODULES_DIR)/kernel/drivers/net/ne2k-pci \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/8390/8390 \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/8390/ne2k-pci \
 ,20))
 
 $(eval $(call KMOD_template,8139CP,8139cp,\
-	$(MODULES_DIR)/kernel/drivers/net/8139cp \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/realtek/8139cp \
 ,20))
 
 $(eval $(call KMOD_template,8139TOO,8139too,\
-	$(MODULES_DIR)/kernel/drivers/net/8139too \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/realtek/8139too \
 ,20))
 
 $(eval $(call KMOD_template,E100,e100,\
-	$(MODULES_DIR)/kernel/drivers/net/e100 \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/intel/e100 \
 ,20))
 
 $(eval $(call KMOD_template,E1000,e1000,\
-	$(MODULES_DIR)/kernel/drivers/net/e1000/e1000 \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/intel/e1000/e1000 \
 ,20))
 
 $(eval $(call KMOD_template,SKY2,sky2,\
-	$(MODULES_DIR)/kernel/drivers/net/sky2 \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/marvell/sky2 \
 ,20))
 
 $(eval $(call KMOD_template,R8169,r8169,\
-	$(MODULES_DIR)/kernel/drivers/net/r8169 \
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/realtek/r8169 \
 ,20))
 
 # 
@@ -427,6 +427,10 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_NOTRACK,netfilter-xt-target-notr
 	$(MODULES_DIR)/kernel/net/netfilter/xt_NOTRACK \
 ,50))
 
+$(eval $(call KMOD_template,NETFILTER_XT_TARGET_LOG,netfilter-xt-target-log,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_LOG \
+,60))
+
 #
 # IP: Netfilter
 #
@@ -553,9 +557,6 @@ $(eval $(call KMOD_template,IP_NF_TARGET_REJECT,ip-nf-target-reject,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_REJECT \
 ,60))
 
-$(eval $(call KMOD_template,IP_NF_TARGET_LOG,ip-nf-target-log,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_LOG \
-,60))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_ULOG,ip-nf-target-ulog,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_ULOG \
@@ -636,10 +637,6 @@ $(eval $(call KMOD_template,IP6_NF_MATCH_MH,ip6-nf-match-mh,\
 
 $(eval $(call KMOD_template,IP6_NF_MATCH_RT,ip6-nf-match-rt,\
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_rt \
-,55))
-
-$(eval $(call KMOD_template,IP6_NF_TARGET_LOG,ip6-nf-target-log,\
-	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_LOG \
 ,55))
 
 #
@@ -963,7 +960,7 @@ $(eval $(call KMOD_template,CRYPTO_ANUBIS,crypto-anubis,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_CAMELLIA,crypto-camellia,\
-    $(MODULES_DIR)/kernel/crypto/camellia \
+    $(MODULES_DIR)/kernel/crypto/camellia_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
@@ -1178,9 +1175,6 @@ endif
 $(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
 	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
 	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
-	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-core \
-	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-memops \
-	$(MODULES_DIR)/kernel/drivers/media/video/videobuf2-vmalloc \
 ,65))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\

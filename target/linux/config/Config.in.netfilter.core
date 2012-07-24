@@ -1,3 +1,9 @@
+config ADK_KPACKAGE_KMOD_NETFILTER_NETLINK_LOG
+	tristate 'Netfilter LOG over NFNETLINK interface'
+	help
+	  If this option is enabled, the kernel will include support                                                                                        
+	  for logging packets via NFNETLINK.
+
 config ADK_KPACKAGE_KMOD_NF_CONNTRACK
 	tristate 'Netfilter connection tracking support'
 	select ADK_KERNEL_NETFILTER_XTABLES
@@ -54,6 +60,13 @@ config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_NFQUEUE
 
 	  As opposed to QUEUE, it supports 65535 different queues,
 	  not just one.
+
+config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_LOG
+	tristate 'LOG target support'
+	depends on ADK_KPACKAGE_KMOD_IP_NF_FILTER
+	help
+	  This option adds a `LOG' target, which allows you to create rules in
+	  any iptables table which records the packet header to the syslog.
 
 config ADK_KPACKAGE_KMOD_NETFILTER_XT_TARGET_TCPMSS
 	tristate 'TCPMSS target'

@@ -84,13 +84,6 @@ config ADK_KPACKAGE_KMOD_IP6_NF_MATCH_RT
 	  To compile it as a module, choose M here.  If unsure, say N.
 
 # The targets
-config ADK_KPACKAGE_KMOD_IP6_NF_TARGET_LOG
-	tristate "LOG target support"
-	help
-	  This option adds a `LOG' target, which allows you to create rules in
-	  any iptables table which records the packet header to the syslog.
-
-	  To compile it as a module, choose M here.  If unsure, say N.
 
 config ADK_KPACKAGE_KMOD_IP6_NF_FILTER
 	tristate "Packet filtering"

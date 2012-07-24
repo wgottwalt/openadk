@@ -4,6 +4,7 @@ config ADK_KPACKAGE_KMOD_IP_VS
 	prompt "kmod-ip-vs............................ IPVS support"
 	tristate
 	select ADK_KERNEL_NETFILTER
+	select ADK_KPACKAGE_KMOD_NF_CONNTRACK
 	default n
 
 config ADK_KERNEL_IP_VS_DEBUG

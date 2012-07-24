@@ -1,80 +1,53 @@
-diff -Nur linux-2.6.36.orig/scripts/Makefile.lib linux-2.6.36/scripts/Makefile.lib
---- linux-2.6.36.orig/scripts/Makefile.lib	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/scripts/Makefile.lib	2010-11-28 18:34:22.000000000 +0100
-@@ -216,7 +216,12 @@
- size_append = printf $(shell						\
- dec_size=0;								\
- for F in $1; do								\
--	fsize=$$(stat -c "%s" $$F);					\
-+	if stat -qs .>/dev/null 2>&1; then				\
-+		statcmd='stat -f %z';					\
-+	else								\
-+		statcmd='stat -c %s';					\
-+	fi;								\
-+	fsize=$$($$statcmd $$F);					\
- 	dec_size=$$(expr $$dec_size + $$fsize);				\
- done;									\
- printf "%08x\n" $$dec_size |						\
-diff -Nur linux-2.6.36.orig/scripts/mod/mk_elfconfig.c linux-2.6.36/scripts/mod/mk_elfconfig.c
---- linux-2.6.36.orig/scripts/mod/mk_elfconfig.c	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/scripts/mod/mk_elfconfig.c	2010-11-28 18:33:24.000000000 +0100
-@@ -1,7 +1,18 @@
- #include <stdio.h>
- #include <stdlib.h>
+diff -Nur linux-3.4.4.orig/arch/x86/tools/relocs.c linux-3.4.4/arch/x86/tools/relocs.c
+--- linux-3.4.4.orig/arch/x86/tools/relocs.c	2012-06-22 20:37:50.000000000 +0200
++++ linux-3.4.4/arch/x86/tools/relocs.c	2012-07-03 09:19:18.000000000 +0200
+@@ -5,12 +5,3123 @@
  #include <string.h>
--#include <elf.h>
-+
-+#define EI_NIDENT (16)
-+#define ELFMAG          "\177ELF"
-+
-+#define SELFMAG         4
-+#define EI_CLASS        4
-+#define ELFCLASS32      1               /* 32-bit objects */
-+#define ELFCLASS64      2               /* 64-bit objects */
-+
-+#define EI_DATA         5               /* Data encoding byte index */
-+#define ELFDATA2LSB     1               /* 2's complement, little endian */
-+#define ELFDATA2MSB     2               /* 2's complement, big endian */
- 
- int
- main(int argc, char **argv)
-diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpost.h
---- linux-2.6.36.orig/scripts/mod/modpost.h	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/scripts/mod/modpost.h	2010-11-28 18:33:24.000000000 +0100
-@@ -7,7 +7,2453 @@
- #include <sys/mman.h>
- #include <fcntl.h>
+ #include <errno.h>
  #include <unistd.h>
 -#include <elf.h>
+-#include <byteswap.h>
++//#include <elf.h>
++//#include <byteswap.h>
+ #define USE_BSD
+-#include <endian.h>
++//#include <endian.h>
+ #include <regex.h>
+-#include <tools/le_byteshift.h>
++//#include <tools/le_byteshift.h>
 +
++static inline void __put_unaligned_le16(int val, int *p)
++{
++	*p++ = val;
++	*p++ = val >> 8;
++}
 +
-+/* This file defines standard ELF types, structures, and macros.
-+   Copyright (C) 1995-1999,2000,2001,2002,2003 Free Software Foundation, Inc.
-+   This file is part of the GNU C Library.
++static inline void __put_unaligned_le32(int val, int *p)
++{
++	__put_unaligned_le16(val >> 16, p + 2);
++	__put_unaligned_le16(val, p);
++}
 +
-+   The GNU C Library is free software; you can redistribute it and/or
-+   modify it under the terms of the GNU Lesser General Public
-+   License as published by the Free Software Foundation; either
-+   version 2.1 of the License, or (at your option) any later version.
++static inline void __put_unaligned_le64(int val, int *p)
++{
++	__put_unaligned_le32(val >> 32, p + 4);
++	__put_unaligned_le32(val, p);
++}
 +
-+   The GNU C Library is distributed in the hope that it will be useful,
-+   but WITHOUT ANY WARRANTY; without even the implied warranty of
-+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+   Lesser General Public License for more details.
++static inline void put_unaligned_le16(int val, void *p)
++{
++	__put_unaligned_le16(val, p);
++}
 +
-+   You should have received a copy of the GNU Lesser General Public
-+   License along with the GNU C Library; if not, write to the Free
-+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-+   02111-1307 USA.  */
++static inline void put_unaligned_le32(int val, void *p)
++{
++	__put_unaligned_le32(val, p);
++}
 +
-+#ifndef _ELF_H
-+#define	_ELF_H 1
-+
-+__BEGIN_DECLS
-+
-+/* Standard ELF types.  */
-+
-+#include <stdint.h>
++static inline void put_unaligned_le64(int val, void *p)
++{
++	__put_unaligned_le64(val, p);
++}
 +
 +/* Type for a 16-bit quantity.  */
 +typedef uint16_t Elf32_Half;
@@ -168,6 +141,11 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +/* Conglomeration of the identification bytes, for easy testing as a word.  */
 +#define	ELFMAG		"\177ELF"
 +#define	SELFMAG		4
++#if __BYTE_ORDER == __LITTLE_ENDIAN
++# define ELFMAG_U32 ((uint32_t)(ELFMAG0 + 0x100 * (ELFMAG1 + (0x100 * (ELFMAG2 + 0x100 * ELFMAG3)))))
++#elif __BYTE_ORDER == __BIG_ENDIAN
++# define ELFMAG_U32 ((uint32_t)((((ELFMAG0 * 0x100) + ELFMAG1) * 0x100 + ELFMAG2) * 0x100 + ELFMAG3))
++#endif
 +
 +#define EI_CLASS	4		/* File class byte index */
 +#define ELFCLASSNONE	0		/* Invalid class */
@@ -190,6 +168,7 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define ELFOSABI_HPUX		1	/* HP-UX */
 +#define ELFOSABI_NETBSD		2	/* NetBSD.  */
 +#define ELFOSABI_LINUX		3	/* Linux.  */
++#define ELFOSABI_HURD		4	/* GNU/Hurd */
 +#define ELFOSABI_SOLARIS	6	/* Sun Solaris.  */
 +#define ELFOSABI_AIX		7	/* IBM AIX.  */
 +#define ELFOSABI_IRIX		8	/* SGI Irix.  */
@@ -197,6 +176,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define ELFOSABI_TRU64		10	/* Compaq TRU64 UNIX.  */
 +#define ELFOSABI_MODESTO	11	/* Novell Modesto.  */
 +#define ELFOSABI_OPENBSD	12	/* OpenBSD.  */
++#define ELFOSABI_OPENVMS	13	/* OpenVMS */
++#define ELFOSABI_NSK		14	/* Hewlett-Packard Non-Stop Kernel */
++#define ELFOSABI_AROS		15	/* Amiga Research OS */
 +#define ELFOSABI_ARM		97	/* ARM */
 +#define ELFOSABI_STANDALONE	255	/* Standalone (embedded) application */
 +
@@ -225,6 +207,7 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define EM_386		 3		/* Intel 80386 */
 +#define EM_68K		 4		/* Motorola m68k family */
 +#define EM_88K		 5		/* Motorola m88k family */
++#define EM_486		 6		/* Intel 80486 *//* Reserved for future use */
 +#define EM_860		 7		/* Intel 80860 */
 +#define EM_MIPS		 8		/* MIPS R3000 big-endian */
 +#define EM_S370		 9		/* IBM System/370 */
@@ -241,17 +224,18 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define EM_V800		36		/* NEC V800 series */
 +#define EM_FR20		37		/* Fujitsu FR20 */
 +#define EM_RH32		38		/* TRW RH-32 */
-+#define EM_RCE		39		/* Motorola RCE */
++#define EM_MCORE	39		/* Motorola M*Core */ /* May also be taken by Fujitsu MMA */
++#define EM_RCE		39		/* Old name for MCore */
 +#define EM_ARM		40		/* ARM */
 +#define EM_FAKE_ALPHA	41		/* Digital Alpha */
-+#define EM_SH		42		/* Hitachi SH */
++#define EM_SH		42		/* Renesas SH */
 +#define EM_SPARCV9	43		/* SPARC v9 64-bit */
 +#define EM_TRICORE	44		/* Siemens Tricore */
 +#define EM_ARC		45		/* Argonaut RISC Core */
-+#define EM_H8_300	46		/* Hitachi H8/300 */
-+#define EM_H8_300H	47		/* Hitachi H8/300H */
-+#define EM_H8S		48		/* Hitachi H8S */
-+#define EM_H8_500	49		/* Hitachi H8/500 */
++#define EM_H8_300	46		/* Renesas H8/300 */
++#define EM_H8_300H	47		/* Renesas H8/300H */
++#define EM_H8S		48		/* Renesas H8S */
++#define EM_H8_500	49		/* Renesas H8/500 */
 +#define EM_IA_64	50		/* Intel Merced */
 +#define EM_MIPS_X	51		/* Stanford MIPS-X */
 +#define EM_COLDFIRE	52		/* Motorola Coldfire */
@@ -289,20 +273,119 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define EM_D10V		85		/* Mitsubishi D10V */
 +#define EM_D30V		86		/* Mitsubishi D30V */
 +#define EM_V850		87		/* NEC v850 */
-+#define EM_M32R		88		/* Mitsubishi M32R */
++#define EM_M32R		88		/* Renesas M32R */
 +#define EM_MN10300	89		/* Matsushita MN10300 */
 +#define EM_MN10200	90		/* Matsushita MN10200 */
 +#define EM_PJ		91		/* picoJava */
 +#define EM_OPENRISC	92		/* OpenRISC 32-bit embedded processor */
 +#define EM_ARC_A5	93		/* ARC Cores Tangent-A5 */
 +#define EM_XTENSA	94		/* Tensilica Xtensa Architecture */
++#define EM_IP2K		101		/* Ubicom IP2022 micro controller */
++#define EM_CR		103		/* National Semiconductor CompactRISC */
++#define EM_MSP430	105		/* TI msp430 micro controller */
++#define EM_BLACKFIN	106		/* Analog Devices Blackfin */
++#define EM_ALTERA_NIOS2	113	/* Altera Nios II soft-core processor */
++#define EM_CRX		114		/* National Semiconductor CRX */
 +#define EM_NUM		95
++#define EM_TI_C6000	140
 +
-+/* If it is necessary to assign new unofficial EM_* values, please
-+   pick large random numbers (0x8523, 0xa7f2, etc.) to minimize the
-+   chances of collision with official or non-GNU unofficial values.  */
++/* If it is necessary to assign new unofficial EM_* values, please pick large
++   random numbers (0x8523, 0xa7f2, etc.) to minimize the chances of collision
++   with official or non-GNU unofficial values.
 +
++   NOTE: Do not just increment the most recent number by one.
++   Somebody else somewhere will do exactly the same thing, and you
++   will have a collision.  Instead, pick a random number.
++
++   Normally, each entity or maintainer responsible for a machine with an
++   unofficial e_machine number should eventually ask registry@caldera.com for
++   an officially blessed number to be added to the list above.  */
++
++/* picoJava */
++#define EM_PJ_OLD	99
++
++/* Cygnus PowerPC ELF backend.  Written in the absence of an ABI.  */
++#define EM_CYGNUS_POWERPC 0x9025
++
++/* Old version of Sparc v9, from before the ABI; this should be
++   removed shortly.  */
++#define EM_OLD_SPARCV9	11
++
++/* Old version of PowerPC, this should be removed shortly. */
++#define EM_PPC_OLD	17
++
++/* (Deprecated) Temporary number for the OpenRISC processor.  */
++#define EM_OR32		0x8472
++
++/* Renesas M32C and M16C.  */
++#define EM_M32C			0xFEB0
++
++/* Cygnus M32R ELF backend.  Written in the absence of an ABI.  */
++#define EM_CYGNUS_M32R	0x9041
++
++/* old S/390 backend magic number. Written in the absence of an ABI.  */
++#define EM_S390_OLD	0xa390
++
++/* D10V backend magic number.  Written in the absence of an ABI.  */
++#define EM_CYGNUS_D10V	0x7650
++
++/* D30V backend magic number.  Written in the absence of an ABI.  */
++#define EM_CYGNUS_D30V	0x7676
++
++/* V850 backend magic number.  Written in the absense of an ABI.  */
++#define EM_CYGNUS_V850	0x9080
++
++/* mn10200 and mn10300 backend magic numbers.
++   Written in the absense of an ABI.  */
++#define EM_CYGNUS_MN10200	0xdead
++#define EM_CYGNUS_MN10300	0xbeef
++
++/* FR30 magic number - no EABI available.  */
++#define EM_CYGNUS_FR30		0x3330
++
++/* AVR magic number
++   Written in the absense of an ABI.  */
++#define EM_AVR_OLD		0x1057
++
++/* OpenRISC magic number
++   Written in the absense of an ABI.  */
++#define EM_OPENRISC_OLD		0x3426
++
++/* DLX magic number
++   Written in the absense of an ABI.  */
++#define EM_DLX			0x5aa5
++
++#define EM_XSTORMY16		0xad45
++
++/* FRV magic number - no EABI available??.  */
++#define EM_CYGNUS_FRV	0x5441
++
++/* Ubicom IP2xxx; no ABI */
++#define EM_IP2K_OLD		0x8217
++
++#define EM_MT                   0x2530  /* Morpho MT; no ABI */
++
++/* MSP430 magic number
++      Written in the absense everything.  */
++#define EM_MSP430_OLD		0x1059
++
++/* Vitesse IQ2000.  */
++#define EM_IQ2000		0xFEBA
++
++/* Old, unofficial value for Xtensa.  */
++#define EM_XTENSA_OLD		0xabc7
++
++/* Alpha backend magic number.  Written in the absence of an ABI.  */
 +#define EM_ALPHA	0x9026
++
++/* NIOS magic number - no EABI available.  */
++#define EM_NIOS32	0xFEBB
++
++/* AVR32 magic number from ATMEL */
++#define EM_AVR32       0x18ad
++
++/* V850 backend magic number.  Written in the absense of an ABI.  */
++#define EM_CYGNUS_V850 0x9080
 +
 +/* Legal values for e_version (version).  */
 +
@@ -345,6 +428,10 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define SHN_UNDEF	0		/* Undefined section */
 +#define SHN_LORESERVE	0xff00		/* Start of reserved indices */
 +#define SHN_LOPROC	0xff00		/* Start of processor-specific */
++#define SHN_BEFORE	0xff00		/* Order section before all others
++					   (Solaris).  */
++#define SHN_AFTER	0xff01		/* Order section after all others
++					   (Solaris).  */
 +#define SHN_HIPROC	0xff1f		/* End of processor-specific */
 +#define SHN_LOOS	0xff20		/* Start of OS-specific */
 +#define SHN_HIOS	0xff3f		/* End of OS-specific */
@@ -374,6 +461,7 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define SHT_SYMTAB_SHNDX  18		/* Extended section indeces */
 +#define	SHT_NUM		  19		/* Number of defined types.  */
 +#define SHT_LOOS	  0x60000000	/* Start OS-specific */
++#define SHT_GNU_HASH	  0x6ffffff6	/* GNU-style hash table.  */
 +#define SHT_GNU_LIBLIST	  0x6ffffff7	/* Prelink library list */
 +#define SHT_CHECKSUM	  0x6ffffff8	/* Checksum for DSO content.  */
 +#define SHT_LOSUNW	  0x6ffffffa	/* Sun-specific low bound.  */
@@ -405,6 +493,10 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define SHF_TLS		     (1 << 10)	/* Section hold thread-local data.  */
 +#define SHF_MASKOS	     0x0ff00000	/* OS-specific.  */
 +#define SHF_MASKPROC	     0xf0000000	/* Processor-specific */
++#define SHF_ORDERED	     (1 << 30)	/* Special ordering requirement
++					   (Solaris).  */
++#define SHF_EXCLUDE	     (1 << 31)	/* Section is excluded unless
++					   referenced or allocated (Solaris).*/
 +
 +/* Section group handling.  */
 +#define GRP_COMDAT	0x1		/* Mark group as COMDAT.  */
@@ -607,6 +699,8 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define PT_LOOS		0x60000000	/* Start of OS-specific */
 +#define PT_GNU_EH_FRAME	0x6474e550	/* GCC .eh_frame_hdr segment */
 +#define PT_GNU_STACK	0x6474e551	/* Indicates stack executability */
++#define PT_GNU_RELRO	0x6474e552	/* Read-only after relocation */
++#define PT_PAX_FLAGS	0x65041580	/* Indicates PaX flag markings */
 +#define PT_LOSUNW	0x6ffffffa
 +#define PT_SUNWBSS	0x6ffffffa	/* Sun Specific segment */
 +#define PT_SUNWSTACK	0x6ffffffb	/* Stack segment */
@@ -620,6 +714,18 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define PF_X		(1 << 0)	/* Segment is executable */
 +#define PF_W		(1 << 1)	/* Segment is writable */
 +#define PF_R		(1 << 2)	/* Segment is readable */
++#define PF_PAGEEXEC	(1 << 4)	/* Enable  PAGEEXEC */
++#define PF_NOPAGEEXEC	(1 << 5)	/* Disable PAGEEXEC */
++#define PF_SEGMEXEC	(1 << 6)	/* Enable  SEGMEXEC */
++#define PF_NOSEGMEXEC	(1 << 7)	/* Disable SEGMEXEC */
++#define PF_MPROTECT	(1 << 8)	/* Enable  MPROTECT */
++#define PF_NOMPROTECT	(1 << 9)	/* Disable MPROTECT */
++#define PF_RANDEXEC	(1 << 10)	/* Enable  RANDEXEC */
++#define PF_NORANDEXEC	(1 << 11)	/* Disable RANDEXEC */
++#define PF_EMUTRAMP	(1 << 12)	/* Enable  EMUTRAMP */
++#define PF_NOEMUTRAMP	(1 << 13)	/* Disable EMUTRAMP */
++#define PF_RANDMMAP	(1 << 14)	/* Enable  RANDMMAP */
++#define PF_NORANDMMAP	(1 << 15)	/* Disable RANDMMAP */
 +#define PF_MASKOS	0x0ff00000	/* OS-specific */
 +#define PF_MASKPROC	0xf0000000	/* Processor-specific */
 +
@@ -738,6 +844,7 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +   If any adjustment is made to the ELF object after it has been
 +   built these entries will need to be adjusted.  */
 +#define DT_ADDRRNGLO	0x6ffffe00
++#define DT_GNU_HASH	0x6ffffef5	/* GNU-style hash table.  */
 +#define DT_GNU_CONFLICT	0x6ffffef8	/* Start of conflict section */
 +#define DT_GNU_LIBLIST	0x6ffffef9	/* Library list */
 +#define DT_CONFIG	0x6ffffefa	/* Configuration information.  */
@@ -938,23 +1045,25 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +
 +typedef struct
 +{
-+  int a_type;			/* Entry type */
++  uint32_t a_type;		/* Entry type */
 +  union
 +    {
-+      long int a_val;		/* Integer value */
-+      void *a_ptr;		/* Pointer value */
-+      void (*a_fcn) (void);	/* Function pointer value */
++      uint32_t a_val;		/* Integer value */
++      /* We use to have pointer elements added here.  We cannot do that,
++	 though, since it does not work when using 32-bit definitions
++	 on 64-bit platforms and vice versa.  */
 +    } a_un;
 +} Elf32_auxv_t;
 +
 +typedef struct
 +{
-+  long int a_type;		/* Entry type */
++  uint64_t a_type;		/* Entry type */
 +  union
 +    {
-+      long int a_val;		/* Integer value */
-+      void *a_ptr;		/* Pointer value */
-+      void (*a_fcn) (void);	/* Function pointer value */
++      uint64_t a_val;		/* Integer value */
++      /* We use to have pointer elements added here.  We cannot do that,
++	 though, since it does not work when using 32-bit definitions
++	 on 64-bit platforms and vice versa.  */
 +    } a_un;
 +} Elf64_auxv_t;
 +
@@ -1002,6 +1111,12 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define AT_SYSINFO	32
 +#define AT_SYSINFO_EHDR	33
 +
++/* Shapes of the caches.  Bits 0-3 contains associativity; bits 4-7 contains
++   log2 of line size; mask those to get cache size.  */
++#define AT_L1I_CACHESHAPE	34
++#define AT_L1D_CACHESHAPE	35
++#define AT_L2_CACHESHAPE	36
++#define AT_L3_CACHESHAPE	37
 +
 +/* Note section contents.  Each entry in the note section begins with
 +   a header of a fixed form.  */
@@ -1170,11 +1285,75 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +/* Keep this the last entry.  */
 +#define R_386_NUM	   38
 +
++/* Blackfin specific definitions.  */
++#define R_BFIN_UNUSED0			0x00
++#define R_BFIN_PCREL5M2			0x01
++#define R_BFIN_UNUSED1			0x02
++#define R_BFIN_PCREL10			0x03
++#define R_BFIN_PCREL12_JUMP		0x04
++#define R_BFIN_RIMM16			0x05
++#define R_BFIN_LUIMM16			0x06
++#define R_BFIN_HUIMM16			0x07
++#define R_BFIN_PCREL12_JUMP_S		0x08
++#define R_BFIN_PCREL24_JUMP_X		0x09
++#define R_BFIN_PCREL24			0x0a
++#define R_BFIN_UNUSEDB			0x0b
++#define R_BFIN_UNUSEDC			0x0c
++#define R_BFIN_PCREL24_JUMP_L		0x0d
++#define R_BFIN_PCREL24_CALL_X		0x0e
++#define R_BFIN_var_eq_symb		0x0f
++#define R_BFIN_BYTE_DATA		0x10
++#define R_BFIN_BYTE2_DATA		0x11
++#define R_BFIN_BYTE4_DATA		0x12
++#define R_BFIN_PCREL11			0x13
++
++#define R_BFIN_GOT17M4			0x14
++#define R_BFIN_GOTHI			0x15
++#define R_BFIN_GOTLO			0x16
++#define R_BFIN_FUNCDESC			0x17
++#define R_BFIN_FUNCDESC_GOT17M4		0x18
++#define R_BFIN_FUNCDESC_GOTHI		0x19
++#define R_BFIN_FUNCDESC_GOTLO		0x1a
++#define R_BFIN_FUNCDESC_VALUE		0x1b
++#define R_BFIN_FUNCDESC_GOTOFF17M4	0x1c
++#define R_BFIN_FUNCDESC_GOTOFFHI	0x1d
++#define R_BFIN_FUNCDESC_GOTOFFLO	0x1e
++#define R_BFIN_GOTOFF17M4		0x1f
++#define R_BFIN_GOTOFFHI			0x20
++#define R_BFIN_GOTOFFLO			0x21
++
++#define EF_BFIN_PIC		0x00000001	/* -fpic */
++#define EF_BFIN_FDPIC		0x00000002      /* -mfdpic */
++#define EF_BFIN_CODE_IN_L1	0x00000010	/* --code-in-l1 */
++#define EF_BFIN_DATA_IN_L1	0x00000020	/* --data-in-l1 */
++
++/* FR-V specific definitions.  */
++#define R_FRV_NONE		0	/* No reloc.  */
++#define R_FRV_32		1	/* Direct 32 bit.  */
++/* Canonical function descriptor address.  */
++#define R_FRV_FUNCDESC		14
++/* Private function descriptor initialization.  */
++#define R_FRV_FUNCDESC_VALUE	18
++
++						/* gpr support */
++#define EF_FRV_GPR_MASK		0x00000003	/* mask for # of gprs */
++#define EF_FRV_GPR_32		0x00000001	/* -mgpr-32 */
++#define EF_FRV_GPR_64		0x00000002	/* -mgpr-64 */
++
++						/* fpr support */
++#define EF_FRV_FPR_MASK		0x0000000c	/* mask for # of fprs */
++#define EF_FRV_FPR_32		0x00000004	/* -mfpr-32 */
++#define EF_FRV_FPR_64		0x00000008	/* -mfpr-64 */
++#define EF_FRV_FPR_NONE		0x0000000c	/* -msoft-float */
++
++#define EF_FRV_PIC   0x00000100
++#define EF_FRV_FDPIC 0x00008000
++
 +/* SUN SPARC specific definitions.  */
 +
 +/* Legal values for ST_TYPE subfield of st_info (symbol type).  */
 +
-+#define STT_REGISTER	13		/* Global register reserved to app. */
++#define STT_SPARC_REGISTER	13	/* Global register reserved to app. */
 +
 +/* Values for Elf64_Ehdr.e_flags.  */
 +
@@ -1392,6 +1571,7 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define STO_MIPS_INTERNAL		0x1
 +#define STO_MIPS_HIDDEN			0x2
 +#define STO_MIPS_PROTECTED		0x3
++#define STO_MIPS_PLT			0x8
 +#define STO_MIPS_SC_ALIGN_UNUSED	0xff
 +
 +/* MIPS specific values for `st_info'.  */
@@ -1524,8 +1704,24 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_MIPS_PJUMP		35
 +#define R_MIPS_RELGOT		36
 +#define R_MIPS_JALR		37
++#define R_MIPS_TLS_DTPMOD32	38	/* Module number 32 bit */
++#define R_MIPS_TLS_DTPREL32	39	/* Module-relative offset 32 bit */
++#define R_MIPS_TLS_DTPMOD64	40	/* Module number 64 bit */
++#define R_MIPS_TLS_DTPREL64	41	/* Module-relative offset 64 bit */
++#define R_MIPS_TLS_GD		42	/* 16 bit GOT offset for GD */
++#define R_MIPS_TLS_LDM		43	/* 16 bit GOT offset for LDM */
++#define R_MIPS_TLS_DTPREL_HI16	44	/* Module-relative offset, high 16 bits */
++#define R_MIPS_TLS_DTPREL_LO16	45	/* Module-relative offset, low 16 bits */
++#define R_MIPS_TLS_GOTTPREL	46	/* 16 bit GOT offset for IE */
++#define R_MIPS_TLS_TPREL32	47	/* TP-relative offset, 32 bit */
++#define R_MIPS_TLS_TPREL64	48	/* TP-relative offset, 64 bit */
++#define R_MIPS_TLS_TPREL_HI16	49	/* TP-relative offset, high 16 bits */
++#define R_MIPS_TLS_TPREL_LO16	50	/* TP-relative offset, low 16 bits */
++#define R_MIPS_GLOB_DAT		51
++#define R_MIPS_COPY		126
++#define R_MIPS_JUMP_SLOT        127
 +/* Keep this the last entry.  */
-+#define R_MIPS_NUM		38
++#define R_MIPS_NUM		128
 +
 +/* Legal values for p_type field of Elf32_Phdr.  */
 +
@@ -1591,7 +1787,13 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define DT_MIPS_COMPACT_SIZE 0x7000002f /* (O32)Size of compact rel section. */
 +#define DT_MIPS_GP_VALUE     0x70000030 /* GP value for aux GOTs.  */
 +#define DT_MIPS_AUX_DYNAMIC  0x70000031 /* Address of aux .dynamic.  */
-+#define DT_MIPS_NUM	     0x32
++/* The address of .got.plt in an executable using the new non-PIC ABI.  */
++#define DT_MIPS_PLTGOT	     0x70000032
++/* The base of the PLT in an executable using the new non-PIC ABI if that
++   PLT is writable.  For a non-writable PLT, this is omitted or has a zero
++   value.  */
++#define DT_MIPS_RWPLT        0x70000034
++#define DT_MIPS_NUM	     0x35
 +
 +/* Legal values for DT_MIPS_FLAGS Elf32_Dyn entry.  */
 +
@@ -1884,6 +2086,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define LITUSE_ALPHA_TLS_GD	4
 +#define LITUSE_ALPHA_TLS_LDM	5
 +
++/* Legal values for d_tag of Elf64_Dyn.  */
++#define DT_ALPHA_PLTRO		(DT_LOPROC + 0)
++#define DT_ALPHA_NUM		1
 +
 +/* PowerPC specific declarations */
 +
@@ -1994,10 +2199,19 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_PPC_DIAB_RELSDA_HI	184	/* like EMB_RELSDA, but high 16 bit */
 +#define R_PPC_DIAB_RELSDA_HA	185	/* like EMB_RELSDA, adjusted high 16 */
 +
++/* GNU relocs used in PIC code sequences.  */
++#define R_PPC_REL16		249	/* word32   (sym+add-.) */
++#define R_PPC_REL16_LO		250	/* half16   (sym+add-.)@l */
++#define R_PPC_REL16_HI		251	/* half16   (sym+add-.)@h */
++#define R_PPC_REL16_HA		252	/* half16   (sym+add-.)@ha */
++
 +/* This is a phony reloc to handle any old fashioned TOC16 references
 +   that may still be in object files.  */
 +#define R_PPC_TOC16		255
 +
++/* PowerPC specific values for the Dyn d_tag field.  */
++#define DT_PPC_GOT		(DT_LOPROC + 0)
++#define DT_PPC_NUM		1
 +
 +/* PowerPC64 relocations defined by the ABIs */
 +#define R_PPC64_NONE		R_PPC_NONE
@@ -2116,7 +2330,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +
 +/* PowerPC64 specific values for the Dyn d_tag field.  */
 +#define DT_PPC64_GLINK  (DT_LOPROC + 0)
-+#define DT_PPC64_NUM    1
++#define DT_PPC64_OPD	(DT_LOPROC + 1)
++#define DT_PPC64_OPDSZ	(DT_LOPROC + 2)
++#define DT_PPC64_NUM    3
 +
 +
 +/* ARM specific declarations */
@@ -2156,7 +2372,11 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define PF_ARM_SB          0x10000000   /* Segment contains the location
 +					   addressed by the static base */
 +
++/* Processor specific values for the Phdr p_type field.  */
++#define PT_ARM_EXIDX	0x70000001	/* .ARM.exidx segment */
++
 +/* ARM relocs.  */
++
 +#define R_ARM_NONE		0	/* No reloc */
 +#define R_ARM_PC24		1	/* PC relative 26 bit branch */
 +#define R_ARM_ABS32		2	/* Direct 32 bit  */
@@ -2174,6 +2394,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_ARM_THM_SWI8		14
 +#define R_ARM_XPC25		15
 +#define R_ARM_THM_XPC22		16
++#define R_ARM_TLS_DTPMOD32	17
++#define R_ARM_TLS_DTPOFF32	18
++#define R_ARM_TLS_TPOFF32	19
 +#define R_ARM_COPY		20	/* Copy symbol at runtime */
 +#define R_ARM_GLOB_DAT		21	/* Create GOT entry */
 +#define R_ARM_JUMP_SLOT		22	/* Create PLT entry */
@@ -2192,6 +2415,14 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_ARM_GNU_VTINHERIT	101
 +#define R_ARM_THM_PC11		102	/* thumb unconditional branch */
 +#define R_ARM_THM_PC9		103	/* thumb conditional branch */
++#define R_ARM_TLS_GD32		104
++#define R_ARM_TLS_LDM32		105
++#define R_ARM_TLS_LDO32		106
++#define R_ARM_TLS_IE32		107
++#define R_ARM_TLS_LE32		108
++#define R_ARM_TLS_LDO12		109
++#define R_ARM_TLS_LE12		110
++#define R_ARM_TLS_IE12GP	111
 +#define R_ARM_RXPC25		249
 +#define R_ARM_RSBREL32		250
 +#define R_ARM_THM_RPC22		251
@@ -2212,6 +2443,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +/* Processor specific values for the Phdr p_type field.  */
 +#define PT_IA_64_ARCHEXT	(PT_LOPROC + 0)	/* arch extension bits */
 +#define PT_IA_64_UNWIND		(PT_LOPROC + 1)	/* ia64 unwind bits */
++#define PT_IA_64_HP_OPT_ANOT	(PT_LOOS + 0x12)
++#define PT_IA_64_HP_HSL_ANOT	(PT_LOOS + 0x13)
++#define PT_IA_64_HP_STACK	(PT_LOOS + 0x14)
 +
 +/* Processor specific flags for the Phdr p_flags field.  */
 +#define PF_IA_64_NORECOV	0x80000000	/* spec insns w/o recovery */
@@ -2313,6 +2547,12 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +
 +/* SH specific declarations */
 +
++/* SH specific values for `st_other'.  */
++
++/* If set, this is a symbol pointing to SHmedia code, which will be branched
++   to, so need to add 1 to the symbol value. */
++#define STO_SH5_ISA32 (1 << 2)
++
 +/* SH relocs.  */
 +#define	R_SH_NONE		0
 +#define	R_SH_DIR32		1
@@ -2351,6 +2591,13 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define	R_SH_RELATIVE		165
 +#define	R_SH_GOTOFF		166
 +#define	R_SH_GOTPC		167
++#define	R_SH_RELATIVE_LOW16	197
++#define	R_SH_RELATIVE_MEDLOW16	198
++#define	R_SH_IMM_LOW16		246
++#define	R_SH_IMM_LOW16_PCREL	247
++#define	R_SH_IMM_MEDLOW16	248
++#define	R_SH_IMM_MEDLOW16_PCREL	249
++
 +/* Keep this the last entry.  */
 +#define	R_SH_NUM		256
 +
@@ -2430,9 +2677,20 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_390_TLS_DTPOFF	55	/* Offset in TLS block.	 */
 +#define R_390_TLS_TPOFF		56	/* Negated offset in static TLS
 +					   block.  */
-+
++#define R_390_20		57	/* Direct 20 bit.  */
++#define R_390_GOT20		58	/* 20 bit GOT offset.  */
++#define R_390_GOTPLT20		59	/* 20 bit offset to jump slot.  */
++#define R_390_TLS_GOTIE20	60	/* 20 bit GOT offset for static TLS
++					   block offset.  */
 +/* Keep this the last entry.  */
-+#define R_390_NUM		57
++#define R_390_NUM		61
++
++
++/* CRIS flags.  */
++#define EF_CRIS_VARIANT_MASK           0x0000000e
++#define EF_CRIS_VARIANT_ANY_V0_V10     0x00000000
++#define EF_CRIS_VARIANT_V32            0x00000002
++#define EF_CRIS_VARIANT_COMMON_V10_V32 0x00000004
 +
 +/* CRIS relocations.  */
 +#define R_CRIS_NONE		0
@@ -2456,7 +2714,9 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +#define R_CRIS_32_PLT_GOTREL	18
 +#define R_CRIS_32_PLT_PCREL	19
 +
++/* Keep this the last entry.  */
 +#define R_CRIS_NUM		20
++
 +
 +/* AMD x86-64 relocations.  */
 +#define R_X86_64_NONE		0	/* No reloc */
@@ -2490,23 +2750,382 @@ diff -Nur linux-2.6.36.orig/scripts/mod/modpost.h linux-2.6.36/scripts/mod/modpo
 +
 +#define R_X86_64_NUM		24
 +
-+__END_DECLS
 +
-+#endif	/* elf.h */
- 
- #include "elfconfig.h"
- 
-@@ -195,3 +2641,4 @@
- void fatal(const char *fmt, ...);
- void warn(const char *fmt, ...);
- void merror(const char *fmt, ...);
++/* AM33 relocations.  */
++#define R_MN10300_NONE		0	/* No reloc.  */
++#define R_MN10300_32		1	/* Direct 32 bit.  */
++#define R_MN10300_16		2	/* Direct 16 bit.  */
++#define R_MN10300_8		3	/* Direct 8 bit.  */
++#define R_MN10300_PCREL32	4	/* PC-relative 32-bit.  */
++#define R_MN10300_PCREL16	5	/* PC-relative 16-bit signed.  */
++#define R_MN10300_PCREL8	6	/* PC-relative 8-bit signed.  */
++#define R_MN10300_GNU_VTINHERIT	7	/* Ancient C++ vtable garbage... */
++#define R_MN10300_GNU_VTENTRY	8	/* ... collection annotation.  */
++#define R_MN10300_24		9	/* Direct 24 bit.  */
++#define R_MN10300_GOTPC32	10	/* 32-bit PCrel offset to GOT.  */
++#define R_MN10300_GOTPC16	11	/* 16-bit PCrel offset to GOT.  */
++#define R_MN10300_GOTOFF32	12	/* 32-bit offset from GOT.  */
++#define R_MN10300_GOTOFF24	13	/* 24-bit offset from GOT.  */
++#define R_MN10300_GOTOFF16	14	/* 16-bit offset from GOT.  */
++#define R_MN10300_PLT32		15	/* 32-bit PCrel to PLT entry.  */
++#define R_MN10300_PLT16		16	/* 16-bit PCrel to PLT entry.  */
++#define R_MN10300_GOT32		17	/* 32-bit offset to GOT entry.  */
++#define R_MN10300_GOT24		18	/* 24-bit offset to GOT entry.  */
++#define R_MN10300_GOT16		19	/* 16-bit offset to GOT entry.  */
++#define R_MN10300_COPY		20	/* Copy symbol at runtime.  */
++#define R_MN10300_GLOB_DAT	21	/* Create GOT entry.  */
++#define R_MN10300_JMP_SLOT	22	/* Create PLT entry.  */
++#define R_MN10300_RELATIVE	23	/* Adjust by program base.  */
 +
-diff -Nur linux-2.6.36.orig/scripts/mod/sumversion.c linux-2.6.36/scripts/mod/sumversion.c
---- linux-2.6.36.orig/scripts/mod/sumversion.c	2010-10-20 22:30:22.000000000 +0200
-+++ linux-2.6.36/scripts/mod/sumversion.c	2010-11-28 18:33:24.000000000 +0100
-@@ -1,4 +1,4 @@
--#include <netinet/in.h>
-+/* #include <netinet/in.h> */
- #ifdef __sun__
- #include <inttypes.h>
- #else
++#define R_MN10300_NUM		24
++
++
++/* M32R relocs.  */
++#define R_M32R_NONE		0	/* No reloc. */
++#define R_M32R_16		1	/* Direct 16 bit. */
++#define R_M32R_32		2	/* Direct 32 bit. */
++#define R_M32R_24		3	/* Direct 24 bit. */
++#define R_M32R_10_PCREL		4	/* PC relative 10 bit shifted. */
++#define R_M32R_18_PCREL		5	/* PC relative 18 bit shifted. */
++#define R_M32R_26_PCREL		6	/* PC relative 26 bit shifted. */
++#define R_M32R_HI16_ULO		7	/* High 16 bit with unsigned low. */
++#define R_M32R_HI16_SLO		8	/* High 16 bit with signed low. */
++#define R_M32R_LO16		9	/* Low 16 bit. */
++#define R_M32R_SDA16		10	/* 16 bit offset in SDA. */
++#define R_M32R_GNU_VTINHERIT	11
++#define R_M32R_GNU_VTENTRY	12
++/* M32R relocs use SHT_RELA.  */
++#define R_M32R_16_RELA		33	/* Direct 16 bit. */
++#define R_M32R_32_RELA		34	/* Direct 32 bit. */
++#define R_M32R_24_RELA		35	/* Direct 24 bit. */
++#define R_M32R_10_PCREL_RELA	36	/* PC relative 10 bit shifted. */
++#define R_M32R_18_PCREL_RELA	37	/* PC relative 18 bit shifted. */
++#define R_M32R_26_PCREL_RELA	38	/* PC relative 26 bit shifted. */
++#define R_M32R_HI16_ULO_RELA	39	/* High 16 bit with unsigned low */
++#define R_M32R_HI16_SLO_RELA	40	/* High 16 bit with signed low */
++#define R_M32R_LO16_RELA	41	/* Low 16 bit */
++#define R_M32R_SDA16_RELA	42	/* 16 bit offset in SDA */
++#define R_M32R_RELA_GNU_VTINHERIT	43
++#define R_M32R_RELA_GNU_VTENTRY	44
++
++#define R_M32R_GOT24		48	/* 24 bit GOT entry */
++#define R_M32R_26_PLTREL	49	/* 26 bit PC relative to PLT shifted */
++#define R_M32R_COPY		50	/* Copy symbol at runtime */
++#define R_M32R_GLOB_DAT		51	/* Create GOT entry */
++#define R_M32R_JMP_SLOT		52	/* Create PLT entry */
++#define R_M32R_RELATIVE		53	/* Adjust by program base */
++#define R_M32R_GOTOFF		54	/* 24 bit offset to GOT */
++#define R_M32R_GOTPC24		55	/* 24 bit PC relative offset to GOT */
++#define R_M32R_GOT16_HI_ULO	56	/* High 16 bit GOT entry with unsigned
++					   low */
++#define R_M32R_GOT16_HI_SLO	57	/* High 16 bit GOT entry with signed
++					   low */
++#define R_M32R_GOT16_LO		58	/* Low 16 bit GOT entry */
++#define R_M32R_GOTPC_HI_ULO	59	/* High 16 bit PC relative offset to
++					   GOT with unsigned low */
++#define R_M32R_GOTPC_HI_SLO	60	/* High 16 bit PC relative offset to
++					   GOT with signed low */
++#define R_M32R_GOTPC_LO		61	/* Low 16 bit PC relative offset to
++					   GOT */
++#define R_M32R_GOTOFF_HI_ULO	62	/* High 16 bit offset to GOT
++					   with unsigned low */
++#define R_M32R_GOTOFF_HI_SLO	63	/* High 16 bit offset to GOT
++					   with signed low */
++#define R_M32R_GOTOFF_LO	64	/* Low 16 bit offset to GOT */
++#define R_M32R_NUM		256	/* Keep this the last entry. */
++
++/* i960 Relocations */
++#define R_960_NONE      0
++#define R_960_12        1
++#define R_960_32        2
++#define R_960_IP24      3
++#define R_960_SUB       4
++#define R_960_OPTCALL   5
++#define R_960_OPTCALLX  6
++#define R_960_OPTCALLXA 7
++/* Keep this the last entry.  */
++#define R_960_NUM	8
++
++
++/* v850 relocations.  */
++#define R_V850_NONE		0
++#define R_V850_9_PCREL		1
++#define R_V850_22_PCREL		2
++#define R_V850_HI16_S		3
++#define R_V850_HI16		4
++#define R_V850_LO16		5
++#define R_V850_32		6
++#define R_V850_16		7
++#define R_V850_8		8
++#define R_V850_SDA_16_16_OFFSET	9	/* For ld.b, st.b, set1, clr1,
++					   not1, tst1, movea, movhi */
++#define R_V850_SDA_15_16_OFFSET	10	/* For ld.w, ld.h, ld.hu, st.w, st.h */
++#define R_V850_ZDA_16_16_OFFSET	11	/* For ld.b, st.b, set1, clr1,
++					   not1, tst1, movea, movhi */
++#define R_V850_ZDA_15_16_OFFSET	12	/* For ld.w, ld.h, ld.hu, st.w, st.h */
++#define R_V850_TDA_6_8_OFFSET	13	/* For sst.w, sld.w */
++#define R_V850_TDA_7_8_OFFSET	14	/* For sst.h, sld.h */
++#define R_V850_TDA_7_7_OFFSET	15	/* For sst.b, sld.b */
++#define R_V850_TDA_16_16_OFFSET	16	/* For set1, clr1, not1, tst1,
++					   movea, movhi */
++/* CYGNUS LOCAL v850e */
++#define R_V850_TDA_4_5_OFFSET		17	/* For sld.hu */
++#define R_V850_TDA_4_4_OFFSET		18	/* For sld.bu */
++#define R_V850_SDA_16_16_SPLIT_OFFSET	19	/* For ld.bu */
++#define R_V850_ZDA_16_16_SPLIT_OFFSET	20	/* For ld.bu */
++#define R_V850_CALLT_6_7_OFFSET		21	/* For callt */
++#define R_V850_CALLT_16_16_OFFSET	22	/* For callt */
++/* END CYGNUS LOCAL */
++#define R_V850_GNU_VTINHERIT	23
++#define R_V850_GNU_VTENTRY	24
++/* Keep this the last entry.  */
++#define R_V850_NUM		25
++
++/* Atmel AVR32 relocations.  */
++#define R_AVR32_NONE           0
++#define R_AVR32_32             1
++#define R_AVR32_16             2
++#define R_AVR32_8              3
++#define R_AVR32_32_PCREL       4
++#define R_AVR32_16_PCREL       5
++#define R_AVR32_8_PCREL                6
++#define R_AVR32_DIFF32         7
++#define R_AVR32_DIFF16         8
++#define R_AVR32_DIFF8          9
++#define R_AVR32_GOT32          10
++#define R_AVR32_GOT16          11
++#define R_AVR32_GOT8           12
++#define R_AVR32_21S            13
++#define R_AVR32_16U            14
++#define R_AVR32_16S            15
++#define R_AVR32_8S             16
++#define R_AVR32_8S_EXT         17
++#define R_AVR32_22H_PCREL      18
++#define R_AVR32_18W_PCREL      19
++#define R_AVR32_16B_PCREL      20
++#define R_AVR32_16N_PCREL      21
++#define R_AVR32_14UW_PCREL     22
++#define R_AVR32_11H_PCREL      23
++#define R_AVR32_10UW_PCREL     24
++#define R_AVR32_9H_PCREL       25
++#define R_AVR32_9UW_PCREL      26
++#define R_AVR32_HI16           27
++#define R_AVR32_LO16           28
++#define R_AVR32_GOTPC          29
++#define R_AVR32_GOTCALL                30
++#define R_AVR32_LDA_GOT                31
++#define R_AVR32_GOT21S         32
++#define R_AVR32_GOT18SW                33
++#define R_AVR32_GOT16S         34
++#define R_AVR32_GOT7UW         35
++#define R_AVR32_32_CPENT       36
++#define R_AVR32_CPCALL         37
++#define R_AVR32_16_CP          38
++#define R_AVR32_9W_CP          39
++#define R_AVR32_RELATIVE       40
++#define R_AVR32_GLOB_DAT       41
++#define R_AVR32_JMP_SLOT       42
++#define R_AVR32_ALIGN          43
++#define R_AVR32_NUM            44
++
++/* AVR32 dynamic tags */
++#define DT_AVR32_GOTSZ         0x70000001 /* Total size of GOT in bytes */
++
++/* Renesas H8/300 Relocations */
++#define R_H8_NONE       0
++#define R_H8_DIR32      1
++#define R_H8_DIR32_28   2
++#define R_H8_DIR32_24   3
++#define R_H8_DIR32_16   4
++#define R_H8_DIR32U     6
++#define R_H8_DIR32U_28  7
++#define R_H8_DIR32U_24  8
++#define R_H8_DIR32U_20  9
++#define R_H8_DIR32U_16 10
++#define R_H8_DIR24     11
++#define R_H8_DIR24_20  12
++#define R_H8_DIR24_16  13
++#define R_H8_DIR24U    14
++#define R_H8_DIR24U_20 15
++#define R_H8_DIR24U_16 16
++#define R_H8_DIR16     17
++#define R_H8_DIR16U    18
++#define R_H8_DIR16S_32 19
++#define R_H8_DIR16S_28 20
++#define R_H8_DIR16S_24 21
++#define R_H8_DIR16S_20 22
++#define R_H8_DIR16S    23
++#define R_H8_DIR8      24
++#define R_H8_DIR8U     25
++#define R_H8_DIR8Z_32  26
++#define R_H8_DIR8Z_28  27
++#define R_H8_DIR8Z_24  28
++#define R_H8_DIR8Z_20  29
++#define R_H8_DIR8Z_16  30
++#define R_H8_PCREL16   31
++#define R_H8_PCREL8    32
++#define R_H8_BPOS      33
++#define R_H8_PCREL32   34
++#define R_H8_GOT32O    35
++#define R_H8_GOT16O    36
++#define R_H8_DIR16A8   59
++#define R_H8_DIR16R8   60
++#define R_H8_DIR24A8   61
++#define R_H8_DIR24R8   62
++#define R_H8_DIR32A16  63
++#define R_H8_ABS32     65
++#define R_H8_ABS32A16 127
++#define R_H8_NUM      128
++
++/* NIOS relocations. */
++#define R_NIOS_NONE				0
++#define R_NIOS_32				1	/* A 32 bit absolute relocation.*/
++#define R_NIOS_LO16_LO5			2	/* A LO-16 5 bit absolute relocation.  */
++#define R_NIOS_LO16_HI11		3	/* A LO-16 top 11 bit absolute relocation.  */
++#define R_NIOS_HI16_LO5			4	/* A HI-16 5 bit absolute relocation.  */
++#define R_NIOS_HI16_HI11		5	/* A HI-16 top 11 bit absolute relocation.  */
++#define R_NIOS_PCREL6			6	/* A 6 bit relative relocation.  */
++#define R_NIOS_PCREL8			7	/* An 8 bit relative relocation.  */
++#define R_NIOS_PCREL11			8	/* An 11 bit relative relocation.  */
++#define R_NIOS_16				9	/* A 16 bit absolute relocation.  */
++#define R_NIOS_H_LO5			10	/* Low 5-bits of absolute relocation in halfwords.  */
++#define R_NIOS_H_HI11			11	/* Top 11 bits of 16-bit absolute relocation in halfwords.  */
++#define R_NIOS_H_XLO5			12	/* Low 5 bits of top 16-bits of 32-bit absolute relocation in halfwords.  */
++#define R_NIOS_H_XHI11			13	/* Top 11 bits of top 16-bits of 32-bit absolute relocation in halfwords.  */
++#define R_NIOS_H_16				14	/* Half-word @h value */
++#define R_NIOS_H_32				15	/* Word @h value */
++#define R_NIOS_GNU_VTINHERIT	200	/* GNU extension to record C++ vtable hierarchy */
++#define R_NIOS_GNU_VTENTRY		201	/* GNU extension to record C++ vtable member usage */
++/* Keep this the last entry.  */
++#define R_NIOS_NUM				202
++
++/* NIOS II relocations */
++#define R_NIOS2_NONE			0
++#define R_NIOS2_S16				1
++#define R_NIOS2_U16				2
++#define R_NIOS2_PCREL16			3
++#define R_NIOS2_CALL26			4
++#define R_NIOS2_IMM5			5
++#define R_NIOS2_CACHE_OPX		6
++#define R_NIOS2_IMM6			7
++#define R_NIOS2_IMM8			8
++#define R_NIOS2_HI16			9
++#define R_NIOS2_LO16			10
++#define R_NIOS2_HIADJ16		11
++#define R_NIOS2_BFD_RELOC_32	12
++#define R_NIOS2_BFD_RELOC_16	13
++#define R_NIOS2_BFD_RELOC_8	14
++#define R_NIOS2_GPREL			15
++#define R_NIOS2_GNU_VTINHERIT	16
++#define R_NIOS2_GNU_VTENTRY	17
++#define R_NIOS2_UJMP			18
++#define R_NIOS2_CJMP			19
++#define R_NIOS2_CALLR			20
++#define R_NIOS2_ALIGN			21
++/* Keep this the last entry.  */
++#define R_NIOS2_NUM				22
++
++/* Xtensa-specific declarations */
++
++/* Xtensa values for the Dyn d_tag field.  */
++#define DT_XTENSA_GOT_LOC_OFF	(DT_LOPROC + 0)
++#define DT_XTENSA_GOT_LOC_SZ	(DT_LOPROC + 1)
++#define DT_XTENSA_NUM		2
++
++/* Xtensa relocations.  */
++#define R_XTENSA_NONE		0
++#define R_XTENSA_32		1
++#define R_XTENSA_RTLD		2
++#define R_XTENSA_GLOB_DAT	3
++#define R_XTENSA_JMP_SLOT	4
++#define R_XTENSA_RELATIVE	5
++#define R_XTENSA_PLT		6
++#define R_XTENSA_OP0		8
++#define R_XTENSA_OP1		9
++#define R_XTENSA_OP2		10
++#define R_XTENSA_ASM_EXPAND	11
++#define R_XTENSA_ASM_SIMPLIFY	12
++#define R_XTENSA_GNU_VTINHERIT	15
++#define R_XTENSA_GNU_VTENTRY	16
++#define R_XTENSA_DIFF8		17
++#define R_XTENSA_DIFF16		18
++#define R_XTENSA_DIFF32		19
++#define R_XTENSA_SLOT0_OP	20
++#define R_XTENSA_SLOT1_OP	21
++#define R_XTENSA_SLOT2_OP	22
++#define R_XTENSA_SLOT3_OP	23
++#define R_XTENSA_SLOT4_OP	24
++#define R_XTENSA_SLOT5_OP	25
++#define R_XTENSA_SLOT6_OP	26
++#define R_XTENSA_SLOT7_OP	27
++#define R_XTENSA_SLOT8_OP	28
++#define R_XTENSA_SLOT9_OP	29
++#define R_XTENSA_SLOT10_OP	30
++#define R_XTENSA_SLOT11_OP	31
++#define R_XTENSA_SLOT12_OP	32
++#define R_XTENSA_SLOT13_OP	33
++#define R_XTENSA_SLOT14_OP	34
++#define R_XTENSA_SLOT0_ALT	35
++#define R_XTENSA_SLOT1_ALT	36
++#define R_XTENSA_SLOT2_ALT	37
++#define R_XTENSA_SLOT3_ALT	38
++#define R_XTENSA_SLOT4_ALT	39
++#define R_XTENSA_SLOT5_ALT	40
++#define R_XTENSA_SLOT6_ALT	41
++#define R_XTENSA_SLOT7_ALT	42
++#define R_XTENSA_SLOT8_ALT	43
++#define R_XTENSA_SLOT9_ALT	44
++#define R_XTENSA_SLOT10_ALT	45
++#define R_XTENSA_SLOT11_ALT	46
++#define R_XTENSA_SLOT12_ALT	47
++#define R_XTENSA_SLOT13_ALT	48
++#define R_XTENSA_SLOT14_ALT	49
++/* Keep this the last entry.  */
++#define R_XTENSA_NUM		50
++
++/* C6X specific relocs */
++#define R_C6000_NONE		0
++#define R_C6000_ABS32		1
++#define R_C6000_ABS16		2
++#define R_C6000_ABS8		3
++#define R_C6000_PCR_S21		4
++#define R_C6000_PCR_S12		5
++#define R_C6000_PCR_S10		6
++#define R_C6000_PCR_S7		7
++#define R_C6000_ABS_S16		8
++#define R_C6000_ABS_L16		9
++#define R_C6000_ABS_H16		10
++#define R_C6000_SBR_U15_B	11
++#define R_C6000_SBR_U15_H	12
++#define R_C6000_SBR_U15_W	13
++#define R_C6000_SBR_S16		14
++#define R_C6000_SBR_L16_B	15
++#define R_C6000_SBR_L16_H	16
++#define R_C6000_SBR_L16_W	17
++#define R_C6000_SBR_H16_B	18
++#define R_C6000_SBR_H16_H	19
++#define R_C6000_SBR_H16_W	20
++#define R_C6000_SBR_GOT_U15_W	21
++#define R_C6000_SBR_GOT_L16_W	22
++#define R_C6000_SBR_GOT_H16_W	23
++#define R_C6000_DSBT_INDEX	24
++#define R_C6000_PREL31		25
++#define R_C6000_COPY		26
++#define R_C6000_JUMP_SLOT	27
++#define R_C6000_SBR_GOT32	28
++#define R_C6000_PCR_H16		29
++#define R_C6000_PCR_L16		30
++#define R_C6000_ALIGN		253
++#define R_C6000_FPHEAD		254
++#define R_C6000_NOCMP		255
++
++/* C6x specific values for the Dyn d_tag field.  */
++#define DT_C6000_DSBT_BASE	(DT_LOPROC + 0)
++#define DT_C6000_DSBT_SIZE	(DT_LOPROC + 1)
++#define DT_C6000_PREEMPTMAP	(DT_LOPROC + 2)
++#define DT_C6000_DSBT_INDEX	(DT_LOPROC + 3)
++
++#define DT_C6000_NUM    4
+ 
+ static void die(char *fmt, ...);
+ 
