@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
 PKG_VERSION:=		3.0.21
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7480dff7115e5af85215893c06b3ac5c
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
@@ -22,6 +22,10 @@ PKGSC_LIBGNUTLS:=	libs
 PKGSC_LIBGNUTLS_EXTRA:=	libs
 PKGSC_LIBGNUTLS_OPENSSL:=	libs
 
+PKG_FLAVOURS_LIBGNUTLS:=	WITH_CRYPTODEV
+PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
+PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
@@ -30,6 +34,10 @@ $(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GNUTLS_UTILS},${PKGSD_GNUTLS_UTILS},${PKGSC_GNUTLS_UTILS}))
 $(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_EXTRA}))
 $(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_OPENSSL}))
+
+ifneq ($(ADK_PACKAGE_LIBGNUTLS_WITH_CRYPTODEV),)
+CONFIGURE_ARGS+= 	--enable-cryptodev
+endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-pthread
