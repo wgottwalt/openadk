@@ -65,6 +65,10 @@ if [[ -n $ADK_PACKAGE_LIBX11 ]]; then
 	NEED_X11="$NEED_X11 libx11"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBNL ]]; then
+	NEED_FLEX="$NEED_FLEX libnl"
+fi
+
 if [[ -n $ADK_PACKAGE_GPSD ]]; then
 	NEED_PYTHON="$NEED_PYTHON gpsd"
 fi
