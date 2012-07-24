@@ -13,6 +13,8 @@ PKG_DEPENDS:=		kmod-crypto-manager2
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 
+PKG_CFLINE_CRYPTODEV_LINUX:=	select ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV
+
 include $(TOPDIR)/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
