@@ -64,4 +64,11 @@ config ADK_KPACKAGE_KMOD_OPROFILE
 	help
 	 use oprofile package to make use of the kernel support.
 
+config ADK_KERNEL_KALLSYMS
+	prompt "kernel support for symbol names in oops"
+	boolean
+	default n
+	help
+	 Load all symbols to the kernel.
+
 endmenu
