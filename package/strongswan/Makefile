@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		4.5.0
+PKG_VERSION:=		5.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		92b6419edb09935860b56fe0455ec037
+PKG_MD5SUM:=		1d7bccb50f01020bb04d06e9755e0eec
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user
@@ -55,31 +55,27 @@ endif
 
 CONFIGURE_ARGS+=	--disable-tools \
 			--disable-fips-prf \
-			--with-group=wheel \
+			--with-group=root \
 			--enable-kernel-pfkey
+
+TARGET_LDFLAGS+=        -Wl,-rpath -Wl,/usr/lib/ipsec
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/etc
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/sbin
-	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/lib
-	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/libexec/ipsec/plugins
+	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/libexec/ipsec
+	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/lib/ipsec/plugins
 	touch $(IDIR_STRONGSWAN)/etc/ipsec.secrets
-	$(CP) $(WRKINST)/usr/libexec/ipsec/plugins/*.so \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec/plugins
+	$(CP) $(WRKINST)/usr/lib/ipsec/plugins/*.so \
+		$(IDIR_STRONGSWAN)/usr/lib/ipsec/plugins
 	$(CP) $(WRKINST)/etc/* $(IDIR_STRONGSWAN)/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/charon \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_pluto_adns \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/starter \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_updown \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/whack \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_copyright \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/pluto \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/stroke \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
@@ -87,7 +83,11 @@ post-install:
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/ipsec \
 		$(IDIR_STRONGSWAN)/usr/sbin
-	$(CP) $(WRKINST)/usr/lib/lib*.so* \
-		$(IDIR_STRONGSWAN)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/ipsec/libcharon*.so* \
+		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
+	$(CP) $(WRKINST)/usr/lib/ipsec/libhydra*.so* \
+		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
+	$(CP) $(WRKINST)/usr/lib/ipsec/libstrongswan*.so* \
+		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
