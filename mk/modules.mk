@@ -897,6 +897,10 @@ $(eval $(call KMOD_template,CRYPTO_CCM,crypto-ccm,\
     $(MODULES_DIR)/kernel/crypto/ccm \
 ,10))
 
+$(eval $(call KMOD_template,CRYPTO_GCM,crypto-gcm,\
+    $(MODULES_DIR)/kernel/crypto/gcm \
+,10))
+
 $(eval $(call KMOD_template,CRYPTO_ECB,crypto-ecb,\
     $(MODULES_DIR)/kernel/crypto/ecb \
 ,10))
@@ -1243,14 +1247,8 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 #
 
 USBMODULES:=
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),3)
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
-else
-USBMODULES+=drivers/usb/core/usbcore
-endif
-endif
 
 ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),)
 $(eval $(call KMOD_template,USB,usb,\

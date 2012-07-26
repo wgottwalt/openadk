@@ -171,6 +171,16 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CCM
 	help
 	  Support for Counter with CBC MAC. Required for IPsec.
 
+config ADK_KPACKAGE_KMOD_CRYPTO_GCM
+	prompt "kmod-crypto-gcm...................... GCM support"
+	tristate
+	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+	select ADK_KPACKAGE_KMOD_CRYPTO_CTR
+	default n
+	help
+	  Support for Galois/Counter Mode (GCM) and Galois Message
+          Authentication Code (GMAC). Required for IPSec.
+
 config ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	prompt "kmod-crypto-ctr...................... CTR support"
 	tristate
