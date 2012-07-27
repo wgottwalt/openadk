@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		epdfview
 PKG_VERSION:=		0.1.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0c57d5e33adbfba047ffa13e570f79d6
 PKG_DESCR:=		lightweight pdf viewer
 PKG_SECTION:=		x11/apps
@@ -20,7 +20,7 @@ $(eval $(call PKG_template,EPDFVIEW,epdfview,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 
 epdfview-install:
 	$(INSTALL_DIR) $(IDIR_EPDFVIEW)/usr/share/epdfview
-	$(CP) $(WRKINST)/usr/share/epdfview/*
+	$(CP) $(WRKINST)/usr/share/epdfview/* \
 		$(IDIR_EPDFVIEW)/usr/share/epdfview
 	$(INSTALL_DIR) $(IDIR_EPDFVIEW)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/epdfview \

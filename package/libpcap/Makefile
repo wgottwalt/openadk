@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		06046e0e81efc60566daf1cc96c77d46
+PKG_MD5SUM:=		f78455a92622b7a3c05c58b6ad1cec7e
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.tcpdump.org/

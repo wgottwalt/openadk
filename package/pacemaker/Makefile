@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pacemaker
-PKG_VERSION:=		1.0.11
+PKG_VERSION:=		1.1.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bfe2127d31e5244d0106a5c290fd0dc2
 PKG_DESCR:=		scalable High-Availability cluster resource manager

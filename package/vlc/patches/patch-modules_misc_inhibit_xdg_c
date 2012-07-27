@@ -1,0 +1,10 @@
+--- vlc-2.0.3.orig/modules/misc/inhibit/xdg.c	2011-12-08 19:00:26.000000000 +0100
++++ vlc-2.0.3/modules/misc/inhibit/xdg.c	2012-07-26 16:36:07.000000000 +0200
+@@ -27,7 +27,6 @@
+ #include <vlc_inhibit.h>
+ #include <assert.h>
+ #include <signal.h>
+-#include <spawn.h>
+ #include <sys/wait.h>
+ 
+ static int Open (vlc_object_t *);

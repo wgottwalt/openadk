@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnetfilter_log
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		acdb188a1e7504e95636d0770ade393c
+PKG_MD5SUM:=		2a4bb0654ae675a52d2e8d1c06090b94
 PKG_DESCR:=		API to packets that have been logged
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink

@@ -1,0 +1,10 @@
+--- mrd6-0.9.6.orig/include/mrd/support/ptree.h	2007-03-21 09:51:27.000000000 +0100
++++ mrd6-0.9.6/include/mrd/support/ptree.h	2012-07-25 17:21:57.000000000 +0200
+@@ -38,6 +38,7 @@
+ #include <stdint.h>
+ #include <algorithm>
+ #include <mrd/log.h>
++using std::ptrdiff_t;
+ 
+ /* Patricia nodes MUST derive from ptree_node */
+ struct ptree_node {

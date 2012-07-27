@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		882c68ea7f71876ca110f3b84d7ab12d
 PKG_DESCR:=		AVL library
 PKG_SECTION:=		libs
-PKG_SITES:=		http://libavl.sourcearchive.com/downloads/0.3.5/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
 WRKDIST=		$(WRKDIR)/avl-$(PKG_VERSION)

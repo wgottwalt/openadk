@@ -1,0 +1,11 @@
+--- openswan-2.6.38.orig/lib/liblwres/Makefile	2012-03-23 22:33:43.000000000 +0100
++++ openswan-2.6.38/lib/liblwres/Makefile	2012-07-25 18:21:02.000000000 +0200
+@@ -23,7 +23,7 @@ CINCLUDES =	-I${srcdir}${ISCARCH}/includ
+ 		-I${srcdir}../libisc/include \
+ 		-I. -I./include -I${srcdir}include 
+ CDEFINES =
+-CWARNINGS = -Werror
++#CWARNINGS = -Werror
+ 
+ CFLAGS+=${USERCOMPILE} ${PORTINCLUDE} ${CINCLUDES} ${CDEFINES} ${CWARNINGS} 
+ 

@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		conntrack-tools
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5add24d4761baf17af630d5627a71752
+PKG_MD5SUM:=		48d414cb7a354001babf184ae6c16db9
 PKG_DESCR:=		Connection tracking userspace tools
 PKG_SECTION:=		firewall
-PKG_DEPENDS:=		libnetfilter-conntrack
-PKG_BUILDDEP:=		libnetfilter_conntrack
+PKG_DEPENDS:=		libnetfilter-conntrack libnetfilter-cttimeout libmnl
+PKG_BUILDDEP:=		libnetfilter_conntrack libnetfilter_cttimeout libmnl
 PKG_URL:=		http://conntrack-tools.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/conntrack-tools/files/
 

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.0-34809
+PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d128a711c453b828faf623b981c39afe
+PKG_MD5SUM:=		ac7bf1cfedc1c5c24bfc83107eefb1d9
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -17,7 +17,10 @@ PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg libtheora
 PKG_BUILDDEP+=		xvidcore libvpx
 PKG_URL:=		http://www.mplayerhq.hu/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
+
+DISTFILES:=		MPlayer-$(PKG_VERSION).tar.xz
+WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
 PKG_ARCH_DEPENDS:=	x86 mips arm
 

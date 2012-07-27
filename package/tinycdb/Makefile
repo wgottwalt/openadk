@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		tinycdb
 PKG_VERSION:=		0.77
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		501ac8a2461eb00393e814155f3750eb
+PKG_MD5SUM:=		c00e5fb96c30356ac3b67b2ab5d5641b
 PKG_DESCR:=		CDB implementation
 PKG_SECTION:=		db
 PKG_URL:=		http://www.corpit.ru/mjt/tinycdb/

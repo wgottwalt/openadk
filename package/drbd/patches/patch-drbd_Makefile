@@ -1,19 +1,13 @@
---- drbd-8.3.10.orig/drbd/Makefile	2011-01-26 14:57:59.000000000 +0100
-+++ drbd-8.3.10/drbd/Makefile	2011-10-23 10:22:50.000000000 +0200
-@@ -65,7 +65,6 @@ else
- 
-   # for some reason some of the commands below only work correctly in bash,
-   # and not in e.g. dash. I'm too lazy to fix it to be compatible.
--  SHELL=/bin/bash
- 
-   DRBDSRC := $(shell pwd)
- 
-@@ -133,7 +132,7 @@ else
+--- drbd-8.4.1.orig/drbd/Makefile	2011-11-17 10:01:55.000000000 +0100
++++ drbd-8.4.1/drbd/Makefile	2012-07-24 23:03:11.000000000 +0200
+@@ -116,8 +116,8 @@ else
+ 	else									\
  		grep return $@ ;						\
  	fi ;									\
- 	echo -e "\t\t\" build by $$USER@$$HOSTNAME, `date "+%F %T"`\";\n}";	\
+-	echo -e "\t\t\" build by $$USER@$$HOSTNAME, `date "+%F %T"`\";\n}";	\
 -	mv --force $@.new $@
-+	mv -f $@.new $@
++	printf "\t\t\" build by $$USER@$$HOSTNAME, `date "+%F %T"`\";\n}";	\
++	mv $@.new $@
  
    kbuild: drbd_buildtag.c
  	@rm -f .drbd_kernelrelease*

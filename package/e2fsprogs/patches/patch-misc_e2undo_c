@@ -1,7 +1,7 @@
 	optind seems to need unistd.h, not only getopt.h
---- e2fsprogs-1.41.12.orig/misc/e2undo.c	2010-05-14 00:59:49.000000000 +0200
-+++ e2fsprogs-1.41.12/misc/e2undo.c	2010-10-18 12:03:49.329511558 +0200
-@@ -19,6 +19,7 @@
+--- e2fsprogs-1.42.4.orig/misc/e2undo.c	2012-03-18 19:18:33.000000000 +0100
++++ e2fsprogs-1.42.4/misc/e2undo.c	2012-07-26 18:48:09.000000000 +0200
+@@ -20,6 +20,7 @@
  #if HAVE_ERRNO_H
  #include <errno.h>
  #endif

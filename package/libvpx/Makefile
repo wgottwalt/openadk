@@ -64,6 +64,12 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc
 endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPSEL),y)
+CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS),y)
+CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+endif
 CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-install-docs \
 			--disable-install-bins \

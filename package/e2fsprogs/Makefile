@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.41.14
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		05f70470aea2ef7efbb0845b2b116720
+PKG_VERSION:=		1.42.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b6e296f210d642361b7394437ff0f318
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
@@ -58,7 +58,7 @@ $(eval $(call PKG_template,MKE2FS,mke2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_M
 $(eval $(call PKG_template,E2FSCK,e2fsck,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_E2FSCK),${PKGSD_E2FSCK},${PKGSC_E2FSCK}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath \
-			--disable-libuuid
+			--disable-libuuid --disable-libblkid 
 INSTALL_TARGET+=	install-libs
 TARGET_LDFLAGS+=	-lpthread
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_DIR)/usr/include

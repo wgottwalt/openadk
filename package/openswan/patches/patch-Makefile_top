@@ -1,6 +1,6 @@
---- openswan-2.6.37.orig/Makefile.top	2011-10-28 23:11:53.000000000 +0200
-+++ openswan-2.6.37/Makefile.top	2011-12-01 17:31:34.000000000 +0100
-@@ -29,7 +29,7 @@ ERRCHECK=${MAKEUTILS}/errcheck
+--- openswan-2.6.38.orig/Makefile.top	2012-03-23 22:33:43.000000000 +0100
++++ openswan-2.6.38/Makefile.top	2012-07-25 18:17:21.000000000 +0200
+@@ -26,7 +26,7 @@ ERRCHECK=${MAKEUTILS}/errcheck
  KVUTIL=${MAKEUTILS}/kernelversion
  KVSHORTUTIL=${MAKEUTILS}/kernelversion-short
  

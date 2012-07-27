@@ -1,0 +1,10 @@
+--- vlc-2.0.3.orig/modules/misc/inhibit/xscreensaver.c	2011-12-08 19:00:26.000000000 +0100
++++ vlc-2.0.3/modules/misc/inhibit/xscreensaver.c	2012-07-26 16:36:21.000000000 +0200
+@@ -39,7 +39,6 @@
+ #include <sys/wait.h>
+ #include <fcntl.h>
+ #include <signal.h>
+-#include <spawn.h>
+ 
+ /*****************************************************************************
+  * Local prototypes

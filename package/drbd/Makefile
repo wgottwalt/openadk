@@ -4,20 +4,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		drbd
-PKG_VERSION:=		8.3.10
+PKG_VERSION:=		8.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7d80edc2da10de5bfffe0ca9e9996fed
+PKG_MD5SUM:=		3af0cc49ee0b5005ea108c5ba92aa755
 PKG_DESCR:=		DRBD admin tools
 PKG_SECTION:=		fs
 PKG_URL:=		http://www.drbd.org/
-PKG_SITES:=		http://oss.linbit.com/drbd/8.3/
+PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DRBD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GENETLINK_H=$(STAGING_DIR)/usr/include/linux/genetlink.h
 CONFIGURE_ARGS+=	--with-distro=generic \
 			--with-pacemaker \
+			--without-heartbeat \
 			--without-km \
 			--without-xen \
 			--without-udev

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		usbutils
-PKG_VERSION:=		003
+PKG_VERSION:=		006
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		94a1738fe92062cdd6a9642eeaccefc1
+PKG_MD5SUM:=		850790442f5eb487cdc7e35f8ee03e11
 PKG_DESCR:=		A program to list USB devices
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat libpthread zlib

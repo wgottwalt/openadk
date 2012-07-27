@@ -1,0 +1,28 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		libnetfilter_acct
+PKG_VERSION:=		1.0.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		246e97feb9cf98f7ddf70d71a3813336
+PKG_DESCR:=		API to extended accounting infrastructure.
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libnfnetlink
+PKG_BUILDDEP:=		libnfnetlink
+PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_acct/
+PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_acct/files/
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,LIBNETFILTER_ACCT,libnetfilter-acct,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_LIBNETFILTER_ACCT)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libnetfilter_acct*so* \
+		$(IDIR_LIBNETFILTER_ACCT)/usr/lib/
+
+include ${TOPDIR}/mk/pkg-bottom.mk
