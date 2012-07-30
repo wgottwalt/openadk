@@ -90,8 +90,8 @@ else
 	fi
 fi
 
-printf "Generate qemu image (512 MB)\n"
-qemu-img create -f raw $1 512M >/dev/null
+printf "Generate qemu image (768 MB)\n"
+qemu-img create -f raw $1 768M >/dev/null
 
 printf "Create partition and filesystem\n"
 case $ostype in
@@ -124,7 +124,7 @@ case $ostype in
 	chmod 1777 $tmp/tmp
 	chmod 4755 $tmp/bin/busybox
 	printf "Creating filesystem $filesystem\n"
-	genext2fs -q -b 409600 -d $tmp ${1}.new
+	genext2fs -q -b 709600 -d $tmp ${1}.new
 	cat scripts/mbr ${1}.new > $1
 	rm ${1}.new 
 	;;
@@ -135,7 +135,7 @@ case $ostype in
 	mkfs.$filesystem $mkfsopts ${1}.new >/dev/null
 	cat mbr ${1}.new > $1
 	rm ${1}.new 
-	rm mbr
+	#rm mbr
 	tmp=$(mktemp -d)
 	mount -o loop,offset=$offset -t $filesystem $1 $tmp
 if [ -z $initramfs ];then
