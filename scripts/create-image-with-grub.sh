@@ -1,35 +1,28 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010, 2011
+# Copyright © 2010, 2011, 2012
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
 # are retained or reproduced in an accompanying document, permission
-# is granted to deal in this work without restriction, including un‐
+# is granted to deal in this work without restriction, including un-
 # limited rights to use, publicly perform, distribute, sell, modify,
 # merge, give away, or sublicence.
 #
-# This work is provided “AS IS” and WITHOUT WARRANTY of any kind, to
+# This work is provided 'AS IS' and WITHOUT WARRANTY of any kind, to
 # the utmost extent permitted by applicable law, neither express nor
 # implied; without malicious intent or gross negligence. In no event
 # may a licensor, author or contributor be held liable for indirect,
 # direct, other damage, loss, or other issues arising in any way out
 # of dealing in the work, even if advised of the possibility of such
 # damage or existence of a defect, except proven that it results out
-# of said person’s immediate fault when using the work as intended.
+# of said person's immediate fault when using the work as intended.
 #
 # Alternatively, this work may be distributed under the terms of the
 # General Public License, any version, as published by the Free Soft-
 # ware Foundation.
 #-
-# Prepare a USB stick or CF/SD/MMC card or hard disc for installation
-# of OpenADK:
-# • install a Master Boot Record containing a MirBSD PBR loading GRUB
-# • write GRUB2 core.img just past the MBR
-# • create a root partition with ext2fs and extract the OpenADK image
-#   just built there
-# • create a cfgfs partition
 
 TOPDIR=$(pwd)
 me=$0
@@ -41,7 +34,7 @@ esac
 
 test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	make package=mksh fetch || exit 1
-	df=$(cd package/mksh; TOPDIR="$TOPDIR" gmake show=DISTFILES)
+	df=$(cd package/mksh; TOPDIR="$TOPDIR" make show=DISTFILES)
 	mkdir -p build_mksh
 	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
 	cd build_mksh/mksh
@@ -51,7 +44,7 @@ test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	rm -rf build_mksh
 fi
 
-test -n "$KSH_VERSION" || exec mksh -x "$me" "$@"
+test -n "$KSH_VERSION" || exec mksh "$me" "$@"
 if test -z "$KSH_VERSION"; then
 	echo >&2 Fatal error: could not run myself with mksh!
 	exit 255
@@ -60,11 +53,6 @@ fi
 ### run with mksh from here onwards ###
 
 me=${me##*/}
-
-if (( USER_ID )); then
-	print -u2 Installation is only possible as root!
-	exit 1
-fi
 
 TOPDIR=$(realpath .)
 ostype=$(uname -s)
@@ -75,17 +63,18 @@ quiet=0
 serial=0
 speed=115200
 panicreboot=10
+type=qemu
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
-    [±t] -n /dev/sdb image
-Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
+Syntax: $me [±  ][-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+    [±t][ -f diskformat ] -n disk.img archive
+Defaults: -c 1 -p 10 -s 115200 -f qemu; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hp:qs:nt" ch; do
+while getopts "c:hp:qs:ntf:" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -106,6 +95,7 @@ while getopts "c:hp:qs:nt" ch; do
 	(n)	noformat=1 ;;
 	(t)	serial=1 ;;
 	(+t)	serial=0 ;;
+	(f)	type=$OPTARG ;;
 	(*)	usage 1 ;;
 	}
 done
@@ -114,7 +104,7 @@ shift $((OPTIND - 1))
 (( $# == 2 )) || usage 1
 
 f=0
-tools='genext2fs'
+tools='genext2fs qemu-img'
 case $ostype {
 (DragonFly|*BSD*)
 	;;
@@ -176,18 +166,7 @@ case $ostype {
 	;;
 }
 
-mount |&
-while read -p dev rest; do
-	eval [[ \$dev = $match ]] || continue
-	print -u2 "Block device $tgt is in use, please umount first."
-	exit 1
-done
-
-if (( !quiet )); then
-	print "WARNING: This will overwrite $basedev - type Yes to continue!"
-	read x
-	[[ $x = Yes ]] || exit 0
-fi
+qemu-img create -f raw $tgt 524288k
 
 if stat -qs .>/dev/null 2>&1; then
 	statcmd='stat -f %z'	# BSD stat (or so we assume)
@@ -203,7 +182,6 @@ if (( cyls < (cfgfs + 2) )); then
 	print -u2 "Size of $tgt is $dksz, this looks fishy?"
 	exit 1
 fi
-
 
 if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
 	print -u2 Error creating temporary directory.
@@ -291,56 +269,13 @@ print -n "$ostr" | \
 (( quiet )) || print Writing MBR and GRUB2 to target device...
 dd if="$T/firsttrack" of="$tgt"
 
-if [[ $basedev = /dev/svnd+([0-9]) ]]; then
-	(( quiet )) || print "Creating BSD disklabel on target device..."
-	# c: whole device (must be so)
-	# i: ext2fs (matching first partition)
-	# j: cfgfs (matching second partition)
-	# p: MBR and GRUB2 area (by tradition)
-	cat >"$T/bsdlabel" <<-EOF
-		type: vnd
-		disk: vnd device
-		label: OpenADK
-		flags:
-		bytes/sector: 512
-		sectors/track: $secs
-		tracks/cylinder: $heads
-		sectors/cylinder: $((heads * secs))
-		cylinders: $cyls
-		total sectors: $((cyls * heads * secs))
-		rpm: 3600
-		interleave: 1
-		trackskew: 0
-		cylinderskew: 0
-		headswitch: 0
-		track-to-track seek: 0
-		drivedata: 0
-
-		16 partitions:
-		c: $((cyls * heads * secs)) 0 unused
-		i: $(((cyls - cfgfs) * heads * secs - partofs)) $partofs ext2fs
-		j: $((cfgfs * heads * secs)) $(((cyls - cfgfs) * heads * secs)) unknown
-		p: $partofs 0 unknown
-EOF
-	disklabel -R ${basedev#/dev/} "$T/bsdlabel"
-fi
-
-#(( quiet )) || print "Creating ext2fs on ${part}..."
-#q=
-#(( quiet )) && q=-q
-#(( noformat )) || mke2fs $q "$part"
-#partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
-#(( noformat )) || tune2fs -c 0 -i 0 "$part"
-
 (( quiet )) || print Extracting installation archive...
-#mount_ext2fs "$part" "$T"
-gzip -dc "$src" | (cd "$T"; tar -xvpf -)
+gzip -dc "$src" | (cd "$T"; tar -xpf -)
 cd "$T"
 rnddev=/dev/urandom
 [[ -c /dev/arandom ]] && rnddev=/dev/arandom
 dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 (( quiet )) || print Fixing up permissions...
-chown 0:0 tmp
 chmod 1777 tmp
 chmod 4755 bin/busybox
 [[ -f usr/bin/Xorg ]] && chmod 4755 usr/bin/Xorg
@@ -362,7 +297,7 @@ mkdir -p boot/grub
 	fi
 	print
 	print 'menuentry "GNU/Linux (OpenADK)" {'
-	linuxargs="root=UUID=$partuuid $consargs"
+	linuxargs="root=/dev/sda1 $consargs"
 	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
 	print "\tlinux /boot/kernel $linuxargs"
 	print '}'
@@ -373,13 +308,15 @@ for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handl
 	[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
 done
 cp "${grubfiles[@]}" boot/grub/
-(( quiet )) || print Finishing up...
 cd "$TOPDIR"
-#umount "$T"
 
-dd if=qemu.img of=mbr bs=16384 count=1 
-genext2fs -q -b 409600 -d $T ${tgt}.new
-cat mbr ${tgt}.new > $tgt
+dd if=qemu.img of=mbr bs=64k count=1 
+bs=$((524288-64-1))
+(( quiet )) || print Generating ext2 image with size $bs...
+dd if=/dev/zero of=cfgfs bs=1024k count=$cfgfs
+genext2fs -q -b $bs -d $T ${tgt}.new
+(( quiet )) || print Finishing up...
+cat mbr ${tgt}.new cfgfs > $tgt
 
-rm -rf "$T" mbr ${tgt}.new
+rm -rf "$T" mbr ${tgt}.new cfgfs
 exit 0
