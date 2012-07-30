@@ -23,6 +23,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
+	${MAKE} -C "${WRKBUILD}"/tests check
 	${MAKE} -C "${WRKBUILD}" version.h
 	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} ${KERNEL_MAKE_OPTS} \
 			 M="${WRKBUILD}" modules
@@ -31,6 +32,12 @@ do-build:
 		${WRKINST}/usr/include/crypto/
 
 do-install:
+	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/bin
+	for i in cipher cipher-aead hmac speed async_cipher async_hmac \
+        	async_speed sha_speed hashcrypt_speed fullspeed cipher-gcm \
+        	cipher-aead-srtp cipher_comp hash_comp hmac_comp; do \
+		$(INSTALL_BIN) ${WRKBUILD}/tests/$$i ${IDIR_CRYPTODEV_LINUX}/usr/bin; \
+	done	
 	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/include/crypto
 	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
 		${IDIR_CRYPTODEV_LINUX}/usr/include/crypto/
