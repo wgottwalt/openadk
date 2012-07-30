@@ -90,8 +90,6 @@ else
 	fi
 fi
 
-printf "Generate qemu image (768 MB)\n"
-qemu-img create -f raw $1 768M >/dev/null
 
 printf "Create partition and filesystem\n"
 case $ostype in
@@ -99,6 +97,8 @@ case $ostype in
 	offset=16384
 	;;
 (Linux)
+	printf "Generate qemu image (768 MB)\n"
+	qemu-img create -f raw $1 768M >/dev/null
 	parted -s $1 mklabel msdos
 	parted -s $1 -- mkpart primary ext2 0 -0
 	parted -s $1 set 1 boot on
