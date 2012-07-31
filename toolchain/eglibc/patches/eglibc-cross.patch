@@ -1,40 +1,47 @@
-* NOTE: This will still use a hardcoded “gcc” instead of HOSTCC
-
-diff -Nur eglibc-2.12.orig/libc/sunrpc/proto.h eglibc-2.12/libc/sunrpc/proto.h
---- eglibc-2.12.orig/libc/sunrpc/proto.h	2010-09-28 19:14:26.000000000 +0200
-+++ eglibc-2.12/libc/sunrpc/proto.h	2010-09-29 14:05:15.000000000 +0200
-@@ -58,7 +58,9 @@
- 
- /* Rather then defining _GNU_SOURCE before including $build's <string.h>
-    we just declare stpcpy here.  */
-+#if !defined(__APPLE__)
- extern char *stpcpy (char *, const char *);
-+#endif
- 
- /* Use $build's i18n support as we can't use $host's.  */
- #define _(X) (gettext (X))
-diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc/types.h eglibc-2.12/libc/sunrpc/rpc/types.h
---- eglibc-2.12.orig/libc/sunrpc/rpc/types.h	2010-09-28 19:14:26.000000000 +0200
-+++ eglibc-2.12/libc/sunrpc/rpc/types.h	2010-09-29 12:45:55.000000000 +0200
-@@ -68,6 +68,7 @@
+diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc/types.h eglibc-2.16/libc/sunrpc/rpc/types.h
+--- eglibc-2.16.orig/libc/sunrpc/rpc/types.h	2012-07-31 09:00:24.000000000 +0200
++++ eglibc-2.16/libc/sunrpc/rpc/types.h	2012-07-31 10:08:35.000000000 +0200
+@@ -69,19 +69,25 @@
  #include <sys/types.h>
  #endif
  
-+#if !defined(_CROSS_RPCGEN_) || !defined(__APPLE__)
- #ifndef __u_char_defined
- typedef __u_char u_char;
- typedef __u_short u_short;
-@@ -83,6 +84,7 @@
- typedef __caddr_t caddr_t;
+-#ifndef __u_char_defined
+-typedef __u_char u_char;
+-typedef __u_short u_short;
+-typedef __u_int u_int;
+-typedef __u_long u_long;
+-typedef __quad_t quad_t;
+-typedef __u_quad_t u_quad_t;
+-typedef __fsid_t fsid_t;
+-# define __u_char_defined
++typedef unsigned char u_char;
++typedef unsigned short u_short;
++typedef unsigned int u_int;
++typedef unsigned long u_long;
++#if __WORDSIZE == 64
++typedef long int quad_t;
++typedef unsigned long int u_quad_t;
++#elif defined __GLIBC_HAVE_LONG_LONG
++typedef long long int quad_t;
++typedef unsigned long long int u_quad_t;
++#endif
++#if defined(_CROSS_RPCGEN_)
++typedef u_quad_t fsid_t;
+ #endif
+-#ifndef __daddr_t_defined
+-typedef __daddr_t daddr_t;
+-typedef __caddr_t caddr_t;
++
++# define __u_char_defined
++#if !defined(__daddr_t_defined) && defined(linux)
++typedef long int daddr_t;
++typedef char *caddr_t;
  # define __daddr_t_defined
  #endif
-+#endif 
  
- #include <sys/time.h>
- #include <sys/param.h>
-diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_clntout.c eglibc-2.12/libc/sunrpc/rpc_clntout.c
---- eglibc-2.12.orig/libc/sunrpc/rpc_clntout.c	2010-09-28 19:14:27.000000000 +0200
-+++ eglibc-2.12/libc/sunrpc/rpc_clntout.c	2010-09-29 12:45:11.000000000 +0200
+diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_clntout.c eglibc-2.16/libc/sunrpc/rpc_clntout.c
+--- eglibc-2.16.orig/libc/sunrpc/rpc_clntout.c	2012-07-31 09:00:24.000000000 +0200
++++ eglibc-2.16/libc/sunrpc/rpc_clntout.c	2012-07-31 09:22:22.000000000 +0200
 @@ -31,7 +31,7 @@
   */
  #include <stdio.h>
@@ -44,10 +51,10 @@ diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_clntout.c eglibc-2.12/libc/sunrpc/rpc
  #include "rpc_parse.h"
  #include "rpc_util.h"
  #include "proto.h"
-diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_main.c eglibc-2.12/libc/sunrpc/rpc_main.c
---- eglibc-2.12.orig/libc/sunrpc/rpc_main.c	2010-09-28 19:14:27.000000000 +0200
-+++ eglibc-2.12/libc/sunrpc/rpc_main.c	2010-09-29 12:45:11.000000000 +0200
-@@ -37,7 +37,11 @@
+diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_main.c eglibc-2.16/libc/sunrpc/rpc_main.c
+--- eglibc-2.16.orig/libc/sunrpc/rpc_main.c	2012-07-31 09:00:24.000000000 +0200
++++ eglibc-2.16/libc/sunrpc/rpc_main.c	2012-07-31 09:22:22.000000000 +0200
+@@ -38,7 +38,11 @@
  #include <stdio.h>
  #include <string.h>
  #include <unistd.h>
@@ -59,7 +66,7 @@ diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_main.c eglibc-2.12/libc/sunrpc/rpc_ma
  #include <ctype.h>
  #include <sys/types.h>
  #include <sys/param.h>
-@@ -996,10 +1000,12 @@
+@@ -958,10 +962,12 @@
  	abort ();
        temp = rindex (cmd->infile, '.');
        cp = stpcpy (mkfilename, "Makefile.");
@@ -75,10 +82,10 @@ diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_main.c eglibc-2.12/libc/sunrpc/rpc_ma
  
      }
    else
-diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_scan.c eglibc-2.12/libc/sunrpc/rpc_scan.c
---- eglibc-2.12.orig/libc/sunrpc/rpc_scan.c	2010-09-28 19:14:27.000000000 +0200
-+++ eglibc-2.12/libc/sunrpc/rpc_scan.c	2010-09-29 12:45:11.000000000 +0200
-@@ -36,7 +36,11 @@
+diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_scan.c eglibc-2.16/libc/sunrpc/rpc_scan.c
+--- eglibc-2.16.orig/libc/sunrpc/rpc_scan.c	2012-07-31 09:00:24.000000000 +0200
++++ eglibc-2.16/libc/sunrpc/rpc_scan.c	2012-07-31 09:22:22.000000000 +0200
+@@ -37,7 +37,11 @@
  #include <stdio.h>
  #include <ctype.h>
  #include <string.h>
@@ -90,18 +97,3 @@ diff -Nur eglibc-2.12.orig/libc/sunrpc/rpc_scan.c eglibc-2.12/libc/sunrpc/rpc_sc
  #include "rpc_scan.h"
  #include "rpc_parse.h"
  #include "rpc_util.h"
-diff -Nur eglibc-2.12.orig/libc/timezone/Makefile eglibc-2.12/libc/timezone/Makefile
---- eglibc-2.12.orig/libc/timezone/Makefile	2010-09-28 19:13:39.000000000 +0200
-+++ eglibc-2.12/libc/timezone/Makefile	2010-09-29 12:45:11.000000000 +0200
-@@ -181,8 +181,9 @@
- $(objpfx)zic: $(addprefix $(objpfx), $(zic-objs))
- 
- $(addprefix $(objpfx)cross-,$(zic-objs)): $(objpfx)cross-%.o: %.c
--	gcc $< -c $(OUTPUT_OPTION) $(CFLAGS-$*.c) $(CPPFLAGS-$*) \
--		-DCROSS_ZIC $(compile-mkdep-flags)
-+	gcc $< -c $(OUTPUT_OPTION) \
-+		$(filter-out -DHAVE_GETTEXT,$(CFLAGS-$*.c)) \
-+		$(CPPFLAGS-$*) -DCROSS_ZIC $(compile-mkdep-flags)
- 
- $(objpfx)cross-zic: $(addprefix $(objpfx)cross-,$(zic-objs))
- 	gcc $(addprefix $(objpfx)cross-,$(zic-objs)) -o $@
