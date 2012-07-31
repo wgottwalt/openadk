@@ -67,14 +67,14 @@ type=qemu
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [±  ][-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+Syntax: $me [�g] [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
     [±t][ -f diskformat ] -n disk.img archive
 Defaults: -c 1 -p 10 -s 115200 -f qemu; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hp:qs:ntf:" ch; do
+while getopts "c:ghp:qs:ntf:" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -87,6 +87,8 @@ while getopts "c:hp:qs:ntf:" ch; do
 		fi ;;
 	(q)	quiet=1 ;;
 	(+q)	quiet=0 ;;
+	(g)	grub=1 ;;
+	(+g)	grub=0 ;;
 	(s)	if [[ $OPTARG != @(96|192|384|576|1152)00 ]]; then
 			print -u2 "$me: serial speed $OPTARG invalid"
 			exit 1
@@ -310,13 +312,18 @@ done
 cp "${grubfiles[@]}" boot/grub/
 cd "$TOPDIR"
 
-dd if=qemu.img of=mbr bs=64k count=1 
-bs=$((524288-64-1))
+dd if=$tgt of=mbr bs=64k count=1 2>/dev/null
+bs=$((524288))
 (( quiet )) || print Generating ext2 image with size $bs...
-dd if=/dev/zero of=cfgfs bs=1024k count=$cfgfs
+dd if=/dev/zero of=cfgfs bs=1024k count=$cfgfs 2>/dev/null
 genext2fs -q -b $bs -d $T ${tgt}.new
 (( quiet )) || print Finishing up...
 cat mbr ${tgt}.new cfgfs > $tgt
+
+if [[ $type = vbox ]]; then
+	rm -f $tgt.vdi
+	VBoxManage convertdd $tgt $tgt.vdi
+fi
 
 rm -rf "$T" mbr ${tgt}.new cfgfs
 exit 0

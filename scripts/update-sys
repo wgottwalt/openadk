@@ -49,7 +49,7 @@ config $archsym
 	boolean
 EOF
 
-if [ "${system}" = "toolchain" -o "${system}" = "qemu" ];then
+if [ "${system}" = "toolchain" -o "${system}" = "qemu" -o "${system}" = "vbox" ];then
 	sys=${system}-$cpuarch
 else
 	sys=$system

@@ -36,6 +36,11 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
+ifeq ($(ADK_HARDWARE_VBOX),y)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo "Use following command to create a VirtualBox Image:"
+	@echo "./scripts/create-image-with-grub.sh -f vbox vbox-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
