@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		eglibc
-PKG_VERSION:=		2.14.1
+PKG_VERSION:=		2.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d01422d90c2f9ef6919949b7ad38ccd4
+PKG_MD5SUM:=		47d724d78f4b291c90b4a490678316f6
 PKG_SITES:=		http://openadk.org/distfiles/

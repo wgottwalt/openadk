@@ -67,7 +67,7 @@ type=qemu
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [�g] [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+Syntax: $me [-g] [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
     [±t][ -f diskformat ] -n disk.img archive
 Defaults: -c 1 -p 10 -s 115200 -f qemu; -t = enable serial console
 EOF
@@ -139,35 +139,6 @@ if [[ ! -f $src ]]; then
 fi
 (( quiet )) || print "Installing $src on $tgt."
 
-case $ostype {
-(DragonFly|*BSD*)
-	basedev=${tgt%c}
-	tgt=${basedev}c
-	part=${basedev}i
-	match=\'${basedev}\''[a-p]'
-	function mount_ext2fs {
-		mount -t ext2fs "$1" "$2"
-	}
-	;;
-(Darwin)
-	basedev=$tgt
-	part=${basedev}s1
-	match=\'${basedev}\''?(s+([0-9]))'
-	function mount_ext2fs {
-		fuse-ext2 "$1" "$2" -o rw+
-		sleep 3
-	}
-	;;
-(Linux)
-	basedev=$tgt
-	part=${basedev}1
-	match=\'${basedev}\''+([0-9])'
-	function mount_ext2fs {
-		mount -t ext2 "$1" "$2"
-	}
-	;;
-}
-
 qemu-img create -f raw $tgt 524288k
 
 if stat -qs .>/dev/null 2>&1; then
@@ -189,6 +160,7 @@ if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
 	print -u2 Error creating temporary directory.
 	exit 1
 fi
+
 tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
 integer coreimgsz=$($statcmd "$T/core.img")
 if (( coreimgsz < 1024 )); then
@@ -201,16 +173,11 @@ if (( coreimgsz > 65024 )); then
 	rm -rf "$T"
 	exit 1
 fi
+
 (( coreendsec = (coreimgsz + 511) / 512 ))
-if [[ $basedev = /dev/svnd+([0-9]) ]]; then
-	# BSD svnd0 mode: protect sector #1
-	corestartsec=2
-	(( ++coreendsec ))
-	corepatchofs=$((0x614))
-else
-	corestartsec=1
-	corepatchofs=$((0x414))
-fi
+corestartsec=1
+corepatchofs=$((0x414))
+
 # partition offset: at least coreendsec+1 but aligned on a multiple of secs
 (( partofs = ((coreendsec / secs) + 1) * secs ))
 
