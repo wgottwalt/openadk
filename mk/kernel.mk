@@ -70,6 +70,7 @@ ifneq ($(4),)
 	chmod 0755 $$(I_$(1))/CONTROL/postinst
 endif
 endif
+	$${RSTRIP} $${I_$(1)}
 	$(PKG_BUILD) $$(I_$(1)) $(PACKAGE_DIR) $(MAKE_TRACE)
 endef
 
