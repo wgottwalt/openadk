@@ -51,7 +51,7 @@ test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	rm -rf build_mksh
 fi
 
-test -n "$KSH_VERSION" || exec mksh "$me" "$@"
+test -n "$KSH_VERSION" || exec mksh -x "$me" "$@"
 if test -z "$KSH_VERSION"; then
 	echo >&2 Fatal error: could not run myself with mksh!
 	exit 255
@@ -114,7 +114,7 @@ shift $((OPTIND - 1))
 (( $# == 2 )) || usage 1
 
 f=0
-tools='mke2fs tune2fs'
+tools='genext2fs'
 case $ostype {
 (DragonFly|*BSD*)
 	;;
@@ -366,11 +366,9 @@ cp "${grubfiles[@]}" boot/grub/
 genext2fs -q -b 524286 -d $T ${tgt}.new
 
 (( quiet )) || print Finishing up...
+dd if=${tgt}.new of=$tgt seek=65536
+
 cd "$TOPDIR"
-
-dd if=${tgt}.new of=$tgt seek=64K 
-
-(( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"
 
 rm -rf "$T"
 exit 0
