@@ -362,9 +362,13 @@ for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handl
 	[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
 done
 cp "${grubfiles[@]}" boot/grub/
+
+genext2fs -q -b 524286 -d $T ${tgt}.new
+
 (( quiet )) || print Finishing up...
 cd "$TOPDIR"
-umount "$T"
+
+dd if=${tgt}.new of=$tgt seek=64K 
 
 (( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"
 
