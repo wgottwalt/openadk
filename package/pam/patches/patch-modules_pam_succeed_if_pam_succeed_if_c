@@ -1,6 +1,6 @@
 --- Linux-PAM-1.1.4.orig/modules/pam_succeed_if/pam_succeed_if.c	2011-06-21 11:04:56.000000000 +0200
-+++ Linux-PAM-1.1.4/modules/pam_succeed_if/pam_succeed_if.c	2011-10-12 14:36:33.843559001 +0200
-@@ -230,6 +230,7 @@ evaluate_notingroup(pam_handle_t *pamh,
++++ Linux-PAM-1.1.4/modules/pam_succeed_if/pam_succeed_if.c	2012-07-31 12:02:24.000000000 +0200
+@@ -230,6 +230,7 @@ evaluate_notingroup(pam_handle_t *pamh, 
  	return PAM_AUTH_ERR;
  }
  /* Return PAM_SUCCESS if the (host,user) is in the netgroup. */

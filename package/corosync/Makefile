@@ -4,14 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		corosync
-PKG_VERSION:=		1.4.1
+PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		66231146af210637393748add091021d
+PKG_MD5SUM:=		9e23f3f5594676455ff39ff363658155
 PKG_DESCR:=		Cluster Engine	
 PKG_SECTION:=		ha
-PKG_DEPENDS:=		cluster-glue
+PKG_BUILDDEP:=		libqb nss
+PKG_DEPENDS:=		cluster-glue libqb nss
 PKG_URL:=		http://www.corosync.org/
-PKG_SITES:=		ftp://ftp:downloads@ftp.corosync.org/downloads/corosync-1.4.1/
+PKG_SITES:=		ftp://ftp:downloads@corosync.org/downloads/corosync-2.0.1/
 
 PKG_CFLINE_COROSYNC:=	select ADK_KERNEL_IP_MULTICAST
 
@@ -19,7 +20,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,COROSYNC,corosync,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-nss
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/nss \
+			-I$(STAGING_DIR)/usr/include/nspr
+TARGET_LDFLAGS+=	-lssl3 -lsmime3 -lnss3 -lnssutil3
 CONFIGURE_ENV+=		ac_cv_func_fnmatch_works=yes
 
 corosync-install:
@@ -31,8 +35,8 @@ corosync-install:
 	$(INSTALL_DIR) $(IDIR_COROSYNC)/usr/sbin
 	$(CP) $(WRKINST)/usr/sbin/* \
 		$(IDIR_COROSYNC)/usr/sbin
-	$(INSTALL_DIR) $(IDIR_COROSYNC)/usr/libexec
-	$(CP) $(WRKINST)/usr/libexec/* \
-		$(IDIR_COROSYNC)/usr/libexec
+	$(INSTALL_DIR) $(IDIR_COROSYNC)/usr/bin
+	$(CP) $(WRKINST)/usr/bin/* \
+		$(IDIR_COROSYNC)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,18 +1,15 @@
-diff -Nur glibc-2.10.1.orig/Makeconfig glibc-2.10.1/Makeconfig
---- glibc-2.10.1.orig/Makeconfig	2009-08-20 08:51:54.000000000 +0200
-+++ glibc-2.10.1/Makeconfig	2009-08-21 01:53:59.000000000 +0200
-@@ -525,12 +525,12 @@
+diff -Nur glibc-2.16.0.orig/Makeconfig glibc-2.16.0/Makeconfig
+--- glibc-2.16.0.orig/Makeconfig	2012-06-30 21:12:34.000000000 +0200
++++ glibc-2.16.0/Makeconfig	2012-08-02 10:18:56.000000000 +0200
+@@ -521,9 +521,9 @@
+ else
    libunwind = -lunwind
  endif
- ifneq ($(have-as-needed),yes)
-- libgcc_eh := -lgcc_eh $(libunwind)
-+ libgcc_eh := $(libunwind)
- else
-  libgcc_eh := -Wl,--as-needed -lgcc_s$(libgcc_s_suffix) $(libunwind) -Wl,--no-as-needed
- endif
+-libgcc_eh := -Wl,--as-needed -lgcc_s $(libunwind) -Wl,--no-as-needed
++libgcc_eh := -Wl,--as-needed $(libunwind) -Wl,--no-as-needed
  gnulib := -lgcc $(libgcc_eh)
 -static-gnulib := -lgcc -lgcc_eh $(libunwind)
 +static-gnulib := -lgcc $(libunwind)
  libc.so-gnulib := -lgcc
  endif
- ifeq ($(elf),yes)
+ +preinit = $(addprefix $(csu-objpfx),crti.o)

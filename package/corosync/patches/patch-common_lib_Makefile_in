@@ -1,0 +1,16 @@
+--- corosync-2.0.1.orig/common_lib/Makefile.in	2012-05-22 08:52:57.000000000 +0200
++++ corosync-2.0.1/common_lib/Makefile.in	2012-08-01 10:17:04.000000000 +0200
+@@ -336,13 +336,6 @@ install-libLIBRARIES: $(lib_LIBRARIES)
+ 	  $(INSTALL_DATA) $$list2 "$(DESTDIR)$(libdir)" || exit $$?; }
+ 	@$(POST_INSTALL)
+ 	@list='$(lib_LIBRARIES)'; test -n "$(libdir)" || list=; \
+-	for p in $$list; do \
+-	  if test -f $$p; then \
+-	    $(am__strip_dir) \
+-	    echo " ( cd '$(DESTDIR)$(libdir)' && $(RANLIB) $$f )"; \
+-	    ( cd "$(DESTDIR)$(libdir)" && $(RANLIB) $$f ) || exit $$?; \
+-	  else :; fi; \
+-	done
+ 
+ uninstall-libLIBRARIES:
+ 	@$(NORMAL_UNINSTALL)

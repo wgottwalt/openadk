@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr/bin
+libdir=${prefix}/lib
+includedir=${prefix}/include/nss3
+
+Name: NSS
+Description: Network Security Services
+Version: 3.12.3
+Requires: sqlite3 nspr >= 4.8
+Libs: -L${libdir} -lssl3 -lsmime3 -lnss3 -lnssutil3
+Cflags: -I${includedir}

@@ -1,6 +1,6 @@
---- pacemaker-1.0.11.orig/configure	2011-05-24 17:00:37.000000000 +0200
-+++ pacemaker-1.0.11/configure	2011-10-07 12:41:11.000000000 +0200
-@@ -12484,7 +12484,7 @@ $as_echo_n "checking for $2 in $1... " >
+--- pacemaker-1.1.7.orig/configure	2012-07-31 13:24:43.000000000 +0200
++++ pacemaker-1.1.7/configure	2012-07-31 13:27:31.000000000 +0200
+@@ -12965,7 +12965,7 @@ $as_echo_n "checking for $2 in $1... " >
  	  printf "#include <stdio.h>\n" > ${Cfile}.c
  	  printf "#include <%s>\n" $1 >> ${Cfile}.c
  	  printf "int main(int argc, char **argv) { printf(\"%%s\", %s); return 0; }\n" $2 >> ${Cfile}.c
@@ -9,7 +9,7 @@
  	  value=`${Cfile}`
  	  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $value" >&5
  $as_echo "$value" >&6; }
-@@ -12660,7 +12660,7 @@ case $libdir in
+@@ -13208,7 +13208,7 @@ case $libdir in
      *prefix*|NONE)
      { $as_echo "$as_me:${as_lineno-$LINENO}: checking which lib directory to use" >&5
  $as_echo_n "checking which lib directory to use... " >&6; }
@@ -18,7 +18,7 @@
      do
        trydir="${exec_prefix}/${aDir}"
        if
-@@ -12713,33 +12713,11 @@ $as_echo "$as_me: WARNING: $j directory 
+@@ -13261,33 +13261,11 @@ $as_echo "$as_me: WARNING: $j directory 
  done
  
  
@@ -49,11 +49,11 @@
 -esac
 -
 -CFLAGS="$CFLAGS -I${prefix}/include/heartbeat"
-+CFLAGS="$CFLAGS -I@@STAGING_DIR@@/usr/include/heartbeat"
++CFLAGS="$CFLAGS -I/Volumes/adk/openadk/target_i686_eglibc/usr/include/heartbeat"
  
  
- 
-@@ -17159,7 +17137,6 @@ else
+ { $as_echo "$as_me:${as_lineno-$LINENO}: Host CPU: $host_cpu" >&5
+@@ -18920,7 +18898,6 @@ else
  
  	# We had to eliminate -Wnested-externs because of libtool changes
          EXTRA_FLAGS="-fgnu89-inline
