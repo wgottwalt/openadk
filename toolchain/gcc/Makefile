@@ -101,6 +101,7 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
 	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
 	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
+	sed -i '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
 	cd $(GCC_BUILD_DIR_MINIMAL); PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \

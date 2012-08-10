@@ -9,6 +9,7 @@ TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_DESCR:=		GNU C library
+PKG_VER:=		2.16
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
 PKG_SUBPKGS:=		GLIBC GLIBC_DEV
@@ -30,22 +31,22 @@ INSTALL_STYLE:=		manual
 # compile nothing, glibc is already build in toolchain directory
 do-install:
 	${INSTALL_DIR} $(IDIR_GLIBC)/lib $(IDIR_GLIBC)/etc
-	cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
-		test -s usr/share/zoneinfo/"$$f" || continue; \
-		echo usr/share/zoneinfo/"$$f" | \
-		    ${TOOLS_DIR}/cpio -pdu ${IDIR_GLIBC}/; \
-	done
-	tz=; cd ${IDIR_GLIBC}/usr/share/zoneinfo || exit 1; \
-	    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
-		test -s "$$f" || continue; \
-		tz=$$f; \
-	done; if test x"$$tz" = x""; then \
-		echo >&2 Error during timezone installation; \
-		exit 1; \
-	else \
-		ln -sf "../usr/share/zoneinfo/$$tz" \
-		    ${IDIR_GLIBC}/etc/localtime; \
-	fi
+	#cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+	#	test -s usr/share/zoneinfo/"$$f" || continue; \
+	#	echo usr/share/zoneinfo/"$$f" | \
+	#	    ${TOOLS_DIR}/cpio -pdu ${IDIR_GLIBC}/; \
+	#done
+	#tz=; cd ${IDIR_GLIBC}/usr/share/zoneinfo || exit 1; \
+	#    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+	#	test -s "$$f" || continue; \
+	#	tz=$$f; \
+	#done; if test x"$$tz" = x""; then \
+	#	echo >&2 Error during timezone installation; \
+	#	exit 1; \
+	#else \
+	#	ln -sf "../usr/share/zoneinfo/$$tz" \
+	#	    ${IDIR_GLIBC}/etc/localtime; \
+	#fi
 	${CP} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${CP} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_GLIBC}/etc
 	${CP} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_GLIBC}/etc
@@ -55,7 +56,7 @@ endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib
 	for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so $(IDIR_GLIBC)/lib; \
 	done
 
 glibc-dev-install:
@@ -66,7 +67,7 @@ glibc-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	-for file in libcrypt libdl libm libresolv librt libutil; do \
-		cd $(IDIR_GLIBC_DEV)/lib; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+		cd $(IDIR_GLIBC_DEV)/lib; ln -sf $$file-$(PKG_VER).so $$file.so; \
 	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
