@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
 PKG_VERSION:=		3.13.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MAJ_VERSION:=	3
 PKG_MIN_VERSION:=	13
 PKG_PATCH_VERSION:=	3
@@ -13,6 +13,7 @@ PKG_MD5SUM:=		006cb82fa900e9e664b4b14a9b7810ca
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		nspr zlib
+PKG_DEPENDS:=		nspr
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
 PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_13_3_RTM/src/
 PKG_NOPARALLEL:=	1
@@ -53,9 +54,12 @@ post-install:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
 	${INSTALL_DATA} ${WRKDIST}/mozilla/dist/public/nss/* \
 		${STAGING_TARGET_DIR}/usr/include/nss
-	# needed for firefox 4
+	# needed for firefox
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/lib
 	$(INSTALL_DATA) ${WRKDIST}/dist/lib/libcrmf.a \
 		${STAGING_TARGET_DIR}/usr/lib
+	# needed for corosync
+	$(INSTALL_DIR) ${WRKINST}/usr/lib/pkgconfig
+	$(CP) ./files/nss.pc ${WRKINST}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -6,12 +6,12 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		pacemaker
 PKG_VERSION:=		1.1.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6f87e80f3c9782af5b4d184742c66a3a
+PKG_MD5SUM:=		818682b8d937e6c6a6e5f999528328a5
 PKG_DESCR:=		scalable High-Availability cluster resource manager
 PKG_SECTION:=		ha
-PKG_BUILDDEP:=		resource-agents cluster-glue pam gnutls corosync
-PKG_DEPENDS:=		python2 python2-readline python2-bzip2 cluster-glue
-PKG_DEPENDS+=		bash resource-agents pam libgnutls glib libxslt libxml2
+PKG_BUILDDEP:=		resource-agents cluster-glue pam gnutls corosync libtool
+PKG_DEPENDS:=		python2 python2-readline python2-bzip2 cluster-glue libuuid
+PKG_DEPENDS+=		bash resource-agents pam libgnutls glib libxslt libxml2 libltdl
 PKG_URL:=		http://www.clusterlabs.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 

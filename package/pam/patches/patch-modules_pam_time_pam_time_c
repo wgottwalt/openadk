@@ -1,6 +1,6 @@
 --- Linux-PAM-1.1.4.orig/modules/pam_time/pam_time.c	2011-06-21 11:04:56.000000000 +0200
-+++ Linux-PAM-1.1.4/modules/pam_time/pam_time.c	2011-10-12 14:43:20.673559001 +0200
-@@ -555,7 +555,9 @@ check_account(pam_handle_t *pamh, const
++++ Linux-PAM-1.1.4/modules/pam_time/pam_time.c	2012-07-31 12:02:24.000000000 +0200
+@@ -555,7 +555,9 @@ check_account(pam_handle_t *pamh, const 
  	  }
  	  /* If buffer starts with @, we are using netgroups */
  	  if (buffer[0] == '@')
