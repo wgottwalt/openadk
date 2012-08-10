@@ -322,14 +322,7 @@ EOF
 fi
 
 (( quiet )) || print "Creating ext2fs on ${part}..."
-q=
-(( quiet )) && q=-q
-(( noformat )) || mke2fs $q "$part"
-partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
-(( noformat )) || tune2fs -c 0 -i 0 "$part"
 
-(( quiet )) || print Extracting installation archive...
-mount_ext2fs "$part" "$T"
 gzip -dc "$src" | (cd "$T"; tar -xvpf -)
 cd "$T"
 rnddev=/dev/urandom
