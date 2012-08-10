@@ -179,20 +179,19 @@ case $ostype {
 	;;
 }
 
-mount |&
-while read -p dev rest; do
-	eval [[ \$dev = $match ]] || continue
-	print -u2 "Block device $tgt is in use, please umount first."
-	exit 1
-done
-
 if (( !quiet )); then
 	print "WARNING: This will overwrite $basedev - type Yes to continue!"
 	read x
 	[[ $x = Yes ]] || exit 0
 fi
 
-dksz=$(dkgetsz "$tgt")
+if stat -qs .>/dev/null 2>&1; then
+	statcmd='stat -f %z'	# BSD stat (or so we assume)
+else
+	statcmd='stat -c %s'	# GNU stat
+fi
+
+dksz=$(($($statcmd "$tgt")*2))
 heads=64
 secs=32
 (( cyls = dksz / heads / secs ))
@@ -201,11 +200,6 @@ if (( cyls < (cfgfs + 2) )); then
 	exit 1
 fi
 
-if stat -qs .>/dev/null 2>&1; then
-	statcmd='stat -f %z'	# BSD stat (or so we assume)
-else
-	statcmd='stat -c %s'	# GNU stat
-fi
 
 if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
 	print -u2 Error creating temporary directory.
