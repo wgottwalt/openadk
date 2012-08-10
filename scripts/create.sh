@@ -142,15 +142,13 @@ done
 tgt=$1
 src=$2
 
-if [[ ! -b $tgt ]]; then
-	print -u2 "'$tgt' is not a block device, exiting"
-	exit 1
-fi
 if [[ ! -f $src ]]; then
 	print -u2 "'$src' is not a file, exiting"
 	exit 1
 fi
 (( quiet )) || print "Installing $src on $tgt."
+
+qemu-img create -f raw $tgt 524288k
 
 case $ostype {
 (DragonFly|*BSD*)
