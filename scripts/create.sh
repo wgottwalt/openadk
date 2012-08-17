@@ -63,34 +63,36 @@ ostype=$(uname -s)
 
 function usage {
 	cat >&2 <<EOF
-Syntax: $me [-c cfgfssize] [-i imagesize] [-p panictime]
+Syntax: $me [-c cfgfssize] [+g] [-i imagesize] [-p panictime]
     [-s serialspeed] [-t] [-T imagetype] [+U] target.ima source.tgz
 Explanation/Defaults:
 	-c: minimum 0, maximum 5, default 1 (MiB)
+	+g: disables installing GNU GRUB 2 (-g enables it, default)
 	-i: total image, default 512 (MiB; max. approx. 2 TiB)
 	-p: default 10 (seconds; 0 disables; max. 300)
 	-s: default 115200 (bps, others: 9600 19200 38400 57600)
 	-t: enable serial console (+t disables it, default)
 	-T: image type (default raw, others: vdi)
-	+U: disables using root=UUID= (-U enables it, default)
 EOF
 	exit ${1:-1}
 }
 
 cfgfs=1
+usegrub=1
 tgtmib=512
 panicreboot=10
 speed=115200
 serial=0
 tgttype=raw
-useuuid=1
 
-while getopts "c:hi:p:s:tT:U" ch; do
+while getopts "c:ghi:p:s:tT:" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
 			usage
 		fi ;;
+	(g)	usegrub=1 ;;
+	(+g)	usegrub=0 ;;
 	(h)	usage 0 ;;
 	(i)	if (( (tgtmib = OPTARG) < 7 || tgtmib > 2097150 )); then
 			print -u2 "$me: -i $OPTARG out of bounds"
@@ -112,8 +114,6 @@ while getopts "c:hi:p:s:tT:U" ch; do
 			usage
 		fi
 		tgttype=$OPTARG ;;
-	(U)	useuuid=1 ;;
-	(+U)	useuuid=0 ;;
 	(*)	usage 1 ;;
 	}
 done
@@ -164,17 +164,22 @@ else
 	statcmd='stat -c %s'	# GNU stat
 fi
 
-tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
-integer coreimgsz=$($statcmd "$T/core.img")
-if (( coreimgsz < 1024 )); then
-	print -u2 core.img is probably too small: $coreimgsz
-	rm -rf "$T"
-	exit 1
-fi
-if (( coreimgsz > 65024 )); then
-	print -u2 core.img is larger than 64K-512: $coreimgsz
-	rm -rf "$T"
-	exit 1
+if (( usegrub )); then
+	tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
+	integer coreimgsz=$($statcmd "$T/core.img")
+	if (( coreimgsz < 1024 )); then
+		print -u2 core.img is probably too small: $coreimgsz
+		rm -rf "$T"
+		exit 1
+	fi
+	if (( coreimgsz > 65024 )); then
+		print -u2 core.img is larger than 64K-512: $coreimgsz
+		rm -rf "$T"
+		exit 1
+	fi
+else
+	# fake it
+	integer coreimgsz=1
 fi
 (( coreendsec = (coreimgsz + 511) / 512 ))
 corestartsec=1
@@ -184,16 +189,23 @@ corepatchofs=$((0x414))
 # calculate size of ext2fs in KiB as image size minus cfgfs minus firsttrack
 ((# partfssz = ((cyls - cfgfs) * 64 * 32 - partofs) / 2 ))
 
-print Preparing MBR and GRUB2...
+if (( usegrub )); then
+	print Preparing MBR and GRUB2...
+else
+	print Preparing partition table...
+fi
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
 echo $corestartsec $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
     -A -g $((cyls - cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
     dd of="$T/firsttrack" conv=notrunc 2>/dev/null
-dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=$corestartsec \
-    2>/dev/null
-# set partition where it can find /boot/grub
-print -n '\0\0\0\0' | \
-    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$corepatchofs 2>/dev/null
+if (( usegrub )); then
+	dd if="$T/core.img" of="$T/firsttrack" conv=notrunc \
+	    seek=$corestartsec 2>/dev/null
+	# set partition where it can find /boot/grub
+	print -n '\0\0\0\0' | \
+	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$corepatchofs \
+	    2>/dev/null
+fi
 
 # create cfgfs partition (mostly taken from bootgrub.mksh)
 set -A thecode
@@ -250,34 +262,37 @@ chmod 1777 tmp
 chmod 4755 bin/busybox
 [[ -f usr/bin/Xorg ]] && chmod 4755 usr/bin/Xorg
 [[ -f usr/bin/sudo ]] && chmod 4755 usr/bin/sudo
-print Configuring GRUB2 bootloader...
-mkdir -p boot/grub
-(
-	print set default=0
-	print set timeout=1
-	if (( serial )); then
-		print serial --unit=0 --speed=$speed
-		print terminal_output serial
-		print terminal_input serial
-		consargs="console=ttyS0,$speed console=tty0"
-	else
-		print terminal_output console
-		print terminal_input console
-		consargs="console=tty0"
-	fi
-	print
-	print 'menuentry "GNU/Linux (OpenADK)" {'
-	linuxargs="root=/dev/sda1 $consargs"
-	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
-	print "\tlinux /boot/kernel $linuxargs"
-	print '}'
-) >boot/grub/grub.cfg
-set -A grubfiles
-ngrubfiles=0
-for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handler.lst,parttool.lst}; do
-	[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
-done
-cp "${grubfiles[@]}" boot/grub/
+
+if (( usegrub )); then
+	print Configuring GRUB2 bootloader...
+	mkdir -p boot/grub
+	(
+		print set default=0
+		print set timeout=1
+		if (( serial )); then
+			print serial --unit=0 --speed=$speed
+			print terminal_output serial
+			print terminal_input serial
+			consargs="console=ttyS0,$speed console=tty0"
+		else
+			print terminal_output console
+			print terminal_input console
+			consargs="console=tty0"
+		fi
+		print
+		print 'menuentry "GNU/Linux (OpenADK)" {'
+		linuxargs="root=/dev/sda1 $consargs"
+		(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
+		print "\tlinux /boot/kernel $linuxargs"
+		print '}'
+	) >boot/grub/grub.cfg
+	set -A grubfiles
+	ngrubfiles=0
+	for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handler.lst,parttool.lst}; do
+		[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
+	done
+	cp "${grubfiles[@]}" boot/grub/
+fi
 
 print "Creating ext2fs filesystem image..."
 cd "$T"
