@@ -25,6 +25,29 @@ config ADK_QUIET_KERNEL
 	help
 	  Make bootup quiet without messages from the kernel.
 
+config ADK_KERNEL_NETCONSOLE
+	prompt "Netconsole"
+	boolean
+	default n
+	help
+	  Activate netconsole. netconsole=@/,@192.168.1.2/
+
+config ADK_PARAMETER_NETCONSOLE_SRC_IP
+	prompt "IP address for source"
+	string
+	default "192.168.1.100"
+	depends on ADK_KERNEL_NETCONSOLE
+	help
+       	  source ip address logging from.
+
+config ADK_PARAMETER_NETCONSOLE_DST_IP
+	prompt "IP address for target"
+	string
+	default "192.168.1.2"
+	depends on ADK_KERNEL_NETCONSOLE
+	help
+       	  ip address logging to.
+
 config ADK_KERNEL_MAGIC_SYSRQ
 	prompt "Magic BREAK sequence"
 	boolean

@@ -87,6 +87,10 @@ ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
+ifeq ($(ADK_KERNEL_NETCONSOLE),y)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
 	@cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.nokernel \
 	    .kernelconfig.kernel .kernelconfig.modules \
 	    >.kernelconfig.tmp
