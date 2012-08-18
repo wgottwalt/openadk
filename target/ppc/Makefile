@@ -17,7 +17,7 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 ifeq ($(ADK_HARDWARE_QEMU),y)
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
 	@echo "Use following command to create a QEMU Image:"
-	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-ppc -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
