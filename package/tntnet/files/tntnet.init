@@ -1,0 +1,26 @@
+#!/bin/sh
+#PKG tntnet
+#INIT 90
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${tntnet:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/bin/tntnet /etc/tntnet/tntnet.conf
+  	;;
+stop)
+	kill $(pgrep -f /usr/bin/tntnet)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cxxtools
-PKG_VERSION:=		2.0
+PKG_VERSION:=		2.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		763ef672a577fa8b93c37239ee0f3d59
+PKG_MD5SUM:=		2026a2bb23b966f13893167b4dbc5d70
 PKG_DESCR:=		a collection of general-purpose C++ classes (libraries)
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv
@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		libiconv
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
+PKG_CXX:=		CXXTOOLS
 
 PKG_ARCH_DEPENDS:=	!arm !avr32
 
@@ -30,7 +31,7 @@ TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++ -Wl,-E
-TARGET_LDFLAGS+=	-luClibc++ -liconv -lm -nodefaultlibs -shared
+TARGET_LDFLAGS+=	-luClibc++ -liconv -lm -lc -nodefaultlibs -shared
 else
 TARGET_LDFLAGS+=	-liconv -shared
 endif

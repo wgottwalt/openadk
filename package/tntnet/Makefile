@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tntnet
-PKG_VERSION:=		2.0
+PKG_VERSION:=		2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8f7185eeed23e7ae6a9be314e2fc0d36
+PKG_MD5SUM:=		a9c85aa6d624f7f88c48374f28730242
 PKG_DESCR:=		small C++ application server
 PKG_SECTION:=		www
 PKG_DEPENDS:=		cxxtools zlib libiconv libpthread
@@ -46,7 +46,22 @@ CONFIGURE_ARGS+=	--without-epoll \
 			--without-sendfile
 CONFIGURE_ENV+= 	CXXFLAGS='${TARGET_CXXFLAGS}' \
 			ac_cv_path_cxxtools_config=${STAGING_TARGET_DIR}/usr/bin
+
+ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
+			-I${STAGING_TARGET_DIR}/usr/include/uClibc++ -Wl,-E
+TARGET_LDFLAGS+=	-luClibc++ -lm -lc -ldl -nodefaultlibs -shared
+else
 TARGET_LDFLAGS+=	-ldl
+endif
+
+ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
+# add workaround because libtool tries to link libstdc++
+post-configure:
+		${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
+			${WRKBUILD}/libtool
+endif
+
 
 tntnet-install:
 	${INSTALL_DIR} ${IDIR_TNTNET}/www
