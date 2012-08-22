@@ -25,9 +25,13 @@ $(eval $(call PKG_template,PACEMAKER,pacemaker,$(PKG_VERSION)-${PKG_RELEASE},${P
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-CONFIGURE_ARGS+=	--disable-fatal-warnings
+CONFIGURE_ARGS+=	--disable-fatal-warnings \
+			--with-corosync \
+			--without-ais \
+			--without-heartbeat
 CONFIGURE_ENV+=		ac_cv_path_HELP2MAN=''
 CFLAGS_FOR_BUILD+=	-I$(STAGING_DIR)/usr/include/heartbeat
+TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/heartbeat
 
 pre-configure:
 	$(SED) "s#@@STAGING_DIR@@#$(STAGING_DIR)#" $(WRKBUILD)/configure

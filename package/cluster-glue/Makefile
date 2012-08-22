@@ -4,12 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cluster-glue
-PKG_VERSION:=		1.0.7
+PKG_VERSION:=		1.0.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		237d396094a3cded73f9f0ad45558a21
+PKG_MD5SUM:=		67e35a8e1a78376af039aa53644f0de2
 PKG_DESCR:=		Cluster Glue library and tools
 PKG_SECTION:=		ha
-PKG_BUILDDEP:=		glib bzip2 e2fsprogs
+PKG_BUILDDEP:=		glib bzip2 e2fsprogs libaio
+PKG_DEPENDS:=		libaio
 PKG_URL:=		http://www.linux-ha.org/wiki/Cluster_Glue
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -25,6 +26,17 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ENV+=		ac_cv_path_HELP2MAN=''
 CONFIGURE_ARGS+=	--disable-bundled-ltdl \
 			--enable-fatal-warnings=no
+
+TARGET_CPPFLAGS+=	-DCONFIG_LITTLE_ENDIAN
+ifeq (${CPU_ARCH},mips)
+TARGET_CPPFLAGS+=		-DCONFIG_BIG_ENDIAN
+endif
+ifeq (${CPU_ARCH},mips64)
+TARGET_CPPFLAGS+=		-DCONFIG_BIG_ENDIAN
+endif
+ifeq (${CPU_ARCH},ppc)
+TARGET_CPPFLAGS+=		-DCONFIG_BIG_ENDIAN
+endif
 
 cluster-glue-install:
 	$(INSTALL_DIR) $(IDIR_CLUSTER_GLUE)/usr/lib/heartbeat
