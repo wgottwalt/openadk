@@ -342,7 +342,7 @@ case $tgttype {
 	VBoxManage convertdd dst.ima dst.vdi
 	rm dst.ima
 	print "Moving VDI image to $tgt..."
-	mv -f dst.vdi "$tgt"
+	mv -f dst.vdi "$tgt".vdi
 	;;
 }
 
