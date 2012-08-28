@@ -8,7 +8,8 @@ RESOLV_CONF=/etc/resolv.conf
 
 case $1 in
 (deconfig)
-	ip addr flush $interface
+	# removes ipv6 link-local address, which is bad
+	# ip addr flush $interface
 	;;
 (renew|bound)
 	ip addr add $ip/${mask:-24} brd + dev $interface
