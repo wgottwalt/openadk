@@ -46,7 +46,7 @@ iptables-install:
 	${CP} ${WRKINST}/usr/lib/libxtables.so* ${IDIR_IPTABLES}/usr/lib
 	${INSTALL_DIR} ${IDIR_IPTABLES}/{usr/lib,etc,usr/sbin}
 	${INSTALL_DATA} ./files/firewall6.conf ${IDIR_IPTABLES}/etc
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libip6tc.so* ${IDIR_IPTABLES}/usr/lib
 
 iptables-dev-install:
