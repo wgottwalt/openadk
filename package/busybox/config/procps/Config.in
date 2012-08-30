@@ -1,3 +1,4 @@
+# DO NOT EDIT. This file is generated from Config.src
 #
 # For a description of the syntax of this configuration file,
 # see scripts/kbuild/config-language.txt.
@@ -5,10 +6,73 @@
 
 menu "Process Utilities"
 
+config BUSYBOX_IOSTAT
+	bool "iostat"
+	default y
+	help
+	  Report CPU and I/O statistics
+config BUSYBOX_LSOF
+	bool "lsof"
+	default y
+	help
+	  Show open files in the format of:
+	  PID <TAB> /path/to/executable <TAB> /path/to/opened/file
+config BUSYBOX_MPSTAT
+	bool "mpstat"
+	default n
+	help
+	  Per-processor statistics
+config BUSYBOX_NMETER
+	bool "nmeter"
+	default n
+	help
+	  Prints selected system stats continuously, one line per update.
+config BUSYBOX_PMAP
+       bool "pmap"
+       default y
+       help
+         Display processes' memory mappings.
+config BUSYBOX_POWERTOP
+	bool "powertop"
+	default n
+	help
+	  Analyze power consumption on Intel-based laptops
+config BUSYBOX_PSTREE
+	bool "pstree"
+	default y
+	help
+	  Display a tree of processes.
+config BUSYBOX_PWDX
+	bool "pwdx"
+	default n
+	help
+	  Report current working directory of a process
+config BUSYBOX_SMEMCAP
+	bool "smemcap"
+	default n
+	help
+	  smemcap is a tool for capturing process data for smem,
+	  a memory usage statistic tool.
+config BUSYBOX_UPTIME
+	bool "uptime"
+	default y
+	select BUSYBOX_PLATFORM_LINUX #sysinfo()
+	help
+	  uptime gives a one line display of the current time, how long
+	  the system has been running, how many users are currently logged
+	  on, and the system load averages for the past 1, 5, and 15 minutes.
+
+config BUSYBOX_FEATURE_UPTIME_UTMP_SUPPORT
+	bool "Support for showing the number of users"
+	default y
+	depends on BUSYBOX_UPTIME && BUSYBOX_FEATURE_UTMP
+	help
+	  Makes uptime display the number of users currently logged on.
+
 config BUSYBOX_FREE
 	bool "free"
 	default y
-	depends on BUSYBOX_PLATFORM_LINUX #sysinfo()
+	select BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  free displays the total amount of free and used physical and swap
 	  memory in the system, as well as the buffers used by the kernel.
@@ -21,13 +85,6 @@ config BUSYBOX_FUSER
 	  fuser lists all PIDs (Process IDs) that currently have a given
 	  file open. fuser can also list all PIDs that have a given network
 	  (TCP or UDP) port open.
-
-config BUSYBOX_IOSTAT
-	bool "iostat"
-	default n
-	depends on !ADK_PACKAGE_SYSSTAT
-	help
-	  Report CPU and I/O statistics
 
 config BUSYBOX_KILL
 	bool "kill"
@@ -48,21 +105,8 @@ config BUSYBOX_KILLALL
 
 config BUSYBOX_KILLALL5
 	bool "killall5"
-	default n
+	default y
 	depends on BUSYBOX_KILL
-
-config BUSYBOX_MPSTAT
-	bool "mpstat"
-	default n
-	depends on !ADK_PACKAGE_SYSSTAT
-	help
-	  Per-processor statistics
-
-config BUSYBOX_NMETER
-	bool "nmeter"
-	default n
-	help
-	  Prints selected system stats continuously, one line per update.
 
 config BUSYBOX_PGREP
 	bool "pgrep"
@@ -72,21 +116,21 @@ config BUSYBOX_PGREP
 
 config BUSYBOX_PIDOF
 	bool "pidof"
-	default n
+	default y
 	help
 	  Pidof finds the process id's (pids) of the named programs. It prints
 	  those id's on the standard output.
 
 config BUSYBOX_FEATURE_PIDOF_SINGLE
 	bool "Enable argument for single shot (-s)"
-	default n
+	default y
 	depends on BUSYBOX_PIDOF
 	help
 	  Support argument '-s' for returning only the first pid found.
 
 config BUSYBOX_FEATURE_PIDOF_OMIT
 	bool "Enable argument for omitting pids (-o)"
-	default n
+	default y
 	depends on BUSYBOX_PIDOF
 	help
 	  Support argument '-o' for omitting the given pids in output.
@@ -99,18 +143,6 @@ config BUSYBOX_PKILL
 	help
 	  Send signals to processes by name.
 
-config BUSYBOX_PMAP
-       bool "pmap"
-       default n
-       help
-         Display processes' memory mappings.
-
-config BUSYBOX_POWERTOP
-	bool "powertop"
-	default n
-	help
-	  Analyze power consumption on Intel-based laptops
-
 config BUSYBOX_PS
 	bool "ps"
 	default y
@@ -120,22 +152,31 @@ config BUSYBOX_PS
 config BUSYBOX_FEATURE_PS_WIDE
 	bool "Enable wide output option (-w)"
 	default y
-	depends on BUSYBOX_PS
+	depends on BUSYBOX_PS && !BUSYBOX_DESKTOP
 	help
 	  Support argument 'w' for wide output.
 	  If given once, 132 chars are printed, and if given more
 	  than once, the length is unlimited.
 
+config BUSYBOX_FEATURE_PS_LONG
+	bool "Enable long output option (-l)"
+	default y
+	depends on BUSYBOX_PS && !BUSYBOX_DESKTOP
+	help
+	  Support argument 'l' for long output.
+	  Adds fields PPID, RSS, START, TIME & TTY
+
 config BUSYBOX_FEATURE_PS_TIME
 	bool "Enable time and elapsed time output"
-	default n
-	depends on BUSYBOX_PS && BUSYBOX_DESKTOP && BUSYBOX_PLATFORM_LINUX #sysinfo()
+	default y
+	depends on BUSYBOX_PS && BUSYBOX_DESKTOP
+	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Support -o time and -o etime output specifiers.
 
 config BUSYBOX_FEATURE_PS_ADDITIONAL_COLUMNS
 	bool "Enable additional ps columns"
-	default n
+	default y
 	depends on BUSYBOX_PS && BUSYBOX_DESKTOP
 	help
 	  Support -o rgroup, -o ruser, -o nice output specifiers.
@@ -150,17 +191,10 @@ config BUSYBOX_FEATURE_PS_UNUSUAL_SYSTEMS
 
 config BUSYBOX_RENICE
 	bool "renice"
-	default n
+	default y
 	help
 	  Renice alters the scheduling priority of one or more running
 	  processes.
-
-config BUSYBOX_SMEMCAP
-	bool "smemcap"
-	default n
-	help
-	  smemcap is a tool for capturing process data for smem,
-	  a memory usage statistic tool.
 
 config BUSYBOX_BB_SYSCTL
 	bool "sysctl"
@@ -193,7 +227,7 @@ config BUSYBOX_FEATURE_TOP_CPU_GLOBAL_PERCENTS
 
 config BUSYBOX_FEATURE_TOP_SMP_CPU
 	bool "SMP CPU usage display ('c' key)"
-	default n
+	default y
 	depends on BUSYBOX_FEATURE_TOP_CPU_GLOBAL_PERCENTS
 	help
 	  Allow 'c' key to switch between individual/cumulative CPU stats
@@ -201,7 +235,7 @@ config BUSYBOX_FEATURE_TOP_SMP_CPU
 
 config BUSYBOX_FEATURE_TOP_DECIMALS
 	bool "Show 1/10th of a percent in CPU/mem statistics"
-	default n
+	default y
 	depends on BUSYBOX_FEATURE_TOP_CPU_USAGE_PERCENTAGE
 	help
 	  Show 1/10th of a percent in CPU/mem statistics.
@@ -209,7 +243,7 @@ config BUSYBOX_FEATURE_TOP_DECIMALS
 
 config BUSYBOX_FEATURE_TOP_SMP_PROCESS
 	bool "Show CPU process runs on ('j' field)"
-	default n
+	default y
 	depends on BUSYBOX_TOP
 	help
 	  Show CPU where process was last found running on.
@@ -217,26 +251,18 @@ config BUSYBOX_FEATURE_TOP_SMP_PROCESS
 
 config BUSYBOX_FEATURE_TOPMEM
 	bool "Topmem command ('s' key)"
-	default n
+	default y
 	depends on BUSYBOX_TOP
 	help
 	  Enable 's' in top (gives lots of memory info).
 
 config BUSYBOX_FEATURE_SHOW_THREADS
-	bool "Support for showing threads in ps/top"
+	bool "Support for showing threads in ps/pstree/top"
 	default y
-	depends on BUSYBOX_PS || BUSYBOX_TOP
+	depends on BUSYBOX_PS || BUSYBOX_TOP || BUSYBOX_PSTREE
 	help
-	  Enables ps -T option and 'h' command in top
-
-config BUSYBOX_UPTIME
-	bool "uptime"
-	default y
-	depends on BUSYBOX_PLATFORM_LINUX #sysinfo()
-	help
-	  uptime gives a one line display of the current time, how long
-	  the system has been running, how many users are currently logged
-	  on, and the system load averages for the past 1, 5, and 15 minutes.
+	  Enables the ps -T option, showing of threads in pstree,
+	  and 'h' command in top.
 
 config BUSYBOX_WATCH
 	bool "watch"

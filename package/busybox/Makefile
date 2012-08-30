@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.19.4
+PKG_VERSION:=		1.20.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9c0cae5a0379228e7b55e5b29528df8e
+PKG_MD5SUM:=		e025414bc6cd79579cc7a32a45d3ae1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
 PKG_BUILDDEP:=		libtirpc

@@ -1,4 +1,6 @@
+# DO NOT EDIT. This file is generated from Config.src
 menu "Mail Utilities"
+
 
 config BUSYBOX_MAKEMIME
 	bool "makemime"
@@ -22,7 +24,7 @@ config BUSYBOX_POPMAILDIR
 
 config BUSYBOX_FEATURE_POPMAILDIR_DELIVERY
 	bool "Allow message filters and custom delivery program"
-	default n
+	default y
 	depends on BUSYBOX_POPMAILDIR
 	help
 	  Allow to use a custom program to filter the content
