@@ -62,7 +62,7 @@ $(WRKBUILD)/.headers_configure:
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		PATH='${TARGET_PATH}' \
-		$(MAKE) install-headers install-bootstrap-headers=yes \
+		$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-64.h
@@ -90,7 +90,7 @@ $(WRKBUILD)/.configured:
 
 $(EGLIBC_BUILD_DIR_FINAL)/libc.so:
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) all
+	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) cross-compiling=yes all
 	touch $@
 
 $(WRKBUILD)/.installed: $(EGLIBC_BUILD_DIR_FINAL)/libc.so

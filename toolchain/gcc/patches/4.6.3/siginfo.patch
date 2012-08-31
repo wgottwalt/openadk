@@ -1,6 +1,6 @@
 diff -Nur gcc-4.6.3.orig/gcc/config/i386/linux-unwind.h gcc-4.6.3/gcc/config/i386/linux-unwind.h
 --- gcc-4.6.3.orig/gcc/config/i386/linux-unwind.h	2011-01-03 21:52:22.000000000 +0100
-+++ gcc-4.6.3/gcc/config/i386/linux-unwind.h	2012-08-02 11:47:11.000000000 +0200
++++ gcc-4.6.3/gcc/config/i386/linux-unwind.h	2012-08-30 15:37:37.000000000 +0200
 @@ -133,9 +133,9 @@
      {
        struct rt_sigframe {
@@ -13,3 +13,15 @@ diff -Nur gcc-4.6.3.orig/gcc/config/i386/linux-unwind.h gcc-4.6.3/gcc/config/i38
  	struct ucontext uc;
        } *rt_ = context->cfa;
        /* The void * cast is necessary to avoid an aliasing warning.
+diff -Nur gcc-4.6.3.orig/gcc/config/mips/linux-unwind.h gcc-4.6.3/gcc/config/mips/linux-unwind.h
+--- gcc-4.6.3.orig/gcc/config/mips/linux-unwind.h	2009-04-09 17:00:19.000000000 +0200
++++ gcc-4.6.3/gcc/config/mips/linux-unwind.h	2012-08-30 15:38:45.000000000 +0200
+@@ -75,7 +75,7 @@
+       struct rt_sigframe {
+ 	u_int32_t ass[4];  /* Argument save space for o32.  */
+ 	u_int32_t trampoline[2];
+-	struct siginfo info;
++	siginfo_t info;
+ 	_sig_ucontext_t uc;
+       } *rt_ = context->cfa;
+       sc = &rt_->uc.uc_mcontext;
