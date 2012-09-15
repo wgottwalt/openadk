@@ -39,18 +39,6 @@ diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc/types.h eglibc-2.16/libc/sunrpc/rpc/t
  # define __daddr_t_defined
  #endif
  
-diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_clntout.c eglibc-2.16/libc/sunrpc/rpc_clntout.c
---- eglibc-2.16.orig/libc/sunrpc/rpc_clntout.c	2012-07-31 09:00:24.000000000 +0200
-+++ eglibc-2.16/libc/sunrpc/rpc_clntout.c	2012-07-31 09:22:22.000000000 +0200
-@@ -31,7 +31,7 @@
-  */
- #include <stdio.h>
- #include <string.h>
--#include <rpc/types.h>
-+#include "rpc/types.h"
- #include "rpc_parse.h"
- #include "rpc_util.h"
- #include "proto.h"
 diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_main.c eglibc-2.16/libc/sunrpc/rpc_main.c
 --- eglibc-2.16.orig/libc/sunrpc/rpc_main.c	2012-07-31 09:00:24.000000000 +0200
 +++ eglibc-2.16/libc/sunrpc/rpc_main.c	2012-07-31 09:22:22.000000000 +0200
