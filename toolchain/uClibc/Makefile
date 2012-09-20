@@ -16,13 +16,26 @@ endif
 
 UCLIBCCFG=uclibc.config
 ifeq ($(ADK_TARGET_ENDIAN),little)
+ifeq ($(ADK_CPU_MIPS64),y)
+UCLIBCCFG=uclibc.config.little.mips64
+else
 UCLIBCCFG=uclibc.config.little
 endif
+endif
 ifeq ($(ADK_TARGET_ENDIAN),big)
+ifeq ($(ADK_CPU_MIPS64),y)
+UCLIBCCFG=uclibc.config.big.mips64
+else
 UCLIBCCFG=uclibc.config.big
 endif
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
 UCLIBCCFG=uclibc.config.v32
+endif
+
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+UCLIBCCFG=uclibc.config.little.mips64
 endif
 
 $(WRKBUILD)/.headers:

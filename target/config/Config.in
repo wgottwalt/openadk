@@ -31,7 +31,7 @@ endchoice
 
 choice
 prompt "Target Kernel"
-depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG || ADK_TARGET_SYSTEM_QEMU_MIPS64
 config ADK_TARGET_KERNEL64
 	boolean "64 Bit Kernel"
 
@@ -335,6 +335,12 @@ config ADK_CPU_XSCALE
 	boolean
 
 config ADK_CPU_M68K
+	boolean
+
+config ADK_CPU_MIPS32
+	boolean
+
+config ADK_CPU_MIPS64
 	boolean
 
 config ADK_TARGET_CPU_ARCH
