@@ -368,6 +368,7 @@ config ADK_TARGET_CPU_ARCH
 	default "crisv32" if ADK_CPU_CRIS_V32
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
+	default "mips64el" if ADK_native && ADK_lemote_yeelong	
 
 config ADK_TARGET_ABI_CFLAGS
 	string
