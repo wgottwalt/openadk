@@ -366,11 +366,11 @@ endif
 ifeq ($(ADKtype),lemote-yeelong)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
+	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/mips/sys-available/$(ADKtype) > \
+		target/mips/sys-enabled/.$(ADKtype)
 	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
 	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
+	@echo "source \"target/mips/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
 	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
