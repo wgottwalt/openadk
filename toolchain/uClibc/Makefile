@@ -39,7 +39,7 @@ UCLIBCCFG=uclibc.config.little.mips64
 endif
 
 $(WRKBUILD)/.headers:
-	$(SED) 's,^CROSS=.*,CROSS=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
+	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
 	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/$(UCLIBCCFG) >${WRKBUILD}/.config
 ifneq ($(ADK_DEBUG),)
