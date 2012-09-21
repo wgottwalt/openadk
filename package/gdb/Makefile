@@ -16,6 +16,10 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+#ifeq ($(ADK_STATIC),y)
+#TARGET_CFLAGS+=         -static
+#endif
+
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
