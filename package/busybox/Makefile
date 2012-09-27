@@ -40,6 +40,8 @@ BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" GCC_HONOUR_COPTS=s \
 			-C ${WRKBUILD}
 ifneq (${ADK_NATIVE},y)
 BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-pthread  -ltirpc' EXTRA_CPPFLAGS="-I$(STAGING_DIR)/usr/include/tirpc"
+else
+BB_MAKE_FLAGS+=		EXTRA_CPPFLAGS="-I/usr/include/tirpc"
 endif
 
 # XXX: Although this looks like all new symbols are enabled when 'make oldconfig' runs, they're not.
