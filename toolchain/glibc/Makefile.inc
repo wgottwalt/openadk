@@ -27,6 +27,7 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         AR=${REAL_GNU_TARGET_NAME}-ar \
                         RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
                         libc_cv_forced_unwind=yes \
+			libc_cv_cc_with_libunwind=yes \
                         libc_cv_c_cleanup=yes \
                         libc_cv_gnu99_inline=yes \
 			libc_cv_sparc64_tls=yes \

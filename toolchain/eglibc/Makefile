@@ -31,6 +31,7 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			CXX=${REAL_GNU_TARGET_NAME}-g++ \
 			AR=${REAL_GNU_TARGET_NAME}-ar \
 			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+			libc_cv_cc_with_libunwind=no \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \
 			libc_cv_gnu99_inline=yes \
@@ -62,6 +63,7 @@ $(WRKBUILD)/.headers_configure:
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		PATH='${TARGET_PATH}' \
+		${EGLIBC_ENV} \
 		$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h

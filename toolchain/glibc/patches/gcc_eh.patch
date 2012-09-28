@@ -1,9 +1,12 @@
 diff -Nur glibc-2.16.0.orig/Makeconfig glibc-2.16.0/Makeconfig
 --- glibc-2.16.0.orig/Makeconfig	2012-06-30 21:12:34.000000000 +0200
-+++ glibc-2.16.0/Makeconfig	2012-08-02 10:18:56.000000000 +0200
-@@ -521,9 +521,9 @@
++++ glibc-2.16.0/Makeconfig	2012-09-28 20:11:14.000000000 +0200
+@@ -519,11 +519,11 @@
+ ifneq ($(have-cc-with-libunwind),yes)
+   libunwind =
  else
-   libunwind = -lunwind
+-  libunwind = -lunwind
++  libunwind =
  endif
 -libgcc_eh := -Wl,--as-needed -lgcc_s $(libunwind) -Wl,--no-as-needed
 +libgcc_eh := -Wl,--as-needed $(libunwind) -Wl,--no-as-needed
