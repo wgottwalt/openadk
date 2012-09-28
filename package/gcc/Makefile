@@ -26,6 +26,7 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif
 
+CONFIGURE_ENV+=		have_sys_sdt_h=no
 CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 			--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
