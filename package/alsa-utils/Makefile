@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
-PKG_VERSION:=		1.0.25
+PKG_VERSION:=		1.0.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f81f9dcb9a014fd32cb3a70066a5b9a9
+PKG_MD5SUM:=		4dcf1017fafc91603af96705c073eca9
 PKG_DESCR:=		ALSA mixer utility
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libpthread
