@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.6
+PKG_VERSION:=		4.5.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e537b2b1afeec70c0e6e27a0d0fd671e
+PKG_MD5SUM:=		64dfe10d9db0c1e34030891695ffca4b
 PKG_DESCR:=		System call trace program
 PKG_SECTION:=		debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
