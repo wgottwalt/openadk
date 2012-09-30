@@ -77,6 +77,7 @@ if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
 	NEED_PYTHON="$NEED_PYTHON firefox"
+	NEED_ZIP="$NEED_ZIP firefox"
 fi
 
 if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
