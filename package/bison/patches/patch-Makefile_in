@@ -1,6 +1,6 @@
---- bison-2.4.2.orig/Makefile.in	2010-03-20 18:14:08.000000000 +0100
-+++ bison-2.4.2/Makefile.in	2010-07-30 17:11:16.198057000 +0200
-@@ -871,7 +871,7 @@ top_build_prefix = @top_build_prefix@
+--- bison-2.4.3.orig/Makefile.in	2010-08-06 03:00:27.000000000 +0200
++++ bison-2.4.3/Makefile.in	2012-09-28 20:42:50.000000000 +0200
+@@ -909,7 +909,7 @@ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  ACLOCAL_AMFLAGS = -I m4
