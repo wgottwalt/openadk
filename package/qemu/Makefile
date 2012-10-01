@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		1.0
+PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a64b36067a191451323b0d34ebb44954
+PKG_MD5SUM:=		78eb1e984f4532aa9f2bdd3c127b5b61
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl libpng
@@ -14,8 +14,9 @@ PKG_BUILDDEP:=		zlib sdl libpng
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
 PKG_ARCH_DEPENDS:=	native x86 x86_64
-#PKG_SYSTEM_DEPENDS:=	ibm-x40 shuttle-sa76
 
 include $(TOPDIR)/mk/package.mk
 
