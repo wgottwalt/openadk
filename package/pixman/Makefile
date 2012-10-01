@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pixman
-PKG_VERSION:=		0.20.2
+PKG_VERSION:=		0.26.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a923c20af88e469ac29ba42cfedb88c2
+PKG_MD5SUM:=		276242da5b3af1258d072cf205d18f0b
 PKG_DESCR:=		Pixel manipulation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libpng
