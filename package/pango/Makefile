@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		22ad1c8d3fda7e73b0798035f3dd96bc
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libXft
+PKG_BUILDDEP:=		libXft glib cairo
 PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
 PKG_NEED_CXX:=		1
