@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dillo
-PKG_VERSION:=		3.0
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		448f44a923222270cb0c84e55adc1be1
+PKG_MD5SUM:=		81b82112cefcc7d54fe2972a21f42930
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libiconv libpng zlib libjpeg
@@ -25,7 +25,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DILLO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-liconv -lpng
+TARGET_LDFLAGS+=	-liconv -lpng15
+CONFIGURE_ARGS+=	--disable-xft
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_DILLO)/usr/bin

@@ -1,0 +1,20 @@
+--- dillo-3.0.2.orig/configure	2011-11-30 12:08:21.000000000 +0100
++++ dillo-3.0.2/configure	2012-09-22 19:06:27.000000000 +0200
+@@ -5690,7 +5690,7 @@ if test "x$enable_png" = "xyes"; then
+ $as_echo_n "checking for libpng-config... " >&6; }
+ 
+   if test -z "$PNG_CONFIG"; then
+-    PNG_CONFIG=`which libpng14-config`
++    PNG_CONFIG=`which libpng-config`
+     if test -z "$PNG_CONFIG"; then
+       PNG_CONFIG=`which libpng12-config`
+     fi
+@@ -5717,7 +5717,7 @@ $as_echo "missing" >&6; }
+ $as_echo_n "checking for libpng version... " >&6; }
+     png_version=`$PNG_CONFIG --version`
+     case $png_version in
+-      1.4.*) { $as_echo "$as_me:${as_lineno-$LINENO}: result: $png_version (newer version)" >&5
++      1.5.*) { $as_echo "$as_me:${as_lineno-$LINENO}: result: $png_version (newer version)" >&5
+ $as_echo "$png_version (newer version)" >&6; } ;;
+       1.2.*) { $as_echo "$as_me:${as_lineno-$LINENO}: result: $png_version (newer version)" >&5
+ $as_echo "$png_version (newer version)" >&6; } ;;
