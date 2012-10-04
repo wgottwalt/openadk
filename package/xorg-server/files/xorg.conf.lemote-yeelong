@@ -31,7 +31,6 @@ Section "Device"
        Option      "pci_burst"         "true"
        Option      "HWCursor"          "false"
        Option      "SWCursor"          "true"
-       Option      "UseBIOS"           "false"
        Option      "PanelSize"         "1024x600"
 EndSection
 
