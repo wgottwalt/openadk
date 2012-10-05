@@ -1,8 +1,8 @@
 	Caller side code changes regarding memory mapped IO. This patch applies
 	for mips architectures and is used by xf86-video-siliconmotion.
---- xorg-server-1.7.6.orig/hw/xfree86/common/compiler.h	2010-03-12 05:38:22.000000000 +0100
-+++ xorg-server-1.7.6/hw/xfree86/common/compiler.h	2010-06-05 09:43:12.531809482 +0200
-@@ -713,42 +713,43 @@ xf86WriteMmio32LeNB(__volatile__ void *b
+--- xorg-server-1.9.3.orig/hw/xfree86/common/compiler.h	2010-09-30 09:27:11.000000000 +0200
++++ xorg-server-1.9.3/hw/xfree86/common/compiler.h	2012-10-01 13:23:55.000000000 +0200
+@@ -714,42 +714,43 @@ xf86WriteMmio32LeNB(__volatile__ void *b
  #     define PORT_SIZE short
  #    endif
  

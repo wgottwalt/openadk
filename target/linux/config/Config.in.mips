@@ -1,17 +1,13 @@
 menu "MIPS devices support"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
-config ADK_KERNEL_MIPS_PLATFORM_DEVICES
+config ADK_KERNEL_LEMOTE_YEELOONG2F_PDEV
+	prompt ".................................. Lemote Yeelong platform drivers (f.e. battery support)"
 	boolean
-
-config ADK_KERNEL_LEMOTE_YEELOONG2F
-	prompt ".................................. RTC support for PC CMOS"
-	boolean
-	select ADK_KERNEL_MIPS_PLATFORM_DEVICES
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	default n
 	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	help
-	  Embedded controller suppport.	
-
+	  Lemote Yeelong platform drivers.
+	
 endmenu

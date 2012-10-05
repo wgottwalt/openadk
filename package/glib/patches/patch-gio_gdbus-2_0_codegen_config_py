@@ -1,9 +1,0 @@
---- glib-2.33.14.orig/gio/gdbus-2.0/codegen/config.py	2012-09-17 23:50:37.000000000 +0200
-+++ glib-2.33.14/gio/gdbus-2.0/codegen/config.py	2012-09-23 11:08:10.000000000 +0200
-@@ -23,5 +23,5 @@
- 
- DATADIR = "${prefix}/share"
- DATADIR = DATADIR.replace(
--    "${prefix}", "/usr/local")
-+    "${prefix}", "/usr")
- VERSION = "2.33.14"
