@@ -53,6 +53,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-cairo \
 			--with-system-pixman \
 			--with-system-jpeg \
+			--with-system-nss \
+			--with-system-nspr \
 			--enable-system-sqlite \
 			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
