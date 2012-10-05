@@ -7,7 +7,7 @@ include ${TOPDIR}/toolchain/gcc/Makefile.inc
 PKG_NAME:=		libgcc
 PKG_DESCR:=		GCC library
 PKG_SECTION:=		libs
-PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
+#PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
@@ -23,8 +23,8 @@ INSTALL_STYLE:=		manual
 
 do-install:
 ifeq ($(ADK_NATIVE),)
-	${INSTALL_DIR} ${IDIR_LIBGCC}/lib
-	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/lib
+	${INSTALL_DIR} ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

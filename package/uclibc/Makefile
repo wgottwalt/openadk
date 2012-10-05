@@ -25,33 +25,33 @@ INSTALL_STYLE:=         manual
 
 # do nothing, uClibc is already build in toolchain directory
 do-install:
-	${INSTALL_DIR} $(IDIR_UCLIBC)/lib $(IDIR_UCLIBC)/etc
+	${INSTALL_DIR} $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH) $(IDIR_UCLIBC)/etc
 	# create timezone file
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/lib
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 endif
-	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/lib
+	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
-		$(IDIR_UCLIBC)/lib
+		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
-		$(IDIR_UCLIBC)/lib
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/lib
-	-for file in libcrypt libdl libm libresolv librt libutil; do \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/lib; \
+		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
+	-for file in libcrypt libdl libm libresolv libutil; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
-			$(IDIR_UCLIBC)/lib; \
+			$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 
 uclibc-dev-install:
-	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib ${IDIR_UCLIBC_DEV}/lib
+	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib ${IDIR_UCLIBC_DEV}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_DEV}/usr/lib
-	for file in libcrypt libdl libm libresolv librt libutil; do \
-		cd $(IDIR_UCLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+	for file in libcrypt libdl libm libresolv libutil; do \
+		cd $(IDIR_UCLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \

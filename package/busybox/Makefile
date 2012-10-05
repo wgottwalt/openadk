@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e025414bc6cd79579cc7a32a45d3ae1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
-PKG_BUILDDEP:=		libtirpc
+#PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://www.busybox.net/
 PKG_SITES:=		http://www.busybox.net/downloads/
 
@@ -37,11 +37,11 @@ INSTALL_STYLE:=		manual
 
 BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" GCC_HONOUR_COPTS=s \
 			HOSTCC="${CC_FOR_BUILD}" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-			-C ${WRKBUILD}
+			-C ${WRKBUILD} 
 ifneq (${ADK_NATIVE},y)
-BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-pthread  -ltirpc' EXTRA_CPPFLAGS="-I$(STAGING_DIR)/usr/include/tirpc"
+BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-static-libgcc'
 else
-BB_MAKE_FLAGS+=		EXTRA_CPPFLAGS="-I/usr/include/tirpc"
+BB_MAKE_FLAGS+=		EXTRA_LDFLAGS="-static-libgcc"
 endif
 
 # XXX: Although this looks like all new symbols are enabled when 'make oldconfig' runs, they're not.

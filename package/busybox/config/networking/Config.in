@@ -551,7 +551,7 @@ config BUSYBOX_FEATURE_IFUPDOWN_EXTERNAL_DHCP
 
 config BUSYBOX_INETD
 	bool "inetd"
-	default y
+	default n
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  Internet superserver daemon
@@ -593,7 +593,7 @@ config BUSYBOX_FEATURE_INETD_SUPPORT_BUILTIN_CHARGEN
 
 config BUSYBOX_FEATURE_INETD_RPC
 	bool "Support RPC services"
-	default y
+	default n
 	depends on BUSYBOX_INETD
 	select BUSYBOX_FEATURE_HAVE_RPC
 	help

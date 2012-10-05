@@ -53,31 +53,15 @@ ifeq ($(ADK_LOCALES),y)
 	${INSTALL_DIR} $(IDIR_EGLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
 endif
-	${INSTALL_DIR} $(IDIR_EGLIBC)/lib $(IDIR_EGLIBC)/etc \
+	${INSTALL_DIR} $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH) $(IDIR_EGLIBC)/etc \
 	    $(IDIR_EGLIBC)/usr/lib $(IDIR_EGLIBC)/usr/bin
-	#cd ${STAGING_TARGET_DIR} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
-	#	test -s usr/share/zoneinfo/"$$f" || continue; \
-	#	echo usr/share/zoneinfo/"$$f" | \
-	#	    ${TOOLS_DIR}/cpio -pdu ${IDIR_EGLIBC}/; \
-	#done
-	#tz=; cd ${IDIR_EGLIBC}/usr/share/zoneinfo || exit 1; \
-	#    for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
-	#	test -s "$$f" || continue; \
-	#	tz=$$f; \
-	#done; if test x"$$tz" = x""; then \
-	#	echo >&2 Error during timezone installation; \
-	#	exit 1; \
-	#else \
-	#	ln -sf "../usr/share/zoneinfo/$$tz" \
-	#	    ${IDIR_EGLIBC}/etc/localtime; \
-	#fi
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/lib
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
 endif
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib
-	-for file in libc libcrypt libdl libm libresolv librt libutil libnsl libnss_dns libnss_files; do \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/lib; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib; \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
+	-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc
@@ -89,7 +73,7 @@ eglibc-static-install:
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.a $(IDIR_EGLIBC_STATIC)/usr/lib
 
 eglibc-dev-install:
-	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/lib $(IDIR_EGLIBC_DEV)/usr/lib
+	${INSTALL_DIR} $(IDIR_EGLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_EGLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 ifeq ($(ADK_TARGET_ABI_O32),y)
@@ -103,8 +87,8 @@ ifeq ($(ADK_TARGET_ABI_N64),y)
 endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib
-	-for file in libcrypt libdl libm libresolv librt libutil libnsl; do \
-		cd $(IDIR_EGLIBC_DEV)/lib/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+	-for file in libcrypt libdl libm libresolv libutil libnsl; do \
+		cd $(IDIR_EGLIBC_DEV)/$(ADK_TARGET_LIBC_PATH)/; ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \

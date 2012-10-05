@@ -17,7 +17,6 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
-			--disable-multilib \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-decimal-float \
@@ -34,10 +33,12 @@ else
 GCC_CONFOPTS+=		--disable-sjlj-exceptions
 endif
 
-ifeq ($(ADK_64BIT_KERNEL),y)
-GCC_CONFOPTS+=		--enable-targets=all
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
+GCC_CONFOPTS+=		--with-multilib-list=$(ADK_MULTILIB_TARGET) \
+			--enable-multilib
 else
-GCC_CONFOPTS+=		--disable-biarch
+GCC_CONFOPTS+=		--disable-biarch \
+			--disable-multilib
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)

@@ -28,6 +28,7 @@ endif
 ADK_TARGET_ARCH:=	$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=	$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_LIBC:=	$(strip $(subst ",, $(ADK_TARGET_LIBC)))
+ADK_TARGET_LIBC_PATH:=	$(strip $(subst ",, $(ADK_TARGET_LIBC_PATH)))
 ADK_TARGET_ENDIAN:=	$(strip $(subst ",, $(ADK_TARGET_ENDIAN)))
 ADK_TARGET_CPU_ARCH:=	$(strip $(subst ",, $(ADK_TARGET_CPU_ARCH)))
 ADK_TARGET_CFLAGS:=	$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))

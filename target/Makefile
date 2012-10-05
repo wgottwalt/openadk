@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 all: install
 
-ifeq (${ADK_64BIT_KERNEL},y)
+ifeq (${ADK_TARGET_KERNEL64},y)
 KERNEL_CFG:=kernel64.config
 else
 KERNEL_CFG:=kernel.config

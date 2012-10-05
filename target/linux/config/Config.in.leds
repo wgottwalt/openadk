@@ -9,6 +9,10 @@ config ADK_KERNEL_LEDS_TRIGGERS
 	boolean
 	select ADK_KERNEL_NEW_LEDS
 
+config ADK_KPACKAGE_KMOD_LEDS_CLASS
+	boolean
+	depends on !ADK_KERNEL_LEDS_CLASS
+
 menu "LEDS driver support"
 depends on ADK_TARGET_WITH_LEDS
 

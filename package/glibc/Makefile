@@ -31,28 +31,28 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, glibc is already build in toolchain directory
 do-install:
-	${INSTALL_DIR} ${IDIR_GLIBC}/lib ${IDIR_GLIBC}/etc
+	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH) ${IDIR_GLIBC}/etc
 	${CP} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${CP} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_GLIBC}/etc
 	${CP} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_GLIBC}/etc
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_GLIBC)/lib
+	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 endif
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/lib
-	for file in libc libcrypt libdl libm libnsl libresolv librt libutil libnss_compat libnss_dns libnss_files; do \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/lib; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so $(IDIR_GLIBC)/lib; \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
+	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_compat libnss_dns libnss_files; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 
 glibc-dev-install:
 	echo $(TARGET_CFLAGS)
-	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/lib $(IDIR_GLIBC_DEV)/usr/lib
+	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
-	-for file in libcrypt libdl libm libresolv librt libutil; do \
-		cd $(IDIR_GLIBC_DEV)/lib; ln -sf $$file-$(PKG_VER).so $$file.so; \
+	-for file in libcrypt libdl libm libresolv libutil; do \
+		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VER).so $$file.so; \
 	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \

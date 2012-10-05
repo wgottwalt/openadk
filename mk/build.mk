@@ -222,10 +222,16 @@ switch:
 		fi \
 	fi
 
+ifeq (${ADK_TARGET_KERNEL64},y)
+KERNEL_CFG:=kernel64.config
+else
+KERNEL_CFG:=kernel.config
+endif
+
 kernelconfig:
-	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config $(BUILD_DIR)/linux/.config
+	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/${KERNEL_CFG} $(BUILD_DIR)/linux/.config
 	${KERNEL_MAKE_ENV} ${MAKE} ARCH=$(ARCH) ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
-	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/kernel.config
+	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/${KERNEL_CFG}
 
 # create a new package from package/.template
 newpackage:
