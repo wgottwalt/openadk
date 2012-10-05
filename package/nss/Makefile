@@ -4,18 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
-PKG_VERSION:=		3.13.3
+PKG_VERSION:=		3.13.6
 PKG_RELEASE:=		2
 PKG_MAJ_VERSION:=	3
 PKG_MIN_VERSION:=	13
-PKG_PATCH_VERSION:=	3
-PKG_MD5SUM:=		006cb82fa900e9e664b4b14a9b7810ca
+PKG_PATCH_VERSION:=	6
+PKG_MD5SUM:=		15ea0e3b63cd0d18b5b75619afc46c3e
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		nspr zlib
 PKG_DEPENDS:=		nspr
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
-PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_13_3_RTM/src/
+PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_${PKG_PATCH_VERSION}_RTM/src/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
@@ -49,17 +49,20 @@ ALL_TARGET:=		build_coreconf all
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
-	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3}.so \
+	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3,softokn3}.so \
 		$(IDIR_NSS)/usr/lib
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
 	${INSTALL_DATA} ${WRKDIST}/mozilla/dist/public/nss/* \
 		${STAGING_TARGET_DIR}/usr/include/nss
-	# needed for firefox
+	# needed for firefox and corosync
+	${INSTALL_DIR} ${WRKINST}/usr/bin
+	${INSTALL_BIN} ${WRKDIST}/dist/bin/nss-config \
+		${WRKINST}/usr/bin
+	${INSTALL_DIR} ${WRKINST}/usr/lib/pkgconfig
+	${INSTALL_BIN} ${WRKDIST}/dist/lib/pkgconfig/nss.pc \
+		${WRKINST}/usr/lib/pkgconfig
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/lib
 	$(INSTALL_DATA) ${WRKDIST}/dist/lib/libcrmf.a \
 		${STAGING_TARGET_DIR}/usr/lib
-	# needed for corosync
-	$(INSTALL_DIR) ${WRKINST}/usr/lib/pkgconfig
-	$(CP) ./files/nss.pc ${WRKINST}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk
