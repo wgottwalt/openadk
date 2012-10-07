@@ -10,6 +10,9 @@ $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(STAGING_DIR)/usr \
 		headers_install
+	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=x86 V=1 \
+		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR_32)/usr \
+		headers_install
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(LINUX_HEADER_DIR) \
 		headers_install

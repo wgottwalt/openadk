@@ -67,6 +67,14 @@ endif
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_EGLIBC}/etc
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_EGLIBC)/usr/bin
+ifeq ($(ADK_TARGET_MULTILIB_X86_32),y)
+	${INSTALL_DIR} $(IDIR_EGLIBC)/lib32 $(IDIR_EGLIBC)/usr/lib32 
+	$(CP) $(STAGING_TARGET_DIR_32)/lib/ld* $(IDIR_EGLIBC)/lib32
+	-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
+		$(CP) $(STAGING_TARGET_DIR_32)/lib/$$file.so* $(IDIR_EGLIBC)/lib32; \
+		$(CP) $(STAGING_TARGET_DIR_32)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib32; \
+	done
+endif
 
 eglibc-static-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib
