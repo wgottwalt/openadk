@@ -1,0 +1,13 @@
+# multilib support
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
+TABI:=
+ifeq ($(ADK_TARGET_MULTILIB_X86_X32),y)
+TABI+=x86_64-openadk-linux-gnu:x32
+endif
+ifeq ($(ADK_TARGET_MULTILIB_X86_32),y)
+TABI+=i486-openadk-linux-gnu:32
+endif
+ifeq ($(ADK_TARGET_MULTILIB_X86_64),y)
+TABI+=x86_64-openadk-linux-gnu:64
+endif
+endif

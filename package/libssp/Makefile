@@ -17,14 +17,14 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 endif
 
-PKG_NAME:=		librt
-PKG_DESCR:=		Realtime library
+PKG_NAME:=		libssp
+PKG_DESCR:=		Stack smashing protection library
 PKG_SECTION:=		libs
 PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1
 
-PKG_SUBPKGS:=		LIBRT
+PKG_SUBPKGS:=		LIBSSP
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
@@ -32,16 +32,16 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBRT,librt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBSSP,libssp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-librt-install:
+libssp-install:
 ifeq ($(ADK_NATIVE),)
-	${INSTALL_DIR} ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
-	${CP} ${STAGING_TARGET_DIR}/lib/librt*.so* ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
+	${INSTALL_DIR} ${IDIR_LIBSSP}/$(ADK_TARGET_LIBC_PATH)
+	${CP} ${STAGING_TARGET_DIR}/lib/libssp.so* ${IDIR_LIBSSP}/$(ADK_TARGET_LIBC_PATH)
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
