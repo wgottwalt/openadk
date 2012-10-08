@@ -141,7 +141,7 @@ endif
 	$(CP) $(STAGING_TARGET_DIR)-64/lib/* $(STAGING_TARGET_DIR)-64/usr/lib/* \
 		$(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/; \
 	rm $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/libc.so ; \
-	-for abi in $(TABI); do \
+	for abi in $(TABI); do \
 		mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/$${abi/*:/} ; \
 		$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/* $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/lib/* \
 			$(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/$${abi/*:/} ; \
