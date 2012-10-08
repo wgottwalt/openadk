@@ -33,6 +33,7 @@ choice
 prompt "Target Kernel"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG \
 	|| ADK_TARGET_SYSTEM_QEMU_MIPS64 \
+	|| ADK_TARGET_SYSTEM_QEMU_MIPS64EL \
 	|| ADK_LINUX_X86_64
 
 config ADK_TARGET_KERNEL64
@@ -111,7 +112,8 @@ config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
 	default "lib64" if ADK_n64 \
-				|| ADK_64 || ADK_LINUX_SPARC64 \
+				|| ADK_64 \
+				|| ADK_LINUX_SPARC64 \
 				|| ADK_LINUX_PPC64 \
 				|| ADK_LINUX_X86_64
 	default "libx32" if ADK_x32
@@ -120,8 +122,7 @@ config ADK_TARGET_LIBC_PATH
 
 menu "Target multilib support"
 depends on ADK_TARGET_KERNEL64 && \
-	ADK_LINUX_X86_64 || \
-	ADK_LINUX_MIPS
+	( ADK_LINUX_X86_64 || ADK_LINUX_MIPS )
 
 config ADK_TARGET_WITH_MULTILIB 
 	boolean "multilib support"
