@@ -1,13 +1,44 @@
 # multilib support
 ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 TABI:=
+TCFLAGS:=
 ifeq ($(ADK_TARGET_MULTILIB_X86_X32),y)
 TABI+=x86_64-openadk-linux-gnu:x32
+TCFLAGS:=-m
 endif
 ifeq ($(ADK_TARGET_MULTILIB_X86_32),y)
 TABI+=i486-openadk-linux-gnu:32
+TCFLAGS:=-m
 endif
 ifeq ($(ADK_TARGET_MULTILIB_X86_64),y)
 TABI+=x86_64-openadk-linux-gnu:64
+TCFLAGS:=-m
+endif
+ifeq ($(ADK_TARGET_MULTILIB_MIPS_N32),y)
+ifeq ($(ADK_KERNEL_CPU_LITTLE_ENDIAN),y)
+TABI+=mips64el-openadk-linux-gnu:n32
+TCFLAGS:=-mabi=
+else
+TABI+=mips64-openadk-linux-gnu:n32
+TCFLAGS:=-mabi=
+endif
+endif
+ifeq ($(ADK_TARGET_MULTILIB_MIPS_O32),y)
+ifeq ($(ADK_KERNEL_CPU_LITTLE_ENDIAN),y)
+TABI+=mips64el-openadk-linux-gnu:o32
+TCFLAGS:=-mabi=
+else
+TABI+=mips64-openadk-linux-gnu:o32
+TCFLAGS:=-mabi=
+endif
+endif
+ifeq ($(ADK_TARGET_MULTILIB_MIPS_64),y)
+ifeq ($(ADK_KERNEL_CPU_LITTLE_ENDIAN),y)
+TABI+=mips64el-openadk-linux-gnu:64
+TCFLAGS:=-mabi=
+else
+TABI+=mips64-openadk-linux-gnu:64
+TCFLAGS:=-mabi=
+endif
 endif
 endif
