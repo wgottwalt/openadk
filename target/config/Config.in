@@ -127,6 +127,21 @@ depends on ADK_TARGET_KERNEL64 && \
 config ADK_TARGET_WITH_MULTILIB 
 	boolean "multilib support"
 
+config ADK_TARGET_MULTILIB_MIPS_64
+	boolean "64 bit libraries (n64 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_n64
+
+config ADK_TARGET_MULTILIB_MIPS_N32
+	boolean "32 bit libraries (n32 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_n32
+
+config ADK_TARGET_MULTILIB_MIPS_O32
+	boolean "32 bit libraries (o32 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_o32
+
 config ADK_TARGET_MULTILIB_X86_64
 	boolean "64 bit libraries"
 	depends on ADK_LINUX_X86_64 && ADK_TARGET_WITH_MULTILIB

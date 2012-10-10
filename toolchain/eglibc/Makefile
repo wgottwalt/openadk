@@ -30,7 +30,7 @@ $(WRKBUILD)/.headers_configure:
 			$(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}/option-groups.config; \
 		(cd $(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
 			${EGLIBC_ENV} \
-			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
+			CC="${REAL_GNU_TARGET_NAME}-gcc ${TCFLAGS}$${abi/*:/}" \
 			$(WRKBUILD)/libc/configure \
 				--prefix=$(STAGING_TARGET_DIR)-$${abi/*:/}/usr \
 				--with-headers=$(STAGING_TARGET_DIR)-$${abi/*:/}/usr/include \
@@ -44,7 +44,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	for abi in $(TABI); do \
 		(cd $(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
 			${EGLIBC_ENV} \
-			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
+			CC="${REAL_GNU_TARGET_NAME}-gcc ${TCFLAGS}$${abi/*:/}" \
 			$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 		); \
 		touch $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/include/gnu/stubs.h; \
@@ -94,7 +94,7 @@ $(WRKBUILD)/.configured:
 			$(EGLIBC_BUILD_DIR_FINAL)-$${abi/*:/}/option-groups.config ;\
 		(cd $(EGLIBC_BUILD_DIR_FINAL)-$${abi/*:/}; \
 			${EGLIBC_ENV} \
-			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
+			CC="${REAL_GNU_TARGET_NAME}-gcc ${TCFLAGS}$${abi/*:/}" \
 			$(WRKBUILD)/libc/configure \
 				--prefix=/usr \
 				--enable-shared \
