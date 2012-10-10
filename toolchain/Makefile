@@ -32,11 +32,13 @@ endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
+FIXUP:=$(patsubst %,%-fixup,$(LIBC))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
 install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
+fixup: $(FIXUP)
 
 gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
@@ -47,6 +49,7 @@ endif
 gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install
+$(LIBC)-fixup: gcc-install
 
 $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/lib
@@ -101,6 +104,10 @@ $(STAGING_HOST_DIR):
 		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
 		    $(MAKE_TRACE); \
 	fi
+
+%-fixup: %-install
+	$(TRACE) toolchain/$(patsubst %-fixup,%,$@)/fixup
+	@$(MAKE) -C $(patsubst %-fixup,%,$@) fixup $(MAKE_TRACE)
 
 %-clean:
 	$(TRACE) toolchain/$(patsubst %-clean,%,$@)/clean

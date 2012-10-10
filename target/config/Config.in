@@ -475,6 +475,10 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-mx32" if ADK_TARGET_ABI_X32
 	default "-m64" if ADK_TARGET_ABI_64
 
+config ADK_TARGET_ABI_LDFLAGS
+	string
+	default "-Wl,-m -Wl,elf_i386" if ADK_TARGET_ABI_32
+
 config ADK_TARGET_KERNEL_LDFLAGS
 	string
 	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_N32
