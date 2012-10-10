@@ -100,31 +100,20 @@ $(WRKBUILD)/.configured:
 	done
 	touch $@
 
-$(GLIBC_BUILD_DIR_FINAL)/libc.so:
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	for abi in $(TABI); do \
 		${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_FINAL)-$${abi/*:/} all ;\
 	done
 	touch $@
 
-$(WRKBUILD)/.installed: $(GLIBC_BUILD_DIR_FINAL)/libc.so
+$(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	for abi in $(TABI); do \
 		${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL)-$${abi/*:/} install_root=$(STAGING_TARGET_DIR)-$${abi/*:/} install ;\
 	done
-ifeq ($(ADK_TARGET_ABI_64),y)
+	# default libgcc searching for 64 bit libraries
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL)-64 install_root=$(STAGING_TARGET_DIR) install
-endif
-ifeq ($(ADK_TARGET_ABI_32),y)
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL)-32 install_root=$(STAGING_TARGET_DIR) install
-endif
-ifeq ($(ADK_TARGET_ABI_X32),y)
-	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL)-x32 install_root=$(STAGING_TARGET_DIR) install
-endif
-	# for libgcc build we need C library files, 64 bit default
-	mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2 ; \
-	$(CP) $(STAGING_TARGET_DIR)-64/lib/* $(STAGING_TARGET_DIR)-64/usr/lib/* \
-		$(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/; \
-	rm $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/libc.so ; \
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
 	for abi in $(TABI); do \
 		mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/$${abi/*:/} ; \
 		$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/* $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/lib/* \
@@ -159,6 +148,23 @@ $(WRKBUILD)/.installed:
 	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
+	touch $@
+endif
+
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
+$(WRKBUILD)/.fixup:
+ifeq ($(ADK_TARGET_ABI_64),y)
+	${CP} $(STAGING_TARGET_DIR)-64/lib/* $(STAGING_TARGET_DIR)/lib
+	${CP} $(STAGING_TARGET_DIR)-64/usr/lib/* $(STAGING_TARGET_DIR)/usr/lib
+endif
+ifeq ($(ADK_TARGET_ABI_32),y)
+	${CP} $(STAGING_TARGET_DIR)-32/lib/* $(STAGING_TARGET_DIR)/lib
+	${CP} $(STAGING_TARGET_DIR)-32/usr/lib/* $(STAGING_TARGET_DIR)/usr/lib
+endif
+ifeq ($(ADK_TARGET_ABI_X32),y)
+	${CP} $(STAGING_TARGET_DIR)-x32/lib/* $(STAGING_TARGET_DIR)/lib
+	${CP} $(STAGING_TARGET_DIR)-x32/usr/lib/* $(STAGING_TARGET_DIR)/usr/lib
+endif
 	touch $@
 endif
 

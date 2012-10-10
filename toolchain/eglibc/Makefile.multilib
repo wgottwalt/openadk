@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 # multilib support
 ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 TABI:=

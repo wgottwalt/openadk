@@ -16,7 +16,6 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--with-tls \
 			--enable-add-ons \
 			$(NLS)
-
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${CC_FOR_BUILD} \
 			GCC_HONOUR_COPTS=s \
@@ -31,4 +30,3 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			libc_cv_gnu99_inline=yes \
 			libc_cv_initfini_array=yes \
 			libc_cv_slibdir="/lib"
-
