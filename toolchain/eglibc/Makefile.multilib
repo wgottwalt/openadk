@@ -25,10 +25,10 @@ endif
 endif
 ifeq ($(ADK_TARGET_MULTILIB_MIPS_O32),y)
 ifeq ($(ADK_KERNEL_CPU_LITTLE_ENDIAN),y)
-TABI+=mips64el-openadk-linux-gnu:o32
+TABI+=mips64el-openadk-linux-gnu:32
 TCFLAGS:=-mabi=
 else
-TABI+=mips64-openadk-linux-gnu:o32
+TABI+=mips64-openadk-linux-gnu:32
 TCFLAGS:=-mabi=
 endif
 endif
