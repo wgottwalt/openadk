@@ -151,8 +151,8 @@ $(WRKBUILD)/.installed:
 	touch $@
 endif
 
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 $(WRKBUILD)/.fixup:
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 ifeq ($(ADK_TARGET_ABI_64),y)
 	${CP} $(STAGING_TARGET_DIR)-64/lib/* $(STAGING_TARGET_DIR)/lib
 	${CP} $(STAGING_TARGET_DIR)-64/usr/lib/* $(STAGING_TARGET_DIR)/usr/lib
@@ -165,7 +165,7 @@ ifeq ($(ADK_TARGET_ABI_X32),y)
 	${CP} $(STAGING_TARGET_DIR)-x32/lib/* $(STAGING_TARGET_DIR)/lib
 	${CP} $(STAGING_TARGET_DIR)-x32/usr/lib/* $(STAGING_TARGET_DIR)/usr/lib
 endif
-	touch $@
 endif
+	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
