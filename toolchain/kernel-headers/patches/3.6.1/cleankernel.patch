@@ -1,0 +1,11 @@
+diff -Nur linux-2.6.29.1.orig/scripts/Makefile.headersinst linux-2.6.29.1/scripts/Makefile.headersinst
+--- linux-2.6.29.1.orig/scripts/Makefile.headersinst	2009-04-02 22:55:27.000000000 +0200
++++ linux-2.6.29.1/scripts/Makefile.headersinst	2009-04-17 20:56:09.143476927 +0200
+@@ -65,7 +65,6 @@
+ 
+ targets += $(install-file)
+ $(install-file): scripts/headers_install.pl $(input-files) FORCE
+-	$(if $(unwanted),$(call cmd,remove),)
+ 	$(if $(wildcard $(dir $@)),,$(shell mkdir -p $(dir $@)))
+ 	$(call if_changed,install)
+ 
