@@ -48,7 +48,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 			$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 		); \
 		touch $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/include/gnu/stubs.h; \
-		touch $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/include/gnu/stubs-{32,x32,64}.h; \
+		touch $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/include/gnu/stubs-{32,x32,64,o32,n32}.h; \
 	done
 	touch $@
 else
@@ -76,7 +76,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,o32,n32}.h
 	touch $@
 endif
 
@@ -118,7 +118,12 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# default libgcc searching for 64 bit libraries
 	${EGLIBC_ENV} $(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL)-64 install_root=$(STAGING_TARGET_DIR) install
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,o32,n32}.h
+	# for libgcc build we need C library files, 64 bit default
+	mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2 ; \
+	$(CP) $(STAGING_TARGET_DIR)-64/lib/* $(STAGING_TARGET_DIR)-64/usr/lib/* \
+		$(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/; \
+	rm $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/libc.so ; \
 	for abi in $(TABI); do \
 		mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/$${abi/*:/} ; \
 		$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/* $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/lib/* \
