@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/eglibc/Makefile.inc
+include $(TOPDIR)/toolchain/eglibc/Makefile.multilib
 
 PKG_DESCR:=		embedded GNU C library
 PKG_SECTION:=		base
@@ -21,52 +22,32 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
-			--host=$(REAL_GNU_TARGET_NAME) \
-			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
-			--disable-nls \
-			--without-cvs \
-			--disable-profile \
-			--disable-debug \
-			--enable-kernel=2.6.0 \
-			--without-gd \
-			--with-__thread \
-			--with-tls \
-			--enable-add-ons
-
-EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
-			GCC_HONOUR_COPTS=s \
-			BUILD_CC=${CC_FOR_BUILD} \
-			CFLAGS="$(TARGET_CFLAGS)" \
-			CC=${REAL_GNU_TARGET_NAME}-gcc \
-			CXX=${REAL_GNU_TARGET_NAME}-g++ \
-			AR=${REAL_GNU_TARGET_NAME}-ar \
-			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
-			libc_cv_forced_unwind=yes \
-			libc_cv_c_cleanup=yes \
-			libc_cv_gnu99_inline=yes \
-			libc_cv_slibdir="/lib"
-
 # compile nothing, eglibc is already build in toolchain directory
 do-install:
-ifeq ($(ADK_LOCALES),y)
-	${INSTALL_DIR} $(IDIR_EGLIBC)/usr/bin
-	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
-endif
-	${INSTALL_DIR} $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH) $(IDIR_EGLIBC)/etc \
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
+	for abi in $(TABI); do \
+		${INSTALL_DIR} $(IDIR_EGLIBC)/lib$${abi/*:/} $(IDIR_EGLIBC)/usr/lib$${abi/*:/} ; \
+		$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib$${abi/*:/} ; \
+		-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
+			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file.so* $(IDIR_EGLIBC)/lib$${abi/*:/}; \
+			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib$${abi/*:/}; \
+		done ; \
+	done
+else
+	${INSTALL_DIR} $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH) \
 	    $(IDIR_EGLIBC)/usr/lib $(IDIR_EGLIBC)/usr/bin
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
-endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
 	-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
-	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
-	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nscd.conf ${IDIR_EGLIBC}/etc
-	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/nsswitch.conf ${IDIR_EGLIBC}/etc
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_EGLIBC)/usr/bin
+ifeq ($(ADK_LOCALES),y)
+	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
+endif
+endif
+	${INSTALL_DIR} $(IDIR_EGLIBC)/etc 
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/{gai,nscd,nsswitch}.conf ${IDIR_EGLIBC}/etc
 
 eglibc-static-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib
@@ -98,13 +79,14 @@ endif
 	(cd $(WRKBUILD); \
 		${EGLIBC_ENV} \
 		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
+			--host=$(REAL_GNU_TARGET_NAME) \
 			--prefix=$(IDIR_EGLIBC_DEV)/usr \
 			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
 			${EGLIBC_CONFOPTS} \
 	);
-	PATH='${TARGET_PATH}' $(MAKE) -C $(WRKBUILD) \
-		install-headers install-bootstrap-headers=yes
-	@touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs.h
+	PATH='${TARGET_PATH}' $(MAKE) -C $(WRKBUILD) install-headers install-bootstrap-headers=yes
+	touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs.h
+	touch $(IDIR_EGLIBC_DEV)/usr/include/gnu/stubs-{32,x32,64}.h
 	@find $(IDIR_EGLIBC_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_EGLIBC_DEV) -name ..install.cmd -exec rm {} \;
 	# conflicts with libiconv

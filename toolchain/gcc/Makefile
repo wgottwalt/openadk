@@ -150,7 +150,6 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			${GCC_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--with-slibdir=$(STAGING_TARGET_DIR)/lib \
 			--enable-shared
 	touch $@
 

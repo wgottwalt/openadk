@@ -83,33 +83,6 @@ endif
 	touch $(WRKBUILD)/.configured
 	touch $@
 
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-$(WRKBUILD)/.compiled:
-	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
-		PREFIX= \
-		DEVEL_PREFIX=/ \
-		RUNTIME_PREFIX=/ \
-		HOSTCC="$(CC_FOR_BUILD)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		MULTILIB_DIR=/$(ADK_TARGET_LIBC_PATH) \
-		all
-	touch $@
-
-$(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	$(MAKE) -C $(WRKBUILD) \
-		PREFIX=$(STAGING_TARGET_DIR) \
-		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
-		RUNTIME_PREFIX=/ \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		MULTILIB_DIR=/$(ADK_TARGET_LIBC_PATH) \
-		install_dev install_runtime
-	rm -rf $(STAGING_TARGET_DIR)/$(ADK_TARGET_LIBC_PATH)/libc.so
-	ln -s libc.so.0 $(STAGING_TARGET_DIR)/$(ADK_TARGET_LIBC_PATH)/libc.so
-	touch $@
-
-else
-
 $(WRKBUILD)/.compiled:
 	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX= \
@@ -141,6 +114,5 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	rm -rf $(STAGING_TARGET_DIR)/lib/libc.so
 	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	touch $@
-endif
 
 include ${TOPDIR}/mk/toolchain.mk

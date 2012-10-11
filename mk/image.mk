@@ -50,6 +50,15 @@ image-prepare-post:
 	sed -i '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
+ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
+	# multilib fixup lib dirs
+	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/lib/
+	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
+	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/usr/lib/
+	ln -sf /usr/${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/usr/lib
+endif
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)

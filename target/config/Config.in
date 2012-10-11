@@ -33,6 +33,7 @@ choice
 prompt "Target Kernel"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG \
 	|| ADK_TARGET_SYSTEM_QEMU_MIPS64 \
+	|| ADK_TARGET_SYSTEM_QEMU_MIPS64EL \
 	|| ADK_LINUX_X86_64
 
 config ADK_TARGET_KERNEL64
@@ -92,14 +93,17 @@ depends on ADK_TARGET_KERNEL64 && ADK_LINUX_X86_64
 config ADK_TARGET_ABI_64
 	boolean "64 Bit ABI"
 	select ADK_64
+	select ADK_TARGET_MULTILIB_X86_64 if ADK_TARGET_WITH_MULTILIB
 
 config ADK_TARGET_ABI_X32
 	boolean "x32 ABI (new)"
 	select ADK_x32
+	select ADK_TARGET_MULTILIB_X86_X32 if ADK_TARGET_WITH_MULTILIB
 
 config ADK_TARGET_ABI_32
 	boolean "32 Bit ABI"
 	select ADK_32
+	select ADK_TARGET_MULTILIB_X86_32 if ADK_TARGET_WITH_MULTILIB
 
 endchoice
 
@@ -108,7 +112,8 @@ config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
 	default "lib64" if ADK_n64 \
-				|| ADK_64 || ADK_LINUX_SPARC64 \
+				|| ADK_64 \
+				|| ADK_LINUX_SPARC64 \
 				|| ADK_LINUX_PPC64 \
 				|| ADK_LINUX_X86_64
 	default "libx32" if ADK_x32
@@ -117,41 +122,40 @@ config ADK_TARGET_LIBC_PATH
 
 menu "Target multilib support"
 depends on ADK_TARGET_KERNEL64 && \
-	ADK_LINUX_X86_64 || \
-	ADK_LINUX_MIPS
+	( ADK_LINUX_X86_64 || ADK_LINUX_MIPS )
 
 config ADK_TARGET_WITH_MULTILIB 
 	boolean "multilib support"
 
+config ADK_TARGET_MULTILIB_MIPS_64
+	boolean "64 bit libraries (n64 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_n64
+
+config ADK_TARGET_MULTILIB_MIPS_N32
+	boolean "32 bit libraries (n32 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_n32
+
+config ADK_TARGET_MULTILIB_MIPS_O32
+	boolean "32 bit libraries (o32 abi)"
+	depends on ADK_LINUX_MIPS && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_o32
+
 config ADK_TARGET_MULTILIB_X86_64
 	boolean "64 bit libraries"
 	depends on ADK_LINUX_X86_64 && ADK_TARGET_WITH_MULTILIB
-	default y
+	default y if ADK_64
 	
 config ADK_TARGET_MULTILIB_X86_32
 	boolean "32 bit libraries"
 	depends on ADK_LINUX_X86_64 && ADK_TARGET_WITH_MULTILIB
+	default y if ADK_32
 
 config ADK_TARGET_MULTILIB_X86_X32
 	boolean "x32 bit libraries"
 	depends on ADK_LINUX_X86_64 && ADK_TARGET_WITH_MULTILIB
-
-choice
-prompt "Default Library (compile all applications with this library)"
-config ADK_TARGET_MULTILIB_X86_64_DEF
-	boolean "64 Bit libraries as default"
-	depends on ADK_TARGET_MULTILIB_X86_64
-
-config ADK_TARGET_MULTILIB_X86_32_DEF
-	boolean "32 Bit libraries as default"
-	depends on ADK_TARGET_MULTILIB_X86_32
-
-config ADK_TARGET_MULTILIB_X86_X32_DEF
-	boolean "x32 Bit libraries as default"
-	depends on ADK_TARGET_MULTILIB_X86_X32
-
-endchoice
-endmenu
+	default y if ADK_x32
 
 config ADK_MULTILIB_TARGET
 	string
@@ -177,6 +181,8 @@ config ADK_MULTILIB_TARGET
 		 	&& ADK_TARGET_MULTILIB_X86_64 \
 			&& ADK_TARGET_MULTILIB_X86_X32
 	
+
+endmenu
 
 # submodel support
 #
@@ -483,6 +489,10 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-m32" if ADK_TARGET_ABI_32
 	default "-mx32" if ADK_TARGET_ABI_X32
 	default "-m64" if ADK_TARGET_ABI_64
+
+config ADK_TARGET_ABI_LDFLAGS
+	string
+	default "-Wl,-m -Wl,elf_i386" if ADK_TARGET_ABI_32
 
 config ADK_TARGET_KERNEL_LDFLAGS
 	string

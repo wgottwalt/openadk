@@ -158,12 +158,12 @@ ifeq ($(ADK_NATIVE),y)
 else
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install package/compile
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install package/compile root_clean package/install
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install package/compile root_clean package/install
 endif
 else
-	$(MAKE) -f mk/build.mk toolchain/install tools/install jtools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 
