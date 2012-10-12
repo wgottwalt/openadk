@@ -57,7 +57,7 @@ ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	ln -sf /usr/${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/usr/lib
+	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 ifeq ($(ADK_LINUX_X86_64),y)
 	# fixup lib dirs
@@ -66,7 +66,7 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	ln -sf /usr/${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/usr/lib
+	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 ifeq ($(ADK_TARGET_ABI_N32),y)
 	# fixup lib dirs
@@ -75,7 +75,7 @@ ifeq ($(ADK_TARGET_ABI_N32),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	ln -sf /usr/${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/usr/lib
+	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 ifeq ($(ADK_TARGET_ABI_N64),y)
 	# fixup lib dirs
@@ -84,7 +84,7 @@ ifeq ($(ADK_TARGET_ABI_N64),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	ln -sf /usr/${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/usr/lib
+	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
