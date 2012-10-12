@@ -8,10 +8,10 @@ include Makefile.multilib
 include ${TOPDIR}/mk/buildhlp.mk
 
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=		-O2
+TARGET_CFLAGS_LIBC+=		-O2
 endif
 # ssp partially supported
-TARGET_CFLAGS:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+TARGET_CFLAGS_LIBC:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 EGLIBC_CONFOPTS+=       --without-fp
