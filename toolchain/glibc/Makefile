@@ -5,9 +5,9 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 
 # glibc does not compile with Os
-TARGET_CFLAGS:= $(subst Os,O2,$(TARGET_CFLAGS))
+TARGET_CFLAGS_LIBC:= $(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=	-O2
+TARGET_CFLAGS_LIBC+=	-O2
 endif
 
 # ssp partially supported
@@ -39,7 +39,7 @@ $(WRKBUILD)/.headers_configure:
 		(cd $(GLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
 			${GLIBC_ENV} \
 			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
-			$(WRKBUILD)/libc/configure \
+			$(WRKBUILD)/configure \
 				--prefix=$(STAGING_TARGET_DIR)-$${abi/*:/}/usr \
 				--with-sysroot=$(STAGING_TARGET_DIR)-$${abi/*:/} \
 				--host=$${abi/:*/} \
@@ -56,8 +56,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 			$(MAKE) ${GLIBC_MAKEOPTS} install-headers \
 		); \
 	done
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
 	touch $@
 else
 $(WRKBUILD)/.headers_configure:
@@ -90,7 +88,7 @@ $(WRKBUILD)/.configured:
 		(cd $(GLIBC_BUILD_DIR_FINAL)-$${abi/*:/}; \
 			${GLIBC_ENV} \
 			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
-			$(WRKBUILD)/libc/configure \
+			$(WRKBUILD)/configure \
 				--prefix=/usr \
 				--enable-shared \
 				--enable-stackguard-randomization \

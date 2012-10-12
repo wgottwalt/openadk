@@ -95,7 +95,8 @@ TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS)
+TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
 TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O2 -Wl,-rpath -Wl,/usr/lib \
