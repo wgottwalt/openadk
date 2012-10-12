@@ -34,8 +34,10 @@ GCC_CONFOPTS+=		--disable-sjlj-exceptions
 endif
 
 ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-GCC_CONFOPTS+=		--with-multilib-list=$(ADK_MULTILIB_TARGET) \
-			--enable-multilib
+ifeq ($(ADK_LINUX_X86_64),y)
+GCC_CONFOPTS+=		--with-multilib-list=$(ADK_MULTILIB_TARGET)
+endif
+GCC_CONFOPTS+=		--enable-multilib
 else
 GCC_CONFOPTS+=		--disable-biarch \
 			--disable-multilib
