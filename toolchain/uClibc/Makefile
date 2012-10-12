@@ -115,4 +115,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	touch $@
 
+$(WRKBUILD)/.fixup:
+	touch $@
+
 include ${TOPDIR}/mk/toolchain.mk
