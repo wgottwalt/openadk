@@ -21,7 +21,7 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--enable-add-ons
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
-                        CFLAGS="$(TARGET_CFLAGS)" \
+                        CFLAGS="$(TARGET_CFLAGS_LIBC)" \
                         CC=${REAL_GNU_TARGET_NAME}-gcc \
                         CXX=${REAL_GNU_TARGET_NAME}-g++ \
                         AR=${REAL_GNU_TARGET_NAME}-ar \
