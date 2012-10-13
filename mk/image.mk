@@ -50,15 +50,6 @@ image-prepare-post:
 	sed -i '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-	# multilib fixup lib dirs
-	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
-	rm -rf ${TARGET_DIR}/lib/
-	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
-	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
-	rm -rf ${TARGET_DIR}/usr/lib/
-	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
-endif
 ifeq ($(ADK_LINUX_X86_64),y)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
@@ -66,7 +57,7 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 ifeq ($(ADK_TARGET_ABI_N32),y)
 	# fixup lib dirs
@@ -75,7 +66,7 @@ ifeq ($(ADK_TARGET_ABI_N32),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 ifeq ($(ADK_TARGET_ABI_N64),y)
 	# fixup lib dirs
@@ -84,7 +75,7 @@ ifeq ($(ADK_TARGET_ABI_N64),y)
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
-	(cd ${TARGET_DIR}/lib ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
