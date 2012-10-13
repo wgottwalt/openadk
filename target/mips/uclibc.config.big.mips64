@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Version: 0.9.33.2
-# Fri Sep 21 10:13:47 2012
+# Sat Oct 13 11:30:23 2012
 #
 # TARGET_alpha is not set
 # TARGET_arm is not set
@@ -244,10 +244,11 @@ UCLIBC_BUILD_NOEXECSTACK=y
 #
 CROSS_COMPILER_PREFIX=""
 UCLIBC_EXTRA_CFLAGS=""
-DODEBUG=y
-DOASSERTS=y
-SUPPORT_LD_DEBUG=y
-SUPPORT_LD_DEBUG_EARLY=y
+# DODEBUG is not set
+DOSTRIP=y
+# DOASSERTS is not set
+# SUPPORT_LD_DEBUG is not set
+# SUPPORT_LD_DEBUG_EARLY is not set
 # UCLIBC_MALLOC_DEBUGGING is not set
 # UCLIBC_HAS_BACKTRACE is not set
 WARNINGS="-Wall"

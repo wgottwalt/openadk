@@ -103,3 +103,7 @@ config ADK_KERNEL_SUNRPC
 
 config ADK_KERNEL_PCI
 	boolean
+
+config ADK_KERNEL_64BIT
+	boolean
+	default y if ADK_TARGET_KERNEL64
