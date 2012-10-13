@@ -28,12 +28,12 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
-	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/lib
+	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
-	$(CP) ${STAGING_TARGET_DIR}/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
-	-@rm ${IDIR_LIBSTDCXX}/usr/lib/libstdc++.so.*-gdb.py
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
