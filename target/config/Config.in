@@ -122,7 +122,8 @@ config ADK_TARGET_LIBC_PATH
 
 menu "Target multilib support"
 depends on ADK_TARGET_KERNEL64 && \
-	( ADK_LINUX_X86_64 || ADK_LINUX_MIPS )
+	( ADK_LINUX_X86_64 || ADK_LINUX_MIPS ) && \
+	( ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC )
 
 config ADK_TARGET_WITH_MULTILIB 
 	boolean "multilib support"
