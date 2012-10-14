@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.24.0
+PKG_VERSION:=		7.28.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b93420f80a2baaa61a0f45214eddc2ba
+PKG_MD5SUM:=		cbdc0a79bdf6e657dd387c3d88d802e3
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcurl
@@ -24,7 +24,7 @@ PKGSC_LIBCURL_DEV:=	devel
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
-PKG_CHOICES_CURL:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
+PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITHOUT_SSL:=	use no SSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
@@ -39,15 +39,15 @@ $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL}))
 $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCURL_DEV},${PKGSC_LIBCURL_DEV}))
 
-ifeq (${ADK_PACKAGE_CURL_WITHOUT_SSL},y)
+ifeq (${ADK_PACKAGE_LIBCURL_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-ssl \
 			--without-gnutls
 endif
-ifeq (${ADK_PACKAGE_CURL_WITH_OPENSSL},y)
+ifeq (${ADK_PACKAGE_LIBCURL_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl="${STAGING_TARGET_DIR}/usr" \
 			--without-gnutls
 endif
-ifeq (${ADK_PACKAGE_CURL_WITH_GNUTLS},y)
+ifeq (${ADK_PACKAGE_LIBCURL_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl
 endif
