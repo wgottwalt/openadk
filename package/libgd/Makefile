@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gd
-PKG_VERSION:=		2.0.35
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
+PKG_VERSION:=		2.0.36
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8c36674f07533a485a60d5ae809cc121
 PKG_DESCR:=		A library for the dynamic creation of images
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libjpeg libpng
@@ -23,7 +23,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBGD,libgd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBGD_DEV,libgd-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBGD_DEV},${PKGSC_LIBGD_DEV}))
 
-CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_TARGET_DIR}/usr/bin/libpng12-config"
+#CONFIGURE_ENV+=		LIBPNG12_CONFIG="${STAGING_TARGET_DIR}/usr/bin/libpng12-config"
 CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \
 			--with-jpeg=${STAGING_TARGET_DIR}/usr \

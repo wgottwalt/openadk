@@ -1,0 +1,10 @@
+--- gd-2.0.36.orig/gd_io.h	2007-11-27 09:30:34.000000000 +0100
++++ gd-2.0.36/gd_io.h	2012-10-14 16:10:30.000000000 +0200
+@@ -26,6 +26,7 @@ typedef struct gdIOCtx
+ 
+   void (*gd_free) (struct gdIOCtx *);
+ 
++  void    *data;
+ }
+ gdIOCtx;
+ 
