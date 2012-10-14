@@ -13,7 +13,7 @@ config ADK_TOOLCHAIN_GDB
 config ADK_TOOLCHAIN_GCC_CXX
 	prompt "Enable building of G++ (C++ language support in GCC)"
 	boolean
-	default y
+	default y if !ADK_TARGET_WITH_MULTILIB
 
 #config ADK_TOOLCHAIN_GCC_JAVA
 #	prompt "Enable building of GCJ (Java language support in GCC)"
