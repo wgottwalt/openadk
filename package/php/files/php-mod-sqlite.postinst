@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+echo "extension=pdo.so" >> $IPKG_INSTROOT/etc/php.ini
+echo "extension=pdo_sqlite.so" >> $IPKG_INSTROOT/etc/php.ini
