@@ -30,9 +30,6 @@ do-install:
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libssp.so* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
-endif
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)

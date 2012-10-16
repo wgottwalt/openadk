@@ -49,7 +49,11 @@ endif
 gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install
+ifeq ($(ADK_TOOLCHAIN_GDB),y)
+$(LIBC)-fixup: gdb-install
+else
 $(LIBC)-fixup: gcc-install
+endif
 
 $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/lib
