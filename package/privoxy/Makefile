@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		privoxy
-PKG_VERSION:=		3.0.15
+PKG_VERSION:=		3.0.19
 PKG_RELEASE:=		1
-PKG_VARIANT:=		beta
-PKG_MD5SUM:=		6571dc9524e945e79c2af62fefe7b107
+PKG_VARIANT:=		stable
+PKG_MD5SUM:=		57acc79059565cc42eda67982842785d
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libpthread libpcre
@@ -22,6 +22,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-DFEATURE_CONNECTION_KEEP_ALIVE
 TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-editor \
 			--disable-jar-files \
