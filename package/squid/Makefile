@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.1.16
+PKG_VERSION:=		3.2.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		765f8ce53f2c46c1e7f53a1a41d810e3
+PKG_MD5SUM:=		4190f04b57b98e3207d3eccc84db003d
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		proxy
-PKG_DEPENDS:=		libopenssl libpthread
+PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl
 PKG_BUILDDEP:=		openssl libtool
 PKG_URL:=		http://www.squid-cache.org/
-PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.1/
+PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.2/
 PKG_MULTI:=		1
 PKG_NEED_CXX:=		1
 
@@ -21,11 +21,13 @@ PKG_ARCH_DEPENDS:=	!avr32
 PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
 PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_PASSWORD
 PKG_SUBPKGS+=		SQUID_MOD_EXTERNAL_ACL_IP_USER SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
-PKG_SUBPKGS+=		SQUID_MOD_NTLM_AUTH_FAKEAUTH
+PKG_SUBPKGS+=		SQUID_MOD_NTLM_AUTH_FAKEAUTH SQUID_MOD_BASIC_AUTH_LDAP
+
+PKGSS_SQUID_MOD_BASIC_AUTH_LDAP:=	libopenldap
+PKGSB_SQUID_MOD_BASIC_AUTH_LDAP:=	openldap
 
 PKG_HOST_DEPENDS:=	!netbsd !cygwin
 
-AUTH_MODULES:=		basic digest ntlm
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)
 BASIC_AUTH_HELPERS+=	getpwnam
 endif
@@ -35,8 +37,17 @@ endif
 ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_SMB},)
 BASIC_AUTH_HELPERS+=	SMB
 endif
+ifneq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_LDAP},)
+BASIC_AUTH_HELPERS+=	LDAP
+endif
+ifeq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_SMB}${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_NCSA}${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_GETPWNAM},)
+BASIC_AUTH_HELPERS:=	none
+endif
+
 ifneq (${ADK_PACKAGE_SQUID_MOD_DIGEST_AUTH_PASSWORD},)
 DIGEST_AUTH_HELPERS:=	password
+else
+DIGEST_AUTH_HELPERS:=	none
 endif
 ifneq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_IP_USER},)
 EXTERNAL_ACL_HELPERS+=	ip_user
@@ -44,8 +55,14 @@ endif
 ifneq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP},)
 EXTERNAL_ACL_HELPERS+=	unix_group
 endif
+ifeq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_IP_USER}${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP},)
+EXTERNAL_ACL_HELPERS:=	none
+endif
+
 ifneq (${ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_FAKEAUTH},)
 NTLM_AUTH_HELPERS+=	fakeauth
+else
+NTLM_AUTH_HELPERS+=	none
 endif
 
 include ${TOPDIR}/mk/package.mk
@@ -64,6 +81,7 @@ $(eval $(call PKG_template,SQUID,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-auth-getpwnam,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_LDAP,${PKG_NAME}-mod-basic-auth-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -79,6 +97,7 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_group))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \
@@ -130,11 +149,12 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--disable-wccpv2 \
 			--enable-useragent-log \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
+			--without-krb5-config \
 			--enable-negotiate-auth-helpers=no \
-			--enable-auth="${AUTH_MODULES}" \
-			--enable-basic-auth-helpers="${BASIC_AUTH_HELPERS}" \
-			--enable-ntlm-auth-helpers="${NTLM_AUTH_HELPERS}" \
-			--enable-digest-auth-helpers="${DIGEST_AUTH_HELPERS}" \
+			--enable-auth \
+			--enable-auth-basic="${BASIC_AUTH_HELPERS}" \
+			--enable-auth-ntlm="${NTLM_AUTH_HELPERS}" \
+			--enable-auth-digest="${DIGEST_AUTH_HELPERS}" \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
@@ -145,9 +165,13 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/share/squid/errors
 	${CP} ${WRKINST}/usr/share/squid/errors/en \
 		${IDIR_SQUID}/usr/share/squid/errors
+	${CP} ${WRKINST}/usr/share/squid/errors/templates \
+		${IDIR_SQUID}/usr/share/squid/errors
 	${CP} ${WRKINST}/usr/share/squid/icons ${IDIR_SQUID}/usr/share/squid/
 	${INSTALL_DIR} ${IDIR_SQUID}/usr/sbin ${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/squid ${IDIR_SQUID}/usr/sbin/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/log_file_daemon \
+		${IDIR_SQUID}/usr/lib/squid
 	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd \
 		${IDIR_SQUID}/usr/lib/squid
 
