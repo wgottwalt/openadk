@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		net-snmp
-PKG_VERSION:=		5.6.1
+PKG_VERSION:=		5.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b4e30ead5783b0bb1d280172c6095ea4
+PKG_MD5SUM:=		5bddd02e2f82b62daa79f82717737a14
 PKG_DESCR:=		SNMP Agent
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnetsnmp libelf libnl
