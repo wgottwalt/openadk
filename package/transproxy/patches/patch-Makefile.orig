@@ -1,0 +1,26 @@
+--- transproxy-1.6.orig/Makefile	2004-03-31 14:19:34.000000000 +0200
++++ transproxy-1.6/Makefile	2012-10-23 11:07:54.000000000 +0200
+@@ -64,17 +64,17 @@ OPTIONS += -DIPTABLES
+ #OPTIONS += -DHAVE_GETOPT_H
+ 
+ # You may need to touch PREFIX, CC and CFLAGS.
+-PREFIX = /usr/local
+-INSTALL_PROGRAM = install -c -m 555 -o bin -g bin
+-INSTALL_MAN = install -c -m 444 -o bin -g bin
++PREFIX ?= $(DESTDIR)/usr
++INSTALL_PROGRAM = install -c -m 555
++INSTALL_MAN = install -c -m 444
+ 
+ # Some make's don't define this.
+ RM      = rm -f
+ 
+ # Should be OK for GNU gcc.
+-CC      = gcc
+-CFLAGS  = -O2 -Wall
+-LDFLAGS = -s
++CC      ?= gcc
++CFLAGS  ?= -O2 -Wall
++LDFLAGS ?= -s
+ 
+ # For using BIND resolver instead of system resolver.
+ #LIBS    += -lresolv	# Really old Linux has this.

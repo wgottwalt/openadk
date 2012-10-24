@@ -1,0 +1,29 @@
+--- transproxy-1.6.orig/tproxyrun	2004-03-31 14:19:34.000000000 +0200
++++ transproxy-1.6/tproxyrun	2012-10-24 09:06:52.000000000 +0200
+@@ -50,7 +50,7 @@ Linux)
+ 	# I really have no idea about Linux, are these kernel versions correct
+ 	# for the type if network filtering supported? Is there a surefire way?
+ 	case `uname -r` in
+-	2.[3456789].*)
++	3.*|2.[3456789].*)
+ 		iptables -t nat -A PREROUTING -p tcp -d localhost --dport 80 -j ACCEPT
+ 		iptables -t nat -A PREROUTING -p tcp -d "$HOSTNAME1" --dport 80 -j ACCEPT
+ 		if [ -n "$HOSTNAME2" ]; then
+@@ -106,7 +106,7 @@ if [ -n "$FORCE_URL" ]; then
+ fi
+ 
+ # Start transproxy running.
+-/usr/local/sbin/tproxy -s "$TRANSPROXYPORT" -d $CMD "$PROXYNAME" "$PROXYPORT"
++/usr/sbin/tproxy -s "$TRANSPROXYPORT" -d $CMD "$PROXYNAME" "$PROXYPORT"
+ 
+ # Remove the filter rules.
+ case `uname` in
+@@ -121,7 +121,7 @@ FreeBSD)
+ 	;;
+ Linux)
+ 	case `uname -r` in
+-	2.[3456789].*)
++	3.*|2.[3456789].*)
+ 		iptables -t nat -D PREROUTING -p tcp -d localhost --dport 80 -j ACCEPT
+ 		iptables -t nat -D PREROUTING -p tcp -d "$HOSTNAME1" --dport 80 -j ACCEPT
+ 		if [ -n "$HOSTNAME2" ]; then
