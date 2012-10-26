@@ -19,7 +19,7 @@ PKGSD_PHP_FASTCGI:=	PHP for FastCGI usage
 PKGSD_PHP_CLI:=		PHP CLI
 
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
-PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SQLITE MOD_SOCKETS MOD_XML MOD_ZLIB
+PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE MOD_SOCKETS MOD_XML MOD_ZLIB
 
 PKGFD_MOD_BZ2:=		Bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
@@ -48,6 +48,9 @@ PKGFD_MOD_PGSQL:=	PGSQL support
 PKGFB_MOD_PGSQL:=	postgresql
 PKGFS_MOD_PGSQL:=	libpq
 PKGFD_MOD_SESSION:=	Session support
+PKGFD_MOD_SNMP:=	SNMP support
+PKGFB_MOD_SNMP:=	net-snmp
+PKGFS_MOD_SNMP:=	libnetsnmp
 PKGFD_MOD_SQLITE:=	SQlite support
 PKGFB_MOD_SQLITE:=	sqlite
 PKGFS_MOD_SQLITE:=	libsqlite
@@ -166,6 +169,12 @@ PKG_CONFIGURE_OPTS+=	--enable-session=shared
 else
 PKG_CONFIGURE_OPTS+=	--without-session
 endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_SNMP),)
+PKG_CONFIGURE_OPTS+=	--with-snmp=shared,"$(STAGING_TARGET_DIR)/usr"
+CONFIGURE_ENV+=		LIBS="-lnetsnmpmibs"
+else
+PKG_CONFIGURE_OPTS+=	--without-snmp
+endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SQLITE),)
 PKG_CONFIGURE_OPTS+=	--with-sqlite3="$(STAGING_TARGET_DIR)/usr"
 PKG_CONFIGURE_OPTS+=	--with-pdo-sqlite=shared,"$(STAGING_TARGET_DIR)/usr"
@@ -200,6 +209,7 @@ $(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-${PKG_RELE
 $(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SESSION,php-mod-session,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_MOD_SNMP,php-mod-snmp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SQLITE,php-mod-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_XML,php-mod-xml,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -216,6 +226,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_OPENSSL,openssl))
 $(eval $(call PKG_mod_template,PHP_MOD_PGSQL,pgsql))
 $(eval $(call PKG_mod_template,PHP_MOD_SESSION,session))
 $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
+$(eval $(call PKG_mod_template,PHP_MOD_SNMP,snmp))
 $(eval $(call PKG_mod_template,PHP_MOD_SQLITE,pdo pdo_sqlite))
 $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
 $(eval $(call PKG_mod_template,PHP_MOD_ZLIB,zlib))
@@ -229,11 +240,7 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP)/etc
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/usr/bin
-	#${INSTALL_DIR} $(IDIR_PHP_CLI)/etc
-	#${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_CLI)/etc
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
-	#${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/etc
-	#${INSTALL_DATA} ./files/php.ini $(IDIR_PHP_FASTCGI)/etc
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
 		$(IDIR_PHP_FASTCGI)/usr/bin/php
