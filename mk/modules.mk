@@ -74,7 +74,7 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/wireless/lib80211 \
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
-,15, kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-ecb))
+,15, kmod-crypto-arc4 kmod-crypto-ecb))
 
 $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
@@ -444,19 +444,20 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
 ,50))
 
-$(eval $(call KMOD_template,NF_NAT,nf-nat,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
+$(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
 ,50))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_FTP,nf-conntrack-ftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_ftp \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ftp \
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat_ftp \
 ,55))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IRC,nf-conntrack-irc,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_irc \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_irc \
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat_irc \
 ,55))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_NETBIOS_NS,nf-conntrack-netbios-ns,\
@@ -466,7 +467,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_NETBIOS_NS,nf-conntrack-netbios-ns,\
 
 $(eval $(call KMOD_template,NF_CONNTRACK_TFTP,nf-conntrack-tftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_tftp \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_tftp \
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat_tftp \
 ,55))
 
 #$(eval $(call KMOD_template,NF_CONNTRACK_RTSP,nf-conntrack-rtsp,\
@@ -494,7 +495,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_H323,nf-conntrack-h323,\
 
 $(eval $(call KMOD_template,NF_CONNTRACK_SIP,nf-conntrack-sip,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_sip \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_sip \
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat_sip \
 ,55))
 
 $(eval $(call KMOD_template,IP_NF_IPTABLES,ip-nf-iptables,\
@@ -571,11 +572,11 @@ $(eval $(call KMOD_template,IP_NF_TARGET_MASQUERADE,ip-nf-target-masquerade,\
 ,65))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_REDIRECT,ip-nf-target-redirect,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_REDIRECT \
+	$(MODULES_DIR)/kernel/net/netfilter/xt_REDIRECT \
 ,65))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_NETMAP,ip-nf-target-netmap,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_NETMAP \
+	$(MODULES_DIR)/kernel/net/netfilter/xt_NETMAP \
 ,65))
 
 #
@@ -805,37 +806,37 @@ $(eval $(call KMOD_template,CRYPTO_DEV_HIFN_795X,crypto-dev-hifn-795x,\
     $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
 ,20, crypto-manager2))
 
-$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
-,02))
+#$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
+#    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
+#,02))
 
-$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
-    $(MODULES_DIR)/kernel/crypto/pcompress \
-,03))
+#$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
+#    $(MODULES_DIR)/kernel/crypto/pcompress \
+#,03))
 
-$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
-    $(MODULES_DIR)/kernel/crypto/aead \
-,03))
+#$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
+#    $(MODULES_DIR)/kernel/crypto/aead \
+#,03))
 
-$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_hash \
-,04))
+#$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
+#    $(MODULES_DIR)/kernel/crypto/crypto_hash \
+#,04))
 
-$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_wq \
-    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
-,05))
+#$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
+#    $(MODULES_DIR)/kernel/crypto/crypto_wq \
+#    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
+#,05))
 
-$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
-    $(MODULES_DIR)/kernel/crypto/rng \
-    $(MODULES_DIR)/kernel/crypto/krng \
-,06))
+#$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
+#    $(MODULES_DIR)/kernel/crypto/rng \
+#    $(MODULES_DIR)/kernel/crypto/krng \
+#,06))
 
-$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
-    $(MODULES_DIR)/kernel/crypto/cryptomgr \
-    $(MODULES_DIR)/kernel/crypto/eseqiv \
-    $(MODULES_DIR)/kernel/crypto/chainiv \
-,07))
+#$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
+#    $(MODULES_DIR)/kernel/crypto/cryptomgr \
+#    $(MODULES_DIR)/kernel/crypto/eseqiv \
+#    $(MODULES_DIR)/kernel/crypto/chainiv \
+#,07))
 
 $(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
     $(MODULES_DIR)/kernel/crypto/authenc \
@@ -931,20 +932,20 @@ $(eval $(call KMOD_template,CRYPTO_SERPENT,crypto-serpent,\
     $(MODULES_DIR)/kernel/crypto/serpent_generic \
 ,11))
 
-$(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
-    $(MODULES_DIR)/kernel/crypto/aes_generic \
-,10))
+#$(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
+#    $(MODULES_DIR)/kernel/crypto/aes_generic \
+#,10))
 
 $(eval $(call KMOD_template,CRYPTO_AES_586,crypto-aes-586,\
     $(MODULES_DIR)/kernel/arch/x86/crypto/aes-i586 \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_CAST5,crypto-cast5,\
-    $(MODULES_DIR)/kernel/crypto/cast5 \
+    $(MODULES_DIR)/kernel/crypto/cast5_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_CAST6,crypto-cast6,\
-    $(MODULES_DIR)/kernel/crypto/cast6 \
+    $(MODULES_DIR)/kernel/crypto/cast6_generic \
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_TEA,crypto-tea,\
@@ -986,9 +987,9 @@ $(eval $(call KMOD_template,CRYPTO_MICHAEL_MIC,crypto-michael-mic,\
     $(MODULES_DIR)/kernel/crypto/michael_mic \
 ,11))
 
-$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
-    $(MODULES_DIR)/kernel/crypto/crc32c \
-,11))
+#$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
+#    $(MODULES_DIR)/kernel/crypto/crc32c \
+#,11))
 
 $(eval $(call KMOD_template,OCF_CRYPTOSOFT,ocf-cryptosoft,\
     ${MODULES_DIR}/kernel/crypto/ocf/cryptosoft \
@@ -1172,14 +1173,14 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55))
 
-ifeq ($(ADK_LINUX_64),y)
-V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
-endif
+#ifeq ($(ADK_LINUX_64),y)
+#V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
+#endif
 
-$(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
-	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
-	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
-,65))
+#$(eval $(call KMOD_template,VIDEO_DEV,video-dev,\
+#	$(foreach mod, $(V4L_COMPAT),$(MODULES_DIR)/kernel/$(mod)) \
+#	$(MODULES_DIR)/kernel/drivers/media/video/videodev \
+#,65))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \

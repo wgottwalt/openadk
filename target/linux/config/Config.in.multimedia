@@ -10,9 +10,6 @@ config ADK_KERNEL_SND_SOC
 config ADK_KERNEL_SND_PXA2XX_AC97
 	boolean
 
-config ADK_KERNEL_MEDIA_SUPPORT
-	boolean
-
 config ADK_KERNEL_SND_TIMER
 	boolean
 
@@ -129,31 +126,17 @@ config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
 endmenu
 
 menu "Video devices support"
-config ADK_KPACKAGE_KMOD_VIDEO_DEV
-	prompt "kmod-video-dev.................. Video (For Linux) kernel support"
+config ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
+	prompt "kmod-media-support............... Multimedia support"
 	tristate
-	select ADK_KERNEL_MEDIA_SUPPORT
 	default n
 	help
-	  Support for audio/video capture and overlay devices and FM radio
-	  cards. The exact capabilities of each device vary.
-
-	  This kernel includes support for the new Video for Linux Two API,
-	  (V4L2) as well as the original system. Drivers and applications
-	  need to be rewritten to use V4L2, but drivers for popular cards
-	  and applications for most video capture functions already exist.
-
-	  Additional info and docs are available on the web at
-	  <http://linuxtv.org>
-
-	  Documentation for V4L2 is also available on the web at
-	  <http://bytesex.org/v4l/>.
 
 config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	select ADK_KPACKAGE_KMOD_VIDEO_DEV
+	select ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
 	default n
 	help
 

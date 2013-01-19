@@ -37,7 +37,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_DEV_HIFN_795X
 	tristate
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_HW
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+	#select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_DES
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
 	default n
@@ -97,7 +97,7 @@ config ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
 
 config ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+	#select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	select ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
 	default n
@@ -109,29 +109,29 @@ config ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
 config ADK_KERNEL_MOD_CRYPTO_MANAGER
 	tristate
 
-config ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
-	prompt "kmod-crypto-manager2................. Crypto algorithm manager"
-	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
-	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
-	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD2
-	select ADK_KPACKAGE_KMOD_CRYPTO_PCOMP2
-	select ADK_KERNEL_MOD_CRYPTO_MANAGER
-	select ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
-	default n
-	help
+#config ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	prompt "kmod-crypto-manager2................. Crypto algorithm manager"
+#	tristate
+#	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_AEAD2
+##	select ADK_KPACKAGE_KMOD_CRYPTO_PCOMP2
+#	select ADK_KERNEL_MOD_CRYPTO_MANAGER
+##	select ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
+#	default n
+#	help
 
 config ADK_KPACKAGE_KMOD_CRYPTO_AUTHENC
 	prompt "kmod-crypto-authenc.................. AuthENC (IPsec)"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+	#select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 
 config ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
 	prompt "kmod-crypto-seqiv.................... Sequence Number IV Generator"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+	#select ADK_KPACKAGE_KMOD_CRYPTO_RNG2
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
 	help
 	  This IV generator generates an IV based on a sequence number by
@@ -141,7 +141,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CTS
 	prompt "kmod-crypto-cts...................... CTS support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
           CTS: Cipher Text Stealing
@@ -156,7 +156,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 	tristate
 	depends on !ADK_KERNEL_CRYPTO_CBC
 	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 	  CBC: Cipher Block Chaining mode
@@ -165,7 +165,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CBC
 config ADK_KPACKAGE_KMOD_CRYPTO_CCM
 	prompt "kmod-crypto-ccm...................... CCM support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	default n
 	help
@@ -174,7 +174,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_CCM
 config ADK_KPACKAGE_KMOD_CRYPTO_GCM
 	prompt "kmod-crypto-gcm...................... GCM support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	default n
 	help
@@ -184,7 +184,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_GCM
 config ADK_KPACKAGE_KMOD_CRYPTO_CTR
 	prompt "kmod-crypto-ctr...................... CTR support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	select ADK_KPACKAGE_KMOD_CRYPTO_SEQIV
 	default n
 	help
@@ -195,7 +195,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_ECB
 	prompt "kmod-crypto-ecb...................... ECB support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_BLKCIPHER2
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 	  ECB: Electronic CodeBook mode
@@ -206,7 +206,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_HMAC
 	prompt "kmod-crypto-hmac..................... HMAC support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	default n
 	help
 	  HMAC: Keyed-Hashing for Message Authentication (RFC2104).
@@ -217,20 +217,20 @@ config ADK_KPACKAGE_KMOD_CRYPTO_XCBC
 	tristate
 	default n
 	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
-	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
+#	select ADK_KPACKAGE_KMOD_CRYPTO_MANAGER2
 	help
           XCBC: Keyed-Hashing with encryption algorithm
 
 config ADK_KERNEL_MOD_CRYPTO_RNG
 	tristate
 
-config ADK_KPACKAGE_KMOD_CRYPTO_RNG2
-	prompt "kmod-crypto-rng2..................... RNG support"
-	tristate
-	select ADK_KERNEL_MOD_CRYPTO_RNG
-	default n
-	help
-	  Random number generator
+#config ADK_KPACKAGE_KMOD_CRYPTO_RNG2
+#	prompt "kmod-crypto-rng2..................... RNG support"
+#	tristate
+#	select ADK_KERNEL_MOD_CRYPTO_RNG
+#	default n
+#	help
+#	  Random number generator
 endmenu
 
 menu "Digest algorithms"
