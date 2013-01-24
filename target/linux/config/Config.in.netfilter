@@ -2,7 +2,7 @@ menu "Netfilter (Firewall/Filtering)"
 
 config ADK_KERNEL_NETFILTER
 	bool
-	default y
+	default n
 
 config ADK_KERNEL_NETFILTER_ADVANCED
 	bool
