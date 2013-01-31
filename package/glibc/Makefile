@@ -49,6 +49,7 @@ else
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
+	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
 ifeq ($(ADK_LOCALES),y)
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_GLIBC)/usr/bin
