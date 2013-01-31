@@ -46,6 +46,19 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 
+pre-configure:
+ifeq ($(OStype),Linux)
+	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
+		./configure --prefix=$(STAGING_HOST_DIR) \
+	)
+	${MAKE} -C ${WRKBUILD} V=1
+	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin
+	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
+	$(CP) ${WRKBUILD}/gobject/glib-mkenums ${STAGING_HOST_DIR}/bin
+	${MAKE} -C ${WRKBUILD} clean
+endif
+
+
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgio*.so* ${IDIR_GLIB}/usr/lib
