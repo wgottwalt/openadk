@@ -40,6 +40,8 @@ config ADK_HARDWARE_ACPI
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_TAROX_PC
+	default y if ADK_NATIVE_SYSTEM_TAROX_PC
 	default n
 	help
 	 Enable ACPI support.
