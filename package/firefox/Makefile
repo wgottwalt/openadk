@@ -78,9 +78,11 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-mathml \
 			--disable-jemalloc \
 			--disable-crashreporter \
+			--disable-updater \
 			--disable-libjpeg-turbo \
 			--disable-elf-hack
 
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3"
 
