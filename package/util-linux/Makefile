@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
-PKG_VERSION:=		2.20.1
+PKG_VERSION:=		2.22.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		079b37517fd4e002a2e6e992e8b4e361
+PKG_MD5SUM:=		eeacbfdd2556acd899a2d0ffdb446185
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		ftp://ftp.infradead.org/pub/util-linux/v2.20/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.22/
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MOUNT MCOOKIE
 PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBUUID_DEV
@@ -50,6 +50,8 @@ CONFIGURE_ENV+=		scanf_cv_type_modifier=yes
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
+			--disable-login \
+			--disable-su \
 			--enable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \

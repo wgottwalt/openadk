@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tar
-PKG_VERSION:=		1.25
+PKG_VERSION:=		1.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0e48e9e473a72f135d0ebbc8af2762cc
+PKG_MD5SUM:=		00d1e769c6af702c542cca54b728920d
 PKG_DESCR:=		GNU archiving application
 PKG_SECTION:=		archive
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar/

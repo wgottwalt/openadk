@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1c
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		ae412727c8c15b67880aef7bd2999b2e
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
@@ -53,11 +53,17 @@ ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
 OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
 endif
 
+ifeq ($(ADK_LINUX_X86_64),y)
+CONFIG:=	linux-embedded-x86_64
+else
+CONFIG:=	linux-embedded
+endif
+
 do-configure:
 	(cd $(WRKBUILD); \
 		PATH=$(TARGET_PATH) \
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
-		./Configure linux-embedded \
+		./Configure $(CONFIG) \
 		  --prefix=/usr \
 		  --openssldir=/etc/ssl \
 		  -I$(STAGING_TARGET_DIR)/usr/include \
@@ -76,7 +82,7 @@ do-build:
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
+	${CP} ${WRKINST}/usr/lib*/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
 	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so*
 
 openssl-util-install:

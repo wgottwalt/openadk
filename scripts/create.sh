@@ -37,7 +37,7 @@ esac
 
 test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	make package=mksh fetch || exit 1
-	df=$(make -s package=mksh show=DISTFILES)
+	df=mksh-R40f.cpio.gz
 	rm -rf build_mksh
 	mkdir -p build_mksh
 	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
