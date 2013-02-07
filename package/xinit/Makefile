@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xinit
 PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		7ad82221ebd6600a8d33712ec3b62efb
 PKG_DESCR:=		X Window System initializer
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		xorg-server mcookie xauth xset
+PKG_DEPENDS:=		xorg-server mcookie xauth xset xterm
 PKG_BUILDDEP:=		xorg-server
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
