@@ -1,0 +1,14 @@
+--- mozilla-release.orig/js/src/jscpucfg.cpp	2011-07-08 03:15:24.000000000 +0200
++++ mozilla-release/js/src/jscpucfg.cpp	2013-02-08 09:41:16.000000000 +0100
+@@ -177,6 +177,11 @@ int main(int argc, char **argv)
+ 
+     printf("#endif /* js_cpucfg___ */\n");
+ 
++#if defined __GNUC__ && defined __x86_64__
++    printf("#define HAVE_VA_LIST_AS_ARRAY\n");
++    printf("\n");
++#endif
++
+     return EXIT_SUCCESS;
+ }
+ 
