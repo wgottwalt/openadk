@@ -80,7 +80,6 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-jemalloc \
 			--disable-crashreporter \
 			--disable-updater \
-			--disable-dtrace \
 			--disable-libjpeg-turbo \
 			--disable-elf-hack
 

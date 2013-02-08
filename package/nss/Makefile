@@ -12,8 +12,8 @@ PKG_PATCH_VERSION:=	1
 PKG_MD5SUM:=		f6f3a942d1eba3e26aa0382a5b5461d9
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		nspr zlib
-PKG_DEPENDS:=		nspr
+PKG_BUILDDEP:=		nspr zlib sqlite
+PKG_DEPENDS:=		nspr zlib libsqlite
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
 PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_${PKG_PATCH_VERSION}_RTM/src/
 PKG_NOPARALLEL:=	1
@@ -44,7 +44,8 @@ TARGET_LDFLAGS+=	-ldl -pthread -lrt
 XAKE_FLAGS+=		SOURCE_MD_DIR=${WRKDIST}/dist DIST=${WRKDIST}/dist
 XAKE_FLAGS+=		ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
 XAKE_FLAGS+=		NSS_DISABLE_DBM=1 OS_TEST=${CPU_ARCH} OS_TARGET=Linux OS_RELEASE=2.6 OS_ARCH=Linux
-XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
+XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib" NSS_USE_SYSTEM_SQLITE=1
+XAKE_FLAGS+=		NSS_USE_SYSTEM_ZLIB=1
 ALL_TARGET:=		build_coreconf all
 
 post-install:
