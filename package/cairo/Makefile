@@ -4,15 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
-PKG_VERSION:=		1.10.2
+PKG_VERSION:=		1.12.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f101a9e88b783337b20b2e26dfd26d5f
+PKG_MD5SUM:=		9f7315e54885c735dcfdabe77f322d30
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		fontconfig libfreetype libpng libx11 pixman
 PKG_BUILDDEP:=		libpng pixman freetype fontconfig libX11 libXrender glib
 PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SUBPKGS:=		CAIRO CAIRO_DEV
 PKGSC_CAIRO_DEV:=	devel

@@ -1,5 +1,14 @@
 --- mozilla-release.orig/configure	2011-07-08 03:30:27.000000000 +0200
-+++ mozilla-release/configure	2011-07-29 15:50:35.000000000 +0200
++++ mozilla-release/configure	2013-02-07 16:38:49.000000000 +0100
+@@ -10022,7 +10022,7 @@ cross_compiling=$ac_cv_prog_cc_cross
+ # Check whether --enable-dtrace or --disable-dtrace was given.
+ if test "${enable_dtrace+set}" = set; then
+   enableval="$enable_dtrace"
+-  enable_dtrace="yes"
++  enable_dtrace="no"
+ fi
+ 
+ if test "x$enable_dtrace" = "xyes"; then
 @@ -23504,6 +23504,9 @@ fi
      fi
  fi

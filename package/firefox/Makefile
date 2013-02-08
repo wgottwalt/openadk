@@ -11,7 +11,8 @@ PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libxcursor libffi
 PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
-PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf libintl
+PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf libintl librt libgcc
+PKG_DEPENDS+=		harfbuzz
 PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme
 PKG_URL:=		http://www.mozilla.org/
@@ -21,7 +22,7 @@ PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 native mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686
+PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
@@ -79,6 +80,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-jemalloc \
 			--disable-crashreporter \
 			--disable-updater \
+			--disable-dtrace \
 			--disable-libjpeg-turbo \
 			--disable-elf-hack
 
