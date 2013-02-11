@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		78eb1e984f4532aa9f2bdd3c127b5b61
+PKG_MD5SUM:=		a4030ddd2ba324152a97d65d3c0b247d
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl libpng
