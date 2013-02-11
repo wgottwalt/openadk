@@ -40,7 +40,7 @@ CONFIGURE_ARGS+= 	--enable-cryptodev
 endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-TARGET_LDFLAGS+=	-pthread
+TARGET_LDFLAGS+=	-pthread -L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ARGS+=	--disable-rpath \
 			--without-libz-prefix \
 			--without-p11-kit \

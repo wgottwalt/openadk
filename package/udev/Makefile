@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e31c83159b017e8ab0fa2f4bca758a41
 PKG_DESCR:=		Dynamic device management subsystem
 PKG_SECTION:=		utils
-PKG_BUILDDEP:=		usbutils glib
+PKG_BUILDDEP:=		usbutils glib kmod
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/hotplug/}
 
