@@ -22,7 +22,7 @@ PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 native mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64
+PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release

@@ -30,6 +30,7 @@ $(eval $(call PKG_template,FONTCONFIG_DEV,fontconfig-dev,${PKG_VERSION}-${PKG_RE
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-liconv
 CONFIGURE_ARGS+=	--with-arch=${ARCH} \
+			--enable-libxml2 \
 			--disable-docs
 
 fontconfig-install:
