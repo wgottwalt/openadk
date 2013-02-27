@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		corosync
-PKG_VERSION:=		2.0.1
+PKG_VERSION:=		2.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9e23f3f5594676455ff39ff363658155
+PKG_MD5SUM:=		4689279c36b1417e122a23c6818017dd
 PKG_DESCR:=		Cluster Engine	
 PKG_SECTION:=		ha
 PKG_BUILDDEP:=		libqb nss
 PKG_DEPENDS:=		cluster-glue libqb nss
 PKG_URL:=		http://www.corosync.org/
-PKG_SITES:=		ftp://ftp:downloads@corosync.org/downloads/corosync-2.0.1/
+PKG_SITES:=		http://corosync.org/download/
 
 PKG_CFLINE_COROSYNC:=	select ADK_KERNEL_IP_MULTICAST
 
