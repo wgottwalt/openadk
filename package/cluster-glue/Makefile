@@ -4,15 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cluster-glue
-PKG_VERSION:=		1.0.10
+PKG_VERSION:=		1.0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		67e35a8e1a78376af039aa53644f0de2
+PKG_MD5SUM:=		bd5a20fc9185da17caf113776d1eac47
 PKG_DESCR:=		Cluster Glue library and tools
 PKG_SECTION:=		ha
 PKG_BUILDDEP:=		glib bzip2 e2fsprogs libaio
 PKG_DEPENDS:=		libaio
 PKG_URL:=		http://www.linux-ha.org/wiki/Cluster_Glue
 PKG_SITES:=		http://openadk.org/distfiles/
+PKG_NOPARALLEL:=	1
 
 PKG_CFLINE_CLUSTER_GLUE:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_ARCH_DEPENDS:=	x86 x86_64
