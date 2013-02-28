@@ -10,7 +10,7 @@ PKG_MD5SUM:=		5097ed5bbe1c621ee12950019f71de02
 PKG_DESCR:=		set root window
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxmu libxcursor
-PKG_BUILDDEP:=		xbitmaps libXcursor
+PKG_BUILDDEP:=		xbitmaps libXcursor libXmu
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
