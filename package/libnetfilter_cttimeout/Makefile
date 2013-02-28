@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7697437fc9ebb6f6b83df56a633db7f9
 PKG_DESCR:=		API to the fine-grain connection tracking timeout infrastructure
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libnfnetlink
-PKG_BUILDDEP:=		libnfnetlink
+PKG_DEPENDS:=		libnfnetlink libmnl
+PKG_BUILDDEP:=		libnfnetlink libmnl
 PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_cttimeout/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_cttimeout/files/
 

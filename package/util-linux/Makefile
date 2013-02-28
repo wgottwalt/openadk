@@ -15,7 +15,7 @@ PKG_NOPARALLEL:=	1
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
-PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MOUNT MCOOKIE
+PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
 PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBUUID_DEV
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
@@ -46,7 +46,8 @@ $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 
-CONFIGURE_ENV+=		scanf_cv_type_modifier=yes
+CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
+			scanf_cv_alloc_modifier=ms
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \

@@ -1,6 +1,6 @@
---- util-linux-2.20.1.orig/libmount/src/tab_parse.c	2011-10-18 14:22:27.000000000 +0200
-+++ util-linux-2.20.1/libmount/src/tab_parse.c	2011-12-03 09:43:31.713340136 +0100
-@@ -10,6 +10,8 @@
+--- util-linux-2.22.2.orig/libmount/src/tab_parse.c	2012-12-12 21:04:47.000000000 +0100
++++ util-linux-2.22.2/libmount/src/tab_parse.c	2013-02-28 14:34:10.000000000 +0100
+@@ -16,6 +16,8 @@
  #include <dirent.h>
  #include <fcntl.h>
  
@@ -9,3 +9,74 @@
  #include "at.h"
  #include "mangle.h"
  #include "mountP.h"
+@@ -59,18 +61,21 @@ static int next_number(char **s, int *nu
+ static int mnt_parse_table_line(struct libmnt_fs *fs, char *s)
+ {
+ 	int rc, n = 0, xrc;
+-	char *src = NULL, *fstype = NULL, *optstr = NULL;
++	int len = strlen (s) + 1;
++	char *fstype  = malloc (sizeof *fstype * len);
++	char *optstr  = malloc (sizeof *optstr * len);
++	char *src     = malloc (sizeof *src * len);
+ 
+-	rc = sscanf(s,	UL_SCNsA" "	/* (1) source */
+-			UL_SCNsA" "	/* (2) target */
+-			UL_SCNsA" "	/* (3) FS type */
+-			UL_SCNsA" "	/* (4) options */
++	rc = sscanf(s,	"%s"" "	/* (1) source */
++			"%s"" "	/* (2) target */
++			"%s"" "	/* (3) FS type */
++			"%s"" "	/* (4) options */
+ 			"%n",		/* byte count */
+ 
+-			&src,
+-			&fs->target,
+-			&fstype,
+-			&optstr,
++			src,
++			fs->target,
++			fstype,
++			optstr,
+ 			&n);
+ 	xrc = rc;
+ 
+@@ -135,13 +140,18 @@ static int mnt_parse_mountinfo_line(stru
+ 	int rc, end = 0;
+ 	unsigned int maj, min;
+ 	char *fstype = NULL, *src = NULL, *p;
++	int len = strlen (s) + 1;
++
++	fs->root        = malloc (sizeof *fs->root * len);
++	fs->target      = malloc (sizeof *fs->target * len);
++	fs->vfs_optstr  = malloc (sizeof *fs->vfs_optstr * len);
+ 
+ 	rc = sscanf(s,	"%u "		/* (1) id */
+ 			"%u "		/* (2) parent */
+ 			"%u:%u "	/* (3) maj:min */
+-			UL_SCNsA" "	/* (4) mountroot */
+-			UL_SCNsA" "	/* (5) target */
+-			UL_SCNsA	/* (6) vfs options (fs-independent) */
++			"%s"" "	/* (4) mountroot */
++			"%s"" "	/* (5) target */
++			"%s"	/* (6) vfs options (fs-independent) */
+ 			"%n",		/* number of read bytes */
+ 
+ 			&fs->id,
+@@ -162,10 +172,14 @@ static int mnt_parse_mountinfo_line(stru
+ 		return -EINVAL;
+ 	}
+ 	s = p + 3;
++	len           = strlen (s) + 1;
++	fstype        = malloc (sizeof *fstype * len);
++	src           = malloc (sizeof *src * len);
++	fs->fs_optstr = malloc (sizeof *fs->fs_optstr * len);
+ 
+-	rc += sscanf(s,	UL_SCNsA" "	/* (8) FS type */
+-			UL_SCNsA" "	/* (9) source */
+-			UL_SCNsA,	/* (10) fs options (fs specific) */
++	rc += sscanf(s,	"%s"" "	/* (8) FS type */
++			"%s"" "	/* (9) source */
++			"%s",	/* (10) fs options (fs specific) */
+ 
+ 			&fstype,
+ 			&src,

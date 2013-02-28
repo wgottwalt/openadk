@@ -18,6 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSIGCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
+
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBSIGCXX}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libsigc-2.0.so* ${IDIR_LIBSIGCXX}/usr/lib/
