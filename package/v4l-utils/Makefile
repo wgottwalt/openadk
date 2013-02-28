@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		v4l-utils
-PKG_VERSION:=		0.8.5
+PKG_VERSION:=		0.9.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		037bec9f68cfb0b84bcccb00d30e429b
+PKG_MD5SUM:=		f4d24bb9f0307345d5a8fc4febcb993d
 PKG_DESCR:=		Video4Linux2 utilities
 PKG_SECTION:=		multimedia
+PKG_BUILDDEP:=		jpeg
 PKG_SITES:=		http://linuxtv.org/downloads/v4l-utils/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_CFLINE_V4L_UTILS:=  depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 
 include $(TOPDIR)/mk/package.mk
@@ -20,7 +22,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,V4L_UTILS,v4l-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBV4L,libv4l,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIG_STYLE:=		manual
+CONFIGURE_ARGS+=	--disable-qv4l2
 
 v4l-utils-install:
 	$(INSTALL_DIR) $(IDIR_V4L_UTILS)/usr/bin
