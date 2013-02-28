@@ -802,9 +802,9 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
 ,20))
 
-$(eval $(call KMOD_template,CRYPTO_DEV_HIFN_795X,crypto-dev-hifn-795x,\
-    $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
-,20, crypto-manager2))
+#$(eval $(call KMOD_template,CRYPTO_DEV_HIFN_795X,crypto-dev-hifn-795x,\
+#    $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
+#,20, crypto-manager2))
 
 #$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
 #    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
