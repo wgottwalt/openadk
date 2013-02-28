@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1c
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		ae412727c8c15b67880aef7bd2999b2e
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
@@ -25,7 +25,6 @@ PKGSS_LIBOPENSSL_DEV:=	libopenssl
 PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC WITH_CRYPTODEV
 PKGFD_WITH_EC:=			enable Elliptic Curve crypto
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
-PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS:=		libonly
@@ -58,6 +57,10 @@ CONFIG:=	linux-embedded-x86_64
 else
 CONFIG:=	linux-embedded
 endif
+
+post-extract:
+	-mkdir -p $(STAGING_DIR)/usr/include/crypto
+	cp ./files/cryptodev.h $(STAGING_DIR)/usr/include/crypto/
 
 do-configure:
 	(cd $(WRKBUILD); \
