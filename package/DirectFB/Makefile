@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		DirectFB
-PKG_VERSION:=		1.4.11
-PKG_RELEASE:=		2
-PKG_EXTRAVER:=		1.4-5
-PKG_MD5SUM:=		94735ccec21120794adcce93a61445d2
+PKG_VERSION:=		1.6.3
+PKG_RELEASE:=		1
+PKG_EXTRAVER:=		1.6-0
+PKG_MD5SUM:=		641e8e999c017770da647f9b5b890906
 PKG_DESCR:=		Thin graphic library for the Linux framebuffer devices
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libjpeg
 PKG_BUILDDEP:=		libpng jpeg freetype
 PKG_URL:=		http://www.directfb.org/
-PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.4/
+PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.6/
 
 PKG_SUBPKGS:=		DIRECTFB DIRECTFB_DEV
 PKGSD_DIRECTFB_DEV:=	development files for DirectFB
@@ -24,6 +24,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DIRECTFB,directfb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DIRECTFB_DEV,directfb-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DIRECTFB_DEV},${PKGSC_DIRECTFB_DEV}))
 
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \
 			--without-tools \
