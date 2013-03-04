@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		poppler
-PKG_VERSION:=		0.18.4
+PKG_VERSION:=		0.22.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		12658f3308597e57f3faff538cc73baf
+PKG_MD5SUM:=		50c259fdda538c1ba94b62aa25f7ec87
 PKG_DESCR:=		pdf rendering library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		fontconfig libstdcxx

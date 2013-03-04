@@ -1,5 +1,5 @@
 --- ppp-2.4.5.orig/pppd/plugins/pppoatm/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/plugins/pppoatm/Makefile.linux	2011-01-21 21:29:58.177408277 +0100
++++ ppp-2.4.5/pppd/plugins/pppoatm/Makefile.linux	2013-03-04 12:31:16.000000000 +0100
 @@ -1,15 +1,16 @@
 -#CC	= gcc
 -COPTS	= -O2 -g
@@ -26,7 +26,7 @@
  
  PLUGIN := pppoatm.so
  PLUGIN_OBJS := pppoatm.o 
-@@ -22,25 +23,22 @@ PLUGIN_OBJS := pppoatm.o 
+@@ -22,25 +23,22 @@ PLUGIN_OBJS := pppoatm.o
  #HAVE_LIBATM=yes
  
  ifdef HAVE_LIBATM

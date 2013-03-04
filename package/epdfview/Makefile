@@ -12,7 +12,7 @@ PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		poppler libgtk
 PKG_BUILDDEP:=		poppler gtk+
 PKG_URL:=		http://trac.emma-soft.com/epdfview/wiki
-PKG_SITES:=		http://trac.emma-soft.com/epdfview/chrome/site/releases/
+PKG_SITES:=		http://openadk.org/distfiles
 
 include $(TOPDIR)/mk/package.mk
 
