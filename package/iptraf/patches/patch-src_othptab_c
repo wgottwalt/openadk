@@ -1,32 +1,14 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iptraf-3.0.0.orig/src/othptab.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/othptab.c	2009-05-21 23:02:50.000000000 +0200
-@@ -17,13 +17,12 @@ details.
- ***/
- 
+--- iptraf-3.0.1.orig/src/othptab.c	2007-09-25 11:47:35.000000000 +0200
++++ iptraf-3.0.1/src/othptab.c	2013-03-04 11:39:50.000000000 +0100
+@@ -20,7 +20,6 @@ details.
  #include <asm/types.h>
-+#include "options.h"
-+#include "tcptable.h"
+ #include <sys/socket.h>
  #include <linux/if_ether.h>
- #include <linux/if_tr.h>
--#include <linux/if_fddi.h>
+-#include <linux/if_tr.h>
+ #include <linux/netdevice.h>
+ #include <linux/if_fddi.h>
  #include <winops.h>
- #include "arphdr.h"
--#include "options.h"
--#include "tcptable.h"
- #include "othptab.h"
- #include "deskman.h"
- #include "attrs.h"
-@@ -128,7 +127,7 @@ struct othptabent *add_othp_entry(struct
-         *nomem = 1;
-         return NULL;
-     }
--    bzero(new_entry, sizeof(struct othptabent));
-+    memset(new_entry, 0, sizeof(struct othptabent));
- 
-     new_entry->is_ip = is_ip;
-     new_entry->fragment = fragment;
-@@ -139,11 +138,6 @@ struct othptabent *add_othp_entry(struct
+@@ -142,16 +141,6 @@ struct othptabent *add_othp_entry(struct
                          new_entry->smacaddr);
              convmacaddr(((struct ethhdr *) packet)->h_dest,
                          new_entry->dmacaddr);
@@ -35,10 +17,15 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 -                        new_entry->smacaddr);
 -            convmacaddr(((struct fddihdr *) packet)->daddr,
 -                        new_entry->dmacaddr);
-         } else if (linkproto == LINK_TR) {
-             convmacaddr(((struct trh_hdr *) packet)->saddr,
-                         new_entry->smacaddr);
-@@ -373,8 +367,7 @@ void printothpentry(struct othptable *ta
+-        } else if (linkproto == LINK_TR) {
+-            convmacaddr(((struct trh_hdr *) packet)->saddr,
+-                        new_entry->smacaddr);
+-            convmacaddr(((struct trh_hdr *) packet)->daddr,
+-                        new_entry->dmacaddr);
+         }
+     }
+ 
+@@ -376,8 +365,7 @@ void printothpentry(struct othptable *ta
          strcat(msgstring, scratchpad);
  
          if ((entry->linkproto == LINK_ETHERNET) ||

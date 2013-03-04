@@ -1,24 +1,14 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iptraf-3.0.0.orig/src/packet.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/packet.c	2009-05-21 23:03:57.000000000 +0200
-@@ -35,7 +35,6 @@ details.
- #include <sys/ioctl.h>
- #include <linux/if_packet.h>
+--- iptraf-3.0.1.orig/src/packet.c	2007-09-25 11:21:18.000000000 +0200
++++ iptraf-3.0.1/src/packet.c	2013-03-04 11:42:52.000000000 +0100
+@@ -36,7 +36,6 @@ details.
  #include <linux/if_ether.h>
--#include <linux/if_fddi.h>
- #include <linux/if_tr.h>
+ #include <linux/netdevice.h>
+ #include <linux/if_fddi.h>
+-#include <linux/if_tr.h>
  #include <linux/isdn.h>
  #include <linux/sockios.h>
-@@ -81,8 +80,6 @@ unsigned short getlinktype(unsigned shor
-             result = LINK_ETHERNET;
-         else if (strncmp(ifname, "plip", 4) == 0)
-             result = LINK_PLIP;
--        else if (strncmp(ifname, "fddi", 4) == 0)       /* For some Ethernet- */
--            result = LINK_ETHERNET;     /* emulated FDDI ifaces */
-         else if (strncmp(ifname, "dvb", 3) == 0)
-             result = LINK_ETHERNET;
-         else if (strncmp(ifname, "sbni", 4) == 0)
-@@ -136,9 +133,6 @@ unsigned short getlinktype(unsigned shor
+ #include <msgboxes.h>
+@@ -136,9 +135,6 @@ unsigned short getlinktype(unsigned shor
      case ARPHRD_PPP:
          result = LINK_PPP;
          break;
@@ -28,7 +18,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
      case ARPHRD_IEEE802:
      case ARPHRD_IEEE802_TR:
          result = LINK_TR;
-@@ -194,19 +188,6 @@ void adjustpacket(char *tpacket, unsigne
+@@ -194,36 +190,6 @@ void adjustpacket(char *tpacket, unsigne
          *packet = tpacket + 4;
          *readlen -= 4;
          break;
@@ -45,15 +35,23 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 -        memmove(aligned_buf, *packet, min(SNAPSHOT_LEN, *readlen));
 -        *packet = aligned_buf;
 -        break;
-     case LINK_TR:
-         /*
-          * Token Ring patch supplied by Tomas Dvorak 
-@@ -337,7 +318,7 @@ int processpacket(char *tpacket, char **
-      * Prepare ISDN reference descriptor and table.
-      */
- 
--    bzero(&isdntable, sizeof(struct isdntab));
-+    memset(&isdntable, 0, sizeof(struct isdntab));
-     isdn_iface_check(&isdnfd, ifname);
- 
-     /*
+-    case LINK_TR:
+-        /*
+-         * Token Ring patch supplied by Tomas Dvorak 
+-         */
+-
+-        /*
+-         * Get the start of the IP packet from the Token Ring frame.
+-         */
+-        dataoffset = get_tr_ip_offset(tpacket);
+-        *packet = tpacket + dataoffset;
+-        *readlen -= dataoffset;
+-        /*
+-         * Move IP datagram into an aligned buffer.
+-         */
+-        memmove(aligned_buf, *packet, min(SNAPSHOT_LEN, *readlen));
+-        *packet = aligned_buf;
+-        break;
+     case LINK_IPIP:
+         *packet = tpacket;
+         break;
