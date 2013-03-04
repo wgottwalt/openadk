@@ -40,7 +40,8 @@ CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
 			ac_cv_alignof_CORBA_double=4 \
 			ac_cv_alignof_CORBA_long_double=4 \
 			ac_cv_alignof_CORBA_struct=1 \
-			ac_cv_alignof_CORBA_pointer=4
+			ac_cv_alignof_CORBA_pointer=4 \
+			ac_cv_cflags_gcc_option__Werror_implicit_function_declaration=no
 
 orbit2-install:
 	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/lib

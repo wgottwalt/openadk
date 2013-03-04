@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iptraf-3.0.0.orig/src/ifstats.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/ifstats.c	2009-05-21 23:05:17.000000000 +0200
+--- iptraf-3.0.1.orig/src/ifstats.c	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.1/src/ifstats.c	2013-03-04 11:35:39.000000000 +0100
 @@ -167,7 +167,7 @@ void initiflist(struct iflist **list)
               */
  
@@ -19,7 +19,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
          (*ptmp)->index = plast->index + 1;
          plast->next_entry = *ptmp;
          (*ptmp)->prev_entry = plast;
-@@ -879,7 +879,7 @@ void detstats(char *iface, const struct 
+@@ -879,7 +879,7 @@ void detstats(char *iface, const struct
      update_panels();
      doupdate();
  

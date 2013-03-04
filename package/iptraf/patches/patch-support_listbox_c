@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iptraf-3.0.0.orig/support/listbox.c	2002-07-19 18:48:11.000000000 +0200
-+++ iptraf-3.0.0/support/listbox.c	2009-05-21 23:06:00.000000000 +0200
-@@ -19,7 +19,7 @@ void tx_init_listbox(struct scroll_list 
+--- iptraf-3.0.1.orig/support/listbox.c	2002-07-19 18:48:11.000000000 +0200
++++ iptraf-3.0.1/support/listbox.c	2013-03-04 11:35:39.000000000 +0100
+@@ -19,7 +19,7 @@ void tx_init_listbox(struct scroll_list
                        int mainattr, int borderattr, int selectattr,
                        int keyattr)
  {

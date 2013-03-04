@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptraf
-PKG_VERSION:=		3.0.0
+PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		377371c28ee3c21a76f7024920649ea8
+PKG_MD5SUM:=		004c2c005a1b78739e22bc49d33e244d
 PKG_DESCR:=		A console-based network monitoring program.
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		b79aae3055a51f8de5c0f1b8ca6cf619
 PKG_DESCR:=		IPsec management tools
 PKG_SECTION:=		net/security
-PKG_BUILDDEP:=		openssl
+PKG_BUILDDEP:=		openssl flex
 PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://ipsec-tools.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
