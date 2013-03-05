@@ -28,6 +28,8 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LOG4CXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LOG4CXX_DEV,${PKG_NAME}_dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LOG4CXX_DEV},${PKGSC_LOG4CXX_DEV}))
 
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
+
 log4cxx-install:
 	${INSTALL_DIR} ${IDIR_LOG4CXX}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.a ${IDIR_LOG4CXX}/usr/lib

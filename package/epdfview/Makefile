@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		poppler gtk+
 PKG_URL:=		http://trac.emma-soft.com/epdfview/wiki
 PKG_SITES:=		http://openadk.org/distfiles
 
+PKG_CFLINE_EPDFVIEW:=  depends on ADK_BROKEN
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,EPDFVIEW,epdfview,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

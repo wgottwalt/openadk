@@ -25,6 +25,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FORKED_DAAPD,forked-daapd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-levent
+
 forked-daapd-install:
 	$(INSTALL_DIR) $(IDIR_FORKED_DAAPD)/etc
 	$(CP) ./files/forked-daapd.conf \
