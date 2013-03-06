@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.7.6
+PKG_VERSION:=		1.7.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bf8ce4b6bd8d807719a531d01a605bef
+PKG_MD5SUM:=		17fe81c30fe0f785b2100ebadb3dc580
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
 PKG_DEPENDS:=		zlib apr apr-util libiconv libexpat libsqlite neon
 PKG_BUILDDEP:=		apr-util expat apr zlib libiconv sqlite neon
-PKG_SITES:=		http://apache.lauf-forum.at/subversion/
 PKG_URL:=		http://subversion.apache.org/
+PKG_SITES:=		http://artfiles.org/apache.org/subversion/
 
 include ${TOPDIR}/mk/package.mk
 
