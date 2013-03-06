@@ -4,14 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pacemaker
-PKG_VERSION:=		1.1.7
+PKG_VERSION:=		1.1.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		818682b8d937e6c6a6e5f999528328a5
+PKG_MD5SUM:=		3aaa95da2bdce96e0c244a2fb0e8b1e3
 PKG_DESCR:=		scalable High-Availability cluster resource manager
 PKG_SECTION:=		ha
 PKG_BUILDDEP:=		resource-agents cluster-glue pam gnutls corosync libtool
 PKG_DEPENDS:=		python2 python2-readline python2-bzip2 cluster-glue libuuid
-PKG_DEPENDS+=		bash resource-agents pam libgnutls glib libxslt libxml2 libltdl
+PKG_DEPENDS+=		bash resource-agents pam libgnutls glib libxslt libxml2 libltdl librt
 PKG_URL:=		http://www.clusterlabs.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -22,27 +22,17 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PACEMAKER,pacemaker,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-# disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
 CONFIGURE_ARGS+=	--disable-fatal-warnings \
 			--with-corosync \
 			--without-ais \
 			--without-heartbeat
 CONFIGURE_ENV+=		ac_cv_path_HELP2MAN=''
-CFLAGS_FOR_BUILD+=	-I$(STAGING_DIR)/usr/include/heartbeat
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/heartbeat
-
-pre-configure:
-	$(SED) "s#@@STAGING_DIR@@#$(STAGING_DIR)#" $(WRKBUILD)/configure
 
 pacemaker-install:
 	$(INSTALL_DIR) $(IDIR_PACEMAKER)/usr/lib/heartbeat
 	$(INSTALL_DIR) $(IDIR_PACEMAKER)/usr/lib/ocf
 	$(CP) $(WRKINST)/usr/lib/lib*.so* \
 		$(IDIR_PACEMAKER)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/heartbeat/* \
-		$(IDIR_PACEMAKER)/usr/lib/heartbeat
 	$(CP) $(WRKINST)/usr/lib/ocf/* \
 		$(IDIR_PACEMAKER)/usr/lib/ocf
 	$(INSTALL_DIR) $(IDIR_PACEMAKER)/usr/share/pacemaker
