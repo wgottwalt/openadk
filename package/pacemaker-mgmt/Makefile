@@ -3,44 +3,35 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		Pacemaker-Python-GUI
-PKG_VERSION:=		2.1.0
+PKG_NAME:=		pacemaker-mgmt
+PKG_VERSION:=		2.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		22379f78409cec9df10c25983783ef6c
-PKG_DESCR:=		Pacemaker GUI
+PKG_MD5SUM:=		be16a38588d1c518f53e64e7e48e1c90
+PKG_DESCR:=		Pacemaker management daemon
 PKG_SECTION:=		ha
-PKG_BUILDDEP:=		pacemaker gnutls pam
+PKG_BUILDDEP:=		pacemaker gnutls pam python2
 PKG_URL:=		http://hg.clusterlabs.org/pacemaker/pygui/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_CFLINE_PACEMAKER_PYTHON_GUI:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_CFLINE_PACEMAKER_MGMTD:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 
-PKG_SUBPKGS:=		PACEMAKER_PYTHON_GUI PACEMAKER_MGMTD
+PKG_SUBPKGS:=		PACEMAKER_MGMTD
 PKGSD_PACEMAKER_MGMTD:=	Management daemon for Pacemaker GUI
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PACEMAKER_PYTHON_GUI,pacemaker-python-gui,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PACEMAKER_MGMTD,pacemaker-mgmtd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+include $(TOPDIR)/mk/python.mk
+
+CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 CONFIGURE_ARGS+=	--with-initdir=/etc/init.d \
 			--with-ocf-root=/usr/lib/ocf \
+			--without-ais-support \
 			--disable-fatal-warnings
 TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/python2.7 \
 			-I$(STAGING_DIR)/usr/include/pacemaker \
 			-I$(STAGING_DIR)/usr/include/heartbeat
-
-pacemaker-python-gui-install:
-	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/bin
-	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/lib/heartbeat-gui
-	$(INSTALL_DIR) $(IDIR_PACEMAKER_PYTHON_GUI)/usr/share/heartbeat-gui
-	$(CP) $(WRKINST)/usr/lib/heartbeat-gui/* \
-		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/lib/heartbeat-gui
-	$(CP) $(WRKINST)/usr/share/heartbeat-gui/* \
-		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/share/heartbeat-gui
-	$(CP) $(WRKINST)/usr/bin/*_gui \
-		$(IDIR_PACEMAKER_PYTHON_GUI)/usr/bin
 
 pacemaker-mgmtd-install:
 	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMTD)/usr/lib
