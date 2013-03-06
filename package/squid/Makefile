@@ -19,9 +19,9 @@ PKG_NEED_CXX:=		1
 PKG_ARCH_DEPENDS:=	!avr32
 
 PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
-PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_PASSWORD
-PKG_SUBPKGS+=		SQUID_MOD_EXTERNAL_ACL_IP_USER SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
-PKG_SUBPKGS+=		SQUID_MOD_NTLM_AUTH_FAKEAUTH SQUID_MOD_BASIC_AUTH_LDAP
+PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_FILE
+PKG_SUBPKGS+=		SQUID_MOD_EXTERNAL_ACL_FILE_USERIP SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
+PKG_SUBPKGS+=		SQUID_MOD_NTLM_AUTH_FAKE SQUID_MOD_BASIC_AUTH_LDAP
 
 PKGSS_SQUID_MOD_BASIC_AUTH_LDAP:=	libopenldap
 PKGSB_SQUID_MOD_BASIC_AUTH_LDAP:=	openldap
@@ -44,13 +44,13 @@ ifeq (${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_SMB}${ADK_PACKAGE_SQUID_MOD_BASIC_AUTH_
 BASIC_AUTH_HELPERS:=	none
 endif
 
-ifneq (${ADK_PACKAGE_SQUID_MOD_DIGEST_AUTH_PASSWORD},)
-DIGEST_AUTH_HELPERS:=	password
+ifneq (${ADK_PACKAGE_SQUID_MOD_DIGEST_AUTH_FILE},)
+DIGEST_AUTH_HELPERS:=	file
 else
 DIGEST_AUTH_HELPERS:=	none
 endif
-ifneq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_IP_USER},)
-EXTERNAL_ACL_HELPERS+=	ip_user
+ifneq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_FILE_USERIP},)
+EXTERNAL_ACL_HELPERS+=	file_userip
 endif
 ifneq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP},)
 EXTERNAL_ACL_HELPERS+=	unix_group
@@ -59,13 +59,15 @@ ifeq (${ADK_PACKAGE_SQUID_MOD_EXTERNAL_ACL_IP_USER}${ADK_PACKAGE_SQUID_MOD_EXTER
 EXTERNAL_ACL_HELPERS:=	none
 endif
 
-ifneq (${ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_FAKEAUTH},)
-NTLM_AUTH_HELPERS+=	fakeauth
+ifneq (${ADK_PACKAGE_SQUID_MOD_NTLM_AUTH_FAKE},)
+NTLM_AUTH_HELPERS+=	fake
 else
 NTLM_AUTH_HELPERS+=	none
 endif
 
 include ${TOPDIR}/mk/package.mk
+
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
 
 define PKG_mod_template
 
@@ -82,20 +84,20 @@ $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,${PKG_NAME}-mod-basic-a
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-ncsa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_LDAP,${PKG_NAME}-mod-basic-auth-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,${PKG_NAME}-mod-digest-auth-password,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_FILE,${PKG_NAME}-mod-digest-auth-file,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,${PKG_NAME}-mod-ntlm-auth-fakeauth,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKE,${PKG_NAME}-mod-ntlm-auth-fake,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,getpwname_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,ldap))
-$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_NCSA,ncsa_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_SMB,smb_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_DIGEST_AUTH_PASSWORD,digest_pw_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,ip_user_check))
+$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,basic_getpwnam_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,basic_ldap_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_NCSA,basic_ncsa_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_SMB,basic_smb_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_DIGEST_AUTH_FILE,digest_pw_file))
+$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_FILE_USERIP,file_userip))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,squid_unix_group))
-$(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKEAUTH,fakeauth_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,ext_unix_group_acl))
+$(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKE,fake_auth))
 
 TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
