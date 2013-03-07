@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.8.3
+PKG_VERSION:=		1.8.20.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		79964868c124a921e71fd568fbc9290f
+PKG_MD5SUM:=		99204257de80a42c4e287fc93dfe714a
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		phone
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
@@ -19,7 +19,7 @@ PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	!cris
 
-PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS ASTERISK_CHAN_MGCP
+PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS
 PKG_SUBPKGS+=		ASTERISK_CHAN_SKINNY ASTERISK_CHAN_IAX2 ASTERISK_CODEC_SPEEX ASTERISK_CODEC_GSM
 PKG_SUBPKGS+=		ASTERISK_PBX_DUNDI ASTERISK_RES_AGI
 PKGSB_ASTERISK_CODEC_SPEEX:=	speex
@@ -37,7 +37,7 @@ $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${
 $(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_ASTERISK_SOUNDS},${PKGSD_ASTERISK_SOUNDS},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_MGCP},${PKG_SECTION}))
+#$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_MGCP},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_SKINNY},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_IAX2},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CODEC_SPEEX},${PKG_SECTION}))
@@ -117,8 +117,8 @@ pre-build:
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \
-	tar xzf asterisk-core-sounds-en-gsm-1.4.20.tar.gz ; \
-	rm asterisk-core-sounds-en-gsm-1.4.20.tar.gz
+	tar xzf asterisk-core-sounds-en-gsm-1.4.22.tar.gz ; \
+	rm asterisk-core-sounds-en-gsm-1.4.22.tar.gz
 
 do-install:
 	$(CP) $(WRKINST)/* $(IDIR_ASTERISK)
