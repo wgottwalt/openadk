@@ -4,17 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pango
-PKG_VERSION:=		1.33.7
+PKG_VERSION:=		1.28.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0dcdae60523229c20ee6551345206988
+PKG_MD5SUM:=		22ad1c8d3fda7e73b0798035f3dd96bc
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libXft glib cairo libstdcxx harfbuzz fontconfig
 PKG_URL:=		http://www.pango.org/
-PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.33/}
+PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
 PKG_NEED_CXX:=		1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+#DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SUBPKGS:=		PANGO PANGO_DEV
 PKGSC_PANGO_DEV:=	devel
