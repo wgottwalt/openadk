@@ -1,6 +1,6 @@
---- nspr-4.8.2.orig/mozilla/nsprpub/config/Makefile.in	2009-03-03 23:04:23.000000000 +0100
-+++ nspr-4.8.2/mozilla/nsprpub/config/Makefile.in	2010-05-02 12:25:27.673464050 +0200
-@@ -145,7 +145,7 @@ endif
+--- nspr-4.9.5.orig/mozilla/nsprpub/config/Makefile.in	2012-11-14 00:17:57.000000000 +0100
++++ nspr-4.9.5/mozilla/nsprpub/config/Makefile.in	2013-02-27 16:29:38.000000000 +0100
+@@ -113,7 +113,7 @@ endif
  
  $(OBJDIR)/%$(PROG_SUFFIX): $(OBJDIR)/%.$(OBJ_SUFFIX)
  	@$(MAKE_OBJDIR)

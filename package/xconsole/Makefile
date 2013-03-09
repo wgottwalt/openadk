@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c617acec432901a3c1a2b23b022624cb
 PKG_DESCR:=		X console app
 PKG_SECTION:=		x11/apps
+PKG_BUILDDEP:=		libXaw
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

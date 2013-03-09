@@ -1,6 +1,6 @@
 --- ppp-2.4.5.orig/include/linux/if_pppol2tp.h	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/include/linux/if_pppol2tp.h	2010-08-29 19:36:29.823658423 +0200
-@@ -32,6 +32,20 @@ struct pppol2tp_addr
++++ ppp-2.4.5/include/linux/if_pppol2tp.h	2013-03-04 12:38:54.000000000 +0100
+@@ -32,6 +32,46 @@ struct pppol2tp_addr
  	__u16 d_tunnel, d_session;	/* For sending outgoing packets */
  };
  
@@ -16,6 +16,32 @@
 +
 +	__u32 s_tunnel, s_session;	/* For matching incoming packets */
 +	__u32 d_tunnel, d_session;	/* For sending outgoing packets */
++};
++
++/* Structure used to connect() the socket to a particular tunnel UDP
++ *  * socket over IPv6.
++ *   */
++struct pppol2tpin6_addr {
++       __kernel_pid_t  pid;            /* pid that owns the fd.
++                                        * 0 => current */
++       int     fd;                     /* FD of UDP socket to use */
++
++       __u16 s_tunnel, s_session;      /* For matching incoming packets */
++       __u16 d_tunnel, d_session;      /* For sending outgoing packets */
++
++       struct sockaddr_in6 addr;       /* IP address and port to send to */
++};
++
++
++struct pppol2tpv3in6_addr {
++       __kernel_pid_t  pid;            /* pid that owns the fd.
++                                        * 0 => current */
++       int     fd;                     /* FD of UDP or IP socket to use */
++
++       __u32 s_tunnel, s_session;      /* For matching incoming packets */
++       __u32 d_tunnel, d_session;      /* For sending outgoing packets */
++
++       struct sockaddr_in6 addr;       /* IP address and port to send to */
 +};
 +
  /* Socket options:

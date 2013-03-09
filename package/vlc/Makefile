@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
-PKG_VERSION:=		2.0.3
+PKG_VERSION:=		2.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a7e79565e3df07dcf9abc6cad3ac26bb
+PKG_MD5SUM:=		4f959c0766ada8cea5a72c65fce94ebe
 PKG_DESCR:=		Media Player
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad
 PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
-PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/2.0.3/
+PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/2.0.5/
 
 PKG_ARCH_DEPENDS:=	!cris !avr32
 
@@ -23,6 +23,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-fPIC
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ENV+=		ac_cv_func_sched_getaffinity=no
 CONFIGURE_ARGS+=	--disable-lua \
 			--disable-dbus \

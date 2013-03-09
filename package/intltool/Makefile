@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		intltool
-PKG_VERSION:=		0.41.1
+PKG_VERSION:=		0.50.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d6c91bf06681919ccfdf3624035b75dc
+PKG_MD5SUM:=		23fbd879118253cb99aeac067da5f591
 PKG_DESCR:=		Internationalization Tool Collection
 PKG_SECTION:=		misc
-PKG_SITES:=		http://edge.launchpad.net/intltool/trunk/0.41.1/+download/
+PKG_SITES:=		https://launchpad.net/intltool/trunk/0.50.2/+download/
 
 include $(TOPDIR)/mk/package.mk
 

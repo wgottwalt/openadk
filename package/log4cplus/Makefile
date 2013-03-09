@@ -18,6 +18,8 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
+TARGET_LDFLAGS+=        -L$(STAGING_DIR)/usr/lib64
+
 $(eval $(call PKG_template,LOG4CPLUS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:

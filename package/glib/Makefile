@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.35.7
-PKG_EXTRAVER:=		2.35
+PKG_VERSION:=		2.28.1
+PKG_EXTRAVER:=		2.28
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d9f36f01a24fcfd568c7e45ceabcec90
+PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libintl libiconv libpthread
@@ -16,7 +16,7 @@ PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+#DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SUBPKGS:=		GLIB GLIB_DEV
 PKGSC_GLIB_DEV:=	devel

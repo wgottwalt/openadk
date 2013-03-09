@@ -8,8 +8,8 @@ PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		huawei modem control
 PKG_SECTION:=		utils
-PKG_DEPENDS:=		libusb
-PKG_BUILDDEP:=		libusb
+PKG_DEPENDS:=		libusb libusb-compat
+PKG_BUILDDEP:=		libusb libusb-compat
 
 PKG_ARCH_DEPENDS:=	!avr32
 

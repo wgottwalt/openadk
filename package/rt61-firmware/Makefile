@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d4c690c93b470bc9a681297c2adc6281
 PKG_DESCR:=		firmware for rt61/rt2601 wireless cards
 PKG_SECTION:=		wifi
-PKG_SITES:=		http://www.ralinktech.com.tw/data/
+PKG_SITES:=		http://www.openadk.org/distfiles/
 
 DISTFILES:=		RT61_Firmware_V1.2.zip
 WRKDIST=		${WRKDIR}/RT61_Firmware_V1.2

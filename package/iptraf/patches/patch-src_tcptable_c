@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- iptraf-3.0.0.orig/src/tcptable.c	2005-09-13 08:42:54.000000000 +0200
-+++ iptraf-3.0.0/src/tcptable.c	2009-05-21 23:07:02.000000000 +0200
+--- iptraf-3.0.1.orig/src/tcptable.c	2005-09-13 08:42:54.000000000 +0200
++++ iptraf-3.0.1/src/tcptable.c	2013-03-04 11:38:22.000000000 +0100
 @@ -17,6 +17,7 @@ details.
     
  ***/
@@ -29,7 +29,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  
      /*
       * Set raw port numbers
-@@ -596,12 +597,10 @@ void updateentry(struct tcptable *table,
+@@ -596,14 +597,10 @@ void updateentry(struct tcptable *table,
      tableentry->spanbr += bcount;
  
      if (opts->mac) {
@@ -40,6 +40,8 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
              convmacaddr(((struct ethhdr *) packet)->h_source, newmacaddr);
 -        } else if (linkproto == LINK_FDDI) {
 -            convmacaddr(((struct fddihdr *) packet)->saddr, newmacaddr);
-         } else if (linkproto == LINK_TR) {
-             convmacaddr(((struct trh_hdr *) packet)->saddr, newmacaddr);
+-        } else if (linkproto == LINK_TR) {
+-            convmacaddr(((struct trh_hdr *) packet)->saddr, newmacaddr);
          }
+ 
+         if (tableentry->smacaddr[0] != '\0') {

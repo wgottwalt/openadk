@@ -24,7 +24,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	${MAKE} -C "${WRKBUILD}"/tests check
+	#${MAKE} -C "${WRKBUILD}"/tests check
 	${MAKE} -C "${WRKBUILD}" version.h
 	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} ${KERNEL_MAKE_OPTS} \
 			 M="${WRKBUILD}" modules
