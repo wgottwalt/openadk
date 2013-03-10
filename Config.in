@@ -95,7 +95,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.7.3"
+	prompt "3.8.2"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
@@ -106,8 +106,8 @@ depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_
 
 choice
 prompt "Kernel Version"
-config ADK_KERNEL_VERSION_3_8_1
-	prompt "3.8.1"
+config ADK_KERNEL_VERSION_3_8_2
+	prompt "3.8.2"
 	boolean
 
 endchoice
