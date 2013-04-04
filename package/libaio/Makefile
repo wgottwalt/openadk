@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.kernel.org
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_ARCH_DEPENDS:=	x86 x86_64
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBAIO,libaio,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

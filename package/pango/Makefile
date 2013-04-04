@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		22ad1c8d3fda7e73b0798035f3dd96bc
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libXft glib cairo libstdcxx harfbuzz fontconfig
+PKG_BUILDDEP:=		libXft glib cairo libstdcxx fontconfig
 PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
 PKG_NEED_CXX:=		1
@@ -35,14 +35,11 @@ CONFIGURE_ENV+=		ac_cv_path_EGREP="grep -E"
 
 pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
-	$(INSTALL_DIR) $(IDIR_PANGO)/usr/bin
-	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.8.0/modules
+	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
 	$(INSTALL_DATA) ./files/pango.modules $(IDIR_PANGO)/etc/pango
 	$(CP) $(WRKINST)/usr/lib/libpango*.so* $(IDIR_PANGO)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/pango/1.8.0/modules/*.so \
-		$(IDIR_PANGO)/usr/lib/pango/1.8.0/modules
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/pango-querymodules \
-		$(IDIR_PANGO)/usr/bin
+	$(CP) $(WRKINST)/usr/lib/pango/1.6.0/modules/*.so \
+		$(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
 
 pango-dev-install:
 	$(INSTALL_DIR) $(IDIR_PANGO_DEV)/usr/include
