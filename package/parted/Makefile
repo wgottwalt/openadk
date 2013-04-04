@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		parted
-PKG_VERSION:=		3.0
+PKG_VERSION:=		3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a94e84a9b9944715c4453f82ccc639bf
+PKG_MD5SUM:=		5d89d64d94bcfefa9ce8f59f4b81bdcb
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		fs
-PKG_DEPENDS:=		libuuid libreadline libpthread
+PKG_DEPENDS:=		libuuid libreadline libpthread libgcc
 PKG_BUILDDEP:=		util-linux readline
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		${MASTER_SITE_GNU:=parted/}
+
+DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
