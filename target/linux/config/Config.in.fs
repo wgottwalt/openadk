@@ -192,6 +192,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	prompt "kmod-fs-xfs....................... XFS filesystem support (module)"
 	tristate
 	select ADK_KERNEL_EXPORTFS
+	select ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
 	depends on !ADK_KERNEL_XFS_FS
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX && !ADK_LINUX_AVR32
 	default n

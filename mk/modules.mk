@@ -987,9 +987,10 @@ $(eval $(call KMOD_template,CRYPTO_MICHAEL_MIC,crypto-michael-mic,\
     $(MODULES_DIR)/kernel/crypto/michael_mic \
 ,11))
 
-#$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
-#    $(MODULES_DIR)/kernel/crypto/crc32c \
-#,11))
+$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
+    $(MODULES_DIR)/kernel/lib/libcrc32c \
+    $(MODULES_DIR)/kernel/crypto/crc32c \
+,11))
 
 $(eval $(call KMOD_template,OCF_CRYPTOSOFT,ocf-cryptosoft,\
     ${MODULES_DIR}/kernel/crypto/ocf/cryptosoft \

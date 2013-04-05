@@ -1,5 +1,5 @@
---- xfsprogs-3.1.4.orig/fsr/xfs_fsr.c	2010-10-01 19:33:38.000000000 +0200
-+++ xfsprogs-3.1.4/fsr/xfs_fsr.c	2011-01-22 20:34:12.465325200 +0100
+--- xfsprogs-3.1.10.orig/fsr/xfs_fsr.c	2012-12-13 22:29:24.000000000 +0100
++++ xfsprogs-3.1.10/fsr/xfs_fsr.c	2013-04-04 16:39:27.000000000 +0200
 @@ -35,7 +35,6 @@
  #include <sys/wait.h>
  #include <sys/vfs.h>
@@ -8,7 +8,7 @@
  
  
  #ifndef XFS_XFLAG_NODEFRAG
-@@ -1003,6 +1002,7 @@ fsr_setup_attr_fork(
+@@ -1032,6 +1031,7 @@ fsr_setup_attr_fork(
  	 * use the old method if we have attr1 or the kernel does not yet
  	 * support passing the fork offset in the bulkstat data.
  	 */
@@ -16,7 +16,7 @@
  	if (!(fsgeom.flags & XFS_FSOP_GEOM_FLAGS_ATTR2) ||
  	    bstatp->bs_forkoff == 0) {
  		/* attr1 */
-@@ -1013,6 +1013,7 @@ fsr_setup_attr_fork(
+@@ -1042,6 +1042,7 @@ fsr_setup_attr_fork(
  		}
  		goto out;
  	}
@@ -24,7 +24,7 @@
  
  	/* attr2 w/ fork offsets */
  
-@@ -1050,6 +1051,7 @@ fsr_setup_attr_fork(
+@@ -1079,6 +1080,7 @@ fsr_setup_attr_fork(
  		 * If there is no attribute, then we need to create one to get
  		 * an attribute fork at the default location.
  		 */
@@ -32,7 +32,7 @@
  		if (!tbstat.bs_forkoff) {
  			ret = fsetxattr(tfd, name, "XX", 2, XATTR_CREATE);
  			if (ret) {
-@@ -1058,7 +1060,7 @@ fsr_setup_attr_fork(
+@@ -1087,7 +1089,7 @@ fsr_setup_attr_fork(
  			}
  			continue;
  		}
@@ -41,7 +41,7 @@
  		/*
  		 * make a progress check so we don't get stuck trying to extend
  		 * a large btree form attribute fork.
-@@ -1097,11 +1099,13 @@ fsr_setup_attr_fork(
+@@ -1126,11 +1128,13 @@ fsr_setup_attr_fork(
  		}
  
  		/* we need to grow the attr fork, so create another attr */

@@ -4,18 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
-PKG_VERSION:=		3.1.5
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		b1db37749e2b4149a0dd178abff956be
+PKG_VERSION:=		3.1.10
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d6159f7a664d95b4c150d580399d4400
 PKG_DESCR:=		Utilities for XFS filesystems
 PKG_SECTION:=		fs
 PKG_BUILDDEP:=		e2fsprogs util-linux
-PKG_DEPENDS:=		libuuid libpthread libblkid
+PKG_DEPENDS:=		libuuid libpthread libblkid librt libgcc
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
-PKG_CFLINE_XFSPROGS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+#PKG_CFLINE_XFSPROGS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_TARGET_DEPENDS:=	!atmel-ngw100
 
 include ${TOPDIR}/mk/package.mk
