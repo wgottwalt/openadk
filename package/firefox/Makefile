@@ -83,9 +83,9 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-libjpeg-turbo \
 			--disable-elf-hack
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
-XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3"
+XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 
 firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin

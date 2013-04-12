@@ -1,0 +1,20 @@
+--- mozilla-release.orig/js/src/xpconnect/src/xpcconvert.cpp	2011-07-08 03:15:26.000000000 +0200
++++ mozilla-release/js/src/xpconnect/src/xpcconvert.cpp	2013-04-04 16:30:18.000000000 +0200
+@@ -1842,17 +1842,7 @@ XPCConvert::JSErrorToXPCException(XPCCal
+ 
+ /***************************************************************************/
+ 
+-/*
+-** Note: on some platforms va_list is defined as an array,
+-** and requires array notation.
+-*/
+-#ifdef HAVE_VA_COPY
+-#define VARARGS_ASSIGN(foo, bar)	VA_COPY(foo,bar)
+-#elif defined(HAVE_VA_LIST_AS_ARRAY)
+-#define VARARGS_ASSIGN(foo, bar)	foo[0] = bar[0]
+-#else
+ #define VARARGS_ASSIGN(foo, bar)	(foo) = (bar)
+-#endif
+ 
+ // We assert below that these formats all begin with "%i".
+ const char* XPC_ARG_FORMATTER_FORMAT_STRINGS[] = {"%ip", "%iv", "%is", nsnull};

@@ -1,5 +1,14 @@
 --- mozilla-release.orig/configure	2011-07-08 03:30:27.000000000 +0200
-+++ mozilla-release/configure	2013-02-07 16:38:49.000000000 +0100
++++ mozilla-release/configure	2013-04-04 16:11:25.000000000 +0200
+@@ -12617,7 +12617,7 @@ fi
+ 
+ if test "x$ac_cv_va_val_copy" = "xno"; then
+    cat >> confdefs.h <<\EOF
+-#define HAVE_VA_LIST_AS_ARRAY 1
++#define HAVE_VA_LIST_AS_ARRAY 0
+ EOF
+ 
+ fi
 @@ -23504,6 +23504,9 @@ fi
      fi
  fi
