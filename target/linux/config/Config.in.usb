@@ -110,6 +110,7 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_INTEL_ATOM
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  The Open Host Controller Interface (OHCI) is a standard for accessing
