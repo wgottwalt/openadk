@@ -90,8 +90,11 @@ case "$IF_WIRELESS_MODE" in
 				exit 1
 			}
 			driver=nl80211
-			iw dev ${IFACE} set channel $IF_WIRELESS_CHANNEL
-			iw dev ${IFACE} connect $IF_WIRELESS_SSID
+			[ $sec -eq 2 ] && {
+				iw dev ${IFACE} connect $IF_WIRELESS_SSID key d:0:$IF_WIRELESS_PASSPHRASE
+			} || {
+				iw dev ${IFACE} connect $IF_WIRELESS_SSID
+			}
 		}
 		[ $wpa2 -eq 1 ] && {
 			[ -x /usr/sbin/wpa_supplicant ] || {
