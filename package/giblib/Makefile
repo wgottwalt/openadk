@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c810ef5389baf24882a1caca2954385e
 PKG_DESCR:=		imlib2 wrapper library
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		imlib2
+PKG_BUILDDEP:=		imlib2
 PKG_SITES:=		http://linuxbrit.co.uk/downloads/
 
 include $(TOPDIR)/mk/package.mk

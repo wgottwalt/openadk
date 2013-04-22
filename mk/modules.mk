@@ -71,7 +71,6 @@ $(eval $(call KMOD_template,RFKILL,rfkill,\
 ,10))
 
 $(eval $(call KMOD_template,MAC80211,mac80211,\
-	$(MODULES_DIR)/kernel/net/wireless/lib80211 \
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
 ,15, kmod-crypto-arc4 kmod-crypto-ecb))
