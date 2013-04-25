@@ -81,6 +81,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-crashreporter \
 			--disable-updater \
 			--disable-libjpeg-turbo \
+			--disable-xpcom-fastload \
 			--disable-elf-hack
 
 TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32

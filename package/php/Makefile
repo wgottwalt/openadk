@@ -19,7 +19,7 @@ PKGSD_PHP_FASTCGI:=	PHP for FastCGI usage
 PKGSD_PHP_CLI:=		PHP CLI
 
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
-PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE MOD_SOCKETS MOD_XML MOD_ZLIB
+PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE MOD_SOCKETS MOD_XML MOD_SIMPLEXML MOD_ZLIB
 
 PKGFD_MOD_BZ2:=		Bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
@@ -58,6 +58,7 @@ PKGFD_MOD_SOCKETS:=	Socket support
 PKGFD_MOD_XML:=		XML support
 PKGFB_MOD_XML:=		expat
 PKGFS_MOD_XML:=		libexpat
+PKGFD_MOD_SIMPLEXML:=		simple XML support
 PKGFD_MOD_ZLIB:=	ZLIB support
 PKGFB_MOD_ZLIB:=	zlib
 PKGFS_MOD_ZLIB:=	zlib
@@ -90,10 +91,8 @@ PKG_CONFIGURE_OPTS:=	\
 	--disable-mbstring \
 	--disable-mbregex \
 	--disable-phar \
-	--disable-libxml \
 	--disable-short-tags \
 	--disable-ctype \
-	--disable-simplexml \
 	--disable-soap \
 	--disable-fileinfo \
 	--disable-tokenizer \
@@ -193,6 +192,11 @@ PKG_CONFIGURE_OPTS+=	--enable-xml=shared,"$(STAGING_TARGET_DIR)/usr" \
 else
 PKG_CONFIGURE_OPTS+=	--disable-xml
 endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_SIMPLEXML),)
+PKG_CONFIGURE_OPTS+=	--enable-simplexml=shared --enable-libxml
+else
+PKG_CONFIGURE_OPTS+=	--disable-simplexml --disable-libxml
+endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_ZLIB),)
 PKG_CONFIGURE_OPTS+=	--with-zlib=shared,"$(STAGING_TARGET_DIR)/usr"
 else
@@ -213,6 +217,7 @@ $(eval $(call PKG_template,PHP_MOD_SNMP,php-mod-snmp,$(PKG_VERSION)-${PKG_RELEAS
 $(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SQLITE,php-mod-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_XML,php-mod-xml,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_MOD_SIMPLEXML,php-mod-simplexml,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_ZLIB,php-mod-zlib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,PHP_MOD_BZ2,bz2))
@@ -229,6 +234,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
 $(eval $(call PKG_mod_template,PHP_MOD_SNMP,snmp))
 $(eval $(call PKG_mod_template,PHP_MOD_SQLITE,pdo pdo_sqlite))
 $(eval $(call PKG_mod_template,PHP_MOD_XML,xml))
+$(eval $(call PKG_mod_template,PHP_MOD_SIMPLEXML,simplexml))
 $(eval $(call PKG_mod_template,PHP_MOD_ZLIB,zlib))
 
 INSTALL_STYLE:=		manual
