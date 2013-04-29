@@ -805,37 +805,41 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
 #    $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
 #,20, crypto-manager2))
 
-#$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
-#    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
-#,02))
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),4)
+$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
+    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
+,02))
 
-#$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
-#    $(MODULES_DIR)/kernel/crypto/pcompress \
-#,03))
+$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
+    $(MODULES_DIR)/kernel/crypto/pcompress \
+,03))
 
-#$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
-#    $(MODULES_DIR)/kernel/crypto/aead \
-#,03))
+$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
+    $(MODULES_DIR)/kernel/crypto/aead \
+,03))
 
-#$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
-#    $(MODULES_DIR)/kernel/crypto/crypto_hash \
-#,04))
+$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
+    $(MODULES_DIR)/kernel/crypto/crypto_hash \
+,04))
 
-#$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
-#    $(MODULES_DIR)/kernel/crypto/crypto_wq \
-#    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
-#,05))
+$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
+    $(MODULES_DIR)/kernel/crypto/crypto_wq \
+    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
+,05))
 
-#$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
-#    $(MODULES_DIR)/kernel/crypto/rng \
-#    $(MODULES_DIR)/kernel/crypto/krng \
-#,06))
+$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
+    $(MODULES_DIR)/kernel/crypto/rng \
+    $(MODULES_DIR)/kernel/crypto/krng \
+,06))
 
-#$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
-#    $(MODULES_DIR)/kernel/crypto/cryptomgr \
-#    $(MODULES_DIR)/kernel/crypto/eseqiv \
-#    $(MODULES_DIR)/kernel/crypto/chainiv \
-#,07))
+$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
+    $(MODULES_DIR)/kernel/crypto/cryptomgr \
+    $(MODULES_DIR)/kernel/crypto/eseqiv \
+    $(MODULES_DIR)/kernel/crypto/chainiv \
+,07))
+endif
+endif
 
 $(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
     $(MODULES_DIR)/kernel/crypto/authenc \
@@ -931,9 +935,13 @@ $(eval $(call KMOD_template,CRYPTO_SERPENT,crypto-serpent,\
     $(MODULES_DIR)/kernel/crypto/serpent_generic \
 ,11))
 
-#$(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
-#    $(MODULES_DIR)/kernel/crypto/aes_generic \
-#,10))
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),4)
+$(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
+    $(MODULES_DIR)/kernel/crypto/aes_generic \
+,10))
+endif
+endif
 
 $(eval $(call KMOD_template,CRYPTO_AES_586,crypto-aes-586,\
     $(MODULES_DIR)/kernel/arch/x86/crypto/aes-i586 \
