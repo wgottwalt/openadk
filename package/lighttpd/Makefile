@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.31
+PKG_VERSION:=		1.4.32
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7907b7167d639b8a8daab97e223249d5
+PKG_MD5SUM:=		d2eaf2ed77670bd25597f61c3a28c074
 PKG_DESCR:=		a lightweight web server
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libgcc
