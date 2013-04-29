@@ -4,7 +4,6 @@ set -e
 [ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
 
 [ "$IF_WIRELESS_SSID" ] || exit 1
-[ "$IF_WIRELESS_CHANNEL" ] || exit 1
 [ "$IF_WIRELESS_HWMODE" ] || IF_WIRELESS_HWMODE=g
 [ "$IF_WIRELESS_EXTENSION" ] || IF_WIRELESS_EXTENSION=0
 
