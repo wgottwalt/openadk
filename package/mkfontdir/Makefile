@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d13d01127f88eb50f5c6c3d47ae585e5
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/apps
+PKG_DEPENDS:=		mkfontscale
 PKG_SITES:=		http://www.x.org/releases/X11R7.6/src/everything/
 PKG_OPTS:=		noscripts
 
