@@ -6,11 +6,12 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ImageMagick
 PKG_VERSION:=		6.7.6
 PKG_EXTRAVER:=		1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8134257e3fbb43cc06fb32a6d725d3d0
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv libtool e2fsprogs
+PKG_BUILDDEP+=		pango
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
 PKG_NEED_CXX:=		1
