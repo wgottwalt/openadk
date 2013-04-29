@@ -582,6 +582,7 @@ config ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
 	prompt "kmod-crypto-michael-mic.............. Michael MIC keyed digest algorithm"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRYPTO_ALGAPI2
+	select ADK_KPACKAGE_KMOD_CRYPTO_HASH2
 	default n
 	help
 	  Michael MIC is used for message integrity protection in TKIP
