@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpc
-PKG_VERSION:=		0.22
+PKG_VERSION:=		0.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f96b55f7724adb8e8bb46b815265852c
+PKG_MD5SUM:=		2b2c093e80b37fc5717caf319986c52b
 PKG_DESCR:=		music player client
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmpdclient
 PKG_BUILDDEP:=		libmpdclient
-PKG_URL:=		http://mpd.wikia.com/wiki/Client:Mpc
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
+PKG_URL:=		http://www.musicpd.org/
+PKG_SITES:=		http://www.musicpd.org/download/mpc/0/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 

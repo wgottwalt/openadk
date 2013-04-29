@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.7
+PKG_VERSION:=		2.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f1a8cbbb4d52ace87df0f6a1097e7c8a
+PKG_MD5SUM:=		79f6c810c291fa4f382a92c8e25123de
 PKG_DESCR:=		library for interfacing MPD
 PKG_SECTION:=		libs
-PKG_URL:=		http://mpd.wikia.com/wiki/ClientLib:libmpdclient
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
+PKG_URL:=		http://www.musicpd.org/
+PKG_SITES:=		http://www.musicpd.org/download/libmpdclient/2/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_SUBPKGS:=		LIBMPDCLIENT LIBMPDCLIENT_DEV
 PKGSD_LIBMPDCLIENT_DEV:=headers for interfacing MPD
@@ -23,6 +25,7 @@ $(eval $(call PKG_template,LIBMPDCLIENT,libmpdclient,$(PKG_VERSION)-${PKG_RELEAS
 $(eval $(call PKG_template,LIBMPDCLIENT_DEV,libmpdclient-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBMPDCLIENT_DEV},${PKGSD_LIBMPDCLIENT_DEV},${PKGSC_LIBMPDCLIENT_DEV}))
 
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
+CONFIGURE_ARGS+=	--disable-documentation
 
 libmpdclient-install:
 	$(INSTALL_DIR) $(IDIR_LIBMPDCLIENT)/usr/lib

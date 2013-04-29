@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.16.7
+PKG_VERSION:=		0.17.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cbe09571fe1d0b3e83ac38d5b7629b16
+PKG_MD5SUM:=		ab408a61f49f215ce77ed0cf1deed6e1
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
 PKG_FDEPENDS:=		glib libstdcxx
 PKG_BUILDDEP:=		glib
-PKG_URL:=		http://mpd.wikia.com/wiki/Music_Player_Daemon_Wiki
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
+PKG_URL:=		http://www.musicpd.org/
+PKG_SITES:=		http://www.musicpd.org/download/mpd/0.17/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
