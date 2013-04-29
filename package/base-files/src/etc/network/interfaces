@@ -37,7 +37,6 @@ iface eth0 inet dhcp
 #auto wlan0
 #iface wlan0 inet dhcp
 #  wireless-ssid myap
-#  wireless-channel 11
 #  wireless-mode sta
 #  wireless-security wpa2
 #  wireless-passphrase xxxxxx
@@ -50,8 +49,8 @@ iface eth0 inet dhcp
 #  netmask 255.255.255.0
 #  broadcast +
 #  wireless-ssid myap
-#  wireless-channel 8
 #  wireless-mode ap
+#  wireless-channel 8
 #  wireless-security wpa2
 #  wireless-passphrase xxxxxxxx
 ##
