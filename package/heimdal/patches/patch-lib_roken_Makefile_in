@@ -1,6 +1,6 @@
---- heimdal-1.4.orig/lib/roken/Makefile.in	2010-09-13 09:24:23.000000000 +0200
-+++ heimdal-1.4/lib/roken/Makefile.in	2010-11-10 19:56:51.764995802 +0100
-@@ -726,9 +726,6 @@ getifaddrs-test$(EXEEXT): $(getifaddrs_t
+--- heimdal-1.5.2.orig/lib/roken/Makefile.in	2012-01-11 14:04:30.000000000 +0100
++++ heimdal-1.5.2/lib/roken/Makefile.in	2013-04-29 16:35:46.000000000 +0200
+@@ -747,9 +747,6 @@ getifaddrs-test$(EXEEXT): $(getifaddrs_t
  hex-test$(EXEEXT): $(hex_test_OBJECTS) $(hex_test_DEPENDENCIES) 
  	@rm -f hex-test$(EXEEXT)
  	$(LINK) $(hex_test_OBJECTS) $(hex_test_LDADD) $(LIBS)
@@ -10,7 +10,7 @@
  parse_bytes-test$(EXEEXT): $(parse_bytes_test_OBJECTS) $(parse_bytes_test_DEPENDENCIES) 
  	@rm -f parse_bytes-test$(EXEEXT)
  	$(LINK) $(parse_bytes_test_OBJECTS) $(parse_bytes_test_LDADD) $(LIBS)
-@@ -1977,18 +1974,18 @@ $(LTLIBOBJS) $(libroken_la_OBJECTS): rok
+@@ -2033,18 +2030,18 @@ $(LTLIBOBJS) $(libroken_la_OBJECTS): rok
  .hin.h:
  	cp $< $@
  

@@ -1,6 +1,6 @@
---- heimdal-1.4.orig/configure	2010-09-13 09:24:11.000000000 +0200
-+++ heimdal-1.4/configure	2011-01-11 18:51:09.154898347 +0100
-@@ -26892,7 +26892,7 @@ rm -fr conftest*
+--- heimdal-1.5.2.orig/configure	2012-01-11 14:04:10.000000000 +0100
++++ heimdal-1.5.2/configure	2013-04-29 16:35:46.000000000 +0200
+@@ -28318,7 +28318,7 @@ rm -fr conftest*
  fi
  
  if test "${krb_cv_compile_et_cross}" = yes ; then
@@ -9,7 +9,7 @@
  elif test "${krb_cv_compile_et}" = "yes"; then
      krb_cv_save_LIBS="${LIBS}"
    LIBS="${LIBS} -lcom_err"
-@@ -26928,6 +26928,7 @@ else
+@@ -28354,6 +28354,7 @@ else
      krb_cv_com_err="no"
  fi
  

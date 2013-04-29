@@ -34,7 +34,7 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-i386 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-i386 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -soundhw ac97 -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_HARDWARE_VBOX),y)
 	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
@@ -63,6 +63,6 @@ imageinstall: createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-i386 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-i386 -soundhw ac97 -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif

@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
-PKG_VERSION:=		2012.55
+PKG_VERSION:=		2013.58
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		44836e5a0419ba12557f9ea46880077e
+PKG_MD5SUM:=		8d3579bbbfcea48404a3219643076450
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
 PKG_URL:=		http://matt.ucc.asn.au/dropbear/
 PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
 PKG_SUBPKGS:=		DROPBEAR DBCONVERT

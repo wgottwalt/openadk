@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
-PKG_VERSION:=		1.4
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		31d08bbf47a77827fe97ef3f52b4c9c4
+PKG_VERSION:=		1.5.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
 PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
@@ -86,7 +86,7 @@ post-extract:
 	${MAKE} -C ${WRKBUILD}/include
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
-	${MAKE} -C ${WRKBUILD}/lib/editline
+	${MAKE} -C ${WRKBUILD}/lib/libedit
 	${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
 	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
 	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT) LDFLAGS="-all-static"
@@ -151,7 +151,7 @@ endif
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	# heimdal client libs
 	${INSTALL_DIR} ${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libeditline.so* \
+	${CP} ${WRKINST}/usr/lib/heimdal/libheimedit.so* \
 		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libsl.so* \
 		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal

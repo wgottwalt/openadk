@@ -1,16 +1,7 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dropbear-2012.55.orig/options.h	2012-02-23 14:47:06.000000000 +0100
-+++ dropbear-2012.55/options.h	2012-06-02 20:53:47.000000000 +0200
-@@ -144,7 +144,7 @@ much traffic. */
- #endif
- 
- /* Whether to do reverse DNS lookups. */
--#define DO_HOST_LOOKUP
-+/* #define DO_HOST_LOOKUP */
- 
- /* Whether to print the message of the day (MOTD). This doesn't add much code
-  * size */
-@@ -243,7 +243,7 @@ much traffic. */
+diff -Nur dropbear-2013.58.orig/options.h dropbear-2013.58/options.h
+--- dropbear-2013.58.orig/options.h	2013-04-18 16:58:14.000000000 +0200
++++ dropbear-2013.58/options.h	2013-04-29 14:28:47.000000000 +0200
+@@ -247,7 +247,7 @@
  /* The command to invoke for xauth when using X11 forwarding.
   * "-q" for quiet */
  #ifndef XAUTH_COMMAND
