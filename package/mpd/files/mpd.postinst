@@ -2,5 +2,5 @@
 . $IPKG_INSTROOT/etc/functions.sh
 gid=$(get_next_gid)
 add_group mpd $gid
-add_user mpd $(get_next_uid) $gid /mnt/media
+add_user mpd $(get_next_uid) $gid /music
 add_rcconf mpd
