@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXrender
-PKG_VERSION:=		0.9.6
+PKG_VERSION:=		0.9.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5dba047cf278e5ac77cd0f19f7195fb9
+PKG_MD5SUM:=		b6702e6f56f9d9103dc688f4336529a9
 PKG_DESCR:=		X11 rendering library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		renderproto libX11

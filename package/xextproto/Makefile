@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xextproto
-PKG_VERSION:=		7.1.2
+PKG_VERSION:=		7.2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Protocol Extensions headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		1e8a156cd209e66cd8290c96678e777a
+PKG_MD5SUM:=		9062d689f422fad1b8774c967d730f09
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

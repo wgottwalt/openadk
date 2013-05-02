@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-bitstream-100dpi
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		823c3c2a1a2307bdca5961145e3db37d
+PKG_MD5SUM:=		c27bf37e9b8039f93bd90b8131ed37ad
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

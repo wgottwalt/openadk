@@ -1,11 +1,10 @@
---- Mesa-7.8.1.orig/src/glsl/Makefile	2010-04-05 01:46:26.000000000 +0200
-+++ Mesa-7.8.1/src/glsl/Makefile	2010-05-21 17:17:54.621613561 +0200
-@@ -4,7 +4,7 @@ TOP = ../..
+--- Mesa-8.0.5.orig/src/glsl/Makefile	2012-10-24 21:03:59.000000000 +0200
++++ Mesa-8.0.5/src/glsl/Makefile	2013-04-30 12:25:40.000000000 +0200
+@@ -167,6 +167,6 @@ builtin_compiler: $(GLSL2_OBJECTS) $(OBJ
  
- include $(TOP)/configs/current
+ builtin_function.cpp: builtins/profiles/* builtins/ir/* builtins/tools/generate_builtins.py builtins/tools/texture_builtins.py builtin_compiler
+ 	@echo Regenerating builtin_function.cpp...
+-	$(PYTHON2) $(PYTHON_FLAGS) builtins/tools/generate_builtins.py ./builtin_compiler > builtin_function.cpp || rm -f builtin_function.cpp
++	$(PYTHON2) $(PYTHON_FLAGS) builtins/tools/generate_builtins.py builtin_compiler > builtin_function.cpp || rm -f builtin_function.cpp
  
--SUBDIRS = pp cl apps
-+SUBDIRS = pp cl
- 
- default install clean:
- 	@for dir in $(SUBDIRS) ; do \
+ -include depend

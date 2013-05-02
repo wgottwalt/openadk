@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		setxkbmap
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		24b2b316af406898f39be56205132bb2
+PKG_MD5SUM:=		57380d069021c6b7d873bfab803e3105
 PKG_DESCR:=		set keyboard utility
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libxkbfile
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

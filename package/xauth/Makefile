@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xauth
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2eb3cc3e4421e1b747c4ac16aac20cda
+PKG_MD5SUM:=		63c5fe6f8459ac08088958febc1db122
 PKG_DESCR:=		X authority file utility
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxext libxmu libgcc

@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		glproto
-PKG_VERSION:=		1.4.12
+PKG_VERSION:=		1.4.15
 PKG_RELEASE:=		1
 PKG_DESCR:=		OpenGL headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		c528c5903bb836b33a35863f97613c64
+PKG_MD5SUM:=		be7c4e3c289db480b9e1238c03637eb7
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

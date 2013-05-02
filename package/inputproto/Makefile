@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		inputproto
-PKG_VERSION:=		2.0.1
+PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Input Extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		796829adecc14a78bfef8e119e6e9c63
+PKG_MD5SUM:=		e0047823230413e67d74e92af77fbe58
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

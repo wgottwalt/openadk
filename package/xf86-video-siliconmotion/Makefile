@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-siliconmotion
-PKG_VERSION:=		1.7.4
+PKG_VERSION:=		1.7.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dc45da59f3d99cd0cdcff960b12156c8
+PKG_MD5SUM:=		b71859e15fc62563d346c7bccc0ef82e
 PKG_DESCR:=		X11 driver for Silicon Motion VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

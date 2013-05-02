@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libdrm
-PKG_VERSION:=		2.4.22
+PKG_VERSION:=		2.4.44
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		baf6e005001c8cf739b499bcf2ca9dfb
+PKG_MD5SUM:=		205fbaedfab827a874265420d38547f0
 PKG_DESCR:=		DRM library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libpthread-stubs cairo

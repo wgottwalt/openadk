@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mkfontscale
-PKG_VERSION:=		1.0.8
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ae166427657f6f31183b2e4378231110
+PKG_MD5SUM:=		c663f511a17e0052fe08139700321955
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		freetype libfontenc
-PKG_SITES:=		http://www.x.org/releases/X11R7.6/src/everything/
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

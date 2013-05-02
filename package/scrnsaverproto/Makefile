@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		scrnsaverproto
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		X11 screensaver headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		c09bd61d39ad0e472b0dfd8bfadd5f2d
+PKG_MD5SUM:=		21704f1bad472d94abd22fea5704bb48
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

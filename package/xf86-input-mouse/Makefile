@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-input-mouse
-PKG_VERSION:=		1.6.0
+PKG_VERSION:=		1.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		31bce890613901ad2692403a0ea3f7c5
+PKG_MD5SUM:=		0f2f2dfb7b769544f04b3469803098a5
 PKG_DESCR:=		X11 driver for mouse
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

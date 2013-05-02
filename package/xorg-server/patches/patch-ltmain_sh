@@ -1,6 +1,6 @@
---- xorg-server-1.9.3.orig/ltmain.sh	2010-12-13 20:59:07.000000000 +0100
-+++ xorg-server-1.9.3/ltmain.sh	2011-01-24 17:03:34.000000000 +0100
-@@ -5840,7 +5840,7 @@ func_mode_link ()
+--- xorg-server-1.12.2.orig/ltmain.sh	2012-05-29 22:06:05.000000000 +0200
++++ xorg-server-1.12.2/ltmain.sh	2013-04-30 10:33:00.000000000 +0200
+@@ -5853,7 +5853,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
        -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \

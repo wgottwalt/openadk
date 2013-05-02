@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bigreqsproto
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		Big Requests Extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		3392142c19cb5a22058cae88be3c554a
+PKG_MD5SUM:=		9b83369ac7a5eb2bf54c8f34db043a0e
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

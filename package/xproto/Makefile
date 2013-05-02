@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xproto
-PKG_VERSION:=		7.0.20
+PKG_VERSION:=		7.0.23
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Window System Core Protocol headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		18320ab36999f3770b14463ed5a2d6cb
+PKG_MD5SUM:=		7ab1239930563a352cb3552fd2db4140
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

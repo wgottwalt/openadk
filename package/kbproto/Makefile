@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kbproto
-PKG_VERSION:=		1.0.5
+PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
 PKG_DESCR:=		X11 keyboard protocol headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		cb95bc6ffb2dfa27498aeb4663dee964
+PKG_MD5SUM:=		9c650b7947fe59b3f144518400e8d029
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

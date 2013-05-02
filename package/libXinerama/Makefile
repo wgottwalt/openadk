@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXinerama
-PKG_VERSION:=		1.1
+PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		42b9fc01984c452ee416076c0977b0b3
+PKG_MD5SUM:=		29a813b3850d499a3524a8d5d5ecb099
 PKG_DESCR:=		Xinerama library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xineramaproto

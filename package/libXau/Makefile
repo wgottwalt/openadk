@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXau
-PKG_VERSION:=		1.0.6
+PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ee1ee30c00d1e033cfc0237a349e1219
+PKG_MD5SUM:=		3ab7a4d1aac1b7f8ccc6b9755a19f252
 PKG_DESCR:=		X11 authorisation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXfont
-PKG_VERSION:=		1.4.3
+PKG_VERSION:=		1.4.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c508998fba44b2b089f2952eb4418420
+PKG_MD5SUM:=		a54dea0debecf232a346c22e71d76836
 PKG_DESCR:=		X font Library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libfreetype

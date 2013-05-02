@@ -1,6 +1,6 @@
---- libX11-1.4.0.orig/ltmain.sh	2010-11-21 23:15:51.000000000 +0100
-+++ libX11-1.4.0/ltmain.sh	2011-01-24 16:20:51.000000000 +0100
-@@ -5840,7 +5840,7 @@ func_mode_link ()
+--- libX11-1.5.0.orig/ltmain.sh	2012-06-02 08:37:28.000000000 +0200
++++ libX11-1.5.0/ltmain.sh	2013-04-29 17:55:12.000000000 +0200
+@@ -5853,7 +5853,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
        -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \

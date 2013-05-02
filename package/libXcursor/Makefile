@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXcursor
-PKG_VERSION:=		1.1.11
+PKG_VERSION:=		1.1.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		55558a41d0bcf9210636858844fa4d2f
+PKG_MD5SUM:=		38a6c7ce393cb5bc10e67de087f9d582
 PKG_DESCR:=		xcursor library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_BUILDDEP:=		libXfixes libXrender
 
 PKG_SUBPKGS:=		LIBXCURSOR LIBXCURSOR_DEV
+PKGSC_LIBXCURSOR_DEV:=	x11/devel
+PKGSD_LIBXCURSOR_DEV:=	libXcursor development files
 
 include $(TOPDIR)/mk/package.mk
 

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xset
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9d8da492fc8f050c5de711d592d3c797
+PKG_MD5SUM:=		25bafb9ec4de87f2c44dde5e1dd12dab
 PKG_DESCR:=		X set utility
 PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		libXmu

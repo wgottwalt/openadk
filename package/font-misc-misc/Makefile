@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-misc-misc
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		047eae4d061f17d96213c4e78f7abccb
+PKG_MD5SUM:=		23a79b92275375315129b440206c85b9
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

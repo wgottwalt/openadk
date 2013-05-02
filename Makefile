@@ -235,3 +235,4 @@ checkreloc:
 	@bash scripts/reloc.sh
 
 .PHONY: prereq prereq-noerror checkreloc
+# DO NOT DELETE

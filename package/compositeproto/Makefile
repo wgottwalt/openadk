@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		compositeproto
-PKG_VERSION:=		0.4.1
+PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6994a209774fe7877fd8e0c9fafe2466
+PKG_MD5SUM:=		2dea7c339432b3363faf2d29c208e7b5
 PKG_DESCR:=		X11 composite headers
 PKG_SECTION:=		x11/devel
 PKG_SITES:=		${MASTER_SITE_XORG}

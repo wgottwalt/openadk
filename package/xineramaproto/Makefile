@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xineramaproto
-PKG_VERSION:=		1.2
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		Xinerama Extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		1e98484ffa9b0eb6ab9d00cd53bfe74f
-PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/proto/
+PKG_MD5SUM:=		e0e148b11739e144a546b8a051b17dde
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-input-keyboard
-PKG_VERSION:=		1.5.0
+PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		32bc80a8a74ce835d77f69c8ca477192
+PKG_MD5SUM:=		c2188611990880f06f7d6c2a7672af1b
 PKG_DESCR:=		X11 driver for keyboard
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

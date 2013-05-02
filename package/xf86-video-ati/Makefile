@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-ati
-PKG_VERSION:=		6.13.2
+PKG_VERSION:=		6.14.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6bb71cff9ad9c5c7b258b2b6c56fdc95
 PKG_DESCR:=		X11 driver for ATI VGA chip

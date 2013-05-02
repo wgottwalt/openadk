@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86vidmodeproto
-PKG_VERSION:=		2.3
+PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		XFree86-VidModeExtension extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		934b400f2f8d1bcab20bb056e0910291
+PKG_MD5SUM:=		99016d0fe355bae0bb23ce00fb4d4a2c
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

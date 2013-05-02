@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-bh-75dpi
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		200b38e879dcbf922ca2a9f71ad44657
+PKG_MD5SUM:=		88fec4ebc4a265684bff3abdd066f14f
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

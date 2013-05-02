@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
-PKG_VERSION:=		1.4.0
+PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3cb91f1f20884661b2b8aae03853441d
+PKG_MD5SUM:=		395455e4d3a51459374fe5ca8420aae8
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau xcb-proto

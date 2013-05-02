@@ -1,8 +1,6 @@
-	Enable the ioBase mapping code for mips, too. This is needed by
-	xf86-video-siliconmotion.
---- xorg-server-1.9.3.orig/hw/xfree86/os-support/linux/lnx_video.c	2010-11-23 20:07:26.000000000 +0100
-+++ xorg-server-1.9.3/hw/xfree86/os-support/linux/lnx_video.c	2012-10-01 13:23:55.000000000 +0200
-@@ -480,7 +480,7 @@ unmapVidMem(int ScreenNum, pointer Base,
+--- xorg-server-1.12.2.orig/hw/xfree86/os-support/linux/lnx_video.c	2012-05-17 19:09:03.000000000 +0200
++++ xorg-server-1.12.2/hw/xfree86/os-support/linux/lnx_video.c	2013-04-30 10:49:01.000000000 +0200
+@@ -472,7 +472,7 @@ unmapVidMem(int ScreenNum, pointer Base,
  /* I/O Permissions section                                                 */
  /***************************************************************************/
  
@@ -11,51 +9,48 @@
  volatile unsigned char *ioBase = NULL;
  
  #ifndef __NR_pciconfig_iobase
-@@ -492,7 +492,7 @@ volatile unsigned char *ioBase = NULL;
+@@ -484,7 +484,7 @@ volatile unsigned char *ioBase = NULL;
  Bool
  xf86EnableIO(void)
  {
 -#if defined(__powerpc__)
 +#if defined(__powerpc__) || defined(__mips__)
- 	int fd;
- 	unsigned int ioBase_phys;
+     int fd;
+     unsigned int ioBase_phys;
  #endif
-@@ -500,8 +500,12 @@ xf86EnableIO(void)
- 	if (ExtendedEnabled)
- 		return TRUE;
+@@ -492,8 +492,12 @@ xf86EnableIO(void)
+     if (ExtendedEnabled)
+         return TRUE;
  
 -#if defined(__powerpc__)
 +#if defined(__powerpc__) || defined(__mips__)
 +#ifdef __powerpc__
- 	ioBase_phys = syscall(__NR_pciconfig_iobase, 2, 0, 0);
+     ioBase_phys = syscall(__NR_pciconfig_iobase, 2, 0, 0);
 +#else
-+	ioBase_phys = 0x1fd00000;
-+#endif
++    ioBase_phys = 0x1fd00000;
++#endif	
  
- 	fd = open("/dev/mem", O_RDWR);
- 	if (ioBase == NULL) {
-@@ -517,9 +521,10 @@ xf86EnableIO(void)
- 		    return FALSE;
- 		}
+     fd = open("/dev/mem", O_RDWR);
+     if (ioBase == NULL) {
+@@ -511,7 +515,7 @@ xf86EnableIO(void)
  #endif
-+		xf86Msg(X_INFO,"ioBase 0x%lx\n", (unsigned long)ioBase);
- 	}
- 	close(fd);
--#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__mips__) && !defined(__sh__) && !defined(__hppa__) && !defined(__s390__) && !defined(__arm__) && !defined(__m32r__)
-+#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__sh__) && !defined(__hppa__) && !defined(__s390__) && !defined(__arm__) && !defined(__m32r__)
-         if (ioperm(0, 1024, 1) || iopl(3)) {
-                 if (errno == ENODEV)
-                         ErrorF("xf86EnableIOPorts: no I/O ports found\n");
-@@ -545,10 +550,10 @@ xf86DisableIO(void)
+     }
+     close(fd);
+-#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__mips__) && !defined(__sh__) && !defined(__hppa__) && !defined(__s390__) && !defined(__arm__) && !defined(__m32r__) && !defined(__nds32__)
++#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__sh__) && !defined(__hppa__) && !defined(__s390__) && !defined(__arm__) && !defined(__m32r__) && !defined(__nds32__)
+     if (ioperm(0, 1024, 1) || iopl(3)) {
+         if (errno == ENODEV)
+             ErrorF("xf86EnableIOPorts: no I/O ports found\n");
+@@ -537,10 +541,10 @@ xf86DisableIO(void)
  {
- 	if (!ExtendedEnabled)
- 		return;
+     if (!ExtendedEnabled)
+         return;
 -#if defined(__powerpc__)
 +#if defined(__powerpc__) || defined(__mips__)
- 	munmap(ioBase, 0x20000);
- 	ioBase = NULL;
--#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__mips__) && !defined(__sh__) && !defined(__hppa__) && !defined(__arm__) && !defined(__s390__) && !defined(__m32r__)
-+#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__sh__) && !defined(__hppa__) && !defined(__arm__) && !defined(__s390__) && !defined(__m32r__)
- 	iopl(0);
- 	ioperm(0, 1024, 0);
+     munmap(ioBase, 0x20000);
+     ioBase = NULL;
+-#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__mips__) && !defined(__sh__) && !defined(__hppa__) && !defined(__arm__) && !defined(__s390__) && !defined(__m32r__) && !defined(__nds32__)
++#elif !defined(__mc68000__) && !defined(__sparc__) && !defined(__sh__) && !defined(__hppa__) && !defined(__arm__) && !defined(__s390__) && !defined(__m32r__) && !defined(__nds32__)
+     iopl(0);
+     ioperm(0, 1024, 0);
  #endif

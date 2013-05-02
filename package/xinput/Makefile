@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xinput
-PKG_VERSION:=		1.5.3
+PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		87ad4db2fad4ff9a68e57759a63abc4b
+PKG_MD5SUM:=		03146d20083a8bd2e3806554b36c7c2b
 PKG_DESCR:=		X input utility
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libxi
-PKG_BUILDDEP:=		libXi
+PKG_DEPENDS:=		libxi libxinerama libxrandr
+PKG_BUILDDEP:=		libXi libXinerama libXrandr
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

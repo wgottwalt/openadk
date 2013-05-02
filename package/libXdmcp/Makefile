@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXdmcp
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bd6577d65c66a971ca52ba7c251905a8
+PKG_MD5SUM:=		194f30d2bb67b23dc33351e128db40a9
 PKG_DESCR:=		X11 display manager control protocol library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto

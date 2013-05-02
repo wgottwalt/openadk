@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libxkbfile
-PKG_VERSION:=		1.0.6
+PKG_VERSION:=		1.0.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a1384a9a48430397aff236f97e26ed05
+PKG_MD5SUM:=		f5b92ef9813c6b78105dfa960ddddcaa
 PKG_DESCR:=		X11 keyboard configuration extension library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		kbproto libX11

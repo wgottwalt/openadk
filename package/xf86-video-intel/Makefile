@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-intel
-PKG_VERSION:=		2.13.0
+PKG_VERSION:=		2.19.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		df7e3644a34e97ead09f083ab48d4457
 PKG_DESCR:=		X11 driver for Intel VGA chip

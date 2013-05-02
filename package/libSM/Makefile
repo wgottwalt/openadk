@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libSM
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4dcf47665aa64161bc5ca74c0778a149
+PKG_MD5SUM:=		1d507651e9fa50aab7ef11be9e0e2f20
 PKG_DESCR:=		X11 Session Management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid

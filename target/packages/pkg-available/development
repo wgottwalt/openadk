@@ -2,6 +2,7 @@ config ADK_PKG_DEVELOPMENT
 	bool "Compile a ADK development system"
 	default n
 	select ADK_PACKAGE_BASH
+	select ADK_PACKAGE_BC
 	select ADK_PACKAGE_BINUTILS
 	select ADK_PACKAGE_BZIP2
 	select ADK_PACKAGE_LZOP

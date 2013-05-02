@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXaw
-PKG_VERSION:=		1.0.8
+PKG_VERSION:=		1.0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ae09e00c5b7e2b12a11a7db4d4b01d73
+PKG_MD5SUM:=		c487a810a8a9b0eb5091f382790b4e75
 PKG_DESCR:=		X11 Athena Widget library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext libXmu libXpm

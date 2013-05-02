@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libICE
-PKG_VERSION:=		1.0.7
+PKG_VERSION:=		1.0.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		91ff02eb5af6073c2e014a5290e65f17
+PKG_MD5SUM:=		4b8dae73fce37e994c3a6fa05d6db7ca
 PKG_DESCR:=		Inter-Client Exchange library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xtrans xproto

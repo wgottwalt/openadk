@@ -4,13 +4,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbitmaps
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e9ab0ddd7dba49b448643768547a275d
+PKG_MD5SUM:=		288bbe310db67280a9e2e5ebc5602595
 PKG_DESCR:=		prerequiste for xsetroot
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
-PKG_SUBPKGS:=
+PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,XBITMAPS,xbitmaps,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+post-install:
+	${INSTALL_DIR} ${IDIR_XBITMAPS}/usr/include
+	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XBITMAPS}/usr/include
+	${INSTALL_DIR} ${IDIR_XBITMAPS}/usr/lib/pkgconfig
+	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xbitmaps.pc \
+		${IDIR_XBITMAPS}/usr/lib/pkgconfig
+
 include ${TOPDIR}/mk/pkg-bottom.mk

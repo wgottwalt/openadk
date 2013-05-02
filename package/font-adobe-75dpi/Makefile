@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-adobe-75dpi
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d22283daba10129643800d73f5496aab
+PKG_MD5SUM:=		7a414bb661949cec938938fd678cf649
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_DEPENDS:=		font-util

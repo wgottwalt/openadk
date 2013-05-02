@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fixesproto
-PKG_VERSION:=		4.1.2
+PKG_VERSION:=		5.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		XFIXES Extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		352e7ea8278bc31a8d75b31232a61cd4
+PKG_MD5SUM:=		1b3115574cadd4cbea1f197faa7c1de4
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

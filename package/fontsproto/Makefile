@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fontsproto
-PKG_VERSION:=		2.1.0
+PKG_VERSION:=		2.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6819fc82585daac68cec17938b659bf0
+PKG_MD5SUM:=		642a8c5700519a84efe28944afe5cbdc
 PKG_DESCR:=		Fonts extension headers
 PKG_SECTION:=		x11/devel
 PKG_SITES:=		${MASTER_SITE_XORG}

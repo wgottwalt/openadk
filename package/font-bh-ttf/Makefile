@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-bh-ttf
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		baea1bb10808857e595f13c6be9cbfbe
+PKG_MD5SUM:=		4ce741ec4edaa11cd38988d355a7578b
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

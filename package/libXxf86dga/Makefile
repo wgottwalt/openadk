@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXxf86dga
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ecb81708157e1a1eeaba0e124f0ade08
+PKG_MD5SUM:=		3d58873171c7765956ce257e6a7e4865
 PKG_DESCR:=		client library for the XFree86-DGA extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86dgaproto libXext libXaw

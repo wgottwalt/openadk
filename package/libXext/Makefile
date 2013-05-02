@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXext
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9beee7f603907840de9d9e73172e74d0
+PKG_MD5SUM:=		249478eae5c4fab7722894cb99565405
 PKG_DESCR:=		X client interface to extensions of the X protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 xextproto

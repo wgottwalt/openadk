@@ -31,6 +31,7 @@ PKGSD_LOSETUP:=		Loop devices management utilities
 PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSD_MOUNT:=		mount/umount utilities
 PKGSS_MOUNT:=		libblkid
+PKGSC_MOUNT:=		fs
 PKGSD_MCOOKIE:=		Generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/apps
 

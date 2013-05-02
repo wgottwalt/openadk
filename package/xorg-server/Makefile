@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.9.3
+PKG_VERSION:=		1.12.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b8e364bffd87291b593726696d39b4b5
+PKG_MD5SUM:=		a95c896fbe8322c3c8d518a13eb74c7a
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile

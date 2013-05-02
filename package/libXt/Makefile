@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXt
-PKG_VERSION:=		1.0.9
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		091ed356b8ab9ca4fcbb471f738ca544
+PKG_MD5SUM:=		7a80ed7aba06668b12ebd0910318a1f1
 PKG_DESCR:=		X Toolkit Intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libSM libX11 kbproto

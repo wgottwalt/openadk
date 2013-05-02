@@ -1,6 +1,6 @@
---- xorg-server-1.9.3.orig/hw/xfree86/os-support/linux/lnx_init.c	2010-09-28 19:17:31.000000000 +0200
-+++ xorg-server-1.9.3/hw/xfree86/os-support/linux/lnx_init.c	2012-10-01 16:32:57.000000000 +0200
-@@ -95,8 +95,8 @@ xf86OpenConsole(void)
+--- xorg-server-1.12.2.orig/hw/xfree86/os-support/linux/lnx_init.c	2012-05-17 19:09:03.000000000 +0200
++++ xorg-server-1.12.2/hw/xfree86/os-support/linux/lnx_init.c	2013-04-30 10:33:00.000000000 +0200
+@@ -75,8 +75,8 @@ xf86OpenConsole(void)
      struct vt_mode VT;
      struct vt_stat vts;
      MessageType from = X_PROBED;

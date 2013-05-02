@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-bh-lucidatypewriter-100dpi
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8fa38b7845c10ff83d6077a1e238b15b
+PKG_MD5SUM:=		5f716f54e497fb4ec1bb3a5d650ac6f7
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

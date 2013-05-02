@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		font-xfree86-type1
-PKG_VERSION:=		1.0.2
+PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		785f2b6e8d6d0dafec08b8d4c54ae2e3
+PKG_MD5SUM:=		89c33c5176cd580de6636ad50ce7777b
 PKG_DESCR:=		X fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

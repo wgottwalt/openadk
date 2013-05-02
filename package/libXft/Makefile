@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXft
-PKG_VERSION:=		2.1.9
+PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0a1e129b1d8b2d3905dc02a64255b781
+PKG_MD5SUM:=		946a157090eec5c3041cf17530d93f59
 PKG_DESCR:=		X FreeType library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXrender fontconfig

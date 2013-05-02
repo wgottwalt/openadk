@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		resourceproto
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		Resource extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		587333b4995a3e11ebe4c8ba2742efaf
+PKG_MD5SUM:=		33091d5358ec32dd7562a1aa225a70aa
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

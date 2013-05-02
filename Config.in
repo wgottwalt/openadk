@@ -110,8 +110,8 @@ config ADK_KERNEL_VERSION_3_8_10
 	prompt "3.8.10"
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_41
-	prompt "3.4.41"
+config ADK_KERNEL_VERSION_3_4_42
+	prompt "3.4.42"
 	boolean
 
 endchoice
@@ -119,7 +119,7 @@ endchoice
 config ADK_KERNEL_VERSION
 	string
 	default "3.8.10" if ADK_KERNEL_VERSION_3_8_10
-	default "3.4.41" if ADK_KERNEL_VERSION_3_4_41
+	default "3.4.42" if ADK_KERNEL_VERSION_3_4_42
 	help
 
 choice

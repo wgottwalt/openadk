@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXtst
-PKG_VERSION:=		1.2.0
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fd94ddca70e10eef4640e1f57b0301ee
+PKG_MD5SUM:=		8918809e47c29b44d25eb16b1586a15b
 PKG_DESCR:=		Xtst library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		recordproto libXi

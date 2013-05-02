@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		recordproto
-PKG_VERSION:=		1.14.1
+PKG_VERSION:=		1.14.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		RECORD extension headers
 PKG_SECTION:=		x11/devel
-PKG_MD5SUM:=		a558e1c6f67871e3fb94d65d67eb2f3b
+PKG_MD5SUM:=		868235e1e150e68916d5a316ebc4ccc4
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk

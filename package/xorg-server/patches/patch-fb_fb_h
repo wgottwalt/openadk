@@ -1,8 +1,8 @@
 	Fix for xf86-video-siliconmotion in 16bpp with XAA, see:
 	http://groups.google.com/group/loongson-dev/browse_thread/thread/570549e3d7894fef/5f04b3d9370adfd2
---- xorg-server-1.9.3.orig/fb/fb.h	2010-12-13 20:42:27.000000000 +0100
-+++ xorg-server-1.9.3/fb/fb.h	2012-10-01 13:23:55.000000000 +0200
-@@ -71,7 +71,7 @@
+--- xorg-server-1.12.2.orig/fb/fb.h	2012-05-29 22:04:19.000000000 +0200
++++ xorg-server-1.12.2/fb/fb.h	2013-04-30 10:33:00.000000000 +0200
+@@ -70,7 +70,7 @@
  #define FBPREFIX(x) fb##x
  #define WRITE(ptr, val) (*(ptr) = (val))
  #define READ(ptr) (*(ptr))
