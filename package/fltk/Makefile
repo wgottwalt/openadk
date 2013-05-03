@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fltk
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		92f6e29921227eec3426a07425c71232
+PKG_MD5SUM:=		9f7e707d4fb7a5a76f0f9b73ff70623d
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut freetype
