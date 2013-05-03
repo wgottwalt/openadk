@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1e0912655e240adfd0ce5ced30bbc685
 PKG_DESCR:=		a DirectFB getty replacement
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		directfb
-PKG_BUILDDEP:=		DirectFB
+PKG_DEPENDS:=		directfb libncurses libgcc librt
+PKG_BUILDDEP:=		DirectFB ncurses
 PKG_URL:=		http://qingy.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=qingy/}
 
