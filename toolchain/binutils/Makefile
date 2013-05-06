@@ -12,6 +12,10 @@ else
 CONFOPTS+=		--disable-libssp
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFOPTS+=          	--with-arch=armv6
+endif
+
 ifneq ($(strip $(ADK_LINUX_64)$(ADK_TARGET_KERNEL64)),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif

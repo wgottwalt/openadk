@@ -329,6 +329,9 @@ config ADK_TARGET_NO_FPU
 config ADK_EABI
 	boolean
 
+config ADK_EABIHF
+	boolean
+
 config ADK_LINUX_64
 	boolean
 
@@ -519,6 +522,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=v32" if ADK_CPU_CRIS_V32
 	default "-march=v10" if ADK_CPU_CRIS_V10
 	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
+	default "-march=armv6 -mtune=arm1176jzf-s -mfloat-abi=hardfp -marm" if ADK_CPU_RASPBERRY_PI
 
 config ADK_TARGET_CMDLINE
 	string
@@ -625,6 +629,7 @@ endchoice
 
 config ADK_TARGET_SUFFIX
 	string
+	default "gnueabihf" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABIHF
 	default "gnueabi" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABI
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
