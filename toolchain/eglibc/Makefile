@@ -7,6 +7,8 @@ include Makefile.inc
 include Makefile.multilib
 include ${TOPDIR}/mk/buildhlp.mk
 
+# eglibc does not compile with Os
+TARGET_CFLAGS_LIBC:= $(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS_LIBC+=		-O2
 endif

@@ -17,7 +17,7 @@ ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj:
 		DYLD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
 		LD_LIBRARY_PATH=$(STAGING_JAVA_HOST_DIR)/usr/lib:$(STAGING_JAVA_HOST_DIR)/usr/lib64 \
 		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$$PATH \
-	$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj -O2 -findirect-dispatch \
+	$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj -lgcj -O2 -findirect-dispatch \
 		-o ${STAGING_JAVA_HOST_DIR}/usr/bin/ecj.native \
 		--main=org.eclipse.jdt.internal.compiler.batch.Main \
 		$(TOPDIR)/jtools_build/gcc-$(GCJ_VER)/ecj.jar

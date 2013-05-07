@@ -3,6 +3,6 @@
 
 WRKDIR_BASE=    ${JTOOLS_BUILD_DIR}
 WRKDIR=		${WRKDIR_BASE}
-GCJ_VER:=	4.5.3
+GCJ_VER:=	4.7.3
 
 include ${TOPDIR}/mk/buildhlp.mk

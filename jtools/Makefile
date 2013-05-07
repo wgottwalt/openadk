@@ -8,6 +8,10 @@ ifneq ($(ADK_PACKAGE_OPENJDK),)
 # jikes is for ant
 TARGETS+=fastjar gcj ecj jikes classpath jamvm ant openjdk qemu
 endif
+ifneq ($(ADK_PACKAGE_OPENJDK7),)
+# jikes is for ant
+TARGETS+=fastjar gcj ecj jikes classpath jamvm ant openjdk7
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
