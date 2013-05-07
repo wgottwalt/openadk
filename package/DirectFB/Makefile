@@ -34,6 +34,9 @@ CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--disable-x11 \
 			--disable-gif \
 			--enable-png \
+			--disable-debug \
+			--disable-trace \
+			--enable-text \
 			--enable-jpeg
 
 # This is to overcome libtool fuckup - when building without,
@@ -50,7 +53,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/{inputdrivers,systems,wm}
 	${CP} $(WRKINST)/usr/lib/lib{direct,fusion}*.so* \
 		$(IDIR_DIRECTFB)/usr/lib
-	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers/libdirectfb_linux_input.so \
+	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers/*.so \
 		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/inputdrivers
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/systems/*.so \
 		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/systems

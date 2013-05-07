@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1d507651e9fa50aab7ef11be9e0e2f20
 PKG_DESCR:=		X11 Session Management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid
-PKG_BUILDDEP:=		libICE e2fsprogs
+PKG_BUILDDEP:=		libICE util-linux
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SUBPKGS:=		LIBSM LIBSM_DEV

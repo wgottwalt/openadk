@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		links
-PKG_VERSION:=		2.2
+PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c9937f9ed0061f264973182f871fb667
+PKG_MD5SUM:=		6b5ca02e180aed2f78ca2712f85e3ba5
 PKG_DESCR:=		web browser with graphic support
 PKG_SECTION:=		browser
 PKG_DEPENDS:=		libpng libjpeg libtiff gpm libopenssl

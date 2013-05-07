@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dillo
-PKG_VERSION:=		3.0.2
+PKG_VERSION:=		3.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		81b82112cefcc7d54fe2972a21f42930
+PKG_MD5SUM:=		726cd0b7a18c5e25f4d80ebeffe7607e
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libiconv libpng zlib libjpeg
-PKG_DEPENDS+=		libstdcxx
+PKG_DEPENDS+=		libstdcxx libpthread libgcc
 PKG_BUILDDEP:=		fltk libXi libiconv jpeg libpng zlib
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
@@ -25,11 +25,13 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DILLO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		PNG_CONFIG=$(STAGING_DIR)/usr/bin/png-config
 TARGET_LDFLAGS+=	-liconv -lpng15
-CONFIGURE_ARGS+=	--disable-xft
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 post-install:
 	$(INSTALL_DIR) $(IDIR_DILLO)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/dillo $(IDIR_DILLO)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/dpid* $(IDIR_DILLO)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
