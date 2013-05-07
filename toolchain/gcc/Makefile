@@ -67,10 +67,12 @@ else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
 
+ifeq ($(ARCH),mips)
 ifeq ($(ADK_TARGET_NO_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 else
 GCC_CONFOPTS+=          --with-float=hard
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
