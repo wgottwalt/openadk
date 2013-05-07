@@ -36,6 +36,7 @@ CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--enable-png \
 			--disable-debug \
 			--disable-trace \
+			--enable-text \
 			--enable-jpeg
 
 # This is to overcome libtool fuckup - when building without,
