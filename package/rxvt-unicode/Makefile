@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rxvt-unicode
-PKG_VERSION:=		9.07
+PKG_VERSION:=		9.18
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		49bb52c99e002bf85eb41d8385d903b5
+PKG_MD5SUM:=		963ccc748fe5bca925e7b92c0404d68b
 PKG_DESCR:=		x-term with unicode support
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libx11 fontconfig libxft libxml2
-PKG_BUILDDEP:=		libX11 fontconfig libXft libxml2
+PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf
+PKG_BUILDDEP:=		libX11 fontconfig libXft libxml2 gdk-pixbuf
 PKG_URL:=		http://software.schmorp.de/pkg/rxvt-unicode.html
 PKG_SITES:=		http://dist.schmorp.de/rxvt-unicode/
 PKG_NEED_CXX:=		1

@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		ant
-PKG_VERSION:=		1.8.2
+PKG_VERSION:=		1.8.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0d9e108afcd15b820150b8085c96d2b1
-PKG_SITES:=		http://www.apache.org/dist/ant/source/
+PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
+PKG_SITES:=		http://archive.apache.org/dist/ant/source/
 
 DISTFILES:=		apache-$(PKG_NAME)-$(PKG_VERSION)-src.tar.bz2
 WRKDIST=		$(WRKDIR)/apache-$(PKG_NAME)-$(PKG_VERSION)

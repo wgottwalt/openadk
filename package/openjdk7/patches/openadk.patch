@@ -1,0 +1,368 @@
+diff -Nur icedtea-2.3.6.orig/Makefile.in icedtea-2.3.6/Makefile.in
+--- icedtea-2.3.6.orig/Makefile.in	2013-02-12 14:23:58.000000000 +0100
++++ icedtea-2.3.6/Makefile.in	2013-05-02 10:37:29.000000000 +0200
+@@ -77,7 +77,6 @@
+ @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7089790-bsd_port.patch \
+ @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7098194-macosx_port.patch \
+ @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7116189-setnativethreadname.patch \
+-@WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/6924259-string_offset.patch \
+ @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/revert_arm_debug.patch
+ 
+ @WITH_RHINO_TRUE@am__append_6 = \
+@@ -640,7 +639,7 @@
+ 	$(am__append_14) $(am__append_15) $(DISTRIBUTION_PATCHES)
+ 
+ # Bootstrapping patches
+-ICEDTEA_BOOT_PATCHES = patches/boot/javafiles.patch \
++ICEDTEA_BOOT_PATCHES = patches/openadk.patch patches/boot/javafiles.patch \
+ 	patches/boot/ant-javac.patch patches/boot/corba-idlj.patch \
+ 	patches/boot/corba-no-gen.patch patches/boot/corba-orb.patch \
+ 	patches/boot/demos.patch patches/boot/ecj-fphexconstants.patch \
+@@ -2033,7 +2032,7 @@
+ # Optional native ecj
+ stamps/native-ecj.stamp:
+ 	mkdir -p stamps 
+-@BUILD_NATIVE_ECJ_TRUE@	${GCJ} $(IT_CFLAGS) -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
++@BUILD_NATIVE_ECJ_TRUE@	${GCJ} -lgcj -Wl,-Bsymbolic -findirect-dispatch -o native-ecj \
+ @BUILD_NATIVE_ECJ_TRUE@	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR}
+ 	touch $@
+ 
+diff -Nur icedtea-2.3.6.orig/patches/openadk.patch icedtea-2.3.6/patches/openadk.patch
+--- icedtea-2.3.6.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
++++ icedtea-2.3.6/patches/openadk.patch	2013-05-03 17:22:54.000000000 +0200
+@@ -0,0 +1,335 @@
++diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
++--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2013-01-14 23:25:00.000000000 +0100
+++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-02-18 10:18:27.000000000 +0100
++@@ -115,7 +115,6 @@
++ # include <string.h>
++ # include <syscall.h>
++ # include <sys/sysinfo.h>
++-# include <gnu/libc-version.h>
++ # include <sys/ipc.h>
++ # include <sys/shm.h>
++ # include <link.h>
++@@ -644,9 +643,7 @@
++      os::Linux::set_glibc_version(str);
++   } else {
++      // _CS_GNU_LIBC_VERSION is not supported, try gnu_get_libc_version()
++-     static char _gnu_libc_version[32];
++-     jio_snprintf(_gnu_libc_version, sizeof(_gnu_libc_version),
++-              "glibc %s %s", gnu_get_libc_version(), gnu_get_libc_release());
+++     static char _gnu_libc_version[32] = "2.9";
++      os::Linux::set_glibc_version(_gnu_libc_version);
++   }
++ 
++@@ -2640,10 +2637,7 @@
++ // If we are running with earlier version, which did not have symbol versions,
++ // we should use the base version.
++ void* os::Linux::libnuma_dlsym(void* handle, const char *name) {
++-  void *f = dlvsym(handle, name, "libnuma_1.1");
++-  if (f == NULL) {
++-    f = dlsym(handle, name);
++-  }
+++  void *f = dlsym(handle, name);
++   return f;
++ }
++ 
++@@ -4908,7 +4902,21 @@
++ // Linux doesn't yet have a (official) notion of processor sets,
++ // so just return the system wide load average.
++ int os::loadavg(double loadavg[], int nelem) {
++-  return ::getloadavg(loadavg, nelem);
+++ FILE *LOADAVG;
+++ double avg[3] = { 0.0, 0.0, 0.0 };
+++ int i, res = -1;;
+++
+++ if ((LOADAVG = fopen("/proc/loadavg", "r"))) {
+++ fscanf(LOADAVG, "%lf %lf %lf", &avg[0], &avg[1], &avg[2]);
+++ res = 0;
+++ fclose(LOADAVG);
+++ }
+++
+++ for (i = 0; (i < nelem) && (i < 3); i++) {
+++ loadavg[i] = avg[i];
+++ }
+++
+++ return res;
++ }
++ 
++ void os::pause() {
++diff -Nur openjdk.orig/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp openjdk/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp
++--- openjdk.orig/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2013-01-14 23:25:00.000000000 +0100
+++++ openjdk/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2013-02-18 10:18:28.000000000 +0100
++@@ -253,7 +253,7 @@
++ #elif defined(__APPLE__)
++ inline int g_isnan(double f) { return isnan(f); }
++ #elif defined(LINUX) || defined(_ALLBSD_SOURCE)
++-inline int g_isnan(float  f) { return isnanf(f); }
+++inline int g_isnan(float  f) { return __isnanf(f); }
++ inline int g_isnan(double f) { return isnan(f); }
++ #else
++ #error "missing platform-specific definition here"
++diff -Nur openjdk.orig/jdk/make/com/sun/java/pack/Makefile openjdk/jdk/make/com/sun/java/pack/Makefile
++--- openjdk.orig/jdk/make/com/sun/java/pack/Makefile	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/com/sun/java/pack/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -80,7 +80,7 @@
++     LDDFLAGS += $(ZIPOBJS)
++   endif
++ else
++-  OTHER_CXXFLAGS += -DNO_ZLIB -DUNPACK_JNI
+++  CXXFLAGS_COMMON += -DNO_ZLIB -DUNPACK_JNI
++   OTHER_LDLIBS += $(JVMLIB)
++ endif
++ 
++diff -Nur openjdk.orig/jdk/make/common/Defs.gmk openjdk/jdk/make/common/Defs.gmk
++--- openjdk.orig/jdk/make/common/Defs.gmk	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/common/Defs.gmk	2013-02-18 10:22:13.000000000 +0100
++@@ -204,7 +204,7 @@
++       ifeq ($(PLATFORM), macosx)
++         FREETYPE_HEADERS_PATH = /usr/X11R6/include
++       else
++-        FREETYPE_HEADERS_PATH = /usr/include
+++        FREETYPE_HEADERS_PATH = /usr/include/disabled
++       endif
++     endif
++   endif
++diff -Nur openjdk.orig/jdk/make/common/shared/Platform.gmk openjdk/jdk/make/common/shared/Platform.gmk
++--- openjdk.orig/jdk/make/common/shared/Platform.gmk	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/common/shared/Platform.gmk	2013-02-18 10:18:28.000000000 +0100
++@@ -160,9 +160,6 @@
++   else
++     mach := $(shell uname -m)
++   endif
++-  ifneq (,$(wildcard /usr/bin/dpkg-architecture))
++-    mach := $(shell (dpkg-architecture -qDEB_BUILD_ARCH_CPU 2>/dev/null || echo $(mach)) | sed 's/powerpc$$/ppc/;s/hppa/parisc/')
++-  endif
++   archExpr = case "$(mach)" in \
++                 i[3-9]86) \
++                     echo i586 \
++diff -Nur openjdk.orig/jdk/make/java/instrument/Makefile openjdk/jdk/make/java/instrument/Makefile
++--- openjdk.orig/jdk/make/java/instrument/Makefile	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/java/instrument/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -140,6 +140,8 @@
++ # We don't want to link against -ljava
++ JAVALIB=
++ 
+++OTHER_LDLIBS += -liconv
+++
++ #
++ # Add to ambient vpath so we pick up the library files
++ #
++diff -Nur openjdk.orig/jdk/make/java/nio/Makefile openjdk/jdk/make/java/nio/Makefile
++--- openjdk.orig/jdk/make/java/nio/Makefile	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/java/nio/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -923,7 +923,7 @@
++ 
++ $(GENSOR_EXE) : $(TEMPDIR)/$(GENSOR_SRC)
++ 	$(prep-target)
++-	($(CD) $(TEMPDIR); $(NIO_CC) $(CPPFLAGS) $(LDDFLAGS) \
+++	($(CD) $(TEMPDIR); $(NIO_CC) -static $(CPPFLAGS) $(LDDFLAGS) \
++ 	   -o genSocketOptionRegistry$(EXE_SUFFIX) $(GENSOR_SRC))
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++@@ -934,8 +934,12 @@
++ $(SCH_GEN)/SocketOptionRegistry.java: $(GENSOR_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(SOR_COPYRIGHT_YEARS)" > $@
+++ifdef CROSS_COMPILE_ARCH
+++	$(QEMU) $(GENSOR_EXE) >> $@
+++else
++ 	$(GENSOR_EXE) >> $@
++ endif
+++endif
++ #
++ # Generated sun.nio.cs SingleByte classes
++ #
++@@ -959,7 +963,7 @@
++ 
++ $(GENUC_EXE) : $(GENUC_SRC)
++ 	$(prep-target)
++-	$(NIO_CC) $(CPPFLAGS) -o $@ $(GENUC_SRC)
+++	$(NIO_CC) -static $(CPPFLAGS) -o $@ $(GENUC_SRC)
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++ $(SFS_GEN)/UnixConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/UnixConstants-$(PLATFORM)-$(ARCH).java
++@@ -969,8 +973,12 @@
++ $(SFS_GEN)/UnixConstants.java: $(GENUC_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENUC_COPYRIGHT_YEARS)" > $@
+++ifdef CROSS_COMPILE_ARCH
+++	$(QEMU) $(GENUC_EXE) >> $@
+++else
++ 	$(GENUC_EXE) >> $@
++ endif
+++endif
++ 
++ GENSC_SRC = $(PLATFORM_SRC)/native/sun/nio/fs/genSolarisConstants.c
++ 
++@@ -981,7 +989,7 @@
++ 
++ $(GENSC_EXE) : $(GENSC_SRC)
++ 	$(prep-target)
++-	$(NIO_CC) $(CPPFLAGS) -o $@ $(GENSC_SRC)
+++	$(NIO_CC) -static $(CPPFLAGS) -o $@ $(GENSC_SRC)
++ 
++ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
++ $(SFS_GEN)/SolarisConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/SolarisConstants-$(PLATFORM)-$(ARCH).java
++@@ -991,7 +999,11 @@
++ $(SFS_GEN)/SolarisConstants.java: $(GENSC_EXE)
++ 	$(prep-target)
++ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENSC_COPYRIGHT_YEARS)" > $@
+++ifdef CROSS_COMPILE_ARCH
+++	$(QEMU) $(GENSC_EXE) >> $@
+++else
++ 	$(GENSC_EXE) >> $@
++ endif
+++endif
++ 
++ .PHONY: sources 
++diff -Nur openjdk.orig/jdk/make/java/npt/Makefile openjdk/jdk/make/java/npt/Makefile
++--- openjdk.orig/jdk/make/java/npt/Makefile	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/java/npt/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -64,6 +64,8 @@
++ # We don't want to link against -ljava
++ JAVALIB=
++ 
+++OTHER_LDLIBS += -liconv
+++
++ # Add -export options to explicitly spell exported symbols
++ ifeq ($(PLATFORM), windows)
++   OTHER_LCF += -export:nptInitialize -export:nptTerminate
++diff -Nur openjdk.orig/jdk/make/sun/awt/mawt.gmk openjdk/jdk/make/sun/awt/mawt.gmk
++--- openjdk.orig/jdk/make/sun/awt/mawt.gmk	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/sun/awt/mawt.gmk	2013-02-18 10:42:16.000000000 +0100
++@@ -151,22 +151,6 @@
++ #endif
++ 
++ LIBXTST = -lXtst
++-ifeq ($(PLATFORM), linux)
++-   ifeq ($(ARCH_DATA_MODEL), 64)
++-   # XXX what about the rest of them?
++-        LIBXT = -lXt
++-    else
++-    # Allows for builds on Debian GNU Linux, X11 is in a different place 
++-       LIBXT = $(firstword $(wildcard $(OPENWIN_LIB)/libXt.a) \
++-                        $(wildcard /usr/lib/libXt.a))
++-       LIBSM = $(firstword $(wildcard $(OPENWIN_LIB)/libSM.a) \
++-                        $(wildcard /usr/lib/libSM.a))
++-       LIBICE = $(firstword $(wildcard $(OPENWIN_LIB)/libICE.a) \
++-                         $(wildcard /usr/lib/libICE.a))
++-       LIBXTST = $(firstword $(wildcard $(OPENWIN_LIB)/libXtst.a) \
++-                         $(wildcard /usr/lib/libXtst.a))
++-   endif
++-endif
++ 
++ # Use -lXmu for EditRes support
++ LIBXMU_DBG	= -lXmu
++@@ -181,7 +165,7 @@
++ OTHER_CFLAGS += -DMLIB_NO_LIBSUNMATH
++ # XXX what is this define below? Isn't it motif-related?
++ OTHER_CFLAGS += -DXMSTRINGDEFINES=1
++-OTHER_LDLIBS =  $(LIBXMU) $(LIBXTST) -lXext $(LIBXT) $(LIBSM) $(LIBICE) -lX11 -lXi
+++OTHER_LDLIBS =  $(LIBXMU) $(LIBXTST) -lXext -lXt -lSM -lICE -lX11 -lXi
++ endif
++ 
++ endif
++@@ -230,11 +214,6 @@
++   CPPFLAGS += -I$(PLATFORM_SRC)/native/common/deps/fontconfig2
++ endif
++ 
++-ifndef HEADLESS
++-CPPFLAGS += -I$(OPENWIN_HOME)/include 
++-LDFLAGS  += -L$(OPENWIN_LIB)
++-
++-endif # !HEADLESS
++ 
++ CPPFLAGS += -I$(SHARE_SRC)/native/$(PKGDIR)/debug \
++             -I$(SHARE_SRC)/native/$(PKGDIR)/../font \
++@@ -269,11 +248,6 @@
++ endif # !HEADLESS
++ endif # PLATFORM
++ 
++-ifeq ($(PLATFORM), linux)
++-  # Checking for the X11/extensions headers at the additional location
++-  CPPFLAGS += -I$(firstword $(wildcard $(OPENWIN_HOME)/include/X11/extensions) \
++-                        $(wildcard /usr/include/X11/extensions))
++-endif
++ 
++ ifeq ($(PLATFORM), macosx))
++   CPPFLAGS += -I$(OPENWIN_HOME)/include/X11/extensions \
++diff -Nur openjdk.orig/jdk/make/sun/splashscreen/Makefile openjdk/jdk/make/sun/splashscreen/Makefile
++--- openjdk.orig/jdk/make/sun/splashscreen/Makefile	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/make/sun/splashscreen/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -55,6 +55,8 @@
++ 
++ JAVALIB=
++ 
+++OTHER_LDLIBS += -liconv
+++
++ #
++ # C Flags
++ #
++diff -Nur openjdk.orig/jdk/src/solaris/native/sun/awt/awt_InputMethod.c openjdk/jdk/src/solaris/native/sun/awt/awt_InputMethod.c
++--- openjdk.orig/jdk/src/solaris/native/sun/awt/awt_InputMethod.c	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/src/solaris/native/sun/awt/awt_InputMethod.c	2013-02-18 10:18:28.000000000 +0100
++@@ -246,7 +246,8 @@
++     if (wcs == NULL)
++         return NULL;
++ 
++-    n = len*MB_CUR_MAX + 1;
+++    //evil hack for uclibc
+++    n = len*1 + 1;
++ 
++     mbs = (char *) malloc(n * sizeof(char));
++     if (mbs == NULL) {
++diff -Nur openjdk.orig/jdk/src/solaris/native/sun/xawt/XToolkit.c openjdk/jdk/src/solaris/native/sun/xawt/XToolkit.c
++--- openjdk.orig/jdk/src/solaris/native/sun/xawt/XToolkit.c	2013-01-14 23:25:02.000000000 +0100
+++++ openjdk/jdk/src/solaris/native/sun/xawt/XToolkit.c	2013-02-18 10:18:28.000000000 +0100
++@@ -27,9 +27,6 @@
++ #include <X11/Xutil.h>
++ #include <X11/Xos.h>
++ #include <X11/Xatom.h>
++-#ifdef __linux__
++-#include <execinfo.h>
++-#endif
++ 
++ #include <jvm.h>
++ #include <jni.h>
++@@ -785,25 +782,6 @@
++     return ret;
++ }
++ 
++-#ifdef __linux__
++-void print_stack(void)
++-{
++-  void *array[10];
++-  size_t size;
++-  char **strings;
++-  size_t i;
++-
++-  size = backtrace (array, 10);
++-  strings = backtrace_symbols (array, size);
++-
++-  fprintf (stderr, "Obtained %zd stack frames.\n", size);
++-
++-  for (i = 0; i < size; i++)
++-     fprintf (stderr, "%s\n", strings[i]);
++-
++-  free (strings);
++-}
++-#endif
++ 
++ Window get_xawt_root_shell(JNIEnv *env) {
++   static jclass classXRootWindow = NULL;
++diff -Nur openjdk.orig/Makefile openjdk/Makefile
++--- openjdk.orig/Makefile	2013-01-14 23:24:55.000000000 +0100
+++++ openjdk/Makefile	2013-02-18 10:18:28.000000000 +0100
++@@ -53,9 +53,7 @@
++ REL_JDK_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(JDK_IMAGE_DIRNAME)
++ REL_JDK_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(JDK_IMAGE_DIRNAME)
++ 
++-ifndef TOPDIR
++-  TOPDIR:=.
++-endif
+++TOPDIR:=.
++ 
++ ifndef JDK_TOPDIR
++   JDK_TOPDIR=$(TOPDIR)/jdk

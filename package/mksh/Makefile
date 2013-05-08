@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		40f
+PKG_VERSION:=		45
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		22c9570660c2efadf36de7b620d06966
+PKG_MD5SUM:=		d3d90973119ae689d5300b690600e1dc
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org/
@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 PKG_FLAVOURS_MKSH:=	FULL
 PKGFD_FULL:=		Include all features
 
-DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.cpio.gz
+DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
