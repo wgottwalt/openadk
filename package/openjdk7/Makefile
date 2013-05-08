@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		icedtea
-PKG_VERSION:=		2.3.4
+PKG_VERSION:=		2.3.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		644095a19eece799735119482de3aa9f
+PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups

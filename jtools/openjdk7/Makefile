@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		icedtea
-PKG_VERSION:=		2.3.6
+PKG_VERSION:=		2.3.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		95ab4fd5c9832149f1e50ef24a1264ff
+PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_URL:=		http://openjdk.org/
