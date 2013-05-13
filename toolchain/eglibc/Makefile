@@ -26,8 +26,6 @@ ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 $(WRKBUILD)/.headers_configure: 
 	for abi in $(TABI); do \
 		mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
-		(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-			ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc); \
 		$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 			$(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}/option-groups.config; \
 		(cd $(EGLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
@@ -56,8 +54,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 else
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
-	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-		ln -sf ../ports ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)/libc);
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
 		$(EGLIBC_BUILD_DIR_INITIAL)/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \

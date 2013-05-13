@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		eglibc
-PKG_VERSION:=		2.16
+PKG_VERSION:=		2.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		97b0956c312e747dcead4c9459ac2aa5
+PKG_MD5SUM:=		7bbee592be7d7fcacdc9dda931db9bec
 PKG_SITES:=		http://openadk.org/distfiles/
 EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--without-cvs \
@@ -12,6 +12,7 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-debug \
 			--enable-kernel=2.6.0 \
 			--without-gd \
+			--disable-nscd \
 			--with-__thread \
 			--with-tls \
 			--enable-add-ons \
