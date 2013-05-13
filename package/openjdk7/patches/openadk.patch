@@ -1,16 +1,16 @@
-diff -Nur icedtea-2.3.6.orig/Makefile.in icedtea-2.3.6/Makefile.in
---- icedtea-2.3.6.orig/Makefile.in	2013-02-12 14:23:58.000000000 +0100
-+++ icedtea-2.3.6/Makefile.in	2013-05-02 10:37:29.000000000 +0200
-@@ -77,7 +77,6 @@
+diff -Nur icedtea-2.3.9.orig/Makefile.in icedtea-2.3.9/Makefile.in
+--- icedtea-2.3.9.orig/Makefile.in	2013-04-21 22:48:31.000000000 +0200
++++ icedtea-2.3.9/Makefile.in	2013-05-13 17:13:12.000000000 +0200
+@@ -90,7 +90,6 @@
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7089790-bsd_port.patch \
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7098194-macosx_port.patch \
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7116189-setnativethreadname.patch \
 -@WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/6924259-string_offset.patch \
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/revert_arm_debug.patch
  
- @WITH_RHINO_TRUE@am__append_6 = \
-@@ -640,7 +639,7 @@
- 	$(am__append_14) $(am__append_15) $(DISTRIBUTION_PATCHES)
+ @WITH_RHINO_TRUE@am__append_9 = \
+@@ -657,7 +656,7 @@
+ 	$(am__append_17) $(am__append_18) $(DISTRIBUTION_PATCHES)
  
  # Bootstrapping patches
 -ICEDTEA_BOOT_PATCHES = patches/boot/javafiles.patch \
@@ -18,7 +18,7 @@ diff -Nur icedtea-2.3.6.orig/Makefile.in icedtea-2.3.6/Makefile.in
  	patches/boot/ant-javac.patch patches/boot/corba-idlj.patch \
  	patches/boot/corba-no-gen.patch patches/boot/corba-orb.patch \
  	patches/boot/demos.patch patches/boot/ecj-fphexconstants.patch \
-@@ -2033,7 +2032,7 @@
+@@ -2050,7 +2049,7 @@
  # Optional native ecj
  stamps/native-ecj.stamp:
  	mkdir -p stamps 
@@ -27,10 +27,10 @@ diff -Nur icedtea-2.3.6.orig/Makefile.in icedtea-2.3.6/Makefile.in
  @BUILD_NATIVE_ECJ_TRUE@	    --main=org.eclipse.jdt.internal.compiler.batch.Main ${ECJ_JAR}
  	touch $@
  
-diff -Nur icedtea-2.3.6.orig/patches/openadk.patch icedtea-2.3.6/patches/openadk.patch
---- icedtea-2.3.6.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.3.6/patches/openadk.patch	2013-05-03 17:22:54.000000000 +0200
-@@ -0,0 +1,335 @@
+diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk.patch
+--- icedtea-2.3.9.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
++++ icedtea-2.3.9/patches/openadk.patch	2013-05-13 17:16:36.000000000 +0200
+@@ -0,0 +1,288 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2013-01-14 23:25:00.000000000 +0100
 ++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-02-18 10:18:27.000000000 +0100
@@ -157,66 +157,19 @@ diff -Nur icedtea-2.3.6.orig/patches/openadk.patch icedtea-2.3.6/patches/openadk
 + $(GENSOR_EXE) : $(TEMPDIR)/$(GENSOR_SRC)
 + 	$(prep-target)
 +-	($(CD) $(TEMPDIR); $(NIO_CC) $(CPPFLAGS) $(LDDFLAGS) \
-++	($(CD) $(TEMPDIR); $(NIO_CC) -static $(CPPFLAGS) $(LDDFLAGS) \
+++	($(CD) $(TEMPDIR); $(HOST_CC) $(CPPFLAGS_FOR_BUILD) $(LDDFLAGS) \
 + 	   -o genSocketOptionRegistry$(EXE_SUFFIX) $(GENSOR_SRC))
 + 
 + ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
-+@@ -934,8 +934,12 @@
-+ $(SCH_GEN)/SocketOptionRegistry.java: $(GENSOR_EXE)
-+ 	$(prep-target)
-+ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(SOR_COPYRIGHT_YEARS)" > $@
-++ifdef CROSS_COMPILE_ARCH
-++	$(QEMU) $(GENSOR_EXE) >> $@
-++else
-+ 	$(GENSOR_EXE) >> $@
-+ endif
-++endif
-+ #
-+ # Generated sun.nio.cs SingleByte classes
-+ #
 +@@ -959,7 +963,7 @@
 + 
 + $(GENUC_EXE) : $(GENUC_SRC)
 + 	$(prep-target)
 +-	$(NIO_CC) $(CPPFLAGS) -o $@ $(GENUC_SRC)
-++	$(NIO_CC) -static $(CPPFLAGS) -o $@ $(GENUC_SRC)
+++	$(HOST_CC) $(CPPFLAGS_FOR_BUILD) -o $@ $(GENUC_SRC)
 + 
 + ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
 + $(SFS_GEN)/UnixConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/UnixConstants-$(PLATFORM)-$(ARCH).java
-+@@ -969,8 +973,12 @@
-+ $(SFS_GEN)/UnixConstants.java: $(GENUC_EXE)
-+ 	$(prep-target)
-+ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENUC_COPYRIGHT_YEARS)" > $@
-++ifdef CROSS_COMPILE_ARCH
-++	$(QEMU) $(GENUC_EXE) >> $@
-++else
-+ 	$(GENUC_EXE) >> $@
-+ endif
-++endif
-+ 
-+ GENSC_SRC = $(PLATFORM_SRC)/native/sun/nio/fs/genSolarisConstants.c
-+ 
-+@@ -981,7 +989,7 @@
-+ 
-+ $(GENSC_EXE) : $(GENSC_SRC)
-+ 	$(prep-target)
-+-	$(NIO_CC) $(CPPFLAGS) -o $@ $(GENSC_SRC)
-++	$(NIO_CC) -static $(CPPFLAGS) -o $@ $(GENSC_SRC)
-+ 
-+ ifdef NIO_PLATFORM_CLASSES_ROOT_DIR
-+ $(SFS_GEN)/SolarisConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/SolarisConstants-$(PLATFORM)-$(ARCH).java
-+@@ -991,7 +999,11 @@
-+ $(SFS_GEN)/SolarisConstants.java: $(GENSC_EXE)
-+ 	$(prep-target)
-+ 	NAWK="$(NAWK)" SH="$(SH)" $(SH) -e addNotices.sh "$(GENSC_COPYRIGHT_YEARS)" > $@
-++ifdef CROSS_COMPILE_ARCH
-++	$(QEMU) $(GENSC_EXE) >> $@
-++else
-+ 	$(GENSC_EXE) >> $@
-+ endif
-++endif
-+ 
-+ .PHONY: sources 
 +diff -Nur openjdk.orig/jdk/make/java/npt/Makefile openjdk/jdk/make/java/npt/Makefile
 +--- openjdk.orig/jdk/make/java/npt/Makefile	2013-01-14 23:25:02.000000000 +0100
 ++++ openjdk/jdk/make/java/npt/Makefile	2013-02-18 10:18:28.000000000 +0100
