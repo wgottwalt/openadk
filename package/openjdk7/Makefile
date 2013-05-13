@@ -11,7 +11,7 @@ PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
