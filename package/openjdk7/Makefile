@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		icedtea
+PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.3.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
@@ -14,6 +14,9 @@ PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
+
+DISTFILES:=		icedtea-$(PKG_VERSION).tar.gz
+WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
