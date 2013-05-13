@@ -59,6 +59,9 @@ endif
 ifeq ($(CPU_ARCH),mipsel)
 QEMU:=			qemu-mipsel
 endif
+ifeq ($(CPU_ARCH),mips64el)
+QEMU:=			qemu-mipsel
+endif
 ifeq ($(CPU_ARCH),mips)
 QEMU:=			qemu-mips
 endif
