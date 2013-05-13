@@ -1,6 +1,6 @@
 diff -Nur icedtea-2.3.9.orig/Makefile.in icedtea-2.3.9/Makefile.in
 --- icedtea-2.3.9.orig/Makefile.in	2013-04-21 22:48:31.000000000 +0200
-+++ icedtea-2.3.9/Makefile.in	2013-05-13 17:13:12.000000000 +0200
++++ icedtea-2.3.9/Makefile.in	2013-05-13 17:36:09.000000000 +0200
 @@ -90,7 +90,6 @@
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7089790-bsd_port.patch \
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7098194-macosx_port.patch \
@@ -29,8 +29,8 @@ diff -Nur icedtea-2.3.9.orig/Makefile.in icedtea-2.3.9/Makefile.in
  
 diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk.patch
 --- icedtea-2.3.9.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.3.9/patches/openadk.patch	2013-05-13 17:16:36.000000000 +0200
-@@ -0,0 +1,288 @@
++++ icedtea-2.3.9/patches/openadk.patch	2013-05-13 17:42:47.000000000 +0200
+@@ -0,0 +1,330 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2013-01-14 23:25:00.000000000 +0100
 ++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-02-18 10:18:27.000000000 +0100
@@ -319,3 +319,45 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 
 + ifndef JDK_TOPDIR
 +   JDK_TOPDIR=$(TOPDIR)/jdk
++diff -Nur openjdk.orig/jdk/make/sun/xawt/Makefile openjdk/jdk/make/sun/xawt/Makefile
++--- openjdk.orig/jdk/make/sun/xawt/Makefile	2013-04-16 00:41:13.000000000 +0200
+++++ openjdk/jdk/make/sun/xawt/Makefile	2013-05-13 17:42:21.000000000 +0200
++@@ -292,16 +292,10 @@
++ SIZERS = $(SIZER).32
++ SIZERS_C = $(SIZER_32_C)
++ SIZES = $(WRAPPER_GENERATOR_DIR)/sizes.32
++-ifdef CROSS_COMPILE_ARCH
++-CFLAGS_32 = -m32
++-endif
++ else # !32
++ SIZERS = $(SIZER).64
++ SIZERS_C = $(SIZER_64_C)
++ SIZES = $(WRAPPER_GENERATOR_DIR)/sizes.64
++-ifdef CROSS_COMPILE_ARCH
++-CFLAGS_64 = -m64
++-endif
++ endif # 32
++ endif # !macosx
++ endif # solaris
++@@ -337,11 +331,7 @@
++ WRAPPER_GENERATOR_CLASS=$(WRAPPER_GENERATOR_TEMPDIR)/WrapperGenerator.class 
++ XLIBTYPES=$(PLATFORM_SRC)/classes/sun/awt/X11/generator/xlibtypes.txt
++ 
++-ifndef CROSS_COMPILE_ARCH
++-SIZERS_CC = $(CC)
++-else
++-SIZERS_CC = $(HOST_CC)
++-endif
+++SIZERS_CC = $(CC) -static
++ 
++ $(SIZERS): $(SIZERS_C) 
++ 	$(prep-target)
++@@ -364,7 +354,7 @@
++ 	    $(CHMOD) +w $@;\
++ 	else	\
++ 	    $(ECHO) GENERATING $@; \
++-	    $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
+++	    $(QEMU) $(WRAPPER_GENERATOR_DIR)/sizer$(suffix $@) > $@; \
++ 	fi
++ 	@if [ "$(DOCOMPARE)$(suffix $@)" = "true.64" ]; then \
++ 	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
