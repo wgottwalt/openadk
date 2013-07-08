@@ -22,6 +22,9 @@ config ADK_KERNEL_NETDEV_1000
 config ADK_KERNEL_VIA_RHINE_MMIO
 	boolean
 
+config ADK_KERNEL_ATH_CARDS
+	boolean
+
 config ADK_KERNEL_SMC91X
 	boolean
 	select ADK_KERNEL_NETDEVICES
@@ -366,6 +369,7 @@ config ADK_KPACKAGE_KMOD_ATH5K
 	prompt "kmod-ath5k................... Atheros 5xxx wireless cards"
 	tristate
 	select ADK_KERNEL_MAC80211_LEDS
+	select ADK_KERNEL_ATH_CARDS
 	select ADK_KERNEL_ATH_COMMON
 	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_AHB
