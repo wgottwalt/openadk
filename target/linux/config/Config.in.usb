@@ -44,6 +44,7 @@ config ADK_KPACKAGE_KMOD_USB
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -82,6 +83,7 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 	depends on !ADK_KERNEL_USB_UHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_INTEL_ATOM
@@ -105,6 +107,7 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	depends on ADK_KPACKAGE_KMOD_USB
 	#depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
@@ -130,6 +133,7 @@ config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
 	depends on ADK_KPACKAGE_KMOD_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
@@ -144,6 +148,7 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 	depends on ADK_KPACKAGE_KMOD_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  The SL811HS is a single-port USB controller that supports either
@@ -151,6 +156,14 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 	  board has this chip, and you want to use it as a host controller. 
 	  If unsure, say N.
 
+config ADK_KERNEL_USB_DWCOTG
+	boolean
+	select ADK_KERNEL_USB
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y
+	help
+	  The Synopsis DWC controller is a dual-role
+          host/peripheral/OTG ("On The Go") USB controllers.
 
 config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
@@ -159,6 +172,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	depends on !ADK_KERNEL_USB_EHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on ADK_KPACKAGE_KMOD_USB
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
@@ -194,6 +208,7 @@ config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_ACM

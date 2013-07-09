@@ -576,6 +576,7 @@ config ADK_TARGET_LIB_UCLIBC
 	depends on \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
+		   !ADK_TARGET_SYSTEM_RASPBERRY_PI && \
 		   !ADK_LINUX_NATIVE
 	help
  	 http://uclibc.org
@@ -617,6 +618,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	help
 	 http://www.gnu.org/libc
 

@@ -123,6 +123,14 @@ config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
+config ADK_KPACKAGE_KMOD_SND_BCM2835
+	prompt "kmod-snd-bcm2835............... ALSA SOC Raspberry PI"
+	tristate
+	select ADK_KERNEL_SND_ARM
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
 endmenu
 
 menu "Video devices support"
