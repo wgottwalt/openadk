@@ -122,8 +122,17 @@ config ADK_KERNEL_VERSION
 	default "3.4.51" if ADK_KERNEL_VERSION_3_4_51
 	help
 
+config ADK_KERNEL_COMP_GZIP
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+        boolean
+        select ADK_KERNEL_RD_GZIP
+        select ADK_KERNEL_KERNEL_GZIP
+        select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+	default y
+
 choice
 prompt "Kernel Compression"
+depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 config ADK_KERNEL_COMP_XZ
 	prompt "use XZ compression"
 	boolean
