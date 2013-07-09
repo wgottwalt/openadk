@@ -95,7 +95,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.9.8"
+	prompt "3.9.9"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
@@ -122,7 +122,7 @@ config ADK_KERNEL_VERSION
 	default "3.4.51" if ADK_KERNEL_VERSION_3_4_51
 	help
 
-config ADK_KERNEL_COMP_GZIP
+config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
         boolean
         select ADK_KERNEL_RD_GZIP

@@ -53,7 +53,7 @@ config ADK_KERNEL_SQUASHFS
 config ADK_KERNEL_EXT2_FS
 	boolean
 	default y if ADK_TARGET_WITH_CF
-	default y if ADK_TARGET_WITH_MMC
+	default y if ADK_TARGET_WITH_MMC && !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT2_FS
