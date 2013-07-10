@@ -11,6 +11,8 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
 else ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
+else ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
 else
 KERNEL:=$(LINUX_DIR)/vmlinux
 endif
@@ -50,9 +52,13 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	#@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	#@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install-rpi.sh /dev/sdb $(BIN_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
