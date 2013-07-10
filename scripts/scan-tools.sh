@@ -237,6 +237,12 @@ if ! which pkg-config >/dev/null 2>&1; then
 	out=1
 fi
 
+if ! which bc >/dev/null 2>&1; then
+	echo  "You need bc to continue."
+	echo
+	out=1
+fi
+
 cd $topdir
 rm -rf tmp
 
