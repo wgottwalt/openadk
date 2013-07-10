@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ab408a61f49f215ce77ed0cf1deed6e1
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia

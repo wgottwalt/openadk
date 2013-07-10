@@ -1,0 +1,11 @@
+--- mpd-0.17.4.orig/src/decoder/ffmpeg_decoder_plugin.c	2013-04-08 20:01:53.000000000 +0200
++++ mpd-0.17.4/src/decoder/ffmpeg_decoder_plugin.c	2013-07-10 11:02:20.000000000 +0200
+@@ -44,6 +44,8 @@
+ #include <libavutil/dict.h>
+ #endif
+ 
++#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
++
+ #undef G_LOG_DOMAIN
+ #define G_LOG_DOMAIN "ffmpeg"
+ 
