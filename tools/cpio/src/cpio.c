@@ -1836,9 +1836,6 @@ addfile(const char *realfile, struct stat *st,
 			}
 			if ((cp = getuser(st->st_uid)) != NULL)
 				sprintf(bc.Tdr.t_uname, "%.31s", cp);
-			else
-				msg(1, 0, "could not get passwd information "
-						"for %s\n", realfile);
 			if ((cp = getgroup(st->st_gid)) != NULL)
 				sprintf(bc.Tdr.t_gname, "%.31s", cp);
 			else
