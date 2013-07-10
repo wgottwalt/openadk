@@ -17,6 +17,16 @@ else
 	exit 1
 fi
 
+printf "Checking if sfdisk is installed"
+sfdisk=$(which sfdisk)
+
+if [ ! -z $sfdisk -a -x $sfdisk ];then
+	printf "...okay\n"
+else
+	printf "...failed\n"
+	exit 1
+fi
+
 printf "Checking if mke2fs is installed"
 mke2fs=$(which mke2fs)
 
@@ -88,14 +98,13 @@ rootpart=${1}2
 $parted -s $1 mklabel msdos
 sleep 2
 maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-rootsize=$(($maxsize-2))
+rootsize=$(($maxsize-16))
 
 $parted -s $1 unit cyl mkpart primary fat32 -- 0 16
-$parted -s $1 unit cyl mkpart primary ext2 -- 16 -2
-#$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
+$parted -s $1 unit cyl mkpart primary ext2 -- 16 $rootsize
+$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
 $parted -s $1 set 1 boot on
-#$sfdisk --change-id $1 1 27
-#$sfdisk --change-id $1 3 88
+$sfdisk --change-id $1 3 88
 sleep 2
 mkfs.vfat ${1}1
 $mke2fs ${1}2
