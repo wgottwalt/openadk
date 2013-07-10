@@ -99,6 +99,15 @@ if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	[ $? -ne 0 ] && out=1
 fi
 
+if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
+	NEED_ZIP="$NEED_ZIP openjdk"
+fi
+
+if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
+	cd ${TOPDIR}/jtools; bash prereq.sh
+	[ $? -ne 0 ] && out=1
+fi
+
 if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
 	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
 fi
