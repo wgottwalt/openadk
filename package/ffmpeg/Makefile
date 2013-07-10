@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		0.10
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		dc665cc599a739e3c5262ccdac13d129
+PKG_VERSION:=		2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		13a0feb74474f89052f6b8ba1bce46be
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
 PKG_FDEPENDS:=		libpthread
