@@ -22,6 +22,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_ARGS+=	--target=armv6-linux-gcc
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
