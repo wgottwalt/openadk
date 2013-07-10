@@ -1190,6 +1190,10 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55))
 
+$(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
+	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
+,55))
+
 #ifeq ($(ADK_LINUX_64),y)
 #V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
 #endif
