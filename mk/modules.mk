@@ -441,18 +441,16 @@ $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_defrag_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
-,50))
+,46))
 
-NAT:=NF_NAT_IPV4
 ifeq ($(KERNEL_BASE),3)
 ifeq ($(KERNEL_MAJ),4)
-NAT:=NF_NAT
-$(eval $(call KMOD_template,$(NAT),full-nat,\
+$(eval $(call KMOD_template,FULL_NAT,full-nat,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
 ,50))
 else
-$(eval $(call KMOD_template,$(NAT),full-nat,\
+$(eval $(call KMOD_template,FULL_NAT,full-nat,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
@@ -510,7 +508,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_SIP,nf-conntrack-sip,\
 
 $(eval $(call KMOD_template,IP_NF_IPTABLES,ip-nf-iptables,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_tables \
-,50))
+,49))
 
 $(eval $(call KMOD_template,IP_NF_MATCH_IPRANGE,ip-nf-match-iprange,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_iprange \
