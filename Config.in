@@ -95,7 +95,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.8.10"
+	prompt "3.9.9"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
@@ -106,24 +106,33 @@ depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_
 
 choice
 prompt "Kernel Version"
-config ADK_KERNEL_VERSION_3_8_10
-	prompt "3.8.10"
+config ADK_KERNEL_VERSION_3_9_9
+	prompt "3.9.9"
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_42
-	prompt "3.4.42"
+config ADK_KERNEL_VERSION_3_4_51
+	prompt "3.4.51"
 	boolean
 
 endchoice
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.8.10" if ADK_KERNEL_VERSION_3_8_10
-	default "3.4.42" if ADK_KERNEL_VERSION_3_4_42
+	default "3.9.9" if ADK_KERNEL_VERSION_3_9_9
+	default "3.4.51" if ADK_KERNEL_VERSION_3_4_51
 	help
+
+config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+        boolean
+        select ADK_KERNEL_RD_GZIP
+        select ADK_KERNEL_KERNEL_GZIP
+        select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+	default y
 
 choice
 prompt "Kernel Compression"
+depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 config ADK_KERNEL_COMP_XZ
 	prompt "use XZ compression"
 	boolean

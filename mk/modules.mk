@@ -994,10 +994,10 @@ $(eval $(call KMOD_template,CRYPTO_MICHAEL_MIC,crypto-michael-mic,\
     $(MODULES_DIR)/kernel/crypto/michael_mic \
 ,11))
 
-$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
-    $(MODULES_DIR)/kernel/lib/libcrc32c \
-    $(MODULES_DIR)/kernel/crypto/crc32c \
-,11))
+#$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
+#    $(MODULES_DIR)/kernel/lib/libcrc32c \
+#    $(MODULES_DIR)/kernel/crypto/crc32c \
+#,11))
 
 $(eval $(call KMOD_template,OCF_CRYPTOSOFT,ocf-cryptosoft,\
     ${MODULES_DIR}/kernel/crypto/ocf/cryptosoft \
@@ -1658,9 +1658,9 @@ $(eval $(call KMOD_template,CRC32,crc32, \
 	$(MODULES_DIR)/kernel/lib/crc32 \
 ,01))
 
-$(eval $(call KMOD_template,LIBCRC32C,libcrc32c, \
-	$(MODULES_DIR)/kernel/lib/libcrc32c \
-,10))
+#$(eval $(call KMOD_template,LIBCRC32C,libcrc32c, \
+#	$(MODULES_DIR)/kernel/lib/libcrc32c \
+#,10))
 
 #
 # parallel port support

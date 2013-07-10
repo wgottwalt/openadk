@@ -526,6 +526,7 @@ config ADK_TARGET_CFLAGS
 
 config ADK_TARGET_CMDLINE
 	string
+	default "rootfstype=ext4 root=/dev/mmcblk0p2 rootwait" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
@@ -575,6 +576,7 @@ config ADK_TARGET_LIB_UCLIBC
 	depends on \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
+		   !ADK_TARGET_SYSTEM_RASPBERRY_PI && \
 		   !ADK_LINUX_NATIVE
 	help
  	 http://uclibc.org
@@ -616,6 +618,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	help
 	 http://www.gnu.org/libc
 
@@ -653,6 +656,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_BLK_DEV_INITRD
 	select ADK_KERNEL_RD_XZ
 	help
@@ -671,6 +675,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_EXT2_FS
 	help
 	  create an read-only initramfs system.
@@ -703,6 +708,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	select ADK_KERNEL_IP_PNP
 	select ADK_KERNEL_IP_PNP_DHCP
 	depends on !ADK_HARDWARE_QEMU && !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	help
 	  Root filesystem mounted via NFS. (DHCP)
 
@@ -744,6 +750,7 @@ config ADK_TARGET_ROOTFS_MMC
 	depends on ADK_TARGET_WITH_MMC
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	help
 	  Use this option if you have a MMC/SDCARD based system.
 	  (ext2 filesystem is used.)
@@ -755,9 +762,17 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 
 endchoice
 
+config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
+        boolean
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI && ADK_TARGET_ROOTFS_ARCHIVE
+        select ADK_KERNEL_EXT4_FS
+	default y
+        help
+          Compile EXT4 filesystem into kernel and use it as root filesystem.
+
 choice
 prompt "Root filesystem type"
-depends on ADK_TARGET_ROOTFS_ARCHIVE
+depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI
 default ADK_TARGET_ROOT_EXT2_FS
 
 config ADK_TARGET_ROOT_EXT2
