@@ -1,6 +1,6 @@
 diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
 --- Python-2.7.1.orig/Makefile.pre.in	2010-10-14 13:37:30.000000000 +0200
-+++ Python-2.7.1/Makefile.pre.in	2011-10-15 16:09:58.000000000 +0200
++++ Python-2.7.1/Makefile.pre.in	2013-07-11 11:56:32.128103200 +0200
 @@ -59,7 +59,7 @@ MAKESETUP=      $(srcdir)/Modules/makese
  # Compiler options
  OPT=		@OPT@
@@ -113,7 +113,7 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  
  # Create the PLATDIR source directory, if one wasn't distributed..
  $(srcdir)/Lib/$(PLATDIR):
-@@ -1044,7 +1045,8 @@ libainstall:	all python-config
+@@ -1044,11 +1045,12 @@ libainstall:	all python-config
  # Install the dynamically loadable modules
  # This goes into $(exec_prefix)
  sharedinstall: sharedmods
@@ -123,6 +123,11 @@ diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
  	   	--prefix=$(prefix) \
  		--install-scripts=$(BINDIR) \
  		--install-platlib=$(DESTSHARED) \
+-		--root=/$(DESTDIR)
++		--root=$(DESTDIR)
+ 
+ # Here are a couple of targets for MacOSX again, to install a full
+ # framework-based Python. frameworkinstall installs everything, the
 @@ -1082,7 +1084,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
  		fi; \
  	done

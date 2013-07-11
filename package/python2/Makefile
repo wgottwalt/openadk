@@ -15,7 +15,7 @@ PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 PKG_OPTS:=		noscripts
 
-PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
+PKG_HOST_DEPENDS:=	!netbsd !openbsd
 
 DISTFILES=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
@@ -29,6 +29,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PYTHON2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PYTHON2_BZIP2,${PKG_NAME}-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,PYTHON2_READLINE,${PKG_NAME}-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+ifeq ($(ADK_HOST_CYGWIN),y)
+EXE:=			.exe
+endif
 
 TARGET_CFLAGS+=		-fPIC
 TARGET_LDFLAGS+=	-L.
@@ -55,7 +59,7 @@ post-extract:
 		./configure --without-cxx-main --with-threads \
 		--prefix=$(STAGING_HOST_DIR)/usr \
 	);
-	$(MAKE) -C ${WRKBUILD} python Parser/pgen
+	$(MAKE) -C ${WRKBUILD} python$(EXE) Parser/pgen$(EXE)
 	$(MAKE) -C ${WRKBUILD} install
 	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_HOST_DIR}/usr/bin/pgen
 	${CP} ${WRKBUILD}/python ${STAGING_HOST_DIR}/usr/bin/hostpython
