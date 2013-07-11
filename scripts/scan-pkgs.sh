@@ -80,6 +80,10 @@ if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_ZIP="$NEED_ZIP firefox"
 fi
 
+if [[ -n $ADK_PACKAGE_MESALIB ]]; then
+	NEED_MAKEDEPEND="$NEED_MAKEDEPEND mesalib"
+fi
+
 if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
 	NEED_BISON="$NEED_BISON heimdal-server"
 fi
@@ -420,6 +424,13 @@ if [[ -n $NEED_PYTHON ]]; then
 			echo >&2 You need python to build $NEED_PYTHON
 			out=1
 		fi
+	fi
+fi
+
+if [[ -n $NEED_MAKEDEPEND ]]; then
+	if ! which makedepend >/dev/null 2>&1; then
+		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
+		out=1
 	fi
 fi
 

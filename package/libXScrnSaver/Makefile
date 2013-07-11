@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		8e459e544298caa27fc7c7e5a56e2a6d
 PKG_DESCR:=		X.Org XScrnSaver library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		scrnsaverproto
+PKG_BUILDDEP:=		scrnsaverproto libXext
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

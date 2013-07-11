@@ -110,10 +110,10 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifneq ($(ADK_HARDWARE_QEMU),)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"

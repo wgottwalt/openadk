@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnetfilter_queue
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		08b968cb2d36c24deb7f26a69f5d8602
+PKG_MD5SUM:=		df09befac35cb215865b39a36c96a3fa
 PKG_DESCR:=		API to packets that have been queued by the kernel packet filter
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink

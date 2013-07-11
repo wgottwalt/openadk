@@ -4,24 +4,27 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		0.9.7
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bd888cffde8d9c3061c7fd719b0cd4ce
-PKG_DESCR:=		VP8 codec library
+PKG_MD5SUM:=		7ae163ac3196c79ec2f0904280078a45
+PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
-PKG_SYSTEM_DEPENDS:=	sharp-zaurus ibm-x40 lemote-yeelong
+PKG_SYSTEM_DEPENDS:=	raspberry-pi sharp-zaurus ibm-x40 lemote-yeelong
 
-DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}-p1.tar.bz2
-WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}-p1
+DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
+WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_ARGS+=	--target=armv6-linux-gcc
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif

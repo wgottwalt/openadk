@@ -1,4 +1,4 @@
-menu "Multimedia devices support"
+menu "Audio devices support"
 depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 
 config ADK_KERNEL_SND_ARM
@@ -37,8 +37,6 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_SOUND
-
-menu "Audio devices support"
 
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-snd...................... ALSA sound support"
@@ -131,54 +129,4 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
-endmenu
-
-menu "Video devices support"
-config ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
-	prompt "kmod-media-support............... Multimedia support"
-	tristate
-	default n
-	help
-
-config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
-	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
-	tristate
-	depends on ADK_KPACKAGE_KMOD_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	select ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
-	default n
-	help
-
-config ADK_KPACKAGE_KMOD_USB_GSPCA
-	prompt "kmod-usb-gspca................... GSPCA webcam framework"
-	depends on ADK_TARGET_WITH_USB
-	tristate
-	help
-	 GSPCA webcam framework
-
-config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC207
-	prompt "kmod-usb-gpsca-pac207............ Pixart PAC207 USB Camera Driver"
-	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
-	help
-
-config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC7311
-	prompt "kmod-usb-gpsca-pac7311........... Pixart PAC7311 USB Camera Driver"
-	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
-	help
-
-config ADK_KPACKAGE_KMOD_USB_GSPCA_SPCA561
-	prompt "kmod-usb-gpsca-spca561........... SPCA561 USB Camera Driver"
-	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
-	help
-
-config ADK_KPACKAGE_KMOD_USB_PWC
-	prompt "kmod-usb-pwc..................... Kernel driver for USB Philips Cameras"
-	tristate
-	depends on ADK_KPACKAGE_KMOD_USB
-	default n
-	help
-
-endmenu
 endmenu

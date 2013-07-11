@@ -441,13 +441,22 @@ $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_defrag_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
-,50))
+,46))
 
-$(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),4)
+$(eval $(call KMOD_template,FULL_NAT,full-nat,\
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
+,50))
+else
+$(eval $(call KMOD_template,FULL_NAT,full-nat,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
 ,50))
+endif
+endif
 
 $(eval $(call KMOD_template,NF_CONNTRACK_FTP,nf-conntrack-ftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_ftp \
@@ -499,7 +508,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_SIP,nf-conntrack-sip,\
 
 $(eval $(call KMOD_template,IP_NF_IPTABLES,ip-nf-iptables,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ip_tables \
-,50))
+,49))
 
 $(eval $(call KMOD_template,IP_NF_MATCH_IPRANGE,ip-nf-match-iprange,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_iprange \
@@ -1181,6 +1190,10 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55))
 
+$(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
+	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
+,55))
+
 #ifeq ($(ADK_LINUX_64),y)
 #V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
 #endif
@@ -1195,23 +1208,23 @@ $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 ,70))
 
 $(eval $(call KMOD_template,USB_GSPCA,usb-gspca,\
-	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_main \
+	$(MODULES_DIR)/kernel/drivers/media/usb/gspca/gspca_main \
 ,75))
 
 $(eval $(call KMOD_template,USB_GSPCA_PAC207,usb-gspca-pac207,\
-	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac207 \
+	$(MODULES_DIR)/kernel/drivers/media/usb/gspca/gspca_pac207 \
 ,80))
 
 $(eval $(call KMOD_template,USB_GSPCA_PAC7311,usb-gspca-pac7311,\
-	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_pac7311 \
+	$(MODULES_DIR)/kernel/drivers/media/usb/gspca/gspca_pac7311 \
 ,80))
 
 $(eval $(call KMOD_template,USB_GSPCA_SPCA561,usb-gspca-spca561,\
-	$(MODULES_DIR)/kernel/drivers/media/video/gspca/gspca_spca561 \
+	$(MODULES_DIR)/kernel/drivers/media/usb/gspca/gspca_spca561 \
 ,80))
 
 $(eval $(call KMOD_template,USB_PWC,usb-pwc,\
-	$(MODULES_DIR)/kernel/drivers/media/video/pwc/pwc \
+	$(MODULES_DIR)/kernel/drivers/media/usb/pwc/pwc \
 ,80))
 
 #
