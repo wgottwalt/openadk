@@ -41,15 +41,18 @@ $(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE}
 
 ifeq (${ADK_PACKAGE_LIBCURL_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-ssl \
-			--without-gnutls
+			--without-gnutls \
+			--without-axtls
 endif
 ifeq (${ADK_PACKAGE_LIBCURL_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl="${STAGING_TARGET_DIR}/usr" \
-			--without-gnutls
+			--without-gnutls \
+			--without-axtls
 endif
 ifeq (${ADK_PACKAGE_LIBCURL_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
-			--without-ssl
+			--without-ssl \
+			--without-axtls
 endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
