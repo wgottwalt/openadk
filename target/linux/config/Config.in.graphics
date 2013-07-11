@@ -115,7 +115,7 @@ config ADK_KERNEL_FB_SM7XX
 
 config ADK_KERNEL_FB_BCM2708
 	prompt "................................ Framebuffer support for Raspberry PI"
-	tristate
+	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
