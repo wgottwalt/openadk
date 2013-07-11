@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		13a0feb74474f89052f6b8ba1bce46be
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
@@ -15,11 +15,11 @@ PKG_SITES:=		http://www.ffmpeg.org/releases/
 
 PKG_ARCH_DEPENDS:=	!cris
 
-PKG_SUBPKGS:=		LIBFFMPEG FFPLAY FFSERVER FFPROBE FFMPEG
-PKGSD_FFPLAY:=		ffmpeg based video player
-PKGSC_FFPLAY:=		multimedia
-PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
-PKGSB_FFPLAY:=		sdl
+PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
+#PKGSD_FFPLAY:=		ffmpeg based video player
+#PKGSC_FFPLAY:=		multimedia
+#PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
+#PKGSB_FFPLAY:=		sdl
 PKGSD_FFMPEG:=		ffmpeg video converter
 PKGSC_FFMPEG:=		multimedia
 PKGSS_FFMPEG:=		libffmpeg
@@ -83,7 +83,7 @@ $(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSC_FFMPEG}))
 $(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSC_FFSERVER}))
 $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSC_FFPROBE}))
-$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
+#$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
@@ -103,6 +103,9 @@ CONFIGURE_CPU_OPTS:=	--enable-sse
 else
 CONFIGURE_CPU_OPTS:=    --disable-sse 
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_CPU_OPTS:=	--enable-armv6
+endif
 
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS:=	--prefix=/usr \
@@ -121,12 +124,13 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-shared \
 			--enable-static \
 			--enable-gpl \
+			--enable-nonfree \
 			--enable-swscale \
 			--enable-postproc \
 			${CONFIGURE_CPU_OPTS}
 
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
-CONFIGURE_ARGS+=	--enable-nonfree --enable-libfaac
+CONFIGURE_ARGS+=	--enable-libfaac
 endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
 CONFIGURE_ARGS+=	--enable-libmp3lame
@@ -155,9 +159,9 @@ libffmpeg-install:
 	${CP} ${WRKINST}/usr/lib/libswscale.so* ${IDIR_LIBFFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libswresample.so* ${IDIR_LIBFFMPEG}/usr/lib
 
-ffplay-install:
-	${INSTALL_DIR} ${IDIR_FFPLAY}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/ffplay ${IDIR_FFPLAY}/usr/bin
+#ffplay-install:
+#	${INSTALL_DIR} ${IDIR_FFPLAY}/usr/bin
+#	${INSTALL_BIN} ${WRKINST}/usr/bin/ffplay ${IDIR_FFPLAY}/usr/bin
 
 ffmpeg-install:
 	${INSTALL_DIR} ${IDIR_FFMPEG}/usr/bin
