@@ -3,6 +3,13 @@ config ADK_KPACKAGE_KMOD_CIFS
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
+	select ADK_KPACKAGE_KMOD_CRYPTO_MD4
+        select ADK_KPACKAGE_KMOD_CRYPTO_MD5
+        select ADK_KPACKAGE_KMOD_CRYPTO_HMAC
+        select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
+        select ADK_KPACKAGE_KMOD_CRYPTO_ECB
+        select ADK_KPACKAGE_KMOD_CRYPTO_DES
+        select ADK_KPACKAGE_KMOD_CRYPTO_SHA256
 	default n
 	help
 	  This is the client VFS module for the Common Internet File System
