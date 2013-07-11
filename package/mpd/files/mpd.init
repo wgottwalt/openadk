@@ -17,7 +17,7 @@ start)
 		echo "mpd user must be in group audio."
 		exit 1
 	fi
-	if [ ! -d /etc/mpd ];then
+	if [ ! -d /etc/mpd/playlists ];then
 		mkdir -p /etc/mpd/playlists
 		chown -R mpd:mpd /etc/mpd
 	fi
