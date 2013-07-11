@@ -1,13 +1,7 @@
 #!/bin/sh
 
-which vconfig || {
-	echo "vconfig executable not found, aborting"
-	exit 0
-}
-[ -d /proc/net/vlan ] || {
-	echo "no kernel support for 802.1q found, aborting"
-	exit 0
-}
+which vconfig >/dev/null || exit 0
+[ -d /proc/net/vlan ] || exit 0
 
 case "$IFACE" in
         vlan*)
