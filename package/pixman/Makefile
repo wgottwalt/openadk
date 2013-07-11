@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pixman
-PKG_VERSION:=		0.26.2
+PKG_VERSION:=		0.30.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		276242da5b3af1258d072cf205d18f0b
+PKG_MD5SUM:=		ae7ac97921dfa59086ca2231621a79c7
 PKG_DESCR:=		Pixel manipulation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libpng
@@ -26,7 +26,8 @@ $(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,PIXMAN_DEV,pixman-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PIXMAN_DEV},${PKGSC_PIXMAN_DEV},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--disable-gtk
+CONFIGURE_ARGS+=	--disable-gtk \
+			--disable-arm-iwmmxt
 
 pixman-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN}/usr/lib
