@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		54
+PKG_RELEASE:=		55
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -83,8 +83,9 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
-
-
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
+endif
 
 # simple network configuration
 ifneq (${ADK_SIMPLE_NETWORK_CONFIG},)
