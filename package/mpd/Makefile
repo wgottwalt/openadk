@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.4
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		ab408a61f49f215ce77ed0cf1deed6e1
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -150,9 +150,9 @@ CONFIGURE_ARGS+=	\
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
-CONFIGURE_ARGS+=	--enable-flac --enable-oggflac
+CONFIGURE_ARGS+=	--enable-flac
 else
-CONFIGURE_ARGS+=	--disable-flac --disable-oggflac
+CONFIGURE_ARGS+=	--disable-flac
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)
@@ -164,7 +164,6 @@ endif
 ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
 CONFIGURE_ARGS+=	--enable-shout \
 			--enable-lame-encoder \
-			--with-lame=${STAGING_TARGET_DIR}/usr \
 			--enable-vorbis-encoder
 else
 CONFIGURE_ARGS+=	--disable-shout \
