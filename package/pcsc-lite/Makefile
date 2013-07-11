@@ -12,7 +12,7 @@ PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libusb libusb-compat libpthread
 PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://pcsclite.alioth.debian.org/
-PKG_SITES:=		http://alioth.debian.org/frs/download.php/3598/
+PKG_SITES:=		http://alioth.debian.org/frs/download.php/file/3598/
 
 PKG_ARCH_DEPENDS:=	!avr32
 

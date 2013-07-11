@@ -11,7 +11,7 @@ PKG_DESCR:=		A routing software package
 PKG_SECTION:=		route
 PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://www.quagga.net/
-PKG_SITES:=		http://www.quagga.net/download/
+PKG_SITES:=		http://download.savannah.gnu.org/releases/quagga/
 PKG_MULTI:=		1
 
 PKG_SUBPKGS:=		QUAGGA QUAGGA_BGPD QUAGGA_OSPFD QUAGGA_OSPF6D

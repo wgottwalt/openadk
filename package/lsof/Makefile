@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lsof
 PKG_VERSION:=		4.84
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		6dae655988c810a7042c06a4e2fa3c5f
 PKG_DESCR:=		list open files
 PKG_SECTION:=		misc
@@ -23,7 +23,7 @@ $(eval $(call PKG_template,LSOF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_
 CONFIG_STYLE:=		minimal
 CONFIGURE_PROG:=	Configure
 CONFIGURE_ARGS:=	-n linux
-XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' CFGL='${TARGET_LDFLAGS} -L./lib -llsof'
+XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS} -I$(STAGING_DIR)/usr/include/tirpc' CFGL='${TARGET_LDFLAGS} -L./lib -llsof -ltirpc'
 INSTALL_STYLE:=		manual
 
 post-extract:
