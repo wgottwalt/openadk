@@ -1,6 +1,7 @@
 config ADK_PKG_MPDBOX
 	bool "Choose packages for MPDBox system"
 	default n
+	select BUSYBOX_NTPD
 	select ADK_PACKAGE_LIBMPDCLIENT
 	select ADK_PACKAGE_MPC
 	select ADK_PACKAGE_MPD

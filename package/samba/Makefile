@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
 PKG_VERSION:=		3.6.16
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		12c6785802813c2c5bf66e5c4c4e1d93
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
@@ -16,15 +16,20 @@ PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
 PKG_ARCH_DEPENDS:=	!avr32
 
-PKG_SUBPKGS:=		SAMBA SAMBA_CLIENT SAMBA_PASSWD
+PKG_SUBPKGS:=		SAMBA SAMBA_CLIENT SAMBA_PASSWD SAMBA_LIB
+PKGSD_SAMBA_CLIENT:=	NetBIOS/SMB client
+PKGSS_SAMBA_CLIENT:=	libreadline samba-lib
+PKGSD_SAMBA_PASSWD:=	SMB password utility
+PKGSD_SAMBA_LIB:=	SMB libraries
 
 WRKSRC=			${WRKDIST}/source3
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_PASSWD},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba -lintl
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
@@ -57,7 +62,8 @@ post-install:
 			${IDIR_SAMBA}/usr/lib/samba/charset
 	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
-	${CP} ${WRKINST}/usr/lib/samba/*.so* ${IDIR_SAMBA}/usr/lib/samba
+	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
+		${IDIR_SAMBA}/usr/lib/samba
 	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
 	${INSTALL_DIR} ${IDIR_SAMBA_PASSWD}/usr/bin
@@ -66,5 +72,8 @@ post-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/smbclient \
 		${IDIR_SAMBA_CLIENT}/usr/bin
+	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib/samba
+	$(CP) ${WRKINST}/usr/lib/samba/{libtalloc,libtdb,libtevent}.* \
+		${IDIR_SAMBA_LIB}/usr/lib/samba
 
 include ${TOPDIR}/mk/pkg-bottom.mk

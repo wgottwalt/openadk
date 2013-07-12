@@ -755,7 +755,7 @@ config BUSYBOX_NTPD
 
 config BUSYBOX_FEATURE_NTPD_SERVER
 	bool "Make ntpd usable as a NTP server"
-	default y
+	default n
 	depends on BUSYBOX_NTPD
 	help
 	  Make ntpd usable as a NTP server. If you disable this option

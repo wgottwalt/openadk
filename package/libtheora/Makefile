@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		292ab65cedd5021d6b7ddd117e07cd8e
 PKG_DESCR:=		Theora video codec
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libsdl libogg libvorbis
-PKG_BUILDDEP:=		sdl libogg libvorbis
+PKG_DEPENDS:=		libogg libvorbis
+PKG_BUILDDEP:=		libogg libvorbis
 PKG_URL:=		http://www.theora.org/
 PKG_SITES:=		http://downloads.xiph.org/releases/theora/
 
