@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
-PKG_VERSION:=		5.00
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		32d27de32166c02d670bb4a086185886
+PKG_VERSION:=		6.25
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		fcc80f94ff3adcb11eedf91092ea6f5e
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libdnet libpcap libpcre
@@ -37,9 +37,9 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
 			--without-liblua \
-			--with-libdnet="${STAGING_TARGET_DIR}/usr" \
 			--with-libpcap="${STAGING_TARGET_DIR}/usr" \
 			--with-libpcre="${STAGING_TARGET_DIR}/usr"
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 post-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap

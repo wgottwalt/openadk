@@ -1,0 +1,22 @@
+--- nmap-6.25.orig/output.h	2012-08-14 18:36:25.000000000 +0200
++++ nmap-6.25/output.h	2013-07-12 14:06:07.000000000 +0200
+@@ -226,6 +226,10 @@ std::string protect_xml(const std::strin
+ void printscriptresults(ScriptResults *scriptResults, stype scantype);
+ 
+ void printhostscriptresults(Target *currenths);
++
++/*This is a helper function to determine the ordering of the script results
++  based on their id */
++bool comparescriptids(ScriptResult first, ScriptResult second);
+ #endif
+ 
+ /* Print a table with traceroute hops. */
+@@ -253,8 +257,4 @@ void printfinaloutput();
+    were found. */
+ void printdatafilepaths();
+ 
+-/*This is a helper function to determine the ordering of the script results
+-  based on their id */
+-bool comparescriptids(ScriptResult first, ScriptResult second);
+-
+ #endif /* OUTPUT_H */
