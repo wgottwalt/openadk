@@ -23,6 +23,7 @@ $(eval $(call PKG_template,V4L_UTILS,v4l-utils,$(PKG_VERSION)-${PKG_RELEASE},${P
 $(eval $(call PKG_template,LIBV4L,libv4l,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-qv4l2
+TARGET_CPPFLAGS+=	-DLINUX_I2C_DEV_H
 
 v4l-utils-install:
 	$(INSTALL_DIR) $(IDIR_V4L_UTILS)/usr/bin
