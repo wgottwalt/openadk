@@ -15,6 +15,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WATCHDOG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/tirpc
+TARGET_LDFLAGS+=	-ltirpc
+
 post-install:
 	${INSTALL_DIR} ${IDIR_WATCHDOG}/sbin ${IDIR_WATCHDOG}/etc/
 	${INSTALL_DATA} ./files/watchdog.conf ${IDIR_WATCHDOG}/etc/
