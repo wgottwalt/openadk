@@ -1,6 +1,2 @@
 #!/bin/sh
-cd /
-sync
-for i in $(grep -v ^# /etc/fstab 2>/dev/null|awk '{ print $2 }');do
-	umount $i 2>/dev/null
-done
+# add code for shutdown routine
