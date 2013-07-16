@@ -9,9 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		92bb09883dd8a77ec5cfbff1c8932b15
 PKG_DESCR:=		connection tracking for RTSP
 PKG_SECTION:=		kernel
+PKG_DEPENDS:=           kmod-ip-nf-iptables kmod-nf-conntrack
 PKG_URL:=		http://github.com/maru-sama/rtsp-linux-v2.6
 
 PKG_CFLINE_RTSP:=	depends on !ADK_TOOLCHAIN_ONLY
+PKG_ARCH_DEPENDS:=	!arm
 
 NO_DISTFILES:=          1
 
