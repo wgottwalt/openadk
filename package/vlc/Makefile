@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
-PKG_VERSION:=		2.0.5
+PKG_VERSION:=		2.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4f959c0766ada8cea5a72c65fce94ebe
+PKG_MD5SUM:=		3b0e465b0990097b65abaf3e25589957
 PKG_DESCR:=		Media Player
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad
 PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
-PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/2.0.5/
+PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
 PKG_ARCH_DEPENDS:=	!cris !avr32
 
@@ -39,7 +39,8 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--without-kde-solid \
 			--enable-libgcrypt \
 			--enable-mad \
-			--enable-theora
+			--enable-theora \
+			--disable-avcodec
 
 vlc-install:
 	$(INSTALL_DIR) $(IDIR_VLC)/usr/bin
