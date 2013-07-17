@@ -107,7 +107,6 @@ PKG_CONFIGURE_OPTS:=	\
 	--without-pear \
 	--without-gettext \
 	--without-iconv \
-	--without-libxml-dir \
 	--with-pcre-regex=no \
 	--with-kerberos=no
 
