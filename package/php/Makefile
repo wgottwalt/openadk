@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
 PKG_VERSION:=		5.4.17
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cc698032dcdcb9ad158edcc90fe798d6
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
@@ -200,7 +200,7 @@ else
 PKG_CONFIGURE_OPTS+=	--disable-xml
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SIMPLEXML),)
-PKG_CONFIGURE_OPTS+=	--enable-simplexml=shared --enable-libxml
+PKG_CONFIGURE_OPTS+=	--enable-simplexml=shared --enable-libxml --with-libxml-dir="$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--disable-simplexml --disable-libxml
 endif
