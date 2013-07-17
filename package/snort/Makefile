@@ -4,31 +4,30 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		snort
-PKG_VERSION:=		2.8.5.2
+PKG_VERSION:=		2.9.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e6a8bc5aa1ebe4d2100533d7709c4a9e
+PKG_MD5SUM:=		f5fc0e176afca5989d47509478758fc7
 PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libnet libpcap libpcre
-PKG_BUILDDEP:=		libnet libpcap pcre
+PKG_DEPENDS:=		libnet libpcap libpcre libtirpc daq
+PKG_BUILDDEP:=		libnet libpcap pcre libtirpc daq
 PKG_URL:=		http://www.snort.org/
-PKG_SITES:=		http://dl.snort.org/snort-current/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-flexresp \
-			--with-libnet-includes="${STAGING_TARGET_DIR}/usr/include" \
-			--with-libnet-libraries="${STAGING_TARGET_DIR}/usr/lib" \
+TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
+TARGET_LDFLAGS+=	-ltirpc
+CONFIGURE_ARGS+=	--disable-static-daq \
 			--with-libpcap-includes="${STAGING_TARGET_DIR}/usr/include" \
 			--with-libpcap-libraries="${STAGING_TARGET_DIR}/usr/lib" \
 			--with-libpcre-includes="${STAGING_TARGET_DIR}/usr/include" \
 			--with-libpcre-libraries="${STAGING_TARGET_DIR}/usr/lib" \
-			--without-mysql \
-			--without-postgresql \
-			--disable-inline
+			--with-dnet-includes="${STAGING_TARGET_DIR}/usr/include" \ 
+			--with-dnet-libraries="${STAGING_TARGET_DIR}/usr/lib" 
 
 post-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin
@@ -39,8 +38,6 @@ post-install:
 	${INSTALL_DATA} ${WRKBUILD}/etc/gen-msg.map \
 		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/reference.config \
-		${IDIR_SNORT}/etc/snort
-	${INSTALL_DATA} ${WRKBUILD}/etc/sid-msg.map \
 		${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/threshold.conf \
 		${IDIR_SNORT}/etc/snort
