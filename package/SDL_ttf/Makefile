@@ -23,6 +23,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBSDL_TTF,libsdl-ttf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBSDL_TTF_DEV,libsdl-ttf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSDL_TTF_DEV},${PKGSC_LIBSDL_TTF_DEV}))
 
+TARGET_LDFLAGS+=	-lintl
+
 libsdl-ttf-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_TTF)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libSDL_ttf*so* $(IDIR_LIBSDL_TTF)/usr/lib
