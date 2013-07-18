@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
-PKG_VERSION:=		1_47_0
+PKG_VERSION:=		1.54.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ff180a5276bec773a7625cac7e2288e8
+PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 
-DISTFILES:=		boost_1_47_0.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
+DISTFILES:=		boost_1_54_0.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
 
 PKG_ARCH_DEPENDS:=	!mips
 
