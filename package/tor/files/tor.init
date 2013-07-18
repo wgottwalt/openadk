@@ -11,12 +11,12 @@ autostart)
 	;;
 start)
 	[ -d /var/run/tor ] || mkdir -p /var/run/tor
-	[ -d /tmp/.tor ] || mkdir -p /tmp/.tor
-	chown tor:tor /tmp/.tor /var/run/tor
-	su - tor -c /usr/bin/tor
+	[ -d /etc/tor ] || mkdir -p /etc/tor
+	chown tor:tor /etc/tor /var/run/tor
+	/usr/bin/tor
 	;;
 stop)
-	kill $(pgrep -f /usr/bin/tor)
+	kill -15 $(pgrep -f /usr/bin/tor)
 	;;
 restart)
 	sh $0 stop

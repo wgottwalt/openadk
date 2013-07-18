@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		371e007a201be90c16497cd9bd5e2553
 PKG_DESCR:=		CIFS utilities
 PKG_SECTION:=		net/fs
@@ -18,6 +18,10 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CIFS_UTILS,cifs-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-cifsupcall \
+			--disable-cifsidmap \
+			--disable-cifsacl
 
 cifs-utils-install:
 	$(INSTALL_DIR) $(IDIR_CIFS_UTILS)/usr/sbin

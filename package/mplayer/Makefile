@@ -147,7 +147,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_DIRECTFB}
 
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
-TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis
+TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis -lintl
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin

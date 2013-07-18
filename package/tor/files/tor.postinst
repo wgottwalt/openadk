@@ -3,4 +3,4 @@
 add_rcconf tor tor NO
 gid=$(get_next_gid)
 add_group tor $gid
-add_user tor $(get_next_uid) $gid /tmp/.tor
+add_user tor $(get_next_uid) $gid /etc/tor

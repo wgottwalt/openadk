@@ -1,0 +1,16 @@
+--- cryptodev-linux-1.6.orig/tests/Makefile	2013-03-04 04:59:29.000000000 +0100
++++ cryptodev-linux-1.6/tests/Makefile	2013-07-17 14:45:18.000000000 +0200
+@@ -20,13 +20,6 @@ example-async-speed-objs := async_speed.
+ example-hashcrypt-speed-objs := hashcrypt_speed.c
+ 
+ check: $(hostprogs)
+-	./cipher
+-	./hmac
+-	./async_cipher
+-	./async_hmac
+-	./cipher-aead-srtp
+-	./cipher-gcm
+-	./cipher-aead
+ 
+ clean:
+ 	rm -f *.o *~ $(hostprogs)

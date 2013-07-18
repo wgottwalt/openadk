@@ -1,5 +1,5 @@
 --- ipsec-tools-0.8.0.orig/configure	2011-03-18 14:27:41.000000000 +0100
-+++ ipsec-tools-0.8.0/configure	2011-03-31 13:16:18.091819156 +0200
++++ ipsec-tools-0.8.0/configure	2013-07-17 14:30:31.000000000 +0200
 @@ -11535,7 +11535,7 @@ $as_echo "$ac_cv_path_EGREP" >&6; }
  
  
@@ -9,6 +9,17 @@
  
  case $host in
  *netbsd*)
+@@ -11627,8 +11627,8 @@ else
+ fi
+ 
+ 
+-    as_ac_Header=`$as_echo "ac_cv_header_$KERNEL_INCLUDE/linux/pfkeyv2.h" | $as_tr_sh`
+-ac_fn_c_check_header_mongrel "$LINENO" "$KERNEL_INCLUDE/linux/pfkeyv2.h" "$as_ac_Header" "$ac_includes_default"
++    as_ac_Header=`$as_echo "ac_cv_header_$KERNEL_INCLUDE/uapi/linux/pfkeyv2.h" | $as_tr_sh`
++ac_fn_c_check_header_mongrel "$LINENO" "$KERNEL_INCLUDE/uapi/linux/pfkeyv2.h" "$as_ac_Header" "$ac_includes_default"
+ if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
+ 
+ else
 @@ -12286,7 +12286,7 @@ $as_echo "$as_me: WARNING: Using a gener
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking if printf accepts %z" >&5
  $as_echo_n "checking if printf accepts %z... " >&6; }
@@ -36,3 +47,21 @@
  	saved_CPPFLAGS=$CPPFLAGS
          CPPFLAGS="$CPPFLAGS $CPPFLAGS_ADD"
  	ac_fn_c_check_header_mongrel "$LINENO" "iconv.h" "ac_cv_header_iconv_h" "$ac_includes_default"
+@@ -14253,7 +14253,7 @@ linux*)
+ # Linux kernel NAT-T check
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+-#include <linux/pfkeyv2.h>
++#include <uapi/linux/pfkeyv2.h>
+ #ifdef SADB_X_EXT_NAT_T_TYPE
+ yes
+ #endif
+@@ -14440,7 +14440,7 @@ linux*)
+ # Linux kernel Security Context check
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+-#include <linux/pfkeyv2.h>
++#include <uapi/linux/pfkeyv2.h>
+ #ifdef SADB_X_EXT_SEC_CTX
+ yes
+ #endif

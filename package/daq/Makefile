@@ -1,0 +1,28 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		daq
+PKG_VERSION:=		2.0.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a00855a153647df76d47f1ea454f74ae
+PKG_DESCR:=		daq
+PKG_SECTION:=		libs
+PKG_DEPENDS:=		libpcap
+PKG_BUILDDEP:=		libpcap
+PKG_URL:=		http://www.snort.org
+PKG_SITES:=		http://openadk.org/distfiles/
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,DAQ,daq,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+daq-install:
+	$(INSTALL_DIR) $(IDIR_DAQ)/usr/lib/daq
+	$(CP) $(WRKINST)/usr/lib/daq/*.so \
+		$(IDIR_DAQ)/usr/lib/daq
+	$(CP) $(WRKINST)/usr/lib/*.so* \
+		$(IDIR_DAQ)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

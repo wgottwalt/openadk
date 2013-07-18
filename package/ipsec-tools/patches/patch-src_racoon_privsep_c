@@ -1,5 +1,5 @@
 --- ipsec-tools-0.8.0.orig/src/racoon/privsep.c	2011-03-06 09:28:10.000000000 +0100
-+++ ipsec-tools-0.8.0/src/racoon/privsep.c	2011-03-31 13:24:07.981813178 +0200
++++ ipsec-tools-0.8.0/src/racoon/privsep.c	2013-07-17 14:18:50.000000000 +0200
 @@ -359,7 +359,7 @@ privsep_init(void)
  			    strerror(errno));
  			goto out;
@@ -18,7 +18,7 @@
  
  	
  			/*
-@@ -903,7 +903,7 @@ privsep_eay_get_pkcs1privkey(path) 
+@@ -903,7 +903,7 @@ privsep_eay_get_pkcs1privkey(path)
  		    "Cannot allocate memory: %s\n", strerror(errno));
  		return NULL;
  	}

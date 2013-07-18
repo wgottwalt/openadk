@@ -85,7 +85,7 @@ $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_NCSA,${PKG_NAME}-mod-basic-auth-
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_SMB,${PKG_NAME}-mod-basic-auth-smb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_BASIC_AUTH_LDAP,${PKG_NAME}-mod-basic-auth-ldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_DIGEST_AUTH_FILE,${PKG_NAME}-mod-digest-auth-file,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_IP_USER,${PKG_NAME}-mod-external-acl-ip-user,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_FILE_USERIP,${PKG_NAME}-mod-external-acl-file-userip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,${PKG_NAME}-mod-external-acl-unix-group,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SQUID_MOD_NTLM_AUTH_FAKE,${PKG_NAME}-mod-ntlm-auth-fake,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -93,11 +93,11 @@ $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_GETPWNAM,basic_getpwnam_auth
 $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_LDAP,basic_ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_NCSA,basic_ncsa_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_BASIC_AUTH_SMB,basic_smb_auth))
-$(eval $(call PKG_mod_template,SQUID_MOD_DIGEST_AUTH_FILE,digest_pw_file))
-$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_FILE_USERIP,file_userip))
+$(eval $(call PKG_mod_template,SQUID_MOD_DIGEST_AUTH_FILE,digest_file_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_FILE_USERIP,ext_file_userip_acl))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,ext_unix_group_acl))
-$(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKE,fake_auth))
+$(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKE,ntlm_fake_auth))
 
 TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \

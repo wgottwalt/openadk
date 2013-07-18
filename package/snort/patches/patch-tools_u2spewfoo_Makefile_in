@@ -1,0 +1,11 @@
+--- snort-2.9.5.orig/tools/u2spewfoo/Makefile.in	2013-06-04 23:21:54.000000000 +0200
++++ snort-2.9.5/tools/u2spewfoo/Makefile.in	2013-07-17 11:24:18.000000000 +0200
+@@ -226,7 +226,7 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AUTOMAKE_OPTIONS = foreign
+ u2spewfoo_SOURCES = u2spewfoo.c
+-u2spewfoo_CFLAGS = @CFLAGS@ $(AM_CFLAGS)
++#u2spewfoo_CFLAGS = @CFLAGS@ $(AM_CFLAGS)
+ EXTRA_DIST = \
+ u2spewfoo.dsp
+ 

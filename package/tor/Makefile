@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
-PKG_VERSION:=		0.2.2.39
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		9157a1f02fcda9d7d2c5744176373abd
+PKG_VERSION:=		0.2.3.25
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		a1c364189a9a66ed9daa8e6436489daf
 PKG_DESCR:=		An anonymous Internet communication system
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libevent libopenssl zlib libpthread
