@@ -77,12 +77,6 @@ fwcf_pack(char *odata, size_t i, int algo, size_t *dstsz)
 
 	/* 12 bytes header, padding to 4-byte boundary, 4 bytes trailer */
 	k = ((j + 19) / 4) * 4;
-#if DEF_FLASHPART > 0xFFFFFF
-# error DEF_FLASHPART too large
-#endif
-	if (k > DEF_FLASHPART)
-		errx(1, "%lu bytes too large for flash partition of %lu KiB",
-		    (u_long)k, DEF_FLASHPART / 1024UL);
 	/* padded to size of flash block */
 #if (DEF_FLASHBLOCK & 3)
 # error DEF_FLASHBLOCK must be dword-aligned
