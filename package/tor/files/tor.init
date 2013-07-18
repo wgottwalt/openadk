@@ -11,8 +11,8 @@ autostart)
 	;;
 start)
 	[ -d /var/run/tor ] || mkdir -p /var/run/tor
-	[ -d /etc/tor/.tor ] || mkdir -p /etc/tor/.tor
-	chown tor:tor /etc/tor/.tor /var/run/tor
+	[ -d /etc/tor ] || mkdir -p /etc/tor
+	chown tor:tor /etc/tor /var/run/tor
 	/usr/bin/tor
 	;;
 stop)
