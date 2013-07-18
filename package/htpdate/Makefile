@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		htpdate
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a3da5ad8965345eb734695c765010acf
+PKG_MD5SUM:=		40f193e3d7220265f6e6f8d4d7f887da
 PKG_DESCR:=		an HTP (Hypertext Time Protocol) implementation
 PKG_SECTION:=		ntp
 PKG_URL:=		http://www.vervest.org/htp/
-PKG_SITES:=		http://www.clevervest.com/htp/archive/c/
+PKG_SITES:=		http://www.vervest.org/htp/archive/c/
 
 include ${TOPDIR}/mk/package.mk
 
