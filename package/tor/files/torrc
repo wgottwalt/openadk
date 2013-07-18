@@ -124,3 +124,4 @@ RunAsDaemon 1
 #ExitPolicy reject *:* # middleman only -- no exits allowed
 
 PidFile /var/run/tor/tor.pid
+User tor
