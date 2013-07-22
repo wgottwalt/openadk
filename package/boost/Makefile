@@ -21,7 +21,7 @@ PKG_SUBPKGS:=		BOOST BOOST_DEV
 PKGSD_BOOST_DEV:=	boost header files
 PKGSC_BOOST_DEV:=	devel
 
-PKG_CHOICES_BOOST:=	STATIC SHARED BOTH
+PKG_CHOICES_BOOST:=	SHARED STATIC BOTH
 PKGCD_STATIC:=		install static libs
 PKGCD_SHARED:=		install shared libs
 PKGCD_BOTH:=		install static and shared libs

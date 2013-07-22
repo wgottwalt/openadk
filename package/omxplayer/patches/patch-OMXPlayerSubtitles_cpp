@@ -1,0 +1,17 @@
+--- omxplayer-0.1.orig/OMXPlayerSubtitles.cpp	2013-07-18 13:18:41.000000000 +0200
++++ omxplayer-0.1/OMXPlayerSubtitles.cpp	2013-07-22 11:04:00.000000000 +0200
+@@ -43,11 +43,9 @@ OMXPlayerSubtitles::OMXPlayerSubtitles()
+   m_font_size(),
+   m_centered(),
+   m_lines(),
+-  m_av_clock(),
+-#ifndef NDEBUG
+-  m_open()
+-#endif
+-{}
++  m_av_clock()
++{
++}
+ 
+ OMXPlayerSubtitles::~OMXPlayerSubtitles() BOOST_NOEXCEPT
+ {

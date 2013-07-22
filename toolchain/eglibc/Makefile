@@ -74,7 +74,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,o32,n32}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,o32,n32,soft,hard}.h
 	touch $@
 endif
 

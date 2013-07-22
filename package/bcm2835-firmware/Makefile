@@ -11,6 +11,8 @@ PKG_DESCR:=		firmware for raspberry pi (bcm2835)
 PKG_SECTION:=		base
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_SYSTEM_DEPENDS:=	raspberry-pi
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BCM2835_FIRMWARE,bcm2835-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
