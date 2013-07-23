@@ -1,0 +1,25 @@
+--- omxplayer-0.1.orig/omxplayer	2013-07-18 13:18:41.000000000 +0200
++++ omxplayer-0.1/omxplayer	2013-07-22 15:19:43.000000000 +0200
+@@ -36,14 +36,14 @@ YRES=1080
+ XRES=1600
+ YRES=900
+ 
+-if [ -e $FBSET ]; then
+-  echo 0 > /sys/class/vtconsole/vtcon1/bind
+-  fbset -xres 1 -yres 1
+-fi
++#if [ -e $FBSET ]; then
++#  echo 0 > /sys/class/vtconsole/vtcon1/bind
++#  fbset -xres 1 -yres 1
++#fi
+ 
+ $OMXPLAYER --font $FONT --italic-font $ITALIC_FONT "$@"
+ 
+-if [ -e $FBSET ]; then
+-  fbset -xres ${XRES} -yres ${YRES}
+-  echo 1 > /sys/class/vtconsole/vtcon1/bind
+-fi
++#if [ -e $FBSET ]; then
++#  fbset -xres ${XRES} -yres ${YRES}
++#  echo 1 > /sys/class/vtconsole/vtcon1/bind
++#fi
