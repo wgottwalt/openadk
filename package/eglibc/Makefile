@@ -38,9 +38,6 @@ else
 	${INSTALL_DIR} $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH) \
 	    $(IDIR_EGLIBC)/usr/lib $(IDIR_EGLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-	(cd $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); ln -sf ld-linux.so.3 ld-linux-armhf.so.3)
-endif
 	-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \

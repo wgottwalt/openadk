@@ -525,7 +525,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=v32" if ADK_CPU_CRIS_V32
 	default "-march=v10" if ADK_CPU_CRIS_V10
 	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
-	default "-march=armv6 -mtune=arm1176jzf-s -mfloat-abi=hard" if ADK_CPU_RASPBERRY_PI
+	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_RASPBERRY_PI
 
 config ADK_TARGET_CMDLINE
 	string
