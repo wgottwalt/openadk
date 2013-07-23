@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.4
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_MD5SUM:=		ab408a61f49f215ce77ed0cf1deed6e1
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -19,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
-PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL
+PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -92,6 +92,13 @@ PKGFS_WITH_CURL:=	libcurl
 PKGFB_WITH_CURL:=	curl
 ifeq ($(ADK_PACKAGE_MPD_WITH_CURL),y)
 PKG_FDEPENDS+=		libcurl
+endif
+
+PKGFD_WITH_SAMPLERATE:=	enable samplerate support
+PKGFS_WITH_SAMPLERATE:=	libsamplerate
+PKGFB_WITH_SAMPLERATE:=	libsamplerate
+ifeq ($(ADK_PACKAGE_MPD_WITH_SAMPLERATE),y)
+PKG_FDEPENDS+=		libsamplerate
 endif
 
 include ${TOPDIR}/mk/package.mk
@@ -188,6 +195,12 @@ ifneq (${ADK_PACKAGE_MPD_WITH_FFMPEG},)
 CONFIGURE_ARGS+=	--enable-ffmpeg
 else
 CONFIGURE_ARGS+=	--disable-ffmpeg
+endif
+
+ifneq (${ADK_PACKAGE_MPD_WITH_SAMPLERATE},)
+CONFIGURE_ARGS+=	--enable-lsr
+else
+CONFIGURE_ARGS+=	--disable-lsr
 endif
 
 post-install:
