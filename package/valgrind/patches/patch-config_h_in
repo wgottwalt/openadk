@@ -1,0 +1,11 @@
+--- valgrind-3.7.0.orig/config.h.in	2011-10-26 23:25:55.000000000 +0200
++++ valgrind-3.7.0/config.h.in	2013-07-23 12:27:52.000000000 +0200
+@@ -1,5 +1,8 @@
+ /* config.h.in.  Generated from configure.in by autoheader.  */
+ 
++/* "Defined for v6 architectures" */
++#undef ARM_ARCH_V6
++
+ /* Define to 1 if you're using Bionic */
+ #undef BIONIC_LIBC
+ 

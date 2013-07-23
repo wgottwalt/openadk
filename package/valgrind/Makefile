@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		valgrind
-PKG_VERSION:=		3.6.0
+PKG_VERSION:=		3.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b289c5f4ab8e39741602445f1dd09b34
+PKG_MD5SUM:=		a855fda56edf05614f099dca316d1775
 PKG_DESCR:=		memory management debugging
 PKG_SECTION:=		debug
 PKG_URL:=		http://valgrind.org/
 PKG_SITES:=		http://valgrind.org/downloads/
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 native
+PKG_ARCH_DEPENDS:=	x86 x86_64 native arm
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
