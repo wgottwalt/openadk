@@ -1,5 +1,5 @@
 --- valgrind-3.7.0.orig/configure	2011-11-05 12:24:39.000000000 +0100
-+++ valgrind-3.7.0/configure	2013-07-23 12:31:28.000000000 +0200
++++ valgrind-3.7.0/configure	2013-07-23 12:28:16.000000000 +0200
 @@ -1,13 +1,11 @@
  #! /bin/sh
  # Guess values for system-dependent variables and create Makefiles.
@@ -1759,22 +1759,6 @@
  
  fi
  
-@@ -6392,11 +6408,11 @@ $as_echo "#define GLIBC_2_13 1" >>confde
- 	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
- 	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
- 	;;
--     2.14)
--	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: 2.14 family" >&5
--$as_echo "2.14 family" >&6; }
-+     2.17)
-+	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: 2.17 family" >&5
-+$as_echo "2.17 family" >&6; }
- 
--$as_echo "#define GLIBC_2_14 1" >>confdefs.h
-+$as_echo "#define GLIBC_2_17 1" >>confdefs.h
- 
- 	DEFAULT_SUPP="glibc-2.X.supp ${DEFAULT_SUPP}"
- 	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
 @@ -6422,8 +6438,8 @@ $as_echo "#define BIONIC_LIBC 1" >>confd
       *)
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: unsupported version ${GLIBC_VERSION}" >&5
