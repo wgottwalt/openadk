@@ -76,7 +76,7 @@ endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-fpu=vfp
+GCC_CONFOPTS+=          --with-arch=armv6 --with-fpu=vfp --with-float=hard
 endif
 
 ifneq ($(ADK_TARGET_ABI),)
