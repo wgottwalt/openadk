@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		htop
-PKG_VERSION:=		0.9
+PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7c5507f35f363f3f40183a2ba3c561f8
+PKG_MD5SUM:=		0d01cca8df3349c74569cefebbd9919e
 PKG_DESCR:=		graphical process manager
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libncurses
@@ -18,8 +18,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HTOP,htop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS += ac_cv_file__proc_stat=yes \
-		  ac_cv_file__proc_meminfo=yes
+CONFIGURE_ENV+= 	ac_cv_file__proc_stat=yes \
+		  	ac_cv_file__proc_meminfo=yes
+CONFIGURE_ARGS+=	--disable-unicode
 
 htop-install:
 	$(INSTALL_DIR) $(IDIR_HTOP)/usr/bin
