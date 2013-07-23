@@ -32,3 +32,6 @@ config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
 	boolean
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
+
+config ADK_KERNEL_VFP
+	boolean
