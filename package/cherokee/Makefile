@@ -16,7 +16,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CHEROKEE,cherokee,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--enable-static-module=all
+CONFIGURE_ARGS+=	--enable-static-module=all \
+			--without-ffmpeg
 
 cherokee-install:
 	$(INSTALL_DIR) $(IDIR_CHEROKEE)/etc/cherokee

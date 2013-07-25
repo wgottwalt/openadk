@@ -10,7 +10,7 @@ PKG_MD5SUM:=		50093db9b64277643969ee75b83ebbd1
 PKG_DESCR:=		Abort TCP/IP connections routed over a firewall
 PKG_SECTION:=		firewall
 PKG_URL:=		http://www.lowth.com/cutter/software/
-PKG_SITES:=		http://www.lowth.com/cutter/software/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
