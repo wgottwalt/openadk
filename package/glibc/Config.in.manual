@@ -4,6 +4,7 @@ config ADK_PACKAGE_GLIBC
 	default y if ADK_TARGET_LIB_GLIBC && !ADK_TOOLCHAIN_ONLY
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
+	select ADK_PACKAGE_TZDATA
 	help
 	  GNU C library.
 
