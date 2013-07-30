@@ -4,6 +4,7 @@ config ADK_PACKAGE_EGLIBC
 	default y if ADK_TARGET_LIB_EGLIBC && !ADK_TOOLCHAIN_ONLY
 	default n
 	depends on ADK_TARGET_LIB_EGLIBC
+	select ADK_PACKAGE_TZDATA
 	help
 	  embedded GNU C library.
 

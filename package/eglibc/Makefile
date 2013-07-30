@@ -9,7 +9,6 @@ PKG_DESCR:=		embedded GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
 PKG_SUBPKGS:=		EGLIBC EGLIBC_DEV EGLIBC_STATIC
-PKG_DEPENDS:=		tzdata
 
 NO_DISTFILES:=		1
 
