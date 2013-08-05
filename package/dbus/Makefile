@@ -53,6 +53,8 @@ dbus-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-uuidgen ${IDIR_DBUS}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-send ${IDIR_DBUS}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-monitor ${IDIR_DBUS}/usr/bin
 
 dbus-dev-install:
 	${INSTALL_DIR} ${IDIR_DBUS_DEV}/usr/include
