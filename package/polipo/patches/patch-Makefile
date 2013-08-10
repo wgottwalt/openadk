@@ -1,5 +1,5 @@
 --- polipo-1.0.4.1.orig/Makefile	2010-02-01 00:13:20.000000000 +0100
-+++ polipo-1.0.4.1/Makefile	2013-07-22 18:06:28.000000000 +0200
++++ polipo-1.0.4.1/Makefile	2013-08-10 14:50:56.263961243 +0200
 @@ -63,7 +63,7 @@ FILE_DEFINES = -DLOCAL_ROOT=\"$(LOCAL_RO
  
  DEFINES = $(FILE_DEFINES) $(PLATFORM_DEFINES)
@@ -9,3 +9,24 @@
  
  SRCS = util.c event.c io.c chunk.c atom.c object.c log.c diskcache.c main.c \
         config.c local.c http.c client.c server.c auth.c tunnel.c \
+@@ -84,9 +84,9 @@ md5import.o: md5import.c md5.c
+ 
+ .PHONY: all install install.binary install.man
+ 
+-all: polipo$(EXE) polipo.info html/index.html localindex.html
++all: polipo$(EXE)
+ 
+-install: install.binary install.man
++install: install.binary
+ 
+ install.binary: all
+ 	mkdir -p $(TARGET)$(BINDIR)
+@@ -94,8 +94,6 @@ install.binary: all
+ 	mkdir -p $(TARGET)$(LOCAL_ROOT)/doc
+ 	rm -f $(TARGET)$(BINDIR)/polipo
+ 	cp -f polipo $(TARGET)$(BINDIR)/
+-	cp -f html/* $(TARGET)$(LOCAL_ROOT)/doc
+-	cp -f localindex.html $(TARGET)$(LOCAL_ROOT)/index.html
+ 
+ install.man: all
+ 	mkdir -p $(TARGET)$(MANDIR)/man1
