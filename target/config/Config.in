@@ -197,6 +197,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_KERNEL_PXA_SHARPSL
 	select ADK_KERNEL_MACH_SPITZ
 	select ADK_KERNEL_SPI_PXA2XX
+	select ADK_TARGET_WITH_VGA
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
 	boolean "ARM Ltd. Versatile"
@@ -557,6 +558,9 @@ config ADK_eglibc
 config ADK_glibc
 	boolean
 
+config ADK_musl
+	boolean
+
 config ADK_libc
 	boolean
 
@@ -565,6 +569,7 @@ config ADK_TARGET_LIBC
 	default "uclibc"  if ADK_uclibc
 	default "eglibc"  if ADK_eglibc
 	default "glibc"  if ADK_glibc
+	default "musl"  if ADK_musl
 	default "libc"  if ADK_libc
 
 source "target/linux/config/Config.in.kernel"
@@ -625,6 +630,20 @@ config ADK_TARGET_LIB_GLIBC
 	help
 	 http://www.gnu.org/libc
 
+config ADK_TARGET_LIB_MUSL
+	prompt "musl C library"
+	boolean
+	select ADK_musl
+	depends on \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_MIPSEL || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_X86 || \
+		ADK_LINUX_X86_64
+	help
+ 	 http://musl-libc.org
+
 config ADK_TARGET_LIB_LIBC
 	prompt "Native C library"
 	boolean
@@ -640,6 +659,8 @@ config ADK_TARGET_SUFFIX
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
+	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
+	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
 	default "gnu"
 
 choice
