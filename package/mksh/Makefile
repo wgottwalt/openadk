@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		45
+PKG_VERSION:=		47
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d3d90973119ae689d5300b690600e1dc
+PKG_MD5SUM:=		71c7cbcd78306897801b8b6691091e66
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org/

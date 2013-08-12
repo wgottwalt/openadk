@@ -26,6 +26,10 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uClibc
 LIBC:=uClibc
 endif
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGETS+=musl
+LIBC:=musl
+endif
 ifeq ($(ADK_TOOLCHAIN_GDB),y)
 TARGETS+=gdb
 endif
