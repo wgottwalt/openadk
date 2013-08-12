@@ -13,6 +13,10 @@ ifeq (${ADK_TARGET_LIB_EGLIBC},y)
 package-$(ADK_PACKAGE_EGLIBC) += eglibc
 gcc-compile: eglibc-compile
 endif
+ifeq (${ADK_TARGET_LIB_MUSL},y)
+package-$(ADK_PACKAGE_MUSL) += musl
+gcc-compile: musl-compile
+endif
 ifeq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_LIBC) += libc
 endif

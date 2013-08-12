@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		e025414bc6cd79579cc7a32a45d3ae1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
-PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://www.busybox.net/
 PKG_SITES:=		http://www.busybox.net/downloads/
 
