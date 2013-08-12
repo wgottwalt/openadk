@@ -24,7 +24,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-#define MAXLINE 512
+#define MAXLINE 1024
 #define MAXPATH 128
 
 static int prefix = 0;

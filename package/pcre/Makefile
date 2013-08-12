@@ -12,21 +12,26 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
 
-PKG_SUBPKGS:=		LIBPCRE LIBPCRE_DEV
+PKG_SUBPKGS:=		LIBPCRE LIBPCRE_DEV LIBPCRECPP
 PKGSD_LIBPCRE_DEV:=	PCRE headers
 PKGSC_LIBPCRE_DEV:=	devel
+PKGSD_LIBPCRECPP:=	PCRE c++ library
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBPCRE_DEV,libpcre-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--disable-cpp
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
 libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib
+
+libpcrecpp-install:
+	${INSTALL_DIR} ${IDIR_LIBPCRECPP}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libpcrecpp.so* ${IDIR_LIBPCRECPP}/usr/lib
 
 libpcre-dev-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/include

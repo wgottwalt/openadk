@@ -1,0 +1,10 @@
+--- xbmc-12.2.orig/Makefile.include.in	2013-05-03 07:57:40.000000000 +0200
++++ xbmc-12.2/Makefile.include.in	2013-07-31 11:46:19.000000000 +0200
+@@ -32,6 +32,7 @@ CC=@CC@
+ CXXFLAGS+=@CXXFLAGS@
+ CFLAGS+=@CFLAGS@
+ LDFLAGS+=@LDFLAGS@
++INCLUDES+=@CPPFLAGS@
+ INCLUDES+=-I@abs_top_srcdir@/lib
+ INCLUDES+=-I@abs_top_srcdir@/xbmc
+ INCLUDES+=$(sort @INCLUDES@)

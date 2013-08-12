@@ -1,0 +1,29 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		mesa-demos
+PKG_VERSION:=		8.1.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		4049d98dd4131212e2842b770f1b0fa5
+PKG_DESCR:=		MESA demo apps
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		mesalib
+PKG_BUILDDEP:=		MesaLib
+PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
+
+PKG_SUBPKGS:=		GLXINFO
+PKGSD_GLXINFO:=		glxinfo
+PKGSS_GLXINFO:=		libxt libxau libxdmcp libxcb libx11 libxext libglew
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,GLXINFO,glxinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+glxinfo-install:
+	$(INSTALL_DIR) $(IDIR_GLXINFO)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/glxinfo \
+		$(IDIR_GLXINFO)/usr/bin
+
+include ${TOPDIR}/mk/pkg-bottom.mk

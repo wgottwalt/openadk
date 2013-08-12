@@ -1,0 +1,19 @@
+--- yajl-2.0.1.orig/CMakeLists.txt	2011-04-28 04:48:41.000000000 +0200
++++ yajl-2.0.1/CMakeLists.txt	2013-07-30 15:20:53.000000000 +0200
+@@ -64,16 +64,5 @@ ENDIF (WIN32)
+ 
+ 
+ ADD_SUBDIRECTORY(src)
+-ADD_SUBDIRECTORY(test)
+-ADD_SUBDIRECTORY(reformatter)
+-ADD_SUBDIRECTORY(verify)
+-ADD_SUBDIRECTORY(example)
+-ADD_SUBDIRECTORY(perf)
+ 
+-INCLUDE(YAJLDoc.cmake)
+-
+-# a test target
+-ADD_CUSTOM_TARGET(test
+-                  ./run_tests.sh ${CMAKE_CURRENT_BINARY_DIR}/test/yajl_test
+-                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
+ 

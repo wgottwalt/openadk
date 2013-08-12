@@ -1,0 +1,11 @@
+--- glew-1.10.0.orig/Makefile	2013-07-22 16:11:22.000000000 +0200
++++ glew-1.10.0/Makefile	2013-07-30 13:15:41.000000000 +0200
+@@ -71,7 +71,7 @@ else
+ OPT = $(POPT)
+ endif
+ INCLUDE = -Iinclude
+-CFLAGS = $(OPT) $(WARN) $(INCLUDE) $(CFLAGS.EXTRA)
++CFLAGS ?= $(OPT) $(WARN) $(INCLUDE) $(CFLAGS.EXTRA)
+ 
+ all debug: glew.lib glew.lib.mx glew.bin
+ 

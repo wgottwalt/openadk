@@ -1,0 +1,15 @@
+--- xbmc-12.2.orig/tools/Linux/xbmc.sh.in	2013-05-03 07:57:41.000000000 +0200
++++ xbmc-12.2/tools/Linux/xbmc.sh.in	2013-08-05 16:24:14.000000000 +0200
+@@ -107,12 +107,6 @@ print_crash_report()
+   echo "Crash report available at $FILE"
+ }
+ 
+-python @datadir@/xbmc/FEH.py $SAVED_ARGS
+-RET=$?
+-if [ $RET -ne 0 ]; then
+-  exit $RET
+-fi
+-
+ if which gdb >/dev/null 2>&1; then
+   # Output warning in case ulimit is unsupported by shell
+   eval ulimit -c unlimited

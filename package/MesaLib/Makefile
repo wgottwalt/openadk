@@ -20,7 +20,7 @@ PKG_SUBPKGS:=		MESALIB MESALIB_DEV
 PKGSD_MESALIB_DEV:=	MESA headers
 PKGSC_MESALIB_DEV:=	devel
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm
 
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 

@@ -167,6 +167,16 @@ if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GETTEXT="$NEED_GETTEXT glib"
 fi
 
+if [[ -n $ADK_PACKAGE_YAJL ]]; then
+	NEED_RUBY="$NEED_RUBY yajl"
+	NEED_CMAKE="$NEED_CMAKE yajl"
+fi
+
+if [[ -n $ADK_PACKAGE_XBMC ]]; then
+	NEED_SDLDEV="$NEED_SDLDEV xbmc"
+	NEED_SDLIMAGEDEV="$NEED_SDLIMAGEDEV xbmc"
+fi
+
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
@@ -226,6 +236,20 @@ fi
 if [[ -n $NEED_TIFFDEV ]];then
 	if ! test -f /usr/include/tiff.h >/dev/null; then
 		echo >&2 You need libtiff headers to build $NEED_TIFFDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_SDLDEV ]];then
+	if ! test -f /usr/include/SDL/SDL.h >/dev/null; then
+		echo >&2 You need libSDL headers to build $NEED_SDLDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_SDLIMAGEDEV ]];then
+	if ! test -f /usr/include/SDL/SDL_image.h >/dev/null; then
+		echo >&2 You need libSDL-image headers to build $NEED_SDLIMAGEDEV
 		out=1
 	fi
 fi
@@ -330,6 +354,13 @@ fi
 if [[ -n $NEED_BISON ]]; then
 	if ! which bison >/dev/null 2>&1; then
 		echo >&2 You need bison to build $NEED_BISON
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_CMAKE ]]; then
+	if ! which cmake >/dev/null 2>&1; then
+		echo >&2 You need cmake to build $NEED_CMAKE
 		out=1
 	fi
 fi

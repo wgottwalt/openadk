@@ -1,0 +1,14 @@
+--- yajl-2.0.1.orig/CMakeLists.txt	2011-04-28 04:48:41.000000000 +0200
++++ yajl-2.0.1/CMakeLists.txt	2013-07-30 15:13:12.000000000 +0200
+@@ -64,11 +64,6 @@ ENDIF (WIN32)
+ 
+ 
+ ADD_SUBDIRECTORY(src)
+-ADD_SUBDIRECTORY(test)
+-ADD_SUBDIRECTORY(reformatter)
+-ADD_SUBDIRECTORY(verify)
+-ADD_SUBDIRECTORY(example)
+-ADD_SUBDIRECTORY(perf)
+ 
+ INCLUDE(YAJLDoc.cmake)
+ 
