@@ -1,11 +1,12 @@
---- llvm-2.9.orig/Makefile	2010-11-29 19:16:10.000000000 +0100
-+++ llvm-2.9/Makefile	2011-06-25 12:16:13.422682536 +0200
-@@ -115,6 +115,8 @@ cross-compile-build-tools:
+--- llvm-3.3.src.orig/Makefile	2013-01-28 04:19:57.000000000 +0100
++++ llvm-3.3.src/Makefile	2013-08-12 14:50:49.000000000 +0200
+@@ -110,6 +110,9 @@ cross-compile-build-tools:
  	$(Verb) if [ ! -f BuildTools/Makefile ]; then \
            $(MKDIR) BuildTools; \
  	  cd BuildTools ; \
 +	  unset CC ; \
 +	  unset CXX ; \
++	  unset RANLIB ; \
  	  unset CFLAGS ; \
  	  unset CXXFLAGS ; \
- 	  $(PROJ_SRC_DIR)/configure --build=$(BUILD_TRIPLE) \
+ 	  unset SDKROOT ; \
