@@ -4,19 +4,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		llvm
-PKG_VERSION:=		2.9
+PKG_VERSION:=		3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		793138412d2af2c7c7f54615f8943771
+PKG_MD5SUM:=		40564e1dc390f9844f1711c08b08e391
 PKG_DESCR:=		collection of modular and reusable compiler and toolchain technologies
 PKG_SECTION:=		lang
 PKG_URL:=		http://llvm.org/
-PKG_SITES:=		http://llvm.org/releases/2.9/
+PKG_SITES:=		http://llvm.org/releases/3.3/
 
 PKG_CFLINE_LLVM:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
 PKG_HOST_DEPENDS:=	!darwin
-PKG_ARCH_DEPENDS:=	mips x86 x86_64
+PKG_ARCH_DEPENDS:=	mips x86 x86_64 arm
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.src.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}.src
 
 include $(TOPDIR)/mk/package.mk
 
@@ -29,6 +30,7 @@ $(eval $(call PKG_template,LLVM,llvm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
+XAKE_FLAGS+=		VERBOSE=1
 
 do-configure:
 	mkdir -p $(WRKBUILD)/BuildTools
@@ -39,6 +41,7 @@ do-build:
 
 do-install:
 	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools DESTDIR=$(STAGING_TARGET_DIR) install 
+	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools DESTDIR=$(WRKINST) install 
 
 llvm-install:
 	$(INSTALL_DIR) $(IDIR_LLVM)/usr/bin
