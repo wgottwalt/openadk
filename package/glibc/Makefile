@@ -10,7 +10,6 @@ include $(TOPDIR)/toolchain/glibc/Makefile.inc
 include $(TOPDIR)/toolchain/glibc/Makefile.multilib
 
 PKG_DESCR:=		GNU C library
-PKG_VER:=		2.16
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
 PKG_SUBPKGS:=		GLIBC GLIBC_DEV GLIBC_STATIC
@@ -47,7 +46,7 @@ else
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_compat libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
@@ -79,7 +78,7 @@ endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	-for file in libcrypt libdl libm libresolv libutil; do \
-		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VER).so $$file.so; \
+		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
