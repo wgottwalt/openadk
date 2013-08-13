@@ -6,7 +6,7 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"${portmap:-NO}" = x"NO" && test x"${rpcbind:-NO}" = x"NO" && exit 0
+	test x"${rpcbind:-NO}" = x"NO" && exit 0
 	test x"${nfs_client:-NO}" = x"NO" && exit 0
 	exec sh $0 start
 	;;

@@ -1,6 +1,6 @@
---- libtirpc-0.2.2.orig/src/rpc_soc.c	2011-05-02 14:10:40.000000000 +0200
-+++ libtirpc-0.2.2/src/rpc_soc.c	2012-03-22 19:20:37.849747561 +0100
-@@ -515,37 +515,6 @@ clnt_broadcast(prog, vers, proc, xargs, 
+--- libtirpc-0.2.3.orig/src/rpc_soc.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/rpc_soc.c	2013-08-12 16:47:07.000000000 +0200
+@@ -520,37 +520,6 @@ clnt_broadcast(prog, vers, proc, xargs,
  	    (resultproc_t) rpc_wrap_bcast, "udp");
  }
  
