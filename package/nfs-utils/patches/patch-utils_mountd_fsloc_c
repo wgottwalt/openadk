@@ -1,9 +1,9 @@
---- nfs-utils-1.2.5.orig/utils/mountd/fsloc.c	2011-09-24 13:55:15.000000000 +0200
-+++ nfs-utils-1.2.5/utils/mountd/fsloc.c	2013-07-11 11:01:30.000000000 +0200
-@@ -126,7 +126,7 @@ static struct servers *method_list(char
- 	struct servers *rv=NULL;
+--- nfs-utils-1.2.8.orig/utils/mountd/fsloc.c	2013-04-22 18:47:20.000000000 +0200
++++ nfs-utils-1.2.8/utils/mountd/fsloc.c	2013-08-13 10:57:48.000000000 +0200
+@@ -127,7 +127,7 @@ static struct servers *method_list(char
+ 	bool v6esc = false;
  
- 	xlog(L_NOTICE, "method_list(%s)\n", data);
+ 	xlog(L_NOTICE, "method_list(%s)", data);
 -	for (ptr--, listsize=1; ptr; ptr=index(ptr, ':'), listsize++)
 +	for (ptr--, listsize=1; ptr; ptr=strchr(ptr, ':'), listsize++)
  		ptr++;
