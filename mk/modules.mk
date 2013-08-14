@@ -1100,7 +1100,7 @@ endif
 
 $(eval $(call KMOD_template,NFSD,nfsd,\
         $(MODULES_DIR)/kernel/fs/nfsd/nfsd \
-,30))
+,30, kmod-sunrpc kmod-lockd))
 
 $(eval $(call KMOD_template,NTFS_FS,ntfs-fs,\
 	$(MODULES_DIR)/kernel/fs/ntfs/ntfs \
