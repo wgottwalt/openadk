@@ -1,8 +1,8 @@
---- krb5-1.9.orig/src/include/osconf.hin	2010-01-05 03:47:58.000000000 +0100
-+++ krb5-1.9/src/include/osconf.hin	2011-01-29 20:25:42.000000000 +0100
-@@ -61,14 +61,14 @@
- #define DEFAULT_LNAME_FILENAME  "@PREFIX/lib/krb5.aname"
- #endif /* _WINDOWS  */
+--- krb5-1.11.3.orig/src/include/osconf.hin	2013-06-03 23:39:43.000000000 +0200
++++ krb5-1.11.3/src/include/osconf.hin	2013-08-14 14:05:17.000000000 +0200
+@@ -58,14 +58,14 @@
+ #define DEFAULT_PLUGIN_BASE_DIR "@LIBDIR/krb5/plugins"
+ #define PLUGIN_EXT              "@DYNOBJEXT"
  
 -#define DEFAULT_KDB_FILE        "@LOCALSTATEDIR/krb5kdc/principal"
 -#define DEFAULT_KEYFILE_STUB    "@LOCALSTATEDIR/krb5kdc/.k5."

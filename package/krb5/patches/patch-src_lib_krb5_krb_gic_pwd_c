@@ -1,10 +1,10 @@
---- krb5-1.9.orig/src/lib/krb5/krb/gic_pwd.c	2010-12-01 03:16:37.000000000 +0100
-+++ krb5-1.9/src/lib/krb5/krb/gic_pwd.c	2011-01-30 22:42:53.000000000 +0100
+--- krb5-1.11.3.orig/src/lib/krb5/krb/gic_pwd.c	2013-06-03 23:39:43.000000000 +0200
++++ krb5-1.11.3/src/lib/krb5/krb/gic_pwd.c	2013-08-14 14:05:17.000000000 +0200
 @@ -1,6 +1,6 @@
  /* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
  #include "k5-int.h"
 -#include "com_err.h"
 +#include <et/com_err.h>
  #include "init_creds_ctx.h"
+ #include "int-proto.h"
  
- krb5_error_code
