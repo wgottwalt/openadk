@@ -26,7 +26,9 @@ $(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
+ifeq ($(ADK_TARGET_LIB_STATIC_LIBGCC),y)
 TARGET_LDFLAGS+=	-static-libgcc
+endif
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CFGFS}/sbin
