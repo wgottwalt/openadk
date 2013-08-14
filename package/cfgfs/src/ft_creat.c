@@ -35,12 +35,10 @@
 #include "defs.h"
 #include "pack.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/ft_creat.c,v 1.2 2006/09/23 23:21:04 tg Exp $");
-
 static size_t ft_creat(char *);
-static void make_directory(char *, uint32_t, uint32_t, uint32_t, time_t);
-static void make_file(char *, uint8_t *, size_t);
-static void make_symlink(char *, uint8_t *, size_t);
+static void make_directory(char *, u_int32_t, u_int32_t, u_int32_t, time_t);
+static void make_file(char *, u_int8_t *, size_t);
+static void make_symlink(char *, u_int8_t *, size_t);
 static void pop_directories(void);
 static void do_chown(char *, uid_t, gid_t);
 static void do_chmod(char *, mode_t);
@@ -74,14 +72,14 @@ ft_creatm(char *buf, const char *pathname)
 static size_t
 ft_creat(char *buf)
 {
-	uint8_t c, *p;
+	u_int8_t c, *p;
 	char *fname;
 	size_t i, type = 0, size = 0;
-	uint32_t x_uid = 0, x_gid = 0, x_mode = 0;
+	u_int32_t x_uid = 0, x_gid = 0, x_mode = 0;
 	time_t x_mtime = 0;
 
 	i = strlen(buf) + 1;
-	p = (uint8_t *)buf + i;
+	p = (u_int8_t *)buf + i;
 	fname = pfxname(buf);
 	while (*p)
 		switch (c = *p++) {
@@ -183,11 +181,11 @@ ft_creat(char *buf)
 	if (type != 3)
 		free(fname);
 
-	return ((p - (uint8_t *)buf) + size);
+	return ((p - (u_int8_t *)buf) + size);
 }
 
 static void
-make_directory(char *n, uint32_t m, uint32_t u, uint32_t g, time_t t)
+make_directory(char *n, u_int32_t m, u_int32_t u, u_int32_t g, time_t t)
 {
 	struct a_directory *newdir;
 
@@ -209,7 +207,7 @@ make_directory(char *n, uint32_t m, uint32_t u, uint32_t g, time_t t)
 }
 
 static void
-make_file(char *n, uint8_t *buf, size_t len)
+make_file(char *n, u_int8_t *buf, size_t len)
 {
 	int fd;
 
@@ -228,7 +226,7 @@ make_file(char *n, uint8_t *buf, size_t len)
 }
 
 static void
-make_symlink(char *n, uint8_t *buf, size_t len)
+make_symlink(char *n, u_int8_t *buf, size_t len)
 {
 	char target[len + 1];
 
