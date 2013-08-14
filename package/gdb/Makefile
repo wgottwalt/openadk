@@ -25,7 +25,8 @@ TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--disable-tui --disable-gdbtk --without-x \
 			--without-included-gettext --disable-sim \
-			--enable-threads --with-curses --disable-werror \
+			--with-curses --disable-werror \
+			--disable-gdbserver \
 			--enable-static --without-python
 XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 # disable honour cflags stuff

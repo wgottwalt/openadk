@@ -564,6 +564,9 @@ config ADK_musl
 config ADK_libc
 	boolean
 
+config ADK_TARGET_LIB_STATIC_LIBGCC
+	boolean
+
 config ADK_TARGET_LIBC
 	string
 	default "uclibc"  if ADK_uclibc
@@ -581,6 +584,7 @@ config ADK_TARGET_LIB_UCLIBC
 	prompt "uClibc embedded C library"
 	boolean
 	select ADK_uclibc
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	depends on \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
@@ -593,6 +597,7 @@ config ADK_TARGET_LIB_EGLIBC
 	prompt "Embedded GNU C library"
 	boolean
 	select ADK_eglibc
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
@@ -613,6 +618,7 @@ config ADK_TARGET_LIB_GLIBC
 	prompt "GNU C library"
 	boolean
 	select ADK_glibc
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
@@ -648,6 +654,7 @@ config ADK_TARGET_LIB_LIBC
 	prompt "Native C library"
 	boolean
 	select ADK_libc
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	depends on ADK_LINUX_NATIVE
 
 endchoice
@@ -659,6 +666,7 @@ config ADK_TARGET_SUFFIX
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
+	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
 	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
 	default "gnu"

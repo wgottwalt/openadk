@@ -1,0 +1,10 @@
+--- gdb-7.6.orig/gdb/common/linux-ptrace.h	2013-01-01 07:32:54.000000000 +0100
++++ gdb-7.6/gdb/common/linux-ptrace.h	2013-08-13 17:10:13.000000000 +0200
+@@ -20,6 +20,7 @@
+ 
+ struct buffer;
+ 
++#include <unistd.h>
+ #include <sys/ptrace.h>
+ 
+ #ifndef PTRACE_GETSIGINFO

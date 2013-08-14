@@ -23,14 +23,13 @@
 
 #include <err.h>
 #include <fcntl.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #include "defs.h"
 #include "sysdeps.h"
-
-__RCSID("$MirOS: contrib/hosted/fwcf/sys_linux.c,v 1.3 2006/09/26 10:25:03 tg Exp $");
 
 void
 pull_rndata(uint8_t *buf, size_t n)
@@ -42,7 +41,7 @@ pull_rndata(uint8_t *buf, size_t n)
 		return;
 	}
 	if ((size_t)read(fd, buf, n) != n)
-		warn("Cannot read %lu bytes from /dev/urandom", (u_long)n);
+		warn("Cannot read %lu bytes from /dev/urandom", (unsigned long)n);
 	close(fd);
 }
 
@@ -56,6 +55,6 @@ push_rndata(uint8_t *buf, size_t n)
 		return;
 	}
 	if ((size_t)write(fd, buf, n) != n)
-		warn("Cannot write %lu bytes to /dev/urandom", (u_long)n);
+		warn("Cannot write %lu bytes to /dev/urandom", (unsigned long)n);
 	close(fd);
 }

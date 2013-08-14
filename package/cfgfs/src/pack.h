@@ -77,7 +77,6 @@ typedef struct FTSF_ENTRY ftsf_entry;
 		res;				\
 	})
 
-__BEGIN_DECLS
 char *ft_pack(ftsf_entry *);
 char *ft_packm(void);
 
@@ -90,6 +89,5 @@ void ft_creatm(char *, const char *);
 char *fwcf_unpack(int, size_t *);
 char *fwcf_pack(char *, size_t, int, size_t *);
 char *fwcf_packm(const char *, int, size_t *);
-__END_DECLS
 
 #endif

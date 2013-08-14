@@ -9,11 +9,9 @@
 #ifndef MINILZOP_H
 #define MINILZOP_H
 
-__BEGIN_DECLS
 int minilzop(int ifd, int ofd, int compr_alg, int decompress);
 /* TODO: use the two below for the “outer filesystem” as well */
 void read_aszdata(int, char **, size_t *);
 void write_aszdata(int, const char *, size_t);
-__END_DECLS
 
 #endif

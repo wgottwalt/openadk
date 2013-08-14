@@ -67,9 +67,9 @@ fwcf_pack(char *odata, size_t i, int algo, size_t *dstsz)
 	char *data, *cdata;
 
 	if (i > 0xFFFFFF)
-		errx(1, "inner size of %lu too large", (u_long)i);
+		errx(1, "inner size of %lu too large", (unsigned long)i);
 #ifdef DEBUG
-	fprintf(stderr, "fwcf_pack: algo %02X packing %lu\n", algo, (u_long)i);
+	fprintf(stderr, "fwcf_pack: algo %02X packing %lu\n", algo, (unsigned long)i);
 #endif
 
 	if ((j = compressor_get(algo)->compress(&cdata, odata, i)) == -1)

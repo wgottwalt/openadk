@@ -18,13 +18,6 @@
 #define __RCSID(x)	static const char __rcsid[] __attribute__((used)) = (x)
 #endif
 
-#ifndef BSD
-#define uint8_t		u_int8_t
-#define uint16_t	u_int16_t
-#define uint32_t	u_int32_t
-#define uint64_t	u_int64_t
-#endif
-
 #ifndef __dead
 #define __dead		__attribute__((noreturn))
 #endif

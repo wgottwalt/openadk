@@ -9,9 +9,7 @@
 #ifndef SYSDEPS_H
 #define SYSDEPS_H
 
-__BEGIN_DECLS
 void pull_rndata(uint8_t *, size_t);
 void push_rndata(uint8_t *, size_t);
-__END_DECLS
 
 #endif

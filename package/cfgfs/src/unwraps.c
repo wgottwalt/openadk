@@ -83,13 +83,13 @@ fwcf_unpack(int fd, size_t *inner)
 
 	if ((x = compressor_get(c)->decompress(udata, *inner, cdata + 12,
 	    outer - 16)) != *inner)
-		errx(1, "size mismatch: decompressed %lu, want %lu", (u_long)x,
-		    (u_long)*inner);
+		errx(1, "size mismatch: decompressed %lu, want %lu", (unsigned long)x,
+		    (unsigned long)*inner);
 	push_rndata((uint8_t *)cdata + outer, maxln - outer);
 	free(cdata);
 #ifdef DEBUG
 	fprintf(stderr, "fwcf_unpack: decompressed outer %lu inner %lu\n",
-	    (u_long)outer, (u_long)*inner);
+	    (unsigned long)outer, (unsigned long)*inner);
 #endif
 	return (udata);
 }

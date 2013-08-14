@@ -221,7 +221,7 @@ make_file(char *n, uint8_t *buf, size_t len)
 	}
 
 	if ((size_t)write(fd, buf, len) != len)
-		warn("could not write %lu bytes", (u_long)len);
+		warn("could not write %lu bytes", (unsigned long)len);
 
 	if (close(fd))
 		warn("close");

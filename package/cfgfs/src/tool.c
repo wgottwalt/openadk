@@ -32,8 +32,6 @@
 #include "minilzop.h"
 #include "pack.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/tool.c,v 1.7 2007/03/09 22:35:13 tg Exp $");
-
 static __dead void usage(void);
 static int mkfwcf(int, const char *, int);
 static int unfwcf(int, const char *);

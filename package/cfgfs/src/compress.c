@@ -28,8 +28,6 @@
 #include "defs.h"
 #include "compress.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/compress.c,v 1.7 2006/09/23 23:46:35 tg Exp $");
-
 static void compress_initialise(void);
 
 static fwcf_compressor *fwcf_compressors = NULL;

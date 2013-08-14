@@ -31,14 +31,11 @@ typedef struct FWCF_COMPRESSOR {
 	uint8_t code;
 } fwcf_compressor;
 
-__BEGIN_DECLS
 /* 0=success 1=EINVAL 2=slot already used */
 int compress_register(fwcf_compressor *);
-__END_DECLS
 
 /* END of plug-in API description, version 1.0 */
 
-__BEGIN_DECLS
 /* low-level */
 fwcf_compressor *compress_enumerate(void);
 int compress_list(void);
@@ -47,6 +44,5 @@ int compress_list(void);
 fwcf_compressor *compressor_get(uint8_t);
 int compressor_getbyname(const char *);
 int list_compressors(void);
-__END_DECLS
 
 #endif
