@@ -10,6 +10,11 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	if [[ ! -f /etc/krb5kdc/principal ]];then
+		echo "You need to create a database first!"
+		echo "Use kdb5_util create -s"
+		exit 1
+	fi
 	/usr/sbin/krb5kdc
 	/usr/sbin/kadmind &
 	;;

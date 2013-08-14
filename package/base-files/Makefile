@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		58
+PKG_RELEASE:=		59
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -26,7 +26,7 @@ do-install:
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
-	$(SED) 's,@ARCH@,$(ADK_TARGET_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@ARCH@,$(ADK_TARGET_CPU_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@SYSTEM@,$(ADK_TARGET_SYSTEM),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@LIBC@,$(ADK_TARGET_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf

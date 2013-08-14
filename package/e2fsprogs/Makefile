@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.42.7
+PKG_VERSION:=		1.42.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a1ec22ef003688dae9f76c74881b22b9
+PKG_MD5SUM:=		8ef664b6eb698aa6b733df59b17b9ed4
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread

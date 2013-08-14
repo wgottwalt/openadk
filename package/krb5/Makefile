@@ -4,15 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
-PKG_VERSION:=		1.9.1
+PKG_VERSION:=		1.11.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b9f237015fbb83f75d17941588b12b7d
+PKG_MD5SUM:=		56f0ae274b285320b8a597cb89442449
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err
+PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
+PKG_DEPENDS+=		libpthread
 PKG_BUILDDEP:=		ncurses e2fsprogs
 PKG_URL:=		http://web.mit.edu/kerberos/
-PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.9/
+PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.11/
 PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT KRB5_UTIL LIBKRB5 LIBKRB5_DEV
@@ -87,7 +88,7 @@ libkrb5-install:
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/etc
 	${INSTALL_DIR} ${IDIR_LIBKRB5}/usr/lib
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_LIBKRB5}/etc
-	${CP} ${WRKINST}/usr/lib/lib{gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
+	${CP} ${WRKINST}/usr/lib/lib{verto,gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
 		${IDIR_LIBKRB5}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
 		${IDIR_LIBKRB5}/usr/lib
