@@ -7,7 +7,7 @@ mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 [ ! -f /etc/notmpfs ] && {
   size=$(cat /etc/tmpfs 2>/dev/null)
   [ -z $size ] && size=2048
-  mount tmpfs /tmp -t tmpfs -o nosuid,nodev,mode=1777,size=${size}k
+  mount -o nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
 }
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 [ -d /dev/pts ] || mkdir /dev/pts 
