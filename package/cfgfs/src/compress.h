@@ -28,7 +28,7 @@ typedef struct FWCF_COMPRESSOR {
 	fwcf_compress_work_func compress;
 	fwcf_compress_rev_func decompress;
 	const char *name;
-	uint8_t code;
+	u_int8_t code;
 } fwcf_compressor;
 
 /* 0=success 1=EINVAL 2=slot already used */
@@ -41,7 +41,7 @@ fwcf_compressor *compress_enumerate(void);
 int compress_list(void);
 
 /* high-level */
-fwcf_compressor *compressor_get(uint8_t);
+fwcf_compressor *compressor_get(u_int8_t);
 int compressor_getbyname(const char *);
 int list_compressors(void);
 

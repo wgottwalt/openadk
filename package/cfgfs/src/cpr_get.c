@@ -29,10 +29,8 @@
 #include "defs.h"
 #include "compress.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/cpr_get.c,v 1.4 2007/03/09 22:35:13 tg Exp $");
-
 fwcf_compressor *
-compressor_get(uint8_t algo)
+compressor_get(u_int8_t algo)
 {
 	fwcf_compressor *list;
 

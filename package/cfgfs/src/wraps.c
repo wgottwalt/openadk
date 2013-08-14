@@ -92,6 +92,6 @@ fwcf_pack(char *odata, size_t i, int algo, size_t *dstsz)
 		data[k++] = 0;
 	mktrailer(data, k);
 	k += 4;
-	pull_rndata((uint8_t *)data + k, *dstsz - k);
+	pull_rndata((u_int8_t *)data + k, *dstsz - k);
 	return (data);
 }

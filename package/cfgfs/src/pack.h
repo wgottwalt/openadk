@@ -51,16 +51,16 @@ typedef struct FTSF_ENTRY ftsf_entry;
 	} while (0)
 
 #define LOADW(x) __extension__({		\
-		uint8_t *lwbf = (uint8_t *)(x);	\
-		uint32_t res = 0;		\
+		u_int8_t *lwbf = (u_int8_t *)(x);	\
+		u_int32_t res = 0;		\
 		res = (res << 8) | lwbf[1];	\
 		res = (res << 8) | lwbf[0];	\
 		res;				\
 	})
 
 #define LOADT(x) __extension__({		\
-		uint8_t *lwbf = (uint8_t *)(x);	\
-		uint32_t res = 0;		\
+		u_int8_t *lwbf = (u_int8_t *)(x);	\
+		u_int32_t res = 0;		\
 		res = (res << 8) | lwbf[2];	\
 		res = (res << 8) | lwbf[1];	\
 		res = (res << 8) | lwbf[0];	\
@@ -68,8 +68,8 @@ typedef struct FTSF_ENTRY ftsf_entry;
 	})
 
 #define LOADD(x) __extension__({		\
-		uint8_t *lwbf = (uint8_t *)(x);	\
-		uint32_t res = 0;		\
+		u_int8_t *lwbf = (u_int8_t *)(x);	\
+		u_int32_t res = 0;		\
 		res = (res << 8) | lwbf[3];	\
 		res = (res << 8) | lwbf[2];	\
 		res = (res << 8) | lwbf[1];	\
@@ -80,7 +80,7 @@ typedef struct FTSF_ENTRY ftsf_entry;
 char *ft_pack(ftsf_entry *);
 char *ft_packm(void);
 
-char *mkheader(char *, size_t, uint32_t, uint32_t, uint8_t);
+char *mkheader(char *, size_t, u_int32_t, u_int32_t, u_int8_t);
 char *mktrailer(char *, size_t);
 
 void ft_dump(char *);
