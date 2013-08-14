@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnfsidmap
 PKG_VERSION:=		0.25
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2ac4893c92716add1a1447ae01df77ab
 PKG_DESCR:=		idmap library for NFSv4
 PKG_SECTION:=		libs
