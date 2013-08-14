@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
-PKG_VERSION:=		2.22.2
+PKG_VERSION:=		2.23.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		eeacbfdd2556acd899a2d0ffdb446185
+PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.22/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.23/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz

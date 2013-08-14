@@ -1,5 +1,5 @@
---- util-linux-2.22.2.orig/libmount/src/tab_parse.c	2012-12-12 21:04:47.000000000 +0100
-+++ util-linux-2.22.2/libmount/src/tab_parse.c	2013-02-28 14:34:10.000000000 +0100
+--- util-linux-2.23.2.orig/libmount/src/tab_parse.c	2013-07-30 10:39:26.000000000 +0200
++++ util-linux-2.23.2/libmount/src/tab_parse.c	2013-08-14 11:39:26.000000000 +0200
 @@ -16,6 +16,8 @@
  #include <dirent.h>
  #include <fcntl.h>
@@ -62,9 +62,9 @@
  			"%n",		/* number of read bytes */
  
  			&fs->id,
-@@ -162,10 +172,14 @@ static int mnt_parse_mountinfo_line(stru
- 		return -EINVAL;
- 	}
+@@ -164,10 +174,14 @@ static int mnt_parse_mountinfo_line(stru
+ 	if (p > s + 1)
+ 		fs->opt_fields = strndup(s + 1, p - s - 1);
  	s = p + 3;
 +	len           = strlen (s) + 1;
 +	fstype        = malloc (sizeof *fstype * len);
