@@ -13,7 +13,10 @@ PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind libdevmapper
 PKG_DEPENDS+=		libpthread
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
+# as long as there are tar archives of nfs-utils with object files
+# on some sourceforge mirrors
+PKG_SITES:=		http://openadk.org/distfiles/
+#PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)

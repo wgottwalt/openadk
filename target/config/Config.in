@@ -584,7 +584,6 @@ config ADK_TARGET_LIB_UCLIBC
 	depends on \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
-		   !ADK_TARGET_SYSTEM_RASPBERRY_PI && \
 		   !ADK_LINUX_NATIVE
 	help
  	 http://uclibc.org
@@ -626,7 +625,6 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	help
 	 http://www.gnu.org/libc
 
@@ -657,6 +655,7 @@ config ADK_TARGET_SUFFIX
 	default "gnueabihf" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABIHF
 	default "gnueabi" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABI
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
+	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_EABIHF
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF

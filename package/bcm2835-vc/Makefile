@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
 PKG_VERSION:=		0.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		d16840805c020af92cd2268a0291228b
 PKG_DESCR:=		vc tools for raspberry pi (bcm2835)
 PKG_SECTION:=		base
+PKG_DEPENDS:=		libpthread
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_LIBC_DEPENDS:=	eglibc glibc
