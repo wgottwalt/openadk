@@ -4,6 +4,7 @@ config ADK_PACKAGE_MUSL
 	default y if ADK_TARGET_LIB_MUSL && !ADK_TOOLCHAIN_ONLY
 	default n
 	depends on ADK_TARGET_LIB_MUSL
+	select ADK_PACKAGE_LIBGCC
 	help
 	  Embedded C library.
 

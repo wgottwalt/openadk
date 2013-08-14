@@ -564,6 +564,9 @@ config ADK_musl
 config ADK_libc
 	boolean
 
+config ADK_TARGET_LIB_STATIC_LIBGCC
+	boolean
+
 config ADK_TARGET_LIBC
 	string
 	default "uclibc"  if ADK_uclibc
@@ -585,6 +588,7 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	help
  	 http://uclibc.org
 
@@ -605,6 +609,7 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	help
 	 http://www.eglibc.org
 
@@ -625,6 +630,7 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_SPARC64 || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	help
 	 http://www.gnu.org/libc
 
@@ -646,6 +652,7 @@ config ADK_TARGET_LIB_LIBC
 	prompt "Native C library"
 	boolean
 	select ADK_libc
+	select ADK_TARGET_LIB_STATIC_LIBGCC
 	depends on ADK_LINUX_NATIVE
 
 endchoice

@@ -32,7 +32,9 @@ ifeq ($(ADK_STATIC),y)
 TARGET_LDFLAGS+=	-static
 endif
 
+ifeq ($(ADK_TARGET_LIB_STATIC_LIBGCC),y)
 TARGET_LDFLAGS+=	-static-libgcc
+endif
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 CONFIGURE_ARGS+=	--disable-pam \
@@ -51,6 +53,7 @@ CONFIGURE_ARGS+=	--disable-utmp --disable-pututline
 else
 CONFIGURE_ENV+=		conf_utmp_location=/var/run/utmp
 endif
+
 
 pre-configure:
 	$(SED) 's,^/\* #define PKG_MULTI.*,#define PKG_MULTI,g' $(WRKBUILD)/options.h
