@@ -16,7 +16,7 @@ $(WRKBUILD)/.headers:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) -C $(WRKBUILD) all
+	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled

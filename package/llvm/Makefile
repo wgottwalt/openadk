@@ -42,6 +42,8 @@ do-build:
 do-install:
 	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools DESTDIR=$(STAGING_TARGET_DIR) install 
 	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools DESTDIR=$(WRKINST) install 
+	cp ${WRKBUILD}/BuildTools/BuildTools/Release+Asserts/bin/llvm-config \
+		$(STAGING_TARGET_DIR)/usr/bin
 
 llvm-install:
 	$(INSTALL_DIR) $(IDIR_LLVM)/usr/bin

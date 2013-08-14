@@ -1,22 +1,24 @@
---- w-tzdata-2010o-1.orig/Makefile	2010-10-12 18:36:50.000000000 +0200
-+++ w-tzdata-2010o-1/Makefile	2011-01-22 22:10:00.358658180 +0100
-@@ -212,13 +212,13 @@ GCC_DEBUG_FLAGS = -Dlint -g -O -fno-comm
+--- w-tzdata-2013d-1.orig/Makefile	2013-07-05 16:38:01.000000000 +0200
++++ w-tzdata-2013d-1/Makefile	2013-08-14 12:58:49.000000000 +0200
+@@ -231,7 +231,7 @@ GCC_DEBUG_FLAGS = -Dlint -g3 -O3 -fno-co
  # before the first Monday in January when a "%V" format is used and January 1
  # falls on a Friday, Saturday, or Sunday.
  
 -CFLAGS=
 +CFLAGS?=
  
- # If you want zic's -s option used when installing, uncomment the next line
- # ZFLAGS=	-s
+ # Linker flags.  Default to $(LFLAGS) for backwards compatibility
+ # to tzcode2012h and earlier.
+@@ -239,7 +239,7 @@ CFLAGS=
+ LDFLAGS=	$(LFLAGS)
  
  zic=		./zic
 -ZIC=		$(zic) $(ZFLAGS)
 +ZIC=		./zic_for_build $(ZFLAGS)
  
  # The name of a Posix-compliant `awk' on your system.
- AWK=		nawk
-@@ -279,7 +279,7 @@ ENCHILADA=	$(DOCS) $(SOURCES) $(DATA) $(
+ AWK=		awk
+@@ -330,7 +330,7 @@ ENCHILADA=	$(COMMON) $(DOCS) $(SOURCES)
  
  SHELL=		/bin/sh
  
@@ -25,11 +27,11 @@
  
  ALL:		all date
  
-@@ -309,6 +309,14 @@ INSTALL:	ALL install date.1
- 		-rm -f $(MANDIR)/man1/date.1
- 		cp date.1 $(MANDIR)/man1/.
+@@ -365,6 +365,14 @@ version.h:
+ 		 echo 'static char const TZVERSION[]="$(VERSION)";' && \
+ 		 echo 'static char const REPORT_BUGS_TO[]="$(BUGEMAIL)";') >$@
  
-+zic_for_build:
++zic_for_build: version.h
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) zic.c -o zic_build.o
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) localtime.c -o localtime_build.o
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) asctime.c -o asctime_build.o
@@ -38,9 +40,9 @@
 +		$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@ zic_build.o localtime_build.o asctime_build.o scheck_build.o ialloc_build.o 
 +
  zdump:		$(TZDOBJS)
- 		$(CC) $(CFLAGS) $(LFLAGS) $(TZDOBJS) $(LDLIBS) -o $@
+ 		$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(TZDOBJS) $(LDLIBS)
  
-@@ -319,10 +327,10 @@ yearistype:	yearistype.sh
+@@ -375,10 +383,10 @@ yearistype:	yearistype.sh
  		cp yearistype.sh yearistype
  		chmod +x yearistype
  
@@ -53,7 +55,7 @@
  		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR) -L leapseconds $(TDATA)
  
  # In earlier versions of this makefile, the other two directories were
-@@ -334,7 +342,7 @@ right_only:	zic leapseconds $(TDATA)
+@@ -390,7 +398,7 @@ right_only:	zic leapseconds $(TDATA)
  # Therefore, the other two directories are now siblings of $(TZDIR).
  # You must replace all of $(TZDIR) to switch from not using leap seconds
  # to using them, or vice versa.

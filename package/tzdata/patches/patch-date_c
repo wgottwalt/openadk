@@ -1,7 +1,7 @@
 strchr() is false defined here
---- w-tzdata-2010o-1.orig/date.c	2010-10-12 18:36:51.000000000 +0200
-+++ w-tzdata-2010o-1/date.c	2011-02-28 00:57:57.274000374 +0100
-@@ -69,7 +69,6 @@ extern char *		getlogin();
+--- w-tzdata-2013d-1.orig/date.c	2013-05-28 06:26:18.000000000 +0200
++++ w-tzdata-2013d-1/date.c	2013-08-14 12:54:54.000000000 +0200
+@@ -60,7 +60,6 @@ extern char *		getlogin();
  extern time_t		mktime();
  extern char *		optarg;
  extern int		optind;

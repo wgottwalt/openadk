@@ -271,7 +271,7 @@ int main() {
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
 	char *pkg_need_cxx, *pkg_need_java, *pkgname;
-	char *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
+	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
 	char *saveptr, *p_ptr, *s_ptr;
 	int result;
@@ -289,6 +289,7 @@ int main() {
 	pkg_arch_depends = NULL;
 	pkg_system_depends = NULL;
 	pkg_host_depends = NULL;
+	pkg_libc_depends = NULL;
 	pkg_cxx = NULL;
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
@@ -393,6 +394,8 @@ int main() {
 						continue;
 					snprintf(variable, MAXVAR, "PKG_DFLT_%s", pkg_name_u);
 					if ((parse_var(buf, variable, NULL, &pkg_dflt)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_LIBC_DEPENDS", NULL, &pkg_libc_depends)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_HOST_DEPENDS", NULL, &pkg_host_depends)) == 0)
 						continue;
@@ -647,6 +650,23 @@ int main() {
 					fprintf(cfg, "\n");
 				}
 
+				/* create package libc dependency information */
+				if (pkg_libc_depends != NULL) {
+					token = strtok(pkg_libc_depends, " ");
+					fprintf(cfg, "\tdepends on ");
+					sp = "";
+					while (token != NULL) {
+						if(strncmp(token, "!", 1) == 0) {
+							fprintf(cfg, "%s!ADK_TARGET_LIB_%s", sp, toupperstr(token));
+							sp = " && ";
+						} else {
+							fprintf(cfg, "%sADK_TARGET_LIB_%s", sp, toupperstr(token));
+							sp = " || ";
+						}
+						token = strtok(NULL, " ");
+					}
+					fprintf(cfg, "\n");
+				}
 				/* create package target architecture dependency information */
 				if (pkg_arch_depends != NULL) {
 					token = strtok(pkg_arch_depends, " ");
@@ -902,6 +922,7 @@ int main() {
 			free(pkg_arch_depends);
 			free(pkg_system_depends);
 			free(pkg_host_depends);
+			free(pkg_libc_depends);
 			free(pkg_cxx);
 			free(pkg_dflt);
 			free(pkg_cfline);
@@ -918,6 +939,7 @@ int main() {
 			pkg_arch_depends = NULL;
 			pkg_system_depends = NULL;
 			pkg_host_depends = NULL;
+			pkg_libc_depends = NULL;
 			pkg_cxx = NULL;
 			pkg_dflt = NULL;
 			pkg_cfline = NULL;

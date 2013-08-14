@@ -4,17 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tzdata
-PKG_VERSION:=		2010o
+PKG_VERSION:=		2013d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5cae5c56fad81dc29f8fcd933a05768e a7a776a5713831993e814fe0c05f9fd5
+PKG_MD5SUM:=		65b6818162230fc02f86f293376c73df 4616a9560270f180eeb9a08540636890
 PKG_DESCR:=		Timezone data (/usr/share/zoneinfo)
 PKG_SECTION:=		utils
-PKG_URL:=		ftp://elsie.nci.nih.gov/pub/
-PKG_SITES:=		ftp://elsie.nci.nih.gov/pub/
+PKG_URL:=		http://www.iana.org/time-zones/
+PKG_SITES:=		http://www.iana.org/time-zones/repository/releases/
 PKG_NOPARALLEL:=	1
 
-# Note that tzcode does NOT have the same version as tzdata does :[
-DISTFILES:=             ${PKG_NAME}${PKG_VERSION}.tar.gz tzcode2010n.tar.gz
+DISTFILES:=             ${PKG_NAME}${PKG_VERSION}.tar.gz tzcode${PKG_VERSION}.tar.gz
 # both archives do not extract into subdirectories
 WRKDIST=		${WRKDIR}
 
