@@ -25,10 +25,13 @@ INSTALL_STYLE:=         manual
 
 # do nothing, musl is already build in toolchain directory
 do-install:
+	${INSTALL_DIR} $(IDIR_MUSL)/usr/bin
 	${INSTALL_DIR} $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.so $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	(cd $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH) && \
 		ln -sf libc.so ld-musl-$(ARCH).so.1)
+	(cd $(IDIR_MUSL)/usr/bin && \
+		ln -sf ../../lib/ld-musl-$(ARCH).so.1 ldd)
 	
 
 musl-dev-install:
