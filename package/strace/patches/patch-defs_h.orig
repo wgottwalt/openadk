@@ -1,0 +1,14 @@
+--- strace-4.8.orig/defs.h	2013-05-14 16:10:42.000000000 +0200
++++ strace-4.8/defs.h	2013-08-14 08:01:46.000000000 +0200
+@@ -222,11 +222,6 @@ extern long ptrace(int, int, char *, lon
+ # define PTRACE_EVENT_EXIT	6
+ #endif
+ 
+-#if !defined(__GLIBC__)
+-# define PTRACE_PEEKUSER PTRACE_PEEKUSR
+-# define PTRACE_POKEUSER PTRACE_POKEUSR
+-#endif
+-
+ #if USE_SEIZE
+ # undef PTRACE_SEIZE
+ # define PTRACE_SEIZE		0x4206

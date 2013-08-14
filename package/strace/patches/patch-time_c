@@ -1,0 +1,14 @@
+--- strace-4.8.orig/time.c	2012-05-01 23:17:51.000000000 +0200
++++ strace-4.8/time.c	2013-08-14 08:52:00.000000000 +0200
+@@ -774,7 +774,11 @@ printsigevent(struct tcb *tcp, long arg)
+ 			/* _pad[0] is the _tid field which might not be
+ 			   present in the userlevel definition of the
+ 			   struct.  */
++#if defined(__GLIBC__) || defined(__UCLIBC__)
+ 			tprintf("{%d}", sev._sigev_un._pad[0]);
++#else
++			;
++#endif
+ 		else if (sev.sigev_notify == SIGEV_THREAD)
+ 			tprintf("{%p, %p}", sev.sigev_notify_function,
+ 				sev.sigev_notify_attributes);

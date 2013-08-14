@@ -20,6 +20,9 @@ $(eval $(call PKG_template,STRACE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=		-static
 endif
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
+endif
 
 INSTALL_STYLE:=		manual
 

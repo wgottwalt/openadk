@@ -1,0 +1,19 @@
+--- strace-4.8.orig/net.c	2013-05-18 00:20:02.000000000 +0200
++++ strace-4.8/net.c	2013-08-14 08:46:21.000000000 +0200
+@@ -94,13 +94,15 @@
+ # define PF_UNSPEC AF_UNSPEC
+ #endif
+ 
+-/* Under Linux these are enums so we can't test for them with ifdef. */
++/* Under Linux (glibc/uclibc) these are enums so we can't test for them with ifdef. */
++#if defined(__GLIBC__) || defined(__UCLIBC__)
+ #define IPPROTO_EGP IPPROTO_EGP
+ #define IPPROTO_PUP IPPROTO_PUP
+ #define IPPROTO_IDP IPPROTO_IDP
+ #define IPPROTO_IGMP IPPROTO_IGMP
+ #define IPPROTO_RAW IPPROTO_RAW
+ #define IPPROTO_MAX IPPROTO_MAX
++#endif
+ 
+ static const struct xlat domains[] = {
+ #ifdef PF_UNSPEC
