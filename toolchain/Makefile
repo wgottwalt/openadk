@@ -15,7 +15,7 @@ include $(TOPDIR)/rules.mk
 
 TARGETS:=binutils gmp mpfr mpc libelf gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
-TARGETS+=glibc-ports glibc
+TARGETS+=glibc
 LIBC:=glibc
 endif
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
@@ -45,11 +45,7 @@ download: $(DOWNLOAD)
 fixup: $(FIXUP)
 
 gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
-ifeq ($(ADK_TARGET_LIB_GLIBC),y)
-$(LIBC)-prepare: gcc-prepare kernel-headers-prepare glibc-ports-prepare
-else
 $(LIBC)-prepare: gcc-prepare kernel-headers-prepare
-endif
 gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install

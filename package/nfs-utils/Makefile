@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.2.5
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		8395ac770720b83c5c469f88306d7765
+PKG_VERSION:=		1.2.8
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		fb48630b7c145fb9d6602a79c6eaab11
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind libdevmapper
+PKG_DEPENDS+=		libpthread
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
@@ -47,6 +48,7 @@ endif
 CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 			ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
+			--disable-nfsdcltrack \
 			--with-rpcgen=internal \
 			--enable-tirpc \
 			--with-tirpcinclude=${TIRPCINC} \

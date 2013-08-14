@@ -1,5 +1,5 @@
---- nfs-utils-1.2.1.orig/utils/mount/error.c	2009-11-04 12:13:56.000000000 +0100
-+++ nfs-utils-1.2.1/utils/mount/error.c	2009-12-25 19:32:49.000000000 +0100
+--- nfs-utils-1.2.8.orig/utils/mount/error.c	2013-04-22 18:47:20.000000000 +0200
++++ nfs-utils-1.2.8/utils/mount/error.c	2013-08-13 10:46:19.000000000 +0200
 @@ -62,7 +62,7 @@ static int rpc_strerror(int spos)
  	char *tmp;
  

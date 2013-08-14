@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.9
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/
@@ -26,7 +26,6 @@ $(eval $(call PKG_template,CFGFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
 TARGET_LDFLAGS+=	-static-libgcc
 
 do-install:

@@ -1,0 +1,26 @@
+--- gdb-7.6.orig/gdb/linux-nat.c	2013-02-13 15:59:49.000000000 +0100
++++ gdb-7.6/gdb/linux-nat.c	2013-08-13 17:01:09.000000000 +0200
+@@ -79,6 +79,14 @@
+ # endif
+ #endif /* HAVE_PERSONALITY */
+ 
++#ifndef __SIGRTMIN
++#define __SIGRTMIN SIGRTMIN
++#endif
++
++#ifndef W_STOPCODE
++#define W_STOPCODE(sig) ((sig) << 8 | 0x7f)
++#endif
++
+ /* This comment documents high-level logic of this file.
+ 
+ Waiting for events in sync mode
+@@ -2379,7 +2387,7 @@ linux_handle_extended_wait (struct lwp_i
+ 		status = 0;
+ 	    }
+ 
+-	  if (non_stop)
++	  if (1)
+ 	    {
+ 	      /* Add the new thread to GDB's lists as soon as possible
+ 		 so that:

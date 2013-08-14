@@ -32,19 +32,17 @@
 #include "compress.h"
 #include "minilzop.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/minilzop.c,v 1.2 2007/03/09 22:25:45 tg Exp $");
-
 #define lodsw(s)	__extension__({				\
-		const uint8_t *lodsw_buf = (const uint8_t *)(s);\
-		uint16_t lodsw_val;				\
+		const u_int8_t *lodsw_buf = (const u_int8_t *)(s);\
+		u_int16_t lodsw_val;				\
 								\
 		lodsw_val = lodsw_buf[0];			\
 		lodsw_val |= lodsw_buf[1] << 8;			\
 		(lodsw_val);					\
 	})
 #define lodsd(s)	__extension__({				\
-		const uint8_t *lodsd_buf = (const uint8_t *)(s);\
-		uint32_t lodsd_val;				\
+		const u_int8_t *lodsd_buf = (const u_int8_t *)(s);\
+		u_int32_t lodsd_val;				\
 								\
 		lodsd_val = lodsd_buf[0];			\
 		lodsd_val |= lodsd_buf[1] << 8;			\
@@ -53,15 +51,15 @@ __RCSID("$MirOS: contrib/hosted/fwcf/minilzop.c,v 1.2 2007/03/09 22:25:45 tg Exp
 		(lodsd_val);					\
 	})
 #define stosw(s,w)	do {					\
-		uint8_t *stosw_buf = (uint8_t *)(s);		\
-		uint16_t stosw_val = (w);			\
+		u_int8_t *stosw_buf = (u_int8_t *)(s);		\
+		u_int16_t stosw_val = (w);			\
 								\
 		stosw_buf[0] = stosw_val & 0xFF;		\
 		stosw_buf[1] = (stosw_val >> 8) & 0xFF;		\
 	} while (0)
 #define stosd(s,dw)	do {					\
-		uint8_t *stosd_buf = (uint8_t *)(s);		\
-		uint32_t stosd_val = (dw);			\
+		u_int8_t *stosd_buf = (u_int8_t *)(s);		\
+		u_int32_t stosd_val = (dw);			\
 								\
 		stosd_buf[0] = stosd_val & 0xFF;		\
 		stosd_buf[1] = (stosd_val >> 8) & 0xFF;		\
@@ -73,7 +71,7 @@ void
 read_aszdata(int dfd, char **dbuf, size_t *dlen)
 {
 	size_t len;
-	uint8_t hdrbuf[8];
+	u_int8_t hdrbuf[8];
 	ADLER_DECL;
 
 	if (read(dfd, hdrbuf, 8) != 8)
@@ -97,7 +95,7 @@ void
 write_aszdata(int dfd, const char *dbuf, size_t dlen)
 {
 	size_t len;
-	uint8_t hdrbuf[8];
+	u_int8_t hdrbuf[8];
 	ADLER_DECL;
 
 	stosd(hdrbuf + 4, dlen);

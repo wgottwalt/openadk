@@ -1,5 +1,5 @@
---- dropbear-2012.55.orig/Makefile.in	2012-02-23 14:47:05.000000000 +0100
-+++ dropbear-2012.55/Makefile.in	2012-10-05 17:24:16.000000000 +0200
+--- dropbear-2013.58.orig/Makefile.in	2013-04-18 16:58:14.000000000 +0200
++++ dropbear-2013.58/Makefile.in	2013-08-13 14:33:37.000000000 +0200
 @@ -56,7 +56,7 @@ HEADERS=options.h dbutil.h session.h pac
  		loginrec.h atomicio.h x11fwd.h agentfwd.h tcpfwd.h compat.h \
  		listener.h fake-rfc2553.h
@@ -9,28 +9,21 @@
  dbclientobjs=$(COMMONOBJS) $(CLISVROBJS) $(CLIOBJS)
  dropbearkeyobjs=$(COMMONOBJS) $(KEYOBJS)
  dropbearconvertobjs=$(COMMONOBJS) $(CONVERTOBJS)
-@@ -75,9 +75,8 @@ AR=@AR@
+@@ -75,10 +75,9 @@ AR=@AR@
  RANLIB=@RANLIB@
  STRIP=@STRIP@
  INSTALL=@INSTALL@
 -CPPFLAGS=@CPPFLAGS@
 -CFLAGS+=-I. -I$(srcdir) $(CPPFLAGS) @CFLAGS@
 -LIBS+=@LIBS@
+-LDFLAGS=@LDFLAGS@
 +CPPFLAGS=@CPPFLAGS@ -I. -I$(srcdir)
 +LIBS+=@LIBS@ @CRYPTLIB@
- LDFLAGS=@LDFLAGS@
++LDFLAGS+=@LDFLAGS@
  
  EXEEXT=@EXEEXT@
-@@ -159,7 +158,7 @@ dropbearkey: $(dropbearkeyobjs)
- dropbearconvert: $(dropbearconvertobjs)
  
- dropbear dbclient dropbearkey dropbearconvert: $(HEADERS) $(LIBTOM_DEPS) Makefile
--	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBS)
-+	$(CC) $(LDFLAGS) -static-libgcc -o $@$(EXEEXT) $($@objs) $(LIBS)
- 
- # scp doesn't use the libs so is special.
- scp: $(SCPOBJS)  $(HEADERS) Makefile
-@@ -169,14 +168,14 @@ scp: $(SCPOBJS)  $(HEADERS) Makefile
+@@ -169,7 +168,7 @@ scp: $(SCPOBJS)  $(HEADERS) Makefile
  # multi-binary compilation.
  MULTIOBJS=
  ifeq ($(MULTI),1)
@@ -38,12 +31,4 @@
 +	MULTIOBJS=dbmulti.o $(sort $(foreach prog, $(PROGRAMS), $($(prog)objs)))
  	CFLAGS+=$(addprefix -DDBMULTI_, $(PROGRAMS)) -DDROPBEAR_MULTI
  endif
- 
- dropbearmulti: multilink 
- 
- multibinary: $(HEADERS) $(MULTIOBJS) $(LIBTOM_DEPS) Makefile
--	$(CC) $(LDFLAGS) -o dropbearmulti$(EXEEXT) $(MULTIOBJS) $(LIBS)
-+	$(CC) $(LDFLAGS) -static-libgcc -o dropbearmulti$(EXEEXT) $(MULTIOBJS) $(LIBS)
- 
- multilink: multibinary $(addprefix link, $(PROGRAMS))
  

@@ -27,11 +27,9 @@ typedef struct FTSF_ENTRY ftsf_entry;
 extern const char ftsf_prefix[];
 #endif
 
-__BEGIN_DECLS
 void ftsf_start(const char *);
 /* returns -1 on error, 0 on empty, 1 on okay */
 int ftsf_next(ftsf_entry *);
 void ftsf_debugent(ftsf_entry *);
-__END_DECLS
 
 #endif

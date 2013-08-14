@@ -52,8 +52,6 @@ static char sccsid[] = "@(#)fts.c	8.6 (Berkeley) 8/14/94";
 
 #include "defs.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/fts.c,v 1.3 2007/07/02 14:50:21 tg Exp $");
-
 #define internal_function
 
 /* Largest alignment size needed, minus one.
@@ -67,15 +65,15 @@ __RCSID("$MirOS: contrib/hosted/fwcf/fts.c,v 1.3 2007/07/02 14:50:21 tg Exp $");
 #endif
 
 
-static FTSENT	*fts_alloc __P((FTS *, const char *, int)) internal_function;
-static FTSENT	*fts_build __P((FTS *, int)) internal_function;
-static void	 fts_lfree __P((FTSENT *)) internal_function;
-static void	 fts_load __P((FTS *, FTSENT *)) internal_function;
-static size_t	 fts_maxarglen __P((char * const *)) internal_function;
-static void	 fts_padjust __P((FTS *, FTSENT *)) internal_function;
-static int	 fts_palloc __P((FTS *, size_t)) internal_function;
-static FTSENT	*fts_sort __P((FTS *, FTSENT *, int)) internal_function;
-static u_short	 fts_stat __P((FTS *, FTSENT *, int)) internal_function;
+static FTSENT	*fts_alloc (FTS *, const char *, int) internal_function;
+static FTSENT	*fts_build (FTS *, int) internal_function;
+static void	 fts_lfree (FTSENT *) internal_function;
+static void	 fts_load (FTS *, FTSENT *) internal_function;
+static size_t	 fts_maxarglen (char * const *) internal_function;
+static void	 fts_padjust (FTS *, FTSENT *) internal_function;
+static int	 fts_palloc (FTS *, size_t) internal_function;
+static FTSENT	*fts_sort (FTS *, FTSENT *, int) internal_function;
+static u_short	 fts_stat (FTS *, FTSENT *, int) internal_function;
 static int	 fts_safe_changedir(FTS *, FTSENT *, int, char *);
 
 #ifndef MAX
@@ -101,7 +99,7 @@ FTS *
 fts_open(argv, options, compar)
 	char * const *argv;
 	register int options;
-	int (*compar) __P((const FTSENT **, const FTSENT **));
+	int (*compar) (const FTSENT **, const FTSENT **);
 {
 	register FTS *sp;
 	register FTSENT *p, *root;
@@ -119,7 +117,7 @@ fts_open(argv, options, compar)
 	if ((sp = malloc((u_int)sizeof(FTS))) == NULL)
 		return (NULL);
 	memset(sp, 0, sizeof(FTS));
-	sp->fts_compar = (int (*) __P((const void *, const void *))) compar;
+	sp->fts_compar = (int (*) (const void *, const void *)) compar;
 	sp->fts_options = options;
 
 	/* Logical walks turn on NOCHDIR; symbolic links are too hard. */
@@ -694,11 +692,11 @@ fts_build(sp, type)
 		if (!ISSET(FTS_SEEDOT) && ISDOT(dp->d_name))
 			continue;
 
-		if ((p = fts_alloc(sp, dp->d_name, (int)_D_EXACT_NAMLEN (dp))) == NULL)
+		if ((p = fts_alloc(sp, dp->d_name, (int)strlen(dp->d_name))) == NULL)
 			goto mem1;
-		if (_D_EXACT_NAMLEN (dp) >= maxlen) {/* include space for NUL */
+		if (strlen(dp->d_name) >= maxlen) {/* include space for NUL */
 			oldaddr = sp->fts_path;
-			if (fts_palloc(sp, _D_EXACT_NAMLEN (dp) + len + 1)) {
+			if (fts_palloc(sp, strlen(dp->d_name) + len + 1)) {
 				/*
 				 * No more memory for path or structures.  Save
 				 * errno, free up the current structure and the
@@ -723,7 +721,7 @@ mem1:				saved_errno = errno;
 			maxlen = sp->fts_pathlen - len;
 		}
 
-		if (len + _D_EXACT_NAMLEN (dp) >= USHRT_MAX) {
+		if (len + strlen(dp->d_name) >= USHRT_MAX) {
 			/*
 			 * In an FTSENT, fts_pathlen is a u_short so it is
 			 * possible to wraparound here.  If we do, free up
@@ -740,7 +738,7 @@ mem1:				saved_errno = errno;
 		}
 		p->fts_level = level;
 		p->fts_parent = sp->fts_cur;
-		p->fts_pathlen = len + _D_EXACT_NAMLEN (dp);
+		p->fts_pathlen = len + strlen(dp->d_name);
 
 #if defined FTS_WHITEOUT && 0
 		if (dp->d_type == DT_WHT)

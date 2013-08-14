@@ -11,6 +11,7 @@ PKG_DESCR:=		vc tools for raspberry pi (bcm2835)
 PKG_SECTION:=		base
 PKG_SITES:=		http://openadk.org/distfiles/
 
+PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
 PKG_SUBPKGS:=		BCM2835_VC BCM2835_VC_DEV

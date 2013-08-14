@@ -27,6 +27,12 @@ $(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	$(ADK_TARGET_ABI_CFLAGS)
+
+ifeq ($(ADK_STATIC),y)
+TARGET_LDFLAGS+=	-static
+endif
+
+TARGET_LDFLAGS+=	-static-libgcc
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 CONFIGURE_ARGS+=	--disable-pam \

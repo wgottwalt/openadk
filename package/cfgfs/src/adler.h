@@ -45,7 +45,7 @@
    by the 'buffer' argument, size expected in 'len'
    which is TRASHED; stores the result in s1 and s2 */
 #define ADLER_CALC(buffer)	do {					\
-		const uint8_t *adler_buf = (const uint8_t *)(buffer);	\
+		const u_int8_t *adler_buf = (const u_int8_t *)(buffer);	\
 		while (len) {						\
 			len -= (n = MIN(len, ADLER_NMAX));		\
 			while (n--) {					\

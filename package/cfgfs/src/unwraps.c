@@ -41,7 +41,7 @@ __RCSID("$MirOS: contrib/hosted/fwcf/unwraps.c,v 1.10 2006/09/26 10:25:03 tg Exp
 char *
 fwcf_unpack(int fd, size_t *inner)
 {
-	uint8_t c, hdrbuf[12];
+	u_int8_t c, hdrbuf[12];
 	size_t outer, x_inner, x, len, maxln;
 	char *cdata, *udata;
 	ADLER_DECL;
@@ -77,19 +77,19 @@ fwcf_unpack(int fd, size_t *inner)
 	if ((s1 != LOADW(cdata + outer - 4)) ||
 	    (s2 != LOADW(cdata + outer - 2)))
 		errx(1, "crc mismatch: %02X%02X%02X%02X != %04X%04X",
-		    (uint8_t)cdata[outer - 1], (uint8_t)cdata[outer - 2],
-		    (uint8_t)cdata[outer - 3], (uint8_t)cdata[outer - 4],
+		    (u_int8_t)cdata[outer - 1], (u_int8_t)cdata[outer - 2],
+		    (u_int8_t)cdata[outer - 3], (u_int8_t)cdata[outer - 4],
 		    s2, s1);
 
 	if ((x = compressor_get(c)->decompress(udata, *inner, cdata + 12,
 	    outer - 16)) != *inner)
-		errx(1, "size mismatch: decompressed %lu, want %lu", (u_long)x,
-		    (u_long)*inner);
-	push_rndata((uint8_t *)cdata + outer, maxln - outer);
+		errx(1, "size mismatch: decompressed %lu, want %lu", (unsigned long)x,
+		    (unsigned long)*inner);
+	push_rndata((u_int8_t *)cdata + outer, maxln - outer);
 	free(cdata);
 #ifdef DEBUG
 	fprintf(stderr, "fwcf_unpack: decompressed outer %lu inner %lu\n",
-	    (u_long)outer, (u_long)*inner);
+	    (unsigned long)outer, (unsigned long)*inner);
 #endif
 	return (udata);
 }

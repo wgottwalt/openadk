@@ -37,8 +37,6 @@
 #define FTSF_INTERNALS
 #include "fts_subs.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/fts_subs.c,v 1.8 2007/07/02 14:53:03 tg Exp $");
-
 static FTS *handle;
 
 char ftsf_prefix[PATH_MAX];

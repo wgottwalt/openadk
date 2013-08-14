@@ -9,6 +9,9 @@ endif
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
 include ${TOPDIR}/toolchain/eglibc/Makefile.inc
 endif
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+include ${TOPDIR}/toolchain/musl/Makefile.inc
+endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
@@ -41,7 +44,9 @@ INSTALL_STYLE:=		manual
 libpthread-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+ifeq ($(ADK_TARGET_LIB_MUSL),)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -34,8 +34,6 @@ ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 $(WRKBUILD)/.headers_configure: 
 	for abi in $(TABI); do \
 		mkdir -p $(GLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
-		(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-			ln -sf ../../w-glibc-ports-$(PKG_VERSION)-1/glibc-ports-$(PKG_VERSION)/ ports); \
 		(cd $(GLIBC_BUILD_DIR_INITIAL)-$${abi/*:/}; \
 			${GLIBC_ENV} \
 			CC="${REAL_GNU_TARGET_NAME}-gcc -m$${abi/*:/}" \
@@ -60,8 +58,6 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 else
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
-	(cd ${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION); \
-	ln -sf ../../w-glibc-ports-$(PKG_VERSION)-1/glibc-ports-$(PKG_VERSION)/ ports);
 	(cd $(GLIBC_BUILD_DIR_INITIAL); \
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
@@ -77,7 +73,7 @@ $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 		$(MAKE) ${GLIBC_MAKEOPTS} install-headers \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,soft,hard}.h
 	touch $@
 endif
 
@@ -111,7 +107,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# default libgcc searching for 64 bit libraries
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL)-64 install_root=$(STAGING_TARGET_DIR) install
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,soft,hard}.h
 	for abi in $(TABI); do \
 		mkdir -p $(STAGING_TARGET_DIR)/lib/$(REAL_GNU_TARGET_NAME)/4.7.2/$${abi/*:/} ; \
 		$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/* $(STAGING_TARGET_DIR)-$${abi/*:/}/usr/lib/* \

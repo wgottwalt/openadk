@@ -33,12 +33,9 @@
 #include "adler.h"
 #include "pack.h"
 
-__RCSID("$MirOS: contrib/hosted/fwcf/header.c,v 1.7 2006/09/26 10:25:03 tg Exp $"
-    "\t" ADLER_H);
-
 char *
-mkheader(char *f_header, size_t hdrsize, uint32_t outer_len,
-    uint32_t inner_len, uint8_t algo)
+mkheader(char *f_header, size_t hdrsize, u_int32_t outer_len,
+    u_int32_t inner_len, u_int8_t algo)
 {
 	char *hdrptr = f_header;
 	size_t hdrleft = hdrsize;
@@ -68,7 +65,7 @@ mktrailer(char *data, size_t len)
 	size_t hdrleft = 4;
 	ADLER_DECL;
 #ifdef DEBUG_ADLER
-	uint32_t adler = adler32(1, (uint8_t *)data, len);
+	u_int32_t adler = adler32(1, (u_int8_t *)data, len);
 #endif
 
 	ADLER_CALC(data);
