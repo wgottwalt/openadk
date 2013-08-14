@@ -9,6 +9,8 @@
 #ifndef SYSDEPS_H
 #define SYSDEPS_H
 
+#include <sys/types.h>
+
 void pull_rndata(u_int8_t *, size_t);
 void push_rndata(u_int8_t *, size_t);
 

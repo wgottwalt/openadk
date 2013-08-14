@@ -9,6 +9,8 @@
 #ifndef PACK_H
 #define PACK_H
 
+#include <sys/types.h>
+
 struct FTSF_ENTRY;
 #ifndef FTS_SUBS_H
 typedef struct FTSF_ENTRY ftsf_entry;

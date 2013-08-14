@@ -9,6 +9,8 @@
 #ifndef COMPRESS_H
 #define COMPRESS_H
 
+#include <sys/types.h>
+
 /* BEGIN of plug-in API description - hook yer proprietary modules here */
 
 /* returns 0 on success, -1 on failure */
