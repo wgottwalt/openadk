@@ -1,0 +1,15 @@
+--- openssl-1.0.1c.orig/crypto/ui/ui_openssl.c	2012-02-12 00:38:49.000000000 +0100
++++ openssl-1.0.1c/crypto/ui/ui_openssl.c	2013-08-15 12:11:24.652833590 +0200
+@@ -184,12 +184,6 @@
+ # undef  SGTTY
+ #endif
+ 
+-#if defined(linux) && !defined(TERMIO)
+-# undef  TERMIOS
+-# define TERMIO
+-# undef  SGTTY
+-#endif
+-
+ #ifdef _LIBC
+ # undef  TERMIOS
+ # define TERMIO

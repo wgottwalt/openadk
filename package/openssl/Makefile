@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.1c
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		ae412727c8c15b67880aef7bd2999b2e
+PKG_VERSION:=		1.0.1e
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		66bf6f10f060d561929de96f9dfe5b8c
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -83,7 +83,7 @@ do-build:
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		all build-shared
 
-post-install:
+libopenssl-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
 	${CP} ${WRKINST}/usr/lib*/lib*.so* ${IDIR_LIBOPENSSL}/usr/lib
 	chmod 644 ${IDIR_LIBOPENSSL}/usr/lib/lib*.so*
