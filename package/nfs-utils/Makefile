@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fb48630b7c145fb9d6602a79c6eaab11
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind libdevmapper
-PKG_DEPENDS+=		libpthread
+PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind libdevmapper libpthread
+PKG_FDEPENDS:=		$(PKG_DEPENDS)
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 # as long as there are tar archives of nfs-utils with object files
@@ -25,9 +25,13 @@ PKGFB_WITH_KERBEROS:=	libnfsidmap krb5 libevent libgssglue librpcsecgss
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
+PKG_FDEPENDS+=		$(PKGFS_WITH_KERBEROS)
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_NATIVE),)
 KRB5INC:=		${STAGING_TARGET_DIR}/usr
