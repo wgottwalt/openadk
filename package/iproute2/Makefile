@@ -4,12 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		3.4.0
+PKG_VERSION:=		3.10.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		879d3fac4e90809598b2864ec4a0cbf8
+PKG_MD5SUM:=		45fb5427fc723a0001c72b92c931ba02
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
 PKG_BUILDDEP:=		iptables libnl linux-atm
+PKG_DEPENDS:=		libnl
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/iproute2/
 
