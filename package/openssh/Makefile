@@ -47,6 +47,7 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
@@ -57,10 +58,12 @@ endif
 
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \
 			ac_cv_func_setlogin=no \
+			ac_cv_have_decl_PR_SET_NO_NEW_PRIVS=no \
 			ac_cv_lib_nsl_yp_match=no
 CONFIGURE_ARGS+=	--disable-strip \
 			--disable-etc-default-login \
 			--disable-lastlog \
+			--with-sandbox=no \
 			--disable-utmp \
 			--disable-utmpx \
 			--disable-wtmp \

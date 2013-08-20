@@ -1,0 +1,10 @@
+--- openssh-6.2p1.orig/sshd.c	2013-02-12 01:04:48.000000000 +0100
++++ openssh-6.2p1/sshd.c	2013-08-20 17:40:31.488435414 +0200
+@@ -46,6 +46,7 @@
+ 
+ #include <sys/types.h>
+ #include <sys/ioctl.h>
++#include <sys/param.h>
+ #include <sys/socket.h>
+ #ifdef HAVE_SYS_STAT_H
+ # include <sys/stat.h>

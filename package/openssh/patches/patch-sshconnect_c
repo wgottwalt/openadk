@@ -1,0 +1,10 @@
+--- openssh-6.2p1.orig/sshconnect.c	2012-09-17 05:25:44.000000000 +0200
++++ openssh-6.2p1/sshconnect.c	2013-08-20 18:00:38.757257988 +0200
+@@ -16,6 +16,7 @@
+ #include "includes.h"
+ 
+ #include <sys/types.h>
++#include <sys/param.h>
+ #include <sys/wait.h>
+ #include <sys/stat.h>
+ #include <sys/socket.h>
