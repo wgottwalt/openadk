@@ -10,16 +10,14 @@ PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
 PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
-PKG_DEPENDS:=		libheimdal libheimdal-client libncurses libcom-err libreadline
+PKG_DEPENDS:=		libheimdal libncurses libcom-err libreadline libopenssl
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		HEIMDAL LIBHEIMDAL LIBHEIMDAL_CLIENT
-PKGSD_LIBHEIMDAL:=	Kerberos 5 server libraries
+PKG_SUBPKGS:=		HEIMDAL_SERVER LIBHEIMDAL
+PKGSD_LIBHEIMDAL:=	Kerberos 5 libraries
 PKGSC_LIBHEIMDAL:=	libs
-PKGSD_LIBHEIMDAL_CLIENT:=	Kerberos 5 client libraries
-PKGSC_LIBHEIMDAL_CLIENT:=	libs
 
 PKG_FLAVOURS_HEIMDAL_SERVER:=	WITH_PKINIT
 PKGFD_WITH_PKINIT:		Enable PK-INIT
@@ -36,7 +34,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL}))
-$(eval $(call PKG_template,LIBHEIMDAL_CLIENT,libheimdal-client,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL_CLIENT},${PKGSC_LIBHEIMDAL_CLIENT}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
@@ -44,6 +41,8 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
+			--without-sqlite3 \
+			--disable-sqlite-cache \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-readline=${STAGING_TARGET_DIR}/usr \
 			--with-ipv6 \
@@ -136,6 +135,10 @@ ifeq ($(ADK_COMPILE_HEIMDAL_WITH_PKINIT),y)
 	${CP} ${WRKINST}/usr/lib/heimdal/libhx509.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 endif
+	${CP} ${WRKINST}/usr/lib/heimdal/libheimsqlite.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
+	${CP} ${WRKINST}/usr/lib/heimdal/libheimbase.so* \
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libheimntlm.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libwind.so* \
@@ -150,13 +153,12 @@ endif
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libroken.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
-	# heimdal client libs
-	${INSTALL_DIR} ${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+	${INSTALL_DIR} ${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libheimedit.so* \
-		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libsl.so* \
-		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* \
-		${IDIR_LIBHEIMDAL_CLIENT}/usr/lib/heimdal
+		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 
 include ${TOPDIR}/mk/pkg-bottom.mk

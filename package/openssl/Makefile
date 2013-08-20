@@ -22,8 +22,7 @@ PKGSD_LIBOPENSSL_DEV:=	development files for openssl
 PKGSC_LIBOPENSSL_DEV:=	devel
 PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
-PKG_FLAVOURS_LIBOPENSSL:=	WITH_EC WITH_CRYPTODEV
-PKGFD_WITH_EC:=			enable Elliptic Curve crypto
+PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 
 ifeq ($(ADK_STATIC),y)
@@ -43,10 +42,6 @@ INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
 OPENSSL_OPTIONS:= shared no-err no-krb5 no-threads zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
-
-ifeq ($(ADK_PACKAGE_LIBOPENSSL_WITH_EC),)
-OPENSSL_OPTIONS+= no-ec
-endif
 
 ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
 OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
