@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.0.21
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		7480dff7115e5af85215893c06b3ac5c
+PKG_VERSION:=		3.2.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7c0dd4f77dc70c64d2f385aeb2df4157
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
 PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 zlib ncurses libnettle
 PKG_URL:=		http://www.gnu.org/software/gnutls/
-PKG_SITES:=		${MASTER_SITE_GNU:=gnutls/}
+PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/
 
 PKG_SUBPKGS:=		LIBGNUTLS GNUTLS_UTILS LIBGNUTLS_EXTRA LIBGNUTLS_OPENSSL
 PKGSD_GNUTLS_UTILS:=	GNU TLS utilities
@@ -43,8 +43,7 @@ TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-pthread -L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ARGS+=	--disable-rpath \
 			--without-libz-prefix \
-			--without-p11-kit \
-			--with-libnettle-prefix="$(STAGING_DIR)/usr"
+			--without-p11-kit
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
 
 post-install:
