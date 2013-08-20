@@ -1,0 +1,20 @@
+--- easy-rsa-2.0.orig/easy-rsa/2.0/vars	2013-08-18 10:11:06.000000000 +0200
++++ easy-rsa-2.0/easy-rsa/2.0/vars	2013-08-18 10:38:50.635782024 +0200
+@@ -12,7 +12,7 @@
+ # This variable should point to
+ # the top level of the easy-rsa
+ # tree.
+-export EASY_RSA="`pwd`"
++export EASY_RSA="/etc/easy-rsa"
+ 
+ #
+ # This variable should point to
+@@ -26,7 +26,7 @@ export GREP="grep"
+ # This variable should point to
+ # the openssl.cnf file included
+ # with easy-rsa.
+-export KEY_CONFIG=`$EASY_RSA/whichopensslcnf $EASY_RSA`
++export KEY_CONFIG=/etc/easy-rsa/openssl.cnf
+ 
+ # Edit this variable to point to
+ # your soon-to-be-created key
