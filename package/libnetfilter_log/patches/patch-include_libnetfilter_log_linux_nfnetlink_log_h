@@ -1,0 +1,10 @@
+--- libnetfilter_log-1.0.1.orig/include/libnetfilter_log/linux_nfnetlink_log.h	2008-07-21 01:04:31.000000000 +0200
++++ libnetfilter_log-1.0.1/include/libnetfilter_log/linux_nfnetlink_log.h	2013-08-20 18:45:57.231082144 +0200
+@@ -9,6 +9,7 @@
+  * and not any kind of function definitions.  It is shared between kernel and
+  * userspace.  Don't put kernel specific stuff in here */
+ 
++#include <sys/types.h>
+ #include <linux/types.h>
+ #include <libnfnetlink/linux_nfnetlink.h>
+ 
