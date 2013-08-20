@@ -1,0 +1,12 @@
+diff -Nur musl-0.9.12.orig/Makefile musl-0.9.12/Makefile
+--- musl-0.9.12.orig/Makefile	2013-07-29 09:20:33.000000000 +0200
++++ musl-0.9.12/Makefile	2013-08-17 16:10:10.000000000 +0200
+@@ -100,7 +100,7 @@
+ 	$(CC) $(CFLAGS_ALL_SHARED) -c -o $@ $<
+ 
+ lib/libc.so: $(LOBJS)
+-	$(CC) $(CFLAGS_ALL_SHARED) $(LDFLAGS) -nostdlib -shared \
++	$(CC) $(CFLAGS_ALL_SHARED) $(LDFLAGS) -static-libgcc -nostdlib -shared \
+ 	-Wl,-e,_start -Wl,-Bsymbolic-functions \
+ 	-o $@ $(LOBJS) $(LIBCC)
+ 
