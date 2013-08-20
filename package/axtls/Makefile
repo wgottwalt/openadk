@@ -4,11 +4,11 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		axtls
-PKG_VERSION:=		1.3.2
+PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b2cdafaa93c033cd4f3ebfca2c7e66b4
-PKG_DESCR:=		small embedded webserver
-PKG_SECTION:=		net/security
+PKG_MD5SUM:=		6d519bc3b5f20faa6ef8d423f5062241
+PKG_DESCR:=		small embedded webserver with TLS
+PKG_SECTION:=		www
 PKG_DEPENDS:=		libaxtls
 PKG_URL:=		http://axtls.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
