@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wpa_supplicant
-PKG_VERSION:=		1.0
+PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8650f6aa23646ef634402552d0669640
+PKG_MD5SUM:=		3be2ebfdcced52e00eda0afe2889839d
 PKG_DESCR:=		WPA Supplicant with support for WPA and WPA2
 PKG_SECTION:=		wifi
 PKG_DEPENDS:=		libnl
@@ -18,13 +18,14 @@ PKG_DFLT_WPA_SUPPLICANT:=	y if ADK_TARGET_SYSTEM_IBM_X40
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
-PKG_CHOICES_WPA_SUPPLICANT:=	WITH_OPENSSL WITH_GNUTLS
+PKG_CHOICES_WPA_SUPPLICANT:=	WITH_OPENSSL WITH_GNUTLS WITH_INTERNAL
 PKGCD_WITH_OPENSSL:=		use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=		libopenssl
 PKGCB_WITH_OPENSSL:=		openssl
 PKGCD_WITH_GNUTLS:=		use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=		libgnutls
 PKGCB_WITH_GNUTLS:=		gnutls
+PKGCD_WITH_INTERNAL:=		use internal crypto library
 
 include ${TOPDIR}/mk/package.mk
 
@@ -43,6 +44,9 @@ do-configure:
 	${CP} ./files/config ${WRKBUILD}/.config
 ifneq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_GNUTLS},)
 	${SED} "s#openssl#gnutls#" ${WRKBUILD}/.config
+endif
+ifneq (${ADK_PACKAGE_WPA_SUPPLICANT_WITH_INTERNAL},)
+	${SED} "s#openssl#internal#" ${WRKBUILD}/.config
 endif
 
 do-install:

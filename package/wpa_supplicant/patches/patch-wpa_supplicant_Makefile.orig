@@ -1,0 +1,25 @@
+--- wpa_supplicant-2.0.orig/wpa_supplicant/Makefile	2013-01-12 16:42:53.000000000 +0100
++++ wpa_supplicant-2.0/wpa_supplicant/Makefile	2013-08-20 17:30:19.132133775 +0200
+@@ -999,9 +999,6 @@ CFLAGS += -DCONFIG_INTERNAL_LIBTOMMATH
+ ifdef CONFIG_INTERNAL_LIBTOMMATH_FAST
+ CFLAGS += -DLTM_FAST
+ endif
+-else
+-LIBS += -ltommath
+-LIBS_p += -ltommath
+ endif
+ CONFIG_INTERNAL_AES=y
+ CONFIG_INTERNAL_DES=y
+@@ -1519,10 +1516,12 @@ preauth_test: $(OBJS_t2)
+ 	@$(E) "  LD " $@
+ 
+ wpa_passphrase: $(OBJS_p)
++	echo crypto: $(CONFIG_CRYPTO)
+ 	$(Q)$(LDO) $(LDFLAGS) -o wpa_passphrase $(OBJS_p) $(LIBS_p)
+ 	@$(E) "  LD " $@
+ 
+ wpa_cli: $(OBJS_c)
++	echo crypto: $(CONFIG_CRYPTO)
+ 	$(Q)$(LDO) $(LDFLAGS) -o wpa_cli $(OBJS_c) $(LIBS_c)
+ 	@$(E) "  LD " $@
+ 
