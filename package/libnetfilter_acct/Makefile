@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnetfilter_acct
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		246e97feb9cf98f7ddf70d71a3813336
-PKG_DESCR:=		API to extended accounting infrastructure.
+PKG_MD5SUM:=		2118d9514c079839ebd9cb3144ad2ad7
+PKG_DESCR:=		API to extended accounting infrastructure
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnfnetlink
 PKG_BUILDDEP:=		libnfnetlink
