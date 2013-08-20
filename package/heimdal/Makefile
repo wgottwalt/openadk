@@ -76,6 +76,7 @@ CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
 
 post-extract:
+	(cd $(WRKBUILD);patch -p1 < $(TOPDIR)/package/heimdal/files/patch-lib_asn1_Makefile.in)
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
 		./configure --prefix=$(STAGING_HOST_DIR) \
 			--disable-pk-init \
