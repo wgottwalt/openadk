@@ -1,6 +1,6 @@
---- openssl-1.0.1c.orig/Configure	2012-03-14 23:20:40.000000000 +0100
-+++ openssl-1.0.1c/Configure	2013-01-31 14:32:14.000000000 +0100
-@@ -400,6 +400,8 @@ my %table=(
+--- openssl-1.0.1e.orig/Configure	2013-02-11 16:26:04.000000000 +0100
++++ openssl-1.0.1e/Configure	2013-08-17 16:07:11.782623643 +0200
+@@ -402,6 +402,8 @@ my %table=(
  "linux-alpha+bwx-gcc","gcc:-O3 -DL_ENDIAN -DTERMIO::-D_REENTRANT::-ldl:SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_RISC1 DES_UNROLL:${alpha_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "linux-alpha-ccc","ccc:-fast -readonly_strings -DL_ENDIAN -DTERMIO::-D_REENTRANT:::SIXTY_FOUR_BIT_LONG RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL:${alpha_asm}",
  "linux-alpha+bwx-ccc","ccc:-fast -readonly_strings -DL_ENDIAN -DTERMIO::-D_REENTRANT:::SIXTY_FOUR_BIT_LONG RC4_CHAR RC4_CHUNK DES_INT DES_PTR DES_RISC1 DES_UNROLL:${alpha_asm}",

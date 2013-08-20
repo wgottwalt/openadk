@@ -1,0 +1,13 @@
+--- openssl-1.0.1e.orig/tools/c_rehash	2013-02-11 16:26:11.000000000 +0100
++++ openssl-1.0.1e/tools/c_rehash	2013-08-17 16:07:16.970558422 +0200
+@@ -6,8 +6,8 @@
+ 
+ my $openssl;
+ 
+-my $dir = "/usr/local/ssl";
+-my $prefix = "/usr/local/ssl";
++my $dir = "/etc/ssl";
++my $prefix = "/usr";
+ 
+ if(defined $ENV{OPENSSL}) {
+ 	$openssl = $ENV{OPENSSL};
