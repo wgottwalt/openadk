@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnettle
-PKG_VERSION:=		2.4
+PKG_VERSION:=		2.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		450be8c4886d46c09f49f568ad6fa013
-PKG_DESCR:=		Nettle Library
+PKG_MD5SUM:=		003d5147911317931dd453520eb234a5
+PKG_DESCR:=		crypto library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgmp
 PKG_BUILDDEP:=		gmp
