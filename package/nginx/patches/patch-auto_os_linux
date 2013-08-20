@@ -1,5 +1,5 @@
---- nginx-1.2.2.orig/auto/os/linux	2012-03-21 14:58:51.000000000 +0100
-+++ nginx-1.2.2/auto/os/linux	2012-07-16 09:27:16.000000000 +0200
+--- nginx-1.5.3.orig/auto/os/linux	2013-07-30 15:27:55.000000000 +0200
++++ nginx-1.5.3/auto/os/linux	2013-08-20 10:00:37.444429620 +0200
 @@ -48,7 +48,7 @@ fi
  
  ngx_feature="epoll"
@@ -36,3 +36,24 @@
  ngx_feature_incs="#include <sys/prctl.h>"
  ngx_feature_path=
  ngx_feature_libs=
+@@ -133,20 +133,6 @@ ngx_feature_test="cpu_set_t mask;
+                   sched_setaffinity(0, sizeof(cpu_set_t), &mask)"
+ . auto/feature
+ 
+-
+-# crypt_r()
+-
+-ngx_feature="crypt_r()"
+-ngx_feature_name="NGX_HAVE_GNU_CRYPT_R"
+-ngx_feature_run=no
+-ngx_feature_incs="#include <crypt.h>"
+-ngx_feature_path=
+-ngx_feature_libs=-lcrypt
+-ngx_feature_test="struct crypt_data  cd;
+-                  crypt_r(\"key\", \"salt\", &cd);"
+-. auto/feature
+-
+-
+ ngx_include="sys/vfs.h";     . auto/include
+ 
+ 
