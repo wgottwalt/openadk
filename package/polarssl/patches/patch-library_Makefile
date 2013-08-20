@@ -1,5 +1,5 @@
 --- polarssl-1.2.8.orig/library/Makefile	2013-06-21 15:11:10.000000000 +0200
-+++ polarssl-1.2.8/library/Makefile	2013-08-15 16:12:05.261471968 +0200
++++ polarssl-1.2.8/library/Makefile	2013-08-20 18:32:08.885495858 +0200
 @@ -18,9 +18,7 @@ endif
  # CFLAGS += -D_BSD_EXTENSION
  
@@ -10,7 +10,7 @@
  
  SONAME=libpolarssl.so.0
  
-@@ -51,26 +49,17 @@ OBJS=	aes.o		arc4.o		asn1parse.o		\
+@@ -51,27 +49,19 @@ OBJS=	aes.o		arc4.o		asn1parse.o		\
  		ssl_tls.o	timing.o	version.o		\
  		x509parse.o	x509write.o	xtea.o
  
@@ -36,9 +36,11 @@
  libpolarssl.so: libpolarssl.a
 -	echo "  LD    $@"
  	$(CC) ${LDFLAGS} -shared -Wl,-soname,$(SONAME) -o $@ $(OBJS)
++	ln -sf $@ $(SONAME)
  
  libpolarssl.dylib: libpolarssl.a
-@@ -82,7 +71,6 @@ libpolarssl.dll: libpolarssl.a
+ 	echo "  LD    $@"
+@@ -82,7 +72,6 @@ libpolarssl.dll: libpolarssl.a
  	$(CC) -shared -Wl,-soname,$@ -o $@ $(OBJS) -lws2_32 -lwinmm -lgdi32 
  
  .c.o:
