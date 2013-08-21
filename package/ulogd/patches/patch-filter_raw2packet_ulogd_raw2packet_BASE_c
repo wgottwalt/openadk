@@ -1,0 +1,19 @@
+--- ulogd-2.0.2.orig/filter/raw2packet/ulogd_raw2packet_BASE.c	2013-03-01 16:44:22.124839615 +0100
++++ ulogd-2.0.2/filter/raw2packet/ulogd_raw2packet_BASE.c	2013-08-20 19:17:11.315521712 +0200
+@@ -36,6 +36,7 @@
+ #include <netinet/ip6.h>
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
++#include <linux/tcp.h>
+ #include <netinet/ip_icmp.h>
+ #include <netinet/icmp6.h>
+ #include <netinet/udp.h>
+@@ -555,7 +556,7 @@ static int _interp_tcp(struct ulogd_plug
+ 	okey_set_b(&ret[KEY_TCP_SYN], tcph->syn);
+ 	okey_set_b(&ret[KEY_TCP_FIN], tcph->fin);
+ 	okey_set_b(&ret[KEY_TCP_RES1], tcph->res1);
+-	okey_set_b(&ret[KEY_TCP_RES2], tcph->res2);
++	//okey_set_b(&ret[KEY_TCP_RES2], tcph->res2);
+ 	okey_set_u16(&ret[KEY_TCP_CSUM], ntohs(tcph->check));
+ 	
+ 	return ULOGD_IRET_OK;
