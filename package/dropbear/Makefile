@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		2013.58
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8d3579bbbfcea48404a3219643076450
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
@@ -71,8 +71,8 @@ do-install:
 	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/dropbearmulti \
 		$(IDIR_DROPBEAR)/usr/sbin/dropbear
-	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/usr/bin/scp
-	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/usr/bin/ssh
+	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/bin/scp
+	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/bin/ssh
 	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/usr/bin/dbclient
 	ln -sf ../sbin/dropbear $(IDIR_DROPBEAR)/usr/bin/dropbearkey
 	# subpackage dropbearconvert
