@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bzip2
 PKG_VERSION:=		1.0.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		00b516f4704d4a7cb50a1d97e6e8e15b
 PKG_DESCR:=		bzip2 compression utility
 PKG_SECTION:=		archive
@@ -35,9 +35,10 @@ libbz2-install:
 	$(CP) ${WRKBUILD}/libbz2.so* \
 		${STAGING_DIR}/usr/lib
 	(cd ${STAGING_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
+	$(CP) $(WRKBUILD)/bzip2.h $(STAGING_DIR)/usr/include
 
 bzip2-install:
 	${INSTALL_DIR} ${IDIR_BZIP2}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/bzip2-shared ${IDIR_BZIP2}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/bzip2-shared ${IDIR_BZIP2}/usr/bin/bzip2
 
 include ${TOPDIR}/mk/pkg-bottom.mk
