@@ -67,7 +67,7 @@ do-build:
 
 do-install:
 	# main package
-	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/bin
+	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/bin $(IDIR_DROPBEAR)/bin
 	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/dropbearmulti \
 		$(IDIR_DROPBEAR)/usr/sbin/dropbear
