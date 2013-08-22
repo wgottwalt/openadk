@@ -35,7 +35,7 @@ libbz2-install:
 	$(CP) ${WRKBUILD}/libbz2.so* \
 		${STAGING_DIR}/usr/lib
 	(cd ${STAGING_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
-	$(CP) $(WRKBUILD)/bzip2.h $(STAGING_DIR)/usr/include
+	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_DIR)/usr/include
 
 bzip2-install:
 	${INSTALL_DIR} ${IDIR_BZIP2}/usr/bin
