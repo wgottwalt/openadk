@@ -16,11 +16,19 @@ PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
 PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 
-PKG_SUBPKGS:=		ULOGD ULOGD_MOD_MYSQL ULOGD_MOD_PCAP ULOGD_MOD_PGSQL ULOGD_MOD_SQLITE ULOGD_MOD_EXTRA
+PKG_SUBPKGS:=		ULOGD ULOGD_MOD_MYSQL ULOGD_MOD_PCAP ULOGD_MOD_PGSQL ULOGD_MOD_SQLITE
+PKGSD_ULOGD_MOD_MYSQL:=		MySQL plugin for ulogd
 PKGSB_ULOGD_MOD_MYSQL:=		mysql
+PKGSS_ULOGD_MOD_MYSQL:=		zlib libmysqlclient
+PKGSD_ULOGD_MOD_PGSQL:=		PostgreSQL plugin for ulogd
 PKGSB_ULOGD_MOD_PGSQL:=		postgresql
+PKGSS_ULOGD_MOD_PGSQL:=		libpq
+PKGSD_ULOGD_MOD_SQLITE:=	sqlite plugin for ulogd
 PKGSB_ULOGD_MOD_SQLITE:=	sqlite
+PKGSS_ULOGD_MOD_SQLITE:=	libsqlite
+PKGSD_ULOGD_MOD_PCAP:=		libpcap plugin for ulogd
 PKGSB_ULOGD_MOD_PCAP:=		libpcap
+PKGSS_ULOGD_MOD_PCAP:=		libpcap
 
 PKG_HOST_DEPENDS:=	!cygwin
 
@@ -29,11 +37,10 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ULOGD,ulogd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ULOGD_MOD_MYSQL,ulogd-mod-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ULOGD_MOD_EXTRA,ulogd-mod-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_MYSQL,ulogd-mod-mysql,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_MYSQL},${PKGSD_ULOGD_MOD_MYSQL},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_PCAP},${PKGSD_ULOGD_MOD_PCAP},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_PGSQL},${PKGSD_ULOGD_MOD_PGSQL},${PKG_SECTION}))
+$(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_SQLITE},${PKGSD_ULOGD_MOD_SQLITE},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-fPIC
 
@@ -45,16 +52,55 @@ ifneq (${ADK_PACKAGE_ULOGD_MOD_PGSQL},)
 CONFIGURE_ARGS+=	--with-pgsql=${STAGING_TARGET_DIR}/usr
 endif
 
-post-install:
+ulogd-install:
+	${INSTALL_DIR} ${IDIR_ULOGD}/etc
+	${INSTALL_DATA} ${WRKBUILD}/ulogd.conf ${IDIR_ULOGD}/etc
 	${INSTALL_DIR} ${IDIR_ULOGD}/usr/sbin ${IDIR_ULOGD}/usr/lib/ulogd/
 	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_raw2packet_BASE.so \
 		${IDIR_ULOGD}/usr/lib/ulogd/
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/ulogd ${IDIR_ULOGD}/usr/sbin/
-
-ulogd-mod-extra-install:
-	${INSTALL_DIR} ${IDIR_ULOGD_MOD_EXTRA}/usr/lib/ulogd
-	${CP} ${WRKINST}/usr/lib/ulogd/ulogd_output_{LOGEMU,OPRINT,SYSLOG}.so \
-		${IDIR_ULOGD_MOD_EXTRA}/usr/lib/ulogd
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_HWHDR.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_IFINDEX.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_IP2BIN.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_IP2HBIN.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_IP2STR.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_MARK.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_PRINTFLOW.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_PRINTPKT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_filter_PWSNIFF.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_inpflow_NFACCT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_inpflow_NFCT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_inppkt_NFLOG.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_inppkt_ULOG.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_inppkt_UNIXSOCK.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_GPRINT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_GRAPHITE.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_LOGEMU.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_NACCT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_OPRINT.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_SYSLOG.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/lib/ulogd/ulogd_output_XML.so \
+		${IDIR_ULOGD}/usr/lib/ulogd/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ulogd ${IDIR_ULOGD}/usr/sbin
 
 ulogd-mod-pcap-install:
 	${INSTALL_DIR} ${IDIR_ULOGD_MOD_PCAP}/usr/lib/ulogd
