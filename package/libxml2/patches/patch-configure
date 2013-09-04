@@ -1,6 +1,6 @@
---- libxml2-2.7.8.orig/configure	2010-11-04 18:28:14.000000000 +0100
-+++ libxml2-2.7.8/configure	2011-10-15 15:07:16.000000000 +0200
-@@ -13423,17 +13423,17 @@ case ${host} in
+--- libxml2-2.9.1.orig/configure	2013-04-19 09:36:11.000000000 +0200
++++ libxml2-2.9.1/configure	2013-09-04 15:16:48.000000000 +0200
+@@ -14010,17 +14010,17 @@ case ${host} in
  esac
  
  
@@ -22,7 +22,7 @@
      else
          if test -x "$with_python/python.exe"
          then
-@@ -13558,7 +13558,7 @@ else
+@@ -14148,7 +14148,7 @@ else
      PYTHON_SUBDIR=
  fi
  
