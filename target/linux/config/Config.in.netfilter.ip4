@@ -37,7 +37,7 @@ config ADK_KPACKAGE_KMOD_IP_NF_FILTER
 config ADK_KPACKAGE_KMOD_FULL_NAT
 	tristate "Meta package for Full NAT"
 	select ADK_KPACKAGE_KMOD_NF_NAT if ADK_KERNEL_VERSION_3_4_60
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_9_9
+	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_9_11
 
 config ADK_KPACKAGE_KMOD_NF_NAT
 	tristate 'Full NAT'
@@ -51,7 +51,7 @@ config ADK_KPACKAGE_KMOD_NF_NAT
 config ADK_KPACKAGE_KMOD_NF_NAT_IPV4
 	tristate 'Full NAT'
 	depends on ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
-	depends on ADK_KERNEL_VERSION_3_9_9
+	depends on ADK_KERNEL_VERSION_3_9_11
 	help
 	  The Full NAT option allows masquerading, port forwarding and other
 	  forms of full Network Address Port Translation.  It is controlled by
