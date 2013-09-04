@@ -53,6 +53,7 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_printf_positional=yes \
 			ac_cv_file__etc_environment=no \
 			ac_cv_file__etc_TIMEZONE=no
+TARGET_LDFLAGS+=	-lintl
 
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
