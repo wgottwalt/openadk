@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libqb
-PKG_VERSION:=		0.14.1
+PKG_VERSION:=		0.16.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c144a5e0cd5b69c8d46a051646609f11
+PKG_MD5SUM:=		88a256ce5217efa420598ade393879ff
 PKG_DESCR:=		high performance client server reusable features
 PKG_SECTION:=		libs
 PKG_URL:=		https://github.com/asalkeld/libqb/wiki#wiki-Releases

@@ -1,0 +1,248 @@
+--- libqb-0.16.0.orig/docs/man3/qblist.h.3	2013-07-25 20:16:18.000000000 +0200
++++ libqb-0.16.0/docs/man3/qblist.h.3	2013-09-09 05:26:31.607808856 +0200
+@@ -1,4 +1,4 @@
+-.TH "qblist.h" 3 "Thu Jul 25 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
++.TH "qblist.h" 3 "Mon Sep 9 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
+ .ad l
+ .nh
+ .SH NAME
+@@ -21,7 +21,7 @@ This is a kernel style list implementati
+ .RI "struct \fBqb_list_head\fP"
+ .br
+ .in -1c
+-.SS "Macros"
++.SS "Defines"
+ 
+ .in +1c
+ .ti -1c
+@@ -122,26 +122,23 @@ This is a kernel style list implementati
+ 
+ \fBAuthor:\fP
+ .RS 4
+-Steven Dake sdake@redhat.com 
++Steven Dake <sdake@redhat.com> 
+ .RE
+ .PP
+ 
+-.SH "Macro Definition Documentation"
++.SH "Define Documentation"
+ .PP 
+-.SS "#define QB_INIT_LIST_HEAD(ptr)"
+-\fBValue:\fP
++.SS "#define \fBQB_INIT_LIST_HEAD\fP(ptr)"\fBValue:\fP
+ .PP
+ .nf
+ do { \
+         (ptr)->next = (ptr); (ptr)->prev = (ptr); \
+ } while (0)
+ .fi
+-.SS "#define QB_LIST_DECLARE(name)   struct \fBqb_list_head\fP name = { &(name), &(name) }"
+-
++.SS "#define \fBQB_LIST_DECLARE\fP(name)   struct \fBqb_list_head\fP name = { &(name), &(name) }"
+ .PP
+ Declare and initialize a list head\&. 
+-.SS "#define qb_list_entry(ptr, type, member)   ((type *)((char *)(ptr)-(char*)(&((type *)0)->member)))"
+-
++.SS "#define \fBqb_list_entry\fP(ptr, type, member)   ((type *)((char *)(ptr)-(char*)(&((type *)0)->member)))"
+ .PP
+ Get the struct for this entry\&. \fBParameters:\fP
+ .RS 4
+@@ -153,8 +150,7 @@ Get the struct for this entry\&. \fBPara
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_first_entry(ptr, type, member)   \fBqb_list_entry\fP((ptr)->next, type, member)"
+-
++.SS "#define \fBqb_list_first_entry\fP(ptr, type, member)   \fBqb_list_entry\fP((ptr)->next, type, member)"
+ .PP
+ Get the first element from a list\&. \fBParameters:\fP
+ .RS 4
+@@ -166,8 +162,7 @@ Get the first element from a list\&. \fB
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each(pos, head)   for (pos = (head)->next; pos != (head); pos = pos->next)"
+-
++.SS "#define \fBqb_list_for_each\fP(pos, head)   for (pos = (head)->next; pos != (head); pos = pos->next)"
+ .PP
+ Iterate over a list\&. \fBParameters:\fP
+ .RS 4
+@@ -179,8 +174,7 @@ Iterate over a list\&. \fBParameters:\fP
+ 
+ .PP
+ Referenced by qb_list_length()\&.
+-.SS "#define qb_list_for_each_entry(pos, head, member)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_entry\fP(pos, head, member)"\fBValue:\fP
+ .PP
+ .nf
+ for (pos = qb_list_entry((head)->next, typeof(*pos), member);     \
+@@ -198,8 +192,7 @@ Iterate over list of given type\&. \fBPa
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_entry_from(pos, head, member)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_entry_from\fP(pos, head, member)"\fBValue:\fP
+ .PP
+ .nf
+ for (; &pos->member != (head);                                            \
+@@ -216,8 +209,7 @@ Iterate over list of given type from the
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_entry_reverse(pos, head, member)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_entry_reverse\fP(pos, head, member)"\fBValue:\fP
+ .PP
+ .nf
+ for (pos = qb_list_entry((head)->prev, typeof(*pos), member);  \
+@@ -235,8 +227,7 @@ Iterate backwards over list of given typ
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_entry_safe(pos, n, head, member)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_entry_safe\fP(pos, n, head, member)"\fBValue:\fP
+ .PP
+ .nf
+ for (pos = qb_list_entry((head)->next, typeof(*pos), member),          \
+@@ -257,8 +248,7 @@ Iterate over list of given type safe aga
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_entry_safe_reverse(pos, n, head, member)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_entry_safe_reverse\fP(pos, n, head, member)"\fBValue:\fP
+ .PP
+ .nf
+ for (pos = qb_list_entry((head)->prev, typeof(*pos), member),          \
+@@ -279,8 +269,7 @@ Iterate backwards over list safe against
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_reverse(pos, head)   for (pos = (head)->prev; pos != (head); pos = pos->prev)"
+-
++.SS "#define \fBqb_list_for_each_reverse\fP(pos, head)   for (pos = (head)->prev; pos != (head); pos = pos->prev)"
+ .PP
+ Iterate over a list backwards\&. \fBParameters:\fP
+ .RS 4
+@@ -290,8 +279,7 @@ Iterate over a list backwards\&. \fBPara
+ .RE
+ .PP
+ 
+-.SS "#define qb_list_for_each_safe(pos, n, head)"
+-\fBValue:\fP
++.SS "#define \fBqb_list_for_each_safe\fP(pos, n, head)"\fBValue:\fP
+ .PP
+ .nf
+ for (pos = (head)->next, n = pos->next; pos != (head); \
+@@ -310,8 +298,7 @@ Iterate over a list safe against removal
+ 
+ .SH "Function Documentation"
+ .PP 
+-.SS "static void qb_list_add (struct \fBqb_list_head\fP *element, struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_add\fP (struct \fBqb_list_head\fP *element, struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Add this element to the list\&. \fBParameters:\fP
+ .RS 4
+@@ -323,8 +310,7 @@ Add this element to the list\&. \fBParam
+ 
+ .PP
+ References qb_list_head::next, and qb_list_head::prev\&.
+-.SS "static void qb_list_add_tail (struct \fBqb_list_head\fP *element, struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_add_tail\fP (struct \fBqb_list_head\fP *element, struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Add to the list (but at the end of the list)\&. \fBParameters:\fP
+ .RS 4
+@@ -333,7 +319,7 @@ Add to the list (but at the end of the l
+ \fIhead\fP pointer to the list head 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_list_add()\fP 
+ .RE
+@@ -341,8 +327,7 @@ Add to the list (but at the end of the l
+ 
+ .PP
+ References qb_list_head::next, and qb_list_head::prev\&.
+-.SS "static void qb_list_del (struct \fBqb_list_head\fP *_remove)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_del\fP (struct \fBqb_list_head\fP *_remove)\fC [inline, static]\fP"
+ .PP
+ Delete an entry from the list\&. \fBParameters:\fP
+ .RS 4
+@@ -352,8 +337,7 @@ Delete an entry from the list\&. \fBPara
+ 
+ .PP
+ References qb_list_head::next, and qb_list_head::prev\&.
+-.SS "static int32_t qb_list_empty (const struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static int32_t \fBqb_list_empty\fP (const struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ A quick test to see if the list is empty (pointing to it's self)\&. \fBParameters:\fP
+ .RS 4
+@@ -370,8 +354,7 @@ boolean true/false
+ References qb_list_head::next\&.
+ .PP
+ Referenced by qb_list_splice(), and qb_list_splice_tail()\&.
+-.SS "static void qb_list_init (struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_init\fP (struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Initialize the list entry\&. Points next and prev pointers to head\&. 
+ .PP
+@@ -383,8 +366,7 @@ Initialize the list entry\&. Points next
+ 
+ .PP
+ References qb_list_head::next, and qb_list_head::prev\&.
+-.SS "static int qb_list_is_last (const struct \fBqb_list_head\fP *list, const struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static int \fBqb_list_is_last\fP (const struct \fBqb_list_head\fP *list, const struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Tests whether list is the last entry in list head\&. \fBParameters:\fP
+ .RS 4
+@@ -401,8 +383,7 @@ boolean true/false
+ 
+ .PP
+ References qb_list_head::next\&.
+-.SS "static int32_t qb_list_length (struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static int32_t \fBqb_list_length\fP (struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Count the number of items in the list\&. \fBParameters:\fP
+ .RS 4
+@@ -417,8 +398,7 @@ length of the list\&.
+ 
+ .PP
+ References qb_list_for_each\&.
+-.SS "static void qb_list_replace (struct \fBqb_list_head\fP *old, struct \fBqb_list_head\fP *new)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_replace\fP (struct \fBqb_list_head\fP *old, struct \fBqb_list_head\fP *new)\fC [inline, static]\fP"
+ .PP
+ Replace old entry by new one\&. \fBParameters:\fP
+ .RS 4
+@@ -430,8 +410,7 @@ Replace old entry by new one\&. \fBParam
+ 
+ .PP
+ References qb_list_head::next, and qb_list_head::prev\&.
+-.SS "static void qb_list_splice (struct \fBqb_list_head\fP *list, struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_splice\fP (struct \fBqb_list_head\fP *list, struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Join two lists\&. \fBParameters:\fP
+ .RS 4
+@@ -448,8 +427,7 @@ The 'list' is reinitialised
+ 
+ .PP
+ References qb_list_head::next, qb_list_head::prev, and qb_list_empty()\&.
+-.SS "static void qb_list_splice_tail (struct \fBqb_list_head\fP *list, struct \fBqb_list_head\fP *head)\fC [inline]\fP, \fC [static]\fP"
+-
++.SS "static void \fBqb_list_splice_tail\fP (struct \fBqb_list_head\fP *list, struct \fBqb_list_head\fP *head)\fC [inline, static]\fP"
+ .PP
+ Join two lists, each list being a queue\&. \fBParameters:\fP
+ .RS 4

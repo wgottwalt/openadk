@@ -1,0 +1,383 @@
+--- libqb-0.16.0.orig/docs/man3/qbipcs.h.3	2013-07-25 20:16:18.000000000 +0200
++++ libqb-0.16.0/docs/man3/qbipcs.h.3	2013-09-09 05:26:31.551809560 +0200
+@@ -1,4 +1,4 @@
+-.TH "qbipcs.h" 3 "Thu Jul 25 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
++.TH "qbipcs.h" 3 "Mon Sep 9 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
+ .ad l
+ .nh
+ .SH NAME
+@@ -206,8 +206,7 @@ Server IPC API\&.
+ 
+ .SH "Typedef Documentation"
+ .PP 
+-.SS "typedef int32_t(* qb_ipcs_connection_accept_fn)(\fBqb_ipcs_connection_t\fP *c, uid_t uid, gid_t gid)"
+-
++.SS "typedef int32_t(* \fBqb_ipcs_connection_accept_fn\fP)(\fBqb_ipcs_connection_t\fP *c, uid_t uid, gid_t gid)"
+ .PP
+ This callback is to check wether you want to accept a new connection\&. The type of checks you should do are authentication, service availabilty or process resource constraints\&. 
+ .PP
+@@ -222,8 +221,7 @@ you can call \fBqb_ipcs_connection_auth_
+ .RE
+ .PP
+ 
+-.SS "typedef int32_t(* qb_ipcs_connection_closed_fn)(\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "typedef int32_t(* \fBqb_ipcs_connection_closed_fn\fP)(\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ This is called after a connection has been disconnected\&. \fBNote:\fP
+ .RS 4
+@@ -231,38 +229,27 @@ if you return anything but 0 this functi
+ .RE
+ .PP
+ 
+-.SS "typedef void(* qb_ipcs_connection_created_fn)(\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "typedef void(* \fBqb_ipcs_connection_created_fn\fP)(\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ This is called after a new connection has been created\&. 
+-.SS "typedef void(* qb_ipcs_connection_destroyed_fn)(\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "typedef void(* \fBqb_ipcs_connection_destroyed_fn\fP)(\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ This is called just before a connection is freed\&. 
+ .SS "typedef struct qb_ipcs_connection \fBqb_ipcs_connection_t\fP"
+-
+-.SS "typedef int32_t(* qb_ipcs_dispatch_add_fn)(enum \fBqb_loop_priority\fP p, int32_t fd, int32_t events, void *data, \fBqb_ipcs_dispatch_fn_t\fP fn)"
+-
+-.SS "typedef int32_t(* qb_ipcs_dispatch_del_fn)(int32_t fd)"
+-
+-.SS "typedef int32_t(* qb_ipcs_dispatch_fn_t)(int32_t fd, int32_t revents, void *data)"
+-
+-.SS "typedef int32_t(* qb_ipcs_dispatch_mod_fn)(enum \fBqb_loop_priority\fP p, int32_t fd, int32_t events, void *data, \fBqb_ipcs_dispatch_fn_t\fP fn)"
+-
+-.SS "typedef int32_t(* qb_ipcs_job_add_fn)(enum \fBqb_loop_priority\fP p, void *data, \fBqb_loop_job_dispatch_fn\fP dispatch_fn)"
+-
+-.SS "typedef int32_t(* qb_ipcs_msg_process_fn)(\fBqb_ipcs_connection_t\fP *c, void *data, size_t size)"
+-
++.SS "typedef int32_t(* \fBqb_ipcs_dispatch_add_fn\fP)(enum \fBqb_loop_priority\fP p, int32_t fd, int32_t events, void *data, \fBqb_ipcs_dispatch_fn_t\fP fn)"
++.SS "typedef int32_t(* \fBqb_ipcs_dispatch_del_fn\fP)(int32_t fd)"
++.SS "typedef int32_t(* \fBqb_ipcs_dispatch_fn_t\fP)(int32_t fd, int32_t revents, void *data)"
++.SS "typedef int32_t(* \fBqb_ipcs_dispatch_mod_fn\fP)(enum \fBqb_loop_priority\fP p, int32_t fd, int32_t events, void *data, \fBqb_ipcs_dispatch_fn_t\fP fn)"
++.SS "typedef int32_t(* \fBqb_ipcs_job_add_fn\fP)(enum \fBqb_loop_priority\fP p, void *data, \fBqb_loop_job_dispatch_fn\fP dispatch_fn)"
++.SS "typedef int32_t(* \fBqb_ipcs_msg_process_fn\fP)(\fBqb_ipcs_connection_t\fP *c, void *data, size_t size)"
+ .PP
+ This is the message processing calback\&. It is called with the message data\&. 
+ .SS "typedef struct qb_ipcs_service \fBqb_ipcs_service_t\fP"
+-
+ .SH "Enumeration Type Documentation"
+ .PP 
+ .SS "enum \fBqb_ipcs_rate_limit\fP"
+-
+ .PP
+-\fBEnumerator\fP
++\fBEnumerator: \fP
+ .in +1c
+ .TP
+ \fB\fIQB_IPCS_RATE_FAST \fP\fP
+@@ -274,10 +261,10 @@ This is the message processing calback\&
+ \fB\fIQB_IPCS_RATE_OFF \fP\fP
+ .TP
+ \fB\fIQB_IPCS_RATE_OFF_2 \fP\fP
++
+ .SH "Function Documentation"
+ .PP 
+-.SS "void qb_ipcs_connection_auth_set (\fBqb_ipcs_connection_t\fP *conn, uid_tuid, gid_tgid, mode_tmode)"
+-
++.SS "void \fBqb_ipcs_connection_auth_set\fP (\fBqb_ipcs_connection_t\fP *conn, uid_tuid, gid_tgid, mode_tmode)"
+ .PP
+ Set the permissions on and shared memory files so that both processes can read and write to them\&. \fBParameters:\fP
+ .RS 4
+@@ -290,7 +277,7 @@ Set the permissions on and shared memory
+ \fImode\fP the mode to set\&.
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ chmod() chown() 
+ .RE
+@@ -301,8 +288,7 @@ this must be called within the \fBqb_ipc
+ .RE
+ .PP
+ 
+-.SS "\fBqb_ipcs_connection_t\fP* qb_ipcs_connection_first_get (\fBqb_ipcs_service_t\fP *pt)"
+-
++.SS "\fBqb_ipcs_connection_t\fP* \fBqb_ipcs_connection_first_get\fP (\fBqb_ipcs_service_t\fP *pt)"
+ .PP
+ Get the first connection\&. \fBNote:\fP
+ .RS 4
+@@ -320,8 +306,7 @@ first connection
+ .RE
+ .PP
+ 
+-.SS "\fBqb_ipcs_connection_t\fP* qb_ipcs_connection_next_get (\fBqb_ipcs_service_t\fP *pt, \fBqb_ipcs_connection_t\fP *current)"
+-
++.SS "\fBqb_ipcs_connection_t\fP* \fBqb_ipcs_connection_next_get\fP (\fBqb_ipcs_service_t\fP *pt, \fBqb_ipcs_connection_t\fP *current)"
+ .PP
+ Get the next connection\&. \fBNote:\fP
+ .RS 4
+@@ -341,8 +326,7 @@ next connection
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_connection_ref (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "void \fBqb_ipcs_connection_ref\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Increment the connection's reference counter\&. \fBParameters:\fP
+ .RS 4
+@@ -350,8 +334,7 @@ Increment the connection's reference cou
+ .RE
+ .PP
+ 
+-.SS "void* qb_ipcs_connection_service_context_get (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "void* \fBqb_ipcs_connection_service_context_get\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Get the context previously set on the service backing this connection\&. \fBParameters:\fP
+ .RS 4
+@@ -363,14 +346,13 @@ Get the context previously set on the se
+ the context 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_ipcs_service_context_set\fP 
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_ipcs_connection_stats_get (\fBqb_ipcs_connection_t\fP *c, struct \fBqb_ipcs_connection_stats\fP *stats, int32_tclear_after_read)"
+-
++.SS "int32_t \fBqb_ipcs_connection_stats_get\fP (\fBqb_ipcs_connection_t\fP *c, struct \fBqb_ipcs_connection_stats\fP *stats, int32_tclear_after_read)"
+ .PP
+ Get the connection statistics\&. \fBDeprecated\fP
+ .RS 4
+@@ -392,8 +374,7 @@ from v0\&.13\&.0 onwards, use qb_ipcs_co
+ .RE
+ .PP
+ 
+-.SS "struct \fBqb_ipcs_connection_stats_2\fP* qb_ipcs_connection_stats_get_2 (\fBqb_ipcs_connection_t\fP *c, int32_tclear_after_read)\fC [read]\fP"
+-
++.SS "struct \fBqb_ipcs_connection_stats_2\fP* \fBqb_ipcs_connection_stats_get_2\fP (\fBqb_ipcs_connection_t\fP *c, int32_tclear_after_read)\fC [read]\fP"
+ .PP
+ Get (and allocate) the connection statistics\&. \fBParameters:\fP
+ .RS 4
+@@ -410,8 +391,7 @@ Get (and allocate) the connection statis
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_connection_unref (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "void \fBqb_ipcs_connection_unref\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Decrement the connection's reference counter\&. \fBParameters:\fP
+ .RS 4
+@@ -419,8 +399,7 @@ Decrement the connection's reference cou
+ .RE
+ .PP
+ 
+-.SS "void* qb_ipcs_context_get (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "void* \fBqb_ipcs_context_get\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Get the context (set previously) \fBParameters:\fP
+ .RS 4
+@@ -432,14 +411,13 @@ Get the context (set previously) \fBPara
+ the context 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_ipcs_context_set()\fP 
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_context_set (\fBqb_ipcs_connection_t\fP *c, void *context)"
+-
++.SS "void \fBqb_ipcs_context_set\fP (\fBqb_ipcs_connection_t\fP *c, void *context)"
+ .PP
+ Associate a 'user' pointer with this connection\&. \fBParameters:\fP
+ .RS 4
+@@ -448,14 +426,13 @@ Associate a 'user' pointer with this con
+ \fIc\fP connection instance 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_ipcs_context_get()\fP 
+ .RE
+ .PP
+ 
+-.SS "\fBqb_ipcs_service_t\fP* qb_ipcs_create (const char *name, int32_tservice_id, enum \fBqb_ipc_type\fPtype, struct \fBqb_ipcs_service_handlers\fP *handlers)"
+-
++.SS "\fBqb_ipcs_service_t\fP* \fBqb_ipcs_create\fP (const char *name, int32_tservice_id, enum \fBqb_ipc_type\fPtype, struct \fBqb_ipcs_service_handlers\fP *handlers)"
+ .PP
+ Create a new IPC server\&. \fBParameters:\fP
+ .RS 4
+@@ -474,8 +451,7 @@ the new service instance\&.
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_destroy (\fBqb_ipcs_service_t\fP *s)"
+-
++.SS "void \fBqb_ipcs_destroy\fP (\fBqb_ipcs_service_t\fP *s)"
+ .PP
+ Destroy the IPC server\&. \fBParameters:\fP
+ .RS 4
+@@ -483,8 +459,7 @@ Destroy the IPC server\&. \fBParameters:
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_disconnect (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "void \fBqb_ipcs_disconnect\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Disconnect from this client\&. \fBParameters:\fP
+ .RS 4
+@@ -492,8 +467,7 @@ Disconnect from this client\&. \fBParame
+ .RE
+ .PP
+ 
+-.SS "ssize_t qb_ipcs_event_send (\fBqb_ipcs_connection_t\fP *c, const void *data, size_tsize)"
+-
++.SS "ssize_t \fBqb_ipcs_event_send\fP (\fBqb_ipcs_connection_t\fP *c, const void *data, size_tsize)"
+ .PP
+ Send an asyncronous event message to the client\&. \fBParameters:\fP
+ .RS 4
+@@ -515,8 +489,7 @@ the data must include a \fBqb_ipc_respon
+ .RE
+ .PP
+ 
+-.SS "ssize_t qb_ipcs_event_sendv (\fBqb_ipcs_connection_t\fP *c, const struct iovec *iov, size_tiov_len)"
+-
++.SS "ssize_t \fBqb_ipcs_event_sendv\fP (\fBqb_ipcs_connection_t\fP *c, const struct iovec *iov, size_tiov_len)"
+ .PP
+ Send an asyncronous event message to the client\&. \fBParameters:\fP
+ .RS 4
+@@ -538,8 +511,7 @@ the iov[0] must be a \fBqb_ipc_response_
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_poll_handlers_set (\fBqb_ipcs_service_t\fP *s, struct \fBqb_ipcs_poll_handlers\fP *handlers)"
+-
++.SS "void \fBqb_ipcs_poll_handlers_set\fP (\fBqb_ipcs_service_t\fP *s, struct \fBqb_ipcs_poll_handlers\fP *handlers)"
+ .PP
+ Set your poll callbacks\&. \fBParameters:\fP
+ .RS 4
+@@ -549,8 +521,7 @@ Set your poll callbacks\&. \fBParameters
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_ref (\fBqb_ipcs_service_t\fP *s)"
+-
++.SS "void \fBqb_ipcs_ref\fP (\fBqb_ipcs_service_t\fP *s)"
+ .PP
+ Increase the reference counter on the service object\&. \fBParameters:\fP
+ .RS 4
+@@ -558,8 +529,7 @@ Increase the reference counter on the se
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_request_rate_limit (\fBqb_ipcs_service_t\fP *s, enum \fBqb_ipcs_rate_limit\fPrl)"
+-
++.SS "void \fBqb_ipcs_request_rate_limit\fP (\fBqb_ipcs_service_t\fP *s, enum \fBqb_ipcs_rate_limit\fPrl)"
+ .PP
+ Limit the incomming request rate\&. \fBParameters:\fP
+ .RS 4
+@@ -569,8 +539,7 @@ Limit the incomming request rate\&. \fBP
+ .RE
+ .PP
+ 
+-.SS "ssize_t qb_ipcs_response_send (\fBqb_ipcs_connection_t\fP *c, const void *data, size_tsize)"
+-
++.SS "ssize_t \fBqb_ipcs_response_send\fP (\fBqb_ipcs_connection_t\fP *c, const void *data, size_tsize)"
+ .PP
+ Send a response to a incomming request\&. \fBParameters:\fP
+ .RS 4
+@@ -592,8 +561,7 @@ the data must include a \fBqb_ipc_respon
+ .RE
+ .PP
+ 
+-.SS "ssize_t qb_ipcs_response_sendv (\fBqb_ipcs_connection_t\fP *c, const struct iovec *iov, size_tiov_len)"
+-
++.SS "ssize_t \fBqb_ipcs_response_sendv\fP (\fBqb_ipcs_connection_t\fP *c, const struct iovec *iov, size_tiov_len)"
+ .PP
+ Send a response to a incomming request\&. \fBParameters:\fP
+ .RS 4
+@@ -615,8 +583,7 @@ the iov[0] must be a \fBqb_ipc_response_
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_ipcs_run (\fBqb_ipcs_service_t\fP *s)"
+-
++.SS "int32_t \fBqb_ipcs_run\fP (\fBqb_ipcs_service_t\fP *s)"
+ .PP
+ run the new IPC server\&. \fBParameters:\fP
+ .RS 4
+@@ -629,8 +596,7 @@ run the new IPC server\&. \fBParameters:
+ .RE
+ .PP
+ 
+-.SS "void* qb_ipcs_service_context_get (\fBqb_ipcs_service_t\fP *s)"
+-
++.SS "void* \fBqb_ipcs_service_context_get\fP (\fBqb_ipcs_service_t\fP *s)"
+ .PP
+ Get the context (set previously) \fBParameters:\fP
+ .RS 4
+@@ -642,14 +608,13 @@ Get the context (set previously) \fBPara
+ the context 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_ipcs_service_context_set()\fP 
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_service_context_set (\fBqb_ipcs_service_t\fP *s, void *context)"
+-
++.SS "void \fBqb_ipcs_service_context_set\fP (\fBqb_ipcs_service_t\fP *s, void *context)"
+ .PP
+ Associate a 'user' pointer with this service\&. \fBParameters:\fP
+ .RS 4
+@@ -658,14 +623,13 @@ Associate a 'user' pointer with this ser
+ \fIcontext\fP the pointer to associate with this service\&. 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_ipcs_service_context_get()\fP 
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_ipcs_service_id_get (\fBqb_ipcs_connection_t\fP *c)"
+-
++.SS "int32_t \fBqb_ipcs_service_id_get\fP (\fBqb_ipcs_connection_t\fP *c)"
+ .PP
+ Get the service id related to this connection's service\&. (as passed into \fBqb_ipcs_create()\fP
+ .PP
+@@ -675,8 +639,7 @@ service id\&.
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_ipcs_stats_get (\fBqb_ipcs_service_t\fP *pt, struct \fBqb_ipcs_stats\fP *stats, int32_tclear_after_read)"
+-
++.SS "int32_t \fBqb_ipcs_stats_get\fP (\fBqb_ipcs_service_t\fP *pt, struct \fBqb_ipcs_stats\fP *stats, int32_tclear_after_read)"
+ .PP
+ Get the service statistics\&. \fBParameters:\fP
+ .RS 4
+@@ -693,8 +656,7 @@ Get the service statistics\&. \fBParamet
+ .RE
+ .PP
+ 
+-.SS "void qb_ipcs_unref (\fBqb_ipcs_service_t\fP *s)"
+-
++.SS "void \fBqb_ipcs_unref\fP (\fBqb_ipcs_service_t\fP *s)"
+ .PP
+ Decrease the reference counter on the service object\&. \fBParameters:\fP
+ .RS 4

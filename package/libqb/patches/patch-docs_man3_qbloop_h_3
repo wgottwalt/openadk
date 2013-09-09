@@ -1,0 +1,222 @@
+--- libqb-0.16.0.orig/docs/man3/qbloop.h.3	2013-07-25 20:16:18.000000000 +0200
++++ libqb-0.16.0/docs/man3/qbloop.h.3	2013-09-09 05:26:31.751807045 +0200
+@@ -1,4 +1,4 @@
+-.TH "qbloop.h" 3 "Thu Jul 25 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
++.TH "qbloop.h" 3 "Mon Sep 9 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
+ .ad l
+ .nh
+ .SH NAME
+@@ -47,7 +47,7 @@ Main loop manages timers, jobs and polli
+ 
+ .in +1c
+ .ti -1c
+-.RI "enum \fBqb_loop_priority\fP { \fBQB_LOOP_LOW\fP = 0, \fBQB_LOOP_MED\fP = 1, \fBQB_LOOP_HIGH\fP = 2 }"
++.RI "enum \fBqb_loop_priority\fP { \fBQB_LOOP_LOW\fP =  0, \fBQB_LOOP_MED\fP =  1, \fBQB_LOOP_HIGH\fP =  2 }"
+ .br
+ .RI "\fIPriorites for jobs, timers & poll\&. \fP"
+ .in -1c
+@@ -129,32 +129,23 @@ Main loop manages timers, jobs and polli
+ 
+ .SH "Typedef Documentation"
+ .PP 
+-.SS "typedef void(* qb_loop_job_dispatch_fn)(void *data)"
+-
+-.SS "typedef int32_t(* qb_loop_poll_dispatch_fn)(int32_t fd, int32_t revents, void *data)"
+-
+-.SS "typedef void(* qb_loop_poll_low_fds_event_fn)(int32_t not_enough, int32_t fds_available)"
+-
+-.SS "typedef int32_t(* qb_loop_signal_dispatch_fn)(int32_t rsignal, void *data)"
+-
++.SS "typedef void(* \fBqb_loop_job_dispatch_fn\fP)(void *data)"
++.SS "typedef int32_t(* \fBqb_loop_poll_dispatch_fn\fP)(int32_t fd, int32_t revents, void *data)"
++.SS "typedef void(* \fBqb_loop_poll_low_fds_event_fn\fP)(int32_t not_enough, int32_t fds_available)"
++.SS "typedef int32_t(* \fBqb_loop_signal_dispatch_fn\fP)(int32_t rsignal, void *data)"
+ .SS "typedef void* \fBqb_loop_signal_handle\fP"
+-
+ .SS "typedef struct qb_loop \fBqb_loop_t\fP"
+-
+ .PP
+ An opaque data type representing the main loop\&. 
+-.SS "typedef void(* qb_loop_timer_dispatch_fn)(void *data)"
+-
++.SS "typedef void(* \fBqb_loop_timer_dispatch_fn\fP)(void *data)"
+ .SS "typedef uint64_t \fBqb_loop_timer_handle\fP"
+-
+ .SH "Enumeration Type Documentation"
+ .PP 
+ .SS "enum \fBqb_loop_priority\fP"
+-
+ .PP
+ Priorites for jobs, timers & poll\&. 
+ .PP
+-\fBEnumerator\fP
++\fBEnumerator: \fP
+ .in +1c
+ .TP
+ \fB\fIQB_LOOP_LOW \fP\fP
+@@ -162,10 +153,10 @@ Priorites for jobs, timers & poll\&.
+ \fB\fIQB_LOOP_MED \fP\fP
+ .TP
+ \fB\fIQB_LOOP_HIGH \fP\fP
++
+ .SH "Function Documentation"
+ .PP 
+-.SS "\fBqb_loop_t\fP* qb_loop_create (void)"
+-
++.SS "\fBqb_loop_t\fP* \fBqb_loop_create\fP (void)"
+ .PP
+ Create a new main loop\&. \fBReturns:\fP
+ .RS 4
+@@ -173,10 +164,8 @@ loop instance\&.
+ .RE
+ .PP
+ 
+-.SS "void qb_loop_destroy (struct qb_loop *l)"
+-
+-.SS "int32_t qb_loop_job_add (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, void *data, \fBqb_loop_job_dispatch_fn\fPdispatch_fn)"
+-
++.SS "void \fBqb_loop_destroy\fP (struct qb_loop *l)"
++.SS "int32_t \fBqb_loop_job_add\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, void *data, \fBqb_loop_job_dispatch_fn\fPdispatch_fn)"
+ .PP
+ Add a job to the mainloop\&. This is run in the next cycle of the loop\&. 
+ .PP
+@@ -202,8 +191,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_job_del (struct qb_loop *l, enum \fBqb_loop_priority\fPp, void *data, \fBqb_loop_job_dispatch_fn\fPdispatch_fn)"
+-
++.SS "int32_t \fBqb_loop_job_del\fP (struct qb_loop *l, enum \fBqb_loop_priority\fPp, void *data, \fBqb_loop_job_dispatch_fn\fPdispatch_fn)"
+ .PP
+ Delete a job from the mainloop\&. This will try to delete the job if it hasn't run yet\&.
+ .PP
+@@ -229,8 +217,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_poll_add (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tfd, int32_tevents, void *data, \fBqb_loop_poll_dispatch_fn\fPdispatch_fn)"
+-
++.SS "int32_t \fBqb_loop_poll_add\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tfd, int32_tevents, void *data, \fBqb_loop_poll_dispatch_fn\fPdispatch_fn)"
+ .PP
+ Add a poll job to the mainloop\&. \fBNote:\fP
+ .RS 4
+@@ -258,8 +245,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_poll_del (\fBqb_loop_t\fP *l, int32_tfd)"
+-
++.SS "int32_t \fBqb_loop_poll_del\fP (\fBqb_loop_t\fP *l, int32_tfd)"
+ .PP
+ Delete a poll job\&. \fBParameters:\fP
+ .RS 4
+@@ -274,8 +260,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_poll_low_fds_event_set (\fBqb_loop_t\fP *l, \fBqb_loop_poll_low_fds_event_fn\fPfn)"
+-
++.SS "int32_t \fBqb_loop_poll_low_fds_event_set\fP (\fBqb_loop_t\fP *l, \fBqb_loop_poll_low_fds_event_fn\fPfn)"
+ .PP
+ Set a callback to receive events on file descriptors getting low\&. \fBParameters:\fP
+ .RS 4
+@@ -290,8 +275,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_poll_mod (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tfd, int32_tevents, void *data, \fBqb_loop_poll_dispatch_fn\fPdispatch_fn)"
+-
++.SS "int32_t \fBqb_loop_poll_mod\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tfd, int32_tevents, void *data, \fBqb_loop_poll_dispatch_fn\fPdispatch_fn)"
+ .PP
+ Modify a poll job\&. \fBParameters:\fP
+ .RS 4
+@@ -314,8 +298,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "void qb_loop_run (\fBqb_loop_t\fP *l)"
+-
++.SS "void \fBqb_loop_run\fP (\fBqb_loop_t\fP *l)"
+ .PP
+ Run the main loop\&. \fBParameters:\fP
+ .RS 4
+@@ -323,8 +306,7 @@ Run the main loop\&. \fBParameters:\fP
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_signal_add (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tsig, void *data, \fBqb_loop_signal_dispatch_fn\fPdispatch_fn, \fBqb_loop_signal_handle\fP *handle)"
+-
++.SS "int32_t \fBqb_loop_signal_add\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tsig, void *data, \fBqb_loop_signal_dispatch_fn\fPdispatch_fn, \fBqb_loop_signal_handle\fP *handle)"
+ .PP
+ Add a signal job\&. Get a callback on this signal (not in the context of the signal)\&.
+ .PP
+@@ -349,8 +331,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_signal_del (\fBqb_loop_t\fP *l, \fBqb_loop_signal_handle\fPhandle)"
+-
++.SS "int32_t \fBqb_loop_signal_del\fP (\fBqb_loop_t\fP *l, \fBqb_loop_signal_handle\fPhandle)"
+ .PP
+ Delete the signal job\&. \fBParameters:\fP
+ .RS 4
+@@ -365,8 +346,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_signal_mod (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tsig, void *data, \fBqb_loop_signal_dispatch_fn\fPdispatch_fn, \fBqb_loop_signal_handle\fPhandle)"
+-
++.SS "int32_t \fBqb_loop_signal_mod\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, int32_tsig, void *data, \fBqb_loop_signal_dispatch_fn\fPdispatch_fn, \fBqb_loop_signal_handle\fPhandle)"
+ .PP
+ Modify the signal job\&. \fBParameters:\fP
+ .RS 4
+@@ -389,8 +369,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "void qb_loop_stop (\fBqb_loop_t\fP *l)"
+-
++.SS "void \fBqb_loop_stop\fP (\fBqb_loop_t\fP *l)"
+ .PP
+ Stop the main loop\&. \fBParameters:\fP
+ .RS 4
+@@ -398,8 +377,7 @@ Stop the main loop\&. \fBParameters:\fP
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_timer_add (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, uint64_tnsec_duration, void *data, \fBqb_loop_timer_dispatch_fn\fPdispatch_fn, \fBqb_loop_timer_handle\fP *timer_handle_out)"
+-
++.SS "int32_t \fBqb_loop_timer_add\fP (\fBqb_loop_t\fP *l, enum \fBqb_loop_priority\fPp, uint64_tnsec_duration, void *data, \fBqb_loop_timer_dispatch_fn\fPdispatch_fn, \fBqb_loop_timer_handle\fP *timer_handle_out)"
+ .PP
+ Add a timer to the mainloop\&. \fBNote:\fP
+ .RS 4
+@@ -427,8 +405,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_timer_del (\fBqb_loop_t\fP *l, \fBqb_loop_timer_handle\fPth)"
+-
++.SS "int32_t \fBqb_loop_timer_del\fP (\fBqb_loop_t\fP *l, \fBqb_loop_timer_handle\fPth)"
+ .PP
+ Delete a timer that is still outstanding\&. \fBParameters:\fP
+ .RS 4
+@@ -443,8 +420,7 @@ status (0 == ok, -errno == failure)
+ .RE
+ .PP
+ 
+-.SS "uint64_t qb_loop_timer_expire_time_get (struct qb_loop *l, \fBqb_loop_timer_handle\fPth)"
+-
++.SS "uint64_t \fBqb_loop_timer_expire_time_get\fP (struct qb_loop *l, \fBqb_loop_timer_handle\fPth)"
+ .PP
+ Get the time remaining before it expires\&. \fBNote:\fP
+ .RS 4
+@@ -464,8 +440,7 @@ nano seconds left
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_loop_timer_is_running (\fBqb_loop_t\fP *l, \fBqb_loop_timer_handle\fPth)"
+-
++.SS "int32_t \fBqb_loop_timer_is_running\fP (\fBqb_loop_t\fP *l, \fBqb_loop_timer_handle\fPth)"
+ .PP
+ Check to see if a timer that is still outstanding\&. \fBParameters:\fP
+ .RS 4

@@ -1,0 +1,261 @@
+--- libqb-0.16.0.orig/docs/man3/qbmap.h.3	2013-07-25 20:16:18.000000000 +0200
++++ libqb-0.16.0/docs/man3/qbmap.h.3	2013-09-09 05:26:31.803806391 +0200
+@@ -1,4 +1,4 @@
+-.TH "qbmap.h" 3 "Thu Jul 25 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
++.TH "qbmap.h" 3 "Mon Sep 9 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
+ .ad l
+ .nh
+ .SH NAME
+@@ -14,7 +14,7 @@ This provides a map interface to a Patri
+ \fC#include <unistd\&.h>\fP
+ .br
+ 
+-.SS "Macros"
++.SS "Defines"
+ 
+ .in +1c
+ .ti -1c
+@@ -137,13 +137,13 @@ The hashtable is NOT ordered, but ptrie
+ Below is a simple example of how to iterate over a map\&. 
+ .PP
+ .nf
+-const char *p;
+-void *data;
+-qb_map_iter_t *it = qb_map_iter_create(m);
+-for (p = qb_map_iter_next(it, &data); p; p = qb_map_iter_next(it, &data)) {
+-    printf('%s > %s\n', p, (char*) data);
+-}
+-qb_map_iter_free(it);
++ const char *p;
++ void *data;
++ qb_map_iter_t *it = qb_map_iter_create(m);
++ for (p = qb_map_iter_next(it, &data); p; p = qb_map_iter_next(it, &data)) {
++     printf('%s > %s\n', p, (char*) data);
++ }
++ qb_map_iter_free(it);
+ 
+ .fi
+ .PP
+@@ -152,8 +152,8 @@ qb_map_iter_free(it);
+ Deletion of items within the iterator is supported\&. But note do not free the item memory in the iterator\&. If you need to free the data items then register for a notifier and free the memory there\&. This is required as the items are reference counted\&. 
+ .PP
+ .nf
+-qb_map_notify_add(m, NULL, my_map_free_handler,
+-             QB_MAP_NOTIFY_FREE, NULL);
++ qb_map_notify_add(m, NULL, my_map_free_handler,
++                     QB_MAP_NOTIFY_FREE, NULL);
+ 
+ .fi
+ .PP
+@@ -168,7 +168,7 @@ These allow you to get callbacks when va
+ hashtable only supports deletion and replacement notificatins\&. There is also a special global callback for freeing deleted and replaced values (QB_MAP_NOTIFY_FREE)\&. 
+ .RE
+ .PP
+-\fBSee Also:\fP
++\fBSee also:\fP
+ .RS 4
+ \fBqb_map_notify_add()\fP \fBqb_map_notify_del_2()\fP
+ .RE
+@@ -180,57 +180,47 @@ The ptrie supports prefixes in the itera
+ .PP
+ .PP
+ .nf
+-it = qb_map_pref_iter_create(m, 'aa');
+-while ((p = qb_map_iter_next(it, &data)) != NULL) {
+-    printf('%s > %s\n', p, (char*)data);
+-}
+-qb_map_iter_free(it);
++ it = qb_map_pref_iter_create(m, 'aa');
++ while ((p = qb_map_iter_next(it, &data)) != NULL) {
++     printf('%s > %s\n', p, (char*)data);
++ }
++ qb_map_iter_free(it);
+ .fi
+ .PP
+ .PP
+ The ptrie also supports prefixes in notifications: (remember to pass QB_MAP_NOTIFY_RECURSIVE into the notify_add\&. 
+ .PP
+ .nf
+-qb_map_notify_add(m, 'root', my_map_notification,
+-            (QB_MAP_NOTIFY_INSERTED|
+-             QB_MAP_NOTIFY_DELETED|
+-             QB_MAP_NOTIFY_REPLACED|
+-             QB_MAP_NOTIFY_RECURSIVE),
+-            NULL);
++ qb_map_notify_add(m, 'root', my_map_notification,
++                    (QB_MAP_NOTIFY_INSERTED|
++                     QB_MAP_NOTIFY_DELETED|
++                     QB_MAP_NOTIFY_REPLACED|
++                     QB_MAP_NOTIFY_RECURSIVE),
++                    NULL);
+ 
+ .fi
+ .PP
+  
+-.SH "Macro Definition Documentation"
++.SH "Define Documentation"
+ .PP 
+-.SS "#define QB_MAP_NOTIFY_DELETED   1"
+-
+-.SS "#define QB_MAP_NOTIFY_FREE   16"
+-
+-.SS "#define QB_MAP_NOTIFY_INSERTED   4"
+-
+-.SS "#define QB_MAP_NOTIFY_RECURSIVE   8"
+-
+-.SS "#define QB_MAP_NOTIFY_REPLACED   2"
+-
++.SS "#define \fBQB_MAP_NOTIFY_DELETED\fP   1"
++.SS "#define \fBQB_MAP_NOTIFY_FREE\fP   16"
++.SS "#define \fBQB_MAP_NOTIFY_INSERTED\fP   4"
++.SS "#define \fBQB_MAP_NOTIFY_RECURSIVE\fP   8"
++.SS "#define \fBQB_MAP_NOTIFY_REPLACED\fP   2"
+ .SH "Typedef Documentation"
+ .PP 
+ .SS "typedef struct qb_map_iter \fBqb_map_iter_t\fP"
+-
+ .PP
+ This is an opaque data type representing an iterator instance\&. 
+-.SS "typedef void(* qb_map_notify_fn)(uint32_t event, char *key, void *old_value, void *value, void *user_data)"
+-
++.SS "typedef void(* \fBqb_map_notify_fn\fP)(uint32_t event, char *key, void *old_value, void *value, void *user_data)"
+ .SS "typedef struct qb_map \fBqb_map_t\fP"
+-
+ .PP
+ This is an opaque data type representing an instance of a map\&. 
+-.SS "typedef int32_t(* qb_map_transverse_fn)(const char *key, void *value, void *user_data)"
+-
++.SS "typedef int32_t(* \fBqb_map_transverse_fn\fP)(const char *key, void *value, void *user_data)"
+ .SH "Function Documentation"
+ .PP 
+-.SS "\fBqb_map_t\fP* qb_hashtable_create (size_tmax_size)"
+-
++.SS "\fBqb_map_t\fP* \fBqb_hashtable_create\fP (size_tmax_size)"
+ .PP
+ Create an unsorted map based on a hashtable\&. \fBParameters:\fP
+ .RS 4
+@@ -243,20 +233,16 @@ the map instance
+ .RE
+ .PP
+ 
+-.SS "size_t qb_map_count_get (\fBqb_map_t\fP *map)"
+-
++.SS "size_t \fBqb_map_count_get\fP (\fBqb_map_t\fP *map)"
+ .PP
+ Get the number of items in the map\&. 
+-.SS "void qb_map_destroy (\fBqb_map_t\fP *map)"
+-
++.SS "void \fBqb_map_destroy\fP (\fBqb_map_t\fP *map)"
+ .PP
+ Destroy the map, removes all the items from the map\&. 
+-.SS "void qb_map_foreach (\fBqb_map_t\fP *map, \fBqb_map_transverse_fn\fPfunc, void *user_data)"
+-
++.SS "void \fBqb_map_foreach\fP (\fBqb_map_t\fP *map, \fBqb_map_transverse_fn\fPfunc, void *user_data)"
+ .PP
+ Calls the given function for each of the key/value pairs in the map\&. The function is passed the key and value of each pair, and the given data parameter\&. The map is traversed in sorted order\&. 
+-.SS "void* qb_map_get (\fBqb_map_t\fP *map, const char *key)"
+-
++.SS "void* \fBqb_map_get\fP (\fBqb_map_t\fP *map, const char *key)"
+ .PP
+ Gets the value corresponding to the given key\&. \fBReturn values:\fP
+ .RS 4
+@@ -266,12 +252,10 @@ Gets the value corresponding to the give
+ .RE
+ .PP
+ 
+-.SS "\fBqb_map_iter_t\fP* qb_map_iter_create (\fBqb_map_t\fP *map)"
+-
++.SS "\fBqb_map_iter_t\fP* \fBqb_map_iter_create\fP (\fBqb_map_t\fP *map)"
+ .PP
+ Create an iterator\&. 
+-.SS "void qb_map_iter_free (\fBqb_map_iter_t\fP *i)"
+-
++.SS "void \fBqb_map_iter_free\fP (\fBqb_map_iter_t\fP *i)"
+ .PP
+ free the iterator \fBParameters:\fP
+ .RS 4
+@@ -279,8 +263,7 @@ free the iterator \fBParameters:\fP
+ .RE
+ .PP
+ 
+-.SS "const char* qb_map_iter_next (\fBqb_map_iter_t\fP *i, void **value)"
+-
++.SS "const char* \fBqb_map_iter_next\fP (\fBqb_map_iter_t\fP *i, void **value)"
+ .PP
+ Get the next item\&. \fBParameters:\fP
+ .RS 4
+@@ -297,8 +280,7 @@ Get the next item\&. \fBParameters:\fP
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_map_notify_add (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents, void *user_data)"
+-
++.SS "int32_t \fBqb_map_notify_add\fP (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents, void *user_data)"
+ .PP
+ Add a notifier to the map\&. \fBParameters:\fP
+ .RS 4
+@@ -328,8 +310,7 @@ you can use key prefixes with trie maps\
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_map_notify_del (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents)"
+-
++.SS "int32_t \fBqb_map_notify_del\fP (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents)"
+ .PP
+ Delete a notifier from the map\&. \fBNote:\fP
+ .RS 4
+@@ -355,8 +336,7 @@ the key,fn and events must match those y
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_map_notify_del_2 (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents, void *user_data)"
+-
++.SS "int32_t \fBqb_map_notify_del_2\fP (\fBqb_map_t\fP *m, const char *key, \fBqb_map_notify_fn\fPfn, int32_tevents, void *user_data)"
+ .PP
+ Delete a notifier from the map (including the userdata)\&. \fBNote:\fP
+ .RS 4
+@@ -384,8 +364,7 @@ the key, fn, events and userdata must ma
+ .RE
+ .PP
+ 
+-.SS "\fBqb_map_iter_t\fP* qb_map_pref_iter_create (\fBqb_map_t\fP *map, const char *prefix)"
+-
++.SS "\fBqb_map_iter_t\fP* \fBqb_map_pref_iter_create\fP (\fBqb_map_t\fP *map, const char *prefix)"
+ .PP
+ Create a prefix iterator\&. This will iterate over all items with the given prefix\&. 
+ .PP
+@@ -395,16 +374,13 @@ this is only supported by the trie\&.
+ .RE
+ .PP
+ 
+-.SS "void qb_map_put (\fBqb_map_t\fP *map, const char *key, const void *value)"
+-
++.SS "void \fBqb_map_put\fP (\fBqb_map_t\fP *map, const char *key, const void *value)"
+ .PP
+ Inserts a new key and value into a qb_map_t\&. If the key already exists in the qb_map_t, it gets replaced by the new key\&. 
+-.SS "int32_t qb_map_rm (\fBqb_map_t\fP *map, const char *key)"
+-
++.SS "int32_t \fBqb_map_rm\fP (\fBqb_map_t\fP *map, const char *key)"
+ .PP
+ Removes a key/value pair from a map\&. 
+-.SS "\fBqb_map_t\fP* qb_skiplist_create (void)"
+-
++.SS "\fBqb_map_t\fP* \fBqb_skiplist_create\fP (void)"
+ .PP
+ Create a sorted map using a skiplist\&. \fBReturns:\fP
+ .RS 4
+@@ -412,12 +388,10 @@ the map instance
+ .RE
+ .PP
+ 
+-.SS "\fBqb_map_t\fP* qb_trie_create (void)"
+-
++.SS "\fBqb_map_t\fP* \fBqb_trie_create\fP (void)"
+ .PP
+ Create a sorted map using a Patricia trie or 'Radix tree'\&.  
+-.SS "void qb_trie_dump (\fBqb_map_t\fP *m)"
+-
++.SS "void \fBqb_trie_dump\fP (\fBqb_map_t\fP *m)"
+ .PP
+ print out the nodes in the trie (for debug purposes) 
+ .SH "Author"

@@ -1,0 +1,106 @@
+--- libqb-0.16.0.orig/docs/man3/qbarray.h.3	2013-07-25 20:16:18.000000000 +0200
++++ libqb-0.16.0/docs/man3/qbarray.h.3	2013-09-09 05:26:31.375811771 +0200
+@@ -1,4 +1,4 @@
+-.TH "qbarray.h" 3 "Thu Jul 25 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
++.TH "qbarray.h" 3 "Mon Sep 9 2013" "Version 0.16.0" "libqb" \" -*- nroff -*-
+ .ad l
+ .nh
+ .SH NAME
+@@ -69,28 +69,25 @@ This is a dynamic array (it can grow, bu
+ 
+ .PP
+ .nf
+-arr = qb_array_create_2(64, sizeof(struct my_struct), 256);
+-\&.\&.\&.
+-res = qb_array_index(arr, idx, (void**)&my_ptr);
+-if (res < 0) {
+-     return res;
+-}
+-// use my_ptr, now even if there is a grow, this pointer will be valid\&.
++ arr = qb_array_create_2(64, sizeof(struct my_struct), 256);
++ \&.\&.\&.
++ res = qb_array_index(arr, idx, (void**)&my_ptr);
++ if (res < 0) {
++        return res;
++ }
++ // use my_ptr, now even if there is a grow, this pointer will be valid\&.
+ .fi
+ .PP
+  
+ .SH "Typedef Documentation"
+ .PP 
+-.SS "typedef void(* qb_array_new_bin_cb_fn)(\fBqb_array_t\fP *a, uint32_t bin)"
+-
++.SS "typedef void(* \fBqb_array_new_bin_cb_fn\fP)(\fBqb_array_t\fP *a, uint32_t bin)"
+ .SS "typedef struct qb_array \fBqb_array_t\fP"
+-
+ .PP
+ This is an opaque data type representing an instance of an array\&. 
+ .SH "Function Documentation"
+ .PP 
+-.SS "\fBqb_array_t\fP* qb_array_create (size_tmax_elements, size_telement_size)"
+-
++.SS "\fBqb_array_t\fP* \fBqb_array_create\fP (size_tmax_elements, size_telement_size)"
+ .PP
+ Create an array with fixed sized elements\&. \fBParameters:\fP
+ .RS 4
+@@ -105,8 +102,7 @@ array instance\&.
+ .RE
+ .PP
+ 
+-.SS "\fBqb_array_t\fP* qb_array_create_2 (size_tmax_elements, size_telement_size, size_tautogrow_elements)"
+-
++.SS "\fBqb_array_t\fP* \fBqb_array_create_2\fP (size_tmax_elements, size_telement_size, size_tautogrow_elements)"
+ .PP
+ Create an array with fixed sized elements\&. \fBParameters:\fP
+ .RS 4
+@@ -123,12 +119,10 @@ array instance\&.
+ .RE
+ .PP
+ 
+-.SS "size_t qb_array_elems_per_bin_get (\fBqb_array_t\fP *a)"
+-
++.SS "size_t \fBqb_array_elems_per_bin_get\fP (\fBqb_array_t\fP *a)"
+ .PP
+ Get the number of elements per bin\&. 
+-.SS "void qb_array_free (\fBqb_array_t\fP *a)"
+-
++.SS "void \fBqb_array_free\fP (\fBqb_array_t\fP *a)"
+ .PP
+ Free all the memory used by the array\&. \fBParameters:\fP
+ .RS 4
+@@ -136,8 +130,7 @@ Free all the memory used by the array\&.
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_array_grow (\fBqb_array_t\fP *a, size_tmax_elements)"
+-
++.SS "int32_t \fBqb_array_grow\fP (\fBqb_array_t\fP *a, size_tmax_elements)"
+ .PP
+ Grow the array\&. \fBParameters:\fP
+ .RS 4
+@@ -152,8 +145,7 @@ Grow the array\&. \fBParameters:\fP
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_array_index (\fBqb_array_t\fP *a, int32_tidx, void **element_out)"
+-
++.SS "int32_t \fBqb_array_index\fP (\fBqb_array_t\fP *a, int32_tidx, void **element_out)"
+ .PP
+ Get an element at a particular index\&. \fBParameters:\fP
+ .RS 4
+@@ -170,12 +162,10 @@ Get an element at a particular index\&.
+ .RE
+ .PP
+ 
+-.SS "int32_t qb_array_new_bin_cb_set (\fBqb_array_t\fP *a, \fBqb_array_new_bin_cb_fn\fPfn)"
+-
++.SS "int32_t \fBqb_array_new_bin_cb_set\fP (\fBqb_array_t\fP *a, \fBqb_array_new_bin_cb_fn\fPfn)"
+ .PP
+ Get a callback when a new bin is allocated\&. 
+-.SS "size_t qb_array_num_bins_get (\fBqb_array_t\fP *a)"
+-
++.SS "size_t \fBqb_array_num_bins_get\fP (\fBqb_array_t\fP *a)"
+ .PP
+ Get the number of bins used or the array\&. 
+ .SH "Author"
