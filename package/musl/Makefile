@@ -33,6 +33,12 @@ endif
 ifeq ($(CPU_ARCH),i486)
 MARCH:=			i386
 endif
+ifeq ($(CPU_ARCH),mipsel)
+MARCH:=			mips
+endif
+ifeq ($(CPU_ARCH),ppc)
+MARCH:=			powerpc
+endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
