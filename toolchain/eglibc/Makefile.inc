@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		eglibc
-PKG_VERSION:=		2.17
+PKG_VERSION:=		2.18
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7bbee592be7d7fcacdc9dda931db9bec
+PKG_MD5SUM:=		2e4aad1b953daa997debe48fe10862cc
 PKG_SITES:=		http://openadk.org/distfiles/
 EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--without-cvs \
