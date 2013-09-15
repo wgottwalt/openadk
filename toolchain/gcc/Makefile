@@ -62,7 +62,7 @@ GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq ($(ARCH),powerpc)
-GCC_CONFOPTS+=		--disable-target-optspace
+GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
 else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
