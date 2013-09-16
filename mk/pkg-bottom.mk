@@ -167,7 +167,7 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
 	@-cd ${WRKINST}; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
