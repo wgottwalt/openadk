@@ -9,6 +9,9 @@ include ${TOPDIR}/mk/buildhlp.mk
 ifeq ($(CPU_ARCH),ppc)
 REAL_GNU_TARGET_NAME:= $(subst ppc,powerpc,$(REAL_GNU_TARGET_NAME))
 endif
+ifeq ($(CPU_ARCH),mips64el)
+REAL_GNU_TARGET_NAME:= $(subst mips64el,mips,$(REAL_GNU_TARGET_NAME))
+endif
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
