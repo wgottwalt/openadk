@@ -6,7 +6,7 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat
+PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat libgcc
 PKG_BUILDDEP:=		ncurses readline libiconv expat
 PKG_NOPARALLEL:=	1
 
@@ -18,6 +18,7 @@ $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=         -static
+CONFIGURE_ARGS+=	--enable-static
 endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
@@ -27,13 +28,10 @@ CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--without-included-gettext --disable-sim \
 			--with-curses --disable-werror \
 			--disable-gdbserver \
-			--enable-static --without-python
+			--without-python
 XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
-
-pre-build:
-	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 
 post-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin

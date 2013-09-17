@@ -1,6 +1,6 @@
-diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc/types.h eglibc-2.16/libc/sunrpc/rpc/types.h
---- eglibc-2.16.orig/libc/sunrpc/rpc/types.h	2012-07-31 09:00:24.000000000 +0200
-+++ eglibc-2.16/libc/sunrpc/rpc/types.h	2012-07-31 10:08:35.000000000 +0200
+diff -Nur eglibc-2.18.orig/libc/sunrpc/rpc/types.h eglibc-2.18/libc/sunrpc/rpc/types.h
+--- eglibc-2.18.orig/libc/sunrpc/rpc/types.h	2013-09-13 10:20:22.000000000 +0200
++++ eglibc-2.18/libc/sunrpc/rpc/types.h	2013-09-13 10:49:06.000000000 +0200
 @@ -69,19 +69,25 @@
  #include <sys/types.h>
  #endif
@@ -39,9 +39,9 @@ diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc/types.h eglibc-2.16/libc/sunrpc/rpc/t
  # define __daddr_t_defined
  #endif
  
-diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_main.c eglibc-2.16/libc/sunrpc/rpc_main.c
---- eglibc-2.16.orig/libc/sunrpc/rpc_main.c	2012-07-31 09:00:24.000000000 +0200
-+++ eglibc-2.16/libc/sunrpc/rpc_main.c	2012-07-31 09:22:22.000000000 +0200
+diff -Nur eglibc-2.18.orig/libc/sunrpc/rpc_main.c eglibc-2.18/libc/sunrpc/rpc_main.c
+--- eglibc-2.18.orig/libc/sunrpc/rpc_main.c	2013-09-13 10:20:22.000000000 +0200
++++ eglibc-2.18/libc/sunrpc/rpc_main.c	2013-09-13 10:49:34.000000000 +0200
 @@ -38,7 +38,11 @@
  #include <stdio.h>
  #include <string.h>
@@ -51,9 +51,9 @@ diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_main.c eglibc-2.16/libc/sunrpc/rpc_ma
 +#else
  #include <libintl.h>
 +#endif
+ #include <locale.h>
  #include <ctype.h>
  #include <sys/types.h>
- #include <sys/param.h>
 @@ -958,10 +962,12 @@
  	abort ();
        temp = rindex (cmd->infile, '.');
@@ -70,9 +70,9 @@ diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_main.c eglibc-2.16/libc/sunrpc/rpc_ma
  
      }
    else
-diff -Nur eglibc-2.16.orig/libc/sunrpc/rpc_scan.c eglibc-2.16/libc/sunrpc/rpc_scan.c
---- eglibc-2.16.orig/libc/sunrpc/rpc_scan.c	2012-07-31 09:00:24.000000000 +0200
-+++ eglibc-2.16/libc/sunrpc/rpc_scan.c	2012-07-31 09:22:22.000000000 +0200
+diff -Nur eglibc-2.18.orig/libc/sunrpc/rpc_scan.c eglibc-2.18/libc/sunrpc/rpc_scan.c
+--- eglibc-2.18.orig/libc/sunrpc/rpc_scan.c	2013-09-13 10:20:22.000000000 +0200
++++ eglibc-2.18/libc/sunrpc/rpc_scan.c	2013-09-13 10:49:06.000000000 +0200
 @@ -37,7 +37,11 @@
  #include <stdio.h>
  #include <ctype.h>

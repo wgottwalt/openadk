@@ -1,6 +1,14 @@
 --- strace-4.8.orig/signal.c	2013-05-23 15:41:23.000000000 +0200
-+++ strace-4.8/signal.c	2013-08-14 08:50:16.000000000 +0200
-@@ -815,7 +815,7 @@ sys_sigreturn(struct tcb *tcp)
++++ strace-4.8/signal.c	2013-09-13 16:20:20.000000000 +0200
+@@ -61,6 +61,7 @@
+ #endif
+ 
+ #if defined(SPARC) || defined(SPARC64) || defined(MIPS)
++#include <asm/ptrace.h>
+ typedef struct {
+ 	struct pt_regs		si_regs;
+ 	int			si_mask;
+@@ -815,7 +816,7 @@ sys_sigreturn(struct tcb *tcp)
  {
  #if defined(ARM)
  	if (entering(tcp)) {

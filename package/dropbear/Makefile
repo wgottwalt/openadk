@@ -32,9 +32,7 @@ ifeq ($(ADK_STATIC),y)
 TARGET_LDFLAGS+=	-static
 endif
 
-ifeq ($(ADK_TARGET_LIB_STATIC_LIBGCC),y)
 TARGET_LDFLAGS+=	-static-libgcc
-endif
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 CONFIGURE_ARGS+=	--disable-pam \

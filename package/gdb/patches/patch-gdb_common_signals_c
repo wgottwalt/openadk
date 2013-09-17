@@ -1,3 +1,5 @@
+* added from https://github.com/rofl0r/sabotage
+
 --- gdb-7.5.orig/gdb/common/signals.c	2012-05-24 18:51:37.000000000 +0200
 +++ gdb-7.5/gdb/common/signals.c	2012-10-01 14:44:23.000000000 +0200
 @@ -346,6 +346,8 @@ gdb_signal_from_host (int hostsig)

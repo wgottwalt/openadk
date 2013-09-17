@@ -1,0 +1,11 @@
+--- libqb-0.16.0.orig/Makefile.in	2013-07-25 20:16:10.000000000 +0200
++++ libqb-0.16.0/Makefile.in	2013-09-09 06:26:09.718825909 +0200
+@@ -352,7 +352,7 @@ MAINTAINERCLEANFILES = Makefile.in acloc
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ dist_doc_DATA = COPYING INSTALL README.markdown
+-SUBDIRS = include lib docs tools tests examples
++SUBDIRS = include lib docs tools
+ RPMBUILDOPTS = --define "_sourcedir $(abs_builddir)" \
+ 		  --define "_specdir $(abs_builddir)" \
+ 		  --define "_builddir $(abs_builddir)" \

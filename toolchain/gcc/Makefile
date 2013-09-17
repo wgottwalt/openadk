@@ -62,7 +62,7 @@ GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq ($(ARCH),powerpc)
-GCC_CONFOPTS+=		--disable-target-optspace
+GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
 else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
@@ -149,8 +149,6 @@ $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
-	# -lgcc_eh workaround
-	(cd $(STAGING_HOST_DIR)/lib/gcc/$(REAL_GNU_TARGET_NAME)/$(PKG_VERSION) && ln -sf libgcc.a libgcc_eh.a)
 	touch $@
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
