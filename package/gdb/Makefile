@@ -18,6 +18,7 @@ $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=         -static
+CONFIGURE_ARGS+=	--enable-static
 endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
