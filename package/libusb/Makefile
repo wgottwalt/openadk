@@ -3,14 +3,14 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libusb
-PKG_VERSION:=		1.0.8
+PKG_NAME:=		libusbx
+PKG_VERSION:=		1.0.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		37d34e6eaa69a4b645a19ff4ca63ceef
+PKG_MD5SUM:=		7f5715d624cd6c26b30a317eb6c2fe5e
 PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
 PKG_URL:=		http://libusb.wiki.sourceforge.net/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusbx/}
 
 PKG_SUBPKGS:=		LIBUSB LIBUSB_DEV
 PKGSD_LIBUSB_DEV:=	header files for libusb library
@@ -26,6 +26,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBUSB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_DEV},${PKGSC_LIBUSB_DEV},${PKG_OPTS}))
+
+TARGET_CPPFLAGS=	-DTIMESPEC_TO_TIMEVAL=
+CONFIGURE_ARGS+=	--disable-udev
 
 libusb-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB}/usr/lib
