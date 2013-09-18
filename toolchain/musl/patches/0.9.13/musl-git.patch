@@ -8597,38 +8597,6 @@ diff -Nur musl-0.9.13/src/mman/mprotect.c musl-git/src/mman/mprotect.c
  #include "syscall.h"
  
  int mprotect(void *addr, size_t len, int prot)
-diff -Nur musl-0.9.13/src/signal/sigemptyset.c musl-git/src/signal/sigemptyset.c
---- musl-0.9.13/src/signal/sigemptyset.c	2013-08-30 23:30:53.000000000 +0200
-+++ musl-git/src/signal/sigemptyset.c	2013-09-16 20:31:39.000000000 +0200
-@@ -4,6 +4,10 @@
- int sigemptyset(sigset_t *set)
- {
- 	set->__bits[0] = 0;
--	if (sizeof(long)==4) set->__bits[1] = 0;
-+	if (sizeof(long)==4 || _NSIG > 65) set->__bits[1] = 0;
-+	if (sizeof(long)==4 && _NSIG > 65) {
-+		set->__bits[2] = 0;
-+		set->__bits[3] = 0;
-+	}
- 	return 0;
- }
-diff -Nur musl-0.9.13/src/signal/sigfillset.c musl-git/src/signal/sigfillset.c
---- musl-0.9.13/src/signal/sigfillset.c	2013-08-30 23:30:53.000000000 +0200
-+++ musl-git/src/signal/sigfillset.c	2013-09-16 20:31:39.000000000 +0200
-@@ -7,8 +7,13 @@
- #if ULONG_MAX == 0xffffffff
- 	set->__bits[0] = 0x7ffffffful;
- 	set->__bits[1] = 0xfffffffcul;
-+	if (_NSIG > 65) {
-+		set->__bits[2] = 0xfffffffful;
-+		set->__bits[3] = 0xfffffffful;
-+	}
- #else
- 	set->__bits[0] = 0xfffffffc7ffffffful;
-+	if (_NSIG > 65) set->__bits[1] = 0xfffffffffffffffful;
- #endif
- 	return 0;
- }
 diff -Nur musl-0.9.13/src/signal/sigqueue.c musl-git/src/signal/sigqueue.c
 --- musl-0.9.13/src/signal/sigqueue.c	2013-08-30 23:30:53.000000000 +0200
 +++ musl-git/src/signal/sigqueue.c	2013-09-16 20:31:39.000000000 +0200
