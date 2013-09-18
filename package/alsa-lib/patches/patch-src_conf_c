@@ -1,0 +1,13 @@
+* added idea/patch from https://github.com/rofl0r/sabotage
+
+--- alsa-lib-1.0.27.2.orig/src/conf.c	2013-07-08 14:31:36.000000000 +0200
++++ alsa-lib-1.0.27.2/src/conf.c	2013-09-17 18:30:14.000000000 +0200
+@@ -428,7 +428,7 @@ beginning:</P>
+ 
+ #ifdef HAVE_LIBPTHREAD
+ static pthread_mutex_t snd_config_update_mutex =
+-				PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
++				{{{1,0,0,0,0,0,0,0,0,0}}};
+ #endif
+ 
+ struct _snd_config {

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		2.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		13a0feb74474f89052f6b8ba1bce46be
+PKG_VERSION:=		2.0.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		dd71a1baedb2daa3e4d21e0651daa918
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
 PKG_FDEPENDS:=		libpthread
@@ -87,6 +87,7 @@ $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
+TARGET_CPPFLAGS+=	-D_POSIX_SOURCE=1 -D_GNU_SOURCE=1
 
 ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)
 CONFIGURE_CPU_OPTS:=	--enable-mmx

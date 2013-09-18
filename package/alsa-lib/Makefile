@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
-PKG_VERSION:=		1.0.26
+PKG_VERSION:=		1.0.27.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2dfa35d28471d721e592b616beedf965
+PKG_MD5SUM:=		69129a7c37697f81ac092335e9fa452b
 PKG_DESCR:=		ALSA sound library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.alsa-project.org/
@@ -23,7 +23,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ALSA_LIB_DEV,alsa-lib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ALSA_LIB_DEV},${PKGSC_ALSA_LIB_DEV}))
 
-CONFIGURE_ARGS+=	--disable-python
+TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
+CONFIGURE_ARGS+=	--disable-python \
+			--without-versioned
 
 alsa-lib-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa

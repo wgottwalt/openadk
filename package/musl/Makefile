@@ -39,6 +39,9 @@ endif
 ifeq ($(CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+MARCH:=			armhf
+endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
