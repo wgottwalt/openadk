@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vim
-PKG_VERSION:=		7.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		5b9510a17074e2b37d8bb38ae09edbf2
+PKG_VERSION:=		7.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		607e135c559be642f210094ad023dc65
 PKG_DESCR:=		The text editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses libgcc
@@ -15,13 +15,14 @@ PKG_URL:=		http://www.vim.org/
 PKG_SITES:=		ftp://ftp.vim.org/pub/vim/unix/
 
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}/vim73
+WRKDIST=		${WRKDIR}/vim74
 WRKSRC=			${WRKDIST}/src
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VIM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS+=		-lgcc
 CONFIGURE_ENV+=		vim_cv_toupper_broken=no \
 			vim_cv_getcwd_broken=no \
 			vim_cv_stat_ignores_slash=yes \
@@ -60,7 +61,7 @@ post-install:
 	${INSTALL_DIR} ${IDIR_VIM}/usr/bin
 	${INSTALL_DIR} ${IDIR_VIM}/usr/share/vim
 	${CP} ${WRKINST}/usr/bin/{ex,vim,view} ${IDIR_VIM}/usr/bin
-	${CP} ${WRKINST}/usr/share/vim/vim73/vimrc_example.vim \
+	${CP} ${WRKINST}/usr/share/vim/vim74/vimrc_example.vim \
 		${IDIR_VIM}/usr/share/vim/vimrc
 
 include ${TOPDIR}/mk/pkg-bottom.mk
