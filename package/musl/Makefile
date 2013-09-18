@@ -36,6 +36,12 @@ endif
 ifeq ($(CPU_ARCH),mipsel)
 MARCH:=			mips
 endif
+ifeq ($(CPU_ARCH),mips64el)
+MARCH:=			mips
+endif
+ifeq ($(CPU_ARCH),mips64)
+MARCH:=			mips
+endif
 ifeq ($(CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
