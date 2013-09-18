@@ -21,6 +21,14 @@ $(eval $(call PKG_template,SCREEN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PK
 CONFIGURE_ENV+=		$(foreach flag,rename fchmod fchown strerror lstat _exit utimes vsnprintf getcwd setlocale strftime,ac_cv_func_${flag}=yes)
 CONFIGURE_ARGS+=	--with-sys-screenrc=/etc/screenrc
 
+pre-build:
+	echo '#undef UTMPOK' >> ${WRKBUILD}/config.h
+	echo '#undef LOGINDEFAULT' >> ${WRKBUILD}/config.h
+	echo '#define LOGINDEFAULT 0' >> ${WRKBUILD}/config.h
+	echo '#undef GETUTENT' >> ${WRKBUILD}/config.h
+	echo '#undef UTHOST' >> ${WRKBUILD}/config.h
+	echo '#undef BUGGYGETLOGIN' >> ${WRKBUILD}/config.h
+
 post-install:
 	${INSTALL_DIR} ${IDIR_SCREEN}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/screen ${IDIR_SCREEN}/usr/bin/

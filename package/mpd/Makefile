@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.17.4
-PKG_RELEASE:=		8
-PKG_MD5SUM:=		ab408a61f49f215ce77ed0cf1deed6e1
+PKG_VERSION:=		0.17.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b68be330deeb23989c08a9fefd9fcdeb
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx
@@ -105,8 +105,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-std=gnu99
-XAKE_FLAGS+=		MPD_CFLAGS='-D_GNU_SOURCE'
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-jack \
