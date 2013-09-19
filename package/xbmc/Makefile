@@ -21,10 +21,12 @@ PKG_BUILDDEP+=		libmpeg2 libmad jpeg libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
+PKG_BUILDDEP+=		bcm2835-vc libgpg-error
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_LIBC_DEPENDS:=	eglibc glibc
 
 include $(TOPDIR)/mk/package.mk
 
