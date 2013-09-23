@@ -20,8 +20,8 @@ PKGSD_LIBPCRECPP:=	PCRE c++ library
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBPCRE_DEV,libpcre-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRECPP},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRE_DEV,libpcre-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRE_DEV},${PKGSC_LIBPCRE_DEV}))
 
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
