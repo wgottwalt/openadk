@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		uClibc++
 PKG_VERSION:=		0.2.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		394c119363dd8b469fb898442a6764b8
 PKG_DESCR:=		A standard c++ library for embedded systems
 PKG_SECTION:=		libs
