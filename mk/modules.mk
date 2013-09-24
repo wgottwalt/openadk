@@ -1204,7 +1204,7 @@ $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 #,65))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
-	$(MODULES_DIR)/kernel/drivers/media/video/uvc/uvcvideo \
+	$(MODULES_DIR)/kernel/drivers/media/usb/uvc/uvcvideo \
 ,70))
 
 $(eval $(call KMOD_template,USB_GSPCA,usb-gspca,\
