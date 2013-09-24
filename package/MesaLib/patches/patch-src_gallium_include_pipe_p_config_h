@@ -1,0 +1,45 @@
+--- Mesa-8.0.5.orig/src/gallium/include/pipe/p_config.h	2012-10-24 21:03:59.000000000 +0200
++++ Mesa-8.0.5/src/gallium/include/pipe/p_config.h	2013-09-19 12:27:54.000000000 +0200
+@@ -111,7 +111,6 @@
+  * Endian detection.
+  */
+ 
+-#ifdef __GLIBC__
+ #include <endian.h>
+ 
+ #if __BYTE_ORDER == __LITTLE_ENDIAN
+@@ -120,34 +119,6 @@
+ # define PIPE_ARCH_BIG_ENDIAN
+ #endif
+ 
+-#elif defined(__APPLE__)
+-#include <machine/endian.h>
+-
+-#if __DARWIN_BYTE_ORDER == __DARWIN_LITTLE_ENDIAN
+-# define PIPE_ARCH_LITTLE_ENDIAN
+-#elif __DARWIN_BYTE_ORDER == __DARWIN_BIG_ENDIAN
+-# define PIPE_ARCH_BIG_ENDIAN
+-#endif
+-
+-#elif defined(__sun)
+-#include <sys/isa_defs.h>
+-
+-#if defined(_LITTLE_ENDIAN)
+-# define PIPE_ARCH_LITTLE_ENDIAN
+-#elif defined(_BIG_ENDIAN)
+-# define PIPE_ARCH_BIG_ENDIAN
+-#endif
+-
+-#else
+-
+-#if defined(PIPE_ARCH_X86) || defined(PIPE_ARCH_X86_64)
+-#define PIPE_ARCH_LITTLE_ENDIAN
+-#elif defined(PIPE_ARCH_PPC) || defined(PIPE_ARCH_PPC_64)
+-#define PIPE_ARCH_BIG_ENDIAN
+-#endif
+-
+-#endif
+-
+ #if !defined(PIPE_ARCH_LITTLE_ENDIAN) && !defined(PIPE_ARCH_BIG_ENDIAN)
+ #error Unknown Endianness
+ #endif
