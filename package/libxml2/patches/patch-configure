@@ -1,5 +1,5 @@
 --- libxml2-2.9.1.orig/configure	2013-04-19 09:36:11.000000000 +0200
-+++ libxml2-2.9.1/configure	2013-09-04 15:16:48.000000000 +0200
++++ libxml2-2.9.1/configure	2013-09-25 13:59:27.000000000 +0200
 @@ -14010,17 +14010,17 @@ case ${host} in
  esac
  
@@ -22,6 +22,15 @@
      else
          if test -x "$with_python/python.exe"
          then
+@@ -14122,7 +14122,7 @@ fi
+ 	else
+ 	    if test -d $with_python/lib/site-packages
+ 	    then
+-		PYTHON_SITE_PACKAGES=$with_python/lib/site-packages
++		PYTHON_SITE_PACKAGES=/usr/lib/python$PYTHON_VERSION/site-packages
+ 	    else
+ 		PYTHON_SITE_PACKAGES=`$PYTHON -c "from distutils import sysconfig; print(sysconfig.get_python_lib())"`
+ 	    fi
 @@ -14148,7 +14148,7 @@ else
      PYTHON_SUBDIR=
  fi
