@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
 PKG_VERSION:=		8.0.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cda5d101f43b8784fa60bdeaca4056f2
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
