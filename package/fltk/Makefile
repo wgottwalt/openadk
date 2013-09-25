@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fltk
 PKG_VERSION:=		1.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f7e707d4fb7a5a76f0f9b73ff70623d
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
@@ -25,7 +25,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc
+LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lgcc_s -lm -lc
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
