@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 DISTFILES:=		boost_1_54_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
 
-PKG_ARCH_DEPENDS:=	!mips
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 PKG_SUBPKGS:=		BOOST BOOST_DEV
 PKGSD_BOOST_DEV:=	boost header files
