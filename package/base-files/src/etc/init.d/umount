@@ -5,7 +5,7 @@ case $1 in
 autostop)
 	cd /
 	sync
-	for i in $(grep -v ^# /etc/fstab 2>/dev/null|awk '{ print $2 }');do
+	for i in $(grep -v ^# /etc/fstab 2>/dev/null|awk '{ print $2 }'|grep -v none);do
        	 umount $i 2>/dev/null
 	done
 	;;
