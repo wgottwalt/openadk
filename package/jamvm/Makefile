@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		lang
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
-PKG_ARCH_DEPENDS:=	!cris !mips !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,6 +24,12 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 CONFIGURE_ARGS+=	--enable-ffi
+ifeq ($(ARCH),mips)
+CONFIGURE_ARGS+=	--disable-tls
+endif
+ifeq ($(ARCH),arm)
+CONFIGURE_ARGS+=	--disable-tls
+endif
 
 do-build:
 	${INSTALL_DIR} ${WRKINST}/usr/bin
