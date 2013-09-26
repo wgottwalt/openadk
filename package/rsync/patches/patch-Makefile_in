@@ -1,0 +1,11 @@
+--- rsync-3.0.9.orig/Makefile.in	2011-03-26 18:01:37.000000000 +0100
++++ rsync-3.0.9/Makefile.in	2013-09-26 12:40:43.000000000 +0200
+@@ -146,7 +146,7 @@ configure.sh config.h.in: configure.ac a
+ 	    else \
+ 		echo 'You may need to run:'; \
+ 		echo '  make reconfigure'; \
+-		exit 1; \
++		exit 0; \
+ 	    fi \
+ 	fi
+ 
