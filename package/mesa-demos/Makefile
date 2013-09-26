@@ -5,12 +5,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mesa-demos
 PKG_VERSION:=		8.1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		4049d98dd4131212e2842b770f1b0fa5
 PKG_DESCR:=		MESA demo apps
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		mesalib
-PKG_BUILDDEP:=		MesaLib
+PKG_BUILDDEP:=		MesaLib libglew
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
 
 PKG_SUBPKGS:=		GLXINFO
