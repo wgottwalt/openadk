@@ -1,0 +1,33 @@
+--- Mesa-8.0.5.orig/src/mesa/main/imports.c	2012-10-24 21:03:59.000000000 +0200
++++ Mesa-8.0.5/src/mesa/main/imports.c	2013-09-25 17:41:11.000000000 +0200
+@@ -49,14 +49,6 @@
+ #include "mtypes.h"
+ #include "version.h"
+ 
+-#ifdef _GNU_SOURCE
+-#include <locale.h>
+-#ifdef __APPLE__
+-#include <xlocale.h>
+-#endif
+-#endif
+-
+-
+ #define MAXSTRING 4000  /* for vsnprintf() */
+ 
+ #ifdef WIN32
+@@ -766,14 +758,7 @@ _mesa_strdup( const char *s )
+ float
+ _mesa_strtof( const char *s, char **end )
+ {
+-#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__) && \
+-   !defined(ANDROID) && !defined(__HAIKU__)
+-   static locale_t loc = NULL;
+-   if (!loc) {
+-      loc = newlocale(LC_CTYPE_MASK, "C", NULL);
+-   }
+-   return strtof_l(s, end, loc);
+-#elif defined(_ISOC99_SOURCE) || (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 600)
++#if defined(_ISOC99_SOURCE) || (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 600)
+    return strtof(s, end);
+ #else
+    return (float)strtod(s, end);

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
-PKG_VERSION:=		1.0.26
+PKG_VERSION:=		1.0.27.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4dcf1017fafc91603af96705c073eca9
+PKG_MD5SUM:=		b65e9a04181bd7c9db7667a4566f8dc3
 PKG_DESCR:=		ALSA mixer utility
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libpthread
@@ -25,6 +25,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ALSA_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIGURE_ARGS+=	--disable-xmlto
 ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
 CONFIGURE_ARGS+=	--enable-alsamixer

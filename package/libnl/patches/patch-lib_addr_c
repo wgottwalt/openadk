@@ -1,0 +1,16 @@
+--- libnl-3.2.22.orig/lib/addr.c	2013-04-05 10:35:44.000000000 +0200
++++ libnl-3.2.22/lib/addr.c	2013-09-26 11:13:50.000000000 +0200
+@@ -33,6 +33,13 @@
+ #include <netlink/addr.h>
+ #include <linux/socket.h>
+ 
++#ifndef PF_RDS
++#define PF_RDS		21
++#endif
++#ifndef AF_RDS
++#define AF_RDS		PF_RDS
++#endif
++
+ /* All this DECnet stuff is stolen from iproute2, thanks to whoever wrote
+  * this, probably Alexey. */
+ static inline uint16_t dn_ntohs(uint16_t addr)

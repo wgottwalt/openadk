@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
 PKG_VERSION:=		3.2.22
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2e1c889494d274aca24ce5f6a748e66e
 PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs

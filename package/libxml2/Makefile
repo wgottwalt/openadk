@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.9.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9c0cfef285d5c4a5c80d00904ddab380
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
@@ -30,6 +30,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RE
 include $(TOPDIR)/mk/python.mk
 
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-lpthread
 ifneq ($(ADK_PACKAGE_LIBXML2_PYTHON),)
 CONFIGURE_ARGS+=	--with-python=${STAGING_DIR}/usr
 else
@@ -61,6 +62,9 @@ CONFIGURE_ARGS+=	--without-c14n \
 			--with-xpath \
 			--with-xptr \
 			--with-zlib
+
+pre-configure:
+	${INSTALL_DIR} ${STAGING_DIR}/usr/lib/site-packages
 
 libxml2-install:
 	${INSTALL_DIR} ${IDIR_LIBXML2}/usr/lib
