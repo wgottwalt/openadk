@@ -11,7 +11,7 @@ PKG_SECTION:=		libs
 
 NO_DISTFILES:=		1
 
-PKG_ARCH_DEPENDS:=	!sh !avr32
+PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,7 +24,11 @@ INSTALL_STYLE:=		manual
 do-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+ifeq ($(ADK_LINUX_SH),y)
+	${CP} ${STAGING_TARGET_DIR}/lib/!m1/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+else
 	${CP} ${STAGING_TARGET_DIR}/$(ADK_TARGET_LIBC_PATH)/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 ifeq ($(ADK_TARGET_MULTILIB_X86_32),y)
 	${INSTALL_DIR} ${IDIR_LIBGCC}/lib32

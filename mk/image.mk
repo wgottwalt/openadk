@@ -143,7 +143,7 @@ ${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 	) >>$@
 
 ${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
-	bash ${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
+	${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
 		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
