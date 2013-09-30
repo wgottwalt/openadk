@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
-PKG_VERSION:=		6.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		371e007a201be90c16497cd9bd5e2553
+PKG_VERSION:=		6.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f83ef48ab1154aa74dd4cf1c1202bf04
 PKG_DESCR:=		CIFS utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-cifs

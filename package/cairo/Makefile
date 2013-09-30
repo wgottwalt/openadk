@@ -10,6 +10,7 @@ PKG_MD5SUM:=		f101a9e88b783337b20b2e26dfd26d5f
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		fontconfig libfreetype libpng libx11 pixman
+PKG_DEPENDS+=		libxrender
 PKG_BUILDDEP:=		libpng pixman freetype fontconfig libX11 libXrender glib
 PKG_BUILDDEP+=		libXext
 PKG_URL:=		http://cairographics.org/
