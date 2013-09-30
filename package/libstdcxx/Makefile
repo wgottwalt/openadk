@@ -34,6 +34,7 @@ ifeq ($(ADK_NATIVE),y)
 else
 	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so.6)
 	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so)
+	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.17 libstdc++.so)
 	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
