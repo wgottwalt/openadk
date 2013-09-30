@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
 PKG_VERSION:=		1.5.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		395455e4d3a51459374fe5ca8420aae8
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
@@ -35,7 +35,7 @@ CONFIGURE_ARGS+=	--enable-xlocale \
 libx11-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/lib/libX11.so* ${IDIR_LIBX11}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/libX11-xcb* ${IDIR_LIBX11}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libX11-xcb*.so* ${IDIR_LIBX11}/usr/lib/
 	${CP} ${WRKINST}/usr/share/X11/XErrorDB ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/share/X11/locale ${IDIR_LIBX11}/usr/share/X11
 
