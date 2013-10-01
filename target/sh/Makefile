@@ -11,9 +11,15 @@ KERNEL:=$(LINUX_DIR)/arch/sh/boot/zImage
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifneq ($(ADK_HARDWARE_QEMU),)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${CPU_ARCH} -M r2d -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)
@@ -22,7 +28,7 @@ imageinstall: $(BIN_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-sh4 -M r2d -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -M r2d -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -31,6 +37,6 @@ imageinstall: createinitramfs
 	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-sh4 -M r2d -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-{CPU_ARCH} -M r2d -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
 endif
