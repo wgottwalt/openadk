@@ -20,7 +20,7 @@ WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
 PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
 PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
-PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx
+PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx !lemote-yeelong
 
 PKG_SUBPKGS:=		OPENJDK7
 PKG_CHOICES_OPENJDK7:=	ZERO SHARK CACAO

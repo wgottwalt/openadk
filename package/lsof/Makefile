@@ -9,6 +9,8 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		6dae655988c810a7042c06a4e2fa3c5f
 PKG_DESCR:=		list open files
 PKG_SECTION:=		misc
+PKG_DEPENDS:=		libtirpc
+PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://people.freebsd.org/~abe/
 PKG_SITES:=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
 
@@ -23,7 +25,8 @@ $(eval $(call PKG_template,LSOF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_
 CONFIG_STYLE:=		minimal
 CONFIGURE_PROG:=	Configure
 CONFIGURE_ARGS:=	-n linux
-XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS} -I$(STAGING_DIR)/usr/include/tirpc' CFGL='${TARGET_LDFLAGS} -L./lib -llsof -ltirpc'
+XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS} -I$(STAGING_DIR)/usr/include/tirpc'
+XAKE_FLAGS+=		CFGL='${TARGET_LDFLAGS} -L./lib -llsof -ltirpc'
 INSTALL_STYLE:=		manual
 
 post-extract:

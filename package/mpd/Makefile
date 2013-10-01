@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b68be330deeb23989c08a9fefd9fcdeb
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		glib libstdcxx
+PKG_DEPENDS:=		glib libstdcxx libgcc
 PKG_FDEPENDS:=		glib libstdcxx
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.musicpd.org/
@@ -117,6 +117,7 @@ CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-wavpack \
 			--disable-sqlite \
 			--disable-mpg123 \
+			--disable-soundcloud \
 			--with-zeroconf=no
 
 ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)

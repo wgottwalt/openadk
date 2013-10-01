@@ -10,7 +10,7 @@ PKG_MD5SUM:=		985151639b1ca037293f06da44fbc6bc
 PKG_DESCR:=		embedded SSL/TLS library
 PKG_SECTION:=		libs
 PKG_URL:=		https://polarssl.org/
-PKG_SITES:=		https://polarssl.org/download/
+PKG_SITES:=		http://www.openadk.org/distfiles/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-gpl.tgz
 

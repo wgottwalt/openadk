@@ -32,6 +32,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
 			ADK_PACKAGE_PACEMAKER_PYTHON_GUI=n \
 			ADK_PACKAGE_OPENJDK=n \
+			ADK_PACKAGE_OPENJDK7=n \
 			ADK_PACKAGE_CLASSPATH=n \
 			ADK_PACKAGE_GPSD=n \
 			ADK_PACKAGE_GPSD_CLIENTS=n \
@@ -594,7 +595,7 @@ bulk:
 	done
 
 bulkall:
-	for libc in uclibc eglibc glibc;do \
+	for libc in uclibc eglibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
@@ -612,7 +613,7 @@ bulkall:
 	done
 
 bulkallmod:
-	for libc in uclibc eglibc glibc;do \
+	for libc in uclibc eglibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu); \
 	      for system in $$systems;do \
