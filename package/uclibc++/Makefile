@@ -16,7 +16,7 @@ PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_CFLINE_UCLIBCXX:= 	depends on ADK_TARGET_LIB_UCLIBC
+PKG_LIBC_DEPENDS:=	uclibc
 
 include ${TOPDIR}/mk/package.mk
 
