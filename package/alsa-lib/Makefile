@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
 PKG_VERSION:=		1.0.27.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		69129a7c37697f81ac092335e9fa452b
 PKG_DESCR:=		ALSA sound library
 PKG_SECTION:=		libs
