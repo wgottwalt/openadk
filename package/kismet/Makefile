@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		kismet
 PKG_VERSION:=		2011-01-R1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1fb1f024a7ca52814b255e2f2faccf3b
 PKG_DESCR:=		Kismet
 PKG_SECTION:=		wifi
-PKG_DEPENDS:=		libpcap libncurses
+PKG_DEPENDS:=		libpcap libncurses libpthread
 PKG_BUILDDEP:=		libpcap ncurses
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
@@ -26,6 +26,7 @@ $(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELE
 $(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_DRONE},${PKG_SECTION}))
 $(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_SERVER},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ARGS+=	--sysconfdir=/etc/kismet
 
 pre-build:
