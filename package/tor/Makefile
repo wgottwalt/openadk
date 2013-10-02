@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
 PKG_VERSION:=		0.2.3.25
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		a1c364189a9a66ed9daa8e6436489daf
 PKG_DESCR:=		An anonymous Internet communication system
 PKG_SECTION:=		proxy
@@ -26,6 +26,8 @@ CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			tor_cv_time_t_signed=yes \
 			tor_cv_null_is_zero=yes \
 			tor_cv_unaligned_ok=yes
+
+CONFIGURE_ARGS+=	--disable-gcc-hardening
 
 post-install:
 	${INSTALL_DIR} ${IDIR_TOR}/usr/bin ${IDIR_TOR}/etc/tor
