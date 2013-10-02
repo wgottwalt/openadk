@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.54.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs

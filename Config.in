@@ -177,6 +177,7 @@ config ADK_COMPRESSION_TOOL
 	default "xz" if ADK_TARGET_INITRAMFS_COMPRESSION_XZ
 	default "lzma -9" if ADK_TARGET_INITRAMFS_COMPRESSION_LZMA
 	default "lzop" if ADK_TARGET_INITRAMFS_COMPRESSION_LZO
+	default "gzip -n9"
 	help
 
 source "target/linux/Config.in"

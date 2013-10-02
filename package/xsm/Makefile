@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6dfc70ae1c13f775f1c646a6d8780076
 PKG_DESCR:=		X session manager
 PKG_SECTION:=		x11/apps
+PKG_DEPENDS:=		libxaw
+PKG_BUILDDEP:=		libXaw
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 

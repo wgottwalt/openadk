@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.11.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		56f0ae274b285320b8a597cb89442449
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
@@ -47,6 +47,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
 			--with-system-ss \
 			--with-system-et \
+			--without-system-verto \
 			--without-tcl
 CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_func_regcomp=yes \

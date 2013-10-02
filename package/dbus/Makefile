@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a70edc50524f258eaf5c9a9994ed8748
 PKG_DESCR:=		DBUS library and daemon
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libexpat libx11
-PKG_BUILDDEP:=		expat libX11
+PKG_DEPENDS:=		libexpat libx11 libuuid
+PKG_BUILDDEP:=		expat libX11 util-linux
 PKG_URL:=		http://dbus.freedesktop.org/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 
@@ -27,6 +27,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,DBUS_DEV,dbus-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBUS_DEV},${PKGSC_DBUS_DEV},${PKG_OPTS}))
 
+TARGET_LDFLAGS+=	-luuid
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
