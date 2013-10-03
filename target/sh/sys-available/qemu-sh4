@@ -1,7 +1,8 @@
-config ADK_TARGET_SYSTEM_QEMU_SH
-	bool "Qemu Emulator"
+config ADK_TARGET_SYSTEM_QEMU_SH4
+	bool "Qemu Emulator (Little Endian)"
 	select ADK_sh
-	select ADK_qemu_sh
+	select ADK_little
+	select ADK_qemu_sh4
 	select ADK_CPU_SH4
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA

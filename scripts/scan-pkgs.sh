@@ -104,7 +104,7 @@ if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 fi
 
 if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
-	NEED_ZIP="$NEED_ZIP openjdk"
+	NEED_ZIP="$NEED_ZIP openjdk7"
 fi
 
 if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
@@ -131,6 +131,10 @@ fi
 
 if [[ -n $ADK_COMPILE_AUTOMAKE ]]; then
 	NEED_AUTOCONF="$NEED_AUTOCONF automake"
+fi
+
+if [[ -n $ADK_COMPILE_COROSYNC ]]; then
+	NEED_GROFF="$NEED_GROFF corosync"
 fi
 
 if [[ -n $ADK_COMPILE_LIBTOOL ]]; then
@@ -301,6 +305,13 @@ fi
 if [[ -n $NEED_LIBSSLDEV ]]; then
 	if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
 		echo >&2 You need openssl headers to build $NEED_LIBSSLDEV
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_GROFF ]]; then
+	if ! which groff >/dev/null 2>&1; then
+		echo >&2 You need groff to build $NEED_GROFF
 		out=1
 	fi
 fi

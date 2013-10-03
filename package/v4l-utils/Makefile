@@ -14,7 +14,7 @@ PKG_SITES:=		http://linuxtv.org/downloads/v4l-utils/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_CFLINE_V4L_UTILS:=  depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 
 include $(TOPDIR)/mk/package.mk

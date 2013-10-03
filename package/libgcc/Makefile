@@ -25,7 +25,11 @@ do-install:
 ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_LINUX_SH),y)
-	${CP} ${STAGING_TARGET_DIR}/lib/!m1/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+ifeq ($(ADK_TARGET_LIB_GLIBC),y)
+	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+else
+	${CP} ${STAGING_TARGET_DIR}/lib/!m4/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+endif
 else
 	${CP} ${STAGING_TARGET_DIR}/$(ADK_TARGET_LIBC_PATH)/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
