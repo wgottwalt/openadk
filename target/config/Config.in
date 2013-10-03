@@ -597,6 +597,7 @@ config ADK_TARGET_LIB_EGLIBC
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
+		ADK_LINUX_M68K || \
 		ADK_LINUX_MIPS || \
 		ADK_LINUX_MIPSEL || \
 		ADK_LINUX_MIPS64 || \
@@ -618,6 +619,7 @@ config ADK_TARGET_LIB_GLIBC
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
+		ADK_LINUX_M68K || \
 		ADK_LINUX_MIPS || \
 		ADK_LINUX_MIPSEL || \
 		ADK_LINUX_MIPS64 || \

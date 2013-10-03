@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.6.16
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		12c6785802813c2c5bf66e5c4c4e1d93
+PKG_VERSION:=		3.6.19
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		afe9c7c590f3093555cd6e870d2532e1
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
-PKG_BUILDDEP:=		gettext
-PKG_DEPENDS:=		libintl
+PKG_BUILDDEP:=		gettext-tiny util-linux
+PKG_DEPENDS:=		samba-lib libuuid
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
@@ -31,7 +31,7 @@ $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_PASSWD},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba -lintl
+TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \
