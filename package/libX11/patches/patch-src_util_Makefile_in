@@ -1,5 +1,5 @@
 --- libX11-1.5.0.orig/src/util/Makefile.in	2012-06-02 08:37:33.000000000 +0200
-+++ libX11-1.5.0/src/util/Makefile.in	2013-04-29 18:01:13.000000000 +0200
++++ libX11-1.5.0/src/util/Makefile.in	2013-10-04 09:47:19.000000000 +0200
 @@ -144,7 +144,7 @@ LD = @LD@
  LDFLAGS = @LDFLAGS_FOR_BUILD@
  LDFLAGS_FOR_BUILD = @LDFLAGS_FOR_BUILD@
@@ -9,15 +9,17 @@
  LIBTOOL = @LIBTOOL@
  LIB_MAN_DIR = @LIB_MAN_DIR@
  LIB_MAN_SUFFIX = @LIB_MAN_SUFFIX@
-@@ -266,7 +266,6 @@ top_build_prefix = @top_build_prefix@
+@@ -265,9 +265,6 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
- makekeys_CFLAGS = \
+-makekeys_CFLAGS = \
 -	$(X11_CFLAGS) \
- 	$(CWARNFLAGS)
+-	$(CWARNFLAGS)
  
  makekeys_CPPFLAGS = \
-@@ -355,18 +354,18 @@ distclean-compile:
+ 	-I$(top_srcdir)/include
+@@ -355,18 +352,18 @@ distclean-compile:
  @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
  
  makekeys-makekeys.o: makekeys.c
