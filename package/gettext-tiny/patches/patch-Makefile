@@ -1,0 +1,37 @@
+--- gettext-tiny-0.0.3.orig/Makefile	2013-06-30 06:48:42.000000000 +0200
++++ gettext-tiny-0.0.3/Makefile	2013-10-04 11:58:03.000000000 +0200
+@@ -1,4 +1,4 @@
+-prefix=/usr/local
++prefix=/usr
+ bindir=$(prefix)/bin
+ includedir=$(prefix)/include
+ libdir=$(prefix)/lib
+@@ -19,7 +19,7 @@ ALL_INCLUDES = $(HEADERS)
+ ALL_LIBS=libintl.a
+ ALL_TOOLS=msgfmt msgmerge xgettext
+ 
+-CFLAGS=-O0 -fPIC
++CFLAGS?=-O0 -fPIC
+ 
+ AR      ?= $(CROSS_COMPILE)ar
+ RANLIB  ?= $(CROSS_COMPILE)ranlib
+@@ -56,13 +56,16 @@ xgettext:
+ 	cp src/xgettext.sh ./xgettext
+ 
+ $(DESTDIR)$(libdir)/%.a: %.a
+-	install -D -m 755 $< $@
++	mkdir -p $(DESTDIR)$(libdir)
++	install -m 755 $< $@
+ 
+ $(DESTDIR)$(includedir)/%.h: include/%.h
+-	install -D -m 644 $< $@
++	mkdir -p $(DESTDIR)$(includedir)
++	install -m 644 $< $@
+ 
+ $(DESTDIR)$(bindir)/%: %
+-	install -D -m 755 $< $@
++	mkdir -p $(DESTDIR)$(bindir)
++	install -m 755 $< $@
+ 
+ .PHONY: all clean install
+ 

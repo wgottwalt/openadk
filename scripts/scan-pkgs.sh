@@ -73,6 +73,10 @@ if [[ -n $ADK_PACKAGE_GPSD ]]; then
 	NEED_PYTHON="$NEED_PYTHON gpsd"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBVPX ]]; then
+	NEED_YASM="$NEED_YASM libvpx"
+fi
+
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"

@@ -5,14 +5,14 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7ae163ac3196c79ec2f0904280078a45
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi sharp-zaurus ibm-x40 lemote-yeelong
+PKG_SYSTEM_DEPENDS:=	raspberry-pi sharp-zaurus ibm-x40 lemote-yeelong qemu-i686
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
@@ -35,6 +35,9 @@ ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
 ifeq ($(ADK_TARGET_SYSTEM_INTEL_ATOM),y)
+CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_I686),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_WRAP),y)

@@ -18,7 +18,8 @@ $(eval $(call PKG_template,LIBDAEMON,libdaemon,${PKG_VERSION}-${PKG_RELEASE},${P
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
-CONFIGURE_ARGS+=	--disable-lynx
+CONFIGURE_ARGS+=	--disable-lynx \
+			--disable-examples
 
 post-install:
 	${INSTALL_DIR} ${IDIR_LIBDAEMON}/usr/lib

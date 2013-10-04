@@ -11,7 +11,7 @@ PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
 PKG_DEPENDS+=		libpthread
-PKG_BUILDDEP:=		ncurses e2fsprogs
+PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny
 PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.11/
 PKG_NOPARALLEL:=	1
@@ -54,7 +54,6 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_printf_positional=yes \
 			ac_cv_file__etc_environment=no \
 			ac_cv_file__etc_TIMEZONE=no
-TARGET_LDFLAGS+=	-lintl
 
 post-extract:
 	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
