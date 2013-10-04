@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnotify
 PKG_VERSION:=		0.4.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		472e2c1f808848365572a9b024d9e8f5
 PKG_DESCR:=		notify library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		gtk+
+PKG_BUILDDEP:=		gtk+ dbus-glib
 PKG_URL:=		http://www.galago-project.org/
 PKG_SITES:=		http://www.galago-project.org/files/releases/source/libnotify/
 PKG_NEED_CXX:=		1
