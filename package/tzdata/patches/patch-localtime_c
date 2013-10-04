@@ -1,0 +1,10 @@
+--- w-tzdata-2013d-1.orig/localtime.c	2013-05-28 06:26:18.000000000 +0200
++++ w-tzdata-2013d-1/localtime.c	2013-10-04 11:35:35.000000000 +0200
+@@ -10,6 +10,7 @@
+ 
+ /*LINTLIBRARY*/
+ 
++#include <stdint.h>
+ #include "private.h"
+ #include "tzfile.h"
+ #include "fcntl.h"

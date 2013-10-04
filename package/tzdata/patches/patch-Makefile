@@ -1,5 +1,5 @@
 --- w-tzdata-2013d-1.orig/Makefile	2013-07-05 16:38:01.000000000 +0200
-+++ w-tzdata-2013d-1/Makefile	2013-08-14 12:58:49.000000000 +0200
++++ w-tzdata-2013d-1/Makefile	2013-10-04 11:29:22.000000000 +0200
 @@ -231,7 +231,7 @@ GCC_DEBUG_FLAGS = -Dlint -g3 -O3 -fno-co
  # before the first Monday in January when a "%V" format is used and January 1
  # falls on a Friday, Saturday, or Sunday.
@@ -18,7 +18,7 @@
  
  # The name of a Posix-compliant `awk' on your system.
  AWK=		awk
-@@ -330,7 +330,7 @@ ENCHILADA=	$(COMMON) $(DOCS) $(SOURCES)
+@@ -330,7 +330,7 @@ ENCHILADA=	$(COMMON) $(DOCS) $(SOURCES) 
  
  SHELL=		/bin/sh
  
