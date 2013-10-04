@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		easy-rsa
-PKG_VERSION:=		2.0
+PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0937fb2f91d534d4fb961e047f714946
+PKG_MD5SUM:=		a63b06c9ad67a5d55c41b5fea553c192
 PKG_DESCR:=		openssl ca scripts
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		openssl-util
