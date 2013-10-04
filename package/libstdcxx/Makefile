@@ -8,7 +8,11 @@ else
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
 include ${TOPDIR}/toolchain/eglibc/Makefile.inc
 else
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+include ${TOPDIR}/toolchain/musl/Makefile.inc
+else
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+endif
 endif
 endif
 
