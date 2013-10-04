@@ -8,7 +8,11 @@ else
 ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
 include ${TOPDIR}/toolchain/eglibc/Makefile.inc
 else
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+include ${TOPDIR}/toolchain/musl/Makefile.inc
+else
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+endif
 endif
 endif
 
@@ -35,7 +39,7 @@ else
 	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so.6)
 	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so)
 	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.17 libstdc++.so)
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.17 ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
 
