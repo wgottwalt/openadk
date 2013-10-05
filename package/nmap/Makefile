@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
 PKG_VERSION:=		6.40
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c0e2f3370e1fb97fb53185b15aa22aff
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
@@ -26,6 +26,7 @@ LIBRARIES+=-lssp -lssp_nonshared
 endif
 
 TARGET_CPPFLAGS+=	-DNOLUA
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
