@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
 PKG_VERSION:=		2.0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		660516de4b5b1e110c12dae414619e0f
 PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		firewall
@@ -42,6 +42,7 @@ $(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_PGSQL},${PKGSD_ULOGD_MOD_PGSQL},${PKG_SECTION}))
 $(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_SQLITE},${PKGSD_ULOGD_MOD_SQLITE},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_CFLAGS+=		-fPIC
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
