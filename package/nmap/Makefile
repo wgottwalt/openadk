@@ -4,17 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
-PKG_VERSION:=		6.25
+PKG_VERSION:=		6.40
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fcc80f94ff3adcb11eedf91092ea6f5e
+PKG_MD5SUM:=		c0e2f3370e1fb97fb53185b15aa22aff
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
-PKG_DEPENDS:=		libdnet libpcap libpcre
+PKG_DEPENDS:=		libdnet libpcap libpcre libstdcxx
 PKG_BUILDDEP:=		libdnet libpcap pcre
 PKG_URL:=		http://nmap.org/
 PKG_SITES:=		http://download.insecure.org/nmap/dist/
 PKG_NEED_CXX:=		1
-PKG_CXX:=		NMAP
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -22,17 +21,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc -lgcc_s
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
 
 TARGET_CPPFLAGS+=	-DNOLUA
-ifeq ($(ADK_COMPILE_NMAP_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -fno-rtti -nostdinc++ \
-			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
-			LIBS="${LIBRARIES}"
-endif
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
