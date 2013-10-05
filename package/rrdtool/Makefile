@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.4.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dbe59386db97fd2f2216729facd74ca8
 PKG_DESCR:=		Round Robin Database (RRD) management library
 PKG_SECTION:=		libs
@@ -36,7 +36,7 @@ CONFIGURE_ARGS+=	--enable-rrdcgi \
 			--disable-tcl \
 			--disable-python
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/freetype2
-TARGET_LDFLAGS+=	-lglib-2.0
+TARGET_LDFLAGS+=	-lglib-2.0 -lm
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 rrdtool-install:
