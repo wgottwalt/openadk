@@ -443,10 +443,12 @@ if [[ -n $NEED_FLEX ]]; then
 	fi
 fi
 
-if [[ -n $NEED_YASM ]]; then
-	if ! which yasm >/dev/null 2>&1; then
-		echo >&2 You need yasm to build $NEED_YASM
-		out=1
+if [[ -n $ADK_LINUX_X86 ]]; then
+	if [[ -n $NEED_YASM ]]; then
+		if ! which yasm >/dev/null 2>&1; then
+			echo >&2 You need yasm to build $NEED_YASM
+			out=1
+		fi
 	fi
 fi
 
