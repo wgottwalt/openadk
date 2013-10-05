@@ -4,14 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gettext-tiny
-PKG_VERSION:=		0.1
+PKG_VERSION:=		0.0.3
 PKG_RELEASE:=		1
+PKG_MD5SUM:=		3af6fd8a9042603b61f634b1c6f49e7e
 PKG_DESCR:=		Gettext stub and replacement
 PKG_SECTION:=		libs
 PKG_URL:=		https://github.com/rofl0r/gettext-tiny
+PKG_SITES:=		http://ftp.barfooze.de/pub/sabotage/tarballs/
 
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
-NO_DISTFILES:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 

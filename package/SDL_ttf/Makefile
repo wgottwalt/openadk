@@ -10,7 +10,7 @@ PKG_MD5SUM:=		814e6e17e8879254208d23b3b7e0354b
 PKG_DESCR:=		TrueType fonts in your SDL applications
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libsdl libfreetype
-PKG_BUILDDEP:=		sdl freetype
+PKG_BUILDDEP:=		sdl freetype gettext-tiny
 PKG_URL:=		http://www.libsdl.org/projects/SDL_ttf/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_ttf/release/
 
@@ -22,8 +22,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_TTF,libsdl-ttf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBSDL_TTF_DEV,libsdl-ttf-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSDL_TTF_DEV},${PKGSC_LIBSDL_TTF_DEV}))
-
-TARGET_LDFLAGS+=	-lintl
 
 libsdl-ttf-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_TTF)/usr/lib

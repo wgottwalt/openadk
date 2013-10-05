@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e4db89a2a403ff4c47d66ac66fad1f43
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
-PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext gtk+ dbus
+PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext-tiny gtk+ dbus
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 PKG_NEED_CXX:=		1
@@ -27,7 +27,6 @@ $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAVAHI},${PKGSC_LIBAVAHI}))
 
-TARGET_LDFLAGS+=	-lintl
 CONFIGURE_ARGS+=	--enable-glib \
 			--enable-gtk2 \
 			--enable-libdaemon \

@@ -73,6 +73,10 @@ if [[ -n $ADK_PACKAGE_GPSD ]]; then
 	NEED_PYTHON="$NEED_PYTHON gpsd"
 fi
 
+if [[ -n $ADK_PACKAGE_LIBVPX ]]; then
+	NEED_YASM="$NEED_YASM libvpx"
+fi
+
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
@@ -439,10 +443,12 @@ if [[ -n $NEED_FLEX ]]; then
 	fi
 fi
 
-if [[ -n $NEED_YASM ]]; then
-	if ! which yasm >/dev/null 2>&1; then
-		echo >&2 You need yasm to build $NEED_YASM
-		out=1
+if [[ -n $ADK_LINUX_X86 ]]; then
+	if [[ -n $NEED_YASM ]]; then
+		if ! which yasm >/dev/null 2>&1; then
+			echo >&2 You need yasm to build $NEED_YASM
+			out=1
+		fi
 	fi
 fi
 

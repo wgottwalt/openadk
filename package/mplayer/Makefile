@@ -15,14 +15,14 @@ PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
 PKG_DEPENDS+=		libxscrnsaver libtheora libxvid libvpx
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext jpeg libtheora
-PKG_BUILDDEP+=		xvidcore libvpx
+PKG_BUILDDEP+=		xvidcore libvpx gettext-tiny
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
 
 DISTFILES:=		MPlayer-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
-PKG_ARCH_DEPENDS:=	x86 mips arm
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
 
 PKG_FLAVOURS_MPLAYER:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -36,7 +36,8 @@ $(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${P
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 # gcc 4.5 produces internal compiler error with -Os
-TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+#TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
+TARGET_CFLAGS+=		-D_POSIX_SOURCE -D_GNU_SOURCE
 
 CONFIG_STYLE:=		minimal
 FAKE_FLAGS+=		INSTALLSTRIP=''
@@ -147,7 +148,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			${CONFIGURE_DIRECTFB}
 
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
-TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis -lintl
+TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
