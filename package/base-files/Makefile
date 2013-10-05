@@ -66,7 +66,7 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
 	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
 ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
-	$(SED) 's#ttyS#nfcon0#g' $(IDIR_BASE_FILES)/etc/inittab
+	$(SED) 's#ttyS#nfcon#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
