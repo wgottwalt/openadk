@@ -16,6 +16,7 @@ PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_LIBC_DEPENDS:=      eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
