@@ -51,7 +51,11 @@ imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
 	@echo "If you just want to update, use adkupdate."
 endif
 ifeq ($(ADK_TARGET_FS),archive)
+ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
+imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
+else
 imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
+endif
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
