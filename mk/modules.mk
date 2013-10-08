@@ -740,7 +740,6 @@ $(eval $(call KMOD_template,BLK_DEV_NBD,blk-dev-nbd,\
 ,20))
 
 $(eval $(call KMOD_template,SCSI,scsi,\
-    $(MODULES_DIR)/kernel/drivers/scsi/scsi_wait_scan \
     $(MODULES_DIR)/kernel/drivers/scsi/scsi_mod \
 ,20))
 
