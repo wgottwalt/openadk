@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		https://github.com/asalkeld/libqb/wiki#wiki-Releases
 PKG_SITES:=		https://fedorahosted.org/releases/q/u/quarterback/
 
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBQB,libqb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
