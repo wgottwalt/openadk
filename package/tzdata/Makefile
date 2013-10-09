@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tzdata
 PKG_VERSION:=		2013d
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		65b6818162230fc02f86f293376c73df 4616a9560270f180eeb9a08540636890
 PKG_DESCR:=		Timezone data (/usr/share/zoneinfo)
 PKG_SECTION:=		utils
@@ -39,7 +39,7 @@ ALL_TARGET:=		ALL
 INSTALL_TARGET:=	INSTALL
 
 post-install:
-	$(INSTALL_DIR) $(IDIR_TZDATA)/usr/share
+	$(INSTALL_DIR) $(IDIR_TZDATA)/usr/share $(IDIR_TZDATA)/etc
 	$(CP) $(WRKINST)/usr/share/zoneinfo $(IDIR_TZDATA)/usr/share
 	${INSTALL_DIR} ${IDIR_ZDUMP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/etc/zdump ${IDIR_ZDUMP}/usr/sbin/
@@ -47,5 +47,16 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/etc/zic ${IDIR_ZIC}/usr/sbin/
 	${INSTALL_DIR} ${IDIR_DATE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/bin/date ${IDIR_DATE}/usr/bin/
+	tz=; cd $(IDIR_TZDATA)/usr/share/zoneinfo || exit 1; \
+		for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+			test -s "$$f" || continue; \
+			tz=$$f; \
+	done; if test x"$$tz" = x""; then \
+		echo >&2 Error during timezone installation; \
+		exit 1; \
+	else \
+		ln -sf "../usr/share/zoneinfo/$$tz" \
+		$(IDIR_TZDATA)/etc/localtime; \
+	fi	
 
 include ${TOPDIR}/mk/pkg-bottom.mk
