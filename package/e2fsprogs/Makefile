@@ -58,7 +58,8 @@ $(eval $(call PKG_template,MKE2FS,mke2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_M
 $(eval $(call PKG_template,E2FSCK,e2fsck,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_E2FSCK),${PKGSD_E2FSCK},${PKGSC_E2FSCK}))
 
 CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath \
-			--disable-libuuid --disable-libblkid 
+			--disable-libuuid --disable-libblkid \
+			--disable-defrag
 INSTALL_TARGET+=	install-libs
 TARGET_LDFLAGS+=	-lpthread
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_DIR)/usr/include
