@@ -16,12 +16,13 @@ PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
+PKG_DEPENDS+=		omxplayer libusb-compat libbluray
 PKG_BUILDDEP:=		boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad jpeg libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
-PKG_BUILDDEP+=		bcm2835-vc libgpg-error dbus
+PKG_BUILDDEP+=		bcm2835-vc libgpg-error dbus libusb-compat libbluray
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
@@ -45,6 +46,8 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-ssh \
 			--disable-samba \
 			--disable-mysql \
+			--enable-libusb \
+			--enable-libbluray \
 			--enable-external-libraries \
 			--enable-player=omxplayer \
 			--enable-gles \
