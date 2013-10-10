@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
-PKG_VERSION:=		2.8.7
+PKG_VERSION:=		2.10.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b3ff47a38db920fc15bb207f42da53db
+PKG_MD5SUM:=		109e753aecafe487207b425dd46e6ee9
 PKG_DESCR:=		Postfix MTA
 PKG_SECTION:=		mail
 PKG_BUILDDEP:=		tinycdb
@@ -25,7 +25,7 @@ ALL_TARGET:=
 INSTALL_STYLE:=		manual
 
 do-configure:
-	(cd $(WRKBUILD) && make -f Makefile.init makefiles "CCARGS=-DHAS_CDB -I$(STAGING_DIR)/usr/include" "AUXLIBS=$(STAGING_DIR)/usr/lib/libcdb.a")
+	(cd $(WRKBUILD) && make -f Makefile.init makefiles "CCARGS=-DNO_PCRE -DNO_NIS -DNO_DB -DHAS_CDB -I$(STAGING_DIR)/usr/include" "AUXLIBS=$(STAGING_DIR)/usr/lib/libcdb.a")
 
 postfix-install:
 	$(INSTALL_DIR) $(IDIR_POSTFIX)/etc/postfix
