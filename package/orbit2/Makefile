@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ORBit2
 PKG_VERSION:=		2.14.19
 PKG_EXTRAVER:=		2.14
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		87c69c56c6d0bdafa4de5e18ae115cc9
 PKG_DESCR:=		a CORBA 2.4-compliant Object Request Broker
 PKG_SECTION:=		libs
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libIDL
 PKG_URL:=		http://projects.gnome.org/ORBit2/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 
-PKG_ARCH_DEPENDS:=	!arm !cris
+PKG_ARCH_DEPENDS:=	!cris
 
 PKG_SUBPKGS:=		ORBIT2 ORBIT2_DEV
 PKGSD_ORBIT2_DEV:=	orbit2 headers
@@ -26,7 +26,6 @@ $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,ORBIT2_DEV,orbit2-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ORBIT2_DEV},${PKGSC_ORBIT2_DEV}))
 
 CFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --cflags)
-CFLAGS_FOR_BUILD+=	-I/usr/local/include -I/usr/include
 LDFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --libs)
 LDFLAGS_FOR_BUILD+=	-lgmodule-2.0
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \

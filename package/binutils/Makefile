@@ -13,6 +13,7 @@ PKGSD_LIBBFD:=		Binary File Descriptor library
 PKGSC_LIBBFD:=		libs
 
 PKG_HOST_DEPENDS:=      !cygwin
+PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
