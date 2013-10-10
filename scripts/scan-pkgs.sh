@@ -77,6 +77,10 @@ if [[ -n $ADK_PACKAGE_LIBVPX ]]; then
 	NEED_YASM="$NEED_YASM libvpx"
 fi
 
+if [[ -n $ADK_COMPILE_ORBIT2 ]]; then
+	NEED_LIBIDL="$NEED_LIBIDL orbit2"
+fi
+
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
