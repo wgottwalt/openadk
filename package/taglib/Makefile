@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://taglib.github.com/
-PKG_SITES:=		http://taglib.github.io/releases/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 include $(TOPDIR)/mk/package.mk
 
