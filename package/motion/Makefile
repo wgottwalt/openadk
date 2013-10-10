@@ -10,8 +10,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6b8730c875e0f550c1abdb647027d8e1
 PKG_DESCR:=		Webcam motion sensing and logging
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libjpeg libpthread
-PKG_BUILDDEP:=		jpeg
+PKG_DEPENDS:=		libjpeg libpthread libsdl
+PKG_BUILDDEP:=		jpeg sdl
 PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=motion/}
 
