@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xf86-input-evdev
 PKG_VERSION:=		2.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		95d35eea1dad1c4828d0027f3be5325c
+PKG_MD5SUM:=		2d3f7111b8284cec81884023c4bb4a11
 PKG_DESCR:=		X11 driver for Event driver
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server kmod-input-evdev
