@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
 PKG_VERSION:=		3.10.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		45fb5427fc723a0001c72b92c931ba02
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
