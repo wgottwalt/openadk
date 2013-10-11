@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
-PKG_VERSION:=		3.14.1
-PKG_RELEASE:=		1
+PKG_VERSION:=		3.15.2
+PKG_RELEASE:=		2
 PKG_MAJ_VERSION:=	3
-PKG_MIN_VERSION:=	14
-PKG_PATCH_VERSION:=	1
-PKG_MD5SUM:=		f6f3a942d1eba3e26aa0382a5b5461d9
+PKG_MIN_VERSION:=	15
+PKG_PATCH_VERSION:=	2
+PKG_MD5SUM:=		154223568f9734c76c164b46c774450c
 PKG_DESCR:=		Network Security Services (NSS) library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		nspr zlib sqlite
@@ -21,13 +21,14 @@ PKG_NOPARALLEL:=	1
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	!cris
 
-WRKSRC=			${WRKDIST}/mozilla/security/nss
+WRKSRC=			${WRKDIST}/nss
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NSS,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 ifneq ($(ADK_LINUX_64),)
 ifeq ($(ADK_LINUX_MIPS),y)
@@ -46,14 +47,14 @@ XAKE_FLAGS+=		ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
 XAKE_FLAGS+=		NSS_DISABLE_DBM=1 OS_TEST=${CPU_ARCH} OS_TARGET=Linux OS_RELEASE=2.6 OS_ARCH=Linux
 XAKE_FLAGS+=		ARTOOL="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib" NSS_USE_SYSTEM_SQLITE=1
 XAKE_FLAGS+=		NSS_USE_SYSTEM_ZLIB=1
-ALL_TARGET:=		build_coreconf all
+ALL_TARGET:=		all
 
-post-install:
+do-install:
 	$(INSTALL_DIR) $(IDIR_NSS)/usr/lib
-	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{ssl3,smime3,nss3,nssutil3,softokn3}.so \
+	${INSTALL_DATA} ${WRKDIST}/dist/lib/lib{nsssysinit,nssckbi,freebl3,ssl3,smime3,nss3,nssutil3,softokn3}.so \
 		$(IDIR_NSS)/usr/lib
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
-	${INSTALL_DATA} ${WRKDIST}/mozilla/dist/public/nss/* \
+	${INSTALL_DATA} ${WRKDIST}/dist/public/nss/* \
 		${STAGING_TARGET_DIR}/usr/include/nss
 	# needed for firefox and corosync
 	${INSTALL_DIR} ${WRKINST}/usr/bin

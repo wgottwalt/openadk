@@ -4,17 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.7.14
+PKG_VERSION:=		3.8.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6464d429b1396a8db35864e791673b65
+PKG_MD5SUM:=		6d6cc639a4da04fbbdda7b1a1a01b386
 PKG_DESCR:=		embeddable SQL database (cli)
 PKG_SECTION:=		db
 PKG_BUILDDEP:=		ncurses readline
 PKG_URL:=		http://www.sqlite.org/
-PKG_SITES:=		http://www.sqlite.org/
+PKG_SITES:=		http://www.sqlite.org/2013/
 
-DISTFILES:=		sqlite-autoconf-3071400.tar.gz
-WRKDIST=		${WRKDIR}/sqlite-autoconf-3071400
+DISTFILES:=		sqlite-autoconf-3080002.tar.gz
+WRKDIST=		${WRKDIR}/sqlite-autoconf-3080002
 
 PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE LIBSQLITE_DEV
 PKGSD_LIBSQLITE:=	sqlite library

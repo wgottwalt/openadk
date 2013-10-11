@@ -4,17 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		5.0.1
+PKG_VERSION:=		24.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6d1f43e402cec84459a3d7f950bd5192
+PKG_MD5SUM:=		06a4c0fe8d3a979aea2fce8d0fdbf328
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libpthread alsa-lib dbus-glib glib libgtk libpng libtiff libxcursor libffi
-PKG_DEPENDS+=		nspr nss libjpeg libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
-PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf libintl librt libgcc
-PKG_DEPENDS+=		harfbuzz
-PKG_BUILDDEP:=		alsa-lib dbus-glib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
-PKG_BUILDDEP+=		nspr nss jpeg libXt fontconfig sqlite atk libpng hicolor-icon-theme
+PKG_DEPENDS:=		libpthread alsa-lib glib libgtk libpng libtiff libxcursor libffi
+PKG_DEPENDS+=		nspr nss libjpeg-turbo libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
+PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf librt libgcc
+PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates
+PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
+PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
+PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -31,6 +32,13 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_DEBUG),y)
+CONFIGURE_ARGS+=	--enable-debug --enable-logging
+else
+CONFIGURE_ARGS+=	--disable-debug --disable-logging
+endif
+
+
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_CC="${CC_FOR_BUILD}" \
 			HOST_CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
@@ -45,27 +53,36 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_sqlite_threadsafe=yes \
 			ac_cv_sqlite_enable_fts3=yes \
-			ac_cv_sqlite_enable_unlock_notify=yes \
-			ac_cv_thread_keyword=no \
-			ac_cv_sizeof_int_p=4
+			ac_cv_sqlite_enable_unlock_notify=yes
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-official-branding \
 			--with-system-zlib \
+			--with-system-bz2 \
+			--with-system-png \
 			--with-system-cairo \
 			--with-system-pixman \
 			--with-system-jpeg \
 			--with-system-nss \
 			--with-system-nspr \
+			--with-system-pango \
+			--with-system-libvpx \
+			--enable-system-ffi \
 			--enable-system-sqlite \
+			--disable-libnotify \
 			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
+			--enable-chrome-format=jar \
+			--enable-necko-protocols=all \
 			--enable-libxul \
-			--disable-libnotify \
+			--enable-alsa \
+			--disable-pulseaudio \
+			--disable-gstreamer \
+			--disable-gio \
+			--disable-gconf \
 			--disable-accessibility \
 			--disable-smil \
 			--disable-dbus \
-			--disable-debug \
-			--disable-logging \
+			--disable-gamepad \
 			--disable-strip \
 			--disable-install-strip \
 			--disable-tests \
@@ -73,6 +90,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-static \
 			--disable-gnomeui \
 			--disable-gnomevfs \
+			--disable-gstreamer \
 			--disable-optimize \
 			--disable-necko-wifi \
 			--disable-svg \
@@ -80,13 +98,17 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-jemalloc \
 			--disable-crashreporter \
 			--disable-updater \
-			--disable-libjpeg-turbo \
 			--disable-xpcom-fastload \
-			--disable-elf-hack
+			--disable-url-classifier \
+			--disable-safe-browsing \
+			--disable-elf-hack 
 
 TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
+
+pre-build:
+	-mkdir ${WRKBUILD}/js/src/.deps
 
 firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin

@@ -22,8 +22,6 @@ $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_STATIC,$(PKG_NAME)-static,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-#TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
-#TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 CONFIG_STYLE:=		manual
@@ -55,7 +53,8 @@ ifeq ($(ADK_LOCALES),y)
 endif
 endif
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
-	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/{gai,nscd,nsswitch}.conf ${IDIR_GLIBC}/etc
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
+	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_GLIBC}/etc
 
 glibc-static-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_STATIC)/usr/lib

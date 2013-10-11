@@ -1,5 +1,5 @@
 --- xbmc-12.2.orig/xbmc/Application.cpp	2013-05-03 07:57:41.000000000 +0200
-+++ xbmc-12.2/xbmc/Application.cpp	2013-10-08 13:55:01.000000000 +0200
++++ xbmc-12.2/xbmc/Application.cpp	2013-10-10 18:43:17.000000000 +0200
 @@ -615,7 +615,7 @@ bool CApplication::Create()
  
    if (!CLog::Init(CSpecialProtocol::TranslatePath(g_settings.m_logFolder).c_str()))
@@ -35,7 +35,7 @@
 -    CStdString strTempPath = userHome;
 -    strTempPath = URIUtils::AddFileToFolder(strTempPath, ".xbmc/temp");
 +    CStdString strTempPath = "/tmp";
-+    strTempPath = URIUtils::AddFileToFolder(strTempPath, "/.xbmc/temp");
++    strTempPath = URIUtils::AddFileToFolder(strTempPath, "/xbmc");
      if (getenv("XBMC_TEMP"))
        strTempPath = getenv("XBMC_TEMP");
      CSpecialProtocol::SetTempPath(strTempPath);

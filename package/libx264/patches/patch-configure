@@ -1,0 +1,23 @@
+--- libx264-1.0.orig/configure	2013-10-10 22:45:04.000000000 +0200
++++ libx264-1.0/configure	2013-10-11 11:33:39.000000000 +0200
+@@ -985,9 +985,9 @@ if [ "$debug" = "yes" ]; then
+ elif [ $ARCH = ARM ]; then
+     # arm-gcc-4.2 produces incorrect output with -ffast-math
+     # and it doesn't save any speed anyway on 4.4, so disable it
+-    CFLAGS="-O3 -fno-fast-math $CFLAGS"
++    CFLAGS="-fno-fast-math $CFLAGS"
+ else
+-    CFLAGS="-O3 -ffast-math $CFLAGS"
++    CFLAGS="-ffast-math $CFLAGS"
+ fi
+ 
+ if cc_check '' -fno-tree-vectorize ; then
+@@ -1136,7 +1136,7 @@ LIBX264=$LIBX264
+ AR=$AR
+ RANLIB=$RANLIB
+ STRIP=$STRIP
+-AS=$AS
++AS=$CC
+ ASFLAGS=$ASFLAGS
+ RC=$RC
+ RCFLAGS=$RCFLAGS
