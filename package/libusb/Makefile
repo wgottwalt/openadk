@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libusbx
 PKG_VERSION:=		1.0.16
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7f5715d624cd6c26b30a317eb6c2fe5e
 PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
@@ -24,8 +24,8 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBUSB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBUSB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_DEV},${PKGSC_LIBUSB_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBUSB,libusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBUSB_DEV,libusb-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUSB_DEV},${PKGSC_LIBUSB_DEV},${PKG_OPTS}))
 
 TARGET_CPPFLAGS=	-DTIMESPEC_TO_TIMEVAL=
 CONFIGURE_ARGS+=	--disable-udev

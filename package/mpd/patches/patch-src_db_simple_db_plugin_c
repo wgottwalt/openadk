@@ -1,0 +1,11 @@
+--- mpd-0.17.5.orig/src/db/simple_db_plugin.c	2013-08-01 09:15:41.000000000 +0200
++++ mpd-0.17.5/src/db/simple_db_plugin.c	2013-10-08 15:28:10.000000000 +0200
+@@ -338,6 +338,8 @@ simple_db_save(struct db *_db, GError **
+ 
+ 	fclose(fp);
+ 
++	g_message("Successfully written database to file: %s", db->path);	
++
+ 	struct stat st;
+ 	if (stat(db->path, &st) == 0)
+ 		db->mtime = st.st_mtime;
