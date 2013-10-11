@@ -8,10 +8,10 @@ NSS_MINOR_VERSION = `grep "NSS_VMINOR" ../lib/nss/nss.h | awk '{print $$3}'`
 NSS_PATCH_VERSION = `grep "NSS_VPATCH" ../lib/nss/nss.h | awk '{print $$3}'`
 PREFIX = /usr
 
-all: install libs
+all: libs
 
 export:
-install:
+libs:
 	# Create the nss.pc file
 	mkdir -p $(DIST)/lib/pkgconfig
 	sed -e "s,@prefix@,$(PREFIX)," \
@@ -35,7 +35,7 @@ install:
 	chmod 0755 nss-config
 	cp nss-config $(DIST)/bin
 
-libs:
+install:
 
 dummy: all export install libs
 
