@@ -4,14 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		omxplayer
-PKG_VERSION:=		0.1
+# actually 5777879e9ee26f3e7c4e8746e07824ade629f152 from 4.10.2013
+PKG_VERSION:=		0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bb0bcdf1de3aec56d3e0746b91915d90
+PKG_MD5SUM:=		c1fddbafb837fe6fa50270d7d1ece6cb
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libffmpeg boost bcm2835-vc libfreetype libpcre
-PKG_DEPENDS+=		librt zlib libpthread libstdcxx libgcc
-PKG_BUILDDEP:=		ffmpeg boost bcm2835-vc freetype pcre
+PKG_DEPENDS+=		librt zlib libpthread libstdcxx libgcc dbus
+PKG_BUILDDEP:=		ffmpeg boost bcm2835-vc freetype pcre dbus
 PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -26,6 +27,7 @@ CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_54 \
 			-I$(STAGING_DIR)/usr/include/freetype2 \
+			-I$(STAGING_DIR)/usr/include/dbus-1.0 \
 			-I$(STAGING_DIR)/opt/vc/include \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
