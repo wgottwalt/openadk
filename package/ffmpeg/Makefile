@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		2.0.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dd71a1baedb2daa3e4d21e0651daa918
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
@@ -31,7 +31,14 @@ PKGSC_FFPROBE:=		multimedia
 PKGSS_FFPROBE:=		libffmpeg
 
 PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
-PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS
+PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS WITH_X264
+
+PKGFD_WITH_X264:=	with X264 decoding support
+PKGFS_WITH_X264:=	libx264
+PKGFB_WITH_X264:=	libx264
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_X264),y)
+PKG_FDEPENDS+=		libx264
+endif
 
 PKGFD_WITH_AAC:=	with AAC encoding support
 PKGFS_WITH_AAC:=	libfaac
@@ -130,6 +137,9 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-postproc \
 			${CONFIGURE_CPU_OPTS}
 
+ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_X264),y)
+CONFIGURE_ARGS+=	--enable-libx264
+endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
 CONFIGURE_ARGS+=	--enable-libfaac
 endif
