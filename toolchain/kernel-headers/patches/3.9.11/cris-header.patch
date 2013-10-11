@@ -1,0 +1,27 @@
+diff -Nur linux-3.9.11.orig/arch/cris/include/asm/Kbuild linux-3.9.11/arch/cris/include/asm/Kbuild
+--- linux-3.9.11.orig/arch/cris/include/asm/Kbuild	2013-07-21 02:16:17.000000000 +0200
++++ linux-3.9.11/arch/cris/include/asm/Kbuild	2013-10-11 21:26:30.000000000 +0200
+@@ -1,7 +1,6 @@
+ 
+-header-y += arch-v10/
+-header-y += arch-v32/
+-
++header-y += ../arch-v10/arch/
++header-y += ../arch-v32/arch/
+ 
+ generic-y += clkdev.h
+ generic-y += exec.h
+diff -Nur linux-3.9.11.orig/arch/cris/include/uapi/asm/Kbuild linux-3.9.11/arch/cris/include/uapi/asm/Kbuild
+--- linux-3.9.11.orig/arch/cris/include/uapi/asm/Kbuild	2013-07-21 02:16:17.000000000 +0200
++++ linux-3.9.11/arch/cris/include/uapi/asm/Kbuild	2013-10-11 21:32:52.000000000 +0200
+@@ -1,8 +1,8 @@
+ # UAPI Header export list
+ include include/uapi/asm-generic/Kbuild.asm
+ 
+-header-y += arch-v10/
+-header-y += arch-v32/
++header-y += ../arch-v10/arch
++header-y += ../arch-v32/arch
+ header-y += auxvec.h
+ header-y += bitsperlong.h
+ header-y += byteorder.h
