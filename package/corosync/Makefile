@@ -15,6 +15,7 @@ PKG_URL:=		http://www.corosync.org/
 PKG_SITES:=		http://corosync.org/download/
 
 PKG_CFLINE_COROSYNC:=	select ADK_KERNEL_IP_MULTICAST
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 

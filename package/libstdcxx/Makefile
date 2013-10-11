@@ -36,10 +36,10 @@ do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so.6)
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.17 libstdc++.so)
-	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.17 libstdc++.so)
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.17 ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.1? libstdc++.so.6)
+	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.1? libstdc++.so)
+	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.1? libstdc++.so)
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.1? ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
 
