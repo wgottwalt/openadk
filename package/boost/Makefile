@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		gettext-tiny
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 

@@ -24,16 +24,6 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, eglibc is already build in toolchain directory
 do-install:
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-	for abi in $(TABI); do \
-		${INSTALL_DIR} $(IDIR_EGLIBC)/lib$${abi/*:/} $(IDIR_EGLIBC)/usr/lib$${abi/*:/} ; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/lib$${abi/*:/} ; \
-		-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file.so* $(IDIR_EGLIBC)/lib$${abi/*:/}; \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/lib$${abi/*:/}; \
-		done ; \
-	done
-else
 	${INSTALL_DIR} $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH) \
 	    $(IDIR_EGLIBC)/usr/lib $(IDIR_EGLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH)
@@ -45,10 +35,9 @@ else
 ifeq ($(ADK_LOCALES),y)
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
 endif
-endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/etc 
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
-	${INSTALL_DATA} ./files/nssswitch.conf ${IDIR_EGLIBC}/etc
+	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_EGLIBC}/etc
 
 eglibc-static-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib

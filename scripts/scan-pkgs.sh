@@ -179,6 +179,10 @@ if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GETTEXT="$NEED_GETTEXT glib"
 fi
 
+if [[ -n $ADK_PACKAGE_BCM2835_VC ]]; then
+	NEED_CMAKE="$NEED_CMAKE bcm2835-vc"
+fi
+
 if [[ -n $ADK_PACKAGE_YAJL ]]; then
 	NEED_RUBY="$NEED_RUBY yajl"
 	NEED_CMAKE="$NEED_CMAKE yajl"

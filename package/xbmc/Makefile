@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		12.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		489f3877decae4e265ece54f9eaef0ba
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
@@ -55,6 +55,9 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-joystick \
 			--disable-x11 \
 			--with-platform=raspberry-pi
+
+post-extract:
+	(cd $(WRKDIR) && ${BASH} $(TOPDIR)/scripts/xbmc-fix.sh)
 
 xbmc-install:
 	$(INSTALL_DIR) $(IDIR_XBMC)/usr/lib/xbmc
