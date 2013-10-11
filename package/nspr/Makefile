@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nspr
-PKG_VERSION:=		4.9.5
+PKG_VERSION:=		4.9.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b6ccfa8fcbbeb17ebeb19a3edff612bd
+PKG_MD5SUM:=		62b1e9d376d503d972f90c3c0031d879
 PKG_DESCR:=		Netscape Portable Runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.mozilla.org/projects/nspr/

@@ -47,7 +47,8 @@ ifeq ($(ADK_LOCALES),y)
 endif
 endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/etc 
-	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/{gai,nscd,nsswitch}.conf ${IDIR_EGLIBC}/etc
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
+	${INSTALL_DATA} ./files/nssswitch.conf ${IDIR_EGLIBC}/etc
 
 eglibc-static-install:
 	${INSTALL_DIR} $(IDIR_EGLIBC_STATIC)/usr/lib
