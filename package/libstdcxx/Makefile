@@ -20,6 +20,11 @@ PKG_NAME:=		libstdcxx
 PKG_DESCR:=		C++ support library
 PKG_SECTION:=		libs
 PKG_NEED_CXX:=		1
+ifeq ($(ADK_LINUX_AVR32),y)
+PKG_SUBVER:=		14
+else
+PKG_SUBVER:=		17
+endif
 
 NO_DISTFILES:=		1
 
@@ -36,10 +41,10 @@ do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.1? libstdc++.so.6)
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.1? libstdc++.so)
-	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.1? libstdc++.so)
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.1? ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.${PKG_SUBVER} libstdc++.so.6)
+	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.${PKG_SUBVER} libstdc++.so)
+	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.${PKG_SUBVER} libstdc++.so)
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.${PKG_SUBVER} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
 
