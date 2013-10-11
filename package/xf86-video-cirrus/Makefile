@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xf86-video-cirrus
 PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c63a29917c48d0c317445991fc36d09a
+PKG_MD5SUM:=		439e3f5e29161f503bcfe23229dc7b17
 PKG_DESCR:=		X11 driver for Cirrus VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

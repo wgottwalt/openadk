@@ -1,0 +1,8 @@
+--- nss-3.15.2.orig/nss/manifest.mn	2013-09-25 15:57:55.000000000 +0200
++++ nss-3.15.2/nss/manifest.mn	2013-09-30 16:02:15.000000000 +0200
+@@ -10,4 +10,4 @@ IMPORTS =	nspr20/v4.8 \
+ 
+ RELEASE = nss
+ 
+-DIRS = coreconf lib cmd
++DIRS = coreconf lib cmd config

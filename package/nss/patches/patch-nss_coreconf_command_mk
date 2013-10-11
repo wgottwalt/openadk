@@ -1,0 +1,11 @@
+--- nss-3.15.2.orig/nss/coreconf/command.mk	2013-09-25 15:57:55.000000000 +0200
++++ nss-3.15.2/nss/coreconf/command.mk	2013-09-27 19:07:39.000000000 +0200
+@@ -16,7 +16,7 @@ LINK_EXE      = $(LINK) $(OS_LFLAGS) $(L
+ CFLAGS        = $(OPTIMIZER) $(OS_CFLAGS) $(XP_DEFINE) $(DEFINES) $(INCLUDES) \
+ 		$(XCFLAGS)
+ PERL          = perl
+-RANLIB        = echo
++RANLIB        = ranlib
+ TAR           = /bin/tar
+ #
+ # For purify
