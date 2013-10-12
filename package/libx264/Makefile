@@ -17,6 +17,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX264,libx264,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
+CONFIGURE_ARGS+=	--disable-asm
+endif
 CONFIGURE_ARGS+=	--disable-cli
 
 libx264-install:
