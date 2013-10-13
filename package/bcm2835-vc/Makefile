@@ -13,10 +13,7 @@ PKG_SECTION:=		base
 PKG_DEPENDS:=		libpthread
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
-
-PKG_SUBPKGS:=		BCM2835_VC
 
 include ${TOPDIR}/mk/package.mk
 
