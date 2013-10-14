@@ -3,7 +3,6 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/eglibc/Makefile.inc
-include $(TOPDIR)/toolchain/eglibc/Makefile.multilib
 
 PKG_DESCR:=		embedded GNU C library
 PKG_SECTION:=		base
