@@ -1,0 +1,11 @@
+--- libmpeg2-0.5.1.orig/configure	2008-07-18 16:41:54.000000000 +0200
++++ libmpeg2-0.5.1/configure	2013-10-14 15:39:35.000000000 +0200
+@@ -4722,7 +4722,7 @@ rm -f core conftest.err conftest.$ac_obj
+     { echo "$as_me:$LINENO: result: $ac_cv_try_cflags_ok" >&5
+ echo "${ECHO_T}$ac_cv_try_cflags_ok" >&6; }
+     if test x"$ac_cv_try_cflags_ok" = x"yes"; then
+-        OPT_CFLAGS="$TRY_CFLAGS"
++        OPT_CFLAGS=""
+     else
+         :
+     fi

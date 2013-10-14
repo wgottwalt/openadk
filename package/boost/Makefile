@@ -9,14 +9,11 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		gettext-tiny
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 
 DISTFILES:=		boost_1_54_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
-
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 PKG_SUBPKGS:=		BOOST BOOST_DEV
 PKGSD_BOOST_DEV:=	boost header files
@@ -60,6 +57,8 @@ CONFIGURE_ARGS += \
 	--host=$(GNU_TARGET_NAME) \
 	--build=$(GNU_HOST_NAME) \
 	--prefix=${WRKINST}/usr \
+
+CONFIGURE_ARGS+=--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
 	CONFIGURE_ARGS += -sNO_BZIP2=1 -sZLIB_INCLUDE=${STAGING_DIR}/usr/include -sZLIB_LIBPATH=${STAGING_DIR}/usr/lib

@@ -7,7 +7,6 @@ TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
-include $(TOPDIR)/toolchain/glibc/Makefile.multilib
 
 PKG_DESCR:=		GNU C library
 PKG_SECTION:=		base
