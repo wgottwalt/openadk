@@ -1,27 +1,68 @@
+diff -Nur linux-3.9.11.orig/arch/cris/include/arch-v10/arch/Kbuild linux-3.9.11/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-3.9.11.orig/arch/cris/include/arch-v10/arch/Kbuild	2013-07-21 02:16:17.000000000 +0200
++++ linux-3.9.11/arch/cris/include/arch-v10/arch/Kbuild	2013-10-14 11:02:43.000000000 +0200
+@@ -1 +1,5 @@
+ # CRISv10 arch
++header-y += ptrace.h
++header-y += user.h
++header-y += elf.h
++header-y += system.h
 diff -Nur linux-3.9.11.orig/arch/cris/include/asm/Kbuild linux-3.9.11/arch/cris/include/asm/Kbuild
 --- linux-3.9.11.orig/arch/cris/include/asm/Kbuild	2013-07-21 02:16:17.000000000 +0200
-+++ linux-3.9.11/arch/cris/include/asm/Kbuild	2013-10-11 21:26:30.000000000 +0200
-@@ -1,7 +1,6 @@
++++ linux-3.9.11/arch/cris/include/asm/Kbuild	2013-10-13 18:34:22.000000000 +0200
+@@ -1,9 +1,11 @@
  
 -header-y += arch-v10/
 -header-y += arch-v32/
 -
 +header-y += ../arch-v10/arch/
 +header-y += ../arch-v32/arch/
++header-y += elf.h
++header-y += user.h
  
  generic-y += clkdev.h
  generic-y += exec.h
+ generic-y += module.h
+ generic-y += trace_clock.h
++generic-y += user.h
 diff -Nur linux-3.9.11.orig/arch/cris/include/uapi/asm/Kbuild linux-3.9.11/arch/cris/include/uapi/asm/Kbuild
 --- linux-3.9.11.orig/arch/cris/include/uapi/asm/Kbuild	2013-07-21 02:16:17.000000000 +0200
-+++ linux-3.9.11/arch/cris/include/uapi/asm/Kbuild	2013-10-11 21:32:52.000000000 +0200
++++ linux-3.9.11/arch/cris/include/uapi/asm/Kbuild	2013-10-13 16:18:43.000000000 +0200
 @@ -1,8 +1,8 @@
  # UAPI Header export list
  include include/uapi/asm-generic/Kbuild.asm
  
 -header-y += arch-v10/
 -header-y += arch-v32/
-+header-y += ../arch-v10/arch
-+header-y += ../arch-v32/arch
++header-y += ../arch-v10/arch/
++header-y += ../arch-v32/arch/
  header-y += auxvec.h
  header-y += bitsperlong.h
  header-y += byteorder.h
+diff -Nur linux-3.9.11.orig/include/uapi/asm-generic/Kbuild linux-3.9.11/include/uapi/asm-generic/Kbuild
+--- linux-3.9.11.orig/include/uapi/asm-generic/Kbuild	2013-07-21 02:16:17.000000000 +0200
++++ linux-3.9.11/include/uapi/asm-generic/Kbuild	2013-10-13 20:09:39.000000000 +0200
+@@ -34,3 +34,4 @@
+ header-y += types.h
+ header-y += ucontext.h
+ header-y += unistd.h
++header-y += user.h
+diff -Nur linux-3.9.11.orig/include/uapi/asm-generic/Kbuild.asm linux-3.9.11/include/uapi/asm-generic/Kbuild.asm
+--- linux-3.9.11.orig/include/uapi/asm-generic/Kbuild.asm	2013-07-21 02:16:17.000000000 +0200
++++ linux-3.9.11/include/uapi/asm-generic/Kbuild.asm	2013-10-13 18:42:03.000000000 +0200
+@@ -18,6 +18,7 @@
+ header-y += ipcbuf.h
+ header-y += mman.h
+ header-y += msgbuf.h
++header-y += page.h
+ header-y += param.h
+ header-y += poll.h
+ header-y += posix_types.h
+@@ -38,6 +39,7 @@
+ header-y += termios.h
+ header-y += types.h
+ header-y += unistd.h
++header-y += user.h
+ 
+ header-y += $(foreach hdr,$(opt-header), \
+ 	      $(if \
