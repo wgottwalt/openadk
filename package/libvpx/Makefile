@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.1.0
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		7ae163ac3196c79ec2f0904280078a45
+PKG_VERSION:=		1.2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6f07da6f5a7f40fdaef0d976d6da3b54
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
@@ -84,6 +84,10 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-examples \
 			--enable-shared
 ALL_TARGET:=
+
+post-extract:
+	chmod a+x $(WRKBUILD)/build/make/*.sh
+	chmod a+x $(WRKBUILD)/build/make/*.pl
 
 libvpx-install:
 	$(INSTALL_DIR) $(IDIR_LIBVPX)/usr/lib
