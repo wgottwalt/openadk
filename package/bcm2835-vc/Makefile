@@ -22,7 +22,7 @@ $(eval $(call PKG_template,BCM2835_VC,bcm2835-vc,${PKG_VERSION}-${PKG_RELEASE},$
 CONFIG_STYLE:=          manual
 
 do-configure:
-	(cd $(WRKBUILD) && cmake .)
+	(cd $(WRKBUILD) && cmake -DCMAKE_SYSTEM_NAME=Linux .)
 
 bcm2835-vc-install:
 	$(INSTALL_DIR) ${IDIR_BCM2835_VC}/opt/vc/{bin,lib}
