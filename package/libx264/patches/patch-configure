@@ -1,5 +1,5 @@
 --- libx264-1.0.orig/configure	2013-10-10 22:45:04.000000000 +0200
-+++ libx264-1.0/configure	2013-10-11 11:33:39.000000000 +0200
++++ libx264-1.0/configure	2013-10-12 17:49:39.000000000 +0200
 @@ -985,9 +985,9 @@ if [ "$debug" = "yes" ]; then
  elif [ $ARCH = ARM ]; then
      # arm-gcc-4.2 produces incorrect output with -ffast-math
@@ -12,7 +12,15 @@
  fi
  
  if cc_check '' -fno-tree-vectorize ; then
-@@ -1136,7 +1136,7 @@ LIBX264=$LIBX264
+@@ -1125,6 +1125,7 @@ bindir=$bindir
+ libdir=$libdir
+ includedir=$includedir
+ ARCH=$ARCH
++ASM=$asm
+ SYS=$SYS
+ CC=$CC
+ CFLAGS=$CFLAGS
+@@ -1136,7 +1137,7 @@ LIBX264=$LIBX264
  AR=$AR
  RANLIB=$RANLIB
  STRIP=$STRIP

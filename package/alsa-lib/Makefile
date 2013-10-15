@@ -24,8 +24,7 @@ $(eval $(call PKG_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG
 $(eval $(call PKG_template,ALSA_LIB_DEV,alsa-lib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ALSA_LIB_DEV},${PKGSC_ALSA_LIB_DEV}))
 
 TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
-CONFIGURE_ARGS+=	--disable-python \
-			--without-versioned
+CONFIGURE_ARGS+=	--disable-python
 
 alsa-lib-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa

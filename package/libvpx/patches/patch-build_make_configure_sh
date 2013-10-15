@@ -1,6 +1,6 @@
---- libvpx-v0.9.7-p1.orig/build/make/configure.sh	2011-08-15 23:02:45.000000000 +0200
-+++ libvpx-v0.9.7-p1/build/make/configure.sh	2011-09-17 17:48:07.667986440 +0200
-@@ -287,7 +287,7 @@ check_cpp() {
+--- libvpx-v1.2.0.orig/build/make/configure.sh	2013-09-04 20:49:22.000000000 +0200
++++ libvpx-v1.2.0/build/make/configure.sh	2013-10-14 20:15:20.000000000 +0200
+@@ -305,7 +305,7 @@ check_cpp() {
  check_ld() {
      log check_ld "$@"
      check_cc $@ \

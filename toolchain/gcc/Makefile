@@ -33,11 +33,16 @@ else
 GCC_CONFOPTS+=		--disable-sjlj-exceptions
 endif
 
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
+endif
 ifeq ($(ADK_LINUX_SH),y)
 GCC_CONFOPTS+=		--with-multilib-list=m4,m4-nofpu
-else
-GCC_CONFOPTS+=		--disable-biarch \
-			--disable-multilib
+endif
+ifeq ($(ADK_LINUX_X86_64),y)
+ifeq ($(ADK_x32),y)
+GCC_CONFOPTS+=		--with-multilib-list=mx32
+endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)

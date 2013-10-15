@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpeg2
 PKG_VERSION:=		0.5.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0f92c7454e58379b4a5a378485bbd8ef
 PKG_DESCR:=		MPEG-1 & -2 decoding library
 PKG_SECTION:=		libs
