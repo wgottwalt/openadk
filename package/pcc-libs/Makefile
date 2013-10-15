@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://pcc.ludd.ltu.se/
 PKG_SITES:=		http://pcc.ludd.ltu.se/ftp/pub/pcc-releases/
 
-PKG_ARCH_DEPENDS:=	!arm !cris !mips !ppc !avr32
+PKG_ARCH_DEPENDS:=	!arm !cris !m68k !mips !ppc !avr32
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include $(TOPDIR)/mk/package.mk
