@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6f07da6f5a7f40fdaef0d976d6da3b54
+PKG_MD5SUM:=		f8de058e6ba14555144583a2d031fe19
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
