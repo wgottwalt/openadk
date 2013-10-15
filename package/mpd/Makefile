@@ -15,6 +15,8 @@ PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.17/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR

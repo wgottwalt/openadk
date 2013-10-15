@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
 
