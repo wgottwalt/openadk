@@ -1,0 +1,25 @@
+--- ffmpeg-2.0.2.orig/libavcodec/arm/fft_init_arm.c	2013-10-08 19:52:31.000000000 +0200
++++ ffmpeg-2.0.2/libavcodec/arm/fft_init_arm.c	2013-10-16 12:59:04.000000000 +0200
+@@ -32,6 +32,12 @@ void ff_mdct_calc_neon(FFTContext *s, FF
+ 
+ void ff_rdft_calc_neon(struct RDFTContext *s, FFTSample *z);
+ 
++void ff_synth_filter_float_vfp(FFTContext *imdct,
++                               float *synth_buf_ptr, int *synth_buf_offset,
++                               float synth_buf2[32], const float window[512],
++                               float out[32], const float in[32],
++                               float scale);
++
+ void ff_synth_filter_float_neon(FFTContext *imdct,
+                                 float *synth_buf_ptr, int *synth_buf_offset,
+                                 float synth_buf2[32], const float window[512],
+@@ -71,6 +77,9 @@ av_cold void ff_synth_filter_init_arm(Sy
+ {
+     int cpu_flags = av_get_cpu_flags();
+ 
++    if (have_vfp(cpu_flags))
++        s->synth_filter_float = ff_synth_filter_float_vfp;
++
+     if (have_neon(cpu_flags))
+         s->synth_filter_float = ff_synth_filter_float_neon;
+ }
