@@ -1,0 +1,15 @@
+--- libmad-0.15.1b.orig/layer3.c	2004-01-23 10:41:32.000000000 +0100
++++ libmad-0.15.1b/layer3.c	2013-10-16 10:51:25.000000000 +0200
+@@ -2608,6 +2608,12 @@ int mad_layer_III(struct mad_stream *str
+     next_md_begin = 0;
+ 
+   md_len = si.main_data_begin + frame_space - next_md_begin;
++  if (md_len + MAD_BUFFER_GUARD > MAD_BUFFER_MDLEN)
++  {
++	stream->error = MAD_ERROR_LOSTSYNC;
++	stream->sync = 0;
++	return -1;
++  }
+ 
+   frame_used = 0;
+ 
