@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6814b47ceaa99880c754c5195aa1aac1
 PKG_DESCR:=		MPEG audio player in fixed point
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libid3tag libmad
-PKG_BUILDDEP:=		libid3tag libmad
+PKG_DEPENDS:=		libid3tag libmad alsa-lib
+PKG_BUILDDEP:=		libid3tag libmad alsa-lib
 PKG_URL:=		http://www.underbit.com/products/mad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}  \
 			ftp://ftp.mars.org/pub/mpeg/
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-debugging \
 			--without-libiconv-prefix \
 			--without-libintl-prefix \
 			--without-esd \
-			--without-alsa
+			--with-alsa
 
 post-install:
 	${INSTALL_DIR} ${IDIR_MADPLAY}/usr/bin
