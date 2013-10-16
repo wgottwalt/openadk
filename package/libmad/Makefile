@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libmad
 PKG_VERSION:=		0.15.1b
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		1be543bc30c56fb6bea1d7bf6a64e66c
 PKG_DESCR:=		An high-quality MPEG audio decoding library
 PKG_SECTION:=		libs
@@ -28,10 +28,18 @@ endif
 ifeq (${ARCH},arm)
 FPM:=arm
 endif
-# MIPS optimization is broken for gcc 4.4 (removed h constraint)
-#ifeq (${ARCH},mips)
-#FPM:=mips
-#endif
+ifeq (${ARCH},mips)
+FPM:=mips
+endif
+ifeq (${ARCH},ppc)
+FPM:=ppc
+endif
+ifeq (${ARCH},sparc)
+FPM:=sparc
+endif
+ifeq (${ARCH},x86_64)
+FPM:=64bit
+endif
 
 CONFIGURE_ARGS+=	--enable-fpm=${FPM} \
 			--disable-debugging \
