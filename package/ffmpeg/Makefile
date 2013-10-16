@@ -13,7 +13,7 @@ PKG_FDEPENDS:=		libpthread
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 
-PKG_ARCH_DEPENDS:=	!cris
+PKG_ARCH_DEPENDS:=	!avr32 !cris
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
 #PKGSD_FFPLAY:=		ffmpeg based video player
