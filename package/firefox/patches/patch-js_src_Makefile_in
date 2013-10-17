@@ -1,0 +1,11 @@
+--- mozilla-release.orig/js/src/Makefile.in	2013-09-11 01:15:04.000000000 +0200
++++ mozilla-release/js/src/Makefile.in	2013-10-14 12:36:25.000000000 +0200
+@@ -112,7 +112,7 @@ ifdef JS_HAS_CTYPES
+ VPATH += $(srcdir)/ctypes
+ 
+ ifdef MOZ_NATIVE_FFI
+-LOCAL_INCLUDES = $(MOZ_FFI_CFLAGS)
++LOCAL_INCLUDES =
+ else
+ LOCAL_INCLUDES = -Ictypes/libffi/include
+ endif
