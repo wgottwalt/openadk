@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		sdl
 PKG_URL:=		http://www.ferzkopp.net/joomla/content/view/19/14/
 PKG_SITES:=		http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		LIBSDL_GFX LIBSDL_GFX_DEV
 PKGSD_LIBSDL_GFX_DEV:=	development files for SDL_gfx
 PKGSC_LIBSDL_GFX_DEV:=	devel

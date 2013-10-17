@@ -15,6 +15,8 @@ PKG_BUILDDEP:=		jpeg sdl
 PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=motion/}
 
+PKG_ARCH_DEPENDS:=      !m68k
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MOTION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
