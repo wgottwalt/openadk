@@ -1,0 +1,14 @@
+--- mozilla-release.orig/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2013-09-11 01:15:18.000000000 +0200
++++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2013-10-15 16:05:38.000000000 +0200
+@@ -21,6 +21,11 @@ Scott McMurray
+ #include "constants.hpp"
+ #include <cstring>
+ 
++#include <features.h>
++#if defined(__UCLIBC__)
++#undef getchar
++#endif
++
+ namespace boost {
+   namespace detail {
+   	//This only works on unsigned data types

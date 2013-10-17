@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		alsa-lib
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/utils/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_FLAVOURS_ALSA_UTILS:=WITH_ALSAMIXER
 PKGFS_WITH_ALSAMIXER:=	libncurses
 PKGFD_WITH_ALSAMIXER:=	include alsamixer ncurses applet

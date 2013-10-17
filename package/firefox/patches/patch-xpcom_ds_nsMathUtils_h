@@ -1,0 +1,11 @@
+--- mozilla-release.orig/xpcom/ds/nsMathUtils.h	2013-09-11 01:15:27.000000000 +0200
++++ mozilla-release/xpcom/ds/nsMathUtils.h	2013-10-14 14:05:43.000000000 +0200
+@@ -98,7 +98,7 @@ inline NS_HIDDEN_(bool) NS_finite(double
+ #ifdef WIN32
+     // NOTE: '!!' casts an int to bool without spamming MSVC warning C4800.
+     return !!_finite(d);
+-#elif defined(XP_DARWIN)
++#elif defined(XP_DARWIN) || defined(__UCLIBC__)
+     // Darwin has deprecated |finite| and recommends |isfinite|. The former is
+     // not present in the iOS SDK.
+     return std::isfinite(d);

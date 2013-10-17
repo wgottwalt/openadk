@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		sdl freetype gettext-tiny
 PKG_URL:=		http://www.libsdl.org/projects/SDL_ttf/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_ttf/release/
 
+PKG_ARCH_DEPENDS:=      !m68k
+
 PKG_SUBPKGS:=		LIBSDL_TTF LIBSDL_TTF_DEV
 PKGSD_LIBSDL_TTF_DEV:=	development files
 PKGSC_LIBSDL_TTF_DEV:=	devel

@@ -12,6 +12,8 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/lib/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		ALSA_LIB ALSA_LIB_DEV
 PKGSD_ALSA_LIB_DEV:=	development files for ALSA
 PKGSC_ALSA_LIB_DEV:=	devel

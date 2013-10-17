@@ -1,0 +1,11 @@
+--- mozilla-release.orig/tools/profiler/platform-linux.cc	2013-09-11 01:15:26.000000000 +0200
++++ mozilla-release/tools/profiler/platform-linux.cc	2013-10-16 10:09:54.000000000 +0200
+@@ -53,7 +53,7 @@
+ #include <sys/stat.h>   // open
+ #include <fcntl.h>      // open
+ #include <unistd.h>     // sysconf
+-#ifdef __GLIBC__
++#if defined(__GLIBC__) && ! defined(__UCLIBC__)
+ #include <execinfo.h>   // backtrace, backtrace_symbols
+ #endif  // def __GLIBC__
+ #include <strings.h>    // index

@@ -23,6 +23,13 @@ out=0
 
 . $topdir/.config
 
+uname -a|grep '\(Debian\|Ubuntu\)' >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	if [[ -n $ADK_COMPILE_PYTHON2 ]]; then
+		NEED_DPKG_ARCHITECTURE="$NEED_DPKG_ARCHITECTURE python2"
+	fi
+fi
+
 if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_NEON ]];then
 		NEED_LIBXML2_DEV="$NEED_LIBXML2_DEV neon"
@@ -486,6 +493,13 @@ fi
 if [[ -n $NEED_MAKEDEPEND ]]; then
 	if ! which makedepend >/dev/null 2>&1; then
 		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_DPKG_ARCHITECTURE ]]; then
+	if ! which dpkg-architecture >/dev/null 2>&1; then
+		echo >&2 You need dpkg-architecture to build $NEED_DPKG_ARCHITECTURE
 		out=1
 	fi
 fi

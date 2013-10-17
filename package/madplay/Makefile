@@ -15,6 +15,8 @@ PKG_URL:=		http://www.underbit.com/products/mad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}  \
 			ftp://ftp.mars.org/pub/mpeg/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MADPLAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
