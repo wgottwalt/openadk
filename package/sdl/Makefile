@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libusb alsa-lib libX11 libXext
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/release/
 
+PKG_ARCH_DEPENDS:=      !m68k
+
 PKG_FLAVOURS_LIBSDL:=	WITH_TSLIB
 PKGFD_WITH_TSLIB:=	enable touchscreen support
 PKGFS_WITH_TSLIB:=	tslib
