@@ -19,9 +19,16 @@ test -z "$BASH_VERSION$KSH_VERSION" && exec $BASH $0 "$@"
 [[ -n $BASH_VERSION ]] && shopt -s extglob
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 OStype=$(uname)
+isdeb=$(uname -a|grep '\(Debian\|Ubuntu\)')
 out=0
 
 . $topdir/.config
+
+if [ $isdeb -eq 0 ];then
+	if [[ -n $ADK_COMPILE_PYTHON2 ]]; then
+		NEED_DPKG_ARCHITECTURE="$NEED_DPKG_ARCHITECTURE python2"
+	fi
+fi
 
 if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_NEON ]];then
@@ -486,6 +493,13 @@ fi
 if [[ -n $NEED_MAKEDEPEND ]]; then
 	if ! which makedepend >/dev/null 2>&1; then
 		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_DPKG_ARCHITECTURE ]]; then
+	if ! which dpkg-architecture >/dev/null 2>&1; then
+		echo >&2 You need dpkg-architecture to build $NEED_DPKG_ARCHITECTURE
 		out=1
 	fi
 fi
