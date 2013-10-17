@@ -5,17 +5,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
 PKG_VERSION:=		24.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		06a4c0fe8d3a979aea2fce8d0fdbf328
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib glib libgtk libpng libtiff libxcursor libffi
 PKG_DEPENDS+=		nspr nss libjpeg-turbo libatk pango cairo libxt libx11 libstdcxx hicolor-icon-theme
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf librt libgcc
-PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates
+PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates libevent
 PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
-PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2
+PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -66,6 +66,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-nspr \
 			--with-system-pango \
 			--with-system-libvpx \
+			--with-system-libevent=${STAGING_TARGET_DIR}/usr \
 			--enable-system-ffi \
 			--enable-system-sqlite \
 			--disable-libnotify \
@@ -115,7 +116,7 @@ firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/firefox-${PKG_VERSION} \
 		$(IDIR_FIREFOX)/usr/lib
-	$(CP) $(WRKINST)/usr/bin/firefox \
+	$(CP) ./files/firefox \
 		$(IDIR_FIREFOX)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

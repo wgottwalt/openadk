@@ -1,0 +1,23 @@
+--- mozilla-release.orig/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_info.cc	2013-09-11 01:15:18.000000000 +0200
++++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_info.cc	2013-10-15 12:21:59.000000000 +0200
+@@ -38,11 +38,6 @@ WebRtc_UWord32 CpuInfo::DetectNumberOfCo
+     WEBRTC_TRACE(kTraceStateInfo, kTraceUtility, -1,
+                  "Available number of cores:%d", number_of_cores_);
+ 
+-#elif defined(WEBRTC_LINUX) && !defined(WEBRTC_ANDROID) && !defined(WEBRTC_GONK)
+-    number_of_cores_ = get_nprocs();
+-    WEBRTC_TRACE(kTraceStateInfo, kTraceUtility, -1,
+-                 "Available number of cores:%d", number_of_cores_);
+-
+ #elif defined(WEBRTC_BSD) || defined(WEBRTC_MAC)
+     int name[] = {
+       CTL_HW,
+@@ -63,8 +58,6 @@ WebRtc_UWord32 CpuInfo::DetectNumberOfCo
+                    "Failed to get number of cores");
+       number_of_cores_ = 1;
+     }
+-#elif defined(_SC_NPROCESSORS_ONLN)
+-    _numberOfCores = sysconf(_SC_NPROCESSORS_ONLN);
+ #else
+     WEBRTC_TRACE(kTraceWarning, kTraceUtility, -1,
+                  "No function to get number of cores");
