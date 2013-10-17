@@ -11,6 +11,8 @@ PKG_SECTION:=		base
 PKG_DEPENDS:=		parted sfdisk mke2fs
 PKG_URL:=		http://openadk.org/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1
 
