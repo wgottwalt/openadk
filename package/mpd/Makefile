@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.17.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		b68be330deeb23989c08a9fefd9fcdeb
+PKG_VERSION:=		0.17.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d0da6a6a1d9cf1e8710b6082f6ef7849
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx libgcc
@@ -14,6 +14,8 @@ PKG_FDEPENDS:=		glib libstdcxx
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.17/
+
+PKG_ARCH_DEPENDS:=	!avr32
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
@@ -204,7 +206,7 @@ else
 CONFIGURE_ARGS+=	--disable-lsr
 endif
 
-post-install:
+mpd-install:
 	${INSTALL_DIR} ${IDIR_MPD}/usr/bin ${IDIR_MPD}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mpd ${IDIR_MPD}/usr/bin
 	${INSTALL_DATA} ./files/mpd.conf ${IDIR_MPD}/etc/mpd.conf

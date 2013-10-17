@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.23/
 PKG_NOPARALLEL:=	1
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT

@@ -13,10 +13,7 @@ PKG_SECTION:=		base
 PKG_DEPENDS:=		libpthread
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
-
-PKG_SUBPKGS:=		BCM2835_VC
 
 include ${TOPDIR}/mk/package.mk
 
@@ -25,7 +22,7 @@ $(eval $(call PKG_template,BCM2835_VC,bcm2835-vc,${PKG_VERSION}-${PKG_RELEASE},$
 CONFIG_STYLE:=          manual
 
 do-configure:
-	(cd $(WRKBUILD) && cmake .)
+	(cd $(WRKBUILD) && cmake -DCMAKE_SYSTEM_NAME=Linux .)
 
 bcm2835-vc-install:
 	$(INSTALL_DIR) ${IDIR_BCM2835_VC}/opt/vc/{bin,lib}

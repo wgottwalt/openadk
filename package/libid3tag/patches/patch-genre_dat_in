@@ -1,0 +1,11 @@
+--- libid3tag-0.15.1b.orig/genre.dat.in	2004-01-23 10:41:32.000000000 +0100
++++ libid3tag-0.15.1b/genre.dat.in	2013-10-16 12:34:37.000000000 +0200
+@@ -153,7 +153,7 @@ Freestyle
+ Duet
+ Punk Rock
+ Drum Solo
+-A Cappella
++A Capella
+ Euro-House
+ Dance Hall
+ Goa

@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.1.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		7ae163ac3196c79ec2f0904280078a45
+PKG_VERSION:=		1.2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f8de058e6ba14555144583a2d031fe19
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi sharp-zaurus ibm-x40 lemote-yeelong qemu-i686
+PKG_ARCH_DEPENDS:=	!avr32
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
@@ -22,6 +22,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--target=armv6-linux-gcc
 endif
@@ -83,6 +86,10 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-examples \
 			--enable-shared
 ALL_TARGET:=
+
+post-extract:
+	chmod a+x $(WRKBUILD)/build/make/*.sh
+	chmod a+x $(WRKBUILD)/build/make/*.pl
 
 libvpx-install:
 	$(INSTALL_DIR) $(IDIR_LIBVPX)/usr/lib
