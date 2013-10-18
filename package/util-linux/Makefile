@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.23.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
@@ -18,13 +18,15 @@ PKG_ARCH_DEPENDS:=	!m68k
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
-PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBUUID_DEV
+PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBUUID_DEV LIBMOUNT
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
 PKGSD_LIBUUID_DEV:=	UUID headers
 PKGSC_LIBUUID_DEV:=	devel
 PKGSD_LIBBLKID:=	BLKID library
 PKGSC_LIBBLKID:=	libs
+PKGSD_LIBMOUNT:=	Mount library
+PKGSC_LIBMOUNT:=	libs
 PKGSD_FDISK:=		Partition table manipulation utility
 PKGSD_SFDISK:=		Scriptable Partition table manipulation utility
 PKGSD_SWAP_UTILS:=	Swap space management utilities
@@ -32,7 +34,7 @@ PKGSS_SWAP_UTILS:=	libblkid
 PKGSD_LOSETUP:=		Loop devices management utilities
 PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSD_MOUNT:=		mount/umount utilities
-PKGSS_MOUNT:=		libblkid
+PKGSS_MOUNT:=		libblkid libmount
 PKGSC_MOUNT:=		fs
 PKGSD_MCOOKIE:=		Generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/apps
@@ -48,6 +50,7 @@ $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
 $(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
+$(eval $(call PKG_template,LIBMOUNT,libmount,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBMOUNT},${PKGSC_LIBMOUNT}))
 
 CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
 			scanf_cv_alloc_modifier=ms
@@ -88,8 +91,8 @@ swap-utils-install:
 	${CP} ${WRKINST}/sbin/swap{on,off} ${IDIR_SWAP_UTILS}/usr/sbin
 
 mount-install:
-	${INSTALL_DIR} ${IDIR_MOUNT}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/{u,}mount ${IDIR_MOUNT}/usr/bin
+	${INSTALL_DIR} ${IDIR_MOUNT}/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/{u,}mount ${IDIR_MOUNT}/bin
 
 mcookie-install:
 	${INSTALL_DIR} ${IDIR_MCOOKIE}/usr/bin
@@ -106,5 +109,9 @@ libuuid-dev-install:
 libblkid-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libblkid.so* ${IDIR_LIBBLKID}/usr/lib
+
+libmount-install:
+	${INSTALL_DIR} ${IDIR_LIBMOUNT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libmount.so* ${IDIR_LIBMOUNT}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
