@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.6
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		d0da6a6a1d9cf1e8710b6082f6ef7849
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -208,7 +208,7 @@ CONFIGURE_ARGS+=	--disable-lsr
 endif
 
 mpd-install:
-	${INSTALL_DIR} ${IDIR_MPD}/usr/bin ${IDIR_MPD}/etc
+	${INSTALL_DIR} ${IDIR_MPD}/usr/bin ${IDIR_MPD}/etc/mpd/playlists
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mpd ${IDIR_MPD}/usr/bin
 	${INSTALL_DATA} ./files/mpd.conf ${IDIR_MPD}/etc/mpd.conf
 

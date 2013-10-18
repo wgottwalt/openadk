@@ -11,20 +11,6 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	# check group membership
-	id mpd | grep audio >/dev/null 2>&1
-	if [ $? -ne 0 ];then
-		echo "mpd user must be in group audio."
-		exit 1
-	fi
-	if [ ! -d /etc/mpd/playlists ];then
-		mkdir -p /etc/mpd/playlists
-		chown -R mpd:mpd /etc/mpd
-	fi
-	if [ ! -d /var/run/mpd ];then
-		mkdir -p /var/run/mpd
-		chown -R mpd:mpd /var/run/mpd
-	fi
 	mpd
 	;;
 stop)
