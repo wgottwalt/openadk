@@ -21,6 +21,10 @@ start)
 		mkdir -p /etc/mpd/playlists
 		chown -R mpd:mpd /etc/mpd
 	fi
+	if [ ! -d /var/run/mpd ];then
+		mkdir -p /var/run/mpd
+		chown -R mpd:mpd /var/run/mpd
+	fi
 	mpd
 	;;
 stop)

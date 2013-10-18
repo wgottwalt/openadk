@@ -106,6 +106,10 @@ depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_
 
 choice
 prompt "Kernel Version"
+config ADK_KERNEL_VERSION_3_11_5
+	prompt "3.11.5"
+	boolean
+
 config ADK_KERNEL_VERSION_3_9_11
 	prompt "3.9.11"
 	boolean
@@ -118,6 +122,7 @@ endchoice
 
 config ADK_KERNEL_VERSION
 	string
+	default "3.11.5" if ADK_KERNEL_VERSION_3_11_5
 	default "3.9.11" if ADK_KERNEL_VERSION_3_9_11
 	default "3.4.60" if ADK_KERNEL_VERSION_3_4_60
 	help

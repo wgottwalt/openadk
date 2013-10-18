@@ -1,9 +1,87 @@
---- mpd-0.17.5.orig/src/db/simple_db_plugin.c	2013-08-01 09:15:41.000000000 +0200
-+++ mpd-0.17.5/src/db/simple_db_plugin.c	2013-10-08 15:28:10.000000000 +0200
-@@ -338,6 +338,8 @@ simple_db_save(struct db *_db, GError **
+--- mpd-0.17.6.orig/src/db/simple_db_plugin.c	2013-08-01 09:15:41.000000000 +0200
++++ mpd-0.17.6/src/db/simple_db_plugin.c	2013-10-17 17:51:34.000000000 +0200
+@@ -28,6 +28,9 @@
+ #include "conf.h"
+ #include "directory.h"
+ 
++#include <sys/mount.h> 
++#include <mntent.h>
++#include <string.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+@@ -128,8 +131,8 @@ simple_db_check(struct simple_db *db, GE
+ 			return false;
+ 		}
+ 
+-		/* Check if we can write to the directory */
+-		if (access(dirPath, X_OK | W_OK)) {
++		/* Check if we can change into the directory */
++		if (access(dirPath, X_OK)) {
+ 			g_set_error(error_r, simple_db_quark(), errno,
+ 				    "Can't create db file in \"%s\": %s",
+ 				    dirPath, g_strerror(errno));
+@@ -159,9 +162,9 @@ simple_db_check(struct simple_db *db, GE
+ 	}
+ 
+ 	/* And check that we can write to it */
+-	if (access(db->path, R_OK | W_OK)) {
++	if (access(db->path, R_OK)) {
+ 		g_set_error(error_r, simple_db_quark(), errno,
+-			    "Can't open db file \"%s\" for reading/writing: %s",
++			    "Can't open db file \"%s\" for reading: %s",
+ 			    db->path, g_strerror(errno));
+ 		return false;
+ 	}
+@@ -305,6 +308,9 @@ simple_db_save(struct db *_db, GError **
+ {
+ 	struct simple_db *db = (struct simple_db *)_db;
+ 	struct directory *music_root = db->root;
++	struct mntent *mnt;
++	int remount;
++	FILE *f;
+ 
+ 	db_lock();
+ 
+@@ -317,6 +323,26 @@ simple_db_save(struct db *_db, GError **
+ 	db_unlock();
+ 
+ 	g_debug("writing DB");
++	
++	remount = 0;
++	/* check if /data is mounted read-only */
++	if ((f = setmntent("/proc/mounts", "r")) == NULL)
++		g_message("Checking /proc/mounts failed");
++
++	while ((mnt = getmntent(f)) != NULL) {
++		if (strcmp(mnt->mnt_dir, "/data") == 0 &&
++			hasmntopt(mnt, MNTOPT_RO) != NULL) {
++			remount = 1;
++		}
++	}
++	endmntent(f);
++
++	if (remount) {		
++		if (mount("","/data",0,MS_REMOUNT,0)<0) {
++			g_error("Remounting /data rw failed");
++		}
++		g_message("Mounted /data successfully in read-write mode"); 
++	}
+ 
+ 	FILE *fp = fopen(db->path, "w");
+ 	if (!fp) {
+@@ -338,6 +364,16 @@ simple_db_save(struct db *_db, GError **
  
  	fclose(fp);
  
++	if (remount) {
++		sync();
++		if (mount("","/data",0,MS_REMOUNT|MS_RDONLY,0)<0) {
++			g_error("Remounting /data ro failed");
++		}
++		g_message("Mounted /data successfully in read-only mode");
++	}
++
 +	g_message("Successfully written database to file: %s", db->path);	
 +
  	struct stat st;

@@ -19,12 +19,12 @@ test -z "$BASH_VERSION$KSH_VERSION" && exec $BASH $0 "$@"
 [[ -n $BASH_VERSION ]] && shopt -s extglob
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 OStype=$(uname)
-isdeb=$(uname -a|grep '\(Debian\|Ubuntu\)')
 out=0
 
 . $topdir/.config
 
-if [ $isdeb -eq 0 ];then
+uname -a|grep '\(Debian\|Ubuntu\)' >/dev/null 2>&1
+if [ $? -eq 0 ];then
 	if [[ -n $ADK_COMPILE_PYTHON2 ]]; then
 		NEED_DPKG_ARCHITECTURE="$NEED_DPKG_ARCHITECTURE python2"
 	fi

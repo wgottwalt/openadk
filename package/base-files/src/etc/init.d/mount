@@ -1,5 +1,5 @@
 #!/bin/sh
-#INIT 99
+#INIT 60
 [[ $1 = autostart ]] || exit 0
 
 # any lvm volumes to activate?

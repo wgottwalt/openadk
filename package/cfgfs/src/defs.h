@@ -10,7 +10,7 @@
 #define DEFS_H
 
 #define DEF_FLASHBLOCK	65536		/* size of a flash block */
-#define DEF_FLASHPART	4194304		/* max size of the partition */
+#define DEF_FLASHPART	16777215	/* max size of the partition */
 
 #define FWCF_VER	0x01		/* major version of spec used */
 
