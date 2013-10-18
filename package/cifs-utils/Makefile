@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		f83ef48ab1154aa74dd4cf1c1202bf04
 PKG_DESCR:=		CIFS utilities
 PKG_SECTION:=		net/fs
@@ -30,8 +30,8 @@ CONFIGURE_ARGS+=	--disable-cifsupcall \
 			--disable-systemd
 
 cifs-utils-install:
-	$(INSTALL_DIR) $(IDIR_CIFS_UTILS)/usr/sbin
+	$(INSTALL_DIR) $(IDIR_CIFS_UTILS)/sbin
 	$(INSTALL_BIN) $(WRKINST)/sbin/mount.cifs \
-		$(IDIR_CIFS_UTILS)/usr/sbin
+		$(IDIR_CIFS_UTILS)/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
