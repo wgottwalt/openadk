@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.23.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
 PKG_DESCR:=		Linux utilities
 PKG_SECTION:=		fs
@@ -34,7 +34,7 @@ PKGSS_SWAP_UTILS:=	libblkid
 PKGSD_LOSETUP:=		Loop devices management utilities
 PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSD_MOUNT:=		mount/umount utilities
-PKGSS_MOUNT:=		libblkid libmount
+PKGSS_MOUNT:=		libblkid libmount libuuid
 PKGSC_MOUNT:=		fs
 PKGSD_MCOOKIE:=		Generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/apps
@@ -45,7 +45,7 @@ $(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SFDISK},${PKG_SECTION}))
 $(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SWAP_UTILS},${PKGSD_SWAP_UTILS},${PKG_SECTION}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LOSETUP},${PKGSD_LOSETUP},${PKG_SECTION}))
-$(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MOUNT},${PKG_SECTION}))
+$(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MOUNT},${PKGSD_MOUNT},${PKG_SECTION}))
 $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MCOOKIE},${PKGSC_MCOOKIE}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
 $(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
