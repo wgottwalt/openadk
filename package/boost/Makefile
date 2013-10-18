@@ -12,7 +12,7 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 
-PKG_ARCH_DEPENDS:=	!avr32
+PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 DISTFILES:=		boost_1_54_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
@@ -20,11 +20,6 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
 PKG_SUBPKGS:=		BOOST BOOST_DEV
 PKGSD_BOOST_DEV:=	boost header files
 PKGSC_BOOST_DEV:=	devel
-
-PKG_CHOICES_BOOST:=	SHARED STATIC BOTH
-PKGCD_STATIC:=		install static libs
-PKGCD_SHARED:=		install shared libs
-PKGCD_BOTH:=		install static and shared libs
 
 PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options python regex serialization signals system test thread wave
 
@@ -76,7 +71,7 @@ endif
 ifeq (${ADK_PACKAGE_BOOST_GRAPH},)
 	CONFIGURE_ARGS+=--without-graph
 endif
-ifeq (${ADK_PACKAGE_BOOST_math},)
+ifeq (${ADK_PACKAGE_BOOST_MATH},)
 	CONFIGURE_ARGS+=--without-math
 endif
 ifeq (${ADK_PACKAGE_BOOST_PROGRAM_OPTIONS},)
@@ -146,16 +141,7 @@ endif
 
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
-ifneq (${ADK_PACKAGE_BOOST_SHARED},)
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
-endif
-ifneq (${ADK_PACKAGE_BOOST_STATIC},)
-	${CP} ${WRKINST}/usr/lib/*.a ${IDIR_BOOST}/usr/lib
-endif
-ifneq (${ADK_PACKAGE_BOOST_BOTH},)
-	${CP} ${WRKINST}/usr/lib/*.a ${IDIR_BOOST}/usr/lib
-	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
-endif
 
 boost-dev-install:
 	${INSTALL_DIR} ${IDIR_BOOST_DEV}/usr/include
