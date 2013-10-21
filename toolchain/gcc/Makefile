@@ -42,6 +42,8 @@ endif
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
 GCC_CONFOPTS+=		--with-multilib-list=mx32
+else
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
 endif
 endif
 

@@ -152,12 +152,14 @@ config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
 	tristate
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_INPUT_KEYBOARD
+	depends on !ADK_KERNEL_KEYBOARD_ATKBD
 	default n
 
 config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
 	prompt "kmod-input-mouse................. Mouse support (PS/2)"
 	tristate
 	select ADK_KERNEL_INPUT
+	depends on !ADK_KERNEL_INPUT_MOUSEDEV
 	default n
 
 config ADK_KPACKAGE_KMOD_INPUT_EVDEV
