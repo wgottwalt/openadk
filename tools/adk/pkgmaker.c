@@ -273,7 +273,7 @@ int main() {
 	char *pkg_need_cxx, *pkg_need_java, *pkgname;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs;
-	char *saveptr, *p_ptr, *s_ptr;
+	char *saveptr, *p_ptr, *s_ptr, *pkg_helper;
 	int result;
 	StrMap *pkgmap, *sectionmap;
 
@@ -297,6 +297,7 @@ int main() {
 	pkg_need_cxx = NULL;
 	pkg_need_java = NULL;
 	pkgname = NULL;
+	pkg_helper = NULL;
 
 	p_ptr = NULL;
 	s_ptr = NULL;
@@ -617,7 +618,8 @@ int main() {
 
 				/* create package target system dependency information */
 				if (pkg_system_depends != NULL) {
-					token = strtok(pkg_system_depends, " ");
+					pkg_helper = strdup(pkg_system_depends);
+					token = strtok(pkg_helper, " ");
 					fprintf(cfg, "\tdepends on ");
 					sp = "";
 					while (token != NULL) {
@@ -631,10 +633,13 @@ int main() {
 						token = strtok(NULL, " ");
 					}
 					fprintf(cfg, "\n");
+					free(pkg_helper);
+					pkg_helper = NULL;
 				}
 				/* create package host dependency information */
 				if (pkg_host_depends != NULL) {
-					token = strtok(pkg_host_depends, " ");
+					pkg_helper = strdup(pkg_host_depends);
+					token = strtok(pkg_helper, " ");
 					fprintf(cfg, "\tdepends on ");
 					sp = "";
 					while (token != NULL) {
@@ -648,11 +653,14 @@ int main() {
 						token = strtok(NULL, " ");
 					}
 					fprintf(cfg, "\n");
+					free(pkg_helper);
+					pkg_helper = NULL;
 				}
 
 				/* create package libc dependency information */
 				if (pkg_libc_depends != NULL) {
-					token = strtok(pkg_libc_depends, " ");
+					pkg_helper = strdup(pkg_libc_depends);
+					token = strtok(pkg_helper, " ");
 					fprintf(cfg, "\tdepends on ");
 					sp = "";
 					while (token != NULL) {
@@ -666,10 +674,13 @@ int main() {
 						token = strtok(NULL, " ");
 					}
 					fprintf(cfg, "\n");
+					free(pkg_helper);
+					pkg_helper = NULL;
 				}
 				/* create package target architecture dependency information */
 				if (pkg_arch_depends != NULL) {
-					token = strtok(pkg_arch_depends, " ");
+					pkg_helper = strdup(pkg_arch_depends);
+					token = strtok(pkg_helper, " ");
 					fprintf(cfg, "\tdepends on ");
 					sp = "";
 					while (token != NULL) {
@@ -683,6 +694,8 @@ int main() {
 						token = strtok(NULL, " ");
 					}
 					fprintf(cfg, "\n");
+					free(pkg_helper);
+					pkg_helper = NULL;
 				}
 
 				/* create package dependency information */

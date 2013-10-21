@@ -11,6 +11,7 @@ config BUSYBOX_BLOCKDEV
 	default n
 	help
 	  Performs some ioctls with block devices.
+
 config BUSYBOX_MDEV
 	bool "mdev"
 	default y
@@ -150,7 +151,7 @@ config BUSYBOX_FEATURE_DMESG_PRETTY
 
 config BUSYBOX_FBSET
 	bool "fbset"
-	depends on !ADK_PACKAGE_FBSET
+	depends on !BUSYBOX_DISABLE_FBSET
 	default y if ADK_TARGET_WITH_VGA
 	default n
 	select BUSYBOX_PLATFORM_LINUX
@@ -450,7 +451,7 @@ config BUSYBOX_LOSETUP
 
 config BUSYBOX_LSPCI
 	bool "lspci"
-	depends on !ADK_PACKAGE_PCIUTILS
+	depends on !BUSYBOX_DISABLE_LSPCI
 	default y if ADK_TARGET_WITH_PCI
 	default y if ADK_TARGET_WITH_MINIPCI
 	default n
@@ -463,7 +464,7 @@ config BUSYBOX_LSPCI
 
 config BUSYBOX_LSUSB
 	bool "lsusb"
-	depends on !ADK_PACKAGE_LSUSB
+	depends on !BUSYBOX_DISABLE_LSUSB
 	default y if ADK_TARGET_WITH_USB
 	default n
 	#select PLATFORM_LINUX
@@ -506,6 +507,7 @@ config BUSYBOX_MORE
 config BUSYBOX_MOUNT
 	bool "mount"
 	default y
+	depends on !BUSYBOX_DISABLE_MOUNT
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  All files and filesystems in Unix are arranged into one big directory
@@ -698,6 +700,7 @@ config BUSYBOX_SWITCH_ROOT
 config BUSYBOX_UMOUNT
 	bool "umount"
 	default y
+	depends on !BUSYBOX_DISABLE_UMOUNT
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  When you want to remove a mounted filesystem from its current mount

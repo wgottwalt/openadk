@@ -8,7 +8,7 @@ menu "Finding Utilities"
 
 config BUSYBOX_FIND
 	bool "find"
-	depends on !ADK_PACKAGE_FINDUTILS
+	depends on !BUSYBOX_DISABLE_FIND
 	default y
 	help
 	  find is used to search your system to find specified files.
@@ -187,9 +187,10 @@ config BUSYBOX_FEATURE_FIND_LINKS
 	depends on BUSYBOX_FIND
 	help
 	  Support the 'find -links' option for matching number of links.
+
 config BUSYBOX_GREP
 	bool "grep"
-	depends on !ADK_PACKAGE_GREP
+	depends on !BUSYBOX_DISABLE_GREP
 	default y
 	help
 	  grep is used to search files for a specified pattern.

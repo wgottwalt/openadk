@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
 PKG_VERSION:=		3.10.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		45fb5427fc723a0001c72b92c931ba02
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
@@ -51,9 +51,9 @@ XAKE_FLAGS+=		CCOPTS="${TARGET_CFLAGS}" MFLAGS="CC=\"${TARGET_CC}\"" \
 CONFIGURE_ENV+=		CC="${TARGET_CC}" IPTC="${TARGET_CFLAGS}" IPTL="${TARGET_LDFLAGS}"
 
 ip-install:
-	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,usr/sbin}
+	${INSTALL_DIR} ${IDIR_IP}/{etc/iproute2,bin}
 	${INSTALL_DATA} ${WRKINST}/etc/iproute2/* ${IDIR_IP}/etc/iproute2/
-	${INSTALL_BIN} ${WRKINST}/sbin/ip ${IDIR_IP}/usr/sbin/ip
+	${INSTALL_BIN} ${WRKINST}/sbin/ip ${IDIR_IP}/bin/ip
 
 tc-install:
 	${INSTALL_DIR} ${IDIR_TC}/{usr/sbin,usr/lib/tc}
