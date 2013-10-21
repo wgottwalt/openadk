@@ -110,8 +110,8 @@ config ADK_KERNEL_VERSION_3_9_11
 	prompt "3.9.11"
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_60
-	prompt "3.4.60"
+config ADK_KERNEL_VERSION_3_4_65
+	prompt "3.4.65"
 	boolean
 
 endchoice
@@ -119,7 +119,7 @@ endchoice
 config ADK_KERNEL_VERSION
 	string
 	default "3.9.11" if ADK_KERNEL_VERSION_3_9_11
-	default "3.4.60" if ADK_KERNEL_VERSION_3_4_60
+	default "3.4.65" if ADK_KERNEL_VERSION_3_4_65
 	help
 
 config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
