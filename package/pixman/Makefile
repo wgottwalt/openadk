@@ -12,6 +12,8 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libpng
 PKG_SITES:=		http://www.cairographics.org/releases/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		PIXMAN PIXMAN_DEV
 PKGSC_PIXMAN_DEV:=	devel
 PKGSD_PIXMAN_DEV:=	Pixel manipulation headers

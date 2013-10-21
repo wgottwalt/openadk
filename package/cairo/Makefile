@@ -16,6 +16,8 @@ PKG_BUILDDEP+=		libXext
 PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
 
+PKG_ARCH_DEPENDS:=      !m68k
+
 #DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SUBPKGS:=		CAIRO CAIRO_DEV
