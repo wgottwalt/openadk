@@ -3,7 +3,7 @@ config ADK_KERNEL_FS_POSIX_ACL
 	default y
 
 config ADK_KPACKAGE_KMOD_CIFS
-	prompt "kmod-fs-cifs...................... CIFS support"
+	prompt "kmod-cifs......................... CIFS support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KERNEL_NETWORK_FILESYSTEMS

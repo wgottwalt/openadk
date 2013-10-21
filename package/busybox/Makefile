@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.20.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		e025414bc6cd79579cc7a32a45d3ae1c
 PKG_DESCR:=		Core utilities for embedded systems
 PKG_SECTION:=		base
@@ -43,17 +43,17 @@ else
 BB_MAKE_FLAGS+=		EXTRA_LDFLAGS="-static-libgcc"
 endif
 
-# XXX: Although this looks like all new symbols are enabled when 'make oldconfig' runs, they're not.
-#      In fact, you can pipe "yes ''" as well as "yes n", each time leading to the default value being
-#      chosen for each unknown symbol.
-#      A real solution for that task (disabling everything that's unknown, as we know better) is to
-#      upgrade ${TOPDIR}/config so it understands the oldnoconfig target, and using that to update
-#      the busybox config before compiling.
-#      The workaround for now is to patch all busybox symbols to default n inside the busybox source
-#      which do depend on non-existance of other packages outside the busybox source.
 do-configure:
+	# get all symbols from top level config
 	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
+	# remove all disabled symbols
+	for i in $$(grep "BUSYBOX_DISABLE" $(TOPDIR)/.config);do \
+		test -s "$$i" || continue; \
+		grep -v $${i#BUSYBOX_DISABLE} ${WRKBUILD}/.config > \
+		${WRKBUILD}/.config.tmp; \
+		cp ${WRKBUILD}/.config.tmp ${WRKBUILD}/.config; \
+	done
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
 	yes '' | $(MAKE) ${BB_MAKE_FLAGS} oldconfig $(MAKE_TRACE)
 

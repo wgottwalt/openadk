@@ -39,7 +39,7 @@ config BUSYBOX_FEATURE_SEAMLESS_Z
 
 config BUSYBOX_AR
 	bool "ar"
-	depends on !ADK_PACKAGE_BINUTILS
+	depends on !BUSYBOX_DISABLE_AR
 	default n  # needs to be improved to be able to replace binutils ar
 	help
 	  ar is an archival utility program used to create, modify, and
@@ -80,7 +80,7 @@ config BUSYBOX_FEATURE_AR_CREATE
 
 config BUSYBOX_BUNZIP2
 	bool "bunzip2"
-	depends on !ADK_PACKAGE_BZIP2
+	depends on !BUSYBOX_DISABLE_BZIP2
 	default n
 	help
 	  bunzip2 is a compression utility using the Burrows-Wheeler block
@@ -94,7 +94,7 @@ config BUSYBOX_BUNZIP2
 
 config BUSYBOX_BZIP2
 	bool "bzip2"
-	depends on !ADK_PACKAGE_BZIP2
+	depends on !BUSYBOX_DISABLE_BZIP2
 	default n
 	help
 	  bzip2 is a compression utility using the Burrows-Wheeler block
@@ -108,7 +108,7 @@ config BUSYBOX_BZIP2
 
 config BUSYBOX_CPIO
 	bool "cpio"
-	depends on !ADK_PACKAGE_CPIO
+	depends on !BUSYBOX_DISABLE_CPIO
 	default n
 	help
 	  cpio is an archival utility program used to create, modify, and
@@ -220,28 +220,27 @@ config BUSYBOX_LZOP_COMPR_HIGH
 
 config BUSYBOX_IPKG
 	bool "ipkg"
-	default y if ADK_TARGET_PACKAGE_IPKG
 	default n
 	help
 	  ipkg is the itsy package management system.
 
 config BUSYBOX_RPM2CPIO
 	bool "rpm2cpio"
-	depends on !ADK_PACKAGE_RPM
+	depends on !BUSYBOX_DISABLE_RPM
 	default n
 	help
 	  Converts a RPM file into a CPIO archive.
 
 config BUSYBOX_RPM
 	bool "rpm"
-	depends on !ADK_PACKAGE_RPM
+	depends on !BUSYBOX_DISABLE_RPM
 	default n
 	help
 	  Mini RPM applet - queries and extracts RPM packages.
 
 config BUSYBOX_TAR
 	bool "tar"
-	depends on !ADK_PACKAGE_TAR
+	depends on !BUSYBOX_DISABLE_TAR
 	default y
 	help
 	  tar is an archiving program. It's commonly used with gzip to
@@ -377,14 +376,14 @@ config BUSYBOX_LZMA
 
 config BUSYBOX_UNXZ
 	bool "unxz"
-	depends on !ADK_PACKAGE_XZ
+	depends on !BUSYBOX_DISABLE_UNXZ
 	default n
 	help
 	  unxz is a unlzma successor.
 
 config BUSYBOX_XZ
 	bool "Provide xz alias which supports only unpacking"
-	depends on !ADK_PACKAGE_XZ
+	depends on !BUSYBOX_DISABLE_XZ
 	default n
 	depends on BUSYBOX_UNXZ
 	help
@@ -393,6 +392,7 @@ config BUSYBOX_XZ
 
 config BUSYBOX_UNZIP
 	bool "unzip"
+	depends on !BUSYBOX_DISABLE_UNZIP
 	default n
 	help
 	  unzip will list or extract files from a ZIP archive,

@@ -4,13 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
-PKG_VERSION:=		1.0.9
-PKG_RELEASE:=		6
+PKG_VERSION:=		1.0.10
+PKG_RELEASE:=		1
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/
 
 PKG_CFLINE_CFGFS:=	select BUSYBOX_COMM@
+PKG_CFLINE_CFGFS:=	select BUSYBOX_DIFF@
 PKG_CFLINE_CFGFS+=	select BUSYBOX_MD5SUM@
 PKG_CFLINE_CFGFS+=	select BUSYBOX_XARGS@
 PKG_CFLINE_CFGFS+=	select BUSYBOX_FEATURE_SORT_BIG@
