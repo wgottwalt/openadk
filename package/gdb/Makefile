@@ -10,7 +10,7 @@ PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat libgcc
 PKG_BUILDDEP:=		ncurses readline libiconv expat
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include ${TOPDIR}/mk/package.mk
 
