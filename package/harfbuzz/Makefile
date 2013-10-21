@@ -13,6 +13,8 @@ PKG_SITES:=		http://www.freedesktop.org/software/harfbuzz/release/
 PKG_DEPENDS:=		libstdcxx cairo
 PKG_BUILDDEP:=		libstdcxx cairo
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

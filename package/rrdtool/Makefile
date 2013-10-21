@@ -16,6 +16,8 @@ PKG_BUILDDEP+=		glib cairo pango
 PKG_URL:=		http://oss.oetiker.ch/
 PKG_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		LIBRRD RRDCGI RRDTOOL
 PKGSC_RRDCGI:=		misc
 PKGSD_RRDCGI:=		RRD CGI

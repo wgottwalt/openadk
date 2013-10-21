@@ -14,6 +14,8 @@ PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
 PKG_NEED_CXX:=		1
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 #DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SUBPKGS:=		PANGO PANGO_DEV

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		LIBPNG LIBPNG_DEV
 PKGSD_LIBPNG_DEV:=	development files for libpng
 PKGSC_LIBPNG_DEV:=	devel

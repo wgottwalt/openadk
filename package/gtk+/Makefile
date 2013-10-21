@@ -17,6 +17,8 @@ PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_NEED_CXX:=		1
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		LIBGTK LIBGTK_DEV
 PKGSC_LIBGTK_DEV:=	devel
 PKGSD_LIBGTK_DEV:=	GTK+ headers

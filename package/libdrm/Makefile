@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		libpthread-stubs cairo
 PKG_URL:=		http://dri.freedesktop.org/wiki/
 PKG_SITES:=		http://dri.freedesktop.org/libdrm/
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_SUBPKGS:=		LIBDRM LIBDRM_DEV
 PKGSD_LIBDRM_DEV:=	DRM headers
 PKGSC_LIBDRM_DEV:=	devel
