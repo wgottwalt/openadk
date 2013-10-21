@@ -6,12 +6,3 @@ config ADK_PACKAGE_MUSL
 	depends on ADK_TARGET_LIB_MUSL
 	help
 	  Embedded C library.
-
-config ADK_PACKAGE_MUSL_DEV
-	prompt "musl-dev............. development files"
-	tristate
-	default n
-	depends on ADK_TARGET_LIB_MUSL && ADK_PACKAGE_MUSL
-	help
-	  C library header files.
-

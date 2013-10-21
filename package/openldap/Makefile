@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
 PKG_VERSION:=		2.4.26
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f36f3086031dd56ae94f722ffae8df5e
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
@@ -14,10 +14,10 @@ PKG_BUILDDEP:=		cyrus-sasl openssl db util-linux
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		libopenldap
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBOPENLDAP LIBOPENLDAP_DEV OPENLDAP_UTILS OPENLDAP_SLAPD
-PKGSD_LIBOPENLDAP_DEV:=	OpenLDAP headers
-PKGSC_LIBOPENLDAP_DEV:=	devel
+PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
 PKGSD_OPENLDAP_UTILS:=	OpenLDAP utilities
 PKGSS_OPENLDAP_UTILS:=	libopenldap
 PKGSC_OPENLDAP_UTILS:=	net/misc
@@ -32,8 +32,7 @@ PKGFD_WITH_IPV6:=		enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENLDAP_DEV,libopenldap-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBOPENLDAP_DEV},${PKGSC_LIBOPENLDAP_DEV}))
+$(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
 $(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
@@ -86,11 +85,6 @@ libopenldap-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENLDAP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{lber,ldap}*.so* \
 		${IDIR_LIBOPENLDAP}/usr/lib
-
-libopenldap-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBOPENLDAP_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_LIBOPENLDAP_DEV}/usr/include
 
 openldap-utils-install:
 	${INSTALL_DIR} ${IDIR_OPENLDAP_UTILS}/etc/openldap-data

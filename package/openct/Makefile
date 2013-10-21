@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openct
 PKG_VERSION:=		0.6.20
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		a1da3358ab798f1cb9232f1dbababc21
 PKG_DESCR:=		drivers for smart card readers
 PKG_SECTION:=		crypto
@@ -13,22 +13,21 @@ PKG_DEPENDS:=		libopenct
 PKG_BUILDDEP:=		libtool
 PKG_URL:=		http://www.opensc-project.org/openct/
 PKG_SITES:=		http://www.opensc-project.org/files/openct/
+PKG_LIBNAME:=		libopenct
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		OPENCT LIBOPENCT LIBOPENCT_DEV
+PKG_SUBPKGS:=		OPENCT LIBOPENCT
 PKGSD_LIBOPENCT:=	crypto token library 
 PKGSC_LIBOPENCT:=	libs
 PKGSS_LIBOPENCT:=	libltdl libusb
 PKGSB_LIBOPENCT:=	libtool libusb
-PKGSD_LIBOPENCT_DEV:=	development files for openct
-PKGSC_LIBOPENCT_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENCT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENCT,libopenct,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENCT},${PKGSD_LIBOPENCT},${PKGSC_LIBOPENCT}))
-$(eval $(call PKG_template,LIBOPENCT_DEV,libopenct-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBOPENCT_DEV},${PKGSC_LIBOPENCT_DEV}))
+$(eval $(call PKG_template,LIBOPENCT,libopenct,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENCT},${PKGSD_LIBOPENCT},${PKGSC_LIBOPENCT},${PKG_OPTS}))
 
-post-install:
+openct-install:
 	${INSTALL_DIR} ${IDIR_OPENCT}/etc ${IDIR_OPENCT}/usr/{sbin,bin}
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/openct-control \
 		${IDIR_OPENCT}/usr/sbin
@@ -43,13 +42,5 @@ libopenct-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENCT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libopenct.so* \
 		${IDIR_LIBOPENCT}/usr/lib
-
-libopenct-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBOPENCT_DEV}/usr/include/openct
-	${CP} ${WRKINST}/usr/include/openct/*.h \
-		${IDIR_LIBOPENCT_DEV}/usr/include/openct
-	${INSTALL_DIR} ${IDIR_LIBOPENCT_DEV}/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		${IDIR_LIBOPENCT_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

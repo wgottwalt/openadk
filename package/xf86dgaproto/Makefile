@@ -7,19 +7,13 @@ PKG_NAME:=		xf86dgaproto
 PKG_VERSION:=		2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		XFree86-DGA headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_MD5SUM:=		1fe79dc07857ad3e1fb8b8f2bdd70d1b
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86DGAPROTO,xf86dgaproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_XF86DGAPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XF86DGAPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_XF86DGAPROTO}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xf86dgaproto.pc \
-		${IDIR_XF86DGAPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cups
 PKG_VERSION:=		1.4.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8776403ad60fea9e85eab9c04d88560d
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
@@ -14,16 +14,13 @@ PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.cups.org/
 PKG_SITES:=		ftp://ftp.easysw.com/pub/cups/${PKG_VERSION}/
 PKG_NEED_CXX:=		1
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
-PKG_SUBPKGS:=		CUPS CUPS_DEV
-PKGSC_CUPS_DEV:=	devel
-
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CUPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,CUPS_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_CUPS_DEV}))
+$(eval $(call PKG_template,CUPS,cups,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
@@ -53,7 +50,7 @@ else
 XAKE_FLAGS+=		OPTIM='-fPIC'
 endif
 
-post-install:
+cups-install:
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/sbin
 	${INSTALL_DIR} ${IDIR_CUPS}/etc/cups
@@ -84,8 +81,4 @@ post-install:
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_CUPS}/usr/sbin/
 	${CP} ./files/etc/cups/* ${IDIR_CUPS}/etc/cups/
 
-cups-dev-install:
-	${INSTALL_DIR} ${IDIR_CUPS_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_CUPS_DEV}/usr/include
-	
 include ${TOPDIR}/mk/pkg-bottom.mk

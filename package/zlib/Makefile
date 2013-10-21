@@ -5,27 +5,23 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		zlib
 PKG_VERSION:=		1.2.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2ab442d169156f34c379c968f3f482dd
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.zlib.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/zlib/}
-
-PKG_SUBPKGS:=		ZLIB ZLIB_DEV
-PKGSD_ZLIB_DEV:=	development files for zlib
-PKGSC_ZLIB_DEV:=	devel
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ZLIB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,ZLIB_DEV,${PKG_NAME}-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ZLIB_DEV},${PKGSC_ZLIB_DEV}))
+$(eval $(call PKG_template,ZLIB,zlib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
@@ -51,12 +47,8 @@ do-configure:
 		$(CONFIGURE_OPTS) \
 	);
 
-post-install:
+zlib-install:
 	${INSTALL_DIR} ${IDIR_ZLIB}/usr/lib
-	${CP} ${WRKBUILD}/libz.so* ${IDIR_ZLIB}/usr/lib
-
-zlib-dev-install:
-	${INSTALL_DIR} ${IDIR_ZLIB_DEV}/usr/include
-	${CP} ${WRKBUILD}/*.h ${IDIR_ZLIB_DEV}/usr/include
+	${CP} ${WRKINST}/usr/lib/libz.so* ${IDIR_ZLIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

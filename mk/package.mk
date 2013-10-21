@@ -98,11 +98,12 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 # 4.) dependencies to other packages, $(PKG_DEPENDS)
 # 5.) description for the package, $(PKG_DESCR)
 # 6.) section of the package, $(PKG_SECTION)  
-# 7.) special package options
+# 7.) special package options $(PKG_OPTS)
 #     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/target/scripts
 #		  (needed for example for autoconf/automake)
 #     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
+#     dev -> create a development subpackage with headers and pkg-config files
 # should be package format independent and modular in the future
 define PKG_template
 ALL_PKGOPTS+=	$(1)
@@ -111,7 +112,9 @@ PKGDEPS_$(1)=	$(4)
 PKGDESC_$(1)=	$(5)
 PKGSECT_$(1)=	$(6)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DEV=	$(PACKAGE_DIR)/$(2)-dev_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
+IDIR_$(1)_DEV=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dev
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
@@ -128,6 +131,7 @@ IDEPEND_$(1):=	$$(strip $(4))
 
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
 ICONTROL_$(1)?=	$(WRKDIR)/.$(2).control
+ICONTROL_$(1)_DEV?= $(WRKDIR)/.$(2)-dev.control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
@@ -151,6 +155,13 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+ifneq (,$(filter dev,$(7)))
+	echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
+	echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
+	echo "Description: development files for $(2)" >> $(WRKDIR)/.$(2)-dev.control
+	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${CPU_ARCH}
+	echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DEV}/CONTROL/control
+endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
@@ -222,8 +233,13 @@ ifeq (,$(filter noscripts,$(7)))
 endif
 ifeq (,$(filter libmix,$(7)))
 ifeq (,$(filter libonly,$(7)))
+ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
+endif
+endif
+ifneq (,$(filter dev,$(7)))
+	$${PKG_BUILD} $${IDIR_$(1)_DEV} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 
 clean-targets: clean-dev-$(1)
@@ -241,6 +257,9 @@ endif
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))
+ifneq (,$(filter dev,$(7)))
+	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
+endif
 endef
 
 install-targets:

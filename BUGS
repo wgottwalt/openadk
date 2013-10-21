@@ -1,3 +1,6 @@
+- qemu-sparc with glibc/eglibc does not compile
+- qemu-ppc64 does not boot
+- cris foxboard-lx is broken, binutils failure
 - openssh on amd64 does not work, ssh-keygen endless loop
 - uclibc on lemote mips64 target does not work (only uclibc-trunk with patches)
 - qemu-mips64* targets does not boot, kernel problem?

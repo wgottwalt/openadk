@@ -6,12 +6,3 @@ config ADK_PACKAGE_UCLIBC
 	depends on ADK_TARGET_LIB_UCLIBC
 	help
 	  Embedded C library.
-
-config ADK_PACKAGE_UCLIBC_DEV
-	prompt "uClibc-dev............. development files"
-	tristate
-	default n
-	depends on ADK_TARGET_LIB_UCLIBC && ADK_PACKAGE_UCLIBC
-	help
-	  C library header files.
-

@@ -11,17 +11,16 @@ PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
+PKG_LIBNAME:=		libltdl
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBTOOL LIBLTDL LIBLTDL_DEV
+PKG_SUBPKGS:=		LIBTOOL LIBLTDL
 PKGSC_LIBLTDL:=		libs
-PKGSD_LIBLTDL_DEV:=	libltdl header files
-PKGSC_LIBLTDL_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL}))
-$(eval $(call PKG_template,LIBLTDL_DEV,libltdl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL_DEV}))
+$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL},${PKG_OPTS}))
 
 ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
@@ -37,9 +36,5 @@ libtool-install:
 libltdl-install:
 	${INSTALL_DIR} ${IDIR_LIBLTDL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libltdl.so* ${IDIR_LIBLTDL}/usr/lib/
-
-libltdl-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBLTDL_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBLTDL_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

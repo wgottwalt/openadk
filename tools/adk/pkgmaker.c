@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2013 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -158,11 +158,11 @@ static int parse_var_with_pkg(char *buf, const char *varname, char *pvalue, char
 	return(1);
 }
 
-/*
+#if 0
 static void iter_debug(const char *key, const char *value, const void *obj) {
 	fprintf(stderr, "HASHMAP key: %s value: %s\n", key, value);
 }
-*/
+#endif
 
 static int hash_str(char *string) {
 
@@ -272,7 +272,7 @@ int main() {
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
 	char *pkg_need_cxx, *pkg_need_java, *pkgname;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
-	char *packages, *pkg_name_u, *pkgs;
+	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper;
 	int result;
 	StrMap *pkgmap, *sectionmap;
@@ -282,6 +282,8 @@ int main() {
 	pkg_section = NULL;
 	pkg_url = NULL;
 	pkg_depends = NULL;
+	pkg_opts = NULL;
+	pkg_libname = NULL;
 	pkg_flavours = NULL;
 	pkg_flavours_string = NULL;
 	pkg_choices = NULL;
@@ -323,8 +325,47 @@ int main() {
 	
 	if (mkdir("package/pkgconfigs.d", S_IRWXU) > 0)
 		fatal_error("creation of package/pkgconfigs.d failed.");
+	if (mkdir("package/pkgconfigs.d/gcc", S_IRWXU) > 0)
+		fatal_error("creation of package/pkgconfigs.d/gcc failed.");
 	if (mkdir("package/pkglist.d", S_IRWXU) > 0)
 		fatal_error("creation of package/pkglist.d failed.");
+
+	/* delete Config.in.dev */
+	if (snprintf(path, MAXPATH, "package/pkgconfigs.d/gcc/Config.in.dev") < 0)
+		fatal_error("failed to create path variable.");
+	unlink(path);
+	cfg = fopen(path, "w");
+	if (cfg == NULL)
+		fatal_error("Config.in.dev can not be opened");
+	fprintf(cfg, "config ADK_PACKAGE_GLIBC_DEV\n");
+	fprintf(cfg, "\tprompt \"glibc-dev............ development files for glibc\"\n");
+	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tdefault n\n");
+	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_GLIBC\n");
+	fprintf(cfg, "\thelp\n");
+	fprintf(cfg, "\t  GNU C library header files.\n\n");
+	fprintf(cfg, "config ADK_PACKAGE_EGLIBC_DEV\n");
+	fprintf(cfg, "\tprompt \"eglibc-dev........... development files for eglibc\"\n");
+	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tdefault n\n");
+	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_EGLIBC\n");
+	fprintf(cfg, "\thelp\n");
+	fprintf(cfg, "\t  GNU C library header files.\n\n");
+	fprintf(cfg, "config ADK_PACKAGE_UCLIBC_DEV\n");
+	fprintf(cfg, "\tprompt \"uclibc-dev........... development files for uclibc\"\n");
+	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tdefault n\n");
+	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_UCLIBC\n");
+	fprintf(cfg, "\thelp\n");
+	fprintf(cfg, "\t  C library header files.\n\n");
+	fprintf(cfg, "config ADK_PACKAGE_MUSL_DEV\n");
+	fprintf(cfg, "\tprompt \"musl-dev............. development files for musl\"\n");
+	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tdefault n\n");
+	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_MUSL\n");
+	fprintf(cfg, "\thelp\n");
+	fprintf(cfg, "\t  C library header files.\n\n");
+	fclose(cfg);	
 
 	/* read Makefile's for all packages */
 	pkgdir = opendir("package");
@@ -371,6 +412,7 @@ int main() {
 				fatal_error("can not create dir variable.");
 			if (mkdir(dir, S_IRWXU) > 0)
 				fatal_error("can not create directory.");
+
 
 			/* allocate memory */
 			hkey = malloc(MAXVAR);
@@ -419,6 +461,10 @@ int main() {
 					if ((parse_var(buf, "PKG_MULTI", NULL, &pkg_multi)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_LIBNAME", pkg_libname, &pkg_libname)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_OPTS", pkg_opts, &pkg_opts)) == 0)
 						continue;
 					if ((parse_var_with_pkg(buf, "PKG_FLAVOURS_STRING_", pkg_flavours_string, &pkg_flavours_string, &pkgname, 20)) == 0)
 						continue;
@@ -476,6 +522,8 @@ int main() {
 				fprintf(stderr, "Package cfline is %s\n", pkg_cfline);
 			if (pkg_multi != NULL)
 				fprintf(stderr, "Package multi is %s\n", pkg_multi);
+			if (pkg_opts != NULL)
+				fprintf(stderr, "Package options are %s\n", pkg_opts);
 
 			strmap_enum(pkgmap, iter_debug, NULL);
 #endif
@@ -517,6 +565,7 @@ int main() {
 			fprintf(cfg, "\tdefault n\n");
 			fclose(cfg);
 			free(pkgs);
+
 
 			/* skip packages without binary package output */
 			if (nobinpkgs == 1)
@@ -579,7 +628,17 @@ int main() {
 					fprintf(cfg, "depends on !ADK_TOOLCHAIN_GCC_CXX\n\n");
 				}
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
-				fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
+				/* no prompt for devonly packages */
+				if (pkg_opts != NULL) {
+					if (strstr(pkg_opts, "devonly") != NULL) {
+						fprintf(cfg, "\t#prompt \"%s. %s\"\n", pseudo_name, pkg_descr);
+					} else {
+						fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
+					}
+				} else {
+					fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
+				}	
+				
 				fprintf(cfg, "\ttristate\n");
 				if (pkg_multi != NULL)
 					if (strncmp(pkg_multi, "1", 1) == 0)
@@ -911,8 +970,43 @@ int main() {
 					free(pkg_choices);
 					pkg_choices = NULL;
 				}
-				/* close file descriptor, parse next package */
+				/* close file descriptor for Config.in file */
 				fclose(cfg);
+				/* create Config.in files for development packages */
+				if (pkg_opts != NULL) {
+					if (strstr(pkg_opts, "dev") != NULL) {
+						if (snprintf(path, MAXPATH, "package/pkgconfigs.d/gcc/Config.in.dev") < 0)
+							fatal_error("failed to create path variable.");
+						cfg = fopen(path, "a");
+						if (cfg == NULL)
+							perror("Can not open Config.in.dev file");
+
+						if (pkg_libname == NULL)
+							pkg_libname = strdup(pkg_name);
+
+						fprintf(cfg, "\n");
+						fprintf(cfg, "config ADK_PACKAGE_%s_DEV\n", toupperstr(pkg_libname));
+
+						pseudo_name = malloc(MAXLINE);
+						memset(pseudo_name, 0, MAXLINE);
+						strncat(pseudo_name, pkg_libname, strlen(pkg_libname));
+						strncat(pseudo_name, "-dev", 4);
+						while (strlen(pseudo_name) < 20)
+							strncat(pseudo_name, ".", 1);
+
+						fprintf(cfg, "\tprompt \"%s. development files for %s\"\n", pseudo_name, pkg_libname);
+						fprintf(cfg, "\ttristate\n");
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_GCC\n");
+						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(pkg_libname));
+						fprintf(cfg, "\tdefault n\n");
+						fclose(cfg);
+						free(pseudo_name);
+						free(pkg_libname);
+						pkg_libname = NULL;
+					}
+					pkg_opts = NULL;
+				}
+				/* parse next package */
 				token = strtok_r(NULL, " ", &p_ptr);
 			}
 
@@ -964,6 +1058,17 @@ int main() {
 		}
 	}
 
+	/* add menu to gcc package */
+	if (snprintf(path, MAXPATH, "package/pkgconfigs.d/gcc/Config.in.gcc") < 0)
+		fatal_error("failed to create path variable.");
+	cfg = fopen(path, "a");
+	if (cfg == NULL)
+		perror("Can not open Config.in.gcc file");
+	fprintf(cfg, "menu \"Development packages\"\n");
+	fprintf(cfg, "depends on ADK_PACKAGE_GCC\n");
+	fprintf(cfg, "source \"package/pkgconfigs.d/gcc/Config.in.dev\"\n");
+	fprintf(cfg, "endmenu\n");
+	fclose(cfg);
 
 	/* create Config.in.auto */
 	strmap_enum(sectionmap, iter, NULL);

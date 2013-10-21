@@ -5,20 +5,19 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		postgresql
 PKG_VERSION:=		9.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		93b293bd735bb99258c1bad7bc9b8f6c
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		db
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.postgresql.org/
 PKG_SITES:=		http://ftp.postgresql.org/pub/source/v9.1.1/
-
-PKG_SUBPKGS:=		LIBPQ LIBPQ_DEV
+PKG_LIBNAME:=		libpq
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBPQ_DEV,libpq-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
@@ -57,10 +56,7 @@ do-build:
 libpq-install:
 	${INSTALL_DIR} ${IDIR_LIBPQ}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpq.so* ${IDIR_LIBPQ}/usr/lib
-
-libpq-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBPQ_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBPQ_DEV}/usr/include
+	# workaround for dev subpackage
 	${INSTALL_DIR} ${IDIR_LIBPQ_DEV}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/pg_config \
 		${IDIR_LIBPQ_DEV}/usr/bin

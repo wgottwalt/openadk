@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1e
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		66bf6f10f060d561929de96f9dfe5b8c
 PKG_DESCR:=		OpenSSL (Secure Socket Layer) libraries
 PKG_SECTION:=		libs
@@ -13,26 +13,24 @@ PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.openssl.org/
 PKG_SITES:=		http://www.openssl.org/source/
+PKG_LIBNAME:=		libopenssl
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBOPENSSL LIBOPENSSL_DEV OPENSSL_UTIL
+PKG_SUBPKGS:=		LIBOPENSSL OPENSSL_UTIL
 PKGSD_OPENSSL_UTIL:=	OpenSSL command line tool
 PKGSC_OPENSSL_UTIL:=	crypto
 PKGSS_OPENSSL_UTIL:=	libopenssl
-PKGSD_LIBOPENSSL_DEV:=	development files for openssl
-PKGSC_LIBOPENSSL_DEV:=	devel
-PKGSS_LIBOPENSSL_DEV:=	libopenssl
 
 PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
-$(eval $(call PKG_template,LIBOPENSSL_DEV,libopenssl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENSSL_DEV},${PKGSD_LIBOPENSSL_DEV},${PKGSC_LIBOPENSSL_DEV}))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
 
 CONFIG_STYLE:=		manual
@@ -89,9 +87,5 @@ openssl-util-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_UTIL}/etc/ssl/{,certs,private}
 	${CP} ${WRKSRC}/apps/openssl.cnf ${IDIR_OPENSSL_UTIL}/etc/ssl/
 	chmod 0700 ${IDIR_OPENSSL_UTIL}/etc/ssl/private
-
-libopenssl-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBOPENSSL_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBOPENSSL_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

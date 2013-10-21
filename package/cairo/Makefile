@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
 PKG_VERSION:=		1.10.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f101a9e88b783337b20b2e26dfd26d5f
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
@@ -15,21 +15,17 @@ PKG_BUILDDEP:=		libpng pixman freetype fontconfig libX11 libXrender glib
 PKG_BUILDDEP+=		libXext
 PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
+PKG_OPTS:=		dev
 
 #DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
-PKG_SUBPKGS:=		CAIRO CAIRO_DEV
-PKGSC_CAIRO_DEV:=	devel
-PKGSD_CAIRO_DEV:=	cairo headers
-
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,CAIRO_DEV,cairo-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CAIRO_DEV},${PKGSC_CAIRO_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS},${PKG_OPTS}))
 
 ifeq (,$(filter arm,$(TARGET_ARCH)))
 TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))

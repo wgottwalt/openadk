@@ -15,12 +15,3 @@ config ADK_PACKAGE_EGLIBC_STATIC
 	depends on ADK_TARGET_LIB_EGLIBC
 	help
 	  embedded GNU C library (static version).
-
-config ADK_PACKAGE_EGLIBC_DEV
-	prompt "eglibc-dev........... C library development files"
-	tristate
-	default n
-	depends on ADK_TARGET_LIB_EGLIBC
-	help
-	  embedded GNU C library header files.
-

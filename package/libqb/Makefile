@@ -5,18 +5,19 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libqb
 PKG_VERSION:=		0.16.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		88a256ce5217efa420598ade393879ff
 PKG_DESCR:=		high performance client server reusable features
 PKG_SECTION:=		libs
 PKG_URL:=		https://github.com/asalkeld/libqb/wiki#wiki-Releases
 PKG_SITES:=		https://fedorahosted.org/releases/q/u/quarterback/
+PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBQB,libqb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBQB,libqb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libqb-install:
 	$(INSTALL_DIR) $(IDIR_LIBQB)/usr/lib

@@ -5,25 +5,21 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		apr
 PKG_VERSION:=		1.4.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		76cc4457fbb71eefdafa27dba8f511fb
 PKG_DESCR:=		Apache Portable Runtime library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
-
-PKG_SUBPKGS:=		APR APR_DEV
-PKGSC_APR_DEV:=		devel
-PKGSD_APR_DEV:=		apr headers
+PKG_OPTS:=		dev
 
 PKG_FLAVOURS_APR:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,APR,apr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,APR_DEV,apr-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_APR_DEV},${PKGSC_APR_DEV}))
+$(eval $(call PKG_template,APR,apr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 
@@ -56,9 +52,5 @@ apr-install:
 	${CP} ${WRKINST}/usr/lib/libapr-1.so* ${IDIR_APR}/usr/lib/
 	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build-1
 	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_DIR}/usr/share/build-1/
-
-apr-dev-install:
-	${INSTALL_DIR} ${IDIR_APR_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_APR_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

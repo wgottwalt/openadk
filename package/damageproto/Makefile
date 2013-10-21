@@ -8,18 +8,12 @@ PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf8c47b7f48625230cff155180f8ddce
 PKG_DESCR:=		X DAMAGE Extension headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=              dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DAMAGEPROTO,damageproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_DAMAGEPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_DAMAGEPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_DAMAGEPROTO}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/damageproto.pc \
-		${IDIR_DAMAGEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

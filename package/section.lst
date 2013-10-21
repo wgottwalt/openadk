@@ -46,4 +46,3 @@ x11/server	X server
 x11/libs	X libraries
 x11/misc	X misc
 x11/fonts	X fonts
-x11/devel	X headers
