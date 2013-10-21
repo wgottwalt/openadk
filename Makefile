@@ -74,6 +74,10 @@ dev-help:
 	@echo ''
 	@echo 'Adding a new package:'
 	@echo 'make PKG=foo VER=1.0 newpackage'
+	@echo 'Adding a new simple library package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=lib newpackage'
+	@echo 'Adding a new simple program package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=prog newpackage'
 
 clean: .prereq_done
 	-@rm -f nohup.out

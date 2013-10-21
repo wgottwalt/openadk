@@ -5,21 +5,18 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.54.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 DISTFILES:=		boost_1_54_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
-
-PKG_SUBPKGS:=		BOOST BOOST_DEV
-PKGSD_BOOST_DEV:=	boost header files
-PKGSC_BOOST_DEV:=	devel
 
 PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options python regex serialization signals system test thread wave
 
@@ -42,8 +39,7 @@ PKGFD_wave:=	with wave
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BOOST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,BOOST_DEV,boost-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BOOST_DEV},${PKGSC_BOOST_DEV}))
+$(eval $(call PKG_template,BOOST,boost,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

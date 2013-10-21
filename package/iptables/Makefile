@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.20
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		387b92d3efcf4f07fe31c3bf0f1d18f5
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		firewall
@@ -18,9 +18,7 @@ PKG_DEPENDS+=		kmod-ip6-nf-iptables kmod-nf-conntrack-ipv6
 PKG_DEPENDS+=		kmod-ip6-nf-filter kmod-ip6-nf-target-reject
 PKG_URL:=		http://www.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/
-
-PKG_SUBPKGS:=		IPTABLES IPTABLES_DEV
-PKGSC_IPTABLES_DEV:=	devel
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -30,8 +28,7 @@ include ${TOPDIR}/mk/package.mk
 # use --disable-static in CONFIGURE_ARGS to change and optimize package
 #include ${LINUX_DIR}/.config
 
-$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,IPTABLES_DEV,iptables-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKGSC_IPTABLES_DEV}))
+$(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--enable-devel
@@ -48,9 +45,5 @@ iptables-install:
 	${INSTALL_DATA} ./files/firewall6.conf ${IDIR_IPTABLES}/etc
 	${CP} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libip6tc.so* ${IDIR_IPTABLES}/usr/lib
-
-iptables-dev-install:
-	${INSTALL_DIR} ${IDIR_IPTABLES_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_IPTABLES_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

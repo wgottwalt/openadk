@@ -5,34 +5,24 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libdrm
 PKG_VERSION:=		2.4.44
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		205fbaedfab827a874265420d38547f0
 PKG_DESCR:=		DRM library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libpthread-stubs cairo libpciaccess
 PKG_URL:=		http://dri.freedesktop.org/wiki/
 PKG_SITES:=		http://dri.freedesktop.org/libdrm/
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBDRM LIBDRM_DEV
-PKGSD_LIBDRM_DEV:=	DRM headers
-PKGSC_LIBDRM_DEV:=	devel
+PKG_ARCH_DEPENDS:=	!m68k
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBDRM,libdrm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBDRM_DEV,libdrm-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBDRM_DEV},${PKGSC_LIBDRM_DEV}))
+$(eval $(call PKG_template,LIBDRM,libdrm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libdrm-install:
 	$(INSTALL_DIR) $(IDIR_LIBDRM)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libdrm*.so* \
 		$(IDIR_LIBDRM)/usr/lib
-
-libdrm-dev-install:
-	$(INSTALL_DIR) $(IDIR_LIBDRM_DEV)/usr/lib/pkgconfig
-	$(INSTALL_DATA) ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		$(IDIR_LIBDRM_DEV)/usr/lib/pkgconfig
-	$(INSTALL_DIR) $(IDIR_LIBDRM_DEV)/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		$(IDIR_LIBDRM_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

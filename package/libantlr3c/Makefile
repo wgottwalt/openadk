@@ -5,15 +5,16 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libantlr3c
 PKG_VERSION:=		3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		674646e1d1bf5c6015435480cead725a
 PKG_DESCR:=		ANother Tool for Language Recognition
 PKG_SECTION:=		libs
 PKG_SITES:=		http://www.antlr.org/download/C/
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBANTLR3C,libantlr3c,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBANTLR3C,libantlr3c,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		OPTIMFLAGS="$(TARGET_CFLAGS)"
 

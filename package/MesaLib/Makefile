@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
 PKG_VERSION:=		8.0.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		cda5d101f43b8784fa60bdeaca4056f2
 PKG_DESCR:=		MESA library
 PKG_SECTION:=		libs
@@ -15,10 +15,7 @@ PKG_BUILDDEP+=		dri2proto glproto expat libXext
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
 PKG_NEED_CXX:=		1
-
-PKG_SUBPKGS:=		MESALIB MESALIB_DEV
-PKGSD_MESALIB_DEV:=	MESA headers
-PKGSC_MESALIB_DEV:=	devel
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm
 
@@ -26,8 +23,7 @@ WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,MESALIB_DEV,mesalib-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MESALIB_DEV},${PKGSC_MESALIB_DEV}))
+$(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
@@ -75,13 +71,5 @@ ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
-
-mesalib-dev-install:
-	$(INSTALL_DIR) $(IDIR_MESALIB_DEV)/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		$(IDIR_MESALIB_DEV)/usr/include
-	$(INSTALL_DIR) $(IDIR_MESALIB_DEV)/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		$(IDIR_MESALIB_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

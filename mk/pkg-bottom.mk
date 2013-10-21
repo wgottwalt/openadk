@@ -12,6 +12,7 @@
 #   are required, but the do-foo: magic is done here
 
 REORDER_DEPENDENCIES=	${TOPDIR}/scripts/automake.dep
+PKG_LIBNAME?=	$(PKG_NAME)
 
 pre-configure:
 do-configure:
@@ -142,6 +143,7 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}.scripts'
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
@@ -166,6 +168,23 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 	fi
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
+ifneq (,$(filter dev,${PKG_OPTS}))
+	mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
+	    find . -name \*.h | \
+ 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
+	    find . -name \*.pc | \
+ 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	for a in ${WRKINST}/usr/bin/*-config*; do \
+		[[ -e $$a ]] || continue; \
+		mkdir -p $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		cp $$a $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		chmod 755 $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
+	done
+	#env ${MAKE_ENV} ${MAKE} ${PKG_LIBNAME}-dev-install $(MAKE_TRACE)
+endif
 	@-cd ${WRKINST}; \
 	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \

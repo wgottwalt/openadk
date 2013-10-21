@@ -4,7 +4,7 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
 
-PKG_DESCR:=		GNU compiler collection
+PKG_DESCR:=		GNU C compiler
 PKG_SECTION:=		lang
 PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr
@@ -12,11 +12,15 @@ PKG_BUILDDEP:=		libmpc gmp mpfr
 
 PKG_ARCH_DEPENDS:=	!avr32
 
+PKG_SUBPKGS:=		GCC GXX
+PKGSD_GXX:=		GNU C++ compiler
+
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GXX,g++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CPPFLAGS:=	''
 TARGET_CFLAGS:=		''
@@ -26,15 +30,19 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif
 
+ifeq ($(ADK_PACKAGE_GXX),y)
+CONFIGURE_ARGS+=	--enable-languages=c,c++
+else
+CONFIGURE_ARGS+=	--enable-languages=c
+endif
+
 CONFIGURE_ENV+=		have_sys_sdt_h=no
-CONFIGURE_ARGS+=	--enable-languages=c,c++ \
-			--host=$(REAL_GNU_TARGET_NAME) \
+CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
 			--disable-__cxa_atexit \
 			--without-headers \
 			--libexecdir=/usr/lib \
 			--disable-libssp \
-			--disable-nls \
 			--disable-sjlj-exceptions \
 			--disable-biarch \
 			--disable-libmudflap \
@@ -46,17 +54,24 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++ \
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-post-install:
+pre-configure:
+	$(SED) 's@\./fixinc\.sh@-c true@' $(WRKSRC)/gcc/Makefile.in
+
+gcc-install:
 	${INSTALL_DIR} ${IDIR_GCC}/usr/lib/gcc ${IDIR_GCC}/usr/bin
-	${INSTALL_DIR} ${IDIR_GCC}/lib ${IDIR_GCC}/usr/include/c++
+	${INSTALL_DIR} ${IDIR_GCC}/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gcc ${IDIR_GCC}/usr/bin/
-	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GCC}/usr/bin/
-	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
 	cd ${IDIR_GCC}/usr/bin/ && ln -sf gcc cc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/cpp ${IDIR_GCC}/usr/bin/
-	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
 	cd ${IDIR_GCC}/lib && ln -sf ../usr/bin/cpp .
 	${CP} ${WRKINST}/usr/lib/gcc/* ${IDIR_GCC}/usr/lib/gcc/
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
+
+g++-install:
+	${INSTALL_DIR} ${IDIR_GCC}/usr/bin
+	${INSTALL_DIR} ${IDIR_GCC}/usr/include/c++
+	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GCC}/usr/bin/
+	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
+	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

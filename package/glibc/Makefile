@@ -29,16 +29,6 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, glibc is already build in toolchain directory
 do-install:
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-	for abi in $(TABI); do \
-		${INSTALL_DIR} $(IDIR_GLIBC)/lib$${abi/*:/} $(IDIR_GLIBC)/usr/lib$${abi/*:/} ; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_GLIBC)/lib$${abi/*:/} ; \
-		-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file.so* $(IDIR_GLIBC)/lib$${abi/*:/}; \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib$${abi/*:/}; \
-		done ; \
-	done
-else
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_compat libnss_dns libnss_files; do \
@@ -49,7 +39,6 @@ else
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
 ifeq ($(ADK_LOCALES),y)
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_GLIBC)/usr/bin
-endif
 endif
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc

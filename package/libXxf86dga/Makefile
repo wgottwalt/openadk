@@ -5,20 +5,21 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXxf86dga
 PKG_VERSION:=		1.1.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3d58873171c7765956ce257e6a7e4865
 PKG_DESCR:=		client library for the XFree86-DGA extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86dgaproto libXext libXaw
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXXF86DGA,libxxf86dga,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXXF86DGA,libxxf86dga,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+= 	--disable-malloc0returnsnull
 
-post-install:
+libxxf86dga-install:
 	${INSTALL_DIR} ${IDIR_LIBXXF86DGA}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXxf86dga.so* ${IDIR_LIBXXF86DGA}/usr/lib/
 

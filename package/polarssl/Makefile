@@ -11,18 +11,14 @@ PKG_DESCR:=		embedded SSL/TLS library
 PKG_SECTION:=		libs
 PKG_URL:=		https://polarssl.org/
 PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_LIBNAME:=		libpolarssl
+PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-gpl.tgz
 
-PKG_SUBPKGS:=		LIBPOLARSSL LIBPOLARSSL_DEV
-
 include $(TOPDIR)/mk/package.mk
 
-PKGSD_LIBPOLARSSL_DEV:=	development files for polarssl
-PKGSC_LIBPOLARSSL_DEV:=	devel
-
-$(eval $(call PKG_template,LIBPOLARSSL,libpolarssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBPOLARSSL_DEV,libpolarssl-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPOLARSSL_DEV},${PKGSC_LIBPOLARSSL_DEV}))
+$(eval $(call PKG_template,LIBPOLARSSL,libpolarssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 ALL_TARGET:=		no_test
@@ -31,10 +27,5 @@ libpolarssl-install:
 	$(INSTALL_DIR) $(IDIR_LIBPOLARSSL)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpolarssl.so* \
 		$(IDIR_LIBPOLARSSL)/usr/lib
-
-libpolarssl-dev-install:
-	$(INSTALL_DIR) $(IDIR_LIBPOLARSSL_DEV)/usr/include
-	$(CP) $(WRKINST)/usr/include/* \
-		$(IDIR_LIBPOLARSSL_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

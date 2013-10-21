@@ -7,8 +7,12 @@ PKG_NAME:=		fontcacheproto
 PKG_VERSION:=		0.1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		dc8c34a8c3559bf3b008bcdf7ba5a743
+PKG_SECTION:=		devel
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
+PKG_OPTS:=              dev devonly
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,FONTCACHEPROTO,fontcacheproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
 include ${TOPDIR}/mk/pkg-bottom.mk

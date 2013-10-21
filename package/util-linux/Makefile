@@ -5,32 +5,35 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.23.2
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
-PKG_DESCR:=		Linux utilities
-PKG_SECTION:=		fs
+PKG_DESCR:=		Linux utilities (meta-package)
+PKG_SECTION:=		utils
+PKG_DEPENDS:=		mount fdisk sfdisk swap-utils losetup mount mcookie
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.23/
 PKG_NOPARALLEL:=	1
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
-PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
-PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBUUID_DEV LIBMOUNT
+PKG_SUBPKGS:=		UTIL_LINUX FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
+PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT
 PKGSD_LIBUUID:=		UUID library
 PKGSC_LIBUUID:=		libs
-PKGSD_LIBUUID_DEV:=	UUID headers
-PKGSC_LIBUUID_DEV:=	devel
 PKGSD_LIBBLKID:=	BLKID library
 PKGSC_LIBBLKID:=	libs
 PKGSD_LIBMOUNT:=	Mount library
 PKGSC_LIBMOUNT:=	libs
 PKGSD_FDISK:=		Partition table manipulation utility
+PKGSC_FDISK:=		fs
 PKGSD_SFDISK:=		Scriptable Partition table manipulation utility
+PKGSC_SFDISK:=		fs
 PKGSD_SWAP_UTILS:=	Swap space management utilities
 PKGSS_SWAP_UTILS:=	libblkid
+PKGSC_SWAP_UTILS:=	fs
 PKGSD_LOSETUP:=		Loop devices management utilities
 PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSD_MOUNT:=		mount/umount utilities
@@ -41,14 +44,14 @@ PKGSC_MCOOKIE:=		x11/apps
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FDISK},${PKG_SECTION}))
-$(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SFDISK},${PKG_SECTION}))
-$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SWAP_UTILS},${PKGSD_SWAP_UTILS},${PKG_SECTION}))
+$(eval $(call PKG_template,UTIL_LINUX,util-linux,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FDISK},${PKGSC_FDISK}))
+$(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SFDISK},${PKGSC_SFDISK}))
+$(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SWAP_UTILS},${PKGSD_SWAP_UTILS},${PKGSC_SWAP_UTILS}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LOSETUP},${PKGSD_LOSETUP},${PKG_SECTION}))
-$(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MOUNT},${PKGSD_MOUNT},${PKG_SECTION}))
+$(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MOUNT},${PKGSD_MOUNT},${PKGSC_MOUNT}))
 $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MCOOKIE},${PKGSC_MCOOKIE}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID},${PKGSC_LIBUUID}))
-$(eval $(call PKG_template,LIBUUID_DEV,libuuid-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID_DEV},${PKGSC_LIBUUID_DEV}))
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 $(eval $(call PKG_template,LIBMOUNT,libmount,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBMOUNT},${PKGSC_LIBMOUNT}))
 
@@ -68,10 +71,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 
-post-build:
-	${INSTALL_DIR} ${STAGING_DIR}/usr/include/uuid
-	${CP} ${WRKBUILD}/libuuid/src/uuid.h \
-		${STAGING_DIR}/usr/include/uuid
+util-linux-install:
 
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin
@@ -101,10 +101,6 @@ mcookie-install:
 libuuid-install:
 	${INSTALL_DIR} ${IDIR_LIBUUID}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libuuid.so* ${IDIR_LIBUUID}/usr/lib
-
-libuuid-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBUUID_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBUUID_DEV}/usr/include
 
 libblkid-install:
 	${INSTALL_DIR} ${IDIR_LIBBLKID}/usr/lib

@@ -244,7 +244,7 @@ kernelconfig:
 # create a new package from package/.template
 newpackage:
 	@echo "Creating new package $(PKG)"
-	$(CP) $(TOPDIR)/package/.template $(TOPDIR)/package/$(PKG)
+	$(CP) $(TOPDIR)/package/.template$(TYPE) $(TOPDIR)/package/$(PKG)
 	pkg=$$(echo $(PKG)|tr '[:lower:]-' '[:upper:]_'); \
 		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile

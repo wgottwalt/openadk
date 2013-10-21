@@ -8,18 +8,12 @@ PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2dea7c339432b3363faf2d29c208e7b5
 PKG_DESCR:=		X11 composite headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,COMPOSITEPROTO,compositeproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_COMPOSITEPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_COMPOSITEPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_COMPOSITEPROTO}/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/compositeproto.pc \
-		${IDIR_COMPOSITEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

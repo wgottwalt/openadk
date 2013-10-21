@@ -1,1 +1,9 @@
-nothing right now.
+- port full blown perl
+- implement host build infrastructure, fixes update-patches for the package
+  needed for ncurses, file, mesalib, openldap, python2, ..
+- gcc fixed-includes disabling
+http://www.linuxfromscratch.org/lfs/view/7.1/chapter05/gcc-pass2.html
+- port w3m
+- port libcec for xbmc
+- check xbmc samba/nfs support
+- add support for librtmp in xbmc

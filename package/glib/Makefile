@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		glib
 PKG_VERSION:=		2.28.1
 PKG_EXTRAVER:=		2.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
@@ -15,21 +15,17 @@ PKG_BUILDDEP:=		gettext-tiny libiconv dbus
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
+PKG_OPTS:=		dev
 
 #DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
-PKG_SUBPKGS:=		GLIB GLIB_DEV
-PKGSC_GLIB_DEV:=	devel
-PKGSD_GLIB_DEV:=	glib headers
-
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,GLIB_DEV,glib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLIB_DEV},${PKGSC_GLIB_DEV},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-debug=no \
@@ -66,8 +62,7 @@ glib-install:
 	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
-
-glib-dev-install:
+	# workaround for dev subpackage
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
 	${CP} ${WRKINST}/usr/lib/glib-2.0/include/glibconfig.h \

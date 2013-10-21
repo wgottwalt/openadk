@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cyrus-sasl
 PKG_VERSION:=		2.1.23
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2eb0e48106f0e9cd8001e654f267ecbc
 PKG_DESCR:=		a general purpose authentication library
 PKG_SECTION:=		libs
@@ -14,15 +14,12 @@ PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://asg.web.cmu.edu/sasl/
 PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
 PKG_NOPARALLEL:=	1
-
-PKG_SUBPKGS:=		LIBSASL2 LIBSASL2_DEV
-PKGSD_LIBSASL2_DEV:=	sasl2 headers
-PKGSC_LIBSASL2_DEV:=	devel
+PKG_LIBNAME:=		libsasl2
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSASL2_DEV,libsasl2-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSASL2_DEV},${PKGSC_LIBSASL2_DEV}))
+$(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-staticdlopen \
 			--enable-cram \
@@ -77,9 +74,5 @@ libsasl2-install:
 	${CP} ${WRKINST}/usr/lib/libsasl2.so* ${IDIR_LIBSASL2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/sasl2/lib*.so* \
 		${IDIR_LIBSASL2}/usr/lib/sasl2
-
-libsasl2-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBSASL2_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBSASL2_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

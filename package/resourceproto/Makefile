@@ -7,19 +7,13 @@ PKG_NAME:=		resourceproto
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		Resource extension headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_MD5SUM:=		33091d5358ec32dd7562a1aa225a70aa
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RESOURCEPROTO,resourceproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_RESOURCEPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_RESOURCEPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_RESOURCEPROTO}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/resourceproto.pc \
-		${IDIR_RESOURCEPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

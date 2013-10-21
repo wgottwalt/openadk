@@ -7,19 +7,13 @@ PKG_NAME:=		xextproto
 PKG_VERSION:=		7.2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Protocol Extensions headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_MD5SUM:=		9062d689f422fad1b8774c967d730f09
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XEXTPROTO,xextproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_XEXTPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XEXTPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_XEXTPROTO}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xextproto.pc \
-		${IDIR_XEXTPROTO}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8ef664b6eb698aa6b733df59b17b9ed4
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
@@ -13,22 +13,18 @@ PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
 PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
+PKG_OPTS:=		dev
 
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		LIBE2FS LIBCOM_ERR LIBSS E2FSCK_STATIC
-PKG_SUBPKGS+=		LIBCOM_ERR_DEV LIBSS_DEV
 PKG_SUBPKGS+=		RESIZE2FS TUNE2FS E2FSCK MKE2FS
 PKGSD_LIBE2FS:=		e2fsprogs library
 PKGSC_LIBE2FS:=		libs
 PKGSD_LIBCOM_ERR:=	Common error library
 PKGSC_LIBCOM_ERR:=	libs
-PKGSD_LIBCOM_ERR_DEV:=	Common error headers
-PKGSC_LIBCOM_ERR_DEV:=	devel
 PKGSD_LIBSS:=		Subsystem command parsing library
 PKGSC_LIBSS:=		libs
-PKGSD_LIBSS_DEV:=	Subsystem command parsing headers
-PKGSC_LIBSS_DEV:=	devel
 PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	fs
 PKGSD_RESIZE2FS:=	Resize FS utility
@@ -46,11 +42,11 @@ PKGSS_MKE2FS:=		libe2fs
 
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call PKG_template,E2FSPROGS,e2fsprogs,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBE2FS,libe2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBE2FS},${PKGSC_LIBE2FS}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
 $(eval $(call PKG_template,LIBCOM_ERR_DEV,libcom-err-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR_DEV},${PKGSC_LIBCOM_ERR_DEV}))
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
-$(eval $(call PKG_template,LIBSS_DEV,libss-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS_DEV},${PKGSC_LIBSS_DEV}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 $(eval $(call PKG_template,TUNE2FS,tune2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_TUNE2FS),${PKGSD_TUNE2FS},${PKGSC_TUNE2FS}))
 $(eval $(call PKG_template,RESIZE2FS,resize2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_RESIZE2FS),${PKGSD_RESIZE2FS},${PKGSC_RESIZE2FS}))
@@ -74,6 +70,11 @@ ifneq ($(ADK_PACKAGE_E2FSCK_STATIC),)
 	${INSTALL_DIR} ${WRKINST}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static ${WRKINST}/usr/sbin
 endif
+
+e2fsprogs-install:
+	# workaround for dev subpackage
+	${CP} ${WRKINST}/usr/bin/compile_et \
+		${IDIR_E2FSPROGS_DEV}/usr/bin
 
 libe2fs-install:
 	${INSTALL_DIR} ${IDIR_LIBE2FS}/etc
@@ -105,24 +106,11 @@ libcom-err-install:
 		${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/bin
 
-libcom-err-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBCOM_ERR_DEV}/usr/include/et
-	${CP} ${WRKINST}/usr/include/et/com_err.h \
-		${IDIR_LIBCOM_ERR_DEV}/usr/include/et
-	${INSTALL_DIR} ${IDIR_LIBCOM_ERR_DEV}/usr/bin
-	${CP} ${WRKINST}/usr/bin/compile_et \
-		${IDIR_LIBCOM_ERR_DEV}/usr/bin
-
 libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libss.so* \
 		${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/bin/mk_cmds ${STAGING_HOST_DIR}/bin
-
-libss-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBSS_DEV}/usr/include/ss
-	${CP} ${WRKINST}/usr/include/ss/ss*.h \
-		${IDIR_LIBSS_DEV}/usr/include/ss
 
 e2fsck-static-install:
 ifneq ($(ADK_PACKAGE_E2FSCK_STATIC),)

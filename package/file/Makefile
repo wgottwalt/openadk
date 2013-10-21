@@ -13,18 +13,17 @@ PKG_DEPENDS:=		libmagic
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 			ftp://ftp.astron.com/pub/file/
+PKG_LIBNAME:=		libmagic
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		FILE LIBMAGIC LIBMAGIC_DEV
+PKG_SUBPKGS:=		FILE LIBMAGIC
 PKGSD_LIBMAGIC:=	file type guesser library
 PKGSC_LIBMAGIC:=	libs
-PKGSD_LIBMAGIC_DEV:=	file type guesser headers
-PKGSC_LIBMAGIC_DEV:=	devel
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC}))
-$(eval $(call PKG_template,LIBMAGIC_DEV,libmagic-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC_DEV},${PKGSD_LIBMAGIC_DEV},${PKGSC_LIBMAGIC_DEV}))
+$(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC},${PKG_OPTS}))
 
 pre-configure:
 	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
@@ -45,9 +44,5 @@ libmagic-install:
 		${IDIR_LIBMAGIC}/usr/share/misc
 	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmagic.so* ${IDIR_LIBMAGIC}/usr/lib
-
-libmagic-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBMAGIC_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMAGIC_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk
