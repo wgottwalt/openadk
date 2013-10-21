@@ -15,7 +15,7 @@ PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include $(TOPDIR)/mk/package.mk
 

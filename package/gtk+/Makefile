@@ -19,6 +19,8 @@ PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libgtk
 PKG_OPTS:=		dev
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 ifeq ($(ADK_STATIC),y)

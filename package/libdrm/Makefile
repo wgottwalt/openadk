@@ -14,6 +14,8 @@ PKG_URL:=		http://dri.freedesktop.org/wiki/
 PKG_SITES:=		http://dri.freedesktop.org/libdrm/
 PKG_OPTS:=		dev
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBDRM,libdrm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
