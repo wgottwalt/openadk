@@ -18,7 +18,7 @@ PKG_CXX:=		DANSGUARDIAN
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DANSGUARDIAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_LINUX_AVR32),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc

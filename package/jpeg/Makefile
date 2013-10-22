@@ -11,6 +11,7 @@ PKG_DESCR:=		The Independent JPEG Groups JPEG runtime library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.ijg.org/
 PKG_SITES:=		http://www.ijg.org/files/
+PKG_LIBNAME:=		libjpeg
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}src.v${PKG_VERSION}.tar.gz

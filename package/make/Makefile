@@ -16,7 +16,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MAKE,make,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+make-install:
 	$(INSTALL_DIR) $(IDIR_MAKE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/make $(IDIR_MAKE)/usr/bin
 

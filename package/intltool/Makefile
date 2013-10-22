@@ -13,11 +13,11 @@ PKG_SITES:=		https://launchpad.net/intltool/trunk/0.50.2/+download/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,INTLTOOL,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,INTLTOOL,intltool,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		PERL="/usr/bin/perl"
 
-post-install:
+intltool-install:
 	$(INSTALL_DIR) $(IDIR_INTLTOOL)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/intltool* \
 		$(IDIR_INTLTOOL)/usr/bin

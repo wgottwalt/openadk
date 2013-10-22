@@ -22,7 +22,7 @@ $(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 TARGET_CPPFLAGS+=	-DHAVE_SOCKADDR_STORAGE -DHAVE_HAS_COLORS
 
-post-install:
+trafshow-install:
 	${INSTALL_DIR} ${IDIR_TRAFSHOW}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/trafshow ${IDIR_TRAFSHOW}/usr/bin/
 

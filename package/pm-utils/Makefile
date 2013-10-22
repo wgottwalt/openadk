@@ -16,9 +16,9 @@ PKG_CFLINE_PM_UTILS:=	select BUSYBOX_FLOCK
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PM_UTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PM_UTILS,pm-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+pm-utils-install:
 	$(INSTALL_DIR) $(IDIR_PM_UTILS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/pm-utils \
 		 $(IDIR_PM_UTILS)/usr/lib

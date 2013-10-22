@@ -14,12 +14,12 @@ PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NETPERF,${PKG_NAME},${PKG_VERSION}${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NETPERF,netperf,${PKG_VERSION}${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 
-post-install:
+netperf-install:
 	${INSTALL_DIR} ${IDIR_NETPERF}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/netperf ${IDIR_NETPERF}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/netserver ${IDIR_NETPERF}/usr/bin/

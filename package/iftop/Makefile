@@ -16,9 +16,9 @@ PKG_SITES:=		http://www.ex-parrot.com/~pdw/iftop/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IFTOP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IFTOP,iftop,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+iftop-install:
 	${INSTALL_DIR} ${IDIR_IFTOP}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/iftop ${IDIR_IFTOP}/usr/bin/
 

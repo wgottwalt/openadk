@@ -17,7 +17,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FPROBE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FPROBE,fprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-piddir=/var \
 			--with-pcap=${STAGING_TARGET_DIR}/usr/include \
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--with-piddir=/var \
 			--with-membulk=index8 \
 			--with-hash=xor8 \
 
-post-install:
+fprobe-install:
 	${INSTALL_DIR} ${IDIR_FPROBE}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/fprobe ${IDIR_FPROBE}/usr/sbin/
 

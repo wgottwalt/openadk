@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SETXKBMAP,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SETXKBMAP,setxkbmap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+setxkbmap-install:
 	$(INSTALL_DIR) $(IDIR_SETXKBMAP)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/setxkbmap \
 		$(IDIR_SETXKBMAP)/usr/bin

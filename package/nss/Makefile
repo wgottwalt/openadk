@@ -25,7 +25,7 @@ WRKSRC=			${WRKDIST}/nss
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,NSS,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NSS,nss,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

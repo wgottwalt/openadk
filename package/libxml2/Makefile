@@ -20,6 +20,10 @@ PKGSD_LIBXML2_PYTHON:=	XML python bindings
 PKGSC_LIBXML2_PYTHON:=	libs
 PKGSB_LIBXML2_PYTHON:=	python2
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

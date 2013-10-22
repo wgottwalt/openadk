@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 authorisation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxau
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

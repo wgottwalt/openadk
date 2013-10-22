@@ -17,9 +17,9 @@ include ${TOPDIR}/mk/package.mk
 
 TARGET_LDFLAGS+=	-lpthread
 
-$(eval $(call PKG_template,WDFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WDFS,wdfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+wdfs-install:
 	${INSTALL_DIR} ${IDIR_WDFS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/wdfs ${IDIR_WDFS}/usr/bin
 

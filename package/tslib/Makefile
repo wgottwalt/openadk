@@ -12,12 +12,13 @@ PKG_SECTION:=		libs
 PKG_URL:=		http://tslib.berlios.de/
 PKG_SITES:=		http://download.berlios.de/tslib/
 PKG_NEED_CXX:=		1
+PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TSLIB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TSLIB,tslib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-corgi \
@@ -33,7 +34,7 @@ pre-build:
 pre-install:
 	$(INSTALL_DIR) $(WRKINST)/etc
 
-post-install:
+tslib-install:
 	$(INSTALL_DIR) $(IDIR_TSLIB)/etc
 	$(INSTALL_DIR) $(IDIR_TSLIB)/usr/lib/ts
 	$(INSTALL_DIR) $(IDIR_TSLIB)/usr/bin

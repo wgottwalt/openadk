@@ -20,7 +20,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_VARIANT}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PRIVOXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PRIVOXY,privoxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-DFEATURE_CONNECTION_KEEP_ALIVE
 TARGET_LDFLAGS+=	-pthread
@@ -33,7 +33,7 @@ CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes \
 MAKE_FLAGS+=		SPECIAL_CFLAGS='${TARGET_LDFLAGS}'
 MAKE_FILE:=		GNUmakefile
 
-post-install:
+privoxy-install:
 	${INSTALL_DIR} ${IDIR_PRIVOXY}/usr/sbin ${IDIR_PRIVOXY}/etc/privoxy
 	${CP} ${WRKINST}/etc/privoxy/* ${IDIR_PRIVOXY}/etc/privoxy
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/privoxy ${IDIR_PRIVOXY}/usr/sbin/

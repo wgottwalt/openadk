@@ -32,7 +32,7 @@ PKGFB_WITH_DIRECTFB:=	DirectFB
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPLAYER,mplayer,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 # gcc 4.5 produces internal compiler error with -Os
@@ -150,7 +150,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
 TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis
 
-post-install:
+mplayer-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
 	${CP} ${WRKINST}/usr/bin/mplayer ${IDIR_MPLAYER}/usr/bin
 

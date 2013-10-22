@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libfreetype
 PKG_BUILDDEP:=		freetype fontcacheproto fontsproto libfontenc xtrans
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxfont
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

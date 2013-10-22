@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		afe9c7c590f3093555cd6e870d2532e1
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
-PKG_BUILDDEP:=		gettext-tiny util-linux
-PKG_DEPENDS:=		samba-lib libuuid
+PKG_BUILDDEP:=		gettext-tiny util-linux popt
+PKG_DEPENDS:=		samba-lib libuuid libpopt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
@@ -55,7 +55,7 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 			--without-cluster-support \
 			--without-sendfile-support
 
-post-install:
+samba-install:
 	${INSTALL_DIR} ${IDIR_SAMBA}/etc/samba ${IDIR_SAMBA}/usr/sbin
 	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/samba/{charset,vfs}
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/charset/CP850.so \
@@ -66,12 +66,18 @@ post-install:
 		${IDIR_SAMBA}/usr/lib/samba
 	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
+
+samba-passwd-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_PASSWD}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/smbpasswd \
 		${IDIR_SAMBA_PASSWD}/usr/bin
+
+samba-client-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_CLIENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/smbclient \
 		${IDIR_SAMBA_CLIENT}/usr/bin
+
+samba-lib-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib/samba
 	$(CP) ${WRKINST}/usr/lib/samba/{libtalloc,libtdb,libtevent}.* \
 		${IDIR_SAMBA_LIB}/usr/lib/samba

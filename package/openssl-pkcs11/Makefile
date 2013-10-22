@@ -18,11 +18,11 @@ WRKDIST=		${WRKDIR}/engine_pkcs11-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSSL_PKCS11,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSSL_PKCS11,openssl-pkcs11,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-openssl="${STAGING_TARGET_DIR}/usr"
 
-post-install:
+openssl-pkcs11-install:
 	${INSTALL_DIR} ${IDIR_OPENSSL_PKCS11}/usr/lib/engines
 	${INSTALL_DATA} ${WRKINST}/usr/lib/engines/engine_pkcs11.so \
 		${IDIR_OPENSSL_PKCS11}/usr/lib/engines

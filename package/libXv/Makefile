@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 Xvideo extensions library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 videoproto libXext
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxv
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

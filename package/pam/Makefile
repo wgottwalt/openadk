@@ -11,13 +11,14 @@ PKG_DESCR:=		Pluggable Authentication Modules
 PKG_BUILDDEP:=		flex
 PKG_SECTION:=		misc
 PKG_SITES:=		http://openadk.org/distfiles/
+PKG_OPTS:=		dev
 
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
 WRKDIST=                ${WRKDIR}/Linux-PAM-${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--disable-nis \

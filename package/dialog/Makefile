@@ -17,11 +17,11 @@ DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DIALOG,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DIALOG,dialog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		makefile
 
-post-install:
+dialog-install:
 	$(INSTALL_DIR) $(IDIR_DIALOG)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/dialog $(IDIR_DIALOG)/usr/bin
 

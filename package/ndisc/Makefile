@@ -24,11 +24,15 @@ $(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RE
 
 MAKE_FLAGS+=		CC="${TARGET_CC}"
 
-post-install:
+ndisc6-install:
 	${INSTALL_DIR} ${IDIR_NDISC6}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ndisc6 ${IDIR_NDISC6}/usr/bin/
+
+rdisc6-install:
 	${INSTALL_DIR} ${IDIR_RDISC6}/usr/bin
-	${INSTALL_BIN} ${WRKINST}//usr/bin/rdisc6 ${IDIR_RDISC6}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/rdisc6 ${IDIR_RDISC6}/usr/bin/
+
+tcptraceroute6-install:
 	${INSTALL_DIR} ${IDIR_TCPTRACEROUTE6}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/tcptraceroute6 \
 		${IDIR_TCPTRACEROUTE6}/usr/bin/

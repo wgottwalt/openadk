@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mutt/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MUTT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--enable-imap \
 			--with-ssl
 
-post-install:
+mutt-install:
 	${INSTALL_DIR} ${IDIR_MUTT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mutt ${IDIR_MUTT}/usr/bin/
 ifeq (${ADK_PACKAGE_GPG},y)

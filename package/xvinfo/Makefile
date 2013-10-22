@@ -17,9 +17,9 @@ PKG_ARCH_DEPENDS:=	!cris
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XVINFO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XVINFO,xvinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xvinfo-install:
 	$(INSTALL_DIR) $(IDIR_XVINFO)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xvinfo \
 		$(IDIR_XVINFO)/usr/bin

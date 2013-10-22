@@ -22,7 +22,7 @@ PKGFD_WITH_IPV6:=		enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPSEC_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \
@@ -38,7 +38,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
+ipsec-tools-install:
 	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/usr/sbin ${IDIR_IPSEC_TOOLS}/usr/lib
 	${INSTALL_DIR} ${IDIR_IPSEC_TOOLS}/etc
 	${INSTALL_DATA} ${WRKBUILD}/src/racoon/samples/racoon.conf \

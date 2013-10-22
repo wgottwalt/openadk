@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		fixesproto xextproto xproto libX11
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxfixes
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

@@ -11,6 +11,7 @@ PKG_DESCR:=		Xinerama library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xineramaproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxinerama
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

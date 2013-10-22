@@ -11,6 +11,7 @@ PKG_DESCR:=		disk file format database
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/gdbm/
 PKG_SITES:=		${MASTER_SITE_GNU:=gdbm/}
+PKG_LIBNAME:=		libgdbm
 PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk

@@ -13,7 +13,6 @@ PKG_URL:=		http://sourceforge.net/projects/giflib/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=giflib/giflib%204.x/$(PKG_NAME)-$(PKG_VERSION)/}
 PKG_OPTS:=		dev
 
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GIFLIB,giflib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

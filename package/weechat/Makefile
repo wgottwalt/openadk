@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.weechat.org/files/src/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WEECHAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WEECHAT,weechat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-liconv
 CONFIGURE_ARGS+=	--with-debug=0 \
@@ -28,7 +28,7 @@ CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-ruby \
 			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
 
-post-install:
+weechat-install:
 	${INSTALL_DIR} ${IDIR_WEECHAT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/weechat-curses \
 		${IDIR_WEECHAT}/usr/bin/weechat

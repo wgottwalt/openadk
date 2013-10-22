@@ -11,6 +11,7 @@ PKG_DESCR:=		common operation for the XPM pixmap format
 PKG_BUILDDEP:=		libX11 libXt
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxpm
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

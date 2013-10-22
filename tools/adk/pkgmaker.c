@@ -462,7 +462,7 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_LIBNAME", pkg_libname, &pkg_libname)) == 0)
+					if ((parse_var(buf, "PKG_LIBNAME", pkg_libname, &pkg_libname)) == 0) 
 						continue;
 					if ((parse_var(buf, "PKG_OPTS", pkg_opts, &pkg_opts)) == 0)
 						continue;
@@ -495,6 +495,11 @@ int main() {
 				}
 			}
 
+			/* when PKG_LIBNAME exist use this instead of PKG_NAME, but only for !libmix */
+			if (pkg_libname != NULL)
+				if (strstr(pkg_opts, "libmix") == NULL)
+					pkg_name = strdup(pkg_libname);
+
 			/* end of package Makefile parsing */
 			if (fclose(pkg) != 0)
 				perror("Failed to close file stream for Makefile");
@@ -502,6 +507,8 @@ int main() {
 #if 0
 			if (pkg_name != NULL)
 				fprintf(stderr, "Package name is %s\n", pkg_name);
+			if (pkg_libname != NULL)
+				fprintf(stderr, "Package library name is %s\n", pkg_libname);
 			if (pkg_section != NULL)
 				fprintf(stderr, "Package section is %s\n", pkg_section);
 			if (pkg_descr != NULL)
@@ -559,7 +566,7 @@ int main() {
 					}
 					fprintf(cfg, "\n");
 				} else {
-					fprintf(cfg, "ADK_PACKAGE_%s\n", toupperstr(pkgdirp->d_name));
+					fprintf(cfg, "ADK_PACKAGE_%s\n", toupperstr(pkg_name));
 				}
 			} 
 			fprintf(cfg, "\tdefault n\n");
@@ -575,7 +582,7 @@ int main() {
 			if (pkg_subpkgs != NULL)
 				packages = tolowerstr(pkg_subpkgs);
 			else
-				packages = strdup(pkgdirp->d_name);
+				packages = strdup(pkg_name);
 
 			token = strtok_r(packages, " ", &p_ptr);
 			while (token != NULL) {

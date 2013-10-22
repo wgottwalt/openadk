@@ -16,9 +16,9 @@ PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CTORRENT,ctorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+ctorrent-install:
 	${INSTALL_DIR} ${IDIR_CTORRENT}/usr/bin
 	${CP} ${WRKINST}/usr/bin/ctorrent ${IDIR_CTORRENT}/usr/bin
 

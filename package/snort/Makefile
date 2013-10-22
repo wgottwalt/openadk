@@ -17,7 +17,7 @@ PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SNORT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SNORT,snort,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-static-daq \
 			--with-dnet-includes="${STAGING_TARGET_DIR}/usr/include" \ 
 			--with-dnet-libraries="${STAGING_TARGET_DIR}/usr/lib" 
 
-post-install:
+snort-install:
 	${INSTALL_DIR} ${IDIR_SNORT}/usr/bin
 	${INSTALL_DIR} ${IDIR_SNORT}/etc/snort
 	${INSTALL_DATA} ${WRKBUILD}/etc/snort.conf ${IDIR_SNORT}/etc/snort

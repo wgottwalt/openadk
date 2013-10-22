@@ -26,9 +26,9 @@ PKGSS_PYTHON2_BZIP2:=	bzip2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PYTHON2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_BZIP2,${PKG_NAME}-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_READLINE,${PKG_NAME}-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PYTHON2_BZIP2,python2-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PYTHON2_READLINE,python2-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXE:=			.exe
@@ -72,7 +72,7 @@ pre-configure:
 	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
 	$(SED) "s#@@STAGING_DIR@@#$(STAGING_DIR)#" ${WRKBUILD}/setup.py
 
-post-install:
+python2-install:
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/include/python2.7

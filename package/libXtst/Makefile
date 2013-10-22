@@ -11,6 +11,7 @@ PKG_DESCR:=		Xtst library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		recordproto libXi
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxtst
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

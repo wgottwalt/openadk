@@ -91,7 +91,7 @@ ${2}-install:
 	done
 endef
 
-$(eval $(call PKG_template,FREERADIUS_SERVER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FREERADIUS_SERVER,freeradius-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_DEMOCERTS,freeradius-democerts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FREERADIUS_DEMOCERTS},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_CHAP,freeradius-mod-chap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FREERADIUS_MOD_CHAP},${PKG_SECTION}))
 $(eval $(call PKG_template,FREERADIUS_MOD_DETAIL,freeradius-mod-detail,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FREERADIUS_MOD_DETAIL},${PKG_SECTION}))

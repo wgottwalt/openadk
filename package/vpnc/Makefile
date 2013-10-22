@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VPNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VPNC,vpnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
@@ -24,7 +24,7 @@ XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			OS="Linux" \
 			PREFIX=/usr
 
-post-install:
+vpnc-install:
 	${CP} ${WRKINST}/* ${IDIR_VPNC}/
 	${CP} files/vpnc-route ${IDIR_VPNC}/etc/vpnc/
 	${CP} files/vpnc-script ${IDIR_VPNC}/etc/vpnc/

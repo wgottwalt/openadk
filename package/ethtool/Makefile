@@ -13,9 +13,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ETHTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+ethtool-install:
 	${INSTALL_DIR} ${IDIR_ETHTOOL}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ethtool ${IDIR_ETHTOOL}/usr/sbin
 

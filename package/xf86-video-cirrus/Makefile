@@ -19,9 +19,9 @@ PKG_CFLINE_XF86_VIDEO_CIRRUS:=depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_VIDEO_CIRRUS,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_VIDEO_CIRRUS,xf86-video-cirrus,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-video-cirrus-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_CIRRUS}/usr/lib/xorg/modules/drivers
 	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/cirrus_*.so \
 		${IDIR_XF86_VIDEO_CIRRUS}/usr/lib/xorg/modules/drivers/

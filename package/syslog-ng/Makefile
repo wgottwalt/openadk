@@ -16,14 +16,14 @@ PKG_SITES:=		http://www.balabit.com/downloads/files/syslog-ng/sources/1.6/src/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SYSLOG_NG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-full-dynamic \
 			--enable-tcp-wrapper
 CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_TARGET_DIR}/usr/bin
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
-post-install:
+syslog-ng-install:
 	${INSTALL_DIR} ${IDIR_SYSLOG_NG}/usr/sbin \
 		${IDIR_SYSLOG_NG}/etc/syslog-ng
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/syslog-ng \

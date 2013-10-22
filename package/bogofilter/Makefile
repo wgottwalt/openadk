@@ -17,7 +17,7 @@ PKG_NEED_CXX:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BOGOFILTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BOGOFILTER,bogofilter,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		LIBS="-liconv" \
 			ac_cv_func_memcmp_working=yes

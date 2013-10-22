@@ -17,9 +17,9 @@ PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FONT_BH_TTF,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FONT_BH_TTF,font-bh-ttf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+font-bh-ttf-install:
 	$(INSTALL_DIR) $(IDIR_FONT_BH_TTF)/usr/share/fonts/X11/TTF
 	$(CP) ${WRKINST}/usr/share/fonts/X11/TTF/* \
 		$(IDIR_FONT_BH_TTF)/usr/share/fonts/X11/TTF

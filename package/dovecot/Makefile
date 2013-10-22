@@ -22,7 +22,7 @@ PKGCB_WITH_GNUTLS:=	gnutls
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DOVECOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DOVECOT,dovecot,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		RPCGEN='' \
 			ignore_signed_size=1 \

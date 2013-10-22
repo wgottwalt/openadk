@@ -5,26 +5,24 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ez-ipupdate
 PKG_VERSION:=		3.0.11b8
-PKG_RELEASE:=		10
+PKG_RELEASE:=		11
 PKG_MD5SUM:=		000211add4c4845ffa4211841bff4fb0
 PKG_DESCR:=		a client for dynamic DNS services
 PKG_SECTION:=		dns
 PKG_URL:=		http://ez-ipupdate.com/
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/e/ez-ipupdate/
 
-PKG_SUBPKGS:=		EZIPUPDATE
-
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,EZIPUPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EZ_IPUPDATE,ez-ipupdate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 
 do-install:
-	${INSTALL_DIR} ${IDIR_EZIPUPDATE}/etc ${IDIR_EZIPUPDATE}/usr/sbin
-	install -m0600 ./files/${PKG_NAME}.conf ${IDIR_EZIPUPDATE}/etc/
-	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_EZIPUPDATE}/usr/sbin/
+	${INSTALL_DIR} ${IDIR_EZ_IPUPDATE}/etc ${IDIR_EZ_IPUPDATE}/usr/sbin
+	install -m0600 ./files/ez-ipupdate.conf ${IDIR_EZ_IPUPDATE}/etc/
+	${INSTALL_BIN} ${WRKBUILD}/ez-ipupdate ${IDIR_EZ_IPUPDATE}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

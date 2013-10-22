@@ -13,7 +13,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=setserial/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SETSERIAL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SETSERIAL,setserial,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=         manual
 TARGET_CPPFLAGS+=	-DFIOQSIZE=1

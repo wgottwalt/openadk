@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-client
 PKG_VERSION:=		1.1.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
 PKG_DESCR:=		RADIUS client
 PKG_SECTION:=		ppp
@@ -15,23 +15,25 @@ PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 
 PKG_SUBPKGS:=		FREERADIUS_CLIENT LIBFREERADIUS_CLIENT
-PKG_SECTION_LIB:=	libs
+PKGSS_LIBFREERADIUS_CLIENT:=	libs
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FREERADIUS_CLIENT,freeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBFREERADIUS_CLIENT,libfreeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION_LIB}))
+$(eval $(call PKG_template,LIBFREERADIUS_CLIENT,libfreeradius-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSS_LIBFREERADIUS_CLIENT}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_func_uname=no
 
-post-install:
+freeradius-client-install:
 	${INSTALL_DIR} ${IDIR_FREERADIUS_CLIENT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radiusclient \
 		${IDIR_FREERADIUS_CLIENT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rad{login,status} \
 		${IDIR_FREERADIUS_CLIENT}/usr/sbin
 	${CP} ${WRKINST}/etc ${IDIR_FREERADIUS_CLIENT}/
+
+libfreeradius-client-install:
 	${INSTALL_DIR} ${IDIR_LIBFREERADIUS_CLIENT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libfreeradius-client.so* \
 		${IDIR_LIBFREERADIUS_CLIENT}/usr/lib

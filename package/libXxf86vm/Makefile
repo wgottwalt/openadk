@@ -11,6 +11,7 @@ PKG_DESCR:=		an interface to the XFree86-VidModeExtension extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86vidmodeproto libXext
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxxf86vm
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

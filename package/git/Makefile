@@ -16,7 +16,7 @@ PKG_SITES:=		http://git-core.googlecode.com/files/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GIT,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GIT,git,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		NO_PERL=1 NO_NSEC=1 NO_TCLTK=1 NO_PYTHON=1 \
 			NO_INSTALL_HARDLINKS=1 NO_GETTEXT=1 NO_ICONV=1 \
@@ -28,7 +28,7 @@ CONFIGURE_ENV+=		ac_cv_c_c99_format=yes \
 			ac_cv_fread_reads_directories=no \
 			ac_cv_snprintf_returns_bogus=no
 
-post-install:
+git-install:
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/bin $(IDIR_GIT)/usr/libexec/git-core
 	$(INSTALL_DIR) $(IDIR_GIT)/usr/share/git-core/templates
 	$(CP) $(WRKINST)/usr/share/git-core/templates/* \

@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libjpeg libpng
 PKG_BUILDDEP:=		libpng jpeg
 PKG_URL:=		http://www.libgd.org/
 PKG_SITES:=		http://www.libgd.org/releases/
+PKG_LIBNAME:=		libgd
 PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk

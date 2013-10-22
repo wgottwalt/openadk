@@ -10,7 +10,7 @@ PKG_MD5SUM:=		ef47003355a2e368e4d9596cd070ef23
 PKG_DESCR:=		small and fast webserver
 PKG_SECTION:=		www
 PKG_URL:=		http://www.cherokee-project.com
-PKG_SITES:=		http://www.cherokee-project.de/mirrors/cherokee/1.2/1.2.101/
+PKG_SITES:=		http://www.cherokee-project.de/mirrors/cherokee/1.2/${PKG_VERSION}/
 
 include $(TOPDIR)/mk/package.mk
 
@@ -26,8 +26,6 @@ cherokee-install:
 	$(INSTALL_DIR) $(IDIR_CHEROKEE)/usr/lib/cherokee
 	$(CP) $(WRKINST)/usr/lib/libcherokee*so* \
 		$(IDIR_CHEROKEE)/usr/lib
-	#$(CP) $(WRKINST)/usr/lib/cherokee/*.so \
-	#	$(IDIR_CHEROKEE)/usr/lib/cherokee
 	$(INSTALL_DIR) $(IDIR_CHEROKEE)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/cherokee{,-worker} \
 		$(IDIR_CHEROKEE)/usr/sbin

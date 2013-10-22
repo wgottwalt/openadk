@@ -16,7 +16,7 @@ PKG_DFLT_BKEYMAPS:=	y if ADK_TARGET_WITH_INPUT
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BKEYMAPS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BKEYMAPS,bkeymaps,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

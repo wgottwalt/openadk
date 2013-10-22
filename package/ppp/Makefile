@@ -39,7 +39,7 @@ XAKE_FLAGS+=		STAGING_TARGET_DIR=${STAGING_TARGET_DIR} \
 			DESTDIR="${WRKINST}/usr" STRIP='' \
 			TARGET_AR='${TARGET_CROSS}ar'
 
-post-install:
+ppp-install:
 	${INSTALL_DIR} ${IDIR_PPP}/etc/ppp
 	install -m0600 ./files/etc/ppp/chap-secrets ${IDIR_PPP}/etc/ppp/
 	${INSTALL_DATA} ./files/etc/ppp/options ${IDIR_PPP}/etc/ppp/

@@ -19,7 +19,7 @@ $(eval $(call PKG_template,RDESKTOP,rdesktop,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 
 CONFIGURE_ARGS+=	--with-openssl="${STAGING_TARGET_DIR}/usr"
 
-post-install:
+rdesktop-install:
 	$(INSTALL_DIR) $(IDIR_RDESKTOP)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/rdesktop \
 		$(IDIR_RDESKTOP)/usr/bin

@@ -15,12 +15,12 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WPUT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WPUT,wput,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-g-switch \
 			--without-ssl
 
-post-install:
+wput-install:
 	${INSTALL_DIR} ${IDIR_WPUT}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/wput ${IDIR_WPUT}/usr/bin
 

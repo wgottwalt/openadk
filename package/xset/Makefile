@@ -15,9 +15,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XSET,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XSET,xset,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xset-install:
 	$(INSTALL_DIR) $(IDIR_XSET)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xset \
 		$(IDIR_XSET)/usr/bin

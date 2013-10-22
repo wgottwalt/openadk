@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb
 PKG_BUILDDEP:=		libSM libX11 kbproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxt
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

@@ -13,8 +13,8 @@ PKG_BUILDDEP:=		glib cluster-glue
 PKG_URL:=		https://github.com/ClusterLabs/resource-agents
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_CFLINE_RESOURCE_AGENTS:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-PKG_ARCH_DEPENDS:=	x86
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 

@@ -15,14 +15,15 @@ PKG_SITES:=		http://download.berlios.de/gpsd/
 PKG_URL:=		http://gpsd.berlios.de/
 PKG_CXX:=		GPSD
 PKG_NEED_CXX:=		1
-PKG_CFLINE_GPSD:=	depends on !ADK_NATIVE
+
+PKG_ARCH_DEPENDS:=	!native
 
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
 PKGSD_GPSD_CLIENTS:=	GPS client utilities
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GPSD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GPSD,gpsd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GPSD_CLIENTS},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
@@ -34,7 +35,10 @@ CONFIGURE_ENV+=		EGREP="grep -E" \
 CONFIGURE_ARGS+=	--disable-dbus
 TARGET_CFLAGS+=		-fPIC
 
+ifeq ($(ADK_COMPILE_GPSD_WITH_UCLIBCXX),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lc
+endif
+
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
@@ -54,11 +58,13 @@ post-configure:
 		${WRKBUILD}/libtool
 endif
 
-post-install:
+gpsd-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libgps.so* ${IDIR_GPSD}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgpsd.so* ${IDIR_GPSD}/usr/lib
 	${CP} ${WRKINST}/usr/sbin/gpsd ${IDIR_GPSD}/usr/sbin
+
+gpsd-clients-install:
 	${INSTALL_DIR} ${IDIR_GPSD_CLIENTS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/{cgps,gpxlogger} \
 		${IDIR_GPSD_CLIENTS}/usr/bin

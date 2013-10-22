@@ -11,12 +11,12 @@ PKG_DESCR:=		an open source patent-free speech compression codec
 PKG_SECTION:=		libs
 PKG_URL:=		http://speex.org/
 PKG_SITES:=		http://downloads.us.xiph.org/releases/speex/
-
-PKG_SUBPKGS:=		LIBSPEEX
+PKG_LIBNAME:=		libspeex
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--without-ogg --disable-oggtest --enable-fixed-point

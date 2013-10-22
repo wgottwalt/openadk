@@ -11,6 +11,7 @@ PKG_DESCR:=		X Print library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext printproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxp
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

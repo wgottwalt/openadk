@@ -17,11 +17,11 @@ PKG_CFLINE_PCMCIAUTILS:=depends on ADK_TARGET_WITH_CARDBUS
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PCMCIAUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PCMCIAUTILS,pcmciautils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE=		manual
 
-post-install:
+pcmciautils-install:
 	$(INSTALL_DIR) $(IDIR_PCMCIAUTILS)/etc/pcmcia
 	$(INSTALL_DATA) ./files/config.opts \
 		$(IDIR_PCMCIAUTILS)/etc/pcmcia

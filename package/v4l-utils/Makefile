@@ -5,22 +5,30 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		v4l-utils
 PKG_VERSION:=		0.9.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f4d24bb9f0307345d5a8fc4febcb993d
 PKG_DESCR:=		Video4Linux2 utilities
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		jpeg
 PKG_SITES:=		http://linuxtv.org/downloads/v4l-utils/
+PKG_LIBNAME:=		libv4l
+PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
+PKGSC_LIBV4L:=		libs
+PKGSD_LIBV4L:=		Video4Linux2 libraries
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,V4L_UTILS,v4l-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBV4L,libv4l,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBV4L,libv4l,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBV4L},${PKGSC_LIBV4L},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-qv4l2
 TARGET_CPPFLAGS+=	-DLINUX_I2C_DEV_H

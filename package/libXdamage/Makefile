@@ -11,6 +11,7 @@ PKG_DESCR:=		X Window System client interface to the DAMAGE extension to the X p
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXfixes damageproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxdamage
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

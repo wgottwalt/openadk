@@ -11,6 +11,7 @@ PKG_DESCR:=		xcursor library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_BUILDDEP:=		libXfixes libXrender
+PKG_LIBNAME:=		libxcursor
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

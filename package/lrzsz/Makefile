@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.ohse.de/uwe/releases/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LRZSZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LRZSZ,lrzsz,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 

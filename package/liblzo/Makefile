@@ -11,6 +11,7 @@ PKG_DESCR:=		a real-time data compression library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo
 PKG_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
+PKG_LIBNAME:=		liblzo
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

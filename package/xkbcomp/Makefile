@@ -15,9 +15,9 @@ PKG_SITES:=		http://xorg.freedesktop.org/releases/X11R7.4/src/everything/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XKBCOMP,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XKBCOMP,xkbcomp,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xkbcomp-install:
 	${INSTALL_DIR} ${IDIR_XKBCOMP}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/xkbcomp ${IDIR_XKBCOMP}/usr/bin
 

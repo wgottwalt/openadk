@@ -12,15 +12,21 @@ PKG_SECTION:=		archive
 PKG_DEPENDS:=		libbz2
 PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
-PKG_SUBPKGS:=		BZIP2 LIBBZ2
+PKG_LIBNAME:=		libbz2
+PKG_OPTS:=		dev
 
+PKG_SUBPKGS:=		BZIP2 LIBBZ2
 PKGSD_LIBBZ2:=		bzip2 compression library
 PKGSC_LIBBZ2:=		libs
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BZIP2,bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBZ2},${PKGSC_LIBBZ2}))
+$(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBZ2},${PKGSC_LIBBZ2},${PKG_OPTS}))
 
 MAKE_FILE:=		Makefile-libbz2_so
 CONFIG_STYLE:=		manual
@@ -36,6 +42,8 @@ libbz2-install:
 		${STAGING_DIR}/usr/lib
 	(cd ${STAGING_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
 	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_DIR)/usr/include
+	${INSTALL_DIR} $(LIBBZ2_DEV)/usr/include
+	$(CP) $(WRKBUILD)/bzlib.h $(LIBBZ2_DEV)/usr/include
 
 bzip2-install:
 	${INSTALL_DIR} ${IDIR_BZIP2}/usr/bin

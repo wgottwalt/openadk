@@ -15,9 +15,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XRDB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XRDB,xrdb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xrdb-install:
 	$(INSTALL_DIR) $(IDIR_XRDB)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xrdb \
 		$(IDIR_XRDB)/usr/bin

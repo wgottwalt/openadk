@@ -18,12 +18,12 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,RPCBIND,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RPCBIND,rpcbind,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/tirpc
 CONFIGURE_ARGS+=	--disable-libwrap
 
-post-install:
+rpcbind-install:
 	$(INSTALL_DIR) $(IDIR_RPCBIND)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/rpcbind \
 		$(IDIR_RPCBIND)/usr/bin

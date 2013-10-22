@@ -15,15 +15,19 @@ PKG_URL:=		http://id3lib.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
 PKG_NEED_CXX:=		1
 PKG_CXX:=		ID3LIB
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ID3LIB,id3lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--enable-cxx-warnings=no
 
+ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc -lgcc
+endif
+
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -fstack-protector
 endif
@@ -36,7 +40,7 @@ else
 TARGET_LDFLAGS+=	-shared
 endif
 
-post-install:
+id3lib-install:
 	${INSTALL_DIR} ${IDIR_ID3LIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libid3-*.so* ${IDIR_ID3LIB}/usr/lib/
 

@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 display manager control protocol library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxdmcp
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

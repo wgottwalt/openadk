@@ -20,6 +20,10 @@ PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	XSLT processor utility
 PKGSC_XSLTPROC:=	misc
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

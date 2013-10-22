@@ -11,6 +11,7 @@ PKG_DESCR:=		miscellaneous utility functions for X libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXt libXext
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxmu
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

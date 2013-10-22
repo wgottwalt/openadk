@@ -11,10 +11,11 @@ PKG_DESCR:=		a small event-driven JSON parser written in ANSI C
 PKG_SECTION:=		libs
 PKG_URL:=		http://lloyd.github.com/yajl/
 PKG_SITES:=		http://openadk.org/distfiles/
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,YAJL,yajl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,YAJL,yajl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 

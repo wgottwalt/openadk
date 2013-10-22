@@ -21,7 +21,7 @@ PKGFB_WITH_DIRECTFB:=	DirectFB
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LINKS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LINKS,links,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-graphics \
 			--with-fb \
@@ -38,7 +38,7 @@ else
 CONFIGURE_ARGS+=	--without-directfb
 endif
 
-post-install:
+links-install:
 	${INSTALL_DIR} ${IDIR_LINKS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_LINKS}/usr/bin
 

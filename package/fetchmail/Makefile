@@ -21,7 +21,7 @@ PKGFB_WITH_SSL:=	openssl
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,FETCHMAIL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FETCHMAIL,fetchmail,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-hesiod
 
@@ -31,7 +31,7 @@ else
 CONFIGURE_ARGS+=	--without-ssl
 endif
 
-post-install:
+fetchmail-install:
 	${INSTALL_DIR} ${IDIR_FETCHMAIL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/fetchmail \
 		 ${IDIR_FETCHMAIL}/usr/bin/

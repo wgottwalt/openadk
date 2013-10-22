@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.very-clever.com/download/nongnu/davfs2/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DAVFS2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DAVFS2,davfs2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-neon
 CONFIGURE_ENV+=		LIBS=-liconv

@@ -11,12 +11,13 @@ PKG_DESCR:=		Gettext stub and replacement
 PKG_SECTION:=		libs
 PKG_URL:=		https://github.com/rofl0r/gettext-tiny
 PKG_SITES:=		http://ftp.barfooze.de/pub/sabotage/tarballs/
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 

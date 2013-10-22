@@ -16,12 +16,12 @@ PKG_SITES:=		http://pkgconfig.freedesktop.org/releases/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PKG_CONFIG,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-installed-glib \
 			--with-installed-popt
 
-post-install:
+pkg-config-install:
 	$(INSTALL_DIR) $(IDIR_PKG_CONFIG)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/pkg-config \
 		$(IDIR_PKG_CONFIG)/usr/bin

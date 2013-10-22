@@ -19,9 +19,9 @@ PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TWM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TWM,twm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+twm-install:
 	$(INSTALL_DIR) $(IDIR_TWM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/twm \
 		$(IDIR_TWM)/usr/bin/

@@ -21,7 +21,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RUBY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags='' dldflags="$(TARGET_LDFLAGS)" 
@@ -40,7 +40,7 @@ pre-configure:
 	$(MAKE) -C ${WRKBUILD} install-nodoc
 	$(MAKE) -C ${WRKBUILD} clean
 
-post-install:
+ruby-install:
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libruby.so* ${IDIR_RUBY}/usr/lib

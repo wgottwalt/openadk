@@ -15,9 +15,9 @@ PKG_SITES:=		http://bhaak.dyndns.org/${PKG_NAME}/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VILISTEXTUM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VILISTEXTUM,vilistextum,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+vilistextum-install:
 	${INSTALL_DIR} ${IDIR_VILISTEXTUM}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/vilistextum \
 		 ${IDIR_VILISTEXTUM}/usr/bin/

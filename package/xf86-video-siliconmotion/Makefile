@@ -19,9 +19,9 @@ PKG_CFLINE_XF86_VIDEO_SILICONMOTION:=depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_VIDEO_SILICONMOTION,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_VIDEO_SILICONMOTION,xf86-video-siliconmotion,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-video-siliconmotion-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_SILICONMOTION}/usr/lib/xorg/modules/drivers
 	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/siliconmotion_*.so \
 		${IDIR_XF86_VIDEO_SILICONMOTION}/usr/lib/xorg/modules/drivers/

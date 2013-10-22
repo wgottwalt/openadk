@@ -15,7 +15,7 @@ PKG_SITES=		http://www.chillispot.info/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CHILLISPOT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CHILLISPOT,chillispot,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CHILLISPOT}/usr/sbin ${IDIR_CHILLISPOT}/etc

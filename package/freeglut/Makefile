@@ -7,21 +7,22 @@ PKG_NAME:=		freeglut
 PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		39f0f2de89f399529d2b981188082218
-PKG_DESCR:=		OpenGL Utility Toolkit
+PKG_DESCR:=		OpenGL Utility Toolkit libraries
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		MesaLib
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 PKG_NEED_CXX:=		1
+PKG_OPTS:=		dev
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FREEGLUT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FREEGLUT,freeglut,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}${PKG_OPTS}))
 
-post-install:
+freeglut-install:
 	$(INSTALL_DIR) $(IDIR_FREEGLUT)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libglut.so* $(IDIR_FREEGLUT)/usr/lib
 

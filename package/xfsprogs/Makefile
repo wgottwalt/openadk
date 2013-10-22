@@ -20,7 +20,7 @@ PKG_TARGET_DEPENDS:=	!atmel-ngw100
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,XFSPROGS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XFSPROGS,xfsprogs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 TARGET_LDFLAGS+=	-lrt

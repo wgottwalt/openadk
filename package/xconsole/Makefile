@@ -15,9 +15,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XCONSOLE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XCONSOLE,xconsole,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xconsole-install:
 	$(INSTALL_DIR) $(IDIR_XCONSOLE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xconsole \
 		$(IDIR_XCONSOLE)/usr/bin

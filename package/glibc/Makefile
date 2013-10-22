@@ -8,6 +8,7 @@ TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
+PKG_NAME:=		glibc
 PKG_DESCR:=		GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove

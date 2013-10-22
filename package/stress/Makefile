@@ -13,11 +13,11 @@ PKG_SITES:=		http://weather.ou.edu/~apw/projects/stress/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,STRESS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,STRESS,stress,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-static
 
-post-install:
+stress-install:
 	${INSTALL_DIR} ${IDIR_STRESS}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/stress ${IDIR_STRESS}/usr/bin/
 

@@ -16,9 +16,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RADDUMP,raddump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+raddump-install:
 	${INSTALL_DIR} ${IDIR_RADDUMP}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/raddump ${IDIR_RADDUMP}/usr/bin
 

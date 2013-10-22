@@ -15,12 +15,12 @@ PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SSLTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SSLTUNNEL,ssltunnel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}"
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include"
 
-post-install:
+ssltunnel-install:
 	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/bin
 	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/sbin
 	${INSTALL_DIR} ${IDIR_SSLTUNNEL}/usr/libexec

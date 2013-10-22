@@ -12,6 +12,7 @@ PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto libXext
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxi
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

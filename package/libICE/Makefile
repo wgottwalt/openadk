@@ -11,6 +11,7 @@ PKG_DESCR:=		Inter-Client Exchange library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xtrans xproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libice
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

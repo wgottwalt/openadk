@@ -20,7 +20,7 @@ WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PYTHON,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON,python,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
@@ -50,7 +50,7 @@ post-extract:
 pre-configure:
 	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
 
-post-install:
+python-install:
 	${INSTALL_DIR} ${IDIR_PYTHON}/usr/bin ${IDIR_PYTHON}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON}/usr/lib/python3.2
 	${INSTALL_DIR} ${IDIR_PYTHON}/usr/include/python3.2m

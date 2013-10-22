@@ -18,13 +18,13 @@ PKGFD_WITH_FTPUSERS:=	install /etc/ftpusers along with proftpd
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PROFTPD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PROFTPD,proftpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-cap
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes \
 			ac_cv_func_setgrent_void=yes
 
-post-install:
+proftpd-install:
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/etc
 	$(INSTALL_DATA) ./files/proftpd.conf $(IDIR_PROFTPD)/etc/
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/usr/{s,}bin

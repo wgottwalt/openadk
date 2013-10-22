@@ -11,6 +11,7 @@ PKG_DESCR:=		X FreeType library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXrender fontconfig
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxft
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

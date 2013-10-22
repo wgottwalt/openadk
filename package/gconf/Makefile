@@ -14,12 +14,14 @@ PKG_BUILDDEP:=		dbus dbus-glib orbit2
 PKG_DEPENDS:=		dbus dbus-glib orbit2
 PKG_URL:=		http://projects.gnome.org/gconf/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/GNOME/sources/GConf/${PKG_EXTRAVER}/
+PKG_LIBNAME:=		gconf
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!arm !cris
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GCONF,gconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GCONF,gconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 gconf-install:
 	$(INSTALL_DIR) $(IDIR_GCONF)/usr/bin

@@ -11,13 +11,14 @@ PKG_DESCR:=		a simple, small, minimal, C++ XML parser
 PKG_SECTION:=		libs
 PKG_URL:=		http://sourceforge.net/projects/tinyxml/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tinyxml/}
+PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}_2_6_2.zip
 WRKDIST=		${WRKDIR}/tinyxml
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TINYXML,tinyxml,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TINYXML,tinyxml,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

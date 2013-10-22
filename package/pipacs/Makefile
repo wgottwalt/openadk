@@ -6,14 +6,14 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		pipacs
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		2
-PKG_DESCR:=		an UNIX socket accounting/wiewer program
+PKG_DESCR:=		an UNIX socket accounting/viewer program
 PKG_SECTION:=		net/misc
 
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PIPACS,${PKG_NAME},${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PIPACS,pipacs,${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual

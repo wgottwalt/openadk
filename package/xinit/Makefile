@@ -19,12 +19,12 @@ PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XINIT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XINIT,xinit,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS:=	--without-launchd
 XAKE_FLAGS+=		RAWCPP="$(TARGET_CROSS)cpp"
 
-post-install:
+xinit-install:
 	$(INSTALL_DIR) $(IDIR_XINIT)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/{xinit,startx} \
 		$(IDIR_XINIT)/usr/bin/

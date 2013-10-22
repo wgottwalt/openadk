@@ -20,7 +20,7 @@ PKGFD_WITH_CHROOT:=	enable chrooting to /var/lib/tcpdump
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TCPDUMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TCPDUMP,tcpdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${CC_FOR_BUILD} \
 			ac_cv_linux_vers=2 \
@@ -39,7 +39,7 @@ XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
 
 XAKE_FLAGS+=           GCC_HONOUR_COPTS=s
 
-post-install:
+tcpdump-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tcpdump ${IDIR_TCPDUMP}/usr/sbin/
 ifneq (${ADK_PACKAGE_TCPDUMP_WITH_CHROOT},)

@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.greenwoodsoftware.com/less/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LESS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LESS,less,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 less-install:
 	${INSTALL_DIR} ${IDIR_LESS}/usr/bin

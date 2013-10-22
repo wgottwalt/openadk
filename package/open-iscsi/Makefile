@@ -21,11 +21,11 @@ include $(TOPDIR)/mk/package.mk
 ALL_TARGET:=		user
 INSTALL_TARGET:=	install_user
 
-$(eval $(call PKG_template,OPEN_ISCSI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPEN_ISCSI,open-iscsi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
-post-install:
+open-iscsi-install:
 	$(INSTALL_DIR) $(IDIR_OPEN_ISCSI)/sbin $(IDIR_OPEN_ISCSI)/etc/iscsi
 	$(INSTALL_BIN) $(WRKINST)/sbin/* $(IDIR_OPEN_ISCSI)/sbin
 	$(CP) $(WRKINST)/etc/iscsi/* $(IDIR_OPEN_ISCSI)/etc/iscsi

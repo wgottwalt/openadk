@@ -26,15 +26,21 @@ $(eval $(call PKG_template,PMACCT_CLIENT,pmacct-client,$(PKG_VERSION)-${PKG_RELE
 CONFIGURE_ARGS+=	--with-pcap-includes="$(STAGING_TARGET_DIR)/usr/include" \
 			--with-pcap-libs="$(STAGING_TARGET_DIR)/usr/lib"
 
-post-install:
+sfacctd-install:
 	${INSTALL_DIR} $(IDIR_SFACCTD)/usr/sbin
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/sfacctd $(IDIR_SFACCTD)/usr/sbin/
+
+nfacctd-install:
 	${INSTALL_DIR} $(IDIR_NFACCTD)/usr/sbin $(IDIR_NFACCTD)/etc
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/nfacctd $(IDIR_NFACCTD)/usr/sbin/
 	${INSTALL_DATA} ./files/nfacctd.conf $(IDIR_NFACCTD)/etc
+
+pmacctd-install:
 	${INSTALL_DIR} $(IDIR_PMACCTD)/usr/sbin $(IDIR_PMACCTD)/etc
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/pmacctd $(IDIR_PMACCTD)/usr/sbin/
 	${INSTALL_DATA} ./files/pmacctd.conf $(IDIR_PMACCTD)/etc
+
+pmacct-client-install:
 	${INSTALL_DIR} $(IDIR_PMACCT_CLIENT)/usr/bin
 	${INSTALL_BIN} $(WRKINST)/usr/bin/pmacct $(IDIR_PMACCT_CLIENT)/usr/bin/
 

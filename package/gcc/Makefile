@@ -4,6 +4,7 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
 
+PKG_NAME:=		gcc
 PKG_DESCR:=		GNU C compiler
 PKG_SECTION:=		lang
 PKG_OPTS:=		noremove
@@ -19,8 +20,8 @@ WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,GXX,g++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GXX,g++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS:=	''
 TARGET_CFLAGS:=		''

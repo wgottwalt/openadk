@@ -15,6 +15,7 @@ PKG_BUILDDEP+=		dri2proto glproto expat libXext
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		mesalib
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm

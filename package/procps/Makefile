@@ -16,11 +16,11 @@ PKG_SITES:=		http://procps.sourceforge.net/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PROCPS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 
-post-install:
+procps-install:
 	${INSTALL_DIR} ${IDIR_PROCPS}/{bin,sbin,usr/bin}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/uptime ${IDIR_PROCPS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/tload ${IDIR_PROCPS}/usr/bin

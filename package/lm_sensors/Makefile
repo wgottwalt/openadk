@@ -23,6 +23,10 @@ PKGSC_LM_SENSORS_DETECT:=	misc
 PKGSS_LM_SENSORS_DETECT:=	perl
 PKGSB_LM_SENSORS_DETECT:=	perl
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LM_SENSORS,lm-sensors,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

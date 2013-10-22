@@ -13,6 +13,7 @@ PKG_BUILDDEP:=		xproto xextproto xtrans libXdmcp libXau xcb-proto
 PKG_BUILDDEP+=		xcmiscproto bigreqsproto kbproto inputproto libxcb
 PKG_DEPENDS:=		libxdmcp libxcb libxau
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libx11
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

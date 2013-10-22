@@ -17,12 +17,12 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NTFS_3G,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NTFS_3G,ntfs-3g,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-ldconfig \
 			--disable-library
 
-post-install:
+ntfs-3g-install:
 	${INSTALL_DIR} ${IDIR_NTFS_3G}/bin
 	${INSTALL_BIN} ${WRKINST}/bin/ntfs-3g ${IDIR_NTFS_3G}/bin
 	cd ${WRKINST}/bin && ln -sf ntfs-3g mount.ntfs-3g

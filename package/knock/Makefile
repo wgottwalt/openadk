@@ -24,9 +24,11 @@ $(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_K
 
 CONFIGURE_ENV+=		ac_cv_lib_pcap_pcap_open_live=yes
 
-post-install:
+knock-install:
 	${INSTALL_DIR} ${IDIR_KNOCK}/usr/bin
 	${CP} ${WRKINST}/usr/bin/knock ${IDIR_KNOCK}/usr/bin/
+
+knockd-install:
 	${INSTALL_DIR} ${IDIR_KNOCKD}/etc
 	install -m0600 ${WRKINST}/etc/knockd.conf ${IDIR_KNOCKD}/etc/
 	${INSTALL_DIR} ${IDIR_KNOCKD}/usr/sbin

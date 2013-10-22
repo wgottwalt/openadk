@@ -19,7 +19,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-v${PKG_VERSION}-4
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,EBTABLES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EBTABLES,ebtables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 

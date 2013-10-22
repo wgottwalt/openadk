@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--without-Judy \
 
 XAKE_FLAGS+=		 CXXLINK="\$${LINK}" \
 
-post-install:
+miredo-install:
 	${INSTALL_DIR} ${IDIR_MIREDO}/etc/miredo ${IDIR_MIREDO}/usr/sbin
 	${INSTALL_DIR} ${IDIR_MIREDO}/usr/lib
 	${INSTALL_DATA} ${WRKINST}/etc/miredo/miredo.conf \
@@ -37,6 +37,8 @@ post-install:
 	${CP} ${WRKINST}/usr/lib/libtun*.so* ${IDIR_MIREDO}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libteredo.so* ${IDIR_MIREDO}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo ${IDIR_MIREDO}/usr/sbin/
+
+miredo-server-install:
 	${INSTALL_DIR} ${IDIR_MIREDO_SERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo-server \
 		${IDIR_MIREDO_SERVER}/usr/sbin/

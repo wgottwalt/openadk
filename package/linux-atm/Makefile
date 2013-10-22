@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		linux-atm
 PKG_VERSION:=		2.5.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		ATM library for Linux
 PKG_SECTION:=		libs
@@ -23,6 +23,10 @@ PKGSS_BR2684CTL:=	libatm
 PKGSC_BR2684CTL:=	route
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 

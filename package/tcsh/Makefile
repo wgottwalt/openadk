@@ -16,11 +16,11 @@ PKG_SITES:=		ftp://ftp.astron.com/pub/tcsh/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TCSH,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TCSH,tcsh,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 
-post-install:
+tcsh-install:
 	$(INSTALL_DIR) $(IDIR_TCSH)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/tcsh $(IDIR_TCSH)/usr/bin
 

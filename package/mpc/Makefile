@@ -18,12 +18,12 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,MPC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPC,mpc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-iconv
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
-post-install:
+mpc-install:
 	$(INSTALL_DIR) $(IDIR_MPC)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/mpc \
 		$(IDIR_MPC)/usr/bin

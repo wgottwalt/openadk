@@ -20,11 +20,11 @@ PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-kernel-support
 
-post-install:
+oprofile-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/opcontrol $(IDIR_OPROFILE)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/ophelp $(IDIR_OPROFILE)/usr/bin/

@@ -16,11 +16,11 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,I2C_TOOLS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,I2C_TOOLS,i2c-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
-post-install:
+i2c-tools-install:
 	$(INSTALL_DIR) $(IDIR_I2C_TOOLS)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/i2c* \
 		$(IDIR_I2C_TOOLS)/usr/sbin

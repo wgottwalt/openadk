@@ -18,14 +18,14 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,VALGRIND,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VALGRIND,valgrind,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_file__proc_self_fd=yes \
 			ac_cv_file__proc_self_exe=yes \
 			ac_cv_file__proc_self_maps=yes
 CONFIGURE_ARGS+=	--disable-tls
 
-post-install:
+valgrind-install:
 	$(INSTALL_DIR) $(IDIR_VALGRIND)/usr/bin
 	$(INSTALL_DIR) $(IDIR_VALGRIND)/usr/lib/valgrind
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/valgrind $(IDIR_VALGRIND)/usr/bin/

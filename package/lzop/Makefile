@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.lzop.org/download/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LZOP,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LZOP,lzop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 lzop-install:
 	$(INSTALL_DIR) $(IDIR_LZOP)/usr/bin

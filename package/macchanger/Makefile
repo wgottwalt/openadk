@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_GNU:=macchanger/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MACCHANGER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MACCHANGER,macchanger,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+macchanger-install:
 	${INSTALL_DIR} ${IDIR_MACCHANGER}/usr/bin ${IDIR_MACCHANGER}/usr/share
 	${INSTALL_BIN} ${WRKINST}/usr/bin/macchanger ${IDIR_MACCHANGER}/usr/bin
 	${CP} ${WRKINST}/usr/share/macchanger ${IDIR_MACCHANGER}/usr/share

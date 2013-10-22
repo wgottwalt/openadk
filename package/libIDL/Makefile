@@ -13,6 +13,7 @@ PKG_DEPENDS:=		glib
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/
+PKG_LIBNAME:=		libidl
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

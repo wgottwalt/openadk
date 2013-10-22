@@ -11,6 +11,7 @@ PKG_DESCR:=		client library for the XFree86-DGA extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86dgaproto libXext libXaw
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxxf86dga
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

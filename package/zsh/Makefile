@@ -14,9 +14,9 @@ PKG_SITES:=		ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ZSH,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ZSH,zsh,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+zsh-install:
 	$(INSTALL_DIR) $(IDIR_ZSH)/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/zsh $(IDIR_ZSH)/bin
 

@@ -27,7 +27,7 @@ PKGFB_WITH_SSL:=	openssl
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NUT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NUT,nut,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 define DRIVER_template
 
@@ -93,7 +93,7 @@ ifneq (${ADK_PACKAGE_NUT_WITH_SNMP},)
 CONFIGURE_ARGS+=	--with-snmp
 endif
 
-post-install:
+nut-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin ${IDIR_NUT}/etc
 	${INSTALL_DIR} ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \

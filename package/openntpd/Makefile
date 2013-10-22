@@ -15,7 +15,7 @@ PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENNTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENNTPD,openntpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 

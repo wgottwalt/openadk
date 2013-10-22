@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipcad/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPCAD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IPCAD,ipcad,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-ifst=linux \
 			--with-psrc=pcap \
@@ -26,7 +26,7 @@ CONFIGURE_ARGS+=	--with-ifst=linux \
 pre-build:
 	touch $(WRKBUILD)/cfglex.c $(WRKBUILD)/cslex.c
 
-post-install:
+ipcad-install:
 	${INSTALL_DIR} ${IDIR_IPCAD}/usr/bin ${IDIR_IPCAD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/ipcad.conf ${IDIR_IPCAD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ipcad ${IDIR_IPCAD}/usr/bin/

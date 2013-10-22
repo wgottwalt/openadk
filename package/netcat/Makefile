@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=netcat/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,NETCAT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NETCAT,netcat,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+netcat-install:
 	$(INSTALL_DIR) $(IDIR_NETCAT)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/netcat \
 		$(IDIR_NETCAT)/usr/bin

@@ -14,9 +14,9 @@ PKG_SITES:=		http://www.nocrew.org/software/httptunnel/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTTPTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,HTTPTUNNEL,httptunnel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+httptunnel-install:
 	${INSTALL_DIR} ${IDIR_HTTPTUNNEL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/hts ${IDIR_HTTPTUNNEL}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/htc ${IDIR_HTTPTUNNEL}/usr/bin/

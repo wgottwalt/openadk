@@ -16,11 +16,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=l2tpns/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,L2TPNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,L2TPNS,l2tpns,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
-post-install:
+l2tpns-install:
 	${INSTALL_DIR} ${IDIR_L2TPNS}/etc/l2tpns
 	${CP} ${WRKINST}/etc/l2tpns/* ${IDIR_L2TPNS}/etc/l2tpns/
 	${INSTALL_DIR} ${IDIR_L2TPNS}/usr/lib/l2tpns

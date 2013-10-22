@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GNUPG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GNUPG,gnupg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-asm \
 			--disable-gnupg-iconv \
@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--disable-asm \
 			--enable-fake-curl \
 			--disable-regex
 
-post-install:
+gnupg-install:
 	${INSTALL_DIR} ${IDIR_GNUPG}/usr/bin/
 	${INSTALL_DIR} ${IDIR_GNUPG}/usr/share/gnupg
 	${INSTALL_DATA} ${WRKINST}/usr/share/gnupg/options.skel \

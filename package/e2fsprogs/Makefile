@@ -5,11 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		8ef664b6eb698aa6b733df59b17b9ed4
-PKG_DESCR:=		Ext2/3/4 filesystem utilities
+PKG_DESCR:=		Ext2/3/4 filesystem utilities (meta-package)
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
+PKG_DEPENDS:=		e2fsck tune2fs mke2fs resize2fs
 PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
@@ -17,7 +18,7 @@ PKG_OPTS:=		dev
 
 PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
-PKG_SUBPKGS:=		LIBE2FS LIBCOM_ERR LIBSS E2FSCK_STATIC
+PKG_SUBPKGS:=		E2FSPROGS LIBE2FS LIBCOM_ERR LIBSS E2FSCK_STATIC
 PKG_SUBPKGS+=		RESIZE2FS TUNE2FS E2FSCK MKE2FS
 PKGSD_LIBE2FS:=		e2fsprogs library
 PKGSC_LIBE2FS:=		libs
@@ -42,10 +43,9 @@ PKGSS_MKE2FS:=		libe2fs
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,E2FSPROGS,e2fsprogs,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,E2FSPROGS,e2fsprogs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBE2FS,libe2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBE2FS},${PKGSC_LIBE2FS}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
-$(eval $(call PKG_template,LIBCOM_ERR_DEV,libcom-err-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR_DEV},${PKGSC_LIBCOM_ERR_DEV}))
 $(eval $(call PKG_template,LIBSS,libss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBSS},${PKGSC_LIBSS}))
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 $(eval $(call PKG_template,TUNE2FS,tune2fs,${PKG_VERSION}-${PKG_RELEASE},$(PKGSS_TUNE2FS),${PKGSD_TUNE2FS},${PKGSC_TUNE2FS}))

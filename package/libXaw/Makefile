@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 Athena Widget library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext libXmu libXpm
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxaw
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

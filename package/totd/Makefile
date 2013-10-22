@@ -14,9 +14,9 @@ PKG_SITES:=		http://www.dillema.net/software/totd/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TOTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TOTD,totd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+totd-install:
 	$(INSTALL_DIR) $(IDIR_TOTD)/{usr/sbin,etc}
 	${INSTALL_DATA} ./files/totd.conf ${IDIR_TOTD}/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/totd $(IDIR_TOTD)/usr/sbin

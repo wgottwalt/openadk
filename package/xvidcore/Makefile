@@ -11,14 +11,14 @@ PKG_DESCR:=		Xvid Codec library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.xvid.org/
 PKG_SITES:=		http://downloads.xvid.org/downloads/
-
-PKG_SUBPKGS:=		LIBXVID
+PKG_LIBNAME:=		libxvid
+PKG_OPTS:=		dev
 
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)/build/generic
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXVID,libxvid,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXVID,libxvid,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libxvid-install:
 	$(INSTALL_DIR) $(IDIR_LIBXVID)/usr/lib

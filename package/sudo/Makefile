@@ -14,13 +14,13 @@ PKG_SITES:=		http://www.courtesan.com/sudo/dist/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SUDO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-pam \
 			--with-env-editor \
 			--with-timedir=/var/run
 
-post-install:
+sudo-install:
 	$(INSTALL_DIR) $(IDIR_SUDO)/usr/bin
 	$(INSTALL_DIR) $(IDIR_SUDO)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_SUDO)/etc

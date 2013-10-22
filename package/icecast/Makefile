@@ -16,7 +16,7 @@ PKG_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ICECAST,icecast,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/libxml2
 CONFIGURE_ARGS+=	--disable-yp \
@@ -28,7 +28,7 @@ CONFIGURE_ARGS+=	--disable-yp \
 			--with-theora="no" \
 			--with-xslt-config="${STAGING_TARGET_DIR}/usr/bin/xslt-config"
 
-post-install:
+icecast-install:
 	${INSTALL_DIR} ${IDIR_ICECAST}/etc
 	${CP} ${WRKINST}/etc/icecast.xml ${IDIR_ICECAST}/etc/
 	${INSTALL_DIR} ${IDIR_ICECAST}/usr/bin

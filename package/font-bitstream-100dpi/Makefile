@@ -17,9 +17,9 @@ PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FONT_BITSTREAM_100DPI,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FONT_BITSTREAM_100DPI,font-bitstream-100dpi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+font-bitstream-100dpi-install:
 	$(INSTALL_DIR) $(IDIR_FONT_BITSTREAM_100DPI)/usr/share/fonts/X11/100dpi
 	$(CP) ${WRKINST}/usr/share/fonts/X11/100dpi/* \
 		$(IDIR_FONT_BITSTREAM_100DPI)/usr/share/fonts/X11/100dpi

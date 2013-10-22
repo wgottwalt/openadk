@@ -25,7 +25,7 @@ PKGSD_DATE:=		famous date utility
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TZDATA,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TZDATA,tzdata,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ZDUMP,zdump,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ZDUMP},${PKG_SECTION}))
 $(eval $(call PKG_template,ZIC,zic,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ZIC},${PKG_SECTION}))
 $(eval $(call PKG_template,DATE,date,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DATE},${PKG_SECTION}))
@@ -38,15 +38,9 @@ XAKE_FLAGS+=		TOPDIR="${WRKINST}" TZDIR="${WRKINST}/usr/share/zoneinfo" cc="${TA
 ALL_TARGET:=		ALL
 INSTALL_TARGET:=	INSTALL
 
-post-install:
+tzdata-install:
 	$(INSTALL_DIR) $(IDIR_TZDATA)/usr/share $(IDIR_TZDATA)/etc
 	$(CP) $(WRKINST)/usr/share/zoneinfo $(IDIR_TZDATA)/usr/share
-	${INSTALL_DIR} ${IDIR_ZDUMP}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/etc/zdump ${IDIR_ZDUMP}/usr/sbin/
-	${INSTALL_DIR} ${IDIR_ZIC}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/etc/zic ${IDIR_ZIC}/usr/sbin/
-	${INSTALL_DIR} ${IDIR_DATE}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/bin/date ${IDIR_DATE}/usr/bin/
 	tz=; cd $(IDIR_TZDATA)/usr/share/zoneinfo || exit 1; \
 		for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
 			test -s "$$f" || continue; \
@@ -58,5 +52,17 @@ post-install:
 		ln -sf "../usr/share/zoneinfo/$$tz" \
 		$(IDIR_TZDATA)/etc/localtime; \
 	fi	
+
+zdump-install:
+	${INSTALL_DIR} ${IDIR_ZDUMP}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/etc/zdump ${IDIR_ZDUMP}/usr/sbin/
+
+zic-install:
+	${INSTALL_DIR} ${IDIR_ZIC}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/etc/zic ${IDIR_ZIC}/usr/sbin/
+
+date-install:
+	${INSTALL_DIR} ${IDIR_DATE}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/bin/date ${IDIR_DATE}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

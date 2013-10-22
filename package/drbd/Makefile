@@ -14,7 +14,7 @@ PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DRBD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DRBD,drbd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GENETLINK_H=$(STAGING_DIR)/usr/include/linux/genetlink.h
 CONFIGURE_ARGS+=	--with-distro=generic \

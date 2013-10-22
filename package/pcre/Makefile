@@ -18,6 +18,10 @@ PKG_OPTS:=		dev
 PKG_SUBPKGS:=		LIBPCRE LIBPCRECPP
 PKGSD_LIBPCRECPP:=	PCRE c++ library
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

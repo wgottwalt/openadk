@@ -14,7 +14,7 @@ PKG_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DHCP_FORWARDER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DHCP_FORWARDER,dhcp-forwarder,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-dietlibc
 XAKE_FLAGS+=		cfg_filename="/etc/dhcp-fwd.conf"

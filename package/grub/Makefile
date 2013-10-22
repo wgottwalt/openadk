@@ -18,7 +18,7 @@ PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GRUB,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GRUB,grub,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=         -static
@@ -30,7 +30,7 @@ CONFIGURE_ARGS+=	--disable-efiemu \
 			--disable-grub-mkfont \
 			--disable-grub-fstest
 
-post-install:
+grub-install:
 	${INSTALL_DIR} $(IDIR_GRUB)/usr/{sbin,lib,bin}
 	${INSTALL_DIR} $(IDIR_GRUB)/etc
 	${CP} ${WRKINST}/etc/grub.d $(IDIR_GRUB)/etc

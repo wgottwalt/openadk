@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.dest-unreach.org/socat/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SOCAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \
 			sc_cv_sys_crdly_shift=9 \
@@ -25,7 +25,7 @@ CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \
 CONFIGURE_ARGS+=	--disable-libwrap \
 			--disable-readline
 
-post-install:
+socat-install:
 	${INSTALL_DIR} ${IDIR_SOCAT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/socat ${IDIR_SOCAT}/usr/bin/
 

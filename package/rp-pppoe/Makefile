@@ -31,7 +31,7 @@ CONFIGURE_ENV+=		ac_cv_func_setvbuf_reversed=no \
 			ac_cv_linux_kernel_pppoe=yes \
 			ac_cv_pack_bitfields_reversed=yes
 
-post-install:
+pppoe-client-install:
 	${INSTALL_DIR} ${IDIR_PPPOE_CLIENT}/etc/ppp \
 		${IDIR_PPPOE_CLIENT}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/ppp/pppoe.conf \
@@ -42,15 +42,21 @@ post-install:
 	${CP} ${WRKINST}/usr/sbin/pppoe-stop ${IDIR_PPPOE_CLIENT}/usr/sbin/
 	${CP} ${WRKINST}/usr/sbin/pppoe-status ${IDIR_PPPOE_CLIENT}/usr/sbin/
 	${CP} ${WRKINST}/usr/sbin/pppoe-setup ${IDIR_PPPOE_CLIENT}/usr/sbin/
+
+pppoe-relay-install:
 	${INSTALL_DIR} ${IDIR_PPPOE_RELAY}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppoe-relay \
 		${IDIR_PPPOE_RELAY}/usr/sbin/
+
+pppoe-server-install:
 	${INSTALL_DIR} ${IDIR_PPPOE_SERVER}/etc/ppp \
 		${IDIR_PPPOE_SERVER}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/ppp/pppoe-server-options \
 		${IDIR_PPPOE_SERVER}/etc/ppp/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppoe-server \
 		${IDIR_PPPOE_SERVER}/usr/sbin/
+
+pppoe-sniff-install:
 	${INSTALL_DIR} ${IDIR_PPPOE_SNIFF}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppoe-sniff \
 		${IDIR_PPPOE_SNIFF}/usr/sbin/

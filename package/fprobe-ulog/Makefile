@@ -22,7 +22,7 @@ CONFIGURE_ARGS+=	--with-piddir=/var \
 			--with-membulk=index8 \
 			--with-hash=xor8
 
-post-install:
+fprobe-ulog-install:
 	${INSTALL_DIR} ${IDIR_FPROBE_ULOG}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/fprobe-ulog \
 		${IDIR_FPROBE_ULOG}/usr/sbin/

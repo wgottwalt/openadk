@@ -11,6 +11,7 @@ PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
 PKG_URL:=		http://libusb.wiki.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusbx/}
+PKG_LIBNAME:=		libusb
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

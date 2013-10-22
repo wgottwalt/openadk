@@ -17,6 +17,10 @@ PKG_OPTS:=		dev
 PKG_SUBPKGS:=		LIBTOOL LIBLTDL
 PKGSC_LIBLTDL:=		libs
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

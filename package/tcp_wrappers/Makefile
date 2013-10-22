@@ -12,15 +12,15 @@ PKG_SECTION:=		libs
 PKG_URL:=		ftp://ftp.porcupine.org/pub/security/index.html
 PKG_SITES:=		ftp://ftp.porcupine.org/pub/security/
 PKG_NOPARALLEL:=	1
-
-PKG_SUBPKGS:=		LIBWRAP
+PKG_LIBNAME:=		libwrap
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBWRAP,libwrap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBWRAP,libwrap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

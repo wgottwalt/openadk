@@ -14,12 +14,12 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CPUFREQUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CPUFREQUTILS,cpufrequtils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		NLS=no
 CONFIG_STYLE:=		manual
 
-post-install:
+cpufrequtils-install:
 	$(INSTALL_DIR) $(IDIR_CPUFREQUTILS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libcpufreq.so* \
 		$(IDIR_CPUFREQUTILS)/usr/lib

@@ -11,6 +11,7 @@ PKG_DESCR:=		X11 rendering library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		renderproto libX11
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxrender
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

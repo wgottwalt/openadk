@@ -11,6 +11,7 @@ PKG_DESCR:=		X client interface to extensions of the X protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 xextproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxext
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

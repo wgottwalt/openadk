@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 TARGET_LDFLAGS+=	-lpthread
 
-$(eval $(call PKG_template,RTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RTORRENT,rtorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 rtorrent-install:
 	${INSTALL_DIR} ${IDIR_RTORRENT}/usr/bin

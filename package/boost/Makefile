@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.54.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
@@ -138,9 +138,5 @@ endif
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
-
-boost-dev-install:
-	${INSTALL_DIR} ${IDIR_BOOST_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_BOOST_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

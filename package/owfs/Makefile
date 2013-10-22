@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OWFS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OWFS,owfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-ldl -lrt -liconv
 CONFIGURE_ARGS+=	--enable-owfs \
@@ -32,7 +32,7 @@ CONFIGURE_ARGS+=	--enable-owfs \
 			--with-fuseinclude=${STAGING_TARGET_DIR}/usr/include \
 			--with-fuselib=${STAGING_TARGET_DIR}/usr/lib
 
-post-install:
+owfs-install:
 	${INSTALL_DIR} ${IDIR_OWFS}/usr/{bin,lib}
 	${CP} ${WRKINST}/usr/lib/libow*.so* \
 	               ${IDIR_OWFS}/usr/lib/

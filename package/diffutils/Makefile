@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DIFFUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DIFFUTILS,diffutils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_use_included_regex=no
 
-post-install:
+diffutils-install:
 	${INSTALL_DIR} ${IDIR_DIFFUTILS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/diff ${IDIR_DIFFUTILS}/usr/bin
 

@@ -27,8 +27,6 @@ PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1
 
-PKG_SUBPKGS:=		LIBPTHREAD
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

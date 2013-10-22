@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--enable-exec \
 			--without-libpcre
 TARGET_CPPFLAGS+=	-DSOCKET_COMM
 
-post-install:
+rrdcollect-install:
 	${INSTALL_DIR} ${IDIR_RRDCOLLECT}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rrdcollect \
 		${IDIR_RRDCOLLECT}/usr/sbin/

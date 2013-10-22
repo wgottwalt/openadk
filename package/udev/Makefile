@@ -12,21 +12,22 @@ PKG_SECTION:=		utils
 PKG_BUILDDEP:=		usbutils glib kmod
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/hotplug/}
+PKG_OPTS:=		dev
 
-PKG_CFLINE_UDEV:=	depends on ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,UDEV,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,UDEV,udev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-lrt
 CONFIGURE_ARGS+=	--disable-logging \
 			--with-pci-ids-path=/usr/share/pci.ids \
 			--disable-introspection
 
-post-install:
+udev-install:
 	${INSTALL_DIR} ${IDIR_UDEV}/usr/bin ${IDIR_UDEV}/etc/udev
 	${INSTALL_DIR} ${IDIR_UDEV}/usr/lib ${IDIR_UDEV}/usr/libexec/udev
 	$(CP) $(WRKINST)/usr/lib/libudev.so* $(IDIR_UDEV)/usr/lib

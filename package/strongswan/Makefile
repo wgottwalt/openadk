@@ -35,7 +35,7 @@ endif
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,STRONGSWAN,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,STRONGSWAN,strongswan,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--enable-openssl \
@@ -60,7 +60,7 @@ CONFIGURE_ARGS+=	--disable-tools \
 
 TARGET_LDFLAGS+=        -Wl,-rpath -Wl,/usr/lib/ipsec
 
-post-install:
+strongswan-install:
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/etc
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_STRONGSWAN)/usr/libexec/ipsec

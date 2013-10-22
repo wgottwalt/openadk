@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MOC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MOC,moc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-jack \
 			--without-oss \
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--without-jack \
 			--without-ffmpeg \
 			--without-sndfile
 
-post-install:
+moc-install:
 	${INSTALL_DIR} ${IDIR_MOC}/usr/bin
 	${INSTALL_DIR} ${IDIR_MOC}/usr/lib/moc/decoder_plugins
 	${CP} ${WRKINST}/usr/lib/moc/decoder_plugins/*.so \

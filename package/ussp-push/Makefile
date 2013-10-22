@@ -17,12 +17,12 @@ PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,USSP_PUSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,USSP_PUSH,ussp-push,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FLAGS+=		OBEXINC="${TARGET_CPPFLAGS}" \
 			OBEXLIB="${TARGET_LDFLAGS} -lopenobex -lbluetooth"
 
-post-install:
+ussp-push-install:
 	${INSTALL_DIR} ${IDIR_USSP_PUSH}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ussp-push ${IDIR_USSP_PUSH}/usr/bin/
 

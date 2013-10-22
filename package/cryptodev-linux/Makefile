@@ -17,7 +17,7 @@ PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 include $(TOPDIR)/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
-$(eval $(call PKG_template,CRYPTODEV_LINUX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

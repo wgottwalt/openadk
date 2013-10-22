@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
+PKG_NAME:=		gdbserver
 PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
-PKG_SUBPKGS:=		GDBSERVER
 
 PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
@@ -17,7 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDBSERVER,gdbserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+gdbserver-install:
 	${INSTALL_DIR} ${IDIR_GDBSERVER}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdbserver ${IDIR_GDBSERVER}/usr/bin/
 

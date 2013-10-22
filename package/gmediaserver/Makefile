@@ -27,7 +27,7 @@ ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz -lc"
 endif
 
-post-install:
+gmediaserver-install:
 	${INSTALL_DIR} ${IDIR_GMEDIASERVER}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gmediaserver \
 		${IDIR_GMEDIASERVER}/usr/sbin/

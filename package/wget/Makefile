@@ -23,7 +23,7 @@ PKGCB_WITH_GNUTLS:=	gnutls
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WGET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WGET,wget,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_PACKAGE_WGET_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl=no
@@ -36,7 +36,7 @@ CONFIGURE_ARGS+=	--with-ssl=gnutls \
 			--with-libgnutls-prefix="$(STAGING_DIR)/usr"
 endif
 
-post-install:
+wget-install:
 	${INSTALL_DIR} ${IDIR_WGET}/etc ${IDIR_WGET}/usr/bin
 	${INSTALL_DATA} ${WRKINST}/etc/wgetrc ${IDIR_WGET}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/wget ${IDIR_WGET}/usr/bin

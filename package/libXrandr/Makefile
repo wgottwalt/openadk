@@ -11,6 +11,8 @@ PKG_DESCR:=		Xrandr library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		randrproto
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxrandr
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 

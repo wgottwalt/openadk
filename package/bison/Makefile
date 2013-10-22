@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BISON,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BISON,bison,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		M4=m4
 
-post-install:
+bison-install:
 	${INSTALL_DIR} ${IDIR_BISON}/usr/bin ${IDIR_BISON}/usr/share/bison
 	${INSTALL_BIN} ${WRKINST}/usr/bin/bison ${IDIR_BISON}/usr/bin
 	${CP} ${WRKINST}/usr/share/bison/* ${IDIR_BISON}/usr/share/bison

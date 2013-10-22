@@ -11,12 +11,13 @@ PKG_DESCR:=		kernel module loading library
 PKG_SECTION:=		libs
 PKG_URL:=		http://profusion.mobi/index.php
 PKG_SITES:=		http://packages.profusion.mobi/kmod/
+PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 kmod-install:
 	$(INSTALL_DIR) $(IDIR_KMOD)/usr/bin

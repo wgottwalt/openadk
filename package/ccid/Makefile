@@ -19,12 +19,12 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CCID,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CCID,ccid,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-twinserial
 
-post-install:
+ccid-install:
 	$(INSTALL_DIR) $(IDIR_CCID)/etc/reader.conf.d
 	$(INSTALL_DIR) $(IDIR_CCID)/usr/lib/pcsc/drivers
 	$(INSTALL_DATA) ./files/gemalto.conf \

@@ -11,6 +11,7 @@ PKG_DESCR:=		X composite library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 compositeproto libXfixes
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_LIBNAME:=		libxcomposite
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

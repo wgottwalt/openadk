@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
 PKG_VERSION:=		7.28.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cbdc0a79bdf6e657dd387c3d88d802e3
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
@@ -32,6 +32,10 @@ PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 

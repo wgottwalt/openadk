@@ -14,14 +14,14 @@ PKG_SITES:=		http://www.nongnu.org/xbindkeys/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XBINDKEYS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XBINDKEYS,xbindkeys,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-guile \
 			--disable-tk
 CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 TARGET_LDFLAGS+=	-lX11
 
-post-install:
+xbindkeys-install:
 	$(INSTALL_DIR) $(IDIR_XBINDKEYS)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbindkeys \
 		$(IDIR_XBINDKEYS)/usr/bin

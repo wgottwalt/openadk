@@ -18,13 +18,13 @@ PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RADVD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RADVD,radvd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-configfile=/etc/radvd.conf \
 			--with-logfile=/var/log/radvd.log \
 			--with-pidfile=/var/run/radvd.pid
 
-post-install:
+radvd-install:
 	${INSTALL_DIR} ${IDIR_RADVD}/etc ${IDIR_RADVD}/usr/sbin
 	${INSTALL_DATA} ./files/radvd.conf ${IDIR_RADVD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/radvd ${IDIR_RADVD}/usr/sbin/

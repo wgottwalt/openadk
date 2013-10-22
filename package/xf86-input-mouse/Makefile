@@ -19,9 +19,9 @@ PKG_CFLINE_XF86_INPUT_MOUSE:=	depends on ADK_TARGET_WITH_INPUT
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_INPUT_MOUSE,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_INPUT_MOUSE,xf86-input-mouse,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-input-mouse-install:
 	${INSTALL_DIR} ${IDIR_XF86_INPUT_MOUSE}/usr/lib/xorg/modules/input
 	${CP} ${WRKINST}/usr/lib/xorg/modules/input/mouse_drv.so \
 		${IDIR_XF86_INPUT_MOUSE}/usr/lib/xorg/modules/input/

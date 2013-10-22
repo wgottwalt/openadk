@@ -25,7 +25,7 @@ PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
+PKG_OPTS+=		libmix
 endif
 
 include ${TOPDIR}/mk/package.mk

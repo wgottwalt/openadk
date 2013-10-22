@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		imlib2
 PKG_VERSION:=		1.4.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		20d59c7cda06742015baade6f5975415
 PKG_DESCR:=		Version 2 of an advanced replacement library for libraries like libXpm
 PKG_SECTION:=		libs
@@ -13,10 +13,11 @@ PKG_DEPENDS:=		libfreetype zlib libpng libtiff
 PKG_BUILDDEP:=		freetype zlib libpng libtiff
 PKG_URL:=		http://www.enlightenment.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=enlightenment/}
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,IMLIB2,imlib2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IMLIB2,imlib2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 

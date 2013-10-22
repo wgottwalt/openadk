@@ -17,7 +17,7 @@ PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-charset \
 			--disable-extcharset \
@@ -39,7 +39,7 @@ CONFIGURE_ARGS+=	--enable-charset \
 CONFIGURE_ENV+=		mc_cv_have_zipinfo=yes \
 			am_cv_func_iconv=no
 
-post-install:
+mc-install:
 	${INSTALL_DIR} ${IDIR_MC}/etc/mc
 	${INSTALL_DIR} ${IDIR_MC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mc ${IDIR_MC}/usr/bin/

@@ -31,7 +31,7 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NFS_UTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_NATIVE),)
 KRB5INC:=		${STAGING_TARGET_DIR}/usr
@@ -61,7 +61,7 @@ CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--with-tirpcinclude=${TIRPCINC} \
 			--disable-uuid
 
-post-install:
+nfs-utils-install:
 	${INSTALL_DIR} ${IDIR_NFS_UTILS}/usr/sbin ${IDIR_NFS_UTILS}/etc
 	${INSTALL_DIR} ${IDIR_NFS_UTILS}/sbin
 	${CP} ${WRKINST}/sbin/{u,}mount.nfs* ${IDIR_NFS_UTILS}/sbin

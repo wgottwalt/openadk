@@ -16,9 +16,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XSM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XSM,xsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xsm-install:
 	$(INSTALL_DIR) $(IDIR_XSM)/usr/lib/X11
 	$(CP) $(WRKINST)/usr/lib/X11/* \
 		$(IDIR_XSM)/usr/lib/X11

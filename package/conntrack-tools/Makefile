@@ -22,9 +22,9 @@ include $(TOPDIR)/mk/package.mk
 
 TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
 
-$(eval $(call PKG_template,CONNTRACK_TOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CONNTRACK_TOOLS,conntrack-tools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+conntrack-tools-install:
 	$(INSTALL_DIR) $(IDIR_CONNTRACK_TOOLS)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/conntrack{,d} $(IDIR_CONNTRACK_TOOLS)/usr/sbin
 

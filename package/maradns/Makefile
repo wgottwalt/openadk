@@ -16,7 +16,7 @@ PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MARADNS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MARADNS,maradns,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 FAKE_FLAGS+=		PREFIX="${WRKINST}/usr" \
@@ -28,7 +28,7 @@ pre-install:
 do-configure:
 	(cd ${WRKBUILD} && ./configure);
 
-post-install:
+maradns-install:
 	${INSTALL_DIR} ${IDIR_MARADNS}/etc/maradns
 	${INSTALL_DIR} ${IDIR_MARADNS}/usr/bin ${IDIR_MARADNS}/usr/sbin
 	${INSTALL_DATA} ./files/mararc ${IDIR_MARADNS}/etc/mararc
