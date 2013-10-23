@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		imlib2
 PKG_VERSION:=		1.4.4
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		20d59c7cda06742015baade6f5975415
 PKG_DESCR:=		Version 2 of an advanced replacement library for libraries like libXpm
 PKG_SECTION:=		libs
