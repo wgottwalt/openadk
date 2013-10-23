@@ -183,7 +183,6 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 		cp $$a $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
 		chmod 755 $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
 	done
-	#env ${MAKE_ENV} ${MAKE} ${PKG_LIBNAME}-dev-install $(MAKE_TRACE)
 endif
 	@-cd ${WRKINST}; \
 	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
