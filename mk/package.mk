@@ -122,9 +122,14 @@ ALL_POSTINST+=	$(2)-install
 $(2)-install:
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
+INFO_$(1)_DEV=	$(PKG_STATE_DIR)/info/$(2)-dev.list
 
 ifeq ($(ADK_PACKAGE_$(1)),y)
+ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DEV)
+else
 install-targets: $$(INFO_$(1))
+endif
 endif
 
 IDEPEND_$(1):=	$$(strip $(4))
@@ -257,9 +262,9 @@ endif
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))
-ifneq (,$(filter dev,$(7)))
+
+$$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
-endif
 endef
 
 install-targets:
