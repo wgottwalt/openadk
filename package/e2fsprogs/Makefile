@@ -73,6 +73,7 @@ endif
 
 e2fsprogs-install:
 	# workaround for dev subpackage
+	mkdir -p ${IDIR_E2FSPROGS_DEV}/usr/bin
 	${CP} ${WRKINST}/usr/bin/compile_et \
 		${IDIR_E2FSPROGS_DEV}/usr/bin
 
