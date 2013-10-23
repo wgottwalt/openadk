@@ -61,10 +61,12 @@ endif
 
 ifeq ($(ARCH),m68k)
 GCC_CONFOPTS+=		--disable-tls
-else if ($(ARCH),cris)
+else 
+if ($(ARCH),cris)
 GCC_CONFOPTS+=		--disable-tls
 else
 GCC_CONFOPTS+=		--enable-tls
+endif
 endif
 
 ifeq ($(ARCH),powerpc)
