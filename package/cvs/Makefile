@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cvs
 PKG_VERSION:=		1.11.23
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		bf185eb51b5918330a04671c3f3cccde
 PKG_DESCR:=		concurrent version system
 PKG_SECTION:=		scm
@@ -17,6 +17,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,CVS,cvs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_lib_nsl_main=no
+CONFIGURE_ARGS+=	--without-gssapi
 
 cvs-install:
 	$(INSTALL_DIR) $(IDIR_CVS)/usr/bin
