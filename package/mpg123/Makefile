@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		alsa-lib
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mpg123/}
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

@@ -16,8 +16,6 @@ PKG_SITES:=		http://www.libsdl.org/projects/SDL_ttf/release/
 PKG_LIBNAME:=		libsdl-ttf
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_TTF,libsdl-ttf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

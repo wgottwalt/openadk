@@ -13,8 +13,6 @@ PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/lib/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
