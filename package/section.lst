@@ -9,7 +9,6 @@ archive	Compression and Archivers
 crypto	Cryptography
 db	Databases
 debug	Debugging / Analyzing
-devel	Development / Headers
 dns	DNS / DHCP
 dhcp	DNS / DHCP
 firewall	Firewall / Routing / Bridging
@@ -46,3 +45,4 @@ x11/server	X server
 x11/libs	X libraries
 x11/misc	X misc
 x11/fonts	X fonts
+devel	Development (see GCC package)

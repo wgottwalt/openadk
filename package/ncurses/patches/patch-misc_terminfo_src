@@ -1,6 +1,6 @@
---- ncurses-5.7.orig/misc/terminfo.src	2008-10-13 01:03:54.000000000 +0200
-+++ ncurses-5.7/misc/terminfo.src	2010-07-15 17:30:24.852569567 +0200
-@@ -3965,6 +3965,171 @@ rxvt-cygwin-native|rxvt terminal emulato
+--- ncurses-5.9.orig/misc/terminfo.src	2011-02-20 21:46:53.000000000 +0100
++++ ncurses-5.9/misc/terminfo.src	2013-10-23 20:00:07.000000000 +0200
+@@ -4208,6 +4208,175 @@ rxvt-cygwin-native|rxvt terminal emulato
  rxvt-16color|xterm with 16 colors like aixterm,
  	ncv#32, use=ibm+16color, use=rxvt,
  
@@ -169,6 +169,6 @@
 +	fsl=\007,
 +	dsl=\E]2;\007,
 +
- # mrxvt 0.5.3
+ # mrxvt 0.5.4
  #
  # mrxvt is based on rxvt 2.7.11, but has by default XTERM_FKEYS defined, which

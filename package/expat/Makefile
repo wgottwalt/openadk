@@ -11,6 +11,7 @@ PKG_DESCR:=		a XML parsing library
 PKG_SECTION:=		libs
 PKG_URL:=		http://expat.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
+PKG_LIBNAME:=		libexpat
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		zlib libffi openssl readline bzip2
 PKG_DEPENDS:=		libpthread zlib libffi libopenssl libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
-PKG_OPTS:=		noscripts
+PKG_OPTS:=		dev noscripts
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd
 
@@ -27,8 +27,8 @@ PKGSS_PYTHON2_BZIP2:=	bzip2
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_BZIP2,python2-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_READLINE,python2-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,PYTHON2_BZIP2,python2-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_READLINE,python2-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXE:=			.exe
@@ -79,7 +79,8 @@ python2-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python ${IDIR_PYTHON2}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
-	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
+	${CP} ${WRKINST}/usr/include/python2.7/pyconfig.h \
+		${IDIR_PYTHON2}/usr/include/python2.7
 	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/readline.so
 	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/bz2.so

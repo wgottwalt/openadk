@@ -17,7 +17,7 @@ PKG_LIBNAME?=	$(PKG_NAME)
 pre-configure:
 do-configure:
 post-configure:
-${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+${_CONFIGURE_COOKIE}: ${_HOST_COOKIE} ${_PATCH_COOKIE}
 	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
 	tsort | while read f; do \
 		cd ${WRKSRC}; \
@@ -169,15 +169,15 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
 ifneq (,$(filter dev,${PKG_OPTS}))
-	mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
-	test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
+	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
 	    find . -name \*.h | \
  	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
-	mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
-	test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
+	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
 	    find . -name \*.pc | \
  	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
-	for a in ${WRKINST}/usr/bin/*-config*; do \
+	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		mkdir -p $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
 		cp $$a $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
