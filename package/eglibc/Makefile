@@ -31,9 +31,6 @@ do-install:
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_EGLIBC)/usr/bin
-ifeq ($(ADK_LOCALES),y)
-	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
-endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/etc 
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_EGLIBC}/etc

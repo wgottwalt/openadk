@@ -38,9 +38,6 @@ do-install:
 	done
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
-ifeq ($(ADK_LOCALES),y)
-	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_GLIBC)/usr/bin
-endif
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_GLIBC}/etc
