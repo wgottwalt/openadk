@@ -143,6 +143,7 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}.scripts'
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
@@ -158,7 +159,6 @@ endif
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
 		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
 	done
-	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
