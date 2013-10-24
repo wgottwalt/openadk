@@ -14,8 +14,6 @@ PKG_DEPENDS:=		zlib libmad liblame alsa-lib libid3tag
 PKG_URL:=		http://sox.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sox/}
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

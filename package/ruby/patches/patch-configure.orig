@@ -1,0 +1,11 @@
+--- ruby-2.0.0-p247.orig/configure	2013-06-27 13:16:17.000000000 +0200
++++ ruby-2.0.0-p247/configure	2013-10-24 10:36:04.000000000 +0200
+@@ -7372,6 +7372,8 @@ else
+   unset ac_c_werror_flag
+ fi
+ 
++# FIXME
++stack_protector=no
+ 
+     # -fstack-protector
+     case "$target_os" in #(

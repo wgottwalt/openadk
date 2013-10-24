@@ -13,8 +13,6 @@ PKG_BUILDDEP:=		libpng
 PKG_SITES:=		http://www.cairographics.org/releases/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

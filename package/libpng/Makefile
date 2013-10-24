@@ -15,8 +15,6 @@ PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

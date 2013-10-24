@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libiconv
 PKG_VERSION:=		1.13.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		7ab33ebd26687c744a37264a330bbe9a
 PKG_DESCR:=		character set conversion library
 PKG_SECTION:=		libs
@@ -23,8 +23,6 @@ $(eval $(call PKG_template,LIBICONV,libiconv,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
-FAKE_FLAGS+=		libdir="${WRKINST}/usr/lib" \
-			includedir="${WRKINST}/usr/include" \
 INSTALL_TARGET=		install-lib
 
 libiconv-install:

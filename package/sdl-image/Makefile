@@ -17,8 +17,6 @@ PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libsdl-image
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 DISTFILES:=             SDL_image-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 

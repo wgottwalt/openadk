@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
-PKG_VERSION:=		8.0.5
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		cda5d101f43b8784fa60bdeaca4056f2
-PKG_DESCR:=		MESA library
+PKG_VERSION:=		9.2.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		df801a975045150790e10e2ccf32193f
+PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
 PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
@@ -40,27 +40,12 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-gles1 \
 			--disable-gles2 \
 			--with-dri-drivers=${DRI_DRIVERS},swrast
-CONFIGURE_ENV+=		PYTHON2=/usr/bin/python
+CONFIGURE_ENV+=		PYTHON2=/usr/bin/python MISSING="echo"
 
-XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD} GLSL_CL=${STAGING_HOST_DIR}/bin/glslcompile
+XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
 ifeq ($(ADK_NATIVE),y)
 XAKE_FLAGS+=		RANLIB=ranlib AR=ar
 endif
-
-post-extract:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-		./configure \
-		--disable-static \
-		--disable-gallium-llvm \
-		--with-gallium-drivers=swrast \
-		--with-driver=xlib \
-	);
-	${MAKE} -C ${WRKBUILD}/src/glsl
-	${CP} ${WRKBUILD}/src/glsl/glsl_compiler \
-		${STAGING_HOST_DIR}/bin/glsl_compiler
-	${CP} ${WRKBUILD}/src/glsl/builtin_compiler \
-		${STAGING_HOST_DIR}/bin/builtin_compiler
-	${MAKE} -C ${WRKBUILD}/src/glsl clean
 
 mesalib-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
