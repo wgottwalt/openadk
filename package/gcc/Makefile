@@ -31,7 +31,7 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif
 
-ifeq ($(ADK_PACKAGE_GXX),y)
+ifneq ($(ADK_PACKAGE_GXX),)
 CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
 CONFIGURE_ARGS+=	--enable-languages=c
@@ -69,10 +69,10 @@ gcc-install:
 	rm -rf ${IDIR_GCC}/usr/lib/gcc/*/*/install-tools
 
 g++-install:
-	${INSTALL_DIR} ${IDIR_GCC}/usr/bin
-	${INSTALL_DIR} ${IDIR_GCC}/usr/include/c++
-	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GCC}/usr/bin/
-	cd ${IDIR_GCC}/usr/bin/ && ln -sf g++ c++
-	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GCC}/usr/include/c++/
+	${INSTALL_DIR} ${IDIR_GXX}/usr/bin
+	${INSTALL_DIR} ${IDIR_GXX}/usr/include/c++
+	${INSTALL_BIN} ${WRKINST}/usr/bin/g++ ${IDIR_GXX}/usr/bin/
+	cd ${IDIR_GXX}/usr/bin/ && ln -sf g++ c++
+	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GXX}/usr/include/c++/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

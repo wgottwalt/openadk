@@ -17,8 +17,6 @@ PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 #DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 ifeq ($(ADK_STATIC),y)

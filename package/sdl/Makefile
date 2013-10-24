@@ -16,8 +16,6 @@ PKG_SITES:=		http://www.libsdl.org/release/
 PKG_LIBNAME:=		libsdl
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=      !m68k
-
 PKG_FLAVOURS_LIBSDL:=	WITH_TSLIB
 PKGFD_WITH_TSLIB:=	enable touchscreen support
 PKGFS_WITH_TSLIB:=	tslib

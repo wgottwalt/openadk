@@ -20,6 +20,8 @@ PKG_NAME:=		libthread-db
 PKG_DESCR:=		POSIX threads library for gdb/gdbserver
 PKG_SECTION:=		libs
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
