@@ -4,14 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		1.9.3
-PKG_EXTRAVER:=		0
+PKG_VERSION:=		2.0.0
+PKG_EXTRAVER:=		247
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8e2fef56185cfbaf29d0c8329fc77c05
+PKG_MD5SUM:=		c351450a0bed670e0f5ca07da3458a5b
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
+PKG_DEPENDS:=		librt libpthread libgcc
 PKG_URL:=		http://www.ruby-lang.org/
-PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/1.9/
+PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.0/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
@@ -19,26 +20,38 @@ PKG_HOST_DEPENDS:=	!freebsd !cygwin
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+# uClibc setpgrp does not take arguments
+CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes \
+			rb_cv_binary_elf=yes
+CONFIGURE_ARGS+=	--disable-install-doc \
+			--with-baseruby=${STAGING_HOST_DIR}/usr/bin/ruby
 
 MAKE_FILE:=		GNUmakefile
 XAKE_FLAGS+=		optflags='' debugflags='' dldflags="$(TARGET_LDFLAGS)" 
-# uClibc setpgrp does not take arguments
-CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes rb_cv_binary_elf=yes
-CONFIGURE_ARGS+=	--disable-install-doc --with-baseruby=${STAGING_DIR}/bin/ruby
 ALL_TARGET:=		main
 INSTALL_TARGET:=	install-nodoc
 
-pre-configure:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		rb_cv_binary_elf=yes ./configure --prefix=$(STAGING_HOST_DIR) --disable-install-doc \
-	);
-	-$(MAKE) -C ${WRKBUILD} main Q=""
-	cp ${WRKBUILD}/ruby ${STAGING_DIR}/bin/ruby
-	$(MAKE) -C ${WRKBUILD} install-nodoc
-	$(MAKE) -C ${WRKBUILD} clean
+HOST_CONFIGURE_ARGS+=	--disable-install-doc \
+			--disable-shared \
+			--prefix=$(HOST_WRKINST)/usr \
+			--bindir=$(HOST_WRKINST)/usr/bin \
+			--mandir=$(HOST_WRKINST)/usr/share/man \
+			--disable-rubygems
+HOST_ALL_TARGET:=	main
+HOST_INSTALL_TARGET:=	install-nodoc
+HOST_XAKE_FLAGS:=	V=1 DESTDIR=""
+
+ruby-hostinstall:
+	$(INSTALL_BIN) $(HOST_WRKINST)/usr/bin/ruby \
+		$(STAGING_HOST_DIR)/usr/bin
+	$(CP) $(HOST_WRKINST)/usr/lib/ruby \
+		$(STAGING_HOST_DIR)/usr/lib
 
 ruby-install:
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
@@ -47,4 +60,5 @@ ruby-install:
 	${CP} ${WRKINST}/usr/lib/ruby/* ${IDIR_RUBY}/usr/lib/ruby
 	${INSTALL_BIN} ${WRKINST}/usr/bin/* ${IDIR_RUBY}/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -15,6 +15,8 @@ PKG_URL:=		http://glew.sourceforge.net/index.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=glew/}
 PKG_OPTS:=		dev
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 DISTFILES:=		glew-$(PKG_VERSION).tgz
 WRKDIST=		${WRKDIR}/glew-$(PKG_VERSION)
 

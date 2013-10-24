@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.26
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f36f3086031dd56ae94f722ffae8df5e
+PKG_VERSION:=		2.4.36
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		744701405d396b1fb9de6cb7a453c6e9
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid
@@ -40,7 +40,7 @@ $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE}
 $(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
 $(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
-PKG_CONFIGURE_OPTIONS+= --enable-slapd \
+CONFIGURE_ARGS+= 	--enable-slapd \
 			--libexecdir=/usr/sbin \
 			--enable-bdb \
 			--disable-hdb \
@@ -62,25 +62,7 @@ CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
-CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS}
 XAKE_FLAGS+=		STRIP="" CPPFLAGS="-D_GNU_SOURCE"
-
-pre-configure:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		CPPFLAGS=-D_GNU_SOURCE ./configure \
-		   ${PKG_CONFIGURE_OPTIONS} \
-		  --disable-slapd \
-		  --without-cyrus-sasl \
-		  --without-threads \
-		  --without-tls \
-	);
-	${MAKE} -C ${WRKBUILD} depend
-	${MAKE} -C ${WRKBUILD}/libraries/liblutil
-	${MAKE} -C ${WRKBUILD}/libraries/liblber
-	${MAKE} -C ${WRKBUILD}/libraries/liblunicode
-	${MAKE} -C ${WRKBUILD}/libraries/liblber clean
-	${MAKE} -C ${WRKBUILD}/libraries/liblutil clean
-	${MAKE} -C ${WRKBUILD}/libraries/liblunicode clean
 
 libopenldap-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENLDAP}/etc/openldap

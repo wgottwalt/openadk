@@ -12,6 +12,7 @@ PKG_SECTION:=		db
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
 PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		libdb
 PKG_OPTS:=		dev
 
 WRKBUILD=		${WRKSRC}/build_unix
@@ -39,6 +40,6 @@ CONFIGURE_ARGS+=	--enable-smallbuild \
 
 libdb-install:
 	${INSTALL_DIR} ${IDIR_LIBDB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libdb*.so ${IDIR_LIBDB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libdb*.so* ${IDIR_LIBDB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

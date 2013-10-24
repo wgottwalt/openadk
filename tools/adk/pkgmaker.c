@@ -1003,6 +1003,28 @@ int main() {
 
 						fprintf(cfg, "\tprompt \"%s. development files for %s\"\n", pseudo_name, pkg_libname);
 						fprintf(cfg, "\ttristate\n");
+
+						/* create package target architecture dependency information */
+						if (pkg_arch_depends != NULL) {
+							pkg_helper = strdup(pkg_arch_depends);
+							token = strtok(pkg_helper, " ");
+							fprintf(cfg, "\tdepends on ");
+							sp = "";
+							while (token != NULL) {
+								if(strncmp(token, "!", 1) == 0) {
+									fprintf(cfg, "%s!ADK_LINUX%s", sp, toupperstr(token));
+									sp = " && ";
+								} else {
+									fprintf(cfg, "%sADK_LINUX_%s", sp, toupperstr(token));
+									sp = " || ";
+								}
+							token = strtok(NULL, " ");
+							}
+							fprintf(cfg, "\n");
+							free(pkg_helper);
+							pkg_helper = NULL;
+						}
+
 						fprintf(cfg, "\tdepends on ADK_PACKAGE_GCC\n");
 						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(pkg_libname));
 						fprintf(cfg, "\tdefault n\n");

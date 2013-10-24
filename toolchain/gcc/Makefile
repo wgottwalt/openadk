@@ -59,10 +59,14 @@ else
 GCC_CONFOPTS+=		--disable-lto
 endif
 
+ifeq ($(ARCH),m68k)
+GCC_CONFOPTS+=		--disable-tls
+else 
 ifeq ($(ARCH),cris)
 GCC_CONFOPTS+=		--disable-tls
 else
 GCC_CONFOPTS+=		--enable-tls
+endif
 endif
 
 ifeq ($(ARCH),powerpc)

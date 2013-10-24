@@ -13,6 +13,7 @@ PKG_DEPENDS:=		exmap-kmod libreadline glib
 PKG_BUILDDEP:=		glib readline
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
+PKG_ARCH_DEPENDS:=	!m68k
 PKG_CFLINE_EXMAP:=	depends on !ADK_TOOLCHAIN_ONLY
 
 PKG_SUBPKGS:=		EXMAP EXMAPD EXMAPSERVER EXMAP_KMOD
