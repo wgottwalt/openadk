@@ -16,7 +16,7 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--with-__thread \
 			--with-tls \
 			--enable-add-ons \
-			$(NLS)
+			--disable-nls
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${CC_FOR_BUILD} \
 			GCC_HONOUR_COPTS=s \
