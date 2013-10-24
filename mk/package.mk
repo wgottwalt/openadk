@@ -99,7 +99,7 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 # 5.) description for the package, $(PKG_DESCR)
 # 6.) section of the package, $(PKG_SECTION)  
 # 7.) special package options $(PKG_OPTS)
-#     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/target/scripts
+#     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/scripts
 #		  (needed for example for autoconf/automake)
 #     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
