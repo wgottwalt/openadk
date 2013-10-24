@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
-PKG_VERSION:=		5.7
-PKG_RELEASE:=		5
-PKG_MD5SUM:=		cce05daf61a64501ef6cd8da1f727ec6
+PKG_VERSION:=		5.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8cb9c412e5f2d96bc6f459aa8c6282a1
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnu.org/software/ncurses/
@@ -17,8 +17,10 @@ PKG_OPTS:=		dev
 PKG_FLAVOURS_LIBNCURSES:=	FULL_TERMINFO
 PKGFD_FULL_TERMINFO:=		install the complete set of terminfo files as provided upstream
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS+=		-lgcc
@@ -27,40 +29,46 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
 			--with-build-cc=${CC_FOR_BUILD} \
 			--without-progs \
-			--with-fallbacks \
 			--disable-termcap \
+			--enable-symlinks \
 			--without-ada \
 			--with-shared \
-			--with-normal \
 			--without-debug \
 			--without-profile \
 			--without-gpm \
+			--without-manpages \
+			--without-tests \
 			--enable-overwrite \
 			--with-terminfo-dirs=/usr/share/terminfo \
 			--with-default-terminfo-dir=/usr/share/terminfo \
 			--disable-big-core \
 			--disable-home-terminfo \
 			--without-rcs-ids \
-			--enable-const \
-			--enable-echo
+			--enable-const
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
-pre-configure:
-	# create tic host binary
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure \
-		--with-shared \
-		--with-build-cc=${CC_FOR_BUILD} \
-		--with-progs \
-		--without-debug \
-		--without-profile \
-	);
-	${MAKE} -C ${WRKBUILD}/include
-	${MAKE} -C ${WRKBUILD}/progs
-	${CP} ${WRKBUILD}/progs/tic ${STAGING_HOST_DIR}/bin
-	find ${WRKBUILD} -name *.o -exec rm {} \;
-	find ${WRKBUILD} -name *.a -exec rm {} \;
+# use sth which does not exist
+HOST_ALL_TARGET:=	progs
+HOST_INSTALL_TARGET:=	install.includes install.progs
+HOST_CONFIGURE_ARGS+=	--without-shared \
+			--with-build-cc=${CC_FOR_BUILD} \
+			--with-progs \
+			--with-ticlib \
+			--disable-tic-depends \
+			--enable-symlinks \
+			--without-manpages \
+			--without-tests \
+			--without-cxx \
+			--without-cxx-binding \
+			--without-gpm \
+			--without-ada \
+			--disable-termcap \
+			--without-debug \
+			--without-profile
+
+libncurses-hostinstall:
+	${CP} ${HOST_WRKINST}/usr/bin/* ${STAGING_HOST_DIR}/usr/bin
 
 libncurses-install:
 	# this is installed as libncurses - make libcurses a "link"
@@ -83,4 +91,5 @@ else
 	done
 endif
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
