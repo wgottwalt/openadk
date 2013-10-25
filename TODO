@@ -1,8 +1,8 @@
+- add PKG_AUTOTOOL logic for packages, which need patches to
+  the autotool infrastructure
+- add grsec kernel patch
+- check for gcc and SSP again
 - port full blown perl
-- implement host build infrastructure, fixes update-patches for the package
-  needed for ncurses, file, mesalib, openldap, python2, ..
-- gcc fixed-includes disabling
-http://www.linuxfromscratch.org/lfs/view/7.1/chapter05/gcc-pass2.html
 - port w3m
 - port libcec for xbmc
 - check xbmc samba/nfs support

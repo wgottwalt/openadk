@@ -87,7 +87,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --enable-static \
 	    --disable-dependency-tracking \
 	    --disable-libtool-lock \
-	    $(NLS) \
+	    --disable-nls \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else
 	@echo "Invalid CONFIG_STYLE '${CONFIG_STYLE}'" >&2
