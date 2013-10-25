@@ -22,8 +22,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HARFBUZZ,harfbuzz,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
-
 harfbuzz-install:
 	$(INSTALL_DIR) $(IDIR_HARFBUZZ)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libharfbuzz*.so* \

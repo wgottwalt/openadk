@@ -19,8 +19,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
-
 poppler-install:
 	$(INSTALL_DIR) $(IDIR_POPPLER)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpoppler*.so* \

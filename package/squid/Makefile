@@ -67,8 +67,6 @@ endif
 
 include ${TOPDIR}/mk/package.mk
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
-
 define PKG_mod_template
 
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=	${2}-install

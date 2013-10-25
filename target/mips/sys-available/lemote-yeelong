@@ -13,6 +13,7 @@ config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_PCI
 	help
          System profile for Lemote Yeelong laptop.
 

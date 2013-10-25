@@ -19,7 +19,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BEECRYPT,beecrypt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-TARGET_LDFLAGS+=        -L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ARGS+=	--without-cplusplus \
 			--without-python \
 			--without-java
