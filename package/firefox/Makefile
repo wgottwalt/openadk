@@ -21,9 +21,9 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 native mips
+PKG_ARCH_DEPENDS:=	arm x86 x86_64 native mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el
+PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
@@ -104,7 +104,6 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-safe-browsing \
 			--disable-elf-hack 
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 

@@ -28,7 +28,6 @@ $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRECPP},${PKG_SECTION}))
 
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 
 libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib

@@ -195,6 +195,13 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	# workaround for openjdk
 	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin ; cp * ..
+	# fix linking g++ apps with libtool
+	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
+		cd $(STAGING_TARGET_DIR)/lib32 && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so
+	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
+		cd $(STAGING_TARGET_DIR)/lib64 && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

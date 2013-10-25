@@ -4,12 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		freeglut
-PKG_VERSION:=		2.6.0
+PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		39f0f2de89f399529d2b981188082218
+PKG_MD5SUM:=		918ffbddcffbac83c218bc52355b6d5a
 PKG_DESCR:=		OpenGL Utility Toolkit libraries
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		MesaLib
+PKG_DEPENDS:=		libglu
+PKG_BUILDDEP:=		glu
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 PKG_NEED_CXX:=		1

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		exmap
 PKG_VERSION:=		0.4.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
 PKG_DESCR:=		memory analysing client tool
 PKG_SECTION:=		debug

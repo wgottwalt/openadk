@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-aligned
-TARGET_LDFLAGS+=        -L$(STAGING_DIR)/usr/lib64
 
 libtorrent-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib

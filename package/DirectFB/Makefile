@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DIRECTFB,directfb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \
 			--without-tools \

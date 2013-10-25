@@ -26,9 +26,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif
@@ -36,7 +33,6 @@ endif
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium-llvm \
 			--with-gallium-drivers=swrast \
-			--with-driver=dri \
 			--disable-gles1 \
 			--disable-gles2 \
 			--with-dri-drivers=${DRI_DRIVERS},swrast
