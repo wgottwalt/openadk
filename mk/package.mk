@@ -263,8 +263,17 @@ endif
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))
 
+ifneq ($(1),UCLIBC)
+ifneq ($(1),EGLIBC)
+ifneq ($(1),GLIBC)
+ifneq ($(1),MUSL)
 $$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
+endif
+endif
+endif
+endif
+
 endef
 
 install-targets:
