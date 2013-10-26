@@ -1,3 +1,5 @@
+- automatically add -dbg package via objcopy magic
+- evaluate libguestfs for image creation
 - add PKG_AUTOTOOL logic for packages, which need patches to
   the autotool infrastructure
 - add grsec kernel patch
