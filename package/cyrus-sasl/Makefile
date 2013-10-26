@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cyrus-sasl
-PKG_VERSION:=		2.1.23
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		2eb0e48106f0e9cd8001e654f267ecbc
+PKG_VERSION:=		2.1.26
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a7f4e5e559a0e37b3ffc438c9456e425
 PKG_DESCR:=		a general purpose authentication library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		openssl
 PKG_DEPENDS:=		libopenssl
-PKG_URL:=		http://asg.web.cmu.edu/sasl/
-PKG_SITES:=		http://ftp.andrew.cmu.edu/pub/cyrus-mail/
+PKG_URL:=		http://cyrusimap.org/
+PKG_SITES:=		ftp://ftp.cyrusimap.org/cyrus-sasl/
 PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libsasl2
 PKG_OPTS:=		dev
@@ -22,10 +22,12 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-staticdlopen \
-			--enable-cram \
 			--enable-plain \
 			--enable-anon \
-			--enable-digest \
+			--enable-login \
+			--disable-cram \
+			--disable-digest \
+			--disable-scram \
 			--with-ipctype=unix \
 			--with-devrandom="/dev/urandom" \
 			--with-openssl="${STAGING_TARGET_DIR}/usr" \
@@ -39,7 +41,6 @@ CONFIGURE_ARGS+=	--enable-staticdlopen \
 			--disable-krb4 \
 			--disable-gssapi \
 			--disable-gss_mutexes \
-			--disable-login \
 			--disable-ntlm \
 			--disable-sql \
 			--disable-static \
