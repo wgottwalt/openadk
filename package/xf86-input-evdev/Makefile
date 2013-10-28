@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server kmod-input-evdev
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_ARCH_DEPENDS:=	!arm !avr32 !m68k
+PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
 
