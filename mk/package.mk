@@ -10,7 +10,14 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
+AUTOTOOL_ENV+=		AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
+			PATH='${AUTOTOOL_PATH}'
+
 CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \
@@ -258,7 +265,7 @@ ifeq (,$(filter noremove,$(7)))
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	rm -f '$${STAGING_PKG_DIR}/$(1)'
+	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))

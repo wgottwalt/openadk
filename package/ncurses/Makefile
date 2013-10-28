@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		8cb9c412e5f2d96bc6f459aa8c6282a1
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		ncurses-host
 PKG_URL:=		http://www.gnu.org/software/ncurses/
 PKG_SITES:=		${MASTER_SITE_GNU:=ncurses/}
 PKG_LIBNAME:=		libncurses

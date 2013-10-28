@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3f99565532f548d7540912c4642d1ede
 PKG_DESCR:=		a file type guesser
 PKG_SECTION:=		utils
+PKG_BUILDDEP:=		file-host
 PKG_DEPENDS:=		libmagic libgcc
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \

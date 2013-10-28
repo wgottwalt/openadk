@@ -11,6 +11,7 @@ PKG_MD5SUM:=		c351450a0bed670e0f5ca07da3458a5b
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		librt libpthread libgcc
+PKG_BUILDDEP:=		ruby-host
 PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.0/
 PKG_NOPARALLEL:=	1

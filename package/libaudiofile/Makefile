@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		audiofile
 PKG_VERSION:=		0.2.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		a39be317a7b1971b408805dc5e371862
 PKG_DESCR:=		audiofile library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.68k.org/~michael/audiofile/
 PKG_SITES:=		http://www.68k.org/~michael/audiofile/
 PKG_LIBNAME:=		libaudiofile
@@ -18,8 +19,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBAUDIOFILE,libaudiofile,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
-CONFIGURE_ARGS+=	--with-build-cc=${CC_FOR_BUILD}
 
 libaudiofile-install:
 	${INSTALL_DIR} ${IDIR_LIBAUDIOFILE}/usr/lib

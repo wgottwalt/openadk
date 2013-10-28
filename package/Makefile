@@ -60,6 +60,12 @@ endif
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
+%-host-compile:
+	$(START_TRACE) "package/$(patsubst %-host-compile,%,$@)-host-compile: "
+	$(MAKE) -C $(patsubst %-host-compile,%,$@) hostpackage
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
+
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
 	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-pkgs

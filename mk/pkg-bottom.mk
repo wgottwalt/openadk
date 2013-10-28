@@ -11,27 +11,17 @@
 # * if you have a style -> define a pre-foo: and post-foo: if they
 #   are required, but the do-foo: magic is done here
 
-REORDER_DEPENDENCIES=	${TOPDIR}/scripts/automake.dep
 PKG_LIBNAME?=	$(PKG_NAME)
 
 pre-configure:
 do-configure:
 post-configure:
-${_CONFIGURE_COOKIE}: ${_HOST_COOKIE} ${_PATCH_COOKIE}
-	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
-	tsort | while read f; do \
-		cd ${WRKSRC}; \
-		case $$f in \
-		/*) \
-			find . -name "$${f#/}" -print | while read i; do \
-				touch "$$i"; \
-			done;; \
-		*) \
-			if test -e "$$f" ; then \
-				touch "$$f"; \
-			fi;; \
-		esac; \
-	done
+${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if
+	rm -rf ${WRKSRC}/autom4te.cache
+	touch ${WRKDIR}/.autoreconf_done
+endif
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
 
@@ -109,7 +99,6 @@ post-build:
 ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
 	@$(CMD_TRACE) "compiling... "
-
 ifneq ($(filter manual,${BUILD_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)
@@ -127,7 +116,7 @@ do-install:
 post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
-	-rm -f ${_ALL_CONTROLS}
+	@-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
@@ -222,6 +211,7 @@ ${_IPKGS_COOKIE}:
 	exec ${MAKE} package
 
 package: ${ALL_IPKGS}
+ifneq ($(DEVELOPER),)
 	@cd ${WRKDIR}/fake-${CPU_ARCH} || exit 1; \
 	y=; sp=; for x in ${ALL_IDIRS}; do \
 		y="$$y$$sp$${x#$(WRKDIR)/fake-${CPU_ARCH}/}"; \
@@ -257,6 +247,7 @@ package: ${ALL_IPKGS}
 		ln=$$name; \
 		li=$$inode; \
 	done
+endif
 	touch ${_IPKGS_COOKIE}
 
 clean-targets: clean-dev-generic

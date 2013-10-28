@@ -1,0 +1,16 @@
+--- cifs-utils-6.1.orig/mount.cifs.c	2013-07-02 21:13:33.000000000 +0200
++++ cifs-utils-6.1/mount.cifs.c	2013-10-28 07:33:27.000000000 +0100
+@@ -34,7 +34,13 @@
+ #include <sys/utsname.h>
+ #include <sys/socket.h>
+ #include <arpa/inet.h>
++#ifdef HAVE_GNU_GETOPT_LONG
+ #include <getopt.h>
++#else
++#include "gnu_getopt.h"
++#define getopt_long gnu_getopt_long
++#define option gnu_option
++#endif
+ #include <errno.h>
+ #include <netdb.h>
+ #include <string.h>

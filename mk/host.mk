@@ -1,7 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-HOST_CONFIGURE_ENV+=	CONFIG_SHELL='$(strip ${SHELL})' \
+HOST_CONFIGURE_ENV+=	AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
+			CONFIG_SHELL='$(strip ${SHELL})' \
+			PATH='${TARGET_PATH}' \
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
 			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
@@ -25,8 +27,8 @@ HOST_WRKINST=		${WRKDIR}/host
 
 _HOST_EXTRACT_COOKIE=	${WRKDIST}/.extract_done
 _HOST_PATCH_COOKIE=	${WRKDIST}/.prepared
-_HOST_CONFIGURE_COOKIE=	${WRKBUILD}/.host_configure_done
-_HOST_BUILD_COOKIE=	${WRKBUILD}/.host_build_done
+_HOST_CONFIGURE_COOKIE=	${WRKDIR}/.host_configure_done
+_HOST_BUILD_COOKIE=	${WRKDIR}/.host_build_done
 _HOST_FAKE_COOKIE=	${HOST_WRKINST}/.host_fake_done
 _HOST_COOKIE=		${PACKAGE_DIR}/.stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}-host
 
@@ -46,11 +48,12 @@ define HOST_template
 ALL_PKGOPTS+=	$(1)
 PKGNAME_$(1)=	$(2)
 HOSTDIR_$(1)=	$(WRKDIR)/host
-ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_HOSTDIRS+=	$${HOSTDIR_$(1)}
 ALL_HOSTINST+=	$(2)-hostinstall
-endif
 
 $$(HOSTDIR_$(1)): ${_HOST_PATCH_COOKIE} ${_HOST_FAKE_COOKIE}
 
 endef
+
+.PHONY:	all hostextract hostpatch hostconfigure \
+	hostbuild hostpackage hostfake

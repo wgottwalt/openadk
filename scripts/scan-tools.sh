@@ -226,9 +226,9 @@ if ! which perl >/dev/null 2>&1; then
 fi
 
 if ! which m4 >/dev/null 2>&1; then
-	echo "You must install m4 (macro processor) to continue."
-	echo
-	out=1
+       echo "You must install m4 (macro processor) to continue."
+       echo
+       out=1
 fi
 
 if ! which pkg-config >/dev/null 2>&1; then

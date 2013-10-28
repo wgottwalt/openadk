@@ -497,8 +497,9 @@ int main() {
 
 			/* when PKG_LIBNAME exist use this instead of PKG_NAME, but only for !libmix */
 			if (pkg_libname != NULL)
-				if (strstr(pkg_opts, "libmix") == NULL)
-					pkg_name = strdup(pkg_libname);
+				if (pkg_opts != NULL)
+					if (strstr(pkg_opts, "libmix") == NULL)
+						pkg_name = strdup(pkg_libname);
 
 			/* end of package Makefile parsing */
 			if (fclose(pkg) != 0)
@@ -1047,6 +1048,7 @@ int main() {
 			pkg_need_java = NULL;
 			/* reset flags, free memory */
 			free(pkg_name);
+			free(pkg_libname);
 			free(pkg_descr);
 			free(pkg_section);
 			free(pkg_url);
@@ -1064,6 +1066,7 @@ int main() {
 			free(pkg_cfline);
 			free(pkg_multi);
 			pkg_name = NULL;
+			pkg_libname = NULL;
 			pkg_descr = NULL;
 			pkg_section = NULL;
 			pkg_url = NULL;

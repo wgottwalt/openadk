@@ -21,15 +21,18 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,LIBTOOL,libtool,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBTOOL,libtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL},${PKG_OPTS}))
 
 ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
 endif
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-ltdl-install
 
 libtool-install:
@@ -41,4 +44,5 @@ libltdl-install:
 	${INSTALL_DIR} ${IDIR_LIBLTDL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libltdl.so* ${IDIR_LIBLTDL}/usr/lib/
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
