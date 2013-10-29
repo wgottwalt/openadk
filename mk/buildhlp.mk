@@ -95,15 +95,15 @@ else
 endif
 	@-test -r ${WRKDIR}/.autoreconf_done && \
 		(cd ${WRKDIR}.orig/${PKG_NAME}-${PKG_VERSION}; \
-		env ${AUTOTOOL_ENV} autoreconf -if)
+		env ${AUTOTOOL_ENV} autoreconf -if) $(MAKE_TRACE)
 	@rm -rf ${WRKDIR}.orig/${PKG_NAME}-${PKG_VERSION}/autom4te.cache
 	@# restore config.sub/config.guess
-	@for i in $$(find ${WRKDIR}.orig -name config.sub);do \
+	@for i in $$(find ${WRKDIR} -name config.sub);do \
 		if [ -f $$i.bak ];then \
 			mv $$i.bak $$i; \
 		fi;\
 	done
-	@for i in $$(find ${WRKDIR}.orig -name config.guess);do \
+	@for i in $$(find ${WRKDIR} -name config.guess);do \
 		if [ -f $$i.bak ];then \
 			mv $$i.bak $$i; \
 		fi;\
