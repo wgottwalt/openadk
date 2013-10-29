@@ -577,9 +577,9 @@ bulk:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
-		if [ -f .exit ]; break;fi \
+		if [ -f .exit ]; then break;fi \
 	      done; \
-	    if [ -f .exit ]; break;fi \
+	    if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
 	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
 	done
@@ -597,9 +597,9 @@ bulkall:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
-		if [ -f .exit ]; break;fi \
+		if [ -f .exit ]; then break;fi \
 	      done; \
-	      if [ -f .exit ]; break;fi \
+	      if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
 	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
 	done
@@ -617,9 +617,9 @@ bulkallmod:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
-	        if [ -f .exit ]; break;fi \
+	        if [ -f .exit ]; then break;fi \
 	      done; \
-	     if [ -f .exit ]; break;fi \
+	     if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
 	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; break;fi \
 	done
