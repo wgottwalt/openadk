@@ -36,7 +36,6 @@ ifneq ($(filter auto,${HOST_STYLE}),)
 	    --disable-libtool-lock \
 	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
-
 else
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${HOST_CONFIGURE_ENV} \
