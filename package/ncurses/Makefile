@@ -50,8 +50,8 @@ ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
 # use sth which does not exist
-HOST_ALL_TARGET:=	progs
-HOST_INSTALL_TARGET:=	install.includes install.progs
+HOST_ALL_TARGET:=	install.includes
+HOST_INSTALL_TARGET:=	install.progs
 HOST_CONFIGURE_ARGS+=	--without-shared \
 			--with-build-cc=${CC_FOR_BUILD} \
 			--with-progs \
