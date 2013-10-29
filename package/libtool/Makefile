@@ -34,6 +34,7 @@ endif
 
 HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-ltdl-install
+XAKE_FLAGS+=		HELP2MAN=/bin/echo
 
 libtool-install:
 	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
