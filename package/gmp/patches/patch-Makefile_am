@@ -1,0 +1,11 @@
+--- gmp-4.3.2.orig/Makefile.am	2010-01-07 21:09:02.000000000 +0100
++++ gmp-4.3.2/Makefile.am	2013-10-29 22:08:10.000000000 +0100
+@@ -25,7 +25,7 @@
+ # Makefiles in subdirectories, but here we must omit it so automake gives
+ # the actual ansi2knr build rule, not "cd $(top_builddir) && make ansi2knr".
+ #
+-AUTOMAKE_OPTIONS = 1.8 gnu no-dependencies ansi2knr
++AUTOMAKE_OPTIONS = 1.8 gnu no-dependencies
+ 
+ 
+ # Libtool -version-info for libgmp.la and libmp.la.  See "Versioning" in the
