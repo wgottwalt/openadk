@@ -15,7 +15,7 @@ start)
 	/usr/bin/php ${php_flags} &
 	;;
 stop)
-	kill $(pgrep -f /usr/bin/php)
+	for i in $(pgrep -f /usr/bin/php);do kill -9 $i;done
 	;;
 restart)
 	sh $0 stop
