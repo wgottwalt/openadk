@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
 PKG_VERSION:=		3.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0a2ea57f6184baf45b150aee53c0c8da
 PKG_DESCR:=		Python scripting language (Version 3)
 PKG_SECTION:=		lang
@@ -116,7 +116,6 @@ python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKINST}/usr/lib/python3.3/* ${IDIR_PYTHON3}/usr/lib/python3.3
 	${CP} ${WRKINST}/usr/include/python3.3m/pyconfig.h \
 		 ${IDIR_PYTHON3}/usr/include/python3.3m
-	find ${IDIR_PYTHON3} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
 	for i in zlib _bz2 _ncurses _ssl _gdbm _sqlite pyexpat readline; do \
 		rm ${IDIR_PYTHON3}/usr/lib/python3.3/lib-dynload/$${i}*so; \
 	done
