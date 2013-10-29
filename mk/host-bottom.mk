@@ -78,9 +78,9 @@ endif
 	rm -rf ${WRKBUILD} ${WRKDIST} ${WRKSRC}
 	exec ${MAKE} host-extract $(MAKE_TRACE)
 	mkdir -p ${HOST_WRKINST}
-	touch $@
 	# avoid rebuild
 	touch ${_HOST_BUILD_COOKIE} ${_HOST_CONFIGURE_COOKIE}
+	touch $@
 
 ${_HOST_COOKIE}:
 	exec ${MAKE} hostpackage
