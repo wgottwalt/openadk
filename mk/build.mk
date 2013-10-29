@@ -559,8 +559,9 @@ bulktoolchain:
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/bin/toolchain_$${arch}_$${libc}/build.log; \
-		    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
+		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 # build all target architecture, target systems and libc combinations
@@ -581,7 +582,7 @@ bulk:
 	      done; \
 	    if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
-	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
+	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 bulkall:
@@ -601,7 +602,7 @@ bulkall:
 	      done; \
 	      if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 bulkallmod:
@@ -621,7 +622,7 @@ bulkallmod:
 	      done; \
 	     if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
-	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; break;fi \
+	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
 ${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
