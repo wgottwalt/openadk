@@ -65,7 +65,6 @@ endef
 $(eval $(call HOST_template,PYTHON3,python3,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PYTHON3,python3,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-$(eval $(call PKG_template,PYTHON3_MOD_ZLIB,python3-mod-zlib,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_ZLIB},${PKGFD_MOD_ZLIB},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_BZ2,python3-mod-bz2,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_BZ2},${PKGFD_MOD_BZ2},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_EXPAT,python3-mod-expat,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_EXPAT},${PKGFD_MOD_EXPAT},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_SQLITE,python3-mod-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_SQLITE},${PKGFD_MOD_SQLITE},${PKG_SECTION}))
@@ -116,7 +115,7 @@ python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKINST}/usr/lib/python3.3/* ${IDIR_PYTHON3}/usr/lib/python3.3
 	${CP} ${WRKINST}/usr/include/python3.3m/pyconfig.h \
 		 ${IDIR_PYTHON3}/usr/include/python3.3m
-	for i in zlib _bz2 _ncurses _ssl _gdbm _sqlite pyexpat readline; do \
+	for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
 		rm ${IDIR_PYTHON3}/usr/lib/python3.3/lib-dynload/$${i}*so; \
 	done
 
