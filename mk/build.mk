@@ -574,12 +574,14 @@ bulk:
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+		if [ -f .exit ]; break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+	    if [ -f .exit ]; break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
 	done
 
 bulkall:
@@ -592,12 +594,14 @@ bulkall:
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+		if [ -f .exit ]; break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+	      if [ -f .exit ]; break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
 	done
 
 bulkallmod:
@@ -613,9 +617,11 @@ bulkallmod:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+	        if [ -f .exit ]; break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
+	     if [ -f .exit ]; break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; break;fi \
 	done
 
 ${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
