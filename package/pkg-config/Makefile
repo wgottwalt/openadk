@@ -21,6 +21,7 @@ $(eval $(call HOST_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE})
 $(eval $(call PKG_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--with-internal-glib
 CONFIGURE_ARGS+=	--with-installed-glib \
 			--with-installed-popt
 
