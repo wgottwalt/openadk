@@ -57,7 +57,7 @@ post-extract:
 
 do-configure:
 	(cd $(WRKBUILD); \
-		PATH=$(TARGET_PATH) \
+		PATH='$(TARGET_PATH)' \
 		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		./Configure $(CONFIG) \
 		  --prefix=/usr \
