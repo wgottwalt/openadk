@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		libffi python2-host
+PKG_BUILDDEP:=		libffi python2-host autotool
 PKG_DEPENDS:=		libpthread libffi libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
@@ -84,6 +84,7 @@ $(eval $(call PKG_mod_template,PYTHON2_MOD_NCURSES,_curses))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_SSL,_ssl))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_READLINE,readline))
 
+AUTOTOOL_STYLE:=	autoreconf
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen
 CONFIGURE_ENV+=         ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
@@ -118,7 +119,7 @@ python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
 	${CP} ${WRKINST}/usr/include/python2.7/pyconfig.h \
 		${IDIR_PYTHON2}/usr/include/python2.7
-	for i in zlib bz2 _curses _ssl gdbm _sqlite pyexpat readline; do \
+	@-for i in zlib bz2 _curses _ssl gdbm _sqlite pyexpat readline; do \
 		rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/$${i}*so; \
 	done
 

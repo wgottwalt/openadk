@@ -115,7 +115,7 @@ python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKINST}/usr/lib/python3.3/* ${IDIR_PYTHON3}/usr/lib/python3.3
 	${CP} ${WRKINST}/usr/include/python3.3m/pyconfig.h \
 		 ${IDIR_PYTHON3}/usr/include/python3.3m
-	for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
+	@-for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
 		rm ${IDIR_PYTHON3}/usr/lib/python3.3/lib-dynload/$${i}*so; \
 	done
 
