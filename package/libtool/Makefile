@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtool
 PKG_VERSION:=		2.4.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d2f3b7d4627e69e13514a40e72a24d50
 PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
@@ -35,6 +35,7 @@ endif
 HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-ltdl-install
 XAKE_FLAGS+=		HELP2MAN=/bin/echo
+HOST_XAKE_FLAGS+=	HELP2MAN=/bin/echo
 
 libtool-install:
 	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
