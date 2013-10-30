@@ -20,24 +20,7 @@ ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 			${CP} ${SCRIPT_DIR}/config.guess $$i; \
 	        fi; \
 	    done;
-ifneq ($(filter auto,${HOST_STYLE}),)
-	cd ${WRKBUILD}; rm -f config.{cache,status}; \
-	    env ${HOST_CONFIGURE_ENV} \
-	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    --program-prefix= \
-	    --program-suffix= \
-	    --prefix=${STAGING_HOST_DIR}/usr \
-	    --bindir=${STAGING_HOST_DIR}/usr/bin \
-	    --datadir=${STAGING_HOST_DIR}/usr/share \
-	    --mandir=${STAGING_HOST_DIR}/usr/share/man \
-	    --libexecdir=${STAGING_HOST_DIR}/usr/libexec \
-	    --sysconfdir=${STAGING_HOST_DIR}/etc \
-	    --disable-dependency-tracking \
-	    --disable-libtool-lock \
-	    --disable-nls \
-	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
-
-else
+ifeq ($(strip ${HOST_STYLE}),)
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${HOST_CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
@@ -50,6 +33,22 @@ else
 	    --libexecdir=/usr/libexec \
 	    --localstatedir=/var \
 	    --sysconfdir=/etc \
+	    --disable-dependency-tracking \
+	    --disable-libtool-lock \
+	    --disable-nls \
+	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
+else
+	cd ${WRKBUILD}; rm -f config.{cache,status}; \
+	    env ${HOST_CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
+	    --program-prefix= \
+	    --program-suffix= \
+	    --prefix=${STAGING_HOST_DIR}/usr \
+	    --bindir=${STAGING_HOST_DIR}/usr/bin \
+	    --datadir=${STAGING_HOST_DIR}/usr/share \
+	    --mandir=${STAGING_HOST_DIR}/usr/share/man \
+	    --libexecdir=${STAGING_HOST_DIR}/usr/libexec \
+	    --sysconfdir=${STAGING_HOST_DIR}/etc \
 	    --disable-dependency-tracking \
 	    --disable-libtool-lock \
 	    --disable-nls \
@@ -68,20 +67,20 @@ hpkg-install: ${ALL_HOSTINST}
 host-install:
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
 	@$(CMD_TRACE) "host installing... "
-ifneq ($(filter auto,${HOST_STYLE}),)
-	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-	    DESTDIR='' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
-else
+ifeq ($(strip ${HOST_STYLE}),)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='${HOST_WRKINST}' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 	env ${HOST_MAKE_ENV} ${MAKE} hpkg-install $(MAKE_TRACE)
+else
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    DESTDIR='' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 endif
 	rm -rf ${WRKBUILD} ${WRKDIST} ${WRKSRC}
 	exec ${MAKE} host-extract $(MAKE_TRACE)
 	mkdir -p ${HOST_WRKINST}
-	touch $@
 	# avoid rebuild
 	touch ${_HOST_BUILD_COOKIE} ${_HOST_CONFIGURE_COOKIE}
+	touch $@
 
 ${_HOST_COOKIE}:
 	exec ${MAKE} hostpackage

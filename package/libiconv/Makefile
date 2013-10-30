@@ -24,5 +24,6 @@ $(eval $(call PKG_template,LIBICONV,libiconv,${PKG_VERSION}-${PKG_RELEASE},${PKG
 libiconv-install:
 	${INSTALL_DIR} ${IDIR_LIBICONV}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libiconv.so* ${IDIR_LIBICONV}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libcharset.so* ${IDIR_LIBICONV}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

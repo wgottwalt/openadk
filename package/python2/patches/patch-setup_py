@@ -1,5 +1,5 @@
 --- Python-2.7.5.orig/setup.py	2013-05-12 05:32:54.000000000 +0200
-+++ Python-2.7.5/setup.py	2013-10-29 07:33:37.000000000 +0100
++++ Python-2.7.5/setup.py	2013-10-30 14:18:23.000000000 +0100
 @@ -74,7 +74,7 @@ def find_file(filename, std_dirs, paths)
      'paths' is a list of additional locations to check; if the file is
          found in one of them, the resulting list will contain the directory.
@@ -54,7 +54,23 @@
              if os.path.join(sysroot, p[1:]) == dirname:
                  return [ p ]
  
-@@ -437,10 +437,12 @@ class PyBuildExt(build_ext):
+@@ -162,6 +162,7 @@ class PyBuildExt(build_ext):
+ 
+     def build_extensions(self):
+ 
++        self.compiler.library_dirs = []
+         # Detect which modules should be compiled
+         missing = self.detect_modules()
+ 
+@@ -281,6 +282,7 @@ class PyBuildExt(build_ext):
+ 
+     def build_extension(self, ext):
+ 
++
+         if ext.name == '_ctypes':
+             if not self.configure_ctypes(ext):
+                 return
+@@ -437,10 +439,12 @@ class PyBuildExt(build_ext):
  
      def detect_modules(self):
          # Ensure that /usr/local is always used
@@ -70,7 +86,7 @@
  
          # Add paths specified in the environment variables LDFLAGS and
          # CPPFLAGS for header and library files.
-@@ -477,7 +479,8 @@ class PyBuildExt(build_ext):
+@@ -477,7 +481,8 @@ class PyBuildExt(build_ext):
                          add_dir_to_list(dir_list, directory)
  
          if os.path.normpath(sys.prefix) != '/usr' \
@@ -80,7 +96,21 @@
              # OSX note: Don't add LIBDIR and INCLUDEDIR to building a framework
              # (PYTHONFRAMEWORK is set) to avoid # linking problems when
              # building a framework with different architectures than
-@@ -530,7 +533,7 @@ class PyBuildExt(build_ext):
+@@ -495,8 +500,13 @@ class PyBuildExt(build_ext):
+         # lib_dirs and inc_dirs are used to search for files;
+         # if a file is found in one of those directories, it can
+         # be assumed that no additional -I,-L directives are needed.
++        if cross_compiling:
++            add_dir_to_list(self.compiler.library_dirs,
++                            sysconfig.get_config_var('srcdir'))
++
+         inc_dirs = self.compiler.include_dirs[:]
+         lib_dirs = self.compiler.library_dirs[:]
++
+         if not cross_compiling:
+             for d in (
+                 '/usr/include',
+@@ -530,7 +540,7 @@ class PyBuildExt(build_ext):
          if host_platform == 'hp-ux11':
              lib_dirs += ['/usr/lib/hpux64', '/usr/lib/hpux32']
  

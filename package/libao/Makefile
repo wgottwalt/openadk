@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libao
 PKG_VERSION:=		0.8.8
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		b92cba3cbcf1ee9bc221118a85d23dcd
 PKG_DESCR:=		A cross platform audio library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		esound
+PKG_DEPENDS:=		libesd
 PKG_BUILDDEP:=		esound
 PKG_URL:=		http://www.xiph.org/ao
 PKG_SITES:=		http://downloads.xiph.org/releases/ao/

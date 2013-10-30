@@ -93,8 +93,9 @@ ifeq ($(strip ${_IN_PACKAGE})$(strip ${_IN_CVTC}),1)
 else
 	@$(MAKE) -s V=0 prepare WRKDIR=${WRKDIR}.orig PREVENT_PATCH=: NO_CHECKSUM=1
 endif
-	@-test -r ${WRKDIR}/.autoreconf_done && \
-		(cd ${WRKDIR}.orig/${PKG_NAME}-${PKG_VERSION}; \
+	@-test ! -r ${WRKDIR}/.autoreconf_done || \
+		(wrkdist=$(WRKDIST) dir=$${wrkdist#$(WRKDIR)}; \
+		cd ${WRKDIR}.orig$${dir}; \
 		env ${AUTOTOOL_ENV} autoreconf -if) $(MAKE_TRACE)
 	@rm -rf ${WRKDIR}.orig/${PKG_NAME}-${PKG_VERSION}/autom4te.cache
 	@# restore config.sub/config.guess
