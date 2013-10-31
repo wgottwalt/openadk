@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.9.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		9c0cfef285d5c4a5c80d00904ddab380
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
@@ -18,7 +18,7 @@ PKG_OPTS:=		dev
 PKG_SUBPKGS:=		LIBXML2 LIBXML2_PYTHON
 PKGSD_LIBXML2_PYTHON:=	XML python bindings
 PKGSC_LIBXML2_PYTHON:=	libs
-PKGSB_LIBXML2_PYTHON:=	python2-host
+PKGSB_LIBXML2_PYTHON:=	python2
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
