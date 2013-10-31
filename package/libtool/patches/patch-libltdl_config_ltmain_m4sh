@@ -1,6 +1,6 @@
---- libtool-2.4.orig/libltdl/config/ltmain.m4sh	2010-09-22 16:45:18.000000000 +0200
-+++ libtool-2.4/libltdl/config/ltmain.m4sh	2011-03-29 22:49:51.801818754 +0200
-@@ -5051,7 +5051,7 @@ func_mode_link ()
+--- libtool-2.4.2.orig/libltdl/config/ltmain.m4sh	2011-10-17 12:17:05.000000000 +0200
++++ libtool-2.4.2/libltdl/config/ltmain.m4sh	2013-10-30 18:43:07.053853500 +0100
+@@ -5066,7 +5066,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
        -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \

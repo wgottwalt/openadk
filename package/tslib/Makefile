@@ -12,7 +12,7 @@ PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://tslib.berlios.de/
-PKG_SITES:=		http://download.berlios.de/tslib/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
