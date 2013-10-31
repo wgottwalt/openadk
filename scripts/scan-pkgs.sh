@@ -23,13 +23,6 @@ out=0
 
 . $topdir/.config
 
-uname -a|grep '\(Debian\|Ubuntu\)' >/dev/null 2>&1
-if [ $? -eq 0 ];then
-	if [[ -n $ADK_COMPILE_PYTHON2 ]]; then
-		NEED_DPKG_ARCHITECTURE="$NEED_DPKG_ARCHITECTURE python2"
-	fi
-fi
-
 if [[ -n $ADK_NATIVE ]];then
 	if [[ -n $ADK_PACKAGE_NEON ]];then
 		NEED_LIBXML2_DEV="$NEED_LIBXML2_DEV neon"
@@ -91,7 +84,6 @@ fi
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
 	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
-	NEED_PYTHON="$NEED_PYTHON firefox"
 	NEED_ZIP="$NEED_ZIP firefox"
 fi
 
@@ -448,25 +440,9 @@ if [[ -n $NEED_DBUSGLIB ]]; then
 	fi
 fi
 
-if [[ -n $NEED_PYTHON ]]; then
-	if ! which python >/dev/null 2>&1; then
-		if ! test -x /usr/pkg/bin/python2.6 >/dev/null; then
-			echo >&2 You need python to build $NEED_PYTHON
-			out=1
-		fi
-	fi
-fi
-
 if [[ -n $NEED_MAKEDEPEND ]]; then
 	if ! which makedepend >/dev/null 2>&1; then
 		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_DPKG_ARCHITECTURE ]]; then
-	if ! which dpkg-architecture >/dev/null 2>&1; then
-		echo >&2 You need dpkg-architecture to build $NEED_DPKG_ARCHITECTURE
 		out=1
 	fi
 fi
