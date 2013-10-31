@@ -1,6 +1,14 @@
 --- Python-2.7.5.orig/Misc/python-config.in	2013-05-12 05:32:49.000000000 +0200
-+++ Python-2.7.5/Misc/python-config.in	2013-10-30 21:09:36.000000000 +0100
-@@ -37,8 +37,8 @@ for opt in opt_flags:
++++ Python-2.7.5/Misc/python-config.in	2013-10-30 21:29:47.000000000 +0100
+@@ -3,6 +3,7 @@
+ import sys
+ import os
+ import getopt
++import re
+ from distutils import sysconfig
+ 
+ valid_opts = ['prefix', 'exec-prefix', 'includes', 'libs', 'cflags',
+@@ -37,8 +38,8 @@ for opt in opt_flags:
          print sysconfig.EXEC_PREFIX
  
      elif opt in ('--includes', '--cflags'):
