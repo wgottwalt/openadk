@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -95,21 +95,11 @@ CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--without-cxx-main
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS:=	--without-threads \
 			--disable-toolbox-glue \
 			--without-cxx-main
 
-python2-hostinstall:
-	$(INSTALL_BIN) ${HOST_WRKINST}/usr/bin/python \
-		$(STAGING_HOST_DIR)/usr/bin
-	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
-		$(STAGING_HOST_DIR)/usr/bin/pgen
-	$(CP) $(HOST_WRKINST)/usr/lib/python2.7 \
-		$(STAGING_HOST_DIR)/usr/lib
-	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/include/python2.7
-	${CP} ${HOST_WRKINST}/usr/include/python2.7/pyconfig.h \
-		$(STAGING_HOST_DIR)/usr/include/python2.7
-	
 python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
