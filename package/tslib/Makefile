@@ -4,22 +4,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tslib
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		92b2eb55b1e4ef7e2c0347069389390e
+# actually git version from 28.10.2013
+PKG_VERSION:=		1.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9563faf5cf9f111538b4f45778e7bb24
 PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://tslib.berlios.de/
-PKG_SITES:=		http://download.berlios.de/tslib/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TSLIB,tslib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-corgi \
 			--disable-collie \
@@ -27,12 +28,6 @@ CONFIGURE_ARGS+=	--disable-ucb1x00 \
 			--disable-mk712 \
 			--disable-linear-h2200 \
 			--disable-arctic2
-
-pre-build:
-	@chmod u+x ${WRKBUILD}/install-sh
-
-pre-install:
-	$(INSTALL_DIR) $(WRKINST)/etc
 
 tslib-install:
 	$(INSTALL_DIR) $(IDIR_TSLIB)/etc

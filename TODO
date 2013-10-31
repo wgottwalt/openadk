@@ -6,6 +6,7 @@
 - check for gcc and SSP again
 - port full blown perl
 - port w3m
+- update valgrind
 - port libcec for xbmc
 - check xbmc samba/nfs support
 - add support for librtmp in xbmc

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
 PKG_DESCR:=		memory analysing client tool
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		exmap-kmod libreadline glib
-PKG_BUILDDEP:=		glib readline
+PKG_BUILDDEP:=		glib readline autotool
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 PKG_ARCH_DEPENDS:=	!m68k
@@ -32,6 +32,7 @@ $(eval $(call PKG_template,EXMAPD,exmapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,EXMAPSERVER,exmapserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_EXMAPSERVER},${PKG_SECTION}))
 $(eval $(call PKG_template,EXMAP_KMOD,exmap-kmod,${KERNEL_VERSION}+${PKG_VERSION}-${ADK_TARGET}-${PKG_RELEASE},,${PKGSD_EXMAP_KMOD},${PKGSC_EXMAP_KMOD}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-doc
 CONFIGURE_ENV+=		LIBS="-lncurses"
 

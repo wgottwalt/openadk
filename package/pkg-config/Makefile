@@ -10,7 +10,7 @@ PKG_MD5SUM:=		aa3c86e67551adc3ac865160e34a2a0d
 PKG_DESCR:=		a helper tool used when compiling applications and libraries.
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		glib libpopt
-PKG_BUILDDEP:=		glib popt
+PKG_BUILDDEP:=		glib popt pkg-config-host
 PKG_URL:=		http://pkg-config.freedesktop.org/wiki/
 PKG_SITES:=		http://pkgconfig.freedesktop.org/releases/
 
@@ -21,6 +21,7 @@ $(eval $(call HOST_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE})
 $(eval $(call PKG_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--with-internal-glib
 CONFIGURE_ARGS+=	--with-installed-glib \
 			--with-installed-popt
 

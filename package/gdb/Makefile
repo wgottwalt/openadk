@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--disable-tui --disable-gdbtk --without-x \
 			--without-included-gettext --disable-sim \
 			--with-curses --disable-werror \
+			--without-auto-load-safe-path \
 			--disable-gdbserver \
 			--without-python
 XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'

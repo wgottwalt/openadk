@@ -18,9 +18,9 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if
-	rm -rf ${WRKSRC}/autom4te.cache
-	touch ${WRKDIR}/.autoreconf_done
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	@rm -rf ${WRKSRC}/autom4te.cache
+	@touch ${WRKDIR}/.autoreconf_done
 endif
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)

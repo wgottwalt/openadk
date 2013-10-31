@@ -1,96 +1,121 @@
-diff -Nur Python-2.7.orig/setup.py Python-2.7/setup.py
---- Python-2.7.1.orig/setup.py	2010-10-31 17:40:21.000000000 +0100
-+++ Python-2.7.1/setup.py	2011-10-06 20:34:53.328787057 +0200
-@@ -21,7 +21,7 @@ from distutils.spawn import find_executa
- COMPILED_WITH_PYDEBUG = hasattr(sys, 'gettotalrefcount')
+--- Python-2.7.5.orig/setup.py	2013-05-12 05:32:54.000000000 +0200
++++ Python-2.7.5/setup.py	2013-10-30 14:18:23.000000000 +0100
+@@ -74,7 +74,7 @@ def find_file(filename, std_dirs, paths)
+     'paths' is a list of additional locations to check; if the file is
+         found in one of them, the resulting list will contain the directory.
+     """
+-    if host_platform == 'darwin':
++    if host_platform == 'darwin' and not cross_compiling:
+         # Honor the MacOSX SDK setting when one was specified.
+         # An SDK is a directory with the same structure as a real
+         # system, but with only header files and libraries.
+@@ -84,7 +84,7 @@ def find_file(filename, std_dirs, paths)
+     for dir in std_dirs:
+         f = os.path.join(dir, filename)
  
- # This global variable is used to hold the list of modules to be disabled.
--disabled_module_list = []
-+disabled_module_list = ['nis']
+-        if host_platform == 'darwin' and is_macosx_sdk_path(dir):
++        if host_platform == 'darwin' and is_macosx_sdk_path(dir) and not cross_compiling:
+             f = os.path.join(sysroot, dir[1:], filename)
  
- def add_dir_to_list(dirlist, dir):
-     """Add the directory 'dir' to the list 'dirlist' (at the front) if
-@@ -307,48 +307,14 @@ class PyBuildExt(build_ext):
-         ext_filename = os.path.join(
-             self.build_lib,
-             self.get_ext_filename(self.get_ext_fullname(ext.name)))
--        try:
--            imp.load_dynamic(ext.name, ext_filename)
--        except ImportError, why:
--            self.failed.append(ext.name)
--            self.announce('*** WARNING: renaming "%s" since importing it'
--                          ' failed: %s' % (ext.name, why), level=3)
--            assert not self.inplace
--            basename, tail = os.path.splitext(ext_filename)
--            newname = basename + "_failed" + tail
--            if os.path.exists(newname):
--                os.remove(newname)
--            os.rename(ext_filename, newname)
--
--            # XXX -- This relies on a Vile HACK in
--            # distutils.command.build_ext.build_extension().  The
--            # _built_objects attribute is stored there strictly for
--            # use here.
--            # If there is a failure, _built_objects may not be there,
--            # so catch the AttributeError and move on.
--            try:
--                for filename in self._built_objects:
--                    os.remove(filename)
--            except AttributeError:
--                self.announce('unable to remove files (ignored)')
--        except:
--            exc_type, why, tb = sys.exc_info()
--            self.announce('*** WARNING: importing extension "%s" '
--                          'failed with %s: %s' % (ext.name, exc_type, why),
--                          level=3)
--            self.failed.append(ext.name)
+         if os.path.exists(f): return []
+@@ -93,7 +93,7 @@ def find_file(filename, std_dirs, paths)
+     for dir in paths:
+         f = os.path.join(dir, filename)
  
-     def get_platform(self):
--        # Get value of sys.platform
--        for platform in ['cygwin', 'beos', 'darwin', 'atheos', 'osf1']:
--            if sys.platform.startswith(platform):
--                return platform
--        return sys.platform
-+        return 'linux'
+-        if host_platform == 'darwin' and is_macosx_sdk_path(dir):
++        if host_platform == 'darwin' and is_macosx_sdk_path(dir) and not cross_compiling:
+             f = os.path.join(sysroot, dir[1:], filename)
+ 
+         if os.path.exists(f):
+@@ -107,7 +107,7 @@ def find_library_file(compiler, libname,
+     if result is None:
+         return None
+ 
+-    if host_platform == 'darwin':
++    if host_platform == 'darwin' and not cross_compiling:
+         sysroot = macosx_sdk_root()
+ 
+     # Check whether the found file is in one of the standard directories
+@@ -116,7 +116,7 @@ def find_library_file(compiler, libname,
+         # Ensure path doesn't end with path separator
+         p = p.rstrip(os.sep)
+ 
+-        if host_platform == 'darwin' and is_macosx_sdk_path(p):
++        if host_platform == 'darwin' and is_macosx_sdk_path(p) and not cross_compiling:
+             if os.path.join(sysroot, p[1:]) == dirname:
+                 return [ ]
+ 
+@@ -129,7 +129,7 @@ def find_library_file(compiler, libname,
+         # Ensure path doesn't end with path separator
+         p = p.rstrip(os.sep)
+ 
+-        if host_platform == 'darwin' and is_macosx_sdk_path(p):
++        if host_platform == 'darwin' and is_macosx_sdk_path(p) and not cross_compiling:
+             if os.path.join(sysroot, p[1:]) == dirname:
+                 return [ p ]
+ 
+@@ -162,6 +162,7 @@ class PyBuildExt(build_ext):
+ 
+     def build_extensions(self):
+ 
++        self.compiler.library_dirs = []
+         # Detect which modules should be compiled
+         missing = self.detect_modules()
+ 
+@@ -281,6 +282,7 @@ class PyBuildExt(build_ext):
+ 
+     def build_extension(self, ext):
+ 
++
+         if ext.name == '_ctypes':
+             if not self.configure_ctypes(ext):
+                 return
+@@ -437,10 +439,12 @@ class PyBuildExt(build_ext):
  
      def detect_modules(self):
          # Ensure that /usr/local is always used
 -        add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
 -        add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
-+        #add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
-+        #add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
++        if not cross_compiling:	
++            add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
++            add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+         self.add_gcc_paths()
+-        self.add_multiarch_paths()
++        if not cross_compiling:
++            self.add_multiarch_paths()
  
          # Add paths specified in the environment variables LDFLAGS and
          # CPPFLAGS for header and library files.
-@@ -384,17 +350,6 @@ class PyBuildExt(build_ext):
-                     for directory in reversed(options.dirs):
+@@ -477,7 +481,8 @@ class PyBuildExt(build_ext):
                          add_dir_to_list(dir_list, directory)
  
--        if os.path.normpath(sys.prefix) != '/usr' \
+         if os.path.normpath(sys.prefix) != '/usr' \
 -                and not sysconfig.get_config_var('PYTHONFRAMEWORK'):
--            # OSX note: Don't add LIBDIR and INCLUDEDIR to building a framework
--            # (PYTHONFRAMEWORK is set) to avoid # linking problems when
--            # building a framework with different architectures than
--            # the one that is currently installed (issue #7473)
--            add_dir_to_list(self.compiler.library_dirs,
--                            sysconfig.get_config_var("LIBDIR"))
--            add_dir_to_list(self.compiler.include_dirs,
--                            sysconfig.get_config_var("INCLUDEDIR"))
--
-         try:
-             have_unicode = unicode
-         except NameError:
-@@ -403,11 +358,8 @@ class PyBuildExt(build_ext):
++                and not sysconfig.get_config_var('PYTHONFRAMEWORK') \
++                and not cross_compiling:
+             # OSX note: Don't add LIBDIR and INCLUDEDIR to building a framework
+             # (PYTHONFRAMEWORK is set) to avoid # linking problems when
+             # building a framework with different architectures than
+@@ -495,8 +500,13 @@ class PyBuildExt(build_ext):
          # lib_dirs and inc_dirs are used to search for files;
          # if a file is found in one of those directories, it can
          # be assumed that no additional -I,-L directives are needed.
--        lib_dirs = self.compiler.library_dirs + [
--            '/lib64', '/usr/lib64',
--            '/lib', '/usr/lib',
--            ]
--        inc_dirs = self.compiler.include_dirs + ['/usr/include']
-+        lib_dirs = self.compiler.library_dirs + ['@@STAGING_DIR@@/usr/lib']
-+        inc_dirs = self.compiler.include_dirs + ['@@STAGING_DIR@@/usr/include']
-         exts = []
-         missing = []
++        if cross_compiling:
++            add_dir_to_list(self.compiler.library_dirs,
++                            sysconfig.get_config_var('srcdir'))
++
+         inc_dirs = self.compiler.include_dirs[:]
+         lib_dirs = self.compiler.library_dirs[:]
++
+         if not cross_compiling:
+             for d in (
+                 '/usr/include',
+@@ -530,7 +540,7 @@ class PyBuildExt(build_ext):
+         if host_platform == 'hp-ux11':
+             lib_dirs += ['/usr/lib/hpux64', '/usr/lib/hpux32']
  
+-        if host_platform == 'darwin':
++        if host_platform == 'darwin' and not cross_compiling:
+             # This should work on any unixy platform ;-)
+             # If the user has bothered specifying additional -I and -L flags
+             # in OPT and LDFLAGS we might as well use them here.
