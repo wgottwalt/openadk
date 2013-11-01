@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pkg-config
 PKG_VERSION:=		0.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		aa3c86e67551adc3ac865160e34a2a0d
 PKG_DESCR:=		a helper tool used when compiling applications and libraries.
 PKG_SECTION:=		lang
@@ -21,7 +21,8 @@ $(eval $(call HOST_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE})
 $(eval $(call PKG_template,PKG_CONFIG,pkg-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--with-internal-glib
+HOST_CONFIGURE_ARGS+=	--with-internal-glib \
+			--disable-host-tool
 CONFIGURE_ARGS+=	--with-installed-glib \
 			--with-installed-popt
 

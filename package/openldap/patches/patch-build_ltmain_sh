@@ -1,6 +1,6 @@
---- openldap-2.4.25.orig/build/ltmain.sh	2011-01-05 00:49:25.000000000 +0100
-+++ openldap-2.4.25/build/ltmain.sh	2011-03-30 18:26:08.621808325 +0200
-@@ -1668,7 +1672,7 @@ EOF
+--- openldap-2.4.36.orig/build/ltmain.sh	2013-08-16 20:12:59.000000000 +0200
++++ openldap-2.4.36/build/ltmain.sh	2013-10-31 21:12:49.000000000 +0100
+@@ -1668,7 +1668,7 @@ EOF
        # -pg pass through profiling flag for GCC
        # @file GCC response files
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*|-pg| \
