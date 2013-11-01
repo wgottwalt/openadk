@@ -60,6 +60,16 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
+ifeq ($(ADK_LINUX_PPC64),y)
+	# fixup lib dirs
+	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/lib/
+	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
+	-mkdir ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH} 2>/dev/null
+	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/usr/lib/
+	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+endif
 ifeq ($(ADK_LINUX_SPARC64),y)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
