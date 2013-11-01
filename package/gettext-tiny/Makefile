@@ -15,10 +15,18 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 
+gettext-tiny-hostinstall:
+	${CP} ${WRKBUILD}/include/libintl.h ${STAGING_HOST_DIR}/usr/include
+	${CP} ${WRKBUILD}/libintl.a ${STAGING_HOST_DIR}/usr/lib
+
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

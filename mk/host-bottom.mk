@@ -20,6 +20,7 @@ ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 			${CP} ${SCRIPT_DIR}/config.guess $$i; \
 	        fi; \
 	    done;
+ifneq (${HOST_STYLE},manual)
 ifeq ($(strip ${HOST_STYLE}),)
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${HOST_CONFIGURE_ENV} \
@@ -54,6 +55,7 @@ else
 	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
+endif
 	touch $@
 
 host-build:
@@ -67,6 +69,7 @@ hpkg-install: ${ALL_HOSTINST}
 host-install:
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
 	@$(CMD_TRACE) "host installing... "
+ifneq (${HOST_STYLE},manual)
 ifeq ($(strip ${HOST_STYLE}),)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='${HOST_WRKINST}' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
@@ -74,6 +77,9 @@ ifeq ($(strip ${HOST_STYLE}),)
 else
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+endif
+else
+	env ${HOST_MAKE_ENV} ${MAKE} hpkg-install $(MAKE_TRACE)
 endif
 	rm -rf ${WRKBUILD} ${WRKDIST} ${WRKSRC}
 	exec ${MAKE} host-extract $(MAKE_TRACE)

@@ -1,5 +1,5 @@
 --- gettext-tiny-0.0.3.orig/Makefile	2013-06-30 06:48:42.000000000 +0200
-+++ gettext-tiny-0.0.3/Makefile	2013-10-04 11:58:03.000000000 +0200
++++ gettext-tiny-0.0.3/Makefile	2013-10-30 22:13:29.000000000 +0100
 @@ -1,4 +1,4 @@
 -prefix=/usr/local
 +prefix=/usr
@@ -15,7 +15,18 @@
  
  AR      ?= $(CROSS_COMPILE)ar
  RANLIB  ?= $(CROSS_COMPILE)ranlib
-@@ -56,13 +56,16 @@ xgettext:
+@@ -47,22 +47,25 @@ libintl.a: $(LIBOBJS)
+ 	$(RANLIB) $@
+ 
+ msgmerge: $(OBJS)
+-	$(CC) $(LDFLAGS) -static -o $@ src/msgmerge.o $(PARSEROBJS)
++	$(CC) $(LDFLAGS) -o $@ src/msgmerge.o $(PARSEROBJS)
+ 
+ msgfmt: $(OBJS)
+-	$(CC) $(LDFLAGS) -static -o $@ src/msgfmt.o $(PARSEROBJS)
++	$(CC) $(LDFLAGS) -o $@ src/msgfmt.o $(PARSEROBJS)
+ 
+ xgettext:
  	cp src/xgettext.sh ./xgettext
  
  $(DESTDIR)$(libdir)/%.a: %.a
