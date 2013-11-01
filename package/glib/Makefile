@@ -6,12 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		glib
 PKG_VERSION:=		2.28.1
 PKG_EXTRAVER:=		2.28
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP:=		gettext-tiny libiconv dbus glib-host
+PKG_BUILDDEP:=		gettext-tiny-host gettext-tiny libiconv dbus glib-host
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
@@ -42,6 +42,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_CONFIGURE_ARGS+=	--prefix=$(HOST_WRKINST)/usr \
+			--with-libiconv=gnu \
 			--enable-debug=no \
 			--disable-fam
 
