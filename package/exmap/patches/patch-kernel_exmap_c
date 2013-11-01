@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- exmap-console-0.4.1.orig/kernel/exmap.c	2006-10-24 20:45:11.000000000 +0200
-+++ exmap-console-0.4.1/kernel/exmap.c	2013-10-24 12:27:35.000000000 +0200
++++ exmap-console-0.4.1/kernel/exmap.c	2013-10-30 14:01:03.000000000 +0100
 @@ -392,7 +392,11 @@ int setup_from_pid(pid_t pid)
  	struct task_struct *tsk;
  	int errcode = -EINVAL;
@@ -13,7 +13,17 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	if (tsk == NULL) {
  		printk (KERN_ALERT
  			"/proc/%s: can't find task for pid %d\n",
-@@ -497,40 +501,29 @@ static int procfile_read (char *buffer,
+@@ -405,6 +409,9 @@ int setup_from_pid(pid_t pid)
+ 			PROCFS_NAME, pid);
+ 		goto Exit;
+ 	}
++	printk (KERN_ALERT
++		"/proc/%s: DEBUG: pid of task is %d\n",
++			PROCFS_NAME, tsk->pid);
+ 	
+ 	mm = get_task_mm(tsk);
+ 	if (mm == NULL) {
+@@ -497,40 +504,29 @@ static int procfile_read (char *buffer,
  	return ret;
  }
  

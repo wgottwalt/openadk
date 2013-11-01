@@ -148,7 +148,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
 		deps=; \
@@ -168,11 +168,11 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
 ifneq (,$(filter dev,$(7)))
-	echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
-	echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
-	echo "Description: development files for $(2)" >> $(WRKDIR)/.$(2)-dev.control
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${CPU_ARCH}
-	echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DEV}/CONTROL/control
+	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
+	@echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
+	@echo "Description: development files for $(2)" >> $(WRKDIR)/.$(2)-dev.control
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${CPU_ARCH}
+	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DEV}/CONTROL/control
 endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
