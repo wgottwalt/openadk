@@ -96,7 +96,7 @@ CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS:=	--without-threads \
+HOST_CONFIGURE_ARGS:=	--with-threads \
 			--disable-toolbox-glue \
 			--without-cxx-main
 

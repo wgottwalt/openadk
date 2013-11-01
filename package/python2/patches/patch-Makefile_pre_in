@@ -1,5 +1,5 @@
 --- Python-2.7.5.orig/Makefile.pre.in	2013-05-12 05:32:49.000000000 +0200
-+++ Python-2.7.5/Makefile.pre.in	2013-10-30 14:10:07.000000000 +0100
++++ Python-2.7.5/Makefile.pre.in	2013-11-01 14:54:24.000000000 +0100
 @@ -227,6 +227,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
  ##########################################################################
  # Parser
@@ -8,6 +8,15 @@
  
  PSRCS=		\
  		Parser/acceler.c \
+@@ -456,7 +457,7 @@ sharedmods: $(BUILDPYTHON) pybuilddir.tx
+ 	    *) quiet="";; \
+ 	esac; \
+ 	$(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' \
+-		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
++		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py build
+ 
+ # Build static library
+ # avoid long command lines, same as LIBRARY_OBJS
 @@ -593,7 +594,7 @@ Modules/pwdmodule.o: $(srcdir)/Modules/p
  $(GRAMMAR_H): $(GRAMMAR_INPUT) $(PGENSRCS)
  		@$(MKDIR_P) Include

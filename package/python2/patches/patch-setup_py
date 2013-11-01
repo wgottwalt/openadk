@@ -1,5 +1,5 @@
 --- Python-2.7.5.orig/setup.py	2013-05-12 05:32:54.000000000 +0200
-+++ Python-2.7.5/setup.py	2013-10-30 14:18:23.000000000 +0100
++++ Python-2.7.5/setup.py	2013-11-01 14:53:38.000000000 +0100
 @@ -74,7 +74,7 @@ def find_file(filename, std_dirs, paths)
      'paths' is a list of additional locations to check; if the file is
          found in one of them, the resulting list will contain the directory.
@@ -119,3 +119,12 @@
              # This should work on any unixy platform ;-)
              # If the user has bothered specifying additional -I and -L flags
              # in OPT and LDFLAGS we might as well use them here.
+@@ -837,7 +847,7 @@ class PyBuildExt(build_ext):
+                                openssl_ver >= min_openssl_ver)
+ 
+         if have_any_openssl:
+-            if have_usable_openssl:
++            if have_usable_openssl and host_platform != 'darwin':
+                 # The _hashlib module wraps optimized implementations
+                 # of hash functions from the OpenSSL library.
+                 exts.append( Extension('_hashlib', ['_hashopenssl.c'],
