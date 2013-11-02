@@ -189,7 +189,7 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
 	echo N | \
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} oldconfig $(MAKE_TRACE) 

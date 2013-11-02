@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		0c4f6e7196703c6eca12217f254612aa
 PKG_DESCR:=		Lightweight IRC client
 PKG_SECTION:=		chat
-PKG_DEPENDS:=		libncurses libiconv
-PKG_BUILDDEP:=		ncurses libiconv
+PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP:=		ncurses libiconv-tiny
 PKG_URL:=		http://www.weechat.org/
 PKG_SITES:=		http://www.weechat.org/files/src/
 

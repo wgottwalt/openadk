@@ -5,13 +5,14 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.28.1
+PKG_RELEASE:=		5
 PKG_EXTRAVER:=		2.28
-PKG_RELEASE:=		4
 PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP:=		gettext-tiny-host gettext-tiny libiconv dbus glib-host
+PKG_DEPENDS:=		libpthread
+PKG_BUILDDEP:=		gettext-tiny-host gettext-tiny libiconv-tiny-host 
+PKG_BUILDDEP:=		libiconv-tiny glib-host zlib
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
@@ -28,11 +29,9 @@ $(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--enable-debug=no \
-			--disable-mem-pools \
+CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
-			--with-libiconv=gnu \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_stack_grows=no \
@@ -42,8 +41,6 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_CONFIGURE_ARGS+=	--prefix=$(HOST_WRKINST)/usr \
-			--with-libiconv=gnu \
-			--enable-debug=no \
 			--disable-fam
 
 glib-hostinstall:

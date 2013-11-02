@@ -9,8 +9,8 @@ PKG_RELEASE:=		4
 PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
 PKG_DESCR:=		bluetooth ftp application
 PKG_SECTION:=		bluetooth
-PKG_DEPENDS:=		openobex libiconv libobexftp libbluetooth
-PKG_BUILDDEP:=		openobex libiconv
+PKG_DEPENDS:=		openobex libobexftp libbluetooth
+PKG_BUILDDEP:=		openobex libiconv-tiny
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 PKG_LIBNAME:=		libobexftp
