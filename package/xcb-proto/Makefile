@@ -9,12 +9,12 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		XML-XCB protocol descriptions
 PKG_SECTION:=		devel
 PKG_MD5SUM:=		8d2cdb770129cef563088a90c5bec768
+PKG_BUILDDEP:=		python2-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly
 
 PKG_SUBPKGS:=		XCB_PROTO XCB_PYTHON
 PKGSC_XCB_PYTHON:=	x11/misc
-PKGSB_XCB_PYTHON:=	python2-host
 
 include $(TOPDIR)/mk/package.mk
 
