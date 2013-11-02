@@ -201,7 +201,7 @@ endif
 ifeq ($(ADK_NATIVE),y)
 RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 else
-RSTRIP:=		prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
+RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 endif
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
