@@ -14,6 +14,7 @@ config BUSYBOX_FEATURE_SYSTEMD
 	  are controlled by systemd, enable this option.
 	  If you don't use systemd, it is still safe to enable it,
 	  but the downside is increased code size.
+
 config BUSYBOX_FEATURE_RTMINMAX
 	bool "Support RTMIN[+n] and RTMAX[-n] signal names"
 	default y
@@ -41,6 +42,16 @@ config BUSYBOX_MD5_SMALL
 	  1                   1.4                5392
 	  2                   3.0                5088
 	  3 (smallest)        5.1                4912
+
+config BUSYBOX_SHA3_SMALL
+       int "SHA3: Trade bytes for speed (0:fast, 1:slow)"
+       default 1
+       range 0 1
+       help
+         Trade binary size versus speed for the sha3sum algorithm.
+         SHA3_SMALL=0 compared to SHA3_SMALL=1 (approximate):
+         64-bit x86: +270 bytes of code, 45% faster
+         32-bit x86: +450 bytes of code, 75% faster
 
 config BUSYBOX_FEATURE_FAST_TOP
 	bool "Faster /proc scanning code (+100 bytes)"
