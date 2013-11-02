@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libiconv-tiny
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7211794e2fa1df4123c5cc9f9226a5bb
+PKG_MD5SUM:=		4898b62aebc1614edab60bf1fe0ac661
 PKG_DESCR:=		iconv stub and replacement
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.openwrt.org/
