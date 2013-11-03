@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BRIDGE_UTILS,bridge-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoreconf
+AUTOTOOL_STYLE:=	autoconf
 CONFIGURE_ARGS+=	--with-linux-headers=${LINUX_DIR}
 
 bridge-utils-install:
