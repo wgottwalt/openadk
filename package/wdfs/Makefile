@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wdfs
 PKG_VERSION:=		1.4.2
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		628bb44194d04c1cf8aacc446ed0a230
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		fs
@@ -15,7 +15,7 @@ PKG_SITES:=		http://noedler.de/projekte/wdfs/
 
 include ${TOPDIR}/mk/package.mk
 
-TARGET_LDFLAGS+=	-lpthread
+TARGET_LDFLAGS+=	-lpthread -liconv
 
 $(eval $(call PKG_template,WDFS,wdfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
