@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
 PKG_VERSION:=		3.3.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		0a2ea57f6184baf45b150aee53c0c8da
 PKG_DESCR:=		Python scripting language (Version 3)
 PKG_SECTION:=		lang
@@ -65,6 +65,7 @@ endef
 $(eval $(call HOST_template,PYTHON3,python3,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PYTHON3,python3,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+$(eval $(call PKG_template,PYTHON3_MOD_ZLIB,python3-mod-zlib,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_ZLIB},${PKGFD_MOD_ZLIB},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_BZ2,python3-mod-bz2,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_BZ2},${PKGFD_MOD_BZ2},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_EXPAT,python3-mod-expat,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_EXPAT},${PKGFD_MOD_EXPAT},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_SQLITE,python3-mod-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_SQLITE},${PKGFD_MOD_SQLITE},${PKG_SECTION}))
