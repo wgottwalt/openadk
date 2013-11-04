@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		0.9.8
+PKG_VERSION:=		0.9.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6d127023af1dd1cf24e15411229f3cc8
+PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx
