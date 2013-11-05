@@ -213,12 +213,6 @@ if ! which wget >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which file >/dev/null 2>&1; then
-	echo You must install \"file\" to continue.
-	echo
-	out=1
-fi
-
 if ! which perl >/dev/null 2>&1; then
 	echo You must install perl to continue.
 	echo
@@ -231,14 +225,14 @@ if ! which m4 >/dev/null 2>&1; then
        out=1
 fi
 
-if ! which pkg-config >/dev/null 2>&1; then
-	echo  "You need pkg-config to continue."
+if ! which bc >/dev/null 2>&1; then
+	echo  "You need bc to continue."
 	echo
 	out=1
 fi
 
-if ! which bc >/dev/null 2>&1; then
-	echo  "You need bc to continue."
+if ! which xargs >/dev/null 2>&1; then
+	echo  "You need xargs to continue."
 	echo
 	out=1
 fi

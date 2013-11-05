@@ -4,11 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bridge-utils
-PKG_VERSION:=		1.4
+PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0182fcac3a2b307113bbec34e5f1c673
+PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
 PKG_DESCR:=		Ethernet bridging tools
 PKG_SECTION:=		bridge
+PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		kmod-bridge kmod-ipv6
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
@@ -17,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BRIDGE_UTILS,bridge-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoconf
 CONFIGURE_ARGS+=	--with-linux-headers=${LINUX_DIR}
 
 bridge-utils-install:

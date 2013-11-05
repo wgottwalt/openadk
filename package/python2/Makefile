@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -99,6 +99,10 @@ HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS:=	--with-threads \
 			--disable-toolbox-glue \
 			--without-cxx-main
+
+hostpost-install:
+	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
+		$(STAGING_HOST_DIR)/usr/bin/pgen
 
 python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib

@@ -130,6 +130,8 @@ TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+# stop generating eh_frame stuff
+TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 endif
 
 
@@ -145,7 +147,7 @@ CXX_FOR_BUILD?=		g++
 CPPFLAGS_FOR_BUILD?=	-I$(STAGING_HOST_DIR)/usr/include
 CFLAGS_FOR_BUILD=	-O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall
-LDFLAGS_FOR_BUILD?= 	-L/opt/local/lib
+LDFLAGS_FOR_BUILD?= 	-L$(STAGING_HOST_DIR)/usr/lib
 FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
@@ -201,7 +203,7 @@ endif
 ifeq ($(ADK_NATIVE),y)
 RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 else
-RSTRIP:=		prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
+RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 endif
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)

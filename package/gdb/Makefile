@@ -7,8 +7,8 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 PKG_NAME:=		gdb
 PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat libgcc
-PKG_BUILDDEP:=		ncurses readline libiconv expat
+PKG_DEPENDS:=		libthread-db libncurses libexpat libgcc
+PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat
 PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k

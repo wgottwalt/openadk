@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		c9e8aeb15daeba4b6283b40bb640e908
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		fuse-utils kmod-fuse-fs libiconv neon
-PKG_BUILDDEP:=		libiconv neon fuse
+PKG_DEPENDS:=		fuse-utils kmod-fuse-fs neon
+PKG_BUILDDEP:=		libiconv-tiny neon fuse
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2/
 PKG_SITES:=		http://www.very-clever.com/download/nongnu/davfs2/
 
@@ -21,7 +21,7 @@ $(eval $(call PKG_template,DAVFS2,davfs2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 CONFIGURE_ARGS+=	--with-neon
 CONFIGURE_ENV+=		LIBS=-liconv
 
-post-install:
+davfs2-install:
 	${INSTALL_DIR} ${IDIR_DAVFS2}/etc/davfs2
 	${INSTALL_DIR} ${IDIR_DAVFS2}/usr/sbin
 	$(CP) ${WRKINST}/etc/davfs2/{davfs2.conf,secrets} \

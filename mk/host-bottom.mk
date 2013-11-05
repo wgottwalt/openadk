@@ -65,6 +65,7 @@ ${_HOST_BUILD_COOKIE}: ${_HOST_CONFIGURE_COOKIE}
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 	touch $@
 
+hostpost-install:
 hpkg-install: ${ALL_HOSTINST}
 host-install:
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
@@ -81,6 +82,7 @@ endif
 else
 	env ${HOST_MAKE_ENV} ${MAKE} hpkg-install $(MAKE_TRACE)
 endif
+	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)
 	rm -rf ${WRKBUILD} ${WRKDIST} ${WRKSRC}
 	exec ${MAKE} host-extract $(MAKE_TRACE)
 	mkdir -p ${HOST_WRKINST}

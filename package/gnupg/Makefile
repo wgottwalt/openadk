@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		991faf66d3352ac1452acc393c430b23
 PKG_DESCR:=		Gnu Privacy Guard
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libreadline libiconv
-PKG_BUILDDEP:=		readline libiconv
+PKG_DEPENDS:=		libreadline
+PKG_BUILDDEP:=		readline libiconv-tiny
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 

@@ -32,12 +32,10 @@ $(eval $(call HOST_template,FILE,file,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-static \
 			--disable-shared \
 			--disable-warnings
-file-hostinstall:
-	${INSTALL_BIN} ${HOST_WRKINST}/usr/bin/file \
-		${STAGING_HOST_DIR}/usr/bin
 
 file-install:
 	${INSTALL_DIR} ${IDIR_FILE}/usr/bin

@@ -172,7 +172,7 @@ endif
 
 ${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
-		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib}
+		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
 
 ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)

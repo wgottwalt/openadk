@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 # meta package for host autotool infrastructure
 PKG_NAME:=		autotool
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		autotool infrastructure for host
 PKG_SECTION:=		devel
-PKG_BUILDDEP:=		m4-host pkg-config-host autoconf-host automake-host
+PKG_BUILDDEP:=		m4-host pkgconf-host autoconf-host automake-host
 PKG_BUILDDEP+=		libtool-host
 
 NO_DISTFILES:=		1

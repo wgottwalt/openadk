@@ -17,6 +17,9 @@ pre-configure:
 do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
+endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache

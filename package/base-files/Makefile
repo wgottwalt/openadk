@@ -9,6 +9,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		61
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
+PKG_BUILDDEP:=		pkgconf-host file-host
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
