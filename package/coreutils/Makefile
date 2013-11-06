@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
 PKG_VERSION:=		8.21
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		065ba41828644eca5dd8163446de5d64
 PKG_DESCR:=		basic file, shell and text manipulation utilities
 PKG_SECTION:=		base
-PKG_BUILDDEP:=		gmp
+PKG_BUILDDEP:=		gmp autotool
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 
@@ -30,6 +30,7 @@ $(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,TOUCH,touch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TOUCH},${PKGSC_TOUCH}))
 $(eval $(call PKG_template,SHA256SUM,sha256sum,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SHA256SUM},${PKGSC_SHA256SUM}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-rpath
 
 touch-install:

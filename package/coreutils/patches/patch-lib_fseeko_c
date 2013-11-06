@@ -1,0 +1,15 @@
+--- coreutils-8.21.orig/lib/fseeko.c	2013-01-04 15:07:03.000000000 +0100
++++ coreutils-8.21/lib/fseeko.c	2013-11-04 20:32:38.000000000 +0100
+@@ -99,6 +99,12 @@ fseeko (FILE *fp, off_t offset, int when
+ #elif defined EPLAN9                /* Plan9 */
+   if (fp->rp == fp->buf
+       && fp->wp == fp->buf)
++#elif FUNC_FFLUSH_STDIN < 0 && 200809 <= _POSIX_VERSION
++  /* Cross-compiling to some other system advertising conformance to
++     POSIX.1-2008 or later.  Assume fseeko and fflush work as advertised.
++     If this assumption is incorrect, please report the bug to
++     bug-gnulib.  */
++  if (0)
+ #else
+   #error "Please port gnulib fseeko.c to your platform! Look at the code in fpurge.c, then report this to bug-gnulib."
+ #endif
