@@ -1,0 +1,11 @@
+--- xterm-297.orig/ptyx.h	2013-09-10 20:10:00.000000000 +0200
++++ xterm-297/ptyx.h	2013-10-30 10:30:07.000000000 +0100
+@@ -169,7 +169,7 @@
+ #define USE_PTY_DEVICE 1
+ #define USE_PTY_SEARCH 1
+ 
+-#if defined(__osf__) || (defined(linux) && defined(__GLIBC__) && (__GLIBC__ >= 2) && (__GLIBC_MINOR__ >= 1)) || defined(__DragonFly__) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__APPLE__)
++#if defined(__osf__) || defined(linux) || defined(__DragonFly__) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__APPLE__)
+ #undef USE_PTY_DEVICE
+ #undef USE_PTY_SEARCH
+ #define USE_PTS_DEVICE 1
