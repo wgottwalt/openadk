@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
 PKG_VERSION:=		0.9.9
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
@@ -22,6 +22,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ARGS+=	--with-kernel-support
 
 oprofile-install:
