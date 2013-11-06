@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
 PKG_VERSION:=		0.9.9
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx
+PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx libgcc
 PKG_BUILDDEP:=		popt binutils
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
