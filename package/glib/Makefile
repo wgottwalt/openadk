@@ -28,6 +28,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
@@ -42,14 +43,6 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 
 HOST_CONFIGURE_ARGS+=	--prefix=$(HOST_WRKINST)/usr \
 			--disable-fam
-
-glib-hostinstall:
-	$(INSTALL_BIN) ${HOST_WRKINST}/usr/bin/glib-compile-schemas \
-		${STAGING_HOST_DIR}/usr/bin
-	$(INSTALL_BIN) ${HOST_WRKINST}/usr/bin/glib-genmarshal \
-		${STAGING_HOST_DIR}/usr/bin
-	$(INSTALL_BIN) ${HOST_WRKINST}/usr/bin/glib-mkenums \
-		${STAGING_HOST_DIR}/usr/bin
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib

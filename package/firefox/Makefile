@@ -15,7 +15,7 @@ PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf li
 PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates libevent
 PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
-PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent
+PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent python2-host
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -103,6 +103,10 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-url-classifier \
 			--disable-safe-browsing \
 			--disable-elf-hack 
+
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+TARGET_CFLAGS:=		$(subst Os,g3,$(TARGET_CFLAGS))
+endif
 
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"

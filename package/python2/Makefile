@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang

@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cgilib
 PKG_VERSION:=		0.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		2c7053f58dfb06f7a80a112797ed7e86
 PKG_DESCR:=		Simple CGI Library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.infodrom.org/projects/cgilib/
 PKG_SITES:=		http://www.infodrom.org/projects/cgilib/download/
 PKG_OPTS:=		dev
@@ -16,6 +17,11 @@ PKG_OPTS:=		dev
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CGILIB,cgilib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+AUTOTOOL_STYLE:=	autoreconf
+
+post-patch:
+	touch $(WRKBUILD)/NEWS
 
 cgilib-install:
 	${INSTALL_DIR} ${IDIR_CGILIB}/usr/lib
