@@ -4,13 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		weechat
-PKG_VERSION:=		0.3.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		0c4f6e7196703c6eca12217f254612aa
-PKG_DESCR:=		Lightweight IRC client
+PKG_VERSION:=		0.4.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		fd584c258aace2aa898f40e1fcf06084
+PKG_DESCR:=		lightweight IRC client
 PKG_SECTION:=		chat
-PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP:=		ncurses libiconv-tiny
+PKG_DEPENDS:=		libncurses libgcrypt libz libcurl
+PKG_BUILDDEP:=		ncurses libiconv-tiny autotool libgcrypt
+PKG_BUILDDEP+=		zlib curl
 PKG_URL:=		http://www.weechat.org/
 PKG_SITES:=		http://www.weechat.org/files/src/
 
@@ -18,7 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WEECHAT,weechat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-liconv
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-perl \
 			--disable-python \
