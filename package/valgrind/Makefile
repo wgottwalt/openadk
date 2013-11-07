@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://valgrind.org/
 PKG_SITES:=		http://valgrind.org/downloads/
 
-PKG_ARCH_DEPENDS:=	ppc ppc64 mips mipsel mips64 mips64el x86 x86_64 arm native
+PKG_ARCH_DEPENDS:=	ppc ppc64 mips mipsel mips64 mips64el x86 x86_64 native
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
