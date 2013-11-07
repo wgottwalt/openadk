@@ -120,22 +120,34 @@ PKGDESC_$(1)=	$(5)
 PKGSECT_$(1)=	$(6)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IPKG_$(1)_DEV=	$(PACKAGE_DIR)/$(2)-dev_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DBG=	$(PACKAGE_DIR)/$(2)-dbg_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 IDIR_$(1)_DEV=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dev
+IDIR_$(1)_DBG=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dbg
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
-ALL_IPKGS+=	$$(IPKG_$(1))
+ALL_IDIRS+=	$${IDIR_$(1)}
 ALL_IDIRS+=	$${IDIR_$(1)}
 ALL_POSTINST+=	$(2)-install
 $(2)-install:
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
 INFO_$(1)_DEV=	$(PKG_STATE_DIR)/info/$(2)-dev.list
+INFO_$(1)_DBG=	$(PKG_STATE_DIR)/info/$(2)-dbg.list
 
 ifeq ($(ADK_PACKAGE_$(1)),y)
+ifeq ($(ADK_PACKAGE_$(1)_DBG),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG)
+ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG) $$(INFO_$(1)_DEV)
+else
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG)
+endif
+else
 ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
 install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DEV)
 else
 install-targets: $$(INFO_$(1))
+endif
 endif
 endif
 
@@ -144,6 +156,7 @@ IDEPEND_$(1):=	$$(strip $(4))
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
 ICONTROL_$(1)?=	$(WRKDIR)/.$(2).control
 ICONTROL_$(1)_DEV?= $(WRKDIR)/.$(2)-dev.control
+ICONTROL_$(1)_DBG?= $(WRKDIR)/.$(2)-dbg.control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
@@ -167,6 +180,13 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+ifneq ($(ADK_DEBUG),y)
+	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
+	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control
+	@echo "Description: debugging symbols for $(2)" >> $(WRKDIR)/.$(2)-dbg.control
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DBG} $${ICONTROL_$(1)_DBG} $(3) ${CPU_ARCH}
+	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DBG}/CONTROL/control
+endif
 ifneq (,$(filter dev,$(7)))
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
 	@echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
@@ -247,6 +267,9 @@ ifeq (,$(filter libmix,$(7)))
 ifeq (,$(filter libonly,$(7)))
 ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+ifneq ($(ADK_DEBUG),y)
+	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
+endif
 endif
 endif
 endif
@@ -269,6 +292,9 @@ endif
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))
+
+$$(INFO_$(1)_DBG): $$(IPKG_$(1)_DBG)
+	$(PKG_INSTALL) $$(IPKG_$(1)_DBG)
 
 ifneq ($(1),UCLIBC)
 ifneq ($(1),EGLIBC)

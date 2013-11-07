@@ -28,8 +28,13 @@ fi
 find $TARGETS -type f -a -exec file {} \; | \
     while IFS= read -r line; do
 	F=${line%%:*}
+	D=${TARGETS}-dbg
 	V=${F##*/fake-+([!/])/}
+	P=${F##*/pkg-+([!/])/}
+	Q=${P%/*}
+	R=${P##*/}
 	T="${prefix}strip"
+	O="${prefix}objcopy"
 	T=$T$stripcomm
 	case $line in
 	*ELF*executable*statically\ linked*)
@@ -55,6 +60,9 @@ find $TARGETS -type f -a -exec file {} \; | \
 	echo "$SELF: $V:$S"
 	echo "-> $T $F"
 	eval "chmod u+w $F"
+	eval "mkdir -p $D/usr/lib/debug/$Q"
+	eval "$O --only-keep-debug $F $D/usr/lib/debug/$P.debug"
 	eval "$T $F"
+	eval "cd $D/usr/lib/debug/$Q && $O --add-gnu-debuglink=$R.debug $F"
 done
 exit 0

@@ -270,7 +270,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
-	char *pkg_need_cxx, *pkg_need_java, *pkgname;
+	char *pkg_need_cxx, *pkg_need_java, *pkgname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper;
@@ -300,6 +300,7 @@ int main() {
 	pkg_need_java = NULL;
 	pkgname = NULL;
 	pkg_helper = NULL;
+	pkg_debug = NULL;
 
 	p_ptr = NULL;
 	s_ptr = NULL;
@@ -635,6 +636,9 @@ int main() {
 					fprintf(cfg, "comment \"%s... %s (disabled, c++ missing)\"\n", token, pkg_descr);
 					fprintf(cfg, "depends on !ADK_TOOLCHAIN_GCC_CXX\n\n");
 				}
+
+				/* save token in pkg_debug */
+				pkg_debug = strdup(token);
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
 				/* no prompt for devonly packages */
 				if (pkg_opts != NULL) {
@@ -818,6 +822,16 @@ int main() {
 					free(pkg_cxx);
 					pkg_cxx = NULL;
 				}
+
+				/* handle debug subpackages */
+				fprintf(cfg, "\nconfig ADK_PACKAGE_%s_DBG\n", toupperstr(pkg_debug));
+				fprintf(cfg, "\tprompt \"add debug symbols package\"\n");
+				fprintf(cfg, "\ttristate\n");
+				fprintf(cfg, "\tdepends on ADK_PACKAGE_GDB\n");
+				fprintf(cfg, "\tdepends on !ADK_DEBUG\n");
+				fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkg_debug));
+				fprintf(cfg, "\tdefault n\n");
+				fprintf(cfg, "\thelp\n\n");
 
 				/* package flavours */
 				if (pkg_flavours != NULL) {
