@@ -1,6 +1,14 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+config ADK_TARGET_KERNEL_VMLINUZ
+	boolean
+
+config ADK_TARGET_KERNEL
+	string
+	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
+	default "vmlinux"
+
 config ADK_big
 	boolean
 

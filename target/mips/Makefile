@@ -7,13 +7,7 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-KERNEL:=$(LINUX_DIR)/vmlinuz
-else ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-KERNEL:=$(LINUX_DIR)/vmlinuz
-else
-KERNEL:=$(LINUX_DIR)/vmlinux
-endif
+KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 

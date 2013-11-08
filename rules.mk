@@ -25,6 +25,7 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
+ADK_TARGET_KERNEL:=	$(strip $(subst ",, $(ADK_TARGET_KERNEL)))
 ADK_TARGET_ARCH:=	$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=	$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_LIBC:=	$(strip $(subst ",, $(ADK_TARGET_LIBC)))
@@ -63,12 +64,6 @@ ADK_STATIC:=y
 endif
 
 include $(TOPDIR)/mk/vars.mk
-
-CPPFLAGS_FOR_BUILD?=
-CFLAGS_FOR_BUILD?=	-O2 -Wall
-CXXFLAGS_FOR_BUILD?=	-O2 -Wall
-LDFLAGS_FOR_BUILD?=
-FLAGS_FOR_BUILD:=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
 ifneq (${show},)
 .DEFAULT_GOAL:=		show
