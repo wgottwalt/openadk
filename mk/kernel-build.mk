@@ -36,7 +36,7 @@ $(LINUX_DIR)/$(KERNEL_TARGET): $(LINUX_DIR)/.config
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
-		modules_install $(MAKE_TRACE)
+		modules modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
 ifneq ($(strip $(TARGETS)),)
 	$(MAKE) $(TARGETS)
