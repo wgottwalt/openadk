@@ -5,7 +5,7 @@
  
  _makenames: _makenames.c cap_names.list.h
 -	$(BUILD_CC) $(BUILD_CFLAGS) $< -o $@
-+	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $< -o $@
++	$(CC_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) $< -o $@
  
  cap_names.h: _makenames
  	./_makenames > cap_names.h

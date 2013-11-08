@@ -1,5 +1,5 @@
 --- libcap-2.22.orig/Make.Rules	2011-07-25 04:18:23.000000000 +0200
-+++ libcap-2.22/Make.Rules	2013-10-28 11:38:54.000000000 +0100
++++ libcap-2.22/Make.Rules	2013-11-08 16:22:41.000000000 +0100
 @@ -12,10 +12,6 @@ FAKEROOT=$(DESTDIR)
  # These choices are motivated by the fact that getcap and setcap are
  # administrative operations that could be needed to recover a system.
@@ -29,7 +29,7 @@
  
  # common defines for libcap
  LIBTITLE=libcap
-@@ -47,8 +43,9 @@ MINOR=22
+@@ -47,12 +43,13 @@ MINOR=22
  KERNEL_HEADERS := $(topdir)/libcap/include
  IPATH += -fPIC -I$(topdir)/libcap/include -I$(KERNEL_HEADERS)
  
@@ -40,7 +40,13 @@
 +CFLAGS += -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
  BUILD_CC := $(CC)
  BUILD_CFLAGS := $(CFLAGS) $(IPATH)
- AR := ar
+-AR := ar
+-RANLIB := ranlib
++AR ?= ar
++RANLIB ?= ranlib
+ DEBUG = -g #-DDEBUG
+ WARNINGS=-Wall -Wwrite-strings \
+         -Wpointer-arith -Wcast-qual -Wcast-align \
 @@ -64,11 +61,11 @@ LDFLAGS := #-g
  SYSTEM_HEADERS = /usr/include
  INCS=$(topdir)/libcap/include/sys/capability.h
