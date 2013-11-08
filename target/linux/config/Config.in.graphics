@@ -19,7 +19,6 @@ config ADK_KERNEL_VT_CONSOLE
 config ADK_KERNEL_VGA_CONSOLE
 	boolean
 	default y if ADK_HARDWARE_VBOX
-	default y if ADK_HARDWARE_QEMU
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 

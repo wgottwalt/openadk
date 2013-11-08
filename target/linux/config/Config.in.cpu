@@ -35,3 +35,4 @@ config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
 
 config ADK_KERNEL_VFP
 	boolean
+
