@@ -1,0 +1,25 @@
+--- miredo-1.2.6.orig/configure.ac	2013-05-23 17:51:41.000000000 +0200
++++ miredo-1.2.6/configure.ac	2013-11-08 16:09:54.000000000 +0100
+@@ -149,12 +149,17 @@ LIBS="$LIBS_save"
+ AS_MESSAGE([checking optional features...])
+ 
+ # POSIX capabilities
++AC_ARG_WITH(libcap,
++	    [AS_HELP_STRING(--with-libcap,
++			    [use POSIX capabilities (default auto)])])
+ LIBCAP=""
+-AC_CHECK_HEADERS([sys/capability.h], [
+-	AC_CHECK_LIB(cap, cap_set_proc, [
+-		LIBCAP="-lcap"
+-		AC_DEFINE(HAVE_LIBCAP, 1,
+-			  [Define to 1 if you have the `cap' library (-lcap).])
++AS_IF([test "x${with_libcap}" != "xno"], [
++	AC_CHECK_HEADERS([sys/capability.h], [
++		AC_CHECK_LIB(cap, cap_set_proc, [
++			LIBCAP="-lcap"
++			AC_DEFINE(HAVE_LIBCAP, 1,
++				  [Define to 1 if you have the `cap' library (-lcap).])
++		])
+ 	])
+ ])
+ AC_SUBST(LIBCAP)

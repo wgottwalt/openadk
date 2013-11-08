@@ -5,10 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libcap
 PKG_VERSION:=		2.22
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ce64058bdb3f086ddbfca8ce6c919845
 PKG_DESCR:=		capabilities library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		pam
 PKG_URL:=		http://www.friedhoff.org/posixfilecaps.html
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
@@ -19,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBCAP,libcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CPPFLAGS_FOR_BUILD+=	-I$(LINUX_HEADER_DIR)/include
 CONFIG_STYLE:=		manual
 
 libcap-install:
