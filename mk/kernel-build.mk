@@ -5,7 +5,12 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 
+KERNEL_FILE:=$(ADK_TARGET_KERNEL)
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
+ifeq ($(ADK_TARGET_KERNEL_BZIMAGE),y)
+KERNEL_FILE:=vmlinux
+KERNEL_TARGET:=all
+endif
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/kernel-patch
@@ -27,7 +32,7 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
-$(LINUX_DIR)/$(KERNEL_TARGET): $(LINUX_DIR)/.config
+$(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
 	-rm $(LINUX_DIR)/$(KERNEL_TARGET) 2>/dev/null
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
 	${KERNEL_MAKE_ENV} $(MAKE) V=1 ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) $(MAKE_TRACE)
@@ -41,10 +46,10 @@ $(LINUX_DIR)/$(KERNEL_TARGET): $(LINUX_DIR)/.config
 ifneq ($(strip $(TARGETS)),)
 	$(MAKE) $(TARGETS)
 endif
-	touch -c $(LINUX_DIR)/$(KERNEL_TARGET)
+	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
 
 prepare:
-compile: $(LINUX_DIR)/$(KERNEL_TARGET)
+compile: $(LINUX_DIR)/$(KERNEL_FILE)
 install: compile
 ifneq ($(strip $(INSTALL_TARGETS)),)
 	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
