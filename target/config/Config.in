@@ -4,9 +4,13 @@
 config ADK_TARGET_KERNEL_VMLINUZ
 	boolean
 
+config ADK_TARGET_KERNEL_BZIMAGE
+	boolean
+
 config ADK_TARGET_KERNEL
 	string
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
+	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "vmlinux"
 
 config ADK_big
@@ -729,6 +733,7 @@ config ADK_TARGET_ROOTFS_MMC
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
+	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 

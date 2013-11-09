@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		201d3f38758d95436cbc64903386de0b
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		lang
+PKG_BUILDDEP:=		m4-host
 PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 PKG_OPTS:=		dev
