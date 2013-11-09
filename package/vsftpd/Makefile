@@ -4,13 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vsftpd
-PKG_VERSION:=		2.3.4
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2ea5d19978710527bb7444d93b67767a
+PKG_MD5SUM:=		8b00c749719089401315bd3c44dddbb2
 PKG_DESCR:=		a fast and secure FTP server
 PKG_SECTION:=		www
+PKG_DEPENDS:=		libcap
+PKG_BUILDDEP:=		libcap
 PKG_URL:=		http://vsftpd.beasts.org/
-PKG_SITES:=		http://security.appspot.com/downloads/
+PKG_SITES:=		https://security.appspot.com/downloads/
 
 include ${TOPDIR}/mk/package.mk
 

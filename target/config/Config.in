@@ -731,6 +731,7 @@ config ADK_TARGET_ROOTFS_MMC
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
+	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
@@ -746,7 +747,7 @@ config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
 
 choice
 prompt "Root filesystem type"
-depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI
+depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_HARDWARE_QEMU
 default ADK_TARGET_ROOT_EXT2_FS
 
 config ADK_TARGET_ROOT_EXT2
