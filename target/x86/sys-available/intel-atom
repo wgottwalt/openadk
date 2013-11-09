@@ -1,5 +1,6 @@
 config ADK_TARGET_SYSTEM_INTEL_ATOM
 	bool "Intel Atom (NM10)"
+	depends on ADK_BROKEN
 	select ADK_x86
 	select ADK_intel_atom
 	select ADK_CPU_ATOM
