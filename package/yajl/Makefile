@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c953a53344c0e20a892fc042bbe69744
 PKG_DESCR:=		a small event-driven JSON parser written in ANSI C
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		http://lloyd.github.com/yajl/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
@@ -20,7 +21,7 @@ $(eval $(call PKG_template,YAJL,yajl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 
 do-configure:
-	(cd ${WRKBUILD} && ./configure --prefix /usr)
+	(cd ${WRKBUILD} && PATH='${TARGET_PATH}' ./configure --prefix /usr)
 
 yajl-install:
 	$(INSTALL_DIR) $(IDIR_YAJL)/usr/lib

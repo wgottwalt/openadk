@@ -56,6 +56,7 @@ else
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
 endif
+	${MAKE} host-configure $(MAKE_TRACE)
 	touch $@
 
 host-build:
