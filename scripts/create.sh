@@ -297,7 +297,7 @@ fi
 print "Creating ext2fs filesystem image..."
 cd "$T"
 f=0
-genext2fs -U -N 16384 -b $((partfssz)) -d src fsimg || f=1
+genext2fs -U -N 32768 -b $((partfssz)) -d src fsimg || f=1
 if (( !f )); then
 	# use bc(1): this may be over the shell’s 32-bit arithmetics
 	wantsz=$($bc <<<"$((partfssz))*1024")
