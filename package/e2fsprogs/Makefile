@@ -30,16 +30,16 @@ PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	fs
 PKGSD_RESIZE2FS:=	Resize FS utility
 PKGSC_RESIZE2FS:=	fs
-PKGSS_RESIZE2FS:=	libe2fs
+PKGSS_RESIZE2FS:=	libe2fs libcom-err libblkid
 PKGSD_TUNE2FS:=		Tune2FS utility
 PKGSC_TUNE2FS:=		fs
-PKGSS_TUNE2FS:=		libe2fs
+PKGSS_TUNE2FS:=		libe2fs libcom-err libblkid libuuid
 PKGSD_E2FSCK:=		E2fsck utility
 PKGSC_E2FSCK:=		fs
-PKGSS_E2FSCK:=		libe2fs
+PKGSS_E2FSCK:=		libe2fs libcom-err libblkid libuuid
 PKGSD_MKE2FS:=		Mke2fs utility
 PKGSC_MKE2FS:=		fs
-PKGSS_MKE2FS:=		libe2fs
+PKGSS_MKE2FS:=		libe2fs libcom-err libblkid libuuid
 
 include ${TOPDIR}/mk/package.mk
 
