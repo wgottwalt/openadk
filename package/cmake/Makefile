@@ -5,18 +5,20 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cmake
 PKG_VERSION:=		2.8.12
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		105bc6d21cc2e9b6aff901e43c53afea
 PKG_DESCR:=		cmake utility
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 
+PKG_TARGET_DEPENDS:=	native
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE}))
-#$(eval $(call PKG_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
