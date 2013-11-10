@@ -7,12 +7,16 @@ config ADK_TARGET_KERNEL_VMLINUZ
 config ADK_TARGET_KERNEL_ZIMAGE
 	boolean
 
+config ADK_TARGET_KERNEL_IMAGE
+	boolean
+
 config ADK_TARGET_KERNEL_BZIMAGE
 	boolean
 
 config ADK_TARGET_KERNEL
 	string
 	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
+	default "Image" if ADK_TARGET_KERNEL_IMAGE
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "vmlinux"
