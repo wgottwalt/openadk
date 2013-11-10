@@ -6,11 +6,12 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bcm2835-vc
 # actually f65a4eef05ee436976f9be219d3db841d3d6b8ec from 05.10.2013
 PKG_VERSION:=		0.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		027d42d1ba803fabdc6bc4ec78d52e67
 PKG_DESCR:=		vc tools for raspberry pi (bcm2835)
 PKG_SECTION:=		base
 PKG_DEPENDS:=		libpthread
+PKG_BUILDDEP:=		cmake-host
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
@@ -22,7 +23,7 @@ $(eval $(call PKG_template,BCM2835_VC,bcm2835-vc,${PKG_VERSION}-${PKG_RELEASE},$
 CONFIG_STYLE:=          manual
 
 do-configure:
-	(cd $(WRKBUILD) && cmake -DCMAKE_SYSTEM_NAME=Linux .)
+	(cd $(WRKBUILD) && PATH='${TARGET_PATH}' cmake -DCMAKE_SYSTEM_NAME=Linux .)
 
 bcm2835-vc-install:
 	$(INSTALL_DIR) ${IDIR_BCM2835_VC}/opt/vc/{bin,lib}

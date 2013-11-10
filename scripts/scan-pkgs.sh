@@ -166,13 +166,8 @@ if [[ -n $ADK_PACKAGE_GLIB ]]; then
 	NEED_GETTEXT="$NEED_GETTEXT glib"
 fi
 
-if [[ -n $ADK_PACKAGE_BCM2835_VC ]]; then
-	NEED_CMAKE="$NEED_CMAKE bcm2835-vc"
-fi
-
 if [[ -n $ADK_PACKAGE_YAJL ]]; then
 	NEED_RUBY="$NEED_RUBY yajl"
-	NEED_CMAKE="$NEED_CMAKE yajl"
 fi
 
 if [[ -n $ADK_PACKAGE_XBMC ]]; then
@@ -343,13 +338,6 @@ fi
 if [[ -n $NEED_BISON ]]; then
 	if ! which bison >/dev/null 2>&1; then
 		echo >&2 You need bison to build $NEED_BISON
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_CMAKE ]]; then
-	if ! which cmake >/dev/null 2>&1; then
-		echo >&2 You need cmake to build $NEED_CMAKE
 		out=1
 	fi
 fi
