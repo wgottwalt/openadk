@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnet
 PKG_VERSION:=		1.1.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		a9bc1d75a610efcfee200d3e28d8eb8f
 PKG_DESCR:=		a low-level packet creation library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP:=		libpcap
+PKG_BUILDDEP:=		libpcap autotool
 PKG_URL:=		http://sourceforge.net/projects/libnet-dev/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnet-dev/}
 PKG_NEED_CXX:=		1
@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ENDIAN:=lil
 ifeq (${CPU_ARCH},mips)
