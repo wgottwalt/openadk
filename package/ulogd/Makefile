@@ -11,6 +11,7 @@ PKG_DESCR:=		Netfilter userspace logging daemon
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log libnetfilter-acct libmnl
 PKG_BUILDDEP:=		iptables libnetfilter_conntrack libnetfilter_log libnetfilter_acct libmnl
+PKG_BUILDDEP+=		autotool
 PKG_URL:=		http://www.netfilter.org/projects/ulogd/
 PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
 PKG_MULTI:=		1
@@ -42,15 +43,20 @@ $(eval $(call PKG_template,ULOGD_MOD_PCAP,ulogd-mod-pcap,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,ULOGD_MOD_PGSQL,ulogd-mod-pgsql,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_PGSQL},${PKGSD_ULOGD_MOD_PGSQL},${PKG_SECTION}))
 $(eval $(call PKG_template,ULOGD_MOD_SQLITE,ulogd-mod-sqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_ULOGD_MOD_SQLITE},${PKGSD_ULOGD_MOD_SQLITE},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_CFLAGS+=		-fPIC
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_MYSQL},)
 CONFIGURE_ARGS+=	--with-mysql=${STAGING_TARGET_DIR}/usr
+else
+CONFIGURE_ARGS+=	--without-mysql
 endif
 
 ifneq (${ADK_PACKAGE_ULOGD_MOD_PGSQL},)
 CONFIGURE_ARGS+=	--with-pgsql=${STAGING_TARGET_DIR}/usr
+else
+CONFIGURE_ARGS+=	--without-pgsql
 endif
 
 ulogd-install:
