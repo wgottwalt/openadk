@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3c388cb559975b37a75cb5965e9800a9
 PKG_DESCR:=		Utilities for PCMCIA subsystem
 PKG_SECTION:=		utils
-PKG_BUILDDEP:=		sysfsutils
+PKG_BUILDDEP:=		sysfsutils bison-host flex-host
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/pcmcia.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/
 

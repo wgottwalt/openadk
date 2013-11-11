@@ -91,14 +91,6 @@ if [[ -n $ADK_PACKAGE_MESALIB ]]; then
 	NEED_MAKEDEPEND="$NEED_MAKEDEPEND mesalib"
 fi
 
-if [[ -n $ADK_COMPILE_HEIMDAL ]]; then
-	NEED_BISON="$NEED_BISON heimdal-server"
-fi
-
-if [[ -n $ADK_COMPILE_KRB5 ]]; then
-	NEED_BISON="$NEED_BISON krb5"
-fi
-
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	NEED_ZIP="$NEED_ZIP openjdk"
 	NEED_GXX="$NEED_GXX openjdk"
@@ -123,11 +115,6 @@ if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
 	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
 fi
 
-if [[ -n $ADK_COMPILE_PCMCIAUTILS ]]; then
-	NEED_BISON="$NEED_BISON pcmciautils"
-	NEED_FLEX="$NEED_FLEX pcmciautils"
-fi
-
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
@@ -142,11 +129,6 @@ fi
 
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_INTL="$NEED_INTL xkeyboard-config"
-fi
-
-if [[ -n $ADK_PACKAGE_LIBPCAP ]]; then
-	NEED_FLEX="$NEED_FLEX libpcap"
-	NEED_BISON="$NEED_BISON libpcap"
 fi
 
 if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
@@ -335,13 +317,6 @@ if [[ -n $NEED_WWW ]]; then
 	fi
 fi
 
-if [[ -n $NEED_BISON ]]; then
-	if ! which bison >/dev/null 2>&1; then
-		echo >&2 You need bison to build $NEED_BISON
-		out=1
-	fi
-fi
-
 if [[ -n $NEED_ZIP ]]; then
 	if ! which zip >/dev/null 2>&1; then
 		echo >&2 You need zip to build $NEED_ZIP
@@ -394,13 +369,6 @@ fi
 if [[ -n $NEED_RPM ]]; then
 	if ! which rpmbuild >/dev/null 2>&1; then
 		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_FLEX ]]; then
-	if ! which flex >/dev/null 2>&1; then
-		echo >&2 You need flex to build $NEED_FLEX
 		out=1
 	fi
 fi

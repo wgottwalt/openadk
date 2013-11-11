@@ -12,11 +12,14 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/bison/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,BISON,bison,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,BISON,bison,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		M4=m4
+HOST_STYLE:=		auto
+#XAKE_FLAGS+=		M4=m4
 
 bison-install:
 	${INSTALL_DIR} ${IDIR_BISON}/usr/bin ${IDIR_BISON}/usr/share/bison
@@ -24,4 +27,5 @@ bison-install:
 	${CP} ${WRKINST}/usr/share/bison/* ${IDIR_BISON}/usr/share/bison
 	$(CP) ./files/yacc ${IDIR_BISON}/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

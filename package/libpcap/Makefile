@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		f78455a92622b7a3c05c58b6ad1cec7e
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		flex-host bison-host
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 PKG_OPTS:=		dev
@@ -34,7 +35,7 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
-XAKE_FLAGS+=		M4=m4
+#XAKE_FLAGS+=		M4=m4
 
 libpcap-install:
 	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib
