@@ -9,6 +9,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		2e1c889494d274aca24ce5f6a748e66e
 PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		flex-host
 PKG_URL:=		http://www.infradead.org/~tgr/libnl/
 PKG_SITES:=		http://www.infradead.org/~tgr/libnl/files/
 PKG_NOPARALLEL:=	1
