@@ -61,9 +61,11 @@ endif
 
 host-build:
 ${_HOST_BUILD_COOKIE}: ${_HOST_CONFIGURE_COOKIE}
+ifneq (${HOST_STYLE},manual)
 	@$(CMD_TRACE) "host compiling... "
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+endif
 	touch $@
 
 hostpost-install:

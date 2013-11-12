@@ -1,0 +1,29 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		scons
+PKG_VERSION:=		2.3.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		083ce5624d6adcbdaf2526623f456ca9
+PKG_DESCR:=		a software construction tool
+PKG_SECTION:=		lang
+PKG_BUILDDEP:=		python2-host
+PKG_URL:=		http://www.scons.org
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}
+
+PKG_ARCH_DEPENDS:=	native
+
+include $(TOPDIR)/mk/host.mk
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call HOST_template,SCONS,scons,$(PKG_VERSION)-${PKG_RELEASE}))
+
+HOST_STYLE:=		manual
+
+scons-hostinstall:
+	(cd $(WRKBUILD); PATH='$(TARGET_PATH)' python setup.py install --prefix=$(STAGING_HOST_DIR)/)
+
+include ${TOPDIR}/mk/host-bottom.mk
+include ${TOPDIR}/mk/pkg-bottom.mk
