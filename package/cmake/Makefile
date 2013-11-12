@@ -27,6 +27,10 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 host-configure:
 	(cd $(WRKBUILD); ./configure --prefix=/usr)
 
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
+
 cmake-hostinstall:
 	$(INSTALL_BIN) $(WRKBUILD)/bin/cmake \
 		$(STAGING_HOST_DIR)/usr/bin

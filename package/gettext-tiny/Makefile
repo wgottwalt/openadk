@@ -24,6 +24,10 @@ $(eval $(call PKG_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEAS
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
+
 gettext-tiny-hostinstall:
 	${CP} ${WRKBUILD}/include/libintl.h ${STAGING_HOST_DIR}/usr/include
 	${CP} ${WRKBUILD}/libintl.a ${STAGING_HOST_DIR}/usr/lib

@@ -22,6 +22,10 @@ $(eval $(call PKG_template,LIBICONV_TINY,libiconv-tiny,$(PKG_VERSION)-${PKG_RELE
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
+
 libiconv-tiny-hostinstall:
 	$(CP) $(WRKBUILD)/libiconv.a $(STAGING_HOST_DIR)/usr/lib
 	$(CP) $(WRKBUILD)/include/* $(STAGING_HOST_DIR)/usr/include
