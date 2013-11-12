@@ -66,6 +66,7 @@ ifneq (${HOST_STYLE},manual)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 endif
+	${MAKE} host-build $(MAKE_TRACE)
 	touch $@
 
 hostpost-install:
