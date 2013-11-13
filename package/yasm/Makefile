@@ -4,20 +4,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		yasm
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8392e5f2235c2c2a981e1a633f2698cb
+PKG_MD5SUM:=		4cfc0686cf5350dd1305c4d905eb55a6
 PKG_DESCR:=		Modular Assembler Project
 PKG_SECTION:=		misc
 PKG_URL:=		http://www.tortall.net/projects/yasm/
 PKG_SITES:=		http://www.tortall.net/projects/yasm/releases/
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,YASM,yasm,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,YASM,yasm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+HOST_STYLE:=		auto
 
 yasm-install:
 	$(INSTALL_DIR) $(IDIR_YASM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/yasm $(IDIR_YASM)/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

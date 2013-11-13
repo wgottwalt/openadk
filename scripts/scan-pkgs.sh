@@ -65,16 +65,11 @@ if [[ -n $ADK_PACKAGE_LIBX11 ]]; then
 	NEED_X11="$NEED_X11 libx11"
 fi
 
-if [[ -n $ADK_PACKAGE_LIBVPX ]]; then
-	NEED_YASM="$NEED_YASM libvpx"
-fi
-
 if [[ -n $ADK_COMPILE_ORBIT2 ]]; then
 	NEED_LIBIDL="$NEED_LIBIDL orbit2"
 fi
 
 if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
-	NEED_YASM="$NEED_YASM firefox"
 	NEED_LIBIDL="$NEED_LIBIDL firefox"
 	NEED_ZIP="$NEED_ZIP firefox"
 fi
@@ -362,15 +357,6 @@ if [[ -n $NEED_RPM ]]; then
 	if ! which rpmbuild >/dev/null 2>&1; then
 		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
 		out=1
-	fi
-fi
-
-if [[ -n $ADK_LINUX_X86 ]]; then
-	if [[ -n $NEED_YASM ]]; then
-		if ! which yasm >/dev/null 2>&1; then
-			echo >&2 You need yasm to build $NEED_YASM
-			out=1
-		fi
 	fi
 fi
 
