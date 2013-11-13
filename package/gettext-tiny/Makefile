@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3af6fd8a9042603b61f634b1c6f49e7e
 PKG_DESCR:=		Gettext stub and replacement
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		gettext-tiny-host
 PKG_URL:=		https://github.com/rofl0r/gettext-tiny
 PKG_SITES:=		http://ftp.barfooze.de/pub/sabotage/tarballs/
 PKG_OPTS:=		dev

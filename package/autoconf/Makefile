@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		82d05e03b93e45f5a39b828dc9c6c29b
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		m4-host
+PKG_BUILDDEP:=		m4-host autoconf-host
 PKG_URL:=		http://www.gnu.org/software/autoconf/
 PKG_SITES:=		${MASTER_SITE_GNU:=autoconf/}
 PKG_OPTS:=		noscripts

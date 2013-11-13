@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4cfc0686cf5350dd1305c4d905eb55a6
 PKG_DESCR:=		Modular Assembler Project
 PKG_SECTION:=		misc
+PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.tortall.net/projects/yasm/
 PKG_SITES:=		http://www.tortall.net/projects/yasm/releases/
 
