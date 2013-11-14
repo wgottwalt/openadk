@@ -32,6 +32,7 @@ host-build:
 gettext-tiny-hostinstall:
 	${CP} ${WRKBUILD}/include/libintl.h ${STAGING_HOST_DIR}/usr/include
 	${CP} ${WRKBUILD}/libintl.a ${STAGING_HOST_DIR}/usr/lib
+	${CP} ${WRKBUILD}/{msgfmt,xgettext,msgmerge} ${STAGING_HOST_DIR}/usr/bin
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -16,6 +16,7 @@ PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates libevent
 PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
 PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent python2-host yasm-host
+PKG_BUILDDEP+=		zip-host
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
@@ -46,8 +47,6 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_LDFLAGS="${LDLAGS_FOR_BUILD}" \
 			HOST_CXX="${CXX_FOR_BUILD}" \
 			HOST_CXXFLAGS="${CXXFLAGS_FOR_BUILD}" \
-			BUILD_LIBIDL_CONFIG="${BUILD_LIBIDL_CONFIG}" \
-			PKG_HOSTLIB_DIR="${PKG_HOSTLIB_DIR}" \
 			HOST_RANLIB="ranlib" HOST_AR="ar" \
 			CPPFLAGS="-I${STAGING_TARGET_DIR}/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \

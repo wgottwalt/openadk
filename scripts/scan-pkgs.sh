@@ -69,17 +69,11 @@ if [[ -n $ADK_COMPILE_ORBIT2 ]]; then
 	NEED_LIBIDL="$NEED_LIBIDL orbit2"
 fi
 
-if [[ -n $ADK_PACKAGE_FIREFOX ]]; then
-	NEED_LIBIDL="$NEED_LIBIDL firefox"
-	NEED_ZIP="$NEED_ZIP firefox"
-fi
-
 if [[ -n $ADK_PACKAGE_MESALIB ]]; then
 	NEED_MAKEDEPEND="$NEED_MAKEDEPEND mesalib"
 fi
 
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
-	NEED_ZIP="$NEED_ZIP openjdk"
 	NEED_GXX="$NEED_GXX openjdk"
 	NEED_XSLTPROC="$NEED_XSLTPROC openjdk"
 fi
@@ -87,10 +81,6 @@ fi
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	cd ${TOPDIR}/jtools; bash prereq.sh
 	[ $? -ne 0 ] && out=1
-fi
-
-if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
-	NEED_ZIP="$NEED_ZIP openjdk7"
 fi
 
 if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
@@ -131,10 +121,6 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
-if [[ -n $ADK_PACKAGE_GLIB ]]; then
-	NEED_GETTEXT="$NEED_GETTEXT glib"
-fi
-
 if [[ -n $ADK_PACKAGE_YAJL ]]; then
 	NEED_RUBY="$NEED_RUBY yajl"
 fi
@@ -158,16 +144,6 @@ fi
 
 if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
-fi
-
-if [[ -n $NEED_GETTEXT ]]; then
-	if ! which gettext >/dev/null 2>&1; then
-		echo >&2 You need gettext to build $NEED_GETTEXT
-		out=1
-	elif ! which msgfmt >/dev/null 2>&1; then
-		echo >&2 You need msgfmt to build $NEED_GETTEXT
-		out=1
-	fi
 fi
 
 if [[ -n $NEED_LIBTIRPCDEV ]];then
@@ -301,20 +277,6 @@ if [[ -n $NEED_WWW ]]; then
 				out=1
 			fi
 		fi
-	fi
-fi
-
-if [[ -n $NEED_ZIP ]]; then
-	if ! which zip >/dev/null 2>&1; then
-		echo >&2 You need zip to build $NEED_ZIP
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LIBIDL ]]; then
-	if ! which libIDL-config-2 >/dev/null 2>&1; then
-		echo >&2 You need libIDL-config-2 to build $NEED_LIBIDL
-		out=1
 	fi
 fi
 
