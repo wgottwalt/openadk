@@ -9,16 +9,20 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7b74551e63f8ee6aab6fbc86676c0d37
 PKG_DESCR:=		zip compression utility
 PKG_SECTION:=		archive
+PKG_BUILDDEP:=		zip-host
 PKG_URL:=		http://www.info-zip.org/Zip.html
 PKG_SITES:=		ftp://ftp.info-zip.org/pub/infozip/src/
 
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)30
 DISTFILES:=		$(PKG_NAME)30.tgz
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		minimal
 INSTALL_STYLE:=		manual
 
@@ -27,8 +31,20 @@ CONFIGURE_PROG:=	unix/configure
 MAKE_FILE:=		unix/Makefile
 ALL_TARGET:=		generic_gcc
 
+host-configure:
+	(cd $(WRKBUILD) && $(BASH) $(CONFIGURE_PROG))
+
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${ALL_TARGET})
+
+zip-hostinstall:
+	$(CP) $(WRKBUILD)/zip \
+		$(STAGING_HOST_DIR)/usr/bin
+
 zip-install:
 	${INSTALL_DIR} ${IDIR_ZIP}/usr/bin
 	${CP} ${WRKBUILD}/zip ${IDIR_ZIP}/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
