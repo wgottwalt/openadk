@@ -15,6 +15,9 @@ Before you can start you need to install some tools:
 - patch
 - gzip
 - bzip2
+- lzop
+- lzma
+- xz
 - wget
 - libc headers
 - ncurses5 headers

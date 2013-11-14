@@ -1,5 +1,2 @@
-- qemu-sparc with eglibc does not compile
-- qemu-ppc64 does not boot
+- uclibc N64 ABI on mips64{,el} targets does not work, nptl fork problem
 - cris foxboard-lx is broken, binutils failure
-- uclibc on lemote mips64 target does not work (only uclibc-trunk with patches)
-- qemu-mips64* targets does not boot, kernel problem?

@@ -1,3 +1,5 @@
+- use host-tools infrastructure for openjdk7
+- remove openjdk6
 - evaluate libguestfs for image creation
 - add grsec kernel patch
 - check for gcc and SSP again
