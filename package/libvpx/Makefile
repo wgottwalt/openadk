@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		f8de058e6ba14555144583a2d031fe19
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 PKG_OPTS:=		dev

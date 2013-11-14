@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4898b62aebc1614edab60bf1fe0ac661
 PKG_DESCR:=		iconv stub and replacement
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		libiconv-tiny-host
 PKG_URL:=		http://www.openwrt.org/
 PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_OPTS:=		dev devonly

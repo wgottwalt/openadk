@@ -10,7 +10,7 @@ PKG_EXTRAVER:=		1.12
 PKG_MD5SUM:=		e620cb9e0259159341c0e0d6b712b67a
 PKG_DESCR:=		GNU automake
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		autoconf-host
+PKG_BUILDDEP:=		autoconf-host automake-host
 PKG_URL:=		http://www.gnu.org/software/automake/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 PKG_OPTS:=		noscripts
