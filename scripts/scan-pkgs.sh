@@ -65,14 +65,6 @@ if [[ -n $ADK_PACKAGE_LIBX11 ]]; then
 	NEED_X11="$NEED_X11 libx11"
 fi
 
-if [[ -n $ADK_COMPILE_ORBIT2 ]]; then
-	NEED_LIBIDL="$NEED_LIBIDL orbit2"
-fi
-
-if [[ -n $ADK_PACKAGE_MESALIB ]]; then
-	NEED_MAKEDEPEND="$NEED_MAKEDEPEND mesalib"
-fi
-
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	NEED_GXX="$NEED_GXX openjdk"
 	NEED_XSLTPROC="$NEED_XSLTPROC openjdk"
@@ -119,10 +111,6 @@ fi
 
 if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
-fi
-
-if [[ -n $ADK_PACKAGE_YAJL ]]; then
-	NEED_RUBY="$NEED_RUBY yajl"
 fi
 
 if [[ -n $ADK_PACKAGE_XBMC ]]; then
@@ -301,13 +289,6 @@ if [[ -n $NEED_GXX ]]; then
 	fi
 fi
 
-if [[ -n $NEED_RUBY ]]; then
-	if ! which ruby >/dev/null 2>&1; then
-		echo >&2 You need ruby to build $NEED_RUBY
-		out=1
-	fi
-fi
-
 if [[ -n $NEED_XKBCOMP ]]; then
 	if ! which xkbcomp >/dev/null 2>&1; then
 		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
@@ -332,13 +313,6 @@ fi
 if [[ -n $NEED_DBUSGLIB ]]; then
 	if ! which dbus-binding-tool >/dev/null 2>&1; then
 		echo >&2 You need dbus-binding-tool to build $NEED_DBUSGLIB
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_MAKEDEPEND ]]; then
-	if ! which makedepend >/dev/null 2>&1; then
-		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
 		out=1
 	fi
 fi
