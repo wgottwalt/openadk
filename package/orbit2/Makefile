@@ -10,7 +10,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		87c69c56c6d0bdafa4de5e18ae115cc9
 PKG_DESCR:=		a CORBA 2.4-compliant Object Request Broker
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libIDL
+PKG_BUILDDEP:=		gettext-tiny glib-host libIDL-host libIDL
 PKG_URL:=		http://projects.gnome.org/ORBit2/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 PKG_LIBNAME:=		orbit2
@@ -22,8 +22,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --cflags)
-LDFLAGS_FOR_BUILD+=	$(shell ${BUILD_LIBIDL_CONFIG} --libs)
+CFLAGS_FOR_BUILD+=	$(shell PATH=$(TARGET_PATH) libIDL-config-2 --cflags)
+LDFLAGS_FOR_BUILD+=	$(shell PATH=$(TARGET_PATH) libIDL-config-2 --libs)
 LDFLAGS_FOR_BUILD+=	-lgmodule-2.0
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
 			ac_cv_alignof_CORBA_boolean=1 \
