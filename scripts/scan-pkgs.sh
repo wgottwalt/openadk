@@ -65,14 +65,6 @@ if [[ -n $ADK_PACKAGE_LIBX11 ]]; then
 	NEED_X11="$NEED_X11 libx11"
 fi
 
-if [[ -n $ADK_COMPILE_ORBIT2 ]]; then
-	NEED_LIBIDL="$NEED_LIBIDL orbit2"
-fi
-
-if [[ -n $ADK_PACKAGE_MESALIB ]]; then
-	NEED_MAKEDEPEND="$NEED_MAKEDEPEND mesalib"
-fi
-
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	NEED_GXX="$NEED_GXX openjdk"
 	NEED_XSLTPROC="$NEED_XSLTPROC openjdk"
@@ -332,13 +324,6 @@ fi
 if [[ -n $NEED_DBUSGLIB ]]; then
 	if ! which dbus-binding-tool >/dev/null 2>&1; then
 		echo >&2 You need dbus-binding-tool to build $NEED_DBUSGLIB
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_MAKEDEPEND ]]; then
-	if ! which makedepend >/dev/null 2>&1; then
-		echo >&2 You need makedepend to build $NEED_MAKEDEPEND
 		out=1
 	fi
 fi
