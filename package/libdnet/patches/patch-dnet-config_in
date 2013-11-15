@@ -1,0 +1,11 @@
+--- libdnet-1.11.orig/dnet-config.in	2001-10-19 03:29:00.000000000 +0200
++++ libdnet-1.11/dnet-config.in	2013-11-15 15:34:29.676762300 +0100
+@@ -3,7 +3,7 @@
+ # $Id: dnet-config.in,v 1.1 2001/10/19 01:29:00 dugsong Exp $
+ 
+ prefix=@prefix@
+-exec_prefix=@prefix@
++exec_prefix=${prefix}
+ 
+ usage()
+ {
