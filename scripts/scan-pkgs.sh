@@ -113,10 +113,6 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
-if [[ -n $ADK_PACKAGE_YAJL ]]; then
-	NEED_RUBY="$NEED_RUBY yajl"
-fi
-
 if [[ -n $ADK_PACKAGE_XBMC ]]; then
 	NEED_SDLDEV="$NEED_SDLDEV xbmc"
 	NEED_SDLIMAGEDEV="$NEED_SDLIMAGEDEV xbmc"
@@ -289,13 +285,6 @@ fi
 if [[ -n $NEED_GXX ]]; then
 	if ! which g++ >/dev/null 2>&1; then
 		echo >&2 You need GNU c++ compiler to build $NEED_GXX
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_RUBY ]]; then
-	if ! which ruby >/dev/null 2>&1; then
-		echo >&2 You need ruby to build $NEED_RUBY
 		out=1
 	fi
 fi
