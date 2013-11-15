@@ -41,6 +41,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BOOST,boost,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+include ${TOPDIR}/mk/python.mk
+
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
@@ -98,7 +100,7 @@ endif
 # some variables for build
 GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
-BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam"`"
+BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam$(EXEEXT)"`"
 PYTHON_PATH:=	${STAGING_TARGET_DIR}/usr/bin/python
 PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
@@ -114,19 +116,18 @@ do-build:
 	${SED} "/^using gcc/d" ${USER_JAM}
 # add using gcc line with determined options to user.jam
 	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} ;" >> ${USER_JAM};
-
 # remove exisiting using python line from user.jam
 	${SED} "/^using python/d" ${USER_JAM}
 ifneq (${ADK_PACKAGE_BOOST_PYTHON},)
 # add using python line with determined options to user.jam
 	echo "using python : ${PYTHON_VERSION} : ${PYTHON_PATH} : ${PYTHON_INCLUDE} : ${PYTHON_LIB} ;" >> ${USER_JAM};
 endif
-
 # run bjam to build boost
 	( cd ${WRKBUILD}; \
 		${BJAM_PATH} \
 			-sBUILD=release \
-			--toolset=gcc-${GPP_VERSION} \
+			target-os=linux \
+			toolset=gcc-${GPP_VERSION} \
 			--build-type=minimal \
 			--layout=versioned \
 			--disable-long-double \
