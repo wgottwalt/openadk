@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9c0cfef285d5c4a5c80d00904ddab380
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		zlib autotool
+PKG_BUILDDEP:=		autotool libxml2-host zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_OPTS:=		dev
@@ -24,12 +24,17 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXML2,libxml2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXML2_PYTHON},${PKGSC_LIBXML2_PYTHON}))
 
 include $(TOPDIR)/mk/python.mk
+
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--without-python
 
 AUTOTOOL_STYLE:=	autoreconf
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
@@ -75,4 +80,5 @@ libxml2-python-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/*.{so,py} \
 		$(IDIR_LIBXML2_PYTHON)/usr/lib/python$(PYTHON_VERSION)/site-packages
 	
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

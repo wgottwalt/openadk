@@ -80,10 +80,6 @@ if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
 	[ $? -ne 0 ] && out=1
 fi
 
-if [[ -n $ADK_PACKAGE_LIBXCB ]]; then
-	NEED_XSLTPROC="$NEED_XSLTPROC libxcb"
-fi
-
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
