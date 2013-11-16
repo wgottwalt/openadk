@@ -61,10 +61,6 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
-if [[ -n $ADK_PACKAGE_LIBX11 ]]; then
-	NEED_X11="$NEED_X11 libx11"
-fi
-
 if [[ -n $ADK_COMPILE_OPENJDK ]]; then
 	NEED_GXX="$NEED_GXX openjdk"
 	NEED_XSLTPROC="$NEED_XSLTPROC openjdk"
@@ -206,15 +202,6 @@ if [[ -n $NEED_X11DEV ]];then
 	if ! test -f /usr/include/X11/Xlib.h >/dev/null; then
 		echo >&2 You need X11 headers to build $NEED_X11DEV
 		out=1
-	fi
-fi
-
-if [[ -n $NEED_X11 ]];then
-	if ! test -f /usr/include/X11/X.h >/dev/null; then
-	  if ! test -f /usr/local/include/X11/X.h >/dev/null; then
-		echo >&2 You need X11 headers to build $NEED_X11
-		out=1
-	  fi
 	fi
 fi
 

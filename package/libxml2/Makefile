@@ -35,6 +35,7 @@ include $(TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-python
+HOST_MAKE_FLAGS+=	LDFLAGS=-lpthread
 
 AUTOTOOL_STYLE:=	autoreconf
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
