@@ -54,31 +54,6 @@ else
 GCC_CHECK:=
 endif
 
-ifeq ($(CPU_ARCH),arm)
-QEMU:=			qemu-arm
-endif
-ifeq ($(CPU_ARCH),mipsel)
-QEMU:=			qemu-mipsel
-endif
-ifeq ($(CPU_ARCH),mips64el)
-QEMU:=			qemu-mipsel
-endif
-ifeq ($(CPU_ARCH),mips)
-QEMU:=			qemu-mips
-endif
-ifeq ($(CPU_ARCH),i486)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),i586)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),i686)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),x86_64)
-QEMU:=			qemu-x86_64
-endif
-
 ifeq ($(ADK_NATIVE),y) 
 TARGET_CROSS:=
 TARGET_COMPILER_PREFIX?=
