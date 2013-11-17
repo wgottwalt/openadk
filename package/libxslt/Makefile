@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9667bf6f9310b957254fdcf6596600b7
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		libxml2
+PKG_BUILDDEP:=		python2-host libxml2-host libxslt-host libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_NEED_CXX:=		1
@@ -24,11 +24,15 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XSLTPROC},${PKGSC_XSLTPROC}))
 
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--without-python
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \
@@ -47,4 +51,5 @@ libxslt-install:
 	${CP} ${WRKINST}/usr/lib/libxslt.so* ${IDIR_LIBXSLT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libexslt.so* ${IDIR_LIBXSLT}/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

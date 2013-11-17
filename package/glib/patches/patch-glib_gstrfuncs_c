@@ -1,0 +1,15 @@
+--- glib-2.28.1.orig/glib/gstrfuncs.c	2011-02-16 03:55:33.000000000 +0100
++++ glib-2.28.1/glib/gstrfuncs.c	2013-11-06 18:24:29.973270200 +0100
+@@ -1423,12 +1423,6 @@ g_strsignal (gint signum)
+ #ifdef HAVE_STRSIGNAL
+   const char *msg_locale;
+ 
+-#if defined(G_OS_BEOS) || defined(G_WITH_CYGWIN)
+-extern const char *strsignal(int);
+-#else
+-  /* this is declared differently (const) in string.h on BeOS */
+-  extern char *strsignal (int sig);
+-#endif /* !G_OS_BEOS && !G_WITH_CYGWIN */
+   msg_locale = strsignal (signum);
+   if (g_get_charset (NULL))
+     return msg_locale;
