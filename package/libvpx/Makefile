@@ -85,6 +85,8 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-install-docs \
 			--disable-install-bins \
 			--enable-install-libs \
+			--disable-unit-tests \
+			--disable-docs \
 			--disable-examples \
 			--enable-shared
 ALL_TARGET:=
