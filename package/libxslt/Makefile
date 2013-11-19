@@ -32,7 +32,8 @@ $(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XSLTPROC},${PKGSC_XSLTPROC}))
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--without-python
+HOST_CONFIGURE_ARGS+=	--without-python \
+			--without-crypto
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \

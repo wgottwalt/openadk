@@ -34,7 +34,10 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RE
 include $(TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--without-python
+HOST_CONFIGURE_ARGS+=	--without-python \
+			--without-iconv \
+			--without-lzma \
+			--without-zlib
 HOST_MAKE_FLAGS+=	LDFLAGS=-lpthread
 
 AUTOTOOL_STYLE:=	autoreconf
