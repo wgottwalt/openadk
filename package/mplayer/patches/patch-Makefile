@@ -1,14 +1,14 @@
---- mplayer-1.0-32749.orig/Makefile	2011-01-03 11:27:11.000000000 +0100
-+++ mplayer-1.0-32749/Makefile	2011-07-29 17:44:21.073424743 +0200
-@@ -185,7 +185,6 @@ SRCS_COMMON-$(NEED_STRSEP)           += 
- SRCS_COMMON-$(NEED_SWAB)             += osdep/swab.c
- SRCS_COMMON-$(NEED_VSSCANF)          += osdep/vsscanf.c
+--- MPlayer-1.1.1.orig/Makefile	2012-05-30 23:21:46.000000000 +0200
++++ MPlayer-1.1.1/Makefile	2013-11-14 13:20:30.000000000 +0100
+@@ -190,7 +190,6 @@ SRCS_COMMON-$(NATIVE_RTSP)           +=
+                                         stream/librtsp/rtsp_session.c \
+ 
  SRCS_COMMON-$(NETWORKING)            += stream/stream_netstream.c \
 -                                        stream/asf_mmst_streaming.c \
                                          stream/asf_streaming.c \
                                          stream/cookies.c \
                                          stream/http.c \
-@@ -816,7 +815,7 @@ mencoder$(EXESUF) mplayer$(EXESUF):
+@@ -794,7 +793,7 @@ mencoder$(EXESUF) mplayer$(EXESUF):
  	$(CC) -o $@ $^ $(EXTRALIBS)
  
  codec-cfg$(EXESUF): codec-cfg.c codec-cfg.h help_mp.h

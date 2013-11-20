@@ -1,6 +1,6 @@
---- mplayer-1.0-32749.orig/libao2/ao_alsa.c	2011-01-03 11:26:52.000000000 +0100
-+++ mplayer-1.0-32749/libao2/ao_alsa.c	2011-09-14 20:52:35.457990653 +0200
-@@ -760,8 +760,9 @@ static int play(void* data, int len, int
+--- MPlayer-1.1.1.orig/libao2/ao_alsa.c	2012-04-10 15:17:49.000000000 +0200
++++ MPlayer-1.1.1/libao2/ao_alsa.c	2013-11-14 13:20:30.000000000 +0100
+@@ -756,8 +756,9 @@ static int play(void* data, int len, int
  {
    int num_frames;
    snd_pcm_sframes_t res = 0;

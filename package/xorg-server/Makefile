@@ -119,5 +119,9 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 endif
+	# add m4 file to host directory
+	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/share/aclocal
+	$(CP) ${WRKINST}/usr/share/aclocal/xorg-server.m4 \
+		$(STAGING_HOST_DIR)/usr/share/aclocal
 
 include ${TOPDIR}/mk/pkg-bottom.mk

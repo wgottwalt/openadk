@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINIT,xinit,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_POSIX_SOURCE
 CONFIGURE_ARGS:=	--without-launchd
 XAKE_FLAGS+=		RAWCPP="$(TARGET_CROSS)cpp"
 
