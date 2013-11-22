@@ -4,6 +4,7 @@
 HOST_CONFIGURE_ENV+=	AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			PATH='${TARGET_PATH}' \
+			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig'
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
 			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
@@ -21,6 +22,7 @@ HOST_ALL_TARGET?=	all
 HOST_INSTALL_TARGET?=	install
 
 HOST_MAKE_ENV+=		PATH='${TARGET_PATH}' \
+			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig'
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
 			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
