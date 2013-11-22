@@ -33,7 +33,10 @@ $(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-python \
-			--without-crypto
+			--without-crypto \
+			--with-libxml-prefix="${STAGING_HOST_DIR}/usr" \
+			--with-libxml-include-prefix="${STAGING_HOST_DIR}/usr/include/libxml2" \
+			--with-libxml-libs-prefix="${STAGING_HOST_DIR}/usr/lib"
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \
