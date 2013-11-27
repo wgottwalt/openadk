@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9c0cfef285d5c4a5c80d00904ddab380
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		autotool libxml2-host zlib
+PKG_BUILDDEP:=		autotool gettext-tiny libxml2-host zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_OPTS:=		dev
@@ -19,6 +19,7 @@ PKG_SUBPKGS:=		LIBXML2 LIBXML2_PYTHON
 PKGSD_LIBXML2_PYTHON:=	XML python bindings
 PKGSC_LIBXML2_PYTHON:=	libs
 PKGSB_LIBXML2_PYTHON:=	python2
+PKGSS_LIBXML2_PYTHON:=	python2
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
@@ -34,7 +35,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RE
 include $(TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--without-python \
+HOST_CONFIGURE_ARGS+=	--with-python \
 			--without-iconv \
 			--without-lzma \
 			--without-zlib

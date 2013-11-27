@@ -10,7 +10,8 @@ PKG_MD5SUM:=		df801a975045150790e10e2ccf32193f
 PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
-PKG_BUILDDEP:=		libXdamage libXfixes libXxf86vm libdrm
+PKG_DEPENDS+=		libxml2 libxml2-python
+PKG_BUILDDEP:=		python2 libxml2 libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat libXext
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
@@ -26,6 +27,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+include $(TOPDIR)/mk/python.mk
+
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif
@@ -36,7 +39,8 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-gles1 \
 			--disable-gles2 \
 			--with-dri-drivers=${DRI_DRIVERS},swrast
-CONFIGURE_ENV+=		PYTHON2=/usr/bin/python MISSING="echo"
+CONFIGURE_ENV+=		MISSING="echo" \
+			PYTHON2=$(PYTHON)
 
 XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
 ifeq ($(ADK_NATIVE),y)

@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f7e707d4fb7a5a76f0f9b73ff70623d
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		mesalib libx11 libxi freeglut libfreetype
 PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut freetype
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://openadk.org/distfiles/
@@ -18,7 +19,6 @@ PKG_LIBNAME:=		libfltk
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
-PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=		${PKG_NAME}-$(PKG_VERSION)-source.tar.gz
 

@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBDRM,libdrm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIGURE_ARGS+=	--disable-manpages
+
 libdrm-install:
 	$(INSTALL_DIR) $(IDIR_LIBDRM)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libdrm*.so* \

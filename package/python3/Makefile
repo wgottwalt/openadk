@@ -93,20 +93,14 @@ CONFIGURE_ENV+=		ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_ptc=no
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-cxx-main \
-			--without-threads
-			
-python3-hostinstall:
-	$(INSTALL_BIN) ${HOST_WRKINST}/usr/bin/python3 \
-		$(STAGING_HOST_DIR)/usr/bin
+			--with-threads
+
+hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
 		$(STAGING_HOST_DIR)/usr/bin/pgen3
-	$(CP) $(HOST_WRKINST)/usr/lib/python3.3 \
-		$(STAGING_HOST_DIR)/usr/lib
-	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/include/python3.3m
-	${CP} ${HOST_WRKINST}/usr/include/python3.3m/pyconfig.h \
-		$(STAGING_HOST_DIR)/usr/include/python3.3m
-
+			
 python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/bin ${IDIR_PYTHON3}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.3

@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		libffi python2-host autotool
+PKG_BUILDDEP:=		autotool libffi python2-host
 PKG_DEPENDS:=		libpthread libffi libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
@@ -103,6 +103,14 @@ HOST_CONFIGURE_ARGS:=	--with-threads \
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
 		$(STAGING_HOST_DIR)/usr/bin/pgen
+
+pre-configure:
+	(cd $(WRKBUILD) && patch -p1 < \
+		$(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py )
+	(cd $(WRKBUILD) && patch -p1 < \
+		$(TOPDIR)/package/python2/files/patch-Misc_python-config_in )
+	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
+		$(WRKBUILD)/Misc/python-config.in
 
 python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib

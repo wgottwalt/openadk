@@ -10,7 +10,7 @@ PKG_MD5SUM:=		9667bf6f9310b957254fdcf6596600b7
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		python2-host libxml2-host libxslt-host libxml2
+PKG_BUILDDEP:=		autotool python2-host libxml2-host libxslt-host libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_NEED_CXX:=		1
@@ -37,6 +37,7 @@ HOST_CONFIGURE_ARGS+=	--without-python \
 			--with-libxml-prefix="${STAGING_HOST_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_HOST_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_HOST_DIR}/usr/lib"
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \

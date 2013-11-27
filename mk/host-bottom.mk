@@ -7,6 +7,11 @@ host-configure:
 ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 	@mkdir -p ${WRKBUILD}
 	@$(CMD_TRACE) "host configuring... "
+ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	@rm -rf ${WRKSRC}/autom4te.cache
+	@touch ${WRKDIR}/.autoreconf_done
+endif
 	@cd ${WRKBUILD}; \
 	    for i in $$(find . -name config.sub);do \
 		if [ -f $$i ]; then \

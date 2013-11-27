@@ -1,5 +1,5 @@
 --- libxml2-2.9.1.orig/configure.in	2013-04-19 09:25:20.000000000 +0200
-+++ libxml2-2.9.1/configure.in	2013-10-31 08:37:36.000000000 +0100
++++ libxml2-2.9.1/configure.in	2013-11-23 23:02:06.000000000 +0100
 @@ -748,80 +748,16 @@ PYTHON_SITE_PACKAGES=
  PYTHON_TESTS=
  pythondir=
@@ -77,11 +77,11 @@
 -	    fi
 -	fi
 -    fi
-+    PYTHON_INCLUDES=`$PYTHON$PYTHON_VERSION-config --includes`
-+    PYTHON_LIBS=`$PYTHON$PYTHON_VERSION-config --ldflags`
-+    PYTHON_SITE_PACKAGES=/usr/lib/python$PYTHON_VERSION/site-packages
-     pythondir='$(PYTHON_SITE_PACKAGES)'
--    PYTHON_LIBS=`python$PYTHON_VERSION-config --ldflags`
+-    pythondir='$(PYTHON_SITE_PACKAGES)'
++    PYTHON_INCLUDES=`python$PYTHON_VERSION-config --includes`
+     PYTHON_LIBS=`python$PYTHON_VERSION-config --ldflags`
++    PYTHON_SITE_PACKAGES=${prefix}/lib/python$PYTHON_VERSION/site-packages
++    pythondir='$(PYTHON_SITE_PACKAGES)'
  else
      PYTHON=
  fi
