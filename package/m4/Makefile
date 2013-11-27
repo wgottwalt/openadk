@@ -20,6 +20,9 @@ $(eval $(call HOST_template,M4,m4,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,M4,m4,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
+CONFIGURE_ENV+=		ac_cv_func_posix_spawn=yes \
+			ac_cv_func_posix_spawn_works=yes
+TARGET_LDFLAGS+=	-lrt
 
 m4-install:
 	${INSTALL_DIR} ${IDIR_M4}/usr/bin

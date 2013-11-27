@@ -1,0 +1,13 @@
+--- bison-3.0.1.orig/Makefile.in	2013-11-12 14:57:09.000000000 +0100
++++ bison-3.0.1/Makefile.in	2013-11-27 18:39:58.000000000 +0100
+@@ -5134,8 +5134,8 @@ $(CROSS_OPTIONS_TEXI): doc/bison.help $(
+ doc/refcard.pdf: doc/refcard.tex
+ 	$(AM_V_GEN) cd doc && pdftex $(abs_top_srcdir)/doc/refcard.tex
+ $(top_srcdir)/doc/bison.help: src/bison$(EXEEXT)
+-	$(AM_V_GEN)src/bison$(EXEEXT) --version >doc/bison.help.tmp
+-	$(AM_V_at) src/bison$(EXEEXT) --help   >>doc/bison.help.tmp
++	bison$(EXEEXT) --version >doc/bison.help.tmp
++	bison$(EXEEXT) --help   >>doc/bison.help.tmp
+ 	$(AM_V_at)$(top_srcdir)/build-aux/move-if-change doc/bison.help.tmp $@
+ 
+ # Depend on configure to get version number changes.
