@@ -13,7 +13,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=socks-relay/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SRELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SRELAY,srelay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 

@@ -9,9 +9,9 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		726cd0b7a18c5e25f4d80ebeffe7607e
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libfltk libxi libiconv libpng zlib libjpeg
+PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg
 PKG_DEPENDS+=		libstdcxx libpthread libgcc libopenssl
-PKG_BUILDDEP:=		fltk libXi libiconv jpeg libpng zlib openssl
+PKG_BUILDDEP:=		fltk libXi libiconv-tiny jpeg libpng zlib openssl
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 PKG_NEED_CXX:=		1
@@ -23,7 +23,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DILLO,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DILLO,dillo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		PNG_CONFIG=$(STAGING_DIR)/usr/bin/png-config
 TARGET_LDFLAGS+=	-liconv -lpng15

@@ -7,19 +7,19 @@ PKG_NAME:=		xproto
 PKG_VERSION:=		7.0.23
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Window System Core Protocol headers
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_MD5SUM:=		7ab1239930563a352cb3552fd2db4140
+PKG_BUILDDEP:=		xproto-host
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,XPROTO,xproto,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,XPROTO,xproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
-	${INSTALL_DIR} ${IDIR_XPROTO}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XPROTO}/usr/include
-	${INSTALL_DIR} ${IDIR_XPROTO}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xproto.pc \
-		${IDIR_XPROTO}/usr/lib/pkgconfig
+HOST_STYLE:=		auto
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

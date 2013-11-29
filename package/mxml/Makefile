@@ -11,12 +11,12 @@ PKG_DESCR:=		lightweight XML library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.minixml.org/
 PKG_SITES:=		http://ftp.easysw.com/pub/mxml/2.6/
-
-PKG_SUBPKGS:=		LIBMXML
+PKG_LIBNAME:=		libmxml
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBMXML,libmxml,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMXML,libmxml,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 FAKE_FLAGS+=		BUILDROOT=${WRKINST}
 

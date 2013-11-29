@@ -9,17 +9,18 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		00d1e769c6af702c542cca54b728920d
 PKG_DESCR:=		GNU archiving application
 PKG_SECTION:=		archive
+PKG_DEPENDS:=		libgcc
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar/
 PKG_SITES:=		http://mirrors.kernel.org/gnu/tar/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TAR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TAR,tar,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		gl_cv_func_mbrtowc_incomplete_state=no \
 			gl_cv_func_wcrtomb_retval=no
 
-post-install:
+tar-install:
 	${INSTALL_DIR} ${IDIR_TAR}/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/tar ${IDIR_TAR}/bin
 

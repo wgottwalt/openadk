@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HASERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,HASERL,haserl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-DMAX_UPLOAD_KB=8192
 
-post-install:
+haserl-install:
 	${INSTALL_DIR} ${IDIR_HASERL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/haserl ${IDIR_HASERL}/usr/bin/
 

@@ -11,48 +11,57 @@ config BUSYBOX_IOSTAT
 	default y
 	help
 	  Report CPU and I/O statistics
+
 config BUSYBOX_LSOF
 	bool "lsof"
 	default y
 	help
 	  Show open files in the format of:
 	  PID <TAB> /path/to/executable <TAB> /path/to/opened/file
+
 config BUSYBOX_MPSTAT
 	bool "mpstat"
 	default n
 	help
 	  Per-processor statistics
+
 config BUSYBOX_NMETER
 	bool "nmeter"
 	default n
 	help
 	  Prints selected system stats continuously, one line per update.
+
 config BUSYBOX_PMAP
        bool "pmap"
        default y
        help
          Display processes' memory mappings.
+
 config BUSYBOX_POWERTOP
 	bool "powertop"
 	default n
 	help
 	  Analyze power consumption on Intel-based laptops
+
 config BUSYBOX_PSTREE
 	bool "pstree"
 	default y
 	help
 	  Display a tree of processes.
+
 config BUSYBOX_PWDX
 	bool "pwdx"
 	default n
 	help
 	  Report current working directory of a process
+
 config BUSYBOX_SMEMCAP
 	bool "smemcap"
 	default n
 	help
 	  smemcap is a tool for capturing process data for smem,
 	  a memory usage statistic tool.
+
 config BUSYBOX_UPTIME
 	bool "uptime"
 	default y

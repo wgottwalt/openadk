@@ -13,14 +13,11 @@ PKG_BUILDDEP:=		pacemaker gnutls pam python2
 PKG_URL:=		http://hg.clusterlabs.org/pacemaker/pygui/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_CFLINE_PACEMAKER_MGMTD:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
-
-PKG_SUBPKGS:=		PACEMAKER_MGMTD
-PKGSD_PACEMAKER_MGMTD:=	Management daemon for Pacemaker GUI
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PACEMAKER_MGMTD,pacemaker-mgmtd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PACEMAKER_MGMT,pacemaker-mgmt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 include $(TOPDIR)/mk/python.mk
 
@@ -33,12 +30,12 @@ TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/python2.7 \
 			-I$(STAGING_DIR)/usr/include/pacemaker \
 			-I$(STAGING_DIR)/usr/include/heartbeat
 
-pacemaker-mgmtd-install:
-	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMTD)/usr/lib
+pacemaker-mgmt-install:
+	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libhbmgmt*so* \
-		$(IDIR_PACEMAKER_MGMTD)/usr/lib
-	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMTD)/usr/lib/heartbeat
+		$(IDIR_PACEMAKER_MGMT)/usr/lib
+	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMT)/usr/lib/heartbeat
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/heartbeat/mgmtd \
-		$(IDIR_PACEMAKER_MGMTD)/usr/lib/heartbeat
+		$(IDIR_PACEMAKER_MGMT)/usr/lib/heartbeat
 	
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -5,24 +5,25 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvorbisidec
 PKG_VERSION:=		1.0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_VARIANT:=		svn15687
 PKG_MD5SUM:=		cd3f62e87e38548c3e1120b1b2d3cac7
 PKG_DESCR:=		Fixed point vorbis library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool
 PKG_SITES:=		http://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec/
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}+$(PKG_VARIANT).orig.tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)+$(PKG_VARIANT)
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBVORBISIDEC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVORBISIDEC,libvorbisidec,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-pre-configure:
-	@chmod 755 ${WRKBUILD}/install-sh
+AUTOTOOL_STYLE:=	autoreconf
 
-post-install:
+libvorbisidec-install:
 	${INSTALL_DIR} ${IDIR_LIBVORBISIDEC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libvorbisidec.so* \
 		${IDIR_LIBVORBISIDEC}/usr/lib/

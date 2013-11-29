@@ -14,16 +14,16 @@ PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://www.conan.de/touchscreen/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=      !arm !avr32
+PKG_ARCH_DEPENDS:=      !arm !avr32 !m68k
 PKG_CFLINE_XF86_INPUT_EVTOUCH:=	depends on ADK_TARGET_WITH_INPUT
 
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_INPUT_EVTOUCH,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_INPUT_EVTOUCH,xf86-input-evtouch,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-input-evtouch-install:
 	${INSTALL_DIR} ${IDIR_XF86_INPUT_EVTOUCH}/usr/lib/xorg/modules/input
 	${CP} ${WRKINST}/usr/lib/xorg/modules/input/evtouch_drv.so \
 		${IDIR_XF86_INPUT_EVTOUCH}/usr/lib/xorg/modules/input/

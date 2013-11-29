@@ -13,12 +13,12 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=watchdog/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WATCHDOG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WATCHDOG,watchdog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 
-post-install:
+watchdog-install:
 	${INSTALL_DIR} ${IDIR_WATCHDOG}/sbin ${IDIR_WATCHDOG}/etc/
 	${INSTALL_DATA} ./files/watchdog.conf ${IDIR_WATCHDOG}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/watchdog \

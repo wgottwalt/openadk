@@ -14,9 +14,9 @@ PKG_SITES:=		http://vgpd.freaknet.org/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VGP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VGP,vgp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+vgp-install:
 	${INSTALL_DIR} ${IDIR_VGP}/usr/bin/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/vgpd ${IDIR_VGP}/usr/bin/
 

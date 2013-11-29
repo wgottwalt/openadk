@@ -3,11 +3,17 @@
 
 include $(TOPDIR)/rules.mk
 include ../rules.mk
+
+# eglibc does not compile with Os on sparc
+ifeq ($(ADK_LINUX_SPARC),y)
+TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
+endif
+
+# ssp not supported
+TARGET_CFLAGS_LIBC:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
+
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
-
-# ssp partially supported
-TARGET_CFLAGS_LIBC:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
 
 ifeq ($(ADK_TARGET_NO_FPU),y)
 EGLIBC_CONFOPTS+=       --without-fp

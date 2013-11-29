@@ -5,29 +5,38 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtool
 PKG_VERSION:=		2.4.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		d2f3b7d4627e69e13514a40e72a24d50
 PKG_DESCR:=		a generic dynamic object loading library
 PKG_SECTION:=		lang
+PKG_BUILDDEP:=		libtool-host
 PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
+PKG_LIBNAME:=		libltdl
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBTOOL LIBLTDL LIBLTDL_DEV
+PKG_SUBPKGS:=		LIBTOOL LIBLTDL
 PKGSC_LIBLTDL:=		libs
-PKGSD_LIBLTDL_DEV:=	libltdl header files
-PKGSC_LIBLTDL_DEV:=	devel
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTOOL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL}))
-$(eval $(call PKG_template,LIBLTDL_DEV,libltdl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL_DEV}))
+$(eval $(call HOST_template,LIBTOOL,libtool,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBTOOL,libtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBLTDL,libltdl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBLTDL},${PKG_OPTS}))
 
 ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
 endif
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-ltdl-install
+XAKE_FLAGS+=		HELP2MAN=/bin/echo
+HOST_XAKE_FLAGS+=	HELP2MAN=/bin/echo
 
 libtool-install:
 	${INSTALL_DIR} ${IDIR_LIBTOOL}/usr/bin
@@ -38,8 +47,5 @@ libltdl-install:
 	${INSTALL_DIR} ${IDIR_LIBLTDL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libltdl.so* ${IDIR_LIBLTDL}/usr/lib/
 
-libltdl-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBLTDL_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBLTDL_DEV}/usr/include
-
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

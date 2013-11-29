@@ -14,7 +14,7 @@ PKG_SITES:=		http://efault.net/npat/hacks/picocom/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PICOCOM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PICOCOM,picocom,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual

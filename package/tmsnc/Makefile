@@ -14,13 +14,13 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmsnc/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TMSNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TMSNC,tmsnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-libiconv-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}
 
-post-install:
+tmsnc-install:
 	${INSTALL_DIR} ${IDIR_TMSNC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/tmsnc ${IDIR_TMSNC}/usr/bin
 

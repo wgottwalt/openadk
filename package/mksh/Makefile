@@ -20,7 +20,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MKSH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1

@@ -1,0 +1,16 @@
+--- bridge-utils-1.5.orig/libbridge/Makefile.in	2011-03-29 02:52:54.000000000 +0200
++++ bridge-utils-1.5/libbridge/Makefile.in	2013-11-03 15:05:14.000000000 +0100
+@@ -1,11 +1,11 @@
+ 
+ KERNEL_HEADERS=-I@KERNEL_HEADERS@
+ 
+-AR=ar
++AR=@AR@
+ RANLIB=@RANLIB@
+ 
+ CC=@CC@
+-CFLAGS = -Wall -g $(KERNEL_HEADERS)
++CFLAGS = -Wall @CFLAGS@ $(KERNEL_HEADERS)
+ 
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@

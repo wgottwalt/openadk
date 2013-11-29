@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TRACEROUTE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TRACEROUTE,traceroute,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 
@@ -24,7 +24,7 @@ MAKE_FLAGS+=		CC="${TARGET_CC}" \
 			CFLAGS="${TARGET_CFLAGS}" \
 			LDFLAGS="${TARGET_LDFLAGS} -L${WRKSRC}/libsupp"
 
-post-install:
+traceroute-install:
 	$(INSTALL_DIR) $(IDIR_TRACEROUTE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/traceroute \
 		$(IDIR_TRACEROUTE)/usr/bin/

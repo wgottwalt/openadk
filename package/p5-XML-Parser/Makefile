@@ -16,7 +16,7 @@ PKG_SITES:=		http://search.cpan.org/CPAN/authors/id/C/CH/CHORNY/
 DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/XML-Parser-${PKG_VERSION}
 
-PKG_CFLINE_P5_XML_PARSER:=depends on ADK_NATIVE
+PKG_ARCH_DEPENDS:=	native
 
 include $(TOPDIR)/mk/package.mk
 
@@ -30,7 +30,7 @@ include $(TOPDIR)/mk/perl.mk
 pre-build:
 	(cd ${WRKSRC} && perl Makefile.PL EXPATLIBPATH=${STAGING_TARGET_DIR}/usr/lib EXPATINCPATH=${STAGING_TARGET_DIR}/usr/include)
 
-post-install:
+p5-xml-parser-install:
 	$(INSTALL_DIR) $(IDIR_P5_XML_PARSER)$(PERL_SITEDIR)
 	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
 		$(IDIR_P5_XML_PARSER)$(PERL_SITEDIR)

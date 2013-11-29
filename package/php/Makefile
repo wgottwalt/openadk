@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.4.19
+PKG_VERSION:=		5.4.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9e7ad2494ba3de519328f74267de8342
+PKG_MD5SUM:=		cc8da0d18683e3a83b332f264af7ca83
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread librt libgcc
@@ -21,6 +21,7 @@ PKGSD_PHP_CLI:=		PHP CLI
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
 PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE 
 PKG_FLAVOURS_PHP+=	MOD_SOCKETS MOD_XML MOD_SIMPLEXML MOD_ZLIB MOD_JSON
+PKG_FLAVOURS_PHP+=	MOD_LDAP
 
 PKGFD_MOD_BZ2:=		Bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
@@ -36,10 +37,9 @@ PKGFD_MOD_GMP:=		GMP support
 PKGFB_MOD_GMP:=		gmp
 PKGFS_MOD_GMP:=		libgmp
 PKGFD_MOD_JSON:=	JSON support
-# segfaults php -m
-#PKGFD_MOD_LDAP:=	LDAP support
-#PKGFB_MOD_LDAP:=	openldap
-#PKGFS_MOD_LDAP:=	libopenldap
+PKGFD_MOD_LDAP:=	LDAP support
+PKGFB_MOD_LDAP:=	openldap
+PKGFS_MOD_LDAP:=	libopenldap
 PKGFD_MOD_MYSQL:=	MySQL support
 PKGFS_MOD_MYSQL:=	libmysqlclient
 PKGFB_MOD_MYSQL:=	mysql
@@ -148,12 +148,12 @@ PKG_CONFIGURE_OPTS+=	--enable-json=shared,"$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--disable-json
 endif
-#ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
-#PKG_CONFIGURE_OPTS+=	--with-ldap=shared,"$(STAGING_TARGET_DIR)/usr" \
-#			--with-ldap-sasl="$(STAGING_TARGET_DIR)/usr"
-#else
+ifneq ($(ADK_PACKAGE_PHP_MOD_LDAP),)
+PKG_CONFIGURE_OPTS+=	--with-ldap=shared,"$(STAGING_TARGET_DIR)/usr" \
+			--with-ldap-sasl="$(STAGING_TARGET_DIR)/usr"
+else
 PKG_CONFIGURE_OPTS+=	--without-ldap
-#endif
+endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
 PKG_CONFIGURE_OPTS+=	--with-mysql=shared,"$(STAGING_TARGET_DIR)/usr"
 else
@@ -216,7 +216,7 @@ $(eval $(call PKG_template,PHP_MOD_FTP,php-mod-ftp,$(PKG_VERSION)-${PKG_RELEASE}
 $(eval $(call PKG_template,PHP_MOD_GD,php-mod-gd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_GMP,php-mod-gmp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_JSON,php-mod-json,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-#$(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -234,7 +234,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_FTP,ftp))
 $(eval $(call PKG_mod_template,PHP_MOD_GD,gd))
 $(eval $(call PKG_mod_template,PHP_MOD_GMP,gmp))
 $(eval $(call PKG_mod_template,PHP_MOD_JSON,json))
-#$(eval $(call PKG_mod_template,PHP_MOD_LDAP,ldap))
+$(eval $(call PKG_mod_template,PHP_MOD_LDAP,ldap))
 $(eval $(call PKG_mod_template,PHP_MOD_MYSQL,mysql))
 $(eval $(call PKG_mod_template,PHP_MOD_OPENSSL,openssl))
 $(eval $(call PKG_mod_template,PHP_MOD_PGSQL,pgsql))

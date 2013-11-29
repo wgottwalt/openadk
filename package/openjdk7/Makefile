@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
-PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv
+PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
+PKG_BUILDDEP+=		alsa-lib xproto jpeg zlib giflib libpng freetype cups
+PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
@@ -18,8 +19,8 @@ PKG_SITES:=		http://icedtea.classpath.org/download/source/
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.gz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-PKG_HOST_DEPENDS:=	!darwin !cygwin !openbsd !netbsd !freebsd
-PKG_ARCH_DEPENDS:=	arm mips x86 x86_64
+PKG_HOST_DEPENDS:=	linux
+PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
 PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx !lemote-yeelong
 
 PKG_SUBPKGS:=		OPENJDK7
@@ -30,6 +31,7 @@ PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
 
 include $(TOPDIR)/mk/package.mk
+include $(TOPDIR)/mk/qemu.mk
 
 $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,7 +43,7 @@ TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
 
-JDKARCH:=		$(ARCH)
+JDKARCH:=		$(CPU_ARCH)
 ifeq ($(ARCH),x86)
 JDKARCH:=		i386
 endif
@@ -85,7 +87,7 @@ CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
 CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
 CONFIGURE_ARGS+=	--disable-bootstrap
 
-CONFIGURE_ENV+=		PATH=$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}:${STAGING_TARGET_DIR}/usr/bin
+CONFIGURE_ENV+=		PATH="$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}"
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ALT_OPENWIN_HOME=$(STAGING_DIR)/usr/ \
 			ALT_CUPS_HEADERS_PATH=$(STAGING_DIR)/usr/include/ \
@@ -97,8 +99,11 @@ MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 ALL_TARGET:=		icedtea
 
 openjdk7-install:
-	$(INSTALL_DIR) $(IDIR_OPENJDK7)/usr
-	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/* $(IDIR_OPENJDK7)/usr 
-	rm -rf $(IDIR_OPENJDK7)/usr/man
+	$(INSTALL_DIR) $(IDIR_OPENJDK7)/usr/lib/jvm/jre
+	$(INSTALL_DIR) $(IDIR_OPENJDK7)/usr/bin
+	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/bin $(IDIR_OPENJDK7)/usr/lib/jvm/jre
+	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/lib $(IDIR_OPENJDK7)/usr/lib/jvm/jre
+	(cd $(IDIR_OPENJDK7)/usr/bin && ln -sf ../lib/jvm/jre/bin/java .)
+	(cd $(IDIR_OPENJDK7)/usr/lib/jvm/jre/lib/$(JDKARCH) && ln -sf server/libjvm.so .)
 
 include ${TOPDIR}/mk/pkg-bottom.mk

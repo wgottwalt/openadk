@@ -24,7 +24,7 @@ PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OPENSWAN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENSWAN,openswan,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
@@ -36,7 +36,7 @@ XAKE_FLAGS+=		KERNELSRC="${LINUX_DIR}" \
 			BUILDENV="linux"
 ALL_TARGET:=		programs
 
-post-install:
+openswan-install:
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/lib/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/usr/libexec/ipsec
 	${INSTALL_DIR} ${IDIR_OPENSWAN}/etc/ipsec.d

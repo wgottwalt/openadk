@@ -15,12 +15,12 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RDATE,rdate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 MAKE_FILE=		GNUmakefile
 
-post-install:
+rdate-install:
 	${INSTALL_DIR} ${IDIR_RDATE}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/rdate ${IDIR_RDATE}/usr/sbin
 

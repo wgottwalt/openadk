@@ -22,7 +22,7 @@ PKG_DFLT_GRUB_BIN:=	y if !ADK_TOOLCHAIN_ONLY && !ADK_TOOLCHAIN_ARCHIVE
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GRUB_BIN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GRUB_BIN,grub-bin,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

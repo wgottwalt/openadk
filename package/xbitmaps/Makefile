@@ -10,16 +10,10 @@ PKG_MD5SUM:=		288bbe310db67280a9e2e5ebc5602595
 PKG_DESCR:=		prerequiste for xsetroot
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XBITMAPS,xbitmaps,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_XBITMAPS}/usr/include
-	${CP} ${WRKINST}/usr/include/X11 ${IDIR_XBITMAPS}/usr/include
-	${INSTALL_DIR} ${IDIR_XBITMAPS}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/xbitmaps.pc \
-		${IDIR_XBITMAPS}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

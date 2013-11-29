@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://llvm.org/
 PKG_SITES:=		http://llvm.org/releases/3.3/
 
-PKG_CFLINE_LLVM:=	depends on ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 PKG_HOST_DEPENDS:=	!darwin
 PKG_ARCH_DEPENDS:=	mips x86 x86_64 arm
 
@@ -44,8 +44,5 @@ do-install:
 	env GCC_HONOUR_COPTS=s ${MAKE} -C ${WRKBUILD}/BuildTools DESTDIR=$(WRKINST) install 
 	cp ${WRKBUILD}/BuildTools/BuildTools/Release+Asserts/bin/llvm-config \
 		$(STAGING_TARGET_DIR)/usr/bin
-
-llvm-install:
-	$(INSTALL_DIR) $(IDIR_LLVM)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

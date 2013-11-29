@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DOSFSTOOLS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		PREFIX="" OPTFLAGS="-D_FILE_OFFSET_BITS=64"

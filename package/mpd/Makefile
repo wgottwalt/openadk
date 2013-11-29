@@ -9,8 +9,8 @@ PKG_RELEASE:=		4
 PKG_MD5SUM:=		d0da6a6a1d9cf1e8710b6082f6ef7849
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		glib libstdcxx libgcc
-PKG_FDEPENDS:=		glib libstdcxx
+PKG_DEPENDS:=		glib libstdcxx libgcc libiconv
+PKG_FDEPENDS:=		glib libstdcxx libgcc libiconv
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.17/
@@ -107,7 +107,7 @@ PKGFD_WITH_HTTPD:=	enable HTTP output
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPD,mpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-std=gnu99

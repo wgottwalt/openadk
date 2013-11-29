@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sdl-image
 PKG_VERSION:=		1.2.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
@@ -14,20 +14,15 @@ PKG_BUILDDEP:=		libpng libtiff jpeg sdl
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
 PKG_NEED_CXX:=		1
-
-PKG_ARCH_DEPENDS:=      !m68k
-
-PKG_SUBPKGS:=		LIBSDL_IMAGE LIBSDL_IMAGE_DEV
-PKGSD_LIBSDL_IMAGE_DEV:=development files for sdlimage
-PKGSC_LIBSDL_IMAGE_DEV:=devel
+PKG_LIBNAME:=		libsdl-image
+PKG_OPTS:=		dev
 
 DISTFILES:=             SDL_image-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSDL_IMAGE_DEV,libsdl-image-dev,$(PKG_VERSION)-${PKG_RELEASE},libsdl-image,${PKGSD_LIBSDL_IMAGE_DEV},${PKGSC_LIBSDL_IMAGE_DEV}))
+$(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
@@ -37,13 +32,5 @@ CONFIGURE_ARGS+=	--enable-png \
 libsdl-image-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL_IMAGE)/usr/lib
-
-libsdl-image-dev-install:
-	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
-	$(CP) ${WRKINST}/usr/include/SDL/*.h \
-		$(IDIR_LIBSDL_IMAGE_DEV)/usr/include/SDL
-	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE_DEV)/usr/lib/pkgconfig
-	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
-		$(IDIR_LIBSDL_IMAGE_DEV)/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

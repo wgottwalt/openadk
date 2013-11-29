@@ -37,7 +37,7 @@ esac
 
 test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	make package=mksh fetch || exit 1
-	df=mksh-R40f.cpio.gz
+	df=mksh-R48b.tgz
 	rm -rf build_mksh
 	mkdir -p build_mksh
 	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
@@ -297,7 +297,7 @@ fi
 print "Creating ext2fs filesystem image..."
 cd "$T"
 f=0
-genext2fs -U -b $((partfssz)) -d src fsimg || f=1
+genext2fs -U -N 32768 -b $((partfssz)) -d src fsimg || f=1
 if (( !f )); then
 	# use bc(1): this may be over the shell’s 32-bit arithmetics
 	wantsz=$($bc <<<"$((partfssz))*1024")

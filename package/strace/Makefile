@@ -5,18 +5,20 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
 PKG_VERSION:=		4.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
 PKG_DESCR:=		System call trace program
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libgcc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
+PKG_ARCH_DEPENDS:=	!avr32
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,STRACE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,STRACE,strace,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=		-static

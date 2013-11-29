@@ -21,13 +21,13 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,RXVT_UNICODE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RXVT_UNICODE,rxvt-unicode,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-perl \
 			--disable-utmp \
 			--disable-afterimage
 
-post-install:
+rxvt-unicode-install:
 	$(INSTALL_DIR) $(IDIR_RXVT_UNICODE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/urxvt \
 		$(IDIR_RXVT_UNICODE)/usr/bin

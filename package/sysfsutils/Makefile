@@ -5,32 +5,24 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sysfsutils
 PKG_VERSION:=		2.1.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		14e7dcd0436d2f49aa403f67e1ef7ddc
 PKG_DESCR:=		utilites built upon sysfs
 PKG_SECTION:=		utils
 PKG_URL:=		http://linux-diag.sourceforge.net/Sysfsutils.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-diag/sysfsutils/2.1.0/}
-
-PKG_SUBPKGS:=		SYSFSUTILS SYSFSUTILS_DEV
-PKGSC_SYSFSUTILS_DEV:=	devel
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SYSFSUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SYSFSUTILS_DEV,sysfsutils-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_SYSFSUTILS_DEV}))
+$(eval $(call PKG_template,SYSFSUTILS,sysfsutils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+sysfsutils-install:
 	$(INSTALL_DIR) $(IDIR_SYSFSUTILS)/usr/bin
 	$(INSTALL_DIR) $(IDIR_SYSFSUTILS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libsysfs.so* \
 		$(IDIR_SYSFSUTILS)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/systool \
 		$(IDIR_SYSFSUTILS)/usr/bin
-
-sysfsutils-dev-install:
-	$(INSTALL_DIR) $(IDIR_SYSFSUTILS_DEV)/usr/include
-	$(CP) $(WRKINST)/usr/include/* \
-		$(IDIR_SYSFSUTILS_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

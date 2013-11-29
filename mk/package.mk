@@ -10,7 +10,14 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
+AUTOTOOL_ENV+=		AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
+			PATH='${AUTOTOOL_PATH}'
+
 CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \
@@ -98,11 +105,12 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 # 4.) dependencies to other packages, $(PKG_DEPENDS)
 # 5.) description for the package, $(PKG_DESCR)
 # 6.) section of the package, $(PKG_SECTION)  
-# 7.) special package options
-#     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/target/scripts
+# 7.) special package options $(PKG_OPTS)
+#     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/scripts
 #		  (needed for example for autoconf/automake)
 #     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
 #                 cleaning (needed for toolchain packages like glibc/eglibc)
+#     dev -> create a development subpackage with headers and pkg-config files
 # should be package format independent and modular in the future
 define PKG_template
 ALL_PKGOPTS+=	$(1)
@@ -111,7 +119,11 @@ PKGDEPS_$(1)=	$(4)
 PKGDESC_$(1)=	$(5)
 PKGSECT_$(1)=	$(6)
 IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DEV=	$(PACKAGE_DIR)/$(2)-dev_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DBG=	$(PACKAGE_DIR)/$(2)-dbg_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
 IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
+IDIR_$(1)_DEV=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dev
+IDIR_$(1)_DBG=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dbg
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
@@ -119,20 +131,37 @@ ALL_POSTINST+=	$(2)-install
 $(2)-install:
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
+INFO_$(1)_DEV=	$(PKG_STATE_DIR)/info/$(2)-dev.list
+INFO_$(1)_DBG=	$(PKG_STATE_DIR)/info/$(2)-dbg.list
 
 ifeq ($(ADK_PACKAGE_$(1)),y)
+ifeq ($(ADK_PACKAGE_$(1)_DBG),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG)
+ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG) $$(INFO_$(1)_DEV)
+else
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG)
+endif
+else
+ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
+install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DEV)
+else
 install-targets: $$(INFO_$(1))
+endif
+endif
 endif
 
 IDEPEND_$(1):=	$$(strip $(4))
 
 _ALL_CONTROLS+=	$$(IDIR_$(1))/CONTROL/control
 ICONTROL_$(1)?=	$(WRKDIR)/.$(2).control
+ICONTROL_$(1)_DEV?= $(WRKDIR)/.$(2)-dev.control
+ICONTROL_$(1)_DBG?= $(WRKDIR)/.$(2)-dbg.control
 $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
-	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
 		deps=; \
@@ -151,6 +180,20 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+ifneq ($(ADK_DEBUG),y)
+	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
+	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control
+	@echo "Description: debugging symbols for $(2)" >> $(WRKDIR)/.$(2)-dbg.control
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DBG} $${ICONTROL_$(1)_DBG} $(3) ${CPU_ARCH}
+	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DBG}/CONTROL/control
+endif
+ifneq (,$(filter dev,$(7)))
+	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
+	@echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
+	@echo "Description: development files for $(2)" >> $(WRKDIR)/.$(2)-dev.control
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${CPU_ARCH}
+	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DEV}/CONTROL/control
+endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
@@ -222,8 +265,16 @@ ifeq (,$(filter noscripts,$(7)))
 endif
 ifeq (,$(filter libmix,$(7)))
 ifeq (,$(filter libonly,$(7)))
+ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+ifneq ($(ADK_DEBUG),y)
+	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
+endif
+endif
+endif
+ifneq (,$(filter dev,$(7)))
+	$${PKG_BUILD} $${IDIR_$(1)_DEV} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 
 clean-targets: clean-dev-$(1)
@@ -237,10 +288,25 @@ ifeq (,$(filter noremove,$(7)))
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
 	fi
 endif
-	rm -f '$${STAGING_PKG_DIR}/$(1)'
+	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 
 $$(INFO_$(1)): $$(IPKG_$(1))
 	$(PKG_INSTALL) $$(IPKG_$(1))
+
+$$(INFO_$(1)_DBG): $$(IPKG_$(1)_DBG)
+	$(PKG_INSTALL) $$(IPKG_$(1)_DBG)
+
+ifneq ($(1),UCLIBC)
+ifneq ($(1),EGLIBC)
+ifneq ($(1),GLIBC)
+ifneq ($(1),MUSL)
+$$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
+	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
+endif
+endif
+endif
+endif
+
 endef
 
 install-targets:

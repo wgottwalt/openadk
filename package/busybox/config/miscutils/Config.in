@@ -15,9 +15,10 @@ config BUSYBOX_CONSPY
 	  example:  conspy NUM      shared access to console num
 	  or        conspy -nd NUM  screenshot of console num
 	  or        conspy -cs NUM  poor man's GNU screen like
+
 config BUSYBOX_LESS
 	bool "less"
-	depends on !ADK_PACKAGE_LESS
+	depends on !BUSYBOX_DISABLE_LESS
 	default y
 	help
 	  'less' is a pager, meaning that it displays text files. It possesses
@@ -508,7 +509,7 @@ endchoice
 config BUSYBOX_HDPARM
 	bool "hdparm"
 	default n
-	depends on !ADK_PACKAGE_HDPARM
+	depends on !BUSYBOX_DISABLE_HDPARM
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Get/Set hard drive parameters. Primarily intended for ATA
@@ -747,7 +748,7 @@ config BUSYBOX_WALL
 config BUSYBOX_WATCHDOG
 	bool "watchdog"
 	default n
-	depends on !ADK_PACKAGE_WATCHDOG
+	depends on !BUSYBOX_DISABLE_WATCHDOG
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The watchdog utility is used with hardware or software watchdog

@@ -4,7 +4,7 @@ config ADK_COMPILE_BUSYBOX
 	default n
 
 config ADK_PACKAGE_BUSYBOX
-	prompt "busybox................ Core utilities for embedded systems"
+	prompt "busybox.............. core utilities for embedded systems"
 	boolean
 	select ADK_COMPILE_BUSYBOX
 	default y if !ADK_TOOLCHAIN_ONLY
@@ -21,3 +21,173 @@ endmenu
 config ADK_PACKAGE_UDHCPD
 	boolean
 	default BUSYBOX_APP_UDHCPD
+
+# disable busybox applets, when full programs are choosen
+config BUSYBOX_DISABLE_MOUNT
+	boolean
+	default y if ADK_PACKAGE_MOUNT
+	depends on ADK_PACKAGE_MOUNT
+	default n
+
+config BUSYBOX_DISABLE_UMOUNT
+	boolean
+	default y if ADK_PACKAGE_MOUNT
+	depends on ADK_PACKAGE_MOUNT
+	default n
+
+config BUSYBOX_DISABLE_TAR
+	boolean
+	default y if ADK_PACKAGE_TAR
+	depends on ADK_PACKAGE_TAR
+	default n
+
+config BUSYBOX_DISABLE_RPM
+	boolean
+	default y if ADK_PACKAGE_RPM
+	depends on ADK_PACKAGE_RPM
+	default n
+
+config BUSYBOX_DISABLE_BZIP2
+	boolean
+	default y if ADK_PACKAGE_BZIP2
+	depends on ADK_PACKAGE_BZIP2
+	default n
+
+config BUSYBOX_DISABLE_IP
+	boolean
+	default y if ADK_PACKAGE_IP
+	depends on ADK_PACKAGE_IP
+	default n
+
+config BUSYBOX_DISABLE_PATCH
+	boolean
+	default y if ADK_PACKAGE_PATCH
+	depends on ADK_PACKAGE_PATCH
+	default n
+
+config BUSYBOX_DISABLE_DIFF
+	boolean
+	default y if ADK_PACKAGE_DIFFUTILS
+	depends on ADK_PACKAGE_DIFFUTILS
+	default n
+
+config BUSYBOX_DISABLE_ED
+	boolean
+	default y if ADK_PACKAGE_ED
+	depends on ADK_PACKAGE_ED
+	default n
+
+config BUSYBOX_DISABLE_SED
+	boolean
+	default y if ADK_PACKAGE_SED
+	depends on ADK_PACKAGE_SED
+	default n
+
+config BUSYBOX_DISABLE_LESS
+	boolean
+	default y if ADK_PACKAGE_LESS
+	depends on ADK_PACKAGE_LESS
+	default n
+
+config BUSYBOX_DISABLE_HDPARM
+	boolean
+	default y if ADK_PACKAGE_HDPARM
+	depends on ADK_PACKAGE_HDPARM
+	default n
+
+config BUSYBOX_DISABLE_WATCHDOG
+	boolean
+	default y if ADK_PACKAGE_WATCHDOG
+	depends on ADK_PACKAGE_WATCHDOG
+	default n
+
+config BUSYBOX_DISABLE_PAM
+	boolean
+	default y if ADK_PACKAGE_PAM
+	depends on ADK_PACKAGE_PAM
+	default n
+
+config BUSYBOX_DISABLE_BRCTL
+	boolean
+	default y if ADK_PACKAGE_BRIDGE_UTILS
+	depends on ADK_PACKAGE_BRIDGE_UTILS
+	default n
+
+config BUSYBOX_DISABLE_ETHER_WAKE
+	boolean
+	default y if ADK_PACKAGE_ETHER_WAKE
+	depends on ADK_PACKAGE_ETHER_WAKE
+	default n
+
+config BUSYBOX_DISABLE_NTPD
+	boolean
+	default y if ADK_PACKAGE_OPENNTPD
+	depends on ADK_PACKAGE_OPENNTPD
+	default n
+
+config BUSYBOX_DISABLE_WGET
+	boolean
+	default y if ADK_PACKAGE_WGET
+	depends on ADK_PACKAGE_WGET
+	default n
+
+config BUSYBOX_DISABLE_AR
+	boolean
+	default y if ADK_PACKAGE_BINUTILS
+	depends on ADK_PACKAGE_BINUTILS
+	default n
+
+config BUSYBOX_DISABLE_CPIO
+	boolean
+	default y if ADK_PACKAGE_CPIO
+	depends on ADK_PACKAGE_CPIO
+	default n
+
+config BUSYBOX_DISABLE_XZ
+	boolean
+	default y if ADK_PACKAGE_XZ
+	depends on ADK_PACKAGE_XZ
+	default n
+
+config BUSYBOX_DISABLE_UNXZ
+	boolean
+	default y if ADK_PACKAGE_XZ
+	depends on ADK_PACKAGE_XZ
+	default n
+
+config BUSYBOX_DISABLE_UNZIP
+	boolean
+	default y if ADK_PACKAGE_UNZIP
+	depends on ADK_PACKAGE_UNZIP
+	default n
+
+config BUSYBOX_DISABLE_FBSET
+	boolean
+	default y if ADK_PACKAGE_FBSET
+	depends on ADK_PACKAGE_FBSET
+	default n
+
+config BUSYBOX_DISABLE_LSPCI
+	boolean
+	default y if ADK_PACKAGE_PCIUTILS
+	depends on ADK_PACKAGE_PCIUTILS
+	default n
+
+config BUSYBOX_DISABLE_LSUSB
+	boolean
+	default y if ADK_PACKAGE_LSUSB
+	depends on ADK_PACKAGE_LSUSB
+	default n
+
+config BUSYBOX_DISABLE_GREP
+	boolean
+	default y if ADK_PACKAGE_GREP
+	depends on ADK_PACKAGE_GREP
+	default n
+
+config BUSYBOX_DISABLE_FIND
+	boolean
+	default y if ADK_PACKAGE_FINDUTILS
+	depends on ADK_PACKAGE_FINDUTILS
+	default n
+

@@ -5,24 +5,25 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libosip2
 PKG_VERSION:=		3.3.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		81493bb4d4ae6d55b71a0d4369339125
 PKG_DESCR:=		a SIP (Session Initiation Protocol) implementation
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.gnu.org/software/osip
 PKG_SITES:=		${MASTER_SITE_GNU:=osip/}
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOSIP2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBOSIP2,libosip2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-trace \
 			--enable-pthread \
 			--enable-semaphore \
 			--enable-ntimer
 
-post-install:
+libosip2-install:
 	${INSTALL_DIR} ${IDIR_LIBOSIP2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libosip{,parser}2.so* \
 		${IDIR_LIBOSIP2}/usr/lib/

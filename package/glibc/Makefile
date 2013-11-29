@@ -8,6 +8,7 @@ TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
+PKG_NAME:=		glibc
 PKG_DESCR:=		GNU C library
 PKG_SECTION:=		base
 PKG_OPTS:=		noremove
@@ -29,16 +30,6 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, glibc is already build in toolchain directory
 do-install:
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-	for abi in $(TABI); do \
-		${INSTALL_DIR} $(IDIR_GLIBC)/lib$${abi/*:/} $(IDIR_GLIBC)/usr/lib$${abi/*:/} ; \
-		$(CP) $(STAGING_TARGET_DIR)/lib/ld* $(IDIR_GLIBC)/lib$${abi/*:/} ; \
-		-for file in libc libcrypt libdl libm libresolv libutil libnsl libnss_dns libnss_files; do \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file.so* $(IDIR_GLIBC)/lib$${abi/*:/}; \
-			$(CP) $(STAGING_TARGET_DIR)-$${abi/*:/}/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/lib$${abi/*:/}; \
-		done ; \
-	done
-else
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_compat libnss_dns libnss_files; do \
@@ -47,10 +38,6 @@ else
 	done
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
-ifeq ($(ADK_LOCALES),y)
-	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_GLIBC)/usr/bin
-endif
-endif
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_GLIBC}/etc
@@ -65,13 +52,25 @@ glibc-dev-install:
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 ifeq ($(ADK_TARGET_ABI_O32),y)
-	$(SED) "s#@@ELFFORMAT@@#elf32-tradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf32-tradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+else
+	$(SED) "s#@@ELFTARGET@@#elf32-tradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+endif
 endif
 ifeq ($(ADK_TARGET_ABI_N32),y)
-	$(SED) "s#@@ELFFORMAT@@#elf32-ntradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf32-ntradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+else
+	$(SED) "s#@@ELFTARGET@@#elf32-ntradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+endif
 endif
 ifeq ($(ADK_TARGET_ABI_N64),y)
-	$(SED) "s#@@ELFFORMAT@@#elf64-tradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf64-tradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+else
+	$(SED) "s#@@ELFTARGET@@#elf64-tradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+endif
 endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib

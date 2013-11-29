@@ -59,7 +59,7 @@ ifeq ($(ADK_NATIVE),y)
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi
 else
-	if [ -f ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ];then \
+	@if [ -f ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ];then \
 		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \

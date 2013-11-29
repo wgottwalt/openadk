@@ -17,7 +17,7 @@ PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VTUN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VTUN,vtun,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 INSTALL_STYLE:=		manual
 

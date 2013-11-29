@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.xinetd.org/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XINETD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XINETD,xinetd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-libwrap \
 			--with-loadavg
@@ -22,7 +22,7 @@ ALL_TARGET:=		build
 TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 
-post-install:
+xinetd-install:
 	${INSTALL_DIR} ${IDIR_XINETD}/etc/xinetd.d ${IDIR_XINETD}/usr/sbin
 	${INSTALL_DATA} ./files/xinetd.conf ${IDIR_XINETD}/etc/xinetd.conf
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/xinetd ${IDIR_XINETD}/usr/sbin/

@@ -16,14 +16,14 @@ PKG_SITES:=		http://rsync.samba.org/ftp/rsync/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RSYNC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RSYNC,rsync,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=		-static
 TARGET_LDFLAGS+=	-static
 endif
 
-post-install:
+rsync-install:
 	${INSTALL_DIR} ${IDIR_RSYNC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/rsync ${IDIR_RSYNC}/usr/bin
 

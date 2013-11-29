@@ -5,15 +5,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline
+PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline bison-host
 PKG_DEPENDS:=		libheimdal libncurses libcom-err libreadline libopenssl
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
+PKG_LIBNAME:=		libheimdal
+PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		HEIMDAL_SERVER LIBHEIMDAL
 PKGSD_LIBHEIMDAL:=	Kerberos 5 libraries
@@ -30,10 +32,14 @@ PKGCD_WITH_BDB:=		use Berkeley DB as database backend
 PKGCS_WITH_BDB:=		libdb
 PKGCB_WITH_BDB:=		db
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL}))
+$(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
@@ -100,7 +106,7 @@ post-extract:
 	${MAKE} -C ${WRKBUILD}/lib/roken clean
 	${MAKE} -C ${WRKBUILD} clean
 
-post-install:
+heimdal-server-install:
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
 	${INSTALL_DIR} ${IDIR_HEIMDAL_SERVER}/etc/openldap/schema
 	${INSTALL_DATA} ${WRKBUILD}/lib/hdb/hdb.schema \
@@ -129,7 +135,8 @@ endif
 		${IDIR_HEIMDAL_SERVER}/usr/sbin/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/kadmin \
 		${IDIR_HEIMDAL_SERVER}/usr/sbin/
-	# heimdal libs
+
+libheimdal-install:
 	${INSTALL_DIR} ${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 ifeq ($(ADK_COMPILE_HEIMDAL_WITH_PKINIT),y)
 	${CP} ${WRKINST}/usr/lib/heimdal/libhx509.so* \

@@ -12,14 +12,14 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		ftp://ftp.cpan.org/pub/CPAN/src/5.0/
 
-PKG_ARCH_DEPENDS:=	!avr32
+PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 DISTFILES:=		perl-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/perl-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MICROPERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MICROPERL,microperl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=screen/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SCREEN,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SCREEN,screen,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		$(foreach flag,rename fchmod fchown strerror lstat _exit utimes vsnprintf getcwd setlocale strftime,ac_cv_func_${flag}=yes)
 CONFIGURE_ARGS+=	--with-sys-screenrc=/etc/screenrc
@@ -29,7 +29,7 @@ pre-build:
 	echo '#undef UTHOST' >> ${WRKBUILD}/config.h
 	echo '#undef BUGGYGETLOGIN' >> ${WRKBUILD}/config.h
 
-post-install:
+screen-install:
 	${INSTALL_DIR} ${IDIR_SCREEN}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/screen ${IDIR_SCREEN}/usr/bin/
 

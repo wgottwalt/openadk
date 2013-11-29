@@ -157,7 +157,7 @@ config BUSYBOX_ARPING
 
 config BUSYBOX_BRCTL
 	bool "brctl"
-	depends on !ADK_PACKAGE_BRIDGE_UTILS
+	depends on !BUSYBOX_DISABLE_BRCTL
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -191,7 +191,7 @@ config BUSYBOX_DNSD
 
 config BUSYBOX_ETHER_WAKE
 	bool "ether-wake"
-	depends on !ADK_PACKAGE_ETHER_WAKE
+	depends on !BUSYBOX_DISABLE_ETHER_WAKE
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -601,7 +601,7 @@ config BUSYBOX_FEATURE_INETD_RPC
 
 config BUSYBOX_IP
 	bool "ip"
-	depends on !ADK_PACKAGE_IP
+	depends on !BUSYBOX_DISABLE_IP
 	default y
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -747,7 +747,7 @@ config BUSYBOX_NSLOOKUP
 
 config BUSYBOX_NTPD
 	bool "ntpd"
-	depends on !ADK_PACKAGE_OPENNTPD
+	depends on !BUSYBOX_DISABLE_NTPD
 	default y
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -1040,7 +1040,7 @@ config BUSYBOX_VCONFIG
 
 config BUSYBOX_WGET
 	bool "wget"
-	depends on !ADK_PACKAGE_WGET
+	depends on !BUSYBOX_DISABLE_WGET
 	default y
 	help
 	  wget is a utility for non-interactive download of files from HTTP,

@@ -23,7 +23,7 @@ PKGFB_WITH_IMLIB2:=	imlib2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FLUXBOX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FLUXBOX,fluxbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_PACKAGE_FLUXBOX_WITH_IMLIB2},y)
 CONFIGURE_ARGS+=	--enable-imlib2
@@ -31,7 +31,7 @@ else
 CONFIGURE_ARGS+=	--disable-imlib2
 endif
 
-post-install:
+fluxbox-install:
 	$(INSTALL_DIR) $(IDIR_FLUXBOX)/usr/{bin,share}
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
 		$(IDIR_FLUXBOX)/usr/bin

@@ -1,7 +1,6 @@
 config ADK_PKG_MPDBOX
 	bool "Choose packages for MPDBox system"
 	default n
-	select BUSYBOX_NTPD
 	select ADK_PACKAGE_LIBMPDCLIENT
 	select ADK_PACKAGE_MPC
 	select ADK_PACKAGE_MPD
@@ -36,6 +35,7 @@ config ADK_PKG_MPDBOX
 	select ADK_PACKAGE_PHP
 	select ADK_PACKAGE_PHP_MOD_SESSION
 	select ADK_PACKAGE_PHP_MOD_JSON
+	select ADK_PACKAGE_PHP_MOD_CURL
 	select ADK_PACKAGE_PHP_FASTCGI
 	select ADK_PACKAGE_SCREEN
 	select ADK_PACKAGE_VIM

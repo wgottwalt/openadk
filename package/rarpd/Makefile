@@ -15,13 +15,13 @@ PKG_SITES:=		ftp://ftp.dementia.org/pub/net-tools/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,RARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,RARPD,rarpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-libnet="${STAGING_TARGET_DIR}/usr" \
 			--with-pcap="${STAGING_TARGET_DIR}/usr"
 TARGET_CPPFLAGS+=	-DNEW_LIBNET_INTERFACE
 
-post-install:
+rarpd-install:
 	${INSTALL_DIR} ${IDIR_RARPD}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/rarpd ${IDIR_RARPD}/usr/sbin/
 

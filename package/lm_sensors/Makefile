@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lm_sensors
 PKG_VERSION:=		3.3.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8c0eebda8524fc87da1393b4564d279b
 PKG_DESCR:=		linux hw sensor toolset
 PKG_SECTION:=		misc
@@ -17,19 +17,19 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_ARCH_DEPENDS:=	x86 x86_64
 
-PKG_SUBPKGS:=		LM_SENSORS LM_SENSORS_DEV LM_SENSORS_DETECT
-PKGSD_LM_SENSORS_DEV:=		lm_sensors header files
-PKGSC_LM_SENSORS_DEV:=		devel
+PKG_SUBPKGS:=		LM_SENSORS LM_SENSORS_DETECT
 PKGSD_LM_SENSORS_DETECT:=	lm_sensors perl scripts (e.g. sensors-detect)
 PKGSC_LM_SENSORS_DETECT:=	misc
 PKGSS_LM_SENSORS_DETECT:=	perl
 PKGSB_LM_SENSORS_DETECT:=	perl
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LM_SENSORS,lm-sensors,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LM_SENSORS_DEV,lm-sensors-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LM_SENSORS_DEV},${PKGSC_LM_SENSORS_DEV}))
+$(eval $(call PKG_template,LM_SENSORS,lm-sensors,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LM_SENSORS_DETECT,lm-sensors-detect,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LM_SENSORS_DETECT},${PKGSC_LM_SENSORS_DETECT}))
 
 CONFIG_STYLE:=		manual
@@ -43,10 +43,6 @@ lm-sensors-install:
 	${CP} ${WRKINST}/usr/lib/libsensors.so* ${IDIR_LM_SENSORS}/usr/lib
 	${INSTALL_DIR} ${IDIR_LM_SENSORS}/etc
 	${CP} ${WRKINST}/etc/sensors3.conf ${IDIR_LM_SENSORS}/etc
-
-lm-sensors-dev-install:
-	${INSTALL_DIR} ${IDIR_LM_SENSORS_DEV}/usr/include/sensors
-	${CP} ${WRKINST}/usr/include/sensors/*.h ${IDIR_LM_SENSORS_DEV}/usr/include/sensors
 
 lm-sensors-detect-install:
 	${INSTALL_DIR} ${IDIR_LM_SENSORS_DETECT}/usr/sbin

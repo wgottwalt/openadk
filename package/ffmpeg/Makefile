@@ -5,15 +5,17 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		2.0.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		6c5cfed204d8a108325d1fc439ab734a
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
 PKG_FDEPENDS:=		libpthread
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
+PKH_LIBNAME:=		libffmpeg
+PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32 !cris
+PKG_ARCH_DEPENDS:=	!avr32 !cris !m68k
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
 #PKGSD_FFPLAY:=		ffmpeg based video player
@@ -29,6 +31,8 @@ PKGSS_FFSERVER:=	libffmpeg
 PKGSD_FFPROBE:=		simple multimedia stream analyzer
 PKGSC_FFPROBE:=		multimedia
 PKGSS_FFPROBE:=		libffmpeg
+PKGSD_LIBFFMPEG:=	ffmpeg library
+PKGSC_LIBFFMPEG:=	libs
 
 PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
 PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS WITH_X264
@@ -84,9 +88,13 @@ endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKGSD_LIBFFMPEG},${PKGSC_LIBFFMPEG},${PKG_OPTS}))
 $(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSC_FFMPEG}))
 $(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSC_FFSERVER}))
 $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSC_FFPROBE}))

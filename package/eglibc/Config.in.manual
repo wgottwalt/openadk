@@ -8,6 +8,15 @@ config ADK_PACKAGE_EGLIBC
 	help
 	  embedded GNU C library.
 
+config ADK_PACKAGE_EGLIBC_DBG
+	prompt "debug symbols package"
+	tristate
+	depends on ADK_PACKAGE_EGLIBC
+	depends on ADK_PACKAGE_GDB
+	depends on !ADK_DEBUG
+	default n
+	help
+
 config ADK_PACKAGE_EGLIBC_STATIC
 	prompt "eglibc-static........ C library (static version)"
 	tristate
@@ -15,12 +24,3 @@ config ADK_PACKAGE_EGLIBC_STATIC
 	depends on ADK_TARGET_LIB_EGLIBC
 	help
 	  embedded GNU C library (static version).
-
-config ADK_PACKAGE_EGLIBC_DEV
-	prompt "eglibc-dev........... C library development files"
-	tristate
-	default n
-	depends on ADK_TARGET_LIB_EGLIBC
-	help
-	  embedded GNU C library header files.
-

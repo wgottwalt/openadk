@@ -12,17 +12,23 @@ PKG_SECTION:=		db
 PKG_BUILDDEP:=		ncurses readline
 PKG_URL:=		http://www.sqlite.org/
 PKG_SITES:=		http://www.sqlite.org/2013/
+PKG_LIBNAME:=		libsqlite
+PKG_OPTS:=		dev
 
 DISTFILES:=		sqlite-autoconf-3080002.tar.gz
 WRKDIST=		${WRKDIR}/sqlite-autoconf-3080002
 
-PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE LIBSQLITE_DEV
+PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE
 PKGSD_LIBSQLITE:=	sqlite library
+PKGSC_LIBSQLITE:=	libs
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSQLITE},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBSQLITE_DEV,libsqlite-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSQLITE},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
@@ -43,14 +49,5 @@ libsqlite-install:
 sqlite-cli-install:
 	${INSTALL_DIR} ${IDIR_SQLITE_CLI}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sqlite3 ${IDIR_SQLITE_CLI}/usr/bin
-
-libsqlite-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBSQLITE_DEV}/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		${IDIR_LIBSQLITE_DEV}/usr/lib/pkgconfig
-	${INSTALL_DIR} ${IDIR_LIBSQLITE_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_LIBSQLITE_DEV}/usr/include
-	
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -60,6 +60,16 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
 endif
+ifeq ($(ADK_LINUX_PPC64),y)
+	# fixup lib dirs
+	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/lib/
+	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
+	-mkdir ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH} 2>/dev/null
+	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
+	rm -rf ${TARGET_DIR}/usr/lib/
+	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+endif
 ifeq ($(ADK_LINUX_SPARC64),y)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
@@ -85,6 +95,7 @@ ifeq ($(ADK_TARGET_ABI_N64),y)
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/lib/
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
+	-mkdir ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH} 2>/dev/null
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
@@ -179,12 +190,12 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
-	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* $(MAKE_TRACE)
+	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
 	echo N | \
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} oldconfig $(MAKE_TRACE) 
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(MAKE_TRACE)
+		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
 
 imageclean:
 	rm -f $(BIN_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*

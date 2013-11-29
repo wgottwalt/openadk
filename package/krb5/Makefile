@@ -5,22 +5,22 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.11.3
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		56f0ae274b285320b8a597cb89442449
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
 PKG_DEPENDS+=		libpthread
-PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny
+PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny bison-host
 PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.11/
 PKG_NOPARALLEL:=	1
+PKG_LIBNAME:=		libkrb5
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT KRB5_UTIL LIBKRB5 LIBKRB5_DEV
+PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT KRB5_UTIL LIBKRB5
 PKGSD_LIBKRB5:=		MIT kerberos libraries
 PKGSC_LIBKRB5:=		libs
-PKGSD_LIBKRB5_DEV:=	MIT kerberos headers
-PKGSC_LIBKRB5_DEV:=	devel
 PKGSD_KRB5_CLIENT:=	MIT kerberos client tools
 PKGSC_KRB5_CLIENT:=	crypto
 PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
@@ -40,8 +40,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
 $(eval $(call PKG_template,KRB5_UTIL,krb5-util,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_UTIL},${PKGSD_KRB5_UTIL},${PKGSC_KRB5_UTIL}))
-$(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5}))
-$(eval $(call PKG_template,LIBKRB5_DEV,libkrb5-dev,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5_DEV},${PKGSC_LIBKRB5_DEV}))
+$(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
@@ -95,13 +94,5 @@ libkrb5-install:
 		${IDIR_LIBKRB5}/usr/lib
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
 		> ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
-
-libkrb5-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBKRB5_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/krb5-config \
-		${IDIR_LIBKRB5_DEV}/usr/bin
-	${INSTALL_DIR} ${IDIR_LIBKRB5_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_LIBKRB5_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

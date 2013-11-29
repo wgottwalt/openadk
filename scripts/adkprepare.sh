@@ -43,14 +43,11 @@ openbsd() {
 openbsd_full() {
 	PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/${ver}/packages/${arch}/"
 	export PKG_PATH
-	pkg_add -v bison
 	pkg_add -v zip
 	pkg_add -v intltool
 	pkg_add -v libIDL
 	pkg_add -v m4
-	pkg_add -v autoconf-2.62p0
 	pkg_add -v gperf
-	pkg_add -v python-2.6.6p0
 }
 
 openbsd_lux() {
@@ -84,10 +81,8 @@ netbsd_full() {
 	pkg_add -vu intltool
 	pkg_add -vu lynx
 	pkg_add -vu zip
-	pkg_add -vu bison
 	pkg_add -vu libIDL
 	pkg_add -vu xkbcomp
-	pkg_add -vu python26
 }
 
 netbsd_lux() {
@@ -106,7 +101,7 @@ freebsd() {
 
 freebsd_full() {
 	echo "Preparing FreeBSD for full OpenADK package builds"
-	pkg_add -r intltool lynx bison zip xkbcomp glib20 libIDL autoconf268 libxslt automake14 swig
+	pkg_add -r intltool lynx zip xkbcomp glib20 libIDL libxslt swig
 }
 
 freebsd_lux() {

@@ -4,20 +4,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		icecast
-PKG_VERSION:=		2.3.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		ff516b3ccd2bcc31e68f460cd316093f
-PKG_DESCR:=		A streaming media server
+PKG_VERSION:=		2.3.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2b5d1b40778922e5f6431b7758c359ad
+PKG_DESCR:=		streaming media server
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libcurl libvorbis libpthread libxml2 libxslt
-PKG_BUILDDEP:=		curl libvorbis libxml2 libxslt
+PKG_BUILDDEP:=		curl libvorbis libxml2 libxslt autotool
 PKG_URL:=		http://www.icecast.org/
 PKG_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ICECAST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ICECAST,icecast,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/libxml2
 CONFIGURE_ARGS+=	--disable-yp \
 			--with-curl="yes" \
@@ -28,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-yp \
 			--with-theora="no" \
 			--with-xslt-config="${STAGING_TARGET_DIR}/usr/bin/xslt-config"
 
-post-install:
+icecast-install:
 	${INSTALL_DIR} ${IDIR_ICECAST}/etc
 	${CP} ${WRKINST}/etc/icecast.xml ${IDIR_ICECAST}/etc/
 	${INSTALL_DIR} ${IDIR_ICECAST}/usr/bin

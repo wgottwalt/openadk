@@ -9,8 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a0fb49ccb6b910bdbd7e76a9960394e3
 PKG_DESCR:=		small non-forking webserver
 PKG_SECTION:=		www
-PKG_DEPENDS:=		libiconv
-PKG_BUILDDEP:=		libowfat libiconv
+PKG_BUILDDEP:=		libowfat libiconv-tiny
 PKG_URL:=		http://www.fefe.de/gatling/
 PKG_SITES:=		http://dl.fefe.de/
 
@@ -18,7 +17,7 @@ DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GATLING,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GATLING,gatling,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

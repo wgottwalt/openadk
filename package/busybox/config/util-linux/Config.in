@@ -11,6 +11,7 @@ config BUSYBOX_BLOCKDEV
 	default n
 	help
 	  Performs some ioctls with block devices.
+
 config BUSYBOX_MDEV
 	bool "mdev"
 	default y
@@ -150,7 +151,7 @@ config BUSYBOX_FEATURE_DMESG_PRETTY
 
 config BUSYBOX_FBSET
 	bool "fbset"
-	depends on !ADK_PACKAGE_FBSET
+	depends on !BUSYBOX_DISABLE_FBSET
 	default y if ADK_TARGET_WITH_VGA
 	default n
 	select BUSYBOX_PLATFORM_LINUX
@@ -450,7 +451,7 @@ config BUSYBOX_LOSETUP
 
 config BUSYBOX_LSPCI
 	bool "lspci"
-	depends on !ADK_PACKAGE_PCIUTILS
+	depends on !BUSYBOX_DISABLE_LSPCI
 	default y if ADK_TARGET_WITH_PCI
 	default y if ADK_TARGET_WITH_MINIPCI
 	default n
@@ -463,7 +464,7 @@ config BUSYBOX_LSPCI
 
 config BUSYBOX_LSUSB
 	bool "lsusb"
-	depends on !ADK_PACKAGE_LSUSB
+	depends on !BUSYBOX_DISABLE_LSUSB
 	default y if ADK_TARGET_WITH_USB
 	default n
 	#select PLATFORM_LINUX
@@ -506,6 +507,7 @@ config BUSYBOX_MORE
 config BUSYBOX_MOUNT
 	bool "mount"
 	default y
+	depends on !BUSYBOX_DISABLE_MOUNT
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  All files and filesystems in Unix are arranged into one big directory
@@ -698,6 +700,7 @@ config BUSYBOX_SWITCH_ROOT
 config BUSYBOX_UMOUNT
 	bool "umount"
 	default y
+	depends on !BUSYBOX_DISABLE_UMOUNT
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  When you want to remove a mounted filesystem from its current mount
@@ -803,12 +806,28 @@ config BUSYBOX_FEATURE_VOLUMEID_FAT
 	help
 	  TODO
 
+config BUSYBOX_FEATURE_VOLUMEID_EXFAT
+       bool "exFAT filesystem"
+       default y
+       depends on BUSYBOX_VOLUMEID
+       help
+         exFAT (extended FAT) is a proprietary file system designed especially
+         for flash drives. It has many features from NTFS, but with less
+         overhead. exFAT is used on most SDXC cards for consumer electronics.
+
 config BUSYBOX_FEATURE_VOLUMEID_HFS
 	bool "hfs filesystem"
 	default y
 	depends on BUSYBOX_VOLUMEID
 	help
 	  TODO
+
+config BUSYBOX_FEATURE_VOLUMEID_NILFS
+       bool "nilfs filesystem"
+       default y
+       depends on BUSYBOX_VOLUMEID
+       help
+         TODO
 
 config BUSYBOX_FEATURE_VOLUMEID_JFS
 	bool "jfs filesystem"
@@ -893,6 +912,16 @@ config BUSYBOX_FEATURE_VOLUMEID_ROMFS
 	depends on BUSYBOX_VOLUMEID
 	help
 	  TODO
+
+config BUSYBOX_FEATURE_VOLUMEID_SQUASHFS
+       bool "SquashFS filesystem"
+       default y
+       depends on BUSYBOX_VOLUMEID && BUSYBOX_FEATURE_BLKID_TYPE
+       help
+         Squashfs is a compressed read-only filesystem for Linux. Squashfs is
+         intended for general read-only filesystem use and in constrained block
+         device/memory systems (e.g. embedded systems) where low overhead is
+         needed.
 
 config BUSYBOX_FEATURE_VOLUMEID_SYSV
 	bool "sysv filesystem"

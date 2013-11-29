@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_GNU:=patch/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PATCH,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PATCH,patch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+patch-install:
 	$(INSTALL_DIR) $(IDIR_PATCH)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/patch $(IDIR_PATCH)/usr/bin
 

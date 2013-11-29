@@ -15,11 +15,11 @@ PKG_SITES:=		http://www.nobiscuit.com/iptables-snmp/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,IPTABLES_SNMP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IPTABLES_SNMP,iptables-snmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
 
-post-install:
+iptables-snmp-install:
 	${INSTALL_DIR} ${IDIR_IPTABLES_SNMP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/iptables-snmp.so ${IDIR_IPTABLES_SNMP}/usr/lib
 

@@ -11,18 +11,19 @@ PKG_DESCR:=		CDB implementation
 PKG_SECTION:=		db
 PKG_URL:=		http://www.corpit.ru/mjt/tinycdb/
 PKG_SITES:=		http://www.corpit.ru/mjt/tinycdb/
+PKG_OPTS:=		dev devonly
 
 DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TINYCDB,tinycdb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TINYCDB,tinycdb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 
 tinycdb-install:
-	$(INSTALL_DIR) $(IDIR_TINYCDB)/usr/lib
+	$(INSTALL_DIR) $(IDIR_TINYCDB_DEV)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libcdb.a \
-		$(IDIR_TINYCDB)/usr/lib
+		$(IDIR_TINYCDB_DEV)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

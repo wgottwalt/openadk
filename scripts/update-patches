@@ -77,11 +77,27 @@ else
 	patch_newfiles=0
 fi
 
+if [[ -e $WRKDIST/../.autoreconf_done ]]; then
+	touch $ORGDIST/.autoreconf_done
+	ignore_autoconf=1
+else
+	ignore_autoconf=0
+fi
+
 DIFF_FLAGS="-adu -I \"^--- $(echo $D_SUBP.orig/ | $TRANSFORM)@@	.*\""
 DIFF_FLAGS="$DIFF_FLAGS -I \"^\+\+\+ $(echo $D_SUBP/ | $TRANSFORM)@@	.*\""
 
 for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
+	echo "DEBUG: $file" >> /tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
+	[[ $file = configure && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = missing && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = depcomp && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = install-sh && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = aclocal.m4 && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = INSTALL && $ignore_autoconf = 1 ]] && continue	
+	[[ $file = config.h.in && $ignore_autoconf = 1 ]] && continue	
+	[[ $(basename $file) = Makefile.in && $ignore_autoconf = 1 ]] && continue	
 	cmp -s "$ORGDIST/$file" "$WRKDIST/$file" && continue
 	echo "Processing ${file}..." >&2
 	# look in patchdir for an existing patchfile matching this

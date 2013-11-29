@@ -14,11 +14,11 @@ PKG_SITES:=		http://www.vervest.org/htp/archive/c/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,HTPDATE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,HTPDATE,htpdate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
-post-install:
+htpdate-install:
 	${INSTALL_DIR} ${IDIR_HTPDATE}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/htpdate ${IDIR_HTPDATE}/usr/sbin/
 

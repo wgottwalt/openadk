@@ -9,23 +9,27 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		9f7e707d4fb7a5a76f0f9b73ff70623d
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		mesalib libx11 libxi freeglut libfreetype
 PKG_BUILDDEP:=		libX11 libXi MesaLib freeglut freetype
 PKG_URL:=		http://www.fltk.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 PKG_CXX:=		LIBFLTK
+PKG_LIBNAME:=		libfltk
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBFLTK
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
-PKG_HOST_DEPENDS:=	!darwin
 
 DISTFILES:=		${PKG_NAME}-$(PKG_VERSION)-source.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lgcc_s -lm -lc
+endif
+
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif

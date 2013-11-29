@@ -20,7 +20,7 @@ WRKSRC=			${WRKDIST}/src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VIM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VIM,vim,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-lgcc
 CONFIGURE_ENV+=		vim_cv_toupper_broken=no \
@@ -57,7 +57,7 @@ XAKE_FLAGS+=		prefix=/usr \
 			DESTDIR=${WRKINST} \
 			STRIP=:
 
-post-install:
+vim-install:
 	${INSTALL_DIR} ${IDIR_VIM}/usr/bin
 	${INSTALL_DIR} ${IDIR_VIM}/usr/share/vim
 	${CP} ${WRKINST}/usr/bin/{ex,vim,view} ${IDIR_VIM}/usr/bin

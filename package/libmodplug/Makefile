@@ -5,16 +5,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmodplug
 PKG_VERSION:=		0.8.8.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fddc3c704c5489de2a3cf0fedfec59db
 PKG_DESCR:=		a MOD player library
 PKG_SECTION:=		libs
 PKG_URL:=		http://modplug-xmms.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=modplug-xmms/libmodplug/0.8.8.4/}
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBMODPLUG,libmodplug,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMODPLUG,libmodplug,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libmodplug-install:
 	$(INSTALL_DIR) $(IDIR_LIBMODPLUG)/usr/lib

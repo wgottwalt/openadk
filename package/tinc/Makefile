@@ -16,13 +16,13 @@ PKG_SITES:=		http://www.tinc-vpn.org/packages/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TINC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TINC,tinc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-kernel=${LINUX_DIR} \
 			--with-zlib=${STAGING_TARGET_DIR}/usr/ \
 			--with-lzo-include=${STAGING_TARGET_DIR}/usr/include/lzo
 
-post-install:
+tinc-install:
 	${INSTALL_DIR} ${IDIR_TINC}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tincd ${IDIR_TINC}/usr/sbin/
 

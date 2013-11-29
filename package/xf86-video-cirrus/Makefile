@@ -5,23 +5,25 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-cirrus
 PKG_VERSION:=		1.4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		439e3f5e29161f503bcfe23229dc7b17
 PKG_DESCR:=		X11 driver for Cirrus VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
-PKG_BUILDDEP:=		xorg-server
+PKG_BUILDDEP:=		xorg-server autotool util-macros
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!arm !avr32
+PKG_ARCH_DEPENDS:=	!arm !avr32 !m68k
 PKG_CFLINE_XF86_VIDEO_CIRRUS:=depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_VIDEO_CIRRUS,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_VIDEO_CIRRUS,xf86-video-cirrus,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+AUTOTOOL_STYLE:=	autoreconf
+
+xf86-video-cirrus-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_CIRRUS}/usr/lib/xorg/modules/drivers
 	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/cirrus_*.so \
 		${IDIR_XF86_VIDEO_CIRRUS}/usr/lib/xorg/modules/drivers/

@@ -7,18 +7,18 @@ PKG_NAME:=		beecrypt
 PKG_VERSION:=		4.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8441c014170823f2dff97e33df55af1e
-PKG_DESCR:=		cryptography toolkit
-PKG_SECTION:=		crypto
+PKG_DESCR:=		cryptography toolkit library
+PKG_SECTION:=		libs
 PKG_URL:=		http://beecrypt.sourceforge.net/
 PKG_SITES:=		http://sourceforge.net/projects/beecrypt/files/beecrypt/$(PKG_VERSION)/
 PKG_NEED_CXX:=		1
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BEECRYPT,beecrypt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BEECRYPT,beecrypt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-TARGET_LDFLAGS+=        -L$(STAGING_DIR)/usr/lib64
 CONFIGURE_ARGS+=	--without-cplusplus \
 			--without-python \
 			--without-java

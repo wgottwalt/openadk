@@ -15,17 +15,18 @@ PKG_DEPENDS:=		libpcre
 PKG_BUILDDEP:=		pcre
 PKG_NEED_CXX:=		1
 PKG_CXX:=		pcrepp
+PKG_OPTS:=		dev
 
-PKG_CFLINE_PCREPP:=	depends on ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_GLIBC
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 DISTFILES:=		pcre++-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/pcre++-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PCREPP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PCREPP,pcrepp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+pcrepp-install:
 	$(INSTALL_DIR) $(IDIR_PCREPP)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpcre++.so* \
 		$(IDIR_PCREPP)/usr/lib

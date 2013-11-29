@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.13.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d499178f72010d5067a77f41fa1a1505
 PKG_DESCR:=		A bittorrent library
 PKG_SECTION:=		libs
@@ -13,15 +13,15 @@ PKG_DEPENDS:=		libopenssl libsigc++
 PKG_BUILDDEP:=		openssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTORRENT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-aligned
-TARGET_LDFLAGS+=        -L$(STAGING_DIR)/usr/lib64
 
 libtorrent-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib

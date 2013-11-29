@@ -4,21 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		autoconf
-PKG_VERSION:=		2.68
+PKG_VERSION:=		2.69
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c3b5247592ce694f7097873aa07d66fe
+PKG_MD5SUM:=		82d05e03b93e45f5a39b828dc9c6c29b
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		lang
+PKG_BUILDDEP:=		m4-host autoconf-host
 PKG_URL:=		http://www.gnu.org/software/autoconf/
 PKG_SITES:=		${MASTER_SITE_GNU:=autoconf/}
 PKG_OPTS:=		noscripts
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-XAKE_FLAGS+=		PERL="/usr/bin/perl" \
-			M4="m4"
+HOST_STYLE:=		auto
+XAKE_FLAGS+=		PERL="/usr/bin/perl"
 
 autoconf-install:
 	${INSTALL_DIR} ${IDIR_AUTOCONF}/usr/bin
@@ -27,4 +30,5 @@ autoconf-install:
 	${CP} ${WRKINST}/usr/share/autoconf/* \
 		${IDIR_AUTOCONF}/usr/share/autoconf
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

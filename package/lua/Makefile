@@ -34,11 +34,15 @@ MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} -DLUA_USE_LINUX -fPIC"
 XAKE_FLAGS+=		INSTALL_TOP="${WRKINST}/usr"
 ALL_TARGET:=		linux
 
-post-install:
+lua-install:
 	${INSTALL_DIR} ${IDIR_LUA}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/lua ${IDIR_LUA}/usr/bin/
+
+luac-install:
 	${INSTALL_DIR} ${IDIR_LUAC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/luac ${IDIR_LUAC}/usr/bin/
+
+lua-examples-install:
 	${INSTALL_DIR} ${IDIR_LUA_EXAMPLES}/usr/share/lua/examples
 	${INSTALL_DATA} ${WRKBUILD}/test/*.lua \
 		${IDIR_LUA_EXAMPLES}/usr/share/lua/examples/

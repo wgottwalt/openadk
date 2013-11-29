@@ -51,7 +51,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
+quagga-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}
 	${CP} ${WRKINST}/usr/lib/libzebra.so.* ${IDIR_QUAGGA}/usr/lib/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/zebra \
@@ -59,19 +59,31 @@ post-install:
 	# avoid /etc being set to 0750
 	${INSTALL_DIR} ${IDIR_QUAGGA}/etc/quagga/
 	chmod 0750 ${IDIR_QUAGGA}/etc/quagga/
+
+quagga-bgpd-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_BGPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/bgpd ${IDIR_QUAGGA_BGPD}/usr/sbin/
+
+quagga-ospfd-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPFD}/usr/{lib,sbin}
 	${CP} ${WRKINST}/usr/lib/libospf.so.* ${IDIR_QUAGGA_OSPFD}/usr/lib/
 	${CP} ${WRKINST}/usr/sbin/ospfd ${IDIR_QUAGGA_OSPFD}/usr/sbin/
+
+quagga-ospf6d-install:
 ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPF6D}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ospf6d ${IDIR_QUAGGA_OSPF6D}/usr/sbin/
 endif
+
+quagga-ripngd-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPNGD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ripngd ${IDIR_QUAGGA_RIPNGD}/usr/sbin/
+
+quagga-ripd-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPD}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ripd ${IDIR_QUAGGA_RIPD}/usr/sbin/
+
+quagga-vtysh-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_VTYSH}/usr/bin
 	${CP} ${WRKINST}/usr/bin/vtysh ${IDIR_QUAGGA_VTYSH}/usr/bin/
 

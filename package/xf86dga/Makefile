@@ -7,9 +7,13 @@ PKG_NAME:=		xf86dga
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ac30b5705f487554c5de0b466e846c31
+PKG_SECTION:=		devel
 PKG_BUILDDEP:=		libXxf86dga
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_SUBPKGS:=
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,XF86DGA,xf86dga,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
 include ${TOPDIR}/mk/pkg-bottom.mk

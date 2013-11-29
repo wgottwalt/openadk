@@ -18,11 +18,11 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-1.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SIPSAK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SIPSAK,sipsak,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-gnutls
 
-post-install:
+sipsak-install:
 	${INSTALL_DIR} ${IDIR_SIPSAK}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sipsak ${IDIR_SIPSAK}/usr/bin/
 

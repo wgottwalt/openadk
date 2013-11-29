@@ -10,7 +10,8 @@ PKG_DESCR:=		daemon listening on button events
 PKG_SECTION:=		base
 PKG_URL:=		http://openadk.org/
 
-PKG_CFLINE_ALIX_SWITCH:=depends on (ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2 || ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13)
+PKG_SYSTEM_DEPENDS:=	pcengines-alix2d2 pcengines-alix2d13
+
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk

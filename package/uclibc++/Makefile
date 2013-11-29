@@ -13,6 +13,8 @@ PKG_URL:=		http://cxx.uclibc.org/
 PKG_SITES:=		http://cxx.uclibc.org/src/
 PKG_NEED_CXX:=		1
 PKG_NOPARALLEL:=	1
+PKG_LIBNAME:=		uclibc++
+PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -20,7 +22,7 @@ PKG_LIBC_DEPENDS:=	uclibc
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,UCLIBCXX,uclibc++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,UCLIBCXX,uclibc++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual

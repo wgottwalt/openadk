@@ -7,16 +7,17 @@ PKG_NAME:=		xz
 PKG_VERSION:=		5.0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		60044a5701997e4e0904257197208ea9
-PKG_DESCR:=		lzma compression utility
+PKG_DESCR:=		xz compression utility
 PKG_SECTION:=		archive
 PKG_URL:=		http://tukaani.org/xz/
 PKG_SITES:=		http://tukaani.org/xz/
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,XZ,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XZ,xz,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+xz-install:
 	${INSTALL_DIR} ${IDIR_XZ}/usr/bin ${IDIR_XZ}/usr/lib
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_XZ}/usr/bin
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_XZ}/usr/lib

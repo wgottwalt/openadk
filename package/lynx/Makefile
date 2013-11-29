@@ -21,7 +21,7 @@ WRKDIST=		${WRKDIR}/lynx2-8-7
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LYNX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/include/openssl
 TARGET_CPPFLAGS+=	-DUSE_OPENSSL_INCL -DUSE_X509_SUPPORT
@@ -82,7 +82,7 @@ CONFIGURE_ARGS+=	\
 			--with-build-cppflags="-I/usr/include/ncurses"
 MAKE_FILE:=		makefile
 
-post-install:
+lynx-install:
 	${INSTALL_DIR} ${IDIR_LYNX}/etc ${IDIR_LYNX}/usr/bin
 	${CP} ${WRKINST}/etc/lynx.{cfg,lss} ${IDIR_LYNX}/etc
 	${CP} ${WRKINST}/usr/bin/lynx ${IDIR_LYNX}/usr/bin

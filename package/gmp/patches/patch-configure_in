@@ -1,0 +1,21 @@
+--- gmp-4.3.2.orig/configure.in	2010-01-07 21:09:02.000000000 +0100
++++ gmp-4.3.2/configure.in	2013-10-29 22:13:19.000000000 +0100
+@@ -65,7 +65,7 @@ dnl
+ dnl  Note that there's a copy of these options in the top-level Makefile.am,
+ dnl  so update there too if changing anything.
+ dnl
+-AM_INIT_AUTOMAKE([1.8 gnu no-dependencies $(top_builddir)/ansi2knr])
++AM_INIT_AUTOMAKE([1.8 gnu no-dependencies])
+ AM_CONFIG_HEADER(config.h:config.in)
+ AM_MAINTAINER_MODE
+ 
+@@ -2072,9 +2072,6 @@ fi
+ echo "      MPN_PATH=\"$path\""
+ 
+ 
+-# Automake ansi2knr support.
+-AM_C_PROTOTYPES
+-
+ CL_AS_NOEXECSTACK
+ 
+ GMP_PROG_AR

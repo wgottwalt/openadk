@@ -19,7 +19,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,QINGY,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,QINGY,qingy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-screen-savers \
 			--disable-optimizations \
@@ -27,7 +27,7 @@ CONFIGURE_ARGS+=	--disable-screen-savers \
 			--disable-x-support \
 			--disable-crypto
 
-post-install:
+qingy-install:
 	$(INSTALL_DIR) $(IDIR_QINGY)/etc/qingy/sessions
 	${INSTALL_BIN} ./files/{pre,post}_GUI.sh ${IDIR_QINGY}/etc/qingy/
 	${INSTALL_DATA} ./files/{settings,welcomes} ${IDIR_QINGY}/etc/qingy/

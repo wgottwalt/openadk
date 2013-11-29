@@ -23,7 +23,7 @@ PKGFD_WITH_UTMP:=	support writing /var/run/utmp
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DROPBEAR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DROPBEAR,dropbear,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	$(ADK_TARGET_ABI_CFLAGS)

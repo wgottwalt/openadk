@@ -74,6 +74,10 @@ dev-help:
 	@echo ''
 	@echo 'Adding a new package:'
 	@echo 'make PKG=foo VER=1.0 newpackage'
+	@echo 'Adding a new simple library package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=lib newpackage'
+	@echo 'Adding a new simple program package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=prog newpackage'
 
 clean: .prereq_done
 	-@rm -f nohup.out
@@ -221,9 +225,6 @@ NO_ERROR=0
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
-	@echo "BUILD_LIBIDL_CONFIG:=$$(which libIDL-config-2 2>/dev/null)" >>prereq.mk
-	@PKGCFGDIR=$$(eval pkg-config --variable pc_path pkg-config 2>/dev/null) >/dev/null ; \
-	echo "PKG_HOSTLIB_DIR:=$${PKGCFGDIR:-/usr/lib/pkgconfig}" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh

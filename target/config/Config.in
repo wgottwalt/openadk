@@ -1,6 +1,26 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+config ADK_TARGET_KERNEL_VMLINUZ
+	boolean
+
+config ADK_TARGET_KERNEL_ZIMAGE
+	boolean
+
+config ADK_TARGET_KERNEL_IMAGE
+	boolean
+
+config ADK_TARGET_KERNEL_BZIMAGE
+	boolean
+
+config ADK_TARGET_KERNEL
+	string
+	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
+	default "Image" if ADK_TARGET_KERNEL_IMAGE
+	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
+	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
+	default "vmlinux"
+
 config ADK_big
 	boolean
 
@@ -75,6 +95,7 @@ depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI (new)"
 	select ADK_n32
+	depends on !ADK_TARGET_LIB_MUSL
 
 config ADK_TARGET_ABI_O32
 	boolean "O32 ABI (old)"
@@ -83,6 +104,7 @@ config ADK_TARGET_ABI_O32
 config ADK_TARGET_ABI_N64
 	boolean "N64 ABI"
 	select ADK_n64
+	depends on !ADK_TARGET_LIB_MUSL
 
 endchoice
 
@@ -122,14 +144,6 @@ choice
 prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
-config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	boolean "Xscale PXA270 Spitz PDA"
-	select ADK_KERNEL_ARCH_PXA
-	select ADK_KERNEL_PXA_SHARPSL
-	select ADK_KERNEL_MACH_SPITZ
-	select ADK_KERNEL_SPI_PXA2XX
-	select ADK_TARGET_WITH_VGA
-
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
 	boolean "ARM Ltd. Versatile"
 	select ADK_KERNEL_ARCH_VERSATILE
@@ -138,6 +152,14 @@ config ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
 	select ADK_KERNEL_SCSI_SYM53C8XX_2
+
+config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	boolean "Xscale PXA270 Spitz PDA"
+	select ADK_KERNEL_ARCH_PXA
+	select ADK_KERNEL_PXA_SHARPSL
+	select ADK_KERNEL_MACH_SPITZ
+	select ADK_KERNEL_SPI_PXA2XX
+	select ADK_TARGET_WITH_VGA
 
 endchoice
 
@@ -424,8 +446,8 @@ config ADK_TARGET_CPU_ARCH
 config ADK_TARGET_ABI_CFLAGS
 	string
 	default "-mabi=32" if ADK_TARGET_ABI_O32
-	default "-mabi=n32 -Wl,-m -Wl,elf32ltsmipn32" if ADK_TARGET_ABI_N32
-	default "-mabi=64 -Wl,-m -Wl,elf64ltsmip" if ADK_TARGET_ABI_N64
+	default "-mabi=n32" if ADK_TARGET_ABI_N32
+	default "-mabi=64" if ADK_TARGET_ABI_N64
 	default "-m32" if ADK_TARGET_ABI_32
 	default "-mx32" if ADK_TARGET_ABI_X32
 	default "-m64" if ADK_TARGET_ABI_64
@@ -436,9 +458,9 @@ config ADK_TARGET_ABI_LDFLAGS
 
 config ADK_TARGET_KERNEL_LDFLAGS
 	string
-	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_N32
-	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_O32
-	default "-mabi=64 -m elf64ltsmip" if ADK_TARGET_ABI_N64
+	default "-mabi=64" if ADK_TARGET_ABI_N32
+	default "-mabi=64" if ADK_TARGET_ABI_O32
+	default "-mabi=64" if ADK_TARGET_ABI_N64
 
 config ADK_TARGET_CFLAGS
 	string
@@ -462,7 +484,7 @@ config ADK_TARGET_CFLAGS
 
 config ADK_TARGET_CMDLINE
 	string
-	default "console=tty0" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "dwc_otg.fiq_split_enable=0" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
@@ -719,6 +741,7 @@ config ADK_TARGET_ROOTFS_MMC
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
+	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
@@ -734,7 +757,7 @@ config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
 
 choice
 prompt "Root filesystem type"
-depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI
+depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_HARDWARE_QEMU
 default ADK_TARGET_ROOT_EXT2_FS
 
 config ADK_TARGET_ROOT_EXT2

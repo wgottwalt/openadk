@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.12.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a95c896fbe8322c3c8d518a13eb74c7a
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
@@ -20,13 +20,10 @@ PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
-
-PKG_SUBPKGS:=		XORG_SERVER XORG_SERVER_DEV
-PKGSD_XORG_SERVER_DEV:=	Xorg server development files
-PKGSC_XORG_SERVER_DEV:=	x11/devel
+PKG_OPTS:=		dev
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
 PKGFS_WITH_DRI:=		mesalib
@@ -44,8 +41,7 @@ PKGCB_WITH_CRYPTO:=		openssl
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XORG_SERVER,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,XORG_SERVER_DEV,${PKG_NAME}-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XORG_SERVER_DEV},${PKGSC_XORG_SERVER_DEV}))
+$(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
 CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
@@ -123,13 +119,9 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 endif
-
-xorg-server-dev-install:
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER_DEV)/usr/include/xorg
-	${CP} ${WRKINST}/usr/include/xorg/* \
-		$(IDIR_XORG_SERVER_DEV)/usr/include/xorg
-	$(INSTALL_DIR) $(IDIR_XORG_SERVER_DEV)/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/xorg-server.pc \
-		$(IDIR_XORG_SERVER_DEV)/usr/lib/pkgconfig
+	# add m4 file to host directory
+	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/share/aclocal
+	$(CP) ${WRKINST}/usr/share/aclocal/xorg-server.m4 \
+		$(STAGING_HOST_DIR)/usr/share/aclocal
 
 include ${TOPDIR}/mk/pkg-bottom.mk

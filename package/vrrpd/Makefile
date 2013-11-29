@@ -13,7 +13,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VRRPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VRRPD,vrrpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual

@@ -15,13 +15,13 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIFIDOG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WIFIDOG,wifidog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes \
 			ac_cv_lib_nsl_main=no \
 			ac_cv_func_setvbuf_reversed=no
 
-post-install:
+wifidog-install:
 	${INSTALL_DIR} ${IDIR_WIFIDOG}/usr/{bin,lib} ${IDIR_WIFIDOG}/etc
 	${INSTALL_DATA} ./files/wifidog.conf ${IDIR_WIFIDOG}/etc/
 	${INSTALL_BIN} ${WRKBUILD}/scripts/init.d/wifidog \

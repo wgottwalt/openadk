@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xterm
-PKG_VERSION:=		267
+PKG_VERSION:=		297
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3945ab70cfa2a9e95804157ee1b0f8e8
+PKG_MD5SUM:=		45610ae6fe90cf086fcd75b9cb97bbaf
 PKG_DESCR:=		Terminal Emulator for X Windows
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig
@@ -18,11 +18,12 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tgz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XTERM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XTERM,xterm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--with-app-defaults=/usr/lib/X11/app-defaults
+CONFIGURE_ARGS+=	--with-app-defaults=/usr/lib/X11/app-defaults \
+			--disable-pty-handshake
 
-post-install:
+xterm-install:
 	$(INSTALL_DIR) $(IDIR_XTERM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/{koi8rxterm,resize,uxterm,xterm} \
 		$(IDIR_XTERM)/usr/bin/

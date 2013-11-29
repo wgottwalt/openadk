@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a4030ddd2ba324152a97d65d3c0b247d
+PKG_MD5SUM:=		3a897d722457c5a895cd6ac79a28fda0
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl libpng
-PKG_BUILDDEP:=		zlib sdl libpng
+PKG_BUILDDEP:=		glib-host qemu-host zlib sdl libpng
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
@@ -18,20 +18,43 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_ARCH_DEPENDS:=	native x86 x86_64
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,QEMU,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-pthread -lm -lrt
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--enable-kvm \
+			--disable-docs \
 			--bindir=/usr/bin
-TARGET_LDFLAGS+=	-pthread -lm -lrt
 
-post-install:
+HOST_STYLE:=		manual
+HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
+			--disable-docs \
+			--disable-system \
+			--disable-sdl
+
+host-configure:
+	cd ${WRKBUILD}; rm -f config.{cache,status}; \
+	    env ${HOST_CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
+	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
+
+host-build:
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+	
+qemu-hostinstall:
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    DESTDIR='$(STAGING_HOST_DIR)' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+
+qemu-install:
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/share/qemu
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/qemu* \
@@ -39,4 +62,5 @@ post-install:
 	$(CP) $(WRKINST)/usr/share/qemu/* \
 		$(IDIR_QEMU)/usr/share/qemu
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

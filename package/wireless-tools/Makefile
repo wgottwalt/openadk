@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/wireless_tools.29
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_TOOLS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WIRELESS_TOOLS,wireless-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		CC="${TARGET_CC}" CFLAGS="${TARGET_CFLAGS} -I."
@@ -26,7 +26,7 @@ FAKE_FLAGS:=		INSTALL_DIR="${WRKINST}/usr/sbin" \
 			INSTALL_INC="${WRKINST}/usr/include"
 INSTALL_TARGET:=	install-iwmulticall install-hdr install-dynamic
 
-post-install:
+wireless-tools-install:
 	${INSTALL_DIR} ${IDIR_WIRELESS_TOOLS}/usr/sbin
 	${INSTALL_DIR} ${IDIR_WIRELESS_TOOLS}/usr/lib
 	${INSTALL_DATA} ${WRKINST}/usr/lib/libiw.so.* \

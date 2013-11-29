@@ -15,15 +15,16 @@ PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf li
 PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates libevent
 PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
-PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent
+PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent python2-host yasm-host
+PKG_BUILDDEP+=		zip-host
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 native mips
+PKG_ARCH_DEPENDS:=	arm x86 x86_64 native mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el
+PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
@@ -46,8 +47,6 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_LDFLAGS="${LDLAGS_FOR_BUILD}" \
 			HOST_CXX="${CXX_FOR_BUILD}" \
 			HOST_CXXFLAGS="${CXXFLAGS_FOR_BUILD}" \
-			BUILD_LIBIDL_CONFIG="${BUILD_LIBIDL_CONFIG}" \
-			PKG_HOSTLIB_DIR="${PKG_HOSTLIB_DIR}" \
 			HOST_RANLIB="ranlib" HOST_AR="ar" \
 			CPPFLAGS="-I${STAGING_TARGET_DIR}/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
@@ -104,7 +103,10 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-safe-browsing \
 			--disable-elf-hack 
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+TARGET_CFLAGS:=		$(subst Os,g3,$(TARGET_CFLAGS))
+endif
+
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(CC_FOR_BUILD) HOST_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 

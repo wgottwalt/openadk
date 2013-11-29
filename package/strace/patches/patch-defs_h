@@ -1,6 +1,43 @@
 --- strace-4.8.orig/defs.h	2013-05-14 16:10:42.000000000 +0200
-+++ strace-4.8/defs.h	2013-08-14 08:51:03.000000000 +0200
-@@ -162,7 +162,7 @@ extern char *stpcpy(char *dst, const cha
++++ strace-4.8/defs.h	2013-10-25 13:21:18.000000000 +0200
+@@ -37,6 +37,28 @@
+ # endif
+ #endif
+ 
++#ifdef ARM
++struct pt_regs { long uregs[18]; };
++#define ARM_cpsr uregs[16]
++#define ARM_pc uregs[15]
++#define ARM_lr uregs[14]
++#define ARM_sp uregs[13]
++#define ARM_ip uregs[12]
++#define ARM_fp uregs[11]
++#define ARM_r10 uregs[10]
++#define ARM_r9 uregs[9]
++#define ARM_r8 uregs[8]
++#define ARM_r7 uregs[7]
++#define ARM_r6 uregs[6]
++#define ARM_r5 uregs[5]
++#define ARM_r4 uregs[4]
++#define ARM_r3 uregs[3]
++#define ARM_r2 uregs[2]
++#define ARM_r1 uregs[1]
++#define ARM_r0 uregs[0]
++#define ARM_ORIG_r0 uregs[17]
++#endif
++
+ #ifdef MIPS
+ # include <sgidefs.h>
+ # if _MIPS_SIM == _MIPS_SIM_ABI64
+@@ -155,14 +177,14 @@ extern char *stpcpy(char *dst, const cha
+     || defined(METAG) \
+     || defined(TILE) \
+     || defined(XTENSA) \
+-    ) && defined(__GLIBC__)
++    ) && defined(__linux__)
+ # include <sys/ptrace.h>
+ #else
+ /* Work around awkward prototype in ptrace.h. */
  # define ptrace xptrace
  # include <sys/ptrace.h>
  # undef ptrace
@@ -9,7 +46,7 @@
  #  define __KERNEL__
  #  include <asm/ptrace.h>
  #  undef __KERNEL__
-@@ -222,11 +222,6 @@ extern long ptrace(int, int, char *, lon
+@@ -222,11 +244,6 @@ extern long ptrace(int, int, char *, lon
  # define PTRACE_EVENT_EXIT	6
  #endif
  

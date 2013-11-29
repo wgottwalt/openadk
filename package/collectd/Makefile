@@ -26,7 +26,7 @@ PKGFD_WITH_PING:=	enable ping statistic plugin
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,COLLECTD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_CPU},y)
 DISABLE_CPU:=--disable-cpu
@@ -121,7 +121,7 @@ CONFIGURE_ARGS+=	--disable-aggregation \
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 XAKE_FLAGS+=		LIBS='-lm -lltdl'
 
-post-install:
+collectd-install:
 	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/lib/collectd \
 		${IDIR_COLLECTD}/usr/sbin ${IDIR_COLLECTD}/etc
 	${INSTALL_DIR} ${IDIR_COLLECTD}/usr/share/collectd

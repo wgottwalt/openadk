@@ -14,11 +14,11 @@ PKG_BUILDDEP:=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,JAMVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

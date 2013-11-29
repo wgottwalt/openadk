@@ -11,12 +11,12 @@ PKG_DESCR:=		AAC encoder
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.audiocoding.com/faac.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
-
-PKG_SUBPKGS:=		LIBFAAC
+PKG_LIBNAME:=		libfaac
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBFAAC,libfaac,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBFAAC,libfaac,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--without-mp4v2
 

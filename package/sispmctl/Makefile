@@ -18,9 +18,9 @@ PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SISPMCTL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SISPMCTL,sispmctl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+sispmctl-install:
 	${INSTALL_DIR} ${IDIR_SISPMCTL}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/sispmctl ${IDIR_SISPMCTL}/usr/bin
 

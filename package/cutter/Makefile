@@ -16,7 +16,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CUTTER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CUTTER,cutter,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

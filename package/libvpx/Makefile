@@ -5,21 +5,23 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f8de058e6ba14555144583a2d031fe19
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
+PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32
+PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
@@ -83,6 +85,8 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-install-docs \
 			--disable-install-bins \
 			--enable-install-libs \
+			--disable-unit-tests \
+			--disable-docs \
 			--disable-examples \
 			--enable-shared
 ALL_TARGET:=

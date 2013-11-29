@@ -9,14 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		991faf66d3352ac1452acc393c430b23
 PKG_DESCR:=		Gnu Privacy Guard
 PKG_SECTION:=		crypto
-PKG_DEPENDS:=		libreadline libiconv
-PKG_BUILDDEP:=		readline libiconv
+PKG_DEPENDS:=		libreadline
+PKG_BUILDDEP:=		readline libiconv-tiny
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GNUPG,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GNUPG,gnupg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-asm \
 			--disable-gnupg-iconv \
@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--disable-asm \
 			--enable-fake-curl \
 			--disable-regex
 
-post-install:
+gnupg-install:
 	${INSTALL_DIR} ${IDIR_GNUPG}/usr/bin/
 	${INSTALL_DIR} ${IDIR_GNUPG}/usr/share/gnupg
 	${INSTALL_DATA} ${WRKINST}/usr/share/gnupg/options.skel \

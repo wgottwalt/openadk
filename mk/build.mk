@@ -12,20 +12,15 @@ CONFIG_CONFIG_IN = Config.in
 CONFIG = config
 DEFCONFIG=		ADK_DEBUG=n \
 			ADK_STATIC=n \
-			ADK_LOCALES=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
 			ADK_LEAVE_ETC_ALONE=n \
 			ADK_SIMPLE_NETWORK_CONFIG=n \
 			ADK_USE_CCACHE=n \
 			ADK_TOOLCHAIN_GDB=n \
-			ADK_PACKAGE_LIBAU=n \
 			ADK_PACKAGE_E2FSCK_STATIC=n \
-			ADK_PACKAGE_AUFS2_UTIL=n \
 			ADK_PACKAGE_KEXECINIT=n \
 			ADK_PACKAGE_INSTALLER=n \
-			ADK_PACKAGE_CXXTOOLS_DEV=n \
-			ADK_PACKAGE_XORG_SERVER_DEV=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
 			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
@@ -33,25 +28,17 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_OPENJDK=n \
 			ADK_PACKAGE_OPENJDK7=n \
 			ADK_PACKAGE_CLASSPATH=n \
-			ADK_PACKAGE_GPSD=n \
-			ADK_PACKAGE_GPSD_CLIENTS=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_CRYPTINIT=n \
-			ADK_PACKAGE_HEIMDAL_SERVER=n \
-			ADK_PACKAGE_LIBHEIMDAL=n \
 			ADK_PACKAGE_PAM=n \
-			ADK_PACKAGE_PYTHON=n \
 			ADK_PACKAGE_VIRTINST=n \
 			ADK_PACKAGE_URLGRABBER=n \
 			ADK_PACKAGE_PERL=n \
 			ADK_PACKAGE_LIBSSP=n \
-			ADK_PKG_DESKTOP=n \
-			ADK_PKG_LAPTOP=n \
+			ADK_PKG_XORG=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
-			ADK_PKG_VPN_CLIENT=n \
-			ADK_PKG_VPN_SERVER=n \
 			ADK_TOOLCHAIN_GCC_JAVA=n \
 			ADK_TOOLCHAIN_GCC_OBJC=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
@@ -112,7 +99,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE;do \
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
@@ -183,7 +170,7 @@ endif
 
 ${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
-		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib}
+		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
 
 ${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
@@ -244,7 +231,7 @@ kernelconfig:
 # create a new package from package/.template
 newpackage:
 	@echo "Creating new package $(PKG)"
-	$(CP) $(TOPDIR)/package/.template $(TOPDIR)/package/$(PKG)
+	$(CP) $(TOPDIR)/package/.template$(TYPE) $(TOPDIR)/package/$(PKG)
 	pkg=$$(echo $(PKG)|tr '[:lower:]-' '[:upper:]_'); \
 		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
@@ -570,8 +557,9 @@ bulktoolchain:
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/bin/toolchain_$${arch}_$${libc}/build.log; \
-		    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
+		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 # build all target architecture, target systems and libc combinations
@@ -585,12 +573,14 @@ bulk:
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+		if [ -f .exit ]; then break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+	    if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 bulkall:
@@ -603,12 +593,14 @@ bulkall:
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+		if [ -f .exit ]; then break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
+	      if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 bulkallmod:
@@ -622,11 +614,14 @@ bulkallmod:
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
+		$(GMAKE) cleantarget; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+	        if [ -f .exit ]; then break;fi \
 	      done; \
-	    if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
+	     if [ -f .exit ]; then break;fi \
 	  done <${TOPDIR}/target/arch.lst ;\
+	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
 ${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c

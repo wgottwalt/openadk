@@ -5,22 +5,19 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
 PKG_VERSION:=		3.2.22
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		2e1c889494d274aca24ce5f6a748e66e
 PKG_DESCR:=		Netlink library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		flex-host
 PKG_URL:=		http://www.infradead.org/~tgr/libnl/
 PKG_SITES:=		http://www.infradead.org/~tgr/libnl/files/
 PKG_NOPARALLEL:=	1
-
-PKG_SUBPKGS:=		LIBNL LIBNL_DEV
-PKGSD_LIBNL_DEV:=	header files for netlink library
-PKGSC_LIBNL_DEV:=	devel
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBNL_DEV,libnl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBNL_DEV},${PKGSC_LIBNL_DEV}))
+$(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libnl-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/etc/libnl
@@ -37,12 +34,5 @@ libnl-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib/libnl/cli/qdisc
 	$(CP) ${WRKINST}/usr/lib/libnl/cli/qdisc/*.so \
 		${IDIR_LIBNL}/usr/lib/libnl/cli/qdisc
-
-libnl-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBNL_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBNL_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_LIBNL_DEV}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		${IDIR_LIBNL_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

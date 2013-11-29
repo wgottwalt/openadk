@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
 PKG_VERSION:=		9.7.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		207477c4cf95f2db5be0ded8a22669e0
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		dns
@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		libbind
+PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		BIND_SERVER BIND_NSUPDATE BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG LIBBIND
 PKGSD_BIND_NSUPDATE:=	nsupdate utility
@@ -40,6 +42,10 @@ PKGSC_LIBBIND:=		libs
 PKG_FLAVOURS_BIND_SERVER:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -49,7 +55,7 @@ $(eval $(call PKG_template,BIND_CHECK,bind-check,${PKG_VERSION}-${PKG_RELEASE},$
 $(eval $(call PKG_template,BIND_DNSSEC,bind-dnssec,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DNSSEC},${PKGSD_BIND_DNSSEC},${PKGSC_BIND_DNSSEC}))
 $(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_HOST},${PKGSD_BIND_HOST},${PKGSC_BIND_HOST}))
 $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DIG},${PKGSD_BIND_DIG},${PKGSC_BIND_DIG}))
-$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND}))
+$(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \

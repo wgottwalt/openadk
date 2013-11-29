@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nasm/nasm%20sources/2.07/}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,NASM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NASM,nasm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 FAKE_FLAGS+=		INSTALLROOT=${WRKINST}
 
-post-install:
+nasm-install:
 	$(INSTALL_DIR) $(IDIR_NASM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/nasm \
 		$(IDIR_NASM)/usr/bin

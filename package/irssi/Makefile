@@ -22,7 +22,7 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IRSSI,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IRSSI,irssi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-perl=no \
 			--with-gnu-ld \
@@ -43,7 +43,7 @@ else
 CONFIGURE_ARGS+=	--disable-ssl
 endif
 
-post-install:
+irssi-install:
 	${INSTALL_DIR} ${IDIR_IRSSI}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/irssi ${IDIR_IRSSI}/usr/bin/
 

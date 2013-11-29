@@ -4,13 +4,14 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
+PKG_NAME:=		gdb
 PKG_DESCR:=		GNU debugger
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libthread-db libncurses libiconv libexpat libgcc
-PKG_BUILDDEP:=		ncurses readline libiconv expat
+PKG_DEPENDS:=		libthread-db libncurses libexpat libgcc zlib
+PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
 include ${TOPDIR}/mk/package.mk
 
@@ -27,13 +28,14 @@ CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
 			--disable-tui --disable-gdbtk --without-x \
 			--without-included-gettext --disable-sim \
 			--with-curses --disable-werror \
+			--without-auto-load-safe-path \
 			--disable-gdbserver \
 			--without-python
 XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
-post-install:
+gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
 	# shipped libbfd conflicts with system wide one

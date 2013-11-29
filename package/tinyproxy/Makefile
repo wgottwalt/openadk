@@ -14,7 +14,7 @@ PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.6/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TINYPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_header_libintl_h=no \
 			ac_cv_lib_nsl_gethostbyaddr=no \
@@ -30,7 +30,7 @@ ifneq (${ADK_COMPILE_TINYPROXY_WITH_FILTER},y)
 CONFIGURE_ARGS+=	--disable-filter
 endif
 
-post-install:
+tinyproxy-install:
 	${INSTALL_DIR} ${IDIR_TINYPROXY}/usr/sbin \
 		       ${IDIR_TINYPROXY}/etc/tinyproxy \
 		       ${IDIR_TINYPROXY}/usr/share/tinyproxy

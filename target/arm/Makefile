@@ -7,14 +7,10 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
-KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
-else ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
-KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
-else ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
 else
-KERNEL:=$(LINUX_DIR)/vmlinux
+KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 endif
 
 LOADADDR:=0x20008000

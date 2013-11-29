@@ -9,19 +9,20 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2d3f7111b8284cec81884023c4bb4a11
 PKG_DESCR:=		X11 driver for Event driver
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server kmod-input-evdev
-PKG_BUILDDEP:=		xorg-server
+PKG_DEPENDS:=		xorg-server kmod-input-evdev libudev
+PKG_BUILDDEP:=		xorg-server systemd
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_ARCH_DEPENDS:=	!arm !avr32
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_INPUT_EVDEV,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_INPUT_EVDEV,xf86-input-evdev,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-input-evdev-install:
 	${INSTALL_DIR} ${IDIR_XF86_INPUT_EVDEV}/usr/lib/xorg/modules/input
 	${CP} ${WRKINST}/usr/lib/xorg/modules/input/evdev_drv.so \
 		${IDIR_XF86_INPUT_EVDEV}/usr/lib/xorg/modules/input/

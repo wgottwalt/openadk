@@ -16,7 +16,7 @@ PKG_SITES:=		http://tor.eff.org/dist/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,TOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TOR,tor,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			ac_cv_libevent_linker_option="" \
@@ -29,7 +29,7 @@ CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 
 CONFIGURE_ARGS+=	--disable-gcc-hardening
 
-post-install:
+tor-install:
 	${INSTALL_DIR} ${IDIR_TOR}/usr/bin ${IDIR_TOR}/etc/tor
 	${INSTALL_DATA} ./files/torrc ${IDIR_TOR}/etc/tor/
 	${CP} ${WRKINST}/usr/bin/tor ${IDIR_TOR}/usr/bin/

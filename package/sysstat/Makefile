@@ -13,14 +13,14 @@ PKG_SITES:=		http://perso.orange.fr/sebastien.godard/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SYSSTAT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SYSSTAT,sysstat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
 do-configure:
 	${CP} ./files/CONFIG ${WRKBUILD}/build/
 
-post-install:
+sysstat-install:
 	${INSTALL_DIR} ${IDIR_SYSSTAT}/usr/lib/sa
 	${INSTALL_BIN} ${WRKINST}/usr/lib/sa/sa1 ${IDIR_SYSSTAT}/usr/lib/sa
 	${INSTALL_BIN} ${WRKINST}/usr/lib/sa/sa2 ${IDIR_SYSSTAT}/usr/lib/sa

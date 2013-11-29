@@ -11,26 +11,20 @@
 # * if you have a style -> define a pre-foo: and post-foo: if they
 #   are required, but the do-foo: magic is done here
 
-REORDER_DEPENDENCIES=	${TOPDIR}/scripts/automake.dep
+PKG_LIBNAME?=	$(PKG_NAME)
 
 pre-configure:
 do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
-	@sed -e '/^#/d' ${REORDER_DEPENDENCIES} | \
-	tsort | while read f; do \
-		cd ${WRKSRC}; \
-		case $$f in \
-		/*) \
-			find . -name "$${f#/}" -print | while read i; do \
-				touch "$$i"; \
-			done;; \
-		*) \
-			if test -e "$$f" ; then \
-				touch "$$f"; \
-			fi;; \
-		esac; \
-	done
+ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
+endif
+ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	@rm -rf ${WRKSRC}/autom4te.cache
+	@touch ${WRKDIR}/.autoreconf_done
+endif
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
 
@@ -86,7 +80,7 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --enable-static \
 	    --disable-dependency-tracking \
 	    --disable-libtool-lock \
-	    $(NLS) \
+	    --disable-nls \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else
 	@echo "Invalid CONFIG_STYLE '${CONFIG_STYLE}'" >&2
@@ -108,7 +102,6 @@ post-build:
 ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
 	@$(CMD_TRACE) "compiling... "
-
 ifneq ($(filter manual,${BUILD_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)
@@ -126,7 +119,7 @@ do-install:
 post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
-	-rm -f ${_ALL_CONTROLS}
+	@-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
@@ -142,6 +135,8 @@ else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
 endif
+	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
+	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}.scripts'
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
@@ -156,7 +151,6 @@ endif
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
 		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
 	done
-	env ${MAKE_ENV} ${MAKE} spkg-install $(MAKE_TRACE)
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
 		cd '${STAGING_DIR}'; \
@@ -166,6 +160,22 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 	fi
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
+ifneq (,$(filter dev,${PKG_OPTS}))
+	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
+	    find . -name \*.h | \
+ 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
+	    find . -name \*.pc | \
+ 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	@for a in ${WRKINST}/usr/bin/*-config*; do \
+		[[ -e $$a ]] || continue; \
+		mkdir -p $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		cp $$a $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		chmod 755 $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
+	done
+endif
 	@-cd ${WRKINST}; \
 	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
@@ -204,6 +214,7 @@ ${_IPKGS_COOKIE}:
 	exec ${MAKE} package
 
 package: ${ALL_IPKGS}
+ifneq ($(DEVELOPER),)
 	@cd ${WRKDIR}/fake-${CPU_ARCH} || exit 1; \
 	y=; sp=; for x in ${ALL_IDIRS}; do \
 		y="$$y$$sp$${x#$(WRKDIR)/fake-${CPU_ARCH}/}"; \
@@ -239,6 +250,7 @@ package: ${ALL_IPKGS}
 		ln=$$name; \
 		li=$$inode; \
 	done
+endif
 	touch ${_IPKGS_COOKIE}
 
 clean-targets: clean-dev-generic

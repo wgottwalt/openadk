@@ -31,9 +31,6 @@ do-install:
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_EGLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_EGLIBC)/usr/bin
-ifeq ($(ADK_LOCALES),y)
-	$(CP) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_EGLIBC)/usr/bin
-endif
 	${INSTALL_DIR} $(IDIR_EGLIBC)/etc 
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_EGLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_EGLIBC}/etc
@@ -47,13 +44,25 @@ eglibc-dev-install:
 	# install linker script
 	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 ifeq ($(ADK_TARGET_ABI_O32),y)
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf32-tradbigmips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+else
 	$(SED) "s#@@ELFTARGET@@#elf32-tradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 endif
+endif
 ifeq ($(ADK_TARGET_ABI_N32),y)
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf32-ntradbigmips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+else
 	$(SED) "s#@@ELFTARGET@@#elf32-ntradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
 endif
+endif
 ifeq ($(ADK_TARGET_ABI_N64),y)
+ifeq ($(ADK_big),y)
+	$(SED) "s#@@ELFTARGET@@#elf64-tradbigmips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+else
 	$(SED) "s#@@ELFTARGET@@#elf64-tradlittlemips#" $(IDIR_EGLIBC_DEV)/usr/lib/libc.so
+endif
 endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_EGLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_EGLIBC_DEV}/usr/lib

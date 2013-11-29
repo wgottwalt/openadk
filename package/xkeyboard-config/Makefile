@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XKEYBOARD_CONFIG,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XKEYBOARD_CONFIG,xkeyboard-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xkeyboard-config-install:
 	${INSTALL_DIR} ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
 	${CP} ${WRKINST}/usr/share/X11/xkb/* \
 		${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb

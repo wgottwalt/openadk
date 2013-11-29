@@ -43,7 +43,9 @@ BIN_DIR_PFX:=		$(BASE_DIR)/bin
 PACKAGE_DIR:=		$(BIN_DIR)/packages
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
-TARGET_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
+TARGET_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+AUTOTOOL_PATH=		${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
 
@@ -51,31 +53,6 @@ ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
 GCC_CHECK:=		GCC_HONOUR_COPTS=2
 else
 GCC_CHECK:=
-endif
-
-ifeq ($(CPU_ARCH),arm)
-QEMU:=			qemu-arm
-endif
-ifeq ($(CPU_ARCH),mipsel)
-QEMU:=			qemu-mipsel
-endif
-ifeq ($(CPU_ARCH),mips64el)
-QEMU:=			qemu-mipsel
-endif
-ifeq ($(CPU_ARCH),mips)
-QEMU:=			qemu-mips
-endif
-ifeq ($(CPU_ARCH),i486)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),i586)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),i686)
-QEMU:=			qemu-i386
-endif
-ifeq ($(CPU_ARCH),x86_64)
-QEMU:=			qemu-x86_64
 endif
 
 ifeq ($(ADK_NATIVE),y) 
@@ -129,6 +106,10 @@ TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+# stop generating eh_frame stuff
+TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
+# always add debug information
+TARGET_CFLAGS+=		-g3
 endif
 
 
@@ -141,10 +122,10 @@ CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
 
 # host compiler flags
 CXX_FOR_BUILD?=		g++
-CPPFLAGS_FOR_BUILD?=
+CPPFLAGS_FOR_BUILD?=	-I$(STAGING_HOST_DIR)/usr/include
 CFLAGS_FOR_BUILD=	-O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall
-LDFLAGS_FOR_BUILD?=
+LDFLAGS_FOR_BUILD?= 	-L$(STAGING_HOST_DIR)/usr/lib
 FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
 PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
@@ -200,7 +181,7 @@ endif
 ifeq ($(ADK_NATIVE),y)
 RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 else
-RSTRIP:=		prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
+RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 endif
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
@@ -240,12 +221,6 @@ FETCH_CMD?=		wget --timeout=5 -t 3 $(QUIET)
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
-endif
-
-ifeq ($(ADK_LOCALES),y)
-NLS:=			--enable-nls
-else
-NLS:=			--disable-nls
 endif
 
 include $(TOPDIR)/mk/mirrors.mk

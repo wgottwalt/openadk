@@ -5,38 +5,33 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.28.1
+PKG_RELEASE:=		5
 PKG_EXTRAVER:=		2.28
-PKG_RELEASE:=		1
 PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libiconv libpthread
-PKG_BUILDDEP:=		gettext-tiny libiconv dbus
+PKG_DEPENDS:=		libpthread
+PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host zlib
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
-
-#DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
-PKG_SUBPKGS:=		GLIB GLIB_DEV
-PKGSC_GLIB_DEV:=	devel
-PKGSD_GLIB_DEV:=	glib headers
+PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS:=		libonly
+PKG_OPTS+=		libonly
 endif
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,GLIB_DEV,glib-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GLIB_DEV},${PKGSC_GLIB_DEV},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-CONFIGURE_ARGS+=	--enable-debug=no \
-			--disable-mem-pools \
+CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
-			--with-libiconv=gnu \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_stack_grows=no \
@@ -45,19 +40,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
 
-
-pre-configure:
-ifeq ($(OStype),Linux)
-	(cd ${WRKBUILD}; rm -rf config.{cache,status}; \
-		./configure --prefix=$(STAGING_HOST_DIR) \
-	)
-	${MAKE} -C ${WRKBUILD} V=1
-	$(CP) ${WRKBUILD}/gio/.libs/glib-compile-schemas ${STAGING_HOST_DIR}/bin
-	$(CP) ${WRKBUILD}/gobject/.libs/glib-genmarshal ${STAGING_HOST_DIR}/bin
-	$(CP) ${WRKBUILD}/gobject/glib-mkenums ${STAGING_HOST_DIR}/bin
-	${MAKE} -C ${WRKBUILD} clean
-endif
-
+HOST_CONFIGURE_ARGS+=	--disable-fam
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
@@ -66,19 +49,14 @@ glib-install:
 	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
-
-glib-dev-install:
+	# workaround for dev subpackage
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
 	${CP} ${WRKINST}/usr/lib/glib-2.0/include/glibconfig.h \
 		${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
-	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_GLIB_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/pkgconfig
-	${CP} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		${IDIR_GLIB_DEV}/usr/lib/pkgconfig
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/glib-genmarshal \
 		${IDIR_GLIB_DEV}/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

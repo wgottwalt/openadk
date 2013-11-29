@@ -5,16 +5,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpeg2
 PKG_VERSION:=		0.5.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		0f92c7454e58379b4a5a378485bbd8ef
 PKG_DESCR:=		MPEG-1 & -2 decoding library
 PKG_SECTION:=		libs
 PKG_URL:=		http://libmpeg2.sourceforge.net/
 PKG_SITES:=		http://libmpeg2.sourceforge.net/files/
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBMPEG2,libmpeg2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMPEG2,libmpeg2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-sdl
 

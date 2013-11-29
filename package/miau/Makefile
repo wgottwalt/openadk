@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=miau/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MIAU,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MIAU,miau,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-automode \
 			--enable-releasenick \
@@ -22,7 +22,7 @@ CONFIGURE_ARGS+=	--enable-automode \
 			--enable-privlog \
 			--enable-onconnect
 
-post-install:
+miau-install:
 	${INSTALL_DIR} ${IDIR_MIAU}/usr/bin ${IDIR_MIAU}/etc/miau
 	${INSTALL_BIN} ${WRKINST}/usr/bin/miau ${IDIR_MIAU}/usr/bin/
 	${INSTALL_DATA} ./files/miaurc ${IDIR_MIAU}/etc/miau/

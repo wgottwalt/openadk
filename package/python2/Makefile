@@ -4,97 +4,126 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7.1
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		15ed56733655e3fab785e49a7278d2fb
+PKG_VERSION:=		2.7.5
+PKG_RELEASE:=		6
+PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		zlib libffi openssl readline bzip2
-PKG_DEPENDS:=		libpthread zlib libffi libopenssl libgcc
+PKG_BUILDDEP:=		autotool libffi python2-host
+PKG_DEPENDS:=		libpthread libffi libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
-PKG_OPTS:=		noscripts
+PKG_OPTS:=		dev noscripts
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd
 
 DISTFILES=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
-PKG_SUBPKGS:=		PYTHON2 PYTHON2_READLINE PYTHON2_BZIP2
-PKGSS_PYTHON2_READLINE:=libreadline
-PKGSS_PYTHON2_BZIP2:=	bzip2
+PKG_FLAVOURS_PYTHON2:=	MOD_ZLIB MOD_BZ2 MOD_EXPAT MOD_SQLITE MOD_GDBM
+PKG_FLAVOURS_PYTHON2+=	MOD_NCURSES MOD_SSL MOD_READLINE
+			
+PKGFD_MOD_ZLIB:=	ZLIB support
+PKGFB_MOD_ZLIB:=	zlib
+PKGFS_MOD_ZLIB:=	zlib
+PKGFD_MOD_BZ2:=		BZIP2 support
+PKGFB_MOD_BZ2:=		bzip2
+PKGFS_MOD_BZ2:=		libbz2
+PKGFD_MOD_EXPAT:=	XML support
+PKGFB_MOD_EXPAT:=	expat
+PKGFS_MOD_EXPAT:=	libexpat
+PKGFD_MOD_SQLITE:=	SQLITE support
+PKGFB_MOD_SQLITE:=	sqlite
+PKGFS_MOD_SQLITE:=	libsqlite
+PKGFD_MOD_GDBM:=	GDBM support
+PKGFB_MOD_GDBM:=	gdbm
+PKGFS_MOD_GDBM:=	libgdbm
+PKGFD_MOD_NCURSES:=	NCURSES support
+PKGFB_MOD_NCURSES:=	ncurses
+PKGFS_MOD_NCURSES:=	libncurses
+PKGFD_MOD_READLINE:=	READLINE support
+PKGFB_MOD_READLINE:=	readline
+PKGFS_MOD_READLINE:=	libreadline
+PKGFD_MOD_SSL:=		OpenSSL support
+PKGFB_MOD_SSL:=		openssl
+PKGFS_MOD_SSL:=		libopenssl
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PYTHON2,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_BZIP2,${PKG_NAME}-bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_BZIP2},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,PYTHON2_READLINE,${PKG_NAME}-readline,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PYTHON2_READLINE},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call HOST_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-ifeq ($(ADK_HOST_CYGWIN),y)
-EXE:=			.exe
-endif
+define PKG_mod_template
 
-TARGET_CFLAGS+=		-fPIC
-TARGET_LDFLAGS+=	-L.
-MAKE_ENV+=		OPT="$(TARGET_CFLAGS)" \
-			RANLIB="${TARGET_CROSS}ranlib" \
-			HOSTPYTHON=./hostpython \
-			HOSTPGEN=./Parser/hostpgen
-CONFIGURE_ENV+=		OPT="$(TARGET_CFLAGS)" \
-			ac_cv_have_long_long_format=yes
+INSTALL_MODS_$${ADK_PACKAGE_${1}}+=    ${2}-install
+
+${2}-install:
+	echo foo $(1)
+	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python2.7/lib-dynload
+	for m in ${2}; do \
+		${INSTALL_DATA} $(WRKINST)/usr/lib/python2.7/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python2.7/lib-dynload ;\
+	done
+endef
+
+$(eval $(call PKG_template,PYTHON2_MOD_ZLIB,python2-mod-zlib,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_ZLIB},${PKGFD_MOD_ZLIB},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_BZ2,python2-mod-bz2,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_BZ2},${PKGFD_MOD_BZ2},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_EXPAT,python2-mod-expat,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_EXPAT},${PKGFD_MOD_EXPAT},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_SQLITE,python2-mod-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_SQLITE},${PKGFD_MOD_SQLITE},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_GDBM,python2-mod-gdbm,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_GDBM},${PKGFD_MOD_GDBM},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_NCURSES,python2-mod-ncurses,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_NCURSES},${PKGFD_MOD_NCURSES},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_SSL,python2-mod-ssl,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_SSL},${PKGFD_MOD_SSL},${PKG_SECTION}))
+$(eval $(call PKG_template,PYTHON2_MOD_READLINE,python2-mod-readline,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_READLINE},${PKGFD_MOD_READLINE},${PKG_SECTION}))
+
+$(eval $(call PKG_mod_template,PYTHON2_MOD_ZLIB,zlib))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_BZ2,bz2))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_EXPAT,pyexpat))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_SQLITE,_sqlite))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_GDBM,gdbm))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_NCURSES,_curses))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_SSL,_ssl))
+$(eval $(call PKG_mod_template,PYTHON2_MOD_READLINE,readline))
+
+AUTOTOOL_STYLE:=	autoreconf
+MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen
+CONFIGURE_ENV+=         ac_cv_have_long_long_format=yes \
+			ac_cv_file__dev_ptmx=yes \
+			ac_cv_file__dev_ptc=no
 CONFIGURE_ARGS:=	--with-threads \
+			--disable-ipv6 \
 			--disable-toolbox-glue \
 			--with-system-ffi \
 			--without-cxx-main
 
-post-extract:
-	$(CP) ${WRKBUILD}/setup.py ${WRKBUILD}/setup.py.sav
-	$(CP) ./files/setup.py ${WRKBUILD}/setup.py
-	$(CP) ./files/posixmodule.c ${WRKBUILD}/Modules/posixmodule.c
-	$(CP) ./files/python-config.in ${WRKBUILD}/Misc/python-config.in
-	$(CP) ./files/build_scripts.py ${WRKBUILD}/Lib/distutils/command/build_scripts.py
-	$(CP) ./files/sysconfig.py ${WRKBUILD}/Lib/distutils/sysconfig.py
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		OPT="$(CFLAGS_FOR_BUILD)" \
-		./configure --without-cxx-main --with-threads \
-		--prefix=$(STAGING_HOST_DIR)/usr \
-	);
-	$(MAKE) -C ${WRKBUILD} python$(EXE) Parser/pgen$(EXE)
-	$(MAKE) -C ${WRKBUILD} install
-	${CP} ${WRKBUILD}/Parser/pgen ${STAGING_HOST_DIR}/usr/bin/pgen
-	${CP} ${WRKBUILD}/python ${STAGING_HOST_DIR}/usr/bin/hostpython
-	${CP} ${WRKBUILD}/Parser/pgen ${WRKBUILD}/Parser/hostpgen
-	${CP} ${WRKBUILD}/python ${WRKBUILD}/hostpython
-	$(MAKE) -C ${WRKBUILD} distclean
-	$(CP) ${WRKBUILD}/setup.py.sav ${WRKBUILD}/setup.py
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS:=	--with-threads \
+			--disable-toolbox-glue \
+			--without-cxx-main
+
+hostpost-install:
+	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
+		$(STAGING_HOST_DIR)/usr/bin/pgen
 
 pre-configure:
-	$(SED) "s#@@CPU_ARCH@@#$(CPU_ARCH)#" ${WRKBUILD}/configure
-	$(SED) "s#@@STAGING_DIR@@#$(STAGING_DIR)#" ${WRKBUILD}/setup.py
+	(cd $(WRKBUILD) && patch -p1 < \
+		$(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py )
+	(cd $(WRKBUILD) && patch -p1 < \
+		$(TOPDIR)/package/python2/files/patch-Misc_python-config_in )
+	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
+		$(WRKBUILD)/Misc/python-config.in
 
-post-install:
+python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/include/python2.7
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python ${IDIR_PYTHON2}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
-	${CP} ${WRKINST}/usr/include/python2.7/* ${IDIR_PYTHON2}/usr/include/python2.7
-	-find ${IDIR_PYTHON2} -name "\*.pyc" -o -name "*\.pyo" -exec rm {} \;
-	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/readline.so
-	-rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/bz2.so
-	# workaround, copy host python-config to target scripts directory
-	${CP} ${STAGING_HOST_DIR}/usr/bin/python*-config ${STAGING_DIR}/scripts
-	(cd ${STAGING_DIR}/usr/bin/ && ln -sf $(STAGING_HOST_DIR)/usr/bin/hostpython hostpython)
+	${CP} ${WRKINST}/usr/include/python2.7/pyconfig.h \
+		${IDIR_PYTHON2}/usr/include/python2.7
+	@-for i in zlib bz2 _curses _ssl gdbm _sqlite pyexpat readline; do \
+		rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/$${i}*so; \
+	done
 
-python2-readline-install:
-	${INSTALL_DIR} ${IDIR_PYTHON2_READLINE}/usr/lib/python2.7/lib-dynload
-	${CP} ${WRKINST}/usr/lib/python2.7/lib-dynload/readline.so \
-		${IDIR_PYTHON2_READLINE}/usr/lib/python2.7/lib-dynload
-
-python2-bzip2-install:
-	${INSTALL_DIR} ${IDIR_PYTHON2_BZIP2}/usr/lib/python2.7/lib-dynload
-	${CP} ${WRKINST}/usr/lib/python2.7/lib-dynload/bz2.so \
-		${IDIR_PYTHON2_BZIP2}/usr/lib/python2.7/lib-dynload
-
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -12,18 +12,18 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/
 
-PKG_CFLINE_PERL:=	depends on ADK_NATIVE
+PKG_ARCH_DEPENDS:=	native
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PERL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PERL,perl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 
 pre-configure:
 	(cd ${WRKBUILD}; ./Configure -des -Dusethreads -Dcc=gcc -Dprefix=/usr -A ccflags="${TARGET_CFLAGS}");
 
-post-install:
+perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
 	${INSTALL_DIR} ${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \

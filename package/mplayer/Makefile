@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.1
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ac7bf1cfedc1c5c24bfc83107eefb1d9
+PKG_MD5SUM:=		39dd55f30eb5403f219a606e79a6648a
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		alsa-lib libjpeg libfaad2 libmad libncurses
@@ -32,7 +32,7 @@ PKGFB_WITH_DIRECTFB:=	DirectFB
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MPLAYER,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPLAYER,mplayer,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 # gcc 4.5 produces internal compiler error with -Os
@@ -150,7 +150,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 XAKE_FLAGS+=		AR="${TARGET_CROSS}ar" RANLIB="${TARGET_CROSS}ranlib"
 TARGET_LDFLAGS+=	-lxvidcore -lX11 -lXext -lvorbis
 
-post-install:
+mplayer-install:
 	${INSTALL_DIR} ${IDIR_MPLAYER}/usr/bin
 	${CP} ${WRKINST}/usr/bin/mplayer ${IDIR_MPLAYER}/usr/bin
 

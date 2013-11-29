@@ -13,10 +13,11 @@ PKG_DEPENDS:=		libexpat apr
 PKG_BUILDDEP:=		expat apr
 PKG_URL:=		http://apr.apache.org/
 PKG_SITES:=		http://apache.mirror.clusters.cc/apr/
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,APR_UTIL,apr-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,APR_UTIL,apr-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--without-berkeley-db \
 			--with-apr=${STAGING_DIR}/usr \

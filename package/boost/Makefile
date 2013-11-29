@@ -5,21 +5,18 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.54.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		efbfbff5a85a9330951f243d0a46e4b9
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
+PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
 DISTFILES:=		boost_1_54_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_54_0
-
-PKG_SUBPKGS:=		BOOST BOOST_DEV
-PKGSD_BOOST_DEV:=	boost header files
-PKGSC_BOOST_DEV:=	devel
 
 PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options python regex serialization signals system test thread wave
 
@@ -42,8 +39,9 @@ PKGFD_wave:=	with wave
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BOOST,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,BOOST_DEV,boost-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_BOOST_DEV},${PKGSC_BOOST_DEV}))
+$(eval $(call PKG_template,BOOST,boost,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+include ${TOPDIR}/mk/python.mk
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -102,7 +100,7 @@ endif
 # some variables for build
 GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
-BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam"`"
+BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam$(EXEEXT)"`"
 PYTHON_PATH:=	${STAGING_TARGET_DIR}/usr/bin/python
 PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
@@ -118,19 +116,18 @@ do-build:
 	${SED} "/^using gcc/d" ${USER_JAM}
 # add using gcc line with determined options to user.jam
 	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} ;" >> ${USER_JAM};
-
 # remove exisiting using python line from user.jam
 	${SED} "/^using python/d" ${USER_JAM}
 ifneq (${ADK_PACKAGE_BOOST_PYTHON},)
 # add using python line with determined options to user.jam
 	echo "using python : ${PYTHON_VERSION} : ${PYTHON_PATH} : ${PYTHON_INCLUDE} : ${PYTHON_LIB} ;" >> ${USER_JAM};
 endif
-
 # run bjam to build boost
 	( cd ${WRKBUILD}; \
 		${BJAM_PATH} \
 			-sBUILD=release \
-			--toolset=gcc-${GPP_VERSION} \
+			target-os=linux \
+			toolset=gcc-${GPP_VERSION} \
 			--build-type=minimal \
 			--layout=versioned \
 			--disable-long-double \
@@ -142,9 +139,5 @@ endif
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
-
-boost-dev-install:
-	${INSTALL_DIR} ${IDIR_BOOST_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_BOOST_DEV}/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

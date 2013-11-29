@@ -15,11 +15,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=reaim/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,REAIM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,REAIM,reaim,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 
-post-install:
+reaim-install:
 	${INSTALL_DIR} ${IDIR_REAIM}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/reaim ${IDIR_REAIM}/usr/sbin/
 

@@ -15,6 +15,10 @@ PKG_BUILDDEP:=		libxml2 cgilib freetype libart libpng
 PKG_BUILDDEP+=		glib cairo pango
 PKG_URL:=		http://oss.oetiker.ch/
 PKG_SITES:=		http://oss.oetiker.ch/rrdtool/pub/
+PKG_LIBNAME:=		librrd
+PKG_OPTS:=		dev
+
+PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		LIBRRD RRDCGI RRDTOOL
 PKGSC_RRDCGI:=		misc
@@ -22,9 +26,13 @@ PKGSD_RRDCGI:=		RRD CGI
 PKGSC_RRDTOOL:=		misc
 PKGSD_RRDTOOL:=		RRD tool
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_RRDCGI}))
 $(eval $(call PKG_template,RRDTOOL,rrdtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_RRDTOOL}))
 

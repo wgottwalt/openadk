@@ -1,0 +1,11 @@
+--- librpcsecgss-0.19.orig/include/rpcsecgss/rpc/rpcsecgss_rename.h	2009-05-13 23:33:08.000000000 +0200
++++ librpcsecgss-0.19/include/rpcsecgss/rpc/rpcsecgss_rename.h	2013-11-11 21:11:41.000000000 +0100
+@@ -83,8 +83,6 @@
+ #define  rpc_createerr		    rpcsecgss_rpc_createerr
+ #define  svc_auth_none		    rpcsecgss_svc_auth_none
+ #define  svc_auth_none_ops	    rpcsecgss_svc_auth_none_ops
+-#define  __svc_fdset		    rpcsecgss___svc_fdset
+-#define  __svc_fdsetsize	    rpcsecgss___svc_fdsetsize
+ #define  svc_maxfd		    rpcsecgss_svc_maxfd
+ 
+ #endif	/* _RPCSECGSS_RENAME_H_ */

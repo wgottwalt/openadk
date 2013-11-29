@@ -19,7 +19,7 @@ PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -flto,$(TARGET_CXXFLAGS))
@@ -36,7 +36,7 @@ else
 CONFIGURE_ENV+=		LIBS="-lc -lm -lgcc_s -lpthread"
 endif
 
-post-install:
+iperf-install:
 	${INSTALL_DIR} ${IDIR_IPERF}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/iperf ${IDIR_IPERF}/usr/bin
 

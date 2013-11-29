@@ -1,0 +1,11 @@
+--- librpcsecgss-0.19.orig/src/Makefile.am	2009-05-13 23:33:08.000000000 +0200
++++ librpcsecgss-0.19/src/Makefile.am	2013-11-11 21:11:41.000000000 +0100
+@@ -1,7 +1,7 @@
+ lib_LTLIBRARIES = librpcsecgss.la
+ librpcsecgss_la_CPPFLAGS = $(GSSGLUE_CFLAGS)
+ librpcsecgss_la_LDFLAGS = -version-info 3:0:0
+-librpcsecgss_la_LIBADD = $(GSSGLUE_LIBS)
++librpcsecgss_la_LIBADD = $(GSSGLUE_LIBS) -ltirpc
+ librpcsecgss_la_SOURCES = \
+ 	auth_gss.c authgss_prot.c svc.c svc_run.c svc_auth.c \
+ 	svc_auth_none.c svc_auth_unix.c svc_auth_gss.c \

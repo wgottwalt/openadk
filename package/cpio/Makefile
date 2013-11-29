@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=cpio/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,CPIO,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,CPIO,cpio,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 post-install:
 	${INSTALL_DIR} ${IDIR_CPIO}/usr/bin

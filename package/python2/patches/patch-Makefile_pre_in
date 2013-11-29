@@ -1,166 +1,57 @@
-diff -Nur Python-2.7.1.orig/Makefile.pre.in Python-2.7.1/Makefile.pre.in
---- Python-2.7.1.orig/Makefile.pre.in	2010-10-14 13:37:30.000000000 +0200
-+++ Python-2.7.1/Makefile.pre.in	2013-07-11 11:56:32.128103200 +0200
-@@ -59,7 +59,7 @@ MAKESETUP=      $(srcdir)/Modules/makese
- # Compiler options
- OPT=		@OPT@
- BASECFLAGS=	@BASECFLAGS@
--CFLAGS=		$(BASECFLAGS) @CFLAGS@ $(OPT) $(EXTRA_CFLAGS)
-+CFLAGS=		$(BASECFLAGS) @CFLAGS@ $(EXTRA_CFLAGS)
- # Both CPPFLAGS and LDFLAGS need to contain the shell's value for setup.py to
- # be able to build extension modules using the directories specified in the
- # environment variables
-@@ -179,6 +179,7 @@ UNICODE_OBJS=   @UNICODE_OBJS@
- 
- PYTHON=		python$(EXE)
- BUILDPYTHON=	python$(BUILDEXE)
-+HOSTPYTHON?=    $(BUILDPYTHON)
- 
- # The task to run while instrument when building the profile-opt target
- PROFILE_TASK=	$(srcdir)/Tools/pybench/pybench.py -n 2 --with-gc --with-syscheck
-@@ -211,6 +212,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
+--- Python-2.7.5.orig/Makefile.pre.in	2013-05-12 05:32:49.000000000 +0200
++++ Python-2.7.5/Makefile.pre.in	2013-11-01 14:54:24.000000000 +0100
+@@ -227,6 +227,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
  ##########################################################################
  # Parser
  PGEN=		Parser/pgen$(EXE)
-+HOSTPGEN?=      $(PGEN)$(EXE)
++HOSTPGEN?=	Parser/pgen$(EXE)
  
- POBJS=		\
- 		Parser/acceler.o \
-@@ -380,7 +382,7 @@ build_all_generate_profile:
- 	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
- 
- run_profile_task:
--	./$(BUILDPYTHON) $(PROFILE_TASK)
-+	$(HOSTPYTHON) $(PROFILE_TASK)
- 
- build_all_use_profile:
- 	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-@@ -398,14 +400,13 @@ $(BUILDPYTHON):	Modules/python.o $(LIBRA
- 			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
- 
- platform: $(BUILDPYTHON)
--	$(RUNSHARED) ./$(BUILDPYTHON) -E -c 'import sys ; from sysconfig import get_platform ; print get_platform()+"-"+sys.version[0:3]' >platform
-+	$(RUNSHARED) $(HOSTPYTHON) -E -c 'import sys ; from sysconfig import get_platform ; print get_platform()+"-"+sys.version[0:3]' >platform
- 
- 
- # Build the shared modules
- sharedmods: $(BUILDPYTHON)
- 	@case $$MAKEFLAGS in \
--	*s*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py -q build;; \
--	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' ./$(BUILDPYTHON) -E $(srcdir)/setup.py build;; \
-+	*) $(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' $(HOSTPYTHON) -E $(srcdir)/setup.py build;; \
- 	esac
+ PSRCS=		\
+ 		Parser/acceler.c \
+@@ -456,7 +457,7 @@ sharedmods: $(BUILDPYTHON) pybuilddir.tx
+ 	    *) quiet="";; \
+ 	esac; \
+ 	$(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' \
+-		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
++		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py build
  
  # Build static library
-@@ -538,7 +539,7 @@ Modules/python.o: $(srcdir)/Modules/pyth
- 
- $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
- 		-@$(INSTALL) -d Include
--		-$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
-+		-$(HOSTPGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
- 
- $(PGEN):	$(PGENOBJS)
- 		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
-@@ -702,7 +703,7 @@ $(LIBRARY_OBJS) $(MODOBJS) Modules/pytho
- 
- TESTOPTS=	-l $(EXTRATESTOPTS)
- TESTPROG=	$(srcdir)/Lib/test/regrtest.py
--TESTPYTHON=	$(RUNSHARED) ./$(BUILDPYTHON) -Wd -3 -E -tt $(TESTPYTHONOPTS)
-+TESTPYTHON=	$(RUNSHARED) $(HOSTPYTHON) -Wd -3 -E -tt $(TESTPYTHONOPTS)
- test:		all platform
- 		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
- 		-$(TESTPYTHON) $(TESTPROG) $(TESTOPTS)
-@@ -725,7 +726,7 @@ testuniversal:	all platform
- 		-find $(srcdir)/Lib -name '*.py[co]' -print | xargs rm -f
- 		-$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
- 		$(TESTPYTHON) $(TESTPROG) -uall $(TESTOPTS)
--		$(RUNSHARED) /usr/libexec/oah/translate ./$(BUILDPYTHON) -E -tt $(TESTPROG) -uall $(TESTOPTS)
-+		$(RUNSHARED) /usr/libexec/oah/translate $(HOSTPYTHON) -E -tt $(TESTPROG) -uall $(TESTOPTS)
- 
- 
- # Like testall, but with a single pass only
-@@ -920,26 +921,26 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
- 		done; \
- 	done
- 	$(INSTALL_DATA) $(srcdir)/LICENSE $(DESTDIR)$(LIBDEST)/LICENSE.txt
+ # avoid long command lines, same as LIBRARY_OBJS
+@@ -593,7 +594,7 @@ Modules/pwdmodule.o: $(srcdir)/Modules/p
+ $(GRAMMAR_H): $(GRAMMAR_INPUT) $(PGENSRCS)
+ 		@$(MKDIR_P) Include
+ 		$(MAKE) $(PGEN)
+-		$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
++		$(HOSTPGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+ $(GRAMMAR_C): $(GRAMMAR_H) $(GRAMMAR_INPUT) $(PGENSRCS)
+ 		$(MAKE) $(GRAMMAR_H)
+ 		touch $(GRAMMAR_C)
+@@ -1000,28 +1001,6 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
+ 		$(INSTALL_DATA) $(srcdir)/Modules/xxmodule.c \
+ 			$(DESTDIR)$(LIBDEST)/distutils/tests ; \
+ 	fi
 -	PYTHONPATH=$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
--		./$(BUILDPYTHON) -Wi -tt $(DESTDIR)$(LIBDEST)/compileall.py \
-+	-PYTHONPATH=$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
-+		$(HOSTPYTHON) -Wi -tt $(DESTDIR)$(LIBDEST)/compileall.py \
- 		-d $(LIBDEST) -f \
- 		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
- 		$(DESTDIR)$(LIBDEST)
+-		$(PYTHON_FOR_BUILD) -Wi -tt $(DESTDIR)$(LIBDEST)/compileall.py \
+-		-d $(LIBDEST) -f \
+-		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
+-		$(DESTDIR)$(LIBDEST)
 -	PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
--		./$(BUILDPYTHON) -Wi -tt -O $(DESTDIR)$(LIBDEST)/compileall.py \
-+	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
-+		$(HOSTPYTHON) -Wi -tt -O $(DESTDIR)$(LIBDEST)/compileall.py \
- 		-d $(LIBDEST) -f \
- 		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
- 		$(DESTDIR)$(LIBDEST)
- 	-PYTHONPATH=$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
--		./$(BUILDPYTHON) -Wi -t $(DESTDIR)$(LIBDEST)/compileall.py \
-+		$(HOSTPYTHON) -Wi -t $(DESTDIR)$(LIBDEST)/compileall.py \
- 		-d $(LIBDEST)/site-packages -f \
- 		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
- 	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
--		./$(BUILDPYTHON) -Wi -t -O $(DESTDIR)$(LIBDEST)/compileall.py \
-+		$(HOSTPYTHON) -Wi -t -O $(DESTDIR)$(LIBDEST)/compileall.py \
- 		-d $(LIBDEST)/site-packages -f \
- 		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
- 	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
--		./$(BUILDPYTHON) -Wi -t -c "import lib2to3.pygram, lib2to3.patcomp;lib2to3.patcomp.PatternCompiler()"
-+		$(HOSTPYTHON) -Wi -t -c "import lib2to3.pygram, lib2to3.patcomp;lib2to3.patcomp.PatternCompiler()"
+-		$(PYTHON_FOR_BUILD) -Wi -tt -O $(DESTDIR)$(LIBDEST)/compileall.py \
+-		-d $(LIBDEST) -f \
+-		-x 'bad_coding|badsyntax|site-packages|lib2to3/tests/data' \
+-		$(DESTDIR)$(LIBDEST)
+-	-PYTHONPATH=$(DESTDIR)$(LIBDEST)  $(RUNSHARED) \
+-		$(PYTHON_FOR_BUILD) -Wi -t $(DESTDIR)$(LIBDEST)/compileall.py \
+-		-d $(LIBDEST)/site-packages -f \
+-		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
+-	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+-		$(PYTHON_FOR_BUILD) -Wi -t -O $(DESTDIR)$(LIBDEST)/compileall.py \
+-		-d $(LIBDEST)/site-packages -f \
+-		-x badsyntax $(DESTDIR)$(LIBDEST)/site-packages
+-	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+-		$(PYTHON_FOR_BUILD) -m lib2to3.pgen2.driver $(DESTDIR)$(LIBDEST)/lib2to3/Grammar.txt
+-	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
+-		$(PYTHON_FOR_BUILD) -m lib2to3.pgen2.driver $(DESTDIR)$(LIBDEST)/lib2to3/PatternGrammar.txt
  
  # Create the PLATDIR source directory, if one wasn't distributed..
  $(srcdir)/Lib/$(PLATDIR):
-@@ -1044,11 +1045,12 @@ libainstall:	all python-config
- # Install the dynamically loadable modules
- # This goes into $(exec_prefix)
- sharedinstall: sharedmods
--	$(RUNSHARED) ./$(BUILDPYTHON) -E $(srcdir)/setup.py install \
-+	CROSS_COMPILE='$(CROSS_COMPILE)' \
-+	$(RUNSHARED) $(HOSTPYTHON) -E $(srcdir)/setup.py install \
- 	   	--prefix=$(prefix) \
- 		--install-scripts=$(BINDIR) \
- 		--install-platlib=$(DESTSHARED) \
--		--root=/$(DESTDIR)
-+		--root=$(DESTDIR)
- 
- # Here are a couple of targets for MacOSX again, to install a full
- # framework-based Python. frameworkinstall installs everything, the
-@@ -1082,7 +1084,7 @@ frameworkinstallstructure:	$(LDLIBRARY)
- 		fi; \
- 	done
- 	$(LN) -fsn include/python$(VERSION) $(DESTDIR)$(prefix)/Headers
--	sed 's/%VERSION%/'"`$(RUNSHARED) ./$(BUILDPYTHON) -c 'import platform; print platform.python_version()'`"'/g' < $(RESSRCDIR)/Info.plist > $(DESTDIR)$(prefix)/Resources/Info.plist
-+	sed 's/%VERSION%/'"`$(RUNSHARED) $(HOSTPYTHON) -c 'import platform; print platform.python_version()'`"'/g' < $(RESSRCDIR)/Info.plist > $(DESTDIR)$(prefix)/Resources/Info.plist
- 	$(LN) -fsn $(VERSION) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Versions/Current
- 	$(LN) -fsn Versions/Current/$(PYTHONFRAMEWORK) $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/$(PYTHONFRAMEWORK)
- 	$(LN) -fsn Versions/Current/Headers $(DESTDIR)$(PYTHONFRAMEWORKINSTALLDIR)/Headers
-@@ -1117,7 +1119,7 @@ frameworkinstallextras:
- # This installs a few of the useful scripts in Tools/scripts
- scriptsinstall:
- 	SRCDIR=$(srcdir) $(RUNSHARED) \
--	./$(BUILDPYTHON) $(srcdir)/Tools/scripts/setup.py install \
-+	$(HOSTPYTHON) $(srcdir)/Tools/scripts/setup.py install \
- 	--prefix=$(prefix) \
- 	--install-scripts=$(BINDIR) \
- 	--root=/$(DESTDIR)
-@@ -1139,7 +1141,7 @@ config.status:	$(srcdir)/configure
- 
- # Run reindent on the library
- reindent:
--	./$(BUILDPYTHON) $(srcdir)/Tools/scripts/reindent.py -r $(srcdir)/Lib
-+	$(HOSTPYTHON) $(srcdir)/Tools/scripts/reindent.py -r $(srcdir)/Lib
- 
- # Rerun configure with the same options as it was run last time,
- # provided the config.status script exists
-@@ -1242,7 +1244,7 @@ funny:
- 
- # Perform some verification checks on any modified files.
- patchcheck:
--	$(RUNSHARED) ./$(BUILDPYTHON) $(srcdir)/Tools/scripts/patchcheck.py
-+	$(RUNSHARED) $(HOSTPYTHON) $(srcdir)/Tools/scripts/patchcheck.py
- 
- # Dependencies
- 

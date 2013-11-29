@@ -9,13 +9,13 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a9c85aa6d624f7f88c48374f28730242
 PKG_DESCR:=		small C++ application server
 PKG_SECTION:=		www
-PKG_DEPENDS:=		cxxtools zlib libiconv libpthread
-PKG_BUILDDEP:=		cxxtools zlib libiconv
+PKG_DEPENDS:=		cxxtools zlib libpthread
+PKG_BUILDDEP:=		cxxtools zlib libiconv-tiny
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!arm !avr32
+PKG_ARCH_DEPENDS:=	!arm !avr32 !m68k
 
 PKG_CHOICES_TNTNET:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITHOUT_SSL:=	use no SSL

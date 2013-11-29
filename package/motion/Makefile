@@ -19,7 +19,7 @@ PKG_ARCH_DEPENDS:=      !m68k
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MOTION,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MOTION,motion,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-ffmpeg \
 			--without-jpeg-mmx \
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--without-ffmpeg \
 			--without-pgsql \
 			--with-v4l
 
-post-install:
+motion-install:
 	${INSTALL_DIR} ${IDIR_MOTION}/etc ${IDIR_MOTION}/usr/bin
 	$(INSTALL_DATA) ./files/motion.conf ${IDIR_MOTION}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/motion ${IDIR_MOTION}/usr/bin

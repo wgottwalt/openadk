@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.26
+PKG_VERSION:=		2.4.36
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f36f3086031dd56ae94f722ffae8df5e
+PKG_MD5SUM:=		744701405d396b1fb9de6cb7a453c6e9
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid
@@ -14,10 +14,10 @@ PKG_BUILDDEP:=		cyrus-sasl openssl db util-linux
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		libopenldap
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBOPENLDAP LIBOPENLDAP_DEV OPENLDAP_UTILS OPENLDAP_SLAPD
-PKGSD_LIBOPENLDAP_DEV:=	OpenLDAP headers
-PKGSC_LIBOPENLDAP_DEV:=	devel
+PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
 PKGSD_OPENLDAP_UTILS:=	OpenLDAP utilities
 PKGSS_OPENLDAP_UTILS:=	libopenldap
 PKGSC_OPENLDAP_UTILS:=	net/misc
@@ -30,14 +30,17 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 PKG_FLAVOURS_OPENLDAP_SLAPD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBOPENLDAP_DEV,libopenldap-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBOPENLDAP_DEV},${PKGSC_LIBOPENLDAP_DEV}))
+$(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
 $(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
-PKG_CONFIGURE_OPTIONS+= --enable-slapd \
+CONFIGURE_ARGS+= 	--enable-slapd \
 			--libexecdir=/usr/sbin \
 			--enable-bdb \
 			--disable-hdb \
@@ -59,25 +62,7 @@ CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
 CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
-CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTIONS}
 XAKE_FLAGS+=		STRIP="" CPPFLAGS="-D_GNU_SOURCE"
-
-pre-configure:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		CPPFLAGS=-D_GNU_SOURCE ./configure \
-		   ${PKG_CONFIGURE_OPTIONS} \
-		  --disable-slapd \
-		  --without-cyrus-sasl \
-		  --without-threads \
-		  --without-tls \
-	);
-	${MAKE} -C ${WRKBUILD} depend
-	${MAKE} -C ${WRKBUILD}/libraries/liblutil
-	${MAKE} -C ${WRKBUILD}/libraries/liblber
-	${MAKE} -C ${WRKBUILD}/libraries/liblunicode
-	${MAKE} -C ${WRKBUILD}/libraries/liblber clean
-	${MAKE} -C ${WRKBUILD}/libraries/liblutil clean
-	${MAKE} -C ${WRKBUILD}/libraries/liblunicode clean
 
 libopenldap-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENLDAP}/etc/openldap
@@ -86,11 +71,6 @@ libopenldap-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENLDAP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{lber,ldap}*.so* \
 		${IDIR_LIBOPENLDAP}/usr/lib
-
-libopenldap-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBOPENLDAP_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* \
-		${IDIR_LIBOPENLDAP_DEV}/usr/include
 
 openldap-utils-install:
 	${INSTALL_DIR} ${IDIR_OPENLDAP_UTILS}/etc/openldap-data

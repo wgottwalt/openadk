@@ -4,6 +4,7 @@ config ADK_TARGET_SYSTEM_QEMU_MIPS64EL
 	select ADK_little
 	select ADK_qemu_mips64el
 	select ADK_KERNEL_MIPS_MALTA
+	select ADK_KERNEL_PAGE_SIZE_4KB
 	select ADK_KERNEL_CPU_LITTLE_ENDIAN
 	select ADK_KERNEL_CPU_MIPS64
 	select ADK_KERNEL_CPU_MIPS64_R1
@@ -14,6 +15,7 @@ config ADK_TARGET_SYSTEM_QEMU_MIPS64EL
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_KERNEL_VMLINUZ
 	help
 	 Qemu support for mips64 little endian architecture.
 

@@ -9,14 +9,14 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4d00c6e09859b653f955b16b988db0ac
 PKG_DESCR:=		IRC gateway to IM chat networks
 PKG_SECTION:=		chat
-PKG_DEPENDS:=		glib libiconv libopenssl
-PKG_BUILDDEP:=		glib libiconv openssl
+PKG_DEPENDS:=		glib libopenssl
+PKG_BUILDDEP:=		glib libiconv-tiny openssl
 PKG_URL:=		http://www.bitlbee.org/
 PKG_SITES:=		http://get.bitlbee.org/src/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BITLBEE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BITLBEE,bitlbee,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
 TARGET_CFLAGS+=		-fPIC
@@ -40,7 +40,7 @@ post-configure:
 	@echo 'LFLAGS+=${TARGET_LDFLAGS}' >> \
 		${WRKBUILD}/Makefile.settings
 
-post-install:
+bitlbee-install:
 	${INSTALL_DIR} ${IDIR_BITLBEE}/etc/bitlbee ${IDIR_BITLBEE}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/bitlbee/* ${IDIR_BITLBEE}/etc/bitlbee
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/bitlbee ${IDIR_BITLBEE}/usr/sbin

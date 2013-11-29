@@ -16,9 +16,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SIPROXD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SIPROXD,siproxd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+siproxd-install:
 	${INSTALL_DIR} ${IDIR_SIPROXD}/usr/sbin ${IDIR_SIPROXD}/etc
 	${INSTALL_DATA} ${WRKINST}/etc/siproxd.conf.example \
 		${IDIR_SIPROXD}/etc/siproxd.conf

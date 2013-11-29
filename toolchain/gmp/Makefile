@@ -18,6 +18,7 @@ endif
 	(cd $(WRKBUILD); \
 		./configure \
 		--prefix=$(STAGING_HOST_DIR) \
+		--with-pic \
 		--disable-shared \
 		--enable-static \
 	)

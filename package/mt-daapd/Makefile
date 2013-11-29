@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mt-daapd/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MT_DAAPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MT_DAAPD,mt-daapd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
@@ -28,7 +28,7 @@ CONFIGURE_ARGS+=	--enable-mdns \
 			--without-static-libs
 TARGET_LDFLAGS+=	-pthread
 
-post-install:
+mt-daapd-install:
 	${INSTALL_DIR} ${IDIR_MT_DAAPD}/etc ${IDIR_MT_DAAPD}/usr/{share,sbin}
 	${INSTALL_DATA} ${WRKBUILD}/contrib/mt-daapd.conf \
 		${IDIR_MT_DAAPD}/etc/

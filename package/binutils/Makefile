@@ -4,9 +4,11 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/binutils/Makefile.inc
 
+PKG_NAME:=		binutils
 PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libbfd
+PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		BINUTILS LIBBFD
 PKGSD_LIBBFD:=		Binary File Descriptor library
@@ -15,10 +17,14 @@ PKGSC_LIBBFD:=		libs
 PKG_HOST_DEPENDS:=      !cygwin
 PKG_ARCH_DEPENDS:=	!avr32
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBFD},${PKGSC_LIBBFD}))
+$(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
 
 ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
 CONFIGURE_ARGS+=	--enable-multilib
@@ -41,7 +47,7 @@ pre-build:
 
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib
-	$(CP) ${WRKINST}/usr/lib/*.so ${IDIR_LIBBFD}/usr/lib
+	$(CP) ${WRKINST}/usr/lib/*.so* ${IDIR_LIBBFD}/usr/lib
 
 binutils-install:
 	${INSTALL_DIR} ${IDIR_BINUTILS}/usr/bin

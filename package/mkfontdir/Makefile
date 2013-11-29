@@ -15,9 +15,9 @@ PKG_OPTS:=		noscripts
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,MKFONTDIR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,MKFONTDIR,mkfontdir,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+mkfontdir-install:
 	$(INSTALL_DIR) $(IDIR_MKFONTDIR)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/mkfontdir \
 		$(IDIR_MKFONTDIR)/usr/bin

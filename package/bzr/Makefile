@@ -16,7 +16,7 @@ PKG_SITES:=		https://launchpad.net/bzr/2.5/2.5.1/+download/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BZR,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BZR,bzr,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

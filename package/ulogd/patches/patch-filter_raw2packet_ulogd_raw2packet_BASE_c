@@ -1,0 +1,17 @@
+--- ulogd-2.0.2.orig/filter/raw2packet/ulogd_raw2packet_BASE.c	2013-03-01 16:44:22.000000000 +0100
++++ ulogd-2.0.2/filter/raw2packet/ulogd_raw2packet_BASE.c	2013-11-11 21:27:31.000000000 +0100
+@@ -588,10 +588,10 @@ static int _interp_udp(struct ulogd_plug
+ 
+ /* Section 3.1.  SCTP Common Header Format */
+ typedef struct sctphdr {
+-	__be16 source;
+-	__be16 dest;
+-	__be32 vtag;
+-	__be32 checksum;
++	uint16_t source;
++	uint16_t dest;
++	uint32_t vtag;
++	uint32_t checksum;
+ } __attribute__((packed)) sctp_sctphdr_t;
+ 
+ static int _interp_sctp(struct ulogd_pluginstance *pi, struct sctphdr *sctph,

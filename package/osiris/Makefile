@@ -16,7 +16,7 @@ PKG_SITES:=		http://osiris.shmoo.com/data/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,OSIRISD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OSIRIS,osiris,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_openssldir="${STAGING_TARGET_DIR}/usr" \
 			ac_cv_have_accrights_in_msghdr=no \
@@ -31,9 +31,9 @@ TARGET_CFLAGS+=		-DOPENSSL_NO_RIPEMD
 post-configure:
 	(cd ${WRKDIST}/src/osirisd/modules && ./genmods.sh);
 
-post-install:
-	${INSTALL_DIR} ${IDIR_OSIRISD}/usr/sbin
+osiris-install:
+	${INSTALL_DIR} ${IDIR_OSIRIS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/osirisd \
-		${IDIR_OSIRISD}/usr/sbin/
+		${IDIR_OSIRIS}/usr/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

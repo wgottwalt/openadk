@@ -15,9 +15,9 @@ PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GPERF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GPERF,gperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+gperf-install:
 	${INSTALL_DIR} ${IDIR_GPERF}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gperf ${IDIR_GPERF}/usr/bin
 

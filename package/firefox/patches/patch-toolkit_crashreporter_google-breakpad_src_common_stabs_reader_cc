@@ -1,6 +1,6 @@
 --- mozilla-release.orig/toolkit/crashreporter/google-breakpad/src/common/stabs_reader.cc	2013-09-11 01:15:25.000000000 +0200
-+++ mozilla-release/toolkit/crashreporter/google-breakpad/src/common/stabs_reader.cc	2013-10-17 10:55:17.000000000 +0200
-@@ -34,7 +34,20 @@
++++ mozilla-release/toolkit/crashreporter/google-breakpad/src/common/stabs_reader.cc	2013-10-24 12:08:16.000000000 +0200
+@@ -34,13 +34,31 @@
  #include "common/stabs_reader.h"
  
  #include <assert.h>
@@ -21,3 +21,14 @@
  #include <string.h>
  
  #include <string>
+ 
+ #include "common/using_std_string.h"
+ 
++#ifndef N_UNDF
++#define N_UNDF 0
++#endif
++
++
+ using std::vector;
+ 
+ namespace google_breakpad {

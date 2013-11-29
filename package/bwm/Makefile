@@ -16,7 +16,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}.orig
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BWM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BWM,bwm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

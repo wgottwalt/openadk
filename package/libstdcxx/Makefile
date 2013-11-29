@@ -21,7 +21,7 @@ PKG_DESCR:=		C++ support library
 PKG_SECTION:=		libs
 PKG_NEED_CXX:=		1
 ifeq ($(ADK_LINUX_AVR32),y)
-PKG_SUBVER:=		14
+PKG_SUBVER:=		13
 else
 PKG_SUBVER:=		17
 endif

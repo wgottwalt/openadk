@@ -13,12 +13,11 @@ PKG_BUILDDEP:=		fontconfig libstdcxx
 PKG_DEPENDS:=		fontconfig libstdcxx
 PKG_URL:=		http://poppler.freedesktop.org/
 PKG_SITES:=		http://poppler.freedesktop.org/
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64
+$(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 poppler-install:
 	$(INSTALL_DIR) $(IDIR_POPPLER)/usr/lib

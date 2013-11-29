@@ -229,7 +229,7 @@ config BUSYBOX_LOGIN_SESSION_AS_CHILD
 
 config BUSYBOX_PAM
 	bool "Support for PAM (Pluggable Authentication Modules)"
-	depends on !ADK_PACKAGE_PAM
+	depends on !BUSYBOX_DISABLE_PAM
 	default n
 	depends on BUSYBOX_LOGIN
 	help

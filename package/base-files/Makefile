@@ -9,6 +9,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		61
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
+PKG_BUILDDEP:=		pkgconf-host file-host
 
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
@@ -67,6 +68,9 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
 	$(SED) 's#ttyS#nfcon#g' $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC64),y)
+	$(SED) 's#ttyS#hvc#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \

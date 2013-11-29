@@ -14,13 +14,13 @@ PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/raid/mdadm/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MDADM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MDADM,mdadm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
 XAKE_FLAGS+=		CROSS_COMPILE="${TARGET_CROSS}"
 
-post-install:
+mdadm-install:
 	${INSTALL_DIR} ${IDIR_MDADM}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/mdadm ${IDIR_MDADM}/usr/sbin
 

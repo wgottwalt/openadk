@@ -19,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NMAP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
@@ -35,7 +35,7 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-libpcre="${STAGING_TARGET_DIR}/usr"
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-post-install:
+nmap-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/bin
 	for file in mac-prefixes os-db protocols rpc service-probes services; do \

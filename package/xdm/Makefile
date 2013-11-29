@@ -16,13 +16,13 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XDM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XDM,xdm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-random-device=/dev/urandom \
 			--with-utmp-file=/dev/null \
 			--with-wtmp-file=/dev/null
 
-post-install:
+xdm-install:
 	$(INSTALL_DIR) $(IDIR_XDM)/usr/lib/X11
 	$(CP) $(WRKINST)/usr/lib/X11/* \
 		$(IDIR_XDM)/usr/lib/X11

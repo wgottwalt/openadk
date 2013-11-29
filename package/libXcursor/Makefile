@@ -5,33 +5,22 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXcursor
 PKG_VERSION:=		1.1.13
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		38a6c7ce393cb5bc10e67de087f9d582
 PKG_DESCR:=		xcursor library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_BUILDDEP:=		libXfixes libXrender
-
-PKG_SUBPKGS:=		LIBXCURSOR LIBXCURSOR_DEV
-PKGSC_LIBXCURSOR_DEV:=	x11/devel
-PKGSD_LIBXCURSOR_DEV:=	libXcursor development files
+PKG_LIBNAME:=		libxcursor
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBXCURSOR,libxcursor,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXCURSOR_DEV,libxcursor-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBXCURSOR,libxcursor,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libxcursor-install:
 	$(INSTALL_DIR) $(IDIR_LIBXCURSOR)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libXcursor*.so* \
 		$(IDIR_LIBXCURSOR)/usr/lib
-
-libxcursor-dev-install:
-	$(INSTALL_DIR) $(IDIR_LIBXCURSOR_DEV)/usr/lib/pkgconfig
-	$(CP) $(WRKINST)/usr/lib/pkgconfig/*.pc \
-		$(IDIR_LIBXCURSOR_DEV)/usr/lib/pkgconfig
-	$(INSTALL_DIR) $(IDIR_LIBXCURSOR_DEV)/usr/include
-	$(CP) $(WRKINST)/usr/include/* \
-		$(IDIR_LIBXCURSOR_DEV)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -14,9 +14,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,MKFONTSCALE,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MKFONTSCALE,mkfontscale,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+mkfontscale-install:
 	$(INSTALL_DIR) $(IDIR_MKFONTSCALE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/mkfontscale \
 		$(IDIR_MKFONTSCALE)/usr/bin

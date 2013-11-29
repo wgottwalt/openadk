@@ -16,9 +16,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XAUTH,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XAUTH,xauth,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xauth-install:
 	$(INSTALL_DIR) $(IDIR_XAUTH)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xauth $(IDIR_XAUTH)/usr/bin
 

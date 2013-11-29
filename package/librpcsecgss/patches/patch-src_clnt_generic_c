@@ -1,0 +1,13 @@
+--- librpcsecgss-0.19.orig/src/clnt_generic.c	2009-07-29 18:24:50.000000000 +0200
++++ librpcsecgss-0.19/src/clnt_generic.c	2013-11-11 21:11:41.000000000 +0100
+@@ -47,8 +47,8 @@ static char *rcsid = "$OpenBSD: clnt_gen
+ CLIENT *
+ clnt_create(hostname, prog, vers, proto)
+ 	__const char *hostname;
+-	__const u_long prog;
+-	__const u_long vers;
++	__const rpcprog_t prog;
++	__const rpcvers_t vers;
+ 	__const char *proto;
+ {
+ 	struct hostent *h;

@@ -19,11 +19,11 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GREP,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GREP,grep,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-liconv
 
-post-install:
+grep-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/bin
 

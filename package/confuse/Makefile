@@ -5,18 +5,18 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		confuse
 PKG_VERSION:=		2.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		45932fdeeccbb9ef4228f1c1a25e9c8f
 PKG_DESCR:=		a configuration file parser library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.nongnu.org/confuse/
 PKG_SITES:=		http://savannah.nongnu.org/download/confuse/
-
-PKG_SUBPKGS:=		LIBCONFUSE
+PKG_LIBNAME:=		libconfuse
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBCONFUSE,libconfuse,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBCONFUSE,libconfuse,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libconfuse-install:
 	${INSTALL_DIR} ${IDIR_LIBCONFUSE}/usr/lib

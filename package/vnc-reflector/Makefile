@@ -18,7 +18,7 @@ WRKDIST=		${WRKDIR}/vnc_reflector
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VNC_REFLECTOR,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VNC_REFLECTOR,vnc-reflector,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual

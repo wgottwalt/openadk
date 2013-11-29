@@ -19,7 +19,7 @@ PKGFD_TINY:=		tiny nano
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NANO,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NANO,nano,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_header_regex_h=no
 CONFIGURE_ARGS+=	--enable-nanorc \
@@ -39,7 +39,7 @@ CONFIGURE_ARGS+=	--disable-browser \
 			--enable-multibuffer
 endif
 
-post-install:
+nano-install:
 	${INSTALL_DIR} ${IDIR_NANO}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/nano ${IDIR_NANO}/usr/bin/
 	${INSTALL_DIR} ${IDIR_NANO}/etc

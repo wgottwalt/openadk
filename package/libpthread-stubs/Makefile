@@ -5,20 +5,16 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpthread-stubs
 PKG_VERSION:=		0.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a09d928c4af54fe5436002345ef71138
 PKG_DESCR:=		Pthread-stubs
-PKG_SECTION:=		x11/devel
+PKG_SECTION:=		devel
 PKG_URL:=		http://xcb.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_OPTS:=		dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBPTHREAD_STUBS,libpthread-stubs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-post-install:
-	${INSTALL_DIR} ${IDIR_LIBPTHREAD_STUBS}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/pthread-stubs.pc \
-		${IDIR_LIBPTHREAD_STUBS}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

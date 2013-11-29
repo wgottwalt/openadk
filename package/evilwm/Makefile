@@ -16,13 +16,13 @@ PKG_SITES:=		http://www.6809.org.uk/evilwm/
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,EVILWM,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,EVILWM,evilwm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
 MAKE_FLAGS+=		XROOT="$(STAGING_TARGET_DIR)/usr"
 
-post-install:
+evilwm-install:
 	$(INSTALL_DIR) $(IDIR_EVILWM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/evilwm $(IDIR_EVILWM)/usr/bin
 

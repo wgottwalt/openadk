@@ -16,9 +16,9 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XINPUT,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XINPUT,xinput,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xinput-install:
 	$(INSTALL_DIR) $(IDIR_XINPUT)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xinput \
 		$(IDIR_XINPUT)/usr/bin

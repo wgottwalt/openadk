@@ -34,13 +34,5 @@ else
 	${CP} ${STAGING_TARGET_DIR}/$(ADK_TARGET_LIBC_PATH)/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 endif
-ifeq ($(ADK_TARGET_MULTILIB_X86_32),y)
-	${INSTALL_DIR} ${IDIR_LIBGCC}/lib32
-	${CP} ${STAGING_TARGET_DIR_32}/lib/libgcc*.so* ${IDIR_LIBGCC}/lib32
-endif
-ifeq ($(ADK_TARGET_MULTILIB_X86_X32),y)
-	${INSTALL_DIR} ${IDIR_LIBGCC}/libx32
-	${CP} ${STAGING_TARGET_DIR_X32}/lib/libgcc*.so* ${IDIR_LIBGCC}/libx32
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

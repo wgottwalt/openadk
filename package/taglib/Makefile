@@ -13,10 +13,11 @@ PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://taglib.github.com/
 PKG_SITES:=		http://openadk.org/distfiles/
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TAGLIB,taglib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TAGLIB,taglib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 

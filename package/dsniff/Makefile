@@ -20,7 +20,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DSNIFF,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--without-db \
 			--without-x \
@@ -31,7 +31,7 @@ CONFIGURE_ARGS+=	--without-db \
 			--with-openssl="${STAGING_TARGET_DIR}/usr"
 FAKE_FLAGS+=		install_prefix="${WRKINST}"
 
-post-install:
+dsniff-install:
 	${INSTALL_DIR} ${IDIR_DSNIFF}/usr/lib ${IDIR_DSNIFF}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_DSNIFF}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/* ${IDIR_DSNIFF}/usr/lib

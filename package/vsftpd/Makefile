@@ -4,22 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vsftpd
-PKG_VERSION:=		2.3.4
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2ea5d19978710527bb7444d93b67767a
+PKG_MD5SUM:=		8b00c749719089401315bd3c44dddbb2
 PKG_DESCR:=		a fast and secure FTP server
 PKG_SECTION:=		www
+PKG_DEPENDS:=		libcap
+PKG_BUILDDEP:=		libcap
 PKG_URL:=		http://vsftpd.beasts.org/
-PKG_SITES:=		http://security.appspot.com/downloads/
+PKG_SITES:=		https://security.appspot.com/downloads/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,VSFTPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,VSFTPD,vsftpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 ALL_TARGET:=		vsftpd
 
-post-install:
+vsftpd-install:
 	${INSTALL_DIR} ${IDIR_VSFTPD}/etc ${IDIR_VSFTPD}/usr/sbin
 	${INSTALL_DATA} ./files/vsftpd.conf ${IDIR_VSFTPD}/etc/vsftpd.conf
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/vsftpd ${IDIR_VSFTPD}/usr/sbin

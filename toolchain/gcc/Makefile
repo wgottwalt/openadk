@@ -42,6 +42,8 @@ endif
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
 GCC_CONFOPTS+=		--with-multilib-list=mx32
+else
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
 endif
 endif
 
@@ -57,10 +59,14 @@ else
 GCC_CONFOPTS+=		--disable-lto
 endif
 
+ifeq ($(ARCH),m68k)
+GCC_CONFOPTS+=		--disable-tls
+else 
 ifeq ($(ARCH),cris)
 GCC_CONFOPTS+=		--disable-tls
 else
 GCC_CONFOPTS+=		--enable-tls
+endif
 endif
 
 ifeq ($(ARCH),powerpc)
@@ -189,6 +195,13 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	# workaround for openjdk
 	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin ; cp * ..
+	# fix linking g++ apps with libtool
+	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
+		cd $(STAGING_TARGET_DIR)/lib32 && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so
+	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
+		cd $(STAGING_TARGET_DIR)/lib64 && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

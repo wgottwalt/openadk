@@ -1,6 +1,6 @@
 diff -Nur icedtea-2.3.9.orig/Makefile.in icedtea-2.3.9/Makefile.in
 --- icedtea-2.3.9.orig/Makefile.in	2013-04-21 22:48:31.000000000 +0200
-+++ icedtea-2.3.9/Makefile.in	2013-07-18 16:10:01.000000000 +0200
++++ icedtea-2.3.9/Makefile.in	2013-11-15 12:28:32.000000000 +0100
 @@ -90,7 +90,6 @@
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7089790-bsd_port.patch \
  @WITH_ALT_HSBUILD_TRUE@	patches/hotspot/$(HSBUILD)/7098194-macosx_port.patch \
@@ -29,11 +29,11 @@ diff -Nur icedtea-2.3.9.orig/Makefile.in icedtea-2.3.9/Makefile.in
  
 diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk.patch
 --- icedtea-2.3.9.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.3.9/patches/openadk.patch	2013-07-18 16:25:18.000000000 +0200
-@@ -0,0 +1,482 @@
++++ icedtea-2.3.9/patches/openadk.patch	2013-11-15 13:52:27.000000000 +0100
+@@ -0,0 +1,493 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2013-03-15 17:33:37.000000000 +0100
-++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-11-15 13:51:09.000000000 +0100
 +@@ -115,7 +115,6 @@
 + # include <string.h>
 + # include <syscall.h>
@@ -90,7 +90,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + void os::pause() {
 +diff -Nur openjdk.orig/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp openjdk/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp
 +--- openjdk.orig/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2013-03-15 17:33:37.000000000 +0100
-++++ openjdk/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp	2013-11-15 13:51:57.000000000 +0100
 +@@ -253,7 +253,7 @@
 + #elif defined(__APPLE__)
 + inline int g_isnan(double f) { return isnan(f); }
@@ -100,9 +100,20 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + inline int g_isnan(double f) { return isnan(f); }
 + #else
 + #error "missing platform-specific definition here"
++@@ -267,8 +267,8 @@
++ 
++ // Checking for finiteness
++ 
++-inline int g_isfinite(jfloat  f)                 { return finite(f); }
++-inline int g_isfinite(jdouble f)                 { return finite(f); }
+++inline int g_isfinite(jfloat  f)                 { return isfinite(f); }
+++inline int g_isfinite(jdouble f)                 { return isfinite(f); }
++ 
++ 
++ // Wide characters
 +diff -Nur openjdk.orig/jdk/make/com/sun/java/pack/Makefile openjdk/jdk/make/com/sun/java/pack/Makefile
 +--- openjdk.orig/jdk/make/com/sun/java/pack/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/com/sun/java/pack/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/com/sun/java/pack/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -80,7 +80,7 @@
 +     LDDFLAGS += $(ZIPOBJS)
 +   endif
@@ -114,7 +125,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 
 +diff -Nur openjdk.orig/jdk/make/com/sun/nio/sctp/Makefile openjdk/jdk/make/com/sun/nio/sctp/Makefile
 +--- openjdk.orig/jdk/make/com/sun/nio/sctp/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/com/sun/nio/sctp/Makefile	2013-07-18 16:24:59.000000000 +0200
+++++ openjdk/jdk/make/com/sun/nio/sctp/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -64,7 +64,7 @@
 + COMPILER_WARNINGS_FATAL=true
 + endif
@@ -126,7 +137,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + #LIBSCTP = -lsctp
 +diff -Nur openjdk.orig/jdk/make/common/Defs.gmk openjdk/jdk/make/common/Defs.gmk
 +--- openjdk.orig/jdk/make/common/Defs.gmk	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/common/Defs.gmk	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/common/Defs.gmk	2013-11-15 13:51:09.000000000 +0100
 +@@ -204,7 +204,7 @@
 +       ifeq ($(PLATFORM), macosx)
 +         FREETYPE_HEADERS_PATH = /usr/X11R6/include
@@ -138,7 +149,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +   endif
 +diff -Nur openjdk.orig/jdk/make/common/shared/Platform.gmk openjdk/jdk/make/common/shared/Platform.gmk
 +--- openjdk.orig/jdk/make/common/shared/Platform.gmk	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/common/shared/Platform.gmk	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/common/shared/Platform.gmk	2013-11-15 13:51:09.000000000 +0100
 +@@ -160,9 +160,6 @@
 +   else
 +     mach := $(shell uname -m)
@@ -151,7 +162,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +                     echo i586 \
 +diff -Nur openjdk.orig/jdk/make/java/instrument/Makefile openjdk/jdk/make/java/instrument/Makefile
 +--- openjdk.orig/jdk/make/java/instrument/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/java/instrument/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/java/instrument/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -140,6 +140,8 @@
 + # We don't want to link against -ljava
 + JAVALIB=
@@ -163,7 +174,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + #
 +diff -Nur openjdk.orig/jdk/make/java/net/Makefile openjdk/jdk/make/java/net/Makefile
 +--- openjdk.orig/jdk/make/java/net/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/java/net/Makefile	2013-07-18 16:17:53.000000000 +0200
+++++ openjdk/jdk/make/java/net/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -25,7 +25,7 @@
 + 
 + BUILDDIR = ../..
@@ -175,7 +186,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 
 +diff -Nur openjdk.orig/jdk/make/java/nio/Makefile openjdk/jdk/make/java/nio/Makefile
 +--- openjdk.orig/jdk/make/java/nio/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/java/nio/Makefile	2013-07-18 16:24:27.000000000 +0200
+++++ openjdk/jdk/make/java/nio/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -369,7 +369,7 @@
 + endif
 + 
@@ -205,7 +216,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + $(SFS_GEN)/UnixConstants.java: $(NIO_PLATFORM_CLASSES_ROOT_DIR)/sun/nio/fs/UnixConstants-$(PLATFORM)-$(ARCH).java
 +diff -Nur openjdk.orig/jdk/make/java/npt/Makefile openjdk/jdk/make/java/npt/Makefile
 +--- openjdk.orig/jdk/make/java/npt/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/java/npt/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/java/npt/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -64,6 +64,8 @@
 + # We don't want to link against -ljava
 + JAVALIB=
@@ -217,7 +228,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +   OTHER_LCF += -export:nptInitialize -export:nptTerminate
 +diff -Nur openjdk.orig/jdk/make/sun/awt/mawt.gmk openjdk/jdk/make/sun/awt/mawt.gmk
 +--- openjdk.orig/jdk/make/sun/awt/mawt.gmk	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/sun/awt/mawt.gmk	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/sun/awt/mawt.gmk	2013-11-15 13:51:09.000000000 +0100
 +@@ -151,22 +151,6 @@
 + #endif
 + 
@@ -276,7 +287,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +   CPPFLAGS += -I$(OPENWIN_HOME)/include/X11/extensions \
 +diff -Nur openjdk.orig/jdk/make/sun/splashscreen/Makefile openjdk/jdk/make/sun/splashscreen/Makefile
 +--- openjdk.orig/jdk/make/sun/splashscreen/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/sun/splashscreen/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/sun/splashscreen/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -55,6 +55,8 @@
 + 
 + JAVALIB=
@@ -288,7 +299,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + #
 +diff -Nur openjdk.orig/jdk/make/sun/xawt/Makefile openjdk/jdk/make/sun/xawt/Makefile
 +--- openjdk.orig/jdk/make/sun/xawt/Makefile	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/make/sun/xawt/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/make/sun/xawt/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -292,16 +292,10 @@
 + SIZERS = $(SIZER).32
 + SIZERS_C = $(SIZER_32_C)
@@ -330,7 +341,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 	    $(ECHO) COMPARING $@ and $(STORED_SIZES_TMPL_$(PLATFORM)_$(LIBARCH)); \
 +diff -Nur openjdk.orig/jdk/src/share/classes/java/net/AbstractPlainDatagramSocketImpl.java openjdk/jdk/src/share/classes/java/net/AbstractPlainDatagramSocketImpl.java
 +--- openjdk.orig/jdk/src/share/classes/java/net/AbstractPlainDatagramSocketImpl.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/java/net/AbstractPlainDatagramSocketImpl.java	2013-07-18 16:18:23.000000000 +0200
+++++ openjdk/jdk/src/share/classes/java/net/AbstractPlainDatagramSocketImpl.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -69,7 +69,7 @@
 +      */
 +     static {
@@ -342,7 +353,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +     /**
 +diff -Nur openjdk.orig/jdk/src/share/classes/java/net/AbstractPlainSocketImpl.java openjdk/jdk/src/share/classes/java/net/AbstractPlainSocketImpl.java
 +--- openjdk.orig/jdk/src/share/classes/java/net/AbstractPlainSocketImpl.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/java/net/AbstractPlainSocketImpl.java	2013-07-18 16:18:54.000000000 +0200
+++++ openjdk/jdk/src/share/classes/java/net/AbstractPlainSocketImpl.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -78,7 +78,7 @@
 +      */
 +     static {
@@ -354,7 +365,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +     /**
 +diff -Nur openjdk.orig/jdk/src/share/classes/java/net/DatagramPacket.java openjdk/jdk/src/share/classes/java/net/DatagramPacket.java
 +--- openjdk.orig/jdk/src/share/classes/java/net/DatagramPacket.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/java/net/DatagramPacket.java	2013-07-18 16:19:15.000000000 +0200
+++++ openjdk/jdk/src/share/classes/java/net/DatagramPacket.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -47,7 +47,7 @@
 +      */
 +     static {
@@ -366,7 +377,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 
 +diff -Nur openjdk.orig/jdk/src/share/classes/java/net/InetAddress.java openjdk/jdk/src/share/classes/java/net/InetAddress.java
 +--- openjdk.orig/jdk/src/share/classes/java/net/InetAddress.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/java/net/InetAddress.java	2013-07-18 16:20:11.000000000 +0200
+++++ openjdk/jdk/src/share/classes/java/net/InetAddress.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -260,7 +260,7 @@
 +     static {
 +         preferIPv6Address = java.security.AccessController.doPrivileged(
@@ -378,7 +389,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + 
 +diff -Nur openjdk.orig/jdk/src/share/classes/java/net/NetworkInterface.java openjdk/jdk/src/share/classes/java/net/NetworkInterface.java
 +--- openjdk.orig/jdk/src/share/classes/java/net/NetworkInterface.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/java/net/NetworkInterface.java	2013-07-18 16:20:27.000000000 +0200
+++++ openjdk/jdk/src/share/classes/java/net/NetworkInterface.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -53,7 +53,7 @@
 +     private static final int defaultIndex; /* index of defaultInterface */
 + 
@@ -390,7 +401,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +         if (defaultInterface != null) {
 +diff -Nur openjdk.orig/jdk/src/share/classes/sun/net/sdp/SdpSupport.java openjdk/jdk/src/share/classes/sun/net/sdp/SdpSupport.java
 +--- openjdk.orig/jdk/src/share/classes/sun/net/sdp/SdpSupport.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/sun/net/sdp/SdpSupport.java	2013-07-18 16:22:51.000000000 +0200
+++++ openjdk/jdk/src/share/classes/sun/net/sdp/SdpSupport.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -76,6 +76,6 @@
 + 
 +     static {
@@ -401,7 +412,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + }
 +diff -Nur openjdk.orig/jdk/src/share/classes/sun/net/spi/DefaultProxySelector.java openjdk/jdk/src/share/classes/sun/net/spi/DefaultProxySelector.java
 +--- openjdk.orig/jdk/src/share/classes/sun/net/spi/DefaultProxySelector.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/sun/net/spi/DefaultProxySelector.java	2013-07-18 16:20:51.000000000 +0200
+++++ openjdk/jdk/src/share/classes/sun/net/spi/DefaultProxySelector.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -95,7 +95,7 @@
 +                 }});
 +         if (b != null && b.booleanValue()) {
@@ -413,7 +424,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +     }
 +diff -Nur openjdk.orig/jdk/src/share/classes/sun/nio/ch/Util.java openjdk/jdk/src/share/classes/sun/nio/ch/Util.java
 +--- openjdk.orig/jdk/src/share/classes/sun/nio/ch/Util.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/share/classes/sun/nio/ch/Util.java	2013-07-18 16:21:22.000000000 +0200
+++++ openjdk/jdk/src/share/classes/sun/nio/ch/Util.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -483,7 +483,7 @@
 +                 return;
 +             loaded = true;
@@ -425,7 +436,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +             // IOUtil must be initialized; Its native methods are called from
 +diff -Nur openjdk.orig/jdk/src/solaris/classes/sun/net/dns/ResolverConfigurationImpl.java openjdk/jdk/src/solaris/classes/sun/net/dns/ResolverConfigurationImpl.java
 +--- openjdk.orig/jdk/src/solaris/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/solaris/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-07-18 16:23:37.000000000 +0200
+++++ openjdk/jdk/src/solaris/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -247,7 +247,7 @@
 + 
 +     static {
@@ -437,7 +448,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 + }
 +diff -Nur openjdk.orig/jdk/src/solaris/native/sun/awt/awt_InputMethod.c openjdk/jdk/src/solaris/native/sun/awt/awt_InputMethod.c
 +--- openjdk.orig/jdk/src/solaris/native/sun/awt/awt_InputMethod.c	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/solaris/native/sun/awt/awt_InputMethod.c	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/src/solaris/native/sun/awt/awt_InputMethod.c	2013-11-15 13:51:09.000000000 +0100
 +@@ -246,7 +246,8 @@
 +     if (wcs == NULL)
 +         return NULL;
@@ -450,7 +461,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +     if (mbs == NULL) {
 +diff -Nur openjdk.orig/jdk/src/solaris/native/sun/xawt/XToolkit.c openjdk/jdk/src/solaris/native/sun/xawt/XToolkit.c
 +--- openjdk.orig/jdk/src/solaris/native/sun/xawt/XToolkit.c	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/solaris/native/sun/xawt/XToolkit.c	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/jdk/src/solaris/native/sun/xawt/XToolkit.c	2013-11-15 13:51:09.000000000 +0100
 +@@ -27,9 +27,6 @@
 + #include <X11/Xutil.h>
 + #include <X11/Xos.h>
@@ -489,7 +500,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +   static jclass classXRootWindow = NULL;
 +diff -Nur openjdk.orig/jdk/src/windows/classes/sun/net/dns/ResolverConfigurationImpl.java openjdk/jdk/src/windows/classes/sun/net/dns/ResolverConfigurationImpl.java
 +--- openjdk.orig/jdk/src/windows/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-04-16 00:41:13.000000000 +0200
-++++ openjdk/jdk/src/windows/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-07-18 16:23:50.000000000 +0200
+++++ openjdk/jdk/src/windows/classes/sun/net/dns/ResolverConfigurationImpl.java	2013-11-15 13:51:09.000000000 +0100
 +@@ -159,7 +159,7 @@
 + 
 +     static {
@@ -501,7 +512,7 @@ diff -Nur icedtea-2.3.9.orig/patches/openadk.patch icedtea-2.3.9/patches/openadk
 +         // start the address listener thread
 +diff -Nur openjdk.orig/Makefile openjdk/Makefile
 +--- openjdk.orig/Makefile	2013-03-08 17:04:19.000000000 +0100
-++++ openjdk/Makefile	2013-07-18 16:17:07.000000000 +0200
+++++ openjdk/Makefile	2013-11-15 13:51:09.000000000 +0100
 +@@ -53,9 +53,7 @@
 + REL_JDK_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(JDK_IMAGE_DIRNAME)
 + REL_JDK_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(JDK_IMAGE_DIRNAME)

@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/libelf/Makefile.inc
 
+PKG_NAME:=		libelf
 PKG_DESCR:=		elf library
 PKG_SECTION:=		libs
 PKG_SITES:=		http://www.mr511.de/software/
-
-PKG_SUBPKGS:=		LIBELF
+PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBELF,libelf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		mr_cv_target_elf=yes \
 			ac_cv_sizeof_long_long=8

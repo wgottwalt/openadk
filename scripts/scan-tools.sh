@@ -112,6 +112,12 @@ if ! which gzip >/dev/null 2>&1; then
 	out=1
 fi
 
+if ! which bzip2 >/dev/null 2>&1; then
+	echo You must install bzip2 to continue.
+	echo
+	out=1
+fi
+
 if ! which lzop >/dev/null 2>&1; then
 	echo You must install lzop to continue.
 	echo
@@ -126,12 +132,6 @@ fi
 
 if ! which xz >/dev/null 2>&1; then
 	echo You must install xz-utils to continue.
-	echo
-	out=1
-fi
-
-if ! which bzip2 >/dev/null 2>&1; then
-	echo You must install bzip2 to continue.
 	echo
 	out=1
 fi
@@ -213,12 +213,6 @@ if ! which wget >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which file >/dev/null 2>&1; then
-	echo You must install \"file\" to continue.
-	echo
-	out=1
-fi
-
 if ! which perl >/dev/null 2>&1; then
 	echo You must install perl to continue.
 	echo
@@ -226,19 +220,19 @@ if ! which perl >/dev/null 2>&1; then
 fi
 
 if ! which m4 >/dev/null 2>&1; then
-	echo "You must install m4 (macro processor) to continue."
-	echo
-	out=1
-fi
-
-if ! which pkg-config >/dev/null 2>&1; then
-	echo  "You need pkg-config to continue."
-	echo
-	out=1
+       echo "You must install m4 (macro processor) to continue."
+       echo
+       out=1
 fi
 
 if ! which bc >/dev/null 2>&1; then
 	echo  "You need bc to continue."
+	echo
+	out=1
+fi
+
+if ! which xargs >/dev/null 2>&1; then
+	echo  "You need xargs to continue."
 	echo
 	out=1
 fi

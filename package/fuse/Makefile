@@ -4,26 +4,30 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fuse
-PKG_VERSION:=		2.7.4
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4879f06570d2225667534c37fea04213
+PKG_VERSION:=		2.9.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		33cae22ca50311446400daf8a6255c6a
 PKG_DESCR:=		Filesystem in Userspace (utilities)
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		kmod-fuse-fs libfuse
+PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://fuse.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
+PKG_LIBNAME:=		libfuse
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE LIBFUSE_DEV
+PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE
 PKGSD_LIBFUSE:=		FUSE library
 PKGSC_LIBFUSE:=		libs
-PKGSD_LIBFUSE_DEV:=	FUSE headers
-PKGSC_LIBFUSE_DEV:=	devel
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FUSE_UTILS,fuse-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBFUSE,libfuse,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBFUSE},${PKGSC_LIBFUSE}))
-$(eval $(call PKG_template,LIBFUSE_DEV,libfuse-dev,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBFUSE_DEV},${PKGSC_LIBFUSE_DEV}))
+$(eval $(call PKG_template,LIBFUSE,libfuse,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBFUSE},${PKGSC_LIBFUSE},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-lib \
 			--enable-util \
@@ -43,15 +47,5 @@ libfuse-install:
 		${IDIR_LIBFUSE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libulockmgr.so* \
 		${IDIR_LIBFUSE}/usr/lib
-
-libfuse-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBFUSE_DEV}/usr/lib/pkgconfig
-	${INSTALL_DIR} ${IDIR_LIBFUSE_DEV}/usr/include/fuse
-	${INSTALL_DATA} ${WRKINST}/usr/include/*.h \
-		${IDIR_LIBFUSE_DEV}/usr/include
-	${INSTALL_DATA} ${WRKINST}/usr/include/fuse/*.h \
-		${IDIR_LIBFUSE_DEV}/usr/include/fuse
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/fuse.pc \
-		${IDIR_LIBFUSE_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

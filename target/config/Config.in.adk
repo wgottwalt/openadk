@@ -12,12 +12,6 @@ config ADK_HOST
 	help
 	  Configure host for IPKG package management.
 
-config ADK_LOCALES
-	bool "Enable locale support in C library and applications"
-	default n
-	help
-	  Multilanguage support.
-
 config ADK_DEBUG
 	bool "Compile applications with debug support by default"
 	default n
@@ -110,11 +104,5 @@ config ADK_HOST_CYGWIN
 	boolean
 
 endchoice
-
-config ADK_64BIT_KERNEL
-	prompt "Build a 64bit Kernel"
-	boolean
-	default n
-	depends on ADK_TARGET_KERNEL_MAY_64BIT
 
 endmenu

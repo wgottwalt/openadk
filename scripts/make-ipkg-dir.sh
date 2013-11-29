@@ -1,4 +1,4 @@
-BASE=http://www.openadk.org
+BASE=http://www.openadk.org/distfiles
 TARGET=$1
 CONTROL=$2
 VERSION=$3
@@ -14,7 +14,7 @@ grep '^Priority' "$CONTROL" 2>&1 >/dev/null || \
         echo "Priority: optional" >> "$TARGET/CONTROL/control"
 grep '^Source' "$CONTROL" 2>&1 >/dev/null || {
         pkgbase=$(echo "$WD" | sed -e "s|^$TOPDIR/||g")
-        [ "$pkgbase" = "$WD" ] && src="N/A" || src="$BASE/$pkgbase"
+        [ "$pkgbase" = "$WD" ] && src="N/A" || src="$BASE"
         echo "Source: $src" >> "$TARGET/CONTROL/control"
 }
 echo "Version: $VERSION" >> "$TARGET/CONTROL/control"

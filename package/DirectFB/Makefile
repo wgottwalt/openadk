@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		DirectFB
 PKG_VERSION:=		1.6.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		1.6-0
 PKG_MD5SUM:=		641e8e999c017770da647f9b5b890906
 PKG_DESCR:=		Thin graphic library for the Linux framebuffer devices
@@ -14,17 +14,13 @@ PKG_DEPENDS:=		libpng libjpeg libfreetype
 PKG_BUILDDEP:=		libpng jpeg freetype
 PKG_URL:=		http://www.directfb.org/
 PKG_SITES:=		http://directfb.org/downloads/Core/DirectFB-1.6/
-
-PKG_SUBPKGS:=		DIRECTFB DIRECTFB_DEV
-PKGSD_DIRECTFB_DEV:=	development files for DirectFB
-PKGSC_DIRECTFB_DEV:=	devel
+PKG_LIBNAME:=		directfb
+PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DIRECTFB,directfb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,DIRECTFB_DEV,directfb-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DIRECTFB_DEV},${PKGSC_DIRECTFB_DEV}))
+$(eval $(call PKG_template,DIRECTFB,directfb,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 CONFIGURE_ARGS+=	--with-inputdrivers=linuxinput,keyboard,ps2mouse \
 			--with-gfxdrivers=none \
 			--without-tools \
@@ -47,7 +43,7 @@ ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 XAKE_FLAGS+=		LDFLAGS=$(ADK_TARGET_ABI_CFLAGS)
 endif
 
-post-install:
+directfb-install:
 	${INSTALL_DIR} ${IDIR_DIRECTFB}/etc
 	${INSTALL_DATA} ./files/directfbrc ${IDIR_DIRECTFB}/etc
 	$(INSTALL_DIR) $(IDIR_DIRECTFB)/usr/lib/directfb-${PKG_EXTRAVER}/{inputdrivers,systems,wm}
@@ -66,12 +62,5 @@ post-install:
 		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBImageProvider
 	${CP} ${WRKINST}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBVideoProvider/*.so \
 		${IDIR_DIRECTFB}/usr/lib/directfb-${PKG_EXTRAVER}/interfaces/IDirectFBVideoProvider
-
-directfb-dev-install:
-	${INSTALL_DIR} ${IDIR_DIRECTFB_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/directfb ${IDIR_DIRECTFB_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_DIRECTFB_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/directfb-config \
-		${IDIR_DIRECTFB_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

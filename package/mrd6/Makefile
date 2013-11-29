@@ -20,11 +20,14 @@ WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MRD6,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MRD6,mrd6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 
+ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
 LIBRARIES:=-nodefaultlibs -luClibc++
+endif
+
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
@@ -36,7 +39,7 @@ TARGET_LDFLAGS+=	-shared ${LIBRARIES}
 endif
 XAKE_FLAGS+=		EXTRA_FLAGS="${TARGET_CFLAGS}"
 
-post-install:
+mrd6-install:
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/sbin ${IDIR_MRD6}/etc
 	${INSTALL_DIR} ${IDIR_MRD6}/usr/lib/mrd6 ${IDIR_MRD6}/usr/bin
 	${INSTALL_DATA} ./files/${PKG_NAME}.conf ${IDIR_MRD6}/etc

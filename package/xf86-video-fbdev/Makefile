@@ -14,14 +14,14 @@ PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=      !avr32
+PKG_ARCH_DEPENDS:=      !avr32 !m68k
 PKG_CFLINE_XF86_VIDEO_FBDEV:=	depends on ADK_TARGET_WITH_VGA
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_VIDEO_FBDEV,${PKG_NAME},$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_VIDEO_FBDEV,xf86-video-fbdev,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+xf86-video-fbdev-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_FBDEV}/usr/lib/xorg/modules/drivers
 	${CP} ${WRKINST}/usr/lib/xorg/modules/drivers/fbdev_*.so \
 		${IDIR_XF86_VIDEO_FBDEV}/usr/lib/xorg/modules/drivers/

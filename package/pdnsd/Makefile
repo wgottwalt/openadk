@@ -22,7 +22,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-par.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PDNSD,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PDNSD,pdnsd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-target=Linux
 
@@ -32,7 +32,7 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-post-install:
+pdnsd-install:
 	$(INSTALL_DIR) $(IDIR_PDNSD)/etc
 	${INSTALL_DATA} ./files/pdnsd.conf ${IDIR_PDNSD}/etc/
 	$(INSTALL_DIR) $(IDIR_PDNSD)/usr/sbin

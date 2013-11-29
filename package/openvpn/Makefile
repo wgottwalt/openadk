@@ -13,9 +13,7 @@ PKG_DEPENDS:=		kmod-tun ip
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
-PKG_SUBPKGS:=		OPENVPN
 PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS SERVER CLIENT
-PKGSS_OPENVPN_EASY_RSA:=openssl-util
 PKGFD_SERVER:=		deliver server example configuration
 PKGFD_CLIENT:=		deliver client example configuration
 PKGFD_WITH_LZO:=	enable LZO compression support
@@ -35,7 +33,7 @@ PKGCB_WITH_POLARSSL:=		polarssl
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPENVPN,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
 CONFIGURE_ARGS+=	--enable-lzo
@@ -73,7 +71,7 @@ CONFIGURE_ARGS+=	--disable-plugins \
 			--disable-debug \
 			--enable-iproute2
 
-post-install:
+openvpn-install:
 	${INSTALL_DIR} $(IDIR_OPENVPN)/usr/sbin $(IDIR_OPENVPN)/etc/openvpn
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
 ifeq ($(ADK_PACKAGE_OPENVPN_SERVER),y)

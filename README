@@ -13,16 +13,18 @@ Before you can start you need to install some tools:
 - GNU sed
 - tar
 - patch
-- pkg-config
 - gzip
 - bzip2
+- lzop
+- lzma
+- xz
 - wget
-- file
 - libc headers
 - ncurses5 headers
 - zlib headers
 - perl
 - bc
+- xargs
 
 There is a check for the required versions of these tools in advance, though.
 (to re-issue the checks, use "make prereq").

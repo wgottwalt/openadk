@@ -13,18 +13,18 @@ PKG_BUILDDEP:=		nasm
 PKG_URL:=		http://syslinux.zytor.com/wiki/index.php/The_Syslinux_Project
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 
-PKG_CFLINE_SYSLINUX:=	depends on ADK_NATIVE
+PKG_ARCH_DEPENDS:=	native
 PKG_HOST_DEPENDS:=	!darwin !netbsd !openbsd !cygwin !freebsd
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SYSLINUX,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SYSLINUX,syslinux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 FAKE_FLAGS+=		INSTALLROOT=${WRKINST}
 TARGET_CFLAGS+=		-std=c99
 
-post-install:
+syslinux-install:
 	$(INSTALL_DIR) $(IDIR_SYSLINUX)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/syslinux \
 		$(IDIR_SYSLINUX)/usr/bin

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
 PKG_VERSION:=		7.28.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cbdc0a79bdf6e657dd387c3d88d802e3
 PKG_DESCR:=		a client-side URL transfer tool
 PKG_SECTION:=		www
@@ -13,13 +13,13 @@ PKG_DEPENDS:=		libcurl
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://curl.haxx.se/
 PKG_SITES:=		http://curl.haxx.se/download/
+PKG_LIBNAME:=		libcurl
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		CURL LIBCURL LIBCURL_DEV
+PKG_SUBPKGS:=		CURL LIBCURL
 PKGSD_LIBCURL:=		a client-side URL transfer library
 PKGSC_LIBCURL:=		libs
 PKGSS_LIBCURL:=		zlib
-PKGSD_LIBCURL_DEV:=	development files for libcurl
-PKGSC_LIBCURL_DEV:=	devel
 
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
@@ -33,11 +33,14 @@ PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL}))
-$(eval $(call PKG_template,LIBCURL_DEV,libcurl-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBCURL_DEV},${PKGSC_LIBCURL_DEV}))
+$(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL},${PKG_OPTS}))
 
 ifeq (${ADK_PACKAGE_LIBCURL_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-ssl \
@@ -89,15 +92,5 @@ curl-install:
 libcurl-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib
-
-libcurl-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcurl.a ${IDIR_LIBCURL_DEV}/usr/lib
-	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/include/curl
-	${CP} ${WRKINST}/usr/include/curl/*.h \
-		${IDIR_LIBCURL_DEV}/usr/include/curl
-	${INSTALL_DIR} ${IDIR_LIBCURL_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/curl-config \
-		${IDIR_LIBCURL_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

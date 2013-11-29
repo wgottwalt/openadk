@@ -13,11 +13,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ser2net/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,SER2NET,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SER2NET,ser2net,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_lib_nsl_main=no
 
-post-install:
+ser2net-install:
 	${INSTALL_DIR} ${IDIR_SER2NET}/etc ${IDIR_SER2NET}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ser2net ${IDIR_SER2NET}/usr/sbin
 	${INSTALL_DATA} ${WRKBUILD}/ser2net.conf ${IDIR_SER2NET}/etc

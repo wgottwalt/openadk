@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.joachim-breitner.de/udp-broadcast-relay/files/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,UDP_BROADCAST_RELAY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,UDP_BROADCAST_RELAY,udp-broadcast-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

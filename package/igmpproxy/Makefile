@@ -17,11 +17,11 @@ PKG_CFLINE_IGMPPROXY+=	select ADK_KERNEL_IP_MROUTE
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,IGMPPROXY,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IGMPPROXY,igmpproxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		-std=gnu99
 
-post-install:
+igmpproxy-install:
 	${INSTALL_DIR} ${IDIR_IGMPPROXY}/usr/sbin ${IDIR_IGMPPROXY}/etc
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/igmpproxy ${IDIR_IGMPPROXY}/usr/sbin
 	${INSTALL_DATA} ${WRKINST}/etc/igmpproxy.conf ${IDIR_IGMPPROXY}/etc

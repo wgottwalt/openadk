@@ -5,28 +5,39 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxslt
 PKG_VERSION:=		1.1.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9667bf6f9310b957254fdcf6596600b7
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		libxml2
+PKG_BUILDDEP:=		autotool python2-host libxml2-host libxslt-host libxml2
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_NEED_CXX:=		1
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBXSLT LIBXSLT_DEV XSLTPROC
-PKGSD_LIBXSLT_DEV:=	XSLT headers
-PKGSC_LIBXSLT_DEV:=	devel
+PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	XSLT processor utility
 PKGSC_XSLTPROC:=	misc
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBXSLT_DEV,libxslt-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBXSLT_DEV},${PKGSC_LIBXSLT_DEV}))
+$(eval $(call HOST_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XSLTPROC},${PKGSC_XSLTPROC}))
 
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--without-python \
+			--without-crypto \
+			--with-libxml-prefix="${STAGING_HOST_DIR}/usr" \
+			--with-libxml-include-prefix="${STAGING_HOST_DIR}/usr/include/libxml2" \
+			--with-libxml-libs-prefix="${STAGING_HOST_DIR}/usr/lib"
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--with-libxml-prefix="${STAGING_TARGET_DIR}/usr" \
 			--with-libxml-include-prefix="${STAGING_TARGET_DIR}/usr/include/libxml2" \
 			--with-libxml-libs-prefix="${STAGING_TARGET_DIR}/usr/lib" \
@@ -45,11 +56,5 @@ libxslt-install:
 	${CP} ${WRKINST}/usr/lib/libxslt.so* ${IDIR_LIBXSLT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libexslt.so* ${IDIR_LIBXSLT}/usr/lib
 
-libxslt-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBXSLT_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBXSLT_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_LIBXSLT_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/xslt-config \
-		${IDIR_LIBXSLT_DEV}/usr/bin
-
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

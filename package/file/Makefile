@@ -4,36 +4,38 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		file
-PKG_VERSION:=		5.11
+PKG_VERSION:=		5.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		16a407bd66d6c7a832f3a5c0d609c27b
+PKG_MD5SUM:=		3f99565532f548d7540912c4642d1ede
 PKG_DESCR:=		a file type guesser
 PKG_SECTION:=		utils
-PKG_DEPENDS:=		libmagic
+PKG_BUILDDEP:=		file-host
+PKG_DEPENDS:=		libmagic libgcc
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 			ftp://ftp.astron.com/pub/file/
+PKG_LIBNAME:=		libmagic
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		FILE LIBMAGIC LIBMAGIC_DEV
+PKG_SUBPKGS:=		FILE LIBMAGIC
 PKGSD_LIBMAGIC:=	file type guesser library
 PKGSC_LIBMAGIC:=	libs
-PKGSD_LIBMAGIC_DEV:=	file type guesser headers
-PKGSC_LIBMAGIC_DEV:=	devel
 
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
+
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,FILE,file,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC}))
-$(eval $(call PKG_template,LIBMAGIC_DEV,libmagic-dev,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC_DEV},${PKGSD_LIBMAGIC_DEV},${PKGSC_LIBMAGIC_DEV}))
+$(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC},${PKG_OPTS}))
 
-pre-configure:
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure --enable-static --disable-shared \
-		--disable-warnings \
-	);
-	${MAKE} -C ${WRKBUILD}
-	${INSTALL_BIN} ${WRKBUILD}/src/file ${WRKBUILD}/magic
-	${MAKE} -C ${WRKBUILD} clean
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--enable-static \
+			--disable-shared \
+			--disable-warnings
 
 file-install:
 	${INSTALL_DIR} ${IDIR_FILE}/usr/bin
@@ -46,8 +48,5 @@ libmagic-install:
 	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmagic.so* ${IDIR_LIBMAGIC}/usr/lib
 
-libmagic-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBMAGIC_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMAGIC_DEV}/usr/include
-
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

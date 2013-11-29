@@ -12,14 +12,15 @@ PKG_SECTION:=		libs
 PKG_SITES:=		http://www.freedesktop.org/software/harfbuzz/release/
 PKG_DEPENDS:=		libstdcxx cairo
 PKG_BUILDDEP:=		libstdcxx cairo
+PKG_OPTS:=		dev
+
+PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,HARFBUZZ,harfbuzz,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
+$(eval $(call PKG_template,HARFBUZZ,harfbuzz,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 harfbuzz-install:
 	$(INSTALL_DIR) $(IDIR_HARFBUZZ)/usr/lib

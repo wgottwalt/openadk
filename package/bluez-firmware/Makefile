@@ -15,7 +15,7 @@ PKG_SITES:=		http://bluez.sourceforge.net/download/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ_FIRMWARE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BLUEZ_FIRMWARE,bluez-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--libdir=/lib
 

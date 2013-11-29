@@ -5,27 +5,29 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pcre
 PKG_VERSION:=		8.31
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fab1bb3b91a4c35398263a5c1e0858c1
 PKG_DESCR:=		a Perl Compatible Regular Expression library
 PKG_SECTION:=		libs
 PKG_BUILDDEPS:=		gettext-tiny
 PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
+PKG_LIBNAME:=		libpcre
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBPCRE LIBPCRE_DEV LIBPCRECPP
-PKGSD_LIBPCRE_DEV:=	PCRE headers
-PKGSC_LIBPCRE_DEV:=	devel
+PKG_SUBPKGS:=		LIBPCRE LIBPCRECPP
 PKGSD_LIBPCRECPP:=	PCRE c++ library
+
+ifeq ($(ADK_STATIC),y)
+PKG_OPTS+=		libmix
+endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRECPP},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBPCRE_DEV,libpcre-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRE_DEV},${PKGSC_LIBPCRE_DEV}))
 
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib64 -L$(STAGING_DIR)/usr/lib32
 
 libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
@@ -34,13 +36,5 @@ libpcre-install:
 libpcrecpp-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRECPP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpcrecpp.so* ${IDIR_LIBPCRECPP}/usr/lib
-
-libpcre-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/*.h \
-		${IDIR_LIBPCRE_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
-	${INSTALL_DATA} ${WRKINST}/usr/lib/pkgconfig/*.pc \
-		${IDIR_LIBPCRE_DEV}/usr/lib/pkgconfig
 
 include ${TOPDIR}/mk/pkg-bottom.mk

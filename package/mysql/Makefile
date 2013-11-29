@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
 PKG_VERSION:=		5.1.61
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		4efd10c69c4c99dbdb8fae3834a6d7b8
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		db
@@ -13,14 +13,14 @@ PKG_DEPENDS:=		libncurses zlib
 PKG_BUILDDEP:=		ncurses zlib readline
 PKG_URL:=		http://www.mysql.com/
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
+PKG_LIBNAME:=		libmysqlclient
+PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		LIBMYSQLCLIENT LIBMYSQLCLIENT_DEV
 PKG_HOST_DEPENDS:=	!cygwin
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBMYSQLCLIENT_DEV,libmysqlclient-dev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
@@ -90,12 +90,5 @@ libmysqlclient-install:
 	    ${IDIR_LIBMYSQLCLIENT}/usr/lib
 	$(SED) "s,\(^pkgincludedir='\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
 		${WRKINST}/usr/bin/mysql_config
-
-libmysqlclient-dev-install:
-	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
-	${CP} ${WRKINST}/usr/include/* ${IDIR_LIBMYSQLCLIENT_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/mysql_config \
-		${IDIR_LIBMYSQLCLIENT_DEV}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

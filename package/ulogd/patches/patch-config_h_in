@@ -1,0 +1,12 @@
+--- ulogd-2.0.2.orig/config.h.in	2013-03-03 22:19:17.000000000 +0100
++++ ulogd-2.0.2/config.h.in	2013-11-11 21:27:31.000000000 +0100
+@@ -66,6 +66,9 @@
+    */
+ #undef HAVE_SYS_NDIR_H
+ 
++/* Define to 1 if you have the <sys/queue.h> header file. */
++#undef HAVE_SYS_QUEUE_H
++
+ /* Define to 1 if you have the <sys/stat.h> header file. */
+ #undef HAVE_SYS_STAT_H
+ 

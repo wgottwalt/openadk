@@ -1,0 +1,70 @@
+--- valgrind-3.9.0.orig/configure.ac	2013-11-01 00:28:16.000000000 +0100
++++ valgrind-3.9.0/configure.ac	2013-11-07 17:26:16.000000000 +0100
+@@ -155,6 +155,7 @@ esac
+ # configure-time, and distinguishes them from the VGA_*/VGO_*/VGP_*
+ # variables used when compiling C files.
+ 
++VGCONF_PLATFORM_ARM_ARCH=
+ AC_CANONICAL_HOST
+ 
+ AC_MSG_CHECKING([for a supported CPU])
+@@ -191,8 +192,18 @@ case "${host_cpu}" in
+         ;;
+ 
+      armv7*)
++	# This means we use a armv7 toolchain - at least Cortex-A8
+ 	AC_MSG_RESULT([ok (${host_cpu})])
+ 	ARCH_MAX="arm"
++	VGCONF_PLATFORM_ARM_ARCH="-march=armv7 -mcpu=cortex-a8"
++	;;
++
++     arm*)
++	# Generic arm toolchain - we will target armv6
++	AC_MSG_RESULT([(${host_cpu}) - no armv7 toolchain specified, will enforce armv6 when compiling])
++	ARCH_MAX="arm"
++	VGCONF_PLATFORM_ARM_ARCH="-march=armv6"
++	AC_DEFINE(ARM_ARCH_V6,1,"Defined for v6 architectures")
+ 	;;
+ 
+      mips)
+@@ -225,6 +236,8 @@ case "${host_cpu}" in
+ 	;;
+ esac
+ 
++AC_SUBST(VGCONF_PLATFORM_ARM_ARCH)
++
+ #----------------------------------------------------------------------------
+ 
+ # Sometimes it's convenient to subvert the bi-arch build system and
+@@ -792,6 +805,15 @@ AC_EGREP_CPP([BIONIC_LIBC], [
+ ],
+ GLIBC_VERSION="bionic")
+ 
++# not really a version check
++AC_EGREP_CPP([MUSL_LIBC], [
++#if defined(__MUSL__)
++  MUSL_LIBC
++#endif
++],
++GLIBC_VERSION="musl")
++
++
+ 
+ AC_MSG_CHECKING([the GLIBC_VERSION version])
+ 
+@@ -928,10 +950,13 @@ case "${GLIBC_VERSION}" in
+ 	AC_DEFINE([BIONIC_LIBC], 1, [Define to 1 if you're using Bionic])
+ 	DEFAULT_SUPP="bionic.supp ${DEFAULT_SUPP}"
+ 	;;
+-
++     musl)
++	AC_MSG_RESULT(musl)
++	AC_DEFINE([MUSL_LIBC], 1, [Define to 1 if you're using musl])
++	;;
+      *)
+ 	AC_MSG_RESULT([unsupported version ${GLIBC_VERSION}])
+-	AC_MSG_ERROR([Valgrind requires glibc version 2.2 - 2.17])
++	AC_MSG_ERROR([Valgrind requires glibc version 2.2 - 2.18])
+ 	AC_MSG_ERROR([or Darwin libc])
+ 	;;
+ esac

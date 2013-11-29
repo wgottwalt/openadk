@@ -10,6 +10,7 @@ PKG_MD5SUM:=		f83ef48ab1154aa74dd4cf1c1202bf04
 PKG_DESCR:=		CIFS utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		kmod-cifs kmod-nls-utf8
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils
 PKG_SITES:=		ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/
 
@@ -23,6 +24,7 @@ ifeq ($(ADK_STATIC),y)
 TARGET_LDFLAGS+=        -static
 endif
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-cifsupcall \
 			--disable-cifsidmap \
 			--disable-cifsacl \

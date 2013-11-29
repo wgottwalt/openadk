@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_GNU:=gawk/}
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,GAWK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,GAWK,gawk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-libsigsegv
 
-post-install:
+gawk-install:
 	${INSTALL_DIR} ${IDIR_GAWK}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gawk ${IDIR_GAWK}/usr/bin
 

@@ -1,1 +1,10 @@
-nothing right now.
+- use host-tools infrastructure for openjdk7
+- remove openjdk6
+- evaluate libguestfs for image creation
+- add grsec kernel patch
+- check for gcc and SSP again
+- port full blown perl
+- port w3m
+- port libcec for xbmc
+- check xbmc samba/nfs support
+- add support for librtmp in xbmc

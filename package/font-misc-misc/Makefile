@@ -17,11 +17,11 @@ PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FONT_MISC_MISC,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FONT_MISC_MISC,font-misc-misc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		MAPFILES_PATH=${STAGING_TARGET_DIR}/usr/share/fonts/X11/util
 
-post-install:
+font-misc-misc-install:
 	$(INSTALL_DIR) $(IDIR_FONT_MISC_MISC)/usr/share/fonts/X11/misc
 	$(CP) ${WRKINST}/usr/share/fonts/X11/misc/* \
 		$(IDIR_FONT_MISC_MISC)/usr/share/fonts/X11/misc

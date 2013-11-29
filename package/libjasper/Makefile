@@ -5,19 +5,20 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libjasper
 PKG_VERSION:=		1.900
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a342b2b4495b3e1394e161eb5d85d754
 PKG_DESCR:=		implementation of the codec specified in the JPEG-2000 Part-1 standard
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.ece.uvic.ca/~frodo/jasper/
 PKG_SITES:=		http://www.ece.uvic.ca/~frodo/jasper/software/
+PKG_OPTS:=		dev
 
 DISTFILES:=             jasper-${PKG_VERSION}.1.zip
 WRKDIST=		${WRKDIR}/jasper-$(PKG_VERSION).1
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBJASPER,libjasper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBJASPER,libjasper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 libjasper-install:
 	$(INSTALL_DIR) $(IDIR_LIBJASPER)/usr/lib

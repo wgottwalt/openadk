@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3c388cb559975b37a75cb5965e9800a9
 PKG_DESCR:=		Utilities for PCMCIA subsystem
 PKG_SECTION:=		utils
-PKG_BUILDDEP:=		sysfsutils
+PKG_BUILDDEP:=		sysfsutils bison-host flex-host
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/pcmcia.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/
 
@@ -17,11 +17,11 @@ PKG_CFLINE_PCMCIAUTILS:=depends on ADK_TARGET_WITH_CARDBUS
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,PCMCIAUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PCMCIAUTILS,pcmciautils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE=		manual
 
-post-install:
+pcmciautils-install:
 	$(INSTALL_DIR) $(IDIR_PCMCIAUTILS)/etc/pcmcia
 	$(INSTALL_DATA) ./files/config.opts \
 		$(IDIR_PCMCIAUTILS)/etc/pcmcia

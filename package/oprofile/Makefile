@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		0.9.8
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		6d127023af1dd1cf24e15411229f3cc8
+PKG_VERSION:=		0.9.9
+PKG_RELEASE:=		4
+PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx
+PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx libgcc
 PKG_BUILDDEP:=		popt binutils
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
@@ -20,11 +20,12 @@ PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,OPROFILE,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ARGS+=	--with-kernel-support
 
-post-install:
+oprofile-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/opcontrol $(IDIR_OPROFILE)/usr/bin/
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/ophelp $(IDIR_OPROFILE)/usr/bin/

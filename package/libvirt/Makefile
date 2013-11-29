@@ -5,23 +5,24 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
 PKG_VERSION:=		1.0.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3d9f85d586c9aa3d819b626622f3fc97
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted udev
+PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted systemd
 PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap libreadline
-PKG_DEPENDS+=		libintl dmidecode kmod-netfilter-xt-target-checksum
-PKG_DEPENDS+=		dnsmasq qemu libnl
+PKG_DEPENDS+=		dmidecode kmod-netfilter-xt-target-checksum
+PKG_DEPENDS+=		dnsmasq qemu libnl libudev
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		http://libvirt.org/sources/
+PKG_OPTS:=		dev
 
 PKG_HOST_DEPENDS:=	!freebsd !netbsd !openbsd
 PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBVIRT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVIRT,libvirt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 include ${TOPDIR}/mk/python.mk
 
@@ -43,7 +44,7 @@ CONFIGURE_ARGS+=	--without-xen \
 			--disable-silent-rules \
 			--without-sasl
 
-post-install:
+libvirt-install:
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib ${IDIR_LIBVIRT}/usr/bin
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/etc/libvirt ${IDIR_LIBVIRT}/usr/sbin
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/share/libvirt

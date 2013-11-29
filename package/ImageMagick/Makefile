@@ -6,15 +6,19 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ImageMagick
 PKG_VERSION:=		6.7.6
 PKG_EXTRAVER:=		1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		8134257e3fbb43cc06fb32a6d725d3d0
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv libtool e2fsprogs
+PKG_BUILDDEP:=		libpng jpeg libtiff fontconfig libiconv-tiny libtool e2fsprogs
 PKG_BUILDDEP+=		pango
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
 PKG_NEED_CXX:=		1
+PKG_LIBNAME:=		libimagemagic
+PKG_OPTS:=		dev
+
+PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		CONVERT DISPLAY LIBIMAGEMAGICK
 PKGSD_LIBIMAGEMAGICK:=	imagemagick library
@@ -33,7 +37,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBIMAGEMAGICK,libimagemagick,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBIMAGEMAGICK},${PKGSC_LIBIMAGEMAGICK}))
+$(eval $(call PKG_template,LIBIMAGEMAGICK,libimagemagick,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBIMAGEMAGICK},${PKGSC_LIBIMAGEMAGICK},${PKG_OPTS}))
 $(eval $(call PKG_template,CONVERT,convert,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_CONVERT},${PKGSD_CONVERT},${PKGSC_CONVERT}))
 $(eval $(call PKG_template,DISPLAY,display,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_DISPLAY},${PKGSD_DISPLAY},${PKGSC_DISPLAY}))
 

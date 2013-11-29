@@ -14,9 +14,9 @@ PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/app/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,XLSFONTS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,XLSFONTS,xlsfonts,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-post-install:
+xlsfonts-install:
 	${INSTALL_DIR} ${IDIR_XLSFONTS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/xlsfonts \
 		${IDIR_XLSFONTS}/usr/bin

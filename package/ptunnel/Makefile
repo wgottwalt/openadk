@@ -16,13 +16,13 @@ PKG_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,PTUNNEL,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PTUNNEL,ptunnel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" \
 			ac_cv_linux_vers=2 \
 			td_cv_buggygetaddrinfo="no"
 
-post-install:
+ptunnel-install:
 	${INSTALL_DIR} ${IDIR_PTUNNEL}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ptunnel ${IDIR_PTUNNEL}/usr/sbin/
 
