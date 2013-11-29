@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.17.6
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		d0da6a6a1d9cf1e8710b6082f6ef7849
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -21,7 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
-PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE
+PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -87,7 +87,7 @@ PKGFD_WITH_SHOUT:=	enable Shoutcast output support
 PKGFS_WITH_SHOUT:=	libshout libmp3lame libvorbisenc
 PKGFB_WITH_SHOUT:=	lame libvorbis libshout
 ifeq ($(ADK_PACKAGE_MPD_WITH_SHOUT),y)
-PKG_FDEPENDS+=		libshout liblame libvorbisenc
+PKG_FDEPENDS+=		libshout libmp3lame libvorbisenc
 endif
 PKGFD_WITH_CURL:=	enable CURL support
 PKGFS_WITH_CURL:=	libcurl
@@ -103,6 +103,8 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_SAMPLERATE),y)
 PKG_FDEPENDS+=		libsamplerate
 endif
 
+PKGFD_WITH_HTTPD:=	enable HTTP output
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -110,8 +112,7 @@ $(eval $(call PKG_template,MPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_F
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-std=gnu99
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
-CONFIGURE_ARGS+=	--disable-httpd-output \
-			--disable-jack \
+CONFIGURE_ARGS+=	--disable-jack \
 			--disable-fifo \
 			--disable-pulse \
 			--disable-oss \
@@ -122,6 +123,12 @@ CONFIGURE_ARGS+=	--disable-httpd-output \
 			--disable-soundcloud \
 			--enable-inotify \
 			--with-zeroconf=no
+
+ifneq (${ADK_PACKAGE_MPD_WITH_HTTPD},)
+CONFIGURE_ARGS+=	--enable-httpd-output
+else
+CONFIGURE_ARGS+=	--disable-httpd-output
+endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
 CONFIGURE_ARGS+=	--enable-alsa
