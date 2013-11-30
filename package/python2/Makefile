@@ -97,6 +97,7 @@ CONFIGURE_ARGS:=	--with-threads \
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS:=	--with-threads \
+			--enable-shared \
 			--disable-toolbox-glue \
 			--without-cxx-main
 
@@ -105,8 +106,6 @@ hostpost-install:
 		$(STAGING_HOST_DIR)/usr/bin/pgen
 
 pre-configure:
-	(cd $(WRKBUILD) && patch -p1 < \
-		$(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py )
 	(cd $(WRKBUILD) && patch -p1 < \
 		$(TOPDIR)/package/python2/files/patch-Misc_python-config_in )
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
