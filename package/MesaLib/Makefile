@@ -11,7 +11,7 @@ PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
 PKG_DEPENDS+=		libxml2 libxml2-python
-PKG_BUILDDEP:=		python2 libxml2 libXdamage libXfixes libXxf86vm libdrm
+PKG_BUILDDEP:=		autotool python2 libxml2 libXdamage libXfixes libXxf86vm libdrm
 PKG_BUILDDEP+=		dri2proto glproto expat libXext
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
@@ -28,11 +28,15 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 include $(TOPDIR)/mk/python.mk
+ifeq ($(ADK_HOST_DARWIN),y)
+PYTHON:=/opt/local/bin/python2.7
+endif
 
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
 endif
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium-llvm \
 			--with-gallium-drivers=swrast \
