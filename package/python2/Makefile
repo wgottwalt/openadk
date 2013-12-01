@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -97,7 +97,7 @@ CONFIGURE_ARGS:=	--with-threads \
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS:=	--with-threads \
-			--enable-shared \
+			--disable-shared \
 			--disable-toolbox-glue \
 			--without-cxx-main
 
