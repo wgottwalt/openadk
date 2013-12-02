@@ -4,16 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.17.6
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		d0da6a6a1d9cf1e8710b6082f6ef7849
+PKG_VERSION:=		0.18.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		63bcf6ce338caa2ae2cd6dc8e9710d5c
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx libgcc libiconv
 PKG_FDEPENDS:=		glib libstdcxx libgcc libiconv
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.musicpd.org/
-PKG_SITES:=		http://www.musicpd.org/download/mpd/0.17/
+PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
+PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	!avr32 !m68k
 
@@ -22,6 +23,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
+PKG_FLAVOURS_MPD+=	WITH_OPUS
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -103,6 +105,13 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_SAMPLERATE),y)
 PKG_FDEPENDS+=		libsamplerate
 endif
 
+PKGFD_WITH_OPUS:=	enable OPUS support
+PKGFS_WITH_OPUS:=	libopus
+PKGFB_WITH_OPUS:=	opus
+ifeq ($(ADK_PACKAGE_MPD_WITH_OPUS),y)
+PKG_FDEPENDS+=		libopus
+endif
+
 PKGFD_WITH_HTTPD:=	enable HTTP output
 
 include ${TOPDIR}/mk/package.mk
@@ -116,8 +125,10 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-fifo \
 			--disable-pulse \
 			--disable-oss \
+			--disable-bzip2 \
 			--disable-mpc \
 			--disable-wavpack \
+			--disable-modplug \
 			--disable-sqlite \
 			--disable-mpg123 \
 			--disable-soundcloud \
@@ -212,6 +223,12 @@ ifneq (${ADK_PACKAGE_MPD_WITH_SAMPLERATE},)
 CONFIGURE_ARGS+=	--enable-lsr
 else
 CONFIGURE_ARGS+=	--disable-lsr
+endif
+
+ifneq (${ADK_PACKAGE_MPD_WITH_OPUS},)
+CONFIGURE_ARGS+=	--enable-opus
+else
+CONFIGURE_ARGS+=	--disable-opus
 endif
 
 mpd-install:

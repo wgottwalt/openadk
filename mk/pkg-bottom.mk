@@ -17,11 +17,14 @@ pre-configure:
 do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
+ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
+endif
 ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
 	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
 endif

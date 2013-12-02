@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.8
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		79f6c810c291fa4f382a92c8e25123de
+PKG_VERSION:=		2.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		4b101a36e5c0cf967dc063391260ddbf
 PKG_DESCR:=		library for interfacing MPD
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/libmpdclient/2/
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 

@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.4.21
+PKG_VERSION:=		5.5.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cc8da0d18683e3a83b332f264af7ca83
+PKG_MD5SUM:=		82968eac50c523ecf7a05855cb5c3d0a
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread librt libgcc
@@ -91,6 +91,7 @@ PKG_CONFIGURE_OPTS:=	\
 	--with-config-file-path=/etc \
 	--enable-cli \
 	--enable-cgi \
+	--enable-opcache=no \
 	--disable-hash \
 	--disable-mbstring \
 	--disable-mbregex \
@@ -191,7 +192,7 @@ endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SOCKETS),)
 PKG_CONFIGURE_OPTS+=	--enable-sockets=shared
 else
-PKG_CONFIGURE_OPTS+=	--without-sockets
+PKG_CONFIGURE_OPTS+=	--enable-sockets=no
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_XML),)
 PKG_CONFIGURE_OPTS+=	--enable-xml=shared,"$(STAGING_TARGET_DIR)/usr" \

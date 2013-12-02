@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.32
+PKG_VERSION:=		1.4.33
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d2eaf2ed77670bd25597f61c3a28c074
+PKG_MD5SUM:=		16e7c85a11a660213be4f83a9a1b752d
 PKG_DESCR:=		a lightweight web server
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libgcc
@@ -138,6 +138,7 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
 	${INSTALL_DATA} ./files/lighttpd.conf $(IDIR_LIGHTTPD)/etc/lighttpd
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_LIGHTTPD)/etc/lighttpd
+	${CP} ./files/conf.d $(IDIR_LIGHTTPD)/etc/lighttpd
 	${CP} ${WRKBUILD}/doc/config/conf.d/*.conf \
 		$(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/lib/lighttpd

@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libmms
-PKG_VERSION:=		0.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		cf83053ec891f14e73a04c84d9de08ee
+PKG_VERSION:=		0.6.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9f63aa363deb4874e072a45850161bff
 PKG_DESCR:=		common library for parsing mms:// type network streams
 PKG_SECTION:=		libs
-PKG_URL:=		https://launchpad.net/libmms
-PKG_SITES:=		http://launchpad.net/libmms/trunk/0.5/+download/
+PKG_URL:=		http://libmms.sourceforge.net/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libmms/}
 PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk

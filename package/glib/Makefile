@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.28.1
-PKG_RELEASE:=		5
-PKG_EXTRAVER:=		2.28
-PKG_MD5SUM:=		9f6e85e1e38490c3956f4415bcd33e6e
+PKG_VERSION:=		2.36.4
+PKG_RELEASE:=		1
+PKG_EXTRAVER:=		2.36
+PKG_MD5SUM:=		2f4b15f7ef43d8702d067ab987bf7aba
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host zlib
+PKG_BUILDDEP:=		libffi gettext-tiny libiconv-tiny glib-host zlib
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
@@ -21,6 +21,8 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
@@ -28,6 +30,7 @@ $(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \

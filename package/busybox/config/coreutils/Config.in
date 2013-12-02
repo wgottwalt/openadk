@@ -60,17 +60,20 @@ config BUSYBOX_FEATURE_DATE_COMPAT
 	  With this option off, 'date DATE' is 'date -s DATE' support
 	  the same format. With it on, 'date DATE' additionally supports
 	  MMDDhhmm[[YY]YY][.ss] format.
+
 config BUSYBOX_HOSTID
 	bool "hostid"
 	default y
 	help
 	  hostid prints the numeric identifier (in hexadecimal) for
 	  the current host.
+
 config BUSYBOX_ID
 	bool "id"
 	default y
 	help
 	  id displays the current user and group ID names.
+
 config BUSYBOX_GROUPS
 	bool "groups"
 	default y
@@ -128,17 +131,20 @@ config BUSYBOX_FEATURE_TR_EQUIV
 	  replace all instances of 'a' with 'xyz'. This option is mainly
 	  useful for cases when no other way of expressing a character
 	  is possible.
+
 config BUSYBOX_BASE64
 	bool "base64"
 	default y
 	help
 	  Base64 encode and decode
+
 config BUSYBOX_WHO
       bool "who"
       default y
       depends on BUSYBOX_FEATURE_UTMP
       help
         who is used to show who is logged on.
+
 config BUSYBOX_USERS
       bool "users"
       default y
