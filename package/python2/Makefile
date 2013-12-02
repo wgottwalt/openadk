@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -100,6 +100,7 @@ HOST_CONFIGURE_ARGS:=	--with-threads \
 			--disable-shared \
 			--disable-toolbox-glue \
 			--without-cxx-main
+CFLAGS_FOR_BUILD+=	-fPIC
 
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
@@ -108,6 +109,8 @@ hostpost-install:
 pre-configure:
 	(cd $(WRKBUILD) && patch -p1 < \
 		$(TOPDIR)/package/python2/files/patch-Misc_python-config_in )
+	(cd $(WRKBUILD) && patch -p1 < \
+		$(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py )
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 
