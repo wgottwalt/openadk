@@ -1,0 +1,11 @@
+--- Mesa-9.2.2.orig/configure.ac	2013-10-19 01:36:09.000000000 +0200
++++ Mesa-9.2.2/configure.ac	2013-12-01 14:08:00.000000000 +0100
+@@ -69,7 +69,7 @@ AC_PATH_PROG([PERL], [perl])
+ 
+ AC_CHECK_PROG(INDENT, indent, indent, cat)
+ if test "x$INDENT" != "xcat"; then
+-    AC_SUBST(INDENT_FLAGS, '-i4 -nut -br -brs -npcs -ce -TGLubyte -TGLbyte -TBool')
++    AC_SUBST(INDENT_FLAGS, '-i4 -br -brs -npcs -ce -TGLubyte -TGLbyte -TBool')
+ fi
+ 
+ AC_PROG_INSTALL
