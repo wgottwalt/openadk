@@ -16,18 +16,19 @@ PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
-PKG_DEPENDS+=		omxplayer libusb-compat libbluray
-PKG_BUILDDEP:=		boost ffmpeg python2 MesaLib libglew libass
+PKG_DEPENDS+=		omxplayer libusb-compat libbluray libgpg-error
+PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad jpeg libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		bcm2835-vc libgpg-error dbus libusb-compat libbluray
+PKG_BUILDDEP+=		libgpg-error
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
@@ -41,7 +42,7 @@ TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_54 \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
 TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static
-#TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static -lX11
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-ssh \
 			--disable-samba \
