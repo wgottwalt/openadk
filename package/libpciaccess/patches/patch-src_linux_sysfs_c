@@ -1,5 +1,5 @@
 --- libpciaccess-0.13.1.orig/src/linux_sysfs.c	2012-04-09 19:02:57.000000000 +0200
-+++ libpciaccess-0.13.1/src/linux_sysfs.c	2013-10-21 15:25:14.000000000 +0200
++++ libpciaccess-0.13.1/src/linux_sysfs.c	2013-12-01 18:26:04.000000000 +0100
 @@ -34,6 +34,7 @@
  
  #define _GNU_SOURCE
@@ -8,3 +8,12 @@
  #include <stdlib.h>
  #include <string.h>
  #include <stdio.h>
+@@ -45,7 +46,7 @@
+ #include <dirent.h>
+ #include <errno.h>
+ 
+-#if defined(__i386__) || defined(__x86_64__) || defined(__arm__)
++#if defined(__i386__) || defined(__x86_64__)
+ #include <sys/io.h>
+ #else
+ #define inb(x) -1

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libgcrypt
 PKG_VERSION:=		1.5.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		78f8f8bec4580f75b25816f7896d0389
 PKG_DESCR:=		GNU crypto library
 PKG_SECTION:=		libs
@@ -26,5 +26,9 @@ libgcrypt-install:
 	${INSTALL_DIR} ${IDIR_LIBGCRYPT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgcrypt.so* \
 		${IDIR_LIBGCRYPT}/usr/lib
+	# provides own automake macros
+	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/share/aclocal
+	${CP} ${WRKINST}//usr/share/aclocal/libgcrypt.m4 \
+		${STAGING_HOST_DIR}/usr/share/aclocal
 
 include ${TOPDIR}/mk/pkg-bottom.mk
