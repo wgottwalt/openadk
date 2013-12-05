@@ -562,6 +562,19 @@ bulktoolchain:
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
+release:
+	for libc in uclibc eglibc glibc musl;do \
+		mkdir -p $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc; \
+		( \
+			echo === building $$libc on $$(date); \
+			$(GMAKE) prereq && \
+			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
+			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
+			rm .config; \
+		) 2>&1 | tee $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
+	done
+
 # build all target architecture, target systems and libc combinations
 bulk:
 	for libc in uclibc eglibc glibc musl;do \
