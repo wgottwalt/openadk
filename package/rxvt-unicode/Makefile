@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rxvt-unicode
-PKG_VERSION:=		9.18
+PKG_VERSION:=		9.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		963ccc748fe5bca925e7b92c0404d68b
+PKG_MD5SUM:=		45ad197eb9b5a840c0f65e3a8131921c
 PKG_DESCR:=		x-term with unicode support
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf

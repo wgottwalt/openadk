@@ -80,13 +80,17 @@ libncurses-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
+	for ti in rxvt rxvt-unicode; do \
+		TERMINFO=${WRKINST}/usr/share/terminfo \
+		tic -x ./files/$$ti.ti; \
+	done
 ifeq (${ADK_PACKAGE_LIBNCURSES_FULL_TERMINFO},y)
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share
 	${CP} ${WRKINST}/usr/share/terminfo ${IDIR_LIBNCURSES}/usr/share/
 else
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
 	for f in ansi dumb linux screen vt100 vt102 \
-	    rxvt vt220 xterm xterm-color xterm-xfree86; do \
+	    rxvt rxvt-unicode vt220 xterm xterm-color xterm-xfree86; do \
 		${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}; \
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		45f3b6dbc9ee7c7dfbbbc5feba571529
 PKG_DESCR:=		Foreign Function Interface library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libffi-host
+PKG_BUILDDEP:=		autotool libffi-host
 PKG_URL:=		http://sourceware.org/libffi/
 PKG_SITES:=		ftp://sourceware.org/pub/libffi/
 PKG_OPTS:=		dev
@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-builddir
 CONFIGURE_ARGS+=	--disable-builddir
