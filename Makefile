@@ -146,6 +146,9 @@ allmodconfig: .prereq_done
 package_index: .prereq_done
 	@${GMAKE_INV} package_index
 
+release: .prereq_done
+	@${GMAKE_INV} release
+
 bulk: .prereq_done
 	@${GMAKE_INV} bulk
 
