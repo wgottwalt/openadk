@@ -4,18 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		atk
-PKG_VERSION:=		1.33.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4338e0c94f767714f4786878112750dd
+PKG_VERSION:=		2.11.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2b4316e69cbe0a1998ba39cdc8c89692
 PKG_DESCR:=		atk library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.gnome.org/
-PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/1.33/}
+PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/2.11/}
 PKG_LIBNAME:=		libatk
 PKG_OPTS:=		dev
 
-#DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
