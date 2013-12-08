@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
-PKG_VERSION:=		0.6.30
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		e4db89a2a403ff4c47d66ac66fad1f43
+PKG_VERSION:=		0.6.31
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2f22745b8f7368ad5a0a3fddac343f2d
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
 PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext-tiny gtk+ dbus

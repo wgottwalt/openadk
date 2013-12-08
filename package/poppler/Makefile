@@ -4,16 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		poppler
-PKG_VERSION:=		0.22.1
+PKG_VERSION:=		0.24.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		50c259fdda538c1ba94b62aa25f7ec87
+PKG_MD5SUM:=		2da22b966cf7a2f8da5bf021e68188ce
 PKG_DESCR:=		pdf rendering library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		fontconfig libstdcxx
-PKG_DEPENDS:=		fontconfig libstdcxx
+PKG_BUILDDEP:=		fontconfig libstdcxx libpng cairo
+PKG_DEPENDS:=		fontconfig libstdcxx libpng cairo
 PKG_URL:=		http://poppler.freedesktop.org/
 PKG_SITES:=		http://poppler.freedesktop.org/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
