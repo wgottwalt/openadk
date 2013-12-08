@@ -2,6 +2,7 @@ arm
 avr32
 cris
 m68k
+microblaze
 mips
 ppc
 ppc64

@@ -1,0 +1,4 @@
+config ADK_KERNEL_OPT_LIB_ASM
+	default y if ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
+	default n
+	boolean
