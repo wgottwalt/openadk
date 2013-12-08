@@ -4,13 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.63
+PKG_VERSION:=		2.67
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		43e771997615ebcd8f6c6ffa60c3e40b
+PKG_MD5SUM:=		3560068c6cc644a01924fa089a70bb9c
 PKG_DESCR:=		A lightweight DNS and DHCP server
 PKG_SECTION:=		dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 
