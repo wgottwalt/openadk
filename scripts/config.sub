@@ -251,7 +251,7 @@ case $basic_machine in
 	| i370 | i860 | i960 | ia64 \
 	| ip2k | iq2000 \
 	| m32c | m32r | m32rle | m68000 | m68k | m88k \
-	| maxq | mb | microblaze | mcore | mep | metag \
+	| maxq | mb | microblaze | microblazeel | mcore | mep | metag \
 	| mips | mipsbe | mipseb | mipsel | mipsle \
 	| mips16 \
 	| mips64 | mips64el \
@@ -711,6 +711,9 @@ case $basic_machine in
 	merlin)
 		basic_machine=ns32k-utek
 		os=-sysv
+		;;
+	microblaze*)
+		basic_machine=microblaze-xilinx
 		;;
 	mingw32)
 		basic_machine=i386-pc
