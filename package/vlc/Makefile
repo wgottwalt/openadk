@@ -40,6 +40,7 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--enable-libgcrypt \
 			--enable-mad \
 			--enable-theora \
+			--disable-static \
 			--disable-avcodec
 
 vlc-install:
