@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lame
-PKG_VERSION:=		3.98.4
+PKG_VERSION:=		3.99
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8e9866ad6b570c6c95c8cba48060473f
+PKG_MD5SUM:=		7abacd1d0a65a63733335786015626db
 PKG_DESCR:=		LAME MP3 encoder
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libncurses

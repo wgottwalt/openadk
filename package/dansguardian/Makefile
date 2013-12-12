@@ -4,26 +4,30 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dansguardian
-PKG_VERSION:=		2.10.1.1
+PKG_VERSION:=		2.12.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0987a1c9bfbdf398118386f10279611a
+PKG_MD5SUM:=		2a88d0392cd28eaec02b7ee727b2e253
 PKG_DESCR:=		web content filter proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		pcre zlib
 PKG_URL:=		http://dansguardian.org/
-PKG_SITES:=		http://dansguardian.org/downloads/2/Stable/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dansguardian/}
 PKG_NEED_CXX:=		1
 PKG_CXX:=		DANSGUARDIAN
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
 ifeq ($(ADK_LINUX_AVR32),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc
 else
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc -lgcc_s
+endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
@@ -35,7 +39,6 @@ CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
 			LIBS="$(LIBRARIES)"
 endif
-
 
 CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \

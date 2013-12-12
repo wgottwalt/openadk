@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freetype
-PKG_VERSION:=		2.4.4
+PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9273efacffb683483e58a9e113efae9f
+PKG_MD5SUM:=		a359993ad0dc23323c676b04fdb57110
 PKG_DESCR:=		A free, high-quality and portable font engine
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
@@ -23,6 +23,8 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+CONFIGURE_ARGS+=	--without-png
 
 libfreetype-install:
 	${INSTALL_DIR} ${IDIR_LIBFREETYPE}/usr/lib
