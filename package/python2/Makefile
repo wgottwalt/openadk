@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		9
+PKG_RELEASE:=		10
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -106,10 +106,10 @@ CFLAGS_FOR_BUILD+=	-fPIC
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
 		$(STAGING_HOST_DIR)/usr/bin/pgen
+	(cd $(STAGING_HOST_DIR)/usr/bin && \
+		patch -p0 < $(TOPDIR)/package/python2/files/python-config.patch)
 
 pre-configure:
-	(cd $(WRKBUILD) && patch -p1 < \
-		$(TOPDIR)/package/python2/files/patch-Misc_python-config_in )
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 
