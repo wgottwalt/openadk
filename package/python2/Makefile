@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		autotool libffi python2-host
 PKG_DEPENDS:=		libpthread libffi libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
-PKG_OPTS:=		dev noscripts
+PKG_OPTS:=		dev
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd
 

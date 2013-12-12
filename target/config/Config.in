@@ -669,7 +669,6 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_EXT2_FS
 	help
 	  create an read-only initramfs system.
