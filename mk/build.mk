@@ -572,8 +572,9 @@ release:
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
 		) 2>&1 | tee $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
-		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
+		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
+	if [ -f .exit ];then rm .exit;exit 1;fi
 
 # build all target architecture, target systems and libc combinations
 bulk:
