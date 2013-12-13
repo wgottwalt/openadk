@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		libpcap libdnet autotool
 PKG_URL:=		http://www.snort.org
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 
