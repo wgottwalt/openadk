@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		cdrtools
 PKG_VERSION:=		3.00
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7b6361bcce2cedff1ae437fadafe53b
+PKG_MD5SUM:=		bb21cefefcfbb76cf249120e8978ffdd
 PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
 
 include ../rules.mk
