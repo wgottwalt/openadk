@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		12edc291dba8127f2e9696e69f36299e
 PKG_DESCR:=		retrieving files using HTTP(S) and FTP
 PKG_SECTION:=		www
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
 
@@ -36,9 +37,12 @@ CONFIGURE_ARGS+=	--with-ssl=gnutls \
 			--with-libgnutls-prefix="$(STAGING_DIR)/usr"
 endif
 
+AUTOTOOL_STYLE:=	autoreconf
+
 wget-install:
 	${INSTALL_DIR} ${IDIR_WGET}/etc ${IDIR_WGET}/usr/bin
-	${INSTALL_DATA} ${WRKINST}/etc/wgetrc ${IDIR_WGET}/etc/
+	${INSTALL_DATA} ${WRKBUILD}/doc/sample.wgetrc \
+		${IDIR_WGET}/etc/wgetrc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/wget ${IDIR_WGET}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

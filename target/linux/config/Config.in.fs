@@ -227,7 +227,11 @@ config ADK_KPACKAGE_KMOD_FUSE_FS
 	  fuse-utils.
 
 config ADK_KERNEL_JOLIET
-	bool 
+	boolean 
+	default n
+
+config ADK_KERNEL_ISO9660_FS
+	boolean
 	default n
 
 config ADK_KPACKAGE_KMOD_ISO9660_FS

@@ -669,7 +669,6 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_EXT2_FS
 	help
 	  create an read-only initramfs system.
@@ -748,6 +747,16 @@ config ADK_TARGET_ROOTFS_MMC
 	help
 	  Use this option if you have a MMC/SDCARD based system.
 	  (ext2 filesystem is used.)
+
+config ADK_TARGET_ROOTFS_ISO
+	bool "ISO image"
+	select ADK_KERNEL_ISO9660_FS
+	select ADK_KERNEL_JOLIET
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SR
+	depends on ADK_HOST_LINUX
+	help
+	  Use this option to create a bootable ISO image.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"

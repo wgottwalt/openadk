@@ -5,12 +5,13 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		systemd
 PKG_VERSION:=		208
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		df64550d92afbffb4f67a434193ee165
 PKG_DESCR:=		System and Service Manager
 PKG_SECTION:=		utils
-PKG_DEPENDS:=		libblkid
-PKG_BUILDDEP:=		usbutils glib kmod util-linux
+PKG_DEPENDS:=		libblkid libcap
+PKG_BUILDDEP:=		autotool usbutils glib kmod util-linux libcap
+PKG_BUILDDEP+=		libgcrypt
 PKG_URL:=		http://freedesktop.org/wiki/Software/systemd/
 PKG_SITES:=		http://www.freedesktop.org/software/systemd/
 PKG_LIBNAME:=		libudev
@@ -33,12 +34,12 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,UDEV,udev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBUDEV,libudev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-lrt
-CONFIGURE_ARGS+=	--disable-logging \
-			--disable-static \
+CONFIGURE_ARGS+=	--disable-static \
 			--without-python \
-			--with-pci-ids-path=/usr/share/pci.ids \
-			--disable-introspection
+			--disable-manpages \
+			--disable-polkit
 
 udev-install:
 	${INSTALL_DIR} ${IDIR_UDEV}/usr/bin ${IDIR_UDEV}/etc/udev

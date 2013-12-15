@@ -1,5 +1,5 @@
---- Python-2.7.5.orig/Misc/python-config.in	2013-05-12 05:32:49.000000000 +0200
-+++ Python-2.7.5/Misc/python-config.in	2013-10-30 21:29:47.000000000 +0100
+--- python2.7-config.orig	2013-12-11 12:40:37.244519764 +0100
++++ python2.7-config	2013-12-11 12:41:43.279093075 +0100
 @@ -3,6 +3,7 @@
  import sys
  import os
@@ -8,14 +8,14 @@
  from distutils import sysconfig
  
  valid_opts = ['prefix', 'exec-prefix', 'includes', 'libs', 'cflags',
-@@ -37,8 +38,8 @@ for opt in opt_flags:
+@@ -37,8 +38,8 @@
          print sysconfig.EXEC_PREFIX
  
      elif opt in ('--includes', '--cflags'):
 -        flags = ['-I' + sysconfig.get_python_inc(),
 -                 '-I' + sysconfig.get_python_inc(plat_specific=True)]
-+        flags = ['-I' + re.sub('host_', 'target_', sysconfig.get_python_inc()),
-+                 '-I' + re.sub('host_', 'target_', sysconfig.get_python_inc(plat_specific=True))]
++        flags = ['-I' + re.sub('target_', 'host_', sysconfig.get_python_inc()),
++                 '-I' + re.sub('target_', 'host_', sysconfig.get_python_inc(plat_specific=True))]
          if opt == '--cflags':
              flags.extend(getvar('CFLAGS').split())
          print ' '.join(flags)

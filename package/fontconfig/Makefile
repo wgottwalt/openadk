@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fontconfig
-PKG_VERSION:=		2.10.91
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		0a8edc63aa79377b2bf44e469d5bbbb7
+PKG_VERSION:=		2.11.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		84278204cd7f36adbea7ad8094e039ac
 PKG_DESCR:=		library for configuring and customizing font access
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
