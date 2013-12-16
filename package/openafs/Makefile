@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openafs
-PKG_VERSION:=		1.6.5
+PKG_VERSION:=		1.6.5.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e33e0b031760d4f90815d40b8ab3c540
 PKG_DESCR:=		AFS implementation
