@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		util-macros
-PKG_VERSION:=		1.8.0
+PKG_VERSION:=		1.18.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fe73a69d02bd0be6cdf7c773bfd72041
+PKG_MD5SUM:=		fd0ba21b3179703c071bbb4c3e5fb0f4
 PKG_DESCR:=		xorg macros
 PKG_SECTION:=		x11/misc
 PKG_BUILDDEP:=		autotool util-macros-host

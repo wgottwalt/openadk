@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		12.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		489f3877decae4e265ece54f9eaef0ba
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
@@ -17,13 +17,15 @@ PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		omxplayer libusb-compat libbluray libgpg-error
+PKG_DEPENDS+=		libssh libcec libnfs librtmp
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad jpeg libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		bcm2835-vc libgpg-error dbus libusb-compat libbluray
-PKG_BUILDDEP+=		libgpg-error
+PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump
+PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
@@ -41,19 +43,25 @@ TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_54 \
 			-I$(STAGING_DIR)/opt/vc/include \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static \
+			-L$(STAGING_DIR)/usr/lib/samba
 AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
+			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
-			--disable-ssh \
-			--disable-samba \
 			--disable-mysql \
+			--enable-samba \
+			--enable-ssh \
+			--enable-nfs \
 			--enable-libusb \
 			--enable-libbluray \
 			--enable-external-libraries \
 			--enable-player=omxplayer \
 			--enable-gles \
+			--enable-rtmp \
 			--disable-sdl \
 			--disable-joystick \
+			--disable-dvdcss \
 			--disable-x11 \
 			--with-platform=raspberry-pi
 

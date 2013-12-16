@@ -10,7 +10,7 @@ PKG_MD5SUM:=		e52086d1b508fa0b76c52ee30b55bec4
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libusb alsa-lib libpthread libx11 libxext
-PKG_BUILDDEP:=		libusb alsa-lib libX11 libXext
+PKG_BUILDDEP:=		sdl-host libusb alsa-lib libX11 libXext
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/release/
 PKG_LIBNAME:=		libsdl
@@ -24,9 +24,13 @@ PKGFB_WITH_TSLIB:=	tslib
 DISTFILES:=             SDL-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+HOST_STYLE:=		auto
 
 ifeq ($(ADK_PACKAGE_SDL_WITH_TSLIB),y)
 CONFIGURE_ARGS+=	--enable-input-tslib
@@ -45,4 +49,5 @@ libsdl-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL)/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
