@@ -52,5 +52,6 @@ $(eval $(call rootfs_template,squashfs,SQUASHFS,$(ROOTFS)))
 $(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV) panic=3))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp init=/init))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
+$(eval $(call rootfs_template,iso,ISO))
 
 export ADK_TARGET_FS

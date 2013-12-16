@@ -28,6 +28,9 @@ config ADK_KERNEL_SCSI
 config ADK_KERNEL_BLK_DEV_SD
 	boolean
 
+config ADK_KERNEL_BLK_DEV_SR
+	boolean
+
 config ADK_KERNEL_ISCSI_TCP
 	boolean
 
@@ -324,6 +327,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 	prompt "kmod-scsi-cdrom................... SCSI CDROM support"
 	depends on !ADK_KERNEL_SCSI
+	depends on !ADK_KERNEL_BLK_DEV_SR
 	depends on ADK_KPACKAGE_KMOD_SCSI
 	tristate
 	help
