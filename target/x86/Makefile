@@ -65,8 +65,8 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-i386 -nographic -net user,hostfwd=tcp::2222-:22 -net nic,model=e1000 -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
 endif
+endif
 ifeq (${ADK_TARGET_FS},iso)
 imageinstall: ${BIN_DIR}/${ROOTFSISO}
 	@echo 'ISO image is at $<'
-endif
 endif

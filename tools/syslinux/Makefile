@@ -24,6 +24,7 @@ $(WRKBUILD)/.installed: ${WRKBUILD}/.compiled
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}' \
 		INSTALLROOT='${WRKINST}' \
 		bios install
+	touch $@
 
 ${TOOLS_DIR}/extlinux: $(WRKBUILD)/.installed
 	$(INSTALL_BIN) ${WRKINST}/sbin/extlinux \

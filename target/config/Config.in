@@ -755,6 +755,7 @@ config ADK_TARGET_ROOTFS_ISO
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SR
 	depends on ADK_HOST_LINUX
+	depends on ADK_LINUX_X86
 	help
 	  Use this option to create a bootable ISO image.
 
