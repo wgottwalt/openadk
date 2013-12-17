@@ -7,6 +7,9 @@ TARGETS:=adk mkcrypt cpio mkimage genext2fs
 ifeq ($(ADK_TARGET_ROOTFS_ISO),y)
 TARGETS+=cdrtools syslinux
 endif
+ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+TARGETS+=gperf
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
