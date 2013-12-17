@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		c7a1cc71cb9747f93122ec650d4ae933
 PKG_DESCR:=		bluray library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		libxml2
 PKG_URL:=		http://www.videolan.org/developers/libbluray.html
 PKG_SITES:=		ftp://ftp.videolan.org/pub/videolan/libbluray/${PKG_VERSION}/
 PKG_OPTS:=		dev

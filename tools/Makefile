@@ -4,6 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 TARGETS:=adk mkcrypt cpio mkimage genext2fs
+ifeq ($(ADK_TARGET_ROOTFS_ISO),y)
+TARGETS+=cdrtools syslinux
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))

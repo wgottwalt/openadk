@@ -24,6 +24,10 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--disable-nis \
 			--enable-db=no
 
+post-install:
+	# /lib is not automatically installed to staging area
+	$(CP) $(WRKINST)/lib/libpam*.so* $(STAGING_TARGET_DIR)/usr/lib
+
 pam-install:
 	$(INSTALL_DIR) $(IDIR_PAM)/etc/security
 	$(CP) $(WRKINST)/etc/security/* $(IDIR_PAM)/etc/security
@@ -31,7 +35,5 @@ pam-install:
 	$(CP) $(WRKINST)/lib/libpam*.so* $(IDIR_PAM)/lib
 	$(CP) $(WRKINST)/lib/security/*.so* $(IDIR_PAM)/lib/security
 	$(CP) ./files/pam.conf $(IDIR_PAM)/etc
-	# /lib is not automatically installed to staging area
-	$(CP) $(WRKINST)/lib/libpam*.so* $(STAGING_DIR)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

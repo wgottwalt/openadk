@@ -10,7 +10,7 @@ PKG_MD5SUM:=		dcb8bd1b756f2843e18b1fdf3aaeee15
 PKG_DESCR:=		Audio Meta-Data library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		zlib
+PKG_BUILDDEP:=		cmake-host zlib
 PKG_URL:=		http://taglib.github.com/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
@@ -22,7 +22,7 @@ $(eval $(call PKG_template,TAGLIB,taglib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		manual
 
 do-configure:
-	(cd ${WRKBUILD} && cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .)
+	(cd ${WRKBUILD} && PATH='${TARGET_PATH}' cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .)
 
 pre-install:
 	$(INSTALL_DATA) ./files/taglib.pc $(WRKBUILD)/

@@ -1,0 +1,34 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		libcec
+PKG_VERSION:=		2.1.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d65e52ab3295e9e4b73bf4580f3bd4f7
+PKG_DESCR:=		control your device with your TV remote control
+PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool
+PKG_URL:=		http://libcec.pulse-eight.com/
+PKG_SITES:=		http://www.openadk.org/distfiles
+PKG_OPTS:=		dev
+
+PKG_SYSTEM_DEPENDS:=    raspberry-pi
+PKG_LIBC_DEPENDS:=      eglibc glibc musl
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,LIBCEC,libcec,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ARGS+=	--enable-rpi \
+			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
+			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib
+
+libcec-install:
+	$(INSTALL_DIR) $(IDIR_LIBCEC)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libcec*.so* \
+		$(IDIR_LIBCEC)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

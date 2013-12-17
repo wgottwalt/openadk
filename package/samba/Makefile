@@ -62,8 +62,6 @@ samba-install:
 			${IDIR_SAMBA}/usr/lib/samba/charset
 	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
-	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
-		${IDIR_SAMBA}/usr/lib/samba
 	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
 
@@ -79,6 +77,8 @@ samba-client-install:
 
 samba-lib-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib/samba
+	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
+		${IDIR_SAMBA}/usr/lib/samba
 	$(CP) ${WRKINST}/usr/lib/samba/{libtalloc,libtdb,libtevent}.* \
 		${IDIR_SAMBA_LIB}/usr/lib/samba
 

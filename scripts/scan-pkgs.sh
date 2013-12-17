@@ -105,11 +105,6 @@ if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
 	NEED_GPERF="$NEED_GPERF eglibc"
 fi
 
-if [[ -n $ADK_PACKAGE_XBMC ]]; then
-	NEED_SDLDEV="$NEED_SDLDEV xbmc"
-	NEED_SDLIMAGEDEV="$NEED_SDLIMAGEDEV xbmc"
-fi
-
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
