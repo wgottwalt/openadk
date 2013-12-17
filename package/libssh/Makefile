@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libssh
 PKG_VERSION:=		0.5.3
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		9ad01838d3b89d98e900e0f6260a88cc
 PKG_DESCR:=		SSH library
 PKG_SECTION:=		libs
