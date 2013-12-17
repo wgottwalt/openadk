@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		2013.62
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ca2c7932a1399cf361f795aaa3843998
 PKG_DESCR:=		SSH 2 server/client designed for embedded systems
 PKG_SECTION:=		net/security
