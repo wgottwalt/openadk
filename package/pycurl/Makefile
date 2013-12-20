@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pycurl
-PKG_VERSION:=		7.19.0
+PKG_VERSION:=		7.19.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		919d58fe37e69fe87ce4534d8b6a1c7b
+PKG_MD5SUM:=		518be33976dbc6838e42495ada64b43f
 PKG_DESCR:=		Python module for fetching of files
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		python2 curl

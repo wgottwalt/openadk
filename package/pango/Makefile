@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pango
-PKG_VERSION:=		1.28.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		22ad1c8d3fda7e73b0798035f3dd96bc
+PKG_VERSION:=		1.36.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		9e0d3a1ea395172f8c39ba98a4d2081a
 PKG_DESCR:=		pango library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libXft glib cairo libstdcxx fontconfig
+PKG_BUILDDEP:=		libXft glib cairo harfbuzz libstdcxx fontconfig
 PKG_URL:=		http://www.pango.org/
-PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.28/}
+PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.36/}
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
@@ -28,10 +30,10 @@ CONFIGURE_ENV+=		ac_cv_path_EGREP="grep -E"
 
 pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
-	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
+	$(INSTALL_DIR) $(IDIR_PANGO)/usr/lib $(IDIR_PANGO)/usr/lib/pango/1.8.0/modules
 	$(INSTALL_DATA) ./files/pango.modules $(IDIR_PANGO)/etc/pango
 	$(CP) $(WRKINST)/usr/lib/libpango*.so* $(IDIR_PANGO)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/pango/1.6.0/modules/*.so \
-		$(IDIR_PANGO)/usr/lib/pango/1.6.0/modules
+	$(CP) $(WRKINST)/usr/lib/pango/1.8.0/modules/*.so \
+		$(IDIR_PANGO)/usr/lib/pango/1.8.0/modules
 
 include ${TOPDIR}/mk/pkg-bottom.mk

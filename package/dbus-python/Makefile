@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dbus-python
 PKG_VERSION:=		1.2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b09cd2d1a057cc432ce944de3fc06bf7
 PKG_DESCR:=		DBUS python bindings
 PKG_SECTION:=		libs

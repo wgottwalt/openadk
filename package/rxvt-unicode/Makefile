@@ -23,6 +23,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RXVT_UNICODE,rxvt-unicode,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ARGS+=	--disable-perl \
 			--disable-utmp \
 			--disable-afterimage

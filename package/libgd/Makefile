@@ -3,18 +3,20 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		gd
-PKG_VERSION:=		2.0.35
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		982963448dc36f20cb79b6e9ba6fdede
+PKG_NAME:=		libgd
+PKG_VERSION:=		2.1.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		03588159bf4faab9079849c8d709acc6
 PKG_DESCR:=		A library for the dynamic creation of images
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libjpeg libpng
 PKG_BUILDDEP:=		libpng jpeg
 PKG_URL:=		http://www.libgd.org/
-PKG_SITES:=		http://www.libgd.org/releases/
+PKG_SITES:=		https://bitbucket.org/libgd/gd-libgd/downloads/
 PKG_LIBNAME:=		libgd
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 

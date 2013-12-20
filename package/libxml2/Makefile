@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.9.1
-PKG_RELEASE:=		4
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		9c0cfef285d5c4a5c80d00904ddab380
 PKG_DESCR:=		XML C parser and toolkit
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		autotool gettext-tiny libxml2-host zlib
+PKG_BUILDDEP:=		autotool gettext-tiny python2-host libxml2-host zlib
 PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_OPTS:=		dev
@@ -45,7 +45,7 @@ AUTOTOOL_STYLE:=	autoreconf
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-lpthread
 ifneq ($(ADK_PACKAGE_LIBXML2_PYTHON),)
-CONFIGURE_ARGS+=	--with-python=$(STAGING_TARGET_DIR)/usr
+CONFIGURE_ARGS+=	--with-python
 else
 CONFIGURE_ARGS+=	--without-python
 endif

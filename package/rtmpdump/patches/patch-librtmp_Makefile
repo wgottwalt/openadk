@@ -1,0 +1,36 @@
+--- rtmpdump-2.4.orig/librtmp/Makefile	2013-12-15 14:24:48.000000000 +0100
++++ rtmpdump-2.4/librtmp/Makefile	2013-12-15 15:20:13.000000000 +0100
+@@ -1,6 +1,6 @@
+ VERSION=v2.4
+ 
+-prefix=/usr/local
++prefix=/usr
+ 
+ incdir=$(prefix)/include/librtmp
+ bindir=$(prefix)/bin
+@@ -11,9 +11,9 @@ INCDIR=$(DESTDIR)$(incdir)
+ LIBDIR=$(DESTDIR)$(libdir)
+ MANDIR=$(DESTDIR)$(mandir)
+ 
+-CC=$(CROSS_COMPILE)gcc
+-LD=$(CROSS_COMPILE)ld
+-AR=$(CROSS_COMPILE)ar
++CC?=$(CROSS_COMPILE)gcc
++LD?=$(CROSS_COMPILE)ld
++AR?=$(CROSS_COMPILE)ar
+ 
+ SYS=posix
+ CRYPTO=OPENSSL
+@@ -74,8 +74,10 @@ SO_INST=$(SOINST_$(SHARED))
+ 
+ DEF=-DRTMPDUMP_VERSION=\"$(VERSION)\" $(CRYPTO_DEF) $(XDEF)
+ OPT=-O2
+-CFLAGS=-Wall $(XCFLAGS) $(INC) $(DEF) $(OPT) $(SO_DEF)
+-LDFLAGS=$(XLDFLAGS)
++CFLAGS?=
++CFLAGS+=-Wall $(XCFLAGS) $(INC) $(DEF) $(SO_DEF)
++LDFLAGS?=
++LDFLAGS+=$(XLDFLAGS)
+ 
+ 
+ OBJS=rtmp.o log.o amf.o hashswf.o parseurl.o

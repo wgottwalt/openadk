@@ -10,7 +10,7 @@ PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libtiff libjpeg libsdl
-PKG_BUILDDEP:=		libpng libtiff jpeg sdl
+PKG_BUILDDEP:=		sdl-image-host libpng libtiff jpeg sdl
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
 PKG_NEED_CXX:=		1
@@ -20,10 +20,13 @@ PKG_OPTS:=		dev
 DISTFILES:=             SDL_image-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL_image-${PKG_VERSION}
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
 			--enable-bmp \
@@ -33,4 +36,5 @@ libsdl-image-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL_IMAGE)/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -7,6 +7,9 @@ config ADK_TARGET_KERNEL_VMLINUZ
 config ADK_TARGET_KERNEL_ZIMAGE
 	boolean
 
+config ADK_TARGET_KERNEL_LINUXBIN
+	boolean
+
 config ADK_TARGET_KERNEL_IMAGE
 	boolean
 
@@ -17,6 +20,7 @@ config ADK_TARGET_KERNEL
 	string
 	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
 	default "Image" if ADK_TARGET_KERNEL_IMAGE
+	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "vmlinux"
@@ -412,6 +416,9 @@ config ADK_CPU_MIPS32
 config ADK_CPU_MIPS64
 	boolean
 
+config ADK_CPU_MICROBLAZE
+	boolean
+
 config ADK_CPU_RASPBERRY_PI
 	boolean
 
@@ -426,6 +433,8 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_PENTIUM_M
 	default "i686" if ADK_CPU_ATOM
 	default "m68k" if ADK_LINUX_M68K
+	default "microblaze" if ADK_LINUX_MICROBLAZE && ADK_big
+	default "microblazeel" if ADK_LINUX_MICROBLAZE && ADK_little
 	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
 	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
 	default "mips" if ADK_LINUX_MIPS && ADK_big
@@ -492,6 +501,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "console=ttyUL0" if ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
+	default "console=ttyUL0" if ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
@@ -537,6 +548,7 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
+		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
@@ -551,10 +563,8 @@ config ADK_TARGET_LIB_EGLIBC
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_M68K || \
+		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
-		ADK_LINUX_MIPSEL || \
-		ADK_LINUX_MIPS64 || \
-		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_PPC64 || \
 		ADK_LINUX_SH || \
@@ -573,10 +583,8 @@ config ADK_TARGET_LIB_GLIBC
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
 		ADK_LINUX_M68K || \
+		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
-		ADK_LINUX_MIPSEL || \
-		ADK_LINUX_MIPS64 || \
-		ADK_LINUX_MIPS64EL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_PPC64 || \
 		ADK_LINUX_SH || \
@@ -593,8 +601,8 @@ config ADK_TARGET_LIB_MUSL
 	select ADK_musl
 	depends on \
 		ADK_LINUX_ARM || \
+		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
-		ADK_LINUX_MIPSEL || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
@@ -633,6 +641,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_HARDWARE_QEMU || \
 		ADK_TARGET_SYSTEM_ARANYM_M68K || \
 		ADK_LINUX_ARM || \
+		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
@@ -652,6 +661,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	depends on \
 		ADK_HARDWARE_QEMU || \
 		ADK_LINUX_ARM || \
+		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
@@ -659,7 +669,6 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_EXT2_FS
 	help
 	  create an read-only initramfs system.
@@ -738,6 +747,17 @@ config ADK_TARGET_ROOTFS_MMC
 	help
 	  Use this option if you have a MMC/SDCARD based system.
 	  (ext2 filesystem is used.)
+
+config ADK_TARGET_ROOTFS_ISO
+	bool "ISO image"
+	select ADK_KERNEL_ISO9660_FS
+	select ADK_KERNEL_JOLIET
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SR
+	depends on ADK_HOST_LINUX
+	depends on ADK_LINUX_X86
+	help
+	  Use this option to create a bootable ISO image.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"

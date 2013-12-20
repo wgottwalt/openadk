@@ -1,0 +1,9 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_MICROBLAZEEL
+	bool "Toolchain only (little endian)"
+	select ADK_microblaze
+	select ADK_little
+	select ADK_toolchain_microblazeel
+	select ADK_TOOLCHAIN
+	help
+	  Microblaze toolchain.
+

@@ -9,11 +9,12 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		a00855a153647df76d47f1ea454f74ae
 PKG_DESCR:=		daq
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP:=		libpcap autotool
+PKG_DEPENDS:=		libpcap libdnet
+PKG_BUILDDEP:=		libpcap libdnet autotool
 PKG_URL:=		http://www.snort.org
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 

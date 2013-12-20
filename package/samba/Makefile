@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.6.19
+PKG_VERSION:=		3.6.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		afe9c7c590f3093555cd6e870d2532e1
+PKG_MD5SUM:=		faa67c625508dc495c082357913ccea6
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt
@@ -62,8 +62,6 @@ samba-install:
 			${IDIR_SAMBA}/usr/lib/samba/charset
 	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
-	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
-		${IDIR_SAMBA}/usr/lib/samba
 	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
 	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
 
@@ -79,6 +77,8 @@ samba-client-install:
 
 samba-lib-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib/samba
+	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
+		${IDIR_SAMBA}/usr/lib/samba
 	$(CP) ${WRKINST}/usr/lib/samba/{libtalloc,libtdb,libtevent}.* \
 		${IDIR_SAMBA_LIB}/usr/lib/samba
 

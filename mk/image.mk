@@ -121,12 +121,14 @@ INITRAMFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
+ROOTFSISO=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.iso
 else
 TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
+ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.iso
 endif
 
 ${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
@@ -196,6 +198,17 @@ endif
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} oldconfig $(MAKE_TRACE) 
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
+
+${BIN_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
+	mkdir -p ${TARGET_DIR}/boot/syslinux
+	cp ${STAGING_HOST_DIR}/usr/share/syslinux/{isolinux.bin,ldlinux.c32} \
+		${TARGET_DIR}/boot/syslinux
+	echo 'DEFAULT /boot/kernel root=/dev/sr0 init=/init' > \
+		${TARGET_DIR}/boot/syslinux/isolinux.cfg
+	${TOOLS_DIR}/mkisofs -R -uid 0 -gid 0 -o $@ \
+		-b boot/syslinux/isolinux.bin \
+		-c boot/syslinux/boot.cat -no-emul-boot \
+		-boot-load-size 4 -boot-info-table ${TARGET_DIR}
 
 imageclean:
 	rm -f $(BIN_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*

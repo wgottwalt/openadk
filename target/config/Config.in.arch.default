@@ -5,9 +5,6 @@ config ADK_native
 config ADK_arm
 	bool
 
-config ADK_armeb
-	bool
-
 config ADK_avr32
 	bool
 
@@ -17,16 +14,10 @@ config ADK_cris
 config ADK_m68k
 	bool
 
+config ADK_microblaze
+	bool
+
 config ADK_mips
-	bool
-
-config ADK_mipsel
-	bool
-
-config ADK_mips64
-	bool
-
-config ADK_mips64el
 	bool
 
 config ADK_ppc
@@ -53,14 +44,11 @@ config ADK_x86
 config ADK_TARGET_ARCH
 	string
 	default "arm"  if ADK_arm
-	default "arm"  if ADK_armeb
 	default "avr32"  if ADK_avr32
 	default "cris"  if ADK_cris
 	default "m68k"  if ADK_m68k
+	default "microblaze"  if ADK_microblaze
 	default "mips"  if ADK_mips
-	default "mips"  if ADK_mipsel
-	default "mips"  if ADK_mips64
-	default "mips"  if ADK_mips64el
 	default "ppc"  if ADK_ppc
 	default "ppc64"  if ADK_ppc64
 	default "sparc"  if ADK_sparc

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
-PKG_VERSION:=		1.10.2
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		f101a9e88b783337b20b2e26dfd26d5f
+PKG_VERSION:=		1.12.16
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a1304edcdc99282f478b995ee5f8f854
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		fontconfig libfreetype libpng libx11 pixman
@@ -17,7 +17,7 @@ PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
 PKG_OPTS:=		dev
 
-#DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
@@ -34,11 +34,13 @@ ifeq (,$(filter cris,$(TARGET_ARCH)))
 TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
 endif
 CONFIGURE_ARGS+=	--enable-ft=yes \
+			--enable-fc=yes \
 			--enable-tee=yes \
 			--enable-xlib=yes
 
 cairo-install:
-	${INSTALL_DIR} ${IDIR_CAIRO}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libcairo.so* ${IDIR_CAIRO}/usr/lib
+	${INSTALL_DIR} ${IDIR_CAIRO}/usr/lib/cairo
+	${CP} ${WRKINST}/usr/lib/libcairo*.so* ${IDIR_CAIRO}/usr/lib
+	${CP} ${WRKINST}/usr/lib/cairo/*.so* ${IDIR_CAIRO}/usr/lib/cairo
 
 include ${TOPDIR}/mk/pkg-bottom.mk

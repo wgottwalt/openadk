@@ -38,6 +38,12 @@ config ADK_LINUX_M68K
 	help
 	  Support for m68k systems.
 
+config ADK_LINUX_MICROBLAZE
+	bool "microblaze system"
+	select ADK_microblaze
+	help
+	  Support for Microblaze systems.
+
 config ADK_LINUX_MIPS
 	bool "mips system"
 	select ADK_mips
