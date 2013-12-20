@@ -172,7 +172,8 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	prompt "kmod-vfat-fs...................... VFAT filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
-	select ADK_KPACKAGE_KMOD_NLS_UTF8
+	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
+	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	select ADK_KERNEL_BLOCK
 	default y if ADK_TARGET_WITH_MMC
 	default n
