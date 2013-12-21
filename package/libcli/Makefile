@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libcli
-PKG_VERSION:=		1.9.4
+PKG_VERSION:=		1.9.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b917617d21b90db214971efe64a33416
+PKG_MD5SUM:=		1b07b09e2840f910defde66afa28fbe7
 PKG_DESCR:=		Cisco-like command-line interface library
 PKG_SECTION:=		libs
-PKG_URL:=		http://code.google.com/p/libcli
-PKG_SITES:=		http://libcli.googlecode.com/files/
+PKG_URL:=		http://sites.dparrish.com/libcli
+PKG_SITES:=		https://github.com/dparrish/libcli
 PKG_OPTS:=		dev
 
 include ${TOPDIR}/mk/package.mk
