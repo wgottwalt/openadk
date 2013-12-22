@@ -1,12 +1,11 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- gpm-1.20.5.orig/src/daemon/open_console.c	2008-06-13 10:08:19.000000000 +0200
-+++ gpm-1.20.5/src/daemon/open_console.c	2008-09-16 17:11:51.000000000 +0200
-@@ -21,7 +21,7 @@
- 
- #include <fcntl.h>                  /* open and co.      */
- #include <sys/stat.h>               /* stat()            */
--#include <stropts.h>                /* ioctl             */
-+#include <sys/ioctl.h>              /* ioctl             */
- 
- /* Linux specific (to be outsourced in gpm2 */
+--- gpm-1.20.7.orig/src/daemon/open_console.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/daemon/open_console.c	2013-12-22 12:54:02.000000000 +0100
+@@ -27,6 +27,8 @@
  #include <linux/serial.h>           /* for serial console check */
+ #include <asm/ioctls.h>            /* for serial console check */
+ 
++#define major(dev) (((unsigned) (dev))>>8)
++#define minor(dev) ((dev)&0xff)
+ 
+ #include "headers/message.h"        /* messaging in gpm  */
+ #include "headers/daemon.h"         /* daemon internals  */

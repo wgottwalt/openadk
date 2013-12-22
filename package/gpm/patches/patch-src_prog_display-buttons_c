@@ -1,0 +1,10 @@
+--- gpm-1.20.7.orig/src/prog/display-buttons.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/display-buttons.c	2013-12-22 12:58:43.000000000 +0100
+@@ -31,6 +31,7 @@
+  *
+  */
+ 
++#include <sys/select.h>
+ #include <unistd.h>           /* write, read, open    */
+ #include <stdlib.h>           /* strtol()             */
+ #include <stdio.h>            /* printf()             */

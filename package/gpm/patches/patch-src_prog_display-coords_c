@@ -1,0 +1,10 @@
+--- gpm-1.20.7.orig/src/prog/display-coords.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/display-coords.c	2013-12-22 12:59:32.000000000 +0100
+@@ -32,6 +32,7 @@
+  *
+  */
+ 
++#include <sys/select.h>
+ #include <unistd.h>           /* write, read, open    */
+ #include <stdlib.h>           /* strtol()             */
+ #include <stdio.h>            /* printf()             */
