@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpm
-PKG_VERSION:=		1.20.6
-PKG_RELEASE:=		2
+PKG_VERSION:=		1.20.7
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		b75e794bfb9fe8114d0b083932673b8f
 PKG_DESCR:=		console mouse support
 PKG_SECTION:=		misc
 PKG_URL:=		http://launchpad.net/gpm
-PKG_SITES:=		http://launchpad.net/gpm/main/${PKG_VERSION}/+download/
+PKG_SITES:=		http://www.nico.schottelius.org/software/gpm/archives/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
 

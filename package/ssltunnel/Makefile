@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libopenssl ppp
 PKG_BUILDDEP:=		openssl ppp
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SSLTUNNEL,ssltunnel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
