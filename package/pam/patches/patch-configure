@@ -14,7 +14,7 @@
  if test "$ac_res" != no; then :
    test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 -  LIBCRYPT="-l$ac_lib"
-+  LIBCRYPT=""
++  LIBCRYPT="-lcrypt"
  else
    LIBCRYPT=""
  fi
