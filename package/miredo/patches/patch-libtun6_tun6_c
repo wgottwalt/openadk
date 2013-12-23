@@ -1,0 +1,15 @@
+--- miredo-1.2.6.orig/libtun6/tun6.c	2012-09-12 15:03:59.000000000 +0200
++++ miredo-1.2.6/libtun6/tun6.c	2013-12-23 17:23:42.000000000 +0100
+@@ -53,7 +53,12 @@
+ const char os_driver[] = "Linux";
+ # define USE_LINUX 1
+ 
++#if defined(__GLIBC__)
+ # include <linux/if_tun.h> // TUNSETIFF - Linux tunnel driver
++#else
++#define IFF_TUN                0x0001
++#define TUNSETIFF     _IOW('T', 202, int)
++#endif
+ /*
+  * <linux/ipv6.h> conflicts with <netinet/in.h> and <arpa/inet.h>,
+  * so we've got to declare this structure by hand.
