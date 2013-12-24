@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.bitwizard.nl/mtr/
 PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MTR,mtr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
