@@ -15,6 +15,7 @@ PKG_URL:=		http://www.monkey.org/~dugsong/dsniff/
 PKG_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
 
 PKG_ARCH_DEPENDS:=	!arm
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 

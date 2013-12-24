@@ -15,10 +15,13 @@ PKG_URL:=		http://libnids.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnids/}
 PKG_OPTS:=		dev
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--with-libpcap=${STAGING_TARGET_DIR}/usr
