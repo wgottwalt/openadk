@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tcsh
 PKG_VERSION:=		6.18.01
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6eed09dbd4223ab5b6955378450d228a
 PKG_DESCR:=		alternative csh
 PKG_SECTION:=		shells
