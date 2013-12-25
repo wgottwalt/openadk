@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		lang
