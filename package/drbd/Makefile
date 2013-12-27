@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		drbd
 PKG_VERSION:=		8.4.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		b51815343c1a9151e2936b3b97520388
 PKG_DESCR:=		DRBD admin tools
 PKG_SECTION:=		fs
@@ -33,7 +33,7 @@ post-install:
 	$(INSTALL_DIR) $(IDIR_DRBD)/usr/sbin
 	$(CP) $(WRKINST)/usr/lib/drbd/* \
 		$(IDIR_DRBD)/usr/lib/drbd/
-	$(INSTALL_BIN) $(WRKINST)/sbin/drbd* \
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/drbd* \
 		$(IDIR_DRBD)/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
