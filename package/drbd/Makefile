@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		drbd
-PKG_VERSION:=		8.4.1
+PKG_VERSION:=		8.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3af0cc49ee0b5005ea108c5ba92aa755
+PKG_MD5SUM:=		b51815343c1a9151e2936b3b97520388
 PKG_DESCR:=		DRBD admin tools
 PKG_SECTION:=		fs
 PKG_URL:=		http://www.drbd.org/
 PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
+
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 include $(TOPDIR)/mk/package.mk
 
