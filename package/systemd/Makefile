@@ -17,7 +17,7 @@ PKG_SITES:=		http://www.freedesktop.org/software/systemd/
 PKG_LIBNAME:=		libudev
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SUBPKGS:=		UDEV LIBUDEV
 PKGSC_LIBUDEV:=		libs
 PKGSD_LIBUDEV:=		UDEV library

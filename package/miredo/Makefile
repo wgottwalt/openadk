@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		miredo
 PKG_VERSION:=		1.2.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		5bcdbaced54f40b6cb1e9c9a8dbac411
 PKG_DESCR:=		A Teredo client and relay daemon
 PKG_SECTION:=		ipv6

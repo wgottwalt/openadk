@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		socat
-PKG_VERSION:=		1.7.2.0
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		0565dd58800e4c50534c61bbb453b771
+PKG_VERSION:=		1.7.2.2
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		fe70c821a104378a834c3ed1b5971e54
 PKG_DESCR:=		A multipurpose relay (SOcket CAT)
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpthread libopenssl

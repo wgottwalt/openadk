@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libtirpc autotool
 PKG_URL:=		http://sourceforge.net/projects/rpcbind/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rpcbind/}
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

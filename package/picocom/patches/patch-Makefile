@@ -1,13 +1,15 @@
---- picocom-1.4.orig/Makefile	2004-08-13 13:18:38.000000000 +0200
-+++ picocom-1.4/Makefile	2011-01-21 21:02:02.096749132 +0100
-@@ -2,11 +2,12 @@
- VERSION=1.4
+--- picocom-1.7.orig/Makefile	2012-02-21 06:42:24.000000000 +0100
++++ picocom-1.7/Makefile	2013-12-26 09:43:38.000000000 +0100
+@@ -4,13 +4,14 @@ VERSION=1.7
+ UUCP_LOCK_DIR=/var/lock
  
  # CC = gcc
--CPPFLAGS=-DVERSION_STR=\"$(VERSION)\" -DUUCP_LOCK_DIR=\"/var/lock\"
--CFLAGS = -Wall -g
+-CPPFLAGS=-DVERSION_STR=\"$(VERSION)\" \
 +CPPFLAGS ?=
-+CPPFLAGS += -DVERSION_STR=\"$(VERSION)\" -DUUCP_LOCK_DIR=\"/var/lock\"
++CPPFLAGS+=-DVERSION_STR=\"$(VERSION)\" \
+          -DUUCP_LOCK_DIR=\"$(UUCP_LOCK_DIR)\" \
+          -DHIGH_BAUD
+-CFLAGS = -Wall -g
 +CFLAGS ?= -Wall -g
  
  # LD = gcc

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		audiofile
 PKG_VERSION:=		0.3.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2731d79bec0acef3d30d2fc86b0b72fd
 PKG_DESCR:=		audiofile library
 PKG_SECTION:=		libs
