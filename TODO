@@ -1,3 +1,4 @@
+- microblaze: add cfgfs partition to dts, add partition to spartan dts
 - use host-tools infrastructure for openjdk7
 - remove openjdk6
 - evaluate libguestfs for image creation

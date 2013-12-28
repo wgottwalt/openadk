@@ -1,0 +1,80 @@
+diff -Nur mtd-utils-1.5.orig/compr.c mtd-utils-1.5/compr.c
+--- mtd-utils-1.5.orig/compr.c	2013-12-24 10:42:36.000000000 +0100
++++ mtd-utils-1.5/compr.c	2013-12-25 22:18:17.000000000 +0100
+@@ -517,9 +517,6 @@
+ #ifdef CONFIG_JFFS2_RTIME
+ 	jffs2_rtime_init();
+ #endif
+-#ifdef CONFIG_JFFS2_LZO
+-	jffs2_lzo_init();
+-#endif
+ 	return 0;
+ }
+ 
+@@ -531,8 +528,5 @@
+ #ifdef CONFIG_JFFS2_ZLIB
+ 	jffs2_zlib_exit();
+ #endif
+-#ifdef CONFIG_JFFS2_LZO
+-	jffs2_lzo_exit();
+-#endif
+ 	return 0;
+ }
+diff -Nur mtd-utils-1.5.orig/Makefile mtd-utils-1.5/Makefile
+--- mtd-utils-1.5.orig/Makefile	2013-12-24 10:42:36.000000000 +0100
++++ mtd-utils-1.5/Makefile	2013-12-25 22:22:52.000000000 +0100
+@@ -26,18 +26,12 @@
+ 	rfddump rfdformat \
+ 	serve_image recv_image \
+ 	sumtool jffs2reader
+-UBI_BINS = \
+-	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
+-	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol
+ 
+ BINS = $(MTD_BINS)
+-BINS += mkfs.ubifs/mkfs.ubifs
+-BINS += $(addprefix ubi-utils/,$(UBI_BINS))
+ SCRIPTS = flash_eraseall
+ 
+ TARGETS = $(BINS)
+ TARGETS += lib/libmtd.a
+-TARGETS += ubi-utils/libubi.a
+ 
+ OBJDEPS = $(BUILDDIR)/include/version.h
+ 
+@@ -84,12 +78,12 @@
+ #
+ # Utils in top level
+ #
+-obj-mkfs.jffs2 = compr_rtime.o compr_zlib.o compr_lzo.o compr.o rbtree.o
+-LDFLAGS_mkfs.jffs2 = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
+-LDLIBS_mkfs.jffs2  = -lz $(LZOLDLIBS)
++obj-mkfs.jffs2 = compr_rtime.o compr_zlib.o compr.o rbtree.o
++LDFLAGS_mkfs.jffs2 = $(ZLIBLDFLAGS)
++LDLIBS_mkfs.jffs2  = -lz
+ 
+-LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
+-LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
++LDFLAGS_jffs2reader = $(ZLIBLDFLAGS)
++LDLIBS_jffs2reader  = -lz
+ 
+ $(foreach v,$(MTD_BINS),$(eval $(call mkdep,,$(v))))
+ 
+@@ -104,8 +98,8 @@
+ #
+ obj-mkfs.ubifs = crc16.o lpt.o compr.o devtable.o \
+ 	hashtable/hashtable.o hashtable/hashtable_itr.o
+-LDFLAGS_mkfs.ubifs = $(ZLIBLDFLAGS) $(LZOLDFLAGS) $(UUIDLDFLAGS)
+-LDLIBS_mkfs.ubifs = -lz -llzo2 -lm -luuid
++LDFLAGS_mkfs.ubifs = $(ZLIBLDFLAGS) $(UUIDLDFLAGS)
++LDLIBS_mkfs.ubifs = -lz -lm -luuid
+ $(call mkdep,mkfs.ubifs/,mkfs.ubifs,,ubi-utils/libubi.a)
+ 
+ #
+@@ -119,6 +113,3 @@
+ obj-mtdinfo   = libubigen.a
+ obj-ubinize   = libubigen.a libiniparser.a
+ obj-ubiformat = libubigen.a libscan.a
+-
+-$(foreach v,libubi.a libubigen.a libiniparser.a libscan.a,$(eval $(call _mkdep,ubi-utils/,$(v))))
+-$(foreach v,$(UBI_BINS),$(eval $(call mkdep,ubi-utils/,$(v),libubi.a ubiutils-common.o)))

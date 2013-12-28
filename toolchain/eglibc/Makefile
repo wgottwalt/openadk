@@ -8,6 +8,9 @@ include ../rules.mk
 ifeq ($(ADK_LINUX_SPARC),y)
 TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
 endif
+ifeq ($(ADK_LINUX_MICROBLAZE),y)
+TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
+endif
 
 # ssp not supported
 TARGET_CFLAGS_LIBC:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
