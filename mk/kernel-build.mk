@@ -35,8 +35,13 @@ $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PK
 $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR)/mk/modules.mk
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
+ifeq ($(ADK_USE_KERNEL_MINICONFIG),y)
+	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
+else
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config
 	echo N | ${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
+endif
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 

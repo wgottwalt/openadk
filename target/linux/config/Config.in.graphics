@@ -1,6 +1,5 @@
 config ADK_KERNEL_VT
 	boolean
-	default y if ADK_HARDWARE_QEMU
 	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
@@ -9,7 +8,6 @@ config ADK_KERNEL_VT
 
 config ADK_KERNEL_VT_CONSOLE
 	boolean
-	default y if ADK_HARDWARE_QEMU
 	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_NATIVE_SYSTEM_IBM_X40

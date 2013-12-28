@@ -59,11 +59,21 @@ ifeq ($(ADK_NATIVE),y)
 	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
 	fi
 else
+ifeq ($(ADK_USE_KERNEL_MINICONFIG),y)
+	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
+		cat ${TOPDIR}/target/linux/kernel.config \
+		    ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} > ${BUILD_DIR}/.kernelconfig.board; \
+	else \
+		echo "no miniconfig found for target system"; \
+		exit 1; \
+	fi
+else
 	@if [ -f ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ];then \
 		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG}.$(ADK_TARGET_SYSTEM) ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
 	fi
+endif
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \

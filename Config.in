@@ -91,6 +91,9 @@ source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
 
+config ADK_USE_KERNEL_MINICONFIG
+	boolean
+
 choice
 prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY

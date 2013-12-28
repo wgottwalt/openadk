@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		squashfs
-PKG_VERSION:=		4.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		a3c23391da4ebab0ac4a75021ddabf96
+PKG_VERSION:=		4.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		1b7a781fb4cf8938842279bd3e8ee852
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=squashfs/}
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz
@@ -17,7 +17,9 @@ include ../rules.mk
 all: ${STAGING_HOST_DIR}/bin/mksquashfs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${CC_FOR_BUILD}'
+	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${CC_FOR_BUILD}' \
+		XZ_SUPPORT=1 CPPFLAGS_FOR_BUILD=$(CPPFLAGS_FOR_BUILD) \
+		EXTRA_LDFLAGS=$(LDFLAGS_FOR_BUILD)
 	touch $@
 
 ${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled
