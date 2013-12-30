@@ -12,6 +12,8 @@ PKG_SECTION:=		net
 PKG_URL:=		http://traceroute.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
 
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TRACEROUTE,traceroute,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
