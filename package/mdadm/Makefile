@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mdadm
-PKG_VERSION:=		3.2.6
+PKG_VERSION:=		3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dd2472f07993496ca4f4e3e8f6746517
+PKG_MD5SUM:=		f73bf9c6a72cdd644904b287bc9b7c9e
 PKG_DESCR:=		tool for managing Linux Software RAID arrays
 PKG_SECTION:=		fs
 PKG_URL:=		http://neil.brown.name/blog/mdadm

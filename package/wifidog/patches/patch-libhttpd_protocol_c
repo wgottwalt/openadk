@@ -1,7 +1,15 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- wifidog-1.1.5.orig/libhttpd/protocol.c	2007-11-01 21:04:20.000000000 +0100
-+++ wifidog-1.1.5/libhttpd/protocol.c	2008-10-16 13:12:58.000000000 +0200
-@@ -83,7 +83,7 @@ int _httpd_readChar(request *r, char *cp
++++ wifidog-1.1.5/libhttpd/protocol.c	2014-01-01 16:29:50.000000000 +0100
+@@ -22,6 +22,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <ctype.h>
++#include <fcntl.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <time.h>
+@@ -83,7 +84,7 @@ int _httpd_readChar(request *r, char *cp
  {
  	if (r->readBufRemain == 0)
  	{
@@ -10,7 +18,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  		r->readBufRemain = _httpd_net_read(r->clientSock, 
  			r->readBuf, HTTP_READ_BUF_LEN);
  		if (r->readBufRemain < 1)
-@@ -352,7 +352,7 @@ void _httpd_storeData(request *r, char *
+@@ -352,7 +353,7 @@ void _httpd_storeData(request *r, char *
  	
  	cp = query;
  	cp2 = var;
@@ -19,7 +27,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	val = NULL;
          while(*cp)
          {
-@@ -483,7 +483,7 @@ httpDir *_httpd_findContentDir(server, d
+@@ -483,7 +484,7 @@ httpDir *_httpd_findContentDir(server, d
  			if (createFlag == HTTP_TRUE)
  			{
  				curChild = malloc(sizeof(httpDir));
@@ -28,7 +36,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  				curChild->name = strdup(curDir);
  				curChild->next = curItem->children;
  				curItem->children = curChild;
-@@ -606,7 +606,7 @@ void _httpd_sendFile(httpd *server, requ
+@@ -606,7 +607,7 @@ void _httpd_sendFile(httpd *server, requ
  	char	*suffix;
  	struct 	stat sbuf;
  
@@ -37,7 +45,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	if (suffix != NULL)
  	{
  		if (strcasecmp(suffix,".gif") == 0) 
-@@ -699,7 +699,7 @@ char *_httpd_escape(str)
+@@ -699,7 +700,7 @@ char *_httpd_escape(str)
          if (!ACCEPTABLE((unsigned char)*p))
                  unacceptable +=2;
      result = (char *) malloc(p-str + unacceptable + 1);

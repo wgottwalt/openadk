@@ -22,7 +22,9 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-ltinfo
 
 do-build:
 	${MAKE} -C ${WRKBUILD}/src \

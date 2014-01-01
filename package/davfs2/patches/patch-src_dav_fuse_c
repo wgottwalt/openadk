@@ -1,10 +1,11 @@
---- davfs2-1.4.6.orig/src/dav_fuse.c	2010-02-16 20:29:49.000000000 +0100
-+++ davfs2-1.4.6/src/dav_fuse.c	2010-12-27 22:02:24.000000000 +0100
-@@ -33,6 +33,7 @@
- #ifdef HAVE_STDINT_H
- #include <stdint.h>
+--- davfs2-1.4.7.orig/src/dav_fuse.c	2012-07-19 13:18:51.000000000 +0200
++++ davfs2-1.4.7/src/dav_fuse.c	2014-01-01 20:02:55.000000000 +0100
+@@ -48,6 +48,8 @@
+ #include <sys/stat.h>
  #endif
-+#include <stdlib.h>
- #include <string.h>
- #ifdef HAVE_SYSLOG_H
- #include <syslog.h>
+ 
++#include <sys/select.h>
++
+ #include "defaults.h"
+ #include "mount_davfs.h"
+ #include "cache.h"

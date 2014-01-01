@@ -1,6 +1,14 @@
---- davfs2-1.4.6.orig/src/webdav.c	2010-02-16 20:29:59.000000000 +0100
-+++ davfs2-1.4.6/src/webdav.c	2010-05-30 09:52:01.161613627 +0200
-@@ -52,6 +52,8 @@
+--- davfs2-1.4.7.orig/src/webdav.c	2012-07-19 13:27:51.000000000 +0200
++++ davfs2-1.4.7/src/webdav.c	2014-01-01 20:14:54.000000000 +0100
+@@ -21,7 +21,6 @@
+ #include "config.h"
+ 
+ #include <errno.h>
+-#include <error.h>
+ #ifdef HAVE_FCNTL_H
+ #include <fcntl.h>
+ #endif
+@@ -52,6 +51,8 @@
  #include <sys/stat.h>
  #endif
  
@@ -9,7 +17,7 @@
  #include <ne_alloc.h>
  #include <ne_auth.h>
  #include <ne_basic.h>
-@@ -1918,6 +1920,7 @@ quota_result(void *userdata, const ne_ur
+@@ -1921,6 +1922,7 @@ quota_result(void *userdata, const ne_ur
  static int
  ssl_verify(void *userdata, int failures, const ne_ssl_certificate *cert)
  {
@@ -17,7 +25,7 @@
      char *issuer = ne_ssl_readable_dname(ne_ssl_cert_issuer(cert));
      char *subject = ne_ssl_readable_dname(ne_ssl_cert_subject(cert));
      char *digest = ne_calloc(NE_SSL_DIGESTLEN);
-@@ -1964,8 +1967,13 @@ ssl_verify(void *userdata, int failures,
+@@ -1967,8 +1969,13 @@ ssl_verify(void *userdata, int failures,
              len = getline(&s, &n, stdin);
              if (len < 0)
                  abort();

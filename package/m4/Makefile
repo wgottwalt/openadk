@@ -4,7 +4,7 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		m4
-PKG_VERSION:=		1.4.16
+PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a5dfb4f2b7370e9d34293d23fd09b280
 PKG_DESCR:=		macro processor

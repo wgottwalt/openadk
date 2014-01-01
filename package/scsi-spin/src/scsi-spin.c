@@ -31,6 +31,7 @@
 #include <linux/major.h>
 #include <sys/sysmacros.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #define SCSI_DISK_MAJOR(M) ((M) == SCSI_DISK0_MAJOR || \
 			    ((M) >= SCSI_DISK1_MAJOR && \
@@ -203,8 +204,8 @@ is_mounted( const char* device, int use_proc, int devmaj, int devmin )
   struct stat devstat;
   int mounted = 0;
   struct {
-    __uint32_t dev_id;
-    __uint32_t host_unique_id;
+    uint32_t dev_id;
+    uint32_t host_unique_id;
   } scsi_dev_id, scsi_id;
   FILE *mtab;
   char *mtabfile = use_proc ? "/proc/mounts" : "/etc/mtab";

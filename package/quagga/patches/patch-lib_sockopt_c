@@ -1,0 +1,23 @@
+--- quagga-0.99.22.4.orig/lib/sockopt.c	2013-04-14 14:46:07.000000000 +0200
++++ quagga-0.99.22.4/lib/sockopt.c	2013-12-30 19:56:54.000000000 +0100
+@@ -24,6 +24,20 @@
+ #include "sockopt.h"
+ #include "sockunion.h"
+ 
++#if !defined(__GLIBC__)
++/* For TCP_MD5SIG socket option.  */
++#define TCP_MD5SIG_MAXKEYLEN    80
++
++struct tcp_md5sig
++{
++  struct sockaddr_storage tcpm_addr;            /* Address associated.  */
++  u_int16_t     __tcpm_pad1;                    /* Zero.  */
++  u_int16_t     tcpm_keylen;                    /* Key length.  */
++  u_int32_t     __tcpm_pad2;                    /* Zero.  */
++  u_int8_t      tcpm_key[TCP_MD5SIG_MAXKEYLEN]; /* Key (binary).  */
++};
++#endif
++
+ int
+ setsockopt_so_recvbuf (int sock, int size)
+ {
