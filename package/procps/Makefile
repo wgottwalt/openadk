@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
+TARGET_LDFLAGS+=	-ltinfo
 
 procps-install:
 	${INSTALL_DIR} ${IDIR_PROCPS}/{bin,sbin,usr/bin}

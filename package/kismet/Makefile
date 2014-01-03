@@ -29,7 +29,7 @@ $(eval $(call PKG_template,KISMET_DRONE,kismet-drone,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,KISMET_SERVER,kismet-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_SERVER},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_LDFLAGS+=	-lpthread
+TARGET_LDFLAGS+=	-lpthread -ltinfo
 CONFIGURE_ARGS+=	--sysconfdir=/etc/kismet
 
 pre-build:

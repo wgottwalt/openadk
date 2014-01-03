@@ -4,14 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		proftpd
-PKG_VERSION:=		1.3.3
+PKG_VERSION:=		1.3.4d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		97ad29f31f4fe633a9f8d021bab2df20
+PKG_MD5SUM:=		13c6fd7ce320886adc371c81a3e23f07
 PKG_DESCR:=		A very configurable FTP server
 PKG_SECTION:=		www
 PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 PKG_NOPARALLEL:=	1
+
+PKG_LIBC_DEPENDS:=	eglibc glibc
 
 PKG_FLAVOURS_PROFTPD:=	WITH_FTPUSERS
 PKGFD_WITH_FTPUSERS:=	install /etc/ftpusers along with proftpd
@@ -23,6 +25,7 @@ $(eval $(call PKG_template,PROFTPD,proftpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 CONFIGURE_ARGS+=	--disable-cap
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes \
 			ac_cv_func_setgrent_void=yes
+TARGET_LDFLAGS+=	-ltinfo
 
 proftpd-install:
 	$(INSTALL_DIR) $(IDIR_PROFTPD)/etc
