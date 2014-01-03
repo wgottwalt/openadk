@@ -14,6 +14,7 @@ PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 PKG_NOPARALLEL:=	1
 
 PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_CFLINE_PROFTPD:=	depends on ADK_BROKEN
 
 PKG_FLAVOURS_PROFTPD:=	WITH_FTPUSERS
 PKGFD_WITH_FTPUSERS:=	install /etc/ftpusers along with proftpd
