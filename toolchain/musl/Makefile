@@ -27,6 +27,13 @@ $(WRKBUILD)/.headers:
 	touch $@
 
 $(WRKBUILD)/.compiled:
+	# reconfigure musl, otherwise linking with libgcc or libgcc_eh is disabled
+	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) clean
+	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+		./configure --prefix=/usr \
+		--target=$(REAL_GNU_TARGET_NAME) \
+		--disable-gcc-wrapper \
+	)
 	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
 	touch $@
 
