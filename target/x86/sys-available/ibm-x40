@@ -1,6 +1,5 @@
 config ADK_TARGET_SYSTEM_IBM_X40
 	bool "IBM X40 laptop"
-	depends on ADK_BROKEN
 	select ADK_x86
 	select ADK_ibm_x40
 	select ADK_CPU_PENTIUM_M
@@ -22,6 +21,7 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_TARGET_WITH_ACPI
 	# with docking station 
 	select ADK_TARGET_WITH_PP
+	select ADK_TARGET_KERNEL_BZIMAGE
 	help
          System profile for IBM X40 laptop.
 
