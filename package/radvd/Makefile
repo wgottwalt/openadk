@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		radvd
-PKG_VERSION:=		1.9.1
+PKG_VERSION:=		1.9.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e807ad7e9a76d46b6133df391385cd31
+PKG_MD5SUM:=		85141c7dc7d35e5499e16052742f1040
 PKG_DESCR:=		Routing Advertisement Daemon for IPv6
 PKG_SECTION:=		ipv6
 PKG_DEPENDS:=		kmod-ipv6 libdaemon
-PKG_BUILDDEP:=		libdaemon
+PKG_BUILDDEP:=		autotool libdaemon
 PKG_URL:=		http://www.litech.org/radvd/
 PKG_SITES:=		http://v6web.litech.org/radvd/dist/
 
@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADVD,radvd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--with-configfile=/etc/radvd.conf \
 			--with-logfile=/var/log/radvd.log \
 			--with-pidfile=/var/run/radvd.pid
