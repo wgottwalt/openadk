@@ -15,6 +15,7 @@ PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
@@ -23,7 +24,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-lpthread
-CONFIGURE_ARGS+=	--with-kernel-support
 
 oprofile-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}

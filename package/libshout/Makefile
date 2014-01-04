@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libshout
-PKG_VERSION:=		2.2.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4f75fc9901c724b712c371c9a1e782d3
+PKG_VERSION:=		2.3.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		11765b2592e7ea623ccd93d3f8df172c
 PKG_DESCR:=		Library which can be used to write a source client for streaming
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libvorbis libogg
@@ -19,8 +19,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSHOUT,libshout,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--with-speex=no \
-			--with-theora=no
+CONFIGURE_ARGS+=	--disable-speex \
+			--disable-theora
 
 libshout-install:
 	${INSTALL_DIR} ${IDIR_LIBSHOUT}/usr/lib

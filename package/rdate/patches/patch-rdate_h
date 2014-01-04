@@ -1,0 +1,11 @@
+--- rdate.orig/rdate.h	2007-08-16 12:38:52.000000000 +0200
++++ rdate/rdate.h	2013-12-30 23:00:23.000000000 +0100
+@@ -10,7 +10,7 @@
+ #endif
+ 
+ #ifdef EXT_A4R
+-extern u_int32_t arc4random(void);
++extern uint32_t arc4random(void);
+ #endif
+ 
+ #ifdef __MirBSD__

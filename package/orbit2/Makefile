@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ORBit2
 PKG_VERSION:=		2.14.19
 PKG_EXTRAVER:=		2.14
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		87c69c56c6d0bdafa4de5e18ae115cc9
 PKG_DESCR:=		a CORBA 2.4-compliant Object Request Broker
 PKG_SECTION:=		libs
@@ -22,8 +22,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CFLAGS_FOR_BUILD+=	$(shell PATH=$(TARGET_PATH) libIDL-config-2 --cflags)
-LDFLAGS_FOR_BUILD+=	$(shell PATH=$(TARGET_PATH) libIDL-config-2 --libs)
+CFLAGS_FOR_BUILD+=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --cflags)
+LDFLAGS_FOR_BUILD+=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --libs)
 LDFLAGS_FOR_BUILD+=	-lgmodule-2.0
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
 			ac_cv_alignof_CORBA_boolean=1 \
@@ -43,9 +43,6 @@ orbit2-install:
 	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libORBit*.so* \
 		$(IDIR_ORBIT2)/usr/lib
-	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/bin
-	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
-		$(IDIR_ORBIT2)/usr/bin
 	$(INSTALL_DIR) $(STAGING_DIR)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
 		$(STAGING_DIR)/usr/bin

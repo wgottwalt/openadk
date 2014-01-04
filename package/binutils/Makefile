@@ -42,8 +42,8 @@ else
 CONFIGURE_ARGS+=	--disable-werror
 endif
 
-pre-build:
-	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
+post-build:
+	$(CP) ${WRKBUILD}/libiberty/libiberty.a $(STAGING_TARGET_DIR)/usr/lib
 
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib

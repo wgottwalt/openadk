@@ -1,0 +1,11 @@
+--- ntpclient-2010.orig/ntpclient.c	2010-12-31 18:28:36.000000000 +0100
++++ ntpclient-2010/ntpclient.c	2014-01-03 12:20:27.000000000 +0100
+@@ -441,7 +441,7 @@ static void stuff_net_addr(struct in_add
+ 	struct hostent *ntpserver;
+ 	ntpserver=gethostbyname(hostname);
+ 	if (ntpserver == NULL) {
+-		herror(hostname);
++		perror(hostname);
+ 		exit(1);
+ 	}
+ 	if (ntpserver->h_length != 4) {

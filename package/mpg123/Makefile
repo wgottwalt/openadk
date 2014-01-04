@@ -20,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MPG123,mpg123,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIGURE_ARGS+=	--disable-shared \
 			--with-default-audio=alsa
 
