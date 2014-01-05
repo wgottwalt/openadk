@@ -18,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SCREEN,screen,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+=		$(foreach flag,rename fchmod fchown strerror lstat _exit utimes vsnprintf getcwd setlocale strftime,ac_cv_func_${flag}=yes)
 CONFIGURE_ARGS+=	--with-sys-screenrc=/etc/screenrc
 
