@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		lsscsi
-PKG_VERSION:=		0.25
+PKG_VERSION:=		0.27
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c4e36b106624aff78527c54cf08ecbfe
+PKG_MD5SUM:=		33ab2927a9e567a47905e6a618c17859
 PKG_DESCR:=		list SCSI devices
 PKG_SECTION:=		utils
 PKG_URL:=		http://sg.danny.cz/scsi/lsscsi.html

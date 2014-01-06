@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- wifidog-1.1.5.orig/libhttpd/api.c	2007-11-01 21:04:20.000000000 +0100
-+++ wifidog-1.1.5/libhttpd/api.c	2008-10-16 13:15:26.000000000 +0200
++++ wifidog-1.1.5/libhttpd/api.c	2014-01-01 16:20:22.000000000 +0100
 @@ -166,7 +166,7 @@ int httpdAddVariable(request *r, char *n
  	while(*name == ' ' || *name == '\t')
  		name++;
@@ -173,7 +173,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	newEntry->name = NULL;
  	newEntry->type = HTTP_WILDCARD;
  	newEntry->indexFlag = HTTP_FALSE;
-@@ -755,7 +755,7 @@ int httpdAddCContent(server, dir, name, 
+@@ -755,7 +755,7 @@ int httpdAddCContent(server, dir, name,
  	newEntry =  malloc(sizeof(httpContent));
  	if (newEntry == NULL)
  		return(-1);
@@ -200,7 +200,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
  	newEntry->name = strdup(name);
  	newEntry->type = HTTP_STATIC;
  	newEntry->indexFlag = indexFlag;
-@@ -946,7 +946,7 @@ void httpdProcessRequest(httpd *server, 
+@@ -946,7 +946,7 @@ void httpdProcessRequest(httpd *server,
  
  	r->response.responseLength = 0;
  	strncpy(dirName, httpdRequestPath(r), HTTP_MAX_URL);

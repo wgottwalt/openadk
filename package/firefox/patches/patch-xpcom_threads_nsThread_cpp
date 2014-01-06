@@ -1,6 +1,6 @@
---- mozilla-release.orig/xpcom/threads/nsThread.cpp	2013-09-11 01:15:27.000000000 +0200
-+++ mozilla-release/xpcom/threads/nsThread.cpp	2013-10-14 15:49:25.000000000 +0200
-@@ -20,11 +20,13 @@
+--- mozilla-release.orig/xpcom/threads/nsThread.cpp	2013-12-05 17:08:00.000000000 +0100
++++ mozilla-release/xpcom/threads/nsThread.cpp	2014-01-02 14:53:47.000000000 +0100
+@@ -23,11 +23,13 @@
                        _XOPEN_SOURCE && _XOPEN_SOURCE_EXTENDED) &&           \
                        !(_POSIX_C_SOURCE >= 200809L || _XOPEN_SOURCE >= 700)
  

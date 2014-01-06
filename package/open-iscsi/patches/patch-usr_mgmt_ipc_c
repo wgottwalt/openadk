@@ -1,6 +1,6 @@
 --- open-iscsi-2.0-871.orig/usr/mgmt_ipc.c	2009-07-11 05:55:58.000000000 +0200
-+++ open-iscsi-2.0-871/usr/mgmt_ipc.c	2010-11-22 22:47:25.000000000 +0100
-@@ -341,31 +341,7 @@ mgmt_ipc_notify_del_portal(queue_task_t 
++++ open-iscsi-2.0-871/usr/mgmt_ipc.c	2014-01-03 12:35:32.000000000 +0100
+@@ -341,31 +341,7 @@ mgmt_ipc_notify_del_portal(queue_task_t
  static int
  mgmt_peeruser(int sock, char *user)
  {

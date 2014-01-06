@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		6b5ca02e180aed2f78ca2712f85e3ba5
 PKG_DESCR:=		web browser with graphic support
 PKG_SECTION:=		browser
-PKG_DEPENDS:=		libpng libjpeg libtiff gpm libopenssl
-PKG_BUILDDEP:=		openssl libpng jpeg gpm
+PKG_DEPENDS:=		libpng libjpeg-turbo libtiff gpm libopenssl
+PKG_BUILDDEP:=		openssl libpng libjpeg-turbo gpm
 PKG_URL:=		http://links.twibright.com/
 PKG_SITES:=		http://links.twibright.com/download/
 

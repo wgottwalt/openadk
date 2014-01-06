@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1498a68d02aa7b6c97bf746c073c8d00
 PKG_DESCR:=		VNC server for X11 displays
 PKG_SECTION:=		x11/apps
-PKG_BUILDDEP:=		libX11 libXtst jpeg
+PKG_BUILDDEP:=		libX11 libXtst libjpeg-turbo
 PKG_URL:=		http://www.karlrunge.com/x11vnc/
 PKG_SITES:=		http://openadk.org/distfiles/
 

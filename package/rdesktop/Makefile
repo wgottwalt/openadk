@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f5382c5c85b0d2cc88b9b1aa9bbf1356
 PKG_DESCR:=		client for Windows Terminal Services
 PKG_SECTION:=		net
-PKG_BUILDDEP:=		libiconv-tiny openssl
+PKG_DEPENDS:=		libsamplerate libopenssl alsa-lib libao
+PKG_BUILDDEP:=		libiconv-tiny openssl libsamplerate alsa-lib libao
 PKG_URL:=		http://www.rdesktop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rdesktop/}
 

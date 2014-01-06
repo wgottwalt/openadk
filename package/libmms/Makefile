@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9f63aa363deb4874e072a45850161bff
 PKG_DESCR:=		common library for parsing mms:// type network streams
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		glib
+PKG_DEPENDS:=		glib
 PKG_URL:=		http://libmms.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libmms/}
 PKG_OPTS:=		dev

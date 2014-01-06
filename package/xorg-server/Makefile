@@ -43,6 +43,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
 CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
 endif

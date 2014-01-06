@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fuse
 PKG_VERSION:=		2.9.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		33cae22ca50311446400daf8a6255c6a
 PKG_DESCR:=		Filesystem in Userspace (utilities)
 PKG_SECTION:=		fs

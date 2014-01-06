@@ -37,6 +37,12 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64EL),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
 endif
 
+ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
+CONFIGURE_ARGS+=	--enable-sjlj-exceptions
+else
+CONFIGURE_ARGS+=	--disable-sjlj-exceptions
+endif
+
 ifneq ($(ADK_PACKAGE_GXX),)
 CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
@@ -50,7 +56,6 @@ CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \
 			--without-headers \
 			--libexecdir=/usr/lib \
 			--disable-libssp \
-			--disable-sjlj-exceptions \
 			--disable-biarch \
 			--disable-libmudflap \
 			--disable-libgomp \

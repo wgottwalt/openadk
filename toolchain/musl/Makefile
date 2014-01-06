@@ -12,6 +12,9 @@ endif
 ifeq ($(CPU_ARCH),mips64el)
 REAL_GNU_TARGET_NAME:= $(subst mips64el,mips,$(REAL_GNU_TARGET_NAME))
 endif
+ifeq ($(CPU_ARCH),mips64)
+REAL_GNU_TARGET_NAME:= $(subst mips64,mips,$(REAL_GNU_TARGET_NAME))
+endif
 ifeq ($(CPU_ARCH),microblazeel)
 REAL_GNU_TARGET_NAME:= $(subst microblazeel,microblaze,$(REAL_GNU_TARGET_NAME))
 endif
@@ -27,6 +30,13 @@ $(WRKBUILD)/.headers:
 	touch $@
 
 $(WRKBUILD)/.compiled:
+	# reconfigure musl, otherwise linking with libgcc or libgcc_eh is disabled
+	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) clean
+	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+		./configure --prefix=/usr \
+		--target=$(REAL_GNU_TARGET_NAME) \
+		--disable-gcc-wrapper \
+	)
 	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
 	touch $@
 

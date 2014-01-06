@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		comgt
 PKG_VERSION:=		0.32
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		db2452680c3d953631299e331daf49ef
 PKG_DESCR:=		3G/GPRS datacard control tool
 PKG_SECTION:=		utils

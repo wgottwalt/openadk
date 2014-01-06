@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		irssi
 PKG_VERSION:=		0.8.15
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		870db8e319f640c2bf446c30d0c24ef6
 PKG_DESCR:=		IRC text client
 PKG_SECTION:=		chat
@@ -24,6 +24,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IRSSI,irssi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-perl=no \
 			--with-gnu-ld \
 			--with-textui \
