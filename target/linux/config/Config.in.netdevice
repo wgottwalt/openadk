@@ -113,16 +113,6 @@ config ADK_KERNEL_AR231X_ETHERNET
 	default n
 	help
 
-config ADK_KERNEL_NE2K_PCI
-	boolean
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_MII
-	default y if ADK_TARGET_SYSTEM_QEMU_PPC
-	default n
-	help
-
 config ADK_KERNEL_KORINA
 	boolean
 	select ADK_KERNEL_NETDEVICES
@@ -164,10 +154,6 @@ config ADK_KERNEL_E1000
 	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_QEMU_I686
 	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64EL
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPSEL
 	default n
 	help
 

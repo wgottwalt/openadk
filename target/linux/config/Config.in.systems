@@ -9,9 +9,6 @@ config ADK_KERNEL_PAGE_SIZE_16KB
 config ADK_KERNEL_ATHEROS_AR231X
 	boolean
 
-config ADK_KERNEL_MIPS_MALTA
-	boolean
-
 config ADK_KERNEL_MIKROTIK_RB532
 	boolean
 
