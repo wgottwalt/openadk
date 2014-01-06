@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
 PKG_VERSION:=		1.5.20
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		027cdd9959203de0c3c64149a7ee351c
 PKG_DESCR:=		Mail text client
 PKG_SECTION:=		mail
@@ -18,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-tinfo
 CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
 			--with-homespool="~/Maildir" \
