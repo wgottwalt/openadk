@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		A Wake-On-LAN (WOL) client
 PKG_SECTION:=		net
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk

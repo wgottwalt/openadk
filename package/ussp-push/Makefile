@@ -8,10 +8,11 @@ PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5c44983ee27809867041feff6bb4423a
 PKG_DESCR:=		OBEX push command
-PKG_SECTION:=		bluetooth
+PKG_SECTION:=		misc
 PKG_DEPENDS:=		openobex
 PKG_BUILDDEP:=		openobex
 PKG_SITES:=		http://xmailserver.org/
+PKG_CFLINE_USSP_PUSH:=	depends on ADK_BROKEN
 
 PKG_ARCH_DEPENDS:=	!avr32
 

@@ -4,11 +4,11 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hdparm
-PKG_VERSION:=		9.15
+PKG_VERSION:=		9.43
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0524dd10ad986285ff4eeb3507f7471c
+PKG_MD5SUM:=		f73233be118d86c779a8463d8b6a3cdb
 PKG_DESCR:=		get/set ATA drive parameters
-PKG_SECTION:=		utils
+PKG_SECTION:=		fs
 PKG_URL:=		http://sourceforge.net/projects/hdparm
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=hdparm/}
 

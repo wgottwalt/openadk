@@ -1,0 +1,11 @@
+--- ptunnel-0.61.orig/ptunnel.h	2005-07-13 11:57:27.000000000 +0200
++++ ptunnel-0.61/ptunnel.h	2013-12-28 18:22:22.000000000 +0100
+@@ -44,7 +44,7 @@
+ 	#define PING_TUNNEL_H
+ 
+ //	Includes
+-	#include	<sys/unistd.h>
++	#include	<unistd.h>
+ 	#include	<sys/types.h>
+ 	#include	<sys/socket.h>
+ 	#include	<netinet/in.h>

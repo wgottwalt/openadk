@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		vpnc
 PKG_VERSION:=		0.5.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		4378f9551d5b077e1770bbe09995afb3
 PKG_DESCR:=		client for cisco3000 VPN Concentrator.
 PKG_SECTION:=		net/security
@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,VPNC,vpnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 XAKE_FLAGS+=		CC="${TARGET_CC}" \
 			OFLAGS="${TARGET_CFLAGS}" \
 			OS="Linux" \

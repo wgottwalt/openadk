@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bridge-utils
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
 PKG_DESCR:=		Ethernet bridging tools
 PKG_SECTION:=		bridge

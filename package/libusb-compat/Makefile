@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libusb-compat
-PKG_VERSION:=		0.1.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		570ac2ea085b80d1f74ddc7c6a93c0eb
+PKG_VERSION:=		0.1.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2780b6a758a1e2c2943bdbf7faf740e4
 PKG_DESCR:=		a library for accessing Linux USB devices
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libusb
-PKG_URL:=		http://libusb.wiki.sourceforge.net
+PKG_URL:=		http://www.libusb.org/wiki/libusb-compat-0.1
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 PKG_OPTS:=		dev
 

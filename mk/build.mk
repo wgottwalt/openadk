@@ -36,6 +36,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_URLGRABBER=n \
 			ADK_PACKAGE_PERL=n \
 			ADK_PACKAGE_LIBSSP=n \
+			ADK_PACKAGE_OPENAFS=n \
 			ADK_PKG_XORG=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
@@ -99,7 +100,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE;do \
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_TARGET_QEMU_MICROBLAZE_MODEL;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
@@ -572,8 +573,9 @@ release:
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
 		) 2>&1 | tee $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
-		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; break;fi \
+		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
+	if [ -f .exit ];then rm .exit;exit 1;fi
 
 # build all target architecture, target systems and libc combinations
 bulk:

@@ -18,6 +18,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IFTOP,iftop,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
+
 iftop-install:
 	${INSTALL_DIR} ${IDIR_IFTOP}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/iftop ${IDIR_IFTOP}/usr/bin/

@@ -97,19 +97,6 @@ if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
 	NEED_XMLTO="$NEED_XMLTO libXfont"
 fi
 
-if [[ -n $ADK_PACKAGE_PACEMAKER_MGMTD ]]; then
-	NEED_SWIG="$NEED_SWIG pacemaker-mgmtd"
-fi
-
-if [[ -n $ADK_PACKAGE_EGLIBC ]]; then
-	NEED_GPERF="$NEED_GPERF eglibc"
-fi
-
-if [[ -n $ADK_PACKAGE_XBMC ]]; then
-	NEED_SDLDEV="$NEED_SDLDEV xbmc"
-	NEED_SDLIMAGEDEV="$NEED_SDLIMAGEDEV xbmc"
-fi
-
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
@@ -248,20 +235,6 @@ if [[ -n $NEED_WWW ]]; then
 				out=1
 			fi
 		fi
-	fi
-fi
-
-if [[ -n $NEED_SWIG ]]; then
-	if ! which swig >/dev/null 2>&1; then
-		echo >&2 You need swig to build $NEED_SWIG
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_GPERF ]]; then
-	if ! which gperf >/dev/null 2>&1; then
-		echo >&2 You need gperf to build $NEED_GPERF
-		out=1
 	fi
 fi
 

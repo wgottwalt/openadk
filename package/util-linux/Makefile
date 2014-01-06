@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.23.2
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
 PKG_DESCR:=		Linux utilities (meta-package)
 PKG_SECTION:=		utils
@@ -69,7 +69,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--with-ncurses=$(STAGING_DIR)/usr/include \
 			--libdir=/usr/lib
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
-TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
+TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -ltinfo
 
 util-linux-install:
 

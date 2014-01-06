@@ -1,6 +1,6 @@
 --- tcp_wrappers_7.6.orig/tcpd.h	1996-03-19 16:22:25.000000000 +0100
-+++ tcp_wrappers_7.6/tcpd.h	2009-06-05 18:45:03.000000000 +0200
-@@ -4,6 +4,25 @@
++++ tcp_wrappers_7.6/tcpd.h	2013-12-22 16:52:10.000000000 +0100
+@@ -4,6 +4,24 @@
    * Author: Wietse Venema, Eindhoven University of Technology, The Netherlands.
    */
  
@@ -21,12 +21,11 @@
 +#include <netinet/in.h>
 +#include <stdio.h>
 +
-+__BEGIN_DECLS
 +
  /* Structure to describe one communications endpoint. */
  
  #define STRING_LENGTH	128		/* hosts, users, processes */
-@@ -25,10 +44,10 @@ struct request_info {
+@@ -25,10 +43,10 @@ struct request_info {
      char    pid[10];			/* access via eval_pid(request) */
      struct host_info client[1];		/* client endpoint info */
      struct host_info server[1];		/* server endpoint info */
@@ -41,7 +40,7 @@
      struct netconfig *config;		/* netdir handle */
  };
  
-@@ -61,25 +80,30 @@ extern char paranoid[];
+@@ -61,25 +79,30 @@ extern char paranoid[];
  /* Global functions. */
  
  #if defined(TLI) || defined(PTX) || defined(TLI_SEQUENT)
@@ -82,7 +81,7 @@
  extern char *hosts_allow_table;		/* for verification mode redirection */
  extern char *hosts_deny_table;		/* for verification mode redirection */
  extern int hosts_access_verbose;	/* for verbose matching mode */
-@@ -92,9 +116,14 @@ extern int resident;			/* > 0 if residen
+@@ -92,9 +115,14 @@ extern int resident;			/* > 0 if residen
    */
  
  #ifdef __STDC__
@@ -97,7 +96,7 @@
  extern struct request_info *request_init();	/* initialize request */
  extern struct request_info *request_set();	/* update request structure */
  #endif
-@@ -117,27 +146,31 @@ extern struct request_info *request_set(
+@@ -117,27 +145,31 @@ extern struct request_info *request_set(
    * host_info structures serve as caches for the lookup results.
    */
  
@@ -139,7 +138,7 @@
  #endif
  
   /*
-@@ -178,7 +211,7 @@ extern struct tcpd_context tcpd_context;
+@@ -178,7 +210,7 @@ extern struct tcpd_context tcpd_context;
    * behavior.
    */
  
@@ -148,11 +147,9 @@
  extern int dry_run;			/* verification flag */
  
  /* Bug workarounds. */
-@@ -217,3 +250,7 @@ extern char *fix_strtok();
+@@ -217,3 +249,5 @@ extern char *fix_strtok();
  #define strtok	my_strtok
  extern char *my_strtok();
  #endif
-+
-+__END_DECLS
 +
 +#endif /* tcpd.h */

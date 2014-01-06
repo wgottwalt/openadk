@@ -18,6 +18,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,RDATE,rdate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 MAKE_FILE=		GNUmakefile
 
 rdate-install:

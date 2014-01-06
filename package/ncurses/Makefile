@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.9
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		8cb9c412e5f2d96bc6f459aa8c6282a1
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -34,6 +34,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--enable-symlinks \
 			--without-ada \
 			--with-shared \
+			--with-termlib \
 			--without-debug \
 			--without-profile \
 			--without-gpm \
@@ -78,7 +79,7 @@ libncurses-install:
 	echo 'GROUP(-lncurses)' >${WRKINST}/usr/lib/libcurses.so
 	# libcurses will not show up in the IPKG, only in STAGING_TARGET_DIR
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib{form,menu,ncurses,panel}.so* \
+	${CP} ${WRKINST}/usr/lib/lib{tinfo,form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
 	for ti in rxvt rxvt-unicode; do \
 		TERMINFO=${WRKINST}/usr/share/terminfo \

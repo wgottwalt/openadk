@@ -1,5 +1,8 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_MISC_FILESYSTEMS
+	boolean
+
 config ADK_KERNEL_FSNOTIFY
 	boolean
 	default y
@@ -7,6 +10,9 @@ config ADK_KERNEL_FSNOTIFY
 config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
+
+config ADK_KERNEL_JFFS2_FS
+	boolean
 
 config ADK_KERNEL_YAFFS_FS
 	tristate
@@ -27,9 +33,6 @@ config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
 config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
 	boolean
 
-config ADK_KERNEL_MISC_FILESYSTEMS
-	boolean
-
 config ADK_KERNEL_DNOTIFY
 	boolean
 
@@ -44,10 +47,15 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 	string
 	default "iso8859-1"
 
+config ADK_KERNEL_SQUASHFS_XZ
+	boolean
+	default n
+
 config ADK_KERNEL_SQUASHFS
 	prompt "squashfs.......................... SquashFS filesystem"
 	boolean
 	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_SQUASHFS_XZ
 	default n
 
 config ADK_KERNEL_EXT2_FS
@@ -172,7 +180,8 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	prompt "kmod-vfat-fs...................... VFAT filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
-	select ADK_KPACKAGE_KMOD_NLS_UTF8
+	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
+	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	select ADK_KERNEL_BLOCK
 	default y if ADK_TARGET_WITH_MMC
 	default n
@@ -227,7 +236,11 @@ config ADK_KPACKAGE_KMOD_FUSE_FS
 	  fuse-utils.
 
 config ADK_KERNEL_JOLIET
-	bool 
+	boolean 
+	default n
+
+config ADK_KERNEL_ISO9660_FS
+	boolean
 	default n
 
 config ADK_KPACKAGE_KMOD_ISO9660_FS

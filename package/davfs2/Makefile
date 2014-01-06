@@ -4,15 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		davfs2
-PKG_VERSION:=		1.4.6
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c9e8aeb15daeba4b6283b40bb640e908
+PKG_VERSION:=		1.4.7
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c75f9d7d260e7364362b89beba2b3186
 PKG_DESCR:=		WebDAV filesystem
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		fuse-utils kmod-fuse-fs neon
 PKG_BUILDDEP:=		libiconv-tiny neon fuse
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2/
-PKG_SITES:=		http://www.very-clever.com/download/nongnu/davfs2/
+PKG_SITES:=		http://download.savannah.gnu.org/releases/davfs2/
+
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

@@ -72,10 +72,7 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC64),y)
 	$(SED) 's#ttyS#hvc#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MICROBLAZE),y)
-	$(SED) 's#ttyS#ttyUL#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL),y)
+ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800),y)
 	$(SED) 's#ttyS#ttyUL#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab

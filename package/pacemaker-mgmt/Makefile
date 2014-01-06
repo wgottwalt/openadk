@@ -9,11 +9,12 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		be16a38588d1c518f53e64e7e48e1c90
 PKG_DESCR:=		Pacemaker management daemon
 PKG_SECTION:=		ha
-PKG_BUILDDEP:=		pacemaker gnutls pam python2
+PKG_BUILDDEP:=		swig-host pacemaker gnutls pam python2
 PKG_URL:=		http://hg.clusterlabs.org/pacemaker/pygui/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_ARCH_DEPENDS:=      x86 x86_64
 
 include $(TOPDIR)/mk/package.mk
 

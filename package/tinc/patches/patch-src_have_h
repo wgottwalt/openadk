@@ -1,0 +1,25 @@
+--- tinc-1.0.23.orig/src/have.h	2013-09-25 21:21:09.000000000 +0200
++++ tinc-1.0.23/src/have.h	2013-12-30 19:30:24.000000000 +0100
+@@ -175,9 +175,11 @@
+ #include <netinet/ip6.h>
+ #endif
+ 
++#if defined(__GLIBC__)
+ #ifdef HAVE_NET_ETHERNET_H
+ #include <net/ethernet.h>
+ #endif
++#endif
+ 
+ #ifdef HAVE_NET_IF_ARP_H
+ #include <net/if_arp.h>
+@@ -191,8 +193,10 @@
+ #include <netinet/icmp6.h>
+ #endif
+ 
++#if defined(__GLIBC__)
+ #ifdef HAVE_NETINET_IF_ETHER_H
+ #include <netinet/if_ether.h>
+ #endif
++#endif
+ 
+ #endif /* __TINC_SYSTEM_H__ */

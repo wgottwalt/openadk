@@ -4,13 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		traceroute
-PKG_VERSION:=		2.0.18
+PKG_VERSION:=		2.0.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7254149b7f081cce07f4b9e065ba5ef
+PKG_MD5SUM:=		dd15d563993020d088ba02e8f987deaf
 PKG_DESCR:=		Utility to trace the route of IP packets
 PKG_SECTION:=		net
 PKG_URL:=		http://traceroute.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
+
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 

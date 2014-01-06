@@ -20,7 +20,7 @@ config ADK_TARGET_KERNEL
 	string
 	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
 	default "Image" if ADK_TARGET_KERNEL_IMAGE
-	default "simpleImage.system" if ADK_TARGET_KERNEL_LINUXBIN
+	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "vmlinux"
@@ -35,6 +35,11 @@ config ADK_TARGET_ENDIAN
 	string
 	default "little" if ADK_little
 	default "big" if ADK_big
+
+config ADK_JFFS2_OPTS
+	string
+	default "-l" if ADK_little
+	default "-b" if ADK_big
 
 config ADK_TOOLCHAIN
 	boolean
@@ -143,7 +148,25 @@ config ADK_TARGET_LIBC_PATH
 
 
 # submodel support
-#
+
+config ADK_TARGET_KERNEL_MINICONFIG
+	string
+	default "qemu-microblaze-s3adsp1800" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	default "qemu-microblaze-ml605" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+
+choice
+prompt "Qemu MICROBLAZE Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
+
+config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	boolean "Xilinx ml605"
+	select ADK_TARGET_WITH_MTD
+
+config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	boolean "Xilinx Spartan S3ADSP1800"
+
+endchoice
+
 choice
 prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
@@ -501,8 +524,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_I686
-	default "console=ttyUL0" if ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
-	default "console=ttyUL0" if ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
+	default "console=ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	default "console=ttyS0,115200" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
@@ -680,6 +703,14 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	help
 	  highly compressed read-only filesystem for MTD flash systems.
 
+config ADK_TARGET_ROOTFS_JFFS2
+	bool "Compressed read-write root filesystem (jffs2)"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_JFFS2
+	depends on ADK_TARGET_WITH_MTD
+	help
+	  compressed read-write filesystem for MTD flash systems.
+
 config ADK_TARGET_ROOTFS_YAFFS
 	bool "YAFFS2 root filesystem (NAND)"
 	select ADK_KERNEL_MISC_FILESYSTEMS
@@ -748,9 +779,21 @@ config ADK_TARGET_ROOTFS_MMC
 	  Use this option if you have a MMC/SDCARD based system.
 	  (ext2 filesystem is used.)
 
+config ADK_TARGET_ROOTFS_ISO
+	bool "ISO image"
+	select ADK_KERNEL_ISO9660_FS
+	select ADK_KERNEL_JOLIET
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SR
+	depends on ADK_HOST_LINUX
+	depends on ADK_LINUX_X86
+	help
+	  Use this option to create a bootable ISO image.
+
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
+	depends on !ADK_LINUX_MICROBLAZE
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
