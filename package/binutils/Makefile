@@ -41,6 +41,8 @@ CONFIGURE_ARGS+=	--disable-werror \
 else
 CONFIGURE_ARGS+=	--disable-werror
 endif
+# disable honour cflags stuff
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 post-build:
 	$(CP) ${WRKBUILD}/libiberty/libiberty.a $(STAGING_TARGET_DIR)/usr/lib
