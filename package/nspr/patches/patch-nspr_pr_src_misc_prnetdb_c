@@ -1,0 +1,16 @@
+--- nspr-4.10.2.orig/nspr/pr/src/misc/prnetdb.c	2013-11-09 10:49:40.000000000 +0100
++++ nspr-4.10.2/nspr/pr/src/misc/prnetdb.c	2014-01-06 17:48:32.869546316 +0100
+@@ -89,6 +89,13 @@ PRLock *_pr_dnsLock = NULL;
+ #define _PR_HAVE_5_ARG_GETPROTO_R
+ #endif
+ 
++#if !defined(__GLIBC__)
++#undef _PR_HAVE_GETPROTO_R
++#undef _PR_HAVE_GETPROTO_R_INT
++#undef _PR_HAVE_GETPROTO_R_POINTER
++#undef _PR_HAVE_5_ARG_GETPROTO_R
++#endif
++
+ #if !defined(_PR_HAVE_GETPROTO_R)
+ PRLock* _getproto_lock = NULL;
+ #endif
