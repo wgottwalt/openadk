@@ -24,6 +24,9 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+# ld memory exhausted problem
+TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
+
 host-configure:
 	(cd ${WRKBUILD}; ./Configure -der -Uusedl)
 
@@ -46,7 +49,7 @@ do-configure:
 		-e 's!%%CPPFLAGS%%!$(TARGET_CPPFLAGS)!g' \
 		-e 's!%%LIBDIRS%%!$(STAGING_TARGET_DIR)/lib $(STAGING_TARGET_DIR)/usr/lib!g' \
 		-e 's!%%INCDIRS%%!$(STAGING_TARGET_DIR)/include $(STAGING_TARGET_DIR)/usr/include!g' \
-		./files/config.sh.$(CPU_ARCH) > ${WRKBUILD}/config.sh
+		./files/config.sh.$(CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
 	(cd ${WRKBUILD}; ./Configure -S)
 
 do-build:
