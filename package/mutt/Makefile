@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-tinfo
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
 			--with-homespool="~/Maildir" \
