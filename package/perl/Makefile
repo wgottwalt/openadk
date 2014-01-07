@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
 PKG_VERSION:=		5.18.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		304cb5bd18e48c44edd6053337d3386d
 PKG_DESCR:=		Perl interpreter
 PKG_SECTION:=		lang
@@ -33,7 +33,7 @@ host-build:
 
 perl-hostinstall:
 	$(CP) ${WRKBUILD}/miniperl $(STAGING_HOST_DIR)/usr/bin
-	$(CP) ${WRKBUILD}/perl $(STAGING_HOST_DIR)/usr/bin
+	$(CP) ${WRKBUILD}/perl $(STAGING_HOST_DIR)/usr/bin/perl.host
 
 do-configure:
 	sed \
@@ -58,7 +58,7 @@ do-build:
 
 do-install:
 	(cd ${WRKBUILD}; $(CP) miniperl.target miniperl)
-	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl installperl --destdir=${WRKINST})
+	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl.host installperl --destdir=${WRKINST})
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
