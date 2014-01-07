@@ -23,7 +23,6 @@ Before you can start you need to install some tools:
 - ncurses5 headers
 - zlib headers
 - perl
-- bc
 - xargs
 
 There is a check for the required versions of these tools in advance, though.
