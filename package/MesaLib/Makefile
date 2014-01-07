@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
 PKG_VERSION:=		9.2.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		df801a975045150790e10e2ccf32193f
 PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs

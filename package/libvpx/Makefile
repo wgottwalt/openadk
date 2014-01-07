@@ -70,7 +70,7 @@ ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+CONFIGURE_ARGS+=	--target=mips64-linux-gcc
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc

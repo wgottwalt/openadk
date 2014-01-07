@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio mkimage genext2fs
+TARGETS:=adk mkcrypt cpio mkimage genext2fs bc
 ifeq ($(ADK_TARGET_ROOTFS_ISO),y)
 TARGETS+=cdrtools syslinux
 endif
