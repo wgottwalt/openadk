@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qingy
 PKG_VERSION:=		1.0.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1e0912655e240adfd0ce5ced30bbc685
 PKG_DESCR:=		a DirectFB getty replacement
 PKG_SECTION:=		misc
@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,QINGY,qingy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--disable-screen-savers \
 			--disable-optimizations \
 			--disable-pam \
