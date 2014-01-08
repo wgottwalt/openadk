@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
 PKG_VERSION:=		1.7.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		17fe81c30fe0f785b2100ebadb3dc580
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		scm
@@ -31,7 +31,7 @@ CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--without-jdk \
 			--disable-javahl \
 			--without-berkeley-db
-CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv -tinfo'
+CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -liconv -ltinfo'
 INSTALL_TARGET:=	external-install local-install
 
 subversion-install:
