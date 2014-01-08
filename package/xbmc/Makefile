@@ -4,33 +4,35 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
-PKG_VERSION:=		12.2
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		489f3877decae4e265ece54f9eaef0ba
+PKG_VERSION:=		12.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx bcm2835-vc
-PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad dbus
+PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
-PKG_DEPENDS+=		omxplayer libusb-compat libbluray libgpg-error
-PKG_DEPENDS+=		libssh libcec libnfs librtmp
+PKG_DEPENDS+=		omxplayer libbluray libgpg-error libudev
+PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
-PKG_BUILDDEP+=		bcm2835-vc libgpg-error dbus libusb-compat libbluray
-PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump
+PKG_BUILDDEP+=		bcm2835-vc libgpg-error libbluray
+PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump systemd
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
+
+WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-Frodo
 
 include $(TOPDIR)/mk/package.mk
 
@@ -53,20 +55,23 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-samba \
 			--enable-ssh \
 			--enable-nfs \
-			--enable-libusb \
+			--enable-udev \
 			--enable-libbluray \
 			--enable-external-libraries \
 			--enable-player=omxplayer \
 			--enable-gles \
 			--enable-rtmp \
+			--disable-libusb \
+			--disable-libcap \
 			--disable-sdl \
 			--disable-joystick \
 			--disable-dvdcss \
 			--disable-x11 \
+			--disable-debug \
 			--with-platform=raspberry-pi
 
-post-extract:
-	(cd $(WRKDIR) && ${BASH} $(TOPDIR)/scripts/xbmc-fix.sh)
+pre-configure:
+	(cd $(WRKBUILD)/lib/cpluff && ./autogen.sh)
 
 xbmc-install:
 	$(INSTALL_DIR) $(IDIR_XBMC)/usr/lib/xbmc

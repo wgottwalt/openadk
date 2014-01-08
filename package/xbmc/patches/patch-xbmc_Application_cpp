@@ -13,7 +13,7 @@
      userName = "root";
  
    CStdString userHome;
-+  userHome = "/etc/xbmc";
++  userHome = "/data/xbmc";
 +/*
    if (getenv("HOME"))
      userHome = getenv("HOME");
