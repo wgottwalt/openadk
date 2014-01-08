@@ -108,20 +108,32 @@ $(eval $(call KMOD_template,P54_USB,p54-usb,\
 
 $(eval $(call KMOD_template,RT2X00,rt2x00,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00lib \
-	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00pci \
 ,17))
+
+$(eval $(call KMOD_template,RT2X00_LIB_PCI,rt2x00pci,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00pci \
+,18))
+
+$(eval $(call KMOD_template,RT2X00_LIB_USB,rt2x00usb,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2x00usb \
+,18))
 
 $(eval $(call KMOD_template,RT2400PCI,rt2400pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2400pci \
-,20, kmod-leds-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00 rt2x00pci))
 
 $(eval $(call KMOD_template,RT2500PCI,rt2500pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2500pci \
-,20, kmod-leds-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00 kmod-rt2x00pci))
+
+$(eval $(call KMOD_template,RT2800USB,rt2800usb,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2800lib \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt2800usb \
+,20, kmod-rt2x00 kmod-rt2x00usb))
 
 $(eval $(call KMOD_template,RT61PCI,rt61pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt61pci \
-,20, kmod-leds-class kmod-rt2x00))
+,20, kmod-leds-class kmod-rt2x00 rt2x00pci))
 
 #
 # Networking
