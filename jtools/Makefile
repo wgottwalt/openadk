@@ -3,8 +3,11 @@
 
 include $(TOPDIR)/rules.mk
 
+TARGETS:=
 # jikes is for ant
+ifneq ($(ADK_PACKAGE_OPENJDK7),)
 TARGETS:=fastjar gcj ecj jikes classpath jamvm ant openjdk7
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
