@@ -151,7 +151,8 @@ endif
 	done
 	@for a in ${WRKINST}/usr/lib/pkgconfig/*.pc; do \
 		[[ -e $$a ]] || continue; \
-		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
+		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," \
+		    -e "s,^prefix = .*,prefix = ${STAGING_TARGET_DIR}/usr," $$a > \
 		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
 	done
 ifeq (,$(filter noremove,${PKG_OPTS}))
