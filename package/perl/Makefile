@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
 PKG_VERSION:=		5.18.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		304cb5bd18e48c44edd6053337d3386d
 PKG_DESCR:=		Perl interpreter
 PKG_SECTION:=		lang
@@ -24,6 +24,9 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+# ld memory exhausted problem
+TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
+
 host-configure:
 	(cd ${WRKBUILD}; ./Configure -der -Uusedl)
 
@@ -33,7 +36,7 @@ host-build:
 
 perl-hostinstall:
 	$(CP) ${WRKBUILD}/miniperl $(STAGING_HOST_DIR)/usr/bin
-	$(CP) ${WRKBUILD}/perl $(STAGING_HOST_DIR)/usr/bin
+	$(CP) ${WRKBUILD}/perl $(STAGING_HOST_DIR)/usr/bin/perl.host
 
 do-configure:
 	sed \
@@ -46,7 +49,7 @@ do-configure:
 		-e 's!%%CPPFLAGS%%!$(TARGET_CPPFLAGS)!g' \
 		-e 's!%%LIBDIRS%%!$(STAGING_TARGET_DIR)/lib $(STAGING_TARGET_DIR)/usr/lib!g' \
 		-e 's!%%INCDIRS%%!$(STAGING_TARGET_DIR)/include $(STAGING_TARGET_DIR)/usr/include!g' \
-		./files/config.sh.$(CPU_ARCH) > ${WRKBUILD}/config.sh
+		./files/config.sh.$(CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
 	(cd ${WRKBUILD}; ./Configure -S)
 
 do-build:
@@ -58,7 +61,7 @@ do-build:
 
 do-install:
 	(cd ${WRKBUILD}; $(CP) miniperl.target miniperl)
-	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl installperl --destdir=${WRKINST})
+	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl.host installperl --destdir=${WRKINST})
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
