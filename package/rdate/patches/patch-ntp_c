@@ -1,0 +1,50 @@
+--- rdate.orig/ntp.c	2007-08-17 17:03:24.000000000 +0200
++++ rdate/ntp.c	2013-12-30 23:07:06.000000000 +0100
+@@ -37,6 +37,7 @@
+ #include <sys/time.h>
+ #include <netinet/in.h>
+ #include <arpa/inet.h>
++#include <sys/types.h>
+ 
+ #include <ctype.h>
+ #include <err.h>
+@@ -100,9 +101,9 @@ struct ntp_data {
+ 	double		transmit;
+ 	double		current;
+ 	double		originate;
+-	u_int64_t	xmitck;
+-	u_int64_t	recvck;
+-	u_int32_t	refid;
++	uint64_t	xmitck;
++	uint64_t	recvck;
++	uint32_t	refid;
+ 	u_char		status;
+ 	u_char		version;
+ 	u_char		mode;
+@@ -268,7 +269,7 @@ write_packet(int fd, struct ntp_data *da
+ 
+ 	packet[0] = ((nver ? nver : NTP_VERSION) << 3) | (NTP_MODE_CLIENT);
+ 
+-	data->xmitck = (u_int64_t)arc4random() << 32 | arc4random();
++	data->xmitck = (uint64_t)arc4random() << 32 | arc4random();
+ 
+ 	/*
+ 	 * Send out a random 64-bit number as our transmit time.  The NTP
+@@ -286,7 +287,7 @@ write_packet(int fd, struct ntp_data *da
+ 	 * the transmit field intelligible.
+ 	 */
+ 
+-	memcpy(packet + NTP_TRANSMIT, &data->xmitck, sizeof (u_int64_t));
++	memcpy(packet + NTP_TRANSMIT, &data->xmitck, sizeof (uint64_t));
+ 
+ 	data->originate = current_time(JAN_1970);
+ 
+@@ -437,7 +438,7 @@ unpack_ntp(struct ntp_data *data, u_char
+ 	data->transmit = d / NTP_SCALE;
+ 
+ 	/* See write_packet for why this isn't an endian problem. */
+-	memcpy(&data->recvck, packet + NTP_ORIGINATE, sizeof (u_int64_t));
++	memcpy(&data->recvck, packet + NTP_ORIGINATE, sizeof (uint64_t));
+ }
+ 
+ /*

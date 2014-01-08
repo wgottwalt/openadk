@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		net-tools
 PKG_VERSION:=		1.60
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		888774accab40217dde927e21979c165
 PKG_DESCR:=		Linux net-tools
 PKG_SECTION:=		net

@@ -1,0 +1,25 @@
+--- gpm-1.20.7.orig/src/prog/gpm-root.y	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/gpm-root.y	2013-12-22 13:06:09.000000000 +0100
+@@ -56,6 +56,9 @@
+ #define minor(dev) ((dev)&0xff)
+ #endif
+ 
++#ifndef SA_INTERRUPT
++#define SA_INTERRUPT 0
++#endif
+ 
+ #define GPM_NULL_DEV "/dev/null"
+ 
+@@ -1196,11 +1199,7 @@ int main(int argc, char **argv)
+                                                         LOG_DAEMON : LOG_USER);
+    /* reap your zombies */
+    childaction.sa_handler=reap_children;
+-#if defined(__GLIBC__)
+-   __sigemptyset(&childaction.sa_mask);
+-#else /* __GLIBC__ */
+-   childaction.sa_mask=0;
+-#endif /* __GLIBC__ */
++   sigemptyset(&childaction.sa_mask);
+    childaction.sa_flags=SA_INTERRUPT; /* need to break the select() call */
+    sigaction(SIGCHLD,&childaction,NULL);
+ 

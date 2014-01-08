@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		deco
 PKG_VERSION:=		39
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f77f60e8be0cae1f814cba1ef61bf4d0
 PKG_DESCR:=		Text-based, full featured file manager
 PKG_SECTION:=		misc
@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DECO,deco,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 INSTALL_STYLE:=		manual
 
 do-install:

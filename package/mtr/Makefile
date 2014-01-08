@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mtr
 PKG_VERSION:=		0.75
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		23baca52d0922c2ecba7eba05317868c
 PKG_DESCR:=		ncurses traceroute/ping tool
 PKG_SECTION:=		net
@@ -14,10 +14,13 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.bitwizard.nl/mtr/
 PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MTR,mtr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+=		ac_cv_lib_resolv_res_mkquery=yes
 CONFIGURE_ARGS+=	--without-gtk
 

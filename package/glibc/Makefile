@@ -50,7 +50,7 @@ glibc-dev-install:
 	echo $(TARGET_CFLAGS)
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
 	# install linker script
-	-cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+	cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 ifeq ($(ADK_TARGET_ABI_O32),y)
 ifeq ($(ADK_big),y)
 	$(SED) "s#@@ELFTARGET@@#elf32-tradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so

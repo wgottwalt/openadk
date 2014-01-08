@@ -11,13 +11,13 @@ PKG_DESCR:=		System and Service Manager
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libblkid libcap
 PKG_BUILDDEP:=		autotool usbutils glib kmod util-linux libcap
-PKG_BUILDDEP+=		libgcrypt
+PKG_BUILDDEP+=		libgcrypt gperf-host
 PKG_URL:=		http://freedesktop.org/wiki/Software/systemd/
 PKG_SITES:=		http://www.freedesktop.org/software/systemd/
 PKG_LIBNAME:=		libudev
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SUBPKGS:=		UDEV LIBUDEV
 PKGSC_LIBUDEV:=		libs
 PKGSD_LIBUDEV:=		UDEV library

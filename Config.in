@@ -91,6 +91,9 @@ source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
 
+config ADK_USE_KERNEL_MINICONFIG
+	boolean
+
 choice
 prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
@@ -107,6 +110,10 @@ depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_
 
 choice
 prompt "Kernel Version"
+config ADK_KERNEL_VERSION_3_12_6
+	prompt "3.12.6"
+	boolean
+
 config ADK_KERNEL_VERSION_3_11_10
 	prompt "3.11.10"
 	boolean
@@ -119,6 +126,7 @@ endchoice
 
 config ADK_KERNEL_VERSION
 	string
+	default "3.12.6" if ADK_KERNEL_VERSION_3_12_6
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
 	default "3.4.71" if ADK_KERNEL_VERSION_3_4_71
 	help

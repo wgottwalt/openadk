@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		procps
 PKG_VERSION:=		3.2.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9532714b6846013ca9898984ba4cd7e0
 PKG_DESCR:=		The /proc file system utilities
 PKG_SECTION:=		utils
@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,PROCPS,procps,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
+TARGET_LDFLAGS+=	-ltinfo
 
 procps-install:
 	${INSTALL_DIR} ${IDIR_PROCPS}/{bin,sbin,usr/bin}

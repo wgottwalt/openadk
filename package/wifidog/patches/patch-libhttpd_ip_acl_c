@@ -1,7 +1,17 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- wifidog-1.1.5.orig/libhttpd/ip_acl.c	2007-03-12 20:37:06.000000000 +0100
-+++ wifidog-1.1.5/libhttpd/ip_acl.c	2008-10-16 13:12:15.000000000 +0200
-@@ -52,22 +52,22 @@ static int scanCidr(val, result, length)
++++ wifidog-1.1.5/libhttpd/ip_acl.c	2014-01-01 16:34:21.000000000 +0100
+@@ -44,30 +44,30 @@
+ 
+ static int scanCidr(val, result, length)
+ 	char	*val;
+-	u_int	*result,
++	unsigned int	*result,
+ 		*length;
+ {
+-	u_int	res, res1, res2, res3, res4, res5;
++	unsigned int	res, res1, res2, res3, res4, res5;
+ 	char	*cp;
  
  	cp = val;
  	res1 = atoi(cp);

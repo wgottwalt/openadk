@@ -49,6 +49,7 @@ ADK_TOOLS_ADDPATTERN_ARGS:=	$(strip $(subst ",, $(ADK_TOOLS_ADDPATTERN_ARGS)))
 ADK_KERNEL_VERSION:=		$(strip $(subst ",, $(ADK_KERNEL_VERSION)))
 ADK_PARAMETER_NETCONSOLE_SRC_IP:=	$(strip $(subst ",, $(ADK_PARAMETER_NETCONSOLE_SRC_IP)))
 ADK_PARAMETER_NETCONSOLE_DST_IP:=	$(strip $(subst ",, $(ADK_PARAMETER_NETCONSOLE_DST_IP)))
+ADK_JFFS2_OPTS:=	$(strip $(subst ",, $(ADK_JFFS2_OPTS)))
 
 ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
 ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk)),)

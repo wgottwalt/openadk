@@ -1,6 +1,6 @@
---- mozilla-release.orig/xpcom/io/nsLocalFileUnix.cpp	2013-09-11 01:15:27.000000000 +0200
-+++ mozilla-release/xpcom/io/nsLocalFileUnix.cpp	2013-10-14 14:33:08.000000000 +0200
-@@ -1256,8 +1256,13 @@ nsLocalFile::GetDiskSpaceAvailable(int64
+--- mozilla-release.orig/xpcom/io/nsLocalFileUnix.cpp	2013-12-05 17:08:00.000000000 +0100
++++ mozilla-release/xpcom/io/nsLocalFileUnix.cpp	2014-01-02 14:53:47.000000000 +0100
+@@ -1234,8 +1234,13 @@ nsLocalFile::GetDiskSpaceAvailable(int64
         && dq.dqb_bhardlimit)
      {
          int64_t QuotaSpaceAvailable = 0;

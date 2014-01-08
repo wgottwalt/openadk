@@ -15,6 +15,7 @@ PKG_URL:=		http://www.openwall.com/scanlogd/
 PKG_SITES:=		http://www.openwall.com/scanlogd/
 
 PKG_ARCH_DEPENDS:=	!arm
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

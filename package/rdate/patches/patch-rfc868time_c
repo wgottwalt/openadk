@@ -1,0 +1,11 @@
+--- rdate.orig/rfc868time.c	2007-08-11 01:52:47.000000000 +0200
++++ rdate/rfc868time.c	2013-12-30 23:07:29.000000000 +0100
+@@ -70,7 +70,7 @@ rfc868time_client (const char *hostname,
+ {
+ 	struct addrinfo hints, *res0, *res;
+ 	struct timeval old;
+-	u_int32_t tim;	/* RFC 868 states clearly this is an uint32 */
++	uint32_t tim;	/* RFC 868 states clearly this is an uint32 */
+ 	int s;
+ 	int error;
+ 

@@ -1,0 +1,14 @@
+--- socat-1.7.2.2.orig/sysincludes.h	2011-12-06 08:45:03.000000000 +0100
++++ socat-1.7.2.2/sysincludes.h	2013-12-25 15:43:19.000000000 +0100
+@@ -136,9 +136,11 @@
+ #if HAVE_NETINET_IF_ETHER_H
+ #include <netinet/if_ether.h>
+ #endif
++#if defined(__GLIBC__)
+ #if HAVE_LINUX_IF_TUN_H
+ #include <linux/if_tun.h>
+ #endif
++#endif
+ 
+ #if HAVE_TERMIOS_H && _WITH_TERMIOS
+ #include <termios.h>

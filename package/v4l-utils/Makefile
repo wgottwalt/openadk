@@ -4,19 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		v4l-utils
-PKG_VERSION:=		0.9.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f4d24bb9f0307345d5a8fc4febcb993d
+PKG_VERSION:=		1.0.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2127f2d06be9162b0d346f7037a9e852
 PKG_DESCR:=		Video4Linux2 utilities
 PKG_SECTION:=		multimedia
-PKG_BUILDDEP:=		jpeg
+PKG_BUILDDEP:=		libjpeg-turbo
 PKG_SITES:=		http://linuxtv.org/downloads/v4l-utils/
 PKG_LIBNAME:=		libv4l
 PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	eglibc glibc
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 PKGSC_LIBV4L:=		libs
 PKGSD_LIBV4L:=		Video4Linux2 libraries

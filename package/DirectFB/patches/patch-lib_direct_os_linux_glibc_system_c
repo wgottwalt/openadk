@@ -1,0 +1,19 @@
+--- DirectFB-1.6.3.orig/lib/direct/os/linux/glibc/system.c	2013-01-18 15:57:11.000000000 +0100
++++ DirectFB-1.6.3/lib/direct/os/linux/glibc/system.c	2013-12-21 12:48:06.000000000 +0100
+@@ -33,6 +33,7 @@
+ #include <errno.h>
+ #include <signal.h>
+ #include <unistd.h>
++#include <sys/syscall.h>
+ 
+ #include <linux/unistd.h>
+ 
+@@ -107,7 +108,7 @@ direct_tgkill( int tgid, int tid, int si
+ void
+ direct_trap( const char *domain, int sig )
+ {
+-     sigval_t val;
++     union sigval val;
+ 
+      D_LOG( Direct_Trap, VERBOSE, "Raising signal %d from %s...\n", sig, domain );
+ 

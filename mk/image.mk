@@ -119,6 +119,7 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
+ROOTFSJFFS2=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-jffs2.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.iso
@@ -126,6 +127,7 @@ else
 TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
+ROOTFSJFFS2=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-jffs2.img
 ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
 ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.iso
@@ -161,8 +163,12 @@ ${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
-		${BUILD_DIR}/root.squashfs \
+		${BUILD_DIR}/root.squashfs -comp xz \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
+
+${BIN_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
+	${STAGING_HOST_DIR}/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -r ${TARGET_DIR} \
+		--pad=$(ADK_TARGET_MTD_SIZE) -o ${BIN_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
 createinitramfs: ${BIN_DIR}/${INITRAMFS}_list
 	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE|INITRAMFS_COMPRESSION).*//' \
@@ -170,32 +176,63 @@ createinitramfs: ${BIN_DIR}/${INITRAMFS}_list
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
 		echo 'CONFIG_INITRAMFS_SOURCE="${BIN_DIR}/${INITRAMFS}_list"'; \
-		echo 'CONFIG_INITRAMFS_COMPRESSION_NONE is not set' >> ${LINUX_DIR}/.config; \
+		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set' >> ${LINUX_DIR}/.config; \
+		echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> ${LINUX_DIR}/.config; \
+		echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> ${LINUX_DIR}/.config; \
 	) >> ${LINUX_DIR}/.config
 ifeq ($(ADK_KERNEL_COMP_XZ),y)
+		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_XZ=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_XZ=y" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_X86=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_POWERPC=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_IA64=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_ARM=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_ARMTHUMB=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_SPARC=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_XZ_DEC_TEST=n" >> ${LINUX_DIR}/.config
 endif
 ifeq ($(ADK_KERNEL_COMP_LZMA),y)
+		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZMA=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_LZMA=y" >> ${LINUX_DIR}/.config
 endif
 ifeq ($(ADK_KERNEL_COMP_LZO),y)
+		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZO=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_LZO=y" >> ${LINUX_DIR}/.config
 endif
 ifeq ($(ADK_KERNEL_COMP_GZIP),y)
+		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_GZIP=y" >> ${LINUX_DIR}/.config
 endif
 ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
+		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
-	echo N | \
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} oldconfig $(MAKE_TRACE) 
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
 

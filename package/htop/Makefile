@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		htop
 PKG_VERSION:=		1.0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0d01cca8df3349c74569cefebbd9919e
 PKG_DESCR:=		graphical process manager
 PKG_SECTION:=		utils
@@ -18,6 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HTOP,htop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+= 	ac_cv_file__proc_stat=yes \
 		  	ac_cv_file__proc_meminfo=yes
 CONFIGURE_ARGS+=	--disable-unicode

@@ -11,6 +11,8 @@ PKG_DESCR:=		framebuffer utility
 PKG_SECTION:=		utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FBSET,fbset,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

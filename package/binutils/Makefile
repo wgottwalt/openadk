@@ -41,9 +41,11 @@ CONFIGURE_ARGS+=	--disable-werror \
 else
 CONFIGURE_ARGS+=	--disable-werror
 endif
+# disable honour cflags stuff
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-pre-build:
-	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
+post-build:
+	$(CP) ${WRKBUILD}/libiberty/libiberty.a $(STAGING_TARGET_DIR)/usr/lib
 
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib

@@ -1,5 +1,8 @@
 menu "Filesystems support"
 
+config ADK_KERNEL_MISC_FILESYSTEMS
+	boolean
+
 config ADK_KERNEL_FSNOTIFY
 	boolean
 	default y
@@ -7,6 +10,9 @@ config ADK_KERNEL_FSNOTIFY
 config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
+
+config ADK_KERNEL_JFFS2_FS
+	boolean
 
 config ADK_KERNEL_YAFFS_FS
 	tristate
@@ -27,9 +33,6 @@ config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
 config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
 	boolean
 
-config ADK_KERNEL_MISC_FILESYSTEMS
-	boolean
-
 config ADK_KERNEL_DNOTIFY
 	boolean
 
@@ -44,10 +47,15 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 	string
 	default "iso8859-1"
 
+config ADK_KERNEL_SQUASHFS_XZ
+	boolean
+	default n
+
 config ADK_KERNEL_SQUASHFS
 	prompt "squashfs.......................... SquashFS filesystem"
 	boolean
 	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_SQUASHFS_XZ
 	default n
 
 config ADK_KERNEL_EXT2_FS

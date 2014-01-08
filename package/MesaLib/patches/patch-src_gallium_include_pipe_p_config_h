@@ -1,0 +1,11 @@
+--- Mesa-9.2.2.orig/src/gallium/include/pipe/p_config.h	2013-10-18 00:26:23.000000000 +0200
++++ Mesa-9.2.2/src/gallium/include/pipe/p_config.h	2014-01-06 12:26:04.042469119 +0100
+@@ -126,7 +126,7 @@
+  * Endian detection.
+  */
+ 
+-#ifdef __GLIBC__
++#ifdef __linux__
+ #include <endian.h>
+ 
+ #if __BYTE_ORDER == __LITTLE_ENDIAN
