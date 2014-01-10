@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		systemd
 PKG_VERSION:=		208
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		df64550d92afbffb4f67a434193ee165
 PKG_DESCR:=		System and Service Manager
 PKG_SECTION:=		utils
@@ -18,7 +18,9 @@ PKG_LIBNAME:=		libudev
 PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	eglibc glibc
-PKG_SUBPKGS:=		UDEV LIBUDEV
+PKG_SUBPKGS:=		UDEV LIBUDEV LIBGUDEV
+PKGSC_LIBGUDEV:=	libs
+PKGSD_LIBGUDEV:=	GUDEV library
 PKGSC_LIBUDEV:=		libs
 PKGSD_LIBUDEV:=		UDEV library
 PKGSD_UDEV:=		Dynamic device management subsystem
@@ -33,11 +35,13 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UDEV,udev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBUDEV,libudev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBGUDEV,libgudev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-lrt
 CONFIGURE_ARGS+=	--disable-static \
 			--without-python \
+			--enable-gudev \
 			--disable-manpages \
 			--disable-polkit
 
@@ -51,5 +55,9 @@ udev-install:
 libudev-install:
 	${INSTALL_DIR} ${IDIR_LIBUDEV}/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libudev.so* $(IDIR_LIBUDEV)/usr/lib
+
+libgudev-install:
+	${INSTALL_DIR} ${IDIR_LIBGUDEV}/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgudev*.so* $(IDIR_LIBGUDEV)/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk
