@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		polkit
 PKG_VERSION:=		0.112
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		758d825e25283b201026f1bb3a476144
+PKG_MD5SUM:=		9fa7a28633b028681163466da898b008
 PKG_DESCR:=		application-level toolkit
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool mozjs
