@@ -10,7 +10,7 @@ PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx bcm2835-vc
-PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad
+PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad dbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
@@ -23,7 +23,7 @@ PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
-PKG_BUILDDEP+=		bcm2835-vc libgpg-error libbluray
+PKG_BUILDDEP+=		bcm2835-vc libgpg-error libbluray dbus
 PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump systemd
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
@@ -40,7 +40,7 @@ $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_54 \
+TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_55 \
 			-DTIXML_USE_STL=1 \
 			-I$(STAGING_DIR)/opt/vc/include \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
