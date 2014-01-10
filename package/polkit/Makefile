@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		polkit
 PKG_VERSION:=		0.112
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9fa7a28633b028681163466da898b008
 PKG_DESCR:=		application-level toolkit
 PKG_SECTION:=		libs
@@ -22,6 +22,8 @@ $(eval $(call PKG_template,POLKIT,polkit,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--disable-man-pages \
 			--disable-examples \
+			--enable-libsystemd-login=no \
+			--without-systemdsystemunitdir \
 			--with-authfw=shadow \
 			--with-os-type=unknown
 

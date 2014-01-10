@@ -20,6 +20,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UPOWER,upower,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--without-systemdutildir \
+			--disable-rpath
+
 upower-install:
 	$(INSTALL_DIR) $(IDIR_UPOWER)/etc
 	$(CP) $(WRKINST)/etc/* \
