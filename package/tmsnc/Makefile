@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tmsnc
 PKG_VERSION:=		0.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		337dae91d4775e03b6681f61db56d2a7
 PKG_DESCR:=		a textbased MSN client
 PKG_SECTION:=		chat
@@ -16,6 +16,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TMSNC,tmsnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-libiconv-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}
