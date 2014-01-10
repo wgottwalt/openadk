@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libcdio
 PKG_VERSION:=		0.90
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		1b245b023fb03a58d030fd2800db3247
 PKG_DESCR:=		a library for CD-ROM and CD image access
 PKG_SECTION:=		libs
@@ -16,6 +16,8 @@ PKG_OPTS:=		dev
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBCDIO,libcdio,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+TARGET_LDFLAGS+=	-ltinfo
 
 libcdio-install:
 	$(INSTALL_DIR) $(IDIR_LIBCDIO)/usr/lib
