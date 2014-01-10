@@ -499,6 +499,17 @@ config ADK_KPACKAGE_KMOD_RT2800USB
 	help
 	  Driver for Ralink RT2800 USB.
 
+config ADK_KPACKAGE_KMOD_RTL8192CU
+	prompt "kmod-rtl8192cu............... Realtek RTL8192CU USB"
+	tristate
+	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_CFG80211_WEXT
+	select ADK_KERNEL_WIRELESS_EXT
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
+	help
+	  Driver for Realtek RTL8192CU USB
+
 config ADK_KPACKAGE_KMOD_RT2400PCI
 	prompt "kmod-rt2400pci............... Ralink rt2400"
 	tristate

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
@@ -42,12 +42,14 @@ $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
 			--without-sqlite3 \
+			--without-libedit \
 			--disable-sqlite-cache \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-readline=${STAGING_TARGET_DIR}/usr \
@@ -161,8 +163,6 @@ endif
 	${CP} ${WRKINST}/usr/lib/heimdal/libroken.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${INSTALL_DIR} ${IDIR_LIBHEIMDAL}/usr/lib/heimdal
-	${CP} ${WRKINST}/usr/lib/heimdal/libheimedit.so* \
-		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libsl.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* \
