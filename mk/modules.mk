@@ -135,6 +135,10 @@ $(eval $(call KMOD_template,RT61PCI,rt61pci,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/rt2x00/rt61pci \
 ,20, kmod-leds-class kmod-rt2x00 rt2x00pci))
 
+$(eval $(call KMOD_template,RTL8192CU,rtl8192cu,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl8192cu/8192cu \
+,20))
+
 #
 # Networking
 #
