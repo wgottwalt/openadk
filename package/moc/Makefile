@@ -4,15 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		moc
-PKG_VERSION:=		2.5.0-alpha4
+PKG_VERSION:=		2.5.0-beta1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2dd0cb6481d77fda09c58ec3154a21c0
+PKG_MD5SUM:=		795ecba86847e082aa2f21937cc04804
 PKG_DESCR:=		console music player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac
 PKG_DEPENDS+=		libncurses libid3tag
 PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac libiconv-tiny
-PKG_BUILDDEP+=		libid3tag db
+PKG_BUILDDEP+=		libid3tag db libtool
 PKG_URL:=		http://moc.daper.net/
 PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/unstable/
 
@@ -22,6 +22,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MOC,moc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--without-jack \
 			--without-oss \
 			--without-musepack \
