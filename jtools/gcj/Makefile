@@ -19,7 +19,7 @@ install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	(cd $(WRKBUILD); \
-		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-latest.jar; \
+		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar; \
 		env ${GCJ_ENV} ./configure \
 			--prefix=/usr \
 			--enable-java-home \

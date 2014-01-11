@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		icedtea
-PKG_VERSION:=		2.3.9
+PKG_VERSION:=		2.3.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
+PKG_MD5SUM:=		9b3afa162021e3fca6161ba8f9f7dc11
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_URL:=		http://openjdk.org/
@@ -30,6 +30,7 @@ CONFIGURE_ARGS+=\
 		--with-javac=$(STAGING_JAVA_HOST_DIR)/usr/bin/ecj \
 		--with-ecj-jar=${STAGING_JAVA_HOST_DIR}/usr/share/java/ecj.jar \
 		--without-hotspot-build \
+                --disable-system-kerberos \
                 --disable-system-jpeg \
                 --disable-system-lcms \
                 --disable-system-zlib \

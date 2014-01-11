@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.3.9
+PKG_VERSION:=		2.3.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e96e5e578d442d3ae56cd332e8dbc6b6
+PKG_MD5SUM:=		9b3afa162021e3fca6161ba8f9f7dc11
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
@@ -75,6 +75,7 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--disable-system-jpeg \
 			--disable-system-lcms \
 			--disable-system-zlib \
+			--disable-system-kerberos \
 			--disable-system-png \
 			--disable-system-gif \
 			--disable-system-gtk \
