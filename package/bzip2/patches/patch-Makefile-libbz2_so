@@ -1,15 +1,24 @@
 --- bzip2-1.0.6.orig/Makefile-libbz2_so	2010-09-11 01:07:52.000000000 +0200
-+++ bzip2-1.0.6/Makefile-libbz2_so	2013-07-30 14:15:29.000000000 +0200
-@@ -22,9 +22,10 @@
- 
- 
- SHELL=/bin/sh
--CC=gcc
-+CC?=gcc
++++ bzip2-1.0.6/Makefile-libbz2_so	2014-01-10 21:37:37.000000000 +0100
+@@ -25,6 +25,12 @@ SHELL=/bin/sh
+ CC=gcc
  BIGFILES=-D_FILE_OFFSET_BITS=64
--CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
-+CFLAGS?=
-+CFLAGS+=-fpic -fPIC -Wall -Winline $(BIGFILES)
+ CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
++OS=$(shell uname)
++ifeq ($(OS),Darwin)
++LDOPT=-install_name
++else 
++LDOPT=-soname
++endif
  
  OBJS= blocksort.o  \
        huffman.o    \
+@@ -35,7 +41,7 @@ OBJS= blocksort.o  \
+       bzlib.o
+ 
+ all: $(OBJS)
+-	$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
++	$(CC) -shared -Wl,$(LDOPT) -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
+ 	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.6
+ 	rm -f libbz2.so.1.0
+ 	ln -s libbz2.so.1.0.6 libbz2.so.1.0
