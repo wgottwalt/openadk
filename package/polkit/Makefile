@@ -6,14 +6,16 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		polkit
 PKG_VERSION:=		0.112
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		9fa7a28633b028681163466da898b008
+PKG_MD5SUM:=		23973dcfd8b92ab2b7db3a925642b76d
 PKG_DESCR:=		application-level toolkit
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool mozjs
 PKG_DEPENDS:=		mozjs
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/polkit/
-PKG_SITES:=		http://cgit.freedesktop.org/polkit/snapshot/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
+
+PKG_LIBC_DEPENDS:=	eglibc glibc
 
 include $(TOPDIR)/mk/package.mk
 

@@ -14,6 +14,8 @@ PKG_DEPENDS:=		glib dbus-glib polkit libgudev
 PKG_URL:=		http://upower.freedesktop.org/
 PKG_SITES:=		http://upower.freedesktop.org/releases/
 
+PKG_LIBC_DEPENDS:=	eglibc glibc
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
