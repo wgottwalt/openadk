@@ -1,0 +1,29 @@
+--- libssh-0.5.3.orig/cmake/Modules/FindZLIB.cmake	2012-11-20 12:41:49.000000000 +0100
++++ libssh-0.5.3/cmake/Modules/FindZLIB.cmake	2014-01-11 12:11:52.000000000 +0100
+@@ -61,11 +61,11 @@ else (ZLIB_LIBRARIES AND ZLIB_INCLUDE_DI
+         NAMES
+             zlib.h
+         PATHS
++            ${ZLIB_ROOT_DIR}/include
+             /usr/local/include
+             /opt/local/include
+             /sw/include
+             /usr/lib/sfw/include
+-            ${ZLIB_ROOT_DIR}/include
+     )
+     mark_as_advanced(ZLIB_INCLUDE_DIR)
+ 
+@@ -98,12 +98,12 @@ else (ZLIB_LIBRARIES AND ZLIB_INCLUDE_DI
+             zlib
+             zlib1
+         PATHS
++            ${ZLIB_ROOT_DIR}/lib
+             /usr/local/lib
+             /opt/local/lib
+             /sw/lib
+             /usr/sfw/lib/64
+             /usr/sfw/lib
+-            ${ZLIB_ROOT_DIR}/lib
+     )
+     mark_as_advanced(ZLIB_LIBRARY)
+ 
