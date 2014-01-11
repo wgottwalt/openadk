@@ -1,0 +1,10 @@
+--- libssh-0.5.3.orig/include/libssh/libssh.h	2012-11-20 12:41:49.000000000 +0100
++++ libssh-0.5.3/include/libssh/libssh.h	2014-01-11 12:04:00.000000000 +0100
+@@ -57,6 +57,7 @@
+   typedef unsigned long long uint64_t;
+   typedef int mode_t;
+ #else /* _MSC_VER */
++  #include <sys/types.h>
+   #include <unistd.h>
+   #include <inttypes.h>
+ #endif /* _MSC_VER */

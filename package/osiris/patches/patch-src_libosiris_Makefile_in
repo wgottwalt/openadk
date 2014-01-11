@@ -1,6 +1,6 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- osiris-4.2.3.orig/src/libosiris/Makefile.in	2006-07-28 01:57:51.000000000 +0200
-+++ osiris-4.2.3/src/libosiris/Makefile.in	2009-05-10 20:51:38.000000000 +0200
++++ osiris-4.2.3/src/libosiris/Makefile.in	2014-01-03 17:24:45.000000000 +0100
 @@ -105,7 +105,7 @@ libosiris_a_SOURCES = list.c message.c s
                              filter_uid.c filter_gid.c filter_user.c \
                              filter_group.c filter_header.c filter_file.c \
@@ -10,7 +10,7 @@ $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
                              string_list.h ssl_utilities.h utilities.h \
                              regex.h regex.c debug.h debug.c strcasestr.c \
                              error.h strptime.h
-@@ -128,11 +128,10 @@ am_libosiris_a_OBJECTS = list.$(OBJEXT) 
+@@ -128,11 +128,10 @@ am_libosiris_a_OBJECTS = list.$(OBJEXT)
  	filter_python.$(OBJEXT) filter_script.$(OBJEXT) \
  	filter_gzip.$(OBJEXT) filter_zip.$(OBJEXT) filter_tar.$(OBJEXT) \
  	filter_pgp.$(OBJEXT) filter_rpm.$(OBJEXT) filter_uid.$(OBJEXT) \

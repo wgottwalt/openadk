@@ -5,15 +5,17 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnids
 PKG_VERSION:=		1.24
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		72d37c79c85615ffe158aa524d649610
 PKG_DESCR:=		Network Intrusion Detection System library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libnet libpcap glib
-PKG_BUILDDEP:=		libnet libpcap glib
+PKG_BUILDDEP:=		autotool libnet libpcap glib
 PKG_URL:=		http://libnids.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnids/}
 PKG_OPTS:=		dev
+
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 include ${TOPDIR}/mk/package.mk
 
@@ -22,6 +24,7 @@ $(eval $(call PKG_template,LIBNIDS,libnids,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--with-libpcap=${STAGING_TARGET_DIR}/usr
+AUTOTOOL_STYLE:=	autoreconf
 XAKE_FLAGS+=		install_prefix="${WRKINST}"
 
 libnids-install:

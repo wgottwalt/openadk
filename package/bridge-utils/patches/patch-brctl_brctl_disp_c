@@ -1,0 +1,10 @@
+--- bridge-utils-1.5.orig/brctl/brctl_disp.c	2011-03-29 02:52:54.000000000 +0200
++++ bridge-utils-1.5/brctl/brctl_disp.c	2013-12-27 21:00:22.000000000 +0100
+@@ -20,6 +20,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/time.h>
++#include <sys/types.h>
+ 
+ #include "libbridge.h"
+ #include "brctl.h"

@@ -1,8 +1,8 @@
---- mozilla-release.orig/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2013-09-11 01:15:18.000000000 +0200
-+++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2013-10-15 16:05:38.000000000 +0200
+--- mozilla-release.orig/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2013-12-05 17:07:50.000000000 +0100
++++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/spreadsortlib/spreadsort.hpp	2014-01-02 14:53:44.000000000 +0100
 @@ -21,6 +21,11 @@ Scott McMurray
- #include "constants.hpp"
- #include <cstring>
+ #include <vector>
+ #include "webrtc/system_wrappers/source/spreadsortlib/constants.hpp"
  
 +#include <features.h>
 +#if defined(__UCLIBC__)

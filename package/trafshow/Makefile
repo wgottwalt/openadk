@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		trafshow
 PKG_VERSION:=		5.2.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0b2f0bb23b7832138b7d841437b9e182
 PKG_DESCR:=		traffic analyzing tool
 PKG_SECTION:=		net
@@ -20,7 +20,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TRAFSHOW,trafshow,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-DHAVE_SOCKADDR_STORAGE -DHAVE_HAS_COLORS
+TARGET_CPPFLAGS+=	-DHAVE_SOCKADDR_STORAGE -DHAVE_HAS_COLORS -D_GNU_SOURCE
+TARGET_LDFLAGS+=	-ltinfo
 
 trafshow-install:
 	${INSTALL_DIR} ${IDIR_TRAFSHOW}/usr/bin

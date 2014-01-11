@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.0.0
+PKG_VERSION:=		5.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1d7bccb50f01020bb04d06e9755e0eec
+PKG_MD5SUM:=		f624ab041c306af0f5f57c927e9ea2e4
 PKG_DESCR:=		IPsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread kmod-net-key kmod-xfrm-user
@@ -17,6 +17,8 @@ PKG_DEPENDS+=		kmod-crypto-null kmod-crypto-des kmod-crypto-aes
 PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
+
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 PKG_CHOICES_STRONGSWAN:=WITH_GMP WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITH_GMP:=	use GMP for crypto

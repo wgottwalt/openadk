@@ -30,6 +30,7 @@ $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBMP3LAME,libmp3lame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBMP3LAME},${PKGSC_LIBMP3LAME},${PKG_OPTS}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_LDFLAGS+=	-ltinfo
 
 lame-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin

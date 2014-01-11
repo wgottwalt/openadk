@@ -1,7 +1,6 @@
-- use host-tools infrastructure for openjdk7
-- remove openjdk6
-- evaluate libguestfs for image creation
 - add grsec kernel patch
+- microblaze: add cfgfs partition to dts, add partition to spartan dts
+- use host-tools infrastructure for openjdk7
+- evaluate libguestfs for image creation
 - check for gcc and SSP again
-- port full blown perl
 - port w3m

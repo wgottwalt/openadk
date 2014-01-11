@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tcp_wrappers
 PKG_VERSION:=		7.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e6fa25f71226d090f34de3f6b122fb5a
 PKG_DESCR:=		IP based access control
 PKG_SECTION:=		libs

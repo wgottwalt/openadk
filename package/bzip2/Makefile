@@ -9,6 +9,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		00b516f4704d4a7cb50a1d97e6e8e15b
 PKG_DESCR:=		bzip2 compression utility
 PKG_SECTION:=		archive
+PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
 PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
@@ -23,16 +24,31 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,BZIP2,bzip2,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,BZIP2,bzip2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBZ2},${PKGSC_LIBBZ2},${PKG_OPTS}))
 
+HOST_STYLE:=		manual
 MAKE_FILE:=		Makefile-libbz2_so
 CONFIG_STYLE:=		manual
 TARGET_CFLAGS+=		-fPIC
 XAKE_FLAGS+=		PREFIX=${WRKINST}/usr
 INSTALL_STYLE:=		manual
+
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		PREFIX=${HOST_WRKINST}/usr ${HOST_ALL_TARGET})
+
+bzip2-hostinstall:
+	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/lib
+	${INSTALL_DIR} $(STAGING_HOST_DIR)/usr/include
+	$(CP) ${WRKBUILD}/libbz2.so* \
+		${STAGING_HOST_DIR}/usr/lib
+	(cd ${STAGING_HOST_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
+	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_HOST_DIR)/usr/include
 
 libbz2-install:
 	${INSTALL_DIR} ${IDIR_LIBBZ2}/usr/lib
@@ -49,4 +65,5 @@ bzip2-install:
 	${INSTALL_DIR} ${IDIR_BZIP2}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/bzip2-shared ${IDIR_BZIP2}/usr/bin/bzip2
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

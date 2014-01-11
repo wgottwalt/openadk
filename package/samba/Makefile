@@ -31,7 +31,7 @@ $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_PASSWD},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba
+#TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
 			ac_cv_lib_ext_nsl_connect=no \
@@ -39,7 +39,7 @@ CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			ac_cv_lib_ext_nsl_gethostbyname=no \
 			ac_cv_file__proc_sys_kernel_core_pattern=yes \
 			libreplace_cv_HAVE_GETADDRINFO=no
-CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
+CONFIGURE_ARGS+=	--libdir=/usr/lib \
 			--localstatedir=/var/log/samba \
 			--with-configdir=/etc/samba \
 			--with-lockdir=/var/run/samba \
@@ -57,13 +57,13 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib/samba \
 
 samba-install:
 	${INSTALL_DIR} ${IDIR_SAMBA}/etc/samba ${IDIR_SAMBA}/usr/sbin
-	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/samba/{charset,vfs}
-	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/charset/CP850.so \
-			${IDIR_SAMBA}/usr/lib/samba/charset
+	${INSTALL_DIR} ${IDIR_SAMBA}/usr/lib/{charset,vfs}
+	${INSTALL_DATA} ${WRKINST}/usr/lib/charset/CP850.so \
+			${IDIR_SAMBA}/usr/lib/charset
 	${INSTALL_DATA} ./files/smb.conf ${IDIR_SAMBA}/etc/samba
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/{nmbd,smbd} ${IDIR_SAMBA}/usr/sbin
-	${CP} ${WRKINST}/usr/lib/samba/vfs/*.so* ${IDIR_SAMBA}/usr/lib/samba/vfs
-	${INSTALL_DATA} ${WRKINST}/usr/lib/samba/*.dat ${IDIR_SAMBA}/usr/lib/samba
+	${CP} ${WRKINST}/usr/lib/vfs/*.so* ${IDIR_SAMBA}/usr/lib/vfs
+	${INSTALL_DATA} ${WRKINST}/usr/lib/*.dat ${IDIR_SAMBA}/usr/lib
 
 samba-passwd-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_PASSWD}/usr/bin
@@ -76,10 +76,10 @@ samba-client-install:
 		${IDIR_SAMBA_CLIENT}/usr/bin
 
 samba-lib-install:
-	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib/samba
-	${CP} ${WRKINST}/usr/lib/samba/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
-		${IDIR_SAMBA}/usr/lib/samba
-	$(CP) ${WRKINST}/usr/lib/samba/{libtalloc,libtdb,libtevent}.* \
-		${IDIR_SAMBA_LIB}/usr/lib/samba
+	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib
+	${CP} ${WRKINST}/usr/lib/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
+		${IDIR_SAMBA_LIB}/usr/lib
+	$(CP) ${WRKINST}/usr/lib/{libtalloc,libtdb,libtevent}.* \
+		${IDIR_SAMBA_LIB}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

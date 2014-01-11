@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
 PKG_VERSION:=		4.7.0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f48b2c8dd140aeb36f59d16a662f0779
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
@@ -19,6 +19,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--enable-charset \
 			--disable-extcharset \
 			--disable-background \

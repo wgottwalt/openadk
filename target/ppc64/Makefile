@@ -14,6 +14,13 @@ imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
 	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_HARDWARE_QEMU),y)
+	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-ppc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(BIN_DIR)/$(INITRAMFS)

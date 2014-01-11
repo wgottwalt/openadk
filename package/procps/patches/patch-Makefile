@@ -1,6 +1,6 @@
 $Id$
---- procps-3.2.7.orig/Makefile	Sat Jun 24 09:02:02 2006
-+++ procps-3.2.7/Makefile	Tue May 22 14:43:11 2007
+--- procps-3.2.8.orig/Makefile	2009-05-10 20:50:48.000000000 +0200
++++ procps-3.2.8/Makefile	2013-12-23 16:53:06.000000000 +0100
 @@ -27,7 +27,7 @@ TARVERSION   := $(VERSION).$(SUBVERSION)
  ldconfig := ldconfig
  ln_f     := ln -f
@@ -19,7 +19,7 @@ $Id$
  ALL_CPPFLAGS := $(PKG_CPPFLAGS) $(CPPFLAGS)
  
  # Left out -Wconversion due to noise in glibc headers.
-@@ -102,11 +102,11 @@ PKG_CFLAGS   := -fno-common -ffast-math 
+@@ -102,11 +102,11 @@ PKG_CFLAGS   := -fno-common -ffast-math
    -Wstrict-prototypes -Wmissing-prototypes
  # Note that some stuff below is conditional on CFLAGS containing
  # an option that starts with "-g". (-g, -g2, -g3, -ggdb, etc.)

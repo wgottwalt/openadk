@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dbus-glib
-PKG_VERSION:=		0.86
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		cd0ab148fb0c786fc88be49d19971f50
+PKG_VERSION:=		0.100.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ad0920c7e3aad669163bb59171cf138e
 PKG_DESCR:=		DBUS glib bindings
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		dbus glib

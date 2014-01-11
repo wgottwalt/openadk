@@ -1,0 +1,10 @@
+--- bluez-5.12.orig/tools/hciconfig.c	2013-10-15 15:41:07.000000000 +0200
++++ bluez-5.12/tools/hciconfig.c	2013-12-21 19:26:45.000000000 +0100
+@@ -30,6 +30,7 @@
+ #include <stdio.h>
+ #include <errno.h>
+ #include <ctype.h>
++#include <fcntl.h>
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <string.h>

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xterm
 PKG_VERSION:=		297
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		45610ae6fe90cf086fcd75b9cb97bbaf
 PKG_DESCR:=		Terminal Emulator for X Windows
 PKG_SECTION:=		x11/apps
@@ -20,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XTERM,xterm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-app-defaults=/usr/lib/X11/app-defaults \
 			--disable-pty-handshake
 

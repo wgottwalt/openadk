@@ -4,13 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pam
-PKG_VERSION:=		1.1.4
+PKG_VERSION:=		1.1.8
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		ff8f3c4382b78ac211e11bcd56ab17bf
+PKG_MD5SUM:=		5107bbf54042400b6200e8367cc7feef
 PKG_DESCR:=		Pluggable Authentication Modules
 PKG_BUILDDEP:=		flex
 PKG_SECTION:=		misc
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_URL:=		http://www.linux-pam.org/
+PKG_SITES:=		http://www.linux-pam.org/library/
 PKG_OPTS:=		dev
 
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
@@ -20,7 +21,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+#XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--disable-nis \
 			--enable-db=no
 

@@ -1,6 +1,6 @@
---- bluez-4.92.orig/tools/hciattach.c	2010-11-30 15:50:48.000000000 +0100
-+++ bluez-4.92/tools/hciattach.c	2011-05-17 18:18:20.776610031 +0200
-@@ -107,6 +107,7 @@ static int uart_speed(int s)
+--- bluez-5.12.orig/tools/hciattach.c	2012-12-24 18:46:55.000000000 +0100
++++ bluez-5.12/tools/hciattach.c	2013-12-21 19:19:21.000000000 +0100
+@@ -101,6 +101,7 @@ static int uart_speed(int s)
  		return B230400;
  	case 460800:
  		return B460800;
@@ -8,7 +8,7 @@
  	case 500000:
  		return B500000;
  	case 576000:
-@@ -137,6 +138,7 @@ static int uart_speed(int s)
+@@ -135,6 +136,7 @@ static int uart_speed(int s)
  	case 4000000:
  		return B4000000;
  #endif

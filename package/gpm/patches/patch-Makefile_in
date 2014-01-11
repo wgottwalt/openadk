@@ -1,0 +1,11 @@
+--- gpm-1.20.7.orig/Makefile.in	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/Makefile.in	2013-12-22 13:07:05.000000000 +0100
+@@ -19,7 +19,7 @@ include Makefile.include
+ # user-overridable flags, but it's also all the implicit rule looks at.
+ # missing ?
+ 
+-SUBDIRS = src doc contrib
++SUBDIRS = src contrib
+ 
+ 
+ ### simple, but effective rules

@@ -1,13 +1,14 @@
---- Linux-PAM-1.1.4.orig/modules/pam_time/pam_time.c	2011-06-21 11:04:56.000000000 +0200
-+++ Linux-PAM-1.1.4/modules/pam_time/pam_time.c	2012-07-31 12:02:24.000000000 +0200
-@@ -555,7 +555,9 @@ check_account(pam_handle_t *pamh, const 
+--- Linux-PAM-1.1.8.orig/modules/pam_time/pam_time.c	2013-06-18 16:11:21.000000000 +0200
++++ Linux-PAM-1.1.8/modules/pam_time/pam_time.c	2013-12-21 18:30:19.000000000 +0100
+@@ -554,9 +554,11 @@ check_account(pam_handle_t *pamh, const
+ 	       continue;
  	  }
  	  /* If buffer starts with @, we are using netgroups */
++#ifdef HAVE_INNETGR
  	  if (buffer[0] == '@')
--	    good &= innetgr (&buffer[1], NULL, user, NULL);
-+	    //good &= innetgr (&buffer[1], NULL, user, NULL);
-+	       pam_syslog(pamh, LOG_ERR,
-+			  "%s: no netgroup support in C library", PAM_TIME_CONF);
+ 	    good &= innetgr (&buffer[1], NULL, user, NULL);
  	  else
++#endif
  	    good &= logic_field(pamh, user, buffer, count, is_same);
  	  D(("with user: %s", good ? "passes":"fails" ));
+ 

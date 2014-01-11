@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		24.0
+PKG_VERSION:=		26.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		06a4c0fe8d3a979aea2fce8d0fdbf328
+PKG_MD5SUM:=		91ce51cc6474f1269484e5327643a59c
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib glib libgtk libpng libtiff libxcursor libffi
@@ -15,7 +15,7 @@ PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf li
 PKG_DEPENDS+=		harfbuzz mesalib libvpx libbz2 ca-certificates libevent
 PKG_BUILDDEP:=		alsa-lib glib gtk+ libIDL libX11 MesaLib libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
-PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent python2-host yasm-host
+PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent bzip2-host python2-host yasm-host
 PKG_BUILDDEP+=		zip-host
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/

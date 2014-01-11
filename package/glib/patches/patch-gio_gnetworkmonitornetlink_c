@@ -1,10 +1,10 @@
---- glib-2.36.4.orig/gio/gnetworkmonitornetlink.c	2013-08-07 16:36:32.000000000 +0200
-+++ glib-2.36.4/gio/gnetworkmonitornetlink.c	2013-11-29 17:14:56.000000000 +0100
-@@ -22,6 +22,7 @@
+--- glib-2.38.2.orig/gio/gnetworkmonitornetlink.c	2013-11-12 06:30:22.000000000 +0100
++++ glib-2.38.2/gio/gnetworkmonitornetlink.c	2014-01-10 19:31:44.888881617 +0100
+@@ -20,6 +20,7 @@
  
+ #include "config.h"
+ 
++#include <string.h>
  #include <errno.h>
  #include <unistd.h>
-+#include <string.h>
  
- #include "gnetworkmonitornetlink.h"
- #include "gcredentials.h"

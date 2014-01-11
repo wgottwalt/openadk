@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cutter
 PKG_VERSION:=		1.03
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		50093db9b64277643969ee75b83ebbd1
 PKG_DESCR:=		Abort TCP/IP connections routed over a firewall
 PKG_SECTION:=		firewall

@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		picocom
-PKG_VERSION:=		1.4
+PKG_VERSION:=		1.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		08fcc5f6bb9e7676a2569386d5ea9f70
+PKG_MD5SUM:=		8eaba1d31407e8408674d6e57af447ef
 PKG_DESCR:=		minimal dumb-terminal emulation program
 PKG_SECTION:=		serial
-PKG_URL:=		http://efault.net/npat/hacks/picocom/
-PKG_SITES:=		http://efault.net/npat/hacks/picocom/dist/
+PKG_URL:=		http://code.google.com/p/picocom
+PKG_SITES:=		http://picocom.googlecode.com/files/
 
 include ${TOPDIR}/mk/package.mk
 

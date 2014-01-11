@@ -1,25 +1,15 @@
---- mdadm-3.2.5.orig/Makefile	2012-05-18 09:10:03.000000000 +0200
-+++ mdadm-3.2.5/Makefile	2012-07-25 13:51:12.000000000 +0200
-@@ -42,7 +42,7 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
+--- mdadm-3.3.orig/Makefile	2013-09-03 06:47:47.000000000 +0200
++++ mdadm-3.3/Makefile	2013-12-31 18:42:30.000000000 +0100
+@@ -43,7 +43,7 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
  
  CC = $(CROSS_COMPILE)gcc
- CXFLAGS = -ggdb
+ CXFLAGS ?= -ggdb
 -CWFLAGS = -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter
 +CWFLAGS = -Wall -Wstrict-prototypes -Wextra -Wno-unused-parameter
  ifdef WARN_UNUSED
- CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O
+ CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O3
  endif
-@@ -76,7 +76,8 @@ FAILED_SLOTS_DIR = /run/mdadm/failed-slo
- DIRFLAGS = -DMAP_DIR=\"$(MAP_DIR)\" -DMAP_FILE=\"$(MAP_FILE)\"
- DIRFLAGS += -DMDMON_DIR=\"$(MDMON_DIR)\"
- DIRFLAGS += -DFAILED_SLOTS_DIR=\"$(FAILED_SLOTS_DIR)\"
--CFLAGS = $(CWFLAGS) $(CXFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS) $(DIRFLAGS)
-+CFLAGS ?=
-+CFLAGS += $(CWFLAGS) $(CXFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS) $(DIRFLAGS)
- 
- # The glibc TLS ABI requires applications that call clone(2) to set up
- # TLS data structures, use pthreads until mdmon implements this support
-@@ -231,9 +232,10 @@ $(MON_OBJS) : $(INCL) mdmon.h
+@@ -257,9 +257,10 @@ $(MON_OBJS) : $(INCL) mdmon.h
  sha1.o : sha1.c sha1.h md5.h
  	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
  

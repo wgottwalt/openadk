@@ -1,0 +1,10 @@
+--- bluez-5.12.orig/profiles/network/bnep.c	2013-12-10 07:59:06.000000000 +0100
++++ bluez-5.12/profiles/network/bnep.c	2013-12-21 19:31:52.000000000 +0100
+@@ -32,6 +32,7 @@
+ #include <sys/param.h>
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
++#include <sys/types.h>
+ #include <sys/wait.h>
+ #include <net/if.h>
+ #include <linux/sockios.h>

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		l2tpns
 PKG_VERSION:=		2.1.21
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		385c58055723ebc6c38062acd2db9c2c
 PKG_DESCR:=		A layer 2 tunneling protocol network server (LNS)
 PKG_SECTION:=		net/security

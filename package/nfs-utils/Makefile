@@ -18,6 +18,8 @@ PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		http://openadk.org/distfiles/
 #PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
 PKGFS_WITH_KERBEROS:=	libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue kmod-rpcsec-gss-krb5 kmod-sunrpc-gss

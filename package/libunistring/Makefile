@@ -13,6 +13,8 @@ PKG_URL:=		http://www.gnu.org/software/libunistring/
 PKG_SITES:=		${MASTER_SITE_GNU:=libunistring/}
 PKG_OPTS:=		dev
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBUNISTRING,libunistring,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

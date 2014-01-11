@@ -151,7 +151,8 @@ endif
 	done
 	@for a in ${WRKINST}/usr/lib/pkgconfig/*.pc; do \
 		[[ -e $$a ]] || continue; \
-		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
+		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," \
+		    -e "s,^prefix = .*,prefix = ${STAGING_TARGET_DIR}/usr," $$a > \
 		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
 	done
 ifeq (,$(filter noremove,${PKG_OPTS}))
@@ -180,7 +181,7 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 	done
 endif
 	@-cd ${WRKINST}; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" -a "${PKG_NAME}" != "pam" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi;\

@@ -1,0 +1,11 @@
+--- vpnc-0.5.3.orig/sysdep.h	2008-11-19 21:36:12.000000000 +0100
++++ vpnc-0.5.3/sysdep.h	2013-12-23 14:13:51.000000000 +0100
+@@ -37,7 +37,7 @@ int tun_read(int fd, unsigned char *buf,
+ int tun_get_hwaddr(int fd, char *dev, uint8_t *hwaddr);
+ 
+ /***************************************************************************/
+-#if defined(__linux__) || defined(__GLIBC__)
++#if defined(__GLIBC__)
+ #include <error.h>
+ 
+ #define HAVE_VASPRINTF 1

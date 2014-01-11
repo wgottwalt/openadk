@@ -36,6 +36,7 @@ $(WRKBUILD)/.configured:
 		--disable-libtool-lock \
 		--disable-nls \
 		--disable-werror \
+		--disable-plugins \
 		${CONFOPTS} \
 	);
 	touch $@

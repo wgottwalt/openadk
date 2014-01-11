@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		daq
 PKG_VERSION:=		2.0.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		a00855a153647df76d47f1ea454f74ae
 PKG_DESCR:=		daq
 PKG_SECTION:=		libs
@@ -21,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DAQ,daq,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ARGS+=	--disable-ipfw-module
 
 daq-install:
 	$(INSTALL_DIR) $(IDIR_DAQ)/usr/lib/daq

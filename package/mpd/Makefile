@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		63bcf6ce338caa2ae2cd6dc8e9710d5c
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -126,6 +126,7 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-pulse \
 			--disable-oss \
 			--disable-bzip2 \
+			--disable-libwrap \
 			--disable-mpc \
 			--disable-wavpack \
 			--disable-modplug \

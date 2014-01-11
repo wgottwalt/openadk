@@ -1,0 +1,17 @@
+--- vpnc-0.5.3.orig/sysdep.c	2008-11-19 21:36:12.000000000 +0100
++++ vpnc-0.5.3/sysdep.c	2013-12-23 14:15:07.000000000 +0100
+@@ -58,14 +58,10 @@
+ 
+ #if defined(__DragonFly__)
+ #include <net/tun/if_tun.h>
+-#elif defined(__linux__)
+-#include <linux/if_tun.h>
+ #elif defined(__APPLE__)
+ /* no header for tun */
+ #elif defined(__CYGWIN__)
+ #include "tap-win32.h"
+-#else
+-#include <net/if_tun.h>
+ #endif
+ 
+ #include "sysdep.h"
