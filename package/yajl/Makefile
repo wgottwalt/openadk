@@ -14,6 +14,8 @@ PKG_URL:=		http://lloyd.github.com/yajl/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 
+PKG_NOPARALLEL:=	1
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,YAJL,yajl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -21,7 +23,7 @@ $(eval $(call PKG_template,YAJL,yajl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 
 do-configure:
-	(cd ${WRKBUILD} && PATH='${TARGET_PATH}' ./configure --prefix /usr)
+	(cd ${WRKBUILD} && PATH='${HOST_PATH}' ./configure --prefix /usr)
 
 yajl-install:
 	$(INSTALL_DIR) $(IDIR_YAJL)/usr/lib
