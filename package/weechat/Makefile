@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		weechat
 PKG_VERSION:=		0.4.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fd584c258aace2aa898f40e1fcf06084
 PKG_DESCR:=		lightweight IRC client
 PKG_SECTION:=		chat
@@ -20,6 +20,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,WEECHAT,weechat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-perl \
 			--disable-python \
