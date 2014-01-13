@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
@@ -97,6 +97,12 @@ ifeq (${ADK_PACKAGE_BOOST_WAVE},)
 	CONFIGURE_ARGS+=--without-wave
 endif
 
+ifeq ($(ARCH),x86_64)
+BOOST_ARCH:=	x86
+else
+BOOST_ARCH:=	$(ARCH)
+endif
+
 # some variables for build
 GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
@@ -128,7 +134,7 @@ endif
 			-sBUILD=release \
 			-d 2 \
 			target-os=linux \
-			architecture=$(CPU_ARCH) \
+			architecture=$(BOOST_ARCH) \
 			binary-format=elf \
 			toolset=gcc-${GPP_VERSION} \
 			--build-type=minimal \
