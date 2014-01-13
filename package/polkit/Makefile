@@ -15,8 +15,6 @@ PKG_URL:=		http://www.freedesktop.org/wiki/Software/polkit/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POLKIT,polkit,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

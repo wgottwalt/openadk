@@ -55,9 +55,9 @@ libbz2-install:
 	$(CP) ${WRKBUILD}/libbz2.so* \
 		${IDIR_LIBBZ2}/usr/lib
 	$(CP) ${WRKBUILD}/libbz2.so* \
-		${STAGING_DIR}/usr/lib
-	(cd ${STAGING_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
-	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_DIR)/usr/include
+		${STAGING_TARGET_DIR}/usr/lib
+	(cd ${STAGING_TARGET_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
+	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_TARGET_DIR)/usr/include
 	${INSTALL_DIR} $(IDIR_LIBBZ2_DEV)/usr/include
 	$(CP) $(WRKBUILD)/bzlib.h $(IDIR_LIBBZ2_DEV)/usr/include
 
