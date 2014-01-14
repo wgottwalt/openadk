@@ -4,23 +4,28 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nasm
-PKG_VERSION:=		2.07
+PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		84d8e009b3d2565a810ab3ddad1f4f63
+PKG_MD5SUM:=		a884450ee65201473af4d270bdc132f8
 PKG_DESCR:=		the netwide assembler
 PKG_SECTION:=		lang
+PKG_BUILDDEP:=		nasm-host
 PKG_URL:=		http://sourceforge.net/projects/nasm/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nasm/nasm%20sources/2.07/}
+PKG_SITES:=		http://www.nasm.us/pub/nasm/releasebuilds/${PKG_VERSION}/
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,NASM,nasm,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,NASM,nasm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 FAKE_FLAGS+=		INSTALLROOT=${WRKINST}
+HOST_STYLE:=		auto
 
 nasm-install:
 	$(INSTALL_DIR) $(IDIR_NASM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/nasm \
 		$(IDIR_NASM)/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

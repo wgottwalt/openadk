@@ -10,7 +10,7 @@ PKG_MD5SUM:=		2d3f7111b8284cec81884023c4bb4a11
 PKG_DESCR:=		X11 driver for Event driver
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server kmod-input-evdev libudev
-PKG_BUILDDEP:=		xorg-server systemd
+PKG_BUILDDEP:=		xorg-server eudev
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_LIBC_DEPENDS:=	eglibc glibc

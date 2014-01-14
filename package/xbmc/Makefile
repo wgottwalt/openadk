@@ -9,27 +9,30 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx bcm2835-vc
+PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx
 PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad dbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
-PKG_DEPENDS+=		omxplayer libbluray libgpg-error libudev
+PKG_DEPENDS+=		libbluray libgpg-error libudev
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
-PKG_BUILDDEP+=		bcm2835-vc libgpg-error libbluray dbus
-PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump systemd
+PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
+PKG_BUILDDEP+=		libgpg-error libbluray dbus
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc omxplayer
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc omxplayer
+PKG_BUILDDEP_IBM_X40:=	nasm-host
+PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-Frodo
@@ -41,12 +44,15 @@ $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_55 \
-			-DTIXML_USE_STL=1 \
-			-I$(STAGING_DIR)/opt/vc/include \
+			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1
+
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/opt/vc/include \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static \
-			-L$(STAGING_DIR)/usr/lib/samba
+TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static
+endif
+
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
@@ -58,20 +64,25 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-udev \
 			--enable-libbluray \
 			--enable-external-libraries \
-			--enable-player=omxplayer \
-			--enable-gles \
 			--enable-rtmp \
 			--disable-libusb \
 			--disable-libcap \
 			--disable-sdl \
 			--disable-joystick \
 			--disable-dvdcss \
-			--disable-x11 \
-			--disable-debug \
-			--with-platform=raspberry-pi
+			--disable-debug
+
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
+			--enable-player=omxplayer \
+			--enable-gles \
+			--disable-x11
+else
+CONFIGURE_ARGS+=	--enable-x11
+endif
 
 pre-configure:
-	(cd $(WRKBUILD)/lib/cpluff && ./autogen.sh)
+	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
 
 xbmc-install:
 	$(INSTALL_DIR) $(IDIR_XBMC)/usr/lib/xbmc

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.6.12
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		a70edc50524f258eaf5c9a9994ed8748
+PKG_VERSION:=		1.6.18
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		b02e9c95027a416987b81f9893831061
 PKG_DESCR:=		DBUS library and daemon
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libexpat libx11 libuuid
@@ -28,10 +28,12 @@ TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--enable-checks \
+			--disable-verbose-mode \
 			--with-xml=expat \
 			--with-session-socket-dir=/var/tmp \
 			--disable-dnotify \
 			--disable-kqueue \
+			--disable-systemd \
 			--disable-xml-docs \
 			--with-x \
 			--disable-doxygen-docs
@@ -44,7 +46,9 @@ pre-install:
 
 dbus-install:
 	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib \
-		${IDIR_DBUS}/usr/bin
+		${IDIR_DBUS}/usr/bin ${IDIR_DBUS}/usr/libexec
+	${INSTALL_BIN} ${WRKINST}/usr/libexec/dbus-daemon-launch-helper \
+		${IDIR_DBUS}/usr/libexec/
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc
 	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_DBUS}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin

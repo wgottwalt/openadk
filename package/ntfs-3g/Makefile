@@ -4,16 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ntfs-3g
-PKG_VERSION:=		2010.1.16
+PKG_VERSION:=		2013.1.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e104c914e8d7d29ee83e63d46afbba25
+PKG_MD5SUM:=		2d6fb47ddf62b51733227126fe9227fe
 PKG_DESCR:=		ntfs filesystem driver
-PKG_SECTION:=		kernel
+PKG_SECTION:=		fs
 PKG_DEPENDS:=		kmod-fuse-fs
 PKG_URL:=		http://tuxera.com
 PKG_SITES:=		http://tuxera.com/opensource/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
+DISTFILES:=		${PKG_NAME}_ntfsprogs-${PKG_VERSION}.tgz
+WRKDIST=		${WRKDIR}/${PKG_NAME}_ntfsprogs-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
 
