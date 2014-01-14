@@ -1,6 +1,6 @@
 --- bzip2-1.0.6.orig/Makefile-libbz2_so	2010-09-11 01:07:52.000000000 +0200
-+++ bzip2-1.0.6/Makefile-libbz2_so	2014-01-13 14:31:10.000000000 +0100
-@@ -21,10 +21,17 @@
++++ bzip2-1.0.6/Makefile-libbz2_so	2014-01-13 21:51:20.000000000 +0100
+@@ -21,10 +21,18 @@
  # ------------------------------------------------------------------
  
  
@@ -13,15 +13,16 @@
 +CFLAGS?=
 +CFLAGS+=-fpic -fPIC -Wall -Winline $(BIGFILES)
 +OS=$(shell uname)
++LDOPT=-soname
++ifneq ($(CROSS_COMPILE),1)
 +ifeq ($(OS),Darwin)
 +LDOPT=-install_name
-+else 
-+LDOPT=-soname
++endif
 +endif
  
  OBJS= blocksort.o  \
        huffman.o    \
-@@ -35,7 +42,7 @@ OBJS= blocksort.o  \
+@@ -35,7 +43,7 @@ OBJS= blocksort.o  \
        bzlib.o
  
  all: $(OBJS)

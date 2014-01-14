@@ -34,8 +34,8 @@ $(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_
 HOST_STYLE:=		manual
 MAKE_FILE:=		Makefile-libbz2_so
 CONFIG_STYLE:=		manual
-TARGET_CFLAGS+=		-fPIC
-XAKE_FLAGS+=		PREFIX=${WRKINST}/usr
+TARGET_CFLAGS+=		-fPIC 
+XAKE_FLAGS+=		PREFIX=${WRKINST}/usr CROSS_COMPILE=1
 INSTALL_STYLE:=		manual
 
 host-build:
