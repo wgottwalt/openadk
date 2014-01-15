@@ -5,18 +5,18 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		12.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx
-PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad dbus
+PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad libdbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
-PKG_DEPENDS+=		libbluray libgpg-error libudev
+PKG_DEPENDS+=		libbluray libgpg-error libudev python2-mod-sqlite
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug

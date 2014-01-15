@@ -11,7 +11,7 @@ PKG_MD5SUM:=		1882cac6032baa59291068af30df1702
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libffmpeg boost bcm2835-vc libfreetype libpcre
-PKG_DEPENDS+=		librt zlib libpthread libstdcxx libgcc dbus xset fbset
+PKG_DEPENDS+=		librt zlib libpthread libstdcxx libgcc libdbus
 PKG_BUILDDEP:=		ffmpeg boost bcm2835-vc freetype pcre dbus
 PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		http://openadk.org/distfiles/
@@ -35,8 +35,8 @@ TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib
 
 omxplayer-install:
 	$(INSTALL_DIR) $(IDIR_OMXPLAYER)/usr/bin
-	$(INSTALL_BIN) $(WRKSRC)/omxplayer{,.bin} \
-		$(IDIR_OMXPLAYER)/usr/bin
+	$(INSTALL_BIN) $(WRKSRC)/omxplayer.bin \
+		$(IDIR_OMXPLAYER)/usr/bin/omxplayer
 	$(INSTALL_DIR) $(IDIR_OMXPLAYER)/usr/share/fonts/truetype/freefont/
 	$(INSTALL_DATA) $(WRKSRC)/fonts/* \
 		$(IDIR_OMXPLAYER)/usr/share/fonts/truetype/freefont/
