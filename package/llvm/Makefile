@@ -4,20 +4,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		llvm
-PKG_VERSION:=		3.3
+PKG_VERSION:=		3.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		40564e1dc390f9844f1711c08b08e391
+PKG_MD5SUM:=		46ed668a1ce38985120dbf6344cf6116
 PKG_DESCR:=		collection of modular and reusable compiler and toolchain technologies
 PKG_SECTION:=		lang
 PKG_URL:=		http://llvm.org/
-PKG_SITES:=		http://llvm.org/releases/3.3/
+PKG_SITES:=		http://llvm.org/releases/3.4/
 
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
 PKG_HOST_DEPENDS:=	!darwin
 PKG_ARCH_DEPENDS:=	mips x86 x86_64 arm
 
+PKG_CFLINE_LLVM:=	depends on ADK_BROKEN
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.src.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}.src
 
 include $(TOPDIR)/mk/package.mk
 
