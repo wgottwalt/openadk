@@ -138,6 +138,10 @@ int main() {
 	char *string, *pkgvar, *pkgdeps, *tmp, *fpkg, *cpkg, *spkg, *key, *check, *dpkg;
 	char *stringtmp;
 	int i;
+
+	spkg = NULL;
+	cpkg = NULL;
+	fpkg = NULL;
 	
 	/* read Makefile's for all packages */
 	pkgdir = opendir("package");
