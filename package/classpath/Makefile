@@ -15,7 +15,7 @@ PKG_URL:=		http://www.gnu.org/software/classpath/home.html
 PKG_SITES:=		${MASTER_SITE_GNU:=classpath/}
 
 PKG_HOST_DEPENDS:=	linux
-PKG_ARCH_DEPENDS:=	!cris !arm
+PKG_ARCH_DEPENDS:=	!arm
 
 include $(TOPDIR)/mk/package.mk
 

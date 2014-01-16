@@ -5,11 +5,9 @@ CPU_ARCH:=		$(shell gcc -dumpmachine | sed -e s'/-.*//' \
 	   		 -e 's/arm.*/arm/g' \
 	 		 -e 's/m68k.*/m68k/' \
 			 -e 's/ppc/powerpc/g' \
-			 -e 's/v850.*/v850/g' \
 			 -e 's/sh[234]/sh/' \
 	   		 -e 's/mips-.*/mips/' \
 	  		 -e 's/mipsel-.*/mipsel/' \
-			 -e 's/cris.*/cris/' \
 			 -e 's/i[3-9]86/i686/' \
 	    		)
 TARGET_OPTIMIZATION:=	-Os -pipe

@@ -13,8 +13,6 @@ PKG_BUILDDEP:=		libXv
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_ARCH_DEPENDS:=	!cris
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XVINFO,xvinfo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

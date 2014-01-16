@@ -30,9 +30,6 @@ $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 ifeq (,$(filter arm,$(TARGET_ARCH)))
 TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
 endif
-ifeq (,$(filter cris,$(TARGET_ARCH)))
-TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
-endif
 CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-fc=yes \
 			--enable-tee=yes \

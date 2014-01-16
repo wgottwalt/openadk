@@ -13,8 +13,6 @@ PKG_URL:=		http://www.mozilla.org/projects/nspr/
 PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!cris
-
 WRKSRC=			${WRKDIST}/nspr
 
 include $(TOPDIR)/mk/package.mk

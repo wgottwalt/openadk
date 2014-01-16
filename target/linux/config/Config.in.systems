@@ -75,7 +75,3 @@ config ADK_KERNEL_CPU_BIG_ENDIAN
 
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	boolean
-
-# cris systems
-config ADK_KERNEL_ETRAXFS
-	boolean

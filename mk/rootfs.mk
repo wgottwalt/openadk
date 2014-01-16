@@ -32,10 +32,6 @@ ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 ROOTFS:=	root=/dev/sda1 rootwait
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),y)
-ROOTFS:=	root=/dev/mtdblock1
-endif
-
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 USB:=		rootwait
 else

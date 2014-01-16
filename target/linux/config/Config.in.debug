@@ -90,7 +90,6 @@ config ADK_KPACKAGE_KMOD_OPROFILE
 	prompt "kernel support for oprofile"
 	tristate
 	select ADK_KERNEL_PROFILING
-	depends on !ADK_LINUX_CRIS
 	depends on !ADK_LINUX_M68K
 	default n
 	help

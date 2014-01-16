@@ -20,12 +20,6 @@ config ADK_LINUX_ARM
 	help
 	  Support for ARM systems.
 
-config ADK_LINUX_CRIS
-	bool "cris system"
-	select ADK_cris
-	help
-	  Support for CRIS systems.
-
 config ADK_LINUX_M68K
 	bool "m68k system"
 	select ADK_m68k

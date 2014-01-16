@@ -4,5 +4,5 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_M68K
 	select ADK_toolchain_m68k
 	select ADK_TOOLCHAIN
 	help
-	  Build a cris toolchain (m68k).
+	  Build a m68k toolchain.
 
