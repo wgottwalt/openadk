@@ -11,8 +11,6 @@ PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr libgcc
 PKG_BUILDDEP:=		libmpc gmp mpfr
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 PKG_SUBPKGS:=		GCC GXX
 PKGSD_GXX:=		GNU C++ compiler
 

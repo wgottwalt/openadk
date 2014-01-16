@@ -16,8 +16,6 @@ PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 PKG_LIBNAME:=		orbit2
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!cris
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

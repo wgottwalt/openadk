@@ -211,11 +211,9 @@ NO_ERROR=0
 	    -e 's/armeb.*/armeb/g' \
 	    -e 's/arm.*/arm/g' \
 	    -e 's/m68k.*/m68k/' \
-	    -e 's/v850.*/v850/g' \
 	    -e 's/sh[234]/sh/' \
 	    -e 's/mips-.*/mips/' \
 	    -e 's/mipsel-.*/mipsel/' \
-	    -e 's/cris.*/cris/' \
 	    -e 's/i[3-9]86/x86/' \
 	    )" >>prereq.mk
 	@echo 'CC_FOR_BUILD:=${CC}' >>prereq.mk

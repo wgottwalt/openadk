@@ -16,7 +16,7 @@ PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!avr32 !m68k
+PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 

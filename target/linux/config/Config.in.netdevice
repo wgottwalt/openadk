@@ -443,7 +443,6 @@ config ADK_KPACKAGE_KMOD_HOSTAP
 	tristate
 	select ADK_KPACKAGE_KMOD_MAC80211
 	default n
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	depends on ADK_TARGET_WITH_PCMCIA
 	help
 	  HostAP Driver for wireless chips.
@@ -462,7 +461,6 @@ config ADK_KPACKAGE_KMOD_RTL8187
 	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
 	tristate
 	depends on ADK_TARGET_WITH_USB
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	select ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	default n

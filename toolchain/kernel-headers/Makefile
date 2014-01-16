@@ -10,13 +10,6 @@ $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(STAGING_DIR)/usr \
 		headers_install
-ifeq ($(ARCH),cris)
-ifeq ($(CPU_ARCH),crisv32)
-	cd $(STAGING_DIR)/usr/include && ln -sf arch-v32/arch arch
-else
-	cd $(STAGING_DIR)/usr/include && ln -sf arch-v10/arch arch
-endif
-endif
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

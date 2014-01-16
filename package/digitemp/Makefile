@@ -15,7 +15,6 @@ PKG_URL:=		http://www.digitemp.com/software/linux/
 PKG_SITES:=		http://www.digitemp.com/software/linux/
 
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
-PKG_ARCH_DEPENDS:=	!avr32
 
 include ${TOPDIR}/mk/package.mk
 

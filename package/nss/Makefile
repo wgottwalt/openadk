@@ -20,7 +20,6 @@ PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${P
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_ARCH_DEPENDS:=	!cris
 
 WRKSRC=			${WRKDIST}/nss
 

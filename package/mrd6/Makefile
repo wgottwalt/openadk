@@ -14,8 +14,6 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 PKG_CXX:=		MRD6
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk

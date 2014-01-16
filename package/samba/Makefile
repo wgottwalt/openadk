@@ -14,8 +14,6 @@ PKG_DEPENDS:=		samba-lib libuuid libpopt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 PKG_SUBPKGS:=		SAMBA SAMBA_CLIENT SAMBA_PASSWD SAMBA_LIB
 PKGSD_SAMBA_CLIENT:=	NetBIOS/SMB client
 PKGSS_SAMBA_CLIENT:=	libreadline samba-lib

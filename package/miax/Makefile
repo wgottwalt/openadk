@@ -14,8 +14,6 @@ PKG_URL:=		http://sourceforge.net/projects/miax
 PKG_SITES:=		http://mesh.dl.sourceforge.net/sourceforge/miax/
 PKG_CFLINE_MIAX:=	depends on ADK_BROKEN
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 

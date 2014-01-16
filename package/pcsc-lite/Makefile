@@ -15,8 +15,6 @@ PKG_URL:=		http://pcsclite.alioth.debian.org/
 PKG_SITES:=		http://alioth.debian.org/frs/download.php/file/3598/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

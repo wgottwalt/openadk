@@ -1,2 +1,1 @@
 - uclibc N64 ABI on mips64{,el} targets does not work, nptl fork problem
-- cris foxboard-lx is broken, binutils failure
