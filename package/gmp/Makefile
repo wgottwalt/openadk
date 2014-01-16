@@ -8,7 +8,7 @@ PKG_NAME:=		gmp
 PKG_DESCR:=		GNU multiprecision arithmetic library
 PKG_SECTION:=		libs
 PKG_URL:=		http://gmplib.org/
-PKG_BUILDDEP:=		flex-host bison-host m4-host
+PKG_BUILDDEP:=		m4-host flex-host bison-host
 PKG_LIBNAME:=		libgmp
 PKG_OPTS:=		dev
 

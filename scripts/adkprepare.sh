@@ -34,6 +34,7 @@ openbsd() {
 	pkg_add -v intltool
 	pkg_add -v screen--
 	pkg_add -v vim--no_x11
+	pkg_add -v py-libxml
 }
 
 netbsd() {
