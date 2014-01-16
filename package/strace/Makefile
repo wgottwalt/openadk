@@ -25,6 +25,9 @@ TARGET_CFLAGS+=		-static
 endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
+ifeq ($(ADK_LINUX_PPC),y)
+TARGET_CPPFLAGS+=	-Dsigcontext_struct=sigcontext -include ppc-regs.h
+endif
 endif
 
 INSTALL_STYLE:=		manual
