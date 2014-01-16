@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libffi zlib
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
-PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
+PKG_ARCH_DEPENDS:=	!cris !m68k
 
 include ${TOPDIR}/mk/package.mk
 

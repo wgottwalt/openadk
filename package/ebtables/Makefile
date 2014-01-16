@@ -12,8 +12,6 @@ PKG_SECTION:=		firewall
 PKG_URL:=		http://ebtables.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ebtables/}
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=		${PKG_NAME}-v${PKG_VERSION}-4.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-v${PKG_VERSION}-4
 

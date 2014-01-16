@@ -199,7 +199,7 @@ config ADK_KERNEL_XFS_FS
 	prompt "xfs............................... XFS filesystem support (kernel)"
 	boolean
 	select ADK_KERNEL_EXPORTFS
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX && !ADK_LINUX_AVR32
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default n
 
 config ADK_KPACKAGE_KMOD_XFS_FS
@@ -209,7 +209,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	select ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
 	select ADK_KERNEL_BLOCK
 	depends on !ADK_KERNEL_XFS_FS
-	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX && !ADK_LINUX_AVR32
+	depends on !ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated

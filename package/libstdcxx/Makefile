@@ -16,14 +16,10 @@ endif
 endif
 endif
 
-ifeq ($(ADK_LINUX_AVR32),y)
-LIBSTDCXX_VER:=		13
-else
 ifeq ($(ADK_LINUX_MICROBLAZE),y)
 LIBSTDCXX_VER:=		18
 else
 LIBSTDCXX_VER:=		17
-endif
 endif
 
 PKG_NAME:=		libstdcxx

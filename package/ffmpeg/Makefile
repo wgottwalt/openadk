@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.ffmpeg.org/releases/
 PKH_LIBNAME:=		libffmpeg
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32 !cris !m68k
+PKG_ARCH_DEPENDS:=	!cris !m68k
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
 #PKGSD_FFPLAY:=		ffmpeg based video player

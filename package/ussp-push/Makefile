@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		openobex
 PKG_SITES:=		http://xmailserver.org/
 PKG_CFLINE_USSP_PUSH:=	depends on ADK_BROKEN
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,USSP_PUSH,ussp-push,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -17,7 +17,6 @@ PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.0/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
-PKG_ARCH_DEPENDS:=	!avr32
 
 DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}

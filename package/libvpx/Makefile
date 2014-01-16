@@ -14,7 +14,7 @@ PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://webm.googlecode.com/files/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32 !m68k
+PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
 WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}

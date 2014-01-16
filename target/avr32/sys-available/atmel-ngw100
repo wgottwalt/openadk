@@ -1,9 +1,0 @@
-config ADK_TARGET_SYSTEM_ATMEL_NGW100
-	bool "Atmel NGW100"
-	select ADK_avr32
-	select ADK_atmel_ngw100
-	select ADK_DISABLE_HONOUR_CFLAGS
-	select ADK_TOOLCHAIN_GCC_SJLJ
-	help
-	  Support for ATMEL NGW100.
-

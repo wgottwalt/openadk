@@ -67,7 +67,7 @@ PKGFD_MOD_ZLIB:=	ZLIB support
 PKGFB_MOD_ZLIB:=	zlib
 PKGFS_MOD_ZLIB:=	zlib
 
-PKG_ARCH_DEPENDS:=	!cris !avr32
+PKG_ARCH_DEPENDS:=	!cris
 PKG_HOST_DEPENDS:=	!cygwin
 
 include $(TOPDIR)/mk/package.mk

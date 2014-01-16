@@ -16,7 +16,7 @@ PKG_NEED_CXX:=		1
 PKG_CXX:=		CXXTOOLS
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!arm !avr32 !m68k
+PKG_ARCH_DEPENDS:=	!arm !m68k
 
 include ${TOPDIR}/mk/package.mk
 
