@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		knock
-PKG_VERSION:=		0.5
+PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ca09d61458974cff90a700aba6120891
+PKG_MD5SUM:=		e6e486be75b0d6433bac22a7de0e11f5
 PKG_DESCR:=		A port-knocking client
 PKG_SECTION:=		firewall
 PKG_BUILDDEP:=		libpcap
@@ -22,6 +22,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,KNOCK,knock,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_KNOCKD},${PKGSD_KNOCKD},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 CONFIGURE_ENV+=		ac_cv_lib_pcap_pcap_open_live=yes
 
 knock-install:
