@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.1
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		f83ef48ab1154aa74dd4cf1c1202bf04
 PKG_DESCR:=		CIFS utilities
 PKG_SECTION:=		net/fs
@@ -29,6 +29,7 @@ CONFIGURE_ARGS+=	--disable-cifsupcall \
 			--disable-cifsidmap \
 			--disable-cifsacl \
 			--disable-pie \
+			--without-libcap \
 			--disable-systemd
 
 cifs-utils-install:

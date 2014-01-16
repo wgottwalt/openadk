@@ -11,8 +11,6 @@ PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat
 PKG_BUILDDEP:=		libusb libusb-compat
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/package.mk

@@ -14,7 +14,9 @@ PKG_URL:=		http://libcec.pulse-eight.com/
 PKG_SITES:=		http://www.openadk.org/distfiles
 PKG_OPTS:=		dev
 
-PKG_SYSTEM_DEPENDS:=    raspberry-pi
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
+PKG_SYSTEM_DEPENDS:=    raspberry-pi ibm-x40
 PKG_LIBC_DEPENDS:=      eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
@@ -22,9 +24,11 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBCEC,libcec,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--enable-rpi \
 			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
 			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib
+endif
 
 libcec-install:
 	$(INSTALL_DIR) $(IDIR_LIBCEC)/usr/lib

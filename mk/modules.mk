@@ -1287,11 +1287,9 @@ USBMODULES:=
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
 
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),)
 $(eval $(call KMOD_template,USB,usb,\
 	$(foreach mod, $(USBMODULES),$(MODULES_DIR)/kernel/$(mod)) \
 ,50))
-endif
 
 $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \

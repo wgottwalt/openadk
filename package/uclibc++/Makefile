@@ -31,9 +31,6 @@ MAKE_FLAGS+=		TOPDIR="${WRKBUILD}/" \
 			${TARGET_CONFIGURE_OPTS} \
 			ARCH_CFLAGS="${TARGET_CFLAGS}" \
 			CROSS="${TARGET_CROSS}"
-ifeq ($(ADK_LINUX_AVR32),y)
-MAKE_FLAGS+=		check_as_needed=
-endif
 TARGET_CONFIGURE_OPTS=
 
 do-configure:

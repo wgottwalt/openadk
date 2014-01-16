@@ -16,8 +16,6 @@ PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 PKG_LIBNAME:=		libopensc
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 PKG_SUBPKGS:=		OPENSC LIBOPENSC
 PKGSD_LIBOPENSC:=	opensc library
 PKGSC_LIBOPENSC:=	libs

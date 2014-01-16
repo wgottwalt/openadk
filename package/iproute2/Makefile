@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
 PKG_VERSION:=		3.12.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f87386aaaecafab95607fd10e8152c68
 PKG_DESCR:=		iproute2 routing control utility
 PKG_SECTION:=		route
@@ -46,8 +46,7 @@ $(eval $(call PKG_template,SS,ss,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_SS},${PK
 
 CONFIG_STYLE:=		minimal
 TARGET_CFLAGS+=		-D_GNU_SOURCE
-XAKE_FLAGS+=		CCOPTS="${TARGET_CFLAGS}" MFLAGS="CC=\"${TARGET_CC}\"" \
-			CFLAGS_FOR_BUILD+="-I${LINUX_DIR}/include"
+XAKE_FLAGS+=		CCOPTS="${TARGET_CFLAGS}" MFLAGS="CC=\"${TARGET_CC}\""
 CONFIGURE_ENV+=		CC="${TARGET_CC}" IPTC="${TARGET_CFLAGS}" IPTL="${TARGET_LDFLAGS}"
 
 ip-install:

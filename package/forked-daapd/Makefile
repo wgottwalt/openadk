@@ -18,7 +18,7 @@ PKG_SITES:=		http://alioth.debian.org/~jblache/forked-daapd/
 
 PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER@
 PKG_CFLINE_FORKED_DAAPD+=	depends on ADK_BROKEN@
-PKG_ARCH_DEPENDS:=	!ppc !avr32
+PKG_ARCH_DEPENDS:=	!ppc
 # gperf problem
 PKG_HOST_DEPENDS:=	!freebsd
 

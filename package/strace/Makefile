@@ -12,8 +12,6 @@ PKG_SECTION:=		debug
 PKG_DEPENDS:=		libgcc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk

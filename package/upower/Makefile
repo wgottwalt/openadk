@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		upower
 PKG_VERSION:=		0.99.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		14f43bc13353e23e7280863f33ac50d2
 PKG_DESCR:=		powermanagement
 PKG_SECTION:=		misc
-PKG_BUILDDEP:=		glib dbus-glib polkit systemd
+PKG_BUILDDEP:=		glib dbus-glib polkit eudev
 PKG_DEPENDS:=		glib dbus-glib polkit libgudev
 PKG_URL:=		http://upower.freedesktop.org/
 PKG_SITES:=		http://upower.freedesktop.org/releases/
@@ -19,6 +19,9 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UPOWER,upower,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--without-systemdutildir \
+			--disable-rpath
 
 upower-install:
 	$(INSTALL_DIR) $(IDIR_UPOWER)/etc
@@ -33,5 +36,8 @@ upower-install:
 	$(INSTALL_DIR) $(IDIR_UPOWER)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/upower \
 		$(IDIR_UPOWER)/usr/bin
+	$(INSTALL_DIR) $(IDIR_UPOWER)/usr/share/dbus-1
+	$(CP) $(WRKINST)/usr/share/dbus-1/* \
+		$(IDIR_UPOWER)/usr/share/dbus-1
 
 include ${TOPDIR}/mk/pkg-bottom.mk

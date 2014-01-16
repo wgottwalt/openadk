@@ -5,9 +5,9 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-firmware
 # actually f46e6d9cb9a6bf419fe2a428a8a586239e93aa2d from 07.01.2014
-PKG_VERSION:=		0.5
+PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0de84bd4fe70b7767026aef5313dd868
+PKG_MD5SUM:=		e4c1b8f3dd13ae8742a7831c19d212b0
 PKG_DESCR:=		firmware for raspberry pi (bcm2835)
 PKG_SECTION:=		base
 PKG_SITES:=		http://openadk.org/distfiles/

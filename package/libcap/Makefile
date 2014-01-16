@@ -20,6 +20,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBCAP,libcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CPPFLAGS_FOR_BUILD+=	-I$(STAGING_TARGET_DIR)/usr/include
 CONFIG_STYLE:=		manual
 
 libcap-install:

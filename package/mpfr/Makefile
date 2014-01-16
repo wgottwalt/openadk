@@ -7,6 +7,7 @@ include ${TOPDIR}/toolchain/mpfr/Makefile.inc
 PKG_NAME:=		mpfr
 PKG_DESCR:=		multi precision library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.mpfr.org/
 PKG_OPTS:=		dev
 

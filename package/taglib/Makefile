@@ -22,7 +22,10 @@ $(eval $(call PKG_template,TAGLIB,taglib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		manual
 
 do-configure:
-	(cd ${WRKBUILD} && PATH='${TARGET_PATH}' cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .)
+	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
+		cmake -DZLIB_ROOT=$(STAGING_TARGET_DIR)/usr \
+			-DCMAKE_INSTALL_PREFIX:PATH=/usr \
+			-DCMAKE_SYSTEM_NAME=Linux .)
 
 pre-install:
 	$(INSTALL_DATA) ./files/taglib.pc $(WRKBUILD)/

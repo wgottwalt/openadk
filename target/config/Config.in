@@ -193,18 +193,6 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 
 endchoice
 
-choice
-prompt "Foxboard LX Model"
-depends on ADK_TARGET_SYSTEM_FOXBOARD_LX
-
-config ADK_TARGET_FOXBOARD_MODEL_LX416
-	boolean "Foxboard LX 4x16"
-
-config ADK_TARGET_FOXBOARD_MODEL_LX832
-	boolean "Foxboard LX 8x32"
-
-endchoice
-
 choice 
 prompt "Broadcom BCM47xx Model"
 depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
@@ -378,12 +366,6 @@ config ADK_TARGET_CPU_WITH_3DNOWEXT
 	boolean
 
 # cpu configuration
-config ADK_CPU_CRIS_V10
-	boolean
-
-config ADK_CPU_CRIS_V32
-	boolean
-
 config ADK_CPU_SH4
 	boolean
 
@@ -467,13 +449,10 @@ config ADK_TARGET_CPU_ARCH
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
 	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "armeb" if ADK_LINUX_ARM && ADK_big
-	default "avr32" if ADK_LINUX_AVR32
 	default "sparc" if ADK_LINUX_SPARC
 	default "sparc64" if ADK_LINUX_SPARC64
 	default "sh4" if ADK_LINUX_SH && ADK_little
 	default "sh4eb" if ADK_LINUX_SH && ADK_big
-	default "cris" if ADK_CPU_CRIS_V10
-	default "crisv32" if ADK_CPU_CRIS_V32
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
 	default "mips64el" if ADK_native && ADK_lemote_yeelong	
@@ -512,14 +491,12 @@ config ADK_TARGET_CFLAGS
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
-	default "-march=v32" if ADK_CPU_CRIS_V32
-	default "-march=v10" if ADK_CPU_CRIS_V10
 	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
 	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_RASPBERRY_PI
 
 config ADK_TARGET_CMDLINE
 	string
-	default "dwc_otg.fiq_split_enable=0" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "dwc_otg.fiq_split_enable=1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
@@ -539,7 +516,6 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
-	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_FOXBOARD_LX
 	default ""
 
 # c library

@@ -9,7 +9,7 @@ PKG_DESCR:=		GNU debugger (small server)
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
 
-PKG_ARCH_DEPENDS:=	!avr32 !m68k
+PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 PKG_SUBPKGS:=		GDBSERVER
 

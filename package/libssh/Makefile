@@ -23,7 +23,7 @@ WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 CONFIG_STYLE:=          manual
 
 do-configure:
-	(cd $(WRKBUILD) && PATH='${TARGET_PATH}' \
+	(cd $(WRKBUILD) && PATH='${HOST_PATH}' \
 		cmake -DCMAKE_SYSTEM_NAME=Linux \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DOPENSSL_ROOT_DIR='$(STAGING_TARGET_DIR)/usr' \

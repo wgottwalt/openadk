@@ -30,10 +30,6 @@ UCLIBCCFG=uclibc.config.big
 endif
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_CRIS),y)
-UCLIBCCFG=uclibc.config.v32
-endif
-
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 UCLIBCCFG=uclibc.config.little.mips64
 endif

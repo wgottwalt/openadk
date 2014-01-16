@@ -5,14 +5,14 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		polkit
 PKG_VERSION:=		0.112
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		758d825e25283b201026f1bb3a476144
+PKG_RELEASE:=		3
+PKG_MD5SUM:=		23973dcfd8b92ab2b7db3a925642b76d
 PKG_DESCR:=		application-level toolkit
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool mozjs
 PKG_DEPENDS:=		mozjs
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/polkit/
-PKG_SITES:=		http://cgit.freedesktop.org/polkit/snapshot/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk
@@ -22,6 +22,9 @@ $(eval $(call PKG_template,POLKIT,polkit,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--disable-man-pages \
 			--disable-examples \
+			--enable-libsystemd-login=no \
+			--without-systemdsystemunitdir \
+			--with-polkitd-user=root \
 			--with-authfw=shadow \
 			--with-os-type=unknown
 
@@ -34,5 +37,8 @@ polkit-install:
 	$(CP) $(WRKINST)/usr/lib/polkit-1/* \
 		$(IDIR_POLKIT)/usr/lib/polkit-1
 	$(CP) $(WRKINST)/usr/bin/* $(IDIR_POLKIT)/usr/bin
+	$(INSTALL_DIR) $(IDIR_POLKIT)/usr/share/dbus-1
+	$(CP) $(WRKINST)/usr/share/dbus-1/* \
+		$(IDIR_POLKIT)/usr/share/dbus-1
 
 include ${TOPDIR}/mk/pkg-bottom.mk

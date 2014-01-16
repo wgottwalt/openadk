@@ -1,7 +1,7 @@
 /*
  * depmaker - create package/Depends.mk for OpenADK buildsystem
  *
- * Copyright (C) 2010,2011 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2014 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ static int check_symbol(char *symbol) {
 }
 
 /*@null@*/
-static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix) {
+static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix, int system) {
 
 	char *key, *value, *dep, *key_sym, *pkgdeps;
 	char temp[MAXLINE];
@@ -83,15 +83,20 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 			perror("Can not allocate memory.");
 			exit(EXIT_FAILURE);
 		}
-		if (pprefix == 0) {
-			if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
-				perror("Can not create string variable.");
+		if (system == 0) {
+			if (pprefix == 0) {
+				if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
+					perror("Can not create string variable.");
+			} else {
+				if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_") < 0)
+					perror("Can not create string variable.");
+			}
+			strncat(key_sym, key+6, strlen(key)-6);
 		} else {
-			if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_") < 0)
-				perror("Can not create string variable.");
+			if (snprintf(key_sym, MAXLINE, "ADK_TARGET_SYSTEM_%s", pkgvar) < 0)
+					perror("Can not create string variable.");
 		}
 			
-		strncat(key_sym, key+6, strlen(key)-6);
 		if (check_symbol(key_sym) != 0) {
 			free(key_sym);
 			return(NULL);
@@ -130,8 +135,13 @@ int main() {
 	FILE *pkg;
 	char buf[MAXLINE];
 	char path[MAXPATH];
-	char *string, *pkgvar, *pkgdeps, *tmp, *fpkg, *cpkg, *spkg, *key, *check;
+	char *string, *pkgvar, *pkgdeps, *tmp, *fpkg, *cpkg, *spkg, *key, *check, *dpkg;
+	char *stringtmp;
 	int i;
+
+	spkg = NULL;
+	cpkg = NULL;
+	fpkg = NULL;
 	
 	/* read Makefile's for all packages */
 	pkgdir = opendir("package");
@@ -160,6 +170,7 @@ int main() {
 				!(strncmp(pkgdirp->d_name, "libpthread", 10) == 0 && strlen(pkgdirp->d_name) == 10) &&
 				!(strncmp(pkgdirp->d_name, "uclibc++", 8) == 0) &&
 				!(strncmp(pkgdirp->d_name, "uclibc", 6) == 0) &&
+				!(strncmp(pkgdirp->d_name, "musl", 4) == 0) &&
 				!(strncmp(pkgdirp->d_name, "glibc", 5) == 0)) {
 				/* print result to stdout */
 				printf("package-$(ADK_COMPILE_%s) += %s\n", pkgvar, pkgdirp->d_name); 
@@ -187,7 +198,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP:=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}
@@ -195,12 +206,27 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP+=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
-					// WE need to find the subpackage name here
+					// We need to find the system name here
+					string = strstr(buf, "PKG_BUILDDEP_");
+					if (string != NULL) {
+						check = strstr(buf, ":=");
+						if (check != NULL) {
+							stringtmp = strdup(string);
+							string[strlen(string)-1] = '\0';
+							key = strtok(string, ":=");
+							dpkg = strdup(key+13);
+							tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1);
+							if (tmp != NULL)
+								strncat(pkgdeps, tmp, strlen(tmp));
+						}
+					}
+
+					// We need to find the subpackage name here
 					string = strstr(buf, "PKG_FLAVOURS_");
 					if (string != NULL) {
 						check = strstr(buf, ":=");
@@ -213,12 +239,12 @@ int main() {
 
 					string = strstr(buf, "PKGFB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, fpkg, string, 1, 0);
+						tmp = parse_line(pkgdirp->d_name, fpkg, string, 1, 0, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
-					// WE need to find the subpackage name here
+					// We need to find the subpackage name here
 					string = strstr(buf, "PKG_CHOICES_");
 					if (string != NULL) {
 						check = strstr(buf, ":=");
@@ -230,12 +256,12 @@ int main() {
 					}
 					string = strstr(buf, "PKGCB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, cpkg, string, 1, 0);
+						tmp = parse_line(pkgdirp->d_name, cpkg, string, 1, 0, 0);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
-					// WE need to find the subpackage name here
+					// We need to find the subpackage name here
 					string = strstr(buf, "PKG_SUBPKGS_");
 					if (string != NULL) {
 						check = strstr(buf, ":=");
@@ -248,7 +274,7 @@ int main() {
 
 					string = strstr(buf, "PKGSB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, spkg, string, 1, 1);
+						tmp = parse_line(pkgdirp->d_name, spkg, string, 1, 1, 0);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}

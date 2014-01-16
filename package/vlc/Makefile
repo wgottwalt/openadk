@@ -14,7 +14,7 @@ PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
-PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
+PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz

@@ -4,36 +4,45 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.6.12
+PKG_VERSION:=		1.6.18
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a70edc50524f258eaf5c9a9994ed8748
-PKG_DESCR:=		DBUS library and daemon
-PKG_SECTION:=		libs
-PKG_DEPENDS:=		libexpat libx11 libuuid
-PKG_BUILDDEP:=		expat libX11 util-linux
+PKG_MD5SUM:=		b02e9c95027a416987b81f9893831061
+PKG_DESCR:=		DBUS daemon
+PKG_SECTION:=		misc
+PKG_DEPENDS:=		libdbus
+PKG_BUILDDEP:=		expat util-linux
 PKG_URL:=		http://dbus.freedesktop.org/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
+PKG_LIBNAME:=		libdbus
 PKG_OPTS:=		dev
 
+PKG_SUBPKGS:=		DBUS LIBDBUS
+PKGSD_LIBDBUS:=		DBUS library
+PKGSC_LIBDBUS:=		libs
+PKGSS_LIBDBUS:=		libexpat libuuid
+
 ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
+PKG_OPTS+=		libmix
 endif
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBDBUS,libdbus,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBDBUS},${PKGSD_LIBDBUS},${PKGSC_LIBDBUS},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-luuid
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--enable-checks \
+			--disable-verbose-mode \
 			--with-xml=expat \
 			--with-session-socket-dir=/var/tmp \
 			--disable-dnotify \
 			--disable-kqueue \
+			--disable-systemd \
 			--disable-xml-docs \
-			--with-x \
+			--without-x \
 			--disable-doxygen-docs
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 
@@ -42,11 +51,16 @@ pre-install:
 	$(CP) $(WRKBUILD)/dbus/dbus-arch-deps.h \
 		$(STAGING_DIR)/usr/include/dbus-1.0/dbus
 
+libdbus-install:
+	${INSTALL_DIR} ${IDIR_LIBDBUS}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_LIBDBUS}/usr/lib
+
 dbus-install:
-	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/lib \
-		${IDIR_DBUS}/usr/bin
+	${INSTALL_DIR} ${IDIR_DBUS}/etc \
+		${IDIR_DBUS}/usr/bin ${IDIR_DBUS}/usr/libexec
+	${INSTALL_BIN} ${WRKINST}/usr/libexec/dbus-daemon-launch-helper \
+		${IDIR_DBUS}/usr/libexec/
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc
-	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_DBUS}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-uuidgen ${IDIR_DBUS}/usr/bin
@@ -56,6 +70,5 @@ dbus-install:
 	${INSTALL_DIR} $(IDIR_DBUS_DEV)/usr/include/dbus-1.0/dbus
 	$(CP) $(WRKBUILD)/dbus/dbus-arch-deps.h \
 		$(IDIR_DBUS_DEV)/usr/include/dbus-1.0/dbus
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

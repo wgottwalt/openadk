@@ -11,6 +11,7 @@ config ADK_TARGET_SYSTEM_LINKSYS_AG241
 	select ADK_KPACKAGE_KMOD_ATM_BR2684
 	select ADK_PACKAGE_KMOD_SANGAM_ATM
 	select ADK_PACKAGE_BR2684CTL
+	depends on ADK_BROKEN
 	help
 	  Linksys AG241 DSL router.
 	  (Texas Instruments AR7 platform)

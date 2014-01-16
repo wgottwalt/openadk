@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bcm2835-vc
 # actually f65a4eef05ee436976f9be219d3db841d3d6b8ec from 05.10.2013
 PKG_VERSION:=		0.3
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		027d42d1ba803fabdc6bc4ec78d52e67
 PKG_DESCR:=		vc tools for raspberry pi (bcm2835)
 PKG_SECTION:=		base
@@ -27,7 +27,7 @@ do-configure:
 
 bcm2835-vc-install:
 	$(INSTALL_DIR) ${IDIR_BCM2835_VC}/opt/vc/{bin,lib}
-	$(CP) ${WRKINST}/opt/vc/lib/* ${IDIR_BCM2835_VC}/opt/vc/lib
+	$(CP) ${WRKINST}/opt/vc/lib/*so* ${IDIR_BCM2835_VC}/opt/vc/lib
 	$(CP) ${WRKINST}/opt/vc/bin/* ${IDIR_BCM2835_VC}/opt/vc/bin
 	# required for xbmc
 	(cd ${IDIR_BCM2835_VC}/opt/vc/lib && ln -sf libEGL.so libEGL.so.1)

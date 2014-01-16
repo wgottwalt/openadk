@@ -23,11 +23,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
-ifeq ($(ADK_LINUX_AVR32),y)
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc
-else
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc -lgcc_s
-endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
