@@ -110,7 +110,7 @@ config ADK_KERNEL_NFSD_V4
 	default n
 
 config ADK_KPACKAGE_KMOD_NFSD
-	prompt "kmod-fs-nfsd...................... NFS server support (includes V3 support)"
+	prompt "kmod-nfsd......................... NFS server support"
 	tristate
 	default n
 	select ADK_KERNEL_EXPORTFS

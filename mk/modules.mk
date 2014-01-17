@@ -1106,7 +1106,7 @@ $(eval $(call KMOD_template,LOCKD,lockd,\
 ifneq ($(ADK_KERNEL_NFS_FS),y)
 $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
 	$(MODULES_DIR)/kernel/fs/nfs/nfs \
-,30))
+,30, kmod-sunrpc))
 endif
 
 #$(eval $(call KMOD_template,EXPORTFS,exportfs,\
