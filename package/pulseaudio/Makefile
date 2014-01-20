@@ -5,14 +5,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		591f211db2790a7e4d222f2dc6858db3
 PKG_DESCR:=		a sound system for POSIX OSes
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libltdl json-c libsndfile libudev libspeex
-PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile
+PKG_DEPENDS:=		libltdl json-c libsndfile libudev libspeex libncurses
+PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile libdbus
+PKG_DEPENDS+=		libgcc libpthread librt alsa-lib
 PKG_BUILDDEP:=		libtool json-c libsndfile eudev speex libsndfile
-PKG_BUILDDEP+=		flac libvorbis libogg util-linux
+PKG_BUILDDEP+=		flac libvorbis libogg util-linux dbus ncurses alsa-lib
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
 PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
@@ -28,9 +29,10 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-neon-opt \
 			--disable-x11 \
 			--disable-openssl \
+			--enable-alsa \
 			--enable-dbus \
 			--enable-udev \
-			--enable-speex \
+			--with-speex
 
 pulseaudio-install:
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/pulse
@@ -42,6 +44,9 @@ pulseaudio-install:
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpulse*.so* \
 		$(IDIR_PULSEAUDIO)/usr/lib
+	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/lib/pulseaudio
+	$(CP) $(WRKINST)/usr/lib/pulseaudio/libpulse*.so* \
+		$(IDIR_PULSEAUDIO)/usr/lib/pulseaudio
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/lib/pulse-$(PKG_VERSION)/modules
 	$(CP) $(WRKINST)/usr/lib/pulse-$(PKG_VERSION)/modules/*.so \
 		$(IDIR_PULSEAUDIO)/usr/lib/pulse-$(PKG_VERSION)/modules
