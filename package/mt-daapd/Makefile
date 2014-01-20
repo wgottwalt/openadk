@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mt-daapd
 PKG_VERSION:=		0.2.4.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		67bef9fb14d487693b0dfb792c3f1b05
 PKG_DESCR:=		a multi-threaded DAAP daemon
 PKG_SECTION:=		multimedia
