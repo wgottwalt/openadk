@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qingy
 PKG_VERSION:=		1.0.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		1e0912655e240adfd0ce5ced30bbc685
 PKG_DESCR:=		a DirectFB getty replacement
 PKG_SECTION:=		misc
