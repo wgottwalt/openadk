@@ -11,9 +11,10 @@ PKG_DESCR:=		a sound system for POSIX OSes
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libltdl json-c libsndfile libudev libspeex libncurses
 PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile libdbus
-PKG_DEPENDS+=		libgcc libpthread librt alsa-lib
+PKG_DEPENDS+=		libgcc libpthread librt alsa-lib libsamplerate
 PKG_BUILDDEP:=		libtool json-c libsndfile eudev speex libsndfile
 PKG_BUILDDEP+=		flac libvorbis libogg util-linux dbus ncurses alsa-lib
+PKG_BUILDDEP+=		libsamplerate
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
 PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
@@ -28,7 +29,16 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-manpages \
 			--disable-neon-opt \
 			--disable-x11 \
+			--disable-avahi \
+			--disable-lirc \
 			--disable-openssl \
+			--disable-orc \
+			--disable-libwrap \
+			--disable-oss \
+			--disable-esound \
+			--disable-jack \
+			--disable-gconf \
+			--enable-samplerate \
 			--enable-alsa \
 			--enable-dbus \
 			--enable-udev \
