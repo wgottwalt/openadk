@@ -1,0 +1,11 @@
+--- tcl8.5.9.orig/generic/tcl.h	2010-08-04 19:02:39.000000000 +0200
++++ tcl8.5.9/generic/tcl.h	2014-01-20 11:18:37.000000000 +0100
+@@ -19,6 +19,8 @@
+ #ifndef _TCL
+ #define _TCL
+ 
++#include <sys/stat.h>
++
+ /*
+  * For C++ compilers, use extern "C"
+  */
