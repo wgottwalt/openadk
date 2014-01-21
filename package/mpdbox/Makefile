@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpdbox
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		ac0dc1cc7141c1eca66d8ddd98574e0b
 PKG_DESCR:=		MPD web interface
 PKG_SECTION:=		multimedia
@@ -24,5 +24,7 @@ mpdbox-install:
 	$(INSTALL_DIR) $(IDIR_MPDBOX)/srv/www/htdocs
 	$(CP) $(WRKBUILD)/* \
 		$(IDIR_MPDBOX)/srv/www/htdocs
+	$(CP) $(IDIR_MPDBOX)/srv/www/htdocs/inc/config.inc.example \
+		$(IDIR_MPDBOX)/srv/www/htdocs/inc/config.inc
 
 include ${TOPDIR}/mk/pkg-bottom.mk
