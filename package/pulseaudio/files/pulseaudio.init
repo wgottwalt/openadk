@@ -11,7 +11,7 @@ autostart)
 	;;
 start)
 	if [ ! -d /var/run/pulse ]; then 
-		mkdir -p /var/run/pulse/.pulse-cookie && chown -R pulse.pulse /var/run/pulse && chmod 750 /var/run/pulse
+		mkdir -p /var/run/pulse/ && chown -R pulse.pulse /var/run/pulse && chmod 750 /var/run/pulse
 	fi
 	if [ ! -d /var/lib/pulse ]; then 
 		mkdir -p /var/lib/pulse/.pulse-cookie && chown -R pulse.pulse /var/lib/pulse && chmod 750 /var/lib/pulse

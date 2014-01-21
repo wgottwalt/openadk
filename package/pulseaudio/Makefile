@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		591f211db2790a7e4d222f2dc6858db3
 PKG_DESCR:=		a sound system for POSIX OSes
 PKG_SECTION:=		multimedia
@@ -38,6 +38,9 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--with-speex
 
 pulseaudio-install:
+	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/dbus-1
+	$(CP) $(WRKINST)/etc/dbus-1/* \
+		$(IDIR_PULSEAUDIO)/etc/dbus-1
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/pulse
 	$(CP) $(WRKINST)/etc/pulse/* \
 		$(IDIR_PULSEAUDIO)/etc/pulse
