@@ -1092,6 +1092,7 @@ $(eval $(call KMOD_template,SUNRPC,sunrpc,\
 ,24))
 
 $(eval $(call KMOD_template,SUNRPC_GSS,sunrpc-gss,\
+	$(MODULES_DIR)/kernel/lib/oid_registry \
 	$(MODULES_DIR)/kernel/net/sunrpc/auth_gss/auth_rpcgss \
 ,25))
 
