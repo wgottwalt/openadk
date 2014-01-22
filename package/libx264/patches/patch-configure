@@ -1,5 +1,14 @@
 --- libx264-1.0.1.orig/configure	2014-01-22 11:20:21.000000000 +0100
-+++ libx264-1.0.1/configure	2014-01-22 11:29:13.000000000 +0100
++++ libx264-1.0.1/configure	2014-01-22 19:42:21.000000000 +0100
+@@ -662,7 +662,7 @@ case $host_cpu in
+                 LDFLAGS="$LDFLAGS -arch armv7"
+             fi
+         else
+-            AS="${AS-${cross_prefix}gcc}"
++            AS="${cross_prefix}gcc"
+         fi
+         ;;
+     s390|s390x)
 @@ -1007,9 +1007,9 @@ if [ "$debug" = "yes" ]; then
  elif [ $ARCH = ARM ]; then
      # arm-gcc-4.2 produces incorrect output with -ffast-math
