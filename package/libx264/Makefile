@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libx264
-# actually is snapshot x264-snapshot-20131010-2245
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		e6718029b4bc955f1dbb9bdafeed3ac0
+# actually is git checkout from 22.01.2014
+PKG_VERSION:=		1.0.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6be3e8adeaf6b007bbc04026b6ebd304
 PKG_DESCR:=		H264 encoding library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.videolan.org/developers/x264.html
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
+
+PKG_BUILDDEP_IBM_X40:=	yasm-host
 
 include $(TOPDIR)/mk/package.mk
 
