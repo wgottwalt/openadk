@@ -1,6 +1,6 @@
---- tcl8.5.8.orig/unix/configure	2009-11-13 19:38:45.000000000 +0100
-+++ tcl8.5.8/unix/configure	2011-01-13 16:22:59.000000000 +0100
-@@ -7968,9 +7968,6 @@ fi
+--- tcl8.5.9.orig/unix/configure	2010-09-08 19:40:48.000000000 +0200
++++ tcl8.5.9/unix/configure	2014-01-20 11:13:05.000000000 +0100
+@@ -7983,9 +7983,6 @@ fi
  	    LD_SEARCH_FLAGS=""
  	    LD_LIBRARY_PATH_VAR="DYLD_LIBRARY_PATH"
  
@@ -10,7 +10,7 @@
  
  	    PLAT_OBJS='${MAC_OSX_OBJS}'
  	    PLAT_SRCS='${MAC_OSX_SRCS}'
-@@ -17646,11 +17643,6 @@ _ACEOF
+@@ -17578,11 +17575,6 @@ _ACEOF
  
  
  cat >>confdefs.h <<\_ACEOF
@@ -22,7 +22,7 @@
  #define TCL_WIDE_CLICKS 1
  _ACEOF
  
-@@ -18817,7 +18809,7 @@ HTML_DIR='$(DISTDIR)/html'
+@@ -18749,7 +18741,7 @@ HTML_DIR='$(DISTDIR)/html'
  # AIX remembers this path and will attempt to use it at run-time to look
  # up the Tcl library.
  

@@ -28,8 +28,12 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 include $(TOPDIR)/mk/python.mk
+
 ifeq ($(ADK_HOST_DARWIN),y)
 PYTHON:=/opt/local/bin/python2.7
+endif
+ifeq ($(ADK_HOST_OPENBSD),y)
+PYTHON:=/usr/local/bin/python2.7
 endif
 
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)

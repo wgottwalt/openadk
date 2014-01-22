@@ -13,6 +13,8 @@ PKG_DEPENDS:=		ppp kmod-crypto kmod-ppp-mppe kmod-ppp kmod-net-ipgre
 PKG_URL:=		http://www.poptop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=poptop/}
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPTPD,pptpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

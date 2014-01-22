@@ -4,13 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ndisc6
-PKG_VERSION:=		0.9.8
+PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cb8d70564b8d40aae95e19592c6be183
+PKG_MD5SUM:=		50cb4c19606cf6ff2b7388e71832f579
 PKG_DESCR:=		ICMPv6 Neighbour Discovery tools
 PKG_SECTION:=		ipv6
 PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
+
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 PKG_SUBPKGS:=		NDISC6 RDISC6 TCPTRACEROUTE6
 

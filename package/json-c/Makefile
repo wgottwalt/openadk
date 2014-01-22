@@ -1,0 +1,26 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		json-c
+PKG_VERSION:=		0.11
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		aa02367d2f7a830bf1e3376f77881e98
+PKG_DESCR:=		JSON library
+PKG_SECTION:=		libs
+PKG_URL:=		https://github.com/json-c/json-c/wiki
+PKG_SITES:=		https://s3.amazonaws.com/json-c_releases/releases/
+PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,JSON_C,json-c,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+json-c-install:
+	$(INSTALL_DIR) $(IDIR_JSON_C)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libjson*.so* \
+		$(IDIR_JSON_C)/usr/lib
+
+include ${TOPDIR}/mk/pkg-bottom.mk

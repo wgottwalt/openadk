@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		63bcf6ce338caa2ae2cd6dc8e9710d5c
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -23,7 +23,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
-PKG_FLAVOURS_MPD+=	WITH_OPUS
+PKG_FLAVOURS_MPD+=	WITH_OPUS WITH_PULSE
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -112,6 +112,13 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_OPUS),y)
 PKG_FDEPENDS+=		libopus
 endif
 
+PKGFD_WITH_PULSE:=	enable PULSE support
+PKGFS_WITH_PULSE:=	pulseaudio
+PKGFB_WITH_PULSE:=	pulseaudio
+ifeq ($(ADK_PACKAGE_MPD_WITH_PULSE),y)
+PKG_FDEPENDS+=		pulseaudio
+endif
+
 PKGFD_WITH_HTTPD:=	enable HTTP output
 
 include ${TOPDIR}/mk/package.mk
@@ -123,7 +130,6 @@ TARGET_CFLAGS+=		-std=gnu99
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--disable-jack \
 			--disable-fifo \
-			--disable-pulse \
 			--disable-oss \
 			--disable-bzip2 \
 			--disable-libwrap \
@@ -140,6 +146,12 @@ ifneq (${ADK_PACKAGE_MPD_WITH_HTTPD},)
 CONFIGURE_ARGS+=	--enable-httpd-output
 else
 CONFIGURE_ARGS+=	--disable-httpd-output
+endif
+
+ifneq (${ADK_PACKAGE_MPD_WITH_PULSE},)
+CONFIGURE_ARGS+=	--enable-pulse
+else
+CONFIGURE_ARGS+=	--disable-pulse
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
