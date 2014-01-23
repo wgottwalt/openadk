@@ -16,10 +16,14 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
 PKG_ARCH_DEPENDS:=	!cris !avr32 !m68k
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--with-classpath-install-dir=$(STAGING_HOST_DIR)/usr
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
@@ -30,6 +34,10 @@ endif
 ifeq ($(ARCH),arm)
 CONFIGURE_ARGS+=	--disable-tls
 endif
+
+hostpost-install:
+	ln -sf ${STAGING_HOST_DIR}/usr/bin/jamvm ${STAGING_HOST_DIR}/usr/lib/jvm/bin/java
+	ln -sf ${STAGING_HOST_DIR}/usr/bin/jamvm ${STAGING_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 do-build:
 	${INSTALL_DIR} ${WRKINST}/usr/bin
@@ -47,4 +55,5 @@ do-install:
 	${CP} ${WRKINST}/usr/share/jamvm/classes.zip \
 		${IDIR_JAMVM}/usr/share/jamvm
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

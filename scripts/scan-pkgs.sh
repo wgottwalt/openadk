@@ -61,21 +61,6 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
-if [[ -n $ADK_COMPILE_OPENJDK ]]; then
-	NEED_GXX="$NEED_GXX openjdk"
-	NEED_XSLTPROC="$NEED_XSLTPROC openjdk"
-fi
-
-if [[ -n $ADK_COMPILE_OPENJDK ]]; then
-	cd ${TOPDIR}/jtools; bash prereq.sh
-	[ $? -ne 0 ] && out=1
-fi
-
-if [[ -n $ADK_COMPILE_OPENJDK7 ]]; then
-	cd ${TOPDIR}/jtools; bash prereq.sh
-	[ $? -ne 0 ] && out=1
-fi
-
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
