@@ -5,16 +5,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		591f211db2790a7e4d222f2dc6858db3
 PKG_DESCR:=		a sound system for POSIX OSes
 PKG_SECTION:=		multimedia
-PKG_DEPENDS:=		libltdl json-c libsndfile libudev libspeex libncurses
-PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile dbus
+PKG_DEPENDS:=		libltdl json-c libsndfile libspeex libncurses
+PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile
 PKG_DEPENDS+=		libgcc libpthread librt alsa-lib libsamplerate
-PKG_BUILDDEP:=		libtool json-c libsndfile eudev speex libsndfile
-PKG_BUILDDEP+=		flac libvorbis libogg util-linux dbus ncurses alsa-lib
-PKG_BUILDDEP+=		libsamplerate
+PKG_BUILDDEP:=		libtool json-c libsndfile speex libsamplerate
+PKG_BUILDDEP+=		flac libvorbis libogg util-linux ncurses alsa-lib
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
 PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
@@ -37,22 +36,21 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-openssl \
 			--disable-orc \
 			--disable-libwrap \
-			--disable-oss \
+			--disable-oss-wrapper \
+			--disable-oss-output \
 			--disable-esound \
 			--disable-jack \
 			--disable-gconf \
+			--disable-udev \
+			--disable-dbus \
+			--disable-hal-compat \
 			--enable-samplerate \
 			--enable-alsa \
-			--enable-dbus \
-			--enable-udev \
 			--with-speex
 
 pulseaudio-install:
-	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/dbus-1
-	$(CP) $(WRKINST)/etc/dbus-1/* \
-		$(IDIR_PULSEAUDIO)/etc/dbus-1
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/pulse
-	$(CP) $(WRKINST)/etc/pulse/* \
+	$(CP) ./files/*.{conf,pa} \
 		$(IDIR_PULSEAUDIO)/etc/pulse
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
