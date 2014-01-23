@@ -1163,10 +1163,14 @@ $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
 
+$(eval $(call KMOD_template,SND_HRTIMER,snd-hrtimer,\
+	$(MODULES_DIR)/kernel/sound/core/snd-hrtimer \
+,41))
+
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
-,41))
+,42))
 
 $(eval $(call KMOD_template,SND_OSSEMUL,snd-ossemul,\
 	$(MODULES_DIR)/kernel/sound/core/oss/snd-mixer-oss \
