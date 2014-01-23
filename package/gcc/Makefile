@@ -11,8 +11,6 @@ PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr libgcc
 PKG_BUILDDEP:=		libmpc gmp mpfr
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 PKG_SUBPKGS:=		GCC GXX
 PKGSD_GXX:=		GNU C++ compiler
 
@@ -48,6 +46,13 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
 CONFIGURE_ARGS+=	--enable-languages=c
 endif
+ifeq ($(CPU_ARCH),ppc)
+CONFIGURE_ARGS+=	--disable-target-optspace --with-long-double-64 --enable-secureplt
+TARGET_CFLAGS+=		'-Wl,--secure-plt'
+else
+CONFIGURE_ARGS+=	--enable-target-optspace
+endif
+
 
 CONFIGURE_ENV+=		have_sys_sdt_h=no
 CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \

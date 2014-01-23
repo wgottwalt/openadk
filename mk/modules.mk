@@ -1092,6 +1092,7 @@ $(eval $(call KMOD_template,SUNRPC,sunrpc,\
 ,24))
 
 $(eval $(call KMOD_template,SUNRPC_GSS,sunrpc-gss,\
+	$(MODULES_DIR)/kernel/lib/oid_registry \
 	$(MODULES_DIR)/kernel/net/sunrpc/auth_gss/auth_rpcgss \
 ,25))
 
@@ -1106,7 +1107,7 @@ $(eval $(call KMOD_template,LOCKD,lockd,\
 ifneq ($(ADK_KERNEL_NFS_FS),y)
 $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
 	$(MODULES_DIR)/kernel/fs/nfs/nfs \
-,30))
+,30, kmod-sunrpc))
 endif
 
 #$(eval $(call KMOD_template,EXPORTFS,exportfs,\
@@ -1287,11 +1288,9 @@ USBMODULES:=
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
 
-ifeq ($(ADK_TARGET_SYSTEM_FOXBOARD_LX),)
 $(eval $(call KMOD_template,USB,usb,\
 	$(foreach mod, $(USBMODULES),$(MODULES_DIR)/kernel/$(mod)) \
 ,50))
-endif
 
 $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \

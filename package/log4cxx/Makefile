@@ -18,8 +18,6 @@ PKG_OPTS:=		dev
 DISTFILES:=		apache-${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/apache-${PKG_NAME}-${PKG_VERSION}
 
-PKG_ARCH_DEPENDS:=	!cris
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LOG4CXX,log4cxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

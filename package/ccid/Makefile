@@ -13,8 +13,6 @@ PKG_BUILDDEP:=		pcsc-lite
 PKG_URL:=		http://pcsclite.alioth.debian.org/ccid.html
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

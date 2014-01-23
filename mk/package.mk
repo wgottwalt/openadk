@@ -18,6 +18,7 @@ AUTOTOOL_ENV+=		AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
 CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
 			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
 			PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \
@@ -47,6 +48,8 @@ INSTALL_TARGET?=	install
 
 MAKE_ENV+=		$(GCC_CHECK) \
 			PATH='${TARGET_PATH}' \
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \

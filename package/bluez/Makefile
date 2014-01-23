@@ -15,8 +15,6 @@ PKG_URL:=		http://www.bluez.org/
 PKG_SITES:=		http://mirror.anl.gov/pub/linux/bluetooth/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

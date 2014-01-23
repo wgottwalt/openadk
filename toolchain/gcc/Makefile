@@ -61,20 +61,12 @@ endif
 
 ifeq ($(ARCH),m68k)
 GCC_CONFOPTS+=		--disable-tls
-else 
-ifeq ($(ARCH),cris)
-GCC_CONFOPTS+=		--disable-tls
 else
 GCC_CONFOPTS+=		--enable-tls
 endif
-endif
 
 ifeq ($(ARCH),powerpc)
-ifeq ($(ADK_TARGET_LIBC),musl)
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
-else
-GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
-endif
 else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif

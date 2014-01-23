@@ -15,8 +15,6 @@ PKG_URL:=		http://software.schmorp.de/pkg/rxvt-unicode.html
 PKG_SITES:=		http://dist.schmorp.de/rxvt-unicode/
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

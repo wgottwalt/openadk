@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.gnome.org//pub/GNOME/sources/GConf/${PKG_EXTRAVER}/
 PKG_LIBNAME:=		gconf
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!arm !cris
+PKG_ARCH_DEPENDS:=	!arm
 
 include $(TOPDIR)/mk/package.mk
 

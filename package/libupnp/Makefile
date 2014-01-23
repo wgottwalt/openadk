@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libupnp
-PKG_VERSION:=		1.6.6
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		8918dcf7428cd119d0c8275765ff2833
+PKG_VERSION:=		1.6.19
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ee16e5d33a3ea7506f38d71facc057dd
 PKG_DESCR:=		The Universal Plug and Play (UPnP) SDK library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool

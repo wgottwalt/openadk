@@ -1,0 +1,28 @@
+diff -Nur xbmc-12.3-Frodo.orig/language/English/langinfo.xml xbmc-12.3-Frodo/language/English/langinfo.xml
+--- xbmc-12.3-Frodo.orig/language/English/langinfo.xml	2013-12-12 22:47:49.000000000 +0100
++++ xbmc-12.3-Frodo/language/English/langinfo.xml	2014-01-14 19:34:44.869490320 +0100
+@@ -48,8 +48,8 @@
+ 
+ <language locale="en">
+   <charsets>
+-    <gui>CP1252</gui>
+-    <subtitle>CP1252</subtitle>
++    <gui>UTF-8</gui>
++    <subtitle>UTF-8</subtitle>
+   </charsets>
+ 
+   <dvd>
+diff -Nur xbmc-12.3-Frodo.orig/language/German/langinfo.xml xbmc-12.3-Frodo/language/German/langinfo.xml
+--- xbmc-12.3-Frodo.orig/language/German/langinfo.xml	2013-12-12 22:47:49.000000000 +0100
++++ xbmc-12.3-Frodo/language/German/langinfo.xml	2014-01-14 19:34:20.997392956 +0100
+@@ -2,8 +2,8 @@
+ <language locale="de">
+ 
+   <charsets>
+-    <gui unicodefont="false">CP1252</gui>
+-    <subtitle>CP1252</subtitle>
++    <gui unicodefont="false">UTF-8</gui>
++    <subtitle>UTF-8</subtitle>
+   </charsets>
+ 
+   <dvd>

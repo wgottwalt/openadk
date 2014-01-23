@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://sispmctl.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sispmctl/}
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SISPMCTL,sispmctl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

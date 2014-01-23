@@ -1,0 +1,32 @@
+#!/bin/sh
+#PKG pulseaudio
+#INIT 60
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${pulseaudio:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	if [ ! -d /var/run/pulse ]; then 
+		mkdir -p /var/run/pulse/ && chown -R pulse.pulse /var/run/pulse && chmod 750 /var/run/pulse
+	fi
+	if [ ! -d /var/lib/pulse ]; then 
+		mkdir -p /var/lib/pulse/.pulse-cookie && chown -R pulse.pulse /var/lib/pulse && chmod 750 /var/lib/pulse
+	fi
+	/usr/bin/pulseaudio $pulseaudio_flags
+	;;
+stop)
+	kill $(pgrep -f /usr/bin/pulseaudio)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

@@ -15,7 +15,7 @@ start)
 	xbmc &
 	;;
 stop)
-	kill $(pgrep -f /usr/bin/xbmc)
+	kill $(pgrep -f /usr/lib/xbmc/xbmc.bin)
 	;;
 restart)
 	sh $0 stop

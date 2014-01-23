@@ -17,8 +17,6 @@ PKG_URL:=		http://cryptsetup.googlecode.com/
 PKG_SITES:=		http://cryptsetup.googlecode.com/files/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!cris
-
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

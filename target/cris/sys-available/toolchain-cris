@@ -1,9 +1,0 @@
-config ADK_TARGET_SYSTEM_TOOLCHAIN_CRIS
-	bool "Toolchain only"
-	select ADK_cris
-	select ADK_toolchain_cris
-	select ADK_CPU_CRIS_V10
-	select ADK_TOOLCHAIN
-	help
-	  Build a cris toolchain (crisv10).
-

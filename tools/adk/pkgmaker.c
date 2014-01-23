@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010-2013 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2014 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -93,6 +93,53 @@ static int parse_var(char *buf, const char *varname, char *pvalue, char **result
 		if (snprintf(pkg_str, MAXVAR, "%s+=", varname) < 0)
 			perror("can not create path variable.");
 		string = strstr(buf, pkg_str);
+		if (string != NULL) {
+			string[strlen(string)-1] = '\0';
+			key = strtok(string, "+=");
+			value = strtok(NULL, "=\t");
+			if (pvalue != NULL)
+				strncat(pkg_var, pvalue, strlen(pvalue));
+			strncat(pkg_var, " ", 1);
+			if (value != NULL)
+				strncat(pkg_var, value, strlen(value));
+			*result = strdup(pkg_var);
+			free(pkg_var);
+			return(0);
+		}
+	}
+	free(pkg_var);
+	return(1);
+}
+
+static int parse_var_with_system(char *buf, const char *varname, char *pvalue, char **result, char **sysname, int varlen) {
+
+	char *pkg_var, *check;
+	char *key, *value, *string;
+
+	if ((pkg_var = malloc(MAXLINE)) != NULL)
+		memset(pkg_var, 0, MAXLINE);
+	else {
+		perror("Can not allocate memory");
+		exit(EXIT_FAILURE);
+	}
+
+	check = strstr(buf, ":=");
+	if (check != NULL) {
+		string = strstr(buf, varname);
+		if (string != NULL) {
+			string[strlen(string)-1] = '\0';
+			key = strtok(string, ":=");
+			*sysname = strdup(key+varlen);
+			value = strtok(NULL, "=\t");
+			if (value != NULL) {
+				strncat(pkg_var, value, strlen(value));
+				*result = strdup(pkg_var);
+			}
+			free(pkg_var);
+			return(0);
+		}
+	} else {
+		string = strstr(buf, varname);
 		if (string != NULL) {
 			string[strlen(string)-1] = '\0';
 			key = strtok(string, "+=");
@@ -268,9 +315,9 @@ int main() {
 	char dir[MAXPATH];
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
-	char *pkg_name, *pkg_depends, *pkg_section, *pkg_descr, *pkg_url;
+	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
-	char *pkg_need_cxx, *pkg_need_java, *pkgname, *pkg_debug;
+	char *pkg_need_cxx, *pkg_need_java, *pkgname, *sysname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper;
@@ -282,6 +329,7 @@ int main() {
 	pkg_section = NULL;
 	pkg_url = NULL;
 	pkg_depends = NULL;
+	pkg_depends_system = NULL;
 	pkg_opts = NULL;
 	pkg_libname = NULL;
 	pkg_flavours = NULL;
@@ -299,6 +347,7 @@ int main() {
 	pkg_need_cxx = NULL;
 	pkg_need_java = NULL;
 	pkgname = NULL;
+	sysname = NULL;
 	pkg_helper = NULL;
 	pkg_debug = NULL;
 
@@ -463,6 +512,8 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
+					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
+						continue;
 					if ((parse_var(buf, "PKG_LIBNAME", pkg_libname, &pkg_libname)) == 0) 
 						continue;
 					if ((parse_var(buf, "PKG_OPTS", pkg_opts, &pkg_opts)) == 0)
@@ -517,6 +568,8 @@ int main() {
 				fprintf(stderr, "Package description is %s\n", pkg_descr);
 			if (pkg_depends != NULL)
 				fprintf(stderr, "Package dependencies are %s\n", pkg_depends);
+			if (pkg_depends_system != NULL)
+				fprintf(stderr, "Package systemspecific dependencies are %s\n", pkg_depends_system);
 			if (pkg_subpkgs != NULL)
 				fprintf(stderr, "Package subpackages are %s\n", pkg_subpkgs);
 			if (pkg_flavours != NULL && pkgname != NULL)
@@ -781,6 +834,16 @@ int main() {
 					}
 					free(pkg_depends);
 					pkg_depends = NULL;
+				}
+				/* create system specific package dependency information */
+				if (pkg_depends_system != NULL) {
+					token = strtok(pkg_depends_system, " ");
+					while (token != NULL) {
+						fprintf(cfg, "\tselect ADK_PACKAGE_%s if ADK_TARGET_SYSTEM_%s\n", toupperstr(token), sysname);
+						token = strtok(NULL, " ");
+					}
+					free(pkg_depends_system);
+					pkg_depends_system = NULL;
 				}
 
 				if (pkg_need_cxx != NULL) {

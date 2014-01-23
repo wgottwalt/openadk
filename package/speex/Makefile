@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		speex
 PKG_VERSION:=		1.2rc1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		c4438b22c08e5811ff10e2b06ee9b9ae
 PKG_DESCR:=		an open source patent-free speech compression codec
 PKG_SECTION:=		libs
@@ -26,6 +26,6 @@ XAKE_FLAGS+=		bin_PROGRAMS=""
 
 libspeex-install:
 	${INSTALL_DIR} ${IDIR_LIBSPEEX}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libspeex.so* ${IDIR_LIBSPEEX}/usr/lib/
+	${CP} ${WRKINST}/usr/lib/libspeex*.so* ${IDIR_LIBSPEEX}/usr/lib/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

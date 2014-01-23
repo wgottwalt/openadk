@@ -4,21 +4,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
-PKG_VERSION:=		0.9.0
+PKG_VERSION:=		0.9.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9bc258d7a63dd13e3348f310ae26a434
+PKG_MD5SUM:=		72c3e9ab859bda7cc8aa96c0b508b09f
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx
-PKG_BUILDDEP:=		ncurses libtorrent curl
+PKG_BUILDDEP:=		autotool ncurses libtorrent curl
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
-PKG_ARCH_DEPENDS:=	!avr32
-
 include ${TOPDIR}/mk/package.mk
 
-TARGET_LDFLAGS+=	-lpthread
+AUTOTOOL_STYLE:=	autoreconf
+TARGET_LDFLAGS+=	-lpthread -ltinfo
 
 $(eval $(call PKG_template,RTORRENT,rtorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

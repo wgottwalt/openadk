@@ -22,6 +22,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_E2FSCK_STATIC=n \
 			ADK_PACKAGE_KEXECINIT=n \
 			ADK_PACKAGE_INSTALLER=n \
+			ADK_PACKAGE_HEIMDAL_SERVER=n \
+			ADK_PACKAGE_LIBHEIMDAL=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
 			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
@@ -575,7 +577,7 @@ release:
 bulk:
 	for libc in uclibc eglibc glibc musl;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain|grep -v qemu-cris|grep -v foxboard-lx); \
+	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -595,7 +597,7 @@ bulk:
 bulkall:
 	for libc in uclibc eglibc glibc musl;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu-cris|grep -v foxboard-lx); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
@@ -615,7 +617,7 @@ bulkall:
 bulkallmod:
 	for libc in uclibc eglibc glibc musl;do \
 	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain|grep -v qemu-cris|grep -v foxboard-lx); \
+	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
 		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
 	    ( \
