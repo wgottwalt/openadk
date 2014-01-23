@@ -4,24 +4,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
-PKG_RELEASE:=		1
 PKG_VERSION:=		4.7.3
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		86f428a30379bdee0224e353ee2f999e
+PKG_DESCR:=		GNU java compiler
+PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 
+PKG_ARCH_DEPENDS:=	native
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
-include ../rules.mk
-GCJ_ENV+=		"JAR=no LDFLAGS=-liconv"
+include $(TOPDIR)/mk/host.mk
+include $(TOPDIR)/mk/package.mk
 
-install: ${STAGING_JAVA_HOST_DIR}/usr/bin/gcj
+$(eval $(call HOST_template,GCJ,gcj,$(PKG_VERSION)-${PKG_RELEASE}))
 
-$(WRKBUILD)/.configured: ${WRKDIST}/.prepared
-	(cd $(WRKBUILD); \
-		wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar; \
-		env ${GCJ_ENV} ./configure \
-			--prefix=/usr \
+HOST_STYLE:=		auto
+HOST_MAKE_ENV+=		"JAR=no LDFLAGS=-liconv"
+HOST_CONFIGURE_ARGS:=	\
 			--enable-java-home \
 			--enable-languages=java \
 			--enable-shared \
@@ -36,17 +37,11 @@ $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 			--disable-biarch \
 			--disable-decimal-float \
 			--disable-multilib \
-			--disable-bootstrap \
-	);
-	touch $@
+			--disable-bootstrap
 
-$(WRKBUILD)/.compiled: ${WRKDIST}/.configured
-	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} $(MAKE_TRACE)
-	touch $@
+post-extract:
+	(cd $(DISTDIR); wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar)
+	(cd $(WRKBUILD); $(CP) $(DISTDIR)/ecj.jar .)
 
-${STAGING_JAVA_HOST_DIR}/usr/bin/gcj: $(WRKBUILD)/.compiled
-	$(INSTALL_DIR) ${STAGING_JAVA_HOST_DIR}
-	env ${GCJ_ENV} ${MAKE} -C ${WRKBUILD} \
-	    DESTDIR=$(STAGING_JAVA_HOST_DIR) install $(MAKE_TRACE)
-
-include $(TOPDIR)/mk/tools.mk
+include ${TOPDIR}/mk/host-bottom.mk
+include ${TOPDIR}/mk/pkg-bottom.mk

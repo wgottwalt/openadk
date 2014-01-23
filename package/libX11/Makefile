@@ -9,7 +9,9 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		395455e4d3a51459374fe5ca8420aae8
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto-host
+PKG_BUILDDEP:=		xproto-host xextproto-host libXau-host libpthread-stubs-host
+PKG_BUILDDEP+=		xcb-proto-host libxcb-host kbproto-host
+PKG_BUILDDEP+=		inputproto-host xtrans-host libX11-host
 PKG_BUILDDEP+=		xproto xextproto xtrans libXdmcp libXau xcb-proto
 PKG_BUILDDEP+=		xcmiscproto bigreqsproto kbproto inputproto libxcb
 PKG_DEPENDS:=		libxdmcp libxcb libxau
@@ -21,14 +23,18 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
 			--disable-xf86bigfont \
 			--disable-malloc0returnsnull
+HOST_CONFIGURE_ARGS+=	$(CONFIGURE_ARGS)
 
 libx11-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11
@@ -37,4 +43,5 @@ libx11-install:
 	${CP} ${WRKINST}/usr/share/X11/XErrorDB ${IDIR_LIBX11}/usr/share/X11
 	${CP} ${WRKINST}/usr/share/X11/locale ${IDIR_LIBX11}/usr/share/X11
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
