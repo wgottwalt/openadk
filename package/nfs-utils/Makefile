@@ -21,9 +21,9 @@ PKG_SITES:=		http://openadk.org/distfiles/
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
-PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs
+PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc
 PKGSD_NFS_UTILS_CLIENT:=NFS client utilities (mount)
-PKGSS_NFS_UTILS_SERVER:=kmod-nfsd
+PKGSS_NFS_UTILS_SERVER:=kmod-nfsd kmod-sunrpc
 PKGSD_NFS_UTILS_SERVER:=NFS server daemons and utilities
 
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS

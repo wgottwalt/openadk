@@ -291,8 +291,12 @@ config ADK_KPACKAGE_KMOD_R8169
 
 endmenu
 
+config ADK_KERNEL_WLAN
+	boolean
+
 config ADK_KERNEL_WIRELESS
 	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_WLAN
 	boolean
 
 config ADK_KERNEL_WIRELESS_EXT

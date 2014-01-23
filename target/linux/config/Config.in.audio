@@ -4,6 +4,9 @@ depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 config ADK_KERNEL_SND_ARM
 	boolean
 
+config ADK_KERNEL_SND_USB
+	boolean
+
 config ADK_KERNEL_SND_SOC
 	boolean
 
@@ -26,6 +29,9 @@ config ADK_KERNEL_SND_MIXER_OSS
 	boolean
 
 config ADK_KERNEL_SND_PCM_OSS
+	boolean
+
+config ADK_KERNEL_SND_HRTIMER
 	boolean
 
 config ADK_KPACKAGE_KMOD_SOUND
@@ -126,6 +132,7 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_ARM
+	select ADK_KERNEL_SND_HRTIMER
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n

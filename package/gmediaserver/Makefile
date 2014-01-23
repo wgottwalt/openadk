@@ -15,6 +15,8 @@ PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 PKG_CXX:=		GMEDIASERVER
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		d024a9de73191628f9772893f02054d8
 PKG_DESCR:=		X Window System client interface to the XINPUT extension to the X protocol.
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto xextproto libXext
+PKG_BUILDDEP:=		xproto xextproto libXext libXi-host
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxi
@@ -19,10 +19,13 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBXI,libxi,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXI,libxi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxi-install:
@@ -30,4 +33,5 @@ libxi-install:
 	$(CP) $(WRKINST)/usr/lib/libXi*.so* \
 		$(IDIR_LIBXI)/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -9,26 +9,29 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		XML-XCB protocol descriptions
 PKG_SECTION:=		devel
 PKG_MD5SUM:=		8d2cdb770129cef563088a90c5bec768
-PKG_BUILDDEP:=		autotool bzip2-host python2-host
+PKG_BUILDDEP:=		autotool bzip2-host python2-host xcb-proto-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly
 
 PKG_SUBPKGS:=		XCB_PROTO XCB_PYTHON
 PKGSC_XCB_PYTHON:=	x11/misc
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,XCB_PROTO,xcb-proto,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,XCB_PROTO,xcb-proto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,XCB_PYTHON,xcb-python,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_XCB_PYTHON}))
 
 include $(TOPDIR)/mk/python.mk
 
+HOST_STYLE:=		auto
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 CONFIGURE_ARGS+=	--datadir=${STAGING_DIR}/usr/share
 
 post-build:
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/xcb
-	${CP} ${WRKBUILD}/src/*.xml ${STAGING_DIR}/usr/share/xcb
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/xcb
+	${CP} ${WRKBUILD}/src/*.xml ${STAGING_TARGET_DIR}/usr/share/xcb
 
 xcb-python-install:
 	$(INSTALL_DIR) ${STAGING_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
@@ -38,4 +41,5 @@ xcb-python-install:
 	${CP} ${WRKINST}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen/*.py \
 		${IDIR_XCB_PYTHON}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

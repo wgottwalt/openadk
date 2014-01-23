@@ -1,6 +1,15 @@
---- libx264-1.0.orig/configure	2013-10-10 22:45:04.000000000 +0200
-+++ libx264-1.0/configure	2013-10-12 17:49:39.000000000 +0200
-@@ -985,9 +985,9 @@ if [ "$debug" = "yes" ]; then
+--- libx264-1.0.1.orig/configure	2014-01-22 11:20:21.000000000 +0100
++++ libx264-1.0.1/configure	2014-01-22 19:42:21.000000000 +0100
+@@ -662,7 +662,7 @@ case $host_cpu in
+                 LDFLAGS="$LDFLAGS -arch armv7"
+             fi
+         else
+-            AS="${AS-${cross_prefix}gcc}"
++            AS="${cross_prefix}gcc"
+         fi
+         ;;
+     s390|s390x)
+@@ -1007,9 +1007,9 @@ if [ "$debug" = "yes" ]; then
  elif [ $ARCH = ARM ]; then
      # arm-gcc-4.2 produces incorrect output with -ffast-math
      # and it doesn't save any speed anyway on 4.4, so disable it
@@ -12,7 +21,7 @@
  fi
  
  if cc_check '' -fno-tree-vectorize ; then
-@@ -1125,6 +1125,7 @@ bindir=$bindir
+@@ -1147,6 +1147,7 @@ bindir=$bindir
  libdir=$libdir
  includedir=$includedir
  ARCH=$ARCH
@@ -20,12 +29,3 @@
  SYS=$SYS
  CC=$CC
  CFLAGS=$CFLAGS
-@@ -1136,7 +1137,7 @@ LIBX264=$LIBX264
- AR=$AR
- RANLIB=$RANLIB
- STRIP=$STRIP
--AS=$AS
-+AS=$CC
- ASFLAGS=$ASFLAGS
- RC=$RC
- RCFLAGS=$RCFLAGS

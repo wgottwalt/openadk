@@ -35,9 +35,9 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-lirc \
 			--disable-openssl \
 			--disable-orc \
-			--disable-libwrap \
-			--disable-oss-wrapper \
+			--disable-tcpwrap \
 			--disable-oss-output \
+			--disable-oss-wrapper \
 			--disable-esound \
 			--disable-jack \
 			--disable-gconf \

@@ -28,7 +28,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
 			ADK_PACKAGE_PACEMAKER_PYTHON_GUI=n \
-			ADK_PACKAGE_OPENJDK7=n \
 			ADK_PACKAGE_CLASSPATH=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_CRYPTINIT=n \
@@ -154,12 +153,12 @@ ifeq ($(ADK_NATIVE),y)
 else
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install package/compile
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install package/compile
 else
-	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install package/compile root_clean package/install
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install package/compile root_clean package/install
 endif
 else
-	$(MAKE) -f mk/build.mk toolchain/fixup tools/install jtools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk toolchain/fixup tools/install target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 endif
 
@@ -190,9 +189,6 @@ toolchain/%: ${STAGING_DIR}
 
 tools/%:
 	$(MAKE) -C tools $(patsubst tools/%,%,$@)
-
-jtools/%:
-	$(MAKE) -C jtools $(patsubst jtools/%,%,$@)
 
 image:
 	$(MAKE) -C target image
@@ -274,7 +270,7 @@ cleandir:
 	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
-	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX) $(JTOOLS_BUILD_DIR) $(STAGING_JAVA_HOST_DIR)
+	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
 cleantarget:
@@ -288,9 +284,9 @@ distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d $(JTOOLS_BUILD_DIR)
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
-	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX) $(STAGING_JAVA_HOST_DIR)
+	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 
@@ -536,9 +532,9 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d $(JTOOLS_BUILD_DIR)
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(TOOLS_BUILD_DIR)
-	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX) $(STAGING_JAVA_HOST_DIR)
+	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
 
