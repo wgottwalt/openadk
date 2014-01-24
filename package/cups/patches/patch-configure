@@ -1,40 +1,11 @@
---- cups-1.4.4.orig/configure	2010-06-17 20:25:47.000000000 +0200
-+++ cups-1.4.4/configure	2011-07-29 16:46:45.000000000 +0200
-@@ -1966,7 +1966,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+--- cups-1.7.1.orig/configure	2014-01-08 17:26:27.000000000 +0100
++++ cups-1.7.1/configure	2014-01-24 18:05:03.000000000 +0100
+@@ -5792,7 +5792,7 @@ fi
  
+ case "$COMPONENTS" in
+ 	all)
+-		BUILDDIRS="filter backend berkeley cgi-bin monitor notifier ppdc scheduler systemv conf data desktop locale man doc examples templates"
++		BUILDDIRS="filter backend berkeley monitor notifier ppdc conf data"
+ 		;;
  
- 
--uname=`uname`
-+uname=Linux
- uversion=`uname -r | sed -e '1,$s/^[^0-9]*\([0-9]*\)\.\([0-9]*\).*/\1\2/'`
- uarch=`uname -m`
- 
-@@ -10002,8 +10002,8 @@ if test "$libdir" = "\${exec_prefix}/lib
- 			libdir="$exec_prefix/lib32"
- 			;;
- 		Linux*)
--			if test -d /usr/lib64; then
--				libdir="$exec_prefix/lib64"
-+			if test -d /usr/lib; then
-+				libdir="$exec_prefix/lib"
- 			fi
- 			;;
- 		HP-UX*)
-@@ -10978,7 +10978,7 @@ fi
- if test x$enable_debug = xyes; then
- 	OPTIM="-g"
- else
--	INSTALL_STRIP="-s"
-+	INSTALL_STRIP=""
- fi
- 
- if test x$enable_debug_printfs = xyes; then
-@@ -11199,7 +11199,7 @@ eval "echo \"\$as_me:$LINENO: $ac_try_ec
- 	 test -z "$ac_c_werror_flag" ||
- 	 test ! -s conftest.err
-        } && test -s conftest.$ac_objext; then
--  PIEFLAGS="-pie -fPIE"
-+  PIEFLAGS=""
- 		{ echo "$as_me:$LINENO: result: yes" >&5
- echo "${ECHO_T}yes" >&6; }
- else
+ 	core)

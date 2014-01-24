@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		032a7b7b9f1a6e278ccde73f82cec5c2
 PKG_DESCR:=		GNU parser generator
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		flex-host bison-host
+PKG_BUILDDEP:=		m4-host flex-host bison-host
 PKG_URL:=		http://www.gnu.org/software/bison/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 

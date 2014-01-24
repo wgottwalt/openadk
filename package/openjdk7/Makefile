@@ -10,6 +10,10 @@ PKG_MD5SUM:=		9b3afa162021e3fca6161ba8f9f7dc11
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
+PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
+PKG_BUILDDEP+=		xineramaproto-host libXinerama-host recordproto-host libXi-host libXtst-host freetype-host
+PKG_BUILDDEP+=		alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
+PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
@@ -18,6 +22,8 @@ PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.gz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
+
+GCJ_VER:=		4.7.3
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
@@ -30,9 +36,11 @@ PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
 PKGCB_SHARK:=		llvm
 PKGCD_CACAO:=		Cacao JIT backend
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 include $(TOPDIR)/mk/qemu.mk
 
+$(eval $(call HOST_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # for UINTPTR_MAX in stdint.h
@@ -41,7 +49,7 @@ TARGET_CFLAGS+=		-D__STDC_LIMIT_MACROS
 TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
-BOOTSTRAPJDK:=		${STAGING_JAVA_HOST_DIR}/bootstrap-jdk
+BOOTSTRAPJDK:=		${STAGING_HOST_DIR}/bootstrap-jdk
 
 JDKARCH:=		$(CPU_ARCH)
 ifeq ($(ARCH),x86)
@@ -70,12 +78,11 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
-			--with-gcj=$(STAGING_JAVA_HOST_DIR)/usr/bin/gcj \
+			--with-gcj=$(STAGING_HOST_DIR)/usr/bin/gcj \
 			--without-hotspot-build \
 			--disable-system-jpeg \
 			--disable-system-lcms \
 			--disable-system-zlib \
-			--disable-system-kerberos \
 			--disable-system-png \
 			--disable-system-gif \
 			--disable-system-gtk \
@@ -88,16 +95,55 @@ CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
 CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
 CONFIGURE_ARGS+=	--disable-bootstrap
 
-CONFIGURE_ENV+=		PATH="$(STAGING_JAVA_HOST_DIR)/usr/bin:$${PATH}"
+CONFIGURE_ENV+=		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
 MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
 			ALT_OPENWIN_HOME=$(STAGING_DIR)/usr/ \
 			ALT_CUPS_HEADERS_PATH=$(STAGING_DIR)/usr/include/ \
 			ALT_FREETYPE_HEADERS_PATH=$(STAGING_DIR)/usr/include/ \
 			OTHER_CFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
 			OTHER_CXXFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
-			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(JDKARCH) QEMU=$(QEMU)
+			OTHER_LDFLAGS='$(TARGET_LDFLAGS)' \
+			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(JDKARCH) QEMU=$(QEMU) \
+			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
 
 ALL_TARGET:=		icedtea
+
+# host stuff
+OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar"
+OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64
+OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_HOST_DIR)/usr/bin/ecj
+OPENJDK_NATIVE_ENV+=	BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip"
+OPENJDK_NATIVE_ENV+=	FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
+			ALT_CUPS_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include"
+
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ENV+=	$(OPENJDK_NATIVE_ENV)
+HOST_MAKE_ENV+=		$(OPENJDK_NATIVE_ENV)
+HOST_ALL_TARGET:=	icedtea-boot
+
+HOST_CONFIGURE_ARGS+=\
+		--enable-bootstrap \
+		--enable-zero \
+		--with-jdk-home=$(STAGING_HOST_DIR)/usr/lib/jvm \
+		--with-java=$(STAGING_HOST_DIR)/usr/bin/java \
+		--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
+		--with-ecj-jar=${STAGING_HOST_DIR}/usr/share/java/ecj.jar \
+		--without-hotspot-build \
+                --disable-system-jpeg \
+                --disable-system-lcms \
+                --disable-system-zlib \
+                --disable-system-png \
+                --disable-system-gif \
+                --disable-system-gtk \
+                --disable-system-gio \
+                --disable-system-fontconfig \
+                --disable-compile-against-syscalls \
+		--without-rhino \
+		--disable-docs
+
+hostpost-install:
+	-rm -rf $(STAGING_HOST_DIR)/bootstrap-jdk
+	$(CP) $(WRKBUILD)/openjdk.build-boot/j2sdk-image $(STAGING_HOST_DIR)/bootstrap-jdk
 
 openjdk7-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK7)/usr/lib/jvm/jre
@@ -107,4 +153,5 @@ openjdk7-install:
 	(cd $(IDIR_OPENJDK7)/usr/bin && ln -sf ../lib/jvm/jre/bin/java .)
 	(cd $(IDIR_OPENJDK7)/usr/lib/jvm/jre/lib/$(JDKARCH) && ln -sf server/libjvm.so .)
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

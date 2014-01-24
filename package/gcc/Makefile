@@ -46,7 +46,7 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
 CONFIGURE_ARGS+=	--enable-languages=c
 endif
-ifeq ($(ARCH),powerpc)
+ifeq ($(CPU_ARCH),ppc)
 CONFIGURE_ARGS+=	--disable-target-optspace --with-long-double-64 --enable-secureplt
 TARGET_CFLAGS+=		'-Wl,--secure-plt'
 else

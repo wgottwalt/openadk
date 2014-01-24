@@ -3,6 +3,7 @@ echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 mount -t devtmpfs devtmpfs /dev >/dev/null 2>&1
 mount -nt proc proc /proc
+echo 0 > /proc/sys/kernel/printk
 mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
 [ ! -f /etc/notmpfs ] && {
   size=$(cat /etc/tmpfs 2>/dev/null)

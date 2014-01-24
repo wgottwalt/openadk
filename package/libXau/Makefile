@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		3ab7a4d1aac1b7f8ccc6b9755a19f252
 PKG_DESCR:=		X11 authorisation library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto
+PKG_BUILDDEP:=		xproto libXau-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxau
 PKG_OPTS:=		dev
@@ -18,12 +18,17 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+HOST_STYLE:=		auto
 
 libxau-install:
 	${INSTALL_DIR} ${IDIR_LIBXAU}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXau.so* ${IDIR_LIBXAU}/usr/lib/
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

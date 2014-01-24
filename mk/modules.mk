@@ -1092,6 +1092,7 @@ $(eval $(call KMOD_template,SUNRPC,sunrpc,\
 ,24))
 
 $(eval $(call KMOD_template,SUNRPC_GSS,sunrpc-gss,\
+	$(MODULES_DIR)/kernel/lib/oid_registry \
 	$(MODULES_DIR)/kernel/net/sunrpc/auth_gss/auth_rpcgss \
 ,25))
 
@@ -1106,7 +1107,7 @@ $(eval $(call KMOD_template,LOCKD,lockd,\
 ifneq ($(ADK_KERNEL_NFS_FS),y)
 $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
 	$(MODULES_DIR)/kernel/fs/nfs/nfs \
-,30))
+,30, kmod-sunrpc))
 endif
 
 #$(eval $(call KMOD_template,EXPORTFS,exportfs,\
@@ -1162,10 +1163,14 @@ $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
 
+$(eval $(call KMOD_template,SND_HRTIMER,snd-hrtimer,\
+	$(MODULES_DIR)/kernel/sound/core/snd-hrtimer \
+,41))
+
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
-,41))
+,42))
 
 $(eval $(call KMOD_template,SND_OSSEMUL,snd-ossemul,\
 	$(MODULES_DIR)/kernel/sound/core/oss/snd-mixer-oss \
