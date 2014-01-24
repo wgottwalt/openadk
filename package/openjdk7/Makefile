@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
 PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
 PKG_BUILDDEP+=		xineramaproto-host libXinerama-host libXtst-host freetype-host
 PKG_BUILDDEP+=		alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
-PKG_BUILDDEP+=		classpath-host jamvm-host ant-host openjdk7-host
+PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
@@ -113,7 +113,8 @@ OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$
 OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64
 OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_HOST_DIR)/usr/bin/ecj
 OPENJDK_NATIVE_ENV+=	BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip"
-OPENJDK_NATIVE_ENV+=	FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)"
+OPENJDK_NATIVE_ENV+=	FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
+			ALT_CUPS_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include"
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ENV+=	$(OPENJDK_NATIVE_ENV)
