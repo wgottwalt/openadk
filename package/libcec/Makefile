@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
 PKG_VERSION:=		2.1.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d65e52ab3295e9e4b73bf4580f3bd4f7
 PKG_DESCR:=		control your device with your TV remote control
 PKG_SECTION:=		libs
@@ -34,5 +34,8 @@ libcec-install:
 	$(INSTALL_DIR) $(IDIR_LIBCEC)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libcec*.so* \
 		$(IDIR_LIBCEC)/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBCEC)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/cec-client \
+		$(IDIR_LIBCEC)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
