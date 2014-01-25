@@ -38,7 +38,9 @@ HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--disable-openssl \
 			--disable-cdsassl \
 			--disable-dbus \
-			--disable-ssl
+			--disable-ssl \
+			--with-components=core \
+			--with-rcdir=$(STAGING_HOST_DIR)/etc
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 			OPTIM='-fPIC'
 
@@ -57,7 +59,9 @@ CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--disable-openssl \
 			--disable-cdsassl \
 			--disable-dbus \
-			--disable-ssl
+			--disable-ssl \
+			--with-components=core \
+			--with-rcdir=$(STAGING_TARGET_DIR)/etc
 
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
@@ -66,22 +70,9 @@ else
 XAKE_FLAGS+=		OPTIM='-fPIC'
 endif
 
-cups-hostpackage:
-
 cups-install:
-	${INSTALL_DIR} ${IDIR_CUPS}/usr/bin
-	${INSTALL_DIR} ${IDIR_CUPS}/usr/sbin
-	${INSTALL_DIR} ${IDIR_CUPS}/etc/cups
-	${INSTALL_DIR} ${IDIR_CUPS}/usr/lib/cups/daemon
-	${CP} ${WRKINST}/etc/cups/* ${IDIR_CUPS}/etc/cups/
-	rm ${IDIR_CUPS}/etc/cups/cupsd.conf.default
-	${CP} ${WRKINST}/usr/bin/* ${IDIR_CUPS}/usr/bin/
-	rm -f ${IDIR_CUPS}/usr/bin/cups-config
+	${INSTALL_DIR} ${IDIR_CUPS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcups*.so* ${IDIR_CUPS}/usr/lib/
-	${CP} ${WRKINST}/usr/lib/cups/daemon/* \
-		${IDIR_CUPS}/usr/lib/cups/daemon/
-	${CP} ${WRKINST}/usr/sbin/* ${IDIR_CUPS}/usr/sbin/
-	${CP} ./files/etc/cups/* ${IDIR_CUPS}/etc/cups/
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -27,6 +27,7 @@ GCJ_VER:=		4.7.3
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
+PKG_LIBC_DEPENDS:=	uclicb eglibc glibc
 PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx !lemote-yeelong
 
 PKG_SUBPKGS:=		OPENJDK7
