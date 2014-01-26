@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7605af4d64291495645f88575a564475
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		multimedia
