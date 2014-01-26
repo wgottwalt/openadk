@@ -28,7 +28,7 @@ EGLIBC_BUILD_DIR_FINAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 $(WRKBUILD)/.headers_configure:
 	mkdir -p $(EGLIBC_BUILD_DIR_INITIAL)
 	$(CP) ${TOPDIR}/toolchain/eglibc/eglibc.config \
-		$(EGLIBC_BUILD_DIR_INITIAL)/option-groups.config
+		$(WRKBUILD)/libc/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
 		CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
