@@ -22,6 +22,9 @@ load-module module-always-sink
 ### Enable positioned event sounds
 load-module module-position-event-sounds
 
+# pacmd communication
+load-module module-cli-protocol-unix socket=/var/run/pulse/cli
+
 # configure as a rtp sender
 #load-module module-null-sink sink_name=rtp format=s16be channels=2
 #load-module module-rtp-send source=rtp.monitor destination=224.0.0.56

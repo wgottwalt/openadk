@@ -10,13 +10,17 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	# check group membership
+	id pulse | grep audio >/dev/null 2>&1
+	if [ $? -ne 0 ];then
+		echo "pulse user must be in group audio."
+		exit 1
+	fi
 	if [ ! -d /var/run/pulse ]; then 
 		mkdir -p /var/run/pulse/ && chown -R pulse.pulse /var/run/pulse && chmod 750 /var/run/pulse
 	fi
-	if [ ! -d /var/lib/pulse ]; then 
-		mkdir -p /var/lib/pulse/.pulse-cookie && chown -R pulse.pulse /var/lib/pulse && chmod 750 /var/lib/pulse
-	fi
-	/usr/bin/pulseaudio $pulseaudio_flags
+	chown pulse /etc/pulse
+	env PULSE_STATE_PATH=/etc/pulse/state /usr/bin/pulseaudio $pulseaudio_flags
 	;;
 stop)
 	kill $(pgrep -f /usr/bin/pulseaudio)

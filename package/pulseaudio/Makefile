@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		591f211db2790a7e4d222f2dc6858db3
 PKG_DESCR:=		a sound system for POSIX OSes
 PKG_SECTION:=		multimedia
@@ -46,7 +46,8 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-hal-compat \
 			--enable-samplerate \
 			--enable-alsa \
-			--with-speex
+			--with-speex \
+			--with-access-group=audio
 
 pulseaudio-install:
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/etc/pulse
@@ -64,5 +65,10 @@ pulseaudio-install:
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/lib/pulse-$(PKG_VERSION)/modules
 	$(CP) $(WRKINST)/usr/lib/pulse-$(PKG_VERSION)/modules/*.so \
 		$(IDIR_PULSEAUDIO)/usr/lib/pulse-$(PKG_VERSION)/modules
+	# pa uses $HOME from root user otherwise
+	mv $(IDIR_PULSEAUDIO)/usr/bin/pacmd $(IDIR_PULSEAUDIO)/usr/bin/pacmd.bin
+	echo "#!/bin/sh" > $(IDIR_PULSEAUDIO)/usr/bin/pacmd
+	echo 'PULSE_RUNTIME_PATH=/var/run/pulse pacmd.bin "$$@"' >> $(IDIR_PULSEAUDIO)/usr/bin/pacmd
+	chmod 755 $(IDIR_PULSEAUDIO)/usr/bin/pacmd
 
 include ${TOPDIR}/mk/pkg-bottom.mk
