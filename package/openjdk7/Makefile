@@ -30,13 +30,6 @@ PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
 PKG_LIBC_DEPENDS:=	uclicb eglibc glibc
 PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx !lemote-yeelong
 
-PKG_SUBPKGS:=		OPENJDK7
-PKG_CHOICES_OPENJDK7:=	ZERO SHARK CACAO
-PKGCD_ZERO:=		zero-assembly backend
-PKGCD_SHARK:=		Shark JIT backend (needs eglibc/glibc)
-PKGCB_SHARK:=		llvm
-PKGCD_CACAO:=		Cacao JIT backend
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 include $(TOPDIR)/mk/qemu.mk
@@ -60,17 +53,7 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 JDKARCH:=		mipsel
 endif
 
-ifeq ($(ADK_PACKAGE_OPENJDK7_ZERO),y)
 CONFIGURE_BACKEND:=	--enable-zero
-endif
-ifeq ($(ADK_PACKAGE_OPENJDK7_SHARK),y)
-CONFIGURE_BACKEND:=	--enable-shark \
-			--with-llvm-config=$(STAGING_TARGET_DIR)/usr/bin/llvm-config
-endif
-ifeq ($(ADK_PACKAGE_OPENJDK7_CACAO),y)
-CONFIGURE_BACKEND:=	--enable-cacao
-endif
-
 CONFIGURE_COMMON:=	--disable-docs \
 			--with-jdk-home=$(BOOTSTRAPJDK) \
 			--with-java=$(BOOTSTRAPJDK)/bin/java \
