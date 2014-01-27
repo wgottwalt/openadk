@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gmediaserver
 PKG_VERSION:=		0.13.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
 PKG_DESCR:=		An UPnP music media server
 PKG_SECTION:=		multimedia
@@ -21,6 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz"
 CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
 			--with-libupnp="${STAGING_TARGET_DIR}/usr"
