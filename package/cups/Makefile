@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cups
 PKG_VERSION:=		1.7.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		55277c40fd4b7183dc3671d39c5c42b7
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
