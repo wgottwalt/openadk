@@ -43,7 +43,8 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getpwuid_r=yes \
 			ac_cv_func_posix_getgrgid_r=yes
 
-HOST_CONFIGURE_ARGS+=	--disable-fam
+HOST_CONFIGURE_ARGS+=	--disable-fam \
+			--disable-compile-warnings
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
