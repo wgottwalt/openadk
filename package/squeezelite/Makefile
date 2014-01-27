@@ -5,15 +5,18 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7605af4d64291495645f88575a564475
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad
-PKG_DEPENDS+=		libpthread librt
-PKG_BUILDDEP:=		alsa-lib
+PKG_DEPENDS+=		libpthread librt libfaad2
+PKG_BUILDDEP:=		alsa-lib libmad flac libvorbis mpg123
+PKG_BUILDDEP+=		faad2
 PKG_URL:=		http://code.google.com/p/squeezelite/
 PKG_SITES:=		http://openadk.org/distfiles/
+
+PKG_LIBC_DEPENDS:=	eglibc glibc musl
 
 include $(TOPDIR)/mk/package.mk
 

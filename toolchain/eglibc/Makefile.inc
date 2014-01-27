@@ -15,6 +15,7 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-nscd \
 			--with-__thread \
 			--with-tls \
+			--disable-obsolete-rpc \
 			--enable-add-ons \
 			--disable-nls
 EGLIBC_ENV:=		PATH='${TARGET_PATH}' \

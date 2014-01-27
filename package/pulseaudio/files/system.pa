@@ -22,6 +22,24 @@ load-module module-always-sink
 ### Enable positioned event sounds
 load-module module-position-event-sounds
 
-load-module module-null-sink sink_name=rtp format=s16be channels=2
-load-module module-rtp-send source=rtp.monitor destination=224.0.0.56
+# pacmd communication
+load-module module-cli-protocol-unix socket=/var/run/pulse/cli
+
+# configure as a rtp sender
+#load-module module-null-sink sink_name=rtp format=s16be channels=2
+#load-module module-rtp-send source=rtp.monitor destination=224.0.0.56
+
+# configure as a rtp receiver and sender
+#load-module module-null-sink sink_name=rtp format=s16be channels=2
+#load-module module-rtp-send source=rtp.monitor destination=224.0.0.56 loop=1
+#load-module module-alsa-sink device=hw:0,0 sink_name=alsa
+#load-module module-rtp-recv sap_address=224.0.0.56 sink=alsa
+
+# configure combine-sink (echo in the same room)
+#load-module module-alsa-sink device=hw:0,0 sink_name=alsa
+#load-module module-combine-sink slaves=rtp,alsa
+
+# configure as a rtp receiver
+load-module module-rtp-recv sap_address=224.0.0.56
+load-module module-alsa-sink device=hw:0,0
 

@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		68977789ae64985dddbd1a1a1652642e
 PKG_DESCR:=		lightweight XML library
 PKG_SECTION:=		libs
-PKG_URL:=		http://www.minixml.org/
-PKG_SITES:=		http://ftp.easysw.com/pub/mxml/2.6/
+PKG_URL:=		http://www.msweet.org/projects.php?Z3
+PKG_SITES:=		http://www.msweet.org/files/project3/
 PKG_LIBNAME:=		libmxml
 PKG_OPTS:=		dev
 
