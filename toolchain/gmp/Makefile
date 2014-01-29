@@ -12,9 +12,6 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
-ifneq ($(OStype),Darwin)
-	(cd $(WRKBUILD); cp configfsf.guess config.guess)
-endif
 	(cd $(WRKBUILD); \
 		./configure \
 		--prefix=$(STAGING_HOST_DIR) \
