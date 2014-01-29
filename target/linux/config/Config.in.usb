@@ -1,7 +1,11 @@
 menu "USB support"
 depends on ADK_TARGET_WITH_USB
 
+config ADK_KERNEL_USB_SUPPORT
+	boolean
+
 config ADK_KERNEL_USB
+	select ADK_KERNEL_USB_SUPPORT
 	boolean
 
 config ADK_KERNEL_USB_LIBUSUAL
@@ -29,6 +33,7 @@ config ADK_KPACKAGE_KMOD_USB
 	prompt "kmod-usb......................... USB support"
 	tristate
 	select ADK_KERNEL_NLS
+	select ADK_KERNEL_USB_SUPPORT
 	depends on !ADK_KERNEL_USB
 	default y if ADK_TARGET_SYSTEM_QEMU_I686
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4
@@ -44,7 +49,6 @@ config ADK_KPACKAGE_KMOD_USB
 	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -335,6 +339,7 @@ config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
 	prompt "kmod-snd-usb-audio................ USB sound adapter"
 	tristate
 	default n
+	select ADK_KERNEL_SND_USB
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER

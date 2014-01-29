@@ -4,6 +4,9 @@ depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 config ADK_KERNEL_SND_ARM
 	boolean
 
+config ADK_KERNEL_SND_USB
+	boolean
+
 config ADK_KERNEL_SND_SOC
 	boolean
 

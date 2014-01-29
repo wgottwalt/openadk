@@ -9,19 +9,26 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		8918809e47c29b44d25eb16b1586a15b
 PKG_DESCR:=		Xtst library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		recordproto libXi
+PKG_BUILDDEP:=		recordproto-host xproto-host xextproto-host inputproto-host kbproto-host
+PKG_BUILDDEP+=		xtrans-host xcb-proto-host libXau-host libpthread-stubs-host libxcb-host
+PKG_BUILDDEP+=		libX11-host libXext-host libXi-host libXtst-host
+PKG_BUILDDEP+=		recordproto libXi
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxtst
 PKG_OPTS:=		dev
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBXTST,libxtst,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXTST,libxtst,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+= 	--disable-malloc0returnsnull
 
 libxtst-install:
 	${INSTALL_DIR} ${IDIR_LIBXTST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXtst.so* ${IDIR_LIBXTST}/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

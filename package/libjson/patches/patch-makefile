@@ -1,0 +1,50 @@
+--- libjson.orig/makefile	2014-01-17 20:38:29.584543459 +0100
++++ libjson/makefile	2014-01-17 20:38:14.372460375 +0100
+@@ -128,7 +128,7 @@ objects        = internalJSONNode.o JSON
+                  JSONDebug.o JSONIterators.o JSONMemory.o JSONNode.o \
+                  JSONNode_Mutex.o JSONPreparse.o JSONStream.o JSONValidator.o \
+                  JSONWorker.o JSONWriter.o libjson.o 
+-OS=$(shell uname)
++OS=Linux
+ 
+ # Defaults
+ ifeq ($(OS), Darwin)
+@@ -158,8 +158,7 @@ srcdir          ?= _internal/Source
+ CXX             ?= c++
+ AR              ?= ar
+ PIC             ?= PIC
+-BUILD_TYPE      ?= "default"
+-SHARED          ?= "1"
++SHARED          ?= 1
+ 
+ 
+ # Internal Variables
+@@ -237,18 +236,16 @@ endif
+ 
+ # Compile object files
+ $(objdir)/%.o: $(srcdir)/%.cpp
+-	$(CXX) $< -o $@ -c $(CXXFLAGS)
++	$(CXX) $< -o $@ -c $(CPPFLAGS) $(CXXFLAGS)
+ 
+ ifeq ($(SHARED),1)
+ install: banner install_headers $(lib_target)
+ 	@echo "Install shared library"
++	mkdir -p $(inst_path)
+ 	cp -f ./$(lib_target) $(inst_path)
+ 	cd $(inst_path) ; \
+ 	ln -sf $(lib_target) $(libname_shared_major_version) ; \
+ 	ln -sf $(libname_shared_major_version) $(libname_shared)
+-ifneq ($(OS),Darwin)
+-	ldconfig
+-endif
+ 	@echo "Install shared library: Done."
+ else
+ install: banner install_headers $(lib_target)
+@@ -266,7 +263,6 @@ install_headers: banner
+ 	cp -r ./$(srcdir)/JSONDefs $(include_path)/$(libname_hdr)/$(srcdir)
+ 	chmod -R a+r $(include_path)/$(libname_hdr)
+ 	find  $(include_path)/$(libname_hdr) -type d -exec chmod a+x {} \;
+-	cp -rv $(srcdir)/Dependencies/ $(include_path)/$(libname_hdr)/$(srcdir)
+ 	@echo "Install header files: Done."
+ 
+ clean: banner

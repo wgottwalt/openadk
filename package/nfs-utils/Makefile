@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.2.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		fb48630b7c145fb9d6602a79c6eaab11
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-nfsd keyutils libtirpc rpcbind libdevmapper libpthread
+PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
 PKG_FDEPENDS:=		$(PKG_DEPENDS)
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
@@ -19,6 +19,12 @@ PKG_SITES:=		http://openadk.org/distfiles/
 #PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+
+PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
+PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc
+PKGSD_NFS_UTILS_CLIENT:=NFS client utilities (mount)
+PKGSS_NFS_UTILS_SERVER:=kmod-nfsd kmod-sunrpc
+PKGSD_NFS_UTILS_SERVER:=NFS server daemons and utilities
 
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
@@ -34,6 +40,8 @@ endif
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
+$(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
 ifeq ($(ADK_NATIVE),)
 KRB5INC:=		${STAGING_TARGET_DIR}/usr
@@ -63,26 +71,31 @@ CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--with-tirpcinclude=${TIRPCINC} \
 			--disable-uuid
 
-nfs-utils-install:
-	${INSTALL_DIR} ${IDIR_NFS_UTILS}/usr/sbin ${IDIR_NFS_UTILS}/etc
-	${INSTALL_DIR} ${IDIR_NFS_UTILS}/sbin
-	${CP} ${WRKINST}/sbin/{u,}mount.nfs* ${IDIR_NFS_UTILS}/sbin
-	${INSTALL_DATA} ./files/rpc ${IDIR_NFS_UTILS}/etc
+nfs-utils-client-install:
+	${INSTALL_DIR} ${IDIR_NFS_UTILS_CLIENT}/sbin
+	${CP} ${WRKINST}/sbin/{u,}mount.nfs* ${IDIR_NFS_UTILS_CLIENT}/sbin
+
+nfs-utils-server-install:
+	${INSTALL_DIR} ${IDIR_NFS_UTILS_SERVER}/usr/sbin ${IDIR_NFS_UTILS_SERVER}/etc
 	${INSTALL_BIN} ${WRKBUILD}/utils/exportfs/exportfs \
-		${IDIR_NFS_UTILS}/usr/sbin/
-	${INSTALL_DATA} ./files/nfsd.exports ${IDIR_NFS_UTILS}/etc/exports
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
+	${INSTALL_DATA} ./files/nfsd.exports ${IDIR_NFS_UTILS_SERVER}/etc/exports
 	${INSTALL_BIN} ${WRKBUILD}/utils/nfsd/nfsd \
-		${IDIR_NFS_UTILS}/usr/sbin/
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
 	${INSTALL_BIN} ${WRKBUILD}/utils/mountd/mountd \
-		${IDIR_NFS_UTILS}/usr/sbin/
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
-	${INSTALL_DATA} ./files/idmapd.conf ${IDIR_NFS_UTILS}/etc
+	${INSTALL_DATA} ./files/idmapd.conf ${IDIR_NFS_UTILS_SERVER}/etc
 	${INSTALL_BIN} ${WRKBUILD}/utils/gssd/gssd \
-		${IDIR_NFS_UTILS}/usr/sbin/
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
 	${INSTALL_BIN} ${WRKBUILD}/utils/gssd/svcgssd \
-		${IDIR_NFS_UTILS}/usr/sbin/
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
 	${INSTALL_BIN} ${WRKBUILD}/utils/idmapd/idmapd \
-		${IDIR_NFS_UTILS}/usr/sbin/
+		${IDIR_NFS_UTILS_SERVER}/usr/sbin/
 endif
+
+nfs-utils-install:
+	${INSTALL_DIR} ${IDIR_NFS_UTILS}/etc
+	${INSTALL_DATA} ./files/rpc ${IDIR_NFS_UTILS}/etc
 
 include ${TOPDIR}/mk/pkg-bottom.mk

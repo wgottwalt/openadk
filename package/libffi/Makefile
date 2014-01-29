@@ -22,8 +22,8 @@ $(eval $(call PKG_template,LIBFFI,libffi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 AUTOTOOL_STYLE:=	autoreconf
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--disable-builddir
-CONFIGURE_ARGS+=	--disable-builddir
+HOST_CONFIGURE_ARGS+=	--disable-builddir --with-pic
+CONFIGURE_ARGS+=	--disable-builddir --with-pic
 
 libffi-install:
 	${INSTALL_DIR} ${IDIR_LIBFFI}/usr/lib

@@ -49,6 +49,7 @@ INSTALL_TARGET?=	install
 MAKE_ENV+=		$(GCC_CHECK) \
 			PATH='${TARGET_PATH}' \
 			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
+			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tcl
 PKG_VERSION:=		8.5.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		8512d8db3233041dd68a81476906012a
 PKG_DESCR:=		TCL scripting language
 PKG_SECTION:=		lang
