@@ -26,6 +26,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_HOST_DARWIN),y)
+LDFLAGS_FOR_BUILD+=	-framework Cocoa
+endif
+
 HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
