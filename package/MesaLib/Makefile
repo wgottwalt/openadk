@@ -35,6 +35,9 @@ endif
 ifeq ($(ADK_HOST_OPENBSD),y)
 PYTHON:=/usr/local/bin/python2.7
 endif
+ifeq ($(ADK_HOST_CYGWIN),y)
+PYTHON:=/usr/bin/python2.7
+endif
 
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=i915
