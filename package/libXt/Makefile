@@ -26,6 +26,7 @@ $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 HOST_STYLE:=		auto
 AUTOTOOL_STYLE:=	autoreconf
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+CONFIGURE_ENV+=		CFLAGS_FOR_BUILD="$(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD)"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxt-install:

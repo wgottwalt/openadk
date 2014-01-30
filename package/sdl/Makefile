@@ -31,7 +31,15 @@ $(eval $(call HOST_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--without-x
+HOST_CONFIGURE_ARGS+=	--without-x \
+			--disable-cdrom \
+			--disable-joystick \
+			--disable-audio \
+			--disable-video \
+			--disable-assembly \
+			--disable-shared \
+			--disable-video-cocoa \
+			--disable-video-opengl
 
 ifeq ($(ADK_PACKAGE_SDL_WITH_TSLIB),y)
 CONFIGURE_ARGS+=	--enable-input-tslib
