@@ -23,6 +23,7 @@ $(eval $(call HOST_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,ALSA_LIB,alsa-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
+HOST_LINUX_ONLY:=	1
 TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
 CONFIGURE_ARGS+=	--disable-python
 

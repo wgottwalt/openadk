@@ -103,5 +103,7 @@ endif
 ${_HOST_COOKIE}:
 	exec ${MAKE} hostpackage
 
+ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
 	touch ${_HOST_COOKIE}
+endif
