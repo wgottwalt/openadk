@@ -27,6 +27,7 @@ $(eval $(call HOST_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE
 $(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--without-png
 CONFIGURE_ARGS+=	--without-png
 
 libfreetype-install:

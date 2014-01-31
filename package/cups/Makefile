@@ -24,6 +24,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,CUPS,cups,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CUPS,cups,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifneq ($(ADK_HOST_LINUX),y)
+HOST_LINUX_ONLY:=	1
+endif
+
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--disable-webif \
