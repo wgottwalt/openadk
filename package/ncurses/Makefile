@@ -83,7 +83,8 @@ libncurses-install:
 	    ${IDIR_LIBNCURSES}/usr/lib
 	for ti in rxvt rxvt-unicode; do \
 		TERMINFO=${WRKINST}/usr/share/terminfo \
-		tic -x ./files/$$ti.ti; \
+		PATH=$(HOST_PATH) \
+		tic$(EXEEXT) -x ./files/$$ti.ti; \
 	done
 ifeq (${ADK_PACKAGE_LIBNCURSES_FULL_TERMINFO},y)
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share

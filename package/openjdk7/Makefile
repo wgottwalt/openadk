@@ -26,7 +26,7 @@ WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 GCJ_VER:=		4.7.3
 
 PKG_HOST_DEPENDS:=	linux
-PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
+PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 PKG_SYSTEM_DEPENDS:=	!lemote-yeelong
 
@@ -48,6 +48,9 @@ BOOTSTRAPJDK:=		${STAGING_HOST_DIR}/bootstrap-jdk
 JDKARCH:=		$(CPU_ARCH)
 ifeq ($(ARCH),x86)
 JDKARCH:=		i386
+endif
+ifeq ($(CPU_ARCH),x86_64)
+JDKARCH:=		amd64
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 JDKARCH:=		mipsel
