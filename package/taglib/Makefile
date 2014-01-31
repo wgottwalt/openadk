@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		taglib
-PKG_VERSION:=		1.8
+PKG_VERSION:=		1.9.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dcb8bd1b756f2843e18b1fdf3aaeee15
+PKG_MD5SUM:=		0d35df96822bbd564c5504cb3c2e4d86
 PKG_DESCR:=		Audio Meta-Data library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		cmake-host zlib
 PKG_URL:=		http://taglib.github.com/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://taglib.github.io/releases/
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/package.mk

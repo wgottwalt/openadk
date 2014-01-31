@@ -58,6 +58,7 @@ CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mysql \
+			--enable-mid \
 			--enable-libmp3lame \
 			--enable-libvorbisenc \
 			--enable-samba \
