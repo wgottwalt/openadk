@@ -10,7 +10,7 @@ PKG_MD5SUM:=		32893941d40d052a5e649efcf06aca06
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl libpng
-PKG_BUILDDEP:=		glib-host qemu-host zlib sdl libpng
+PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host qemu-host zlib sdl libpng
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
