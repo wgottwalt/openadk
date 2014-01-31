@@ -32,12 +32,12 @@ $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-x \
+			--enable-shared \
 			--disable-cdrom \
 			--disable-joystick \
 			--disable-audio \
 			--disable-video \
 			--disable-assembly \
-			--disable-shared \
 			--disable-video-cocoa \
 			--disable-video-opengl
 
