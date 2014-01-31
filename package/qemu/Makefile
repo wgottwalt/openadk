@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		1.6.1
+PKG_VERSION:=		1.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3a897d722457c5a895cd6ac79a28fda0
+PKG_MD5SUM:=		32893941d40d052a5e649efcf06aca06
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib libsdl libpng
@@ -37,6 +37,7 @@ CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 HOST_STYLE:=		manual
 HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--disable-docs \
+			--disable-werror \
 			--disable-system \
 			--disable-sdl
 

@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
 PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
 PKG_BUILDDEP+=		xineramaproto-host libXinerama-host recordproto-host libXi-host libXtst-host freetype-host
-PKG_BUILDDEP+=		alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
+PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
 PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
@@ -27,8 +27,8 @@ GCJ_VER:=		4.7.3
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc sparc x86 x86_64
-PKG_LIBC_DEPENDS:=	uclicb eglibc glibc
-PKG_SYSTEM_DEPENDS:=	!linksys-ag241 !fon-fon2100 !broadcom-bcm47xx !lemote-yeelong
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_SYSTEM_DEPENDS:=	!lemote-yeelong
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

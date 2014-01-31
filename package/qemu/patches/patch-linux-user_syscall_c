@@ -1,0 +1,11 @@
+--- qemu-1.7.0.orig/linux-user/syscall.c	2013-11-27 23:15:55.000000000 +0100
++++ qemu-1.7.0/linux-user/syscall.c	2014-01-30 12:14:53.751964593 +0100
+@@ -94,7 +94,7 @@ int __clone2(int (*fn)(void *), void *ch
+ #include <linux/utsname.h>
+ #include <linux/cdrom.h>
+ #include <linux/hdreg.h>
+-#include <linux/soundcard.h>
++#include <linux/soundcard.h.oss3>
+ #include <linux/kd.h>
+ #include <linux/mtio.h>
+ #include <linux/fs.h>
