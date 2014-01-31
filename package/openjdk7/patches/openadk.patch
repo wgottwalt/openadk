@@ -1,6 +1,6 @@
 diff -Nur icedtea-2.3.12.orig/Makefile.in icedtea-2.3.12/Makefile.in
---- icedtea-2.3.12.orig/Makefile.in	2013-07-26 20:18:01.000000000 +0200
-+++ icedtea-2.3.12/Makefile.in	2014-01-16 08:54:53.000000000 +0100
+--- icedtea-2.3.12.orig/Makefile.in	2013-07-26 20:18:01.947711693 +0200
++++ icedtea-2.3.12/Makefile.in	2014-01-31 17:22:30.941371226 +0100
 @@ -695,7 +695,7 @@
  	$(DISTRIBUTION_PATCHES)
  
@@ -21,8 +21,8 @@ diff -Nur icedtea-2.3.12.orig/Makefile.in icedtea-2.3.12/Makefile.in
  
 diff -Nur icedtea-2.3.12.orig/patches/openadk.patch icedtea-2.3.12/patches/openadk.patch
 --- icedtea-2.3.12.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.3.12/patches/openadk.patch	2014-01-16 08:55:05.000000000 +0100
-@@ -0,0 +1,546 @@
++++ icedtea-2.3.12/patches/openadk.patch	2014-01-31 17:30:37.666672422 +0100
+@@ -0,0 +1,562 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2013-07-17 20:14:46.000000000 +0200
 ++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2013-12-08 15:44:03.000000000 +0100
@@ -516,32 +516,6 @@ diff -Nur icedtea-2.3.12.orig/patches/openadk.patch icedtea-2.3.12/patches/opena
 + 
 + ifndef JDK_TOPDIR
 +   JDK_TOPDIR=$(TOPDIR)/jdk
-+diff -Nur openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make openjdk-boot/hotspot/make/linux/makefiles/vm.make
-+--- openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make	2013-07-26 12:31:42.000000000 +0200
-++++ openjdk-boot/hotspot/make/linux/makefiles/vm.make	2014-01-14 21:28:27.000000000 +0100
-+@@ -285,7 +285,7 @@
-+   LIBS_VM                  += $(LIBS)
-+ endif
-+ ifeq ($(ZERO_BUILD), true)
-+-  LIBS_VM += $(LIBFFI_LIBS)
-++  LIBS_VM += $(FFI_LDFLAGS) -Wl,-Bstatic $(LIBFFI_LIBS) -Wl,-Bdynamic
-+ endif
-+ ifeq ($(SHARK_BUILD), true)
-+   LFLAGS_VM += $(LLVM_LDFLAGS)
-+diff -Nur openjdk-boot.orig/Makefile openjdk-boot/Makefile
-+--- openjdk-boot.orig/Makefile	2013-07-24 23:26:43.000000000 +0200
-++++ openjdk-boot/Makefile	2014-01-13 22:15:04.000000000 +0100
-+@@ -53,9 +53,7 @@
-+ REL_JDK_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(JDK_IMAGE_DIRNAME)
-+ REL_JDK_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(JDK_IMAGE_DIRNAME)
-+ 
-+-ifndef TOPDIR
-+-  TOPDIR:=.
-+-endif
-++TOPDIR:=.
-+ 
-+ ifndef JDK_TOPDIR
-+   JDK_TOPDIR=$(TOPDIR)/jdk
 +diff -Nur openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make openjdk/hotspot/make/linux/makefiles/zeroshark.make
 +--- openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make	2013-07-26 12:31:42.000000000 +0200
 ++++ openjdk/hotspot/make/linux/makefiles/zeroshark.make	2014-01-16 08:45:53.000000000 +0100
@@ -569,3 +543,45 @@ diff -Nur icedtea-2.3.12.orig/patches/openadk.patch icedtea-2.3.12/patches/opena
 + 
 + endif
 + 
++diff -Nur openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make openjdk-boot/hotspot/make/linux/makefiles/vm.make
++--- openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make	2013-07-26 12:31:42.000000000 +0200
+++++ openjdk-boot/hotspot/make/linux/makefiles/vm.make	2014-01-31 17:29:43.410522729 +0100
++@@ -285,7 +285,7 @@
++   LIBS_VM                  += $(LIBS)
++ endif
++ ifeq ($(ZERO_BUILD), true)
++-  LIBS_VM += $(LIBFFI_LIBS)
+++  LIBS_VM += $(FFI_LDFLAGS) -Wl,-Bstatic $(LIBFFI_LIBS) -Wl,-Bdynamic
++ endif
++ ifeq ($(SHARK_BUILD), true)
++   LFLAGS_VM += $(LLVM_LDFLAGS)
++diff -Nur openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk openjdk-boot/jdk/make/sun/awt/mawt.gmk
++--- openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk	2013-07-25 18:10:09.000000000 +0200
+++++ openjdk-boot/jdk/make/sun/awt/mawt.gmk	2014-01-31 17:29:54.942555812 +0100
++@@ -269,12 +269,6 @@
++ endif # !HEADLESS
++ endif # PLATFORM
++ 
++-ifeq ($(PLATFORM), linux)
++-  # Checking for the X11/extensions headers at the additional location
++-  CPPFLAGS += -I$(firstword $(wildcard $(OPENWIN_HOME)/include/X11/extensions) \
++-                        $(wildcard /usr/include/X11/extensions))
++-endif
++-
++ ifeq ($(PLATFORM), macosx))
++   CPPFLAGS += -I$(OPENWIN_HOME)/include/X11/extensions \
++               -I$(OPENWIN_HOME)/include 
++diff -Nur openjdk-boot.orig/Makefile openjdk-boot/Makefile
++--- openjdk-boot.orig/Makefile	2013-07-24 23:26:43.000000000 +0200
+++++ openjdk-boot/Makefile	2014-01-31 17:29:43.410522729 +0100
++@@ -53,9 +53,7 @@
++ REL_JDK_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(JDK_IMAGE_DIRNAME)
++ REL_JDK_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(JDK_IMAGE_DIRNAME)
++ 
++-ifndef TOPDIR
++-  TOPDIR:=.
++-endif
+++TOPDIR:=.
++ 
++ ifndef JDK_TOPDIR
++   JDK_TOPDIR=$(TOPDIR)/jdk
