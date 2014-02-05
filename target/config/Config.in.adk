@@ -38,6 +38,12 @@ config ADK_DISABLE_HONOUR_CFLAGS
 	help
 	  Disable honour CFLAGS checks.
 
+config ADK_WGET_TIMEOUT
+	int "Set wget timeout"
+	default 10
+	help
+	  set wget timeout	
+
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
 	default n

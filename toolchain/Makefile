@@ -4,12 +4,14 @@
 # Steps to build toolchains
 # 1) build and install binutils
 # 2) build and install mpfr, mpc, libelf and gmp
-# 3) build and install gcc c compiler
+# 3) build and install minimal gcc c compiler
 # 4) install kernel-headers
 # 5) install libc headers
-# 6) build and install full gcc
+# 6) build and install initial static gcc
 # 7) build and install full libc
-# 8) build and install gdb debugger
+# 8) build and install full shared gcc
+# 9) rebuild and install full libc (in case of musl)
+# 10) build and install gdb debugger
 
 include $(TOPDIR)/rules.mk
 
@@ -50,7 +52,7 @@ gcc-configure: $(LIBC)-prepare
 $(LIBC)-compile: gcc-configure
 gcc-compile: $(LIBC)-install
 ifeq ($(ADK_TOOLCHAIN_GDB),y)
-$(LIBC)-fixup: gdb-install
+$(LIBC)-fixup: gcc-install gdb-install
 else
 $(LIBC)-fixup: gcc-install
 endif

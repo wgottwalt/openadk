@@ -218,7 +218,7 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		wget --timeout=40 -t 3 $(QUIET)
+FETCH_CMD?=		wget --timeout=$(ADK_WGET_TIMEOUT) -t 3 $(QUIET)
 
 ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe

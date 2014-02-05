@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sdl
 PKG_VERSION:=		1.2.14
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		e52086d1b508fa0b76c52ee30b55bec4
 PKG_DESCR:=		Simple DirectMedia Layer
 PKG_SECTION:=		libs
@@ -32,12 +32,14 @@ $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-x \
+			--enable-shared \
 			--disable-cdrom \
 			--disable-joystick \
 			--disable-audio \
 			--disable-video \
 			--disable-assembly \
-			--disable-shared \
+			--disable-input-tslib \
+			--disable-video-directfb \
 			--disable-video-cocoa \
 			--disable-video-opengl
 

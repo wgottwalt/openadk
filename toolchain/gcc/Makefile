@@ -95,13 +95,6 @@ LANGUAGES:=c
 ifeq ($(ADK_TOOLCHAIN_GCC_CXX),y)
 LANGUAGES:=${LANGUAGES},c++
 endif
-ifeq ($(ADK_TOOLCHAIN_GCC_JAVA),y)
-LANGUAGES:=${LANGUAGES},java
-GCC_CONFOPTS+=		--enable-java-home
-endif
-ifeq ($(ADK_TOOLCHAIN_GCC_ADA),y)
-LANGUAGES:=${LANGUAGES},ada
-endif
 
 include ${TOPDIR}/mk/buildhlp.mk
 
@@ -145,7 +138,6 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 			--enable-languages=c \
 			--disable-shared \
 			--disable-threads \
-			--with-newlib \
 			--with-sysroot=$(STAGING_TARGET_DIR)
 	touch $@
 
