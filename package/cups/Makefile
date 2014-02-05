@@ -15,6 +15,7 @@ PKG_URL:=		http://www.cups.org/
 PKG_SITES:=		http://www.cups.org/software/${PKG_VERSION}/
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.bz2
 
@@ -32,6 +33,7 @@ HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--disable-webif \
 			--disable-gssapi \
+			--disable-avahi \
 			--disable-pam \
 			--disable-dbus \
 			--without-java \
@@ -46,10 +48,12 @@ HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--with-components=core \
 			--with-rcdir=$(STAGING_HOST_DIR)/etc
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
-			OPTIM='-fPIC'
+			OPTIM='-fPIC -std=c89'
 
 CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-cups-group=cups \
+			--disable-static \
+			--disable-avahi \
 			--disable-webif \
 			--disable-tcp-wrappers \
 			--disable-gssapi \
@@ -68,11 +72,6 @@ CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-rcdir=$(STAGING_TARGET_DIR)/etc
 
 FAKE_FLAGS+=		DSTROOT="${WRKINST}" STRIP="/bin/true"
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
-XAKE_FLAGS+=		OPTIM='-fPIC -fstack-protector'
-else
-XAKE_FLAGS+=		OPTIM='-fPIC'
-endif
 
 cups-install:
 	${INSTALL_DIR} ${IDIR_CUPS}/usr/lib
