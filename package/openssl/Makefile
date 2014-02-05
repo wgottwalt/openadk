@@ -46,9 +46,10 @@ OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
 endif
 
 ifeq ($(ADK_LINUX_X86_64),y)
-CONFIG:=	linux-embedded-x86_64
+CONFIG:=		linux-embedded-x86_64
+TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 else
-CONFIG:=	linux-embedded
+CONFIG:=		linux-embedded
 endif
 
 post-extract:
