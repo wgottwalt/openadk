@@ -21,11 +21,3 @@
  fi
  
  if cc_check '' -fno-tree-vectorize ; then
-@@ -1147,6 +1147,7 @@ bindir=$bindir
- libdir=$libdir
- includedir=$includedir
- ARCH=$ARCH
-+ASM=$asm
- SYS=$SYS
- CC=$CC
- CFLAGS=$CFLAGS
