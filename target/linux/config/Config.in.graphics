@@ -50,9 +50,18 @@ config ADK_KERNEL_AGP
 
 config ADK_KERNEL_AGP_INTEL
 	boolean
+
+config ADK_KERNEL_LOGO
+	boolean
  
 menu "Graphic devices support"
 depends on ADK_TARGET_WITH_VGA
+
+config ADK_KERNEL_LOGO_LINUX_CLUT224
+	prompt "Enable Linux penguin boot logo"
+	boolean
+	select ADK_KERNEL_LOGO
+	default n
 
 config ADK_KERNEL_FB_VESA
 	prompt "................................ Framebuffer support for VirtualBox Emulator (VESA)"
