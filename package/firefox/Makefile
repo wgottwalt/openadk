@@ -30,6 +30,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
 
 include $(TOPDIR)/mk/package.mk
+include $(TOPDIR)/mk/python.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,6 +42,7 @@ endif
 
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
+			PYTHON="$(PYTHON)" \
 			HOST_CC="${CC_FOR_BUILD}" \
 			HOST_CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
 			HOST_CFLAGS="${CFLAGS_FOR_BUILD}" \
