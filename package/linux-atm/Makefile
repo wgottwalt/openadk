@@ -9,6 +9,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		ATM library for Linux
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		flex-host
 PKG_URL:=		http://linux-atm.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 PKG_NOPARALLEL:=	1
