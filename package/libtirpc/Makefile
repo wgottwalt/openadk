@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libgssglue
 PKG_BUILDDEP:=		libgssglue
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
-PKG_OPTS:		dev
+PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 

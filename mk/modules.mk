@@ -136,7 +136,10 @@ $(eval $(call KMOD_template,RT61PCI,rt61pci,\
 ,20, kmod-leds-class kmod-rt2x00 rt2x00pci))
 
 $(eval $(call KMOD_template,RTL8192CU,rtl8192cu,\
-	$(MODULES_DIR)/kernel/drivers/net/wireless/rtl8192cu/8192cu \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtlwifi/rtlwifi \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtlwifi/rtl_usb \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu \
 ,20))
 
 #
