@@ -16,12 +16,6 @@ endif
 endif
 endif
 
-ifeq ($(ADK_LINUX_MICROBLAZE),y)
-LIBSTDCXX_VER:=		18
-else
-LIBSTDCXX_VER:=		17
-endif
-
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		C++ support library
 PKG_SECTION:=		libs
@@ -41,10 +35,7 @@ do-install:
 ifeq ($(ADK_NATIVE),y)
 	$(CP) /usr/lib/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/lib
 else
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.${LIBSTDCXX_VER} libstdc++.so.6)
-	(cd ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}; ln -sf libstdc++.so.6.0.${LIBSTDCXX_VER} libstdc++.so)
-	(cd ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/; ln -sf libstdc++.so.6.0.${LIBSTDCXX_VER} libstdc++.so)
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so.6.0.${LIBSTDCXX_VER} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 endif
 
