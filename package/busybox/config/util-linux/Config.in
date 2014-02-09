@@ -69,6 +69,7 @@ config BUSYBOX_FEATURE_MDEV_LOAD_FIRMWARE
 	  These devices will request userspace look up the files in
 	  /lib/firmware/ and if it exists, send it to the kernel for
 	  loading into the hardware.
+
 config BUSYBOX_REV
 	bool "rev"
 	default n

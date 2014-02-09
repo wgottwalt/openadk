@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		7605af4d64291495645f88575a564475
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		multimedia
@@ -22,6 +22,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SQUEEZELITE,squeezelite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=       -D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 

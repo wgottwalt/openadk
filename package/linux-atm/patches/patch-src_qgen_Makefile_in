@@ -1,6 +1,6 @@
 --- linux-atm-2.5.1.orig/src/qgen/Makefile.in	2009-11-30 17:21:18.000000000 +0100
-+++ linux-atm-2.5.1/src/qgen/Makefile.in	2010-02-05 22:35:31.371836598 +0100
-@@ -57,14 +57,14 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top
++++ linux-atm-2.5.1/src/qgen/Makefile.in	2014-02-07 21:40:48.000000000 +0100
+@@ -57,15 +57,15 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top
  depcomp = $(SHELL) $(top_srcdir)/depcomp
  am__depfiles_maybe = depfiles
  am__mv = mv -f
@@ -14,10 +14,12 @@
  CCLD = $(CC)
  LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 -	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-+	--mode=link $(CC_FOR_BUILD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
- 	$(LDFLAGS) -o $@
+-	$(LDFLAGS) -o $@
++	--mode=link $(CC_FOR_BUILD) $(AM_CFLAGS) $(CFLAGS_FOR_BUILD) $(AM_LDFLAGS) \
++	$(LDFLAGS_FOR_BUILD) -o $@
  LEXCOMPILE = $(LEX) $(LFLAGS) $(AM_LFLAGS)
  LTLEXCOMPILE = $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(LEX) $(LFLAGS) $(AM_LFLAGS)
 @@ -91,7 +91,7 @@ CC_FOR_BUILD = @CC_FOR_BUILD@
  CFLAGS = @CFLAGS_FOR_BUILD@
  CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@

@@ -5,10 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		watchdog
 PKG_VERSION:=		5.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		31766450ecfc9aff70fe966c0b9df06d
 PKG_DESCR:=		watchdog daemon
 PKG_SECTION:=		utils
+PKG_DEPENDS:=		libtirpc
+PKG_BUILDDEP:=		libtirpc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=watchdog/}
 
 include ${TOPDIR}/mk/package.mk
