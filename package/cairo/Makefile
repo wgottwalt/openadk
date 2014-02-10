@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
 PKG_VERSION:=		1.12.16
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a1304edcdc99282f478b995ee5f8f854
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs
@@ -33,7 +33,8 @@ endif
 CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-fc=yes \
 			--enable-tee=yes \
-			--enable-xlib=yes
+			--enable-xlib=yes \
+			--enable-pdf=no
 
 cairo-install:
 	${INSTALL_DIR} ${IDIR_CAIRO}/usr/lib/cairo
