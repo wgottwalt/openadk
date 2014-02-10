@@ -1,3 +1,7 @@
+- cleanup toolchain building, add toolchain archiv creation target
+- update uclibc to git
+- update gcc to 4.8.2
+- port opkg with gpg signing
 - restart network (kill wpa_supplicant)
 - essid with spaces
 - add grsec kernel patch
