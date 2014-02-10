@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kexec-tools
-PKG_VERSION:=		2.0.3
+PKG_VERSION:=		2.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b362abd2e8669171a5ba50a9cc26183
+PKG_MD5SUM:=		da5887e30eec16895e9d98ef072dc257
 PKG_DESCR:=		kexec tools
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib
 PKG_BUILDEP:=		zlib
 PKG_URL:=		http://kernel.org/pub/linux/utils/kernel/kexec/
-PKG_SITES:=		http://kernel.org/pub/linux/utils/kernel/kexec/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_ARCH_DEPENDS:=	!mips !m68k
 PKG_CFLINE_KEXEC_TOOLS:=	select ADK_KERNEL_KEXEC
