@@ -1,0 +1,20 @@
+--- cairo-1.12.16.orig/Makefile.in	2013-08-26 19:00:44.000000000 +0200
++++ cairo-1.12.16/Makefile.in	2014-02-10 14:44:58.000000000 +0100
+@@ -80,7 +80,7 @@ EXTRA_PROGRAMS =
+ TESTS =
+ check_PROGRAMS =
+ # libpng is required for our test programs
+-@CAIRO_HAS_PNG_FUNCTIONS_TRUE@am__append_1 = boilerplate test perf
++@CAIRO_HAS_PNG_FUNCTIONS_TRUE@am__append_1 = boilerplate perf
+ subdir = .
+ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
+ am__aclocal_m4_deps = $(top_srcdir)/build/aclocal.cairo.m4 \
+@@ -439,7 +439,7 @@ MAINTAINERCLEANFILES = Makefile.in $(src
+ #	$(srcdir)/build/Makefile.win32.features-h \
+ #	$(NULL)
+ ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
+-DIST_SUBDIRS = src doc util boilerplate test perf
++DIST_SUBDIRS = src doc util boilerplate perf
+ SUBDIRS = src doc util $(am__append_1)
+ DISTCHECK_CONFIGURE_FLAGS = \
+ 	--enable-gtk-doc \
