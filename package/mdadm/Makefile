@@ -17,8 +17,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MDADM,mdadm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-
-XAKE_FLAGS+=		CROSS_COMPILE="${TARGET_CROSS}"
+XAKE_FLAGS+=		CROSS_COMPILE="${TARGET_CROSS}" CHECK_RUN_DIR=0
 
 mdadm-install:
 	${INSTALL_DIR} ${IDIR_MDADM}/usr/sbin

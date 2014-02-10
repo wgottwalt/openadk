@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		monit
 PKG_VERSION:=		5.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		19dfc1ce8512e832134d06eedd96ba50
 PKG_DESCR:=		An utility for system services monitoring
 PKG_SECTION:=		admin
@@ -20,7 +20,8 @@ $(eval $(call PKG_template,MONIT,monit,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIGURE_ENV+=		libmonit_cv_setjmp_available=yes \
 			libmonit_cv_vsnprintf_c99_conformant=yes
-CONFIGURE_ARGS+=	--with-ssl --with-ssl-dir="${STAGING_TARGET_DIR}/usr"
+CONFIGURE_ARGS+=	--with-ssl --with-ssl-dir="${STAGING_TARGET_DIR}/usr" \
+			--without-pam
 
 monit-install:
 	${INSTALL_DIR} ${IDIR_MONIT}/etc
