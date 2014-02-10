@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		poppler
 PKG_VERSION:=		0.24.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		334f2ac95cc8039f2a57fe63e4a81c69
 PKG_DESCR:=		pdf rendering library
 PKG_SECTION:=		libs
@@ -20,9 +20,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-CONFIGURE_ARGS+=	--disable-cairo-output \
-			--enable-poppler-glib
 
 poppler-install:
 	$(INSTALL_DIR) $(IDIR_POPPLER)/usr/lib
