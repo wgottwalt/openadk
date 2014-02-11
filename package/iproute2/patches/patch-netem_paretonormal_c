@@ -1,6 +1,6 @@
---- iproute2-2.6.29-1.orig/netem/paretonormal.c	2009-03-24 23:40:54.000000000 +0100
-+++ iproute2-2.6.29-1/netem/paretonormal.c	2009-12-11 16:59:02.000000000 +0100
-@@ -11,11 +11,9 @@
+--- iproute2-3.12.0.orig/netem/paretonormal.c	2013-11-23 02:10:33.000000000 +0100
++++ iproute2-3.12.0/netem/paretonormal.c	2014-02-09 12:22:09.000000000 +0100
+@@ -11,15 +11,11 @@
   */
  #include <stdio.h>
  #include <stdlib.h>
@@ -9,6 +9,11 @@
  #include <math.h>
  #include <limits.h>
 -#include <malloc.h>
+-
+-#include <linux/types.h>
+-#include <linux/pkt_sched.h>
  
- #include <linux/types.h>
- #include <linux/pkt_sched.h>
++#define NETEM_DIST_SCALE	8192
+ #define TABLESIZE	16384
+ #define TABLEFACTOR	NETEM_DIST_SCALE
+ 
