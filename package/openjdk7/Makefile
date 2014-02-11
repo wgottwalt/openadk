@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.3.12
+PKG_VERSION:=		2.4.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9b3afa162021e3fca6161ba8f9f7dc11
+PKG_MD5SUM:=		6dcc544657ade213d01017354a6f9858
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
@@ -74,6 +74,7 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--disable-system-gif \
 			--disable-system-gtk \
 			--disable-system-gio \
+			--disable-system-kerberos \
 			--disable-system-fontconfig \
 			--disable-compile-against-syscalls \
 			--without-rhino
@@ -126,6 +127,7 @@ HOST_CONFIGURE_ARGS+=\
                 --disable-system-gif \
                 --disable-system-gtk \
                 --disable-system-gio \
+                --disable-system-kerberos \
                 --disable-system-fontconfig \
                 --disable-compile-against-syscalls \
 		--without-rhino \
