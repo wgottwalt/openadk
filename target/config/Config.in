@@ -161,6 +161,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-ppc" if ADK_TARGET_SYSTEM_QEMU_PPC
 	default "qemu-ppc64" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
+	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 
@@ -505,6 +506,7 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "console=ttyS0,9600 console=tty0" if ADK_TARGET_SYSTEM_QEMU_PPC
 	default "console=hvc0 console=tty0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "console=ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
