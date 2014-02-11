@@ -1,5 +1,5 @@
 --- vsftpd-3.0.2.orig/Makefile	2012-09-16 09:27:35.000000000 +0200
-+++ vsftpd-3.0.2/Makefile	2013-11-09 11:38:47.000000000 +0100
++++ vsftpd-3.0.2/Makefile	2014-02-11 12:59:30.000000000 +0100
 @@ -1,16 +1,16 @@
  # Makefile for systems with GNU tools
 -CC 	=	gcc
@@ -21,7 +21,7 @@
  
  OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
  		tunables.o ftpdataio.o secbuf.o ls.o \
-@@ -29,21 +29,8 @@ vsftpd: $(OBJS) 
+@@ -29,21 +29,8 @@ vsftpd: $(OBJS)
  	$(CC) -o vsftpd $(OBJS) $(LINK) $(LDFLAGS) $(LIBS)
  
  install:
