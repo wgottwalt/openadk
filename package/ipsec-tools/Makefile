@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ipsec-tools
-PKG_VERSION:=		0.8.0
+PKG_VERSION:=		0.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b79aae3055a51f8de5c0f1b8ca6cf619
+PKG_MD5SUM:=		d38b39f291ba2962387c3232e7335dd8
 PKG_DESCR:=		IPsec management tools
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		openssl flex
@@ -14,6 +14,7 @@ PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://ipsec-tools.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipsec-tools/}
 
+PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 PKG_CFLINE_IPSEC_TOOLS:=depends on !ADK_TOOLCHAIN_ONLY
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -25,6 +26,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_CPPFLAGS+=	-I${LINUX_DIR}/include
 CONFIGURE_ARGS+=	--with-kernel-headers="${LINUX_DIR}/include" \
 			--without-readline \
 			--disable-security-context \
