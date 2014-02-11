@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.3.12
+PKG_VERSION:=		2.4.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9b3afa162021e3fca6161ba8f9f7dc11
+PKG_MD5SUM:=		6dcc544657ade213d01017354a6f9858
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
@@ -74,6 +74,7 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--disable-system-gif \
 			--disable-system-gtk \
 			--disable-system-gio \
+			--disable-system-kerberos \
 			--disable-system-fontconfig \
 			--disable-compile-against-syscalls \
 			--without-rhino
@@ -83,7 +84,7 @@ CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
 CONFIGURE_ARGS+=	--disable-bootstrap
 
 CONFIGURE_ENV+=		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
-MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME) \
+MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin \
 			ALT_OPENWIN_HOME=$(STAGING_DIR)/usr/ \
 			ALT_CUPS_HEADERS_PATH=$(STAGING_DIR)/usr/include/ \
 			ALT_FREETYPE_HEADERS_PATH=$(STAGING_DIR)/usr/include/ \
@@ -126,6 +127,7 @@ HOST_CONFIGURE_ARGS+=\
                 --disable-system-gif \
                 --disable-system-gtk \
                 --disable-system-gio \
+                --disable-system-kerberos \
                 --disable-system-fontconfig \
                 --disable-compile-against-syscalls \
 		--without-rhino \

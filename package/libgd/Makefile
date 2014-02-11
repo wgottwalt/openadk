@@ -5,11 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libgd
 PKG_VERSION:=		2.1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		03588159bf4faab9079849c8d709acc6
 PKG_DESCR:=		A library for the dynamic creation of images
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libjpeg-turbo libpng
+PKG_DEPENDS:=		libpng libjpeg-turbo
 PKG_BUILDDEP:=		libpng libjpeg-turbo
 PKG_URL:=		http://www.libgd.org/
 PKG_SITES:=		https://bitbucket.org/libgd/gd-libgd/downloads/
@@ -26,6 +26,8 @@ CONFIGURE_ARGS+=	--without-x \
 			--without-freetype \
 			--with-jpeg=${STAGING_TARGET_DIR}/usr \
 			--with-png=${STAGING_TARGET_DIR}/usr \
+			--without-tiff \
+			--without-vpx \
 			--without-xpm
 
 libgd-install:

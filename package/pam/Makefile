@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.8
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		5107bbf54042400b6200e8367cc7feef
 PKG_DESCR:=		Pluggable Authentication Modules
-PKG_BUILDDEP:=		flex
+PKG_BUILDDEP:=		flex-host flex
 PKG_SECTION:=		misc
 PKG_URL:=		http://www.linux-pam.org/
 PKG_SITES:=		http://www.linux-pam.org/library/
@@ -21,8 +21,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-#XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--disable-nis \
+			--disable-regenerate-docu \
 			--enable-db=no
 
 post-install:

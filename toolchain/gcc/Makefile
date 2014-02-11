@@ -9,6 +9,7 @@ TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 include Makefile.inc
 
 GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
+			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
@@ -118,7 +119,6 @@ endif
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
-			--with-newlib \
 			--without-headers
 	touch $@
 
@@ -166,9 +166,7 @@ $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
-	# workaround if you cross-compile binutils
-	@-rm $(STAGING_TARGET_DIR)/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
-	# Set up the symlinks to enable lying about target name.
+	# Set up the symlinks to enable lying about target name
 	set -e; \
 	cd $(STAGING_HOST_DIR); \
 		ln -sf $(REAL_GNU_TARGET_NAME) $(GNU_TARGET_NAME); \
@@ -177,8 +175,18 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 			ln -sf $${app} \
 				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done;
-	# workaround for openjdk
-	cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/bin ; cp * ..
+	# remove duplicate tools
+	set -e; \
+	cd $(STAGING_HOST_DIR)/bin; \
+		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
+			ln -sf ../$(REAL_GNU_TARGET_NAME)/bin/$${app##$(REAL_GNU_TARGET_NAME)-} $${app}; \
+		done;
+	# setup symlink, so that gcc/g++ find cc1plus
+	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/ && \
+		ln -sf ../libexec .)
+	# setup symlink, so that gcc/g++ find stddef.h
+	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib/ && \
+		ln -sf ../../host_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}/lib/gcc .)
 	# fix linking g++ apps with libtool
 	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
 		cd $(STAGING_TARGET_DIR)/lib32 && \

@@ -8,6 +8,8 @@ include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
+		headers_check
+	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		INSTALL_HDR_PATH=$(STAGING_DIR)/usr \
 		headers_install
 	touch $@
