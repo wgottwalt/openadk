@@ -175,11 +175,11 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 			ln -sf $${app} \
 				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
 		done;
-	# remove duplicate tools
+	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
 	cd $(STAGING_HOST_DIR)/bin; \
-		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
-			ln -sf ../$(REAL_GNU_TARGET_NAME)/bin/$${app##$(REAL_GNU_TARGET_NAME)-} $${app}; \
+		for app in ar as c++ g++ gcc gcc-${PKG_VERSION} ld ld.bfd nm objcopy objdump ranlib strip; do \
+			ln -sf ../$(REAL_GNU_TARGET_NAME)/bin/$${app} $(REAL_GNU_TARGET_NAME)-$${app}; \
 		done;
 	# setup symlink, so that gcc/g++ find cc1plus
 	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/ && \
