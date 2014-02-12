@@ -1,7 +1,7 @@
 diff -Nur openssh-6.2p1.orig/cipher.c openssh-6.2p1/cipher.c
---- openssh-6.2p1.orig/cipher.c	2013-02-12 01:00:35.000000000 +0100
-+++ openssh-6.2p1/cipher.c	2013-08-20 08:56:48.923159083 +0200
-@@ -69,23 +69,33 @@ struct Cipher {
+--- openssh-6.5p1.orig/cipher.c	2014-01-25 23:37:26.000000000 +0100
++++ openssh-6.5p1/cipher.c	2014-02-11 15:26:16.000000000 +0100
+@@ -75,23 +75,33 @@ static const struct Cipher ciphers[] = {
  	{ "none",	SSH_CIPHER_NONE, 8, 0, 0, 0, 0, 0, EVP_enc_null },
  	{ "des",	SSH_CIPHER_DES, 8, 8, 0, 0, 0, 1, EVP_des_cbc },
  	{ "3des",	SSH_CIPHER_3DES, 8, 16, 0, 0, 0, 1, evp_ssh1_3des },
