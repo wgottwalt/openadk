@@ -167,34 +167,6 @@ config ADK_KERNEL_PATA_JMICRON
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	default y if ADK_TARGET_SYSTEM_TAROX_PC
-	default y if ADK_NATIVE_SYSTEM_TAROX_PC
-	default n
-
-config ADK_KERNEL_ATA_PIIX
-	boolean
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_ATA_SFF
-	select ADK_KERNEL_ATA_BMDMA
-	select ADK_KERNEL_BLK_DEV
-	select ADK_KERNEL_BLK_DEV_SD
-	default y if ADK_TARGET_SYSTEM_QEMU_ARM
-	default y if ADK_TARGET_SYSTEM_QEMU_I686
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPSEL
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64
-	default y if ADK_TARGET_SYSTEM_QEMU_MIPS64EL
-	default y if ADK_TARGET_SYSTEM_QEMU_PPC
-	default y if ADK_TARGET_SYSTEM_QEMU_SPARC
-	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_INTEL_ATOM
-	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
-	default y if ADK_TARGET_SYSTEM_TAROX_PC
-	default y if ADK_NATIVE_SYSTEM_TAROX_PC
 	default n
 
 config ADK_KERNEL_SATA_AHCI
@@ -297,7 +269,6 @@ config ADK_KPACKAGE_KMOD_SCSI
 	select ADK_KERNEL_IOSCHED_AS
 	depends on !ADK_KERNEL_SCSI
 	depends on !ADK_KERNEL_SATA_AHCI
-	depends on !ADK_KERNEL_ATA_PIIX
 	tristate
 	help
 	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or

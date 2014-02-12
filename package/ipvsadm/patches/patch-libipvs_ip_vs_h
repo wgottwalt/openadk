@@ -1,0 +1,10 @@
+--- ipvsadm-1.26.orig/libipvs/ip_vs.h	2011-02-07 03:38:57.000000000 +0100
++++ ipvsadm-1.26/libipvs/ip_vs.h	2014-02-11 12:45:07.000000000 +0100
+@@ -10,6 +10,7 @@
+ #include <sys/socket.h>
+ #include <arpa/inet.h>
+ #include <linux/types.h>	/* For __beXX types in userland */
++#include <sys/types.h>
+ 
+ #ifdef LIBIPVS_USE_NL
+ #include <netlink/netlink.h>
