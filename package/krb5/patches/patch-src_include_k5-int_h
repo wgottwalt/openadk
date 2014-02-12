@@ -1,6 +1,6 @@
---- krb5-1.11.3.orig/src/include/k5-int.h	2013-06-03 23:39:43.000000000 +0200
-+++ krb5-1.11.3/src/include/k5-int.h	2013-08-14 14:05:17.000000000 +0200
-@@ -1156,7 +1156,7 @@ void k5_free_pa_otp_challenge(krb5_conte
+--- krb5-1.12.1.orig/src/include/k5-int.h	2014-01-16 01:44:15.000000000 +0100
++++ krb5-1.12.1/src/include/k5-int.h	2014-02-11 18:55:39.000000000 +0100
+@@ -904,7 +904,7 @@ void k5_free_pa_otp_challenge(krb5_conte
  void k5_free_pa_otp_req(krb5_context context, krb5_pa_otp_req *val);
  
  /* #include "krb5/wordsize.h" -- comes in through base-defs.h. */
