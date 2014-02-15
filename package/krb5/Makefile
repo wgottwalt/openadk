@@ -4,16 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
-PKG_VERSION:=		1.11.3
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		56f0ae274b285320b8a597cb89442449
+PKG_VERSION:=		1.12.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		524b1067b619cb5bf780759b6884c3f5
 PKG_DESCR:=		MIT kerberos server
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
 PKG_DEPENDS+=		libpthread
 PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny bison-host
 PKG_URL:=		http://web.mit.edu/kerberos/
-PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.11/
+PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.12/
 PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libkrb5
 PKG_OPTS:=		dev

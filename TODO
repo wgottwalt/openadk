@@ -1,4 +1,5 @@
-- cleanup toolchain building, add toolchain archiv creation target
+- cleanup toolchain building, add toolchain archive creation target
+- add fb full screen logo
 - update uclibc to git
 - update gcc to 4.8.2
 - port opkg with gpg signing

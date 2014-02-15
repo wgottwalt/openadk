@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
-PKG_VERSION:=		4.7.0.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f48b2c8dd140aeb36f59d16a662f0779
+PKG_VERSION:=		4.8.11
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		1a2d74b75ddbff0b0d6cdc04bf4a7d31
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		glib libncurses
 PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.midnight-commander.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://ftp.midnight-commander.org/
 PKG_NOPARALLEL:=	1
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 
@@ -45,7 +47,7 @@ mc-install:
 	${INSTALL_DIR} ${IDIR_MC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mc ${IDIR_MC}/usr/bin/
 	cd ${IDIR_MC}/usr/bin && ln -fs mc mcedit && ln -fs mc mcview
-	cd ${WRKINST}/etc/mc && ${CP} cedit.menu mc.ext \
-	    mc.lib mc.menu extfs ${IDIR_MC}/etc/mc/
+	cd ${WRKINST}/etc/mc && ${CP} mcedit.menu mc.ext \
+	    mc.menu ${IDIR_MC}/etc/mc/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
