@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bzr
-PKG_VERSION:=		2.5.1
+PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ac5079858364a046071000d5cdccb67b
+PKG_MD5SUM:=		28c86653d0df10d202c6b842deb0ea35
 PKG_DESCR:=		bazaar
 PKG_SECTION:=		scm
 PKG_BUILDDEP:=		python2
 PKG_DEPENDS:=		python2
 PKG_URL:=		http://bazaar.canonical.com/en/
-PKG_SITES:=		https://launchpad.net/bzr/2.5/2.5.1/+download/
+PKG_SITES:=		https://launchpad.net/bzr/2.6/2.6.0/+download/
+
+PKG_HOST_DEPENDS:=	!darwin
 
 include $(TOPDIR)/mk/package.mk
 

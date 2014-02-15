@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		06e5f93dbf13f2c19647ca15ffc23ac1
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net/security
+PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		kmod-tun ip
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
@@ -34,6 +35,8 @@ PKGCB_WITH_POLARSSL:=		polarssl
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+AUTOTOOL_STYLE:=	autoreconf
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
 CONFIGURE_ARGS+=	--enable-lzo

@@ -144,38 +144,6 @@ config ADK_KERNEL_B44
 	default n
 	help
 
-config ADK_KERNEL_E1000
-	boolean
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_VBOX_I686
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_QEMU_I686
-	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
-	default n
-	help
-
-config ADK_KERNEL_E1000E
-	boolean
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_TAROX_PC
-	default y if ADK_NATIVE_SYSTEM_TAROX_PC
-	default n
-	help
-
-config ADK_KERNEL_SKY2
-	boolean
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_NETDEV_1000
-	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76
-	default n
-	help
-
 config ADK_KERNEL_R8169
 	boolean
 	select ADK_KERNEL_NETDEVICES

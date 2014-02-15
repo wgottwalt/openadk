@@ -27,6 +27,7 @@ endif
 
 TARGET_CPPFLAGS+=	-DNOLUA
 TARGET_LDFLAGS+=	-lpthread
+CONFIGURE_ENV+=		ac_cv_dnet_bsd_bpf=no
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-zenmap \
 			--without-ndiff \
