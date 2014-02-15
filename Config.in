@@ -97,7 +97,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.11.10"
+	prompt "3.12.6"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
