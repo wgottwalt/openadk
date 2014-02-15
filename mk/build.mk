@@ -544,7 +544,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in uclibc eglibc glibc;do \
+	for libc in uclibc eglibc glibc musl;do \
 		while read arch; do \
 		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 		    ( \

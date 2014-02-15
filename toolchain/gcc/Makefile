@@ -26,6 +26,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-cloog-version-check \
 			--without-ppl \
 			--without-cloog \
+			--without-isl \
 			--disable-nls
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
@@ -61,13 +62,21 @@ GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ARCH),m68k)
+ifeq ($(ADK_TARGET_LIBC),uclibc)
 GCC_CONFOPTS+=		--disable-tls
+else
+GCC_CONFOPTS+=		--enable-tls
+endif
 else
 GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq ($(ARCH),powerpc)
+ifeq ($(ADK_TARGET_LIBC),uclibc)
+GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
+else
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
+endif
 else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
@@ -196,6 +205,8 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
 		cd $(STAGING_TARGET_DIR)/lib64 && \
 		ln -sf libstdc++.so.6.0.17 libstdc++.so
+	# cleanup unneeded docs
+	rm -rf $(STAGING_HOST_DIR)/share
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

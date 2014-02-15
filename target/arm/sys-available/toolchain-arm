@@ -6,6 +6,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_ARM
 	select ADK_TOOLCHAIN
 	select ADK_EABI
 	select ADK_TARGET_NO_FPU
+	select ADK_TARGET_PACKAGE_TGZ
 	help
 	  ARM toolchain (little endian).
 
