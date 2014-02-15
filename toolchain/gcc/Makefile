@@ -107,7 +107,7 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
 	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
 	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
 	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 ifeq ($(ADK_LINUX_SH),y)
@@ -177,10 +177,12 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
-	cd $(STAGING_HOST_DIR)/bin; \
-		for app in ar as c++ g++ gcc gcc-${PKG_VERSION} ld ld.bfd nm objcopy objdump ranlib strip; do \
-			ln -sf ../$(REAL_GNU_TARGET_NAME)/bin/$${app} $(REAL_GNU_TARGET_NAME)-$${app}; \
+	cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin; \
+		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
+			ln -sf ../../bin/$(REAL_GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
+	(cd $(STAGING_HOST_DIR)/bin && \
+		ln -sf $(REAL_GNU_TARGET_NAME)-gcc $(REAL_GNU_TARGET_NAME)-gcc-${PKG_VERSION})
 	# setup symlink, so that gcc/g++ find cc1plus
 	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/ && \
 		ln -sf ../libexec .)
