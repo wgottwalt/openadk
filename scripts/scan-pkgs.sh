@@ -61,6 +61,10 @@ if [[ -n $ADK_NATIVE ]];then
 	fi
 fi
 
+if [[ -n $ADK_PACKAGE_XBMC ]]; then
+	NEED_JAVA="$NEED_JAVA xbmc"
+fi
+
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
@@ -78,7 +82,6 @@ if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 fi
 
 if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
-	NEED_WWW="$NEED_WWW libXfont"
 	NEED_XMLTO="$NEED_XMLTO libXfont"
 fi
 
@@ -254,6 +257,13 @@ fi
 if [[ -n $NEED_DBUSGLIB ]]; then
 	if ! which dbus-binding-tool >/dev/null 2>&1; then
 		echo >&2 You need dbus-binding-tool to build $NEED_DBUSGLIB
+		out=1
+	fi
+fi
+
+if [[ -n $NEED_JAVA ]]; then
+	if ! which java >/dev/null 2>&1; then
+		echo >&2 You need java to build $NEED_JAVA
 		out=1
 	fi
 fi

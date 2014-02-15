@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		bzip2-host python2-host nspr
 PKG_SITES:=		http://ftp.mozilla.org/pub/mozilla.org/js/
 PKG_OPTS:=		dev
 
+PKG_HOST_DEPENDS:=	!darwin
+
 DISTFILES:=             ${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}${PKG_VERSION}
 WRKSRC=                 ${WRKDIST}/js/src
