@@ -3203,8 +3203,8 @@ diff -Nur icedtea-2.4.5.orig/Makefile.in.orig icedtea-2.4.5/Makefile.in.orig
 +.NOEXPORT:
 diff -Nur icedtea-2.4.5.orig/patches/openadk.patch icedtea-2.4.5/patches/openadk.patch
 --- icedtea-2.4.5.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.4.5/patches/openadk.patch	2014-02-10 18:48:24.000000000 +0100
-@@ -0,0 +1,544 @@
++++ icedtea-2.4.5/patches/openadk.patch	2014-02-12 12:48:40.000000000 +0100
+@@ -0,0 +1,687 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2014-01-28 18:58:08.000000000 +0100
 ++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2014-02-10 11:31:48.000000000 +0100
@@ -3321,6 +3321,19 @@ diff -Nur icedtea-2.4.5.orig/patches/openadk.patch icedtea-2.4.5/patches/openadk
 +       endif
 +     endif
 +   endif
++diff -Nur openjdk.orig/jdk/make/common/Sanity.gmk openjdk/jdk/make/common/Sanity.gmk
++--- openjdk.orig/jdk/make/common/Sanity.gmk	2014-01-28 19:02:26.000000000 +0100
+++++ openjdk/jdk/make/common/Sanity.gmk	2014-02-12 12:28:47.000000000 +0100
++@@ -91,8 +91,7 @@
++     sane-ld_run_path \
++     sane-alt_bootdir \
++     sane-bootdir \
++-    sane-local-bootdir \
++-    sane-alsa-headers
+++    sane-local-bootdir
++ 
++ ifdef OPENJDK
++ sanity-all:: sane-freetype 
 +diff -Nur openjdk.orig/jdk/make/common/shared/Platform.gmk openjdk/jdk/make/common/shared/Platform.gmk
 +--- openjdk.orig/jdk/make/common/shared/Platform.gmk	2014-01-28 19:02:26.000000000 +0100
 ++++ openjdk/jdk/make/common/shared/Platform.gmk	2014-02-10 11:32:16.000000000 +0100
@@ -3334,6 +3347,64 @@ diff -Nur icedtea-2.4.5.orig/patches/openadk.patch icedtea-2.4.5/patches/openadk
 +   archExpr = case "$(mach)" in \
 +                 i[3-9]86) \
 +                     echo i586 \
++diff -Nur openjdk.orig/jdk/make/common/shared/Sanity.gmk openjdk/jdk/make/common/shared/Sanity.gmk
++--- openjdk.orig/jdk/make/common/shared/Sanity.gmk	2014-01-28 19:02:26.000000000 +0100
+++++ openjdk/jdk/make/common/shared/Sanity.gmk	2014-02-12 12:31:12.000000000 +0100
++@@ -114,11 +114,6 @@
++     elif [ -f /etc/lsb-release ] ; then \
++       $(EGREP) DISTRIB_RELEASE /etc/lsb-release | $(SED) -e 's@.*DISTRIB_RELEASE=\(.*\)@\1@'; \
++     fi)
++-  ALSA_INCLUDE=/usr/include/alsa/version.h
++-  ALSA_LIBRARY=/usr/lib/libasound.so
++-  _ALSA_VERSION := $(shell $(EGREP) SND_LIB_VERSION_STR $(ALSA_INCLUDE) | \
++-           $(SED) -e 's@.*"\(.*\)".*@\1@' )
++-  ALSA_VERSION := $(call GetVersion,$(_ALSA_VERSION))
++ endif
++ 
++ ifeq ($(PLATFORM), macosx)
++@@ -225,7 +220,6 @@
++ 	sane-compiler \
++ 	sane-link \
++ 	sane-cacerts \
++-	sane-alsa-headers \
++ 	sane-ant_version \
++ 	sane-zip_version \
++ 	sane-unzip_version \
++@@ -1381,34 +1375,6 @@
++   endif
++ endif
++ 
++-######################################################
++-# Check that ALSA headers and libs are installed and 
++-# that the header has the right version. We only
++-# need /usr/include/alsa/version.h and /usr/lib/libasound.so
++-######################################################
++-
++-ifdef REQUIRED_ALSA_VERSION
++-  ALSA_CHECK := $(call CheckVersions,$(ALSA_VERSION),$(REQUIRED_ALSA_VERSION))
++-endif
++-sane-alsa-headers:
++-ifdef REQUIRED_ALSA_VERSION
++-	@if [ "$(ALSA_CHECK)" != "missing" ] ; then \
++-	    if [ "$(ALSA_CHECK)" != "same" -a "$(ALSA_CHECK)" != "newer"  ] ; then \
++-		$(ECHO) "ERROR: The ALSA version must be $(REQUIRED_ALSA_VERSION) or higher. \n" \
++-		"      You have the following ALSA version installed: $${alsa_version} \n" \
++-		"      Please reinstall ALSA (drivers and lib). You can download \n" \
++-		"      the source distribution from http://www.alsa-project.org \n" \
++-		"      or go to http://www.freshrpms.net/docs/alsa/ for precompiled RPM packages. \n" \
++-		"" >> $(ERROR_FILE) ; \
++-	    fi ; \
++-	else \
++-	    $(ECHO) "ERROR: You seem to not have installed ALSA $(REQUIRED_ALSA_VERSION) or higher. \n" \
++-	    "      Please install ALSA (drivers and lib). You can download the \n" \
++-	    "      source distribution from http://www.alsa-project.org or go to \n" \
++-	    "      http://www.freshrpms.net/docs/alsa/ for precompiled RPM packages. \n" \
++-	    "" >> $(ERROR_FILE) ; \
++-	fi
++-endif
++ 
++ # If a sanity file doesn't exist, just make sure it's dir exists
++ $(SANITY_FILES):
 +diff -Nur openjdk.orig/jdk/make/java/instrument/Makefile openjdk/jdk/make/java/instrument/Makefile
 +--- openjdk.orig/jdk/make/java/instrument/Makefile	2014-01-28 19:02:26.000000000 +0100
 ++++ openjdk/jdk/make/java/instrument/Makefile	2014-02-10 11:31:49.000000000 +0100
@@ -3712,13 +3783,85 @@ diff -Nur icedtea-2.4.5.orig/patches/openadk.patch icedtea-2.4.5/patches/openadk
 + 
 +diff -Nur openjdk-boot.orig/hotspot/make/linux/makefiles/zero.make openjdk-boot/hotspot/make/linux/makefiles/zero.make
 +--- openjdk-boot.orig/hotspot/make/linux/makefiles/zero.make	2014-01-28 18:58:08.000000000 +0100
-++++ openjdk-boot/hotspot/make/linux/makefiles/zero.make	2014-02-10 18:35:50.000000000 +0100
+++++ openjdk-boot/hotspot/make/linux/makefiles/zero.make	2014-02-11 17:33:53.000000000 +0100
 +@@ -33,4 +33,4 @@
 + 
 + # Make sure libffi is included
 + CFLAGS += $(LIBFFI_CFLAGS)
 +-LIBS_VM += $(LIBFFI_LIBS)
 ++LIBS_VM += $(FFI_LDFLAGS) -Wl,-Bstatic $(LIBFFI_LIBS) -Wl,-Bdynamic
++diff -Nur openjdk-boot.orig/jdk/make/common/Sanity.gmk openjdk-boot/jdk/make/common/Sanity.gmk
++--- openjdk-boot.orig/jdk/make/common/Sanity.gmk	2014-01-28 19:02:26.000000000 +0100
+++++ openjdk-boot/jdk/make/common/Sanity.gmk	2014-02-11 14:46:04.000000000 +0100
++@@ -91,8 +91,7 @@
++     sane-ld_run_path \
++     sane-alt_bootdir \
++     sane-bootdir \
++-    sane-local-bootdir \
++-    sane-alsa-headers
+++    sane-local-bootdir
++ 
++ ifdef OPENJDK
++ sanity-all:: sane-freetype 
++diff -Nur openjdk-boot.orig/jdk/make/common/shared/Sanity.gmk openjdk-boot/jdk/make/common/shared/Sanity.gmk
++--- openjdk-boot.orig/jdk/make/common/shared/Sanity.gmk	2014-01-28 19:02:26.000000000 +0100
+++++ openjdk-boot/jdk/make/common/shared/Sanity.gmk	2014-02-11 14:45:37.000000000 +0100
++@@ -114,11 +114,6 @@
++     elif [ -f /etc/lsb-release ] ; then \
++       $(EGREP) DISTRIB_RELEASE /etc/lsb-release | $(SED) -e 's@.*DISTRIB_RELEASE=\(.*\)@\1@'; \
++     fi)
++-  ALSA_INCLUDE=/usr/include/alsa/version.h
++-  ALSA_LIBRARY=/usr/lib/libasound.so
++-  _ALSA_VERSION := $(shell $(EGREP) SND_LIB_VERSION_STR $(ALSA_INCLUDE) | \
++-           $(SED) -e 's@.*"\(.*\)".*@\1@' )
++-  ALSA_VERSION := $(call GetVersion,$(_ALSA_VERSION))
++ endif
++ 
++ ifeq ($(PLATFORM), macosx)
++@@ -225,7 +220,6 @@
++ 	sane-compiler \
++ 	sane-link \
++ 	sane-cacerts \
++-	sane-alsa-headers \
++ 	sane-ant_version \
++ 	sane-zip_version \
++ 	sane-unzip_version \
++@@ -1381,35 +1375,6 @@
++   endif
++ endif
++ 
++-######################################################
++-# Check that ALSA headers and libs are installed and 
++-# that the header has the right version. We only
++-# need /usr/include/alsa/version.h and /usr/lib/libasound.so
++-######################################################
++-
++-ifdef REQUIRED_ALSA_VERSION
++-  ALSA_CHECK := $(call CheckVersions,$(ALSA_VERSION),$(REQUIRED_ALSA_VERSION))
++-endif
++-sane-alsa-headers:
++-ifdef REQUIRED_ALSA_VERSION
++-	@if [ "$(ALSA_CHECK)" != "missing" ] ; then \
++-	    if [ "$(ALSA_CHECK)" != "same" -a "$(ALSA_CHECK)" != "newer"  ] ; then \
++-		$(ECHO) "ERROR: The ALSA version must be $(REQUIRED_ALSA_VERSION) or higher. \n" \
++-		"      You have the following ALSA version installed: $${alsa_version} \n" \
++-		"      Please reinstall ALSA (drivers and lib). You can download \n" \
++-		"      the source distribution from http://www.alsa-project.org \n" \
++-		"      or go to http://www.freshrpms.net/docs/alsa/ for precompiled RPM packages. \n" \
++-		"" >> $(ERROR_FILE) ; \
++-	    fi ; \
++-	else \
++-	    $(ECHO) "ERROR: You seem to not have installed ALSA $(REQUIRED_ALSA_VERSION) or higher. \n" \
++-	    "      Please install ALSA (drivers and lib). You can download the \n" \
++-	    "      source distribution from http://www.alsa-project.org or go to \n" \
++-	    "      http://www.freshrpms.net/docs/alsa/ for precompiled RPM packages. \n" \
++-	    "" >> $(ERROR_FILE) ; \
++-	fi
++-endif
++-
++ # If a sanity file doesn't exist, just make sure it's dir exists
++ $(SANITY_FILES):
++ 	-@$(prep-target)
 +diff -Nur openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk openjdk-boot/jdk/make/sun/awt/mawt.gmk
 +--- openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk	2014-01-28 19:02:26.000000000 +0100
 ++++ openjdk-boot/jdk/make/sun/awt/mawt.gmk	2014-02-10 18:28:56.000000000 +0100

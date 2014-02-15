@@ -16,7 +16,8 @@ PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-h
 PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc cups
+PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
