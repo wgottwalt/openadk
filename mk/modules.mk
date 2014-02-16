@@ -1736,3 +1736,14 @@ $(eval $(call KMOD_template,SCx200_ACB,scx200-acb,\
 	$(MODULES_DIR)/kernel/drivers/i2c/busses/scx200_acb \
 ,25))
 
+#
+# VirtIO
+#
+$(eval $(call KMOD_template,VIRTIO_BLK,virtio-block,\
+	$(MODULES_DIR)/kernel/drivers/net/virtio_blk \
+,20))
+
+$(eval $(call KMOD_template,VIRTIO_NET,virtio-net,\
+	$(MODULES_DIR)/kernel/drivers/net/virtio_net \
+,40))
+
