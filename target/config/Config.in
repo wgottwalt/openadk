@@ -172,6 +172,23 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 choice
+prompt "Qemu Emulation using VirtIO drivers"
+depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
+
+config ADK_TARGET_QEMU_WITH_VIRTIO
+	boolean "enabled"
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_VIRTIO
+	select ADK_KERNEL_VIRTIO_PCI
+	select ADK_KERNEL_VIRTIO_NET
+	select ADK_KERNEL_VIRTIO_BLK
+
+config ADK_TARGET_QEMU_WITHOUT_VIRTIO
+	boolean "disabled"
+
+endchoice
+
+choice
 prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
 

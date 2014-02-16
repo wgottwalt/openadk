@@ -1,4 +1,5 @@
 base	Base System
+boot	Boot Loaders
 browser	Browser / Editor / Pager
 editor	Browser / Editor / Pager
 pager	Browser / Editor / Pager
@@ -21,7 +22,7 @@ lang	Programming / Languages
 libs	Libraries
 mail	Mail
 misc	Misc
-multimedia	Multimedia
+multimedia	Multimedia / Audio / Video
 net	Networking
 net/fs	Network Filesystems
 net/misc	Networking Misc

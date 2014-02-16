@@ -3,27 +3,28 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		bcm2835-firmware
+PKG_NAME:=		bcm2835-bootloader
 # actually f46e6d9cb9a6bf419fe2a428a8a586239e93aa2d from 07.01.2014
+# https://github.com/raspberrypi/firmware
 PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e4c1b8f3dd13ae8742a7831c19d212b0
-PKG_DESCR:=		firmware for raspberry pi (bcm2835)
-PKG_SECTION:=		base
+PKG_MD5SUM:=		dba84ce20fc8a8c1bf473758d9350e19
+PKG_DESCR:=		bootloader for raspberry pi (bcm2835)
+PKG_SECTION:=		boot
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,BCM2835_FIRMWARE,bcm2835-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BCM2835_BOOTLOADER,bcm2835-bootloader,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
 do-install:
-	${INSTALL_DIR} ${IDIR_BCM2835_FIRMWARE}/boot
-	${CP} ${WRKBUILD}/boot/* ${IDIR_BCM2835_FIRMWARE}/boot/
+	${INSTALL_DIR} ${IDIR_BCM2835_BOOTLOADER}/boot
+	${CP} ${WRKBUILD}/boot/* ${IDIR_BCM2835_BOOTLOADER}/boot/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
