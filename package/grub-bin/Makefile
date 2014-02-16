@@ -10,7 +10,7 @@ PKG_VERSION:=		1.98
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		50dbe739776f904c318be05faf1d7ce5
 PKG_DESCR:=		GRUB2 bootloader (binary package)
-PKG_SECTION:=		base
+PKG_SECTION:=		boot
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_URL:=		http://www.gnu.org/software/grub
 

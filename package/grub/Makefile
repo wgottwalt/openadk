@@ -8,7 +8,7 @@ PKG_VERSION:=		1.98
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c0bcf60e524739bb64e3a2d4e3732a59
 PKG_DESCR:=		GRUB2 bootloader (source package)
-PKG_SECTION:=		base
+PKG_SECTION:=		boot
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://alpha.gnu.org/gnu/grub/
 

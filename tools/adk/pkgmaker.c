@@ -33,7 +33,7 @@
 #define MAXVALUE 168
 #define MAXVAR 	64
 #define MAXPATH 320
-#define HASHSZ	32
+#define HASHSZ	96
 
 static int nobinpkgs;
 
