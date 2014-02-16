@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cups
 PKG_VERSION:=		1.7.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		55277c40fd4b7183dc3671d39c5c42b7
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
@@ -48,7 +48,7 @@ HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--with-components=core \
 			--with-rcdir=$(STAGING_HOST_DIR)/etc
 CONFIGURE_ENV+=		ac_cv_func_sigset=no \
-			OPTIM='-fPIC -std=c89'
+			OPTIM='-fPIC -std=c89' LSB_BUILD=y
 
 CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-cups-group=cups \
