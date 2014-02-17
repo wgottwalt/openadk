@@ -53,9 +53,6 @@ ifeq ($(ADK_TARGET_ABI_O32),y)
 	$(SED)  's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED)  's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifneq ($(ADK_DEBUG),)
-	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
-endif
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
 	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
@@ -100,18 +97,21 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
+	touch $@
+
+$(WRKBUILD)/.fixup:
+ifneq ($(ADK_DEBUG),)
+	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
+endif
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		install_runtime
+		all install_runtime
 	rm -rf $(STAGING_TARGET_DIR)/lib/libc.so
 	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
-	touch $@
-
-$(WRKBUILD)/.fixup:
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
