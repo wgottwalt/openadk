@@ -13,10 +13,11 @@ PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
 PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
 PKG_BUILDDEP+=		xineramaproto-host libXinerama-host recordproto-host libXi-host libXtst-host freetype-host
 PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
-PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host
+PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host nss
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
-PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc
+PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc cups
+PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
@@ -66,6 +67,7 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--with-gcj=$(STAGING_HOST_DIR)/usr/bin/gcj \
+			--enable-nss \
 			--without-hotspot-build \
 			--disable-system-jpeg \
 			--disable-system-lcms \
