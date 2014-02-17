@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		64
+PKG_RELEASE:=		65
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -95,6 +95,12 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
+ifneq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI)$(ADK_TARGET_SYSTEM_IBM_X40)$(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),)
+	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
+else
+	echo 'export IPKGTMPDIR=/tmp >> $(IDIR_BASE_FILES)/etc/profile
+endif
+
 endif
 
 # simple network configuration
