@@ -97,6 +97,12 @@ config ADK_TARGET_ABI
 	default "n32" if ADK_n32
 	default "64" if ADK_n64
 
+config ADK_TARGET_ABI_MIPS_O32
+	boolean
+	select ADK_o32
+	depends on !ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
+	default y
+
 choice
 prompt "Target ABI"
 depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
@@ -164,6 +170,23 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+
+choice
+prompt "Qemu Emulation using VirtIO drivers"
+depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
+
+config ADK_TARGET_QEMU_WITH_VIRTIO
+	boolean "enabled"
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_VIRTIO
+	select ADK_KERNEL_VIRTIO_PCI
+	select ADK_KERNEL_VIRTIO_NET
+	select ADK_KERNEL_VIRTIO_BLK
+
+config ADK_TARGET_QEMU_WITHOUT_VIRTIO
+	boolean "disabled"
+
+endchoice
 
 choice
 prompt "Qemu MICROBLAZE Emulation"
@@ -461,7 +484,7 @@ config ADK_TARGET_CPU_ARCH
 
 config ADK_TARGET_ABI_CFLAGS
 	string
-	default "-mabi=32" if ADK_TARGET_ABI_O32
+	default "-mabi=32" if ADK_TARGET_ABI_O32 || ADK_TARGET_ABI_MIPS_O32
 	default "-mabi=n32" if ADK_TARGET_ABI_N32
 	default "-mabi=64" if ADK_TARGET_ABI_N64
 	default "-m32" if ADK_TARGET_ABI_32
@@ -474,9 +497,10 @@ config ADK_TARGET_ABI_LDFLAGS
 
 config ADK_TARGET_KERNEL_LDFLAGS
 	string
-	default "-mabi=64" if ADK_TARGET_ABI_N32
-	default "-mabi=64" if ADK_TARGET_ABI_O32
-	default "-mabi=64" if ADK_TARGET_ABI_N64
+	default "-mabi=64" if ADK_TARGET_ABI_N32 && ADK_TARGET_KERNEL64
+	default "-mabi=64" if ADK_TARGET_ABI_O32 && ADK_TARGET_KERNEL64
+	default "-mabi=64" if ADK_TARGET_ABI_N64 && ADK_TARGET_KERNEL64
+	default ""
 
 config ADK_TARGET_CFLAGS
 	string

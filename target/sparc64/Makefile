@@ -18,7 +18,12 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC64),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img -append "root=/dev/sda1"'
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
+	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 \
+		-net nic,model=virtio -net user'
+else
+	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)

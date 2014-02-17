@@ -13,6 +13,9 @@ MTDDEV:=	root=/dev/mtdblock0
 ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ROOTFS:=	root=/dev/sda1
 endif
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
+ROOTFS:=	root=/dev/vda1
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)

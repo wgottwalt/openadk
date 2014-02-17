@@ -26,6 +26,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-cloog-version-check \
 			--without-ppl \
 			--without-cloog \
+			--without-isl \
 			--disable-nls
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
@@ -61,13 +62,21 @@ GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ARCH),m68k)
+ifeq ($(ADK_TARGET_LIBC),uclibc)
 GCC_CONFOPTS+=		--disable-tls
+else
+GCC_CONFOPTS+=		--enable-tls
+endif
 else
 GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq ($(ARCH),powerpc)
+ifeq ($(ADK_TARGET_LIBC),uclibc)
+GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
+else
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
+endif
 else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
@@ -107,7 +116,7 @@ $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
 	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
 	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
 	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
 ifeq ($(ADK_LINUX_SH),y)
@@ -177,10 +186,12 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
-	cd $(STAGING_HOST_DIR)/bin; \
-		for app in ar as c++ g++ gcc gcc-${PKG_VERSION} ld ld.bfd nm objcopy objdump ranlib strip; do \
-			ln -sf ../$(REAL_GNU_TARGET_NAME)/bin/$${app} $(REAL_GNU_TARGET_NAME)-$${app}; \
+	cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin; \
+		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
+			ln -sf ../../bin/$(REAL_GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
+	(cd $(STAGING_HOST_DIR)/bin && \
+		ln -sf $(REAL_GNU_TARGET_NAME)-gcc $(REAL_GNU_TARGET_NAME)-gcc-${PKG_VERSION})
 	# setup symlink, so that gcc/g++ find cc1plus
 	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/ && \
 		ln -sf ../libexec .)
@@ -194,6 +205,8 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
 		cd $(STAGING_TARGET_DIR)/lib64 && \
 		ln -sf libstdc++.so.6.0.17 libstdc++.so
+	# cleanup unneeded docs
+	rm -rf $(STAGING_HOST_DIR)/share
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

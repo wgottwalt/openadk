@@ -5,10 +5,11 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
+PKG_BUILDDEP:=		autotool bzip2-host python2-host
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev
@@ -18,24 +19,24 @@ PKG_ARCH_DEPENDS:=	!m68k
 DISTFILES:=		boost_1_55_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_55_0
 
-PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options python regex serialization signals system test thread wave
+PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS SYSTEM TEST THREAD WAVE
 
-PKGFD_date_time:=	with date-time
-PKGFD_python:=	with Python
-PKGFB_python:=	python2
-PKGFS_python:=	python2
-PKGFD_iostreams:=	with iostreams
-PKGFD_graph:=	with graph
-PKGFD_graph_parallel:=	with graph_parallel
-PKGFD_math:=	with math
-PKGFD_program_options:=	with program_options
-PKGFD_regex:=	with regex
-PKGFD_serialization:=	with serialization
-PKGFD_signals:=	with signals
-PKGFD_system:=	with system
-PKGFD_test:=	with test
-PKGFD_thread:=	with thread
-PKGFD_wave:=	with wave
+PKGFD_DATE_TIME:=	with date-time
+PKGFD_PYTHON:=		with Python
+PKGFB_PYTHON:=		python2
+PKGFS_PYTHON:=		python2
+PKGFD_IOSTREAMS:=	with iostreams
+PKGFD_GRAPH:=	with graph
+PKGFD_GRAPH_PARALLEL:=	with graph_parallel
+PKGFD_MATH:=	with math
+PKGFD_PROGRAM_OPTIONS:=	with program_options
+PKGFD_REGEX:=	with regex
+PKGFD_SERIALIZATION:=	with serialization
+PKGFD_SIGNALS:=	with signals
+PKGFD_SYSTEM:=	with system
+PKGFD_TEST:=	with test
+PKGFD_THREAD:=	with thread
+PKGFD_WAVE:=	with wave
 
 include ${TOPDIR}/mk/package.mk
 
@@ -107,7 +108,7 @@ endif
 GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
 BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam$(EXEEXT)"`"
-PYTHON_PATH:=	${STAGING_TARGET_DIR}/usr/bin/python
+PYTHON_PATH:=	${STAGING_HOST_DIR}/usr/bin/python
 PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
 USER_JAM:=	${WRKBUILD}/tools/build/v2/user-config.jam
@@ -141,6 +142,7 @@ endif
 			--layout=versioned \
 			--disable-long-double \
 			--without-mpi \
+			--debug-configuration \
 			${CONFIGURE_ARGS} \
 			install \
 	)
