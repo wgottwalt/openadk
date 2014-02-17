@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		file
-PKG_VERSION:=		5.15
+PKG_VERSION:=		5.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3f99565532f548d7540912c4642d1ede
+PKG_MD5SUM:=		e19c47e069ced7b01ccb4db402cc01d3
 PKG_DESCR:=		a file type guesser
 PKG_SECTION:=		utils
 PKG_BUILDDEP:=		file-host
