@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
@@ -19,24 +19,24 @@ PKG_ARCH_DEPENDS:=	!m68k
 DISTFILES:=		boost_1_55_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_55_0
 
-PKG_FLAVOURS_BOOST:=	date_time graph graph_parallel iostreams math program_options PYTHON regex serialization signals system test thread wave
+PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS SYSTEM TEST THREAD WAVE
 
-PKGFD_date_time:=	with date-time
+PKGFD_DATE_TIME:=	with date-time
 PKGFD_PYTHON:=		with Python
 PKGFB_PYTHON:=		python2
 PKGFS_PYTHON:=		python2
-PKGFD_iostreams:=	with iostreams
-PKGFD_graph:=	with graph
-PKGFD_graph_parallel:=	with graph_parallel
-PKGFD_math:=	with math
-PKGFD_program_options:=	with program_options
-PKGFD_regex:=	with regex
-PKGFD_serialization:=	with serialization
-PKGFD_signals:=	with signals
-PKGFD_system:=	with system
-PKGFD_test:=	with test
-PKGFD_thread:=	with thread
-PKGFD_wave:=	with wave
+PKGFD_IOSTREAMS:=	with iostreams
+PKGFD_GRAPH:=	with graph
+PKGFD_GRAPH_PARALLEL:=	with graph_parallel
+PKGFD_MATH:=	with math
+PKGFD_PROGRAM_OPTIONS:=	with program_options
+PKGFD_REGEX:=	with regex
+PKGFD_SERIALIZATION:=	with serialization
+PKGFD_SIGNALS:=	with signals
+PKGFD_SYSTEM:=	with system
+PKGFD_TEST:=	with test
+PKGFD_THREAD:=	with thread
+PKGFD_WAVE:=	with wave
 
 include ${TOPDIR}/mk/package.mk
 
