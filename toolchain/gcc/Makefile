@@ -90,7 +90,11 @@ endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-fpu=vfp --with-float=hard
+GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vfp --with-float=hard
+endif
+
+ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard
 endif
 
 ifneq ($(ADK_TARGET_ABI),)
