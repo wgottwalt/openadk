@@ -34,16 +34,16 @@ STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LI
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
-TOOLS_DIR:=		$(BASE_DIR)/bin/tools
+BIN_DIR:=		$(BASE_DIR)/bin
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
-BIN_DIR:=		$(BASE_DIR)/bin/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
-BIN_DIR_PFX:=		$(BASE_DIR)/bin
-PACKAGE_DIR:=		$(BIN_DIR)/packages
+FW_DIR:=		$(BASE_DIR)/firmware/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
+FW_DIR_PFX:=		$(BASE_DIR)/firmware
+PACKAGE_DIR:=		$(FW_DIR)/packages
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
-TARGET_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-HOST_PATH=		${SCRIPT_DIR}:${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-AUTOTOOL_PATH=		${TOOLS_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
+TARGET_PATH=		${SCRIPT_DIR}:${BIN_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${BIN_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+AUTOTOOL_PATH=		${BIN_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
 
@@ -170,7 +170,7 @@ PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
 			IPKG_CONF_DIR=$(STAGING_TARGET_DIR)/etc \
 			IPKG_OFFLINE_ROOT=$(TARGET_DIR) \
-			TOOLS_DIR=$(TOOLS_DIR) \
+			BIN_DIR=$(BIN_DIR) \
 			${BASH} ${SCRIPT_DIR}/ipkg \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
@@ -193,21 +193,21 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+				cat $$file | $(BIN_DIR)/cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+				gzip -dc $$file | $(BIN_DIR)/cpio -i -d ;; \
 			*.tar.xz | *.txz) \
 				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				bzip2 -dc $$file | $(TOOLS_DIR)/cpio -i -d ;; \
+				bzip2 -dc $$file | $(BIN_DIR)/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(TOOLS_DIR)/cpio -ivd -H zip ;; \
+				cat $$file | $(BIN_DIR)/cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

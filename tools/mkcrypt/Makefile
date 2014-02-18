@@ -3,9 +3,9 @@
 
 include $(TOPDIR)/rules.mk
 
-install: ${TOOLS_DIR}/mkcrypt
+install: ${BIN_DIR}/mkcrypt
 
-${TOOLS_DIR}/mkcrypt:
+${BIN_DIR}/mkcrypt:
 	$(CC_FOR_BUILD) ${FLAGS_FOR_BUILD} -o $@ mkcrypt.c
 
 include $(TOPDIR)/mk/tools.mk

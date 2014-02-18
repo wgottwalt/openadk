@@ -62,7 +62,7 @@ kernel-install: tools-compile
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(LINUX_DIR)/vmlinux $(BUILD_DIR)/vmlinux.strip
 	dd if=$(BUILD_DIR)/vmlinux.strip of=${BUILD_DIR}/vmlinux bs=65536 conv=sync
-	lzma -9efzc ${BUILD_DIR}/vmlinux > $(BIN_DIR)/${TARGET_KERNEL}
+	lzma -9efzc ${BUILD_DIR}/vmlinux > $(FW_DIR)/${TARGET_KERNEL}
 	cp ${BUILD_DIR}/root.squashfs ${BUILD_DIR}/${ROOTFSSQUASHFS}
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
@@ -79,10 +79,10 @@ kernel-install:
 endif
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
-imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
 	@echo 'Type the following in Redboot:'
 	@echo 'RedBoot> load $(TARGET_KERNEL)'
@@ -96,22 +96,22 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 endif
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
-imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo 'The root tarball is: ${BIN_DIR}/${ROOTFSTARBALL}'
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSTARBALL)
+	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
 	@echo 'Format your NAND with Routerboot, boot via NFS and'
 	@echo 'then install kernel and filesystem via:'
 	@echo 'adkinstall ${ROOTFSTARBALL}'
 endif
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifneq ($(ADK_HARDWARE_QEMU),)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
@@ -121,27 +121,27 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+imageinstall: $(FW_DIR)/$(INITRAMFS)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
 	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
@@ -150,10 +150,10 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 endif
 endif
 ifeq ($(ADK_TARGET_FS),cf)
-imageinstall: kernel-install $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSUSERTARBALL)"
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 	@echo "Boot the board via network (tftp+nfsroot) and use adkinstall."
 	@echo "If you just want to update, use adkupdate."
 endif
@@ -162,7 +162,7 @@ imageinstall: kernel-install ${BUILD_DIR}/${ROOTFSSQUASHFS}
 	@if [ $$($(STATCMD) ${BUILD_DIR}/${ROOTFSSQUASHFS}) -gt 3801088 ];then \
 		echo 'Image is too big!'; \
 	else \
-		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${BIN_DIR}/${ROOTFSSQUASHFS}; \
+		${CP} ${BUILD_DIR}/${ROOTFSSQUASHFS} ${FW_DIR}/${ROOTFSSQUASHFS}; \
 		echo The image file is $(ROOTFSSQUASHFS); \
 	fi
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)

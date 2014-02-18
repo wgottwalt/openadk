@@ -78,7 +78,7 @@ _PATCH_COOKIE=		${WRKDIST}/.prepared
 _CONFIGURE_COOKIE=	${WRKBUILD}/.configure_done
 _BUILD_COOKIE=		${WRKBUILD}/.build_done
 _FAKE_COOKIE=		${WRKINST}/.fake_done
-_IPKGS_COOKIE=		${PACKAGE_DIR}/.stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
+_IPKGS_COOKIE=		${STAGING_PKG_DIR}/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
 
 _IN_PACKAGE:=		1
 include ${TOPDIR}/mk/buildhlp.mk
@@ -249,7 +249,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
-	    $(TOOLS_DIR)/cpio -padlmu '$${STAGING_DIR}'
+	    $(BIN_DIR)/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
@@ -321,7 +321,7 @@ clean-targets:
 clean:
 	@$(CMD_TRACE) "cleaning... "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
-	rm -rf ${WRKDIR} ${ALL_IPKGS} ${PACKAGE_DIR}/.stamps/${PKG_NAME}*
+	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/${PKG_NAME}*
 
 distclean: clean
 	rm -f ${FULLDISTFILES}
