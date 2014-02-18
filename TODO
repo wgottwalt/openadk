@@ -1,10 +1,11 @@
+- qemu-system-mips64el memory alloc probs
+- hash-style=gnu for non-mips and non-musl
+- add toolchain archive creation target
 - add hash-style=gnu for non-mips non-musl
-- add amr hard and softfloat toolchains
+- add arm hard and softfloat toolchains
 - add misp64 n32/n64 toolchains
 - add support for static toolchains
-- cleanup toolchain building, add toolchain archive creation target
 - add fb full screen logo
-- update uclibc to git
 - update gcc to 4.8.2
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)
