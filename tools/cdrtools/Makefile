@@ -11,15 +11,15 @@ PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
 
 include ../rules.mk
 
-install: ${TOOLS_DIR}/mkisofs
+install: ${BIN_DIR}/mkisofs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	#(cd ${WRKBUILD}; ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}'
 	touch $@
 
-${TOOLS_DIR}/mkisofs: $(WRKBUILD)/.compiled
+${BIN_DIR}/mkisofs: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/mkisofs/OBJ/*/mkisofs \
-		${TOOLS_DIR}
+		${BIN_DIR}
 
 include $(TOPDIR)/mk/tools.mk

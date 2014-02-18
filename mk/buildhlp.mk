@@ -24,11 +24,7 @@ else
 _CHECKSUM_COOKIE=
 endif
 
-${PACKAGE_DIR}/.stamps:
-	@mkdir -p ${PACKAGE_DIR}/.stamps
-
-post-extract: ${PACKAGE_DIR}/.stamps
-
+post-extract:
 ifeq ($(strip ${NO_DISTFILES}),1)
 ${WRKDIST}/.extract_done:
 	rm -rf ${WRKDIST} ${WRKSRC} ${WRKBUILD}

@@ -171,11 +171,11 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
 	    find . -name \*.h | \
- 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+ 	    $(BIN_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
 	    find . -name \*.pc | \
- 	    $(TOOLS_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+ 	    $(BIN_DIR)/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		mkdir -p $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
@@ -191,7 +191,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(TOOLS_DIR)/cpio -padlmu '${STAGING_DIR}'
+	    $(BIN_DIR)/cpio -padlmu '${STAGING_DIR}'
 	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \

@@ -12,7 +12,7 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 include ../rules.mk
 WRKINST:=		${WRKBUILD}/openadk_installroot
 
-install: ${TOOLS_DIR}/extlinux ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
+install: ${BIN_DIR}/extlinux ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	#(cd ${WRKBUILD}; ./configure)
@@ -26,9 +26,9 @@ $(WRKBUILD)/.installed: ${WRKBUILD}/.compiled
 		bios install
 	touch $@
 
-${TOOLS_DIR}/extlinux: $(WRKBUILD)/.installed
+${BIN_DIR}/extlinux: $(WRKBUILD)/.installed
 	$(INSTALL_BIN) ${WRKINST}/sbin/extlinux \
-		${TOOLS_DIR}
+		${BIN_DIR}
 
 ${STAGING_HOST_DIR}/usr/share/syslinux/.installed: ${WRKBUILD}/.installed
 	mkdir -p ${STAGING_HOST_DIR}/usr/share

@@ -10,38 +10,38 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC64),y)
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(BIN_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
-	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 \
+	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 \
 		-net nic,model=virtio -net user'
 else
-	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+imageinstall: $(FW_DIR)/$(INITRAMFS)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC64),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL) -initrd ${BIN_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
-	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: $(BIN_DIR)/${TARGET_KERNEL}'
+	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC64),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-sparc64 -nographic -kernel $(BIN_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif

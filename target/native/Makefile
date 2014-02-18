@@ -15,23 +15,23 @@ KERNEL:=$(LINUX_DIR)/vmlinuz
 endif
 
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: $(BIN_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo 'The initramfs image is: ${BIN_DIR}/${INITRAMFS}'
+imageinstall: $(FW_DIR)/$(INITRAMFS)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
-	@cp $(KERNEL) $(BIN_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: ${BIN_DIR}/${TARGET_KERNEL}'
+	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+	@echo 'The kernel+initramfs file is: ${FW_DIR}/${TARGET_KERNEL}'
 endif
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(BIN_DIR)/$(ROOTFSTARBALL)
-	@echo "The RootFS tarball is: $(BIN_DIR)/$(ROOTFSTARBALL)"
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
-imageinstall: $(BIN_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(KERNEL) $(BIN_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(BIN_DIR)/${TARGET_KERNEL}'
-	@echo 'The nfs root tarball is: ${BIN_DIR}/${ROOTFSUSERTARBALL}'
+imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
 endif

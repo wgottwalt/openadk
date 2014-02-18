@@ -139,14 +139,15 @@ include $(TOPDIR)/rules.mk
 all: world
 
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
-	$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
+	$(BIN_DIR)/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
 .PHONY: all world clean cleantarget cleandir distclean image_clean
 
 world:
-	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(PACKAGE_DIR)/.stamps \
-		$(TOOLS_DIR) $(TOOLS_BUILD_DIR) $(TOOLCHAIN_BUILD_DIR)
+	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+		$(PACKAGE_DIR) $(BIN_DIR) $(TOOLS_BUILD_DIR) \
+		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
@@ -258,7 +259,7 @@ clean:
 			rm $$f ; \
 		done \
 	done
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR) \
+	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
 	    	${TOPDIR}/package/pkglist.d
 	rm -f ${TOPDIR}/package/Depends.mk
 
@@ -269,7 +270,7 @@ cleankernel:
 cleandir:
 	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
-	rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) \
+	rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
 	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
@@ -278,14 +279,14 @@ cleandir:
 cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR) $(BIN_DIR) $(TARGET_DIR)
+	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
 	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_DIR) $(STAGING_PKG_DIR)
 	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
@@ -533,7 +534,7 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
-	@rm -rf $(BUILD_DIR_PFX) $(BIN_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(TOOLS_BUILD_DIR)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
@@ -649,12 +650,12 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TO
 	@$(TOPDIR)/bin/tools/pkgmaker
 	@:>.menu
 
-${TOPDIR}/bin/tools/depmaker: $(TOPDIR)/tools/adk/depmaker.c
-	$(CC_FOR_BUILD) -g -o $(TOPDIR)/bin/tools/depmaker $(TOPDIR)/tools/adk/depmaker.c
+${BIN_DIR}/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	$(CC_FOR_BUILD) -g -o $(BIN_DIR)/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
-dep: $(TOPDIR)/bin/tools/depmaker
+dep: $(BIN_DIR)/depmaker
 	@echo "Generating dependencies ..."
-	@$(TOPDIR)/bin/tools/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(BIN_DIR)/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 

@@ -133,17 +133,17 @@ ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.iso
 endif
 
-${BIN_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
+${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
+		${BIN_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
-${BIN_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
+${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${TOOLS_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
+		${BIN_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
 
-${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
+${FW_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 	bash ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
@@ -157,8 +157,8 @@ ${BIN_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 		echo "nod /dev/ram 0655 0 0 b 1 1"; \
 	) >>$@
 
-${BIN_DIR}/${INITRAMFS}: ${BIN_DIR}/${INITRAMFS}_list
-	${LINUX_DIR}/usr/gen_init_cpio ${BIN_DIR}/${INITRAMFS}_list | \
+${FW_DIR}/${INITRAMFS}: ${FW_DIR}/${INITRAMFS}_list
+	${LINUX_DIR}/usr/gen_init_cpio ${FW_DIR}/${INITRAMFS}_list | \
 		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
@@ -166,16 +166,16 @@ ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 		${BUILD_DIR}/root.squashfs -comp xz \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
-${BIN_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
+${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -r ${TARGET_DIR} \
-		--pad=$(ADK_TARGET_MTD_SIZE) -o ${BIN_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
+		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
-createinitramfs: ${BIN_DIR}/${INITRAMFS}_list
+createinitramfs: ${FW_DIR}/${INITRAMFS}_list
 	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE|INITRAMFS_COMPRESSION).*//' \
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
-		echo 'CONFIG_INITRAMFS_SOURCE="${BIN_DIR}/${INITRAMFS}_list"'; \
+		echo 'CONFIG_INITRAMFS_SOURCE="${FW_DIR}/${INITRAMFS}_list"'; \
 		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set' >> ${LINUX_DIR}/.config; \
 		echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> ${LINUX_DIR}/.config; \
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> ${LINUX_DIR}/.config; \
@@ -236,16 +236,16 @@ endif
 	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
 
-${BIN_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
+${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 	mkdir -p ${TARGET_DIR}/boot/syslinux
 	cp ${STAGING_HOST_DIR}/usr/share/syslinux/{isolinux.bin,ldlinux.c32} \
 		${TARGET_DIR}/boot/syslinux
 	echo 'DEFAULT /boot/kernel root=/dev/sr0 init=/init' > \
 		${TARGET_DIR}/boot/syslinux/isolinux.cfg
-	${TOOLS_DIR}/mkisofs -R -uid 0 -gid 0 -o $@ \
+	${BIN_DIR}/mkisofs -R -uid 0 -gid 0 -o $@ \
 		-b boot/syslinux/isolinux.bin \
 		-c boot/syslinux/boot.cat -no-emul-boot \
 		-boot-load-size 4 -boot-info-table ${TARGET_DIR}
 
 imageclean:
-	rm -f $(BIN_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*
+	rm -f $(FW_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*
