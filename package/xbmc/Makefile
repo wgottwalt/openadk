@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		12.3
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
@@ -58,6 +58,7 @@ CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mysql \
+			--disable-avahi \
 			--enable-mid \
 			--enable-libmp3lame \
 			--enable-libvorbisenc \
