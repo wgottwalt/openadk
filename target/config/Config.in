@@ -170,6 +170,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 
 choice
 prompt "Qemu Emulation using VirtIO drivers"
@@ -455,6 +456,9 @@ config ADK_CPU_MICROBLAZE
 config ADK_CPU_RASPBERRY_PI
 	boolean
 
+config ADK_CPU_CUBOX_I
+	boolean
+
 config ADK_TARGET_CPU_ARCH
 	string
 	default "x86_64" if ADK_CPU_X86_64
@@ -519,11 +523,13 @@ config ADK_TARGET_CFLAGS
 	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
 	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
 	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_RASPBERRY_PI
+	default "-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CUBOX_I
 
 config ADK_TARGET_CMDLINE
 	string
 	default "dwc_otg.fiq_split_enable=1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "console=ttymxc0,115200" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
