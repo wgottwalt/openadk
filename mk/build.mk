@@ -638,16 +638,15 @@ bulkallmod:
 	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
-${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
-	@mkdir -p $(TOPDIR)/bin/tools
+${BIN_DIR}/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
-${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
+${BIN_DIR}/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${BIN_DIR}/pkgmaker ${BIN_DIR}/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(TOPDIR)/bin/tools/pkgmaker
+	@$(BIN_DIR)/pkgmaker
 	@:>.menu
 
 ${BIN_DIR}/depmaker: $(TOPDIR)/tools/adk/depmaker.c

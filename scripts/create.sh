@@ -31,8 +31,8 @@ TOPDIR=$(pwd)
 me=$0
 
 case :$PATH: in
-(*:$TOPDIR/bin/tools:*) ;;
-(*) export PATH=$PATH:$TOPDIR/bin/tools ;;
+(*:$TOPDIR/bin:*) ;;
+(*) export PATH=$PATH:$TOPDIR/bin ;;
 esac
 
 test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
@@ -43,7 +43,7 @@ test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
 	cd build_mksh/mksh
 	bash Build.sh -r -c lto || bash Build.sh -r || exit 1
-	cp mksh "$TOPDIR"/bin/tools/
+	cp mksh "$TOPDIR"/bin
 	cd "$TOPDIR"
 	rm -rf build_mksh
 fi
