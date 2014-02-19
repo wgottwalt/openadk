@@ -72,15 +72,24 @@ TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 
+MODE_FLAGS:=
+ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+MODE_FLAGS:=		-mthumb
+else
+MODE_FLAGS:=		-marm
+endif
+endif
+
 TARGET_CPPFLAGS:=	
 ifeq ($(ADK_LINUX_MICROBLAZE),y)
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(ADK_TARGET_ABI_CFLAGS)
 TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(TARGET_OPTIMIZATION)
 else
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS)
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS) $(MODE_FLAGS)
 TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(TARGET_OPTIMIZATION)
 endif
-TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
+TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(MODE_FLAGS)
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
