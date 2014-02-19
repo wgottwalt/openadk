@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		glibc
-PKG_VERSION:=		2.18
+PKG_VERSION:=		2.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b67b22b428ed183148d1344da6d22ea9
+PKG_MD5SUM:=		5374d29864b583622b62bfc6b8429418
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(REAL_GNU_TARGET_NAME) \
