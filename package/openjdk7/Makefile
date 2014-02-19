@@ -16,8 +16,10 @@ PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-h
 PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host nss
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
+PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc cups
-PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss
+PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
+PKG_DEPENDS+=		libpng giflib libgtk glib fontconfig
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
@@ -67,17 +69,17 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
 			--with-gcj=$(STAGING_HOST_DIR)/usr/bin/gcj \
-			--enable-nss \
 			--without-hotspot-build \
-			--disable-system-jpeg \
+			--enable-nss \
+			--enable-system-zlib \
+			--enable-system-jpeg \
+			--enable-system-png \
+			--enable-system-gif \
+			--enable-system-gtk \
+			--enable-system-gio \
+			--enable-system-fontconfig \
 			--disable-system-lcms \
-			--disable-system-zlib \
-			--disable-system-png \
-			--disable-system-gif \
-			--disable-system-gtk \
-			--disable-system-gio \
 			--disable-system-kerberos \
-			--disable-system-fontconfig \
 			--disable-compile-against-syscalls \
 			--without-rhino
 
@@ -122,9 +124,9 @@ HOST_CONFIGURE_ARGS+=\
 		--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
 		--with-ecj-jar=${STAGING_HOST_DIR}/usr/share/java/ecj.jar \
 		--without-hotspot-build \
+                --disable-system-zlib \
                 --disable-system-jpeg \
                 --disable-system-lcms \
-                --disable-system-zlib \
                 --disable-system-png \
                 --disable-system-gif \
                 --disable-system-gtk \
