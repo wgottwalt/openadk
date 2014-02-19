@@ -41,8 +41,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_XORG=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
-			ADK_TOOLCHAIN_GCC_JAVA=n \
-			ADK_TOOLCHAIN_GCC_OBJC=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -546,12 +544,12 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in glibc eglibc uclibc musl;do \
 		while read arch; do \
 		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
-			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##"); \
+			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
