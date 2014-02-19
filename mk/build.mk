@@ -344,16 +344,6 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
-ifeq ($(ADKtype),shuttle-sa76)
-	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
-	@echo ADK_TARGET_SYSTEM_SHUTTLE_SA76=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
@@ -437,15 +427,6 @@ ifeq (${OStype},Darwin)
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
-endif
-ifeq ($(ADKtype),shuttle-sa76)
-	@echo ADK_TARGET_SYSTEM_SHUTTLE_SA76=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 ifeq ($(ADKtype),ibm-x40)
 	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
@@ -638,24 +619,24 @@ bulkallmod:
 	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
-${TOPDIR}/bin/tools/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
-	@mkdir -p $(TOPDIR)/bin/tools
+${TOPDIR}/bin/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
+	mkdir -p ${TOPDIR}/bin
 	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
-${TOPDIR}/bin/tools/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
+${TOPDIR}/bin/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/tools/pkgmaker ${TOPDIR}/bin/tools/pkgrebuild
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TOPDIR}/bin/pkgmaker ${TOPDIR}/bin/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(TOPDIR)/bin/tools/pkgmaker
+	@$(TOPDIR)/bin/pkgmaker
 	@:>.menu
 
-${BIN_DIR}/depmaker: $(TOPDIR)/tools/adk/depmaker.c
-	$(CC_FOR_BUILD) -g -o $(BIN_DIR)/depmaker $(TOPDIR)/tools/adk/depmaker.c
+${TOPDIR}/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	$(CC_FOR_BUILD) -g -o $(TOPDIR)/bin/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(BIN_DIR)/depmaker
 	@echo "Generating dependencies ..."
-	@$(BIN_DIR)/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(TOPDIR)/bin/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 

@@ -1,0 +1,11 @@
+--- nspr-4.10.2.orig/nspr/config/Makefile.in	2013-11-09 10:49:40.000000000 +0100
++++ nspr-4.10.2/nspr/config/Makefile.in	2014-02-19 07:15:42.000000000 +0100
+@@ -113,7 +113,7 @@ endif
+ 
+ $(OBJDIR)/%$(PROG_SUFFIX): $(OBJDIR)/%.$(OBJ_SUFFIX)
+ 	@$(MAKE_OBJDIR)
+-	$(CC) $(XCFLAGS) $< $(LDFLAGS) $(XLDOPTS) $(OUTOPTION)$@
++	$(CC_FOR_BUILD) $(HOSTCFLAGS) $< $(HOSTLDFLAGS) $(XLDOPTS) $(OUTOPTION)$@
+ 
+ install:: nspr.m4
+ 	$(NSINSTALL) -D $(DESTDIR)$(datadir)/aclocal

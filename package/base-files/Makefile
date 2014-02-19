@@ -82,7 +82,7 @@ endif
 	    echo "::1		localhost" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
-	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/tools/mkcrypt \
+	    $(SED) 's,\*NP\*,'"$$(${TOPDIR}/bin/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
 	git log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
