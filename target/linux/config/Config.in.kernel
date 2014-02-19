@@ -101,3 +101,6 @@ config ADK_KERNEL_CPU_MIPS64_R1
 
 config ADK_KERNEL_PREEMPT
 	boolean
+
+config ADK_KERNEL_THUMB2_KERNEL
+	boolean
