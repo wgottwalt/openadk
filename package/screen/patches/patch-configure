@@ -1,5 +1,5 @@
 --- screen-4.0.3.orig/configure	2003-12-05 14:46:53.000000000 +0100
-+++ screen-4.0.3/configure	2010-01-23 10:18:22.000000000 +0100
++++ screen-4.0.3/configure	2014-02-19 08:18:45.000000000 +0100
 @@ -124,7 +124,7 @@ done
    fi
    if test ! -f "$as_myself"; then
@@ -63,7 +63,7 @@
      ;;
  
    *=*)
-@@ -633,7 +633,7 @@ Try \`$0 --help' for more information." 
+@@ -633,7 +633,7 @@ Try \`$0 --help' for more information."
      # Reject names that are not valid shell variable names.
      expr "x$ac_envvar" : ".*[^_$as_cr_alnum]" >/dev/null &&
        { echo "$as_me: error: invalid variable name: $ac_envvar" >&2
@@ -490,7 +490,7 @@
    --help | --hel | -h )
      echo "$ac_cs_usage"; exit 0 ;;
    --debug | --d* | -d )
-@@ -8516,7 +8480,7 @@ Try \`$0 --help' for more information." 
+@@ -8516,7 +8480,7 @@ Try \`$0 --help' for more information."
  Try \`$0 --help' for more information." >&5
  echo "$as_me: error: unrecognized option: $1
  Try \`$0 --help' for more information." >&2;}
