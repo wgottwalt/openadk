@@ -532,7 +532,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 bulktoolchain:
 	for libc in uclibc eglibc glibc musl;do \
 		while read arch; do \
-		    mkdir -p $(TOPDIR)/bin/toolchain_$${arch}_$$libc; \
+		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##"); \
@@ -540,7 +540,7 @@ bulktoolchain:
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/bin/toolchain_$${arch}_$${libc}/build.log; \
+		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
@@ -548,14 +548,14 @@ bulktoolchain:
 
 release:
 	for libc in uclibc eglibc glibc musl;do \
-		mkdir -p $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc; \
+		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
 			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/bin/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi
@@ -566,14 +566,14 @@ bulk:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	    if [ -f .exit ]; then break;fi \
@@ -586,14 +586,14 @@ bulkall:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	      if [ -f .exit ]; then break;fi \
@@ -606,7 +606,7 @@ bulkallmod:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/bin/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
@@ -614,7 +614,7 @@ bulkallmod:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		$(GMAKE) cleantarget; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/bin/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
 	        if [ -f .exit ]; then break;fi \
 	      done; \
 	     if [ -f .exit ]; then break;fi \
@@ -623,7 +623,7 @@ bulkallmod:
 	done
 
 ${TOPDIR}/bin/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
-	mkdir -p ${TOPDIR}/bin
+	@mkdir -p ${TOPDIR}/bin
 	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
 
 ${TOPDIR}/bin/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
@@ -637,7 +637,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) ${TO
 ${TOPDIR}/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
 	$(CC_FOR_BUILD) -g -o $(TOPDIR)/bin/depmaker $(TOPDIR)/tools/adk/depmaker.c
 
-dep: $(BIN_DIR)/depmaker
+dep: $(TOPDIR)/bin/depmaker
 	@echo "Generating dependencies ..."
 	@$(TOPDIR)/bin/depmaker > ${TOPDIR}/package/Depends.mk
 

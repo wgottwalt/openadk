@@ -93,9 +93,15 @@ TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(MODE_FLAGS)
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			$(ADK_TARGET_ABI_LDFLAGS) $(TARGET_CFLAGS_ARCH)
+			$(ADK_TARGET_ABI_LDFLAGS)
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
+# needed for musl ppc 
+ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_LDFLAGS+=	-Wl,--secure-plt
+endif
+endif
 
 ifneq ($(ADK_NATIVE),)
 TARGET_CPPFLAGS:=
