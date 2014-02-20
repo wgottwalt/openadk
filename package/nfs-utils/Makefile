@@ -4,19 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.2.8
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		fb48630b7c145fb9d6602a79c6eaab11
+PKG_VERSION:=		1.2.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		18869d16db3f49c053f8c68eba3fe2e0
 PKG_DESCR:=		Utilities for NFS kernel server implementation
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
 PKG_FDEPENDS:=		$(PKG_DEPENDS)
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
-# as long as there are tar archives of nfs-utils with object files
-# on some sourceforge mirrors
-PKG_SITES:=		http://openadk.org/distfiles/
-#PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
 PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
 
