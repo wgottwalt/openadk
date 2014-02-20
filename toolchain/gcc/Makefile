@@ -94,7 +94,11 @@ GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vf
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard
+ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard  --with-mode=thumb
+else
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard  --with-mode=arm
+endif
 endif
 
 ifneq ($(ADK_TARGET_ABI),)

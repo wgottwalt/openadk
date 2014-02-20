@@ -122,6 +122,9 @@ POSTCONFIG=		-@\
 		if [ "$$(grep ^ADK_KERNEL_VERSION_ .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION_ .config.old|md5sum)" ];then \
 			make kernelclean;\
 		fi; \
+		if [ "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config|md5sum)" != "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config.old|md5sum)" ];then \
+			echo "You should make cleantarget, after changing thumb mode";\
+		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
 		fi; \
