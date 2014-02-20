@@ -87,15 +87,21 @@ TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(ADK_TARGET_ABI_CFLAG
 TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(TARGET_OPTIMIZATION)
 else
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS) $(MODE_FLAGS)
-TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(TARGET_OPTIMIZATION)
+TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(TARGET_OPTIMIZATION) $(MODE_FLAGS)
 endif
 TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(MODE_FLAGS)
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			$(ADK_TARGET_ABI_LDFLAGS) $(TARGET_CFLAGS_ARCH)
+			$(ADK_TARGET_ABI_LDFLAGS)
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
+# needed for musl ppc 
+ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_LDFLAGS+=	-Wl,--secure-plt
+endif
+endif
 
 ifneq ($(ADK_NATIVE),)
 TARGET_CPPFLAGS:=
