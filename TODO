@@ -1,12 +1,11 @@
-- update glibc/eglibc to 2.19
 - update gcc to 4.8.2
-- qemu-system-mips64el memory alloc probs
+- add toolchain archive creation target (optimize for size)
 - hash-style=gnu for non-mips and non-musl
-- add toolchain archive creation target
 - add arm hard and softfloat toolchains
 - add misp64 n32/n64 toolchains
 - add support for static toolchains
 - add fb full screen logo
+- qemu-system-mips64el memory alloc probs
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)
 - essid with spaces
