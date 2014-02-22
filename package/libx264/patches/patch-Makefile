@@ -1,0 +1,14 @@
+--- libx264-1.0.1.orig/Makefile	2014-01-22 11:20:21.000000000 +0100
++++ libx264-1.0.1/Makefile	2014-02-22 20:15:00.000000000 +0100
+@@ -201,7 +201,10 @@ $(OBJS) $(OBJASM) $(OBJSO) $(OBJCLI) $(O
+ 
+ .depend: config.mak
+ 	@rm -f .depend
+-	@$(foreach SRC, $(addprefix $(SRCPATH)/, $(SRCS) $(SRCCLI) $(SRCSO)), $(CC) $(CFLAGS) $(SRC) $(DEPMT) $(SRC:$(SRCPATH)/%.c=%.o) $(DEPMM) 1>> .depend;)
++	echo $(SRCS)
++	echo $(SRCS0)
++	echo $(SRCCLI)
++	$(foreach SRC, $(addprefix $(SRCPATH)/, $(SRCS) $(SRCCLI) $(SRCSO)), $(CC) $(CFLAGS) $(SRC) $(DEPMT) $(SRC:$(SRCPATH)/%.c=%.o) $(DEPMM) 1>> .depend;)
+ 
+ config.mak:
+ 	./configure
