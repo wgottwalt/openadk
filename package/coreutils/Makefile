@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
-PKG_VERSION:=		8.21
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		065ba41828644eca5dd8163446de5d64
+PKG_VERSION:=		8.22
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8fb0ae2267aa6e728958adc38f8163a2
 PKG_DESCR:=		basic file, shell and text manipulation utilities
 PKG_SECTION:=		base
 PKG_BUILDDEP:=		gmp autotool

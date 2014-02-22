@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cryptodev-linux
 PKG_VERSION:=		1.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		eade38998313c25fd7934719cdf8a2ea
 PKG_DESCR:=		cryptodev-linux kernel module
 PKG_SECTION:=		crypto

@@ -1,0 +1,8 @@
+--- coreutils-8.22.orig/Makefile.am	2013-12-04 15:48:30.000000000 +0100
++++ coreutils-8.22/Makefile.am	2014-02-21 16:15:49.000000000 +0100
+@@ -187,5 +187,4 @@ AM_CPPFLAGS = -Ilib -I$(top_srcdir)/lib
+ include $(top_srcdir)/lib/local.mk
+ include $(top_srcdir)/src/local.mk
+ include $(top_srcdir)/doc/local.mk
+-include $(top_srcdir)/man/local.mk
+ include $(top_srcdir)/tests/local.mk
