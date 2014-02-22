@@ -1,5 +1,5 @@
 --- strace-4.8.orig/syscall.c	2013-05-14 16:10:42.000000000 +0200
-+++ strace-4.8/syscall.c	2013-10-25 14:52:35.000000000 +0200
++++ strace-4.8/syscall.c	2014-01-23 19:57:19.000000000 +0100
 @@ -40,17 +40,6 @@
  # ifndef PTRACE_PEEKUSR
  #  define PTRACE_PEEKUSR PTRACE_PEEKUSER
@@ -18,3 +18,18 @@
  #endif
  
  #if defined(SPARC64)
+@@ -72,13 +61,7 @@
+ # include <elf.h>
+ #endif
+ 
+-#if defined(AARCH64)
+-# include <asm/ptrace.h>
+-#endif
+-
+-#if defined(XTENSA)
+-# include <asm/ptrace.h>
+-#endif
++#include <asm/ptrace.h>
+ 
+ #ifndef ERESTARTSYS
+ # define ERESTARTSYS	512
