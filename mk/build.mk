@@ -537,6 +537,7 @@ bulktoolchain:
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+				tar -cJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_$${arch}_*_$${libc} target_$${arch}_*_$${libc}; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
 		    if [ -f .exit ];then break;fi \
