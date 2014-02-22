@@ -20,6 +20,8 @@ PKG_NAME:=		libthread-db
 PKG_DESCR:=		POSIX threads library for gdb/gdbserver
 PKG_SECTION:=		libs
 
+PKG_CFLINE_LIBTHREAD_DB:=depends on ADK_PACKAGE_GDB || ADK_PACKAGE_GDBSERVER
+
 PKG_ARCH_DEPENDS:=	!m68k
 
 NO_DISTFILES:=		1

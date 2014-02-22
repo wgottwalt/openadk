@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libx264
 # actually is git checkout from 22.01.2014
 PKG_VERSION:=		1.0.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		6be3e8adeaf6b007bbc04026b6ebd304
 PKG_DESCR:=		H264 encoding library
 PKG_SECTION:=		libs
@@ -20,12 +20,21 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX264,libx264,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIG_STYLE:=		minimal
+
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 CONFIGURE_ARGS+=	--disable-asm
 endif
 CONFIGURE_ARGS+=	--disable-cli \
-			--enable-asm \
+			--disable-opencl \
+			--enable-shared \
+			--prefix=/usr \
+			--host=${REAL_GNU_TARGET_NAME} \
+			--sysroot=${STAGING_TARGET_DIR} \
 			--cross-prefix=$(TARGET_CROSS)
+
+post-configure:
+	cd $(WRKBUILD); $(MAKE) depend
 
 libx264-install:
 	$(INSTALL_DIR) $(IDIR_LIBX264)/usr/lib

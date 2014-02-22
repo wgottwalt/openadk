@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
 PKG_VERSION:=		4.8
-PKG_RELEASE:=		4
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
 PKG_DESCR:=		System call trace program
 PKG_SECTION:=		debug
