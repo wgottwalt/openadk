@@ -4,11 +4,14 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 
-# eglibc does not compile with Os on sparc
+# eglibc does not compile with Os on some architectures
 ifeq ($(ADK_LINUX_SPARC),y)
 TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
 endif
 ifeq ($(ADK_LINUX_MICROBLAZE),y)
+TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
+endif
+ifeq ($(ADK_LINUX_PPC64),y)
 TARGET_CFLAGS_LIBC:=	$(subst Os,O2,$(TARGET_CFLAGS))
 endif
 
