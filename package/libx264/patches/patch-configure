@@ -1,5 +1,5 @@
 --- libx264-1.0.1.orig/configure	2014-01-22 11:20:21.000000000 +0100
-+++ libx264-1.0.1/configure	2014-02-23 19:48:57.000000000 +0100
++++ libx264-1.0.1/configure	2014-02-23 19:54:33.000000000 +0100
 @@ -560,7 +560,7 @@ LDFLAGS="$LDFLAGS $libm"
  aligned_stack=1
  case $host_cpu in
@@ -98,6 +98,15 @@
      if ! as_check "vpmovzxwd ymm0, xmm0" ; then
          VER=`($AS --version || echo no assembler) 2>/dev/null | head -n 1`
          echo "Found $VER"
+@@ -740,7 +740,7 @@ if [ $asm = auto -a \( $ARCH = X86 -o $A
+     fi
+ fi
+ 
+-if [ $asm = auto -a $ARCH = ARM ] ; then
++if [ $asm = auto -a $XARCH = ARM ] ; then
+     # set flags so neon is built by default
+     echo $CFLAGS | grep -Eq '(-mcpu|-march|-mfpu)' || CFLAGS="$CFLAGS -mcpu=cortex-a8 -mfpu=neon"
+ 
 @@ -758,7 +758,7 @@ fi
  [ $asm = no ] && AS=""
  [ "x$AS" = x ] && asm="no" || asm="yes"

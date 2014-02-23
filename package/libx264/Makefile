@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libx264
 # actually is git checkout from 22.01.2014
 PKG_VERSION:=		1.0.1
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		6be3e8adeaf6b007bbc04026b6ebd304
 PKG_DESCR:=		H264 encoding library
 PKG_SECTION:=		libs

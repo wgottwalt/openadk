@@ -43,15 +43,3 @@
  ifeq ($(findstring HIGH_BIT_DEPTH, $(CONFIG)),)
  ASMSRC += common/sparc/pixel.asm
  OBJASM  = $(ASMSRC:%.asm=%.o)
-@@ -201,7 +201,10 @@ $(OBJS) $(OBJASM) $(OBJSO) $(OBJCLI) $(O
- 
- .depend: config.mak
- 	@rm -f .depend
--	@$(foreach SRC, $(addprefix $(SRCPATH)/, $(SRCS) $(SRCCLI) $(SRCSO)), $(CC) $(CFLAGS) $(SRC) $(DEPMT) $(SRC:$(SRCPATH)/%.c=%.o) $(DEPMM) 1>> .depend;)
-+	echo $(SRCS)
-+	echo $(SRCS0)
-+	echo $(SRCCLI)
-+	$(foreach SRC, $(addprefix $(SRCPATH)/, $(SRCS) $(SRCCLI) $(SRCSO)), $(CC) $(CFLAGS) $(SRC) $(DEPMT) $(SRC:$(SRCPATH)/%.c=%.o) $(DEPMM) 1>> .depend;)
- 
- config.mak:
- 	./configure
