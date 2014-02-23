@@ -1,3 +1,4 @@
-- uclibc N64 ABI on mips64{,el} targets does not work, nptl fork problem
+- sparc: uclibc toolchain is broken
+- sparc64: ide driver not working, only virtio (but unstable)
 - microblaze big endian: network card emulation fails
 - microblaze: qemu reboot not working
