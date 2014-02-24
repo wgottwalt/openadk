@@ -53,7 +53,7 @@ ifeq ($(ADK_TARGET_ABI_O32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_PACKAGE_GDB),y)
+ifneq ($(ADK_PACKAGE_GDB),)
 	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
