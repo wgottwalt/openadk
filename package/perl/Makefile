@@ -12,6 +12,7 @@ PKG_SECTION:=		lang
 PKG_BUILDDEP:=		perl-host
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/
+PKG_NOPARALLEL:=	1
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
@@ -28,15 +29,21 @@ INSTALL_STYLE:=		manual
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 
 host-configure:
-	(cd ${WRKBUILD}; ./Configure -der -Uusedl)
+	$(SED) "s#@@STAGING_HOST_DIR@@/perl-host#./perl#" ${WRKBUILD}/Makefile.SH 
+	$(SED) "s#@@LIB@@#-Ilib#" ${WRKBUILD}/Makefile.SH 
+	# darwin workaround
+	$(SED) "s#^usedl.*##" ${WRKBUILD}/hints/darwin.sh
+	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Duseperlio -Uusedl -Uusethreads -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
 
 host-build:
 	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 
 perl-hostinstall:
-	$(CP) ${WRKBUILD}/miniperl $(STAGING_HOST_DIR)/usr/bin
-	$(CP) ${WRKBUILD}/perl $(STAGING_HOST_DIR)/usr/bin/perl.host
+	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-host
+	cp ${WRKBUILD}/miniperl ${STAGING_HOST_DIR}/usr/bin
 
 do-configure:
 	sed \
@@ -50,6 +57,8 @@ do-configure:
 		-e 's!%%LIBDIRS%%!$(STAGING_TARGET_DIR)/lib $(STAGING_TARGET_DIR)/usr/lib!g' \
 		-e 's!%%INCDIRS%%!$(STAGING_TARGET_DIR)/include $(STAGING_TARGET_DIR)/usr/include!g' \
 		./files/config.sh.$(CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
+	$(SED) "s#@@STAGING_HOST_DIR@@#${STAGING_HOST_DIR}/usr/bin#" ${WRKBUILD}/Makefile.SH 
+	$(SED) "s#@@LIB@@##" ${WRKBUILD}/Makefile.SH 
 	(cd ${WRKBUILD}; ./Configure -S)
 
 do-build:
@@ -60,8 +69,7 @@ do-build:
 	(cd ${WRKBUILD}; $(MAKE))
 
 do-install:
-	(cd ${WRKBUILD}; $(CP) miniperl.target miniperl)
-	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl.host installperl --destdir=${WRKINST})
+	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl-host installperl --destdir=${WRKINST})
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
