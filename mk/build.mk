@@ -93,7 +93,7 @@ POSTCONFIG=		-@\
 	if [ -f .adkinit ];then rm .adkinit;\
 	else \
 	if [ -f .config.old ];then \
-		$(TOPDIR)/bin/tools/pkgrebuild;\
+		$(TOPDIR)/bin/pkgrebuild;\
 		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
