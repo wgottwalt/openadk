@@ -97,7 +97,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.12.11"
+	prompt "3.12.13"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
@@ -113,8 +113,8 @@ config ADK_KERNEL_VERSION_3_13_5
 	prompt "3.13.5"
 	boolean
 
-config ADK_KERNEL_VERSION_3_12_11
-	prompt "3.12.11"
+config ADK_KERNEL_VERSION_3_12_13
+	prompt "3.12.13"
 	boolean
 
 config ADK_KERNEL_VERSION_3_11_10
@@ -130,7 +130,7 @@ endchoice
 config ADK_KERNEL_VERSION
 	string
 	default "3.13.5" if ADK_KERNEL_VERSION_3_13_5
-	default "3.12.11" if ADK_KERNEL_VERSION_3_12_11
+	default "3.12.13" if ADK_KERNEL_VERSION_3_12_13
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
 	default "3.4.71" if ADK_KERNEL_VERSION_3_4_71
 	help
