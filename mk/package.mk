@@ -78,7 +78,7 @@ _PATCH_COOKIE=		${WRKDIST}/.prepared
 _CONFIGURE_COOKIE=	${WRKBUILD}/.configure_done
 _BUILD_COOKIE=		${WRKBUILD}/.build_done
 _FAKE_COOKIE=		${WRKINST}/.fake_done
-_IPKGS_COOKIE=		${STAGING_PKG_DIR}/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
+_IPKGS_COOKIE=		${STAGING_PKG_DIR}/stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
 
 _IN_PACKAGE:=		1
 include ${TOPDIR}/mk/buildhlp.mk
@@ -225,7 +225,7 @@ ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 	-rm -rf $${IDIR_$(1)}/etc/network
 endif
 endif
-	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}' \
+	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}/stamps' \
 	    '$${STAGING_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
@@ -321,7 +321,7 @@ clean-targets:
 clean:
 	@$(CMD_TRACE) "cleaning... "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
-	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/${PKG_NAME}*
+	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*
 
 distclean: clean
 	rm -f ${FULLDISTFILES}
