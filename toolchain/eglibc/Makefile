@@ -21,10 +21,6 @@ TARGET_CFLAGS_LIBC:= 	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_TARGET_NO_FPU),y)
-EGLIBC_CONFOPTS+=       --without-fp
-endif
-
 EGLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
 EGLIBC_BUILD_DIR_FINAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 

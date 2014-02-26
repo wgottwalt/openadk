@@ -3,8 +3,6 @@ config ADK_TARGET_SYSTEM_QEMU_ARM
 	select ADK_arm
 	select ADK_qemu_arm
 	select ADK_little
-	select ADK_EABI
-	select ADK_TARGET_NO_FPU
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_KERNEL_ZIMAGE
 	select ADK_USE_KERNEL_MINICONFIG
