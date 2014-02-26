@@ -10,7 +10,7 @@ EGLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--without-cvs \
 			--disable-profile \
 			--disable-debug \
-			--enable-kernel=2.6.0 \
+			--enable-kernel=2.6.32 \
 			--without-gd \
 			--disable-nscd \
 			--with-__thread \
