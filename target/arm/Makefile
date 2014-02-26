@@ -20,11 +20,11 @@ MACH:=spitz
 endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 MACH:=versatilepb
-NET:=-net user,hostfwd=tcp::2222-:22 -net nic,model=smc91c111
+NET:=-net user -net nic,model=smc91c111
 endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 MACH:=vexpress-a9
-NET:=-cpu cortex-a9 -device lan9118,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22
+NET:=-cpu cortex-a9 -device lan9118,netdev=adk0 -netdev user,id=adk0
 endif
 
 kernel-install:
