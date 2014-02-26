@@ -104,3 +104,21 @@ config ADK_KERNEL_PREEMPT
 
 config ADK_KERNEL_THUMB2_KERNEL
 	boolean
+
+# page size
+config ADK_KERNEL_PAGE_SIZE_4KB
+	boolean
+
+config ADK_KERNEL_PAGE_SIZE_16KB
+	boolean
+
+# ABI
+config ADK_KERNEL_AEABI
+	boolean
+
+# endianess
+config ADK_KERNEL_CPU_BIG_ENDIAN
+	boolean
+
+config ADK_KERNEL_CPU_LITTLE_ENDIAN
+	boolean

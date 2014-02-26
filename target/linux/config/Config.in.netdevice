@@ -28,16 +28,6 @@ config ADK_KERNEL_VIA_RHINE_MMIO
 config ADK_KERNEL_ATH_CARDS
 	boolean
 
-config ADK_KERNEL_SMC91X
-	boolean
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_NET_ETHERNET
-	select ADK_KERNEL_NET_PCI
-	select ADK_KERNEL_MII
-	default y if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
-	default n
-	help
-
 config ADK_KERNEL_CPMAC
 	boolean
 	select ADK_KERNEL_NETDEVICES

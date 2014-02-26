@@ -30,8 +30,8 @@ $(eval $(call PKG_template,NSS,nss,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-ifneq ($(ADK_LINUX_64),)
-ifeq ($(ADK_LINUX_MIPS),y)
+ifeq ($(ADK_LINUX_64),y)
+ifeq ($(ADK_TARGET_ABI_N32),y)
 TARGET_CFLAGS+=		-DNS_PTR_LE_32
 endif
 XAKE_FLAGS+=		USE_64=1

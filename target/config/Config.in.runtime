@@ -204,10 +204,30 @@ config SIMPLE_NETWORK_CONFIG_ETH0_BC
 
 endmenu
 
+menu "wlan0 Configuration"
+depends on ADK_SIMPLE_NETWORK_CONFIG && \
+	ADK_TARGET_SYSTEM_LEMOTE_YEELONG || \
+	ADK_TARGET_SYSTEM_RASPBERRY_PI || \
+	ADK_TARGET_SYSTEM_IBM_X40
 
+choice
+	prompt "Type"
+	default SIMPLE_NETWORK_CONFIG_WLAN0_TYPE_NONE
+
+config SIMPLE_NETWORK_CONFIG_WLAN0_TYPE_DHCP
+	bool "DHCP"
+
+config SIMPLE_NETWORK_CONFIG_WLAN0_TYPE_STATIC
+	bool "static IP configuration"
+
+endchoice
+endmenu
 
 menu "eth1 Configuration"
-depends on ADK_SIMPLE_NETWORK_CONFIG
+depends on ADK_SIMPLE_NETWORK_CONFIG && \
+	!ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
+	!ADK_TARGET_SYSTEM_RASPBERRY_PI && \
+	!ADK_TARGET_SYSTEM_IBM_X40
 
 choice
 	prompt "Type"

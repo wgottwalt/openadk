@@ -5,68 +5,11 @@ config ADK_KERNEL_PAGE_SIZE_4KB
 config ADK_KERNEL_PAGE_SIZE_16KB
 	boolean
 
-# mips systems
-config ADK_KERNEL_ATHEROS_AR231X
-	boolean
-
-config ADK_KERNEL_MIKROTIK_RB532
-	boolean
-
-config ADK_KERNEL_AR7
-	boolean
-
-config ADK_KERNEL_BCM47XX
-	select ADK_KERNEL_BCM47XX_SSB
-	boolean
-
-config ADK_KERNEL_ATHEROS_AR71XX
-	boolean
-
-config ADK_KERNEL_AR71XX_MACH_RB4XX
-	boolean
-
-# mips64 systems
-config ADK_KERNEL_MACH_LOONGSON
-	boolean
-
-config ADK_KERNEL_LEMOTE_MACH2F
-	boolean
-
-# arm systems
-config ADK_KERNEL_ARCH_VERSATILE
-	boolean
-
-config ADK_KERNEL_PXA_SHARP_Cxx00
-	boolean
-
-config ADK_KERNEL_ARCH_PXA
-	boolean
-
-config ADK_KERNEL_PXA_SHARPSL
-	boolean
-
-config ADK_KERNEL_MACH_SPITZ
-	boolean
-
-config ADK_KERNEL_ARCH_AT91
-	boolean
-
-config ADK_KERNEL_ARCH_AT91SAM9G20
-	boolean
-
-config ADK_KERNEL_ARCH_AT91SAM9260
-	boolean
-
-config ADK_KERNEL_MACH_ACMENETUSFOXG20
-	boolean
-
-config ADK_KERNEL_BCM47XX_SSB
-	boolean
-
-# endianesss and ABI
+# ABI
 config ADK_KERNEL_AEABI
 	boolean
 
+# endianess
 config ADK_KERNEL_CPU_BIG_ENDIAN
 	boolean
 

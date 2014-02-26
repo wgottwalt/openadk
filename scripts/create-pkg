@@ -2,6 +2,7 @@
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 
 mkdir -p $topdir/target/packages/pkg-enabled
+rm $topdir/target/packages/pkg-enabled/* 2>/dev/null
 count=1
 for i in $(ls $topdir/target/packages/pkg-available/);do
 	cd $topdir/target/packages/pkg-enabled &&

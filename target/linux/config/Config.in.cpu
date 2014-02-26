@@ -33,9 +33,6 @@ config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
-config ADK_KERNEL_VFP
-	boolean
-
 menu "CPU support"
 
 config ADK_KERNEL_CPU_FREQ
@@ -93,6 +90,4 @@ config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_USERSPACE
 	select ADK_KERNEL_CPU_FREQ_GOV_USERSPACE
 	
 endchoice
-
 endmenu
-
