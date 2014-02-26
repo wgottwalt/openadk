@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		65
+PKG_RELEASE:=		66
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -111,11 +111,11 @@ ifneq (${ADK_SIMPLE_NETWORK_CONFIG},)
 	echo -e "auto lo\niface lo inet loopback" > ${IDIR_BASE_FILES}/etc/network/interfaces
 
 	# network config eth0
-	# configure nic with manual ip
+	# configure nic with dhcp
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC},y)
 	echo -e "\nauto eth0\niface eth0 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
-	# configure nic with dhcp
+	# configure nic with manual ip
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL},y)
 	echo -e "\nauto eth0\niface eth0 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH0_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
@@ -137,12 +137,17 @@ ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP},y)
 	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
 
+	# network config wlan0
+ifeq (${SIMPLE_NETWORK_CONFIG_WLAN0_TYPE_NIC},y)
+	echo -e "\nauto wlan0\niface wlan0 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
+
 	# network config eth1
-	# configure nic with manual ip
+	# configure nic with dhcp
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC},y)
 	echo -e "\nauto eth1\niface eth1 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
-	# configure nic with dhcp
+	# configure nic with manual ip
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL},y)
 	echo -e "\nauto eth1\niface eth1 inet static" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	echo -e "  address ${SIMPLE_NETWORK_CONFIG_ETH1_IP}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
