@@ -96,14 +96,14 @@ endif
 	exec ${MAKE} host-extract $(MAKE_TRACE)
 	mkdir -p ${HOST_WRKINST}
 	# avoid rebuild
-	touch ${_HOST_CONFIGURE_COOKIE} 
-	touch ${_HOST_BUILD_COOKIE}
-	touch $@
+	@touch ${_HOST_CONFIGURE_COOKIE} 
+	@touch ${_HOST_BUILD_COOKIE}
+	@touch $@
 
 ${_HOST_COOKIE}:
 	exec ${MAKE} hostpackage
 
 ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
-	touch ${_HOST_COOKIE}
+	@touch ${_HOST_COOKIE}
 endif
