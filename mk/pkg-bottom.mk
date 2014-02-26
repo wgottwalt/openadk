@@ -126,7 +126,7 @@ post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	@-rm -f ${_ALL_CONTROLS}
-	@mkdir -p '${STAGING_PKG_DIR}' ${WRKINST} '${STAGING_DIR}/scripts'
+	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
 ifneq ($(filter manual,${INSTALL_STYLE}),)
