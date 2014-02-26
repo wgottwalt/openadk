@@ -63,7 +63,10 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
+	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
 ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
