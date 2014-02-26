@@ -107,7 +107,7 @@ case "$IF_WIRELESS_MODE" in
 		 	echo " psk=\"$IF_WIRELESS_PASSPHRASE\"" >> /tmp/wpa_supplicant.conf
 			echo " priority=5" >> /tmp/wpa_supplicant.conf
 			echo "}"  >> /tmp/wpa_supplicant.conf
-			wpa_supplicant -B -D${driver} -i${IFACE} -c/tmp/wpa_supplicant.conf
+			wpa_supplicant -B -D${driver} -i${IFACE} -P/var/run/wpa_supplicant.pid -c/tmp/wpa_supplicant.conf
 		}
 		;;
 	*)
