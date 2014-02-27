@@ -2,11 +2,10 @@ config ADK_TARGET_SYSTEM_KEYASIC_KA2000
 	bool "KeyASIC KA2000 (f.e. Transcend WifiSD)"
 	select ADK_arm
 	select ADK_little
+	select ADK_soft_float
 	select ADK_keyasic_ka2000
-	select ADK_KERNEL_AEABI
 	select ADK_EABI
-	select ADK_CPU_ARMV5
-	select ADK_TARGET_NO_FPU
+	select ADK_CPU_ARM926EJ_S
 	select ADK_TOOLCHAIN
 	select ADK_STATIC if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_MUSL
 	select BUSYBOX_STATIC if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC || ADK_TARGET_LIB_MUSL

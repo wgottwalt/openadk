@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.2
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
 PKG_DESCR:=		Kerberos 5 server
 PKG_SECTION:=		crypto
@@ -50,6 +50,7 @@ CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-ndbm-db \
 			--libdir=/usr/lib/heimdal \
 			--libexecdir=/usr/sbin \
+			--includedir=/usr/include/heimdal \
 			--without-sqlite3 \
 			--without-libedit \
 			--disable-sqlite-cache \

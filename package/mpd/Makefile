@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.18.5
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		63bcf6ce338caa2ae2cd6dc8e9710d5c
+PKG_VERSION:=		0.18.8
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7bbe1caf5abe404dc985ca4f44984b1f
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx libgcc libiconv-tiny libmpdclient
@@ -23,7 +23,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
-PKG_FLAVOURS_MPD+=	WITH_OPUS WITH_PULSE
+PKG_FLAVOURS_MPD+=	WITH_OPUS WITH_PULSE WITH_AVAHI
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -119,6 +119,13 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_PULSE),y)
 PKG_FDEPENDS+=		pulseaudio
 endif
 
+PKGFD_WITH_AVAHI:=	enable AVAHI/zeroconf support
+PKGFS_WITH_AVAHI:=	libavahi
+PKGFB_WITH_AVAHI:=	avahi
+ifeq ($(ADK_PACKAGE_MPD_WITH_AVAHI),y)
+PKG_FDEPENDS+=		libavahi
+endif
+
 PKGFD_WITH_HTTPD:=	enable HTTP output
 
 include ${TOPDIR}/mk/package.mk
@@ -139,13 +146,18 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-sqlite \
 			--disable-mpg123 \
 			--disable-soundcloud \
-			--enable-inotify \
-			--with-zeroconf=no
+			--enable-inotify
 
 ifneq (${ADK_PACKAGE_MPD_WITH_HTTPD},)
 CONFIGURE_ARGS+=	--enable-httpd-output
 else
 CONFIGURE_ARGS+=	--disable-httpd-output
+endif
+
+ifneq (${ADK_PACKAGE_MPD_WITH_AVAHI},)
+CONFIGURE_ARGS+=	--with-zeroconf=avahi
+else
+CONFIGURE_ARGS+=	--with-zeroconf=no
 endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_PULSE},)

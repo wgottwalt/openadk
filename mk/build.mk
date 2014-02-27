@@ -22,8 +22,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_E2FSCK_STATIC=n \
 			ADK_PACKAGE_KEXECINIT=n \
 			ADK_PACKAGE_INSTALLER=n \
-			ADK_PACKAGE_HEIMDAL_SERVER=n \
-			ADK_PACKAGE_LIBHEIMDAL=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
 			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
@@ -148,7 +146,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 world:
 	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(PACKAGE_DIR) $(BIN_DIR) $(TOOLS_BUILD_DIR) \
-		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)
+		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
