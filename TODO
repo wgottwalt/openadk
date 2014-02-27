@@ -1,4 +1,7 @@
 - update gcc to 4.8.2
+- socat openssl flavour + update
+- use gnu_host_name for host_ dir
+- move target/tools to tools, mv binaries to host_ dir, use ADK_HOST_NEED_FOO (xz,lzop,bzip2,..)
 - add toolchain archive creation target (optimize for size)
 - hash-style=gnu for non-mips and non-musl
 - add arm hard and softfloat toolchains
