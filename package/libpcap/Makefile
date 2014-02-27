@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.5.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		33ba2f10f3a402cb5d34f5e2a904794a
 PKG_DESCR:=		a low-level packet capture library
 PKG_SECTION:=		libs
@@ -24,6 +24,7 @@ $(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 CONFIGURE_ENV+=		ac_cv_linux_vers=26
 CONFIGURE_ARGS+=	--disable-yydebug \
 			--with-build-cc=$(CC_FOR_BUILD) \
+			--disable-dbus \
 			--without-libnl \
 			--with-pcap=linux
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS}

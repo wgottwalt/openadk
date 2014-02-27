@@ -31,6 +31,29 @@ config ADK_big
 config ADK_little
 	boolean
 
+config ADK_soft_float
+	boolean
+
+config ADK_hard_float
+	boolean
+
+config ADK_mode_arm
+	boolean
+
+config ADK_mode_thumb
+	boolean
+
+config ADK_TARGET_FLOAT
+	string
+	default "hard" if ADK_hard_float
+	default "soft" if ADK_soft_float
+
+config ADK_TARGET_ARM_MODE
+	string
+	default "arm" if ADK_mode_arm
+	default "thumb" if ADK_mode_thumb
+	default "arm"
+
 config ADK_TARGET_ENDIAN
 	string
 	default "little" if ADK_little
@@ -161,7 +184,9 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	string
 	default "qemu-microblaze-s3adsp1800" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default "qemu-microblaze-ml605" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	default "qemu-arm-versatile" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
+	default "qemu-arm-versatilepb" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	default "qemu-arm-vexpress-a9" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	default "qemu-arm-spitz" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default "qemu-mips" if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default "qemu-mipsel" if ADK_TARGET_SYSTEM_QEMU_MIPSEL
 	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64
@@ -171,21 +196,9 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
-	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
-
-choice
-prompt "Use ARM thumb mode"
-depends on ADK_TARGET_SYSTEM_CUBOX_I
-
-config ADK_LINUX_ARM_WITHOUT_THUMB
-	boolean "disabled"
-
-config ADK_LINUX_ARM_WITH_THUMB
-	boolean "enabled"
-	select ADK_KERNEL_THUMB2_KERNEL
-
-endchoice
+	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 
 choice
 prompt "Qemu Emulation using VirtIO drivers"
@@ -221,18 +234,42 @@ choice
 prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
-config ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
-	boolean "ARM Ltd. Versatile"
+config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	boolean "ARM Ltd. Versatile/PB"
+	select ADK_soft_float
+	select ADK_EABI
+	select ADK_CPU_ARM926EJ_S
+
+config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	boolean "ARM Ltd. Versatile Express for Cortex-A9"
+	select ADK_hard_float
+	select ADK_EABIHF
+	select ADK_CPU_CORTEX_A9
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
-	select ADK_KERNEL_ARCH_PXA
-	select ADK_KERNEL_PXA_SHARPSL
-	select ADK_KERNEL_MACH_SPITZ
-	select ADK_KERNEL_SPI_PXA2XX
+	select ADK_soft_float
+	select ADK_EABI
+	select ADK_CPU_XSCALE
 	select ADK_TARGET_WITH_VGA
 
 endchoice
+
+choice
+prompt "Use ARM thumb mode"
+depends on ADK_CPU_CORTEX_A9
+
+config ADK_LINUX_ARM_WITHOUT_THUMB
+	boolean "disabled"
+	select ADK_mode_arm
+
+config ADK_LINUX_ARM_WITH_THUMB
+	boolean "enabled"
+	select ADK_mode_thumb
+	select ADK_KERNEL_THUMB2_KERNEL
+
+endchoice
+
 
 choice 
 prompt "Broadcom BCM47xx Model"
@@ -334,9 +371,6 @@ config ADK_TARGET_KERNEL_MAY_64BIT
 
 # global symbols
 config ADK_TOOLCHAIN_ONLY
-	boolean
-
-config ADK_TARGET_NO_FPU
 	boolean
 
 config ADK_EABI
@@ -450,9 +484,6 @@ config ADK_CPU_AMDFAM10
 config ADK_CPU_LOONGSON2F
 	boolean
 
-config ADK_CPU_ARMV5
-	boolean
-
 config ADK_CPU_XSCALE
 	boolean
 
@@ -468,10 +499,13 @@ config ADK_CPU_MIPS64
 config ADK_CPU_MICROBLAZE
 	boolean
 
-config ADK_CPU_RASPBERRY_PI
+config ADK_CPU_ARM926EJ_S
 	boolean
 
-config ADK_CPU_CUBOX_I
+config ADK_CPU_ARM1176JZF_S
+	boolean
+
+config ADK_CPU_CORTEX_A9
 	boolean
 
 config ADK_TARGET_CPU_ARCH
@@ -535,10 +569,13 @@ config ADK_TARGET_CFLAGS
 	default "-march=loongson2f -Wa,-mfix-loongson2f-nop" if ADK_CPU_LOONGSON2F
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64
-	default "-march=armv5te -mtune=arm926ej-s" if ADK_CPU_ARMV5
 	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
-	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_RASPBERRY_PI
-	default "-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CUBOX_I
+	default "-march=armv5te -mtune=arm926ej-s -mfloat-abi=soft" if ADK_CPU_ARM926EJ_S && ADK_soft_float
+	default "-march=armv5te -mtune=arm926ej-s -mfloat-abi=hard" if ADK_CPU_ARM926EJ_S && ADK_hard_float
+	default "-march=armv6 -mtune=arm1176jzf-s -mfloat-abi=soft" if ADK_CPU_ARM1176JZF_S && ADK_soft_float
+	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_ARM1176JZF_S && ADK_hard_float
+	default "-march=armv7-a -mtune=cortex-a9 -mfloat-abi=soft" if ADK_CPU_CORTEX_A9 && ADK_soft_float
+	default "-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CORTEX_A9 && ADK_hard_float
 
 config ADK_TARGET_CMDLINE
 	string
@@ -558,7 +595,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,115200" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
 	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILE
+	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH
 	default "console=ttyS0" if ADK_TARGET_SYSTEM_ARANYM_M68K
@@ -692,7 +730,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	bool "initramfs filesystem"
 	depends on \
 		ADK_HARDWARE_QEMU || \
-		ADK_TARGET_SYSTEM_ARANYM_M68K || \
+		ADK_LINUX_M68K || \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
@@ -907,5 +945,4 @@ config ADK_TARGET_PACKAGE_TGZ
 	  directory. There will be no package manager installed onto the target.
 	  
 endchoice
-
 source "target/config/Config.in.tools"

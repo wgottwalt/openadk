@@ -56,6 +56,9 @@ endif
 ifneq ($(ADK_PACKAGE_GDB),)
 	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
+endif
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
 	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
 	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config

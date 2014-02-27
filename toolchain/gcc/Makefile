@@ -81,24 +81,21 @@ else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
 
-ifeq ($(ARCH),mips)
-ifeq ($(ADK_TARGET_NO_FPU),y)
-GCC_CONFOPTS+=		--with-float=soft
-else
-GCC_CONFOPTS+=          --with-float=hard
-endif
+ifeq ($(ARCH),arm)
+GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
+GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_ARM_MODE)
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vfp --with-float=hard
+ifeq ($(ADK_CPU_ARM926EJ_S),y)
+GCC_CONFOPTS+=          --with-arch=armv5te --with-tune=arm1176jzf-s
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
-ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard  --with-mode=thumb
-else
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon --with-float=hard  --with-mode=arm
+ifeq ($(ADK_CPU_ARM1176JZF_S),y)
+GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vfp
 endif
+
+ifeq ($(ADK_CPU_CORTEX_A9),y)
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
 endif
 
 ifneq ($(ADK_TARGET_ABI),)
@@ -209,10 +206,12 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# fix linking g++ apps with libtool
 	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
 		cd $(STAGING_TARGET_DIR)/lib32 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so
+		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
 	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
 		cd $(STAGING_TARGET_DIR)/lib64 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so
+		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(STAGING_HOST_DIR)/share
 	touch $@

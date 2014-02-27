@@ -18,9 +18,13 @@ LOADADDR:=0x20008000
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
 MACH:=spitz
 endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILE),y)
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 MACH:=versatilepb
-NET:=-net user,hostfwd=tcp::2222-:22 -net nic,model=smc91c111
+NET:=-net user -net nic,model=smc91c111
+endif
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
+MACH:=vexpress-a9
+NET:=-cpu cortex-a9 -device lan9118,netdev=adk0 -netdev user,id=adk0
 endif
 
 kernel-install:
@@ -72,8 +76,12 @@ imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
+        @echo 'qemu-system-arm -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user'
+else
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)

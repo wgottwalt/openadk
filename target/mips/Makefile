@@ -111,7 +111,7 @@ ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
@@ -127,7 +127,7 @@ imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -136,7 +136,7 @@ imageinstall: createinitramfs
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0,hostfwd=tcp::2222-:22 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)

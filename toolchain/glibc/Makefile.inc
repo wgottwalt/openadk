@@ -18,7 +18,7 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-nscd \
 			--with-__thread \
 			--with-tls \
-			--enable-kernel="2.6.0" \
+			--enable-kernel="2.6.32" \
 			--enable-add-ons
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \

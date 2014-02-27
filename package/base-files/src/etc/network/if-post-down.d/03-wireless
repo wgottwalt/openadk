@@ -1,4 +1,5 @@
-#!/bin/sh 
+#!/bin/sh
+set -x
 set -e 
 
 [ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
@@ -11,7 +12,7 @@ case "$IF_WIRELESS_MODE" in
 	sta)
 		[ "$IF_WIRELESS_SECURITY" != "none" ] && {
 			logger -t wireless "Killing wpa_supplicant"
-			pkill wpa_supplicant
+			kill -9 $(cat /var/run/wpa_supplicant.pid)
 		}
 		;;
 	*)

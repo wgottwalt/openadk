@@ -16,10 +16,6 @@ TARGET_CFLAGS_LIBC:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_TARGET_NO_FPU),y)
-GLIBC_CONFOPTS+=	--without-fp
-endif
-
 GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
 GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j1"
