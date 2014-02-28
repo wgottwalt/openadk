@@ -49,6 +49,7 @@ config ADK_TARGET_FLOAT
 	default "soft" if ADK_soft_float
 
 config ADK_TARGET_ARM_MODE
+	depends on ADK_LINUX_ARM
 	string
 	default "arm" if ADK_mode_arm
 	default "thumb" if ADK_mode_thumb
