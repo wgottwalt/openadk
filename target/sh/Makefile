@@ -26,7 +26,7 @@ imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH),y)
+ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${CPU_ARCH} -M r2d -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
@@ -35,8 +35,8 @@ ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
 	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH),y)
+ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-{CPU_ARCH} -M r2d -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -M r2d -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif

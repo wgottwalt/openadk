@@ -49,6 +49,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 MARCH:=			armhf
 endif
+ifeq ($(CPU_ARCH),sh4)
+MARCH:=			sh
+endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
