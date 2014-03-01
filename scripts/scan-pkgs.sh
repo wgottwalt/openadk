@@ -77,10 +77,6 @@ if [[ -n $ADK_PACKAGE_SQUID ]]; then
 	NEED_GXX="$NEED_GXX squid"
 fi
 
-if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
-	NEED_INTL="$NEED_INTL xkeyboard-config"
-fi
-
 if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
 	NEED_XMLTO="$NEED_XMLTO libXfont"
 fi
@@ -204,13 +200,6 @@ fi
 if [[ -n $NEED_MKFONTDIR ]]; then
 	if ! which mkfontdir >/dev/null 2>&1; then
 		echo >&2 You need mkfontdir to build $NEED_MKFONTDIR
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_INTL ]]; then
-	if ! which intltool-update >/dev/null 2>&1; then
-		echo >&2 You need intltool to build $NEED_INTL
 		out=1
 	fi
 fi

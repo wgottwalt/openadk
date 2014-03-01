@@ -205,6 +205,8 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-mips64el" if ADK_TARGET_SYSTEM_QEMU_MIPS64EL
 	default "qemu-ppc" if ADK_TARGET_SYSTEM_QEMU_PPC
 	default "qemu-ppc64" if ADK_TARGET_SYSTEM_QEMU_PPC64
+	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
