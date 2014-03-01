@@ -26,7 +26,7 @@ PKG_SITES:=		http://icedtea.classpath.org/download/source/
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.gz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.7.3
+GCJ_VER:=		4.8.2
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64

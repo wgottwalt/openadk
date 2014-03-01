@@ -4,12 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
-PKG_VERSION:=		4.7.3
+PKG_VERSION:=		4.8.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		86f428a30379bdee0224e353ee2f999e
+PKG_MD5SUM:=		a3d7d63b9cb6b6ea049469a0c4a43c9d
 PKG_DESCR:=		GNU java compiler
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
+
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 
 PKG_ARCH_DEPENDS:=	native
@@ -22,7 +23,8 @@ $(eval $(call HOST_template,GCJ,gcj,$(PKG_VERSION)-${PKG_RELEASE}))
 
 HOST_STYLE:=		auto
 HOST_MAKE_ENV+=		"JAR=no LDFLAGS=-liconv"
-HOST_CONFIGURE_ARGS:=	\
+# http://gcc.gnu.org/bugzilla/attachment.cgi?id=30880&action=diff
+HOST_CONFIGURE_ARGS:=	--enable-dependency-tracking \
 			--enable-java-home \
 			--enable-languages=java \
 			--enable-shared \

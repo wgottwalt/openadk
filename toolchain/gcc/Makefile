@@ -18,6 +18,8 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
+			--disable-libsanitizer \
+			--disable-libitm \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-decimal-float \
