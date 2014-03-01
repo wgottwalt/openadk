@@ -25,7 +25,7 @@ endif
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) ${GMP_MAKEOPTS} -C $(WRKBUILD) all
+	env PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" $(MAKE) ${GMP_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
