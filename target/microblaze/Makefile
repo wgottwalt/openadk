@@ -30,7 +30,7 @@ imageinstall: tools-compile $(BUILD_DIR)/root.squashfs
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} $(DTB) -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSSQUASHFS)'
+	@echo 'qemu-system-${CPU_ARCH} -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSSQUASHFS) $(DTB)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),jffs2)
@@ -38,7 +38,7 @@ imageinstall: tools-compile $(FW_DIR)/$(ROOTFSJFFS2)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} $(DTB) -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSJFFS2)'
+	@echo 'qemu-system-${CPU_ARCH} -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSJFFS2) $(DTB)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -48,7 +48,7 @@ imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} $(DTB) -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS} $(DTB)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -57,6 +57,6 @@ imageinstall: createinitramfs
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} $(DTB) -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(DTB)'
 endif
 endif
