@@ -16,34 +16,38 @@ BUILD_DIR:=		${BASE_DIR}/build_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIB
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
 STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
-STAGING_HOST_DIR:=	${BASE_DIR}/host_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
+STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 # use headers and foo-config from system
 ifeq ($(ADK_NATIVE),y)
 STAGING_TARGET_DIR:=
 SCRIPT_TARGET_DIR:=	/usr/bin
 else
-STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
+ifeq ($(ADK_TARGET_ABI),)
+STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
+STAGING_DIR:=		${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
+STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
+TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}
+else
+STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
+STAGING_DIR:=		${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
+STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
+TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
+endif
 SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
 endif
-STAGING_DIR:=		${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
-# relation from STAGING_HOST_DIR to STAGING_TARGET_DIR (for gcc to find
-# its sysroot while staying relocatable)
-STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
-TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
-BIN_DIR:=		$(BASE_DIR)/bin
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 FW_DIR:=		$(BASE_DIR)/firmware/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
 PACKAGE_DIR:=		$(FW_DIR)/packages
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
-TARGET_PATH=		${SCRIPT_DIR}:${BIN_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-HOST_PATH=		${SCRIPT_DIR}:${BIN_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-AUTOTOOL_PATH=		${BIN_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
+TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+AUTOTOOL_PATH=		${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 REAL_GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux
 
@@ -185,7 +189,7 @@ PKG_INSTALL:=		IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
 			IPKG_CONF_DIR=$(STAGING_TARGET_DIR)/etc \
 			IPKG_OFFLINE_ROOT=$(TARGET_DIR) \
-			BIN_DIR=$(BIN_DIR) \
+			BIN_DIR=$(STAGING_HOST_DIR)/usr/bin \
 			${BASH} ${SCRIPT_DIR}/ipkg \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
@@ -208,21 +212,21 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(BIN_DIR)/cpio -i -d ;; \
+				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(BIN_DIR)/cpio -i -d ;; \
+				gzip -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				xz -dc $$file | tar -xf - ;; \
+				$(STAGING_HOST_DIR)/usr/bin/xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				bzip2 -dc $$file | $(BIN_DIR)/cpio -i -d ;; \
+				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				bzip2 -dc $$file | tar -xf - ;; \
+				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(BIN_DIR)/cpio -ivd -H zip ;; \
+				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

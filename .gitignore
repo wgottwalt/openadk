@@ -30,7 +30,6 @@
 /host_*/
 /pkg_*/
 /root_*/
-/bin/
 /firmware/
 /build_*/
 /config/*.o

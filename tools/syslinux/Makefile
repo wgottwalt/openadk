@@ -12,27 +12,26 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 include ../rules.mk
 WRKINST:=		${WRKBUILD}/openadk_installroot
 
-install: ${BIN_DIR}/extlinux ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
+install: ${STAGING_HOST_DIR}/usr/bin/extlinux ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	#(cd ${WRKBUILD}; ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}' bios installer
-	touch $@
+	@touch $@
 
 $(WRKBUILD)/.installed: ${WRKBUILD}/.compiled
 	mkdir -p ${WRKINST}
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}' \
 		INSTALLROOT='${WRKINST}' \
 		bios install
-	touch $@
+	@touch $@
 
-${BIN_DIR}/extlinux: $(WRKBUILD)/.installed
+${STAGING_HOST_DIR}/usr/bin/extlinux: $(WRKBUILD)/.installed
 	$(INSTALL_BIN) ${WRKINST}/sbin/extlinux \
-		${BIN_DIR}
+		${STAGING_HOST_DIR}/usr/bin
 
 ${STAGING_HOST_DIR}/usr/share/syslinux/.installed: ${WRKBUILD}/.installed
 	mkdir -p ${STAGING_HOST_DIR}/usr/share
 	${CP} ${WRKINST}/usr/share/syslinux ${STAGING_HOST_DIR}/usr/share
-	touch ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
+	@touch ${STAGING_HOST_DIR}/usr/share/syslinux/.installed
 
 include $(TOPDIR)/mk/tools.mk

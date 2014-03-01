@@ -3,12 +3,34 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio mkimage genext2fs bc
-ifeq ($(ADK_TARGET_ROOTFS_ISO),y)
-TARGETS+=cdrtools syslinux
+TARGETS:=adk mkcrypt cpio bc bzip2 m4 xz
+
+ifeq ($(ADK_HOST_NEED_GENEXT2FS),y)
+TARGETS+=genext2fs
 endif
-ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
+ifeq ($(ADK_HOST_NEED_MKIMAGE),y)
+TARGETS+=mkimage
+endif
+ifeq ($(ADK_HOST_NEED_MKISOFS),y)
+TARGETS+=cdrtools
+endif
+ifeq ($(ADK_HOST_NEED_SYSLINUX),y)
+TARGETS+=syslinux
+endif
+ifeq ($(ADK_HOST_NEED_GPERF),y)
 TARGETS+=gperf
+endif
+ifeq ($(ADK_HOST_NEED_JFFS2),y)
+TARGETS+=mtd-utils
+endif
+ifeq ($(ADK_HOST_NEED_SQUASHFS),y)
+TARGETS+=squashfs
+endif
+ifeq ($(ADK_HOST_NEED_LZOP),y)
+TARGETS+=lzo lzop
+endif
+ifeq ($(ADK_HOST_NEED_LZMA),y)
+TARGETS+=lzma
 endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))

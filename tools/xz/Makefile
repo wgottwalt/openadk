@@ -11,18 +11,18 @@ PKG_SITES:=		http://tukaani.org/xz/
 
 include ../rules.mk
 
-all: $(WRKBUILD)/.installed
+install: $(WRKBUILD)/.installed
 
 $(WRKBUILD)/.configured: ${WRKDIST}/.prepared
 	(cd ${WRKBUILD}; ./configure --prefix=$(STAGING_HOST_DIR)/usr)
-	touch $@
+	@touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	${MAKE} -C ${WRKBUILD}
-	touch $@
+	@touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	${MAKE} -C ${WRKBUILD} install
-	touch $@
+	@touch $@
 
 include $(TOPDIR)/mk/tools.mk

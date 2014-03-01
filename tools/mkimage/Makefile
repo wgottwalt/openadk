@@ -3,9 +3,9 @@
 
 include $(TOPDIR)/rules.mk
 
-install: ${BIN_DIR}/mkimage
+install: ${STAGING_HOST_DIR}/usr/bin/mkimage
 
-${BIN_DIR}/mkimage: mkimage.c crc32.c
+${STAGING_HOST_DIR}/usr/bin/mkimage: mkimage.c crc32.c
 	$(CC_FOR_BUILD) ${FLAGS_FOR_BUILD} -o $@ mkimage.c crc32.c
 
 include $(TOPDIR)/mk/tools.mk

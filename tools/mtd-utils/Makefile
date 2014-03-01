@@ -11,14 +11,14 @@ PKG_SITES:=		http://openadk.org/distfiles/
 
 include ../rules.mk
 
-all: ${STAGING_HOST_DIR}/bin/mkfs.jffs2
+install: ${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}' CPPFLAGS='-DWITHOUT_XATTR=1 -I./include'
 	touch $@
 
-${STAGING_HOST_DIR}/bin/mkfs.jffs2: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/mkfs.jffs2 \
-		${STAGING_HOST_DIR}/bin
+		${STAGING_HOST_DIR}/usr/bin
 
 include $(TOPDIR)/mk/tools.mk

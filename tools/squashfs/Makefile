@@ -14,16 +14,16 @@ WRKDIST=		${WRKDIR}/$(PKG_NAME)${PKG_VERSION}
 
 include ../rules.mk
 
-all: ${STAGING_HOST_DIR}/bin/mksquashfs
+install: ${STAGING_HOST_DIR}/usr/bin/mksquashfs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	${MAKE} -C ${WRKBUILD}/squashfs-tools CC='${CC_FOR_BUILD}' \
 		XZ_SUPPORT=1 CPPFLAGS_FOR_BUILD=$(CPPFLAGS_FOR_BUILD) \
 		EXTRA_LDFLAGS=$(LDFLAGS_FOR_BUILD)
-	touch $@
+	@touch $@
 
-${STAGING_HOST_DIR}/bin/mksquashfs: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/usr/bin/mksquashfs: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/squashfs-tools/mksquashfs \
-		${STAGING_HOST_DIR}/bin
+		${STAGING_HOST_DIR}/usr/bin
 
 include $(TOPDIR)/mk/tools.mk

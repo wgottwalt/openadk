@@ -136,15 +136,15 @@ endif
 ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${BIN_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
+		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${BIN_DIR}/cpio -o -Hustar -P | gzip -n9 >$@
+		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${FW_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
-	bash ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
+	$(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
 		echo "nod /dev/console 0644 0 0 c 5 1"; \
@@ -162,12 +162,12 @@ ${FW_DIR}/${INITRAMFS}: ${FW_DIR}/${INITRAMFS}_list
 		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
-	${STAGING_HOST_DIR}/bin/mksquashfs ${TARGET_DIR} \
+	${STAGING_HOST_DIR}/usr/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs -comp xz \
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
 ${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
-	${STAGING_HOST_DIR}/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -r ${TARGET_DIR} \
+	${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -r ${TARGET_DIR} \
 		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
 createinitramfs: ${FW_DIR}/${INITRAMFS}_list
@@ -242,7 +242,7 @@ ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 		${TARGET_DIR}/boot/syslinux
 	echo 'DEFAULT /boot/kernel root=/dev/sr0 init=/init' > \
 		${TARGET_DIR}/boot/syslinux/isolinux.cfg
-	${BIN_DIR}/mkisofs -R -uid 0 -gid 0 -o $@ \
+	${STAGING_HOST_DIR}/usr/bin/mkisofs -R -uid 0 -gid 0 -o $@ \
 		-b boot/syslinux/isolinux.bin \
 		-c boot/syslinux/boot.cat -no-emul-boot \
 		-boot-load-size 4 -boot-info-table ${TARGET_DIR}

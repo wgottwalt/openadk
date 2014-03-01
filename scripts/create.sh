@@ -28,11 +28,12 @@
 # root partition and an OpenADK cfgfs partition.
 
 TOPDIR=$(pwd)
+HOST=$(gcc -dumpmachine)
 me=$0
 
 case :$PATH: in
-(*:$TOPDIR/bin:*) ;;
-(*) export PATH=$PATH:$TOPDIR/bin ;;
+(*:$TOPDIR/host_$HOST/usr/bin:*) ;;
+(*) export PATH=$PATH:$TOPDIR/host_$HOST/usr/bin ;;
 esac
 
 test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then

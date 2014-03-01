@@ -26,13 +26,13 @@ TARGET_CFLAGS:=		''
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CXXFLAGS))
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
+CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
+CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64EL),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI)
+CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)

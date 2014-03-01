@@ -98,8 +98,8 @@ ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
 endif
 
-ifneq ($(ADK_TARGET_ABI),)
-GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI}
+ifneq ($(ADK_TARGET_MIPS_ABI),)
+GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
 
 ifeq (${ADK_MAKE_PARALLEL},y)
