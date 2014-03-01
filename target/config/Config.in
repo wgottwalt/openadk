@@ -129,6 +129,7 @@ config ADK_TARGET_ABI
 	default "eabihf" if ADK_EABIHF
 
 config ADK_TARGET_MIPS_ABI
+	depends ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
 	string
 	default "32" if ADK_o32
 	default "n32" if ADK_n32
