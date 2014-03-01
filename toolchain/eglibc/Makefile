@@ -84,11 +84,16 @@ $(WRKBUILD)/.installed: $(EGLIBC_BUILD_DIR_FINAL)/libc.so
 		$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/libc/posix/gai.conf ${STAGING_TARGET_DIR}/etc/
-	${INSTALL_DATA} ${WRKBUILD}/libc/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc/
 	${INSTALL_DATA} ${WRKBUILD}/libc/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc/
 	touch $@
 
 $(WRKBUILD)/.fixup:
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
+	-find $(STAGING_TARGET_DIR) -type -f -name \*_pic\* -delete
+	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
+	rm -rf $(STAGING_TARGET_DIR)/usr/lib/gconv
+	PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
+	prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
