@@ -25,6 +25,6 @@ $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 
 ${STAGING_HOST_DIR}/usr/bin/lzma: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/CPP/7zip/Compress/LZMA_Alone/lzma_alone \
-		$(STAGING_DIR)/usr/bin/lzma
+		$(STAGING_HOST_DIR)/usr/bin/lzma
 
 include $(TOPDIR)/mk/tools.mk
