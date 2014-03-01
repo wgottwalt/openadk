@@ -19,6 +19,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--disable-libsanitizer \
+			--disable-libitm \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-decimal-float \
@@ -72,7 +73,7 @@ else
 GCC_CONFOPTS+=		--enable-tls
 endif
 
-ifeq ($(ARCH),powerpc)
+ifeq ($(ADK_LINUX_PPC),y)
 ifeq ($(ADK_TARGET_LIBC),uclibc)
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
 else
@@ -99,8 +100,8 @@ ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
 endif
 
-ifneq ($(ADK_TARGET_ABI),)
-GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI}
+ifneq ($(ADK_TARGET_MIPS_ABI),)
+GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
 
 ifeq (${ADK_MAKE_PARALLEL},y)

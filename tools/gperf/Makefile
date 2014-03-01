@@ -11,15 +11,15 @@ PKG_SITES:=		http://ftp.gnu.org/pub/gnu/gperf/
 
 include ../rules.mk
 
-install: ${BIN_DIR}/gperf
+install: ${STAGING_HOST_DIR}/usr/bin/gperf
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	(cd ${WRKBUILD}; ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}'
 	touch $@
 
-${BIN_DIR}/gperf: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/usr/bin/gperf: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/src/gperf \
-		${BIN_DIR}
+		${STAGING_HOST_DIR}/usr/bin
 
 include $(TOPDIR)/mk/tools.mk

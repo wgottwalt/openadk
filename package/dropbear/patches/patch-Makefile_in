@@ -1,0 +1,35 @@
+--- dropbear-2014.63.orig/Makefile.in	2014-02-19 15:05:24.000000000 +0100
++++ dropbear-2014.63/Makefile.in	2014-03-01 18:27:41.000000000 +0100
+@@ -81,10 +81,10 @@ AR=@AR@
+ RANLIB=@RANLIB@
+ STRIP=@STRIP@
+ INSTALL=@INSTALL@
+-CPPFLAGS=@CPPFLAGS@
+-CFLAGS+=-I. -I$(srcdir) $(CPPFLAGS) @CFLAGS@
+-LIBS+=@LIBS@
+-LDFLAGS=@LDFLAGS@
++CPPFLAGS=@CPPFLAGS@ -I. -I$(srcdir)
++LIBS+=@LIBS@ @CRYPTLIB@
++LDFLAGS+=@LDFLAGS@
++
+ 
+ EXEEXT=@EXEEXT@
+ 
+@@ -163,7 +163,7 @@ dropbearkey: $(dropbearkeyobjs)
+ dropbearconvert: $(dropbearconvertobjs)
+ 
+ dropbear: $(HEADERS) $(LIBTOM_DEPS) Makefile
+-	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS) @CRYPTLIB@
++	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS)
+ 
+ dbclient: $(HEADERS) $(LIBTOM_DEPS) Makefile
+ 	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS)
+@@ -184,7 +184,7 @@ ifeq ($(MULTI),1)
+ endif
+ 
+ dropbearmulti$(EXEEXT): $(HEADERS) $(MULTIOBJS) $(LIBTOM_DEPS) Makefile
+-	$(CC) $(LDFLAGS) -o $@ $(MULTIOBJS) $(LIBTOM_LIBS) $(LIBS) @CRYPTLIB@
++	$(CC) $(LDFLAGS) -o $@ $(MULTIOBJS) $(LIBTOM_LIBS) $(LIBS)
+ 
+ multibinary: dropbearmulti$(EXEEXT)
+ 

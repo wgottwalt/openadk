@@ -3,9 +3,9 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_ARM
 	select ADK_arm
 	select ADK_toolchain_arm
 	select ADK_little
+	select ADK_soft_float
 	select ADK_TOOLCHAIN
 	select ADK_EABI
 	select ADK_TARGET_PACKAGE_TGZ
 	help
-	  ARM toolchain (little endian).
-
+	  ARM toolchain (soft float).

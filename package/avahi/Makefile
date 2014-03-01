@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.31
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2f22745b8f7368ad5a0a3fddac343f2d
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
@@ -97,6 +97,8 @@ libavahi-install:
 	${CP} ${WRKINST}/usr/lib/libavahi-client.so* \
 		${IDIR_LIBAVAHI}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libavahi-core.so* \
+		${IDIR_LIBAVAHI}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libavahi-glib.so* \
 		${IDIR_LIBAVAHI}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

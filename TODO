@@ -1,15 +1,9 @@
-- update gcc to 4.8.2
 - port uuterm
-- socat openssl flavour + update
-- use gnu_host_name for host_ dir
-- move target/tools to tools, mv binaries to host_ dir, use ADK_HOST_NEED_FOO (xz,lzop,bzip2,..)
-- add toolchain archive creation target (optimize for size)
-- hash-style=gnu for non-mips and non-musl
-- add arm hard and softfloat toolchains
+- move tools to package host infrastructure, resolve dependency handling for host tools
 - add misp64 n32/n64 toolchains
-- add support for static toolchains
+- hash-style=gnu for non-mips and non-musl
+- socat openssl flavour + update
 - add fb full screen logo
-- qemu-system-mips64el memory alloc probs
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)
 - essid with spaces

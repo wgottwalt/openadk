@@ -11,15 +11,15 @@ PKG_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
 
 include ../rules.mk
 
-install: ${BIN_DIR}/bc
+install: ${STAGING_HOST_DIR}/usr/bin/bc
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	(cd ${WRKBUILD}; ./configure)
+	(cd ${WRKBUILD}; PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}'
 	touch $@
 
-${BIN_DIR}/bc: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/usr/bin/bc: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/bc/bc \
-		${BIN_DIR}
+		${STAGING_HOST_DIR}/usr/bin
 
 include $(TOPDIR)/mk/tools.mk
