@@ -15,7 +15,7 @@ $(WRKBUILD)/.configured:
 ifneq ($(OStype),Darwin)
 	(cd $(WRKBUILD); cp configfsf.guess config.guess)
 endif
-	(cd $(WRKBUILD); \
+	(cd $(WRKBUILD); PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
 		./configure \
 		--prefix=$(STAGING_HOST_DIR) \
 		--with-pic \
