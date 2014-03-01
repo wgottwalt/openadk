@@ -18,6 +18,9 @@ endif
 ifeq ($(CPU_ARCH),microblazeel)
 REAL_GNU_TARGET_NAME:= $(subst microblazeel,microblaze,$(REAL_GNU_TARGET_NAME))
 endif
+ifeq ($(CPU_ARCH),sh4)
+REAL_GNU_TARGET_NAME:= $(subst sh4,sh,$(REAL_GNU_TARGET_NAME))
+endif
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
