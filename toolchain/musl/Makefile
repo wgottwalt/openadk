@@ -18,6 +18,9 @@ endif
 ifeq ($(CPU_ARCH),microblazeel)
 REAL_GNU_TARGET_NAME:= $(subst microblazeel,microblaze,$(REAL_GNU_TARGET_NAME))
 endif
+ifeq ($(CPU_ARCH),sh4)
+REAL_GNU_TARGET_NAME:= $(subst sh4,sh,$(REAL_GNU_TARGET_NAME))
+endif
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
@@ -54,6 +57,10 @@ $(WRKBUILD)/.fixup:
 	)
 	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
 	$(MAKE) -C $(WRKBUILD) DESTDIR=$(STAGING_TARGET_DIR) install
+	# cleanup toolchain
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
+	PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
+	prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
