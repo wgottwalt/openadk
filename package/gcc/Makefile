@@ -23,7 +23,7 @@ $(eval $(call PKG_template,GXX,g++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 TARGET_CPPFLAGS:=	''
 TARGET_CFLAGS:=		''
-TARGET_CXXFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CXXFLAGS))
+TARGET_CXXFLAGS:=	''
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
@@ -57,6 +57,7 @@ endif
 CONFIGURE_ENV+=		have_sys_sdt_h=no
 CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \
 			--target=$(REAL_GNU_TARGET_NAME) \
+			--build=$(GNU_HOST_NAME) \
 			--disable-__cxa_atexit \
 			--without-headers \
 			--libexecdir=/usr/lib \
@@ -66,6 +67,8 @@ CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \
 			--disable-libgomp \
 			--disable-multilib \
 			--disable-libstdcxx-pch \
+			--disable-libsanitizer \
+			--disable-libitm \
 			--enable-cxx-flags="${TARGET_LDFLAGS}"
 
 # disable honour cflags stuff

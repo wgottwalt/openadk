@@ -18,6 +18,8 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
+			--disable-libsanitizer \
+			--disable-libitm \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-decimal-float \
@@ -71,7 +73,7 @@ else
 GCC_CONFOPTS+=		--enable-tls
 endif
 
-ifeq ($(ARCH),powerpc)
+ifeq ($(ADK_LINUX_PPC),y)
 ifeq ($(ADK_TARGET_LIBC),uclibc)
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
 else
