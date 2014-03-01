@@ -145,7 +145,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 
 world:
 	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
-		$(PACKAGE_DIR) $(BIN_DIR) $(TOOLS_BUILD_DIR) \
+		$(PACKAGE_DIR) $(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
 		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
