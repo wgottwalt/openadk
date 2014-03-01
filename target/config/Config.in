@@ -119,12 +119,10 @@ config ADK_n64
 
 config ADK_TARGET_ABI
 	string
-	default "o32" if ADK_o32
 	default "n32" if ADK_n32
 	default "n64" if ADK_n64
 	default "32" if ADK_32
 	default "x32" if ADK_x32
-	default "64" if ADK_64
 	default "eabi" if ADK_EABI
 	default "eabihf" if ADK_EABIHF
 
@@ -738,7 +736,6 @@ config ADK_TARGET_SUFFIX
 	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
 	default "n64" if ADK_n64
 	default "n32" if ADK_n32
-	default "o32" if ADK_o32
 	default "32" if ADK_32
 	default "x32" if ADK_x32
 	default "gnu"
