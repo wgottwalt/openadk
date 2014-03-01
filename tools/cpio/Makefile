@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-install: ${BIN_DIR}/cpio
+install: ${STAGING_HOST_DIR}/usr/bin/cpio
 
 SRCS:=		src/ib_open.c \
 		src/ib_close.c \
@@ -26,7 +26,7 @@ SRCS:=		src/ib_open.c \
 		src/nonpax.c \
 		src/cpio.c
 
-${BIN_DIR}/cpio: ${SRCS}
+${STAGING_HOST_DIR}/usr/bin/cpio: ${SRCS}
 	${CC_FOR_BUILD} ${FLAGS_FOR_BUILD} -D_GNU_SOURCE -Isrc -o $@ $^
 
 include $(TOPDIR)/mk/tools.mk

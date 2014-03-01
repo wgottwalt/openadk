@@ -3,15 +3,15 @@
 
 include $(TOPDIR)/rules.mk
 
-install: ${BIN_DIR}/depmaker ${BIN_DIR}/pkgrebuild ${BIN_DIR}/dkgetsz
+install: ${STAGING_HOST_DIR}/usr/bin/depmaker ${STAGING_HOST_DIR}/usr/bin/pkgrebuild ${STAGING_HOST_DIR}/usr/bin/dkgetsz
 
-${BIN_DIR}/depmaker: depmaker.c
+${STAGING_HOST_DIR}/usr/bin/depmaker: depmaker.c
 	${CC_FOR_BUILD} ${FLAGS_FOR_BUILD} -o $@ depmaker.c
 
-${BIN_DIR}/pkgrebuild: pkgrebuild.c strmap.c
+${STAGING_HOST_DIR}/usr/bin/pkgrebuild: pkgrebuild.c strmap.c
 	${CC_FOR_BUILD} ${FLAGS_FOR_BUILD} -o $@ pkgrebuild.c strmap.c
 
-${BIN_DIR}/dkgetsz: dkgetsz.c
+${STAGING_HOST_DIR}/usr/bin/dkgetsz: dkgetsz.c
 	${CC_FOR_BUILD} ${FLAGS_FOR_BUILD} -o $@ dkgetsz.c
 
 include $(TOPDIR)/mk/tools.mk

@@ -8,16 +8,11 @@ Before you can start you need to install some tools:
 - gcc 
 - binutils 
 - GNU make
-- GNU m4
 - GNU awk
 - GNU sed
 - tar
 - patch
 - gzip
-- bzip2
-- lzop
-- lzma
-- xz
 - wget
 - libc headers
 - ncurses5 headers
@@ -39,3 +34,4 @@ To switch to another target configuration, simply run "make switch". This will
 backup your existing configuration and will start with an empty one.
 
 Sunshine!
+ Waldemar Brodkorb <wbx@openadk.org>

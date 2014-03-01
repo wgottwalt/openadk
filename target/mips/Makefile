@@ -11,16 +11,8 @@ KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
-tools-compile:
-	$(MAKE) -C ../tools/trx all
-	$(MAKE) -C ../tools/addpattern all
-	$(MAKE) -C ../tools/srec2bin all
-	$(MAKE) -C ../tools/squashfs all
-	$(MAKE) -C ../tools/lzma all
-	$(MAKE) -C ../tools/lzma-loader all
-
 ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
-kernel-install: tools-compile
+kernel-install:
 	${TARGET_CROSS}objcopy ${OSTRIP} -S ${LINUX_DIR}/vmlinuz.elf \
 	    ${BUILD_DIR}/${TARGET_KERNEL}
 
@@ -39,7 +31,7 @@ endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
-kernel-install: tools-compile
+kernel-install:
 	${TARGET_CROSS}objcopy -S -O srec $(KERNEL) $(LINUX_DIR)/vmlinux.srec
 	PATH='${TARGET_PATH}' srec2bin $(LINUX_DIR)/vmlinux.srec $(LINUX_DIR)/vmlinux.bin
 	(dd if=/dev/zero bs=16 count=1; cat $(LINUX_DIR)/vmlinux.bin) > $(LINUX_DIR)/vmlinux.tmp
@@ -56,7 +48,7 @@ kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-kernel-install: tools-compile
+kernel-install:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 ${BUILD_DIR}/${ROOTFSSQUASHFS}: ${BUILD_DIR}/root.squashfs

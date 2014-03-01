@@ -1,3 +1,43 @@
+config ADK_HOST_NEED_MKISOFS
+	boolean
+	default n
+
+config ADK_HOST_NEED_SYSLINUX
+	boolean
+	default n
+
+config ADK_HOST_NEED_GPERF
+	boolean
+	default n
+
+config ADK_HOST_NEED_SQUASHFS
+	boolean
+	default n
+
+config ADK_HOST_NEED_JFFS2
+	boolean
+	default n
+
+config ADK_HOST_NEED_GENEXT2FS
+	boolean
+	default n
+
+config ADK_HOST_NEED_LZOP
+	boolean
+	default n
+
+config ADK_HOST_NEED_LZMA
+	boolean
+	default n
+
+config ADK_HOST_NEED_BZIP2
+	boolean
+	default n
+
+config ADK_HOST_NEED_XZ
+	boolean
+	default n
+
 config ADK_TOOLS_ADDPATTERN_ARGS
 	string
 	default "-p W54G -v v4.20.6" if ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G

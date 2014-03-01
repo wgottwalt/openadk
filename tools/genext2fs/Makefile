@@ -11,15 +11,15 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=genext2fs/}
 
 include ../rules.mk
 
-install: ${BIN_DIR}/genext2fs
+install: ${STAGING_HOST_DIR}/usr/bin/genext2fs
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
 	(cd ${WRKBUILD}; ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}'
 	touch $@
 
-${BIN_DIR}/genext2fs: $(WRKBUILD)/.compiled
+${STAGING_HOST_DIR}/usr/bin/genext2fs: $(WRKBUILD)/.compiled
 	$(INSTALL_BIN) $(WRKBUILD)/genext2fs \
-		${BIN_DIR}
+		${STAGING_HOST_DIR}/usr/bin
 
 include $(TOPDIR)/mk/tools.mk

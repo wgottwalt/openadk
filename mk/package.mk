@@ -249,7 +249,7 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
-	    $(BIN_DIR)/cpio -padlmu '$${STAGING_DIR}'
+	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_DIR}'
 	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \

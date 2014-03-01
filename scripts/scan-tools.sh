@@ -112,30 +112,6 @@ if ! which gzip >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which bzip2 >/dev/null 2>&1; then
-	echo You must install bzip2 to continue.
-	echo
-	out=1
-fi
-
-if ! which lzop >/dev/null 2>&1; then
-	echo You must install lzop to continue.
-	echo
-	out=1
-fi
-
-if ! which lzma >/dev/null 2>&1; then
-	echo You must install lzma to continue.
-	echo
-	out=1
-fi
-
-if ! which xz >/dev/null 2>&1; then
-	echo You must install xz-utils to continue.
-	echo
-	out=1
-fi
-
 if ! which patch >/dev/null 2>&1; then
 	echo You must install patch to continue.
 	echo
@@ -215,18 +191,6 @@ fi
 
 if ! which perl >/dev/null 2>&1; then
 	echo You must install perl to continue.
-	echo
-	out=1
-fi
-
-if ! which m4 >/dev/null 2>&1; then
-       echo "You must install m4 (macro processor) to continue."
-       echo
-       out=1
-fi
-
-if ! which bc >/dev/null 2>&1; then
-	echo  "You need bc to continue."
 	echo
 	out=1
 fi

@@ -119,6 +119,17 @@ config ADK_n64
 
 config ADK_TARGET_ABI
 	string
+	default "o32" if ADK_o32
+	default "n32" if ADK_n32
+	default "n64" if ADK_n64
+	default "32" if ADK_32
+	default "x32" if ADK_x32
+	default "64" if ADK_64
+	default "eabi" if ADK_EABI
+	default "eabihf" if ADK_EABIHF
+
+config ADK_TARGET_MIPS_ABI
+	string
 	default "32" if ADK_o32
 	default "n32" if ADK_n32
 	default "64" if ADK_n64
@@ -653,6 +664,7 @@ config ADK_TARGET_LIB_EGLIBC
 	prompt "Embedded GNU C library"
 	boolean
 	select ADK_eglibc
+	select ADK_HOST_NEED_GPERF
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_ARMEB || \
@@ -723,6 +735,11 @@ config ADK_TARGET_SUFFIX
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
 	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
+	default "n64" if ADK_n64
+	default "n32" if ADK_n32
+	default "o32" if ADK_o32
+	default "32" if ADK_32
+	default "x32" if ADK_x32
 	default "gnu"
 
 choice
@@ -771,6 +788,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
+	select ADK_HOST_NEED_SQUASHFS
 	depends on ADK_TARGET_WITH_MTD
 	help
 	  highly compressed read-only filesystem for MTD flash systems.
@@ -779,6 +797,7 @@ config ADK_TARGET_ROOTFS_JFFS2
 	bool "Compressed read-write root filesystem (jffs2)"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_JFFS2
+	select ADK_HOST_NEED_JFFS2
 	depends on ADK_TARGET_WITH_MTD
 	help
 	  compressed read-write filesystem for MTD flash systems.
@@ -837,6 +856,7 @@ config ADK_TARGET_ROOTFS_GENEXT2FS
 	depends on ADK_TARGET_WITH_CF
 	select ADK_KERNEL_EXT2_FS
 	select ADK_KERNEL_SCSI
+	select ADK_HOST_NEED_GENEXT2FS
 	help
 	  Use this option if you have a compact flash based system.
 	  (ext2 filesystem is used.)
@@ -857,6 +877,8 @@ config ADK_TARGET_ROOTFS_ISO
 	select ADK_KERNEL_JOLIET
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SR
+	select ADK_HOST_NEED_MKISOFS
+	select ADK_HOST_NEED_SYSLINUX
 	depends on ADK_HOST_LINUX
 	depends on ADK_LINUX_X86
 	help
@@ -864,6 +886,7 @@ config ADK_TARGET_ROOTFS_ISO
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
+	select ADK_HOST_NEED_GENEXT2FS if ADK_HARDWARE_QEMU
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	depends on !ADK_LINUX_MICROBLAZE
 	help
