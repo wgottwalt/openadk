@@ -49,6 +49,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 MARCH:=			armhf
 endif
+ifeq ($(ADK_TARGET_ABI_X32),y)
+MARCH:=			x32
+endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
