@@ -104,7 +104,7 @@ POSTCONFIG=		-@\
 			fi; \
 		done; \
 		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
-			touch .rebuild.eglibc .rebuild.uclibc .rebuild.glibc;\
+			touch .rebuild.musl .rebuild.uclibc .rebuild.glibc;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
@@ -389,6 +389,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(COLLECTION)" ];then \
+		grep -h "^config" target/packages/pkg-available/* \
+			|grep -i "$(COLLECTION)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(PKG)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(PKG)" \
@@ -533,7 +539,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in glibc eglibc uclibc musl;do \
+	for libc in glibc uclibc musl;do \
 		while read arch; do \
 		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
 		    ( \
@@ -552,13 +558,14 @@ bulktoolchain:
 	done
 
 test-framework:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			for arch in arm mips mipsel x86 x86_64;do \
-				echo === building qemu-$$arch for $$libc on $$(date); \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$arch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				rm .config; \
 			done; \
@@ -568,7 +575,7 @@ test-framework:
 	if [ -f .exit ];then rm .exit;exit 1;fi
 
 release:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
@@ -583,7 +590,7 @@ release:
 
 # build all target architecture, target systems and libc combinations
 bulk:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
@@ -603,7 +610,7 @@ bulk:
 	done
 
 bulkall:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
@@ -623,7 +630,7 @@ bulkall:
 	done
 
 bulkallmod:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \

@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.bitwizard.nl/mtr/
 PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

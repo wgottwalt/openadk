@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libopenssl ppp
 PKG_BUILDDEP:=		openssl ppp
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

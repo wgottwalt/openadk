@@ -394,13 +394,6 @@ int main() {
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_GLIBC\n");
 	fprintf(cfg, "\thelp\n");
 	fprintf(cfg, "\t  GNU C library header files.\n\n");
-	fprintf(cfg, "config ADK_PACKAGE_EGLIBC_DEV\n");
-	fprintf(cfg, "\tprompt \"eglibc-dev........... development files for eglibc\"\n");
-	fprintf(cfg, "\ttristate\n");
-	fprintf(cfg, "\tdefault n\n");
-	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_EGLIBC\n");
-	fprintf(cfg, "\thelp\n");
-	fprintf(cfg, "\t  GNU C library header files.\n\n");
 	fprintf(cfg, "config ADK_PACKAGE_UCLIBC_DEV\n");
 	fprintf(cfg, "\tprompt \"uclibc-dev........... development files for uclibc\"\n");
 	fprintf(cfg, "\ttristate\n");
@@ -873,7 +866,7 @@ int main() {
 					fprintf(cfg, "\nchoice\n");
 					fprintf(cfg, "prompt \"C++ library to use\"\n");
 					fprintf(cfg, "depends on ADK_COMPILE_%s\n\n", toupperstr(pkgdirp->d_name));
-					fprintf(cfg, "default ADK_COMPILE_%s_WITH_STDCXX if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC\n", pkg_cxx);
+					fprintf(cfg, "default ADK_COMPILE_%s_WITH_STDCXX if ADK_TARGET_LIB_GLIBC\n", pkg_cxx);
 					fprintf(cfg, "default ADK_COMPILE_%s_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC\n\n", pkg_cxx);
 					fprintf(cfg, "config ADK_COMPILE_%s_WITH_STDCXX\n", pkg_cxx);
 					fprintf(cfg, "\tbool \"GNU C++ library\"\n");

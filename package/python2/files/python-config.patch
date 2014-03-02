@@ -14,8 +14,8 @@
      elif opt in ('--includes', '--cflags'):
 -        flags = ['-I' + sysconfig.get_python_inc(),
 -                 '-I' + sysconfig.get_python_inc(plat_specific=True)]
-+        flags = ['-I' + re.sub('target_', 'host_', sysconfig.get_python_inc()),
-+                 '-I' + re.sub('target_', 'host_', sysconfig.get_python_inc(plat_specific=True))]
++        flags = ['-I' + re.sub('@@STAGING_TARGET_DIR@@', '@@STAGING_HOST_DIR@@', sysconfig.get_python_inc()),
++                 '-I' + re.sub('@@STAGING_TARGET_DIR@@', '@@STAGING_HOST_DIR@@', sysconfig.get_python_inc(plat_specific=True))]
          if opt == '--cflags':
              flags.extend(getvar('CFLAGS').split())
          print ' '.join(flags)

@@ -13,7 +13,7 @@ PKG_DEPENDS:=		xorg-server kmod-input-evdev libudev
 PKG_BUILDDEP:=		xorg-server eudev
 PKG_SITES:=		${MASTER_SITE_XORG}
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT

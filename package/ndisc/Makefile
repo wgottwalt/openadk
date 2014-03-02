@@ -12,7 +12,7 @@ PKG_SECTION:=		ipv6
 PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		NDISC6 RDISC6 TCPTRACEROUTE6
 

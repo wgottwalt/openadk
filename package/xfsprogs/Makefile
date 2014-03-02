@@ -15,7 +15,7 @@ PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 PKG_TARGET_DEPENDS:=	!atmel-ngw100
 
 include ${TOPDIR}/mk/package.mk

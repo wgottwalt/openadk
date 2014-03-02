@@ -18,7 +18,7 @@ PKG_DEPENDS+=		kmod-crypto-hmac kmod-crypto-cbc kmod-crypto-authenc
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_CHOICES_STRONGSWAN:=WITH_GMP WITH_OPENSSL WITH_GNUTLS
 PKGCD_WITH_GMP:=	use GMP for crypto

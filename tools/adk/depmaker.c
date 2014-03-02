@@ -165,7 +165,7 @@ int main() {
 			}
 			
 			/* exclude manual maintained packages from package/Makefile */
-			if (!(strncmp(pkgdirp->d_name, "eglibc", 6) == 0) &&
+			if (
 				!(strncmp(pkgdirp->d_name, "libc", 4) == 0 && strlen(pkgdirp->d_name) == 4) &&
 				!(strncmp(pkgdirp->d_name, "libpthread", 10) == 0 && strlen(pkgdirp->d_name) == 10) &&
 				!(strncmp(pkgdirp->d_name, "uclibc++", 8) == 0) &&
