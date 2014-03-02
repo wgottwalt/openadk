@@ -11,7 +11,6 @@ else
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
 endif
-endif
 
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		C++ support library
