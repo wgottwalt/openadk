@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		m4-host
 PKG_URL:=		http://www.gnu.org/software/m4/
 PKG_SITES:=		${MASTER_SITE_GNU:=m4/}
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk

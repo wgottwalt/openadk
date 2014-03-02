@@ -15,7 +15,7 @@ PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 

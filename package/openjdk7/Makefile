@@ -30,7 +30,7 @@ GCJ_VER:=		4.8.2
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 PKG_SYSTEM_DEPENDS:=	!lemote-yeelong
 
 include $(TOPDIR)/mk/host.mk

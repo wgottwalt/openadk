@@ -15,7 +15,7 @@ PKG_DEPENDS+=		bash resource-agents pam libgnutls glib libxslt libxml2 libltdl l
 PKG_URL:=		http://www.clusterlabs.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include $(TOPDIR)/mk/package.mk

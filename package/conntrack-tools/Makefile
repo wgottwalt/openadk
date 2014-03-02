@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libtirpc libnetfilter_queue libnetfilter_conntrack libnetfilter_
 PKG_URL:=		http://conntrack-tools.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/conntrack-tools/files/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

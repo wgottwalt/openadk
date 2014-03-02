@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libiconv-tiny neon fuse
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/davfs2/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

@@ -18,7 +18,7 @@ PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
 PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 

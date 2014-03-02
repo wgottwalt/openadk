@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libgssglue libtirpc autotool
 PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/librpcsecgss/
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include $(TOPDIR)/mk/package.mk
 

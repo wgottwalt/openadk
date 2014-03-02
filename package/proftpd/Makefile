@@ -13,7 +13,7 @@ PKG_URL:=		http://www.proftpd.org/
 PKG_SITES:=		ftp://ftp.proftpd.org/distrib/source/
 PKG_NOPARALLEL:=	1
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 PKG_CFLINE_PROFTPD:=	depends on ADK_BROKEN
 
 PKG_FLAVOURS_PROFTPD:=	WITH_FTPUSERS

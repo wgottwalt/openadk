@@ -17,7 +17,7 @@ PKG_NEED_CXX:=		1
 PKG_CXX:=		pcrepp
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 DISTFILES:=		pcre++-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/pcre++-${PKG_VERSION}

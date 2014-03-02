@@ -15,7 +15,7 @@ PKG_URL:=		http://libnids.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnids/}
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

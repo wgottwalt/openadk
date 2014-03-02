@@ -12,7 +12,7 @@ PKG_SECTION:=		fs
 PKG_URL:=		http://www.drbd.org/
 PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include $(TOPDIR)/mk/package.mk
 
