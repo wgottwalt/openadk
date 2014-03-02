@@ -1,7 +1,7 @@
 diff -Nur dropbear-2013.58.orig/options.h dropbear-2013.58/options.h
---- dropbear-2013.58.orig/options.h	2013-04-18 16:58:14.000000000 +0200
-+++ dropbear-2013.58/options.h	2013-08-13 14:29:15.000000000 +0200
-@@ -247,7 +247,7 @@ much traffic. */
+--- dropbear-2014.63.orig/options.h	2014-02-19 15:05:24.000000000 +0100
++++ dropbear-2014.63/options.h	2014-02-27 16:29:06.000000000 +0100
+@@ -264,7 +264,7 @@ much traffic. */
  /* The command to invoke for xauth when using X11 forwarding.
   * "-q" for quiet */
  #ifndef XAUTH_COMMAND

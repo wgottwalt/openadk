@@ -5,6 +5,10 @@
 
 SELF=${0##*/}
 
+if [[ -z $debug ]];then
+	debug=1
+fi
+
 if [[ -z $prefix ]]; then
 	echo >&2 "$SELF: strip command not defined ('prefix' variable not set)"
 	exit 1
@@ -60,9 +64,13 @@ find $TARGETS -type f -a -exec file {} \; | \
 	echo "$SELF: $V:$S"
 	echo "-> $T $F"
 	eval "chmod u+w $F"
-	eval "mkdir -p $D/usr/lib/debug/$Q"
-	eval "$O --only-keep-debug $F $D/usr/lib/debug/$P.debug"
+	if [[ $debug -eq 1 ]];then
+		eval "mkdir -p $D/usr/lib/debug/$Q"
+		eval "$O --only-keep-debug $F $D/usr/lib/debug/$P.debug"
+	fi
 	eval "$T $F"
-	eval "cd $D/usr/lib/debug/$Q && $O --add-gnu-debuglink=$R.debug $F"
+	if [[ $debug -eq 1 ]];then
+		eval "cd $D/usr/lib/debug/$Q && $O --add-gnu-debuglink=$R.debug $F"
+	fi
 done
 exit 0
