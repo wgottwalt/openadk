@@ -180,12 +180,12 @@ endchoice
 config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
+	default "lib" if ADK_x32
 	default "lib64" if ADK_n64 \
 				|| ADK_64 \
 				|| ADK_LINUX_SPARC64 \
 				|| ADK_LINUX_PPC64 \
 				|| ADK_LINUX_X86_64
-	default "libx32" if ADK_x32
 	default "lib"
 
 
@@ -209,6 +209,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
