@@ -73,8 +73,8 @@ $(WRKBUILD)/.fixup:
 	-find $(STAGING_TARGET_DIR) -type f -name \*_pic\* -delete
 	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
 	rm -rf $(STAGING_TARGET_DIR)/usr/lib/gconv
-	PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
-	prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
+	PATH="$(TARGET_PATH)" debug='' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
+	debug='' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)/bin $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

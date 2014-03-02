@@ -127,6 +127,7 @@ config ADK_TARGET_ABI
 	default "eabihf" if ADK_EABIHF
 
 config ADK_TARGET_MIPS_ABI
+	depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
 	string
 	default "32" if ADK_o32
 	default "n32" if ADK_n32
@@ -652,7 +653,6 @@ config ADK_TARGET_LIB_UCLIBC
 	select ADK_uclibc
 	depends on \
 		   !ADK_LINUX_MICROBLAZE && \
-		   !ADK_LINUX_SPARC && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
@@ -727,15 +727,22 @@ config ADK_TARGET_SUFFIX
 	string
 	default "gnueabihf" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABIHF
 	default "gnueabi" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABI
+	default "gnuabi64" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_n64
+	default "gnuabin32" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_n32
+	default "gnuabi32" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_o32
 	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
 	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_EABIHF
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
+	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
+	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
+	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
-	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
-	default "n64" if ADK_n64
-	default "n32" if ADK_n32
+	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
+	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
+	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
+	default "musl" if ADK_TARGET_LIB_MUSL
 	default "32" if ADK_32
 	default "x32" if ADK_x32
 	default "gnu"
