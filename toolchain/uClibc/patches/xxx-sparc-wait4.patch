@@ -1,0 +1,12 @@
+diff -Nur uClibc-0.9.33.2.orig/include/sys/wait.h uClibc-0.9.33.2/include/sys/wait.h
+--- uClibc-0.9.33.2.orig/include/sys/wait.h	2014-03-01 19:15:53.000000000 +0100
++++ uClibc-0.9.33.2/include/sys/wait.h	2014-03-01 19:16:42.000000000 +0100
+@@ -176,7 +176,7 @@
+ #endif /* Use BSD.  */
+ 
+ #ifdef _LIBC
+-extern __pid_t __wait4_nocancel(__pid_t, __WAIT_STATUS, int, struct rusage *) attribute_hidden;
++extern __pid_t __wait4_nocancel(__pid_t, __WAIT_STATUS, int, struct rusage *);
+ #endif
+ 
+ 
