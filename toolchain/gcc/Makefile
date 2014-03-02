@@ -208,12 +208,16 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# fix linking g++ apps with libtool
 	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
 		cd $(STAGING_TARGET_DIR)/lib32 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
+	@-test -d $(STAGING_TARGET_DIR)/libx32 && \
+		cd $(STAGING_TARGET_DIR)/libx32 && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
 		cd $(STAGING_TARGET_DIR)/lib64 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(STAGING_HOST_DIR)/share
 	touch $@
