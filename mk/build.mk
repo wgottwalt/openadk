@@ -252,10 +252,8 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for f in $$(ls ${STAGING_PKG_DIR}/ 2>/dev/null |grep -v [A-Z]|grep -v stamps 2>/dev/null); do  \
 		while read file ; do \
-			echo ${STAGING_DIR}/$$file ;\
 			rm ${STAGING_DIR}/$$file 2>/dev/null;\
-		done < $$f ; \
-		echo ${STAGING_PKG_DIR}/$$f ;\
+		done < ${STAGING_PKG_DIR}/$$f ; \
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
