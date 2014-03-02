@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		10
+PKG_RELEASE:=		11
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
@@ -103,11 +103,20 @@ HOST_CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 CFLAGS_FOR_BUILD+=	-fPIC
 
+post-extract:
+	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
+	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
+	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
+	(cd $(WRKBUILD) && patch -p0 <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
+
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
 		$(STAGING_HOST_DIR)/usr/bin/pgen
+	$(CP) $(TOPDIR)/package/python2/files/python-config.patch $(WRKBUILD)/
+	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/python-config.patch
+	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/python-config.patch
 	(cd $(STAGING_HOST_DIR)/usr/bin && \
-		patch -p0 < $(TOPDIR)/package/python2/files/python-config.patch)
+		patch -p0 < $(WRKBUILD)/python-config.patch)
 
 pre-configure:
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
