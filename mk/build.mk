@@ -389,6 +389,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(COLLECTION)" ];then \
+		grep -h "^config" target/packages/pkg-available/* \
+			|grep -i "$(COLLECTION)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(PKG)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(PKG)" \
@@ -556,9 +562,10 @@ test-framework:
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			for arch in arm mips mipsel x86 x86_64;do \
-				echo === building qemu-$$arch for $$libc on $$(date); \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$arch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				rm .config; \
 			done; \
