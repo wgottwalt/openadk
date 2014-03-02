@@ -543,6 +543,22 @@ bulktoolchain:
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
+test-framework:
+	for libc in uclibc eglibc glibc musl;do \
+		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
+		( \
+			for arch in arm mips mipsel x86 x86_64;do \
+				echo === building qemu-$$arch for $$libc on $$(date); \
+				$(GMAKE) prereq && \
+				$(GMAKE) ARCH=$$arch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive defconfig; \
+				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
+				rm .config; \
+			done; \
+		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
+	done
+	if [ -f .exit ];then rm .exit;exit 1;fi
+
 release:
 	for libc in uclibc eglibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
