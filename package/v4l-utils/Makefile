@@ -16,7 +16,7 @@ PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 PKGSC_LIBV4L:=		libs
 PKGSD_LIBV4L:=		Video4Linux2 libraries

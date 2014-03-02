@@ -13,7 +13,7 @@ PKG_URL:=		http://www.gnu.org/software/libunistring/
 PKG_SITES:=		${MASTER_SITE_GNU:=libunistring/}
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

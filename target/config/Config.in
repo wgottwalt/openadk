@@ -119,16 +119,15 @@ config ADK_n64
 
 config ADK_TARGET_ABI
 	string
-	default "o32" if ADK_o32
 	default "n32" if ADK_n32
 	default "n64" if ADK_n64
 	default "32" if ADK_32
 	default "x32" if ADK_x32
-	default "64" if ADK_64
 	default "eabi" if ADK_EABI
 	default "eabihf" if ADK_EABIHF
 
 config ADK_TARGET_MIPS_ABI
+	depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
 	string
 	default "32" if ADK_o32
 	default "n32" if ADK_n32
@@ -181,12 +180,12 @@ endchoice
 config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
+	default "lib" if ADK_x32
 	default "lib64" if ADK_n64 \
 				|| ADK_64 \
 				|| ADK_LINUX_SPARC64 \
 				|| ADK_LINUX_PPC64 \
 				|| ADK_LINUX_X86_64
-	default "libx32" if ADK_x32
 	default "lib"
 
 
@@ -210,6 +209,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -622,9 +622,6 @@ config ADK_TARGET_CMDLINE
 config ADK_uclibc
 	boolean
 
-config ADK_eglibc
-	boolean
-
 config ADK_glibc
 	boolean
 
@@ -637,7 +634,6 @@ config ADK_libc
 config ADK_TARGET_LIBC
 	string
 	default "uclibc"  if ADK_uclibc
-	default "eglibc"  if ADK_eglibc
 	default "glibc"  if ADK_glibc
 	default "musl"  if ADK_musl
 	default "libc"  if ADK_libc
@@ -653,33 +649,11 @@ config ADK_TARGET_LIB_UCLIBC
 	select ADK_uclibc
 	depends on \
 		   !ADK_LINUX_MICROBLAZE && \
-		   !ADK_LINUX_SPARC && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_LINUX_NATIVE
 	help
  	 http://uclibc.org
-
-config ADK_TARGET_LIB_EGLIBC
-	prompt "Embedded GNU C library"
-	boolean
-	select ADK_eglibc
-	select ADK_HOST_NEED_GPERF
-	depends on \
-		ADK_LINUX_ARM || \
-		ADK_LINUX_ARMEB || \
-		ADK_LINUX_M68K || \
-		ADK_LINUX_MICROBLAZE || \
-		ADK_LINUX_MIPS || \
-		ADK_LINUX_PPC || \
-		ADK_LINUX_PPC64 || \
-		ADK_LINUX_SH || \
-		ADK_LINUX_SPARC || \
-		ADK_LINUX_SPARC64 || \
-		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64
-	help
-	 http://www.eglibc.org
 
 config ADK_TARGET_LIB_GLIBC
 	prompt "GNU C library"
@@ -726,18 +700,24 @@ endchoice
 
 config ADK_TARGET_SUFFIX
 	string
-	default "gnueabihf" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABIHF
-	default "gnueabi" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && ADK_EABI
-	default "gnu" if (ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_EGLIBC) && !ADK_EABI
+	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_EABIHF
+	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_EABI
+	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
+	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
+	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
+	default "gnu" if ADK_TARGET_LIB_GLIBC && !ADK_EABI
 	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_EABIHF
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
+	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
+	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
+	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
-	default "musl" if ADK_TARGET_LIB_MUSL && !ADK_EABI
-	default "n64" if ADK_n64
-	default "n32" if ADK_n32
-	default "o32" if ADK_o32
+	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
+	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
+	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
+	default "musl" if ADK_TARGET_LIB_MUSL
 	default "32" if ADK_32
 	default "x32" if ADK_x32
 	default "gnu"

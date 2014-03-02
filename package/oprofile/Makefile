@@ -15,7 +15,7 @@ PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 PKG_ARCH_DEPENDS:=	!m68k
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 

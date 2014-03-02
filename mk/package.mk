@@ -112,7 +112,7 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 #     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/scripts
 #		  (needed for example for autoconf/automake)
 #     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
-#                 cleaning (needed for toolchain packages like glibc/eglibc)
+#                 cleaning (needed for toolchain packages like glibc)
 #     dev -> create a development subpackage with headers and pkg-config files
 # should be package format independent and modular in the future
 define PKG_template
@@ -242,7 +242,7 @@ endif
 		    'ramdisk location:' >&2; \
 		echo "$$$$x" | sed 's/^/- /' >&2; \
 	    fi; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "eglibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
+	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libgcc" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
 	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
 	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
 		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
@@ -300,12 +300,10 @@ $$(INFO_$(1)_DBG): $$(IPKG_$(1)_DBG)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DBG)
 
 ifneq ($(1),UCLIBC)
-ifneq ($(1),EGLIBC)
 ifneq ($(1),GLIBC)
 ifneq ($(1),MUSL)
 $$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
-endif
 endif
 endif
 endif

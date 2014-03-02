@@ -11,7 +11,7 @@ PKG_DESCR:=		framebuffer utility
 PKG_SECTION:=		utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

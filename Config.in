@@ -152,7 +152,6 @@ config ADK_KERNEL_COMP_XZ
 	select ADK_KERNEL_RD_XZ
 	select ADK_KERNEL_KERNEL_XZ
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
-	depends on !ADK_LINUX_MIPS
 
 config ADK_KERNEL_COMP_LZMA
 	prompt "use LZMA compression"

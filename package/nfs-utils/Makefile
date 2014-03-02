@@ -15,7 +15,7 @@ PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
 PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc

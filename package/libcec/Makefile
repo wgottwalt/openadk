@@ -17,7 +17,7 @@ PKG_OPTS:=		dev
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_SYSTEM_DEPENDS:=    raspberry-pi ibm-x40
-PKG_LIBC_DEPENDS:=      eglibc glibc musl
+PKG_LIBC_DEPENDS:=      glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
