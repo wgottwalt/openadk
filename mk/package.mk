@@ -307,7 +307,6 @@ $$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
 endif
 endif
 endif
-endif
 
 endef
 

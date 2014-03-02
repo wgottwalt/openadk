@@ -29,7 +29,6 @@ endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 endif
 endif
-endif
 
 include $(TOPDIR)/package/Depends.mk
 
