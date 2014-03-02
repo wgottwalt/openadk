@@ -30,11 +30,11 @@ $(WRKBUILD)/.headers_configure:
 		$(WRKBUILD)/libc/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
-		CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
+		CC="${GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
 		$(WRKBUILD)/libc/configure \
 			--prefix=$(STAGING_TARGET_DIR)/usr \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
-			--host=$(REAL_GNU_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
 			${EGLIBC_CONFOPTS} \
 	);
 	touch $@
@@ -42,7 +42,7 @@ $(WRKBUILD)/.headers_configure:
 $(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
 	(cd $(EGLIBC_BUILD_DIR_INITIAL); \
 		${EGLIBC_ENV} \
-		CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
+		CC="${GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
 		$(MAKE) install-headers install-bootstrap-headers=yes cross-compiling=yes \
 	);
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
@@ -61,12 +61,12 @@ $(WRKBUILD)/.configured:
 		$(EGLIBC_BUILD_DIR_FINAL)/option-groups.config
 	(cd $(EGLIBC_BUILD_DIR_FINAL); \
 		${EGLIBC_ENV} \
-		CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
+		CC="${GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
 		$(WRKBUILD)/libc/configure \
 			--prefix=/usr \
 			--enable-shared \
 			--enable-stackguard-randomization \
-			--host=$(REAL_GNU_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
 			${EGLIBC_CONFOPTS} \
 	);
 	touch $@
@@ -74,13 +74,13 @@ $(WRKBUILD)/.configured:
 $(EGLIBC_BUILD_DIR_FINAL)/libc.so:
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	${EGLIBC_ENV} \
-	CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
+	CC="${GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
 		$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) cross-compiling=yes all
 	touch $@
 
 $(WRKBUILD)/.installed: $(EGLIBC_BUILD_DIR_FINAL)/libc.so
 	${EGLIBC_ENV} \
-	CC="${REAL_GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
+	CC="${GNU_TARGET_NAME}-gcc $(ADK_TARGET_ABI_CFLAGS)" \
 		$(MAKE) -C $(EGLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/libc/posix/gai.conf ${STAGING_TARGET_DIR}/etc/

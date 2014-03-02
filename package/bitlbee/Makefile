@@ -20,7 +20,7 @@ $(eval $(call PKG_template,BITLBEE,bitlbee,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 
 CONFIG_STYLE:=		minimal
 TARGET_CFLAGS+=		-fPIC
-CONFIGURE_ARGS:=	--target=${REAL_GNU_TARGET_NAME} \
+CONFIGURE_ARGS:=	--target=${GNU_TARGET_NAME} \
 			--prefix=/usr \
 			--bindir=/usr/sbin \
 			--etcdir=/etc/bitlbee \

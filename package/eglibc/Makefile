@@ -77,7 +77,7 @@ endif
 	(cd $(WRKBUILD); \
 		${EGLIBC_ENV} \
 		$(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)/libc/configure \
-			--host=$(REAL_GNU_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
 			--prefix=$(IDIR_EGLIBC_DEV)/usr \
 			--with-headers=$(IDIR_EGLIBC_DEV)/usr/include \
 			${EGLIBC_CONFOPTS} \

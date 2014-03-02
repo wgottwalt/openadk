@@ -22,10 +22,10 @@ EGLIBC_ENV:=		PATH='${TARGET_PATH}' \
 			BUILD_CC=${CC_FOR_BUILD} \
 			GCC_HONOUR_COPTS=s \
 			CFLAGS="$(TARGET_CFLAGS_LIBC)" \
-			CC=${REAL_GNU_TARGET_NAME}-gcc \
-			CXX=${REAL_GNU_TARGET_NAME}-g++ \
-			AR=${REAL_GNU_TARGET_NAME}-ar \
-			RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+			CC=${GNU_TARGET_NAME}-gcc \
+			CXX=${GNU_TARGET_NAME}-g++ \
+			AR=${GNU_TARGET_NAME}-ar \
+			RANLIB=${GNU_TARGET_NAME}-ranlib \
 			libc_cv_cc_with_libunwind=no \
 			libc_cv_forced_unwind=yes \
 			libc_cv_c_cleanup=yes \

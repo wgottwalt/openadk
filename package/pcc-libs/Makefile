@@ -20,8 +20,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PCC_LIBS,pcc-libs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # we cross-compile a native compiler for the target system
-CONFIGURE_ARGS+=	--host=${REAL_GNU_TARGET_NAME}
-CONFIGURE_ARGS+=	--target=${REAL_GNU_TARGET_NAME}
+CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME}
+CONFIGURE_ARGS+=	--target=${GNU_TARGET_NAME}
 
 pcc-libs-install:
 	$(INSTALL_DIR) $(IDIR_PCC_LIBS)/usr/bin

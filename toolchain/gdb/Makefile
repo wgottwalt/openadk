@@ -18,7 +18,7 @@ $(WRKBUILD)/.configured:
 		--prefix=$(STAGING_HOST_DIR) \
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_HOST_NAME) \
-		--target=$(REAL_GNU_TARGET_NAME) \
+		--target=$(GNU_TARGET_NAME) \
 		--disable-dependency-tracking \
 		--without-uiout \
 		--enable-gdbmi \
@@ -41,8 +41,6 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	install -c $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
-	cd $(STAGING_HOST_DIR)/bin && \
-	ln -fs $(TARGET_CROSS)gdb $(GNU_TARGET_NAME)-gdb
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
