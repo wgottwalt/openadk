@@ -14,7 +14,7 @@ include ../rules.mk
 install: ${STAGING_HOST_DIR}/usr/bin/bc
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	(cd ${WRKBUILD}; ./configure)
+	(cd ${WRKBUILD}; PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" ./configure)
 	${MAKE} -C ${WRKBUILD} CC='${CC_FOR_BUILD}'
 	touch $@
 

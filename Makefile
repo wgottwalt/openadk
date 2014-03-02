@@ -104,6 +104,9 @@ cleantarget targetclean: .prereq_done
 	-@${GMAKE_INV} cleantarget
 	@-rm -f make.log
 
+cleantoolchain toolchainclean: .prereq_done
+	-@${GMAKE_INV} cleantoolchain
+
 distclean cleandist:
 	-@${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done
@@ -145,6 +148,9 @@ allmodconfig: .prereq_done
 
 package_index: .prereq_done
 	@${GMAKE_INV} package_index
+
+test-framework: .prereq_done
+	@${GMAKE_INV} test-framework
 
 release: .prereq_done
 	@${GMAKE_INV} release

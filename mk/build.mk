@@ -104,7 +104,7 @@ POSTCONFIG=		-@\
 			fi; \
 		done; \
 		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
-			touch .rebuild.eglibc .rebuild.uclibc .rebuild.glibc;\
+			touch .rebuild.musl .rebuild.uclibc .rebuild.glibc;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
@@ -141,7 +141,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 	$(STAGING_HOST_DIR)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
-.PHONY: all world clean cleantarget cleandir distclean image_clean
+.PHONY: all world clean cleantarget cleandir cleantoolchain distclean image_clean
 
 world:
 	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
@@ -252,10 +252,8 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for f in $$(ls ${STAGING_PKG_DIR}/ 2>/dev/null |grep -v [A-Z]|grep -v stamps 2>/dev/null); do  \
 		while read file ; do \
-			echo ${STAGING_DIR}/$$file ;\
 			rm ${STAGING_DIR}/$$file 2>/dev/null;\
-		done < $$f ; \
-		echo ${STAGING_PKG_DIR}/$$f ;\
+		done < ${STAGING_PKG_DIR}/$$f ; \
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
@@ -270,6 +268,15 @@ cleandir:
 	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
+	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+
+cleantoolchain:
+	@$(TRACE) cleantoolchain
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
+	rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
 	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
@@ -526,7 +533,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in glibc eglibc uclibc musl;do \
+	for libc in glibc uclibc musl;do \
 		while read arch; do \
 		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
 		    ( \
@@ -535,7 +542,8 @@ bulktoolchain:
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_$${arch}_*_$${libc} target_$${arch}_*_$${libc}; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}_*; \
+				$(GMAKE) cleantoolchain; \
 			rm .config; \
 		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
 		    if [ -f .exit ];then break;fi \
@@ -543,8 +551,24 @@ bulktoolchain:
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
+test-framework:
+	for libc in uclibc glibc musl;do \
+		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
+		( \
+			for arch in arm mips mipsel x86 x86_64;do \
+				echo === building qemu-$$arch for $$libc on $$(date); \
+				$(GMAKE) prereq && \
+				$(GMAKE) ARCH=$$arch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive defconfig; \
+				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
+				rm .config; \
+			done; \
+		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
+	done
+	if [ -f .exit ];then rm .exit;exit 1;fi
+
 release:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
@@ -559,7 +583,7 @@ release:
 
 # build all target architecture, target systems and libc combinations
 bulk:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
@@ -579,7 +603,7 @@ bulk:
 	done
 
 bulkall:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
@@ -599,7 +623,7 @@ bulkall:
 	done
 
 bulkallmod:
-	for libc in uclibc eglibc glibc musl;do \
+	for libc in uclibc glibc musl;do \
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \

@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		swig-host pacemaker gnutls pam python2
 PKG_URL:=		http://hg.clusterlabs.org/pacemaker/pygui/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 PKG_ARCH_DEPENDS:=      x86 x86_64
 
 include $(TOPDIR)/mk/package.mk

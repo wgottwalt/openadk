@@ -120,8 +120,8 @@ endif
 	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
-	PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
-	prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
+	PATH="$(TARGET_PATH)" debug='' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
+	debug='' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

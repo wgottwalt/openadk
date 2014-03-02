@@ -13,7 +13,7 @@ PKG_DEPENDS:=		setserial
 PKG_URL:=		http://heyu.tanj.com/
 PKG_SITES:=		http://heyu.tanj.com/download/
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 

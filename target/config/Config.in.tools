@@ -6,10 +6,6 @@ config ADK_HOST_NEED_SYSLINUX
 	boolean
 	default n
 
-config ADK_HOST_NEED_GPERF
-	boolean
-	default n
-
 config ADK_HOST_NEED_SQUASHFS
 	boolean
 	default n

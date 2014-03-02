@@ -12,7 +12,7 @@ PKG_SECTION:=		net/security
 PKG_URL:=		http://sourceforge.net/projects/sentrytools
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sentrytools/}
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}_beta
 

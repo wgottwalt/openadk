@@ -19,7 +19,7 @@ PKG_OPTS:=		dev
 
 PKG_HOST_DEPENDS:=	!freebsd !netbsd !openbsd
 PKG_ARCH_DEPENDS:=	x86 x86_64
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 
 include ${TOPDIR}/mk/package.mk
 

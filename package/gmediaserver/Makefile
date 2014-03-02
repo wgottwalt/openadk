@@ -15,7 +15,7 @@ PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 PKG_CXX:=		GMEDIASERVER
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

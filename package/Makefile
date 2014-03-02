@@ -9,10 +9,6 @@ ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 gcc-compile: glibc-compile
 endif
-ifeq (${ADK_TARGET_LIB_EGLIBC},y)
-package-$(ADK_PACKAGE_EGLIBC) += eglibc
-gcc-compile: eglibc-compile
-endif
 ifeq (${ADK_TARGET_LIB_MUSL},y)
 package-$(ADK_PACKAGE_MUSL) += musl
 gcc-compile: musl-compile
@@ -25,14 +21,12 @@ package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 endif
 
 ifneq (${ADK_TARGET_LIB_GLIBC},y)
-ifneq (${ADK_TARGET_LIB_EGLIBC},y)
 ifneq (${ADK_TARGET_LIB_MUSL},y)
 ifneq (${ADK_NATIVE},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
 gcc-compile: uclibc-compile
 endif
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
-endif
 endif
 endif
 

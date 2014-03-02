@@ -13,7 +13,7 @@ PKG_URL:=		https://github.com/asalkeld/libqb/wiki#wiki-Releases
 PKG_SITES:=		https://fedorahosted.org/releases/q/u/quarterback/
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 include $(TOPDIR)/mk/package.mk
 
