@@ -1,7 +1,6 @@
 - move tools to package host infrastructure, resolve dependency handling for host tools
 - add misp64 n32/n64 toolchains
 - hash-style=gnu for non-mips and non-musl
-- socat openssl flavour + update
 - add fb full screen logo
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)

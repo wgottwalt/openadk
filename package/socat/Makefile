@@ -4,15 +4,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		socat
-PKG_VERSION:=		1.7.2.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fe70c821a104378a834c3ed1b5971e54
+PKG_VERSION:=		1.7.2.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6943f7a5e1ffd553ad2a900bbf05b83a
 PKG_DESCR:=		A multipurpose relay (SOcket CAT)
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		libpthread libopenssl
-PKG_BUILDDEP:=		openssl
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.dest-unreach.org/socat/
 PKG_SITES:=		http://www.dest-unreach.org/socat/download/
+
+PKG_FLAVOURS_SOCAT:=	WITH_SSL
+PKGFD_WITH_SSL:=	enable SSL support
+PKGFS_WITH_SSL:=	libopenssl
+PKGFB_WITH_SSL:=	openssl
 
 include ${TOPDIR}/mk/package.mk
 
@@ -24,6 +28,12 @@ CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \
 			sc_cv_sys_csize_shift=4
 CONFIGURE_ARGS+=	--disable-libwrap \
 			--disable-readline
+
+ifneq (${ADK_PACKAGE_SOCAT_WITH_SSL},)
+CONFIGURE_ARGS+=	--enable-openssl
+else
+CONFIGURE_ARGS+=	--disable-openssl
+endif
 
 socat-install:
 	${INSTALL_DIR} ${IDIR_SOCAT}/usr/bin
