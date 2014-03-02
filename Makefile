@@ -104,6 +104,9 @@ cleantarget targetclean: .prereq_done
 	-@${GMAKE_INV} cleantarget
 	@-rm -f make.log
 
+cleantoolchain toolchainclean: .prereq_done
+	-@${GMAKE_INV} cleantoolchain
+
 distclean cleandist:
 	-@${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done

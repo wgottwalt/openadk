@@ -51,6 +51,7 @@ image-prepare-post:
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 ifeq ($(ADK_LINUX_X86_64),y)
+ifneq ($(ADK_TARGET_ABI_X32),y)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/lib/
@@ -59,6 +60,7 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+endif
 endif
 ifeq ($(ADK_LINUX_PPC64),y)
 	# fixup lib dirs
@@ -175,10 +177,11 @@ createinitramfs: ${FW_DIR}/${INITRAMFS}_list
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
+		echo "CONFIG_ACPI_INITRD_TABLE_OVERRIDE=n"; \
 		echo 'CONFIG_INITRAMFS_SOURCE="${FW_DIR}/${INITRAMFS}_list"'; \
-		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set' >> ${LINUX_DIR}/.config; \
-		echo 'CONFIG_INITRAMFS_ROOT_UID=0' >> ${LINUX_DIR}/.config; \
-		echo 'CONFIG_INITRAMFS_ROOT_GID=0' >> ${LINUX_DIR}/.config; \
+		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set'; \
+		echo 'CONFIG_INITRAMFS_ROOT_UID=0'; \
+		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
 	) >> ${LINUX_DIR}/.config
 ifeq ($(ADK_KERNEL_COMP_XZ),y)
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config

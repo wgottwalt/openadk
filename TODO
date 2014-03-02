@@ -1,3 +1,4 @@
+- port uuterm
 - move tools to package host infrastructure, resolve dependency handling for host tools
 - finish miniconfig + cleanup
 - qemu-sh serial

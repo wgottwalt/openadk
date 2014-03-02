@@ -1,15 +1,6 @@
---- dropbear-2013.58.orig/Makefile.in	2013-04-18 16:58:14.000000000 +0200
-+++ dropbear-2013.58/Makefile.in	2013-08-13 14:33:37.000000000 +0200
-@@ -56,7 +56,7 @@ HEADERS=options.h dbutil.h session.h pac
- 		loginrec.h atomicio.h x11fwd.h agentfwd.h tcpfwd.h compat.h \
- 		listener.h fake-rfc2553.h
- 
--dropbearobjs=$(COMMONOBJS) $(CLISVROBJS) $(SVROBJS) @CRYPTLIB@ 
-+dropbearobjs=$(COMMONOBJS) $(CLISVROBJS) $(SVROBJS)
- dbclientobjs=$(COMMONOBJS) $(CLISVROBJS) $(CLIOBJS)
- dropbearkeyobjs=$(COMMONOBJS) $(KEYOBJS)
- dropbearconvertobjs=$(COMMONOBJS) $(CONVERTOBJS)
-@@ -75,10 +75,9 @@ AR=@AR@
+--- dropbear-2014.63.orig/Makefile.in	2014-02-19 15:05:24.000000000 +0100
++++ dropbear-2014.63/Makefile.in	2014-03-01 18:27:41.000000000 +0100
+@@ -81,10 +81,10 @@ AR=@AR@
  RANLIB=@RANLIB@
  STRIP=@STRIP@
  INSTALL=@INSTALL@
@@ -20,15 +11,25 @@
 +CPPFLAGS=@CPPFLAGS@ -I. -I$(srcdir)
 +LIBS+=@LIBS@ @CRYPTLIB@
 +LDFLAGS+=@LDFLAGS@
++
  
  EXEEXT=@EXEEXT@
  
-@@ -169,7 +168,7 @@ scp: $(SCPOBJS)  $(HEADERS) Makefile
- # multi-binary compilation.
- MULTIOBJS=
- ifeq ($(MULTI),1)
--	MULTIOBJS=dbmulti.o $(sort $(foreach prog, $(PROGRAMS), $($(prog)objs))) @CRYPTLIB@ 
-+	MULTIOBJS=dbmulti.o $(sort $(foreach prog, $(PROGRAMS), $($(prog)objs)))
- 	CFLAGS+=$(addprefix -DDBMULTI_, $(PROGRAMS)) -DDROPBEAR_MULTI
+@@ -163,7 +163,7 @@ dropbearkey: $(dropbearkeyobjs)
+ dropbearconvert: $(dropbearconvertobjs)
+ 
+ dropbear: $(HEADERS) $(LIBTOM_DEPS) Makefile
+-	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS) @CRYPTLIB@
++	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS)
+ 
+ dbclient: $(HEADERS) $(LIBTOM_DEPS) Makefile
+ 	$(CC) $(LDFLAGS) -o $@$(EXEEXT) $($@objs) $(LIBTOM_LIBS) $(LIBS)
+@@ -184,7 +184,7 @@ ifeq ($(MULTI),1)
  endif
+ 
+ dropbearmulti$(EXEEXT): $(HEADERS) $(MULTIOBJS) $(LIBTOM_DEPS) Makefile
+-	$(CC) $(LDFLAGS) -o $@ $(MULTIOBJS) $(LIBTOM_LIBS) $(LIBS) @CRYPTLIB@
++	$(CC) $(LDFLAGS) -o $@ $(MULTIOBJS) $(LIBTOM_LIBS) $(LIBS)
+ 
+ multibinary: dropbearmulti$(EXEEXT)
  
