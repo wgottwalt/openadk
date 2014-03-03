@@ -180,7 +180,7 @@ endchoice
 config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
-	default "lib" if ADK_x32
+	default "libx32" if ADK_x32
 	default "lib64" if ADK_n64 \
 				|| ADK_64 \
 				|| ADK_LINUX_SPARC64 \
