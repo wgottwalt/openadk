@@ -145,7 +145,7 @@ ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
-${FW_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
+${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 	$(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
@@ -159,8 +159,8 @@ ${FW_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
 		echo "nod /dev/ram 0655 0 0 b 1 1"; \
 	) >>$@
 
-${FW_DIR}/${INITRAMFS}: ${FW_DIR}/${INITRAMFS}_list
-	${LINUX_DIR}/usr/gen_init_cpio ${FW_DIR}/${INITRAMFS}_list | \
+${FW_DIR}/${INITRAMFS}: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
+	${LINUX_DIR}/usr/gen_init_cpio ${STAGING_TARGET_DIR}/${INITRAMFS}_list | \
 		${ADK_COMPRESSION_TOOL} -c >$@
 
 ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
@@ -172,13 +172,13 @@ ${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
 	${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -r ${TARGET_DIR} \
 		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
-createinitramfs: ${FW_DIR}/${INITRAMFS}_list
+createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE|INITRAMFS_COMPRESSION).*//' \
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
 		echo "CONFIG_ACPI_INITRD_TABLE_OVERRIDE=n"; \
-		echo 'CONFIG_INITRAMFS_SOURCE="${FW_DIR}/${INITRAMFS}_list"'; \
+		echo 'CONFIG_INITRAMFS_SOURCE="${STAGING_TARGET_DIR}/${INITRAMFS}_list"'; \
 		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set'; \
 		echo 'CONFIG_INITRAMFS_ROOT_UID=0'; \
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
