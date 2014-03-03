@@ -12,7 +12,7 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://llvm.org/
 PKG_SITES:=		http://llvm.org/releases/3.4/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 PKG_HOST_DEPENDS:=	!darwin
 PKG_ARCH_DEPENDS:=	mips x86 x86_64 arm
 

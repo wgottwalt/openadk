@@ -15,7 +15,7 @@ PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
 PKG_ARCH_DEPENDS:=	!m68k
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 

@@ -10,7 +10,7 @@
 # 6) build and install initial static gcc
 # 7) build and install full libc
 # 8) build and install full shared gcc
-# 9) rebuild and install full libc (in case of musl)
+# 9) rebuild and install full libc (in case of musl/uclibc)
 # 10) build and install gdb debugger
 
 include $(TOPDIR)/rules.mk
@@ -19,10 +19,6 @@ TARGETS:=binutils gmp mpfr mpc libelf gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
 LIBC:=glibc
-endif
-ifeq ($(ADK_TARGET_LIB_EGLIBC),y)
-TARGETS+=eglibc
-LIBC:=eglibc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uClibc
@@ -60,8 +56,8 @@ endif
 $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/lib
 	@mkdir -p $(STAGING_HOST_DIR)/include
-	@mkdir -p $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)
-	@ln -sf ../lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
+	@mkdir -p $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)
+	@ln -sf ../lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download

@@ -55,8 +55,8 @@ endif
 
 
 CONFIGURE_ENV+=		have_sys_sdt_h=no
-CONFIGURE_ARGS+=	--host=$(REAL_GNU_TARGET_NAME) \
-			--target=$(REAL_GNU_TARGET_NAME) \
+CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \
+			--target=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \
 			--disable-__cxa_atexit \
 			--without-headers \

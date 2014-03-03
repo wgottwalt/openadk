@@ -17,9 +17,6 @@ endif
 ifeq ($(ADK_HOST_NEED_SYSLINUX),y)
 TARGETS+=syslinux
 endif
-ifeq ($(ADK_HOST_NEED_GPERF),y)
-TARGETS+=gperf
-endif
 ifeq ($(ADK_HOST_NEED_JFFS2),y)
 TARGETS+=mtd-utils
 endif

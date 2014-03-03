@@ -15,7 +15,7 @@ PKG_URL:=		http://www.snort.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NOPARALLEL:=	1
 
-PKG_LIBC_DEPENDS:=	uclibc eglibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk
 

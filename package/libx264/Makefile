@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-cli \
 			--disable-opencl \
 			--enable-shared \
 			--prefix=/usr \
-			--host=${REAL_GNU_TARGET_NAME} \
+			--host=${GNU_TARGET_NAME} \
 			--sysroot=${STAGING_TARGET_DIR} \
 			--cross-prefix=$(TARGET_CROSS)
 

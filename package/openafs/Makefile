@@ -12,7 +12,7 @@ PKG_SECTION:=		net/fs
 PKG_URL:=		http://openafs.org
 PKG_SITES:=		http://www.openafs.org/dl/openafs/${PKG_VERSION}/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 PKG_CFLINE_OPENAFS+=	select ADK_KERNEL_KEYS
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-src.tar.bz2

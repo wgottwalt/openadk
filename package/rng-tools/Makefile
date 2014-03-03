@@ -12,7 +12,7 @@ PKG_SECTION:=		crypto
 PKG_URL:=		http://gkernel.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 include $(TOPDIR)/mk/package.mk
 

@@ -16,7 +16,7 @@ PKG_BUILDDEP+=		faad2
 PKG_URL:=		http://code.google.com/p/squeezelite/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_LIBC_DEPENDS:=	eglibc glibc musl
+PKG_LIBC_DEPENDS:=	glibc musl
 
 include $(TOPDIR)/mk/package.mk
 

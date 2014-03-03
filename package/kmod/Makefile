@@ -20,7 +20,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--host=${REAL_GNU_TARGET_NAME}
+CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME}
 
 kmod-install:
 	$(INSTALL_DIR) $(IDIR_KMOD)/usr/bin

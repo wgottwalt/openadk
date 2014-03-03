@@ -35,8 +35,8 @@ TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
 ifeq ($(ADK_NATIVE),)
 CONFIGURE_ARGS+=	--disable-werror \
-			--host=$(REAL_GNU_TARGET_NAME) \
-			--target=$(REAL_GNU_TARGET_NAME)
+			--host=$(GNU_TARGET_NAME) \
+			--target=$(GNU_TARGET_NAME)
 else
 CONFIGURE_ARGS+=	--disable-werror
 endif

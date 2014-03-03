@@ -12,7 +12,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
-			--target=$(REAL_GNU_TARGET_NAME) \
+			--target=$(GNU_TARGET_NAME) \
 			--with-gmp=$(STAGING_HOST_DIR) \
 			--with-mpfr=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
@@ -122,10 +122,10 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
-	rm -rf $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/sys-include
-	rm -rf ${STAGING_HOST_DIR}/$(REAL_GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
+	rm -rf $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
+	rm -rf ${STAGING_HOST_DIR}/$(GNU_TARGET_NAME)/lib
+	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
 ifeq ($(ADK_LINUX_SH),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4 && ln -sf . m4-nofpu)
 endif
@@ -182,38 +182,33 @@ $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
-	# Set up the symlinks to enable lying about target name
-	set -e; \
-	cd $(STAGING_HOST_DIR); \
-		ln -sf $(REAL_GNU_TARGET_NAME) $(GNU_TARGET_NAME); \
-		cd bin; \
-		for app in $(REAL_GNU_TARGET_NAME)-* ; do \
-			ln -sf $${app} \
-				$(GNU_TARGET_NAME)$${app##$(REAL_GNU_TARGET_NAME)}; \
-		done;
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
 	cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin; \
 		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
-			ln -sf ../../bin/$(REAL_GNU_TARGET_NAME)-$${app} $${app}; \
+			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
 	(cd $(STAGING_HOST_DIR)/bin && \
-		ln -sf $(REAL_GNU_TARGET_NAME)-gcc $(REAL_GNU_TARGET_NAME)-gcc-${PKG_VERSION})
+		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
 	# setup symlink, so that gcc/g++ find cc1plus
-	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/ && \
+	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/ && \
 		ln -sf ../libexec .)
 	# setup symlink, so that gcc/g++ find stddef.h
-	(cd $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib/ && \
-		ln -sf ../../host_${CPU_ARCH}_${ADK_TARGET_SUFFIX}_${ADK_TARGET_LIBC}/lib/gcc .)
+	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib/ && \
+		ln -sf ../../host_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_SUFFIX}/lib/gcc .)
 	# fix linking g++ apps with libtool
 	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
 		cd $(STAGING_TARGET_DIR)/lib32 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
+	@-test -d $(STAGING_TARGET_DIR)/libx32 && \
+		cd $(STAGING_TARGET_DIR)/libx32 && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
 		cd $(STAGING_TARGET_DIR)/lib64 && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.17 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(STAGING_HOST_DIR)/share
 	touch $@

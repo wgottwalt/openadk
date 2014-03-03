@@ -33,7 +33,7 @@ PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc omxplayer
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc omxplayer
 PKG_BUILDDEP_IBM_X40:=	nasm-host
 PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
-PKG_LIBC_DEPENDS:=	eglibc glibc
+PKG_LIBC_DEPENDS:=	glibc
 
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-Frodo
 
