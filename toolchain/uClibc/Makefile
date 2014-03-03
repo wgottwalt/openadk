@@ -120,8 +120,11 @@ endif
 	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
-	PATH="$(TARGET_PATH)" debug='' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
-	debug='' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
+ifeq ($(ADK_TOOLCHAIN),y)
+	# strip target libs and host tools for toolchain builds
+	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
+	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)
+endif
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
