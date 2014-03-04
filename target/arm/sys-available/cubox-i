@@ -3,9 +3,9 @@ config ADK_TARGET_SYSTEM_CUBOX_I
 	select ADK_arm
 	select ADK_little
 	select ADK_hard_float
+	select ADK_eabihf
 	select ADK_cubox_i
 	select ADK_CPU_CORTEX_A9
-	select ADK_EABIHF
 	select ADK_TARGET_WITH_MMC
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_USB
