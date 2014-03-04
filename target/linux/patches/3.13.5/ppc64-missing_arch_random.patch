@@ -1,0 +1,11 @@
+diff -Nur linux-3.13.5.orig/arch/powerpc/platforms/pseries/Kconfig linux-3.13.5/arch/powerpc/platforms/pseries/Kconfig
+--- linux-3.13.5.orig/arch/powerpc/platforms/pseries/Kconfig	2014-02-22 22:35:30.000000000 +0100
++++ linux-3.13.5/arch/powerpc/platforms/pseries/Kconfig	2014-03-04 13:55:06.000000000 +0100
+@@ -20,6 +20,7 @@
+ 	select PPC_DOORBELL
+ 	select HAVE_CONTEXT_TRACKING
+ 	select HOTPLUG_CPU if SMP
++	select ARCH_RANDOM
+ 	default y
+ 
+ config PPC_SPLPAR
