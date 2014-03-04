@@ -201,6 +201,12 @@ if ! which xargs >/dev/null 2>&1; then
 	out=1
 fi
 
+if ! which g++ >/dev/null 2>&1; then
+	echo  "You need g++ (GNU C++ compiler) to continue."
+	echo
+	out=1
+fi
+
 cd $topdir
 rm -rf tmp
 
