@@ -2,13 +2,14 @@ config ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	bool "Foxboard FOXG20"
 	select ADK_arm
 	select ADK_little
+	select ADK_soft_float
+	select ADK_eabi
 	select ADK_acmesystems_foxg20
 	select ADK_KERNEL_ARCH_AT91
 	select ADK_KERNEL_ARCH_AT91SAM9260
 	select ADK_KERNEL_ARCH_AT91SAM9G20
 	select ADK_KERNEL_MACH_ACMENETUSFOXG20
 	select ADK_KERNEL_AEABI
-	select ADK_EABI
 	select ADK_TARGET_WITH_WATCHDOG
 	select ADK_TARGET_WITH_MMC
 	select ADK_TARGET_WITH_RTC
