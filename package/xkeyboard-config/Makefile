@@ -4,17 +4,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xkeyboard-config
-PKG_VERSION:=		2.6
+PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9a77cb477aec1123720332a091255f25
+PKG_MD5SUM:=		e3defd29cc464cc1a1dfa0eebaca53b1
 PKG_DESCR:=		X keyboard config
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xkbcomp
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_BUILDDEP:=		autotool util-macros xkbcomp
+PKG_SITES:=		http://www.x.org/releases/individual/data/xkeyboard-config/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XKEYBOARD_CONFIG,xkeyboard-config,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+AUTOTOOL_STYLE:=	autoreconf
 
 xkeyboard-config-install:
 	${INSTALL_DIR} ${IDIR_XKEYBOARD_CONFIG}/usr/share/X11/xkb
