@@ -7,7 +7,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		5374d29864b583622b62bfc6b8429418
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
-			--host=$(REAL_GNU_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-sanity-checks \
 			--disable-nls \
@@ -23,10 +23,10 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
                         CFLAGS="$(TARGET_CFLAGS_LIBC)" \
-                        CC=${REAL_GNU_TARGET_NAME}-gcc \
-                        CXX=${REAL_GNU_TARGET_NAME}-g++ \
-                        AR=${REAL_GNU_TARGET_NAME}-ar \
-                        RANLIB=${REAL_GNU_TARGET_NAME}-ranlib \
+                        CC=${GNU_TARGET_NAME}-gcc \
+                        CXX=${GNU_TARGET_NAME}-g++ \
+                        AR=${GNU_TARGET_NAME}-ar \
+                        RANLIB=${GNU_TARGET_NAME}-ranlib \
                         libc_cv_forced_unwind=yes \
 			libc_cv_cc_with_libunwind=yes \
                         libc_cv_c_cleanup=yes \

@@ -56,8 +56,8 @@ endif
 $(STAGING_HOST_DIR):
 	@mkdir -p $(STAGING_HOST_DIR)/lib
 	@mkdir -p $(STAGING_HOST_DIR)/include
-	@mkdir -p $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)
-	@ln -sf ../lib $(STAGING_HOST_DIR)/$(REAL_GNU_TARGET_NAME)/lib
+	@mkdir -p $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)
+	@ln -sf ../lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download

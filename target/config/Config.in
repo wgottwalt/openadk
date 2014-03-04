@@ -117,14 +117,20 @@ config ADK_n32
 config ADK_n64
 	boolean
 
+config ADK_eabi
+	boolean
+
+config ADK_eabihf
+	boolean
+
 config ADK_TARGET_ABI
 	string
 	default "n32" if ADK_n32
 	default "n64" if ADK_n64
 	default "32" if ADK_32
 	default "x32" if ADK_x32
-	default "eabi" if ADK_EABI
-	default "eabihf" if ADK_EABIHF
+	default "eabi" if ADK_eabi
+	default "eabihf" if ADK_eabihf
 
 config ADK_TARGET_MIPS_ABI
 	depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
@@ -180,7 +186,7 @@ endchoice
 config ADK_TARGET_LIBC_PATH
 	string
 	default "lib32" if ADK_n32
-	default "lib" if ADK_x32
+	default "libx32" if ADK_x32
 	default "lib64" if ADK_n64 \
 				|| ADK_64 \
 				|| ADK_LINUX_SPARC64 \
@@ -213,6 +219,36 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+
+config ADK_QEMU_ARGS
+	string
+	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+
+choice
+prompt "Qemu Emulation with graphical output"
+depends on ADK_HARDWARE_QEMU
+
+config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+	boolean "disabled"
+
+config ADK_TARGET_QEMU_WITH_GRAPHIC
+	boolean "enabled"
+	select ADK_KERNEL_VT
+	select ADK_KERNEL_VT_CONSOLE
+	select ADK_KERNEL_FONTS
+	select ADK_KERNEL_FONT_8x16
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FB_SM501 if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
+	select ADK_KERNEL_FB_CIRRUS if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_FB_PXA if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_INPUT_MOUSE
+	select ADK_KERNEL_INPUT_MOUSEDEV
+
+endchoice
 
 choice
 prompt "Qemu Emulation using VirtIO drivers"
@@ -251,19 +287,19 @@ depends on ADK_TARGET_SYSTEM_QEMU_ARM
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	boolean "ARM Ltd. Versatile/PB"
 	select ADK_soft_float
-	select ADK_EABI
+	select ADK_eabi
 	select ADK_CPU_ARM926EJ_S
 
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	boolean "ARM Ltd. Versatile Express for Cortex-A9"
 	select ADK_hard_float
-	select ADK_EABIHF
+	select ADK_eabihf
 	select ADK_CPU_CORTEX_A9
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
 	select ADK_soft_float
-	select ADK_EABI
+	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_WITH_VGA
 
@@ -385,12 +421,6 @@ config ADK_TARGET_KERNEL_MAY_64BIT
 
 # global symbols
 config ADK_TOOLCHAIN_ONLY
-	boolean
-
-config ADK_EABI
-	boolean
-
-config ADK_EABIHF
 	boolean
 
 config ADK_LINUX_64
@@ -579,7 +609,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=atom" if ADK_CPU_ATOM
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
-	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
+	default "-m64 -mcpu=ultrasparc" if ADK_CPU_SPARC_V9
 	default "-march=loongson2f -Wa,-mfix-loongson2f-nop" if ADK_CPU_LOONGSON2F
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64
@@ -612,7 +642,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH
+	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "console=ttyS0" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
@@ -700,27 +731,30 @@ endchoice
 
 config ADK_TARGET_SUFFIX
 	string
-	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_EABIHF
-	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_EABI
-	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
-	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
-	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
-	default "gnu" if ADK_TARGET_LIB_GLIBC && !ADK_EABI
-	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_EABIHF
-	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_EABI
-	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
-	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
-	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
-	default "uclibc" if ADK_TARGET_LIB_UCLIBC && !ADK_EABI
-	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_EABIHF
-	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_EABI
-	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
-	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
-	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
+	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_eabihf
+	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_eabi
+	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64 && ADK_TARGET_KERNEL64
+	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32 && ADK_TARGET_KERNEL64
+	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32 && ADK_TARGET_KERNEL64
+	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_TARGET_KERNEL64
+	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_TARGET_KERNEL64
+	default "gnu" if ADK_TARGET_LIB_GLIBC
+	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_eabihf
+	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_eabi
+	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64 && ADK_TARGET_KERNEL64
+	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32 && ADK_TARGET_KERNEL64
+	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32 && ADK_TARGET_KERNEL64
+	default "uclibc32" if ADK_TARGET_LIB_UCLIBC && ADK_32 && ADK_TARGET_KERNEL64
+	default "uclibcx32" if ADK_TARGET_LIB_UCLIBC && ADK_x32 && ADK_TARGET_KERNEL64
+	default "uclibc" if ADK_TARGET_LIB_UCLIBC
+	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_eabihf
+	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_eabi
+	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64 && ADK_TARGET_KERNEL64
+	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32 && ADK_TARGET_KERNEL64
+	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32 && ADK_TARGET_KERNEL64
+	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_32 && ADK_TARGET_KERNEL64
+	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_x32 && ADK_TARGET_KERNEL64
 	default "musl" if ADK_TARGET_LIB_MUSL
-	default "32" if ADK_32
-	default "x32" if ADK_x32
-	default "gnu"
 
 choice
 prompt "Target firmware type"
