@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 _UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
-		test -n "$$__limit" && ulimit -Sd $$__limit;
+		test -n "$$__limit" && ulimit -Sd $$__limit; ulimit -n 1024;
 
 all: checkreloc .prereq_done
 	@${_UNLIMIT} ${GMAKE_INV} all

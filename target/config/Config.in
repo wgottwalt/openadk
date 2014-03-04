@@ -579,7 +579,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=atom" if ADK_CPU_ATOM
 	default "-march=amdfam10" if ADK_CPU_AMDFAM10
 	default "-mcpu=v8" if ADK_CPU_SPARC_V8
-	default "-m64 -mcpu=v9" if ADK_CPU_SPARC_V9
+	default "-m64 -mcpu=ultrasparc" if ADK_CPU_SPARC_V9
 	default "-march=loongson2f -Wa,-mfix-loongson2f-nop" if ADK_CPU_LOONGSON2F
 	default "-march=mips32" if ADK_CPU_MIPS32
 	default "-march=mips64" if ADK_CPU_MIPS64

@@ -561,7 +561,7 @@ test-framework:
 	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
-			for arch in arm mips mipsel i686 x86_64;do \
+			for arch in arm mips mipsel mips64 mips64el ppc ppc64 sparc sparc64 i686 x86_64;do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#"); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
