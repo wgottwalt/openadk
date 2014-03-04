@@ -16,7 +16,6 @@ help:
 	@echo '  config       - Update current config utilising a line-oriented program'
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
-	@echo '  guiconfig    - Update current config utilising a gui based program'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
 	@echo '  allmodconfig - New config selecting all packages as modules when possible'
 	@echo '  allconfig    - New config selecting all packages when possible'
@@ -128,9 +127,6 @@ image_clean imageclean cleanimage: .prereq_done
 
 menuconfig: .prereq_done
 	@${GMAKE_INV} menuconfig
-
-guiconfig: .prereq_done
-	@${GMAKE_INV} guiconfig
 
 defconfig: .prereq_done
 	@${GMAKE_INV} defconfig

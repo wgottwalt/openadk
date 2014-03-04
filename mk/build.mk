@@ -80,7 +80,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
-			guiconfig \
 			_config \
 			_mconfig \
 			distclean \
@@ -504,15 +503,6 @@ menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
-	${POSTCONFIG}
-
-guiconfig: $(CONFIG)/gconf defconfig .menu package/Config.in.auto
-	@${BASH} ${TOPDIR}/scripts/update-sys
-	@${BASH} ${TOPDIR}/scripts/update-pkg
-	@if [ ! -f .config ];then \
-		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
-	fi
-	@$(CONFIG)/gconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
 _config: $(CONFIG)/conf .menu package/Config.in.auto
