@@ -100,6 +100,10 @@ ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
 endif
 
+ifeq ($(ADK_CPU_SPARC_V9),y)
+GCC_CONFOPTS+=          --with-cpu=ultrasparc
+endif
+
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
