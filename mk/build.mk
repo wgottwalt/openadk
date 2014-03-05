@@ -80,7 +80,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
-			guiconfig \
 			_config \
 			_mconfig \
 			distclean \
@@ -506,15 +505,6 @@ menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-guiconfig: $(CONFIG)/gconf defconfig .menu package/Config.in.auto
-	@${BASH} ${TOPDIR}/scripts/update-sys
-	@${BASH} ${TOPDIR}/scripts/update-pkg
-	@if [ ! -f .config ];then \
-		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
-	fi
-	@$(CONFIG)/gconf $(CONFIG_CONFIG_IN)
-	${POSTCONFIG}
-
 _config: $(CONFIG)/conf .menu package/Config.in.auto
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
@@ -561,7 +551,7 @@ test-framework:
 	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
-			for arch in arm mips mipsel i686 x86_64;do \
+			for arch in arm mips mipsel mips64 mips64el ppc ppc64 sparc sparc64 i686 x86_64;do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#"); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \

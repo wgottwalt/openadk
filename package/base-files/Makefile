@@ -75,6 +75,12 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC64),y)
 	$(SED) 's#ttyS#hvc#g' $(IDIR_BASE_FILES)/etc/inittab
 endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH4),y)
+	$(SED) 's#ttyS0#ttySC1#g' $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH4EB),y)
+	$(SED) 's#ttyS0#ttySC1#g' $(IDIR_BASE_FILES)/etc/inittab
+endif
 ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800),y)
 	$(SED) 's#ttyS#ttyUL#g' $(IDIR_BASE_FILES)/etc/inittab
 endif

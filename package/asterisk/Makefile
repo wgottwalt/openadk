@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
 PKG_VERSION:=		1.8.20.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		99204257de80a42c4e287fc93dfe714a
 PKG_DESCR:=		Open Source PBX
 PKG_SECTION:=		phone
@@ -101,7 +101,7 @@ endif
 
 INSTALL_STYLE:=		manual
 
-TARGET_LDFLAGS+=	-lm -ltinfo
+TARGET_LDFLAGS+=	-lm -ltinfo -ldl -lpthread
 MAKE_ENV=		ASTCFLAGS="${TARGET_CPPFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TARGET_LDFLAGS}"
 MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \

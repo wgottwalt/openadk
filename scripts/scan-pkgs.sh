@@ -23,44 +23,6 @@ out=0
 
 . $topdir/.config
 
-if [[ -n $ADK_NATIVE ]];then
-	if [[ -n $ADK_PACKAGE_NEON ]];then
-		NEED_LIBXML2_DEV="$NEED_LIBXML2_DEV neon"
-	fi
-	if [[ -n $ADK_PACKAGE_LZOP ]];then
-		NEED_LZODEV="$NEED_LZODEV lzop"
-	fi
-	if [[ -n $ADK_PACKAGE_LIBIMAGEMAGICK ]];then
-		NEED_JPEGDEV="$NEED_JPEGDEV libimagemagick"
-		NEED_TIFFDEV="$NEED_TIFFDEV libimagemagick"
-	fi
-	if [[ -n $ADK_PACKAGE_DISPLAY ]];then
-		NEED_X11DEV="$NEED_X11DEV display"
-		NEED_XEXTDEV="$NEED_XEXTDEV display"
-	fi
-	if [[ -n $ADK_PACKAGE_GIT ]];then
-		NEED_CURLDEV="$NEED_CURLDEV git"
-	fi
-	if [[ -n $ADK_TARGET_PACKAGE_RPM ]]; then
-		NEED_RPM="$NEED_RPM rpm"
-	fi
-	if [[ -n $ADK_PACKAGE_WPA_SUPPLICANT_WITH_OPENSSL ]]; then
-		NEED_LIBSSLDEV="$NEED_LIBSSLDEV wpa_supplicant"
-	fi
-	if [[ -n $ADK_COMPILE_BIND ]]; then
-		NEED_LIBSSLDEV="$NEED_LIBSSLDEV bind"
-	fi
-	if [[ -n $ADK_PACKAGE_IW ]]; then
-		NEED_LIBNLDEV="$NEED_LIBNLDEV iw"
-	fi
-	if [[ -n $ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS ]]; then
-		NEED_LIBKRB5DEV="$NEED_LIBKRB5DEV nfs-utils"
-	fi
-	if [[ -n $ADK_PACKAGE_NFS_UTILS_WITH_TIRPC ]]; then
-		NEED_LIBTIRPCDEV="$NEED_LIBTIRPCDEV nfs-utils"
-	fi
-fi
-
 if [[ -n $ADK_PACKAGE_XBMC ]]; then
 	NEED_JAVA="$NEED_JAVA xbmc"
 fi
@@ -71,10 +33,6 @@ fi
 
 if [[ -n $ADK_COMPILE_COROSYNC ]]; then
 	NEED_GROFF="$NEED_GROFF corosync"
-fi
-
-if [[ -n $ADK_PACKAGE_SQUID ]]; then
-	NEED_GXX="$NEED_GXX squid"
 fi
 
 if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
@@ -97,99 +55,6 @@ if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
 fi
 
-if [[ -n $NEED_LIBTIRPCDEV ]];then
-	if ! test -f /usr/include/tirpc/netconfig.h >/dev/null; then
-		echo >&2 You need tirpc headers to build $NEED_LIBTIRPCDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LIBXML2_DEV ]];then
-	if ! test -f /usr/include/libxml2/libxml/xmlversion.h >/dev/null; then
-		echo >&2 You need libxml2 headers to build $NEED_LIBXML2_DEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LIBKRB5DEV ]];then
-	if ! test -f /usr/include/krb5.h >/dev/null; then
-		echo >&2 You need krb5 headers to build $NEED_LIBKRB5DEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_CURLDEV ]];then
-	if ! test -f /usr/include/curl/curl.h >/dev/null; then
-		if ! test -f /usr/local/include/curl/curl.h >/dev/null; then
-			echo >&2 You need curl headers to build $NEED_CURLDEV
-			out=1
-		fi
-	fi
-fi
-
-if [[ -n $NEED_TIFFDEV ]];then
-	if ! test -f /usr/include/tiff.h >/dev/null; then
-		echo >&2 You need libtiff headers to build $NEED_TIFFDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_SDLDEV ]];then
-	if ! test -f /usr/include/SDL/SDL.h >/dev/null; then
-		echo >&2 You need libSDL headers to build $NEED_SDLDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_SDLIMAGEDEV ]];then
-	if ! test -f /usr/include/SDL/SDL_image.h >/dev/null; then
-		echo >&2 You need libSDL-image headers to build $NEED_SDLIMAGEDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_JPEGDEV ]];then
-	if ! test -f /usr/include/jpeglib.h >/dev/null; then
-		echo >&2 You need libjpeg headers to build $NEED_JPEGDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LZODEV ]];then
-	if ! test -f /usr/include/lzo/lzo1.h >/dev/null; then
-		echo >&2 You need liblzo headers to build $NEED_LZODEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LIBNLDEV ]];then
-	if ! test -f /usr/include/netlink/netlink.h >/dev/null; then
-		echo >&2 You need libnl headers to build $NEED_LIBNLDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_X11DEV ]];then
-	if ! test -f /usr/include/X11/Xlib.h >/dev/null; then
-		echo >&2 You need X11 headers to build $NEED_X11DEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_XEXTDEV ]];then
-	if ! test -f /usr/include/X11/extensions/XShm.h >/dev/null; then
-		echo >&2 You need X11 extensions headers to build $NEED_XEXTDEV
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_LIBSSLDEV ]]; then
-	if ! test -f /usr/include/openssl/ssl.h >/dev/null; then
-		echo >&2 You need openssl headers to build $NEED_LIBSSLDEV
-		out=1
-	fi
-fi
-
 if [[ -n $NEED_GROFF ]]; then
 	if ! which groff >/dev/null 2>&1; then
 		echo >&2 You need groff to build $NEED_GROFF
@@ -204,48 +69,9 @@ if [[ -n $NEED_MKFONTDIR ]]; then
 	fi
 fi
 
-if [[ -n $NEED_WWW ]]; then
-	if ! which w3m >/dev/null 2>&1; then
-		if ! which lynx >/dev/null 2>&1; then
-			if ! which links >/dev/null 2>&1; then
-				echo >&2 You need w3m/links/lynx to build $NEED_WWW
-				out=1
-			fi
-		fi
-	fi
-fi
-
-if [[ -n $NEED_GXX ]]; then
-	if ! which g++ >/dev/null 2>&1; then
-		echo >&2 You need GNU c++ compiler to build $NEED_GXX
-		out=1
-	fi
-fi
-
 if [[ -n $NEED_XKBCOMP ]]; then
 	if ! which xkbcomp >/dev/null 2>&1; then
 		echo >&2 You need xkbcomp to build $NEED_XKBCOMP
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_RPM ]]; then
-	if ! which rpmbuild >/dev/null 2>&1; then
-		echo >&2 You need rpmbuild to to use $NEED_RPM package backend
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_XSLTPROC ]]; then
-	if ! which xsltproc >/dev/null 2>&1; then
-		echo >&2 You need xsltproc to build $NEED_XSLTPROC
-		out=1
-	fi
-fi
-
-if [[ -n $NEED_DBUSGLIB ]]; then
-	if ! which dbus-binding-tool >/dev/null 2>&1; then
-		echo >&2 You need dbus-binding-tool to build $NEED_DBUSGLIB
 		out=1
 	fi
 fi

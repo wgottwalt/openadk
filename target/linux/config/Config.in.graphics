@@ -33,7 +33,17 @@ config ADK_KERNEL_FB
 config ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	boolean
 
+config ADK_KERNEL_MFD_SM501
+	boolean
+
+config ADK_KERNEL_FB_CIRRUS
+	boolean
+
 config ADK_KERNEL_FB_GEODE
+	boolean
+
+config ADK_KERNEL_FB_SM501
+	select ADK_KERNEL_MFD_SM501
 	boolean
 
 config ADK_KERNEL_DRM
@@ -74,26 +84,14 @@ config ADK_KERNEL_FB_VESA
  	help
 	 Framebuffer support for VirtualBox Emulator.
 
-config ADK_KERNEL_FB_CIRRUS
-	prompt "................................ Framebuffer support for QEMU Emulator (Cirrus)"
-	boolean
-	select ADK_KERNEL_FB
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	default y if ADK_TARGET_SYSTEM_QEMU_I686
- 	default n
-	depends on ADK_TARGET_SYSTEM_QEMU_I686
- 	help
-	 Framebuffer support for Qemu Emulator.
-
 config ADK_KERNEL_FB_PXA
 	prompt "................................ Framebuffer support for Sharp Zaurus"
 	tristate
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default y if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
  	default n
-	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS || ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
  	help
 	 Framebuffer support for Sharp Zaurus CL Series.
 

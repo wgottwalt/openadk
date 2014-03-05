@@ -5,9 +5,10 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fbset
 PKG_VERSION:=		2.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e547cfcbb8c1a4f2a6b8ba4acb8b7164
 PKG_DESCR:=		framebuffer utility
+PKG_DEPENDS:=		bison-host flex-host
 PKG_SECTION:=		utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
@@ -22,8 +23,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	(cd ${WRKSRC} && bison -d modes.y)
-	(cd ${WRKSRC} && flex modes.l)
+	(cd ${WRKSRC} && PATH='${HOST_PATH}' bison -d modes.y)
+	(cd ${WRKSRC} && PATH='${HOST_PATH}' flex modes.l)
 	${TARGET_CC} ${TARGET_CFLAGS} -I${WRKBUILD} -c -o \
 		${WRKBUILD}/modes.tab.o ${WRKSRC}/modes.tab.c
 	${TARGET_CC} ${TARGET_CFLAGS} -I${WRKBUILD} -c -o \
