@@ -18,11 +18,6 @@ STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
-# use headers and foo-config from system
-ifeq ($(ADK_NATIVE),y)
-STAGING_TARGET_DIR:=
-SCRIPT_TARGET_DIR:=	/usr/bin
-else
 ifeq ($(ADK_TARGET_ABI),)
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_DIR:=		${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
@@ -35,7 +30,6 @@ STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 endif
 SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
-endif
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
@@ -60,15 +54,9 @@ else
 GCC_CHECK:=
 endif
 
-ifeq ($(ADK_NATIVE),y) 
-TARGET_CROSS:=
-TARGET_COMPILER_PREFIX?=
-CONFIGURE_TRIPLE:=	
-else
 TARGET_CROSS:=		$(STAGING_HOST_DIR)/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
 CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} --host=${GNU_TARGET_NAME} --target=${GNU_TARGET_NAME}
-endif
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
 TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
@@ -103,12 +91,6 @@ ifeq ($(ADK_LINUX_PPC),y)
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_LDFLAGS+=	-Wl,--secure-plt
 endif
-endif
-
-ifneq ($(ADK_NATIVE),)
-TARGET_CPPFLAGS:=
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
-TARGET_LDFLAGS:=
 endif
 
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
@@ -198,11 +180,7 @@ PKG_INSTALL:=		PKG_INSTROOT=$(TARGET_DIR) \
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
 endif
 
-ifeq ($(ADK_NATIVE),y)
-RSTRIP:=		prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh
-else
 RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
-endif
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
 	

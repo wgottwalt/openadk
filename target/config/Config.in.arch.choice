@@ -4,16 +4,6 @@ prompt "Target architecture"
 config ADK_CHOOSE_TARGET_ARCH
 	bool "Choose target architecture"
 
-config ADK_LINUX_NATIVE
-	bool "native build"
-	select ADK_native
-	select ADK_NATIVE
-	select ADK_TARGET_LIB_LIBC
-	depends on ADK_HOST_LINUX
-	help
-	  Make a native build. Use host tools.
-	  No toolchain will be created.
-
 config ADK_LINUX_ARM
 	bool "arm system"
 	select ADK_arm

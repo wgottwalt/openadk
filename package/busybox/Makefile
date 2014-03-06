@@ -36,12 +36,8 @@ INSTALL_STYLE:=		manual
 
 BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" GCC_HONOUR_COPTS=s \
 			HOSTCC="${CC_FOR_BUILD}" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+			CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-static-libgcc' \
 			-C ${WRKBUILD} 
-ifneq (${ADK_NATIVE},y)
-BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-static-libgcc'
-else
-BB_MAKE_FLAGS+=		EXTRA_LDFLAGS="-static-libgcc"
-endif
 
 do-configure:
 	# get all symbols from top level config

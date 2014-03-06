@@ -12,8 +12,6 @@ PKG_SECTION:=		lang
 
 NO_DISTFILES:=		1
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

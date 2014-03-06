@@ -11,8 +11,6 @@ PKG_DESCR:=		fastjar utility
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fastjar/}
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

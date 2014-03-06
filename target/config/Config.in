@@ -336,10 +336,6 @@ config ADK_TARGET_BROADCOM_MODEL_ASUS_WL500GP
 
 endchoice
 
-if ADK_LINUX_NATIVE
-source "target/config/Config.in.native"
-endif
-
 # hardware features
 config ADK_TARGET_WITH_USB
 	boolean
@@ -430,9 +426,6 @@ config ADK_HARDWARE_QEMU
 	boolean
 
 config ADK_HARDWARE_VBOX
-	boolean
-
-config ADK_NATIVE
 	boolean
 
 # the inverse of ADK_TARGET_KERNEL_CUSTOMISING,

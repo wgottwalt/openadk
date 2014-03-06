@@ -52,11 +52,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-dri-drivers=${DRI_DRIVERS},swrast
 CONFIGURE_ENV+=		MISSING="echo" \
 			PYTHON2=$(PYTHON)
-
 XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
-ifeq ($(ADK_NATIVE),y)
-XAKE_FLAGS+=		RANLIB=ranlib AR=ar
-endif
 
 mesalib-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
