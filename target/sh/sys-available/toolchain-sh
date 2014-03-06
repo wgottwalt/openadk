@@ -1,6 +1,7 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_SH
 	bool "Toolchain only"
 	select ADK_sh
+	select ADK_little
 	select ADK_toolchain_sh
 	select ADK_CPU_SH4
 	select ADK_TOOLCHAIN
