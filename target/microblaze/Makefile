@@ -55,3 +55,7 @@ ifneq ($(ADK_HARDWARE_QEMU),)
 	@echo 'qemu-system-${CPU_ARCH} -M $(MODEL) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(DTB)'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif

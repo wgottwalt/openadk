@@ -895,7 +895,6 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_HARDWARE_QEMU
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
-	depends on !ADK_LINUX_MICROBLAZE
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
