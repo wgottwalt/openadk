@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libmpc gmp mpfr
 PKG_SUBPKGS:=		GCC GXX
 PKGSD_GXX:=		GNU C++ compiler
 
-PKG_LIBC_DEPENDS:=	glibc musl
-
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include ${TOPDIR}/mk/package.mk
