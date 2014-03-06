@@ -36,17 +36,17 @@ else
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_ABI_N64),y)
+ifeq ($(ADK_n64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_ABI_N32),y)
+ifeq ($(ADK_n32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_ABI_O32),y)
+ifeq ($(ADK_o32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
