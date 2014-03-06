@@ -19,7 +19,6 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
-ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_LINUX_SH),y)
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
@@ -29,7 +28,6 @@ else
 endif
 else
 	${CP} ${STAGING_TARGET_DIR}/$(ADK_TARGET_LIBC_PATH)/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
-endif
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

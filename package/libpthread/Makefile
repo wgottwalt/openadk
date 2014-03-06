@@ -12,10 +12,6 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
-ifeq ($(ADK_NATIVE),y)
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
-endif
 
 PKG_NAME:=		libpthread
 PKG_DESCR:=		POSIX threading library
@@ -37,11 +33,9 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 libpthread-install:
-ifeq ($(ADK_NATIVE),)
 ifeq ($(ADK_TARGET_LIB_MUSL),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
-endif
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

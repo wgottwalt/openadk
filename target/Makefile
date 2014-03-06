@@ -52,13 +52,6 @@ config-prepare: $(TOPDIR)/.config
 	    >${BUILD_DIR}/.kernelconfig.kernel
 	@sed -n '/^# ADK_KERNEL/s//# CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.nokernel
-ifeq ($(ADK_NATIVE),y)
-	@if [ -f /etc/adktarget ];then \
-		cp $(TOPDIR)/target/$(ARCH)/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
-	else \
-	if [ -f /proc/config.gz ];then zcat /proc/config.gz > ${BUILD_DIR}/.kernelconfig.board; else cp ${ADK_TARGET}/kernel.config.$(ARCH) ${BUILD_DIR}/.kernelconfig.board; fi; \
-	fi
-else
 ifeq ($(ADK_USE_KERNEL_MINICONFIG),y)
 	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
 		cat ${TOPDIR}/target/linux/kernel.config \
@@ -73,7 +66,6 @@ else
 	else \
 		cp ${ADK_TARGET_ARCH}/${KERNEL_CFG} ${BUILD_DIR}/.kernelconfig.board; \
 	fi
-endif
 endif
 	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
 	    while IFS='=' read symbol value; do \
