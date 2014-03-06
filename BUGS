@@ -1,5 +1,3 @@
 - arm: thumb mode with glibc does not boot
-- arm: vexpress network card emulation not working
-- sparc: uclibc toolchain is broken
 - sparc64: ide driver not working, only virtio (but unstable)
 - microblaze big endian: network card emulation fails
