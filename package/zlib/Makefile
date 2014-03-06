@@ -26,10 +26,6 @@ $(eval $(call PKG_template,ZLIB,zlib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
 
-ifeq ($(ADK_NATIVE),)
-COPTS:=                 $(TARGET_CONFIGURE_OPTS)
-endif
-
 ifeq ($(ADK_STATIC),)
 CONFIGURE_OPTS:=	--shared
 endif
@@ -37,8 +33,9 @@ endif
 ALL_TARGET:=		libz.a libz.so.$(PKG_VERSION)
 
 do-configure:
-	(cd $(WRKBUILD); $(COPTS) \
+	(cd $(WRKBUILD); \
 		uname="Linux" \
+		$(TARGET_CONFIGURE_OPTS) \
 		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
 		CPPFLAGS="-I$(STAGING_TARGET_DIR)/usr/include" \
 		LDFLAGS="-L$(STAGING_TARGET_DIR)/usr/lib" \

@@ -14,23 +14,12 @@ defaults() {
 	exit 0
 }
 
-check_native() {
-	native=$(grep ^ADK_LINUX_NATIVE $topdir/.config)
-	if [ ! -z "$native" ];then
-		exit 0
-	fi
-}
-
-touch $topdir/target/config/Config.in.native
-
 for i in $(ls $topdir/target/);do
 	if [ -d "$topdir/target/$i/sys-enabled" ];then
 		cat $topdir/target/$i/sys-enabled/* > $topdir/target/$i/Config.in.systems 2>/dev/null
 	fi
 done
 if [ -f $topdir/.config ];then
-
-check_native
 
 arch=$(grep ^ADK_TARGET_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
 cpuarch=$(grep ^ADK_TARGET_CPU_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')

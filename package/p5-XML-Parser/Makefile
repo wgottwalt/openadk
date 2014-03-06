@@ -16,8 +16,6 @@ PKG_SITES:=		http://search.cpan.org/CPAN/authors/id/C/CH/CHORNY/
 DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/XML-Parser-${PKG_VERSION}
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_XML_PARSER,p5-xml-parser,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

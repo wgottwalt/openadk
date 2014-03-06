@@ -12,8 +12,6 @@ PKG_SECTION:=		misc
 PKG_URL:=		http://cdrecord.berlios.de/private/cdrecord.html
 PKG_SITES:=		http://openadk.org/
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CDRTOOLS,cdrtools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

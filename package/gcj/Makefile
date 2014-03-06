@@ -13,7 +13,6 @@ PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 
-PKG_ARCH_DEPENDS:=	native
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include $(TOPDIR)/mk/host.mk

@@ -13,8 +13,6 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jikes/Jikes/1.22/}
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

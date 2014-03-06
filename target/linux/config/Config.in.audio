@@ -60,7 +60,6 @@ config ADK_KPACKAGE_KMOD_SND_OSSEMUL
 	select ADK_KERNEL_SND_PCM_OSS
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
 	help
 	 ALSA OSS Emulation
@@ -71,7 +70,6 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
 	depends on ADK_TARGET_WITH_PCI
 	help

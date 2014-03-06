@@ -9,10 +9,6 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
-ifeq ($(ADK_NATIVE),y)
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
-endif
 
 PKG_NAME:=		libssp
 PKG_DESCR:=		Stack smashing protection library
@@ -34,9 +30,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 libssp-install:
-ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBSSP}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libssp.so* ${IDIR_LIBSSP}/$(ADK_TARGET_LIBC_PATH)
-endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
