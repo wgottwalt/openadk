@@ -25,13 +25,12 @@ CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
-			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
 			ac_cv_func_realloc_0_nonnull=yes \
-			ac_cv_func_malloc_0_nonnull=yes
-ifeq ($(ADK_NATIVE),)
-CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} cross_compiling=yes
-endif
+			ac_cv_func_malloc_0_nonnull=yes \
+			cross_compiling=yes \
+			${HOST_CONFIGURE_OPTS} \
+			${TARGET_CONFIGURE_OPTS}
 
 CONFIGURE_PROG?=	configure
 MAKE_FILE?=		Makefile
@@ -57,12 +56,8 @@ MAKE_ENV+=		$(GCC_CHECK) \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
 			${HOST_CONFIGURE_OPTS} \
-			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
-ifeq ($(ADK_NATIVE),)
-MAKE_ENV+=		${TARGET_CONFIGURE_OPTS}
-else
-MAKE_ENV+=		M4=m4
-endif
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
+			${TARGET_CONFIGURE_OPTS}
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1
 FAKE_FLAGS+=		${XAKE_FLAGS}

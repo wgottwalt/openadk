@@ -220,6 +220,36 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 
+config ADK_QEMU_ARGS
+	string
+	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+
+choice
+prompt "Qemu Emulation with graphical output"
+depends on ADK_HARDWARE_QEMU
+
+config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+	boolean "disabled"
+
+config ADK_TARGET_QEMU_WITH_GRAPHIC
+	boolean "enabled"
+	select ADK_KERNEL_VT
+	select ADK_KERNEL_VT_CONSOLE
+	select ADK_KERNEL_FONTS
+	select ADK_KERNEL_FONT_8x16
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FB_SM501 if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
+	select ADK_KERNEL_FB_CIRRUS if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_FB_PXA if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_INPUT_KEYBOARD
+	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_INPUT_MOUSE
+	select ADK_KERNEL_INPUT_MOUSEDEV
+
+endchoice
+
 choice
 prompt "Qemu Emulation using VirtIO drivers"
 depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
@@ -305,10 +335,6 @@ config ADK_TARGET_BROADCOM_MODEL_ASUS_WL500GP
 	boolean "Asus WL500gP"
 
 endchoice
-
-if ADK_LINUX_NATIVE
-source "target/config/Config.in.native"
-endif
 
 # hardware features
 config ADK_TARGET_WITH_USB
@@ -400,9 +426,6 @@ config ADK_HARDWARE_QEMU
 	boolean
 
 config ADK_HARDWARE_VBOX
-	boolean
-
-config ADK_NATIVE
 	boolean
 
 # the inverse of ADK_TARGET_KERNEL_CUSTOMISING,
@@ -612,7 +635,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH
+	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "console=ttyS0" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2

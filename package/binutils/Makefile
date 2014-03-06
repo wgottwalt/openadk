@@ -33,13 +33,9 @@ endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
-ifeq ($(ADK_NATIVE),)
 CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME)
-else
-CONFIGURE_ARGS+=	--disable-werror
-endif
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 

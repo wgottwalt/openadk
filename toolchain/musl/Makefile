@@ -15,12 +15,6 @@ endif
 ifeq ($(CPU_ARCH),mips64)
 GNU_TARGET_NAME:= $(subst mips64,mips,$(GNU_TARGET_NAME))
 endif
-ifeq ($(CPU_ARCH),microblazeel)
-GNU_TARGET_NAME:= $(subst microblazeel,microblaze,$(GNU_TARGET_NAME))
-endif
-ifeq ($(CPU_ARCH),sh4)
-GNU_TARGET_NAME:= $(subst sh4,sh,$(GNU_TARGET_NAME))
-endif
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \

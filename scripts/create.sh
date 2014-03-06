@@ -44,7 +44,7 @@ test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
 	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
 	cd build_mksh/mksh
 	bash Build.sh -r -c lto || bash Build.sh -r || exit 1
-	cp mksh "$TOPDIR"/bin
+	cp mksh "$TOPDIR"/host_$HOST/usr/bin
 	cd "$TOPDIR"
 	rm -rf build_mksh
 fi

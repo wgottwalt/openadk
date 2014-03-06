@@ -22,7 +22,7 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	arm x86 x86_64 native mips
+PKG_ARCH_DEPENDS:=	arm x86 x86_64 mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
 

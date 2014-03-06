@@ -9,10 +9,6 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uClibc/Makefile.inc
 endif
-ifeq ($(ADK_NATIVE),y)
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
-endif
 
 PKG_NAME:=		librt
 PKG_DESCR:=		Realtime library
@@ -34,11 +30,9 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 librt-install:
-ifeq ($(ADK_NATIVE),)
 	${INSTALL_DIR} ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_TARGET_LIB_MUSL),)
 	${CP} ${STAGING_TARGET_DIR}/lib/librt*.so* ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
-endif
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk
