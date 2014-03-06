@@ -149,9 +149,6 @@ world:
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
-ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
-else
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile
@@ -160,7 +157,6 @@ else
 endif
 else
 	$(MAKE) -f mk/build.mk tools/install toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
-endif
 endif
 
 package_index:
@@ -349,26 +345,6 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
-ifeq ($(ADKtype),ibm-x40)
-	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
-	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
-ifeq ($(ADKtype),lemote-yeelong)
-	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
-	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/mips/sys-available/$(ADKtype) > \
-		target/mips/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/mips/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.system.default"' > target/config/Config.in.system
@@ -438,24 +414,6 @@ ifeq (${OStype},Darwin)
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
-endif
-ifeq ($(ADKtype),ibm-x40)
-	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
-ifeq ($(ADKtype),lemote-yeelong)
-	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
@@ -551,8 +509,8 @@ test-framework:
 	for libc in uclibc glibc musl;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
-			for arch in arm mips mipsel mips64 mips64el ppc ppc64 sparc sparc64 i686 x86_64;do \
-				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#"); \
+			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#"); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \

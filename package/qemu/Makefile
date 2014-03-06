@@ -16,7 +16,7 @@ PKG_SITES:=		http://wiki.qemu.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_ARCH_DEPENDS:=	native x86 x86_64
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

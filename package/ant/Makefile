@@ -14,8 +14,6 @@ PKG_SITES:=		http://archive.apache.org/dist/ant/source/
 DISTFILES:=             apache-$(PKG_NAME)-$(PKG_VERSION)-src.tar.bz2
 WRKDIST=                $(WRKDIR)/apache-$(PKG_NAME)-$(PKG_VERSION)
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

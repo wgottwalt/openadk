@@ -19,7 +19,6 @@ source target/linux/config/Config.in.misc
 source target/linux/config/Config.in.mips
 source target/linux/config/Config.in.lib
 source target/linux/config/Config.in.pm
-source target/linux/config/Config.in.serial
 source target/linux/config/Config.in.spi
 source target/linux/config/Config.in.kvm
 source target/linux/config/Config.in.debug
