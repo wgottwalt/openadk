@@ -10,6 +10,13 @@ MAKEFLAGS=		$(EXTRA_MAKEFLAGS)
 BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
 
+# some global dirs
+BASE_DIR:=		$(TOPDIR)
+DISTDIR?=		${BASE_DIR}/dl
+TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
+SCRIPT_DIR:=		$(BASE_DIR)/scripts
+STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
+
 # PFX dirs for cleandir
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
@@ -18,13 +25,6 @@ STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
 TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
-
-# some global dirs
-BASE_DIR:=		$(TOPDIR)
-DISTDIR?=		${BASE_DIR}/dl
-TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
-SCRIPT_DIR:=		$(BASE_DIR)/scripts
-STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 
 ifeq ($(ADK_TARGET_ABI),)
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
