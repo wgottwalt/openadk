@@ -50,7 +50,7 @@ config ADK_RUNTIME_CONSOLE_VGA
 config ADK_RUNTIME_CONSOLE_SERIAL
 	bool "console output on serial"
 	help
-	  Start getty on serial console. (ttyS0)
+	  Start getty on serial console.
 
 config ADK_RUNTIME_CONSOLE_BOTH
 	bool "console output on VGA and serial"
@@ -74,7 +74,14 @@ config ADK_RUNTIME_KBD_LAYOUT
 
 choice
 prompt "Initial login shell for the root user"
-default ADK_ROOTSH_ASH
+default ADK_ROOTSH_MKSH
+
+config ADK_ROOTSH_MKSH
+	select ADK_PACKAGE_MKSH
+	bool "mksh (MirBSD Korn Shell)"
+	help
+	  Use mksh (a Korn Shell variant) as standard login shell
+	  for the superuser.
 
 config ADK_ROOTSH_ASH
 	select BUSYBOX_ASH
@@ -114,7 +121,14 @@ endchoice
 
 choice
 prompt "System /bin/sh (POSIX script shell)"
-default ADK_BINSH_ASH
+default ADK_BINSH_MKSH
+
+config ADK_BINSH_MKSH
+	select ADK_PACKAGE_MKSH
+	bool "mksh (MirBSD Korn Shell)"
+	help
+	  Use mksh (a Korn Shell variant) as system shell, which is
+	  both small and powerful, so quite suited for this task.
 
 config ADK_BINSH_ASH
 	select BUSYBOX_ASH
@@ -130,13 +144,6 @@ config ADK_BINSH_BASH
 	help
 	  Use GNU bash as system shell. This is discouraged due to
 	  its size and slowness.
-
-config ADK_BINSH_MKSH
-	select ADK_PACKAGE_MKSH
-	bool "mksh (MirBSD Korn Shell)"
-	help
-	  Use mksh (a Korn Shell variant) as system shell, which is
-	  both small and powerful, so quite suited for this task.
 
 config ADK_BINSH_ZSH
 	select ADK_PACKAGE_ZSH
