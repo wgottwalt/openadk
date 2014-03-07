@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=adk mkcrypt cpio m4 flex bc bzip2 xz
+TARGETS:=adk mksh mkcrypt cpio m4 flex bc bzip2 xz
 
 ifeq ($(ADK_HOST_NEED_GENEXT2FS),y)
 TARGETS+=genext2fs
