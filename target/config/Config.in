@@ -71,6 +71,10 @@ config ADK_TOOLCHAIN
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
 
+config ADK_LINUX_MIPS64
+	boolean
+	default y if ADK_LINUX_MIPS && ADK_TARGET_KERNEL64
+
 choice
 prompt "Toolchain options"
 depends on ADK_TOOLCHAIN
@@ -692,6 +696,7 @@ config ADK_TARGET_LIB_MUSL
 	prompt "musl C library"
 	boolean
 	select ADK_musl
+	depends on !ADK_LINUX_MIPS64
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_MICROBLAZE || \
@@ -700,6 +705,7 @@ config ADK_TARGET_LIB_MUSL
 		ADK_LINUX_SH || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+		
 	help
  	 http://musl-libc.org
 
