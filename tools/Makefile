@@ -29,6 +29,9 @@ endif
 ifeq ($(ADK_HOST_NEED_LZMA),y)
 TARGETS+=lzma
 endif
+ifeq ($(ADK_HOST_NEED_CCACHE),y)
+TARGETS+=ccache
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))

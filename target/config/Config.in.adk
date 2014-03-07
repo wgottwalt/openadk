@@ -46,6 +46,7 @@ config ADK_WGET_TIMEOUT
 
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
+	select ADK_HOST_NEED_CCACHE
 	default n
 	help
 	  Useful if you have enough space for the cache and need speedup compilation.
