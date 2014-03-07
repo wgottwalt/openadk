@@ -1,26 +1,7 @@
 #!/bin/sh
-echo "System initialization ..."
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-mount -t devtmpfs devtmpfs /dev >/dev/null 2>&1
-mount -nt proc proc /proc
-echo 0 > /proc/sys/kernel/printk
-mount -o nosuid,nodev,noexec -t sysfs sysfs /sys
-[ ! -f /etc/notmpfs ] && {
-  size=$(cat /etc/tmpfs 2>/dev/null)
-  [ -z $size ] && size=2048
-  mount -o nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
-}
-mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
-[ -d /dev/pts ] || mkdir /dev/pts 
-[ -d /dev/shm ] || mkdir /dev/shm
-mount -o nosuid,noexec -t tmpfs tmpfs /dev/shm
-mount -o nosuid,noexec -t devpts devpts /dev/pts
-echo >/dev/mdev.seq
-echo "/sbin/mdev" >/proc/sys/kernel/hotplug
-mdev -s
-cat /etc/.rnd >/dev/urandom 2>&1
-[ -x /installer ] && { /installer; }
-[ -x /kexecinit ] && { /kexecinit; }
-[ -x /cryptinit ] && { /cryptinit; exec switch_root /mnt "/init";}
-[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
-exec /sbin/init
+# devtmpfs does not get automounted for initramfs
+/bin/mount -t devtmpfs devtmpfs /dev
+exec 0</dev/console
+exec 1>/dev/console
+exec 2>/dev/console
+exec /sbin/init $*
