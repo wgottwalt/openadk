@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cyrus-sasl
 PKG_VERSION:=		2.1.26
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a7f4e5e559a0e37b3ffc438c9456e425
 PKG_DESCR:=		a general purpose authentication library
 PKG_SECTION:=		libs
@@ -21,10 +21,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSASL2,libsasl2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--enable-staticdlopen \
-			--enable-plain \
-			--enable-anon \
+CONFIGURE_ARGS+=	--enable-plain \
 			--enable-login \
+			--disable-anon \
 			--disable-cram \
 			--disable-digest \
 			--disable-scram \
