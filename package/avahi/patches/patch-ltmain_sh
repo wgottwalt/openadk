@@ -1,6 +1,6 @@
---- avahi-0.6.30.orig/ltmain.sh	2011-04-04 00:10:35.000000000 +0200
-+++ avahi-0.6.30/ltmain.sh	2011-05-12 12:30:44.000000000 +0200
-@@ -5840,7 +5840,7 @@ func_mode_link ()
+--- avahi-0.6.31.orig/ltmain.sh	2012-02-14 23:36:26.000000000 +0100
++++ avahi-0.6.31/ltmain.sh	2014-03-04 07:44:03.000000000 +0100
+@@ -5853,7 +5853,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
        -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \

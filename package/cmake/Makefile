@@ -12,8 +12,6 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 
-PKG_ARCH_DEPENDS:=	native
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

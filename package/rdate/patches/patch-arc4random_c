@@ -1,0 +1,41 @@
+--- rdate.orig/arc4random.c	2007-05-15 00:15:12.000000000 +0200
++++ rdate/arc4random.c	2014-03-03 07:27:38.000000000 +0100
+@@ -30,7 +30,6 @@
+ #include <sys/param.h>
+ #include <sys/types.h>
+ #include <sys/time.h>
+-#include <sys/sysctl.h>
+ #include <fcntl.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -97,30 +96,6 @@ arc4_stir(struct arc4_stream *as)
+ 	if (fd != -1) {
+ 		read(fd, rdat.rnd, sizeof(rdat.rnd));
+ 		close(fd);
+-	} else {
+-		/* /dev/urandom failed? Maybe we're in a chroot. */
+-//#if defined(CTL_KERN) && defined(KERN_RANDOM) && defined(RANDOM_UUID)
+-#ifdef _LINUX_SYSCTL_H
+-		/* XXX this is for Linux, which uses enums */
+-
+-		int mib[3];
+-		size_t i, len;
+-
+-		mib[0] = CTL_KERN;
+-		mib[1] = KERN_RANDOM;
+-		mib[2] = RANDOM_UUID;
+-
+-		for (i = 0; i < sizeof(rdat.rnd) / sizeof(u_int); i ++) {
+-			len = sizeof(u_int);
+-			if (sysctl(mib, 3, &rdat.rnd[i], &len, NULL, 0) == -1) {
+-				fprintf(stderr, "warning: no entropy source\n");
+-				break;
+-			}
+-		}
+-#else
+-		/* XXX kFreeBSD doesn't seem to have KERN_ARND or so */
+-		;
+-#endif
+ 	}
+ 
+ 	arc4_stir_pid = getpid();

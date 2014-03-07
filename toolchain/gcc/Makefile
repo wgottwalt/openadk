@@ -18,6 +18,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--with-libelf=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
+			--with-gnu-as \
 			--disable-libsanitizer \
 			--disable-libitm \
 			--disable-libmudflap \
@@ -100,6 +101,10 @@ ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
 endif
 
+ifeq ($(ADK_CPU_SPARC_V9),y)
+GCC_CONFOPTS+=          --with-cpu=ultrasparc
+endif
+
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
@@ -172,6 +177,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
+			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--enable-shared
 	touch $@
