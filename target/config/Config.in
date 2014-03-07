@@ -669,7 +669,7 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
-		   !ADK_LINUX_NATIVE
+		   !ADK_TARGET_ABI_X32
 	help
  	 http://uclibc.org
 
