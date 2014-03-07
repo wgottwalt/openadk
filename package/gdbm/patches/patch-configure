@@ -1,0 +1,11 @@
+--- gdbm-1.8.3.orig/configure	2002-10-15 23:53:26.000000000 +0200
++++ gdbm-1.8.3/configure	2014-03-07 10:48:33.000000000 +0100
+@@ -5532,7 +5532,7 @@ linux-gnuoldld* | linux-gnuaout* | linux
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-*)
+   version_type=linux
+   need_lib_prefix=no
+   need_version=no

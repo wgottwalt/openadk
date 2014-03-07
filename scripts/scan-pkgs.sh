@@ -83,11 +83,4 @@ if [[ -n $NEED_JAVA ]]; then
 	fi
 fi
 
-if [[ -n $ADK_USE_CCACHE ]]; then
-        if ! which ccache >/dev/null 2>&1; then
-                echo >&2 You have selected to build with ccache, but ccache could not be found.
-                out=1
-        fi
-fi
-
 exit $out

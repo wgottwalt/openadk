@@ -310,16 +310,13 @@ all: menuconfig
 # ---------------------------------------------------------------------------
 
 # force entering the subdir, as dependency checking is done there
-.PHONY: $(CONFIG)/conf $(CONFIG)/mconf $(CONFIG)/gconf
+.PHONY: $(CONFIG)/conf $(CONFIG)/mconf
 
 $(CONFIG)/conf:
 	@$(MAKE) -C $(CONFIG) conf
 
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
-
-$(CONFIG)/gconf:
-	@$(MAKE) -C $(CONFIG) gconf
 
 defconfig: .menu $(CONFIG)/conf
 	@${BASH} ${TOPDIR}/scripts/update-sys
