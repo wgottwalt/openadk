@@ -2,7 +2,7 @@
 #-
 # Copyright © 2010, 2011, 2012
 #	Thorsten Glaser <tg@mirbsd.org>
-# Copyright © 2010, 2011
+# Copyright © 2010-2014
 #	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
@@ -35,19 +35,6 @@ case :$PATH: in
 (*:$TOPDIR/host_$HOST/usr/bin:*) ;;
 (*) export PATH=$PATH:$TOPDIR/host_$HOST/usr/bin ;;
 esac
-
-test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
-	make package=mksh fetch || exit 1
-	df=mksh-R48b.tgz
-	rm -rf build_mksh
-	mkdir -p build_mksh
-	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
-	cd build_mksh/mksh
-	bash Build.sh -r -c lto || bash Build.sh -r || exit 1
-	cp mksh "$TOPDIR"/host_$HOST/usr/bin
-	cd "$TOPDIR"
-	rm -rf build_mksh
-fi
 
 test -n "$KSH_VERSION" || exec mksh "$me" "$@"
 if test -z "$KSH_VERSION"; then
