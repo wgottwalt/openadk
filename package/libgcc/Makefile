@@ -24,7 +24,7 @@ ifeq ($(ADK_LINUX_SH),y)
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 else
-	${CP} ${STAGING_TARGET_DIR}/lib/!m4/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+	${CP} ${STAGING_TARGET_DIR}/lib/m4-nofpu/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 else
 	${CP} ${STAGING_TARGET_DIR}/$(ADK_TARGET_LIBC_PATH)/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)

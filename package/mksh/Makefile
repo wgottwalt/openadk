@@ -4,16 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		48b
+PKG_VERSION:=		49
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ab9baa6b5a4de9d0e6a3ce9957c18da0
+PKG_MD5SUM:=		e8c205cac72c3dc8540bbc3897421422
 PKG_DESCR:=		MirBSD Korn Shell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.mirbsd.org/
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 
-PKG_FLAVOURS_MKSH:=	FULL
-PKGFD_FULL:=		Include all features
+PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY
 
 DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
@@ -22,10 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(strip ${ADK_PACKAGE_MKSH_FULL}),)
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
-endif
-
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

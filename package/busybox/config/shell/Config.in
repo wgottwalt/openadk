@@ -8,7 +8,7 @@ menu "Shells"
 
 config BUSYBOX_ASH
 	bool "ash"
-	default y
+	default n
 	depends on !BUSYBOX_NOMMU
 	help
 	  Tha 'ash' shell adds about 60k in the default configuration and is

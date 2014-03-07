@@ -114,8 +114,6 @@ endif
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		all install_runtime
-	rm -rf $(STAGING_TARGET_DIR)/lib/libc.so
-	ln -s libc.so.0 $(STAGING_TARGET_DIR)/lib/libc.so
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
 ifeq ($(ADK_TOOLCHAIN),y)
