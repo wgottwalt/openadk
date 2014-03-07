@@ -51,7 +51,6 @@ image-prepare-post:
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 ifeq ($(ADK_LINUX_X86_64),y)
-ifneq ($(ADK_TARGET_ABI_X32),y)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/lib/
@@ -60,7 +59,6 @@ ifneq ($(ADK_TARGET_ABI_X32),y)
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
-endif
 endif
 ifeq ($(ADK_LINUX_PPC64),y)
 	# fixup lib dirs
