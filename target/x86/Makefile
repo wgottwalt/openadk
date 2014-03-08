@@ -34,7 +34,7 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-i386 -nographic -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-i386 ${ADK_QEMU_ARGS} -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_HARDWARE_VBOX),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
@@ -54,7 +54,7 @@ imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-i386 -nographic -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-i386 ${ADK_QEMU_ARGS} -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -63,7 +63,7 @@ imageinstall: createinitramfs
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-i386 -nographic -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-i386 ${ADK_QEMU_ARGS} -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq (${ADK_TARGET_FS},iso)
