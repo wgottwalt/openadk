@@ -10,6 +10,8 @@ PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
 PKG_DESCR:=		ecj java compiler
 PKG_SECTION:=		lang
 
+PKG_CFLINE_ECJ:=	depends on ADK_HOST_ONLY
+
 NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/host.mk
