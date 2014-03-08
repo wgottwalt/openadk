@@ -47,7 +47,7 @@ image-prepare-post:
 			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
 		done; \
 	fi
-	sed -i '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
+	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 ifeq ($(ADK_LINUX_X86_64),y)
@@ -171,7 +171,7 @@ ${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
 		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
 createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
-	${SED} 's/.*CONFIG_(BLK_DEV_INITRD|INITRAMFS_SOURCE|INITRAMFS_COMPRESSION).*//' \
+	${SED} 's/.*CONFIG_\(RD_\|XZ_\|BLK_DEV_INITRD\|INITRAMFS_\).*//' \
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \
