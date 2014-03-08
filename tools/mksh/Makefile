@@ -17,8 +17,7 @@ include ../rules.mk
 install: ${STAGING_HOST_DIR}/usr/bin/mksh
 
 $(WRKBUILD)/.compiled: ${WRKDIST}/.prepared
-	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
-	    CPPFLAGS='${TARGET_CPPFLAGS}' LDFLAGS='${TARGET_LDFLAGS}' \
+	cd ${WRKBUILD} && CC='${CC_FOR_BUILD}' CFLAGS='${CFLAGS_FOR_BUILD}' \
 	    HAVE_CAN_FSTACKPROTECTORALL=0 \
 	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 	touch $@

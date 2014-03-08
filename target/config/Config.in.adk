@@ -12,6 +12,13 @@ config ADK_HOST
 	help
 	  Configure host for IPKG package management.
 
+config ADK_DL_DIR
+	string "download directory for packages"
+	default ""
+	help
+	  Configure the download directory for all source packages.
+	  Use an absolute path.
+
 config ADK_DEBUG
 	bool "Compile applications with debug support by default"
 	default n

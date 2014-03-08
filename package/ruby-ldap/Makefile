@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		ruby openldap
 PKG_URL:=		http://ruby-ldap.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ruby-ldap/0.9.8/}
 
+PKG_CFLINE_RUBY_LDAP:=	depends on ADK_BROKEN
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk

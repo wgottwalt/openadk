@@ -1,11 +1,23 @@
 menu "USB support"
-depends on ADK_TARGET_WITH_USB
+depends on ADK_TARGET_WITH_USB || ADK_HARDWARE_QEMU
 
 config ADK_KERNEL_USB_SUPPORT
 	boolean
 
 config ADK_KERNEL_USB
 	select ADK_KERNEL_USB_SUPPORT
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
+	boolean
+
+config ADK_KERNEL_USB_OHCI_HCD
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
+	boolean
+
+config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	boolean
 
 config ADK_KERNEL_USB_LIBUSUAL
@@ -36,7 +48,6 @@ config ADK_KPACKAGE_KMOD_USB
 	select ADK_KERNEL_USB_SUPPORT
 	depends on !ADK_KERNEL_USB
 	default y if ADK_TARGET_SYSTEM_QEMU_I686
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4
 	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
@@ -108,6 +119,7 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4
+	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default n
 	help
 	  The Open Host Controller Interface (OHCI) is a standard for accessing

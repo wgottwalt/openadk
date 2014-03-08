@@ -4,6 +4,29 @@
 
 . /etc/functions.sh
 
+# disable kernel messages
+echo 0 > /proc/sys/kernel/printk
+
+# remount /dev with smaller size
+mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
+
+# remount /tmp with smaller size
+size=$(cat /etc/tmpfs 2>/dev/null)
+[ -z $size ] && size=2048
+mount -o remount,nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
+
+# start mdev dynamic device node management
+echo >/dev/mdev.seq
+echo "/sbin/mdev" >/proc/sys/kernel/hotplug
+mdev -s
+
+# seed some random
+cat /etc/.rnd >/dev/urandom 2>&1
+
+# setup cfgfs
+[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
+
+# create some useful directories in tmpfs
 mkdir -p /var/log
 mkdir -p /var/run
 touch /var/log/lastlog
@@ -22,6 +45,4 @@ for f in /etc/modules.d/*; do
 	[[ -e $f ]] && load_modules /etc/modules.d/*
 	break
 done
-# settle down, after module load
-sleep 2
 exit 0

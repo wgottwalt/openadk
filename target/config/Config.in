@@ -71,6 +71,10 @@ config ADK_TOOLCHAIN
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
 
+config ADK_LINUX_MIPS64
+	boolean
+	default y if ADK_LINUX_MIPS && ADK_TARGET_KERNEL64
+
 choice
 prompt "Toolchain options"
 depends on ADK_TOOLCHAIN
@@ -87,8 +91,6 @@ prompt "Target Kernel"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG \
 	|| ADK_TARGET_SYSTEM_QEMU_MIPS64 \
 	|| ADK_TARGET_SYSTEM_QEMU_MIPS64EL \
-	|| ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64 \
-	|| ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64EL \
 	|| ADK_LINUX_X86_64
 
 config ADK_TARGET_KERNEL64
@@ -133,26 +135,19 @@ config ADK_TARGET_ABI
 	default "eabihf" if ADK_eabihf
 
 config ADK_TARGET_MIPS_ABI
-	depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
+	depends on ADK_LINUX_MIPS
 	string
 	default "32" if ADK_o32
 	default "n32" if ADK_n32
 	default "64" if ADK_n64
 
-config ADK_TARGET_ABI_MIPS_O32
-	boolean
-	select ADK_o32
-	depends on !ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
-	default y
-
 choice
 prompt "Target ABI"
-depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS
+depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS && !ADK_TOOLCHAIN
 
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI (new)"
 	select ADK_n32
-	depends on !ADK_TARGET_LIB_MUSL
 
 config ADK_TARGET_ABI_O32
 	boolean "O32 ABI (old)"
@@ -161,13 +156,12 @@ config ADK_TARGET_ABI_O32
 config ADK_TARGET_ABI_N64
 	boolean "N64 ABI"
 	select ADK_n64
-	depends on !ADK_TARGET_LIB_MUSL
 
 endchoice
 
 choice
 prompt "Target ABI"
-depends on ADK_TARGET_KERNEL64 && ADK_LINUX_X86_64
+depends on ADK_TARGET_KERNEL64 && ADK_LINUX_X86_64 && !ADK_TOOLCHAIN
 
 config ADK_TARGET_ABI_64
 	boolean "64 Bit ABI"
@@ -247,6 +241,7 @@ config ADK_TARGET_QEMU_WITH_GRAPHIC
 	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_KERNEL_INPUT_MOUSE
 	select ADK_KERNEL_INPUT_MOUSEDEV
+	select ADK_KERNEL_USB_HID if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
 
 endchoice
 
@@ -558,8 +553,8 @@ config ADK_TARGET_CPU_ARCH
 	default "m68k" if ADK_LINUX_M68K
 	default "microblaze" if ADK_LINUX_MICROBLAZE && ADK_big
 	default "microblazeel" if ADK_LINUX_MICROBLAZE && ADK_little
-	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_TARGET_KERNEL64
-	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_TARGET_KERNEL64
+	default "mips64" if ADK_LINUX_MIPS && ADK_big && ADK_LINUX_64
+	default "mips64el" if ADK_LINUX_MIPS && ADK_little && ADK_LINUX_64
 	default "mips" if ADK_LINUX_MIPS && ADK_big
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
 	default "arm" if ADK_LINUX_ARM && ADK_little
@@ -570,26 +565,26 @@ config ADK_TARGET_CPU_ARCH
 	default "sh4eb" if ADK_LINUX_SH && ADK_big
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
-	default "mips64el" if ADK_native && ADK_lemote_yeelong	
+	default "mips64el" if ADK_native && ADK_lemote_yeelong
 
 config ADK_TARGET_ABI_CFLAGS
 	string
-	default "-mabi=32" if ADK_TARGET_ABI_O32 || ADK_TARGET_ABI_MIPS_O32
-	default "-mabi=n32" if ADK_TARGET_ABI_N32
-	default "-mabi=64" if ADK_TARGET_ABI_N64
-	default "-m32" if ADK_TARGET_ABI_32
-	default "-mx32" if ADK_TARGET_ABI_X32
-	default "-m64" if ADK_TARGET_ABI_64
+	default "-mabi=32" if ADK_o32
+	default "-mabi=n32" if ADK_n32
+	default "-mabi=64" if ADK_n64
+	default "-m32" if ADK_32
+	default "-mx32" if ADK_x32
+	default "-m64" if ADK_64
 
 config ADK_TARGET_ABI_LDFLAGS
 	string
-	default "-Wl,-m -Wl,elf_i386" if ADK_TARGET_ABI_32
+	default "-Wl,-m -Wl,elf_i386" if ADK_32
 
 config ADK_TARGET_KERNEL_LDFLAGS
 	string
-	default "-mabi=64" if ADK_TARGET_ABI_N32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_TARGET_ABI_O32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_TARGET_ABI_N64 && ADK_TARGET_KERNEL64
+	default "-mabi=64" if ADK_n32 && ADK_TARGET_KERNEL64
+	default "-mabi=64" if ADK_o32 && ADK_TARGET_KERNEL64
+	default "-mabi=64" if ADK_n64 && ADK_TARGET_KERNEL64
 	default ""
 
 config ADK_TARGET_CFLAGS
@@ -675,7 +670,7 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
-		   !ADK_LINUX_NATIVE
+		   !ADK_TARGET_ABI_X32
 	help
  	 http://uclibc.org
 
@@ -685,7 +680,6 @@ config ADK_TARGET_LIB_GLIBC
 	select ADK_glibc
 	depends on \
 		ADK_LINUX_ARM || \
-		ADK_LINUX_ARMEB || \
 		ADK_LINUX_M68K || \
 		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
@@ -703,6 +697,7 @@ config ADK_TARGET_LIB_MUSL
 	prompt "musl C library"
 	boolean
 	select ADK_musl
+	depends on !ADK_LINUX_MIPS64
 	depends on \
 		ADK_LINUX_ARM || \
 		ADK_LINUX_MICROBLAZE || \
@@ -711,6 +706,7 @@ config ADK_TARGET_LIB_MUSL
 		ADK_LINUX_SH || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
+		
 	help
  	 http://musl-libc.org
 
@@ -726,25 +722,25 @@ config ADK_TARGET_SUFFIX
 	string
 	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_eabihf
 	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_eabi
-	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64 && ADK_TARGET_KERNEL64
-	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32 && ADK_TARGET_KERNEL64
-	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32 && ADK_TARGET_KERNEL64
+	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
+	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
+	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
 	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_TARGET_KERNEL64
 	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_TARGET_KERNEL64
 	default "gnu" if ADK_TARGET_LIB_GLIBC
 	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_eabihf
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_eabi
-	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64 && ADK_TARGET_KERNEL64
-	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32 && ADK_TARGET_KERNEL64
-	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32 && ADK_TARGET_KERNEL64
+	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
+	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
+	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
 	default "uclibc32" if ADK_TARGET_LIB_UCLIBC && ADK_32 && ADK_TARGET_KERNEL64
 	default "uclibcx32" if ADK_TARGET_LIB_UCLIBC && ADK_x32 && ADK_TARGET_KERNEL64
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_eabihf
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_eabi
-	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64 && ADK_TARGET_KERNEL64
-	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32 && ADK_TARGET_KERNEL64
-	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32 && ADK_TARGET_KERNEL64
+	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
+	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
+	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
 	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_32 && ADK_TARGET_KERNEL64
 	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_x32 && ADK_TARGET_KERNEL64
 	default "musl" if ADK_TARGET_LIB_MUSL
