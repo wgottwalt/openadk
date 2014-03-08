@@ -9,6 +9,10 @@ config ADK_KERNEL_INPUT
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
+config ADK_KERNEL_USB_HID
+	boolean
+	default n
+
 config ADK_KERNEL_HID_LOGITECH
 	boolean
 	default n
@@ -113,6 +117,7 @@ depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT || ADK_TARGET_WITH_TOUCH
 config ADK_KPACKAGE_KMOD_USB_HID
 	prompt "kmod-usb-hid..................... USB keyboard/mouse support"
 	tristate
+	depends on !ADK_KERNEL_USB_HID
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_KERNEL_HID_GENERIC
@@ -122,8 +127,6 @@ config ADK_KPACKAGE_KMOD_USB_HID
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_TARGET_WITH_USB
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4 && ADK_TARGET_QEMU_WITH_GRAPHIC
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB && ADK_TARGET_QEMU_WITH_GRAPHIC
 	default n
 
 config ADK_KERNEL_LOGITECH_DINOVO
