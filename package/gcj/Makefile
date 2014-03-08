@@ -41,8 +41,8 @@ HOST_CONFIGURE_ARGS:=	--enable-dependency-tracking \
 			--disable-bootstrap
 
 post-extract:
-	(cd $(DISTDIR); wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar)
-	(cd $(WRKBUILD); $(CP) $(DISTDIR)/ecj.jar .)
+	(cd $(DL_DIR); wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar)
+	(cd $(WRKBUILD); $(CP) $(DL_DIR)/ecj.jar .)
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
