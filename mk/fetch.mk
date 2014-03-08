@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 ifneq ($(strip ${DIST_SUBDIR}),)
-FULLDISTDIR?=		${DISTDIR}/${DIST_SUBDIR}
+FULLDISTDIR?=		${DL_DIR}/${DIST_SUBDIR}
 else
-FULLDISTDIR?=		${DISTDIR}
+FULLDISTDIR?=		${DL_DIR}
 endif
 
 FULLDISTFILES=		$(patsubst %,${FULLDISTDIR}/%,${DISTFILES})

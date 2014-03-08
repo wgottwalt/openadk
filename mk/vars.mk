@@ -12,7 +12,11 @@ BUILD_GROUP=		$(shell id -gn)
 
 # some global dirs
 BASE_DIR:=		$(TOPDIR)
-DISTDIR?=		${BASE_DIR}/dl
+ifeq ($(ADK_DL_DIR),)
+DL_DIR?=		$(BASE_DIR)/dl
+else
+DL_DIR?=		$(ADK_DL_DIR)
+endif
 TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
