@@ -38,7 +38,7 @@ ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
-	@cd ${WRKBUILD}; \
+	@cd ${WRKSRC}; \
 	    for i in $$(find . -name config.sub);do \
 		if [ -f $$i ]; then \
 			${CP} $$i $$i.bak; \
@@ -57,7 +57,7 @@ else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifeq ($(strip ${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
-	@cd ${WRKBUILD}; \
+	@cd ${WRKSRC}; \
 	    for i in $$(find . -name config.sub);do \
 		if [ -f $$i ]; then \
 			${CP} $$i $$i.bak; \
