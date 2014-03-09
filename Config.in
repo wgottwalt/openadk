@@ -121,6 +121,10 @@ config ADK_KERNEL_VERSION_3_11_10
 	prompt "3.11.10"
 	boolean
 
+config ADK_KERNEL_VERSION_3_10_30
+	prompt "3.10.30"
+	boolean
+
 config ADK_KERNEL_VERSION_3_4_82
 	prompt "3.4.82"
 	boolean
@@ -132,6 +136,7 @@ config ADK_KERNEL_VERSION
 	default "3.13.5" if ADK_KERNEL_VERSION_3_13_5
 	default "3.12.13" if ADK_KERNEL_VERSION_3_12_13
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
+	default "3.10.30" if ADK_KERNEL_VERSION_3_10_30
 	default "3.4.82" if ADK_KERNEL_VERSION_3_4_82
 	help
 
