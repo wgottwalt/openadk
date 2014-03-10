@@ -7,3 +7,4 @@ config ADK_PKG_TEST
 	help
 	  Package collection used to build adk-test-framework root
 	  filesystem.
+

@@ -1198,8 +1198,11 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
-$(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
+$(eval $(call KMOD_template,SND_SOC,snd-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
+,54))
+
+$(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-lib \
 	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-pcm \
 	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-ac97 \
@@ -1207,11 +1210,25 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx-i2s \
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx \
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
-,55))
+,55, kmod-snd-soc))
 
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
 ,55))
+
+$(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2709-soc-i2s,\
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-pcm5102a \
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8804 \
+	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-bcm2708-i2s \
+,55, kmod-snd-soc))
+
+$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
+	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-dac \
+,56, kmod-snd-bcm2709-soc-i2s))
+
+$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
+	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-digi \
+,56, kmod-snd-bcm2709-soc-i2s))
 
 #ifeq ($(ADK_LINUX_64),y)
 #V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32

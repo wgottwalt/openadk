@@ -5,7 +5,9 @@
 . /etc/functions.sh
 
 # disable kernel messages
-echo 0 > /proc/sys/kernel/printk
+if [ -f /proc/sys/kernel/printk ];then
+	echo 0 > /proc/sys/kernel/printk
+fi
 
 # remount /dev with smaller size
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev

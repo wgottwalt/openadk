@@ -58,7 +58,7 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs --disable-rpath \
 			--disable-defrag
 INSTALL_TARGET+=	install-libs
 TARGET_LDFLAGS+=	-lpthread
-TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_DIR)/usr/include
+TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 			BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
 			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}" \

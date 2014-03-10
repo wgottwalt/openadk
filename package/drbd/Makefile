@@ -18,7 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DRBD,drbd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GENETLINK_H=$(STAGING_DIR)/usr/include/linux/genetlink.h
+XAKE_FLAGS+=		GENETLINK_H=$(STAGING_TARGET_DIR)/usr/include/linux/genetlink.h
 CONFIGURE_ARGS+=	--with-distro=generic \
 			--with-pacemaker \
 			--without-heartbeat \
