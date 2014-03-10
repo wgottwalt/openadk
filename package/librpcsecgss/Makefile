@@ -21,7 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBRPCSECGSS,librpcsecgss,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 
 librpcsecgss-install:

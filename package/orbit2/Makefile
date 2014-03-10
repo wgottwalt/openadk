@@ -41,8 +41,8 @@ orbit2-install:
 	$(INSTALL_DIR) $(IDIR_ORBIT2)/usr/lib
 	$(INSTALL_BIN) $(WRKINST)/usr/lib/libORBit*.so* \
 		$(IDIR_ORBIT2)/usr/lib
-	$(INSTALL_DIR) $(STAGING_DIR)/usr/bin
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
-		$(STAGING_DIR)/usr/bin
+		$(STAGING_TARGET_DIR)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk

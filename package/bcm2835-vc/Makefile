@@ -31,9 +31,9 @@ bcm2835-vc-install:
 	$(CP) ${WRKINST}/opt/vc/bin/* ${IDIR_BCM2835_VC}/opt/vc/bin
 	# required for xbmc
 	(cd ${IDIR_BCM2835_VC}/opt/vc/lib && ln -sf libEGL.so libEGL.so.1)
-	-rm -rf ${STAGING_DIR}/opt/vc
-	mkdir -p ${STAGING_DIR}/opt/vc
-	${CP} ${WRKINST}/opt/vc/lib ${STAGING_DIR}/opt/vc
-	${CP} ${WRKINST}/opt/vc/include ${STAGING_DIR}/opt/vc
+	-rm -rf ${STAGING_TARGET_DIR}/opt/vc
+	mkdir -p ${STAGING_TARGET_DIR}/opt/vc
+	${CP} ${WRKINST}/opt/vc/lib ${STAGING_TARGET_DIR}/opt/vc
+	${CP} ${WRKINST}/opt/vc/include ${STAGING_TARGET_DIR}/opt/vc
 
 include ${TOPDIR}/mk/pkg-bottom.mk

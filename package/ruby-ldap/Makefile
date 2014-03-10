@@ -26,19 +26,19 @@ CONFIG_STYLE:=		manual
 FAKE_FLAGS+=		DESTDIR="/"
 
 do-configure:
-	(cd $(WRKBUILD) && $(STAGING_HOST_DIR)/usr/bin/ruby -I$(STAGING_DIR)/usr/lib/ruby/2.0.0/$(CPU_ARCH)-linux/ extconf.rb \
+	(cd $(WRKBUILD) && $(STAGING_HOST_DIR)/usr/bin/ruby -I$(STAGING_TARGET_DIR)/usr/lib/ruby/2.0.0/$(CPU_ARCH)-linux/ extconf.rb \
 		--with-openldap2 \
 		--without-libnsl \
-		--with-ldap-dir=$(STAGING_DIR)/usr \
-		--with-ldap-lib=$(STAGING_DIR)/usr/lib \
-		--with-ldap-include=$(STAGING_DIR)/usr/include)
+		--with-ldap-dir=$(STAGING_TARGET_DIR)/usr \
+		--with-ldap-lib=$(STAGING_TARGET_DIR)/usr/lib \
+		--with-ldap-include=$(STAGING_TARGET_DIR)/usr/include)
 
 ruby-ldap-install:
 	$(INSTALL_DIR) $(IDIR_RUBY_LDAP)/usr/lib/ruby/site_ruby/2.0.0/$(CPU_ARCH)-linux
 	$(INSTALL_DIR) $(IDIR_RUBY_LDAP)/usr/lib/ruby/site_ruby/2.0.0/ldap
-	$(CP) $(STAGING_DIR)/usr/lib/ruby/site_ruby/2.0.0/$(CPU_ARCH)-linux/ldap.so \
+	$(CP) $(STAGING_TARGET_DIR)/usr/lib/ruby/site_ruby/2.0.0/$(CPU_ARCH)-linux/ldap.so \
 		$(IDIR_RUBY_LDAP)/usr/lib/ruby/site_ruby/2.0.0/$(CPU_ARCH)-linux
-	$(CP) $(STAGING_DIR)//usr/lib/ruby/site_ruby/2.0.0/ldap/*.rb \
+	$(CP) $(STAGING_TARGET_DIR)//usr/lib/ruby/site_ruby/2.0.0/ldap/*.rb \
 		$(IDIR_RUBY_LDAP)/usr/lib/ruby/site_ruby/2.0.0/ldap
 
 include ${TOPDIR}/mk/pkg-bottom.mk

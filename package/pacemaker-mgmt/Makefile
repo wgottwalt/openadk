@@ -27,9 +27,9 @@ CONFIGURE_ARGS+=	--with-initdir=/etc/init.d \
 			--with-ocf-root=/usr/lib/ocf \
 			--without-ais-support \
 			--disable-fatal-warnings
-TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/python2.7 \
-			-I$(STAGING_DIR)/usr/include/pacemaker \
-			-I$(STAGING_DIR)/usr/include/heartbeat
+TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/python2.7 \
+			-I$(STAGING_TARGET_DIR)/usr/include/pacemaker \
+			-I$(STAGING_TARGET_DIR)/usr/include/heartbeat
 
 pacemaker-mgmt-install:
 	$(INSTALL_DIR) $(IDIR_PACEMAKER_MGMT)/usr/lib

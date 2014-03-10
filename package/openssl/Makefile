@@ -57,8 +57,8 @@ CONFIG:=		linux-embedded
 endif
 
 post-extract:
-	-mkdir -p $(STAGING_DIR)/usr/include/crypto
-	cp ./files/cryptodev.h $(STAGING_DIR)/usr/include/crypto/
+	-mkdir -p $(STAGING_TARGET_DIR)/usr/include/crypto
+	cp ./files/cryptodev.h $(STAGING_TARGET_DIR)/usr/include/crypto/
 
 do-configure:
 	(cd $(WRKBUILD); \

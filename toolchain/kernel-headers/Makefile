@@ -10,10 +10,10 @@ $(WRKBUILD)/.headers:
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
 		headers_check
 	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
-		INSTALL_HDR_PATH=$(STAGING_DIR)/usr \
+		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
-	@-find $(STAGING_DIR)/usr/include -name .install -delete
-	@-find $(STAGING_DIR)/usr/include -name ..install.cmd -delete
+	@-find $(STAGING_TARGET_DIR)/usr/include -name .install -delete
+	@-find $(STAGING_TARGET_DIR)/usr/include -name ..install.cmd -delete
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
