@@ -19,7 +19,7 @@ $(eval $(call PKG_template,XINETD,xinetd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 CONFIGURE_ARGS+=	--without-libwrap \
 			--with-loadavg
 ALL_TARGET:=		build
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 
 xinetd-install:

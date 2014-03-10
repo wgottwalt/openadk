@@ -1,5 +1,6 @@
-config ADK_KERNEL_PM
+config ADK_KERNEL_PM_RUNTIME
 	boolean
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
 
 config ADK_KERNEL_ACPI
 	boolean
@@ -28,7 +29,7 @@ depends on ADK_TARGET_WITH_ACPI || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 config ADK_HARDWARE_ACPI
 	prompt "Enable ACPI support"
 	boolean
-	select ADK_KERNEL_PM
+	select ADK_KERNEL_PM_RUNTIME
 	select ADK_KERNEL_ACPI
 	select ADK_KERNEL_ACPI_SYSFS_POWER
 	select ADK_KERNEL_ACPI_AC
@@ -44,7 +45,7 @@ config ADK_HARDWARE_ACPI
 config ADK_KERNEL_SUSPEND
 	prompt "Enable Suspend-to-RAM support"
 	boolean
-	select ADK_KERNEL_PM
+	select ADK_KERNEL_PM_RUNTIME
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
@@ -54,7 +55,7 @@ config ADK_KERNEL_SUSPEND
 config ADK_KERNEL_HIBERNATION
 	prompt "Enable Suspend-to-Disk support"
 	boolean
-	select ADK_KERNEL_PM
+	select ADK_KERNEL_PM_RUNTIME
 	select ADK_KERNEL_SWAP
 	select BUSYBOX_SWAPONOFF
 	default y if ADK_TARGET_SYSTEM_IBM_X40

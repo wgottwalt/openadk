@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LSOF,lsof,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		minimal
 CONFIGURE_PROG:=	Configure
 CONFIGURE_ARGS:=	-n linux
-XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS} -I$(STAGING_DIR)/usr/include/tirpc'
+XAKE_FLAGS+=		CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS} -I$(STAGING_TARGET_DIR)/usr/include/tirpc'
 XAKE_FLAGS+=		CFGL='${TARGET_LDFLAGS} -L./lib -llsof -ltirpc'
 INSTALL_STYLE:=		manual
 

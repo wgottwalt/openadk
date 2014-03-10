@@ -39,6 +39,14 @@ config ADK_KERNEL_CPU_FREQ
 	boolean
 	default n
 
+config ADK_KERNEL_REGULATOR
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_ANATOP
+	boolean
+	default n
+
 config ADK_KERNEL_CPU_FREQ_GOV_PERFORMANCE
 	boolean
 	default n
@@ -59,15 +67,25 @@ config ADK_KERNEL_CPU_FREQ_GOV_CONSERVATIVE
 	boolean
 	default n
 
+config ADK_KERNEL_ARM_IMX6_CPUFREQ
+	prompt "CPU frequency support for cubox-i"
+	boolean
+	select ADK_KERNEL_CPU_FREQ
+	select ADK_KERNEL_REGULATOR
+	select ADK_KERNEL_REGULATOR_ANATOP
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+
 config ADK_KERNEL_ARM_BCM2835_CPUFREQ
-	prompt "CPU frequency support"
+	prompt "CPU frequency support for raspberry-pi"
 	boolean
 	select ADK_KERNEL_CPU_FREQ
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 choice
 prompt "Governor"
-depends on ADK_KERNEL_ARM_BCM2835_CPUFREQ
+depends on ADK_KERNEL_ARM_BCM2835_CPUFREQ || ADK_KERNEL_ARM_IMX6_CPUFREQ
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_ONDEMAND
 	boolean "ondemand"

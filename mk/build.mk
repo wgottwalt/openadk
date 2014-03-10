@@ -143,7 +143,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .PHONY: all world clean cleantarget cleandir cleantoolchain distclean image_clean
 
 world:
-	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(PACKAGE_DIR) $(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
 		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
@@ -165,23 +165,23 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
-${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
+${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
+	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
 
-${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
+${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
-	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
+	echo "dest root /" >${STAGING_TARGET_DIR}/etc/ipkg.conf
+	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%:
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
-toolchain/%: ${STAGING_DIR}
+toolchain/%: ${STAGING_TARGET_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
 
 tools/%:
@@ -247,7 +247,7 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for f in $$(ls ${STAGING_PKG_DIR}/ 2>/dev/null |grep -v [A-Z]|grep -v stamps 2>/dev/null); do  \
 		while read file ; do \
-			rm ${STAGING_DIR}/$$file 2>/dev/null;\
+			rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
 		done < ${STAGING_PKG_DIR}/$$f ; \
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
@@ -281,7 +281,7 @@ cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_DIR) $(STAGING_PKG_DIR)
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
 	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:

@@ -34,7 +34,7 @@ $(eval $(call PKG_template,HOSTAPD_UTILS,hostapd-utils,${PKG_VERSION}-${PKG_RELE
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/libnl3
+TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libnl3
 
 do-configure:
 	${CP} ./files/hostapd.config ${WRKBUILD}/.config

@@ -17,7 +17,7 @@ PKG_NOPARALLEL:=	1
 
 include $(TOPDIR)/mk/package.mk
 
-TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/libnl3 -fPIC -DHAVE_NL=0
+TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libnl3 -fPIC -DHAVE_NL=0
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		HAVE_NL=0
 

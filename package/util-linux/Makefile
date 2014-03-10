@@ -66,7 +66,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--enable-libblkid \
 			--enable-libmount \
 			--enable-mount \
-			--with-ncurses=$(STAGING_DIR)/usr/include \
+			--with-ncurses=$(STAGING_TARGET_DIR)/usr/include \
 			--libdir=/usr/lib
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -ltinfo

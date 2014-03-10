@@ -25,13 +25,13 @@ $(eval $(call PKG_template,OMXPLAYER,omxplayer,$(PKG_VERSION)-${PKG_RELEASE},${P
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_55 \
-			-I$(STAGING_DIR)/usr/include/freetype2 \
-			-I$(STAGING_DIR)/usr/include/dbus-1.0 \
-			-I$(STAGING_DIR)/opt/vc/include \
-			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
-			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
+			-I$(STAGING_TARGET_DIR)/usr/include/freetype2 \
+			-I$(STAGING_TARGET_DIR)/usr/include/dbus-1.0 \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib
 
 omxplayer-install:
 	$(INSTALL_DIR) $(IDIR_OMXPLAYER)/usr/bin
