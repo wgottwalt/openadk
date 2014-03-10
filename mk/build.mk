@@ -486,17 +486,18 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 bulktoolchain:
 	for libc in glibc uclibc musl;do \
 		while read arch; do \
-		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
+			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}_*; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
+		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
