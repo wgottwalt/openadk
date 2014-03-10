@@ -1,4 +1,4 @@
-OpenADK is Copyright © 2008-2010 Waldemar Brodkorb <wbx@openadk.org>
+OpenADK is Copyright © 2008-2014 Waldemar Brodkorb <wbx@openadk.org>
 All rights reserved.
 
 This licence file covers all of the OpenADK meta distribution
@@ -20,11 +20,12 @@ contains tools that are possibly covered by non-GPL-compatible,
 but OSD/DFSG-compliant, licences. 
 
 OpenADK is based upon several other projects which are listed
-below, in no particular order. If you think you should be li-
-sted here but I have forgotten you, please forgive and drop
+below, in no particular order. If you think you should be listed 
+here but I have forgotten you, please forgive and drop
 me an email.
 
 • The FreeWRT Project
 • The OpenWrt Project
-• uClibc Buildroot
+• The Buildroot Project
+• The Aboriginal Linux Project
 • The MirOS Project and contributors

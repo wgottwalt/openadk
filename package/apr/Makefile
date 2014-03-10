@@ -42,15 +42,15 @@ endif
 
 pre-build:
 	# we need to patch paths to get apr-util compiling
-	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_DIR}\2," \
+	$(SED) "s,\(^installbuilddir=\"\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
 		${WRKBUILD}/apr-1-config
-	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_DIR}\2," \
+	$(SED) "s,\(^datadir=\"\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
 		${WRKBUILD}/apr-1-config
 
 apr-install:
 	${INSTALL_DIR} ${IDIR_APR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libapr-1.so* ${IDIR_APR}/usr/lib/
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/build-1
-	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_DIR}/usr/share/build-1/
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/build-1
+	${CP} ${WRKINST}/usr/share/build-1/* ${STAGING_TARGET_DIR}/usr/share/build-1/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

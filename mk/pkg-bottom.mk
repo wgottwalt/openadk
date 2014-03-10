@@ -126,7 +126,7 @@ post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	@-rm -f ${_ALL_CONTROLS}
-	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_DIR}/scripts'
+	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
 ifneq ($(filter manual,${INSTALL_STYLE}),)
@@ -146,9 +146,9 @@ endif
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," $$a > \
-		${STAGING_DIR}/usr/bin/$$(basename $$a); \
-		chmod u+x ${STAGING_DIR}/usr/bin/$$(basename $$a); \
-		[[ "$$(basename $$a)" != "pkg-config" ]] && cp ${STAGING_DIR}/usr/bin/$$(basename $$a) ${STAGING_DIR}/scripts; \
+		${STAGING_TARGET_DIR}/usr/bin/$$(basename $$a); \
+		chmod u+x ${STAGING_TARGET_DIR}/usr/bin/$$(basename $$a); \
+		[[ "$$(basename $$a)" != "pkg-config" ]] && cp ${STAGING_TARGET_DIR}/usr/bin/$$(basename $$a) ${STAGING_TARGET_DIR}/scripts; \
 		echo "scripts/$$(basename $$a)" \
 		    >>'${STAGING_PKG_DIR}/${PKG_NAME}.scripts'; \
 	done
@@ -156,11 +156,11 @@ endif
 		[[ -e $$a ]] || continue; \
 		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," \
 		    -e "s,^prefix = .*,prefix = ${STAGING_TARGET_DIR}/usr," $$a > \
-		${STAGING_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
+		${STAGING_TARGET_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
 	done
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
-		cd '${STAGING_DIR}'; \
+		cd '${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \
@@ -191,14 +191,14 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '${STAGING_DIR}'
-	@cd '${STAGING_DIR}'; grep 'usr/lib/.*\.la$$' \
+	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '${STAGING_TARGET_DIR}'
+	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
 		chmod u+w $$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$fn; \
 	done
 ifeq (,$(filter noscripts,${PKG_OPTS}))
-	@cd '${STAGING_DIR}'; grep 'usr/s*bin/' \
+	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    while read fn; do \
 		b="$$(dd if="$$fn" bs=2 count=1 2>/dev/null)"; \
@@ -265,7 +265,7 @@ clean-targets: clean-dev-generic
 clean-dev-generic:
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
-		cd '${STAGING_DIR}'; \
+		cd '${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$fn"; \
 		done <'${STAGING_PKG_DIR}/${PKG_NAME}'; \

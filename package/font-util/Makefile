@@ -22,9 +22,9 @@ $(eval $(call PKG_template,FONT_UTIL,font-util,${PKG_VERSION}-${PKG_RELEASE},${P
 # calling pkg-config (which we don't provide) in order to
 # automatically find the mappings.
 post-build:
-	${INSTALL_DIR} ${STAGING_DIR}/usr/share/fonts/X11/util
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/fonts/X11/util
 	${CP} ${WRKBUILD}/map-* \
-		${STAGING_DIR}/usr/share/fonts/X11/util
+		${STAGING_TARGET_DIR}/usr/share/fonts/X11/util
 
 font-util-install:
 	${INSTALL_DIR} ${IDIR_FONT_UTIL}/usr/bin

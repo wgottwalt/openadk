@@ -33,7 +33,7 @@ $(eval $(call PKG_template,WPA_SUPPLICANT,wpa-supplicant,${PKG_VERSION}-${PKG_RE
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
-TARGET_CFLAGS+=		-I$(STAGING_DIR)/usr/include/libnl3
+TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libnl3
 
 MAKE_FLAGS+=		CPPFLAGS='${TARGET_CPPFLAGS}' \
 			LDFLAGS='${TARGET_LDFLAGS}' \

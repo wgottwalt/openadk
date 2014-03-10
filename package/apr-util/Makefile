@@ -20,10 +20,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,APR_UTIL,apr-util,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--without-berkeley-db \
-			--with-apr=${STAGING_DIR}/usr \
+			--with-apr=${STAGING_TARGET_DIR}/usr \
 			--with-expat=${STAGING_TARGET_DIR}/usr
-XAKE_FLAGS+=		apr_builddir=${STAGING_DIR}/usr/share/build-1 \
-			apr_builders=${STAGING_DIR}/usr/share/build-1
+XAKE_FLAGS+=		apr_builddir=${STAGING_TARGET_DIR}/usr/share/build-1 \
+			apr_builders=${STAGING_TARGET_DIR}/usr/share/build-1
 
 apr-util-install:
 	${INSTALL_DIR} ${IDIR_APR_UTIL}/usr/lib

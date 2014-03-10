@@ -28,6 +28,6 @@ tinyxml-install:
 	$(CP) $(WRKBUILD)/libtinyxml*.so* \
 		$(IDIR_TINYXML)/usr/lib
 	$(INSTALL_DATA) $(WRKBUILD)/tiny{str,xml}.h \
-		$(STAGING_DIR)/usr/include
+		$(STAGING_TARGET_DIR)/usr/include
 
 include ${TOPDIR}/mk/pkg-bottom.mk

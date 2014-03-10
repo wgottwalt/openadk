@@ -25,7 +25,7 @@ INSTALL_STYLE:=		manual
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_CFLAGS+=		-fPIC
 MAKE_ENV+=		LDSHARED="$(TARGET_CC) -shared"
-CURL_CONFIG:=		$(STAGING_DIR)/usr/bin/curl-config
+CURL_CONFIG:=		$(STAGING_TARGET_DIR)/usr/bin/curl-config
 
 include $(TOPDIR)/mk/python.mk
 
