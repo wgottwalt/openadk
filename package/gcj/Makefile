@@ -11,6 +11,8 @@ PKG_DESCR:=		GNU java compiler
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
+PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY
+
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}

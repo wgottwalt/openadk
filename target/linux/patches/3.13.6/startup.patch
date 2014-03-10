@@ -1,0 +1,12 @@
+diff -Nur linux-3.13.3.orig/init/main.c linux-3.13.3/init/main.c
+--- linux-3.13.3.orig/init/main.c	2014-02-13 23:00:14.000000000 +0100
++++ linux-3.13.3/init/main.c	2014-02-17 11:35:14.000000000 +0100
+@@ -916,6 +917,8 @@
+ 	if (sys_open((const char __user *) "/dev/console", O_RDWR, 0) < 0)
+ 		pr_err("Warning: unable to open an initial console.\n");
+ 
++	printk(KERN_WARNING "Starting Linux (built with OpenADK).\n");
++
+ 	(void) sys_dup(0);
+ 	(void) sys_dup(0);
+ 	/*

@@ -44,9 +44,9 @@ classpath-install:
 	$(CP) $(WRKINST)/usr/lib/classpath/lib*so.* \
 		$(IDIR_CLASSPATH)/usr/lib/classpath
 	# install to staging directory
-	$(INSTALL_DIR) $(STAGING_DIR)/usr/share/classpath
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/share/classpath
 	$(CP) $(WRKINST)/usr/share/classpath/glibj.zip \
-		$(STAGING_DIR)/usr/share/classpath
+		$(STAGING_TARGET_DIR)/usr/share/classpath
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

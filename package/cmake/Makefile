@@ -12,13 +12,12 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 
-PKG_CFLINE_CMAKE:=	depends on ADK_BROKEN
+PKG_CFLINE_CMAKE:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE}))
-$(eval $(call PKG_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
@@ -34,14 +33,6 @@ host-build:
 cmake-hostinstall:
 	$(INSTALL_BIN) $(WRKBUILD)/bin/cmake \
 		$(STAGING_HOST_DIR)/usr/bin
-
-do-configure:
-	(cd $(WRKBUILD); ./configure --prefix=/usr)
-
-cmake-install:
-	$(INSTALL_DIR) $(IDIR_CMAKE)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/cmake \
-		$(IDIR_CMAKE)/usr/bin
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
