@@ -1218,7 +1218,6 @@ $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2709-soc-i2s,\
 	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-pcm5102a \
-	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8804 \
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-bcm2708-i2s \
 ,55, kmod-snd-soc))
 
@@ -1226,7 +1225,7 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifibe
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-dac \
 ,56, kmod-snd-bcm2709-soc-i2s))
 
-$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
+$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DIGI,snd-bcm2709-soc-hifiberry-digi,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-digi \
 ,56, kmod-snd-bcm2709-soc-i2s))
 
