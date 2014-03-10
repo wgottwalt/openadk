@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--with-ssl=openssl
 endif
 ifeq (${ADK_PACKAGE_WGET_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-ssl=gnutls \
-			--with-libgnutls-prefix="$(STAGING_DIR)/usr"
+			--with-libgnutls-prefix="$(STAGING_TARGET_DIR)/usr"
 endif
 
 AUTOTOOL_STYLE:=	autoreconf

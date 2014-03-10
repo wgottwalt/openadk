@@ -19,7 +19,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBMICROHTTPD,libmicrohttpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--with-libgcrypt-prefix=$(STAGING_DIR)/usr
+CONFIGURE_ARGS+=	--with-libgcrypt-prefix=$(STAGING_TARGET_DIR)/usr
 
 libmicrohttpd-install:
 	$(INSTALL_DIR) $(IDIR_LIBMICROHTTPD)/usr/lib

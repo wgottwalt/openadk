@@ -221,10 +221,10 @@ ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 endif
 endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}/stamps' \
-	    '$${STAGING_DIR}/scripts'
+	    '$${STAGING_TARGET_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
@@ -244,8 +244,8 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
-	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_DIR}'
-	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_TARGET_DIR}'
+	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$$$fn; \
@@ -280,7 +280,7 @@ clean-targets: clean-dev-$(1)
 clean-dev-$(1):
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PKG_DIR}/$(1)'; \

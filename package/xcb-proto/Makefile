@@ -27,16 +27,16 @@ include $(TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
-CONFIGURE_ARGS+=	--datadir=${STAGING_DIR}/usr/share
+CONFIGURE_ARGS+=	--datadir=${STAGING_TARGET_DIR}/usr/share
 
 post-build:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/xcb
 	${CP} ${WRKBUILD}/src/*.xml ${STAGING_TARGET_DIR}/usr/share/xcb
 
 xcb-python-install:
-	$(INSTALL_DIR) ${STAGING_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
+	$(INSTALL_DIR) ${STAGING_TARGET_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
 	${CP} ${WRKINST}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen/*.py \
-		${STAGING_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
+		${STAGING_TARGET_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
 	${INSTALL_DIR} ${IDIR_XCB_PYTHON}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
 	${CP} ${WRKINST}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen/*.py \
 		${IDIR_XCB_PYTHON}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen
