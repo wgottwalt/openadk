@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-CFLAGS_FOR_BUILD+=-DKBUILD_NO_NLS
+CFLAGS_FOR_BUILD:=-DKBUILD_NO_NLS -O2 -w
 
 all: ncurses conf mconf
 
@@ -39,36 +39,25 @@ endif
 endif
 endif
 
-GTKLIBS = `pkg-config --libs gtk+-2.0 gmodule-2.0 libglade-2.0`
-GTKCFLAGS = `pkg-config --cflags gtk+-2.0 gmodule-2.0 libglade-2.0`
-
 CONF_SRC  =conf.c
 MCONF_SRC =mconf.c $(wildcard lxdialog/*.c)
-GCONF_SRC =gconf.c
 SHARED_SRC=zconf.tab.c
 SHARED_DEPS:=lkc.h lkc_proto.h lkc_defs.h expr.h zconf.tab.h
 CONF_OBJS =$(patsubst %.c,%.o, $(CONF_SRC))
 MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
-GCONF_OBJS=$(patsubst %.c,%.o, $(GCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@ $(LIBS)
-
-gconf: $(GCONF_OBJS) $(SHARED_OBJS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(NATIVE_LDFLAGS) $^ -o $@ $(GTKLIBS)
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $^ -o $@ $(LIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
 	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(HOSTNCURSES) -I. -c $< -o $@
-
-$(GCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(GTKCFLAGS) -DLKC_DIRECT_LINK -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
 	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c glob.c -o $@
@@ -94,15 +83,15 @@ lex.%.c: %.l
 	flex -P$(notdir $*) -o$@ $<
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 else
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
 
 lex.zconf.c: lex.zconf.c_shipped
 	@$(CP) lex.zconf.c_shipped lex.zconf.c
