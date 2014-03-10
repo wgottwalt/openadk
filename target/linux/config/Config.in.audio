@@ -7,9 +7,6 @@ config ADK_KERNEL_SND_ARM
 config ADK_KERNEL_SND_USB
 	boolean
 
-config ADK_KERNEL_SND_SOC
-	boolean
-
 config ADK_KERNEL_SND_PXA2XX_AC97
 	boolean
 
@@ -105,6 +102,10 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	help
 	 ALSA AMD CS5535 driver
 
+config ADK_KPACKAGE_KMOD_SND_SOC
+	tristate
+	default n
+
 config ADK_KERNEL_SND_PXA2XX_SOC
 	tristate
 	default n
@@ -113,10 +114,10 @@ config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
 	prompt "kmod-snd-pxa2xx-soc-spitz..... ALSA SOC Sharp Zaurus"
 	tristate
 	select ADK_KERNEL_SND_ARM
-	select ADK_KERNEL_SND_SOC
 	select ADK_KERNEL_SND_PXA2XX_AC97
-	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	select ADK_KPACKAGE_KMOD_SND_SOC
 	select ADK_KERNEL_SND_PXA2XX_SOC
 	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -129,6 +130,28 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	select ADK_KERNEL_SND_ARM
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	prompt "kmod-snd-bcm2708-soc-i2s........ ALSA SOC I2S Raspberry PI"
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KERNEL_SND_ARM
+	select ADK_KPACKAGE_KMOD_SND_SOC
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DAC
+	prompt "kmod-snd-bcm2708-hifiberry-dac.... ALSA for Raspberry PI with hifiberry DAC"
+	tristate
+	select ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DIGI
+	prompt "kmod-snd-bcm2708-hifiberry-digi... ALSA for Raspberry PI with hifiberry DIGI"
+	tristate
+	select ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 endmenu
