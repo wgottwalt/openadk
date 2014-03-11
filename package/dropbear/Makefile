@@ -14,7 +14,7 @@ PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY
+PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY && !ADK_PKG_TEST
 PKG_SUBPKGS:=		DROPBEAR DBCONVERT
 PKGSD_DBCONVERT:=	Utility for converting SSH private keys
 

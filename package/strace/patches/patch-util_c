@@ -1,0 +1,12 @@
+--- strace-4.8.orig/util.c	2013-05-06 20:23:01.000000000 +0200
++++ strace-4.8/util.c	2014-03-07 15:34:01.074036954 +0100
+@@ -55,7 +55,9 @@
+ # ifdef HAVE_STRUCT_PT_ALL_USER_REGS
+ #  define pt_all_user_regs XXX_pt_all_user_regs
+ # endif
++#if !defined(SH)
+ # include <linux/ptrace.h>
++#endif
+ # undef ia64_fpreg
+ # undef pt_all_user_regs
+ #endif
