@@ -42,28 +42,30 @@ else
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/.config
 	echo N | ${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} oldconfig $(MAKE_TRACE)
 endif
-	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} prepare scripts $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
-	-rm $(LINUX_DIR)/$(KERNEL_TARGET) 2>/dev/null
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	${KERNEL_MAKE_ENV} $(MAKE) V=1 ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) modules $(MAKE_TRACE)
+	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
+
+$(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
-		modules modules_install $(MAKE_TRACE)
+		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
 ifneq ($(strip $(TARGETS)),)
 	$(MAKE) $(TARGETS)
 endif
-	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
+
+$(INSTALL_TARGETS): $(LINUX_BUILD_DIR)/modules
 
 prepare:
-compile: $(LINUX_DIR)/$(KERNEL_FILE)
-install: compile
+compile: $(LINUX_BUILD_DIR)/modules
+install: compile $(INSTALL_TARGETS)
 ifneq ($(strip $(INSTALL_TARGETS)),)
 	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)

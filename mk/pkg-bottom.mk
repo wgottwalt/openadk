@@ -213,11 +213,6 @@ endif
 	touch $@
 
 ${_IPKGS_COOKIE}:
-	@clean=0; \
-	for f in ${ALL_IPKGS}; do \
-		[[ -e $$f ]] && clean=1; \
-	done; \
-	[[ $$clean = 0 ]] || ${MAKE} clean
 	exec ${MAKE} package
 
 package: ${ALL_IPKGS}
