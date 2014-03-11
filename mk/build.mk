@@ -39,6 +39,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_XORG=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
+			ADK_PKG_CONSOLE=n \
+			ADK_PKG_TEST=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -484,7 +486,12 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in glibc uclibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		while read arch; do \
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
@@ -504,7 +511,12 @@ bulktoolchain:
 	done
 
 test-framework:
-	for libc in uclibc glibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
