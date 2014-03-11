@@ -1417,8 +1417,8 @@ $(eval $(call KMOD_template,BT_RFCOMM,bt-rfcomm,\
 # Misc devices
 #
 
-$(eval $(call KMOD_template,SOFTDOG,softdog,\
-	$(MODULES_DIR)/kernel/drivers/char/watchdog/softdog \
+$(eval $(call KMOD_template,SOFT_WATCHDOG,soft-watchdog,\
+	$(MODULES_DIR)/kernel/drivers/watchdog/softdog \
 ,95))
 
 $(eval $(call KMOD_template,FW_LOADER,fw-loader,\
