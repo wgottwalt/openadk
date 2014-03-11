@@ -1,6 +1,7 @@
 config ADK_PKG_TEST
 	bool "Compile a ADK test framework system"
 	default n
+	select ADK_PACKAGE_ADK_TEST_TOOLS
 	select ADK_PACKAGE_STRACE
 	select ADK_PACKAGE_SOCAT
 	select ADK_PACKAGE_MAKE
