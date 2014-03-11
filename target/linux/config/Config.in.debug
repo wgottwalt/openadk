@@ -25,6 +25,35 @@ config ADK_QUIET_KERNEL
 	help
 	  Make bootup quiet without messages from the kernel.
 
+config ADK_KERNEL_EARLY_PRINTK
+	boolean
+	default n
+
+config ADK_KERNEL_PRINTK
+	prompt "Enable printk to save space and quieten bootup"
+	boolean
+	select ADK_KERNEL_EARLY_PRINTK
+	default y
+	depends on !ADK_PKG_TEST
+	help
+	  Disable printk to save space and quieten bootup.
+
+config ADK_KERNEL_PRINTK_TIME
+	prompt "Enable timing information for printk"
+	boolean
+	depends on ADK_KERNEL_PRINTK
+	default n
+	help
+	  Enable timing information for printk, to analyze kernel
+	  bootup performance.
+
+config ADK_KERNEL_BUG
+	prompt "Enable BUGS() in the kernel"
+	boolean
+	default n
+	help
+	  Enable if you need BUGS() in the kernel.
+
 config ADK_KERNEL_NETCONSOLE
 	prompt "Netconsole"
 	boolean

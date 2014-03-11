@@ -23,8 +23,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,COROSYNC,corosync,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/nss \
-			-I$(STAGING_DIR)/usr/include/nspr
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/nss \
+			-I$(STAGING_TARGET_DIR)/usr/include/nspr
 TARGET_LDFLAGS+=	-lssl3 -lsmime3 -lnss3 -lnssutil3
 CONFIGURE_ENV+=		ac_cv_func_fnmatch_works=yes
 

@@ -22,3 +22,6 @@ config ADK_PKG_XORG
 	select ADK_PACKAGE_EVILWM
 	select ADK_PACKAGE_DILLO
 	select ADK_PACKAGE_XRDB
+	help
+	  X desktop environment with EvilWM.
+

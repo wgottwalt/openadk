@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SNORT,snort,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/tirpc
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 CONFIGURE_ARGS+=	--disable-static-daq \
 			--with-libpcap-includes="${STAGING_TARGET_DIR}/usr/include" \

@@ -1,4 +1,9 @@
 root:x:0:
-video:x:1:
-audio:x:2:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:
+tty:x:5:
+video:x:6:
+audio:x:7:
 nogroup:x:65534:

@@ -39,6 +39,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_XORG=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
+			ADK_PKG_CONSOLE=n \
+			ADK_PKG_TEST=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -165,23 +167,23 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
-${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
+${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
+	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
 
-${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
+${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
-	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
+	echo "dest root /" >${STAGING_TARGET_DIR}/etc/ipkg.conf
+	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%:
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
-toolchain/%: ${STAGING_DIR}
+toolchain/%: ${STAGING_TARGET_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
 
 tools/%:
@@ -247,7 +249,7 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for f in $$(ls ${STAGING_PKG_DIR}/ 2>/dev/null |grep -v [A-Z]|grep -v stamps 2>/dev/null); do  \
 		while read file ; do \
-			rm ${STAGING_DIR}/$$file 2>/dev/null;\
+			rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
 		done < ${STAGING_PKG_DIR}/$$f ; \
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
@@ -281,7 +283,7 @@ cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_DIR) $(STAGING_PKG_DIR)
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
 	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
@@ -484,26 +486,37 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in glibc uclibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		while read arch; do \
-		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
+			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}_*; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
+		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 test-framework:
-	for libc in uclibc glibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \

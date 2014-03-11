@@ -47,7 +47,7 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)

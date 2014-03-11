@@ -1,0 +1,13 @@
+diff -Nur linux-3.11.5.orig/scripts/headers_check.pl linux-3.11.5/scripts/headers_check.pl
+--- linux-3.11.5.orig/scripts/headers_check.pl	2013-10-14 03:14:45.000000000 +0200
++++ linux-3.11.5/scripts/headers_check.pl	2013-10-16 17:08:59.000000000 +0200
+@@ -18,7 +18,7 @@
+ #
+ # 3) Check for leaked CONFIG_ symbols
+ 
+-use strict;
++#use strict;
+ use File::Basename;
+ 
+ my ($dir, $arch, @files) = @ARGV;
+
