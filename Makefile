@@ -90,6 +90,7 @@ oldconfig: .prereq_done
 
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download
+	@${GMAKE_INV} dep
 	@${GMAKE_INV} package/download
 
 cleankernel kernelclean: .prereq_done

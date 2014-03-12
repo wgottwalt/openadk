@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		gettext-tiny
-PKG_VERSION:=		0.0.3
+PKG_VERSION:=		0.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3af6fd8a9042603b61f634b1c6f49e7e
+PKG_MD5SUM:=		09f6a74945df5961080234f7851f352c
 PKG_DESCR:=		Gettext stub and replacement
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		gettext-tiny-host

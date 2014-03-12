@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.21.1
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		795394f83903b5eec6567d51eebb417e
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base
@@ -36,12 +36,8 @@ INSTALL_STYLE:=		manual
 
 BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" ARCH="${ARCH}" GCC_HONOUR_COPTS=s \
 			HOSTCC="${CC_FOR_BUILD}" HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
+			CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-static-libgcc' \
 			-C ${WRKBUILD} 
-ifneq (${ADK_NATIVE},y)
-BB_MAKE_FLAGS+=		CROSS_COMPILE="$(TARGET_CROSS)" EXTRA_LDFLAGS='-static-libgcc'
-else
-BB_MAKE_FLAGS+=		EXTRA_LDFLAGS="-static-libgcc"
-endif
 
 do-configure:
 	# get all symbols from top level config

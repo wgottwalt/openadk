@@ -1,0 +1,20 @@
+#!/bin/sh
+#INIT 60
+[[ $1 = autostart ]] || exit 0
+
+# mount net filesystems (nfs/cifs)
+grep nfs /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab| grep nfs >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t nfs
+	fi
+fi
+grep cifs /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab| grep cifs >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t cifs
+	fi
+fi
+exit 0

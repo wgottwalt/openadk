@@ -1,6 +1,24 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
 --- id3lib-3.8.3.orig/configure	2003-03-02 01:23:00.000000000 +0100
-+++ id3lib-3.8.3/configure	2008-12-15 13:14:18.000000000 +0100
++++ id3lib-3.8.3/configure	2014-03-08 12:16:00.000000000 +0100
+@@ -3353,7 +3353,7 @@ irix5* | irix6*)
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-*)
+   case $host_cpu in
+   alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* )
+     lt_cv_deplibs_check_method=pass_all ;;
+@@ -6142,7 +6142,7 @@ linux-gnuoldld* | linux-gnuaout* | linux
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-*)
+   version_type=linux
+   need_lib_prefix=no
+   need_version=no
 @@ -10296,7 +10296,7 @@ done
  
  for ac_header in \

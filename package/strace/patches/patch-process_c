@@ -1,5 +1,5 @@
 --- strace-4.8.orig/process.c	2013-05-18 00:22:19.000000000 +0200
-+++ strace-4.8/process.c	2014-02-25 20:02:55.000000000 +0100
++++ strace-4.8/process.c	2014-03-07 11:15:51.318966166 +0100
 @@ -55,7 +55,7 @@
  # endif
  #endif
@@ -9,7 +9,7 @@
  # undef PTRACE_SYSCALL
  # ifdef HAVE_STRUCT_IA64_FPREG
  #  define ia64_fpreg XXX_ia64_fpreg
-@@ -104,6 +104,10 @@
+@@ -104,6 +104,14 @@
  # include <asm/rse.h>
  #endif
  
@@ -17,10 +17,23 @@
 +#include <asm/ptrace.h>
 +#endif
 +
++#ifdef __microblaze__
++#include <asm/ptrace.h>
++#endif
++
  #ifdef HAVE_PRCTL
  # include <sys/prctl.h>
  
-@@ -2857,7 +2861,7 @@ sys_sched_setscheduler(struct tcb *tcp)
+@@ -2472,7 +2480,7 @@ const struct xlat struct_user_offsets[]
+ #elif defined(TILE)
+ 	/* nothing */
+ #elif defined(MICROBLAZE)
+-	{ sizeof(struct user),	"sizeof(struct user)"			},
++	/* nothing */
+ #elif defined(AVR32)
+ 	{ uoff(u_tsize),	"offsetof(struct user, u_tsize)"	},
+ 	{ uoff(u_dsize),	"offsetof(struct user, u_dsize)"	},
+@@ -2857,7 +2865,7 @@ sys_sched_setscheduler(struct tcb *tcp)
  		if (umove(tcp, tcp->u_arg[2], &p) < 0)
  			tprintf(", %#lx", tcp->u_arg[2]);
  		else
@@ -29,7 +42,7 @@
  	}
  	return 0;
  }
-@@ -2872,7 +2876,7 @@ sys_sched_getparam(struct tcb *tcp)
+@@ -2872,7 +2880,7 @@ sys_sched_getparam(struct tcb *tcp)
  		if (umove(tcp, tcp->u_arg[1], &p) < 0)
  			tprintf("%#lx", tcp->u_arg[1]);
  		else
@@ -38,7 +51,7 @@
  	}
  	return 0;
  }
-@@ -2885,7 +2889,7 @@ sys_sched_setparam(struct tcb *tcp)
+@@ -2885,7 +2893,7 @@ sys_sched_setparam(struct tcb *tcp)
  		if (umove(tcp, tcp->u_arg[1], &p) < 0)
  			tprintf("%d, %#lx", (int) tcp->u_arg[0], tcp->u_arg[1]);
  		else

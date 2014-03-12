@@ -1,10 +1,12 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64
-	bool "Toolchain only (mips64 big endian)"
+	bool "Toolchain only (mips64 big endian o32 ABI)"
 	select ADK_mips
 	select ADK_big
-	select ADK_CPU_MIPS64
+	select ADK_o32
 	select ADK_toolchain_mips64
+	select ADK_CPU_MIPS64
+	select ADK_LINUX_64
 	select ADK_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TGZ
 	help
-	  MIPS64 big endian toolchain.
+	  MIPS64 big endian o32 ABI toolchain.

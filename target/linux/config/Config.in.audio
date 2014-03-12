@@ -4,10 +4,10 @@ depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 config ADK_KERNEL_SND_ARM
 	boolean
 
-config ADK_KERNEL_SND_USB
+config ADK_KERNEL_SND_PCI
 	boolean
 
-config ADK_KERNEL_SND_SOC
+config ADK_KERNEL_SND_USB
 	boolean
 
 config ADK_KERNEL_SND_PXA2XX_AC97
@@ -39,7 +39,6 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
-	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_SOUND
 
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-snd...................... ALSA sound support"
@@ -60,7 +59,6 @@ config ADK_KPACKAGE_KMOD_SND_OSSEMUL
 	select ADK_KERNEL_SND_PCM_OSS
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
 	help
 	 ALSA OSS Emulation
@@ -71,7 +69,6 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
 	depends on ADK_TARGET_WITH_PCI
 	help
@@ -98,6 +95,7 @@ config ADK_KPACKAGE_KMOD_SND_ENS1370
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-snd-cs5535audio.......... ALSA AMD CS5535 driver"
 	tristate
+	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -107,6 +105,10 @@ config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	help
 	 ALSA AMD CS5535 driver
 
+config ADK_KPACKAGE_KMOD_SND_SOC
+	tristate
+	default n
+
 config ADK_KERNEL_SND_PXA2XX_SOC
 	tristate
 	default n
@@ -115,10 +117,10 @@ config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
 	prompt "kmod-snd-pxa2xx-soc-spitz..... ALSA SOC Sharp Zaurus"
 	tristate
 	select ADK_KERNEL_SND_ARM
-	select ADK_KERNEL_SND_SOC
 	select ADK_KERNEL_SND_PXA2XX_AC97
-	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
+	select ADK_KPACKAGE_KMOD_SND_SOC
 	select ADK_KERNEL_SND_PXA2XX_SOC
 	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -131,6 +133,28 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	select ADK_KERNEL_SND_ARM
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	prompt "kmod-snd-bcm2708-soc-i2s........ ALSA SOC I2S Raspberry PI"
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KERNEL_SND_ARM
+	select ADK_KPACKAGE_KMOD_SND_SOC
+	boolean
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DAC
+	prompt "kmod-snd-bcm2708-hifiberry-dac.... ALSA for Raspberry PI with hifiberry DAC"
+	tristate
+	select ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DIGI
+	prompt "kmod-snd-bcm2708-hifiberry-digi... ALSA for Raspberry PI with hifiberry DIGI"
+	tristate
+	select ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 endmenu

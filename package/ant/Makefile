@@ -11,10 +11,10 @@ PKG_DESCR:=		ant utility
 PKG_SECTION:=		lang
 PKG_SITES:=		http://archive.apache.org/dist/ant/source/
 
+PKG_CFLINE_ANT:=	depends on ADK_HOST_ONLY
+
 DISTFILES:=             apache-$(PKG_NAME)-$(PKG_VERSION)-src.tar.bz2
 WRKDIST=                $(WRKDIR)/apache-$(PKG_NAME)-$(PKG_VERSION)
-
-PKG_ARCH_DEPENDS:=	native
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

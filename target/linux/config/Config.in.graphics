@@ -2,16 +2,12 @@ config ADK_KERNEL_VT
 	boolean
 	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
 	boolean
 	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default n
 
 config ADK_KERNEL_VGA_CONSOLE
@@ -143,9 +139,8 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	select ADK_KERNEL_DRM_I915_KMS
 	select ADK_KERNEL_DRM_I915
 	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_NATIVE_SYSTEM_IBM_X40
 	default n
-	depends on ADK_TARGET_SYSTEM_IBM_X40 || ADK_NATIVE_SYSTEM_IBM_X40 || ADK_TARGET_SYSTEM_INTEL_ATOM || ADK_NATIVE_SYSTEM_INTEL_ATOM
+	depends on ADK_TARGET_SYSTEM_IBM_X40
 	help
           AGP/DRM/KMS support for Intel chipset i915.
 	

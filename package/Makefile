@@ -9,26 +9,19 @@ ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
 gcc-compile: glibc-compile
 endif
+
 ifeq (${ADK_TARGET_LIB_MUSL},y)
 package-$(ADK_PACKAGE_MUSL) += musl
 gcc-compile: musl-compile
 endif
-ifeq (${ADK_NATIVE},y)
-package-$(ADK_PACKAGE_LIBC) += libc
-endif
-ifneq (${ADK_NATIVE},y)
-package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
-endif
 
-ifneq (${ADK_TARGET_LIB_GLIBC},y)
-ifneq (${ADK_TARGET_LIB_MUSL},y)
-ifneq (${ADK_NATIVE},y)
+ifeq (${ADK_TARGET_LIB_UCLIBC},y)
 package-$(ADK_PACKAGE_UCLIBC) += uclibc
+package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 gcc-compile: uclibc-compile
 endif
-package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
-endif
-endif
+
+package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 
 include $(TOPDIR)/package/Depends.mk
 

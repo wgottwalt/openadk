@@ -10,9 +10,9 @@ PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
 PKG_DESCR:=		ecj java compiler
 PKG_SECTION:=		lang
 
-NO_DISTFILES:=		1
+PKG_CFLINE_ECJ:=	depends on ADK_HOST_ONLY
 
-PKG_ARCH_DEPENDS:=	native
+NO_DISTFILES:=		1
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
@@ -26,7 +26,7 @@ ecj-hostinstall:
 	$(STAGING_HOST_DIR)/usr/bin/gcj -lgcj -O2 -findirect-dispatch \
 		-o ${STAGING_HOST_DIR}/usr/bin/ecj.native \
 		--main=org.eclipse.jdt.internal.compiler.batch.Main \
-		$(DISTDIR)/ecj.jar
+		$(DL_DIR)/ecj.jar
 	echo "env LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 ${STAGING_HOST_DIR}/usr/bin/ecj.native \$$@" > \
 		${STAGING_HOST_DIR}/usr/bin/ecj
 	chmod u+x ${STAGING_HOST_DIR}/usr/bin/ecj

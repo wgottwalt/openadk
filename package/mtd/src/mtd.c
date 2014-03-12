@@ -37,7 +37,6 @@
 #include <stdint.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <error.h>
 #include <err.h>
 #include <time.h>
 #include <string.h>

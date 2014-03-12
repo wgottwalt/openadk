@@ -5,8 +5,6 @@ config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_lemote_yeelong
 	select ADK_LINUX_64
 	select ADK_CPU_LOONGSON2F
-	select ADK_KERNEL_MACH_LOONGSON
-	select ADK_KERNEL_LEMOTE_MACH2F
 	select ADK_TARGET_WITH_USB_BOOT
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_VGA
@@ -15,6 +13,7 @@ config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_TARGET_WITH_HDD
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_KERNEL_VMLINUZ
+	select ADK_USE_KERNEL_MINICONFIG
 	help
          System profile for Lemote Yeelong laptop.
 

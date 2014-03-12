@@ -25,7 +25,7 @@ ALL_TARGET:=
 INSTALL_STYLE:=		manual
 
 do-configure:
-	(cd $(WRKBUILD) && make -f Makefile.init makefiles "CCARGS=-DNO_PCRE -DNO_NIS -DNO_DB -DHAS_CDB -I$(STAGING_DIR)/usr/include" "AUXLIBS=$(STAGING_DIR)/usr/lib/libcdb.a")
+	(cd $(WRKBUILD) && make -f Makefile.init makefiles "CCARGS=-DNO_PCRE -DNO_NIS -DNO_DB -DHAS_CDB -I$(STAGING_TARGET_DIR)/usr/include" "AUXLIBS=$(STAGING_TARGET_DIR)/usr/lib/libcdb.a")
 
 postfix-install:
 	$(INSTALL_DIR) $(IDIR_POSTFIX)/etc/postfix

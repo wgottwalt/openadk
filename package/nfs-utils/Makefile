@@ -40,13 +40,8 @@ $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
-ifeq ($(ADK_NATIVE),)
 KRB5INC:=		${STAGING_TARGET_DIR}/usr
 TIRPCINC:=		${STAGING_TARGET_DIR}/usr/include/tirpc
-else
-KRB5INC:=		/usr
-TIRPCINC:=		/usr/include/tirpc
-endif
 
 ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \

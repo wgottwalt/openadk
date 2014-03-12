@@ -36,13 +36,13 @@ XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
 post-extract:
-	-mv $(STAGING_DIR)/usr/lib/libiberty.a $(STAGING_DIR)/usr/lib/libiberty.a.bak
+	-mv $(STAGING_TARGET_DIR)/usr/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a.bak
 
 gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
 	# shipped libbfd conflicts with system wide one
 	rm -f ${WRKINST}/usr/lib/libbfd*
-	-mv $(STAGING_DIR)/usr/lib/libiberty.a.bak $(STAGING_DIR)/usr/lib/libiberty.a
+	-mv $(STAGING_TARGET_DIR)/usr/lib/libiberty.a.bak $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 
 include ${TOPDIR}/mk/pkg-bottom.mk

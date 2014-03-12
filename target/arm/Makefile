@@ -24,7 +24,7 @@ NET:=-net user -net nic,model=smc91c111
 endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 MACH:=vexpress-a9
-NET:=-cpu cortex-a9 -device lan9118,netdev=adk0 -netdev user,id=adk0
+NET:=-cpu cortex-a9 -net user -net nic,model=lan9118
 endif
 
 kernel-install:

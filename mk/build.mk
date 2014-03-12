@@ -41,6 +41,8 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_TEST=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
+			ADK_PKG_CONSOLE=n \
+			ADK_PKG_TEST=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -145,15 +147,12 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .PHONY: all world clean cleantarget cleandir cleantoolchain distclean image_clean
 
 world:
-	mkdir -p $(DISTDIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(PACKAGE_DIR) $(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
 		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
-ifeq ($(ADK_NATIVE),y)
-	$(MAKE) -f mk/build.mk toolchain/kernel-headers-prepare tools/install target/config-prepare target/compile package/compile root_clean package/install package_index target/install
-else
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile
@@ -163,7 +162,6 @@ endif
 else
 	$(MAKE) -f mk/build.mk tools/install toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
-endif
 
 package_index:
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
@@ -171,23 +169,23 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
-${STAGING_DIR} ${STAGING_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
+${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
+	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
 
-${STAGING_DIR}/etc/ipkg.conf: ${STAGING_DIR}/etc
+${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-	echo "dest root /" >${STAGING_DIR}/etc/ipkg.conf
-	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_DIR)/etc/ipkg.conf
+	echo "dest root /" >${STAGING_TARGET_DIR}/etc/ipkg.conf
+	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${STAGING_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%:
 	$(MAKE) -C target $(patsubst target/%,%,$@)
 
-toolchain/%: ${STAGING_DIR}
+toolchain/%: ${STAGING_TARGET_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
 
 tools/%:
@@ -253,7 +251,7 @@ clean:
 	$(MAKE) -C $(CONFIG) clean
 	for f in $$(ls ${STAGING_PKG_DIR}/ 2>/dev/null |grep -v [A-Z]|grep -v stamps 2>/dev/null); do  \
 		while read file ; do \
-			rm ${STAGING_DIR}/$$file 2>/dev/null;\
+			rm ${STAGING_TARGET_DIR}/$$file 2>/dev/null;\
 		done < ${STAGING_PKG_DIR}/$$f ; \
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
@@ -276,18 +274,17 @@ cleandir:
 
 cleantoolchain:
 	@$(TRACE) cleantoolchain
-	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
-	rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
+	@rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
-	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
+	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
 
 cleantarget:
 	@$(TRACE) cleantarget
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_DIR) $(STAGING_PKG_DIR)
+	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
 	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
@@ -316,16 +313,13 @@ all: menuconfig
 # ---------------------------------------------------------------------------
 
 # force entering the subdir, as dependency checking is done there
-.PHONY: $(CONFIG)/conf $(CONFIG)/mconf $(CONFIG)/gconf
+.PHONY: $(CONFIG)/conf $(CONFIG)/mconf
 
 $(CONFIG)/conf:
 	@$(MAKE) -C $(CONFIG) conf
 
 $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
-
-$(CONFIG)/gconf:
-	@$(MAKE) -C $(CONFIG) gconf
 
 defconfig: .menu $(CONFIG)/conf
 	@${BASH} ${TOPDIR}/scripts/update-sys
@@ -350,26 +344,6 @@ ifeq (${OStype},Darwin)
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
-endif
-ifeq ($(ADKtype),ibm-x40)
-	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
-	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
-ifeq ($(ADKtype),lemote-yeelong)
-	@echo ADK_LINUX_NATIVE=y >> $(TOPDIR)/.defconfig
-	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/.defconfig
-	@sed -e "s#config ADK_TARGET#config ADK_NATIVE#" target/mips/sys-available/$(ADKtype) > \
-		target/mips/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/mips/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
@@ -440,24 +414,6 @@ ifeq (${OStype},Darwin)
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
-endif
-ifeq ($(ADKtype),ibm-x40)
-	@echo ADK_TARGET_SYSTEM_IBM_X40=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
-endif
-ifeq ($(ADKtype),lemote-yeelong)
-	@echo ADK_TARGET_SYSTEM_LEMOTE_YEELONG=y >> $(TOPDIR)/all.config
-	@sed -e "s#TARGET#NATIVE#" target/$(ARCH_FOR_BUILD)/sys-available/$(ADKtype) > \
-		target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)
-	@echo "choice" > $(TOPDIR)/target/config/Config.in.native
-	@echo "prompt \"Target system (autodetected)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "source \"target/$(ARCH_FOR_BUILD)/sys-enabled/.$(ADKtype)\"" >> $(TOPDIR)/target/config/Config.in.native
-	@echo "endchoice" >> $(TOPDIR)/target/config/Config.in.native
 endif
 	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
 	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
@@ -531,30 +487,41 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	for libc in glibc uclibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		while read arch; do \
-		    mkdir -p $(TOPDIR)/firmware/toolchain_$${arch}_$$libc; \
+			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
-				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}_*; \
+				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}/build.log; \
+		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 test-framework:
-	for libc in uclibc glibc musl;do \
+	if [ -z "$(LIBC)" ];then \
+		libc="glibc uclibc musl"; \
+	else \
+		libc="$(LIBC)"; \
+	fi; \
+	for libc in $$libc;do \
 		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
-			for arch in arm mips mipsel mips64 mips64el ppc ppc64 sparc sparc64 i686 x86_64;do \
-				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#"); \
+			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#"); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
@@ -655,6 +622,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TO
 	@:>.menu
 
 $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
 	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker

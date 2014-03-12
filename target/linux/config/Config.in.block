@@ -177,7 +177,6 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_WITH_SATA
-	default y if ADK_TARGET_SYSTEM_SHUTTLE_SA76
 	default y if ADK_TARGET_SYSTEM_VBOX_I686
 	default n	
 
@@ -191,8 +190,6 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
 	depends on ADK_TARGET_WITH_SATA
-	default y if ADK_TARGET_SYSTEM_INTEL_ATOM
-	default y if ADK_NATIVE_SYSTEM_INTEL_ATOM
 	default n
 	help
 	  Enables support for AHCI Serial ATA.
