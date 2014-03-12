@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.5.6
+PKG_VERSION:=		5.5.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		82968eac50c523ecf7a05855cb5c3d0a
+PKG_MD5SUM:=		e760656f7cf2f05158f73da75e8b720b
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread librt libgcc
@@ -130,7 +130,6 @@ PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
 			--with-png-dir="$(STAGING_TARGET_DIR)/usr" \
 			--with-jpeg-dir="$(STAGING_TARGET_DIR)/usr" \
 			--without-freetype-dir \
-			--without-xpm-dir \
 			--without-ttf \
 			--without-t1lib	\
 			--enable-gd-native-ttf \

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.18.8
+PKG_VERSION:=		0.18.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7bbe1caf5abe404dc985ca4f44984b1f
+PKG_MD5SUM:=		0e5156a831d4302d2032998bcfd5c36f
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx libgcc libiconv-tiny libmpdclient
@@ -120,7 +120,7 @@ PKG_FDEPENDS+=		pulseaudio
 endif
 
 PKGFD_WITH_AVAHI:=	enable AVAHI/zeroconf support
-PKGFS_WITH_AVAHI:=	libavahi
+PKGFS_WITH_AVAHI:=	libavahi libdbus
 PKGFB_WITH_AVAHI:=	avahi
 ifeq ($(ADK_PACKAGE_MPD_WITH_AVAHI),y)
 PKG_FDEPENDS+=		libavahi
