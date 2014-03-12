@@ -77,7 +77,7 @@ prompt "Initial login shell for the root user"
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
-	select ADK_PACKAGE_MKSH
+	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	bool "mksh (MirBSD Korn Shell)"
 	help
 	  Use mksh (a Korn Shell variant) as standard login shell
@@ -96,13 +96,6 @@ config ADK_ROOTSH_BASH
 	bool "bash (GNU Bourne-Again Shell)"
 	help
 	  Use GNU bash as standard login shell for the superuser.
-
-config ADK_ROOTSH_MKSH
-	select ADK_PACKAGE_MKSH
-	bool "mksh (MirBSD Korn Shell)"
-	help
-	  Use mksh (a Korn Shell variant) as standard login shell
-	  for the superuser.
 
 config ADK_ROOTSH_TCSH
 	select ADK_PACKAGE_TCSH
@@ -124,7 +117,7 @@ prompt "System /bin/sh (POSIX script shell)"
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
-	select ADK_PACKAGE_MKSH
+	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	bool "mksh (MirBSD Korn Shell)"
 	help
 	  Use mksh (a Korn Shell variant) as system shell, which is
