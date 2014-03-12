@@ -137,7 +137,7 @@ imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the netbook and type del to enter PMON:"
 	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
-	@echo "PMON> g root=/dev/sdc1"
+	@echo "PMON> g"
 endif
 endif
 ifeq ($(ADK_TARGET_FS),cf)
