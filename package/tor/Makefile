@@ -4,20 +4,22 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
-PKG_VERSION:=		0.2.3.25
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		a1c364189a9a66ed9daa8e6436489daf
-PKG_DESCR:=		An anonymous Internet communication system
+PKG_VERSION:=		0.2.4.21
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		bde981d10e8faf1e171ef1ebbb7b398a
+PKG_DESCR:=		anonymous internet communication system
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libevent libopenssl zlib libpthread
 PKG_BUILDDEP:=		libevent openssl zlib
-PKG_URL:=		http://tor.eff.org/
-PKG_SITES:=		http://tor.eff.org/dist/
+PKG_URL:=		https://www.torproject.org/
+PKG_SITES:=		https://www.torproject.org/dist/
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TOR,tor,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+# -DNDEBUG not supported
+TARGET_CPPFLAGS:=
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			ac_cv_libevent_linker_option="" \
 			ac_cv_libevent_dir="${STAGING_TARGET_DIR}/usr" \
