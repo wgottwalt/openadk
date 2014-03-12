@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.6.21
+PKG_VERSION:=		3.6.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		faa67c625508dc495c082357913ccea6
+PKG_MD5SUM:=		2f7aee1dc5d31aefcb364600915b31dc
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt

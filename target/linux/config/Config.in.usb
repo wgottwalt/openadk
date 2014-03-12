@@ -5,20 +5,23 @@ config ADK_KERNEL_USB_SUPPORT
 	boolean
 
 config ADK_KERNEL_USB
+	boolean
 	select ADK_KERNEL_USB_SUPPORT
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
-	boolean
+	default n
 
 config ADK_KERNEL_USB_OHCI_HCD
+	boolean
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
-	boolean
+	default n
 
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
+	boolean
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4
 	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
-	boolean
+	default n
 
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
@@ -47,8 +50,6 @@ config ADK_KPACKAGE_KMOD_USB
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_SUPPORT
 	depends on !ADK_KERNEL_USB
-	default y if ADK_TARGET_SYSTEM_QEMU_I686
-	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
@@ -111,15 +112,12 @@ config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
 	tristate
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_KPACKAGE_KMOD_USB
-	#depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default n
 	help
 	  The Open Host Controller Interface (OHCI) is a standard for accessing
@@ -176,8 +174,6 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on ADK_KPACKAGE_KMOD_USB
-	default y if ADK_TARGET_SYSTEM_QEMU_I686
-	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
@@ -212,34 +208,34 @@ config ADK_PACKAGE_KMOD_USB_CONTROLLER
 config ADK_KPACKAGE_KMOD_USB_ACM
 	prompt "kmod-usb-acm...................... Support for USB modems/isdn controllers"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_PEGASUS
 	prompt "kmod-usb-pegasus.................. Support for USB Pegasus"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_HSO
 	prompt "kmod-usb-hso...................... Support for USB HSO devices"
 	tristate
 	select ADK_KPACKAGE_KMOD_RFKILL
 	select ADK_KPACKAGE_KMOD_USB_STORAGE
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_PRINTER
 	prompt "kmod-usb-printer.................. Support for USB printers"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL
 	prompt "kmod-usb-serial................... Support for USB-to-serial converters"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 	help
 	  Say Y here if you have a USB device that provides normal serial
 	  ports, or acts like a serial device, and you want to connect it to
@@ -253,8 +249,8 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL
 config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
 	prompt   "kmod-usb-serial-belkin.......... Support for Belkin USB-to-serial converters"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	default n
 	help
 	  Say Y here if you want to use a Belkin USB Serial single port
 	  adaptor (F5U103 is one of the model numbers) or the Peracom single
@@ -263,8 +259,8 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
 config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
 	prompt   "kmod-usb-serial-ftdi............ Support for FTDI USB-to-serial converter"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	default n
 	help
 	  Say Y here if you want to use a FTDI SIO single port USB to serial
 	  converter device. The implementation I have is called the USC-1000.
@@ -276,8 +272,8 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
 config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
 	prompt   "kmod-usb-serial-mct-u232........ Support for Magic Control Technology USB-to-Serial converters"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	default n
 	help
 	  Say Y here if you want to use a USB Serial single port adapter from
 	  Magic Control Technology Corp. (U232 is one of the model numbers).
@@ -288,8 +284,8 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
 config ADK_KPACKAGE_KMOD_USB_SERIAL_PL2303
 	prompt   "kmod-usb-serial-pl2303.......... Support for Prolific PL2303 USB-to-Serial converters"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	default n
 	help
 	  Say Y here if you want to use the PL2303 USB Serial single port
 	  adapter from Prolific.
@@ -297,8 +293,8 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_PL2303
 config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
 	prompt   "kmod-usb-serial-visor........... Support for Handspring Visor / Palm m50x / Sony Clie Driver"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	default n
 	help
 	  Say Y here if you want to connect to your HandSpring Visor, Palm
 	  m500 or m505 through its USB docking station. See
@@ -308,43 +304,43 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
 config ADK_KPACKAGE_KMOD_USB_STORAGE
 	prompt "kmod-usb-storage.................. Support for USB storage devices"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on !ADK_KERNEL_USB_STORAGE
 	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
 	select ADK_KPACKAGE_KMOD_BLK_DEV_SD if !ADK_KERNEL_SCSI
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_ATM
         prompt "kmod-usb-atm...................... Support for USB ATM devices"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_ATM_SPEEDTOUCH
         prompt   "kmod-usb-atm-speedtouch......... Support for USB Speedtouch ADSL modem"
 	tristate
-	default n
 	depends on ADK_KPACKAGE_KMOD_USB_ATM
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_USBNET
         prompt "kmod-usb-usbnet................... Multi-purpose USB Networking Framework"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
 	prompt "kmod-snd-usb-audio................ USB sound adapter"
 	tristate
-	default n
 	select ADK_KERNEL_SND_USB
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 
 config ADK_KPACKAGE_KMOD_USB_SISUSBVGA
         prompt "kmod-usb-svga..................... USB 2.0 SVGA dongle support (Net2280/SiS315)"
 	tristate
-	default n
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
 	
 endmenu
