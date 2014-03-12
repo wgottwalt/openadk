@@ -272,12 +272,11 @@ cleandir:
 
 cleantoolchain:
 	@$(TRACE) cleantoolchain
-	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
-	rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
+	@rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
-	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
+	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
 
 cleantarget:
 	@$(TRACE) cleantarget
@@ -500,7 +499,7 @@ bulktoolchain:
 			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
-				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit;fi; \
+				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
 				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
@@ -621,6 +620,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TO
 	@:>.menu
 
 $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
 	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker

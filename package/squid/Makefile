@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.4.1
+PKG_VERSION:=		3.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		da9f30aeff856bc8348494da2730f94e
+PKG_MD5SUM:=		b36ab3696485a86b43d9194ac9b6b7fe
 PKG_DESCR:=		squid web and cache proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl
-PKG_BUILDDEP:=		openssl libtool
+PKG_BUILDDEP:=		autotool openssl libtool
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.4/
 PKG_MULTI:=		1
@@ -95,6 +95,7 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,ext_unix_group_acl))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKE,ntlm_fake_auth))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-lpthread
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
@@ -120,6 +121,7 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			squid_cv_pf_inet6=yes \
 			ac_cv_have_squid=yes
 XAKE_FLAGS+=		MKDIR_P="mkdir -p"
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \
 			--sysconfdir=/etc/squid \
