@@ -608,6 +608,7 @@ package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TO
 	@:>.menu
 
 $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
+	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
 	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/tools/adk/depmaker.c
 
 dep: $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker
