@@ -1154,6 +1154,17 @@ $(eval $(call KMOD_template,UDF_FS,udf-fs,\
 # Multimedia
 #
 
+$(eval $(call KMOD_template,REGMAP_MMIO,regmap-mmio,\
+	$(MODULES_DIR)/kernel/drivers/base/regmap/regmap-mmio \
+,20))
+
+
+$(eval $(call KMOD_template,DMA_BCM2708,dma-bcm2708,\
+	$(MODULES_DIR)/kernel/drivers/dma/virt-dma \
+	$(MODULES_DIR)/kernel/drivers/dma/bcm2708-dmaengine \
+,25))
+
+
 $(eval $(call KMOD_template,SOUND,sound,\
 	$(MODULES_DIR)/kernel/sound/soundcore \
 ,30))
@@ -1225,11 +1236,11 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2709-soc-i2s,\
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-dac \
-,56, kmod-snd-bcm2709-soc-i2s))
+,56, kmod-snd-bcm2709-soc-i2s kmod-regmap-mmio))
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DIGI,snd-bcm2709-soc-hifiberry-digi,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-digi \
-,56, kmod-snd-bcm2709-soc-i2s))
+,56, kmod-snd-bcm2709-soc-i2s kmod-regmap-mmio))
 
 #ifeq ($(ADK_LINUX_64),y)
 #V4L_COMPAT:=drivers/media/video/v4l2-compat-ioctl32
