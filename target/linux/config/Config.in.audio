@@ -4,6 +4,9 @@ depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 config ADK_KERNEL_SND_ARM
 	boolean
 
+config ADK_KERNEL_SND_PCI
+	boolean
+
 config ADK_KERNEL_SND_USB
 	boolean
 
@@ -36,7 +39,6 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
-	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_SOUND
 
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-snd...................... ALSA sound support"
@@ -93,6 +95,7 @@ config ADK_KPACKAGE_KMOD_SND_ENS1370
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
 	prompt "kmod-snd-cs5535audio.......... ALSA AMD CS5535 driver"
 	tristate
+	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG

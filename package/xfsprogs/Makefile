@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d6159f7a664d95b4c150d580399d4400
 PKG_DESCR:=		Utilities for XFS filesystems
 PKG_SECTION:=		fs
-PKG_BUILDDEP:=		e2fsprogs util-linux
+PKG_BUILDDEP:=		e2fsprogs util-linux ncurses
 PKG_DEPENDS:=		libuuid libpthread libblkid librt libgcc
+PKG_DEPENDS+=		libncurses
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/

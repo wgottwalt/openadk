@@ -19,8 +19,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC64),y)
 	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
-	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 \
-		-net nic,model=virtio -net user'
+	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user'
 else
 	@echo 'qemu-system-sparc64 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif

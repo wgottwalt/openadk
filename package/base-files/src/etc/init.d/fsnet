@@ -1,0 +1,53 @@
+#!/bin/sh
+#INIT 20
+[[ $1 = autostart ]] || exit 0
+
+# activate swap
+[ -x /sbin/swapon ] && { swapon -a; }
+
+# activate any logical volumes
+[ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay; }
+
+# filesystem checks
+[ -x /sbin/fsck.ext2 ] && {
+	for i in $(grep -v "^#" /etc/fstab|grep ext2|awk '{ print $1}');do fsck.ext2 $i;done;
+}
+[ -x /sbin/fsck.ext3 ] && {
+	for i in $(grep -v "^#" /etc/fstab|grep ext3|awk '{ print $1}');do fsck.ext3 $i;done;
+}
+[ -x /sbin/fsck.ext4 ] && {
+	for i in $(grep -v "^#" /etc/fstab|grep ext4|awk '{ print $1}');do fsck.ext4 $i;done;
+}
+[ -x /sbin/fsck.xfs ] && {
+	for i in $(grep -v "^#" /etc/fstab|grep xfs|awk '{ print $1}');do xfs_repair $i;done;
+}
+# local filesystems
+grep ext2 /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab |grep ext2 >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t ext2
+	fi
+fi
+grep ext3 /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab |grep ext3 >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t ext3
+	fi
+fi
+grep ext4 /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab |grep ext4 >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t ext4
+	fi
+fi
+grep xfs /proc/filesystems  >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab |grep xfs >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t xfs
+	fi
+fi
+exit 0

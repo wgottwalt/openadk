@@ -4,26 +4,29 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dosfstools
-PKG_VERSION:=		3.0.9
+PKG_VERSION:=		3.0.26
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		bd273cf8aa6341c0b52cbac72050bcf4
-PKG_DESCR:=		Utilities to create and check MS-DOS FAT filesystems
+PKG_MD5SUM:=		45012f5f56f2aae3afcd62120b9e5a08
+PKG_DESCR:=		utilities to create and check FAT filesystems
 PKG_SECTION:=		fs
+PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
-PKG_SITES:=		http://www.daniel-baumann.ch/software/dosfstools/
+PKG_SITES:=		http://daniel-baumann.ch/files/software/dosfstools/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		PREFIX="" OPTFLAGS="-D_FILE_OFFSET_BITS=64"
+XAKE_FLAGS+=		PREFIX=""
 
-post-install:
+dosfstools-install:
 	${INSTALL_DIR} ${IDIR_DOSFSTOOLS}/sbin
 	${CP} ${WRKINST}/sbin/dosfsck ${IDIR_DOSFSTOOLS}/sbin/
-	${CP} ${WRKINST}/sbin/fsck.{msdos,vfat} ${IDIR_DOSFSTOOLS}/sbin/
+	${CP} ${WRKINST}/sbin/fsck.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/sbin/
 	${CP} ${WRKINST}/sbin/mkdosfs ${IDIR_DOSFSTOOLS}/sbin/
-	${CP} ${WRKINST}/sbin/mkfs.{msdos,vfat} ${IDIR_DOSFSTOOLS}/sbin/
+	${CP} ${WRKINST}/sbin/mkfs.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/sbin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
