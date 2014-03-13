@@ -213,6 +213,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 config ADK_QEMU_ARGS
 	string
@@ -612,7 +613,7 @@ config ADK_TARGET_CFLAGS
 config ADK_TARGET_CMDLINE
 	string
 	default "dwc_otg.fiq_split_enable=1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default "console=tty no_auto_cmd" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "console=tty0" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttymxc0,115200" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
