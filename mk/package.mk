@@ -25,13 +25,12 @@ CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
-			${HOST_CONFIGURE_OPTS} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
 			ac_cv_func_realloc_0_nonnull=yes \
-			ac_cv_func_malloc_0_nonnull=yes
-ifeq ($(ADK_NATIVE),)
-CONFIGURE_ENV+=		${TARGET_CONFIGURE_OPTS} cross_compiling=yes
-endif
+			ac_cv_func_malloc_0_nonnull=yes \
+			cross_compiling=yes \
+			${HOST_CONFIGURE_OPTS} \
+			${TARGET_CONFIGURE_OPTS}
 
 CONFIGURE_PROG?=	configure
 MAKE_FILE?=		Makefile
@@ -57,12 +56,8 @@ MAKE_ENV+=		$(GCC_CHECK) \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
 			${HOST_CONFIGURE_OPTS} \
-			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig'
-ifeq ($(ADK_NATIVE),)
-MAKE_ENV+=		${TARGET_CONFIGURE_OPTS}
-else
-MAKE_ENV+=		M4=m4
-endif
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
+			${TARGET_CONFIGURE_OPTS}
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1
 FAKE_FLAGS+=		${XAKE_FLAGS}
@@ -226,10 +221,10 @@ ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 endif
 endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}/stamps' \
-	    '$${STAGING_DIR}/scripts'
+	    '$${STAGING_TARGET_DIR}/scripts'
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PKG_DIR}/$(1)'; \
@@ -249,8 +244,8 @@ endif
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
-	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_DIR}'
-	@cd '$${STAGING_DIR}'; grep 'usr/lib/.*\.la$$$$' \
+	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_TARGET_DIR}'
+	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$$$' \
 	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$$$fn; \
@@ -285,7 +280,7 @@ clean-targets: clean-dev-$(1)
 clean-dev-$(1):
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
-		cd '$${STAGING_DIR}'; \
+		cd '$${STAGING_TARGET_DIR}'; \
 		while read fn; do \
 			rm -f "$$$$fn"; \
 		done <'$${STAGING_PKG_DIR}/$(1)'; \

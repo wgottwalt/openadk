@@ -1,10 +1,15 @@
 #!/bin/sh
+# disable kernel messages
+if [ -f /proc/sys/kernel/printk ];then
+	echo 0 > /proc/sys/kernel/printk
+fi
+echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+ln -s /proc/self/fd/2 /dev/stderr
 {
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -nk2 | \
 	    while read line; do
-		sh ${line%%:*} autostart 2>&1
+		sh ${line%%:*} autostart
 	    done
-	test -e /etc/init.d/boot.local && (/bin/sh /etc/init.d/boot.local) 2>&1
-} | logger -p 6 -t '' &
+} | tee /dev/stderr |logger -p 6 -t ''

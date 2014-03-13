@@ -31,10 +31,6 @@ PKGSS_KRB5_UTIL:=	libkrb5 libncurses libss libcom-err
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
 
-ifeq ($(ADK_NATIVE),y)
-NM:=nm
-endif
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

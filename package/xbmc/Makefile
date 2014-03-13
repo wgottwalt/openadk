@@ -43,14 +43,14 @@ $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/usr/include/boost-1_55 \
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
 			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-TARGET_CPPFLAGS+=	-I$(STAGING_DIR)/opt/vc/include \
-			-I$(STAGING_DIR)/opt/vc/include/interface/vcos/pthreads \
-			-I$(STAGING_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_DIR)/opt/vc/lib -lkhrn_static
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib -lkhrn_static
 endif
 
 AUTOTOOL_STYLE:=	autoreconf

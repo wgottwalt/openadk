@@ -42,6 +42,8 @@ MASTER_SITE_GNU?=	\
   	ftp://ftp.sunet.se/pub/gnu/ \
 
 MASTER_SITE_SOURCEFORGE?=	\
+	http://skylink.dl.sourceforge.net/sourceforge/ \
+	http://garr.dl.sourceforge.net/sourceforge/ \
 	http://heanet.dl.sourceforge.net/sourceforge/ \
 	http://jaist.dl.sourceforge.net/sourceforge/ \
 	http://nchc.dl.sourceforge.net/sourceforge/ \

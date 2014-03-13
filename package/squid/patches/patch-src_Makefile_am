@@ -1,0 +1,11 @@
+--- squid-3.4.4.orig/src/Makefile.am	2014-03-09 10:40:56.000000000 +0100
++++ squid-3.4.4/src/Makefile.am	2014-03-12 09:46:23.001434141 +0100
+@@ -981,7 +981,7 @@ cache_cf.o: cf_parser.cci
+ 
+ # cf_gen builds the configuration files.
+ cf_gen$(EXEEXT): $(cf_gen_SOURCES) $(cf_gen_DEPENDENCIES) cf_gen_defines.cci
+-	$(HOSTCXX) -o $@ $(srcdir)/cf_gen.cc -I$(srcdir) -I$(top_builddir)/include/ -I$(top_builddir)/src
++	$(CXX_FOR_BUILD) -o $@ $(srcdir)/cf_gen.cc -I$(srcdir) -I$(top_builddir)/include/ -I$(top_builddir)/src
+ 
+ # squid.conf.default is built by cf_gen when making cf_parser.cci
+ squid.conf.default squid.conf.documented: cf_parser.cci

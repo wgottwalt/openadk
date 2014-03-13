@@ -1,14 +1,6 @@
 diff -Nur linux-2.6.34.orig/init/main.c linux-2.6.34/init/main.c
 --- linux-2.6.34.orig/init/main.c	2010-05-16 23:17:36.000000000 +0200
 +++ linux-2.6.34/init/main.c	2010-05-20 20:13:26.321613615 +0200
-@@ -842,6 +842,7 @@
- 		printk(KERN_WARNING "Failed to execute %s.  Attempting "
- 					"defaults...\n", execute_command);
- 	}
-+	run_init_process("/init");
- 	run_init_process("/sbin/init");
- 	run_init_process("/etc/init");
- 	run_init_process("/bin/init");
 @@ -889,6 +890,8 @@
  	if (sys_open((const char __user *) "/dev/console", O_RDWR, 0) < 0)
  		printk(KERN_WARNING "Warning: unable to open an initial console.\n");

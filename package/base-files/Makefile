@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		66
+PKG_RELEASE:=		70
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -33,12 +33,12 @@ endif
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
+	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
+ifneq (${ADK_PACKAGE_ASH},)
 	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
+endif
 ifneq (${ADK_PACKAGE_BASH},)
 	echo /bin/bash >>${IDIR_BASE_FILES}/etc/shells
-endif
-ifneq (${ADK_PACKAGE_MKSH},)
-	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
 endif
 ifneq (${ADK_PACKAGE_ZSH},)
 	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells

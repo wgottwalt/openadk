@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_DESCR:=		A Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		lang
@@ -28,12 +28,6 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 CONFIGURE_ARGS+=	--enable-ffi
-ifeq ($(ARCH),mips)
-CONFIGURE_ARGS+=	--disable-tls
-endif
-ifeq ($(ARCH),arm)
-CONFIGURE_ARGS+=	--disable-tls
-endif
 
 hostpost-install:
 	ln -sf ${STAGING_HOST_DIR}/usr/bin/jamvm ${STAGING_HOST_DIR}/usr/lib/jvm/bin/java

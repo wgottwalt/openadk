@@ -12,7 +12,7 @@ PKG_SECTION:=		admin
 PKG_DEPENDS:=		libopenssl libpthread
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://osiris.shmoo.com/
-PKG_SITES:=		http://osiris.shmoo.com/data/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 include ${TOPDIR}/mk/package.mk
 

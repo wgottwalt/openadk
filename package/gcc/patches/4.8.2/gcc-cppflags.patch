@@ -1,0 +1,24 @@
+diff -Nur gcc-4.8.2.orig/gcc/configure gcc-4.8.2/gcc/configure
+--- gcc-4.8.2.orig/gcc/configure	2013-06-19 03:18:38.000000000 +0200
++++ gcc-4.8.2/gcc/configure	2014-03-03 15:05:00.647062804 +0100
+@@ -11204,7 +11204,7 @@
+ 	esac
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+-	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
++	LDFLAGS="${LDFLAGS_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
+ 	${realsrcdir}/configure \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+diff -Nur gcc-4.8.2.orig/gcc/Makefile.in gcc-4.8.2/gcc/Makefile.in
+--- gcc-4.8.2.orig/gcc/Makefile.in	2013-07-08 11:14:34.000000000 +0200
++++ gcc-4.8.2/gcc/Makefile.in	2014-03-03 15:13:22.021327933 +0100
+@@ -996,7 +996,7 @@
+ # Likewise.  Put INCLUDES at the beginning: this way, if some autoconf macro
+ # puts -I options in CPPFLAGS, our include files in the srcdir will always
+ # win against random include files in /usr/include.
+-ALL_CPPFLAGS = $(INCLUDES) $(CPPFLAGS)
++ALL_CPPFLAGS = $(INCLUDES)
+ 
+ # This is the variable to use when using $(COMPILER).
+ ALL_COMPILERFLAGS = $(ALL_CXXFLAGS)

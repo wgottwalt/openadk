@@ -37,8 +37,9 @@ if [[ -e foo ]]; then
 		Darwin*)
 			echo "Building OpenADK on $os needs a case-sensitive disk partition."
 			echo "For Snow Leopard and above you can use diskutil to resize your existing disk."
-			echo "For older versions you might consider to use a disk image."
 			echo "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G"
+			echo "For older versions you might consider to use a disk image:"
+			echo "hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 30g ~/openadk.dmg"
 			;;
 	esac
 	exit 1
@@ -197,6 +198,12 @@ fi
 
 if ! which xargs >/dev/null 2>&1; then
 	echo  "You need xargs to continue."
+	echo
+	out=1
+fi
+
+if ! which g++ >/dev/null 2>&1; then
+	echo  "You need g++ (GNU C++ compiler) to continue."
 	echo
 	out=1
 fi

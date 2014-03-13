@@ -1,5 +1,5 @@
-- arm: thumb mode with glibc does not boot
-- arm: vexpress network card emulation not working
-- sparc: uclibc toolchain is broken
-- sparc64: ide driver not working, only virtio (but unstable)
-- microblaze big endian: network card emulation fails
+- qemu-sparc: startup kernel with gcc 4.8.2 broken
+- qemu-sh4: usb keyboard is broken
+- qemu-arm: thumb mode with glibc does not boot
+- qemu-sparc64: ide driver not working, only virtio (but unstable)
+- qemu-microblaze: network card emulation fails, little endian works

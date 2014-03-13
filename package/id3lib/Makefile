@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		id3lib
 PKG_VERSION:=		3.8.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		19f27ddd2dda4b2d26a559a4f0f402a7
 PKG_DESCR:=		An ID3v1/ID3v2 tagging library
 PKG_SECTION:=		libs

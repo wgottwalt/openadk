@@ -1,0 +1,11 @@
+#!/bin/sh
+#PKG adk-test-tools
+#INIT 90
+[[ $1 = autostart ]] || exit 0
+echo "Starting test script ..."
+if [ -x /run.sh ];then
+	exec /run.sh
+else
+	echo "no run.sh found"
+fi
+quit

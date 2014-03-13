@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		bzip2-host python2-host
 PKG_URL:=		http://www.scons.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}
 
-PKG_ARCH_DEPENDS:=	native
+PKG_CFLINE_SCONS:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

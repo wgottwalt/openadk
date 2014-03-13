@@ -11,7 +11,7 @@ PKG_DESCR:=		fastjar utility
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fastjar/}
 
-PKG_ARCH_DEPENDS:=	native
+PKG_CFLINE_FASTJAR:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

@@ -73,7 +73,7 @@ config ADK_KERNEL_RC32434_WDT
 	 Routerboard 532's SoC, the IDT RC32434.
 
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
-	prompt "kmod-softdog...................... Software watchdog"
+	prompt "kmod-soft-watchdog...................... Software watchdog"
 	tristate
 	default n
 	select ADK_KERNEL_WATCHDOG

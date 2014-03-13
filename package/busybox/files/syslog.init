@@ -11,10 +11,14 @@ autostart)
 	;;
 start)
 	/sbin/syslogd $syslogd_flags
-	/sbin/klogd
+	if [ -f /proc/sys/kernel/printk ];then
+		/sbin/klogd
+	fi
 	;;
 stop)
-	kill $(pgrep -f /sbin/klogd)
+	if [ -f /proc/sys/kernel/printk ];then
+		kill $(pgrep -f /sbin/klogd)
+	fi
 	kill $(pgrep -f /sbin/syslogd)
 	;;
 restart)

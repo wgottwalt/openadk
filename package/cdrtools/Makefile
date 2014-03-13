@@ -12,7 +12,7 @@ PKG_SECTION:=		misc
 PKG_URL:=		http://cdrecord.berlios.de/private/cdrecord.html
 PKG_SITES:=		http://openadk.org/
 
-PKG_ARCH_DEPENDS:=	native
+PKG_CFLINE_CDRTOOLS:=	depends on ADK_BROKEN
 
 include $(TOPDIR)/mk/package.mk
 

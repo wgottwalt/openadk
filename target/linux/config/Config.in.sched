@@ -17,7 +17,6 @@ config ADK_KERNEL_NET_ESTIMATOR
 	default n
 
 config ADK_KERNEL_NET_SCHED
-	#prompt "kmod-net-sched.................... QoS and/or fair queueing support"
 	boolean
 	default n
 	help
