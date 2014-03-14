@@ -1,3 +1,17 @@
+config ADK_KERNEL_DMADEVICES
+	boolean
+
+config ADK_KPACKAGE_KMOD_DMA_BCM2708
+	select ADK_KERNEL_DMADEVICES
+	boolean
+
+config ADK_KERNEL_REGMAP
+	boolean
+
+config ADK_KPACKAGE_KMOD_REGMAP_MMIO
+	select ADK_KERNEL_REGMAP
+	boolean
+
 config ADK_KERNEL_KEYS
 	boolean
 

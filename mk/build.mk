@@ -518,7 +518,6 @@ test-framework:
 		libc="$(LIBC)"; \
 	fi; \
 	for libc in $$libc;do \
-		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#"); \
@@ -526,9 +525,18 @@ test-framework:
 				$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
+				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
+				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
+				if [ -d root ];then rm -rf root;fi; \
+				echo cp -a root_qemu_$${arch}_$${libc}$${abi} root; \
+				cp -a root_qemu_$${arch}_$${libc}$${abi} root; \
+				mkdir -p $(TOPDIR)/firmware/qemu/$$tarch; \
+				tar cJvf $(TOPDIR)/firmware/qemu/$$tarch/root.tar.xz root; \
+				cp $(TOPDIR)/firmware/qemu_$${arch}_$${libc}$${abi}/qemu-$${arch}-archive-kernel \
+					$(TOPDIR)/firmware/qemu/$$tarch/kernel; \
 				rm .config; \
 			done; \
-		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/test-framework-build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi
