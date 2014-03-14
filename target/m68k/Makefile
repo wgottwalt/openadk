@@ -7,7 +7,7 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/vmlinux
+KERNEL:=$(LINUX_DIR)/vmlinux.gz
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
