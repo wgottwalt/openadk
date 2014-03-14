@@ -279,25 +279,11 @@ config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 endchoice
 
 choice
-prompt "Qemu ARM Emulation (hard-float)"
-depends on ADK_TARGET_SYSTEM_QEMU_ARMHF
-
-config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	boolean "ARM Ltd. Versatile Express for Cortex-A9"
-	select ADK_hard_float
-	select ADK_eabihf
-	select ADK_CPU_CORTEX_A9
-
-endchoice
-
-choice
 prompt "Qemu ARM Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_ARM
+depends on ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_SYSTEM_QEMU_ARMHF
 
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	boolean "ARM Ltd. Versatile Express for Cortex-A9"
-	select ADK_soft_float
-	select ADK_eabi
 	select ADK_CPU_CORTEX_A9
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
@@ -305,6 +291,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_ARM926EJ_S
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
@@ -312,6 +299,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 endchoice
 
