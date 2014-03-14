@@ -53,6 +53,8 @@ config-prepare: $(TOPDIR)/.config
 	    while IFS='=' read symbol value; do \
 		sed -i -e "/^# $$symbol/d" ${BUILD_DIR}/.kernelconfig.board; \
 	done;)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 init=/sbin/init"#' \
+		${BUILD_DIR}/.kernelconfig.board
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 ifneq ($(ADK_TARGET_CMDLINE),)

@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xextproto
-PKG_VERSION:=		7.2.1
+PKG_VERSION:=		7.3.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Protocol Extensions headers
 PKG_SECTION:=		devel
 PKG_BUILDDEP:=		xextproto-host
-PKG_MD5SUM:=		9062d689f422fad1b8774c967d730f09
+PKG_MD5SUM:=		37b700baa8c8ea7964702d948dd13821
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

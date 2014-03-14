@@ -3,17 +3,17 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		glproto
-PKG_VERSION:=		1.4.17
+PKG_NAME:=		dri3proto
+PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_DESCR:=		OpenGL headers
+PKG_MD5SUM:=		25e84a49a076862277ee12aebd49ff5f
+PKG_DESCR:=		DRI protocol headers
 PKG_SECTION:=		devel
-PKG_MD5SUM:=		d69554c1b51a83f2c6976a640819911b
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_OPTS:=		dev devonly
+PKG_OPTS:=              dev devonly
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GLPROTO,glproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,DRI3PROTO,dri3proto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 include ${TOPDIR}/mk/pkg-bottom.mk

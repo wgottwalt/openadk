@@ -1,6 +1,9 @@
-- more output for initscripts on bootup
+- more output for initscripts on bootup (fancy OK/FAIL with color?)
+- try Preset Loops per Jiffy for faster bootup via lpj=
 - port uuterm
-- move tools to package host infrastructure, resolve dependency handling for host tools
+- move tools to package host infrastructure, 
+  resolve dependency handling for host tools
+- port uuterm
 - hash-style=gnu for non-mips and non-musl
 - add fb full screen logo
 - port opkg with gpg signing

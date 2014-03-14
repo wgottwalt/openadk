@@ -5,6 +5,9 @@ config ADK_PKG_TEST
 	select ADK_PACKAGE_STRACE
 	select ADK_PACKAGE_SOCAT
 	select ADK_PACKAGE_MAKE
+	select ADK_KERNEL_BLK_DEV_INITRD
+	select ADK_KERNEL_COMP_XZ
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
 	help
 	  Package collection used to build adk-test-framework root
 	  filesystem.

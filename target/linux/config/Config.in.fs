@@ -62,6 +62,7 @@ config ADK_KERNEL_EXT2_FS
 	boolean
 	default y if ADK_TARGET_WITH_CF
 	default y if ADK_TARGET_WITH_MMC && !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT2_FS
