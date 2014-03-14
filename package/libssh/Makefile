@@ -4,16 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libssh
-PKG_VERSION:=		0.5.3
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		9ad01838d3b89d98e900e0f6260a88cc
+PKG_VERSION:=		0.6.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		66cf16e77f60913b4d54f18c92cdbf71
 PKG_DESCR:=		SSH library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl zlib
 PKG_BUILDDEP:=		cmake-host openssl zlib
 PKG_URL:=		http://www.libssh.org/
-PKG_SITES:=		http://www.libssh.org/files/0.5/
+PKG_SITES:=		https://red.libssh.org/attachments/download/87/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
