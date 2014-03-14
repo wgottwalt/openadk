@@ -1,7 +1,6 @@
-diff -Nur xf86-video-siliconmotion-1.7.4/src/smi_video.c xf86-video-siliconmotion-1.7.4-loongson/src/smi_video.c
---- xf86-video-siliconmotion-1.7.4/src/smi_video.c	2010-02-25 08:33:07.000000000 +0100
-+++ xf86-video-siliconmotion-1.7.4-loongson/src/smi_video.c	2012-03-13 04:18:18.634989344 +0100
-@@ -276,6 +276,7 @@
+--- xf86-video-siliconmotion-1.7.7.orig/src/smi_video.c	2012-07-17 06:53:21.000000000 +0200
++++ xf86-video-siliconmotion-1.7.7/src/smi_video.c	2014-03-14 18:35:37.546382342 +0100
+@@ -275,6 +275,7 @@ static XF86ImageRec SMI_VideoImages[] =
      XVIMAGE_YUY2,
      XVIMAGE_YV12,
      XVIMAGE_I420,
@@ -9,7 +8,7 @@ diff -Nur xf86-video-siliconmotion-1.7.4/src/smi_video.c xf86-video-siliconmotio
      {
  	FOURCC_RV15,			/* id				*/
  	XvRGB,				/* type				*/
-@@ -1464,6 +1465,117 @@
+@@ -1461,6 +1462,117 @@ SMI_QueryBestSize(
      LEAVE();
  }
  
@@ -127,7 +126,7 @@ diff -Nur xf86-video-siliconmotion-1.7.4/src/smi_video.c xf86-video-siliconmotio
  
  static int
  SMI_PutImage(
-@@ -1592,7 +1704,7 @@
+@@ -1592,7 +1704,7 @@ SMI_PutImage(
  		offset3 = tmp;
  	    }
  	    nLines = ((((y2 + 0xffff) >> 16) + 1) & ~1) - top;
