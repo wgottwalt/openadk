@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dri2proto
-PKG_VERSION:=		2.6
+PKG_VERSION:=		2.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		873142af5db695537cfe05e01d13541f
-PKG_DESCR:=		DRI protocol headers
+PKG_MD5SUM:=		19ea18f63d8ae8053c9fa84b60365b77
+PKG_DESCR:=		DRI2 protocol headers
 PKG_SECTION:=		devel
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly

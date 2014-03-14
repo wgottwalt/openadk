@@ -3,7 +3,6 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_x86
 	select ADK_ibm_x40
 	select ADK_CPU_PENTIUM_M
-	select ADK_KERNEL_MPENTIUMM
 	select ADK_TARGET_CPU_WITH_MMX
 	select ADK_TARGET_CPU_WITH_SSE
 	select ADK_TARGET_CPU_WITH_SSE2
@@ -24,4 +23,3 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_TARGET_KERNEL_BZIMAGE
 	help
          System profile for IBM X40 laptop.
-

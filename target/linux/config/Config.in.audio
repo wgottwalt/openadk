@@ -40,6 +40,12 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
 
+config ADK_KPACKAGE_KMOD_SND_PCM_DMAENGINE
+	tristate
+
+config ADK_KPACKAGE_KMOD_SND_COMPRESS
+	tristate
+
 config ADK_KPACKAGE_KMOD_SND
 	prompt "kmod-snd...................... ALSA sound support"
 	tristate
@@ -140,6 +146,8 @@ config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_ARM
 	select ADK_KPACKAGE_KMOD_SND_SOC
+	select ADK_KPACKAGE_KMOD_SND_PCM_DMAENGINE
+	select ADK_KPACKAGE_KMOD_SND_COMPRESS
 	boolean
 	default n
 

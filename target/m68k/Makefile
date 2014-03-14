@@ -14,29 +14,15 @@ imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
-	@echo "Use following command to create a QEMU Image:"
-	@echo "sudo ./scripts/create-image.sh -f ${ADK_TARGET_ROOTFS} qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
-	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-m68k -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
-endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
-	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-m68k -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
-endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
 	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
-	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-m68k -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL)'
-endif
 endif

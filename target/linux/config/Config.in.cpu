@@ -1,12 +1,3 @@
-config ADK_KERNEL_MATOM
-	boolean
-
-config ADK_KERNEL_MPENTIUMM
-	boolean
-
-config ADK_KERNEL_MGEODE_LX
-	boolean
-
 config ADK_KERNEL_MTRR
 	boolean
 	default y if ADK_TARGET_CPU_WITH_MTRR
