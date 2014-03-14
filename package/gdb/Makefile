@@ -11,8 +11,6 @@ PKG_DEPENDS:=		libthread-db libncurses libexpat libgcc zlib
 PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

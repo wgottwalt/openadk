@@ -171,7 +171,7 @@ ${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
 		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
 createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
-	${SED} 's/.*CONFIG_\(RD_\|XZ_\|BLK_DEV_INITRD\|INITRAMFS_\).*//' \
+	${SED} 's/.*CONFIG_\(RD_\|BLK_DEV_INITRD\|INITRAMFS_\).*//' \
 		${LINUX_DIR}/.config
 	( \
 		echo "CONFIG_BLK_DEV_INITRD=y"; \

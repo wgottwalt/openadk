@@ -7,6 +7,9 @@ config ADK_KERNEL_EXPERIMENTAL
 config ADK_KERNEL_BLK_DEV_INITRD
 	boolean
 
+config ADK_KERNEL_BLK_DEV_RAM
+	boolean
+
 config ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
 	boolean
 
