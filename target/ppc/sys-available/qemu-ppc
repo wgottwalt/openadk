@@ -6,7 +6,6 @@ config ADK_TARGET_SYSTEM_QEMU_PPC
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
-	select ADK_USE_KERNEL_MINICONFIG
 	help
 	 Support for Qemu Emulator (PPC).
 

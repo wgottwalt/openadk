@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010, 2011
+# Copyright © 2010-2014
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -32,24 +32,13 @@
 # • create a cfgfs partition
 
 TOPDIR=$(pwd)
+HOST=$(gcc -dumpmachine)
 me=$0
 
 case :$PATH: in
-(*:$TOPDIR/bin/tools:*) ;;
-(*) export PATH=$PATH:$TOPDIR/bin/tools ;;
+(*:$TOPDIR/host_$HOST/usr/bin:*) ;;
+(*) export PATH=$PATH:$TOPDIR/host_$HOST/usr/bin ;;
 esac
-
-test -n "$KSH_VERSION" || if ! which mksh >/dev/null 2>&1; then
-	make package=mksh fetch || exit 1
-	df=$(cd package/mksh; TOPDIR="$TOPDIR" gmake show=DISTFILES)
-	mkdir -p build_mksh
-	gzip -dc dl/"$df" | (cd build_mksh; cpio -mid)
-	cd build_mksh/mksh
-	bash Build.sh -r -c lto || exit 1
-	cp mksh "$TOPDIR"/bin/tools/
-	cd "$TOPDIR"
-	rm -rf build_mksh
-fi
 
 test -n "$KSH_VERSION" || exec mksh "$me" "$@"
 if test -z "$KSH_VERSION"; then

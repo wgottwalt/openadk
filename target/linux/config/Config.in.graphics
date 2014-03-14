@@ -32,6 +32,12 @@ config ADK_KERNEL_FRAMEBUFFER_CONSOLE
 config ADK_KERNEL_MFD_SM501
 	boolean
 
+config ADK_KERNEL_FB_ATARI
+	boolean
+	select ADK_KERNEL_FB
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default n
+
 config ADK_KERNEL_FB_CIRRUS
 	boolean
 

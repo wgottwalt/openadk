@@ -7,7 +7,6 @@ config ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_KERNEL_MAY_64BIT
 	select ADK_TARGET_KERNEL_BZIMAGE
-	select ADK_USE_KERNEL_MINICONFIG
 	help
 	 Support for Qemu Emulator.
 
