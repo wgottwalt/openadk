@@ -1,7 +1,18 @@
-diff -Nur linux-3.11.5.orig/arch/x86/tools/relocs.h linux-3.11.5/arch/x86/tools/relocs.h
---- linux-3.11.5.orig/arch/x86/tools/relocs.h	2013-10-14 03:14:45.000000000 +0200
-+++ linux-3.11.5/arch/x86/tools/relocs.h	2013-10-20 17:41:16.000000000 +0200
-@@ -9,10 +9,14 @@
+diff -Nur linux-3.13.6.orig/arch/x86/tools/relocs.c linux-3.13.6/arch/x86/tools/relocs.c
+--- linux-3.13.6.orig/arch/x86/tools/relocs.c	2014-03-07 07:07:02.000000000 +0100
++++ linux-3.13.6/arch/x86/tools/relocs.c	2014-03-15 19:39:45.000000000 +0100
+@@ -126,6 +126,7 @@
+ 
+ 		if (err) {
+ 			regerror(err, &sym_regex_c[i], errbuf, sizeof errbuf);
++			printf("foo: %s\n", sym_regex[i]);
+ 			die("%s", errbuf);
+ 		}
+         }
+diff -Nur linux-3.13.6.orig/arch/x86/tools/relocs.h linux-3.13.6/arch/x86/tools/relocs.h
+--- linux-3.13.6.orig/arch/x86/tools/relocs.h	2014-03-07 07:07:02.000000000 +0100
++++ linux-3.13.6/arch/x86/tools/relocs.h	2014-03-15 18:48:40.000000000 +0100
+@@ -9,11 +9,19 @@
  #include <string.h>
  #include <errno.h>
  #include <unistd.h>
@@ -13,12 +24,17 @@ diff -Nur linux-3.11.5.orig/arch/x86/tools/relocs.h linux-3.11.5/arch/x86/tools/
 +#else
 +#include "elf.h"
 +#endif
++#ifdef __APPLE__
++#include <pcreposix.h>
++#else
  #include <regex.h>
++#endif
  #include <tools/le_byteshift.h>
  
-diff -Nur linux-3.11.5.orig/tools/include/elf.h linux-3.11.5/tools/include/elf.h
---- linux-3.11.5.orig/tools/include/elf.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.11.5/tools/include/elf.h	2013-10-20 17:42:10.000000000 +0200
+ void die(char *fmt, ...);
+diff -Nur linux-3.13.6.orig/tools/include/elf.h linux-3.13.6/tools/include/elf.h
+--- linux-3.13.6.orig/tools/include/elf.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.13.6/tools/include/elf.h	2014-03-15 18:47:36.000000000 +0100
 @@ -0,0 +1,2671 @@
 +#ifndef _ELF_H
 +#define _ELF_H

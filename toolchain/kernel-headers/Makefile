@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 include $(TOPDIR)/mk/linux.mk
+include ${TOPDIR}/mk/kernel-vars.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers:
-	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
-		headers_check
-	$(MAKE) -C $(WRKBUILD) HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} headers_check
+	$(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 	@-find $(STAGING_TARGET_DIR)/usr/include -name .install -delete
