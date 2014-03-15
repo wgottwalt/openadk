@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.3.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		06e5f93dbf13f2c19647ca15ffc23ac1
 PKG_DESCR:=		Open Source VPN solution using SSL
 PKG_SECTION:=		net/security
@@ -14,9 +14,7 @@ PKG_DEPENDS:=		kmod-tun ip
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
-PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS SERVER CLIENT
-PKGFD_SERVER:=		deliver server example configuration
-PKGFD_CLIENT:=		deliver client example configuration
+PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
 PKGFD_WITH_LZO:=	enable LZO compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
@@ -77,13 +75,7 @@ CONFIGURE_ARGS+=	--disable-plugins \
 openvpn-install:
 	${INSTALL_DIR} $(IDIR_OPENVPN)/usr/sbin $(IDIR_OPENVPN)/etc/openvpn
 	${INSTALL_BIN} $(WRKINST)/usr/sbin/openvpn $(IDIR_OPENVPN)/usr/sbin/
-ifeq ($(ADK_PACKAGE_OPENVPN_SERVER),y)
-	$(CP) ./files/server.conf $(IDIR_OPENVPN)/etc/openvpn/
-	echo "/etc/openvpn/server.conf" > ./files/openvpn.conffiles
-endif
-ifeq ($(ADK_PACKAGE_OPENVPN_CLIENT),y)
-	$(CP) ./files/client.conf $(IDIR_OPENVPN)/etc/openvpn/
-	echo "/etc/openvpn/client.conf" > ./files/openvpn.conffiles
-endif
+	$(CP) ./files/server.conf $(IDIR_OPENVPN)/etc/openvpn/server.conf.example
+	$(CP) ./files/client.conf $(IDIR_OPENVPN)/etc/openvpn/client.conf.example
 
 include ${TOPDIR}/mk/pkg-bottom.mk
