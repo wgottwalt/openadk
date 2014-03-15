@@ -1,6 +1,6 @@
---- Mesa-9.2.2.orig/configure.ac	2013-10-19 01:36:09.000000000 +0200
-+++ Mesa-9.2.2/configure.ac	2013-12-01 14:08:00.000000000 +0100
-@@ -69,7 +69,7 @@ AC_PATH_PROG([PERL], [perl])
+--- Mesa-10.1.0.orig/configure.ac	2014-02-27 02:56:39.000000000 +0100
++++ Mesa-10.1.0/configure.ac	2014-03-14 21:36:14.000000000 +0100
+@@ -65,7 +65,7 @@ AC_PATH_PROG([PERL], [perl])
  
  AC_CHECK_PROG(INDENT, indent, indent, cat)
  if test "x$INDENT" != "xcat"; then
