@@ -365,12 +365,6 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(PKG)" ];then \
-		grep "^config" target/config/Config.in \
-			|grep -i "$(PKG)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
-	fi
 	@if [ ! -z "$(LIBC)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(LIBC)" \
@@ -426,12 +420,6 @@ endif
 	@if [ ! -z "$(FS)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(FS)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
-	fi
-	@if [ ! -z "$(PKG)" ];then \
-		grep "^config" target/config/Config.in \
-			|grep -i "$(PKG)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
