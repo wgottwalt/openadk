@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
 PKG_VERSION:=		1.15.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		faf04f1213f9a476997a774254b3abce
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
@@ -45,7 +45,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D__gid_t=gid_t -D__uid_t=uid_t
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
 CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
