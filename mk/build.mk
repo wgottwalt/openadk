@@ -510,11 +510,12 @@ test-framework:
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
+				if [ $$arch = "armhf" ];then qarch=arm; else qarch=$$arch;fi; \
 				if [ -d root ];then rm -rf root;fi; \
-				cp -a root_qemu_$${arch}_$${libc}$${abi} root; \
+				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
 				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
 				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
-				cp $(TOPDIR)/firmware/qemu_$${arch}_$${libc}$${abi}/qemu-$${arch}-archive-kernel \
+				cp $(TOPDIR)/firmware/qemu_$${qarch}_$${libc}$${abi}/qemu-$${qarch}-archive-kernel \
 					$(TOPDIR)/firmware/qemu/$$arch/kernel; \
 				rm .config; \
 			done; \

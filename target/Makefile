@@ -53,12 +53,16 @@ config-prepare: $(TOPDIR)/.config
 	    while IFS='=' read symbol value; do \
 		sed -i -e "/^# $$symbol/d" ${BUILD_DIR}/.kernelconfig.board; \
 	done;)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 init=/sbin/init"#' \
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		${BUILD_DIR}/.kernelconfig.board
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 ifneq ($(ADK_TARGET_CMDLINE),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
+ifeq ($(ADK_TARGET_QEMU_WITH_GRAPHIC),y)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=tty0"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifneq ($(ADK_PACKAGE_CRYPTINIT_ROOT),)
