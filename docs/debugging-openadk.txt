@@ -1,0 +1,29 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[debugging-openadk]]
+
+Debugging OpenADK
+-----------------
+
+To analyze any build problems, use verbose output:
+
+----
+ $ make v
+----
+
+To analyze any inter package dependency problems, use make debug output:
+
+----
+ $ make --debug=b
+----
+
+If you have a problem with a specific package, use following command
+to capture the output and send it to the OpenADK developer:
+
+----
+ $ make package=<pkgname> clean package > pkgname.log 2>&1
+----
+
+
+

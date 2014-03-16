@@ -1,0 +1,182 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[network-configuration]]
+Network configuration 
+~~~~~~~~~~~~~~~~~~~~~
+
+loopback devices
+^^^^^^^^^^^^^^^^
+
+Example for loopback device configuration:
+
+---------------------
+auto lo
+iface lo inet loopback
+---------------------
+
+static network configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example for an ethernet network card:
+
+---------------------
+auto eth0
+iface eth0 inet static
+  address 192.168.1.1
+  netmask 255.255.255.0
+  broadcast +
+  gateway 192.168.1.254
+---------------------
+
+The DNS resolver must be manually configured in /etc/resolv.conf.
+The plus for the broadcast value, will calculate the correct broadcast address for the network.
+
+dynamic network configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example for an ethernet network card:
+
+---------------------
+auto eth0
+iface eth0 inet dhcp
+---------------------
+
+bridge configuration
+^^^^^^^^^^^^^^^^^^^^
+
+Example for a network bridge with two ethernet network interfaces and an ip address:
+
+---------------------
+auto br0 
+iface br0 inet static
+        address 192.168.99.1
+        netmask 255.255.255.0
+        broadcast +
+        bridge-ports eth0 eth1
+---------------------
+
+Just a bridge without an ip address:
+---------------------
+auto br0 
+iface br0 inet manual
+         bridge-ports eth0 eth1
+---------------------
+
+You need to install either Busybox brctl applet or the bridge-utils package. The required kernel modules will be automatically selected.
+
+VLAN network interfaces
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Example configuration of a network interface with VLAN ID 8 without any ip configuration:
+
+---------------------
+auto eth0.8
+iface eth0.8 inet manual
+---------------------
+
+You need to install Busybox vconfig applet. The required kernel modules will be automatically selected.
+
+PPP over Ethernet
+^^^^^^^^^^^^^^^^^
+
+Typical DSL configuration:
+
+---------------------
+auto ppp0
+iface ppp0 inet ppp
+	use-template pppoe
+	provider isp
+	ppp-mtu 1412
+	ppp-username foo
+	ppp-password bar
+	ppp-device eth1
+---------------------
+
+The provider can be used as argument for "pon" and "poff" commands.
+You need to install the ppp and ppp-mod-pppoe package. The required kernel modules will be automatically selected.
+
+wireless client configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example wireless client configuration, secured with WPA2:
+
+---------------------
+auto wlan0
+iface wlan0 inet dhcp
+        wireless-ssid myap
+        wireless-channel 11
+        wireless-mode sta
+        wireless-security wpa2
+        wireless-passphrase xxxxxx
+---------------------
+
+You need to install iw and wpa_supplicant packages. For older wireless drivers you
+need to install wireless-tools instead of iw and use the following variable to choose the right tools:
+
+---------------------
+wireless-extension 1 
+---------------------
+
+wireless accesspoint configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To configure an access point use following example:
+
+---------------------
+auto wlan0
+iface wlan0 inet static
+        address 192.168.40.10
+        netmask 255.255.255.0
+        broadcast +
+        wireless-ssid myap
+        wireless-channel 8
+        wireless-mode ap
+        wireless-security wpa2
+        wireless-passphrase xxxxxx
+---------------------
+
+You need to install hostapd and iw/wireless-tools packages.
+
+hso umts modem
+^^^^^^^^^^^^^^
+
+If you have a HSO UMTS modem, you can use following to configure internet access:
+---------------------
+auto hso0
+iface hso0 inet manual
+	pin 1234
+	apn your.apn
+---------------------
+
+ATM configuration
+^^^^^^^^^^^^^^^^^
+
+For example a configuration on a Linksys AG241 router with integrated DSL modem,
+you can configure two ATM devices to distinguish between Internet and IPTV traffic:
+
+---------------------
+auto eth0.1 
+iface eth0.1 inet manual
+
+auto eth0.8
+iface eth0.8 inet manual
+
+auto nas0
+iface nas0 inet manual
+
+auto nas1
+iface nas1 inet manual
+        atm-vpi 1
+        atm-vci 34
+
+auto br0
+iface br0 inet manual
+        bridge-ports eth0.1 nas0
+
+auto br1
+iface br1 inet manual
+        bridge-ports eth0.8 nas1
+---------------------
+
+More network setups can be implemented on request.

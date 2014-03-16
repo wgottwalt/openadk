@@ -1,0 +1,62 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Using OpenADK during development
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The normal operation of OpenADK is to download a tarball, extract it,
+configure, compile and install the software component found inside this
+tarball. The source code is extracted in
++build_<system>_<arch>_<libc>/w-<package>-<version>+, which is a
+temporary directory: whenever +make clean+ or one of the other clean
+targets are used, this directory is entirely removed, and recreated at
+the next +make+ invocation.
+
+This behavior is well-suited when OpenADK is used mainly as an
+integration tool, to build and integrate all the components of an
+embedded Linux system. However, if one uses OpenADK during the
+development of certain components of the system, this behavior is not
+very convenient: one would instead like to make a small change to the
+source code of one package, and be able to quickly rebuild the system
+with OpenADK.
+
+Following workflow might help to integrate your own changes, while 
+developing a new package or board support.
+
+Make changes directly in +build_<system>_<arch>_<libc>/w-<package>-<version>+ 
+and recompile the package with:
+
+------------
+ $ make package=<package> package
+------------
+
+When you are happy with the change, generate a patch:
+------------
+ $ make package=<package> update-patches
+------------
+
+For the linux kernel just change the code in 
++build_<system>_<arch>_<libc>/linux, remove the .config
+and call make again:
+
+------------
+ $ rm build_<system>_<arch>_<libc>/linux/.config
+ $ make
+------------
+
+There is no update-patches target for the kernel, you need
+to extract the kernel source from your download dir, make 
+a copy of the source tree, add your changes and create a 
+patch manually:
+
+------------
+ $ tar xvf dl/linux-x.y.z.tar.xz
+ $ cp -a linux-x.y.z linux-x.y.z.orig
+ $ diff -Nur linux-x.y.z.orig linux-x.y.z > target/linux/patches/x.y.z/mykernel.patch
+ $ make cleankernel 
+ $ make
+------------
+
+The same method can be used for toolchain components and _must_
+be used for busybox, because it contains patches, which are not
+generated via +make update-patches+.

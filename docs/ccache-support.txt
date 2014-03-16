@@ -1,0 +1,21 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[ccache]]
+Using +ccache+ in OpenADK
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+http://ccache.samba.org[ccache] is a compiler cache. It stores the
+object files resulting from each compilation process, and is able to
+skip future compilation of the same source file (with same compiler
+and same arguments) by using the pre-existing object files. When doing
+almost identical builds from scratch a number of times, it can nicely
+speed up the build process.
+
++ccache+ support is integrated in OpenADK. You just have to enable +Use ccache
+to speedup recompilation+ in +Globale settings+. This will automatically build
++ccache+ and use it for every target compilation.
+
+The cache is located in +$HOME/.ccache+. It is stored outside of OpenADK
+directory so that it can be shared by separate OpenADK builds. If you want to
+get rid of the cache, simply remove this directory.

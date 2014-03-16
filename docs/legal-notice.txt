@@ -1,0 +1,51 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[legal-info]]
+
+Legal notice and licensing
+==========================
+
+Complying with open source licenses
+-----------------------------------
+
+All of the end products of OpenADK (toolchain, root filesystem, kernel,
+bootloaders) contain open source software, released under various licenses.
+
+Using open source software gives you the freedom to build rich embedded
+systems, choosing from a wide range of packages, but also imposes some
+obligations that you must know and honour.
+Some licenses require you to publish the license text in the documentation of
+your product. Others require you to redistribute the source code of the
+software to those that receive your product.
+
+The exact requirements of each license are documented in each package, and
+it is your responsibility (or that of your legal office) to comply with those
+requirements.
+
+Complying with the OpenADK license
+----------------------------------
+
+OpenADK itself is an open source software, released under the
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[GNU General Public
+License, version 2] or (at your option) any later version.
+However, being a build system, it is not normally part of the end product:
+if you develop the root filesystem, kernel, bootloader or toolchain for a
+device, the code of OpenADK is only present on the development machine, not
+in the device storage.
+
+Nevertheless, the general view of the OpenADK developer is that you should
+release the OpenADK source code along with the source code of other packages
+when releasing a product that contains GPL-licensed software.
+This is because the
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html[GNU GPL]
+defines the "'complete source code'" for an executable work as "'all the
+source code for all modules it contains, plus any associated interface
+definition files, plus the scripts used to control compilation and installation
+of the executable'".
+OpenADK is part of the 'scripts used to control compilation and
+installation of the executable', and as such it is considered part of the
+material that must be redistributed.
+
+Keep in mind that this is only the OpenADK developer opinion, and you
+should consult your legal department or lawyer in case of any doubt.

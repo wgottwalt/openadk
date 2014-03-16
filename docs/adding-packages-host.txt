@@ -1,0 +1,92 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Infrastructure for host packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[host-package-tutorial]]
+
+First, let's see how to write a +Makefile+ for an host only package, required
+by another target package to build, with an example:
+
+------------------------
+01: # This file is part of the OpenADK project. OpenADK is copyrighted
+02: # material, please see the LICENCE file in the top-level directory.
+03:
+04: include $(TOPDIR)/rules.mk
+05:
+06: PKG_NAME:=              hostfoo
+07: PKG_VERSION:=           1.0
+08: PKG_RELEASE:=           1
+09: PKG_MD5SUM:=            291ba57c0acd218da0b0916c280dcbae
+10: PKG_DESCR:=             hostfoo utility
+11: PKG_SECTION:=           misc
+12: PKG_URL:=               http://www.foo.org/
+13: PKG_SITES:=             http://download.foo.org/
+14:
+15: PKG_CFLINE_HOSTFOO:=    depends on ADK_HOST_ONLY
+16:
+17: include $(TOPDIR)/mk/host.mk
+18: include $(TOPDIR)/mk/package.mk
+19:
+20: $(eval $(call HOST_template,HOSTFOO,hostfoo,$(PKG_VERSION)-${PKG_RELEASE}))
+21:
+22: HOST_STYLE:=            auto
+23:
+24: include ${TOPDIR}/mk/host-bottom.mk
+25: include ${TOPDIR}/mk/pkg-bottom.mk
+------------------------
+
+The differences to a target package is the inclusion of +mk/host.mk+ in line 17 and
++mk/host-bottom.mk+ in line 24. Furthermore the HOST_template is called instead of
+the PKG_template. The last difference is the usage of +PKG_CFLINE_HOSTFOO+ to mark
+the package as host only package.
+
+Following mix between host and target package is possible, too:
+------------------------
+01: # This file is part of the OpenADK project. OpenADK is copyrighted
+02: # material, please see the LICENCE file in the top-level directory.
+03:
+04: include ${TOPDIR}/rules.mk
+05:
+06: PKG_NAME:=		foo
+07: PKG_VERSION:=	1.0
+08: PKG_RELEASE:=	1
+09: PKG_MD5SUM:=	032a7b7b9f1a6e278ccde73f82cec5c2
+10: PKG_DESCR:=		foo tool
+11: PKG_SECTION:=	lang
+12: PKG_BUILDDEP:=	foo-host
+13: PKG_URL:=		http://www.foo.org/
+14: PKG_SITES:=		http://download.foo.org/
+15:
+16: include ${TOPDIR}/mk/host.mk
+17: include ${TOPDIR}/mk/package.mk
+18:
+19: $(eval $(call HOST_template,FOO,foo,${PKG_VERSION}-${PKG_RELEASE}))
+20: $(eval $(call PKG_template,FOO,foo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+21:
+22: HOST_STYLE:=	auto
+23:
+24: foo-install:
+25:	${INSTALL_DIR} ${IDIR_FOO}/usr/bin
+26:	${INSTALL_BIN} ${WRKINST}/usr/bin/foo ${IDIR_FOO}/usr/bin
+27:
+28: include ${TOPDIR}/mk/host-bottom.mk
+29: include ${TOPDIR}/mk/pkg-bottom.mk
+------------------------
+
+It is important to have foo-host as package build dependency, see line 12, so that the order is always build the host package
+and then the target package.
+If you need to rebuild a mixed package, you are advised to use:
+------------
+ $ make package=<package> clean hostpackage package
+------------
+
+At the moment there is one limitation regarding the recursive dependency resolving. It is just not implemented, yet.
+So you always need to set +PKG_BUILDDEP+ to all host tools dependencies in the right order. If package foo needs host
+tool bar, and host tool bar needs host library libbaz, you have to use following +PKG_BUILDDEP+ variable:
+------------
+ PKG_BUILDDEP:=libbaz-host bar-host
+------------
+
+

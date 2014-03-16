@@ -1,0 +1,58 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Frequently Asked Questions & Troubleshooting
+============================================
+
+[[faq-no-doc-on-target]]
+Why is there no documentation on the target?
+--------------------------------------------
+
+Because OpenADK mostly targets _small_ or _very small_ target
+hardware with limited resource onboard (CPU, ram, mass-storage), it
+does not make sense to waste space with the documentation data.
+
+If you need documentation data on your target anyway, then OpenADK
+is not suitable for your purpose, and you should look for a _real
+distribution_.
+
+[[faq-no-locale-on-target]]
+Why is there no locale support on the target?
+---------------------------------------------
+
+OpenADK tries to create a simple and small Linux system, which
+has no fancy features enabled. Locale support on a headless system,
+like a router is not useful anyway. To avoid bloat, it is a design
+decision to not have any locale support. Developers and users
+still could add any kind of user interface with internationalization
+features.
+
+[[faq-why-not-visible-package]]
+Why are some packages not visible in the OpenADK config menu?
+-------------------------------------------------------------
+
+If a package exists in the OpenADK tree and does not appear in the
+config menu, this most likely means that some of the package's
+dependencies are not met.
+
+To know more about the dependencies of a package, search for the
+package symbol in the config menu (see xref:make-tips[]).
+
+Then, you may have to recursively enable several options (which
+correspond to the unmet dependencies) to finally be able to select
+the package.
+
+If the package is not visible due to some unmet dependency to another
+C library, either consider to switch to another C library or fix the
+package so that it works with your configured library. For this you
+need to add your C library to PKG_LIBC_DEPENDS in +package/<pkgname>/Makefile+.
+
+[[faq-no-web-interface]]
+Why is there no web based configuration interface available?
+------------------------------------------------------------
+
+OpenADK provides a basic root filesystem for your embedded device.
+If you need a web based configuration interface for your own appliance,
+just write one. There are plenty of possibilities. You could use 
+Lighttpd with PHP or an C++ application server like Tntnet.
+

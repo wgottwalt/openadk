@@ -1,0 +1,15 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Advanced usage
+--------------
+
+include::using-openadk-toolchain.txt[]
+
+include::ccache-support.txt[]
+
+include::download-location.txt[]
+
+include::package-make-target.txt[]
+
+include::using-openadk-development.txt[]

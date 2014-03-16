@@ -1,0 +1,14 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[customize-store]]
+Storing the configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you have a OpenADK configuration that you are satisfied with and
+you want to share it with others, put it under revision control or move
+on to a different OpenADK project.
+
+You just need to copy your .config and extra directory to regenerate your
+firmware images on another system. The used config is, if not explicitely disabled,
+saved on the target in +/etc/adkconfig.gz+.
