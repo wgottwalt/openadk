@@ -13,14 +13,14 @@ config ADK_KERNEL_SND_USB
 config ADK_KERNEL_SND_PXA2XX_AC97
 	boolean
 
-config ADK_KERNEL_SND_TIMER
+config ADK_KPACKAGE_KMOD_SND_TIMER
 	boolean
 
-config ADK_KERNEL_SND_PCM
+config ADK_KPACKAGE_KMOD_SND_PCM
 	boolean
 
-config ADK_KERNEL_SND_HWDEP
-	boolean
+config ADK_KPACKAGE_KMOD_SND_HWDEP
+	tristate
 
 config ADK_KPACKAGE_KMOD_SOUND
 	tristate
@@ -40,14 +40,15 @@ config ADK_KPACKAGE_KMOD_SND_COMPRESS
 config ADK_KPACKAGE_KMOD_SND
 	tristate
 	select ADK_KPACKAGE_KMOD_SOUND
-	select ADK_KERNEL_SND_TIMER
-	select ADK_KERNEL_SND_PCM
-	select ADK_KERNEL_SND_HWDEP
+	select ADK_KPACKAGE_KMOD_SND_PCM
+	select ADK_KPACKAGE_KMOD_SND_TIMER
+	select ADK_KPACKAGE_KMOD_SND_HWDEP
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	prompt "kmod-snd-intel8x0............. Intel AC97 driver"
 	tristate
+	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40

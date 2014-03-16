@@ -32,6 +32,9 @@ endif
 ifeq ($(ADK_HOST_NEED_CCACHE),y)
 TARGETS+=ccache
 endif
+ifeq ($(ADK_HOST_NEED_PCRE),y)
+TARGETS+=pcre
+endif
 
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
