@@ -21,6 +21,7 @@ config ADK_KERNEL_IOSCHED_CFQ
 
 config ADK_KERNEL_SCSI
 	boolean
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 
 config ADK_KERNEL_BLK_DEV_SD
 	boolean
@@ -252,7 +253,6 @@ config ADK_KPACKAGE_KMOD_SCSI
 	select ADK_KERNEL_LSF
 	select ADK_KERNEL_IOSCHED_AS
 	depends on !ADK_KERNEL_SCSI
-	depends on !ADK_KERNEL_SATA_AHCI
 	tristate
 	help
 	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or
@@ -268,7 +268,7 @@ config ADK_KPACKAGE_KMOD_SCSI
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 	prompt "kmod-scsi-disk.................... SCSI disk support"
-	select ADK_KPACKAGE_KMOD_SCSI
+	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
 	depends on !ADK_KERNEL_BLK_DEV_SD
 	tristate
 	help
