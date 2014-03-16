@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		arpd
 PKG_VERSION:=		0.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		e2911fa9de1b92ef50deda1489ae944d
 PKG_DESCR:=		Generates ARP responses for IP address ranges
 PKG_SECTION:=		route
