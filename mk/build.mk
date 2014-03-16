@@ -470,7 +470,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	if [ -z "$(LIBC)" ];then \
+	@if [ -z "$(LIBC)" ];then \
 		libc="glibc uclibc musl"; \
 	else \
 		libc="$(LIBC)"; \
@@ -480,15 +480,18 @@ bulktoolchain:
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
-			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
+			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##"); \
 			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
+				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
+				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
+				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz host_* target_$${arch}_$${libc}$${abi}; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}_build.log; \
+		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
