@@ -4,15 +4,6 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -rnk2 | \
 	    while read line; do
-		shebang=$(sed -n '1s/^#![	 ]*//p' ${line%%:*})
-		case $shebang in
-		*[\	\ ]*) shebang=\'$(echo X"$shebang" | sed \
-		    -e 's/^X//' -e "s/'/'\\\\''/g" \
-		    -e 's/^\([^	 ][^	 ]*\)[	 ]*$/\1/' \
-		    -e 's/^\([^	 ][^	 ]*\)[	 ][	 ]*\(..*\)$/\1 \2/' \
-		    -e 's/^\([^ ][^ ]*\) /\1'\'' '\''/')\' ;;
-		esac
-		${shebang:-/bin/sh} ${line%%:*} autostop 2>&1
+		sh ${line%%:*} autostop
 	done
-	test -e /etc/rc.shutdown && (/bin/sh /etc/rc.shutdown) 2>&1
 } | logger -s -p 6 -t ''

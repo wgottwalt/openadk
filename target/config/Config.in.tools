@@ -38,6 +38,11 @@ config ADK_HOST_NEED_CCACHE
 	boolean
 	default n
 
+config ADK_HOST_NEED_PCRE
+	boolean
+	default y if ADK_HOST_DARWIN
+	default n
+
 config ADK_TOOLS_ADDPATTERN_ARGS
 	string
 	default "-p W54G -v v4.20.6" if ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G

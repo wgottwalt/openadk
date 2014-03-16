@@ -210,6 +210,8 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
 	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
+	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -278,19 +280,18 @@ endchoice
 
 choice
 prompt "Qemu ARM Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_ARM
+depends on ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_SYSTEM_QEMU_ARMHF
+
+config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	boolean "ARM Ltd. Versatile Express for Cortex-A9"
+	select ADK_CPU_CORTEX_A9
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	boolean "ARM Ltd. Versatile/PB"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_ARM926EJ_S
-
-config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	boolean "ARM Ltd. Versatile Express for Cortex-A9"
-	select ADK_hard_float
-	select ADK_eabihf
-	select ADK_CPU_CORTEX_A9
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
@@ -298,6 +299,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 endchoice
 
@@ -559,7 +561,6 @@ config ADK_TARGET_CPU_ARCH
 	default "mips" if ADK_LINUX_MIPS && ADK_big
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
 	default "arm" if ADK_LINUX_ARM && ADK_little
-	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
 	default "sparc64" if ADK_LINUX_SPARC64
 	default "sh4" if ADK_LINUX_SH && ADK_little
@@ -613,28 +614,27 @@ config ADK_TARGET_CFLAGS
 config ADK_TARGET_CMDLINE
 	string
 	default "dwc_otg.fiq_split_enable=1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default "console=tty0" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "console=ttymxc0,115200" if ADK_TARGET_SYSTEM_CUBOX_I
+	default "console=tty0" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
+	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_INTEL_ATOM
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_I686
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_X86_64
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SPARC64
-	default "console=ttyS0,9600 console=tty0" if ADK_TARGET_SYSTEM_QEMU_PPC
-	default "console=hvc0 console=tty0" if ADK_TARGET_SYSTEM_QEMU_PPC64
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
+	default "console=tty0" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_I686
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_X86_64
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_QEMU_PPC
+	default "console=hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "console=ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default "console=ttyS0,115200" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	default "console=ttyAMA0 console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4
-	default "console=ttySC1 console=tty0" if ADK_TARGET_SYSTEM_QEMU_SH4EB
-	default "console=ttyS0" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "console=ttyS0,115200" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default ""
@@ -669,6 +669,7 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
+		   !ADK_LINUX_M68K && \
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
@@ -768,7 +769,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	depends on !ADK_HARDWARE_VBOX
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_BLK_DEV_INITRD
-	select ADK_KERNEL_RD_XZ
+	select ADK_KERNEL_BLK_DEV_RAM if ADK_TARGET_SYSTEM_ARANYM_M68K
 	help
 	  create an read-only initramfs system.
 
@@ -778,6 +779,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	depends on \
 		ADK_HARDWARE_QEMU || \
 		ADK_LINUX_ARM || \
+		ADK_LINUX_M68K || \
 		ADK_LINUX_MICROBLAZE || \
 		ADK_LINUX_MIPS || \
 		ADK_LINUX_PPC || \

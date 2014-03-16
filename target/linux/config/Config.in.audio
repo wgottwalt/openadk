@@ -13,23 +13,14 @@ config ADK_KERNEL_SND_USB
 config ADK_KERNEL_SND_PXA2XX_AC97
 	boolean
 
-config ADK_KERNEL_SND_TIMER
+config ADK_KPACKAGE_KMOD_SND_TIMER
 	boolean
 
-config ADK_KERNEL_SND_PCM
+config ADK_KPACKAGE_KMOD_SND_PCM
 	boolean
 
-config ADK_KERNEL_SND_HWDEP
-	boolean
-
-config ADK_KERNEL_SND_OSSEMUL
-	boolean
-
-config ADK_KERNEL_SND_MIXER_OSS
-	boolean
-
-config ADK_KERNEL_SND_PCM_OSS
-	boolean
+config ADK_KPACKAGE_KMOD_SND_HWDEP
+	tristate
 
 config ADK_KPACKAGE_KMOD_SOUND
 	tristate
@@ -40,32 +31,24 @@ config ADK_KPACKAGE_KMOD_SND_RAWMIDI
 config ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	tristate
 
+config ADK_KPACKAGE_KMOD_SND_PCM_DMAENGINE
+	tristate
+
+config ADK_KPACKAGE_KMOD_SND_COMPRESS
+	tristate
+
 config ADK_KPACKAGE_KMOD_SND
-	prompt "kmod-snd...................... ALSA sound support"
 	tristate
 	select ADK_KPACKAGE_KMOD_SOUND
-	select ADK_KERNEL_SND_OSSEMUL
-	select ADK_KERNEL_SND_TIMER
-	select ADK_KERNEL_SND_PCM
-	select ADK_KERNEL_SND_HWDEP
+	select ADK_KPACKAGE_KMOD_SND_PCM
+	select ADK_KPACKAGE_KMOD_SND_TIMER
+	select ADK_KPACKAGE_KMOD_SND_HWDEP
 	default n
-	help
-	 Basic ALSA sound support.
-
-config ADK_KPACKAGE_KMOD_SND_OSSEMUL
-	prompt "kmod-snd-ossemul.............. ALSA OSS Emulation"
-	tristate
-	select ADK_KERNEL_SND_MIXER_OSS
-	select ADK_KERNEL_SND_PCM_OSS
-	select ADK_KPACKAGE_KMOD_SND
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default n
-	help
-	 ALSA OSS Emulation
 
 config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	prompt "kmod-snd-intel8x0............. Intel AC97 driver"
 	tristate
+	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
 	select ADK_KPACKAGE_KMOD_SND
 	default y if ADK_TARGET_SYSTEM_IBM_X40
@@ -136,10 +119,12 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
-	prompt "kmod-snd-bcm2708-soc-i2s........ ALSA SOC I2S Raspberry PI"
+	prompt "kmod-snd-bcm2708-soc-i2s...... ALSA SOC I2S Raspberry PI"
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_ARM
 	select ADK_KPACKAGE_KMOD_SND_SOC
+	select ADK_KPACKAGE_KMOD_SND_PCM_DMAENGINE
+	select ADK_KPACKAGE_KMOD_SND_COMPRESS
 	boolean
 	default n
 

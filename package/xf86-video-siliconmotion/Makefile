@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-siliconmotion
-PKG_VERSION:=		1.7.6
+PKG_VERSION:=		1.7.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b71859e15fc62563d346c7bccc0ef82e
+PKG_MD5SUM:=		94c44123d8d0a46a7f6bace8508763d8
 PKG_DESCR:=		X11 driver for Silicon Motion VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
@@ -20,6 +20,8 @@ PKG_CFLINE_XF86_VIDEO_SILICONMOTION:=depends on ADK_TARGET_WITH_VGA
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_SILICONMOTION,xf86-video-siliconmotion,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-xaa
 
 xf86-video-siliconmotion-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_SILICONMOTION}/usr/lib/xorg/modules/drivers

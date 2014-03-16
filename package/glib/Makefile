@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.38.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		2.38
 PKG_MD5SUM:=		26d1d08e478fc48c181ca8be44f5b69f
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
@@ -44,6 +44,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_CONFIGURE_ARGS+=	--disable-fam \
+			--enable-static \
 			--disable-compile-warnings
 
 glib-install:

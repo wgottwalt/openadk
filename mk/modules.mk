@@ -1175,19 +1175,20 @@ $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
-	$(MODULES_DIR)/kernel/sound/core/snd-compress \
 ,40))
+
+$(eval $(call KMOD_template,SND_PCM_DMAENGINE,snd-pcm-dmaengine,\
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
+,41))
+
+$(eval $(call KMOD_template,SND_COMPRESS,snd-compress,\
+	$(MODULES_DIR)/kernel/sound/core/snd-compress \
+,41))
 
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 ,42))
-
-$(eval $(call KMOD_template,SND_OSSEMUL,snd-ossemul,\
-	$(MODULES_DIR)/kernel/sound/core/oss/snd-mixer-oss \
-	$(MODULES_DIR)/kernel/sound/core/oss/snd-pcm-oss \
-,45))
 
 $(eval $(call KMOD_template,SND_AC97_CODEC,snd-ac97-codec,\
 	$(MODULES_DIR)/kernel/sound/ac97_bus \

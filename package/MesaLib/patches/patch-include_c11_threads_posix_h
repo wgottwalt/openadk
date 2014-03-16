@@ -1,0 +1,11 @@
+--- Mesa-10.1.0.orig/include/c11/threads_posix.h	2014-02-27 02:56:39.000000000 +0100
++++ Mesa-10.1.0/include/c11/threads_posix.h	2014-03-14 21:54:55.000000000 +0100
+@@ -176,7 +176,7 @@ mtx_init(mtx_t *mtx, int type)
+         return thrd_error;
+     pthread_mutexattr_init(&attr);
+     if ((type & mtx_recursive) != 0) {
+-#if defined(__linux__) || defined(__linux)
++#if defined(__GLIBC__)
+         pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE_NP);
+ #else
+         pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);

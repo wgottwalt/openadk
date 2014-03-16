@@ -3,7 +3,6 @@ config ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
 	select ADK_mips
 	select ADK_little
 	select ADK_broadcom_bcm47xx
-	select ADK_KERNEL_BCM47XX
 	select ADK_TARGET_WITH_MTD
 	select ADK_TARGET_WITH_SSB
 	select ADK_TARGET_WITH_WATCHDOG

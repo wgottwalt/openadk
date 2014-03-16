@@ -4,12 +4,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		inputproto
-PKG_VERSION:=		2.2
+PKG_VERSION:=		2.3
 PKG_RELEASE:=		1
 PKG_DESCR:=		X Input Extension headers
 PKG_SECTION:=		devel
 PKG_BUILDDEP:=		inputproto-host
-PKG_MD5SUM:=		e0047823230413e67d74e92af77fbe58
+PKG_MD5SUM:=		5ea366d32a9a78d6204a47ea35d9dc5c
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

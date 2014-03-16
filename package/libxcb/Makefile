@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libxcb
-PKG_VERSION:=		1.9.1
+PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		324c76024a73dba8a902638696ba87de
+PKG_MD5SUM:=		a484793fbfb974b09d54fa1ebf44b2e4
 PKG_DESCR:=		X11 keyboard library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXau-host libpthread-stubs-host xcb-proto-host

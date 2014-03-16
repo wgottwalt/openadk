@@ -19,6 +19,7 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--with-gnu-as \
+			--enable-tls \
 			--disable-libsanitizer \
 			--disable-libitm \
 			--disable-libmudflap \
@@ -62,16 +63,6 @@ ifeq ($(ADK_TOOLCHAIN_GCC_LTO),y)
 GCC_CONFOPTS+=		--enable-lto
 else
 GCC_CONFOPTS+=		--disable-lto
-endif
-
-ifeq ($(ARCH),m68k)
-ifeq ($(ADK_TARGET_LIBC),uclibc)
-GCC_CONFOPTS+=		--disable-tls
-else
-GCC_CONFOPTS+=		--enable-tls
-endif
-else
-GCC_CONFOPTS+=		--enable-tls
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)

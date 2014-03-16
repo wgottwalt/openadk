@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
 PKG_VERSION:=		3.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fc5b03aae38b9b5b6880b31924d0ace3
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		misc

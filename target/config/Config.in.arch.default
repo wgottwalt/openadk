@@ -1,7 +1,4 @@
 # target architectures
-config ADK_native
-	bool
-
 config ADK_arm
 	bool
 
@@ -48,5 +45,4 @@ config ADK_TARGET_ARCH
 	default "sh"  if ADK_sh
 	default "x86"  if ADK_x86
 	default "x86_64"  if ADK_x86_64
-	default "native"  if ADK_native
 

@@ -1,14 +1,16 @@
---- xorg-server-1.12.2.orig/hw/xfree86/os-support/xf86_OSlib.h	2012-05-17 19:09:03.000000000 +0200
-+++ xorg-server-1.12.2/hw/xfree86/os-support/xf86_OSlib.h	2013-10-29 15:23:18.000000000 +0100
-@@ -178,11 +178,7 @@
+--- xorg-server-1.15.0.orig/hw/xfree86/os-support/xf86_OSlib.h	2013-12-15 08:48:09.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/os-support/xf86_OSlib.h	2014-03-14 22:59:25.000000000 +0100
+@@ -177,12 +177,8 @@
+ #include <stdlib.h>
  #include <sys/types.h>
  #include <assert.h>
- 
+-
 -#ifdef __linux__
 -#include <termio.h>
 -#else                           /* __GLIBC__ */
  #include <termios.h>
 -#endif
++
  #ifdef __sparc__
  #include <sys/param.h>
  #endif

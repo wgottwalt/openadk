@@ -1,6 +1,3 @@
-config ADK_KERNEL_BLOCK
-	boolean
-
 config ADK_KERNEL_MD
 	boolean
 
@@ -82,7 +79,6 @@ config ADK_KERNEL_PATA_PCMCIA
 
 config ADK_KERNEL_PATA_PXA
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -95,7 +91,6 @@ config ADK_KERNEL_PATA_PXA
 
 config ADK_KERNEL_MMC_AT91
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -106,7 +101,6 @@ config ADK_KERNEL_MMC_AT91
 
 config ADK_KERNEL_MMC_SDHCI_BCM2708
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -121,7 +115,6 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708
 
 config ADK_KERNEL_PATA_RB532
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -133,7 +126,6 @@ config ADK_KERNEL_PATA_RB532
 
 config ADK_KERNEL_PATA_AMD
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -148,7 +140,6 @@ config ADK_KERNEL_PATA_AMD
 
 config ADK_KERNEL_PATA_SC1200
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -160,7 +151,6 @@ config ADK_KERNEL_PATA_SC1200
 
 config ADK_KERNEL_PATA_JMICRON
 	boolean
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -171,7 +161,6 @@ config ADK_KERNEL_PATA_JMICRON
 
 config ADK_KERNEL_SATA_AHCI
 	tristate
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV
@@ -185,7 +174,6 @@ menu "Block devices support"
 config ADK_KPACKAGE_KMOD_SATA_AHCI
 	prompt "kmod-sata-ahci.................... AHCI SATA driver"
 	tristate
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on !ADK_KERNEL_SATA_AHCI
@@ -197,7 +185,6 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	prompt "kmod-blk-dev-loop................. Loop mount support"
 	tristate
-	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_BLK_DEV
 	default n
 	help

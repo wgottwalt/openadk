@@ -6,11 +6,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ORBit2
 PKG_VERSION:=		2.14.19
 PKG_EXTRAVER:=		2.14
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		87c69c56c6d0bdafa4de5e18ae115cc9
 PKG_DESCR:=		a CORBA 2.4-compliant Object Request Broker
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		gettext-tiny glib-host libIDL-host libIDL
+PKG_BUILDDEP:=		gettext-tiny glib-host libIDL-host glib libIDL
 PKG_URL:=		http://projects.gnome.org/ORBit2/
 PKG_SITES:=		ftp://ftp.gnome.org//pub/gnome/sources/ORBit2/${PKG_EXTRAVER}/
 PKG_LIBNAME:=		orbit2
@@ -21,8 +21,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CFLAGS_FOR_BUILD+=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --cflags)
-LDFLAGS_FOR_BUILD+=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --libs)
-LDFLAGS_FOR_BUILD+=	-lgmodule-2.0
+LDFLAGS_FOR_BUILD+=	-static
+LIBS_FOR_BUILD:=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --libs)
+LIBS_FOR_BUILD+=	-lgmodule-2.0 -ldl -lpthread -lrt -lglib-2.0
+XAKE_FLAGS+=		LIBS_FOR_BUILD="${LIBS_FOR_BUILD}"
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
 			ac_cv_alignof_CORBA_boolean=1 \
 			ac_cv_alignof_CORBA_char=1 \

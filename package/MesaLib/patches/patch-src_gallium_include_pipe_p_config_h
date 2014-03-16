@@ -1,6 +1,6 @@
---- Mesa-9.2.2.orig/src/gallium/include/pipe/p_config.h	2013-10-18 00:26:23.000000000 +0200
-+++ Mesa-9.2.2/src/gallium/include/pipe/p_config.h	2014-01-06 12:26:04.042469119 +0100
-@@ -126,7 +126,7 @@
+--- Mesa-10.1.0.orig/src/gallium/include/pipe/p_config.h	2014-02-27 02:56:39.000000000 +0100
++++ Mesa-10.1.0/src/gallium/include/pipe/p_config.h	2014-03-14 21:36:14.000000000 +0100
+@@ -130,7 +130,7 @@
   * Endian detection.
   */
  

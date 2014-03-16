@@ -4,8 +4,9 @@
 [[ $1 = autostart ]] || exit 0
 echo "Starting test script ..."
 if [ -x /run.sh ];then
-	exec /run.sh
+	/run.sh
+	quit
 else
 	echo "no run.sh found"
+	quit
 fi
-quit
