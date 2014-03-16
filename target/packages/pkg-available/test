@@ -1,6 +1,5 @@
 config ADK_PKG_TEST
 	bool "Compile a ADK test framework system"
-	default n
 	select ADK_PACKAGE_ADK_TEST_TOOLS
 	select ADK_PACKAGE_STRACE
 	select ADK_PACKAGE_SOCAT
@@ -8,6 +7,8 @@ config ADK_PKG_TEST
 	select ADK_KERNEL_BLK_DEV_INITRD
 	select ADK_KERNEL_COMP_XZ
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+	select ADK_SIMPLE_NETWORK_CONFIG
+	default n
 	help
 	  Package collection used to build adk-test-framework root
 	  filesystem.
