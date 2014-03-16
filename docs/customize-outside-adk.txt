@@ -1,0 +1,154 @@
+// -*- mode:doc -*- ;
+
+[[outside-adk-custom]]
+Keeping customizations outside OpenADK
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OpenADK project recommends and encourages upstreaming to the
+official OpenADK version the packages and board support that are
+written by developers. However, it is sometimes not possible or
+desirable because some of these packages or board support are highly
+specific or proprietary.
+
+In this case, OpenADK users are offered following choice using
+here own git repository.
+
+* Initialize your project
+
+Personalize your Git environment via:
+
+---------------------
+ $ git config --global user.name "Waldemar Brodkorb"
+ $ git config --global user.email wbx@openadk.org
+---------------------
+
+Get the latest version of OpenADK via anonymous git:
+
+---------------------
+ $ git clone --bare git://openadk.org/git/openadk myadk.git
+---------------------
+
+Use git-daemon to make the repository public to your developers. After that clone your new shared project repository:
+
+---------------------
+ $ git clone git+ssh://myserver.com/git/myadk.git
+ $ cd myadk
+---------------------
+
+Configure OpenADK remote git repository:
+
+---------------------
+ $ git remote add openadk git://openadk.org/git/openadk
+---------------------
+
+* Create your firmware
+
+Now you can either start with the latest version or use some older version:
+
+---------------------
+ $ git checkout -b stable_1_0 $sha1
+---------------------
+You can find $sha1 via git log. $sha1 is the hash after the keyword “commit”.
+
+Now build a firmware image for your target and test it. Fix bugs in the build
+environment or add new stuff. You can use the “extra” directory to add local
+unpackaged binaries and/or configuration files to overwrite packaged stuff.
+
+Check your uncommitted changes:
+
+---------------------
+ $ git status
+ $ git diff --cached
+ $ git diff
+---------------------
+
+Commit your git-added changes:
+
+---------------------
+ $ git commit 
+---------------------
+Or just commit all changes:
+
+---------------------
+ $ git commit -a
+---------------------
+It is a good style to make a lot of small atomic commits.
+
+Push your changes back to your git repository.
+For new local branches:
+
+---------------------
+ $ git push origin stable_1_0
+---------------------
+
+Or in regulary usage via:
+---------------------
+ $ git push
+---------------------
+
+* Working together with OpenADK
+
+You can generate patches from all your changes against the remote master:
+
+---------------------
+ $ git format-patch -s origin 
+---------------------
+
+Send all relevant patches to OpenADK author via eMail.
+
+Update your master with changes from OpenADK:
+
+---------------------
+ $ git checkout master
+ $ git pull openadk master
+---------------------
+
+If you want you can merge all changes to your branch:
+
+---------------------
+ $ git checkout stable_1_0
+ $ git merge master
+---------------------
+
+Or just cherry-pick some of the commits:
+
+---------------------
+ $ git cherry-pick $sha1
+---------------------
+
+* Releasing
+
+Tag your tested stable branch:
+
+---------------------
+ $ git tag -a stable_1.0
+---------------------
+Push your tag to your repository:
+
+---------------------
+ $ git push origin stable_1.0
+---------------------
+
+Checkout your tag and build your firmware:
+
+---------------------
+ $ git clone git+ssh://myserver.com/git/myadk.git mytag
+ $ cd mytag 
+ $ git checkout stable_1.0
+---------------------
+
+* Deleting unused branches
+
+Deleting branches remotely:
+
+---------------------
+ $ git branch -r
+ $ git push origin :branchname
+---------------------
+
+Deleting branches locally:
+
+---------------------
+ $ git branch
+ $ git branch -D branchname
+---------------------

@@ -1,0 +1,52 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[pkg-build-steps]]
+
+Package-specific _make_ targets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Running +make package=<package> package+ builds and installs that particular package.
+Be aware of the fact, that no build dependencies are resolved using this method!
+
+For packages relying on the OpenADK infrastructure, there are
+numerous special make targets that can be called independently like
+this:
+
+------------
+ $ make package=<package> <target>
+------------
+
+The package build targets are (in the order they are executed):
+
+[width="90%",cols="^1,4",options="header"]
+|===================================================
+| command/target    | Description
+
+| +fetch+           | Fetch the source
+
+| +extract+         | Put the source in the package build directory
+
+| +patch+           | Apply the patches, if any
+
+| +configure+       | Run the configure commands, if any
+
+| +build+           | Run the compilation commands
+
+| +fake+            | Run the installation of the package into a fake directory
+
+| +package+         | Create a package or tar archive of the package files
+
+|===================================================
+
+Additionally, there are some other useful make targets:
+
+[width="90%",cols="^1,4",options="header"]
+|===================================================
+| command/target    | Description
+
+| +clean+           | Remove the whole package build directory
+
+| +host-package+    | Build and install the host binaries and libraries
+
+|===================================================

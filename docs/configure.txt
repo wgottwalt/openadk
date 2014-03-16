@@ -1,0 +1,68 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[toolchain]]
+
+Cross-compilation toolchain
+---------------------------
+
+A compilation toolchain is the set of tools that allows you to compile
+code for your system. It consists of a compiler (in our case, +gcc+),
+binary utils like assembler and linker (in our case, +binutils+) and a
+C standard library (either
+http://www.gnu.org/software/libc/libc.html[GNU Libc],
+http://www.uclibc.org/[uClibc] or
+http://www.musl-libc.org/[musl]).
+
+The system installed on your development station certainly already has
+a compilation toolchain that you can use to compile an application
+that runs on your system. If you're using a PC, your compilation
+toolchain runs on an x86 processor and generates code for an x86
+processor. Under most Linux systems, the compilation toolchain uses
+the GNU libc (glibc) as the C standard library. This compilation
+toolchain is called the "host compilation toolchain". The machine on
+which it is running, and on which you're working, is called the "host
+system" footnote:[This terminology differs from what is used by GNU
+configure, where the host is the machine on which the application will
+run (which is usually the same as target)].
+
+The compilation toolchain is provided by your distribution, and
+OpenADK has nothing to do with it (other than using it to build a
+cross-compilation toolchain and other tools that are run on the
+development host).
+
+As said above, the compilation toolchain that comes with your system
+runs on and generates code for the processor in your host system. As
+your embedded system has a different processor, you need a
+cross-compilation toolchain - a compilation toolchain that runs on
+your _host system_ but generates code for your _target system_ (and
+target processor). For example, if your host system uses x86 and your
+target system uses ARM, the regular compilation toolchain on your host
+runs on x86 and generates code for x86, while the cross-compilation
+toolchain runs on x86 and generates code for ARM.
+
+OpenADK provides only one solution for the cross-compilation toolchain.
+The versions for binutils, gcc, gdb and libc are fixed. It is a combination
+of mostly the latest versions, which are known to work in this combination
+and are known to produce usable firmware images. You normally do not need to
+know the deep details, it is part of OpenADK policy to keep this part
+simple for the user.
+
+You can only choose between three C libraries:
+http://www.uclibc.org[uClibc], the
+http://www.gnu.org/software/libc/libc.html[glibc] and
+http://www.musl-libc.org[musl].
+
+There are some minimal configuration options provided in +Toolchain settings+.
+You can enable or disable the building of following components and toolchain
+options:
+
+* GDB (enabled by default)
+
+* GNU C++ compiler (enabled by default, when disabled 
+  will prevent some packages to show up in the menu selection)
+
+* Stack Smashing Support (SSP) support for GNU C/C++ Compiler (experimental, some packages will fail to build)
+
+* Link Time Optimization (LTO) support for GNU C/C++ Compiler (experimental, some packages will fail to build)
+

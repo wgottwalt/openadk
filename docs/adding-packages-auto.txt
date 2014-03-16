@@ -1,0 +1,71 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Infrastructure for autotools-based packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[auto-package-tutorial]]
+
+First, let's see how to write a +Makefile+ file for an autotools-based
+package, with an example:
+
+------------------------
+01: # This file is part of the OpenADK project. OpenADK is copyrighted
+02: # material, please see the LICENCE file in the top-level directory.
+03: 
+04: include ${TOPDIR}/rules.mk
+05:
+06: PKG_NAME:=		libfoo
+07: PKG_VERSION:=	1.0
+08: PKG_RELEASE:=	1
+09: PKG_MD5SUM:=	ba526cd8f4403a5d351a9efaa8608fbc
+10: PKG_DESCR:=		foo library
+11: PKG_SECTION:=	libs
+12: PKG_BUILDDEP:=	openssl
+13: PKG_DEPENDS:=	libopenssl
+14: PKG_URL:=		http://www.libfoo.org/
+15: PKG_SITES:=		http://downloads.libfoo.org/
+16:
+17: include ${TOPDIR}/mk/package.mk
+18:
+19: $(eval $(call PKG_template,LIBFOO,libfoo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+20:
+21: libfoo-install:
+22:	${INSTALL_DIR} ${IDIR_LIBFOO}/usr/lib
+23:	${CP} ${WRKINST}/usr/lib/libfoo.so* ${IDIR_LIBFOO}/usr/lib
+24:
+25: include ${TOPDIR}/mk/pkg-bottom.mk
+
+------------------------
+
+The Makefile begins with line 4 with the inclusion of the top level rules.mk
+file.  After that the Makefile starts on line 6 to 15 with metadata
+information: the name of the package (+PKG_NAME+), the version of the package
+(+PKG_VERSION+), the release number of the package (+PKG_RELEASE+), which is
+used in OpenADK to mark any package updates, the md5 hash of the source archive
+(+PKG_MD5SUM+), the short one line description for the package (+PKG_DESCR+),
+the package section for the menu configuration system (+PKG_SECTION+), the
+package buildtime dependencies (+PKG_BUILDDEP+), the package runtime
+dependencies (+PKG_DEPENDS+), the package homepage (+PKG_URL+) and finally the
+internet locations at which the tarball can be downloaded from (+PKG_SITES+).
+Normally ${PKG_NAME}-${PKG_VERSION}.tar.gz will be downloaded. You can
+overwrite the default via the +DISTFILES+ variable. You can add more then one
+archive name in +DISTFILES+ via space separated. If you have no source archive
+at all, just use the boolean variable +NO_DISTFILES+ and set it to 1.
+
+On line 17 the +mk/package.mk+ file is included, which contains the PKG_template
+function, which is used in line 19.
+
+On line 21-23 we install the shared library into the package installation
+directory, which is used to create the resulting binary package or tar archive
+for the target.
+
+On line 25 we include +mk/pkg-bottom.mk+, which includes common functions used
+by the package fetching and building process.
+
+With the autotools infrastructure, all the steps required to build
+and install the packages are already defined, and they generally work
+well for most autotools-based packages. However, when required, it is
+still possible to customize what is done in any particular step.
+By adding a post-operation hook (after extract, patch, configure,
+build or install). See xref:hooks[] for details.

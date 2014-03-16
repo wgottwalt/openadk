@@ -1,3 +1,12 @@
+- tzdata split + update
+- getty + serial rework
+- add daemon() function to functions.sh
+- add printing of OK/FAIL (optional verbose bootup)
+- fixup rework libgcc --export-symbols
+- libgcc static?
+- remove 32 bit kernel for 64 bit targets
+- static toolchain support
+- toolchain in /usr , check gcj
 - rework startup, maybe use init.c, start gettys after bootup ready
 - more output for initscripts on bootup
 - port uuterm

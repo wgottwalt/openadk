@@ -1,0 +1,23 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[toolchain-custom]]
+Customizing the toolchain
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is no simple way to change anything for the toolchain.
+OpenADK chooses the best combination of the toolchain components to
+provide you with a working and recent system.
+
+If you like to change the version of a component, add patches or like
+to change the configure options, you need to dig into the +toolchain+ directory.
+
+For example to change the version of gcc, you need to change +toolchain/gcc/Makefile.inc+.
+Be aware of the fact, that this is used for the +package/gcc/Makefile+ and therefore for
+the gcc running on your target.
+
+OpenADK supports running a cross-compiled toolchain on your target. You can even use OpenADK
+buildsystem on your target. There is a package collection called +development+, which does 
+configure OpenADK to include all required software to use OpenADK on your target.
+
+
