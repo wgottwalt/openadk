@@ -1,5 +1,5 @@
 --- arpd.orig/arpd.c	2003-02-09 05:20:40.000000000 +0100
-+++ arpd/arpd.c	2007-01-21 00:39:05.000000000 +0100
++++ arpd/arpd.c	2014-03-16 08:11:53.000000000 +0100
 @@ -70,7 +70,7 @@ static int			 arpd_sig;
  static void
  usage(void)
@@ -74,10 +74,21 @@
  			    addr_ntoa(&req->pa), addr_ntoa(&src.arp_ha));
  			
  			/* This address is claimed */
-@@ -465,14 +469,14 @@ main(int argc, char *argv[])
+@@ -445,9 +449,6 @@ arpd_recv(int fd, short type, void *ev)
+ void
+ terminate_handler(int sig)
+ {
+-	extern int event_gotsig;
+-
+-	event_gotsig = 1;
+ 	arpd_sig = sig;
+ }
+ 
+@@ -464,15 +465,14 @@ int
+ main(int argc, char *argv[])
  {
  	struct event recv_ev;
- 	extern int (*event_sigcb)(void);
+-	extern int (*event_sigcb)(void);
 -	char *dev;
 +	char *dev, *and_pcap_exp;
  	int c, debug;
@@ -91,7 +102,7 @@
  		switch (c) {
  		case 'd':
  			debug = 1;
-@@ -480,6 +484,9 @@ main(int argc, char *argv[])
+@@ -480,6 +480,9 @@ main(int argc, char *argv[])
  		case 'i':
  			dev = optarg;
  			break;
@@ -101,7 +112,7 @@
  		default:
  			usage();
  			break;
-@@ -489,9 +496,9 @@ main(int argc, char *argv[])
+@@ -489,9 +492,9 @@ main(int argc, char *argv[])
  	argv += optind;
  
  	if (argc == 0)
@@ -113,3 +124,11 @@
  	
  	if ((fp = fopen(PIDFILE, "w")) == NULL)
  		err(1, "fopen");
+@@ -524,7 +527,6 @@ main(int argc, char *argv[])
+ 		perror("signal");
+ 		return (-1);
+ 	}
+-	event_sigcb = arpd_signal;
+ 	
+ 	event_dispatch();
+ 

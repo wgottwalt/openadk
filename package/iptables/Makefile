@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.21
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		536d048c8e8eeebcd9757d0863ebb0c0
 PKG_DESCR:=		The netfilter firewalling software
 PKG_SECTION:=		firewall
