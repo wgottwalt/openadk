@@ -42,13 +42,8 @@ and pkg trees, the firmware and the toolchain for all targets):
  $ make cleandir
 --------------------
 
-If you only want to clean your specific configured target, just use:
-
---------------------
- $ make cleantarget
---------------------
-
-If you even want to clean any downloaded source:
+If you even want to clean any downloaded source and your 
+confiuration +.config+:
 
 --------------------
  $ make distclean

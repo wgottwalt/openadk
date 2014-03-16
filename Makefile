@@ -32,8 +32,7 @@ help:
 	@echo '  kernelconfig - Modify the target kernel configuration'
 	@echo ''
 	@echo 'Cleaning targets:'
-	@echo '  clean        - Remove bin and build_dir directories'
-	@echo '  cleantarget  - Same as "clean", but also remove toolchain for target'
+	@echo '  clean        - Remove firmware and build directories'
 	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
 	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
@@ -99,10 +98,6 @@ cleankernel kernelclean: .prereq_done
 cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} cleandir
 	@-rm -f make.log .prereq_done
-
-cleantarget targetclean: .prereq_done
-	-@${GMAKE_INV} cleantarget
-	@-rm -f make.log
 
 cleantoolchain toolchainclean: .prereq_done
 	-@${GMAKE_INV} cleantoolchain
