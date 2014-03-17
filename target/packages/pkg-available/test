@@ -4,10 +4,12 @@ config ADK_PKG_TEST
 	select ADK_PACKAGE_STRACE
 	select ADK_PACKAGE_SOCAT
 	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_FILE
 	select ADK_KERNEL_BLK_DEV_INITRD
 	select ADK_KERNEL_COMP_XZ
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
 	select ADK_SIMPLE_NETWORK_CONFIG
+	select ADK_KPACKAGE_KMOD_IPV6
 	default n
 	help
 	  Package collection used to build adk-test-framework root
