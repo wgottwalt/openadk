@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		valgrind
 PKG_VERSION:=		3.9.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0947de8112f946b9ce64764af7be6df2
 PKG_DESCR:=		memory management debugging
 PKG_SECTION:=		debug
