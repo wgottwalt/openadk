@@ -31,10 +31,10 @@ INSTALL_STYLE:=		manual
 # compile nothing, glibc is already build in toolchain directory
 do-install:
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/$(ADK_TARGET_LIBC_PATH)/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
-	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_compat libnss_dns libnss_files; do \
-		$(CP) $(STAGING_TARGET_DIR)/$(ADK_TARGET_LIBC_PATH)/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/$(ADK_TARGET_LIBC_PATH)/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
+	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_dns libnss_files; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
