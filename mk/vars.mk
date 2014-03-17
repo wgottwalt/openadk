@@ -21,7 +21,7 @@ TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 
-# PFX dirs for cleandir
+# dirs for cleandir
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
@@ -56,18 +56,13 @@ TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bi
 HOST_PATH=		${SCRIPT_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
 AUTOTOOL_PATH=		${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 
-ifeq ($(ADK_TARGET_ABI_X32),y)
-GNU_TARGET_NAME=	$(CPU_ARCH)-x32-linux-$(ADK_TARGET_SUFFIX)
-else
-GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
-endif
-
 ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
 GCC_CHECK:=		GCC_HONOUR_COPTS=2
 else
 GCC_CHECK:=
 endif
 
+GNU_TARGET_NAME:=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 TARGET_CROSS:=		$(STAGING_HOST_DIR)/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
 CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} --host=${GNU_TARGET_NAME} --target=${GNU_TARGET_NAME}
@@ -76,10 +71,17 @@ ifneq ($(strip ${ADK_USE_CCACHE}),)
 TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
 endif
 
-# target compiler flags
+# target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
+TARGET_AR:=		${TARGET_COMPILER_PREFIX}ar
+TARGET_RANLIB:=		${TARGET_COMPILER_PREFIX}ranlib
+
+ifneq ($(ADK_TARGET_ABI_CFLAGS),)
+TARGET_CC+=		$(ADK_TARGET_ABI_CFLAGS)
+TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
+endif
 
 MODE_FLAGS:=
 ifeq ($(ADK_LINUX_ARM),y)
@@ -91,13 +93,13 @@ endif
 endif
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS) $(MODE_FLAGS)
-TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(TARGET_OPTIMIZATION) $(MODE_FLAGS)
-TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(MODE_FLAGS)
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
+TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
 			$(ADK_TARGET_ABI_LDFLAGS)
+
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
 # needed for musl ppc 
@@ -130,6 +132,10 @@ TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CFLAGS+=		-g3
 endif
 
+ifneq ($(MODE_FLAGS),)
+TARGET_CFLAGS+=		$(MODE_CFLAGS)
+TARGET_CXXFLAGS+=	$(MODE_CFLAGS)
+endif
 
 # A nifty macro to make testing gcc features easier (from uClibc project)
 check_gcc=$(shell \
@@ -150,9 +156,11 @@ PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			PATH=${HOST_PATH} sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ARCH} \
-			KERNEL_PATH=${LINUX_DIR} KERNELDIR=${LINUX_DIR} KERNEL_DIR=${LINUX_DIR} \
+			KERNEL_PATH=${LINUX_DIR} \
+			KERNELDIR=${LINUX_DIR} \
+			KERNEL_DIR=${LINUX_DIR} \
 			PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-			LDFLAGS="$(ADK_TARGET_KERNEL_LDFLAGS)" CFLAGS_MODULE="-fhonour-copts" V=1
+			CFLAGS_MODULE="-fhonour-copts" V=1
 
 TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			AR='$(TARGET_CROSS)ar' \

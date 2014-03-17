@@ -20,6 +20,12 @@ ifneq ($(strip $(ADK_LINUX_64)$(ADK_TARGET_KERNEL64)),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+CONFOPTS+=		--disable-multilib
+else
+CONFOPTS+=		--enable-multilib
+endif
+
 ifeq (${ADK_MAKE_PARALLEL},y)
 BINUTILS_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
@@ -31,7 +37,6 @@ $(WRKBUILD)/.configured:
 		--prefix=$(STAGING_HOST_DIR) \
 		--target=$(GNU_TARGET_NAME) \
 		--with-sysroot=$(STAGING_TARGET_DIR) \
-		--disable-multilib \
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-nls \

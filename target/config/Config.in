@@ -578,17 +578,6 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-mx32" if ADK_x32
 	default "-m64" if ADK_64
 
-config ADK_TARGET_ABI_LDFLAGS
-	string
-	default "-Wl,-m -Wl,elf_i386" if ADK_32
-
-config ADK_TARGET_KERNEL_LDFLAGS
-	string
-	default "-mabi=64" if ADK_n32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_o32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_n64 && ADK_TARGET_KERNEL64
-	default ""
-
 config ADK_TARGET_CFLAGS
 	string
 	default "-march=geode" if ADK_CPU_GEODE
