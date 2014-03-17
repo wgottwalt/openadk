@@ -1,0 +1,9 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Going further in OpenADK's innards
+====================================
+
+include::how-openadk-works.txt[]
+
+include::advanced.txt[]

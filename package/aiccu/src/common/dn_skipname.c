@@ -9,10 +9,10 @@
  * return:
  *      0 on success, -1 (with errno set) on failure.
  */
-int ns_name_skip(const u_char **ptrptr, const u_char *eom)
+int ns_name_skip(const unsigned char **ptrptr, const unsigned char *eom)
 {
-	const u_char *cp;
-	u_int n;
+	const unsigned char *cp;
+	unsigned int n;
 
 	cp = *ptrptr;
 	while (cp < eom && (n = *cp++) != 0)
@@ -40,9 +40,9 @@ int ns_name_skip(const u_char **ptrptr, const u_char *eom)
 	return (0);
 }
 
-int dn_skipname(const u_char *ptr, const u_char *eom)
+int dn_skipname(const unsigned char *ptr, const unsigned char *eom)
 {
-	const u_char *saveptr = ptr;
+	const unsigned char *saveptr = ptr;
 
 	if(ns_name_skip(&ptr, eom) == -1)
 		return (-1);

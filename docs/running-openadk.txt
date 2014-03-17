@@ -1,0 +1,178 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Running OpenADK created Linux firmware
+======================================
+
+Bootloader
+~~~~~~~~~~~
+
+The Bootloader is used to initialize the machine and load the Linux kernel.
+A list of popular Bootloaders can be found on http://elinux.org/Bootloader.
+OpenADK provides the Bootloader if necessary for a target system.
+You can find them in +make menuconfg+ under +Packages/Bootloader+.
+Some Bootloaders require the Linux kernel in a special format (SREC, ELF, ..),
+compressed or with a special header. This will be automatically done by
+OpenADK in +target/<arch>/Makefile+ while creating the firmware archives or
+images.
+
+Linux kernel
+~~~~~~~~~~~~
+
+The kernel is a program that constitutes the central core of a computer
+operating system. It has complete control over everything that occurs in the
+system. The Bootloader can provide some basic runtime configuration 
+parameters via the kernel commandline feature.
+
+The Linux kernel in OpenADK is intended to be very small in size and will
+be by default compressed with xz compression algorithm, if available for
+the target system. You can configure the compression algorithm used for the
+compression of the Linux kernel and if choosen the initramfs filesystem in
++make menuconfig+. In +Kernel configuration+ you have the choice between
+dfferent kernel versions. The latest version will be automatically used.
+There you can choose any needed addon drivers or any supported runtime
+and debugging features.
+
+The kernel expands itself on boot, if compressed, and then initialize the
+hardware. The additional kernel modules are loaded later by a init script.
+The kernel will autoamtically mount the virtual filesystem /dev as devtmpfs
+and then will execute +/sbin/init+ in userspace.
+
+init system
+~~~~~~~~~~~
+
+The _init_ program is the first userspace program started by the kernel (it
+carries the PID number 1), and is responsible for starting the userspace
+services and programs (for example: web server, graphical applications, other
+network servers, etc.).
+
+OpenADK uses *Busybox* init. Amongst many programs, Busybox has an
+implementation of a basic +init+ program, which is sufficient for most embedded
+systems.  The Busybox +init+ program will read the +/etc/inittab+ file at boot
+to know what to do. The syntax of this file can be found in
+http://git.busybox.net/busybox/tree/examples/inittab (note that Busybox
++inittab+ syntax is special: do not use a random +inittab+ documentation from
+the Internet to learn about Busybox +inittab+). The default +inittab+ in
+OpenADK is generated while producing the +base-files+ package.  The main job
+the default inittab does is to start the +/etc/init.d/rcS+ shell script, and
+start one or more +getty+ programs (which provides a login prompt).
+
+/dev management
+~~~~~~~~~~~~~~~
+
+On a Linux system, the +/dev+ directory contains special files, called
+_device files_, that allow userspace applications to access the
+hardware devices managed by the Linux kernel. Without these _device
+files_, your userspace applications would not be able to use the
+hardware devices, even if they are properly recognized by the Linux
+kernel.
+
+OpenADK uses *dynamic device nodes using devtmpfs and mdev*. This method relies
+on the _devtmpfs_ virtual filesystem in the kernel, which is enabled by default
+for all OpenADK generated kernels, and adds the +mdev+ userspace utility on top
+of it. +mdev+ is a program part of Busybox that the kernel will call every time
+a device is added or removed. Thanks to the +/etc/mdev.conf+ configuration
+file, +mdev+ can be configured to for example, set specific permissions or
+ownership on a device file, call a script or application whenever a device
+appears or disappear, etc.  Basically, it allows _userspace_ to react on device
+addition and removal events. +mdev+ is also important if you have devices that
+require a firmware, as it will be responsible for pushing the firmware contents
+to the kernel.  +mdev+ is a lightweight implementation (with fewer features) of
++udev+. For more details about +mdev+ and the syntax of its configuration file,
+see http://git.busybox.net/busybox/tree/docs/mdev.txt.
+
+initscripts
+~~~~~~~~~~~
+
+The /etc/init.d/rcS script will execute all shell scripts in /etc/init.d in
+order with the parameter +autostart+. The order is identified by the +#INIT+
+comment in the script. All scripts are sourcing the +/etc/rc.conf+ file to
+determine if a service should be started on boot and which flags if any are
+used for the service. By default all services except syslog and ssh are
+disabled.  Most scripts provided by OpenADK via
++package/<pkgname>/files/<pkgname>.init+ are like:
+
+---------------------
+#!/bin/sh
+#PKG foo
+#INIT 60
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+        test x"${foo:-NO}" = x"NO" && exit 0
+        exec sh $0 start
+        ;;
+start)
+        /usr/sbin/foo $foo_flags
+        ;;
+stop)
+        kill $(pgrep -f /usr/sbin/foo )
+        ;;
+restart)
+        sh $0 stop
+        sh $0 start
+        ;;
+*)
+        echo "usage: $0 (start|stop|restart)"
+        exit 1
+esac
+exit $?
+---------------------
+
+cfgfs - configuration file system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The cfgfs application for the OpenADK system uses a special small partition on
+the block device of your embedded system (f.e. flash, sd card, compact flash
+or hard disk). Only changes made to /etc on your embedded system are saved in a
+compressed form (using LZO1 compression algorithm) in this partition. There is
+no Linux filesystem on this partition. The embedded system initialization
+process will setup /etc correctly on boot up, when cfgfs application is found.
+After making any changes to /etc, which should survive a reboot of the embedded
+system must be written to the cfgfs partition via “cfgfs commit”. Trying to
+reboot, shutdown or halt an embedded system with unsaved changes will generate
+an error, which can be circumvented. Updates to /etc via the ipkg package
+manager will be reported.
+
+---------------------
+cfgfs
+Configuration Filesystem Utility (cfgfs), Version 1.09
+Syntax:
+        /sbin/cfgfs commit [-f]
+        /sbin/cfgfs erase
+        /sbin/cfgfs setup [-N]
+        /sbin/cfgfs status [-rq]
+        /sbin/cfgfs { dump | restore } [<filename>]
+---------------------
+
+network configuration
+~~~~~~~~~~~~~~~~~~~~~
+
+On bootup +/etc/network/interfaces+ is used to find out which network configuration
+should be used. The default is to use DHCP (via busybox +udhcpc+) on the first found
+ethernet device to configure the network. See network configuration for detailed syntax
+of +/etc/network/interfaces+. It is similar to Debian network configuration and uses
++ifupdown+ from +busybox+.
+
+See Appendix xref:network-configuration[]
+
+getting a shell on the system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are two method available to get a shell on your embedded system created with
+OpenADK. You can either login locally via serial console or graphical console or you
+can login remotely via secure shell.
+
+In both cases the default user is +root+ and the default password is
++linux123+. *You should always change the default password!!* You can do this
+either via +passwd+ on the system or you can preconfigure a password via +make
+menuconfig+ under +Runtime configuration+.
+
+The default shell used in OpenADK is +mksh+ from http://www.mirbsd.org/mksh/.
+You can change the shell in +make menuconfig+ under +Runtime configuration+. Be
+aware of the fact that the bootup process might use some +mksh+ features to
+speedup the system start. When you change the shell for system +/bin/sh+ the
+slower startup is used as a fallback.

@@ -41,8 +41,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_TEST=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
-			ADK_PKG_CONSOLE=n \
-			ADK_PKG_TEST=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -122,7 +120,7 @@ POSTCONFIG=		-@\
 			make kernelclean;\
 		fi; \
 		if [ "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config|md5sum)" != "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config.old|md5sum)" ];then \
-			echo "You should make cleantarget, after changing thumb mode";\
+			echo "You should make cleandir, after changing thumb mode";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
@@ -144,7 +142,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 	$(STAGING_HOST_DIR)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
-.PHONY: all world clean cleantarget cleandir cleantoolchain distclean image_clean
+.PHONY: all world clean cleandir cleantoolchain distclean image_clean
 
 world:
 	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
@@ -274,13 +272,6 @@ cleantoolchain:
 	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
-
-cleantarget:
-	@$(TRACE) cleantarget
-	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
-	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
 	@$(TRACE) distclean
@@ -593,7 +584,7 @@ bulkallmod:
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
-		$(GMAKE) cleantarget; \
+		$(GMAKE) clean; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
 	        if [ -f .exit ]; then break;fi \

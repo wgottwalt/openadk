@@ -145,7 +145,6 @@ check_gcc=$(shell \
 CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
 
 # host compiler flags
-CXX_FOR_BUILD?=		g++
 CPPFLAGS_FOR_BUILD?=	-I$(STAGING_HOST_DIR)/usr/include
 CFLAGS_FOR_BUILD=	-O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall

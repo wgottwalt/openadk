@@ -1,0 +1,20 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[busybox-custom]]
+Customizing the Busybox configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+http://www.busybox.net/[Busybox] is very configurable, and you may
+want to customize it. You can just configure it via +Package selection+,
++Base System+, +Busybox Configuration+. The menu based busybox configuration
+is mostly integrated into OpenADK. There are some options, which are not
+available and not supported. If you need to, you can change the defaults
+in +package/busybox/config+ and regenerate your OpenADK configuration.
+
+A change in the busybox configuration will rebuild the busybox package. If you
+choose another implementation of f.e. tar, which is provided by default from
+busybox, tar in busybox will be deactivated and the package will be
+automatically rebuilded, so that your resulting firmware images or archives
+will only contain a single tar program. Obviosly just the one you have
+selected.

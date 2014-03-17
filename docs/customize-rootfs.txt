@@ -1,0 +1,23 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[rootfs-custom]]
+Customizing the generated target filesystem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Besides changing one or another configuration through +make menuconfig+,
+there are is a way to customize the resulting target filesystem.
+
+Create a new directory called +extra+ in the top OpenADK directory.
+Put there a tree of directories and files that will be copied directly
+over the target filesystem (+root_*+) after everything is build, but
+before the firmware images or archives are created.
+
+You can also point to another directory via:
+---------------
+ $ make extra=/foo/bar
+---------------
+
+You can start with the example configuration files from +root_*+.
+The +extra+ directory will never be deleted by any clean target to avoid
+loss of customized configuration data.

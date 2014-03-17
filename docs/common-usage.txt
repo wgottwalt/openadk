@@ -1,0 +1,87 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Daily use
+---------
+
+Understanding when a full rebuild is necessary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OpenADK tries to detect what part of the system should be rebuilt when the
+system configuration is changed through +make menuconfig+.  In some cases it
+automatically rebuilt packages, but sometimes just a warning is printed to the
+terminal, that a rebuild is necessary to make the changes an effect. If strange
+things are happening, the autodetection might have not worked correctly, then
+you should consider to rebuild everything. If you are following development you
+should always do a full rebuild after fetching updates via +git pull+. It is
+not always required, but if anything fails, you are on your own.
+Use following to do a full rebuild without refetching distfiles:
+
+--------------------
+ $ make cleandir && make
+--------------------
+
+Understanding how to rebuild packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In OpenADK you can rebuild a single package with:
+--------------------
+ $ make package=<pkgname> clean package
+--------------------
+
+It will automatically remove all files added to the staging target directory
++target_*+. If you just want to restart compilation process, after making
+some fixes in +build_*/w-<pkgname>-<pkgversion>/+, just do:
+--------------------
+ $ make package=<pkgname> package
+--------------------
+
+If you are happy with your changes to the package sources, you can automatically
+generate a patch, which will be saved in +package/<pkgname>/patches and automatically
+applied on the next clean rebuild:
+--------------------
+ $ make package=<pkgname> update-patches
+--------------------
+
+The newly created patches will be opened in $EDITOR, so you can some comments to
+the top of the file, before the diff.
+
+
+Offline builds
+~~~~~~~~~~~~~~
+
+If you intend to do an offline build and just want to download
+all sources that you previously selected in the configurator
+then issue:
+
+--------------------
+ $ make download
+--------------------
+
+You can now disconnect or copy the content of your +dl+
+directory to the build-host.
+
+[[env-vars]]
+
+Environment variables
+~~~~~~~~~~~~~~~~~~~~~
+
+OpenADK also honors some environment variables, when they are passed
+to +make+.
+
+* +ARCH+, the architecture of the target system
+* +SYSTEM+, the target system name
+* +LIBC+, the C library for the target system
+* +COLLECT+, the package collection, which will be used
+* +VERBOSE+, verbose build, when set to 1
+
+An example that creates a configuration file for Raspberry PI with all
+software packages enabled, but not included in the resulting firmware image:
+
+--------------------
+ $ make ARCH=arm SYSTEM=raspberry-pi LIBC=musl allmodconfig
+--------------------
+
+This is often used in the development process of a target system, to verify that
+all packages are compilable.
+

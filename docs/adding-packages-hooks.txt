@@ -1,0 +1,31 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[hooks]]
+Hooks available in the various build steps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The infrastructure allow packages to specify hooks.  These define further
+actions to perform after existing steps.  Most hooks aren't really useful for
+manual packages, since the +Makefile+ already has full control over the
+actions performed in each step of the package construction.
+
+The following hook targets are available:
+
+* +post-extract+
+* +post-patch+
+* +pre-configure+
+* +post-configure+
+* +pre-build+
+* +post-build+
+* +pre-install+
+* +post-install+
+
+For example, to make some scripts executable after extraction,
+add following to your +Makefile+:
+
+---------------------
+post-extract:
+	chmod a+x $(WRKBUILD)/build/make/*.sh
+	chmod a+x $(WRKBUILD)/build/make/*.pl
+---------------------

@@ -22,18 +22,16 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PCC,pcc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # we cross-compile a native compiler for the target system
-CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME}
-CONFIGURE_ARGS+=	--target=${GNU_TARGET_NAME}
-CONFIGURE_ARGS+=	--with-assembler=/usr/bin/as
-CONFIGURE_ARGS+=	--with-linker=/usr/bin/ld
+CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME} \
+			--target=${GNU_TARGET_NAME} \
+			--with-assembler=/usr/bin/as \
+			--with-linker=/usr/bin/ld
 
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGET_CPPFLAGS+=	-DADK_FOR_GLIBC
-else
+endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGET_CPPFLAGS+=	-DADK_FOR_UCLIBC
-endif
-endif
 endif
 
 pcc-install:

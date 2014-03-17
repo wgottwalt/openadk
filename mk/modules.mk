@@ -1294,7 +1294,7 @@ $(eval $(call KMOD_template,PCMCIA,pcmcia,\
 ,60))
 
 $(eval $(call KMOD_template,SERIAL_8250_CS,serial-8250-cs,\
-	$(MODULES_DIR)/kernel/drivers/tty/serial/serial_cs \
+	$(MODULES_DIR)/kernel/drivers/tty/serial/8250/serial_cs \
 ,70))
 
 #
@@ -1743,7 +1743,7 @@ $(eval $(call KMOD_template,PARPORT_PC,parport-pc,\
 ,55))
 
 $(eval $(call KMOD_template,PLIP,plip,\
-	$(MODULES_DIR)/kernel/drivers/net/plip \
+	$(MODULES_DIR)/kernel/drivers/net/plip/plip \
 ,60))
 
 #

@@ -1,0 +1,57 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+New package
+~~~~~~~~~~~
+
+First of all, create a directory and Makefile under the +package+
+directory for your software, for example +libfoo+:
+
+------------
+ $ make newpackage PKG=libfoo VER=0.1
+------------
+
+This will create a sample Makefile for you, with a lot of comments and
+hints.  It describes how the package should be downloaded, configured,
+built, installed, etc.
+
+Depending on the package type, the +Makefile+ must be written in a
+different way, using two different infrastructures:
+
+* manual package configuration
+
+* automatic package configuration using autotools
+
+
+[[dependencies-target-toolchain-options]]
+Dependencies on target and toolchain options
+
+Some packages depend on certain options of the toolchain: mainly the
+choice of C library and C++ support.  Some packages can only be built on
+certain target architectures or for specific target systems. 
+
+These dependencies have to be expressed in the Makefile. The given values
+are space separated and can be negated with ! as a prefix.
+
+* Target architecture
+** variable used PKG_ARCH_DEPENDS
+** allowed values are: arm, mips, .. see target/arch.lst
+
+* Target system 
+** variable used PKG_SYSTEM_DEPENDS
+** for allowed values see the output of ./scripts/getsystems
+
+* Target C library
+** variable used PKG_LIBC_DEPENDS
+** allowed values are: uclibc glibc musl
+
+* Host system
+** variable used PKG_HOST_DEPENDS
+** allowed values are: linux darwin cygwin freebsd netbsd openbsd
+
+* C++ support
+** variable used PKG_NEED_CXX
+** Comment string: `C++`
+
+Further formatting details: see xref:writing-rules-mk[the writing
+rules].

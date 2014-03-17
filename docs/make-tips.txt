@@ -1,0 +1,94 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[make-tips]]
+'make' tips
+-----------
+
+This is a collection of tips that help you make the most of OpenADK.
+
+.Configuration searches:
+
+The +make menuconfig+ command offer a search tool. 
+The search tool is called by pressing +/+;
+The result of the search shows the help message of the matching items.
+
+.Display all commands executed by make:
+
+--------------------
+ $ make v
+--------------------
+
+or
+
+--------------------
+ $ make VERBOSE=1 <target>
+--------------------
+
+.Display all available targets:
+
+--------------------
+ $ make help
+--------------------
+
+.Cleaning:
+
+There are different cleaning targets available. If a full clean is
+necessary, you normally will get a message from OpenADK.
+To delete all build products (including build directories, target, host
+and pkg trees, the firmware and the toolchain for all targets):
+
+--------------------
+ $ make cleandir
+--------------------
+
+If you even want to clean any downloaded source and your 
+confiuration +.config+:
+
+--------------------
+ $ make distclean
+--------------------
+
+If you only want to clean the kernel build, because you added or
+removed some patch, just do:
+
+--------------------
+ $ make cleankernel
+--------------------
+
+This is automatically triggered if you change the kernel version in 
+your configuration.
+
+If you just want to clean all packages and wants to rebuild the firmware,
+(the tools/toolchain is not deleted) just use:
+
+--------------------
+ $ make clean
+--------------------
+
+.Resetting OpenADK for a new target:
+
+You can either delete the configuration and start from scratch:
+
+--------------------
+ $ rm .config*
+ $ make menuconfig
+--------------------
+
+Or you can save your existing configuration and switch to a new
+one with:
+
+--------------------
+ $ make switch
+--------------------
+
+Afterwards you can switch back to your old configuration, you just
+need to remember, which architecture and system you had configured:
+
+--------------------
+ $ make switch ARCH=<arch> SYSTEM=<system>
+--------------------
+
+OpenADK is designed to have multiple architectures and embedded system
+combinations configured and build without a need to rebuild everything
+from scratch. There is no limit, you just need to have enough disk space.

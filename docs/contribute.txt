@@ -1,0 +1,87 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Contributing to OpenADK
+=======================
+
+If you want to contribute to OpenADK, you will need a git view of
+the project. Refer to xref:getting-openadk[] to get it.
+
+Currently a mail to wbx@openadk.org is the central place for contribution.
+
+[[submitting-patches]]
+Submitting patches
+------------------
+
+When your changes are done, and committed in your local git view,
+_rebase_ your development branch on top of the upstream tree before
+generating the patch set. To do so, run:
+
+---------------------
+$ git fetch --all --tags
+$ git rebase origin/master
+---------------------
+
+Here, you are ready to generate then submit your patch set.
+
+To generate it, run:
+
+---------------------
+$ git format-patch -M -n -s origin/master
+---------------------
+
+This will generate patch files automatically adding the +Signed-off-by+ line.
+
+Once patch files are generated, you can review/edit the commit message
+before submitting them using your favorite text editor.
+
+Lastly, send/submit your patch set to the OpenADK developer:
+
+---------------------
+$ git send-email --to wbx@openadk.org *.patch
+---------------------
+
+Note that +git+ should be configured to use your mail account.
+To configure +git+, see +man git-send-email+ or google it.
+
+Make sure posted *patches are not line-wrapped*, otherwise they cannot
+easily be applied. In such a case, fix your e-mail client, or better,
+use +git send-email+ to send your patches.
+
+Cover letter
+~~~~~~~~~~~~
+
+If you want to present the whole patch set in a separate mail, add
++--cover-letter+ to the +git format-patch+ command (see +man
+git-format-patch+ for further information). This will generate a
+template for an introduction e-mail to your patch series.
+
+A 'cover letter' may be useful to introduce the changes you propose
+in the following cases:
+
+* large number of commits in the series;
+
+* deep impact of the changes in the rest of the project;
+
+* RFC footnote:[RFC: (Request for comments) change proposal];
+
+* whenever you feel it will help presenting your work, your choices,
+  the review process, etc.
+
+[[reporting-bugs]]
+Reporting issues/bugs, get help
+-------------------------------
+
+Try to think as if you were trying to help someone else; in
+that case, what would you need?
+
+Here is a short list of details to provide in such case:
+
+* host machine (OS/release)
+* git version of OpenADK
+* target for which the build fails
+* package(s) which the build fails
+* the command that fails and its output
+* any information you think that may be relevant
+
+Additionally, you can add the +.config+ file.
