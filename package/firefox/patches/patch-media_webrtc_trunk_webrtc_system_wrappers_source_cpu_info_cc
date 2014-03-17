@@ -1,6 +1,6 @@
 --- mozilla-release.orig/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_info.cc	2013-12-05 17:07:50.000000000 +0100
-+++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_info.cc	2014-02-05 07:19:01.000000000 +0100
-@@ -36,11 +36,6 @@ uint32_t CpuInfo::DetectNumberOfCores() 
++++ mozilla-release/media/webrtc/trunk/webrtc/system_wrappers/source/cpu_info.cc	2014-03-16 10:56:09.000000000 +0100
+@@ -36,11 +36,6 @@ uint32_t CpuInfo::DetectNumberOfCores()
      WEBRTC_TRACE(kTraceStateInfo, kTraceUtility, -1,
                   "Available number of cores:%d", number_of_cores_);
  
@@ -12,7 +12,7 @@
  #elif defined(WEBRTC_BSD) || defined(WEBRTC_MAC)
      int name[] = {
        CTL_HW,
-@@ -61,8 +56,6 @@ uint32_t CpuInfo::DetectNumberOfCores() 
+@@ -61,8 +56,6 @@ uint32_t CpuInfo::DetectNumberOfCores()
                     "Failed to get number of cores");
        number_of_cores_ = 1;
      }
