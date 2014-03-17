@@ -15,7 +15,7 @@ $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
-		--prefix=$(STAGING_HOST_DIR) \
+		--prefix=$(STAGING_HOST_DIR)/usr \
 		--with-gmp-build=$(GMP_BUILD_DIR) \
 		--disable-shared \
 		--enable-static \
