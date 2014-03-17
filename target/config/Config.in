@@ -73,7 +73,7 @@ source "target/config/Config.in.system"
 
 config ADK_LINUX_MIPS64
 	boolean
-	default y if ADK_LINUX_MIPS && ADK_TARGET_KERNEL64
+	default y if ADK_LINUX_MIPS && ADK_LINUX_64
 
 choice
 prompt "Toolchain options"
@@ -83,21 +83,6 @@ config ADK_TOOLCHAIN_ONLY
 
 config ADK_TOOLCHAIN_ARCHIVE
 	boolean "Build a complete system usable f.e. via chroot"
-
-endchoice
-
-choice
-prompt "Target Kernel"
-depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG \
-	|| ADK_TARGET_SYSTEM_QEMU_MIPS64 \
-	|| ADK_TARGET_SYSTEM_QEMU_MIPS64EL \
-	|| ADK_LINUX_X86_64
-
-config ADK_TARGET_KERNEL64
-	boolean "64 Bit Kernel"
-
-config ADK_TARGET_KERNEL32
-	boolean "32 Bit Kernel"
 
 endchoice
 
@@ -143,7 +128,7 @@ config ADK_TARGET_MIPS_ABI
 
 choice
 prompt "Target ABI"
-depends on ADK_TARGET_KERNEL64 && ADK_LINUX_MIPS && !ADK_TOOLCHAIN
+depends on ADK_LINUX_64 && ADK_LINUX_MIPS && !ADK_TOOLCHAIN
 
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI (new)"
@@ -161,7 +146,7 @@ endchoice
 
 choice
 prompt "Target ABI"
-depends on ADK_TARGET_KERNEL64 && ADK_LINUX_X86_64 && !ADK_TOOLCHAIN
+depends on ADK_LINUX_64 && ADK_LINUX_X86_64 && !ADK_TOOLCHAIN
 
 config ADK_TARGET_ABI_64
 	boolean "64 Bit ABI"
@@ -224,7 +209,6 @@ depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZ
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	boolean "Xilinx ml605"
-	select ADK_TARGET_WITH_MTD
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	boolean "Xilinx Spartan S3ADSP1800"
@@ -267,7 +251,7 @@ config ADK_TARGET_QEMU_WITH_BLOCK
 	boolean "enabled"
 	select ADK_KERNEL_SCSI_SYM53C8XX_2 if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_TARGET_SYSTEM_QEMU_I686
+	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_KERNEL_PATA_MACIO if ADK_TARGET_SYSTEM_QEMU_PPC
 	select ADK_KERNEL_SCSI_IBMVSCSI if ADK_TARGET_SYSTEM_QEMU_PPC64
 	select ADK_KERNEL_SCSI_SUNESP if ADK_TARGET_SYSTEM_QEMU_SPARC
@@ -338,23 +322,7 @@ config ADK_LINUX_ARM_WITH_THUMB
 
 endchoice
 
-
-choice 
-prompt "Broadcom BCM47xx Model"
-depends on ADK_TARGET_SYSTEM_BROADCOM_BCM47XX
-
-config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G
-	boolean "Linksys WRT54g"
-	
-config ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54GS
-	boolean "Linksys WRT54gs"
-
-config ADK_TARGET_BROADCOM_MODEL_ASUS_WL500GP
-	boolean "Asus WL500gP"
-
-endchoice
-
-# hardware features
+# hardware features, do not use for qemu
 config ADK_TARGET_WITH_USB
 	boolean
 
@@ -658,15 +626,11 @@ config ADK_glibc
 config ADK_musl
 	boolean
 
-config ADK_libc
-	boolean
-
 config ADK_TARGET_LIBC
 	string
 	default "uclibc"  if ADK_uclibc
 	default "glibc"  if ADK_glibc
 	default "musl"  if ADK_musl
-	default "libc"  if ADK_libc
 
 source "target/linux/config/Config.in.kernel"
 
@@ -722,12 +686,6 @@ config ADK_TARGET_LIB_MUSL
 	help
  	 http://musl-libc.org
 
-config ADK_TARGET_LIB_LIBC
-	prompt "Native C library"
-	boolean
-	select ADK_libc
-	depends on ADK_LINUX_NATIVE
-
 endchoice
 
 config ADK_TARGET_SUFFIX
@@ -737,24 +695,24 @@ config ADK_TARGET_SUFFIX
 	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
 	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
 	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
-	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_TARGET_KERNEL64
-	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_TARGET_KERNEL64
+	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_LINUX_64
+	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_LINUX_64
 	default "gnu" if ADK_TARGET_LIB_GLIBC
 	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_eabihf
 	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_eabi
 	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
 	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
 	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
-	default "uclibc32" if ADK_TARGET_LIB_UCLIBC && ADK_32 && ADK_TARGET_KERNEL64
-	default "uclibcx32" if ADK_TARGET_LIB_UCLIBC && ADK_x32 && ADK_TARGET_KERNEL64
+	default "uclibc32" if ADK_TARGET_LIB_UCLIBC && ADK_32 && ADK_LINUX_64
+	default "uclibcx32" if ADK_TARGET_LIB_UCLIBC && ADK_x32 && ADK_LINUX_64
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC
 	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_eabihf
 	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_eabi
 	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
 	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
 	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
-	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_32 && ADK_TARGET_KERNEL64
-	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_x32 && ADK_TARGET_KERNEL64
+	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_32 && ADK_LINUX_64
+	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_x32 && ADK_LINUX_64
 	default "musl" if ADK_TARGET_LIB_MUSL
 
 choice
