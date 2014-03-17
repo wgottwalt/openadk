@@ -1,5 +1,5 @@
 --- strace-4.8.orig/desc.c	2013-05-02 00:39:10.000000000 +0200
-+++ strace-4.8/desc.c	2014-02-25 15:16:36.000000000 +0100
++++ strace-4.8/desc.c	2014-03-01 19:44:21.000000000 +0100
 @@ -223,7 +223,7 @@ static const struct xlat perf_event_open
  	{ 0,				NULL			},
  };
@@ -9,3 +9,15 @@
  /* fcntl/lockf */
  static void
  printflock64(struct tcb *tcp, long addr, int getlk)
+@@ -255,7 +255,11 @@ printflock(struct tcb *tcp, long addr, i
+ #if SUPPORTED_PERSONALITIES > 1
+ # ifdef X32
+ 	if (current_personality == 0) {
++#if defined(__GLIBC__)
+ 		printflock64(tcp, addr, getlk);
++#else
++		printflock(tcp, addr, getlk);
++#endif
+ 		return;
+ 	}
+ # endif

@@ -1,0 +1,12 @@
+diff -Nur musl-0.9.15.orig/configure musl-0.9.15/configure
+--- musl-0.9.15.orig/configure	2014-03-16 21:17:29.000000000 +0100
++++ musl-0.9.15/configure	2014-03-16 22:46:46.000000000 +0100
+@@ -226,7 +226,7 @@
+ mips64*|powerpc64*) fail "$0: unsupported target \"$target\"" ;;
+ arm*) ARCH=arm ;;
+ i?86*) ARCH=i386 ;;
+-x86_64-x32*|x32*) ARCH=x32 ;;
++x86_64*x32) ARCH=x32 ;;
+ x86_64*) ARCH=x86_64 ;;
+ mips*) ARCH=mips ;;
+ microblaze*) ARCH=microblaze ;;

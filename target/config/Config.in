@@ -188,9 +188,6 @@ config ADK_TARGET_LIBC_PATH
 				|| ADK_LINUX_X86_64
 	default "lib"
 
-
-# submodel support
-
 config ADK_TARGET_KERNEL_MINICONFIG
 	string
 	default "qemu-microblaze-s3adsp1800" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
@@ -220,6 +217,63 @@ config ADK_TARGET_KERNEL_MINICONFIG
 config ADK_QEMU_ARGS
 	string
 	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+
+choice
+prompt "Qemu MICROBLAZE Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
+
+config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	boolean "Xilinx ml605"
+	select ADK_TARGET_WITH_MTD
+
+config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	boolean "Xilinx Spartan S3ADSP1800"
+
+endchoice
+
+choice
+prompt "Qemu ARM Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_SYSTEM_QEMU_ARMHF
+
+config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	boolean "ARM Ltd. Versatile Express for Cortex-A9"
+	select ADK_CPU_CORTEX_A9
+
+config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	boolean "ARM Ltd. Versatile/PB"
+	select ADK_soft_float
+	select ADK_eabi
+	select ADK_CPU_ARM926EJ_S
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
+
+config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	boolean "Xscale PXA270 Spitz PDA"
+	select ADK_soft_float
+	select ADK_eabi
+	select ADK_CPU_XSCALE
+	select ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM
+
+endchoice
+
+choice
+prompt "Qemu Emulation with permanent storage device (disk/flash)"
+depends on ADK_HARDWARE_QEMU
+
+config ADK_TARGET_QEMU_WITHOUT_BLOCK
+	boolean "disabled"
+
+config ADK_TARGET_QEMU_WITH_BLOCK
+	boolean "enabled"
+	select ADK_KERNEL_SCSI_SYM53C8XX_2 if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_TARGET_SYSTEM_QEMU_I686
+	select ADK_KERNEL_PATA_MACIO if ADK_TARGET_SYSTEM_QEMU_PPC
+	select ADK_KERNEL_SCSI_IBMVSCSI if ADK_TARGET_SYSTEM_QEMU_PPC64
+	select ADK_KERNEL_SCSI_SUNESP if ADK_TARGET_SYSTEM_QEMU_SPARC
+	select ADK_KERNEL_PATA_PLATFORM if ADK_LINUX_SH
+
+endchoice
 
 choice
 prompt "Qemu Emulation with graphical output"
@@ -265,43 +319,6 @@ config ADK_TARGET_QEMU_WITHOUT_VIRTIO
 
 endchoice
 
-choice
-prompt "Qemu MICROBLAZE Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
-
-config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	boolean "Xilinx ml605"
-	select ADK_TARGET_WITH_MTD
-
-config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
-	boolean "Xilinx Spartan S3ADSP1800"
-
-endchoice
-
-choice
-prompt "Qemu ARM Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_SYSTEM_QEMU_ARMHF
-
-config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	boolean "ARM Ltd. Versatile Express for Cortex-A9"
-	select ADK_CPU_CORTEX_A9
-
-config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	boolean "ARM Ltd. Versatile/PB"
-	select ADK_soft_float
-	select ADK_eabi
-	select ADK_CPU_ARM926EJ_S
-	depends on ADK_TARGET_SYSTEM_QEMU_ARM
-
-config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	boolean "Xscale PXA270 Spitz PDA"
-	select ADK_soft_float
-	select ADK_eabi
-	select ADK_CPU_XSCALE
-	select ADK_TARGET_WITH_VGA
-	depends on ADK_TARGET_SYSTEM_QEMU_ARM
-
-endchoice
 
 choice
 prompt "Use ARM thumb mode"
@@ -577,17 +594,6 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-m32" if ADK_32
 	default "-mx32" if ADK_x32
 	default "-m64" if ADK_64
-
-config ADK_TARGET_ABI_LDFLAGS
-	string
-	default "-Wl,-m -Wl,elf_i386" if ADK_32
-
-config ADK_TARGET_KERNEL_LDFLAGS
-	string
-	default "-mabi=64" if ADK_n32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_o32 && ADK_TARGET_KERNEL64
-	default "-mabi=64" if ADK_n64 && ADK_TARGET_KERNEL64
-	default ""
 
 config ADK_TARGET_CFLAGS
 	string

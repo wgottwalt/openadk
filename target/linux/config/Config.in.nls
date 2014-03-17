@@ -1,12 +1,8 @@
 menu "Native Language support"
 
-config ADK_KERNEL_NLS
-	boolean
-	default y
-
 config ADK_KERNEL_NLS_DEFAULT
 	string
-	default "iso8859-1"
+	default "utf-8"
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_437
 	prompt   "kmod-nls-codepage-437........... Codepage 437 (United States, Canada)"
@@ -325,7 +321,7 @@ config ADK_KPACKAGE_KMOD_NLS_ASCII
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	prompt   "kmod-nls-iso8859-1.............. NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	tristate
-	default n
+	default y
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -499,7 +495,7 @@ config ADK_KPACKAGE_KMOD_NLS_KOI8_U
 config ADK_KPACKAGE_KMOD_NLS_UTF8
 	prompt   "kmod-nls-utf8................... NLS UTF8"
 	tristate
-	default n
+	default y
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs

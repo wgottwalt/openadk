@@ -25,10 +25,10 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
 
-ifeq ($(ADK_TARGET_WITH_MULTILIB),y)
-CONFIGURE_ARGS+=	--enable-multilib
-else
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
 CONFIGURE_ARGS+=	--disable-multilib
+else
+CONFIGURE_ARGS+=	--enable-multilib
 endif
 
 TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))

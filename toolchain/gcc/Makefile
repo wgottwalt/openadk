@@ -4,11 +4,11 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 
-TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 include Makefile.inc
 
-GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
+GCC_CONFOPTS:=		--prefix=$(STAGING_HOST_DIR) \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
@@ -28,41 +28,43 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
+			--without-system-zlib \
 			--without-ppl \
 			--without-cloog \
 			--without-isl \
 			--disable-nls
 
-ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
-GCC_CONFOPTS+=		--enable-sjlj-exceptions
-else
-GCC_CONFOPTS+=		--disable-sjlj-exceptions
+GCC_FINAL_CONFOPTS:=
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
-GCC_CONFOPTS+=		--disable-biarch --disable-multilib
-endif
 ifeq ($(ADK_LINUX_SH),y)
-GCC_CONFOPTS+=		--with-multilib-list=m4,m4-nofpu
+GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
+
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
-GCC_CONFOPTS+=		--with-multilib-list=mx32
-else
-GCC_CONFOPTS+=		--disable-biarch --disable-multilib
+GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=mx32
+endif
+ifeq ($(ADK_32),y)
+GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m32
+endif
+ifeq ($(ADK_64),y)
+GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
-GCC_CONFOPTS+=		--enable-libssp
+GCC_FINAL_CONFOPTS+=	--enable-libssp
 else
-GCC_CONFOPTS+=		--disable-libssp
+GCC_FINAL_CONFOPTS+=	--disable-libssp
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_LTO),y)
-GCC_CONFOPTS+=		--enable-lto
+GCC_FINAL_CONFOPTS+=	--enable-lto
 else
-GCC_CONFOPTS+=		--disable-lto
+GCC_FINAL_CONFOPTS+=	--disable-lto
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)
@@ -132,6 +134,9 @@ endif
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
+			--disable-multilib \
+			--disable-lto \
+			--disable-libssp \
 			--disable-shared \
 			--without-headers
 	touch $@
@@ -151,6 +156,7 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 		CXXFLAGS="-O0 -g0" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
+			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
 			--disable-threads \
@@ -171,6 +177,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 	cd $(GCC_BUILD_DIR_FINAL); PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
+			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \

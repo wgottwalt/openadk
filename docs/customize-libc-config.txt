@@ -27,7 +27,7 @@ and rebuild your targetsystem, including the toolchain components:
 
 ----------------
  $ cp .config ../target/<arch>/uclibc.config
- $ cd .. && make cleantarget && make
+ $ cd .. && make cleandir && make
 ----------------
 
 There are no customization options for GNU libc or musl available.
