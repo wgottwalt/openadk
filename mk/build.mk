@@ -496,20 +496,21 @@ test-framework:
 	fi; \
 	for libc in $$libc;do \
 		( \
+			mkdir -p $(TOPDIR)/firmware/; \
 			for arch in arm armhf microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##"); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=initramfsarchive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
 				if [ $$arch = "armhf" ];then qarch=arm; else qarch=$$arch;fi; \
-				if [ -d root ];then rm -rf root;fi; \
 				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
 				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
 				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
-				cp $(TOPDIR)/firmware/qemu_$${qarch}_$${libc}$${abi}/qemu-$${qarch}-archive-kernel \
+				if [ -d root ];then rm -rf root;fi; \
+				cp $(TOPDIR)/firmware/qemu_$${qarch}_$${libc}$${abi}/qemu-$${qarch}-initramfsarchive-kernel \
 					$(TOPDIR)/firmware/qemu/$$arch/kernel; \
 				rm .config; \
 			done; \
