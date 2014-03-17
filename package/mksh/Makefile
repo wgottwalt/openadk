@@ -21,6 +21,11 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_STATIC),y)
+TARGET_CFLAGS+=		-static
+TARGET_LDFLAGS+=	-static
+endif
+
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
