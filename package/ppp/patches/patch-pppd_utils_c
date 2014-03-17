@@ -1,0 +1,37 @@
+--- ppp-2.4.5.orig/pppd/utils.c	2009-11-16 23:26:07.000000000 +0100
++++ ppp-2.4.5/pppd/utils.c	2014-03-17 16:13:14.000000000 +0100
+@@ -65,11 +65,11 @@ static const char rcsid[] = RCSID;
+ extern char *strerror();
+ #endif
+ 
+-static void logit __P((int, char *, va_list));
+-static void log_write __P((int, char *));
+-static void vslp_printer __P((void *, char *, ...));
+-static void format_packet __P((u_char *, int, void (*) (void *, char *, ...),
+-			       void *));
++static void logit (int, char *, va_list);
++static void log_write (int, char *);
++static void vslp_printer (void *, char *, ...);
++static void format_packet (u_char *, int, void (*) (void *, char *, ...),
++			       void *);
+ 
+ struct buffer_info {
+     char *ptr;
+@@ -475,7 +475,7 @@ static void
+ format_packet(p, len, printer, arg)
+     u_char *p;
+     int len;
+-    void (*printer) __P((void *, char *, ...));
++    void (*printer) (void *, char *, ...);
+     void *arg;
+ {
+     int i, n;
+@@ -613,7 +613,7 @@ void
+ print_string(p, len, printer, arg)
+     char *p;
+     int len;
+-    void (*printer) __P((void *, char *, ...));
++    void (*printer) (void *, char *, ...);
+     void *arg;
+ {
+     int c;
