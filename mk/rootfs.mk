@@ -10,8 +10,12 @@ endef
 
 ifeq ($(ADK_HARDWARE_QEMU),y)
 MTDDEV:=	root=/dev/mtdblock0
+ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 ROOTFS:=	root=/dev/vda1
+else
+ROOTFS:=	root=/dev/sda1
+endif
 endif
 endif
 
@@ -43,6 +47,7 @@ $(eval $(call rootfs_template,cf,CF,$(ROOTFS)))
 $(eval $(call rootfs_template,mmc,MMC,$(ROOTFS)))
 $(eval $(call rootfs_template,usb,USB,$(USB)))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
+$(eval $(call rootfs_template,initramfsarchive,INITRAMFSARCHIVE))
 $(eval $(call rootfs_template,initramfs,INITRAMFS))
 $(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
 $(eval $(call rootfs_template,squashfs,SQUASHFS,$(ROOTFS)))
