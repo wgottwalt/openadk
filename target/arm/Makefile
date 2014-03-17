@@ -70,6 +70,12 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(FW_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)

@@ -258,6 +258,7 @@ endchoice
 choice
 prompt "Qemu Emulation with permanent storage device (disk/flash)"
 depends on ADK_HARDWARE_QEMU
+default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_QEMU_WITHOUT_BLOCK
 	boolean "disabled"
@@ -306,6 +307,7 @@ prompt "Qemu Emulation using VirtIO drivers"
 depends on ADK_TARGET_SYSTEM_QEMU_SPARC64 || \
 		ADK_TARGET_SYSTEM_QEMU_I686 || \
 		ADK_TARGET_SYSTEM_QEMU_X86_64
+default ADK_TARGET_QEMU_WITH_VIRTIO if ADK_TARGET_SYSTEM_QEMU_SPARC64
 
 config ADK_TARGET_QEMU_WITHOUT_VIRTIO
 	boolean "disabled"
@@ -898,10 +900,17 @@ config ADK_TARGET_ROOTFS_ISO
 	help
 	  Use this option to create a bootable ISO image.
 
+config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
+	bool "Archive usable for initramfs creation"
+	help
+	  Use this option if your palnning to create a initramfs,
+	  useful for adk-test-framework.
+
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_HARDWARE_QEMU
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
