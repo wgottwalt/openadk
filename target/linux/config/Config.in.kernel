@@ -98,12 +98,15 @@ config ADK_KERNEL_PCI
 
 config ADK_KERNEL_64BIT
 	boolean
-	default y if ADK_TARGET_KERNEL64
+	default y if ADK_LINUX_64
 
 config ADK_KERNEL_CPU_MIPS64
 	boolean
 
 config ADK_KERNEL_CPU_MIPS64_R1
+	boolean
+
+config ADK_KERNEL_CPU_MIPS64_R2
 	boolean
 
 config ADK_KERNEL_PREEMPT

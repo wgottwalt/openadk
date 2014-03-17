@@ -27,6 +27,7 @@ TARGET_LDFLAGS+=	-static
 endif
 
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
+TARGET_LDFLAGS+=	-static-libgcc
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
