@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tzdata
 PKG_VERSION:=		2013d
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		65b6818162230fc02f86f293376c73df 4616a9560270f180eeb9a08540636890
 PKG_DESCR:=		Timezone data (/usr/share/zoneinfo)
 PKG_SECTION:=		utils
@@ -39,8 +39,12 @@ ALL_TARGET:=		ALL
 INSTALL_TARGET:=	INSTALL
 
 tzdata-install:
-	$(INSTALL_DIR) $(IDIR_TZDATA)/usr/share $(IDIR_TZDATA)/etc
-	$(CP) $(WRKINST)/usr/share/zoneinfo $(IDIR_TZDATA)/usr/share
+	$(INSTALL_DIR) $(IDIR_TZDATA)/usr/share/zoneinfo $(IDIR_TZDATA)/etc
+	cd ${WRKINST} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
+		test -s usr/share/zoneinfo/"$$f" || continue; \
+		echo usr/share/zoneinfo/"$$f" | \
+		${STAGING_HOST_DIR}/usr/bin/cpio -pdu ${IDIR_TZDATA}/; \
+	done
 	tz=; cd $(IDIR_TZDATA)/usr/share/zoneinfo || exit 1; \
 		for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
 			test -s "$$f" || continue; \

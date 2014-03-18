@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		cryptodev-linux
 PKG_VERSION:=		1.6
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		eade38998313c25fd7934719cdf8a2ea
 PKG_DESCR:=		cryptodev-linux kernel module
 PKG_SECTION:=		crypto
@@ -26,7 +26,7 @@ INSTALL_STYLE:=		manual
 do-build:
 	${MAKE} -C "${WRKBUILD}"/tests check
 	${MAKE} -C "${WRKBUILD}" version.h
-	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} ${KERNEL_MAKE_OPTS} \
+	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} -C ${LINUX_DIR} ${KERNEL_MAKE_OPTS} \
 			 M="${WRKBUILD}" modules
 	${INSTALL_DIR} ${WRKINST}/usr/include/crypto
 	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
