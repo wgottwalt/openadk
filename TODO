@@ -1,5 +1,4 @@
 - check gold for mozilla compile
-- tzdata split + update
 - getty + serial rework
 - add daemon() function to functions.sh
 - add printing of OK/FAIL (optional verbose bootup)
