@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sane-backends
 PKG_VERSION:=		1.0.22
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fadf56a60f4776bfb24491f66b617cf5
 PKG_DESCR:=		Scanner access now easy
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		libpthread libusb
+PKG_BUILDDEP:=		libpthread libusb libusb-compat
 PKG_URL:=		http://www.sane-project.org/
 PKG_SITES:=		ftp://ftp2.sane-project.org/pub/sane/${PKG_NAME}-${PKG_VERSION}/
 PKG_MULTI:=		1
@@ -165,6 +165,7 @@ $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX1220U,umax1220u))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX_PP,umax_pp))
 $(eval $(call PKG_mod_template,SANE_BACKEND_UMAX,umax))
 
+TARGET_CFLAGS+=		-D_GNU_SOURCE
 CONFIGURE_ENV+=		ac_cv_func_ioperm=no have_libv4l1=no
 CONFIGURE_ARGS+=	--disable-translations \
 			--without-gphoto2 \
