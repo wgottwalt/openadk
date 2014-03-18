@@ -22,10 +22,10 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC),y)
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
+imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(FW_DIR)/$(INITRAMFS)
