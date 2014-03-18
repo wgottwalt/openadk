@@ -76,7 +76,7 @@ $(WRKBUILD)/.fixup:
 ifeq ($(ADK_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
-	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)/bin $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/
+	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr
 endif
 	touch $@
 

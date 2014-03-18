@@ -7,6 +7,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_ARMHF
 	select ADK_toolchain_armhf
 	select ADK_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TGZ
+	select ADK_CPU_CORTEX_A9
 	help
-	  ARM toolchain (hard float).
+	  ARM toolchain (hard float) for Cortex A9.
 

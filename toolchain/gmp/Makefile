@@ -15,9 +15,10 @@ $(WRKBUILD)/.configured:
 ifneq ($(OStype),Darwin)
 	(cd $(WRKBUILD); cp configfsf.guess config.guess)
 endif
-	(cd $(WRKBUILD); PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
+	(cd $(WRKBUILD); \
+		PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
 		./configure \
-		--prefix=$(STAGING_HOST_DIR) \
+		--prefix=$(STAGING_HOST_DIR)/usr \
 		--with-pic \
 		--disable-shared \
 		--enable-static \
