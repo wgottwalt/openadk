@@ -53,17 +53,11 @@ else
 $(LIBC)-fixup: gcc-install
 endif
 
-$(STAGING_HOST_DIR):
-	@mkdir -p $(STAGING_HOST_DIR)/lib
-	@mkdir -p $(STAGING_HOST_DIR)/include
-	@mkdir -p $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)
-	@ln -sf ../lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
-
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 
-%-prepare: $(STAGING_HOST_DIR)
+%-prepare:
 	$(TRACE) toolchain/$(patsubst %-prepare,%,$@)/prepare
 	@if test x"$(patsubst %-prepare,%,$@)" = x"$(LIBC)"; then \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \

@@ -34,7 +34,7 @@ $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
-		--prefix=$(STAGING_HOST_DIR) \
+		--prefix=$(TOOLCHAIN_DIR)/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--with-sysroot=$(STAGING_TARGET_DIR) \
 		--disable-dependency-tracking \
