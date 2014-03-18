@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kexec-tools
 PKG_VERSION:=		2.0.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		da5887e30eec16895e9d98ef072dc257
 PKG_DESCR:=		kexec tools
 PKG_SECTION:=		misc
