@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sane-backends
 PKG_VERSION:=		1.0.22
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		fadf56a60f4776bfb24491f66b617cf5
 PKG_DESCR:=		Scanner access now easy
 PKG_SECTION:=		misc
