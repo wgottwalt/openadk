@@ -170,7 +170,7 @@ endif
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
-	for i in lib64 lib32 libx32;do; \
+	for i in lib64 lib32 libx32;do \
 		cd ${STAGING_TARGET_DIR}/; ln -sf lib $$i; \
 	done
 
