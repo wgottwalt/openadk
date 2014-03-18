@@ -3,6 +3,11 @@
 #INIT 90
 [[ $1 = autostart ]] || exit 0
 echo "Starting test script ..."
+grep shell /proc/cmdline > /dev/null 2&>1
+if [ $? -eq 0 ];then
+	echo "Use user root and password linux123 to login. And quit to finish."
+	exit 0
+fi
 if [ -x /run.sh ];then
 	/run.sh
 	quit
