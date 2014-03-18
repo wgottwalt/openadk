@@ -224,8 +224,8 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
-	$(MAKE) -C $(LINUX_DIR) V=1 CROSS_COMPILE="$(TARGET_CROSS)" \
-		ARCH=$(ARCH) CC="$(TARGET_CC)" -j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+		-j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
 
 ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 	mkdir -p ${TARGET_DIR}/boot/syslinux
