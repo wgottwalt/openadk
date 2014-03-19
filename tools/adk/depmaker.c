@@ -28,6 +28,7 @@
 #define MAXPATH 128
 
 static int prefix = 0;
+static int hprefix = 0;
 
 static int check_symbol(char *symbol) {
 
@@ -64,7 +65,7 @@ static int check_symbol(char *symbol) {
 }
 
 /*@null@*/
-static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix, int system) {
+static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix, int system, int *prefixp) {
 
 	char *key, *value, *dep, *key_sym, *pkgdeps;
 	char temp[MAXLINE];
@@ -114,8 +115,8 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 	value = strtok(NULL, "=\t");
 	dep = strtok(value, " ");
 	while (dep != NULL) {
-		if (prefix == 0) {
-			prefix = 1;
+		if (*prefixp == 0) {
+			*prefixp = 1;
 			if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
 				perror("Can not create string variable.");
 		} else {
@@ -135,7 +136,7 @@ int main() {
 	FILE *pkg;
 	char buf[MAXLINE];
 	char path[MAXPATH];
-	char *string, *pkgvar, *pkgdeps, *tmp, *fpkg, *cpkg, *spkg, *key, *check, *dpkg;
+	char *string, *pkgvar, *pkgdeps, *hpkgdeps = NULL, *tmp, *fpkg, *cpkg, *spkg, *key, *check, *dpkg;
 	char *stringtmp;
 	int i;
 
@@ -182,6 +183,7 @@ int main() {
 				exit(EXIT_FAILURE);
 			}
 			prefix = 0;
+			hprefix = 0;
 
 			/* generate build dependencies */
 			while (fgets(buf, MAXLINE, pkg) != NULL) {
@@ -197,7 +199,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP:=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0, &prefix);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}
@@ -205,7 +207,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP+=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0, &prefix);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
@@ -219,7 +221,7 @@ int main() {
 							string[strlen(string)-1] = '\0';
 							key = strtok(string, ":=");
 							dpkg = strdup(key+13);
-							tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1);
+							tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1, &prefix);
 							if (tmp != NULL)
 								strncat(pkgdeps, tmp, strlen(tmp));
 						}
@@ -238,7 +240,7 @@ int main() {
 
 					string = strstr(buf, "PKGFB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, fpkg, string, 1, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, fpkg, string, 1, 0, 0, &prefix);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
@@ -255,7 +257,7 @@ int main() {
 					}
 					string = strstr(buf, "PKGCB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, cpkg, string, 1, 0, 0);
+						tmp = parse_line(pkgdirp->d_name, cpkg, string, 1, 0, 0, &prefix);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
@@ -273,16 +275,31 @@ int main() {
 
 					string = strstr(buf, "PKGSB_");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, spkg, string, 1, 1, 0);
+						tmp = parse_line(pkgdirp->d_name, spkg, string, 1, 1, 0, &prefix);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}
+					}
+				} else if (strncmp(buf, "HOST_BUILDDEP", 13) == 0) {
+					asprintf(&string, "%s-host", pkgdirp->d_name);
+					// check retval; string for NULL
+					tmp = parse_line(string, NULL, buf, 0, 0, 0, &hprefix);
+					if (tmp && *tmp) {
+						asprintf(&string, "%s%s",
+						    hpkgdeps ? hpkgdeps : "",
+						    tmp);
+						free(hpkgdeps);
+						hpkgdeps = string;
 					}
 				}
 				free(tmp);
 			}
 			if (strlen(pkgdeps) != 0)
 				printf("%s\n", pkgdeps);
+			if (hpkgdeps && *hpkgdeps)
+				printf("%s\n", hpkgdeps);
+			free(hpkgdeps);
+			hpkgdeps = NULL;
 			free(pkgdeps);
 			free(pkgvar);
 			if (fclose(pkg) != 0)

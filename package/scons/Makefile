@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		083ce5624d6adcbdaf2526623f456ca9
 PKG_DESCR:=		a software construction tool
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		bzip2-host python2-host
+HOST_BUILDDEP:=		bzip2-host python2-host
 PKG_URL:=		http://www.scons.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}
 
