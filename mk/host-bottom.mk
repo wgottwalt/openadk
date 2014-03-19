@@ -102,3 +102,7 @@ ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
 	@touch ${_HOST_COOKIE}
 endif
+
+hostclean:
+	@$(CMD_TRACE) "cleaning... "
+	rm -rf ${WRKDIR} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host
