@@ -1,6 +1,6 @@
 diff -Nur musl-0.9.15/arch/arm/bits/sem.h musl-git/arch/arm/bits/sem.h
 --- musl-0.9.15/arch/arm/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/arm/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/arm/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -20,7 +20,7 @@ diff -Nur musl-0.9.15/arch/arm/bits/sem.h musl-git/arch/arm/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/arm/bits/shm.h musl-git/arch/arm/bits/shm.h
 --- musl-0.9.15/arch/arm/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/arm/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/arm/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -16,3 +16,14 @@
  	unsigned long __pad1;
  	unsigned long __pad2;
@@ -36,9 +36,25 @@ diff -Nur musl-0.9.15/arch/arm/bits/shm.h musl-git/arch/arm/bits/shm.h
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/arm/bits/signal.h musl-git/arch/arm/bits/signal.h
+--- musl-0.9.15/arch/arm/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/arm/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -18,6 +18,12 @@
+ } mcontext_t;
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
 diff -Nur musl-0.9.15/arch/arm/bits/termios.h musl-git/arch/arm/bits/termios.h
 --- musl-0.9.15/arch/arm/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/arm/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/arm/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -42,6 +42,7 @@
  #define IXANY   0004000
  #define IXOFF   0010000
@@ -94,7 +110,7 @@ diff -Nur musl-0.9.15/arch/arm/bits/termios.h musl-git/arch/arm/bits/termios.h
 +#endif
 diff -Nur musl-0.9.15/arch/arm/syscall_arch.h musl-git/arch/arm/syscall_arch.h
 --- musl-0.9.15/arch/arm/syscall_arch.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/arm/syscall_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/arm/syscall_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -3,6 +3,8 @@
  ((union { long long ll; long l[2]; }){ .ll = x }).l[1]
  #define __SYSCALL_LL_O(x) 0, __SYSCALL_LL_E((x))
@@ -106,7 +122,7 @@ diff -Nur musl-0.9.15/arch/arm/syscall_arch.h musl-git/arch/arm/syscall_arch.h
  #define __asm_syscall(...) do { \
 diff -Nur musl-0.9.15/arch/i386/bits/sem.h musl-git/arch/i386/bits/sem.h
 --- musl-0.9.15/arch/i386/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/i386/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/i386/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -126,7 +142,7 @@ diff -Nur musl-0.9.15/arch/i386/bits/sem.h musl-git/arch/i386/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/i386/bits/shm.h musl-git/arch/i386/bits/shm.h
 --- musl-0.9.15/arch/i386/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/i386/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/i386/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -16,3 +16,14 @@
  	unsigned long __pad1;
  	unsigned long __pad2;
@@ -142,9 +158,25 @@ diff -Nur musl-0.9.15/arch/i386/bits/shm.h musl-git/arch/i386/bits/shm.h
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/i386/bits/signal.h musl-git/arch/i386/bits/signal.h
+--- musl-0.9.15/arch/i386/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/i386/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -53,6 +53,12 @@
+ } mcontext_t;
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
 diff -Nur musl-0.9.15/arch/i386/bits/termios.h musl-git/arch/i386/bits/termios.h
 --- musl-0.9.15/arch/i386/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/i386/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/i386/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -42,6 +42,7 @@
  #define IXANY   0004000
  #define IXOFF   0010000
@@ -200,7 +232,7 @@ diff -Nur musl-0.9.15/arch/i386/bits/termios.h musl-git/arch/i386/bits/termios.h
 +#endif
 diff -Nur musl-0.9.15/arch/microblaze/bits/sem.h musl-git/arch/microblaze/bits/sem.h
 --- musl-0.9.15/arch/microblaze/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/microblaze/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/microblaze/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -220,7 +252,7 @@ diff -Nur musl-0.9.15/arch/microblaze/bits/sem.h musl-git/arch/microblaze/bits/s
 +};
 diff -Nur musl-0.9.15/arch/microblaze/bits/shm.h musl-git/arch/microblaze/bits/shm.h
 --- musl-0.9.15/arch/microblaze/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/microblaze/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/microblaze/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -16,3 +16,14 @@
  	unsigned long __pad1;
  	unsigned long __pad2;
@@ -236,9 +268,25 @@ diff -Nur musl-0.9.15/arch/microblaze/bits/shm.h musl-git/arch/microblaze/bits/s
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/microblaze/bits/signal.h musl-git/arch/microblaze/bits/signal.h
+--- musl-0.9.15/arch/microblaze/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/microblaze/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -21,6 +21,12 @@
+ } mcontext_t;
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
 diff -Nur musl-0.9.15/arch/microblaze/bits/termios.h musl-git/arch/microblaze/bits/termios.h
 --- musl-0.9.15/arch/microblaze/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/microblaze/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/microblaze/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -42,6 +42,7 @@
  #define IXANY   0004000
  #define IXOFF   0010000
@@ -294,7 +342,7 @@ diff -Nur musl-0.9.15/arch/microblaze/bits/termios.h musl-git/arch/microblaze/bi
 +#endif
 diff -Nur musl-0.9.15/arch/microblaze/syscall_arch.h musl-git/arch/microblaze/syscall_arch.h
 --- musl-0.9.15/arch/microblaze/syscall_arch.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/microblaze/syscall_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/microblaze/syscall_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -3,6 +3,8 @@
  ((union { long long ll; long l[2]; }){ .ll = x }).l[1]
  #define __SYSCALL_LL_O(x) 0, __SYSCALL_LL_E((x))
@@ -306,7 +354,7 @@ diff -Nur musl-0.9.15/arch/microblaze/syscall_arch.h musl-git/arch/microblaze/sy
  static __inline long __syscall0(long n)
 diff -Nur musl-0.9.15/arch/mips/bits/fenv.h musl-git/arch/mips/bits/fenv.h
 --- musl-0.9.15/arch/mips/bits/fenv.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/bits/fenv.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/bits/fenv.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,3 +1,7 @@
 +#ifdef __mips_soft_float
 +#define FE_ALL_EXCEPT 0
@@ -325,7 +373,7 @@ diff -Nur musl-0.9.15/arch/mips/bits/fenv.h musl-git/arch/mips/bits/fenv.h
  
 diff -Nur musl-0.9.15/arch/mips/bits/sem.h musl-git/arch/mips/bits/sem.h
 --- musl-0.9.15/arch/mips/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/mips/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,14 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -341,9 +389,15 @@ diff -Nur musl-0.9.15/arch/mips/bits/sem.h musl-git/arch/mips/bits/sem.h
 +	time_t __unused3;
 +	time_t __unused4;
 +};
+diff -Nur musl-0.9.15/arch/mips/bits/setjmp.h musl-git/arch/mips/bits/setjmp.h
+--- musl-0.9.15/arch/mips/bits/setjmp.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/mips/bits/setjmp.h	2014-03-19 07:42:48.000000000 +0100
+@@ -1 +1 @@
+-typedef unsigned long long __jmp_buf[15];
++typedef unsigned long long __jmp_buf[13];
 diff -Nur musl-0.9.15/arch/mips/bits/shm.h musl-git/arch/mips/bits/shm.h
 --- musl-0.9.15/arch/mips/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -13,3 +13,14 @@
  	unsigned long __pad1;
  	unsigned long __pad2;
@@ -359,9 +413,32 @@ diff -Nur musl-0.9.15/arch/mips/bits/shm.h musl-git/arch/mips/bits/shm.h
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/mips/bits/signal.h musl-git/arch/mips/bits/signal.h
+--- musl-0.9.15/arch/mips/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/mips/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -38,13 +38,18 @@
+ } mcontext_t;
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	size_t ss_size;
++	int ss_flags;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
+ 	stack_t uc_stack;
+ 	mcontext_t uc_mcontext;
+ 	sigset_t uc_sigmask;
+-	unsigned long uc_regspace[128];
+ } ucontext_t;
+ 
+ #define SA_NOCLDSTOP  1
 diff -Nur musl-0.9.15/arch/mips/bits/statfs.h musl-git/arch/mips/bits/statfs.h
 --- musl-0.9.15/arch/mips/bits/statfs.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/bits/statfs.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/bits/statfs.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,7 +1,8 @@
  struct statfs {
 -	unsigned long f_type, f_bsize;
@@ -376,7 +453,7 @@ diff -Nur musl-0.9.15/arch/mips/bits/statfs.h musl-git/arch/mips/bits/statfs.h
  };
 diff -Nur musl-0.9.15/arch/mips/bits/termios.h musl-git/arch/mips/bits/termios.h
 --- musl-0.9.15/arch/mips/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -77,9 +77,6 @@
  #define VT0    0000000
  #define VT1    0040000
@@ -427,7 +504,7 @@ diff -Nur musl-0.9.15/arch/mips/bits/termios.h musl-git/arch/mips/bits/termios.h
 +#endif
 diff -Nur musl-0.9.15/arch/mips/reloc.h musl-git/arch/mips/reloc.h
 --- musl-0.9.15/arch/mips/reloc.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/reloc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/reloc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -8,7 +8,13 @@
  #define ENDIAN_SUFFIX ""
  #endif
@@ -445,7 +522,7 @@ diff -Nur musl-0.9.15/arch/mips/reloc.h musl-git/arch/mips/reloc.h
  #define IS_PLT(x) 1
 diff -Nur musl-0.9.15/arch/mips/syscall_arch.h musl-git/arch/mips/syscall_arch.h
 --- musl-0.9.15/arch/mips/syscall_arch.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/mips/syscall_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/mips/syscall_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -3,6 +3,8 @@
  ((union { long long ll; long l[2]; }){ .ll = x }).l[1]
  #define __SYSCALL_LL_O(x) 0, __SYSCALL_LL_E((x))
@@ -457,7 +534,7 @@ diff -Nur musl-0.9.15/arch/mips/syscall_arch.h musl-git/arch/mips/syscall_arch.h
  #define __asm_syscall(...) do { \
 diff -Nur musl-0.9.15/arch/powerpc/bits/ipc.h musl-git/arch/powerpc/bits/ipc.h
 --- musl-0.9.15/arch/powerpc/bits/ipc.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/powerpc/bits/ipc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/ipc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -7,8 +7,9 @@
  	gid_t cgid;
  	mode_t mode;
@@ -472,7 +549,7 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/ipc.h musl-git/arch/powerpc/bits/ipc.h
  #define IPC_64 0x100
 diff -Nur musl-0.9.15/arch/powerpc/bits/msg.h musl-git/arch/powerpc/bits/msg.h
 --- musl-0.9.15/arch/powerpc/bits/msg.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/powerpc/bits/msg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/msg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,12 +1,12 @@
  struct msqid_ds
  {
@@ -491,7 +568,7 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/msg.h musl-git/arch/powerpc/bits/msg.h
  	msglen_t msg_qbytes;
 diff -Nur musl-0.9.15/arch/powerpc/bits/sem.h musl-git/arch/powerpc/bits/sem.h
 --- musl-0.9.15/arch/powerpc/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/powerpc/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,10 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -505,7 +582,7 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/sem.h musl-git/arch/powerpc/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/powerpc/bits/shm.h musl-git/arch/powerpc/bits/shm.h
 --- musl-0.9.15/arch/powerpc/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/powerpc/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -3,16 +3,28 @@
  struct shmid_ds
  {
@@ -539,9 +616,25 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/shm.h musl-git/arch/powerpc/bits/shm.h
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/powerpc/bits/signal.h musl-git/arch/powerpc/bits/signal.h
+--- musl-0.9.15/arch/powerpc/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/powerpc/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -49,6 +49,12 @@
+ 
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
 diff -Nur musl-0.9.15/arch/powerpc/bits/socket.h musl-git/arch/powerpc/bits/socket.h
 --- musl-0.9.15/arch/powerpc/bits/socket.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/powerpc/bits/socket.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/socket.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,12 +1,12 @@
  struct msghdr
  {
@@ -561,7 +654,7 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/socket.h musl-git/arch/powerpc/bits/sock
  struct cmsghdr
 diff -Nur musl-0.9.15/arch/powerpc/bits/termios.h musl-git/arch/powerpc/bits/termios.h
 --- musl-0.9.15/arch/powerpc/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/powerpc/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/powerpc/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -66,7 +66,6 @@
  #define TAB1	00002000
  #define TAB2	00004000
@@ -621,7 +714,7 @@ diff -Nur musl-0.9.15/arch/powerpc/bits/termios.h musl-git/arch/powerpc/bits/ter
 +#endif
 diff -Nur musl-0.9.15/arch/sh/atomic.h musl-git/arch/sh/atomic.h
 --- musl-0.9.15/arch/sh/atomic.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/atomic.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/atomic.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,87 @@
 +#ifndef _INTERNAL_ATOMIC_H
 +#define _INTERNAL_ATOMIC_H
@@ -712,7 +805,7 @@ diff -Nur musl-0.9.15/arch/sh/atomic.h musl-git/arch/sh/atomic.h
 +#endif
 diff -Nur musl-0.9.15/arch/sh/bits/alltypes.h.in musl-git/arch/sh/bits/alltypes.h.in
 --- musl-0.9.15/arch/sh/bits/alltypes.h.in	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/alltypes.h.in	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/alltypes.h.in	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,23 @@
 +#define _Addr int
 +#define _Int64 long long
@@ -739,7 +832,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/alltypes.h.in musl-git/arch/sh/bits/alltypes.
 +TYPEDEF struct { union { int __i[5]; void *__p[5]; } __u; } pthread_barrier_t;
 diff -Nur musl-0.9.15/arch/sh/bits/endian.h musl-git/arch/sh/bits/endian.h
 --- musl-0.9.15/arch/sh/bits/endian.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/endian.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/endian.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +#if __BIG_ENDIAN__
 +#define __BYTE_ORDER __BIG_ENDIAN
@@ -748,7 +841,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/endian.h musl-git/arch/sh/bits/endian.h
 +#endif
 diff -Nur musl-0.9.15/arch/sh/bits/errno.h musl-git/arch/sh/bits/errno.h
 --- musl-0.9.15/arch/sh/bits/errno.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/errno.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/errno.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,134 @@
 +#define EPERM            1
 +#define ENOENT           2
@@ -886,7 +979,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/errno.h musl-git/arch/sh/bits/errno.h
 +#define EHWPOISON       133
 diff -Nur musl-0.9.15/arch/sh/bits/fcntl.h musl-git/arch/sh/bits/fcntl.h
 --- musl-0.9.15/arch/sh/bits/fcntl.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/fcntl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/fcntl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,39 @@
 +#define O_CREAT        0100
 +#define O_EXCL         0200
@@ -929,7 +1022,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/fcntl.h musl-git/arch/sh/bits/fcntl.h
 +#define F_GETOWNER_UIDS 17
 diff -Nur musl-0.9.15/arch/sh/bits/fenv.h musl-git/arch/sh/bits/fenv.h
 --- musl-0.9.15/arch/sh/bits/fenv.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/fenv.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/fenv.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,26 @@
 +#ifndef __SH_FPU_ANY__
 +
@@ -959,7 +1052,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/fenv.h musl-git/arch/sh/bits/fenv.h
 +#define FE_DFL_ENV    ((const fenv_t *) -1)
 diff -Nur musl-0.9.15/arch/sh/bits/float.h musl-git/arch/sh/bits/float.h
 --- musl-0.9.15/arch/sh/bits/float.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/float.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/float.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,17 @@
 +#define FLT_ROUNDS 1
 +#define FLT_EVAL_METHOD 0
@@ -980,7 +1073,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/float.h musl-git/arch/sh/bits/float.h
 +#define DECIMAL_DIG 17
 diff -Nur musl-0.9.15/arch/sh/bits/ioctl.h musl-git/arch/sh/bits/ioctl.h
 --- musl-0.9.15/arch/sh/bits/ioctl.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/ioctl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/ioctl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,205 @@
 +#define _IOC(a,b,c,d) ( ((a)<<30) | ((b)<<8) | (c) | ((d)<<16) )
 +#define _IOC_NONE  0U
@@ -1189,7 +1282,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/ioctl.h musl-git/arch/sh/bits/ioctl.h
 +#define SIOCPROTOPRIVATE    0x89E0
 diff -Nur musl-0.9.15/arch/sh/bits/ipc.h musl-git/arch/sh/bits/ipc.h
 --- musl-0.9.15/arch/sh/bits/ipc.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/ipc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/ipc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,14 @@
 +struct ipc_perm
 +{
@@ -1207,7 +1300,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/ipc.h musl-git/arch/sh/bits/ipc.h
 +#define IPC_64 0x100
 diff -Nur musl-0.9.15/arch/sh/bits/limits.h musl-git/arch/sh/bits/limits.h
 --- musl-0.9.15/arch/sh/bits/limits.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/limits.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/limits.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,8 @@
 +#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
 + || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
@@ -1219,7 +1312,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/limits.h musl-git/arch/sh/bits/limits.h
 +#define LLONG_MAX  0x7fffffffffffffffLL
 diff -Nur musl-0.9.15/arch/sh/bits/mman.h musl-git/arch/sh/bits/mman.h
 --- musl-0.9.15/arch/sh/bits/mman.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/mman.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/mman.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,62 @@
 +#define MAP_FAILED ((void *) -1)
 +
@@ -1285,7 +1378,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/mman.h musl-git/arch/sh/bits/mman.h
 +#endif
 diff -Nur musl-0.9.15/arch/sh/bits/msg.h musl-git/arch/sh/bits/msg.h
 --- musl-0.9.15/arch/sh/bits/msg.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/msg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/msg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct msqid_ds
 +{
@@ -1305,13 +1398,13 @@ diff -Nur musl-0.9.15/arch/sh/bits/msg.h musl-git/arch/sh/bits/msg.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/posix.h musl-git/arch/sh/bits/posix.h
 --- musl-0.9.15/arch/sh/bits/posix.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/posix.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/posix.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,2 @@
 +#define _POSIX_V6_ILP32_OFFBIG  1
 +#define _POSIX_V7_ILP32_OFFBIG  1
 diff -Nur musl-0.9.15/arch/sh/bits/sem.h musl-git/arch/sh/bits/sem.h
 --- musl-0.9.15/arch/sh/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -1331,12 +1424,12 @@ diff -Nur musl-0.9.15/arch/sh/bits/sem.h musl-git/arch/sh/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/setjmp.h musl-git/arch/sh/bits/setjmp.h
 --- musl-0.9.15/arch/sh/bits/setjmp.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/setjmp.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/setjmp.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +typedef unsigned long __jmp_buf[13];
 diff -Nur musl-0.9.15/arch/sh/bits/shm.h musl-git/arch/sh/bits/shm.h
 --- musl-0.9.15/arch/sh/bits/shm.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,28 @@
 +#define SHMLBA 16384
 +
@@ -1368,8 +1461,8 @@ diff -Nur musl-0.9.15/arch/sh/bits/shm.h musl-git/arch/sh/bits/shm.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/signal.h musl-git/arch/sh/bits/signal.h
 --- musl-0.9.15/arch/sh/bits/signal.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/signal.h	2014-03-17 16:49:44.000000000 +0100
-@@ -0,0 +1,76 @@
++++ musl-git/arch/sh/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -0,0 +1,82 @@
 +#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
 + || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 +
@@ -1390,6 +1483,12 @@ diff -Nur musl-0.9.15/arch/sh/bits/signal.h musl-git/arch/sh/bits/signal.h
 +	unsigned long __regs[58];
 +} mcontext_t;
 +#endif
++
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
 +
 +typedef struct __ucontext {
 +	unsigned long uc_flags;
@@ -1448,7 +1547,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/signal.h musl-git/arch/sh/bits/signal.h
 +#define _NSIG 65
 diff -Nur musl-0.9.15/arch/sh/bits/socket.h musl-git/arch/sh/bits/socket.h
 --- musl-0.9.15/arch/sh/bits/socket.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/socket.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/socket.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,17 @@
 +struct msghdr
 +{
@@ -1469,7 +1568,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/socket.h musl-git/arch/sh/bits/socket.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/statfs.h musl-git/arch/sh/bits/statfs.h
 --- musl-0.9.15/arch/sh/bits/statfs.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/statfs.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/statfs.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +struct statfs {
 +	unsigned long f_type, f_bsize;
@@ -1480,7 +1579,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/statfs.h musl-git/arch/sh/bits/statfs.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/stat.h musl-git/arch/sh/bits/stat.h
 --- musl-0.9.15/arch/sh/bits/stat.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/stat.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/stat.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +/* copied from kernel definition, but with padding replaced
 + * by the corresponding correctly-sized userspace types. */
@@ -1506,7 +1605,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/stat.h musl-git/arch/sh/bits/stat.h
 +};
 diff -Nur musl-0.9.15/arch/sh/bits/stdarg.h musl-git/arch/sh/bits/stdarg.h
 --- musl-0.9.15/arch/sh/bits/stdarg.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/stdarg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/stdarg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,4 @@
 +#define va_start(v,l)   __builtin_va_start(v,l)
 +#define va_end(v)       __builtin_va_end(v)
@@ -1514,7 +1613,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/stdarg.h musl-git/arch/sh/bits/stdarg.h
 +#define va_copy(d,s)    __builtin_va_copy(d,s)
 diff -Nur musl-0.9.15/arch/sh/bits/stdint.h musl-git/arch/sh/bits/stdint.h
 --- musl-0.9.15/arch/sh/bits/stdint.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/stdint.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/stdint.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,20 @@
 +typedef int32_t int_fast16_t;
 +typedef int32_t int_fast32_t;
@@ -1538,7 +1637,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/stdint.h musl-git/arch/sh/bits/stdint.h
 +#define SIZE_MAX        UINT32_MAX
 diff -Nur musl-0.9.15/arch/sh/bits/syscall.h musl-git/arch/sh/bits/syscall.h
 --- musl-0.9.15/arch/sh/bits/syscall.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/syscall.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/syscall.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,684 @@
 +#define __NR_restart_syscall        0
 +#define __NR_exit                   1
@@ -2226,7 +2325,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/syscall.h musl-git/arch/sh/bits/syscall.h
 +#define SYS_finit_module            368
 diff -Nur musl-0.9.15/arch/sh/bits/termios.h musl-git/arch/sh/bits/termios.h
 --- musl-0.9.15/arch/sh/bits/termios.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,160 @@
 +struct termios
 +{
@@ -2390,7 +2489,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/termios.h musl-git/arch/sh/bits/termios.h
 +#endif
 diff -Nur musl-0.9.15/arch/sh/bits/user.h musl-git/arch/sh/bits/user.h
 --- musl-0.9.15/arch/sh/bits/user.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/bits/user.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/bits/user.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,75 @@
 +#undef __WORDSIZE
 +#define __WORDSIZE 32
@@ -2469,7 +2568,7 @@ diff -Nur musl-0.9.15/arch/sh/bits/user.h musl-git/arch/sh/bits/user.h
 +};
 diff -Nur musl-0.9.15/arch/sh/crt_arch.h musl-git/arch/sh/crt_arch.h
 --- musl-0.9.15/arch/sh/crt_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/crt_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/crt_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,12 @@
 +__asm__("\
 +.global _start \n\
@@ -2485,7 +2584,7 @@ diff -Nur musl-0.9.15/arch/sh/crt_arch.h musl-git/arch/sh/crt_arch.h
 +const unsigned long __fpscr_values[2] = { 0, 0x80000 };
 diff -Nur musl-0.9.15/arch/sh/pthread_arch.h musl-git/arch/sh/pthread_arch.h
 --- musl-0.9.15/arch/sh/pthread_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/pthread_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/pthread_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,11 @@
 +static inline struct pthread *__pthread_self()
 +{
@@ -2500,7 +2599,7 @@ diff -Nur musl-0.9.15/arch/sh/pthread_arch.h musl-git/arch/sh/pthread_arch.h
 +#define CANCEL_REG_IP 17
 diff -Nur musl-0.9.15/arch/sh/reloc.h musl-git/arch/sh/reloc.h
 --- musl-0.9.15/arch/sh/reloc.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/reloc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/reloc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,47 @@
 +#if __BYTE_ORDER == __BIG_ENDIAN
 +#define ENDIAN_SUFFIX "eb"
@@ -2551,7 +2650,7 @@ diff -Nur musl-0.9.15/arch/sh/reloc.h musl-git/arch/sh/reloc.h
 +}
 diff -Nur musl-0.9.15/arch/sh/src/atomic.c musl-git/arch/sh/src/atomic.c
 --- musl-0.9.15/arch/sh/src/atomic.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/src/atomic.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/src/atomic.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,146 @@
 +#include "libc.h"
 +
@@ -2699,9 +2798,9 @@ diff -Nur musl-0.9.15/arch/sh/src/atomic.c musl-git/arch/sh/src/atomic.c
 +			: "=&r"(dummy) : "r"(x), "r"(v) : GUSA_CLOBBERS);
 +	}
 +}
-diff -Nur musl-0.9.15/arch/sh/src/__fpsrc_values.c musl-git/arch/sh/src/__fpsrc_values.c
---- musl-0.9.15/arch/sh/src/__fpsrc_values.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/src/__fpsrc_values.c	2014-03-17 16:49:44.000000000 +0100
+diff -Nur musl-0.9.15/arch/sh/src/__fpscr_values.c musl-git/arch/sh/src/__fpscr_values.c
+--- musl-0.9.15/arch/sh/src/__fpscr_values.c	1970-01-01 01:00:00.000000000 +0100
++++ musl-git/arch/sh/src/__fpscr_values.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +#include "libc.h"
 +
@@ -2710,7 +2809,7 @@ diff -Nur musl-0.9.15/arch/sh/src/__fpsrc_values.c musl-git/arch/sh/src/__fpsrc_
 +
 diff -Nur musl-0.9.15/arch/sh/syscall_arch.h musl-git/arch/sh/syscall_arch.h
 --- musl-0.9.15/arch/sh/syscall_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/sh/syscall_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/sh/syscall_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,87 @@
 +#define __SYSCALL_LL_E(x) \
 +((union { long long ll; long l[2]; }){ .ll = x }).l[0], \
@@ -2801,7 +2900,7 @@ diff -Nur musl-0.9.15/arch/sh/syscall_arch.h musl-git/arch/sh/syscall_arch.h
 +}
 diff -Nur musl-0.9.15/arch/x32/atomic.h musl-git/arch/x32/atomic.h
 --- musl-0.9.15/arch/x32/atomic.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/atomic.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/atomic.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,125 @@
 +#ifndef _INTERNAL_ATOMIC_H
 +#define _INTERNAL_ATOMIC_H
@@ -2930,7 +3029,7 @@ diff -Nur musl-0.9.15/arch/x32/atomic.h musl-git/arch/x32/atomic.h
 +#endif
 diff -Nur musl-0.9.15/arch/x32/bits/alltypes.h.in musl-git/arch/x32/bits/alltypes.h.in
 --- musl-0.9.15/arch/x32/bits/alltypes.h.in	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/alltypes.h.in	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/alltypes.h.in	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,28 @@
 +#define _Addr int
 +#define _Int64 long long
@@ -2962,12 +3061,12 @@ diff -Nur musl-0.9.15/arch/x32/bits/alltypes.h.in musl-git/arch/x32/bits/alltype
 +TYPEDEF struct { union { int __i[8]; void *__p[4]; } __u; } pthread_barrier_t;
 diff -Nur musl-0.9.15/arch/x32/bits/endian.h musl-git/arch/x32/bits/endian.h
 --- musl-0.9.15/arch/x32/bits/endian.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/endian.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/endian.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +#define __BYTE_ORDER __LITTLE_ENDIAN
 diff -Nur musl-0.9.15/arch/x32/bits/errno.h musl-git/arch/x32/bits/errno.h
 --- musl-0.9.15/arch/x32/bits/errno.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/errno.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/errno.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,134 @@
 +#define EPERM            1
 +#define ENOENT           2
@@ -3105,7 +3204,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/errno.h musl-git/arch/x32/bits/errno.h
 +#define EHWPOISON       133
 diff -Nur musl-0.9.15/arch/x32/bits/fcntl.h musl-git/arch/x32/bits/fcntl.h
 --- musl-0.9.15/arch/x32/bits/fcntl.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/fcntl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/fcntl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,39 @@
 +#define O_CREAT        0100
 +#define O_EXCL         0200
@@ -3148,7 +3247,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/fcntl.h musl-git/arch/x32/bits/fcntl.h
 +#define F_GETOWNER_UIDS 17
 diff -Nur musl-0.9.15/arch/x32/bits/fenv.h musl-git/arch/x32/bits/fenv.h
 --- musl-0.9.15/arch/x32/bits/fenv.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/fenv.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/fenv.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,34 @@
 +#define FE_INVALID    1
 +#define __FE_DENORM   2
@@ -3186,7 +3285,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/fenv.h musl-git/arch/x32/bits/fenv.h
 +#define FE_DFL_ENV      ((const fenv_t *) -1)
 diff -Nur musl-0.9.15/arch/x32/bits/float.h musl-git/arch/x32/bits/float.h
 --- musl-0.9.15/arch/x32/bits/float.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/float.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/float.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,21 @@
 +#define FLT_ROUNDS 1
 +#ifdef __FLT_EVAL_METHOD__
@@ -3211,7 +3310,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/float.h musl-git/arch/x32/bits/float.h
 +#define DECIMAL_DIG 21
 diff -Nur musl-0.9.15/arch/x32/bits/ioctl.h musl-git/arch/x32/bits/ioctl.h
 --- musl-0.9.15/arch/x32/bits/ioctl.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/ioctl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/ioctl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,197 @@
 +#define _IOC(a,b,c,d) ( ((a)<<30) | ((b)<<8) | (c) | ((d)<<16) )
 +#define _IOC_NONE  0U
@@ -3412,7 +3511,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/ioctl.h musl-git/arch/x32/bits/ioctl.h
 +#define SIOCPROTOPRIVATE 0x89E0
 diff -Nur musl-0.9.15/arch/x32/bits/io.h musl-git/arch/x32/bits/io.h
 --- musl-0.9.15/arch/x32/bits/io.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/io.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/io.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,77 @@
 +static __inline void outb(unsigned char __val, unsigned short __port)
 +{
@@ -3493,7 +3592,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/io.h musl-git/arch/x32/bits/io.h
 +}
 diff -Nur musl-0.9.15/arch/x32/bits/ipc.h musl-git/arch/x32/bits/ipc.h
 --- musl-0.9.15/arch/x32/bits/ipc.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/ipc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/ipc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,14 @@
 +struct ipc_perm
 +{
@@ -3511,7 +3610,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/ipc.h musl-git/arch/x32/bits/ipc.h
 +#define IPC_64 0
 diff -Nur musl-0.9.15/arch/x32/bits/limits.h musl-git/arch/x32/bits/limits.h
 --- musl-0.9.15/arch/x32/bits/limits.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/limits.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/limits.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,8 @@
 +#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
 + || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
@@ -3523,7 +3622,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/limits.h musl-git/arch/x32/bits/limits.h
 +#define LLONG_MAX  0x7fffffffffffffffLL
 diff -Nur musl-0.9.15/arch/x32/bits/mman.h musl-git/arch/x32/bits/mman.h
 --- musl-0.9.15/arch/x32/bits/mman.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/mman.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/mman.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,62 @@
 +#define MAP_FAILED ((void *) -1)
 +
@@ -3589,7 +3688,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/mman.h musl-git/arch/x32/bits/mman.h
 +#endif
 diff -Nur musl-0.9.15/arch/x32/bits/msg.h musl-git/arch/x32/bits/msg.h
 --- musl-0.9.15/arch/x32/bits/msg.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/msg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/msg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct msqid_ds
 +{
@@ -3609,13 +3708,13 @@ diff -Nur musl-0.9.15/arch/x32/bits/msg.h musl-git/arch/x32/bits/msg.h
 +};
 diff -Nur musl-0.9.15/arch/x32/bits/posix.h musl-git/arch/x32/bits/posix.h
 --- musl-0.9.15/arch/x32/bits/posix.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/posix.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/posix.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,2 @@
 +#define _POSIX_V6_LP64_OFF64  1
 +#define _POSIX_V7_LP64_OFF64  1
 diff -Nur musl-0.9.15/arch/x32/bits/reg.h musl-git/arch/x32/bits/reg.h
 --- musl-0.9.15/arch/x32/bits/reg.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/reg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/reg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,29 @@
 +#undef __WORDSIZE
 +#define __WORDSIZE 32
@@ -3648,7 +3747,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/reg.h musl-git/arch/x32/bits/reg.h
 +#define GS     26
 diff -Nur musl-0.9.15/arch/x32/bits/sem.h musl-git/arch/x32/bits/sem.h
 --- musl-0.9.15/arch/x32/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -3668,12 +3767,12 @@ diff -Nur musl-0.9.15/arch/x32/bits/sem.h musl-git/arch/x32/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/x32/bits/setjmp.h musl-git/arch/x32/bits/setjmp.h
 --- musl-0.9.15/arch/x32/bits/setjmp.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/setjmp.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/setjmp.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +typedef unsigned long long __jmp_buf[8];
 diff -Nur musl-0.9.15/arch/x32/bits/shm.h musl-git/arch/x32/bits/shm.h
 --- musl-0.9.15/arch/x32/bits/shm.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,33 @@
 +#define SHMLBA 4096
 +
@@ -3710,8 +3809,8 @@ diff -Nur musl-0.9.15/arch/x32/bits/shm.h musl-git/arch/x32/bits/shm.h
 +;
 diff -Nur musl-0.9.15/arch/x32/bits/signal.h musl-git/arch/x32/bits/signal.h
 --- musl-0.9.15/arch/x32/bits/signal.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/signal.h	2014-03-17 16:49:44.000000000 +0100
-@@ -0,0 +1,119 @@
++++ musl-git/arch/x32/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -0,0 +1,125 @@
 +#if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
 + || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 +
@@ -3774,6 +3873,12 @@ diff -Nur musl-0.9.15/arch/x32/bits/signal.h musl-git/arch/x32/bits/signal.h
 +} mcontext_t;
 +#endif
 +
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
 +typedef struct __ucontext {
 +	unsigned long uc_flags;
 +	struct __ucontext *uc_link;
@@ -3833,7 +3938,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/signal.h musl-git/arch/x32/bits/signal.h
 +
 diff -Nur musl-0.9.15/arch/x32/bits/socket.h musl-git/arch/x32/bits/socket.h
 --- musl-0.9.15/arch/x32/bits/socket.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/socket.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/socket.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,18 @@
 +struct msghdr
 +{
@@ -3855,7 +3960,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/socket.h musl-git/arch/x32/bits/socket.h
 +};
 diff -Nur musl-0.9.15/arch/x32/bits/statfs.h musl-git/arch/x32/bits/statfs.h
 --- musl-0.9.15/arch/x32/bits/statfs.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/statfs.h	2014-03-18 13:19:59.000000000 +0100
++++ musl-git/arch/x32/bits/statfs.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,9 @@
 +struct statfs {
 +	unsigned long f_type, __pad0, f_bsize, __pad1;
@@ -3868,7 +3973,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/statfs.h musl-git/arch/x32/bits/statfs.h
 +};
 diff -Nur musl-0.9.15/arch/x32/bits/stat.h musl-git/arch/x32/bits/stat.h
 --- musl-0.9.15/arch/x32/bits/stat.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/stat.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/stat.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +/* copied from kernel definition, but with padding replaced
 + * by the corresponding correctly-sized userspace types. */
@@ -3894,7 +3999,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/stat.h musl-git/arch/x32/bits/stat.h
 +};
 diff -Nur musl-0.9.15/arch/x32/bits/stdarg.h musl-git/arch/x32/bits/stdarg.h
 --- musl-0.9.15/arch/x32/bits/stdarg.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/stdarg.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/stdarg.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,4 @@
 +#define va_start(v,l)   __builtin_va_start(v,l)
 +#define va_end(v)       __builtin_va_end(v)
@@ -3902,7 +4007,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/stdarg.h musl-git/arch/x32/bits/stdarg.h
 +#define va_copy(d,s)    __builtin_va_copy(d,s)
 diff -Nur musl-0.9.15/arch/x32/bits/stdint.h musl-git/arch/x32/bits/stdint.h
 --- musl-0.9.15/arch/x32/bits/stdint.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/stdint.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/stdint.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,20 @@
 +typedef int32_t int_fast16_t;
 +typedef int32_t int_fast32_t;
@@ -3926,7 +4031,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/stdint.h musl-git/arch/x32/bits/stdint.h
 +#define SIZE_MAX        UINT32_MAX
 diff -Nur musl-0.9.15/arch/x32/bits/syscall.h musl-git/arch/x32/bits/syscall.h
 --- musl-0.9.15/arch/x32/bits/syscall.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/syscall.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/syscall.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,634 @@
 +#define __X32_SYSCALL_BIT        0x40000000
 +#define __NR_read (__X32_SYSCALL_BIT + 0)
@@ -4564,7 +4669,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/syscall.h musl-git/arch/x32/bits/syscall.h
 +#define SYS_fadvise SYS_fadvise64
 diff -Nur musl-0.9.15/arch/x32/bits/termios.h musl-git/arch/x32/bits/termios.h
 --- musl-0.9.15/arch/x32/bits/termios.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,160 @@
 +struct termios
 +{
@@ -4728,7 +4833,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/termios.h musl-git/arch/x32/bits/termios.h
 +#endif
 diff -Nur musl-0.9.15/arch/x32/bits/user.h musl-git/arch/x32/bits/user.h
 --- musl-0.9.15/arch/x32/bits/user.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/bits/user.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/bits/user.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,44 @@
 +#undef __WORDSIZE
 +#define __WORDSIZE 64
@@ -4776,7 +4881,7 @@ diff -Nur musl-0.9.15/arch/x32/bits/user.h musl-git/arch/x32/bits/user.h
 +#define HOST_STACK_END_ADDR	(u.start_stack + u.u_ssize * NBPG)
 diff -Nur musl-0.9.15/arch/x32/crt_arch.h musl-git/arch/x32/crt_arch.h
 --- musl-0.9.15/arch/x32/crt_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/crt_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/crt_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,9 @@
 +__asm__("\
 +.text \n\
@@ -4789,7 +4894,7 @@ diff -Nur musl-0.9.15/arch/x32/crt_arch.h musl-git/arch/x32/crt_arch.h
 +");
 diff -Nur musl-0.9.15/arch/x32/pthread_arch.h musl-git/arch/x32/pthread_arch.h
 --- musl-0.9.15/arch/x32/pthread_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/pthread_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/pthread_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,10 @@
 +static inline struct pthread *__pthread_self()
 +{
@@ -4803,7 +4908,7 @@ diff -Nur musl-0.9.15/arch/x32/pthread_arch.h musl-git/arch/x32/pthread_arch.h
 +#define CANCEL_REG_IP 16
 diff -Nur musl-0.9.15/arch/x32/reloc.h musl-git/arch/x32/reloc.h
 --- musl-0.9.15/arch/x32/reloc.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/reloc.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/reloc.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,46 @@
 +#include <stdint.h>
 +#include <string.h>
@@ -4853,7 +4958,7 @@ diff -Nur musl-0.9.15/arch/x32/reloc.h musl-git/arch/x32/reloc.h
 +}
 diff -Nur musl-0.9.15/arch/x32/src/syscall_cp_fixup.c musl-git/arch/x32/src/syscall_cp_fixup.c
 --- musl-0.9.15/arch/x32/src/syscall_cp_fixup.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/src/syscall_cp_fixup.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/src/syscall_cp_fixup.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,31 @@
 +#include <sys/syscall.h>
 +long __syscall_cp_internal(volatile void*, long long, long long, long long, long long,
@@ -4888,7 +4993,7 @@ diff -Nur musl-0.9.15/arch/x32/src/syscall_cp_fixup.c musl-git/arch/x32/src/sysc
 +
 diff -Nur musl-0.9.15/arch/x32/src/sysinfo.c musl-git/arch/x32/src/sysinfo.c
 --- musl-0.9.15/arch/x32/src/sysinfo.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/src/sysinfo.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/src/sysinfo.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,47 @@
 +#include <sys/sysinfo.h>
 +#include "syscall.h"
@@ -4939,7 +5044,7 @@ diff -Nur musl-0.9.15/arch/x32/src/sysinfo.c musl-git/arch/x32/src/sysinfo.c
 +}
 diff -Nur musl-0.9.15/arch/x32/syscall_arch.h musl-git/arch/x32/syscall_arch.h
 --- musl-0.9.15/arch/x32/syscall_arch.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x32/syscall_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x32/syscall_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,117 @@
 +#define __SYSCALL_LL_E(x) (x)
 +#define __SYSCALL_LL_O(x) (x)
@@ -5060,7 +5165,7 @@ diff -Nur musl-0.9.15/arch/x32/syscall_arch.h musl-git/arch/x32/syscall_arch.h
 +}
 diff -Nur musl-0.9.15/arch/x86_64/atomic.h musl-git/arch/x86_64/atomic.h
 --- musl-0.9.15/arch/x86_64/atomic.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/x86_64/atomic.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/atomic.h	2014-03-19 07:42:48.000000000 +0100
 @@ -5,38 +5,36 @@
  
  static inline int a_ctz_64(uint64_t x)
@@ -5146,7 +5251,7 @@ diff -Nur musl-0.9.15/arch/x86_64/atomic.h musl-git/arch/x86_64/atomic.h
  static inline void a_spin()
 diff -Nur musl-0.9.15/arch/x86_64/bits/sem.h musl-git/arch/x86_64/bits/sem.h
 --- musl-0.9.15/arch/x86_64/bits/sem.h	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/arch/x86_64/bits/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/bits/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +struct semid_ds {
 +	struct ipc_perm sem_perm;
@@ -5166,7 +5271,7 @@ diff -Nur musl-0.9.15/arch/x86_64/bits/sem.h musl-git/arch/x86_64/bits/sem.h
 +};
 diff -Nur musl-0.9.15/arch/x86_64/bits/shm.h musl-git/arch/x86_64/bits/shm.h
 --- musl-0.9.15/arch/x86_64/bits/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/x86_64/bits/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/bits/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -13,3 +13,14 @@
  	unsigned long __pad1;
  	unsigned long __pad2;
@@ -5182,9 +5287,25 @@ diff -Nur musl-0.9.15/arch/x86_64/bits/shm.h musl-git/arch/x86_64/bits/shm.h
 +	unsigned long __swap_attempts, __swap_successes;
 +};
 +
+diff -Nur musl-0.9.15/arch/x86_64/bits/signal.h musl-git/arch/x86_64/bits/signal.h
+--- musl-0.9.15/arch/x86_64/bits/signal.h	2014-01-03 21:12:17.000000000 +0100
++++ musl-git/arch/x86_64/bits/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -60,6 +60,12 @@
+ } mcontext_t;
+ #endif
+ 
++struct sigaltstack {
++	void *ss_sp;
++	int ss_flags;
++	size_t ss_size;
++};
++
+ typedef struct __ucontext {
+ 	unsigned long uc_flags;
+ 	struct __ucontext *uc_link;
 diff -Nur musl-0.9.15/arch/x86_64/bits/stat.h musl-git/arch/x86_64/bits/stat.h
 --- musl-0.9.15/arch/x86_64/bits/stat.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/x86_64/bits/stat.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/bits/stat.h	2014-03-19 07:42:48.000000000 +0100
 @@ -2,7 +2,7 @@
   * by the corresponding correctly-sized userspace types. */
  
@@ -5196,7 +5317,7 @@ diff -Nur musl-0.9.15/arch/x86_64/bits/stat.h musl-git/arch/x86_64/bits/stat.h
  
 diff -Nur musl-0.9.15/arch/x86_64/bits/termios.h musl-git/arch/x86_64/bits/termios.h
 --- musl-0.9.15/arch/x86_64/bits/termios.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/x86_64/bits/termios.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/bits/termios.h	2014-03-19 07:42:48.000000000 +0100
 @@ -42,6 +42,7 @@
  #define IXANY   0004000
  #define IXOFF   0010000
@@ -5252,7 +5373,7 @@ diff -Nur musl-0.9.15/arch/x86_64/bits/termios.h musl-git/arch/x86_64/bits/termi
 +#endif
 diff -Nur musl-0.9.15/arch/x86_64/pthread_arch.h musl-git/arch/x86_64/pthread_arch.h
 --- musl-0.9.15/arch/x86_64/pthread_arch.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/arch/x86_64/pthread_arch.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/arch/x86_64/pthread_arch.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,7 +1,7 @@
  static inline struct pthread *__pthread_self()
  {
@@ -5264,7 +5385,7 @@ diff -Nur musl-0.9.15/arch/x86_64/pthread_arch.h musl-git/arch/x86_64/pthread_ar
  
 diff -Nur musl-0.9.15/configure musl-git/configure
 --- musl-0.9.15/configure	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/configure	2014-03-18 13:19:59.000000000 +0100
++++ musl-git/configure	2014-03-19 07:42:48.000000000 +0100
 @@ -222,12 +222,16 @@
  # Convert to just ARCH
  #
@@ -5331,7 +5452,7 @@ diff -Nur musl-0.9.15/configure musl-git/configure
  
 diff -Nur musl-0.9.15/COPYRIGHT musl-git/COPYRIGHT
 --- musl-0.9.15/COPYRIGHT	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/COPYRIGHT	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/COPYRIGHT	2014-03-19 07:42:48.000000000 +0100
 @@ -1,6 +1,6 @@
  musl as a whole is licensed under the following standard MIT license:
  
@@ -5351,7 +5472,7 @@ diff -Nur musl-0.9.15/COPYRIGHT musl-git/COPYRIGHT
  media. All public header files (include/* and arch/*/bits/*) should be
 diff -Nur musl-0.9.15/crt/superh/crti.s musl-git/crt/superh/crti.s
 --- musl-0.9.15/crt/superh/crti.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/crt/superh/crti.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/crt/superh/crti.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,13 @@
 +.section .init
 +.global  _init
@@ -5368,7 +5489,7 @@ diff -Nur musl-0.9.15/crt/superh/crti.s musl-git/crt/superh/crti.s
 +	nop
 diff -Nur musl-0.9.15/crt/superh/crtn.s musl-git/crt/superh/crtn.s
 --- musl-0.9.15/crt/superh/crtn.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/crt/superh/crtn.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/crt/superh/crtn.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,9 @@
 +.section .init
 +	lds.l @r15+, pr
@@ -5381,7 +5502,7 @@ diff -Nur musl-0.9.15/crt/superh/crtn.s musl-git/crt/superh/crtn.s
 +	 nop
 diff -Nur musl-0.9.15/crt/x32/crti.s musl-git/crt/x32/crti.s
 --- musl-0.9.15/crt/x32/crti.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/crt/x32/crti.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/crt/x32/crti.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,9 @@
 +.section .init
 +.global _init
@@ -5394,7 +5515,7 @@ diff -Nur musl-0.9.15/crt/x32/crti.s musl-git/crt/x32/crti.s
 +	push %rax
 diff -Nur musl-0.9.15/crt/x32/crtn.s musl-git/crt/x32/crtn.s
 --- musl-0.9.15/crt/x32/crtn.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/crt/x32/crtn.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/crt/x32/crtn.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.section .init
 +	pop %rax
@@ -5405,7 +5526,7 @@ diff -Nur musl-0.9.15/crt/x32/crtn.s musl-git/crt/x32/crtn.s
 +	ret
 diff -Nur musl-0.9.15/.gitignore musl-git/.gitignore
 --- musl-0.9.15/.gitignore	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/.gitignore	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/.gitignore	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,11 @@
 +*.o
 +*.lo
@@ -5420,7 +5541,7 @@ diff -Nur musl-0.9.15/.gitignore musl-git/.gitignore
 +src/internal/version.h
 diff -Nur musl-0.9.15/include/arpa/inet.h musl-git/include/arpa/inet.h
 --- musl-0.9.15/include/arpa/inet.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/arpa/inet.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/arpa/inet.h	2014-03-19 07:42:48.000000000 +0100
 @@ -20,7 +20,7 @@
  const char *inet_ntop (int, const void *__restrict, char *__restrict, socklen_t);
  
@@ -5432,7 +5553,7 @@ diff -Nur musl-0.9.15/include/arpa/inet.h musl-git/include/arpa/inet.h
  
 diff -Nur musl-0.9.15/include/dlfcn.h musl-git/include/dlfcn.h
 --- musl-0.9.15/include/dlfcn.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/dlfcn.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/dlfcn.h	2014-03-19 07:42:48.000000000 +0100
 @@ -31,7 +31,7 @@
  	const char *dli_sname;
  	void *dli_saddr;
@@ -5444,7 +5565,7 @@ diff -Nur musl-0.9.15/include/dlfcn.h musl-git/include/dlfcn.h
  
 diff -Nur musl-0.9.15/include/elf.h musl-git/include/elf.h
 --- musl-0.9.15/include/elf.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/elf.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/elf.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1153,6 +1153,7 @@
  #define EF_MIPS_64BIT_WHIRL 16
  #define EF_MIPS_ABI2	    32
@@ -5573,7 +5694,7 @@ diff -Nur musl-0.9.15/include/elf.h musl-git/include/elf.h
  #define R_AARCH64_JUMP_SLOT    1026
 diff -Nur musl-0.9.15/include/fcntl.h musl-git/include/fcntl.h
 --- musl-0.9.15/include/fcntl.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/fcntl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/fcntl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -148,6 +148,7 @@
  #define SPLICE_F_MORE 4
  #define SPLICE_F_GIFT 8
@@ -5592,7 +5713,7 @@ diff -Nur musl-0.9.15/include/fcntl.h musl-git/include/fcntl.h
  #define creat64 creat
 diff -Nur musl-0.9.15/include/math.h musl-git/include/math.h
 --- musl-0.9.15/include/math.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/math.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/math.h	2014-03-19 07:42:48.000000000 +0100
 @@ -42,12 +42,14 @@
  
  static __inline unsigned __FLOAT_BITS(float __f)
@@ -5612,7 +5733,7 @@ diff -Nur musl-0.9.15/include/math.h musl-git/include/math.h
  
 diff -Nur musl-0.9.15/include/netdb.h musl-git/include/netdb.h
 --- musl-0.9.15/include/netdb.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/netdb.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/netdb.h	2014-03-19 07:42:48.000000000 +0100
 @@ -131,6 +131,7 @@
  #define TRY_AGAIN      2
  #define NO_RECOVERY    3
@@ -5623,7 +5744,7 @@ diff -Nur musl-0.9.15/include/netdb.h musl-git/include/netdb.h
  #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 diff -Nur musl-0.9.15/include/netinet/if_ether.h musl-git/include/netinet/if_ether.h
 --- musl-0.9.15/include/netinet/if_ether.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/netinet/if_ether.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/netinet/if_ether.h	2014-03-19 07:42:48.000000000 +0100
 @@ -54,6 +54,7 @@
  #define ETH_P_8021AH	0x88E7
  #define ETH_P_MVRP	0x88F5
@@ -5634,7 +5755,7 @@ diff -Nur musl-0.9.15/include/netinet/if_ether.h musl-git/include/netinet/if_eth
  #define ETH_P_FIP	0x8914
 diff -Nur musl-0.9.15/include/netinet/in.h musl-git/include/netinet/in.h
 --- musl-0.9.15/include/netinet/in.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/netinet/in.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/netinet/in.h	2014-03-19 07:42:48.000000000 +0100
 @@ -149,7 +149,7 @@
          (IN6_IS_ADDR_MULTICAST(a) && ((((uint8_t *) (a))[1] & 0xf) == 0xe))
  
@@ -5743,7 +5864,7 @@ diff -Nur musl-0.9.15/include/netinet/in.h musl-git/include/netinet/in.h
  
 diff -Nur musl-0.9.15/include/netinet/tcp.h musl-git/include/netinet/tcp.h
 --- musl-0.9.15/include/netinet/tcp.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/netinet/tcp.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/netinet/tcp.h	2014-03-19 07:42:48.000000000 +0100
 @@ -44,42 +44,80 @@
  #define SOL_TCP 6
  #include <sys/types.h>
@@ -5941,7 +6062,7 @@ diff -Nur musl-0.9.15/include/netinet/tcp.h musl-git/include/netinet/tcp.h
  #endif
 diff -Nur musl-0.9.15/include/netinet/udp.h musl-git/include/netinet/udp.h
 --- musl-0.9.15/include/netinet/udp.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/netinet/udp.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/netinet/udp.h	2014-03-19 07:42:48.000000000 +0100
 @@ -5,19 +5,22 @@
  extern "C" {
  #endif
@@ -5974,7 +6095,7 @@ diff -Nur musl-0.9.15/include/netinet/udp.h musl-git/include/netinet/udp.h
  #define UDP_ENCAP	100
 diff -Nur musl-0.9.15/include/sched.h musl-git/include/sched.h
 --- musl-0.9.15/include/sched.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sched.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sched.h	2014-03-19 07:42:48.000000000 +0100
 @@ -78,7 +78,7 @@
  int sched_getaffinity(pid_t, size_t, cpu_set_t *);
  int sched_setaffinity(pid_t, size_t, const cpu_set_t *);
@@ -5986,8 +6107,21 @@ diff -Nur musl-0.9.15/include/sched.h musl-git/include/sched.h
  #define CPU_SET_S(i, size, set) __CPU_op_S(i, size, set, |=)
 diff -Nur musl-0.9.15/include/signal.h musl-git/include/signal.h
 --- musl-0.9.15/include/signal.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/signal.h	2014-03-17 16:49:44.000000000 +0100
-@@ -227,8 +227,8 @@
++++ musl-git/include/signal.h	2014-03-19 07:42:48.000000000 +0100
+@@ -77,11 +77,7 @@
+ #define CLD_STOPPED 5
+ #define CLD_CONTINUED 6
+ 
+-typedef struct sigaltstack {
+-	void *ss_sp;
+-	int ss_flags;
+-	size_t ss_size;
+-} stack_t;
++typedef struct sigaltstack stack_t;
+ 
+ union sigval {
+ 	int sival_int;
+@@ -227,8 +223,8 @@
  typedef void (*sighandler_t)(int);
  void (*bsd_signal(int, void (*)(int)))(int);
  int sigisemptyset(const sigset_t *);
@@ -6000,7 +6134,7 @@ diff -Nur musl-0.9.15/include/signal.h musl-git/include/signal.h
  #define SA_ONESHOT SA_RESETHAND
 diff -Nur musl-0.9.15/include/stdlib.h musl-git/include/stdlib.h
 --- musl-0.9.15/include/stdlib.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/stdlib.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/stdlib.h	2014-03-19 07:42:48.000000000 +0100
 @@ -93,7 +93,7 @@
  #define WSTOPSIG(s) WEXITSTATUS(s)
  #define WIFEXITED(s) (!WTERMSIG(s))
@@ -6012,7 +6146,7 @@ diff -Nur musl-0.9.15/include/stdlib.h musl-git/include/stdlib.h
  int setenv (const char *, const char *, int);
 diff -Nur musl-0.9.15/include/sys/inotify.h musl-git/include/sys/inotify.h
 --- musl-0.9.15/include/sys/inotify.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/inotify.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/inotify.h	2014-03-19 07:42:48.000000000 +0100
 @@ -48,7 +48,7 @@
  int inotify_init(void);
  int inotify_init1(int);
@@ -6024,7 +6158,7 @@ diff -Nur musl-0.9.15/include/sys/inotify.h musl-git/include/sys/inotify.h
  }
 diff -Nur musl-0.9.15/include/sys/mman.h musl-git/include/sys/mman.h
 --- musl-0.9.15/include/sys/mman.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/mman.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/mman.h	2014-03-19 07:42:48.000000000 +0100
 @@ -33,7 +33,7 @@
  
  #ifdef _GNU_SOURCE
@@ -6036,7 +6170,7 @@ diff -Nur musl-0.9.15/include/sys/mman.h musl-git/include/sys/mman.h
  #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 diff -Nur musl-0.9.15/include/sys/procfs.h musl-git/include/sys/procfs.h
 --- musl-0.9.15/include/sys/procfs.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/procfs.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/procfs.h	2014-03-19 07:42:48.000000000 +0100
 @@ -40,7 +40,7 @@
  	char pr_zomb;
  	char pr_nice;
@@ -6048,7 +6182,7 @@ diff -Nur musl-0.9.15/include/sys/procfs.h musl-git/include/sys/procfs.h
  #else
 diff -Nur musl-0.9.15/include/sys/sem.h musl-git/include/sys/sem.h
 --- musl-0.9.15/include/sys/sem.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/sem.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/sem.h	2014-03-19 07:42:48.000000000 +0100
 @@ -27,22 +27,7 @@
  
  #include <endian.h>
@@ -6075,7 +6209,7 @@ diff -Nur musl-0.9.15/include/sys/sem.h musl-git/include/sys/sem.h
  
 diff -Nur musl-0.9.15/include/sys/shm.h musl-git/include/sys/shm.h
 --- musl-0.9.15/include/sys/shm.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/shm.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/shm.h	2014-03-19 07:42:48.000000000 +0100
 @@ -14,6 +14,13 @@
  #include <bits/alltypes.h>
  
@@ -6113,7 +6247,7 @@ diff -Nur musl-0.9.15/include/sys/shm.h musl-git/include/sys/shm.h
  void *shmat(int, const void *, int);
 diff -Nur musl-0.9.15/include/sys/socket.h musl-git/include/sys/socket.h
 --- musl-0.9.15/include/sys/socket.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/socket.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/socket.h	2014-03-19 07:42:48.000000000 +0100
 @@ -202,11 +202,16 @@
  #define SO_LOCK_FILTER          44
  #define SO_SELECT_ERR_QUEUE     45
@@ -6154,7 +6288,7 @@ diff -Nur musl-0.9.15/include/sys/sysctl.h musl-git/include/sys/sysctl.h
 -#endif
 diff -Nur musl-0.9.15/include/sys/time.h musl-git/include/sys/time.h
 --- musl-0.9.15/include/sys/time.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/time.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/time.h	2014-03-19 07:42:48.000000000 +0100
 @@ -51,6 +51,17 @@
  	((a)->tv_usec += 1000000, (a)->tv_sec--) )
  #endif
@@ -6175,7 +6309,7 @@ diff -Nur musl-0.9.15/include/sys/time.h musl-git/include/sys/time.h
  #endif
 diff -Nur musl-0.9.15/include/sys/wait.h musl-git/include/sys/wait.h
 --- musl-0.9.15/include/sys/wait.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/sys/wait.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/sys/wait.h	2014-03-19 07:42:48.000000000 +0100
 @@ -50,7 +50,7 @@
  #define WCOREDUMP(s) ((s) & 0x80)
  #define WIFEXITED(s) (!WTERMSIG(s))
@@ -6187,7 +6321,7 @@ diff -Nur musl-0.9.15/include/sys/wait.h musl-git/include/sys/wait.h
  #ifdef __cplusplus
 diff -Nur musl-0.9.15/include/syslog.h musl-git/include/syslog.h
 --- musl-0.9.15/include/syslog.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/syslog.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/syslog.h	2014-03-19 07:42:48.000000000 +0100
 @@ -21,7 +21,7 @@
  #define	LOG_MAKEPRI(f, p) (((f)<<3)|(p))
  
@@ -6199,7 +6333,7 @@ diff -Nur musl-0.9.15/include/syslog.h musl-git/include/syslog.h
  #define LOG_USER     (1<<3)
 diff -Nur musl-0.9.15/include/time.h musl-git/include/time.h
 --- musl-0.9.15/include/time.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/time.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/time.h	2014-03-19 07:42:48.000000000 +0100
 @@ -125,7 +125,7 @@
  
  
@@ -6211,7 +6345,7 @@ diff -Nur musl-0.9.15/include/time.h musl-git/include/time.h
  
 diff -Nur musl-0.9.15/include/utmp.h musl-git/include/utmp.h
 --- musl-0.9.15/include/utmp.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/utmp.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/utmp.h	2014-03-19 07:42:48.000000000 +0100
 @@ -10,6 +10,7 @@
  #define ACCOUNTING 9
  #define UT_NAMESIZE 32
@@ -6231,7 +6365,7 @@ diff -Nur musl-0.9.15/include/utmp.h musl-git/include/utmp.h
  struct utmp *getutent(void);
 diff -Nur musl-0.9.15/include/utmpx.h musl-git/include/utmpx.h
 --- musl-0.9.15/include/utmpx.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/include/utmpx.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/include/utmpx.h	2014-03-19 07:42:48.000000000 +0100
 @@ -5,6 +5,8 @@
  extern "C" {
  #endif
@@ -6278,7 +6412,7 @@ diff -Nur musl-0.9.15/include/utmpx.h musl-git/include/utmpx.h
  #define RUN_LVL         1
 diff -Nur musl-0.9.15/src/crypt/crypt_des.c musl-git/src/crypt/crypt_des.c
 --- musl-0.9.15/src/crypt/crypt_des.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/crypt/crypt_des.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/crypt/crypt_des.c	2014-03-19 07:42:48.000000000 +0100
 @@ -692,7 +692,7 @@
  	return saltbits;
  }
@@ -6335,7 +6469,7 @@ diff -Nur musl-0.9.15/src/crypt/crypt_des.c musl-git/src/crypt/crypt_des.c
  	 * Now encode the result...
 diff -Nur musl-0.9.15/src/crypt/encrypt.c musl-git/src/crypt/encrypt.c
 --- musl-0.9.15/src/crypt/encrypt.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/crypt/encrypt.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/crypt/encrypt.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,60 @@
 +#include <stdint.h>
 +#include <stdlib.h>
@@ -6399,7 +6533,7 @@ diff -Nur musl-0.9.15/src/crypt/encrypt.c musl-git/src/crypt/encrypt.c
 +}
 diff -Nur musl-0.9.15/src/dirent/readdir.c musl-git/src/dirent/readdir.c
 --- musl-0.9.15/src/dirent/readdir.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/dirent/readdir.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/dirent/readdir.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,5 +1,7 @@
  #include <dirent.h>
 +#include <errno.h>
@@ -6424,7 +6558,7 @@ diff -Nur musl-0.9.15/src/dirent/readdir.c musl-git/src/dirent/readdir.c
  	}
 diff -Nur musl-0.9.15/src/errno/strerror.c musl-git/src/errno/strerror.c
 --- musl-0.9.15/src/errno/strerror.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/errno/strerror.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/errno/strerror.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,7 +1,7 @@
  #include <errno.h>
  #include <string.h>
@@ -6449,7 +6583,7 @@ diff -Nur musl-0.9.15/src/errno/strerror.c musl-git/src/errno/strerror.c
  	return (char *)s;
 diff -Nur musl-0.9.15/src/fcntl/fcntl.c musl-git/src/fcntl/fcntl.c
 --- musl-0.9.15/src/fcntl/fcntl.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/fcntl/fcntl.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fcntl/fcntl.c	2014-03-19 07:42:48.000000000 +0100
 @@ -7,17 +7,17 @@
  
  int fcntl(int fd, int cmd, ...)
@@ -6490,7 +6624,7 @@ diff -Nur musl-0.9.15/src/fcntl/fcntl.c musl-git/src/fcntl/fcntl.c
  }
 diff -Nur musl-0.9.15/src/fcntl/posix_fadvise.c musl-git/src/fcntl/posix_fadvise.c
 --- musl-0.9.15/src/fcntl/posix_fadvise.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/fcntl/posix_fadvise.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fcntl/posix_fadvise.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,8 +1,11 @@
  #include <fcntl.h>
  #include "syscall.h"
@@ -6505,7 +6639,7 @@ diff -Nur musl-0.9.15/src/fcntl/posix_fadvise.c musl-git/src/fcntl/posix_fadvise
 +LFS64(posix_fadvise);
 diff -Nur musl-0.9.15/src/fcntl/posix_fallocate.c musl-git/src/fcntl/posix_fallocate.c
 --- musl-0.9.15/src/fcntl/posix_fallocate.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/fcntl/posix_fallocate.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fcntl/posix_fallocate.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,8 +1,11 @@
  #include <fcntl.h>
  #include "syscall.h"
@@ -6520,7 +6654,7 @@ diff -Nur musl-0.9.15/src/fcntl/posix_fallocate.c musl-git/src/fcntl/posix_fallo
 +LFS64(posix_fallocate);
 diff -Nur musl-0.9.15/src/fenv/i386/fenv.s musl-git/src/fenv/i386/fenv.s
 --- musl-0.9.15/src/fenv/i386/fenv.s	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/fenv/i386/fenv.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/i386/fenv.s	2014-03-19 07:42:48.000000000 +0100
 @@ -126,7 +126,7 @@
  	push %eax
  	push %eax
@@ -6532,17 +6666,17 @@ diff -Nur musl-0.9.15/src/fenv/i386/fenv.s musl-git/src/fenv/i386/fenv.s
  	fldenv (%esp)
 diff -Nur musl-0.9.15/src/fenv/mipsel-sf/fenv.sub musl-git/src/fenv/mipsel-sf/fenv.sub
 --- musl-0.9.15/src/fenv/mipsel-sf/fenv.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/mipsel-sf/fenv.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/mipsel-sf/fenv.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../fenv.c
 diff -Nur musl-0.9.15/src/fenv/mips-sf/fenv.sub musl-git/src/fenv/mips-sf/fenv.sub
 --- musl-0.9.15/src/fenv/mips-sf/fenv.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/mips-sf/fenv.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/mips-sf/fenv.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../fenv.c
 diff -Nur musl-0.9.15/src/fenv/sh/fenv.s musl-git/src/fenv/sh/fenv.s
 --- musl-0.9.15/src/fenv/sh/fenv.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/sh/fenv.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/sh/fenv.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,74 @@
 +.global fegetround
 +.type   fegetround, @function
@@ -6620,17 +6754,17 @@ diff -Nur musl-0.9.15/src/fenv/sh/fenv.s musl-git/src/fenv/sh/fenv.s
 +	 mov #0, r0
 diff -Nur musl-0.9.15/src/fenv/sheb-nofpu/fenv.sub musl-git/src/fenv/sheb-nofpu/fenv.sub
 --- musl-0.9.15/src/fenv/sheb-nofpu/fenv.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/sheb-nofpu/fenv.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/sheb-nofpu/fenv.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../fenv.c
 diff -Nur musl-0.9.15/src/fenv/sh-nofpu/fenv.sub musl-git/src/fenv/sh-nofpu/fenv.sub
 --- musl-0.9.15/src/fenv/sh-nofpu/fenv.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/sh-nofpu/fenv.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/sh-nofpu/fenv.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../fenv.c
 diff -Nur musl-0.9.15/src/fenv/x32/fenv.s musl-git/src/fenv/x32/fenv.s
 --- musl-0.9.15/src/fenv/x32/fenv.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/fenv/x32/fenv.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/x32/fenv.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,97 @@
 +.global feclearexcept
 +.type feclearexcept,@function
@@ -6731,7 +6865,7 @@ diff -Nur musl-0.9.15/src/fenv/x32/fenv.s musl-git/src/fenv/x32/fenv.s
 +	ret
 diff -Nur musl-0.9.15/src/fenv/x86_64/fenv.s musl-git/src/fenv/x86_64/fenv.s
 --- musl-0.9.15/src/fenv/x86_64/fenv.s	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/fenv/x86_64/fenv.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/fenv/x86_64/fenv.s	2014-03-19 07:42:48.000000000 +0100
 @@ -76,7 +76,7 @@
  	ret
  1:	push %rax
@@ -6743,7 +6877,7 @@ diff -Nur musl-0.9.15/src/fenv/x86_64/fenv.s musl-git/src/fenv/x86_64/fenv.s
  	pushq $0x1f80
 diff -Nur musl-0.9.15/src/internal/sh/syscall.s musl-git/src/internal/sh/syscall.s
 --- musl-0.9.15/src/internal/sh/syscall.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/internal/sh/syscall.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/internal/sh/syscall.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +.global __syscall
 +.type   __syscall, @function
@@ -6769,7 +6903,7 @@ diff -Nur musl-0.9.15/src/internal/sh/syscall.s musl-git/src/internal/sh/syscall
 +	 nop
 diff -Nur musl-0.9.15/src/internal/stdio_impl.h musl-git/src/internal/stdio_impl.h
 --- musl-0.9.15/src/internal/stdio_impl.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/internal/stdio_impl.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/internal/stdio_impl.h	2014-03-19 07:42:48.000000000 +0100
 @@ -17,6 +17,7 @@
  #define F_EOF 16
  #define F_ERR 32
@@ -6780,7 +6914,7 @@ diff -Nur musl-0.9.15/src/internal/stdio_impl.h musl-git/src/internal/stdio_impl
  	unsigned flags;
 diff -Nur musl-0.9.15/src/internal/syscall.h musl-git/src/internal/syscall.h
 --- musl-0.9.15/src/internal/syscall.h	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/internal/syscall.h	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/internal/syscall.h	2014-03-19 07:42:48.000000000 +0100
 @@ -1,22 +1,28 @@
  #ifndef _INTERNAL_SYSCALL_H
  #define _INTERNAL_SYSCALL_H
@@ -6844,7 +6978,7 @@ diff -Nur musl-0.9.15/src/internal/syscall.h musl-git/src/internal/syscall.h
  #define syscall_cp(...) __syscall_ret(__syscall_cp(__VA_ARGS__))
 diff -Nur musl-0.9.15/src/internal/x32/syscall.s musl-git/src/internal/x32/syscall.s
 --- musl-0.9.15/src/internal/x32/syscall.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/internal/x32/syscall.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/internal/x32/syscall.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,12 @@
 +.global __syscall
 +.type __syscall,@function
@@ -6860,7 +6994,7 @@ diff -Nur musl-0.9.15/src/internal/x32/syscall.s musl-git/src/internal/x32/sysca
 +	ret
 diff -Nur musl-0.9.15/src/ipc/semctl.c musl-git/src/ipc/semctl.c
 --- musl-0.9.15/src/ipc/semctl.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/ipc/semctl.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ipc/semctl.c	2014-03-19 07:42:48.000000000 +0100
 @@ -3,16 +3,26 @@
  #include "syscall.h"
  #include "ipc.h"
@@ -6896,7 +7030,7 @@ diff -Nur musl-0.9.15/src/ipc/semctl.c musl-git/src/ipc/semctl.c
  }
 diff -Nur musl-0.9.15/src/ldso/dladdr.c musl-git/src/ldso/dladdr.c
 --- musl-0.9.15/src/ldso/dladdr.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/ldso/dladdr.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/dladdr.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,9 +1,9 @@
  #define _GNU_SOURCE
  #include <dlfcn.h>
@@ -6911,7 +7045,7 @@ diff -Nur musl-0.9.15/src/ldso/dladdr.c musl-git/src/ldso/dladdr.c
  }
 diff -Nur musl-0.9.15/src/ldso/dynlink.c musl-git/src/ldso/dynlink.c
 --- musl-0.9.15/src/ldso/dynlink.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/ldso/dynlink.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/dynlink.c	2014-03-19 07:42:48.000000000 +0100
 @@ -253,7 +253,8 @@
  			name = strings + sym->st_name;
  			ctx = IS_COPY(type) ? head->next : head;
@@ -6942,7 +7076,7 @@ diff -Nur musl-0.9.15/src/ldso/dynlink.c musl-git/src/ldso/dynlink.c
  }
 diff -Nur musl-0.9.15/src/ldso/sh/dlsym.s musl-git/src/ldso/sh/dlsym.s
 --- musl-0.9.15/src/ldso/sh/dlsym.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/ldso/sh/dlsym.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/sh/dlsym.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,10 @@
 +.text
 +.global dlsym
@@ -6956,7 +7090,7 @@ diff -Nur musl-0.9.15/src/ldso/sh/dlsym.s musl-git/src/ldso/sh/dlsym.s
 +L1:	.long __dlsym@PLT-(1b-.)
 diff -Nur musl-0.9.15/src/ldso/sh/start.s musl-git/src/ldso/sh/start.s
 --- musl-0.9.15/src/ldso/sh/start.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/ldso/sh/start.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/sh/start.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,26 @@
 +.text
 +.global _start
@@ -6986,7 +7120,7 @@ diff -Nur musl-0.9.15/src/ldso/sh/start.s musl-git/src/ldso/sh/start.s
 +L1:	.long __dynlink@PLT-(2b-.)
 diff -Nur musl-0.9.15/src/ldso/x32/dlsym.s musl-git/src/ldso/x32/dlsym.s
 --- musl-0.9.15/src/ldso/x32/dlsym.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/ldso/x32/dlsym.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/x32/dlsym.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,6 @@
 +.text
 +.global dlsym
@@ -6996,7 +7130,7 @@ diff -Nur musl-0.9.15/src/ldso/x32/dlsym.s musl-git/src/ldso/x32/dlsym.s
 +	jmp __dlsym
 diff -Nur musl-0.9.15/src/ldso/x32/start.s musl-git/src/ldso/x32/start.s
 --- musl-0.9.15/src/ldso/x32/start.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/ldso/x32/start.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/ldso/x32/start.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,24 @@
 +.text
 +.global _start
@@ -7024,7 +7158,7 @@ diff -Nur musl-0.9.15/src/ldso/x32/start.s musl-git/src/ldso/x32/start.s
 +	jmp *%rax
 diff -Nur musl-0.9.15/src/linux/clone.c musl-git/src/linux/clone.c
 --- musl-0.9.15/src/linux/clone.c	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/linux/clone.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/clone.c	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,19 @@
 +#include <stdarg.h>
 +#include <unistd.h>
@@ -7047,7 +7181,7 @@ diff -Nur musl-0.9.15/src/linux/clone.c musl-git/src/linux/clone.c
 +}
 diff -Nur musl-0.9.15/src/linux/fallocate.c musl-git/src/linux/fallocate.c
 --- musl-0.9.15/src/linux/fallocate.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/linux/fallocate.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/fallocate.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,9 +1,13 @@
  #define _GNU_SOURCE
  #include <fcntl.h>
@@ -7064,7 +7198,7 @@ diff -Nur musl-0.9.15/src/linux/fallocate.c musl-git/src/linux/fallocate.c
 +LFS64(fallocate);
 diff -Nur musl-0.9.15/src/linux/inotify.c musl-git/src/linux/inotify.c
 --- musl-0.9.15/src/linux/inotify.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/linux/inotify.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/inotify.c	2014-03-19 07:42:48.000000000 +0100
 @@ -15,7 +15,7 @@
  	return syscall(SYS_inotify_add_watch, fd, pathname, mask);
  }
@@ -7076,7 +7210,7 @@ diff -Nur musl-0.9.15/src/linux/inotify.c musl-git/src/linux/inotify.c
  }
 diff -Nur musl-0.9.15/src/linux/remap_file_pages.c musl-git/src/linux/remap_file_pages.c
 --- musl-0.9.15/src/linux/remap_file_pages.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/linux/remap_file_pages.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/remap_file_pages.c	2014-03-19 07:42:48.000000000 +0100
 @@ -2,7 +2,7 @@
  #include <sys/mman.h>
  #include "syscall.h"
@@ -7088,7 +7222,7 @@ diff -Nur musl-0.9.15/src/linux/remap_file_pages.c musl-git/src/linux/remap_file
  }
 diff -Nur musl-0.9.15/src/linux/stime.c musl-git/src/linux/stime.c
 --- musl-0.9.15/src/linux/stime.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/linux/stime.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/stime.c	2014-03-19 07:42:48.000000000 +0100
 @@ -2,7 +2,7 @@
  #include <time.h>
  #include <sys/time.h>
@@ -7100,7 +7234,7 @@ diff -Nur musl-0.9.15/src/linux/stime.c musl-git/src/linux/stime.c
  	return settimeofday(&tv, (void *)0);
 diff -Nur musl-0.9.15/src/linux/x32/sysinfo.s musl-git/src/linux/x32/sysinfo.s
 --- musl-0.9.15/src/linux/x32/sysinfo.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/linux/x32/sysinfo.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/linux/x32/sysinfo.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.text
 +.global sysinfo
@@ -7109,7 +7243,7 @@ diff -Nur musl-0.9.15/src/linux/x32/sysinfo.s musl-git/src/linux/x32/sysinfo.s
 +	jmp __x32_sysinfo
 diff -Nur musl-0.9.15/src/locale/wcsxfrm.c musl-git/src/locale/wcsxfrm.c
 --- musl-0.9.15/src/locale/wcsxfrm.c	2014-01-03 21:12:17.000000000 +0100
-+++ musl-git/src/locale/wcsxfrm.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/locale/wcsxfrm.c	2014-03-19 07:42:48.000000000 +0100
 @@ -6,10 +6,12 @@
  size_t __wcsxfrm_l(wchar_t *restrict dest, const wchar_t *restrict src, size_t n, locale_t loc)
  {
@@ -7127,7 +7261,7 @@ diff -Nur musl-0.9.15/src/locale/wcsxfrm.c musl-git/src/locale/wcsxfrm.c
  
 diff -Nur musl-0.9.15/src/math/i386/remainderf.s musl-git/src/math/i386/remainderf.s
 --- musl-0.9.15/src/math/i386/remainderf.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/math/i386/remainderf.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/i386/remainderf.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,6 +1,9 @@
  .global remainderf
  .type remainderf,@function
@@ -7140,7 +7274,7 @@ diff -Nur musl-0.9.15/src/math/i386/remainderf.s musl-git/src/math/i386/remainde
  1:	fprem1
 diff -Nur musl-0.9.15/src/math/i386/remainder.s musl-git/src/math/i386/remainder.s
 --- musl-0.9.15/src/math/i386/remainder.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/math/i386/remainder.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/i386/remainder.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,6 +1,9 @@
  .global remainder
  .type remainder,@function
@@ -7153,7 +7287,7 @@ diff -Nur musl-0.9.15/src/math/i386/remainder.s musl-git/src/math/i386/remainder
  1:	fprem1
 diff -Nur musl-0.9.15/src/math/x32/acosl.s musl-git/src/math/x32/acosl.s
 --- musl-0.9.15/src/math/x32/acosl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/acosl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/acosl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,16 @@
 +# see ../i386/acos.s
 +
@@ -7173,7 +7307,7 @@ diff -Nur musl-0.9.15/src/math/x32/acosl.s musl-git/src/math/x32/acosl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/asinl.s musl-git/src/math/x32/asinl.s
 --- musl-0.9.15/src/math/x32/asinl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/asinl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/asinl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,12 @@
 +.global asinl
 +.type asinl,@function
@@ -7189,7 +7323,7 @@ diff -Nur musl-0.9.15/src/math/x32/asinl.s musl-git/src/math/x32/asinl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/atan2l.s musl-git/src/math/x32/atan2l.s
 --- musl-0.9.15/src/math/x32/atan2l.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/atan2l.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/atan2l.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global atan2l
 +.type atan2l,@function
@@ -7200,7 +7334,7 @@ diff -Nur musl-0.9.15/src/math/x32/atan2l.s musl-git/src/math/x32/atan2l.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/atanl.s musl-git/src/math/x32/atanl.s
 --- musl-0.9.15/src/math/x32/atanl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/atanl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/atanl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global atanl
 +.type atanl,@function
@@ -7211,12 +7345,12 @@ diff -Nur musl-0.9.15/src/math/x32/atanl.s musl-git/src/math/x32/atanl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/ceill.s musl-git/src/math/x32/ceill.s
 --- musl-0.9.15/src/math/x32/ceill.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/ceill.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/ceill.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +# see floorl.s
 diff -Nur musl-0.9.15/src/math/x32/exp2l.s musl-git/src/math/x32/exp2l.s
 --- musl-0.9.15/src/math/x32/exp2l.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/exp2l.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/exp2l.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,90 @@
 +.global expm1l
 +.type expm1l,@function
@@ -7310,7 +7444,7 @@ diff -Nur musl-0.9.15/src/math/x32/exp2l.s musl-git/src/math/x32/exp2l.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/expl.s musl-git/src/math/x32/expl.s
 --- musl-0.9.15/src/math/x32/expl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/expl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/expl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,101 @@
 +# exp(x) = 2^hi + 2^hi (2^lo - 1)
 +# where hi+lo = log2e*x with 128bit precision
@@ -7415,12 +7549,12 @@ diff -Nur musl-0.9.15/src/math/x32/expl.s musl-git/src/math/x32/expl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/expm1l.s musl-git/src/math/x32/expm1l.s
 --- musl-0.9.15/src/math/x32/expm1l.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/expm1l.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/expm1l.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +# see exp2l.s
 diff -Nur musl-0.9.15/src/math/x32/fabsf.s musl-git/src/math/x32/fabsf.s
 --- musl-0.9.15/src/math/x32/fabsf.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/fabsf.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/fabsf.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global fabsf
 +.type fabsf,@function
@@ -7431,7 +7565,7 @@ diff -Nur musl-0.9.15/src/math/x32/fabsf.s musl-git/src/math/x32/fabsf.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/fabsl.s musl-git/src/math/x32/fabsl.s
 --- musl-0.9.15/src/math/x32/fabsl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/fabsl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/fabsl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,6 @@
 +.global fabsl
 +.type fabsl,@function
@@ -7441,7 +7575,7 @@ diff -Nur musl-0.9.15/src/math/x32/fabsl.s musl-git/src/math/x32/fabsl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/fabs.s musl-git/src/math/x32/fabs.s
 --- musl-0.9.15/src/math/x32/fabs.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/fabs.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/fabs.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,9 @@
 +.global fabs
 +.type fabs,@function
@@ -7454,7 +7588,7 @@ diff -Nur musl-0.9.15/src/math/x32/fabs.s musl-git/src/math/x32/fabs.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/floorl.s musl-git/src/math/x32/floorl.s
 --- musl-0.9.15/src/math/x32/floorl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/floorl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/floorl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,27 @@
 +.global floorl
 +.type floorl,@function
@@ -7485,7 +7619,7 @@ diff -Nur musl-0.9.15/src/math/x32/floorl.s musl-git/src/math/x32/floorl.s
 +	jmp 1b
 diff -Nur musl-0.9.15/src/math/x32/fmodl.s musl-git/src/math/x32/fmodl.s
 --- musl-0.9.15/src/math/x32/fmodl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/fmodl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/fmodl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,11 @@
 +.global fmodl
 +.type fmodl,@function
@@ -7500,7 +7634,7 @@ diff -Nur musl-0.9.15/src/math/x32/fmodl.s musl-git/src/math/x32/fmodl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/llrintf.s musl-git/src/math/x32/llrintf.s
 --- musl-0.9.15/src/math/x32/llrintf.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/llrintf.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/llrintf.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global llrintf
 +.type llrintf,@function
@@ -7509,7 +7643,7 @@ diff -Nur musl-0.9.15/src/math/x32/llrintf.s musl-git/src/math/x32/llrintf.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/llrintl.s musl-git/src/math/x32/llrintl.s
 --- musl-0.9.15/src/math/x32/llrintl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/llrintl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/llrintl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global llrintl
 +.type llrintl,@function
@@ -7520,7 +7654,7 @@ diff -Nur musl-0.9.15/src/math/x32/llrintl.s musl-git/src/math/x32/llrintl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/llrint.s musl-git/src/math/x32/llrint.s
 --- musl-0.9.15/src/math/x32/llrint.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/llrint.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/llrint.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global llrint
 +.type llrint,@function
@@ -7529,7 +7663,7 @@ diff -Nur musl-0.9.15/src/math/x32/llrint.s musl-git/src/math/x32/llrint.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/log10l.s musl-git/src/math/x32/log10l.s
 --- musl-0.9.15/src/math/x32/log10l.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/log10l.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/log10l.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global log10l
 +.type log10l,@function
@@ -7540,7 +7674,7 @@ diff -Nur musl-0.9.15/src/math/x32/log10l.s musl-git/src/math/x32/log10l.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/log1pl.s musl-git/src/math/x32/log1pl.s
 --- musl-0.9.15/src/math/x32/log1pl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/log1pl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/log1pl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,15 @@
 +.global log1pl
 +.type log1pl,@function
@@ -7559,7 +7693,7 @@ diff -Nur musl-0.9.15/src/math/x32/log1pl.s musl-git/src/math/x32/log1pl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/log2l.s musl-git/src/math/x32/log2l.s
 --- musl-0.9.15/src/math/x32/log2l.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/log2l.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/log2l.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global log2l
 +.type log2l,@function
@@ -7570,7 +7704,7 @@ diff -Nur musl-0.9.15/src/math/x32/log2l.s musl-git/src/math/x32/log2l.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/logl.s musl-git/src/math/x32/logl.s
 --- musl-0.9.15/src/math/x32/logl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/logl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/logl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global logl
 +.type logl,@function
@@ -7581,7 +7715,7 @@ diff -Nur musl-0.9.15/src/math/x32/logl.s musl-git/src/math/x32/logl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/lrintf.s musl-git/src/math/x32/lrintf.s
 --- musl-0.9.15/src/math/x32/lrintf.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/lrintf.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/lrintf.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global lrintf
 +.type lrintf,@function
@@ -7590,7 +7724,7 @@ diff -Nur musl-0.9.15/src/math/x32/lrintf.s musl-git/src/math/x32/lrintf.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/lrintl.s musl-git/src/math/x32/lrintl.s
 --- musl-0.9.15/src/math/x32/lrintl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/lrintl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/lrintl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,7 @@
 +.global lrintl
 +.type lrintl,@function
@@ -7601,7 +7735,7 @@ diff -Nur musl-0.9.15/src/math/x32/lrintl.s musl-git/src/math/x32/lrintl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/lrint.s musl-git/src/math/x32/lrint.s
 --- musl-0.9.15/src/math/x32/lrint.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/lrint.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/lrint.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global lrint
 +.type lrint,@function
@@ -7610,7 +7744,7 @@ diff -Nur musl-0.9.15/src/math/x32/lrint.s musl-git/src/math/x32/lrint.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/remainderl.s musl-git/src/math/x32/remainderl.s
 --- musl-0.9.15/src/math/x32/remainderl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/remainderl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/remainderl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,11 @@
 +.global remainderl
 +.type remainderl,@function
@@ -7625,7 +7759,7 @@ diff -Nur musl-0.9.15/src/math/x32/remainderl.s musl-git/src/math/x32/remainderl
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/rintl.s musl-git/src/math/x32/rintl.s
 --- musl-0.9.15/src/math/x32/rintl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/rintl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/rintl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,6 @@
 +.global rintl
 +.type rintl,@function
@@ -7635,7 +7769,7 @@ diff -Nur musl-0.9.15/src/math/x32/rintl.s musl-git/src/math/x32/rintl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/sqrtf.s musl-git/src/math/x32/sqrtf.s
 --- musl-0.9.15/src/math/x32/sqrtf.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/sqrtf.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/sqrtf.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,4 @@
 +.global sqrtf
 +.type sqrtf,@function
@@ -7643,7 +7777,7 @@ diff -Nur musl-0.9.15/src/math/x32/sqrtf.s musl-git/src/math/x32/sqrtf.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/sqrtl.s musl-git/src/math/x32/sqrtl.s
 --- musl-0.9.15/src/math/x32/sqrtl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/sqrtl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/sqrtl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global sqrtl
 +.type sqrtl,@function
@@ -7652,7 +7786,7 @@ diff -Nur musl-0.9.15/src/math/x32/sqrtl.s musl-git/src/math/x32/sqrtl.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/sqrt.s musl-git/src/math/x32/sqrt.s
 --- musl-0.9.15/src/math/x32/sqrt.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/sqrt.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/sqrt.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,4 @@
 +.global sqrt
 +.type sqrt,@function
@@ -7660,12 +7794,12 @@ diff -Nur musl-0.9.15/src/math/x32/sqrt.s musl-git/src/math/x32/sqrt.s
 +	ret
 diff -Nur musl-0.9.15/src/math/x32/truncl.s musl-git/src/math/x32/truncl.s
 --- musl-0.9.15/src/math/x32/truncl.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/math/x32/truncl.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/math/x32/truncl.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +# see floorl.s
 diff -Nur musl-0.9.15/src/misc/nftw.c musl-git/src/misc/nftw.c
 --- musl-0.9.15/src/misc/nftw.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/misc/nftw.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/misc/nftw.c	2014-03-19 07:42:48.000000000 +0100
 @@ -46,8 +46,7 @@
  		type = FTW_F;
  	}
@@ -7678,7 +7812,7 @@ diff -Nur musl-0.9.15/src/misc/nftw.c musl-git/src/misc/nftw.c
  	new.chain = h;
 diff -Nur musl-0.9.15/src/misc/pty.c musl-git/src/misc/pty.c
 --- musl-0.9.15/src/misc/pty.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/misc/pty.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/misc/pty.c	2014-03-19 07:42:48.000000000 +0100
 @@ -26,7 +26,7 @@
  {
  	int pty, err;
@@ -7690,7 +7824,7 @@ diff -Nur musl-0.9.15/src/misc/pty.c musl-git/src/misc/pty.c
  }
 diff -Nur musl-0.9.15/src/misc/syscall.c musl-git/src/misc/syscall.c
 --- musl-0.9.15/src/misc/syscall.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/misc/syscall.c	2014-03-18 22:16:18.000000000 +0100
++++ musl-git/src/misc/syscall.c	2014-03-19 07:42:48.000000000 +0100
 @@ -6,14 +6,14 @@
  long syscall(long n, ...)
  {
@@ -7715,7 +7849,7 @@ diff -Nur musl-0.9.15/src/misc/syscall.c musl-git/src/misc/syscall.c
  }
 diff -Nur musl-0.9.15/src/network/accept4.c musl-git/src/network/accept4.c
 --- musl-0.9.15/src/network/accept4.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/network/accept4.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/network/accept4.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,9 +1,20 @@
  #define _GNU_SOURCE
  #include <sys/socket.h>
@@ -7740,7 +7874,7 @@ diff -Nur musl-0.9.15/src/network/accept4.c musl-git/src/network/accept4.c
  }
 diff -Nur musl-0.9.15/src/network/inet_legacy.c musl-git/src/network/inet_legacy.c
 --- musl-0.9.15/src/network/inet_legacy.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/network/inet_legacy.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/network/inet_legacy.c	2014-03-19 07:42:48.000000000 +0100
 @@ -16,9 +16,8 @@
  	return 1;
  }
@@ -7754,7 +7888,7 @@ diff -Nur musl-0.9.15/src/network/inet_legacy.c musl-git/src/network/inet_legacy
  	else h |= n<<8;
 diff -Nur musl-0.9.15/src/network/proto.c musl-git/src/network/proto.c
 --- musl-0.9.15/src/network/proto.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/network/proto.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/network/proto.c	2014-03-19 07:42:48.000000000 +0100
 @@ -4,7 +4,7 @@
  /* do we really need all these?? */
  
@@ -7777,7 +7911,7 @@ diff -Nur musl-0.9.15/src/network/proto.c musl-git/src/network/proto.c
  
 diff -Nur musl-0.9.15/src/prng/random.c musl-git/src/prng/random.c
 --- musl-0.9.15/src/prng/random.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/prng/random.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/prng/random.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,10 +1,3 @@
 -/*
 - * random.c - Copyright © 2011 Szabolcs Nagy
@@ -7812,7 +7946,7 @@ diff -Nur musl-0.9.15/src/prng/random.c musl-git/src/prng/random.c
  }
 diff -Nur musl-0.9.15/src/process/posix_spawn.c musl-git/src/process/posix_spawn.c
 --- musl-0.9.15/src/process/posix_spawn.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/process/posix_spawn.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/process/posix_spawn.c	2014-03-19 07:42:48.000000000 +0100
 @@ -166,7 +166,7 @@
  
  	close(args.p[0]);
@@ -7824,7 +7958,7 @@ diff -Nur musl-0.9.15/src/process/posix_spawn.c musl-git/src/process/posix_spawn
  	pthread_setcancelstate(cs, 0);
 diff -Nur musl-0.9.15/src/process/x32/vfork.s musl-git/src/process/x32/vfork.s
 --- musl-0.9.15/src/process/x32/vfork.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/process/x32/vfork.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/process/x32/vfork.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,12 @@
 +.global __vfork
 +.weak vfork
@@ -7840,17 +7974,17 @@ diff -Nur musl-0.9.15/src/process/x32/vfork.s musl-git/src/process/x32/vfork.s
 +	jmp __syscall_ret
 diff -Nur musl-0.9.15/src/setjmp/mipsel-sf/longjmp.sub musl-git/src/setjmp/mipsel-sf/longjmp.sub
 --- musl-0.9.15/src/setjmp/mipsel-sf/longjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mipsel-sf/longjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mipsel-sf/longjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../mips-sf/longjmp.s
 diff -Nur musl-0.9.15/src/setjmp/mipsel-sf/setjmp.sub musl-git/src/setjmp/mipsel-sf/setjmp.sub
 --- musl-0.9.15/src/setjmp/mipsel-sf/setjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mipsel-sf/setjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mipsel-sf/setjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../mips-sf/setjmp.s
 diff -Nur musl-0.9.15/src/setjmp/mips-sf/longjmp.s musl-git/src/setjmp/mips-sf/longjmp.s
 --- musl-0.9.15/src/setjmp/mips-sf/longjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mips-sf/longjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mips-sf/longjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,25 @@
 +.set noreorder
 +
@@ -7879,12 +8013,12 @@ diff -Nur musl-0.9.15/src/setjmp/mips-sf/longjmp.s musl-git/src/setjmp/mips-sf/l
 +	lw      $28, 44($4)
 diff -Nur musl-0.9.15/src/setjmp/mips-sf/longjmp.sub musl-git/src/setjmp/mips-sf/longjmp.sub
 --- musl-0.9.15/src/setjmp/mips-sf/longjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mips-sf/longjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mips-sf/longjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +longjmp.s
 diff -Nur musl-0.9.15/src/setjmp/mips-sf/setjmp.s musl-git/src/setjmp/mips-sf/setjmp.s
 --- musl-0.9.15/src/setjmp/mips-sf/setjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mips-sf/setjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mips-sf/setjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,25 @@
 +.set noreorder
 +
@@ -7913,12 +8047,12 @@ diff -Nur musl-0.9.15/src/setjmp/mips-sf/setjmp.s musl-git/src/setjmp/mips-sf/se
 +	li      $2, 0
 diff -Nur musl-0.9.15/src/setjmp/mips-sf/setjmp.sub musl-git/src/setjmp/mips-sf/setjmp.sub
 --- musl-0.9.15/src/setjmp/mips-sf/setjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/mips-sf/setjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/mips-sf/setjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +setjmp.s
 diff -Nur musl-0.9.15/src/setjmp/sh/longjmp.s musl-git/src/setjmp/sh/longjmp.s
 --- musl-0.9.15/src/setjmp/sh/longjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh/longjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh/longjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,26 @@
 +.global _longjmp
 +.global longjmp
@@ -7948,7 +8082,7 @@ diff -Nur musl-0.9.15/src/setjmp/sh/longjmp.s musl-git/src/setjmp/sh/longjmp.s
 +	 nop
 diff -Nur musl-0.9.15/src/setjmp/sh/setjmp.s musl-git/src/setjmp/sh/setjmp.s
 --- musl-0.9.15/src/setjmp/sh/setjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh/setjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh/setjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,25 @@
 +.global __setjmp
 +.global _setjmp
@@ -7977,17 +8111,17 @@ diff -Nur musl-0.9.15/src/setjmp/sh/setjmp.s musl-git/src/setjmp/sh/setjmp.s
 +	 mov  #0, r0
 diff -Nur musl-0.9.15/src/setjmp/sheb-nofpu/longjmp.sub musl-git/src/setjmp/sheb-nofpu/longjmp.sub
 --- musl-0.9.15/src/setjmp/sheb-nofpu/longjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sheb-nofpu/longjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sheb-nofpu/longjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../sh-nofpu/longjmp.s
 diff -Nur musl-0.9.15/src/setjmp/sheb-nofpu/setjmp.sub musl-git/src/setjmp/sheb-nofpu/setjmp.sub
 --- musl-0.9.15/src/setjmp/sheb-nofpu/setjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sheb-nofpu/setjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sheb-nofpu/setjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +../sh-nofpu/setjmp.s
 diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/longjmp.s musl-git/src/setjmp/sh-nofpu/longjmp.s
 --- musl-0.9.15/src/setjmp/sh-nofpu/longjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh-nofpu/longjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh-nofpu/longjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +.global _longjmp
 +.global longjmp
@@ -8013,12 +8147,12 @@ diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/longjmp.s musl-git/src/setjmp/sh-nofpu
 +	 nop
 diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/longjmp.sub musl-git/src/setjmp/sh-nofpu/longjmp.sub
 --- musl-0.9.15/src/setjmp/sh-nofpu/longjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh-nofpu/longjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh-nofpu/longjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +longjmp.s
 diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/setjmp.s musl-git/src/setjmp/sh-nofpu/setjmp.s
 --- musl-0.9.15/src/setjmp/sh-nofpu/setjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh-nofpu/setjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh-nofpu/setjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,21 @@
 +.global __setjmp
 +.global _setjmp
@@ -8043,12 +8177,12 @@ diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/setjmp.s musl-git/src/setjmp/sh-nofpu/
 +	 mov  #0, r0
 diff -Nur musl-0.9.15/src/setjmp/sh-nofpu/setjmp.sub musl-git/src/setjmp/sh-nofpu/setjmp.sub
 --- musl-0.9.15/src/setjmp/sh-nofpu/setjmp.sub	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/sh-nofpu/setjmp.sub	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/sh-nofpu/setjmp.sub	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1 @@
 +setjmp.s
 diff -Nur musl-0.9.15/src/setjmp/x32/longjmp.s musl-git/src/setjmp/x32/longjmp.s
 --- musl-0.9.15/src/setjmp/x32/longjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/x32/longjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/x32/longjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +/* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
 +.global _longjmp
@@ -8074,7 +8208,7 @@ diff -Nur musl-0.9.15/src/setjmp/x32/longjmp.s musl-git/src/setjmp/x32/longjmp.s
 +	jmp *%rdx               /* goto saved address without altering rsp */
 diff -Nur musl-0.9.15/src/setjmp/x32/setjmp.s musl-git/src/setjmp/x32/setjmp.s
 --- musl-0.9.15/src/setjmp/x32/setjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/setjmp/x32/setjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/setjmp/x32/setjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +/* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
 +.global __setjmp
@@ -8098,9 +8232,21 @@ diff -Nur musl-0.9.15/src/setjmp/x32/setjmp.s musl-git/src/setjmp/x32/setjmp.s
 +	mov %rdx,56(%rdi)
 +	xor %rax,%rax           /* always return 0 */
 +	ret
+diff -Nur musl-0.9.15/src/signal/mips/sigsetjmp.s musl-git/src/signal/mips/sigsetjmp.s
+--- musl-0.9.15/src/signal/mips/sigsetjmp.s	2014-01-03 21:12:18.000000000 +0100
++++ musl-git/src/signal/mips/sigsetjmp.s	2014-03-19 07:42:48.000000000 +0100
+@@ -11,7 +11,7 @@
+ 	sw $4, 20($sp)
+ 	sw $ra, 24($sp)
+ 	sw $gp, 28($sp)
+-	addu $6, $4, 124
++	addu $6, $4, 108
+ 	li $5, 0
+ 	li $4, 1
+ 	sw $4, -4($6)
 diff -Nur musl-0.9.15/src/signal/sh/restore.s musl-git/src/signal/sh/restore.s
 --- musl-0.9.15/src/signal/sh/restore.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/signal/sh/restore.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/sh/restore.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,24 @@
 +.global __restore
 +.type   __restore, @function
@@ -8128,7 +8274,7 @@ diff -Nur musl-0.9.15/src/signal/sh/restore.s musl-git/src/signal/sh/restore.s
 +	or    r0, r0
 diff -Nur musl-0.9.15/src/signal/sh/sigsetjmp.s musl-git/src/signal/sh/sigsetjmp.s
 --- musl-0.9.15/src/signal/sh/sigsetjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/signal/sh/sigsetjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/sh/sigsetjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,27 @@
 +.global sigsetjmp
 +.type   sigsetjmp, @function
@@ -8159,7 +8305,7 @@ diff -Nur musl-0.9.15/src/signal/sh/sigsetjmp.s musl-git/src/signal/sh/sigsetjmp
 +L2:	.long setjmp@PLT-(3b-.)
 diff -Nur musl-0.9.15/src/signal/sigandset.c musl-git/src/signal/sigandset.c
 --- musl-0.9.15/src/signal/sigandset.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/signal/sigandset.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/sigandset.c	2014-03-19 07:42:48.000000000 +0100
 @@ -3,7 +3,7 @@
  
  #define SST_SIZE (_NSIG/8/sizeof(long))
@@ -8171,7 +8317,7 @@ diff -Nur musl-0.9.15/src/signal/sigandset.c musl-git/src/signal/sigandset.c
  	for(; i < SST_SIZE; i++) d[i] = l[i] & r[i];
 diff -Nur musl-0.9.15/src/signal/sigorset.c musl-git/src/signal/sigorset.c
 --- musl-0.9.15/src/signal/sigorset.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/signal/sigorset.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/sigorset.c	2014-03-19 07:42:48.000000000 +0100
 @@ -3,7 +3,7 @@
  
  #define SST_SIZE (_NSIG/8/sizeof(long))
@@ -8183,7 +8329,7 @@ diff -Nur musl-0.9.15/src/signal/sigorset.c musl-git/src/signal/sigorset.c
  	for(; i < SST_SIZE; i++) d[i] = l[i] | r[i];
 diff -Nur musl-0.9.15/src/signal/x32/restore.s musl-git/src/signal/x32/restore.s
 --- musl-0.9.15/src/signal/x32/restore.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/signal/x32/restore.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/x32/restore.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,8 @@
 +.global __restore_rt
 +.global __restore
@@ -8195,7 +8341,7 @@ diff -Nur musl-0.9.15/src/signal/x32/restore.s musl-git/src/signal/x32/restore.s
 +	syscall
 diff -Nur musl-0.9.15/src/signal/x32/sigsetjmp.s musl-git/src/signal/x32/sigsetjmp.s
 --- musl-0.9.15/src/signal/x32/sigsetjmp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/signal/x32/sigsetjmp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/signal/x32/sigsetjmp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,14 @@
 +/* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
 +.global sigsetjmp
@@ -8213,7 +8359,7 @@ diff -Nur musl-0.9.15/src/signal/x32/sigsetjmp.s musl-git/src/signal/x32/sigsetj
 +1:	jmp setjmp
 diff -Nur musl-0.9.15/src/stdio/__fdopen.c musl-git/src/stdio/__fdopen.c
 --- musl-0.9.15/src/stdio/__fdopen.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/stdio/__fdopen.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/stdio/__fdopen.c	2014-03-19 07:42:48.000000000 +0100
 @@ -32,7 +32,9 @@
  	/* Set append mode on fd if opened for append */
  	if (*mode == 'a') {
@@ -8227,7 +8373,7 @@ diff -Nur musl-0.9.15/src/stdio/__fdopen.c musl-git/src/stdio/__fdopen.c
  	f->fd = fd;
 diff -Nur musl-0.9.15/src/stdio/ftell.c musl-git/src/stdio/ftell.c
 --- musl-0.9.15/src/stdio/ftell.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/stdio/ftell.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/stdio/ftell.c	2014-03-19 07:42:48.000000000 +0100
 @@ -4,7 +4,9 @@
  
  off_t __ftello_unlocked(FILE *f)
@@ -8241,7 +8387,7 @@ diff -Nur musl-0.9.15/src/stdio/ftell.c musl-git/src/stdio/ftell.c
  	/* Adjust for data in buffer. */
 diff -Nur musl-0.9.15/src/stdio/vfprintf.c musl-git/src/stdio/vfprintf.c
 --- musl-0.9.15/src/stdio/vfprintf.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/stdio/vfprintf.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/stdio/vfprintf.c	2014-03-19 07:42:48.000000000 +0100
 @@ -207,7 +207,8 @@
  
  static int fmt_fp(FILE *f, long double y, int w, int p, int fl, int t)
@@ -8272,7 +8418,7 @@ diff -Nur musl-0.9.15/src/stdio/vfprintf.c musl-git/src/stdio/vfprintf.c
  
 diff -Nur musl-0.9.15/src/stdio/vfscanf.c musl-git/src/stdio/vfscanf.c
 --- musl-0.9.15/src/stdio/vfscanf.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/stdio/vfscanf.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/stdio/vfscanf.c	2014-03-19 07:42:48.000000000 +0100
 @@ -328,3 +328,5 @@
  	FUNLOCK(f);
  	return matches;
@@ -8281,7 +8427,7 @@ diff -Nur musl-0.9.15/src/stdio/vfscanf.c musl-git/src/stdio/vfscanf.c
 +weak_alias(vfscanf,__isoc99_vfscanf);
 diff -Nur musl-0.9.15/src/thread/arm/clone.s musl-git/src/thread/arm/clone.s
 --- musl-0.9.15/src/thread/arm/clone.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/arm/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/arm/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,10 +1,7 @@
  .text
  .global __clone
@@ -8295,7 +8441,7 @@ diff -Nur musl-0.9.15/src/thread/arm/clone.s musl-git/src/thread/arm/clone.s
  	mov r6,r3
 diff -Nur musl-0.9.15/src/thread/cancel_dummy.c musl-git/src/thread/cancel_dummy.c
 --- musl-0.9.15/src/thread/cancel_dummy.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/cancel_dummy.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/cancel_dummy.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,6 +1,9 @@
  #include "pthread_impl.h"
 +#include "syscall.h"
@@ -8309,7 +8455,7 @@ diff -Nur musl-0.9.15/src/thread/cancel_dummy.c musl-git/src/thread/cancel_dummy
  }
 diff -Nur musl-0.9.15/src/thread/cancel_impl.c musl-git/src/thread/cancel_impl.c
 --- musl-0.9.15/src/thread/cancel_impl.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/cancel_impl.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/cancel_impl.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,4 +1,5 @@
  #include "pthread_impl.h"
 +#include "syscall.h"
@@ -8334,7 +8480,7 @@ diff -Nur musl-0.9.15/src/thread/cancel_impl.c musl-git/src/thread/cancel_impl.c
  	long r;
 diff -Nur musl-0.9.15/src/thread/clone.c musl-git/src/thread/clone.c
 --- musl-0.9.15/src/thread/clone.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/clone.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/clone.c	2014-03-19 07:42:48.000000000 +0100
 @@ -1,10 +1,7 @@
  #include <errno.h>
 -#include "libc.h"
@@ -8350,7 +8496,7 @@ diff -Nur musl-0.9.15/src/thread/clone.c musl-git/src/thread/clone.c
 -weak_alias(__clone, clone);
 diff -Nur musl-0.9.15/src/thread/i386/clone.s musl-git/src/thread/i386/clone.s
 --- musl-0.9.15/src/thread/i386/clone.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/i386/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/i386/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,10 +1,7 @@
  .text
  .global __clone
@@ -8364,7 +8510,7 @@ diff -Nur musl-0.9.15/src/thread/i386/clone.s musl-git/src/thread/i386/clone.s
  	push %ebx
 diff -Nur musl-0.9.15/src/thread/microblaze/clone.s musl-git/src/thread/microblaze/clone.s
 --- musl-0.9.15/src/thread/microblaze/clone.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/microblaze/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/microblaze/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,14 +1,11 @@
  .global __clone
 -.weak clone
@@ -8391,7 +8537,7 @@ diff -Nur musl-0.9.15/src/thread/microblaze/clone.s musl-git/src/thread/microbla
  	brald   r15, r3
 diff -Nur musl-0.9.15/src/thread/sh/clone.s musl-git/src/thread/sh/clone.s
 --- musl-0.9.15/src/thread/sh/clone.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/sh/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/sh/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,47 @@
 +.text
 +.global __clone
@@ -8442,7 +8588,7 @@ diff -Nur musl-0.9.15/src/thread/sh/clone.s musl-git/src/thread/sh/clone.s
 +	or   r0, r0
 diff -Nur musl-0.9.15/src/thread/sh/__set_thread_area.s musl-git/src/thread/sh/__set_thread_area.s
 --- musl-0.9.15/src/thread/sh/__set_thread_area.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/sh/__set_thread_area.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/sh/__set_thread_area.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,5 @@
 +.global __set_thread_area
 +.type   __set_thread_area, @function
@@ -8451,7 +8597,7 @@ diff -Nur musl-0.9.15/src/thread/sh/__set_thread_area.s musl-git/src/thread/sh/_
 +	 ldc r4, gbr
 diff -Nur musl-0.9.15/src/thread/sh/syscall_cp.s musl-git/src/thread/sh/syscall_cp.s
 --- musl-0.9.15/src/thread/sh/syscall_cp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/sh/syscall_cp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/sh/syscall_cp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,39 @@
 +.text
 +.global __syscall_cp_asm
@@ -8494,7 +8640,7 @@ diff -Nur musl-0.9.15/src/thread/sh/syscall_cp.s musl-git/src/thread/sh/syscall_
 +	 nop
 diff -Nur musl-0.9.15/src/thread/sh/__unmapself.s musl-git/src/thread/sh/__unmapself.s
 --- musl-0.9.15/src/thread/sh/__unmapself.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/sh/__unmapself.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/sh/__unmapself.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,22 @@
 +.text
 +.global __unmapself
@@ -8520,7 +8666,7 @@ diff -Nur musl-0.9.15/src/thread/sh/__unmapself.s musl-git/src/thread/sh/__unmap
 +	or    r0, r0
 diff -Nur musl-0.9.15/src/thread/__wait.c musl-git/src/thread/__wait.c
 --- musl-0.9.15/src/thread/__wait.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/__wait.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/__wait.c	2014-03-19 07:42:48.000000000 +0100
 @@ -10,6 +10,6 @@
  	}
  	if (waiters) a_inc(waiters);
@@ -8531,7 +8677,7 @@ diff -Nur musl-0.9.15/src/thread/__wait.c musl-git/src/thread/__wait.c
  }
 diff -Nur musl-0.9.15/src/thread/x32/clone.s musl-git/src/thread/x32/clone.s
 --- musl-0.9.15/src/thread/x32/clone.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/x32/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/x32/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,25 @@
 +.text
 +.global __clone
@@ -8560,7 +8706,7 @@ diff -Nur musl-0.9.15/src/thread/x32/clone.s musl-git/src/thread/x32/clone.s
 +1:	ret
 diff -Nur musl-0.9.15/src/thread/x32/__set_thread_area.s musl-git/src/thread/x32/__set_thread_area.s
 --- musl-0.9.15/src/thread/x32/__set_thread_area.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/x32/__set_thread_area.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/x32/__set_thread_area.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,10 @@
 +/* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
 +.text
@@ -8574,7 +8720,7 @@ diff -Nur musl-0.9.15/src/thread/x32/__set_thread_area.s musl-git/src/thread/x32
 +	ret
 diff -Nur musl-0.9.15/src/thread/x32/syscall_cp.s musl-git/src/thread/x32/syscall_cp.s
 --- musl-0.9.15/src/thread/x32/syscall_cp.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/x32/syscall_cp.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/x32/syscall_cp.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,23 @@
 +.text
 +.global __syscall_cp_internal
@@ -8601,7 +8747,7 @@ diff -Nur musl-0.9.15/src/thread/x32/syscall_cp.s musl-git/src/thread/x32/syscal
 +	ret
 diff -Nur musl-0.9.15/src/thread/x32/__unmapself.s musl-git/src/thread/x32/__unmapself.s
 --- musl-0.9.15/src/thread/x32/__unmapself.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/thread/x32/__unmapself.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/x32/__unmapself.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,10 @@
 +/* Copyright 2011-2012 Nicholas J. Kain, licensed under standard MIT license */
 +.text
@@ -8615,7 +8761,7 @@ diff -Nur musl-0.9.15/src/thread/x32/__unmapself.s musl-git/src/thread/x32/__unm
 +	syscall         /* exit(0) */
 diff -Nur musl-0.9.15/src/thread/x86_64/clone.s musl-git/src/thread/x86_64/clone.s
 --- musl-0.9.15/src/thread/x86_64/clone.s	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/thread/x86_64/clone.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/thread/x86_64/clone.s	2014-03-19 07:42:48.000000000 +0100
 @@ -1,10 +1,7 @@
  .text
  .global __clone
@@ -8629,7 +8775,7 @@ diff -Nur musl-0.9.15/src/thread/x86_64/clone.s musl-git/src/thread/x86_64/clone
  	mov %rdi,%r11
 diff -Nur musl-0.9.15/src/time/timer_delete.c musl-git/src/time/timer_delete.c
 --- musl-0.9.15/src/time/timer_delete.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/time/timer_delete.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/time/timer_delete.c	2014-03-19 07:42:48.000000000 +0100
 @@ -10,5 +10,5 @@
  		__wake(&td->timer_id, 1, 1);
  		return 0;
@@ -8639,7 +8785,7 @@ diff -Nur musl-0.9.15/src/time/timer_delete.c musl-git/src/time/timer_delete.c
  }
 diff -Nur musl-0.9.15/src/time/timer_getoverrun.c musl-git/src/time/timer_getoverrun.c
 --- musl-0.9.15/src/time/timer_getoverrun.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/time/timer_getoverrun.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/time/timer_getoverrun.c	2014-03-19 07:42:48.000000000 +0100
 @@ -8,5 +8,5 @@
  		pthread_t td = (void *)((uintptr_t)t << 1);
  		t = (void *)(uintptr_t)(td->timer_id & INT_MAX);
@@ -8649,7 +8795,7 @@ diff -Nur musl-0.9.15/src/time/timer_getoverrun.c musl-git/src/time/timer_getove
  }
 diff -Nur musl-0.9.15/src/time/timer_gettime.c musl-git/src/time/timer_gettime.c
 --- musl-0.9.15/src/time/timer_gettime.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/time/timer_gettime.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/time/timer_gettime.c	2014-03-19 07:42:48.000000000 +0100
 @@ -8,5 +8,5 @@
  		pthread_t td = (void *)((uintptr_t)t << 1);
  		t = (void *)(uintptr_t)(td->timer_id & INT_MAX);
@@ -8659,7 +8805,7 @@ diff -Nur musl-0.9.15/src/time/timer_gettime.c musl-git/src/time/timer_gettime.c
  }
 diff -Nur musl-0.9.15/src/time/timer_settime.c musl-git/src/time/timer_settime.c
 --- musl-0.9.15/src/time/timer_settime.c	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/src/time/timer_settime.c	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/time/timer_settime.c	2014-03-19 07:42:48.000000000 +0100
 @@ -8,5 +8,5 @@
  		pthread_t td = (void *)((uintptr_t)t << 1);
  		t = (void *)(uintptr_t)(td->timer_id & INT_MAX);
@@ -8669,7 +8815,7 @@ diff -Nur musl-0.9.15/src/time/timer_settime.c musl-git/src/time/timer_settime.c
  }
 diff -Nur musl-0.9.15/src/unistd/sh/pipe.s musl-git/src/unistd/sh/pipe.s
 --- musl-0.9.15/src/unistd/sh/pipe.s	1970-01-01 01:00:00.000000000 +0100
-+++ musl-git/src/unistd/sh/pipe.s	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/src/unistd/sh/pipe.s	2014-03-19 07:42:48.000000000 +0100
 @@ -0,0 +1,27 @@
 +.global pipe
 +.type   pipe, @function
@@ -8700,7 +8846,7 @@ diff -Nur musl-0.9.15/src/unistd/sh/pipe.s musl-git/src/unistd/sh/pipe.s
 +L1:	.long __syscall_ret@PLT-(1b-.)
 diff -Nur musl-0.9.15/tools/install.sh musl-git/tools/install.sh
 --- musl-0.9.15/tools/install.sh	2014-01-03 21:12:18.000000000 +0100
-+++ musl-git/tools/install.sh	2014-03-17 16:49:44.000000000 +0100
++++ musl-git/tools/install.sh	2014-03-19 07:42:48.000000000 +0100
 @@ -51,6 +51,7 @@
  ln -s "$1" "$tmp"
  else
