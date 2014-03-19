@@ -83,8 +83,11 @@ OpenADK output is stored in several subdirectories:
   not present, the binaries are stripped.
 
 * +host_<gnu_host_name>/+ contains the installation of tools compiled for the host
-  that are needed for the proper execution of OpenADK, including the
-  cross-compilation toolchain.
+  that are needed for the proper execution of OpenADK
+
+* +toolchain_<gnu_host_name>/+ contains just the cross-compilation toolchain.
+  Can be used together with +target_<arch>_<libc>/+ for other projects. Toolchain
+  is relocatable.
 
 * +toolchain_build_<arch>_<libc>/+ contains the build directories for the various
   components of the cross-compilation toolchain.

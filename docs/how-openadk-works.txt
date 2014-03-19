@@ -59,8 +59,8 @@ is done:
 The main Makefile performs the following steps, once the
 configuration is done (it is mainly a wrapper for +mk/build.mk+):
 
-* Create all the output directories: +host_<gnu_host_name>+, +target_<arch>_<libc>+, +build_<arch>_<libc>+,
-  +pkg_<arch>_<libc>+, etc. 
+* Create all the output directories: +host_<gnu_host_name>+, +target_<arch>_<libc>+, 
+  +build_<arch>_<libc>+, +pkg_<arch>_<libc>+, etc. 
 
 * Call the +scan-pkgs.sh+ script to find any needed optional host software, needed to compile
   software the user has configured 

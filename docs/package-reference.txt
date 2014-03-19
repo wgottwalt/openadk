@@ -28,11 +28,11 @@ information is:
   building OpenADK behind a HTTP proxy should be working without any configuration hassle.
   There are also some predefined mirror sites in +mk/mirrors.mk+,
   which can be used.
-  Example: PKG_SITES:=		${MASTER_SITE_GNU:=foo/}
+  Example: PKG_SITES:=		+${MASTER_SITE_GNU:=foo/}+
 
 * +DISTFILES+ optional, may contain the name of the tarball of
   the package. If +DISTFILES+ is not specified, it defaults to +PKG_NAME-PKG_VERSION.tar.gz+. 
-  Example: DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.xz
+  Example: DISTFILES=		+${PKG_NAME}${PKG_VERSION}.tar.xz+
 
 * +NO_DISTFILES+ optional, may be set to 1, to disable fetching of any archives.
   Provide the source code for the package in +package/<pkgname>/src+, which will be
