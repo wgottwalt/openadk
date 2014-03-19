@@ -36,6 +36,7 @@ config ADK_DEBUG_STRIP
 config ADK_STATIC
 	bool "Link applications statically by default"
 	default n
+	select BUSYBOX_STATIC
 	help
 	  Useful for toolchain only target devices.
 
