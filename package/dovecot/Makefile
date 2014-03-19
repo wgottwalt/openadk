@@ -12,7 +12,7 @@ PKG_SECTION:=		mail
 PKG_URL:=		http://www.dovecot.org/
 PKG_SITES:=		http://www.dovecot.org/releases/2.0/
 
-PKG_CHOICES_DOVECOT:=	WITH_OPENSSL WITH_GNUTLS
+PKG_CHOICES_DOVECOT:=	WITH_GNUTLS WITH_OPENSSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
 PKGCB_WITH_OPENSSL:=	openssl

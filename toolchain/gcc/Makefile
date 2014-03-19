@@ -8,14 +8,14 @@ TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 include Makefile.inc
 
-GCC_CONFOPTS:=		--prefix=$(STAGING_HOST_DIR) \
+GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(GNU_TARGET_NAME) \
-			--with-gmp=$(STAGING_HOST_DIR) \
-			--with-mpfr=$(STAGING_HOST_DIR) \
-			--with-libelf=$(STAGING_HOST_DIR) \
+			--with-gmp=$(STAGING_HOST_DIR)/usr \
+			--with-mpfr=$(STAGING_HOST_DIR)/usr \
+			--with-libelf=$(STAGING_HOST_DIR)/usr \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--with-gnu-as \
@@ -120,15 +120,17 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
-	rm -rf $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
-	rm -rf ${STAGING_HOST_DIR}/$(GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
+	rm -rf $(TOOLCHAIN_DIR)/$(GNU_TARGET_NAME)/sys-include
+	ln -sf ${STAGING_TARGET_DIR}/usr/include \
+		$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
+	rm -rf ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
+	ln -sf ${STAGING_TARGET_DIR}/lib $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/lib
 ifeq ($(ADK_LINUX_SH),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4 && ln -sf . m4-nofpu)
 endif
-	sed -i '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
-	cd $(GCC_BUILD_DIR_MINIMAL); PATH='$(TARGET_PATH)' \
+	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
+	cd $(GCC_BUILD_DIR_MINIMAL); \
+		PATH='$(TARGET_PATH)' \
 		CFLAGS="-O0 -g0" \
 		CXXFLAGS="-O0 -g0" \
 		$(WRKBUILD)/configure \
@@ -151,7 +153,8 @@ $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
-	cd $(GCC_BUILD_DIR_INITIAL); PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_INITIAL); \
+		PATH='$(TARGET_PATH)' \
 		CFLAGS="-O0 -g0" \
 		CXXFLAGS="-O0 -g0" \
 		$(WRKBUILD)/configure \
@@ -174,7 +177,8 @@ $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
-	cd $(GCC_BUILD_DIR_FINAL); PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_FINAL); \
+		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
@@ -192,19 +196,12 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
-	cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin; \
+	cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin; \
 		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
 			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
-	(cd $(STAGING_HOST_DIR)/bin && \
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
-	# setup symlink, so that gcc/g++ find cc1plus
-	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/ && \
-		ln -sf ../libexec .)
-	# setup symlink, so that gcc/g++ find stddef.h
-	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib/ && \
-		ln -sf ../../host_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_SUFFIX}/lib/gcc .)
-	# fix linking g++ apps with libtool
 	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
 		cd $(STAGING_TARGET_DIR)/lib32 && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
@@ -218,7 +215,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	# cleanup unneeded docs
-	rm -rf $(STAGING_HOST_DIR)/share
+	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

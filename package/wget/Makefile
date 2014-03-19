@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
 
-PKG_CHOICES_WGET:=	WITHOUT_SSL WITH_OPENSSL WITH_GNUTLS
+PKG_CHOICES_WGET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
 PKGCD_WITHOUT_SSL:=	use no SSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
