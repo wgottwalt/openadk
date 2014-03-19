@@ -4,6 +4,7 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_little
 	select ADK_hard_float
 	select ADK_eabihf
+	select ADK_fpu_vfp
 	select ADK_raspberry_pi
 	select ADK_CPU_ARM1176JZF_S
 	select ADK_TARGET_WITH_MMC
