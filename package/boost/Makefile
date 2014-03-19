@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost C++ library
 PKG_SECTION:=		libs
@@ -105,7 +105,7 @@ BOOST_ARCH:=	$(ARCH)
 endif
 
 # some variables for build
-GPP_PATH:=	${STAGING_HOST_DIR}/bin/${GNU_TARGET_NAME}-g++
+GPP_PATH:=	${TOOLCHAIN_DIR}/usr/bin/${GNU_TARGET_NAME}-g++
 GPP_VERSION:=	"`${GPP_PATH} -v 2>&1 | tail -1 | awk '{print $$3}'`"
 BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam$(EXEEXT)"`"
 PYTHON_PATH:=	${STAGING_HOST_DIR}/usr/bin/python
