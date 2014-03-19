@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		73
+PKG_RELEASE:=		74
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -55,14 +55,12 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
-	test -z $(ADK_RUNTIME_CONSOLE_VGA) || \
+	test -z $(ADK_RUNTIME_SHELL) || \
+	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_GETTY_VGA) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
-	test -z $(ADK_RUNTIME_CONSOLE_SERIAL) || \
+	test -z $(ADK_RUNTIME_GETTY_SERIAL) || \
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
-	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
-	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
-	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
-	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#' $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
