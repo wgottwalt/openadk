@@ -100,8 +100,7 @@ TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
 TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			$(ADK_TARGET_ABI_LDFLAGS)
+			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
