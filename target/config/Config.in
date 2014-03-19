@@ -736,7 +736,6 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	depends on !ADK_HARDWARE_VBOX
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_BLK_DEV_INITRD
-	select ADK_KERNEL_BLK_DEV_RAM if ADK_TARGET_SYSTEM_ARANYM_M68K
 	help
 	  create an read-only initramfs system.
 
