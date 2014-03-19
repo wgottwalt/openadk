@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		72
+PKG_RELEASE:=		73
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -63,27 +63,7 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_CONSOLE_BOTH) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
-	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
-	$(SED) 's#ttyS#ttyAMA#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
-	$(SED) 's#ttyS#nfcon#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_PPC64),y)
-	$(SED) 's#ttyS#hvc#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH4),y)
-	$(SED) 's#ttyS0#ttySC1#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_SH4EB),y)
-	$(SED) 's#ttyS0#ttySC1#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800),y)
-	$(SED) 's#ttyS#ttyUL#g' $(IDIR_BASE_FILES)/etc/inittab
-endif
+	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#' $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \

@@ -1,3 +1,4 @@
+- qemu-i386: uCLibc fails for non-debug builds
 - qemu-sparc: startup kernel with gcc 4.8.2 broken
 - qemu-sh4: usb keyboard is broken
 - qemu-arm: thumb mode with glibc does not boot
