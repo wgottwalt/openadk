@@ -5,11 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		11
+PKG_RELEASE:=		12
 PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
 PKG_DESCR:=		Python scripting language (Version 2)
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		autotool libffi bzip2-host python2-host 
+PKG_BUILDDEP:=		libffi python2-host 
+HOST_BUILDDEP:=		libffi-host bzip2-host autotool
 PKG_DEPENDS:=		libpthread libffi libgcc
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
@@ -96,18 +97,20 @@ CONFIGURE_ARGS:=	--with-threads \
 			--without-cxx-main
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS:=	--with-threads \
+HOST_CONFIGURE_ARGS+=	--with-threads \
 			--disable-ipv6 \
 			--disable-shared \
 			--disable-toolbox-glue \
 			--without-cxx-main
 CFLAGS_FOR_BUILD+=	-fPIC
 
-post-extract:
+hostpre-configure:
 	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
-	(cd $(WRKBUILD) && patch -p0 <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
+	(cd $(WRKBUILD) && patch -p0 < patch-Lib_distutils_sysconfig_py)	
+	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
+		$(WRKBUILD)/Misc/python-config.in
 
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
@@ -119,6 +122,10 @@ hostpost-install:
 		patch -p0 < $(WRKBUILD)/python-config.patch)
 
 pre-configure:
+	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
+	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
+	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
+	(cd $(WRKBUILD) && patch -p0 <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 

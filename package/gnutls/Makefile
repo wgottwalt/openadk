@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.2.9
+PKG_VERSION:=		3.2.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9ae2bfa55d4c12dd6005cfb7014977f9
+PKG_MD5SUM:=		f507365940de8f095e1d867c6f0842f6
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
@@ -45,7 +45,6 @@ ifneq ($(ADK_PACKAGE_LIBGNUTLS_WITH_CRYPTODEV),)
 CONFIGURE_ARGS+= 	--enable-cryptodev
 endif
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-rpath \
 			--without-libz-prefix \
