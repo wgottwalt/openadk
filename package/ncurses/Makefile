@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.9
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		8cb9c412e5f2d96bc6f459aa8c6282a1
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -50,6 +50,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
+HOST_STYLE:=		auto
 # use sth which does not exist
 HOST_ALL_TARGET:=	progs
 HOST_INSTALL_TARGET:=	install.includes install.progs
@@ -68,9 +69,6 @@ HOST_CONFIGURE_ARGS+=	--without-shared \
 			--disable-termcap \
 			--without-debug \
 			--without-profile
-
-libncurses-hostinstall:
-	${CP} ${HOST_WRKINST}/usr/bin/* ${STAGING_HOST_DIR}/usr/bin
 
 libncurses-install:
 	rm -rf ${WRKINST}/usr/lib/terminfo

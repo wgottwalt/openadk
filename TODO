@@ -1,5 +1,4 @@
 - check gold for mozilla compile
-- getty + serial rework
 - add daemon() function to functions.sh
 - add printing of OK/FAIL (optional verbose bootup)
 - fixup rework libgcc --export-symbols

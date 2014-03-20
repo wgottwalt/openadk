@@ -54,7 +54,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
 	# needed on hosts without readelf, but strange things happen on Cygwin.
 ifeq (${OStype},Darwin)
-	$(CP) $(WRKBUILD)/binutils/readelf $(STAGING_HOST_DIR)/bin
+	$(CP) $(WRKBUILD)/binutils/readelf $(TOOLCHAIN_DIR)/usr/bin
 endif
 	touch $@
 

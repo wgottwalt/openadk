@@ -19,6 +19,7 @@ Before you can start you need to install some tools:
 - ncurses5 headers
 - zlib headers
 - perl
+- git
 
 There is a check for the required versions of these tools in advance, though.
 (to re-issue the checks, use "make prereq").

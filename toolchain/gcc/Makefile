@@ -80,6 +80,9 @@ endif
 ifeq ($(ARCH),arm)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_ARM_MODE)
+ifneq ($(ADK_TARGET_FPU),)
+GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
+endif
 endif
 
 ifeq ($(ADK_CPU_ARM926EJ_S),y)
@@ -87,11 +90,11 @@ GCC_CONFOPTS+=          --with-arch=armv5te --with-tune=arm1176jzf-s
 endif
 
 ifeq ($(ADK_CPU_ARM1176JZF_S),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vfp
+GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s
 endif
 
 ifeq ($(ADK_CPU_CORTEX_A9),y)
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9
 endif
 
 ifeq ($(ADK_CPU_SPARC_V9),y)
@@ -120,11 +123,13 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
-	rm -rf $(TOOLCHAIN_DIR)/$(GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/usr/include \
-		$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
+	rm -rf $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
+	mkdir -p $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)
+	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
+		ln -s ../$(STAGING_HOST2TARGET)/usr/include sys-include)
 	rm -rf ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_TARGET_DIR}/lib $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/lib
+	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
+		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
 ifeq ($(ADK_LINUX_SH),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4 && ln -sf . m4-nofpu)
 endif
@@ -202,16 +207,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
-	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
-		cd $(STAGING_TARGET_DIR)/lib32 && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
-	@-test -d $(STAGING_TARGET_DIR)/libx32 && \
-		cd $(STAGING_TARGET_DIR)/libx32 && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
-	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
-		cd $(STAGING_TARGET_DIR)/lib64 && \
+	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	# cleanup unneeded docs

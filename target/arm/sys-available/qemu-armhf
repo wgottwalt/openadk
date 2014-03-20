@@ -5,6 +5,7 @@ config ADK_TARGET_SYSTEM_QEMU_ARMHF
 	select ADK_little
 	select ADK_hard_float
 	select ADK_eabihf
+	select ADK_fpu_vfp
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_KERNEL_ZIMAGE
 	help

@@ -1,1 +1,1 @@
-ttyS0::respawn:/sbin/getty -i -L ttyS0 @SPEED@ vt100
+@DEVICE@::respawn:/sbin/getty -i -L @DEVICE@ @SPEED@ vt100
