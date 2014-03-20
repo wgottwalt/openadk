@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 # This is where all package operation is done in
-ifneq (,$(findstring hostpackage,$(MAKECMDGOALS)))
+ifneq (,$(findstring host,$(MAKECMDGOALS)))
 WRKDIR?=		${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
 endif
 
@@ -68,4 +68,4 @@ $$(HOSTDIR_$(1)): ${_HOST_PATCH_COOKIE} ${_HOST_FAKE_COOKIE}
 endef
 
 .PHONY:	all hostextract hostpatch hostconfigure \
-	hostbuild hostpackage hostfake
+	hostbuild hostpackage hostfake hostclean

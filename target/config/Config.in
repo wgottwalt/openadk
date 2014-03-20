@@ -37,6 +37,12 @@ config ADK_soft_float
 config ADK_hard_float
 	boolean
 
+config ADK_fpu_neon
+	boolean
+
+config ADK_fpu_vfp
+	boolean
+
 config ADK_mode_arm
 	boolean
 
@@ -47,6 +53,11 @@ config ADK_TARGET_FLOAT
 	string
 	default "hard" if ADK_hard_float
 	default "soft" if ADK_soft_float
+
+config ADK_TARGET_FPU
+	string
+	default "vfp" if ADK_fpu_vfp
+	default "neon" if ADK_fpu_neon
 
 config ADK_TARGET_ARM_MODE
 	depends on ADK_LINUX_ARM
