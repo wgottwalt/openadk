@@ -59,6 +59,7 @@ config ADK_RUNTIME_GETTY_VGA
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 	help
           Start getty on VGA console. (tty1-tty6)
@@ -69,6 +70,7 @@ config ADK_RUNTIME_GETTY_SERIAL
 	default n if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n if ADK_TARGET_SYSTEM_IBM_X40
+	default n if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default y
 	help
 	  Start getty on serial console.
@@ -80,7 +82,6 @@ config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
 	default "ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "ttymxc0" if ADK_TARGET_SYSTEM_CUBOX_I
-	default "nfcon0" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "ttyS0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
