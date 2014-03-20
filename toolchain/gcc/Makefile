@@ -28,7 +28,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
-			--without-system-zlib \
+			--with-system-zlib \
 			--without-ppl \
 			--without-cloog \
 			--without-isl \
