@@ -104,9 +104,8 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	touch $@
 
 $(WRKBUILD)/.fixup:
-ifneq ($(ADK_DEBUG),)
+	# DOSTRIP kills x86 target (ld.so can not map libc.so.0), always use DODEBUG
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
-endif
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
