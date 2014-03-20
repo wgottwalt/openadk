@@ -79,6 +79,7 @@ hpkg-install: ${ALL_HOSTINST}
 host-install:
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
 	@$(CMD_TRACE) "host installing... "
+	@mkdir -p ${HOST_WRKINST}
 ifneq (${HOST_STYLE},manual)
 ifeq ($(strip ${HOST_STYLE}),)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -92,12 +93,6 @@ else
 	env ${HOST_MAKE_ENV} ${MAKE} hpkg-install $(MAKE_TRACE)
 endif
 	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)
-	rm -rf ${WRKBUILD} ${WRKDIST} ${WRKSRC}
-	exec ${MAKE} host-extract $(MAKE_TRACE)
-	mkdir -p ${HOST_WRKINST}
-	# avoid rebuild
-	@touch ${_HOST_CONFIGURE_COOKIE} 
-	@touch ${_HOST_BUILD_COOKIE}
 	@touch $@
 
 ${_HOST_COOKIE}:
@@ -107,3 +102,7 @@ ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
 	@touch ${_HOST_COOKIE}
 endif
+
+hostclean:
+	@$(CMD_TRACE) "cleaning... "
+	rm -rf ${WRKDIR} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host
