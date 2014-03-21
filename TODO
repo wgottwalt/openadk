@@ -1,13 +1,13 @@
+- hash-style=gnu for non-mips and non-musl
 - check gold for mozilla compile
+- check for gcc and SSP again
 - add daemon() function to functions.sh
 - add printing of OK/FAIL (optional verbose bootup)
 - fixup rework libgcc --export-symbols
 - libgcc static?
 - static toolchain support
-- toolchain in /usr , check gcj
 - try Preset Loops per Jiffy for faster bootup via lpj=
 - port uuterm
-- hash-style=gnu for non-mips and non-musl
 - add fb full screen logo
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)
@@ -15,7 +15,6 @@
 - add grsec kernel patch
 - microblaze: add cfgfs partition to dts, add partition to spartan dts
 - evaluate libguestfs for image creation
-- check for gcc and SSP again
 - port w3m
 - port msmtp
 - rutorrent porting
