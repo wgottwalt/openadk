@@ -17,5 +17,6 @@
 - evaluate libguestfs for image creation
 - check for gcc and SSP again
 - port w3m
+- port msmtp
 - rutorrent porting
 - lms perl 
