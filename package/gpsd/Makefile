@@ -10,7 +10,7 @@ PKG_MD5SUM:=		fc5b03aae38b9b5b6880b31924d0ace3
 PKG_DESCR:=		An interface daemon for GPS receivers
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		ncurses scons-host bzip2-host python2-host
+PKG_BUILDDEP:=		scons-host ncurses
 PKG_URL:=		http://catb.org/gpsd/
 PKG_SITES:=		http://download-mirror.savannah.gnu.org/releases/gpsd/
 
