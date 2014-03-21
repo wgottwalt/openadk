@@ -53,3 +53,4 @@
 /target/config/Config.in.system
 /target/config/Config.in.native
 /target/config/Config.in.arch
+/target/m68k/aranym.cfg
