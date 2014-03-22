@@ -1,6 +1,5 @@
-diff -ruN socat-1.4-old/Makefile.in socat-1.4-new/Makefile.in
---- socat-1.7.2.2.orig/Makefile.in	2011-12-06 08:45:03.000000000 +0100
-+++ socat-1.7.2.2/Makefile.in	2013-12-24 16:37:21.000000000 +0100
+--- socat-1.7.2.4.orig/Makefile.in	2014-03-09 15:48:44.000000000 +0100
++++ socat-1.7.2.4/Makefile.in	2014-03-22 12:13:46.000000000 +0100
 @@ -38,7 +38,8 @@ INSTALL = @INSTALL@
  
  #0 CFLAGS = @CFLAGS@ $(CCOPTS) $(DEFS) $(INCLS)
