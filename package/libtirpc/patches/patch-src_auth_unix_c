@@ -1,0 +1,10 @@
+--- libtirpc-0.2.3.orig/src/auth_unix.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/auth_unix.c	2014-03-22 13:20:53.000000000 +0100
+@@ -26,7 +26,6 @@
+  * POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+-#include <sys/cdefs.h>
+ 
+ /*
+  * auth_unix.c, Implements UNIX style authentication parameters.

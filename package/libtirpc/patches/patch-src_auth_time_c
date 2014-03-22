@@ -1,6 +1,14 @@
---- libtirpc-0.2.2.orig/src/auth_time.c	2011-05-02 14:10:40.000000000 +0200
-+++ libtirpc-0.2.2/src/auth_time.c	2012-03-22 19:02:30.422855534 +0100
-@@ -43,7 +43,7 @@
+--- libtirpc-0.2.3.orig/src/auth_time.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/auth_time.c	2014-03-22 13:20:53.000000000 +0100
+@@ -25,7 +25,6 @@
+  *	needed to deal with TCP connections.
+  */
+ 
+-#include <sys/cdefs.h>
+ #include <stdio.h>
+ #include <syslog.h>
+ #include <string.h>
+@@ -43,7 +42,7 @@
  //#include <clnt_soc.h>
  #include <sys/select.h>
  #undef NIS
@@ -9,7 +17,7 @@
  
  
  #ifdef TESTING
-@@ -138,6 +138,7 @@ free_eps(eps, num)
+@@ -138,6 +137,7 @@ free_eps(eps, num)
   * NIS+ server will call __rpc_get_time_offset() with the nis_server
   * structure already populated.
   */
@@ -17,7 +25,7 @@
  static nis_server *
  get_server(sin, host, srv, eps, maxep)
  	struct sockaddr_in *sin;
-@@ -491,3 +492,4 @@ error:
+@@ -491,3 +491,4 @@ error:
  
  	return (time_valid);
  }
