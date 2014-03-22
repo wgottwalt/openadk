@@ -1,0 +1,31 @@
+--- libtirpc-0.2.3.orig/src/rpc_com.h	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/rpc_com.h	2014-03-22 13:20:53.000000000 +0100
+@@ -40,7 +40,6 @@
+ #ifndef _TIRPC_RPCCOM_H
+ #define	_TIRPC_RPCCOM_H
+ 
+-#include <sys/cdefs.h>
+ 
+ /* #pragma ident	"@(#)rpc_com.h	1.11	93/07/05 SMI" */
+ 
+@@ -54,7 +53,9 @@
+ #define __RPC_GETXID(now) ((u_int32_t)getpid() ^ (u_int32_t)(now)->tv_sec ^ \
+     (u_int32_t)(now)->tv_usec)
+ 
+-__BEGIN_DECLS
++#ifdef __cplusplus
++extern "C" {
++#endif
+ extern u_int __rpc_get_a_size(int);
+ extern int __rpc_dtbsize(void);
+ extern struct netconfig * __rpcgettp(int);
+@@ -90,6 +91,8 @@ void __xprt_set_raddr(SVCXPRT *, const s
+ SVCXPRT **__svc_xports;
+ int __svc_maxrec;
+ 
+-__END_DECLS
++#ifdef __cplusplus
++}
++#endif
+ 
+ #endif /* _TIRPC_RPCCOM_H */

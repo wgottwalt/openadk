@@ -1,0 +1,10 @@
+--- libtirpc-0.2.3.orig/src/svc_simple.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/svc_simple.c	2014-03-22 13:20:53.000000000 +0100
+@@ -29,7 +29,6 @@
+  * Copyright (c) 1986-1991 by Sun Microsystems Inc. 
+  */
+ 
+-#include <sys/cdefs.h>
+ 
+ /*
+  * svc_simple.c
