@@ -476,17 +476,18 @@ bulktoolchain:
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##"); \
-			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
+			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64.*#mips64#"); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
-				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
+				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${arch}_$${libc}$${abi}; \
+				if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
+				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_build.log; \
+		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \

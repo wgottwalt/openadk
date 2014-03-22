@@ -9,6 +9,8 @@ mips64
 mips64n32
 mips64n64
 mips64el
+mips64eln32
+mips64eln64
 ppc
 ppc64
 sparc
