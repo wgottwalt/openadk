@@ -48,10 +48,6 @@ config ADK_KERNEL_SQUASHFS_XZ
 	boolean
 	default n
 
-config ADK_KERNEL_JFFS2_FS_DEBUG
-	int
-	default "1"
-
 config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	boolean
 	default n
@@ -65,7 +61,6 @@ config ADK_KERNEL_JFFS2_FS
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	select ADK_KERNEL_JFFS2_ZLIB
-	select ADK_KERNEL_JFFS2_FS_DEBUG
 	boolean
 
 config ADK_KERNEL_SQUASHFS
