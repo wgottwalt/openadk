@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
 PKG_VERSION:=		0.2.3
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		b70e6c12a369a91e69fcc3b9feb23d61
 PKG_DESCR:=		a transport independent RPC library
 PKG_SECTION:=		libs
@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libgssglue
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 PKG_OPTS:=		dev
-
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
