@@ -15,7 +15,7 @@ DTB:=-dtb target/microblaze/ml605.dtb
 endif
 ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800),y)
 MODEL:=petalogix-s3adsp1800
-DTB:=
+DTB:=-dtb target/microblaze/s3adsp1800.dtb
 endif
 
 ifeq ($(ADK_TARGET_FS),squashfs)

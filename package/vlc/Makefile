@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
-PKG_VERSION:=		2.1.1
+PKG_VERSION:=		2.1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1331cd853d56762c96afcb92dd498348
-PKG_DESCR:=		Media Player
+PKG_MD5SUM:=		7ed67d22f7425011078772bfc62ac222
+PKG_DESCR:=		popular media player
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad
 PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
@@ -23,6 +23,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ENV+=		ac_cv_func_sched_getaffinity=no
 CONFIGURE_ARGS+=	--disable-lua \

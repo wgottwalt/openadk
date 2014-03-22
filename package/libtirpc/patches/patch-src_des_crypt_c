@@ -1,6 +1,10 @@
 --- libtirpc-0.2.3.orig/src/des_crypt.c	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/src/des_crypt.c	2013-08-12 16:47:07.000000000 +0200
-@@ -43,7 +43,7 @@ static char sccsid[] = "@(#)des_crypt.c
++++ libtirpc-0.2.3/src/des_crypt.c	2014-03-22 13:20:53.000000000 +0100
+@@ -39,11 +39,10 @@
+ static char sccsid[] = "@(#)des_crypt.c	2.2 88/08/10 4.0 RPCSRC; from 1.13 88/02/08 SMI";
+ #endif
+ #endif
+-#include <sys/cdefs.h>
  
  static int common_crypt( char *, char *, unsigned, unsigned, struct desparams * );
  int (*__des_crypt_LOCAL)() = 0;
@@ -9,7 +13,7 @@
  /*
   * Copy 8 bytes
   */
-@@ -145,10 +145,6 @@ common_crypt(key, buf, len, mode, desp)
+@@ -145,10 +144,6 @@ common_crypt(key, buf, len, mode, desp)
  		if (!__des_crypt_LOCAL(buf, len, desp)) {
  			return (DESERR_HWERROR);
  		}

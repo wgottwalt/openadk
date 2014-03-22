@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		scons
 PKG_VERSION:=		2.3.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		083ce5624d6adcbdaf2526623f456ca9
 PKG_DESCR:=		a software construction tool
 PKG_SECTION:=		lang
-HOST_BUILDDEP:=		bzip2-host python2-host
+HOST_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.scons.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}
 
@@ -23,7 +23,8 @@ $(eval $(call HOST_template,SCONS,scons,$(PKG_VERSION)-${PKG_RELEASE}))
 HOST_STYLE:=		manual
 
 scons-hostinstall:
-	(cd $(WRKBUILD); PATH='$(TARGET_PATH)' python setup.py install --prefix=$(STAGING_HOST_DIR)/)
+	(cd $(WRKBUILD); PATH='$(HOST_PATH)' python setup.py install \
+		--prefix=$(STAGING_HOST_DIR)/usr)
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

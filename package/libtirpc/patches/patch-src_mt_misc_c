@@ -1,0 +1,8 @@
+--- libtirpc-0.2.3.orig/src/mt_misc.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/mt_misc.c	2014-03-22 13:20:53.000000000 +0100
+@@ -1,5 +1,4 @@
+ 
+-#include <sys/cdefs.h>
+ #include <pthread.h>
+ #include <reentrant.h>
+ #include <rpc/rpc.h>
