@@ -11,9 +11,6 @@ config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
 
-config ADK_KERNEL_JFFS2_FS
-	boolean
-
 config ADK_KERNEL_YAFFS_FS
 	tristate
 
@@ -50,6 +47,26 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 config ADK_KERNEL_SQUASHFS_XZ
 	boolean
 	default n
+
+config ADK_KERNEL_JFFS2_FS_DEBUG
+	int
+	default "1"
+
+config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_ZLIB
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_FS
+	prompt "jffs2............................. JFFS2 filesystem"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	select ADK_KERNEL_JFFS2_ZLIB
+	select ADK_KERNEL_JFFS2_FS_DEBUG
+	boolean
 
 config ADK_KERNEL_SQUASHFS
 	prompt "squashfs.......................... SquashFS filesystem"
