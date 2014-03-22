@@ -4,14 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rrdcollect
-PKG_VERSION:=		0.2.9
+PKG_VERSION:=		0.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1e94eb0f8d55ebf0f042c10baebc2d3d
+PKG_MD5SUM:=		138e21fc9f2de0b8b6c89f1506394ef8
 PKG_DESCR:=		Round-Robin Database (RRD) collecting daemon
 PKG_SECTION:=		admin
 PKG_DEPENDS:=		librrd
 PKG_BUILDDEP:=		rrdtool
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rrdcollect/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 ifneq (${ADK_PACKAGE_LIBRRD},)
 RRDTOOL_LIBS:=		-lart_lgpl_2 -lfreetype -lpng
@@ -25,8 +27,8 @@ CONFIGURE_ENV+=		LIBS="${RRDTOOL_LIBS} -lz" \
 			ac_cv_func_malloc_0_nonnull=yes
 CONFIGURE_ARGS+=	--enable-exec \
 			--without-rrdtool \
-			--with-librrd \
-			--without-libpcre
+			--without-libpcre \
+			--with-librrd
 TARGET_CPPFLAGS+=	-DSOCKET_COMM
 
 rrdcollect-install:
