@@ -157,7 +157,7 @@ ${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
 		-nopad -noappend -root-owned $(MAKE_TRACE)
 
 ${FW_DIR}/${ROOTFSJFFS2}: ${TARGET_DIR}
-	${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -X zlib -r ${TARGET_DIR} \
+	${STAGING_HOST_DIR}/usr/bin/mkfs.jffs2 $(ADK_JFFS2_OPTS) -q -X zlib -r ${TARGET_DIR} \
 		--pad=$(ADK_TARGET_MTD_SIZE) -o ${FW_DIR}/${ROOTFSJFFS2} $(MAKE_TRACE)
 
 createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
