@@ -2,4 +2,4 @@
 - qemu-sh4: usb keyboard is broken
 - qemu-arm: thumb mode with glibc does not boot
 - qemu-sparc64: ide driver not working, only virtio (but unstable)
-- qemu-microblaze: network card emulation fails, little endian works
+- qemu-microblaze: ml605 early printk and network card emulation fails, little endian works
