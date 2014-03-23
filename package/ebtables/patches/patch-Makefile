@@ -1,6 +1,6 @@
---- ebtables-v2.0.10-3.orig/Makefile	2011-12-04 10:46:26.000000000 +0100
-+++ ebtables-v2.0.10-3/Makefile	2011-12-11 16:35:34.619464748 +0100
-@@ -10,16 +10,16 @@ LOCKDIR:=$(shell echo $(LOCKFILE) | sed 
+--- ebtables-v2.0.10-4.orig/Makefile	2011-12-15 21:02:47.000000000 +0100
++++ ebtables-v2.0.10-4/Makefile	2014-03-23 15:46:20.000000000 +0100
+@@ -10,16 +10,16 @@ LOCKDIR:=$(shell echo $(LOCKFILE) | sed
  
  # default paths
  LIBDIR:=/usr/lib
