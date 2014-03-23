@@ -223,7 +223,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  with the IRIX version of XFS.
 
 config ADK_KPACKAGE_KMOD_FUSE_FS
-	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
+	prompt   "kmod-fuse-fs...................... Filesystem in Userspace support"
 	tristate
 	default n
 	help
