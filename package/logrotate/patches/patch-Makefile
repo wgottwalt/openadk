@@ -1,60 +1,33 @@
---- logrotate-3.7.8.orig/Makefile	2008-05-19 12:25:54.000000000 +0200
-+++ logrotate-3.7.8/Makefile	2011-01-15 23:45:59.000000000 +0100
-@@ -1,10 +1,10 @@
+--- logrotate-3.8.7.orig/Makefile	2013-06-10 13:29:16.000000000 +0200
++++ logrotate-3.8.7/Makefile	2014-03-23 15:16:09.000000000 +0100
+@@ -1,11 +1,11 @@
  VERSION = $(shell awk '/Version:/ { print $$2 }' logrotate.spec)
 -OS_NAME = $(shell uname -s)
 +OS_NAME = Linux
  LFS = $(shell echo `getconf LFS_CFLAGS 2>/dev/null`)
--CFLAGS = -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
-+CFLAGS ?= -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
+ CFLAGS = -Wall -D_GNU_SOURCE -D$(OS_NAME) -DVERSION=\"$(VERSION)\" $(RPM_OPT_FLAGS) $(LFS)
  PROG = logrotate
  MAN = logrotate.8
+ MAN5 = logrotate.conf.5
 -LOADLIBES = -lpopt
 +LIBS = -lpopt
  SVNURL= svn+ssh://svn.fedorahosted.org/svn/logrotate
  SVNPUBURL = http://svn.fedorahosted.org/svn/logrotate
  SVNTAG = r$(subst .,-,$(VERSION))
-@@ -68,10 +68,7 @@ MANDIR = $(BASEDIR)/man
- OBJS = logrotate.o log.o config.o basenames.o
- SOURCES = $(subst .o,.c,$(OBJS) $(LIBOBJS))
+@@ -64,7 +64,7 @@ endif
+ # Red Hat Linux
+ ifeq ($(OS_NAME),Linux)
+     INSTALL = install
+-    BASEDIR = /usr
++    BASEDIR = $(DESTDIR)/usr
+ endif
  
--ifeq ($(RPM_OPT_FLAGS),)
--CFLAGS += -g
--LDFLAGS = -g
--endif
-+LDFLAGS ?=
- 
- ifeq (.depend,$(wildcard .depend))
- TARGET=$(PROG)
-@@ -84,6 +81,7 @@ RCSVERSION = $(subst .,-,$(VERSION))
- all: $(TARGET)
+ # FreeBSD
+@@ -117,6 +117,7 @@ RCSVERSION = $(subst .,-,$(VERSION))
+ all: $(TARGET) pretest
  
  $(PROG): $(OBJS)
 +	$(CC) $(LDFLAGS) -o $(PROG) $^ $(LIBS)
  
  clean:
  	rm -f $(OBJS) $(PROG) core* .depend
-@@ -96,16 +94,16 @@ test: $(TARGET)
- 	(cd test; ./test)
- 
- install:
--	[ -d $(PREFIX)/$(BINDIR) ] || mkdir -p $(PREFIX)/$(BINDIR)
--	[ -d $(PREFIX)/$(MANDIR) ] || mkdir -p $(PREFIX)/$(MANDIR)
--	[ -d $(PREFIX)/$(MANDIR)/man8 ] || mkdir -p $(PREFIX)/$(MANDIR)/man8
-+	[ -d $(DESTDIR)/$(BINDIR) ] || mkdir -p $(DESTDIR)/$(BINDIR)
-+	[ -d $(DESTDIR)/$(MANDIR) ] || mkdir -p $(DESTDIR)/$(MANDIR)
-+	[ -d $(DESTDIR)/$(MANDIR)/man8 ] || mkdir -p $(DESTDIR)/$(MANDIR)/man8
- 
- 	if [ "$(OS_NAME)" = HP-UX ]; then \
--	$(INSTALL) $(PROG) $(PREFIX)/$(BINDIR) 0755 bin bin; \
--	$(INSTALL) $(MAN) $(PREFIX)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"` 0644 bin bin; \
-+	$(INSTALL) $(PROG) $(DESTDIR)/$(BINDIR) 0755 bin bin; \
-+	$(INSTALL) $(MAN) $(DESTDIR)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"` 0644 bin bin; \
- 	else \
--	$(INSTALL) -m 755 $(PROG) $(PREFIX)/$(BINDIR); \
--	$(INSTALL) -m 644 $(MAN) $(PREFIX)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"`/$(MAN); \
-+	$(INSTALL) -m 755 $(PROG) $(DESTDIR)/$(BINDIR); \
-+	$(INSTALL) -m 644 $(MAN) $(DESTDIR)/$(MANDIR)/man`echo $(MAN) | sed "s/.*\.//"`/$(MAN); \
- 	fi
- 
- co:
