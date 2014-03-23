@@ -1,0 +1,10 @@
+--- ntfs-3g_ntfsprogs-2014.2.15.orig/libfuse-lite/mount_util.c	2014-02-15 15:07:52.000000000 +0100
++++ ntfs-3g_ntfsprogs-2014.2.15/libfuse-lite/mount_util.c	2014-03-23 09:54:19.000000000 +0100
+@@ -12,6 +12,7 @@
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <paths.h>
+ #include <dirent.h>
+ #include <errno.h>
+ #include <limits.h>
