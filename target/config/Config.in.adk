@@ -19,6 +19,13 @@ config ADK_DL_DIR
 	  Configure the download directory for all source packages.
 	  Use an absolute path.
 
+config ADK_TARGET_CFLAGS_OPT
+	string "optimization flags for compiler"
+	default "-Os -pipe"
+	help
+	  Compilation is only verfied with optimization for code size (Os).
+	  Other stuff (O2) might break. Will not be used when ADK_DEBUG is on.
+
 config ADK_DEBUG
 	bool "Compile applications with debug support by default"
 	default n
