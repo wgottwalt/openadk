@@ -1,6 +1,12 @@
 config ADK_KERNEL_SPI
 	boolean
 
+config ADK_KERNEL_SPI_MASTER
+	boolean
+
+config ADK_KERNEL_SPI_XILINX
+	boolean
+
 config ADK_KERNEL_SPI_AR71XX
 	select ADK_KERNEL_SPI
 	boolean

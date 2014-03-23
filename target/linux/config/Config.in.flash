@@ -99,6 +99,8 @@ config ADK_KERNEL_MTD_M25P80
 	select ADK_KERNEL_MTD_PHYSMAP
 	select ADK_KERNEL_MTD_PHYSMAP_OF
 	select ADK_KERNEL_MTD_OF_PARTS
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
 	boolean
 	default n
 
