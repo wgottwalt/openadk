@@ -1,0 +1,10 @@
+--- libpciaccess-0.13.2.orig/src/pciaccess_private.h	2013-07-21 00:54:34.000000000 +0200
++++ libpciaccess-0.13.2/src/pciaccess_private.h	2014-03-24 13:26:10.492152406 +0100
+@@ -109,6 +109,7 @@ struct pci_io_handle {
+     pciaddr_t size;
+     void *memory;
+     int fd;
++    int is_legacy;
+ };
+ 
+ struct pci_device_private {

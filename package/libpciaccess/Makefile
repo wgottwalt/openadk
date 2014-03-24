@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libpciaccess
-PKG_VERSION:=		0.13.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		3a95b70913621840bf8af616ea01d7d9
+PKG_VERSION:=		0.13.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c49bd638c78fa4124e11432c1a94b5f4
 PKG_DESCR:=		X.org PCI access library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}
