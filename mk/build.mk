@@ -527,14 +527,13 @@ test-framework:
 
 release:
 	for libc in uclibc glibc musl;do \
-		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
 			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi
