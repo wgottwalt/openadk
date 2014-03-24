@@ -69,6 +69,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-libbluray \
 			--enable-external-libraries \
 			--enable-rtmp \
+			--enable-libcec \
 			--disable-libusb \
 			--disable-libcap \
 			--disable-sdl \
