@@ -34,7 +34,7 @@ config ADK_KERNEL_PRINTK
 	boolean
 	select ADK_KERNEL_EARLY_PRINTK
 	default y
-	#depends on !ADK_PKG_TEST
+	depends on !ADK_PKG_TEST
 	help
 	  Disable printk to save space and quieten bootup.
 
