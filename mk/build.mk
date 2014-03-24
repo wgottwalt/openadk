@@ -477,15 +477,15 @@ bulktoolchain:
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##"); \
-			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64.*#mips64#"); \
+			carch=$$(echo $$arch|sed -e "s#sh#sh4#" -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" ); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
+				if [ -f ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
 		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
@@ -527,14 +527,13 @@ test-framework:
 
 release:
 	for libc in uclibc glibc musl;do \
-		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
 			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi
