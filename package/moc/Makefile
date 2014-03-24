@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		moc
-PKG_VERSION:=		2.5.0-beta1
+PKG_VERSION:=		2.5.0-beta2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		795ecba86847e082aa2f21937cc04804
+PKG_MD5SUM:=		da87b90b57934234589b63e347921458
 PKG_DESCR:=		console music player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac
@@ -22,6 +22,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MOC,moc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--without-jack \
 			--without-oss \

@@ -1,0 +1,10 @@
+--- libtirpc-0.2.3.orig/src/auth_none.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/auth_none.c	2014-03-22 13:20:53.000000000 +0100
+@@ -31,7 +31,6 @@
+ static char *sccsid = "@(#)auth_none.c 1.19 87/08/11 Copyr 1984 Sun Micro";
+ static char *sccsid = "@(#)auth_none.c	2.1 88/07/29 4.0 RPCSRC";
+ #endif
+-#include <sys/cdefs.h>
+ __FBSDID("$FreeBSD: src/lib/libc/rpc/auth_none.c,v 1.12 2002/03/22 23:18:35 obrien Exp $");
+ */
+ 

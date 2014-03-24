@@ -13,6 +13,7 @@ mips64eln32
 mips64eln64
 ppc
 ppc64
+sh
 sparc
 sparc64
 x86

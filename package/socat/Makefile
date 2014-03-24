@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		socat
-PKG_VERSION:=		1.7.2.3
+PKG_VERSION:=		1.7.2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6943f7a5e1ffd553ad2a900bbf05b83a
+PKG_MD5SUM:=		2a15dc3362f49d543abdbacc267d0a41
 PKG_DESCR:=		A multipurpose relay (SOcket CAT)
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpthread
@@ -22,7 +22,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		sc_cv_termios_ispeed="no" \
+CONFIGURE_ENV+=		sc_cv_termios_ispeed=no \
 			sc_cv_sys_crdly_shift=9 \
 			sc_cv_sys_tabdly_shift=11 \
 			sc_cv_sys_csize_shift=4

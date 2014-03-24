@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		net-snmp
 PKG_URL:=		http://www.nobiscuit.com/iptables-snmp/
 PKG_SITES:=		http://www.nobiscuit.com/iptables-snmp/
 
+PKG_LIBC_DEPENDS:=	uclibc glibc
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,IPTABLES_SNMP,iptables-snmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

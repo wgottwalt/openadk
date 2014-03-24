@@ -79,6 +79,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			BUSYBOX_FEATURE_VI_REGEX_SEARCH=n \
 			ADK_KERNEL_RT2X00_DEBUG=n \
 			ADK_KERNEL_ATH5K_DEBUG=n \
+			ADK_KERNEL_BUG=n \
 			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
@@ -98,7 +99,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_GETTY ADK_RUNTIME_SHELL;do \
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_RUNTIME_GETTY ADK_RUNTIME_SHELL;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
@@ -169,7 +170,7 @@ endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
-		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
+		${STAGING_HOST_DIR}/{usr/bin,usr/lib,usr/include}
 	for i in lib64 lib32 libx32;do \
 		cd ${STAGING_TARGET_DIR}/; ln -sf lib $$i; \
 		cd ${STAGING_TARGET_DIR}/usr; ln -sf lib $$i; \
@@ -476,15 +477,15 @@ bulktoolchain:
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##"); \
-			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64.*#mips64#"); \
+			carch=$$(echo $$arch|sed -e "s#sh#sh4#" -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" ); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
+				if [ -f ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
 		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
@@ -526,14 +527,13 @@ test-framework:
 
 release:
 	for libc in uclibc glibc musl;do \
-		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
 			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi

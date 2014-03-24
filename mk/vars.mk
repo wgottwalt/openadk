@@ -127,7 +127,7 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
-TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 # always add debug information

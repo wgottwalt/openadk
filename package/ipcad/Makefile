@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ipcad
 PKG_VERSION:=		3.7.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		125605249958894148ec26d3c88189f5
 PKG_DESCR:=		IP Cisco Accounting Daemon
 PKG_SECTION:=		net

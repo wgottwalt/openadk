@@ -1,0 +1,23 @@
+--- socat-1.7.2.4.orig/configure	2014-03-09 20:57:51.000000000 +0100
++++ socat-1.7.2.4/configure	2014-03-22 12:20:13.000000000 +0100
+@@ -3347,18 +3347,8 @@ fi
+ # fail
+ 
+ 
+-
+-if test "$CC" = "gcc"; then
+-   CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
+-   ERRONWARN="-Werror -O0"
+-elif test "$CC" = "clang"; then
+-   CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
+-   ERRONWARN="-Werror -O0"
+-#elif Sun Studio
+-#   ERRONWARN="-errwarn"
+-else
+-   ERRONWARN=
+-fi
++CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
++ERRONWARN="-Werror -O0"
+ export CFLAGS
+ 
+ 
