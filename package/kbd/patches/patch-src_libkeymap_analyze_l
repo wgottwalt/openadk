@@ -1,0 +1,11 @@
+--- kbd-2.0.1.orig/src/libkeymap/analyze.l	2013-10-04 15:28:49.000000000 +0200
++++ kbd-2.0.1/src/libkeymap/analyze.l	2014-03-24 22:34:35.000000000 +0100
+@@ -12,6 +12,8 @@
+ %}
+ 
+ %top {
++#include <stdarg.h>
++#include <stdio.h>
+ #include "keymap.h"
+ int stack_push(struct lk_ctx *ctx, lkfile_t *fp, void *scanner);
+ int stack_pop(struct lk_ctx *ctx, void *scanner);
