@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		bash
-PKG_VERSION:=		4.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		3fb927c7c33022f1c327f14a81c0d4b0
+PKG_VERSION:=		4.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		81348932d5da294953e15d4814c74dd1
 PKG_DESCR:=		Bourne-Again SHell
 PKG_SECTION:=		shells
 PKG_URL:=		http://www.gnu.org/software/bash/
