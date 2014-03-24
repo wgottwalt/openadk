@@ -1,6 +1,20 @@
 --- libpciaccess-0.13.2.orig/src/linux_sysfs.c	2013-07-21 00:54:34.000000000 +0200
-+++ libpciaccess-0.13.2/src/linux_sysfs.c	2014-03-24 13:26:10.484152334 +0100
-@@ -759,6 +759,7 @@ pci_device_linux_sysfs_open_device_io(st
++++ libpciaccess-0.13.2/src/linux_sysfs.c	2014-03-24 21:01:44.000000000 +0100
+@@ -41,11 +41,12 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
++#include <limits.h>
+ #include <sys/mman.h>
+ #include <dirent.h>
+ #include <errno.h>
+ 
+-#if defined(__i386__) || defined(__x86_64__) || defined(__arm__)
++#if defined(__i386__) || defined(__x86_64__)
+ #include <sys/io.h>
+ #else
+ #define inb(x) -1
+@@ -759,6 +760,7 @@ pci_device_linux_sysfs_open_device_io(st
  
      ret->base = base;
      ret->size = size;
@@ -8,7 +22,7 @@
  
      return ret;
  }
-@@ -796,6 +797,7 @@ pci_device_linux_sysfs_open_legacy_io(st
+@@ -796,6 +798,7 @@ pci_device_linux_sysfs_open_legacy_io(st
  
      ret->base = base;
      ret->size = size;
@@ -16,7 +30,7 @@
  
      return ret;
  }
-@@ -813,10 +815,14 @@ pci_device_linux_sysfs_read32(struct pci
+@@ -813,10 +816,14 @@ pci_device_linux_sysfs_read32(struct pci
  {
      uint32_t ret;
  
@@ -34,7 +48,7 @@
  	
      return ret;
  }
-@@ -826,10 +832,14 @@ pci_device_linux_sysfs_read16(struct pci
+@@ -826,10 +833,14 @@ pci_device_linux_sysfs_read16(struct pci
  {
      uint16_t ret;
  
@@ -52,7 +66,7 @@
  
      return ret;
  }
-@@ -839,10 +849,14 @@ pci_device_linux_sysfs_read8(struct pci_
+@@ -839,10 +850,14 @@ pci_device_linux_sysfs_read8(struct pci_
  {
      uint8_t ret;
  
@@ -70,7 +84,7 @@
  
      return ret;
  }
-@@ -851,30 +865,42 @@ static void
+@@ -851,30 +866,42 @@ static void
  pci_device_linux_sysfs_write32(struct pci_io_handle *handle, uint32_t port,
  			       uint32_t data)
  {
