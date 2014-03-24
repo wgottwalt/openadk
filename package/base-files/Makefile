@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		76
+PKG_RELEASE:=		78
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 PKG_BUILDDEP:=		pkgconf-host file-host
@@ -30,6 +30,11 @@ endif
 	$(SED) 's,@ARCH@,$(ADK_TARGET_CPU_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@SYSTEM@,$(ADK_TARGET_SYSTEM),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@LIBC@,$(ADK_TARGET_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+ifneq ($(ADK_TARGET_ABI),)
+	$(SED) 's,@ABI@,_$(ADK_TARGET_ABI),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+else
+	$(SED) 's,@ABI@,,g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+endif
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
@@ -51,6 +56,7 @@ endif
 	chmod 755 $(IDIR_BASE_FILES)/lib/mdev/init
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
+	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../tmp/resolv.conf .)
 	chmod 1777 ${IDIR_BASE_FILES}/tmp
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
@@ -80,23 +86,20 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
 	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
-ifneq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI)$(ADK_TARGET_SYSTEM_IBM_X40)$(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),)
+ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
 else
-	echo 'export IPKGTMPDIR=/tmp >> $(IDIR_BASE_FILES)/etc/profile
+	echo 'export IPKGTMPDIR=/tmp' >> $(IDIR_BASE_FILES)/etc/profile
 endif
-
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
 endif
 
 # simple network configuration
 ifneq (${ADK_SIMPLE_NETWORK_CONFIG},)
 	${INSTALL_DIR} ${IDIR_BASE_FILES}/etc/network
-
 	# network config local
 	echo -e "auto lo\niface lo inet loopback" > ${IDIR_BASE_FILES}/etc/network/interfaces
-
 	# network config eth0
 	# configure nic with dhcp
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC},y)
@@ -123,12 +126,10 @@ ifeq (${SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP},y)
 	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH0_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
-
 	# network config wlan0
 ifeq (${SIMPLE_NETWORK_CONFIG_WLAN0_TYPE_NIC},y)
 	echo -e "\nauto wlan0\niface wlan0 inet dhcp" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
-
 	# network config eth1
 	# configure nic with dhcp
 ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC},y)
@@ -155,13 +156,11 @@ ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP},y)
 	echo -e "  broadcast ${SIMPLE_NETWORK_CONFIG_ETH1_BC}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
-
 	# newline at the end of interfaces file
 	echo -en "\n" >>  ${IDIR_BASE_FILES}/etc/network/interfaces
-
 	# resolver config
+	rm ${IDIR_BASE_FILES}/etc/resolv.conf
 	echo -e "nameserver ${SIMPLE_NETWORK_CONFIG_RESOLV}" > ${IDIR_BASE_FILES}/etc/resolv.conf
 endif
-
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -21,7 +21,7 @@ $(eval $(call PKG_template,EBTABLES,ebtables,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 CONFIG_STYLE:=		manual
 
-post-install:
+ebtables-install:
 	${INSTALL_DIR} ${IDIR_EBTABLES}/etc
 	${INSTALL_DIR} ${IDIR_EBTABLES}/usr/sbin ${IDIR_EBTABLES}/usr/lib
 	${INSTALL_DATA} ${WRKINST}/etc/ethertypes ${IDIR_EBTABLES}/etc

@@ -1,4 +1,5 @@
 - hash-style=gnu for non-mips and non-musl
+- fix libiberty.a mess
 - check gold for mozilla compile
 - check for gcc and SSP again
 - add daemon() function to functions.sh
