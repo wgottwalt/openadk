@@ -1,0 +1,23 @@
+--- libtirpc-0.2.3.orig/tirpc/netconfig.h	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/tirpc/netconfig.h	2014-03-22 13:20:52.000000000 +0100
+@@ -74,7 +74,9 @@ typedef struct {
+ #define NC_UDP		"udp"
+ #define NC_ICMP		"icmp"
+ 
+-__BEGIN_DECLS
++#ifdef __cplusplus
++extern "C" {
++#endif
+ 
+ extern void *setnetconfig (void);
+ extern struct netconfig *getnetconfig (void *);
+@@ -89,6 +91,8 @@ extern int endnetpath (void *);
+ extern void nc_perror (const char *);
+ extern char *nc_sperror (void);
+ 
+-__END_DECLS
++#ifdef __cplusplus
++}
++#endif
+ 
+ #endif /* _NETCONFIG_H_ */

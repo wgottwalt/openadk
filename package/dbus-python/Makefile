@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		dbus dbus-glib
 PKG_URL:=		http://dbus.freedesktop.org/doc/dbus-python/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-python/
 
+PKG_CFLINE_DBUS_PYTHON:=	depends on ADK_BROKEN
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DBUS_PYTHON,dbus-python,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

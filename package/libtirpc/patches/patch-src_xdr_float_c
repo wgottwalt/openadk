@@ -1,0 +1,10 @@
+--- libtirpc-0.2.3.orig/src/xdr_float.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/xdr_float.c	2014-03-22 13:20:53.000000000 +0100
+@@ -27,7 +27,6 @@
+  * POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+-#include <sys/cdefs.h>
+ 
+ /*
+  * xdr_float.c, Generic XDR routines implementation.

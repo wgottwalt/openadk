@@ -11,9 +11,6 @@ config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
 
-config ADK_KERNEL_JFFS2_FS
-	boolean
-
 config ADK_KERNEL_YAFFS_FS
 	tristate
 
@@ -50,6 +47,21 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 config ADK_KERNEL_SQUASHFS_XZ
 	boolean
 	default n
+
+config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_ZLIB
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_FS
+	prompt "jffs2............................. JFFS2 filesystem"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	select ADK_KERNEL_JFFS2_ZLIB
+	boolean
 
 config ADK_KERNEL_SQUASHFS
 	prompt "squashfs.......................... SquashFS filesystem"
@@ -223,7 +235,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  with the IRIX version of XFS.
 
 config ADK_KPACKAGE_KMOD_FUSE_FS
-	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
+	prompt   "kmod-fuse-fs...................... Filesystem in Userspace support"
 	tristate
 	default n
 	help

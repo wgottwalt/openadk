@@ -1,4 +1,5 @@
 - hash-style=gnu for non-mips and non-musl
+- fix libiberty.a mess
 - check gold for mozilla compile
 - check for gcc and SSP again
 - add daemon() function to functions.sh
@@ -16,5 +17,6 @@
 - microblaze: add cfgfs partition to dts, add partition to spartan dts
 - evaluate libguestfs for image creation
 - port w3m
+- port msmtp
 - rutorrent porting
 - lms perl 

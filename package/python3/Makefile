@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
-PKG_VERSION:=		3.3.2
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		0a2ea57f6184baf45b150aee53c0c8da
+PKG_VERSION:=		3.4.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		77c22725e14af3d71022cbfdebff4903
 PKG_DESCR:=		Python scripting language (Version 3)
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread libgcc libffi
 PKG_BUILDDEP:=		python3-host libffi 
+HOST_BUILDDEP:=		libffi-host
 PKG_URL:=		http://www.python.org/
-PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
+PKG_SITES:=		http://legacy.python.org/ftp/python/${PKG_VERSION}/
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
 
@@ -44,7 +45,7 @@ PKGFD_MOD_SSL:=		OpenSSL support
 PKGFB_MOD_SSL:=		openssl
 PKGFS_MOD_SSL:=		libopenssl
 
-DISTFILES=		Python-${PKG_VERSION}.tgz
+DISTFILES=		Python-${PKG_VERSION}.tar.xz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
 include ${TOPDIR}/mk/host.mk
@@ -55,9 +56,9 @@ define PKG_mod_template
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=    ${2}-install
 
 ${2}-install:
-	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.3/lib-dynload
+	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.4/lib-dynload
 	for m in ${2}; do \
-		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.3/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.3/lib-dynload ;\
+		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.4/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.4/lib-dynload ;\
 	done
 endef
 
@@ -84,6 +85,7 @@ $(eval $(call PKG_mod_template,PYTHON3_MOD_SSL,_ssl))
 $(eval $(call PKG_mod_template,PYTHON3_MOD_READLINE,readline))
 
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen3
+FAKE_FLAGS+=		ENSUREPIP=no
 CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--with-system-expat \
@@ -97,21 +99,21 @@ HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-cxx-main \
 			--with-threads
 
-hostpost-install:
-	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
-		$(STAGING_HOST_DIR)/usr/bin/pgen3
+#hostpost-install:
+#	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
+#		$(STAGING_HOST_DIR)/usr/bin/pgen3
 			
 python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/bin ${IDIR_PYTHON3}/usr/lib
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.3
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.3m
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.4
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.4m
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python3 ${IDIR_PYTHON3}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON3}/usr/lib
-	${CP} ${WRKINST}/usr/lib/python3.3/* ${IDIR_PYTHON3}/usr/lib/python3.3
-	${CP} ${WRKINST}/usr/include/python3.3m/pyconfig.h \
-		 ${IDIR_PYTHON3}/usr/include/python3.3m
+	${CP} ${WRKINST}/usr/lib/python3.4/* ${IDIR_PYTHON3}/usr/lib/python3.4
+	${CP} ${WRKINST}/usr/include/python3.4m/pyconfig.h \
+		 ${IDIR_PYTHON3}/usr/include/python3.4m
 	@-for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
-		rm ${IDIR_PYTHON3}/usr/lib/python3.3/lib-dynload/$${i}*so; \
+		rm ${IDIR_PYTHON3}/usr/lib/python3.4/lib-dynload/$${i}*so; \
 	done
 
 include ${TOPDIR}/mk/host-bottom.mk

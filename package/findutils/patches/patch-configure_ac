@@ -1,0 +1,11 @@
+--- findutils-4.4.2.orig/configure.ac	2009-05-16 17:27:39.000000000 +0200
++++ findutils-4.4.2/configure.ac	2014-03-23 19:39:22.000000000 +0100
+@@ -77,8 +77,6 @@ AC_PROG_CPP
+ dnl for gnulib
+ gl_EARLY
+ 
+-AM_C_PROTOTYPES
+-
+ AC_PROG_INSTALL
+ AC_PROG_RANLIB
+ dnl AC_PROG_LIBTOOL

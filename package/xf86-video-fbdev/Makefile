@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-fbdev
-PKG_VERSION:=		0.4.2
+PKG_VERSION:=		0.4.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a94011aac77eb9cd6d46bf0af0dbc631
+PKG_MD5SUM:=		2b5e6dd218243cf96c1a4090596a6bba
 PKG_DESCR:=		X11 driver for Linux Framebuffer devices
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

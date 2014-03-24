@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fetchmail
-PKG_VERSION:=		6.3.9
+PKG_VERSION:=		6.3.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		72c20ad2b9629f1a109668b05a84d823
+PKG_MD5SUM:=		d9ae3d939205a3c06a21ea79b8f14793
 PKG_DESCR:=		fetch mail from a POP or IMAP server
 PKG_SECTION:=		mail
 PKG_URL:=		http://fetchmail.berlios.de/
