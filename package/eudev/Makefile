@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
 PKG_VERSION:=		1.5.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		51380938b489385cc394f4ebabc048f0
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		utils
