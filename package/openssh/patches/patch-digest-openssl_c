@@ -1,5 +1,5 @@
---- openssh-6.5p1.orig/digest.c	2014-01-20 02:41:53.000000000 +0100
-+++ openssh-6.5p1/digest.c	2014-02-11 17:41:23.000000000 +0100
+--- openssh-6.6p1.orig/digest-openssl.c	2014-02-04 01:25:45.000000000 +0100
++++ openssh-6.6p1/digest-openssl.c	2014-03-24 13:42:01.000000000 +0100
 @@ -44,7 +44,9 @@ struct ssh_digest {
  /* NB. Indexed directly by algorithm number */
  const struct ssh_digest digests[] = {
