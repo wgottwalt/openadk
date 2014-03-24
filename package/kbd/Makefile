@@ -4,16 +4,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
-PKG_VERSION:=		1.15.3
+PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8143e179a0f3c25646ce5085e8777200
+PKG_MD5SUM:=		cc0ee9f2537d8636cae85a8c6541ed2e
 PKG_DESCR:=		keyboard utility
 PKG_SECTION:=		utils
-PKG_SITES:=		ftp://ftp.altlinux.org/pub/people/legion/kbd/
+PKG_DEPENDS:=		libcheck
+PKG_BUILDDEP:=		check
+PKG_URL:=		http://kbd-project.org/
+PKG_SITES:=		http://kbd-project.org/download/
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KBD,kbd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-vlock
 
 kbd-install:
 	$(INSTALL_DIR) $(IDIR_KBD)/usr/bin
