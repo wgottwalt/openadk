@@ -4,18 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xinetd
-PKG_VERSION:=		2.3.14
+PKG_VERSION:=		2.3.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		567382d7972613090215c6c54f9b82d9
+PKG_MD5SUM:=		77358478fd58efa6366accae99b8b04c
 PKG_DESCR:=		a powerful and secure superserver
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.xinetd.org/
-PKG_SITES:=		http://www.xinetd.org/
+PKG_SITES:=		ftp://mirror.ovh.net/gentoo-distfiles/distfiles/
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINETD,xinetd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		xinetd_cv_type_rlim_t=yes
 CONFIGURE_ARGS+=	--without-libwrap \
 			--with-loadavg
 ALL_TARGET:=		build
