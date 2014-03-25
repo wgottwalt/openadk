@@ -1,0 +1,54 @@
+diff -Nur gcc-4.8.2.orig/gcc/config/i386/biarch32.h gcc-4.8.2/gcc/config/i386/biarch32.h
+--- gcc-4.8.2.orig/gcc/config/i386/biarch32.h	1970-01-01 01:00:00.000000000 +0100
++++ gcc-4.8.2/gcc/config/i386/biarch32.h	2014-03-23 20:33:52.000000000 +0100
+@@ -0,0 +1,27 @@
++/* Make configure files to produce biarch compiler defaulting to 32bit mode.
++   This file must be included very first, while the OS specific file later
++   to overwrite otherwise wrong defaults. 
++   Copyright (C) 2001-2014 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation; either version 3, or (at your option)
++any later version.
++
++GCC is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++Under Section 7 of GPL version 3, you are granted additional
++permissions described in the GCC Runtime Library Exception, version
++3.1, as published by the Free Software Foundation.
++
++You should have received a copy of the GNU General Public License and
++a copy of the GCC Runtime Library Exception along with this program;
++see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
++<http://www.gnu.org/licenses/>.  */
++
++#define TARGET_64BIT_DEFAULT 0
+diff -Nur gcc-4.8.2.orig/gcc/config.gcc gcc-4.8.2/gcc/config.gcc
+--- gcc-4.8.2.orig/gcc/config.gcc	2013-10-03 02:47:24.000000000 +0200
++++ gcc-4.8.2/gcc/config.gcc	2014-03-22 13:15:18.000000000 +0100
+@@ -522,6 +522,9 @@
+ 	64 | m64)
+ 		tm_file="i386/biarch64.h ${tm_file}"
+ 		;;
++	32 | m32)
++		tm_file="i386/biarch32.h ${tm_file}"
++		;;
+ 	x32 | mx32)
+ 		tm_file="i386/biarchx32.h ${tm_file}"
+ 		;;
+@@ -1343,6 +1346,9 @@
+ 		x32 | mx32)
+ 			x86_multilibs="mx32"
+ 			;;
++		32 | m32)
++			x86_multilibs="m32"
++			;;
+ 		*)
+ 			x86_multilibs="m64,m32"
+ 			;;

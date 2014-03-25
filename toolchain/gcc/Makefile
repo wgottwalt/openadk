@@ -45,10 +45,10 @@ endif
 
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
-GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=mx32
+GCC_FINAL_CONFOPTS+=	--with-abi=x32
 endif
 ifeq ($(ADK_32),y)
-GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m32
+GCC_FINAL_CONFOPTS+=	--with-abi=32
 endif
 ifeq ($(ADK_64),y)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
