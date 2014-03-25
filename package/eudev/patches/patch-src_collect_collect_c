@@ -1,0 +1,11 @@
+--- eudev-1.5.3.orig/src/collect/collect.c	2014-03-22 22:56:51.000000000 +0100
++++ eudev-1.5.3/src/collect/collect.c	2014-03-24 20:45:48.000000000 +0100
+@@ -32,7 +32,7 @@
+ #include <sys/stat.h>
+ 
+ #ifdef __UCLIBC__
+-#include <linux/fcntl.h>
++#define O_CLOEXEC     02000000 /* Set close_on_exec.  */
+ #endif
+ 
+ #include "libudev.h"
