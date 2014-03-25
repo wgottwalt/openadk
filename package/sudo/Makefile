@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
 PKG_VERSION:=		1.8.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		954d64906c3f6e2436f33445a049c58b
 PKG_DESCR:=		su do
 PKG_SECTION:=		admin
@@ -20,6 +20,12 @@ CPPFLAGS_FOR_BUILD+=	-I../ -I../include
 CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
 			--with-env-editor
+
+ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-hardening
+else
+CONFIGURE_ARGS+=	--disable-hardening
+endif
 
 sudo-install:
 	$(INSTALL_DIR) $(IDIR_SUDO)/usr/bin
