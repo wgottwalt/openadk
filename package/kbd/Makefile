@@ -5,12 +5,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
 PKG_VERSION:=		2.0.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		cc0ee9f2537d8636cae85a8c6541ed2e
 PKG_DESCR:=		keyboard utility
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libcheck
-PKG_BUILDDEP:=		check
+PKG_BUILDDEP:=		flex-host bison-host check
 PKG_URL:=		http://kbd-project.org/
 PKG_SITES:=		http://kbd-project.org/download/
 
