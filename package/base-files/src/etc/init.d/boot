@@ -27,9 +27,9 @@ cat /etc/.rnd >/dev/urandom 2>&1
 # create some useful directories in tmpfs
 mkdir -p /var/log
 mkdir -p /var/run
+mkdir -p /var/tmp
 touch /var/log/lastlog
 touch /var/log/wtmp
-ln -s /tmp /var/tmp
 
 HOSTNAME=
 [[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)
