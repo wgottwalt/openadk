@@ -2,6 +2,8 @@
 - fix libiberty.a mess
 - check gold for mozilla compile
 - check for gcc and SSP again
+- config.site/config.cache usage for speedup?
+  http://lists.gnu.org/archive/html/autoconf/2014-03/msg00031.html
 - add daemon() function to functions.sh
 - add printing of OK/FAIL (optional verbose bootup)
 - fixup rework libgcc --export-symbols
