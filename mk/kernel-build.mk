@@ -54,6 +54,7 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
+	@mkdir -p ${PACKAGE_DIR}
 ifneq ($(strip $(TARGETS)),)
 	$(MAKE) $(TARGETS)
 endif

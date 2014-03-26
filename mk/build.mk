@@ -503,8 +503,9 @@ test-framework:
 	for libc in $$libc;do \
 		( \
 			mkdir -p $(TOPDIR)/firmware/; \
-			for arch in arm armhf microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
+			for arch in $$(grep -v m68k target/tarch.lst|xargs);do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##"); \
+				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
 				$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=initramfsarchive COLLECTION=test defconfig; \

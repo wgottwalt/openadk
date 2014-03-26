@@ -10,6 +10,7 @@ PKG_MD5SUM:=		45f3b6dbc9ee7c7dfbbbc5feba571529
 PKG_DESCR:=		Foreign Function Interface library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool libffi-host
+HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceware.org/libffi/
 PKG_SITES:=		ftp://sourceware.org/pub/libffi/
 PKG_OPTS:=		dev
