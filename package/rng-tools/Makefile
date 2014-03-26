@@ -4,15 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rng-tools
-PKG_VERSION:=		2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		63d503191eabed630324c104cc024475
-PKG_DESCR:=		Daemon to use hardware random number generators.
+PKG_VERSION:=		4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ae89dbfcf08bdfbea19066cfbf599127
+PKG_DESCR:=		daemon to use hardware random number generators.
 PKG_SECTION:=		crypto
 PKG_URL:=		http://gkernel.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
-PKG_LIBC_DEPENDS:=	glibc musl
+# argp.h required
+PKG_LIBC_DEPENDS:=	glibc
 
 include $(TOPDIR)/mk/package.mk
 
