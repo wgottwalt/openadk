@@ -15,6 +15,8 @@ PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_queue/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_queue/files/
 PKG_OPTS:=		dev
 
+PKG_LIBC_DEPENDS:=	uclibc glibc
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
