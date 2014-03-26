@@ -147,7 +147,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 
 world:
 	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
-		$(PACKAGE_DIR) $(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
+		$(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
 		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
@@ -476,8 +476,8 @@ bulktoolchain:
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
-			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##"); \
-			carch=$$(echo $$arch|sed -e "s#sh#sh4#" -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" ); \
+			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
+			carch=$$(echo $$arch|sed -e "s#sh#sh4#" -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e "s#x86_64.*#x86_64#" ); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
@@ -544,14 +544,14 @@ bulk:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkbuild.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	    if [ -f .exit ]; then break;fi \
@@ -564,14 +564,14 @@ bulkall:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallbuild.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	      if [ -f .exit ]; then break;fi \
@@ -584,7 +584,7 @@ bulkallmod:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
@@ -592,7 +592,7 @@ bulkallmod:
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		$(GMAKE) clean; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallmodbuild.log; \
 	        if [ -f .exit ]; then break;fi \
 	      done; \
 	     if [ -f .exit ]; then break;fi \

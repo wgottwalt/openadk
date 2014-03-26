@@ -224,6 +224,7 @@ NO_ERROR=0
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
+	@echo "GIT:=$$(which git 2>/dev/null)" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh

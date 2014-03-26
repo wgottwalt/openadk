@@ -208,12 +208,6 @@ if ! which g++ >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which git >/dev/null 2>&1; then
-	echo  "You need git to continue."
-	echo
-	out=1
-fi
-
 cd $topdir
 rm -rf tmp
 
