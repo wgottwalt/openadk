@@ -4,19 +4,21 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		siproxd
-PKG_VERSION:=		0.7.1
+PKG_VERSION:=		0.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		45e5a44803181e2bf3361d562060c904
+PKG_MD5SUM:=		1a6f9d13aeb2d650375c9a346ac6cbaf
 PKG_DESCR:=		a SIP (Session Initiation Protocol) proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libosip2 libpthread
-PKG_BUILDDEP:=		libosip2
+PKG_BUILDDEP:=		autotool libosip2
 PKG_URL:=		http://siproxd.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SIPROXD,siproxd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+AUTOTOOL_STYLE:=	autoreconf
 
 siproxd-install:
 	${INSTALL_DIR} ${IDIR_SIPROXD}/usr/sbin ${IDIR_SIPROXD}/etc
