@@ -105,7 +105,10 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 
 $(WRKBUILD)/.fixup:
 	# DOSTRIP kills x86 target (ld.so can not map libc.so.0), always use DODEBUG
+	# DODEBUG compile failure linking with libgcc_eh.a on arm hf
+ifneq ($(ADK_LINUX_ARM),y)
 	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
+endif
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \

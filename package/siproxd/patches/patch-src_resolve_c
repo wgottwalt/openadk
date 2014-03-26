@@ -1,0 +1,10 @@
+--- siproxd-0.8.1.orig/src/resolve.c	2011-05-28 17:47:15.000000000 +0200
++++ siproxd-0.8.1/src/resolve.c	2014-03-26 18:37:07.000000000 +0100
+@@ -20,6 +20,7 @@
+ 
+ #include "config.h"
+ 
++#include <sys/types.h>
+ #include <arpa/inet.h>
+ #include <netinet/in.h>
+ 

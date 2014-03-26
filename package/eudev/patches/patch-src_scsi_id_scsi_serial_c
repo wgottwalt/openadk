@@ -1,0 +1,11 @@
+--- eudev-1.5.3.orig/src/scsi_id/scsi_serial.c	2014-03-22 22:56:51.000000000 +0100
++++ eudev-1.5.3/src/scsi_id/scsi_serial.c	2014-03-24 20:49:53.000000000 +0100
+@@ -35,7 +35,7 @@
+ #include <linux/bsg.h>
+ 
+ #ifdef __UCLIBC__
+-#include <linux/fcntl.h>
++#define O_CLOEXEC      02000000        /* set close_on_exec */
+ #endif
+ 
+ #include "libudev.h"

@@ -12,6 +12,7 @@ endif
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+		CFLAGS='$(TARGET_CFLAGS)' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--disable-gcc-wrapper \
@@ -22,29 +23,31 @@ $(WRKBUILD)/.headers:
 
 $(WRKBUILD)/.compiled:
 	# reconfigure musl, otherwise linking with libgcc or libgcc_eh is disabled
-	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) clean
+	$(MAKE) -C $(WRKBUILD) clean
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+		CFLAGS='$(TARGET_CFLAGS)' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--disable-gcc-wrapper \
 	)
-	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
+	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	$(MAKE) -C $(WRKBUILD) DESTDIR=$(STAGING_TARGET_DIR) install
+	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' DESTDIR=$(STAGING_TARGET_DIR) install
 	touch $@
 
 $(WRKBUILD)/.fixup:
 	# reconfigure musl, otherwise linking with libgcc or libgcc_eh is disabled
-	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) clean
+	$(MAKE) -C $(WRKBUILD) clean
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+		CFLAGS='$(TARGET_CFLAGS)' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--disable-gcc-wrapper \
 	)
-	$(MAKE) CFLAGS='$(TARGET_CFLAGS)' -C $(WRKBUILD) all
-	$(MAKE) -C $(WRKBUILD) DESTDIR=$(STAGING_TARGET_DIR) install
+	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' all
+	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' DESTDIR=$(STAGING_TARGET_DIR) install
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
 ifeq ($(ADK_TOOLCHAIN),y)

@@ -1,13 +1,21 @@
---- postfix-2.10.2.orig/src/util/sys_defs.h	2012-09-25 01:53:56.000000000 +0200
-+++ postfix-2.10.2/src/util/sys_defs.h	2013-10-10 16:30:37.000000000 +0200
-@@ -753,8 +753,8 @@ extern int initgroups(const char *, int)
- #define DEF_MAILBOX_LOCK "fcntl, dotlock"	/* RedHat >= 4.x */
+--- postfix-2.11.0.orig/src/util/sys_defs.h	2013-09-29 22:51:55.000000000 +0200
++++ postfix-2.11.0/src/util/sys_defs.h	2014-03-26 19:38:02.000000000 +0100
+@@ -46,7 +46,7 @@
  #define HAS_FSYNC
  #define HAS_DB
--#define DEF_DB_TYPE	"hash"
--#define ALIAS_DB_MAP	"hash:/etc/aliases"
-+#define DEF_DB_TYPE    "cdb"
-+#define ALIAS_DB_MAP   "cdb:/etc/postfix/aliases"
- #ifndef NO_NIS
- #define HAS_NIS
+ #define HAS_SA_LEN
+-#define NATIVE_DB_TYPE	"hash"
++#define NATIVE_DB_TYPE	"cdb"
+ #if (defined(__NetBSD_Version__) && __NetBSD_Version__ >= 104250000)
+ #define ALIAS_DB_MAP   DEF_DB_TYPE ":/etc/mail/aliases"	/* sendmail 8.10 */
  #endif
+@@ -54,7 +54,8 @@
+ #define ALIAS_DB_MAP   DEF_DB_TYPE ":/etc/mail/aliases"	/* OpenBSD 2.7 */
+ #endif
+ #ifndef ALIAS_DB_MAP
+-#define ALIAS_DB_MAP	DEF_DB_TYPE ":/etc/aliases"
++#define DEF_DB_TYPE    "cdb"
++#define ALIAS_DB_MAP	DEF_DB_TYPE ":/etc/postfix/aliases"
+ #endif
+ #define GETTIMEOFDAY(t)	gettimeofday(t,(struct timezone *) 0)
+ #define ROOT_PATH	"/bin:/usr/bin:/sbin:/usr/sbin"

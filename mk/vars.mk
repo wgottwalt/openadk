@@ -127,7 +127,7 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
-TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 # always add debug information
@@ -178,9 +178,10 @@ TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			CROSS_COMPILE='$(TARGET_CROSS)'
 
 HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${CC_FOR_BUILD}' \
-			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CXX_FOR_BUILD='${CXX_FOR_BUILD}' \
+			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CFLAGS_FOR_BUILD='${CFLAGS_FOR_BUILD}' \
+			CXXFLAGS_FOR_BUILD='${CXXFLAGS_FOR_BUILD}' \
 			LDFLAGS_FOR_BUILD='${LDFLAGS_FOR_BUILD}'
 
 PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))

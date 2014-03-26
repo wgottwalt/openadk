@@ -34,6 +34,9 @@ imageprepare: image-prepare-post extra-install
 # if an extra directory exist in TOPDIR, copy all content over the 
 # root directory, do the same if make extra=/dir/to/extra is used
 extra-install:
+	@-if [ -h ${TARGET_DIR}/etc/resolv.conf -a -f $(TOPDIR)/extra/etc/resolv.conf ];then \
+		rm ${TARGET_DIR}/etc/resolv.conf;\
+	fi
 	@if [ -d $(TOPDIR)/extra ];then $(CP) $(TOPDIR)/extra/* ${TARGET_DIR};fi
 	@if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
 
@@ -51,6 +54,7 @@ image-prepare-post:
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 ifeq ($(ADK_LINUX_X86_64),y)
+ifeq ($(ADK_TARGET_ABI_32),)
 	# fixup lib dirs
 	mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/lib/
@@ -59,6 +63,7 @@ ifeq ($(ADK_LINUX_X86_64),y)
 	mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}
 	rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+endif
 endif
 ifeq ($(ADK_LINUX_PPC64),y)
 	# fixup lib dirs
