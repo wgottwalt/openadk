@@ -82,6 +82,7 @@ Here is a short list of details to provide in such case:
 * target for which the build fails
 * package(s) which the build fails
 * the command that fails and its output
+* the make.log file, generated when make v is used
 * any information you think that may be relevant
 
 Additionally, you can add the +.config+ file.
