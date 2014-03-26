@@ -77,7 +77,8 @@ endif
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
-	git log -1|head -1|sed -e 's#commit ##' \
+	test -z $(GIT) || \
+	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
 		> $(IDIR_BASE_FILES)/etc/adkversion
 	test -z $(ADK_TARGET_SYSTEM) || \
 	    echo $(ADK_TARGET_SYSTEM) > $(IDIR_BASE_FILES)/etc/adktarget
