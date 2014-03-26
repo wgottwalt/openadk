@@ -1,0 +1,11 @@
+--- mpd-0.18.9.orig/src/thread/Id.hxx	2013-12-11 20:51:53.000000000 +0100
++++ mpd-0.18.9/src/thread/Id.hxx	2014-03-26 09:04:04.000000000 +0100
+@@ -84,7 +84,7 @@ public:
+ #ifdef WIN32
+ 		return id == other.id;
+ #else
+-		return ::pthread_equal(id, other.id);
++		return pthread_equal(id, other.id);
+ #endif
+ 	}
+ 
