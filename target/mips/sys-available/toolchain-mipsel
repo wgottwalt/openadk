@@ -1,10 +1,10 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPSEL
-	bool "Toolchain only (little endian)"
+	bool "Toolchain only (mips32 little endian)"
 	select ADK_mips
 	select ADK_little
 	select ADK_toolchain_mipsel
 	select ADK_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TGZ
 	help
-	  MIPS toolchain.
+	  MIPS32 little endian toolchain.
 
