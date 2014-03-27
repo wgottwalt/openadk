@@ -1,0 +1,11 @@
+--- squid-3.4.4.orig/lib/rfcnb/rfcnb-io.c	2014-03-09 10:40:56.000000000 +0100
++++ squid-3.4.4/lib/rfcnb/rfcnb-io.c	2014-03-27 09:28:30.000000000 +0100
+@@ -30,7 +30,7 @@
+ #include "rfcnb/rfcnb-util.h"
+ #include "rfcnb/std-includes.h"
+ #include <sys/uio.h>
+-#include <sys/signal.h>
++#include <signal.h>
+ 
+ #if HAVE_STRING_H
+ #include <string.h>
