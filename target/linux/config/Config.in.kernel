@@ -128,7 +128,9 @@ config ADK_KERNEL_AEABI
 
 # endianess
 config ADK_KERNEL_CPU_BIG_ENDIAN
+	default y if ADK_big
 	boolean
 
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
+	default y if ADK_little
 	boolean

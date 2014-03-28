@@ -512,7 +512,7 @@ test-framework:
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				qarch=$$(echo $$arch|sed -e "s#armhf#arm#" -e 's#mips64n.*$$#mips64#' -e 's#mips64eln.*$$#mips64el#'); \
+				qarch=$$(echo $$arch|sed -e "s#armhf#arm#" -e 's#mips64n.*$$#mips64#' -e 's#mips64eln.*$$#mips64el#' -e "s#x86_64.*#x86_64#"); \
 				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
 				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
 				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
