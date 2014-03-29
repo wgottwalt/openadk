@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sox
 PKG_VERSION:=		14.4.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		670307f40763490a2bc0d1f322071e7a
 PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		multimedia
