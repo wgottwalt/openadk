@@ -5,7 +5,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_SHEB
 	select ADK_toolchain_sheb
 	select ADK_CPU_SH4
 	select ADK_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TGZ
+	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  Build a superh toolchain (sh4 big endian).
 

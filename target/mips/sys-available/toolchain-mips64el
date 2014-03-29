@@ -7,6 +7,6 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_MIPS64EL
 	select ADK_CPU_MIPS64
 	select ADK_LINUX_64
 	select ADK_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TGZ
+	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  MIPS64 little endian o32 ABI toolchain.

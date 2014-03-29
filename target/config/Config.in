@@ -662,7 +662,8 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
-		   !ADK_TARGET_ABI_X32
+		   !ADK_x32 && \
+		   !ADK_32
 	help
  	 http://uclibc.org
 
@@ -944,11 +945,12 @@ config ADK_TARGET_ROOTFS
 config ADK_PACKAGE_SUFFIX
 	string
 	default "ipk" if ADK_TARGET_PACKAGE_IPKG
-	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
+	default "tar.xz" if ADK_TARGET_PACKAGE_TXZ
 	help
 
 choice
 prompt "Target package format"
+default ADK_TARGET_PACKAGE_TXZ if ADK_PKG_TEST
 default ADK_TARGET_PACKAGE_IPKG
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
@@ -959,9 +961,9 @@ config ADK_TARGET_PACKAGE_IPKG
 	help
 	  Create ipkg packages and use ipkg package management on the target.
 
-config ADK_TARGET_PACKAGE_TGZ
+config ADK_TARGET_PACKAGE_TXZ
 	boolean
-	prompt "tar archive"
+	prompt "xz compressed tar archive"
 	help
 	  Create compressed tar archives of packages.
 	  Pre- and post install scripts will be executed in the target

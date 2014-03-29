@@ -5,7 +5,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC64
 	select ADK_CPU_PPC64
 	select ADK_LINUX_64
 	select ADK_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TGZ
+	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  Build a ppc64 toolchain.
 
