@@ -10,6 +10,7 @@ config ADK_PKG_TEST
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
 	select ADK_SIMPLE_NETWORK_CONFIG
 	select ADK_KPACKAGE_KMOD_IPV6
+	select ADK_TARGET_PACKAGE_TXZ
 	default n
 	help
 	  Package collection used to build adk-test-framework root
