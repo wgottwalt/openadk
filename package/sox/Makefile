@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sox
-PKG_VERSION:=		14.3.2
+PKG_VERSION:=		14.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e9d35cf3b0f8878596e0b7c49f9e8302
-PKG_DESCR:=		Swiss Army knife of sound processing programs
+PKG_MD5SUM:=		670307f40763490a2bc0d1f322071e7a
+PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		zlib libmad lame alsa-lib libid3tag
 PKG_DEPENDS:=		zlib libmad liblame alsa-lib libid3tag
