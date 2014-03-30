@@ -36,6 +36,10 @@ config ADK_HOST_BUILD_M4
 	boolean
 	default n
 
+config ADK_HOST_BUILD_PKGCONF
+	boolean
+	default n
+
 config ADK_HOST_BUILD_XZ
 	boolean
 	default n

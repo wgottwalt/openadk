@@ -245,6 +245,12 @@ if ! which m4 >/dev/null 2>&1; then
 	host_build_m4=1
 fi
 
+host_build_pkgconf=0
+if ! which pkgconf >/dev/null 2>&1; then
+	echo "No pkgconf found, will build one."
+	host_build_pkgconf=1
+fi
+
 host_build_xz=0
 if ! which xz >/dev/null 2>&1; then
 	echo "No xz found, will build one."
@@ -281,6 +287,7 @@ if [ $host_build_bzip2 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BZIP2
 if [ $host_build_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FILE" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_flex -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FLEX" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_m4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_pkgconf -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PKGCONF" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq ;fi
 # optional
 if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq ;fi
