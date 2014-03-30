@@ -28,11 +28,13 @@ include $(TOPDIR)/package/Depends.mk
 DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
 REBUILD_PACKAGES:=$(patsubst %,%-rebuild,$(package-y) $(package-m))
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))
+HOST_COMPILE_PACKAGES:=$(patsubst %,%-host-compile,$(hostpackage-y))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
 all: compile
 download: $(DOWNLOAD)
 clean: $(patsubst %,%-clean,$(package-) $(package-y) $(package-m) base-files)
+hostcompile: $(HOST_COMPILE_PACKAGES)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 compile: $(REBUILD_PACKAGES) $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)

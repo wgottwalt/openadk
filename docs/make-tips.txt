@@ -43,7 +43,7 @@ and pkg trees, the firmware and the toolchain for all targets):
 --------------------
 
 If you even want to clean any downloaded source and your 
-confiuration +.config+:
+configuration +.config+:
 
 --------------------
  $ make distclean
@@ -60,7 +60,7 @@ This is automatically triggered if you change the kernel version in
 your configuration.
 
 If you just want to clean all packages and wants to rebuild the firmware,
-(the tools/toolchain is not deleted) just use:
+(the toolchain is not deleted) just use:
 
 --------------------
  $ make clean

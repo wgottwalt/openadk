@@ -17,7 +17,6 @@ DL_DIR?=		$(BASE_DIR)/dl
 else
 DL_DIR?=		$(ADK_DL_DIR)
 endif
-TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 TOOLCHAIN_DIR:=		${BASE_DIR}/toolchain_${GNU_HOST_NAME}
@@ -71,7 +70,7 @@ CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
 			--target=${GNU_TARGET_NAME}
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
-TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
+TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
 # target tools
@@ -212,21 +211,21 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				cat $$file | cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				$(STAGING_HOST_DIR)/usr/bin/xz -dc $$file | tar -xf - ;; \
+				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -ivd -H zip ;; \
+				cat $$file | cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

@@ -8,28 +8,27 @@ PKG_VERSION:=		3.01
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		afd4563e335a614a11e042c7b6734d66
 PKG_DESCR:=		cdrtools
-PKG_SECTION:=		misc
+PKG_SECTION:=		fs
 PKG_URL:=		http://cdrecord.berlios.de/private/cdrecord.html
-PKG_SITES:=		http://openadk.org/
+PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
 
-PKG_CFLINE_CDRTOOLS:=	depends on ADK_BROKEN
+PKG_CFLINE_CDRTOOLS:=	depends on ADK_HOST_ONLY
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,CDRTOOLS,cdrtools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,CDRTOOLS,cdrtools,$(PKG_VERSION)-${PKG_RELEASE}))
 
-CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+HOST_STYLE:=		manual
 
-cdrtools-install:
-	$(INSTALL_DIR) $(IDIR_CDRTOOLS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/cdrecord \
-		$(IDIR_CDRTOOLS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/readcd \
-		$(IDIR_CDRTOOLS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/mkisofs \
-		$(IDIR_CDRTOOLS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/schily/bin/cdda2wav \
-		$(IDIR_CDRTOOLS)/usr/bin
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
 
+cdrtools-hostinstall:
+	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/mkisofs/OBJ/*/mkisofs \
+		$(STAGING_HOST_DIR)/usr/bin
+
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

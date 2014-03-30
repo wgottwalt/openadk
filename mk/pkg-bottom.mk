@@ -125,6 +125,8 @@ do-install:
 post-install:
 spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
+	echo FOO
+	echo $(HOST_WRKDIR)
 	@-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)

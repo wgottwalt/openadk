@@ -17,9 +17,11 @@ PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY
 DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE}))
+$(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=		-static
@@ -28,9 +30,20 @@ endif
 
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
 TARGET_LDFLAGS+=	-static-libgcc
+
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
+
+host-build:
+	cd ${WRKBUILD} && HAVE_CAN_FSTACKPROTECTORALL=0 \
+	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
+
+mksh-hostinstall:
+	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/mksh \
+		${STAGING_HOST_DIR}/usr/bin
 
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
@@ -38,9 +51,10 @@ do-build:
 	    HAVE_CAN_FSTACKPROTECTORALL=0 \
 	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 
-do-install:
+mksh-install:
 	${INSTALL_DIR} ${IDIR_MKSH}/bin ${IDIR_MKSH}/root
 	${INSTALL_BIN} ${WRKBUILD}/mksh ${IDIR_MKSH}/bin/
 	${CP} ${WRKSRC}/dot.mkshrc ${IDIR_MKSH}/root/.mkshrc
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
