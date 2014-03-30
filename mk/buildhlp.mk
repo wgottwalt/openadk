@@ -81,7 +81,7 @@ ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
 	touch $@
 endif
 
-update-patches:
+update-patches host-update-patches:
 	@test ! -d ${WRKDIR}.orig || rm -rf ${WRKDIR}.orig
 	@test ! -d ${WRKDIR}.orig
 ifeq ($(strip ${_IN_PACKAGE})$(strip ${_IN_CVTC}),1)
@@ -115,4 +115,4 @@ endif
 	    rm -rf ${WRKDIR}.orig; \
 	    [[ $$toedit != FAIL ]]
 
-.PHONY: update-patches
+.PHONY: update-patches host-update-patches

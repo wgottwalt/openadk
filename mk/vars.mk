@@ -17,7 +17,6 @@ DL_DIR?=		$(BASE_DIR)/dl
 else
 DL_DIR?=		$(ADK_DL_DIR)
 endif
-TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 TOOLCHAIN_DIR:=		${BASE_DIR}/toolchain_${GNU_HOST_NAME}
@@ -71,7 +70,7 @@ CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
 			--target=${GNU_TARGET_NAME}
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
-TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
+TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
 # target tools
