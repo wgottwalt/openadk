@@ -196,12 +196,6 @@ if ! which perl >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which xargs >/dev/null 2>&1; then
-	echo  "You need xargs to continue."
-	echo
-	out=1
-fi
-
 if ! which g++ >/dev/null 2>&1; then
 	echo  "You need g++ (GNU C++ compiler) to continue."
 	echo
@@ -251,6 +245,21 @@ if ! which pkgconf >/dev/null 2>&1; then
 	host_build_pkgconf=1
 fi
 
+host_build_findutils=0
+if ! which gxargs >/dev/null 2>&1; then
+	if ! which xargs >/dev/null 2>&1; then
+		echo "No xargs found, will build one."
+		host_build_findutils=1
+	fi
+fi
+
+if ! which gfind >/dev/null 2>&1; then
+	if ! which find >/dev/null 2>&1; then
+		echo "No find found, will build one."
+		host_build_findutils=1
+	fi
+fi
+
 host_build_xz=0
 if ! which xz >/dev/null 2>&1; then
 	echo "No xz found, will build one."
@@ -288,6 +297,7 @@ if [ $host_build_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FILE" 
 if [ $host_build_flex -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FLEX" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_m4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_pkgconf -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PKGCONF" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_findutils -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FINDUTILS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq ;fi
 # optional
 if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq ;fi

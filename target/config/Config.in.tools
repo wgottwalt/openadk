@@ -28,6 +28,10 @@ config ADK_HOST_BUILD_FILE
 	boolean
 	default n
 
+config ADK_HOST_BUILD_FINDUTILS
+	boolean
+	default n
+
 config ADK_HOST_BUILD_FLEX
 	boolean
 	default n
