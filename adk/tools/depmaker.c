@@ -174,7 +174,7 @@ int main() {
 				!(strncmp(pkgdirp->d_name, "glibc", 5) == 0)) {
 				/* print result to stdout */
 				printf("package-$(ADK_COMPILE_%s) += %s\n", pkgvar, pkgdirp->d_name); 
-				printf("hostpackage-$(ADK_HOST_NEED_%s) += %s\n", pkgvar, pkgdirp->d_name); 
+				printf("hostpackage-$(ADK_HOST_BUILD_%s) += %s\n", pkgvar, pkgdirp->d_name); 
 			}
 
 			if ((pkgdeps = malloc(MAXLINE)) != NULL)
