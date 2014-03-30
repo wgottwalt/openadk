@@ -6,7 +6,6 @@ config ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_WITH_MTD
 	select ADK_TARGET_KERNEL_LINUXBIN
-	select ADK_HOST_NEED_MKIMAGE
 	help
 	 Qemu support for microblaze big endian architecture.
 

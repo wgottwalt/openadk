@@ -26,7 +26,6 @@ refetch:
 	-rm -f ${FULLDISTFILES}
 	${MAKE} fetch
 
-# XXX for now
 _CHECKSUM_COOKIE?=	${WRKDIR}/.checksum_done
 checksum: ${_CHECKSUM_COOKIE}
 ifeq ($(strip ${NO_CHECKSUM}),)

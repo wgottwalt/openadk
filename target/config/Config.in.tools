@@ -1,4 +1,24 @@
-config ADK_HOST_NEED_MKISOFS
+config ADK_HOST_NEED_HEIRLOOM_CPIO
+	boolean
+	default y
+
+config ADK_HOST_NEED_BC
+	boolean
+	default y
+
+config ADK_HOST_NEED_MKCRYPT
+	boolean
+	default y
+
+config ADK_HOST_NEED_FILE
+	boolean
+	default y
+
+config ADK_HOST_NEED_BZIP2
+	boolean
+	default n
+
+config ADK_HOST_NEED_CDRTOOLS
 	boolean
 	default n
 
@@ -10,7 +30,7 @@ config ADK_HOST_NEED_SQUASHFS
 	boolean
 	default n
 
-config ADK_HOST_NEED_JFFS2
+config ADK_HOST_NEED_MTD_UTILS
 	boolean
 	default n
 
@@ -26,10 +46,6 @@ config ADK_HOST_NEED_LZMA
 	boolean
 	default n
 
-config ADK_HOST_NEED_BZIP2
-	boolean
-	default n
-
 config ADK_HOST_NEED_XZ
 	boolean
 	default n
@@ -39,6 +55,10 @@ config ADK_HOST_NEED_CCACHE
 	default n
 
 config ADK_HOST_NEED_MKIMAGE
+	boolean
+	default n
+
+config ADK_HOST_NEED_MKSH
 	boolean
 	default n
 

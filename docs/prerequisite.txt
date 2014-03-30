@@ -23,8 +23,8 @@ package names may vary between host systems.
 
 ** +bash+
 ** +binutils+
-** +gcc+ 
-** `g++`
+** +C compiler (gcc or clang)+ 
+** `C++ compiler (g++ or clang++)`
 ** +GNU sed+
 ** +GNU awk+
 ** +GNU make+
@@ -33,10 +33,9 @@ package names may vary between host systems.
 ** +perl+
 ** +tar+
 ** +wget+
-** +findutils (find, xargs)+
-** +ncurses5 development+
-** +zlib development+ 
-** +libc development+
+** +ncurses5 development files+
+** +zlib development files+ 
+** +libc development files+
 
 There is a check for the required versions of these tools in advance,
 though. To re-issue the checks, use +make prereq+.

@@ -9,7 +9,7 @@ $(error your umask is not 022)
 endif
 
 CONFIG_CONFIG_IN = Config.in
-CONFIG = config
+CONFIG = adk/config
 DEFCONFIG=		ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_WGET_TIMEOUT=180 \
@@ -93,7 +93,7 @@ POSTCONFIG=		-@\
 	if [ -f .adkinit ];then rm .adkinit;\
 	else \
 	if [ -f .config.old ];then \
-		$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild;\
+		$(TOPDIR)/adk/tools/pkgrebuild;\
 		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
@@ -139,27 +139,26 @@ include $(TOPDIR)/rules.mk
 
 all: world
 
-${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
-	$(STAGING_HOST_DIR)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
+${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/depmaker
+	$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
 .PHONY: all world clean cleandir cleantoolchain distclean image_clean
 
 world:
 	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
-		$(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
-		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
+		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile
 else
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile root_clean package/install
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile root_clean package/install
 endif
 else
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 
 package_index:
@@ -190,9 +189,6 @@ target/%:
 
 toolchain/%: ${STAGING_TARGET_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
-
-tools/%:
-	$(MAKE) -C tools $(patsubst tools/%,%,$@)
 
 image:
 	$(MAKE) -C target image
@@ -266,7 +262,7 @@ cleandir:
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
@@ -274,7 +270,7 @@ cleantoolchain:
 	@$(TRACE) cleantoolchain
 	@rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
 
@@ -283,7 +279,7 @@ distclean:
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
@@ -456,7 +452,7 @@ distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
@@ -601,45 +597,42 @@ bulkallmod:
 	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
-	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
-	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+$(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools/sortfile.c $(TOPDIR)/adk/tools/strmap.c
+	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
-	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
+$(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
+	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker
+	@$(TOPDIR)/adk/tools/pkgmaker
 	@:>.menu
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
-	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
-	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/tools/adk/depmaker.c
+$(TOPDIR)/adk/tools/depmaker: $(TOPDIR)/adk/tools/depmaker.c
+	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/adk/tools/depmaker.c
 
-dep: $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker
+dep: $(TOPDIR)/adk/tools/depmaker
 	@echo "Generating dependencies ..."
-	@$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 
 include $(TOPDIR)/toolchain/gcc/Makefile.inc
 
 check-dejagnu:
-	@-rm tests/adk.exp tests/master.exp >/dev/null 2>&1
-	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" tests/adk.exp.in > \
-		tests/adk.exp.in.tmp
-	@sed -e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" tests/adk.exp.in.tmp > \
-		tests/adk.exp
-	@sed -e "s#@TOPDIR@#$(TOPDIR)#" tests/master.exp.in > \
-		tests/master.exp
+	@-rm adk/tests/adk.exp adk/tests/master.exp >/dev/null 2>&1
+	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" \
+		-e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" \
+		adk/tests/adk.exp.in > adk/tests/adk.exp
+	@sed -e "s#@TOPDIR@#$(TOPDIR)#" adk/tests/master.exp.in > \
+		adk/tests/master.exp
 
 check-gcc: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc
 
 check-g++: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-g++
 
 check: check-gcc check-g++

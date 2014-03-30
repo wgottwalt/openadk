@@ -6,7 +6,7 @@ How OpenADK works
 
 As mentioned above, OpenADK is basically a set of Makefiles that
 download, configure, and compile software with the correct options. It
-also includes patches for various software packages and the linux kernel. 
+also includes patches for various software packages and the Linux kernel. 
 
 There is basically one Makefile per software package. Makefiles are split into
 many different parts.
@@ -22,27 +22,19 @@ many different parts.
   the kernel patches
 
 * The +package/+ directory contains the Makefiles and
-  associated files for all user-space tools and libraries that OpenADK
-  can compile and add to the target root filesystem. There is one
-  sub-directory per package.
+  associated files for all user-space tools and libraries that OpenADK can
+  compile and add to the target root filesystem or to the host directory. There
+  is one sub-directory per package.
 
 * The +mk/+ directory contains some globally used Makefiles with
   the suffix +.mk+, these are used in all other Makefile via include
 
-* The +tools/+ directory contains the Makefiles and
+* The +adk/+ directory contains the Makefiles and
   associated files for software related to the generation of the
-  host tools needed for different tasks (compression tools, ..).
-
-There are three other directories in the top level directory of OpenADK:
+  host tools needed for +make menuconfig+ system
 
 * The +scripts/+ directory contains shell scripts for the creation of
   meta-data in OpenADK, install scripts and image creation scripts
-
-* The +config/+ directory contains the application used for the
-  +make menuconfig+ system
-
-* The +tests/+ directory contains some data for the +make check+ target,
-  to run the gcc testsuite
 
 The main Makefile performs the following steps before the configuration
 is done:
@@ -69,12 +61,13 @@ configuration is done (it is mainly a wrapper for +mk/build.mk+):
   available systems and package collections
 
 * Generate the host tools required for different tasks (encrypting passwords,
-  compressing data, extracting archives, ..)
+  compressing data, extracting archives, creating images, ..)
 
 * Generate the cross-compilation toolchain (binutils, gcc, libc, gdb)
 
-* Compile the linux kernel
+* Compile the Linux kernel
 
 * Compile all the userspace packages, the boot loader and external kernel modules
 
 * Generate the firmware images or archives
+

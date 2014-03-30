@@ -43,8 +43,10 @@ host-build:
 		PREFIX=${HOST_WRKINST}/usr ${HOST_ALL_TARGET})
 
 bzip2-hostinstall:
+	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/lib
 	${INSTALL_DIR} $(STAGING_HOST_DIR)/usr/include
+	$(INSTALL_BIN) ${WRKBUILD}/bzip2-shared ${STAGING_HOST_DIR}/usr/bin/bzip2
 	$(CP) ${WRKBUILD}/libbz2.so* \
 		${STAGING_HOST_DIR}/usr/lib
 	(cd ${STAGING_HOST_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
