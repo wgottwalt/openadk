@@ -2,17 +2,17 @@ config ADK_HOST_NEED_HEIRLOOM_CPIO
 	boolean
 	default y
 
-config ADK_HOST_NEED_BC
-	boolean
-	default y
-
 config ADK_HOST_NEED_MKCRYPT
 	boolean
 	default y
 
+config ADK_HOST_NEED_BC
+	boolean
+	default n
+
 config ADK_HOST_NEED_FILE
 	boolean
-	default y
+	default n
 
 config ADK_HOST_NEED_BZIP2
 	boolean
@@ -66,3 +66,5 @@ config ADK_HOST_NEED_PCRE
 	boolean
 	default y if ADK_HOST_DARWIN
 	default n
+
+source "target/config/Config.in.prereq"

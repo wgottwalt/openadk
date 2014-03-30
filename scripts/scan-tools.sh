@@ -208,6 +208,38 @@ if ! which g++ >/dev/null 2>&1; then
 	out=1
 fi
 
+host_need_file=0
+if ! which file >/dev/null 2>&1; then
+	echo "No file found, will build one."
+	host_need_file=1
+fi
+
+host_need_bc=0
+if ! which bc >/dev/null 2>&1; then
+	echo "No bc found, will build one."
+	host_need_bc=1
+fi
+
+host_need_bzip2=0
+if ! which bzip2 >/dev/null 2>&1; then
+	echo "No bzip2 found, will build one."
+	host_need_bzip2=1
+fi
+
+host_need_xz=0
+if ! which xz >/dev/null 2>&1; then
+	echo "No xz found, will build one."
+	host_need_xz=1
+fi
+
+echo "config ADK_HOST_NEED_TOOLS" > $topdir/target/config/Config.in.prereq
+printf "\t%s\n" "boolean" >> $topdir/target/config/Config.in.prereq
+printf "\t%s\n" "default y" >> $topdir/target/config/Config.in.prereq
+if [ $host_need_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_NEED_XZ" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_need_bc -eq 1 ];then printf "\t%s\n" "select ADK_HOST_NEED_BC" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_need_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_NEED_FILE" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_need_bzip2 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_NEED_BZIP2" >> $topdir/target/config/Config.in.prereq ;fi
+
 cd $topdir
 rm -rf tmp
 

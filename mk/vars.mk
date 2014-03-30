@@ -211,21 +211,21 @@ EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				cat $$file | cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				$(STAGING_HOST_DIR)/usr/bin/xz -dc $$file | tar -xf - ;; \
+				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -ivd -H zip ;; \
+				cat $$file | cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \
