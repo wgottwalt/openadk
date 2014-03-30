@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		79
+PKG_RELEASE:=		80
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -26,6 +26,7 @@ do-install:
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
+ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
 	$(SED) 's,@ARCH@,$(ADK_TARGET_CPU_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@SYSTEM@,$(ADK_TARGET_SYSTEM),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@LIBC@,$(ADK_TARGET_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
@@ -36,6 +37,8 @@ else
 endif
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
+endif
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
 	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
 ifneq (${ADK_PACKAGE_ASH},)
@@ -47,7 +50,6 @@ endif
 ifneq (${ADK_PACKAGE_ZSH},)
 	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
 endif
-	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
 	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
 	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt}
 	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}

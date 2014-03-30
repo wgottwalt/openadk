@@ -4,7 +4,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC
 	select ADK_toolchain_ppc
 	select ADK_CPU_PPC
 	select ADK_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TGZ
+	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  Build a ppc toolchain.
 

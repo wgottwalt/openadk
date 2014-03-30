@@ -13,11 +13,10 @@ mips64eln32
 mips64eln64
 ppc
 ppc64
-sh
-sheb
+sh4
+sh4eb
 sparc
 sparc64
 x86
 x86_64
-x86_64_32
 x86_64_x32

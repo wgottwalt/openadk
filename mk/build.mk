@@ -472,8 +472,8 @@ bulktoolchain:
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
-			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
-			carch=$$(echo $$arch|sed -e "s#sh#sh4#" -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e "s#x86_64.*#x86_64#" ); \
+			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
+			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
@@ -500,15 +500,14 @@ test-framework:
 		( \
 			mkdir -p $(TOPDIR)/firmware/; \
 			for arch in $$(grep -v m68k target/tarch.lst|xargs);do \
-				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##"); \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##" -e "s#x86_64.*#x86_64#"); \
 				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
-				$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=initramfsarchive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				if [ $$arch = "armhf" ];then qarch=arm; else qarch=$$arch;fi; \
+				qarch=$$(echo $$arch|sed -e "s#armhf#arm#" -e 's#mips64n.*$$#mips64#' -e 's#mips64eln.*$$#mips64el#' -e "s#x86_64.*#x86_64#"); \
 				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
 				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
 				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
