@@ -3,7 +3,7 @@ config ADK_HOST_BUILD_HEIRLOOM_CPIO
 	boolean
 	default y
 
-config ADK_HOST_BUILD_MKCRYPT
+config ADK_HOST_BUILD_ADK_HELPER
 	boolean
 	default y
 

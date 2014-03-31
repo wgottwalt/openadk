@@ -20,6 +20,7 @@ endif
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 TOOLCHAIN_DIR:=		${BASE_DIR}/toolchain_${GNU_HOST_NAME}
+HOST_BUILD_DIR:=	${BASE_DIR}/host_build_${GNU_HOST_NAME}
 
 # dirs for cleandir
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
