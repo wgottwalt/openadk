@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		aa0a9e735e086228bc245b18e231bf6c
 PKG_DESCR:=		framebuffer splash utility
 PKG_SECTION:=		misc
-PKG_BUILDDEP:=		libjpeg-turbo libpng freetype
-PKG_DEPENDS:=		libjpeg-turbo libpng libfreetype
+PKG_BUILDDEP:=		libjpeg-turbo libpng freetype bzip2
+PKG_DEPENDS:=		libjpeg-turbo libpng libfreetype libbzip2
 PKG_URL:=		https://github.com/alanhaggai/fbsplash
 PKG_SITES:=		http://openadk.org/distfiles/
 
