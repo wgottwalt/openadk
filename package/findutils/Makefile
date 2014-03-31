@@ -11,6 +11,7 @@ PKG_DESCR:=		utilities for finding files
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		autotool
+HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
 
