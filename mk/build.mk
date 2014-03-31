@@ -146,7 +146,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 .PHONY: all world clean cleandir cleantoolchain distclean image_clean
 
 world:
-	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+	mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys

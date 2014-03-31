@@ -3,7 +3,7 @@
 
 # This is where all package operation is done in
 ifneq (,$(findstring host,$(MAKECMDGOALS)))
-WRKDIR?=		${WRKDIR_BASE}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
+WRKDIR?=		${HOST_BUILD_DIR}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
 endif
 
 HOST_CONFIGURE_ENV+=	AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
