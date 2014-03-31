@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bison
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		032a7b7b9f1a6e278ccde73f82cec5c2
+PKG_MD5SUM:=		72c66879187c128d04f4ab7422e8072d
 PKG_DESCR:=		parser generator
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		m4-host flex-host bison-host
