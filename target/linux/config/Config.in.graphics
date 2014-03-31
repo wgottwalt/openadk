@@ -68,12 +68,18 @@ config ADK_KERNEL_LOGO
 	boolean
  
 menu "Graphic devices support"
-depends on ADK_TARGET_WITH_VGA
+depends on ADK_TARGET_WITH_VGA || ADK_HARDWARE_QEMU
 
 config ADK_KERNEL_LOGO_LINUX_CLUT224
 	prompt "Enable Linux penguin boot logo"
 	boolean
 	select ADK_KERNEL_LOGO
+	default n
+
+config ADK_KERNEL_FB_CON_DECOR
+	prompt "Enable fullscreen boot logo"
+	boolean
+	select ADK_PACKAGE_FBSPLASH
 	default n
 
 config ADK_KERNEL_FB_VESA

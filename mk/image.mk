@@ -149,7 +149,7 @@ ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
 ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
-	$(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
+	env PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 
 ${FW_DIR}/${INITRAMFS}: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
