@@ -17,6 +17,9 @@
 /adk/tools/pkgmaker
 /adk/tools/depmaker
 /adk/tools/pkgrebuild
+/adk/tools/depmaker.dSYM/
+/adk/tools/pkgmaker.dSYM/
+/adk/tools/pkgrebuild.dSYM/
 /adk/tests/master.exp
 /adk/tests/adk.exp
 /adk/tests/adk.exp.in.tmp
