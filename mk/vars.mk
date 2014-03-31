@@ -208,7 +208,7 @@ RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/r
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
 	
-EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
+EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
