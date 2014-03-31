@@ -46,7 +46,7 @@ endif
 ifeq ($(EXTRACT_OVERRIDE),1)
 	${MAKE} do-extract
 else
-	PATH='${HOST_PATH}' ${EXTRACT_CMD}
+	export PATH='${HOST_PATH}' ${EXTRACT_CMD}
 endif
 	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
@@ -62,7 +62,7 @@ endif
 ifeq ($(EXTRACT_OVERRIDE),1)
 	${MAKE} do-extract
 else
-	PATH='${HOST_PATH}' ${EXTRACT_CMD}
+	export PATH='${HOST_PATH}' ${EXTRACT_CMD}
 endif
 	@${MAKE} post-extract $(MAKE_TRACE)
 	touch $@
