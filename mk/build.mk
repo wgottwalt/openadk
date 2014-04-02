@@ -471,9 +471,9 @@ bulktoolchain:
 		while read arch; do \
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
-			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
 			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
 			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
+			echo === building $$tarch $$libc toolchain-$$arch on $$(date); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
