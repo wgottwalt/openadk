@@ -24,6 +24,7 @@ HOST_STYLE:=		auto
 
 hostpost-install:
 	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf pkg-config)
+	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf $(GNU_TARGET_NAME)-pkg-config)
 
 pkgconf-install:
 	$(INSTALL_DIR) $(IDIR_PKGCONF)/usr/bin
