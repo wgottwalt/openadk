@@ -54,6 +54,9 @@ find $TARGETS -type f -a -exec file {} \; | \
 		S='kernel module' ;;
 	*ELF*shared\ object*,\ not\ stripped*)
 		S='shared object' ;;
+	*current\ ar\ archive*)
+		S='static library'
+		T="$T -S" ;;
 	*)
 		continue ;;
 	esac

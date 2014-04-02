@@ -17,16 +17,17 @@ DL_DIR?=		$(BASE_DIR)/dl
 else
 DL_DIR?=		$(ADK_DL_DIR)
 endif
-TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
+TOOLCHAIN_DIR:=		${BASE_DIR}/toolchain_${GNU_HOST_NAME}
+HOST_BUILD_DIR:=	${BASE_DIR}/host_build_${GNU_HOST_NAME}
 
-# PFX dirs for cleandir
+# dirs for cleandir
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
 BUILD_DIR_PFX:=		$(BASE_DIR)/build_*
 STAGING_PKG_DIR_PFX:=	${BASE_DIR}/pkg_*
 STAGING_TARGET_DIR_PFX:=${BASE_DIR}/target_*
-TOOLCHAIN_BUILD_DIR_PFX=$(BASE_DIR)/toolchain_build_*
+TOOLCHAIN_DIR_PFX=	$(BASE_DIR)/toolchain_*
 STAGING_HOST_DIR_PFX:=	${BASE_DIR}/host_*
 TARGET_DIR_PFX:=	$(BASE_DIR)/root_*
 
@@ -36,7 +37,7 @@ FW_DIR:=		$(BASE_DIR)/firmware/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIB
 BUILD_DIR:=		${BASE_DIR}/build_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}
-STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
+STAGING_HOST2TARGET:=	../../target_${CPU_ARCH}_${ADK_TARGET_LIBC}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}
 else
 TARGET_DIR:=		$(BASE_DIR)/root_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
@@ -44,7 +45,7 @@ FW_DIR:=		$(BASE_DIR)/firmware/${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIB
 BUILD_DIR:=		${BASE_DIR}/build_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 STAGING_TARGET_DIR:=	${BASE_DIR}/target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 STAGING_PKG_DIR:=	${BASE_DIR}/pkg_${ADK_TARGET_SYSTEM}_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
-STAGING_HOST2TARGET:=	../target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
+STAGING_HOST2TARGET:=	../../target_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 TOOLCHAIN_BUILD_DIR=	$(BASE_DIR)/toolchain_build_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_ABI}
 endif
 
@@ -52,15 +53,9 @@ PACKAGE_DIR:=		$(FW_DIR)/packages
 SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
 
 # PATH variables
-TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-HOST_PATH=		${SCRIPT_DIR}:${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-AUTOTOOL_PATH=		${STAGING_HOST_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
-
-ifeq ($(ADK_TARGET_ABI_X32),y)
-GNU_TARGET_NAME=	$(CPU_ARCH)-x32-linux-$(ADK_TARGET_SUFFIX)
-else
-GNU_TARGET_NAME=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
-endif
+TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+AUTOTOOL_PATH=		${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 
 ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
 GCC_CHECK:=		GCC_HONOUR_COPTS=2
@@ -68,18 +63,28 @@ else
 GCC_CHECK:=
 endif
 
-TARGET_CROSS:=		$(STAGING_HOST_DIR)/bin/$(GNU_TARGET_NAME)-
+GNU_TARGET_NAME:=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
+TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
-CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} --host=${GNU_TARGET_NAME} --target=${GNU_TARGET_NAME}
+CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
+			--host=${GNU_TARGET_NAME} \
+			--target=${GNU_TARGET_NAME}
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
-TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
+TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
-# target compiler flags
+# target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
+TARGET_AR:=		${TARGET_COMPILER_PREFIX}ar
+TARGET_RANLIB:=		${TARGET_COMPILER_PREFIX}ranlib
+
+ifneq ($(ADK_TARGET_ABI_CFLAGS),)
+TARGET_CC+=		$(ADK_TARGET_ABI_CFLAGS)
+TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
+endif
 
 MODE_FLAGS:=
 ifeq ($(ADK_LINUX_ARM),y)
@@ -91,13 +96,12 @@ endif
 endif
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(ADK_TARGET_ABI_CFLAGS) $(MODE_FLAGS)
-TARGET_CFLAGS_LIBC:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts $(TARGET_OPTIMIZATION) $(MODE_FLAGS)
-TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident $(MODE_FLAGS)
+TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
+TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
-			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib \
-			$(ADK_TARGET_ABI_LDFLAGS)
+			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
+
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
 # needed for musl ppc 
@@ -123,13 +127,17 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
-TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 # always add debug information
 TARGET_CFLAGS+=		-g3
 endif
 
+ifneq ($(MODE_FLAGS),)
+TARGET_CFLAGS+=		$(MODE_CFLAGS)
+TARGET_CXXFLAGS+=	$(MODE_CFLAGS)
+endif
 
 # A nifty macro to make testing gcc features easier (from uClibc project)
 check_gcc=$(shell \
@@ -139,7 +147,6 @@ check_gcc=$(shell \
 CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
 
 # host compiler flags
-CXX_FOR_BUILD?=		g++
 CPPFLAGS_FOR_BUILD?=	-I$(STAGING_HOST_DIR)/usr/include
 CFLAGS_FOR_BUILD=	-O2 -Wall $(CF_FOR_BUILD)
 CXXFLAGS_FOR_BUILD?=    -O2 -Wall
@@ -150,9 +157,11 @@ PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			PATH=${HOST_PATH} sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ARCH} \
-			KERNEL_PATH=${LINUX_DIR} KERNELDIR=${LINUX_DIR} KERNEL_DIR=${LINUX_DIR} \
+			KERNEL_PATH=${LINUX_DIR} \
+			KERNELDIR=${LINUX_DIR} \
+			KERNEL_DIR=${LINUX_DIR} \
 			PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-			LDFLAGS="$(ADK_TARGET_KERNEL_LDFLAGS)" CFLAGS_MODULE="-fhonour-copts" V=1
+			CFLAGS_MODULE="-fhonour-copts" V=1
 
 TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			AR='$(TARGET_CROSS)ar' \
@@ -169,9 +178,10 @@ TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			CROSS_COMPILE='$(TARGET_CROSS)'
 
 HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${CC_FOR_BUILD}' \
-			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CXX_FOR_BUILD='${CXX_FOR_BUILD}' \
+			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CFLAGS_FOR_BUILD='${CFLAGS_FOR_BUILD}' \
+			CXXFLAGS_FOR_BUILD='${CXXFLAGS_FOR_BUILD}' \
 			LDFLAGS_FOR_BUILD='${LDFLAGS_FOR_BUILD}'
 
 PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))
@@ -198,25 +208,25 @@ RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/r
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
 	
-EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
+EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				cat $$file | cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				$(STAGING_HOST_DIR)/usr/bin/xz -dc $$file | tar -xf - ;; \
+				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -ivd -H zip ;; \
+				cat $$file | cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

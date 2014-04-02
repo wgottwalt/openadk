@@ -16,8 +16,14 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFOPTS+=          	--with-arch=armv6
 endif
 
-ifneq ($(strip $(ADK_LINUX_64)$(ADK_TARGET_KERNEL64)),)
+ifneq ($(ADK_LINUX_64),)
 CONFOPTS+=		--enable-64-bit-bfd
+endif
+
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+CONFOPTS+=		--disable-multilib
+else
+CONFOPTS+=		--enable-multilib
 endif
 
 ifeq (${ADK_MAKE_PARALLEL},y)
@@ -28,10 +34,9 @@ $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
-		--prefix=$(STAGING_HOST_DIR) \
+		--prefix=$(TOOLCHAIN_DIR)/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--with-sysroot=$(STAGING_TARGET_DIR) \
-		--disable-multilib \
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-nls \
@@ -49,7 +54,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
 	# needed on hosts without readelf, but strange things happen on Cygwin.
 ifeq (${OStype},Darwin)
-	$(CP) $(WRKBUILD)/binutils/readelf $(STAGING_HOST_DIR)/bin
+	$(CP) $(WRKBUILD)/binutils/readelf $(TOOLCHAIN_DIR)/usr/bin
 endif
 	touch $@
 

@@ -1,0 +1,25 @@
+--- libtirpc-0.2.3.orig/tirpc/rpc/pmap_clnt.h	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/tirpc/rpc/pmap_clnt.h	2014-03-22 13:20:52.000000000 +0100
+@@ -63,9 +63,10 @@
+ 
+ #ifndef _RPC_PMAP_CLNT_H_
+ #define _RPC_PMAP_CLNT_H_
+-#include <sys/cdefs.h>
+ 
+-__BEGIN_DECLS
++#ifdef __cplusplus
++extern "C" {
++#endif
+ extern bool_t		pmap_set(u_long, u_long, int, int);
+ extern bool_t		pmap_unset(u_long, u_long);
+ extern struct pmaplist	*pmap_getmaps(struct sockaddr_in *);
+@@ -80,6 +81,8 @@ extern enum clnt_stat	clnt_broadcast(u_l
+ 				       resultproc_t);
+ extern u_short		pmap_getport(struct sockaddr_in *,
+ 				     u_long, u_long, u_int);
+-__END_DECLS
++#ifdef __cplusplus
++}
++#endif
+ 
+ #endif /* !_RPC_PMAP_CLNT_H_ */

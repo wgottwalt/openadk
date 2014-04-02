@@ -61,7 +61,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install-rpi.sh /dev/sdb $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
@@ -70,12 +70,18 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(FW_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
         @echo 'qemu-system-arm -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user'
 else
@@ -88,7 +94,7 @@ ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif

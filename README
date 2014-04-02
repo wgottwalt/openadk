@@ -5,12 +5,12 @@ This is a menu based buildsystem for your home made embedded Linux system.
 
 Before you can start you need to install some tools: 
 - bash
-- gcc 
+- gcc or clang
+- g++ or clang++
 - binutils 
 - GNU make
 - GNU awk
 - GNU sed
-- findutils (find, xargs)
 - tar
 - patch
 - gzip

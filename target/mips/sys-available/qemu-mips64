@@ -1,13 +1,13 @@
 config ADK_TARGET_SYSTEM_QEMU_MIPS64
-	bool "Qemu Emulator (mips64 big endian)"
+	bool "Qemu Emulator (mips64 big endian o32 abi)"
 	select ADK_mips
 	select ADK_big
+	select ADK_o32
 	select ADK_qemu_mips64
 	select ADK_CPU_MIPS64
 	select ADK_LINUX_64
 	select ADK_HARDWARE_QEMU
 	select ADK_TARGET_KERNEL_VMLINUZ
-	select ADK_USE_KERNEL_MINICONFIG
 	help
-	 Qemu support for mips64 big endian architecture.
+	 Qemu support for mips64 big endian architecture with o32 abi.
 

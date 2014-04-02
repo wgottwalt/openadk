@@ -195,10 +195,10 @@ endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
-	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
 ifeq ($(ADK_DEBUG_STRIP),y)
-	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
 ifeq (${ADK_LEAVE_ETC_ALONE}$(filter force_etc,$(7)),y)
 	-rm -rf $${IDIR_$(1)}/etc
@@ -314,7 +314,7 @@ clean-targets:
 clean:
 	@$(CMD_TRACE) "cleaning... "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
-	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*
+	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}${PKG_VERSION}
 
 distclean: clean
 	rm -f ${FULLDISTFILES}

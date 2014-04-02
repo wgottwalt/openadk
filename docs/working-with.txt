@@ -1,0 +1,25 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Working with OpenADK
+====================
+
+This section explains how you can customize OpenADK to fit your
+needs.
+
+include::configure.txt[]
+
+include::make-tips.txt[]
+
+include::customize.txt[]
+
+include::common-usage.txt[]
+
+Hacking OpenADK
+---------------
+
+If OpenADK does not yet fit all your requirements, you may be
+interested in hacking it to add:
+
+* new packages: refer to the xref:adding-packages[Developer guide]
+

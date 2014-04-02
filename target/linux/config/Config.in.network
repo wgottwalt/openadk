@@ -1,13 +1,5 @@
 menu "Network support"
 
-config ADK_KERNEL_INET
-	boolean
-	default y
-
-config ADK_KERNEL_NET_CORE
-	boolean
-	default y
-
 config ADK_KERNEL_IP_FIB_HASH
 	boolean
 	default y

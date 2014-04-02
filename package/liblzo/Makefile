@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		95380bd4081f85ef08c5209f4107e9f8
 PKG_DESCR:=		a real-time data compression library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo
 PKG_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
 PKG_LIBNAME:=		liblzo

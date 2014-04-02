@@ -1,0 +1,10 @@
+--- libtirpc-0.2.3.orig/src/crypt_client.c	2013-02-13 16:13:59.000000000 +0100
++++ libtirpc-0.2.3/src/crypt_client.c	2014-03-22 13:20:53.000000000 +0100
+@@ -30,7 +30,6 @@
+  * SUCH DAMAGE.
+  */
+ 
+-#include <sys/cdefs.h>
+ 
+ #include <err.h>
+ #include <sys/types.h>

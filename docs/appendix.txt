@@ -1,0 +1,8 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Appendix
+========
+
+include::network-configuration.txt[]
+

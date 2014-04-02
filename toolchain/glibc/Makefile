@@ -5,13 +5,13 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 
 # glibc does not compile with Os
-TARGET_CFLAGS_LIBC:= $(subst Os,O2,$(TARGET_CFLAGS_LIBC))
+TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS_LIBC+=	-O2
+TARGET_CFLAGS+=		-O2
 endif
 
 # ssp partially supported
-TARGET_CFLAGS_LIBC:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS_LIBC))
+TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
@@ -64,19 +64,18 @@ $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
 	mkdir -p ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
-	${INSTALL_DATA} ${WRKBUILD}/nscd/nscd.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
 	touch $@
 
 $(WRKBUILD)/.fixup:
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
-	-find $(STAGING_TARGET_DIR) -type f -name \*_pic\* -delete
 	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
 	rm -rf $(STAGING_TARGET_DIR)/usr/lib/gconv
 ifeq ($(ADK_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
-	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_TARGET_DIR)
-	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(STAGING_HOST_DIR)/bin $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/
+	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
+		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
+	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr/bin
 endif
 	touch $@
 

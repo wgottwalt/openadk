@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
-PKG_VERSION:=		2.10.2
+PKG_VERSION:=		2.11.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		109e753aecafe487207b425dd46e6ee9
+PKG_MD5SUM:=		25fe7dd05f81cc0755131beecee046fd
 PKG_DESCR:=		Postfix MTA
 PKG_SECTION:=		mail
 PKG_BUILDDEP:=		tinycdb

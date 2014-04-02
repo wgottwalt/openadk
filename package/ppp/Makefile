@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.5
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		4621bc56167b6953ec4071043fe0ec57
 PKG_DESCR:=		Point-to-Point Protocol software
 PKG_SECTION:=		ppp
@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://ppp.samba.org/
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
 PKG_MULTI:=		1
-
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		PPP PPP_MOD_PPPOA PPP_MOD_PPPOE PPP_MOD_RADIUS
 PKG_SUBPKGS+=		PPP_MOD_CHAT PPP_MOD_PPPDUMP PPP_MOD_PPPSTATS PPP_MOD_PPPUMTS

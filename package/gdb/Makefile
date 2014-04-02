@@ -11,8 +11,6 @@ PKG_DEPENDS:=		libthread-db libncurses libexpat libgcc zlib
 PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -22,27 +20,28 @@ TARGET_CFLAGS+=         -static
 CONFIGURE_ARGS+=	--enable-static
 endif
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
-CONFIGURE_ARGS+=	--without-uiout --enable-gdbmi \
-			--disable-tui --disable-gdbtk --without-x \
-			--without-included-gettext --disable-sim \
-			--with-curses --disable-werror \
-			--without-auto-load-safe-path \
+CONFIGURE_ARGS+=	--without-uiout \
+			--disable-tui \
+			--disable-gdbtk \
+			--without-x \
+			--disable-sim \
+			--disable-werror \
 			--disable-gdbserver \
-			--without-python
+			--without-python \
+			--without-included-gettext \
+			--without-auto-load-safe-path \
+			--with-curses \
+			--enable-gdbmi
+
 XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
-
-post-extract:
-	-mv $(STAGING_TARGET_DIR)/usr/lib/libiberty.a $(STAGING_TARGET_DIR)/usr/lib/libiberty.a.bak
 
 gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
 	# shipped libbfd conflicts with system wide one
 	rm -f ${WRKINST}/usr/lib/libbfd*
-	-mv $(STAGING_TARGET_DIR)/usr/lib/libiberty.a.bak $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,51 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[requirement]]
+System requirements
+-------------------
+
+OpenADK is designed to run on Linux systems. But there is basic 
+support to run on MacOS X Maverick, Windows 7 with Cygwin, OpenBSD,
+NetBSD and FreeBSD. Main development happens on Debian/GNU Linux 7
+and MacOS X Maverick. The other host platforms are occasionally 
+tested. 
+
+OpenADK detects the host system and displays only the software
+packages, which are known to be cross-compilable on the used host.
+For example OpenJDK7 is only cross-compilable on a Linux host.
+
+OpenADK needs some software to be already installed on the host
+system; here is the list of the mandatory packages,
+package names may vary between host systems.
+
+* Build tools:
+
+** +bash+
+** +binutils+
+** +C compiler (gcc or clang)+ 
+** `C++ compiler (g++ or clang++)`
+** +GNU sed+
+** +GNU awk+
+** +GNU make+
+** +patch+
+** +gzip+
+** +perl+
+** +tar+
+** +wget+
+** +ncurses5 development files+
+** +zlib development files+ 
+** +libc development files+
+
+There is a check for the required versions of these tools in advance,
+though. To re-issue the checks, use +make prereq+.
+
+For some packages there are some optional packages required. OpenADK
+will check for the required tools in advance, when a specific package is
+choosen. For example XBMC needs java installed on the host system.
+OpenADK tries to avoid any optional required host tools and will try to
+build them when needed.
+
+For some host systems you can try to use ./scripts/adkprepare.sh to
+install all required software. You need to run the script as root, it
+will use the package management of your host to install the software. 

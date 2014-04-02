@@ -21,6 +21,12 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC),y)
 	@echo 'qemu-system-sparc -M SS-5 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img -append "root=/dev/sda1"'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: $(FW_DIR)/$(INITRAMFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)

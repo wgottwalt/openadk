@@ -3,7 +3,6 @@ config ADK_TARGET_SYSTEM_FON_FON2100
 	select ADK_mips
 	select ADK_big
 	select ADK_fon_fon2100
-	select ADK_KERNEL_ATHEROS_AR231X
 	select ADK_TARGET_WITH_MTD
 	select ADK_TARGET_WITH_AHB
 	select ADK_TARGET_KERNEL_VMLINUZ

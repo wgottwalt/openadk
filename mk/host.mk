@@ -1,10 +1,16 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+# This is where all package operation is done in
+ifneq (,$(findstring host,$(MAKECMDGOALS)))
+WRKDIR?=		${HOST_BUILD_DIR}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
+endif
+
 HOST_CONFIGURE_ENV+=	AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig' \
 			PATH='${HOST_PATH}' \
+			CC='$(strip ${CC_FOR_BUILD})' \
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
 			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
@@ -23,6 +29,7 @@ HOST_INSTALL_TARGET?=	install
 
 HOST_MAKE_ENV+=		PATH='${HOST_PATH}' \
 			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig' \
+			CC='$(strip ${CC_FOR_BUILD})' \
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
 			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
@@ -30,7 +37,7 @@ HOST_MAKE_ENV+=		PATH='${HOST_PATH}' \
 HOST_MAKE_FLAGS+=	${HOST_XAKE_FLAGS} V=1
 HOST_FAKE_FLAGS+=	${HOST_XAKE_FLAGS}
 
-HOST_WRKINST=		${WRKDIR}/host
+HOST_WRKINST=		${WRKDIR}/fake
 
 _HOST_EXTRACT_COOKIE=	${WRKDIST}/.extract_done
 _HOST_PATCH_COOKIE=	${WRKDIST}/.prepared
@@ -54,7 +61,7 @@ hostfake: ${_HOST_FAKE_COOKIE}
 define HOST_template
 ALL_PKGOPTS+=	$(1)
 PKGNAME_$(1)=	$(2)
-HOSTDIR_$(1)=	$(WRKDIR)/host
+HOSTDIR_$(1)=	$(WRKDIR)/fake
 ALL_HOSTDIRS+=	$${HOSTDIR_$(1)}
 ALL_HOSTINST+=	$(2)-hostinstall
 
@@ -63,4 +70,4 @@ $$(HOSTDIR_$(1)): ${_HOST_PATCH_COOKIE} ${_HOST_FAKE_COOKIE}
 endef
 
 .PHONY:	all hostextract hostpatch hostconfigure \
-	hostbuild hostpackage hostfake
+	hostbuild hostpackage hostfake hostclean

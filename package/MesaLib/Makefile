@@ -4,17 +4,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		MesaLib
-PKG_VERSION:=		9.2.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		df801a975045150790e10e2ccf32193f
+PKG_VERSION:=		10.1.0
+PKG_SUBVER:=		10.1
+PKG_RELEASE:=		3
+PKG_MD5SUM:=		08e796ec7122aa299d32d4f67a254315
 PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
 PKG_DEPENDS+=		libxml2 libxml2-python
-PKG_BUILDDEP:=		autotool python2 libxml2 libXdamage libXfixes libXxf86vm libdrm
-PKG_BUILDDEP+=		dri2proto glproto expat libXext
+PKG_BUILDDEP:=		autotool python2 libxml2 libXdamage libXfixes
+PKG_BUILDDEP+=		libXxf86vm libdrm dri2proto glproto expat libXext
+PKG_BUILDDEP+=		eudev dri3proto presentproto xcb-proto libxcb
+PKG_BUILDDEP+=		libxshmfence
 PKG_URL:=		http://www.mesa3d.org/
-PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
+PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_SUBVER}/
 PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		mesalib
 PKG_OPTS:=		dev
@@ -57,6 +60,8 @@ XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
 mesalib-install:
 	$(INSTALL_DIR) $(IDIR_MESALIB)/usr/lib/dri
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
+		$(IDIR_MESALIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libglapi.so* \
 		$(IDIR_MESALIB)/usr/lib
 	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
 		${IDIR_MESALIB}/usr/lib/dri/

@@ -1,0 +1,135 @@
+[[package-reference]]
+
++package+ Reference
+~~~~~~~~~~~~~~~~~~~
+
+The list of variables that can be set in a +Makefile+ to give metadata
+information is: 
+
+* +PKG_NAME+, mandatory, must contain the name of the package.
+
+* +PKG_VERSION+, mandatory, must contain the version of the package.
+
+* +PKG_RELEASE+, mandatory, must contain the OpenADK specific release of the package.
+
+* +PKG_MD5SUM+, mandatory, must contain the MD5 hash of the package, will be used
+  to check if a download of a package is complete.
+
+* +PKG_SECTION+, mandatory, must contain the OpenADK specific section, see package/section.lst.
+
+* +PKG_RELEASE+, mandatory, must contain an one line summary of the package description.
+
+* +PKG_URL+, optional, may contain the url to the homepage of the package
+
+* +PKG_SITES+, mandatory, must contain the download url for the package, multiple entries
+  with space separated, are allowed. Only HTTP/HTTPS or FTP URLS are allowed.
+  A backup site (http://www.openadk.org/distfiles) is always used, if the package site is
+  not available. There is no direct support for cvs/svn/git/hg/bzr repositories, because 
+  building OpenADK behind a HTTP proxy should be working without any configuration hassle.
+  There are also some predefined mirror sites in +mk/mirrors.mk+,
+  which can be used.
+  Example: PKG_SITES:=		+${MASTER_SITE_GNU:=foo/}+
+
+* +DISTFILES+ optional, may contain the name of the tarball of
+  the package. If +DISTFILES+ is not specified, it defaults to +PKG_NAME-PKG_VERSION.tar.gz+. 
+  Example: DISTFILES=		+${PKG_NAME}${PKG_VERSION}.tar.xz+
+
+* +NO_DISTFILES+ optional, may be set to 1, to disable fetching of any archives.
+  Provide the source code for the package in +package/<pkgname>/src+, which will be
+  automatically copied to the WRKBUILD/WRKSRC directory.
+
+* +PKG_BUILDDEP+ optional, lists the build time dependencies (in terms of package
+  directory name, see +package/+) that are required for the current target package to
+  compile. These dependencies are guaranteed to be compiled and
+  installed before the configuration of the current package starts.
+
+* +PKG_DEPENDS+ optional, lists the runtime dependencies that are required to
+  run the software package on the target. It conatins a list of package names,
+  which might be different to the package directory name. See what is used
+  in PKG_template, to find out the package name used here.
+
+* +PKG_NOPARALLEL+ optional, may be set to 1, to disable parallel building of the
+  package via make -jn, n=4 is default, but can be changed in +Global Settings+ in the
+  menu based configuration.
+
+* +PKG_OPTS+ optional, may be set to following values: 
+     +dev+ create a development package automatically, containing header files and +.pc+ files. 
+            Only useful for library packages, when you want to compile on the target.
+     +devonly+ only creates a development package with header files, normally not needed on
+   	      the target.
+     +noscripts+ do not automatically install *-config and other build related scripts into
+     +STAGING_TARGET_DIR/scripts+, required for automake/autoconf package
+     +noremove+ do not automatically remove package files from +STAGING_TARGET_DIR+
+
+* +PKG_NEED_CXX+ optional, package need C++ compiler
+
+* +PKG_CXX+ optional, package can use either `uClibc++` or `libstdc++`
+
+The recommended way to define these variables is to use the following
+syntax:
+
+----------------------
+PKG_VERSION:=		2.11
+----------------------
+
+Or for lines longer than 80 characters use:
+----------------------
+PKG_DEPENDS:=		foo bar baz
+PKG_DEPENDS+=		muh maeh
+----------------------
+
+
+The variables that define what should be performed at the
+different steps of the configure, build and install process.
+
+* +CONFIG_STYLE+ either manual, auto or minimal
+
+* +CONFIGURE_ARGS+ add --enable-foo/--disable-foo to configure
+
+* +CONFIGURE_ENV+ add additional environment variables to configure step
+
+* +HOST_STYLE+ either manual or auto
+
+* +HOST_CONFIGURE_ARGS+ add --enable-foo/--disable-foo to host configure
+
+* +HOST_CONFIGURE_ENV+ add additional environment variables to the host configure step
+
+* +AUTOTOOL_STYLE+ either autoreconf, autoconf or bootstrap
+
+* +BUILD_STYLE+ either manual or auto
+
+* +MAKE_ENV+ add additional variables to build step
+
+* +MAKE_FLAGS+ add additinal make flags to build step
+
+* +FAKE_FLAGS+ add additional make flags to fake install step
+
+* +XAKE_FLAGS+ add additional make flags to build and fake install step
+
+* +INSTALL_STYLE+ either manual or auto
+
+* +CONFIGURE_PROG+ overwrite default configure programm
+
+* +MAKE_FILE+ overwrite default Makefile
+
+* +ALL_TARGET+ overwrite default build target
+
+* +INSTALL_TARGET+ overwrite default install target
+
+The variables to add or overwrite preprocessor, compiler and linker flags:
+
+* +TARGET_CPPFLAGS+ flags for the preprocessor
+
+* +TARGET_CFLAGS+ flags for the compiler
+
+* +TARGET_LDFLAGS+ flags for the linker
+
+* +TARGET_CXXFLAGS+ flags for the C++ compiler
+
+* +CPPFLAGS_FOR_BUILD+ flags used for host preprocessing
+
+* +CFLAGS_FOR_BUILD+ flags used for host compiling
+
+* +LDFLAGS_FOR_BUILD+ flags used for host linking
+
+

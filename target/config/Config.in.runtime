@@ -37,30 +37,57 @@ config ADK_RUNTIME_TIMEZONE
 	  Predefine the timezone for the embedded system.
 
 choice
-prompt "Console output on embedded system"
-default ADK_RUNTIME_CONSOLE_BOTH if ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-default ADK_RUNTIME_CONSOLE_VGA if ADK_TARGET_SYSTEM_RASPBERRY_PI || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-default ADK_RUNTIME_CONSOLE_SERIAL
+prompt "Start getty or shell after bootup"
+default ADK_RUNTIME_SHELL if ADK_PKG_TEST
+default ADK_RUNTIME_GETTY
 
-config ADK_RUNTIME_CONSOLE_VGA
-	bool "console output on VGA"
+config ADK_RUNTIME_GETTY
+	boolean "start a getty after bootup"
 	help
-          Start getty on VGA console. (tty1-tty6)
+	  Start a getty after bootup.
 
-config ADK_RUNTIME_CONSOLE_SERIAL
-	bool "console output on serial"
+config ADK_RUNTIME_SHELL
+	boolean "start a shell after bootup"
 	help
-	  Start getty on serial console.
-
-config ADK_RUNTIME_CONSOLE_BOTH
-	bool "console output on VGA and serial"
-	help
-	  Start getty on VGA console and serial device.
+	  Start a shell after bootup
 
 endchoice
 
+config ADK_RUNTIME_GETTY_VGA
+	boolean "start getty on VGA console (tty1-tty6)"
+	depends on ADK_RUNTIME_GETTY
+	default y if ADK_TARGET_QEMU_WITH_GRAPHIC
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default n
+	help
+          Start getty on VGA console. (tty1-tty6)
+
+config ADK_RUNTIME_GETTY_SERIAL
+	boolean "start getty on serial console"
+	depends on ADK_RUNTIME_GETTY
+	default n if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default n if ADK_TARGET_SYSTEM_IBM_X40
+	default n if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default y
+	help
+	  Start getty on serial console.
+
+config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
+	string
+	default "hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
+	default "ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	default "ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	default "ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
+	default "ttymxc0" if ADK_TARGET_SYSTEM_CUBOX_I
+	default "ttyS0"
+
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
 	string
+	default "9600" if ADK_TARGET_SYSTEM_QEMU_PPC
 	default "9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP	
 	default "115200"
@@ -159,13 +186,13 @@ depends on ADK_SIMPLE_NETWORK_CONFIG
 
 choice
 	prompt "Type"
-	default SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC
-
-config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC
-	bool "NIC / DHCP"
+	default SIMPLE_NETWORK_CONFIG_ETH0_TYPE_MANUAL
 
 config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL
 	bool "NIC / manual IP"
+
+config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC
+	bool "NIC / DHCP"
 
 config SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
 	bool "Bridge with IP"
@@ -180,7 +207,7 @@ endchoice
 config SIMPLE_NETWORK_CONFIG_ETH0_IP
 	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
 	string "eth0 IP Address"
-	default "192.168.1.2"
+	default "10.0.2.15"
 
 config SIMPLE_NETWORK_CONFIG_ETH0_NM
 	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
@@ -190,7 +217,7 @@ config SIMPLE_NETWORK_CONFIG_ETH0_NM
 config SIMPLE_NETWORK_CONFIG_ETH0_GW
 	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL
 	string "eth0 Gateway"
-	default "192.168.1.1"
+	default "10.0.2.2"
 
 config SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE
 	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
@@ -282,7 +309,7 @@ depends on ADK_SIMPLE_NETWORK_CONFIG
 
 config SIMPLE_NETWORK_CONFIG_RESOLV
 	string "Nameserver"
-	default "192.168.1.1"
+	default "10.0.2.3"
 
 endmenu
 

@@ -30,7 +30,7 @@ config ADK_KERNEL_EARLY_PRINTK
 	default n
 
 config ADK_KERNEL_PRINTK
-	prompt "Enable printk to save space and quieten bootup"
+	prompt "printk support (disable to save space and quieten bootup)"
 	boolean
 	select ADK_KERNEL_EARLY_PRINTK
 	default y
@@ -39,7 +39,7 @@ config ADK_KERNEL_PRINTK
 	  Disable printk to save space and quieten bootup.
 
 config ADK_KERNEL_PRINTK_TIME
-	prompt "Enable timing information for printk"
+	prompt "timing information for printk"
 	boolean
 	depends on ADK_KERNEL_PRINTK
 	default n

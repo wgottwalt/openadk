@@ -5,10 +5,8 @@ config ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_mikrotik_rb532
 	select ADK_TARGET_WITH_MINIPCI
 	select ADK_TARGET_WITH_WATCHDOG
-	select ADK_TARGET_WITH_CF
 	select ADK_TARGET_WITH_NAND
 	select ADK_TARGET_WITH_LEDS
-	select ADK_KERNEL_MIKROTIK_RB532
 	depends on ADK_BROKEN
 	help
 	  Support for Mikrotik RB532.

@@ -1,0 +1,10 @@
+--- libpciaccess-0.13.2.orig/src/solx_devfs.c	2013-07-21 00:54:34.000000000 +0200
++++ libpciaccess-0.13.2/src/solx_devfs.c	2014-03-24 13:26:10.496152442 +0100
+@@ -911,6 +911,7 @@ pci_device_solx_devfs_open_legacy_io(str
+     if (sysi86(SI86V86, V86SC_IOPL, PS_IOPL) == 0) {
+ 	ret->base = base;
+ 	ret->size = size;
++	ret->is_legacy = 1;
+ 	return ret;
+     }
+ #endif

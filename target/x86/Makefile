@@ -14,7 +14,6 @@ imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "To install everything to CompactFlash use scripts/genext2.sh"
 endif
-
 ifeq ($(ADK_TARGET_FS),cf)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -41,6 +40,12 @@ ifeq ($(ADK_HARDWARE_VBOX),y)
 	@echo "Use following command to create a VirtualBox Image:"
 	@echo "./scripts/create.sh -T vdi vbox-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)

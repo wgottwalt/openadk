@@ -1,7 +1,3 @@
-config ADK_TOOLCHAIN_GCC_SJLJ
-	boolean
-	default n
-
 menu "Toolchain settings"
 
 config ADK_TOOLCHAIN_GDB
@@ -17,7 +13,7 @@ config ADK_TOOLCHAIN_GCC_CXX
 config ADK_TOOLCHAIN_GCC_SSP
 	prompt "Enable Stack Smashing Protection in GCC"
 	boolean
-	default n
+	default y
 
 config ADK_TOOLCHAIN_GCC_USE_SSP
 	prompt "Use SSP for all packages"
@@ -28,7 +24,7 @@ config ADK_TOOLCHAIN_GCC_USE_SSP
 config ADK_TOOLCHAIN_GCC_LTO
 	prompt "Enable Link Time Optimization in GCC"
 	boolean
-	default n
+	default y
 
 config ADK_TOOLCHAIN_GCC_USE_LTO
 	prompt "Use Link Time Optimization for all packages"

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		olsrd
-PKG_VERSION:=		0.6.0
+PKG_VERSION:=		0.6.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		84e9295457cab50539f776118939b343
+PKG_MD5SUM:=		65181a5280391d69411908c186fd0c1f
 PKG_DESCR:=		Optimized Link State Routing protocol
 PKG_SECTION:=		wifi
 PKG_URL:=		http://www.olsr.org/
@@ -33,19 +33,17 @@ $(eval $(call PKG_template,OLSRD,olsrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,OLSRD_MOD_DYN_GW,olsrd-mod-dyn-gw,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OLSRD_MOD_HTTPINFO,olsrd-mod-httpinfo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OLSRD_MOD_NAMESERVICE,olsrd-mod-nameservice,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OLSRD_MOD_TAS,olsrd-mod-tas,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,OLSRD_MOD_DYN_GW,dyn_gw))
 $(eval $(call PKG_mod_template,OLSRD_MOD_HTTPINFO,httpinfo))
 $(eval $(call PKG_mod_template,OLSRD_MOD_NAMESERVICE,nameservice))
-$(eval $(call PKG_mod_template,OLSRD_MOD_TAS,tas))
 
 CONFIG_STYLE:=          manual
 
-TARGET_CFLAGS+=		-fPIC
+TARGET_CFLAGS+=		-fPIC -D_GNU_SOURCE
 ALL_TARGET+=		libs
 INSTALL_TARGET+=	install_libs
-MAKE_ENV+=		OS="linux" NODEBUG=1 STRIP="true" OFLAGS="${TARGET_CFLAGS}"
+MAKE_ENV+=		OS="linux" DEBUG=0 STRIP="true" OFLAGS="${TARGET_CFLAGS}" prefix="/usr"
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_OLSRD}/usr/sbin ${IDIR_OLSRD}/etc

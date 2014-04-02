@@ -1,0 +1,22 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[runtime-debugging]]
+
+Details on debugging your newly created firmware
+------------------------------------------------
+
+strace
+~~~~~~
+
+gdbserver
+~~~~~~~~~
+
+gdb
+~~~
+
+kernel module debugging
+~~~~~~~~~~~~~~~~~~~~~~~
+
+kernel debugging
+~~~~~~~~~~~~~~~~

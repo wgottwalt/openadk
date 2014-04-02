@@ -1,6 +1,16 @@
 --- mozilla-release.orig/media/mtransport/third_party/nICEr/src/stun/addrs.c	2013-12-05 17:07:48.000000000 +0100
-+++ mozilla-release/media/mtransport/third_party/nICEr/src/stun/addrs.c	2014-02-05 07:19:01.000000000 +0100
-@@ -53,7 +53,9 @@ static char *RCSSTRING __UNUSED__="$Id: 
++++ mozilla-release/media/mtransport/third_party/nICEr/src/stun/addrs.c	2014-03-16 18:41:03.000000000 +0100
+@@ -45,7 +45,9 @@ static char *RCSSTRING __UNUSED__="$Id:
+ #include <sys/param.h>
+ #include <sys/socket.h>
+ #ifndef ANDROID
++#ifdef __GLIBC__
+ #include <sys/sysctl.h>
++#endif
+ #include <sys/syslog.h>
+ #else
+ #include <syslog.h>
+@@ -53,7 +55,9 @@ static char *RCSSTRING __UNUSED__="$Id:
  #undef __unused
  #include <linux/sysctl.h>
  #endif
@@ -10,7 +20,7 @@
  #ifndef LINUX
  #if !defined(__OpenBSD__) && !defined(__NetBSD__)
  #include <net/if_var.h>
-@@ -61,14 +63,17 @@ static char *RCSSTRING __UNUSED__="$Id: 
+@@ -61,14 +65,17 @@ static char *RCSSTRING __UNUSED__="$Id:
  #include <net/if_dl.h>
  #include <net/if_types.h>
  #include <sys/sockio.h>

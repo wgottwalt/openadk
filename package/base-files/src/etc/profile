@@ -12,3 +12,5 @@ cat /etc/banner 2>&-
 alias l='ls -lF'
 alias la='ls -A'
 alias ll='ls -alF'
+alias ro='mount -o remount,ro /'
+alias rw='mount -o remount,rw /'

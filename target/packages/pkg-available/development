@@ -34,7 +34,7 @@ config ADK_PKG_DEVELOPMENT
 	select ADK_PACKAGE_GDB
 	select ADK_PACKAGE_PARTED
 	select ADK_PACKAGE_SFDISK
-	select ADK_APCKAGE_MKE2FS
+	select ADK_PACKAGE_MKE2FS
 	select ADK_PACKAGE_DOSFSTOOLS
 	help
 	  After bootstrapping a Linux system you might want to

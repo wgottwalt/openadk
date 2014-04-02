@@ -4,19 +4,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.12.2
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		a95c896fbe8322c3c8d518a13eb74c7a
+PKG_VERSION:=		1.15.0
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		faf04f1213f9a476997a774254b3abce
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
 PKG_DEPENDS+=		libfontenc xkeyboard-config xkbcomp libxau libxaw
 PKG_DEPENDS+=		libxmu libxpm libxrender libxt libxxf86dga libxext
 PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11 libxcb libgcc librt
+PKG_DEPENDS+=		libxshmfence libfreetype libfontenc
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
 PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
+PKG_BUILDDEP+=		xineramaproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
@@ -28,7 +30,7 @@ PKG_ARCH_DEPENDS:=	!m68k
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
 PKGFS_WITH_DRI:=		mesalib
 PKGFD_WITH_DRI:=		enable DRI/DRI2 support
-PKGFB_WITH_DRI:=		xf86driproto glproto dri2proto MesaLib
+PKGFB_WITH_DRI:=		xf86driproto glproto MesaLib
 PKGFD_WITH_KDRIVE:=		Build Kdrive Xfbdev server
 
 PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_CRYPTO
@@ -43,7 +45,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XORG_SERVER,xorg-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D__gid_t=gid_t -D__uid_t=uid_t
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
 CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
@@ -57,9 +59,10 @@ CONFIGURE_ENV+=		V=1
 CONFIGURE_ARGS+=	--enable-dga \
 			--enable-xorg \
 			--enable-xv \
-			--enable-xaa \
 			--enable-vgahw \
 			--enable-dpms \
+			--enable-xinerama \
+			--disable-docs \
 			--disable-aiglx \
 			--disable-config-hal \
 			--disable-config-udev \
@@ -68,7 +71,6 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--disable-xf86bigfont \
 			--disable-xf86vidmode \
 			--disable-xfake \
-			--disable-xinerama \
 			--disable-xnest \
 			--disable-xselinux \
 			--disable-xcsecurity \
@@ -85,9 +87,9 @@ CONFIGURE_ARGS+=	--disable-kdrive --disable-xfbdev
 endif
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
-CONFIGURE_ARGS+=	--enable-dri --enable-dri2 --enable-glx
+CONFIGURE_ARGS+=	--enable-dri --enable-dri2 --enable-dri3 --enable-glx
 else
-CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-glx
+CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-dri3 --disable-glx
 endif
 
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
@@ -116,10 +118,6 @@ endif
 ifeq (${ADK_TARGET_SYSTEM_SHARP_ZAURUS},y)
 	${CP} ./files/xorg.conf.sharp-zaurus \
 		$(IDIR_XORG_SERVER)/etc/X11/xorg.conf
-endif
-ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
-	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*dri*.so \
-		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 endif
 	# add m4 file to host directory
 	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/share/aclocal

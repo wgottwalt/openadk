@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pcrepp
 PKG_VERSION:=		0.9.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1fe6ea8e23ece01fde2ce5fb4746acc2
 PKG_DESCR:=		Cpp Wrapper classes for PCRE
 PKG_SECTION:=		libs

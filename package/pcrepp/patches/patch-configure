@@ -1,5 +1,23 @@
 --- pcre++-0.9.5.orig/configure	2004-08-25 01:38:03.000000000 +0200
-+++ pcre++-0.9.5/configure	2011-08-05 07:30:53.000000000 +0200
++++ pcre++-0.9.5/configure	2014-03-17 20:07:03.000000000 +0100
+@@ -3844,7 +3844,7 @@ irix5* | irix6* | nonstopux*)
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-*)
+   case $host_cpu in
+   alpha* | hppa* | i*86 | mips | mipsel | powerpc* | sparc* | ia64*)
+     lt_cv_deplibs_check_method=pass_all ;;
+@@ -6598,7 +6598,7 @@ linux-gnuoldld* | linux-gnuaout* | linux
+   ;;
+ 
+ # This must be Linux ELF.
+-linux-gnu*)
++linux-*)
+   version_type=linux
+   need_lib_prefix=no
+   need_version=no
 @@ -8612,7 +8612,7 @@ if test "x$with_pcre_include" = "x"; the
  			CPPFLAGS="$CPPFLAGS -I/include"
  			;;

@@ -1,0 +1,11 @@
+--- openswan-2.6.38.orig/lib/libipsecconf/starterwhack.c	2012-03-23 22:33:43.000000000 +0100
++++ openswan-2.6.38/lib/libipsecconf/starterwhack.c	2014-03-26 21:21:22.000000000 +0100
+@@ -17,7 +17,7 @@
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+-#include <sys/queue.h>
++#include "queue.h"
+ #include <stddef.h>
+ #include <stdio.h>
+ #include <stdlib.h>

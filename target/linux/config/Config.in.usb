@@ -7,20 +7,14 @@ config ADK_KERNEL_USB_SUPPORT
 config ADK_KERNEL_USB
 	boolean
 	select ADK_KERNEL_USB_SUPPORT
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default n
 
 config ADK_KERNEL_USB_OHCI_HCD
 	boolean
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default n
 
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 	boolean
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4
-	default y if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default n
 
 config ADK_KERNEL_USB_LIBUSUAL

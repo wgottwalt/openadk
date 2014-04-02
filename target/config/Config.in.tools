@@ -1,16 +1,67 @@
-config ADK_HOST_NEED_MKISOFS
+# always required from OpenADK
+config ADK_HOST_BUILD_HEIRLOOM_CPIO
+	boolean
+	default y
+
+config ADK_HOST_BUILD_ADK_HELPER
+	boolean
+	default y
+
+# always required, but can be provided by host
+config ADK_HOST_BUILD_BASH
 	boolean
 	default n
 
-config ADK_HOST_NEED_SYSLINUX
+config ADK_HOST_BUILD_BC
 	boolean
 	default n
 
-config ADK_HOST_NEED_SQUASHFS
+config ADK_HOST_BUILD_BISON
 	boolean
 	default n
 
-config ADK_HOST_NEED_JFFS2
+config ADK_HOST_BUILD_BZIP2
+	boolean
+	default n
+
+config ADK_HOST_BUILD_FILE
+	boolean
+	default n
+
+config ADK_HOST_BUILD_FINDUTILS
+	boolean
+	default n
+
+config ADK_HOST_BUILD_FLEX
+	boolean
+	default n
+
+config ADK_HOST_BUILD_M4
+	boolean
+	default n
+
+config ADK_HOST_BUILD_PKGCONF
+	boolean
+	default n
+
+config ADK_HOST_BUILD_XZ
+	boolean
+	default n
+
+# optional, but can be provided by host
+config ADK_HOST_NEED_CCACHE
+	boolean
+	default n
+
+config ADK_HOST_BUILD_CCACHE
+	boolean
+	default n
+
+config ADK_HOST_NEED_CDRTOOLS
+	boolean
+	default n
+
+config ADK_HOST_BUILD_CDRTOOLS
 	boolean
 	default n
 
@@ -18,7 +69,7 @@ config ADK_HOST_NEED_GENEXT2FS
 	boolean
 	default n
 
-config ADK_HOST_NEED_LZOP
+config ADK_HOST_BUILD_GENEXT2FS
 	boolean
 	default n
 
@@ -26,20 +77,50 @@ config ADK_HOST_NEED_LZMA
 	boolean
 	default n
 
-config ADK_HOST_NEED_BZIP2
+config ADK_HOST_BUILD_LZMA
 	boolean
 	default n
 
-config ADK_HOST_NEED_XZ
+config ADK_HOST_NEED_LZOP
 	boolean
 	default n
 
-config ADK_HOST_NEED_CCACHE
+config ADK_HOST_BUILD_LZOP
 	boolean
 	default n
 
-config ADK_TOOLS_ADDPATTERN_ARGS
-	string
-	default "-p W54G -v v4.20.6" if ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54G
-	default "-p W54S -v v4.70.6" if ADK_TARGET_BROADCOM_MODEL_LINKSYS_WRT54GS
-	default ""
+config ADK_HOST_NEED_MKSH
+	boolean
+	default n
+
+config ADK_HOST_BUILD_MKSH
+	boolean
+	default n
+
+config ADK_HOST_NEED_SYSLINUX
+	boolean
+	default n
+
+config ADK_HOST_BUILD_SYSLINUX
+	boolean
+	default n
+
+# optional, must be used from OpenADK
+config ADK_HOST_BUILD_MTD_UTILS
+	boolean
+	default n
+
+config ADK_HOST_BUILD_SQUASHFS
+	boolean
+	default n
+
+config ADK_HOST_BUILD_MKIMAGE
+	boolean
+	default n
+
+config ADK_HOST_BUILD_PCRE
+	boolean
+	default y if ADK_HOST_DARWIN
+	default n
+
+source "target/config/Config.in.prereq"

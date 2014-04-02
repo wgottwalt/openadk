@@ -1,5 +1,5 @@
 --- ORBit2-2.14.19.orig/src/idl-compiler/Makefile.in	2010-09-28 11:39:39.000000000 +0200
-+++ ORBit2-2.14.19/src/idl-compiler/Makefile.in	2011-03-25 20:28:46.000000000 +0100
++++ ORBit2-2.14.19/src/idl-compiler/Makefile.in	2014-03-15 20:45:12.000000000 +0100
 @@ -66,15 +66,13 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top
  depcomp = $(SHELL) $(top_srcdir)/depcomp
  am__depfiles_maybe = depfiles
@@ -43,3 +43,12 @@
  
  orbit_idl_2_LDADD = \
  	$(ORBIT_IDL_LIBS)		\
+@@ -383,7 +380,7 @@ clean-binPROGRAMS:
+ 	rm -f $$list
+ orbit-idl-2$(EXEEXT): $(orbit_idl_2_OBJECTS) $(orbit_idl_2_DEPENDENCIES) 
+ 	@rm -f orbit-idl-2$(EXEEXT)
+-	$(LINK) $(orbit_idl_2_OBJECTS) $(orbit_idl_2_LDADD) $(LIBS)
++	$(LINK) $(orbit_idl_2_OBJECTS) $(orbit_idl_2_LDADD) $(LIBS) $(LIBS_FOR_BUILD)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)

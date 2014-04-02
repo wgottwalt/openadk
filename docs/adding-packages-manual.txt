@@ -1,0 +1,83 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Infrastructure for packages with specific build systems
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By 'packages with specific build systems' we mean all the packages whose build
+system is not the standard one, speak 'autotools'. This typically includes
+packages whose build system is based on hand-written Makefiles or shell
+scripts.
+
+[[manual-package-tutorial]]
+
+------------------------------
+01: # This file is part of the OpenADK project. OpenADK is copyrighted
+02: # material, please see the LICENCE file in the top-level directory.
+03:
+04: include $(TOPDIR)/rules.mk
+05:
+06: PKG_NAME:=		libfoo
+07: PKG_VERSION:=	1.0
+08: PKG_RELEASE:=	1
+09: PKG_MD5SUM:=	eade38998313c25fd7934719cdf8a2ea
+10: PKG_DESCR:=		foo library
+11: PKG_SECTION:=	libs
+12: PKG_BUILDDEP:=	openssl
+13: PKG_DEPENDS:=	libopenssl
+14: PKG_URL:=		http://www.libfoo.org/
+15: PKG_SITES:=		http://download.libfoo.org/
+16:
+17: include $(TOPDIR)/mk/package.mk
+18:
+19: $(eval $(call PKG_template,LIBFOO,libfoo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+20:
+21: CONFIG_STYLE:=		manual
+22: BUILD_STYLE:=		manual
+23: INSTALL_STYLE:=		manual
+24:
+25: do-configure:
+26:	${CP} ./files/config ${WRKBUILD}/.config
+27:
+28: do-build:
+29:	${MAKE} -C ${WRKBUILD} all
+30:
+31: do-install:
+32:	${INSTALL_DIR} ${IDIR_LIBFOO}/usr/lib
+33:	${CP} ${WRKBUILD}/libfoo.so* ${IDIR_LIBFOO}/usr/lib
+34:
+35: include ${TOPDIR}/mk/pkg-bottom.mk
+--------------------------------
+
+The Makefile begins with line 4 with the inclusion of the top level rules.mk
+file.  After that the Makefile starts on line 6 to 15 with metadata
+information: the name of the package (+PKG_NAME+), the version of the package
+(+PKG_VERSION+), the release number of the package (+PKG_RELEASE+), which is
+used in OpenADK to mark any package updates, the md5 hash of the source archive
+(+PKG_MD5SUM+), the short one line description for the package (+PKG_DESCR+),
+the package section for the menu configuration system (+PKG_SECTION+), the
+package buildtime dependencies (+PKG_BUILDDEP+), the package runtime
+dependencies (+PKG_DEPENDS+), the package homepage (+PKG_URL+) and finally the
+internet locations at which the tarball can be downloaded from (+PKG_SITES+).
+Normally ${PKG_NAME}-${PKG_VERSION}.tar.gz will be downloaded. You can
+overwrite the default via the +DISTFILES+ variable. You can add more then one
+archive name in +DISTFILES+ via space separated. If you have no source archive
+at all, just use the boolean variable +NO_DISTFILES+ and set it to 1.
+
+On line 17 the +mk/package.mk+ file is included, which contains the PKG_template
+function, which is used in line 19.
+
+On line 21 to 23 we define that the configuration step, the building and install
+steps are manually provided.
+
+On line 25-26 we implement a manual configuration step of the libfoo package
+by copying a manually created config file into the build directory.
+
+On line 28-29 we start the compilation process via make.
+
+On line 31-33 we install the shared library into the package installation
+directory, which is used to create the resulting binary package or tar archive
+for the target.
+
+On line 35 we include +mk/pkg-bottom.mk+, which includes common functions used
+by the package fetching and building process.

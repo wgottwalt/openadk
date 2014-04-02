@@ -1,12 +1,16 @@
-- rework startup, maybe use init.c, start gettys after bootup ready
-- more output for initscripts on bootup
-- port uuterm
-- move tools to package host infrastructure, resolve dependency handling for host tools
-- finish miniconfig + cleanup
-- qemu-sh serial
-- choice qemu with graphic
-- x32 musl
 - hash-style=gnu for non-mips and non-musl
+- fix libiberty.a mess
+- check gold for mozilla compile
+- check for gcc and SSP again
+- config.site/config.cache usage for speedup?
+  http://lists.gnu.org/archive/html/autoconf/2014-03/msg00031.html
+- add daemon() function to functions.sh
+- add printing of OK/FAIL (optional verbose bootup)
+- fixup rework libgcc --export-symbols
+- libgcc static?
+- static toolchain support
+- try Preset Loops per Jiffy for faster bootup via lpj=
+- port uuterm
 - add fb full screen logo
 - port opkg with gpg signing
 - restart network (kill wpa_supplicant)
@@ -14,7 +18,7 @@
 - add grsec kernel patch
 - microblaze: add cfgfs partition to dts, add partition to spartan dts
 - evaluate libguestfs for image creation
-- check for gcc and SSP again
 - port w3m
+- port msmtp
 - rutorrent porting
 - lms perl 

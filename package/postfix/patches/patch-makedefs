@@ -1,6 +1,6 @@
---- postfix-2.10.2.orig/makedefs	2013-02-04 02:33:13.000000000 +0100
-+++ postfix-2.10.2/makedefs	2013-10-10 16:28:03.000000000 +0200
-@@ -366,16 +366,7 @@ EOF
+--- postfix-2.11.0.orig/makedefs	2014-01-05 18:18:56.000000000 +0100
++++ postfix-2.11.0/makedefs	2014-03-25 08:55:06.000000000 +0100
+@@ -382,16 +382,7 @@ EOF
  		    SYSLIBS="-ldb"
  		    ;;
  		esac
@@ -17,4 +17,4 @@
 +		SYSLIBS="-lresolv"
  		;;
       GNU.0*|GNU/kFreeBSD.[567]*)
-      		SYSTYPE=GNU0
+ 		SYSTYPE=GNU0

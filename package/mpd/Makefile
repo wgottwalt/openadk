@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		0e5156a831d4302d2032998bcfd5c36f
 PKG_DESCR:=		A music player daemon
 PKG_SECTION:=		multimedia
@@ -15,8 +15,6 @@ PKG_BUILDDEP:=		glib libmpdclient
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
 PKG_NEED_CXX:=		1
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 

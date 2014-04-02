@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		adk-test-tools
 PKG_VERSION:=		0.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		5
 PKG_DESCR:=		helper tools and scripts for adk-test-framework
 PKG_SECTION:=		misc
 PKG_URL:=		http://openadk.org/

@@ -4,10 +4,7 @@ config ADK_TARGET_SYSTEM_QEMU_SH4
 	select ADK_little
 	select ADK_qemu_sh4
 	select ADK_CPU_SH4
-	select ADK_KERNEL_CPU_LITTLE_ENDIAN
 	select ADK_HARDWARE_QEMU
-	select ADK_TARGET_WITH_USB
-	select ADK_USE_KERNEL_MINICONFIG
 	select ADK_TARGET_KERNEL_ZIMAGE
 	help
 	 Support for Qemu Emulator (superh).

@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		watchdog
-PKG_VERSION:=		5.7
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		31766450ecfc9aff70fe966c0b9df06d
+PKG_VERSION:=		5.13
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		153455f008f1cf8f65f6ad9586a21ff1
 PKG_DESCR:=		watchdog daemon
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		libtirpc
@@ -17,6 +17,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WATCHDOG,watchdog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
 

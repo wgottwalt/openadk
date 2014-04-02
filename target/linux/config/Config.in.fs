@@ -11,9 +11,6 @@ config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
 
-config ADK_KERNEL_JFFS2_FS
-	boolean
-
 config ADK_KERNEL_YAFFS_FS
 	tristate
 
@@ -51,6 +48,21 @@ config ADK_KERNEL_SQUASHFS_XZ
 	boolean
 	default n
 
+config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_ZLIB
+	boolean
+	default n
+
+config ADK_KERNEL_JFFS2_FS
+	prompt "jffs2............................. JFFS2 filesystem"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	select ADK_KERNEL_JFFS2_ZLIB
+	boolean
+
 config ADK_KERNEL_SQUASHFS
 	prompt "squashfs.......................... SquashFS filesystem"
 	boolean
@@ -60,8 +72,7 @@ config ADK_KERNEL_SQUASHFS
 
 config ADK_KERNEL_EXT2_FS
 	boolean
-	default y if ADK_TARGET_WITH_CF
-	default y if ADK_TARGET_WITH_MMC && !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT2_FS
@@ -183,7 +194,7 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	select ADK_KERNEL_BLOCK
-	default y if ADK_TARGET_WITH_MMC
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  This option provides support for normal Windows file systems with
@@ -222,7 +233,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  with the IRIX version of XFS.
 
 config ADK_KPACKAGE_KMOD_FUSE_FS
-	prompt   "kmod-fs-fuse...................... Filesystem in Userspace support"
+	prompt   "kmod-fuse-fs...................... Filesystem in Userspace support"
 	tristate
 	default n
 	help

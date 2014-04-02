@@ -3,8 +3,6 @@ config ADK_TARGET_SYSTEM_LINKSYS_AG241
 	select ADK_mips
 	select ADK_little
 	select ADK_linksys_ag241
-	select ADK_KERNEL_AR7
-	select ADK_KERNEL_KERNEL_LZMA
 	select ADK_TARGET_WITH_DSL
 	select ADK_TARGET_WITH_WATCHDOG
 	select ADK_TARGET_WITH_MTD

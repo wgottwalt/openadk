@@ -1,0 +1,102 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+Using OpenADK
+-------------
+
+OpenADK has a nice configuration tool similar to the one you can
+find in the http://www.kernel.org/[Linux kernel] or in
+http://www.busybox.net/[Busybox]. Note that you can *and should build
+everything as a normal user*. There is no need to be root to configure
+and use OpenADK. The first step is to run the configuration
+assistant:
+
+--------------------
+ $ make menuconfig
+--------------------
+
+For each menu entry in the configuration tool, you can find associated
+help that describes the purpose of the entry.
+
+image::menuconfig.png[]
+
+First of all you need to choose your target architecture, your target
+system, your target C library, your target firmware type and your target
+package format. After that you can select individual packages and kernel
+settings or just use one of the predefined package collections. When you
+are ready exit and save.  You can always redefine the configuration
+using +make menuconfig+.
+
+image::menuconfig-configured.png[]
+
+Once everything is configured, the configuration tool generates a
++.config+ file that contains the description of your configuration. It
+will be used by the Makefiles to do what's needed.
+
+Let's go:
+
+--------------------
+ $ make
+--------------------
+
+You *should never* use +make -jN+ with OpenADK: it does not support 'top-level
+parallel make'. Instead, use the +ADK_MAKE_JOBS+ option in +Global settings+ to
+tell OpenADK to run each package compilation with +make -jN+.
+
+The `make` command will generally perform the following steps:
+
+* download source files (as required);
+* configure, build and install required host tools;
+* configure, build and install the cross-compiling toolchain;
+* build a kernel image, if selected;
+* build/install selected target packages;
+* build a bootloader, if selected;
+* create a root filesystem in selected format.
+
+OpenADK output is stored in several subdirectories: 
+
+* +firmware/+ where all the images and packages are stored.
+
+* +build_<system>_<arch>_<libc>/+ where all the components except for the cross-compilation toolchain are built. The directory contains one subdirectory for each of these components.
+
+* +target_<arch>_<libc>/+ which contains a hierarchy similar to a root filesystem
+  hierarchy. This directory contains the installation of the
+  cross-compilation toolchain and all the userspace packages selected
+  for the target. However, this directory is 'not' intended to be
+  the root filesystem for the target: it contains a lot of development
+  files, unstripped binaries and libraries that make it far too big
+  for an embedded system. These development files are used to compile
+  libraries and applications for the target that depend on other
+  libraries.
+
+* +root_<system>_<arch>_<libc>/+ which contains the complete root filesystem for
+  the target. One exception, it doesn't have the correct
+  permissions (e.g. setuid for the busybox binary) for some files. 
+  Therefore, this directory *should not be used on your target*.  
+  Instead, you should use one of the images or archives built in the 
+  +firmware/+ directory. If you need an
+  extracted image of the root filesystem for booting over NFS, then
+  use the tarball image generated in +firmware/+ and extract it as
+  root. Compared to +build_*/+, +target_*/+ contains only the files and
+  libraries needed to run the selected target applications: the
+  development files are (exception: if any dev packages are selected)
+  not present, the binaries are stripped.
+
+* +host_<gnu_host_name>/+ contains the installation of tools compiled for the host
+  that are needed for the proper execution of OpenADK
+
+* +toolchain_<gnu_host_name>/+ contains just the cross-compilation toolchain.
+  Can be used together with +target_<arch>_<libc>/+ for other projects. Toolchain
+  is relocatable.
+
+* +toolchain_build_<arch>_<libc>/+ contains the build directories for the various
+  components of the cross-compilation toolchain.
+
+* +pkg_<system>_<arch>_<libc>/+ contains stamp files and file lists for the various components.
+
+The command, +make menuconfig+ and +make+, are the
+basic ones that allow to easily and quickly generate images fitting
+your needs, with all the supports and applications you enabled.
+
+More details about the "make" command usage are given in
+xref:make-tips[].

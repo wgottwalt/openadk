@@ -33,17 +33,17 @@ config ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in"
 
 menu "Runtime configuration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_KERNEL && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in.runtime"
 endmenu
 
 menu "Package collection"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_KERNEL && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/packages/Config.in"
 endmenu
 
 menu "Package selection"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_KERNEL && !ADK_CHOOSE_TARGET_SYSTEM
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 
 config ADK_LEAVE_ETC_ALONE
 	boolean "do not install anything into /etc"
@@ -89,55 +89,52 @@ source "package/Config.in.auto.global"
 source "package/Config.in.auto"
 endmenu
 
-config ADK_USE_KERNEL_MINICONFIG
-	boolean
-
 choice
 prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.13.6"
+	prompt "3.13.7"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
 endchoice
 
 menu "Kernel configuration"
-depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_KERNEL && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
+depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
 
 choice
 prompt "Kernel Version"
 
-config ADK_KERNEL_VERSION_3_13_6
-	prompt "3.13.6"
+config ADK_KERNEL_VERSION_3_13_7
+	prompt "3.13.7"
 	boolean
 
-config ADK_KERNEL_VERSION_3_12_13
-	prompt "3.12.13"
+config ADK_KERNEL_VERSION_3_12_14
+	prompt "3.12.14"
 	boolean
 
 config ADK_KERNEL_VERSION_3_11_10
 	prompt "3.11.10"
 	boolean
 
-config ADK_KERNEL_VERSION_3_10_33
-	prompt "3.10.33"
+config ADK_KERNEL_VERSION_3_10_34
+	prompt "3.10.34"
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_82
-	prompt "3.4.82"
+config ADK_KERNEL_VERSION_3_4_84
+	prompt "3.4.84"
 	boolean
 
 endchoice
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.13.6" if ADK_KERNEL_VERSION_3_13_6
-	default "3.12.13" if ADK_KERNEL_VERSION_3_12_13
+	default "3.13.7" if ADK_KERNEL_VERSION_3_13_7
+	default "3.12.14" if ADK_KERNEL_VERSION_3_12_14
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
-	default "3.10.33" if ADK_KERNEL_VERSION_3_10_33
-	default "3.4.82" if ADK_KERNEL_VERSION_3_4_82
+	default "3.10.34" if ADK_KERNEL_VERSION_3_10_34
+	default "3.4.84" if ADK_KERNEL_VERSION_3_4_84
 	help
 
 config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI

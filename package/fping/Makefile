@@ -4,15 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fping
-PKG_VERSION:=		2.4b2_to
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		d5e8be59e307cef76bc479e1684df705
-PKG_DESCR:=		A program to ping hosts in parallel
+PKG_VERSION:=		3.9
+PKG_RELEASE:=		2
+PKG_MD5SUM:=		7ad0313646681c33e975f7b946d8d283	
+PKG_DESCR:=		program to ping hosts in parallel
 PKG_SECTION:=		net
-PKG_URL:=		http://fping.sourceforge.net/
-PKG_SITES:=		http://fping.sourceforge.net/download/
-
-DISTFILES:=		${PKG_NAME}.tar.gz
+PKG_URL:=		http://fping.org
+PKG_SITES:=		http://fping.org/dist/
 
 include ${TOPDIR}/mk/package.mk
 

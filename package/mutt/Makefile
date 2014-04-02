@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.5.20
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		027cdd9959203de0c3c64149a7ee351c
-PKG_DESCR:=		Mail text client
+PKG_VERSION:=		1.5.23
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		11f5b6a3eeba1afa1257fe93c9f26bff
+PKG_DESCR:=		mail text client
 PKG_SECTION:=		mail
 PKG_DEPENDS:=		libncurses libopenssl
 PKG_BUILDDEP:=		ncurses openssl
 PKG_URL:=		http://www.mutt.org/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mutt/}
+PKG_SITES:=		ftp://ftp.mutt.org/mutt/devel/ \
+			http://ftp.hi.is/pub/mutt/
 
 include ${TOPDIR}/mk/package.mk
 

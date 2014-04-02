@@ -1,0 +1,11 @@
+--- xf86-video-siliconmotion-1.7.7.orig/src/smi_driver.c	2012-07-17 06:53:21.000000000 +0200
++++ xf86-video-siliconmotion-1.7.7/src/smi_driver.c	2014-03-14 18:39:37.307139846 +0100
+@@ -1750,8 +1750,6 @@ SMI_ScreenInit(SCREEN_INIT_ARGS_DECL)
+ 		   "Done writing mode.  Register dump:\n");
+     SMI_PrintRegs(pScrn);
+ 
+-    miInitializeBackingStore(pScreen);
+-
+ #ifdef HAVE_XMODES
+     xf86DiDGAInit(pScreen, (unsigned long)(pSmi->FBBase + pScrn->fbOffset));
+ #endif

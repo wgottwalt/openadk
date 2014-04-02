@@ -4,21 +4,22 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 
-TARGET_CFLAGS:=	$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
 
 include Makefile.inc
 
-GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
+GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(GNU_TARGET_NAME) \
-			--with-gmp=$(STAGING_HOST_DIR) \
-			--with-mpfr=$(STAGING_HOST_DIR) \
-			--with-libelf=$(STAGING_HOST_DIR) \
+			--with-gmp=$(STAGING_HOST_DIR)/usr \
+			--with-mpfr=$(STAGING_HOST_DIR)/usr \
+			--with-libelf=$(STAGING_HOST_DIR)/usr \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--with-gnu-as \
+			--enable-tls \
 			--disable-libsanitizer \
 			--disable-libitm \
 			--disable-libmudflap \
@@ -27,51 +28,43 @@ GCC_CONFOPTS=		--prefix=$(STAGING_HOST_DIR) \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
+			--with-system-zlib \
 			--without-ppl \
 			--without-cloog \
 			--without-isl \
 			--disable-nls
 
-ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
-GCC_CONFOPTS+=		--enable-sjlj-exceptions
-else
-GCC_CONFOPTS+=		--disable-sjlj-exceptions
+GCC_FINAL_CONFOPTS:=
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
-GCC_CONFOPTS+=		--disable-biarch --disable-multilib
-endif
 ifeq ($(ADK_LINUX_SH),y)
-GCC_CONFOPTS+=		--with-multilib-list=m4,m4-nofpu
+GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
+
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
-GCC_CONFOPTS+=		--with-multilib-list=mx32
-else
-GCC_CONFOPTS+=		--disable-biarch --disable-multilib
+GCC_FINAL_CONFOPTS+=	--with-abi=x32
+endif
+ifeq ($(ADK_32),y)
+GCC_FINAL_CONFOPTS+=	--with-abi=32
+endif
+ifeq ($(ADK_64),y)
+GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
-GCC_CONFOPTS+=		--enable-libssp
+GCC_FINAL_CONFOPTS+=	--enable-libssp
 else
-GCC_CONFOPTS+=		--disable-libssp
+GCC_FINAL_CONFOPTS+=	--disable-libssp
 endif
 
 ifeq ($(ADK_TOOLCHAIN_GCC_LTO),y)
-GCC_CONFOPTS+=		--enable-lto
+GCC_FINAL_CONFOPTS+=	--enable-lto
 else
-GCC_CONFOPTS+=		--disable-lto
-endif
-
-ifeq ($(ARCH),m68k)
-ifeq ($(ADK_TARGET_LIBC),uclibc)
-GCC_CONFOPTS+=		--disable-tls
-else
-GCC_CONFOPTS+=		--enable-tls
-endif
-else
-GCC_CONFOPTS+=		--enable-tls
+GCC_FINAL_CONFOPTS+=	--disable-lto
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)
@@ -87,6 +80,9 @@ endif
 ifeq ($(ARCH),arm)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_ARM_MODE)
+ifneq ($(ADK_TARGET_FPU),)
+GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
+endif
 endif
 
 ifeq ($(ADK_CPU_ARM926EJ_S),y)
@@ -94,11 +90,11 @@ GCC_CONFOPTS+=          --with-arch=armv5te --with-tune=arm1176jzf-s
 endif
 
 ifeq ($(ADK_CPU_ARM1176JZF_S),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s --with-fpu=vfp
+GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s
 endif
 
 ifeq ($(ADK_CPU_CORTEX_A9),y)
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9 --with-fpu=neon
+GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9
 endif
 
 ifeq ($(ADK_CPU_SPARC_V9),y)
@@ -127,20 +123,27 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
-	rm -rf $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
-	ln -sf ${STAGING_TARGET_DIR}/usr/include $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/sys-include
-	rm -rf ${STAGING_HOST_DIR}/$(GNU_TARGET_NAME)/lib
-	ln -sf ${STAGING_TARGET_DIR}/lib $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib
+	rm -rf $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
+	mkdir -p $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)
+	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
+		ln -s ../$(STAGING_HOST2TARGET)/usr/include sys-include)
+	rm -rf ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
+	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
+		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
 ifeq ($(ADK_LINUX_SH),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4 && ln -sf . m4-nofpu)
 endif
-	sed -i '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
-	cd $(GCC_BUILD_DIR_MINIMAL); PATH='$(TARGET_PATH)' \
+	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
+	cd $(GCC_BUILD_DIR_MINIMAL); \
+		PATH='$(TARGET_PATH)' \
 		CFLAGS="-O0 -g0" \
 		CXXFLAGS="-O0 -g0" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
+			--disable-multilib \
+			--disable-lto \
+			--disable-libssp \
 			--disable-shared \
 			--without-headers
 	touch $@
@@ -155,11 +158,13 @@ $(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
-	cd $(GCC_BUILD_DIR_INITIAL); PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_INITIAL); \
+		PATH='$(TARGET_PATH)' \
 		CFLAGS="-O0 -g0" \
 		CXXFLAGS="-O0 -g0" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
+			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
 			--disable-threads \
@@ -177,9 +182,11 @@ $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
-	cd $(GCC_BUILD_DIR_FINAL); PATH='$(TARGET_PATH)' \
+	cd $(GCC_BUILD_DIR_FINAL); \
+		PATH='$(TARGET_PATH)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
+			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
@@ -194,33 +201,17 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
-	cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin; \
+	cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin; \
 		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
 			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
-	(cd $(STAGING_HOST_DIR)/bin && \
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
-	# setup symlink, so that gcc/g++ find cc1plus
-	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/ && \
-		ln -sf ../libexec .)
-	# setup symlink, so that gcc/g++ find stddef.h
-	(cd $(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/lib/ && \
-		ln -sf ../../host_${CPU_ARCH}_${ADK_TARGET_LIBC}_${ADK_TARGET_SUFFIX}/lib/gcc .)
-	# fix linking g++ apps with libtool
-	@-test -d $(STAGING_TARGET_DIR)/lib32 && \
-		cd $(STAGING_TARGET_DIR)/lib32 && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
-	@-test -d $(STAGING_TARGET_DIR)/libx32 && \
-		cd $(STAGING_TARGET_DIR)/libx32 && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
-	@-test -d $(STAGING_TARGET_DIR)/lib64 && \
-		cd $(STAGING_TARGET_DIR)/lib64 && \
+	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
 	# cleanup unneeded docs
-	rm -rf $(STAGING_HOST_DIR)/share
+	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk

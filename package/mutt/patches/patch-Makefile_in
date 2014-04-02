@@ -1,20 +1,20 @@
---- mutt-1.5.20.orig/Makefile.in	2009-06-09 08:50:44.000000000 +0200
-+++ mutt-1.5.20/Makefile.in	2010-05-30 13:43:47.001613117 +0200
-@@ -155,7 +155,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGE
- 	distdir dist dist-all distcheck
+--- mutt-1.5.23.orig/Makefile.in	2014-03-12 17:26:44.000000000 +0100
++++ mutt-1.5.23/Makefile.in	2014-03-27 11:06:17.000000000 +0100
+@@ -259,7 +259,7 @@ am__define_uniq_tagged_files = \
  ETAGS = etags
  CTAGS = ctags
+ CSCOPE = cscope
 -DIST_SUBDIRS = m4 po intl doc contrib imap
 +DIST_SUBDIRS = m4 po intl contrib imap
  DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
  distdir = $(PACKAGE)-$(VERSION)
  top_distdir = $(distdir)
-@@ -340,7 +340,7 @@ top_srcdir = @top_srcdir@
+@@ -451,7 +451,7 @@ top_srcdir = @top_srcdir@
  AUTOMAKE_OPTIONS = 1.6 foreign
  @BUILD_IMAP_TRUE@IMAP_SUBDIR = imap
  @BUILD_IMAP_TRUE@IMAP_INCLUDES = -I$(top_srcdir)/imap
 -SUBDIRS = m4 po intl doc contrib $(IMAP_SUBDIR)
 +SUBDIRS = m4 po intl contrib $(IMAP_SUBDIR)
  bin_SCRIPTS = muttbug flea @SMIMEAUX_TARGET@
- BUILT_SOURCES = keymap_defs.h patchlist.c reldate.h hcversion.h
- mutt_SOURCES = \
+ @BUILD_HCACHE_TRUE@HCVERSION = hcversion.h
+ BUILT_SOURCES = keymap_defs.h patchlist.c reldate.h conststrings.c $(HCVERSION)

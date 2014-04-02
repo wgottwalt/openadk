@@ -9,7 +9,7 @@ $(error your umask is not 022)
 endif
 
 CONFIG_CONFIG_IN = Config.in
-CONFIG = config
+CONFIG = adk/config
 DEFCONFIG=		ADK_DEBUG=n \
 			ADK_STATIC=n \
 			ADK_WGET_TIMEOUT=180 \
@@ -41,8 +41,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_TEST=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
-			ADK_PKG_CONSOLE=n \
-			ADK_PKG_TEST=n \
 			ADK_TOOLCHAIN_GCC_USE_SSP=n \
 			ADK_TOOLCHAIN_GCC_USE_LTO=n \
 			BUSYBOX_IFPLUGD=n \
@@ -81,6 +79,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			BUSYBOX_FEATURE_VI_REGEX_SEARCH=n \
 			ADK_KERNEL_RT2X00_DEBUG=n \
 			ADK_KERNEL_ATH5K_DEBUG=n \
+			ADK_KERNEL_BUG=n \
 			ADK_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
@@ -94,13 +93,13 @@ POSTCONFIG=		-@\
 	if [ -f .adkinit ];then rm .adkinit;\
 	else \
 	if [ -f .config.old ];then \
-		$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild;\
+		$(TOPDIR)/adk/tools/pkgrebuild;\
 		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_TARGET_QEMU_MICROBLAZE_MODEL;do \
+		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_RUNTIME_GETTY ADK_RUNTIME_SHELL;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
@@ -122,7 +121,7 @@ POSTCONFIG=		-@\
 			make kernelclean;\
 		fi; \
 		if [ "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config|md5sum)" != "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config.old|md5sum)" ];then \
-			echo "You should make cleantarget, after changing thumb mode";\
+			echo "You should make cleandir, after changing thumb mode";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
@@ -140,27 +139,26 @@ include $(TOPDIR)/rules.mk
 
 all: world
 
-${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile)
-	$(STAGING_HOST_DIR)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
+${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/depmaker
+	$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
-.PHONY: all world clean cleantarget cleandir cleantoolchain distclean image_clean
+.PHONY: all world clean cleandir cleantoolchain distclean image_clean
 
 world:
-	mkdir -p $(DL_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
-		$(PACKAGE_DIR) $(TOOLS_BUILD_DIR) $(STAGING_HOST_DIR)/usr/bin \
-		$(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
+	mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 	${BASH} ${TOPDIR}/scripts/update-sys
 	${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile
 else
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup package/compile root_clean package/install
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile root_clean package/install
 endif
 else
-	$(MAKE) -f mk/build.mk tools/install toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 
 package_index:
@@ -171,7 +169,11 @@ endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
-		${STAGING_HOST_DIR}/{bin,lib,usr/bin,usr/lib,usr/include}
+		${STAGING_HOST_DIR}/{usr/bin,usr/lib,usr/include}
+	for i in lib64 lib32 libx32;do \
+		cd ${STAGING_TARGET_DIR}/; ln -sf lib $$i; \
+		cd ${STAGING_TARGET_DIR}/usr; ln -sf lib $$i; \
+	done
 
 ${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
@@ -187,9 +189,6 @@ target/%:
 
 toolchain/%: ${STAGING_TARGET_DIR}
 	$(MAKE) -C toolchain $(patsubst toolchain/%,%,$@)
-
-tools/%:
-	$(MAKE) -C tools $(patsubst tools/%,%,$@)
 
 image:
 	$(MAKE) -C target image
@@ -215,16 +214,11 @@ switch:
 		fi \
 	fi
 
-ifeq (${ADK_TARGET_KERNEL64},y)
-KERNEL_CFG:=kernel64.config
-else
-KERNEL_CFG:=kernel.config
-endif
-
 kernelconfig:
-	cp $(TOPDIR)/target/$(ADK_TARGET_ARCH)/${KERNEL_CFG} $(BUILD_DIR)/linux/.config
-	${KERNEL_MAKE_ENV} ${MAKE} ARCH=$(ARCH) ${KERNEL_MAKE_OPTS} -C $(BUILD_DIR)/linux menuconfig
-	cp $(BUILD_DIR)/linux/.config $(TOPDIR)/target/$(ADK_TARGET_ARCH)/${KERNEL_CFG}
+	${KERNEL_MAKE_ENV} ${MAKE} \
+		ARCH=$(ARCH) \
+		${KERNEL_MAKE_OPTS} \
+		-C $(BUILD_DIR)/linux menuconfig
 
 # create a new package from package/.template
 newpackage:
@@ -268,7 +262,7 @@ cleandir:
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
@@ -276,23 +270,16 @@ cleantoolchain:
 	@$(TRACE) cleantoolchain
 	@rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
-
-cleantarget:
-	@$(TRACE) cleantarget
-	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR)
-	rm -rf $(TOOLCHAIN_BUILD_DIR) $(STAGING_HOST_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR)
-	rm -f .tmpconfig.h all.config .defconfig
 
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_HOST_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
@@ -370,12 +357,6 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(PKG)" ];then \
-		grep "^config" target/config/Config.in \
-			|grep -i "$(PKG)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
-	fi
 	@if [ ! -z "$(LIBC)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(LIBC)" \
@@ -434,12 +415,6 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
-	@if [ ! -z "$(PKG)" ];then \
-		grep "^config" target/config/Config.in \
-			|grep -i "$(PKG)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
-	fi
 	@if [ ! -z "$(LIBC)" ];then \
 		grep "^config" target/config/Config.in \
 			|grep -i "$(LIBC)" \
@@ -475,9 +450,9 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
-	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DISTDIR) \
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_BUILD_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(TOOLS_BUILD_DIR)
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
 	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
@@ -487,7 +462,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	if [ -z "$(LIBC)" ];then \
+	@if [ -z "$(LIBC)" ];then \
 		libc="glibc uclibc musl"; \
 	else \
 		libc="$(LIBC)"; \
@@ -497,43 +472,48 @@ bulktoolchain:
 			mkdir -p ${TOPDIR}/firmware; \
 		    ( \
 			echo === building $$arch $$libc toolchain-$$arch on $$(date); \
-			tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#"); \
-			if [ -f ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz ];then exit;fi; \
+			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
+			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
 			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
+				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
+				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
+				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
+				if [ -f ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${arch}_$${libc}.tar.xz host_* target_$${arch}_$${libc}*; \
+				tar -cvJf ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
 				$(GMAKE) cleantoolchain; \
 			rm .config; \
-		    ) 2>&1 | tee $(TOPDIR)/firmware/toolchain_$${arch}_$${libc}_build.log; \
+		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
 		    if [ -f .exit ];then break;fi \
 		done <${TOPDIR}/target/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
 test-framework:
-	if [ -z "$(LIBC)" ];then \
+	@if [ -z "$(LIBC)" ];then \
 		libc="glibc uclibc musl"; \
 	else \
 		libc="$(LIBC)"; \
 	fi; \
 	for libc in $$libc;do \
 		( \
-			for arch in arm microblaze microblazeel mips mipsel mips64 mips64el ppc ppc64 sh4 sh4eb sparc sparc64 i686 x86_64;do \
-				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#"); \
+			mkdir -p $(TOPDIR)/firmware/; \
+			for arch in $$(grep -v m68k target/tarch.lst|xargs);do \
+				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##" -e "s#x86_64.*#x86_64#"); \
+				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
-				$(GMAKE) prereq && \
-				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=archive COLLECTION=test defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=initramfsarchive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
+				qarch=$$(echo $$arch|sed -e "s#armhf#arm#" -e 's#mips64n.*$$#mips64#' -e 's#mips64eln.*$$#mips64el#' -e "s#x86_64.*#x86_64#"); \
+				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
+				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
+				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
 				if [ -d root ];then rm -rf root;fi; \
-				echo cp -a root_qemu_$${arch}_$${libc}$${abi} root; \
-				cp -a root_qemu_$${arch}_$${libc}$${abi} root; \
-				mkdir -p $(TOPDIR)/firmware/qemu/$$tarch; \
-				tar cJvf $(TOPDIR)/firmware/qemu/$$tarch/root.tar.xz root; \
-				cp $(TOPDIR)/firmware/qemu_$${arch}_$${libc}$${abi}/qemu-$${arch}-archive-kernel \
-					$(TOPDIR)/firmware/qemu/$$tarch/kernel; \
+				cp $(TOPDIR)/firmware/qemu_$${qarch}_$${libc}$${abi}/qemu-$${qarch}-initramfsarchive-kernel \
+					$(TOPDIR)/firmware/qemu/$$arch/kernel; \
 				rm .config; \
 			done; \
 		) 2>&1 | tee $(TOPDIR)/firmware/test-framework-build.log; \
@@ -543,14 +523,13 @@ test-framework:
 
 release:
 	for libc in uclibc glibc musl;do \
-		mkdir -p $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc; \
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
 			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/firmware/$(SYSTEM)_$(ARCH)_$$libc/build.log; \
+		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
 		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
 	done
 	if [ -f .exit ];then rm .exit;exit 1;fi
@@ -561,14 +540,14 @@ bulk:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkbuild.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	    if [ -f .exit ]; then break;fi \
@@ -581,14 +560,14 @@ bulkall:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallbuild.log; \
 		if [ -f .exit ]; then break;fi \
 	      done; \
 	      if [ -f .exit ]; then break;fi \
@@ -601,15 +580,15 @@ bulkallmod:
 	  while read arch; do \
 	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
 	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware/$${system}_$${arch}_$$libc; \
+		mkdir -p $(TOPDIR)/firmware; \
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
 		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
-		$(GMAKE) cleantarget; \
+		$(GMAKE) clean; \
 		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/$${system}_$${arch}_$$libc/build.log; \
+            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallmodbuild.log; \
 	        if [ -f .exit ]; then break;fi \
 	      done; \
 	     if [ -f .exit ]; then break;fi \
@@ -617,45 +596,42 @@ bulkallmod:
 	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
 	done
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker: $(TOPDIR)/tools/adk/pkgmaker.c $(TOPDIR)/tools/adk/sortfile.c $(TOPDIR)/tools/adk/strmap.c
-	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
-	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgmaker.c tools/adk/sortfile.c tools/adk/strmap.c
+$(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools/sortfile.c $(TOPDIR)/adk/tools/strmap.c
+	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild: $(TOPDIR)/tools/adk/pkgrebuild.c $(TOPDIR)/tools/adk/strmap.c
-	@$(CC_FOR_BUILD) -g -o $@ tools/adk/pkgrebuild.c tools/adk/strmap.c
+$(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
+	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgrebuild
+package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/pkgmaker
+	@$(TOPDIR)/adk/tools/pkgmaker
 	@:>.menu
 
-$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker: $(TOPDIR)/tools/adk/depmaker.c
-	@mkdir -p host_$(GNU_HOST_NAME)/usr/bin
-	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/tools/adk/depmaker.c
+$(TOPDIR)/adk/tools/depmaker: $(TOPDIR)/adk/tools/depmaker.c
+	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/adk/tools/depmaker.c
 
-dep: $(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker
+dep: $(TOPDIR)/adk/tools/depmaker
 	@echo "Generating dependencies ..."
-	@$(TOPDIR)/host_$(GNU_HOST_NAME)/usr/bin/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 
 include $(TOPDIR)/toolchain/gcc/Makefile.inc
 
 check-dejagnu:
-	@-rm tests/adk.exp tests/master.exp >/dev/null 2>&1
-	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" tests/adk.exp.in > \
-		tests/adk.exp.in.tmp
-	@sed -e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" tests/adk.exp.in.tmp > \
-		tests/adk.exp
-	@sed -e "s#@TOPDIR@#$(TOPDIR)#" tests/master.exp.in > \
-		tests/master.exp
+	@-rm adk/tests/adk.exp adk/tests/master.exp >/dev/null 2>&1
+	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" \
+		-e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" \
+		adk/tests/adk.exp.in > adk/tests/adk.exp
+	@sed -e "s#@TOPDIR@#$(TOPDIR)#" adk/tests/master.exp.in > \
+		adk/tests/master.exp
 
 check-gcc: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc
 
 check-g++: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/tests/master.exp \
+	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-g++
 
 check: check-gcc check-g++

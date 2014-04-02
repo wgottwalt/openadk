@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freetype
-PKG_VERSION:=		2.5.1
+PKG_VERSION:=		2.5.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a359993ad0dc23323c676b04fdb57110
-PKG_DESCR:=		A free, high-quality and portable font engine
+PKG_MD5SUM:=		cafe9f210e45360279c730d27bf071e9
+PKG_DESCR:=		free, high-quality and portable font engine
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib freetype-host
@@ -27,8 +27,12 @@ $(eval $(call HOST_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE
 $(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--without-png
-CONFIGURE_ARGS+=	--without-png
+HOST_CONFIGURE_ARGS+=	--with-zlib \
+			--without-png \
+			--without-bzip2
+CONFIGURE_ARGS+=	--with-zlib \
+			--without-png \
+			--without-bzip2
 
 libfreetype-install:
 	${INSTALL_DIR} ${IDIR_LIBFREETYPE}/usr/lib

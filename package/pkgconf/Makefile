@@ -4,15 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pkgconf
-PKG_VERSION:=		0.9.3
+PKG_VERSION:=		0.9.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		52c553bad686f8be1556b58bc1925f4f
+PKG_MD5SUM:=		babb4e02f0fb8f4044ee95ad2241a676
 PKG_DESCR:=		smart pkg-config replacement
 PKG_SECTION:=		lang
 PKG_URL:=		https://github.com/pkgconf/pkgconf
 PKG_SITES:=		http://rabbit.dereferenced.org/~nenolod/distfiles/
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

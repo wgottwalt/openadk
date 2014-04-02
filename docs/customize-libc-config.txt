@@ -1,0 +1,33 @@
+// -*- mode:doc; -*-
+// vim: set syntax=asciidoc:
+
+[[libc-custom]]
+Customizing the libc configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Just like xref:busybox-custom[BusyBox], http://www.uclibc.org/[uClibc]
+offers a lot of configuration options. They allow you to select
+various functionalities depending on your needs and limitations.
+OpenADK chooses automatically the best configuration regarding 
+resulting code size, standard conformance, portability and GNU 
+libc compatibility.
+
+If you still have the requirements to change the default, regenerate
+a new uClibc config from the existing one:
+
+----------------
+ $ tar xvf dl/uClibc-x.y.z.tar.bz2
+ $ cd uClibc-x.y.z && patch -p1 <../toolchain/uClibc/patches/uclibc-git*.patch
+ $ cp ../target/<arch>/uclibc.config .config
+ $ make menuconfig
+----------------
+
+Make all required changes. Then copy the newly created uClibc configuration back
+and rebuild your targetsystem, including the toolchain components:
+
+----------------
+ $ cp .config ../target/<arch>/uclibc.config
+ $ cd .. && make cleandir && make
+----------------
+
+There are no customization options for GNU libc or musl available.

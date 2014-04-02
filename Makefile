@@ -32,8 +32,7 @@ help:
 	@echo '  kernelconfig - Modify the target kernel configuration'
 	@echo ''
 	@echo 'Cleaning targets:'
-	@echo '  clean        - Remove bin and build_dir directories'
-	@echo '  cleantarget  - Same as "clean", but also remove toolchain for target'
+	@echo '  clean        - Remove firmware and build directories'
 	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
 	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
@@ -99,10 +98,6 @@ cleankernel kernelclean: .prereq_done
 cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} cleandir
 	@-rm -f make.log .prereq_done
-
-cleantarget targetclean: .prereq_done
-	-@${GMAKE_INV} cleantarget
-	@-rm -f make.log
 
 cleantoolchain toolchainclean: .prereq_done
 	-@${GMAKE_INV} cleantoolchain
@@ -229,6 +224,7 @@ NO_ERROR=0
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
+	@echo "GIT:=$$(which git 2>/dev/null)" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \
 		CC='${CC}' CPPFLAGS='${CPPFLAGS}' \
 	    	bash scripts/scan-tools.sh

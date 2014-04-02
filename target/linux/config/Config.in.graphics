@@ -13,7 +13,6 @@ config ADK_KERNEL_VT_CONSOLE
 config ADK_KERNEL_VGA_CONSOLE
 	boolean
 	default y if ADK_HARDWARE_VBOX
-	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 
 config ADK_KERNEL_FONTS
@@ -27,10 +26,18 @@ config ADK_KERNEL_FB
  	boolean
  
 config ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default n
 	boolean
 
 config ADK_KERNEL_MFD_SM501
 	boolean
+
+config ADK_KERNEL_FB_ATARI
+	boolean
+	select ADK_KERNEL_FB
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default n
 
 config ADK_KERNEL_FB_CIRRUS
 	boolean
@@ -61,12 +68,18 @@ config ADK_KERNEL_LOGO
 	boolean
  
 menu "Graphic devices support"
-depends on ADK_TARGET_WITH_VGA
+depends on ADK_TARGET_WITH_VGA || ADK_HARDWARE_QEMU
 
 config ADK_KERNEL_LOGO_LINUX_CLUT224
 	prompt "Enable Linux penguin boot logo"
 	boolean
 	select ADK_KERNEL_LOGO
+	default n
+
+config ADK_KERNEL_FB_CON_DECOR
+	prompt "Enable fullscreen boot logo"
+	boolean
+	select ADK_PACKAGE_FBSPLASH
 	default n
 
 config ADK_KERNEL_FB_VESA

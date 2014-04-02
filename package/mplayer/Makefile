@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		39dd55f30eb5403f219a606e79a6648a
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
@@ -34,9 +34,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPLAYER,mplayer,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-# gcc 4.5 produces internal compiler error with -Os
-#TARGET_CFLAGS:=$(subst Os,O2,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-D_POSIX_SOURCE -D_GNU_SOURCE
 
 CONFIG_STYLE:=		minimal

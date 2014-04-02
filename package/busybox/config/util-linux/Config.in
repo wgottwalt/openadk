@@ -572,7 +572,7 @@ config BUSYBOX_FEATURE_MOUNT_NFS
 
 config BUSYBOX_FEATURE_MOUNT_CIFS
 	bool "Support mounting CIFS/SMB file systems"
-	default y
+	default n
 	depends on BUSYBOX_MOUNT
 	help
 	  Enable support for samba mounts.

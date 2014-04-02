@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		5.9
-PKG_RELEASE:=		3
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		8cb9c412e5f2d96bc6f459aa8c6282a1
 PKG_DESCR:=		a terminal handling library
 PKG_SECTION:=		libs
@@ -50,6 +50,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
+HOST_STYLE:=		auto
 # use sth which does not exist
 HOST_ALL_TARGET:=	progs
 HOST_INSTALL_TARGET:=	install.includes install.progs
@@ -69,9 +70,6 @@ HOST_CONFIGURE_ARGS+=	--without-shared \
 			--without-debug \
 			--without-profile
 
-libncurses-hostinstall:
-	${CP} ${HOST_WRKINST}/usr/bin/* ${STAGING_HOST_DIR}/usr/bin
-
 libncurses-install:
 	rm -rf ${WRKINST}/usr/lib/terminfo
 	# this is installed as libncurses - make libcurses a "link"
@@ -81,18 +79,13 @@ libncurses-install:
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/lib{tinfo,form,menu,ncurses,panel}.so* \
 	    ${IDIR_LIBNCURSES}/usr/lib
-	for ti in rxvt rxvt-unicode; do \
-		TERMINFO=${WRKINST}/usr/share/terminfo \
-		PATH=$(HOST_PATH) \
-		tic$(EXEEXT) -x ./files/$$ti.ti; \
-	done
 ifeq (${ADK_PACKAGE_LIBNCURSES_FULL_TERMINFO},y)
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share
 	${CP} ${WRKINST}/usr/share/terminfo ${IDIR_LIBNCURSES}/usr/share/
 else
 	${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/
 	for f in ansi dumb linux screen vt100 vt102 \
-	    rxvt rxvt-unicode vt220 xterm xterm-color xterm-xfree86; do \
+	    vt220 xterm xterm-color xterm-xfree86; do \
 		${INSTALL_DIR} ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}; \
 		${INSTALL_DATA} ${WRKINST}/usr/share/terminfo/*/$$f \
 		    ${IDIR_LIBNCURSES}/usr/share/terminfo/$${f:0:1}/$$f; \
