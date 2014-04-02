@@ -4,13 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		1.7.0
+PKG_VERSION:=		1.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		32893941d40d052a5e649efcf06aca06
+PKG_MD5SUM:=		9541063d999cf9659ed7fdce71314f31
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		zlib libsdl libpng
-PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host qemu-host zlib sdl libpng
+PKG_DEPENDS:=		zlib glib
+PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host 
+PKG_BUILDDEP+=		qemu-host zlib glib
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
@@ -24,17 +25,18 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
-TARGET_LDFLAGS+=	-pthread -lm -lrt
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
+			--cross-prefix=$(GNU_TARGET_NAME)- \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--enable-kvm \
 			--disable-docs \
+			--disable-sdl \
 			--bindir=/usr/bin
 
 HOST_STYLE:=		manual
+CFLAGS_FOR_BUILD+=	-DNATIVE
 HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--disable-docs \
 			--disable-werror \

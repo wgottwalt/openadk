@@ -1,21 +1,25 @@
---- qemu-1.7.0.orig/linux-user/syscall.c	2013-11-27 23:15:55.000000000 +0100
-+++ qemu-1.7.0/linux-user/syscall.c	2014-01-31 09:51:34.051058876 +0100
-@@ -64,6 +64,7 @@ int __clone2(int (*fn)(void *), void *ch
+--- qemu-1.7.1.orig/linux-user/syscall.c	2014-03-25 15:01:10.000000000 +0100
++++ qemu-1.7.1/linux-user/syscall.c	2014-04-02 16:56:13.483513278 +0200
+@@ -63,6 +63,7 @@ int __clone2(int (*fn)(void *), void *ch
+ //#include <sys/user.h>
  #include <netinet/ip.h>
  #include <netinet/tcp.h>
- #include <linux/wireless.h>
 +#include <linux/version.h>
+ #include <linux/wireless.h>
  #include <linux/icmp.h>
  #include "qemu-common.h"
- #ifdef TARGET_GPROF
-@@ -94,7 +95,11 @@ int __clone2(int (*fn)(void *), void *ch
+@@ -94,7 +95,15 @@ int __clone2(int (*fn)(void *), void *ch
  #include <linux/utsname.h>
  #include <linux/cdrom.h>
  #include <linux/hdreg.h>
++#ifdef NATIVE
 +#if LINUX_VERSION_CODE <= KERNEL_VERSION(3,11,0)
  #include <linux/soundcard.h>
 +#else
 +#include <linux/soundcard.h.oss3>
++#endif
++#else
++#include <linux/soundcard.h>
 +#endif
  #include <linux/kd.h>
  #include <linux/mtio.h>
