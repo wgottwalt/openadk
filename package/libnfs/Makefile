@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnfs
-PKG_VERSION:=		1.8.0
+PKG_VERSION:=		1.9.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0f20c7c104aa2e2ee563169b7e164aab
+PKG_MD5SUM:=		a07656eeca58ad8d4870da546745628a
 PKG_DESCR:=		NFS client library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
