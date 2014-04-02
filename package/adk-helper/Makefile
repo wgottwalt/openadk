@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		adk helper utilities
 PKG_SECTION:=		misc
 
-PKG_CFLINE_MKCRYPT:=	depends on ADK_HOST_ONLY
+PKG_CFLINE_ADK_HELPER:=	depends on ADK_HOST_ONLY
 
 NO_DISTFILES:=		1
 
