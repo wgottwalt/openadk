@@ -10,8 +10,9 @@ PKG_MD5SUM:=		9541063d999cf9659ed7fdce71314f31
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		zlib glib
-PKG_BUILDDEP:=		gettext-tiny libiconv-tiny glib-host 
-PKG_BUILDDEP+=		qemu-host zlib glib
+PKG_BUILDDEP:=		gettext-tiny libiconv-tiny
+PKG_BUILDDEP+=		zlib glib
+HOST_BUILDDEP:=		glib-host
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
@@ -35,9 +36,10 @@ CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--disable-sdl \
 			--bindir=/usr/bin
 
-HOST_STYLE:=		manual
 CFLAGS_FOR_BUILD+=	-DNATIVE
+HOST_STYLE:=		manual
 HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
+			--prefix=${STAGING_HOST_DIR}/usr \
 			--disable-docs \
 			--disable-werror \
 			--disable-system \
@@ -45,17 +47,17 @@ HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 
 host-configure:
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
-	    env ${HOST_CONFIGURE_ENV} \
-	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
+		env ${HOST_CONFIGURE_ENV} \
+		${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
+		${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 
 host-build:
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
-	
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+       
 qemu-hostinstall:
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-	    DESTDIR='$(STAGING_HOST_DIR)' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+		${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 
 qemu-install:
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/share/qemu

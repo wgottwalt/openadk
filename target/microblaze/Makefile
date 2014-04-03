@@ -18,7 +18,7 @@ endif
 
 ifeq ($(ADK_TARGET_FS),squashfs)
 imageinstall: $(BUILD_DIR)/root.squashfs
-	qemu-img create -f raw $(FW_DIR)/$(ROOTFSSQUASHFS) $(ADK_TARGET_MTD_SIZE)
+	env PATH=$(HOST_PATH) qemu-img create -f raw $(FW_DIR)/$(ROOTFSSQUASHFS) $(ADK_TARGET_MTD_SIZE)
 	dd conv=notrunc if=$(BUILD_DIR)/root.squashfs of=$(FW_DIR)/$(ROOTFSSQUASHFS)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 ifneq ($(ADK_HARDWARE_QEMU),)
