@@ -270,8 +270,6 @@ config ADK_TARGET_QEMU_WITH_BLOCK
 	select ADK_KERNEL_SCSI_IBMVSCSI if ADK_TARGET_SYSTEM_QEMU_PPC64
 	select ADK_KERNEL_SCSI_SUNESP if ADK_TARGET_SYSTEM_QEMU_SPARC
 	select ADK_KERNEL_PATA_PLATFORM if ADK_LINUX_SH
-	select ADK_HOST_NEED_JFFS2 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
-	select ADK_HOST_NEED_SQUASHFS if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 
 endchoice
 
@@ -358,12 +356,6 @@ config ADK_TARGET_WITH_ACPI
 	boolean
 
 config ADK_TARGET_WITH_VGA
-	boolean
-
-config ADK_TARGET_WITH_CF
-	boolean
-
-config ADK_TARGET_WITH_MMC
 	boolean
 
 config ADK_TARGET_WITH_NAND
@@ -779,6 +771,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
+	select ADK_HOST_NEED_QEMU if ADK_HARDWARE_QEMU
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_TARGET_WITH_MTD
 	help
@@ -833,35 +826,6 @@ config ADK_TARGET_ROOTFS_USB
 	help
 	  Boot system from USB stick.
 
-config ADK_TARGET_ROOTFS_CF
-	bool "read-write filesystem for compact flash"
-	depends on ADK_TARGET_WITH_CF
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	help
-	  Use this option if you have a compact flash based system.
-	  (ext2 filesystem is used.)
-
-config ADK_TARGET_ROOTFS_GENEXT2FS
-	bool "read-write filesystem for compact flash (genext2fs version)"
-	depends on ADK_TARGET_WITH_CF
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	select ADK_HOST_NEED_GENEXT2FS
-	help
-	  Use this option if you have a compact flash based system.
-	  (ext2 filesystem is used.)
-
-config ADK_TARGET_ROOTFS_MMC
-	bool "read-write filesystem for mmc/sdcard"
-	depends on ADK_TARGET_WITH_MMC
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	help
-	  Use this option if you have a MMC/SDCARD based system.
-	  (ext2 filesystem is used.)
-
 config ADK_TARGET_ROOTFS_ISO
 	bool "ISO image"
 	select ADK_KERNEL_ISO9660_FS
@@ -879,7 +843,7 @@ config ADK_TARGET_ROOTFS_ISO
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	bool "Archive usable for initramfs creation"
 	help
-	  Use this option if your palnning to create a initramfs,
+	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.
 
 config ADK_TARGET_ROOTFS_ARCHIVE

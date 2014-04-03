@@ -123,6 +123,11 @@ TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
+ifeq ($(ADK_LINUX_MICROBLAZE),y)
+TARGET_CFLAGS+=		-mxl-barrel-shift
+TARGET_CXX_FLAGS+=	-mxl-barrel-shift
+endif
+
 ifneq ($(ADK_DEBUG),)
 ifeq ($(ADK_DEBUG_OPTS),y)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)

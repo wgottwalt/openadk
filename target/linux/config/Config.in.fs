@@ -72,8 +72,6 @@ config ADK_KERNEL_SQUASHFS
 
 config ADK_KERNEL_EXT2_FS
 	boolean
-	default y if ADK_TARGET_WITH_CF
-	default y if ADK_TARGET_WITH_MMC && !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 
@@ -196,7 +194,7 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	select ADK_KERNEL_BLOCK
-	default y if ADK_TARGET_WITH_MMC
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
 	  This option provides support for normal Windows file systems with
