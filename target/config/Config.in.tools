@@ -97,6 +97,14 @@ config ADK_HOST_BUILD_MKSH
 	boolean
 	default n
 
+config ADK_HOST_NEED_QEMU
+	boolean
+	default n
+
+config ADK_HOST_BUILD_QEMU
+	boolean
+	default n
+
 config ADK_HOST_NEED_SYSLINUX
 	boolean
 	default n

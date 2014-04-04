@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBJASPER,libjasper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+
 libjasper-install:
 	$(INSTALL_DIR) $(IDIR_LIBJASPER)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libjasper*.so* \
