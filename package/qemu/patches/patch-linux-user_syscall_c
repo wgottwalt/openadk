@@ -1,5 +1,5 @@
 --- qemu-1.7.1.orig/linux-user/syscall.c	2014-03-25 15:01:10.000000000 +0100
-+++ qemu-1.7.1/linux-user/syscall.c	2014-04-02 16:56:13.483513278 +0200
++++ qemu-1.7.1/linux-user/syscall.c	2014-04-04 16:51:08.292546548 +0200
 @@ -63,6 +63,7 @@ int __clone2(int (*fn)(void *), void *ch
  //#include <sys/user.h>
  #include <netinet/ip.h>
@@ -24,3 +24,12 @@
  #include <linux/kd.h>
  #include <linux/mtio.h>
  #include <linux/fs.h>
+@@ -400,7 +409,7 @@ static int sys_inotify_init1(int flags)
+ #endif
+ #define __NR_sys_ppoll __NR_ppoll
+ _syscall5(int, sys_ppoll, struct pollfd *, fds, nfds_t, nfds,
+-          struct timespec *, timeout, const __sigset_t *, sigmask,
++          struct timespec *, timeout, const sigset_t *, sigmask,
+           size_t, sigsetsize)
+ #endif
+ 

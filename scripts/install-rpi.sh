@@ -76,9 +76,9 @@ parted -s $1 unit cyl mkpart primary fat32 $datasize $maxsize
 parted -s $1 set 1 boot on
 sfdisk --change-id $1 4 88
 sleep 2
-mkfs.vfat ${1}1
-mkfs.ext4 ${1}2
-mkfs.ext4 ${1}3
+mkfs.vfat ${1}1 >/dev/null
+mkfs.ext4 -q -O ^huge_file ${1}2
+mkfs.ext4 -q -O ^huge_file ${1}3
 sync
 sleep 2
 
