@@ -4,14 +4,14 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		postgresql
-PKG_VERSION:=		9.1.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		93b293bd735bb99258c1bad7bc9b8f6c
+PKG_VERSION:=		9.3.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d9be740a612f8a0b9ea61dd524abfa4c
 PKG_DESCR:=		PostgreSQL database library
 PKG_SECTION:=		db
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.postgresql.org/
-PKG_SITES:=		http://ftp.postgresql.org/pub/source/v9.1.1/
+PKG_SITES:=		http://ftp.postgresql.org/pub/source/v9.3.4/
 PKG_LIBNAME:=		libpq
 PKG_OPTS:=		dev
 

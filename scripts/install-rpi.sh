@@ -3,125 +3,101 @@
 # material, please see the LICENCE file in the top-level directory.
 
 if [ $(id -u) -ne 0 ];then
-	printf "Installation is only possible as root\n"
+	echo "Installation is only possible as root"
 	exit 1
 fi
 
-printf "Checking if parted is installed"
-parted=$(which parted)
-
-if [ ! -z $parted -a -x $parted ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if sfdisk is installed"
-sfdisk=$(which sfdisk)
-
-if [ ! -z $sfdisk -a -x $sfdisk ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
-
-printf "Checking if mke2fs is installed"
-mke2fs=$(which mke2fs)
-
-if [ ! -z $mke2fs -a -x $mke2fs ];then
-	printf "...okay\n"
-else
-	printf "...failed\n"
-	exit 1
-fi
+for tool in parted sfdisk mkfs.vfat mkfs.ext4;do
+	if ! which $tool >/dev/null; then
+		echo "Checking if $tool is installed... failed"
+		f=1
+	fi
+done
+[[ $f -eq 1 ]] && exit 1
 
 if [ -z $1 ];then
-	printf "Please give your SD card device as first parameter\n"
+	echo "Please give your SD card device as first parameter"
 	exit 1
 else
 	if [ -z $2 ];then
-		printf "Please give your install tar archive as second parameter\n"
-		exit 2
+		echo "Please give your install tar archive as second parameter"
+		exit 1
 	fi
 	if [ -f $2 ];then
-		printf "Installing $2 on $1\n"
+		echo "Installing $2 on $1"
 	else
-		printf "$2 is not a file, Exiting\n"
+		echo "$2 is not a file, exiting"
 		exit 1
 	fi
 	if [ -b $1 ];then
-		printf "Using $1 as SD card disk for installation\n"
-		printf "This will destroy all data on $1, are you sure?\n"
-		printf "Type "y" to continue\n"
+		echo "Using $1 as SD card disk for installation"
+		echo "WARNING: This will destroy all data on $1 - type Yes to continue!"
 		read y
-		if [ "$y" = "y" ];then
+		if [ "$y" = "Yes" ];then
 			$sfdisk -l $1 2>&1 |grep 'No medium'
 			if [ $? -eq 0 ];then
+				echo "No medium found"
 				exit 1
 			else
-				printf "Starting with installation\n"
+				echo "Starting with installation"
 			fi
 		else
-			printf "Exiting.\n"
+			echo "Exiting."
 			exit 1
 		fi
 	else
-		printf "Sorry $1 is not a block device\n"
+		echo "Sorry $1 is not a block device"
 		exit 1
 	fi
 fi
 	
 
 if [ $(mount | grep $1| wc -l) -ne 0 ];then
-	printf "Block device $1 is in use, please umount first.\n"
+	echo "Block device $1 is in use, please umount first"
 	exit 1
 fi
 
+echo "Wiping existing partitions"
+dd if=/dev/zero of=$1 bs=512 count=1 >/dev/null 2>&1
+sync
 
-if [ $($sfdisk -l $1 2>/dev/null|grep Empty|wc -l) -ne 4 ];then
-	printf "Partitions already exist, should I wipe them?\n"
-	printf "Type y to continue\n"
-	read y
-	if [ $y = "y" ];then
-		printf "Wiping existing partitions\n"
-		dd if=/dev/zero of=$1 bs=512 count=1 >/dev/null 2>&1
-	else
-		printf "Exiting.\n"
-		exit 1
-	fi
-fi
-
-printf "Create partition and filesystem for raspberry pi\n"
+echo "Create partition and filesystem for raspberry pi"
 rootpart=${1}2
-$parted -s $1 mklabel msdos
+parted -s $1 mklabel msdos
 sleep 2
-maxsize=$(env LC_ALL=C $parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
-rootsize=$(($maxsize-16))
+maxsize=$(env LC_ALL=C parted $1 -s unit cyl print |awk '/^Disk/ { print $3 }'|sed -e 's/cyl//')
+rootsize=$(($maxsize-34))
+datasize=$(($maxsize-2))
 
-$parted -s $1 unit cyl mkpart primary fat32 -- 0 16
-$parted -s $1 unit cyl mkpart primary ext2 -- 16 $rootsize
-$parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
-$parted -s $1 set 1 boot on
-$sfdisk --change-id $1 3 88
+parted -s $1 unit cyl mkpart primary fat32 -- 0 16
+parted -s $1 unit cyl mkpart primary ext2 -- 16 $rootsize
+parted -s $1 unit cyl mkpart primary ext2 $rootsize $datasize
+parted -s $1 unit cyl mkpart primary fat32 $datasize $maxsize
+parted -s $1 set 1 boot on
+sfdisk --change-id $1 4 88
 sleep 2
-mkfs.vfat ${1}1
-$mke2fs ${1}2
+mkfs.vfat ${1}1 >/dev/null
+mkfs.ext4 -q -O ^huge_file ${1}2
+mkfs.ext4 -q -O ^huge_file ${1}3
 sync
 sleep 2
 
 tmp=$(mktemp -d)
-mount -t ext2 ${rootpart} $tmp
+mount -t ext4 ${rootpart} $tmp
 mkdir $tmp/boot
+mkdir $tmp/data
+mount -t ext4 ${1}3 $tmp/data
+mkdir $tmp/data/mpd $tmp/data/xbmc
 mount -t vfat ${1}1 $tmp/boot
-sleep 2
-printf "Extracting install archive\n"
+sleep 1
+echo "Extracting install archive"
 tar -C $tmp -xzpf $2 
-printf "Fixing permissions\n"
+echo "Fixing permissions"
 chmod 1777 $tmp/tmp
 chmod 4755 $tmp/bin/busybox
+echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >>$tmp/etc/fstab
+umount $tmp/data
 umount $tmp/boot
 umount $tmp
-printf "Successfully installed.\n"
+echo "Successfully installed."
 exit 0

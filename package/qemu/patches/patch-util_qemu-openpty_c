@@ -1,0 +1,11 @@
+--- qemu-1.7.0.orig/util/qemu-openpty.c	2013-11-27 23:15:55.000000000 +0100
++++ qemu-1.7.0/util/qemu-openpty.c	2014-03-14 09:05:17.280258135 +0100
+@@ -35,7 +35,7 @@
+ #include "config-host.h"
+ #include "qemu-common.h"
+ 
+-#if defined(__GLIBC__)
++#if defined(__linux__)
+ # include <pty.h>
+ #elif defined CONFIG_BSD
+ # include <termios.h>
