@@ -180,7 +180,6 @@ config ADK_KPACKAGE_KMOD_IPV6_SIT
 config ADK_KPACKAGE_KMOD_PPP
 	prompt "kmod-ppp.......................... PPP support"
 	tristate
-	select ADK_KERNEL_NETDEVICES
 	select ADK_KERNEL_PPP_ASYNC
 	select ADK_KERNEL_SLHC
 	select ADK_KPACKAGE_KMOD_CRC_CCITT
@@ -243,7 +242,6 @@ config ADK_KPACKAGE_KMOD_PPPOE
 config ADK_KPACKAGE_KMOD_TUN
 	prompt "kmod-tun.......................... Universal TUN/TAP driver"
 	tristate
-	select ADK_KERNEL_NETDEVICES
 	default n
 	help
 	  Kernel support for the TUN/TAP tunneling device
