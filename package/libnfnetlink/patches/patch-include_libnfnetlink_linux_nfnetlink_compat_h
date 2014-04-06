@@ -1,0 +1,13 @@
+--- libnfnetlink-1.0.1.orig/include/libnfnetlink/linux_nfnetlink_compat.h	2008-06-18 14:36:57.000000000 +0200
++++ libnfnetlink-1.0.1/include/libnfnetlink/linux_nfnetlink_compat.h	2014-04-05 09:33:12.251169468 +0200
+@@ -20,8 +20,8 @@
+ 
+ struct nfattr
+ {
+-	u_int16_t nfa_len;
+-	u_int16_t nfa_type;	/* we use 15 bits for the type, and the highest
++	uint16_t nfa_len;
++	uint16_t nfa_type;	/* we use 15 bits for the type, and the highest
+ 				 * bit to indicate whether the payload is nested */
+ };
+ 

@@ -271,6 +271,12 @@ if ! which xz >/dev/null 2>&1; then
 fi
 
 # optional
+host_build_cdrtools=0
+if ! which mkisofs >/dev/null 2>&1; then
+	echo "No mkisofs found, will build one when required."
+	host_build_cdrtools=1
+fi
+
 host_build_ccache=0
 if ! which ccache >/dev/null 2>&1; then
 	echo "No ccache found, will build one when required."
@@ -295,6 +301,11 @@ if ! which lzop >/dev/null 2>&1; then
 	host_build_lzop=1
 fi
 
+host_build_qemu=0
+if ! which qemu-img >/dev/null 2>&1; then
+	echo "No qemu found, will build one when required."
+	host_build_qemu=1
+fi
 
 echo "config ADK_HOST_BUILD_TOOLS" > $topdir/target/config/Config.in.prereq
 printf "\t%s\n" "boolean" >> $topdir/target/config/Config.in.prereq
@@ -311,9 +322,11 @@ if [ $host_build_findutils -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_F
 if [ $host_build_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq ;fi
 # optional
 if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_cdrtools -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CDRTOOLS if ADK_HOST_NEED_CDRTOOLS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_genext2fs -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GENEXT2FS if ADK_HOST_NEED_GENEXT2FS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_lzma -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZMA if ADK_HOST_NEED_LZMA" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_lzop -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZOP if ADK_HOST_NEED_LZOP" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_qemu -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_QEMU if ADK_HOST_NEED_QEMU" >> $topdir/target/config/Config.in.prereq ;fi
 
 cd $topdir
 rm -rf tmp

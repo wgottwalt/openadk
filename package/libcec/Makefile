@@ -5,13 +5,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
 PKG_VERSION:=		2.1.4
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		d65e52ab3295e9e4b73bf4580f3bd4f7
 PKG_DESCR:=		control your device with your TV remote control
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://libcec.pulse-eight.com/
-PKG_SITES:=		http://www.openadk.org/distfiles
+PKG_SITES:=		http://packages.pulse-eight.net/pulse/sources/libcec/
 PKG_OPTS:=		dev
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc

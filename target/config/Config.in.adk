@@ -33,6 +33,13 @@ config ADK_DEBUG
 	  All packages and libc will be compiled and packaged with debug information.
 	  Mostly useful for NFS root or big USB/CF or hard disk setups.
 
+config ADK_DEBUG_OPTS
+	bool "use optimization cflags"
+	depends on ADK_DEBUG
+	default n
+	help
+	  All packages and libc will be compiled with debug information and optimization flags on.
+
 config ADK_DEBUG_STRIP
 	bool "strip target binaries/libraries for gdbserver usage"
 	depends on ADK_DEBUG

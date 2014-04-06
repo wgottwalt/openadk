@@ -54,7 +54,7 @@ SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
 
 # PATH variables
 TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
 AUTOTOOL_PATH=		${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 
 ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
@@ -123,8 +123,17 @@ TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
+ifeq ($(ADK_LINUX_MICROBLAZE),y)
+TARGET_CFLAGS+=		-mxl-barrel-shift
+TARGET_CXX_FLAGS+=	-mxl-barrel-shift
+endif
+
 ifneq ($(ADK_DEBUG),)
+ifeq ($(ADK_DEBUG_OPTS),y)
+TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
+else
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
+endif
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
