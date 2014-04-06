@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnfnetlink
 PKG_VERSION:=		1.0.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		98927583d2016a9fb1936fed992e2c5e
 PKG_DESCR:=		low-level library for netfilter related kernel/userspace communication
 PKG_SECTION:=		libs

@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.28.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		cbdc0a79bdf6e657dd387c3d88d802e3
-PKG_DESCR:=		a client-side URL transfer tool
+PKG_VERSION:=		7.36.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		643a7030b27449e76413d501d4b8eb57
+PKG_DESCR:=		client-side URL transfer tool
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcurl
 PKG_BUILDDEP:=		zlib
@@ -58,7 +58,6 @@ CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
 			--without-axtls
 endif
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
 CONFIGURE_ARGS+=	--disable-thread \
 			--enable-cookies \
@@ -67,17 +66,24 @@ CONFIGURE_ARGS+=	--disable-thread \
 			--enable-file \
 			--enable-ftp \
 			--enable-http \
+			--enable-proxy \
+			--disable-symbol-hiding \
 			--disable-ares \
 			--disable-dict \
 			--disable-gopher \
 			--disable-ldap \
+			--disable-smtp \
+			--disable-imap \
+			--disable-ldaps \
 			--disable-manual \
 			--disable-sspi \
 			--disable-telnet \
 			--disable-verbose \
+			--without-libssh2 \
+			--without-librtmp \
+			--without-libidn \
 			--with-random="/dev/urandom" \
-			--with-ca-bundle="/etc/ssl/cert.pem" \
-			--without-libidn
+			--with-ca-bundle="/etc/ssl/cert.pem"
 
 ifneq (${ADK_PACKAGE_CURL_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6

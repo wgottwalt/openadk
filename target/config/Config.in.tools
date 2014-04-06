@@ -97,15 +97,24 @@ config ADK_HOST_BUILD_MKSH
 	boolean
 	default n
 
-config ADK_HOST_NEED_SYSLINUX
+config ADK_HOST_NEED_QEMU
 	boolean
 	default n
 
-config ADK_HOST_BUILD_SYSLINUX
+config ADK_HOST_BUILD_QEMU
 	boolean
 	default n
 
 # optional, must be used from OpenADK
+config ADK_HOST_NEED_MKIMAGE
+	boolean
+	default n
+
+config ADK_HOST_BUILD_MKIMAGE
+	boolean
+	default y if ADK_HOST_NEED_MKIMAGE
+	default n
+
 config ADK_HOST_NEED_MTD_UTILS
 	boolean
 	default n
@@ -124,13 +133,13 @@ config ADK_HOST_BUILD_SQUASHFS
 	default y if ADK_HOST_NEED_SQUASHFS
 	default n
 
-config ADK_HOST_NEED_MKIMAGE
+config ADK_HOST_NEED_SYSLINUX
 	boolean
 	default n
 
-config ADK_HOST_BUILD_MKIMAGE
+config ADK_HOST_BUILD_SYSLINUX
 	boolean
-	default y if ADK_HOST_NEED_MKIMAGE
+	default y if ADK_HOST_NEED_SYSLINUX
 	default n
 
 config ADK_HOST_BUILD_PCRE

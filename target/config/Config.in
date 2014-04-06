@@ -210,6 +210,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
 
 config ADK_QEMU_ARGS
 	string
@@ -771,6 +772,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
+	select ADK_HOST_NEED_QEMU if ADK_HARDWARE_QEMU
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_TARGET_WITH_MTD
 	help

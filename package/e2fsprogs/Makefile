@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.42.8
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		8ef664b6eb698aa6b733df59b17b9ed4
+PKG_VERSION:=		1.42.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		3f8e41e63b432ba114b33f58674563f7
 PKG_DESCR:=		Ext2/3/4 filesystem utilities (meta-package)
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libcom-err libuuid libblkid libpthread
@@ -15,8 +15,6 @@ PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 PKG_OPTS:=		dev
-
-PKG_CFLINE_E2FSPROGS:=	default y if ADK_TARGET_ROOTFS_CF
 
 PKG_SUBPKGS:=		E2FSPROGS LIBE2FS LIBCOM_ERR LIBSS E2FSCK_STATIC
 PKG_SUBPKGS+=		RESIZE2FS TUNE2FS E2FSCK MKE2FS
@@ -88,6 +86,8 @@ e2fsck-install:
 	${INSTALL_DIR} ${IDIR_E2FSCK}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/e2fsck ${IDIR_E2FSCK}/usr/sbin
 	cd $(IDIR_E2FSCK)/usr/sbin && ln -sf e2fsck fsck.ext2
+	cd $(IDIR_E2FSCK)/usr/sbin && ln -sf e2fsck fsck.ext3
+	cd $(IDIR_E2FSCK)/usr/sbin && ln -sf e2fsck fsck.ext4
 
 mke2fs-install:
 	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
