@@ -1,0 +1,10 @@
+--- conntrack-tools-1.4.2.orig/include/tcp.h	2013-02-24 23:23:57.000000000 +0100
++++ conntrack-tools-1.4.2/include/tcp.h	2014-04-05 09:40:10.923493847 +0200
+@@ -2,6 +2,7 @@
+ #define _TCP_H_
+ 
+ #include <stdint.h>
++#include <sys/select.h>
+ #include <netinet/in.h>
+ 
+ struct tcp_conf {

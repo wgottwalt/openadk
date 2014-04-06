@@ -21,8 +21,8 @@ TARGETS+=glibc
 LIBC:=glibc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-TARGETS+=uClibc
-LIBC:=uClibc
+TARGETS+=uclibc
+LIBC:=uclibc
 endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl

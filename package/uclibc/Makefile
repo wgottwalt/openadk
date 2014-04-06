@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
-include $(TOPDIR)/toolchain/uClibc/Makefile.inc
+include $(TOPDIR)/toolchain/uclibc/Makefile.inc
 
 PKG_NAME:=		uClibc
 PKG_DESCR:=		embedded C library
