@@ -10,7 +10,7 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 include ${TOPDIR}/toolchain/musl/Makefile.inc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		libpthread

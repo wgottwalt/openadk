@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
 
-PKG_HOST_DEPENDS:=	linux
+#PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips
 PKG_NOPARALLEL:=	1
 
