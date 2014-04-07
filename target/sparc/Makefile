@@ -16,7 +16,7 @@ imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_SPARC),y)
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-sparc -M SS-5 -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img -append "root=/dev/sda1"'
 endif

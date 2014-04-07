@@ -65,7 +65,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh +g qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-arm -M $(MACH) -nographic $(NET) -kernel $(FW_DIR)/$(TARGET_KERNEL) -hda qemu-${CPU_ARCH}.img'
 endif
