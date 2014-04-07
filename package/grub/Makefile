@@ -13,7 +13,6 @@ PKG_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
 
-#PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips
 PKG_NOPARALLEL:=	1
 
@@ -39,6 +38,7 @@ TARGET_CFLAGS+=         -static
 TARGET_LDFLAGS+=        -static
 endif
 
+CONFIGURE_ARGS+=	--disable-grub-mkfont
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
