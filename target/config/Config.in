@@ -216,6 +216,22 @@ config ADK_QEMU_ARGS
 	string
 	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
 
+menu "Qemu configuration"
+depends on ADK_HARDWARE_QEMU
+
+choice 
+prompt "Use a Bootloader"
+depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
+
+config ADK_TARGET_QEMU_WITHOUT_BOOTLOADER
+	boolean "do not use bootloader"
+
+config ADK_TARGET_QEMU_WITH_BOOTLOADER
+	boolean "use bootloader"
+	select ADK_PACKAGE_GRUB if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
+
+endchoice
+
 choice
 prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
@@ -321,6 +337,7 @@ config ADK_TARGET_QEMU_WITH_VIRTIO
 
 endchoice
 
+endmenu
 
 choice
 prompt "Use ARM thumb mode"
