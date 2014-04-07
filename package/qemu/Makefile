@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
 PKG_VERSION:=		1.7.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9541063d999cf9659ed7fdce71314f31
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		misc
@@ -26,6 +26,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_CFLAGS+=		-DF_EXLCK=4 -DF_SHLCK=8 -D__SIGRTMIN=32 -D__SIGRTMAX=\(NSIG-1\)
+endif
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--cross-prefix=$(GNU_TARGET_NAME)- \

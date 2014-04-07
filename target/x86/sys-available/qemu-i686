@@ -1,5 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_I686
-	bool "Qemu Emulator"
+	bool "Qemu Emulator (i686)"
 	select ADK_x86
 	select ADK_qemu_i686
 	select ADK_CPU_I686

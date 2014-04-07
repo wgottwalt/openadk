@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nasm
-PKG_VERSION:=		2.11
+PKG_VERSION:=		2.11.02
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a884450ee65201473af4d270bdc132f8
+PKG_MD5SUM:=		7d5408bf18aa1699ad6c17e5017f12c3
 PKG_DESCR:=		the netwide assembler
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		nasm-host

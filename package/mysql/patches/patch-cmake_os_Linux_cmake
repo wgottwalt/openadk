@@ -1,0 +1,17 @@
+--- mysql-5.6.17.orig/cmake/os/Linux.cmake	2014-03-14 20:07:26.000000000 +0100
++++ mysql-5.6.17/cmake/os/Linux.cmake	2014-04-04 10:11:45.000000000 +0200
+@@ -23,14 +23,6 @@ SET(TARGET_OS_LINUX 1)
+ SET(HAVE_NPTL 1)
+ SET(_GNU_SOURCE 1)
+ 
+-# Fix CMake (< 2.8) flags. -rdynamic exports too many symbols.
+-FOREACH(LANG C CXX)
+-  STRING(REPLACE "-rdynamic" "" 
+-  CMAKE_SHARED_LIBRARY_LINK_${LANG}_FLAGS
+-  ${CMAKE_SHARED_LIBRARY_LINK_${LANG}_FLAGS}  
+-  )
+-ENDFOREACH()
+-
+ # Ensure we have clean build for shared libraries
+ # without unresolved symbols
+ # Not supported with AddressSanitizer

@@ -238,7 +238,7 @@ ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 		${TARGET_DIR}/boot/syslinux
 	echo 'DEFAULT /boot/kernel root=/dev/sr0' > \
 		${TARGET_DIR}/boot/syslinux/isolinux.cfg
-	${STAGING_HOST_DIR}/usr/bin/mkisofs -R -uid 0 -gid 0 -o $@ \
+	PATH='${HOST_PATH}' mkisofs -R -uid 0 -gid 0 -o $@ \
 		-b boot/syslinux/isolinux.bin \
 		-c boot/syslinux/boot.cat -no-emul-boot \
 		-boot-load-size 4 -boot-info-table ${TARGET_DIR}
