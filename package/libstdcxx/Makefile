@@ -8,7 +8,7 @@ else
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 include ${TOPDIR}/toolchain/musl/Makefile.inc
 else
-include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 endif
 
