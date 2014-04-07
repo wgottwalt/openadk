@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nginx
-PKG_VERSION:=		1.5.3
+PKG_VERSION:=		1.5.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1e735dd6a6ade2b5c20e924b67c3d355
-PKG_DESCR:=		powerful http reverse proxy
+PKG_MD5SUM:=		c21589daaec0743d6d4cdf41503ffd53
+PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		proxy
 PKG_BUILDDEP:=		openssl pcre zlib
 PKG_DEPENDS:=		libopenssl libpcre libpthread zlib

@@ -1,0 +1,10 @@
+config ADK_TARGET_SYSTEM_QEMU_I486
+	bool "Qemu Emulator (i486)"
+	select ADK_x86
+	select ADK_qemu_i486
+	select ADK_CPU_I486
+	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_KERNEL_BZIMAGE
+	help
+	 Support for Qemu Emulator (i486).
+

@@ -7,7 +7,7 @@ ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${TOPDIR}/toolchain/glibc/Makefile.inc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		librt
