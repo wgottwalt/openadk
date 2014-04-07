@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG udhcpd
+#PKG busybox
 #INIT 50
 . /etc/rc.conf
 

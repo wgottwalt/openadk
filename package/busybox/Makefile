@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.21.1
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		795394f83903b5eec6567d51eebb417e
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base
@@ -60,6 +60,10 @@ do-build:
 do-install:
 	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
+ifeq ($(BUSYBOX_IFUPDOWN),y)
+	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc/init.d
+	$(INSTALL_BIN) ./files/network $(IDIR_BUSYBOX)/etc/init.d
+endif
 ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
 		$(IDIR_BUSYBOX)/bin/busybox

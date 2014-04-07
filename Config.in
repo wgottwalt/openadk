@@ -32,11 +32,6 @@ config ADK_CHOOSE_TARGET_SYSTEM
 
 source "target/config/Config.in"
 
-menu "Runtime configuration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-source "target/config/Config.in.runtime"
-endmenu
-
 menu "Package collection"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/packages/Config.in"
@@ -87,6 +82,11 @@ config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
 
 source "package/Config.in.auto.global"
 source "package/Config.in.auto"
+endmenu
+
+menu "Runtime configuration"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+source "target/config/Config.in.runtime"
 endmenu
 
 choice

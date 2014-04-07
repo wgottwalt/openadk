@@ -5,7 +5,8 @@ add_rcconf network network YES
 add_rcconf crond crond NO
 add_rcconf watchdog watchdog NO
 add_rcconf watchdog_flags watchdog_flags '-t 10 -T 20'
-add_rcconf 'use "-C32" normally, "NO" to disable' syslogd_flags '-C32'
+add_rcconf syslogd NO
+add_rcconf 'use "-C32" normally' syslogd_flags '-C32'
 add_rcconf inetd inetd NO
 add_rcconf ntpd ntpd NO
 add_rcconf ntpd_flags ntpd_flags '-p time.fu-berlin.de'
