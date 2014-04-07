@@ -39,12 +39,6 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64EL),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_SJLJ),y)
-CONFIGURE_ARGS+=	--enable-sjlj-exceptions
-else
-CONFIGURE_ARGS+=	--disable-sjlj-exceptions
-endif
-
 ifneq ($(ADK_PACKAGE_GXX),)
 CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
@@ -56,7 +50,6 @@ TARGET_CFLAGS+=		'-Wl,--secure-plt'
 else
 CONFIGURE_ARGS+=	--enable-target-optspace
 endif
-
 
 CONFIGURE_ENV+=		have_sys_sdt_h=no
 CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \

@@ -21,7 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NMAP,nmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
 
