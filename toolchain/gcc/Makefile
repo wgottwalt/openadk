@@ -202,11 +202,18 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
 	cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin; \
-		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
+		for app in ar as c++ g++ gcc ld ld.gold ld.bfd nm objcopy objdump ranlib strip; do \
 			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
+ifeq ($(ADK_TOOLCHAIN_USE_GOLD),y)
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
+		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
+else
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
+		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
+endif
 	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so.6

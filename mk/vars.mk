@@ -117,13 +117,13 @@ TARGET_CXXFLAGS+=	-static
 TARGET_LDFLAGS+=	-static
 endif
 
-ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
+ifneq ($(ADK_TOOLCHAIN_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
 TARGET_CXXFLAGS+=	-fstack-protector
 TARGET_LDFLAGS+=	-fstack-protector
 endif
 
-ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
+ifneq ($(ADK_TOOLCHAIN_USE_LTO),)
 TARGET_CFLAGS+=		-flto
 TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
