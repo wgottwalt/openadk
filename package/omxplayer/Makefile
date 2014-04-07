@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		omxplayer
-# actually d1a4a0e1030249e40e2e9bb04518f1b786b18488 from 7.01.2014
-PKG_VERSION:=		0.3
+# actually 1ca2f7adaa7f6a92410d9664e76c395537659dba from 07.04.2014
+PKG_VERSION:=		0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1882cac6032baa59291068af30df1702
+PKG_MD5SUM:=		d4efff32305bd16315e6fa4f80ea2a98
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libffmpeg boost bcm2835-vc libfreetype libpcre

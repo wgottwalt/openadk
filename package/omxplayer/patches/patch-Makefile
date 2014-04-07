@@ -1,14 +1,20 @@
---- omxplayer-0.2.orig/Makefile	2013-10-11 15:17:41.000000000 +0200
-+++ omxplayer-0.2/Makefile	2013-10-11 15:30:49.000000000 +0200
+--- omxplayer-0.4.orig/Makefile	2014-04-07 13:50:34.000000000 +0200
++++ omxplayer-0.4/Makefile	2014-04-07 15:39:22.000000000 +0200
 @@ -2,9 +2,9 @@ include Makefile.include
  
  CFLAGS+=-std=c++0x -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -DTARGET_POSIX -DTARGET_LINUX -fPIC -DPIC -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CMAKE_CONFIG -D__VIDEOCORE4__ -U_FORTIFY_SOURCE -Wall -DHAVE_OMXLIB -DUSE_EXTERNAL_FFMPEG  -DHAVE_LIBAVCODEC_AVCODEC_H -DHAVE_LIBAVUTIL_OPT_H -DHAVE_LIBAVUTIL_MEM_H -DHAVE_LIBAVUTIL_AVUTIL_H -DHAVE_LIBAVFORMAT_AVFORMAT_H -DHAVE_LIBAVFILTER_AVFILTER_H -DHAVE_LIBSWRESAMPLE_SWRESAMPLE_H -DOMX -DOMX_SKIP64BIT -ftree-vectorize -DUSE_EXTERNAL_OMX -DTARGET_RASPBERRY_PI -DUSE_EXTERNAL_LIBBCM_HOST
  
--LDFLAGS+=-L./ -ldbus-1 -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz -Lffmpeg_compiled/usr/local/lib/
-+LDFLAGS+=-L./ -ldbus-1 -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz -lkhrn_static
+-LDFLAGS+=-L./ -Lffmpeg_compiled/usr/local/lib/ -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz
++LDFLAGS+=-L./ -lc -lWFC -lGLESv2 -lEGL -lbcm_host -lopenmaxil -lfreetype -lz
  
 -INCLUDES+=-I./ -Ilinux -Iffmpeg_compiled/usr/local/include/
 +INCLUDES+=-I./ -Ilinux
  
  DIST ?= omxplayer-dist
  
+@@ -71,5 +71,4 @@ dist: omxplayer.bin
+ 	cp omxplayer omxplayer.bin $(DIST)/usr/bin
+ 	cp COPYING $(DIST)/usr/share/doc/
+ 	cp README.md $(DIST)/usr/share/doc/README
+-	cp -a ffmpeg_compiled/usr/local/lib/*.so* $(DIST)/usr/lib/omxplayer/
+ 	cd $(DIST); tar -czf ../$(DIST).tgz *
