@@ -23,11 +23,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_STATIC),y)
-TARGET_CFLAGS+=		-static
-TARGET_LDFLAGS+=	-static
-endif
-
 TARGET_CPPFLAGS+=	-DMKSH_SMALL=1
 TARGET_LDFLAGS+=	-static-libgcc
 

@@ -111,6 +111,12 @@ TARGET_LDFLAGS+=	-Wl,--secure-plt
 endif
 endif
 
+ifeq ($(ADK_STATIC),y)
+TARGET_CFLAGS+=		-static
+TARGET_CXXFLAGS+=	-static
+TARGET_LDFLAGS+=	-static
+endif
+
 ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
 TARGET_CXXFLAGS+=	-fstack-protector
