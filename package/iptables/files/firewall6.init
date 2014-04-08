@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG iptables
+#PKG ip6tables
 #INIT 45
 . /etc/rc.conf
 

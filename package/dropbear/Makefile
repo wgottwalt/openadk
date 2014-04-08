@@ -14,7 +14,6 @@ PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_DFLT_DROPBEAR:=	y if !ADK_TOOLCHAIN_ONLY && !ADK_PKG_TEST
 PKG_SUBPKGS:=		DROPBEAR DBCONVERT
 PKGSD_DBCONVERT:=	Utility for converting SSH private keys
 
@@ -25,8 +24,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,dropbear,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
-
-TARGET_LDFLAGS+=	$(ADK_TARGET_ABI_CFLAGS)
 
 ifeq ($(ADK_STATIC),y)
 TARGET_LDFLAGS+=	-static

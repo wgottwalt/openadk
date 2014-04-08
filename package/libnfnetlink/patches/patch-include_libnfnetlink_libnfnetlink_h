@@ -1,10 +1,10 @@
 --- libnfnetlink-1.0.1.orig/include/libnfnetlink/libnfnetlink.h	2010-05-09 23:31:56.000000000 +0200
-+++ libnfnetlink-1.0.1/include/libnfnetlink/libnfnetlink.h	2013-08-20 18:44:17.220339451 +0200
-@@ -15,6 +15,7 @@
++++ libnfnetlink-1.0.1/include/libnfnetlink/libnfnetlink.h	2014-04-08 08:59:56.000000000 +0200
+@@ -15,6 +15,8 @@
  #define aligned_u64 unsigned long long __attribute__((aligned(8)))
  #endif
  
-+#include <sys/types.h>
++#include <stdint.h>
  #include <sys/socket.h>	/* for sa_family_t */
  #include <linux/netlink.h>
  #include <libnfnetlink/linux_nfnetlink.h>
