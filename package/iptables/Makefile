@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.21
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		536d048c8e8eeebcd9757d0863ebb0c0
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		firewall
@@ -14,6 +14,7 @@ PKG_DEPENDS+=		kmod-nf-conntrack-ipv4 kmod-full-nat
 PKG_DEPENDS+=		kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject
 PKG_DEPENDS+=		kmod-ip-nf-filter kmod-ip-nf-match-state
 PKG_DEPENDS+=		kmod-netfilter-xt-target-tcpmss
+PKG_BUILDDEP:=		autotool libnetfilter_conntrack
 PKG_URL:=		http://www.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/
 PKG_OPTS:=		dev
@@ -34,6 +35,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_IPTABLES},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,IP6TABLES,ip6tables,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_IP6TABLES},${PKGSD_IP6TABLES},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--enable-devel
 
