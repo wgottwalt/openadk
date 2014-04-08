@@ -2,6 +2,8 @@ config ADK_PKG_MPDBOX
 	bool "Choose packages for MPDBox system"
 	default n
 	select ADK_PACKAGE_MPDBOX
+	select ADK_PACKAGE_DROPBEAR
+	select BUSYBOX_NTPD
 	select ADK_PACKAGE_CIFS_UTILS
 	select ADK_PACKAGE_NFS_UTILS
 	select ADK_PACKAGE_NFS_UTILS_CLIENT

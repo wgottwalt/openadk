@@ -304,13 +304,18 @@ static char *toupperstr(char *string) {
 
 int main() {
 
-	DIR *pkgdir, *pkglistdir;
+	DIR *pkgdir, *pkglistdir, *scriptdir;
 	struct dirent *pkgdirp;
-	FILE *pkg, *cfg, *menuglobal, *section;
+	struct dirent *scriptdirp;
+	size_t len;
+	FILE *pkg, *cfg, *menuglobal, *section, *initscript, *icfg;
 	char hvalue[MAXVALUE];
 	char buf[MAXPATH];
+	char ibuf[MAXPATH];
 	char tbuf[MAXPATH];
 	char path[MAXPATH];
+	char script[MAXPATH];
+	char script2[MAXPATH];
 	char spath[MAXPATH];
 	char dir[MAXPATH];
 	char variable[2*MAXVAR];
@@ -320,9 +325,10 @@ int main() {
 	char *pkg_need_cxx, *pkg_need_java, *pkgname, *sysname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
-	char *saveptr, *p_ptr, *s_ptr, *pkg_helper;
+	char *saveptr, *p_ptr, *s_ptr, *pkg_helper, *sname, *sname2;
 	int result;
 	StrMap *pkgmap, *sectionmap;
+	const char runtime[] = "target/config/Config.in.scripts";
 
 	pkg_name = NULL;
 	pkg_descr = NULL;
@@ -355,6 +361,7 @@ int main() {
 	s_ptr = NULL;
 
 	unlink("package/Config.in.auto");
+	unlink(runtime);
 	/* open global sectionfile */
 	menuglobal = fopen("package/Config.in.auto.global", "w");
 	if (menuglobal == NULL)
@@ -410,6 +417,7 @@ int main() {
 	fprintf(cfg, "\t  C library header files.\n\n");
 	fclose(cfg);	
 
+
 	/* read Makefile's for all packages */
 	pkgdir = opendir("package");
 	while ((pkgdirp = readdir(pkgdir)) != NULL) {
@@ -420,6 +428,57 @@ int main() {
 			pkg = fopen(path, "r");
 			if (pkg == NULL)
 				continue;
+
+			/* runtime configuration */
+			if (snprintf(script, MAXPATH, "package/%s/files", pkgdirp->d_name) < 0)
+				fatal_error("script variable creation failed.");
+			scriptdir = opendir(script);
+			if (scriptdir != NULL) {
+				while ((scriptdirp = readdir(scriptdir)) != NULL) {
+					/* skip dotfiles */
+					if (strncmp(scriptdirp->d_name, ".", 1) > 0) {
+						len = strlen(scriptdirp->d_name);
+						if (strlen(".init") > len)
+							continue;
+						if (strncmp(scriptdirp->d_name + len - strlen(".init"), ".init", strlen(".init")) == 0) {
+							if (snprintf(script, MAXPATH, "package/%s/files/%s", pkgdirp->d_name, scriptdirp->d_name) < 0)
+								fatal_error("script variable creation failed.");
+							initscript = fopen(script, "r");
+							if (initscript == NULL)
+								continue;
+
+							while (fgets(ibuf, MAXPATH, initscript) != NULL) {
+								if (strncmp("#PKG", ibuf, 4) == 0) {
+									sname = strdup(ibuf+5);
+									sname[strlen(sname)-1] = '\0';
+									sname2 = strdup(scriptdirp->d_name);
+									sname2[strlen(sname2)-5] = '\0';
+									icfg = fopen(runtime, "a");
+									if (icfg == NULL)
+										continue;
+									if (strncmp("busybox", sname, 7) == 0)
+										fprintf(icfg, "config ADK_RUNTIME_START_%s_%s\n", toupperstr(sname), toupperstr(sname2));
+									else
+										fprintf(icfg, "config ADK_RUNTIME_START_%s\n", toupperstr(sname));
+									fprintf(icfg, "\tprompt \"Start %s on boot\"\n", sname2);
+									fprintf(icfg, "\tboolean\n");
+									if (strncmp("busybox", sname, 7) == 0)
+										fprintf(icfg, "\tdepends on BUSYBOX_%s\n", toupperstr(sname2));
+									else
+										fprintf(icfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(sname));
+									fprintf(icfg, "\tdepends on ADK_RUNTIME_START_SERVICES\n");
+									fprintf(icfg, "\tdefault n\n\n");
+									fclose(icfg);
+								}
+								continue;
+								free(sname);
+								free(sname2);
+							}
+						}
+					}
+				}
+				closedir(scriptdir);
+			}
 
 			/* skip manually maintained packages */
 			if (snprintf(path, MAXPATH, "package/%s/Config.in.manual", pkgdirp->d_name) < 0)
@@ -620,7 +679,6 @@ int main() {
 			fprintf(cfg, "\tdefault n\n");
 			fclose(cfg);
 			free(pkgs);
-
 
 			/* skip packages without binary package output */
 			if (nobinpkgs == 1)
