@@ -748,7 +748,7 @@ config BUSYBOX_NSLOOKUP
 config BUSYBOX_NTPD
 	bool "ntpd"
 	depends on !BUSYBOX_DISABLE_NTPD
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The NTP client/server daemon.

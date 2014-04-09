@@ -56,6 +56,7 @@
 /target/packages/Config.in
 /target/config/Config.in.system.default
 /target/config/Config.in.system
+/target/config/Config.in.scripts
 /target/config/Config.in.native
 /target/config/Config.in.arch
 /target/config/Config.in.prereq
