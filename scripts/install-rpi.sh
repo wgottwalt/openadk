@@ -7,13 +7,14 @@ if [ $(id -u) -ne 0 ];then
 	exit 1
 fi
 
+f=0
 for tool in parted sfdisk mkfs.vfat mkfs.ext4;do
 	if ! which $tool >/dev/null; then
 		echo "Checking if $tool is installed... failed"
 		f=1
 	fi
 done
-[[ $f -eq 1 ]] && exit 1
+if [ $f -eq 1 ];then exit 1;fi
 
 datadir=0
 keep=0
@@ -48,7 +49,7 @@ else
 		echo "WARNING: This will destroy all data on $1 - type Yes to continue!"
 		read y
 		if [ "$y" = "Yes" ];then
-			$sfdisk -l $1 2>&1 |grep 'No medium'
+			env LC_ALL=C sfdisk -l $1 2>&1 |grep 'No medium'
 			if [ $? -eq 0 ];then
 				echo "No medium found"
 				exit 1
