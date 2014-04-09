@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		w3m
 PKG_VERSION:=		0.5.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1b845a983a50b8dec0169ac48479eacc
 PKG_DESCR:=		console web browser
 PKG_SECTION:=		browser
@@ -20,7 +20,8 @@ $(eval $(call PKG_template,W3M,w3m,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 
 TARGET_LDFLAGS+=	-lncurses -ltinfo
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
-CONFIGURE_ARGS+=	--with-termlib=ncurses
+CONFIGURE_ARGS+=	--with-termlib=ncurses \
+			--enable-image=fb
 
 w3m-install:
 	$(INSTALL_DIR) $(IDIR_W3M)/usr/bin
