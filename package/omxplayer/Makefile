@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		omxplayer
 # actually 1ca2f7adaa7f6a92410d9664e76c395537659dba from 07.04.2014
 PKG_VERSION:=		0.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d4efff32305bd16315e6fa4f80ea2a98
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		multimedia
