@@ -1,0 +1,16 @@
+arm
+armhf
+mips
+mipsel
+mips64
+mips64n32
+mips64n64
+mips64el
+mips64eln32
+mips64eln64
+ppc
+sh4
+sh4eb
+sparc
+x86
+x86_64

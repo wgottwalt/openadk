@@ -476,7 +476,6 @@ bulktoolchain:
 			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
 			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
 			echo === building $$tarch $$libc toolchain-$$arch on $$(date); \
-			$(GMAKE) prereq && \
 				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
@@ -488,7 +487,7 @@ bulktoolchain:
 			rm .config; \
 		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
 		    if [ -f .exit ];then break;fi \
-		done <${TOPDIR}/target/tarch.lst ;\
+		done <${TOPDIR}/toolchain/$$libc/tarch.lst ;\
 		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
 	done
 
