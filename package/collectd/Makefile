@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		5.4.0
+PKG_VERSION:=		5.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d4176b3066f3b85d85343d3648ea43f6
-PKG_DESCR:=		System statistics collection daemon
+PKG_MD5SUM:=		6514ab3f7fd2135d2713f1ab25068841
+PKG_DESCR:=		system statistics collection daemon
 PKG_SECTION:=		misc
 PKG_BUILDDEP:=		libtool
 PKG_DEPENDS:=		libpthread libltdl
@@ -15,7 +15,7 @@ PKG_URL:=		http://collectd.org/
 PKG_SITES:=		http://collectd.org/files/
 
 PKG_FLAVOURS_COLLECTD:=	WITH_CPU WITH_LOAD WITH_MEMORY WITH_PING
-PKG_FLAVOURS_COLLECTD+=	WITH_RRD
+PKG_FLAVOURS_COLLECTD+=	WITH_RRD WITH_NETWORK WITH_UPTIME
 PKGFD_WITH_RRD:=	enable RRD output
 PKGFB_WITH_RRD:=	rrdtool
 PKGFS_WITH_RRD:=	librrd
@@ -23,6 +23,8 @@ PKGFD_WITH_CPU:=	collect CPU statistics
 PKGFD_WITH_LOAD:=	collect system load statistics
 PKGFD_WITH_MEMORY:=	collect memory usage statistics
 PKGFD_WITH_PING:=	enable ping statistic plugin
+PKGFD_WITH_NETWORK:=	enable network statistic plugin
+PKGFD_WITH_UPTIME:=	enable uptime statistic plugin
 
 include ${TOPDIR}/mk/package.mk
 
@@ -39,6 +41,12 @@ DISABLE_MEMORY:=--disable-memory
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_PING},y)
 DISABLE_PING:=--disable-ping
+endif
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_NETWORK},y)
+DISABLE_NETWORK:=--disable-network
+endif
+ifneq (${ADK_PACKAGE_COLLECTD_WITH_UPTIME},y)
+DISABLE_UPTIME:=--disable-uptime
 endif
 
 CONFIGURE_ARGS+=	--disable-aggregation \
@@ -75,7 +83,7 @@ CONFIGURE_ARGS+=	--disable-aggregation \
 			${DISABLE_MEMORY} \
 			--disable-multimeter \
 			--disable-mysql \
-			--disable-network \
+			${DISABLE_NETWORK} \
 			--disable-nginx \
 			--disable-nfs \
 			--disable-ntpd \
@@ -106,7 +114,7 @@ CONFIGURE_ARGS+=	--disable-aggregation \
 			--disable-thermal \
 			--disable-unixsock \
 			--disable-users \
-			--disable-uptime \
+			${DISABLE_UPTIME} \
 			--disable-uuid \
 			--disable-vserver \
 			--disable-wireless \
@@ -118,7 +126,6 @@ CONFIGURE_ARGS+=	--disable-aggregation \
 			--without-libiptc \
 			--with-nan-emulation
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 XAKE_FLAGS+=		LIBS='-lm -lltdl'
 
 collectd-install:
