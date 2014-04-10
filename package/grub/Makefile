@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e927540b6eda8b024fb0391eeaa4091c
 PKG_DESCR:=		GRUB2 bootloader (source package)
 PKG_SECTION:=		boot
@@ -50,5 +50,7 @@ grub-install:
 		$(IDIR_GRUB)/usr/lib/grub/${GRUB_ARCH}/
 	${INSTALL_BIN} ${WRKINST}/usr/bin/* $(IDIR_GRUB)/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/* $(IDIR_GRUB)/usr/sbin
+	${CP} ./files/core.img.${GRUB_ARCH} \
+		$(IDIR_GRUB)/usr/lib/grub/core.img
 
 include ${TOPDIR}/mk/pkg-bottom.mk
