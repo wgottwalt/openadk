@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.2.12
+PKG_VERSION:=		3.2.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f507365940de8f095e1d867c6f0842f6
+PKG_MD5SUM:=		300e5f413054e2f4719c1c3b5179a611
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
