@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnetfilter_conntrack
 PKG_VERSION:=		1.0.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		18cf80c4b339a3285e78822dbd4f08d7
 PKG_DESCR:=		API to connection tracking state table
 PKG_SECTION:=		libs
