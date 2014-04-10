@@ -2,4 +2,3 @@
 . $IPKG_INSTROOT/etc/functions.sh
 
 add_rcconf iptables firewall NO
-add_rcconf iptables firewall6 NO

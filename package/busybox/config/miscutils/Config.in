@@ -281,7 +281,7 @@ config BUSYBOX_CHRT
 
 config BUSYBOX_CROND
 	bool "crond"
-	default y
+	default n
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  Crond is a background daemon that parses individual crontab
@@ -301,7 +301,7 @@ config BUSYBOX_FEATURE_CROND_D
 
 config BUSYBOX_FEATURE_CROND_CALL_SENDMAIL
 	bool "Report command output via email (using sendmail)"
-	default y
+	default n
 	depends on BUSYBOX_CROND
 	help
 	  Command output will be sent to corresponding user via email.
@@ -747,7 +747,7 @@ config BUSYBOX_WALL
 
 config BUSYBOX_WATCHDOG
 	bool "watchdog"
-	default y
+	default n
 	depends on !BUSYBOX_DISABLE_WATCHDOG
 	select BUSYBOX_PLATFORM_LINUX
 	help

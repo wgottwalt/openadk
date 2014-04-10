@@ -26,7 +26,7 @@ ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lm -lc -lgcc_s
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 LIBRARIES+=-lssp
 endif
 

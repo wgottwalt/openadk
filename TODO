@@ -18,7 +18,6 @@
 - add grsec kernel patch
 - microblaze: add cfgfs partition to dts, add partition to spartan dts
 - evaluate libguestfs for image creation
-- port w3m
 - port msmtp
 - rutorrent porting
 - lms perl 

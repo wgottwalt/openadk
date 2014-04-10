@@ -12,7 +12,7 @@ config BUSYBOX_UDHCPC6
 
 config BUSYBOX_UDHCPD
 	bool "udhcp server (udhcpd)"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  udhcpd is a DHCP server geared primarily toward embedded systems,

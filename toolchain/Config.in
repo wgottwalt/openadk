@@ -10,26 +10,38 @@ config ADK_TOOLCHAIN_GCC_CXX
 	boolean
 	default y
 
-config ADK_TOOLCHAIN_GCC_SSP
-	prompt "Enable Stack Smashing Protection in GCC"
+config ADK_TOOLCHAIN_SSP
+	prompt "Enable Stack Smashing Protection"
 	boolean
 	default y
 
-config ADK_TOOLCHAIN_GCC_USE_SSP
+config ADK_TOOLCHAIN_USE_SSP
 	prompt "Use SSP for all packages"
  	boolean	
-	depends on ADK_TOOLCHAIN_GCC_SSP
+	depends on ADK_TOOLCHAIN_SSP
 	default n
 
-config ADK_TOOLCHAIN_GCC_LTO
-	prompt "Enable Link Time Optimization in GCC"
+config ADK_TOOLCHAIN_LTO
+	prompt "Enable Link Time Optimization"
 	boolean
 	default y
 
-config ADK_TOOLCHAIN_GCC_USE_LTO
+config ADK_TOOLCHAIN_USE_LTO
 	prompt "Use Link Time Optimization for all packages"
 	boolean
-	depends on ADK_TOOLCHAIN_GCC_LTO
+	depends on ADK_TOOLCHAIN_LTO
+	default n
+
+config ADK_TOOLCHAIN_GOLD
+	prompt "Enable GOLD as linker"
+	boolean
+	depends on !ADK_LINUX_MIPS
+	default y
+
+config ADK_TOOLCHAIN_USE_GOLD
+	prompt "Use GOLD as linker for all packages"
+	boolean
+	depends on ADK_TOOLCHAIN_GOLD
 	default n
 
 endmenu

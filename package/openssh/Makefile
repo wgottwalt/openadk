@@ -50,7 +50,7 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 CONFIGURE_ARGS+=	--with-stackprotect
 else
 CONFIGURE_ARGS+=	--without-stackprotect

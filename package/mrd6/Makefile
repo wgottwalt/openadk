@@ -26,7 +26,7 @@ ifeq (${ADK_COMPILE_MRD6_WITH_UCLIBCXX},y)
 LIBRARIES:=-nodefaultlibs -luClibc++
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
 endif
 

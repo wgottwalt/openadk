@@ -59,7 +59,7 @@ endif
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install-rpi.sh /dev/sdb $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install-rpi.sh /dev/sdx $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
