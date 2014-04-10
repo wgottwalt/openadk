@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libgc
 PKG_VERSION:=		7.4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f40d9a47c90d60791eeecb484f8df5ee
 PKG_DESCR:=		garbage collector library
 PKG_SECTION:=		libs
