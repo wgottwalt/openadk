@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		e927540b6eda8b024fb0391eeaa4091c
 PKG_DESCR:=		GRUB2 bootloader (source package)
 PKG_SECTION:=		boot
@@ -24,6 +24,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GRUB,grub,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+GRUB_MODULES:=		ext2 part_msdos biosdisk
+
 ifeq ($(ADK_PACKAGE_GRUB_PC),y)
 GRUB_ARCH:=		i386-pc
 CONFIGURE_ARGS+=	--with-platform=pc
@@ -33,11 +35,8 @@ GRUB_ARCH:=		x86_64-efi
 CONFIGURE_ARGS+=	--with-platform=efi
 endif
 
-ifeq ($(ADK_STATIC),y)
 TARGET_CFLAGS+=         -static
 TARGET_LDFLAGS+=        -static
-endif
-
 CONFIGURE_ARGS+=	--disable-grub-mkfont \
 			--enable-efiemu=no \
 			--enable-liblzma=no \
@@ -50,7 +49,8 @@ grub-install:
 	${INSTALL_DIR} $(IDIR_GRUB)/boot/grub/${GRUB_ARCH}
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH}/*{mod,lst,img} \
 		$(IDIR_GRUB)/boot/grub/${GRUB_ARCH}/
-	${CP} ./files/core.img.${GRUB_ARCH} \
-		$(IDIR_GRUB)/boot/grub/core.img
+	PATH='${HOST_PATH}' qemu-i386 ${WRKBUILD}/grub-mkimage \
+		-o $(IDIR_GRUB)/boot/grub/core.img -O ${GRUB_ARCH} \
+		-c ./files/embed.cfg ${GRUB_MODULES}
 
 include ${TOPDIR}/mk/pkg-bottom.mk
