@@ -152,7 +152,7 @@ else
 fi
 
 if (( usegrub )); then
-	tar -xOzf "$src" usr/lib/grub/core.img >"$T/core.img"
+	tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
 	integer coreimgsz=$($statcmd "$T/core.img")
 	if (( coreimgsz < 1024 )); then
 		print -u2 core.img is probably too small: $coreimgsz
@@ -273,12 +273,6 @@ if (( usegrub )); then
 		print "\tlinux /boot/kernel $linuxargs"
 		print '}'
 	) >boot/grub/grub.cfg
-	set -A grubfiles
-	ngrubfiles=0
-	for a in usr/lib/grub/*-pc/{*.mod,*.lst}; do
-		[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
-	done
-	cp "${grubfiles[@]}" boot/grub/
 fi
 
 print "Creating ext2fs filesystem image..."

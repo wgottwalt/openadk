@@ -5,11 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		e927540b6eda8b024fb0391eeaa4091c
 PKG_DESCR:=		GRUB2 bootloader (source package)
 PKG_SECTION:=		boot
-PKG_BUILDDEP:=		bison-host
+PKG_BUILDDEP:=		bison-host qemu-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
 
@@ -38,19 +38,19 @@ TARGET_CFLAGS+=         -static
 TARGET_LDFLAGS+=        -static
 endif
 
-CONFIGURE_ARGS+=	--disable-grub-mkfont
+CONFIGURE_ARGS+=	--disable-grub-mkfont \
+			--enable-efiemu=no \
+			--enable-liblzma=no \
+			--enable-device-mapper=no \
+			--enable-libzfs=no \
+			--disable-werror
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
-	${INSTALL_DIR} $(IDIR_GRUB)/usr/{sbin,bin}
-	${INSTALL_DIR} $(IDIR_GRUB)/usr/lib/grub/${GRUB_ARCH}/
-	${INSTALL_DIR} $(IDIR_GRUB)/etc
-	${CP} ${WRKINST}/etc/grub.d $(IDIR_GRUB)/etc
+	${INSTALL_DIR} $(IDIR_GRUB)/boot/grub/${GRUB_ARCH}
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH}/*{mod,lst,img} \
-		$(IDIR_GRUB)/usr/lib/grub/${GRUB_ARCH}/
-	${INSTALL_BIN} ${WRKINST}/usr/bin/* $(IDIR_GRUB)/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/* $(IDIR_GRUB)/usr/sbin
+		$(IDIR_GRUB)/boot/grub/${GRUB_ARCH}/
 	${CP} ./files/core.img.${GRUB_ARCH} \
-		$(IDIR_GRUB)/usr/lib/grub/core.img
+		$(IDIR_GRUB)/boot/grub/core.img
 
 include ${TOPDIR}/mk/pkg-bottom.mk
