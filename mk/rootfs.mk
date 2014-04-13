@@ -44,9 +44,9 @@ endif
 
 $(eval $(call rootfs_template,usb,USB,$(USB)))
 $(eval $(call rootfs_template,archive,ARCHIVE,$(ROOTFS)))
-$(eval $(call rootfs_template,initramfsarchive,INITRAMFSARCHIVE))
-$(eval $(call rootfs_template,initramfs,INITRAMFS))
-$(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK))
+$(eval $(call rootfs_template,initramfsarchive,INITRAMFSARCHIVE,rootfstype=tmpfs))
+$(eval $(call rootfs_template,initramfs,INITRAMFS,rootfstype=tmpfs))
+$(eval $(call rootfs_template,initramfs-piggyback,INITRAMFS_PIGGYBACK,rootfstype=tmpfs))
 $(eval $(call rootfs_template,squashfs,SQUASHFS,$(MTDDEV) rootfstype=squashfs))
 $(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV) panic=3))
 $(eval $(call rootfs_template,jffs2,JFFS2,$(MTDDEV) rootfstype=jffs2))

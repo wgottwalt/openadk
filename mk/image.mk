@@ -138,17 +138,17 @@ ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}.iso
 endif
 
-${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR} kernel-package
+${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
-${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}
+${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
 
-${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}
+${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
 	env PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 
@@ -156,7 +156,7 @@ ${FW_DIR}/${INITRAMFS}: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 	${LINUX_DIR}/usr/gen_init_cpio ${STAGING_TARGET_DIR}/${INITRAMFS}_list | \
 		${ADK_COMPRESSION_TOOL} -c >$@
 
-${BUILD_DIR}/root.squashfs: ${TARGET_DIR}
+${BUILD_DIR}/root.squashfs: ${TARGET_DIR}/.adk
 	${STAGING_HOST_DIR}/usr/bin/mksquashfs ${TARGET_DIR} \
 		${BUILD_DIR}/root.squashfs -comp xz \
 		-nopad -noappend -root-owned $(MAKE_TRACE)

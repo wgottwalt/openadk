@@ -237,6 +237,7 @@ root_clean:
 	@$(TRACE) root_clean
 	rm -rf $(TARGET_DIR)
 	mkdir -p $(TARGET_DIR)
+	touch $(TARGET_DIR)/.adk
 
 # Do a per-package clean here, too. This way stale headers and
 # libraries from target_*/ get wiped away, which keeps
