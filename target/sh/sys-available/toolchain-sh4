@@ -2,7 +2,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_SH4
 	bool "Toolchain only (little endian)"
 	select ADK_sh
 	select ADK_little
-	select ADK_toolchain_sh
+	select ADK_toolchain_sh4
 	select ADK_CPU_SH4
 	select ADK_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
