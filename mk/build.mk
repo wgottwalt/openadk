@@ -44,6 +44,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_DEVELOPMENT=n \
 			ADK_TOOLCHAIN_USE_SSP=n \
 			ADK_TOOLCHAIN_USE_LTO=n \
+			ADK_TOOLCHAIN_GOLD=n \
 			ADK_TOOLCHAIN_USE_GOLD=n \
 			BUSYBOX_IFPLUGD=n \
 			BUSYBOX_EXTRA_COMPAT=n \
@@ -236,6 +237,7 @@ root_clean:
 	@$(TRACE) root_clean
 	rm -rf $(TARGET_DIR)
 	mkdir -p $(TARGET_DIR)
+	touch $(TARGET_DIR)/.adk
 
 # Do a per-package clean here, too. This way stale headers and
 # libraries from target_*/ get wiped away, which keeps
