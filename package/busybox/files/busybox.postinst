@@ -5,7 +5,7 @@ add_rcconf network network YES
 add_rcconf crond crond NO
 add_rcconf watchdog watchdog NO
 add_rcconf watchdog_flags watchdog_flags '-t 10 -T 20'
-add_rcconf syslogd NO
+add_rcconf syslogd syslogd NO
 add_rcconf 'use "-C32" normally' syslogd_flags '-C32'
 add_rcconf inetd inetd NO
 add_rcconf ntpd ntpd NO
