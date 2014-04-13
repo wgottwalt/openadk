@@ -36,7 +36,7 @@ config ADK_TOOLCHAIN_GOLD
 	prompt "Enable GOLD as linker"
 	boolean
 	depends on !ADK_LINUX_MIPS
-	default y
+	default n
 
 config ADK_TOOLCHAIN_USE_GOLD
 	prompt "Use GOLD as linker for all packages"
