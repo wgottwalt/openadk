@@ -138,7 +138,7 @@ ifneq ($(ADK_DEBUG),)
 ifeq ($(ADK_DEBUG_OPTS),y)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 else
-TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
+TARGET_CFLAGS+=		-O0 -g3 -fno-omit-frame-pointer
 endif
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
