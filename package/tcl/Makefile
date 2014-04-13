@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tcl
-PKG_VERSION:=		8.5.9
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		8512d8db3233041dd68a81476906012a
+PKG_VERSION:=		8.6.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		aae4b701ee527c6e4e1a6f9c7399882e
 PKG_DESCR:=		TCL scripting language
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
@@ -35,6 +35,6 @@ tcl-install:
 	cd ${IDIR_TCL}/usr/bin && ln -sf tclsh8.5 tclsh
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_TCL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/tcl8 ${IDIR_TCL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/tcl8.5 ${IDIR_TCL}/usr/lib
+	${CP} ${WRKINST}/usr/lib/tcl8.6 ${IDIR_TCL}/usr/lib
 
 include ${TOPDIR}/mk/pkg-bottom.mk

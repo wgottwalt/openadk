@@ -4,10 +4,6 @@
 
 . /etc/functions.sh
 
-if [ -f /proc/sys/kernel/printk ];then
-	echo 0 > /proc/sys/kernel/printk
-fi
-
 # remount /dev with smaller size
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 
@@ -19,6 +15,8 @@ mount -o remount,nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
 # start mdev dynamic device node management
 echo >/dev/mdev.seq
 echo "/sbin/mdev" >/proc/sys/kernel/hotplug
+# creates f.e. /dev/root
+mdev -s
 
 # seed some random
 cat /etc/.rnd >/dev/urandom 2>&1
@@ -29,9 +27,9 @@ cat /etc/.rnd >/dev/urandom 2>&1
 # create some useful directories in tmpfs
 mkdir -p /var/log
 mkdir -p /var/run
+mkdir -p /var/tmp
 touch /var/log/lastlog
 touch /var/log/wtmp
-ln -s /tmp /var/tmp
 
 HOSTNAME=
 [[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)

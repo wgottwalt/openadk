@@ -4,17 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bison
-PKG_VERSION:=		3.0.1
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		032a7b7b9f1a6e278ccde73f82cec5c2
-PKG_DESCR:=		GNU parser generator
+PKG_MD5SUM:=		72c66879187c128d04f4ab7422e8072d
+PKG_DESCR:=		parser generator
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		m4-host flex-host bison-host
 HOST_BUILDDEP:=		m4-host flex-host
 PKG_URL:=		http://www.gnu.org/software/bison/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk

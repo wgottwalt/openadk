@@ -20,6 +20,9 @@ PKG_URL:=		http://www.openswan.org/
 PKG_SITES:=		http://www.openswan.org/download/
 PKG_NOPARALLEL:=	1
 
+# GLOB_BRACE usage
+PKG_LIBC_DEPENDS:=	uclibc glibc
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSWAN,openswan,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

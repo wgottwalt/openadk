@@ -1,0 +1,32 @@
+--- dosfstools-3.0.26.orig/src/fat.c	2014-01-17 07:07:05.000000000 +0100
++++ dosfstools-3.0.26/src/fat.c	2014-03-26 13:37:03.000000000 +0100
+@@ -180,7 +180,7 @@ void set_fat(DOS_FS * fs, uint32_t clust
+ {
+     unsigned char *data = NULL;
+     int size;
+-    loff_t offs;
++    off_t offs;
+ 
+     if (new == -1)
+ 	new = FAT_EOF(fs);
+@@ -264,9 +264,9 @@ uint32_t next_cluster(DOS_FS * fs, uint3
+     return FAT_IS_EOF(fs, value) ? -1 : value;
+ }
+ 
+-loff_t cluster_start(DOS_FS * fs, uint32_t cluster)
++off_t cluster_start(DOS_FS * fs, uint32_t cluster)
+ {
+-    return fs->data_start + ((loff_t) cluster -
++    return fs->data_start + ((off_t) cluster -
+ 			     2) * (uint64_t)fs->cluster_size;
+ }
+ 
+@@ -475,7 +475,7 @@ void reclaim_file(DOS_FS * fs)
+ 	/* If this cluster is the head of an orphan chain... */
+ 	if (get_owner(fs, i) == &orphan && !num_refs[i]) {
+ 	    DIR_ENT de;
+-	    loff_t offset;
++	    off_t offset;
+ 	    files++;
+ 	    offset = alloc_rootdir_entry(fs, &de, "FSCK%04dREC");
+ 	    de.start = htole16(i & 0xffff);

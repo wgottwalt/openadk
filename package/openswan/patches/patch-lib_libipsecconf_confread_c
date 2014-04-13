@@ -1,0 +1,11 @@
+--- openswan-2.6.38.orig/lib/libipsecconf/confread.c	2012-03-23 22:33:43.000000000 +0100
++++ openswan-2.6.38/lib/libipsecconf/confread.c	2014-03-26 21:15:56.000000000 +0100
+@@ -20,7 +20,7 @@
+ #include <string.h>
+ #include <limits.h>
+ #include <assert.h>
+-#include <sys/queue.h>
++#include "queue.h"
+ 
+ #include "oswalloc.h"
+ 

@@ -4,21 +4,15 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dovecot
-PKG_VERSION:=		2.0.5
+PKG_VERSION:=		2.2.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7168c5bf40fdd38cceb99114547699b8
-PKG_DESCR:=		A minimal and secure imap server
+PKG_MD5SUM:=		25395269fa2e0525e2d144d71d0450eb
+PKG_DESCR:=		minimal and secure imap server
+PKG_BUILDDEP:=		openssl
+PKG_DEPENDS:=		libopenssl
 PKG_SECTION:=		mail
 PKG_URL:=		http://www.dovecot.org/
-PKG_SITES:=		http://www.dovecot.org/releases/2.0/
-
-PKG_CHOICES_DOVECOT:=	WITH_GNUTLS WITH_OPENSSL
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
-PKGCS_WITH_GNUTLS:=	libgnutls
-PKGCB_WITH_GNUTLS:=	gnutls
+PKG_SITES:=		http://www.dovecot.org/releases/2.2/
 
 include ${TOPDIR}/mk/package.mk
 
@@ -45,16 +39,10 @@ CONFIGURE_ARGS+=	--with-notify=none \
 			--without-gssapi \
 			--without-pam \
 			--with-ioloop=epoll \
-                	--with-moduledir=/usr/lib/dovecot/modules
+                	--with-moduledir=/usr/lib/dovecot/modules \
+			--with-ssl=openssl
 
-ifeq (${ADK_PACKAGE_DOVECOT_WITH_GNUTLS},y)
-CONFIGURE_ARGS+=	--with-ssl=gnutls
-endif
-ifeq (${ADK_PACKAGE_DOVECOT_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-ssl=openssl
-endif
-
-post-install:
+dovecot-install:
 	${INSTALL_DIR} ${IDIR_DOVECOT}/etc
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/sbin
 	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/libexec/dovecot

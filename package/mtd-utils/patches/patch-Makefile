@@ -1,0 +1,65 @@
+--- mtd-utils-1.5.0.orig/Makefile	2012-05-07 09:19:39.000000000 +0200
++++ mtd-utils-1.5.0/Makefile	2014-03-30 15:49:30.000000000 +0200
+@@ -16,27 +16,13 @@ endif
+ 
+ TESTS = tests
+ 
+-MTD_BINS = \
+-	ftl_format flash_erase nanddump doc_loadbios \
+-	ftl_check mkfs.jffs2 flash_lock flash_unlock \
+-	flash_otp_info flash_otp_dump mtd_debug flashcp nandwrite nandtest \
+-	jffs2dump \
+-	nftldump nftl_format docfdisk \
+-	rfddump rfdformat \
+-	serve_image recv_image \
+-	sumtool jffs2reader
+-UBI_BINS = \
+-	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
+-	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol
++MTD_BINS = mkfs.jffs2
+ 
+ BINS = $(MTD_BINS)
+-BINS += mkfs.ubifs/mkfs.ubifs
+-BINS += $(addprefix ubi-utils/,$(UBI_BINS))
+ SCRIPTS = flash_eraseall
+ 
+ TARGETS = $(BINS)
+ TARGETS += lib/libmtd.a
+-TARGETS += ubi-utils/libubi.a
+ 
+ OBJDEPS = $(BUILDDIR)/include/version.h
+ 
+@@ -83,12 +69,12 @@ $(BUILDDIR)/include/version.h.tmp:
+ #
+ # Utils in top level
+ #
+-obj-mkfs.jffs2 = compr_rtime.o compr_zlib.o compr_lzo.o compr.o rbtree.o
+-LDFLAGS_mkfs.jffs2 = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
+-LDLIBS_mkfs.jffs2  = -lz $(LZOLDLIBS)
++obj-mkfs.jffs2 = compr_rtime.o compr_zlib.o compr.o rbtree.o
++LDFLAGS_mkfs.jffs2 = $(ZLIBLDFLAGS)
++LDLIBS_mkfs.jffs2  = -lz
+ 
+-LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
+-LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
++LDFLAGS_jffs2reader = $(ZLIBLDFLAGS)
++LDLIBS_jffs2reader  = -lz
+ 
+ $(foreach v,$(MTD_BINS),$(eval $(call mkdep,,$(v))))
+ 
+@@ -103,7 +89,7 @@ $(call _mkdep,lib/,libmtd.a)
+ #
+ obj-mkfs.ubifs = crc16.o lpt.o compr.o devtable.o \
+ 	hashtable/hashtable.o hashtable/hashtable_itr.o
+-LDLIBS_mkfs.ubifs = -lz -llzo2 -lm -luuid
++LDLIBS_mkfs.ubifs = -lz -lm -luuid
+ $(call mkdep,mkfs.ubifs/,mkfs.ubifs,,ubi-utils/libubi.a)
+ 
+ #
+@@ -117,6 +103,3 @@ obj-libubigen.a    = libubigen.o
+ obj-mtdinfo   = libubigen.a
+ obj-ubinize   = libubigen.a libiniparser.a
+ obj-ubiformat = libubigen.a libscan.a
+-
+-$(foreach v,libubi.a libubigen.a libiniparser.a libscan.a,$(eval $(call _mkdep,ubi-utils/,$(v))))
+-$(foreach v,$(UBI_BINS),$(eval $(call mkdep,ubi-utils/,$(v),libubi.a ubiutils-common.o)))

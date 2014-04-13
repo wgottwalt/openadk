@@ -1,0 +1,41 @@
+--- libnfnetlink-1.0.1.orig/include/libnfnetlink/linux_nfnetlink.h	2008-06-18 14:36:57.000000000 +0200
++++ libnfnetlink-1.0.1/include/libnfnetlink/linux_nfnetlink.h	2014-04-08 09:31:12.000000000 +0200
+@@ -1,6 +1,6 @@
+ #ifndef _NFNETLINK_H
+ #define _NFNETLINK_H
+-#include <linux/types.h>
++#include <stdint.h>
+ #include <libnfnetlink/linux_nfnetlink_compat.h>
+ 
+ enum nfnetlink_groups {
+@@ -25,9 +25,9 @@ enum nfnetlink_groups {
+ /* General form of address family dependent message.
+  */
+ struct nfgenmsg {
+-	u_int8_t  nfgen_family;		/* AF_xxx */
+-	u_int8_t  version;		/* nfnetlink version */
+-	u_int16_t    res_id;		/* resource id */
++	uint8_t  nfgen_family;		/* AF_xxx */
++	uint8_t  version;		/* nfnetlink version */
++	uint16_t    res_id;		/* resource id */
+ };
+ 
+ #define NFNETLINK_V0	0
+@@ -59,7 +59,7 @@ struct nfnl_callback
+ 	int (*call)(struct sock *nl, struct sk_buff *skb, 
+ 		struct nlmsghdr *nlh, struct nlattr *cda[]);
+ 	const struct nla_policy *policy;	/* netlink attribute policy */
+-	const u_int16_t attr_count;		/* number of nlattr's */
++	const uint16_t attr_count;		/* number of nlattr's */
+ };
+ 
+ struct nfnetlink_subsystem
+@@ -76,7 +76,7 @@ extern int nfnetlink_subsys_unregister(c
+ extern int nfnetlink_has_listeners(unsigned int group);
+ extern int nfnetlink_send(struct sk_buff *skb, u32 pid, unsigned group, 
+ 			  int echo);
+-extern int nfnetlink_unicast(struct sk_buff *skb, u_int32_t pid, int flags);
++extern int nfnetlink_unicast(struct sk_buff *skb, uint32_t pid, int flags);
+ 
+ #define MODULE_ALIAS_NFNL_SUBSYS(subsys) \
+ 	MODULE_ALIAS("nfnetlink-subsys-" __stringify(subsys))

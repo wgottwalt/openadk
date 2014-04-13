@@ -18,7 +18,7 @@ $(eval $(call PKG_template,DMIDECODE,dmidecode,$(PKG_VERSION)-${PKG_RELEASE},${P
 
 CONFIG_STYLE:=		manual
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 TARGET_LDFLAGS+=        -lssp
 endif
 

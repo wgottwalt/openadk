@@ -10,7 +10,7 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 include ${TOPDIR}/toolchain/musl/Makefile.inc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-include ${TOPDIR}/toolchain/uClibc/Makefile.inc
+include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		libpthread
@@ -36,6 +36,7 @@ libpthread-install:
 ifeq ($(ADK_TARGET_LIB_MUSL),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+	(cd ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH); ln -sf libpthread.so.0 libpthread.so)
 endif
 
 include ${TOPDIR}/mk/pkg-bottom.mk

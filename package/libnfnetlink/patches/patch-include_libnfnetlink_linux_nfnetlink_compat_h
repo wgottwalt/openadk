@@ -1,0 +1,22 @@
+--- libnfnetlink-1.0.1.orig/include/libnfnetlink/linux_nfnetlink_compat.h	2008-06-18 14:36:57.000000000 +0200
++++ libnfnetlink-1.0.1/include/libnfnetlink/linux_nfnetlink_compat.h	2014-04-08 09:00:23.000000000 +0200
+@@ -3,6 +3,8 @@
+ #ifndef __KERNEL__
+ /* Old nfnetlink macros for userspace */
+ 
++#include <stdint.h>
++
+ /* nfnetlink groups: Up to 32 maximum */
+ #define NF_NETLINK_CONNTRACK_NEW 		0x00000001
+ #define NF_NETLINK_CONNTRACK_UPDATE		0x00000002
+@@ -20,8 +22,8 @@
+ 
+ struct nfattr
+ {
+-	u_int16_t nfa_len;
+-	u_int16_t nfa_type;	/* we use 15 bits for the type, and the highest
++	uint16_t nfa_len;
++	uint16_t nfa_type;	/* we use 15 bits for the type, and the highest
+ 				 * bit to indicate whether the payload is nested */
+ };
+ 

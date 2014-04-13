@@ -7,11 +7,11 @@ config ADK_TARGET_SYSTEM_CUBOX_I
 	select ADK_fpu_neon
 	select ADK_cubox_i
 	select ADK_CPU_CORTEX_A9
-	select ADK_TARGET_WITH_MMC
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_KERNEL_ZIMAGE
+	select ADK_TARGET_WITH_ROOT_RW
 	select ADK_PACKAGE_U_BOOT_CUBOX_I
 	help
 	  Cubox-i

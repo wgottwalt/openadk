@@ -1,0 +1,29 @@
+--- collectd-5.4.1.orig/configure	2014-01-26 09:10:00.000000000 +0100
++++ collectd-5.4.1/configure	2014-04-10 16:56:47.000000000 +0200
+@@ -16812,7 +16812,7 @@ SAVE_CFLAGS="$CFLAGS"
+ # Emulate behavior of src/Makefile.am
+ if test "x$GCC" = "xyes"
+ then
+-	CFLAGS="$CFLAGS -Wall -Werror"
++	CFLAGS="$CFLAGS -Wall"
+ fi
+ 
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for strtok_r" >&5
+@@ -17388,7 +17388,7 @@ done
+ if test "x$GCC" = "xyes"
+ then
+ 	SAVE_CFLAGS="$CFLAGS"
+-	CFLAGS="$CFLAGS -Wall -Wextra -Werror"
++	CFLAGS="$CFLAGS -Wall -Wextra"
+ fi
+ 
+ for ac_func in strptime
+@@ -23057,7 +23057,7 @@ then
+ 	SAVE_LDFLAGS="$LDFLAGS"
+ 	# trigger an error if Perl_load_module*() uses __attribute__nonnull__(3)
+ 	# (see issues #41 and #42)
+-	CFLAGS="$CFLAGS $PERL_CFLAGS -Wall -Werror"
++	CFLAGS="$CFLAGS $PERL_CFLAGS -Wall"
+ 	LDFLAGS="$LDFLAGS $PERL_LDFLAGS"
+ 
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for broken Perl_load_module()" >&5

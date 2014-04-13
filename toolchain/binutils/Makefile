@@ -6,17 +6,29 @@ include Makefile.inc
 include ../rules.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_SSP),y)
 CONFOPTS+=		--enable-libssp
 else
 CONFOPTS+=		--disable-libssp
+endif
+
+ifeq ($(ADK_TOOLCHAIN_LTO),y)
+CONFOPTS+=		--enable-lto
+else
+CONFOPTS+=		--disable-lto
+endif
+
+ifeq ($(ADK_TOOLCHAIN_GOLD),y)
+CONFOPTS+=		--enable-gold
+else
+CONFOPTS+=		--disable-gold
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFOPTS+=          	--with-arch=armv6
 endif
 
-ifneq ($(strip $(ADK_LINUX_64)$(ADK_TARGET_KERNEL64)),)
+ifneq ($(ADK_LINUX_64),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 

@@ -1,4 +1,0 @@
-#!/bin/sh
-if [ ! -z $IPKG_INSTROOT ];then 
-	(cd $IPKG_INSTROOT/lib && ln -sf libpthread.so.0 libpthread.so)
-fi

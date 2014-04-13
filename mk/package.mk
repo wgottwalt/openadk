@@ -178,6 +178,9 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
+ifeq ($(ADK_RUNTIME_START_$(1)),y)
+	$(SED) "s#NO#YES#" $$(IDIR_$(1))/CONTROL/postinst
+endif
 ifneq ($(ADK_DEBUG),y)
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
 	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control
@@ -195,10 +198,10 @@ endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
 ifeq ($(ADK_DEBUG),)
-	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
 ifeq ($(ADK_DEBUG_STRIP),y)
-	$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
 ifeq (${ADK_LEAVE_ETC_ALONE}$(filter force_etc,$(7)),y)
 	-rm -rf $${IDIR_$(1)}/etc

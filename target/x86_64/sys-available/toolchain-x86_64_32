@@ -1,0 +1,12 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_X86_64_32
+	bool "Toolchain only (32 ABI)"
+	select ADK_x86_64
+	select ADK_32
+	select ADK_toolchain_x86_64
+	select ADK_CPU_X86_64
+	select ADK_LINUX_64
+	select ADK_TOOLCHAIN
+	select ADK_TARGET_PACKAGE_TXZ
+	help
+	  Build a x86_64 toolchain.
+

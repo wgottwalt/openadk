@@ -75,18 +75,12 @@ Following mix between host and target package is possible, too:
 29: include ${TOPDIR}/mk/pkg-bottom.mk
 ------------------------
 
-It is important to have foo-host as package build dependency, see line 12, so that the order is always build the host package
-and then the target package.
-If you need to rebuild a mixed package, you are advised to use:
+If you need to rebuild a mixed package, you can do:
 ------------
- $ make package=<package> clean hostpackage package
+ $ make package=<package> hostclean hostpackage clean package
 ------------
 
-At the moment there is one limitation regarding the recursive dependency resolving. It is just not implemented, yet.
-So you always need to set +PKG_BUILDDEP+ to all host tools dependencies in the right order. If package foo needs host
-tool bar, and host tool bar needs host library libbaz, you have to use following +PKG_BUILDDEP+ variable:
+If your host package have some dependencies, use following:
 ------------
- PKG_BUILDDEP:=libbaz-host bar-host
+ HOST_BUILDDEP:=libbaz-host bar-host
 ------------
-
-

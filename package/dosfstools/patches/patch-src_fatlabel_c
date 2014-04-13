@@ -1,0 +1,11 @@
+--- dosfstools-3.0.26.orig/src/fatlabel.c	2014-01-17 07:07:08.000000000 +0100
++++ dosfstools-3.0.26/src/fatlabel.c	2014-03-26 13:23:52.000000000 +0100
+@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
+     char *device = NULL;
+     char label[12] = { 0 };
+ 
+-    loff_t offset;
++    off_t offset;
+     DIR_ENT de;
+ 
+     check_atari();

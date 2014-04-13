@@ -139,7 +139,7 @@ config ADK_TARGET_MIPS_ABI
 
 choice
 prompt "Target ABI"
-depends on ADK_LINUX_64 && ADK_LINUX_MIPS && !ADK_TOOLCHAIN
+depends on ADK_LINUX_64 && ADK_LINUX_MIPS && !ADK_TOOLCHAIN && !ADK_HARDWARE_QEMU
 
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI (new)"
@@ -157,7 +157,7 @@ endchoice
 
 choice
 prompt "Target ABI"
-depends on ADK_LINUX_64 && ADK_LINUX_X86_64 && !ADK_TOOLCHAIN
+depends on ADK_LINUX_64 && ADK_LINUX_X86_64 && !ADK_TOOLCHAIN && !ADK_HARDWARE_QEMU
 
 config ADK_TARGET_ABI_64
 	boolean "64 Bit ABI"
@@ -175,6 +175,7 @@ endchoice
 
 config ADK_TARGET_LIBC_PATH
 	string
+	default "lib" if ADK_32
 	default "lib32" if ADK_n32
 	default "libx32" if ADK_x32
 	default "lib64" if ADK_n64 \
@@ -193,36 +194,53 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-arm-spitz" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default "qemu-mips" if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default "qemu-mipsel" if ADK_TARGET_SYSTEM_QEMU_MIPSEL
-	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64
-	default "qemu-mips64el" if ADK_TARGET_SYSTEM_QEMU_MIPS64EL
+	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64 || ADK_TARGET_SYSTEM_QEMU_MIPS64N32 || ADK_TARGET_SYSTEM_QEMU_MIPS64N64
+	default "qemu-mips64el" if ADK_TARGET_SYSTEM_QEMU_MIPS64EL || ADK_TARGET_SYSTEM_QEMU_MIPS64ELN32 || ADK_TARGET_SYSTEM_QEMU_MIPS64ELN64
 	default "qemu-ppc" if ADK_TARGET_SYSTEM_QEMU_PPC
 	default "qemu-ppc64" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH4
 	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
 	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
-	default "qemu-i686" if ADK_TARGET_SYSTEM_QEMU_I686
-	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
+	default "qemu-x86" if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_I486
+	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86_64_32 || ADK_TARGET_SYSTEM_QEMU_X86_64_X32
 	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
 
 config ADK_QEMU_ARGS
 	string
 	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
 
+menu "Qemu configuration"
+depends on ADK_HARDWARE_QEMU
+
+choice 
+prompt "Use a Bootloader"
+depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
+
+config ADK_TARGET_QEMU_WITHOUT_BOOTLOADER
+	boolean "do not use bootloader"
+
+config ADK_TARGET_QEMU_WITH_BOOTLOADER
+	boolean "use bootloader"
+	select ADK_PACKAGE_GRUB if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
+
+endchoice
+
 choice
 prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
 
-config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	boolean "Xilinx ml605"
-
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	boolean "Xilinx Spartan S3ADSP1800"
+
+config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	boolean "Xilinx ml605"
 
 endchoice
 
@@ -254,6 +272,8 @@ choice
 prompt "Qemu Emulation with permanent storage device (disk/flash)"
 depends on ADK_HARDWARE_QEMU
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_ARCHIVE
+default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_SQUASHFS
+default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_JFFS2
 
 config ADK_TARGET_QEMU_WITHOUT_BLOCK
 	boolean "disabled"
@@ -261,8 +281,8 @@ config ADK_TARGET_QEMU_WITHOUT_BLOCK
 config ADK_TARGET_QEMU_WITH_BLOCK
 	boolean "enabled"
 	select ADK_KERNEL_SCSI_SYM53C8XX_2 if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_KERNEL_PATA_MACIO if ADK_TARGET_SYSTEM_QEMU_PPC
 	select ADK_KERNEL_SCSI_IBMVSCSI if ADK_TARGET_SYSTEM_QEMU_PPC64
 	select ADK_KERNEL_SCSI_SUNESP if ADK_TARGET_SYSTEM_QEMU_SPARC
@@ -285,15 +305,15 @@ config ADK_TARGET_QEMU_WITH_GRAPHIC
 	select ADK_KERNEL_FONT_8x16
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_FB_SM501 if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
-	select ADK_KERNEL_FB_CIRRUS if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_FB_SM501 if ADK_LINUX_SH
+	select ADK_KERNEL_FB_CIRRUS if ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_KERNEL_FB_PXA if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_TARGET_SYSTEM_QEMU_I686 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	select ADK_KERNEL_INPUT_MOUSE
 	select ADK_KERNEL_INPUT_MOUSEDEV
-	select ADK_KERNEL_USB_HID if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
+	select ADK_KERNEL_USB_HID if ADK_LINUX_SH
 
 endchoice
 
@@ -317,6 +337,7 @@ config ADK_TARGET_QEMU_WITH_VIRTIO
 
 endchoice
 
+endmenu
 
 choice
 prompt "Use ARM thumb mode"
@@ -353,12 +374,6 @@ config ADK_TARGET_WITH_ACPI
 	boolean
 
 config ADK_TARGET_WITH_VGA
-	boolean
-
-config ADK_TARGET_WITH_CF
-	boolean
-
-config ADK_TARGET_WITH_MMC
 	boolean
 
 config ADK_TARGET_WITH_NAND
@@ -657,7 +672,8 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
-		   !ADK_TARGET_ABI_X32
+		   !ADK_x32 && \
+		   !ADK_32
 	help
  	 http://uclibc.org
 
@@ -747,7 +763,6 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	depends on !ADK_HARDWARE_VBOX
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_KERNEL_BLK_DEV_INITRD
-	select ADK_KERNEL_BLK_DEV_RAM if ADK_TARGET_SYSTEM_ARANYM_M68K
 	help
 	  create an read-only initramfs system.
 
@@ -774,15 +789,17 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	bool "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
+	select ADK_HOST_NEED_QEMU if ADK_HARDWARE_QEMU
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_TARGET_WITH_MTD
 	help
 	  highly compressed read-only filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_JFFS2
 	bool "Compressed read-write root filesystem (jffs2)"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_JFFS2
-	select ADK_HOST_NEED_JFFS2
+	select ADK_KERNEL_JFFS2_FS
+	select ADK_HOST_NEED_MTD_UTILS
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_TARGET_WITH_MTD
 	help
 	  compressed read-write filesystem for MTD flash systems.
@@ -827,43 +844,15 @@ config ADK_TARGET_ROOTFS_USB
 	help
 	  Boot system from USB stick.
 
-config ADK_TARGET_ROOTFS_CF
-	bool "read-write filesystem for compact flash"
-	depends on ADK_TARGET_WITH_CF
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	help
-	  Use this option if you have a compact flash based system.
-	  (ext2 filesystem is used.)
-
-config ADK_TARGET_ROOTFS_GENEXT2FS
-	bool "read-write filesystem for compact flash (genext2fs version)"
-	depends on ADK_TARGET_WITH_CF
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	select ADK_HOST_NEED_GENEXT2FS
-	help
-	  Use this option if you have a compact flash based system.
-	  (ext2 filesystem is used.)
-
-config ADK_TARGET_ROOTFS_MMC
-	bool "read-write filesystem for mmc/sdcard"
-	depends on ADK_TARGET_WITH_MMC
-	select ADK_KERNEL_EXT2_FS
-	select ADK_KERNEL_SCSI
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	help
-	  Use this option if you have a MMC/SDCARD based system.
-	  (ext2 filesystem is used.)
-
 config ADK_TARGET_ROOTFS_ISO
 	bool "ISO image"
 	select ADK_KERNEL_ISO9660_FS
 	select ADK_KERNEL_JOLIET
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SR
-	select ADK_HOST_NEED_MKISOFS
+	select ADK_HOST_NEED_CDRTOOLS
 	select ADK_HOST_NEED_SYSLINUX
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_HOST_LINUX
 	depends on ADK_LINUX_X86
 	help
@@ -872,7 +861,7 @@ config ADK_TARGET_ROOTFS_ISO
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	bool "Archive usable for initramfs creation"
 	help
-	  Use this option if your palnning to create a initramfs,
+	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
@@ -939,11 +928,12 @@ config ADK_TARGET_ROOTFS
 config ADK_PACKAGE_SUFFIX
 	string
 	default "ipk" if ADK_TARGET_PACKAGE_IPKG
-	default "tar.gz" if ADK_TARGET_PACKAGE_TGZ
+	default "tar.xz" if ADK_TARGET_PACKAGE_TXZ
 	help
 
 choice
 prompt "Target package format"
+default ADK_TARGET_PACKAGE_TXZ if ADK_PKG_TEST
 default ADK_TARGET_PACKAGE_IPKG
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
@@ -954,9 +944,9 @@ config ADK_TARGET_PACKAGE_IPKG
 	help
 	  Create ipkg packages and use ipkg package management on the target.
 
-config ADK_TARGET_PACKAGE_TGZ
+config ADK_TARGET_PACKAGE_TXZ
 	boolean
-	prompt "tar archive"
+	prompt "xz compressed tar archive"
 	help
 	  Create compressed tar archives of packages.
 	  Pre- and post install scripts will be executed in the target

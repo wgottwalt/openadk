@@ -23,16 +23,12 @@ case $1 in
 			ip route add to default via $i
 		done
 	fi
-
-	touch /tmp/resolv.conf
-	ln -sf /tmp/resolv.conf $RESOLV_CONF
 	echo -n >$RESOLV_CONF
 	${domain:+echo search $domain} >>$RESOLV_CONF
 	for i in $dns; do
 		echo "adding dns $i"
 		echo "nameserver $i" >>$RESOLV_CONF
 	done
-
 	# user rules
 	[ -f /etc/udhcpc.user ] && . /etc/udhcpc.user
 ;;

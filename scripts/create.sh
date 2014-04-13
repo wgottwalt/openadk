@@ -55,7 +55,7 @@ Syntax: $me [-c cfgfssize] [+g] [-i imagesize] [-p panictime]
     [-s serialspeed] [-t] [-T imagetype] [+U] target.ima source.tgz
 Explanation/Defaults:
 	-c: minimum 0, maximum 5, default 1 (MiB)
-	+g: disables installing GNU GRUB 2 (-g enables it, default)
+	-g: enable installing GNU GRUB 2
 	-i: total image, default 512 (MiB; max. approx. 2 TiB)
 	-p: default 10 (seconds; 0 disables; max. 300)
 	-s: default 115200 (bps, others: 9600 19200 38400 57600)
@@ -66,7 +66,7 @@ EOF
 }
 
 cfgfs=1
-usegrub=1
+usegrub=0
 tgtmib=512
 panicreboot=10
 speed=115200
@@ -80,7 +80,6 @@ while getopts "c:ghi:p:s:tT:" ch; do
 			usage
 		fi ;;
 	(g)	usegrub=1 ;;
-	(+g)	usegrub=0 ;;
 	(h)	usage 0 ;;
 	(i)	if (( (tgtmib = OPTARG) < 7 || tgtmib > 2097150 )); then
 			print -u2 "$me: -i $OPTARG out of bounds"
@@ -153,7 +152,7 @@ else
 fi
 
 if (( usegrub )); then
-	tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
+	tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
 	integer coreimgsz=$($statcmd "$T/core.img")
 	if (( coreimgsz < 1024 )); then
 		print -u2 core.img is probably too small: $coreimgsz
@@ -274,12 +273,6 @@ if (( usegrub )); then
 		print "\tlinux /boot/kernel $linuxargs"
 		print '}'
 	) >boot/grub/grub.cfg
-	set -A grubfiles
-	ngrubfiles=0
-	for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handler.lst,parttool.lst}; do
-		[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
-	done
-	cp "${grubfiles[@]}" boot/grub/
 fi
 
 print "Creating ext2fs filesystem image..."

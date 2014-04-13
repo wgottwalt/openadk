@@ -1,0 +1,11 @@
+--- collectd-5.4.1.orig/src/Makefile.in	2014-01-26 09:09:56.000000000 +0100
++++ collectd-5.4.1/src/Makefile.in	2014-04-10 19:13:47.000000000 +0200
+@@ -2235,7 +2235,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ SUBDIRS = libcollectdclient $(am__append_1)
+-@COMPILER_IS_GCC_TRUE@AM_CFLAGS = -Wall -Werror
++@COMPILER_IS_GCC_TRUE@AM_CFLAGS = -Wall
+ AM_CPPFLAGS = -DPREFIX='"${prefix}"' \
+ 	-DCONFIGFILE='"${sysconfdir}/${PACKAGE_NAME}.conf"' \
+ 	-DLOCALSTATEDIR='"${localstatedir}"' \

@@ -17,10 +17,10 @@ DL_DIR?=		$(BASE_DIR)/dl
 else
 DL_DIR?=		$(ADK_DL_DIR)
 endif
-TOOLS_BUILD_DIR=	$(BASE_DIR)/tools_build
 SCRIPT_DIR:=		$(BASE_DIR)/scripts
 STAGING_HOST_DIR:=	${BASE_DIR}/host_${GNU_HOST_NAME}
 TOOLCHAIN_DIR:=		${BASE_DIR}/toolchain_${GNU_HOST_NAME}
+HOST_BUILD_DIR:=	${BASE_DIR}/host_build_${GNU_HOST_NAME}
 
 # dirs for cleandir
 FW_DIR_PFX:=		$(BASE_DIR)/firmware
@@ -54,7 +54,7 @@ SCRIPT_TARGET_DIR:=	${STAGING_TARGET_DIR}/scripts
 
 # PATH variables
 TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
-HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
+HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${_PATH}
 AUTOTOOL_PATH=		${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 
 ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
@@ -71,7 +71,7 @@ CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
 			--target=${GNU_TARGET_NAME}
 
 ifneq ($(strip ${ADK_USE_CCACHE}),)
-TARGET_COMPILER_PREFIX=ccache ${TARGET_CROSS}
+TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
 # target tools
@@ -111,23 +111,38 @@ TARGET_LDFLAGS+=	-Wl,--secure-plt
 endif
 endif
 
-ifneq ($(ADK_TOOLCHAIN_GCC_USE_SSP),)
+ifeq ($(ADK_STATIC),y)
+TARGET_CFLAGS+=		-static
+TARGET_CXXFLAGS+=	-static
+TARGET_LDFLAGS+=	-static
+endif
+
+ifneq ($(ADK_TOOLCHAIN_USE_SSP),)
 TARGET_CFLAGS+=		-fstack-protector
 TARGET_CXXFLAGS+=	-fstack-protector
 TARGET_LDFLAGS+=	-fstack-protector
 endif
 
-ifneq ($(ADK_TOOLCHAIN_GCC_USE_LTO),)
+ifneq ($(ADK_TOOLCHAIN_USE_LTO),)
 TARGET_CFLAGS+=		-flto
 TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
+ifeq ($(ADK_LINUX_MICROBLAZE),y)
+TARGET_CFLAGS+=		-mxl-barrel-shift
+TARGET_CXX_FLAGS+=	-mxl-barrel-shift
+endif
+
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
+ifeq ($(ADK_DEBUG_OPTS),y)
+TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
+else
+TARGET_CFLAGS+=		-O0 -g3 -fno-omit-frame-pointer
+endif
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
-TARGET_CFLAGS+=		-fomit-frame-pointer $(TARGET_OPTIMIZATION)
+TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 # always add debug information
@@ -178,9 +193,10 @@ TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			CROSS_COMPILE='$(TARGET_CROSS)'
 
 HOST_CONFIGURE_OPTS=	CC_FOR_BUILD='${CC_FOR_BUILD}' \
-			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CXX_FOR_BUILD='${CXX_FOR_BUILD}' \
+			CPPFLAGS_FOR_BUILD='${CPPFLAGS_FOR_BUILD}' \
 			CFLAGS_FOR_BUILD='${CFLAGS_FOR_BUILD}' \
+			CXXFLAGS_FOR_BUILD='${CXXFLAGS_FOR_BUILD}' \
 			LDFLAGS_FOR_BUILD='${LDFLAGS_FOR_BUILD}'
 
 PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))
@@ -207,25 +223,25 @@ RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/r
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
 	
-EXTRACT_CMD=		mkdir -p ${WRKDIR}; \
+EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
 			*.cpio) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				cat $$file | cpio -i -d ;; \
 			*.tar) \
 				tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
-				gzip -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				$(STAGING_HOST_DIR)/usr/bin/xz -dc $$file | tar -xf - ;; \
+				xz -dc $$file | tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
 				gzip -dc $$file | tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -i -d ;; \
+				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				$(STAGING_HOST_DIR)/usr/bin/bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | $(STAGING_HOST_DIR)/usr/bin/cpio -ivd -H zip ;; \
+				cat $$file | cpio -ivd -H zip ;; \
 			*.arm) \
 				cp $$file ${WRKDIR} ;; \
 			*) \

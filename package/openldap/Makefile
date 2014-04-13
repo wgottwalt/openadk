@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.36
+PKG_VERSION:=		2.4.39
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		744701405d396b1fb9de6cb7a453c6e9
+PKG_MD5SUM:=		b0d5ee4b252c841dec6b332d679cf943
 PKG_DESCR:=		OpenLDAP client libraries
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid

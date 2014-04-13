@@ -20,6 +20,14 @@ PKGSS_SAMBA_CLIENT:=	libreadline samba-lib
 PKGSD_SAMBA_PASSWD:=	SMB password utility
 PKGSD_SAMBA_LIB:=	SMB libraries
 
+PKG_FLAVOURS_SAMBA:=	WITH_WINBIND WITH_LDAP
+PKGFD_WITH_WINBIND:=	enable winbind support
+PKGFS_WITH_WINBIND:=	libkrb5
+PKGFB_WITH_WINBIND:=	krb5
+PKGFD_WITH_LDAP:=	enable LDAP support
+PKGFS_WITH_LDAP:=	libopenldap
+PKGFB_WITH_LDAP:=	openldap
+
 WRKSRC=			${WRKDIST}/source3
 
 include ${TOPDIR}/mk/package.mk
@@ -29,9 +37,25 @@ $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEAS
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_PASSWD},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKG_SECTION}))
 
-#TARGET_LDFLAGS+=	-Wl,-rpath -Wl,/usr/lib/samba
+ifneq ($(ADK_PACKAGE_SAMBA_WITH_WINBIND),)
+CONFIGURE_ARGS+=	--with-winbind \
+			--with-krb5="$(STAGING_TARGET_DIR)/usr"
+else
+CONFIGURE_ARGS+=	--without-winbind
+endif
+
+ifneq ($(ADK_PACKAGE_SAMBA_WITH_LDAP),)
+CONFIGURE_ARGS+=	--with-ldap
+else
+CONFIGURE_ARGS+=	--with-ldap=no
+endif
+
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
 			samba_cv_USE_SETRESUID=no \
+			samba_cv_HAVE_WRFILE_KEYTAB=yes \
+			ac_cv_func_ext_krb5_enctype_to_string=yes \
+			smb_krb5_cv_enctype_to_string_takes_krb5_context_arg=yes \
+			smb_krb5_cv_enctype_to_string_takes_size_t_arg=no \
 			ac_cv_lib_ext_nsl_connect=no \
 			ac_cv_search_yp_get_default_domain=no \
 			ac_cv_lib_ext_nsl_gethostbyname=no \
@@ -44,12 +68,10 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib \
 			--with-privatedir=/etc/samba \
 			--with-libiconv=/dev/null \
 			--with-syslog \
-			--without-winbind \
 			--disable-cups \
 			--disable-swat \
 			--disable-avahi \
 			--with-utmp=no \
-			--with-ldap=no \
 			--without-cluster-support \
 			--without-sendfile-support
 

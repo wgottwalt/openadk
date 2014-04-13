@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		6.5p1
+PKG_VERSION:=		6.6p1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a084e7272b8cbd25afe0f5dce4802fef
+PKG_MD5SUM:=		3e9800e6bca1fbac0eea4d41baa7f239
 PKG_DESCR:=		OpenSSH
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib openssl
@@ -50,7 +50,7 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_USE_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 CONFIGURE_ARGS+=	--with-stackprotect
 else
 CONFIGURE_ARGS+=	--without-stackprotect

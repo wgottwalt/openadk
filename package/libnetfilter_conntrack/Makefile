@@ -4,13 +4,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libnetfilter_conntrack
-PKG_VERSION:=		1.0.3
+PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		73394a3d8d0cfecc6abb6027b4792d52
+PKG_MD5SUM:=		18cf80c4b339a3285e78822dbd4f08d7
 PKG_DESCR:=		API to connection tracking state table
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libnfnetlink
-PKG_BUILDDEP:=		libnfnetlink
+PKG_DEPENDS:=		libnfnetlink libmnl
+PKG_BUILDDEP:=		libnfnetlink libmnl
 PKG_URL:=		http://www.netfilter.org/projects/libnetfilter_conntrack/
 PKG_SITES:=		http://www.netfilter.org/projects/libnetfilter_conntrack/files/
 PKG_OPTS:=		dev

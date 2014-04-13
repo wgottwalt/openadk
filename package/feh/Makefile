@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		feh
-PKG_VERSION:=		1.16.1
+PKG_VERSION:=		2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1bb080c7b0021db50884a52161251990
+PKG_MD5SUM:=		6714dedeff1db5c3593c4a27b0d9cf50
 PKG_DESCR:=		image viewer
 PKG_SECTION:=		multimedia
 PKG_BUILDDEP:=		imlib2 giblib libXt

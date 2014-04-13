@@ -1,6 +1,6 @@
---- lynx2-8-7.orig/WWW/Library/Implementation/HTUtils.h	2009-05-25 23:05:31.000000000 +0200
-+++ lynx2-8-7/WWW/Library/Implementation/HTUtils.h	2010-05-29 12:56:42.125000000 +0200
-@@ -677,6 +677,8 @@ extern int WWW_TraceMask;
+--- lynx2-8-8.orig/WWW/Library/Implementation/HTUtils.h	2014-02-05 01:50:18.000000000 +0100
++++ lynx2-8-8/WWW/Library/Implementation/HTUtils.h	2014-03-21 22:14:07.000000000 +0100
+@@ -725,6 +725,8 @@ extern int WWW_TraceMask;
  
  #define SHORTENED_RBIND		/* FIXME: do this in configure-script */
  
@@ -9,15 +9,15 @@
  #ifdef USE_SSL
  
  #define free_func free__func
-@@ -717,6 +719,7 @@ extern int WWW_TraceMask;
+@@ -765,6 +767,7 @@ extern int WWW_TraceMask;
  
  #undef free_func
  #endif /* USE_SSL */
 +#endif
  
- #ifdef HAVE_LIBDMALLOC
- #include <dmalloc.h>		/* Gray Watson's library */
-@@ -747,11 +750,14 @@ extern "C" {
+ #ifdef HAVE_BSD_STDLIB_H
+ #include <bsd/stdlib.h>		/* prototype for arc4random.h */
+@@ -801,11 +804,14 @@ extern "C" {
  
      extern FILE *TraceFP(void);
  

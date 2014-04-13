@@ -7,6 +7,14 @@ config ADK_RUNTIME_HOSTNAME
 	help
 	  Set your target hostname.
 
+config ADK_RUNTIME_START_SERVICES
+	prompt "start some services by default"
+	boolean
+	default n
+	help
+
+source "target/config/Config.in.scripts"
+
 config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	default ""
@@ -38,6 +46,7 @@ config ADK_RUNTIME_TIMEZONE
 
 choice
 prompt "Start getty or shell after bootup"
+default ADK_RUNTIME_SHELL if ADK_PKG_TEST
 default ADK_RUNTIME_GETTY
 
 config ADK_RUNTIME_GETTY
@@ -59,6 +68,7 @@ config ADK_RUNTIME_GETTY_VGA
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 	help
           Start getty on VGA console. (tty1-tty6)
@@ -69,6 +79,7 @@ config ADK_RUNTIME_GETTY_SERIAL
 	default n if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n if ADK_TARGET_SYSTEM_IBM_X40
+	default n if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default y
 	help
 	  Start getty on serial console.
@@ -80,7 +91,6 @@ config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
 	default "ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
 	default "ttymxc0" if ADK_TARGET_SYSTEM_CUBOX_I
-	default "nfcon0" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "ttyS0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED

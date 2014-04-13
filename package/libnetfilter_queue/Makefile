@@ -21,6 +21,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNETFILTER_QUEUE,libnetfilter-queue,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+
 libnetfilter-queue-install:
 	$(INSTALL_DIR) $(IDIR_LIBNETFILTER_QUEUE)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libnetfilter_queue*so* \

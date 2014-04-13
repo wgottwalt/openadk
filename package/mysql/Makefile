@@ -4,91 +4,75 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.1.61
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		4efd10c69c4c99dbdb8fae3834a6d7b8
+PKG_VERSION:=		5.6.17
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		82114fa7c13fa3ca897b34666577d9f4
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		db
 PKG_DEPENDS:=		libncurses zlib
-PKG_BUILDDEP:=		ncurses zlib readline
+PKG_BUILDDEP:=		cmake-host mysql-host ncurses zlib readline
+HOST_BUILDDEP:=		cmake-host
 PKG_URL:=		http://www.mysql.com/
-PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.1/}
+PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.6/}
 PKG_LIBNAME:=		libmysqlclient
 PKG_OPTS:=		dev
 
-PKG_HOST_DEPENDS:=	!cygwin
-
+include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,MYSQL,mysql,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-BUILD_STYLE:=		manual
-INSTALL_STYLE:=		manual
+HOST_STYLE:=		manual
+CONFIG_STYLE:=		manual
 
-CONFIGURE_ENV+=		OPTIMIZE_CFLAGS="${TARGET_CFLAGS}" \
-			OPTIMIZE_CXXFLAGS="${TARGET_CXXFLAGS}" \
-			ac_cv_lib_nsl_gethostbyname_r=no \
-			ac_cv_lib_nsl_yp_get_default_domain=no \
-			ac_cv_sys_restartable_syscalls=yes \
-			mysql_cv_sys_os=Linux \
-			mysql_cv_compress=yes \
-			ac_cv_sys_restartable_syscalls=no \
-			ac_cv_conv_longlong_to_float=yes \
-			mysql_cv_gcc_atomic_builtins=yes \
-			mysql_cv_gethostname_style=glibc2
-CONFIGURE_ARGS+=	--disable-assembler \
-			--with-pthread \
-			--with-atomic-ops=rwlocks \
-			--with-unix-socket-path=/tmp/.mysql.sock \
-			--with-named-thread-libs=-lpthread \
-			--without-libwrap \
-			--without-pstack \
-			--with-low-memory \
-			--without-server \
-			--without-embedded-server \
-			--without-query-cache \
-			--without-ssl \
-			--without-docs \
-			--without-readline \
-			--with-machine-type=${CPU_ARCH}
-BUILD_LFLAGS=		CC="${CC_FOR_BUILD}" \
-			CXX='${CXX_FOR_BUILD}' \
-			CFLAGS='${CFLAGS_FOR_BUILD} -DHOSTCOMPILE=1' \
-			CXXFLAGS='${CXXFLAGS_FOR_BUILD}' \
-			LDFLAGS='${LDFLAGS_FOR_BUILD}' \
-			CPPFLAGS='${CPPFLAGS_FOR_BUILD}' \
-			CXXLINK='${CXX_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD} -o $$@' \
-			LINK='${CC_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD} -o $$@'
-ifneq (${OStype},Linux)
-BUILD_FLAGS+=		LIBS='-lm -lz'
-endif
+host-configure:
+	cd ${WRKBUILD} && PATH='${HOST_PATH}' \
+		cmake .
 
-do-build:
-	${MAKE} -C "${WRKBUILD}" \
-		SUBDIRS="include" \
-		DESTDIR="${WRKINST}" \
-		all install
-	${MAKE} -C "${WRKBUILD}/libmysql" \
-		LINK="${CC_FOR_BUILD} -o conf_to_src -lc" \
-		${BUILD_FLAGS} \
-		conf_to_src
-	${MAKE} -C "${WRKBUILD}" \
-		CFLAGS="${TARGET_CFLAGS}" \
-		SUBDIRS="libmysql" \
-		DESTDIR="${WRKINST}" \
-		all install
-	${MAKE} -C "${WRKBUILD}" \
-		CFLAGS="${TARGET_CFLAGS}" \
-		SUBDIRS="scripts" \
-		DESTDIR="${WRKINST}" \
-		bin_SCRIPTS="mysql_config" \
-		all install
+host-build:
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+
+mysql-hostinstall:
+	$(INSTALL_BIN) ${WRKBUILD}/extra/comp_err \
+		$(STAGING_HOST_DIR)/usr/bin
+	$(INSTALL_BIN) ${WRKBUILD}/scripts/comp_sql \
+		$(STAGING_HOST_DIR)/usr/bin
+	$(INSTALL_BIN) ${WRKBUILD}/sql/gen_lex_hash \
+		$(STAGING_HOST_DIR)/usr/bin
+	$(INSTALL_BIN) ${WRKBUILD}/storage/perfschema/gen_pfs_lex_token \
+		$(STAGING_HOST_DIR)/usr/bin
+
+do-configure:
+	sed -e "s#@@TARGET_CC@@#$(TARGET_CC)#" \
+	 	-e "s#@@TARGET_CXX@@#$(TARGET_CXX)#" \
+		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
+		-e "s#@@TARGET_CXXFLAGS@@#$(TARGET_CXXFLAGS)#" \
+		-e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" \
+		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
+		$(SCRIPT_DIR)/toolchain.cmake.in > $(SCRIPT_DIR)/toolchain.cmake
+	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
+		cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
+			-DWITH_EDITLINE=bundled \
+			-DCURSES_LIBRARY="$(STAGING_TARGET_DIR)/usr/lib" \
+			-DCURSES_INCLUDE_PATH="$(STAGING_TARGET_DIR)/usr/lib" \
+			-DSTACK_DIRECTION=1 \
+			.)
+	$(CP) $(STAGING_HOST_DIR)/usr/bin/comp_err \
+		${WRKBUILD}/extra/
+	$(CP) $(STAGING_HOST_DIR)/usr/bin/comp_sql \
+		${WRKBUILD}/scripts/
+	$(CP) $(STAGING_HOST_DIR)/usr/bin/gen_lex_hash \
+		${WRKBUILD}/sql/
+	$(CP) $(STAGING_HOST_DIR)/usr/bin/gen_pfs_lex_token \
+		${WRKBUILD}/storage/perfschema/
 
 libmysqlclient-install:
 	${INSTALL_DIR} ${IDIR_LIBMYSQLCLIENT}/usr/lib
-	${CP} ${WRKINST}/usr/lib/mysql/libmysqlclient.so* \
+	${CP} ${WRKINST}/usr/lib/libmysqlclient.so* \
 	    ${IDIR_LIBMYSQLCLIENT}/usr/lib
-	$(SED) "s,\(^pkgincludedir='\)\(.*\),\1${STAGING_TARGET_DIR}\2," \
-		${WRKINST}/usr/bin/mysql_config
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

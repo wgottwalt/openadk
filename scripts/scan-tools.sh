@@ -196,23 +196,137 @@ if ! which perl >/dev/null 2>&1; then
 	out=1
 fi
 
-if ! which xargs >/dev/null 2>&1; then
-	echo  "You need xargs to continue."
-	echo
-	out=1
-fi
-
 if ! which g++ >/dev/null 2>&1; then
 	echo  "You need g++ (GNU C++ compiler) to continue."
 	echo
 	out=1
 fi
 
-if ! which git >/dev/null 2>&1; then
-	echo  "You need git to continue."
-	echo
-	out=1
+# always required, but can be provided by host
+host_build_bc=0
+if ! which bc >/dev/null 2>&1; then
+	echo "No bc found, will build one."
+	host_build_bc=1
 fi
+
+host_build_bison=0
+if ! which bison >/dev/null 2>&1; then
+	echo "No bison found, will build one."
+	host_build_bison=1
+fi
+
+host_build_bzip2=0
+if ! which bzip2 >/dev/null 2>&1; then
+	echo "No bzip2 found, will build one."
+	host_build_bzip2=1
+fi
+
+host_build_file=0
+if ! which file >/dev/null 2>&1; then
+	echo "No file found, will build one."
+	host_build_file=1
+fi
+
+host_build_flex=0
+if ! which flex >/dev/null 2>&1; then
+	echo "No flex found, will build one."
+	host_build_m4=1
+fi
+
+host_build_m4=0
+if ! which m4 >/dev/null 2>&1; then
+	echo "No m4 found, will build one."
+	host_build_m4=1
+fi
+
+host_build_pkgconf=0
+if ! which pkgconf >/dev/null 2>&1; then
+	echo "No pkgconf found, will build one."
+	host_build_pkgconf=1
+fi
+
+host_build_findutils=0
+if ! which gxargs >/dev/null 2>&1; then
+	if which xargs >/dev/null 2>&1; then
+		if ! xargs --version 2>/dev/null|grep GNU >/dev/null;then
+			echo "No GNU xargs found, will build one."
+			host_build_findutils=1
+		fi
+	fi
+fi
+
+if ! which gfind >/dev/null 2>&1; then
+	if which find >/dev/null 2>&1; then
+		if ! find --version 2>/dev/null|grep GNU >/dev/null;then
+			echo "No GNU find found, will build one."
+			host_build_findutils=1
+		fi
+	fi
+fi
+
+host_build_xz=0
+if ! which xz >/dev/null 2>&1; then
+	echo "No xz found, will build one."
+	host_build_xz=1
+fi
+
+# optional
+host_build_cdrtools=0
+if ! which mkisofs >/dev/null 2>&1; then
+	echo "No mkisofs found, will build one when required."
+	host_build_cdrtools=1
+fi
+
+host_build_ccache=0
+if ! which ccache >/dev/null 2>&1; then
+	echo "No ccache found, will build one when required."
+	host_build_ccache=1
+fi
+
+host_build_genext2fs=0
+if ! which genext2fs >/dev/null 2>&1; then
+	echo "No genext2fs found, will build one when required."
+	host_build_genext2fs=1
+fi
+
+host_build_lzma=0
+if ! which lzma >/dev/null 2>&1; then
+	echo "No lzma found, will build one when required."
+	host_build_lzma=1
+fi
+
+host_build_lzop=0
+if ! which lzop >/dev/null 2>&1; then
+	echo "No lzop found, will build one when required."
+	host_build_lzop=1
+fi
+
+host_build_qemu=0
+if ! which qemu-img >/dev/null 2>&1; then
+	echo "No qemu found, will build one when required."
+	host_build_qemu=1
+fi
+
+echo "config ADK_HOST_BUILD_TOOLS" > $topdir/target/config/Config.in.prereq
+printf "\t%s\n" "boolean" >> $topdir/target/config/Config.in.prereq
+printf "\t%s\n" "default y" >> $topdir/target/config/Config.in.prereq
+# always required
+if [ $host_build_bc -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BC" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_bison -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BISON" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_bzip2 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BZIP2" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FILE" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_flex -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FLEX" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_m4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_pkgconf -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PKGCONF" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_findutils -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FINDUTILS" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq ;fi
+# optional
+if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_cdrtools -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CDRTOOLS if ADK_HOST_NEED_CDRTOOLS" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_genext2fs -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GENEXT2FS if ADK_HOST_NEED_GENEXT2FS" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_lzma -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZMA if ADK_HOST_NEED_LZMA" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_lzop -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZOP if ADK_HOST_NEED_LZOP" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_qemu -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_QEMU if ADK_HOST_NEED_QEMU" >> $topdir/target/config/Config.in.prereq ;fi
 
 cd $topdir
 rm -rf tmp

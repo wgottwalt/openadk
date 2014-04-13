@@ -28,7 +28,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
-			--without-system-zlib \
+			--with-system-zlib \
 			--without-ppl \
 			--without-cloog \
 			--without-isl \
@@ -45,10 +45,10 @@ endif
 
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
-GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=mx32
+GCC_FINAL_CONFOPTS+=	--with-abi=x32
 endif
 ifeq ($(ADK_32),y)
-GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m32
+GCC_FINAL_CONFOPTS+=	--with-abi=32
 endif
 ifeq ($(ADK_64),y)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
@@ -202,11 +202,18 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
 	cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin; \
-		for app in ar as c++ g++ gcc ld ld.bfd nm objcopy objdump ranlib strip; do \
+		for app in ar as c++ g++ gcc ld ld.gold ld.bfd nm objcopy objdump ranlib strip; do \
 			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
+ifeq ($(ADK_TOOLCHAIN_USE_GOLD),y)
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
+		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
+else
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
+		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
+endif
 	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
 		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
