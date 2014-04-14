@@ -9,7 +9,7 @@ PKG_RELEASE:=		5
 PKG_MD5SUM:=		e927540b6eda8b024fb0391eeaa4091c
 PKG_DESCR:=		GRUB2 bootloader
 PKG_SECTION:=		boot
-PKG_BUILDDEP:=		bison-host qemu-host
+PKG_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
 
@@ -52,7 +52,7 @@ grub-install:
 	${INSTALL_DIR} $(IDIR_GRUB)/boot/grub/${GRUB_ARCH}
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH}/*{mod,lst,img} \
 		$(IDIR_GRUB)/boot/grub/${GRUB_ARCH}/
-	${CP} ./files/core.img.${GRUB_ARCH} \
+	-${CP} ./files/core.img.${GRUB_ARCH} \
 		$(IDIR_GRUB)/boot/grub/core.img
 
 grub-tools-install:
