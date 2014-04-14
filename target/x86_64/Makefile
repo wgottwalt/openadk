@@ -8,6 +8,15 @@ include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
+ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
+ifeq ($(ADK_TARGET_QEMU_WITHOUT_GRAPHIC),y)
+CREATE:=./scripts/create.sh -g -t
+else
+CREATE:=./scripts/create.sh -g
+endif
+else
+CREATE:=./scripts/create.sh
+endif
 
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
@@ -15,9 +24,13 @@ imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86_64),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "$(CREATE) qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following command line:"
+ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
+	@echo 'qemu-system-x86_64 ${ADK_QEMU_ARGS} -net user -net nic,model=e1000 qemu-${CPU_ARCH}.img'
+else
 	@echo 'qemu-system-x86_64 ${ADK_QEMU_ARGS} -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)

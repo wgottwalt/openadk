@@ -4,20 +4,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		patch
-PKG_VERSION:=		2.5.9
+PKG_VERSION:=		2.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dacfb618082f8d3a2194601193cf8716
-PKG_DESCR:=		GNU patch
+PKG_MD5SUM:=		95dd8d7e41dcbcecdd5cd88ef915378d
+PKG_DESCR:=		GNU patch utility
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.gnu.org/software/patch/
 PKG_SITES:=		${MASTER_SITE_GNU:=patch/}
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,PATCH,patch,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,PATCH,patch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+HOST_STYLE:=		auto
 
 patch-install:
 	$(INSTALL_DIR) $(IDIR_PATCH)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/patch $(IDIR_PATCH)/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

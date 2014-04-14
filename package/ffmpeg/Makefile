@@ -100,7 +100,11 @@ $(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG
 $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSC_FFPROBE}))
 #$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
+ifeq ($(ADK_DEBUG),y)
+TARGET_CFLAGS:=		$(subst O0,O2,$(TARGET_CFLAGS))
+else
 TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
+endif
 TARGET_CPPFLAGS+=	-D_POSIX_SOURCE -D_GNU_SOURCE
 
 ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)

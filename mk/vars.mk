@@ -138,7 +138,7 @@ ifneq ($(ADK_DEBUG),)
 ifeq ($(ADK_DEBUG_OPTS),y)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 else
-TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer
+TARGET_CFLAGS+=		-O0 -g3 -fno-omit-frame-pointer
 endif
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
@@ -168,7 +168,7 @@ CXXFLAGS_FOR_BUILD?=    -O2 -Wall
 LDFLAGS_FOR_BUILD?= 	-L$(STAGING_HOST_DIR)/usr/lib
 FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
 
-PATCH=			${BASH} $(SCRIPT_DIR)/patch.sh
+PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
 SED:=			PATH=${HOST_PATH} sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ARCH} \

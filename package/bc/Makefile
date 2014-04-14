@@ -10,6 +10,7 @@ PKG_MD5SUM:=		d44b5dddebd8a7a7309aea6c36fda117
 PKG_DESCR:=		arbitrary precision calculator language
 PKG_SECTION:=		utils
 PKG_BUILDDEP:=		m4-host flex-host
+HOST_BUILDDEP:=		m4-host flex-host
 PKG_URL:=		http://www.gnu.org/software/bc/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
 
