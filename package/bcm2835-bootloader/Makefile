@@ -4,14 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-bootloader
-# actually 9953ce0847c04b587b694c79c5b5a4ac63f5c369 from 25.03.2014
-# https://github.com/raspberrypi/firmware
-PKG_VERSION:=		0.7
+# actually 04ba1c03780ae708c9289bce14f56933e55e9c20 from 13.04.2014
+PKG_VERSION:=		0.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7ad7e5d3ad311d88d1e82fc729042d87
+PKG_MD5SUM:=		08beaa7d66e7dd6b0ab58483d0f4ce40
 PKG_DESCR:=		bootloader for raspberry pi (bcm2835)
 PKG_SECTION:=		boot
+PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		http://openadk.org/distfiles/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
