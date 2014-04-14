@@ -12,7 +12,6 @@ Before you can start you need to install some tools:
 - GNU awk
 - GNU sed
 - tar
-- patch
 - gzip
 - wget
 - libc headers

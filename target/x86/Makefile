@@ -9,7 +9,11 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
+ifeq ($(ADK_TARGET_QEMU_WITHOUT_GRAPHIC),y)
+CREATE:=./scripts/create.sh -g -t
+else
 CREATE:=./scripts/create.sh -g
+endif
 else
 CREATE:=./scripts/create.sh
 endif
