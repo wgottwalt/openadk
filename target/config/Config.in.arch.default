@@ -1,4 +1,7 @@
 # target architectures
+config ADK_aarch64
+	bool
+
 config ADK_arm
 	bool
 
@@ -34,6 +37,7 @@ config ADK_x86
 
 config ADK_TARGET_ARCH
 	string
+	default "aarch64"  if ADK_aarch64
 	default "arm"  if ADK_arm
 	default "m68k"  if ADK_m68k
 	default "microblaze"  if ADK_microblaze

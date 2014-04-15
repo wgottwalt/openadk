@@ -1,0 +1,14 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_AARCH64
+	bool "Toolchain only (little endian)"
+	select ADK_aarch64
+	select ADK_toolchain_aarch64
+	select ADK_little
+	select ADK_soft_float
+	select ADK_fpu_vfp
+	select ADK_eabi
+	select ADK_TOOLCHAIN
+	select ADK_CPU_ARMV8
+	select ADK_LINUX_64
+	select ADK_TARGET_PACKAGE_TXZ
+	help
+	  AARCH64 toolchain.

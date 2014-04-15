@@ -1,3 +1,4 @@
+source "target/aarch64/Config.in"
 source "target/arm/Config.in"
 source "target/m68k/Config.in"
 source "target/microblaze/Config.in"
