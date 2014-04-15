@@ -46,6 +46,12 @@ endif
 ifeq ($(CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
+ifeq ($(CPU_ARCH),sh4)
+MARCH:=			sh
+endif
+ifeq ($(CPU_ARCH),sh4eb)
+MARCH:=			sheb
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 MARCH:=			armhf
 endif

@@ -40,6 +40,11 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
 ifeq ($(ADK_LINUX_SH),y)
+ifeq ($(ADK_little),y)
+GCC_CONFOPTS+=		--with-endian=little
+else
+GCC_CONFOPTS+=          --with-endian=big
+endif
 GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
 
