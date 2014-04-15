@@ -19,6 +19,10 @@ ifeq ($(ADK_TARGET_KERNEL_BZIMAGE),y)
 KERNEL_FILE:=vmlinux
 KERNEL_TARGET:=all
 endif
+ifeq ($(ADK_TARGET_KERNEL_IMAGE),y)
+KERNEL_FILE:=vmlinux
+KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
+endif
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) target/kernel-patch

@@ -4,6 +4,12 @@ prompt "Target architecture"
 config ADK_CHOOSE_TARGET_ARCH
 	bool "Choose target architecture"
 
+config ADK_LINUX_AARCH64
+	bool "aarch64 system"
+	select ADK_aarch64
+	help
+	  Support for AARCH64 systems.
+
 config ADK_LINUX_ARM
 	bool "arm system"
 	select ADK_arm
