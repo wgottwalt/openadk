@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
-# actually a8fbe2cd6a3d4455344295809f2e663373ad25cb from 25.03.2014
-# https://github.com/raspberrypi/userland
-PKG_VERSION:=		0.4
+# actually a59842a068cbd19e262701f30014499e9070fbf6 from 13.04.2014
+PKG_VERSION:=		0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		091ae422e05a59ffc2b8908256047b7d
+PKG_MD5SUM:=		ed8c41f58e5657209cca73cb46b846d3
 PKG_DESCR:=		vc tools and libraries for raspberry pi
 PKG_SECTION:=		base
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		cmake-host
+PKG_URL:=		https://github.com/raspberrypi/userland
 PKG_SITES:=		http://openadk.org/distfiles/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
