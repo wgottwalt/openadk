@@ -12,6 +12,8 @@ PKG_SECTION:=		boot
 PKG_BUILDDEP:=		autotool
 PKG_SITES:=		http://www.openadk.org/distfiles/
 
+PKG_SYSTEM_DEPENDS:=	arm-fm
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
