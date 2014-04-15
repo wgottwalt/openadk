@@ -108,7 +108,7 @@ hostpre-configure:
 	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
-	(cd $(WRKBUILD) && patch -p0 < patch-Lib_distutils_sysconfig_py)	
+	(cd $(WRKBUILD) && ${PATCHP0} < patch-Lib_distutils_sysconfig_py)	
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 
@@ -119,13 +119,13 @@ hostpost-install:
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/python-config.patch
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/python-config.patch
 	(cd $(STAGING_HOST_DIR)/usr/bin && \
-		patch -p0 < $(WRKBUILD)/python-config.patch)
+		${PATCHP0} < $(WRKBUILD)/python-config.patch)
 
 pre-configure:
 	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
-	(cd $(WRKBUILD) && patch -p0 <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
+	(cd $(WRKBUILD) && ${PATCHP0} <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 

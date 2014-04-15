@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gtk+
-PKG_VERSION:=		2.24.6
+PKG_VERSION:=		2.24.22
 PKG_EXTRAVER:=		2.24
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4d7efde4ac24dbaa720bc0744eee8235
+PKG_MD5SUM:=		5fbbfb7637bbd571a572a2dae0e736d2
 PKG_DESCR:=		GTK+ library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		glib
