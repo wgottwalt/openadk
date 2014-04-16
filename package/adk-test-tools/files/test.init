@@ -1,18 +1,33 @@
 #!/bin/sh
 #PKG adk-test-tools
 #INIT 90
-[[ $1 = autostart ]] || exit 0
-echo "Setting time via network ..."
-rdate -nv pool.ntp.org
-echo "Starting test script ..."
-grep shell /proc/cmdline > /dev/null 2&>1
-if [ $? -eq 0 ];then
-	exit 0
-fi
-if [ -x /run.sh ];then
-	/run.sh
-	quit
-else
-	echo "no run.sh found"
-	quit
-fi
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${test:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	echo "Setting time via network ..."
+	rdate -nv pool.ntp.org
+	grep shell /proc/cmdline > /dev/null 2&>1
+	if [ $? -eq 0 ];then
+		exit 0
+	fi
+	echo "Starting test script ..."
+	if [ -x /run.sh ];then
+		/run.sh
+		quit
+	else
+		echo "no run.sh found"
+		quit
+	fi
+	;;
+*)
+	echo "Usage: $0 {start}"
+	exit 1
+	;;
+esac
+exit $?
