@@ -4,22 +4,19 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.0.0
-PKG_EXTRAVER:=		247
+PKG_VERSION:=		2.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c351450a0bed670e0f5ca07da3458a5b
+PKG_MD5SUM:=		e57fdbb8ed56e70c43f39c79da1654b2
 PKG_DESCR:=		interpreter for the ruby language
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		librt libpthread libgcc
 PKG_BUILDDEP:=		ruby-host
+HOST_BUILDDEP:=		readline-host
 PKG_URL:=		http://www.ruby-lang.org/
-PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.0/
+PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.1/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
-
-DISTFILES:= 		${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-p${PKG_EXTRAVER}
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
