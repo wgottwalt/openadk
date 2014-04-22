@@ -10,7 +10,7 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 
 QEMU_ARGS:=-M sun4u
-ifeq ($(ADK_TARGET_QEMU_WITH_GRAPHICS),)
+ifeq ($(ADK_TARGET_QEMU_WITH_GRAPHIC),)
 QEMU_ARGS+=-nographic
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
