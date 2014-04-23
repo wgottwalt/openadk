@@ -86,8 +86,8 @@ rootsizeend=$(($rootsize+1))
 
 echo "Install bootloader for cubox-i"
 parted -s $1 mklabel msdos
-dd if=${3}/SPL of=${1} bs=1K seek=1
-dd if=${3}/u-boot.img of=${1} bs=1K seek=42
+dd if=${3}/SPL of=${1} bs=1K seek=1 >/dev/null 2>&1
+dd if=${3}/u-boot.img of=${1} bs=1K seek=42 >/dev/null 2>&1
 parted -a optimal -s $1 unit s mkpart primary ext2 -- 2048 $rootsize
 parted -a optimal -s $1 unit s mkpart primary fat32 $rootsizeend $maxsize
 sfdisk --change-id $1 2 88

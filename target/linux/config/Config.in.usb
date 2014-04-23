@@ -57,6 +57,7 @@ config ADK_KPACKAGE_KMOD_USB
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -180,6 +181,7 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
@@ -245,7 +247,6 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL
 	  Please read <file:Documentation/usb/usb-serial.txt> for more
 	  information on the specifics of the different devices that are
 	  supported, and on how to use them.
-
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
 	prompt   "kmod-usb-serial-belkin.......... Support for Belkin USB-to-serial converters"

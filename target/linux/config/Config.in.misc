@@ -25,12 +25,6 @@ config ADK_KPACKAGE_KMOD_REGMAP_MMIO
 config ADK_KERNEL_KEYS
 	boolean
 
-config ADK_KERNEL_I2C
- 	boolean
- 
-config ADK_KERNEL_I2C_CHARDEV
- 	tristate
-
 config ADK_KERNEL_RTC_CLASS
  	boolean
 
@@ -87,16 +81,6 @@ config ADK_KERNEL_RTC_DRV_CMOS
  	help
 	 PC CMOS RTC support.
 	
-config ADK_KPACKAGE_KMOD_SCx200_ACB
-	prompt "kmod-i2c-geode.................... I2C driver for Geode"
-	tristate
-	select ADK_KERNEL_I2C
-	select ADK_KERNEL_I2C_CHARDEV
-	default n
-	depends on ADK_CPU_GEODE
-	help
-	  I2C driver for Geode boards.
-
 config ADK_KPACKAGE_KMOD_PARPORT
 	prompt "kmod-parport...................... generic parallel port support"
 	tristate

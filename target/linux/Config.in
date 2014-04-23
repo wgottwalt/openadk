@@ -21,8 +21,9 @@ source target/linux/config/Config.in.lib
 source target/linux/config/Config.in.pm
 source target/linux/config/Config.in.spi
 source target/linux/config/Config.in.kvm
-source target/linux/config/Config.in.debug
 source target/linux/config/Config.in.virtio
 source target/linux/config/Config.in.regulator
 source target/linux/config/Config.in.gpio
+source target/linux/config/Config.in.i2c
 source target/linux/config/Config.in.dma
+source target/linux/config/Config.in.debug

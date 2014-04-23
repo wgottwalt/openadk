@@ -384,6 +384,9 @@ endchoice
 config ADK_TARGET_WITH_USB
 	boolean
 
+config ADK_TARGET_WITH_I2C
+	boolean
+
 config ADK_TARGET_WITH_PCI
 	boolean
 
