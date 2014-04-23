@@ -93,9 +93,6 @@ config ADK_KERNEL_NFS_COMMON
 config ADK_KERNEL_SUNRPC
 	boolean
 
-config ADK_KERNEL_PCI
-	boolean
-
 config ADK_KERNEL_64BIT
 	boolean
 	default y if ADK_LINUX_64

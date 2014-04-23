@@ -9,12 +9,19 @@ config ADK_KERNEL_USB
 	select ADK_KERNEL_USB_SUPPORT
 	default n
 
+config ADK_KERNEL_USB_HID
+	boolean
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_HID
+	select ADK_KERNEL_HID_GENERIC
+
 config ADK_KERNEL_USB_OHCI_HCD
 	boolean
 	default n
 
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 	boolean
+	select ADK_KERNEL_USB_OHCI_HCD
 	default n
 
 config ADK_KERNEL_USB_LIBUSUAL
