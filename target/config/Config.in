@@ -13,11 +13,15 @@ config ADK_TARGET_KERNEL_LINUXBIN
 config ADK_TARGET_KERNEL_IMAGE
 	boolean
 
+config ADK_TARGET_KERNEL_UIMAGE
+	boolean
+
 config ADK_TARGET_KERNEL_BZIMAGE
 	boolean
 
 config ADK_TARGET_KERNEL
 	string
+	default "uImage" if ADK_TARGET_KERNEL_UIMAGE
 	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
 	default "Image" if ADK_TARGET_KERNEL_IMAGE
 	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
@@ -207,11 +211,33 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86_64_32 || ADK_TARGET_SYSTEM_QEMU_X86_64_X32
 	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
-	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
+	default "cubox-i4pro" if ADK_TARGET_CUBOX_I4PRO
+	default "cubox-i2ultra" if ADK_TARGET_CUBOX_I2ULTRA
+	default "cubox-i2" if ADK_TARGET_CUBOX_I2
+	default "cubox-i1" if ADK_TARGET_CUBOX_I1
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
+
+choice
+prompt "Cubox-i model"
+depends on ADK_TARGET_SYSTEM_CUBOX_I
+
+config ADK_TARGET_CUBOX_I4PRO
+	boolean "Solidrun Cubox-i4Pro"
+
+config ADK_TARGET_CUBOX_I2ULTRA
+	boolean "Solidrun Cubox-i2Ultra"
+
+config ADK_TARGET_CUBOX_I2
+	boolean "Solidrun Cubox-i2"
+
+config ADK_TARGET_CUBOX_I1
+	boolean "Solidrun Cubox-i1"
+
+endchoice
+
 
 config ADK_QEMU_ARGS
 	string
@@ -897,21 +923,7 @@ config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
 choice
 prompt "Root filesystem type"
 depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_HARDWARE_QEMU
-default ADK_TARGET_ROOT_EXT2_FS
-
-config ADK_TARGET_ROOT_EXT2
-	boolean
-	prompt "EXT2 filesystem"
-	select ADK_KERNEL_EXT2_FS
-	help
-	  Compile EXT2 filesystem into kernel and use it as root filesystem.
-
-config ADK_TARGET_ROOT_EXT3
-	boolean
-	prompt "EXT3 filesystem"
-	select ADK_KERNEL_EXT3_FS
-	help
-	  Compile EXT3 filesystem into kernel and use it as root filesystem.
+default ADK_TARGET_ROOT_EXT4
 
 config ADK_TARGET_ROOT_EXT4
 	boolean
@@ -926,6 +938,20 @@ config ADK_TARGET_ROOT_XFS
 	select ADK_KERNEL_XFS_FS
 	help
 	  Compile XFS filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_EXT2
+	boolean
+	prompt "EXT2 filesystem"
+	select ADK_KERNEL_EXT2_FS
+	help
+	  Compile EXT2 filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_EXT3
+	boolean
+	prompt "EXT3 filesystem"
+	select ADK_KERNEL_EXT3_FS
+	help
+	  Compile EXT3 filesystem into kernel and use it as root filesystem.
 
 endchoice
 

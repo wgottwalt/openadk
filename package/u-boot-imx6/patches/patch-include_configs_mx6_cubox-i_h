@@ -1,0 +1,52 @@
+--- u-boot-imx6-20140416.orig/include/configs/mx6_cubox-i.h	2014-04-17 15:53:51.000000000 +0200
++++ u-boot-imx6-20140416/include/configs/mx6_cubox-i.h	2014-04-22 11:45:28.117832106 +0200
+@@ -171,7 +171,7 @@
+         "ip_dyn=yes\0" \
+         "mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
+         "mmcpart=1\0" \
+-        "mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
++        "mmcroot=/dev/mmcblk0p1 rootwait rw\0" \
+         "update_sd_firmware_filename=u-boot.imx\0" \
+         "update_sd_firmware=" \
+                 "if test ${ip_dyn} = yes; then " \
+@@ -212,19 +212,19 @@
+         "importbootenv=echo Importing environment from mmc${mmcdev} ...; " \
+                 "env import -t ${loadaddr} ${filesize};\0" \
+         "autobootfdt=echo Booting ${boot_file}; " \
+-                "if test ${boot_file} = zImage; then " \
++                "if test ${boot_file} = kernel; then " \
+ 		    "bootz ${loadaddr} - ${fdt_addr}; " \
+ 		"else " \
+ 		    "bootm ${loadaddr} - ${fdt_addr}; " \
+ 		"fi;\0 " \
+         "autoboot=echo Booting ${boot_file}; " \
+-		"if test ${boot_file} = zImage; then " \
++		"if test ${boot_file} = kernel; then " \
+ 		    "bootz; " \
+ 		"else " \
+ 		    "bootm; " \
+ 		"fi;\0 " \
+ 	"bootit=setenv boot_file ${bootfile}; " \
+-                "if test ${boot_file} = zImage; then " \
++                "if test ${boot_file} = kernel; then " \
+                     "if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+                         "if run loadfdt; then " \
+                             "run autobootfdt; " \
+@@ -260,7 +260,7 @@
+                     "setenv get_cmd tftp; " \
+                 "fi; " \
+                 "if test ${bootfile} = auto; then " \
+-                     "setenv bootfile zImage; " \
++                     "setenv bootfile kernel; " \
+                      "if ${get_cmd} ${bootfile}; then " \
+                          "run bootit; " \
+                      "else " \
+@@ -286,7 +286,7 @@
+ 			   "fi; " \
+                            "if test ${bootfile} = auto; then " \
+                                    "setenv origbootfile auto; " \
+-                                   "setenv bootfile zImage; " \
++                                   "setenv bootfile kernel; " \
+                                    "if run loadbootfile; then " \
+                                         "run mmcboot; " \
+                                    "else " \

@@ -7,10 +7,14 @@ include $(TOPDIR)/mk/modules.mk
 include $(TOPDIR)/mk/kernel-build.mk
 include $(TOPDIR)/mk/image.mk
 
+KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
+
 ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/arm/boot/zImage
-else
-KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
+endif
+
+ifeq ($(ADK_TARGET_KERNEL_UIMAGE),y)
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/uImage
 endif
 
 LOADADDR:=0x20008000
@@ -27,6 +31,16 @@ MACH:=vexpress-a9
 NET:=-cpu cortex-a9 -net user -net nic,model=lan9118
 endif
 
+dtb-install:
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+		-j${ADK_MAKE_JOBS} imx6q-cubox-i.dtb $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6q-cubox-i.dtb \
+		$(FW_DIR)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+		-j${ADK_MAKE_JOBS} imx6dl-cubox-i.dtb $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6dl-cubox-i.dtb \
+		$(FW_DIR)
+
 kernel-install:
 	gzip -9 < $(LINUX_DIR)/arch/arm/boot/Image > ${BUILD_DIR}/Image.gz
 	PATH='${TARGET_PATH}' mkimage -A arm -O linux -T kernel -C gzip \
@@ -39,27 +53,21 @@ imageinstall: kernel-install ${FW_DIR}/${ROOTFSUSERTARBALL}
 	@echo 'Type dhcp via u-boot prompt to load kernel'
 	@echo 'After that type bootm to load the kernel'
 endif
-ifeq ($(ADK_TARGET_FS),mmc)
-imageinstall: kernel-install $(FW_DIR)/$(ROOTFSTARBALL)
-	@echo "The RootFS tarball is:"
-	@echo "$(FW_DIR)/$(ROOTFSTARBALL)"
-	@echo 'Before booting from MicroSD card you need to set following u-boot environment variable:'
-	@echo "setenv bootcmd 'mmc init; sleep 1; fatload mmc 0 0x22000000 kernel; bootm 0x22000000'"
-	@echo "saveenv"
-	@echo
-	@echo "Boot the board via network and use adkinstall."
-	@echo "If you just want to update, use adkupdate."
-endif
 ifeq ($(ADK_TARGET_FS),archive)
-ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
-imageinstall: kernel-install $(FW_DIR)/$(ROOTFSTARBALL)
+ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL)
 else
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
 endif
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install-rpi.sh /dev/sdx $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install-rpi.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
+ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install-cubox.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
