@@ -66,7 +66,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
 	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install-cubox.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install-cubox.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
 
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM)$(ADK_TARGET_SYSTEM_QEMU_ARMHF),y)

@@ -80,14 +80,16 @@ if [ $(mount | grep $1| wc -l) -ne 0 ];then
 fi
 
 maxsize=$(env LC_ALL=C parted $1 -s unit s print |awk '/^Disk/ { print $3 }'|sed -e 's/s//')
+maxsize=$(($maxsize-1))
 rootsize=$(($maxsize-32768))
+rootsizeend=$(($rootsize+1))
 
 echo "Install bootloader for cubox-i"
 parted -s $1 mklabel msdos
 dd if=${3}/SPL of=${1} bs=1K seek=1
 dd if=${3}/u-boot.img of=${1} bs=1K seek=42
-parted -s $1 unit s mkpart primary ext2 -- 2048 $rootsize
-parted -s $1 unit s mkpart primary fat32 $rootsize $maxsize
+parted -a optimal -s $1 unit s mkpart primary ext2 -- 2048 $rootsize
+parted -a optimal -s $1 unit s mkpart primary fat32 $rootsizeend $maxsize
 sfdisk --change-id $1 2 88
 
 echo "Creating filesystem"
@@ -96,16 +98,6 @@ sync
 
 tmp=$(mktemp -d)
 mount -t ext4 ${1}1 $tmp
-
-#echo "rootdev=/dev/mmcblk0p1" > $tmp/uEnv.txt
-#echo "kernel=/boot/kernel" >> $tmp/uEnv.txt
-#echo "dtb=/boot/imx6q-cubox-i.dtb" >> $tmp/uEnv.txt
-#echo 'kernelargs=rootwait console=ttymxc0 console=tty0 video=mxcfb0:dev=hdmi consoleblank=0' >> $tmp/uEnv.txt
-#echo 'sdargs=setenv bootargs root=${rootdev} ${kernelargs}' >> $tmp/uEnv.txt
-#echo 'sdloadk=load mmc 0:1 0x10800000 ${kernel}' >> $tmp/uEnv.txt
-#echo 'sdloadd=load mmc 0:1 0x18000000 ${dtb}' >> $tmp/uEnv.txt
-#echo 'sdboot=bootz 0x10800000 - 0x18000000' >> $tmp/uEnv.txt
-#echo 'bootit=echo Booting OpenADK' > $tmp/uEnv.txt
 
 echo "Extracting install archive"
 tar -C $tmp -xzpf $2 

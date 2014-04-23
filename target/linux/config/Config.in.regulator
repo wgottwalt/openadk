@@ -1,0 +1,69 @@
+config ADK_KERNEL_REGULATOR
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_ANATOP
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_MC13XXX_CORE
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_DA9052
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_MC13783
+	boolean
+	default n
+
+config ADK_KERNEL_REGULATOR_MC13892
+	boolean
+	default n
+	
+config ADK_KERNEL_REGULATOR_PFUZE100
+	boolean
+	default n
+
+config ADK_KERNEL_REGMAP
+	boolean
+	default n
+
+config ADK_KERNEL_REGMAP_I2C
+	boolean
+	default n
+
+config ADK_KERNEL_REGMAP_SPI
+	boolean
+	default n
+
+config ADK_KERNEL_REGMAP_MMIO
+	boolean
+	default n
+
+config ADK_KERNEL_REGMAP_IRQ
+	boolean
+	default n
+
+config ADK_TARGET_CUBOX_REGULATOR
+	boolean
+	select ADK_KERNEL_REGMAP
+	select ADK_KERNEL_REGMAP_I2C
+	select ADK_KERNEL_REGMAP_SPI
+	select ADK_KERNEL_REGMAP_MMIO
+	select ADK_KERNEL_REGMAP_IRQ
+	select ADK_KERNEL_REGULATOR
+	select ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
+	select ADK_KERNEL_REGULATOR_ANATOP
+	select ADK_KERNEL_REGULATOR_MC13XXX_CORE
+	select ADK_KERNEL_REGULATOR_DA9052
+	select ADK_KERNEL_REGULATOR_MC13783
+	select ADK_KERNEL_REGULATOR_MC13892
+	select ADK_KERNEL_REGULATOR_PFUZE100
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n

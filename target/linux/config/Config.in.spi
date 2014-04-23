@@ -4,6 +4,9 @@ config ADK_KERNEL_SPI
 config ADK_KERNEL_SPI_MASTER
 	boolean
 
+config ADK_KERNEL_SPI_BITBANG
+	boolean
+
 config ADK_KERNEL_SPI_XILINX
 	boolean
 
@@ -22,3 +25,11 @@ config ADK_KERNEL_SPI_RB4XX_CPLD
 config ADK_KERNEL_SPI_PXA2XX
 	select ADK_KERNEL_SPI
 	boolean
+
+config ADK_KERNEL_SPI_IMX
+	boolean
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	select ADK_KERNEL_SPI_BITBANG
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n

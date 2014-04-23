@@ -30,14 +30,6 @@ config ADK_KERNEL_CPU_FREQ
 	boolean
 	default n
 
-config ADK_KERNEL_REGULATOR
-	boolean
-	default n
-
-config ADK_KERNEL_REGULATOR_ANATOP
-	boolean
-	default n
-
 config ADK_KERNEL_CPU_FREQ_GOV_PERFORMANCE
 	boolean
 	default n

@@ -1,0 +1,8 @@
+config ADK_KERNEL_DMADEVICES
+	boolean
+
+config ADK_KERNEL_IMX_SDMA
+	boolean
+	select ADK_KERNEL_DMADEVICES
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
