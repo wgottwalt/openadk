@@ -5,14 +5,14 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.38.2
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_EXTRAVER:=		2.38
 PKG_MD5SUM:=		26d1d08e478fc48c181ca8be44f5b69f
 PKG_DESCR:=		low-level core library that forms the basis of GTK+
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		glib-host libffi gettext-tiny libiconv-tiny zlib libelf dbus
-HOST_BUILDDEP:=		libffi-host gettext-tiny-host libiconv-tiny-host
+HOST_BUILDDEP:=		libffi-host gettext-tiny-host libiconv-tiny-host python2-host
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
