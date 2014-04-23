@@ -1,0 +1,15 @@
+--- wget-1.15.orig/configure.ac	2014-01-04 13:49:47.000000000 +0100
++++ wget-1.15/configure.ac	2014-04-23 19:48:44.679755324 +0200
+@@ -104,12 +104,6 @@ AC_AIX
+ 
+ gl_EARLY
+ 
+-dnl
+-dnl Gettext
+-dnl
+-AM_GNU_GETTEXT([external],[need-ngettext])
+-AM_GNU_GETTEXT_VERSION([0.17])
+-
+ AC_PROG_RANLIB
+ 
+ AC_PROG_LEX

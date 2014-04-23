@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
 PKG_VERSION:=		1.15
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		506df41295afc6486662cc47470b4618
 PKG_DESCR:=		retrieving files using HTTP(S) and FTP
 PKG_SECTION:=		www
