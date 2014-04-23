@@ -1,0 +1,11 @@
+--- findutils-4.4.2.orig/xargs/Makefile.am	2009-05-16 17:17:01.000000000 +0200
++++ findutils-4.4.2/xargs/Makefile.am	2014-04-23 16:00:55.249971596 +0200
+@@ -3,7 +3,7 @@ localedir = $(datadir)/locale
+ bin_PROGRAMS = xargs
+ man_MANS = xargs.1
+ INCLUDES = -I.. -I../gnulib/lib -I$(top_srcdir)/gnulib/lib -I$(top_srcdir)/lib -I../intl -DLOCALEDIR=\"$(localedir)\"
+-LDADD = ../lib/libfind.a ../gnulib/lib/libgnulib.a @INTLLIBS@
++LDADD = ../lib/libfind.a ../gnulib/lib/libgnulib.a
+ EXTRA_DIST = $(man_MANS)
+ SUBDIRS = . testsuite
+ 

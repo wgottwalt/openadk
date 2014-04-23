@@ -1,0 +1,11 @@
+--- findutils-4.4.2.orig/Makefile.am	2009-05-16 17:17:01.000000000 +0200
++++ findutils-4.4.2/Makefile.am	2014-04-23 16:03:42.290460470 +0200
+@@ -8,7 +8,7 @@ DISTCLEANFILES = tool-versions.txt
+ 
+ 
+ # "tests" is the gnulib unit test dir.
+-SUBDIRS = gnulib tests build-aux lib find xargs locate doc po m4 
++SUBDIRS = gnulib tests build-aux lib find xargs locate m4 
+ 
+ ACLOCAL_AMFLAGS = -I gnulib/m4 -I m4
+ 
