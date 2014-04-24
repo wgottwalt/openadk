@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
-PKG_VERSION:=		4.8.11
+PKG_VERSION:=		4.8.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1a2d74b75ddbff0b0d6cdc04bf4a7d31
+PKG_MD5SUM:=		7ecccc03df060cd0ca1414a5a14e6649
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
-PKG_DEPENDS:=		glib libncurses
-PKG_BUILDDEP:=		glib ncurses
+PKG_DEPENDS:=		glib libncurses libssh2
+PKG_BUILDDEP:=		glib ncurses libssh2
 PKG_URL:=		http://www.midnight-commander.org/
 PKG_SITES:=		http://ftp.midnight-commander.org/
 PKG_NOPARALLEL:=	1
@@ -30,7 +30,8 @@ CONFIGURE_ARGS+=	--enable-charset \
 			--disable-netcode \
 			--without-libiconv-prefix \
 			--without-x \
-			--with-vfs \
+			--enable-vfs \
+			--enable-vfs-sftp \
 			--without-mcfs \
 			--without-samba \
 			--without-gpm-mouse \
