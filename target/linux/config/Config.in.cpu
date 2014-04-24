@@ -24,7 +24,7 @@ config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
-menu "CPU support"
+menu "CPU frequency support"
 
 config ADK_KERNEL_CPU_FREQ
 	boolean
@@ -55,6 +55,7 @@ config ADK_KERNEL_ARM_IMX6_CPUFREQ
 	boolean
 	select ADK_KERNEL_CPU_FREQ
 	select ADK_KERNEL_REGULATOR
+	select ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
 	select ADK_KERNEL_REGULATOR_ANATOP
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
