@@ -127,8 +127,8 @@ config ADK_KERNEL_VERSION_3_10_37
 	prompt "3.10.37"
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_84
-	prompt "3.4.84"
+config ADK_KERNEL_VERSION_3_4_87
+	prompt "3.4.87"
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	boolean
 
@@ -141,7 +141,7 @@ config ADK_KERNEL_VERSION
 	default "3.12.18" if ADK_KERNEL_VERSION_3_12_18
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
 	default "3.10.37" if ADK_KERNEL_VERSION_3_10_37
-	default "3.4.84" if ADK_KERNEL_VERSION_3_4_84
+	default "3.4.87" if ADK_KERNEL_VERSION_3_4_87
 	help
 
 config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
