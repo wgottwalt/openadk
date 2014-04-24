@@ -1,16 +1,16 @@
-diff -Nur linux-3.4.2.orig/block/genhd.c linux-3.4.2/block/genhd.c
---- linux-3.4.2.orig/block/genhd.c	2012-06-09 17:36:33.000000000 +0200
-+++ linux-3.4.2/block/genhd.c	2012-06-15 18:19:16.000000000 +0200
-@@ -33,7 +33,7 @@
+diff -Nur linux-3.14.1.orig/block/genhd.c linux-3.14.1/block/genhd.c
+--- linux-3.14.1.orig/block/genhd.c	2014-04-14 15:50:10.000000000 +0200
++++ linux-3.14.1/block/genhd.c	2014-04-24 09:50:05.281309701 +0200
+@@ -34,7 +34,7 @@
  static DEFINE_MUTEX(ext_devt_mutex);
  static DEFINE_IDR(ext_devt_idr);
  
 -static struct device_type disk_type;
 +struct device_type disk_type;
  
- static void disk_alloc_events(struct gendisk *disk);
- static void disk_add_events(struct gendisk *disk);
-@@ -1122,7 +1122,7 @@
+ static void disk_check_events(struct disk_events *ev,
+ 			      unsigned int *clearing_ptr);
+@@ -1121,7 +1121,7 @@
  	return NULL;
  }
  
@@ -19,10 +19,10 @@ diff -Nur linux-3.4.2.orig/block/genhd.c linux-3.4.2/block/genhd.c
  	.name		= "disk",
  	.groups		= disk_attr_groups,
  	.release	= disk_release,
-diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
---- linux-3.4.2.orig/init/do_mounts.c	2012-06-09 17:36:33.000000000 +0200
-+++ linux-3.4.2/init/do_mounts.c	2012-06-15 18:20:11.000000000 +0200
-@@ -21,6 +21,7 @@
+diff -Nur linux-3.14.1.orig/init/do_mounts.c linux-3.14.1/init/do_mounts.c
+--- linux-3.14.1.orig/init/do_mounts.c	2014-04-14 15:50:10.000000000 +0200
++++ linux-3.14.1/init/do_mounts.c	2014-04-24 10:17:54.043200973 +0200
+@@ -33,6 +33,7 @@
  #include <linux/nfs_fs_sb.h>
  #include <linux/nfs_mount.h>
  
@@ -30,7 +30,7 @@ diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
  #include "do_mounts.h"
  
  int __initdata rd_doload;	/* 1 = load RAM disk, 0 = don't load */
-@@ -32,6 +33,132 @@
+@@ -44,6 +45,132 @@
  
  dev_t ROOT_DEV;
  
@@ -95,7 +95,7 @@ diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
 +	rw |= REQ_SYNC;
 +
 +	bio->bi_bdev = bdev;
-+	bio->bi_sector = sector;
++	bio->bi_iter.bi_sector = sector;
 +	bio_add_page(bio, page, size, 0);
 +	init_completion(&event);
 +	bio->bi_private = &event;
@@ -163,7 +163,7 @@ diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
  static int __init load_ramdisk(char *str)
  {
  	rd_doload = simple_strtol(str,NULL,0) & 3;
-@@ -256,6 +383,13 @@
+@@ -289,6 +416,13 @@
  static int __init root_dev_setup(char *line)
  {
  	strlcpy(saved_root_name, line, sizeof(saved_root_name));
@@ -177,7 +177,7 @@ diff -Nur linux-3.4.2.orig/init/do_mounts.c linux-3.4.2/init/do_mounts.c
  	return 1;
  }
  
-@@ -471,6 +605,83 @@
+@@ -505,6 +639,83 @@
  
  void __init mount_root(void)
  {
