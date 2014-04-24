@@ -36,6 +36,10 @@ ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 ROOTFS:=	root=/dev/sda1 rootwait
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+ROOTFS:=	root=/dev/mmcblk0p1 rootwait
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 USB:=		rootwait root=/dev/sdc1
 else

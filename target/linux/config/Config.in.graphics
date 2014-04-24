@@ -49,6 +49,12 @@ config ADK_KERNEL_FB_SM501
 	select ADK_KERNEL_MFD_SM501
 	boolean
 
+config ADK_KERNEL_FB_MXC_SYNC_PANEL
+	boolean
+
+config ADK_KERNEL_FB_MXC_HDMI
+	boolean
+
 config ADK_KERNEL_DRM
 	boolean
 
@@ -56,6 +62,9 @@ config ADK_KERNEL_DRM_I915
 	boolean
 
 config ADK_KERNEL_DRM_I915_KMS
+	boolean
+
+config ADK_KERNEL_DRM_VIVANTE
 	boolean
 
 config ADK_KERNEL_AGP
@@ -92,6 +101,21 @@ config ADK_KERNEL_FB_VESA
 	depends on ADK_TARGET_SYSTEM_VBOX_I686
  	help
 	 Framebuffer support for VirtualBox Emulator.
+
+config ADK_KERNEL_FB_MXS
+	prompt "................................ Framebuffer support for Cubox-i"
+	tristate
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FB_MXC_SYNC_PANEL
+	select ADK_KERNEL_FB_MXC_HDMI
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_DRM_VIVANTE
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+ 	default n
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+ 	help
+	 Framebuffer support for Cubox-i.
 
 config ADK_KERNEL_FB_PXA
 	prompt "................................ Framebuffer support for Sharp Zaurus"
