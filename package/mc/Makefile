@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
 PKG_VERSION:=		4.8.12
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7ecccc03df060cd0ca1414a5a14e6649
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		misc
@@ -32,7 +32,7 @@ CONFIGURE_ARGS+=	--enable-charset \
 			--without-x \
 			--enable-vfs \
 			--enable-vfs-sftp \
-			--without-mcfs \
+			--with-mcfs \
 			--without-samba \
 			--without-gpm-mouse \
 			--with-configdir=/etc \
@@ -46,9 +46,11 @@ CONFIGURE_ENV+=		mc_cv_have_zipinfo=yes \
 mc-install:
 	${INSTALL_DIR} ${IDIR_MC}/etc/mc
 	${INSTALL_DIR} ${IDIR_MC}/usr/bin
+	${INSTALL_DIR} ${IDIR_MC}/usr/share/mc
+	${CP} ${WRKINST}/usr/share/mc/* ${IDIR_MC}/usr/share/mc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mc ${IDIR_MC}/usr/bin/
 	cd ${IDIR_MC}/usr/bin && ln -fs mc mcedit && ln -fs mc mcview
-	cd ${WRKINST}/etc/mc && ${CP} mcedit.menu mc.ext \
+	cd ${WRKINST}/etc/mc && ${CP} mcedit.menu mc.ext sfs.ini \
 	    mc.menu ${IDIR_MC}/etc/mc/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
