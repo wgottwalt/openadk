@@ -9,6 +9,15 @@ config ADK_KERNEL_USB
 	select ADK_KERNEL_USB_SUPPORT
 	default n
 
+config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
+	boolean
+
+config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
+	boolean
+
+config ADK_KERNEL_USB_MXS_PHY
+	boolean
+
 config ADK_KERNEL_USB_HID
 	boolean
 	select ADK_KERNEL_USB
@@ -169,9 +178,12 @@ config ADK_KERNEL_USB_DWCOTG
           host/peripheral/OTG ("On The Go") USB controllers.
 
 config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
-	prompt   "kmod-usb-ehci................... Support for USB 2.0 controllers"
+	prompt   "kmod-usb-ehci..................... Support for USB 2.0 controllers"
 	tristate
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
+	select ADK_KERNEL_USB_EHCI_TT_NEWSCHED
+	select ADK_KERNEL_USB_MXS_PHY
 	depends on !ADK_KERNEL_USB_EHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -201,6 +213,21 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	  Driver too.
 
 	  You may want to read <file:Documentation/usb/ehci.txt>.
+
+config ADK_KERNEL_USB_CHIPIDEA_UDC
+	boolean
+
+config ADK_KERNEL_USB_CHIPIDEA_HOST
+	boolean
+
+config ADK_KPACKAGE_KMOD_USB_CHIPIDEA
+	prompt "kmod-ci-hdrc...................... Support ChipIdea controller"
+	tristate
+	select ADK_KERNEL_USB_CHIPIDEA_UDC
+	select ADK_KERNEL_USB_CHIPIDEA_HOST
+	depends on ADK_KPACKAGE_KMOD_USB_EHCI_HCD
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
 
 config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate

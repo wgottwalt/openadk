@@ -1328,6 +1328,12 @@ $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \
 ,55))
 
+$(eval $(call KMOD_template,USB_CHIPIDEA,ci-hdrc,\
+	$(MODULES_DIR)/kernel/drivers/usb/chipidea/ci_hdrc \
+	$(MODULES_DIR)/kernel/drivers/usb/chipidea/usbmisc_imx \
+	$(MODULES_DIR)/kernel/drivers/usb/chipidea/ci_hdrc_imx \
+,56))
+
 $(eval $(call KMOD_template,USB_OHCI_HCD,usb-ohci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ohci-hcd \
 ,60))
