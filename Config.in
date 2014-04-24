@@ -95,7 +95,7 @@ prompt "Kernel Version"
 depends on ADK_TOOLCHAIN_ONLY
 
 config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.13.7"
+	prompt "3.13.11"
 	boolean
 	depends on ADK_TOOLCHAIN_ONLY
 
@@ -111,8 +111,8 @@ config ADK_KERNEL_VERSION_3_14_1
 	prompt "3.14.1"
 	boolean
 
-config ADK_KERNEL_VERSION_3_13_7
-	prompt "3.13.7"
+config ADK_KERNEL_VERSION_3_13_11
+	prompt "3.13.11"
 	boolean
 
 config ADK_KERNEL_VERSION_3_12_14
@@ -129,6 +129,7 @@ config ADK_KERNEL_VERSION_3_10_36
 
 config ADK_KERNEL_VERSION_3_4_84
 	prompt "3.4.84"
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	boolean
 
 endchoice
@@ -136,7 +137,7 @@ endchoice
 config ADK_KERNEL_VERSION
 	string
 	default "3.14.1" if ADK_KERNEL_VERSION_3_14_1
-	default "3.13.7" if ADK_KERNEL_VERSION_3_13_7
+	default "3.13.11" if ADK_KERNEL_VERSION_3_13_11
 	default "3.12.14" if ADK_KERNEL_VERSION_3_12_14
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
 	default "3.10.36" if ADK_KERNEL_VERSION_3_10_36

@@ -1171,7 +1171,6 @@ $(eval $(call KMOD_template,SOUND,sound,\
 
 
 $(eval $(call KMOD_template,SND,snd,\
-	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
