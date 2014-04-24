@@ -4,23 +4,23 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		2.1.8
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aa2ae711387af144df7c351b28b8789c
-PKG_DESCR:=		a flexible RADIUS server
+PKG_MD5SUM:=		3532b6439270f9da0ebfc03d3623f962
+PKG_DESCR:=		flexible RADIUS server
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		libltdl libopenssl libpthread
-PKG_BUILDDEP:=		libtool openssl
+PKG_BUILDDEP:=		autotool libtool openssl
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 PKG_MULTI:=		1
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		FREERADIUS_SERVER FREERADIUS_DEMOCERTS FREERADIUS_MOD_CHAP FREERADIUS_MOD_DETAIL
 PKG_SUBPKGS+=		FREERADIUS_MOD_DIGEST FREERADIUS_MOD_FILES FREERADIUS_MOD_LDAP FREERADIUS_MOD_MSCHAP
 PKG_SUBPKGS+=		FREERADIUS_MOD_PAP FREERADIUS_MOD_PREPROCESS FREERADIUS_MOD_REALM FREERADIUS_MOD_SQL
 PKG_SUBPKGS+=		FREERADIUS_MOD_SQL_MYSQL FREERADIUS_MOD_SQL_PGSQL FREERADIUS_UTILS
-
-PKG_HOST_DEPENDS:=	!cygwin
 
 # sub package build dependencies
 PKGSB_FREERADIUS_MOD_LDAP:=		openldap
@@ -81,7 +81,7 @@ INSTALL_MODS_$${ADK_PACKAGE_${1}}+=	${2}-install
 ${2}-install:
 	${INSTALL_DIR} $${IDIR_${1}}/usr/lib/freeradius
 	for m in ${2}; do \
-		${CP} ${WRKINST}/usr/lib/freeradius/$$$${m}{,-*}.so \
+		${CP} ${WRKINST}/usr/lib/freeradius/$$$${m}.so \
 		  $${IDIR_${1}}/usr/lib/freeradius/ ; \
 	done
 	${INSTALL_DIR} $${IDIR_${1}}/etc/freeradius
@@ -112,14 +112,16 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_DETAIL,rlm_detail,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_DIGEST,rlm_digest,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_FILES,rlm_files,acct_users preproxy_users users))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_MSCHAP,rlm_mschap,))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_LDAP,rlm_ldap,ldap.attrmap))
+$(eval $(call PKG_mod_template,FREERADIUS_MOD_LDAP,rlm_ldap,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_PAP,rlm_pap,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_PREPROCESS,rlm_preprocess,hints huntgroups))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_REALM,rlm_realm,proxy.conf))
-$(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL,rlm_sql,sql.conf))
+$(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL,rlm_sql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
+AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ENV+=		LIBTOOL=
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--with-openssl-includes=${STAGING_TARGET_DIR}/usr/include \
 			--with-openssl-libraries=${STAGING_TARGET_DIR}/usr/lib \
@@ -185,7 +187,7 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 		    ${IDIR_FREERADIUS_SERVER}/usr/share/freeradius/ ; \
 	done
 	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/usr/lib/freeradius
-	${CP} ${WRKINST}/usr/lib/freeradius/libfreeradius-radius{,-*}.so \
+	${CP} ${WRKINST}/usr/lib/freeradius/libfreeradius-radius.so \
 	  ${IDIR_FREERADIUS_SERVER}/usr/lib
 	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/radiusd \

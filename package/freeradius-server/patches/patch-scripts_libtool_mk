@@ -1,0 +1,11 @@
+--- freeradius-server-3.0.2.orig/scripts/libtool.mk	2014-03-21 13:27:25.000000000 +0100
++++ freeradius-server-3.0.2/scripts/libtool.mk	2014-04-24 15:58:56.000000000 +0200
+@@ -33,7 +33,7 @@ ifeq "${LIBTOOL}" "JLIBTOOL"
+     ${JLIBTOOL}: ${top_makedir}/jlibtool.c
+ 	$(Q)mkdir -p $(dir $@)
+ 	$(Q)echo CC jlibtool.c
+-	$(Q)${CC} $< -o $@ ${DARWIN_CFLAGS}
++	$(Q)${CC_FOR_BUILD} $< -o $@ ${CFLAGS_FOR_BUILD}
+ 
+     clean: jlibtool_clean
+ 
