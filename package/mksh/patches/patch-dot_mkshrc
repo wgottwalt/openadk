@@ -1,0 +1,11 @@
+--- mksh.orig/dot.mkshrc	2014-01-11 19:10:04.000000000 +0100
++++ mksh/dot.mkshrc	2014-03-21 12:48:48.705772066 +0100
+@@ -30,7 +30,7 @@ esac
+ 
+ PS1='#'; (( USER_ID )) && PS1='$'; [[ ${HOSTNAME:=$(ulimit -c 0; hostname -s \
+     2>/dev/null)} = *([	 ]|localhost) ]] && HOSTNAME=$(ulimit -c 0; hostname \
+-    2>/dev/null); : ${EDITOR:=/bin/ed} ${HOSTNAME:=nil} ${TERM:=vt100}
++    2>/dev/null); : ${EDITOR:=/bin/ed} ${HOSTNAME:=nil} ${TERM:=linux}
+ : ${MKSH:=$(whence -p mksh)}; PS4='[$EPOCHREALTIME] '; PS1=$'\001\r''${|
+ 	local e=$?
+ 
