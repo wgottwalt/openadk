@@ -25,15 +25,6 @@ config ADK_KPACKAGE_KMOD_REGMAP_MMIO
 config ADK_KERNEL_KEYS
 	boolean
 
-config ADK_KERNEL_RTC_CLASS
- 	boolean
-
-config ADK_KERNEL_RTC_HCTOSYS
- 	boolean
-
-config ADK_KERNEL_RTC_INTF_DEV
- 	boolean
-
 menu "Miscellaneous devices support"
 
 config ADK_KERNEL_KEXEC
@@ -42,45 +33,6 @@ config ADK_KERNEL_KEXEC
 	help
 	  You need also kexec-tools to benefit from it.	
 
-config ADK_KERNEL_RTC_DRV_PXA
-	prompt ".................................. RTC support for Sharp Zaurus"
-	boolean
-	select ADK_KERNEL_RTC_CLASS
-	select ADK_KERNEL_RTC_HCTOSYS
-	select ADK_KERNEL_RTC_INTF_DEV
-	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default n
-	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	help
-	  Sharp Zaurus RTC.
-
-config ADK_KERNEL_RTC_DRV_AT91SAM9
-	prompt ".................................. RTC support for AT91SAM9 (Fox G20)"
-	boolean
-	select ADK_KERNEL_RTC_CLASS
-	select ADK_KERNEL_RTC_HCTOSYS
-	select ADK_KERNEL_RTC_INTF_DEV
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default n
-	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	help
- 	  Fox G20 RTC support.
-
-config ADK_KERNEL_RTC_DRV_CMOS
-	prompt ".................................. RTC support for PC CMOS"
-	boolean
-	select ADK_KERNEL_RTC_CLASS
-	select ADK_KERNEL_RTC_HCTOSYS
-	select ADK_KERNEL_RTC_INTF_DEV
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
- 	default n
-	depends on (ADK_TARGET_SYSTEM_PCENGINES_ALIX1C || ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13 || ADK_TARGET_SYSTEM_IBM_X40 || ADK_TARGET_SYSTEM_LEMOTE_YEELONG)
- 	help
-	 PC CMOS RTC support.
-	
 config ADK_KPACKAGE_KMOD_PARPORT
 	prompt "kmod-parport...................... generic parallel port support"
 	tristate

@@ -13,6 +13,7 @@ source target/linux/config/Config.in.audio
 source target/linux/config/Config.in.video
 source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.bluetooth
+source target/linux/config/Config.in.rtc
 source target/linux/config/Config.in.watchdog
 source target/linux/config/Config.in.leds
 source target/linux/config/Config.in.misc

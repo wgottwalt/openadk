@@ -1,0 +1,72 @@
+menu "RTC device support"
+depends on ADK_TARGET_WITH_RTC
+
+config ADK_KERNEL_RTC_CLASS
+ 	boolean
+
+config ADK_KERNEL_RTC_HCTOSYS
+ 	boolean
+
+config ADK_KERNEL_RTC_INTF_DEV
+ 	boolean
+
+config ADK_KERNEL_RTC_INTF_DEV_UIE_EMUL
+	boolean
+
+config ADK_KERNEL_RTC_DRV_PCF8563
+	boolean
+
+config ADK_KERNEL_RTC_DRV_SNVS
+	prompt "RTC support for Solidrun Cubox-i"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	select ADK_KERNEL_RTC_INTF_DEV_UIE_EMUL
+	select ADK_KERNEL_RTC_DRV_PCF8563
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	help
+	  Solidrun Cubox-i RTC.
+
+config ADK_KERNEL_RTC_DRV_PXA
+	prompt "RTC support for Sharp Zaurus"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default n
+	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	help
+	  Sharp Zaurus RTC.
+
+config ADK_KERNEL_RTC_DRV_AT91SAM9
+	prompt "RTC support for AT91SAM9 (Fox G20)"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default n
+	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	help
+ 	  Fox G20 RTC support.
+
+config ADK_KERNEL_RTC_DRV_CMOS
+	prompt "RTC support for PC CMOS"
+	boolean
+	select ADK_KERNEL_RTC_CLASS
+	select ADK_KERNEL_RTC_HCTOSYS
+	select ADK_KERNEL_RTC_INTF_DEV
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+ 	default n
+	depends on (ADK_TARGET_SYSTEM_PCENGINES_ALIX1C || ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13 || ADK_TARGET_SYSTEM_IBM_X40 || ADK_TARGET_SYSTEM_LEMOTE_YEELONG)
+ 	help
+	 PC CMOS RTC support.
+
+endmenu
